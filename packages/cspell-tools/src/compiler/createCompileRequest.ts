@@ -1,6 +1,6 @@
 import * as path from 'path';
 import { CompileCommonAppOptions } from '../AppOptions';
-import { CompileRequest, DictionaryFormats, Target } from './config';
+import { CompileRequest, DictionaryFormats, Target } from '../config';
 
 export function createCompileRequest(sources: string[], options: CompileCommonAppOptions): CompileRequest {
     const { max_depth, maxDepth, experimental, split, keepRawCase, useLegacySplitter } = options;
@@ -25,14 +25,11 @@ function calcTargets(sources: string[], options: CompileCommonAppOptions): Targe
     const { merge, output = '.' } = options;
 
     const format = calcFormat(options);
-    const useTrie = format.startsWith('trie');
-    const fileExt = useTrie ? '.trie' : '.txt';
 
     if (merge) {
-        const targetFilename = toTargetFilename(merge, fileExt);
-        const filename = path.join(output, targetFilename);
         const target: Target = {
-            filename,
+            name: merge,
+            targetDirectory: output,
             compress: options.compress,
             format,
             sources,
@@ -43,10 +40,10 @@ function calcTargets(sources: string[], options: CompileCommonAppOptions): Targe
     }
 
     const targets: Target[] = sources.map((source) => {
-        const targetFilename = toTargetFilename(path.basename(source), fileExt);
-        const filename = path.join(output, targetFilename);
+        const name = toTargetName(path.basename(source));
         const target: Target = {
-            filename,
+            name,
+            targetDirectory: output,
             compress: options.compress,
             format,
             sources: [source],
@@ -62,8 +59,8 @@ function calcFormat(options: CompileCommonAppOptions): DictionaryFormats {
     return (options.trie4 && 'trie4') || (options.trie3 && 'trie3') || (options.trie && 'trie') || 'plaintext';
 }
 
-function toTargetFilename(name: string, ext: string) {
-    return name.replace(/((\.txt|\.dic|\.aff|\.trie)(\.gz)?)?$/, '') + ext;
+function toTargetName(sourceFile: string) {
+    return path.basename(sourceFile).replace(/((\.txt|\.dic|\.aff|\.trie)(\.gz)?)?$/, '');
 }
 
 function parseNumber(s: string | undefined): number | undefined {

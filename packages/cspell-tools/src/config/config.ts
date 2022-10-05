@@ -3,9 +3,22 @@ export interface RunConfig extends CompileTargetOptions {
      * Optional Target Dictionaries to create.
      */
     targets?: Target[];
+
+    /**
+     * Specify the directory where all relative paths will resolved against.
+     * By default, all relative paths are relative to the location of the
+     * config file.
+     */
+    rootDir?: string;
 }
 
 export interface CompileRequest extends CompileTargetOptions {
+    /**
+     * Specify the directory where all relative paths will resolved against.
+     * By default, all relative paths are relative to the current directory.
+     */
+    rootDir?: string;
+
     /**
      * Target Dictionaries to create.
      */
@@ -38,28 +51,38 @@ export interface CompileTargetOptions {
 
 export interface Target {
     /**
-     * The target filename
+     * Name of target, used as the basis of target file name.
      */
-    filename: FilePath;
+    name: string;
+
+    /**
+     * The target directory
+     */
+    targetDirectory: FilePath;
+
     /**
      * gzip the file?
      * @default: false
      */
-    compress: boolean;
+    compress?: boolean;
+
     /**
      * Format of the dictionary.
      */
     format: DictionaryFormats;
+
     /**
      * File sources used to build the dictionary.
      */
     sources: DictionarySource[];
+
     /**
      * Sort the words in the resulting dictionary.
      * Does not apply to `trie` based formats.
      * @default: true
      */
     sort?: boolean | undefined;
+
     /**
      * Words from the sources that are found in `excludeWordsFrom` files
      * will not be added to the dictionary.
@@ -109,18 +132,4 @@ export interface SourceConfig {
      * @default false
      */
     keepRawCase?: boolean | undefined;
-}
-
-export function isFilePath(source: DictionarySource): source is FilePath {
-    return typeof source === 'string';
-}
-
-export function isFileSource(source: DictionarySource): source is FileSource {
-    if (!source || isFilePath(source)) return false;
-    return (<FileSource>source).filename !== undefined;
-}
-
-export function isFileListSource(source: DictionarySource): source is FileListSource {
-    if (!source || isFilePath(source)) return false;
-    return (<FileListSource>source).listFile !== undefined;
 }

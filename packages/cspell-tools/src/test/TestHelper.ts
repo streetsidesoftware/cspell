@@ -20,6 +20,8 @@ export interface TestHelper {
 
     createTempDir(...parts: string[]): void;
 
+    resolveFixture(...parts: string[]): string;
+
     /**
      * Make the temp directory
      * @param parts
@@ -47,9 +49,11 @@ class TestHelperImpl implements TestHelper {
     readonly packageRoot = packageRoot;
     readonly repoRoot = repoRoot;
     readonly tempDir: string;
+    readonly fixtureDir: string;
 
     constructor(testFilename: string) {
         this.tempDir = path.join(tempDirBase, path.relative(packageRoot, testFilename));
+        this.fixtureDir = path.join(packageRoot, 'fixtures');
     }
 
     clearTempDir(): void {
@@ -77,6 +81,10 @@ class TestHelperImpl implements TestHelper {
     cdToTempDir(): void {
         this.createTempDir();
         this.cd('.');
+    }
+
+    resolveFixture(...parts: string[]): string {
+        return path.resolve(this.fixtureDir, ...parts);
     }
 
     readonly createTempDir = this.mkdir;

@@ -3,17 +3,8 @@ import { opAwaitAsync, opMapAsync } from '@cspell/cspell-pipe/operators';
 import { opConcatMap, opMap, pipe } from '@cspell/cspell-pipe/sync';
 import * as path from 'path';
 import { getSystemFeatureFlags } from '../FeatureFlags';
-import {
-    CompileRequest,
-    CompileTargetOptions,
-    DictionarySource,
-    FilePath,
-    FileSource,
-    isFileListSource,
-    isFilePath,
-    isFileSource,
-    Target,
-} from './config';
+import { CompileRequest, CompileTargetOptions, DictionarySource, FilePath, FileSource, Target } from '../config';
+import { isFileListSource, isFilePath, isFileSource } from './configUtils';
 import { streamWordsFromFile } from './iterateWordsFromFile';
 import { logWithTimestamp } from './logWithTimestamp';
 import { ReaderOptions } from './Reader';
@@ -25,29 +16,32 @@ getSystemFeatureFlags().register('compound', 'Enable compound dictionary sources
 export async function compile(request: CompileRequest): Promise<void> {
     const { targets } = request;
 
+    const rootDir = path.resolve(request.rootDir || '.');
+
     for (const target of targets) {
-        await compileTarget(target, request);
+        await compileTarget(target, request, rootDir);
     }
     logWithTimestamp(`Complete.`);
 }
 
-export async function compileTarget(target: Target, options: CompileTargetOptions): Promise<void> {
-    logWithTimestamp(`Start compile: ${target.filename}`);
+export async function compileTarget(target: Target, options: CompileTargetOptions, rootDir: string): Promise<void> {
+    logWithTimestamp(`Start compile: ${target.name}`);
 
     const { format, sources, trieBase, sort = true } = target;
     const { keepRawCase = false, maxDepth, split = false } = options;
     const legacy = split === 'legacy';
     const splitWords = legacy ? false : split;
+    const targetDirectory = path.resolve(rootDir, target.targetDirectory);
 
     const useTrie = format.startsWith('trie');
-    const filename = resolveTarget(target.filename, useTrie, target.compress);
+    const filename = resolveTarget(target.name, targetDirectory, useTrie, target.compress ?? false);
     const experimental = new Set(options.experimental);
     const useAnnotation = (useTrie && format >= 'trie3') || experimental.has('compound');
     const skipNormalization = useAnnotation;
     const readerOptions: ReaderOptions = { maxDepth, useAnnotation };
 
     const filesToProcessAsync = pipeAsync(
-        readSourceList(sources),
+        readSourceList(sources, rootDir),
         opMapAsync((src) => readFileSource(src, readerOptions)),
         opAwaitAsync()
     );
@@ -78,7 +72,11 @@ export async function compileTarget(target: Target, options: CompileTargetOption
 
     await processFiles(action, filesToProcess, filename);
 
-    logWithTimestamp(`Done compile: ${target.filename}`);
+    logWithTimestamp(`Done compile: ${target.name}`);
+}
+
+function rel(filePath: string): string {
+    return path.relative(process.cwd(), filePath);
 }
 
 async function processFiles(action: ActionFn, filesToProcess: FileToProcess[], mergeTarget: string) {
@@ -89,16 +87,16 @@ async function processFiles(action: ActionFn, filesToProcess: FileToProcess[], m
         toProcess,
         opMap((ftp) => {
             const { src } = ftp;
-            logWithTimestamp('Process "%s" to "%s"', src, dst);
+            logWithTimestamp('Process "%s" to "%s"', rel(src), rel(dst));
             return ftp;
         }),
         opConcatMap(function* (ftp) {
             yield* ftp.words;
-            logWithTimestamp('Done processing %s', ftp.src);
+            logWithTimestamp('Done processing %s', rel(ftp.src));
         })
     );
     await action(words, dst);
-    logWithTimestamp('Done "%s"', dst);
+    logWithTimestamp('Done "%s"', rel(dst));
 }
 interface FileToProcess {
     src: string;
@@ -107,28 +105,30 @@ interface FileToProcess {
 
 type ActionFn = (words: Iterable<string>, dst: string) => Promise<void>;
 
-function resolveTarget(filename: string, useTrie: boolean, useGzCompress: boolean | boolean): string {
+function resolveTarget(name: string, directory: string, useTrie: boolean, useGzCompress: boolean | boolean): string {
     const ext = ((useTrie && '.trie') || '.txt') + ((useGzCompress && '.gz') || '');
-    filename = filename.replace(/((\.txt|\.dic|\.aff|\.trie)(\.gz)?)?$/, '') + ext;
-    return path.resolve(filename);
+    const filename = name + ext;
+    return path.resolve(directory, filename);
 }
 
-function readSourceList(sources: DictionarySource[]): AsyncIterable<FileSource> {
+function readSourceList(sources: DictionarySource[], rootDir: string): AsyncIterable<FileSource> {
     async function* mapSrc(): AsyncIterable<FileSource> {
         for (const src of sources) {
             if (isFilePath(src)) {
-                yield { filename: src };
+                yield { filename: path.resolve(rootDir, src) };
                 continue;
             }
             if (isFileSource(src)) {
-                yield src;
+                yield { ...src, filename: path.resolve(rootDir, src.filename) };
                 continue;
             }
             if (isFileListSource(src)) {
                 const { listFile, ...rest } = src;
-                const files = await readFileList(listFile);
+                const absListFile = path.resolve(rootDir, listFile);
+                const listFileDir = path.dirname(absListFile);
+                const files = await readFileList(absListFile);
                 for (const filename of files) {
-                    yield { ...rest, filename };
+                    yield { ...rest, filename: path.resolve(listFileDir, filename) };
                 }
             }
         }

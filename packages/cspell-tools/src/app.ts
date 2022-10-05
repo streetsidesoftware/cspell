@@ -5,8 +5,9 @@ import * as path from 'path';
 import type { CompileAppOptions, CompileTrieAppOptions } from './AppOptions';
 import * as compiler from './compiler';
 import { logWithTimestamp } from './compiler/logWithTimestamp';
-import { processCompileAction } from './compiler/processCompileAction';
+import { processCompileAction } from './compile';
 import { FeatureFlags } from './FeatureFlags';
+import { build } from './build';
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const npmPackage = require(path.join(__dirname, '..', 'package.json'));
@@ -63,8 +64,12 @@ export async function run(program: program.Command, argv: string[], flags?: Feat
         return processCompileAction(src, { ...options, trie: true }, flags);
     });
 
+    program
+        .command('build [targets]')
+        .description('Build the targets defined in the run configuration.')
+        .option('-c, --config <path to run configuration>', 'Specify the run configuration file.')
+        .option('-r, --root <directory>', 'Specify the run directory')
+        .action(build);
+
     await program.parseAsync(argv);
-    // if (!argv.slice(2).length) {
-    //     program.help();
-    // }
 }

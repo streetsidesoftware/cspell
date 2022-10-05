@@ -13,11 +13,12 @@ exports[`createCompileRequest createCompileRequest 2`] = `
   "targets": [
     {
       "compress": false,
-      "filename": "words.txt",
       "format": "plaintext",
+      "name": "words",
       "sources": [
         "src/words.txt",
       ],
+      "targetDirectory": ".",
     },
   ],
 }
@@ -29,19 +30,21 @@ exports[`createCompileRequest createCompileRequest 3`] = `
   "targets": [
     {
       "compress": false,
-      "filename": "out/words.txt",
       "format": "plaintext",
+      "name": "words",
       "sources": [
         "src/words.txt",
       ],
+      "targetDirectory": "out",
     },
     {
       "compress": false,
-      "filename": "out/cities.txt",
       "format": "plaintext",
+      "name": "cities",
       "sources": [
         "src/cities.txt",
       ],
+      "targetDirectory": "out",
     },
   ],
 }
@@ -53,12 +56,13 @@ exports[`createCompileRequest createCompileRequest 4`] = `
   "targets": [
     {
       "compress": false,
-      "filename": "out/combo.txt",
       "format": "plaintext",
+      "name": "combo",
       "sources": [
         "src/words.txt",
         "src/cities.txt",
       ],
+      "targetDirectory": "out",
     },
   ],
 }

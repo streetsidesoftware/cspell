@@ -115,7 +115,8 @@ describe('Validate the application', () => {
     test('app compile merge legacy', async () => {
         const commander = getCommander();
         const targetDir = relPathTemp;
-        const target = 'merge.txt';
+        const name = 'merge';
+        const target = name + '.txt';
         const pathSamples = path.join(projectRoot, '..', 'Samples', 'dicts');
         const cities = path.join(pathSamples, 'cities.txt');
         const exampleHunspell = path.join(pathSamples, 'hunspell', 'example.dic');
@@ -124,7 +125,7 @@ describe('Validate the application', () => {
             '-n',
             '--use-legacy-splitter',
             '-M',
-            target,
+            name,
             cities,
             exampleHunspell,
             '-o',
@@ -138,11 +139,12 @@ describe('Validate the application', () => {
     test('app compile merge', async () => {
         const commander = getCommander();
         const targetDir = relPathTemp;
-        const target = 'merge.txt';
+        const name = 'merge';
+        const target = name + '.txt';
         const pathSamples = path.join(projectRoot, '..', 'Samples', 'dicts');
         const cities = path.join(pathSamples, 'cities.txt');
         const exampleHunspell = path.join(pathSamples, 'hunspell', 'example.dic');
-        const args = argv('compile', '-n', '--split', '-M', target, cities, exampleHunspell, '-o', targetDir);
+        const args = argv('compile', '-n', '--split', '-M', name, cities, exampleHunspell, '-o', targetDir);
         await expect(app.run(commander, args)).resolves.toBeUndefined();
         const words = await fs.readFile(path.join(targetDir, target), 'utf8');
         expect(words).toMatchSnapshot();
@@ -151,11 +153,12 @@ describe('Validate the application', () => {
     test('app compile merge with defaults', async () => {
         const commander = getCommander();
         const targetDir = relPathTemp;
-        const target = 'merge.txt';
+        const name = 'merge';
+        const target = name + '.txt';
         const pathSamples = path.join(projectRoot, '..', 'Samples', 'dicts');
         const cities = path.join(pathSamples, 'cities.txt');
         const exampleHunspell = path.join(pathSamples, 'hunspell', 'example.dic');
-        const args = argv('compile', '-n', '-M', target, cities, exampleHunspell, '-o', targetDir);
+        const args = argv('compile', '-n', '-M', name, cities, exampleHunspell, '-o', targetDir);
         await expect(app.run(commander, args)).resolves.toBeUndefined();
         const words = await fs.readFile(path.join(targetDir, target), 'utf8');
         expect(words).toMatchSnapshot();
@@ -164,11 +167,12 @@ describe('Validate the application', () => {
     test('app compile merge with defaults --keep-raw-case', async () => {
         const commander = getCommander();
         const targetDir = relPathTemp;
-        const target = 'merge.txt';
+        const name = 'merge';
+        const target = name + '.txt';
         const pathSamples = path.join(projectRoot, '..', 'Samples', 'dicts');
         const cities = path.join(pathSamples, 'cities.txt');
         const exampleHunspell = path.join(pathSamples, 'hunspell', 'example.dic');
-        const args = argv('compile', '--keep-raw-case', '-n', '-M', target, cities, exampleHunspell, '-o', targetDir);
+        const args = argv('compile', '--keep-raw-case', '-n', '-M', name, cities, exampleHunspell, '-o', targetDir);
         await expect(app.run(commander, args)).resolves.toBeUndefined();
         const words = await fs.readFile(path.join(targetDir, target), 'utf8');
         expect(words).toMatchSnapshot();

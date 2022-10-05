@@ -1,0 +1,195 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "additionalProperties": false,
+  "definitions": {
+    "DictionaryFormats": {
+      "enum": [
+        "plaintext",
+        "trie",
+        "trie3",
+        "trie4"
+      ],
+      "type": "string"
+    },
+    "DictionarySource": {
+      "anyOf": [
+        {
+          "$ref": "#/definitions/FilePath"
+        },
+        {
+          "$ref": "#/definitions/FileSource"
+        },
+        {
+          "$ref": "#/definitions/FileListSource"
+        }
+      ]
+    },
+    "FileListSource": {
+      "additionalProperties": false,
+      "properties": {
+        "keepRawCase": {
+          "default": false,
+          "description": "Do not generate lower case / accent free versions of words.",
+          "type": "boolean"
+        },
+        "listFile": {
+          "$ref": "#/definitions/FilePath"
+        },
+        "maxDepth": {
+          "description": "Maximum number of nested Hunspell Rules to apply. This is needed for recursive dictionaries like Hebrew.",
+          "type": "number"
+        },
+        "split": {
+          "anyOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "const": "legacy",
+              "type": "string"
+            }
+          ],
+          "default": false,
+          "description": "Split lines into words."
+        }
+      },
+      "required": [
+        "listFile"
+      ],
+      "type": "object"
+    },
+    "FilePath": {
+      "description": "Note: All relative paths are relative to the config file location.",
+      "type": "string"
+    },
+    "FileSource": {
+      "additionalProperties": false,
+      "properties": {
+        "filename": {
+          "$ref": "#/definitions/FilePath"
+        },
+        "keepRawCase": {
+          "default": false,
+          "description": "Do not generate lower case / accent free versions of words.",
+          "type": "boolean"
+        },
+        "maxDepth": {
+          "description": "Maximum number of nested Hunspell Rules to apply. This is needed for recursive dictionaries like Hebrew.",
+          "type": "number"
+        },
+        "split": {
+          "anyOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "const": "legacy",
+              "type": "string"
+            }
+          ],
+          "default": false,
+          "description": "Split lines into words."
+        }
+      },
+      "required": [
+        "filename"
+      ],
+      "type": "object"
+    },
+    "Target": {
+      "additionalProperties": false,
+      "properties": {
+        "compress": {
+          "default": ": false",
+          "description": "gzip the file?",
+          "type": "boolean"
+        },
+        "excludeWordsFrom": {
+          "description": "Words from the sources that are found in `excludeWordsFrom` files will not be added to the dictionary.",
+          "items": {
+            "$ref": "#/definitions/FilePath"
+          },
+          "type": "array"
+        },
+        "format": {
+          "$ref": "#/definitions/DictionaryFormats",
+          "description": "Format of the dictionary."
+        },
+        "name": {
+          "description": "Name of target, used as the basis of target file name.",
+          "type": "string"
+        },
+        "sort": {
+          "default": ": true",
+          "description": "Sort the words in the resulting dictionary. Does not apply to `trie` based formats.",
+          "type": "boolean"
+        },
+        "sources": {
+          "description": "File sources used to build the dictionary.",
+          "items": {
+            "$ref": "#/definitions/DictionarySource"
+          },
+          "type": "array"
+        },
+        "targetDirectory": {
+          "$ref": "#/definitions/FilePath",
+          "description": "The target directory"
+        },
+        "trieBase": {
+          "description": "Advanced: Set the trie base number. A value between 10 and 36 Set numeric base to use. 10 is the easiest to read. 16 is common hex format. 36 is the most compact.",
+          "type": "number"
+        }
+      },
+      "required": [
+        "name",
+        "targetDirectory",
+        "format",
+        "sources"
+      ],
+      "type": "object"
+    }
+  },
+  "properties": {
+    "experimental": {
+      "description": "Experimental flags",
+      "items": {
+        "type": "string"
+      },
+      "type": "array"
+    },
+    "keepRawCase": {
+      "default": false,
+      "description": "Do not generate lower case / accent free versions of words.",
+      "type": "boolean"
+    },
+    "maxDepth": {
+      "description": "Maximum number of nested Hunspell Rules to apply. This is needed for recursive dictionaries like Hebrew.",
+      "type": "number"
+    },
+    "rootDir": {
+      "description": "Specify the directory where all relative paths will resolved against. By default, all relative paths are relative to the location of the config file.",
+      "type": "string"
+    },
+    "split": {
+      "anyOf": [
+        {
+          "type": "boolean"
+        },
+        {
+          "const": "legacy",
+          "type": "string"
+        }
+      ],
+      "default": false,
+      "description": "Split lines into words."
+    },
+    "targets": {
+      "description": "Optional Target Dictionaries to create.",
+      "items": {
+        "$ref": "#/definitions/Target"
+      },
+      "type": "array"
+    }
+  },
+  "type": "object"
+}

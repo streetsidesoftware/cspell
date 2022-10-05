@@ -2,7 +2,7 @@ import * as path from 'path';
 import { spyOnConsole } from '../test/console';
 import { createTestHelper } from '../test/TestHelper';
 import { compile } from './compile';
-import { CompileRequest, Target } from './config';
+import { CompileRequest, Target } from '../config';
 import { readTextFile } from './readTextFile';
 
 const testHelper = createTestHelper(__filename);
@@ -30,7 +30,8 @@ describe('compile', () => {
         ${'plaintext'} | ${true}
     `('compile', async ({ format, compress }) => {
         const target: Target = {
-            filename: 'myDictionary',
+            name: 'myDictionary',
+            targetDirectory: '.',
             format,
             sources: [sample('cities.txt')],
             compress,
