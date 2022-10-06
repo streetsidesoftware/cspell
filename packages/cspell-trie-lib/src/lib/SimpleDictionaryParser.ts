@@ -1,14 +1,14 @@
-import { operators } from 'gensequence';
-import { normalizeWord, normalizeWordForCaseInsensitive } from './trie-util';
+import { opCombine as opPipe, opConcatMap, opFilter, opMap, type Operator } from '@cspell/cspell-pipe/sync';
 import {
-    COMPOUND_FIX,
-    OPTIONAL_COMPOUND_FIX,
-    FORBID_PREFIX,
     CASE_INSENSITIVE_PREFIX,
-    LINE_COMMENT,
+    COMPOUND_FIX,
+    FORBID_PREFIX,
     IDENTITY_PREFIX,
+    LINE_COMMENT,
+    OPTIONAL_COMPOUND_FIX,
 } from './constants';
 import { Trie } from './trie';
+import { normalizeWord, normalizeWordForCaseInsensitive } from './trie-util';
 import { buildTrieFast } from './TrieBuilder';
 
 export interface ParseDictionaryOptions {
@@ -53,9 +53,7 @@ export const defaultParseDictionaryOptions: ParseDictionaryOptions = Object.free
  * @param options - defines prefixes used when parsing lines.
  * @returns words that have been normalized.
  */
-export function createDictionaryLineParser(
-    options?: Partial<ParseDictionaryOptions>
-): (lines: Iterable<string>) => Iterable<string> {
+export function createDictionaryLineParserMapper(options?: Partial<ParseDictionaryOptions>): Operator<string> {
     const _options = mergeOptions(_defaultOptions, options);
     const {
         commentCharacter,
@@ -133,15 +131,15 @@ export function createDictionaryLineParser(
         yield* forms;
     }
 
-    const processLines = operators.pipe(
-        operators.filter(isString),
-        operators.map(removeComments),
-        operators.map(trim),
-        operators.filter(filterEmptyLines),
-        operators.concatMap(mapOptionalPrefix),
-        operators.concatMap(mapOptionalSuffix),
-        operators.concatMap(mapNormalize),
-        operators.map(removeDoublePrefix)
+    const processLines = opPipe(
+        opFilter(isString),
+        opMap(removeComments),
+        opMap(trim),
+        opFilter(filterEmptyLines),
+        opConcatMap(mapOptionalPrefix),
+        opConcatMap(mapOptionalSuffix),
+        opConcatMap(mapNormalize),
+        opMap(removeDoublePrefix)
     );
 
     return processLines;
@@ -158,7 +156,7 @@ export function parseDictionaryLines(
     lines: Iterable<string>,
     options?: Partial<ParseDictionaryOptions>
 ): Iterable<string> {
-    return createDictionaryLineParser(options)(lines);
+    return createDictionaryLineParserMapper(options)(lines);
 }
 
 export function parseLinesToDictionary(lines: Iterable<string>, options?: Partial<ParseDictionaryOptions>): Trie {
