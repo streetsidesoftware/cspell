@@ -6,10 +6,10 @@ import {
     OPTIONAL_COMPOUND_FIX,
     Trie,
 } from 'cspell-trie-lib';
-import { genSequence, operators, Sequence } from 'gensequence';
 import * as HR from 'hunspell-reader';
 import { AffWord } from 'hunspell-reader';
 import { readTextFileLines } from './readTextFile';
+import { pipe } from '@cspell/cspell-pipe/sync';
 
 const regHunspellFile = /\.(dic|aff)$/i;
 
@@ -32,13 +32,11 @@ export type AnnotatedWord = string;
 
 interface BaseReader {
     size: number;
-    annotatedWords: () => Sequence<AnnotatedWord>;
-    rawWords: () => Sequence<string>;
+    annotatedWords: Iterable<AnnotatedWord>;
+    rawWords: Iterable<string>;
 }
 
-export interface Reader extends BaseReader {
-    [Symbol.iterator]: () => Sequence<string>;
-}
+export interface Reader extends BaseReader, Iterable<string> {}
 
 const regExMatchComments = /\s*(#|\/\/).*/;
 
@@ -60,13 +58,14 @@ function findMatchingReader(filename: string, options: ReaderOptions): Promise<B
 export async function createReader(filename: string, options: ReaderOptions): Promise<Reader> {
     const baseReader = await findMatchingReader(filename, options);
     return Object.assign(baseReader, {
-        [Symbol.iterator]: options.useAnnotation ? baseReader.annotatedWords : baseReader.rawWords,
+        [Symbol.iterator]: () =>
+            (options.useAnnotation ? baseReader.annotatedWords : baseReader.rawWords)[Symbol.iterator](),
     });
 }
 
 export function createArrayReader(lines: string[]): BaseReader {
-    const rawWords = () => genSequence(lines);
-    const annotatedWords = () => genSequence(lines).pipe(_mapText, dedupeAndSort);
+    const rawWords = lines;
+    const annotatedWords = pipe(lines, _mapText, dedupeAndSort);
 
     return {
         size: lines.length,
@@ -82,14 +81,13 @@ export async function readHunspellFiles(filename: string, options: ReaderOptions
     const reader = await HR.IterableHunspellReader.createFromFiles(affFile, dicFile);
     reader.maxDepth = options.maxDepth !== undefined ? options.maxDepth : reader.maxDepth;
 
-    const normalizeAndDedupe = operators.pipe(_stripCaseAndAccents, dedupeAndSort);
-    const rawWords = () => reader.seqWords();
+    const normalizeAndDedupe = opCompose(_stripCaseAndAccents, dedupeAndSort);
+    const rawWords = reader.seqWords();
+    const annotatedWords = pipe(reader.seqAffWords(), _mapAffWords, normalizeAndDedupe);
 
     return {
         size: reader.dic.length,
-        annotatedWords() {
-            return reader.seqAffWords().pipe(_mapAffWords, normalizeAndDedupe);
-        },
+        annotatedWords,
         rawWords,
     };
 }
@@ -97,7 +95,7 @@ export async function readHunspellFiles(filename: string, options: ReaderOptions
 async function trieFileReader(filename: string): Promise<BaseReader> {
     const trieRoot = importTrie(await readTextFileLines(filename));
     const trie = new Trie(trieRoot);
-    const rawWords = () => trie.words();
+    const rawWords = trie.words();
     return {
         get size() {
             return trie.size();
@@ -112,16 +110,16 @@ async function textFileReader(filename: string, _options: ReaderOptions): Promis
     return createArrayReader(lines);
 }
 
-const _mapText = operators.pipe(_comments, _compoundBegin, _compoundEnd, _stripCaseAndAccents);
+const _mapText = opCompose(_comments, _compoundBegin, _compoundEnd, _stripCaseAndAccents);
 
-function* _comments(lines: Iterable<string>): Generator<AnnotatedWord> {
+function* _comments(lines: Iterable<string>): Iterable<AnnotatedWord> {
     for (const line of lines) {
         const w = line.replace(regExMatchComments, '').trim();
         if (w) yield w;
     }
 }
 
-function* _compoundEnd(lines: Iterable<string>): Generator<AnnotatedWord> {
+function* _compoundEnd(lines: Iterable<string>): Iterable<AnnotatedWord> {
     for (const line of lines) {
         if (line[0] !== OPTIONAL_COMPOUND_FIX) {
             yield line;
@@ -133,7 +131,7 @@ function* _compoundEnd(lines: Iterable<string>): Generator<AnnotatedWord> {
     }
 }
 
-function* _compoundBegin(lines: Iterable<string>): Generator<AnnotatedWord> {
+function* _compoundBegin(lines: Iterable<string>): Iterable<AnnotatedWord> {
     for (const line of lines) {
         if (line[line.length - 1] !== OPTIONAL_COMPOUND_FIX) {
             yield line;
@@ -145,7 +143,7 @@ function* _compoundBegin(lines: Iterable<string>): Generator<AnnotatedWord> {
     }
 }
 
-function* _stripCaseAndAccents(words: Iterable<AnnotatedWord>): Generator<AnnotatedWord> {
+function* _stripCaseAndAccents(words: Iterable<AnnotatedWord>): Iterable<AnnotatedWord> {
     for (const word of words) {
         // Words are normalized to the compact format: e + ` => è
         yield word.normalize();
@@ -175,7 +173,7 @@ function* dedupeAndSort(words: Iterable<AnnotatedWord>): Iterable<AnnotatedWord>
     yield* sortDedupeClear();
 }
 
-function* _mapAffWords(affWords: Iterable<AffWord>): Generator<AnnotatedWord> {
+function* _mapAffWords(affWords: Iterable<AffWord>): Iterable<AnnotatedWord> {
     const hasSpecial = /[~+!]/;
     for (const affWord of affWords) {
         const { word, flags } = affWord;
@@ -192,6 +190,15 @@ function* _mapAffWords(affWords: Iterable<AffWord>): Generator<AnnotatedWord> {
             yield forbid + word;
         }
     }
+}
+
+function opCompose<T>(...ops: ((i: Iterable<T>) => Iterable<T>)[]): (i: Iterable<T>) => Iterable<T> {
+    return (i: Iterable<T>) => {
+        for (const op of ops) {
+            i = op(i);
+        }
+        return i;
+    };
 }
 
 export const __testing__ = {
