@@ -1,5 +1,6 @@
 export { opAppend, opAppendAsync, opAppendSync } from './append';
 export { opAwaitAsync } from './await';
+export { opCombineAsync, opCombineSync } from './combine';
 export { opConcatMap, opConcatMapAsync, opConcatMapSync } from './concatMap';
 export { opFilter, opFilterAsync, opFilterSync } from './filter';
 export { opFirst, opFirstAsync, opFirstSync } from './first';
@@ -10,4 +11,5 @@ export { opMap, opMapAsync, opMapSync } from './map';
 export { opSkip, opSkipAsync, opSkipSync } from './skip';
 export { opTake, opTakeAsync, opTakeSync } from './take';
 export { opTap, opTapAsync, opTapSync } from './tap';
+export type { OperatorAsync, OperatorSync, OperatorSyncToAsync } from './types';
 export { opUnique, opUniqueAsync, opUniqueSync } from './unique';

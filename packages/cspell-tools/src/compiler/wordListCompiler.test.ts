@@ -1,6 +1,6 @@
 // cSpell:ignore jpegs outing dirs lcode outring outrings
 
-import { opConcatMap, pipe, toArray } from '@cspell/cspell-pipe/sync';
+import { opConcatMap, pipe, toArray, opTake } from '@cspell/cspell-pipe/sync';
 import * as Trie from 'cspell-trie-lib';
 import { importTrie, isCircular, iteratorTrieWords, serializeTrie } from 'cspell-trie-lib';
 import * as fsp from 'fs-extra';
@@ -18,7 +18,8 @@ import {
     compileWordList as _compileWordList,
     __testing__,
 } from './wordListCompiler';
-import { createNormalizer, legacyLineToWords } from './wordListParser';
+import { createNormalizer } from './wordListParser';
+import { legacyLineToWords } from './legacyLineToWords';
 
 const testHelper = createTestHelper(__filename);
 
@@ -180,7 +181,7 @@ describe('Validate the wordListCompiler', () => {
 describe('Validate Larger Dictionary', () => {
     test('en_US hunspell', async () => {
         const source = await streamWordsFromFile(sampleDictEnUS, {});
-        const words = source.take(5000).toArray();
+        const words = [...pipe(source, opTake(5000))];
         const trie = normalizeWordsToTrie(words);
         expect(isCircular(trie)).toBe(false);
         const nWords = toArray(legacyNormalizeWords(words)).sort().filter(uniqueFilter(1000));
@@ -190,7 +191,7 @@ describe('Validate Larger Dictionary', () => {
 
     test('en_US word list', async () => {
         const source = await streamWordsFromFile(sampleDictEn, {});
-        const words = source.toArray();
+        const words = [...source];
         const trie = Trie.consolidate(normalizeWordsToTrie(words));
         expect(isCircular(trie)).toBe(false);
         const nWords = toArray(legacyNormalizeWords(words)).sort().filter(uniqueFilter(1000));

@@ -1,4 +1,5 @@
 import { createReader, __testing__ } from './Reader';
+import { pipe, opTake, opFilter } from '@cspell/cspell-pipe/sync';
 import * as path from 'path';
 
 const samples = path.join(__dirname, '..', '..', '..', 'Samples', 'dicts');
@@ -36,7 +37,7 @@ describe('Validate the iterateWordsFromFile', () => {
     test('annotatedWords: hunspell', async () => {
         const reader = await createReader(path.join(samples, 'hunspell', 'example.aff'), {});
         expect(reader.size).toBe(3);
-        const results = [...reader.annotatedWords()];
+        const results = [...reader.annotatedWords];
         // this might break if the processing order of hunspell changes.
         expect(results).toEqual(
             ('hello tried try rework reworked work worked ' + '~hello ~tried ~try ~rework ~reworked ~work ~worked')
@@ -50,10 +51,11 @@ describe('Validate the iterateWordsFromFile', () => {
         expect(reader.size).toBe(180689);
         const regBoek = /^.?boek\b/; // cspell:ignore fiets koopman doek boek
         const results = [
-            ...reader
-                .annotatedWords()
-                .filter((word) => regBoek.test(word))
-                .take(8),
+            ...pipe(
+                reader.annotatedWords,
+                opFilter((word) => regBoek.test(word)),
+                opTake(8)
+            ),
         ];
         expect(results.join(' ')).toBe('+boek boek boek+ ~boek ~boek+ boek ~boek');
     });
@@ -61,7 +63,7 @@ describe('Validate the iterateWordsFromFile', () => {
     test('annotatedWords: trie', async () => {
         const reader = await createReader(path.join(samples, 'cities.trie.gz'), {});
         expect(reader.size).toBeGreaterThan(1);
-        const results = [...reader.annotatedWords()];
+        const results = [...reader.annotatedWords];
         expect(results.join('|')).toBe(
             'amsterdam|angeles|city|delhi|francisco|london|los|los angeles' +
                 '|mexico|mexico city|new|new amsterdam|new delhi|new york|paris|san|san francisco|york'
@@ -71,7 +73,7 @@ describe('Validate the iterateWordsFromFile', () => {
     test('annotatedWords: text - cities.txt', async () => {
         const reader = await createReader(path.join(samples, 'cities.txt'), {});
         expect(reader.size).toBeGreaterThan(1);
-        const results = [...reader.annotatedWords()];
+        const results = [...reader.annotatedWords];
         // the results are sorted
         expect(results.join('|')).toBe(
             'London|Los Angeles|Mexico City|New Amsterdam|New Delhi|New York|Paris|San Francisco' +
@@ -82,7 +84,7 @@ describe('Validate the iterateWordsFromFile', () => {
     test('annotatedWords: text - sampleCodeDic.txt', async () => {
         const reader = await createReader(path.join(samples, 'sampleCodeDic.txt'), {});
         expect(reader.size).toBeGreaterThan(1);
-        const results = [...reader.annotatedWords()];
+        const results = [...reader.annotatedWords];
         // cspell:ignore codecode errorerror codemsg
         // the results are sorted
         expect(results.join('|')).toBe(

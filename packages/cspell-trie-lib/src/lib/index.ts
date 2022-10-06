@@ -5,7 +5,11 @@ export type { FindFullResult } from './find';
 export { ExportOptions, importTrie, serializeTrie } from './io/importExport';
 export { mapDictionaryInformationToWeightMap } from './mappers/mapDictionaryInfoToWeightMap';
 export type { SuggestionCostMapDef } from './models/suggestionCostsDef';
-export { createDictionaryLineParser, parseDictionary, parseDictionaryLines } from './SimpleDictionaryParser';
+export {
+    createDictionaryLineParserMapper as createDictionaryLineParser,
+    parseDictionary,
+    parseDictionaryLines,
+} from './SimpleDictionaryParser';
 export { impersonateCollector, suggestionCollector } from './suggestCollector';
 export type { MaxCost, SuggestionCollector, SuggestionResult } from './suggestCollector';
 export {

@@ -1,5 +1,6 @@
 import { AnyIterable, PaFn, PipeAsyncTx, PipeSyncTx, PsFn } from './internalTypes';
 import { toAsyncIterable } from './helpers';
+import { opCombineAsync, opCombineSync } from './operators';
 
 // type Rest = [...any];
 
@@ -14,11 +15,8 @@ export function pipeAsync<T, T0, T1, T2, T3, T4, T5, T6>(i: AnyIterable<T>, ...f
 export function pipeAsync<T, T0, T1, T2, T3, T4, T5, T6, T7>(i: AnyIterable<T>, ...f: PipeAsyncTx<[T, T0, T1, T2, T3, T4, T5, T6, T7]>): AsyncIterable<T7>; // prettier-ignore
 
 export function pipeAsync<T>(i: AnyIterable<T>, ...fns: PaFn<T, T>[]): AsyncIterable<T> {
-    let iter = toAsyncIterable(i);
-    for (const fn of fns) {
-        iter = fn(iter);
-    }
-    return iter;
+    const iter = toAsyncIterable(i);
+    return opCombineAsync<T>(...fns)(iter);
 }
 
 export function pipeSync<T>(i: Iterable<T>): Iterable<T>; // prettier-ignore
@@ -32,9 +30,5 @@ export function pipeSync<T, T0, T1, T2, T3, T4, T5, T6>(i: Iterable<T>, ...f: Pi
 export function pipeSync<T, T0, T1, T2, T3, T4, T5, T6, T7>(i: Iterable<T>, ...f: PipeSyncTx<[T, T0, T1, T2, T3, T4, T5, T6, T7]>): Iterable<T7>; // prettier-ignore
 
 export function pipeSync<T>(i: Iterable<T>, ...fns: PsFn<T, T>[]): Iterable<T> {
-    let iter: Iterable<T> = i;
-    for (const fn of fns) {
-        iter = fn(iter);
-    }
-    return iter;
+    return opCombineSync(...fns)(i);
 }

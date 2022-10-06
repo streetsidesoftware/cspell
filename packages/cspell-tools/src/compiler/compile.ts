@@ -2,16 +2,25 @@ import { pipeAsync, toArray } from '@cspell/cspell-pipe';
 import { opAwaitAsync, opMapAsync } from '@cspell/cspell-pipe/operators';
 import { opConcatMap, opMap, pipe } from '@cspell/cspell-pipe/sync';
 import * as path from 'path';
+import {
+    CompileRequest,
+    CompileTargetOptions,
+    DictionarySource,
+    FilePath,
+    FileSource,
+    isFileListSource,
+    isFilePath,
+    isFileSource,
+    Target,
+} from '../config';
 import { getSystemFeatureFlags } from '../FeatureFlags';
-import { CompileRequest, CompileTargetOptions, DictionarySource, FilePath, FileSource, Target } from '../config';
-import { isFileListSource, isFilePath, isFileSource } from './configUtils';
+import { NormalizeOptions } from './CompileOptions';
 import { streamWordsFromFile } from './iterateWordsFromFile';
 import { logWithTimestamp } from './logWithTimestamp';
 import { ReaderOptions } from './Reader';
 import { readTextFile } from './readTextFile';
 import { compileTrie, compileWordList } from './wordListCompiler';
 import { createNormalizer } from './wordListParser';
-import { NormalizeOptions } from './CompileOptions';
 
 getSystemFeatureFlags().register('compound', 'Enable compound dictionary sources.');
 

@@ -1,44 +1,15 @@
 import { opFilter, pipe } from '@cspell/cspell-pipe/sync';
-import * as Trie from 'cspell-trie-lib';
-import { genSequence } from 'gensequence';
+import { parseDictionaryLines } from 'cspell-trie-lib';
 import { uniqueFilter } from 'hunspell-reader/dist/util';
 import { NormalizeOptions } from './CompileOptions';
 import { extractInlineSettings, InlineSettings } from './inlineSettings';
-import * as Text from './text';
+import { legacyLineToWords } from './legacyLineToWords';
 
-const regNonWordOrSpace = /[^\p{L}\p{M}' ]+/giu;
 const regNonWordOrDigit = /[^\p{L}\p{M}'\w-]+/giu;
-const regExpSpaceOrDash = /[- ]+/g;
-const regExpRepeatChars = /(.)\1{4,}/i;
 
 type Normalizer = (lines: Iterable<string>) => Iterable<string>;
 type LineProcessor = (line: string) => Iterable<string>;
 type WordMapper = (word: string) => Iterable<string>;
-
-export function legacyLineToWords(line: string): Iterable<string> {
-    // Remove punctuation and non-letters.
-    const filteredLine = line.replace(regNonWordOrSpace, '|');
-    const wordGroups = filteredLine.split('|');
-
-    const words = genSequence(wordGroups)
-        .concatMap((a) => [a, ...a.split(regExpSpaceOrDash)])
-        .concatMap((a) => splitCamelCase(a))
-        .map((a) => a.trim())
-        .filter((a) => !!a)
-        .filter((s) => !regExpRepeatChars.test(s))
-        .map((a) => a.toLowerCase());
-
-    return words;
-}
-
-function splitCamelCase(word: string): Iterable<string> {
-    const splitWords = Text.splitCamelCaseWord(word);
-    // We only want to preserve this: "New York" and not "Namespace DNSLookup"
-    if (splitWords.length > 1 && regExpSpaceOrDash.test(word)) {
-        return genSequence(splitWords).concatMap((w) => w.split(regExpSpaceOrDash));
-    }
-    return splitWords;
-}
 
 export function createNormalizer(options: NormalizeOptions): Normalizer {
     const { skipNormalization = false, splitWords, keepRawCase, legacy } = options;
@@ -66,7 +37,7 @@ export function createNormalizer(options: NormalizeOptions): Normalizer {
 }
 
 function mapWordToDictionaryEntries(w: string): Iterable<string> {
-    return Trie.parseDictionaryLines([w]);
+    return parseDictionaryLines([w]);
 }
 
 function mapWordIdentity(w: string): string[] {
