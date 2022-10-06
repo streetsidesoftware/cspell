@@ -50,14 +50,12 @@ export const defaultParseDictionaryOptions: ParseDictionaryOptions = Object.free
 /**
  * Normalizes a dictionary words based upon prefix / suffixes.
  * Case insensitive versions are also generated.
- * @param lines - one word per line
- * @param _options - defines prefixes used when parsing lines.
+ * @param options - defines prefixes used when parsing lines.
  * @returns words that have been normalized.
  */
-export function parseDictionaryLines(
-    lines: Iterable<string>,
+export function createDictionaryLineParser(
     options?: Partial<ParseDictionaryOptions>
-): Iterable<string> {
+): (lines: Iterable<string>) => Iterable<string> {
     const _options = mergeOptions(_defaultOptions, options);
     const {
         commentCharacter,
@@ -146,7 +144,21 @@ export function parseDictionaryLines(
         operators.map(removeDoublePrefix)
     );
 
-    return processLines(lines);
+    return processLines;
+}
+
+/**
+ * Normalizes a dictionary words based upon prefix / suffixes.
+ * Case insensitive versions are also generated.
+ * @param lines - one word per line
+ * @param _options - defines prefixes used when parsing lines.
+ * @returns words that have been normalized.
+ */
+export function parseDictionaryLines(
+    lines: Iterable<string>,
+    options?: Partial<ParseDictionaryOptions>
+): Iterable<string> {
+    return createDictionaryLineParser(options)(lines);
 }
 
 export function parseLinesToDictionary(lines: Iterable<string>, options?: Partial<ParseDictionaryOptions>): Trie {
