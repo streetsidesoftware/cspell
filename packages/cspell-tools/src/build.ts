@@ -1,6 +1,6 @@
 import { cosmiconfig } from 'cosmiconfig';
 import { compile } from './compiler';
-import { normalizeConfig } from './config';
+import { normalizeConfig, Target } from './config';
 import * as path from 'path';
 
 export interface BuildOptions {
@@ -19,6 +19,12 @@ const searchPlaces = [
 ];
 
 export async function build(targets: string[] | undefined, options: BuildOptions) {
+    const allowedTargets = new Set(targets || []);
+
+    function filter(target: Target): boolean {
+        return !targets || allowedTargets.has(target.name);
+    }
+
     if (options.root) {
         process.chdir(path.resolve(options.root));
     }
@@ -35,5 +41,5 @@ export async function build(targets: string[] | undefined, options: BuildOptions
         throw 'cspell-tools.config not found.';
     }
 
-    await compile(config.config);
+    await compile(config.config, { filter });
 }
