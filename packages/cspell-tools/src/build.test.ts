@@ -20,7 +20,6 @@ describe('build action', () => {
         helper.mkdir(currentDir);
         helper.cd(currentDir);
         await expect(build(undefined, { config })).resolves.toBeUndefined();
-        const targetFile = t(target);
         const content = await readTextFile(target);
         expect(content).toMatchSnapshot();
     });

@@ -2,6 +2,7 @@ import * as path from 'path';
 import { RunConfig } from '.';
 
 type CosmiconfigResult = {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     config: any;
     filepath: string;
     isEmpty?: boolean | undefined;
