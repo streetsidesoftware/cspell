@@ -18,7 +18,8 @@ import {
     compileWordList as _compileWordList,
     __testing__,
 } from './wordListCompiler';
-import { createNormalizer, legacyLineToWords } from './wordListParser';
+import { createNormalizer } from './wordListParser';
+import { legacyLineToWords } from './legacyLineToWords';
 
 const testHelper = createTestHelper(__filename);
 
