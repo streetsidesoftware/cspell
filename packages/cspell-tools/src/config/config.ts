@@ -57,14 +57,15 @@ export interface Target {
 
     /**
      * The target directory
+     * @default current directory
      */
-    targetDirectory: FilePath;
+    targetDirectory?: FilePath | undefined;
 
     /**
      * gzip the file?
      * @default: false
      */
-    compress?: boolean;
+    compress?: boolean | undefined;
 
     /**
      * Format of the dictionary.

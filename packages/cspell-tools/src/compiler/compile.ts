@@ -13,12 +13,21 @@ import { compileTrie, compileWordList } from './wordListCompiler';
 
 getSystemFeatureFlags().register('compound', 'Enable compound dictionary sources.');
 
-export async function compile(request: CompileRequest): Promise<void> {
+interface CompileOptions {
+    /**
+     * Optional filter function to filter targets.
+     */
+    filter?: (target: Target) => boolean;
+}
+
+export async function compile(request: CompileRequest, options?: CompileOptions): Promise<void> {
     const { targets } = request;
 
     const rootDir = path.resolve(request.rootDir || '.');
 
     for (const target of targets) {
+        const keep = options?.filter?.(target) ?? true;
+        if (!keep) continue;
         await compileTarget(target, request, rootDir);
     }
     logWithTimestamp(`Complete.`);
@@ -31,7 +40,7 @@ export async function compileTarget(target: Target, options: CompileTargetOption
     const { keepRawCase = false, maxDepth, split = false } = options;
     const legacy = split === 'legacy';
     const splitWords = legacy ? false : split;
-    const targetDirectory = path.resolve(rootDir, target.targetDirectory);
+    const targetDirectory = path.resolve(rootDir, target.targetDirectory ?? process.cwd());
 
     const useTrie = format.startsWith('trie');
     const filename = resolveTarget(target.name, targetDirectory, useTrie, target.compress ?? false);

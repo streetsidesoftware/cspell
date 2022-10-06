@@ -1,5 +1,6 @@
 import * as path from 'path';
 import * as shell from 'shelljs';
+import { promises as fs } from 'fs';
 
 const packageRoot = path.join(__dirname, '../..');
 const repoRoot = path.join(packageRoot, '../..');
@@ -41,13 +42,24 @@ export interface TestHelper {
 
     cd(dir: string): void;
 
-    cdToTempDir(): void;
+    cdToTempDir(...parts: string[]): void;
 
     packageTemp(...parts: string[]): string;
+
+    /**
+     * Signal the start of a test.
+     * Use to make test.each unique.
+     * @param name
+     */
+    beginTest(name?: string): void;
+
+    getCurrentTestName(): string;
+
+    fileExists(path: string): Promise<boolean>;
 }
 
-export function createTestHelper(testFilename: string): TestHelper {
-    return new TestHelperImpl(testFilename);
+export function createTestHelper(testFilename?: string): TestHelper {
+    return new TestHelperImpl(testFilename || expect.getState().testPath || 'test');
 }
 
 class TestHelperImpl implements TestHelper {
@@ -56,9 +68,27 @@ class TestHelperImpl implements TestHelper {
     readonly tempDir: string;
     readonly fixtureDir: string;
 
+    private testCounter = new Map<string, number>();
+
     constructor(testFilename: string) {
         this.tempDir = path.join(tempDirBase, path.relative(packageRoot, testFilename));
         this.fixtureDir = path.join(packageRoot, 'fixtures');
+    }
+
+    beginTest(): void {
+        const currentTestName = this.getRawTestName();
+        const prev = this.testCounter.get(currentTestName) || 0;
+        this.testCounter.set(currentTestName, prev + 1);
+    }
+
+    private getRawTestName(): string {
+        return expect.getState().currentTestName || '';
+    }
+
+    getCurrentTestName(): string {
+        const currentTestName = this.getRawTestName();
+        const counter = this.testCounter.get(currentTestName);
+        return `${currentTestName}${counter ? ' ' + counter : ''}`;
     }
 
     /**
@@ -74,7 +104,8 @@ class TestHelperImpl implements TestHelper {
      * @returns
      */
     resolveTemp(...parts: string[]): string {
-        const testName = (expect.getState().currentTestName || '').replace(/[^\w_.-]/g, '_');
+        const currentTestName = this.getCurrentTestName();
+        const testName = currentTestName.replace(/[^\w_.-]/g, '_');
         return path.resolve(this.tempDir, testName, ...parts);
     }
 
@@ -107,8 +138,8 @@ class TestHelperImpl implements TestHelper {
     /**
      * Change dir to temp directory unique to the current test.
      */
-    cdToTempDir(): void {
-        this.createTempDir();
+    cdToTempDir(...parts: string[]): void {
+        this.createTempDir(...parts);
         this.cd('.');
     }
 
@@ -131,4 +162,13 @@ class TestHelperImpl implements TestHelper {
     }
 
     readonly createTempDir = this.mkdir;
+
+    async fileExists(path: string): Promise<boolean> {
+        try {
+            await fs.stat(path);
+            return true;
+        } catch (e) {
+            return false;
+        }
+    }
 }
