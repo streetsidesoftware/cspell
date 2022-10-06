@@ -2,7 +2,7 @@ import { opFilter, pipe } from '@cspell/cspell-pipe/sync';
 import * as Trie from 'cspell-trie-lib';
 import { genSequence } from 'gensequence';
 import { uniqueFilter } from 'hunspell-reader/dist/util';
-import { CompileOptions } from './CompileOptions';
+import { NormalizeOptions } from './CompileOptions';
 import { extractInlineSettings, InlineSettings } from './inlineSettings';
 import * as Text from './text';
 
@@ -40,7 +40,7 @@ function splitCamelCase(word: string): Iterable<string> {
     return splitWords;
 }
 
-export function createNormalizer(options: CompileOptions): Normalizer {
+export function createNormalizer(options: NormalizeOptions): Normalizer {
     const { skipNormalization = false, splitWords, keepRawCase, legacy } = options;
     if (skipNormalization) {
         return (lines: Iterable<string>) => lines;

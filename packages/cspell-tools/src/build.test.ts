@@ -1,8 +1,13 @@
 import { build } from './build';
+import { setLogger } from './compiler';
 import { readTextFile } from './compiler/readTextFile';
+import { spyOnConsole } from './test/console';
 import { createTestHelper } from './test/TestHelper';
 
 const helper = createTestHelper(__filename);
+
+spyOnConsole();
+setLogger(console.log);
 
 describe('build action', () => {
     beforeEach(() => {
@@ -16,6 +21,7 @@ describe('build action', () => {
         ${'.'}                           | ${f('build-single-target-yaml/cspell-tools.config.yaml')} | ${'my/colors.txt'}
         ${f('build-single-trie')}        | ${undefined}                                              | ${tBuild('build-single-trie/cities.trie')}
         ${f('build-source-list')}        | ${undefined}                                              | ${tBuild('build-source-list/source-list.txt')}
+        ${'.'}                           | ${f('build-combo/cspell-tools.config.yaml')}              | ${'color-cities-code.txt'}
     `('build', async ({ currentDir, config, target }) => {
         helper.mkdir(currentDir);
         helper.cd(currentDir);

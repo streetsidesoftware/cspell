@@ -8,11 +8,17 @@ import { uniqueFilter } from 'hunspell-reader/dist/util';
 import * as path from 'path';
 import { spyOnConsole } from '../test/console';
 import { createTestHelper } from '../test/TestHelper';
+import { NormalizeOptions } from './CompileOptions';
 import { streamWordsFromFile } from './iterateWordsFromFile';
 import { setLogger } from './logger';
 import { readTextFile } from './readTextFile';
-import { compileTrie, compileWordList, consolidate, __testing__ } from './wordListCompiler';
-import { legacyLineToWords } from './wordListParser';
+import {
+    compileTrie as _compileTrie,
+    CompileTrieOptions,
+    compileWordList as _compileWordList,
+    __testing__,
+} from './wordListCompiler';
+import { createNormalizer, legacyLineToWords } from './wordListParser';
 
 const testHelper = createTestHelper(__filename);
 
@@ -185,7 +191,7 @@ describe('Validate Larger Dictionary', () => {
     test('en_US word list', async () => {
         const source = await streamWordsFromFile(sampleDictEn, {});
         const words = source.toArray();
-        const trie = consolidate(normalizeWordsToTrie(words));
+        const trie = Trie.consolidate(normalizeWordsToTrie(words));
         expect(isCircular(trie)).toBe(false);
         const nWords = toArray(legacyNormalizeWords(words)).sort().filter(uniqueFilter(1000));
         const results = iteratorTrieWords(trie).toArray().sort();
@@ -196,6 +202,24 @@ describe('Validate Larger Dictionary', () => {
         expect(results2).toEqual(results);
     }, 60000);
 });
+
+async function compileTrie(
+    words: Iterable<string>,
+    destFilename: string,
+    options: CompileTrieOptions & NormalizeOptions
+): Promise<void> {
+    const normalizer = createNormalizer(options);
+    return _compileTrie(normalizer(words), destFilename, options);
+}
+
+async function compileWordList(
+    lines: Iterable<string>,
+    destFilename: string,
+    options: CompileTrieOptions & NormalizeOptions
+): Promise<void> {
+    const normalizer = createNormalizer(options);
+    return _compileWordList(normalizer(lines), destFilename, options);
+}
 
 function normalizeWordsToTrie(words: Iterable<string>): Trie.TrieRoot {
     return Trie.buildTrie(legacyNormalizeWords(words)).root;
