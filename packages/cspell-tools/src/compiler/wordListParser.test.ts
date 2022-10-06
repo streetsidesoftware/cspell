@@ -1,7 +1,7 @@
 // cSpell:ignore jpegs outing dirs lcode outring outrings
 
 import { opFilter, pipe, toArray } from '@cspell/cspell-pipe/sync';
-import { CompileOptions } from './CompileOptions';
+import { CompileOptions, NormalizeOptions } from './CompileOptions';
 import { createNormalizer, __testing__ } from './wordListParser';
 
 const { splitLine, legacyLineToWords } = __testing__;
@@ -58,7 +58,6 @@ describe('Validate the wordListCompiler', () => {
                 skipNormalization: false,
                 splitWords: undefined,
                 keepRawCase: false,
-                sort: false,
                 legacy: true,
             });
             const r = toArray(normalizer(lines.split('\n')));
@@ -66,7 +65,7 @@ describe('Validate the wordListCompiler', () => {
         }
     );
 
-    interface NormalizeTestCase extends Partial<CompileOptions> {
+    interface NormalizeTestCase extends Partial<CompileOptions & NormalizeOptions> {
         text: string;
         expectedResult: string[];
     }
@@ -107,19 +106,11 @@ describe('Validate the wordListCompiler', () => {
         ${'kDNSServiceErr_BadSig'}                  | ${['kDNSServiceErr_BadSig']}                  | ${true}    | ${true}
         ${'apd_get_active_symbols'}                 | ${['apd_get_active_symbols']}                 | ${true}    | ${true}
     `('normalizer line splitting "$text" $splitWords $keepRawCase', (testCase: NormalizeTestCase) => {
-        const {
-            skipNormalization = false,
-            splitWords = false,
-            keepRawCase = false,
-            sort = false,
-            text,
-            expectedResult,
-        } = testCase;
+        const { skipNormalization = false, splitWords = false, keepRawCase = false, text, expectedResult } = testCase;
         const normalizer = createNormalizer({
             skipNormalization,
             splitWords,
             keepRawCase,
-            sort,
             legacy: false,
         });
         const r = toArray(normalizer(text.split('\n')));

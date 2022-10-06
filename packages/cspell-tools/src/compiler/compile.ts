@@ -10,6 +10,8 @@ import { logWithTimestamp } from './logWithTimestamp';
 import { ReaderOptions } from './Reader';
 import { readTextFile } from './readTextFile';
 import { compileTrie, compileWordList } from './wordListCompiler';
+import { createNormalizer } from './wordListParser';
+import { NormalizeOptions } from './CompileOptions';
 
 getSystemFeatureFlags().register('compound', 'Enable compound dictionary sources.');
 
@@ -37,21 +39,14 @@ export async function compileTarget(target: Target, options: CompileTargetOption
     logWithTimestamp(`Start compile: ${target.name}`);
 
     const { format, sources, trieBase, sort = true } = target;
-    const { keepRawCase = false, maxDepth, split = false } = options;
-    const legacy = split === 'legacy';
-    const splitWords = legacy ? false : split;
     const targetDirectory = path.resolve(rootDir, target.targetDirectory ?? process.cwd());
 
     const useTrie = format.startsWith('trie');
     const filename = resolveTarget(target.name, targetDirectory, useTrie, target.compress ?? false);
-    const experimental = new Set(options.experimental);
-    const useAnnotation = (useTrie && format >= 'trie3') || experimental.has('compound');
-    const skipNormalization = useAnnotation;
-    const readerOptions: ReaderOptions = { maxDepth, useAnnotation };
 
     const filesToProcessAsync = pipeAsync(
         readSourceList(sources, rootDir),
-        opMapAsync((src) => readFileSource(src, readerOptions)),
+        opMapAsync((src) => readFileSource(src, options)),
         opAwaitAsync()
     );
     const filesToProcess: FileToProcess[] = await toArray(filesToProcessAsync);
@@ -59,10 +54,6 @@ export async function compileTarget(target: Target, options: CompileTargetOption
     const action = useTrie
         ? async (words: Iterable<string>, dst: string) => {
               return compileTrie(words, dst, {
-                  skipNormalization,
-                  splitWords,
-                  keepRawCase,
-                  legacy,
                   base: trieBase,
                   sort: false,
                   trie3: format === 'trie3',
@@ -70,13 +61,7 @@ export async function compileTarget(target: Target, options: CompileTargetOption
               });
           }
         : async (src: Iterable<string>, dst: string) => {
-              return compileWordList(src, dst, {
-                  splitWords,
-                  sort,
-                  skipNormalization,
-                  keepRawCase,
-                  legacy,
-              });
+              return compileWordList(src, dst, { sort });
           };
 
     await processFiles(action, filesToProcess, filename);
@@ -103,6 +88,7 @@ async function processFiles(action: ActionFn, filesToProcess: FileToProcess[], m
             yield* ftp.words;
             logWithTimestamp('Done processing %s', rel(ftp.src));
         })
+        // opMap((a) => (console.warn(a), a))
     );
     await action(words, dst);
     logWithTimestamp('Done "%s"', rel(dst));
@@ -154,17 +140,40 @@ async function readFileList(fileList: FilePath): Promise<string[]> {
         .filter((a) => !!a);
 }
 
-async function readFileSource(fileSource: FileSource, defaultReaderOptions: ReaderOptions): Promise<FileToProcess> {
-    const { filename, maxDepth = defaultReaderOptions.maxDepth } = fileSource;
-    const { useAnnotation } = defaultReaderOptions;
+async function readFileSource(fileSource: FileSource, targetOptions: CompileTargetOptions): Promise<FileToProcess> {
+    const {
+        filename,
+        keepRawCase = targetOptions.keepRawCase || false,
+        split = targetOptions.split || false,
+        maxDepth,
+    } = fileSource;
+
+    const legacy = split === 'legacy';
+    const splitWords = legacy ? false : split;
+    const experimental = new Set(targetOptions.experimental);
+    const useTrieCompounds = experimental.has('compound');
+    const useAnnotation = useTrieCompounds;
+    const skipNormalization = useTrieCompounds;
+
+    const opt: NormalizeOptions = {
+        keepRawCase,
+        skipNormalization,
+        splitWords,
+        legacy,
+    };
+
+    // console.warn('fileSource: %o,\n targetOptions %o, \n opt: %o', fileSource, targetOptions, opt);
+
+    const normalizer = createNormalizer(opt);
+
     const readerOptions: ReaderOptions = { maxDepth, useAnnotation };
 
     logWithTimestamp(`Reading ${path.basename(filename)}`);
-    const words = await streamWordsFromFile(filename, readerOptions);
+    const stream = await streamWordsFromFile(filename, readerOptions);
     logWithTimestamp(`Done reading ${path.basename(filename)}`);
     const f: FileToProcess = {
         src: filename,
-        words,
+        words: normalizer(stream),
     };
     return f;
 }

@@ -1,12 +1,10 @@
-import { opMap, pipe } from '@cspell/cspell-pipe/sync';
+import { opMap, pipe, opAppend } from '@cspell/cspell-pipe/sync';
 import * as Trie from 'cspell-trie-lib';
 import { mkdirp } from 'fs-extra';
-import { genSequence } from 'gensequence';
 import * as path from 'path';
 import { CompileOptions } from './CompileOptions';
 import { writeSeqToFile } from './fileWriter';
 import { getLogger } from './logger';
-import { createNormalizer } from './wordListParser';
 
 // Indicate that a word list has already been processed.
 const wordListHeader = `
@@ -19,16 +17,12 @@ export async function compileWordList(
     destFilename: string,
     options: CompileOptions
 ): Promise<void> {
-    const normalizer = createNormalizer(options);
-    const seq = normalizer(lines);
-
-    const header = genSequence(wordListHeaderLines);
-    const finalSeq = header.concat(options.sort ? genSequence(sort(seq)) : seq);
+    const finalSeq = pipe(wordListHeaderLines, opAppend(options.sort ? sort(lines) : lines));
 
     return createWordListTarget(destFilename)(finalSeq);
 }
 
-export function createWordListTarget(destFilename: string): (seq: Iterable<string>) => Promise<void> {
+function createWordListTarget(destFilename: string): (seq: Iterable<string>) => Promise<void> {
     const target = createTarget(destFilename);
     return (seq: Iterable<string>) =>
         target(
@@ -60,21 +54,15 @@ export interface TrieOptions {
 
 export interface CompileTrieOptions extends CompileOptions, TrieOptions {}
 
-export const consolidate = Trie.consolidate;
-
 export async function compileTrie(
     words: Iterable<string>,
     destFilename: string,
     options: CompileTrieOptions
 ): Promise<void> {
-    const normalizer = createNormalizer(options);
-    await createTrieTarget(destFilename, options)(normalizer(words));
+    await createTrieTarget(destFilename, options)(words);
 }
 
-export function createTrieTarget(
-    destFilename: string,
-    options: TrieOptions
-): (words: Iterable<string>) => Promise<void> {
+function createTrieTarget(destFilename: string, options: TrieOptions): (words: Iterable<string>) => Promise<void> {
     const target = createTarget(destFilename);
     return async (words: Iterable<string>) => {
         const log = getLogger();
@@ -83,7 +71,7 @@ export function createTrieTarget(
         const version = options.trie4 ? 4 : options.trie3 ? 3 : 1;
         const root = Trie.buildTrie(words).root;
         log('Reduce duplicate word endings');
-        const trie = consolidate(root);
+        const trie = Trie.consolidate(root);
         log(`Writing to file ${path.basename(destFilename)}`);
         await target(
             Trie.serializeTrie(trie, {
