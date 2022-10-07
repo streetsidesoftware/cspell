@@ -156,6 +156,19 @@ describe('Validate SimpleDictionaryParser', () => {
         expect(r).toEqual(expected);
     });
 
+    test.each`
+        lines                                                          | options                           | expected
+        ${dictionary()}                                                | ${{}}                             | ${s('Begin|~begin|Begin+|~begin+|End|~end|+End|~+end|+Middle+|~+middle+|Café|~café|~cafe|!forbid')}
+        ${s('# cspell-tools: keep-case split|Apple|Arizona|New York')} | ${{}}                             | ${s('Apple|Arizona|New|York')}
+        ${s('# cspell-tools: split|Apple|Arizona|New York')}           | ${{}}                             | ${s('Apple|~apple|Arizona|~arizona|New|~new|York|~york')}
+        ${s('# cspell-tools: no-split|Apple|Arizona|New York')}        | ${{ stripCaseAndAccents: false }} | ${s('Apple|Arizona|New York')}
+        ${s('# cspell-tools: no-keep-case|Apple|Arizona|New York')}    | ${{ stripCaseAndAccents: false }} | ${s('Apple|~apple|Arizona|~arizona|New York|~new york')}
+        ${s('Apple| # cspell-tools: keep-case|Arizona|New York')}      | ${{}}                             | ${s('Apple|~apple|Arizona|New York')}
+    `('parseDictionaryLines complex $lines', ({ lines, options, expected }) => {
+        const r = [...parseDictionaryLines(lines, options)];
+        expect(r).toEqual(expected);
+    });
+
     // cspell:ignore érror
     test.each`
         lines               | expected
