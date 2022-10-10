@@ -3,9 +3,9 @@ Repository: eslint/eslint
 Url: https://github.com/eslint/eslint
 Args: ["**","--exclude=bin/**","--exclude=CHANGELOG.md","--exclude=_data","--exclude=tests/bench/large.js","--exclude=docs/src/_includes","--exclude=docs/src/assets/{fonts,s?css,images}"]
 Summary:
-  files: 1787
+  files: 1790
   filesWithIssues: 1218
-  issues: 5358
+  issues: 5350
   errors: 0
 Errors: []
 
@@ -82,8 +82,8 @@ issues:
   - "docs/src/developer-guide/shareable-configs.md:40:186    	eslintconfig	U   	using the `eslint` and `eslintconfig` keywords so others"
   - "docs/src/developer-guide/working-with-custom-formatters.md:57:9     	eslintformatter 	U   	* `\"eslintformatter\"`"
   - "docs/src/developer-guide/working-with-custom-formatters.md:95:29    	Gruntfile       	U   	filePath: \"/path/to/Gruntfile.js\","
-  - "docs/src/developer-guide/working-with-custom-formatters.md:245:14   	concat          	U   	.concat(summary.warnings)"
-  - "docs/src/developer-guide/working-with-custom-formatters.md:385:61   	Guake           	U   	www.iterm2.com/) or [Guake](http://guake-project"
+  - "docs/src/developer-guide/working-with-custom-formatters.md:250:14   	concat          	U   	.concat(summary.warnings)"
+  - "docs/src/developer-guide/working-with-custom-formatters.md:390:61   	Guake           	U   	www.iterm2.com/) or [Guake](http://guake-project"
   - "docs/src/developer-guide/working-with-custom-parsers.md:58:44   	rewritable  	U   	of all nodes must be rewritable. ESLint sets each node"
   - "docs/src/developer-guide/working-with-plugins.md:5:23       	plugings    	U   	key: working with plugings"
   - "docs/src/developer-guide/working-with-plugins.md:34:46      	unprefixed  	U   	ESLint, you would use the unprefixed plugin name, followed"
@@ -94,7 +94,7 @@ issues:
   - "docs/src/developer-guide/working-with-rules-deprecated.md:443:36    	doublequote 	U   	[\"Strings must use doublequote.\"]"
   - "docs/src/developer-guide/working-with-rules-deprecated.md:534:1     	camelcase   	U   	camelcase |"
   - "docs/src/developer-guide/working-with-rules-deprecated.md:581:88    	rulesdir    	U   	interface) using the `--rulesdir` option to specify the"
-  - "docs/src/developer-guide/working-with-rules.md:412:79   	multipass   	U   	without triggering multipass fixes. Each suggestion"
+  - "docs/src/developer-guide/working-with-rules.md:419:79   	multipass   	U   	without triggering multipass fixes. Each suggestion"
   - "docs/src/library/alert.md:9:12      	shortcode   	U   	There is a shortcode for each type of alert"
   - "docs/src/maintainer-guide/governance.md:74:35   	committership   	U   	important to recognize that committership is a privilege, not"
   - "docs/src/maintainer-guide/governance.md:88:106  	triaging        	U   	the project through triaging of issues, fixing bugs"
@@ -244,9 +244,9 @@ issues:
   - "docs/src/user-guide/integrations.md:20:11   	Flycheck    	U   	* Emacs: [Flycheck](http://www.flycheck"
   - "docs/src/user-guide/integrations.md:24:15   	tmbundle    	U   	* [eslint.tmbundle](https://github.com"
   - "docs/src/user-guide/integrations.md:29:3    	Intelli     	U   	* IntelliJ IDEA, WebStorm, PhpStorm"
-  - "docs/src/user-guide/integrations.md:39:16   	eslintify   	U   	* Browserify: [eslintify](https://www.npmjs.com"
-  - "docs/src/user-guide/integrations.md:55:8    	Precommit   	U   	* [Git Precommit Hook](https://coderwall"
-  - "docs/src/user-guide/integrations.md:57:4    	overcommit  	U   	* [overcommit Git hook manager](https"
+  - "docs/src/user-guide/integrations.md:40:16   	eslintify   	U   	* Browserify: [eslintify](https://www.npmjs.com"
+  - "docs/src/user-guide/integrations.md:56:8    	Precommit   	U   	* [Git Precommit Hook](https://coderwall"
+  - "docs/src/user-guide/integrations.md:58:4    	overcommit  	U   	* [overcommit Git hook manager](https"
   - "docs/src/user-guide/migrating-from-jscs.md:13:111   	jscsrs      	U   	.jscsrc.yaml`, or `.jscsrs.js`. In ESLint, the"
   - "docs/src/user-guide/migrating-from-jscs.md:16:38    	Polyjuice   	U   	Configuration Files Using Polyjuice"
   - "docs/src/user-guide/migrating-from-jscs.md:23:16    	polyjuice   	U   	npm install -g polyjuice"
@@ -268,7 +268,7 @@ issues:
   - "lib/cli-engine/hash.js:12:25    	imurmurhash 	U   	const murmur = require(\"imurmurhash\");"
   - "lib/cli-engine/lint-result-cache.js:14:58   	jsonify 	U   	stable-stringify-without-jsonify\");"
   - "lib/cli-engine/xml-escape.js:29:26      	apos	U   	return \"&apos;\";"
-  - "lib/cli.js:28:44    	humanwhocodes   	U   	noreToMinimatch } = require(\"@humanwhocodes/gitignore-to-minimatch"
+  - "lib/cli.js:28:38    	humanwhocodes   	U   	ModuleImporter } = require(\"@humanwhocodes/module-importer\");"
   - "lib/config/default-config.js:59:61      	globbed 	U   	ensure these files are globbed by default"
   - "lib/eslint/eslint-helpers.js:16:7       	globby  	U   	const globby = require(\"globby\")"
   - "lib/linter/code-path-analysis/code-path-state.js:159:31     	unflattened 	U   	{CodePathSegment[]} unflattenedFromSegments Segments"
@@ -373,9 +373,9 @@ issues:
   - "package.json:24:15      	alpharelease	U   	\"generate-alpharelease\": \"node Makefile.js"
   - "package.json:25:15      	betarelease 	U   	\"generate-betarelease\": \"node Makefile.js"
   - "package.json:26:15      	rcrelease   	U   	\"generate-rcrelease\": \"node Makefile.js"
-  - "package.json:117:6      	eslump      	U   	\"eslump\": \"^3.0.0\","
-  - "package.json:134:6      	memfs       	U   	\"memfs\": \"^3.0.1\","
-  - "package.json:135:6      	metascraper 	U   	\"metascraper\": \"^5.25.7\","
+  - "package.json:116:6      	eslump      	U   	\"eslump\": \"^3.0.0\","
+  - "package.json:133:6      	memfs       	U   	\"memfs\": \"^3.0.1\","
+  - "package.json:134:6      	metascraper 	U   	\"metascraper\": \"^5.25.7\","
   - "packages/eslint-config-eslint/default.yml:5:15      	jsdoc   	U   	- \"plugin:jsdoc/recommended\""
   - "packages/eslint-config-eslint/default.yml:23:50     	namepath	U   	Point to a `@callback` namepath or `GenericCallback"
   - "README.md:204:5     	teamstart       	U   	<!--teamstart-->"
@@ -424,12 +424,12 @@ issues:
   - "tests/lib/cli-engine/cli-engine.js:4818:63  	doesntexist         	U   	getFixturePath(\"formatters\", \"doesntexist.js\"),"
   - "tests/lib/cli-engine/cli-engine.js:6350:87  	myconf              	U   	config node_modules/myconf/.eslintrc.json',\","
   - "tests/lib/cli-engine/cli-engine.js:6578:52  	extendees           	U   	config file and linear extendees.\", () => {"
-  - "tests/lib/cli.js:250:56     	fakeformatter   	U   	await cli.execute(`-f fakeformatter ${filePath}`);"
+  - "tests/lib/cli.js:289:56     	fakeformatter   	U   	await cli.execute(`-f fakeformatter ${filePath}`);"
   - "tests/lib/config/flat-config-array.js:147:22    	noniterable 	U   	it(\"should allow noniterable baseConfig objects\""
   - "tests/lib/config/flat-config-array.js:898:43    	truex       	U   	foo: \"truex\""
   - "tests/lib/config/flat-config-array.js:1408:29   	foox        	U   	foox: [1, \"bar\"]"
   - "tests/lib/config/flat-config-array.js:1430:30   	doesnt      	U   	\"doesnt-exist/match\": \"error"
-  - "tests/lib/eslint/flat-eslint.js:4184:9  	xdescribe   	U   	xdescribe(\"ignorePatterns can"
+  - "tests/lib/eslint/flat-eslint.js:4014:9  	xdescribe   	U   	xdescribe(\"ignorePatterns can"
   - "tests/lib/linter/code-path-analysis/code-path-analyzer.js:30:16     	ESQUERY 	U   	const STANDARD_ESQUERY_OPTION = { visitorKeys"
   - "tests/lib/linter/config-comment-parser.js:165:41    	ELEVENTEEN  	U   	code = \"a: seventy, b:ELEVENTEEN\";"
   - "tests/lib/linter/linter.js:3229:1   	consolexlog     	U   	consolexlog(\"test2\");"
@@ -447,7 +447,7 @@ issues:
   - "tests/lib/linter/source-code-fixer.js:70:19     	removemiddle	U   	message: \"removemiddle\","
   - "tests/lib/linter/source-code-fixer.js:77:19     	removeend   	U   	message: \"removeend\","
   - "tests/lib/linter/source-code-fixer.js:84:19     	nofix       	U   	message: \"nofix\""
-  - "tests/lib/options.js:367:71     	morerules   	U   	trcOptions.parse(\"--rulesdir /morerules\");"
+  - "tests/lib/options.js:359:71     	morerules   	U   	trcOptions.parse(\"--rulesdir /morerules\");"
   - "tests/lib/rule-tester/flat-rule-tester.js:987:22    	noeval      	U   	\"noeval('foo')\""
   - "tests/lib/rule-tester/flat-rule-tester.js:1102:36   	somefile    	U   	filename: \"somefile.js\""
   - "tests/lib/rule-tester/flat-rule-tester.js:2227:33   	outpt       	U   	outpt: \"var baz;\""
