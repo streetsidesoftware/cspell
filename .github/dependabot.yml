@@ -32,24 +32,24 @@ updates:
     schedule:
       interval: "weekly"
 
-  - package-ecosystem: "npm" # See documentation for possible values
-    directory: "/" # Location of package manifests
-    versioning-strategy: increase
-    target-branch: "cspell5"
-    schedule:
-      interval: "weekly"
-    ignore:
-      - dependency-name: "configstore"
-        versions: [">=6"]
-      - dependency-name: "get-stdin"
-        versions: [">=9"]
-      - dependency-name: "commander"
-        versions: [">=8"]
+  # - package-ecosystem: "npm" # See documentation for possible values
+  #   directory: "/" # Location of package manifests
+  #   versioning-strategy: increase
+  #   target-branch: "cspell5"
+  #   schedule:
+  #     interval: "weekly"
+  #   ignore:
+  #     - dependency-name: "configstore"
+  #       versions: [">=6"]
+  #     - dependency-name: "get-stdin"
+  #       versions: [">=9"]
+  #     - dependency-name: "commander"
+  #       versions: [">=8"]
 
-  - package-ecosystem: "github-actions"
-    # Workflow files stored in the
-    # default location of `.github/workflows`
-    directory: "/"
-    target-branch: "cspell5"
-    schedule:
-      interval: "daily"
+  # - package-ecosystem: "github-actions"
+  #   # Workflow files stored in the
+  #   # default location of `.github/workflows`
+  #   directory: "/"
+  #   target-branch: "cspell5"
+  #   schedule:
+  #     interval: "daily"
