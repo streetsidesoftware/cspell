@@ -1,19 +1,27 @@
 # https://github.com/dependabot/dependabot-core/issues/1736
-name: Dependabot - Recreate Pull Requests
+name: Dependabot - Process Recreate Pull Requests
 on:
-  push:
-    branches:
-      - main
-  workflow_dispatch:
+  pull_request:
+    types:
+      - closed
+      - reopened
+      - opened
+      - synchronize
+      - labeled
+      - unlabeled
 permissions: read-all
 jobs:
   add-comment-recreate:
     runs-on: ubuntu-latest
-    permissions:
-      pull-requests: write
-      contents: write
+    # permissions:
+    #   pull-requests: write
+    #   contents: write
     steps:
       - uses: actions/checkout@v3
+
+      - name: Show PR
+        env:
+          PR_DATA: ${{ toJSON(github.event) }}
 
       - name: Show Open PRs
         env:
@@ -25,17 +33,7 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          echo PR_SUMMARY=$(gh pr list -S "-label:cspell5 -label:dependabot:recreate author:app/dependabot") >> $GITHUB_ENV
-
-      - name: Get Open PRs and apply label
-        if: ${{ env.PR_SUMMARY }}
-        env:
-          # GH_TOKEN: ${{ secrets.TOKEN_UPDATE_DEPENDABOT }}
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: >
-          gh pr list -S "-label:cspell5 -label:dependabot:recreate author:app/dependabot" --json number
-          | jq '.[].number'
-          | xargs -n1 gh pr edit --add-label "dependabot:recreate"
+          echo PR_SUMMARY=$(gh pr list -S "label:dependabot:recreate author:app/dependabot") >> $GITHUB_ENV
 
       # - name: Get Open PRs and apply comment
       #   if: ${{ env.PR_SUMMARY }}
