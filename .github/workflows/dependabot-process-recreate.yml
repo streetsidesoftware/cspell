@@ -1,0 +1,45 @@
+# https://github.com/dependabot/dependabot-core/issues/1736
+name: Dependabot - Process Recreate Pull Requests
+on:
+  pull_request:
+    types:
+      - closed
+      - reopened
+      - opened
+      - synchronize
+      - labeled
+      - unlabeled
+permissions: read-all
+jobs:
+  add-comment-recreate:
+    runs-on: ubuntu-latest
+    # permissions:
+    #   pull-requests: write
+    #   contents: write
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Show PR
+        env:
+          PR_DATA: ${{ toJSON(github.event) }}
+
+      - name: Show Open PRs
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh pr list -S "-label:cspell5 author:app/dependabot"
+
+      - name: Get List of PRs to Update
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          echo PR_SUMMARY=$(gh pr list -S "label:dependabot:recreate author:app/dependabot") >> $GITHUB_ENV
+
+      # - name: Get Open PRs and apply comment
+      #   if: ${{ env.PR_SUMMARY }}
+      #   env:
+      #     GH_TOKEN: ${{ secrets.TOKEN_UPDATE_DEPENDABOT }}
+      #   run: >
+      #     gh pr list -S "-label:cspell5 author:app/dependabot" --json number
+      #     | jq '.[].number'
+      #     | xargs -n1 gh pr comment -b "@dependabot recreate"
