@@ -19,9 +19,9 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          gh pr list -S "-label:cspell5 -label:dependabot:recreate author:app/dependabot"
+          gh pr list -S "-label:cspell5 author:app/dependabot"
 
-      - name: Get List of PRs
+      - name: Get List of PRs to Update
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
@@ -33,7 +33,7 @@ jobs:
           # GH_TOKEN: ${{ secrets.TOKEN_UPDATE_DEPENDABOT }}
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: >
-          gh pr list -S "-label:cspell5 author:app/dependabot" --json number
+          gh pr list -S "-label:cspell5 -label:dependabot:recreate author:app/dependabot" --json number
           | jq '.[].number'
           | xargs -n1 gh pr edit --add-label "dependabot:recreate"
 
