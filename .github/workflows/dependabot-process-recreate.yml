@@ -22,6 +22,8 @@ jobs:
       - name: Show PR
         env:
           PR_DATA: ${{ toJSON(github.event) }}
+        run: |
+          echo "$PR_DATA"
 
       - name: Show Open PRs
         env:
