@@ -19,13 +19,13 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          gh pr list -S "-label:cspell5 author:app/dependabot"
+          gh pr list -S "-label:cspell5 -label:dependabot:recreate author:app/dependabot"
 
       - name: Get List of PRs
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          echo PR_SUMMARY=$(gh pr list -S "-label:cspell5 author:app/dependabot") >> $GITHUB_ENV
+          echo PR_SUMMARY=$(gh pr list -S "-label:cspell5 -label:dependabot:recreate author:app/dependabot") >> $GITHUB_ENV
 
       - name: Get Open PRs and apply label
         if: ${{ env.PR_SUMMARY }}
