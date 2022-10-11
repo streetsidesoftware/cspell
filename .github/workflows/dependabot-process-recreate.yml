@@ -29,13 +29,23 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          gh pr list -S "-label:cspell5 author:app/dependabot"
+          gh pr list -S "author:app/dependabot"
+
+      - name: Has PRs in progress?
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          echo PR_IN_PROGRESS=$(gh pr list -S "label:dependabot:recreate-in-progress") >> $GITHUB_ENV
 
       - name: Get List of PRs to Update
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           echo PR_SUMMARY=$(gh pr list -S "label:dependabot:recreate author:app/dependabot") >> $GITHUB_ENV
+
+      - name: Display
+        run: |
+          echo $PR_IN_PROGRESS
 
       # - name: Get Open PRs and apply comment
       #   if: ${{ env.PR_SUMMARY }}
