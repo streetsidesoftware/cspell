@@ -18,7 +18,7 @@ jobs:
         run: |
           gh pr list -S "-label:cspell5 author:app/dependabot"
 
-      - name: Get List of tokens
+      - name: Get List of PRs
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
