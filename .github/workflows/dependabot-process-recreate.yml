@@ -1,38 +1,15 @@
 # https://github.com/dependabot/dependabot-core/issues/1736
 name: Dependabot - Process Recreate Pull Requests
 on:
-  # Trigger this workflow most changes. We want it to check if something needs to be done when a change happens.
-  pull_request_target:
-    types:
-      - synchronize
   workflow_dispatch:
   schedule:
-    - cron: "1 * * * *"
-    - cron: "11 * * * *"
-    - cron: "21 * * * *"
-    - cron: "31 * * * *"
-    - cron: "41 * * * *"
-    - cron: "51 * * * *"
+    - cron: "*/5 * * * *"
+
 permissions: read-all
+
 jobs:
-  remove-recreate-label:
-    runs-on: ubuntu-latest
-    if: ${{ github.event.action == 'synchronize'}}
-    permissions:
-      pull-requests: write
-      contents: write
-    steps:
-      - uses: actions/checkout@v3
-
-      - name: Remove Labels
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          gh pr edit --remove-label "dependabot:recreate"  ${{ github.event.pull_request.number }}
-
   add-comment-recreate:
     runs-on: ubuntu-latest
-    if: ${{ github.event.action != 'synchronize' }}
     permissions:
       pull-requests: write
       contents: write
@@ -95,12 +72,3 @@ jobs:
           GH_TOKEN: ${{ secrets.TOKEN_UPDATE_DEPENDABOT }}
         run: |
           gh pr comment -b "@dependabot recreate" $PR_TO_RECREATE
-
-      # - name: Get Open PRs and apply comment
-      #   if: ${{ env.PR_SUMMARY }}
-      #   env:
-      #     GH_TOKEN: ${{ secrets.TOKEN_UPDATE_DEPENDABOT }}
-      #   run: >
-      #     gh pr list -S "-label:cspell5 author:app/dependabot" --json number
-      #     | jq '.[].number'
-      #     | xargs -n1 gh pr comment -b "@dependabot recreate"

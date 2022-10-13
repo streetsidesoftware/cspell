@@ -1,0 +1,16 @@
+name: Experiment
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "*/5 * * * *"
+
+jobs:
+  job1:
+    name: Debug
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Git checkout
+        uses: actions/checkout@v3
+      - name: List files
+        run: ls

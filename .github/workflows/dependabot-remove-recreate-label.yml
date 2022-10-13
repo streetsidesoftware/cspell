@@ -1,0 +1,22 @@
+name: Dependabot - Recreate - remove label.
+on:
+  pull_request:
+    types:
+      - synchronize
+
+permissions: read-all
+jobs:
+  remove-recreate-label:
+    runs-on: ubuntu-latest
+    # if: ${{ github.event.action == 'synchronize'}}
+    permissions:
+      pull-requests: write
+      contents: write
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Remove Labels
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh pr edit --remove-label "dependabot:recreate"  ${{ github.event.pull_request.number }}
