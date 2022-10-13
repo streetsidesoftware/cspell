@@ -28,6 +28,13 @@ jobs:
         run: |
           echo "$PR_DATA"
 
+      - name: Remove Labels
+        if: ${{ contains(github.event.pull_request.labels.*.name, 'dependabot:recreate-in-progress') }}
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh pr edit --remove-label "dependabot:recreate-in-progress" --remove-label "dependabot:recreate" ${{ github.event.pull_request.number }}
+
       - name: Show Open PRs
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -38,7 +45,9 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          echo PR_IN_PROGRESS=$(gh pr list -S "label:dependabot:recreate-in-progress author:app/dependabot") >> $GITHUB_ENV
+          echo PR_IN_PROGRESS=$(
+            gh pr list -S "label:dependabot:recreate-in-progress author:app/dependabot" --json number | jq -r '.[0].number || ""'
+          ) >> $GITHUB_ENV
 
       - name: Get List of PRs to Update
         env:
@@ -50,10 +59,22 @@ jobs:
         run: |
           echo $PR_IN_PROGRESS
 
-      - name: Tell Dependabot to Recreate PR
+      - name: Calc PR to Recreate
         if: ${{ !env.PR_IN_PROGRESS && env.PR_SUMMARY }}
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          echo 'Something To Do!' "$PR_SUMMARY"
+          echo PR_TO_RECREATE=$(
+            gh pr list -S "label:dependabot:recreate author:app/dependabot" --json number | jq -r '.[0].number || ""'
+          ) >> $GITHUB_ENV
+
+      - name: Tell Dependabot to Recreate PR
+        if: ${{ !env.PR_TO_RECREATE }}
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh pr edit --add-label "dependabot:recreate-in-progress" $PR_TO_RECREATE
+          gh pr comment -b "@dependabot recreate" $PR_TO_RECREATE
 
       # - name: Get Open PRs and apply comment
       #   if: ${{ env.PR_SUMMARY }}
