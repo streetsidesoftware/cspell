@@ -2,22 +2,33 @@
 name: Dependabot - Process Recreate Pull Requests
 on:
   # Trigger this workflow most changes. We want it to check if something needs to be done when a change happens.
-  pull_request:
+  pull_request_target:
     types:
-      - closed
-      - reopened
-      - opened
       - synchronize
-      - labeled
-      - unlabeled
   workflow_dispatch:
-  push:
-  check_suite:
-    types: [completed]
+  schedule:
+    - 1/10 * * * *
 permissions: read-all
 jobs:
+  remove-recreate-label:
+    runs-on: ubuntu-latest
+    if: ${{ github.event.action == 'synchronize'}}
+    permissions:
+      pull-requests: write
+      contents: write
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Remove Labels
+        if: ${{ contains(github.event.pull_request.labels.*.name, 'dependabot:recreate-in-progress') && contains(github.event.pull_request.labels.*.name, 'dependabot:recreate') }}
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh pr edit --remove-label "dependabot:recreate"  ${{ github.event.pull_request.number }}
+
   add-comment-recreate:
     runs-on: ubuntu-latest
+    if: ${{ github.event.action != 'synchronize' }}
     permissions:
       pull-requests: write
       contents: write
@@ -29,13 +40,6 @@ jobs:
           PR_DATA: ${{ toJSON(github.event) }}
         run: |
           echo "$PR_DATA"
-
-      - name: Remove Labels
-        if: ${{ contains(github.event.pull_request.labels.*.name, 'dependabot:recreate-in-progress') && contains(github.event.pull_request.labels.*.name, 'dependabot:recreate') }}
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          gh pr edit --remove-label "dependabot:recreate"  ${{ github.event.pull_request.number }}
 
       - name: Show Open PRs
         env:
@@ -51,6 +55,14 @@ jobs:
             gh pr list -S "label:dependabot:recreate-in-progress author:app/dependabot"
           ) >> $GITHUB_ENV
 
+      # time is up, remove label.
+      - name: Remove in-progress label
+        if: ${{ env.PR_IN_PROGRESS }}
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh pr edit --remove-label "dependabot:recreate-in-progress"  ${{ env.PR_IN_PROGRESS }}
+
       - name: Get List of PRs to Update
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -58,7 +70,7 @@ jobs:
           echo PR_SUMMARY=$(gh pr list -S "label:dependabot:recreate author:app/dependabot") >> $GITHUB_ENV
 
       - name: Calc PR to Recreate
-        if: ${{ !env.PR_IN_PROGRESS && env.PR_SUMMARY }}
+        if: ${{ env.PR_SUMMARY }}
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
@@ -66,16 +78,12 @@ jobs:
             gh pr list -S "label:dependabot:recreate author:app/dependabot" --json number | jq -r 'if .[0] then .[0].number else "" end'
           ) >> $GITHUB_ENV
 
-      - name: Display
-        run: |
-          echo $PR_IN_PROGRESS
-
       - name: Mark Recreate PR to in progress
         if: ${{ env.PR_TO_RECREATE }}
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          gh pr edit --add-label "dependabot:recreate-in-progress" $PR_TO_RECREATE
+          gh pr edit --add-label "dependabot:recreate-in-progress"  $PR_TO_RECREATE
 
       - name: Tell Dependabot to Recreate PR
         if: ${{ env.PR_TO_RECREATE }}
