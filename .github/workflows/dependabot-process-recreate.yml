@@ -16,9 +16,9 @@ permissions: read-all
 jobs:
   add-comment-recreate:
     runs-on: ubuntu-latest
-    # permissions:
-    #   pull-requests: write
-    #   contents: write
+    permissions:
+      pull-requests: write
+      contents: write
     steps:
       - uses: actions/checkout@v3
 
