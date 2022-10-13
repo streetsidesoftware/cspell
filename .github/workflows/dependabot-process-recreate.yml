@@ -46,7 +46,7 @@ jobs:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           echo PR_IN_PROGRESS=$(
-            gh pr list -S "label:dependabot:recreate-in-progress author:app/dependabot" --json number | jq -r '.[0].number || ""'
+            gh pr list -S "label:dependabot:recreate-in-progress author:app/dependabot"
           ) >> $GITHUB_ENV
 
       - name: Get List of PRs to Update
