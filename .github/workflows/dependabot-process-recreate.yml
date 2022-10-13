@@ -55,10 +55,6 @@ jobs:
         run: |
           echo PR_SUMMARY=$(gh pr list -S "label:dependabot:recreate author:app/dependabot") >> $GITHUB_ENV
 
-      - name: Display
-        run: |
-          echo $PR_IN_PROGRESS
-
       - name: Calc PR to Recreate
         if: ${{ !env.PR_IN_PROGRESS && env.PR_SUMMARY }}
         env:
@@ -67,6 +63,10 @@ jobs:
           echo PR_TO_RECREATE=$(
             gh pr list -S "label:dependabot:recreate author:app/dependabot" --json number | jq -r 'if .[0] then .[0].number else "" end'
           ) >> $GITHUB_ENV
+
+      - name: Display
+        run: |
+          echo $PR_IN_PROGRESS
 
       - name: Tell Dependabot to Recreate PR
         if: ${{ !env.PR_TO_RECREATE }}
