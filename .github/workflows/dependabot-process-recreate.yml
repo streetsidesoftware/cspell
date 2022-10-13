@@ -22,7 +22,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: Show PR
+      - name: Show Event Data
         env:
           PR_DATA: ${{ toJSON(github.event) }}
         run: |
@@ -65,7 +65,7 @@ jobs:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           echo PR_TO_RECREATE=$(
-            gh pr list -S "label:dependabot:recreate author:app/dependabot" --json number | jq -r '.[0].number || ""'
+            gh pr list -S "label:dependabot:recreate author:app/dependabot" --json number | jq -r 'if .[0] then .[0].number else "" end'
           ) >> $GITHUB_ENV
 
       - name: Tell Dependabot to Recreate PR
