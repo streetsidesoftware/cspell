@@ -64,11 +64,11 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          gh pr edit --add-label "dependabot:recreate-in-progress"  $PR_TO_RECREATE
+          gh pr edit --add-label "dependabot:recreate-in-progress"  ${{ env.PR_TO_RECREATE }}
 
       - name: Tell Dependabot to Recreate PR
         if: ${{ env.PR_TO_RECREATE }}
         env:
           GH_TOKEN: ${{ secrets.TOKEN_UPDATE_DEPENDABOT }}
         run: |
-          gh pr comment -b "@dependabot recreate" $PR_TO_RECREATE
+          gh pr comment -b "@dependabot recreate" ${{ env.PR_TO_RECREATE }}
