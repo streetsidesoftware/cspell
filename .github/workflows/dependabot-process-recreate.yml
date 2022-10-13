@@ -7,7 +7,12 @@ on:
       - synchronize
   workflow_dispatch:
   schedule:
-    - cron: "*/5 * * * *"
+    - cron: "1 * * * *"
+    - cron: "11 * * * *"
+    - cron: "21 * * * *"
+    - cron: "31 * * * *"
+    - cron: "41 * * * *"
+    - cron: "51 * * * *"
 permissions: read-all
 jobs:
   remove-recreate-label:
