@@ -7,7 +7,7 @@ on:
       - synchronize
   workflow_dispatch:
   schedule:
-    - cron: "1/10 * * * *"
+    - cron: "*/10 * * * *"
 permissions: read-all
 jobs:
   remove-recreate-label:
