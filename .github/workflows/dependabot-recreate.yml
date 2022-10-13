@@ -30,7 +30,6 @@ jobs:
       - name: Get Open PRs and apply label
         if: ${{ env.PR_SUMMARY }}
         env:
-          # GH_TOKEN: ${{ secrets.TOKEN_UPDATE_DEPENDABOT }}
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: >
           gh pr list -S "-label:cspell5 -label:dependabot:recreate author:app/dependabot" --json number

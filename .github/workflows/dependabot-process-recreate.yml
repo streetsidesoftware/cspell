@@ -29,11 +29,11 @@ jobs:
           echo "$PR_DATA"
 
       - name: Remove Labels
-        if: ${{ contains(github.event.pull_request.labels.*.name, 'dependabot:recreate-in-progress') }}
+        if: ${{ contains(github.event.pull_request.labels.*.name, 'dependabot:recreate-in-progress') && contains(github.event.pull_request.labels.*.name, 'dependabot:recreate') }}
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          gh pr edit --remove-label "dependabot:recreate-in-progress" --remove-label "dependabot:recreate" ${{ github.event.pull_request.number }}
+          gh pr edit --remove-label "dependabot:recreate"  ${{ github.event.pull_request.number }}
 
       - name: Show Open PRs
         env:
