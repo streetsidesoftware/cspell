@@ -328,7 +328,7 @@ importers:
     specifiers:
       '@rollup/plugin-commonjs': ^23.0.0
       '@rollup/plugin-json': ^4.1.0
-      '@rollup/plugin-node-resolve': ^14.1.0
+      '@rollup/plugin-node-resolve': ^15.0.0
       '@rollup/plugin-typescript': ^9.0.1
       '@types/eslint': ^8.4.6
       '@types/estree': ^1.0.0
@@ -349,7 +349,7 @@ importers:
     devDependencies:
       '@rollup/plugin-commonjs': 23.0.0_rollup@2.79.1
       '@rollup/plugin-json': 4.1.0_rollup@2.79.1
-      '@rollup/plugin-node-resolve': 14.1.0_rollup@2.79.1
+      '@rollup/plugin-node-resolve': 15.0.0_rollup@2.79.1
       '@rollup/plugin-typescript': 9.0.1_gypgyaqhine6mwjfvh7icfhviq
       '@types/eslint': 8.4.6
       '@types/estree': 1.0.0
@@ -4240,14 +4240,17 @@ packages:
       rollup: 2.79.1
     dev: true
 
-  /@rollup/plugin-node-resolve/14.1.0_rollup@2.79.1:
-    resolution: {integrity: sha512-5G2niJroNCz/1zqwXtk0t9+twOSDlG00k1Wfd7bkbbXmwg8H8dvgHdIWAun53Ps/rckfvOC7scDBjuGFg5OaWw==}
-    engines: {node: '>= 10.0.0'}
+  /@rollup/plugin-node-resolve/15.0.0_rollup@2.79.1:
+    resolution: {integrity: sha512-iwJbzfTzlzDDQcGmkS7EkCKwe2kSkdBrjX87Fy/KrNjr6UNnLpod0t6X66e502LRe5JJCA4FFqrEscWPnZAkig==}
+    engines: {node: '>=14.0.0'}
     peerDependencies:
-      rollup: ^2.78.0
+      rollup: ^2.78.0||^3.0.0
+    peerDependenciesMeta:
+      rollup:
+        optional: true
     dependencies:
-      '@rollup/pluginutils': 3.1.0_rollup@2.79.1
-      '@types/resolve': 1.17.1
+      '@rollup/pluginutils': 4.2.1
+      '@types/resolve': 1.20.2
       deepmerge: 4.2.2
       is-builtin-module: 3.2.0
       is-module: 1.0.0
@@ -4792,10 +4795,8 @@ packages:
       '@types/scheduler': 0.16.2
       csstype: 3.1.1
 
-  /@types/resolve/1.17.1:
-    resolution: {integrity: sha512-yy7HuzQhj0dhGpD8RLXSZWEkLsV9ibvxvi6EiJ3bkqLAO1RGo0WbkWQiwpRlSFymTJRz0d3k5LM3kkx8ArDbLw==}
-    dependencies:
-      '@types/node': 18.8.5
+  /@types/resolve/1.20.2:
+    resolution: {integrity: sha512-60BCwRFOZCQhDncwQdxxeOEEkbc5dIMccYLwbxsS4TUNeVECQ/pBJ0j09mrHOl/JJvpRPGwO9SvE4nR2Nb/a4Q==}
     dev: true
 
   /@types/responselike/1.0.0:
