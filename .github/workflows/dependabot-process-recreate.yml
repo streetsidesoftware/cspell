@@ -1,6 +1,7 @@
 # https://github.com/dependabot/dependabot-core/issues/1736
 name: Dependabot - Process Recreate Pull Requests
 on:
+  # Trigger this workflow most changes. We want it to check if something needs to be done when a change happens.
   pull_request:
     types:
       - closed
@@ -9,6 +10,8 @@ on:
       - synchronize
       - labeled
       - unlabeled
+  workflow_dispatch:
+  push:
 permissions: read-all
 jobs:
   add-comment-recreate:
@@ -35,7 +38,7 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          echo PR_IN_PROGRESS=$(gh pr list -S "label:dependabot:recreate-in-progress") >> $GITHUB_ENV
+          echo PR_IN_PROGRESS=$(gh pr list -S "label:dependabot:recreate-in-progress author:app/dependabot") >> $GITHUB_ENV
 
       - name: Get List of PRs to Update
         env:
@@ -46,6 +49,11 @@ jobs:
       - name: Display
         run: |
           echo $PR_IN_PROGRESS
+
+      - name: Tell Dependabot to Recreate PR
+        if: ${{ !env.PR_IN_PROGRESS && env.PR_SUMMARY }}
+        run: |
+          echo 'Something To Do!' "$PR_SUMMARY"
 
       # - name: Get Open PRs and apply comment
       #   if: ${{ env.PR_SUMMARY }}
