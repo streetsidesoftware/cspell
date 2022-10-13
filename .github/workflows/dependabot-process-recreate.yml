@@ -12,6 +12,8 @@ on:
       - unlabeled
   workflow_dispatch:
   push:
+  check_suite:
+    types: [completed]
 permissions: read-all
 jobs:
   add-comment-recreate:
