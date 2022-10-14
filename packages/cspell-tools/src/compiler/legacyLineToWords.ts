@@ -20,6 +20,13 @@ export function legacyLineToWords(line: string): Iterable<string> {
 
     return words;
 }
+
+export function* legacyLinesToWords(lines: Iterable<string>): Iterable<string> {
+    for (const line of lines) {
+        yield* legacyLineToWords(line);
+    }
+}
+
 function splitCamelCase(word: string): Iterable<string> {
     const splitWords = Text.splitCamelCaseWord(word);
     // We only want to preserve this: "New York" and not "Namespace DNSLookup"

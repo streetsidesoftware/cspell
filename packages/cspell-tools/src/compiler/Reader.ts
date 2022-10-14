@@ -1,21 +1,38 @@
+import { pipe } from '@cspell/cspell-pipe/sync';
 import {
     CASE_INSENSITIVE_PREFIX,
     COMPOUND_FIX,
+    createDictionaryLineParser,
     FORBID_PREFIX,
     importTrie,
-    OPTIONAL_COMPOUND_FIX,
     Trie,
 } from 'cspell-trie-lib';
 import * as HR from 'hunspell-reader';
 import { AffWord } from 'hunspell-reader';
+import { legacyLinesToWords } from './legacyLineToWords';
 import { readTextFileLines } from './readTextFile';
-import { pipe } from '@cspell/cspell-pipe/sync';
 
 const regHunspellFile = /\.(dic|aff)$/i;
 
 export interface ReaderOptions {
-    useAnnotation?: boolean;
+    /**
+     * Max Hunspell recursive depth.
+     */
     maxDepth?: number;
+    /**
+     * split words if necessary.
+     */
+    splitWords: boolean;
+    /**
+     * Generate a case insensitive version.
+     */
+    generateNonStrictAlternatives: boolean;
+    /**
+     * Indicate that it is an unformatted file and needs to be cleaned
+     * before processing. Applies only to text file sources.
+     * @default false
+     */
+    legacy?: boolean;
 }
 
 type ReaderFn = (filename: string, options: ReaderOptions) => Promise<BaseReader>;
@@ -32,13 +49,10 @@ export type AnnotatedWord = string;
 
 interface BaseReader {
     size: number;
-    annotatedWords: Iterable<AnnotatedWord>;
-    rawWords: Iterable<string>;
+    words: Iterable<AnnotatedWord>;
 }
 
 export interface Reader extends BaseReader, Iterable<string> {}
-
-const regExMatchComments = /\s*(#|\/\/).*/;
 
 // Readers first match wins
 const readers: ReaderSelector[] = [
@@ -58,20 +72,8 @@ function findMatchingReader(filename: string, options: ReaderOptions): Promise<B
 export async function createReader(filename: string, options: ReaderOptions): Promise<Reader> {
     const baseReader = await findMatchingReader(filename, options);
     return Object.assign(baseReader, {
-        [Symbol.iterator]: () =>
-            (options.useAnnotation ? baseReader.annotatedWords : baseReader.rawWords)[Symbol.iterator](),
+        [Symbol.iterator]: () => baseReader.words[Symbol.iterator](),
     });
-}
-
-export function createArrayReader(lines: string[]): BaseReader {
-    const rawWords = lines;
-    const annotatedWords = pipe(lines, _mapText, dedupeAndSort);
-
-    return {
-        size: lines.length,
-        annotatedWords,
-        rawWords,
-    };
 }
 
 export async function readHunspellFiles(filename: string, options: ReaderOptions): Promise<BaseReader> {
@@ -82,65 +84,38 @@ export async function readHunspellFiles(filename: string, options: ReaderOptions
     reader.maxDepth = options.maxDepth !== undefined ? options.maxDepth : reader.maxDepth;
 
     const normalizeAndDedupe = opCompose(_stripCaseAndAccents, dedupeAndSort);
-    const rawWords = reader.seqWords();
-    const annotatedWords = pipe(reader.seqAffWords(), _mapAffWords, normalizeAndDedupe);
+    const words = pipe(reader.seqAffWords(), _mapAffWords, normalizeAndDedupe);
 
     return {
         size: reader.dic.length,
-        annotatedWords,
-        rawWords,
+        words,
     };
 }
 
 async function trieFileReader(filename: string): Promise<BaseReader> {
     const trieRoot = importTrie(await readTextFileLines(filename));
     const trie = new Trie(trieRoot);
-    const rawWords = trie.words();
+    const words = trie.words();
     return {
         get size() {
             return trie.size();
         },
-        annotatedWords: rawWords,
-        rawWords,
+        words,
     };
 }
 
-async function textFileReader(filename: string, _options: ReaderOptions): Promise<BaseReader> {
+async function textFileReader(filename: string, options: ReaderOptions): Promise<BaseReader> {
     const lines = await readTextFileLines(filename);
-    return createArrayReader(lines);
-}
+    const { splitWords: split, generateNonStrictAlternatives: stripCaseAndAccents } = options;
 
-const _mapText = opCompose(_comments, _compoundBegin, _compoundEnd, _stripCaseAndAccents);
+    const normalizeLines = createDictionaryLineParser({ stripCaseAndAccents, split });
+    const parseLines = options.legacy ? opCompose(legacyLinesToWords, normalizeLines) : normalizeLines;
+    const words = pipe(lines, parseLines, dedupeAndSort);
 
-function* _comments(lines: Iterable<string>): Iterable<AnnotatedWord> {
-    for (const line of lines) {
-        const w = line.replace(regExMatchComments, '').trim();
-        if (w) yield w;
-    }
-}
-
-function* _compoundEnd(lines: Iterable<string>): Iterable<AnnotatedWord> {
-    for (const line of lines) {
-        if (line[0] !== OPTIONAL_COMPOUND_FIX) {
-            yield line;
-            continue;
-        }
-        const w = line.slice(1);
-        yield w;
-        yield COMPOUND_FIX + w;
-    }
-}
-
-function* _compoundBegin(lines: Iterable<string>): Iterable<AnnotatedWord> {
-    for (const line of lines) {
-        if (line[line.length - 1] !== OPTIONAL_COMPOUND_FIX) {
-            yield line;
-            continue;
-        }
-        const w = line.slice(0, -1);
-        yield w;
-        yield w + COMPOUND_FIX;
-    }
+    return {
+        size: lines.length,
+        words,
+    };
 }
 
 function* _stripCaseAndAccents(words: Iterable<AnnotatedWord>): Iterable<AnnotatedWord> {

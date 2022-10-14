@@ -14,13 +14,11 @@ import {
     Target,
 } from '../config';
 import { getSystemFeatureFlags } from '../FeatureFlags';
-import { NormalizeOptions } from './CompileOptions';
 import { streamWordsFromFile } from './iterateWordsFromFile';
 import { logWithTimestamp } from './logWithTimestamp';
 import { ReaderOptions } from './Reader';
 import { readTextFile } from './readTextFile';
 import { compileTrie, compileWordList } from './wordListCompiler';
-import { createNormalizer } from './wordListParser';
 
 getSystemFeatureFlags().register('compound', 'Enable compound dictionary sources.');
 
@@ -67,10 +65,11 @@ export async function compileTarget(target: Target, options: CompileTargetOption
                   sort: false,
                   trie3: format === 'trie3',
                   trie4: format === 'trie4',
+                  stripNonStrictPrefix: format === 'trie',
               });
           }
         : async (src: Iterable<string>, dst: string) => {
-              return compileWordList(src, dst, { sort });
+              return compileWordList(src, dst, { sort, stripNonStrictPrefix: false });
           };
 
     await processFiles(action, filesToProcess, filename);
@@ -159,30 +158,17 @@ async function readFileSource(fileSource: FileSource, targetOptions: CompileTarg
 
     const legacy = split === 'legacy';
     const splitWords = legacy ? false : split;
-    const experimental = new Set(targetOptions.experimental);
-    const useTrieCompounds = experimental.has('compound');
-    const useAnnotation = useTrieCompounds;
-    const skipNormalization = useTrieCompounds;
-
-    const opt: NormalizeOptions = {
-        keepRawCase,
-        skipNormalization,
-        splitWords,
-        legacy,
-    };
 
     // console.warn('fileSource: %o,\n targetOptions %o, \n opt: %o', fileSource, targetOptions, opt);
 
-    const normalizer = createNormalizer(opt);
-
-    const readerOptions: ReaderOptions = { maxDepth, useAnnotation };
+    const readerOptions: ReaderOptions = { maxDepth, legacy, splitWords, generateNonStrictAlternatives: !keepRawCase };
 
     logWithTimestamp(`Reading ${path.basename(filename)}`);
     const stream = await streamWordsFromFile(filename, readerOptions);
     logWithTimestamp(`Done reading ${path.basename(filename)}`);
     const f: FileToProcess = {
         src: filename,
-        words: normalizer(stream),
+        words: stream,
     };
     return f;
 }
