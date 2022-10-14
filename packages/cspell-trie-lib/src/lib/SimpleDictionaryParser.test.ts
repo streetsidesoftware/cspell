@@ -164,6 +164,8 @@ describe('Validate SimpleDictionaryParser', () => {
         ${s('# cspell-tools: no-split|Apple|Arizona|New York')}        | ${{ stripCaseAndAccents: false }} | ${s('Apple|Arizona|New York')}
         ${s('# cspell-tools: no-keep-case|Apple|Arizona|New York')}    | ${{ stripCaseAndAccents: false }} | ${s('Apple|~apple|Arizona|~arizona|New York|~new york')}
         ${s('Apple| # cspell-tools: keep-case|Arizona|New York')}      | ${{}}                             | ${s('Apple|~apple|Arizona|New York')}
+        ${dictionary3()}                                               | ${{}}                             | ${s('Error|~error|Error+|~error+|+error|+error+|Code|~code|Code+|~code+|+code|+code+|msg|+msg|!err|!Errorerror|!Codemsg|Café|~café|~cafe|!codecode')}
+        ${s('# cspell-tools: split|"New York"|Tower of London')}       | ${{}}                             | ${s('New York|Tower|~tower|of|London|~london')}
     `('parseDictionaryLines complex $lines', ({ lines, options, expected }) => {
         const r = [...parseDictionaryLines(lines, options)];
         expect(r).toEqual(expected);
@@ -208,4 +210,26 @@ function dictionary2() {
 
     `;
     return dictionary() + moreWords;
+}
+
+// cspell:ignore Errormsg msgerror codecode codemsg errorerror
+
+function dictionary3() {
+    return `
+    # Sample Dictionary
+
+    # It possible to group the dictionary into sections.
+    Error*
+    +error*
+    Code*
+    +code*
+    *msg    # \`Errormsg\` is allowed, but \`msgerror\` is not.
+    !err    # forbid \`err\`
+    !Errorerror # forbid
+    !Codemsg
+
+    Café    # will get normalized and will only match if case sensitive matching is turned off.
+
+    !codecode # Do not allow \`codecode\` or \`Codecode\` when using case insensitive matching.
+        `;
 }

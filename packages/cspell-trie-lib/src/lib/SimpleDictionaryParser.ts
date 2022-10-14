@@ -35,7 +35,7 @@ export interface ParseDictionaryOptions {
     stripCaseAndAccents: boolean;
 
     /**
-     * Tell the parser to split words
+     * Tell the parser to split into words along spaces.
      * @default false
      */
     split: boolean;
@@ -77,7 +77,7 @@ export function createDictionaryLineParserMapper(options?: Partial<ParseDictiona
 
     let { stripCaseAndAccents = _defaultOptions.stripCaseAndAccents, split = _defaultOptions.split } = _options;
 
-    const regExpSplit = /[\s,;]/g;
+    const regExpSplit = /(?<!\\)[\s,;]/g;
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     function isString(line: any | string): line is string {
@@ -144,14 +144,15 @@ export function createDictionaryLineParserMapper(options?: Partial<ParseDictiona
         }
     }
 
-    const doNotNormalizePrefix = new Set([forbidden, ignoreCase, keepCase, '"']);
+    const doNotNormalizePrefix: Record<string, true | undefined> = {};
+    [forbidden, ignoreCase, keepCase, '"'].forEach((prefix) => (doNotNormalizePrefix[prefix] = true));
 
     function removeDoublePrefix(w: string): string {
         return w.startsWith(ignoreCase + ignoreCase) ? w.slice(1) : w;
     }
 
     function stripKeepCasePrefixAndQuotes(word: string): string {
-        word = word.replace(/"(.*)"/, '$1');
+        word = word.replace(/"(.*?)"/g, '$1');
         return word[0] === keepCase ? word.slice(1) : word;
     }
 
@@ -163,7 +164,7 @@ export function createDictionaryLineParserMapper(options?: Partial<ParseDictiona
         const nWord = _normalize(word);
         const forms = new Set<string>();
         forms.add(nWord);
-        if (stripCaseAndAccents && !doNotNormalizePrefix.has(word[0])) {
+        if (stripCaseAndAccents && !(word[0] in doNotNormalizePrefix)) {
             for (const n of normalizeWordForCaseInsensitive(nWord)) {
                 if (n !== nWord) forms.add(ignoreCase + n);
             }
@@ -171,13 +172,18 @@ export function createDictionaryLineParserMapper(options?: Partial<ParseDictiona
         yield* forms;
     }
 
-    function* splitWords(words: Iterable<string>): Iterable<string> {
-        for (const word of words) {
+    function* splitWords(lines: Iterable<string>): Iterable<string> {
+        for (const line of lines) {
             if (split) {
-                yield* word.split(regExpSplit);
+                const lineEscaped =
+                    line.indexOf('"') >= 0
+                        ? line.replace(/".*?"/g, (quoted) => ' ' + quoted.replace(/(\s)/g, '\\$1') + ' ')
+                        : line;
+                const words = lineEscaped.split(regExpSplit);
+                yield* words.map((escaped) => escaped.replace(/\\(\s)/g, '$1'));
                 continue;
             }
-            yield word;
+            yield line;
         }
     }
 
