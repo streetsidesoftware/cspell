@@ -5,7 +5,7 @@ Args: ["**/*.go"]
 Summary:
   files: 224
   filesWithIssues: 211
-  issues: 3528
+  issues: 3526
   errors: 0
 Errors: []
 
@@ -91,19 +91,20 @@ issues:
   - "caddyconfig/httpcaddyfile/httptype.go:280:12    	Cvtr        	U   	if storageCvtr, ok := options[\"storage"
   - "caddyconfig/httpcaddyfile/httptype.go:643:11    	cval        	U   	for _, cval := range sblock.pile"
   - "caddyconfig/httpcaddyfile/httptype.go:665:17    	reqs        	U   	// not log reqs to any host unless it"
-  - "caddyconfig/httpcaddyfile/httptype.go:1104:3    	hostm       	U   	hostm caddyhttp.MatchHost"
-  - "caddyconfig/httpcaddyfile/httptype.go:1105:3    	pathm       	U   	pathm caddyhttp.MatchPath"
-  - "caddyconfig/httpcaddyfile/httptype.go:1275:5    	hostport    	U   	\"{hostport}\", \"{http.request.hostport"
-  - "caddyconfig/httpcaddyfile/httptype.go:1357:25   	unexported  	U   	Mostly borrowed from unexported method in caddyhttp"
-  - "caddyconfig/httpcaddyfile/httptype.go:1364:3    	laddrs      	U   	laddrs, err := caddy.ParseNetworkAdd"
+  - "caddyconfig/httpcaddyfile/httptype.go:1128:3    	hostm       	U   	hostm caddyhttp.MatchHost"
+  - "caddyconfig/httpcaddyfile/httptype.go:1129:3    	pathm       	U   	pathm caddyhttp.MatchPath"
+  - "caddyconfig/httpcaddyfile/httptype.go:1299:5    	hostport    	U   	\"{hostport}\", \"{http.request.hostport"
+  - "caddyconfig/httpcaddyfile/httptype.go:1381:25   	unexported  	U   	Mostly borrowed from unexported method in caddyhttp"
+  - "caddyconfig/httpcaddyfile/httptype.go:1388:3    	laddrs      	U   	laddrs, err := caddy.ParseNetworkAdd"
   - "caddyconfig/httpcaddyfile/options_test.go:17:22     	caddytest   	U   	// are present in: caddytest/integration/caddyfile"
   - "caddyconfig/httpcaddyfile/options.go:43:43      	ACMEDNS 	U   	\"acme_dns\", parseOptACMEDNS)"
   - "caddyconfig/httpcaddyfile/options.go:44:43      	ACMEEAB 	U   	\"acme_eab\", parseOptACMEEAB)"
   - "caddyconfig/httpcaddyfile/pkiapp.go:63:33   	CAID	U   	ID = caddypki.DefaultCAID"
   - "caddyconfig/httpcaddyfile/serveroptions.go:155:5    	protos  	U   	protos := d.RemainingArgs("
-  - "caddyconfig/httpcaddyfile/tlsapp.go:58:7    	hostless	U   	// a hostless key, so that they don"
-  - "caddyconfig/httpcaddyfile/tlsapp.go:60:25   	Hostless	U   	var serverBlocksWithTLSHostlessKey int"
-  - "caddyconfig/httpcaddyfile/tlsapp.go:360:9   	ACMECA  	U   	globalACMECA := options[\"acme_ca"
+  - "caddyconfig/httpcaddyfile/tlsapp.go:52:53   	hostless    	U   	server block with a hostless"
+  - "caddyconfig/httpcaddyfile/tlsapp.go:55:22   	Hostless    	U   	httpsHostsSharedWithHostlessKey := make(map[string"
+  - "caddyconfig/httpcaddyfile/tlsapp.go:197:38  	Tailscale   	U   	as desired (see the Tailscale listener plugin), so"
+  - "caddyconfig/httpcaddyfile/tlsapp.go:360:9   	ACMECA      	U   	globalACMECA := options[\"acme_ca"
   - "caddyconfig/httploader.go:60:7      	CAPEM   	U   	RootCAPEMFiles []string `json"
   - "caddytest/caddytest.go:24:14    	aryann          	U   	\"github.com/aryann/difflib\""
   - "caddytest/caddytest.go:24:21    	difflib         	U   	\"github.com/aryann/difflib\""
@@ -171,7 +172,6 @@ issues:
   - "modules/caddyevents/eventsconfig/caddyfile.go:15:12     	eventsconfig	U   	// Package eventsconfig is for configuring caddyevent"
   - "modules/caddyhttp/app.go:461:15     	errcheck	U   	//nolint:errcheck"
   - "modules/caddyhttp/app.go:487:5      	hrough  	U   	// hrough a reload; because if"
-  - "modules/caddyhttp/autohttps.go:192:21   	Tailscale       	U   	// the implicit Tailscale manager module will"
   - "modules/caddyhttp/autohttps.go:513:12   	reprovision     	U   	// must reprovision the automation policy"
   - "modules/caddyhttp/autohttps.go:665:4    	reprovisioned   	U   	// reprovisioned. acmeIssuer must not"
   - "modules/caddyhttp/autohttps.go:682:28   	TLSALPN         	U   	acmeIssuer.Challenges.TLSALPN == nil {"
@@ -331,8 +331,8 @@ issues:
   - "modules/caddyhttp/templates/templates.go:128:18     	mydir           	U   	// {{listFiles \"/mydir\"}}"
   - "modules/caddyhttp/templates/templates.go:134:5      	Goldmark        	U   	// [Goldmark](https://github.com"
   - "modules/caddyhttp/templates/templates.go:210:4      	sitename        	U   	// sitename = \"A Caddy site\""
-  - "modules/caddyhttp/templates/templates.go:290:4      	Customfunctions 	U   	// Customfunctions is the interface for"
-  - "modules/caddyhttp/templates/templates.go:372:14     	etags           	U   	// and weak etags still cause browsers"
+  - "modules/caddyhttp/templates/templates.go:289:4      	Customfunctions 	U   	// Customfunctions is the interface for"
+  - "modules/caddyhttp/templates/templates.go:371:14     	etags           	U   	// and weak etags still cause browsers"
   - "modules/caddyhttp/templates/tplcontext_test.go:489:75   	ctxtest 	U   	tplContext.Root), \"caddy_ctxtest\")"
   - "modules/caddyhttp/templates/tplcontext.go:32:14     	alecthomas  	U   	\"github.com/alecthomas/chroma/formatters/html"
   - "modules/caddyhttp/templates/tplcontext.go:36:14     	yuin        	U   	\"github.com/yuin/goldmark\""

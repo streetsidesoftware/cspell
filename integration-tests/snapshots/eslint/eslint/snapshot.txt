@@ -3,7 +3,7 @@ Repository: eslint/eslint
 Url: "https://github.com/eslint/eslint"
 Args: ["**","--exclude=bin/**","--exclude=CHANGELOG.md","--exclude=_data","--exclude=tests/bench/large.js","--exclude=docs/src/_includes","--exclude=docs/src/assets/{fonts,s?css,images}"]
 Lines:
- CSpell: Files checked: 1790, Issues found: 5350 in 1218 files
+ CSpell: Files checked: 1796, Issues found: 5360 in 1219 files
  exit code: 1
 ./LICENSE:1:58      - Unknown word (openjsf)    -- other contributors, <www.openjsf.org>
 ./Makefile.js:144:88    - Unknown word (ined)               -- followed by the string "ined".
@@ -164,8 +164,8 @@ Lines:
 ./docs/src/rules/no-extend-native.md:75:34     - Unknown word (muhahaha)   -- prototype.forEach = 'muhahaha'");
 ./docs/src/rules/no-extra-parens.md:22:172    - Unknown word (iife)       -- conflicts with the [wrap-iife](wrap-iife) rule
 ./docs/src/rules/no-fallthrough.md:60:12     - Unknown word (fallsthrough) -- // fallsthrough
-./docs/src/rules/no-implicit-globals.md:119:26    - Unknown word (redeclarations) -- rule also disallows redeclarations of read-only global
-./docs/src/rules/no-implicit-globals.md:24:3      - Unknown word (Redeclarations) -- * Redeclarations of read-only global
+./docs/src/rules/no-implicit-globals.md:120:26    - Unknown word (redeclarations) -- rule also disallows redeclarations of read-only global
+./docs/src/rules/no-implicit-globals.md:25:3      - Unknown word (Redeclarations) -- * Redeclarations of read-only global
 ./docs/src/rules/no-irregular-whitespace.md:39:2      - Unknown word (ufeff)      -- \ufeff - Zero Width No-Break
 ./docs/src/rules/no-irregular-whitespace.md:51:30     - Unknown word (ZWSP)       -- Zero Width Space - <ZWSP>
 ./docs/src/rules/no-loop-func.md:12:5      - Unknown word (funcs)      -- funcs[i] = function() {
@@ -290,7 +290,9 @@ Lines:
 ./lib/cli-engine/xml-escape.js:29:26     - Unknown word (apos)       -- return "&apos;";
 ./lib/cli.js:28:38     - Unknown word (humanwhocodes) -- ModuleImporter } = require("@humanwhocodes/module-importer");
 ./lib/config/default-config.js:59:61     - Unknown word (globbed)    -- ensure these files are globbed by default
-./lib/eslint/eslint-helpers.js:16:7      - Unknown word (globby)     -- const globby = require("globby")
+./lib/eslint/eslint-helpers.js:19:26     - Unknown word (nodelib)    -- const fswalk = require("@nodelib/fs.walk");
+./lib/eslint/eslint-helpers.js:19:7      - Unknown word (fswalk)     -- const fswalk = require("@nodelib
+./lib/eslint/eslint-helpers.js:245:11    - Unknown word (globby)     -- const globbyPatterns = [];
 ./lib/linter/code-path-analysis/code-path-state.js:159:31    - Unknown word (unflattened) -- {CodePathSegment[]} unflattenedFromSegments Segments
 ./lib/linter/code-path-analysis/code-path-state.js:913:23    - Unknown word (Segs)        -- const prevSegsOfLeavingSegment = [headOfLeav
 ./lib/linter/code-path-analysis/code-path.js:138:34    - Unknown word (Omittable)  -- param {Object} [options] Omittable.
@@ -303,8 +305,8 @@ Lines:
 ./lib/linter/config-comment-parser.js:93:12     - Unknown word (Optionator) -- * Optionator cannot parse commaless
 ./lib/linter/linter.js:110:52    - Unknown word (postprocessor) -- postprocess} [postprocess] postprocessor for report
 ./lib/linter/linter.js:44:11     - Unknown word (AUTOFIX)    -- const MAX_AUTOFIX_PASSES = 10;
-./lib/linter/linter.js:946:18    - Unknown word (SOURCECODE)    -- const DEPRECATED_SOURCECODE_PASSTHROUGHS = {
-./lib/linter/linter.js:946:29    - Unknown word (PASSTHROUGHS)  -- DEPRECATED_SOURCECODE_PASSTHROUGHS = {
+./lib/linter/linter.js:947:18    - Unknown word (SOURCECODE)    -- const DEPRECATED_SOURCECODE_PASSTHROUGHS = {
+./lib/linter/linter.js:947:29    - Unknown word (PASSTHROUGHS)  -- DEPRECATED_SOURCECODE_PASSTHROUGHS = {
 ./lib/options.js:2:44      - Unknown word (optionator) -- Options configuration for optionator.
 ./lib/rule-tester/flat-rule-tester.js:225:42    - Unknown word (errorize)   -- ast The root node to errorize `start`/`end` properties
 ./lib/rule-tester/flat-rule-tester.js:717:27    - Unknown word (Didnt)      -- function assertASTDidntChange(beforeAST, afterAST
@@ -419,12 +421,13 @@ Lines:
 ./tests/lib/cli-engine/cli-engine.js:589:44    - Unknown word (foothis)    -- output: "var bar = foothis is a syntax error."
 ./tests/lib/cli-engine/cli-engine.js:6350:87   - Unknown word (myconf)              -- config node_modules/myconf/.eslintrc.json',",
 ./tests/lib/cli-engine/cli-engine.js:6578:52   - Unknown word (extendees)           -- config file and linear extendees.", () => {
-./tests/lib/cli.js:289:56    - Unknown word (fakeformatter) -- await cli.execute(`-f fakeformatter ${filePath}`);
+./tests/lib/cli.js:322:56    - Unknown word (fakeformatter) -- await cli.execute(`-f fakeformatter ${filePath}`);
 ./tests/lib/config/flat-config-array.js:1408:29   - Unknown word (foox)        -- foox: [1, "bar"]
 ./tests/lib/config/flat-config-array.js:1430:30   - Unknown word (doesnt)      -- "doesnt-exist/match": "error
 ./tests/lib/config/flat-config-array.js:147:22    - Unknown word (noniterable) -- it("should allow noniterable baseConfig objects"
 ./tests/lib/config/flat-config-array.js:898:43    - Unknown word (truex)       -- foo: "truex"
-./tests/lib/eslint/flat-eslint.js:4014:9    - Unknown word (xdescribe)  -- xdescribe("ignorePatterns can
+./tests/lib/eslint/flat-eslint.js:1143:30   - Unknown word (reignoring) -- it("should allow reignoring of previously ignored
+./tests/lib/eslint/flat-eslint.js:4106:9    - Unknown word (xdescribe)  -- xdescribe("ignorePatterns can
 ./tests/lib/linter/code-path-analysis/code-path-analyzer.js:30:16     - Unknown word (ESQUERY)    -- const STANDARD_ESQUERY_OPTION = { visitorKeys
 ./tests/lib/linter/config-comment-parser.js:165:41    - Unknown word (ELEVENTEEN) -- code = "a: seventy, b:ELEVENTEEN";
 ./tests/lib/linter/linter.js:3229:1    - Unknown word (consolexlog) -- consolexlog("test2");
