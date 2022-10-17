@@ -57,7 +57,7 @@ jobs:
           ref: ${{ env.REF_BRANCH }}
 
       - name: Setup pnpm
-        uses: pnpm/action-setup@v2.2.3
+        uses: pnpm/action-setup@v2.2.4
 
       - name: Patch
         if: ${{ inputs.patch }}
