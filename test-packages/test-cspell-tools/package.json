@@ -8,11 +8,11 @@
     "build": "pnpm run compile && pnpm run build-dictionaries",
     "build-dev": "pnpm run compile-dev && pnpm run build-dictionaries",
     "clean-build": "pnpm run clean && pnpm run build",
-    "build-dictionaries": "cspell-tools-cli compile -o dist src/php.txt src/companies.txt src/node.txt",
+    "build-dictionaries": "cspell-tools-cli compile --no-compress -o dict src/php.txt src/companies.txt src/node.txt",
     "compile": "tsc -p .",
     "compile-dev": "tsc -p tsconfig.dev.json",
     "test-dist": "node dist",
-    "test-cspell": "cspell -c cspell.test.json \"src/*\"",
+    "test-cspell": "cspell -c cspell.json \"src/*\"",
     "test": "pnpm run test-dist && pnpm run test-cspell"
   },
   "author": "",
