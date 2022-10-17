@@ -3,7 +3,7 @@ Repository: caddyserver/caddy
 Url: "https://github.com/caddyserver/caddy.git"
 Args: ["**/*.go"]
 Lines:
- CSpell: Files checked: 224, Issues found: 3528 in 211 files
+ CSpell: Files checked: 224, Issues found: 3526 in 211 files
  exit code: 1
 ./admin.go:1029:33   - Unknown word (unsynchronized) -- This is a low-level, unsynchronized function; most callers
 ./admin.go:1065:31   - Unknown word (elems)          -- array = append(array, elems...)
@@ -79,11 +79,11 @@ Lines:
 ./caddyconfig/httpcaddyfile/directives.go:471:54    - Unknown word (hostnames)    -- of all the non-empty hostnames found in
 ./caddyconfig/httpcaddyfile/directives.go:79:7      - Unknown word (fastcgi)    -- "php_fastcgi",
 ./caddyconfig/httpcaddyfile/directives.go:96:15     - Unknown word (unmarshaling) -- // associated unmarshaling (setup) function. When
-./caddyconfig/httpcaddyfile/httptype.go:1104:3    - Unknown word (hostm)      -- hostm caddyhttp.MatchHost
-./caddyconfig/httpcaddyfile/httptype.go:1105:3    - Unknown word (pathm)      -- pathm caddyhttp.MatchPath
-./caddyconfig/httpcaddyfile/httptype.go:1275:5    - Unknown word (hostport)   -- "{hostport}", "{http.request.hostport
-./caddyconfig/httpcaddyfile/httptype.go:1357:25   - Unknown word (unexported) -- Mostly borrowed from unexported method in caddyhttp
-./caddyconfig/httpcaddyfile/httptype.go:1364:3    - Unknown word (laddrs)     -- laddrs, err := caddy.ParseNetworkAdd
+./caddyconfig/httpcaddyfile/httptype.go:1128:3    - Unknown word (hostm)      -- hostm caddyhttp.MatchHost
+./caddyconfig/httpcaddyfile/httptype.go:1129:3    - Unknown word (pathm)      -- pathm caddyhttp.MatchPath
+./caddyconfig/httpcaddyfile/httptype.go:1299:5    - Unknown word (hostport)   -- "{hostport}", "{http.request.hostport
+./caddyconfig/httpcaddyfile/httptype.go:1381:25   - Unknown word (unexported) -- Mostly borrowed from unexported method in caddyhttp
+./caddyconfig/httpcaddyfile/httptype.go:1388:3    - Unknown word (laddrs)     -- laddrs, err := caddy.ParseNetworkAdd
 ./caddyconfig/httpcaddyfile/httptype.go:258:5     - Unknown word (annnd)      -- // annnd the top-level config
 ./caddyconfig/httpcaddyfile/httptype.go:280:12    - Unknown word (Cvtr)       -- if storageCvtr, ok := options["storage
 ./caddyconfig/httpcaddyfile/httptype.go:30:43     - Unknown word (caddypki)   -- caddyserver/caddy/v2/modules/caddypki"
@@ -96,9 +96,10 @@ Lines:
 ./caddyconfig/httpcaddyfile/options_test.go:17:22     - Unknown word (caddytest)  -- // are present in: caddytest/integration/caddyfile
 ./caddyconfig/httpcaddyfile/pkiapp.go:63:33     - Unknown word (CAID)       -- ID = caddypki.DefaultCAID
 ./caddyconfig/httpcaddyfile/serveroptions.go:155:5     - Unknown word (protos)     -- protos := d.RemainingArgs(
+./caddyconfig/httpcaddyfile/tlsapp.go:197:38    - Unknown word (Tailscale)  -- as desired (see the Tailscale listener plugin), so
 ./caddyconfig/httpcaddyfile/tlsapp.go:360:9     - Unknown word (ACMECA)     -- globalACMECA := options["acme_ca
-./caddyconfig/httpcaddyfile/tlsapp.go:58:7      - Unknown word (hostless)   -- // a hostless key, so that they don
-./caddyconfig/httpcaddyfile/tlsapp.go:60:25     - Unknown word (Hostless)   -- var serverBlocksWithTLSHostlessKey int
+./caddyconfig/httpcaddyfile/tlsapp.go:52:53     - Unknown word (hostless)   -- server block with a hostless
+./caddyconfig/httpcaddyfile/tlsapp.go:55:22     - Unknown word (Hostless)   -- httpsHostsSharedWithHostlessKey := make(map[string
 ./caddyconfig/httploader.go:60:7      - Unknown word (CAPEM)      -- RootCAPEMFiles []string `json
 ./caddytest/caddytest.go:239:12    - Unknown word (inprocess)   -- // start inprocess caddy server
 ./caddytest/caddytest.go:24:14     - Unknown word (aryann)     -- "github.com/aryann/difflib"
@@ -166,7 +167,6 @@ Lines:
 ./modules/caddyevents/eventsconfig/caddyfile.go:15:12     - Unknown word (eventsconfig) -- // Package eventsconfig is for configuring caddyevent
 ./modules/caddyhttp/app.go:461:15    - Unknown word (errcheck)   -- //nolint:errcheck
 ./modules/caddyhttp/app.go:487:5     - Unknown word (hrough)     -- // hrough a reload; because if
-./modules/caddyhttp/autohttps.go:192:21    - Unknown word (Tailscale)  -- // the implicit Tailscale manager module will
 ./modules/caddyhttp/autohttps.go:513:12    - Unknown word (reprovision) -- // must reprovision the automation policy
 ./modules/caddyhttp/autohttps.go:665:4     - Unknown word (reprovisioned) -- // reprovisioned. acmeIssuer must not
 ./modules/caddyhttp/autohttps.go:682:28    - Unknown word (TLSALPN)       -- acmeIssuer.Challenges.TLSALPN == nil {
@@ -323,8 +323,8 @@ Lines:
 ./modules/caddyhttp/templates/templates.go:128:18    - Unknown word (mydir)      -- // {{listFiles "/mydir"}}
 ./modules/caddyhttp/templates/templates.go:134:5     - Unknown word (Goldmark)   -- // [Goldmark](https://github.com
 ./modules/caddyhttp/templates/templates.go:210:4     - Unknown word (sitename)   -- // sitename = "A Caddy site"
-./modules/caddyhttp/templates/templates.go:290:4     - Unknown word (Customfunctions) -- // Customfunctions is the interface for
-./modules/caddyhttp/templates/templates.go:372:14    - Unknown word (etags)           -- // and weak etags still cause browsers
+./modules/caddyhttp/templates/templates.go:289:4     - Unknown word (Customfunctions) -- // Customfunctions is the interface for
+./modules/caddyhttp/templates/templates.go:371:14    - Unknown word (etags)           -- // and weak etags still cause browsers
 ./modules/caddyhttp/templates/templates.go:60:15     - Unknown word (cookiename) -- // {{.Cookie "cookiename"}}
 ./modules/caddyhttp/templates/templates.go:99:114    - Unknown word (defitions)  -- stack. If there are no defitions, the filepath will be
 ./modules/caddyhttp/templates/templates.go:99:150    - Unknown word (defition)   -- filepath will be the defition name. Any {{ define

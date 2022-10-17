@@ -3,9 +3,9 @@ Repository: eslint/eslint
 Url: https://github.com/eslint/eslint
 Args: ["**","--exclude=bin/**","--exclude=CHANGELOG.md","--exclude=_data","--exclude=tests/bench/large.js","--exclude=docs/src/_includes","--exclude=docs/src/assets/{fonts,s?css,images}"]
 Summary:
-  files: 1790
-  filesWithIssues: 1218
-  issues: 5350
+  files: 1796
+  filesWithIssues: 1219
+  issues: 5360
   errors: 0
 Errors: []
 
@@ -144,8 +144,8 @@ issues:
   - "docs/src/rules/no-extend-native.md:75:34    	muhahaha	U   	prototype.forEach = 'muhahaha'\");"
   - "docs/src/rules/no-extra-parens.md:22:172    	iife	U   	conflicts with the [wrap-iife](wrap-iife) rule"
   - "docs/src/rules/no-fallthrough.md:60:12      	fallsthrough	U   	// fallsthrough"
-  - "docs/src/rules/no-implicit-globals.md:24:3      	Redeclarations  	U   	* Redeclarations of read-only global"
-  - "docs/src/rules/no-implicit-globals.md:119:26    	redeclarations  	U   	rule also disallows redeclarations of read-only global"
+  - "docs/src/rules/no-implicit-globals.md:25:3      	Redeclarations  	U   	* Redeclarations of read-only global"
+  - "docs/src/rules/no-implicit-globals.md:120:26    	redeclarations  	U   	rule also disallows redeclarations of read-only global"
   - "docs/src/rules/no-irregular-whitespace.md:39:2      	ufeff   	U   	\\ufeff - Zero Width No-Break"
   - "docs/src/rules/no-irregular-whitespace.md:51:30     	ZWSP    	U   	Zero Width Space - <ZWSP>"
   - "docs/src/rules/no-loop-func.md:12:5     	funcs   	U   	funcs[i] = function() {"
@@ -270,7 +270,9 @@ issues:
   - "lib/cli-engine/xml-escape.js:29:26      	apos	U   	return \"&apos;\";"
   - "lib/cli.js:28:38    	humanwhocodes   	U   	ModuleImporter } = require(\"@humanwhocodes/module-importer\");"
   - "lib/config/default-config.js:59:61      	globbed 	U   	ensure these files are globbed by default"
-  - "lib/eslint/eslint-helpers.js:16:7       	globby  	U   	const globby = require(\"globby\")"
+  - "lib/eslint/eslint-helpers.js:19:7       	fswalk  	U   	const fswalk = require(\"@nodelib"
+  - "lib/eslint/eslint-helpers.js:19:26      	nodelib 	U   	const fswalk = require(\"@nodelib/fs.walk\");"
+  - "lib/eslint/eslint-helpers.js:245:11     	globby  	U   	const globbyPatterns = [];"
   - "lib/linter/code-path-analysis/code-path-state.js:159:31     	unflattened 	U   	{CodePathSegment[]} unflattenedFromSegments Segments"
   - "lib/linter/code-path-analysis/code-path-state.js:913:23     	Segs        	U   	const prevSegsOfLeavingSegment = [headOfLeav"
   - "lib/linter/code-path-analysis/code-path.js:138:34   	Omittable   	U   	param {Object} [options] Omittable."
@@ -283,8 +285,8 @@ issues:
   - "lib/linter/config-comment-parser.js:93:12   	Optionator  	U   	* Optionator cannot parse commaless"
   - "lib/linter/linter.js:44:11      	AUTOFIX         	U   	const MAX_AUTOFIX_PASSES = 10;"
   - "lib/linter/linter.js:110:52     	postprocessor   	U   	postprocess} [postprocess] postprocessor for report"
-  - "lib/linter/linter.js:946:18     	SOURCECODE      	U   	const DEPRECATED_SOURCECODE_PASSTHROUGHS = {"
-  - "lib/linter/linter.js:946:29     	PASSTHROUGHS    	U   	DEPRECATED_SOURCECODE_PASSTHROUGHS = {"
+  - "lib/linter/linter.js:947:18     	SOURCECODE      	U   	const DEPRECATED_SOURCECODE_PASSTHROUGHS = {"
+  - "lib/linter/linter.js:947:29     	PASSTHROUGHS    	U   	DEPRECATED_SOURCECODE_PASSTHROUGHS = {"
   - "lib/options.js:2:44     	optionator  	U   	Options configuration for optionator."
   - "lib/rule-tester/flat-rule-tester.js:225:42  	errorize	U   	ast The root node to errorize `start`/`end` properties"
   - "lib/rule-tester/flat-rule-tester.js:717:27  	Didnt   	U   	function assertASTDidntChange(beforeAST, afterAST"
@@ -424,12 +426,13 @@ issues:
   - "tests/lib/cli-engine/cli-engine.js:4818:63  	doesntexist         	U   	getFixturePath(\"formatters\", \"doesntexist.js\"),"
   - "tests/lib/cli-engine/cli-engine.js:6350:87  	myconf              	U   	config node_modules/myconf/.eslintrc.json',\","
   - "tests/lib/cli-engine/cli-engine.js:6578:52  	extendees           	U   	config file and linear extendees.\", () => {"
-  - "tests/lib/cli.js:289:56     	fakeformatter   	U   	await cli.execute(`-f fakeformatter ${filePath}`);"
+  - "tests/lib/cli.js:322:56     	fakeformatter   	U   	await cli.execute(`-f fakeformatter ${filePath}`);"
   - "tests/lib/config/flat-config-array.js:147:22    	noniterable 	U   	it(\"should allow noniterable baseConfig objects\""
   - "tests/lib/config/flat-config-array.js:898:43    	truex       	U   	foo: \"truex\""
   - "tests/lib/config/flat-config-array.js:1408:29   	foox        	U   	foox: [1, \"bar\"]"
   - "tests/lib/config/flat-config-array.js:1430:30   	doesnt      	U   	\"doesnt-exist/match\": \"error"
-  - "tests/lib/eslint/flat-eslint.js:4014:9  	xdescribe   	U   	xdescribe(\"ignorePatterns can"
+  - "tests/lib/eslint/flat-eslint.js:1143:30 	reignoring  	U   	it(\"should allow reignoring of previously ignored"
+  - "tests/lib/eslint/flat-eslint.js:4106:9  	xdescribe   	U   	xdescribe(\"ignorePatterns can"
   - "tests/lib/linter/code-path-analysis/code-path-analyzer.js:30:16     	ESQUERY 	U   	const STANDARD_ESQUERY_OPTION = { visitorKeys"
   - "tests/lib/linter/config-comment-parser.js:165:41    	ELEVENTEEN  	U   	code = \"a: seventy, b:ELEVENTEEN\";"
   - "tests/lib/linter/linter.js:3229:1   	consolexlog     	U   	consolexlog(\"test2\");"
