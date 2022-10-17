@@ -17,9 +17,7 @@
     "build": "npm run build-software-terms && npm run build-networking-terms",
     "test": "npm run test-software-terms && npm run test-networking-terms",
     "test-software-terms": "cat \"src/software-terms.txt\" | cspell -v -c ./cspell-ext.json \"--local=*\" \"--languageId=*\" stdin",
-    "test-networking-terms": "cat source-files-networking.txt | xargs cat | cspell -v \"--local=*\" \"--languageId=*\" stdin",
-    "prepublishOnly": "echo pre-publish",
-    "prepare": "yarn run build"
+    "test-networking-terms": "cat source-files-networking.txt | xargs cat | cspell -v \"--local=*\" \"--languageId=*\" stdin"
   },
   "repository": {
     "type": "git",

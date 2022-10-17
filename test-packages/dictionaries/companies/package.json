@@ -13,9 +13,7 @@
   },
   "scripts": {
     "build": "cspell-tools-cli compile --no-compress --split \"src/companies.txt\" -o ./dict",
-    "test": "cat \"src/companies.txt\" | cspell -v -c ./cspell-ext.json --local=* --languageId=* stdin",
-    "prepublishOnly": "echo pre-publish",
-    "prepare": "yarn run build"
+    "test": "cat \"src/companies.txt\" | cspell -v -c ./cspell-ext.json --local=* --languageId=* stdin"
   },
   "repository": {
     "type": "git",
