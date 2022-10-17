@@ -1,0 +1,26 @@
+{
+    "id": "software-terms",
+    "name": "Software Terms",
+    "readonly": true,
+    "description": "Software terms dictionary for cspell.",
+    "dictionaryDefinitions": [
+        {
+            // changing the name is a breaking change.
+            "name": "softwareTerms",
+            "path": "./dict/softwareTerms.txt",
+            "description": "Software terms dictionary for cspell."
+        },
+        {
+            // Note this dictionary name is not consistent withe `softwareTerms` but it is
+            // consistent with other dictionaries.
+            "name": "networking-terms",
+            "path": "./dict/networkingTerms.txt",
+            "description": "Software networking terms dictionary for cspell."
+        }
+    ],
+    // Enable `softwareTerms` by default if this extension is imported.
+    "dictionaries": [
+        "softwareTerms"
+        // "networking-terms" - is not included by default because it is very specific.
+    ]
+}
