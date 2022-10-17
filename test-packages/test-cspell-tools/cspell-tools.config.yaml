@@ -1,0 +1,22 @@
+# yaml-language-server: $schema=./../../packages/cspell-tools/cspell-tools.config.schema.json
+
+# cspell-tools-cli compile -o dist src/php.txt src/companies.txt src/node.txt
+
+targets:
+  - name: php
+    sources:
+      - src/php.txt
+    format: plaintext
+    targetDirectory: dist
+  - name: companies
+    sources:
+      - src/companies.txt
+    format: plaintext
+    targetDirectory: dist
+  - name: node
+    sources:
+      - filename: src/node.txt
+        keepRawCase: true
+        split: legacy
+    format: plaintext
+    targetDirectory: dist
