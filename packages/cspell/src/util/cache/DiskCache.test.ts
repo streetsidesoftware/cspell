@@ -20,8 +20,9 @@ jest.mock('file-entry-cache', () => ({
 
 const mockCreateFileEntryCache = jest.mocked(createFromFile);
 
-const mockReadFileInfo = jest.spyOn(fileHelper, 'readFileInfo');
 jest.mock('../../util/fileHelper', () => ({ readFileInfo: jest.fn() }));
+
+const mockReadFileInfo = jest.mocked(fileHelper.readFileInfo);
 
 const RESULT_NO_ISSUES: CachedFileResult = {
     processed: true,
