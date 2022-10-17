@@ -1,0 +1,46 @@
+{
+  "name": "@cspell/dict-companies",
+  "version": "3.0.0",
+  "private": true,
+  "description": "Company names dictionary for cspell.",
+  "publishConfig": {
+    "access": "public"
+  },
+  "exports": {
+    ".": "./cspell-ext.json",
+    "./cspell": "./cspell-ext.json",
+    "./cspell-ext.json": "./cspell-ext.json"
+  },
+  "scripts": {
+    "build": "cspell-tools-cli compile --no-compress --split \"src/companies.txt\" -o ./dict",
+    "test": "cat \"src/companies.txt\" | cspell -v -c ./cspell-ext.json --local=* --languageId=* stdin",
+    "prepublishOnly": "echo pre-publish",
+    "prepare": "yarn run build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/streetsidesoftware/cspell-dicts.git"
+  },
+  "keywords": [
+    "cspell",
+    "cspell-ext",
+    "companies",
+    "Company names",
+    "dictionary",
+    "spelling"
+  ],
+  "author": "Jason Dent",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/streetsidesoftware/cspell-dicts/issues"
+  },
+  "homepage": "https://github.com/streetsidesoftware/cspell-dicts/blob/main/dictionaries/companies#readme",
+  "devdependencies": {
+    "@cspell/cspell-tools": "workspace:*",
+    "cspell": "workspace:*"
+  },
+  "files": [
+    "companies.txt.gz",
+    "cspell-ext.json"
+  ]
+}
