@@ -29,7 +29,7 @@ export interface ParseDictionaryOptions {
     keepExactPrefix: string;
 
     /**
-     * Tell the parser to automatically create case / accents insensitive forms.
+     * Tell the parser to automatically create case / accent insensitive forms.
      * @default true
      */
     stripCaseAndAccents: boolean;
@@ -39,7 +39,20 @@ export interface ParseDictionaryOptions {
      * @default false
      */
     split: boolean;
+
+    /**
+     * When splitting tells the parser to output both the split and non-split versions of the line.
+     * @default false
+     */
+    splitKeepBoth: boolean;
+
+    /**
+     * Specify the separator for splitting words.
+     */
+    splitSeparator: RegExp | string;
 }
+
+const RegExpSplit = /(?<!\\)[\s,;]/g;
 
 const _defaultOptions: ParseDictionaryOptions = {
     commentCharacter: LINE_COMMENT,
@@ -50,6 +63,8 @@ const _defaultOptions: ParseDictionaryOptions = {
     keepExactPrefix: IDENTITY_PREFIX,
     stripCaseAndAccents: true,
     split: false,
+    splitKeepBoth: false,
+    splitSeparator: RegExpSplit,
 };
 
 export const defaultParseDictionaryOptions: ParseDictionaryOptions = Object.freeze(_defaultOptions);
@@ -73,11 +88,11 @@ export function createDictionaryLineParserMapper(options?: Partial<ParseDictiona
         caseInsensitivePrefix: ignoreCase = _defaultOptions.caseInsensitivePrefix,
         forbiddenPrefix: forbidden = _defaultOptions.forbiddenPrefix,
         keepExactPrefix: keepCase = _defaultOptions.keepExactPrefix,
+        splitSeparator = _defaultOptions.splitSeparator,
+        splitKeepBoth = _defaultOptions.splitKeepBoth,
     } = _options;
 
     let { stripCaseAndAccents = _defaultOptions.stripCaseAndAccents, split = _defaultOptions.split } = _options;
-
-    const regExpSplit = /(?<!\\)[\s,;]/g;
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     function isString(line: any | string): line is string {
@@ -179,9 +194,9 @@ export function createDictionaryLineParserMapper(options?: Partial<ParseDictiona
                     line.indexOf('"') >= 0
                         ? line.replace(/".*?"/g, (quoted) => ' ' + quoted.replace(/(\s)/g, '\\$1') + ' ')
                         : line;
-                const words = lineEscaped.split(regExpSplit);
+                const words = lineEscaped.split(splitSeparator);
                 yield* words.map((escaped) => escaped.replace(/\\(\s)/g, '$1'));
-                continue;
+                if (!splitKeepBoth) continue;
             }
             yield line;
         }

@@ -1,4 +1,4 @@
-import { parseDictionary, parseDictionaryLines } from './SimpleDictionaryParser';
+import { parseDictionary, parseDictionaryLines, ParseDictionaryOptions } from './SimpleDictionaryParser';
 
 describe('Validate SimpleDictionaryParser', () => {
     test('parsing lines', () => {
@@ -171,6 +171,18 @@ describe('Validate SimpleDictionaryParser', () => {
         expect(r).toEqual(expected);
     });
 
+    test.each`
+        lines              | options                                       | expected
+        ${'New York'}      | ${pdOp({})}                                   | ${s('New York|~new york')}
+        ${'New York'}      | ${pdOp({ split: true })}                      | ${s('New|~new|York|~york')}
+        ${'New,York'}      | ${pdOp({ split: true, splitSeparator: ',' })} | ${s('New|~new|York|~york')}
+        ${'New York Café'} | ${pdOp({ split: true })}                      | ${s('New|~new|York|~york|Café|~café|~cafe')}
+        ${'New York'}      | ${pdOp({ split: true, splitKeepBoth: true })} | ${s('New|~new|York|~york|New York|~new york')}
+    `('parseDictionaryLines $lines', ({ lines, options, expected }) => {
+        const r = [...parseDictionaryLines(lines, options)];
+        expect(r).toEqual(expected);
+    });
+
     // cspell:ignore érror
     test.each`
         lines               | expected
@@ -232,4 +244,12 @@ function dictionary3() {
 
     !codecode # Do not allow \`codecode\` or \`Codecode\` when using case insensitive matching.
         `;
+}
+
+function pdOp(...opts: Partial<ParseDictionaryOptions>[]): Partial<ParseDictionaryOptions> {
+    let opt: Partial<ParseDictionaryOptions> = {};
+    for (const p of opts) {
+        Object.assign(opt, p);
+    }
+    return opt;
 }
