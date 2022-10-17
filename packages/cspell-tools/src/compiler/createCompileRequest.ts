@@ -11,7 +11,7 @@ export function createCompileRequest(sources: string[], options: CompileCommonAp
         targets,
         experimental,
         maxDepth: parseNumber(maxDepth) ?? parseNumber(max_depth),
-        split: (useLegacySplitter ? 'legacy' : split) ?? 'legacy',
+        split: useLegacySplitter ? 'legacy' : split,
         /**
          * Do not generate lower case / accent free versions of words.
          * @default false
