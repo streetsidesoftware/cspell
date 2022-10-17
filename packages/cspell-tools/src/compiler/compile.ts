@@ -19,6 +19,7 @@ import { logWithTimestamp } from './logWithTimestamp';
 import { ReaderOptions } from './Reader';
 import { readTextFile } from './readTextFile';
 import { compileTrie, compileWordList } from './wordListCompiler';
+import { createSortAndFilterOperation } from './wordListParser';
 
 getSystemFeatureFlags().register('compound', 'Enable compound dictionary sources.');
 
@@ -57,10 +58,11 @@ export async function compileTarget(target: Target, options: CompileTargetOption
         opAwaitAsync()
     );
     const filesToProcess: FileToProcess[] = await toArray(filesToProcessAsync);
+    const filter = createSortAndFilterOperation({ sort: useTrie || sort });
 
     const action = useTrie
         ? async (words: Iterable<string>, dst: string) => {
-              return compileTrie(words, dst, {
+              return compileTrie(pipe(words, filter), dst, {
                   base: trieBase,
                   sort: false,
                   trie3: format === 'trie3',
@@ -68,8 +70,8 @@ export async function compileTarget(target: Target, options: CompileTargetOption
                   stripNonStrictPrefix: format === 'trie',
               });
           }
-        : async (src: Iterable<string>, dst: string) => {
-              return compileWordList(src, dst, { sort, stripNonStrictPrefix: false });
+        : async (words: Iterable<string>, dst: string) => {
+              return compileWordList(pipe(words, filter), dst, { sort, stripNonStrictPrefix: false });
           };
 
     await processFiles(action, filesToProcess, filename);
