@@ -1,11 +1,10 @@
-import * as FileEntryCacheModule from 'file-entry-cache';
+import { createFromFile } from 'file-entry-cache';
 import * as path from 'path';
 import * as fileHelper from '../../util/fileHelper';
 import { CachedFileResult, DiskCache, CSpellCacheMeta, __testing__ } from './DiskCache';
 
 const { calcVersion } = __testing__;
 
-const mockCreateFileEntryCache = jest.spyOn(FileEntryCacheModule, 'createFromFile');
 jest.mock('file-entry-cache', () => ({
     createFromFile: jest.fn().mockReturnValue({
         getFileDescriptor: jest.fn(),
@@ -19,8 +18,11 @@ jest.mock('file-entry-cache', () => ({
     }),
 }));
 
-const mockReadFileInfo = jest.spyOn(fileHelper, 'readFileInfo');
+const mockCreateFileEntryCache = jest.mocked(createFromFile);
+
 jest.mock('../../util/fileHelper', () => ({ readFileInfo: jest.fn() }));
+
+const mockReadFileInfo = jest.mocked(fileHelper.readFileInfo);
 
 const RESULT_NO_ISSUES: CachedFileResult = {
     processed: true,
