@@ -9,7 +9,7 @@ export function normalizeTargetWords(options: CompileOptions): Operator<string> 
     const operations: Operator<string>[] = [
         opFilter<string>((a) => !!a),
         lineParser,
-        options.sort ? createInlineBufferedSort() : undefined,
+        options.sort ? createInlineBufferedSort(10000) : undefined,
         opFilter<string>(uniqueFilter(10000)),
     ].filter(isDefined);
     return opCombine(...operations);
@@ -58,10 +58,10 @@ export interface ParseFileOptions {
      */
     splitKeepBoth?: boolean | undefined;
 
-    /**
-     * Specify the separator for splitting words.
-     */
-    splitSeparator?: RegExp | string | undefined;
+    // /**
+    //  * Specify the separator for splitting words.
+    //  */
+    // splitSeparator?: RegExp | string | undefined;
 
     /**
      * Use legacy splitting.
@@ -80,7 +80,7 @@ const _defaultOptions: ParseFileOptionsRequired = {
     legacy: false,
     split: false,
     splitKeepBoth: false,
-    splitSeparator: regExpSplit,
+    // splitSeparator: regExpSplit,
 };
 
 export const defaultParseDictionaryOptions: ParseFileOptionsRequired = Object.freeze(_defaultOptions);
@@ -97,7 +97,7 @@ export const setOfCSpellDirectiveFlags = ['no-split', 'split', 'keep-case', 'no-
  */
 export function createParseFileLineMapper(options?: Partial<ParseFileOptions>): Operator<string> {
     const _options = options || _defaultOptions;
-    const { splitSeparator = _defaultOptions.splitSeparator, splitKeepBoth = _defaultOptions.splitKeepBoth } = _options;
+    const { splitKeepBoth = _defaultOptions.splitKeepBoth } = _options;
 
     let { legacy = _defaultOptions.legacy } = _options;
 
@@ -153,6 +153,32 @@ export function createParseFileLineMapper(options?: Partial<ParseFileOptions>): 
         return !!line;
     }
 
+    const regNonWordOrDigit = /[^\p{L}\p{M}'\w-]+/giu;
+
+    function splitLine(line: string): string[] {
+        line = line.replace(/#.*/, ''); // remove comment
+        line = line.trim();
+        line = line.replace(/\bU\+[0-9A-F]+\b/gi, '|'); // Remove Unicode Definitions
+        line = line.replace(regNonWordOrDigit, '|');
+        line = line.replace(/'(?=\|)/g, ''); // remove trailing '
+        line = line.replace(/'$/, ''); // remove trailing '
+        line = line.replace(/(?<=\|)'/g, ''); // remove leading '
+        line = line.replace(/^'/, ''); // remove leading '
+        line = line.replace(/\s*\|\s*/g, '|'); // remove spaces around |
+        line = line.replace(/[|]+/g, '|'); // reduce repeated |
+        line = line.replace(/^\|/, ''); // remove leading |
+        line = line.replace(/\|$/, ''); // remove trailing |
+        const lines = line
+            .split('|')
+            .map((a) => a.trim())
+            .filter((a) => !!a)
+            .filter((a) => !a.match(/^[0-9_-]+$/)) // pure numbers and symbols
+            .filter((a) => !a.match(/^[ux][0-9A-F]*$/i)) // hex digits
+            .filter((a) => !a.match(/^0[xo][0-9A-F]*$/i)); // c-style hex/octal digits
+
+        return lines;
+    }
+
     function* splitWords(lines: Iterable<string>): Iterable<string> {
         for (const line of lines) {
             if (legacy) {
@@ -160,12 +186,7 @@ export function createParseFileLineMapper(options?: Partial<ParseFileOptions>): 
                 continue;
             }
             if (split) {
-                const lineEscaped =
-                    line.indexOf('"') >= 0
-                        ? line.replace(/".*?"/g, (quoted) => ' ' + quoted.replace(/(\s)/g, '\\$1') + ' ')
-                        : line;
-                const words = lineEscaped.split(splitSeparator);
-                yield* words.map((escaped) => escaped.replace(/\\(\s)/g, '$1'));
+                yield* splitLine(line);
                 if (!splitKeepBoth) continue;
             }
             yield line.replace(/["]/g, '');

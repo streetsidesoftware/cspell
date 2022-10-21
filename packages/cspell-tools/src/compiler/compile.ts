@@ -33,6 +33,8 @@ interface CompileOptions {
 export async function compile(request: CompileRequest, options?: CompileOptions): Promise<void> {
     const { targets } = request;
 
+    console.log('Request: %o', request);
+
     const rootDir = path.resolve(request.rootDir || '.');
 
     for (const target of targets) {
@@ -45,6 +47,8 @@ export async function compile(request: CompileRequest, options?: CompileOptions)
 
 export async function compileTarget(target: Target, options: SourceOptions, rootDir: string): Promise<void> {
     logWithTimestamp(`Start compile: ${target.name}`);
+
+    console.log('Target: %o', target);
 
     const { format, sources, trieBase, sort = true, generateNonStrict = true } = target;
     const targetDirectory = path.resolve(rootDir, target.targetDirectory ?? process.cwd());
