@@ -5,7 +5,7 @@ import * as path from 'path';
 import { CompileOptions } from './CompileOptions';
 import { writeSeqToFile } from './fileWriter';
 import { getLogger } from './logger';
-import { createSortAndFilterOperation } from './wordListParser';
+import { normalizeTargetWords } from './wordListParser';
 
 // Indicate that a word list has already been processed.
 const wordListHeader = `
@@ -18,7 +18,7 @@ export async function compileWordList(
     destFilename: string,
     options: CompileOptions
 ): Promise<void> {
-    const filter = createSortAndFilterOperation(options);
+    const filter = normalizeTargetWords(options);
 
     const finalSeq = pipe(wordListHeaderLines, opAppend(pipe(lines, filter)));
 

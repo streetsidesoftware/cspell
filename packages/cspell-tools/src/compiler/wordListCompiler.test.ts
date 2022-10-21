@@ -8,6 +8,7 @@ import { uniqueFilter } from 'hunspell-reader/dist/util';
 import * as path from 'path';
 import { spyOnConsole } from '../test/console';
 import { createTestHelper } from '../test/TestHelper';
+import { CompileOptions } from './CompileOptions';
 import { streamWordsFromFile } from './iterateWordsFromFile';
 import { legacyLineToWords } from './legacyLineToWords';
 import { setLogger } from './logger';
@@ -19,7 +20,7 @@ import {
     compileWordList as _compileWordList,
     __testing__,
 } from './wordListCompiler';
-import { createSortAndFilterOperation } from './wordListParser';
+import { normalizeTargetWords } from './wordListParser';
 
 const testHelper = createTestHelper(__filename);
 
@@ -32,14 +33,8 @@ const wordListHeader = __testing__.wordListHeader;
 const { consoleOutput } = spyOnConsole();
 setLogger(console.log);
 
-const readOptionsAdjustCase: ReaderOptions = {
+const readOptions: ReaderOptions = {
     splitWords: false,
-    generateNonStrictAlternatives: true,
-};
-
-const readOptionsKeepCase: ReaderOptions = {
-    splitWords: false,
-    generateNonStrictAlternatives: false,
 };
 
 describe('Validate the wordListCompiler', () => {
@@ -55,9 +50,9 @@ describe('Validate the wordListCompiler', () => {
         ${'cities.txt'}
         ${'cities.txt.gz'}
     `('reading and normalizing to text file: $destFile', async ({ destFile }) => {
-        const source = [...(await streamWordsFromFile(path.join(samples, 'cities.txt'), readOptionsKeepCase))];
+        const source = [...(await streamWordsFromFile(path.join(samples, 'cities.txt'), readOptions))];
         const destName = path.join(temp, destFile);
-        await compileWordList(source, destName, { sort: false, stripNonStrictPrefix: true });
+        await compileWordList(source, destName, compileOpt(false));
         const result = await readTextFile(destName);
         const expected = '\n# cspell-tools: keep-case no-split\n\n' + source.join('\n') + '\n';
         expect(result).toEqual(expected);
@@ -65,9 +60,9 @@ describe('Validate the wordListCompiler', () => {
     });
 
     test('compiling to a file without split', async () => {
-        const source = await streamWordsFromFile(path.join(samples, 'cities.txt'), readOptionsAdjustCase);
+        const source = await streamWordsFromFile(path.join(samples, 'cities.txt'), readOptions);
         const destName = path.join(temp, 'cities2.txt');
-        await compileWordList(source, destName, { sort: false, stripNonStrictPrefix: false });
+        await compileWordList(source, destName, compileOpt(false));
         const output = await fsp.readFile(destName, 'utf8');
         expect(output).toBe(
             wordListHeader +
@@ -97,9 +92,9 @@ describe('Validate the wordListCompiler', () => {
         ${'cities.trie'}
         ${'cities.trie.gz'}
     `('reading and normalizing to $destFile', async ({ destFile }) => {
-        const source = [...(await streamWordsFromFile(path.join(samples, 'cities.txt'), readOptionsKeepCase))];
+        const source = [...(await streamWordsFromFile(path.join(samples, 'cities.txt'), readOptions))];
         const destName = path.join(temp, destFile);
-        await compileTrie(source, destName, { sort: true, stripNonStrictPrefix: false });
+        await compileTrie(source, destName, compileOpt(true));
         const resultFile = await readTextFile(destName);
         const resultLines = resultFile.split('\n');
         const node = Trie.importTrie(resultLines);
@@ -110,11 +105,11 @@ describe('Validate the wordListCompiler', () => {
 
     test('a simple hunspell dictionary depth 0', async () => {
         const source = await streamWordsFromFile(path.join(samples, 'hunspell', 'example.dic'), {
-            ...readOptionsAdjustCase,
+            ...readOptions,
             maxDepth: 0,
         });
         const destName = path.join(temp, 'example0.txt');
-        await compileWordList(source, destName, { sort: false, stripNonStrictPrefix: true });
+        await compileWordList(source, destName, compileOpt(false));
         const output = await fsp.readFile(destName, 'utf8');
         expect(output).toBe(__testing__.wordListHeader + '\n' + 'hello\ntry\nwork\n');
         expect(consoleOutput()).toMatchSnapshot();
@@ -122,11 +117,11 @@ describe('Validate the wordListCompiler', () => {
 
     test('a simple hunspell dictionary depth 1', async () => {
         const source = await streamWordsFromFile(path.join(samples, 'hunspell/example.dic'), {
-            ...readOptionsKeepCase,
+            ...readOptions,
             maxDepth: 1,
         });
         const destName = path.join(temp, 'example1.txt');
-        await compileWordList(source, destName, { sort: false, stripNonStrictPrefix: true });
+        await compileWordList(source, destName, compileOpt(false));
         const output = await fsp.readFile(destName, 'utf8');
         expect(output.split('\n')).toEqual(
             `\
@@ -149,7 +144,7 @@ describe('Validate the wordListCompiler', () => {
 
 describe('Validate Larger Dictionary', () => {
     test('en_US hunspell', async () => {
-        const source = await streamWordsFromFile(sampleDictEnUS, readOptionsAdjustCase);
+        const source = await streamWordsFromFile(sampleDictEnUS, readOptions);
         const words = [...pipe(source, opTake(5000))];
         const trie = normalizeWordsToTrie(words);
         expect(isCircular(trie)).toBe(false);
@@ -159,7 +154,7 @@ describe('Validate Larger Dictionary', () => {
     }, 60000);
 
     test('en_US word list', async () => {
-        const source = await streamWordsFromFile(sampleDictEn, readOptionsAdjustCase);
+        const source = await streamWordsFromFile(sampleDictEn, readOptions);
         const words = [...source];
         const trie = Trie.consolidate(normalizeWordsToTrie(words));
         expect(isCircular(trie)).toBe(false);
@@ -174,7 +169,7 @@ describe('Validate Larger Dictionary', () => {
 });
 
 async function compileTrie(words: Iterable<string>, destFilename: string, options: CompileTrieOptions): Promise<void> {
-    const normalizer = createSortAndFilterOperation(options);
+    const normalizer = normalizeTargetWords(options);
     return _compileTrie(normalizer(words), destFilename, options);
 }
 
@@ -183,7 +178,7 @@ async function compileWordList(
     destFilename: string,
     options: CompileTrieOptions
 ): Promise<void> {
-    const normalizer = createSortAndFilterOperation(options);
+    const normalizer = normalizeTargetWords(options);
     return _compileWordList(normalizer(lines), destFilename, options);
 }
 
@@ -194,8 +189,12 @@ function normalizeWordsToTrie(words: Iterable<string>): Trie.TrieRoot {
 function legacyNormalizeWords(lines: Iterable<string>): Iterable<string> {
     return pipe(
         lines,
-        opConcatMap((line) => legacyLineToWords(line))
+        opConcatMap((line) => legacyLineToWords(line, true))
     );
+}
+
+function compileOpt(sort: boolean, generateNonStrict = true): CompileOptions {
+    return { sort, generateNonStrict };
 }
 
 // const cities = `\

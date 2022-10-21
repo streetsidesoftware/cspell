@@ -27,7 +27,7 @@ describe('Validate legacyLineToWords', () => {
         ${'kDNSServiceErr_BadSig'}                                     | ${['k', 'dns', 'service', 'err', 'bad', 'sig']}
         ${'apd_get_active_symbols'}                                    | ${['apd', 'get', 'active', 'symbols']}
     `('legacy splitting lines $line', ({ line, expectedResult }: { line: string; expectedResult: string[] }) => {
-        expect([...pipe(legacyLineToWords(line), opFilter(distinct()))]).toEqual(expectedResult);
+        expect([...pipe(legacyLineToWords(line, false), opFilter(distinct()))]).toEqual(expectedResult);
     });
 });
 

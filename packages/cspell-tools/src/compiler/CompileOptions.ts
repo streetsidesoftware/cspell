@@ -1,8 +1,12 @@
 export interface CompileOptions {
-    sort: boolean;
     /**
-     * true - do not include the case insensitive version.
-     * @default false
+     * Sort the words in the resulting dictionary.
+     * Does not apply to `trie` based formats.
      */
-    stripNonStrictPrefix?: boolean;
+    sort: boolean;
+
+    /**
+     * Generate lower case / accent free versions of words.
+     */
+    generateNonStrict: boolean;
 }

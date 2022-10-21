@@ -5,7 +5,7 @@ const regNonWord = /[^\p{L}\p{M}' ]+/giu;
 const regExpSpaceOrDash = /[- ]+/g;
 const regExpRepeatChars = /(.)\1{4,}/i;
 
-export function legacyLineToWords(line: string): Iterable<string> {
+export function legacyLineToWords(line: string, keepCase: boolean): Iterable<string> {
     // Remove punctuation and non-letters.
     const filteredLine = line.replace(regNonWord, '|');
     const wordGroups = filteredLine.split('|');
@@ -17,15 +17,15 @@ export function legacyLineToWords(line: string): Iterable<string> {
         opMap((a) => a.trim()),
         opFilter((a) => !!a),
         opFilter((s) => !regExpRepeatChars.test(s)),
-        opMap((a) => a.toLowerCase())
+        opMap((a) => (keepCase ? a : a.toLowerCase()))
     );
 
     return words;
 }
 
-export function* legacyLinesToWords(lines: Iterable<string>): Iterable<string> {
+export function* legacyLinesToWords(lines: Iterable<string>, keepCase = false): Iterable<string> {
     for (const line of lines) {
-        yield* legacyLineToWords(line);
+        yield* legacyLineToWords(line, keepCase);
     }
 }
 

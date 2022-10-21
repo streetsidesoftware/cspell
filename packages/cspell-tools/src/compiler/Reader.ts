@@ -1,16 +1,9 @@
 import { pipe } from '@cspell/cspell-pipe/sync';
-import {
-    CASE_INSENSITIVE_PREFIX,
-    COMPOUND_FIX,
-    createDictionaryLineParser,
-    FORBID_PREFIX,
-    importTrie,
-    Trie,
-} from 'cspell-trie-lib';
+import { CASE_INSENSITIVE_PREFIX, COMPOUND_FIX, FORBID_PREFIX, importTrie, Trie } from 'cspell-trie-lib';
 import * as HR from 'hunspell-reader';
 import { AffWord } from 'hunspell-reader';
-import { legacyLinesToWords } from './legacyLineToWords';
-import { readTextFileLines } from './readTextFile';
+import { readTextFile, readTextFileLines } from './readTextFile';
+import { parseFileLines } from './wordListParser';
 
 const regHunspellFile = /\.(dic|aff)$/i;
 
@@ -24,15 +17,13 @@ export interface ReaderOptions {
      */
     splitWords: boolean;
     /**
-     * Generate a case insensitive version.
-     */
-    generateNonStrictAlternatives: boolean;
-    /**
      * Indicate that it is an unformatted file and needs to be cleaned
      * before processing. Applies only to text file sources.
      * @default false
      */
     legacy?: boolean;
+
+    keepCase?: boolean;
 }
 
 type ReaderFn = (filename: string, options: ReaderOptions) => Promise<BaseReader>;
@@ -83,8 +74,7 @@ export async function readHunspellFiles(filename: string, options: ReaderOptions
     const reader = await HR.IterableHunspellReader.createFromFiles(affFile, dicFile);
     reader.maxDepth = options.maxDepth !== undefined ? options.maxDepth : reader.maxDepth;
 
-    const normalizeAndDedupe = opCompose(_stripCaseAndAccents, dedupeAndSort);
-    const words = pipe(reader.seqAffWords(), _mapAffWords, normalizeAndDedupe);
+    const words = pipe(reader.seqAffWords(), _mapAffWords, dedupeAndSort);
 
     return {
         size: reader.dic.length,
@@ -105,47 +95,43 @@ async function trieFileReader(filename: string): Promise<BaseReader> {
 }
 
 async function textFileReader(filename: string, options: ReaderOptions): Promise<BaseReader> {
-    const lines = await readTextFileLines(filename);
-    const { splitWords: split, generateNonStrictAlternatives: stripCaseAndAccents } = options;
-
-    const normalizeLines = createDictionaryLineParser({ stripCaseAndAccents, split });
-    const parseLines = options.legacy ? opCompose(legacyLinesToWords, normalizeLines) : normalizeLines;
-    const words = pipe(lines, parseLines, dedupeAndSort);
+    const content = await readTextFile(filename);
+    const words = [...parseFileLines(content, { legacy: options.legacy, split: options.splitWords })];
 
     return {
-        size: lines.length,
+        size: words.length,
         words,
     };
 }
 
-function* _stripCaseAndAccents(words: Iterable<AnnotatedWord>): Iterable<AnnotatedWord> {
-    for (const word of words) {
-        // Words are normalized to the compact format: e + ` => è
-        yield word.normalize();
-        // covert to lower case and strip accents.
-        const n = word.toLowerCase().normalize('NFD').replace(/\p{M}/gu, '');
-        // All words are added for case-insensitive searches.
-        // It is a space / speed trade-off. In this case, speed is more important.
-        yield CASE_INSENSITIVE_PREFIX + n;
-    }
-}
+// function* _stripCaseAndAccents(words: Iterable<AnnotatedWord>): Iterable<AnnotatedWord> {
+//     for (const word of words) {
+//         // Words are normalized to the compact format: e + ` => è
+//         yield word.normalize();
+//         // covert to lower case and strip accents.
+//         const n = word.toLowerCase().normalize('NFD').replace(/\p{M}/gu, '');
+//         // All words are added for case-insensitive searches.
+//         // It is a space / speed trade-off. In this case, speed is more important.
+//         yield CASE_INSENSITIVE_PREFIX + n;
+//     }
+// }
 
 function* dedupeAndSort(words: Iterable<AnnotatedWord>): Iterable<AnnotatedWord> {
-    const buffer: AnnotatedWord[] = [];
+    const buffer = new Set<string>();
 
-    function sortDedupeClear() {
-        const s = new Set(buffer.sort());
-        buffer.length = 0;
-        return s;
+    function flush() {
+        const result = [...buffer].sort();
+        buffer.clear();
+        return result;
     }
 
     for (const word of words) {
-        buffer.push(word);
-        if (buffer.length >= DEDUPE_SIZE) {
-            yield* sortDedupeClear();
+        buffer.add(word);
+        if (buffer.size >= DEDUPE_SIZE) {
+            yield* flush();
         }
     }
-    yield* sortDedupeClear();
+    yield* flush();
 }
 
 function* _mapAffWords(affWords: Iterable<AffWord>): Iterable<AnnotatedWord> {
@@ -166,16 +152,3 @@ function* _mapAffWords(affWords: Iterable<AffWord>): Iterable<AnnotatedWord> {
         }
     }
 }
-
-function opCompose<T>(...ops: ((i: Iterable<T>) => Iterable<T>)[]): (i: Iterable<T>) => Iterable<T> {
-    return (i: Iterable<T>) => {
-        for (const op of ops) {
-            i = op(i);
-        }
-        return i;
-    };
-}
-
-export const __testing__ = {
-    _stripCaseAndAccents,
-};

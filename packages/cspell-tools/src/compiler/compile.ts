@@ -4,13 +4,13 @@ import { opConcatMap, opMap, pipe } from '@cspell/cspell-pipe/sync';
 import * as path from 'path';
 import {
     CompileRequest,
-    CompileTargetOptions,
     DictionarySource,
     FilePath,
     FileSource,
     isFileListSource,
     isFilePath,
     isFileSource,
+    SourceOptions,
     Target,
 } from '../config';
 import { getSystemFeatureFlags } from '../FeatureFlags';
@@ -19,7 +19,7 @@ import { logWithTimestamp } from './logWithTimestamp';
 import { ReaderOptions } from './Reader';
 import { readTextFile } from './readTextFile';
 import { compileTrie, compileWordList } from './wordListCompiler';
-import { createSortAndFilterOperation } from './wordListParser';
+import { normalizeTargetWords } from './wordListParser';
 
 getSystemFeatureFlags().register('compound', 'Enable compound dictionary sources.');
 
@@ -43,7 +43,7 @@ export async function compile(request: CompileRequest, options?: CompileOptions)
     logWithTimestamp(`Complete.`);
 }
 
-export async function compileTarget(target: Target, options: CompileTargetOptions, rootDir: string): Promise<void> {
+export async function compileTarget(target: Target, options: SourceOptions, rootDir: string): Promise<void> {
     logWithTimestamp(`Start compile: ${target.name}`);
 
     const { format, sources, trieBase, sort = true } = target;
@@ -58,20 +58,20 @@ export async function compileTarget(target: Target, options: CompileTargetOption
         opAwaitAsync()
     );
     const filesToProcess: FileToProcess[] = await toArray(filesToProcessAsync);
-    const filter = createSortAndFilterOperation({ sort: useTrie || sort });
+    const normalizer = normalizeTargetWords({ sort: useTrie || sort, generateNonStrict: false });
 
     const action = useTrie
         ? async (words: Iterable<string>, dst: string) => {
-              return compileTrie(pipe(words, filter), dst, {
+              return compileTrie(pipe(words, normalizer), dst, {
                   base: trieBase,
                   sort: false,
                   trie3: format === 'trie3',
                   trie4: format === 'trie4',
-                  stripNonStrictPrefix: format === 'trie',
+                  generateNonStrict: format === 'trie',
               });
           }
         : async (words: Iterable<string>, dst: string) => {
-              return compileWordList(pipe(words, filter), dst, { sort, stripNonStrictPrefix: false });
+              return compileWordList(pipe(words, normalizer), dst, { sort, generateNonStrict: false });
           };
 
     await processFiles(action, filesToProcess, filename);
@@ -150,11 +150,11 @@ async function readFileList(fileList: FilePath): Promise<string[]> {
         .filter((a) => !!a);
 }
 
-async function readFileSource(fileSource: FileSource, targetOptions: CompileTargetOptions): Promise<FileToProcess> {
+async function readFileSource(fileSource: FileSource, sourceOptions: SourceOptions): Promise<FileToProcess> {
     const {
         filename,
-        keepRawCase = targetOptions.keepRawCase || false,
-        split = targetOptions.split || false,
+        keepRawCase = sourceOptions.keepRawCase || false,
+        split = sourceOptions.split || false,
         maxDepth,
     } = fileSource;
 
@@ -163,7 +163,7 @@ async function readFileSource(fileSource: FileSource, targetOptions: CompileTarg
 
     // console.warn('fileSource: %o,\n targetOptions %o, \n opt: %o', fileSource, targetOptions, opt);
 
-    const readerOptions: ReaderOptions = { maxDepth, legacy, splitWords, generateNonStrictAlternatives: !keepRawCase };
+    const readerOptions: ReaderOptions = { maxDepth, legacy, splitWords };
 
     logWithTimestamp(`Reading ${path.basename(filename)}`);
     const stream = await streamWordsFromFile(filename, readerOptions);
