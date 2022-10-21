@@ -8,9 +8,7 @@ describe('Validate the iterateWordsFromFile', () => {
         const reader = await streamWordsFromFile(path.join(samples, 'hunspell/example.aff'), { splitWords: false });
         const results = [...reader];
         // this might break if the processing order of hunspell changes.
-        expect(results.join(' ')).toBe(
-            'hello rework reworked tried try work worked ~hello ~rework ~reworked ~tried ~try ~work ~worked'
-        );
+        expect(results.join(' ')).toBe('hello rework reworked tried try work worked');
     });
 
     test('stream words from trie', async () => {

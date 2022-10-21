@@ -52,7 +52,7 @@ describe('Validate the wordListCompiler', () => {
     `('reading and normalizing to text file: $destFile', async ({ destFile }) => {
         const source = [...(await streamWordsFromFile(path.join(samples, 'cities.txt'), readOptions))];
         const destName = path.join(temp, destFile);
-        await compileWordList(source, destName, compileOpt(false));
+        await compileWordList(source, destName, compileOpt(false, false));
         const result = await readTextFile(destName);
         const expected = '\n# cspell-tools: keep-case no-split\n\n' + source.join('\n') + '\n';
         expect(result).toEqual(expected);
@@ -62,7 +62,7 @@ describe('Validate the wordListCompiler', () => {
     test('compiling to a file without split', async () => {
         const source = await streamWordsFromFile(path.join(samples, 'cities.txt'), readOptions);
         const destName = path.join(temp, 'cities2.txt');
-        await compileWordList(source, destName, compileOpt(false));
+        await compileWordList(source, destName, compileOpt(true));
         const output = await fsp.readFile(destName, 'utf8');
         expect(output).toBe(
             wordListHeader +
@@ -98,7 +98,7 @@ describe('Validate the wordListCompiler', () => {
         const resultFile = await readTextFile(destName);
         const resultLines = resultFile.split('\n');
         const node = Trie.importTrie(resultLines);
-        const words = [...Trie.iteratorTrieWords(node)].sort();
+        const words = [...Trie.iteratorTrieWords(node)].filter((a) => !a.startsWith('~')).sort();
         expect(words).toEqual(source.concat().sort());
         expect(consoleOutput()).toMatchSnapshot();
     });

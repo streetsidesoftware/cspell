@@ -46,7 +46,7 @@ export async function compile(request: CompileRequest, options?: CompileOptions)
 export async function compileTarget(target: Target, options: SourceOptions, rootDir: string): Promise<void> {
     logWithTimestamp(`Start compile: ${target.name}`);
 
-    const { format, sources, trieBase, sort = true } = target;
+    const { format, sources, trieBase, sort = true, generateNonStrict = true } = target;
     const targetDirectory = path.resolve(rootDir, target.targetDirectory ?? process.cwd());
 
     const useTrie = format.startsWith('trie');
@@ -58,7 +58,7 @@ export async function compileTarget(target: Target, options: SourceOptions, root
         opAwaitAsync()
     );
     const filesToProcess: FileToProcess[] = await toArray(filesToProcessAsync);
-    const normalizer = normalizeTargetWords({ sort: useTrie || sort, generateNonStrict: false });
+    const normalizer = normalizeTargetWords({ sort: useTrie || sort, generateNonStrict });
 
     const action = useTrie
         ? async (words: Iterable<string>, dst: string) => {
@@ -71,7 +71,7 @@ export async function compileTarget(target: Target, options: SourceOptions, root
               });
           }
         : async (words: Iterable<string>, dst: string) => {
-              return compileWordList(pipe(words, normalizer), dst, { sort, generateNonStrict: false });
+              return compileWordList(pipe(words, normalizer), dst, { sort, generateNonStrict });
           };
 
     await processFiles(action, filesToProcess, filename);
