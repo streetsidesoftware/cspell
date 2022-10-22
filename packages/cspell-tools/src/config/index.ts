@@ -1,5 +1,6 @@
 export type {
     CompileRequest,
+    CompileSourceOptions,
     CompileTargetOptions,
     DictionaryFormats,
     DictionarySource,
@@ -7,7 +8,6 @@ export type {
     FilePath,
     FileSource,
     RunConfig,
-    CompileSourceOptions as SourceOptions,
     Target,
 } from './config';
 export { isFileListSource, isFilePath, isFileSource } from './configUtils';
