@@ -1,5 +1,5 @@
 import { pipe } from '@cspell/cspell-pipe/sync';
-import { CASE_INSENSITIVE_PREFIX, COMPOUND_FIX, FORBID_PREFIX, importTrie, Trie } from 'cspell-trie-lib';
+import { COMPOUND_FIX, FORBID_PREFIX, importTrie, Trie } from 'cspell-trie-lib';
 import * as HR from 'hunspell-reader';
 import { AffWord } from 'hunspell-reader';
 import { readTextFile, readTextFileLines } from './readTextFile';

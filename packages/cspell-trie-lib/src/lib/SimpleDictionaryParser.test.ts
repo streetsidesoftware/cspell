@@ -247,7 +247,7 @@ function dictionary3() {
 }
 
 function pdOp(...opts: Partial<ParseDictionaryOptions>[]): Partial<ParseDictionaryOptions> {
-    let opt: Partial<ParseDictionaryOptions> = {};
+    const opt: Partial<ParseDictionaryOptions> = {};
     for (const p of opts) {
         Object.assign(opt, p);
     }

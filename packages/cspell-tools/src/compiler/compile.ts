@@ -167,7 +167,7 @@ async function readFileSource(fileSource: FileSource, sourceOptions: SourceOptio
 
     // console.warn('fileSource: %o,\n targetOptions %o, \n opt: %o', fileSource, targetOptions, opt);
 
-    const readerOptions: ReaderOptions = { maxDepth, legacy, splitWords };
+    const readerOptions: ReaderOptions = { maxDepth, legacy, splitWords, keepCase: keepRawCase };
 
     logWithTimestamp(`Reading ${path.basename(filename)}`);
     const stream = await streamWordsFromFile(filename, readerOptions);

@@ -1,8 +1,8 @@
 import { opCombine, opCombine as opPipe, opFilter, opMap, type Operator } from '@cspell/cspell-pipe/sync';
+import { createDictionaryLineParser } from 'cspell-trie-lib';
 import { uniqueFilter } from 'hunspell-reader/dist/util';
 import { CompileOptions } from './CompileOptions';
 import { legacyLineToWords } from './legacyLineToWords';
-import { createDictionaryLineParser } from 'cspell-trie-lib';
 
 export function normalizeTargetWords(options: CompileOptions): Operator<string> {
     const lineParser = createDictionaryLineParser({ stripCaseAndAccents: options.generateNonStrict });
@@ -73,7 +73,6 @@ export interface ParseFileOptions {
 type ParseFileOptionsRequired = Required<ParseFileOptions>;
 
 const commentCharacter = '#';
-const regExpSplit = /(?<!\\)[^\p{L}\p{M}'\w-]/giu;
 
 const _defaultOptions: ParseFileOptionsRequired = {
     keepCase: true,
