@@ -6,10 +6,11 @@ export function createCompileRequest(sources: string[], options: CompileCommonAp
     const { max_depth, maxDepth, experimental = [], split, keepRawCase, useLegacySplitter } = options;
 
     const targets = calcTargets(sources, options);
+    const generateNonStrict = experimental.includes('compounds') || undefined;
 
     const req: CompileRequest = {
         targets,
-        experimental,
+        generateNonStrict,
         maxDepth: parseNumber(maxDepth) ?? parseNumber(max_depth),
         split: useLegacySplitter ? 'legacy' : split,
         /**

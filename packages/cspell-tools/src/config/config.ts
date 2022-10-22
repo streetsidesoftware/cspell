@@ -11,7 +11,7 @@ export interface RunConfig extends Partial<CompileRequest> {
     rootDir?: string;
 }
 
-export interface CompileRequest extends CompileTargetOptions, CompileSourceOptions, Experimental {
+export interface CompileRequest extends CompileTargetOptions, CompileSourceOptions {
     /**
      * Specify the directory where all relative paths will resolved against.
      * By default, all relative paths are relative to the current directory.
@@ -24,7 +24,7 @@ export interface CompileRequest extends CompileTargetOptions, CompileSourceOptio
     targets: Target[];
 }
 
-interface Experimental {
+export interface Experimental {
     /**
      * Experimental flags
      */

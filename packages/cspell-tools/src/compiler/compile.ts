@@ -4,6 +4,7 @@ import { opConcatMap, opMap, pipe } from '@cspell/cspell-pipe/sync';
 import * as path from 'path';
 import {
     CompileRequest,
+    CompileTargetOptions,
     DictionarySource,
     FilePath,
     FileSource,
@@ -13,15 +14,12 @@ import {
     SourceOptions,
     Target,
 } from '../config';
-import { getSystemFeatureFlags } from '../FeatureFlags';
 import { streamWordsFromFile } from './iterateWordsFromFile';
 import { logWithTimestamp } from './logWithTimestamp';
 import { ReaderOptions } from './Reader';
 import { readTextFile } from './readTextFile';
 import { compileTrie, compileWordList } from './wordListCompiler';
 import { normalizeTargetWords } from './wordListParser';
-
-getSystemFeatureFlags().register('compound', 'Enable compound dictionary sources.');
 
 interface CompileOptions {
     /**
@@ -36,11 +34,16 @@ export async function compile(request: CompileRequest, options?: CompileOptions)
     // console.log('Request: %o', request);
 
     const rootDir = path.resolve(request.rootDir || '.');
+    const targetOptions: CompileTargetOptions = {
+        sort: request.sort,
+        generateNonStrict: request.generateNonStrict,
+    };
 
     for (const target of targets) {
         const keep = options?.filter?.(target) ?? true;
         if (!keep) continue;
-        await compileTarget(target, request, rootDir);
+        const adjustedTarget: Target = { ...targetOptions, ...target };
+        await compileTarget(adjustedTarget, request, rootDir);
     }
     logWithTimestamp(`Complete.`);
 }
@@ -50,8 +53,9 @@ export async function compileTarget(target: Target, options: SourceOptions, root
 
     // console.log('Target: %o', target);
 
-    const { format, sources, trieBase, sort = true, generateNonStrict = true } = target;
+    const { format, sources, trieBase, sort = true, generateNonStrict = false } = target;
     const targetDirectory = path.resolve(rootDir, target.targetDirectory ?? process.cwd());
+    const generateNonStrictTrie = target.generateNonStrict ?? true;
 
     const name = normalizeTargetName(target.name);
 
@@ -73,7 +77,7 @@ export async function compileTarget(target: Target, options: SourceOptions, root
                   sort: false,
                   trie3: format === 'trie3',
                   trie4: format === 'trie4',
-                  generateNonStrict: format === 'trie',
+                  generateNonStrict: generateNonStrictTrie,
               });
           }
         : async (words: Iterable<string>, dst: string) => {
@@ -182,5 +186,5 @@ async function readFileSource(fileSource: FileSource, sourceOptions: SourceOptio
 }
 
 function normalizeTargetName(name: string) {
-    return name.replace(/((\.txt|\.dic|\.aff|\.trie)(\.gz)?)?$/, '').replace(/[^\p{L}\p{M}.\w-]/gu, '_');
+    return name.replace(/((\.txt|\.dic|\.aff|\.trie)(\.gz)?)?$/, '').replace(/[^\p{L}\p{M}.\w\\/-]/gu, '_');
 }
