@@ -25,24 +25,37 @@ describe('compile', () => {
     });
 
     test.each`
-        format         | compress
-        ${'plaintext'} | ${false}
-        ${'plaintext'} | ${true}
-    `('compile', async ({ format, compress }) => {
-        const target: Target = {
-            name: 'myDictionary',
-            targetDirectory: '.',
-            format,
-            sources: [sample('cities.txt')],
-            compress,
-        };
-        const req: CompileRequest = {
-            targets: [target],
-        };
+        file                   | format         | compress | generateNonStrict
+        ${'cities.txt'}        | ${'plaintext'} | ${false} | ${true}
+        ${'cities.txt'}        | ${'plaintext'} | ${true}  | ${true}
+        ${'cities.txt'}        | ${'plaintext'} | ${false} | ${undefined}
+        ${'cities.txt'}        | ${'plaintext'} | ${true}  | ${undefined}
+        ${'cities.txt'}        | ${'trie3'}     | ${false} | ${undefined}
+        ${'sampleCodeDic.txt'} | ${'plaintext'} | ${false} | ${undefined}
+        ${'sampleCodeDic.txt'} | ${'plaintext'} | ${false} | ${true}
+    `(
+        'compile $file fmt: $format gz: $compress alt: $generateNonStrict',
+        async ({ format, file, generateNonStrict, compress }) => {
+            const targetDirectory = `.`;
+            const target: Target = {
+                name: 'myDictionary',
+                targetDirectory,
+                format,
+                sources: [sample(file)],
+                compress,
+                generateNonStrict,
+                trieBase: 10,
+                sort: true,
+            };
+            const req: CompileRequest = {
+                targets: [target],
+            };
 
-        await compile(req);
+            await compile(req);
 
-        const content = await readTextFile('myDictionary.txt');
-        expect(content).toMatchSnapshot();
-    });
+            const ext = (format === 'plaintext' ? '.txt' : '.trie') + ((compress && '.gz') || '');
+            const content = await readTextFile(`${targetDirectory}/myDictionary${ext}`);
+            expect(content).toMatchSnapshot();
+        }
+    );
 });

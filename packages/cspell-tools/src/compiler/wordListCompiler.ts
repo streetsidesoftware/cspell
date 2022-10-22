@@ -5,6 +5,7 @@ import * as path from 'path';
 import { CompileOptions } from './CompileOptions';
 import { writeSeqToFile } from './fileWriter';
 import { getLogger } from './logger';
+import { normalizeTargetWords } from './wordListParser';
 
 // Indicate that a word list has already been processed.
 const wordListHeader = `
@@ -17,7 +18,9 @@ export async function compileWordList(
     destFilename: string,
     options: CompileOptions
 ): Promise<void> {
-    const finalSeq = pipe(wordListHeaderLines, opAppend(options.sort ? sort(lines) : lines));
+    const filter = normalizeTargetWords(options);
+
+    const finalSeq = pipe(wordListHeaderLines, opAppend(pipe(lines, filter)));
 
     return createWordListTarget(destFilename)(finalSeq);
 }
@@ -42,9 +45,9 @@ function createTarget(destFilename: string): (seq: Iterable<string>) => Promise<
     };
 }
 
-function sort(words: Iterable<string>): Iterable<string> {
-    return [...words].sort();
-}
+// function sort(words: Iterable<string>): Iterable<string> {
+//     return [...words].sort();
+// }
 
 export interface TrieOptions {
     base?: number;

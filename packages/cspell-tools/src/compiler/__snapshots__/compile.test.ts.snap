@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`compile compile 1`] = `
+exports[`compile compile cities.txt fmt: plaintext gz: false alt: true 1`] = `
 "
 # cspell-tools: keep-case no-split
 
@@ -23,7 +23,22 @@ San Francisco
 "
 `;
 
-exports[`compile compile 2`] = `
+exports[`compile compile cities.txt fmt: plaintext gz: false alt: undefined 1`] = `
+"
+# cspell-tools: keep-case no-split
+
+London
+Los Angeles
+Mexico City
+New Amsterdam
+New Delhi
+New York
+Paris
+San Francisco
+"
+`;
+
+exports[`compile compile cities.txt fmt: plaintext gz: true alt: true 1`] = `
 "
 # cspell-tools: keep-case no-split
 
@@ -43,5 +58,95 @@ San Francisco
 ~new york
 ~paris
 ~san francisco
+"
+`;
+
+exports[`compile compile cities.txt fmt: plaintext gz: true alt: undefined 1`] = `
+"
+# cspell-tools: keep-case no-split
+
+London
+Los Angeles
+Mexico City
+New Amsterdam
+New Delhi
+New York
+Paris
+San Francisco
+"
+`;
+
+exports[`compile compile cities.txt fmt: trie3 gz: false alt: undefined 1`] = `
+"#!/usr/bin/env cspell-trie reader
+TrieXv3
+base=10
+# Built by cspell-tools.
+# Data:
+__DATA__
+L
+o
+ndon$4s Angeles$9<2
+M
+e
+xico City$9<2
+N
+e
+w Amsterdam$9Delhi$5York$8
+P
+a
+ri#13;<4
+S
+a
+n Francisco$9<4
+"
+`;
+
+exports[`compile compile sampleCodeDic.txt fmt: plaintext gz: false alt: true 1`] = `
+"
+# cspell-tools: keep-case no-split
+
+!Codemsg
+!Errorerror
+!codecode
+!err
++code
++code+
++error
++error+
++msg
+Café
+Code
+Code+
+Error
+Error+
+msg
+~cafe
+~café
+~code
+~code+
+~error
+~error+
+"
+`;
+
+exports[`compile compile sampleCodeDic.txt fmt: plaintext gz: false alt: undefined 1`] = `
+"
+# cspell-tools: keep-case no-split
+
+!Codemsg
+!Errorerror
+!codecode
+!err
++code
++code+
++error
++error+
++msg
+Café
+Code
+Code+
+Error
+Error+
+msg
 "
 `;

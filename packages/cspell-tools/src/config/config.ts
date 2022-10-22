@@ -1,9 +1,8 @@
-export interface RunConfig extends CompileTargetOptions {
+export interface RunConfig extends Partial<CompileRequest> {
     /**
      * Optional Target Dictionaries to create.
      */
     targets?: Target[];
-
     /**
      * Specify the directory where all relative paths will resolved against.
      * By default, all relative paths are relative to the location of the
@@ -12,7 +11,7 @@ export interface RunConfig extends CompileTargetOptions {
     rootDir?: string;
 }
 
-export interface CompileRequest extends CompileTargetOptions {
+export interface CompileRequest extends CompileTargetOptions, CompileSourceOptions {
     /**
      * Specify the directory where all relative paths will resolved against.
      * By default, all relative paths are relative to the current directory.
@@ -25,31 +24,29 @@ export interface CompileRequest extends CompileTargetOptions {
     targets: Target[];
 }
 
-export interface CompileTargetOptions {
+export interface Experimental {
     /**
      * Experimental flags
      */
     experimental?: string[] | undefined;
-
-    // Optional Source Config Defaults
-    /**
-     * Maximum number of nested Hunspell Rules to apply.
-     * This is needed for recursive dictionaries like Hebrew.
-     */
-    maxDepth?: number | undefined;
-    /**
-     * Split lines into words.
-     * @default false
-     */
-    split?: boolean | 'legacy' | undefined;
-    /**
-     * Do not generate lower case / accent free versions of words.
-     * @default false
-     */
-    keepRawCase?: boolean | undefined;
 }
 
-export interface Target {
+export interface CompileTargetOptions {
+    /**
+     * Generate lower case / accent free versions of words.
+     * @default true
+     */
+    generateNonStrict?: boolean | undefined;
+
+    /**
+     * Sort the words in the resulting dictionary.
+     * Does not apply to `trie` based formats.
+     * @default: true
+     */
+    sort?: boolean | undefined;
+}
+
+export interface Target extends CompileTargetOptions {
     /**
      * Name of target, used as the basis of target file name.
      */
@@ -78,13 +75,6 @@ export interface Target {
     sources: DictionarySource[];
 
     /**
-     * Sort the words in the resulting dictionary.
-     * Does not apply to `trie` based formats.
-     * @default: true
-     */
-    sort?: boolean | undefined;
-
-    /**
      * Words from the sources that are found in `excludeWordsFrom` files
      * will not be added to the dictionary.
      */
@@ -109,15 +99,15 @@ export type FilePath = string;
 
 export type DictionarySource = FilePath | FileSource | FileListSource;
 
-export interface FileSource extends SourceConfig {
+export interface FileSource extends CompileSourceOptions {
     filename: FilePath;
 }
 
-export interface FileListSource extends SourceConfig {
+export interface FileListSource extends CompileSourceOptions {
     listFile: FilePath;
 }
 
-export interface SourceConfig {
+export interface CompileSourceOptions {
     /**
      * Maximum number of nested Hunspell Rules to apply.
      * This is needed for recursive dictionaries like Hebrew.

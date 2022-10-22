@@ -1,4 +1,4 @@
-import { parseDictionary, parseDictionaryLines } from './SimpleDictionaryParser';
+import { parseDictionary, parseDictionaryLines, ParseDictionaryOptions } from './SimpleDictionaryParser';
 
 describe('Validate SimpleDictionaryParser', () => {
     test('parsing lines', () => {
@@ -156,6 +156,33 @@ describe('Validate SimpleDictionaryParser', () => {
         expect(r).toEqual(expected);
     });
 
+    test.each`
+        lines                                                                              | options                           | expected
+        ${dictionary()}                                                                    | ${{}}                             | ${s('Begin|~begin|Begin+|~begin+|End|~end|+End|~+end|+Middle+|~+middle+|Café|~café|~cafe|!forbid')}
+        ${s('# cspell-dictionary: no-generate-alternatives split|Apple|Arizona|New York')} | ${{}}                             | ${s('Apple|Arizona|New|York')}
+        ${s('# cspell-dictionary: split|Apple|Arizona|New York')}                          | ${{}}                             | ${s('Apple|~apple|Arizona|~arizona|New|~new|York|~york')}
+        ${s('# cspell-dictionary: no-split|Apple|Arizona|New York')}                       | ${{ stripCaseAndAccents: false }} | ${s('Apple|Arizona|New York')}
+        ${s('# cspell-dictionary: generate-alternatives|Apple|Arizona|New York')}          | ${{ stripCaseAndAccents: false }} | ${s('Apple|~apple|Arizona|~arizona|New York|~new york')}
+        ${s('Apple| # cspell-dictionary: no-generate-alternatives|Arizona|New York')}      | ${{}}                             | ${s('Apple|~apple|Arizona|New York')}
+        ${dictionary3()}                                                                   | ${{}}                             | ${s('Error|~error|Error+|~error+|+error|+error+|Code|~code|Code+|~code+|+code|+code+|msg|+msg|!err|!Errorerror|!Codemsg|Café|~café|~cafe|!codecode')}
+        ${s('# cspell-dictionary: split|"New York"|Tower of London')}                      | ${{}}                             | ${s('New York|Tower|~tower|of|London|~london')}
+    `('parseDictionaryLines complex $lines', ({ lines, options, expected }) => {
+        const r = [...parseDictionaryLines(lines, options)];
+        expect(r).toEqual(expected);
+    });
+
+    test.each`
+        lines              | options                                       | expected
+        ${'New York'}      | ${pdOp({})}                                   | ${s('New York|~new york')}
+        ${'New York'}      | ${pdOp({ split: true })}                      | ${s('New|~new|York|~york')}
+        ${'New,York'}      | ${pdOp({ split: true, splitSeparator: ',' })} | ${s('New|~new|York|~york')}
+        ${'New York Café'} | ${pdOp({ split: true })}                      | ${s('New|~new|York|~york|Café|~café|~cafe')}
+        ${'New York'}      | ${pdOp({ split: true, splitKeepBoth: true })} | ${s('New|~new|York|~york|New York|~new york')}
+    `('parseDictionaryLines $lines', ({ lines, options, expected }) => {
+        const r = [...parseDictionaryLines(lines, options)];
+        expect(r).toEqual(expected);
+    });
+
     // cspell:ignore érror
     test.each`
         lines               | expected
@@ -195,4 +222,34 @@ function dictionary2() {
 
     `;
     return dictionary() + moreWords;
+}
+
+// cspell:ignore Errormsg msgerror codecode codemsg errorerror
+
+function dictionary3() {
+    return `
+    # Sample Dictionary
+
+    # It possible to group the dictionary into sections.
+    Error*
+    +error*
+    Code*
+    +code*
+    *msg    # \`Errormsg\` is allowed, but \`msgerror\` is not.
+    !err    # forbid \`err\`
+    !Errorerror # forbid
+    !Codemsg
+
+    Café    # will get normalized and will only match if case sensitive matching is turned off.
+
+    !codecode # Do not allow \`codecode\` or \`Codecode\` when using case insensitive matching.
+        `;
+}
+
+function pdOp(...opts: Partial<ParseDictionaryOptions>[]): Partial<ParseDictionaryOptions> {
+    const opt: Partial<ParseDictionaryOptions> = {};
+    for (const p of opts) {
+        Object.assign(opt, p);
+    }
+    return opt;
 }

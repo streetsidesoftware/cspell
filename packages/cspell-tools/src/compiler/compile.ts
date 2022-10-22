@@ -11,18 +11,15 @@ import {
     isFileListSource,
     isFilePath,
     isFileSource,
+    SourceOptions,
     Target,
 } from '../config';
-import { getSystemFeatureFlags } from '../FeatureFlags';
-import { NormalizeOptions } from './CompileOptions';
 import { streamWordsFromFile } from './iterateWordsFromFile';
 import { logWithTimestamp } from './logWithTimestamp';
 import { ReaderOptions } from './Reader';
 import { readTextFile } from './readTextFile';
 import { compileTrie, compileWordList } from './wordListCompiler';
-import { createNormalizer } from './wordListParser';
-
-getSystemFeatureFlags().register('compound', 'Enable compound dictionary sources.');
+import { normalizeTargetWords } from './wordListParser';
 
 interface CompileOptions {
     /**
@@ -34,24 +31,36 @@ interface CompileOptions {
 export async function compile(request: CompileRequest, options?: CompileOptions): Promise<void> {
     const { targets } = request;
 
+    // console.log('Request: %o', request);
+
     const rootDir = path.resolve(request.rootDir || '.');
+    const targetOptions: CompileTargetOptions = {
+        sort: request.sort,
+        generateNonStrict: request.generateNonStrict,
+    };
 
     for (const target of targets) {
         const keep = options?.filter?.(target) ?? true;
         if (!keep) continue;
-        await compileTarget(target, request, rootDir);
+        const adjustedTarget: Target = { ...targetOptions, ...target };
+        await compileTarget(adjustedTarget, request, rootDir);
     }
     logWithTimestamp(`Complete.`);
 }
 
-export async function compileTarget(target: Target, options: CompileTargetOptions, rootDir: string): Promise<void> {
+export async function compileTarget(target: Target, options: SourceOptions, rootDir: string): Promise<void> {
     logWithTimestamp(`Start compile: ${target.name}`);
 
-    const { format, sources, trieBase, sort = true } = target;
+    // console.log('Target: %o', target);
+
+    const { format, sources, trieBase, sort = true, generateNonStrict = false } = target;
     const targetDirectory = path.resolve(rootDir, target.targetDirectory ?? process.cwd());
+    const generateNonStrictTrie = target.generateNonStrict ?? true;
+
+    const name = normalizeTargetName(target.name);
 
     const useTrie = format.startsWith('trie');
-    const filename = resolveTarget(target.name, targetDirectory, useTrie, target.compress ?? false);
+    const filename = resolveTarget(name, targetDirectory, useTrie, target.compress ?? false);
 
     const filesToProcessAsync = pipeAsync(
         readSourceList(sources, rootDir),
@@ -59,18 +68,20 @@ export async function compileTarget(target: Target, options: CompileTargetOption
         opAwaitAsync()
     );
     const filesToProcess: FileToProcess[] = await toArray(filesToProcessAsync);
+    const normalizer = normalizeTargetWords({ sort: useTrie || sort, generateNonStrict });
 
     const action = useTrie
         ? async (words: Iterable<string>, dst: string) => {
-              return compileTrie(words, dst, {
+              return compileTrie(pipe(words, normalizer), dst, {
                   base: trieBase,
                   sort: false,
                   trie3: format === 'trie3',
                   trie4: format === 'trie4',
+                  generateNonStrict: generateNonStrictTrie,
               });
           }
-        : async (src: Iterable<string>, dst: string) => {
-              return compileWordList(src, dst, { sort });
+        : async (words: Iterable<string>, dst: string) => {
+              return compileWordList(pipe(words, normalizer), dst, { sort, generateNonStrict });
           };
 
     await processFiles(action, filesToProcess, filename);
@@ -149,40 +160,31 @@ async function readFileList(fileList: FilePath): Promise<string[]> {
         .filter((a) => !!a);
 }
 
-async function readFileSource(fileSource: FileSource, targetOptions: CompileTargetOptions): Promise<FileToProcess> {
+async function readFileSource(fileSource: FileSource, sourceOptions: SourceOptions): Promise<FileToProcess> {
     const {
         filename,
-        keepRawCase = targetOptions.keepRawCase || false,
-        split = targetOptions.split || false,
+        keepRawCase = sourceOptions.keepRawCase || false,
+        split = sourceOptions.split || false,
         maxDepth,
     } = fileSource;
 
     const legacy = split === 'legacy';
     const splitWords = legacy ? false : split;
-    const experimental = new Set(targetOptions.experimental);
-    const useTrieCompounds = experimental.has('compound');
-    const useAnnotation = useTrieCompounds;
-    const skipNormalization = useTrieCompounds;
-
-    const opt: NormalizeOptions = {
-        keepRawCase,
-        skipNormalization,
-        splitWords,
-        legacy,
-    };
 
     // console.warn('fileSource: %o,\n targetOptions %o, \n opt: %o', fileSource, targetOptions, opt);
 
-    const normalizer = createNormalizer(opt);
-
-    const readerOptions: ReaderOptions = { maxDepth, useAnnotation };
+    const readerOptions: ReaderOptions = { maxDepth, legacy, splitWords, keepCase: keepRawCase };
 
     logWithTimestamp(`Reading ${path.basename(filename)}`);
     const stream = await streamWordsFromFile(filename, readerOptions);
     logWithTimestamp(`Done reading ${path.basename(filename)}`);
     const f: FileToProcess = {
         src: filename,
-        words: normalizer(stream),
+        words: stream,
     };
     return f;
+}
+
+function normalizeTargetName(name: string) {
+    return name.replace(/((\.txt|\.dic|\.aff|\.trie)(\.gz)?)?$/, '').replace(/[^\p{L}\p{M}.\w\\/-]/gu, '_');
 }

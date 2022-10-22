@@ -3,13 +3,14 @@ import { CompileCommonAppOptions } from '../AppOptions';
 import { CompileRequest, DictionaryFormats, Target } from '../config';
 
 export function createCompileRequest(sources: string[], options: CompileCommonAppOptions): CompileRequest {
-    const { max_depth, maxDepth, experimental, split, keepRawCase, useLegacySplitter } = options;
+    const { max_depth, maxDepth, experimental = [], split, keepRawCase, useLegacySplitter } = options;
 
     const targets = calcTargets(sources, options);
+    const generateNonStrict = experimental.includes('compounds') || undefined;
 
     const req: CompileRequest = {
         targets,
-        experimental,
+        generateNonStrict,
         maxDepth: parseNumber(maxDepth) ?? parseNumber(max_depth),
         split: useLegacySplitter ? 'legacy' : split,
         /**
@@ -22,7 +23,9 @@ export function createCompileRequest(sources: string[], options: CompileCommonAp
     return req;
 }
 function calcTargets(sources: string[], options: CompileCommonAppOptions): Target[] {
-    const { merge, output = '.' } = options;
+    const { merge, output = '.', experimental = [] } = options;
+
+    const generateNonStrict = experimental.includes('comp');
 
     const format = calcFormat(options);
 
@@ -35,6 +38,7 @@ function calcTargets(sources: string[], options: CompileCommonAppOptions): Targe
             sources,
             sort: options.sort,
             trieBase: parseNumber(options.trieBase),
+            generateNonStrict,
         };
         return [target];
     }
@@ -49,6 +53,7 @@ function calcTargets(sources: string[], options: CompileCommonAppOptions): Targe
             sources: [source],
             sort: options.sort,
             trieBase: parseNumber(options.trieBase),
+            generateNonStrict,
         };
         return target;
     });

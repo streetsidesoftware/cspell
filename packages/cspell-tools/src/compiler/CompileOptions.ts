@@ -1,9 +1,12 @@
 export interface CompileOptions {
+    /**
+     * Sort the words in the resulting dictionary.
+     * Does not apply to `trie` based formats.
+     */
     sort: boolean;
-}
-export interface NormalizeOptions {
-    skipNormalization: boolean | undefined;
-    splitWords: boolean | undefined;
-    keepRawCase: boolean | undefined;
-    legacy: boolean | undefined;
+
+    /**
+     * Generate lower case / accent free versions of words.
+     */
+    generateNonStrict: boolean;
 }

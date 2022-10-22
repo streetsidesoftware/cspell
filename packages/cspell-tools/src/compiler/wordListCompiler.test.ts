@@ -1,6 +1,6 @@
 // cSpell:ignore jpegs outing dirs lcode outring outrings
 
-import { opConcatMap, pipe, toArray, opTake } from '@cspell/cspell-pipe/sync';
+import { opConcatMap, opTake, pipe, toArray } from '@cspell/cspell-pipe/sync';
 import * as Trie from 'cspell-trie-lib';
 import { importTrie, isCircular, iteratorTrieWords, serializeTrie } from 'cspell-trie-lib';
 import * as fsp from 'fs-extra';
@@ -8,9 +8,11 @@ import { uniqueFilter } from 'hunspell-reader/dist/util';
 import * as path from 'path';
 import { spyOnConsole } from '../test/console';
 import { createTestHelper } from '../test/TestHelper';
-import { NormalizeOptions } from './CompileOptions';
+import { CompileOptions } from './CompileOptions';
 import { streamWordsFromFile } from './iterateWordsFromFile';
+import { legacyLineToWords } from './legacyLineToWords';
 import { setLogger } from './logger';
+import { ReaderOptions } from './Reader';
 import { readTextFile } from './readTextFile';
 import {
     compileTrie as _compileTrie,
@@ -18,8 +20,7 @@ import {
     compileWordList as _compileWordList,
     __testing__,
 } from './wordListCompiler';
-import { createNormalizer } from './wordListParser';
-import { legacyLineToWords } from './legacyLineToWords';
+import { normalizeTargetWords } from './wordListParser';
 
 const testHelper = createTestHelper(__filename);
 
@@ -32,6 +33,10 @@ const wordListHeader = __testing__.wordListHeader;
 const { consoleOutput } = spyOnConsole();
 setLogger(console.log);
 
+const readOptions: ReaderOptions = {
+    splitWords: false,
+};
+
 describe('Validate the wordListCompiler', () => {
     let temp = '.';
     beforeEach(() => {
@@ -40,31 +45,24 @@ describe('Validate the wordListCompiler', () => {
         jest.resetAllMocks();
     });
 
-    test('reading and normalizing a file', async () => {
-        const source = await streamWordsFromFile(path.join(samples, 'cities.txt'), {});
-        const destName = path.join(temp, 'cities.txt');
-        await compileWordList(source, destName, {
-            skipNormalization: false,
-            splitWords: undefined,
-            sort: true,
-            keepRawCase: false,
-            legacy: true,
-        });
-        const output = await fsp.readFile(destName, 'utf8');
-        expect(output).toBe(wordListHeader + '\n' + citiesResultSorted);
+    test.each`
+        destFile
+        ${'cities.txt'}
+        ${'cities.txt.gz'}
+    `('reading and normalizing to text file: $destFile', async ({ destFile }) => {
+        const source = [...(await streamWordsFromFile(path.join(samples, 'cities.txt'), readOptions))];
+        const destName = path.join(temp, destFile);
+        await compileWordList(source, destName, compileOpt(false, false));
+        const result = await readTextFile(destName);
+        const expected = '\n# cspell-tools: keep-case no-split\n\n' + source.join('\n') + '\n';
+        expect(result).toEqual(expected);
         expect(consoleOutput()).toMatchSnapshot();
     });
 
     test('compiling to a file without split', async () => {
-        const source = await streamWordsFromFile(path.join(samples, 'cities.txt'), {});
+        const source = await streamWordsFromFile(path.join(samples, 'cities.txt'), readOptions);
         const destName = path.join(temp, 'cities2.txt');
-        await compileWordList(source, destName, {
-            skipNormalization: false,
-            splitWords: false,
-            sort: true,
-            keepRawCase: false,
-            legacy: false,
-        });
+        await compileWordList(source, destName, compileOpt(true));
         const output = await fsp.readFile(destName, 'utf8');
         expect(output).toBe(
             wordListHeader +
@@ -82,105 +80,71 @@ describe('Validate the wordListCompiler', () => {
     });
 
     test('tests normalized to a trie', () => {
-        const words = citiesResult.split('\n');
+        const words = citiesLegacyResult.split('\n');
         const nWords = toArray(legacyNormalizeWords(words));
         const tWords = [...Trie.iteratorTrieWords(normalizeWordsToTrie(words))];
         expect(tWords.sort()).toEqual([...new Set(nWords.sort())]);
         expect(consoleOutput()).toMatchSnapshot();
     });
 
-    test('reading and normalizing to a trie file', async () => {
-        const source = await streamWordsFromFile(path.join(samples, 'cities.txt'), {});
-        const destName = path.join(temp, 'cities.trie');
-        await compileTrie(source, destName, {
-            skipNormalization: false,
-            splitWords: undefined,
-            keepRawCase: false,
-            sort: false,
-            legacy: true,
-        });
-        const srcWords = (await fsp.readFile(destName, 'utf8')).split(/\r?\n/g);
-        const node = Trie.importTrie(srcWords);
-        const expected = citiesResult
-            .split('\n')
-            .filter((a) => !!a)
-            .sort();
-        const words = [...Trie.iteratorTrieWords(node)].sort();
-        expect(words).toEqual(expected);
-        expect(consoleOutput()).toMatchSnapshot();
-    });
-
-    test('reading and normalizing to a trie gz file', async () => {
-        const source = await streamWordsFromFile(path.join(samples, 'cities.txt'), {});
-        const destName = path.join(temp, 'cities.trie.gz');
-        await compileTrie(source, destName, {
-            skipNormalization: false,
-            splitWords: undefined,
-            keepRawCase: false,
-            sort: false,
-            legacy: true,
-        });
+    test.each`
+        destFile
+        ${'cities.trie'}
+        ${'cities.trie.gz'}
+    `('reading and normalizing to $destFile', async ({ destFile }) => {
+        const source = [...(await streamWordsFromFile(path.join(samples, 'cities.txt'), readOptions))];
+        const destName = path.join(temp, destFile);
+        await compileTrie(source, destName, compileOpt(true));
         const resultFile = await readTextFile(destName);
-        const srcWords = resultFile.split('\n');
-        const node = Trie.importTrie(srcWords);
-        const expected = citiesResult
-            .split('\n')
-            .filter((a) => !!a)
-            .sort();
-        const words = [...Trie.iteratorTrieWords(node)].sort();
-        expect(words).toEqual(expected);
+        const resultLines = resultFile.split('\n');
+        const node = Trie.importTrie(resultLines);
+        const words = [...Trie.iteratorTrieWords(node)].filter((a) => !a.startsWith('~')).sort();
+        expect(words).toEqual(source.concat().sort());
         expect(consoleOutput()).toMatchSnapshot();
     });
 
     test('a simple hunspell dictionary depth 0', async () => {
         const source = await streamWordsFromFile(path.join(samples, 'hunspell', 'example.dic'), {
+            ...readOptions,
             maxDepth: 0,
         });
         const destName = path.join(temp, 'example0.txt');
-        await compileWordList(source, destName, {
-            skipNormalization: false,
-            splitWords: undefined,
-            sort: true,
-            keepRawCase: false,
-            legacy: true,
-        });
+        await compileWordList(source, destName, compileOpt(false));
         const output = await fsp.readFile(destName, 'utf8');
         expect(output).toBe(__testing__.wordListHeader + '\n' + 'hello\ntry\nwork\n');
         expect(consoleOutput()).toMatchSnapshot();
     });
 
     test('a simple hunspell dictionary depth 1', async () => {
-        const source = await streamWordsFromFile(path.join(samples, 'hunspell', 'example.dic'), {
+        const source = await streamWordsFromFile(path.join(samples, 'hunspell/example.dic'), {
+            ...readOptions,
             maxDepth: 1,
         });
         const destName = path.join(temp, 'example1.txt');
-        await compileWordList(source, destName, {
-            skipNormalization: false,
-            splitWords: undefined,
-            sort: true,
-            keepRawCase: false,
-            legacy: true,
-        });
+        await compileWordList(source, destName, compileOpt(false));
         const output = await fsp.readFile(destName, 'utf8');
-        expect(output.split('\n')).toEqual([
-            '',
-            '# cspell-tools: keep-case no-split',
-            '',
-            'hello',
-            'rework',
-            'tried',
-            'try',
-            'work',
-            'worked',
-            '',
-        ]);
+        expect(output.split('\n')).toEqual(
+            `\
+
+            # cspell-tools: keep-case no-split
+
+            hello
+            rework
+            tried
+            try
+            work
+            worked
+        `
+                .split('\n')
+                .map((line) => line.trim())
+        );
         expect(consoleOutput()).toMatchSnapshot();
     });
 });
 
 describe('Validate Larger Dictionary', () => {
     test('en_US hunspell', async () => {
-        const source = await streamWordsFromFile(sampleDictEnUS, {});
+        const source = await streamWordsFromFile(sampleDictEnUS, readOptions);
         const words = [...pipe(source, opTake(5000))];
         const trie = normalizeWordsToTrie(words);
         expect(isCircular(trie)).toBe(false);
@@ -190,7 +154,7 @@ describe('Validate Larger Dictionary', () => {
     }, 60000);
 
     test('en_US word list', async () => {
-        const source = await streamWordsFromFile(sampleDictEn, {});
+        const source = await streamWordsFromFile(sampleDictEn, readOptions);
         const words = [...source];
         const trie = Trie.consolidate(normalizeWordsToTrie(words));
         expect(isCircular(trie)).toBe(false);
@@ -204,21 +168,17 @@ describe('Validate Larger Dictionary', () => {
     }, 60000);
 });
 
-async function compileTrie(
-    words: Iterable<string>,
-    destFilename: string,
-    options: CompileTrieOptions & NormalizeOptions
-): Promise<void> {
-    const normalizer = createNormalizer(options);
+async function compileTrie(words: Iterable<string>, destFilename: string, options: CompileTrieOptions): Promise<void> {
+    const normalizer = normalizeTargetWords(options);
     return _compileTrie(normalizer(words), destFilename, options);
 }
 
 async function compileWordList(
     lines: Iterable<string>,
     destFilename: string,
-    options: CompileTrieOptions & NormalizeOptions
+    options: CompileTrieOptions
 ): Promise<void> {
-    const normalizer = createNormalizer(options);
+    const normalizer = normalizeTargetWords(options);
     return _compileWordList(normalizer(lines), destFilename, options);
 }
 
@@ -229,8 +189,12 @@ function normalizeWordsToTrie(words: Iterable<string>): Trie.TrieRoot {
 function legacyNormalizeWords(lines: Iterable<string>): Iterable<string> {
     return pipe(
         lines,
-        opConcatMap((line) => legacyLineToWords(line))
+        opConcatMap((line) => legacyLineToWords(line, true))
     );
+}
+
+function compileOpt(sort: boolean, generateNonStrict = true): CompileOptions {
+    return { sort, generateNonStrict };
 }
 
 // const cities = `\
@@ -255,7 +219,7 @@ Paris
 San Francisco
 `;
 
-const citiesResult = `\
+const citiesLegacyResult = `\
 new york
 new
 york
@@ -274,25 +238,4 @@ mexico
 city
 london
 paris
-`;
-
-const citiesResultSorted = `\
-amsterdam
-angeles
-city
-delhi
-francisco
-london
-los
-los angeles
-mexico
-mexico city
-new
-new amsterdam
-new delhi
-new york
-paris
-san
-san francisco
-york
 `;
