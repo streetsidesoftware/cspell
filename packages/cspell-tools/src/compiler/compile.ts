@@ -33,7 +33,7 @@ interface CompileOptions {
 export async function compile(request: CompileRequest, options?: CompileOptions): Promise<void> {
     const { targets } = request;
 
-    console.log('Request: %o', request);
+    // console.log('Request: %o', request);
 
     const rootDir = path.resolve(request.rootDir || '.');
 
@@ -48,13 +48,15 @@ export async function compile(request: CompileRequest, options?: CompileOptions)
 export async function compileTarget(target: Target, options: SourceOptions, rootDir: string): Promise<void> {
     logWithTimestamp(`Start compile: ${target.name}`);
 
-    console.log('Target: %o', target);
+    // console.log('Target: %o', target);
 
     const { format, sources, trieBase, sort = true, generateNonStrict = true } = target;
     const targetDirectory = path.resolve(rootDir, target.targetDirectory ?? process.cwd());
 
+    const name = normalizeTargetName(target.name);
+
     const useTrie = format.startsWith('trie');
-    const filename = resolveTarget(target.name, targetDirectory, useTrie, target.compress ?? false);
+    const filename = resolveTarget(name, targetDirectory, useTrie, target.compress ?? false);
 
     const filesToProcessAsync = pipeAsync(
         readSourceList(sources, rootDir),
@@ -177,4 +179,8 @@ async function readFileSource(fileSource: FileSource, sourceOptions: SourceOptio
         words: stream,
     };
     return f;
+}
+
+function normalizeTargetName(name: string) {
+    return name.replace(/((\.txt|\.dic|\.aff|\.trie)(\.gz)?)?$/, '').replace(/[^\p{L}\p{M}.\w-]/gu, '_');
 }
