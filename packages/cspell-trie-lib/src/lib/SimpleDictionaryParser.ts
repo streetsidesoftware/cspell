@@ -69,9 +69,9 @@ const _defaultOptions: ParseDictionaryOptions = {
 
 export const defaultParseDictionaryOptions: ParseDictionaryOptions = Object.freeze(_defaultOptions);
 
-export const cSpellToolDirective = 'cspell-tools:';
+export const cSpellToolDirective = 'cspell-dictionary:';
 
-export const setOfCSpellDirectiveFlags = ['no-split', 'split', 'keep-case', 'no-keep-case'];
+export const setOfCSpellDirectiveFlags = ['no-split', 'split', 'generate-alternatives', 'no-generate-alternatives'];
 
 /**
  * Normalizes a dictionary words based upon prefix / suffixes.
@@ -122,10 +122,10 @@ export function createDictionaryLineParserMapper(options?: Partial<ParseDictiona
                     case 'no-split':
                         split = false;
                         break;
-                    case 'keep-case':
+                    case 'no-generate-alternatives':
                         stripCaseAndAccents = false;
                         break;
-                    case 'no-keep-case':
+                    case 'generate-alternatives':
                         stripCaseAndAccents = true;
                         break;
                 }
