@@ -4,6 +4,7 @@ import { opConcatMap, opMap, pipe } from '@cspell/cspell-pipe/sync';
 import * as path from 'path';
 import {
     CompileRequest,
+    CompileSourceOptions,
     CompileTargetOptions,
     DictionarySource,
     FilePath,
@@ -11,7 +12,6 @@ import {
     isFileListSource,
     isFilePath,
     isFileSource,
-    SourceOptions,
     Target,
 } from '../config';
 import { streamWordsFromFile } from './iterateWordsFromFile';
@@ -48,7 +48,7 @@ export async function compile(request: CompileRequest, options?: CompileOptions)
     logWithTimestamp(`Complete.`);
 }
 
-export async function compileTarget(target: Target, options: SourceOptions, rootDir: string): Promise<void> {
+export async function compileTarget(target: Target, options: CompileSourceOptions, rootDir: string): Promise<void> {
     logWithTimestamp(`Start compile: ${target.name}`);
 
     // console.log('Target: %o', target);
@@ -160,7 +160,7 @@ async function readFileList(fileList: FilePath): Promise<string[]> {
         .filter((a) => !!a);
 }
 
-async function readFileSource(fileSource: FileSource, sourceOptions: SourceOptions): Promise<FileToProcess> {
+async function readFileSource(fileSource: FileSource, sourceOptions: CompileSourceOptions): Promise<FileToProcess> {
     const {
         filename,
         keepRawCase = sourceOptions.keepRawCase || false,
