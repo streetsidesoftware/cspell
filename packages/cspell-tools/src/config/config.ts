@@ -1,4 +1,15 @@
-export interface RunConfig extends Partial<CompileRequest> {}
+export interface RunConfig extends Partial<CompileRequest> {
+    /**
+     * Optional Target Dictionaries to create.
+     */
+    targets?: Target[];
+    /**
+     * Specify the directory where all relative paths will resolved against.
+     * By default, all relative paths are relative to the location of the
+     * config file.
+     */
+    rootDir?: string;
+}
 
 export interface CompileRequest extends CompileTargetOptions, CompileSourceOptions, Experimental {
     /**
