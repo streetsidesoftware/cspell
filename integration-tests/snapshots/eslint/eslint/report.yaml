@@ -3,9 +3,9 @@ Repository: eslint/eslint
 Url: https://github.com/eslint/eslint
 Args: ["**","--exclude=bin/**","--exclude=CHANGELOG.md","--exclude=_data","--exclude=tests/bench/large.js","--exclude=docs/src/_includes","--exclude=docs/src/assets/{fonts,s?css,images}"]
 Summary:
-  files: 1796
-  filesWithIssues: 1219
-  issues: 5360
+  files: 1808
+  filesWithIssues: 1222
+  issues: 5373
   errors: 0
 Errors: []
 
@@ -211,10 +211,10 @@ issues:
   - "docs/src/static/sitemap.njk:10:14   	lastmod     	U   	<lastmod>{{ page.date.toISOString"
   - "docs/src/static/sitemap.njk:11:14   	changefreq  	U   	<changefreq>{{ page.data.changeFreq"
   - "docs/src/user-guide/command-line-interface.md:223:267   	levn        	U   	multiple times. The [levn](https://github.com"
-  - "docs/src/user-guide/command-line-interface.md:339:5     	myfile      	U   	cat myfile.js | npx eslint --stdin"
-  - "docs/src/user-guide/command-line-interface.md:394:4     	checkstyle  	U   	* [checkstyle](formatters/#checkstyle"
-  - "docs/src/user-guide/command-line-interface.md:416:17    	customformat	U   	npx eslint -f ./customformat.js file.js"
-  - "docs/src/user-guide/command-line-interface.md:493:11    	Autofixed   	U   	**Note:** Autofixed files are not placed"
+  - "docs/src/user-guide/command-line-interface.md:341:5     	myfile      	U   	cat myfile.js | npx eslint --stdin"
+  - "docs/src/user-guide/command-line-interface.md:396:4     	checkstyle  	U   	* [checkstyle](formatters/#checkstyle"
+  - "docs/src/user-guide/command-line-interface.md:418:17    	customformat	U   	npx eslint -f ./customformat.js file.js"
+  - "docs/src/user-guide/command-line-interface.md:495:11    	Autofixed   	U   	**Note:** Autofixed files are not placed"
   - "docs/src/user-guide/configuring/configuration-files-new.md:217:564  	runtimes	U   	example, some older runtimes might only allow ECMAScript"
   - "docs/src/user-guide/configuring/configuration-files.md:40:25    	myfiletotest	U   	eslint -c myconfig.json myfiletotest.js"
   - "docs/src/user-guide/configuring/ignoring-code.md:29:186     	subdir      	U   	foo.js` but not `lib/subdir/foo.js`."
@@ -272,7 +272,7 @@ issues:
   - "lib/config/default-config.js:59:61      	globbed 	U   	ensure these files are globbed by default"
   - "lib/eslint/eslint-helpers.js:19:7       	fswalk  	U   	const fswalk = require(\"@nodelib"
   - "lib/eslint/eslint-helpers.js:19:26      	nodelib 	U   	const fswalk = require(\"@nodelib/fs.walk\");"
-  - "lib/eslint/eslint-helpers.js:245:11     	globby  	U   	const globbyPatterns = [];"
+  - "lib/eslint/eslint-helpers.js:269:9      	globby  	U   	let globbyPatterns = [];"
   - "lib/linter/code-path-analysis/code-path-state.js:159:31     	unflattened 	U   	{CodePathSegment[]} unflattenedFromSegments Segments"
   - "lib/linter/code-path-analysis/code-path-state.js:913:23     	Segs        	U   	const prevSegsOfLeavingSegment = [headOfLeav"
   - "lib/linter/code-path-analysis/code-path.js:138:34   	Omittable   	U   	param {Object} [options] Omittable."
@@ -375,9 +375,9 @@ issues:
   - "package.json:24:15      	alpharelease	U   	\"generate-alpharelease\": \"node Makefile.js"
   - "package.json:25:15      	betarelease 	U   	\"generate-betarelease\": \"node Makefile.js"
   - "package.json:26:15      	rcrelease   	U   	\"generate-rcrelease\": \"node Makefile.js"
-  - "package.json:116:6      	eslump      	U   	\"eslump\": \"^3.0.0\","
-  - "package.json:133:6      	memfs       	U   	\"memfs\": \"^3.0.1\","
-  - "package.json:134:6      	metascraper 	U   	\"metascraper\": \"^5.25.7\","
+  - "package.json:117:6      	eslump      	U   	\"eslump\": \"^3.0.0\","
+  - "package.json:134:6      	memfs       	U   	\"memfs\": \"^3.0.1\","
+  - "package.json:135:6      	metascraper 	U   	\"metascraper\": \"^5.25.7\","
   - "packages/eslint-config-eslint/default.yml:5:15      	jsdoc   	U   	- \"plugin:jsdoc/recommended\""
   - "packages/eslint-config-eslint/default.yml:23:50     	namepath	U   	Point to a `@callback` namepath or `GenericCallback"
   - "README.md:204:5     	teamstart       	U   	<!--teamstart-->"
@@ -431,8 +431,10 @@ issues:
   - "tests/lib/config/flat-config-array.js:898:43    	truex       	U   	foo: \"truex\""
   - "tests/lib/config/flat-config-array.js:1408:29   	foox        	U   	foox: [1, \"bar\"]"
   - "tests/lib/config/flat-config-array.js:1430:30   	doesnt      	U   	\"doesnt-exist/match\": \"error"
-  - "tests/lib/eslint/flat-eslint.js:1143:30 	reignoring  	U   	it(\"should allow reignoring of previously ignored"
-  - "tests/lib/eslint/flat-eslint.js:4106:9  	xdescribe   	U   	xdescribe(\"ignorePatterns can"
+  - "tests/lib/eslint/flat-eslint.js:817:65  	doesnotexist	U   	lintFiles([\"subdir1\", \"doesnotexist/*.js\"]);"
+  - "tests/lib/eslint/flat-eslint.js:1216:30 	reignoring  	U   	it(\"should allow reignoring of previously ignored"
+  - "tests/lib/eslint/flat-eslint.js:4242:9  	xdescribe   	U   	xdescribe(\"ignorePatterns can"
+  - "tests/lib/eslint/flat-eslint.js:4945:48 	intepreted  	U   	files' they should be intepreted as relative to the config"
   - "tests/lib/linter/code-path-analysis/code-path-analyzer.js:30:16     	ESQUERY 	U   	const STANDARD_ESQUERY_OPTION = { visitorKeys"
   - "tests/lib/linter/config-comment-parser.js:165:41    	ELEVENTEEN  	U   	code = \"a: seventy, b:ELEVENTEEN\";"
   - "tests/lib/linter/linter.js:3229:1   	consolexlog     	U   	consolexlog(\"test2\");"
@@ -468,7 +470,7 @@ issues:
   - "tests/lib/rules/comma-spacing.js:22:10      	myfunc  	U   	\"myfunc(404, true/* bla bla"
   - "tests/lib/rules/comma-style.js:69:36    	nsnd	U   	code: \"var ar ={fst:1,\\nsnd: [1,\\n2]};\","
   - "tests/lib/rules/comma-style.js:268:38   	fifi	U   	\"const arr = [\\n ,'fifi' \\n]\","
-  - "tests/lib/rules/getter-return.js:188:70     	getfoo  	U   	bar', { get: function getfoo (){}});\","
+  - "tests/lib/rules/getter-return.js:207:70     	getfoo  	U   	bar', { get: function getfoo (){}});\","
   - "tests/lib/rules/handle-callback-err.js:52:99    	rror	U   	options: [\"^.+(e|E)rror$\"] }"
   - "tests/lib/rules/id-blacklist.js:64:70   	bingg       	U   	ba\", \"barr\", \"bazz\", \"bingg\"]"
   - "tests/lib/rules/id-blacklist.js:136:41  	mydate      	U   	[\"array\", \"date\", \"mydate\", \"myarray\", \"new\","
