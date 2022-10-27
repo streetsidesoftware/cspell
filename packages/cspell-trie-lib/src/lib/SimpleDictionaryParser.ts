@@ -94,6 +94,8 @@ export function createDictionaryLineParserMapper(options?: Partial<ParseDictiona
 
     let { stripCaseAndAccents = _defaultOptions.stripCaseAndAccents, split = _defaultOptions.split } = _options;
 
+    // console.log('options: %o', options);
+
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     function isString(line: any | string): line is string {
         return typeof line === 'string';
@@ -181,7 +183,7 @@ export function createDictionaryLineParserMapper(options?: Partial<ParseDictiona
         forms.add(nWord);
         if (stripCaseAndAccents && !(word[0] in doNotNormalizePrefix)) {
             for (const n of normalizeWordForCaseInsensitive(nWord)) {
-                if (n !== nWord) forms.add(ignoreCase + n);
+                forms.add(ignoreCase + n);
             }
         }
         yield* forms;
