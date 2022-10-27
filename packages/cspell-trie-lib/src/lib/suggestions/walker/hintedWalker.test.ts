@@ -45,7 +45,7 @@ describe('Validate Util Functions', () => {
 
     test.each`
         dict                          | ignoreCase | sep    | depth | compoundMethod                        | expected
-        ${['A*', '+a*', '*b*', '+c']} | ${true}    | ${''}  | ${2}  | ${undefined}                          | ${['A', 'Aa', 'Ab', 'Ac', 'b', 'ba', 'bb', 'bc', 'a', 'aa', 'ab', 'ac']}
+        ${['A*', '+a*', '*b*', '+c']} | ${true}    | ${''}  | ${2}  | ${undefined}                          | ${['A', 'Aa', 'Ab', 'Ac', 'Aa', 'Ab', 'Ac', 'b', 'ba', 'bb', 'bc', 'ba', 'bb', 'bc', 'a', 'aa', 'ab', 'ac', 'aa', 'ab', 'ac', 'b', 'ba', 'bb', 'bc', 'ba', 'bb', 'bc']}
         ${['A*', '+a*', '*b*', '+c']} | ${false}   | ${''}  | ${2}  | ${undefined}                          | ${['A', 'Aa', 'Ab', 'Ac', 'b', 'ba', 'bb', 'bc']}
         ${['A*', '+b+', '+C']}        | ${false}   | ${'•'} | ${3}  | ${CompoundWordsMethod.NONE}           | ${['A', 'A•C', 'A•b•C']}
         ${['A*', '+b+', '+C']}        | ${false}   | ${'•'} | ${3}  | ${CompoundWordsMethod.JOIN_WORDS}     | ${['A', 'A•C', 'A•b•C', 'A+A', 'A+C']}
