@@ -35,6 +35,12 @@ export interface ParseDictionaryOptions {
     stripCaseAndAccents: boolean;
 
     /**
+     * Tell the parser to keep non-case/accent version in both forms.
+     * @default true
+     */
+    stripCaseAndAccentsKeepDuplicate: boolean;
+
+    /**
      * Tell the parser to split into words along spaces.
      * @default false
      */
@@ -62,6 +68,7 @@ const _defaultOptions: ParseDictionaryOptions = {
     caseInsensitivePrefix: CASE_INSENSITIVE_PREFIX,
     keepExactPrefix: IDENTITY_PREFIX,
     stripCaseAndAccents: true,
+    stripCaseAndAccentsKeepDuplicate: true,
     split: false,
     splitKeepBoth: false,
     splitSeparator: RegExpSplit,
@@ -90,9 +97,12 @@ export function createDictionaryLineParserMapper(options?: Partial<ParseDictiona
         keepExactPrefix: keepCase = _defaultOptions.keepExactPrefix,
         splitSeparator = _defaultOptions.splitSeparator,
         splitKeepBoth = _defaultOptions.splitKeepBoth,
+        stripCaseAndAccentsKeepDuplicate = _defaultOptions.stripCaseAndAccentsKeepDuplicate,
     } = _options;
 
     let { stripCaseAndAccents = _defaultOptions.stripCaseAndAccents, split = _defaultOptions.split } = _options;
+
+    // console.log('options: %o', options);
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     function isString(line: any | string): line is string {
@@ -181,7 +191,7 @@ export function createDictionaryLineParserMapper(options?: Partial<ParseDictiona
         forms.add(nWord);
         if (stripCaseAndAccents && !(word[0] in doNotNormalizePrefix)) {
             for (const n of normalizeWordForCaseInsensitive(nWord)) {
-                if (n !== nWord) forms.add(ignoreCase + n);
+                (stripCaseAndAccentsKeepDuplicate || n !== nWord) && forms.add(ignoreCase + n);
             }
         }
         yield* forms;

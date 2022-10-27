@@ -6,7 +6,7 @@ export function createCompileRequest(sources: string[], options: CompileCommonAp
     const { max_depth, maxDepth, experimental = [], split, keepRawCase, useLegacySplitter } = options;
 
     const targets = calcTargets(sources, options);
-    const generateNonStrict = experimental.includes('compounds') || undefined;
+    const generateNonStrict = experimental.includes('compound') || undefined;
 
     const req: CompileRequest = {
         targets,
@@ -23,9 +23,7 @@ export function createCompileRequest(sources: string[], options: CompileCommonAp
     return req;
 }
 function calcTargets(sources: string[], options: CompileCommonAppOptions): Target[] {
-    const { merge, output = '.', experimental = [] } = options;
-
-    const generateNonStrict = experimental.includes('comp');
+    const { merge, output = '.' } = options;
 
     const format = calcFormat(options);
 
@@ -38,7 +36,6 @@ function calcTargets(sources: string[], options: CompileCommonAppOptions): Targe
             sources,
             sort: options.sort,
             trieBase: parseNumber(options.trieBase),
-            generateNonStrict,
         };
         return [target];
     }
@@ -53,7 +50,6 @@ function calcTargets(sources: string[], options: CompileCommonAppOptions): Targe
             sources: [source],
             sort: options.sort,
             trieBase: parseNumber(options.trieBase),
-            generateNonStrict,
         };
         return target;
     });

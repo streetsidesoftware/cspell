@@ -143,29 +143,29 @@ describe('Validate SimpleDictionaryParser', () => {
 
     test.each`
         lines               | expected
-        ${s('word')}        | ${s('word')}
-        ${s('two-word')}    | ${s('two-word')}
+        ${s('word')}        | ${s('word|~word')}
+        ${s('two-word')}    | ${s('two-word|~two-word')}
         ${s('Geschäft')}    | ${s('Geschäft|~geschäft|~geschaft')}
         ${s('=Geschäft')}   | ${s('Geschäft')}
         ${s('"Geschäft"')}  | ${s('Geschäft')}
         ${s('="Geschäft"')} | ${s('Geschäft')}
         ${s('Word')}        | ${s('Word|~word')}
-        ${s('*error*')}     | ${s('error|error+|+error|+error+')}
+        ${s('*error*')}     | ${s('error|~error|error+|~error+|+error|~+error|+error+|~+error+')}
     `('parseDictionaryLines simple $lines', ({ lines, expected }) => {
         const r = [...parseDictionaryLines(lines)];
         expect(r).toEqual(expected);
     });
 
     test.each`
-        lines                                                                              | options                           | expected
-        ${dictionary()}                                                                    | ${{}}                             | ${s('Begin|~begin|Begin+|~begin+|End|~end|+End|~+end|+Middle+|~+middle+|Café|~café|~cafe|!forbid')}
-        ${s('# cspell-dictionary: no-generate-alternatives split|Apple|Arizona|New York')} | ${{}}                             | ${s('Apple|Arizona|New|York')}
-        ${s('# cspell-dictionary: split|Apple|Arizona|New York')}                          | ${{}}                             | ${s('Apple|~apple|Arizona|~arizona|New|~new|York|~york')}
-        ${s('# cspell-dictionary: no-split|Apple|Arizona|New York')}                       | ${{ stripCaseAndAccents: false }} | ${s('Apple|Arizona|New York')}
-        ${s('# cspell-dictionary: generate-alternatives|Apple|Arizona|New York')}          | ${{ stripCaseAndAccents: false }} | ${s('Apple|~apple|Arizona|~arizona|New York|~new york')}
-        ${s('Apple| # cspell-dictionary: no-generate-alternatives|Arizona|New York')}      | ${{}}                             | ${s('Apple|~apple|Arizona|New York')}
-        ${dictionary3()}                                                                   | ${{}}                             | ${s('Error|~error|Error+|~error+|+error|+error+|Code|~code|Code+|~code+|+code|+code+|msg|+msg|!err|!Errorerror|!Codemsg|Café|~café|~cafe|!codecode')}
-        ${s('# cspell-dictionary: split|"New York"|Tower of London')}                      | ${{}}                             | ${s('New York|Tower|~tower|of|London|~london')}
+        lines                                                                              | options                                        | expected
+        ${dictionary()}                                                                    | ${{}}                                          | ${s('Begin|~begin|Begin+|~begin+|End|~end|+End|~+end|+Middle+|~+middle+|Café|~café|~cafe|!forbid')}
+        ${s('# cspell-dictionary: no-generate-alternatives split|Apple|Arizona|New York')} | ${{}}                                          | ${s('Apple|Arizona|New|York')}
+        ${s('# cspell-dictionary: split|Apple|Arizona|New York')}                          | ${{}}                                          | ${s('Apple|~apple|Arizona|~arizona|New|~new|York|~york')}
+        ${s('# cspell-dictionary: no-split|Apple|Arizona|New York')}                       | ${{ stripCaseAndAccents: false }}              | ${s('Apple|Arizona|New York')}
+        ${s('# cspell-dictionary: generate-alternatives|Apple|Arizona|New York')}          | ${{ stripCaseAndAccents: false }}              | ${s('Apple|~apple|Arizona|~arizona|New York|~new york')}
+        ${s('Apple| # cspell-dictionary: no-generate-alternatives|Arizona|New York')}      | ${{}}                                          | ${s('Apple|~apple|Arizona|New York')}
+        ${dictionary3()}                                                                   | ${{ stripCaseAndAccentsKeepDuplicate: false }} | ${s('Error|~error|Error+|~error+|+error|+error+|Code|~code|Code+|~code+|+code|+code+|msg|+msg|!err|!Errorerror|!Codemsg|Café|~café|~cafe|!codecode')}
+        ${s('# cspell-dictionary: split|"New York"|Tower of London')}                      | ${{}}                                          | ${s('New York|Tower|~tower|of|~of|London|~london')}
     `('parseDictionaryLines complex $lines', ({ lines, options, expected }) => {
         const r = [...parseDictionaryLines(lines, options)];
         expect(r).toEqual(expected);

@@ -111,7 +111,7 @@ describe('Validate the wordListCompiler', () => {
         const destName = path.join(temp, 'example0.txt');
         await compileWordList(source, destName, compileOpt(false));
         const output = await fsp.readFile(destName, 'utf8');
-        expect(output).toBe(__testing__.wordListHeader + '\n' + 'hello\ntry\nwork\n');
+        expect(output).toBe(__testing__.wordListHeader + '\n' + 'hello\n~hello\ntry\n~try\nwork\n~work\n');
         expect(consoleOutput()).toMatchSnapshot();
     });
 
@@ -121,7 +121,7 @@ describe('Validate the wordListCompiler', () => {
             maxDepth: 1,
         });
         const destName = path.join(temp, 'example1.txt');
-        await compileWordList(source, destName, compileOpt(false));
+        await compileWordList(source, destName, compileOpt(false, false));
         const output = await fsp.readFile(destName, 'utf8');
         expect(output.split('\n')).toEqual(
             `\
