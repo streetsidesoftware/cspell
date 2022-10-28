@@ -5,7 +5,10 @@ import { CompileOptions } from './CompileOptions';
 import { legacyLineToWords } from './legacyLineToWords';
 
 export function normalizeTargetWords(options: CompileOptions): Operator<string> {
-    const lineParser = createDictionaryLineParser({ stripCaseAndAccents: options.generateNonStrict });
+    const lineParser = createDictionaryLineParser({
+        stripCaseAndAccents: options.generateNonStrict,
+        stripCaseAndAccentsOnForbidden: true,
+    });
     const operations: Operator<string>[] = [
         opFilter<string>((a) => !!a),
         lineParser,

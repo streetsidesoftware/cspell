@@ -166,6 +166,8 @@ describe('Validate SimpleDictionaryParser', () => {
         ${s('Apple| # cspell-dictionary: no-generate-alternatives|Arizona|New York')}      | ${{}}                                          | ${s('Apple|~apple|Arizona|New York')}
         ${dictionary3()}                                                                   | ${{ stripCaseAndAccentsKeepDuplicate: false }} | ${s('Error|~error|Error+|~error+|+error|+error+|Code|~code|Code+|~code+|+code|+code+|msg|+msg|!err|!Errorerror|!Codemsg|Café|~café|~cafe|!codecode')}
         ${s('# cspell-dictionary: split|"New York"|Tower of London')}                      | ${{}}                                          | ${s('New York|Tower|~tower|of|~of|London|~london')}
+        ${s('Hello|!Goodbye')}                                                             | ${{}}                                          | ${s('Hello|~hello|!Goodbye')}
+        ${s('Hello|!Goodbye')}                                                             | ${{ stripCaseAndAccentsOnForbidden: true }}    | ${s('Hello|~hello|!Goodbye|~!goodbye')}
     `('parseDictionaryLines complex $lines', ({ lines, options, expected }) => {
         const r = [...parseDictionaryLines(lines, options)];
         expect(r).toEqual(expected);
