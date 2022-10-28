@@ -41,6 +41,12 @@ export interface ParseDictionaryOptions {
     stripCaseAndAccentsKeepDuplicate: boolean;
 
     /**
+     * Tell the parser to keep non-case/accent version in both forms.
+     * @default false
+     */
+    stripCaseAndAccentsOnForbidden: boolean;
+
+    /**
      * Tell the parser to split into words along spaces.
      * @default false
      */
@@ -69,6 +75,7 @@ const _defaultOptions: ParseDictionaryOptions = {
     keepExactPrefix: IDENTITY_PREFIX,
     stripCaseAndAccents: true,
     stripCaseAndAccentsKeepDuplicate: true,
+    stripCaseAndAccentsOnForbidden: false,
     split: false,
     splitKeepBoth: false,
     splitSeparator: RegExpSplit,
@@ -98,6 +105,7 @@ export function createDictionaryLineParserMapper(options?: Partial<ParseDictiona
         splitSeparator = _defaultOptions.splitSeparator,
         splitKeepBoth = _defaultOptions.splitKeepBoth,
         stripCaseAndAccentsKeepDuplicate = _defaultOptions.stripCaseAndAccentsKeepDuplicate,
+        stripCaseAndAccentsOnForbidden = _defaultOptions.stripCaseAndAccentsOnForbidden,
     } = _options;
 
     let { stripCaseAndAccents = _defaultOptions.stripCaseAndAccents, split = _defaultOptions.split } = _options;
@@ -169,8 +177,11 @@ export function createDictionaryLineParserMapper(options?: Partial<ParseDictiona
         }
     }
 
-    const doNotNormalizePrefix: Record<string, true | undefined> = {};
-    [forbidden, ignoreCase, keepCase, '"'].forEach((prefix) => (doNotNormalizePrefix[prefix] = true));
+    const doNotNormalizePrefix: Record<string, true | undefined> = Object.create(null);
+    [ignoreCase, keepCase, '"'].forEach((prefix) => (doNotNormalizePrefix[prefix] = true));
+    if (!stripCaseAndAccentsOnForbidden) {
+        doNotNormalizePrefix[forbidden] = true;
+    }
 
     function removeDoublePrefix(w: string): string {
         return w.startsWith(ignoreCase + ignoreCase) ? w.slice(1) : w;
