@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 6.13.0 (2022-10-28)
+
+### Bug Fixes
+
+* make sure all forms are generated. ([#3783](https://github.com/Jason-Rev/hunspell-reader/issues/3783)) ([70949a5](https://github.com/Jason-Rev/hunspell-reader/commit/70949a5823f7c58052f9627c9455dcaa3496e8fb))
+
 # 6.12.0 (2022-09-30)
 
 ### Features
