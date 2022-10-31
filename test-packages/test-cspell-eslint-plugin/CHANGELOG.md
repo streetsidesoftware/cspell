@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 6.13.3 (2022-10-31)
+
+### Bug Fixes
+
+* Update dictionaries ([#3795](https://github.com/streetsidesoftware/cspell/issues/3795)) ([ae8de27](https://github.com/streetsidesoftware/cspell/commit/ae8de2754daafcdeb7e187a80e27b6f6c09dc1d7))
+
 ## 6.13.2 (2022-10-31)
 
 ### Bug Fixes
