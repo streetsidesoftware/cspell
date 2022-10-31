@@ -166,7 +166,7 @@ describe('Validate Trie Class', () => {
         `);
 
         expect(trieModern.isSizeKnown()).toBe(false);
-        expect(trieModern.size()).toBe(11); // begin, begin+, end, +end, café ~cafe
+        expect(trieModern.size()).toBe(6); // begin, begin+, end, +end, café ~cafe
         expect(trieModern.isSizeKnown()).toBe(true);
     });
 

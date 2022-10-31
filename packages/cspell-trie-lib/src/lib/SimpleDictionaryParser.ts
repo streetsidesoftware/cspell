@@ -36,7 +36,7 @@ export interface ParseDictionaryOptions {
 
     /**
      * Tell the parser to keep non-case/accent version in both forms.
-     * @default true
+     * @default false
      */
     stripCaseAndAccentsKeepDuplicate: boolean;
 
@@ -74,7 +74,7 @@ const _defaultOptions: ParseDictionaryOptions = {
     caseInsensitivePrefix: CASE_INSENSITIVE_PREFIX,
     keepExactPrefix: IDENTITY_PREFIX,
     stripCaseAndAccents: true,
-    stripCaseAndAccentsKeepDuplicate: true,
+    stripCaseAndAccentsKeepDuplicate: false,
     stripCaseAndAccentsOnForbidden: false,
     split: false,
     splitKeepBoth: false,

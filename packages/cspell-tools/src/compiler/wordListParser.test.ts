@@ -22,9 +22,9 @@ describe('Validate the wordListCompiler', () => {
 
     test.each`
         lines                                | sort     | expectedResult
-        ${'banana|Apple|Apple|apple'}        | ${true}  | ${'Apple|apple|banana|~apple|~banana'}
-        ${'banana|Apple|Apple|apple|banana'} | ${false} | ${'banana|~banana|Apple|~apple|apple'}
-        ${'hello'}                           | ${true}  | ${'hello|~hello'}
+        ${'banana|Apple|Apple|apple'}        | ${true}  | ${'Apple|apple|banana|~apple'}
+        ${'banana|Apple|Apple|apple|banana'} | ${false} | ${'banana|Apple|~apple|apple'}
+        ${'hello'}                           | ${true}  | ${'hello'}
         ${'!Hello'}                          | ${true}  | ${'!Hello|~!hello'}
     `('createSortAndFilterOperation $lines $sort', ({ lines, expectedResult, sort }) => {
         const normalizer = normalizeTargetWords({ sort, generateNonStrict: true });
