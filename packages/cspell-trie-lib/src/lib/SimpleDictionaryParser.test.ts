@@ -152,7 +152,7 @@ describe('Validate SimpleDictionaryParser', () => {
         ${s('Word')}        | ${s('Word|~word')}
         ${s('*error*')}     | ${s('error|~error|error+|~error+|+error|~+error|+error+|~+error+')}
     `('parseDictionaryLines simple $lines', ({ lines, expected }) => {
-        const r = [...parseDictionaryLines(lines)];
+        const r = [...parseDictionaryLines(lines, { stripCaseAndAccentsKeepDuplicate: true })];
         expect(r).toEqual(expected);
     });
 
@@ -165,7 +165,7 @@ describe('Validate SimpleDictionaryParser', () => {
         ${s('# cspell-dictionary: generate-alternatives|Apple|Arizona|New York')}          | ${{ stripCaseAndAccents: false }}              | ${s('Apple|~apple|Arizona|~arizona|New York|~new york')}
         ${s('Apple| # cspell-dictionary: no-generate-alternatives|Arizona|New York')}      | ${{}}                                          | ${s('Apple|~apple|Arizona|New York')}
         ${dictionary3()}                                                                   | ${{ stripCaseAndAccentsKeepDuplicate: false }} | ${s('Error|~error|Error+|~error+|+error|+error+|Code|~code|Code+|~code+|+code|+code+|msg|+msg|!err|!Errorerror|!Codemsg|Café|~café|~cafe|!codecode')}
-        ${s('# cspell-dictionary: split|"New York"|Tower of London')}                      | ${{}}                                          | ${s('New York|Tower|~tower|of|~of|London|~london')}
+        ${s('# cspell-dictionary: split|"New York"|Tower of London')}                      | ${{ stripCaseAndAccentsKeepDuplicate: true }}  | ${s('New York|Tower|~tower|of|~of|London|~london')}
         ${s('Hello|!Goodbye')}                                                             | ${{}}                                          | ${s('Hello|~hello|!Goodbye')}
         ${s('Hello|!Goodbye')}                                                             | ${{ stripCaseAndAccentsOnForbidden: true }}    | ${s('Hello|~hello|!Goodbye|~!goodbye')}
     `('parseDictionaryLines complex $lines', ({ lines, options, expected }) => {
