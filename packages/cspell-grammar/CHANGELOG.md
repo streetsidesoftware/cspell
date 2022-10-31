@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 6.13.2 (2022-10-31)
+
+### Bug Fixes
+
+* Do not generate duplicate entries by default ([#3793](https://github.com/streetsidesoftware/cspell/issues/3793)) ([f27d3c6](https://github.com/streetsidesoftware/cspell/commit/f27d3c68ad454719d71724f92693db57270827b9))
+
 ## 6.13.1 (2022-10-28)
 
 **Note:** Version bump only for package cspell-grammar
