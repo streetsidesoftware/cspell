@@ -4,8 +4,8 @@ Url: https://github.com/eslint/eslint
 Args: ["**","--exclude=bin/**","--exclude=CHANGELOG.md","--exclude=_data","--exclude=tests/bench/large.js","--exclude=docs/src/_includes","--exclude=docs/src/assets/{fonts,s?css,images}"]
 Summary:
   files: 1808
-  filesWithIssues: 1222
-  issues: 5373
+  filesWithIssues: 1221
+  issues: 5375
   errors: 0
 Errors: []
 
@@ -17,9 +17,10 @@ issues:
   - "conf/eslint-recommended.js:73:14    	isnan           	U   	\"use-isnan\": \"error\","
   - "conf/replacements.json:12:36    	parens  	U   	wrap-func\": [\"no-extra-parens\"],"
   - "conf/replacements.json:13:62    	paren   	U   	space-before-function-paren\"],"
-  - "docs/package.json:25:32     	syntaxhighlight 	U   	1ty/eleventy-plugin-syntaxhighlight\": \"^3.1.2\","
-  - "docs/package.json:27:10     	algoliasearch   	U   	\"algoliasearch\": \"^4.12.1\","
-  - "docs/package.json:36:10     	luxon           	U   	\"luxon\": \"^2.4.0\","
+  - "docs/package.json:19:23     	stylelint       	U   	\"lint:scss\": \"stylelint \\\"**/*.scss\\\"\","
+  - "docs/package.json:27:32     	syntaxhighlight 	U   	1ty/eleventy-plugin-syntaxhighlight\": \"^3.1.2\","
+  - "docs/package.json:29:10     	algoliasearch   	U   	\"algoliasearch\": \"^4.12.1\","
+  - "docs/package.json:38:10     	luxon           	U   	\"luxon\": \"^2.4.0\","
   - "docs/README.md:34:14    	docsjs  	U   	npm run lint:docsjs"
   - "docs/README.md:37:4     	autofix 	U   	To autofix JS files, run this from"
   - "docs/src/about/index.md:7:87    	Zakas       	U   	created by Nicholas C. Zakas in June 2013. Code"
@@ -45,15 +46,14 @@ issues:
   - "docs/src/assets/js/tabs.js:236:9    	decrementcurrent	U   	var decrementcurrentIndex = function ()"
   - "docs/src/assets/scss/carbon-ads.scss:7:2        	carbonads   	U   	#carbonads * {"
   - "docs/src/assets/scss/carbon-ads.scss:81:20      	poweredby   	U   	#carbonads .carbon-poweredby {"
-  - "docs/src/assets/scss/components/docs-navigation.scss:28:6       	flexer  	U   	.flexer {"
+  - "docs/src/assets/scss/components/docs-navigation.scss:27:6       	flexer  	U   	.flexer {"
   - "docs/src/assets/scss/components/search.scss:154:10  	docsearch   	U   	.algolia-docsearch-suggestion--highlight"
-  - "docs/src/assets/scss/docs.scss:124:44   	Csvg    	U   	data:image/svg+xml,%3Csvg width='45' height='"
-  - "docs/src/assets/scss/docs.scss:124:216  	Cpath   	U   	fill='%23ECFDF3'/%3E%3Cpath d='M30.5 16L19.5 27L"
-  - "docs/src/assets/scss/docs.scss:124:339  	Crect   	U   	linejoin='round'/%3E%3Crect x='1.5' y='1' width"
-  - "docs/src/assets/scss/docs.scss:152:6    	anchorjs	U   	.anchorjs-link {"
-  - "docs/src/assets/scss/print.scss:187:29  	mywebsite   	U   	'http']:not([href*='mywebsite.com'])::after {"
-  - "docs/src/assets/scss/syntax-highlighter.scss:90:8       	atrule  	U   	.token.atrule,"
-  - "docs/src/assets/scss/syntax-highlighter.scss:123:35     	nums    	U   	variant-numeric: tabular-nums;"
+  - "docs/src/assets/scss/docs.scss:120:44   	Csvg    	U   	data:image/svg+xml,%3Csvg width='45' height='"
+  - "docs/src/assets/scss/docs.scss:120:216  	Cpath   	U   	fill='%23ECFDF3'/%3E%3Cpath d='M30.5 16L19.5 27L"
+  - "docs/src/assets/scss/docs.scss:120:339  	Crect   	U   	linejoin='round'/%3E%3Crect x='1.5' y='1' width"
+  - "docs/src/assets/scss/docs.scss:148:6    	anchorjs	U   	.anchorjs-link {"
+  - "docs/src/assets/scss/syntax-highlighter.scss:85:8       	atrule  	U   	.token.atrule,"
+  - "docs/src/assets/scss/syntax-highlighter.scss:118:35     	nums    	U   	variant-numeric: tabular-nums;"
   - "docs/src/developer-guide/architecture/index.md:65:264   	espree      	U   	the given text with `espree` (or whatever the configured"
   - "docs/src/developer-guide/architecture/index.md:67:29    	estraverse  	U   	the AST is available, `estraverse` is used to traverse"
   - "docs/src/developer-guide/code-path-analysis.md:362:5    	hoge	U   	hoge();"
@@ -94,7 +94,7 @@ issues:
   - "docs/src/developer-guide/working-with-rules-deprecated.md:443:36    	doublequote 	U   	[\"Strings must use doublequote.\"]"
   - "docs/src/developer-guide/working-with-rules-deprecated.md:534:1     	camelcase   	U   	camelcase |"
   - "docs/src/developer-guide/working-with-rules-deprecated.md:581:88    	rulesdir    	U   	interface) using the `--rulesdir` option to specify the"
-  - "docs/src/developer-guide/working-with-rules.md:419:79   	multipass   	U   	without triggering multipass fixes. Each suggestion"
+  - "docs/src/developer-guide/working-with-rules.md:436:79   	multipass   	U   	without triggering multipass fixes. Each suggestion"
   - "docs/src/library/alert.md:9:12      	shortcode   	U   	There is a shortcode for each type of alert"
   - "docs/src/maintainer-guide/governance.md:74:35   	committership   	U   	important to recognize that committership is a privilege, not"
   - "docs/src/maintainer-guide/governance.md:88:106  	triaging        	U   	the project through triaging of issues, fixing bugs"

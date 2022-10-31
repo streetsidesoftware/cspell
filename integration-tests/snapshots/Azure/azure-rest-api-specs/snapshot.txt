@@ -3,16 +3,17 @@ Repository: Azure/azure-rest-api-specs
 Url: "https://github.com/Azure/azure-rest-api-specs.git"
 Args: ["--config=cSpell.json","**/*.{md,ts,js}"]
 Lines:
- CSpell: Files checked: 1931, Issues found: 2275 in 733 files
+ CSpell: Files checked: 1941, Issues found: 2298 in 739 files
  exit code: 1
 ./CONTRIBUTING.md:24:6      - Unknown word (tocstop)    -- <!-- tocstop -->
 ./CONTRIBUTING.md:86:3      - Unknown word (Poli)       -- - PoliCheck -
 ./CONTRIBUTING.md:9:29      - Unknown word (maxdepth)   -- npx markdown-toc -i --maxdepth 4 CONTRIBUTING.md
-./README.md:101:28    - Unknown word (Playfab)    -- +---Microsoft.Playfab
-./README.md:149:23    - Unknown word (sharedgallery) -- | |     +---sharedgallery
-./README.md:171:521   - Unknown word (enitity)       -- latter supports the enitity type sharing cross components
-./README.md:51:108    - Unknown word (AFEC)       -- Public Preview (behind [AFEC](https://armwiki.azurewebsite
-./README.md:99:10     - Unknown word (playfab)    -- | +---playfab
+./README.md:100:10    - Unknown word (playfab)    -- | \---playfab
+./README.md:101:14    - Unknown word (Playfab)    -- | +---Playfab
+./README.md:151:23    - Unknown word (sharedgallery) -- | |     +---sharedgallery
+./README.md:173:521   - Unknown word (enitity)       -- latter supports the enitity type sharing cross components
+./README.md:40:28     - Unknown word (resoure)    -- folders may contain resoure manager or data plane
+./README.md:52:108    - Unknown word (AFEC)       -- Public Preview (behind [AFEC](https://armwiki.azurewebsite
 ./SECURITY.md:13:72     - Unknown word (MSRC)       -- Security Response Center (MSRC) at [https://msrc.microsoft
 ./SECURITY.md:17:205    - Unknown word (msrc)       -- found at [microsoft.com/msrc](https://aka.ms/opensource
 ./arm-compute/quickstart-templates/README.md:3:107     - Unknown word (quickstart) -- specification/compute/quickstart-templates`. However
@@ -29,6 +30,10 @@ Lines:
 ./documentation/api-scenario/how-to/ResolveDependencies.md:246:22    - Unknown word (ipconfigmy) -- "name": "ipconfigmyVM",
 ./documentation/api-scenario/references/ApiScenarioDefinition.md:277:29    - Unknown word (somedomain) -- value: $(serviceName).somedomain.com
 ./documentation/api-scenario/references/ErrorCodeReference.md:32:31     - Unknown word (blobnfs)    -- "namespacePath":"/blobnfs"
+./documentation/cadl-structure-guidelines.md:135:372   - Unknown word (inital)             -- versioning decorators. The inital version in the spec
+./documentation/cadl-structure-guidelines.md:32:7      - Unknown word (confidentialledger) -- -> confidentialledger
+./documentation/cadl-structure-guidelines.md:61:92     - Unknown word (libarary)           -- management (resource manager) libarary.
+./documentation/cadl-structure-guidelines.md:66:107    - Unknown word (librarie)           -- must install supporting librarie for proper tooling support
 ./documentation/ci-fix.md:162:9     - Unknown word (Pakcage)    -- |MissingPakcageJson| adding the package
 ./documentation/ci-fix.md:60:216    - Unknown word (guildance)  -- github comment with guildance on how to fix.
 ./documentation/ci-fix.md:74:125    - Unknown word (differece)  -- final result is the differece set between the result
@@ -100,6 +105,7 @@ Lines:
 ./specification/apimanagement/resource-manager/readme.md:78:56     - Unknown word (apimsettings)               -- preview/2022-04-01-preview/apimsettings.json
 ./specification/apimanagement/resource-manager/readme.md:79:56     - Unknown word (apimskus)                   -- preview/2022-04-01-preview/apimskus.json
 ./specification/app/resource-manager/readme.python.md:9:26      - Unknown word (appcontainers) -- package-name: azure-mgmt-appcontainers
+./specification/appcomplianceautomation/resource-manager/readme.az.md:9:17      - Unknown word (appcomplianceautomation) -- extensions: appcomplianceautomation
 ./specification/appconfiguration/resource-manager/readme.md:176:50    - Unknown word (proxied)    -- plane level information proxied through the RP and cannot
 ./specification/applicationinsights/data-plane/Monitor.Exporters/readme.md:29:39     - Unknown word (schemaregistry) -- global settings for the schemaregistry.
 ./specification/applicationinsights/resource-manager/readme.go.md:19:165    - Unknown word (livetoken)  -- preview/2020-06-02-preview/livetoken_API.json
@@ -145,18 +151,17 @@ Lines:
 ./specification/compute/resource-manager/readme.az.md:5:21      - Unknown word (cloudservice) -- ``` yaml $(az) && $(cloudservice)
 ./specification/compute/resource-manager/readme.az.md:83:14     - Unknown word (sshkey)       -- group: sshkey
 ./specification/compute/resource-manager/readme.md:270:23    - Unknown word (Cloudservice) -- - Microsoft.Compute/CloudserviceRP/stable/2022-04-04
-./specification/confidentialledger/data-plane/readme.md:10:151    - Unknown word (identityservice)    -- ntialLedger/stable/2022-05-13/identityservice.json` for the most up
-./specification/confidentialledger/data-plane/readme.md:1:3       - Unknown word (confidentialledger) -- # confidentialledger
+./specification/confidentialledger/data-plane/readme.md:10:151    - Unknown word (identityservice) -- ntialLedger/stable/2022-05-13/identityservice.json` for the most up
 ./specification/connectedvmware/resource-manager/readme.azureresourceschema.md:9:17      - Unknown word (connectedvmware) -- - tag: schema-connectedvmware-2020-10-01-preview
 ./specification/containerregistry/resource-manager/readme.md:360:4     - Unknown word (Pyhton)     -- ## Pyhton
 ./specification/cosmos-db/data-plane/readme.go.md:8:14      - Unknown word (storagetables) -- namespace: storagetables
 ./specification/cosmos-db/data-plane/readme.md:49:46     - Unknown word (outputm)    -- only supports XML input/outputm which is not supported
 ./specification/cosmos-db/resource-manager/readme.go.md:14:41     - Unknown word (armcosmos)  -- resourcemanager/cosmos/armcosmos
 ./specification/cosmos-db/resource-manager/readme.md:43:53     - Unknown word (mongorbac)  -- preview/2022-08-15-preview/mongorbac.json
-./specification/cost-management/resource-manager/readme.md:156:57    - Unknown word (costallocation)             -- preview/2020-03-01-preview/costallocation.json
-./specification/cost-management/resource-manager/readme.md:245:52    - Unknown word (Operatio)                   -- Response schema of OperatioAPI does not match Arm
-./specification/cost-management/resource-manager/readme.md:68:63     - Unknown word (generatecostdetailsreport) -- 5-01/costmanagement.generatecostdetailsreport.json
-./specification/cost-management/resource-manager/readme.md:71:63     - Unknown word (generatedetailedcostreport) -- 0-01/costmanagement.generatedetailedcostreport.json
+./specification/cost-management/resource-manager/readme.md:155:57    - Unknown word (costallocation)             -- preview/2020-03-01-preview/costallocation.json
+./specification/cost-management/resource-manager/readme.md:244:52    - Unknown word (Operatio)                   -- Response schema of OperatioAPI does not match Arm
+./specification/cost-management/resource-manager/readme.md:67:63     - Unknown word (generatecostdetailsreport) -- 5-01/costmanagement.generatecostdetailsreport.json
+./specification/cost-management/resource-manager/readme.md:70:63     - Unknown word (generatedetailedcostreport) -- 0-01/costmanagement.generatedetailedcostreport.json
 ./specification/cpim/resource-manager/readme.go.md:17:14     - Unknown word (azureadexternalidentities) -- namespace: azureadexternalidentities
 ./specification/customerlockbox/resource-manager/readme.csharp.md:14:40     - Unknown word (customerlockbox) -- csharp-sdks-folder)/customerlockbox/management/Microsoft
 ./specification/customproviders/resource-manager/readme.terraform.md:18:19     - Unknown word (resourceproviders) -- - IdPortion: "resourceproviders"
@@ -230,7 +235,7 @@ Lines:
 ./specification/managednetwork/resource-manager/readme.cli.md:13:12     - Unknown word (managednetworkpeeringpolicies) -- "^.*[/]managednetworkpeeringpolicies([/][^/]*)?$": "managed
 ./specification/managednetwork/resource-manager/readme.cli.md:8:25      - Unknown word (managednetwork) -- namespace: azure.mgmt.managednetwork
 ./specification/managementgroups/resource-manager/readme.az.md:7:15      - Unknown word (managementgroup) -- extensions: managementgroup
-./specification/maps/data-plane/Creator/readme.md:49:17     - Unknown word (dwgconversion) -- - preview/2.0/dwgconversion.json
+./specification/maps/data-plane/Creator/readme.md:51:17     - Unknown word (dwgconversion) -- - preview/2.0/dwgconversion.json
 ./specification/maps/data-plane/Render/readme.md:30:96     - Unknown word (Lintdiff)   -- v0.26 of the Swagger Lintdiff.
 ./specification/maps/resource-manager/readme.go.md:14:39     - Unknown word (armmaps)    -- resourcemanager/maps/armmaps
 ./specification/mariadb/resource-manager/readme.go.md:14:42     - Unknown word (armmariadb) -- resourcemanager/mariadb/armmariadb
@@ -406,5 +411,5 @@ Lines:
 ./specification/vmwarecloudsimple/resource-manager/readme.csharp.md:13:40     - Unknown word (vmwarecloudsimple) -- csharp-sdks-folder)/vmwarecloudsimple/Microsoft.Azure.Management
 ./specification/web/resource-manager/readme.md:1019:18   - Unknown word (weidongxu)  -- approved-by: "@weidongxu-microsoft"
 ./specification/web/resource-manager/readme.md:1027:23   - Unknown word (cowlishaw)  -- approved-by: "@mark.cowlishaw"
-./specification/webpubsub/data-plane/readme.md:110:31    - Unknown word (webpubsubservice) -- name: azure-messaging-webpubsubservice
+./specification/webpubsub/data-plane/readme.md:120:31    - Unknown word (webpubsubservice) -- name: azure-messaging-webpubsubservice
 ./specification/windowsiot/resource-manager/readme.az.md:7:15      - Unknown word (windowsiotservices) -- extensions: windowsiotservices
