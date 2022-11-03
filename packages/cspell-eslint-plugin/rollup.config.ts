@@ -7,8 +7,10 @@ import rollupPluginTypescript from '@rollup/plugin-typescript';
 import rollupPluginJson from '@rollup/plugin-json';
 import rollupPluginDts from 'rollup-plugin-dts';
 import type { RollupOptions } from 'rollup';
+import { readFileSync } from 'fs';
 
-import pkg from './package.json' assert { type: 'json' };
+const pkgContent = readFileSync('./package.json', 'utf-8');
+const pkg = JSON.parse(pkgContent);
 
 const common: RollupOptions = {
     input: 'src/index.ts',
