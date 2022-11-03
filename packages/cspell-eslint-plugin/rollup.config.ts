@@ -8,7 +8,7 @@ import rollupPluginJson from '@rollup/plugin-json';
 import rollupPluginDts from 'rollup-plugin-dts';
 import type { RollupOptions } from 'rollup';
 
-import pkg from './package.json';
+import pkg from './package.json' assert { type: 'json' };
 
 const common: RollupOptions = {
     input: 'src/index.ts',
