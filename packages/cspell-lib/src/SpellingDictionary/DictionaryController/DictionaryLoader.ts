@@ -9,6 +9,7 @@ import {
 import { CSpellIO, Stats } from 'cspell-io';
 import { DictionaryDefinitionInternal } from '../../Models/CSpellSettingsInternalDef';
 import { toError } from '../../util/errors';
+import { StrongWeakMap } from '../../util/StrongWeakMap';
 import { SpellingDictionaryLoadError } from '../SpellingDictionaryError';
 
 const MAX_AGE = 10000;
@@ -75,8 +76,11 @@ interface SyncLoaders {
 }
 
 export class DictionaryLoader {
-    private dictionaryCache = new Map<string, CacheEntry>();
-    private dictionaryCacheByDef = new Map<DictionaryDefinitionInternal, { key: string; entry: CacheEntry }>();
+    private dictionaryCache = new StrongWeakMap<string, CacheEntry>();
+    private dictionaryCacheByDef = new StrongWeakMap<
+        DictionaryDefinitionInternal,
+        { key: string; entry: CacheEntry }
+    >();
     private reader: Reader;
     private readerSync: ReaderSync;
 
