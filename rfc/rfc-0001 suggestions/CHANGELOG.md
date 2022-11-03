@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 6.14.0 (2022-11-03)
+
+**Note:** Version bump only for package rfc-0001-suggestions
+
 ## 6.13.3 (2022-10-31)
 
 ### Bug Fixes
