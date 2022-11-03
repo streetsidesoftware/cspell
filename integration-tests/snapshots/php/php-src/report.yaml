@@ -5,7 +5,7 @@ Args: ["--config=${repoConfig}/cspell.json","**/*.{md,c,h,php}"]
 Summary:
   files: 1842
   filesWithIssues: 1308
-  issues: 44222
+  issues: 44204
   errors: 0
 Errors: []
 
@@ -3020,7 +3020,6 @@ issues:
   - "ext/ldap/ldap.c:3930:43 	sssz            	U   	parameters(myargcount, \"O|sssz/\", &link, ldap_link"
   - "ext/ldap/ldap.c:4021:17 	lauthzid        	U   	struct berval *lauthzid;"
   - "ext/ldap/ldap.c:4057:12 	lttl            	U   	ber_int_t lttl;"
-  - "ext/ldap/ldap.stub.php:8:21     	DEREF                   	U   	* @cvalue LDAP_DEREF_NEVER"
   - "ext/ldap/ldap.stub.php:63:48    	ORALDAP                 	U   	00) || defined(HAVE_ORALDAP))"
   - "ext/ldap/ldap.stub.php:71:25    	SIZELIMIT               	U   	* @cvalue LDAP_OPT_SIZELIMIT"
   - "ext/ldap/ldap.stub.php:76:25    	TIMELIMIT               	U   	* @cvalue LDAP_OPT_TIMELIMIT"
@@ -3045,7 +3044,6 @@ issues:
   - "ext/ldap/ldap.stub.php:607:29   	VLVRESPONSE             	U   	cvalue LDAP_CONTROL_VLVRESPONSE"
   - "ext/ldap/ldap.stub.php:632:128  	sizelimit               	U   	attributes_only = 0, int $sizelimit = -1, int $timelimit"
   - "ext/ldap/ldap.stub.php:632:149  	timelimit               	U   	sizelimit = -1, int $timelimit = -1, int $deref = LDAP"
-  - "ext/ldap/ldap.stub.php:632:170  	deref                   	U   	timelimit = -1, int $deref = LDAP_DEREF_NEVER,"
   - "ext/ldap/ldap.stub.php:754:68   	SETREBINDPROC           	U   	& defined(HAVE_3ARG_SETREBINDPROC))"
   - "ext/ldap/ldap.stub.php:776:19   	exop                    	U   	function ldap_exop(LDAP\\Connection $ldap"
   - "ext/ldap/tests/README.md:20:17      	noninteractive  	U   	DEBIAN_FRONTEND=noninteractive aptitude install -q"
