@@ -68,7 +68,7 @@ jobs:
 
       - run: pnpm i
       - run: pnpm run build
-      - run: pnpm --workspace-concurrency 1 test
+      - run: pnpm test
 
       - name: verify trace command
         run: pnpm run test-bin-trace
