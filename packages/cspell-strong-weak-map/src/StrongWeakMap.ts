@@ -1,5 +1,4 @@
-// eslint-disable-next-line @typescript-eslint/ban-types
-export class StrongWeakMap<K, V extends {}> implements Map<K, V> {
+export class StrongWeakMap<K, V extends object> implements Map<K, V> {
     private map: Map<K, WeakRef<V>>;
 
     constructor(init?: [K, V][]) {
