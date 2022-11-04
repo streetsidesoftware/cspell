@@ -10,6 +10,7 @@
             "name": "cspell-strong-weak-map: Jest current-file",
             "program": "${workspaceFolder}/../../node_modules/jest/bin/jest.js",
             "args": ["--runInBand", "${fileBasename}"],
+            "runtimeArgs": ["--expose-gc"],
             "console": "integratedTerminal",
             "internalConsoleOptions": "neverOpen"
         },
@@ -19,6 +20,7 @@
             "name": "cspell-strong-weak-map: Jest All",
             "program": "${workspaceFolder}/../../node_modules/jest/bin/jest.js",
             "args": ["--runInBand"],
+            "runtimeArgs": ["--expose-gc"],
             "console": "integratedTerminal",
             "internalConsoleOptions": "neverOpen"
         }
