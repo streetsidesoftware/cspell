@@ -1,0 +1,73 @@
+{
+  "name": "@cspell/strong-weak-map",
+  "publishConfig": {
+    "access": "public"
+  },
+  "version": "6.14.0",
+  "description": "A Map with weakly referenced values.",
+  "keywords": [
+    "Map",
+    "WeakMap",
+    "Weak",
+    "Values"
+  ],
+  "author": "Jason Dent <jason@streetsidesoftware.nl>",
+  "homepage": "https://github.com/streetsidesoftware/cspell/tree/main/packages/cspell-strong-weak-map#readme",
+  "license": "MIT",
+  "main": "dist/index.js",
+  "directories": {
+    "dist": "dist"
+  },
+  "exports": {
+    ".": {
+      "require": "./dist/index.js"
+    },
+    "./index": "./dist/index.js",
+    "./index.js": "./dist/index.js",
+    "./index.d.ts": "./dist/index.d.ts"
+  },
+  "typings": "dist/index.d.ts",
+  "typesVersions": {
+    "*": {
+      "index.d.ts": [
+        "dist/index.d.ts"
+      ],
+      "dist/index.d.ts": [
+        "dist/index.d.ts"
+      ],
+      "*": [
+        "dist/*",
+        "dist/*/index.d.ts"
+      ]
+    }
+  },
+  "files": [
+    "dist",
+    "!**/__mocks__",
+    "!**/*.spec.*",
+    "!**/examples/**",
+    "!**/*.test.*",
+    "!**/test/**",
+    "!**/*.map"
+  ],
+  "scripts": {
+    "build": "tsc -p .",
+    "watch": "tsc -p . -w",
+    "clean": "rimraf dist coverage .tsbuildinfo",
+    "clean-build": "pnpm run clean && pnpm run build",
+    "coverage": "node --expose-gc ../../node_modules/jest/bin/jest.js --coverage",
+    "test-watch": "node --expose-gc ../../node_modules/jest/bin/jest.js --watch",
+    "test": "node --expose-gc ../../node_modules/jest/bin/jest.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/streetsidesoftware/cspell.git"
+  },
+  "bugs": {
+    "url": "https://github.com/streetsidesoftware/cspell"
+  },
+  "engines": {
+    "node": ">=14.6"
+  },
+  "devDependencies": {}
+}
