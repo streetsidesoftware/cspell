@@ -13,4 +13,5 @@ module.exports = {
             '<rootDir>/src/__mocks__/fileMock.js',
         '\\.(css|less)$': '<rootDir>/src/__mocks__/styleMock.js',
     },
+    maxConcurrency: 1,
 };
