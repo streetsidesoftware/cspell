@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/ban-types */
 import { StrongWeakMap } from './StrongWeakMap';
 import { promisify } from 'util';
 

@@ -9,7 +9,7 @@ import {
 import { CSpellIO, Stats } from 'cspell-io';
 import { DictionaryDefinitionInternal } from '../../Models/CSpellSettingsInternalDef';
 import { toError } from '../../util/errors';
-import { StrongWeakMap } from '../../util/StrongWeakMap';
+import { StrongWeakMap } from '@cspell/strong-weak-map';
 import { SpellingDictionaryLoadError } from '../SpellingDictionaryError';
 
 const MAX_AGE = 10000;
