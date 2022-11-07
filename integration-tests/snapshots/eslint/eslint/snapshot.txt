@@ -3,7 +3,7 @@ Repository: eslint/eslint
 Url: "https://github.com/eslint/eslint"
 Args: ["**","--exclude=bin/**","--exclude=CHANGELOG.md","--exclude=_data","--exclude=tests/bench/large.js","--exclude=docs/src/_includes","--exclude=docs/src/assets/{fonts,s?css,images}"]
 Lines:
- CSpell: Files checked: 1808, Issues found: 5375 in 1221 files
+ CSpell: Files checked: 1814, Issues found: 5398 in 1226 files
  exit code: 1
 ./LICENSE:1:58      - Unknown word (openjsf)    -- other contributors, <www.openjsf.org>
 ./Makefile.js:144:88    - Unknown word (ined)               -- followed by the string "ined".
@@ -39,7 +39,7 @@ Lines:
 ./conf/replacements.json:13:62     - Unknown word (paren)      -- space-before-function-paren"],
 ./docs/README.md:34:14     - Unknown word (docsjs)     -- npm run lint:docsjs
 ./docs/README.md:37:4      - Unknown word (autofix)    -- To autofix JS files, run this from
-./docs/package.json:19:23     - Unknown word (stylelint)  -- "lint:scss": "stylelint \"**/*.scss\"",
+./docs/package.json:19:23     - Unknown word (stylelint)  -- "lint:scss": "stylelint \"**/*.{scss,html}\
 ./docs/package.json:27:32     - Unknown word (syntaxhighlight) -- 1ty/eleventy-plugin-syntaxhighlight": "^3.1.2",
 ./docs/package.json:29:10     - Unknown word (algoliasearch)   -- "algoliasearch": "^4.12.1",
 ./docs/package.json:38:10     - Unknown word (luxon)           -- "luxon": "^2.4.0",
@@ -67,13 +67,13 @@ Lines:
 ./docs/src/assets/scss/carbon-ads.scss:7:2       - Unknown word (carbonads)  -- #carbonads * {
 ./docs/src/assets/scss/carbon-ads.scss:81:20     - Unknown word (poweredby)  -- #carbonads .carbon-poweredby {
 ./docs/src/assets/scss/components/docs-navigation.scss:27:6      - Unknown word (flexer)     -- .flexer {
-./docs/src/assets/scss/components/search.scss:154:10    - Unknown word (docsearch)  -- .algolia-docsearch-suggestion--highlight
+./docs/src/assets/scss/components/search.scss:153:10    - Unknown word (docsearch)  -- .algolia-docsearch-suggestion--highlight
 ./docs/src/assets/scss/docs.scss:120:216   - Unknown word (Cpath)      -- fill='%23ECFDF3'/%3E%3Cpath d='M30.5 16L19.5 27L
 ./docs/src/assets/scss/docs.scss:120:339   - Unknown word (Crect)      -- linejoin='round'/%3E%3Crect x='1.5' y='1' width
 ./docs/src/assets/scss/docs.scss:120:44    - Unknown word (Csvg)       -- data:image/svg+xml,%3Csvg width='45' height='
 ./docs/src/assets/scss/docs.scss:148:6     - Unknown word (anchorjs)   -- .anchorjs-link {
-./docs/src/assets/scss/syntax-highlighter.scss:118:35    - Unknown word (nums)       -- variant-numeric: tabular-nums;
-./docs/src/assets/scss/syntax-highlighter.scss:85:8      - Unknown word (atrule)     -- .token.atrule,
+./docs/src/assets/scss/syntax-highlighter.scss:117:35    - Unknown word (nums)       -- variant-numeric: tabular-nums;
+./docs/src/assets/scss/syntax-highlighter.scss:84:8      - Unknown word (atrule)     -- .token.atrule,
 ./docs/src/developer-guide/architecture/index.md:65:264    - Unknown word (espree)     -- the given text with `espree` (or whatever the configured
 ./docs/src/developer-guide/architecture/index.md:67:29     - Unknown word (estraverse) -- the AST is available, `estraverse` is used to traverse
 ./docs/src/developer-guide/code-path-analysis.md:362:5     - Unknown word (hoge)       -- hoge();
@@ -169,6 +169,8 @@ Lines:
 ./docs/src/rules/no-irregular-whitespace.md:39:2      - Unknown word (ufeff)      -- \ufeff - Zero Width No-Break
 ./docs/src/rules/no-irregular-whitespace.md:51:30     - Unknown word (ZWSP)       -- Zero Width Space - <ZWSP>
 ./docs/src/rules/no-loop-func.md:12:5      - Unknown word (funcs)      -- funcs[i] = function() {
+./docs/src/rules/no-new-native-nonconstructor.md:2:22      - Unknown word (nonconstructor) -- title: no-new-native-nonconstructor
+./docs/src/rules/no-new-native-nonconstructor.md:65:11     - Unknown word (corge)          -- const corge = new BigInt(900719
 ./docs/src/rules/no-param-reassign.md:165:14    - Unknown word (barrito)    -- function foo(barrito) {
 ./docs/src/rules/no-plusplus.md:2:11      - Unknown word (plusplus)   -- title: no-plusplus
 ./docs/src/rules/no-proto.md:2:11      - Unknown word (proto)      -- title: no-proto
@@ -281,10 +283,10 @@ Lines:
 ./docs/src/user-guide/migrating-to-7.0.0.md:211:23    - Unknown word (cliengine)  -- <a name="deprecate-cliengine"></a> The `CLIEngine
 ./docs/src/user-guide/migrating-to-8.0.0.md:21:13     - Unknown word (codeframe)  -- * [Removed `codeframe` and `table` formatters
 ./lib/cli-engine/cli-engine.js:47:4      - Unknown word (Typedefs)   -- // Typedefs
-./lib/cli-engine/formatters/html.js:222:66    - Unknown word (noopener)   -- target="_blank" rel="noopener noreferrer">${ruleId
-./lib/cli-engine/formatters/html.js:222:75    - Unknown word (noreferrer) -- blank" rel="noopener noreferrer">${ruleId ? ruleId
-./lib/cli-engine/formatters/html.js:278:9     - Unknown word (colspan)    -- <th colspan="4">
-./lib/cli-engine/formatters/html.js:46:47     - Unknown word (Neue)       -- family:Arial, "Helvetica Neue", Helvetica, sans-serif
+./lib/cli-engine/formatters/html.js:247:66    - Unknown word (noopener)   -- target="_blank" rel="noopener noreferrer">${ruleId
+./lib/cli-engine/formatters/html.js:247:75    - Unknown word (noreferrer) -- blank" rel="noopener noreferrer">${ruleId ? ruleId
+./lib/cli-engine/formatters/html.js:303:9     - Unknown word (colspan)    -- <th colspan="4">
+./lib/cli-engine/formatters/html.js:46:48     - Unknown word (Neue)       -- family: Arial, "Helvetica Neue", Helvetica, sans-serif
 ./lib/cli-engine/hash.js:12:25     - Unknown word (imurmurhash) -- const murmur = require("imurmurhash");
 ./lib/cli-engine/lint-result-cache.js:14:58     - Unknown word (jsonify)    -- stable-stringify-without-jsonify");
 ./lib/cli-engine/xml-escape.js:29:26     - Unknown word (apos)       -- return "&apos;";
@@ -292,7 +294,9 @@ Lines:
 ./lib/config/default-config.js:59:61     - Unknown word (globbed)    -- ensure these files are globbed by default
 ./lib/eslint/eslint-helpers.js:19:26     - Unknown word (nodelib)    -- const fswalk = require("@nodelib/fs.walk");
 ./lib/eslint/eslint-helpers.js:19:7      - Unknown word (fswalk)     -- const fswalk = require("@nodelib
-./lib/eslint/eslint-helpers.js:269:9     - Unknown word (globby)     -- let globbyPatterns = [];
+./lib/eslint/eslint-helpers.js:225:36    - Unknown word (Errror)     -- UnmatchedSearchPatternsErrror} If there is a pattern
+./lib/eslint/eslint-helpers.js:402:40    - Unknown word (prepopulated) -- for the cwd, which is prepopulated in the searches map
+./lib/eslint/eslint-helpers.js:486:9     - Unknown word (globby)       -- let globbyPatterns = [];
 ./lib/linter/code-path-analysis/code-path-state.js:159:31    - Unknown word (unflattened) -- {CodePathSegment[]} unflattenedFromSegments Segments
 ./lib/linter/code-path-analysis/code-path-state.js:913:23    - Unknown word (Segs)        -- const prevSegsOfLeavingSegment = [headOfLeav
 ./lib/linter/code-path-analysis/code-path.js:138:34    - Unknown word (Omittable)  -- param {Object} [options] Omittable.
@@ -350,6 +354,7 @@ Lines:
 ./lib/rules/no-misleading-character-class.js:15:7      - Unknown word (REGEXPP)    -- const REGEXPP_LATEST_ECMA_VERSION
 ./lib/rules/no-mixed-requires.js:182:62    - Unknown word (Declarators) -- The list of VariableDeclarators.
 ./lib/rules/no-mixed-requires.js:78:66     - Unknown word (iojs)       -- per nodejs v0.12.2 and iojs v0.7.1
+./lib/rules/no-new-native-nonconstructor.js:32:18     - Unknown word (Nonconstructor) -- noNewNonconstructor: "`{{name}}` cannot
 ./lib/rules/no-restricted-imports.js:179:57    - Unknown word (ignorecase) -- allowRelativePaths: true, ignorecase: !caseSensitive }).add
 ./lib/rules/no-trailing-spaces.js:57:13     - Unknown word (NONBLANK)   -- NONBLANK = `${BLANK_CLASS}+$
 ./lib/rules/no-useless-backreference.js:112:37    - Unknown word (bref's)     -- // group is bref's ancestor => bref is
@@ -426,10 +431,11 @@ Lines:
 ./tests/lib/config/flat-config-array.js:1430:30   - Unknown word (doesnt)      -- "doesnt-exist/match": "error
 ./tests/lib/config/flat-config-array.js:147:22    - Unknown word (noniterable) -- it("should allow noniterable baseConfig objects"
 ./tests/lib/config/flat-config-array.js:898:43    - Unknown word (truex)       -- foo: "truex"
-./tests/lib/eslint/flat-eslint.js:1216:30   - Unknown word (reignoring)   -- it("should allow reignoring of previously ignored
-./tests/lib/eslint/flat-eslint.js:4242:9    - Unknown word (xdescribe)    -- xdescribe("ignorePatterns can
-./tests/lib/eslint/flat-eslint.js:4945:48   - Unknown word (intepreted)   -- files' they should be intepreted as relative to the config
-./tests/lib/eslint/flat-eslint.js:817:65    - Unknown word (doesnotexist) -- lintFiles(["subdir1", "doesnotexist/*.js"]);
+./tests/lib/eslint/flat-eslint.js:1268:30   - Unknown word (reignoring)   -- it("should allow reignoring of previously ignored
+./tests/lib/eslint/flat-eslint.js:4393:9    - Unknown word (xdescribe)    -- xdescribe("ignorePatterns can
+./tests/lib/eslint/flat-eslint.js:5096:48   - Unknown word (intepreted)   -- files' they should be intepreted as relative to the config
+./tests/lib/eslint/flat-eslint.js:821:57    - Unknown word (doesnotexist) -- lintFiles(["subdir1", "doesnotexist/*.js"]);
+./tests/lib/eslint/flat-eslint.js:871:58    - Unknown word (doesexist)    -- await eslint.lintFiles(["doesexist/*.js"]);
 ./tests/lib/linter/code-path-analysis/code-path-analyzer.js:30:16     - Unknown word (ESQUERY)    -- const STANDARD_ESQUERY_OPTION = { visitorKeys
 ./tests/lib/linter/config-comment-parser.js:165:41    - Unknown word (ELEVENTEEN) -- code = "a: seventy, b:ELEVENTEEN";
 ./tests/lib/linter/linter.js:3229:1    - Unknown word (consolexlog) -- consolexlog("test2");
@@ -518,11 +524,11 @@ Lines:
 ./tests/lib/rules/object-shorthand.js:22:7      - Unknown word (LONGFORM)   -- const LONGFORM_PROPERTY_ERROR = { messageId
 ./tests/lib/rules/prefer-object-spread.js:213:112   - Unknown word (butwhy)     -- {}, { superNested: 'butwhy' })))",
 ./tests/lib/rules/prefer-object-spread.js:700:39    - Unknown word (somethingelse) -- import { Something as somethingelse } from 'foo';
-./tests/lib/rules/prefer-regex-literals.js:1268:65   - Unknown word (blahblah)   -- instanceof RegExp(String.raw`blahblah`, 'g') ? typeof new
-./tests/lib/rules/prefer-regex-literals.js:1300:36   - Unknown word (someregular) -- code: "[   new RegExp(`someregular`)]",
-./tests/lib/rules/prefer-regex-literals.js:1328:191  - Unknown word (notregbutstring) -- new RegExp('abc') : 'notregbutstring'",
-./tests/lib/rules/prefer-regex-literals.js:2276:62   - Unknown word (avalue)          -- condition2) new RegExp('avalue').test(str);",
-./tests/lib/rules/prefer-regex-literals.js:2467:32   - Unknown word (mysafereg)       -- code: "new RegExp('mysafereg' /* comment explaining
+./tests/lib/rules/prefer-regex-literals.js:1269:65   - Unknown word (blahblah)   -- instanceof RegExp(String.raw`blahblah`, 'g') ? typeof new
+./tests/lib/rules/prefer-regex-literals.js:1301:36   - Unknown word (someregular) -- code: "[   new RegExp(`someregular`)]",
+./tests/lib/rules/prefer-regex-literals.js:1329:191  - Unknown word (notregbutstring) -- new RegExp('abc') : 'notregbutstring'",
+./tests/lib/rules/prefer-regex-literals.js:2277:62   - Unknown word (avalue)          -- condition2) new RegExp('avalue').test(str);",
+./tests/lib/rules/prefer-regex-literals.js:2468:32   - Unknown word (mysafereg)       -- code: "new RegExp('mysafereg' /* comment explaining
 ./tests/lib/rules/prefer-template.js:168:27    - Unknown word (unescapes)  -- code: "foo + 'unescapes an escaped single quote
 ./tests/lib/rules/quotes.js:532:24    - Unknown word (notoctal)   -- code: "var notoctal = '\\0'",
 ./tests/lib/rules/require-unicode-regexp.js:26:15     - Unknown word (gimuy)      -- "/foo/gimuy",
