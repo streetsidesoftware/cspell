@@ -1,5 +1,7 @@
-/* eslint-disable @typescript-eslint/ban-types */
 import { StrongWeakMap } from './StrongWeakMap';
+import { promisify } from 'util';
+
+const wait = promisify(setTimeout);
 
 describe('StrongWeakMap', () => {
     test.each`
@@ -42,6 +44,27 @@ describe('StrongWeakMap', () => {
     `('has', ({ init, has, expected }) => {
         const map = new StrongWeakMap(safeBoxKeyValues(init));
         expect(map.has(has)).toBe(expected);
+    });
+
+    test.each`
+        init                                    | hold   | expected
+        ${[['a', 'a'], ['b', 'b'], ['c', 'c']]} | ${'a'} | ${['a']}
+        ${[['a', 'a'], ['b', 'b'], ['c', 'c']]} | ${'b'} | ${['b']}
+    `('Garbage Collection', async ({ init, hold, expected }) => {
+        const map = new StrongWeakMap(safeBoxKeyValues(init));
+        const allKeys = keys(map);
+        const v = map.get(hold);
+        expect(v).toBeDefined();
+        expect([...map.keys()]).toEqual(allKeys);
+        expect(gc).toBeDefined();
+        await wait(1);
+        gc?.();
+        await wait(1);
+        expect([...map.keys()]).toEqual(allKeys);
+        map.cleanKeys();
+        // getting values will clean up keys
+        expect([...map.keys()]).toEqual(expected);
+        expect(map.get(hold)).toBe(v);
     });
 
     test('toStringTag', () => {
@@ -97,4 +120,9 @@ function addAll<K, V>(map: Map<K, Boxed<V>>, entries: [key: K, value: V][] | und
 
 function deleteAll<K, V>(map: Map<K, Boxed<V>>, keys: K[] | undefined) {
     keys?.forEach((k) => map.delete(k));
+}
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+function keys<T>(iterable: Iterable<[T, ...any[]]>): T[] {
+    return [...iterable].map(([k]) => k);
 }
