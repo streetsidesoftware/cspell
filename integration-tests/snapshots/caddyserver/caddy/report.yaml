@@ -4,8 +4,8 @@ Url: https://github.com/caddyserver/caddy.git
 Args: ["**/*.go"]
 Summary:
   files: 224
-  filesWithIssues: 211
-  issues: 3526
+  filesWithIssues: 207
+  issues: 3465
   errors: 0
 Errors: []
 
@@ -48,11 +48,9 @@ issues:
   - "caddyconfig/caddyfile/formatter_test.go:332:10  	ACMEEMAIL   	U   	email {$ACMEEMAIL}"
   - "caddyconfig/caddyfile/formatter.go:216:8    	Caddyfiles  	U   	// ...Caddyfiles should, however, end"
   - "caddyconfig/caddyfile/parse_test.go:180:12  	testdata    	U   	import testdata/import_test1.txt`, false"
-  - "caddyconfig/caddyfile/parse_test.go:462:12  	notfound    	U   	{`import notfound/*`, false, [][]string"
   - "caddyconfig/caddyfile/parse_test.go:552:13  	foofoobarbar	U   	expect: \"foofoobarbar\","
   - "caddyconfig/caddyfile/parse_test.go:564:13  	foobarfoobar	U   	expect: \"foobarfoobar\","
   - "caddyconfig/caddyfile/parse_test.go:576:13  	foobarbaz   	U   	expect: \"foobarbaz\","
-  - "caddyconfig/caddyfile/parse_test.go:666:4   	basicauth   	U   	basicauth / import password"
   - "caddyconfig/caddyfile/parse.go:176:19   	redeclaration   	U   	return p.Errf(\"redeclaration of previously declared"
   - "caddyconfig/caddyfile/parse.go:185:57   	namespacing     	U   	across files/snippets by namespacing them. Without"
   - "caddyconfig/caddyfile/parse.go:331:7    	globbing        	U   	// or globbing pattern. When the function"
@@ -122,23 +120,19 @@ issues:
   - "caddytest/integration/stream_test.go:155:3      	rstring     	U   	rstring, err := httputil.DumpRequest"
   - "caddytest/integration/stream_test.go:339:31     	automaticlly	U   	underlying transport will automaticlly add gzip"
   - "cmd/caddy/main.go:27:19     	xcaddy  	U   	// Or you can use xcaddy which does it all for"
-  - "cmd/cobra.go:69:46      	setcap  	U   	this on Linux is to use setcap:"
   - "cmd/commandfuncs.go:44:10   	Pidfile     	U   	startCmdPidfileFlag := fl.String(\"pidfile"
   - "cmd/commandfuncs.go:46:10   	Envfile     	U   	startCmdEnvfileFlag := fl.String(\"envfile"
   - "cmd/commandfuncs.go:46:36   	envfile     	U   	tCmdEnvfileFlag := fl.String(\"envfile\")"
   - "cmd/commandfuncs.go:57:30   	pingback    	U   	craft the command with a pingback address and with a"
-  - "cmd/commandfuncs.go:82:2    	stdinpipe   	U   	stdinpipe, err := cmd.StdinPipe"
   - "cmd/commandfuncs.go:127:16  	Pingback    	U   	err = handlePingbackConn(conn, expect)"
   - "cmd/commandfuncs.go:261:44  	USERPROFILE 	U   	== \"\" && os.Getenv(\"USERPROFILE\") == \"\" && !hasXDG"
   - "cmd/commands.go:33:47   	godoc       	U   	the RegisterCommand() godoc."
-  - "cmd/commands.go:62:18   	flagset     	U   	// Flags is the flagset for command."
   - "cmd/commands.go:71:40   	initialised 	U   	returns a list of commands initialised by"
   - "cmd/commands.go:409:63  	manpages    	U   	directory where the manpages are generated\")"
   - "cmd/commands.go:435:12  	autoload    	U   	$ echo \"autoload -U compinit; compinit"
   - "cmd/commands.go:435:24  	compinit    	U   	$ echo \"autoload -U compinit; compinit\" >> ~/.zshrc"
   - "cmd/commands.go:438:32  	fpath       	U   	completion zsh > \"${fpath[1]}/_%[1]s\""
   - "cmd/main.go:36:20   	pflag       	U   	\"github.com/spf13/pflag\""
-  - "cmd/main.go:45:32   	USERAGENT   	U   	ok := os.LookupEnv(\"USERAGENT\"); ok {"
   - "cmd/main.go:219:11  	staticcheck 	U   	//nolint:staticcheck"
   - "cmd/packagesfuncs.go:39:8       	Pkgs    	U   	pluginPkgs, err := getPluginPackages"
   - "cmd/packagesfuncs.go:197:3      	iface   	U   	iface := any(modInfo.New("
@@ -212,9 +206,8 @@ issues:
   - "modules/caddyhttp/errors.go:97:18   	abcdefghijkmnopqrstuvwxyz   	U   	dict := []byte(\"abcdefghijkmnopqrstuvwxyzABCDEFGHJKLMNPQRTUVWXY"
   - "modules/caddyhttp/errors.go:97:43   	ABCDEFGHJKLMNPQRTUVWXY      	U   	abcdefghijkmnopqrstuvwxyzABCDEFGHJKLMNPQRTUVWXY23456789\")"
   - "modules/caddyhttp/errors.go:99:18   	abcdefghijkmnpqrstuvwxyz    	U   	dict = []byte(\"abcdefghijkmnpqrstuvwxyz0123456789\")"
-  - "modules/caddyhttp/fileserver/browse.go:15:9     	fileserver  	U   	package fileserver"
-  - "modules/caddyhttp/fileserver/browse.go:47:7     	fsrv        	U   	func (fsrv *FileServer) serveBrowse"
-  - "modules/caddyhttp/fileserver/browse.go:53:49    	hrefs       	U   	trailing slash because hrefs to"
+  - "modules/caddyhttp/fileserver/browse.go:47:7     	fsrv    	U   	func (fsrv *FileServer) serveBrowse"
+  - "modules/caddyhttp/fileserver/browse.go:53:49    	hrefs   	U   	trailing slash because hrefs to"
   - "modules/caddyhttp/fileserver/browsetplcontext_test.go:33:10     	quux    	U   	{\"/qux/quux/corge/\", []crumb{"
   - "modules/caddyhttp/fileserver/browsetplcontext_test.go:33:15     	corge   	U   	{\"/qux/quux/corge/\", []crumb{"
   - "modules/caddyhttp/fileserver/browsetplcontext_test.go:39:6      	مجلد    	U   	{\"/مجلد/\", []crumb{"
@@ -273,8 +266,7 @@ issues:
   - "modules/caddyhttp/requestbody/caddyfile.go:15:9     	requestbody 	U   	package requestbody"
   - "modules/caddyhttp/responsewriter_test.go:23:6       	barebones   	U   	// a barebones http.ResponseWriter"
   - "modules/caddyhttp/responsewriter_test.go:64:22      	middlewares 	U   	// what we expect middlewares to do:"
-  - "modules/caddyhttp/reverseproxy/addresses.go:15:9    	reverseproxy	U   	package reverseproxy"
-  - "modules/caddyhttp/reverseproxy/addresses.go:50:20   	proxying    	U   	// a backend and proxying to it, so we cannot"
+  - "modules/caddyhttp/reverseproxy/addresses.go:50:20   	proxying	U   	// a backend and proxying to it, so we cannot"
   - "modules/caddyhttp/reverseproxy/admin.go:26:28   	Upstreams   	U   	RegisterModule(adminUpstreams{})"
   - "modules/caddyhttp/reverseproxy/caddyfile.go:676:56  	subroutes   	U   	httpcaddyfile.Helper to parse subroutes."
   - "modules/caddyhttp/reverseproxy/fastcgi/client_test.go:50:26     	fcgic   	U   	scriptFile = \"/tank/www/fcgic_test.php\""
@@ -393,10 +385,9 @@ issues:
   - "modules/caddytls/zerosslissuer.go:141:3     	EABKID  	U   	EABKID string `json:\"eab"
   - "modules/caddytls/zerosslissuer.go:142:3     	EABHMAC 	U   	EABHMACKey string `json:\"eab"
   - "modules/filestorage/filestorage.go:15:9     	filestorage 	U   	package filestorage"
-  - "modules/logging/encoders.go:54:44   	Zapcore     	U   	NewConsoleEncoder(ce.ZapcoreEncoderConfig())"
-  - "modules/logging/encoders.go:228:32  	Millis      	U   	timeFormatter = zapcore.EpochMillisTimeEncoder"
-  - "modules/logging/encoders.go:230:32  	Nanos       	U   	timeFormatter = zapcore.EpochNanosTimeEncoder"
-  - "modules/logging/encoders.go:288:5   	bufferpool  	U   	var bufferpool = buffer.NewPool()"
+  - "modules/logging/encoders.go:54:44   	Zapcore 	U   	NewConsoleEncoder(ce.ZapcoreEncoderConfig())"
+  - "modules/logging/encoders.go:228:32  	Millis  	U   	timeFormatter = zapcore.EpochMillisTimeEncoder"
+  - "modules/logging/encoders.go:230:32  	Nanos   	U   	timeFormatter = zapcore.EpochNanosTimeEncoder"
   - "modules/logging/filewriter.go:28:12     	natefinch   	U   	\"gopkg.in/natefinch/lumberjack.v2\""
   - "modules/logging/filters_test.go:89:20   	notexist	U   	{replaceAction, \"notexist\", \"REDACTED\"},"
   - "modules/logging/filters_test.go:131:2   	outval  	U   	outval := out.Interface.(caddyhttp"
