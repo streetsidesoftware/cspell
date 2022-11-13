@@ -1,0 +1,1 @@
+export { TyposDef } from './typos';
