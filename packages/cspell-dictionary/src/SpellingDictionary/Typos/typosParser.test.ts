@@ -7,7 +7,8 @@ describe('TypoParser', () => {
         ${'apple ->orange'}    | ${{ apple: 'orange' }}
         ${'apple ->'}          | ${{ apple: null }}
         ${'apple : , '}        | ${{ apple: null }}
-        ${'a: b; c'}           | ${{ a: ['b', 'c'] }}
+        ${'a: b, c'}           | ${{ a: ['b', 'c'] }}
+        ${'a: b; c; d:e'}      | ${{ a: 'b', c: null, d: 'e' }}
         ${'a->b , c'}          | ${{ a: ['b', 'c'] }}
         ${'a->b , c'}          | ${{ a: ['b', 'c'] }}
         ${'a->b , c\nb'}       | ${{ a: ['b', 'c'], b: null }}
