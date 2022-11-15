@@ -18,6 +18,7 @@ export {
     opUnique,
 } from './operators';
 export { pipeAsync, pipeSync } from './pipe';
+export { reduce, reduceAsync, reduceSync } from './reduce';
 
 export const operators = _operators;
 export const helpers = _helpers;

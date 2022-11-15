@@ -8,6 +8,7 @@ export { opFlatten, opFlattenAsync, opFlattenSync } from './flatten';
 export { opJoinStrings, opJoinStringsAsync, opJoinStringsSync } from './joinStrings';
 export { opLast, opLastAsync, opLastSync } from './last';
 export { opMap, opMapAsync, opMapSync } from './map';
+export { opReduceAsync, opReduceSync } from './reduce';
 export { opSkip, opSkipAsync, opSkipSync } from './skip';
 export { opTake, opTakeAsync, opTakeSync } from './take';
 export { opTap, opTapAsync, opTapSync } from './tap';
