@@ -1,4 +1,4 @@
-import { appendToDef, createTyposDef } from './util';
+import { appendToDef, createTyposDef, extractAllSuggestions, extractIgnoreValues } from './util';
 
 describe('typos/util', () => {
     test.each`
@@ -24,5 +24,24 @@ describe('typos/util', () => {
     `('parseTyposFile $entries', ({ entries, expected }) => {
         const result = createTyposDef(entries);
         expect(result).toEqual(expected);
+    });
+
+    test.each`
+        typos                                                  | expected
+        ${{}}                                                  | ${[]}
+        ${{ a: null, b: undefined, c: 'cc', d: ['dd', 'ee'] }} | ${['cc', 'dd', 'ee']}
+    `('extractAllSuggestions $typos', ({ typos, expected }) => {
+        const r = extractAllSuggestions(typos);
+        expect(r).toEqual(new Set(expected));
+    });
+
+    test.each`
+        typos                                                        | expected
+        ${{}}                                                        | ${[]}
+        ${{ a: null, b: undefined, c: 'cc', d: ['dd', 'ee'] }}       | ${['cc', 'dd', 'ee']}
+        ${{ '!a': null, '!b': undefined, c: 'cc', d: ['dd', 'ee'] }} | ${['cc', 'dd', 'ee', 'a', 'b']}
+    `('extractIgnoreValues $typos', ({ typos, expected }) => {
+        const r = extractIgnoreValues(typos, '!');
+        expect(r).toEqual(new Set(expected));
     });
 });

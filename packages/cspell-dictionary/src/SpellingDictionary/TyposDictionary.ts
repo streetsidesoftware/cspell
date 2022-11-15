@@ -1,3 +1,4 @@
+import { opAppend, pipe } from '@cspell/cspell-pipe/sync';
 import { CompoundWordsMethod, SuggestionCollector, SuggestionResult } from 'cspell-trie-lib';
 import {
     FindResult,
@@ -7,15 +8,25 @@ import {
     SpellingDictionaryOptions,
     SuggestOptions,
 } from './SpellingDictionary';
-import { processEntriesToTyposDef, TypoEntry, TyposDef } from './Typos';
+import { processEntriesToTyposDef, type TypoEntry, type TyposDef } from './Typos';
+import { extractIgnoreValues } from './Typos/util';
+
+const symIgnore = Symbol('ignored');
 
 class TyposDictionary implements SpellingDictionary {
     readonly containsNoSuggestWords = false;
     readonly options: SpellingDictionaryOptions = {};
     readonly type = 'typos';
     readonly size: number;
-    constructor(readonly name: string, readonly source: string, readonly typosDef: TyposDef) {
+    private ignoreWords: Set<string>;
+    constructor(
+        readonly name: string,
+        readonly source: string,
+        readonly typosDef: TyposDef,
+        ignoreList?: Iterable<string>
+    ) {
         this.size = Object.keys(typosDef).length;
+        this.ignoreWords = new Set(pipe(extractIgnoreValues(typosDef, '!'), opAppend(ignoreList || [])));
     }
 
     /**
@@ -31,16 +42,31 @@ class TyposDictionary implements SpellingDictionary {
 
     /** A more detailed search for a word, might take longer than `has` */
     find(word: string, _options?: SearchOptions): FindResult | undefined {
-        const forbidden = this.isForbidden(word);
-        return forbidden ? { found: word, forbidden, noSuggest: true } : undefined;
+        const found = this._findForms(word);
+        return typeof found === 'string' ? { found, forbidden: true, noSuggest: false } : undefined;
+    }
+
+    private _findForms(word: string): string | typeof symIgnore | false {
+        const f = this._find(word);
+        if (f !== false) return f;
+        const lcWord = word.toLowerCase();
+        if (lcWord === word) return false;
+        return this._find(lcWord);
+    }
+
+    private _find(word: string): string | typeof symIgnore | false {
+        if (this.ignoreWords.has(word)) return symIgnore;
+        if (word in this.typosDef) return word;
+        return false;
     }
 
     isForbidden(word: string): boolean {
-        return word in this.typosDef;
+        const found = this._findForms(word);
+        return typeof found === 'string';
     }
 
-    isNoSuggestWord(word: string, _options: HasOptions): boolean {
-        return this.isForbidden(word);
+    isNoSuggestWord(_word: string, _options: HasOptions): boolean {
+        return false;
     }
 
     suggest(
@@ -52,7 +78,12 @@ class TyposDictionary implements SpellingDictionary {
     ): SuggestionResult[];
     suggest(word: string, suggestOptions: SuggestOptions): SuggestionResult[];
     public suggest(word: string): SuggestionResult[] {
-        if (!(word in this.typosDef)) return [];
+        return this._suggest(word) || this._suggest(word.toLowerCase()) || [];
+    }
+
+    private _suggest(word: string): SuggestionResult[] | undefined {
+        if (this.ignoreWords.has(word)) return [];
+        if (!(word in this.typosDef)) return undefined;
         const sug = this.typosDef[word];
         if (!sug) return [];
         if (typeof sug === 'string') {

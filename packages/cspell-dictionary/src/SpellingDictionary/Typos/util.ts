@@ -1,3 +1,4 @@
+import { opConcatMap, opFilter, pipe, reduce } from '@cspell/cspell-pipe/sync';
 import { TypoEntry, TyposDef, TyposDefKey, TyposDefValue } from './typos';
 
 /**
@@ -34,4 +35,26 @@ export function createTyposDef(entries?: Iterable<[TyposDefKey, TyposDefValue]>)
     }
 
     return def;
+}
+
+export function extractAllSuggestions(typosDef: TyposDef): Set<string> {
+    const allSugs = pipe(
+        Object.values(typosDef),
+        opFilter(isDefined),
+        opConcatMap((v) => (Array.isArray(v) ? v : [v]))
+    );
+    return new Set(allSugs);
+}
+
+export function extractIgnoreValues(typosDef: TyposDef, ignorePrefix: string): Set<string> {
+    const sugs = extractAllSuggestions(typosDef);
+    const pfxLen = ignorePrefix.length;
+    const ignoreKeys = Object.keys(typosDef)
+        .filter((k) => k.startsWith(ignorePrefix))
+        .map((k) => k.slice(pfxLen));
+    return reduce(ignoreKeys, (sugs, word) => sugs.add(word), sugs);
+}
+
+function isDefined<T>(v: T | undefined | null): v is T {
+    return v !== undefined && v !== null;
 }
