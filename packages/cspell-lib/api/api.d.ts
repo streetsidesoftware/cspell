@@ -9,8 +9,8 @@ export { CompoundWordsMethod } from 'cspell-trie-lib';
 export { asyncIterableToArray, readFile, readFileSync, writeToFile, writeToFileIterable, writeToFileIterableP } from 'cspell-io';
 import { URI } from 'vscode-uri';
 
-declare type ExclusionFunction = (fileUri: string) => boolean;
-declare type FileExclusionFunction = (file: string) => boolean;
+type ExclusionFunction = (fileUri: string) => boolean;
+type FileExclusionFunction = (file: string) => boolean;
 /** The structure of the VS Code search.exclude settings */
 interface ExcludeFilesGlobMap {
     [glob: string]: boolean;
@@ -121,13 +121,13 @@ declare const createCollection: typeof cspellDictModule.createCollection;
 /**
  * The keys of an object where the values cannot be undefined.
  */
-declare type OptionalKeys<T> = Exclude<{
+type OptionalKeys<T> = Exclude<{
     [P in keyof T]: T[P] extends Exclude<T[P], undefined> ? never : P;
 }[keyof T], undefined>;
 /**
  * Allow undefined in optional fields
  */
-declare type OptionalOrUndefined<T> = {
+type OptionalOrUndefined<T> = {
     [P in keyof T]: P extends OptionalKeys<T> ? T[P] | undefined : T[P];
 };
 
@@ -142,7 +142,7 @@ interface CSpellSettingsInternalFinalized extends CSpellSettingsInternal {
     ignoreRegExpList: RegExp[];
     includeRegExpList: RegExp[];
 }
-declare type DictionaryDefinitionCustomUniqueFields = Omit<DictionaryDefinitionCustom, keyof DictionaryDefinitionPreferred>;
+type DictionaryDefinitionCustomUniqueFields = Omit<DictionaryDefinitionCustom, keyof DictionaryDefinitionPreferred>;
 interface DictionaryDefinitionInternal extends Readonly<DictionaryDefinitionPreferred>, Readonly<Partial<DictionaryDefinitionCustomUniqueFields>>, Readonly<DictionaryDefinitionAugmented> {
     /**
      * Optional weight map used to improve suggestions.
@@ -154,7 +154,7 @@ interface DictionaryDefinitionInternal extends Readonly<DictionaryDefinitionPref
 
 declare function refreshDictionaryCache(maxAge?: number): Promise<void>;
 
-declare type LoadOptions = DictionaryDefinitionInternal;
+type LoadOptions = DictionaryDefinitionInternal;
 
 declare class SpellingDictionaryLoadError extends Error {
     readonly uri: string;
@@ -278,7 +278,7 @@ interface FeatureFlag {
     name: string;
     description: string;
 }
-declare type FlagTypes = string | boolean;
+type FlagTypes = string | boolean;
 /**
  * Feature Flags are used to turn on/off features.
  * These are primarily used before a feature has been fully released.
@@ -303,11 +303,11 @@ declare class UnknownFeatureFlagError extends Error {
 }
 declare function getSystemFeatureFlags(): FeatureFlags;
 
-declare type LanguageId = string;
+type LanguageId = string;
 declare function getLanguagesForExt(ext: string): string[];
 declare function getLanguagesForBasename(basename: string): string[];
 
-declare type DocumentUri = URI;
+type DocumentUri = URI;
 interface Position {
     line: number;
     character: number;
@@ -315,7 +315,7 @@ interface Position {
 /**
  * Range offset tuple.
  */
-declare type SimpleRange$1 = [start: number, end: number];
+type SimpleRange$1 = [start: number, end: number];
 interface TextDocumentLine {
     readonly text: string;
     readonly offset: number;
@@ -373,11 +373,11 @@ declare function updateTextDocument(doc: TextDocument, edits: TextDocumentConten
  * Handles loading of `.pnp.js` and `.pnp.js` files.
  */
 
-declare type LoaderResult = URI | undefined;
+type LoaderResult = URI | undefined;
 
-declare type CSpellSettingsWST$1 = CSpellSettingsWithSourceTrace;
-declare type CSpellSettingsI$1 = CSpellSettingsInternal;
-declare type PnPSettings = OptionalOrUndefined<PnPSettings$1>;
+type CSpellSettingsWST$1 = CSpellSettingsWithSourceTrace;
+type CSpellSettingsI$1 = CSpellSettingsInternal;
+type PnPSettings = OptionalOrUndefined<PnPSettings$1>;
 declare const sectionCSpell = "cSpell";
 declare const defaultFileName = "cspell.json";
 declare const defaultConfigFilenames: readonly string[];
@@ -430,9 +430,9 @@ declare function readSettings(filename: string, defaultValues: CSpellSettingsWST
 declare function readSettings(filename: string, relativeTo: string): CSpellSettingsI$1;
 declare function readSettings(filename: string, relativeTo: string, defaultValues: CSpellSettingsWST$1): CSpellSettingsI$1;
 
-declare type CSpellSettingsWST = AdvancedCSpellSettingsWithSourceTrace;
-declare type CSpellSettingsWSTO = OptionalOrUndefined<AdvancedCSpellSettingsWithSourceTrace>;
-declare type CSpellSettingsI = CSpellSettingsInternal;
+type CSpellSettingsWST = AdvancedCSpellSettingsWithSourceTrace;
+type CSpellSettingsWSTO = OptionalOrUndefined<AdvancedCSpellSettingsWithSourceTrace>;
+type CSpellSettingsI = CSpellSettingsInternal;
 declare function mergeSettings(left: CSpellSettingsWSTO | CSpellSettingsI, ...settings: (CSpellSettingsWSTO | CSpellSettingsI | undefined)[]): CSpellSettingsI;
 declare function mergeInDocSettings(left: CSpellSettingsWSTO, right: CSpellSettingsWSTO): CSpellSettingsWST;
 declare function calcOverrideSettings(settings: CSpellSettingsWSTO, filename: string): CSpellSettingsI;
@@ -482,7 +482,7 @@ interface MatchRange {
     endPos: number;
 }
 
-declare type TextOffsetRO = Readonly<TextOffset>;
+type TextOffsetRO = Readonly<TextOffset>;
 interface ValidationOptions extends IncludeExcludeOptions {
     maxNumberOfProblems?: number;
     maxDuplicateProblems?: number;
@@ -501,7 +501,7 @@ interface ValidationResult extends TextOffset, Pick<Issue, 'message' | 'issueTyp
     isFlagged?: boolean | undefined;
     isFound?: boolean | undefined;
 }
-declare type LineValidatorFn = (line: LineSegment) => Iterable<ValidationResult>;
+type LineValidatorFn = (line: LineSegment) => Iterable<ValidationResult>;
 interface LineSegment {
     line: TextOffsetRO;
     segment: TextOffsetRO;
@@ -510,7 +510,7 @@ interface MappedTextValidationResult extends MappedText {
     isFlagged?: boolean | undefined;
     isFound?: boolean | undefined;
 }
-declare type TextValidatorFn = (text: MappedText) => Iterable<MappedTextValidationResult>;
+type TextValidatorFn = (text: MappedText) => Iterable<MappedTextValidationResult>;
 
 interface LineValidator {
     fn: LineValidatorFn;
@@ -544,8 +544,8 @@ interface ValidateTextOptions {
  */
 declare function validateText(text: string, settings: CSpellUserSettings, options?: ValidateTextOptions): Promise<ValidationIssue[]>;
 
-declare type Offset = number;
-declare type SimpleRange = readonly [Offset, Offset];
+type Offset = number;
+type SimpleRange = readonly [Offset, Offset];
 
 interface DocumentValidatorOptions extends ValidateTextOptions {
     /**
@@ -709,7 +709,7 @@ interface SpellCheckFileResult {
     checked: boolean;
     errors: Error[] | undefined;
 }
-declare type UriString = string;
+type UriString = string;
 interface DocumentWithText extends Document {
     text: string;
 }
@@ -836,7 +836,7 @@ interface TraceOptions {
 declare function traceWords(words: string[], settings: CSpellSettings, options: TraceOptions | undefined): Promise<TraceResult[]>;
 declare function traceWordsAsync(words: Iterable<string> | AsyncIterable<string>, settings: CSpellSettings, options: TraceOptions | undefined): AsyncIterableIterator<TraceResult[]>;
 
-declare type Console = typeof console;
+type Console = typeof console;
 interface Logger {
     log: Console['log'];
     warn: Console['warn'];
