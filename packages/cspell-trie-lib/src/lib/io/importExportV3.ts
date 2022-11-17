@@ -184,7 +184,7 @@ interface ReduceResults {
 type Reducer = (acc: ReduceResults, s: string) => ReduceResults;
 
 export function importTrie(linesX: Iterable<string> | string): TrieRoot {
-    linesX = typeof linesX === 'string' ? linesX.split(/(?<=\n)/) : linesX;
+    linesX = typeof linesX === 'string' ? linesX.split(/^/m) : linesX;
     const root: TrieRoot = trieNodeToRoot({}, {});
 
     let radix = 16;

@@ -1,4 +1,6 @@
-import { parseDictionary, parseDictionaryLines, ParseDictionaryOptions } from './SimpleDictionaryParser';
+import { parseDictionary, parseDictionaryLines, ParseDictionaryOptions, __testing__ } from './SimpleDictionaryParser';
+
+const { splitLine } = __testing__;
 
 describe('Validate SimpleDictionaryParser', () => {
     test('parsing lines', () => {
@@ -200,6 +202,15 @@ describe('Validate SimpleDictionaryParser', () => {
     `('parseDictionaryLines simple no strip $lines', ({ lines, expected }) => {
         const r = [...parseDictionaryLines(lines, { stripCaseAndAccents: false })];
         expect(r).toEqual(expected);
+    });
+
+    test.each`
+        line                 | expected
+        ${''}                | ${['']}
+        ${'hello\\ there'}   | ${['hello\\ there']}
+        ${'hello\\\n there'} | ${['hello\\\n', 'there']}
+    `('splitLine $line', ({ line, expected }) => {
+        expect(splitLine(line, /[\s,;]/)).toEqual(expected);
     });
 });
 
