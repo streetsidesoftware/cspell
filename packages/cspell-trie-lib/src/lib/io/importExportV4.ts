@@ -278,13 +278,13 @@ interface ReduceResults {
 type Reducer = (acc: ReduceResults, s: string) => ReduceResults;
 
 export function importTrie(linesX: Iterable<string> | string): TrieRoot {
-    linesX = typeof linesX === 'string' ? linesX.split(/(?<=\n)/) : linesX;
+    linesX = typeof linesX === 'string' ? linesX.split(/^/m) : linesX;
     let radix = 10;
     const comment = /^\s*#/;
     const iter = tapIterable(
         pipe(
             linesX,
-            opConcatMap((a) => a.split(/(?<=\n)(?!$)/))
+            opConcatMap((a) => a.split(/^/m))
         )
     );
 
