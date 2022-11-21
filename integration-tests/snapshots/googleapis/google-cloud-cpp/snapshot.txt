@@ -3,7 +3,7 @@ Repository: googleapis/google-cloud-cpp
 Url: "https://github.com/googleapis/google-cloud-cpp.git"
 Args: ["--config=../../../../config/repositories/googleapis/google-cloud-cpp/cspell.json","**/*","-e","{*.BUILD,BUILD,CHANGELOG.md,*.sh,*.cfg,*.ps1,Dockerfile.*,*.Dockerfile,*.{yaml,xml,json,cmake}}"]
 Lines:
- CSpell: Files checked: 8505, Issues found: 60385 in 6587 files
+ CSpell: Files checked: 8606, Issues found: 60953 in 6650 files
  exit code: 1
 ./ARCHITECTURE.md:100:20    - Unknown word (bigtable)   -- - Bigtable has a [`bigtable::Table`](/google/cloud
 ./ARCHITECTURE.md:100:3     - Unknown word (Bigtable)   -- - Bigtable has a [`bigtable::Table
@@ -21,10 +21,11 @@ Lines:
 ./BUILD.bazel:111:6     - Unknown word (texttospeech)          -- "texttospeech",
 ./BUILD.bazel:116:6     - Unknown word (videointelligence)     -- "videointelligence",
 ./BUILD.bazel:118:6     - Unknown word (vmmigration)           -- "vmmigration",
-./BUILD.bazel:119:6     - Unknown word (vpcaccess)             -- "vpcaccess",
-./BUILD.bazel:120:6     - Unknown word (webrisk)               -- "webrisk",
-./BUILD.bazel:121:6     - Unknown word (websecurityscanner)    -- "websecurityscanner",
-./BUILD.bazel:134:5     - Unknown word (testonly)              -- testonly = True,
+./BUILD.bazel:119:6     - Unknown word (vmwareengine)          -- "vmwareengine",
+./BUILD.bazel:120:6     - Unknown word (vpcaccess)             -- "vpcaccess",
+./BUILD.bazel:121:6     - Unknown word (webrisk)               -- "webrisk",
+./BUILD.bazel:122:6     - Unknown word (websecurityscanner)    -- "websecurityscanner",
+./BUILD.bazel:135:5     - Unknown word (testonly)              -- testonly = True,
 ./BUILD.bazel:25:6      - Unknown word (apikeys)    -- "apikeys",
 ./BUILD.bazel:27:6      - Unknown word (pubsublite) -- "pubsublite",
 ./BUILD.bazel:36:6      - Unknown word (accessapproval) -- "accessapproval",
@@ -77,7 +78,7 @@ Lines:
 ./CMakeLists.txt:95:25     - Unknown word (DGOOGLE)    -- " cmake -DGOOGLE_CLOUD_CPP_ENABLE_MACOS
 ./CMakeLists.txt:98:6      - Unknown word (ccache)     -- # If ccache is installed use it
 ./CMakeLists.txt:99:32     - Unknown word (CCACHE)     -- GOOGLE_CLOUD_CPP_ENABLE_CCACHE "Automatically use ccache
-./README.md:563:35    - Unknown word (lgoogle)    -- names, e.g., by using `-lgoogle_cloud_cpp_bigtable`
+./README.md:566:35    - Unknown word (lgoogle)    -- names, e.g., by using `-lgoogle_cloud_cpp_bigtable`
 ./README.md:8:4       - Unknown word (Codecov)    -- [![Codecov Coverage status][codecov
 ./SECURITY.md:3:46      - Unknown word (vulnz)      -- issue, please use [g.co/vulnz](https://g.co/vulnz
 ./bazel/BUILD.bazel:17:37     - Unknown word (subpackages) -- visibility = ["//:__subpackages__"])
@@ -123,11 +124,11 @@ Lines:
 ./ci/etc/docuploader-requirements.txt:5:43      - Unknown word (docuploader) -- generate-hashes ci/etc/docuploader-requirements.in
 ./ci/etc/expected_install_directories:119:24    - Unknown word (clouddms)                -- include/google/cloud/clouddms
 ./ci/etc/expected_install_directories:270:33    - Unknown word (agentendpoint)           -- google/cloud/osconfig/agentendpoint
-./ci/etc/expected_install_directories:389:30    - Unknown word (livestream)              -- include/google/cloud/video/livestream
-./ci/etc/expected_install_directories:433:27    - Unknown word (clouddebugger)           -- include/google/devtools/clouddebugger
-./ci/etc/expected_install_directories:435:27    - Unknown word (cloudprofiler)           -- include/google/devtools/cloudprofiler
-./ci/etc/expected_install_directories:437:27    - Unknown word (cloudtrace)              -- include/google/devtools/cloudtrace
-./ci/etc/expected_install_directories:455:29    - Unknown word (metricsscope)            -- include/google/monitoring/metricsscope
+./ci/etc/expected_install_directories:392:30    - Unknown word (livestream)              -- include/google/cloud/video/livestream
+./ci/etc/expected_install_directories:440:27    - Unknown word (clouddebugger)           -- include/google/devtools/clouddebugger
+./ci/etc/expected_install_directories:442:27    - Unknown word (cloudprofiler)           -- include/google/devtools/cloudprofiler
+./ci/etc/expected_install_directories:444:27    - Unknown word (cloudtrace)              -- include/google/devtools/cloudtrace
+./ci/etc/expected_install_directories:462:29    - Unknown word (metricsscope)            -- include/google/monitoring/metricsscope
 ./ci/etc/expected_install_directories:65:35     - Unknown word (appconnections) -- google/cloud/beyondcorp/appconnections
 ./ci/etc/expected_install_directories:67:35     - Unknown word (appconnectors)  -- google/cloud/beyondcorp/appconnectors
 ./ci/etc/expected_install_directories:69:35     - Unknown word (appgateways)    -- google/cloud/beyondcorp/appgateways
@@ -271,14 +272,14 @@ Lines:
 ./external/googleapis/protolists/tasks.list:1:47      - Unknown word (cloudtasks) -- google/cloud/tasks/v2:cloudtasks.proto
 ./generator/BUILD.bazel:19:69     - Unknown word (hdrs)       -- cloud_cpp_generator_hdrs", "google_cloud_cpp
 ./generator/BUILD.bazel:91:39     - Unknown word (commandlineflag) -- google_absl//absl/flags:commandlineflag",
-./generator/CMakeLists.txt:103:29    - Unknown word (SRCS)        -- protobuf_generate_cpp(PROTO_SRCS PROTO_HDRS generator
-./generator/CMakeLists.txt:103:40    - Unknown word (HDRS)        -- cpp(PROTO_SRCS PROTO_HDRS generator_config.proto
-./generator/CMakeLists.txt:106:40    - Unknown word (libprotobuf) -- PUBLIC protobuf::libprotobuf)
-./generator/CMakeLists.txt:158:14    - Unknown word (fname)       -- foreach (fname ${google_cloud_cpp_generator
-./generator/CMakeLists.txt:175:62    - Unknown word (bigobj)      -- .obj file. Add the /bigobj option to
-./generator/CMakeLists.txt:185:26    - Unknown word (everytime)   -- build all the tests everytime they create a new package
+./generator/CMakeLists.txt:107:29    - Unknown word (SRCS)        -- protobuf_generate_cpp(PROTO_SRCS PROTO_HDRS generator
+./generator/CMakeLists.txt:107:40    - Unknown word (HDRS)        -- cpp(PROTO_SRCS PROTO_HDRS generator_config.proto
+./generator/CMakeLists.txt:110:40    - Unknown word (libprotobuf) -- PUBLIC protobuf::libprotobuf)
+./generator/CMakeLists.txt:162:14    - Unknown word (fname)       -- foreach (fname ${google_cloud_cpp_generator
+./generator/CMakeLists.txt:179:62    - Unknown word (bigobj)      -- .obj file. Add the /bigobj option to
+./generator/CMakeLists.txt:189:26    - Unknown word (everytime)   -- build all the tests everytime they create a new package
 ./generator/CMakeLists.txt:41:14     - Unknown word (idempotency) -- internal/idempotency_policy_generator.cc
-./generator/CMakeLists.txt:83:22     - Unknown word (libprotoc)   -- protobuf::libprotoc)
+./generator/CMakeLists.txt:87:22     - Unknown word (libprotoc)   -- protobuf::libprotoc)
 ./generator/generator.h:27:8      - Unknown word (microgenerator) -- * C++ microgenerator plugin entry point.
 ./generator/generator_config.proto:23:27     - Unknown word (rpcs)       -- repeated string omitted_rpcs = 4;
 ./generator/generator_config.proto:37:35     - Unknown word (gcpxx)      -- to true generate the `gcpxxV1` alias for our inline
@@ -312,26 +313,26 @@ Lines:
 ./generator/internal/auth_decorator_generator.cc:81:11     - Unknown word (Bidir)      -- if (IsBidirStreaming(method)) {
 ./generator/internal/codegen_utils_test.cc:58:22     - Unknown word (baaaaa)     -- EXPECT_EQ("foo_bar_baaaaa", CamelCaseToSnakeCase
 ./generator/internal/codegen_utils_test.cc:58:59     - Unknown word (BAAAAA)     -- CamelCaseToSnakeCase("fooBarBAAAAA"));
-./generator/internal/descriptor_utils.cc:186:42    - Unknown word (uids)       -- string> method_signature_uids;
-./generator/internal/descriptor_utils.cc:59:27     - Unknown word (CPPTYPE)    -- case FieldDescriptor::CPPTYPE_INT32:
-./generator/internal/descriptor_utils.cc:80:5      - Unknown word (NOTREACHED) -- /*NOTREACHED*/
+./generator/internal/descriptor_utils.cc:189:42    - Unknown word (uids)       -- string> method_signature_uids;
+./generator/internal/descriptor_utils.cc:62:27     - Unknown word (CPPTYPE)    -- case FieldDescriptor::CPPTYPE_INT32:
+./generator/internal/descriptor_utils.cc:83:5      - Unknown word (NOTREACHED) -- /*NOTREACHED*/
 ./generator/internal/descriptor_utils.h:175:7     - Unknown word (actools)    -- * go/actools-dynamic-routing-proposal
-./generator/internal/descriptor_utils_test.cc:939:10    - Unknown word (endcond)    -- /// @endcond
+./generator/internal/descriptor_utils_test.cc:940:10    - Unknown word (endcond)    -- /// @endcond
 ./generator/internal/predicate_utils_test.cc:678:46    - Unknown word (Repated)    -- PaginationExactlyOneRepatedStringResponse) {
 ./generator/internal/predicate_utils_test.cc:986:44    - Unknown word (falsefragment) -- std::string("fragment0_falsefragment1_true"));
 ./generator/internal/printer_test.cc:37:33     - Unknown word (Inigo)      -- VarsDictionary vars{{"name", "Inigo Montoya"}};
-./generator/internal/scaffold_generator.cc:1095:15   - Unknown word (cxxopt)          -- build:linux --cxxopt=-std=c++14
-./generator/internal/scaffold_generator.cc:130:21    - Unknown word (bazelrc)    -- {"quickstart/.bazelrc", GenerateQuickstartBazelrc
-./generator/internal/scaffold_generator.cc:515:2     - Unknown word (mainpage)   -- @mainpage $title$ C++ Client Library
-./generator/internal/scaffold_generator.cc:528:2     - Unknown word (tableofcontents) -- @tableofcontents{HTML:2}
-./generator/internal/scaffold_generator.cc:714:7     - Unknown word (tsch)            -- | csh/tsch | `setenv
-./generator/internal/scaffold_generator.cc:776:14    - Unknown word (gooogle)         -- cd $$HOME/gooogle-cloud-cpp/google/cloud
-./generator/internal/scaffold_generator.cc:804:21    - Unknown word (DGRPC)           -- bazel build --copt=-DGRPC_BAZEL_BUILD ...
-./generator/internal/scaffold_generator.cc:822:39    - Unknown word (Downloadfile)    -- System.Net.WebClient).Downloadfile( ^
-./generator/internal/scaffold_generator.cc:960:8     - Unknown word (CXXLDFLAGS)      -- CLIENT_CXXLDFLAGS := $$(shell pkg-config
-./generator/internal/scaffold_generator_test.cc:295:38    - Unknown word (CXXLD)      -- actual, HasSubstr("\t$(CXXLD) "));
-./generator/internal/scaffold_generator_test.cc:317:37    - Unknown word (Bazelrc)    -- ScaffoldGenerator, QuickstartBazelrc) {
-./generator/internal/service_code_generator.cc:345:20    - Unknown word (nspace)     -- for (auto const& nspace : namespaces_) {
+./generator/internal/scaffold_generator.cc:1094:15   - Unknown word (cxxopt)          -- build:linux --cxxopt=-std=c++14
+./generator/internal/scaffold_generator.cc:129:21    - Unknown word (bazelrc)    -- {"quickstart/.bazelrc", GenerateQuickstartBazelrc
+./generator/internal/scaffold_generator.cc:514:2     - Unknown word (mainpage)   -- @mainpage $title$ C++ Client Library
+./generator/internal/scaffold_generator.cc:527:2     - Unknown word (tableofcontents) -- @tableofcontents{HTML:2}
+./generator/internal/scaffold_generator.cc:713:7     - Unknown word (tsch)            -- | csh/tsch | `setenv
+./generator/internal/scaffold_generator.cc:775:14    - Unknown word (gooogle)         -- cd $$HOME/gooogle-cloud-cpp/google/cloud
+./generator/internal/scaffold_generator.cc:803:21    - Unknown word (DGRPC)           -- bazel build --copt=-DGRPC_BAZEL_BUILD ...
+./generator/internal/scaffold_generator.cc:821:39    - Unknown word (Downloadfile)    -- System.Net.WebClient).Downloadfile( ^
+./generator/internal/scaffold_generator.cc:959:8     - Unknown word (CXXLDFLAGS)      -- CLIENT_CXXLDFLAGS := $$(shell pkg-config
+./generator/internal/scaffold_generator_test.cc:288:38    - Unknown word (CXXLD)      -- actual, HasSubstr("\t$(CXXLD) "));
+./generator/internal/scaffold_generator_test.cc:310:37    - Unknown word (Bazelrc)    -- ScaffoldGenerator, QuickstartBazelrc) {
+./generator/internal/service_code_generator.cc:350:20    - Unknown word (nspace)     -- for (auto const& nspace : namespaces_) {
 ./google/cloud/BUILD.bazel:25:5      - Unknown word (toolchains) -- toolchains = [
 ./google/cloud/accessapproval/README.md:37:11     - Unknown word (iostream)   -- #include <iostream>
 ./google/cloud/accessapproval/README.md:41:10     - Unknown word (cerr)       -- std::cerr << "Usage: " << argv
@@ -525,9 +526,9 @@ Lines:
 ./google/cloud/gameservices/game_server_clusters_client.h:38:65     - Unknown word (Agones)     -- Kubernetes clusters running Agones and is
 ./google/cloud/gameservices/game_server_deployments_client.h:425:60    - Unknown word (autoscalers) -- Agones fleets and Agones autoscalers,
 ./google/cloud/gkehub/gke_hub_client.h:19:39     - Unknown word (GKEHUB)     -- CLOUD_CPP_GOOGLE_CLOUD_GKEHUB_GKE_HUB_CLIENT_H
-./google/cloud/google_cloud_cpp_common.bzl:45:23     - Unknown word (msvc)       -- "internal/disable_msvc_crt_secure_warnings
-./google/cloud/google_cloud_cpp_common.bzl:54:15     - Unknown word (getenv)     -- "internal/getenv.h",
-./google/cloud/google_cloud_cpp_common_unit_tests.bzl:48:15     - Unknown word (strerror)   -- "internal/strerror_test.cc",
+./google/cloud/google_cloud_cpp_common.bzl:46:23     - Unknown word (msvc)       -- "internal/disable_msvc_crt_secure_warnings
+./google/cloud/google_cloud_cpp_common.bzl:56:15     - Unknown word (getenv)     -- "internal/getenv.h",
+./google/cloud/google_cloud_cpp_common_unit_tests.bzl:51:15     - Unknown word (strerror)   -- "internal/strerror_test.cc",
 ./google/cloud/google_cloud_cpp_rest_internal_unit_tests.bzl:26:37     - Unknown word (sigpipe)    -- curl_wrappers_disable_sigpipe_handler_test.cc",
 ./google/cloud/idempotency.h:28:48     - Unknown word (idempotence) -- idempotent][wikipedia-idempotence].
 ./google/cloud/ids/doc/main.dox:9:12      - Unknown word (Palo)       -- built with Palo Alto Networks technologies
@@ -570,6 +571,7 @@ Lines:
 ./google/cloud/internal/oauth2_authorized_user_credentials_test.cc:91:58     - Unknown word (THETOKEN)   -- "refresh_token", "1/THETOKEN")));
 ./google/cloud/internal/oauth2_compute_engine_credentials_test.cc:70:24     - Unknown word (mysupersecrettoken) -- "access_token": "mysupersecrettoken",
 ./google/cloud/internal/oauth2_compute_engine_credentials_test.cc:72:22     - Unknown word (tokentype)          -- "token_type": "tokentype"
+./google/cloud/internal/oauth2_external_account_token_source.h:40:66     - Unknown word (OIDC)       -- metadata service or OIDC service.
 ./google/cloud/internal/oauth2_refreshing_credentials_wrapper.h:39:16     - Unknown word (refreshable) -- * Wrapper for refreshable parts of a Credentials
 ./google/cloud/internal/oauth2_service_account_credentials.cc:279:32    - Unknown word (notasecret) -- 2_parse(p12.get(), "notasecret", &pkey_raw, &cert_raw
 ./google/cloud/internal/oauth2_service_account_credentials.cc:304:51    - Unknown word (oneline)    -- decltype(openssl_free)> oneline(
@@ -707,8 +709,8 @@ Lines:
 ./google/cloud/spanner/samples/postgresql_samples.cc:351:36    - Unknown word (firstname)  -- Singers", {"singerid", "firstname", "lastname"})
 ./google/cloud/spanner/samples/postgresql_samples.cc:351:49    - Unknown word (lastname)   -- singerid", "firstname", "lastname"})
 ./google/cloud/spanner/samples/postgresql_samples.cc:438:40    - Unknown word (TIMESTAMPTZ) -- 11-03T09:35:01UTC'::TIMESTAMPTZ as timestamp
-./google/cloud/spanner/samples/samples.cc:3260:8    - Unknown word (songinfo)   -- auto songinfo = SongInfo(
-./google/cloud/spanner/samples/samples.cc:3692:11   - Unknown word (partitionable) -- auto is_partitionable = [](spanner::ExecutionPlan
+./google/cloud/spanner/samples/samples.cc:3259:8    - Unknown word (songinfo)   -- auto songinfo = SongInfo(
+./google/cloud/spanner/samples/samples.cc:3691:11   - Unknown word (partitionable) -- auto is_partitionable = [](spanner::ExecutionPlan
 ./google/cloud/spanner/value.cc:34:47     - Unknown word (subvalues)  -- compare subtypes and subvalues.
 ./google/cloud/spanner/value.h:349:6     - Unknown word (Metafunction) -- // Metafunction that returns true if
 ./google/cloud/spanner/value_test.cc:1144:14   - Unknown word (alphahex)   -- auto const alphahex = [](std::ostream& os
@@ -879,6 +881,8 @@ Lines:
 ./google/cloud/vmmigration/internal/vm_migration_connection_impl.cc:894:15    - Unknown word (cutover)    -- r.cutover_jobs().size());
 ./google/cloud/vmmigration/vm_migration_client.h:284:32    - Unknown word (onprem)     -- remote source is the onprem vCenter (remote in the
 ./google/cloud/vmmigration/vm_migration_client.h:653:7     - Unknown word (updateable) -- /// updateable version.
+./google/cloud/vmwareengine/v1/internal/vmware_engine_auth_decorator.h:19:39     - Unknown word (VMWAREENGINE) -- CLOUD_CPP_GOOGLE_CLOUD_VMWAREENGINE_V1_INTERNAL_VMWARE_ENGINE
+./google/cloud/vmwareengine/v1/vmware_engine_client.h:94:37     - Unknown word (schemeless) -- Resource names are schemeless URIs that follow the
 ./google/cloud/vpcaccess/internal/vpc_access_auth_decorator.h:19:39     - Unknown word (VPCACCESS)  -- CLOUD_CPP_GOOGLE_CLOUD_VPCACCESS_INTERNAL_VPC_ACCESS
 ./google/cloud/webrisk/internal/web_risk_auth_decorator.h:19:39     - Unknown word (WEBRISK)    -- CLOUD_CPP_GOOGLE_CLOUD_WEBRISK_INTERNAL_WEB_RISK_AUTH
 ./google/cloud/websecurityscanner/internal/web_security_scanner_auth_decorator.h:19:39     - Unknown word (WEBSECURITYSCANNER) -- CLOUD_CPP_GOOGLE_CLOUD_WEBSECURITYSCANNER_INTERNAL_WEB_SECURITY

@@ -5,7 +5,7 @@ Args: ["**/*.go"]
 Summary:
   files: 224
   filesWithIssues: 207
-  issues: 3465
+  issues: 3467
   errors: 0
 Errors: []
 
@@ -192,7 +192,7 @@ issues:
   - "modules/caddyhttp/encode/brotli/brotli_precompressed.go:9:29    	Precompressed   	U   	RegisterModule(BrotliPrecompressed{})"
   - "modules/caddyhttp/encode/brotli/brotli_precompressed.go:12:62   	precompressed   	U   	extension for files precompressed with brotli encoding"
   - "modules/caddyhttp/encode/brotli/brotli_precompressed.go:12:81   	brotli          	U   	files precompressed with brotli encoding."
-  - "modules/caddyhttp/encode/caddyfile.go:44:12     	zstd	U   	// zstd"
+  - "modules/caddyhttp/encode/caddyfile.go:44:8      	zstd	U   	// zstd"
   - "modules/caddyhttp/encode/encode.go:19:65    	Httpgzip    	U   	Copyright (c) 2015 The Httpgzip Authors."
   - "modules/caddyhttp/encode/encode.go:52:59    	Mmatcher    	U   	against this ResponseMmatcher."
   - "modules/caddyhttp/encode/encode.go:256:4    	deallocates 	U   	// deallocates any active resources"
@@ -298,16 +298,16 @@ issues:
   - "modules/caddyhttp/reverseproxy/reverseproxy.go:1342:56  	libcurl         	U   	standard but still sent by libcurl and rejected by e.g"
   - "modules/caddyhttp/reverseproxy/reverseproxy.go:1346:16  	canonicalized   	U   	\"Te\", // canonicalized version of \"TE\""
   - "modules/caddyhttp/reverseproxy/selectionpolicies.go:168:7   	Reqs    	U   	leastReqs := -1"
-  - "modules/caddyhttp/reverseproxy/selectionpolicies.go:517:65  	hashable	U   	from pool based on a hashable string s."
-  - "modules/caddyhttp/reverseproxy/streaming.go:66:22   	cancelation 	U   	// Ensure that the cancelation of a request closes"
-  - "modules/caddyhttp/reverseproxy/streaming.go:121:2   	errc        	U   	errc := make(chan error,"
-  - "modules/caddyhttp/reverseproxy/streaming.go:200:7   	rerr        	U   	nr, rerr := src.Read(buf)"
-  - "modules/caddyhttp/reverseproxy/streaming.go:212:8   	werr        	U   	nw, werr := dst.Write(buf[:nr"
-  - "modules/caddyhttp/reverseproxy/streaming.go:249:37  	pascaldekloe	U   	connection. Thanks to @pascaldekloe who provided inspiration"
+  - "modules/caddyhttp/reverseproxy/selectionpolicies.go:518:65  	hashable	U   	from pool based on a hashable string s."
+  - "modules/caddyhttp/reverseproxy/streaming.go:67:22   	cancelation 	U   	// Ensure that the cancelation of a request closes"
+  - "modules/caddyhttp/reverseproxy/streaming.go:125:2   	errc        	U   	errc := make(chan error,"
+  - "modules/caddyhttp/reverseproxy/streaming.go:204:7   	rerr        	U   	nr, rerr := src.Read(buf)"
+  - "modules/caddyhttp/reverseproxy/streaming.go:216:8   	werr        	U   	nw, werr := dst.Write(buf[:nr"
+  - "modules/caddyhttp/reverseproxy/streaming.go:253:37  	pascaldekloe	U   	connection. Thanks to @pascaldekloe who provided inspiration"
   - "modules/caddyhttp/reverseproxy/upstreams.go:113:2   	srvs        	U   	srvsMu.RLock()"
   - "modules/caddyhttp/reverseproxy/upstreams.go:363:4   	failovers   	U   	// failovers, especially in conjunction"
   - "modules/caddyhttp/rewrite/caddyfile.go:42:6     	rewr    	U   	var rewr Rewrite"
-  - "modules/caddyhttp/rewrite/caddyfile.go:127:50   	substr  	U   	append(rewr.URISubstring, substrReplacer{"
+  - "modules/caddyhttp/rewrite/caddyfile.go:126:50   	substr  	U   	append(rewr.URISubstring, substrReplacer{"
   - "modules/caddyhttp/rewrite/rewrite_test.go:70:49     	Ffoo    	U   	GET\", \"/index.php?p=%2Ffoo%2Fbar\"),"
   - "modules/caddyhttp/rewrite/rewrite_test.go:301:40    	fsuffix 	U   	StripPathSuffix: \"%2fsuffix\"},"
   - "modules/caddyhttp/rewrite/rewrite_test.go:312:59    	findme  	U   	substrReplacer{{Find: \"findme\", Replace: \"replaced"
