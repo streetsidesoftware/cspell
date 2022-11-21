@@ -3,7 +3,7 @@ Repository: eslint/eslint
 Url: "https://github.com/eslint/eslint"
 Args: ["**","--exclude=bin/**","--exclude=CHANGELOG.md","--exclude=_data","--exclude=tests/bench/large.js","--exclude=docs/src/_includes","--exclude=docs/src/assets/{fonts,s?css,images}"]
 Lines:
- CSpell: Files checked: 1816, Issues found: 5405 in 1226 files
+ CSpell: Files checked: 1818, Issues found: 5409 in 1226 files
  exit code: 1
 ./LICENSE:1:58      - Unknown word (openjsf)    -- other contributors, <www.openjsf.org>
 ./Makefile.js:144:88    - Unknown word (ined)               -- followed by the string "ined".
@@ -52,10 +52,10 @@ Lines:
 ./docs/src/assets/js/css-vars-ponyfill@2.js:8:14683   - Unknown word (cssvars)         -- e.hasAttribute("data-cssvars"),n=function(e){return
 ./docs/src/assets/js/focus-visible.js:26:5      - Unknown word (datetime)   -- datetime: true,
 ./docs/src/assets/js/focus-visible.js:31:46     - Unknown word (iframes)    -- legacy browsers and iframes which sometimes focus
-./docs/src/assets/js/main.js:215:13    - Unknown word (setupindex) -- setupindexToggles(indexToggles
-./docs/src/assets/js/main.js:244:27    - Unknown word (labelledby) -- "aria-labelledby",
-./docs/src/assets/js/main.js:253:17    - Unknown word (thepanel)   -- var thepanel = toggleButton.nextElementSib
-./docs/src/assets/js/main.js:66:51     - Unknown word (togglenav)  -- addEventListener("click", togglenav, false);
+./docs/src/assets/js/main.js:105:51    - Unknown word (togglenav)  -- addEventListener("click", togglenav, false);
+./docs/src/assets/js/main.js:254:13    - Unknown word (setupindex) -- setupindexToggles(indexToggles
+./docs/src/assets/js/main.js:283:27    - Unknown word (labelledby) -- "aria-labelledby",
+./docs/src/assets/js/main.js:292:17    - Unknown word (thepanel)   -- var thepanel = toggleButton.nextElementSib
 ./docs/src/assets/js/tabs.js:164:10    - Unknown word (unactivate) -- // unactivate all other tabs
 ./docs/src/assets/js/tabs.js:167:27    - Unknown word (tabindex)   -- tab.setAttribute('tabindex', '-1');
 ./docs/src/assets/js/tabs.js:174:11    - Unknown word (Tabpanel)   -- showTabpanel(tab);
@@ -68,10 +68,10 @@ Lines:
 ./docs/src/assets/scss/carbon-ads.scss:81:20     - Unknown word (poweredby)  -- #carbonads .carbon-poweredby {
 ./docs/src/assets/scss/components/docs-navigation.scss:27:6      - Unknown word (flexer)     -- .flexer {
 ./docs/src/assets/scss/components/search.scss:153:10    - Unknown word (docsearch)  -- .algolia-docsearch-suggestion--highlight
-./docs/src/assets/scss/docs.scss:120:216   - Unknown word (Cpath)      -- fill='%23ECFDF3'/%3E%3Cpath d='M30.5 16L19.5 27L
-./docs/src/assets/scss/docs.scss:120:339   - Unknown word (Crect)      -- linejoin='round'/%3E%3Crect x='1.5' y='1' width
-./docs/src/assets/scss/docs.scss:120:44    - Unknown word (Csvg)       -- data:image/svg+xml,%3Csvg width='45' height='
-./docs/src/assets/scss/docs.scss:148:6     - Unknown word (anchorjs)   -- .anchorjs-link {
+./docs/src/assets/scss/docs.scss:119:216   - Unknown word (Cpath)      -- fill='%23ECFDF3'/%3E%3Cpath d='M30.5 16L19.5 27L
+./docs/src/assets/scss/docs.scss:119:339   - Unknown word (Crect)      -- linejoin='round'/%3E%3Crect x='1.5' y='1' width
+./docs/src/assets/scss/docs.scss:119:44    - Unknown word (Csvg)       -- data:image/svg+xml,%3Csvg width='45' height='
+./docs/src/assets/scss/docs.scss:147:6     - Unknown word (anchorjs)   -- .anchorjs-link {
 ./docs/src/assets/scss/syntax-highlighter.scss:117:35    - Unknown word (nums)       -- variant-numeric: tabular-nums;
 ./docs/src/assets/scss/syntax-highlighter.scss:84:8      - Unknown word (atrule)     -- .token.atrule,
 ./docs/src/developer-guide/architecture/index.md:64:264    - Unknown word (espree)     -- the given text with `espree` (or whatever the configured
@@ -96,7 +96,7 @@ Lines:
 ./docs/src/developer-guide/package-json-conventions.md:17:97     - Unknown word (postprepare) -- preprepare | prepare | postprepare | prepack | postpack
 ./docs/src/developer-guide/scope-manager-interface.md:218:100   - Unknown word (redeclared) -- If this variable is redeclared, this array includes
 ./docs/src/developer-guide/scope-manager-interface.md:6:125     - Unknown word (escope)     -- eslint-scope), a fork of [escope](https://github.com
-./docs/src/developer-guide/selectors.md:140:406   - Unknown word (Fpath)      -- `[value=/some\\u002Fpath/]`.
+./docs/src/developer-guide/selectors.md:140:405   - Unknown word (Fpath)      -- so: `[value=/some\u002Fpath/]`.
 ./docs/src/developer-guide/selectors.md:54:58     - Unknown word (esquery)    -- were adapted from the [esquery](https://github.com
 ./docs/src/developer-guide/shareable-configs.md:15:281    - Unknown word (myconfig)   -- such as `eslint-config-myconfig`.
 ./docs/src/developer-guide/shareable-configs.md:39:186    - Unknown word (eslintconfig) -- using the `eslint` and `eslintconfig` keywords so others
@@ -232,28 +232,28 @@ Lines:
 ./docs/src/static/sitemap.njk:10:14     - Unknown word (lastmod)    -- <lastmod>{{ page.date.toISOString
 ./docs/src/static/sitemap.njk:11:14     - Unknown word (changefreq) -- <changefreq>{{ page.data.changeFreq
 ./docs/src/static/sitemap.njk:6:2       - Unknown word (urlset)     -- <urlset xmlns="http://www.sitemaps
-./docs/src/user-guide/command-line-interface.md:222:267   - Unknown word (levn)       -- multiple times. The [levn](https://github.com
-./docs/src/user-guide/command-line-interface.md:340:5     - Unknown word (myfile)     -- cat myfile.js | npx eslint --stdin
-./docs/src/user-guide/command-line-interface.md:395:4     - Unknown word (checkstyle) -- * [checkstyle](formatters/#checkstyle
-./docs/src/user-guide/command-line-interface.md:417:17    - Unknown word (customformat) -- npx eslint -f ./customformat.js file.js
-./docs/src/user-guide/command-line-interface.md:494:11    - Unknown word (Autofixed)    -- **Note:** Autofixed files are not placed
+./docs/src/user-guide/command-line-interface.md:226:267   - Unknown word (levn)       -- multiple times. The [levn](https://github.com
+./docs/src/user-guide/command-line-interface.md:344:5     - Unknown word (myfile)     -- cat myfile.js | npx eslint --stdin
+./docs/src/user-guide/command-line-interface.md:399:4     - Unknown word (checkstyle) -- * [checkstyle](formatters/#checkstyle
+./docs/src/user-guide/command-line-interface.md:421:17    - Unknown word (customformat) -- npx eslint -f ./customformat.js file.js
+./docs/src/user-guide/command-line-interface.md:498:11    - Unknown word (Autofixed)    -- **Note:** Autofixed files are not placed
 ./docs/src/user-guide/configuring/configuration-files-new.md:216:564   - Unknown word (runtimes)   -- example, some older runtimes might only allow ECMAScript
 ./docs/src/user-guide/configuring/configuration-files.md:39:25     - Unknown word (myfiletotest) -- eslint -c myconfig.json myfiletotest.js
-./docs/src/user-guide/configuring/ignoring-code.md:108:186   - Unknown word (globbing)     -- not be used. Note that globbing rules in `.eslintignore
-./docs/src/user-guide/configuring/ignoring-code.md:116:14    - Unknown word (mypackage)    -- "name": "mypackage",
-./docs/src/user-guide/configuring/ignoring-code.md:168:211   - Unknown word (reinclude)    -- the implicit rule and reinclude this file for linting
-./docs/src/user-guide/configuring/ignoring-code.md:28:186    - Unknown word (subdir)     -- foo.js` but not `lib/subdir/foo.js`.
-./docs/src/user-guide/configuring/ignoring-code.md:96:200    - Unknown word (jshintignore) -- example, you can use `.jshintignore` file because it has
-./docs/src/user-guide/configuring/language-options.md:34:4      - Unknown word (qunit)      -- * `qunit` - QUnit global variables
-./docs/src/user-guide/configuring/language-options.md:36:4      - Unknown word (prototypejs) -- * `prototypejs` - Prototype.js global
-./docs/src/user-guide/configuring/language-options.md:40:4      - Unknown word (applescript) -- * `applescript` - AppleScript global
-./docs/src/user-guide/configuring/language-options.md:41:22     - Unknown word (Nashorn)     -- `nashorn` - Java 8 Nashorn global variables.
-./docs/src/user-guide/configuring/language-options.md:41:4      - Unknown word (nashorn)     -- * `nashorn` - Java 8 Nashorn global
-./docs/src/user-guide/configuring/language-options.md:42:4      - Unknown word (serviceworker) -- * `serviceworker` - Service Worker global
-./docs/src/user-guide/configuring/language-options.md:43:4      - Unknown word (atomtest)      -- * `atomtest` - Atom test helper
-./docs/src/user-guide/configuring/language-options.md:44:4      - Unknown word (embertest)     -- * `embertest` - Ember test helper
-./docs/src/user-guide/configuring/language-options.md:45:4      - Unknown word (webextensions) -- * `webextensions` - WebExtensions globals
-./docs/src/user-guide/configuring/language-options.md:46:4      - Unknown word (greasemonkey)  -- * `greasemonkey` - GreaseMonkey globals
+./docs/src/user-guide/configuring/ignoring-code.md:102:200   - Unknown word (jshintignore) -- example, you can use `.jshintignore` file because it has
+./docs/src/user-guide/configuring/ignoring-code.md:114:181   - Unknown word (globbing)     -- not used. Note that globbing rules in `.eslintignore
+./docs/src/user-guide/configuring/ignoring-code.md:122:14    - Unknown word (mypackage)    -- "name": "mypackage",
+./docs/src/user-guide/configuring/ignoring-code.md:174:211   - Unknown word (reinclude)    -- the implicit rule and reinclude this file for linting
+./docs/src/user-guide/configuring/ignoring-code.md:34:186    - Unknown word (subdir)     -- foo.js` but not `lib/subdir/foo.js`.
+./docs/src/user-guide/configuring/language-options.md:36:4      - Unknown word (qunit)      -- * `qunit` - QUnit global variables
+./docs/src/user-guide/configuring/language-options.md:38:4      - Unknown word (prototypejs) -- * `prototypejs` - Prototype.js global
+./docs/src/user-guide/configuring/language-options.md:42:4      - Unknown word (applescript) -- * `applescript` - AppleScript global
+./docs/src/user-guide/configuring/language-options.md:43:22     - Unknown word (Nashorn)     -- `nashorn` - Java 8 Nashorn global variables.
+./docs/src/user-guide/configuring/language-options.md:43:4      - Unknown word (nashorn)     -- * `nashorn` - Java 8 Nashorn global
+./docs/src/user-guide/configuring/language-options.md:44:4      - Unknown word (serviceworker) -- * `serviceworker` - Service Worker global
+./docs/src/user-guide/configuring/language-options.md:45:4      - Unknown word (atomtest)      -- * `atomtest` - Atom test helper
+./docs/src/user-guide/configuring/language-options.md:46:4      - Unknown word (embertest)     -- * `embertest` - Ember test helper
+./docs/src/user-guide/configuring/language-options.md:47:4      - Unknown word (webextensions) -- * `webextensions` - WebExtensions globals
+./docs/src/user-guide/configuring/language-options.md:48:4      - Unknown word (greasemonkey)  -- * `greasemonkey` - GreaseMonkey globals
 ./docs/src/user-guide/configuring/plugins.md:114:156   - Unknown word (pluginname) -- require('eslint-plugin-pluginname')` in the config file
 ./docs/src/user-guide/configuring/plugins.md:13:26     - Unknown word (Espree)     -- default, ESLint uses [Espree](https://github.com
 ./docs/src/user-guide/formatters/index.md:110:5     - Unknown word (testsuites) -- &lt;testsuites&gt;
@@ -263,13 +263,13 @@ Lines:
 ./docs/src/user-guide/getting-started.md:30:22     - Unknown word (semistandard) -- use `eslint-config-semistandard` shared config
 ./docs/src/user-guide/getting-started.md:54:12     - Unknown word (yourfile)     -- npx eslint yourfile.js
 ./docs/src/user-guide/getting-started.md:94:220    - Unknown word (npmjs)        -- "eslint-config" on [npmjs.com](https://www.npmjs
-./docs/src/user-guide/integrations.md:18:8      - Unknown word (Syntastic)  -- * [Syntastic](https://github.com
-./docs/src/user-guide/integrations.md:19:11     - Unknown word (Flycheck)   -- * Emacs: [Flycheck](http://www.flycheck
-./docs/src/user-guide/integrations.md:23:15     - Unknown word (tmbundle)   -- * [eslint.tmbundle](https://github.com
-./docs/src/user-guide/integrations.md:28:3      - Unknown word (Intelli)    -- * IntelliJ IDEA, WebStorm, PhpStorm
-./docs/src/user-guide/integrations.md:39:16     - Unknown word (eslintify)  -- * Browserify: [eslintify](https://www.npmjs.com
-./docs/src/user-guide/integrations.md:55:8      - Unknown word (Precommit)  -- * [Git Precommit Hook](https://coderwall
-./docs/src/user-guide/integrations.md:57:4      - Unknown word (overcommit) -- * [overcommit Git hook manager](https
+./docs/src/user-guide/integrations.md:22:8      - Unknown word (Syntastic)  -- * [Syntastic](https://github.com
+./docs/src/user-guide/integrations.md:23:11     - Unknown word (Flycheck)   -- * Emacs: [Flycheck](http://www.flycheck
+./docs/src/user-guide/integrations.md:27:15     - Unknown word (tmbundle)   -- * [eslint.tmbundle](https://github.com
+./docs/src/user-guide/integrations.md:32:3      - Unknown word (Intelli)    -- * IntelliJ IDEA, WebStorm, PhpStorm
+./docs/src/user-guide/integrations.md:43:16     - Unknown word (eslintify)  -- * Browserify: [eslintify](https://www.npmjs.com
+./docs/src/user-guide/integrations.md:59:8      - Unknown word (Precommit)  -- * [Git Precommit Hook](https://coderwall
+./docs/src/user-guide/integrations.md:61:4      - Unknown word (overcommit) -- * [overcommit Git hook manager](https
 ./docs/src/user-guide/migrating-from-jscs.md:12:111    - Unknown word (jscsrs)     -- .jscsrc.yaml`, or `.jscsrs.js`. In ESLint, the
 ./docs/src/user-guide/migrating-from-jscs.md:15:38     - Unknown word (Polyjuice)  -- Configuration Files Using Polyjuice
 ./docs/src/user-guide/migrating-from-jscs.md:22:16     - Unknown word (polyjuice)  -- npm install -g polyjuice
@@ -295,9 +295,9 @@ Lines:
 ./lib/config/default-config.js:59:61     - Unknown word (globbed)    -- ensure these files are globbed by default
 ./lib/eslint/eslint-helpers.js:19:26     - Unknown word (nodelib)    -- const fswalk = require("@nodelib/fs.walk");
 ./lib/eslint/eslint-helpers.js:19:7      - Unknown word (fswalk)     -- const fswalk = require("@nodelib
-./lib/eslint/eslint-helpers.js:225:36    - Unknown word (Errror)     -- UnmatchedSearchPatternsErrror} If there is a pattern
-./lib/eslint/eslint-helpers.js:402:40    - Unknown word (prepopulated) -- for the cwd, which is prepopulated in the searches map
-./lib/eslint/eslint-helpers.js:486:9     - Unknown word (globby)       -- let globbyPatterns = [];
+./lib/eslint/eslint-helpers.js:226:36    - Unknown word (Errror)     -- UnmatchedSearchPatternsErrror} If there is a pattern
+./lib/eslint/eslint-helpers.js:397:40    - Unknown word (prepopulated) -- for the cwd, which is prepopulated in the searches map
+./lib/eslint/eslint-helpers.js:481:9     - Unknown word (globby)       -- let globbyPatterns = [];
 ./lib/linter/code-path-analysis/code-path-state.js:159:31    - Unknown word (unflattened) -- {CodePathSegment[]} unflattenedFromSegments Segments
 ./lib/linter/code-path-analysis/code-path-state.js:913:23    - Unknown word (Segs)        -- const prevSegsOfLeavingSegment = [headOfLeav
 ./lib/linter/code-path-analysis/code-path.js:138:34    - Unknown word (Omittable)  -- param {Object} [options] Omittable.
@@ -432,11 +432,11 @@ Lines:
 ./tests/lib/config/flat-config-array.js:1430:30   - Unknown word (doesnt)      -- "doesnt-exist/match": "error
 ./tests/lib/config/flat-config-array.js:147:22    - Unknown word (noniterable) -- it("should allow noniterable baseConfig objects"
 ./tests/lib/config/flat-config-array.js:898:43    - Unknown word (truex)       -- foo: "truex"
-./tests/lib/eslint/flat-eslint.js:1283:30   - Unknown word (reignoring)   -- it("should allow reignoring of previously ignored
-./tests/lib/eslint/flat-eslint.js:4408:9    - Unknown word (xdescribe)    -- xdescribe("ignorePatterns can
-./tests/lib/eslint/flat-eslint.js:5111:48   - Unknown word (intepreted)   -- files' they should be intepreted as relative to the config
-./tests/lib/eslint/flat-eslint.js:836:57    - Unknown word (doesnotexist) -- lintFiles(["subdir1", "doesnotexist/*.js"]);
-./tests/lib/eslint/flat-eslint.js:886:58    - Unknown word (doesexist)    -- await eslint.lintFiles(["doesexist/*.js"]);
+./tests/lib/eslint/flat-eslint.js:1383:30   - Unknown word (reignoring)   -- it("should allow reignoring of previously ignored
+./tests/lib/eslint/flat-eslint.js:4511:9    - Unknown word (xdescribe)    -- xdescribe("ignorePatterns can
+./tests/lib/eslint/flat-eslint.js:5214:48   - Unknown word (intepreted)   -- files' they should be intepreted as relative to the config
+./tests/lib/eslint/flat-eslint.js:905:57    - Unknown word (doesnotexist) -- lintFiles(["subdir1", "doesnotexist/*.js"]);
+./tests/lib/eslint/flat-eslint.js:980:58    - Unknown word (doesexist)    -- await eslint.lintFiles(["doesexist/*.js"]);
 ./tests/lib/linter/code-path-analysis/code-path-analyzer.js:30:16     - Unknown word (ESQUERY)    -- const STANDARD_ESQUERY_OPTION = { visitorKeys
 ./tests/lib/linter/config-comment-parser.js:165:41    - Unknown word (ELEVENTEEN) -- code = "a: seventy, b:ELEVENTEEN";
 ./tests/lib/linter/linter.js:3229:1    - Unknown word (consolexlog) -- consolexlog("test2");
