@@ -18,7 +18,7 @@ class IgnoreWordsDictionary implements SpellingDictionary {
     private dictNonStrict: Set<string>;
     readonly containsNoSuggestWords = true;
     readonly options: SpellingDictionaryOptions = {};
-    readonly type = 'forbidden';
+    readonly type = 'ignore';
     constructor(readonly name: string, readonly source: string, words: Iterable<string>) {
         this.dict = new Set(words);
         this.dictNonStrict = new Set(

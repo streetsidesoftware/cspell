@@ -1,4 +1,4 @@
-# Suggestion Lists
+# Suggestion Lists and Typos
 
 Suggestion lists are useful in addressing common mistakes as noted by [Wikipedia:Lists of common misspellings - Wikipedia](https://en.wikipedia.org/wiki/Wikipedia:Lists_of_common_misspellings)
 
@@ -35,6 +35,8 @@ flagWords:
   - [hte, the]
   - [acadmic, academic]
   - [accension, accession, ascension]
+  - alturnative: > # cspell:disable-line
+      alternative
 ```
 
 ```json
@@ -104,6 +106,15 @@ dictionaryDefinitions:
     type: suggestions # alternatively we could call it a `typo` file.
 ```
 
+### Inline Dictionary Definitions
+
+```yaml
+dictionaryDefinitions:
+  - name: company-terms
+    words:
+      - MyCompanyName
+```
+
 <!--- cspell:ignore acadmic accension -->
 
 # Terminology
@@ -134,4 +145,7 @@ terms:
     - abandoning
   accesories: ['accessories'] # cspell:disable-line
   accidant: ['accident'] # cspell:disable-line
+  accident: y # Accident is an allowed word
+  # cspell:disable-next-line
+  alusion: allusion, illusion # two suggestions `alusion`
 ```

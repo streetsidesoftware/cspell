@@ -278,13 +278,13 @@ interface ReduceResults {
 type Reducer = (acc: ReduceResults, s: string) => ReduceResults;
 
 export function importTrie(linesX: Iterable<string> | string): TrieRoot {
-    linesX = typeof linesX === 'string' ? linesX.split(/(?<=\n)/) : linesX;
+    linesX = typeof linesX === 'string' ? linesX.split(/^/m) : linesX;
     let radix = 10;
     const comment = /^\s*#/;
     const iter = tapIterable(
         pipe(
             linesX,
-            opConcatMap((a) => a.split(/(?<=\n)(?!$)/))
+            opConcatMap((a) => a.split(/^/m))
         )
     );
 
@@ -463,7 +463,10 @@ function parseStream(radix: number, iter: Iterable<string>): TrieRoot {
         function parser(acc: ReduceResults, s: string): ReduceResults {
             json = json + s;
             if (s === REF_INDEX_END) {
-                refIndex = JSON.parse(json) as number[];
+                refIndex = json
+                    .replace(/[\s[\]]/g, '')
+                    .split(',')
+                    .map((n) => parseInt(n, radix));
                 return { ...acc, parser: undefined };
             }
             return acc;

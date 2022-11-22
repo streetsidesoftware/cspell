@@ -179,7 +179,7 @@ export function isCircular(root: TrieNode): boolean {
  * @param value
  * @param defaultValue
  */
-export function mergeDefaults<T>(value: PartialWithUndefined<T> | undefined, defaultValue: T): T {
+export function mergeDefaults<T extends object>(value: PartialWithUndefined<T> | undefined, defaultValue: T): T {
     const result = { ...defaultValue };
     if (value) {
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
