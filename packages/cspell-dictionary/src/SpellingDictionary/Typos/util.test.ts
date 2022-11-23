@@ -36,10 +36,10 @@ describe('typos/util', () => {
     });
 
     test.each`
-        typos                                                        | expected
-        ${{}}                                                        | ${[]}
-        ${{ a: null, b: undefined, c: 'cc', d: ['dd', 'ee'] }}       | ${['cc', 'dd', 'ee']}
-        ${{ '!a': null, '!b': undefined, c: 'cc', d: ['dd', 'ee'] }} | ${['cc', 'dd', 'ee', 'a', 'b']}
+        typos                                                   | expected
+        ${{}}                                                   | ${[]}
+        ${{ a: null, b: undefined, c: 'cc', d: ['dd', 'ee'] }}  | ${[]}
+        ${{ '!a': null, '!b': null, c: 'cc', d: ['dd', 'ee'] }} | ${['a', 'b']}
     `('extractIgnoreValues $typos', ({ typos, expected }) => {
         const r = extractIgnoreValues(typos, '!');
         expect(r).toEqual(new Set(expected));

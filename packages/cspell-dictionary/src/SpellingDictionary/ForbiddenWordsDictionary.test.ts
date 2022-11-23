@@ -21,12 +21,13 @@ describe('ForbiddenWordsDictionary', () => {
 
     test.each`
         word         | options                  | expected
-        ${'avocado'} | ${undefined}             | ${undefined}
-        ${'Avocado'} | ${undefined}             | ${{ found: 'Avocado', forbidden: true, noSuggest: false }}
-        ${'Avocado'} | ${{ ignoreCase: true }}  | ${{ found: 'Avocado', forbidden: true, noSuggest: false }}
+        ${'avocado'} | ${undefined}             | ${{ forbidden: false, found: 'avocado', noSuggest: true }}
+        ${'Avocado'} | ${undefined}             | ${{ found: 'avocado', forbidden: false, noSuggest: true }}
+        ${'Avocado'} | ${{ ignoreCase: true }}  | ${{ found: 'avocado', forbidden: false, noSuggest: true }}
+        ${'Avocado'} | ${{ ignoreCase: false }} | ${{ found: 'Avocado', forbidden: true, noSuggest: false }}
         ${''}        | ${undefined}             | ${undefined}
-        ${'English'} | ${{ ignoreCase: true }}  | ${undefined}
-        ${'English'} | ${{ ignoreCase: false }} | ${undefined}
+        ${'English'} | ${{ ignoreCase: true }}  | ${{ forbidden: false, found: 'English', noSuggest: true }}
+        ${'English'} | ${{ ignoreCase: false }} | ${{ forbidden: false, found: 'English', noSuggest: true }}
         ${'english'} | ${{ ignoreCase: true }}  | ${{ found: 'english', forbidden: true, noSuggest: false }}
         ${'english'} | ${{ ignoreCase: false }} | ${{ found: 'english', forbidden: true, noSuggest: false }}
     `('find "$word" $options', async ({ word, options, expected }) => {
@@ -34,14 +35,20 @@ describe('ForbiddenWordsDictionary', () => {
     });
 
     test.each`
-        word         | expected
-        ${'avocado'} | ${false}
-        ${'Avocado'} | ${false}
-        ${''}        | ${false}
-        ${'English'} | ${false}
-        ${'english'} | ${false}
-    `('isNoSuggestWord of "$word"', async ({ word, expected }) => {
-        expect(dict.isNoSuggestWord(word, {})).toEqual(expected);
+        word         | ignoreCase | expected
+        ${''}        | ${false}   | ${false}
+        ${''}        | ${true}    | ${false}
+        ${'Avocado'} | ${false}   | ${false}
+        ${'avocado'} | ${false}   | ${true}
+        ${'Avocado'} | ${true}    | ${true}
+        ${'avocado'} | ${true}    | ${true}
+        ${'english'} | ${false}   | ${false}
+        ${'English'} | ${false}   | ${true}
+        ${'english'} | ${true}    | ${false}
+        ${'English'} | ${true}    | ${true}
+    `('isNoSuggestWord of "$word" ignoreCase: $ignoreCase', async ({ word, ignoreCase, expected }) => {
+        const result = dict.isNoSuggestWord(word, { ignoreCase });
+        expect(result).toEqual(expected);
     });
 
     test.each`
@@ -56,7 +63,8 @@ describe('ForbiddenWordsDictionary', () => {
         ${'grumpy'}   | ${true}
         ${'Grumpy'}   | ${true}
     `('isForbidden of "$word"', async ({ word, expected }) => {
-        expect(dict.isForbidden(word)).toEqual(expected);
+        const result = dict.isForbidden(word);
+        expect(result).toEqual(expected);
     });
 
     test.each`
@@ -76,11 +84,12 @@ describe('ForbiddenWordsDictionary', () => {
 });
 
 describe('ForbiddenWordsDictionaryTrie', () => {
-    const dictWords = [
+    const flagWords = [
         '  english',
         '!English',
         'grumpy',
         'Avocado',
+        'Capitol',
         'avocadoS',
         '!avocado',
         'not+',
@@ -88,7 +97,7 @@ describe('ForbiddenWordsDictionaryTrie', () => {
         '+working',
         '!notfound',
     ];
-    const dict = createForbiddenWordsDictionary(dictWords, 'flag_words', 'test');
+    const dict = createForbiddenWordsDictionary(flagWords, 'flag_words', 'test');
 
     test.each`
         word         | expected
@@ -107,47 +116,60 @@ describe('ForbiddenWordsDictionaryTrie', () => {
 
     test.each`
         word            | options                  | expected
-        ${'avocado'}    | ${undefined}             | ${undefined}
-        ${'Avocado'}    | ${undefined}             | ${{ found: 'avocado', forbidden: true, noSuggest: false }}
-        ${'Avocado'}    | ${{ ignoreCase: true }}  | ${{ found: 'avocado', forbidden: true, noSuggest: false }}
-        ${'avocado'}    | ${{ ignoreCase: true }}  | ${undefined}
+        ${'avocado'}    | ${undefined}             | ${{ forbidden: false, found: 'avocado', noSuggest: true }}
+        ${'Avocado'}    | ${undefined}             | ${{ found: 'avocado', forbidden: false, noSuggest: true }}
+        ${'Avocado'}    | ${{ ignoreCase: true }}  | ${{ found: 'avocado', forbidden: false, noSuggest: true }}
+        ${'Avocado'}    | ${{ ignoreCase: false }} | ${{ found: 'Avocado', forbidden: true, noSuggest: false }}
+        ${'avocado'}    | ${{ ignoreCase: false }} | ${{ forbidden: false, found: 'avocado', noSuggest: true }}
+        ${'avocado'}    | ${{ ignoreCase: true }}  | ${{ forbidden: false, found: 'avocado', noSuggest: true }}
         ${''}           | ${undefined}             | ${undefined}
-        ${'English'}    | ${{ ignoreCase: true }}  | ${undefined}
-        ${'English'}    | ${{ ignoreCase: false }} | ${undefined}
+        ${'English'}    | ${{ ignoreCase: true }}  | ${{ forbidden: false, found: 'English', noSuggest: true }}
+        ${'English'}    | ${{ ignoreCase: false }} | ${{ forbidden: false, found: 'English', noSuggest: true }}
         ${'english'}    | ${{ ignoreCase: true }}  | ${{ found: 'english', forbidden: true, noSuggest: false }}
         ${'english'}    | ${{ ignoreCase: false }} | ${{ found: 'english', forbidden: true, noSuggest: false }}
-        ${'Grumpy'}     | ${{ ignoreCase: true }}  | ${undefined}
-        ${'notfound'}   | ${{ ignoreCase: true }}  | ${undefined}
-        ${'notfound'}   | ${{}}                    | ${undefined}
+        ${'Grumpy'}     | ${{ ignoreCase: true }}  | ${{ found: 'grumpy', forbidden: true, noSuggest: false }}
+        ${'notfound'}   | ${{ ignoreCase: false }} | ${{ forbidden: false, found: 'notfound', noSuggest: true }}
+        ${'notfound'}   | ${{ ignoreCase: true }}  | ${{ forbidden: false, found: 'notfound', noSuggest: true }}
+        ${'notfound'}   | ${{}}                    | ${{ forbidden: false, found: 'notfound', noSuggest: true }}
         ${'notworking'} | ${undefined}             | ${undefined}
     `('find "$word" $options', async ({ word, options, expected }) => {
         expect(dict.find(word, options)).toEqual(expected);
     });
 
     test.each`
-        word         | expected
-        ${'avocado'} | ${false}
-        ${'Avocado'} | ${false}
-        ${''}        | ${false}
-        ${'English'} | ${false}
-        ${'english'} | ${false}
-    `('isNoSuggestWord of "$word"', async ({ word, expected }) => {
-        expect(dict.isNoSuggestWord(word, {})).toEqual(expected);
+        word         | ignoreCase | expected
+        ${''}        | ${false}   | ${false}
+        ${''}        | ${true}    | ${false}
+        ${'Avocado'} | ${false}   | ${false}
+        ${'avocado'} | ${false}   | ${true}
+        ${'Avocado'} | ${true}    | ${true}
+        ${'avocado'} | ${true}    | ${true}
+        ${'english'} | ${false}   | ${false}
+        ${'English'} | ${false}   | ${true}
+        ${'english'} | ${true}    | ${false}
+        ${'English'} | ${true}    | ${true}
+    `('isNoSuggestWord of "$word" IgnoreCase: $ignoreCase', async ({ word, ignoreCase, expected }) => {
+        const result = dict.isNoSuggestWord(word, { ignoreCase });
+        expect(result).toEqual(expected);
     });
 
     test.each`
         word          | expected
+        ${''}         | ${false}
         ${'avocado'}  | ${false}
         ${'Avocado'}  | ${true}
-        ${''}         | ${false}
+        ${'AvocadoS'} | ${false}
+        ${'avocadoS'} | ${true}
+        ${'capitol'}  | ${false}
+        ${'Capitol'}  | ${true}
         ${'English'}  | ${false}
         ${'english'}  | ${true}
-        ${'avocadoS'} | ${true}
-        ${'AvocadoS'} | ${false}
         ${'grumpy'}   | ${true}
-        ${'Grumpy'}   | ${false}
+        ${'Grumpy'}   | ${true}
+        ${'GRUMPY'}   | ${true}
     `('isForbidden of "$word"', async ({ word, expected }) => {
-        expect(dict.isForbidden(word)).toEqual(expected);
+        const result = dict.isForbidden(word);
+        expect(result).toEqual(expected);
     });
 
     test.each`

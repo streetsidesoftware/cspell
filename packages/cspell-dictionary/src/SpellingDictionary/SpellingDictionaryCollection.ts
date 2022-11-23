@@ -20,6 +20,7 @@ import {
     suggestArgsToSuggestOptions,
     suggestionCollector,
 } from './SpellingDictionaryMethods';
+import * as Defaults from './defaults';
 
 function identityString(w: string): string {
     return w;
@@ -53,20 +54,16 @@ class SpellingDictionaryCollectionImpl implements SpellingDictionaryCollection {
 
     public find(word: string, hasOptions?: HasOptions): FindResult | undefined {
         const options = hasOptionToSearchOption(hasOptions);
-        const {
-            found = false,
-            forbidden = false,
-            noSuggest = false,
-        } = findInAnyDictionary(this.dictionaries, word, options) || {};
-        return { found, forbidden, noSuggest };
+        return findInAnyDictionary(this.dictionaries, word, options);
     }
 
     public isNoSuggestWord(word: string, options?: HasOptions): boolean {
         return this._isNoSuggestWord(word, options);
     }
 
-    public isForbidden(word: string): boolean {
-        return !!this._isForbiddenInDict(word) && !this.isNoSuggestWord(word);
+    public isForbidden(word: string, ignoreCaseAndAccents?: boolean): boolean {
+        const ignoreCase = ignoreCaseAndAccents ?? Defaults.isForbiddenIgnoreCaseAndAccents;
+        return !!this._isForbiddenInDict(word, ignoreCase) && !this.isNoSuggestWord(word, { ignoreCase });
     }
 
     public suggest(
@@ -123,7 +120,9 @@ class SpellingDictionaryCollectionImpl implements SpellingDictionaryCollection {
         return this.dictionaries.reduce((errors, dict) => errors.concat(dict.getErrors?.() || []), [] as Error[]);
     }
 
-    private _isForbiddenInDict = (word: string) => isWordForbiddenInAnyDictionary(this.dictionaries, word);
+    private _isForbiddenInDict(word: string, ignoreCase: boolean | undefined) {
+        return isWordForbiddenInAnyDictionary(this.dictionaries, word, ignoreCase);
+    }
 
     private _isNoSuggestWord = (word: string, options?: HasOptions) => {
         if (!this.containsNoSuggestWords) return false;
@@ -165,8 +164,12 @@ function isNoSuggestWordInAnyDictionary(
     return genSequence(dicts).first((dict) => dict.isNoSuggestWord(word, options));
 }
 
-function isWordForbiddenInAnyDictionary(dicts: SpellingDictionary[], word: string): SpellingDictionary | undefined {
-    return genSequence(dicts).first((dict) => dict.isForbidden(word));
+function isWordForbiddenInAnyDictionary(
+    dicts: SpellingDictionary[],
+    word: string,
+    ignoreCase: boolean | undefined
+): SpellingDictionary | undefined {
+    return genSequence(dicts).first((dict) => dict.isForbidden(word, ignoreCase));
 }
 
 export function isSpellingDictionaryCollection(dict: SpellingDictionary): dict is SpellingDictionaryCollection {

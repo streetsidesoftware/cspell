@@ -15,3 +15,4 @@ export type {
 } from './SpellingDictionary';
 export { createCollection, SpellingDictionaryCollection } from './SpellingDictionaryCollection';
 export { createSpellingDictionaryFromTrieFile } from './SpellingDictionaryFromTrie';
+export { createTyposDictionary } from './TyposDictionary';

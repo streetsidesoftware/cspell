@@ -150,7 +150,7 @@ export class SpellingDictionaryFromTrie implements SpellingDictionary {
         return this.containsNoSuggestWords ? this.has(word, options) : false;
     }
 
-    public isForbidden(word: string): boolean {
+    public isForbidden(word: string, _ignoreCaseAndAccents?: boolean): boolean {
         return this._isForbidden(word);
     }
 

@@ -1,4 +1,4 @@
-import { opConcatMap, opFilter, pipe, reduce } from '@cspell/cspell-pipe/sync';
+import { opConcatMap, opFilter, pipe } from '@cspell/cspell-pipe/sync';
 import { TypoEntry, TyposDef, TyposDefKey, TyposDefValue } from './typos';
 
 /**
@@ -37,6 +37,11 @@ export function createTyposDef(entries?: Iterable<[TyposDefKey, TyposDefValue]>)
     return def;
 }
 
+/**
+ * Extract all suggestions.
+ * @param typosDef - the def
+ * @returns the set of suggestions.
+ */
 export function extractAllSuggestions(typosDef: TyposDef): Set<string> {
     const allSugs = pipe(
         Object.values(typosDef),
@@ -46,13 +51,19 @@ export function extractAllSuggestions(typosDef: TyposDef): Set<string> {
     return new Set(allSugs);
 }
 
+/**
+ * Extract all words that have been explicitly ignore because they contains the `ignorePrefix`.
+ * @param typosDef - the def
+ * @param ignorePrefix - prefix
+ * @returns set of ignored words with the prefix removed.
+ */
 export function extractIgnoreValues(typosDef: TyposDef, ignorePrefix: string): Set<string> {
-    const sugs = extractAllSuggestions(typosDef);
     const pfxLen = ignorePrefix.length;
-    const ignoreKeys = Object.keys(typosDef)
-        .filter((k) => k.startsWith(ignorePrefix))
-        .map((k) => k.slice(pfxLen));
-    return reduce(ignoreKeys, (sugs, word) => sugs.add(word), sugs);
+    return new Set(
+        Object.keys(typosDef)
+            .filter((k) => k.startsWith(ignorePrefix))
+            .map((k) => k.slice(pfxLen))
+    );
 }
 
 function isDefined<T>(v: T | undefined | null): v is T {
