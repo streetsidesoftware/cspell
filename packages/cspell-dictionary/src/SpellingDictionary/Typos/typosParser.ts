@@ -71,8 +71,8 @@ export function sanitizeIntoTypoDef(dirtyDef: TyposDef | Record<string, unknown>
  * @param entries - entries to process
  * @returns a TyposDef
  */
-export function processEntriesToTyposDef(entries: TyposDef | readonly TypoEntry[] | Record<string, unknown>): TyposDef {
-    const def = Array.isArray(entries) ? reduceToTyposDef(entries) : entries;
+export function processEntriesToTyposDef(entries: Iterable<TypoEntry> | TyposDef | Record<string, unknown>): TyposDef {
+    const def = isIterable(entries) ? reduceToTyposDef(entries) : entries;
     const result = sanitizeIntoTypoDef(def);
     assert(result);
     return result;
@@ -123,4 +123,8 @@ function splitEntry(line: string): readonly [string, string | undefined] {
 export function parseTyposFile(content: string): TyposDef {
     const lines = splitIntoLines(content.replace(inlineComment, ''));
     return reduceToTyposDef(lines);
+}
+
+function isIterable<T>(v: Iterable<T> | object): v is Iterable<T> {
+    return Symbol.iterator in v;
 }
