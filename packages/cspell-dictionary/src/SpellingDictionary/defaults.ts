@@ -1,1 +1,1 @@
-export const ignoreCase = true;
+export const ignoreCase = true as const;
