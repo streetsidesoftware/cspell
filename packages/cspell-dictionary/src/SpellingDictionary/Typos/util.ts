@@ -1,4 +1,4 @@
-import { opConcatMap, opFilter, pipe, reduce } from '@cspell/cspell-pipe/sync';
+import { opConcatMap, opFilter, pipe } from '@cspell/cspell-pipe/sync';
 import { TypoEntry, TyposDef, TyposDefKey, TyposDefValue } from './typos';
 
 /**
