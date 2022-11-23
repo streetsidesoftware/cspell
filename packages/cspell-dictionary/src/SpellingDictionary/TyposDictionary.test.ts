@@ -52,13 +52,13 @@ describe('ForbiddenWordsDictionary', () => {
         word          | expected
         ${''}         | ${false}
         ${'avocado'}  | ${false}
-        ${'Avocado'}  | ${false}
+        ${'Avocado'}  | ${true}
         ${'AvocadoS'} | ${false}
         ${'avocadoS'} | ${true}
         ${'crud'}     | ${true}
         ${'Crud'}     | ${true}
         ${'CRUD'}     | ${true}
-        ${'english'}  | ${false}
+        ${'english'}  | ${true}
         ${'English'}  | ${false}
         ${'grumpy'}   | ${true}
         ${'Grumpy'}   | ${true}
@@ -167,7 +167,7 @@ describe('ForbiddenWordsDictionaryTrie', () => {
         ${'English'} | ${false}     | ${false}
         ${'english'} | ${false}     | ${true}
         ${'english'} | ${true}      | ${false}
-        ${'english'} | ${undefined} | ${false}
+        ${'english'} | ${undefined} | ${true}
         ${'grumpy'}  | ${false}     | ${false}
         ${'Grumpy'}  | ${false}     | ${true}
         ${'Grumpy'}  | ${true}      | ${true}

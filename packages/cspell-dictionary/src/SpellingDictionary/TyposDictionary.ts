@@ -19,7 +19,7 @@ interface Found {
 }
 
 class TyposDictionary implements SpellingDictionary {
-    readonly containsNoSuggestWords = false;
+    readonly containsNoSuggestWords: boolean;
     readonly options: SpellingDictionaryOptions = {};
     readonly type = 'typos';
     readonly size: number;
@@ -42,6 +42,7 @@ class TyposDictionary implements SpellingDictionary {
         const suggestions = extractAllSuggestions(typosDef);
         this.ignoreWords = new Set(pipe(this.explicitIgnoreWords, opAppend(suggestions), opAppend(ignoreList || [])));
         this.ignoreWordsLower = new Set(pipe(suggestions, mapperRemoveCaseAndAccents));
+        this.containsNoSuggestWords = this.ignoreWords.size > 0;
     }
 
     /**
@@ -76,17 +77,14 @@ class TyposDictionary implements SpellingDictionary {
         return false;
     }
 
-    isForbidden(word: string, ignoreCaseAndAccents: boolean = defaults.ignoreCase): boolean {
+    isForbidden(word: string, ignoreCaseAndAccents: boolean = defaults.isForbiddenIgnoreCaseAndAccents): boolean {
         const found = this._findForms(word, ignoreCaseAndAccents);
         return found !== false && !found.ignore;
     }
 
     isNoSuggestWord(word: string, options: HasOptions): boolean {
-        if (this.ignoreWords.has(word)) return true;
-        const lc = word.toLowerCase();
-        return (
-            this.ignoreWords.has(lc) || ((options.ignoreCase ?? defaults.ignoreCase) && this.ignoreWordsLower.has(lc))
-        );
+        const result = this.find(word, options);
+        return result?.noSuggest ?? false;
     }
 
     suggest(

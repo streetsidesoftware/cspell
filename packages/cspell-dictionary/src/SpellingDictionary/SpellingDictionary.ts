@@ -115,7 +115,7 @@ export interface SpellingDictionary extends DictionaryInfo {
      * Checks if a word is forbidden.
      * @param word - word to check.
      */
-    isForbidden(word: string): boolean;
+    isForbidden(word: string, ignoreCaseAndAccents?: boolean): boolean;
     /**
      * Is the word "Ignored". Ignored words override forbidden words.
      * @param word - word to check
