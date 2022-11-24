@@ -35,7 +35,7 @@ function trimAndFilter(lines: readonly string[]): string[] {
 
 function cleanSugs(rawSugs: readonly string[]): TyposDefValue {
     const sugs = trimAndFilter(rawSugs);
-    return sugs.length === 1 ? sugs[0] : sugs.length ? sugs : null;
+    return sugs.length === 1 ? sugs[0] : sugs.length ? sugs : false;
 }
 
 function splitSuggestionsValue(value: string): TyposDefValue {
@@ -59,8 +59,8 @@ export function sanitizeIntoTypoDef(dirtyDef: TyposDef | Record<string, unknown>
             def[key] = sugs;
             continue;
         }
-        assert(value === null || value === undefined, 'Unexpected suggestion type.');
-        def[key] = null;
+        assert(value === false, 'Unexpected suggestion type.');
+        def[key] = false;
     }
 
     return def;

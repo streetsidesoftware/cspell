@@ -4,8 +4,8 @@ describe('typos/util', () => {
     test.each`
         def                     | entry              | expected
         ${{}}                   | ${''}              | ${{}}
-        ${{ a: 'b' }}           | ${'a'}             | ${{ a: null }}
-        ${{}}                   | ${['a']}           | ${{ a: null }}
+        ${{ a: 'b' }}           | ${'a'}             | ${{ a: false }}
+        ${{}}                   | ${['a']}           | ${{ a: false }}
         ${{}}                   | ${['a', 'b']}      | ${{ a: 'b' }}
         ${{}}                   | ${['a', 'b', 'c']} | ${{ a: ['b', 'c'] }}
         ${{ a: 'aa', b: 'bb' }} | ${{ a: 'aaa' }}    | ${{ a: 'aaa', b: 'bb' }}
@@ -17,7 +17,7 @@ describe('typos/util', () => {
         entries                | expected
         ${[]}                  | ${{}}
         ${undefined}           | ${{}}
-        ${[['a', null]]}       | ${{ a: null }}
+        ${[['a', null]]}       | ${{ a: false }}
         ${[['a', 'b']]}        | ${{ a: 'b' }}
         ${[['a', ['b']]]}      | ${{ a: ['b'] }}
         ${[['a', ['b', 'c']]]} | ${{ a: ['b', 'c'] }}
