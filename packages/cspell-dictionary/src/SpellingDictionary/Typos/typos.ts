@@ -1,4 +1,4 @@
-import { TermsDefKey, TermValueTypo, TermValueTypoNoSuggestions, TermValueTypoWithSuggestions } from '../Terms';
+import type { TermsDefKey, TermValueTypo, TermValueTypoNoSuggestions, TermValueTypoWithSuggestions } from '../Terms';
 
 export type TypoValueNoSuggestions = TermValueTypoNoSuggestions;
 export type TypoValueWithSuggestions = TermValueTypoWithSuggestions;
