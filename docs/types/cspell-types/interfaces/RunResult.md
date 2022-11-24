@@ -22,7 +22,7 @@ Number files that used results from the cache.
 
 #### Defined in
 
-[CSpellReporter.ts:92](https://github.com/streetsidesoftware/cspell/blob/875a61f/packages/cspell-types/src/CSpellReporter.ts#L92)
+[CSpellReporter.ts:92](https://github.com/streetsidesoftware/cspell/blob/bb436cd/packages/cspell-types/src/CSpellReporter.ts#L92)
 
 ___
 
@@ -34,7 +34,7 @@ Number of processing errors.
 
 #### Defined in
 
-[CSpellReporter.ts:90](https://github.com/streetsidesoftware/cspell/blob/875a61f/packages/cspell-types/src/CSpellReporter.ts#L90)
+[CSpellReporter.ts:90](https://github.com/streetsidesoftware/cspell/blob/bb436cd/packages/cspell-types/src/CSpellReporter.ts#L90)
 
 ___
 
@@ -46,7 +46,7 @@ Number of files processed.
 
 #### Defined in
 
-[CSpellReporter.ts:84](https://github.com/streetsidesoftware/cspell/blob/875a61f/packages/cspell-types/src/CSpellReporter.ts#L84)
+[CSpellReporter.ts:84](https://github.com/streetsidesoftware/cspell/blob/bb436cd/packages/cspell-types/src/CSpellReporter.ts#L84)
 
 ___
 
@@ -58,7 +58,7 @@ Set of files where issues were found.
 
 #### Defined in
 
-[CSpellReporter.ts:86](https://github.com/streetsidesoftware/cspell/blob/875a61f/packages/cspell-types/src/CSpellReporter.ts#L86)
+[CSpellReporter.ts:86](https://github.com/streetsidesoftware/cspell/blob/bb436cd/packages/cspell-types/src/CSpellReporter.ts#L86)
 
 ___
 
@@ -70,4 +70,4 @@ Number of issues found.
 
 #### Defined in
 
-[CSpellReporter.ts:88](https://github.com/streetsidesoftware/cspell/blob/875a61f/packages/cspell-types/src/CSpellReporter.ts#L88)
+[CSpellReporter.ts:88](https://github.com/streetsidesoftware/cspell/blob/bb436cd/packages/cspell-types/src/CSpellReporter.ts#L88)
