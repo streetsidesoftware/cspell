@@ -38,7 +38,7 @@ Optional description.
 
 #### Defined in
 
-[CSpellSettingsDef.ts:578](https://github.com/streetsidesoftware/cspell/blob/875a61f/packages/cspell-types/src/CSpellSettingsDef.ts#L578)
+[DictionaryDefinition.ts:25](https://github.com/streetsidesoftware/cspell/blob/bb436cd/packages/cspell-types/src/DictionaryDefinition.ts#L25)
 
 ___
 
@@ -61,7 +61,7 @@ Name Format:
 
 #### Defined in
 
-[CSpellSettingsDef.ts:576](https://github.com/streetsidesoftware/cspell/blob/875a61f/packages/cspell-types/src/CSpellSettingsDef.ts#L576)
+[DictionaryDefinition.ts:23](https://github.com/streetsidesoftware/cspell/blob/bb436cd/packages/cspell-types/src/DictionaryDefinition.ts#L23)
 
 ___
 
@@ -83,7 +83,7 @@ possible suggestions.
 
 #### Defined in
 
-[CSpellSettingsDef.ts:592](https://github.com/streetsidesoftware/cspell/blob/875a61f/packages/cspell-types/src/CSpellSettingsDef.ts#L592)
+[DictionaryDefinition.ts:39](https://github.com/streetsidesoftware/cspell/blob/bb436cd/packages/cspell-types/src/DictionaryDefinition.ts#L39)
 
 ___
 
@@ -95,7 +95,7 @@ Path to the file.
 
 #### Defined in
 
-[CSpellSettingsDef.ts:607](https://github.com/streetsidesoftware/cspell/blob/875a61f/packages/cspell-types/src/CSpellSettingsDef.ts#L607)
+[DictionaryDefinition.ts:54](https://github.com/streetsidesoftware/cspell/blob/bb436cd/packages/cspell-types/src/DictionaryDefinition.ts#L54)
 
 ___
 
@@ -111,7 +111,7 @@ Replacement pairs.
 
 #### Defined in
 
-[CSpellSettingsDef.ts:580](https://github.com/streetsidesoftware/cspell/blob/875a61f/packages/cspell-types/src/CSpellSettingsDef.ts#L580)
+[DictionaryDefinition.ts:27](https://github.com/streetsidesoftware/cspell/blob/bb436cd/packages/cspell-types/src/DictionaryDefinition.ts#L27)
 
 ___
 
@@ -136,7 +136,7 @@ C is the slowest to load due to the need to split each line based upon code spli
 
 #### Defined in
 
-[CSpellSettingsDef.ts:602](https://github.com/streetsidesoftware/cspell/blob/875a61f/packages/cspell-types/src/CSpellSettingsDef.ts#L602)
+[DictionaryDefinition.ts:49](https://github.com/streetsidesoftware/cspell/blob/bb436cd/packages/cspell-types/src/DictionaryDefinition.ts#L49)
 
 ___
 
@@ -152,4 +152,4 @@ Use Compounds.
 
 #### Defined in
 
-[CSpellSettingsDef.ts:582](https://github.com/streetsidesoftware/cspell/blob/875a61f/packages/cspell-types/src/CSpellSettingsDef.ts#L582)
+[DictionaryDefinition.ts:29](https://github.com/streetsidesoftware/cspell/blob/bb436cd/packages/cspell-types/src/DictionaryDefinition.ts#L29)
