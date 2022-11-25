@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 6.15.0 (2022-11-25)
+
+### Features
+
+* Preferred suggestions are listed first ([#3869](https://github.com/streetsidesoftware/cspell-cli/issues/3869)) ([1b7a65d](https://github.com/streetsidesoftware/cspell-cli/commit/1b7a65d6ec851b78e1cc27c56f32b77adfba36e5))
+
 ## 6.14.3 (2022-11-17)
 
 ### Bug Fixes
