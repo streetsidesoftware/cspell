@@ -153,3 +153,15 @@ export interface SpellingDictionary extends DictionaryInfo {
     readonly isDictionaryCaseSensitive: boolean;
     getErrors?(): Error[];
 }
+
+export type SuggestArgs =
+    | Parameters<SpellingDictionary['suggest']>
+    | Parameters<
+          (
+              word: string,
+              numSuggestions?: number,
+              compoundMethod?: CompoundWordsMethod,
+              numChanges?: number,
+              ignoreCase?: boolean
+          ) => SuggestionResult[]
+      >;

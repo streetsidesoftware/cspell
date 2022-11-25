@@ -1,24 +1,12 @@
 import { DictionaryInformation } from '@cspell/cspell-types';
-import { CompoundWordsMethod, mapDictionaryInformationToWeightMap, SuggestionResult, WeightMap } from 'cspell-trie-lib';
+import { mapDictionaryInformationToWeightMap, SuggestionResult, WeightMap } from 'cspell-trie-lib';
 import { clean } from '../util/clean';
 import { isUpperCase, removeUnboundAccents, ucFirst } from '../util/text';
-import { HasOptions, SearchOptions, SpellingDictionary, SuggestOptions } from './SpellingDictionary';
+import { HasOptions, SearchOptions, SuggestArgs, SuggestOptions } from './SpellingDictionary';
 
 export { impersonateCollector, suggestionCollector } from 'cspell-trie-lib';
 
 export type FilterSuggestionsPredicate = (word: SuggestionResult) => boolean;
-
-export type SuggestArgs =
-    | Parameters<SpellingDictionary['suggest']>
-    | Parameters<
-          (
-              word: string,
-              numSuggestions?: number,
-              compoundMethod?: CompoundWordsMethod,
-              numChanges?: number,
-              ignoreCase?: boolean
-          ) => SuggestionResult[]
-      >;
 
 export const defaultNumSuggestions = 10;
 

@@ -1,7 +1,8 @@
 import { CASE_INSENSITIVE_PREFIX } from 'cspell-trie-lib';
 import { genSequence } from 'gensequence';
-import { isDefined } from '../util/util';
 import { clean } from '../util/clean';
+import { isDefined } from '../util/util';
+import * as Defaults from './defaults';
 import {
     CompoundWordsMethod,
     FindResult,
@@ -9,6 +10,7 @@ import {
     SearchOptions,
     SpellingDictionary,
     SpellingDictionaryOptions,
+    SuggestArgs,
     SuggestionCollector,
     SuggestionResult,
     SuggestOptions,
@@ -16,11 +18,9 @@ import {
 import {
     defaultNumSuggestions,
     hasOptionToSearchOption,
-    SuggestArgs,
     suggestArgsToSuggestOptions,
     suggestionCollector,
 } from './SpellingDictionaryMethods';
-import * as Defaults from './defaults';
 
 function identityString(w: string): string {
     return w;
