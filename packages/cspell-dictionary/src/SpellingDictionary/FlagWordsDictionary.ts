@@ -12,7 +12,7 @@ import { createCollection } from './SpellingDictionaryCollection';
 import { SpellingDictionaryFromTrie } from './SpellingDictionaryFromTrie';
 import { createTyposDictionary } from './TyposDictionary';
 
-class ForbiddenWordsDictionaryTrie extends SpellingDictionaryFromTrie {
+class FlagWordsDictionaryTrie extends SpellingDictionaryFromTrie {
     readonly containsNoSuggestWords = false;
     readonly options: SpellingDictionaryOptions = {};
     constructor(trie: Trie, readonly name: string, readonly source: string) {
@@ -59,10 +59,9 @@ class ForbiddenWordsDictionaryTrie extends SpellingDictionaryFromTrie {
  * @param name
  * @param source
  * @param options
- * @returns
+ * @returns SpellingDictionary
  */
-
-export function createForbiddenWordsDictionary(
+export function createFlagWordsDictionary(
     wordList: readonly string[],
     name: string,
     source: string
@@ -84,7 +83,7 @@ export function createForbiddenWordsDictionary(
 
 const regExpCleanIgnore = /^(!!)+/;
 
-function buildTrieDict(words: Set<string>, name: string, source: string): ForbiddenWordsDictionaryTrie {
+function buildTrieDict(words: Set<string>, name: string, source: string): FlagWordsDictionaryTrie {
     const trie = buildTrieFast(
         pipe(
             words,
@@ -92,7 +91,7 @@ function buildTrieDict(words: Set<string>, name: string, source: string): Forbid
             opMap((w) => w.replace(regExpCleanIgnore, ''))
         )
     );
-    return new ForbiddenWordsDictionaryTrie(trie, name, source);
+    return new FlagWordsDictionaryTrie(trie, name, source);
 }
 
 function bisect<T>(values: Set<T> | Iterable<T>, predicate: (v: T) => boolean): { t: Set<T>; f: Set<T> } {
