@@ -1,6 +1,9 @@
 export { CachingDictionary, createCachingDictionary } from './CachingDictionary';
-export { createSpellingDictionary, createFailedToLoadDictionary } from './createSpellingDictionary';
-export { createForbiddenWordsDictionary } from './ForbiddenWordsDictionary';
+export { createFailedToLoadDictionary, createSpellingDictionary } from './createSpellingDictionary';
+export {
+    createFlagWordsDictionary,
+    createFlagWordsDictionary as createForbiddenWordsDictionary,
+} from './FlagWordsDictionary';
 export { createIgnoreWordsDictionary } from './IgnoreWordsDictionary';
 export type {
     FindOptions,

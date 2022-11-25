@@ -1,8 +1,8 @@
-import { createTyposDictionary, _createTyposDictionary } from './TyposDictionary';
+import { createTyposDictionary } from './TyposDictionary';
 
 // const oc = expect.objectContaining;
 
-describe('ForbiddenWordsDictionary', () => {
+describe('TyposDictionary 1', () => {
     const dictWords = ['  english:English', 'grumpy', 'Avocado', 'avocadoS', '!avocado', 'crud'];
     const dict = createTyposDictionary(dictWords, 'typos', 'test');
 
@@ -26,10 +26,10 @@ describe('ForbiddenWordsDictionary', () => {
         ${'Avocado'} | ${{ ignoreCase: true }}  | ${{ found: 'avocado', forbidden: false, noSuggest: true }}
         ${'Avocado'} | ${undefined}             | ${{ found: 'avocado', forbidden: false, noSuggest: true }}
         ${'avocado'} | ${undefined}             | ${{ forbidden: false, found: 'avocado', noSuggest: true }}
-        ${'English'} | ${{ ignoreCase: false }} | ${{ forbidden: false, found: 'English', noSuggest: true }}
+        ${'English'} | ${{ ignoreCase: false }} | ${undefined}
         ${'english'} | ${{ ignoreCase: false }} | ${{ found: 'english', forbidden: true, noSuggest: false }}
-        ${'english'} | ${{ ignoreCase: true }}  | ${{ forbidden: false, found: 'english', noSuggest: true }}
-        ${'English'} | ${{ ignoreCase: true }}  | ${{ forbidden: false, found: 'English', noSuggest: true }}
+        ${'english'} | ${{ ignoreCase: true }}  | ${undefined}
+        ${'English'} | ${{ ignoreCase: true }}  | ${undefined}
         ${'Crud'}    | ${{ ignoreCase: true }}  | ${{ forbidden: true, found: 'crud', noSuggest: false }}
         ${'crude'}   | ${{ ignoreCase: true }}  | ${undefined}
     `('find "$word" $options', async ({ word, options, expected }) => {
@@ -41,8 +41,8 @@ describe('ForbiddenWordsDictionary', () => {
         ${''}        | ${false}
         ${'avocado'} | ${true}
         ${'Avocado'} | ${true}
-        ${'english'} | ${true}
-        ${'English'} | ${true}
+        ${'english'} | ${false}
+        ${'English'} | ${false}
         ${'grumpy'}  | ${false}
     `('isNoSuggestWord of "$word"', async ({ word, expected }) => {
         expect(dict.isNoSuggestWord(word, {})).toEqual(expected);
@@ -71,7 +71,7 @@ describe('ForbiddenWordsDictionary', () => {
         ${'avocado'}  | ${[]}
         ${'Avocado'}  | ${[]}
         ${''}         | ${[]}
-        ${'English'}  | ${[]}
+        ${'English'}  | ${[{ word: 'English', cost: 1, isPreferred: true }]}
         ${'english'}  | ${[{ word: 'English', cost: 1, isPreferred: true }]}
         ${'avocadoS'} | ${[]}
         ${'AvocadoS'} | ${[]}
@@ -82,7 +82,7 @@ describe('ForbiddenWordsDictionary', () => {
     });
 });
 
-describe('ForbiddenWordsDictionaryTrie', () => {
+describe('TyposDictionary 2', () => {
     const dictWords = [
         '  english->English',
         'Grumpy',
@@ -97,7 +97,7 @@ describe('ForbiddenWordsDictionaryTrie', () => {
         '!Fudge',
         '!notworking',
     ];
-    const dict = _createTyposDictionary(dictWords, 'typos', 'test');
+    const dict = createTyposDictionary(dictWords, 'typos', 'test');
 
     test.each`
         word         | expected
@@ -118,22 +118,22 @@ describe('ForbiddenWordsDictionaryTrie', () => {
         word            | options                  | expected
         ${''}           | ${undefined}             | ${undefined}
         ${'avocado'}    | ${{ ignoreCase: false }} | ${{ found: 'avocado', forbidden: true, noSuggest: false }}
-        ${'Avocado'}    | ${{ ignoreCase: true }}  | ${{ forbidden: false, found: 'Avocado', noSuggest: true }}
-        ${'avocado'}    | ${undefined}             | ${{ forbidden: false, found: 'avocado', noSuggest: true }}
-        ${'Avocado'}    | ${undefined}             | ${{ forbidden: false, found: 'Avocado', noSuggest: true }}
+        ${'Avocado'}    | ${{ ignoreCase: true }}  | ${undefined}
+        ${'avocado'}    | ${undefined}             | ${undefined}
+        ${'Avocado'}    | ${undefined}             | ${undefined}
         ${'Crud'}       | ${{}}                    | ${{ found: 'crud', forbidden: true, noSuggest: false }}
         ${'english'}    | ${{ ignoreCase: false }} | ${{ found: 'english', forbidden: true, noSuggest: false }}
-        ${'English'}    | ${{ ignoreCase: false }} | ${{ found: 'English', forbidden: false, noSuggest: true }}
-        ${'english'}    | ${{ ignoreCase: true }}  | ${{ found: 'english', forbidden: false, noSuggest: true }}
-        ${'English'}    | ${{ ignoreCase: true }}  | ${{ found: 'English', forbidden: false, noSuggest: true }}
+        ${'English'}    | ${{ ignoreCase: false }} | ${undefined}
+        ${'english'}    | ${{ ignoreCase: true }}  | ${undefined}
+        ${'English'}    | ${{ ignoreCase: true }}  | ${undefined}
         ${'fudge'}      | ${{}}                    | ${{ found: 'fudge', forbidden: true, noSuggest: false }}
         ${'Fudge'}      | ${{}}                    | ${{ forbidden: false, found: 'Fudge', noSuggest: true }}
         ${'Grumpy'}     | ${{ ignoreCase: true }}  | ${{ found: 'Grumpy', forbidden: true, noSuggest: false }}
         ${'grumpy'}     | ${{ ignoreCase: true }}  | ${undefined}
         ${'notfound'}   | ${{ ignoreCase: false }} | ${{ found: 'notfound', forbidden: true, noSuggest: false }}
         ${'Notfound'}   | ${{ ignoreCase: false }} | ${{ found: 'notfound', forbidden: true, noSuggest: false }}
-        ${'notfound'}   | ${{ ignoreCase: true }}  | ${{ forbidden: false, found: 'notfound', noSuggest: true }}
-        ${'Notfound'}   | ${{ ignoreCase: true }}  | ${{ forbidden: false, found: 'notfound', noSuggest: true }}
+        ${'notfound'}   | ${{ ignoreCase: true }}  | ${undefined}
+        ${'Notfound'}   | ${{ ignoreCase: true }}  | ${undefined}
         ${'notworking'} | ${undefined}             | ${{ forbidden: false, found: 'notworking', noSuggest: true }}
         ${'wont'}       | ${undefined}             | ${{ found: 'wont', forbidden: true, noSuggest: false }}
         ${'WONT'}       | ${undefined}             | ${{ found: 'wont', forbidden: true, noSuggest: false }}
@@ -146,15 +146,39 @@ describe('ForbiddenWordsDictionaryTrie', () => {
         ${''}        | ${false}   | ${false}
         ${''}        | ${true}    | ${false}
         ${'avocado'} | ${false}   | ${false}
-        ${'Avocado'} | ${false}   | ${true}
+        ${'Avocado'} | ${false}   | ${false}
         ${'avocado'} | ${true}    | ${false}
+        ${'Avocado'} | ${true}    | ${false}
+        ${'english'} | ${false}   | ${false}
+        ${'English'} | ${false}   | ${false}
+        ${'english'} | ${true}    | ${false}
+        ${'English'} | ${true}    | ${false}
+        ${'fudge'}   | ${false}   | ${false}
+        ${'Fudge'}   | ${false}   | ${true}
+        ${'fudge'}   | ${true}    | ${false}
+        ${'Fudge'}   | ${true}    | ${true}
+    `('isNoSuggestWord of "$word" ignoreCase: $ignoreCase', async ({ word, ignoreCase, expected }) => {
+        expect(dict.isNoSuggestWord(word, { ignoreCase })).toEqual(expected);
+    });
+
+    test.each`
+        word         | ignoreCase | expected
+        ${''}        | ${false}   | ${false}
+        ${''}        | ${true}    | ${false}
+        ${'avocado'} | ${false}   | ${false}
+        ${'Avocado'} | ${false}   | ${true}
+        ${'avocado'} | ${true}    | ${true}
         ${'Avocado'} | ${true}    | ${true}
         ${'english'} | ${false}   | ${false}
         ${'English'} | ${false}   | ${true}
-        ${'english'} | ${true}    | ${false}
+        ${'english'} | ${true}    | ${true}
         ${'English'} | ${true}    | ${true}
-    `('isNoSuggestWord of "$word" ignoreCase: $ignoreCase', async ({ word, expected }) => {
-        expect(dict.isNoSuggestWord(word, { ignoreCase: false })).toEqual(expected);
+        ${'fudge'}   | ${false}   | ${false}
+        ${'Fudge'}   | ${false}   | ${false}
+        ${'fudge'}   | ${true}    | ${false}
+        ${'Fudge'}   | ${true}    | ${false}
+    `('isNoSuggestWord of "$word" ignoreCase: $ignoreCase', async ({ word, ignoreCase, expected }) => {
+        expect(dict.isSuggestedWord(word, ignoreCase)).toEqual(expected);
     });
 
     test.each`
@@ -178,10 +202,10 @@ describe('ForbiddenWordsDictionaryTrie', () => {
     test.each`
         word         | expected
         ${''}        | ${[]}
-        ${'Avocado'} | ${[]}
+        ${'Avocado'} | ${[{ cost: 1, isPreferred: true, word: 'Avocado' }]}
         ${'avocado'} | ${[{ cost: 1, isPreferred: true, word: 'Avocado' }]}
         ${'cafe'}    | ${[{ cost: 1, isPreferred: true, word: 'café' }]}
-        ${'English'} | ${[]}
+        ${'English'} | ${[{ word: 'English', isPreferred: true, cost: 1 }]}
         ${'english'} | ${[{ word: 'English', isPreferred: true, cost: 1 }]}
         ${'grumpy'}  | ${[]}
         ${'Grumpy'}  | ${[]}

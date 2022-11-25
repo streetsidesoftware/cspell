@@ -1,3 +1,4 @@
+import { opConcatMap, pipe } from '@cspell/cspell-pipe/sync';
 import type {
     FindFullResult,
     FindWordOptions,
@@ -6,13 +7,16 @@ import type {
     WeightMap,
 } from 'cspell-trie-lib';
 import { CompoundWordsMethod, importTrie, suggestionCollector, Trie } from 'cspell-trie-lib';
-import { createMapper } from '../util/repMap';
+import { autoCache, createCache01 } from '../util/AutoCache';
 import { clean } from '../util/clean';
+import { createMapper } from '../util/repMap';
+import * as Defaults from './defaults';
 import {
     FindResult,
     HasOptions,
     SpellingDictionary,
     SpellingDictionaryOptions,
+    SuggestArgs,
     SuggestOptions,
 } from './SpellingDictionary';
 import {
@@ -20,14 +24,10 @@ import {
     defaultNumSuggestions,
     hasOptionToSearchOption,
     impersonateCollector,
-    SuggestArgs,
     suggestArgsToSuggestOptions,
     wordSearchForms,
     wordSuggestFormsArray,
 } from './SpellingDictionaryMethods';
-import { autoCache, createCache01 } from '../util/AutoCache';
-import { pipe, opConcatMap } from '@cspell/cspell-pipe/sync';
-import * as Defaults from './defaults';
 
 const findWordOptionsCaseSensitive: FindWordOptions = Object.freeze({ caseSensitive: true });
 const findWordOptionsNotCaseSensitive: FindWordOptions = Object.freeze({ caseSensitive: false });

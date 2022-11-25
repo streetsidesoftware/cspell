@@ -1,10 +1,10 @@
-import { createForbiddenWordsDictionary } from './ForbiddenWordsDictionary';
+import { createFlagWordsDictionary } from './FlagWordsDictionary';
 
 // const oc = expect.objectContaining;
 
 describe('ForbiddenWordsDictionary', () => {
     const dictWords = ['  english', '!English', 'grumpy', 'Avocado', 'avocadoS', '!avocado'];
-    const dict = createForbiddenWordsDictionary(dictWords, 'flag_words', 'test');
+    const dict = createFlagWordsDictionary(dictWords, 'flag_words', 'test');
 
     test.each`
         word         | expected
@@ -97,7 +97,7 @@ describe('ForbiddenWordsDictionaryTrie', () => {
         '+working',
         '!notfound',
     ];
-    const dict = createForbiddenWordsDictionary(flagWords, 'flag_words', 'test');
+    const dict = createFlagWordsDictionary(flagWords, 'flag_words', 'test');
 
     test.each`
         word         | expected

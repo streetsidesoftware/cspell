@@ -60,6 +60,8 @@ export interface FindResult {
 
 export type HasOptions = SearchOptions;
 
+export type IgnoreCaseOption = boolean;
+
 export interface SpellingDictionaryOptions {
     repMap?: ReplaceMap;
     /**
@@ -115,9 +117,11 @@ export interface SpellingDictionary extends DictionaryInfo {
      * Checks if a word is forbidden.
      * @param word - word to check.
      */
-    isForbidden(word: string, ignoreCaseAndAccents?: boolean): boolean;
+    isForbidden(word: string, ignoreCaseAndAccents?: IgnoreCaseOption): boolean;
     /**
-     * Is the word "Ignored". Ignored words override forbidden words.
+     * No Suggest words are considered correct but will not be listed when
+     * suggestions are generated.
+     * No Suggest words and "Ignored" words are equivalent. Ignored / no suggest words override forbidden words.
      * @param word - word to check
      * @param options - options
      */
@@ -149,3 +153,15 @@ export interface SpellingDictionary extends DictionaryInfo {
     readonly isDictionaryCaseSensitive: boolean;
     getErrors?(): Error[];
 }
+
+export type SuggestArgs =
+    | Parameters<SpellingDictionary['suggest']>
+    | Parameters<
+          (
+              word: string,
+              numSuggestions?: number,
+              compoundMethod?: CompoundWordsMethod,
+              numChanges?: number,
+              ignoreCase?: boolean
+          ) => SuggestionResult[]
+      >;
