@@ -109,7 +109,6 @@ describe('Verify building Dictionary', () => {
 
         const dict = await createSpellingDictionary(words as string[], 'words', 'test', opts());
         expect(dict.name).toBe('words');
-        // expect(dict).toBeInstanceOf(SpellingDictionaryFromTrie);
         expect(dict.has('apple')).toBe(true);
         const suggestions = dict.suggest('aple').map(({ word }) => word);
         expect(suggestions).toEqual(expect.arrayContaining(['apple']));

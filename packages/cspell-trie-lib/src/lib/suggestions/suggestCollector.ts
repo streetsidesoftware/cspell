@@ -78,7 +78,9 @@ export type SuggestionGenerator = Generator<GenerateSuggestionResult, void, Gene
 
 // comparison function for Suggestion Results.
 export function compSuggestionResults(a: SuggestionResultBase, b: SuggestionResultBase): number {
-    return a.cost - b.cost || a.word.length - b.word.length || collator.compare(a.word, b.word);
+    const aPref = (a.isPreferred && -1) || 0;
+    const bPref = (b.isPreferred && -1) || 0;
+    return aPref - bPref || a.cost - b.cost || a.word.length - b.word.length || collator.compare(a.word, b.word);
 }
 
 export type FilterWordFn = (word: string, cost: number) => boolean;

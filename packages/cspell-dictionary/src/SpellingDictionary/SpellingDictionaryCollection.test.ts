@@ -1,7 +1,7 @@
 import * as Trie from 'cspell-trie-lib';
 import { SpellingDictionaryOptions } from '.';
 import { createFailedToLoadDictionary, createSpellingDictionary } from './createSpellingDictionary';
-import { createForbiddenWordsDictionary } from './ForbiddenWordsDictionary';
+import { createFlagWordsDictionary } from './FlagWordsDictionary';
 import { createIgnoreWordsDictionary } from './IgnoreWordsDictionary';
 import { CompoundWordsMethod } from './SpellingDictionary';
 import { createCollection } from './SpellingDictionaryCollection';
@@ -57,7 +57,7 @@ describe('Verify using multiple dictionaries', () => {
             createSpellingDictionary(wordsB, 'wordsB', 'test', opts()),
             createSpellingDictionary(wordsC, 'wordsC', 'test', opts()),
             createSpellingDictionary(wordsD, 'wordsD', 'test', opts()),
-            createForbiddenWordsDictionary(['Avocado', 'guava'], 'flag_words', 'test'),
+            createFlagWordsDictionary(['Avocado', 'guava'], 'flag_words', 'test'),
         ]);
 
         const dictCollection = createCollection(dicts, 'test');
@@ -78,7 +78,7 @@ describe('Verify using multiple dictionaries', () => {
     `('isNoSuggestWord "$word"', async ({ word, expected }) => {
         const dicts = await Promise.all([
             createSpellingDictionary(wordsA, 'wordsA', 'test', opts()),
-            createForbiddenWordsDictionary(['behaviour', 'guava', 'Ignored', 'Colour'], 'flag_words', 'test'),
+            createFlagWordsDictionary(['behaviour', 'guava', 'Ignored', 'Colour'], 'flag_words', 'test'),
             dictNoSug,
             dictIgnore,
         ]);
@@ -95,7 +95,7 @@ describe('Verify using multiple dictionaries', () => {
             createSpellingDictionary(wordsB, 'wordsB', 'test', opts()),
             createSpellingDictionary(wordsC, 'wordsC', 'test', opts()),
             createSpellingDictionary(wordsD, 'wordsD', 'test', opts()),
-            createForbiddenWordsDictionary(['Avocado', 'guava'], 'flag_words', 'test'),
+            createFlagWordsDictionary(['Avocado', 'guava'], 'flag_words', 'test'),
         ];
 
         const dictCollection = createCollection(dicts, 'test');
@@ -111,7 +111,7 @@ describe('Verify using multiple dictionaries', () => {
             createSpellingDictionary(wordsB, 'wordsB', 'test', opts()),
             createSpellingDictionary(wordsC, 'wordsC', 'test', opts()),
             createSpellingDictionary(wordsD, 'wordsD', 'test', opts()),
-            createForbiddenWordsDictionary(['Avocado', 'guava'], 'flag_words', 'test'),
+            createFlagWordsDictionary(['Avocado', 'guava'], 'flag_words', 'test'),
         ];
 
         const dictCollection = createCollection(dicts, 'test');
@@ -134,7 +134,7 @@ describe('Verify using multiple dictionaries', () => {
             createSpellingDictionary(wordsA, 'wordsA', 'test', opts()),
             createSpellingDictionary(wordsC, 'wordsC', 'test', opts()),
             createFailedToLoadDictionary('failed dict', './missing.txt', new Error('error')),
-            createForbiddenWordsDictionary(['Avocado'], 'flag_words', 'test'),
+            createFlagWordsDictionary(['Avocado'], 'flag_words', 'test'),
         ]);
 
         const dictCollection = createCollection(dicts, 'test');
@@ -155,7 +155,7 @@ describe('Verify using multiple dictionaries', () => {
             createSpellingDictionary(wordsB, 'wordsB', 'test', undefined),
             createSpellingDictionary(wordsA, 'wordsA', 'test', undefined),
             createSpellingDictionary(wordsC, 'wordsC', 'test', undefined),
-            createForbiddenWordsDictionary(['Avocado'], 'flag_words', 'test'),
+            createFlagWordsDictionary(['Avocado'], 'flag_words', 'test'),
         ]);
 
         // cspell:ignore appletango applemango
@@ -175,7 +175,7 @@ describe('Verify using multiple dictionaries', () => {
             createSpellingDictionary(wordsB, 'wordsB', 'test', undefined),
             createSpellingDictionary(wordsA, 'wordsA', 'test', undefined),
             createSpellingDictionary(wordsC, 'wordsC', 'test', undefined),
-            createForbiddenWordsDictionary(['Avocado'], 'flag_words', 'test'),
+            createFlagWordsDictionary(['Avocado'], 'flag_words', 'test'),
         ]);
 
         // cspell:ignore appletango applemango
@@ -197,7 +197,7 @@ describe('Verify using multiple dictionaries', () => {
             createSpellingDictionary(wordsB, 'wordsB', 'test', undefined),
             createSpellingDictionary(wordsA, 'wordsA', 'test', undefined),
             createSpellingDictionary(wordsC, 'wordsC', 'test', undefined),
-            createForbiddenWordsDictionary(['Avocado'], 'flag_words', 'test'),
+            createFlagWordsDictionary(['Avocado'], 'flag_words', 'test'),
         ]);
 
         // cspell:ignore appletango applemango
@@ -219,7 +219,7 @@ describe('Verify using multiple dictionaries', () => {
             createSpellingDictionary(wordsB, 'wordsB', 'test', undefined),
             createSpellingDictionary(wordsA, 'wordsA', 'test', undefined),
             createSpellingDictionary(wordsC, 'wordsC', 'test', undefined),
-            createForbiddenWordsDictionary(['Avocado'], 'flag_words', 'test'),
+            createFlagWordsDictionary(['Avocado'], 'flag_words', 'test'),
         ]);
 
         // cspell:ignore appletango applemango
@@ -257,7 +257,7 @@ describe('Verify using multiple dictionaries', () => {
                 dictionaryInformation: { ignore: '\u0300-\u0362' },
                 caseSensitive: true,
             }),
-            createForbiddenWordsDictionary(['Avocado'], 'flag_words', 'test'),
+            createFlagWordsDictionary(['Avocado'], 'flag_words', 'test'),
             dictIgnore,
         ];
 
@@ -283,7 +283,7 @@ describe('Verify using multiple dictionaries', () => {
             createSpellingDictionary(wordsC, 'wordsC', 'test', undefined),
             createSpellingDictionary(wordsD, 'wordsD', 'test', undefined),
             createSpellingDictionary(wordsF, 'wordsF', 'test', undefined),
-            createForbiddenWordsDictionary(['Avocado'], 'flag_words', 'test'),
+            createFlagWordsDictionary(['Avocado'], 'flag_words', 'test'),
             dictNoSug,
             dictIgnore,
         ];
@@ -313,7 +313,7 @@ describe('Verify using multiple dictionaries', () => {
             createSpellingDictionary(wordsC, 'wordsC', 'test', undefined),
             createSpellingDictionary(wordsD, 'wordsD', 'test', undefined),
             createSpellingDictionary(wordsF, 'wordsF', 'test', undefined),
-            createForbiddenWordsDictionary(['Avocado'], 'flag_words', 'test'),
+            createFlagWordsDictionary(['Avocado'], 'flag_words', 'test'),
             dictNoSug,
             dictLegacy,
             dictIgnore,
@@ -340,7 +340,7 @@ describe('Verify using multiple dictionaries', () => {
             createSpellingDictionary(wordsC, 'wordsC', 'test', undefined),
             createSpellingDictionary(wordsD, 'wordsD', 'test', undefined),
             createSpellingDictionary(wordsF, 'wordsF', 'test', undefined),
-            createForbiddenWordsDictionary(['Avocado'], 'flag_words', 'test'),
+            createFlagWordsDictionary(['Avocado'], 'flag_words', 'test'),
         ];
 
         const dictCollection = createCollection(dicts, 'test');
@@ -366,7 +366,7 @@ describe('Verify using multiple dictionaries', () => {
             createSpellingDictionary(wordsC, 'wordsC', 'test', undefined),
             createSpellingDictionary(wordsD, 'wordsD', 'test', undefined),
             createSpellingDictionary(wordsF, 'wordsF', 'test', undefined),
-            createForbiddenWordsDictionary(['Avocado'], 'flag_words', 'test'),
+            createFlagWordsDictionary(['Avocado'], 'flag_words', 'test'),
             dictIgnore,
         ];
 
@@ -380,7 +380,7 @@ describe('Verify using multiple dictionaries', () => {
             createSpellingDictionary(wordsB, 'wordsB', 'test', undefined),
             createSpellingDictionary(wordsA, 'wordsA', 'test', undefined),
             createSpellingDictionary(wordsC, 'wordsC', 'test', undefined),
-            createForbiddenWordsDictionary(['Avocado'], 'flag_words', 'test'),
+            createFlagWordsDictionary(['Avocado'], 'flag_words', 'test'),
         ]);
 
         const dictCollection = createCollection(dicts, 'test');
@@ -440,7 +440,7 @@ describe('Validate looking up words', () => {
         createSpellingDictionary(wordsC, 'wordsC', 'test', undefined),
         createSpellingDictionary(wordsD, 'wordsD', 'test', undefined),
         createSpellingDictionary(cities, 'cities', 'test', undefined),
-        createForbiddenWordsDictionary(['Avocado'], 'flag_words', 'test'),
+        createFlagWordsDictionary(['Avocado'], 'flag_words', 'test'),
     ];
 
     const testDictCollection = createCollection(testDicts, 'test');

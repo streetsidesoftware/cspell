@@ -4,8 +4,8 @@ describe('typos/util', () => {
     test.each`
         def                     | entry              | expected
         ${{}}                   | ${''}              | ${{}}
-        ${{ a: 'b' }}           | ${'a'}             | ${{ a: null }}
-        ${{}}                   | ${['a']}           | ${{ a: null }}
+        ${{ a: 'b' }}           | ${'a'}             | ${{ a: false }}
+        ${{}}                   | ${['a']}           | ${{ a: false }}
         ${{}}                   | ${['a', 'b']}      | ${{ a: 'b' }}
         ${{}}                   | ${['a', 'b', 'c']} | ${{ a: ['b', 'c'] }}
         ${{ a: 'aa', b: 'bb' }} | ${{ a: 'aaa' }}    | ${{ a: 'aaa', b: 'bb' }}
@@ -17,7 +17,7 @@ describe('typos/util', () => {
         entries                | expected
         ${[]}                  | ${{}}
         ${undefined}           | ${{}}
-        ${[['a', null]]}       | ${{ a: null }}
+        ${[['a', null]]}       | ${{ a: false }}
         ${[['a', 'b']]}        | ${{ a: 'b' }}
         ${[['a', ['b']]]}      | ${{ a: ['b'] }}
         ${[['a', ['b', 'c']]]} | ${{ a: ['b', 'c'] }}
@@ -36,10 +36,10 @@ describe('typos/util', () => {
     });
 
     test.each`
-        typos                                                        | expected
-        ${{}}                                                        | ${[]}
-        ${{ a: null, b: undefined, c: 'cc', d: ['dd', 'ee'] }}       | ${['cc', 'dd', 'ee']}
-        ${{ '!a': null, '!b': undefined, c: 'cc', d: ['dd', 'ee'] }} | ${['cc', 'dd', 'ee', 'a', 'b']}
+        typos                                                   | expected
+        ${{}}                                                   | ${[]}
+        ${{ a: null, b: undefined, c: 'cc', d: ['dd', 'ee'] }}  | ${[]}
+        ${{ '!a': null, '!b': null, c: 'cc', d: ['dd', 'ee'] }} | ${['a', 'b']}
     `('extractIgnoreValues $typos', ({ typos, expected }) => {
         const r = extractIgnoreValues(typos, '!');
         expect(r).toEqual(new Set(expected));

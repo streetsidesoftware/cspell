@@ -1,24 +1,49 @@
 import { opAppend, pipe } from '@cspell/cspell-pipe/sync';
 import { CompoundWordsMethod, SuggestionCollector, SuggestionResult } from 'cspell-trie-lib';
+import { mapperRemoveCaseAndAccents } from '../util/textMappers';
+import * as defaults from './defaults';
 import {
     FindResult,
     HasOptions,
+    IgnoreCaseOption,
     SearchOptions,
     SpellingDictionary,
     SpellingDictionaryOptions,
     SuggestOptions,
 } from './SpellingDictionary';
 import { processEntriesToTyposDef, type TypoEntry, type TyposDef } from './Typos';
-import { extractIgnoreValues } from './Typos/util';
+import { extractAllSuggestions, extractIgnoreValues } from './Typos/util';
 
-const symIgnore = Symbol('ignored');
+interface Found {
+    found: string;
+    ignore: boolean;
+}
 
-class TyposDictionary implements SpellingDictionary {
-    readonly containsNoSuggestWords = false;
+export interface TyposDictionary extends SpellingDictionary {
+    isForbidden(word: string, ignoreCaseAndAccents?: IgnoreCaseOption): boolean;
+    /**
+     * Determine if the word can appear in a list of suggestions.
+     * @param word - word
+     * @param ignoreCaseAndAccents - ignore case.
+     * @returns true if a word is suggested, otherwise false.
+     */
+    isSuggestedWord(word: string, ignoreCaseAndAccents?: IgnoreCaseOption): boolean;
+}
+
+class TyposDictionaryImpl implements TyposDictionary {
+    readonly containsNoSuggestWords: boolean;
     readonly options: SpellingDictionaryOptions = {};
     readonly type = 'typos';
     readonly size: number;
     private ignoreWords: Set<string>;
+    /**
+     * Note: ignoreWordsLower is only suggestions with the case and accents removed.
+     * The logic is that if someone explicity ignored an upper case version, it does not
+     * mean that the lower case version is ok.
+     */
+    private suggestions: Set<string>;
+    private suggestionsLower: Set<string>;
+    private explicitIgnoreWords: Set<string>;
     constructor(
         readonly name: string,
         readonly source: string,
@@ -26,7 +51,11 @@ class TyposDictionary implements SpellingDictionary {
         ignoreList?: Iterable<string>
     ) {
         this.size = Object.keys(typosDef).length;
-        this.ignoreWords = new Set(pipe(extractIgnoreValues(typosDef, '!'), opAppend(ignoreList || [])));
+        this.explicitIgnoreWords = extractIgnoreValues(typosDef, '!');
+        this.suggestions = extractAllSuggestions(typosDef);
+        this.ignoreWords = new Set(pipe(this.explicitIgnoreWords, opAppend(ignoreList || [])));
+        this.suggestionsLower = new Set(pipe(this.suggestions, mapperRemoveCaseAndAccents));
+        this.containsNoSuggestWords = this.ignoreWords.size > 0;
     }
 
     /**
@@ -41,32 +70,60 @@ class TyposDictionary implements SpellingDictionary {
     }
 
     /** A more detailed search for a word, might take longer than `has` */
-    find(word: string, _options?: SearchOptions): FindResult | undefined {
-        const found = this._findForms(word);
-        return typeof found === 'string' ? { found, forbidden: true, noSuggest: false } : undefined;
+    find(word: string, options?: SearchOptions): FindResult | undefined {
+        const result = this._findForms(word, options?.ignoreCase ?? defaults.ignoreCase);
+        if (result === false) return undefined;
+        const { found, ignore } = result;
+        return { found, forbidden: !ignore, noSuggest: ignore };
     }
 
-    private _findForms(word: string): string | typeof symIgnore | false {
-        const f = this._find(word);
-        if (f !== false) return f;
+    private _findForms(word: string, ignoreCaseAndAccents: boolean): Found | false {
         const lcWord = word.toLowerCase();
-        if (lcWord === word) return false;
-        return this._find(lcWord);
-    }
-
-    private _find(word: string): string | typeof symIgnore | false {
-        if (this.ignoreWords.has(word)) return symIgnore;
-        if (word in this.typosDef) return word;
+        if (this.ignoreWords.has(word)) {
+            return { found: word, ignore: true };
+        }
+        if (this.suggestions.has(word)) {
+            return false;
+        }
+        if (ignoreCaseAndAccents) {
+            if (this.suggestionsLower.has(lcWord)) {
+                return false;
+            }
+            if (this.ignoreWords.has(lcWord)) {
+                return { found: lcWord, ignore: true };
+            }
+        }
+        if (word in this.typosDef) return { found: word, ignore: false };
+        if (lcWord in this.typosDef) return { found: lcWord, ignore: false };
         return false;
     }
 
-    isForbidden(word: string): boolean {
-        const found = this._findForms(word);
-        return typeof found === 'string';
+    isForbidden(
+        word: string,
+        ignoreCaseAndAccents: IgnoreCaseOption = defaults.isForbiddenIgnoreCaseAndAccents
+    ): boolean {
+        const found = this._findForms(word, ignoreCaseAndAccents);
+        return found !== false && !found.ignore;
     }
 
-    isNoSuggestWord(_word: string, _options: HasOptions): boolean {
-        return false;
+    isNoSuggestWord(word: string, options: HasOptions): boolean {
+        const result = this.find(word, options);
+        return result?.noSuggest ?? false;
+    }
+
+    /**
+     * Determine if the word can appear in a list of suggestions.
+     * @param word - word
+     * @param ignoreCaseAndAccents - ignore case.
+     * @returns true if a word is suggested, otherwise false.
+     */
+    isSuggestedWord(
+        word: string,
+        ignoreCaseAndAccents: IgnoreCaseOption = defaults.isForbiddenIgnoreCaseAndAccents
+    ): boolean {
+        if (this.suggestions.has(word)) return true;
+        const lcWord = word.toLowerCase();
+        return ignoreCaseAndAccents && (this.suggestions.has(lcWord) || this.suggestionsLower.has(lcWord));
     }
 
     suggest(
@@ -114,16 +171,15 @@ class TyposDictionary implements SpellingDictionary {
 /**
  * Create a dictionary where all words are to be forbidden.
  * @param entries - list of Typos Entries
- * @param name
- * @param source
- * @param options
+ * @param name - name of dictionary
+ * @param source - source
  * @returns
  */
 export function createTyposDictionary(
-    entries: string[] | TyposDef | readonly TypoEntry[],
+    entries: readonly string[] | TyposDef | Iterable<TypoEntry>,
     name: string,
     source: string
-): SpellingDictionary {
+): TyposDictionary {
     const def = processEntriesToTyposDef(entries);
-    return new TyposDictionary(name, source, def);
+    return new TyposDictionaryImpl(name, source, def);
 }

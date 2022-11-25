@@ -4,7 +4,15 @@ import type { CompoundWordsMethod, SuggestionCollector, SuggestionResult, Weight
 export { CompoundWordsMethod, SuggestionCollector, SuggestionResult } from 'cspell-trie-lib';
 
 export interface SearchOptions {
+    /**
+     * Legacy compounds have been deprecated.
+     *
+     * @deprecated
+     */
     useCompounds?: boolean | number | undefined;
+    /**
+     * Ignore Case and Accents
+     */
     ignoreCase?: boolean | undefined;
 }
 
@@ -51,6 +59,8 @@ export interface FindResult {
 }
 
 export type HasOptions = SearchOptions;
+
+export type IgnoreCaseOption = boolean;
 
 export interface SpellingDictionaryOptions {
     repMap?: ReplaceMap;
@@ -103,8 +113,27 @@ export interface SpellingDictionary extends DictionaryInfo {
     has(word: string, options?: HasOptions): boolean;
     /** A more detailed search for a word, might take longer than `has` */
     find(word: string, options?: SearchOptions): FindResult | undefined;
-    isForbidden(word: string): boolean;
+    /**
+     * Checks if a word is forbidden.
+     * @param word - word to check.
+     */
+    isForbidden(word: string, ignoreCaseAndAccents?: IgnoreCaseOption): boolean;
+    /**
+     * No Suggest words are considered correct but will not be listed when
+     * suggestions are generated.
+     * No Suggest words and "Ignored" words are equivalent. Ignored / no suggest words override forbidden words.
+     * @param word - word to check
+     * @param options - options
+     */
     isNoSuggestWord(word: string, options: HasOptions): boolean;
+    /**
+     * Generate suggestions for a word.
+     * @param word - word
+     * @param numSuggestions - max number of suggestions to generate.
+     * @param compoundMethod - Default NONE.
+     * @param numChanges - Default 5
+     * @param ignoreCase - true
+     */
     suggest(
         word: string,
         numSuggestions?: number,
@@ -112,6 +141,11 @@ export interface SpellingDictionary extends DictionaryInfo {
         numChanges?: number,
         ignoreCase?: boolean
     ): SuggestionResult[];
+    /**
+     * Generate suggestions for a word
+     * @param word - word
+     * @param suggestOptions - options
+     */
     suggest(word: string, suggestOptions: SuggestOptions): SuggestionResult[];
     genSuggestions(collector: SuggestionCollector, suggestOptions: SuggestOptions): void;
     mapWord(word: string): string;
@@ -119,3 +153,15 @@ export interface SpellingDictionary extends DictionaryInfo {
     readonly isDictionaryCaseSensitive: boolean;
     getErrors?(): Error[];
 }
+
+export type SuggestArgs =
+    | Parameters<SpellingDictionary['suggest']>
+    | Parameters<
+          (
+              word: string,
+              numSuggestions?: number,
+              compoundMethod?: CompoundWordsMethod,
+              numChanges?: number,
+              ignoreCase?: boolean
+          ) => SuggestionResult[]
+      >;

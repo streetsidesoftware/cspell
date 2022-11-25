@@ -4,8 +4,8 @@ Url: https://github.com/aspnetboilerplate/aspnetboilerplate
 Args: ["**/*.{md,cs,cshtml}","--exclude=wwwroot","--exclude=**/*SampleApp.Tests/Web*"]
 Summary:
   files: 2572
-  filesWithIssues: 1282
-  issues: 4891
+  filesWithIssues: 844
+  issues: 2975
   errors: 0
 Errors: []
 
@@ -165,8 +165,6 @@ issues:
   - "LICENSE.md:3:25     	Volosoft	U   	Copyright (c) 2013-2021 Volosoft (https://volosoft.com"
   - "README.md:72:17     	Proto   	U   	|Abp.RedisCache.ProtoBuf|[![NuGet version"
   - "src/Abp.AspNetCore.OData/Properties/AssemblyInfo.cs:21:44   	typelib 	U   	is for the ID of the typelib if this project is exposed"
-  - "src/Abp.AspNetCore.SignalR/AspNetCore/SignalR/AbpAspNetCoreSignalRModule.cs:13:14   	inheritdoc  	U   	/// <inheritdoc/>"
-  - "src/Abp.AspNetCore.TestBase/AbpAspNetCoreIntegratedTestBase.cs:59:14    	typeparam   	U   	/// <typeparam name=\"TController\">The"
   - "src/Abp.AspNetCore/Application/Services/Dto/ComboboxItemDtoExtensions.cs:5:25       	Combobox	U   	public static class ComboboxItemDtoExtensions"
   - "src/Abp.AspNetCore/Application/Services/Dto/ComboboxItemDtoExtensions.cs:7:76       	combobox	U   	this ComboboxItemDto comboboxItem)"
   - "src/Abp.AspNetCore/AspNetCore/Configuration/AbpControllerAssemblySettingBuilder.cs:21:101   	configurer  	U   	Action<ControllerModel> configurer)"
@@ -180,17 +178,14 @@ issues:
   - "src/Abp.AspNetCore/AspNetCore/Security/AbpSecurityHeadersMiddleware.cs:23:176   	SAMEORIGIN  	U   	iframe> or <object>. SAMEORIGIN makes it being displayed"
   - "src/Abp.AspNetCore/Json/AbpMvcContractResolver.cs:21:25     	datetime	U   	private string _datetimeFormat { get; set; }"
   - "src/Abp.AutoMapper/AutoMapper/AbpAutoMapperConfiguration.cs:11:20   	Automapper  	U   	[Obsolete(\"Automapper will remove static API"
-  - "src/Abp.AutoMapper/AutoMapper/AutoMapExtensions.cs:18:94    	typeparamref	U   	Creates a new object of <typeparamref name=\"TDestination\""
   - "src/Abp.AutoMapper/AutoMapper/AutoMapperConfigurationExtensions.cs:42:63    	exemple 	U   	represent the source exemple : (source) => ..."
   - "src/Abp.AutoMapper/AutoMapper/AutoMapperConfigurationExtensions.cs:51:58    	specfic 	U   	expression represent a specfic property of a parameter"
   - "src/Abp.AutoMapper/AutoMapper/AutoMapperConfigurationExtensions.cs:55:23    	Exemple 	U   	//Exemple if we have in source"
   - "src/Abp.AutoMapper/AutoMapper/AutoMapperConfigurationExtensions.cs:55:56    	attribut	U   	we have in source the attribut AutoMapKey on the Property"
   - "src/Abp.AutoMapper/AutoMapper/AutoMapperConfigurationExtensions.cs:55:138   	agaisnt 	U   	the target to compare agaisnt"
   - "src/Abp.Dapper/Dapper/AbpDapperModule.cs:26:62      	Orms	U   	OrmContextKey == AbpConsts.Orms.EntityFramework)"
-  - "src/Abp.Dapper/Dapper/Expressions/DapperExpressionVisitor.cs:17:10      	seealso     	U   	/// <seealso cref=\"System.Linq.Expressions"
   - "src/Abp.Dapper/Dapper/Expressions/DapperExpressionVisitor.cs:173:27     	startswith  	U   	case \"startswith\":"
   - "src/Abp.Dapper/Dapper/Expressions/DapperExpressionVisitor.cs:176:27     	endswith    	U   	case \"endswith\":"
-  - "src/Abp.Dapper/Dapper/Utils/TypeExtensions.cs:11:33     	paramref	U   	Checks whether <paramref name=\"child\" /> implements"
   - "src/Abp.EntityFramework.Common/DbContextTypeMatcher.cs:39:122   	Contexes    	U   	ideAttribute attributes for DbContexes."
   - "src/Abp.EntityFramework.Common/DbContextTypeMatcher.cs:43:66    	dbcontexes  	U   	MultiTenancySide to filter dbcontexes"
   - "src/Abp.EntityFramework.Common/IShouldInitializeDcontext.cs:3:39    	Dcontext	U   	interface IShouldInitializeDcontext"
@@ -581,7 +576,6 @@ issues:
   - "test/Abp.Zero.SampleApp.Tests/Users/UserLogin_Tests.cs:54:80    	asdfgh  	U   	LoginAsync(\"wrongUserName\", \"asdfgh\");"
   - "test/Abp.Zero.SampleApp.Tests/Users/UserManager_Update_Tests.cs:29:39   	tuana   	U   	adminUser.UserName = \"tuana\";"
   - "test/Abp.Zero.SampleApp/Features/AppFeatureProvider.cs:23:24    	Frature 	U   	var numericFrature = boolFeature.CreateChildFeat"
-  - "test/Abp.Zero.SampleApp/Linq/FakeAsyncQueryableExecuter.cs:9:55     	langword	U   	syncQueryableExecuter\"/> <see langword=\"await\"/>s an asynchronous"
   - "test/Abp.Zero.SampleApp/Users/UserAppService.cs:80:15   	Becasue 	U   	//Becasue of the validation error"
   - "test/Abp.ZeroCore.SampleApp/AbpZeroCoreSampleAppModule.cs:51:34     	Registarar  	U   	var genericRepositoryRegistarar = IocManager.Resolve"
   - "test/Abp.ZeroCore.Tests/Zero/AbpZeroTestBase.cs:110:110 	Saat        	U   	Language = \"tr\", Name = \"Saat\"};"

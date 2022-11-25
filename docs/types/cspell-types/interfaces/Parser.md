@@ -22,7 +22,7 @@ Name of parser
 
 #### Defined in
 
-[Parser.ts:7](https://github.com/streetsidesoftware/cspell/blob/875a61f/packages/cspell-types/src/Parser.ts#L7)
+[Parser.ts:7](https://github.com/streetsidesoftware/cspell/blob/bb436cd/packages/cspell-types/src/Parser.ts#L7)
 
 ## Methods
 
@@ -45,4 +45,4 @@ Parse Method
 
 #### Defined in
 
-[Parser.ts:13](https://github.com/streetsidesoftware/cspell/blob/875a61f/packages/cspell-types/src/Parser.ts#L13)
+[Parser.ts:13](https://github.com/streetsidesoftware/cspell/blob/bb436cd/packages/cspell-types/src/Parser.ts#L13)

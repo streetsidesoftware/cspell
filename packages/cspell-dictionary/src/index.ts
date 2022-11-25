@@ -2,11 +2,11 @@ export {
     createCachingDictionary,
     createCollection,
     createFailedToLoadDictionary,
+    createFlagWordsDictionary,
     createForbiddenWordsDictionary,
     createIgnoreWordsDictionary,
     createSpellingDictionary,
     createSpellingDictionaryFromTrieFile,
-    SpellingDictionaryCollection,
 } from './SpellingDictionary';
 export type {
     CachingDictionary,
@@ -15,6 +15,7 @@ export type {
     HasOptions,
     SearchOptions,
     SpellingDictionary,
+    SpellingDictionaryCollection,
     SpellingDictionaryOptions,
     SuggestionCollector,
     SuggestionResult,

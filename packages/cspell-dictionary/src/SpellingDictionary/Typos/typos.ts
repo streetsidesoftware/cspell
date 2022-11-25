@@ -1,9 +1,10 @@
-type NoSuggestion = null | undefined;
-type SingleSuggestion = string;
-type MultipleSuggestions = string[];
+import type { TermsDefKey, TermValueTypo, TermValueTypoNoSuggestions, TermValueTypoWithSuggestions } from '../Terms';
 
-export type TyposDefValue = MultipleSuggestions | SingleSuggestion | NoSuggestion;
-export type TyposDefKey = string;
+export type TypoValueNoSuggestions = TermValueTypoNoSuggestions;
+export type TypoValueWithSuggestions = TermValueTypoWithSuggestions;
+
+export type TyposDefValue = TermValueTypo;
+export type TyposDefKey = TermsDefKey;
 
 /**
  * Typos Definition
@@ -12,9 +13,9 @@ export type TyposDefKey = string;
  */
 export type TyposDef = Record<TyposDefKey, TyposDefValue>;
 
-type TypoNoSuggestions = string;
+type TypoWithNoSuggestions = string;
 type TypoWithSuggestionsArray = [forbidWord: string, ...suggestions: string[]];
 type TypoWithSuggestionsObj = TyposDef;
 type TypoWithSuggestions = TypoWithSuggestionsArray | TypoWithSuggestionsObj;
 
-export type TypoEntry = TypoNoSuggestions | TypoWithSuggestions;
+export type TypoEntry = TypoWithNoSuggestions | TypoWithSuggestions;

@@ -5,14 +5,14 @@ describe('TypoParser', () => {
         content                | expected
         ${''}                  | ${{}}
         ${'apple ->orange'}    | ${{ apple: 'orange' }}
-        ${'apple ->'}          | ${{ apple: null }}
-        ${'apple : , '}        | ${{ apple: null }}
+        ${'apple ->'}          | ${{ apple: false }}
+        ${'apple : , '}        | ${{ apple: false }}
         ${'a: b, c'}           | ${{ a: ['b', 'c'] }}
-        ${'a: b; c; d:e'}      | ${{ a: 'b', c: null, d: 'e' }}
+        ${'a: b; c; d:e'}      | ${{ a: 'b', c: false, d: 'e' }}
         ${'a->b , c'}          | ${{ a: ['b', 'c'] }}
         ${'a->b , c'}          | ${{ a: ['b', 'c'] }}
-        ${'a->b , c\nb'}       | ${{ a: ['b', 'c'], b: null }}
-        ${'a->b , c\nb\na->b'} | ${{ a: 'b', b: null }}
+        ${'a->b , c\nb'}       | ${{ a: ['b', 'c'], b: false }}
+        ${'a->b , c\nb\na->b'} | ${{ a: 'b', b: false }}
     `('parseTyposFile $content', ({ content, expected }) => {
         const result = parseTyposFile(content);
         expect(result).toEqual(expected);
@@ -23,8 +23,8 @@ describe('TypoParser', () => {
         ${[]}                | ${{}}
         ${['']}              | ${{}}
         ${[['', 'b']]}       | ${{}}
-        ${['a']}             | ${{ a: null }}
-        ${[['a']]}           | ${{ a: null }}
+        ${['a']}             | ${{ a: false }}
+        ${[['a']]}           | ${{ a: false }}
         ${[['a', 'b']]}      | ${{ a: 'b' }}
         ${[['a', 'b', 'c']]} | ${{ a: ['b', 'c'] }}
     `('createTyposDefFromEntries $entries', ({ entries, expected }) => {
@@ -37,8 +37,8 @@ describe('TypoParser', () => {
         ${[]}                | ${{}}
         ${['']}              | ${{}}
         ${[['', 'b']]}       | ${{}}
-        ${['a']}             | ${{ a: null }}
-        ${[['a']]}           | ${{ a: null }}
+        ${['a']}             | ${{ a: false }}
+        ${[['a']]}           | ${{ a: false }}
         ${[['a', 'b']]}      | ${{ a: 'b' }}
         ${[['a', 'b', 'c']]} | ${{ a: ['b', 'c'] }}
         ${{ a: ['b'] }}      | ${{ a: 'b' }}

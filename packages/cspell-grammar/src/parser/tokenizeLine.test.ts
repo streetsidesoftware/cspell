@@ -61,7 +61,8 @@ describe('tokenizeLine', () => {
         expect(r).toMatchSnapshot();
     });
 
-    const sampleTemplate = '\
+    const sampleTemplate =
+        '\
 msg = `\n\
 ${\n\
 a + b // Join prefix and suffix\n\

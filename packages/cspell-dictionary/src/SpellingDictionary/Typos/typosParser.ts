@@ -35,7 +35,7 @@ function trimAndFilter(lines: readonly string[]): string[] {
 
 function cleanSugs(rawSugs: readonly string[]): TyposDefValue {
     const sugs = trimAndFilter(rawSugs);
-    return sugs.length === 1 ? sugs[0] : sugs.length ? sugs : null;
+    return sugs.length === 1 ? sugs[0] : sugs.length ? sugs : false;
 }
 
 function splitSuggestionsValue(value: string): TyposDefValue {
@@ -59,8 +59,8 @@ export function sanitizeIntoTypoDef(dirtyDef: TyposDef | Record<string, unknown>
             def[key] = sugs;
             continue;
         }
-        assert(value === null || value === undefined, 'Unexpected suggestion type.');
-        def[key] = null;
+        assert(value === false, 'Unexpected suggestion type.');
+        def[key] = false;
     }
 
     return def;
@@ -71,8 +71,8 @@ export function sanitizeIntoTypoDef(dirtyDef: TyposDef | Record<string, unknown>
  * @param entries - entries to process
  * @returns a TyposDef
  */
-export function processEntriesToTyposDef(entries: TyposDef | readonly TypoEntry[] | Record<string, unknown>): TyposDef {
-    const def = Array.isArray(entries) ? reduceToTyposDef(entries) : entries;
+export function processEntriesToTyposDef(entries: Iterable<TypoEntry> | TyposDef | Record<string, unknown>): TyposDef {
+    const def = isIterable(entries) ? reduceToTyposDef(entries) : entries;
     const result = sanitizeIntoTypoDef(def);
     assert(result);
     return result;
@@ -123,4 +123,8 @@ function splitEntry(line: string): readonly [string, string | undefined] {
 export function parseTyposFile(content: string): TyposDef {
     const lines = splitIntoLines(content.replace(inlineComment, ''));
     return reduceToTyposDef(lines);
+}
+
+function isIterable<T>(v: Iterable<T> | object): v is Iterable<T> {
+    return Symbol.iterator in v;
 }

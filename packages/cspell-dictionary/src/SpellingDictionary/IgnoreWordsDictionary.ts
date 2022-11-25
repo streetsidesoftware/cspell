@@ -60,7 +60,7 @@ class IgnoreWordsDictionary implements SpellingDictionary {
         return (this.dictNonStrict.has(lcWord) && { found: lcWord, forbidden: false, noSuggest: true }) || undefined;
     }
 
-    isForbidden(_word: string): boolean {
+    isForbidden(_word: string, _ignoreCase?: boolean): boolean {
         return false;
     }
 
