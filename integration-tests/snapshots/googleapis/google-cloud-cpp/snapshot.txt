@@ -3,7 +3,7 @@ Repository: googleapis/google-cloud-cpp
 Url: "https://github.com/googleapis/google-cloud-cpp.git"
 Args: ["--config=../../../../config/repositories/googleapis/google-cloud-cpp/cspell.json","**/*","-e","{*.BUILD,BUILD,CHANGELOG.md,*.sh,*.cfg,*.ps1,Dockerfile.*,*.Dockerfile,*.{yaml,xml,json,cmake}}"]
 Lines:
- CSpell: Files checked: 8606, Issues found: 60953 in 6650 files
+ CSpell: Files checked: 8627, Issues found: 60966 in 6653 files
  exit code: 1
 ./ARCHITECTURE.md:100:20    - Unknown word (bigtable)   -- - Bigtable has a [`bigtable::Table`](/google/cloud
 ./ARCHITECTURE.md:100:3     - Unknown word (Bigtable)   -- - Bigtable has a [`bigtable::Table
@@ -84,6 +84,7 @@ Lines:
 ./bazel/BUILD.bazel:17:37     - Unknown word (subpackages) -- visibility = ["//:__subpackages__"])
 ./bazel/google_cloud_cpp_deps.bzl:117:9     - Unknown word (boringssl)  -- if "boringssl" not in native.existing
 ./bazel/google_cloud_cpp_deps.bzl:152:15    - Unknown word (libcurl)    -- # We need libcurl for the Google Cloud
+./bazel/google_cloud_cpp_deps.bzl:191:12    - Unknown word (opentelemetry) -- if "io_opentelemetry_cpp" not in native.existing
 ./bazel/google_cloud_cpp_deps.bzl:40:30     - Unknown word (googletest) -- Load rules_cc, used by googletest
 ./bazel/google_cloud_cpp_deps.bzl:83:16     - Unknown word (googleapis) -- # Load the googleapis dependency.
 ./bazel/google_cloud_cpp_deps.bzl:97:15     - Unknown word (protobuf)   -- # protobuf message. No changes
@@ -272,14 +273,14 @@ Lines:
 ./external/googleapis/protolists/tasks.list:1:47      - Unknown word (cloudtasks) -- google/cloud/tasks/v2:cloudtasks.proto
 ./generator/BUILD.bazel:19:69     - Unknown word (hdrs)       -- cloud_cpp_generator_hdrs", "google_cloud_cpp
 ./generator/BUILD.bazel:91:39     - Unknown word (commandlineflag) -- google_absl//absl/flags:commandlineflag",
-./generator/CMakeLists.txt:107:29    - Unknown word (SRCS)        -- protobuf_generate_cpp(PROTO_SRCS PROTO_HDRS generator
-./generator/CMakeLists.txt:107:40    - Unknown word (HDRS)        -- cpp(PROTO_SRCS PROTO_HDRS generator_config.proto
-./generator/CMakeLists.txt:110:40    - Unknown word (libprotobuf) -- PUBLIC protobuf::libprotobuf)
-./generator/CMakeLists.txt:162:14    - Unknown word (fname)       -- foreach (fname ${google_cloud_cpp_generator
-./generator/CMakeLists.txt:179:62    - Unknown word (bigobj)      -- .obj file. Add the /bigobj option to
-./generator/CMakeLists.txt:189:26    - Unknown word (everytime)   -- build all the tests everytime they create a new package
+./generator/CMakeLists.txt:109:29    - Unknown word (SRCS)        -- protobuf_generate_cpp(PROTO_SRCS PROTO_HDRS generator
+./generator/CMakeLists.txt:109:40    - Unknown word (HDRS)        -- cpp(PROTO_SRCS PROTO_HDRS generator_config.proto
+./generator/CMakeLists.txt:112:40    - Unknown word (libprotobuf) -- PUBLIC protobuf::libprotobuf)
+./generator/CMakeLists.txt:164:14    - Unknown word (fname)       -- foreach (fname ${google_cloud_cpp_generator
+./generator/CMakeLists.txt:181:62    - Unknown word (bigobj)      -- .obj file. Add the /bigobj option to
+./generator/CMakeLists.txt:191:26    - Unknown word (everytime)   -- build all the tests everytime they create a new package
 ./generator/CMakeLists.txt:41:14     - Unknown word (idempotency) -- internal/idempotency_policy_generator.cc
-./generator/CMakeLists.txt:87:22     - Unknown word (libprotoc)   -- protobuf::libprotoc)
+./generator/CMakeLists.txt:89:22     - Unknown word (libprotoc)   -- protobuf::libprotoc)
 ./generator/generator.h:27:8      - Unknown word (microgenerator) -- * C++ microgenerator plugin entry point.
 ./generator/generator_config.proto:23:27     - Unknown word (rpcs)       -- repeated string omitted_rpcs = 4;
 ./generator/generator_config.proto:37:35     - Unknown word (gcpxx)      -- to true generate the `gcpxxV1` alias for our inline
@@ -313,9 +314,9 @@ Lines:
 ./generator/internal/auth_decorator_generator.cc:81:11     - Unknown word (Bidir)      -- if (IsBidirStreaming(method)) {
 ./generator/internal/codegen_utils_test.cc:58:22     - Unknown word (baaaaa)     -- EXPECT_EQ("foo_bar_baaaaa", CamelCaseToSnakeCase
 ./generator/internal/codegen_utils_test.cc:58:59     - Unknown word (BAAAAA)     -- CamelCaseToSnakeCase("fooBarBAAAAA"));
-./generator/internal/descriptor_utils.cc:189:42    - Unknown word (uids)       -- string> method_signature_uids;
-./generator/internal/descriptor_utils.cc:62:27     - Unknown word (CPPTYPE)    -- case FieldDescriptor::CPPTYPE_INT32:
-./generator/internal/descriptor_utils.cc:83:5      - Unknown word (NOTREACHED) -- /*NOTREACHED*/
+./generator/internal/descriptor_utils.cc:190:42    - Unknown word (uids)       -- string> method_signature_uids;
+./generator/internal/descriptor_utils.cc:63:27     - Unknown word (CPPTYPE)    -- case FieldDescriptor::CPPTYPE_INT32:
+./generator/internal/descriptor_utils.cc:84:5      - Unknown word (NOTREACHED) -- /*NOTREACHED*/
 ./generator/internal/descriptor_utils.h:175:7     - Unknown word (actools)    -- * go/actools-dynamic-routing-proposal
 ./generator/internal/descriptor_utils_test.cc:940:10    - Unknown word (endcond)    -- /// @endcond
 ./generator/internal/predicate_utils_test.cc:678:46    - Unknown word (Repated)    -- PaginationExactlyOneRepatedStringResponse) {
@@ -563,6 +564,7 @@ Lines:
 ./google/cloud/internal/diagnostics_pop.inc:17:2      - Unknown word (elif)       -- #elif __clang__
 ./google/cloud/internal/diagnostics_pop.inc:19:9      - Unknown word (GNUC)       -- #elif __GNUC__
 ./google/cloud/internal/disable_deprecation_warnings.inc:19:36     - Unknown word (Wdeprecated) -- diagnostic ignored "-Wdeprecated-declarations"
+./google/cloud/internal/external_account_token_source_url_test.cc:75:26     - Unknown word (parseable)  -- full error payload, parseable as an error info.
 ./google/cloud/internal/filesystem_test.cc:50:41     - Unknown word (Bitxor)     -- PermissionsOperatorBitxor) {
 ./google/cloud/internal/future_impl.h:742:10    - Unknown word (unwrapper)  -- auto unwrapper = [](std::shared_ptr
 ./google/cloud/internal/future_then_meta.h:20:11     - Unknown word (metafunctions) -- * Define metafunctions used in the implementation
@@ -619,7 +621,7 @@ Lines:
 ./google/cloud/pubsub/integration_tests/subscription_admin_integration_test.cc:111:47    - Unknown word (appspot)    -- /" + project_id + ".appspot.com/push";
 ./google/cloud/pubsub/internal/exactly_once_policies_test.cc:28:38     - Unknown word (ooops)      -- StatusCode::kInternal, "ooops"),
 ./google/cloud/pubsub/internal/extend_leases_with_retry.cc:89:5      - Unknown word (enccode)    -- * @enccode
-./google/cloud/pubsub/internal/pull_ack_handler_test.cc:58:63     - Unknown word (aseq)       -- AsyncSequencer<bool>& aseq) {
+./google/cloud/pubsub/internal/pull_ack_handler_impl_test.cc:55:63     - Unknown word (aseq)       -- AsyncSequencer<bool>& aseq) {
 ./google/cloud/pubsub/internal/subscription_session_test.cc:172:37    - Unknown word (acking)     -- Increment the counter before acking, as the ack() may trigger
 ./google/cloud/pubsub/samples/samples.cc:823:36    - Unknown word (pfile)      -- constexpr kDefinition = R"pfile(
 ./google/cloud/pubsub/subscription_builder_test.cc:152:9     - Unknown word (oidc)       -- oidc_token {

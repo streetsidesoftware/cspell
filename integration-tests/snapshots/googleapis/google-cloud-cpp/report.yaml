@@ -3,9 +3,9 @@ Repository: googleapis/google-cloud-cpp
 Url: https://github.com/googleapis/google-cloud-cpp.git
 Args: ["--config=${repoConfig}/cspell.json","**/*","-e","{*.BUILD,BUILD,CHANGELOG.md,*.sh,*.cfg,*.ps1,Dockerfile.*,*.Dockerfile,*.{yaml,xml,json,cmake}}"]
 Summary:
-  files: 8606
-  filesWithIssues: 6650
-  issues: 60953
+  files: 8627
+  filesWithIssues: 6653
+  issues: 60966
   errors: 0
 Errors: []
 
@@ -17,11 +17,12 @@ issues:
   - "ARCHITECTURE.md:100:20  	bigtable        	U   	- Bigtable has a [`bigtable::Table`](/google/cloud"
   - "ARCHITECTURE.md:188:1   	discoverability 	U   	discoverability of available option"
   - "bazel/BUILD.bazel:17:37     	subpackages 	U   	visibility = [\"//:__subpackages__\"])"
-  - "bazel/google_cloud_cpp_deps.bzl:40:30   	googletest  	U   	Load rules_cc, used by googletest"
-  - "bazel/google_cloud_cpp_deps.bzl:83:16   	googleapis  	U   	# Load the googleapis dependency."
-  - "bazel/google_cloud_cpp_deps.bzl:97:15   	protobuf    	U   	# protobuf message. No changes"
-  - "bazel/google_cloud_cpp_deps.bzl:117:9   	boringssl   	U   	if \"boringssl\" not in native.existing"
-  - "bazel/google_cloud_cpp_deps.bzl:152:15  	libcurl     	U   	# We need libcurl for the Google Cloud"
+  - "bazel/google_cloud_cpp_deps.bzl:40:30   	googletest      	U   	Load rules_cc, used by googletest"
+  - "bazel/google_cloud_cpp_deps.bzl:83:16   	googleapis      	U   	# Load the googleapis dependency."
+  - "bazel/google_cloud_cpp_deps.bzl:97:15   	protobuf        	U   	# protobuf message. No changes"
+  - "bazel/google_cloud_cpp_deps.bzl:117:9   	boringssl       	U   	if \"boringssl\" not in native.existing"
+  - "bazel/google_cloud_cpp_deps.bzl:152:15  	libcurl         	U   	# We need libcurl for the Google Cloud"
+  - "bazel/google_cloud_cpp_deps.bzl:191:12  	opentelemetry   	U   	if \"io_opentelemetry_cpp\" not in native.existing"
   - "BUILD.bazel:25:6    	apikeys                 	U   	\"apikeys\","
   - "BUILD.bazel:27:6    	pubsublite              	U   	\"pubsublite\","
   - "BUILD.bazel:36:6    	accessapproval          	U   	\"accessapproval\","
@@ -275,13 +276,13 @@ issues:
   - "generator/BUILD.bazel:19:69     	hdrs            	U   	cloud_cpp_generator_hdrs\", \"google_cloud_cpp"
   - "generator/BUILD.bazel:91:39     	commandlineflag 	U   	google_absl//absl/flags:commandlineflag\","
   - "generator/CMakeLists.txt:41:14      	idempotency 	U   	internal/idempotency_policy_generator.cc"
-  - "generator/CMakeLists.txt:87:22      	libprotoc   	U   	protobuf::libprotoc)"
-  - "generator/CMakeLists.txt:107:29     	SRCS        	U   	protobuf_generate_cpp(PROTO_SRCS PROTO_HDRS generator"
-  - "generator/CMakeLists.txt:107:40     	HDRS        	U   	cpp(PROTO_SRCS PROTO_HDRS generator_config.proto"
-  - "generator/CMakeLists.txt:110:40     	libprotobuf 	U   	PUBLIC protobuf::libprotobuf)"
-  - "generator/CMakeLists.txt:162:14     	fname       	U   	foreach (fname ${google_cloud_cpp_generator"
-  - "generator/CMakeLists.txt:179:62     	bigobj      	U   	.obj file. Add the /bigobj option to"
-  - "generator/CMakeLists.txt:189:26     	everytime   	U   	build all the tests everytime they create a new package"
+  - "generator/CMakeLists.txt:89:22      	libprotoc   	U   	protobuf::libprotoc)"
+  - "generator/CMakeLists.txt:109:29     	SRCS        	U   	protobuf_generate_cpp(PROTO_SRCS PROTO_HDRS generator"
+  - "generator/CMakeLists.txt:109:40     	HDRS        	U   	cpp(PROTO_SRCS PROTO_HDRS generator_config.proto"
+  - "generator/CMakeLists.txt:112:40     	libprotobuf 	U   	PUBLIC protobuf::libprotobuf)"
+  - "generator/CMakeLists.txt:164:14     	fname       	U   	foreach (fname ${google_cloud_cpp_generator"
+  - "generator/CMakeLists.txt:181:62     	bigobj      	U   	.obj file. Add the /bigobj option to"
+  - "generator/CMakeLists.txt:191:26     	everytime   	U   	build all the tests everytime they create a new package"
   - "generator/generator_config.proto:23:27      	rpcs    	U   	repeated string omitted_rpcs = 4;"
   - "generator/generator_config.proto:37:35      	gcpxx   	U   	to true generate the `gcpxxV1` alias for our inline"
   - "generator/generator_config.proto:44:42      	struct  	U   	ServiceNameRetryTraits struct using the provided codes"
@@ -316,9 +317,9 @@ issues:
   - "generator/internal/codegen_utils_test.cc:58:22      	baaaaa  	U   	EXPECT_EQ(\"foo_bar_baaaaa\", CamelCaseToSnakeCase"
   - "generator/internal/codegen_utils_test.cc:58:59      	BAAAAA  	U   	CamelCaseToSnakeCase(\"fooBarBAAAAA\"));"
   - "generator/internal/descriptor_utils_test.cc:940:10  	endcond 	U   	/// @endcond"
-  - "generator/internal/descriptor_utils.cc:62:27    	CPPTYPE     	U   	case FieldDescriptor::CPPTYPE_INT32:"
-  - "generator/internal/descriptor_utils.cc:83:5     	NOTREACHED  	U   	/*NOTREACHED*/"
-  - "generator/internal/descriptor_utils.cc:189:42   	uids        	U   	string> method_signature_uids;"
+  - "generator/internal/descriptor_utils.cc:63:27    	CPPTYPE     	U   	case FieldDescriptor::CPPTYPE_INT32:"
+  - "generator/internal/descriptor_utils.cc:84:5     	NOTREACHED  	U   	/*NOTREACHED*/"
+  - "generator/internal/descriptor_utils.cc:190:42   	uids        	U   	string> method_signature_uids;"
   - "generator/internal/descriptor_utils.h:175:7     	actools 	U   	* go/actools-dynamic-routing-proposal"
   - "generator/internal/predicate_utils_test.cc:678:46   	Repated         	U   	PaginationExactlyOneRepatedStringResponse) {"
   - "generator/internal/predicate_utils_test.cc:986:44   	falsefragment   	U   	std::string(\"fragment0_falsefragment1_true\"));"
@@ -564,6 +565,7 @@ issues:
   - "google/cloud/internal/diagnostics_pop.inc:17:2      	elif	U   	#elif __clang__"
   - "google/cloud/internal/diagnostics_pop.inc:19:9      	GNUC	U   	#elif __GNUC__"
   - "google/cloud/internal/disable_deprecation_warnings.inc:19:36    	Wdeprecated 	U   	diagnostic ignored \"-Wdeprecated-declarations\""
+  - "google/cloud/internal/external_account_token_source_url_test.cc:75:26   	parseable   	U   	full error payload, parseable as an error info."
   - "google/cloud/internal/filesystem_test.cc:50:41      	Bitxor  	U   	PermissionsOperatorBitxor) {"
   - "google/cloud/internal/future_impl.h:742:10  	unwrapper   	U   	auto unwrapper = [](std::shared_ptr"
   - "google/cloud/internal/future_then_meta.h:20:11      	metafunctions   	U   	* Define metafunctions used in the implementation"
@@ -621,7 +623,7 @@ issues:
   - "google/cloud/pubsub/integration_tests/subscription_admin_integration_test.cc:111:47     	appspot 	U   	/\" + project_id + \".appspot.com/push\";"
   - "google/cloud/pubsub/internal/exactly_once_policies_test.cc:28:38    	ooops   	U   	StatusCode::kInternal, \"ooops\"),"
   - "google/cloud/pubsub/internal/extend_leases_with_retry.cc:89:5       	enccode 	U   	* @enccode"
-  - "google/cloud/pubsub/internal/pull_ack_handler_test.cc:58:63     	aseq	U   	AsyncSequencer<bool>& aseq) {"
+  - "google/cloud/pubsub/internal/pull_ack_handler_impl_test.cc:55:63    	aseq	U   	AsyncSequencer<bool>& aseq) {"
   - "google/cloud/pubsub/internal/subscription_session_test.cc:172:37    	acking  	U   	Increment the counter before acking, as the ack() may trigger"
   - "google/cloud/pubsub/samples/samples.cc:823:36   	pfile   	U   	constexpr kDefinition = R\"pfile("
   - "google/cloud/pubsub/subscription_builder_test.cc:31:31      	Oidc	U   	SubscriptionBuilder, MakeOidcToken) {"
