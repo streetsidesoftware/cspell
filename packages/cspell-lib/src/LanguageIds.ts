@@ -112,6 +112,7 @@ export const languageExtensionDefinitions: LanguageDefinitions = [
         ],
     },
     { id: 'sql', extensions: ['.sql', '.dsql'] },
+    { id: 'svelte', extensions: ['.svelte'] },
     { id: 'swift', extensions: ['.swift'] },
     { id: 'toml', extensions: ['.toml'] },
     { id: 'typescript', extensions: ['.ts', '.cts', '.mts'] },

@@ -51,6 +51,10 @@ const settings = {
             dictionaries: ['typescript', 'node', 'npm'],
         },
         {
+            languageId: 'svelte',
+            dictionaries: ['typescript', 'npm', 'html', 'html-symbol-entities', 'css', 'fonts'],
+        },
+        {
             languageId: 'javascriptreact,typescriptreact,mdx',
             dictionaries: ['html', 'html-symbol-entities', 'css', 'fonts'],
         },
@@ -99,6 +103,7 @@ const settings = {
             ignoreRegExpList: ['MARKDOWN-link-reference', 'MARKDOWN-link-footer', 'MARKDOWN-link', 'MARKDOWN-anchor'],
         },
     ],
+    enableFiletypes: ['svelte'],
     import: [
         './cspell-compatibility.json',
         '@cspell/dict-ada/cspell-ext.json',
