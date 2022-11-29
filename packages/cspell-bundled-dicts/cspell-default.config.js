@@ -51,10 +51,6 @@ const settings = {
             dictionaries: ['typescript', 'node', 'npm'],
         },
         {
-            languageId: 'svelte',
-            dictionaries: ['typescript', 'npm', 'html', 'html-symbol-entities', 'css', 'fonts'],
-        },
-        {
             languageId: 'javascriptreact,typescriptreact,mdx',
             dictionaries: ['html', 'html-symbol-entities', 'css', 'fonts'],
         },
@@ -105,7 +101,6 @@ const settings = {
     ],
     enableFiletypes: ['svelte'],
     import: [
-        './cspell-compatibility.json',
         '@cspell/dict-ada/cspell-ext.json',
         '@cspell/dict-aws/cspell-ext.json',
         '@cspell/dict-bash/cspell-ext.json',
@@ -145,6 +140,7 @@ const settings = {
         '@cspell/dict-scala/cspell-ext.json',
         '@cspell/dict-sql/cspell-ext.json',
         '@cspell/dict-software-terms/cspell-ext.json',
+        '@cspell/dict-svelte/cspell-ext.json',
         '@cspell/dict-swift/cspell-ext.json',
         '@cspell/dict-typescript/cspell-ext.json',
         '@cspell/dict-vue/cspell-ext.json',

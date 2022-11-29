@@ -338,7 +338,7 @@ info
 info	Checking: ./src/app.test.ts, File type: auto, Language: default
 info	Checked: ./src/app.test.ts, File type: typescript, Language: en ... Issues: 0 0.00S
 info	Config file Used: ./cspell.json
-info	Dictionaries Used: backwards-compatibility, companies, filetypes, public-licenses, softwareTerms, workspace, aws, cryptocurrencies, en_us, fullstack, node, npm, typescript
+info	Dictionaries Used: companies, filetypes, public-licenses, softwareTerms, workspace, aws, cryptocurrencies, en_us, fullstack, node, npm, typescript
 error	 0.00ms
 error	CSpell: Files checked: 1, Issues found: 0 in 0 files"
 `;
@@ -395,7 +395,7 @@ info
 info	Checking: ./fixtures/issue-2998/fix-words.txt, File type: fix, Language: default
 info	Checked: ./fixtures/issue-2998/fix-words.txt, File type: fix, Language: en ... Issues: 0 0.00S
 info	Config file Used: ./fixtures/issue-2998/cspell.json
-info	Dictionaries Used: backwards-compatibility, companies, filetypes, public-licenses, softwareTerms, aws, cryptocurrencies, en_us, fixture
+info	Dictionaries Used: companies, filetypes, public-licenses, softwareTerms, aws, cryptocurrencies, en_us, fixture
 error	 0.00ms
 error	CSpell: Files checked: 1, Issues found: 0 in 0 files"
 `;
@@ -726,7 +726,6 @@ café - [ignoreWords]*       From Settings \`ignoreWords\`
 café - [words]*             From Settings \`words\`
 café - ada                  ../../node_modules/.pnpm...ell/dict-ada/dict/ada.txt
 café - aws*                 ../../node_modules/.pnpm...spell/dict-aws/aws.txt.gz
-café - backwards-compatibi* ../cspell-bundled-dicts/compatibility-words.txt.gz
 café - bash                 ../../node_modules/.pnpm...-bash/dict/bash-words.txt
 café - companies*           ../../node_modules/.pnpm...panies/dict/companies.txt
 café - cpp                  ../../node_modules/.pnpm...spell/dict-cpp/cpp.txt.gz
@@ -766,6 +765,7 @@ café - rust                 ../../node_modules/.pnpm...ell/dict-rust/rust.txt.
 café - scala                ../../node_modules/.pnpm...l/dict-scala/scala.txt.gz
 café - softwareTerms*       ../../node_modules/.pnpm...ms/dict/softwareTerms.txt
 café - sql                  ../../node_modules/.pnpm...spell/dict-sql/sql.txt.gz
+café - svelte               ../../node_modules/.pnpm...ct-svelte/dict/svelte.txt
 café - swift                ../../node_modules/.pnpm...l/dict-swift/swift.txt.gz
 café - typescript           ../../node_modules/.pnpm...cript/dict/typescript.txt
 café - workspace*           ../../cspell-dict.txt"
@@ -780,7 +780,6 @@ hello - [ignoreWords]*       From Settings \`ignoreWords\`
 hello - [words]*             From Settings \`words\`
 hello - ada                  ../../node_modules/.pnpm...ll/dict-ada/dict/ada.txt
 hello - aws*                 ../../node_modules/.pnpm...pell/dict-aws/aws.txt.gz
-hello - backwards-compatibi* ../cspell-bundled-dicts/compatibility-words.txt.gz
 hello - bash                 ../../node_modules/.pnpm...bash/dict/bash-words.txt
 hello - companies*           ../../node_modules/.pnpm...anies/dict/companies.txt
 hello * cpp                  ../../node_modules/.pnpm...pell/dict-cpp/cpp.txt.gz
@@ -820,6 +819,7 @@ hello - rust                 ../../node_modules/.pnpm...ll/dict-rust/rust.txt.gz
 hello - scala                ../../node_modules/.pnpm.../dict-scala/scala.txt.gz
 hello - softwareTerms*       ../../node_modules/.pnpm...s/dict/softwareTerms.txt
 hello - sql                  ../../node_modules/.pnpm...pell/dict-sql/sql.txt.gz
+hello - svelte               ../../node_modules/.pnpm...t-svelte/dict/svelte.txt
 hello - swift                ../../node_modules/.pnpm.../dict-swift/swift.txt.gz
 hello - typescript           ../../node_modules/.pnpm...ript/dict/typescript.txt
 hello - workspace*           ../../cspell-dict.txt"
@@ -834,7 +834,6 @@ hello - [ignoreWords]*       From Settings \`ignoreWords\`
 hello - [words]*             From Settings \`words\`
 hello - ada                  ../../node_modules/.pnpm...ll/dict-ada/dict/ada.txt
 hello - aws*                 ../../node_modules/.pnpm...pell/dict-aws/aws.txt.gz
-hello - backwards-compatibi* ../cspell-bundled-dicts/compatibility-words.txt.gz
 hello - bash                 ../../node_modules/.pnpm...bash/dict/bash-words.txt
 hello - companies*           ../../node_modules/.pnpm...anies/dict/companies.txt
 hello * cpp                  ../../node_modules/.pnpm...pell/dict-cpp/cpp.txt.gz
@@ -874,6 +873,7 @@ hello - rust                 ../../node_modules/.pnpm...ll/dict-rust/rust.txt.gz
 hello - scala                ../../node_modules/.pnpm.../dict-scala/scala.txt.gz
 hello - softwareTerms*       ../../node_modules/.pnpm...s/dict/softwareTerms.txt
 hello - sql                  ../../node_modules/.pnpm...pell/dict-sql/sql.txt.gz
+hello - svelte               ../../node_modules/.pnpm...t-svelte/dict/svelte.txt
 hello - swift                ../../node_modules/.pnpm.../dict-swift/swift.txt.gz
 hello - typescript           ../../node_modules/.pnpm...ript/dict/typescript.txt
 hello - workspace*           ../../cspell-dict.txt"
@@ -1049,7 +1049,6 @@ café - [ignoreWords]*       From Settings \`ignoreWords\`
 café - [words]*             From Settings \`words\`
 café - ada                  ../../node_modules/.pnpm...ell/dict-ada/dict/ada.txt
 café - aws*                 ../../node_modules/.pnpm...spell/dict-aws/aws.txt.gz
-café - backwards-compatibi* ../cspell-bundled-dicts/compatibility-words.txt.gz
 café - bash                 ../../node_modules/.pnpm...-bash/dict/bash-words.txt
 café - companies*           ../../node_modules/.pnpm...panies/dict/companies.txt
 café - cpp                  ../../node_modules/.pnpm...spell/dict-cpp/cpp.txt.gz
@@ -1089,6 +1088,7 @@ café - rust                 ../../node_modules/.pnpm...ell/dict-rust/rust.txt.
 café - scala                ../../node_modules/.pnpm...l/dict-scala/scala.txt.gz
 café - softwareTerms*       ../../node_modules/.pnpm...ms/dict/softwareTerms.txt
 café - sql                  ../../node_modules/.pnpm...spell/dict-sql/sql.txt.gz
+café - svelte               ../../node_modules/.pnpm...ct-svelte/dict/svelte.txt
 café - swift                ../../node_modules/.pnpm...l/dict-swift/swift.txt.gz
 café - typescript           ../../node_modules/.pnpm...cript/dict/typescript.txt
 café - workspace*           ../../cspell-dict.txt"
@@ -1103,7 +1103,6 @@ hello - [ignoreWords]*       From Settings \`ignoreWords\`
 hello - [words]*             From Settings \`words\`
 hello - ada                  ../../node_modules/.pnpm...ll/dict-ada/dict/ada.txt
 hello - aws*                 ../../node_modules/.pnpm...pell/dict-aws/aws.txt.gz
-hello - backwards-compatibi* ../cspell-bundled-dicts/compatibility-words.txt.gz
 hello - bash                 ../../node_modules/.pnpm...bash/dict/bash-words.txt
 hello - companies*           ../../node_modules/.pnpm...anies/dict/companies.txt
 hello * cpp                  ../../node_modules/.pnpm...pell/dict-cpp/cpp.txt.gz
@@ -1143,6 +1142,7 @@ hello - rust                 ../../node_modules/.pnpm...ll/dict-rust/rust.txt.gz
 hello - scala                ../../node_modules/.pnpm.../dict-scala/scala.txt.gz
 hello - softwareTerms*       ../../node_modules/.pnpm...s/dict/softwareTerms.txt
 hello - sql                  ../../node_modules/.pnpm...pell/dict-sql/sql.txt.gz
+hello - svelte               ../../node_modules/.pnpm...t-svelte/dict/svelte.txt
 hello - swift                ../../node_modules/.pnpm.../dict-swift/swift.txt.gz
 hello - typescript           ../../node_modules/.pnpm...ript/dict/typescript.txt
 hello - workspace*           ../../cspell-dict.txt"
@@ -1157,7 +1157,6 @@ hello - [ignoreWords]*       From Settings \`ignoreWords\`
 hello - [words]*             From Settings \`words\`
 hello - ada                  ../../node_modules/.pnpm...ll/dict-ada/dict/ada.txt
 hello - aws*                 ../../node_modules/.pnpm...pell/dict-aws/aws.txt.gz
-hello - backwards-compatibi* ../cspell-bundled-dicts/compatibility-words.txt.gz
 hello - bash                 ../../node_modules/.pnpm...bash/dict/bash-words.txt
 hello - companies*           ../../node_modules/.pnpm...anies/dict/companies.txt
 hello * cpp                  ../../node_modules/.pnpm...pell/dict-cpp/cpp.txt.gz
@@ -1197,6 +1196,7 @@ hello - rust                 ../../node_modules/.pnpm...ll/dict-rust/rust.txt.gz
 hello - scala                ../../node_modules/.pnpm.../dict-scala/scala.txt.gz
 hello - softwareTerms*       ../../node_modules/.pnpm...s/dict/softwareTerms.txt
 hello - sql                  ../../node_modules/.pnpm...pell/dict-sql/sql.txt.gz
+hello - svelte               ../../node_modules/.pnpm...t-svelte/dict/svelte.txt
 hello - swift                ../../node_modules/.pnpm.../dict-swift/swift.txt.gz
 hello - typescript           ../../node_modules/.pnpm...ript/dict/typescript.txt
 hello - workspace*           ../../cspell-dict.txt"
@@ -1239,7 +1239,6 @@ hello - [ignoreWords]*       From Settings \`ignoreWords\`
 hello - [words]*             From Settings \`words\`
 hello - ada                  ../../node_modules/.pnpm...ll/dict-ada/dict/ada.txt
 hello - aws*                 ../../node_modules/.pnpm...pell/dict-aws/aws.txt.gz
-hello - backwards-compatibi* ../cspell-bundled-dicts/compatibility-words.txt.gz
 hello - bash                 ../../node_modules/.pnpm...bash/dict/bash-words.txt
 hello - companies*           ../../node_modules/.pnpm...anies/dict/companies.txt
 hello * cpp                  ../../node_modules/.pnpm...pell/dict-cpp/cpp.txt.gz
@@ -1281,6 +1280,7 @@ hello - rust                 ../../node_modules/.pnpm...ll/dict-rust/rust.txt.gz
 hello - scala                ../../node_modules/.pnpm.../dict-scala/scala.txt.gz
 hello - softwareTerms*       ../../node_modules/.pnpm...s/dict/softwareTerms.txt
 hello - sql                  ../../node_modules/.pnpm...pell/dict-sql/sql.txt.gz
+hello - svelte               ../../node_modules/.pnpm...t-svelte/dict/svelte.txt
 hello - swift                ../../node_modules/.pnpm.../dict-swift/swift.txt.gz
 hello - typescript           ../../node_modules/.pnpm...ript/dict/typescript.txt
 hello - workspace*           ../../cspell-dict.txt"
@@ -1295,7 +1295,6 @@ not-in-any-dictionary - [ignoreWords]*       From Settings \`ignoreWords\`
 not-in-any-dictionary - [words]*             From Settings \`words\`
 not-in-any-dictionary - ada                  ../../node_modul...ada/dict/ada.txt
 not-in-any-dictionary - aws*                 ../../node_modul...t-aws/aws.txt.gz
-not-in-any-dictionary - backwards-compatibi* ../cspell-bundle...ity-words.txt.gz
 not-in-any-dictionary - bash                 ../../node_modul...t/bash-words.txt
 not-in-any-dictionary - companies*           ../../node_modul...ct/companies.txt
 not-in-any-dictionary - cpp                  ../../node_modul...t-cpp/cpp.txt.gz
@@ -1335,6 +1334,7 @@ not-in-any-dictionary - rust                 ../../node_modul...rust/rust.txt.gz
 not-in-any-dictionary - scala                ../../node_modul...ala/scala.txt.gz
 not-in-any-dictionary - softwareTerms*       ../../node_modul...oftwareTerms.txt
 not-in-any-dictionary - sql                  ../../node_modul...t-sql/sql.txt.gz
+not-in-any-dictionary - svelte               ../../node_modul.../dict/svelte.txt
 not-in-any-dictionary - swift                ../../node_modul...ift/swift.txt.gz
 not-in-any-dictionary - typescript           ../../node_modul...t/typescript.txt
 not-in-any-dictionary - workspace*           ../../cspell-dict.txt"
