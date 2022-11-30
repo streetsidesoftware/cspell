@@ -1,13 +1,14 @@
 import { CSpellUserSettings } from '@cspell/cspell-types';
 import assert from 'assert';
 import { isTextDocument, TextDocument } from '../Models/TextDocument';
+import type { ValidationIssue } from '../Models/ValidationIssue';
 import * as Settings from '../Settings';
 import { Document, resolveDocumentToTextDocument } from '../spellCheckFile';
 import { MatchRange } from '../util/TextRange';
 import { clean } from '../util/util';
 import { DocumentValidator, DocumentValidatorOptions } from './docValidator';
 import { calcTextInclusionRanges } from './textValidator';
-import { validateText, ValidationIssue } from './validator';
+import { validateText } from './validator';
 
 /**
  * Annotate text with issues and include / exclude zones.

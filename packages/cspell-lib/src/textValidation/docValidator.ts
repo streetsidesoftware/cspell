@@ -10,13 +10,14 @@ import {
 import assert from 'assert';
 import { GlobMatcher } from 'cspell-glob';
 import { CSpellSettingsInternal, CSpellSettingsInternalFinalized } from '../Models/CSpellSettingsInternalDef';
+import { ExtendedSuggestion } from '../Models/Suggestion';
 import { TextDocument, TextDocumentLine, updateTextDocument } from '../Models/TextDocument';
+import { ValidationIssue } from '../Models/ValidationIssue';
 import { finalizeSettings, loadConfig, mergeSettings, searchForConfig } from '../Settings';
 import { loadConfigSync, searchForConfigSync } from '../Settings/Controller/configLoader';
 import { DirectiveIssue, validateInDocumentSettings } from '../Settings/InDocSettings';
 import { getDictionaryInternal, getDictionaryInternalSync, SpellingDictionaryCollection } from '../SpellingDictionary';
 import { toError } from '../util/errors';
-import { callOnce } from '../util/Memorizer';
 import { AutoCache } from '../util/simpleCache';
 import { MatchRange } from '../util/TextRange';
 import { createTimer } from '../util/timer';
@@ -27,7 +28,7 @@ import { createMappedTextSegmenter, SimpleRange } from './parsedText';
 import { calcTextInclusionRanges, defaultMaxDuplicateProblems, defaultMaxNumberOfProblems } from './textValidator';
 import type { MappedTextValidationResult } from './ValidationTypes';
 import { ValidationOptions } from './ValidationTypes';
-import { settingsToValidateOptions, ValidateTextOptions, ValidationIssue } from './validator';
+import { settingsToValidateOptions, ValidateTextOptions } from './validator';
 
 export interface DocumentValidatorOptions extends ValidateTextOptions {
     /**
@@ -252,8 +253,10 @@ export class DocumentValidator {
         const withSugs = issues.map((t) => {
             // lazy suggestion calculation.
             const text = t.text;
-            const suggestions = callOnce(() => this.suggest(text));
-            return Object.defineProperty({ ...t }, 'suggestions', { enumerable: true, get: suggestions });
+            const suggestionsEx = this.getSuggestions(text);
+            t.suggestionsEx = suggestionsEx;
+            t.suggestions = suggestionsEx.map((s) => s.word);
+            return t;
         });
 
         return withSugs;
@@ -299,11 +302,11 @@ export class DocumentValidator {
         const issueType = IssueType.directive;
 
         function toValidationIssue(dirIssue: DirectiveIssue): ValidationIssue {
-            const { text, range, suggestions, message } = dirIssue;
+            const { text, range, suggestions, suggestionsEx, message } = dirIssue;
             const offset = range[0];
             const pos = document.positionAt(offset);
             const line = document.getLine(pos.line);
-            const issue: ValidationIssue = { text, offset, line, suggestions, message, issueType };
+            const issue: ValidationIssue = { text, offset, line, suggestions, suggestionsEx, message, issueType };
             return issue;
         }
 
@@ -377,11 +380,11 @@ export class DocumentValidator {
         return parser.parse(this.document.text, this.document.uri.path).parsedTexts;
     }
 
-    private suggest(text: string) {
+    private getSuggestions(text: string): ExtendedSuggestion[] {
         return this._suggestions.get(text);
     }
 
-    private genSuggestions(text: string): string[] {
+    private genSuggestions(text: string): ExtendedSuggestion[] {
         assert(this._preparations, ERROR_NOT_PREPARED);
         const settings = this._preparations.docSettings;
         const dict = this._preparations.dictionary;
@@ -393,7 +396,9 @@ export class DocumentValidator {
             timeout: settings.suggestionsTimeout,
             numChanges: settings.suggestionNumChanges,
         });
-        return dict.suggest(text, sugOptions).map((r) => r.word);
+        return dict
+            .suggest(text, sugOptions)
+            .map(({ word, isPreferred }) => (isPreferred ? { word, isPreferred } : { word }));
     }
 
     public getFinalizedDocSettings(): CSpellSettingsInternal {
