@@ -1,16 +1,11 @@
 import { opConcatMap, opFilter, opTake, pipe } from '@cspell/cspell-pipe/sync';
-import { genSequence, Sequence } from 'gensequence';
 import { SpellingDictionary } from 'cspell-dictionary';
+import { genSequence, Sequence } from 'gensequence';
+import type { ValidationResult } from '../Models/ValidationResult';
 import * as Text from '../util/text';
 import * as TextRange from '../util/TextRange';
 import { lineValidatorFactory } from './lineValidatorFactory';
-import {
-    IncludeExcludeOptions,
-    LineSegment,
-    TextOffsetRO,
-    ValidationOptions,
-    ValidationResult,
-} from './ValidationTypes';
+import type { IncludeExcludeOptions, LineSegment, TextOffsetRO, ValidationOptions } from './ValidationTypes';
 
 export const defaultMaxNumberOfProblems = 200;
 export const defaultMaxDuplicateProblems = 5;

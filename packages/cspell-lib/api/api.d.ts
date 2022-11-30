@@ -477,6 +477,22 @@ declare class ImportError extends Error {
 
 declare function combineTextAndLanguageSettings(settings: CSpellUserSettings, text: string, languageId: string | string[]): CSpellSettingsInternal;
 
+interface ExtendedSuggestion {
+    word: string;
+    isPreferred?: boolean;
+}
+
+interface ValidationResult extends TextOffset, Pick<Issue, 'message' | 'issueType'> {
+    line: TextOffset;
+    isFlagged?: boolean | undefined;
+    isFound?: boolean | undefined;
+}
+
+interface ValidationIssue extends ValidationResult {
+    suggestions?: string[];
+    suggestionsEx?: ExtendedSuggestion[];
+}
+
 interface MatchRange {
     startPos: number;
     endPos: number;
@@ -495,11 +511,6 @@ interface ValidationOptions extends IncludeExcludeOptions {
 interface IncludeExcludeOptions {
     ignoreRegExpList?: RegExp[];
     includeRegExpList?: RegExp[];
-}
-interface ValidationResult extends TextOffset, Pick<Issue, 'message' | 'issueType'> {
-    line: TextOffset;
-    isFlagged?: boolean | undefined;
-    isFound?: boolean | undefined;
 }
 type LineValidatorFn = (line: LineSegment) => Iterable<ValidationResult>;
 interface LineSegment {
@@ -521,9 +532,9 @@ interface TextValidator {
     lineValidator: LineValidator;
 }
 
-interface ValidationIssue extends ValidationResult {
-    suggestions?: string[];
-}
+type Offset = number;
+type SimpleRange = readonly [Offset, Offset];
+
 interface ValidateTextOptions {
     /**
      * Generate suggestions where there are spelling issues.
@@ -543,9 +554,6 @@ interface ValidateTextOptions {
  * @deprecationMessage Use spellCheckDocument
  */
 declare function validateText(text: string, settings: CSpellUserSettings, options?: ValidateTextOptions): Promise<ValidationIssue[]>;
-
-type Offset = number;
-type SimpleRange = readonly [Offset, Offset];
 
 interface DocumentValidatorOptions extends ValidateTextOptions {
     /**
@@ -613,7 +621,7 @@ declare class DocumentValidator {
     private catchError;
     private errorCatcherWrapper;
     private _parse;
-    private suggest;
+    private getSuggestions;
     private genSuggestions;
     getFinalizedDocSettings(): CSpellSettingsInternal;
     /**

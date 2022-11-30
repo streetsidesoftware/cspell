@@ -2,6 +2,7 @@ import { opConcatMap, opFilter, opMap, pipe, toArray } from '@cspell/cspell-pipe
 import { ParsedText } from '@cspell/cspell-types';
 import { CachingDictionary, createCachingDictionary, SearchOptions, SpellingDictionary } from 'cspell-dictionary';
 import { genSequence, Sequence } from 'gensequence';
+import type { ValidationResult } from '../Models/ValidationResult';
 import * as RxPat from '../Settings/RegExpPatterns';
 import * as Text from '../util/text';
 import { clean } from '../util/util';
@@ -16,7 +17,6 @@ import type {
     TextOffsetRO,
     TextValidatorFn,
     ValidationOptions,
-    ValidationResult,
     ValidationResultRO,
 } from './ValidationTypes';
 
