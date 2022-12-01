@@ -1,5 +1,16 @@
 import { TextDocumentOffset, TextOffset } from './TextOffset';
 
+export interface Suggestion {
+    /**
+     * Word to suggest.
+     */
+    word: string;
+    /**
+     * `true` - if this suggestion can be an automatic fix.
+     */
+    isPreferred?: boolean;
+}
+
 export interface Issue extends Omit<TextDocumentOffset, 'doc'> {
     /** text surrounding the issue text */
     context: TextOffset;
@@ -11,6 +22,10 @@ export interface Issue extends Omit<TextDocumentOffset, 'doc'> {
      * An optional array of replacement strings.
      */
     suggestions?: string[];
+    /**
+     * An optional array of suggestions.
+     */
+    suggestionsEx?: Suggestion[];
     /**
      * Issues are spelling issues unless otherwise specified.
      */
