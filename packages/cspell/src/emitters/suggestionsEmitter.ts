@@ -48,7 +48,14 @@ export function emitSuggestionResult(result: TimedSuggestionsForWordResult, opti
         for (const sug of mappedSugs) {
             const { cost, dictionaries, w } = sug;
             const padding = ' '.repeat(padWidth(w, maxWidth));
-            const forbid = sug.forbidden ? chalk.red('X') : ' ';
+            const forbid =
+                sug.forbidden && sug.isPreferred
+                    ? chalk.red('*')
+                    : sug.forbidden
+                    ? chalk.red('X')
+                    : sug.isPreferred
+                    ? chalk.yellow('*')
+                    : ' ';
             const ignore = sug.noSuggest ? chalk.yellow('N') : ' ';
             const strCost = padLeft(cost.toString(10), 4);
             const dicts = dictionaries.map((n) => chalk.gray(n)).join(', ');
