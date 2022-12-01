@@ -77,5 +77,6 @@ function formatWordSingle(s: SuggestedWord): string {
     let word = formatWord(s.word, s);
     word = s.forbidden ? word + chalk.red(' X') : word;
     word = s.noSuggest ? word + chalk.yellow(' Not suggested.') : word;
+    word = s.isPreferred ? chalk.yellow(word + ' *') : word;
     return word;
 }
