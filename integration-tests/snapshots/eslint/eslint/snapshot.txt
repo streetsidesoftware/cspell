@@ -3,7 +3,7 @@ Repository: eslint/eslint
 Url: "https://github.com/eslint/eslint"
 Args: ["**","--exclude=bin/**","--exclude=CHANGELOG.md","--exclude=_data","--exclude=tests/bench/large.js","--exclude=docs/src/_includes","--exclude=docs/src/assets/{fonts,s?css,images}"]
 Lines:
- CSpell: Files checked: 1818, Issues found: 5410 in 1226 files
+ CSpell: Files checked: 1818, Issues found: 5423 in 1226 files
  exit code: 1
 ./LICENSE:1:58      - Unknown word (openjsf)    -- other contributors, <www.openjsf.org>
 ./Makefile.js:145:88    - Unknown word (ined)               -- followed by the string "ined".
@@ -255,7 +255,7 @@ Lines:
 ./docs/src/user-guide/configuring/language-options.md:46:4      - Unknown word (embertest)     -- * `embertest` - Ember test helper
 ./docs/src/user-guide/configuring/language-options.md:47:4      - Unknown word (webextensions) -- * `webextensions` - WebExtensions globals
 ./docs/src/user-guide/configuring/language-options.md:48:4      - Unknown word (greasemonkey)  -- * `greasemonkey` - GreaseMonkey globals
-./docs/src/user-guide/configuring/plugins.md:114:156   - Unknown word (pluginname) -- require('eslint-plugin-pluginname')` in the config file
+./docs/src/user-guide/configuring/plugins.md:46:152    - Unknown word (pluginname) -- require('eslint-plugin-pluginname')` in the config file
 ./docs/src/user-guide/formatters/index.md:110:5     - Unknown word (testsuites) -- &lt;testsuites&gt;
 ./docs/src/user-guide/formatters/index.md:111:5     - Unknown word (testsuite)  -- &lt;testsuite package=&#34;org.eslint
 ./docs/src/user-guide/formatters/index.md:112:5     - Unknown word (testcase)   -- &lt;testcase time=&#34;0&#34; name
@@ -343,11 +343,11 @@ Lines:
 ./lib/rules/no-else-return.js:78:16     - Unknown word (Redeclaring) -- * Redeclaring any of these would cause
 ./lib/rules/no-eval.js:75:12     - Unknown word (Pushs)      -- * Pushs a `this` scope (non
 ./lib/rules/no-extend-native.js:120:87    - Unknown word (Propert)    -- callee, "Object", /^definePropert(?:y|ies)$/u)
-./lib/rules/no-extra-parens.js:253:52    - Unknown word (newed)          -- constructor function is newed-up with parens
+./lib/rules/no-extra-parens.js:255:52    - Unknown word (newed)          -- constructor function is newed-up with parens
 ./lib/rules/no-extra-parens.js:2:27      - Unknown word (parenthesising) -- fileoverview Disallow parenthesising higher precedence subexpressi
 ./lib/rules/no-extra-parens.js:2:60      - Unknown word (subexpressions) -- enthesising higher precedence subexpressions.
-./lib/rules/no-extra-parens.js:513:28    - Unknown word (logicals)       -- * Evaluate binary logicals
-./lib/rules/no-extra-parens.js:519:19    - Unknown word (prec)           -- const prec = precedence(node);
+./lib/rules/no-extra-parens.js:528:28    - Unknown word (logicals)       -- * Evaluate binary logicals
+./lib/rules/no-extra-parens.js:534:19    - Unknown word (prec)           -- const prec = precedence(node);
 ./lib/rules/no-implicit-coercion.js:14:39     - Unknown word (ndex)       -- PATTERN = /^(?:i|lastI)ndexOf$/u;
 ./lib/rules/no-inline-comments.js:61:17     - Unknown word (postamble)  -- postamble = endLine.slice(node
 ./lib/rules/no-inline-comments.js:63:19     - Unknown word (Postamble)  -- isPostambleEmpty = !postamble;
@@ -505,6 +505,8 @@ Lines:
 ./tests/lib/rules/no-dupe-else-if.js:56:61     - Unknown word (subconditions) -- may contain redundant subconditions, but the branch can
 ./tests/lib/rules/no-duplicate-imports.js:94:32     - Unknown word (modns)      -- code: "import * as modns from \"lodash-es\";
 ./tests/lib/rules/no-eval.js:41:29     - Unknown word (noneval)    -- { code: "globalThis.noneval('foo')", env: { es2
+./tests/lib/rules/no-extra-parens.js:3325:31   - Unknown word (coment)     -- /** extra coment */
+./tests/lib/rules/no-extra-parens.js:772:32    - Unknown word (ipaddr)     -- code: "const net = ipaddr.parseCIDR(/** @type
 ./tests/lib/rules/no-implicit-globals.js:26:15     - Unknown word (Redeclaration) -- const readonlyRedeclarationMessage = "Unexpected
 ./tests/lib/rules/no-inline-comments.js:127:37    - Unknown word (otherthing) -- ignorePattern: "otherthing"
 ./tests/lib/rules/no-invalid-regexp.js:70:35     - Unknown word (Nandinagari) -- RegExp('\\\\p{Script=Nandinagari}', 'u');",

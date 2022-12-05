@@ -3,7 +3,7 @@ Repository: php/php-src
 Url: "https://github.com/php/php-src.git"
 Args: ["--config=../../../../config/repositories/php/php-src/cspell.json","**/*.{md,c,h,php}"]
 Lines:
- CSpell: Files checked: 1842, Issues found: 44223 in 1307 files
+ CSpell: Files checked: 1843, Issues found: 44224 in 1308 files
  exit code: 1
 ./CODING_STANDARDS.md:105:8     - Unknown word (setclientencoding) -- pg_setclientencoding
 ./CODING_STANDARDS.md:126:5     - Unknown word (fooselect)         -- fooselect_bar
@@ -160,9 +160,9 @@ Lines:
 ./Zend/zend_alloc.c:68:12     - Unknown word (wincrypt)   -- # include <wincrypt.h>
 ./Zend/zend_alloc.c:706:40    - Unknown word (hugepage)   -- inline void zend_mm_hugepage(void* ptr, size_t size
 ./Zend/zend_alloc.c:826:25    - Unknown word (MAYMOVE)    -- We don't use MREMAP_MAYMOVE due to alignment requirements
-./Zend/zend_ast.c:1196:39   - Unknown word (qstr)       -- void zend_ast_export_qstr(smart_str *str, char
-./Zend/zend_ast.c:1355:39   - Unknown word (encaps)     -- void zend_ast_export_encaps_list(smart_str *str
-./Zend/zend_ast.c:1818:17   - Unknown word (ENCAPS)     -- case ZEND_AST_ENCAPS_LIST:
+./Zend/zend_ast.c:1204:39   - Unknown word (qstr)       -- void zend_ast_export_qstr(smart_str *str, char
+./Zend/zend_ast.c:1363:39   - Unknown word (encaps)     -- void zend_ast_export_encaps_list(smart_str *str
+./Zend/zend_ast.c:1826:17   - Unknown word (ENCAPS)     -- case ZEND_AST_ENCAPS_LIST:
 ./Zend/zend_atomic.h:73:44     - Unknown word (Iterlocked) -- is non-const due to Iterlocked API*/
 ./Zend/zend_attributes.c:16:22     - Unknown word (Schröder)   -- | Martin Schröder <m.schroeder2007@gmail
 ./Zend/zend_bitset.h:81:51     - Unknown word (clzl)       -- has_builtin(__builtin_clzl)) \
@@ -211,9 +211,9 @@ Lines:
 ./Zend/zend_execute.c:60:18     - Unknown word (IBMC)       -- # elif defined(__IBMC__) && ZEND_GCC_VERSION
 ./Zend/zend_execute.c:662:36    - Unknown word (fsep)       -- fname, const char **fsep, const char **fclass
 ./Zend/zend_execute.c:662:55    - Unknown word (fclass)     -- *fsep, const char **fclass,
-./Zend/zend_execute_API.c:1010:24   - Unknown word (fcic)       -- zend_fcall_info_cache fcic;
-./Zend/zend_execute_API.c:1466:111  - Unknown word (EXECUTEONLYONCE)     -- seconds*1000, 0, WT_EXECUTEONLYONCE)) {
-./Zend/zend_execute_API.c:1466:47   - Unknown word (WAITORTIMERCALLBACK) -- rQueueTimer(&tq_timer, NULL, (WAITORTIMERCALLBACK)tq_timer_cb, (VOID*
+./Zend/zend_execute_API.c:1011:24   - Unknown word (fcic)       -- zend_fcall_info_cache fcic;
+./Zend/zend_execute_API.c:1467:111  - Unknown word (EXECUTEONLYONCE)     -- seconds*1000, 0, WT_EXECUTEONLYONCE)) {
+./Zend/zend_execute_API.c:1467:47   - Unknown word (WAITORTIMERCALLBACK) -- rQueueTimer(&tq_timer, NULL, (WAITORTIMERCALLBACK)tq_timer_cb, (VOID*
 ./Zend/zend_fibers.c:143:33    - Unknown word (fcontext)   -- by boost.context in fcontext.hpp:
 ./Zend/zend_gc.c:1468:26   - Unknown word (tmpvars)    -- static void zend_gc_root_tmpvars(void);
 ./Zend/zend_gdb.c:34:14     - Unknown word (NOACTION)   -- ZEND_GDBJIT_NOACTION,
@@ -599,53 +599,53 @@ Lines:
 ./ext/calendar/julian.c:89:17     - Unknown word (Nonae)      -- * from the Nonae (9th day before the
 ./ext/calendar/sdncal.h:10:12     - Unknown word (sdncal)     -- /* $selId: sdncal.h,v 2.0 1995/10/24
 ./ext/calendar/sdncal.h:1:9       - Unknown word (SDNCAL)     -- #ifndef SDNCAL_H
-./ext/com_dotnet/com_com.c:106:33    - Unknown word (dcom)           -- name && !COMG(allow_dcom)) {
-./ext/com_dotnet/com_com.c:107:37    - Unknown word (DCOM)           -- exception(E_ERROR, "DCOM has been disabled by
-./ext/com_dotnet/com_com.c:111:30    - Unknown word (olestring)      -- = php_com_string_to_olestring(module_name, module
-./ext/com_dotnet/com_com.c:118:8     - Unknown word (pwsz)           -- info.pwszName = php_com_string
-./ext/com_dotnet/com_com.c:151:14    - Unknown word (bopt)           -- BIND_OPTS2 bopt = {0};
-./ext/com_dotnet/com_com.c:218:9     - Unknown word (werr)           -- char *werr, *msg;
-./ext/com_dotnet/com_com.c:232:59    - Unknown word (MAKELANGID)     -- DISPATCH(&obj->v), 0, MAKELANGID(LANG_NEUTRAL, SUBLANG
-./ext/com_dotnet/com_com.c:232:84    - Unknown word (SUBLANG)        -- MAKELANGID(LANG_NEUTRAL, SUBLANG_NEUTRAL), &obj->typeinfo
-./ext/com_dotnet/com_com.c:251:4     - Unknown word (BSTR)           -- BSTR name;
-./ext/com_dotnet/com_com.c:315:19    - Unknown word (dispatchable)   -- /* we got our dispatchable object */
-./ext/com_dotnet/com_com.c:333:59    - Unknown word (DISPID)         -- dotnet_object *obj, DISPID id_member,
-./ext/com_dotnet/com_com.c:334:15    - Unknown word (DISPPARAMS)     -- WORD flags, DISPPARAMS *disp_params, VARIANT
-./ext/com_dotnet/com_com.c:334:76    - Unknown word (noarg)          -- bool silent, bool allow_noarg)
-./ext/com_dotnet/com_com.c:338:2     - Unknown word (EXCEPINFO)      -- EXCEPINFO e = {0};
-./ext/com_dotnet/com_com.c:349:11    - Unknown word (bstr)           -- if (e.bstrSource) {
+./ext/com_dotnet/com_com.c:105:22    - Unknown word (COMG)           -- if (server_name && !COMG(allow_dcom)) {
+./ext/com_dotnet/com_com.c:105:33    - Unknown word (dcom)           -- name && !COMG(allow_dcom)) {
+./ext/com_dotnet/com_com.c:106:37    - Unknown word (DCOM)           -- exception(E_ERROR, "DCOM has been disabled by
+./ext/com_dotnet/com_com.c:110:30    - Unknown word (olestring)      -- = php_com_string_to_olestring(module_name, module
+./ext/com_dotnet/com_com.c:117:8     - Unknown word (pwsz)           -- info.pwszName = php_com_string
+./ext/com_dotnet/com_com.c:150:14    - Unknown word (bopt)           -- BIND_OPTS2 bopt = {0};
+./ext/com_dotnet/com_com.c:217:9     - Unknown word (werr)           -- char *werr, *msg;
+./ext/com_dotnet/com_com.c:231:59    - Unknown word (MAKELANGID)     -- DISPATCH(&obj->v), 0, MAKELANGID(LANG_NEUTRAL, SUBLANG
+./ext/com_dotnet/com_com.c:231:84    - Unknown word (SUBLANG)        -- MAKELANGID(LANG_NEUTRAL, SUBLANG_NEUTRAL), &obj->typeinfo
+./ext/com_dotnet/com_com.c:236:13    - Unknown word (autoreg)        -- if (COMG(autoreg_on)) {
+./ext/com_dotnet/com_com.c:250:4     - Unknown word (BSTR)           -- BSTR name;
+./ext/com_dotnet/com_com.c:314:19    - Unknown word (dispatchable)   -- /* we got our dispatchable object */
+./ext/com_dotnet/com_com.c:332:59    - Unknown word (DISPID)         -- dotnet_object *obj, DISPID id_member,
+./ext/com_dotnet/com_com.c:333:15    - Unknown word (DISPPARAMS)     -- WORD flags, DISPPARAMS *disp_params, VARIANT
+./ext/com_dotnet/com_com.c:333:76    - Unknown word (noarg)          -- bool silent, bool allow_noarg)
+./ext/com_dotnet/com_com.c:337:2     - Unknown word (EXCEPINFO)      -- EXCEPINFO e = {0};
+./ext/com_dotnet/com_com.c:348:11    - Unknown word (bstr)           -- if (e.bstrSource) {
 ./ext/com_dotnet/com_com.c:35:22     - Unknown word (typelib)    -- char *module_name, *typelib_name = NULL;
-./ext/com_dotnet/com_com.c:377:16    - Unknown word (PARAMNOTFOUND)  -- case DISP_E_PARAMNOTFOUND:
-./ext/com_dotnet/com_com.c:378:16    - Unknown word (TYPEMISMATCH)   -- case DISP_E_TYPEMISMATCH:
-./ext/com_dotnet/com_com.c:384:16    - Unknown word (BADPARAMCOUNT)  -- case DISP_E_BADPARAMCOUNT:
+./ext/com_dotnet/com_com.c:376:16    - Unknown word (PARAMNOTFOUND)  -- case DISP_E_PARAMNOTFOUND:
+./ext/com_dotnet/com_com.c:377:16    - Unknown word (TYPEMISMATCH)   -- case DISP_E_TYPEMISMATCH:
+./ext/com_dotnet/com_com.c:383:16    - Unknown word (BADPARAMCOUNT)  -- case DISP_E_BADPARAMCOUNT:
 ./ext/com_dotnet/com_com.c:38:2      - Unknown word (OLECHAR)    -- OLECHAR *moniker;
 ./ext/com_dotnet/com_com.c:39:2      - Unknown word (CLSID)      -- CLSID clsid;
 ./ext/com_dotnet/com_com.c:39:8      - Unknown word (clsid)      -- CLSID clsid;
 ./ext/com_dotnet/com_com.c:40:2      - Unknown word (CLSCTX)     -- CLSCTX ctx = CLSCTX_SERVER
-./ext/com_dotnet/com_com.c:412:11    - Unknown word (dispid)         -- DISPID *dispid)
-./ext/com_dotnet/com_com.c:414:11    - Unknown word (olename)        -- OLECHAR *olename;
+./ext/com_dotnet/com_com.c:411:11    - Unknown word (dispid)         -- DISPID *dispid)
+./ext/com_dotnet/com_com.c:413:11    - Unknown word (olename)        -- OLECHAR *olename;
 ./ext/com_dotnet/com_com.c:41:2      - Unknown word (HRESULT)    -- HRESULT res = E_FAIL;
-./ext/com_dotnet/com_com.c:42:13     - Unknown word (COMG)       -- int mode = COMG(autoreg_case_sensitive
-./ext/com_dotnet/com_com.c:42:18     - Unknown word (autoreg)    -- int mode = COMG(autoreg_case_sensitive) ? CONST
-./ext/com_dotnet/com_com.c:44:2      - Unknown word (COSERVERINFO) -- COSERVERINFO info;
-./ext/com_dotnet/com_com.c:45:2      - Unknown word (COAUTHIDENTITY) -- COAUTHIDENTITY authid = {0};
-./ext/com_dotnet/com_com.c:460:17    - Unknown word (altdispid)      -- DISPID dispid, altdispid;
-./ext/com_dotnet/com_com.c:463:11    - Unknown word (vargs)          -- VARIANT *vargs = NULL, *byref_vals
-./ext/com_dotnet/com_com.c:46:2      - Unknown word (COAUTHINFO)     -- COAUTHINFO authinfo = {
-./ext/com_dotnet/com_com.c:475:9     - Unknown word (winerr)         -- char *winerr = php_win32_error_to
-./ext/com_dotnet/com_com.c:49:12     - Unknown word (EOAC)           -- &authid, EOAC_NONE
-./ext/com_dotnet/com_com.c:529:14    - Unknown word (rgvarg)         -- disp_params.rgvarg = vargs;
-./ext/com_dotnet/com_com.c:530:14    - Unknown word (rgdispid)       -- disp_params.rgdispidNamedArgs = NULL;
-./ext/com_dotnet/com_com.c:532:23    - Unknown word (PROPERTYPUT)    -- if (flags & DISPATCH_PROPERTYPUT) {
-./ext/com_dotnet/com_com.c:554:13    - Unknown word (pointee)        -- * the pointee value as a zval; otherwise
-./ext/com_dotnet/com_com.c:63:8      - Unknown word (CDNO)           -- obj = CDNO_FETCH(object);
-./ext/com_dotnet/com_com.c:677:17    - Unknown word (sinkobject)     -- zval *object, *sinkobject;
-./ext/com_dotnet/com_com.c:67:29     - Unknown word (INVALIDARG)     -- com_throw_exception(E_INVALIDARG, "Could not create COM
-./ext/com_dotnet/com_com.c:698:11    - Unknown word (typelibname)    -- /* 0 => typelibname, 1 => dispname */
-./ext/com_dotnet/com_com.c:698:29    - Unknown word (dispname)       -- > typelibname, 1 => dispname */
-./ext/com_dotnet/com_com.c:771:49    - Unknown word (timeoutms)      -- sleeping for up to timeoutms milliseconds */
-./ext/com_dotnet/com_com.c:782:74    - Unknown word (ALLINPUT)       -- DWORD)timeoutms, QS_ALLINPUT);
-./ext/com_dotnet/com_com.c:798:16    - Unknown word (Typelibrary)    -- /* {{{ Loads a Typelibrary and registers its constants
+./ext/com_dotnet/com_com.c:43:2      - Unknown word (COSERVERINFO) -- COSERVERINFO info;
+./ext/com_dotnet/com_com.c:44:2      - Unknown word (COAUTHIDENTITY) -- COAUTHIDENTITY authid = {0};
+./ext/com_dotnet/com_com.c:459:17    - Unknown word (altdispid)      -- DISPID dispid, altdispid;
+./ext/com_dotnet/com_com.c:45:2      - Unknown word (COAUTHINFO)     -- COAUTHINFO authinfo = {
+./ext/com_dotnet/com_com.c:462:11    - Unknown word (vargs)          -- VARIANT *vargs = NULL, *byref_vals
+./ext/com_dotnet/com_com.c:474:9     - Unknown word (winerr)         -- char *winerr = php_win32_error_to
+./ext/com_dotnet/com_com.c:48:12     - Unknown word (EOAC)           -- &authid, EOAC_NONE
+./ext/com_dotnet/com_com.c:528:14    - Unknown word (rgvarg)         -- disp_params.rgvarg = vargs;
+./ext/com_dotnet/com_com.c:529:14    - Unknown word (rgdispid)       -- disp_params.rgdispidNamedArgs = NULL;
+./ext/com_dotnet/com_com.c:531:23    - Unknown word (PROPERTYPUT)    -- if (flags & DISPATCH_PROPERTYPUT) {
+./ext/com_dotnet/com_com.c:553:13    - Unknown word (pointee)        -- * the pointee value as a zval; otherwise
+./ext/com_dotnet/com_com.c:62:8      - Unknown word (CDNO)           -- obj = CDNO_FETCH(object);
+./ext/com_dotnet/com_com.c:66:29     - Unknown word (INVALIDARG)     -- com_throw_exception(E_INVALIDARG, "Could not create COM
+./ext/com_dotnet/com_com.c:676:17    - Unknown word (sinkobject)     -- zval *object, *sinkobject;
+./ext/com_dotnet/com_com.c:697:11    - Unknown word (typelibname)    -- /* 0 => typelibname, 1 => dispname */
+./ext/com_dotnet/com_com.c:697:29    - Unknown word (dispname)       -- > typelibname, 1 => dispname */
+./ext/com_dotnet/com_com.c:770:49    - Unknown word (timeoutms)      -- sleeping for up to timeoutms milliseconds */
+./ext/com_dotnet/com_com.c:781:74    - Unknown word (ALLINPUT)       -- DWORD)timeoutms, QS_ALLINPUT);
+./ext/com_dotnet/com_com.c:797:16    - Unknown word (Typelibrary)    -- /* {{{ Loads a Typelibrary and registers its constants
 ./ext/com_dotnet/com_dotnet.c:127:19    - Unknown word (STDAPICALLTYPE)    -- typedef HRESULT (STDAPICALLTYPE *cbtr_t)(LPCWSTR pwszVersion
 ./ext/com_dotnet/com_dotnet.c:127:35    - Unknown word (cbtr)              -- HRESULT (STDAPICALLTYPE *cbtr_t)(LPCWSTR pwszVersion
 ./ext/com_dotnet/com_dotnet.c:127:89    - Unknown word (REFCLSID)          -- LPCWSTR pwszBuildFlavor, REFCLSID rclsid, REFIID riid
@@ -660,10 +660,10 @@ Lines:
 ./ext/com_dotnet/com_dotnet.c:52:12     - Unknown word (STDMETHODCALLTYPE) -- HRESULT ( STDMETHODCALLTYPE *QueryInterface )(
 ./ext/com_dotnet/com_dotnet.c:54:14     - Unknown word (REFIID)            -- /* [in] */ REFIID riid,
 ./ext/com_dotnet/com_dotnet.c:54:21     - Unknown word (riid)              -- /* [in] */ REFIID riid,
-./ext/com_dotnet/com_extension.c:143:22    - Unknown word (Autoregister)  -- static ZEND_INI_MH(OnAutoregisterCasesensitive)
-./ext/com_dotnet/com_extension.c:143:34    - Unknown word (Casesensitive) -- INI_MH(OnAutoregisterCasesensitive)
-./ext/com_dotnet/com_extension.c:154:27    - Unknown word (autoregister)  -- PHP_INI_BOOLEAN("com.autoregister_verbose", "0", PHP_INI
-./ext/com_dotnet/com_extension.c:156:38    - Unknown word (casesensitive) -- ENTRY("com.autoregister_casesensitive", "1", PHP_INI_ALL,
+./ext/com_dotnet/com_extension.c:142:22    - Unknown word (Autoregister)  -- static ZEND_INI_MH(OnAutoregisterCasesensitive)
+./ext/com_dotnet/com_extension.c:142:34    - Unknown word (Casesensitive) -- INI_MH(OnAutoregisterCasesensitive)
+./ext/com_dotnet/com_extension.c:153:27    - Unknown word (autoregister)  -- PHP_INI_BOOLEAN("com.autoregister_verbose", "0", PHP_INI
+./ext/com_dotnet/com_extension.c:155:38    - Unknown word (casesensitive) -- ENTRY("com.autoregister_casesensitive", "1", PHP_INI_ALL,
 ./ext/com_dotnet/com_extension.c:53:11     - Unknown word (saproxy)    -- *php_com_saproxy_class_entry;
 ./ext/com_dotnet/com_extension.c:84:12     - Unknown word (typelibraries) -- * list of typelibraries to register *persistently
 ./ext/com_dotnet/com_extension.stub.php:221:17    - Unknown word (IGNORECASE) -- * @cvalue NORM_IGNORECASE
@@ -1547,10 +1547,10 @@ Lines:
 ./ext/ext_skel.php:246:29    - Unknown word (EXTNAMECAPS) -- source = str_replace('%EXTNAMECAPS%', strtoupper($options
 ./ext/ext_skel.php:97:46     - Unknown word (onlyunix)   -- dir <path>] [--std] [--onlyunix]
 ./ext/ext_skel.php:98:23     - Unknown word (onlywindows) -- [--onlywindows] [--help]
-./ext/ffi/ffi.c:4139:75   - Unknown word (undimensioned) -- leftmost array can be undimensioned");
-./ext/ffi/ffi.c:5194:9    - Unknown word (globbuf)       -- glob_t globbuf;
-./ext/ffi/ffi.c:6560:16   - Unknown word (declarartion)  -- /* useless declarartion */
-./ext/ffi/ffi.c:6755:4    - Unknown word (regparam)      -- _(regparam) \
+./ext/ffi/ffi.c:4174:75   - Unknown word (undimensioned) -- leftmost array can be undimensioned");
+./ext/ffi/ffi.c:5229:9    - Unknown word (globbuf)       -- glob_t globbuf;
+./ext/ffi/ffi.c:6595:16   - Unknown word (declarartion)  -- /* useless declarartion */
+./ext/ffi/ffi.c:6790:4    - Unknown word (regparam)      -- _(regparam) \
 ./ext/ffi/ffi.stub.php:235:33    - Unknown word (CDECL)      -- cvalue ZEND_FFI_ABI_CDECL
 ./ext/ffi/ffi.stub.php:240:33    - Unknown word (FASTCALL)   -- cvalue ZEND_FFI_ABI_FASTCALL
 ./ext/ffi/ffi.stub.php:245:33    - Unknown word (THISCALL)   -- cvalue ZEND_FFI_ABI_THISCALL
@@ -1570,6 +1570,7 @@ Lines:
 ./ext/ffi/ffi_parser.c:38:9      - Unknown word (YYPOS)      -- #define YYPOS cpos
 ./ext/ffi/ffi_parser.c:39:9      - Unknown word (YYEND)      -- #define YYEND cend
 ./ext/ffi/ffi_parser.c:45:13     - Unknown word (RPAREN)     -- #define YY__RPAREN 4
+./ext/ffi/tests/ffi_load_error.h:1:20      - Unknown word (donotexist) -- #define FFI_LIB "./donotexist.so"
 ./ext/fileinfo/libmagic/apprentice.c:1015:3    - Unknown word (ARGSUSED)    -- /*ARGSUSED*/
 ./ext/fileinfo/libmagic/apprentice.c:1098:11   - Unknown word (magindex)    -- uint32_t magindex, descindex, mimeindex
 ./ext/fileinfo/libmagic/apprentice.c:1098:21   - Unknown word (descindex)   -- uint32_t magindex, descindex, mimeindex, lineindex
@@ -6861,7 +6862,7 @@ Lines:
 ./ext/pdo_firebird/firebird_statement.c:39:3      - Unknown word (XSQLVAR)    -- XSQLVAR const *var = &sqlda
 ./ext/pdo_firebird/firebird_statement.c:39:32     - Unknown word (sqlvar)     -- const *var = &sqlda->sqlvar[i];
 ./ext/pdo_firebird/firebird_statement.c:41:12     - Unknown word (sqlind)     -- if (var->sqlind) {
-./ext/pdo_firebird/firebird_statement.c:538:16    - Unknown word (sqlname)    -- || (var->sqlname_length && !strncasecmp
+./ext/pdo_firebird/firebird_statement.c:540:16    - Unknown word (sqlname)    -- || (var->sqlname_length && !strncasecmp
 ./ext/pdo_mysql/mysql_driver.c:172:15    - Unknown word (nsql)       -- zend_string *nsql = NULL;
 ./ext/pdo_mysql/mysql_driver.c:273:40    - Unknown word (unfetched)  -- support - eat up all unfetched result sets */
 ./ext/pdo_mysql/mysql_statement.c:205:45    - Unknown word (MEDIUMINT)  -- buffer_length = MAX_MEDIUMINT_WIDTH + 1;
@@ -7748,8 +7749,8 @@ Lines:
 ./ext/sodium/sodium_pwhash.c:50:13     - Unknown word (smemlimit)  -- zend_long smemlimit = zval_get_long(opt
 ./ext/spl/php_spl.c:219:52    - Unknown word (clsses)     -- containing the names of all clsses and interfaces defined
 ./ext/spl/php_spl.c:293:16    - Unknown word (autoloader) -- /* {{{ Default autoloader implementation */
-./ext/spl/php_spl.c:416:13    - Unknown word (autoloaders) -- * because autoloaders may be added/removed
-./ext/spl/php_spl.c:673:8     - Unknown word (strg)        -- char *strg;
+./ext/spl/php_spl.c:426:13    - Unknown word (autoloaders) -- * because autoloaders may be added/removed
+./ext/spl/php_spl.c:690:8     - Unknown word (strg)        -- char *strg;
 ./ext/spl/spl_array.c:1217:12   - Unknown word (opos)       -- zend_long opos, position;
 ./ext/spl/spl_array.c:1554:18   - Unknown word (zflags)     -- zval *members, *zflags, *array;
 ./ext/spl/spl_array.c:1575:8    - Unknown word (outexcept)  -- goto outexcept;
@@ -8928,7 +8929,6 @@ Lines:
 ./sapi/cli/php_cli.c:172:12    - Unknown word (rzendextension) -- {13, 1, "rzendextension"},
 ./sapi/cli/php_cli.c:174:12    - Unknown word (rextinfo)       -- {14, 1, "rextinfo"},
 ./sapi/cli/php_cli.c:416:4     - Unknown word (overwritable)   -- /* overwritable ini defaults must be
-./sapi/cli/php_cli.c:539:70    - Unknown word (Othewrise)      -- underlying handles. Othewrise,
 ./sapi/cli/php_cli_server.c:2256:37   - Unknown word (voidify)    -- FAILURE on error? Or voidify as return value of function
 ./sapi/cli/php_cli_server.c:2392:63   - Unknown word (pport)      -- const char *addr, int *pport) {
 ./sapi/cli/php_cli_server.c:2446:43   - Unknown word (pdeathsig)  -- server_worker_install_pdeathsig(void)

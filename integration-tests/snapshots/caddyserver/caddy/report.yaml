@@ -5,7 +5,7 @@ Args: ["**/*.go"]
 Summary:
   files: 224
   filesWithIssues: 207
-  issues: 3468
+  issues: 3469
   errors: 0
 Errors: []
 
@@ -252,13 +252,14 @@ issues:
   - "modules/caddyhttp/matchers_test.go:735:17   	someparam   	U   	input: \"/?someparam\","
   - "modules/caddyhttp/matchers_test.go:765:17   	somekey     	U   	input: \"/?somekey=1\","
   - "modules/caddyhttp/matchers_test.go:812:43   	barfoo      	U   	Header{\"Field\": []string{\"barfoo\", \"foobar\"}},"
-  - "modules/caddyhttp/matchers.go:136:53    	escapings   	U   	including those with bad escapings or illegal characters"
-  - "modules/caddyhttp/matchers.go:598:22    	rawpath     	U   	// we can now treat rawpath globs (%*) as regular"
-  - "modules/caddyhttp/matchers.go:803:22    	WHATWG      	U   	// Despite the URL WHATWG spec mandating the use"
-  - "modules/caddyhttp/matchers.go:804:56    	Filippo     	U   	lementation is different, and Filippo Valsorda rightly wrote"
-  - "modules/caddyhttp/matchers.go:804:64    	Valsorda    	U   	different, and Filippo Valsorda rightly wrote:"
-  - "modules/caddyhttp/matchers.go:1372:15   	Adresses    	U   	// Some IPv6-Adresses can contain zone identifiers"
-  - "modules/caddyhttp/matchers.go:1409:22   	embedable   	U   	/ MatchRegexp is an embedable type for matching"
+  - "modules/caddyhttp/matchers.go:137:53    	escapings   	U   	including those with bad escapings or illegal characters"
+  - "modules/caddyhttp/matchers.go:143:66    	relyon      	U   	Backend applications relyon on query"
+  - "modules/caddyhttp/matchers.go:613:22    	rawpath     	U   	// we can now treat rawpath globs (%*) as regular"
+  - "modules/caddyhttp/matchers.go:818:22    	WHATWG      	U   	// Despite the URL WHATWG spec mandating the use"
+  - "modules/caddyhttp/matchers.go:819:56    	Filippo     	U   	lementation is different, and Filippo Valsorda rightly wrote"
+  - "modules/caddyhttp/matchers.go:819:64    	Valsorda    	U   	different, and Filippo Valsorda rightly wrote:"
+  - "modules/caddyhttp/matchers.go:1387:15   	Adresses    	U   	// Some IPv6-Adresses can contain zone identifiers"
+  - "modules/caddyhttp/matchers.go:1424:22   	embedable   	U   	/ MatchRegexp is an embedable type for matching"
   - "modules/caddyhttp/metrics_test.go:10:50     	testutil	U   	client_golang/prometheus/testutil\""
   - "modules/caddyhttp/metrics.go:128:26     	behaviour   	U   	Effectively the same behaviour as promhttp.InstrumentHandler"
   - "modules/caddyhttp/metrics.go:131:3      	ttfb        	U   	ttfb := time.Since(start"
