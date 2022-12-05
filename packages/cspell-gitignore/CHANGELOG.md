@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 6.17.0 (2022-12-05)
+
+**Note:** Version bump only for package cspell-gitignore
+
 # 6.16.0 (2022-12-02)
 
 **Note:** Version bump only for package cspell-gitignore
