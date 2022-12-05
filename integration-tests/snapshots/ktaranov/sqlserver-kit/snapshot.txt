@@ -3,7 +3,7 @@ Repository: ktaranov/sqlserver-kit
 Url: "https://github.com/ktaranov/sqlserver-kit.git"
 Args: ["**","--exclude=**/Backup/**"]
 Lines:
- CSpell: Files checked: 509, Issues found: 16863 in 485 files
+ CSpell: Files checked: 509, Issues found: 16865 in 485 files
  exit code: 1
 ./ADS/README.md:25:88     - Unknown word (vsix)       -- Release Date | Version  | .vsix download link
 ./ADS/README.md:30:15     - Unknown word (Dacpac)     -- | [SQL Server Dacpac]
@@ -2033,113 +2033,115 @@ Lines:
 ./SQL Server People.md:8:87      - Unknown word (rabryst)     -- Calgary | [@rabryst] | NULL
 ./SQL Server People.md:9:10      - Unknown word (Allred)      -- | Andrea Allred | [Andrea Allred
 ./SQL Server People.md:9:87      - Unknown word (royalsql)    -- Utah | [@royalsql] | NULL
-./SQL Server Trace Flag.md:103:145   - Unknown word (querytraceon) -- your queries: **&lt;querytraceon_hint ::= {QUERYTRACEON
-./SQL Server Trace Flag.md:1068:76   - Unknown word (AUTOGROW)      -- is controlled by the `AUTOGROW_SINGLE_FILE` and `AUTOGROW
-./SQL Server Trace Flag.md:1163:45   - Unknown word (syslocks)      -- blocked lock requests into syslocks<br />
-./SQL Server Trace Flag.md:1338:39   - Unknown word (Khen)          -- flag is also covered in Khen2005, p400, but with
-./SQL Server Trace Flag.md:1427:44   - Unknown word (NODELAY)       -- dataserver with TCP_NODELAY enabled<br />
-./SQL Server Trace Flag.md:144:102   - Unknown word (SHOWONRULES)  -- undocumented DBCC commands SHOWONRULES and SHOWOFFRULES.
-./SQL Server Trace Flag.md:144:118   - Unknown word (SHOWOFFRULES) -- commands SHOWONRULES and SHOWOFFRULES.
-./SQL Server Trace Flag.md:1517:9    - Unknown word (proxycfg)      -- - The [`proxycfg.exe`](https://docs.microsoft
-./SQL Server Trace Flag.md:1518:9    - Unknown word (netsh)         -- - The [`netsh.exe`]() utility on Windows
-./SQL Server Trace Flag.md:1525:115  - Unknown word (automerge)     -- 4: “...disables the automerge functionality for in
-./SQL Server Trace Flag.md:1525:153  - Unknown word (oltp)          -- functionality for in-memory oltp”<br />
-./SQL Server Trace Flag.md:1544:78   - Unknown word (etwcnf)        -- templates stored in the `etwcnf.xml` directory on SQL
-./SQL Server Trace Flag.md:1548:28   - Unknown word (Xevents)       -- Microsoft recommends using Xevents instead the template
-./SQL Server Trace Flag.md:1587:55   - Unknown word (PROCHDR)       -- maybe the plan as well? “PROCHDR”), as well as
-./SQL Server Trace Flag.md:1594:113  - Unknown word (HEURISTICJOINREORDER) -- Optimization Stage: HEURISTICJOINREORDER”. Maybe useful in combo
-./SQL Server Trace Flag.md:168:3     - Unknown word (LASJ)         -- | LASJNtoSM | Left Anti Semi
-./SQL Server Trace Flag.md:184:239   - Unknown word (SPID)         -- flag is lost when the SPID that opened the session
-./SQL Server Trace Flag.md:1982:47   - Unknown word (Sqlservr)             -- Facilitates capturing a Sqlservr.exe user-mode crash
-./SQL Server Trace Flag.md:202:71    - Unknown word (taranov)      -- issue or contact me (taranov.pro).
-./SQL Server Trace Flag.md:2377:110  - Unknown word (Backedup)             -- Causes LogMgr::ValidateBackedupBlock to be skipped during
-./SQL Server Trace Flag.md:2510:144  - Unknown word (reac)                 -- faster as the mirroring reac
-./SQL Server Trace Flag.md:2696:8    - Unknown word (globa)                -- Scope: globa only
-./SQL Server Trace Flag.md:2748:124  - Unknown word (MEMOBJLIST)           -- have replaced the DBCC MEMOBJLIST command) Bob Ward also
-./SQL Server Trace Flag.md:280:54    - Unknown word (NOWAIT)       -- command SHUTDOWN WITH NOWAIT can be used instead
-./SQL Server Trace Flag.md:2830:52   - Unknown word (rowcnt)               -- does not update the rowcnt column of the sysindexes
-./SQL Server Trace Flag.md:283:71    - Unknown word (LOADDB)       -- high number of [QDS_LOADDB](https://www.sqlskills
-./SQL Server Trace Flag.md:2864:89   - Unknown word (DSYNC)                -- THROUGH, mapping to O_DSYNC in the Host Extension
-./SQL Server Trace Flag.md:2870:98   - Unknown word (SQLPAL)               -- Server and are trusting SQLPAL, HE and the I/O subsystem
-./SQL Server Trace Flag.md:287:32    - Unknown word (spinlock)     -- Flag: 8099** enables a spinlock contention fix for high
-./SQL Server Trace Flag.md:2885:51   - Unknown word (Elmore)               -- Campbell, Bob Ward, Keith Elmore and I many years ago
-./SQL Server Trace Flag.md:2953:24   - Unknown word (OUTPUTBUFFER)         -- You can also use [DBCC OUTPUTBUFFER](https://docs.microsoft
-./SQL Server Trace Flag.md:2968:134  - Unknown word (serverfile)           -- add this to your RUN_serverfile. This will generate
-./SQL Server Trace Flag.md:305:123   - Unknown word (replmerg)     -- option when executing `replmerg.exe` from the command
-./SQL Server Trace Flag.md:3063:373  - Unknown word (cursoropen)           -- interesting info about sp_cursoropen<br />
-./SQL Server Trace Flag.md:3063:75   - Unknown word (alonger)              -- FORWARD_ONLY cursor takes alonger time to run in Microsoft
-./SQL Server Trace Flag.md:313:122   - Unknown word (msmerge)      -- Distribution server>..msmerge_history` table.<br
+./SQL Server Trace Flag.md:104:145   - Unknown word (querytraceon) -- your queries: **&lt;querytraceon_hint ::= {QUERYTRACEON
+./SQL Server Trace Flag.md:1069:76   - Unknown word (AUTOGROW)      -- is controlled by the `AUTOGROW_SINGLE_FILE` and `AUTOGROW
+./SQL Server Trace Flag.md:1164:45   - Unknown word (syslocks)      -- blocked lock requests into syslocks<br />
+./SQL Server Trace Flag.md:1339:39   - Unknown word (Khen)          -- flag is also covered in Khen2005, p400, but with
+./SQL Server Trace Flag.md:1428:44   - Unknown word (NODELAY)       -- dataserver with TCP_NODELAY enabled<br />
+./SQL Server Trace Flag.md:145:102   - Unknown word (SHOWONRULES)  -- undocumented DBCC commands SHOWONRULES and SHOWOFFRULES.
+./SQL Server Trace Flag.md:145:118   - Unknown word (SHOWOFFRULES) -- commands SHOWONRULES and SHOWOFFRULES.
+./SQL Server Trace Flag.md:1518:9    - Unknown word (proxycfg)      -- - The [`proxycfg.exe`](https://docs.microsoft
+./SQL Server Trace Flag.md:1519:9    - Unknown word (netsh)         -- - The [`netsh.exe`]() utility on Windows
+./SQL Server Trace Flag.md:1526:115  - Unknown word (automerge)     -- 4: “...disables the automerge functionality for in
+./SQL Server Trace Flag.md:1526:153  - Unknown word (oltp)          -- functionality for in-memory oltp”<br />
+./SQL Server Trace Flag.md:1545:78   - Unknown word (etwcnf)        -- templates stored in the `etwcnf.xml` directory on SQL
+./SQL Server Trace Flag.md:1549:28   - Unknown word (Xevents)       -- Microsoft recommends using Xevents instead the template
+./SQL Server Trace Flag.md:1588:55   - Unknown word (PROCHDR)       -- maybe the plan as well? “PROCHDR”), as well as
+./SQL Server Trace Flag.md:1595:113  - Unknown word (HEURISTICJOINREORDER) -- Optimization Stage: HEURISTICJOINREORDER”. Maybe useful in combo
+./SQL Server Trace Flag.md:169:3     - Unknown word (LASJ)         -- | LASJNtoSM | Left Anti Semi
+./SQL Server Trace Flag.md:185:239   - Unknown word (SPID)         -- flag is lost when the SPID that opened the session
+./SQL Server Trace Flag.md:1983:47   - Unknown word (Sqlservr)             -- Facilitates capturing a Sqlservr.exe user-mode crash
+./SQL Server Trace Flag.md:203:71    - Unknown word (taranov)      -- issue or contact me (taranov.pro).
+./SQL Server Trace Flag.md:2378:110  - Unknown word (Backedup)             -- Causes LogMgr::ValidateBackedupBlock to be skipped during
+./SQL Server Trace Flag.md:2511:144  - Unknown word (reac)                 -- faster as the mirroring reac
+./SQL Server Trace Flag.md:2697:8    - Unknown word (globa)                -- Scope: globa only
+./SQL Server Trace Flag.md:2749:124  - Unknown word (MEMOBJLIST)           -- have replaced the DBCC MEMOBJLIST command) Bob Ward also
+./SQL Server Trace Flag.md:281:54    - Unknown word (NOWAIT)       -- command SHUTDOWN WITH NOWAIT can be used instead
+./SQL Server Trace Flag.md:2831:52   - Unknown word (rowcnt)               -- does not update the rowcnt column of the sysindexes
+./SQL Server Trace Flag.md:284:71    - Unknown word (LOADDB)       -- high number of [QDS_LOADDB](https://www.sqlskills
+./SQL Server Trace Flag.md:2865:89   - Unknown word (DSYNC)                -- THROUGH, mapping to O_DSYNC in the Host Extension
+./SQL Server Trace Flag.md:2871:98   - Unknown word (SQLPAL)               -- Server and are trusting SQLPAL, HE and the I/O subsystem
+./SQL Server Trace Flag.md:2886:51   - Unknown word (Elmore)               -- Campbell, Bob Ward, Keith Elmore and I many years ago
+./SQL Server Trace Flag.md:288:32    - Unknown word (spinlock)     -- Flag: 8099** enables a spinlock contention fix for high
+./SQL Server Trace Flag.md:2954:24   - Unknown word (OUTPUTBUFFER)         -- You can also use [DBCC OUTPUTBUFFER](https://docs.microsoft
+./SQL Server Trace Flag.md:2969:134  - Unknown word (serverfile)           -- add this to your RUN_serverfile. This will generate
+./SQL Server Trace Flag.md:3064:373  - Unknown word (cursoropen)           -- interesting info about sp_cursoropen<br />
+./SQL Server Trace Flag.md:3064:75   - Unknown word (alonger)              -- FORWARD_ONLY cursor takes alonger time to run in Microsoft
+./SQL Server Trace Flag.md:306:123   - Unknown word (replmerg)     -- option when executing `replmerg.exe` from the command
+./SQL Server Trace Flag.md:314:122   - Unknown word (msmerge)      -- Distribution server>..msmerge_history` table.<br
 ./SQL Server Trace Flag.md:31:145    - Unknown word (Morelli)    -- server-flags/) (by Aaron Morelli)
-./SQL Server Trace Flag.md:3256:105  - Unknown word (HOTFIXES)             -- the QUERY_OPTIMIZER_HOTFIXES option in [ALTER DATABASE
-./SQL Server Trace Flag.md:3297:22   - Unknown word (minidump)             -- Function: Generate a minidump file whenever an entry
-./SQL Server Trace Flag.md:329:63    - Unknown word (Replmerg)     -- ynchronization, you can start Replmerg.exe and pass the -T
-./SQL Server Trace Flag.md:3361:50   - Unknown word (affinitied)           -- from running any non-affinitied tasks.<br />
+./SQL Server Trace Flag.md:3257:105  - Unknown word (HOTFIXES)             -- the QUERY_OPTIMIZER_HOTFIXES option in [ALTER DATABASE
+./SQL Server Trace Flag.md:3298:22   - Unknown word (minidump)             -- Function: Generate a minidump file whenever an entry
+./SQL Server Trace Flag.md:330:63    - Unknown word (Replmerg)     -- ynchronization, you can start Replmerg.exe and pass the -T
+./SQL Server Trace Flag.md:3362:50   - Unknown word (affinitied)           -- from running any non-affinitied tasks.<br />
 ./SQL Server Trace Flag.md:33:4      - Unknown word (Yusuf)      -- - [Yusuf Anis trace flag table
-./SQL Server Trace Flag.md:3472:23   - Unknown word (gamsgam)              -- Link: [Github disable gamsgam]<br />
-./SQL Server Trace Flag.md:3544:183  - Unknown word (Dima’s)               -- related bitmap, etc. Dima’s article is a must-read
-./SQL Server Trace Flag.md:3552:11   - Unknown word (queryprocessor)       -- Link: www.queryprocessor.com/hash-join-execution
-./SQL Server Trace Flag.md:3596:134  - Unknown word (UPDSTATS)             -- acquires `X LOCK` on UPDSTATS resource on the table
-./SQL Server Trace Flag.md:3636:69   - Unknown word (dbcursorfetchex)      -- return codes when calling dbcursorfetchex and the resulting cursor
-./SQL Server Trace Flag.md:3642:56   - Unknown word (nonstatic)            -- behavior of closing nonstatic cursors regardless of
-./SQL Server Trace Flag.md:3672:137  - Unknown word (docidfilter)          -- caused by blocking on the docidfilter internal table.<br
-./SQL Server Trace Flag.md:372:29    - Unknown word (bucketization) -- Function: Force server side bucketization.
-./SQL Server Trace Flag.md:3971:81   - Unknown word (TOPLEVELBLOCKALLOCATOR) -- and the `SOS_MEMORY_TOPLEVELBLOCKALLOCATOR` wait occurs.<br />
+./SQL Server Trace Flag.md:3473:23   - Unknown word (gamsgam)              -- Link: [Github disable gamsgam]<br />
+./SQL Server Trace Flag.md:3545:183  - Unknown word (Dima’s)               -- related bitmap, etc. Dima’s article is a must-read
+./SQL Server Trace Flag.md:3553:11   - Unknown word (queryprocessor)       -- Link: www.queryprocessor.com/hash-join-execution
+./SQL Server Trace Flag.md:3597:134  - Unknown word (UPDSTATS)             -- acquires `X LOCK` on UPDSTATS resource on the table
+./SQL Server Trace Flag.md:3637:69   - Unknown word (dbcursorfetchex)      -- return codes when calling dbcursorfetchex and the resulting cursor
+./SQL Server Trace Flag.md:3643:56   - Unknown word (nonstatic)            -- behavior of closing nonstatic cursors regardless of
+./SQL Server Trace Flag.md:3673:137  - Unknown word (docidfilter)          -- caused by blocking on the docidfilter internal table.<br
+./SQL Server Trace Flag.md:373:29    - Unknown word (bucketization) -- Function: Force server side bucketization.
+./SQL Server Trace Flag.md:3972:81   - Unknown word (TOPLEVELBLOCKALLOCATOR) -- and the `SOS_MEMORY_TOPLEVELBLOCKALLOCATOR` wait occurs.<br />
 ./SQL Server Trace Flag.md:39:46     - Unknown word (QUERYRULEOFF) -- Optimizer Rules with QUERYRULEOFF](https://www.mssqltips
-./SQL Server Trace Flag.md:4004:65   - Unknown word (Logreader)              -- DELETE/INSERT," the Logreader send UDPATE command
-./SQL Server Trace Flag.md:4004:80   - Unknown word (UDPATE)                 -- the Logreader send UDPATE command to the subscriber
-./SQL Server Trace Flag.md:4041:60   - Unknown word (vupgrade)               -- master].[sys].[sp_cdc_vupgrade]`<br />
-./SQL Server Trace Flag.md:4182:131  - Unknown word (showplan)               -- be put into the XML showplan.<br />
-./SQL Server Trace Flag.md:4245:24   - Unknown word (Dimitriy)               -- Function: According to Dimitriy Pilugin, disables the
-./SQL Server Trace Flag.md:4332:72   - Unknown word (KEEPFIXED)              -- same effect as OPTION(KEEPFIXED PLAN)<br />
-./SQL Server Trace Flag.md:4451:123  - Unknown word (optimisations)          -- disables a number of optimisations, not just the one
-./SQL Server Trace Flag.md:4452:124  - Unknown word (Pqte)                   -- CPhyOp_StreamUpdate::PqteConvert)”<br />
-./SQL Server Trace Flag.md:4460:80   - Unknown word (autoparameterized)      -- log when it has been autoparameterized.<br />
-./SQL Server Trace Flag.md:4567:118  - Unknown word (recompiles)             -- trigger execution plan recompiles repeatedly”<br />
-./SQL Server Trace Flag.md:4642:73   - Unknown word (Dima)                   -- FPrefetchAllowedForDML)” Dima: “Disables both [NLoop
+./SQL Server Trace Flag.md:4005:65   - Unknown word (Logreader)              -- DELETE/INSERT," the Logreader send UDPATE command
+./SQL Server Trace Flag.md:4005:80   - Unknown word (UDPATE)                 -- the Logreader send UDPATE command to the subscriber
+./SQL Server Trace Flag.md:4042:60   - Unknown word (vupgrade)               -- master].[sys].[sp_cdc_vupgrade]`<br />
+./SQL Server Trace Flag.md:4183:131  - Unknown word (showplan)               -- be put into the XML showplan.<br />
+./SQL Server Trace Flag.md:4246:24   - Unknown word (Dimitriy)               -- Function: According to Dimitriy Pilugin, disables the
+./SQL Server Trace Flag.md:4333:72   - Unknown word (KEEPFIXED)              -- same effect as OPTION(KEEPFIXED PLAN)<br />
+./SQL Server Trace Flag.md:4452:123  - Unknown word (optimisations)          -- disables a number of optimisations, not just the one
+./SQL Server Trace Flag.md:4453:124  - Unknown word (Pqte)                   -- CPhyOp_StreamUpdate::PqteConvert)”<br />
+./SQL Server Trace Flag.md:4461:80   - Unknown word (autoparameterized)      -- log when it has been autoparameterized.<br />
+./SQL Server Trace Flag.md:4568:118  - Unknown word (recompiles)             -- trigger execution plan recompiles repeatedly”<br />
+./SQL Server Trace Flag.md:4643:73   - Unknown word (Dima)                   -- FPrefetchAllowedForDML)” Dima: “Disables both [NLoop
 ./SQL Server Trace Flag.md:46:62     - Unknown word (sqlcrossjoin) -- lcrossjoin.wordpress.com) | [@sqlcrossjoin](https://twitter.com
-./SQL Server Trace Flag.md:4718:11   - Unknown word (Ccan)                   -- Function: Ccan be used to disable lazy
-./SQL Server Trace Flag.md:4812:38   - Unknown word (aggreation)             -- Appears to disable partial aggreation.<br />
-./SQL Server Trace Flag.md:4877:30   - Unknown word (pushdown)               -- Disable [aggregate pushdown](http://www.nikoport
-./SQL Server Trace Flag.md:4924:129  - Unknown word (CTFP)                   -- parallelism based on CTFP. Full effect unknown
-./SQL Server Trace Flag.md:5019:1    - Unknown word (Sunil)                  -- Sunil Agarwal also used this
-./SQL Server Trace Flag.md:5019:7    - Unknown word (Agarwal)                -- Sunil Agarwal also used this trace
+./SQL Server Trace Flag.md:4719:11   - Unknown word (Ccan)                   -- Function: Ccan be used to disable lazy
+./SQL Server Trace Flag.md:4813:38   - Unknown word (aggreation)             -- Appears to disable partial aggreation.<br />
+./SQL Server Trace Flag.md:4878:30   - Unknown word (pushdown)               -- Disable [aggregate pushdown](http://www.nikoport
+./SQL Server Trace Flag.md:4925:129  - Unknown word (CTFP)                   -- parallelism based on CTFP. Full effect unknown
+./SQL Server Trace Flag.md:5020:1    - Unknown word (Sunil)                  -- Sunil Agarwal also used this
+./SQL Server Trace Flag.md:5020:7    - Unknown word (Agarwal)                -- Sunil Agarwal also used this trace
 ./SQL Server Trace Flag.md:50:8      - Unknown word (Utterström)   -- - Lars Utterström
 ./SQL Server Trace Flag.md:51:10     - Unknown word (Höglund)      -- - Martin Höglund
-./SQL Server Trace Flag.md:5201:169  - Unknown word (sublinear)              -- patibility settings where the sublinear behaviour is default
+./SQL Server Trace Flag.md:5202:169  - Unknown word (sublinear)              -- patibility settings where the sublinear behaviour is default
 ./SQL Server Trace Flag.md:52:3      - Unknown word (Håkan)        -- - Håkan Winther
-./SQL Server Trace Flag.md:5327:15   - Unknown word (traceflag)              -- Because this traceflag is instance level, it
+./SQL Server Trace Flag.md:5328:15   - Unknown word (traceflag)              -- Because this traceflag is instance level, it
 ./SQL Server Trace Flag.md:53:3      - Unknown word (Toine)        -- - Toine Rozemeijer
 ./SQL Server Trace Flag.md:53:9      - Unknown word (Rozemeijer)   -- - Toine Rozemeijer
-./SQL Server Trace Flag.md:5521:162  - Unknown word (whith)                  -- This TF is additive whith [12312](#12312), [1
+./SQL Server Trace Flag.md:5522:162  - Unknown word (whith)                  -- This TF is additive whith [12312](#12312), [1
 ./SQL Server Trace Flag.md:55:9      - Unknown word (Niederstadt)  -- - Lonny Niederstadt ([b](http://sql-sasquatch
 ./SQL Server Trace Flag.md:56:11     - Unknown word (Kukuła)       -- - Andrzej Kukuła
 ./SQL Server Trace Flag.md:56:3      - Unknown word (Andrzej)      -- - Andrzej Kukuła
 ./SQL Server Trace Flag.md:57:23     - Unknown word (gtihub)       -- Alexander Titenko ([gtihub](https://github.com
 ./SQL Server Trace Flag.md:60:64     - Unknown word (erinstellato) -- com/blogs/erin/) | [@erinstellato](https://twitter.com
 ./SQL Server Trace Flag.md:61:3      - Unknown word (Darik)        -- - Darik Hammer ([b](http://www
-./SQL Server Trace Flag.md:629:175   - Unknown word (FORCEPLAN)     -- One can also use SET FORCEPLAN ON to disable the costing
+./SQL Server Trace Flag.md:630:175   - Unknown word (FORCEPLAN)     -- One can also use SET FORCEPLAN ON to disable the costing
 ./SQL Server Trace Flag.md:67:10     - Unknown word (Nagorskiy)    -- - Alexey Nagorskiy ([github](https://github
 ./SQL Server Trace Flag.md:67:3      - Unknown word (Alexey)       -- - Alexey Nagorskiy ([github]
-./SQL Server Trace Flag.md:714:160   - Unknown word (rowgroups)     -- compresses columnstore index rowgroups with uncompressed data
+./SQL Server Trace Flag.md:715:160   - Unknown word (rowgroups)     -- compresses columnstore index rowgroups with uncompressed data
 ./SQL Server Trace Flag.md:71:10     - Unknown word (Isakov)       -- - Victor Isakov ([b](https://victorisakov
-./SQL Server Trace Flag.md:727:101   - Unknown word (Optimiser)     -- eliminated by the Query Optimiser right into the error
+./SQL Server Trace Flag.md:728:101   - Unknown word (Optimiser)     -- eliminated by the Query Optimiser right into the error
 ./SQL Server Trace Flag.md:74:16     - Unknown word (Rastogi)      -- - Prince Kumar Rastogi ([b](https://www.sqlservergee
 ./SQL Server Trace Flag.md:78:3      - Unknown word (Pavel)        -- - Pavel Málek ([t](https://twitter
 ./SQL Server Trace Flag.md:78:9      - Unknown word (Málek)        -- - Pavel Málek ([t](https://twitter
-./SQL Server Trace Flag.md:816:59    - Unknown word (dataserver)    -- logging for the entire SQL dataserver<br />
+./SQL Server Trace Flag.md:817:59    - Unknown word (dataserver)    -- logging for the entire SQL dataserver<br />
 ./SQL Server Trace Flag.md:81:11     - Unknown word (Kukula)       -- - Andrzej Kukula
-./SQL Server Trace Flag.md:822:101   - Unknown word (actuall)       -- post! The flag # may actuall by 671.<br />
-./SQL Server Trace Flag.md:822:29    - Unknown word (deallocation)  -- Function: Disables deferred deallocation. But note Paul White
-./SQL Server Trace Flag.md:831:122   - Unknown word (tableoption)   -- load, or when the `sp_tableoption` table lock on bulk
+./SQL Server Trace Flag.md:823:101   - Unknown word (actuall)       -- post! The flag # may actuall by 671.<br />
+./SQL Server Trace Flag.md:823:29    - Unknown word (deallocation)  -- Function: Disables deferred deallocation. But note Paul White
+./SQL Server Trace Flag.md:832:122   - Unknown word (tableoption)   -- load, or when the `sp_tableoption` table lock on bulk
 ./SQL Server Trace Flag.md:83:15     - Unknown word (Dijk)         -- - Wilfred van Dijk
-./SQL Server Trace Flag.md:867:175   - Unknown word (workfile)      -- not including sort and workfile I/Os.
-./SQL Server Trace Flag.md:915:20    - Unknown word (superlatches)  -- Function: Disable [superlatches](https://www.sqlshack
-./SQL Server Trace Flag.md:916:58    - Unknown word (sublatches)    -- superlatches (also called sublatches) were introduced to
-./SQL Server Trace Flag.md:917:3     - Unknown word (Superlatches)  -- **Superlatches are used by SQL Server
-./SQL Server Trace Flag.md:918:3     - Unknown word (Superlatch)    -- A Superlatch will behave as a single
-./SQL Server Trace Flag.md:918:49    - Unknown word (sublatch)      -- a single latch with sublatch structures and there
-./SQL Server Trace Flag.md:919:11    - Unknown word (superlatch)    -- So when a superlatch is created, the CPU
-./SQL Server Trace Flag.md:964:45    - Unknown word (treate)        -- forces SQL Server to treate all NUMA memory as
+./SQL Server Trace Flag.md:85:10     - Unknown word (Zocco)        -- - Danilo Zocco (https://github.com
+./SQL Server Trace Flag.md:85:3      - Unknown word (Danilo)       -- - Danilo Zocco (https://github
+./SQL Server Trace Flag.md:868:175   - Unknown word (workfile)      -- not including sort and workfile I/Os.
+./SQL Server Trace Flag.md:916:20    - Unknown word (superlatches)  -- Function: Disable [superlatches](https://www.sqlshack
+./SQL Server Trace Flag.md:917:58    - Unknown word (sublatches)    -- superlatches (also called sublatches) were introduced to
+./SQL Server Trace Flag.md:918:3     - Unknown word (Superlatches)  -- **Superlatches are used by SQL Server
+./SQL Server Trace Flag.md:919:3     - Unknown word (Superlatch)    -- A Superlatch will behave as a single
+./SQL Server Trace Flag.md:919:49    - Unknown word (sublatch)      -- a single latch with sublatch structures and there
+./SQL Server Trace Flag.md:920:11    - Unknown word (superlatch)    -- So when a superlatch is created, the CPU
+./SQL Server Trace Flag.md:965:45    - Unknown word (treate)        -- forces SQL Server to treate all NUMA memory as
 ./SQL Server Version.md:124:77    - Unknown word (sqlncli)    -- individual msi file (e.g. sqlncli.msi)
 ./SQL Server Version.md:1380:160  - Unknown word (SQLTEST)       -- Login failed for user SQLTEST\AgentService. Reason
 ./SQL Server Version.md:1519:92   - Unknown word (republisher)   -- a subscription to a republisher that is in a merge publicatio
