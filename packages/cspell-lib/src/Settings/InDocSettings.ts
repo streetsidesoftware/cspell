@@ -1,6 +1,7 @@
 import { opAppend, opFilter, opMap, pipeSync } from '@cspell/cspell-pipe/sync';
 import type { CSpellUserSettings } from '@cspell/cspell-types';
 import { genSequence, Sequence } from 'gensequence';
+import { ExtendedSuggestion } from '../Models/Suggestion';
 import { getSpellDictInterface } from '../SpellingDictionary';
 import * as Text from '../util/text';
 import { clean, isDefined } from '../util/util';
@@ -66,6 +67,12 @@ const preferredDirectives = [
 ];
 
 const allDirectives = new Set(preferredDirectives.concat(officialDirectives));
+const allDirectiveSuggestions: ExtendedSuggestion[] = [
+    ...pipeSync(
+        allDirectives,
+        opMap((word) => ({ word }))
+    ),
+];
 
 const dictInDocSettings = getSpellDictInterface().createSpellingDictionary(
     allDirectives,
@@ -90,6 +97,7 @@ export interface DirectiveIssue {
     text: string;
     message: string;
     suggestions: string[];
+    suggestionsEx: ExtendedSuggestion[];
 }
 
 export function getInDocumentSettings(text: string): CSpellUserSettings {
@@ -156,19 +164,35 @@ function parseSettingMatchValidation(matchArray: RegExpMatchArray): DirectiveIss
     // No matches were found, let make some suggestions.
     const dictSugs = dictInDocSettings
         .suggest(text, { ignoreCase: false })
-        .map((sug) => sug.word)
-        .filter((a) => !noSuggestDirectives.has(a));
-    const sugs = new Set(pipeSync(dictSugs, opAppend(allDirectives)));
-    const suggestions = [...sugs].slice(0, 8);
+        .map(({ word, isPreferred }) => (isPreferred ? { word, isPreferred } : { word }))
+        .filter((a) => !noSuggestDirectives.has(a.word));
+    const sugs = pipeSync(dictSugs, opAppend(allDirectiveSuggestions), filterUniqueSuggestions);
+    const suggestionsEx = [...sugs].slice(0, 8);
+    const suggestions = suggestionsEx.map((s) => s.word);
 
     const issue: DirectiveIssue = {
         range: [start, end],
         text,
         message: issueMessages.unknownDirective,
         suggestions,
+        suggestionsEx,
     };
 
     return issue;
+}
+
+function* filterUniqueSuggestions(sugs: Iterable<ExtendedSuggestion>): Iterable<ExtendedSuggestion> {
+    const map = new Map<string, ExtendedSuggestion>();
+
+    for (const sug of sugs) {
+        const existing = map.get(sug.word);
+        if (existing) {
+            if (sug.isPreferred) {
+                existing.isPreferred = true;
+            }
+        }
+        yield sug;
+    }
 }
 
 function parseSettingMatch(matchArray: RegExpMatchArray): CSpellUserSettings[] {

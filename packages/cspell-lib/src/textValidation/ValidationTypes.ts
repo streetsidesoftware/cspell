@@ -1,4 +1,5 @@
-import { MappedText, TextOffset as TextOffsetRW, Issue } from '@cspell/cspell-types';
+import type { MappedText, TextOffset as TextOffsetRW } from '@cspell/cspell-types';
+import type { ValidationResult } from '../Models/ValidationResult';
 
 export type TextOffsetRO = Readonly<TextOffsetRW>;
 
@@ -27,12 +28,6 @@ export interface WordRangeAcc {
     textOffset: TextOffsetRO;
     isIncluded: boolean;
     rangePos: number;
-}
-
-export interface ValidationResult extends TextOffsetRW, Pick<Issue, 'message' | 'issueType'> {
-    line: TextOffsetRW;
-    isFlagged?: boolean | undefined;
-    isFound?: boolean | undefined;
 }
 
 export type ValidationResultRO = Readonly<ValidationResult>;

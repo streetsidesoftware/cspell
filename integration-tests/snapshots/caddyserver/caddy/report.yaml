@@ -5,7 +5,7 @@ Args: ["**/*.go"]
 Summary:
   files: 224
   filesWithIssues: 207
-  issues: 3467
+  issues: 3469
   errors: 0
 Errors: []
 
@@ -26,11 +26,11 @@ issues:
   - "admin.go:434:33     	zerossl         	U   	RawMessage(`{\"module\": \"zerossl\"}`),"
   - "admin.go:527:16     	Protos          	U   	tlsConfig.NextProtos = nil // this server"
   - "admin.go:531:23     	stdlib          	U   	/ convert logger to stdlib so it can be used by"
-  - "admin.go:798:23     	Redir           	U   	if err == errInternalRedir {"
-  - "admin.go:901:29     	hasher          	U   	etagHasher returns a the hasher we used on the config"
-  - "admin.go:1029:33    	unsynchronized  	U   	This is a low-level, unsynchronized function; most callers"
-  - "admin.go:1065:31    	elems           	U   	array = append(array, elems...)"
-  - "admin.go:1299:21    	pidfile         	U   	// PIDFile writes a pidfile to the file at filename"
+  - "admin.go:801:23     	Redir           	U   	if err == errInternalRedir {"
+  - "admin.go:904:29     	hasher          	U   	etagHasher returns a the hasher we used on the config"
+  - "admin.go:1032:33    	unsynchronized  	U   	This is a low-level, unsynchronized function; most callers"
+  - "admin.go:1068:31    	elems           	U   	array = append(array, elems...)"
+  - "admin.go:1302:21    	pidfile         	U   	// PIDFile writes a pidfile to the file at filename"
   - "caddy.go:691:24     	byeee   	U   	logger.Warn(\"exiting; byeee!! 👋\")"
   - "caddy.go:834:47     	ldflags 	U   	during `go build` with `-ldflags`:"
   - "caddy.go:850:28     	devel   	U   	this function returns \"(devel)\" because Go uses that"
@@ -252,13 +252,14 @@ issues:
   - "modules/caddyhttp/matchers_test.go:735:17   	someparam   	U   	input: \"/?someparam\","
   - "modules/caddyhttp/matchers_test.go:765:17   	somekey     	U   	input: \"/?somekey=1\","
   - "modules/caddyhttp/matchers_test.go:812:43   	barfoo      	U   	Header{\"Field\": []string{\"barfoo\", \"foobar\"}},"
-  - "modules/caddyhttp/matchers.go:136:53    	escapings   	U   	including those with bad escapings or illegal characters"
-  - "modules/caddyhttp/matchers.go:598:22    	rawpath     	U   	// we can now treat rawpath globs (%*) as regular"
-  - "modules/caddyhttp/matchers.go:803:22    	WHATWG      	U   	// Despite the URL WHATWG spec mandating the use"
-  - "modules/caddyhttp/matchers.go:804:56    	Filippo     	U   	lementation is different, and Filippo Valsorda rightly wrote"
-  - "modules/caddyhttp/matchers.go:804:64    	Valsorda    	U   	different, and Filippo Valsorda rightly wrote:"
-  - "modules/caddyhttp/matchers.go:1372:15   	Adresses    	U   	// Some IPv6-Adresses can contain zone identifiers"
-  - "modules/caddyhttp/matchers.go:1409:22   	embedable   	U   	/ MatchRegexp is an embedable type for matching"
+  - "modules/caddyhttp/matchers.go:137:53    	escapings   	U   	including those with bad escapings or illegal characters"
+  - "modules/caddyhttp/matchers.go:143:66    	relyon      	U   	Backend applications relyon on query"
+  - "modules/caddyhttp/matchers.go:613:22    	rawpath     	U   	// we can now treat rawpath globs (%*) as regular"
+  - "modules/caddyhttp/matchers.go:818:22    	WHATWG      	U   	// Despite the URL WHATWG spec mandating the use"
+  - "modules/caddyhttp/matchers.go:819:56    	Filippo     	U   	lementation is different, and Filippo Valsorda rightly wrote"
+  - "modules/caddyhttp/matchers.go:819:64    	Valsorda    	U   	different, and Filippo Valsorda rightly wrote:"
+  - "modules/caddyhttp/matchers.go:1387:15   	Adresses    	U   	// Some IPv6-Adresses can contain zone identifiers"
+  - "modules/caddyhttp/matchers.go:1424:22   	embedable   	U   	/ MatchRegexp is an embedable type for matching"
   - "modules/caddyhttp/metrics_test.go:10:50     	testutil	U   	client_golang/prometheus/testutil\""
   - "modules/caddyhttp/metrics.go:128:26     	behaviour   	U   	Effectively the same behaviour as promhttp.InstrumentHandler"
   - "modules/caddyhttp/metrics.go:131:3      	ttfb        	U   	ttfb := time.Since(start"
@@ -352,6 +353,7 @@ issues:
   - "modules/caddypki/acmeserver/acmeserver.go:204:17    	bbolt       	U   	Type: \"bbolt\","
   - "modules/caddypki/ca.go:32:24    	truststore  	U   	github.com/smallstep/truststore\""
   - "modules/caddypki/ca.go:184:31   	Smallstep   	U   	NewAuthority returns a new Smallstep-powered signing authority"
+  - "modules/caddypki/certificates.go:22:21      	keyutil 	U   	\"go.step.sm/crypto/keyutil\""
   - "modules/caddypki/pki.go:94:69   	unconfigured	U   	installation disabled; unconfigured clients may show warnings"
   - "modules/caddytls/acmeissuer.go:55:27    	mothership  	U   	not sent to any Caddy mothership or used for any purpose"
   - "modules/caddytls/acmeissuer.go:142:45   	libdns      	U   	implemented for the libdns APIs instead."

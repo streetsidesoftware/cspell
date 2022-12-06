@@ -1,5 +1,6 @@
 import type { CSpellSettings } from '@cspell/cspell-types';
 import { loremIpsum } from 'lorem-ipsum';
+import type { ValidationIssue } from '.';
 import { mergeSettings } from '../Settings';
 import { getDefaultSettings } from '../Settings/DefaultSettings';
 import * as tds from '../Settings/TextDocumentSettings';
@@ -9,6 +10,8 @@ import * as Validator from './validator';
 
 const ac = expect.arrayContaining;
 const notAc = expect.not.arrayContaining;
+
+const oc = expect.objectContaining;
 
 describe('Validator', () => {
     test('validates the validator', async () => {
@@ -228,14 +231,14 @@ const defaultSettings: CSpellSettings = {
     enabledLanguageIds: ['plaintext', 'javascript'],
 };
 
-function mValIssue(text: string, ...parts: Partial<Validator.ValidationIssue>[]): Validator.ValidationIssue {
-    const issue: Partial<Validator.ValidationIssue> = {
+function mValIssue(text: string, ...parts: Partial<ValidationIssue>[]): ValidationIssue {
+    const issue: Partial<ValidationIssue> = {
         text,
     };
     for (const p of parts) {
         Object.assign(issue, p);
     }
-    return oc<Validator.ValidationIssue>(issue);
+    return oc(issue);
 }
 
 function sampleSettings() {
@@ -244,8 +247,4 @@ function sampleSettings() {
 
 function getSettings(text: string, languageId: string) {
     return tds.combineTextAndLanguageSettings(defaultSettings, text, languageId);
-}
-
-function oc<T>(t: Partial<T>): T {
-    return expect.objectContaining(t);
 }

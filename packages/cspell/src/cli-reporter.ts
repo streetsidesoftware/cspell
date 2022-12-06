@@ -198,7 +198,7 @@ function formatIssue(templateStr: string, issue: ReporterIssue, maxIssueTextWidt
     const rowText = row.toString();
     const colText = col.toString();
     const padRowCol = ' '.repeat(Math.max(1, 8 - (rowText.length + colText.length)));
-    const suggestions = issue.suggestions?.join(', ') || '';
+    const suggestions = formatSuggestions(issue);
     const msg = issue.message || (issue.isFlagged ? 'Forbidden word' : 'Unknown word');
     const message = issue.isFlagged ? `{yellow ${msg}}` : msg;
 
@@ -219,6 +219,18 @@ function formatIssue(templateStr: string, issue: ReporterIssue, maxIssueTextWidt
     const t = template(templateStr.replace(/\$message/g, message));
 
     return substitute(chalk(t), substitutions);
+}
+
+function formatSuggestions(issue: Issue): string {
+    if (issue.suggestionsEx) {
+        return issue.suggestionsEx
+            .map((sug) => (sug.isPreferred ? chalk.italic(chalk.bold(sug.word)) + '*' : sug.word))
+            .join(', ');
+    }
+    if (issue.suggestions) {
+        return issue.suggestions.join(', ');
+    }
+    return '';
 }
 
 class TS extends Array<string> {

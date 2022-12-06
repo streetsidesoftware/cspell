@@ -338,7 +338,7 @@ info
 info	Checking: ./src/app.test.ts, File type: auto, Language: default
 info	Checked: ./src/app.test.ts, File type: typescript, Language: en ... Issues: 0 0.00S
 info	Config file Used: ./cspell.json
-info	Dictionaries Used: backwards-compatibility, companies, filetypes, public-licenses, softwareTerms, workspace, aws, cryptocurrencies, en_us, fullstack, node, npm, typescript
+info	Dictionaries Used: companies, filetypes, public-licenses, softwareTerms, workspace, aws, cryptocurrencies, en_us, fullstack, node, npm, typescript
 error	 0.00ms
 error	CSpell: Files checked: 1, Issues found: 0 in 0 files"
 `;
@@ -395,7 +395,7 @@ info
 info	Checking: ./fixtures/issue-2998/fix-words.txt, File type: fix, Language: default
 info	Checked: ./fixtures/issue-2998/fix-words.txt, File type: fix, Language: en ... Issues: 0 0.00S
 info	Config file Used: ./fixtures/issue-2998/cspell.json
-info	Dictionaries Used: backwards-compatibility, companies, filetypes, public-licenses, softwareTerms, aws, cryptocurrencies, en_us, fixture
+info	Dictionaries Used: companies, filetypes, public-licenses, softwareTerms, aws, cryptocurrencies, en_us, fixture
 error	 0.00ms
 error	CSpell: Files checked: 1, Issues found: 0 in 0 files"
 `;
@@ -726,7 +726,6 @@ café - [ignoreWords]*       From Settings \`ignoreWords\`
 café - [words]*             From Settings \`words\`
 café - ada                  ../../node_modules/.pnpm...ell/dict-ada/dict/ada.txt
 café - aws*                 ../../node_modules/.pnpm...spell/dict-aws/aws.txt.gz
-café - backwards-compatibi* ../cspell-bundled-dicts/compatibility-words.txt.gz
 café - bash                 ../../node_modules/.pnpm...-bash/dict/bash-words.txt
 café - companies*           ../../node_modules/.pnpm...panies/dict/companies.txt
 café - cpp                  ../../node_modules/.pnpm...spell/dict-cpp/cpp.txt.gz
@@ -754,7 +753,7 @@ café - lorem-ipsum          ../../node_modules/.pnpm...m-ipsum/dictionary.txt.
 café - lua                  ../../node_modules/.pnpm...spell/dict-lua/lua.txt.gz
 café - networking-terms     ../../node_modules/.pnpm.../dict/networkingTerms.txt
 café - node                 ../../node_modules/.pnpm...l/dict-node/dict/node.txt
-café - npm                  ../../node_modules/.pnpm...spell/dict-npm/npm.txt.gz
+café - npm                  ../../node_modules/.pnpm...ell/dict-npm/dict/npm.txt
 café - php                  ../../node_modules/.pnpm...ell/dict-php/dict/php.txt
 café - powershell           ../../node_modules/.pnpm...ershell/powershell.txt.gz
 café - public-licenses*     ../../node_modules/.pnpm...es/public-licenses.txt.gz
@@ -766,6 +765,7 @@ café - rust                 ../../node_modules/.pnpm...ell/dict-rust/rust.txt.
 café - scala                ../../node_modules/.pnpm...l/dict-scala/scala.txt.gz
 café - softwareTerms*       ../../node_modules/.pnpm...ms/dict/softwareTerms.txt
 café - sql                  ../../node_modules/.pnpm...spell/dict-sql/sql.txt.gz
+café - svelte               ../../node_modules/.pnpm...ct-svelte/dict/svelte.txt
 café - swift                ../../node_modules/.pnpm...l/dict-swift/swift.txt.gz
 café - typescript           ../../node_modules/.pnpm...cript/dict/typescript.txt
 café - workspace*           ../../cspell-dict.txt"
@@ -780,7 +780,6 @@ hello - [ignoreWords]*       From Settings \`ignoreWords\`
 hello - [words]*             From Settings \`words\`
 hello - ada                  ../../node_modules/.pnpm...ll/dict-ada/dict/ada.txt
 hello - aws*                 ../../node_modules/.pnpm...pell/dict-aws/aws.txt.gz
-hello - backwards-compatibi* ../cspell-bundled-dicts/compatibility-words.txt.gz
 hello - bash                 ../../node_modules/.pnpm...bash/dict/bash-words.txt
 hello - companies*           ../../node_modules/.pnpm...anies/dict/companies.txt
 hello * cpp                  ../../node_modules/.pnpm...pell/dict-cpp/cpp.txt.gz
@@ -808,7 +807,7 @@ hello - lorem-ipsum          ../../node_modules/.pnpm...-ipsum/dictionary.txt.gz
 hello - lua                  ../../node_modules/.pnpm...pell/dict-lua/lua.txt.gz
 hello - networking-terms     ../../node_modules/.pnpm...dict/networkingTerms.txt
 hello * node                 ../../node_modules/.pnpm.../dict-node/dict/node.txt
-hello - npm                  ../../node_modules/.pnpm...pell/dict-npm/npm.txt.gz
+hello - npm                  ../../node_modules/.pnpm...ll/dict-npm/dict/npm.txt
 hello - php                  ../../node_modules/.pnpm...ll/dict-php/dict/php.txt
 hello - powershell           ../../node_modules/.pnpm...rshell/powershell.txt.gz
 hello - public-licenses*     ../../node_modules/.pnpm...s/public-licenses.txt.gz
@@ -820,6 +819,7 @@ hello - rust                 ../../node_modules/.pnpm...ll/dict-rust/rust.txt.gz
 hello - scala                ../../node_modules/.pnpm.../dict-scala/scala.txt.gz
 hello - softwareTerms*       ../../node_modules/.pnpm...s/dict/softwareTerms.txt
 hello - sql                  ../../node_modules/.pnpm...pell/dict-sql/sql.txt.gz
+hello - svelte               ../../node_modules/.pnpm...t-svelte/dict/svelte.txt
 hello - swift                ../../node_modules/.pnpm.../dict-swift/swift.txt.gz
 hello - typescript           ../../node_modules/.pnpm...ript/dict/typescript.txt
 hello - workspace*           ../../cspell-dict.txt"
@@ -834,7 +834,6 @@ hello - [ignoreWords]*       From Settings \`ignoreWords\`
 hello - [words]*             From Settings \`words\`
 hello - ada                  ../../node_modules/.pnpm...ll/dict-ada/dict/ada.txt
 hello - aws*                 ../../node_modules/.pnpm...pell/dict-aws/aws.txt.gz
-hello - backwards-compatibi* ../cspell-bundled-dicts/compatibility-words.txt.gz
 hello - bash                 ../../node_modules/.pnpm...bash/dict/bash-words.txt
 hello - companies*           ../../node_modules/.pnpm...anies/dict/companies.txt
 hello * cpp                  ../../node_modules/.pnpm...pell/dict-cpp/cpp.txt.gz
@@ -862,7 +861,7 @@ hello - lorem-ipsum          ../../node_modules/.pnpm...-ipsum/dictionary.txt.gz
 hello - lua                  ../../node_modules/.pnpm...pell/dict-lua/lua.txt.gz
 hello - networking-terms     ../../node_modules/.pnpm...dict/networkingTerms.txt
 hello * node                 ../../node_modules/.pnpm.../dict-node/dict/node.txt
-hello - npm                  ../../node_modules/.pnpm...pell/dict-npm/npm.txt.gz
+hello - npm                  ../../node_modules/.pnpm...ll/dict-npm/dict/npm.txt
 hello - php                  ../../node_modules/.pnpm...ll/dict-php/dict/php.txt
 hello - powershell           ../../node_modules/.pnpm...rshell/powershell.txt.gz
 hello - public-licenses*     ../../node_modules/.pnpm...s/public-licenses.txt.gz
@@ -874,6 +873,7 @@ hello - rust                 ../../node_modules/.pnpm...ll/dict-rust/rust.txt.gz
 hello - scala                ../../node_modules/.pnpm.../dict-scala/scala.txt.gz
 hello - softwareTerms*       ../../node_modules/.pnpm...s/dict/softwareTerms.txt
 hello - sql                  ../../node_modules/.pnpm...pell/dict-sql/sql.txt.gz
+hello - svelte               ../../node_modules/.pnpm...t-svelte/dict/svelte.txt
 hello - swift                ../../node_modules/.pnpm.../dict-swift/swift.txt.gz
 hello - typescript           ../../node_modules/.pnpm...ript/dict/typescript.txt
 hello - workspace*           ../../cspell-dict.txt"
@@ -1049,7 +1049,6 @@ café - [ignoreWords]*       From Settings \`ignoreWords\`
 café - [words]*             From Settings \`words\`
 café - ada                  ../../node_modules/.pnpm...ell/dict-ada/dict/ada.txt
 café - aws*                 ../../node_modules/.pnpm...spell/dict-aws/aws.txt.gz
-café - backwards-compatibi* ../cspell-bundled-dicts/compatibility-words.txt.gz
 café - bash                 ../../node_modules/.pnpm...-bash/dict/bash-words.txt
 café - companies*           ../../node_modules/.pnpm...panies/dict/companies.txt
 café - cpp                  ../../node_modules/.pnpm...spell/dict-cpp/cpp.txt.gz
@@ -1077,7 +1076,7 @@ café - lorem-ipsum          ../../node_modules/.pnpm...m-ipsum/dictionary.txt.
 café - lua                  ../../node_modules/.pnpm...spell/dict-lua/lua.txt.gz
 café - networking-terms     ../../node_modules/.pnpm.../dict/networkingTerms.txt
 café - node                 ../../node_modules/.pnpm...l/dict-node/dict/node.txt
-café - npm                  ../../node_modules/.pnpm...spell/dict-npm/npm.txt.gz
+café - npm                  ../../node_modules/.pnpm...ell/dict-npm/dict/npm.txt
 café - php                  ../../node_modules/.pnpm...ell/dict-php/dict/php.txt
 café - powershell           ../../node_modules/.pnpm...ershell/powershell.txt.gz
 café - public-licenses*     ../../node_modules/.pnpm...es/public-licenses.txt.gz
@@ -1089,6 +1088,7 @@ café - rust                 ../../node_modules/.pnpm...ell/dict-rust/rust.txt.
 café - scala                ../../node_modules/.pnpm...l/dict-scala/scala.txt.gz
 café - softwareTerms*       ../../node_modules/.pnpm...ms/dict/softwareTerms.txt
 café - sql                  ../../node_modules/.pnpm...spell/dict-sql/sql.txt.gz
+café - svelte               ../../node_modules/.pnpm...ct-svelte/dict/svelte.txt
 café - swift                ../../node_modules/.pnpm...l/dict-swift/swift.txt.gz
 café - typescript           ../../node_modules/.pnpm...cript/dict/typescript.txt
 café - workspace*           ../../cspell-dict.txt"
@@ -1103,7 +1103,6 @@ hello - [ignoreWords]*       From Settings \`ignoreWords\`
 hello - [words]*             From Settings \`words\`
 hello - ada                  ../../node_modules/.pnpm...ll/dict-ada/dict/ada.txt
 hello - aws*                 ../../node_modules/.pnpm...pell/dict-aws/aws.txt.gz
-hello - backwards-compatibi* ../cspell-bundled-dicts/compatibility-words.txt.gz
 hello - bash                 ../../node_modules/.pnpm...bash/dict/bash-words.txt
 hello - companies*           ../../node_modules/.pnpm...anies/dict/companies.txt
 hello * cpp                  ../../node_modules/.pnpm...pell/dict-cpp/cpp.txt.gz
@@ -1131,7 +1130,7 @@ hello - lorem-ipsum          ../../node_modules/.pnpm...-ipsum/dictionary.txt.gz
 hello - lua                  ../../node_modules/.pnpm...pell/dict-lua/lua.txt.gz
 hello - networking-terms     ../../node_modules/.pnpm...dict/networkingTerms.txt
 hello * node                 ../../node_modules/.pnpm.../dict-node/dict/node.txt
-hello - npm                  ../../node_modules/.pnpm...pell/dict-npm/npm.txt.gz
+hello - npm                  ../../node_modules/.pnpm...ll/dict-npm/dict/npm.txt
 hello - php                  ../../node_modules/.pnpm...ll/dict-php/dict/php.txt
 hello - powershell           ../../node_modules/.pnpm...rshell/powershell.txt.gz
 hello - public-licenses*     ../../node_modules/.pnpm...s/public-licenses.txt.gz
@@ -1143,6 +1142,7 @@ hello - rust                 ../../node_modules/.pnpm...ll/dict-rust/rust.txt.gz
 hello - scala                ../../node_modules/.pnpm.../dict-scala/scala.txt.gz
 hello - softwareTerms*       ../../node_modules/.pnpm...s/dict/softwareTerms.txt
 hello - sql                  ../../node_modules/.pnpm...pell/dict-sql/sql.txt.gz
+hello - svelte               ../../node_modules/.pnpm...t-svelte/dict/svelte.txt
 hello - swift                ../../node_modules/.pnpm.../dict-swift/swift.txt.gz
 hello - typescript           ../../node_modules/.pnpm...ript/dict/typescript.txt
 hello - workspace*           ../../cspell-dict.txt"
@@ -1157,7 +1157,6 @@ hello - [ignoreWords]*       From Settings \`ignoreWords\`
 hello - [words]*             From Settings \`words\`
 hello - ada                  ../../node_modules/.pnpm...ll/dict-ada/dict/ada.txt
 hello - aws*                 ../../node_modules/.pnpm...pell/dict-aws/aws.txt.gz
-hello - backwards-compatibi* ../cspell-bundled-dicts/compatibility-words.txt.gz
 hello - bash                 ../../node_modules/.pnpm...bash/dict/bash-words.txt
 hello - companies*           ../../node_modules/.pnpm...anies/dict/companies.txt
 hello * cpp                  ../../node_modules/.pnpm...pell/dict-cpp/cpp.txt.gz
@@ -1185,7 +1184,7 @@ hello - lorem-ipsum          ../../node_modules/.pnpm...-ipsum/dictionary.txt.gz
 hello - lua                  ../../node_modules/.pnpm...pell/dict-lua/lua.txt.gz
 hello - networking-terms     ../../node_modules/.pnpm...dict/networkingTerms.txt
 hello * node                 ../../node_modules/.pnpm.../dict-node/dict/node.txt
-hello - npm                  ../../node_modules/.pnpm...pell/dict-npm/npm.txt.gz
+hello - npm                  ../../node_modules/.pnpm...ll/dict-npm/dict/npm.txt
 hello - php                  ../../node_modules/.pnpm...ll/dict-php/dict/php.txt
 hello - powershell           ../../node_modules/.pnpm...rshell/powershell.txt.gz
 hello - public-licenses*     ../../node_modules/.pnpm...s/public-licenses.txt.gz
@@ -1197,6 +1196,7 @@ hello - rust                 ../../node_modules/.pnpm...ll/dict-rust/rust.txt.gz
 hello - scala                ../../node_modules/.pnpm.../dict-scala/scala.txt.gz
 hello - softwareTerms*       ../../node_modules/.pnpm...s/dict/softwareTerms.txt
 hello - sql                  ../../node_modules/.pnpm...pell/dict-sql/sql.txt.gz
+hello - svelte               ../../node_modules/.pnpm...t-svelte/dict/svelte.txt
 hello - swift                ../../node_modules/.pnpm.../dict-swift/swift.txt.gz
 hello - typescript           ../../node_modules/.pnpm...ript/dict/typescript.txt
 hello - workspace*           ../../cspell-dict.txt"
@@ -1239,7 +1239,6 @@ hello - [ignoreWords]*       From Settings \`ignoreWords\`
 hello - [words]*             From Settings \`words\`
 hello - ada                  ../../node_modules/.pnpm...ll/dict-ada/dict/ada.txt
 hello - aws*                 ../../node_modules/.pnpm...pell/dict-aws/aws.txt.gz
-hello - backwards-compatibi* ../cspell-bundled-dicts/compatibility-words.txt.gz
 hello - bash                 ../../node_modules/.pnpm...bash/dict/bash-words.txt
 hello - companies*           ../../node_modules/.pnpm...anies/dict/companies.txt
 hello * cpp                  ../../node_modules/.pnpm...pell/dict-cpp/cpp.txt.gz
@@ -1269,7 +1268,7 @@ hello - lua                  ../../node_modules/.pnpm...pell/dict-lua/lua.txt.gz
 hello X missing-dictionary   samples/missing.txt
 hello - networking-terms     ../../node_modules/.pnpm...dict/networkingTerms.txt
 hello * node                 ../../node_modules/.pnpm.../dict-node/dict/node.txt
-hello - npm                  ../../node_modules/.pnpm...pell/dict-npm/npm.txt.gz
+hello - npm                  ../../node_modules/.pnpm...ll/dict-npm/dict/npm.txt
 hello - php                  ../../node_modules/.pnpm...ll/dict-php/dict/php.txt
 hello - powershell           ../../node_modules/.pnpm...rshell/powershell.txt.gz
 hello - public-licenses*     ../../node_modules/.pnpm...s/public-licenses.txt.gz
@@ -1281,6 +1280,7 @@ hello - rust                 ../../node_modules/.pnpm...ll/dict-rust/rust.txt.gz
 hello - scala                ../../node_modules/.pnpm.../dict-scala/scala.txt.gz
 hello - softwareTerms*       ../../node_modules/.pnpm...s/dict/softwareTerms.txt
 hello - sql                  ../../node_modules/.pnpm...pell/dict-sql/sql.txt.gz
+hello - svelte               ../../node_modules/.pnpm...t-svelte/dict/svelte.txt
 hello - swift                ../../node_modules/.pnpm.../dict-swift/swift.txt.gz
 hello - typescript           ../../node_modules/.pnpm...ript/dict/typescript.txt
 hello - workspace*           ../../cspell-dict.txt"
@@ -1295,7 +1295,6 @@ not-in-any-dictionary - [ignoreWords]*       From Settings \`ignoreWords\`
 not-in-any-dictionary - [words]*             From Settings \`words\`
 not-in-any-dictionary - ada                  ../../node_modul...ada/dict/ada.txt
 not-in-any-dictionary - aws*                 ../../node_modul...t-aws/aws.txt.gz
-not-in-any-dictionary - backwards-compatibi* ../cspell-bundle...ity-words.txt.gz
 not-in-any-dictionary - bash                 ../../node_modul...t/bash-words.txt
 not-in-any-dictionary - companies*           ../../node_modul...ct/companies.txt
 not-in-any-dictionary - cpp                  ../../node_modul...t-cpp/cpp.txt.gz
@@ -1323,7 +1322,7 @@ not-in-any-dictionary - lorem-ipsum          ../../node_modul...ictionary.txt.gz
 not-in-any-dictionary - lua                  ../../node_modul...t-lua/lua.txt.gz
 not-in-any-dictionary - networking-terms     ../../node_modul...workingTerms.txt
 not-in-any-dictionary - node                 ../../node_modul...de/dict/node.txt
-not-in-any-dictionary - npm                  ../../node_modul...t-npm/npm.txt.gz
+not-in-any-dictionary - npm                  ../../node_modul...npm/dict/npm.txt
 not-in-any-dictionary - php                  ../../node_modul...php/dict/php.txt
 not-in-any-dictionary - powershell           ../../node_modul...owershell.txt.gz
 not-in-any-dictionary - public-licenses*     ../../node_modul...-licenses.txt.gz
@@ -1335,6 +1334,7 @@ not-in-any-dictionary - rust                 ../../node_modul...rust/rust.txt.gz
 not-in-any-dictionary - scala                ../../node_modul...ala/scala.txt.gz
 not-in-any-dictionary - softwareTerms*       ../../node_modul...oftwareTerms.txt
 not-in-any-dictionary - sql                  ../../node_modul...t-sql/sql.txt.gz
+not-in-any-dictionary - svelte               ../../node_modul.../dict/svelte.txt
 not-in-any-dictionary - swift                ../../node_modul...ift/swift.txt.gz
 not-in-any-dictionary - typescript           ../../node_modul...t/typescript.txt
 not-in-any-dictionary - workspace*           ../../cspell-dict.txt"
@@ -1343,9 +1343,9 @@ not-in-any-dictionary - workspace*           ../../cspell-dict.txt"
 exports[`Validate cli app typos Expect Error: [Function CheckFailed] 1`] = `[]`;
 
 exports[`Validate cli app typos Expect Error: [Function CheckFailed] 2`] = `
-"log	./fixtures/features/typos/test.md:5:3 - Forbidden word (blacklist) Suggestions: [denylist, blacklists, backlist, blacklist's, blacklisted]
-log	./fixtures/features/typos/test.md:6:3 - Forbidden word (whitelist) Suggestions: [allowlist, whitelists, whitelisted, whitefish, whitest]
-log	./fixtures/features/typos/test.md:7:3 - Forbidden word (rad) Suggestions: [cool, rda, rads, raid, rand]
+"log	./fixtures/features/typos/test.md:5:3 - Forbidden word (blacklist) Suggestions: [denylist*, blacklists, backlist, blacklist's, blacklisted]
+log	./fixtures/features/typos/test.md:6:3 - Forbidden word (whitelist) Suggestions: [allowlist*, whitelists, whitelisted, whitefish, whitest]
+log	./fixtures/features/typos/test.md:7:3 - Forbidden word (rad) Suggestions: [cool*, rda, rads, raid, rand]
 error	CSpell: Files checked: 2, Issues found: 3 in 1 files"
 `;
 

@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 6.17.0 (2022-12-05)
+
+**Note:** Version bump only for package @cspell/cspell-json-reporter
+
+# 6.16.0 (2022-12-02)
+
+**Note:** Version bump only for package @cspell/cspell-json-reporter
+
+## 6.15.1 (2022-11-30)
+
+**Note:** Version bump only for package @cspell/cspell-json-reporter
+
+# 6.15.0 (2022-11-25)
+
+### Features
+
+* Preferred suggestions are listed first ([#3869](https://github.com/streetsidesoftware/cspell/issues/3869)) ([1b7a65d](https://github.com/streetsidesoftware/cspell/commit/1b7a65d6ec851b78e1cc27c56f32b77adfba36e5))
+
 ## 6.14.3 (2022-11-17)
 
 ### Bug Fixes

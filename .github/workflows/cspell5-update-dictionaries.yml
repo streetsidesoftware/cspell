@@ -105,14 +105,14 @@ jobs:
           git --no-pager diff --compact-summary >> $GITHUB_ENV
           echo 'DIFF' >> $GITHUB_ENV
 
-      - uses: tibdex/github-app-token@f717b5ecd4534d3c4df4ce9b5c1c2214f0f7cd06 # v1.5 # cspell:ignore tibdex
+      - uses: tibdex/github-app-token@021a2405c7f990db57f5eae5397423dcc554159c # v1.5 # cspell:ignore tibdex
         id: generate-token
         with:
           app_id: ${{ secrets.AUTOMATION_APP_ID }}
           private_key: ${{ secrets.AUTOMATION_PRIVATE_KEY }}
 
       - name: Create Pull Request
-        uses: peter-evans/create-pull-request@331d02c7e2104af23ad5974d4d5cbc58a3e6dc77 # v4
+        uses: peter-evans/create-pull-request@2b011faafdcbc9ceb11414d64d0573f37c774b04 # v4
         with:
           commit-message: "ci: Workflow Bot -- Update Dictionaries"
           branch: ${{ env.NEW_BRANCH }}

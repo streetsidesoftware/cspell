@@ -1,19 +1,15 @@
 import { CSpellUserSettings, IssueType } from '@cspell/cspell-types';
 import { CSpellSettingsInternalFinalized } from '../Models/CSpellSettingsInternalDef';
 import { createTextDocument } from '../Models/TextDocument';
+import type { ValidationIssue } from '../Models/ValidationIssue';
 import * as Settings from '../Settings';
 import { DirectiveIssue, validateInDocumentSettings } from '../Settings/InDocSettings';
 import { CompoundWordsMethod, getDictionaryInternal } from '../SpellingDictionary';
-import { callOnce } from '../util/Memorizer';
 import { clean } from '../util/util';
 import { validateText as validateFullText } from './textValidator';
-import type { ValidationOptions, ValidationResult } from './ValidationTypes';
+import type { ValidationOptions } from './ValidationTypes';
 
 export const diagSource = 'cSpell Checker';
-
-export interface ValidationIssue extends ValidationResult {
-    suggestions?: string[];
-}
 
 export interface ValidateTextOptions {
     /**
@@ -47,7 +43,7 @@ export async function validateText(
         options.validateDirectives || finalSettings.validateDirectives
             ? validateInDocumentSettings(text, settings)
             : [];
-    const issues = spellingIssues.concat(mapValidationIssues(text, validationIssues));
+    const issues: ValidationIssue[] = spellingIssues.concat(mapValidationIssues(text, validationIssues));
     if (!options.generateSuggestions) {
         return issues;
     }
@@ -61,15 +57,18 @@ export async function validateText(
     });
     const withSugs = issues.map((t) => {
         const text = t.text;
-        // lazy suggestion calculation.
-        const suggestions = callOnce(() => dict.suggest(text, sugOptions).map((r) => r.word));
-        return Object.defineProperty({ ...t }, 'suggestions', { enumerable: true, get: suggestions });
+        const suggestionsEx = dict
+            .suggest(text, sugOptions)
+            .map(({ word, isPreferred }) => (isPreferred ? { word, isPreferred } : { word }));
+        t.suggestions = suggestionsEx.map((s) => s.word);
+        t.suggestionsEx = suggestionsEx;
+        return t;
     });
 
     return withSugs;
 }
 
-function mapValidationIssues(text: string, valIssues: Iterable<DirectiveIssue>): ValidationResult[] {
+function mapValidationIssues(text: string, valIssues: Iterable<DirectiveIssue>): ValidationIssue[] {
     const issues = [...valIssues];
     if (!issues.length) return [];
 
@@ -77,11 +76,11 @@ function mapValidationIssues(text: string, valIssues: Iterable<DirectiveIssue>):
     const issueType = IssueType.directive;
 
     function toValidationIssue(dirIssue: DirectiveIssue): ValidationIssue {
-        const { text, range, suggestions, message } = dirIssue;
+        const { text, range, suggestions, suggestionsEx, message } = dirIssue;
         const offset = range[0];
         const pos = document.positionAt(offset);
         const line = document.getLine(pos.line);
-        const issue: ValidationIssue = { text, offset, line, suggestions, message, issueType };
+        const issue: ValidationIssue = { text, offset, line, suggestions, suggestionsEx, message, issueType };
 
         return issue;
     }
