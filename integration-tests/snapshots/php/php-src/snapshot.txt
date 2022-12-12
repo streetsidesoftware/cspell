@@ -3,7 +3,7 @@ Repository: php/php-src
 Url: "https://github.com/php/php-src.git"
 Args: ["--config=../../../../config/repositories/php/php-src/cspell.json","**/*.{md,c,h,php}"]
 Lines:
- CSpell: Files checked: 1843, Issues found: 44224 in 1308 files
+ CSpell: Files checked: 1843, Issues found: 44223 in 1308 files
  exit code: 1
 ./CODING_STANDARDS.md:105:8     - Unknown word (setclientencoding) -- pg_setclientencoding
 ./CODING_STANDARDS.md:126:5     - Unknown word (fooselect)         -- fooselect_bar
@@ -211,9 +211,9 @@ Lines:
 ./Zend/zend_execute.c:60:18     - Unknown word (IBMC)       -- # elif defined(__IBMC__) && ZEND_GCC_VERSION
 ./Zend/zend_execute.c:662:36    - Unknown word (fsep)       -- fname, const char **fsep, const char **fclass
 ./Zend/zend_execute.c:662:55    - Unknown word (fclass)     -- *fsep, const char **fclass,
-./Zend/zend_execute_API.c:1011:24   - Unknown word (fcic)       -- zend_fcall_info_cache fcic;
-./Zend/zend_execute_API.c:1467:111  - Unknown word (EXECUTEONLYONCE)     -- seconds*1000, 0, WT_EXECUTEONLYONCE)) {
-./Zend/zend_execute_API.c:1467:47   - Unknown word (WAITORTIMERCALLBACK) -- rQueueTimer(&tq_timer, NULL, (WAITORTIMERCALLBACK)tq_timer_cb, (VOID*
+./Zend/zend_execute_API.c:1015:24   - Unknown word (fcic)       -- zend_fcall_info_cache fcic;
+./Zend/zend_execute_API.c:1471:111  - Unknown word (EXECUTEONLYONCE)     -- seconds*1000, 0, WT_EXECUTEONLYONCE)) {
+./Zend/zend_execute_API.c:1471:47   - Unknown word (WAITORTIMERCALLBACK) -- rQueueTimer(&tq_timer, NULL, (WAITORTIMERCALLBACK)tq_timer_cb, (VOID*
 ./Zend/zend_fibers.c:143:33    - Unknown word (fcontext)   -- by boost.context in fcontext.hpp:
 ./Zend/zend_gc.c:1468:26   - Unknown word (tmpvars)    -- static void zend_gc_root_tmpvars(void);
 ./Zend/zend_gdb.c:34:14     - Unknown word (NOACTION)   -- ZEND_GDBJIT_NOACTION,
@@ -3090,7 +3090,7 @@ Lines:
 ./ext/intl/locale/locale_methods.c:857:14    - Unknown word (Subtag)     -- int isFirstSubtag = 0;
 ./ext/intl/locale/locale_methods.c:859:14    - Unknown word (Extlang)    -- /* Variant/ Extlang/Private etc. */
 ./ext/intl/msgformat/msgformat_arginfo.h:51:15     - Unknown word (msgfmt)     -- ZEND_FUNCTION(msgfmt_create);
-./ext/intl/msgformat/msgformat_attr.c:71:5      - Unknown word (msgformat)  -- if(msgformat_fix_quotes(&spattern
+./ext/intl/msgformat/msgformat_attr.c:72:5      - Unknown word (msgformat)  -- if(msgformat_fix_quotes(&spattern
 ./ext/intl/msgformat/msgformat_attr.c:79:2      - Unknown word (umsg)       -- umsg_applyPattern(MSG_FORMAT
 ./ext/intl/msgformat/msgformat_class.c:34:42     - Unknown word (messageformatter) -- object* mfo = php_intl_messageformatter_fetch_object(object
 ./ext/intl/msgformat/msgformat_class.h:37:16     - Unknown word (MESSAGEFORMATTER) -- #define Z_INTL_MESSAGEFORMATTER_P(zv) php_intl_messageformatt
@@ -7225,19 +7225,19 @@ Lines:
 ./ext/random/engine_xoshiro256starstar.c:174:22    - Unknown word (Xoshiro)    -- * {{{ Random\Engine\Xoshiro256StarStar::jump()
 ./ext/random/engine_xoshiro256starstar.c:29:24     - Unknown word (splitmix)   -- static inline uint64_t splitmix64(uint64_t *seed)
 ./ext/random/engine_xoshiro256starstar.c:44:63     - Unknown word (xoshiro)    -- random_status_state_xoshiro256starstar *s)
-./ext/random/php_random.h:253:28    - Unknown word (randomizer) -- typedef struct _php_random_randomizer {
-./ext/random/php_random.h:271:50    - Unknown word (Randomizer) -- entry *random_ce_Random_Randomizer;
-./ext/random/php_random.h:283:19    - Unknown word (RANDOMIZER) -- # define Z_RANDOM_RANDOMIZER_P(zval) php_random_randomizer
-./ext/random/php_random.h:296:48    - Unknown word (hexstr)     -- bin_le(zend_string *hexstr, void *dest);
+./ext/random/php_random.h:255:28    - Unknown word (randomizer) -- typedef struct _php_random_randomizer {
+./ext/random/php_random.h:273:50    - Unknown word (Randomizer) -- entry *random_ce_Random_Randomizer;
+./ext/random/php_random.h:285:19    - Unknown word (RANDOMIZER) -- # define Z_RANDOM_RANDOMIZER_P(zval) php_random_randomizer
+./ext/random/php_random.h:298:48    - Unknown word (hexstr)     -- bin_le(zend_string *hexstr, void *dest);
 ./ext/random/php_random.h:61:21     - Unknown word (BADSCALING) -- # define RAND_RANGE_BADSCALING(__n, __min, __max,
-./ext/random/random.c:344:40    - Unknown word (hexconvtab)   -- , static const char hexconvtab[]) = "0123456789abcdef
-./ext/random/random.c:497:18    - Unknown word (silented)     -- * a status but silented to respect the "no fail
-./ext/random/random.c:511:41    - Unknown word (getrandom)    -- linux__) && defined(SYS_getrandom)) || (defined(__FreeBSD
+./ext/random/random.c:342:40    - Unknown word (hexconvtab)   -- , static const char hexconvtab[]) = "0123456789abcdef
+./ext/random/random.c:495:18    - Unknown word (silented)     -- * a status but silented to respect the "no fail
+./ext/random/random.c:509:41    - Unknown word (getrandom)    -- linux__) && defined(SYS_getrandom)) || (defined(__FreeBSD
 ./ext/random/random.c:56:23     - Unknown word (COMMONRANDOM) -- if HAVE_COMMONCRYPTO_COMMONRANDOM_H
-./ext/random/random.c:578:11    - Unknown word (ISNAM)        -- # ifdef S_ISNAM
-./ext/random/random.c:707:6     - Unknown word (genrand)      -- /* genrand_int31 in mt19937ar.c
-./ext/random/random.c:868:22    - Unknown word (Onseq)        -- /* Random\Engine\PcgOnseq128XslRr64 */
-./ext/random/randomizer.c:282:8     - Unknown word (zengine)    -- zval *zengine;
+./ext/random/random.c:576:11    - Unknown word (ISNAM)        -- # ifdef S_ISNAM
+./ext/random/random.c:705:6     - Unknown word (genrand)      -- /* genrand_int31 in mt19937ar.c
+./ext/random/random.c:866:22    - Unknown word (Onseq)        -- /* Random\Engine\PcgOnseq128XslRr64 */
+./ext/random/randomizer.c:378:8     - Unknown word (zengine)    -- zval *zengine;
 ./ext/readline/README.md:11:48     - Unknown word (libedit)    -- to variables from the libedit library).
 ./ext/readline/README.md:1:1       - Unknown word (readline)   -- readline
 ./ext/readline/readline.c:149:8     - Unknown word (oldstr)     -- char *oldstr;
@@ -7818,8 +7818,8 @@ Lines:
 ./ext/sqlite3/sqlite3.c:1145:99   - Unknown word (newoffs)    -- whence, zend_off_t *newoffs)
 ./ext/sqlite3/sqlite3.c:1600:82   - Unknown word (binded)     -- If expanded is true, binded parameters and values
 ./ext/sqlite3/sqlite3.c:208:8     - Unknown word (errtext)    -- char *errtext = NULL;
-./ext/sqlite3/sqlite3.c:2130:6    - Unknown word (authreturn) -- int authreturn = SQLITE_DENY;
-./ext/sqlite3/sqlite3.c:2357:37   - Unknown word (threasafe)  -- load if this wasn't a threasafe library loaded */
+./ext/sqlite3/sqlite3.c:2124:6    - Unknown word (authreturn) -- int authreturn = SQLITE_DENY;
+./ext/sqlite3/sqlite3.c:2351:37   - Unknown word (threasafe)  -- load if this wasn't a threasafe library loaded */
 ./ext/sqlite3/sqlite3.stub.php:227:23    - Unknown word (REINDEX)    -- * @cvalue SQLITE_REINDEX
 ./ext/sqlite3/sqlite3.stub.php:237:30    - Unknown word (VTABLE)     -- cvalue SQLITE_CREATE_VTABLE
 ./ext/standard/array.c:1333:15   - Unknown word (thash)      -- HashTable *thash;
@@ -8735,14 +8735,13 @@ Lines:
 ./main/network.c:421:6     - Unknown word (sockoptval)    -- int sockoptval = 1;
 ./main/output.c:531:13    - Unknown word (rconflicts) -- HashTable *rconflicts;
 ./main/output.c:755:22    - Unknown word (unallowed)  -- * Checks whether an unallowed operation is attempted
-./main/php_ini.c:175:28    - Unknown word (sectin)     -- Reset / free active_ini_sectin global */
-./main/php_ini.c:430:8     - Unknown word (phprc)      -- char phprc_path[MAXPATHLEN];
-./main/php_ini.c:433:26    - Unknown word (PHPRC)      -- env_location = getenv("PHPRC");
-./main/php_ini.c:651:19    - Unknown word (debpath)    -- char *bufpath, *debpath, *endpath;
-./main/php_ini.c:651:29    - Unknown word (endpath)    -- bufpath, *debpath, *endpath;
-./main/php_ini.c:651:9     - Unknown word (bufpath)    -- char *bufpath, *debpath, *endpath
-./main/php_ini.c:652:7     - Unknown word (lenpath)    -- int lenpath;
-./main/php_ini.c:787:13    - Unknown word (inis)       -- /* User inis are parsed during SAPI
+./main/php_ini.c:440:8     - Unknown word (phprc)      -- char phprc_path[MAXPATHLEN];
+./main/php_ini.c:443:26    - Unknown word (PHPRC)      -- env_location = getenv("PHPRC");
+./main/php_ini.c:641:19    - Unknown word (debpath)    -- char *bufpath, *debpath, *endpath;
+./main/php_ini.c:641:29    - Unknown word (endpath)    -- bufpath, *debpath, *endpath;
+./main/php_ini.c:641:9     - Unknown word (bufpath)    -- char *bufpath, *debpath, *endpath
+./main/php_ini.c:642:7     - Unknown word (lenpath)    -- int lenpath;
+./main/php_ini.c:777:13    - Unknown word (inis)       -- /* User inis are parsed during SAPI
 ./main/php_ini_builder.c:13:19     - Unknown word (Kellermann) -- | Authors: Max Kellermann <max.kellermann@ionos
 ./main/php_open_temporary_file.c:92:18     - Unknown word (pfxw)       -- wchar_t *cwdw, *pfxw, pathw[MAXPATHLEN];
 ./main/php_scandir.c:70:18     - Unknown word (newdp)      -- struct dirent *newdp = NULL;
@@ -9067,13 +9066,13 @@ Lines:
 ./sapi/litespeed/README.md:182:10    - Unknown word (PPID)       -- * `LSAPI_PPID_NO_CHECK`
 ./sapi/litespeed/README.md:204:52    - Unknown word (litespeedtech) -- bug report to bug [at] litespeedtech.com.
 ./sapi/litespeed/README.md:39:50     - Unknown word (fcgi)       -- succeeds. Copy it to `lsws/fcgi-bin/lsphp` or wherever
-./sapi/litespeed/lsapi_main.c:1168:53   - Unknown word (climode)    -- char * argv[], int *climode,
-./sapi/litespeed/lsapi_main.c:1172:13   - Unknown word (argend)     -- char ** argend= &argv[argc];
-./sapi/litespeed/lsapi_main.c:1548:12   - Unknown word (criu)       -- int is_criu = LSCRIU_Init(); //
-./sapi/litespeed/lsapi_main.c:1548:19   - Unknown word (LSCRIU)     -- int is_criu = LSCRIU_Init(); // Must be called
-./sapi/litespeed/lsapi_main.c:1613:29   - Unknown word (LSPHP)      -- const char *p = getenv("LSPHP_ENABLE_USER_INI");
-./sapi/litespeed/lsapi_main.c:1628:46   - Unknown word (CPAN)       -- getenv("LSAPI_DISABLE_CPAN_BEHAV") != NULL );
-./sapi/litespeed/lsapi_main.c:1628:51   - Unknown word (BEHAV)      -- "LSAPI_DISABLE_CPAN_BEHAV") != NULL );
+./sapi/litespeed/lsapi_main.c:1164:53   - Unknown word (climode)    -- char * argv[], int *climode,
+./sapi/litespeed/lsapi_main.c:1168:13   - Unknown word (argend)     -- char ** argend= &argv[argc];
+./sapi/litespeed/lsapi_main.c:1544:12   - Unknown word (criu)       -- int is_criu = LSCRIU_Init(); //
+./sapi/litespeed/lsapi_main.c:1544:19   - Unknown word (LSCRIU)     -- int is_criu = LSCRIU_Init(); // Must be called
+./sapi/litespeed/lsapi_main.c:1609:29   - Unknown word (LSPHP)      -- const char *p = getenv("LSPHP_ENABLE_USER_INI");
+./sapi/litespeed/lsapi_main.c:1624:46   - Unknown word (CPAN)       -- getenv("LSAPI_DISABLE_CPAN_BEHAV") != NULL );
+./sapi/litespeed/lsapi_main.c:1624:51   - Unknown word (BEHAV)      -- "LSAPI_DISABLE_CPAN_BEHAV") != NULL );
 ./sapi/litespeed/lsapi_main.c:56:14     - Unknown word (LSAPI)      -- #define SAPI_LSAPI_MAX_HEADER_LENGTH LSAPI
 ./sapi/litespeed/lsapi_main.c:677:18    - Unknown word (onexit)     -- static int clean_onexit = 1;
 ./sapi/litespeed/lsapi_main.c:71:13     - Unknown word (lsapi)      -- static int  lsapi_mode = 0;
@@ -9081,25 +9080,25 @@ Lines:
 ./sapi/litespeed/lsapi_main.stub.php:5:10      - Unknown word (litespeed)  -- function litespeed_request_headers(): array
 ./sapi/litespeed/lsapidef.h:50:11     - Unknown word (LSAPIDEF)   -- #ifndef _LSAPIDEF_H_
 ./sapi/litespeed/lsapidef.h:80:10     - Unknown word (UNMOD)      -- H_IF_UNMOD_SINCE,
-./sapi/litespeed/lsapilib.c:1098:44   - Unknown word (Ugid)           -- pAuth, int len, char * pUgid, int ugidLen )
-./sapi/litespeed/lsapilib.c:1098:54   - Unknown word (ugid)           -- len, char * pUgid, int ugidLen )
-./sapi/litespeed/lsapilib.c:1129:40   - Unknown word (lscgid)         -- should be MD5( nonce + lscgid secret )
-./sapi/litespeed/lsapilib.c:1142:49   - Unknown word (UGID)           -- pEnv->pKey+1, "SUEXEC_UGID" ) == 0 ))
-./sapi/litespeed/lsapilib.c:1325:21   - Unknown word (sigalarm)       -- //static void lsapi_sigalarm( int sig )
+./sapi/litespeed/lsapilib.c:1092:44   - Unknown word (Ugid)           -- pAuth, int len, char * pUgid, int ugidLen )
+./sapi/litespeed/lsapilib.c:1092:54   - Unknown word (ugid)           -- len, char * pUgid, int ugidLen )
+./sapi/litespeed/lsapilib.c:1123:40   - Unknown word (lscgid)         -- should be MD5( nonce + lscgid secret )
+./sapi/litespeed/lsapilib.c:1136:49   - Unknown word (UGID)           -- pEnv->pKey+1, "SUEXEC_UGID" ) == 0 ))
+./sapi/litespeed/lsapilib.c:1319:21   - Unknown word (sigalarm)       -- //static void lsapi_sigalarm( int sig )
 ./sapi/litespeed/lsapilib.c:148:14    - Unknown word (inited)     -- static int g_inited = 0;
-./sapi/litespeed/lsapilib.c:1960:9    - Unknown word (gsendfile)      -- ssize_t gsendfile( int fdOut, int fdIn
-./sapi/litespeed/lsapilib.c:2030:5    - Unknown word (sendfilevec)    -- sendfilevec_t vec[1];
-./sapi/litespeed/lsapilib.c:2039:19   - Unknown word (sendfilev)      -- ssize_t ret = sendfilev( fdOut, vec, n, &written
+./sapi/litespeed/lsapilib.c:1930:9    - Unknown word (gsendfile)      -- ssize_t gsendfile( int fdOut, int fdIn
+./sapi/litespeed/lsapilib.c:2000:5    - Unknown word (sendfilevec)    -- sendfilevec_t vec[1];
+./sapi/litespeed/lsapilib.c:2009:19   - Unknown word (sendfilev)      -- ssize_t ret = sendfilev( fdOut, vec, n, &written
 ./sapi/litespeed/lsapilib.c:287:9     - Unknown word (DBGLOG)     -- #define DBGLOG_FLAG (LSAPI_LOG_TIMESTAMP
-./sapi/litespeed/lsapilib.c:3064:9    - Unknown word (tobekilled)     -- int tobekilled;
-./sapi/litespeed/lsapilib.c:3246:38   - Unknown word (AVPHYS)         -- pages = sysconf(_SC_AVPHYS_PAGES);
+./sapi/litespeed/lsapilib.c:3034:9    - Unknown word (tobekilled)     -- int tobekilled;
+./sapi/litespeed/lsapilib.c:3216:38   - Unknown word (AVPHYS)         -- pages = sysconf(_SC_AVPHYS_PAGES);
 ./sapi/litespeed/lsapilib.c:330:19    - Unknown word (siguser)    -- static void lsapi_siguser1( int sig )
 ./sapi/litespeed/lsapilib.c:335:9     - Unknown word (sighandler) -- #ifndef sighandler_t
-./sapi/litespeed/lsapilib.c:3397:11   - Unknown word (Postfork)       -- int LSAPI_Postfork_Child(LSAPI_Request
+./sapi/litespeed/lsapilib.c:3367:11   - Unknown word (Postfork)       -- int LSAPI_Postfork_Child(LSAPI_Request
 ./sapi/litespeed/lsapilib.c:376:19    - Unknown word (NOSUIDCOREDUMP) -- mib[1] = KERN_NOSUIDCOREDUMP;
 ./sapi/litespeed/lsapilib.c:404:23    - Unknown word (nblock)         -- static int lsapi_set_nblock( int fd, int nonblock
-./sapi/litespeed/lsapilib.c:4199:15   - Unknown word (bitcount)       -- /* Update bitcount */
-./sapi/litespeed/lsapilib.c:4300:31   - Unknown word (longwords)      -- reflect the addition of 16 longwords of new data.  MD5Update
+./sapi/litespeed/lsapilib.c:4169:15   - Unknown word (bitcount)       -- /* Update bitcount */
+./sapi/litespeed/lsapilib.c:4270:31   - Unknown word (longwords)      -- reflect the addition of 16 longwords of new data.  MD5Update
 ./sapi/litespeed/lsapilib.c:785:15    - Unknown word (CAGEFS)         -- #define LSAPI_CAGEFS_ENABLED 2
 ./sapi/litespeed/lsapilib.c:787:8     - Unknown word (liblve)         -- struct liblve;
 ./sapi/litespeed/lsapilib.h:50:11     - Unknown word (LSAPILIB)   -- #ifndef _LSAPILIB_H_
@@ -9113,7 +9112,7 @@ Lines:
 ./sapi/litespeed/lscriu.c:567:54    - Unknown word (filepointer) -- Native checkpoint.  Use filepointer %d (%s) to send "
 ./sapi/litespeed/lscriu.c:641:10    - Unknown word (cloudlinux)  -- // 1 cloudlinux
 ./sapi/litespeed/lscriu.c:93:10     - Unknown word (CRIU)       -- // Begin CRIU inclusion
-./sapi/litespeed/lscriu.c:98:16     - Unknown word (lscapi)     -- static int (*s_lscapi_dump_me)() = NULL;
+./sapi/litespeed/lscriu.c:98:16     - Unknown word (lscapi)     -- static int (*s_lscapi_dump_me)(void) = NULL
 ./sapi/phpdbg/create-test.php:118:2     - Unknown word (testdata)   -- $testdata = <<<TEST
 ./sapi/phpdbg/create-test.php:16:19     - Unknown word (Weinand)    -- | Authors: Bob Weinand <bwoebi@php.net>
 ./sapi/phpdbg/create-test.php:30:2      - Unknown word (cmdargv)    -- $cmdargv = "";
