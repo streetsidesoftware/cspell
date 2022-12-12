@@ -3,7 +3,7 @@ Repository: django/django
 Url: "https://github.com/django/django.git"
 Args: ["**/*.{md,py}"]
 Lines:
- CSpell: Files checked: 2756, Issues found: 8301 in 920 files
+ CSpell: Files checked: 2756, Issues found: 8309 in 920 files
  exit code: 1
 ./django/__init__.py:12:26     - Unknown word (urlresolvers) -- Set the thread-local urlresolvers script prefix if `set
 ./django/apps/config.py:217:40    - Unknown word (qualname)   -- app_config_class.__qualname__,
@@ -369,9 +369,9 @@ Lines:
 ./django/contrib/staticfiles/handlers.py:9:39      - Unknown word (ASGI)       -- handlers.asgi import ASGIHandler
 ./django/contrib/staticfiles/management/commands/findstatic.py:9:14      - Unknown word (staticfile) -- label = "staticfile"
 ./django/contrib/staticfiles/management/commands/runserver.py:14:16     - Unknown word (nostatic)   -- "--nostatic",
-./django/contrib/staticfiles/storage.py:132:58    - Unknown word (myfont)     -- face hack, like url(myfont.eot?#iefix")
-./django/contrib/staticfiles/storage.py:132:70    - Unknown word (iefix)      -- like url(myfont.eot?#iefix")
-./django/contrib/staticfiles/storage.py:182:23    - Unknown word (matchobj)   -- def converter(matchobj):
+./django/contrib/staticfiles/storage.py:154:58    - Unknown word (myfont)     -- face hack, like url(myfont.eot?#iefix")
+./django/contrib/staticfiles/storage.py:154:70    - Unknown word (iefix)      -- like url(myfont.eot?#iefix")
+./django/contrib/staticfiles/storage.py:204:23    - Unknown word (matchobj)   -- def converter(matchobj):
 ./django/contrib/syndication/views.py:40:9      - Unknown word (feedgen)    -- feedgen = self.get_feed(obj
 ./django/contrib/syndication/views.py:84:24     - Unknown word (argcount)   -- # Check co_argcount rather than try/excepting
 ./django/core/cache/backends/base.py:175:15    - Unknown word (atouch)     -- async def atouch(self, key, timeout=DEFAULT
@@ -453,7 +453,7 @@ Lines:
 ./django/core/servers/basehttp.py:212:18    - Unknown word (requestline) -- self.raw_requestline = self.rfile.readline
 ./django/core/servers/basehttp.py:226:43    - Unknown word (backpointer) -- request_handler = self  # backpointer for logging & connection
 ./django/core/servers/basehttp.py:31:50     - Unknown word (projectname) -- application`` object in ``projectname/wsgi.py``.
-./django/core/signing.py:249:32    - Unknown word (uncompress) -- # It's compressed; uncompress it first.
+./django/core/signing.py:271:32    - Unknown word (uncompress) -- # It's compressed; uncompress it first.
 ./django/core/signing.py:27:32     - Unknown word (ZVJs)       -- eJwFwcERACAIwLCF-rCiILN47r-GyZVJsNgkxaFxoDgxcOHGxMKD_T
 ./django/core/signing.py:27:36     - Unknown word (Ngkxa)      -- FwcERACAIwLCF-rCiILN47r-GyZVJsNgkxaFxoDgxcOHGxMKD_T7vhAml
 ./django/core/signing.py:27:44     - Unknown word (Dgxc)       -- rCiILN47r-GyZVJsNgkxaFxoDgxcOHGxMKD_T7vhAml:1QaUaL
@@ -484,7 +484,7 @@ Lines:
 ./django/db/backends/mysql/creation.py:67:14     - Unknown word (mysqldump)  -- "mysqldump",
 ./django/db/backends/mysql/creation.py:86:48     - Unknown word (SIGPIPE)    -- dump_proc to receive a SIGPIPE if the load process
 ./django/db/backends/mysql/introspection.py:27:20     - Unknown word (NEWDECIMAL) -- FIELD_TYPE.NEWDECIMAL: "DecimalField",
-./django/db/backends/mysql/introspection.py:312:39    - Unknown word (colseq)     -- non_unique, index, colseq, column, order, type
+./django/db/backends/mysql/introspection.py:313:39    - Unknown word (colseq)     -- non_unique, index, colseq, column, order, type
 ./django/db/backends/mysql/introspection.py:35:20     - Unknown word (LONGLONG)   -- FIELD_TYPE.LONGLONG: "BigIntegerField",
 ./django/db/backends/mysql/operations.py:286:32    - Unknown word (timespec)   -- return value.isoformat(timespec="microseconds")
 ./django/db/backends/mysql/operations.py:368:17    - Unknown word (TIMESTAMPDIFF) -- return "TIMESTAMPDIFF(MICROSECOND, %s, %s
@@ -510,7 +510,7 @@ Lines:
 ./django/db/backends/oracle/features.py:41:15     - Unknown word (uppercasing) -- # does by uppercasing all identifiers.
 ./django/db/backends/oracle/functions.py:20:17     - Unknown word (NUMTODSINTERVAL) -- function = "NUMTODSINTERVAL"
 ./django/db/backends/oracle/introspection.py:161:37    - Unknown word (ROWNUM)     -- SELECT * FROM {} WHERE ROWNUM < 2 AND {} > 0".format
-./django/db/backends/oracle/introspection.py:281:17    - Unknown word (LISTAGG)    -- LISTAGG(LOWER(cols.column_name
+./django/db/backends/oracle/introspection.py:282:17    - Unknown word (LISTAGG)    -- LISTAGG(LOWER(cols.column_name
 ./django/db/backends/oracle/introspection.py:85:31     - Unknown word (mviews)     -- FROM user_mviews
 ./django/db/backends/oracle/introspection.py:86:39     - Unknown word (mview)      -- WHERE user_mviews.mview_name = user_tables.table
 ./django/db/backends/oracle/operations.py:323:18    - Unknown word (Psycopg's)  -- # Unlike Psycopg's `query` and MySQLdb
@@ -530,34 +530,34 @@ Lines:
 ./django/db/backends/postgresql/client.py:53:18     - Unknown word (PGPASSFILE)    -- env["PGPASSFILE"] = str(passfile)
 ./django/db/backends/postgresql/creation.py:36:57     - Unknown word (datname)    -- catalog.pg_database WHERE datname = %s",
 ./django/db/backends/postgresql/features.py:43:17     - Unknown word (plpgsql)    -- $$ LANGUAGE plpgsql;"""
-./django/db/backends/postgresql/introspection.py:130:30    - Unknown word (colname)        -- a.attname AS colname
-./django/db/backends/postgresql/introspection.py:134:27    - Unknown word (classid)        -- AND d.classid = 'pg_class'::regclass
-./django/db/backends/postgresql/introspection.py:134:49    - Unknown word (regclass)       -- classid = 'pg_class'::regclass
-./django/db/backends/postgresql/introspection.py:135:27    - Unknown word (refclassid)     -- AND d.refclassid = 'pg_class'::regclass
-./django/db/backends/postgresql/introspection.py:136:42    - Unknown word (refobjid)       -- pg_attribute a ON d.refobjid = a.attrelid
-./django/db/backends/postgresql/introspection.py:137:27    - Unknown word (refobjsubid)    -- AND d.refobjsubid = a.attnum
-./django/db/backends/postgresql/introspection.py:160:42    - Unknown word (conrelid)       -- JOIN pg_class c1 ON con.conrelid = c1.oid
-./django/db/backends/postgresql/introspection.py:161:42    - Unknown word (confrelid)      -- JOIN pg_class c2 ON con.confrelid = c2.oid
-./django/db/backends/postgresql/introspection.py:163:77    - Unknown word (conkey)         -- AND a1.attnum = con.conkey[1]
-./django/db/backends/postgresql/introspection.py:165:77    - Unknown word (confkey)        -- AND a2.attnum = con.confkey[1]
-./django/db/backends/postgresql/introspection.py:168:21    - Unknown word (contype)        -- con.contype = 'f' AND
-./django/db/backends/postgresql/introspection.py:189:19    - Unknown word (conname)        -- c.conname,
-./django/db/backends/postgresql/introspection.py:192:26    - Unknown word (unnest)         -- FROM unnest(c.conkey) WITH ORDINALITY
-./django/db/backends/postgresql/introspection.py:192:48    - Unknown word (ORDINALITY)     -- unnest(c.conkey) WITH ORDINALITY cols(colid, arridx)
-./django/db/backends/postgresql/introspection.py:192:64    - Unknown word (colid)          -- WITH ORDINALITY cols(colid, arridx)
-./django/db/backends/postgresql/introspection.py:192:71    - Unknown word (arridx)         -- ORDINALITY cols(colid, arridx)
-./django/db/backends/postgresql/introspection.py:202:20    - Unknown word (reloptions)     -- cl.reloptions
-./django/db/backends/postgresql/introspection.py:226:17    - Unknown word (indisunique)    -- indisunique,
-./django/db/backends/postgresql/introspection.py:227:17    - Unknown word (indisprimary)   -- indisprimary,
-./django/db/backends/postgresql/introspection.py:229:17    - Unknown word (amname)         -- amname,
-./django/db/backends/postgresql/introspection.py:230:17    - Unknown word (exprdef)        -- exprdef,
-./django/db/backends/postgresql/introspection.py:231:20    - Unknown word (attoptions)     -- s2.attoptions
-./django/db/backends/postgresql/introspection.py:236:34    - Unknown word (indexprs)       -- WHEN idx.indexprs IS NOT NULL THEN
-./django/db/backends/postgresql/introspection.py:237:36    - Unknown word (indexdef)       -- pg_get_indexdef(idx.indexrelid)
-./django/db/backends/postgresql/introspection.py:250:34    - Unknown word (indkey)         -- unnest(i.indkey, i.indoption)
-./django/db/backends/postgresql/introspection.py:250:44    - Unknown word (indoption)      -- unnest(i.indkey, i.indoption)
-./django/db/backends/postgresql/introspection.py:253:45    - Unknown word (indrelid)       -- JOIN pg_class c ON idx.indrelid = c.oid
-./django/db/backends/postgresql/introspection.py:255:42    - Unknown word (relam)          -- JOIN pg_am am ON c2.relam = am.oid
+./django/db/backends/postgresql/introspection.py:131:30    - Unknown word (colname)        -- a.attname AS colname
+./django/db/backends/postgresql/introspection.py:135:27    - Unknown word (classid)        -- AND d.classid = 'pg_class'::regclass
+./django/db/backends/postgresql/introspection.py:135:49    - Unknown word (regclass)       -- classid = 'pg_class'::regclass
+./django/db/backends/postgresql/introspection.py:136:27    - Unknown word (refclassid)     -- AND d.refclassid = 'pg_class'::regclass
+./django/db/backends/postgresql/introspection.py:137:42    - Unknown word (refobjid)       -- pg_attribute a ON d.refobjid = a.attrelid
+./django/db/backends/postgresql/introspection.py:138:27    - Unknown word (refobjsubid)    -- AND d.refobjsubid = a.attnum
+./django/db/backends/postgresql/introspection.py:161:42    - Unknown word (conrelid)       -- JOIN pg_class c1 ON con.conrelid = c1.oid
+./django/db/backends/postgresql/introspection.py:162:42    - Unknown word (confrelid)      -- JOIN pg_class c2 ON con.confrelid = c2.oid
+./django/db/backends/postgresql/introspection.py:164:77    - Unknown word (conkey)         -- AND a1.attnum = con.conkey[1]
+./django/db/backends/postgresql/introspection.py:166:77    - Unknown word (confkey)        -- AND a2.attnum = con.confkey[1]
+./django/db/backends/postgresql/introspection.py:169:21    - Unknown word (contype)        -- con.contype = 'f' AND
+./django/db/backends/postgresql/introspection.py:190:19    - Unknown word (conname)        -- c.conname,
+./django/db/backends/postgresql/introspection.py:193:26    - Unknown word (unnest)         -- FROM unnest(c.conkey) WITH ORDINALITY
+./django/db/backends/postgresql/introspection.py:193:48    - Unknown word (ORDINALITY)     -- unnest(c.conkey) WITH ORDINALITY cols(colid, arridx)
+./django/db/backends/postgresql/introspection.py:193:64    - Unknown word (colid)          -- WITH ORDINALITY cols(colid, arridx)
+./django/db/backends/postgresql/introspection.py:193:71    - Unknown word (arridx)         -- ORDINALITY cols(colid, arridx)
+./django/db/backends/postgresql/introspection.py:203:20    - Unknown word (reloptions)     -- cl.reloptions
+./django/db/backends/postgresql/introspection.py:227:17    - Unknown word (indisunique)    -- indisunique,
+./django/db/backends/postgresql/introspection.py:228:17    - Unknown word (indisprimary)   -- indisprimary,
+./django/db/backends/postgresql/introspection.py:230:17    - Unknown word (amname)         -- amname,
+./django/db/backends/postgresql/introspection.py:231:17    - Unknown word (exprdef)        -- exprdef,
+./django/db/backends/postgresql/introspection.py:232:20    - Unknown word (attoptions)     -- s2.attoptions
+./django/db/backends/postgresql/introspection.py:237:34    - Unknown word (indexprs)       -- WHEN idx.indexprs IS NOT NULL THEN
+./django/db/backends/postgresql/introspection.py:238:36    - Unknown word (indexdef)       -- pg_get_indexdef(idx.indexrelid)
+./django/db/backends/postgresql/introspection.py:251:34    - Unknown word (indkey)         -- unnest(i.indkey, i.indoption)
+./django/db/backends/postgresql/introspection.py:251:44    - Unknown word (indoption)      -- unnest(i.indkey, i.indoption)
+./django/db/backends/postgresql/introspection.py:254:45    - Unknown word (indrelid)       -- JOIN pg_class c ON idx.indrelid = c.oid
+./django/db/backends/postgresql/introspection.py:256:42    - Unknown word (relam)          -- JOIN pg_am am ON c2.relam = am.oid
 ./django/db/backends/postgresql/introspection.py:62:28     - Unknown word (relispartition) -- WHEN c.relispartition THEN 'p'
 ./django/db/backends/postgresql/introspection.py:69:23     - Unknown word (nspname)        -- AND n.nspname NOT IN ('pg_catalog
 ./django/db/backends/postgresql/introspection.py:91:24     - Unknown word (attnotnull)     -- NOT (a.attnotnull OR (t.typtype = 'd'
@@ -583,15 +583,15 @@ Lines:
 ./django/db/backends/sqlite3/_functions.py:84:26     - Unknown word (compileoption) -- sql = "select sqlite_compileoption_used('ENABLE_MATH_FUNCTIONS
 ./django/db/backends/sqlite3/base.py:155:44    - Unknown word (DECLTYPES)  -- types": Database.PARSE_DECLTYPES | Database.PARSE_COLNAMES
 ./django/db/backends/sqlite3/base.py:155:71    - Unknown word (COLNAMES)   -- DECLTYPES | Database.PARSE_COLNAMES,
-./django/db/backends/sqlite3/base.py:257:21    - Unknown word (rowid)      -- rowid,
-./django/db/backends/sqlite3/base.py:356:8     - Unknown word (QMARK)      -- FORMAT_QMARK_REGEX = _lazy_re_compile
-./django/db/backends/sqlite3/base.py:366:26    - Unknown word (qmark)      -- "format" style to "qmark" style
-./django/db/backends/sqlite3/base.py:383:9     - Unknown word (peekable)   -- peekable, param_list = tee(iter
+./django/db/backends/sqlite3/base.py:255:17    - Unknown word (rowid)      -- rowid,
+./django/db/backends/sqlite3/base.py:306:8     - Unknown word (QMARK)      -- FORMAT_QMARK_REGEX = _lazy_re_compile
+./django/db/backends/sqlite3/base.py:316:26    - Unknown word (qmark)      -- "format" style to "qmark" style
+./django/db/backends/sqlite3/base.py:333:9     - Unknown word (peekable)   -- peekable, param_list = tee(iter
 ./django/db/backends/sqlite3/creation.py:105:13    - Unknown word (ondisk)     -- ondisk_db = sqlite3.connect
 ./django/db/backends/sqlite3/creation.py:22:26     - Unknown word (memorydb)   -- return "file:memorydb_%s?mode=memory&cache
-./django/db/backends/sqlite3/features.py:107:39    - Unknown word (liveserverthread) -- "servers.test_liveserverthread.LiveServerThreadTest
-./django/db/backends/sqlite3/features.py:50:16     - Unknown word (nocase)     -- "ci": "nocase",
-./django/db/backends/sqlite3/features.py:78:43     - Unknown word (doesnt)     -- alter_field_default_doesnt_perform_queries",
+./django/db/backends/sqlite3/features.py:103:39    - Unknown word (liveserverthread) -- "servers.test_liveserverthread.LiveServerThreadTest
+./django/db/backends/sqlite3/features.py:46:16     - Unknown word (nocase)     -- "ci": "nocase",
+./django/db/backends/sqlite3/features.py:74:43     - Unknown word (doesnt)     -- alter_field_default_doesnt_perform_queries",
 ./django/db/backends/sqlite3/introspection.py:37:10     - Unknown word (smallinteger) -- "smallinteger": "SmallIntegerField
 ./django/db/backends/sqlite3/operations.py:95:28     - Unknown word (tznames)    -- *self._convert_tznames_to_sql(tzname),
 ./django/db/backends/sqlite3/schema.py:345:41    - Unknown word (autom)      -- model(model, handle_autom2m=False)
@@ -801,14 +801,14 @@ Lines:
 ./django/utils/html.py:11:39     - Unknown word (GENDELIMS)  -- http import RFC3986_GENDELIMS, RFC3986_SUBDELIMS
 ./django/utils/html.py:143:34    - Unknown word (charrefs)   -- super().__init__(convert_charrefs=False)
 ./django/utils/html.py:87:54     - Unknown word (markupsafe) -- party libraries like markupsafe.
-./django/utils/http.py:106:38    - Unknown word (usegmt)      -- formatdate(epoch_seconds, usegmt=True)
-./django/utils/http.py:118:19    - Unknown word (parsedate)   -- # email.utils.parsedate() does the job for RFC
+./django/utils/http.py:107:38    - Unknown word (usegmt)      -- formatdate(epoch_seconds, usegmt=True)
+./django/utils/http.py:119:19    - Unknown word (parsedate)   -- # email.utils.parsedate() does the job for RFC
 ./django/utils/http.py:11:6      - Unknown word (splitnetloc) -- _splitnetloc,
 ./django/utils/http.py:12:6      - Unknown word (splitparams) -- _splitparams,
-./django/utils/http.py:168:18    - Unknown word (overconsumption) -- # To prevent overconsumption of server resources
-./django/utils/http.py:379:59    - Unknown word (schemaless)      -- handling the path as schemaless and
-./django/utils/http.py:387:6     - Unknown word (parseparam)      -- def _parseparam(s):
-./django/utils/http.py:50:34     - Unknown word (WHATWG)      -- bytes to be removed per WHATWG spec.
+./django/utils/http.py:169:18    - Unknown word (overconsumption) -- # To prevent overconsumption of server resources
+./django/utils/http.py:380:59    - Unknown word (schemaless)      -- handling the path as schemaless and
+./django/utils/http.py:388:6     - Unknown word (parseparam)      -- def _parseparam(s):
+./django/utils/http.py:51:34     - Unknown word (WHATWG)      -- bytes to be removed per WHATWG spec.
 ./django/utils/ipv6.py:16:31     - Unknown word (hextets)    -- zeroes, and make sure all hextets are lowercase.
 ./django/utils/jslex.py:103:14    - Unknown word (linecomment) -- Tok("linecomment", r"//.*?$"),
 ./django/utils/jslex.py:111:62    - Unknown word (instanceof)  -- function if import in instanceof
@@ -1896,7 +1896,7 @@ Lines:
 ./tests/gis_tests/test_geoip2.py:44:9      - Unknown word (cntry)      -- cntry = os.path.join(path
 ./tests/gis_tests/test_ptr.py:42:20     - Unknown word (ptrs)       -- # (in `bad_ptrs`) aren't allowed.
 ./tests/gis_tests/test_spatialrefsys.py:26:10     - Unknown word (eprec)      -- "eprec": (1, 1, 9),
-./tests/handlers/tests.py:179:14    - Unknown word (suspiciousop) -- def test_suspiciousop_in_view_returns_400
+./tests/handlers/tests.py:192:14    - Unknown word (suspiciousop) -- def test_suspiciousop_in_view_returns_400
 ./tests/handlers/tests.py:48:15     - Unknown word (MSIE)       -- # MSIE).
 ./tests/httpwrappers/tests.py:120:25    - Unknown word (xebst)      -- q["next"] = "/t\xebst&key/"
 ./tests/httpwrappers/tests.py:286:28    - Unknown word (nondefault) -- def test_fromkeys_with_nondefault_encoding(self):
@@ -2363,10 +2363,10 @@ Lines:
 ./tests/postgres_tests/test_array.py:321:20    - Unknown word (mogrify)    -- # psycopg2 mogrify method that generates
 ./tests/postgres_tests/test_array.py:925:38    - Unknown word (chartextarrayindexmodel) -- name = "postgres_tests_chartextarrayindexmodel"
 ./tests/postgres_tests/test_array.py:957:35    - Unknown word (integerarraymodel)       -- model": "postgres_tests.integerarraymodel", "pk": null}]'
-./tests/postgres_tests/test_constraints.py:1199:35   - Unknown word (Depracation) -- ExclusionConstraintOpclassesDepracationTests(PostgreSQLTestCase
-./tests/postgres_tests/test_constraints.py:201:48    - Unknown word (Bedemir's)  -- setting__contains="Sir Bedemir's Castle"),
-./tests/postgres_tests/test_constraints.py:541:25    - Unknown word (SPGIST)     -- index_type="SPGIST",
-./tests/postgres_tests/test_constraints.py:756:25    - Unknown word (TSTZRANGE)  -- function = "TSTZRANGE"
+./tests/postgres_tests/test_constraints.py:1209:35   - Unknown word (Depracation) -- ExclusionConstraintOpclassesDepracationTests(PostgreSQLTestCase
+./tests/postgres_tests/test_constraints.py:211:48    - Unknown word (Bedemir's)  -- setting__contains="Sir Bedemir's Castle"),
+./tests/postgres_tests/test_constraints.py:551:25    - Unknown word (SPGIST)     -- index_type="SPGIST",
+./tests/postgres_tests/test_constraints.py:766:25    - Unknown word (TSTZRANGE)  -- function = "TSTZRANGE"
 ./tests/postgres_tests/test_hstore.py:303:42    - Unknown word (hstoremodel) -- model": "postgres_tests.hstoremodel",
 ./tests/postgres_tests/test_hstore.py:81:44     - Unknown word (Tigr)       -- HStoreModel(field={"cat": "TigrOu", "breed": "birman
 ./tests/postgres_tests/test_hstore.py:81:63     - Unknown word (birman)     -- "TigrOu", "breed": "birman"}),
@@ -2377,12 +2377,11 @@ Lines:
 ./tests/postgres_tests/test_operations.py:361:21    - Unknown word (phonebook)  -- "german_phonebook_test",
 ./tests/postgres_tests/test_operations.py:363:29    - Unknown word (phonebk)    -- locale="de-u-co-phonebk",
 ./tests/postgres_tests/test_search.py:100:35    - Unknown word (cadeau)     -- dialogue="Oh. Un beau cadeau. Oui oui.",
-./tests/postgres_tests/test_search.py:152:49    - Unknown word (cadeaux)    -- vector=SearchQuery("cadeaux", config="french")
-./tests/postgres_tests/test_search.py:204:26    - Unknown word (minstrelbravely) -- ).filter(search="minstrelbravely")
+./tests/postgres_tests/test_search.py:154:49    - Unknown word (cadeaux)    -- vector=SearchQuery("cadeaux", config="french")
+./tests/postgres_tests/test_search.py:206:26    - Unknown word (minstrelbravely) -- ).filter(search="minstrelbravely")
 ./tests/postgres_tests/test_search.py:66:50     - Unknown word (Bedemir)    -- objects.create(name="Bedemir")
 ./tests/postgres_tests/test_search.py:66:9      - Unknown word (bedemir)    -- bedemir = Character.objects
 ./tests/postgres_tests/test_search.py:94:79     - Unknown word (Ramper)     -- Master Ruiz' de lu la Ramper"
-./tests/postgres_tests/test_signals.py:12:13     - Unknown word (pyscogp)    -- pass # pyscogp2 isn't installed.
 ./tests/postgres_tests/test_trigram.py:39:20     - Unknown word (Gumby)      -- field="Gumby rides on the path of
 ./tests/postgres_tests/test_trigram.py:42:68     - Unknown word (Middlesborough) -- trigram_word_similar="Middlesborough"),
 ./tests/prefetch_related/test_prefetch_related_objects.py:17:48     - Unknown word (Wuthering)  -- objects.create(title="Wuthering Heights")
@@ -2577,7 +2576,9 @@ Lines:
 ./tests/shortcuts/tests.py:23:75     - Unknown word (rendertest) -- Type"], "application/x-rendertest")
 ./tests/signals/tests.py:202:42    - Unknown word (Rayuela)    -- objects.create(name="Rayuela")
 ./tests/signing/tests.py:160:52    - Unknown word (Rhemh)      -- msxYA0sBohAxLC0BJf8uRhemh0BGU",
-./tests/signing/tests.py:186:42    - Unknown word (othersecret) -- newsecret", fallback_keys=["othersecret", "secret"]
+./tests/signing/tests.py:186:46    - Unknown word (othersecret) -- newsecret", fallback_keys=["othersecret", "secret"]
+./tests/signing/tests.py:256:49    - Unknown word (somesalt)    -- Signer("secret", "/", "somesalt", "sha1", ["oldsecret
+./tests/signing/tests.py:258:57    - Unknown word (XRTF)        -- xyz/zzdO_8rk-NGnm8jNasXRTF2P5kY")
 ./tests/signing/tests.py:51:19     - Unknown word (VQOZ)       -- "Usf3uVQOZ9m6uPfVonKR-EBXjPe7bjMbp
 ./tests/signing/tests.py:51:52     - Unknown word (Mfsptgkk)   -- uPfVonKR-EBXjPe7bjMbp3_Fq8MfsptgkkM1ojidN0BxYaT5HAEN1"
 ./tests/signing/tests.py:51:62     - Unknown word (ojid)       -- bjMbp3_Fq8MfsptgkkM1ojidN0BxYaT5HAEN1"
@@ -2598,8 +2599,8 @@ Lines:
 ./tests/staticfiles_tests/test_management.py:171:14    - Unknown word (collectstatis) -- def test_collectstatis_check(self):
 ./tests/staticfiles_tests/test_storage.py:108:57    - Unknown word (webfont)    -- font.b8d603e42714.svg#webfontIyfZbseF", content)
 ./tests/staticfiles_tests/test_storage.py:108:67    - Unknown word (Zbse)       -- e42714.svg#webfontIyfZbseF", content)
-./tests/staticfiles_tests/test_storage.py:265:45    - Unknown word (GURL)       -- assertIn(b"/*# sOuRcEMaPpInGURL=source_map.css.map
-./tests/staticfiles_tests/test_storage.py:508:14    - Unknown word (collectstatistic) -- def test_collectstatistic_no_post_process_replaced
+./tests/staticfiles_tests/test_storage.py:311:45    - Unknown word (GURL)       -- assertIn(b"/*# sOuRcEMaPpInGURL=source_map.css.map
+./tests/staticfiles_tests/test_storage.py:554:14    - Unknown word (collectstatistic) -- def test_collectstatistic_no_post_process_replaced
 ./tests/staticfiles_tests/test_templatetags.py:11:60     - Unknown word (Fchars)     -- , "/static/special%3Fchars%26quoted.html"
 ./tests/swappable_models/tests.py:35:45     - Unknown word (alternatearticle) -- swappable_models", "alternatearticle"), apps_models)
 ./tests/syndication_tests/feeds.py:227:18    - Unknown word (sarticle)   -- return "%sarticle/%s/" % (item.entry.get
@@ -2813,7 +2814,9 @@ Lines:
 ./tests/utils_tests/test_html.py:112:26    - Unknown word (ript)       -- ("<sc<!-- -->ript>test<<!-- -->/script
 ./tests/utils_tests/test_html.py:195:44    - Unknown word (Etest)      -- "\\u003Cscript\\u003Etest\\u0026ing\\u003C/script
 ./tests/utils_tests/test_html.py:42:33     - Unknown word (sfdsa)      -- patterns = ("%s", "asdf%sfdsa", "%s1", "1%sb")
-./tests/utils_tests/test_http.py:481:60    - Unknown word (Afun)       -- This%20is%20%2A%2A%2Afun%2A%2A%2A",
+./tests/utils_tests/test_http.py:482:60    - Unknown word (Afun)       -- This%20is%20%2A%2A%2Afun%2A%2A%2A",
+./tests/utils_tests/test_http.py:528:22    - Unknown word (espécimen)  -- ((True, "espécimen"), "attachment; filename
+./tests/utils_tests/test_http.py:528:74    - Unknown word (cimen)      -- filename*=utf-8''esp%C3%A9cimen"),
 ./tests/utils_tests/test_jslex.py:161:17    - Unknown word (rexl)       -- rexl.re = {
 ./tests/utils_tests/test_jslex.py:55:13     - Unknown word (ƃuıxǝ)      -- (r'"ƃuıxǝ⅂ ʇdıɹɔsɐʌɐſ\""', [r
 ./tests/utils_tests/test_jslex.py:55:20     - Unknown word (ʇdıɹɔsɐʌɐſ) -- (r'"ƃuıxǝ⅂ ʇdıɹɔsɐʌɐſ\""', [r'string "ƃuıx

@@ -29,14 +29,14 @@ Lines:
 ./Engine/Assembly/x86-64/neo-engine-cpu.adb:245:26    - Unknown word (fldcw)          -- " fldcw (%%eax)          "
 ./Engine/Assembly/x86-64/neo-engine-cpu.adb:304:28    - Unknown word (fstp)           -- " fstp %%st
 ./Engine/Assembly/x86-64/neo-engine-cpu.adb:351:31    - Unknown word (fxch)           -- -- fxch %%st (I)
-./Engine/Assembly/x86-64/neo-engine-cpu.adb:466:17    - Unknown word (denormals)      -- -- Enable denormals are zero
-./Engine/Assembly/x86-64/neo-engine-cpu.adb:475:28    - Unknown word (fxsave)         -- " fxsave (%%eax)           "
+./Engine/Assembly/x86-64/neo-engine-cpu.adb:466:21    - Unknown word (denormals)      -- -- -- Enable denormals are zero
+./Engine/Assembly/x86-64/neo-engine-cpu.adb:475:32    - Unknown word (fxsave)         -- " fxsave (%%eax)           "
 ./Engine/Assembly/x86-64/neo-engine-cpu.adb:64:27     - Unknown word (cpuid)      -- Template => "cpuid",
 ./Engine/Assembly/x86-64/neo-engine-cpu.adb:99:30     - Unknown word (SIMD)       -- Result.Has_Streaming_SIMD_Extensions_4_Supplement
-./Engine/Runtime/a-comutr.adb:1735:7    - Unknown word (Prepent)      -- -- Prepent_Child --
-./Engine/Runtime/a-comutr.adb:466:29    - Unknown word (multiway)   -- Implement Vet for multiway tree???
-./Engine/Runtime/a-comutr.adb:765:19    - Unknown word (represention) -- -- Restore represention invariants before attempting
-./Engine/Runtime/a-comutr.adb:964:7     - Unknown word (Unbusy)       -- Unbusy (Object.Container.TC
+./Engine/Runtime/a-comutr.adb:1731:7    - Unknown word (Prepent)      -- -- Prepent_Child --
+./Engine/Runtime/a-comutr.adb:462:29    - Unknown word (multiway)   -- Implement Vet for multiway tree???
+./Engine/Runtime/a-comutr.adb:761:19    - Unknown word (represention) -- -- Restore represention invariants before attempting
+./Engine/Runtime/a-comutr.adb:960:7     - Unknown word (Unbusy)       -- Unbusy (Object.Container.TC
 ./Engine/Systems/Win32/neo-engine-system-console.adb:224:120   - Unknown word (mwindows)   -- This fails without -mwindows
 ./Engine/Systems/Win32/neo-engine-system-console.adb:296:27    - Unknown word (inputed)    -- -- Query user inputed sizes then calculate
 ./Engine/Systems/Win32/neo-engine-system-console.adb:34:54     - Unknown word (Lucida)     -- Str_C := To_Str_C ("Lucida Console");
@@ -572,23 +572,23 @@ Lines:
 ./Engine/neo-data-texture.adb:52:59     - Unknown word (mipmaps)    -- according to the spec zero mipmaps also happens to mean
 ./Engine/neo-data-texture.ads:28:45     - Unknown word (preferribly) -- textures through KTX1 (preferribly generated through PVRTexTool
 ./Engine/neo-data-texture.ads:29:102    - Unknown word (Orienation)  -- have the correct KTXOrienation of "S=r,T=u,R=i"
-./Engine/neo-data.adb:1020:24   - Unknown word (dimensionals) -- -- Multi-dimensionals are wrapped in curlies
-./Engine/neo-data.adb:1020:52   - Unknown word (curlies)      -- dimensionals are wrapped in curlies
-./Engine/neo-data.adb:1063:37   - Unknown word (rendevous)    -- Set the locals via a rendevous
-./Engine/neo-data.adb:1287:36   - Unknown word (dimensinal)   -- -- Parse multi-dimensinal
-./Engine/neo-data.adb:306:17    - Unknown word (catagory)   -- -- Rough "catagory" tables for characters
-./Engine/neo-data.adb:307:42    - Unknown word (Catagory)   -- Kind is (Identifier_Catagory, Whitespace_Catagory
-./Engine/neo-data.adb:308:7     - Unknown word (CATAGORY)   -- CATAGORY : array (Char_8'First
-./Engine/neo-data.adb:315:7     - Unknown word (SEPORATOR)  -- SEPORATOR_VALUE : constant Int
-./Engine/neo-data.adb:690:45    - Unknown word (Deciaml)    -- Real_Digits (Before_Deciaml_Point : Bool) is
-./Engine/neo-data.adb:748:16    - Unknown word (Indentifier) -- -- Parse_Indentifier --
-./Engine/neo-data.adb:828:73    - Unknown word (Bitsize)     -- Primitive_Kind; Test_Bitsize : Bool := False; Disble
-./Engine/neo-data.adb:828:98    - Unknown word (Disble)      -- Bitsize : Bool := False; Disble_8_Bit : Bool := False
-./Engine/neo-data.adb:836:34    - Unknown word (bitsize)     -- - Load the optional bitsize
-./Engine/neo-data.adb:881:41    - Unknown word (nsigned)     -- => Parse_Rest ("nsigned_int", Unsigned_Int8
-./Engine/neo-data.adb:882:41    - Unknown word (loat)        -- => Parse_Rest ("loat", Type_x16_Kind
-./Engine/neo-data.adb:885:41    - Unknown word (ouble)       -- => Parse_Rest ("ouble", Float64_Kind
-./Engine/neo-data.adb:886:41    - Unknown word (tring)       -- => Parse_Rest ("tring", String_Kind
+./Engine/neo-data.adb:1186:36   - Unknown word (dimensinal)   -- -- Parse multi-dimensinal
+./Engine/neo-data.adb:205:17    - Unknown word (catagory)   -- -- Rough "catagory" tables for characters
+./Engine/neo-data.adb:206:42    - Unknown word (Catagory)   -- Kind is (Identifier_Catagory, Whitespace_Catagory
+./Engine/neo-data.adb:207:7     - Unknown word (CATAGORY)   -- CATAGORY : array (Char_8'First
+./Engine/neo-data.adb:214:7     - Unknown word (SEPORATOR)  -- SEPORATOR_VALUE : constant Int
+./Engine/neo-data.adb:589:45    - Unknown word (Deciaml)    -- Real_Digits (Before_Deciaml_Point : Bool) is
+./Engine/neo-data.adb:647:16    - Unknown word (Indentifier) -- -- Parse_Indentifier --
+./Engine/neo-data.adb:727:73    - Unknown word (Bitsize)     -- Primitive_Kind; Test_Bitsize : Bool := False; Disble
+./Engine/neo-data.adb:727:98    - Unknown word (Disble)      -- Bitsize : Bool := False; Disble_8_Bit : Bool := False
+./Engine/neo-data.adb:735:34    - Unknown word (bitsize)     -- - Load the optional bitsize
+./Engine/neo-data.adb:780:41    - Unknown word (nsigned)     -- => Parse_Rest ("nsigned_int", Unsigned_Int8
+./Engine/neo-data.adb:781:41    - Unknown word (loat)        -- => Parse_Rest ("loat", Type_x16_Kind
+./Engine/neo-data.adb:784:41    - Unknown word (ouble)       -- => Parse_Rest ("ouble", Float64_Kind
+./Engine/neo-data.adb:785:41    - Unknown word (tring)       -- => Parse_Rest ("tring", String_Kind
+./Engine/neo-data.adb:919:24    - Unknown word (dimensionals) -- -- Multi-dimensionals are wrapped in curlies
+./Engine/neo-data.adb:919:52    - Unknown word (curlies)      -- dimensionals are wrapped in curlies
+./Engine/neo-data.adb:962:37    - Unknown word (rendevous)    -- Set the locals via a rendevous
 ./Engine/neo-data.ads:35:78     - Unknown word (SPIR)       -- in bytes (needed for SPIR-V shaders among other
 ./Engine/neo-data.ads:46:88     - Unknown word (repetative) -- cetera), and "* #" for repetative items.
 ./Engine/neo-data.ads:88:82     - Unknown word (listeral)   -- list] "}" | "[" integer-listeral "]" [name] "{" data

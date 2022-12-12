@@ -3,7 +3,7 @@ Repository: caddyserver/caddy
 Url: "https://github.com/caddyserver/caddy.git"
 Args: ["**/*.go"]
 Lines:
- CSpell: Files checked: 224, Issues found: 3469 in 207 files
+ CSpell: Files checked: 225, Issues found: 3477 in 208 files
  exit code: 1
 ./admin.go:1032:33   - Unknown word (unsynchronized) -- This is a low-level, unsynchronized function; most callers
 ./admin.go:1068:31   - Unknown word (elems)          -- array = append(array, elems...)
@@ -92,20 +92,20 @@ Lines:
 ./caddyconfig/httpcaddyfile/options.go:43:43     - Unknown word (ACMEDNS)    -- "acme_dns", parseOptACMEDNS)
 ./caddyconfig/httpcaddyfile/options.go:44:43     - Unknown word (ACMEEAB)    -- "acme_eab", parseOptACMEEAB)
 ./caddyconfig/httpcaddyfile/options_test.go:17:22     - Unknown word (caddytest)  -- // are present in: caddytest/integration/caddyfile
-./caddyconfig/httpcaddyfile/pkiapp.go:63:33     - Unknown word (CAID)       -- ID = caddypki.DefaultCAID
+./caddyconfig/httpcaddyfile/pkiapp.go:65:33     - Unknown word (CAID)       -- ID = caddypki.DefaultCAID
 ./caddyconfig/httpcaddyfile/serveroptions.go:155:5     - Unknown word (protos)     -- protos := d.RemainingArgs(
 ./caddyconfig/httpcaddyfile/tlsapp.go:197:38    - Unknown word (Tailscale)  -- as desired (see the Tailscale listener plugin), so
 ./caddyconfig/httpcaddyfile/tlsapp.go:360:9     - Unknown word (ACMECA)     -- globalACMECA := options["acme_ca
 ./caddyconfig/httpcaddyfile/tlsapp.go:52:53     - Unknown word (hostless)   -- server block with a hostless
 ./caddyconfig/httpcaddyfile/tlsapp.go:55:22     - Unknown word (Hostless)   -- httpsHostsSharedWithHostlessKey := make(map[string
 ./caddyconfig/httploader.go:60:7      - Unknown word (CAPEM)      -- RootCAPEMFiles []string `json
-./caddytest/caddytest.go:239:12    - Unknown word (inprocess)   -- // start inprocess caddy server
 ./caddytest/caddytest.go:24:14     - Unknown word (aryann)     -- "github.com/aryann/difflib"
 ./caddytest/caddytest.go:24:21     - Unknown word (difflib)    -- "github.com/aryann/difflib"
+./caddytest/caddytest.go:256:12    - Unknown word (inprocess)   -- // start inprocess caddy server
 ./caddytest/caddytest.go:26:2      - Unknown word (caddycmd)   -- caddycmd "github.com/caddyserver
-./caddytest/caddytest.go:279:36    - Unknown word (certificatename) -- convention to replace /[certificatename].[crt|key] with the
-./caddytest/caddytest.go:312:67    - Unknown word (nolint)          -- InsecureSkipVerify: true}, //nolint:gosec
-./caddytest/caddytest.go:312:74    - Unknown word (gosec)           -- reSkipVerify: true}, //nolint:gosec
+./caddytest/caddytest.go:296:36    - Unknown word (certificatename) -- convention to replace /[certificatename].[crt|key] with the
+./caddytest/caddytest.go:329:67    - Unknown word (nolint)          -- InsecureSkipVerify: true}, //nolint:gosec
+./caddytest/caddytest.go:329:74    - Unknown word (gosec)           -- reSkipVerify: true}, //nolint:gosec
 ./caddytest/caddytest.go:37:2      - Unknown word (Certifcates) -- Certifcates []string
 ./caddytest/caddytest.go:94:53     - Unknown word (configurion) -- configure the server with a configurion of a specific
 ./caddytest/integration/autohttps_test.go:20:11     - Unknown word (Yahaha)     -- respond "Yahaha! You found me!"
@@ -241,7 +241,6 @@ Lines:
 ./modules/caddyhttp/matchers.go:137:53    - Unknown word (escapings)  -- including those with bad escapings or illegal characters
 ./modules/caddyhttp/matchers.go:1387:15   - Unknown word (Adresses)   -- // Some IPv6-Adresses can contain zone identifiers
 ./modules/caddyhttp/matchers.go:1424:22   - Unknown word (embedable)  -- / MatchRegexp is an embedable type for matching
-./modules/caddyhttp/matchers.go:143:66    - Unknown word (relyon)     -- Backend applications relyon on query
 ./modules/caddyhttp/matchers.go:613:22    - Unknown word (rawpath)    -- // we can now treat rawpath globs (%*) as regular
 ./modules/caddyhttp/matchers.go:818:22    - Unknown word (WHATWG)     -- // Despite the URL WHATWG spec mandating the use
 ./modules/caddyhttp/matchers.go:819:56    - Unknown word (Filippo)    -- lementation is different, and Filippo Valsorda rightly wrote
@@ -343,10 +342,10 @@ Lines:
 ./modules/caddyhttp/tracing/tracer.go:15:2      - Unknown word (sdktrace)      -- sdktrace "go.opentelemetry.io
 ./modules/caddyhttp/tracing/tracer.go:16:2      - Unknown word (semconv)       -- semconv "go.opentelemetry.io
 ./modules/caddypki/acmeserver/acmeserver.go:15:9      - Unknown word (acmeserver) -- package acmeserver
-./modules/caddypki/acmeserver/acmeserver.go:204:17    - Unknown word (bbolt)      -- Type: "bbolt",
+./modules/caddypki/acmeserver/acmeserver.go:216:17    - Unknown word (bbolt)      -- Type: "bbolt",
 ./modules/caddypki/acmeserver/acmeserver.go:30:14     - Unknown word (smallstep)  -- "github.com/smallstep/certificates/acme"
 ./modules/caddypki/acmeserver/acmeserver.go:32:55     - Unknown word (nosql)      -- certificates/acme/db/nosql"
-./modules/caddypki/ca.go:184:31    - Unknown word (Smallstep)  -- NewAuthority returns a new Smallstep-powered signing authority
+./modules/caddypki/ca.go:192:31    - Unknown word (Smallstep)  -- NewAuthority returns a new Smallstep-powered signing authority
 ./modules/caddypki/ca.go:32:24     - Unknown word (truststore) -- github.com/smallstep/truststore"
 ./modules/caddypki/certificates.go:22:21     - Unknown word (keyutil)    -- "go.step.sm/crypto/keyutil"
 ./modules/caddypki/pki.go:94:69     - Unknown word (unconfigured) -- installation disabled; unconfigured clients may show warnings

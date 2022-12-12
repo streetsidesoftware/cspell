@@ -3,9 +3,9 @@ Repository: caddyserver/caddy
 Url: https://github.com/caddyserver/caddy.git
 Args: ["**/*.go"]
 Summary:
-  files: 224
-  filesWithIssues: 207
-  issues: 3469
+  files: 225
+  filesWithIssues: 208
+  issues: 3477
   errors: 0
 Errors: []
 
@@ -97,7 +97,7 @@ issues:
   - "caddyconfig/httpcaddyfile/options_test.go:17:22     	caddytest   	U   	// are present in: caddytest/integration/caddyfile"
   - "caddyconfig/httpcaddyfile/options.go:43:43      	ACMEDNS 	U   	\"acme_dns\", parseOptACMEDNS)"
   - "caddyconfig/httpcaddyfile/options.go:44:43      	ACMEEAB 	U   	\"acme_eab\", parseOptACMEEAB)"
-  - "caddyconfig/httpcaddyfile/pkiapp.go:63:33   	CAID	U   	ID = caddypki.DefaultCAID"
+  - "caddyconfig/httpcaddyfile/pkiapp.go:65:33   	CAID	U   	ID = caddypki.DefaultCAID"
   - "caddyconfig/httpcaddyfile/serveroptions.go:155:5    	protos  	U   	protos := d.RemainingArgs("
   - "caddyconfig/httpcaddyfile/tlsapp.go:52:53   	hostless    	U   	server block with a hostless"
   - "caddyconfig/httpcaddyfile/tlsapp.go:55:22   	Hostless    	U   	httpsHostsSharedWithHostlessKey := make(map[string"
@@ -109,10 +109,10 @@ issues:
   - "caddytest/caddytest.go:26:2     	caddycmd        	U   	caddycmd \"github.com/caddyserver"
   - "caddytest/caddytest.go:37:2     	Certifcates     	U   	Certifcates []string"
   - "caddytest/caddytest.go:94:53    	configurion     	U   	configure the server with a configurion of a specific"
-  - "caddytest/caddytest.go:239:12   	inprocess       	U   	// start inprocess caddy server"
-  - "caddytest/caddytest.go:279:36   	certificatename 	U   	convention to replace /[certificatename].[crt|key] with the"
-  - "caddytest/caddytest.go:312:67   	nolint          	U   	InsecureSkipVerify: true}, //nolint:gosec"
-  - "caddytest/caddytest.go:312:74   	gosec           	U   	reSkipVerify: true}, //nolint:gosec"
+  - "caddytest/caddytest.go:256:12   	inprocess       	U   	// start inprocess caddy server"
+  - "caddytest/caddytest.go:296:36   	certificatename 	U   	convention to replace /[certificatename].[crt|key] with the"
+  - "caddytest/caddytest.go:329:67   	nolint          	U   	InsecureSkipVerify: true}, //nolint:gosec"
+  - "caddytest/caddytest.go:329:74   	gosec           	U   	reSkipVerify: true}, //nolint:gosec"
   - "caddytest/integration/autohttps_test.go:20:11   	Yahaha  	U   	respond \"Yahaha! You found me!\""
   - "caddytest/integration/caddyfile_test.go:82:11   	clientname  	U   	Name: \"clientname\","
   - "caddytest/integration/reverseproxy_test.go:43:8     	upstreams   	U   	\"upstreams\": ["
@@ -253,7 +253,6 @@ issues:
   - "modules/caddyhttp/matchers_test.go:765:17   	somekey     	U   	input: \"/?somekey=1\","
   - "modules/caddyhttp/matchers_test.go:812:43   	barfoo      	U   	Header{\"Field\": []string{\"barfoo\", \"foobar\"}},"
   - "modules/caddyhttp/matchers.go:137:53    	escapings   	U   	including those with bad escapings or illegal characters"
-  - "modules/caddyhttp/matchers.go:143:66    	relyon      	U   	Backend applications relyon on query"
   - "modules/caddyhttp/matchers.go:613:22    	rawpath     	U   	// we can now treat rawpath globs (%*) as regular"
   - "modules/caddyhttp/matchers.go:818:22    	WHATWG      	U   	// Despite the URL WHATWG spec mandating the use"
   - "modules/caddyhttp/matchers.go:819:56    	Filippo     	U   	lementation is different, and Filippo Valsorda rightly wrote"
@@ -350,9 +349,9 @@ issues:
   - "modules/caddypki/acmeserver/acmeserver.go:15:9      	acmeserver  	U   	package acmeserver"
   - "modules/caddypki/acmeserver/acmeserver.go:30:14     	smallstep   	U   	\"github.com/smallstep/certificates/acme\""
   - "modules/caddypki/acmeserver/acmeserver.go:32:55     	nosql       	U   	certificates/acme/db/nosql\""
-  - "modules/caddypki/acmeserver/acmeserver.go:204:17    	bbolt       	U   	Type: \"bbolt\","
+  - "modules/caddypki/acmeserver/acmeserver.go:216:17    	bbolt       	U   	Type: \"bbolt\","
   - "modules/caddypki/ca.go:32:24    	truststore  	U   	github.com/smallstep/truststore\""
-  - "modules/caddypki/ca.go:184:31   	Smallstep   	U   	NewAuthority returns a new Smallstep-powered signing authority"
+  - "modules/caddypki/ca.go:192:31   	Smallstep   	U   	NewAuthority returns a new Smallstep-powered signing authority"
   - "modules/caddypki/certificates.go:22:21      	keyutil 	U   	\"go.step.sm/crypto/keyutil\""
   - "modules/caddypki/pki.go:94:69   	unconfigured	U   	installation disabled; unconfigured clients may show warnings"
   - "modules/caddytls/acmeissuer.go:55:27    	mothership  	U   	not sent to any Caddy mothership or used for any purpose"

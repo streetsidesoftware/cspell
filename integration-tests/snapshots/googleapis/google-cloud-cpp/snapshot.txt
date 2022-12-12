@@ -3,7 +3,7 @@ Repository: googleapis/google-cloud-cpp
 Url: "https://github.com/googleapis/google-cloud-cpp.git"
 Args: ["--config=../../../../config/repositories/googleapis/google-cloud-cpp/cspell.json","**/*","-e","{*.BUILD,BUILD,CHANGELOG.md,*.sh,*.cfg,*.ps1,Dockerfile.*,*.Dockerfile,*.{yaml,xml,json,cmake}}"]
 Lines:
- CSpell: Files checked: 8640, Issues found: 60992 in 6659 files
+ CSpell: Files checked: 8692, Issues found: 61226 in 6695 files
  exit code: 1
 ./ARCHITECTURE.md:100:20    - Unknown word (bigtable)   -- - Bigtable has a [`bigtable::Table`](/google/cloud
 ./ARCHITECTURE.md:100:3     - Unknown word (Bigtable)   -- - Bigtable has a [`bigtable::Table
@@ -124,20 +124,21 @@ Lines:
 ./ci/etc/docuploader-requirements.in:2:1       - Unknown word (certifi)    -- certifi==2022.6.15
 ./ci/etc/docuploader-requirements.in:5:1       - Unknown word (colorlog)   -- colorlog==6.7.0
 ./ci/etc/docuploader-requirements.txt:5:43      - Unknown word (docuploader) -- generate-hashes ci/etc/docuploader-requirements.in
-./ci/etc/expected_install_directories:119:24    - Unknown word (clouddms)                -- include/google/cloud/clouddms
-./ci/etc/expected_install_directories:270:33    - Unknown word (agentendpoint)           -- google/cloud/osconfig/agentendpoint
-./ci/etc/expected_install_directories:392:30    - Unknown word (livestream)              -- include/google/cloud/video/livestream
-./ci/etc/expected_install_directories:440:27    - Unknown word (clouddebugger)           -- include/google/devtools/clouddebugger
-./ci/etc/expected_install_directories:442:27    - Unknown word (cloudprofiler)           -- include/google/devtools/cloudprofiler
-./ci/etc/expected_install_directories:444:27    - Unknown word (cloudtrace)              -- include/google/devtools/cloudtrace
-./ci/etc/expected_install_directories:462:29    - Unknown word (metricsscope)            -- include/google/monitoring/metricsscope
+./ci/etc/expected_install_directories:121:24    - Unknown word (clouddms)                -- include/google/cloud/clouddms
+./ci/etc/expected_install_directories:275:33    - Unknown word (agentendpoint)           -- google/cloud/osconfig/agentendpoint
+./ci/etc/expected_install_directories:397:30    - Unknown word (livestream)              -- include/google/cloud/video/livestream
+./ci/etc/expected_install_directories:445:27    - Unknown word (clouddebugger)           -- include/google/devtools/clouddebugger
+./ci/etc/expected_install_directories:447:27    - Unknown word (cloudprofiler)           -- include/google/devtools/cloudprofiler
+./ci/etc/expected_install_directories:449:27    - Unknown word (cloudtrace)              -- include/google/devtools/cloudtrace
+./ci/etc/expected_install_directories:468:29    - Unknown word (metricsscope)            -- include/google/monitoring/metricsscope
 ./ci/etc/expected_install_directories:65:35     - Unknown word (appconnections) -- google/cloud/beyondcorp/appconnections
 ./ci/etc/expected_install_directories:67:35     - Unknown word (appconnectors)  -- google/cloud/beyondcorp/appconnectors
 ./ci/etc/expected_install_directories:69:35     - Unknown word (appgateways)    -- google/cloud/beyondcorp/appgateways
 ./ci/etc/expected_install_directories:71:35     - Unknown word (clientconnectorservices) -- google/cloud/beyondcorp/clientconnectorservices
 ./ci/etc/expected_install_directories:73:35     - Unknown word (clientgateways)          -- google/cloud/beyondcorp/clientgateways
 ./ci/etc/expected_install_directories:78:33     - Unknown word (analyticshub)            -- google/cloud/bigquery/analyticshub
-./ci/etc/expected_install_directories:82:33     - Unknown word (datatransfer)            -- google/cloud/bigquery/datatransfer
+./ci/etc/expected_install_directories:82:33     - Unknown word (datapolicies)            -- google/cloud/bigquery/datapolicies
+./ci/etc/expected_install_directories:84:33     - Unknown word (datatransfer)            -- google/cloud/bigquery/datatransfer
 ./ci/etc/pip-tooling-requirements.txt:10:1      - Unknown word (tomli)      -- tomli==2.0.1 \
 ./ci/generate-markdown/README.md:12:4      - Unknown word (HOWTO)      -- ## HOWTO: Generate the markdown
 ./ci/kokoro/README.md:13:46     - Unknown word (Googlers)   -- Kokoro is available to Googlers only (sorry) at go/kokoro
@@ -253,6 +254,7 @@ Lines:
 ./external/googleapis/CMakeLists.txt:88:18     - Unknown word (latlng)      -- "google/type/latlng.proto"
 ./external/googleapis/CMakeLists.txt:95:18     - Unknown word (timeofday)   -- "google/type/timeofday.proto")
 ./external/googleapis/CMakeLists.txt:97:15     - Unknown word (Werror)      -- include(EnableWerror)
+./external/googleapis/protolists/bigquery.list:3:63      - Unknown word (datapolicy) -- bigquery/datapolicies/v1:datapolicy.proto
 ./external/googleapis/protolists/connectors.list:1:52      - Unknown word (authconfig) -- cloud/connectors/v1:authconfig.proto
 ./external/googleapis/protolists/datacatalog.list:6:57      - Unknown word (fileset)    -- cloud/datacatalog/v1:gcs_fileset_spec.proto
 ./external/googleapis/protolists/datacatalog.list:8:53      - Unknown word (policytagmanager) -- cloud/datacatalog/v1:policytagmanager.proto
@@ -289,15 +291,15 @@ Lines:
 ./generator/generator_config.proto:44:42     - Unknown word (struct)     -- ServiceNameRetryTraits struct using the provided codes
 ./generator/generator_config.proto:92:24     - Unknown word (COMPAT)     -- LOCATION_DEPENDENT_COMPAT = 2;
 ./generator/generator_config.textproto:104:47    - Unknown word (AUTOML)     -- var: "GOOGLE_CLOUD_CPP_AUTOML_PREDICTION_SERVICE_ENDPOINT
-./generator/generator_config.textproto:415:3     - Unknown word (Dataplex)   -- # Dataplex
 ./generator/generator_config.textproto:41:3      - Unknown word (Apigee)     -- # Apigee Connect
-./generator/generator_config.textproto:437:3     - Unknown word (Dataproc)   -- # Dataproc
+./generator/generator_config.textproto:422:3     - Unknown word (Dataplex)   -- # Dataplex
+./generator/generator_config.textproto:444:3     - Unknown word (Dataproc)   -- # Dataproc
 ./generator/generator_config.textproto:46:47     - Unknown word (APIGEE)     -- var: "GOOGLE_CLOUD_CPP_APIGEE_CONNECTION_SERVICE_ENDPOINT
-./generator/generator_config.textproto:488:3     - Unknown word (Datastream) -- # Datastream
-./generator/generator_config.textproto:504:3     - Unknown word (Dialogflow) -- # Dialogflow CX
-./generator/generator_config.textproto:510:47    - Unknown word (DIALOGFLOW) -- var: "GOOGLE_CLOUD_CPP_DIALOGFLOW_ENVIRONMENT_ENDPOINT
-./generator/generator_config.textproto:798:3     - Unknown word (Eventarc)   -- # Eventarc
-./generator/generator_config.textproto:813:3     - Unknown word (Filestore)  -- # Filestore
+./generator/generator_config.textproto:495:3     - Unknown word (Datastream) -- # Datastream
+./generator/generator_config.textproto:511:3     - Unknown word (Dialogflow) -- # Dialogflow CX
+./generator/generator_config.textproto:517:47    - Unknown word (DIALOGFLOW) -- var: "GOOGLE_CLOUD_CPP_DIALOGFLOW_ENVIRONMENT_ENDPOINT
+./generator/generator_config.textproto:805:3     - Unknown word (Eventarc)   -- # Eventarc
+./generator/generator_config.textproto:820:3     - Unknown word (Filestore)  -- # Filestore
 ./generator/integration_tests/BUILD.bazel:65:1      - Unknown word (filegroup)  -- filegroup(
 ./generator/integration_tests/backup.proto:27:40     - Unknown word (genproto)   -- "google.golang.org/genproto/googleapis/test/admin
 ./generator/integration_tests/backup.proto:29:19     - Unknown word (classname)  -- option java_outer_classname = "BackupProto";
@@ -338,6 +340,7 @@ Lines:
 ./generator/internal/scaffold_generator_test.cc:347:37    - Unknown word (Bazelrc)    -- ScaffoldGenerator, QuickstartBazelrc) {
 ./generator/internal/service_code_generator.cc:350:20    - Unknown word (nspace)     -- for (auto const& nspace : namespaces_) {
 ./google/cloud/BUILD.bazel:25:5      - Unknown word (toolchains) -- toolchains = [
+./google/cloud/BUILD.bazel:52:36     - Unknown word (OPENTELEMETRY) -- GOOGLE_CLOUD_CPP_HAVE_OPENTELEMETRY",
 ./google/cloud/accessapproval/README.md:37:11     - Unknown word (iostream)   -- #include <iostream>
 ./google/cloud/accessapproval/README.md:41:10     - Unknown word (cerr)       -- std::cerr << "Usage: " << argv
 ./google/cloud/accessapproval/README.md:51:10     - Unknown word (cout)       -- std::cout << a->DebugString()
@@ -368,17 +371,18 @@ Lines:
 ./google/cloud/automl/auto_ml_client.h:693:7     - Unknown word (Undeploys)  -- /// Undeploys a model. If the model
 ./google/cloud/baremetalsolution/bare_metal_solution_client.h:19:39     - Unknown word (BAREMETALSOLUTION) -- CLOUD_CPP_GOOGLE_CLOUD_BAREMETALSOLUTION_BARE_METAL_SOLUTION
 ./google/cloud/beyondcorp/app_connections_client.h:20:39     - Unknown word (BEYONDCORP) -- CLOUD_CPP_GOOGLE_CLOUD_BEYONDCORP_APP_CONNECTIONS_CLIENT
-./google/cloud/bigquery/CMakeLists.txt:105:44    - Unknown word (QUICKSTART)  -- CLOUD_CPP_BIGQUERY_TEST_QUICKSTART_TABLE)
-./google/cloud/bigquery/CMakeLists.txt:66:42     - Unknown word (servicename) -- SOURCE_DIR}/mocks/mock_servicename_v2_connection.h
+./google/cloud/bigquery/CMakeLists.txt:61:42     - Unknown word (servicename) -- SOURCE_DIR}/mocks/mock_servicename_v2_connection.h
+./google/cloud/bigquery/CMakeLists.txt:99:44     - Unknown word (QUICKSTART)  -- CLOUD_CPP_BIGQUERY_TEST_QUICKSTART_TABLE)
 ./google/cloud/bigquery/README.md:60:3      - Unknown word (constexpr)  -- constexpr int kMaxReadStreams
 ./google/cloud/bigquery/doc/bigquery-read-mock.dox:3:75      - Unknown word (googlemock) -- BigQueryRead application with googlemock
 ./google/cloud/bigquery/doc/main.dox:45:2      - Unknown word (parblock)   -- @parblock
 ./google/cloud/bigquery/doc/main.dox:51:2      - Unknown word (endparblock) -- @endparblock
 ./google/cloud/bigquery/doc/main.dox:65:40     - Unknown word (bigquerystorage) -- (which defaults to "bigquerystorage.googleapis.com")
 ./google/cloud/bigquery/doc/main.dox:73:40     - Unknown word (bigqueryconnection) -- (which defaults to "bigqueryconnection.googleapis.com")
-./google/cloud/bigquery/doc/main.dox:77:40     - Unknown word (bigquerydatatransfer) -- (which defaults to "bigquerydatatransfer.googleapis.com")
-./google/cloud/bigquery/doc/main.dox:81:40     - Unknown word (bigquerymigration)    -- (which defaults to "bigquerymigration.googleapis.com")
-./google/cloud/bigquery/doc/main.dox:89:40     - Unknown word (bigqueryreservation)  -- (which defaults to "bigqueryreservation.googleapis.com")
+./google/cloud/bigquery/doc/main.dox:77:40     - Unknown word (bigquerydatapolicy) -- (which defaults to "bigquerydatapolicy.googleapis.com")
+./google/cloud/bigquery/doc/main.dox:81:40     - Unknown word (bigquerydatatransfer) -- (which defaults to "bigquerydatatransfer.googleapis.com")
+./google/cloud/bigquery/doc/main.dox:85:40     - Unknown word (bigquerymigration)    -- (which defaults to "bigquerymigration.googleapis.com")
+./google/cloud/bigquery/doc/main.dox:93:40     - Unknown word (bigqueryreservation)  -- (which defaults to "bigqueryreservation.googleapis.com")
 ./google/cloud/bigtable/BUILD.bazel:99:22     - Unknown word (readrowsparser) -- name = "internal_readrowsparser_test",
 ./google/cloud/bigtable/CMakeLists.txt:429:18    - Unknown word (DBIGTABLE)  -- PRIVATE -DBIGTABLE_CLIENT_FORCE_STATIC
 ./google/cloud/bigtable/README.md:41:35     - Unknown word (substr)     -- << "Usage: " << cmd.substr(last_slash + 1)
@@ -489,7 +493,7 @@ Lines:
 ./google/cloud/containeranalysis/container_analysis_client.h:19:39     - Unknown word (CONTAINERANALYSIS) -- CLOUD_CPP_GOOGLE_CLOUD_CONTAINERANALYSIS_CONTAINER_ANALYSIS_CLIENT
 ./google/cloud/containeranalysis/container_analysis_client.h:39:6      - Unknown word (Grafeas)           -- /// [Grafeas](https://grafeas.io
 ./google/cloud/containeranalysis/doc/main.dox:51:21     - Unknown word (GRAFEAS)    -- - `GOOGLE_CLOUD_CPP_GRAFEAS_ENDPOINT=...` overrides
-./google/cloud/credentials.h:191:28    - Unknown word (cryptographical) -- account, as well as the cryptographical materials (a RSA private
+./google/cloud/credentials.h:214:28    - Unknown word (cryptographical) -- account, as well as the cryptographical materials (a RSA private
 ./google/cloud/datacatalog/data_catalog_client.cc:555:42    - Unknown word (Unstar)     -- cloud::datacatalog::v1::UnstarEntryResponse>
 ./google/cloud/datacatalog/data_catalog_client.h:183:18    - Unknown word (Metastore)   -- /// * Dataproc Metastore services (`@dataproc
 ./google/cloud/datacatalog/data_catalog_client.h:19:39     - Unknown word (DATACATALOG) -- CLOUD_CPP_GOOGLE_CLOUD_DATACATALOG_DATA_CATALOG_CLIENT
@@ -531,9 +535,9 @@ Lines:
 ./google/cloud/gameservices/game_server_clusters_client.h:38:65     - Unknown word (Agones)     -- Kubernetes clusters running Agones and is
 ./google/cloud/gameservices/game_server_deployments_client.h:425:60    - Unknown word (autoscalers) -- Agones fleets and Agones autoscalers,
 ./google/cloud/gkehub/gke_hub_client.h:19:39     - Unknown word (GKEHUB)     -- CLOUD_CPP_GOOGLE_CLOUD_GKEHUB_GKE_HUB_CLIENT_H
-./google/cloud/google_cloud_cpp_common.bzl:46:23     - Unknown word (msvc)       -- "internal/disable_msvc_crt_secure_warnings
-./google/cloud/google_cloud_cpp_common.bzl:56:15     - Unknown word (getenv)     -- "internal/getenv.h",
-./google/cloud/google_cloud_cpp_common_unit_tests.bzl:51:15     - Unknown word (strerror)   -- "internal/strerror_test.cc",
+./google/cloud/google_cloud_cpp_common.bzl:48:23     - Unknown word (msvc)       -- "internal/disable_msvc_crt_secure_warnings
+./google/cloud/google_cloud_cpp_common.bzl:58:15     - Unknown word (getenv)     -- "internal/getenv.h",
+./google/cloud/google_cloud_cpp_common_unit_tests.bzl:54:15     - Unknown word (strerror)   -- "internal/strerror_test.cc",
 ./google/cloud/google_cloud_cpp_rest_internal_unit_tests.bzl:26:37     - Unknown word (sigpipe)    -- curl_wrappers_disable_sigpipe_handler_test.cc",
 ./google/cloud/idempotency.h:28:48     - Unknown word (idempotence) -- idempotent][wikipedia-idempotence].
 ./google/cloud/ids/doc/main.dox:9:12      - Unknown word (Palo)       -- built with Palo Alto Networks technologies
@@ -577,11 +581,11 @@ Lines:
 ./google/cloud/internal/oauth2_authorized_user_credentials_test.cc:83:58     - Unknown word (THETOKEN)   -- "refresh_token", "1/THETOKEN")));
 ./google/cloud/internal/oauth2_compute_engine_credentials_test.cc:81:24     - Unknown word (mysupersecrettoken) -- "access_token": "mysupersecrettoken",
 ./google/cloud/internal/oauth2_compute_engine_credentials_test.cc:83:22     - Unknown word (tokentype)          -- "token_type": "tokentype"
-./google/cloud/internal/oauth2_credentials.h:92:6      - Unknown word (copydoc)    -- /// @copydoc AuthorizationHeader
-./google/cloud/internal/oauth2_external_account_token_source.h:44:66     - Unknown word (OIDC)       -- metadata service or OIDC service.
+./google/cloud/internal/oauth2_credentials.h:93:6      - Unknown word (copydoc)    -- /// @copydoc AuthorizationHeader
+./google/cloud/internal/oauth2_external_account_token_source.h:41:66     - Unknown word (OIDC)       -- metadata service or OIDC service.
 ./google/cloud/internal/oauth2_refreshing_credentials_wrapper.h:40:16     - Unknown word (refreshable) -- * Wrapper for refreshable parts of a Credentials
-./google/cloud/internal/oauth2_service_account_credentials.cc:271:32    - Unknown word (notasecret) -- 2_parse(p12.get(), "notasecret", &pkey_raw, &cert_raw
-./google/cloud/internal/oauth2_service_account_credentials.cc:296:51    - Unknown word (oneline)    -- decltype(openssl_free)> oneline(
+./google/cloud/internal/oauth2_service_account_credentials.cc:272:32    - Unknown word (notasecret) -- 2_parse(p12.get(), "notasecret", &pkey_raw, &cert_raw
+./google/cloud/internal/oauth2_service_account_credentials.cc:297:51    - Unknown word (oneline)    -- decltype(openssl_free)> oneline(
 ./google/cloud/internal/oauth2_service_account_credentials_test.cc:100:33    - Unknown word (Cerl)       -- constexpr kAuthProviderX509CerlUrl =
 ./google/cloud/internal/oauth2_service_account_credentials_test.cc:509:5     - Unknown word (CNHKF)      -- rmYdCNHKFXam78uCt7xQLw==
 ./google/cloud/internal/oauth2_service_account_credentials_test.cc:529:13    - Unknown word (SCCV)       -- "hRW9bSCCV8w1Ex+"

@@ -3,9 +3,9 @@ Repository: aspnetboilerplate/aspnetboilerplate
 Url: https://github.com/aspnetboilerplate/aspnetboilerplate
 Args: ["**/*.{md,cs,cshtml}","--exclude=wwwroot","--exclude=**/*SampleApp.Tests/Web*"]
 Summary:
-  files: 2572
-  filesWithIssues: 844
-  issues: 2975
+  files: 2503
+  filesWithIssues: 802
+  issues: 2822
   errors: 0
 Errors: []
 
@@ -491,25 +491,6 @@ issues:
   - "test/Abp.NHibernate.Tests/Basic_Repository_Tests.cs:92:92   	yunus   	U   	user => user.Name = \"yunus\");"
   - "test/Abp.NHibernate.Tests/Transaction_Tests.cs:24:49    	Transation  	U   	Complete_Uow_Without_Transation()"
   - "test/Abp.RedisCache.Tests/ProtoBufRedisCacheSerializer_Test.cs:25:17    	proto   	U   	var protoBufSerializer = new ProtoBufRe"
-  - "test/Abp.TestBase.SampleApplication.Tests/EntityFramework/GraphDiff/GraphDiffExtensions_Tests.cs:47:21      	Disattached 	U   	public void Disattached_Entity_Can_Be_Attached"
-  - "test/Abp.TestBase.SampleApplication.Tests/EntityFramework/GraphDiff/GraphDiffExtensions_Tests.cs:66:142     	disattached 	U   	a new entity as it's disattached);"
-  - "test/Abp.TestBase.SampleApplication.Tests/EntityFramework/GraphDiff/GraphDiffExtensions_Tests.cs:67:33      	Beeing      	U   	var johnDoeAfterBeeingAttached = _peopleRepository"
-  - "test/Abp.TestBase.SampleApplication.Tests/EntityFramework/ObjectMaterialize_Tests.cs:28:134     	Materialition   	U   	Normalized_On_Ef_ObjectMaterialition test."
-  - "test/Abp.TestBase.SampleApplication.Tests/EntityFramework/ObjectMaterialize_Tests.cs:87:40      	Herkimer        	U   	FullAddress = \"Herkimer St, Brooklyn, NY\","
-  - "test/Abp.TestBase.SampleApplication.Tests/People/NestedTransaction_Test.cs:53:71    	thown   	U   	nException(\"This exception is thown to rollback outer transaction"
-  - "test/Abp.TestBase.SampleApplication.Tests/People/PersonRepository_SoftDelete_Tests.cs:21:46     	Deleteds    	U   	Should_Not_Retrieve_Soft_Deleteds_As_Default()"
-  - "test/Abp.TestBase.SampleApplication.Tests/People/PersonRepository_SoftDelete_Tests.cs:27:28     	Retrive     	U   	public void Should_Retrive_Soft_Deleteds_If_Filter"
-  - "test/Abp.TestBase.SampleApplication.Tests/People/PersonRepository_SoftDelete_Tests.cs:57:143    	enabed      	U   	effect since it's already enabed"
-  - "test/Abp.TestBase.SampleApplication.Tests/People/PersonRepository_SoftDelete_Tests.cs:75:53     	Informations	U   	Should_Set_Deletion_Audit_Informations()"
-  - "test/Abp.TestBase.SampleApplication.Tests/People/PersonRepository_Tests_For_EntityChangeEvents.cs:275:83    	Tuana   	U   	new Person { Name = \"Tuana\", ContactListId = 1"
-  - "test/Abp.TestBase.SampleApplication.Tests/Reflection/ProxyHelper_Tests.cs:20:71     	Proxied 	U   	Original_Object_For_Not_Proxied_Object()"
-  - "test/Abp.TestBase.SampleApplication.Tests/SampleApplicationTestBase.cs:121:24   	Denizkoskler	U   	\"Denizkoskler Mah. Avcilar\","
-  - "test/Abp.TestBase.SampleApplication.Tests/SampleApplicationTestBase.cs:121:42   	Avcilar     	U   	\"Denizkoskler Mah. Avcilar\","
-  - "test/Abp.TestBase.SampleApplication.Tests/SampleApplicationTestBase.cs:123:24   	Gumuspala   	U   	\"Gumuspala Mah. Avcilar\","
-  - "test/Abp.TestBase.SampleApplication.Tests/Uow/UnitOfWork_Event_Tests.cs:86:65   	throwed 	U   	ApplicationException(\"This is throwed to make uow failed\""
-  - "test/Abp.TestBase.SampleApplication.Tests/Uow/UnitOfWork_Event_Tests.cs:127:69  	Uows    	U   	Outer_Uow_On_Nested_Uows()"
-  - "test/Abp.TestBase.SampleApplication.Tests/Uow/UnitOfWork_Nested_Tests.cs:35:121     	uow's   	U   	transaction copies outer uow's filters."
-  - "test/Abp.TestBase.SampleApplication/EntityFramework/SecondDbContext.cs:8:63     	dbcontextes 	U   	demonstrate usage of 2 dbcontextes in same UOW."
   - "test/Abp.TestBase.Tests/Application/Services/Validation_Tests.cs:38:44      	Nesned  	U   	Should_Work_With_Right_Nesned_Inputs()"
   - "test/Abp.TestBase.Tests/Application/Services/Validation_Tests.cs:133:45     	Dtos    	U   	Should_Normalize_Nested_Dtos()"
   - "test/Abp.TestBase.Tests/Application/Services/Validation_Tests.cs:284:75     	greather	U   	\"MyIntValue must be greather than or equal to 18"
@@ -549,6 +530,7 @@ issues:
   - "test/Abp.Tests/Runtime/Security/SimpleStringCipher_Tests.cs:24:50   	BCHF    	U   	initVectorString = \"1234BCHF9876skd*\";"
   - "test/Abp.Tests/Runtime/Security/SimpleStringCipher_Tests.cs:25:37   	ncpa    	U   	const string myKey = \"84ncpaKMC_!TuAna\";"
   - "test/Abp.Tests/Runtime/Security/SimpleStringCipher_Tests.cs:33:17   	enrypted	U   	var enryptedText = cipher.Encrypt"
+  - "test/Abp.Tests/Specifications/Specification_Tests.cs:20:31      	Tuana       	U   	new Customer(\"Tuana\", 2, 500, \"Turkey\")"
   - "test/Abp.Tests/Specifications/Specification_Tests.cs:26:31      	Daan        	U   	new Customer(\"Daan\", 39, 6000, \"Netherlands"
   - "test/Abp.Tests/Specifications/Specification_Tests.cs:27:31      	Alessandro  	U   	new Customer(\"Alessandro\", 22, 8271, \"Italy\""
   - "test/Abp.Tests/Startup/AbpBootstraper_Tester.cs:7:21    	Bootstraper 	U   	public class AbpBootstraper_Tester : TestBaseWithLocalIoc"
