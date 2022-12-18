@@ -4,8 +4,8 @@ Url: https://github.com/sveltejs/svelte.git
 Args: ["**"]
 Summary:
   files: 5256
-  filesWithIssues: 533
-  issues: 4158
+  filesWithIssues: 521
+  issues: 4087
   errors: 0
 Errors: []
 
@@ -148,10 +148,8 @@ issues:
   - "elements/index.d.ts:456:5   	tablist                 	U   	| 'tablist'"
   - "elements/index.d.ts:457:5   	tabpanel                	U   	| 'tabpanel'"
   - "elements/index.d.ts:465:5   	treeitem                	U   	| 'treeitem'"
-  - "elements/index.d.ts:470:2   	accesskey               	U   	accesskey?: string | undefined"
   - "elements/index.d.ts:473:2   	contenteditable         	U   	contenteditable?: Booleanish | 'inherit"
   - "elements/index.d.ts:477:2   	enterkeyhint            	U   	enterkeyhint?: 'enter' | 'done'"
-  - "elements/index.d.ts:485:2   	tabindex                	U   	tabindex?: number | undefined"
   - "elements/index.d.ts:499:2   	inlist                  	U   	inlist?: any;"
   - "elements/index.d.ts:508:2   	autocorrect             	U   	autocorrect?: string | undefined"
   - "elements/index.d.ts:511:2   	itemprop                	U   	itemprop?: string | undefined"
@@ -160,8 +158,6 @@ issues:
   - "elements/index.d.ts:514:2   	itemid                  	U   	itemid?: string | undefined"
   - "elements/index.d.ts:515:2   	itemref                 	U   	itemref?: string | undefined"
   - "elements/index.d.ts:525:2   	inputmode               	U   	inputmode?: 'none' | 'text' |"
-  - "elements/index.d.ts:542:8   	sveltekit               	U   	'data-sveltekit-noscroll'?: true |"
-  - "elements/index.d.ts:542:18  	noscroll                	U   	'data-sveltekit-noscroll'?: true | '' | 'off"
   - "elements/index.d.ts:564:2   	referrerpolicy          	U   	referrerpolicy?: ReferrerPolicy | undefined"
   - "elements/index.d.ts:599:2   	formaction              	U   	formaction?: string | undefined"
   - "elements/index.d.ts:600:2   	formenctype             	U   	formenctype?: string | undefined"
@@ -834,7 +830,6 @@ issues:
   - "src/compiler/compile/compiler_errors.ts:47:18   	writibale   	U   	invalid_binding_writibale: {"
   - "src/compiler/compile/compiler_warnings.ts:74:10     	idlist          	U   	case 'idlist':"
   - "src/compiler/compile/compiler_warnings.ts:83:10     	tokenlist       	U   	case 'tokenlist':"
-  - "src/compiler/compile/compiler_warnings.ts:118:33    	noninteractive  	U   	interactive_element_to_noninteractive_role: (role: string"
   - "src/compiler/compile/compiler_warnings.ts:152:19    	Screenreaders   	U   	message: 'A11y: Screenreaders already announce <img"
   - "src/compiler/compile/compiler_warnings.ts:198:15    	eachblock       	U   	invalid_rest_eachblock_binding: (rest_element"
   - "src/compiler/compile/Component.ts:25:8      	fuzzymatch  	U   	import fuzzymatch from '../utils/fuzzymatch"
@@ -2116,11 +2111,8 @@ issues:
   - "src/runtime/internal/transitions.ts:12:6    	OUTRO   	U   	type OUTRO = 0;"
   - "src/runtime/internal/transitions.ts:13:11   	Outro   	U   	interface Outro {"
   - "src/runtime/internal/utils.ts:71:8      	unsub   	U   	const unsub = store.subscribe(."
-  - "src/runtime/motion/index.ts:2:18    	tweened 	U   	export * from './tweened';"
   - "src/runtime/store/index.ts:7:13     	Unsubscriber	U   	export type Unsubscriber = () => void;"
   - "src/runtime/store/index.ts:167:7    	inited      	U   	let inited = false;"
-  - "src/runtime/transition/index.ts:205:18  	Crossfade   	U   	export interface CrossfadeParams {"
-  - "src/runtime/transition/index.ts:213:17  	crossfade   	U   	export function crossfade({ fallback, ...defaults"
   - "src/shared/utils/names.ts:6:590     	hatchpath   	U   	glyph|glyphRef|hatch|hatchpath|hkern|image|line|linearGradie"
   - "src/shared/utils/names.ts:6:600     	hkern       	U   	glyphRef|hatch|hatchpath|hkern|image|line|linearGradient"
   - "src/shared/utils/names.ts:6:649     	meshgradient	U   	nearGradient|marker|mask|mesh|meshgradient|meshpatch|meshrow|metadata"
@@ -2187,7 +2179,6 @@ issues:
   - "test/runtime/samples/attribute-null-classnames-no-style/_config.js:23:32    	undefinedtest   	U   	equal(div.className, 'undefinedtest');"
   - "test/runtime/samples/binding-this-with-context/_config.js:8:7       	elems   	U   	let elems = target.querySelectorAll"
   - "test/runtime/samples/class-shortcut-with-transition/_config.js:13:37    	yszte   	U   	p class=\"red svelte-1yszte8 border\" style=\"\">bar"
-  - "test/runtime/samples/component-data-dynamic/main.svelte:11:71   	quux	U   	a {compound} string' quux='{go.deeper}'/>"
   - "test/runtime/samples/component-slot-fallback-2/_config.js:3:26      	Blub	U   	ssrHtml: '<input value=\"Blub\"> <input value=\"Blub"
   - "test/runtime/samples/component-template-inline-mutation/_config.js:3:9      	btns	U   	const btns = target.querySelectorAll"
   - "test/runtime/samples/const-tag-each-const/_config.js:17:13      	nums	U   	component.nums = [1, 2, 3];"
@@ -2228,6 +2219,7 @@ issues:
   - "test/runtime/samples/svg-multiple/_config.js:15:9       	svgs	U   	const svgs = target.querySelectorAll"
   - "test/runtime/samples/transition-js-slot-5-cancelled-overflow/_config.js:3:6     	spreaded	U   	// + spreaded props + overflow context"
   - "test/runtime/samples/window-event/_config.js:2:14       	undefinedxundefined 	U   	html: '<div>undefinedxundefined</div>',"
+  - "test/server-side-rendering/samples/attribute-escaped-quotes-spread/_expected.html:5:2       	quux	U   	quux=\"&quot;><script>alert"
   - "test/sourcemaps/samples/decoded-sourcemap/test.js:7:9       	actualbar   	U   	const actualbar = preprocessed.mapConsumer"
   - "test/sourcemaps/samples/external/input.svelte:3:22      	Divs	U   	div class=\"awesome\">Divs ftw!</div>"
   - "test/sourcemaps/samples/preprocessed-markup/test.js:21:8    	actualbaz   	U   	const actualbaz = js.mapConsumer.originalPosi"
@@ -2246,6 +2238,9 @@ issues:
   - "test/validator/samples/a11y-mouse-events-have-key-events/warnings.json:39:30    	mouseout	U   	message\": \"A11y: on:mouseout must be accompanied"
   - "test/validator/samples/a11y-no-abstract-roles/input.svelte:6:12     	roletype    	U   	<div role=\"roletype\"/>"
   - "test/validator/samples/a11y-no-abstract-roles/input.svelte:8:12     	sectionhead 	U   	<div role=\"sectionhead\"/>"
+  - "test/validator/samples/a11y-no-access-key/warnings.json:2:16    	accesskey   	U   	\"code\": \"a11y-accesskey\","
+  - "test/validator/samples/a11y-no-interactive-element-to-noninteractive-role/warnings.json:3:43    	noninteractive  	U   	interactive-element-to-noninteractive-role\","
+  - "test/validator/samples/a11y-no-nointeractive-tabindex/warnings.json:3:35    	tabindex	U   	y-no-noninteractive-tabindex\","
   - "test/validator/samples/dollar-dollar-global-in-markup/errors.json:3:16      	billsyall   	U   	\"message\": \"$$billsyall is an illegal variable"
   - "test/validator/samples/rest-eachblock-binding-3/input.svelte:2:103      	Somethin	U   	id:1, innerValue: \"Somethin\"} }]"
   - "test/validator/samples/window-binding-invalid-innerwidth/errors.json:3:15       	innerwidth  	U   	\"message\": \"'innerwidth' is not a valid binding"
