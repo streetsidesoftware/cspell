@@ -3,7 +3,7 @@ Repository: django/django
 Url: "https://github.com/django/django.git"
 Args: ["**/*.{md,py}"]
 Lines:
- CSpell: Files checked: 2756, Issues found: 8309 in 920 files
+ CSpell: Files checked: 2757, Issues found: 8363 in 922 files
  exit code: 1
 ./django/__init__.py:12:26     - Unknown word (urlresolvers) -- Set the thread-local urlresolvers script prefix if `set
 ./django/apps/config.py:217:40    - Unknown word (qualname)   -- app_config_class.__qualname__,
@@ -193,20 +193,20 @@ Lines:
 ./django/contrib/gis/db/backends/oracle/operations.py:82:36     - Unknown word (GETNUMELEM)         -- NumGeometries": "SDO_UTIL.GETNUMELEM",
 ./django/contrib/gis/db/backends/oracle/operations.py:83:32     - Unknown word (GETNUMVERTICES)     -- NumPoints": "SDO_UTIL.GETNUMVERTICES",
 ./django/contrib/gis/db/backends/oracle/schema.py:21:10     - Unknown word (INDEXTYPE)  -- "INDEXTYPE IS MDSYS.SPATIAL_INDEX
-./django/contrib/gis/db/backends/postgis/adapter.py:29:52     - Unknown word (Psycopg)    -- protocol conform to what Psycopg2 expects?"""
-./django/contrib/gis/db/backends/postgis/adapter.py:4:6       - Unknown word (psycopg)    -- from psycopg2 import extensions
-./django/contrib/gis/db/backends/postgis/adapter.py:5:33      - Unknown word (ISQL)       -- psycopg2.extensions import ISQLQuote
-./django/contrib/gis/db/backends/postgis/base.py:26:62     - Unknown word (extname)    -- FROM pg_extension WHERE extname = %s", ["postgis"])
+./django/contrib/gis/db/backends/postgis/adapter.py:27:52     - Unknown word (Psycopg)    -- protocol conform to what Psycopg2 expects?"""
+./django/contrib/gis/db/backends/postgis/adapter.py:28:41     - Unknown word (ISQL)       -- psycopg2.extensions import ISQLQuote
+./django/contrib/gis/db/backends/postgis/adapter.py:6:36      - Unknown word (psycopg)    -- backends.postgresql.psycopg_any import sql
+./django/contrib/gis/db/backends/postgis/base.py:102:62    - Unknown word (extname)    -- FROM pg_extension WHERE extname = %s", ["postgis"])
 ./django/contrib/gis/db/backends/postgis/const.py:13:3      - Unknown word (Endianness) -- # Endianness, PostGIS raster version
 ./django/contrib/gis/db/backends/postgis/const.py:17:11     - Unknown word (endianness) -- # a fixed endianness (1) and there is only
 ./django/contrib/gis/db/backends/postgis/const.py:61:10     - Unknown word (PIXTYPE)    -- BANDTYPE_PIXTYPE_MASK = 0x0F
 ./django/contrib/gis/db/backends/postgis/introspection.py:25:34     - Unknown word (typname)    -- "SELECT oid, typname "
 ./django/contrib/gis/db/backends/postgis/models.py:62:5      - Unknown word (srtext)     -- srtext = models.CharField(max
-./django/contrib/gis/db/backends/postgis/operations.py:164:19    - Unknown word (bytea)      -- select = "%s::bytea"
-./django/contrib/gis/db/backends/postgis/operations.py:195:17    - Unknown word (vtup)       -- vtup = self.postgis_version
-./django/contrib/gis/db/backends/postgis/operations.py:229:21    - Unknown word (zmin)       -- xmin, ymin, zmin = map(float, ll.split
-./django/contrib/gis/db/backends/postgis/operations.py:230:21    - Unknown word (zmax)       -- xmax, ymax, zmax = map(float, ur.split
-./django/contrib/gis/db/backends/postgis/operations.py:86:70     - Unknown word (rast)       -- don't support mixed (rast-geom)
+./django/contrib/gis/db/backends/postgis/operations.py:165:44    - Unknown word (bytea)      -- is_psycopg3 else "%s::bytea"
+./django/contrib/gis/db/backends/postgis/operations.py:197:17    - Unknown word (vtup)       -- vtup = self.postgis_version
+./django/contrib/gis/db/backends/postgis/operations.py:231:21    - Unknown word (zmin)       -- xmin, ymin, zmin = map(float, ll.split
+./django/contrib/gis/db/backends/postgis/operations.py:232:21    - Unknown word (zmax)       -- xmax, ymax, zmax = map(float, ur.split
+./django/contrib/gis/db/backends/postgis/operations.py:87:70     - Unknown word (rast)       -- don't support mixed (rast-geom)
 ./django/contrib/gis/db/backends/postgis/pgraster.py:107:5     - Unknown word (rasterheader) -- rasterheader = (
 ./django/contrib/gis/db/backends/postgis/pgraster.py:147:9     - Unknown word (bandheader)   -- bandheader = pack(structure, (pixeltype
 ./django/contrib/gis/db/backends/postgis/pgraster.py:25:26     - Unknown word (hexlified)  -- Unpack little endian hexlified binary string into a
@@ -345,20 +345,20 @@ Lines:
 ./django/contrib/postgres/constraints.py:39:63     - Unknown word (spgist)     -- lower() not in {"gist", "spgist"}:
 ./django/contrib/postgres/fields/hstore.py:104:17    - Unknown word (akeys)      -- function = "akeys"
 ./django/contrib/postgres/fields/hstore.py:111:17    - Unknown word (avals)      -- function = "avals"
-./django/contrib/postgres/fields/ranges.py:186:17    - Unknown word (numrange)   -- return "numrange"
-./django/contrib/postgres/fields/ranges.py:195:17    - Unknown word (tstzrange)  -- return "tstzrange"
-./django/contrib/postgres/fields/ranges.py:204:17    - Unknown word (daterange)  -- return "daterange"
-./django/contrib/postgres/operations.py:166:51    - Unknown word (libc)       -- locale, *, provider="libc", deterministic=True
+./django/contrib/postgres/fields/ranges.py:191:17    - Unknown word (numrange)   -- return "numrange"
+./django/contrib/postgres/fields/ranges.py:200:17    - Unknown word (tstzrange)  -- return "tstzrange"
+./django/contrib/postgres/fields/ranges.py:209:17    - Unknown word (daterange)  -- return "daterange"
+./django/contrib/postgres/operations.py:102:25    - Unknown word (trgm)       -- self.name = "pg_trgm"
+./django/contrib/postgres/operations.py:170:51    - Unknown word (libc)       -- locale, *, provider="libc", deterministic=True
 ./django/contrib/postgres/operations.py:2:16      - Unknown word (oids)       -- get_citext_oids,
-./django/contrib/postgres/operations.py:88:22     - Unknown word (pgcrypto)   -- self.name = "pgcrypto"
-./django/contrib/postgres/operations.py:98:25     - Unknown word (trgm)       -- self.name = "pg_trgm"
-./django/contrib/postgres/search.py:142:20    - Unknown word (setweight)  -- sql = "setweight({}, {})".format(sql
-./django/contrib/postgres/search.py:185:19    - Unknown word (plainto)    -- "plain": "plainto_tsquery",
-./django/contrib/postgres/search.py:186:20    - Unknown word (phraseto)   -- "phrase": "phraseto_tsquery",
-./django/contrib/postgres/search.py:36:17     - Unknown word (tsvector)   -- return "tsvector"
-./django/contrib/postgres/search.py:41:17     - Unknown word (tsquery)    -- return "tsquery"
-./django/contrib/postgres/search.py:65:21     - Unknown word (regconfig)  -- return "%s::regconfig" % sql, params
-./django/contrib/postgres/signals.py:13:26     - Unknown word (typarray)   -- "SELECT oid, typarray FROM pg_type WHERE typname
+./django/contrib/postgres/operations.py:92:22     - Unknown word (pgcrypto)   -- self.name = "pgcrypto"
+./django/contrib/postgres/search.py:145:20    - Unknown word (setweight)  -- sql = "setweight({}, {})".format(sql
+./django/contrib/postgres/search.py:192:19    - Unknown word (plainto)    -- "plain": "plainto_tsquery",
+./django/contrib/postgres/search.py:193:20    - Unknown word (phraseto)   -- "phrase": "phraseto_tsquery",
+./django/contrib/postgres/search.py:34:17     - Unknown word (tsvector)   -- return "tsvector"
+./django/contrib/postgres/search.py:39:17     - Unknown word (tsquery)    -- return "tsquery"
+./django/contrib/postgres/search.py:68:21     - Unknown word (regconfig)  -- return "%s::regconfig" % sql, params
+./django/contrib/postgres/signals.py:11:26     - Unknown word (typarray)   -- "SELECT oid, typarray FROM pg_type WHERE typname
 ./django/contrib/sessions/backends/base.py:38:25     - Unknown word (testcookie) -- TEST_COOKIE_NAME = "testcookie"
 ./django/contrib/sessions/backends/file.py:129:26    - Unknown word (WRONLY)     -- flags = os.O_WRONLY | getattr(os, "O_BINARY
 ./django/contrib/sessions/backends/file.py:131:43    - Unknown word (CREAT)      -- |= os.O_EXCL | os.O_CREAT
@@ -466,11 +466,12 @@ Lines:
 ./django/db/backends/base/creation.py:101:36    - Unknown word (DJANGOS)    -- environ.get("RUNNING_DJANGOS_TEST_SUITE") == "true
 ./django/db/backends/base/creation.py:33:63     - Unknown word (keepdb)     -- False, serialize=True, keepdb=False
 ./django/db/backends/base/creation.py:363:28    - Unknown word (RDBMS)      -- accordingly to the RDBMS particularities.
+./django/db/backends/base/features.py:167:24    - Unknown word (clientside) -- schema_editor_uses_clientside_param_binding = False
 ./django/db/backends/base/features.py:75:36     - Unknown word (timedeltas) -- a true datatype for timedeltas?
 ./django/db/backends/base/operations.py:292:23    - Unknown word (lastrowid)  -- return cursor.lastrowid
 ./django/db/backends/base/operations.py:501:18    - Unknown word (autopk)     -- def validate_autopk_value(self, value):
-./django/db/backends/base/operations.py:661:27    - Unknown word (subexpressions) -- Combine a list of subexpressions into a single expression
-./django/db/backends/base/operations.py:664:9     - Unknown word (subexpression)  -- subexpression types (e.g., date expressions
+./django/db/backends/base/operations.py:664:27    - Unknown word (subexpressions) -- Combine a list of subexpressions into a single expression
+./django/db/backends/base/operations.py:667:9     - Unknown word (subexpression)  -- subexpression types (e.g., date expressions
 ./django/db/backends/base/schema.py:1063:9    - Unknown word (rels)         -- rels_to_update = []
 ./django/db/backends/base/schema.py:211:37    - Unknown word (deferreds)    -- Create column SQL, add FK deferreds if needed.
 ./django/db/backends/base/schema.py:212:16    - Unknown word (sqls)         -- column_sqls = []
@@ -520,16 +521,20 @@ Lines:
 ./django/db/backends/oracle/operations.py:98:30     - Unknown word (IYYY)       -- extract_param = "IYYY"
 ./django/db/backends/oracle/schema.py:185:40    - Unknown word (uppercased) -- properly shortened and uppercased identifier as returned
 ./django/db/backends/oracle/utils.py:96:25     - Unknown word (makedsn)    -- return Database.makedsn(host, int(settings_dict
-./django/db/backends/postgresql/base.py:36:1      - Unknown word (PSYCOPG)    -- PSYCOPG2_VERSION = psycopg2
-./django/db/backends/postgresql/base.py:58:1      - Unknown word (INETARRAY)  -- INETARRAY_OID = 1041
+./django/db/backends/postgresql/base.py:231:73    - Unknown word (poolers)     -- default to keep connection poolers
+./django/db/backends/postgresql/base.py:427:13    - Unknown word (qparts)      -- qparts = [sql.SQL("SELECT
+./django/db/backends/postgresql/base.py:53:62     - Unknown word (tzloader)   -- adapters_template, register_tzloader
+./django/db/backends/postgresql/base.py:55:39     - Unknown word (timestamptz) -- OID = adapters.types["timestamptz"].oid
+./django/db/backends/postgresql/base.py:55:5      - Unknown word (TIMESTAMPTZ) -- TIMESTAMPTZ_OID = adapters.types
+./django/db/backends/postgresql/base.py:66:5      - Unknown word (INETARRAY)   -- INETARRAY_OID = 1041
 ./django/db/backends/postgresql/client.py:43:18     - Unknown word (PGSERVICE)  -- env["PGSERVICE"] = str(service)
 ./django/db/backends/postgresql/client.py:45:18     - Unknown word (PGSSLMODE)  -- env["PGSSLMODE"] = str(sslmode)
 ./django/db/backends/postgresql/client.py:47:18     - Unknown word (PGSSLROOTCERT) -- env["PGSSLROOTCERT"] = str(sslrootcert
 ./django/db/backends/postgresql/client.py:49:18     - Unknown word (PGSSLCERT)     -- env["PGSSLCERT"] = str(sslcert)
 ./django/db/backends/postgresql/client.py:51:18     - Unknown word (PGSSLKEY)      -- env["PGSSLKEY"] = str(sslkey)
 ./django/db/backends/postgresql/client.py:53:18     - Unknown word (PGPASSFILE)    -- env["PGPASSFILE"] = str(passfile)
-./django/db/backends/postgresql/creation.py:36:57     - Unknown word (datname)    -- catalog.pg_database WHERE datname = %s",
-./django/db/backends/postgresql/features.py:43:17     - Unknown word (plpgsql)    -- $$ LANGUAGE plpgsql;"""
+./django/db/backends/postgresql/creation.py:35:57     - Unknown word (datname)    -- catalog.pg_database WHERE datname = %s",
+./django/db/backends/postgresql/features.py:45:17     - Unknown word (plpgsql)    -- $$ LANGUAGE plpgsql;"""
 ./django/db/backends/postgresql/introspection.py:131:30    - Unknown word (colname)        -- a.attname AS colname
 ./django/db/backends/postgresql/introspection.py:135:27    - Unknown word (classid)        -- AND d.classid = 'pg_class'::regclass
 ./django/db/backends/postgresql/introspection.py:135:49    - Unknown word (regclass)       -- classid = 'pg_class'::regclass
@@ -573,11 +578,16 @@ Lines:
 ./django/db/backends/postgresql/introspection.py:96:82     - Unknown word (adnum)          -- adrelid AND a.attnum = ad.adnum
 ./django/db/backends/postgresql/introspection.py:97:44     - Unknown word (attcollation)   -- pg_collation co ON a.attcollation = co.oid
 ./django/db/backends/postgresql/introspection.py:98:33     - Unknown word (atttypid)       -- JOIN pg_type t ON a.atttypid = t.oid
-./django/db/backends/postgresql/operations.py:208:21    - Unknown word (setval)     -- "%s setval(pg_get_serial_sequence
-./django/db/backends/postgresql/operations.py:265:61    - Unknown word (NAMEDATALEN) -- PostgreSQL after editing the NAMEDATALEN
-./django/db/backends/postgresql/operations.py:70:30     - Unknown word (isodow)     -- extract_param = "isodow"
-./django/db/backends/postgresql/operations.py:72:30     - Unknown word (isoyear)    -- extract_param = "isoyear"
-./django/db/backends/postgresql/schema.py:48:14     - Unknown word (indentity)  -- sql_drop_indentity = (
+./django/db/backends/postgresql/operations.py:11:5      - Unknown word (mogrify)    -- mogrify,
+./django/db/backends/postgresql/operations.py:236:21    - Unknown word (setval)     -- "%s setval(pg_get_serial_sequence
+./django/db/backends/postgresql/operations.py:293:61    - Unknown word (NAMEDATALEN) -- PostgreSQL after editing the NAMEDATALEN
+./django/db/backends/postgresql/operations.py:87:30     - Unknown word (ISODOW)     -- return f"EXTRACT(ISODOW FROM {sql})", params
+./django/db/backends/postgresql/operations.py:89:30     - Unknown word (ISOYEAR)    -- return f"EXTRACT(ISOYEAR FROM {sql})", params
+./django/db/backends/postgresql/psycopg_any.py:17:26     - Unknown word (tsrange)     -- TSRANGE_OID = types["tsrange"].oid
+./django/db/backends/postgresql/psycopg_any.py:17:5      - Unknown word (TSRANGE)     -- TSRANGE_OID = types["tsrange
+./django/db/backends/postgresql/psycopg_any.py:18:5      - Unknown word (TSTZRANGE)   -- TSTZRANGE_OID = types["tstzrange
+./django/db/backends/postgresql/psycopg_any.py:7:40      - Unknown word (Timestamptz) -- types.datetime import TimestamptzLoader
+./django/db/backends/postgresql/schema.py:55:14     - Unknown word (indentity)  -- sql_drop_indentity = (
 ./django/db/backends/sqlite3/_functions.py:61:50     - Unknown word (dtdelta)    -- function("django_format_dtdelta", 3, _sqlite_format
 ./django/db/backends/sqlite3/_functions.py:80:57     - Unknown word (Samp)       -- STDDEV_SAMP", 1, StdDevSamp)
 ./django/db/backends/sqlite3/_functions.py:84:26     - Unknown word (compileoption) -- sql = "select sqlite_compileoption_used('ENABLE_MATH_FUNCTIONS
@@ -614,7 +624,7 @@ Lines:
 ./django/db/models/base.py:823:15    - Unknown word (asave)         -- async def asave(
 ./django/db/models/enums.py:12:17     - Unknown word (metacls)    -- def __new__(metacls, classname, bases, classdict
 ./django/db/models/expressions.py:269:47    - Unknown word (multijoins) -- of reusable joins for multijoins
-./django/db/models/fields/__init__.py:2744:11   - Unknown word (subclasscheck) -- def __subclasscheck__(self, subclass):
+./django/db/models/fields/__init__.py:2748:11   - Unknown word (subclasscheck) -- def __subclasscheck__(self, subclass):
 ./django/db/models/fields/__init__.py:454:76    - Unknown word (EXXX)       -- details.get("id", "fields.EXXX"),
 ./django/db/models/fields/__init__.py:465:79    - Unknown word (WXXX)       -- details.get("id", "fields.WXXX"),
 ./django/db/models/fields/json.py:335:7     - Unknown word (JSONI)      -- class JSONIContains(CaseInsensitiveMixin
@@ -627,8 +637,8 @@ Lines:
 ./django/db/models/functions/__init__.py:88:5      - Unknown word (Ntile)      -- Ntile,
 ./django/db/models/functions/datetime.py:156:35    - Unknown word (mydatetime) -- replicate this in Python: (mydatetime.isoweekday() % 7) +
 ./django/db/models/functions/text.py:24:24     - Unknown word (RAWTOHEX)   -- "LOWER(RAWTOHEX(STANDARD_HASH(UTL_I
-./django/db/models/functions/text.py:316:63    - Unknown word (STRPOS)     -- connection, function="STRPOS", **extra_context)
 ./django/db/models/functions/text.py:31:7      - Unknown word (Postgre)    -- class PostgreSQLSHAMixin:
+./django/db/models/functions/text.py:330:63    - Unknown word (STRPOS)     -- connection, function="STRPOS", **extra_context)
 ./django/db/models/functions/window.py:20:17     - Unknown word (CUME)       -- function = "CUME_DIST"
 ./django/db/models/functions/window.py:95:17     - Unknown word (NTILE)      -- function = "NTILE"
 ./django/db/models/lookups.py:345:18    - Unknown word (boolfield)  -- # turns "boolfield__exact=True" into "WHERE
@@ -714,7 +724,7 @@ Lines:
 ./django/middleware/common.py:124:13    - Unknown word (referer)    -- referer = request.META.get(
 ./django/middleware/common.py:124:46    - Unknown word (REFERER)    -- request.META.get("HTTP_REFERER", "")
 ./django/middleware/csrf.py:451:62    - Unknown word (MITM)       -- (man-in-the-middle, MITM) sends a
-./django/middleware/gzip.py:21:17     - Unknown word (gzipping)   -- # Avoid gzipping if we've already got
+./django/middleware/gzip.py:23:17     - Unknown word (gzipping)   -- # Avoid gzipping if we've already got
 ./django/template/__init__.py:34:19     - Unknown word (smartif)    -- - django.template.smartif
 ./django/template/base.py:249:36    - Unknown word (linebreak)  -- num, next in enumerate(linebreak_iter(self.source)):
 ./django/template/base.py:521:25    - Unknown word (endtag)     -- def skip_past(self, endtag):
@@ -976,8 +986,8 @@ Lines:
 ./django/utils/regex_helper.py:141:45    - Unknown word (backreference) -- # We are in a named backreference.
 ./django/utils/regex_helper.py:150:33    - Unknown word (backreferences) -- # Named backreferences have already consumed
 ./django/utils/regex_helper.py:5:60      - Unknown word (decompiler) -- a complete reg-exp decompiler. It
-./django/utils/text.py:318:29    - Unknown word (compresslevel) -- return gzip_compress(s, compresslevel=6, mtime=0)
-./django/utils/text.py:332:72    - Unknown word (zfile)         -- fileobj=buf, mtime=0) as zfile:
+./django/utils/text.py:324:40    - Unknown word (compresslevel) -- data = gzip_compress(s, compresslevel=6, mtime=0)
+./django/utils/text.py:352:10    - Unknown word (zfile)         -- ) as zfile:
 ./django/utils/timesince.py:63:17     - Unknown word (leapyears)  -- # Deal with leapyears by subtracing the number
 ./django/utils/timesince.py:63:30     - Unknown word (subtracing) -- Deal with leapyears by subtracing the number of leapdays
 ./django/utils/timezone.py:313:59    - Unknown word (Ganssle)    -- with thanks to Paul Ganssle.
@@ -1458,7 +1468,7 @@ Lines:
 ./tests/backends/oracle/tests.py:47:68     - Unknown word (sysdate)                                                     -- 1936-12-29 00:00' < sysdate"
 ./tests/backends/postgresql/test_introspection.py:24:77     - Unknown word (pers)       -- person_id_seq RENAME TO pers_seq")
 ./tests/backends/postgresql/test_server_side_cursors.py:56:9      - Unknown word (asser)      -- def asserNotUsesCursor(self, queryset
-./tests/backends/postgresql/tests.py:259:15    - Unknown word (awef)       -- a = ["awef"]
+./tests/backends/postgresql/tests.py:280:15    - Unknown word (awef)       -- a = ["awef"]
 ./tests/backends/sqlite/test_operations.py:36:40     - Unknown word (verylongmodelnamezzzzzzzzzzzzzzzzzzzzzz) -- DELETE FROM "backends_verylongmodelnamezzzzzzzzzzzzzzzzzzzzzz'
 ./tests/backends/sqlite/test_operations.py:84:24     - Unknown word (verylongmodelnamezzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz) -- "'backends_verylongmodelnamezzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz"
 ./tests/backends/test_utils.py:77:24     - Unknown word (Nera)       -- ("Asia/Ust+Nera", ("Asia/Ust+Nera",
@@ -1480,9 +1490,9 @@ Lines:
 ./tests/cache/tests.py:1725:26   - Unknown word (enoent)      -- def test_get_ignores_enoent(self):
 ./tests/cache/tests.py:1737:53   - Unknown word (filebasedcache) -- dirname) / "nested" / "filebasedcache"
 ./tests/cache/tests.py:1753:38   - Unknown word (filenotfound)   -- does_not_ignore_non_filenotfound_exceptions(self):
-./tests/cache/tests.py:2376:63   - Unknown word (somethingelse)  -- path, {"foo": "bar", "somethingelse": "true"})
-./tests/cache/tests.py:2385:23   - Unknown word (Hola)           -- es_message = "Hola mundo!"
-./tests/cache/tests.py:2385:28   - Unknown word (mundo)          -- es_message = "Hola mundo!"
+./tests/cache/tests.py:2390:63   - Unknown word (somethingelse)  -- path, {"foo": "bar", "somethingelse": "true"})
+./tests/cache/tests.py:2399:23   - Unknown word (Hola)           -- es_message = "Hola mundo!"
+./tests/cache/tests.py:2399:28   - Unknown word (mundo)          -- es_message = "Hola mundo!"
 ./tests/cache/tests.py:275:31    - Unknown word (cacheprefix) -- prefix": {"KEY_PREFIX": "cacheprefix{}".format(os.getpid
 ./tests/cache/tests.py:275:56    - Unknown word (getpid)      -- cacheprefix{}".format(os.getpid())},
 ./tests/cache/tests.py:330:20    - Unknown word (somekey)     -- cache.set("somekey", "value")
@@ -1528,6 +1538,7 @@ Lines:
 ./tests/db_functions/comparison/test_json_object.py:15:58     - Unknown word (iivanov)    -- Ivan Ivanov", alias="iivanov")
 ./tests/db_functions/comparison/test_json_object.py:38:31     - Unknown word (ivanov)     -- "name": "ivan ivanov",
 ./tests/db_functions/datetime/test_extract_trunc.py:1706:13   - Unknown word (melb)        -- for melb in self.get_timezones
+./tests/db_functions/datetime/test_extract_trunc.py:1712:21   - Unknown word (isoyear)     -- isoyear=ExtractIsoYear("start
 ./tests/db_functions/datetime/test_extract_trunc.py:1768:17   - Unknown word (nera)        -- for ust_nera in self.get_timezones
 ./tests/db_functions/datetime/test_extract_trunc.py:189:27    - Unknown word (greaterthan) -- def test_extract_year_greaterthan_lookup(self):
 ./tests/db_functions/datetime/test_extract_trunc.py:214:27    - Unknown word (lessthan)    -- def test_extract_year_lessthan_lookup(self):
@@ -1548,7 +1559,8 @@ Lines:
 ./tests/db_functions/window/test_validation.py:36:35     - Unknown word (ntile)      -- negative_num_buckets_ntile(self):
 ./tests/db_typecasts/tests.py:77:17     - Unknown word (inpt)       -- for inpt, expected in v:
 ./tests/db_utils/tests.py:64:14     - Unknown word (reraising)  -- def test_reraising_backend_specific_database
-./tests/db_utils/tests.py:72:53     - Unknown word (pgerror)    -- exception.__cause__.pgerror)
+./tests/db_utils/tests.py:74:62     - Unknown word (sqlstate)   -- exception.__cause__.diag.sqlstate)
+./tests/db_utils/tests.py:78:57     - Unknown word (pgerror)    -- exception.__cause__.pgerror)
 ./tests/dbshell/test_mysql.py:100:32    - Unknown word (deprecatedoptiondbname) -- "db": "deprecatedoptiondbname",
 ./tests/dbshell/test_mysql.py:102:36    - Unknown word (deprecatedoptionpassword) -- "passwd": "deprecatedoptionpassword",
 ./tests/dbshell/test_mysql.py:161:23    - Unknown word (sslca)                    -- "--ssl-ca=sslca",
@@ -1612,11 +1624,11 @@ Lines:
 ./tests/files/tests.py:40:25     - Unknown word (djángö)     -- f = File(None, "djángö")
 ./tests/files/tests.py:482:38    - Unknown word (quux)       -- write(b"foo bar baz quux\n")
 ./tests/fixtures/models.py:4:63      - Unknown word (Fixure)     -- the database in bulk. Fixure data
-./tests/fixtures/tests.py:1312:35   - Unknown word (circulara)    -- {"model": "fixtures.circulara", "pk": 1, '
-./tests/fixtures/tests.py:1314:34   - Unknown word (circularb)    -- {"model": "fixtures.circularb", "pk": 1, '
+./tests/fixtures/tests.py:1308:35   - Unknown word (circulara)    -- {"model": "fixtures.circulara", "pk": 1, '
+./tests/fixtures/tests.py:1310:34   - Unknown word (circularb)    -- {"model": "fixtures.circularb", "pk": 1, '
 ./tests/fixtures/tests.py:308:25    - Unknown word (Stephane)   -- "<Visa: Stephane Grappelli Can add user
 ./tests/fixtures/tests.py:308:34    - Unknown word (Grappelli)  -- "<Visa: Stephane Grappelli Can add user>",
-./tests/fixtures/tests.py:935:69    - Unknown word (someotherapp) -- verbosity=0, app_label="someotherapp"
+./tests/fixtures/tests.py:931:69    - Unknown word (someotherapp) -- verbosity=0, app_label="someotherapp"
 ./tests/fixtures_regress/tests.py:1:3       - Unknown word (Unittests)  -- # Unittests for fixtures.
 ./tests/fixtures_regress/tests.py:214:50    - Unknown word (ture)       -- installing fixture 'bad_fix.ture1': unkn is not a known
 ./tests/fixtures_regress/tests.py:225:14    - Unknown word (unimportable) -- def test_unimportable_serializer(self):
@@ -2111,9 +2123,9 @@ Lines:
 ./tests/messages_tests/test_cookie.py:155:55    - Unknown word (NOTRECEIVED) -- m"e', "\u2019", '123"NOTRECEIVED"']
 ./tests/messages_tests/test_cookie.py:76:21     - Unknown word (setings)    -- def test_cookie_setings(self):
 ./tests/middleware/extra_urls.py:6:11      - Unknown word (customurlconf) -- path("customurlconf/noslash", views.empty
-./tests/middleware/tests.py:175:37    - Unknown word (Fevil)        -- assertEqual(r.url, "/%2Fevil.com/security/")
-./tests/middleware/tests.py:456:34    - Unknown word (referers)     -- tend to use http:// in referers even when browsing HTTPS
-./tests/middleware/tests.py:92:38     - Unknown word (querystrings) -- SLASH should preserve querystrings when redirecting.
+./tests/middleware/tests.py:176:37    - Unknown word (Fevil)        -- assertEqual(r.url, "/%2Fevil.com/security/")
+./tests/middleware/tests.py:457:34    - Unknown word (referers)     -- tend to use http:// in referers even when browsing HTTPS
+./tests/middleware/tests.py:93:38     - Unknown word (querystrings) -- SLASH should preserve querystrings when redirecting.
 ./tests/migrations/migrations_test_apps/conflicting_app_with_dependencies/migrations/0001_initial.py:18:14     - Unknown word (Tribble)    -- "Tribble",
 ./tests/migrations/migrations_test_apps/unmigrated_app/models.py:6:11      - Unknown word (tribble)    -- silly_tribble = models.ForeignKey
 ./tests/migrations/models.py:14:66     - Unknown word (Ðjáñgó)     -- length=20, default="“Ðjáñgó”")
@@ -2358,15 +2370,13 @@ Lines:
 ./tests/postgres_tests/test_aggregates.py:623:27    - Unknown word (stattestmodel)    -- ArrayAgg("stattestmodel__int1", ordering="-stattestmo
 ./tests/postgres_tests/test_aggregates.py:917:19    - Unknown word (avgx)             -- def test_regr_avgx_general(self):
 ./tests/postgres_tests/test_aggregates.py:921:19    - Unknown word (avgy)             -- def test_regr_avgy_general(self):
-./tests/postgres_tests/test_array.py:1070:32   - Unknown word (defg)                    -- field.clean("abc,c,defg")
-./tests/postgres_tests/test_array.py:1287:14   - Unknown word (splitarraywidget)        -- def test_splitarraywidget_value_omitted_from_data
-./tests/postgres_tests/test_array.py:321:20    - Unknown word (mogrify)    -- # psycopg2 mogrify method that generates
-./tests/postgres_tests/test_array.py:925:38    - Unknown word (chartextarrayindexmodel) -- name = "postgres_tests_chartextarrayindexmodel"
-./tests/postgres_tests/test_array.py:957:35    - Unknown word (integerarraymodel)       -- model": "postgres_tests.integerarraymodel", "pk": null}]'
-./tests/postgres_tests/test_constraints.py:1209:35   - Unknown word (Depracation) -- ExclusionConstraintOpclassesDepracationTests(PostgreSQLTestCase
-./tests/postgres_tests/test_constraints.py:211:48    - Unknown word (Bedemir's)  -- setting__contains="Sir Bedemir's Castle"),
-./tests/postgres_tests/test_constraints.py:551:25    - Unknown word (SPGIST)     -- index_type="SPGIST",
-./tests/postgres_tests/test_constraints.py:766:25    - Unknown word (TSTZRANGE)  -- function = "TSTZRANGE"
+./tests/postgres_tests/test_array.py:1069:32   - Unknown word (defg)                    -- field.clean("abc,c,defg")
+./tests/postgres_tests/test_array.py:1286:14   - Unknown word (splitarraywidget)        -- def test_splitarraywidget_value_omitted_from_data
+./tests/postgres_tests/test_array.py:924:38    - Unknown word (chartextarrayindexmodel) -- name = "postgres_tests_chartextarrayindexmodel"
+./tests/postgres_tests/test_array.py:956:35    - Unknown word (integerarraymodel)       -- model": "postgres_tests.integerarraymodel", "pk": null}]'
+./tests/postgres_tests/test_constraints.py:1208:35   - Unknown word (Depracation) -- ExclusionConstraintOpclassesDepracationTests(PostgreSQLTestCase
+./tests/postgres_tests/test_constraints.py:210:48    - Unknown word (Bedemir's)  -- setting__contains="Sir Bedemir's Castle"),
+./tests/postgres_tests/test_constraints.py:550:25    - Unknown word (SPGIST)     -- index_type="SPGIST",
 ./tests/postgres_tests/test_hstore.py:303:42    - Unknown word (hstoremodel) -- model": "postgres_tests.hstoremodel",
 ./tests/postgres_tests/test_hstore.py:81:44     - Unknown word (Tigr)       -- HStoreModel(field={"cat": "TigrOu", "breed": "birman
 ./tests/postgres_tests/test_hstore.py:81:63     - Unknown word (birman)     -- "TigrOu", "breed": "birman"}),
