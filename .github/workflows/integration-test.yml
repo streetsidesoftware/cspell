@@ -112,8 +112,8 @@ jobs:
       - name: Repo Info
         id: step-repo-info
         run: |
-          echo "::set-output name=repo-info::$(jq -c '.repositories[] | select(.path == "${{ matrix.repo }}")' integration-tests/config/config.json)"
-          echo "::set-output name=repo-hash::${{ hashFiles(
+          echo "repo-info=$(jq -c '.repositories[] | select(.path == "${{ matrix.repo }}")' integration-tests/config/config.json)" >> $GITHUB_OUTPUT
+          echo "repo-hash=${{ hashFiles(
             'integration-tests/tsconfig.json',
             'integration-tests/config/repositories/${{matrix.repo}}/**',
             'integration-tests/snapshots/${{ matrix.repo }}/*',
@@ -122,7 +122,7 @@ jobs:
             'packages/*/src/**/*.ts', 'packages/*/tsconfig.json',
             'packages/*/*.ts',
             '*-lock.yaml'
-          ) }}"
+          ) }}"  >> $GITHUB_OUTPUT
 
       - name: Cache Integration Run
         id: step-cache-run

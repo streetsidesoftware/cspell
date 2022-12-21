@@ -183,7 +183,7 @@ jobs:
       - name: Repo Info
         id: step-repo-info
         run: |
-          echo "::set-output name=repo-info::$(jq -c '.repositories[] | select(.path == "${{ matrix.repo }}")' integration-tests/config/config.json)"
+          echo "repo-info=$(jq -c '.repositories[] | select(.path == "${{ matrix.repo }}")' integration-tests/config/config.json)" >> $GITHUB_OUTPUT
 
       - name: Cache Integration Test Repository Files
         uses: actions/cache@v3
