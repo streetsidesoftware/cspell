@@ -4,8 +4,8 @@ Url: https://github.com/eslint/eslint
 Args: ["**","--exclude=bin/**","--exclude=CHANGELOG.md","--exclude=_data","--exclude=tests/bench/large.js","--exclude=docs/src/_includes","--exclude=docs/src/assets/{fonts,s?css,images}"]
 Summary:
   files: 1821
-  filesWithIssues: 1228
-  issues: 5419
+  filesWithIssues: 1227
+  issues: 5411
   errors: 0
 Errors: []
 
@@ -14,7 +14,6 @@ issues:
   - "conf/config-schema.js:14:5      	fileoverview	U   	* @fileoverview Defines a schema for"
   - "conf/eslint-recommended.js:49:13    	nonoctal        	U   	\"no-nonoctal-decimal-escape\": \"error"
   - "conf/eslint-recommended.js:68:21    	backreference   	U   	\"no-useless-backreference\": \"error\","
-  - "conf/eslint-recommended.js:73:14    	isnan           	U   	\"use-isnan\": \"error\","
   - "conf/replacements.json:12:36    	parens  	U   	wrap-func\": [\"no-extra-parens\"],"
   - "conf/replacements.json:13:62    	paren   	U   	space-before-function-paren\"],"
   - "docs/package.json:19:23     	stylelint       	U   	\"lint:scss\": \"stylelint \\\"**/*.{scss,html}\\"
@@ -203,6 +202,7 @@ issues:
   - "docs/src/rules/space-unary-ops.md:12:101    	nonwords	U   	operators and after/before `nonwords` unary operators."
   - "docs/src/rules/spaced-comment.md:39:69      	doxygen 	U   	documentation read by doxygen, vsdoc, etc. which must"
   - "docs/src/rules/spaced-comment.md:39:78      	vsdoc   	U   	ocumentation read by doxygen, vsdoc, etc. which must have"
+  - "docs/src/rules/use-isnan.md:2:12    	isnan   	U   	title: use-isnan"
   - "docs/src/rules/valid-typeof.md:31:17    	strnig      	U   	typeof foo === \"strnig\""
   - "docs/src/rules/valid-typeof.md:32:16    	undefimed   	U   	typeof foo == \"undefimed\""
   - "docs/src/rules/valid-typeof.md:33:16    	nunber      	U   	typeof bar != \"nunber\""
@@ -338,7 +338,6 @@ issues:
   - "lib/rules/no-mixed-requires.js:78:66    	iojs        	U   	per nodejs v0.12.2 and iojs v0.7.1"
   - "lib/rules/no-mixed-requires.js:182:62   	Declarators 	U   	The list of VariableDeclarators."
   - "lib/rules/no-new-native-nonconstructor.js:32:18     	Nonconstructor  	U   	noNewNonconstructor: \"`{{name}}` cannot"
-  - "lib/rules/no-restricted-imports.js:179:57   	ignorecase  	U   	allowRelativePaths: true, ignorecase: !caseSensitive }).add"
   - "lib/rules/no-trailing-spaces.js:57:13   	NONBLANK	U   	NONBLANK = `${BLANK_CLASS}+$"
   - "lib/rules/no-useless-backreference.js:43:12     	Lookaround  	U   	function isLookaround(node) {"
   - "lib/rules/no-useless-backreference.js:75:40     	bref        	U   	\"Backreference '{{ bref }}' will be ignored"
