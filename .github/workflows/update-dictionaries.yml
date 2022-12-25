@@ -263,7 +263,7 @@ jobs:
       - name: Store Update Snapshot Diff
         run: |
           mkdir temp || echo temp already exists
-          git diff packages  > temp/update_snapshot.diff
+          git diff packages/cspell packages/cspell-lib  > temp/update_snapshot.diff
       - name: store diff
         uses: actions/upload-artifact@v3
         with:
