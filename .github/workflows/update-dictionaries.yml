@@ -217,7 +217,6 @@ jobs:
     if: ${{ needs.check-dictionaries.outputs.patch }}
     runs-on: ubuntu-latest
     needs:
-      - build
       - calc-ref
       - check-dictionaries
 
@@ -226,11 +225,6 @@ jobs:
       PATCH: ${{ needs.check-dictionaries.outputs.patch }}
 
     steps:
-      - name: Build Results
-        run: |
-          echo "key: ${{ needs.build.outputs.key }}"
-          echo "path: ${{ needs.build.outputs.path }}"
-
       - name: Checkout
         uses: actions/checkout@v3
         with:
@@ -251,29 +245,16 @@ jobs:
 
       - run: pnpm -v
 
-      - name: Cache Build
-        id: step-cache-build
-        uses: actions/cache@v3
-        with:
-          key: ${{ needs.build.outputs.key }}
-          path: ${{ needs.build.outputs.path }}
-
-      - name: Cached Results
+      - name: Install and Build
         run: |
-          echo Build Cache: ${{ steps.step-cache-build.outputs.cache-hit && 'Hit' || 'Miss' }}
-
-      - name: Install
-        run: pnpm i
+          pnpm i
+          pnpm run build
 
       - name: Has pnpm has failed?
         if: ${{ failure() }}
         run: |
           ls -alF /home/runner/.pnpm/_logs/*.log
           cat /home/runner/.pnpm/_logs/*.log
-
-      - name: Check Build
-        if: ${{ !steps.step-cache-build.outputs.cache-hit }}
-        run: exit 1
 
       - name: Update update-snapshots-only
         run: |
@@ -282,7 +263,7 @@ jobs:
       - name: Store Update Snapshot Diff
         run: |
           mkdir temp || echo temp already exists
-          git diff integration-tests/config integration-tests/repositories integration-tests/snapshots  > temp/update_snapshot.diff
+          git diff packages/cspell packages/cspell-lib  > temp/update_snapshot.diff
       - name: store diff
         uses: actions/upload-artifact@v3
         with:
