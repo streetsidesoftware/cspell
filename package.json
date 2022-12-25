@@ -39,6 +39,7 @@
     "symlink": "node build_tools/bin/symlink.js packages test-packages",
     "test-watch": "pnpm -r run --parallel test-watch",
     "test": "pnpm -r run test && pnpm run test-schema",
+    "test:update-snapshots": "pnpm run -r test:update-snapshot",
     "test-bin": "pnpm run test-bin-spell && pnpm run test-bin-spell-cache-content && pnpm run test-bin-spell-cache-metadata && pnpm run test-bin-trace && pnpm run test-bin-check",
     "test-bin-check": "node ./bin.js check README.md",
     "test-bin-spell": "node ./bin.js -c cspellrc.json --no-progress --no-cache",
