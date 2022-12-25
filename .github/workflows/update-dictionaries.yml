@@ -263,7 +263,7 @@ jobs:
       - name: Store Update Snapshot Diff
         run: |
           mkdir temp || echo temp already exists
-          git diff integration-tests/config integration-tests/repositories integration-tests/snapshots  > temp/update_snapshot.diff
+          git diff .  > temp/update_snapshot.diff
       - name: store diff
         uses: actions/upload-artifact@v3
         with:
