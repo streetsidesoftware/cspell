@@ -1,27 +1,17 @@
 import assert from 'assert';
-import { validateText, combineTextAndLanguageSettings, finalizeSettings, getDefaultSettings } from 'cspell-lib';
+import { spellCheckDocument } from 'cspell-lib';
 
 // cspell:ignore wordz coztom clockz cuztom
 const customWords = ['wordz', 'cuztom', 'clockz'];
 
-async function spellcheckerFactory(customWords: string[] = []) {
-    const settings = {
-        ...getDefaultSettings(),
-        words: customWords,
-    };
-
-    const fileSettings = combineTextAndLanguageSettings(settings, '', ['plaintext']);
-    const finalSettings = finalizeSettings(fileSettings);
-
-    return (phrase: string) => {
-        return validateText(phrase, finalSettings, { generateSuggestions: true });
-    };
+async function checkSpelling(phrase: string) {
+    const result = await spellCheckDocument(
+        { uri: 'text.txt', text: phrase, languageId: 'plaintext', locale: 'en' },
+        { generateSuggestions: true, noConfigSearch: true },
+        { words: customWords }
+    );
+    return result.issues;
 }
-
-const checkSpelling = async (phrase: string) => {
-    const spellChecker = await spellcheckerFactory(customWords);
-    return spellChecker(phrase);
-};
 
 async function run() {
     const r = await checkSpelling('These are my coztom wordz.');
