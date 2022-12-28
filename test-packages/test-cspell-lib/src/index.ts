@@ -1,4 +1,4 @@
-import { assert } from 'console';
+import assert from 'assert';
 import { validateText, combineTextAndLanguageSettings, finalizeSettings, getDefaultSettings } from 'cspell-lib';
 
 // cspell:ignore wordz coztom clockz cuztom
