@@ -27,7 +27,7 @@ async function run() {
     const r = await checkSpelling('These are my coztom wordz.');
     assert(r.length === 1, 'Make sure we got 1 spelling issue back.');
     assert(r[0].text === 'coztom');
-    assert(r[0].suggestions?.[0] === 'cuztom');
+    assert(r[0].suggestions?.includes('cuztom'));
     // console.log('%o', r);
 }
 
