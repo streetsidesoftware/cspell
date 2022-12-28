@@ -8,7 +8,7 @@ async function checkSpelling(phrase: string) {
     const result = await spellCheckDocument(
         { uri: 'text.txt', text: phrase, languageId: 'plaintext', locale: 'en' },
         { generateSuggestions: true, noConfigSearch: true },
-        { words: customWords }
+        { words: customWords, suggestionsTimeout: 2000 }
     );
     return result.issues;
 }
