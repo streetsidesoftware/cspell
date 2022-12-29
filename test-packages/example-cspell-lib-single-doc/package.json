@@ -1,15 +1,17 @@
 {
-  "name": "test-cspell-lib",
+  "name": "example-cspell-lib-single-doc",
   "version": "6.18.0",
-  "description": "Pure testing package for cspell-lib.",
+  "description": "Pure testing package for cspell-io. It purpose is to verify cspell-io dependencies.",
   "private": true,
+  "bin": "bin.js",
   "scripts": {
     "clean": "rimraf dist .tsbuildinfo",
     "build": "pnpm run compile",
     "build-dev": "tsc -p tsconfig.dev.json",
+    "watch": "tsc -p tsconfig.dev.json --watch",
     "clean-build": "pnpm run clean && pnpm run build",
     "compile": "tsc -p .",
-    "test": "node dist"
+    "test": "node bin src/index.ts"
   },
   "author": "",
   "license": "MIT",
@@ -20,5 +22,9 @@
   "engines": {
     "node": ">=14"
   },
+  "files": [
+    "bin.js",
+    "dist/**/*.js"
+  ],
   "keywords": []
 }

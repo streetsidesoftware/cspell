@@ -728,6 +728,12 @@ importers:
       '@cspell/cspell-tools': link:../../../packages/cspell-tools
       cspell: link:../../../packages/cspell
 
+  test-packages/example-cspell-lib-single-doc:
+    specifiers:
+      cspell-lib: workspace:*
+    dependencies:
+      cspell-lib: link:../../packages/cspell-lib
+
   test-packages/test-cspell:
     specifiers:
       '@cspell/cspell-types': workspace:*
