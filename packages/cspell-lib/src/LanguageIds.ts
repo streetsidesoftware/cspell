@@ -57,7 +57,7 @@ export const languageExtensionDefinitions: LanguageDefinitions = [
         id: 'html',
         extensions: ['.html', '.htm', '.shtml', '.xhtml', '.mdoc', '.jsp', '.asp', '.aspx', '.jshtm', '.volt', '.vue'],
     },
-    { id: 'ini', extensions: ['.ini'] },
+    { id: 'ini', extensions: ['.ini', '.conf'] },
     { id: 'properties', extensions: ['.properties', '.gitconfig', '.cfg', '.conf'] },
     { id: 'jade', extensions: ['.jade', '.pug'] },
     { id: 'java', extensions: ['.java', '.jav'] },
@@ -90,7 +90,7 @@ export const languageExtensionDefinitions: LanguageDefinitions = [
     { id: 'ruby', extensions: ['.rb', '.rbx', '.rjs', '.gemspec', '.rake', '.ru'] },
     { id: 'ruby', extensions: [], filenames: ['Gemfile'] },
     { id: 'rust', extensions: ['.rs'] },
-    { id: 'scala', extensions: ['.scala', '.sc'] },
+    { id: 'scala', extensions: ['.scala', '.sc', '.sbt'] },
     { id: 'scss', extensions: ['.scss'] },
     { id: 'shaderlab', extensions: ['.shader', '.cginc'] },
     {
@@ -252,6 +252,7 @@ export const languageExtensionDefinitions: LanguageDefinitions = [
     { id: 'object-file', extensions: ['.o', '.obj'], format: 'Binary' },
     { id: 'jar', extensions: ['.jar'], format: 'Binary' },
     { id: 'spv', extensions: ['.spv'], format: 'Binary', description: 'SPSS Output Document' },
+    { id: 'mdb', extensions: ['.mdb'], format: 'Binary', description: 'Microsoft Access DB' },
 ];
 
 export type LanguageId = string;
