@@ -252,6 +252,7 @@ export const languageExtensionDefinitions: LanguageDefinitions = [
     { id: 'object-file', extensions: ['.o', '.obj'], format: 'Binary' },
     { id: 'jar', extensions: ['.jar'], format: 'Binary' },
     { id: 'spv', extensions: ['.spv'], format: 'Binary', description: 'SPSS Output Document' },
+    { id: 'mdb', extensions: ['.mdb'], format: 'Binary', description: 'Microsoft Access DB' },
 ];
 
 export type LanguageId = string;
