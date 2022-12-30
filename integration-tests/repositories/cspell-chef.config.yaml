@@ -1,0 +1,14 @@
+$schema: https://raw.githubusercontent.com/streetsidesoftware/cspell/main/cspell.schema.json
+import:
+  - ./cspell-reporter.json
+  - ./temp/chef/chef/cspell.json
+
+patterns:
+  - name: RsaCert
+    pattern: >-
+      /-{5}BEGIN\s+(CERTIFICATE|(?:(?:RSA|EC)\s+)?(?:PRIVATE|PUBLIC)\s+KEY)[\w=+\-/=\\\s:,]+?-{5}END\s+\1-{5}/g
+
+dictionaryDefinitions:
+  - name: "chef"
+    file: "https://raw.githubusercontent.com/chef/chef_dictionary/main/chef.txt"
+    description: "Custom Chef Dictionary"

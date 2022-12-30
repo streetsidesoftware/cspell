@@ -1,0 +1,23 @@
+---
+Repository: chef/chef
+Url: https://github.com/chef/chef.git
+Args: ["--config=../../../cspell-chef.config.yaml","**"]
+Summary:
+  files: 1167
+  filesWithIssues: 4
+  issues: 17
+  errors: 0
+Errors: []
+
+issues: 
+  - "kitchen-tests/data_bags/users/adam.json:8:67    	ovhpasm 	U   	JOxUmaJTsxYFttFhP1jZZtTk/ovhpasmQJS5mfimeFs8HMRWGWM8uBB"
+  - "kitchen-tests/data_bags/users/adam.json:8:78    	mfime   	U   	JTsxYFttFhP1jZZtTk/ovhpasmQJS5mfimeFs8HMRWGWM8uBB5dhEmP"
+  - "kitchen-tests/data_bags/users/adam.json:8:86    	HMRWGWM 	U   	jZZtTk/ovhpasmQJS5mfimeFs8HMRWGWM8uBB5dhEmP6svqhRdJE5k"
+  - "kitchen-tests/data_bags/users/adam.json:8:104   	svqh    	U   	mfimeFs8HMRWGWM8uBB5dhEmP6svqhRdJE5k1oWRPF1\""
+  - "kitchen-tests/data_bags/users/adam.json:8:116   	WRPF    	U   	uBB5dhEmP6svqhRdJE5k1oWRPF1\""
+  - "lib/chef/provider/mount/solaris.rb:152:74   	largefiles  	U   	setuid/devices/intr/largefiles/logging/xattr/onerror"
+  - "lib/chef/provider/package/dnf/dnf_helper.py:6:8     	hawkey      	U   	import hawkey"
+  - "lib/chef/provider/package/dnf/dnf_helper.py:19:14   	installroot 	U   	conf.installroot = '/'"
+  - "lib/chef/provider/package/dnf/dnf_helper.py:20:14   	assumeyes   	U   	conf.assumeyes = True"
+  - "lib/chef/provider/package/dnf/dnf_helper.py:55:19   	versionstr  	U   	def version_tuple(versionstr):"
+  - "lib/chef/resource/ssh_known_hosts_entry.rb:152:36   	nistp   	U   	ecdsa\" => \"ecdsa-sha2-nistp256\","

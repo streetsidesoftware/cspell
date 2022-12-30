@@ -1,0 +1,20 @@
+
+Repository: chef/chef
+Url: "https://github.com/chef/chef.git"
+Args: ["--config=../../../cspell-chef.config.yaml","**"]
+Lines:
+  File: "./chef/chef/cspell.json"
+ CSpell: Files checked: 1167, Issues found: 17 in 4 files
+ exit code: 1
+./kitchen-tests/data_bags/users/adam.json:8:104     - Unknown word (svqh)       -- mfimeFs8HMRWGWM8uBB5dhEmP6svqhRdJE5k1oWRPF1"
+./kitchen-tests/data_bags/users/adam.json:8:116     - Unknown word (WRPF)       -- uBB5dhEmP6svqhRdJE5k1oWRPF1"
+./kitchen-tests/data_bags/users/adam.json:8:67      - Unknown word (ovhpasm)    -- JOxUmaJTsxYFttFhP1jZZtTk/ovhpasmQJS5mfimeFs8HMRWGWM8uBB
+./kitchen-tests/data_bags/users/adam.json:8:78      - Unknown word (mfime)      -- JTsxYFttFhP1jZZtTk/ovhpasmQJS5mfimeFs8HMRWGWM8uBB5dhEmP
+./kitchen-tests/data_bags/users/adam.json:8:86      - Unknown word (HMRWGWM)    -- jZZtTk/ovhpasmQJS5mfimeFs8HMRWGWM8uBB5dhEmP6svqhRdJE5k
+./lib/chef/provider/mount/solaris.rb:152:74    - Unknown word (largefiles) -- setuid/devices/intr/largefiles/logging/xattr/onerror
+./lib/chef/provider/package/dnf/dnf_helper.py:19:14     - Unknown word (installroot) -- conf.installroot = '/'
+./lib/chef/provider/package/dnf/dnf_helper.py:20:14     - Unknown word (assumeyes)   -- conf.assumeyes = True
+./lib/chef/provider/package/dnf/dnf_helper.py:55:19     - Unknown word (versionstr)  -- def version_tuple(versionstr):
+./lib/chef/provider/package/dnf/dnf_helper.py:6:8       - Unknown word (hawkey)     -- import hawkey
+./lib/chef/resource/ssh_known_hosts_entry.rb:152:36    - Unknown word (nistp)      -- ecdsa" => "ecdsa-sha2-nistp256",
+Legacy config file version found: "0.1", upgrade to "0.2"
