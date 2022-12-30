@@ -13,9 +13,41 @@ ignorePaths:
   - "*.jar"
   - "**/java-design-patterns/**/localization/**" # do not spell check localization files
   - "**/eslint/eslint/**/*.svg"
+  # RustPython Ignores
+  - "*.whl"
+  - "**/snapshots/**"
+  - "*.snap"
+  - "*.decTest"
+  - "*.{bmp,exr,gif,ico,jpeg,jpg,pbm,pgm,png,ppm,ras,sgi,tiff,webp,xbm}"
+  - "**/RustPython/**/html/entities.py"
+  - "mime.types"
 import:
   - ./cspell-reporter.json
   - ./cspell-latex.json
+patterns:
+  - name: python_binary_string_double
+    pattern: >-
+      /(?<=^\s*|[=(,[]\s*)\bb"(\\"|[^"])+"/gm
+  - name: python_binary_string_single
+    pattern: >-
+      /(?<=^\s*|[=(,[]\s*)\bb'(\\'|[^'])+'/gm
+  - name: file_url
+    pattern: >-
+      /\bfile:\w*\/[^\s'"]+/gm
+  - name: all_caps
+    pattern: >-
+      /\b[A-Z0-9]{4,}\b/g
+  - name: all_caps_codes
+    pattern: >-
+      /\b(Py_)?[A-Z_0-9]{4,}\b/g
+languageSettings:
+  - languageId: python
+    patterns:
+      - name: bytearray #cspell:ignore bytearray
+        pattern: >-
+          /bytearray\([^)]+\)/g
+    ignoreRegExpList:
+      - bytearray
 overrides:
   - filename: temp/TheAlgorithms/Python/**/*.py
     languageSettings:
@@ -39,6 +71,14 @@ overrides:
   - filename: temp/**/java-design-patterns/**/*.md
     dictionaries:
       - java
+  - filename: temp/RustPython/**
+    languageSettings:
+      - languageId: python
+        ignoreRegExpList: [python_binary_string_double, python_binary_string_single]
+    ignoreRegExpList:
+      - file_url
+      - all_caps
+      - all_caps_codes
   - filename: temp/sveltejs/**/*.md
     dictionaries:
       - css
@@ -52,3 +92,4 @@ dictionaryDefinitions:
   - name: custom-dictionary
     path: ./.cspell/custom-dictionary.txt
     addWords: true
+# cspell:ignore sveltejs webp

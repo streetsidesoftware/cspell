@@ -10,7 +10,7 @@
 // cspell:ignore jshintrc jscsrc eslintrc babelrc webmanifest mdown markdn psgi phtml pssc psrc gypi rhistory
 // cspell:ignore rprofile cshtml gemspec cginc ebuild zshrc zprofile zlogin zlogout zshenv dsql ascx axml
 // cspell:ignore bpmn csproj dita ditamap dtml fsproj fxml isml mxml adoc
-// cspell:ignore purescript purs dhall
+// cspell:ignore purescript purs dhall SPSS
 
 export interface LanguageExtensionDefinition {
     id: string;
@@ -18,6 +18,10 @@ export interface LanguageExtensionDefinition {
     extensions: string[];
     /** Filenames that do not have an extension or have a different type than their implied extension */
     filenames?: string[];
+    /** Indicates that it is a Text or Binary file type. */
+    format?: 'Text' | 'Binary';
+    /** Optional Description */
+    description?: string;
 }
 export type LanguageDefinition = LanguageExtensionDefinition;
 export type LanguageDefinitions = LanguageDefinition[];
@@ -181,6 +185,7 @@ export const languageExtensionDefinitions: LanguageDefinitions = [
             '.xul',
         ],
     },
+    { id: 'wheel', extensions: ['.whl'], format: 'Binary' },
     { id: 'xsl', extensions: ['.xsl', '.xslt'] },
     { id: 'yaml', extensions: ['.eyaml', '.eyml', '.yaml', '.yml'] },
     { id: 'latex', extensions: ['.tex'] },
@@ -195,20 +200,41 @@ export const languageExtensionDefinitions: LanguageDefinitions = [
     //
     {
         id: 'image',
-        extensions: ['.jpg', '.png', '.jpeg', '.tiff', '.bmp', '.gif', '.ico'],
+        extensions: [
+            '.bmp',
+            '.exr',
+            '.gif',
+            '.ico',
+            '.jpeg',
+            '.jpg',
+            '.pbm',
+            '.pgm',
+            '.png',
+            '.ppm',
+            '.ras',
+            '.sgi',
+            '.tiff',
+            '.webp',
+            '.xbm',
+        ],
+        format: 'Binary',
+        description: 'Some image extensions',
     },
     // cspell:ignore woff
     {
         id: 'binary',
         extensions: ['.gz', '.exe', '.dll', '.lib', '.obj', '.o', '.eot', '.cur', '.zip'],
+        format: 'Binary',
     },
     {
         id: 'fonts',
         extensions: ['.ttf', '.woff', '.woff2'],
+        format: 'Binary',
     },
     {
         id: 'video',
         extensions: ['.mov', '.mpg'],
+        format: 'Binary',
     },
     {
         id: 'lock',
@@ -221,11 +247,17 @@ export const languageExtensionDefinitions: LanguageDefinitions = [
         // cspell:ignore eslintcache
         filenames: ['.cspellcache', '.DS_Store', '.eslintcache'],
     },
+    { id: 'dll', extensions: ['.dll'], format: 'Binary' },
+    { id: 'exe', extensions: ['.exe'], format: 'Binary' },
+    { id: 'object-file', extensions: ['.o', '.obj'], format: 'Binary' },
+    { id: 'jar', extensions: ['.jar'], format: 'Binary' },
+    { id: 'spv', extensions: ['.spv'], format: 'Binary', description: 'SPSS Output Document' },
 ];
 
 export type LanguageId = string;
 
-export const binaryLanguages = new Set(['binary', 'image', 'video', 'fonts']);
+const binaryFormatIds = languageExtensionDefinitions.filter((d) => d.format === 'Binary').map((d) => d.id);
+export const binaryLanguages = new Set(['binary', 'image', 'video', 'fonts'].concat(binaryFormatIds));
 
 export const generatedFiles = new Set([...binaryLanguages, 'map', 'lock', 'pdf', 'cache_files', 'rsa', 'pem']);
 
