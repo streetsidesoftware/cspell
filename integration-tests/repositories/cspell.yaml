@@ -4,6 +4,7 @@ id: integration-test-default
 words:
   - octokit
 ignorePaths:
+  - CHANGELOG.md
   - "*.ktx"
   - "*.idmap" # DOOM, cspell:ignore idmap
   - "*.ogex" # DOOM, cspell:ignore ogex
@@ -21,6 +22,9 @@ ignorePaths:
   - "*.{bmp,exr,gif,ico,jpeg,jpg,pbm,pgm,png,ppm,ras,sgi,tiff,webp,xbm}"
   - "**/RustPython/**/html/entities.py"
   - "mime.types"
+  # GitBucket
+  - "**/gitbucket/**/*.{xml,erd,spec,init,conf}"
+  - "**/gitbucket/**/webapp/assets/**"
 import:
   - ./cspell-reporter.json
   - ./cspell-latex.json
@@ -71,6 +75,8 @@ overrides:
   - filename: temp/**/java-design-patterns/**/*.md
     dictionaries:
       - java
+  - filename: temp/gitbucket/**/{*.init,install}
+    languageId: shellscript
   - filename: temp/RustPython/**
     languageSettings:
       - languageId: python
@@ -92,4 +98,4 @@ dictionaryDefinitions:
   - name: custom-dictionary
     path: ./.cspell/custom-dictionary.txt
     addWords: true
-# cspell:ignore sveltejs webp
+# cspell:ignore sveltejs webp gitbucket
