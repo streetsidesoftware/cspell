@@ -3,9 +3,9 @@ Repository: sveltejs/svelte
 Url: https://github.com/sveltejs/svelte.git
 Args: ["**"]
 Summary:
-  files: 5212
-  filesWithIssues: 478
-  issues: 3253
+  files: 5229
+  filesWithIssues: 480
+  issues: 3258
   errors: 0
 Errors: []
 
@@ -276,10 +276,10 @@ issues:
   - "src/compiler/compile/css/Stylesheet.ts:230:15   	atrule      	U   	// if the atrule has children, leave"
   - "src/compiler/compile/nodes/Element.ts:26:18     	Defintion   	U   	import { ARIARoleDefintionKey, roles, aria, ARIAProperty"
   - "src/compiler/compile/nodes/Element.ts:67:12     	labelable   	U   	const a11y_labelable = new Set(["
-  - "src/compiler/compile/nodes/Element.ts:475:13    	proptypes   	U   	// aria-proptypes"
-  - "src/compiler/compile/nodes/Element.ts:630:33    	noreferrer  	U   	expected_values = ['noreferrer'];"
-  - "src/compiler/compile/nodes/Element.ts:1035:25   	vovel       	U   	const regex_starts_with_vovel = /^[aeiou]/;"
-  - "src/compiler/compile/nodes/Element.ts:1035:36   	aeiou       	U   	starts_with_vovel = /^[aeiou]/;"
+  - "src/compiler/compile/nodes/Element.ts:476:13    	proptypes   	U   	// aria-proptypes"
+  - "src/compiler/compile/nodes/Element.ts:631:33    	noreferrer  	U   	expected_values = ['noreferrer'];"
+  - "src/compiler/compile/nodes/Element.ts:1036:25   	vovel       	U   	const regex_starts_with_vovel = /^[aeiou]/;"
+  - "src/compiler/compile/nodes/Element.ts:1036:36   	aeiou       	U   	starts_with_vovel = /^[aeiou]/;"
   - "src/compiler/compile/nodes/shared/get_const_tags.ts:21:9    	consts  	U   	const consts_nodes = const_tags.map"
   - "src/compiler/compile/nodes/shared/is_contextual.ts:13:5     	hoistables  	U   	// hoistables, module declarations"
   - "src/compiler/compile/nodes/shared/Node.ts:17:10     	innerhtml   	U   	can_use_innerhtml: boolean;"
@@ -296,14 +296,14 @@ issues:
   - "src/compiler/compile/render_dom/wrappers/Element/fix_attribute_casing.ts:1:1343     	onbegin 	U   	offset onabort onactivate onbegin onclick onend onerror"
   - "src/compiler/compile/render_dom/wrappers/Element/fix_attribute_casing.ts:1:1458     	onrepeat	U   	onmouseover onmouseup onrepeat onresize onscroll onunload"
   - "src/compiler/compile/render_dom/wrappers/Element/index.ts:68:18     	elementresize   	U   	event_names: ['elementresize'],"
-  - "src/compiler/compile/render_dom/wrappers/Element/index.ts:380:97    	unclaimable     	U   	nodes`); // if we're in unclaimable territory, i.e. <head"
-  - "src/compiler/compile/render_dom/wrappers/Element/index.ts:427:31    	outgroup        	U   	that belong to the same outgroup as an outroing element"
-  - "src/compiler/compile/render_dom/wrappers/Element/index.ts:427:46    	outroing        	U   	same outgroup as an outroing element..."
-  - "src/compiler/compile/render_dom/wrappers/Element/index.ts:432:11    	textcontent     	U   	// skip textcontent for <template>. append"
-  - "src/compiler/compile/render_dom/wrappers/Element/index.ts:453:6     	quasis          	U   	quasis: []"
-  - "src/compiler/compile/render_dom/wrappers/Element/index.ts:639:62    	animationframe  	U   	name(`${this.var.name}_animationframe`);"
-  - "src/compiler/compile/render_dom/wrappers/Element/index.ts:714:16    	initialise      	U   	const should_initialise = ("
-  - "src/compiler/compile/render_dom/wrappers/Element/index.ts:982:37    	outro'd         	U   	hide elements that have outro'd (unless they belong"
+  - "src/compiler/compile/render_dom/wrappers/Element/index.ts:386:97    	unclaimable     	U   	nodes`); // if we're in unclaimable territory, i.e. <head"
+  - "src/compiler/compile/render_dom/wrappers/Element/index.ts:433:31    	outgroup        	U   	that belong to the same outgroup as an outroing element"
+  - "src/compiler/compile/render_dom/wrappers/Element/index.ts:433:46    	outroing        	U   	same outgroup as an outroing element..."
+  - "src/compiler/compile/render_dom/wrappers/Element/index.ts:438:11    	textcontent     	U   	// skip textcontent for <template>. append"
+  - "src/compiler/compile/render_dom/wrappers/Element/index.ts:459:6     	quasis          	U   	quasis: []"
+  - "src/compiler/compile/render_dom/wrappers/Element/index.ts:645:62    	animationframe  	U   	name(`${this.var.name}_animationframe`);"
+  - "src/compiler/compile/render_dom/wrappers/Element/index.ts:720:16    	initialise      	U   	const should_initialise = ("
+  - "src/compiler/compile/render_dom/wrappers/Element/index.ts:988:37    	outro'd         	U   	hide elements that have outro'd (unless they belong"
   - "src/compiler/compile/render_dom/wrappers/Fragment.ts:47:10      	trimmable   	U   	function trimmable_at(child: INode, next"
   - "src/compiler/compile/render_dom/wrappers/shared/Wrapper.ts:89:37    	renderable  	U   	Wrapper class is not renderable');"
   - "src/compiler/compile/render_dom/wrappers/Window.ts:83:38    	onwindow            	U   	block.get_unique_name(`onwindow${event}`);"
@@ -1534,7 +1534,8 @@ issues:
   - "src/compiler/utils/mapped_code.ts:114:6     	unswitched  	U   	// unswitched loops are faster"
   - "src/runtime/action/index.ts:13:5    	newprop 	U   	* newprop?: string;"
   - "src/runtime/internal/dom.ts:387:194 	dont	U   	createNode: () => R, dontUpdateLastIndex: boolean"
-  - "src/runtime/internal/scheduler.ts:53:5      	flushidx	U   	let flushidx = 0; // Do *not* move"
+  - "src/runtime/internal/scheduler.ts:53:5      	flushidx    	U   	let flushidx = 0; // Do *not* move"
+  - "src/runtime/internal/scheduler.ts:57:5      	Reentrancy  	U   	// Reentrancy is ok afterwards for"
   - "src/runtime/internal/ssr.ts:6:70    	FDEF    	U   	[\\s'\">/=\\u{FDD0}-\\u{FDEF}\\u{FFFE}\\u{FFFF}\\u{"
   - "src/runtime/internal/ssr.ts:6:78    	FFFE    	U   	\\u{FDD0}-\\u{FDEF}\\u{FFFE}\\u{FFFF}\\u{1FFFE}\\u"
   - "src/runtime/internal/ssr.ts:6:256   	AFFFE   	U   	u{9FFFE}\\u{9FFFF}\\u{AFFFE}\\u{AFFFF}\\u{BFFFE}\\u"
@@ -1582,8 +1583,8 @@ issues:
   - "test/css/samples/unused-selector-string-concat/_config.js:96:12     	fooccbar	U   	25: .fooccbar {color: red;}`,"
   - "test/css/samples/unused-selector-string-concat/_config.js:110:12    	fooddbar	U   	26: .fooddbar {color: red;}`,"
   - "test/css/samples/unused-selector-ternary/_config.js:9:35    	maybeactive 	U   	Unused CSS selector \".maybeactive\"',"
-  - "test/custom-elements/index.ts:82:17     	importee	U   	resolveId(importee) {"
-  - "test/custom-elements/index.ts:112:52    	iife    	U   	generate({ format: 'iife', name: 'test' });"
+  - "test/custom-elements/index.ts:85:17     	importee	U   	resolveId(importee) {"
+  - "test/custom-elements/index.ts:115:52    	iife    	U   	generate({ format: 'iife', name: 'test' });"
   - "test/hydration/samples/head-html-and-component/_after_head.html:1:20    	ibcve   	U   	<!-- HEAD_svelte-17ibcve_START -->"
   - "test/hydration/samples/head-html-and-component/_after_head.html:8:19    	gqzvnn  	U   	<!-- HEAD_svelte-1gqzvnn_START -->"
   - "test/hydration/samples/head-meta-hydrate-duplicate/_after_head.html:2:21    	aodm	U   	<!-- HEAD_svelte-1s8aodm_START -->"

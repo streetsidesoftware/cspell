@@ -3,9 +3,9 @@ Repository: googleapis/google-cloud-cpp
 Url: https://github.com/googleapis/google-cloud-cpp.git
 Args: ["--config=${repoConfig}/cspell.json","**/*","-e","{*.BUILD,BUILD,CHANGELOG.md,*.sh,*.cfg,*.ps1,Dockerfile.*,*.Dockerfile,*.{yaml,xml,json,cmake}}"]
 Summary:
-  files: 8721
-  filesWithIssues: 6710
-  issues: 61201
+  files: 8723
+  filesWithIssues: 6711
+  issues: 61203
   errors: 0
 Errors: []
 
@@ -280,13 +280,13 @@ issues:
   - "generator/BUILD.bazel:19:69     	hdrs            	U   	cloud_cpp_generator_hdrs\", \"google_cloud_cpp"
   - "generator/BUILD.bazel:91:39     	commandlineflag 	U   	google_absl//absl/flags:commandlineflag\","
   - "generator/CMakeLists.txt:44:25      	idempotency 	U   	internal/forwarding_idempotency_policy_generator.cc"
-  - "generator/CMakeLists.txt:99:22      	libprotoc   	U   	protobuf::libprotoc)"
-  - "generator/CMakeLists.txt:119:29     	SRCS        	U   	protobuf_generate_cpp(PROTO_SRCS PROTO_HDRS generator"
-  - "generator/CMakeLists.txt:119:40     	HDRS        	U   	cpp(PROTO_SRCS PROTO_HDRS generator_config.proto"
-  - "generator/CMakeLists.txt:122:40     	libprotobuf 	U   	PUBLIC protobuf::libprotobuf)"
-  - "generator/CMakeLists.txt:174:14     	fname       	U   	foreach (fname ${google_cloud_cpp_generator"
-  - "generator/CMakeLists.txt:190:62     	bigobj      	U   	.obj file. Add the /bigobj option to"
-  - "generator/CMakeLists.txt:200:26     	everytime   	U   	build all the tests everytime they create a new package"
+  - "generator/CMakeLists.txt:101:22     	libprotoc   	U   	protobuf::libprotoc)"
+  - "generator/CMakeLists.txt:121:29     	SRCS        	U   	protobuf_generate_cpp(PROTO_SRCS PROTO_HDRS generator"
+  - "generator/CMakeLists.txt:121:40     	HDRS        	U   	cpp(PROTO_SRCS PROTO_HDRS generator_config.proto"
+  - "generator/CMakeLists.txt:124:40     	libprotobuf 	U   	PUBLIC protobuf::libprotobuf)"
+  - "generator/CMakeLists.txt:176:14     	fname       	U   	foreach (fname ${google_cloud_cpp_generator"
+  - "generator/CMakeLists.txt:192:62     	bigobj      	U   	.obj file. Add the /bigobj option to"
+  - "generator/CMakeLists.txt:202:26     	everytime   	U   	build all the tests everytime they create a new package"
   - "generator/generator_config.proto:23:27      	rpcs    	U   	repeated string omitted_rpcs = 4;"
   - "generator/generator_config.proto:37:35      	gcpxx   	U   	to true generate the `gcpxxV1` alias for our inline"
   - "generator/generator_config.proto:44:42      	struct  	U   	ServiceNameRetryTraits struct using the provided codes"
@@ -317,7 +317,7 @@ issues:
   - "generator/integration_tests/tests/golden_thing_admin_auth_decorator_test.cc:37:50   	Longrunning 	U   	longrunning::Operation>> LongrunningError(Unused,"
   - "generator/integration_tests/tests/golden_thing_admin_idempotency_policy_test.cc:26:11   	gtab	U   	namespace gtab = ::google::test::admin"
   - "generator/integration_tests/tests/golden_thing_admin_rest_stub_test.cc:263:24   	expirable   	U   	\"title\": \"expirable access\","
-  - "generator/internal/auth_decorator_generator.cc:81:11    	Bidir   	U   	if (IsBidirStreaming(method)) {"
+  - "generator/internal/auth_decorator_generator.cc:99:10    	Bidir   	U   	HasBidirStreamingMethod()"
   - "generator/internal/codegen_utils_test.cc:58:22      	baaaaa  	U   	EXPECT_EQ(\"foo_bar_baaaaa\", CamelCaseToSnakeCase"
   - "generator/internal/codegen_utils_test.cc:58:59      	BAAAAA  	U   	CamelCaseToSnakeCase(\"fooBarBAAAAA\"));"
   - "generator/internal/descriptor_utils_test.cc:977:10  	endcond 	U   	/// @endcond"
@@ -569,6 +569,7 @@ issues:
   - "google/cloud/internal/build_info.cc.in:18:11    	cctype          	U   	#include <cctype>"
   - "google/cloud/internal/build_info.cc.in:25:4     	NOLINTNEXTLINE  	U   	// NOLINTNEXTLINE(readability-identifier"
   - "google/cloud/internal/compute_engine_util.h:26:49   	sevrre  	U   	query a GCE metadata sevrre."
+  - "google/cloud/internal/curl_impl.cc:169:35   	defrag  	U   	0) start_ = 0; // defrag optimization"
   - "google/cloud/internal/curl_rest_client_integration_test.cc:45:10    	httpbin 	U   	auto httpbin_endpoint = google::cloud"
   - "google/cloud/internal/curl_rest_client_integration_test.cc:45:62    	HTTPBIN 	U   	cloud::internal::GetEnv(\"HTTPBIN_ENDPOINT\");"
   - "google/cloud/internal/curl_rest_client_integration_test.cc:106:21   	httbin  	U   	// TODO(#8396): httbin.org doesn't send back"
@@ -710,7 +711,7 @@ issues:
   - "google/cloud/spanner/database_admin_client_test.cc:32:11    	gsad	U   	namespace gsad = ::google::spanner"
   - "google/cloud/spanner/instance_admin_client_test.cc:29:11    	gsai	U   	namespace gsai = ::google::spanner"
   - "google/cloud/spanner/integration_tests/data_types_integration_test.cc:71:30     	Tmpl                	U   	DataTypeIntegrationTestTmpl : public T {"
-  - "google/cloud/spanner/integration_tests/data_types_integration_test.cc:518:47    	datatypesbyjsonvalue	U   	AllOf(HasSubstr(\"Index datatypesbyjsonvalue\"),"
+  - "google/cloud/spanner/integration_tests/data_types_integration_test.cc:508:47    	datatypesbyjsonvalue	U   	AllOf(HasSubstr(\"Index datatypesbyjsonvalue\"),"
   - "google/cloud/spanner/internal/connection_impl_test.cc:61:34     	Wmissing    	U   	diagnostic ignored \"-Wmissing-field-initializers\""
   - "google/cloud/spanner/internal/connection_impl_test.cc:87:27     	Pointwise   	U   	::testing::UnorderedPointwise;"
   - "google/cloud/spanner/internal/connection_impl_test.cc:2539:37   	BADDECAF    	U   	{ partition_token: \"BADDECAF\" }"
