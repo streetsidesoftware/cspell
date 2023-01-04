@@ -89,7 +89,9 @@ cspell lint --help
 
 ### Options
 
-```text
+<!--- @@inject: static/help-lint.txt --->
+
+```
 Usage: cspell lint [options] [globs...]
 
 Check spelling
@@ -97,30 +99,22 @@ Check spelling
 Options:
   -c, --config <cspell.json>   Configuration file to use.  By default cspell
                                looks for cspell.json in the current directory.
-
   -v, --verbose                Display more information about the files being
                                checked and the configuration.
-
   --locale <locale>            Set language locales. i.e. "en,fr" for English
                                and French, or "en-GB" for British English.
-
   --language-id <language>     Force programming language for unknown
                                extensions. i.e. "php" or "scala"
-
   --words-only                 Only output the words not found in the
                                dictionaries.
-
   -u, --unique                 Only output the first instance of a word not
                                found in the dictionaries.
-
   -e, --exclude <glob>         Exclude files matching the glob pattern. This
                                option can be used multiple times to add
                                multiple globs.
-
   --file-list <path or stdin>  Specify a list of files to be spell checked. The
                                list is filtered against the glob file patterns.
                                Note: the format is 1 file path per line.
-
   --no-issues                  Do not show the spelling errors.
   --no-progress                Turn off progress messages
   --no-summary                 Turn off summary message in console.
@@ -131,28 +125,26 @@ Options:
   --show-context               Show the surrounding text around an issue.
   --show-suggestions           Show spelling suggestions.
   --no-must-find-files         Do not error if no files are found.
-
   --cache                      Use cache to only check changed files.
   --no-cache                   Do not use cache.
+  --cache-reset                Reset the cache file.
   --cache-strategy <strategy>  Strategy to use for detecting changed files.
                                (choices: "metadata", "content")
-
   --cache-location <path>      Path to the cache file or directory. (default:
                                ".cspellcache")
-
   --dot                        Include files and directories starting with `.`
                                (period) when matching globs.
-
   --gitignore                  Ignore files matching glob patterns found in
                                .gitignore files.
-
   --no-gitignore               Do NOT use .gitignore files.
-
   --gitignore-root <path>      Prevent searching for .gitignore files past
                                root.
-
+  --validate-directives        Validate in-document CSpell directives.
+  --no-validate-directives     Do not validate in-document CSpell directives.
   --no-color                   Turn off color.
   --color                      Force color.
+  --no-default-configuration   Do not load the default configuration and
+                               dictionaries.
   --debug                      Output information useful for debugging
                                cspell.json files.
   -h, --help                   display help for command
@@ -166,6 +158,8 @@ Examples:
     cspell "**/*.{txt,js,md}"       Check .txt, .js, and .md files.
     cat LICENSE | cspell stdin      Check stdin
 ```
+
+<!--- @@inject-end: static/help-lint.txt --->
 
 ## Command: `check` - Quick Visual Check
 
@@ -193,6 +187,35 @@ Trace shows a the list of known dictionaries and a `*` next to the ones that con
 A `!` will appear next to the ones where the word is forbidden.
 
 ![image](https://user-images.githubusercontent.com/3740137/129488961-b99dbd2f-7daa-4462-96cd-568e0d4c3c6e.png)
+
+### Help `cspell trace --help`
+
+<!--- @@inject: static/help-trace.txt --->
+
+```
+Usage: cspell trace [options] [words...]
+
+Trace words -- Search for words in the configuration and dictionaries.
+
+Options:
+  -c, --config <cspell.json>  Configuration file to use.  By default cspell
+                              looks for cspell.json in the current directory.
+  --locale <locale>           Set language locales. i.e. "en,fr" for English
+                              and French, or "en-GB" for British English.
+  --language-id <language>    Use programming language. i.e. "php" or "scala"
+  --allow-compound-words      Turn on allowCompoundWords
+  --no-allow-compound-words   Turn off allowCompoundWords
+  --no-ignore-case            Do not ignore case and accents when searching for
+                              words
+  --stdin                     Read words from stdin.
+  --no-color                  Turn off color.
+  --color                     Force color
+  --no-default-configuration  Do not load the default configuration and
+                              dictionaries.
+  -h, --help                  display help for command
+```
+
+<!--- @@inject-end: static/help-trace.txt --->
 
 ## CI/CD Continuous Integration support
 
@@ -227,7 +250,7 @@ exec git diff --cached --name-only | npx cspell --no-summary --no-progress --no-
 
 ## Requirements
 
-cspell needs Node 12 and above.
+cspell needs Node 14 and above.
 
 ## How it works
 
@@ -283,6 +306,7 @@ It is possible to disable / enable the spell checker by adding comments to your 
 - `/* spellchecker: disable */`
 - `// cspell:disable-line` -- disables checking for the current line.
 - `/* cspell:disable-next-line */` -- disables checking till the end of the next line.
+
 <!--- cSpell:enable -->
 
 #### Enable Checking
@@ -373,9 +397,9 @@ By default the flags `gim` are added if no flags are given.
 
 The spell checker works in the following way:
 
-1. Find all text matching `includeRegExp`
-2. Remove any text matching `ignoreRegExp`
-3. Check the remaining text.
+1.  Find all text matching `includeRegExp`
+1.  Remove any text matching `ignoreRegExp`
+1.  Check the remaining text.
 
 #### Exclude Example
 
@@ -432,7 +456,7 @@ const companyName = 'Lorem ipsum dolor sit amet';
 ### Exclude patterns
 
 - `Urls`<sup>1</sup> -- Matches urls
-- `HexValues` -- Matches common hex format like #aaa, 0xfeef, \\u0134
+- `HexValues` -- Matches common hex format like `#aaa`, `0xfeef`, `\u0134`
 - `Base64`<sup>1</sup> -- matches base64 blocks of text longer than 40 characters.
 - `Email` -- matches most email addresses.
 
@@ -495,11 +519,16 @@ Or you can specify a path to a config file with the `--config <path>` argument o
 ### cspell.json sections
 
 - `version` - currently always 0.2 - controls how the settings in the configuration file behave.
+
 - `language` - this specifies the language locale to use in choosing the general dictionary.
   For example: `"language": "en-GB"` tells cspell to use British English instead of US English.
+
 - `words` - a list of words to be considered correct.
+
 - `flagWords` - a list of words to be always considered incorrect
+
 - `ignoreWords` - a list of words to be ignored (even if they are in the flagWords).
+
 - `ignorePaths` - a list of globs to specify which files are to be ignored.
 
   **Example**
@@ -511,9 +540,13 @@ Or you can specify a path to a config file with the `--config <path>` argument o
   will cause cspell to ignore anything in the `node_modules` directory.
 
 - `maxNumberOfProblems` - defaults to **_100_** per file.
+
 - `minWordLength` - defaults to **_4_** - the minimum length of a word before it is checked.
+
 - `allowCompoundWords` - defaults to **_false_**; set to **true** to allow compound words by default.
+
 - `dictionaries` - list of the names of the dictionaries to use. See [Dictionaries](#Dictionaries) below.
+
 - `dictionaryDefinitions` - this list defines any custom dictionaries to use. This is how you can include other languages like Spanish.
 
   **Example**
@@ -533,9 +566,12 @@ Or you can specify a path to a config file with the `--config <path>` argument o
   ```
 
 - `ignoreRegExpList` - list of patterns to be ignored
+
 - `includeRegExpList` - _(Advanced)_ limits the text checked to be only that matching the expressions in the list.
+
 - `patterns` - this allows you to define named patterns to be used with
   `ignoreRegExpList` and `includeRegExpList`.
+
 - `languageSettings` - this allow for per programming language configuration settings. See [LanguageSettings](#LanguageSettings)
 
 ## Dictionaries

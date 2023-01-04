@@ -1,0 +1,19 @@
+name: install_build
+description: Install and Build
+inputs:
+  node-version:
+    required: false
+    description: The version of Node to use.
+runs:
+  using: "composite"
+  steps:
+    - name: Setup
+      # Directory name only
+      uses: ./.github/actions/setup
+      with:
+        node-version: ${{ inputs.node-version }}
+    - shell: bash
+      run: |
+        pnpm -v
+        pnpm i
+        pnpm build
