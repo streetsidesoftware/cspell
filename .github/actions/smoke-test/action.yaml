@@ -27,7 +27,7 @@ runs:
 
     - name: Restore CSpell cache
       uses: actions/cache@v3
-      if: ${{ inputs.use_cspell_cache }}
+      if: ${{ inputs.use_cspell_cache == 'true' }}
       with:
         key: cspell-cache-${{ runner.os }}-test-${{ hashFiles('**/*.ts', '**/*.md') }}
         path: |
