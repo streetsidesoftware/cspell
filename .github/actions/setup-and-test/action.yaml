@@ -5,6 +5,9 @@ inputs:
     required: false
     description: The version of Node to use.
     default: "18.x"
+  shell:
+    required: false
+    description: Shell to use, defaults to (bash || powershell)
 
 runs:
   using: "composite"
@@ -12,8 +15,10 @@ runs:
     - name: Show inputs
       env:
         INPUTS: ${{ toJSON(inputs) }}
+        OS: ${{ runner.os }}
       run: |
         echo "$INPUTS"
+        echo "$OS"
       shell: bash
 
     - name: Setup
@@ -24,4 +29,4 @@ runs:
     # Node 19 has started to fail if concurrency is not set to 1
     # both jest and pnpm run in parallel overloading the machine.
     - run: pnpm --workspace-concurrency 1 test
-      shell: bash
+      shell: ${{ inputs.shell }}

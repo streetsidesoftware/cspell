@@ -11,18 +11,13 @@ inputs:
 runs:
   using: "composite"
   steps:
-    - name: Determine Shell
-      id: shell
-      run: echo "shell=${{ inputs.shell || (contains(runner.io, 'win') && 'pwsh' || 'bash') }}" >> $GITHUB_OUTPUT
-      shell: bash
-
     - name: Show inputs
       env:
         INPUTS: ${{ toJSON(inputs) }}
-        USE_SHELL: ${{ toJSON(steps.shell)}}
+        OS: ${{ runner.os }}
       run: |
         echo "$INPUTS"
-        echo "$USE_SHELL"
+        echo "$OS"
       shell: bash
 
     - name: Restore CSpell cache
@@ -38,12 +33,12 @@ runs:
 
     - name: verify trace command
       run: pnpm run test-bin-trace
-      shell: ${{ steps.shell.shell }}
+      shell: ${{ inputs.shell }}
 
     - name: verify the spell checker runs
       run: pnpm run test-bin-spell
-      shell: ${{ steps.shell.shell }}
+      shell: ${{ inputs.shell }}
 
     - name: verify the check command
       run: pnpm run test-bin-check
-      shell: ${{ steps.shell.shell }}
+      shell: ${{ inputs.shell }}
