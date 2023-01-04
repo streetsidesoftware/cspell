@@ -1,0 +1,23 @@
+name: setup_node
+description: Setup Node, and install Pnpm
+inputs:
+  node-version:
+    required: false
+    description: The version of Node to use.
+    default: '18.x'
+runs:
+  using: 'composite'
+  steps:
+    - name: Setup pnpm
+      uses: pnpm/action-setup@v2.2.4
+
+    - name: Use Node.js ${{ inputs.node-version }}
+      uses: actions/setup-node@v3
+      with:
+        registry-url: 'https://registry.npmjs.org'
+        node-version: ${{ inputs.node-version }}
+        cache: 'pnpm'
+
+    - name: Install
+      run: pnpm i
+      shell: bash
