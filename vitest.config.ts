@@ -8,7 +8,16 @@ export default defineConfig({
             clean: true,
             all: true,
             reporter: ['html', 'text', 'lcov', 'json'],
-            exclude: ['bin.mjs', '_snapshots_', '.eslint*', 'vitest*', '.prettier*', '**/*.test.*'],
+            exclude: [
+                'bin.mjs',
+                'bin.js',
+                'bin.cjs',
+                '_snapshots_',
+                '.eslint*',
+                'vitest*',
+                '.prettier*',
+                '**/*.test.*',
+            ],
         },
     },
 });
