@@ -1,0 +1,61 @@
+name: create_pr
+description: Create A Pull Request That will Trigger Workflows
+inputs:
+  base:
+    description: The Base Ref to apply the diff
+    required: false
+  body:
+    description: Optional body of the PR
+    required: false
+  commit-message:
+    description: Commit Message for the PR
+    required: true
+  branch:
+    description: The Branch to create for the PR
+    required: true
+  title:
+    description: PR title - defaults to commit-message
+    required: false
+runs:
+  using: "composite"
+  steps:
+    - name: Has changes
+      shell: bash
+      run: |
+        git --no-pager diff --compact-summary  --exit-code && echo "git_status=clean" >> $GITHUB_ENV || echo "git_status=dirty" >> $GITHUB_ENV
+        git --no-pager diff --compact-summary
+    - name: Gen Body
+      shell: bash
+      env:
+        BODY: ${{ inputs.body }}
+      run: |
+        echo 'git_body<<DIFF' >> $GITHUB_ENV
+        echo "$BODY" >> $GITHUB_ENV
+        git --no-pager diff --compact-summary >> $GITHUB_ENV
+        echo 'DIFF' >> $GITHUB_ENV
+    - name: Echo git_status
+      shell: bash
+      run: echo "${{ env.git_status }}"
+
+    - name: Body
+      shell: bash
+      run: |
+        echo "$git_body"
+
+    - uses: tibdex/github-app-token@021a2405c7f990db57f5eae5397423dcc554159c # v1.5 # cspell:ignore tibdex
+      if: env.git_status == 'dirty'
+      id: generate-token
+      with:
+        app_id: ${{ secrets.AUTOMATION_APP_ID }}
+        private_key: ${{ secrets.AUTOMATION_PRIVATE_KEY }}
+    - name: Create Pull Request
+      if: env.git_status == 'dirty'
+      uses: peter-evans/create-pull-request@2b011faafdcbc9ceb11414d64d0573f37c774b04 # v4
+      with:
+        commit-message: ${{ inputs.commit-message }}
+        branch: ${{ inputs.branch }}
+        base: ${{ inputs.base }}
+        title: ${{ inputs.title || inputs.commit-message }}
+        token: ${{ steps.generate-token.outputs.token }}
+        body: ${{ env.git_body }}
+        delete-branch: true
