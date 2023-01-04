@@ -1,12 +1,17 @@
 import * as app from './app';
 import * as path from 'path';
 
-const log = jest.spyOn(console, 'log').mockImplementation();
-const error = jest.spyOn(console, 'error').mockImplementation();
-
 describe('app', () => {
+    let log: jest.SpyInstance<void, Parameters<typeof console.log>>;
+    let error: jest.SpyInstance<void, Parameters<typeof console.error>>;
+
     beforeEach(() => {
-        jest.resetAllMocks();
+        log = jest.spyOn(console, 'log').mockImplementation();
+        error = jest.spyOn(console, 'error').mockImplementation();
+    });
+
+    afterEach(() => {
+        jest.restoreAllMocks();
     });
 
     test.each`
