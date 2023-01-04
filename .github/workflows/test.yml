@@ -61,7 +61,9 @@ jobs:
             cspell-cache-${{ runner.os }}-test-
             cspell-cache-${{ runner.os }}-
 
-      - run: pnpm test
+      # Node 19 has started to fail if concurrency is not set to 1
+      # both jest and pnpm run in parallel overloading the machine.
+      - run: pnpm --workspace-concurrency 1 test
 
       - name: verify trace command
         run: pnpm run test-bin-trace
