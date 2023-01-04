@@ -28,30 +28,8 @@ jobs:
         run: |
           pnpm run build:readme
 
-      - name: Has changes
-        run: |
-          git --no-pager diff --compact-summary  --exit-code && echo "git_status=clean" >> $GITHUB_ENV || echo "git_status=dirty" >> $GITHUB_ENV
-          git --no-pager diff --compact-summary
-      - name: Gen Body
-        run: |
-          echo 'git_body<<DIFF' >> $GITHUB_ENV
-          git --no-pager diff --compact-summary >> $GITHUB_ENV
-          echo 'DIFF' >> $GITHUB_ENV
-      - name: Echo git_status
-        run: echo "${{ env.git_status }}"
-      - uses: tibdex/github-app-token@021a2405c7f990db57f5eae5397423dcc554159c # v1.5 # cspell:ignore tibdex
-        if: env.git_status == 'dirty'
-        id: generate-token
-        with:
-          app_id: ${{ secrets.AUTOMATION_APP_ID }}
-          private_key: ${{ secrets.AUTOMATION_PRIVATE_KEY }}
-      - name: Create Pull Request
-        if: env.git_status == 'dirty'
-        uses: peter-evans/create-pull-request@2b011faafdcbc9ceb11414d64d0573f37c774b04 # v4
+      - name: PR
+        uses: ./.github/actions/pr
         with:
           commit-message: "ci: Workflow Bot -- Build Readme"
           branch: ${{ env.NEW_BRANCH }}
-          title: "ci: Workflow Bot -- Build Readme"
-          token: ${{ steps.generate-token.outputs.token }}
-          body: ${{ env.git_body }}
-          delete-branch: true
