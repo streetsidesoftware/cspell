@@ -48,12 +48,13 @@ runs:
       run: |
         echo "$git_body"
 
-    - uses: tibdex/github-app-token@021a2405c7f990db57f5eae5397423dcc554159c # v1.5 # cspell:ignore tibdex
+    - uses: ./.github/actions/github-app-token
       if: env.git_status == 'dirty'
       id: generate-token
       with:
         app_id: ${{ inputs.app_id }}
         private_key: ${{ inputs.app_private_key }}
+
     - name: Create Pull Request
       if: env.git_status == 'dirty'
       uses: peter-evans/create-pull-request@2b011faafdcbc9ceb11414d64d0573f37c774b04 # v4

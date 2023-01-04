@@ -24,17 +24,11 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: Setup pnpm
-        uses: pnpm/action-setup@v2.2.4
-
-      - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v3
+      - name: Setup
+        uses: ./.github/actions/setup
         with:
           node-version: ${{ matrix.node-version }}
-          cache: "pnpm"
 
-      - run: pnpm -v
-      - run: pnpm i
       - run: pnpm run test-build-docs
 
       # Ensure the repository is clean after build & test
