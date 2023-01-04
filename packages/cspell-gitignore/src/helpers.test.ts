@@ -1,5 +1,7 @@
-import { directoryRoot, findRepoRoot, isParentOf, contains } from './helpers';
+import { describe, expect, test } from 'vitest';
+
 import * as path from 'path';
+import { contains, directoryRoot, findRepoRoot, isParentOf } from './helpers';
 
 const pkg = path.resolve(__dirname, '..');
 const gitRoot = path.resolve(pkg, '../..');

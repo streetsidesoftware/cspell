@@ -67,12 +67,19 @@ const config = {
         },
         {
             files: ['**/*.test.ts', '**/*.spec.ts'],
+            excludedFiles: ['**/cspell-gitignore/**'],
             extends: 'plugin:jest/recommended',
             env: {
                 jest: true,
             },
             rules: {
                 'jest/valid-title': 'warn',
+            },
+        },
+        {
+            files: ['vitest.config.*'],
+            rules: {
+                'node/no-unpublished-import': 'off',
             },
         },
     ],
