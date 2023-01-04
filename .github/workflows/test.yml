@@ -45,16 +45,10 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: Setup pnpm
-        uses: pnpm/action-setup@v2.2.4
-
-      - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v3
+      - name: Setup
+        uses: ./.github/actions/install-build
         with:
           node-version: ${{ matrix.node-version }}
-          cache: "pnpm"
-
-      - run: pnpm -v
 
       - name: Restore CSpell cache
         uses: actions/cache@v3
@@ -66,8 +60,6 @@ jobs:
             cspell-cache-${{ runner.os }}-test-
             cspell-cache-${{ runner.os }}-
 
-      - run: pnpm i
-      - run: pnpm run build
       - run: pnpm test
 
       - name: verify trace command
@@ -98,19 +90,11 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: Setup pnpm
-        uses: pnpm/action-setup@v2.2.4
-
-      - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v3
+      - name: Setup
+        uses: ./.github/actions/install-build
         with:
           node-version: ${{ matrix.node-version }}
-          cache: pnpm
 
-      - run: pnpm -v
-
-      - run: pnpm i
-      - run: pnpm run build
       # macos has started to fail if concurrency is not set to 1
       # both jest and pnpm run in parallel overloading the machine.
       - run: pnpm --workspace-concurrency 1 test
@@ -141,16 +125,10 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: Setup pnpm
-        uses: pnpm/action-setup@v2.2.4
-
-      - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v3
+      - name: Setup
+        uses: ./.github/actions/setup
         with:
           node-version: ${{ matrix.node-version }}
-          cache: "pnpm"
-
-      - run: pnpm -v
 
       - name: Swap tsconfig.json
         run: |

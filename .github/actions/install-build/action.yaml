@@ -14,5 +14,6 @@ runs:
         node-version: ${{ inputs.node-version }}
     - shell: bash
       run: |
+        pnpm -v
         pnpm i
         pnpm build
