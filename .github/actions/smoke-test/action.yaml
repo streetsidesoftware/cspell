@@ -29,12 +29,12 @@ runs:
 
     - name: verify trace command
       run: pnpm run test-bin-trace
-      shell: ${{ step.shell.shell }}
+      shell: ${{ steps.shell.shell }}
 
     - name: verify the spell checker runs
       run: pnpm run test-bin-spell
-      shell: ${{ step.shell.shell }}
+      shell: ${{ steps.shell.shell }}
 
     - name: verify the check command
       run: pnpm run test-bin-check
-      shell: ${{ step.shell.shell }}
+      shell: ${{ steps.shell.shell }}
