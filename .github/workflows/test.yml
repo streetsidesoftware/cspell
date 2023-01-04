@@ -45,31 +45,10 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: Setup
-        uses: ./.github/actions/install-build
+      - name: Setup And Test
+        uses: ./.github/actions/setup-and-test
         with:
           node-version: ${{ matrix.node-version }}
-
-      - name: Restore CSpell cache
-        uses: actions/cache@v3
-        with:
-          key: cspell-cache-${{ runner.os }}-test-${{ hashFiles('**/*.ts', '**/*.md') }}
-          path: |
-            .cspell/.cspellcache
-          restore-keys: |
-            cspell-cache-${{ runner.os }}-test-
-            cspell-cache-${{ runner.os }}-
-
-      - run: pnpm test
-
-      - name: verify trace command
-        run: pnpm run test-bin-trace
-
-      - name: verify the spell checker runs
-        run: pnpm run test-bin-spell
-
-      - name: verify the check command
-        run: pnpm run test-bin-check
 
       # Ensure the repository is clean after build & test
       - run: git --no-pager diff --exit-code
@@ -80,8 +59,7 @@ jobs:
     strategy:
       matrix:
         node-version:
-          # Test the latest node version here, move older versions to `test-old-node-versions`
-          - 16.x
+          - 18.x
 
         os:
           - windows-latest
@@ -90,23 +68,10 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: Setup
-        uses: ./.github/actions/install-build
+      - name: Setup And Test
+        uses: ./.github/actions/setup-and-test
         with:
           node-version: ${{ matrix.node-version }}
-
-      # macos has started to fail if concurrency is not set to 1
-      # both jest and pnpm run in parallel overloading the machine.
-      - run: pnpm --workspace-concurrency 1 test
-
-      - name: verify trace command
-        run: pnpm run test-bin-trace
-
-      - name: verify the spell checker runs
-        run: pnpm run test-bin-spell
-
-      - name: verify the check command
-        run: pnpm run test-bin-check
 
       # Ensure the repository is clean after build & test
       - run: git --no-pager diff --compact-summary --exit-code
@@ -118,6 +83,7 @@ jobs:
       matrix:
         node-version:
           - 18.x
+          # - 19.x
 
         os:
           - ubuntu-latest
@@ -141,3 +107,42 @@ jobs:
       - run: pnpm i
       - run: pnpm run build
       - run: pnpm --workspace-concurrency 1 test
+
+  smoke-test:
+    runs-on: ${{ matrix.os }}
+
+    strategy:
+      matrix:
+        node-version:
+          # List of supported node versions (latest is tested in `test-os`)
+          - 18.x
+          - 19.x
+
+        os:
+          - ubuntu-latest
+
+        use_cspell_cache:
+          - true
+          - ""
+
+        include:
+          - os: windows-latest
+            use_cspell_cache: ""
+          - os: macos-latest
+            use_cspell_cache: ""
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Install and Build
+        uses: ./.github/actions/install-build
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Smoke Tests
+        uses: ./.github/actions/smoke-test
+        with:
+          use_cspell_cache: ${{ matrix.use_cspell_cache }}
+
+      # Ensure the repository is clean after build & test
+      - run: git --no-pager diff --exit-code
