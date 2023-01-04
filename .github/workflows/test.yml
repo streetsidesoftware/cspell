@@ -50,11 +50,6 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
 
-      - name: Smoke Tests
-        uses: ./.github/actions/smoke-test
-        with:
-          use_cspell_cache: true
-
       # Ensure the repository is clean after build & test
       - run: git --no-pager diff --exit-code
 
@@ -64,7 +59,7 @@ jobs:
     strategy:
       matrix:
         node-version:
-          - 16.x
+          - 18.x
 
         os:
           - windows-latest
@@ -123,14 +118,22 @@ jobs:
       matrix:
         node-version:
           # List of supported node versions (latest is tested in `test-os`)
-          - 16.x
+          - 18.x
+          - 19.x
 
         os:
           - ubuntu-latest
 
         use_cspell_cache:
           - true
-          - false
+          - ""
+
+        include:
+          - os: windows-latest
+            use_cspell_cache: ""
+          - os: macos-latest
+            use_cspell_cache: ""
+
     steps:
       - uses: actions/checkout@v3
 
