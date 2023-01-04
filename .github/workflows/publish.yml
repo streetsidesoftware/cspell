@@ -19,7 +19,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: Setup
+      - name: Setup and Build
         uses: ./.github/actions/install-build
         with:
           node-version: ${{ matrix.node-version }}

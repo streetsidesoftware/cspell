@@ -16,6 +16,12 @@ inputs:
   title:
     description: PR title - defaults to commit-message
     required: false
+  app_id:
+    description: Application ID used to make the PR
+    required: true
+  app_private_key:
+    description: Application Private Key used to sign the PR
+    required: true
 runs:
   using: "composite"
   steps:
@@ -46,8 +52,8 @@ runs:
       if: env.git_status == 'dirty'
       id: generate-token
       with:
-        app_id: ${{ secrets.AUTOMATION_APP_ID }}
-        private_key: ${{ secrets.AUTOMATION_PRIVATE_KEY }}
+        app_id: ${{ inputs.app_id }}
+        private_key: ${{ inputs.app_private_key }}
     - name: Create Pull Request
       if: env.git_status == 'dirty'
       uses: peter-evans/create-pull-request@2b011faafdcbc9ceb11414d64d0573f37c774b04 # v4
