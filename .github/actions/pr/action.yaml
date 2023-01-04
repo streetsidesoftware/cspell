@@ -53,7 +53,7 @@ runs:
       id: generate-token
       with:
         app_id: ${{ inputs.app_id }}
-        private_key: ${{ inputs.app_private_key }}
+        app_private_key: ${{ inputs.app_private_key }}
 
     - name: Create Pull Request
       if: env.git_status == 'dirty'
