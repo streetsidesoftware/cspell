@@ -31,20 +31,20 @@ declare function generateExclusionFunctionForUri(globs: Glob[], root: string, al
  */
 declare function generateExclusionFunctionForFiles(globs: Glob[], root: string): FileExclusionFunction;
 
+type exclusionHelper_d_ExcludeFilesGlobMap = ExcludeFilesGlobMap;
 type exclusionHelper_d_ExclusionFunction = ExclusionFunction;
 type exclusionHelper_d_FileExclusionFunction = FileExclusionFunction;
-type exclusionHelper_d_ExcludeFilesGlobMap = ExcludeFilesGlobMap;
 declare const exclusionHelper_d_extractGlobsFromExcludeFilesGlobMap: typeof extractGlobsFromExcludeFilesGlobMap;
-declare const exclusionHelper_d_generateExclusionFunctionForUri: typeof generateExclusionFunctionForUri;
 declare const exclusionHelper_d_generateExclusionFunctionForFiles: typeof generateExclusionFunctionForFiles;
+declare const exclusionHelper_d_generateExclusionFunctionForUri: typeof generateExclusionFunctionForUri;
 declare namespace exclusionHelper_d {
   export {
+    exclusionHelper_d_ExcludeFilesGlobMap as ExcludeFilesGlobMap,
     exclusionHelper_d_ExclusionFunction as ExclusionFunction,
     exclusionHelper_d_FileExclusionFunction as FileExclusionFunction,
-    exclusionHelper_d_ExcludeFilesGlobMap as ExcludeFilesGlobMap,
     exclusionHelper_d_extractGlobsFromExcludeFilesGlobMap as extractGlobsFromExcludeFilesGlobMap,
-    exclusionHelper_d_generateExclusionFunctionForUri as generateExclusionFunctionForUri,
     exclusionHelper_d_generateExclusionFunctionForFiles as generateExclusionFunctionForFiles,
+    exclusionHelper_d_generateExclusionFunctionForUri as generateExclusionFunctionForUri,
   };
 }
 
@@ -94,24 +94,24 @@ interface ResolveSettingsResult {
 
 //# sourceMappingURL=index.link.d.ts.map
 
-declare const index_link_d_addPathsToGlobalImports: typeof addPathsToGlobalImports;
-declare const index_link_d_listGlobalImports: typeof listGlobalImports;
-declare const index_link_d_removePathsFromGlobalImports: typeof removePathsFromGlobalImports;
 type index_link_d_AddPathsToGlobalImportsResults = AddPathsToGlobalImportsResults;
 type index_link_d_ListGlobalImportsResult = ListGlobalImportsResult;
 type index_link_d_ListGlobalImportsResults = ListGlobalImportsResults;
 type index_link_d_RemovePathsFromGlobalImportsResult = RemovePathsFromGlobalImportsResult;
 type index_link_d_ResolveSettingsResult = ResolveSettingsResult;
+declare const index_link_d_addPathsToGlobalImports: typeof addPathsToGlobalImports;
+declare const index_link_d_listGlobalImports: typeof listGlobalImports;
+declare const index_link_d_removePathsFromGlobalImports: typeof removePathsFromGlobalImports;
 declare namespace index_link_d {
   export {
-    index_link_d_addPathsToGlobalImports as addPathsToGlobalImports,
-    index_link_d_listGlobalImports as listGlobalImports,
-    index_link_d_removePathsFromGlobalImports as removePathsFromGlobalImports,
     index_link_d_AddPathsToGlobalImportsResults as AddPathsToGlobalImportsResults,
     index_link_d_ListGlobalImportsResult as ListGlobalImportsResult,
     index_link_d_ListGlobalImportsResults as ListGlobalImportsResults,
     index_link_d_RemovePathsFromGlobalImportsResult as RemovePathsFromGlobalImportsResult,
     index_link_d_ResolveSettingsResult as ResolveSettingsResult,
+    index_link_d_addPathsToGlobalImports as addPathsToGlobalImports,
+    index_link_d_listGlobalImports as listGlobalImports,
+    index_link_d_removePathsFromGlobalImports as removePathsFromGlobalImports,
   };
 }
 
@@ -213,64 +213,64 @@ declare const __testing__: {
     regExWordsAndDigits: RegExp;
 };
 
-declare const text_d_splitCamelCaseWordWithOffset: typeof splitCamelCaseWordWithOffset;
-declare const text_d_splitCamelCaseWord: typeof splitCamelCaseWord;
-declare const text_d_match: typeof match;
-declare const text_d_matchStringToTextOffset: typeof matchStringToTextOffset;
-declare const text_d_matchToTextOffset: typeof matchToTextOffset;
-declare const text_d_extractLinesOfText: typeof extractLinesOfText;
-declare const text_d_extractWordsFromText: typeof extractWordsFromText;
-declare const text_d_extractWordsFromTextOffset: typeof extractWordsFromTextOffset;
+declare const text_d___testing__: typeof __testing__;
+declare const text_d_calculateTextDocumentOffsets: typeof calculateTextDocumentOffsets;
+declare const text_d_camelToSnake: typeof camelToSnake;
 declare const text_d_cleanText: typeof cleanText;
 declare const text_d_cleanTextOffset: typeof cleanTextOffset;
+declare const text_d_extractLinesOfText: typeof extractLinesOfText;
 declare const text_d_extractPossibleWordsFromTextOffset: typeof extractPossibleWordsFromTextOffset;
+declare const text_d_extractText: typeof extractText;
 declare const text_d_extractWordsFromCode: typeof extractWordsFromCode;
 declare const text_d_extractWordsFromCodeTextOffset: typeof extractWordsFromCodeTextOffset;
-declare const text_d_isUpperCase: typeof isUpperCase;
-declare const text_d_isLowerCase: typeof isLowerCase;
-declare const text_d_isFirstCharacterUpper: typeof isFirstCharacterUpper;
+declare const text_d_extractWordsFromText: typeof extractWordsFromText;
+declare const text_d_extractWordsFromTextOffset: typeof extractWordsFromTextOffset;
 declare const text_d_isFirstCharacterLower: typeof isFirstCharacterLower;
-declare const text_d_ucFirst: typeof ucFirst;
+declare const text_d_isFirstCharacterUpper: typeof isFirstCharacterUpper;
+declare const text_d_isLowerCase: typeof isLowerCase;
+declare const text_d_isUpperCase: typeof isUpperCase;
 declare const text_d_lcFirst: typeof lcFirst;
-declare const text_d_snakeToCamel: typeof snakeToCamel;
-declare const text_d_camelToSnake: typeof camelToSnake;
+declare const text_d_match: typeof match;
 declare const text_d_matchCase: typeof matchCase;
-declare const text_d_textOffset: typeof textOffset;
-declare const text_d_extractText: typeof extractText;
-declare const text_d_calculateTextDocumentOffsets: typeof calculateTextDocumentOffsets;
+declare const text_d_matchStringToTextOffset: typeof matchStringToTextOffset;
+declare const text_d_matchToTextOffset: typeof matchToTextOffset;
 declare const text_d_removeAccents: typeof removeAccents;
-declare const text_d___testing__: typeof __testing__;
+declare const text_d_snakeToCamel: typeof snakeToCamel;
+declare const text_d_splitCamelCaseWord: typeof splitCamelCaseWord;
+declare const text_d_splitCamelCaseWordWithOffset: typeof splitCamelCaseWordWithOffset;
 declare const text_d_stringToRegExp: typeof stringToRegExp;
+declare const text_d_textOffset: typeof textOffset;
+declare const text_d_ucFirst: typeof ucFirst;
 declare namespace text_d {
   export {
-    text_d_splitCamelCaseWordWithOffset as splitCamelCaseWordWithOffset,
-    text_d_splitCamelCaseWord as splitCamelCaseWord,
-    text_d_match as match,
-    text_d_matchStringToTextOffset as matchStringToTextOffset,
-    text_d_matchToTextOffset as matchToTextOffset,
-    text_d_extractLinesOfText as extractLinesOfText,
-    text_d_extractWordsFromText as extractWordsFromText,
-    text_d_extractWordsFromTextOffset as extractWordsFromTextOffset,
+    text_d___testing__ as __testing__,
+    text_d_calculateTextDocumentOffsets as calculateTextDocumentOffsets,
+    text_d_camelToSnake as camelToSnake,
     text_d_cleanText as cleanText,
     text_d_cleanTextOffset as cleanTextOffset,
+    text_d_extractLinesOfText as extractLinesOfText,
     text_d_extractPossibleWordsFromTextOffset as extractPossibleWordsFromTextOffset,
+    text_d_extractText as extractText,
     text_d_extractWordsFromCode as extractWordsFromCode,
     text_d_extractWordsFromCodeTextOffset as extractWordsFromCodeTextOffset,
-    text_d_isUpperCase as isUpperCase,
-    text_d_isLowerCase as isLowerCase,
-    text_d_isFirstCharacterUpper as isFirstCharacterUpper,
+    text_d_extractWordsFromText as extractWordsFromText,
+    text_d_extractWordsFromTextOffset as extractWordsFromTextOffset,
     text_d_isFirstCharacterLower as isFirstCharacterLower,
-    text_d_ucFirst as ucFirst,
+    text_d_isFirstCharacterUpper as isFirstCharacterUpper,
+    text_d_isLowerCase as isLowerCase,
+    text_d_isUpperCase as isUpperCase,
     text_d_lcFirst as lcFirst,
-    text_d_snakeToCamel as snakeToCamel,
-    text_d_camelToSnake as camelToSnake,
+    text_d_match as match,
     text_d_matchCase as matchCase,
-    text_d_textOffset as textOffset,
-    text_d_extractText as extractText,
-    text_d_calculateTextDocumentOffsets as calculateTextDocumentOffsets,
+    text_d_matchStringToTextOffset as matchStringToTextOffset,
+    text_d_matchToTextOffset as matchToTextOffset,
     text_d_removeAccents as removeAccents,
-    text_d___testing__ as __testing__,
+    text_d_snakeToCamel as snakeToCamel,
+    text_d_splitCamelCaseWord as splitCamelCaseWord,
+    text_d_splitCamelCaseWordWithOffset as splitCamelCaseWordWithOffset,
     text_d_stringToRegExp as stringToRegExp,
+    text_d_textOffset as textOffset,
+    text_d_ucFirst as ucFirst,
   };
 }
 
