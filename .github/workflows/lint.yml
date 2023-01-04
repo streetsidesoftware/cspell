@@ -1,5 +1,6 @@
 name: Lint
 on:
+  workflow_dispatch:
   pull_request:
     paths-ignore:
       - "docs/**"
@@ -20,14 +21,9 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: Setup pnpm
-        uses: pnpm/action-setup@v2.2.4
-
-      - name: Use Node.js
-        uses: actions/setup-node@v3
+      - name: Setup
+        uses: ./.github/actions/install-build
         with:
-          cache: pnpm
+          node-version: ${{ matrix.node-version }}
 
-      - run: pnpm i
-      - run: pnpm run build
       - run: pnpm run lint-ci
