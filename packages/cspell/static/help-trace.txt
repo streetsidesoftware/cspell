@@ -1,0 +1,20 @@
+Usage: cspell trace [options] [words...]
+
+Trace words -- Search for words in the configuration and dictionaries.
+
+Options:
+  -c, --config <cspell.json>  Configuration file to use.  By default cspell
+                              looks for cspell.json in the current directory.
+  --locale <locale>           Set language locales. i.e. "en,fr" for English
+                              and French, or "en-GB" for British English.
+  --language-id <language>    Use programming language. i.e. "php" or "scala"
+  --allow-compound-words      Turn on allowCompoundWords
+  --no-allow-compound-words   Turn off allowCompoundWords
+  --no-ignore-case            Do not ignore case and accents when searching for
+                              words
+  --stdin                     Read words from stdin.
+  --no-color                  Turn off color.
+  --color                     Force color
+  --no-default-configuration  Do not load the default configuration and
+                              dictionaries.
+  -h, --help                  display help for command
