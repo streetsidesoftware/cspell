@@ -1,0 +1,20 @@
+name: setup-and-test
+description: Run Tests
+inputs:
+  node-version:
+    required: false
+    description: The version of Node to use.
+    default: "18.x"
+
+runs:
+  using: "composite"
+  steps:
+    - name: Setup
+      uses: ./.github/actions/install-build
+      with:
+        node-version: ${{ inputs.node-version }}
+
+    # Node 19 has started to fail if concurrency is not set to 1
+    # both jest and pnpm run in parallel overloading the machine.
+    - run: pnpm --workspace-concurrency 1 test
+      shell: bash

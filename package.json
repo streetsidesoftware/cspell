@@ -4,8 +4,7 @@
   "description": "cspell monorepo.",
   "main": "bin.js",
   "bin": {
-    "cspell-monorepo": "bin.js",
-    "symlink": "build_tools/bin/symlink.js"
+    "cspell-monorepo": "bin.js"
   },
   "packageManager": "pnpm@7.18.2",
   "private": true,
@@ -37,7 +36,6 @@
     "pub": "pnpm run pre-pub && lerna publish --conventional-commits --sync-workspace-lock",
     "pub-grad": "pnpm run pre-pub && lerna publish --conventional-commits --conventional-graduate  --sync-workspace-lock",
     "pub-next": "pnpm run pre-pub && lerna publish --conventional-commits --conventional-prerelease  --sync-workspace-lock --dist-tag next",
-    "symlink": "node build_tools/bin/symlink.js packages test-packages",
     "test-watch": "pnpm -r run --parallel test-watch",
     "test": "pnpm -r run test && pnpm run test-schema",
     "test:update-snapshots": "pnpm run -r test:update-snapshot",

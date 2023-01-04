@@ -1,0 +1,40 @@
+name: smoke_test
+description: Run the smoke tests
+inputs:
+  shell:
+    required: false
+    description: Shell to use, defaults to (bash || powershell)
+  use_cspell_cache:
+    required: false
+    description: Load the CSpell cache
+
+runs:
+  using: "composite"
+  steps:
+    - name: Determine Shell
+      id: shell
+      run: echo "shell=${{ inputs.shell || (contains(runner.io, 'win') && 'pwsh' || 'bash') }}" >> $GITHUB_OUTPUT
+      shell: bash
+
+    - name: Restore CSpell cache
+      uses: actions/cache@v3
+      if: ${{ inputs.use_cspell_cache }}
+      with:
+        key: cspell-cache-${{ runner.os }}-test-${{ hashFiles('**/*.ts', '**/*.md') }}
+        path: |
+          .cspell/.cspellcache
+        restore-keys: |
+          cspell-cache-${{ runner.os }}-test-
+          cspell-cache-${{ runner.os }}-
+
+    - name: verify trace command
+      run: pnpm run test-bin-trace
+      shell: ${{ step.shell.shell }}
+
+    - name: verify the spell checker runs
+      run: pnpm run test-bin-spell
+      shell: ${{ step.shell.shell }}
+
+    - name: verify the check command
+      run: pnpm run test-bin-check
+      shell: ${{ step.shell.shell }}
