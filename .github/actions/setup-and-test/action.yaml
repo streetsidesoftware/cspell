@@ -9,6 +9,13 @@ inputs:
 runs:
   using: "composite"
   steps:
+    - name: Show inputs
+      env:
+        INPUTS: ${{ toJSON(inputs) }}
+      run: |
+        echo "$INPUTS"
+      shell: bash
+
     - name: Setup
       uses: ./.github/actions/install-build
       with:

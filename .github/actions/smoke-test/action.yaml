@@ -16,6 +16,15 @@ runs:
       run: echo "shell=${{ inputs.shell || (contains(runner.io, 'win') && 'pwsh' || 'bash') }}" >> $GITHUB_OUTPUT
       shell: bash
 
+    - name: Show inputs
+      env:
+        INPUTS: ${{ toJSON(inputs) }}
+        USE_SHELL: ${{ toJSON(steps.shell)}}
+      run: |
+        echo "$INPUTS"
+        echo "$USE_SHELL"
+      shell: bash
+
     - name: Restore CSpell cache
       uses: actions/cache@v3
       if: ${{ inputs.use_cspell_cache }}
