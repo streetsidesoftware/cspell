@@ -1,4 +1,5 @@
-module.exports = {
+/** @type {import('jest').Config} */
+const config = {
     roots: ['./src'],
     transform: {
         '^.+\\.tsx?$': 'ts-jest',
@@ -15,3 +16,5 @@ module.exports = {
     },
     maxConcurrency: 1,
 };
+
+module.exports = config;
