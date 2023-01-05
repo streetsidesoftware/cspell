@@ -1,3 +1,5 @@
+import { describe, expect, test } from 'vitest';
+
 import * as path from 'path';
 import { GitIgnore } from './GitIgnore';
 
@@ -54,11 +56,11 @@ describe('GitIgnoreServer', () => {
         ${__filename}                      | ${undefined}               | ${undefined}
         ${p(samples, 'ignored/keepme.md')} | ${undefined}               | ${undefined}
         ${p(samples, 'ignored/file.txt')}  | ${undefined}               | ${{ glob: 'ignored/**', matched: true, line: 3, root: samples, gitIgnoreFile: p(samples, '.gitignore') }}
-        ${p(pkg, 'node_modules/bin')}      | ${undefined}               | ${{ glob: 'node_modules/', matched: true, line: 58, root: gitRoot, gitIgnoreFile: gitIgnoreFile }}
+        ${p(pkg, 'node_modules/bin')}      | ${undefined}               | ${{ glob: 'node_modules/', matched: true, line: 59, root: gitRoot, gitIgnoreFile: gitIgnoreFile }}
         ${__filename}                      | ${[p(samples, 'ignored')]} | ${undefined}
         ${p(samples, 'ignored/keepme.md')} | ${[p(samples, 'ignored')]} | ${undefined}
         ${p(samples, 'ignored/file.txt')}  | ${[p(samples, 'ignored')]} | ${undefined}
-        ${p(pkg, 'node_modules/bin')}      | ${[p(samples, 'ignored')]} | ${{ glob: 'node_modules/', matched: true, line: 58, root: gitRoot, gitIgnoreFile: gitIgnoreFile }}
+        ${p(pkg, 'node_modules/bin')}      | ${[p(samples, 'ignored')]} | ${{ glob: 'node_modules/', matched: true, line: 59, root: gitRoot, gitIgnoreFile: gitIgnoreFile }}
     `('isIgnoredEx $file $roots', async ({ file, roots, expected }) => {
         const dir = path.dirname(file);
         const gs = new GitIgnore(roots);

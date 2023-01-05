@@ -1,6 +1,6 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1
 
-exports[`app app.help 1`] = `
+exports[`app > app.help 1`] = `
 [
   [
     "Usage cspell-gitignore [options] <files>
@@ -21,34 +21,34 @@ Example:
 ]
 `;
 
-exports[`app app.run [" "] 1`] = `""`;
+exports[`app > app.run [ ' ' ] 1`] = `""`;
 
-exports[`app app.run [" "] 2`] = `"Missing files"`;
+exports[`app > app.run [ ' ' ] 2`] = `"Missing files"`;
 
-exports[`app app.run ["../node_modules"] 1`] = `".gitignore:58:node_modules/	../node_modules"`;
+exports[`app > app.run [ '../node_modules' ] 1`] = `".gitignore:59:node_modules/	../node_modules"`;
 
-exports[`app app.run ["../node_modules"] 2`] = `""`;
+exports[`app > app.run [ '../node_modules' ] 2`] = `""`;
 
-exports[`app app.run ["-r", ".", "dist"] 1`] = `"packages/cspell-gitignore/.gitignore:3:dist	dist"`;
+exports[`app > app.run [ '-r', '.' ] 1`] = `""`;
 
-exports[`app app.run ["-r", ".", "dist"] 2`] = `""`;
+exports[`app > app.run [ '-r', '.' ] 2`] = `"Missing files"`;
 
-exports[`app app.run ["-r", ".", "temp"] 1`] = `"packages/cspell-gitignore/.gitignore:4:temp	temp"`;
+exports[`app > app.run [ '-r', '.', 'dist' ] 1`] = `"packages/cspell-gitignore/.gitignore:3:dist	dist"`;
 
-exports[`app app.run ["-r", ".", "temp"] 2`] = `""`;
+exports[`app > app.run [ '-r', '.', 'dist' ] 2`] = `""`;
 
-exports[`app app.run ["-r", "."] 1`] = `""`;
+exports[`app > app.run [ '-r', '.', 'temp' ] 1`] = `"packages/cspell-gitignore/.gitignore:4:temp	temp"`;
 
-exports[`app app.run ["-r", "."] 2`] = `"Missing files"`;
+exports[`app > app.run [ '-r', '.', 'temp' ] 2`] = `""`;
 
-exports[`app app.run ["src/code.ts"] 1`] = `"::	src/code.ts"`;
+exports[`app > app.run [ 'src/code.ts' ] 1`] = `"::	src/code.ts"`;
 
-exports[`app app.run ["src/code.ts"] 2`] = `""`;
+exports[`app > app.run [ 'src/code.ts' ] 2`] = `""`;
 
-exports[`app app.run ["temp"] 1`] = `".gitignore:53:temp	temp"`;
+exports[`app > app.run [ 'temp' ] 1`] = `".gitignore:54:temp	temp"`;
 
-exports[`app app.run ["temp"] 2`] = `""`;
+exports[`app > app.run [ 'temp' ] 2`] = `""`;
 
-exports[`app app.run [] 1`] = `""`;
+exports[`app > app.run [] 1`] = `""`;
 
-exports[`app app.run [] 2`] = `"Missing files"`;
+exports[`app > app.run [] 2`] = `"Missing files"`;

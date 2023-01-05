@@ -1,17 +1,19 @@
+import { describe, expect, test, afterEach, vi, beforeEach, SpyInstance } from 'vitest';
+
 import * as app from './app';
 import * as path from 'path';
 
 describe('app', () => {
-    let log: jest.SpyInstance<void, Parameters<typeof console.log>>;
-    let error: jest.SpyInstance<void, Parameters<typeof console.error>>;
+    let log: SpyInstance<Parameters<typeof console.log>>;
+    let error: SpyInstance<Parameters<typeof console.error>>;
 
     beforeEach(() => {
-        log = jest.spyOn(console, 'log').mockImplementation();
-        error = jest.spyOn(console, 'error').mockImplementation();
+        log = vi.spyOn(console, 'log').mockImplementation(() => undefined);
+        error = vi.spyOn(console, 'error').mockImplementation(() => undefined);
     });
 
     afterEach(() => {
-        jest.restoreAllMocks();
+        vi.restoreAllMocks();
     });
 
     test.each`
