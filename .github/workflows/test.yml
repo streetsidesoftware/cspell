@@ -128,8 +128,10 @@ jobs:
         include:
           - os: windows-latest
             use_cspell_cache: ""
+            node-version: 18.x
           - os: macos-latest
             use_cspell_cache: ""
+            node-version: 18.x
 
     steps:
       - uses: actions/checkout@v3
@@ -146,3 +148,29 @@ jobs:
 
       # Ensure the repository is clean after build & test
       - run: git --no-pager diff --exit-code
+
+  test-node-19:
+    runs-on: ${{ matrix.os }}
+
+    strategy:
+      matrix:
+        node-version:
+          # List of supported node versions (latest is tested in `test-os`)
+          - 19.x
+
+        os:
+          - ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Setup
+        uses: ./.github/actions/install-build
+        with:
+          node-version: ${{ inputs.node-version }}
+
+      - run: pnpm -r --filter ./packages/cspell run test
+
+      # Node 19 has started to fail if concurrency is not set to 1
+      # both jest and pnpm run in parallel overloading the machine.
+      - run: pnpm --workspace-concurrency 1 test
