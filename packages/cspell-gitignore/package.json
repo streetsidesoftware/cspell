@@ -32,7 +32,9 @@
     "watch": "tsc -p . -w",
     "clean": "rimraf dist coverage .tsbuildinfo",
     "clean-build": "pnpm run clean && pnpm run build",
-    "coverage": "vitest run --coverage",
+    "coverage": "pnpm coverage:vitest && pnpm coverage:fix",
+    "coverage:vitest": "vitest run --coverage",
+    "coverage:fix": "nyc report --temp-dir \"$(pwd)/.coverage\" --reporter lcov --reporter html --report-dir \"$(pwd)/coverage\" --cwd ../..",
     "test-watch": "vitest",
     "test": "vitest run"
   },
@@ -53,6 +55,7 @@
   "devDependencies": {
     "@types/node": "^18.11.18",
     "@vitest/coverage-c8": "^0.26.3",
+    "@vitest/coverage-istanbul": "^0.26.3",
     "rimraf": "^3.0.2",
     "vite": "^4.0.4",
     "vitest": "^0.26.3"

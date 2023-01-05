@@ -8,6 +8,7 @@ export default mergeConfig(
         test: {
             include: ['src/**/*.test.{ts,mts}'],
             exclude: ['content/**', 'fixtures/**', 'bin.mjs', '_snapshots_'],
+            root: __dirname,
         },
     })
 );

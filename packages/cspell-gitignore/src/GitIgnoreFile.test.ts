@@ -62,7 +62,7 @@ describe('GitIgnoreHierarchy', () => {
         file                         | expected
         ${__filename}                | ${{ matched: true, gitIgnoreFile: p('./.gitignore'), line: undefined, glob: '*.test.*', root: __dirname }}
         ${p('GitIgnoreFiles.ts')}    | ${undefined}
-        ${require.resolve('vitest')} | ${{ matched: true, gitIgnoreFile, glob: 'node_modules/', line: 58, root: pathRepo }}
+        ${require.resolve('vitest')} | ${{ matched: true, gitIgnoreFile, glob: 'node_modules/', line: 59, root: pathRepo }}
         ${p('package-lock.json')}    | ${undefined}
     `('ignoreEx $file', async ({ file, expected }) => {
         // cspell:ignore gifs

@@ -25,7 +25,7 @@ exports[`app > app.run [ ' ' ] 1`] = `""`;
 
 exports[`app > app.run [ ' ' ] 2`] = `"Missing files"`;
 
-exports[`app > app.run [ '../node_modules' ] 1`] = `".gitignore:58:node_modules/	../node_modules"`;
+exports[`app > app.run [ '../node_modules' ] 1`] = `".gitignore:59:node_modules/	../node_modules"`;
 
 exports[`app > app.run [ '../node_modules' ] 2`] = `""`;
 
@@ -45,63 +45,10 @@ exports[`app > app.run [ 'src/code.ts' ] 1`] = `"::	src/code.ts"`;
 
 exports[`app > app.run [ 'src/code.ts' ] 2`] = `""`;
 
-exports[`app > app.run [ 'temp' ] 1`] = `".gitignore:53:temp	temp"`;
+exports[`app > app.run [ 'temp' ] 1`] = `".gitignore:54:temp	temp"`;
 
 exports[`app > app.run [ 'temp' ] 2`] = `""`;
 
 exports[`app > app.run [] 1`] = `""`;
 
 exports[`app > app.run [] 2`] = `"Missing files"`;
-
-exports[`app app.help 1`] = `
-[
-  [
-    "Usage cspell-gitignore [options] <files>
-
-Check files against .gitignore
-Compare against git check-ignore -v -n <files>
-
-Options:
--r, --root   Add a root to prevent searching for .gitignore files above the root if the file is under the root.
-             This option can be used multiple times to add multiple roots. The default root is the current
-             repository root determined by the \`.git\` directory.
-
-Example:
-  cspell-gitignore README.md
-  cspell-gitignore -r . node_modules
-",
-  ],
-]
-`;
-
-exports[`app app.run [" "] 1`] = `""`;
-
-exports[`app app.run [" "] 2`] = `"Missing files"`;
-
-exports[`app app.run ["../node_modules"] 1`] = `".gitignore:58:node_modules/	../node_modules"`;
-
-exports[`app app.run ["../node_modules"] 2`] = `""`;
-
-exports[`app app.run ["-r", ".", "dist"] 1`] = `"packages/cspell-gitignore/.gitignore:3:dist	dist"`;
-
-exports[`app app.run ["-r", ".", "dist"] 2`] = `""`;
-
-exports[`app app.run ["-r", ".", "temp"] 1`] = `"packages/cspell-gitignore/.gitignore:4:temp	temp"`;
-
-exports[`app app.run ["-r", ".", "temp"] 2`] = `""`;
-
-exports[`app app.run ["-r", "."] 1`] = `""`;
-
-exports[`app app.run ["-r", "."] 2`] = `"Missing files"`;
-
-exports[`app app.run ["src/code.ts"] 1`] = `"::	src/code.ts"`;
-
-exports[`app app.run ["src/code.ts"] 2`] = `""`;
-
-exports[`app app.run ["temp"] 1`] = `".gitignore:53:temp	temp"`;
-
-exports[`app app.run ["temp"] 2`] = `""`;
-
-exports[`app app.run [] 1`] = `""`;
-
-exports[`app app.run [] 2`] = `"Missing files"`;
