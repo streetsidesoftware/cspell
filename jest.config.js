@@ -4,6 +4,7 @@ const config = {
     transform: {
         '^.+\\.tsx?$': 'ts-jest',
     },
+    verbose: true,
     testRegex: '(/__tests__/.*|\\.(test|spec|perf))\\.[jt]sx?$',
     moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx', 'json', 'node'],
     coverageReporters: ['html', 'json', ['lcov', { projectRoot: __dirname }], 'text'],
