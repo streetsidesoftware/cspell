@@ -1,3 +1,4 @@
+import { globifyGitIgnoreFile, posixifyPathNormalized } from 'globify-gitignore';
 import * as path from 'path';
 import { contains } from '.';
 import { GitIgnoreHierarchy, IsIgnoredExResult, loadGitIgnore } from './GitIgnoreFile';
@@ -51,6 +52,26 @@ export class GitIgnore {
         this.resolvedGitIgnoreHierarchies.set(directory, found);
         return find;
     }
+
+    async getGlobs(root: string) {
+        const rootPosixified = posixifyPathNormalized(root);
+        const globs = await globifyGitIgnoreFile(rootPosixified);
+
+        // globify-gitignore is compatible with fast-glob, but to make it work with glob,
+        // the patterns need to be separated and normalized.
+        const rootPosixifiedSlashed = `${rootPosixified}/`;
+        const ignored = [];
+        const included = [];
+        for (const g of globs) {
+            if (g.startsWith('!')) {
+                ignored.push(g.slice(1).replace(rootPosixifiedSlashed, ''));
+            } else {
+                included.push(g.replace(rootPosixifiedSlashed, ''));
+            }
+        }
+        return [ignored, included];
+    }
+
     filterOutIgnored(files: string[]): Promise<string[]>;
     filterOutIgnored(files: Iterable<string>): Promise<string[]>;
     filterOutIgnored(files: AsyncIterable<string>): AsyncIterable<string>;
