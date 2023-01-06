@@ -120,6 +120,11 @@ importers:
       '@cspell/cspell-json-reporter': workspace:*
       '@cspell/cspell-pipe': workspace:*
       '@cspell/cspell-types': workspace:*
+      '@rollup/plugin-commonjs': ^23.0.7
+      '@rollup/plugin-json': ^5.0.1
+      '@rollup/plugin-node-resolve': ^15.0.1
+      '@rollup/plugin-terser': ^0.2.1
+      '@rollup/plugin-typescript': ^9.0.2
       '@types/file-entry-cache': ^5.0.2
       '@types/fs-extra': ^9.0.13
       '@types/glob': ^8.0.0
@@ -145,9 +150,11 @@ importers:
       rollup-plugin-dts: ^5.1.0
       semver: ^7.3.8
       strip-ansi: ^6.0.1
+      tslib: ^2.4.1
       vscode-uri: ^3.0.7
     dependencies:
       '@cspell/cspell-pipe': link:../cspell-pipe
+      '@cspell/cspell-types': link:../cspell-types
       chalk: 4.1.2
       commander: 9.4.1
       cspell-gitignore: link:../cspell-gitignore
@@ -164,7 +171,11 @@ importers:
       vscode-uri: 3.0.7
     devDependencies:
       '@cspell/cspell-json-reporter': link:../cspell-json-reporter
-      '@cspell/cspell-types': link:../cspell-types
+      '@rollup/plugin-commonjs': 23.0.7_rollup@3.9.1
+      '@rollup/plugin-json': 5.0.2_rollup@3.9.1
+      '@rollup/plugin-node-resolve': 15.0.1_rollup@3.9.1
+      '@rollup/plugin-terser': 0.2.1_rollup@3.9.1
+      '@rollup/plugin-typescript': 9.0.2_hqjvco2e22ojmon3nhwchufpre
       '@types/file-entry-cache': 5.0.2
       '@types/fs-extra': 9.0.13
       '@types/glob': 8.0.0
@@ -177,6 +188,7 @@ importers:
       minimatch: 5.1.2
       rollup: 3.9.1
       rollup-plugin-dts: 5.1.0_esmavzhadgk2idmxtiodxm33ma
+      tslib: 2.4.1
 
   packages/cspell-bundled-dicts:
     specifiers:
@@ -4518,6 +4530,24 @@ packages:
     resolution: {integrity: sha512-a5Sab1C4/icpTZVzZc5Ghpz88yQtGOyNqYXcZgOssB2uuAr+wF/MvN6bgtW32q7HHrvBki+BsZ0OuNv6EV3K9g==}
     dev: false
 
+  /@rollup/plugin-commonjs/23.0.7_rollup@3.9.1:
+    resolution: {integrity: sha512-hsSD5Qzyuat/swzrExGG5l7EuIlPhwTsT7KwKbSCQzIcJWjRxiimi/0tyMYY2bByitNb3i1p+6JWEDGa0NvT0Q==}
+    engines: {node: '>=14.0.0'}
+    peerDependencies:
+      rollup: ^2.68.0||^3.0.0
+    peerDependenciesMeta:
+      rollup:
+        optional: true
+    dependencies:
+      '@rollup/pluginutils': 5.0.2_rollup@3.9.1
+      commondir: 1.0.1
+      estree-walker: 2.0.2
+      glob: 8.0.3
+      is-reference: 1.2.1
+      magic-string: 0.27.0
+      rollup: 3.9.1
+    dev: true
+
   /@rollup/plugin-commonjs/24.0.0_rollup@3.9.1:
     resolution: {integrity: sha512-0w0wyykzdyRRPHOb0cQt14mIBLujfAv6GgP6g8nvg/iBxEm112t3YPPq+Buqe2+imvElTka+bjNlJ/gB56TD8g==}
     engines: {node: '>=14.0.0'}
@@ -4533,6 +4563,19 @@ packages:
       glob: 8.0.3
       is-reference: 1.2.1
       magic-string: 0.27.0
+      rollup: 3.9.1
+    dev: true
+
+  /@rollup/plugin-json/5.0.2_rollup@3.9.1:
+    resolution: {integrity: sha512-D1CoOT2wPvadWLhVcmpkDnesTzjhNIQRWLsc3fA49IFOP2Y84cFOOJ+nKGYedvXHKUsPeq07HR4hXpBBr+CHlA==}
+    engines: {node: '>=14.0.0'}
+    peerDependencies:
+      rollup: ^1.20.0||^2.0.0||^3.0.0
+    peerDependenciesMeta:
+      rollup:
+        optional: true
+    dependencies:
+      '@rollup/pluginutils': 5.0.2_rollup@3.9.1
       rollup: 3.9.1
     dev: true
 
@@ -4567,6 +4610,21 @@ packages:
       rollup: 3.9.1
     dev: true
 
+  /@rollup/plugin-terser/0.2.1_rollup@3.9.1:
+    resolution: {integrity: sha512-hV52c8Oo6/cXZZxVVoRNBb4zh+EKSHS4I1sedWV5pf0O+hTLSkrf6w86/V0AZutYtwBguB6HLKwz89WDBfwGOA==}
+    engines: {node: '>=14.0.0'}
+    peerDependencies:
+      rollup: ^2.x || ^3.x
+    peerDependenciesMeta:
+      rollup:
+        optional: true
+    dependencies:
+      rollup: 3.9.1
+      serialize-javascript: 6.0.0
+      smob: 0.0.6
+      terser: 5.16.1
+    dev: true
+
   /@rollup/plugin-typescript/10.0.1_esmavzhadgk2idmxtiodxm33ma:
     resolution: {integrity: sha512-wBykxRLlX7EzL8BmUqMqk5zpx2onnmRMSw/l9M1sVfkJvdwfxogZQVNUM9gVMJbjRLDR5H6U0OMOrlDGmIV45A==}
     engines: {node: '>=14.0.0'}
@@ -4583,6 +4641,26 @@ packages:
       '@rollup/pluginutils': 5.0.2_rollup@3.9.1
       resolve: 1.22.1
       rollup: 3.9.1
+      typescript: 4.9.4
+    dev: true
+
+  /@rollup/plugin-typescript/9.0.2_hqjvco2e22ojmon3nhwchufpre:
+    resolution: {integrity: sha512-/sS93vmHUMjzDUsl5scNQr1mUlNE1QjBBvOhmRwJCH8k2RRhDIm3c977B3wdu3t3Ap17W6dDeXP3hj1P1Un1bA==}
+    engines: {node: '>=14.0.0'}
+    peerDependencies:
+      rollup: ^2.14.0||^3.0.0
+      tslib: '*'
+      typescript: '>=3.7.0'
+    peerDependenciesMeta:
+      rollup:
+        optional: true
+      tslib:
+        optional: true
+    dependencies:
+      '@rollup/pluginutils': 5.0.2_rollup@3.9.1
+      resolve: 1.22.1
+      rollup: 3.9.1
+      tslib: 2.4.1
       typescript: 4.9.4
     dev: true
 
@@ -4908,7 +4986,7 @@ packages:
     resolution: {integrity: sha512-9K4zoImiZc3HlIp6AVUDE4CWYx22a+lhSZMYNpbjW04+YF0KWj4pJXnEMjdnFTiQibFFmElcsasJXDbdI/EPhA==}
     dependencies:
       '@types/eslint': 8.4.10
-      '@types/estree': 0.0.51
+      '@types/estree': 1.0.0
 
   /@types/eslint/8.4.10:
     resolution: {integrity: sha512-Sl/HOqN8NKPmhWo2VBEPm0nvHnu2LL3v9vKo8MEq0EtbJ4eVzGPl41VNPvn5E1i5poMk4/XD8UriLHpJvEP/Nw==}
@@ -14154,6 +14232,10 @@ packages:
   /smart-buffer/4.2.0:
     resolution: {integrity: sha512-94hK0Hh8rPqQl2xXc3HsaBoOXKV20MToPkcXvwbISWLEs+64sBq5kFgn2kJDHb1Pry9yrP0dxrCI9RRci7RXKg==}
     engines: {node: '>= 6.0.0', npm: '>= 3.0.0'}
+    dev: true
+
+  /smob/0.0.6:
+    resolution: {integrity: sha512-V21+XeNni+tTyiST1MHsa84AQhT1aFZipzPpOFAVB8DkHzwJyjjAmt9bgwnuZiZWnIbMo2duE29wybxv/7HWUw==}
     dev: true
 
   /sockjs/0.3.24:

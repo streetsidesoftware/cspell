@@ -3,7 +3,7 @@ import * as App from './application';
 import { checkText } from './application';
 import { BaseOptions } from './options';
 import { CheckFailed } from './util/errors';
-import chalk = require('chalk');
+import chalk from 'chalk';
 
 export function commandCheck(prog: Command): Command {
     type CheckCommandOptions = BaseOptions;

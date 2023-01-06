@@ -14,7 +14,7 @@ import {
     GlobPatternWithRoot,
     PathInterface,
 } from './GlobMatcherTypes';
-import mm = require('micromatch');
+import mm from 'micromatch';
 import { NormalizeOptions } from '.';
 
 const { rebaseGlob, trimGlob, isGlobalGlob } = __testing__;
