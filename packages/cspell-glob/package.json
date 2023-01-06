@@ -25,7 +25,7 @@
     "build": "tsc -p .",
     "build-dev": "tsc -p tsconfig.dev.json",
     "watch": "tsc -p . -w",
-    "clean": "rimraf dist coverage .tsbuildinfo",
+    "clean": "shx rm -rf dist coverage .tsbuildinfo",
     "clean-build": "pnpm run clean && pnpm run build",
     "coverage": "jest --coverage",
     "test-watch": "jest --watch",
@@ -47,7 +47,6 @@
   "devDependencies": {
     "@types/micromatch": "^4.0.2",
     "@types/node": "^18.11.18",
-    "jest": "^29.3.1",
-    "rimraf": "^3.0.2"
+    "jest": "^29.3.1"
   }
 }

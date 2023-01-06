@@ -25,7 +25,7 @@
     "url": "git+https://github.com/streetsidesoftware/cspell.git"
   },
   "scripts": {
-    "clean": "rimraf dist temp coverage .tsbuildinfo",
+    "clean": "shx rm -rf dist temp coverage .tsbuildinfo",
     "build": "pnpm run compile",
     "build-dev": "tsc -p tsconfig.dev.json",
     "clean-build": "pnpm run clean && pnpm run build",

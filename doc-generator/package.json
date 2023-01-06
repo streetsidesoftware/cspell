@@ -4,7 +4,7 @@
   "version": "1.0.0",
   "description": "Document Generation Tools and Scripts",
   "scripts": {
-    "build-cspell-types-docs": "rimraf ../docs/types/cspell-types && typedoc",
+    "build-cspell-types-docs": "shx rm -rf ../docs/types/cspell-types && typedoc",
     "test-build-docs": "typedoc --out ./temp/docs ",
     "test": "echo No tests needed."
   },

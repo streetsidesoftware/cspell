@@ -37,7 +37,7 @@
     "build-rollup": "rollup --config rollup.config.ts --configPlugin typescript",
     "build-schema": "ts-json-schema-generator --no-top-ref --expose none --path src/options.ts --type Options  -o  ./src/_auto_generated_/options.schema.json",
     "watch": "pnpm run build-rollup -- --watch",
-    "clean": "rimraf dist coverage .tsbuildinfo",
+    "clean": "shx rm -rf dist coverage .tsbuildinfo",
     "clean-build": "pnpm run clean && pnpm run build",
     "coverage": "echo coverage",
     "test-watch": "pnpm run test -- --watch",
@@ -67,7 +67,6 @@
     "eslint": "^8.31.0",
     "eslint-plugin-react": "^7.31.11",
     "mocha": "^10.2.0",
-    "rimraf": "^3.0.2",
     "rollup": "^3.9.1",
     "rollup-plugin-dts": "^5.1.0",
     "ts-json-schema-generator": "^1.2.0"

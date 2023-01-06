@@ -30,7 +30,7 @@
     "build": "tsc -p .",
     "build-dev": "tsc -p tsconfig.dev.json",
     "watch": "tsc -p . -w",
-    "clean": "rimraf dist coverage .tsbuildinfo",
+    "clean": "shx rm -rf dist coverage .tsbuildinfo",
     "clean-build": "pnpm run clean && pnpm run build",
     "coverage": "pnpm coverage:vitest && pnpm coverage:fix",
     "coverage:vitest": "vitest run --coverage",
@@ -56,7 +56,6 @@
     "@types/node": "^18.11.18",
     "@vitest/coverage-c8": "^0.26.3",
     "@vitest/coverage-istanbul": "^0.26.3",
-    "rimraf": "^3.0.2",
     "vite": "^4.0.4",
     "vitest": "^0.26.3"
   }
