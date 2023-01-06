@@ -1,4 +1,4 @@
-import { globifyGitIgnoreFile, posixifyPathNormalized } from 'globify-gitignore';
+import { globifyGitIgnoreFile } from 'globify-gitignore';
 import * as path from 'path';
 import { contains } from '.';
 import { GitIgnoreHierarchy, IsIgnoredExResult, loadGitIgnore } from './GitIgnoreFile';
@@ -54,19 +54,14 @@ export class GitIgnore {
     }
 
     async getGlobs(root: string) {
-        const rootPosixified = posixifyPathNormalized(root);
-        const globs = await globifyGitIgnoreFile(rootPosixified);
-
-        // globify-gitignore is compatible with fast-glob, but to make it work with glob,
-        // the patterns need to be separated and normalized.
-        const rootPosixifiedSlashed = `${rootPosixified}/`;
-        const ignored = [];
-        const included = [];
-        for (const g of globs) {
-            if (g.startsWith('!')) {
-                ignored.push(g.slice(1).replace(rootPosixifiedSlashed, ''));
+        const globEntries = await globifyGitIgnoreFile(root, false);
+        const ignored: string[] = [];
+        const included: string[] = [];
+        for (const globEntry of globEntries) {
+            if (!globEntry.included) {
+                ignored.push(globEntry.glob);
             } else {
-                included.push(g.replace(rootPosixifiedSlashed, ''));
+                included.push(globEntry.glob);
             }
         }
         return [ignored, included];
