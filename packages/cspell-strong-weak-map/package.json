@@ -53,7 +53,7 @@
   "scripts": {
     "build": "tsc -p .",
     "watch": "tsc -p . -w",
-    "clean": "rimraf dist coverage .tsbuildinfo",
+    "clean": "shx rm -rf dist coverage .tsbuildinfo",
     "clean-build": "pnpm run clean && pnpm run build",
     "coverage": "node --expose-gc ../../node_modules/jest/bin/jest.js --coverage",
     "test-watch": "node --expose-gc ../../node_modules/jest/bin/jest.js --watch",

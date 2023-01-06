@@ -26,8 +26,8 @@ importers:
       jest: ^29.3.1
       nyc: ^15.1.0
       prettier: ^2.8.1
-      rimraf: ^3.0.2
       shelljs: ^0.8.5
+      shx: ^0.3.4
       ts-jest: ^29.0.3
       typescript: ^4.9.4
       vite: ^4.0.4
@@ -55,8 +55,8 @@ importers:
       jest: 29.3.1_@types+node@18.11.18
       nyc: 15.1.0
       prettier: 2.8.1
-      rimraf: 3.0.2
       shelljs: 0.8.5
+      shx: 0.3.4
       ts-jest: 29.0.3_b6ud3wjfzxmze5tmlpgpdpo43e
       typescript: 4.9.4
       vite: 4.0.4_@types+node@18.11.18
@@ -86,7 +86,6 @@ importers:
       jest: ^29.3.1
       jest-diff: ^29.3.1
       mkdirp: ^1.0.4
-      rimraf: ^3.0.2
       shelljs: ^0.8.5
       simple-git: ^3.15.1
       vscode-uri: ^3.0.7
@@ -97,7 +96,6 @@ importers:
       commander: 9.4.1
       jest-diff: 29.3.1
       mkdirp: 1.0.4
-      rimraf: 3.0.2
       shelljs: 0.8.5
       simple-git: 3.15.1
       vscode-uri: 3.0.7
@@ -143,7 +141,6 @@ importers:
       jest: ^29.3.1
       micromatch: ^4.0.5
       minimatch: ^5.1.2
-      rimraf: ^3.0.2
       rollup: ^3.9.1
       rollup-plugin-dts: ^5.1.0
       semver: ^7.3.8
@@ -178,7 +175,6 @@ importers:
       jest: 29.3.1
       micromatch: 4.0.5
       minimatch: 5.1.2
-      rimraf: 3.0.2
       rollup: 3.9.1
       rollup-plugin-dts: 5.1.0_esmavzhadgk2idmxtiodxm33ma
 
@@ -286,10 +282,8 @@ importers:
   packages/cspell-code-snippets:
     specifiers:
       jest: ^29.3.1
-      rimraf: ^3.0.2
     devDependencies:
       jest: 29.3.1
-      rimraf: 3.0.2
 
   packages/cspell-config-lib:
     specifiers:
@@ -297,7 +291,6 @@ importers:
       '@types/node': ^18.11.18
       comment-json: ^4.2.3
       jest: ^29.3.1
-      rimraf: ^3.0.2
       vscode-uri: ^3.0.7
       yaml: ^1.10.2
     dependencies:
@@ -308,7 +301,6 @@ importers:
     devDependencies:
       '@types/node': 18.11.18
       jest: 29.3.1_@types+node@18.11.18
-      rimraf: 3.0.2
 
   packages/cspell-dictionary:
     specifiers:
@@ -337,7 +329,6 @@ importers:
       cspell-lib: workspace:*
       import-fresh: ^3.3.0
       jest: ^29.3.1
-      rimraf: ^3.0.2
       typescript: ^4.9.4
     dependencies:
       cspell: link:../cspell
@@ -345,7 +336,6 @@ importers:
       import-fresh: 3.3.0
     devDependencies:
       jest: 29.3.1
-      rimraf: 3.0.2
       typescript: 4.9.4
 
   packages/cspell-eslint-plugin:
@@ -364,7 +354,6 @@ importers:
       eslint: ^8.31.0
       eslint-plugin-react: ^7.31.11
       mocha: ^10.2.0
-      rimraf: ^3.0.2
       rollup: ^3.9.1
       rollup-plugin-dts: ^5.1.0
       ts-json-schema-generator: ^1.2.0
@@ -384,7 +373,6 @@ importers:
       eslint: 8.31.0
       eslint-plugin-react: 7.31.11_eslint@8.31.0
       mocha: 10.2.0
-      rimraf: 3.0.2
       rollup: 3.9.1
       rollup-plugin-dts: 5.1.0_esmavzhadgk2idmxtiodxm33ma
       ts-json-schema-generator: 1.2.0
@@ -396,7 +384,6 @@ importers:
       '@vitest/coverage-istanbul': ^0.26.3
       cspell-glob: workspace:*
       find-up: ^5.0.0
-      rimraf: ^3.0.2
       vite: ^4.0.4
       vitest: ^0.26.3
     dependencies:
@@ -406,7 +393,6 @@ importers:
       '@types/node': 18.11.18
       '@vitest/coverage-c8': 0.26.3
       '@vitest/coverage-istanbul': 0.26.3
-      rimraf: 3.0.2
       vite: 4.0.4_@types+node@18.11.18
       vitest: 0.26.3
 
@@ -416,14 +402,12 @@ importers:
       '@types/node': ^18.11.18
       jest: ^29.3.1
       micromatch: ^4.0.5
-      rimraf: ^3.0.2
     dependencies:
       micromatch: 4.0.5
     devDependencies:
       '@types/micromatch': 4.0.2
       '@types/node': 18.11.18
       jest: 29.3.1_@types+node@18.11.18
-      rimraf: 3.0.2
 
   packages/cspell-grammar:
     specifiers:
@@ -431,14 +415,12 @@ importers:
       '@cspell/cspell-types': workspace:*
       '@types/node': ^18.11.18
       jest: ^29.3.1
-      rimraf: ^3.0.2
     dependencies:
       '@cspell/cspell-pipe': link:../cspell-pipe
       '@cspell/cspell-types': link:../cspell-types
     devDependencies:
       '@types/node': 18.11.18
       jest: 29.3.1_@types+node@18.11.18
-      rimraf: 3.0.2
 
   packages/cspell-io:
     specifiers:
@@ -450,7 +432,6 @@ importers:
       jest: ^29.3.1
       lorem-ipsum: ^2.0.8
       node-fetch: ^2.6.7
-      rimraf: ^3.0.2
     dependencies:
       '@cspell/cspell-service-bus': link:../cspell-service-bus
       node-fetch: 2.6.7
@@ -461,7 +442,6 @@ importers:
       fs-extra: 11.1.0
       jest: 29.3.1_@types+node@18.11.18
       lorem-ipsum: 2.0.8
-      rimraf: 3.0.2
 
   packages/cspell-json-reporter:
     specifiers:
@@ -511,7 +491,6 @@ importers:
       lorem-ipsum: ^2.0.8
       resolve-from: ^5.0.0
       resolve-global: ^1.0.0
-      rimraf: ^3.0.2
       rollup: ^3.9.1
       rollup-plugin-dts: ^5.1.0
       ts-jest: ^29.0.3
@@ -556,7 +535,6 @@ importers:
       cspell-dict-nl-nl: 1.1.2
       jest: 29.3.1_@types+node@18.11.18
       lorem-ipsum: 2.0.8
-      rimraf: 3.0.2
       rollup: 3.9.1
       rollup-plugin-dts: 5.1.0_esmavzhadgk2idmxtiodxm33ma
       ts-jest: 29.0.3_b6ud3wjfzxmze5tmlpgpdpo43e
@@ -565,21 +543,17 @@ importers:
     specifiers:
       '@types/node': ^18.11.18
       jest: ^29.3.1
-      rimraf: ^3.0.2
     devDependencies:
       '@types/node': 18.11.18
       jest: 29.3.1_@types+node@18.11.18
-      rimraf: 3.0.2
 
   packages/cspell-service-bus:
     specifiers:
       '@types/node': ^18.11.18
       jest: ^29.3.1
-      rimraf: ^3.0.2
     devDependencies:
       '@types/node': 18.11.18
       jest: 29.3.1_@types+node@18.11.18
-      rimraf: 3.0.2
 
   packages/cspell-strong-weak-map:
     specifiers: {}
@@ -602,7 +576,6 @@ importers:
       hunspell-reader: workspace:*
       jest: ^29.3.1
       lorem-ipsum: ^2.0.8
-      rimraf: ^3.0.2
       shelljs: ^0.8.5
       ts-json-schema-generator: ^1.2.0
     dependencies:
@@ -623,7 +596,6 @@ importers:
       '@types/shelljs': 0.8.11
       jest: 29.3.1_@types+node@18.11.18
       lorem-ipsum: 2.0.8
-      rimraf: 3.0.2
       shelljs: 0.8.5
       ts-json-schema-generator: 1.2.0
 
@@ -636,7 +608,6 @@ importers:
       fs-extra: ^11.1.0
       gensequence: ^4.0.3
       jest: ^29.3.1
-      rimraf: ^3.0.2
     dependencies:
       commander: 9.4.1
       cspell-trie-lib: link:../cspell-trie-lib
@@ -646,7 +617,6 @@ importers:
       '@types/fs-extra': 9.0.13
       '@types/node': 18.11.18
       jest: 29.3.1_@types+node@18.11.18
-      rimraf: 3.0.2
 
   packages/cspell-trie-lib:
     specifiers:
@@ -659,7 +629,6 @@ importers:
       fs-extra: ^11.1.0
       gensequence: ^4.0.3
       jest: ^29.3.1
-      rimraf: ^3.0.2
     dependencies:
       '@cspell/cspell-pipe': link:../cspell-pipe
       '@cspell/cspell-types': link:../cspell-types
@@ -671,19 +640,16 @@ importers:
       '@types/fs-extra': 9.0.13
       '@types/node': 18.11.18
       jest: 29.3.1_@types+node@18.11.18
-      rimraf: 3.0.2
 
   packages/cspell-types:
     specifiers:
       ajv-cli: ^5.0.0
       jest: ^29.3.1
-      rimraf: ^3.0.2
       ts-json-schema-generator: ^1.2.0
       typescript: ^4.9.4
     devDependencies:
       ajv-cli: 5.0.0
       jest: 29.3.1
-      rimraf: 3.0.2
       ts-json-schema-generator: 1.2.0
       typescript: 4.9.4
 
@@ -697,7 +663,6 @@ importers:
       gensequence: ^4.0.3
       iconv-lite: ^0.6.3
       jest: ^29.3.1
-      rimraf: ^3.0.2
       ts-jest: ^29.0.3
       typescript: ^4.9.4
     dependencies:
@@ -710,7 +675,6 @@ importers:
       '@types/jest': 29.2.5
       '@types/node': 18.11.18
       jest: 29.3.1_@types+node@18.11.18
-      rimraf: 3.0.2
       ts-jest: 29.0.3_b6ud3wjfzxmze5tmlpgpdpo43e
       typescript: 4.9.4
 
@@ -14126,6 +14090,15 @@ packages:
       vscode-oniguruma: 1.7.0
       vscode-textmate: 6.0.0
     dev: false
+
+  /shx/0.3.4:
+    resolution: {integrity: sha512-N6A9MLVqjxZYcVn8hLmtneQWIJtp8IKzMP4eMnx+nqkvXoqinUPCbUFLp2UcWTEIUONhlk0ewxr/jaVGlc+J+g==}
+    engines: {node: '>=6'}
+    hasBin: true
+    dependencies:
+      minimist: 1.2.7
+      shelljs: 0.8.5
+    dev: true
 
   /side-channel/1.0.4:
     resolution: {integrity: sha512-q5XPytqFEIKHkGdiMIrY10mvLRvnQh42/+GoBlFW3b2LXLE2xxJpZFdm94we0BaoV3RwJyGqg5wS7epxTv0Zvw==}

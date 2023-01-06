@@ -13,7 +13,7 @@
     "!**/*.map"
   ],
   "scripts": {
-    "clean": "rimraf dist coverage .tsbuildinfo",
+    "clean": "shx rm -rf dist coverage .tsbuildinfo",
     "build": "tsc -p .",
     "build-dev": "tsc -p tsconfig.dev.json",
     "clean-build": "pnpm run clean && pnpm run build",
@@ -50,7 +50,6 @@
     "@cspell/dict-es-es": "^2.2.3",
     "@types/fs-extra": "^9.0.13",
     "@types/node": "^18.11.18",
-    "jest": "^29.3.1",
-    "rimraf": "^3.0.2"
+    "jest": "^29.3.1"
   }
 }

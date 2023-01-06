@@ -4,7 +4,7 @@
   "description": "Pure testing package for cspell-lib.",
   "private": true,
   "scripts": {
-    "clean": "rimraf dist .tsbuildinfo",
+    "clean": "shx rm -rf dist .tsbuildinfo",
     "build": "pnpm run compile",
     "build-dev": "tsc -p tsconfig.dev.json",
     "clean-build": "pnpm run clean && pnpm run build",

@@ -5,7 +5,7 @@
   "private": true,
   "bin": "bin.js",
   "scripts": {
-    "clean": "rimraf dist .tsbuildinfo",
+    "clean": "shx rm -rf dist .tsbuildinfo",
     "build": "pnpm run compile",
     "build-dev": "tsc -p tsconfig.dev.json",
     "watch": "tsc -p tsconfig.dev.json --watch",

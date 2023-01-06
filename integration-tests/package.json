@@ -13,8 +13,8 @@
     "build": "tsc -p .",
     "build-dev": "tsc -p tsconfig.dev.json",
     "clean": "pnpm run clean-dist && pnpm run clean-repos",
-    "clean-dist": "rimraf dist .tsbuildinfo",
-    "clean-repos": "rimraf repositories/temp temp",
+    "clean-dist": "shx rm -rf dist .tsbuildinfo",
+    "clean-repos": "shx rm -rf repositories/temp temp",
     "clean-build": "pnpm run clean && pnpm run build",
     "integration-tests": "node tester.js check -f",
     "test-jest": "jest",
@@ -30,7 +30,6 @@
     "commander": "^9.4.1",
     "jest-diff": "^29.3.1",
     "mkdirp": "^1.0.4",
-    "rimraf": "^3.0.2",
     "shelljs": "^0.8.5",
     "simple-git": "^3.15.1",
     "vscode-uri": "^3.0.7"
