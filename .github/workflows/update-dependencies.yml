@@ -74,13 +74,19 @@ jobs:
       - name: Install
         run: pnpm install
 
-      - name: Apply and new Lint rules
-        run: pnpm run lint
+      - name: Has changes
+        run: |
+          git --no-pager diff --compact-summary  --exit-code && echo "git_status=clean" >> $GITHUB_ENV || echo "git_status=dirty" >> $GITHUB_ENV
+          git --no-pager diff --compact-summary
 
       - name: Build
-        if: env.UPDATE_SNAPSHOTS == 'true'
+        if: (env.UPDATE_SNAPSHOTS == 'true' || env.git_status == 'dirty')
         run: |
           pnpm run build
+
+      - name: Apply and new Lint rules
+        if: env.git_status == 'dirty'
+        run: pnpm run lint
 
       - name: Update Integration Test Snapshots
         if: env.UPDATE_SNAPSHOTS == 'true'
