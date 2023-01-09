@@ -8,7 +8,7 @@ import {
     PathInterface,
 } from './GlobMatcherTypes';
 
-import mm = require('micromatch');
+import mm from 'micromatch';
 
 const defaultCwdWin32 = 'C:\\user\\home\\project\\testing';
 const defaultCwdPosix = '/user/home/project/testing';

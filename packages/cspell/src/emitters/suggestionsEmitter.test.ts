@@ -1,6 +1,6 @@
 import { emitSuggestionResult, EmitSuggestionOptions } from './suggestionsEmitter';
 import type { SuggestedWord } from 'cspell-lib';
-import chalk = require('chalk');
+import chalk from 'chalk';
 
 chalk.level = 0;
 
