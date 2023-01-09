@@ -1,0 +1,14 @@
+$schema: https://raw.githubusercontent.com/streetsidesoftware/cspell/main/cspell.schema.json
+patterns:
+  - name: json-key
+    pattern: >-
+      /".*?":/g
+languageSettings:
+  - languageId:
+      - javascript
+    includeRegExpList:
+      - string
+      - CStyleComment
+  - languageId: json,jsonc
+    ignoreRegExpList:
+      - json-key
