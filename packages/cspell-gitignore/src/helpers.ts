@@ -1,5 +1,5 @@
 import * as path from 'path';
-import findUp = require('find-up');
+import findUp from 'find-up';
 
 /**
  * Parse a directory and return its root

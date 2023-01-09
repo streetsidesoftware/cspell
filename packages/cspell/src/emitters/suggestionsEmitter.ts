@@ -1,5 +1,5 @@
 import type { SuggestionsForWordResult, SuggestedWord } from 'cspell-lib';
-import chalk = require('chalk');
+import chalk from 'chalk';
 import { padLeft, padWidth, width } from '../util/util';
 
 export interface EmitSuggestionOptions {

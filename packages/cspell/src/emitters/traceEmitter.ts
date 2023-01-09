@@ -2,7 +2,7 @@ import * as Path from 'path';
 import strip from 'strip-ansi';
 import { TraceResult } from '../application';
 import { pad, width } from '../util/util';
-import chalk = require('chalk');
+import chalk from 'chalk';
 
 export interface EmitTraceOptions {
     /** current working directory */
