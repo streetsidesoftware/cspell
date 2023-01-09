@@ -1,4 +1,4 @@
-import { isAsyncIterable } from '.';
+import { isAsyncIterable } from './util';
 
 export function toArray<T>(i: AsyncIterable<T>): Promise<Awaited<T>[]>;
 export function toArray<T>(i: Iterable<T>): T[];
