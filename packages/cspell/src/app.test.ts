@@ -305,7 +305,7 @@ describe('Validate cli', () => {
     });
 });
 
-function _listGlobalImports(): typeof Link['listGlobalImports'] {
+function _listGlobalImports(): (typeof Link)['listGlobalImports'] {
     return () => {
         return {
             list: [],
@@ -314,7 +314,7 @@ function _listGlobalImports(): typeof Link['listGlobalImports'] {
     };
 }
 
-function _addPathsToGlobalImports(): typeof Link['addPathsToGlobalImports'] {
+function _addPathsToGlobalImports(): (typeof Link)['addPathsToGlobalImports'] {
     return (_paths: string[]) => {
         return {
             success: true,
@@ -324,7 +324,7 @@ function _addPathsToGlobalImports(): typeof Link['addPathsToGlobalImports'] {
     };
 }
 
-function _removePathsFromGlobalImports(): typeof Link['removePathsFromGlobalImports'] {
+function _removePathsFromGlobalImports(): (typeof Link)['removePathsFromGlobalImports'] {
     return (paths: string[]) => {
         return {
             success: true,
