@@ -27,7 +27,7 @@ import { loadReporters, mergeReporters } from '../util/reporters';
 import { getTimeMeasurer } from '../util/timer';
 import * as util from '../util/util';
 import { LintRequest } from './LintRequest';
-import chalk = require('chalk');
+import chalk from 'chalk';
 import { getFeatureFlags } from '../featureFlags';
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const npmPackage = require('../../package.json');
