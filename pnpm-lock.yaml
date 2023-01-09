@@ -787,6 +787,43 @@ importers:
       webpack: 5.75.0_webpack-cli@5.0.1
       webpack-cli: 5.0.1_webpack@5.75.0
 
+  test-packages/test-cspell-pipe:
+    specifiers:
+      '@cspell/cspell-pipe': workspace:*
+      vitest: ^0.26.3
+    dependencies:
+      '@cspell/cspell-pipe': link:../../packages/cspell-pipe
+    devDependencies:
+      vitest: 0.26.3
+
+  test-packages/test-cspell-pipe-esm:
+    specifiers:
+      '@cspell/cspell-pipe': workspace:*
+      vitest: ^0.26.3
+    dependencies:
+      '@cspell/cspell-pipe': link:../../packages/cspell-pipe
+    devDependencies:
+      vitest: 0.26.3
+
+  test-packages/test-cspell-pipe-rollup:
+    specifiers:
+      '@cspell/cspell-pipe': workspace:*
+      '@rollup/plugin-commonjs': ^24.0.0
+      '@rollup/plugin-json': ^6.0.0
+      '@rollup/plugin-node-resolve': ^15.0.1
+      '@rollup/plugin-typescript': ^10.0.1
+      rollup: ^3.9.1
+      vitest: ^0.26.3
+    dependencies:
+      '@cspell/cspell-pipe': link:../../packages/cspell-pipe
+    devDependencies:
+      '@rollup/plugin-commonjs': 24.0.0_rollup@3.9.1
+      '@rollup/plugin-json': 6.0.0_rollup@3.9.1
+      '@rollup/plugin-node-resolve': 15.0.1_rollup@3.9.1
+      '@rollup/plugin-typescript': 10.0.1_esmavzhadgk2idmxtiodxm33ma
+      rollup: 3.9.1
+      vitest: 0.26.3
+
   test-packages/test-cspell-tools:
     specifiers:
       '@cspell/cspell-tools': workspace:*
@@ -5150,7 +5187,7 @@ packages:
   /@types/sax/1.2.4:
     resolution: {integrity: sha512-pSAff4IAxJjfAXUG6tFkO7dsSbTmf8CtUpfhhZ5VhkRpC4628tJhh3+V6H1E+/Gs9piSzYKT5yzHO5M4GG9jkw==}
     dependencies:
-      '@types/node': 17.0.45
+      '@types/node': 18.11.18
     dev: false
 
   /@types/scheduler/0.16.2:

@@ -77,7 +77,7 @@ const config = {
             },
         },
         {
-            files: ['vitest.config.*'],
+            files: ['vitest.config.*', '**/*.test.*'],
             rules: {
                 'node/no-unpublished-import': 'off',
             },
