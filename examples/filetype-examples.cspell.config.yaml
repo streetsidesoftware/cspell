@@ -1,0 +1,24 @@
+---
+$schema: https://raw.githubusercontent.com/streetsidesoftware/cspell/main/cspell.schema.json
+ignorePaths:
+  - "node_modules"
+# Overrides are processed in order
+overrides:
+  - filename: "**/*.{js,jsx}" # if it matches against the path
+    # apply these settings
+    enable: false # turn off spell checking
+  - filename: "**/webpage/examples/**/*.{js,jsx}"
+    # turn it back on
+    enable: true
+  - filename: "**/i18n/ru/**"
+    language: ru
+
+languageSettings:
+  - languageId: javascript # if the file type matches
+    # apply settings
+    dictionaries: ["our_javascript_terms"]
+
+# this only applies to the VS Code Extension
+enableFiletype:
+  - kotlin
+  - "!json"
