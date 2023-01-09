@@ -3,7 +3,7 @@ Repository: caddyserver/caddy
 Url: "https://github.com/caddyserver/caddy.git"
 Args: ["**/*.go"]
 Lines:
- CSpell: Files checked: 225, Issues found: 3477 in 208 files
+ CSpell: Files checked: 225, Issues found: 3478 in 208 files
  exit code: 1
 ./admin.go:1032:33   - Unknown word (unsynchronized) -- This is a low-level, unsynchronized function; most callers
 ./admin.go:1068:31   - Unknown word (elems)          -- array = append(array, elems...)
@@ -62,16 +62,16 @@ Lines:
 ./caddyconfig/httpcaddyfile/addresses.go:81:2      - Unknown word (sbmap)      -- sbmap := make(map[string]
 ./caddyconfig/httpcaddyfile/addresses.go:83:9      - Unknown word (sblock)     -- for i, sblock := range originalServerBlocks
 ./caddyconfig/httpcaddyfile/addresses_fuzz.go:17:9      - Unknown word (httpcaddyfile) -- package httpcaddyfile
-./caddyconfig/httpcaddyfile/builtins.go:209:6     - Unknown word (subdir)     -- subdir := h.Val()
-./caddyconfig/httpcaddyfile/builtins.go:253:35    - Unknown word (subdirective) -- nil, h.Errf("unknown subdirective for client_auth: %s
-./caddyconfig/httpcaddyfile/builtins.go:262:8     - Unknown word (ALPN)         -- cp.ALPN = args
-./caddyconfig/httpcaddyfile/builtins.go:34:14     - Unknown word (mholt)      -- "github.com/mholt/acmez/acme"
-./caddyconfig/httpcaddyfile/builtins.go:34:20     - Unknown word (acmez)      -- "github.com/mholt/acmez/acme"
-./caddyconfig/httpcaddyfile/builtins.go:416:8     - Unknown word (Vals)         -- configVals := []ConfigValue{}
-./caddyconfig/httpcaddyfile/builtins.go:432:14    - Unknown word (subdirectives) -- // some tls subdirectives are shortcuts that implicitly
-./caddyconfig/httpcaddyfile/builtins.go:658:22    - Unknown word (Subroute)      -- sr := new(caddyhttp.Subroute)
-./caddyconfig/httpcaddyfile/builtins.go:670:41    - Unknown word (subroute)      -- which return a literal subroute instead of a route
-./caddyconfig/httpcaddyfile/builtins.go:78:8      - Unknown word (alpn)       -- // alpn <values...>
+./caddyconfig/httpcaddyfile/builtins.go:216:6     - Unknown word (subdir)     -- subdir := h.Val()
+./caddyconfig/httpcaddyfile/builtins.go:260:35    - Unknown word (subdirective) -- nil, h.Errf("unknown subdirective for client_auth: %s
+./caddyconfig/httpcaddyfile/builtins.go:269:8     - Unknown word (ALPN)         -- cp.ALPN = args
+./caddyconfig/httpcaddyfile/builtins.go:35:14     - Unknown word (mholt)      -- "github.com/mholt/acmez/acme"
+./caddyconfig/httpcaddyfile/builtins.go:35:20     - Unknown word (acmez)      -- "github.com/mholt/acmez/acme"
+./caddyconfig/httpcaddyfile/builtins.go:492:8     - Unknown word (Vals)         -- configVals := []ConfigValue{}
+./caddyconfig/httpcaddyfile/builtins.go:508:14    - Unknown word (subdirectives) -- // some tls subdirectives are shortcuts that implicitly
+./caddyconfig/httpcaddyfile/builtins.go:734:22    - Unknown word (Subroute)      -- sr := new(caddyhttp.Subroute)
+./caddyconfig/httpcaddyfile/builtins.go:746:41    - Unknown word (subroute)      -- which return a literal subroute instead of a route
+./caddyconfig/httpcaddyfile/builtins.go:79:8      - Unknown word (alpn)       -- // alpn
 ./caddyconfig/httpcaddyfile/builtins_test.go:174:31    - Unknown word (htlm)       -- /old.html /new.html htlm
 ./caddyconfig/httpcaddyfile/directives.go:243:58    - Unknown word (vals)         -- caddyhttp.Route type) in vals to the
 ./caddyconfig/httpcaddyfile/directives.go:471:54    - Unknown word (hostnames)    -- of all the non-empty hostnames found in
@@ -216,9 +216,9 @@ Lines:
 ./modules/caddyhttp/fileserver/command.go:28:2      - Unknown word (caddytpl)   -- caddytpl "github.com/caddyserver
 ./modules/caddyhttp/fileserver/matcher.go:318:3     - Unknown word (fullpath)   -- fullpath, relative, splitRemainder
 ./modules/caddyhttp/fileserver/matcher.go:547:2     - Unknown word (nlen)       -- nlen := len(needle)
-./modules/caddyhttp/fileserver/matcher_test.go:186:20    - Unknown word (notphp)      -- path: "/notphp.php.txt",
-./modules/caddyhttp/fileserver/matcher_test.go:66:20     - Unknown word (foodir)     -- path: "/foodir",
-./modules/caddyhttp/fileserver/matcher_test.go:84:15     - Unknown word (missingfile) -- path: "/missingfile.php",
+./modules/caddyhttp/fileserver/matcher_test.go:192:20    - Unknown word (notphp)      -- path: "/notphp.php.txt",
+./modules/caddyhttp/fileserver/matcher_test.go:72:20     - Unknown word (foodir)     -- path: "/foodir",
+./modules/caddyhttp/fileserver/matcher_test.go:90:15     - Unknown word (missingfile) -- path: "/missingfile.php",
 ./modules/caddyhttp/fileserver/staticfiles.go:118:51    - Unknown word (explictness)      -- maximum clarity and explictness, use complete,
 ./modules/caddyhttp/fileserver/staticfiles.go:156:2     - Unknown word (precompressors)   -- precompressors map[string]encode
 ./modules/caddyhttp/fileserver/staticfiles.go:329:12    - Unknown word (canonicalization) -- // if URL canonicalization is enabled, we need
@@ -277,21 +277,21 @@ Lines:
 ./modules/caddyhttp/reverseproxy/fastcgi/fastcgi.go:379:8     - Unknown word (httpserver) -- // if httpserver.CaseSensitivePath {
 ./modules/caddyhttp/reverseproxy/fastcgi/fastcgi.go:60:30     - Unknown word (opcache)    -- to the nature of PHP opcache, root directory path
 ./modules/caddyhttp/reverseproxy/forwardauth/caddyfile.go:15:9      - Unknown word (forwardauth) -- package forwardauth
-./modules/caddyhttp/reverseproxy/healthchecks.go:390:71    - Unknown word (forgetter)  -- health check failure forgetter panicked",
+./modules/caddyhttp/reverseproxy/healthchecks.go:393:71    - Unknown word (forgetter)  -- health check failure forgetter panicked",
 ./modules/caddyhttp/reverseproxy/healthchecks.go:47:35     - Unknown word (proxied)    -- health checks monitor proxied requests for errors
 ./modules/caddyhttp/reverseproxy/httptransport.go:245:27    - Unknown word (cleartext)  -- does not "HTTP/2 over cleartext TCP")
 ./modules/caddyhttp/reverseproxy/httptransport.go:268:14    - Unknown word (Servername) -- // replaceTLSServername checks TLS servername
 ./modules/caddyhttp/reverseproxy/httptransport.go:268:36    - Unknown word (servername) -- placeTLSServername checks TLS servername to see if it needs replacing
 ./modules/caddyhttp/reverseproxy/httptransport.go:276:3     - Unknown word (newtransport) -- newtransport := &HTTPTransport{
 ./modules/caddyhttp/reverseproxy/httptransport.go:99:46     - Unknown word (Cleartext)  -- use H2C (HTTP/2 over Cleartext) to the
-./modules/caddyhttp/reverseproxy/reverseproxy.go:1342:56   - Unknown word (libcurl)    -- standard but still sent by libcurl and rejected by e.g
-./modules/caddyhttp/reverseproxy/reverseproxy.go:1346:16   - Unknown word (canonicalized) -- "Te", // canonicalized version of "TE"
+./modules/caddyhttp/reverseproxy/reverseproxy.go:1353:56   - Unknown word (libcurl)    -- standard but still sent by libcurl and rejected by e.g
+./modules/caddyhttp/reverseproxy/reverseproxy.go:1357:16   - Unknown word (canonicalized) -- "Te", // canonicalized version of "TE"
 ./modules/caddyhttp/reverseproxy/reverseproxy.go:168:22    - Unknown word (roundtrips) -- // after successful roundtrips. The first handler that
 ./modules/caddyhttp/reverseproxy/reverseproxy.go:581:5     - Unknown word (succ)       -- if succ, ok := proxyErr.(roundtripSuc
 ./modules/caddyhttp/reverseproxy/reverseproxy.go:619:26    - Unknown word (gunicorn)   -- with "slow clients" (gunicorn, etc.) - this obviously
 ./modules/caddyhttp/reverseproxy/reverseproxy.go:621:47    - Unknown word (slowloris)  -- more susceptible to slowloris
-./modules/caddyhttp/reverseproxy/reverseproxy.go:661:50    - Unknown word (websockets) -- upgrades, such as for websockets.
-./modules/caddyhttp/reverseproxy/reverseproxy.go:778:32    - Unknown word (backported) -- Forward 1xx status codes, backported from https://github
+./modules/caddyhttp/reverseproxy/reverseproxy.go:662:50    - Unknown word (websockets) -- upgrades, such as for websockets.
+./modules/caddyhttp/reverseproxy/reverseproxy.go:779:32    - Unknown word (backported) -- Forward 1xx status codes, backported from https://github
 ./modules/caddyhttp/reverseproxy/selectionpolicies.go:168:7     - Unknown word (Reqs)       -- leastReqs := -1
 ./modules/caddyhttp/reverseproxy/selectionpolicies.go:518:65    - Unknown word (hashable)   -- from pool based on a hashable string s.
 ./modules/caddyhttp/reverseproxy/streaming.go:125:2     - Unknown word (errc)        -- errc := make(chan error,
