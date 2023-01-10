@@ -1,5 +1,5 @@
-import type { PaFn, PipeAsyncTx, PipeSyncTx, PsFn } from '../internalTypes';
-import type { OperatorAsync, OperatorSync } from './types';
+import type { PaFn, PipeAsyncTx, PipeSyncTx, PsFn } from '../internalTypes.js';
+import type { OperatorAsync, OperatorSync } from './types.js';
 
 export function opCombineAsync<T>(): OperatorAsync<T>; // prettier-ignore
 export function opCombineAsync<T, T0>(...f: PipeAsyncTx<[T, T0]>): OperatorAsync<T0>; // prettier-ignore

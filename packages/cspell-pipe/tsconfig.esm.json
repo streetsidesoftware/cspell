@@ -1,8 +1,9 @@
 {
     "extends": "../../tsconfig.esm.json",
     "compilerOptions": {
-        "moduleResolution": "node",
-        "lib": ["es2020"],
+        "skipLibCheck": true,
+        "moduleResolution": "Node16",
+        "lib": ["es2020", "DOM"],
         "module": "ES2020",
         "target": "es2020",
         "outDir": "dist/esm",
