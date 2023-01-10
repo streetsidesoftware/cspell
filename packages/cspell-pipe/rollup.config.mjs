@@ -1,17 +1,20 @@
+import rollupPluginCommonjs from '@rollup/plugin-commonjs';
+import rollupPluginJson from '@rollup/plugin-json';
 import rollupPluginNodeResolve from '@rollup/plugin-node-resolve';
 import rollupPluginTypescript from '@rollup/plugin-typescript';
-import rollupPluginJson from '@rollup/plugin-json';
-import rollupPluginCommonjs from '@rollup/plugin-commonjs';
 import { readFileSync } from 'fs';
+import { globbySync } from 'globby';
+import * as path from 'node:path';
 
 const pkg = JSON.parse(readFileSync('./package.json', 'utf-8'));
 
+const cjsExports = globbySync(['operators/*.ts', 'sync/*.ts'], { ignore: ['**/*.test.ts'], cwd: 'src' });
+// console.log('%o', cjsExports);
+
 /** @type {import('rollup').RollupOptions} */
 const common = {
-    input: 'src/index.ts',
-
     output: {
-        sourcemap: true,
+        sourcemap: false,
     },
 
     // external: ['@cspell/cspell-pipe', '@cspell/cspell-pipe/sync'],
@@ -46,15 +49,20 @@ function getPlugins(tsconfig = 'tsconfig.json') {
 
 /** @type {import('rollup').RollupOptions[]} */
 const configs = [
-    {
+    ...cjsExports.map((filename) => ({
         ...common,
-        input: 'src/sync/index.ts',
+        input: `src/${filename}`,
         external: [],
-        output: { ...common.output, file: 'dist/cjs/sync/index.cjs', format: 'cjs' },
+        output: {
+            ...common.output,
+            file: `dist/cjs/${path.join(path.dirname(filename), path.basename(filename, '.ts')) + '.cjs'}`,
+            format: 'cjs',
+        },
         plugins: getPlugins(),
-    },
+    })),
     {
         ...common,
+        input: 'src/index.ts',
         output: [
             { ...common.output, file: pkg.main, format: 'cjs' },
             // { ...common.output, file: pkg.module, format: 'es' },
