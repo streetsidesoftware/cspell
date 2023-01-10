@@ -1,3 +1,4 @@
+import { existsSync } from 'fs';
 import { globifyGitIgnoreFile } from 'globify-gitignore';
 import * as path from 'path';
 import { contains } from '.';
@@ -54,6 +55,10 @@ export class GitIgnore {
     }
 
     async getGlobs(root: string) {
+        if (!existsSync(path.join(root, '.gitignore'))) {
+            return [[], []];
+        }
+
         const globEntries = await globifyGitIgnoreFile(root, false);
         const ignored: string[] = [];
         const included: string[] = [];
