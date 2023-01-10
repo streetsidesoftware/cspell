@@ -1,6 +1,9 @@
 import React from 'react';
 import clsx from 'clsx';
 import styles from './styles.module.css';
+import mountainSvg from '@site/static/img/undraw_docusaurus_mountain.svg';
+import treeSvg from '@site/static/img/undraw_docusaurus_tree.svg';
+import reactSvg from '@site/static/img/undraw_docusaurus_react.svg';
 
 type FeatureItem = {
   title: string;
@@ -11,7 +14,7 @@ type FeatureItem = {
 const FeatureList: FeatureItem[] = [
   {
     title: 'Easy to Use',
-    Svg: require('@site/static/img/undraw_docusaurus_mountain.svg').default,
+    Svg: mountainSvg,
     description: (
       <>
         Docusaurus was designed from the ground up to be easily installed and used to get your website up and running
@@ -21,7 +24,7 @@ const FeatureList: FeatureItem[] = [
   },
   {
     title: 'Focus on What Matters',
-    Svg: require('@site/static/img/undraw_docusaurus_tree.svg').default,
+    Svg: treeSvg,
     description: (
       <>
         Docusaurus lets you focus on your docs, and we&apos;ll do the chores. Go ahead and move your docs into the{' '}
@@ -31,7 +34,7 @@ const FeatureList: FeatureItem[] = [
   },
   {
     title: 'Powered by React',
-    Svg: require('@site/static/img/undraw_docusaurus_react.svg').default,
+    Svg: reactSvg,
     description: (
       <>
         Extend or customize your website layout by reusing React. Docusaurus can be extended while reusing the same
