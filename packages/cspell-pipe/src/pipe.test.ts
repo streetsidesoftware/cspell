@@ -1,19 +1,23 @@
-import { toArray, toAsyncIterable } from './helpers';
-import { opAwaitAsync, opFilter, opMap } from './operators';
-import { pipeAsync, pipeSync } from '.';
+/* eslint-disable unicorn/no-array-callback-reference */
+import { describe, expect, test } from 'vitest';
+import { toArray, toAsyncIterable } from './helpers/index.js';
+import { opAwaitAsync, opFilter, opMap } from './operators/index.js';
+import { pipeAsync, pipeSync } from './index.js';
 
 describe('Validate async', () => {
     test('mergeAsyncIterables', async () => {
-        const a = 'hello'.split('');
-        const b = 'there'.split('');
+        const a = [...'hello'];
+        const b = [...'there'];
         expect(await toArray(toAsyncIterable(a, b))).toEqual([...a, ...b]);
     });
 
     test('toAsyncIterable', async () => {
         const values = ['one', 'two', 'three'];
-        expect(await toArray(toAsyncIterable(values, wrapInPromise(values), toAsync(values)))).toEqual(
-            values.concat(values).concat(values)
-        );
+        expect(await toArray(toAsyncIterable(values, wrapInPromise(values), toAsync(values)))).toEqual([
+            ...values,
+            ...values,
+            ...values,
+        ]);
     });
 
     test('map', async () => {

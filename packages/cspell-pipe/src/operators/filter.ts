@@ -1,5 +1,5 @@
-import { isAsyncIterable } from '../helpers/util';
-import { PipeFn } from '../internalTypes';
+import { isAsyncIterable } from '../helpers/util.js';
+import type { PipeFn } from '../internalTypes.js';
 
 // prettier-ignore
 export function opFilterAsync<T, S extends T>(filterFn: (v: T) => v is S): (iter: AsyncIterable<T>) => AsyncIterable<S>;

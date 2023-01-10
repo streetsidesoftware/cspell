@@ -1,8 +1,9 @@
-import { pipeAsync, pipeSync, toArray } from '..';
-import { fibonacci } from '../test/fibonacci';
-import { opAppend, opAppendAsync } from './append';
-import { opTake } from './take';
-import { toAsyncIterable } from '../helpers';
+import { describe, expect, test } from 'vitest';
+import { pipeAsync, pipeSync, toArray } from '../index.js';
+import { fibonacci } from '../test/fibonacci.js';
+import { opAppend, opAppendAsync } from './append.js';
+import { opTake } from './take.js';
+import { toAsyncIterable } from '../helpers/index.js';
 
 describe('append', () => {
     test('sync', () => {

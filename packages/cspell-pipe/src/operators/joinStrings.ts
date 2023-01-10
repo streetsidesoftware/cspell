@@ -1,5 +1,5 @@
-import { toArray } from '../helpers';
-import { toPipeFn } from '../helpers/util';
+import { toArray } from '../helpers/toArray.js';
+import { toPipeFn } from '../helpers/util.js';
 
 export function opJoinStringsAsync(
     joinCharacter = ','

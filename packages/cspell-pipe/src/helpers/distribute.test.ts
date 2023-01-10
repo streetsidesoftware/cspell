@@ -1,7 +1,8 @@
-import { opMap, opTake } from '../operators';
-import { pipeSync } from '../pipe';
-import { toDistributableIterable } from './distribute';
-import { interleave } from './interleave';
+import { describe, expect, test } from 'vitest';
+import { opMap, opTake } from '../operators/index.js';
+import { pipeSync } from '../pipe.js';
+import { toDistributableIterable } from './distribute.js';
+import { interleave } from './interleave.js';
 
 describe('distribute', () => {
     test.each`

@@ -1,6 +1,7 @@
-import { toArray, toAsyncIterable } from '../helpers';
-import { pipeAsync, pipeSync } from '../pipe';
-import { opFirst, opFirstAsync } from './first';
+import { describe, expect, test } from 'vitest';
+import { toArray, toAsyncIterable } from '../helpers/index.js';
+import { pipeAsync, pipeSync } from '../pipe.js';
+import { opFirst, opFirstAsync } from './first.js';
 
 describe('Validate first', () => {
     test('first', async () => {
@@ -61,7 +62,7 @@ describe('Validate first', () => {
                 4,
                 {},
                 'hello',
-                Promise.resolve(undefined),
+                Promise.resolve(),
                 Promise.resolve(Promise.resolve(Promise.resolve('deep'))),
             ],
             opFirstAsync(truthyAsync),

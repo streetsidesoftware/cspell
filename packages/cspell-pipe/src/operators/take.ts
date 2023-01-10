@@ -1,4 +1,4 @@
-import { toPipeFn } from '../helpers/util';
+import { toPipeFn } from '../helpers/util.js';
 
 export function opTakeAsync<T>(count: number): (iter: AsyncIterable<T> | Iterable<T>) => AsyncIterable<T> {
     async function* fn(iter: AsyncIterable<T> | Iterable<T>) {

@@ -1,4 +1,4 @@
-import { toPipeFn } from '../helpers/util';
+import { toPipeFn } from '../helpers/util.js';
 
 /**
  * Tap allows you to listen on values, without modifying them.

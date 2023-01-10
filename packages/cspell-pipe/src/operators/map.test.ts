@@ -1,6 +1,8 @@
-import { opMap } from '.';
-import { toArray } from '../helpers';
-import { pipeAsync, pipeSync } from '../pipe';
+/* eslint-disable unicorn/no-array-callback-reference */
+import { describe, expect, test } from 'vitest';
+import { opMap } from './map.js';
+import { toArray } from '../helpers/index.js';
+import { pipeAsync, pipeSync } from '../pipe.js';
 
 describe('Validate map', () => {
     test('map', async () => {

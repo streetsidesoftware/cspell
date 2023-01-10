@@ -1,4 +1,4 @@
-import { toPipeFn } from '../helpers/util';
+import { toPipeFn } from '../helpers/util.js';
 
 export function opFlattenAsync<T>(): (iter: AsyncIterable<AsyncIterable<T> | Iterable<T>>) => AsyncIterable<T> {
     async function* fn(iter: Iterable<Iterable<T>> | AsyncIterable<AsyncIterable<T> | Iterable<T>>) {

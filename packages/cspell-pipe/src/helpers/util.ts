@@ -1,4 +1,4 @@
-import { AnyIterable, PipeFn, PipeFnAsync, PipeFnSync } from '../internalTypes';
+import type { AnyIterable, PipeFn, PipeFnAsync, PipeFnSync } from '../internalTypes.js';
 
 export function toPipeFn<T, U = T>(syncFn: PipeFnSync<T, U>, asyncFn: PipeFnAsync<T, U>): PipeFn<T, U> {
     function _(i: Iterable<T>): Iterable<U>;

@@ -1,4 +1,4 @@
-import { asyncIteratorToAsyncIterable, iteratorToIterable } from '../helpers';
+import { asyncIteratorToAsyncIterable, iteratorToIterable } from '../helpers/index.js';
 
 export function opReduceAsync<T>(
     reduceFn: (previousValue: T, currentValue: T) => T
@@ -23,7 +23,7 @@ export function opReduceAsync<T>(
     }
 
     async function* fn(iter: AsyncIterable<T> | Iterable<T>) {
-        const ht = initialValue !== undefined ? { head: await initialValue, tail: iter } : await headTailAsync(iter);
+        const ht = initialValue === undefined ? await headTailAsync(iter) : { head: await initialValue, tail: iter };
         if (!ht) return;
         yield* reduce(ht.head, ht.tail);
     }
@@ -48,7 +48,7 @@ export function opReduceSync<T>(reduceFn: (p: T, c: T) => T, initialValue?: T): 
     }
 
     function* fn(iter: Iterable<T>) {
-        const ht = initialValue !== undefined ? { head: initialValue, tail: iter } : headTail(iter);
+        const ht = initialValue === undefined ? headTail(iter) : { head: initialValue, tail: iter };
         if (!ht) return;
         yield* reduce(ht.head, ht.tail);
     }

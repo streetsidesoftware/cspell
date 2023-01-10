@@ -1,8 +1,8 @@
-import { isAsyncIterable } from './helpers';
-import { toArrayAsync } from './helpers/toArray';
-import { AnyIterable } from './internalTypes';
-import { opReduceAsync, opReduceSync } from './operators';
-import { pipeAsync, pipeSync } from './pipe';
+import { isAsyncIterable } from './helpers/index.js';
+import { toArrayAsync } from './helpers/toArray.js';
+import type { AnyIterable } from './internalTypes.js';
+import { opReduceAsync, opReduceSync } from './operators/index.js';
+import { pipeAsync, pipeSync } from './pipe.js';
 
 export function reduceSync<T>(iter: Iterable<T>, reduceFn: (prev: T, curr: T) => T): T | undefined;
 export function reduceSync<T>(iter: Iterable<T>, reduceFn: (prev: T, curr: T) => T, initialValue: T): T;
@@ -10,9 +10,9 @@ export function reduceSync<T>(iter: Iterable<T>, reduceFn: (prev: T, curr: T) =>
 export function reduceSync<T, U>(iter: Iterable<T>, reduceFn: (prev: U, curr: T) => U, initialValue: U): U;
 export function reduceSync<T>(iter: Iterable<T>, reduceFn: (prev: T, curr: T) => T, initialValue?: T): T | undefined {
     const i =
-        initialValue !== undefined
-            ? pipeSync(iter, opReduceSync(reduceFn, initialValue))
-            : pipeSync(iter, opReduceSync(reduceFn));
+        initialValue === undefined
+            ? pipeSync(iter, opReduceSync(reduceFn))
+            : pipeSync(iter, opReduceSync(reduceFn, initialValue));
     return [...i][0];
 }
 
@@ -30,10 +30,11 @@ export async function reduceAsync<T>(
     initialValue?: T
 ): Promise<T | undefined> {
     const i =
-        initialValue !== undefined
-            ? pipeAsync(iter, opReduceAsync(reduceFn, initialValue))
-            : pipeAsync(iter, opReduceAsync(reduceFn));
-    return (await toArrayAsync(i))[0];
+        initialValue === undefined
+            ? pipeAsync(iter, opReduceAsync(reduceFn))
+            : pipeAsync(iter, opReduceAsync(reduceFn, initialValue));
+    const arr = await toArrayAsync(i);
+    return arr[0];
 }
 
 export function reduce<T>(iter: Iterable<T>, reduceFn: (prev: T, curr: T) => T): T | undefined;

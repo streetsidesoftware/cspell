@@ -1,7 +1,8 @@
-import { pipeAsync, pipeSync, toArray } from '..';
-import { fibonacci } from '../test/fibonacci';
-import { opTake } from './take';
-import { opSkip } from './skip';
+import { describe, expect, test } from 'vitest';
+import { pipeAsync, pipeSync, toArray } from '../index.js';
+import { fibonacci } from '../test/fibonacci.js';
+import { opSkip } from './skip.js';
+import { opTake } from './take.js';
 
 describe('skip', () => {
     test('sync', () => {

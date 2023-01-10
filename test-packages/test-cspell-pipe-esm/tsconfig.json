@@ -1,10 +1,7 @@
 {
-    "extends": "../../tsconfig.next.json",
+    "extends": "../../tsconfig.esm.json",
     "compilerOptions": {
-        "skipLibCheck": true, // this is a bug in vite types: https://github.com/vitejs/vite/issues/11552
-        "outDir": "dist",
-        "module": "ES2020",
-        "moduleResolution": "node16"
+        "outDir": "dist"
     },
     "include": [
         "src"

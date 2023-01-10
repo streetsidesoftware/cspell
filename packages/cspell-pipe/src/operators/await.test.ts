@@ -1,6 +1,9 @@
-import { opAwaitAsync, opMap } from '.';
-import { toArray } from '../helpers';
-import { pipeAsync } from '../pipe';
+/* eslint-disable unicorn/no-array-callback-reference */
+import { describe, expect, test } from 'vitest';
+import { opMap } from './map.js';
+import { toArray } from '../helpers/index.js';
+import { pipeAsync } from '../pipe.js';
+import { opAwaitAsync } from './await.js';
 
 describe('Validate await', () => {
     test('asyncAwait', async () => {

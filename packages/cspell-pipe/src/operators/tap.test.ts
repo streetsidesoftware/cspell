@@ -1,15 +1,17 @@
-import { opMap } from '.';
-import { toArray } from '../helpers';
-import { pipeAsync, pipeSync } from '../pipe';
-import { opTap } from './tap';
+/* eslint-disable unicorn/no-array-callback-reference */
+import { describe, expect, test, vi } from 'vitest';
+import { toArray } from '../helpers/index.js';
+import { pipeAsync, pipeSync } from '../pipe.js';
+import { opMap } from './map.js';
+import { opTap } from './tap.js';
 
 describe('Validate map', () => {
     test('map', async () => {
         const values = ['one', 'two', 'three'];
 
         const mapFn = (v: string) => v.length;
-        const tapFn1 = jest.fn();
-        const tapFn2 = jest.fn();
+        const tapFn1 = vi.fn();
+        const tapFn2 = vi.fn();
 
         const expected = values.map(mapFn);
         const mapToLen = opMap(mapFn);
