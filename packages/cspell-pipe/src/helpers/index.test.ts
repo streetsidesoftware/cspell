@@ -1,4 +1,5 @@
-import * as helpers from '.';
+import { describe, expect, test } from 'vitest';
+import * as helpers from './index.js';
 
 describe('Helpers', () => {
     test('helpers', () => {

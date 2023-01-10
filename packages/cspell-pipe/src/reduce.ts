@@ -10,9 +10,9 @@ export function reduceSync<T>(iter: Iterable<T>, reduceFn: (prev: T, curr: T) =>
 export function reduceSync<T, U>(iter: Iterable<T>, reduceFn: (prev: U, curr: T) => U, initialValue: U): U;
 export function reduceSync<T>(iter: Iterable<T>, reduceFn: (prev: T, curr: T) => T, initialValue?: T): T | undefined {
     const i =
-        initialValue !== undefined
-            ? pipeSync(iter, opReduceSync(reduceFn, initialValue))
-            : pipeSync(iter, opReduceSync(reduceFn));
+        initialValue === undefined
+            ? pipeSync(iter, opReduceSync(reduceFn))
+            : pipeSync(iter, opReduceSync(reduceFn, initialValue));
     return [...i][0];
 }
 
@@ -30,10 +30,11 @@ export async function reduceAsync<T>(
     initialValue?: T
 ): Promise<T | undefined> {
     const i =
-        initialValue !== undefined
-            ? pipeAsync(iter, opReduceAsync(reduceFn, initialValue))
-            : pipeAsync(iter, opReduceAsync(reduceFn));
-    return (await toArrayAsync(i))[0];
+        initialValue === undefined
+            ? pipeAsync(iter, opReduceAsync(reduceFn))
+            : pipeAsync(iter, opReduceAsync(reduceFn, initialValue));
+    const arr = await toArrayAsync(i);
+    return arr[0];
 }
 
 export function reduce<T>(iter: Iterable<T>, reduceFn: (prev: T, curr: T) => T): T | undefined;

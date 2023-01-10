@@ -1,6 +1,7 @@
-import { toAsyncIterable } from '../helpers';
-import { toArrayAsync } from '../helpers/toArray';
-import { opReduceAsync, opReduceSync } from './reduce';
+import { describe, expect, test } from 'vitest';
+import { toAsyncIterable } from '../helpers/index.js';
+import { toArrayAsync } from '../helpers/toArray.js';
+import { opReduceAsync, opReduceSync } from './reduce.js';
 
 describe('reduce', () => {
     test('opReduceSync with Init', () => {

@@ -1,6 +1,7 @@
-import { opUnique } from '.';
-import { toArray } from '../helpers';
-import { pipeAsync, pipeSync } from '../pipe';
+import { describe, expect, test } from 'vitest';
+import { toArray } from '../helpers/index.js';
+import { pipeAsync, pipeSync } from '../pipe.js';
+import { opUnique } from './unique.js';
 
 describe('Validate unique', () => {
     test.each`

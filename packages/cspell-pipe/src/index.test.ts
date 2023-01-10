@@ -1,4 +1,5 @@
-import * as pipe from '.';
+import { describe, expect, test } from 'vitest';
+import * as pipe from './index.js';
 
 describe('Pipe API', () => {
     test('pipe api', () => {

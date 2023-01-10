@@ -1,6 +1,7 @@
-import { pipeAsync, pipeSync, toArray, opTap } from '..';
-import { fibonacci } from '../test/fibonacci';
-import { opTake } from './take';
+import { describe, expect, test } from 'vitest';
+import { pipeAsync, pipeSync, toArray, opTap } from '../index.js';
+import { fibonacci } from '../test/fibonacci.js';
+import { opTake } from './take.js';
 
 describe('take', () => {
     test.each`

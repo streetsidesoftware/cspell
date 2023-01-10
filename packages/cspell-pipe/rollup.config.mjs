@@ -1,4 +1,3 @@
-/* eslint-disable node/no-unpublished-import */
 import rollupPluginNodeResolve from '@rollup/plugin-node-resolve';
 import rollupPluginTypescript from '@rollup/plugin-typescript';
 import rollupPluginJson from '@rollup/plugin-json';
@@ -28,7 +27,7 @@ const common = {
 /**
  * Get new instances of all the common plugins.
  */
-function getPlugins(tsconfig = 'tsconfig.esm.json') {
+function getPlugins(tsconfig = 'tsconfig.json') {
     return [
         rollupPluginTypescript({
             tsconfig,

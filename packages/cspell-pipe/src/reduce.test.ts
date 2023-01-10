@@ -1,5 +1,7 @@
-import { toAsyncIterable } from './helpers';
-import { reduce } from './reduce';
+import { describe, expect, test } from 'vitest';
+
+import { toAsyncIterable } from './helpers/index.js';
+import { reduce } from './reduce.js';
 
 describe('reduce', () => {
     test('reduceSync', () => {

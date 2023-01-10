@@ -1,4 +1,4 @@
-import type { AnyIterable, PaFn, PipeAsyncTx, PipeSyncTx, PsFn } from './internalTypes';
+import type { AnyIterable, PaFn, PipeAsyncTx, PipeSyncTx, PsFn } from './internalTypes.js';
 import { toAsyncIterable } from './helpers/index.js';
 import { opCombineAsync, opCombineSync } from './operators/index.js';
 
