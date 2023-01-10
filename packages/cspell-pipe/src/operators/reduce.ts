@@ -1,4 +1,4 @@
-import { asyncIteratorToAsyncIterable, iteratorToIterable } from '../helpers';
+import { asyncIteratorToAsyncIterable, iteratorToIterable } from '../helpers/index.js';
 
 export function opReduceAsync<T>(
     reduceFn: (previousValue: T, currentValue: T) => T

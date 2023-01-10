@@ -1,4 +1,4 @@
-import { toPipeFn } from '../helpers/util';
+import { toPipeFn } from '../helpers/util.js';
 
 export function opMapAsync<T, U = T>(mapFn: (v: T) => U): (iter: AsyncIterable<T>) => AsyncIterable<U> {
     async function* fn(iter: Iterable<T> | AsyncIterable<T>) {

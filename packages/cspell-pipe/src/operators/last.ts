@@ -1,5 +1,5 @@
-import { isAsyncIterable } from '../helpers/util';
-import { PipeFn } from '../internalTypes';
+import { isAsyncIterable } from '../helpers/util.js';
+import type { PipeFn } from '../internalTypes.js';
 
 const symNotFound = Symbol('LastNotFound');
 

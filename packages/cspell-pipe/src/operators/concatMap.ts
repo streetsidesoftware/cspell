@@ -1,4 +1,4 @@
-import { toPipeFn } from '../helpers/util';
+import { toPipeFn } from '../helpers/util.js';
 
 export function opConcatMapAsync<T, U = T>(
     mapFn: (v: T) => AsyncIterable<U> | Iterable<U>

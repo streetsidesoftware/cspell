@@ -1,7 +1,11 @@
 {
     "extends": "../../tsconfig.json",
     "compilerOptions": {
-        "outDir": "dist"
+        "lib": ["es2020"],
+        "module": "ESNext",
+        "target": "es2020",
+        "moduleResolution": "node",
+        "outDir": "dist/cjs"
     },
     "include": [
         "src/**/*.ts"

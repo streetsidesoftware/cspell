@@ -1,5 +1,5 @@
-import * as _helpers from './helpers';
-import * as _operators from './operators';
+import * as _helpers from './helpers/index.js';
+import * as _operators from './operators/index.js';
 
 export { interleave, isAsyncIterable, toArray, toAsyncIterable, toDistributableIterable } from './helpers';
 export {
@@ -16,9 +16,9 @@ export {
     opTake,
     opTap,
     opUnique,
-} from './operators';
-export { pipeAsync, pipeSync } from './pipe';
-export { reduce, reduceAsync, reduceSync } from './reduce';
+} from './operators/index.js';
+export { pipeAsync, pipeSync } from './pipe.js';
+export { reduce, reduceAsync, reduceSync } from './reduce.js';
 
 export const operators = _operators;
 export const helpers = _helpers;

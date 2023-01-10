@@ -1,8 +1,8 @@
-import { isAsyncIterable } from './helpers';
-import { toArrayAsync } from './helpers/toArray';
-import { AnyIterable } from './internalTypes';
-import { opReduceAsync, opReduceSync } from './operators';
-import { pipeAsync, pipeSync } from './pipe';
+import { isAsyncIterable } from './helpers/index.js';
+import { toArrayAsync } from './helpers/toArray.js';
+import type { AnyIterable } from './internalTypes.js';
+import { opReduceAsync, opReduceSync } from './operators/index.js';
+import { pipeAsync, pipeSync } from './pipe.js';
 
 export function reduceSync<T>(iter: Iterable<T>, reduceFn: (prev: T, curr: T) => T): T | undefined;
 export function reduceSync<T>(iter: Iterable<T>, reduceFn: (prev: T, curr: T) => T, initialValue: T): T;

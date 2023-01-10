@@ -1,5 +1,5 @@
-import { isAsyncIterable } from '../helpers';
-import { PipeFn } from '../internalTypes';
+import { isAsyncIterable } from '../helpers/index.js';
+import type { PipeFn } from '../internalTypes';
 
 /**
  * Append values onto the end of an iterable.

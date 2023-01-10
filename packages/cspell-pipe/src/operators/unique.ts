@@ -1,4 +1,4 @@
-import { toPipeFn } from '../helpers/util';
+import { toPipeFn } from '../helpers/util.js';
 
 export function opUniqueAsync<T, U>(k?: (v: T) => U): (iter: AsyncIterable<T>) => AsyncIterable<T> {
     function fnK(k: (v: T) => U) {
