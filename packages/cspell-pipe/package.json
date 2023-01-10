@@ -68,32 +68,36 @@
       "require": "./dist/cjs/sync/index.d.ts"
     }
   },
+  "types": "dist/index.d.ts",
   "typesVersions": {
     "*": {
       "index.d.ts": [
-        "dist/types/index.d.ts"
+        "dist/index.d.ts"
       ],
       "dist/index.d.ts": [
-        "dist/types/index.d.ts"
+        "dist/index.d.ts"
       ],
       "operators": [
-        "dist/types/operators/index.d.ts"
+        "dist/operators/index.d.ts"
       ],
       "operators/*.js": [
-        "dist/types/operators/*.d.ts"
+        "dist/operators/*.d.ts"
       ],
       "operators/index.d.ts": [
-        "dist/types/operators/index.d.ts"
+        "dist/operators/index.d.ts"
       ],
       "sync": [
-        "dist/types/sync/index.d.ts"
+        "dist/sync/index.d.ts"
       ],
       "sync/index.d.ts": [
-        "dist/types/sync/index.d.ts"
+        "dist/sync/index.d.ts"
+      ],
+      "dist/cjs/index.d.ts": [
+        "dist/index.d.ts"
       ],
       "*": [
-        "dist/types/*",
-        "dist/types/*/index.d.ts"
+        "dist/*.d.ts",
+        "dist/*/index.d.ts"
       ]
     }
   },
@@ -109,7 +113,7 @@
     "build": "pnpm build:types && pnpm build:esm && pnpm build:cjs",
     "build:cjs": "rollup -c rollup.config.mjs",
     "build:esm": "tsc -p tsconfig.esm.json",
-    "build:types": "tsc --emitDeclarationOnly --declaration --declarationDir dist/types",
+    "build:types": "tsc --emitDeclarationOnly --declaration --declarationDir dist",
     "build-dev": "tsc -p tsconfig.dev.json",
     "watch": "tsc -p . -w",
     "clean": "shx rm -rf dist coverage .tsbuildinfo",
