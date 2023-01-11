@@ -1,33 +1,28 @@
 {
-  "name": "test-cspell-pipe-rollup",
+  "name": "test-cspell-types-cjs",
   "version": "6.18.1",
   "description": "Pure testing package for @cspell/cspell-pipe. It purpose is to verify @cspell/cspell-pipe dependencies.",
   "private": true,
-  "bin": "./bin.mjs",
-  "browser": "./dist/browser.js",
-  "main": "./dist/index.cjs",
-  "module": "./dist/index.mjs",
-  "type": "module",
+  "type": "commonjs",
+  "bin": "./bin.cjs",
   "scripts": {
     "clean": "shx rm -rf dist .tsbuildinfo",
-    "build": "rollup -c rollup.config.mjs",
+    "build": "pnpm run compile",
     "build-dev": "tsc -p tsconfig.dev.json",
     "clean-build": "pnpm run clean && pnpm run build",
     "compile": "tsc -p .",
     "test": "pnpm test:unit && pnpm test:smoke",
-    "test:smoke": "node ./bin.mjs && node ./bin.cjs",
-    "test:unit": "vitest run"
+    "test:smoke": "node ./bin.cjs",
+    "test:unit": "jest"
   },
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "@cspell/cspell-pipe": "workspace:*"
+    "@cspell/cspell-types": "workspace:*"
   },
+  "main": "index.js",
   "keywords": [],
   "devDependencies": {
     "vitest": "^0.26.3"
-  },
-  "engines": {
-    "node": ">=14"
   }
 }
