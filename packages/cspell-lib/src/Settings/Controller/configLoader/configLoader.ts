@@ -1,3 +1,4 @@
+import * as path from 'path';
 import type {
     CSpellSettingsWithSourceTrace,
     CSpellUserSettings,
@@ -10,8 +11,8 @@ import type { Options as CosmicOptions, OptionsSync as CosmicOptionsSync } from 
 import { cosmiconfig, cosmiconfigSync } from 'cosmiconfig';
 import type { CSpellIO } from 'cspell-io';
 import { getDefaultCSpellIO } from 'cspell-io';
-import * as path from 'path';
 import { URI } from 'vscode-uri';
+
 import type { CSpellSettingsInternal } from '../../../Models/CSpellSettingsInternalDef';
 import { createCSpellSettingsInternal as csi } from '../../../Models/CSpellSettingsInternalDef';
 import { logError, logWarning } from '../../../util/logger';

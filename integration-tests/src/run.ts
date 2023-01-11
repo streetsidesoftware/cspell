@@ -1,9 +1,10 @@
+import os from 'os';
+import { createCommand } from 'commander';
+import * as commander from 'commander';
+
 import { check } from './check';
 import type { ListRepositoryOptions } from './repositoryHelper';
 import { addRepository, listRepositories } from './repositoryHelper';
-import { createCommand } from 'commander';
-import * as commander from 'commander';
-import os from 'os';
 
 const defaultParallel = Math.max(os.cpus().length / 2, 1);
 

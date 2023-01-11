@@ -1,3 +1,5 @@
+import assert from 'assert';
+import * as path from 'path';
 import type {
     AdvancedCSpellSettingsWithSourceTrace,
     CSpellSettingsWithSourceTrace,
@@ -8,9 +10,8 @@ import type {
     Plugin,
     Source,
 } from '@cspell/cspell-types';
-import assert from 'assert';
 import { GlobMatcher } from 'cspell-glob';
-import * as path from 'path';
+
 import type { CSpellSettingsInternal, CSpellSettingsInternalFinalized } from '../Models/CSpellSettingsInternalDef';
 import { createCSpellSettingsInternal as csi, isCSpellSettingsInternal } from '../Models/CSpellSettingsInternalDef';
 import type { OptionalOrUndefined } from '../util/types';

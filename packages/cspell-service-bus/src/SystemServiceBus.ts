@@ -1,13 +1,13 @@
 import { assert } from './assert';
 import { createServiceBus, ServiceBus } from './bus';
-import type { Dispatcher } from './Dispatcher';
-import type { Handler, HandleRequest, HandleRequestFn, HandlerNext } from './handlers';
 import { createRequestHandler } from './createRequestHandler';
+import type { Dispatcher } from './Dispatcher';
+import { ErrorDuplicateSubsystem } from './errors';
+import type { Handler, HandleRequest, HandleRequestFn, HandlerNext } from './handlers';
 import type { RequestResponseType, ServiceRequest } from './request';
 import { createResponse } from './request';
-import type { ServiceRequestFactory, ServiceRequestFactoryRequestType } from './ServiceRequestFactory';
 import { requestFactory } from './requestFactory';
-import { ErrorDuplicateSubsystem } from './errors';
+import type { ServiceRequestFactory, ServiceRequestFactoryRequestType } from './ServiceRequestFactory';
 
 export interface SystemServiceBus extends Dispatcher {
     registerHandler(requestPrefix: string, handler: Handler): this;

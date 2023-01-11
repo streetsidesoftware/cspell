@@ -1,7 +1,8 @@
-import type { CSpellUserSettings } from '@cspell/cspell-types';
 import * as Path from 'path';
 import { posix } from 'path';
+import type { CSpellUserSettings } from '@cspell/cspell-types';
 import { URI } from 'vscode-uri';
+
 import { ImportError } from './Settings/Controller/ImportError';
 import type { Document, SpellCheckFileOptions, SpellCheckFileResult } from './spellCheckFile';
 import {

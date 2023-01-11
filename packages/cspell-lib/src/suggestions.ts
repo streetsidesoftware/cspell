@@ -1,8 +1,9 @@
 import type { CSpellSettings, LocaleId } from '@cspell/cspell-types';
+
 import type { LanguageId } from './LanguageIds';
 import { finalizeSettings, getDefaultSettings, getGlobalSettings, mergeSettings } from './Settings';
 import { calcSettingsForLanguageId } from './Settings/LanguageSettings';
-import type { FindOptions, SuggestionResult, SuggestOptions, SpellingDictionaryCollection } from './SpellingDictionary';
+import type { FindOptions, SpellingDictionaryCollection, SuggestionResult, SuggestOptions } from './SpellingDictionary';
 import { getDictionaryInternal, refreshDictionaryCache } from './SpellingDictionary';
 import * as util from './util/util';
 

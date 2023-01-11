@@ -1,9 +1,10 @@
-import { IterableHunspellReader } from './IterableHunspellReader';
+import * as path from 'path';
+import * as fs from 'fs-extra';
+import { genSequence } from 'gensequence';
+
 import * as Aff from './aff';
 import * as AffReader from './affReader';
-import { genSequence } from 'gensequence';
-import * as fs from 'fs-extra';
-import * as path from 'path';
+import { IterableHunspellReader } from './IterableHunspellReader';
 
 const DICTIONARY_LOCATIONS = path.join(__dirname, '..', 'dictionaries');
 

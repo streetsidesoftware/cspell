@@ -1,4 +1,5 @@
 import assert from 'assert';
+
 import { PairingHeap } from '../utils/PairingHeap';
 import type { WeightMap } from './weightedMaps';
 

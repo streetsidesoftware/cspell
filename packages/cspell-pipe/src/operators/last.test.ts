@@ -1,4 +1,5 @@
 import { describe, expect, test } from 'vitest';
+
 import { toArray, toAsyncIterable } from '../helpers/index.js';
 import { pipeAsync, pipeSync } from '../pipe.js';
 import { opLast, opLastAsync } from './last.js';

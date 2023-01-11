@@ -1,9 +1,10 @@
+import { opFilter, opFlatten, opMap, pipe } from '@cspell/cspell-pipe/sync';
+import type { Parser, ParseResult } from '@cspell/cspell-types/Parser';
+
+import type { Grammar } from './grammar';
 import type { NGrammar } from './grammarNormalized';
 import { tokenizeText, tokenizeTextIterable } from './tokenizeLine';
 import type { TokenizedLine, TokenizedLineResult } from './types';
-import { pipe, opFlatten, opMap, opFilter } from '@cspell/cspell-pipe/sync';
-import type { Parser, ParseResult } from '@cspell/cspell-types/Parser';
-import type { Grammar } from './grammar';
 
 export interface DocumentParser {
     parse: (firstLine: string) => TokenizedLineResult;

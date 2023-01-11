@@ -1,7 +1,8 @@
-import { determineTextDocumentSettings } from './determineTextDocumentSettings';
 import * as path from 'path';
-import { loadConfig } from '../Settings';
+
 import { loadTextDocument } from '../Models/TextDocument';
+import { loadConfig } from '../Settings';
+import { determineTextDocumentSettings } from './determineTextDocumentSettings';
 
 const samples = path.resolve(__dirname, '../../samples');
 const cfgPath = path.join(samples, '.cspell.json');

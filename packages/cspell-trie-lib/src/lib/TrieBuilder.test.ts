@@ -1,5 +1,5 @@
 import { countNodes, isCircular } from './trie-util';
-import { TrieBuilder, buildTrie } from './TrieBuilder';
+import { buildTrie, TrieBuilder } from './TrieBuilder';
 
 describe('Validate TrieBuilder', () => {
     test('builder explicit consolidateSuffixes', () => {

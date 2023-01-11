@@ -1,4 +1,5 @@
 import assert from 'assert';
+
 import type { NGrammar, Rule } from './grammarNormalized';
 import { extractScope } from './grammarNormalizer';
 import { applyCaptureToBeginOrMatch, applyCaptureToEnd } from './processors/procMatchingRule';

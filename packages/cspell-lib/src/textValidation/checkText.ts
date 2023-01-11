@@ -1,5 +1,6 @@
-import type { CSpellUserSettings } from '@cspell/cspell-types';
 import assert from 'assert';
+import type { CSpellUserSettings } from '@cspell/cspell-types';
+
 import type { TextDocument } from '../Models/TextDocument';
 import { isTextDocument } from '../Models/TextDocument';
 import type { ValidationIssue } from '../Models/ValidationIssue';

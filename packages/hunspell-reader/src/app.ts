@@ -1,13 +1,14 @@
 // cSpell:ignore findup
 import { program as commander } from 'commander';
-import { IterableHunspellReader } from './IterableHunspellReader';
 import * as fs from 'fs-extra';
-import { uniqueFilter, batch } from './util';
 import type { Sequence } from 'gensequence';
 import { genSequence } from 'gensequence';
+
 import { asAffWord } from './aff';
 import type { AffWord } from './affDef';
+import { IterableHunspellReader } from './IterableHunspellReader';
 import { iterableToStream } from './iterableToStream';
+import { batch, uniqueFilter } from './util';
 
 const uniqueHistorySize = 500000;
 

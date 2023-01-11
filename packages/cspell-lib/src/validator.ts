@@ -1,4 +1,3 @@
-export { checkText, checkTextDocument, IncludeExcludeFlag, validateText } from './textValidation';
 export type {
     CheckTextInfo,
     IncludeExcludeOptions,
@@ -6,3 +5,4 @@ export type {
     ValidateTextOptions,
     ValidationIssue,
 } from './textValidation';
+export { checkText, checkTextDocument, IncludeExcludeFlag, validateText } from './textValidation';

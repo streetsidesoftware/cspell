@@ -1,5 +1,5 @@
 import type { FindFullResult, PartialFindOptions } from './find';
-import { createFindOptions, findLegacyCompound, findWord, __testing__ } from './find';
+import { __testing__, createFindOptions, findLegacyCompound, findWord } from './find';
 import { parseDictionary } from './SimpleDictionaryParser';
 import { Trie } from './trie';
 

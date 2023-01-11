@@ -1,4 +1,4 @@
-import { ShallowObjectCollection, Collection } from './ObjectCollection';
+import { Collection, ShallowObjectCollection } from './ObjectCollection';
 
 const objects = (function () {
     const empty = {};

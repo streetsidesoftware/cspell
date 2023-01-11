@@ -1,8 +1,9 @@
 import * as Path from 'path';
+import chalk from 'chalk';
 import strip from 'strip-ansi';
+
 import type { TraceResult } from '../application';
 import { pad, width } from '../util/util';
-import chalk from 'chalk';
 
 export interface EmitTraceOptions {
     /** current working directory */

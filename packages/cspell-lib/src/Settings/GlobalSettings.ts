@@ -1,6 +1,7 @@
+import { format } from 'util';
 import type { CSpellSettings, CSpellSettingsWithSourceTrace } from '@cspell/cspell-types';
 import ConfigStore from 'configstore';
-import { format } from 'util';
+
 import { isErrnoException } from '../util/errors';
 import { logError } from '../util/logger';
 

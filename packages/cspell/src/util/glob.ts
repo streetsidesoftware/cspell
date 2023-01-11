@@ -1,8 +1,8 @@
+import * as path from 'path';
 import type { CSpellUserSettings, Glob } from '@cspell/cspell-types';
 import type { GlobPatternWithRoot } from 'cspell-glob';
 import { fileOrGlobToGlob, GlobMatcher } from 'cspell-glob';
 import glob from 'glob';
-import * as path from 'path';
 
 /**
  * This is a subset of IOptions from 'glob'.

@@ -1,10 +1,11 @@
-import type { TrieNode, TrieRoot } from '../TrieNode';
-import { FLAG_WORD, ChildMap } from '../TrieNode';
-import type { TrieRefNode } from '../trieRef';
 import type { Sequence } from 'gensequence';
 import { genSequence } from 'gensequence';
+
 import { convertToTrieRefNodes } from '../convertToTrieRefNodes';
 import { trieNodeToRoot } from '../trie-util';
+import type { TrieNode, TrieRoot } from '../TrieNode';
+import { ChildMap, FLAG_WORD } from '../TrieNode';
+import type { TrieRefNode } from '../trieRef';
 
 const EOW = '*';
 export const DATA = EOW;

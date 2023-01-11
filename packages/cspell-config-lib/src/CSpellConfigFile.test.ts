@@ -1,4 +1,5 @@
 import { parse, stringify } from 'comment-json';
+
 import { __testing__ } from './CSpellConfigFile';
 
 const { addUniqueWordsToListAndSort } = __testing__;

@@ -1,4 +1,5 @@
 import type { MappedText, TextOffset as TextOffsetRW } from '@cspell/cspell-types';
+
 import type { ValidationResult } from '../Models/ValidationResult';
 
 export type TextOffsetRO = Readonly<TextOffsetRW>;

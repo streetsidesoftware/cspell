@@ -1,5 +1,5 @@
 import type { ParseDictionaryOptions } from './SimpleDictionaryParser';
-import { parseDictionary, parseDictionaryLines, __testing__ } from './SimpleDictionaryParser';
+import { __testing__, parseDictionary, parseDictionaryLines } from './SimpleDictionaryParser';
 
 const { splitLine } = __testing__;
 

@@ -1,7 +1,7 @@
-import type { GlobMatchRule, GlobPatternNormalized } from 'cspell-glob';
-import { GlobMatcher } from 'cspell-glob';
 import { promises as fs } from 'fs';
 import * as path from 'path';
+import type { GlobMatchRule, GlobPatternNormalized } from 'cspell-glob';
+import { GlobMatcher } from 'cspell-glob';
 
 export interface IsIgnoredExResult {
     glob: string | undefined;

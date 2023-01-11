@@ -1,5 +1,6 @@
-import { StrongWeakMap } from './StrongWeakMap';
 import { promisify } from 'util';
+
+import { StrongWeakMap } from './StrongWeakMap';
 
 const wait = promisify(setTimeout);
 

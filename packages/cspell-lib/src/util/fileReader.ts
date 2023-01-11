@@ -1,4 +1,5 @@
 import { readFile, readFileSync } from 'cspell-io';
+
 import { toIterableIterator } from './iterableIteratorLib';
 
 export async function readLines(

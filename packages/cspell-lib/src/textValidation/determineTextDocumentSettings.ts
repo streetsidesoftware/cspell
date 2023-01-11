@@ -1,5 +1,6 @@
-import type { CSpellUserSettings } from '@cspell/cspell-types';
 import * as path from 'path';
+import type { CSpellUserSettings } from '@cspell/cspell-types';
+
 import { getLanguagesForBasename } from '../LanguageIds';
 import type { CSpellSettingsInternal } from '../Models/CSpellSettingsInternalDef';
 import type { TextDocument } from '../Models/TextDocument';

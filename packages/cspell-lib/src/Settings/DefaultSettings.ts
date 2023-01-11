@@ -1,13 +1,14 @@
 import type { PredefinedPatterns, RegExpPatternDefinition } from '@cspell/cspell-types';
 import { parsers } from 'cspell-grammar';
+
 import type { CSpellSettingsInternal } from '../Models/CSpellSettingsInternalDef';
 import { createCSpellSettingsInternal } from '../Models/CSpellSettingsInternalDef';
 import { PatternRegExp } from '../Models/PatternRegExp';
 import { resolveFile } from '../util/resolveFile';
 import { readSettings } from './Controller/configLoader';
-import { mergeSettings } from './index';
 import * as LanguageSettings from './LanguageSettings';
 import * as RegPat from './RegExpPatterns';
+import { mergeSettings } from './index';
 
 const defaultConfigFileModuleRef = '@cspell/cspell-bundled-dicts/cspell-default.json';
 

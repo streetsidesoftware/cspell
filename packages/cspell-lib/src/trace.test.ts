@@ -1,7 +1,8 @@
 import type { CSpellSettings } from '@cspell/cspell-types';
-import { getDefaultSettings, traceWords } from '.';
+
 import { mergeSettings } from './Settings';
 import type { TraceResult } from './trace';
+import { getDefaultSettings, traceWords } from '.';
 
 describe('Verify trace', () => {
     jest.setTimeout(10000);

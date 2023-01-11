@@ -1,7 +1,7 @@
-import { parseFlags } from './parseFlags';
+import { spyOnConsole } from '../test/console';
 import type { FeatureFlag } from './FeatureFlags';
 import { createFeatureFlags } from './FeatureFlags';
-import { spyOnConsole } from '../test/console';
+import { parseFlags } from './parseFlags';
 
 const { consoleOutput } = spyOnConsole();
 

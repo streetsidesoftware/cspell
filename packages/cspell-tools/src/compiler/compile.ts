@@ -1,7 +1,8 @@
+import * as path from 'path';
 import { pipeAsync, toArray } from '@cspell/cspell-pipe';
 import { opAwaitAsync, opMapAsync } from '@cspell/cspell-pipe/operators';
 import { opConcatMap, opMap, pipe } from '@cspell/cspell-pipe/sync';
-import * as path from 'path';
+
 import type {
     CompileRequest,
     CompileSourceOptions,

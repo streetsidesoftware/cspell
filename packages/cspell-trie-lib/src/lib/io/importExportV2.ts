@@ -1,8 +1,9 @@
-import type { TrieNode, TrieRoot } from '../TrieNode';
-import { FLAG_WORD, ChildMap } from '../TrieNode';
 import type { Sequence } from 'gensequence';
 import { genSequence } from 'gensequence';
+
 import { trieNodeToRoot } from '../trie-util';
+import type { TrieNode, TrieRoot } from '../TrieNode';
+import { ChildMap, FLAG_WORD } from '../TrieNode';
 
 const EOW = '*';
 export const DATA = '__DATA__';

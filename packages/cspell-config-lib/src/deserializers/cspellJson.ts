@@ -1,9 +1,10 @@
-import type { Deserializer, DeserializerParams, DeserializerNext } from '../Deserializer';
-import type { CSpellConfigFile } from '../CSpellConfigFile';
-import { ImplCSpellConfigFile } from '../CSpellConfigFile';
-import { detectIndent } from './util';
 import type { CSpellSettings } from '@cspell/cspell-types';
 import { parse, stringify } from 'comment-json';
+
+import type { CSpellConfigFile } from '../CSpellConfigFile';
+import { ImplCSpellConfigFile } from '../CSpellConfigFile';
+import type { Deserializer, DeserializerNext, DeserializerParams } from '../Deserializer';
+import { detectIndent } from './util';
 
 const isSupportedFormat = /\.jsonc?(?=$|[?#])/;
 

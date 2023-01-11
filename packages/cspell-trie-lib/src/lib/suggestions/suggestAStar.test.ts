@@ -1,11 +1,11 @@
-import type { GenSuggestionOptionsStrict, SuggestionOptions } from './genSuggestionsOptions';
 import { parseDictionary } from '../SimpleDictionaryParser';
+import { Trie } from '../trie';
+import { clean } from '../trie-util';
+import type { GenSuggestionOptionsStrict, SuggestionOptions } from './genSuggestionsOptions';
 import * as Sug from './suggestAStar';
 import type { SuggestionCollector, SuggestionCollectorOptions } from './suggestCollector';
 import { suggestionCollector } from './suggestCollector';
-import { Trie } from '../trie';
 import { CompoundWordsMethod } from './walker';
-import { clean } from '../trie-util';
 
 const defaultOptions: SuggestionCollectorOptions = {
     numSuggestions: 10,

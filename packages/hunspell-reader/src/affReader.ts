@@ -1,6 +1,7 @@
 import assert from 'assert';
 import { readFile } from 'fs-extra';
 import { decode } from 'iconv-lite';
+
 import { Aff } from './aff';
 import type { AffInfo, Fx, Rep, SubstitutionSet } from './affDef';
 import { cleanObject, isDefined } from './util';

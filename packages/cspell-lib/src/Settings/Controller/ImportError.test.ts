@@ -1,4 +1,4 @@
-import { UnsupportedSchema, UnsupportedPnpFile, ImportError } from './ImportError';
+import { ImportError, UnsupportedPnpFile, UnsupportedSchema } from './ImportError';
 
 describe('ImportError', () => {
     test.each`

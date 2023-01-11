@@ -1,8 +1,9 @@
 import assert from 'assert';
-import * as Simple from '../grammars/simple';
-import { TypeScript } from '../grammars';
 import { readFileSync } from 'fs';
 import * as path from 'path';
+
+import { TypeScript } from '../grammars';
+import * as Simple from '../grammars/simple';
 import { normalizeGrammar } from './grammarNormalizer';
 import { tokenizeText } from './tokenizeLine';
 import type { TokenizedLine } from './types';

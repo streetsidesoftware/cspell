@@ -1,12 +1,12 @@
-import type * as commander from 'commander';
-import * as fs from 'fs-extra';
-import { mkdirp } from 'fs-extra';
 import * as path from 'path';
-import * as Trie from 'cspell-trie-lib';
-import type { Sequence } from 'gensequence';
-import { genSequence } from 'gensequence';
 import * as stream from 'stream';
 import * as zlib from 'zlib';
+import type * as commander from 'commander';
+import * as Trie from 'cspell-trie-lib';
+import * as fs from 'fs-extra';
+import { mkdirp } from 'fs-extra';
+import type { Sequence } from 'gensequence';
+import { genSequence } from 'gensequence';
 
 const UTF8: BufferEncoding = 'utf8';
 

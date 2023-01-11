@@ -1,4 +1,3 @@
-export { addPathsToGlobalImports, listGlobalImports, removePathsFromGlobalImports } from './link';
 export type {
     AddPathsToGlobalImportsResults,
     ListGlobalImportsResult,
@@ -6,3 +5,4 @@ export type {
     RemovePathsFromGlobalImportsResult,
     ResolveSettingsResult,
 } from './link';
+export { addPathsToGlobalImports, listGlobalImports, removePathsFromGlobalImports } from './link';

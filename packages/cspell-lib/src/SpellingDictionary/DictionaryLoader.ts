@@ -1,8 +1,9 @@
+import type { SpellingDictionary } from 'cspell-dictionary';
 import type { CSpellIO } from 'cspell-io';
+
 import type { DictionaryDefinitionInternal } from '../Models/CSpellSettingsInternalDef';
 import { getCSpellIO } from '../static';
 import { DictionaryLoader } from './DictionaryController';
-import type { SpellingDictionary } from 'cspell-dictionary';
 export type { LoadOptions } from './DictionaryController';
 
 let loader: DictionaryLoader | undefined;

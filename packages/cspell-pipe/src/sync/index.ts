@@ -1,4 +1,5 @@
 export { toArraySync as toArray } from '../helpers/toArray.js';
+export type { OperatorSync as Operator } from '../operators/index.js';
 export {
     opAppendSync as opAppend,
     opCombineSync as opCombine,
@@ -15,6 +16,5 @@ export {
     opTapSync as opTap,
     opUniqueSync as opUnique,
 } from '../operators/index.js';
-export type { OperatorSync as Operator } from '../operators/index.js';
 export { pipeSync as pipe, pipeSync } from '../pipe.js';
 export { reduceSync as reduce } from '../reduce.js';

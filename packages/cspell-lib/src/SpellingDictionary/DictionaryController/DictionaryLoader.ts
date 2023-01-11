@@ -1,5 +1,6 @@
 import { opConcatMap, opFilter, opMap, pipe } from '@cspell/cspell-pipe/sync';
 import type { DictionaryFileTypes } from '@cspell/cspell-types';
+import { StrongWeakMap } from '@cspell/strong-weak-map';
 import type { SpellingDictionary } from 'cspell-dictionary';
 import {
     createFailedToLoadDictionary,
@@ -7,9 +8,9 @@ import {
     createSpellingDictionaryFromTrieFile,
 } from 'cspell-dictionary';
 import type { CSpellIO, Stats } from 'cspell-io';
+
 import type { DictionaryDefinitionInternal } from '../../Models/CSpellSettingsInternalDef';
 import { toError } from '../../util/errors';
-import { StrongWeakMap } from '@cspell/strong-weak-map';
 import { SpellingDictionaryLoadError } from '../SpellingDictionaryError';
 
 const MAX_AGE = 10000;

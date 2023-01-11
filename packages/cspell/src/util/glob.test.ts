@@ -1,8 +1,9 @@
 import * as path from 'path';
-import { calcGlobs, normalizeGlobsToRoot } from './glob';
 import { GlobMatcher } from 'cspell-glob';
 import mm from 'micromatch';
 import minimatch from 'minimatch';
+
+import { calcGlobs, normalizeGlobsToRoot } from './glob';
 
 const getStdinResult = {
     value: '',

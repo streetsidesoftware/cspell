@@ -1,4 +1,4 @@
-import { extractStats, autoCache } from './AutoCache';
+import { autoCache, extractStats } from './AutoCache';
 
 describe('AutoCache', () => {
     test.each`

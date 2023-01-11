@@ -1,4 +1,5 @@
 import type { ImportFileRef } from '@cspell/cspell-types';
+
 import type { CSpellSettingsWST } from './configLoader';
 
 export function extractImportErrors(settings: CSpellSettingsWST): ImportFileRefWithError[] {

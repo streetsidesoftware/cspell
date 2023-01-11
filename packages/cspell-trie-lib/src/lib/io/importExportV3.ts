@@ -1,9 +1,10 @@
-import type { TrieNode, TrieRoot } from '../TrieNode';
-import { FLAG_WORD } from '../TrieNode';
 import type { Sequence } from 'gensequence';
 import { genSequence } from 'gensequence';
-import { bufferLines } from '../utils/bufferLines';
+
 import { trieNodeToRoot } from '../trie-util';
+import type { TrieNode, TrieRoot } from '../TrieNode';
+import { FLAG_WORD } from '../TrieNode';
+import { bufferLines } from '../utils/bufferLines';
 
 const EOW = '$'; // End of word
 const BACK = '<'; // Move up the tree

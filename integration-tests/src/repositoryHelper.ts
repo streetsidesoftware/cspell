@@ -1,14 +1,15 @@
-import * as Path from 'path';
-import * as Config from './config';
 import * as fs from 'fs';
+import * as Path from 'path';
+import { Octokit } from '@octokit/rest';
 import Chalk from 'chalk';
+import mkdirp from 'mkdirp';
+import { simpleGit } from 'simple-git';
+
+import * as Config from './config';
+import type { Repository } from './configDef';
 import type { ShouldCheckOptions } from './shouldCheckRepo';
 import { shouldCheckRepo } from './shouldCheckRepo';
 import type { Logger } from './types';
-import { simpleGit } from 'simple-git';
-import mkdirp from 'mkdirp';
-import { Octokit } from '@octokit/rest';
-import type { Repository } from './configDef';
 
 export const repositoryDir = Path.resolve(Path.join(__dirname, '../repositories/temp'));
 

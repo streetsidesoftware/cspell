@@ -1,8 +1,9 @@
 import type { CSpellSettings } from '@cspell/cspell-types';
 import { parse, stringify } from 'yaml';
+
 import type { CSpellConfigFile } from '../CSpellConfigFile';
 import { ImplCSpellConfigFile } from '../CSpellConfigFile';
-import type { Deserializer, DeserializerParams, DeserializerNext } from '../Deserializer';
+import type { Deserializer, DeserializerNext, DeserializerParams } from '../Deserializer';
 import { detectIndentAsNum } from './util';
 
 const isSupportedFormat = /\.ya?ml(?=$|[?#])/;

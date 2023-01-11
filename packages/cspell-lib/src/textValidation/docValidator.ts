@@ -1,3 +1,4 @@
+import assert from 'assert';
 import { opConcatMap, opMap, pipeSync } from '@cspell/cspell-pipe/sync';
 import type {
     CSpellSettingsWithSourceTrace,
@@ -7,8 +8,8 @@ import type {
     PnPSettings,
 } from '@cspell/cspell-types';
 import { IssueType } from '@cspell/cspell-types';
-import assert from 'assert';
 import { GlobMatcher } from 'cspell-glob';
+
 import type { CSpellSettingsInternal, CSpellSettingsInternalFinalized } from '../Models/CSpellSettingsInternalDef';
 import type { ExtendedSuggestion } from '../Models/Suggestion';
 import type { TextDocument, TextDocumentLine } from '../Models/TextDocument';

@@ -1,8 +1,9 @@
-import { clearPnPGlobalCache, pnpLoader } from './pnpLoader';
-import { URI, Utils as UriUtils } from 'vscode-uri';
-import resolveFrom from 'resolve-from';
 import path from 'path';
+import resolveFrom from 'resolve-from';
+import { URI, Utils as UriUtils } from 'vscode-uri';
+
 import { UnsupportedPnpFile } from './ImportError';
+import { clearPnPGlobalCache, pnpLoader } from './pnpLoader';
 
 const rootCspellLib = path.resolve(path.join(__dirname, '../../..'));
 const root = path.resolve(rootCspellLib, '../..');

@@ -3,9 +3,9 @@
  */
 
 export type { FileDescriptor } from 'file-entry-cache';
+import * as path from 'path';
 import type { FileEntryCache as FecFileEntryCache } from 'file-entry-cache';
 import * as file_entry_cache from 'file-entry-cache';
-import * as path from 'path';
 import * as fs from 'fs-extra';
 
 export type FileEntryCache = FecFileEntryCache;

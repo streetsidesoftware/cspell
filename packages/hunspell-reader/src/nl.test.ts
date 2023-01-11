@@ -1,7 +1,8 @@
-import { IterableHunspellReader } from './IterableHunspellReader';
-import * as AffReader from './affReader';
 import * as path from 'path';
+
 import * as Aff from './aff';
+import * as AffReader from './affReader';
+import { IterableHunspellReader } from './IterableHunspellReader';
 
 describe('HunspellReader NL', function () {
     // We are reading big files, so we need to give it some time.

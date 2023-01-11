@@ -1,8 +1,9 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
-import type { DictionaryDefinition, DictionaryDefinitionLegacy } from '@cspell/cspell-types';
 import * as fsp from 'fs/promises';
 import * as os from 'os';
 import * as path from 'path';
+import type { DictionaryDefinition, DictionaryDefinitionLegacy } from '@cspell/cspell-types';
+
 import { getDefaultBundledSettings } from './DefaultSettings';
 import { createDictionaryReferenceCollection as createRefCol } from './DictionaryReferenceCollection';
 import * as DictSettings from './DictionarySettings';

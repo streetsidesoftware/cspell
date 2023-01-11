@@ -1,6 +1,7 @@
 import type { Command } from 'commander';
 import { Option as CommanderOption, program } from 'commander';
 import { satisfies as semverSatisfies } from 'semver';
+
 import { commandCheck } from './commandCheck';
 import { commandLink } from './commandLink';
 import { commandLint } from './commandLint';

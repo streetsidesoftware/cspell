@@ -1,8 +1,7 @@
-import * as index from './index';
-
 // Make sure the types are exported.
-import type { CSpellApplicationOptions } from './index';
 import { InMemoryReporter } from './util/InMemoryReporter';
+import type { CSpellApplicationOptions } from './index';
+import * as index from './index';
 
 describe('Validate index.ts', () => {
     test('index', () => {

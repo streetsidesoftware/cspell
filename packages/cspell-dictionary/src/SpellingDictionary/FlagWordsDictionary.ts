@@ -1,6 +1,7 @@
 import { opMap, pipe } from '@cspell/cspell-pipe/sync';
 import type { CompoundWordsMethod, SuggestionResult, Trie } from 'cspell-trie-lib';
 import { buildTrieFast, parseDictionaryLines } from 'cspell-trie-lib';
+
 import { defaultOptions } from './createSpellingDictionary';
 import * as Defaults from './defaults';
 import type {

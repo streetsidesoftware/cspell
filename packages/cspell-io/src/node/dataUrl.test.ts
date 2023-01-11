@@ -1,5 +1,5 @@
 import { pathToSample } from '../test/helper';
-import { decodeDataUrl, encodeDataUrl, encodeDataUrlFromFile, toDataUrl, guessMimeType } from './dataUrl';
+import { decodeDataUrl, encodeDataUrl, encodeDataUrlFromFile, guessMimeType, toDataUrl } from './dataUrl';
 
 const sc = expect.stringContaining;
 

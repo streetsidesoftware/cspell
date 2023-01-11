@@ -1,8 +1,9 @@
 import * as path from 'path';
-import { LintRequest } from './LintRequest';
+
+import { CheckFailed } from '../app';
 import { InMemoryReporter } from '../util/InMemoryReporter';
 import { runLint } from './lint';
-import { CheckFailed } from '../app';
+import { LintRequest } from './LintRequest';
 
 const root = path.resolve(__dirname, '../..');
 const samples = path.resolve(root, 'samples');

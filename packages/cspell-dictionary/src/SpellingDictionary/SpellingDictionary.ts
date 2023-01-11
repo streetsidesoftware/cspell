@@ -1,4 +1,4 @@
-import type { ReplaceMap, DictionaryInformation } from '@cspell/cspell-types';
+import type { DictionaryInformation, ReplaceMap } from '@cspell/cspell-types';
 import type { CompoundWordsMethod, SuggestionCollector, SuggestionResult, WeightMap } from 'cspell-trie-lib';
 
 export { CompoundWordsMethod, SuggestionCollector, SuggestionResult } from 'cspell-trie-lib';

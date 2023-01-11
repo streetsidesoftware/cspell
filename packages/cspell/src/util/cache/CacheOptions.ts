@@ -1,4 +1,4 @@
-import type { CacheStrategy, CacheFormat } from '@cspell/cspell-types';
+import type { CacheFormat, CacheStrategy } from '@cspell/cspell-types';
 
 export interface CacheOptions {
     /**

@@ -1,9 +1,10 @@
 import { describe, expect, test } from 'vitest';
+
+import { toAsyncIterable } from '../helpers/index.js';
 import { pipeAsync, pipeSync, toArray } from '../index.js';
 import { fibonacci } from '../test/fibonacci.js';
 import { opAppend, opAppendAsync } from './append.js';
 import { opTake } from './take.js';
-import { toAsyncIterable } from '../helpers/index.js';
 
 describe('append', () => {
     test('sync', () => {

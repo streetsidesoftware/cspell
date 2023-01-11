@@ -1,4 +1,4 @@
-import type { HunspellCosts, EditCosts } from '../models/DictionaryInformation';
+import type { EditCosts, HunspellCosts } from '../models/DictionaryInformation';
 import { cleanCopy } from '../utils/util';
 
 export type EditCostsRequired = Required<EditCosts>;

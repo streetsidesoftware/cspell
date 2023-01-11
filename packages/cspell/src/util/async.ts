@@ -2,9 +2,9 @@ import { operators } from '@cspell/cspell-pipe';
 
 export {
     helpers as asyncHelpers,
+    toArray as asyncIterableToArray,
     operators as asyncOperators,
     pipeAsync as asyncPipe,
-    toArray as asyncIterableToArray,
     toAsyncIterable as mergeAsyncIterables,
 } from '@cspell/cspell-pipe';
 

@@ -1,8 +1,8 @@
+import type { WalkItem, WalkNext } from './compoundWalker';
+import { compoundWalker, compoundWords } from './compoundWalker';
+import { findWord } from './find';
 import { parseDictionary } from './SimpleDictionaryParser';
 import type { Trie } from './trie';
-import { findWord } from './find';
-import type { WalkNext, WalkItem } from './compoundWalker';
-import { compoundWalker, compoundWords } from './compoundWalker';
 
 // cspell:ignore errorerror
 

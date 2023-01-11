@@ -1,4 +1,5 @@
 import type { CSpellSettings, CSpellUserSettings } from '@cspell/cspell-types';
+
 import type { CSpellSettingsInternal } from '../Models/CSpellSettingsInternalDef';
 import * as CSpellSettingsServer from './CSpellSettingsServer';
 import { getInDocumentSettings } from './InDocSettings';

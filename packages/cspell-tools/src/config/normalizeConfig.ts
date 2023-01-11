@@ -1,4 +1,5 @@
 import * as path from 'path';
+
 import type { RunConfig } from '.';
 
 type CosmiconfigResult = {

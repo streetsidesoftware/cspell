@@ -1,12 +1,13 @@
 // cSpell:ignore curr
 // cSpell:words zlib iconv
 import * as fs from 'fs';
+import { fileURLToPath } from 'url';
 import * as zlib from 'zlib';
+
+import type { BufferEncoding } from '../../models/BufferEncoding';
 import { fetch } from './fetch';
 import { FetchUrlError } from './FetchError';
-import { toURL, isSupportedURL, isFileURL, isZipped } from './util';
-import { fileURLToPath } from 'url';
-import type { BufferEncoding } from '../../models/BufferEncoding';
+import { isFileURL, isSupportedURL, isZipped, toURL } from './util';
 
 const defaultEncoding: BufferEncoding = 'utf8';
 

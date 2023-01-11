@@ -1,11 +1,12 @@
-import * as fs from 'fs-extra';
 import * as zlib from 'zlib';
-import { normalizeWordToLowercase } from '.';
+import * as fs from 'fs-extra';
+
 import { resolveGlobalDict } from '../test/samples';
 import type { FindFullResult, PartialFindOptions } from './find';
 import { findWord } from './find';
 import { importTrie } from './io/importExport';
 import type { TrieNode } from './TrieNode';
+import { normalizeWordToLowercase } from '.';
 
 const dutchDictionary = resolveGlobalDict('nl_nl.trie.gz');
 

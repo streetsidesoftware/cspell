@@ -1,4 +1,4 @@
-import { createTriFromList, serializeTrie, importTrie, Trie } from 'cspell-trie-lib';
+import { createTriFromList, importTrie, serializeTrie, Trie } from 'cspell-trie-lib';
 
 describe('Validate Library', () => {
     it('test', () => {

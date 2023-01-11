@@ -1,6 +1,6 @@
 import type { Dispatcher } from './Dispatcher';
 import { ErrorServiceRequestDepthExceeded, ErrorUnhandledRequest, UnhandledHandlerError } from './errors';
-import type { Handler, HandlerFn, HandleRequest } from './handlers';
+import type { Handler, HandleRequest, HandlerFn } from './handlers';
 import type { RequestResponseType, ServiceRequest } from './request';
 import { createResponseFail } from './request';
 

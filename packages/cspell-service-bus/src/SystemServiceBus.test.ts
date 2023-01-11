@@ -1,8 +1,8 @@
 import { assert } from './assert';
 import type { RequestResponseType } from './request';
 import { createResponse, createResponseFail, isServiceResponseFailure, isServiceResponseSuccess } from './request';
-import type { ServiceRequestFactory } from './ServiceRequestFactory';
 import { requestFactory } from './requestFactory';
+import type { ServiceRequestFactory } from './ServiceRequestFactory';
 import {
     createSystemServiceBus,
     RequestCreateSubsystemFactory,

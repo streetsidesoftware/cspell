@@ -1,5 +1,6 @@
 import type { CSpellSettings, DictionaryId, LocaleId } from '@cspell/cspell-types';
 import { genSequence } from 'gensequence';
+
 import type { LanguageId } from './LanguageIds';
 import { finalizeSettings, mergeSettings } from './Settings';
 import { toInternalSettings } from './Settings/CSpellSettingsServer';

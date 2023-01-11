@@ -1,4 +1,4 @@
-import chalk from 'chalk';
+import * as path from 'path';
 import type {
     CSpellReporter,
     Issue,
@@ -8,10 +8,11 @@ import type {
     ProgressItem,
     RunResult,
 } from '@cspell/cspell-types';
+import chalk from 'chalk';
 import type { ImportError, SpellingDictionaryLoadError } from 'cspell-lib';
 import { isSpellingDictionaryLoadError } from 'cspell-lib';
-import * as path from 'path';
 import { URI } from 'vscode-uri';
+
 import type { LinterCliOptions } from './options';
 
 const templateIssue = `{green $filename}:{yellow $row:$col} - $message ({red $text})`;

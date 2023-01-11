@@ -1,9 +1,10 @@
 /* eslint-disable node/no-missing-require */
-import { resolveFile } from './resolveFile';
-import * as path from 'path';
-import { parse } from 'comment-json';
 import * as fs from 'fs';
 import * as os from 'os';
+import * as path from 'path';
+import { parse } from 'comment-json';
+
+import { resolveFile } from './resolveFile';
 
 interface Config {
     import: string[];

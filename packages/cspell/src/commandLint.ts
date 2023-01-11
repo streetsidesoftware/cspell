@@ -1,5 +1,6 @@
 import type { Command } from 'commander';
 import { Option as CommanderOption } from 'commander';
+
 import * as App from './application';
 import type { LinterCliOptions } from './options';
 import { DEFAULT_CACHE_LOCATION } from './util/cache';

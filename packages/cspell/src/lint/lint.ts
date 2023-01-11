@@ -1,14 +1,17 @@
+import * as path from 'path';
+import { format } from 'util';
 import { isAsyncIterable, operators, opFilter, pipeAsync, pipeSync } from '@cspell/cspell-pipe';
 import type { CSpellReporter, CSpellSettings, Glob, Issue, RunResult, TextDocumentOffset } from '@cspell/cspell-types';
 import { MessageTypes } from '@cspell/cspell-types';
+import chalk from 'chalk';
 import { findRepoRoot, GitIgnore } from 'cspell-gitignore';
-import { GlobMatcher, type GlobMatchOptions, type GlobPatternNormalized, type GlobPatternWithRoot } from 'cspell-glob';
+import { type GlobMatchOptions, type GlobPatternNormalized, type GlobPatternWithRoot, GlobMatcher } from 'cspell-glob';
 import type { Logger, ValidationIssue } from 'cspell-lib';
 import * as cspell from 'cspell-lib';
-import * as path from 'path';
-import { format } from 'util';
 import { URI } from 'vscode-uri';
-import type { CSpellLintResultCache, CreateCacheSettings } from '../util/cache';
+
+import { getFeatureFlags } from '../featureFlags';
+import type { CreateCacheSettings, CSpellLintResultCache } from '../util/cache';
 import { calcCacheSettings, createCache } from '../util/cache';
 import { CheckFailed, toApplicationError, toError } from '../util/errors';
 import type { ConfigInfo, FileResult } from '../util/fileHelper';
@@ -26,8 +29,6 @@ import { loadReporters, mergeReporters } from '../util/reporters';
 import { getTimeMeasurer } from '../util/timer';
 import * as util from '../util/util';
 import type { LintRequest } from './LintRequest';
-import chalk from 'chalk';
-import { getFeatureFlags } from '../featureFlags';
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const npmPackage = require('../../package.json');
 const version = npmPackage.version;

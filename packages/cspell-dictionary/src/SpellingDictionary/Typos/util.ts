@@ -1,4 +1,5 @@
 import { opConcatMap, opFilter, pipe } from '@cspell/cspell-pipe/sync';
+
 import type { TypoEntry, TyposDef, TyposDefKey, TyposDefValue, TypoValueWithSuggestions } from './typos';
 
 /**

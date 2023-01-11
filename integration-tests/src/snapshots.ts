@@ -1,8 +1,9 @@
 import * as fs from 'fs';
 import * as Path from 'path';
-import type { Repository } from './configDef';
-import * as Shell from 'shelljs';
 import * as Diff from 'jest-diff';
+import * as Shell from 'shelljs';
+
+import type { Repository } from './configDef';
 
 export const snapshotDir = Path.resolve(Path.join(__dirname, '..', 'snapshots'));
 const snapshotFileName = 'snapshot.txt';

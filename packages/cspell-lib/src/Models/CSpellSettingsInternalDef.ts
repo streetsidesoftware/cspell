@@ -7,6 +7,7 @@ import type {
     Parser,
 } from '@cspell/cspell-types';
 import type { WeightMap } from 'cspell-trie-lib';
+
 import type { OptionalOrUndefined } from '../util/types';
 import { clean } from '../util/util';
 

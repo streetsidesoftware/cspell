@@ -1,9 +1,9 @@
 import {
+    __testing__,
+    isInstanceOfFn,
     isServiceResponseFailure,
     isServiceResponseSuccess,
-    isInstanceOfFn,
     ServiceRequest,
-    __testing__,
 } from './request';
 
 const { BaseServiceRequest } = __testing__;

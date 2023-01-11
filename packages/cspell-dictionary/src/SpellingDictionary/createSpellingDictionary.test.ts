@@ -1,6 +1,7 @@
 import type { DictionaryInformation } from '@cspell/cspell-types';
-import type { SpellingDictionaryOptions } from '.';
+
 import { createFailedToLoadDictionary, createSpellingDictionary } from './createSpellingDictionary';
+import type { SpellingDictionaryOptions } from '.';
 
 describe('Validate createSpellingDictionary', () => {
     test('createFailedToLoadDictionary', () => {

@@ -1,4 +1,5 @@
 import { isServiceResponseSuccess, ServiceBus } from '@cspell/cspell-service-bus';
+
 import { compareStats } from './common/stat';
 import type { CSpellIO } from './CSpellIO';
 import { ErrorNotImplemented } from './errors/ErrorNotImplemented';

@@ -1,5 +1,5 @@
-import { red, green, cyan } from 'chalk';
 import { format } from 'util';
+import { cyan, green, red } from 'chalk';
 
 export interface ExecOutput {
     code: number;

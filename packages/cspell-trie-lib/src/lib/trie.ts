@@ -1,5 +1,6 @@
 import type { Sequence } from 'gensequence';
 import { genSequence } from 'gensequence';
+
 import { CASE_INSENSITIVE_PREFIX, COMPOUND_FIX, FORBID_PREFIX, OPTIONAL_COMPOUND_FIX } from './constants';
 import type { FindFullResult, FindOptions, PartialFindOptions } from './find';
 import { createFindOptions, findLegacyCompound, findWord, findWordNode, isForbiddenWord } from './find';

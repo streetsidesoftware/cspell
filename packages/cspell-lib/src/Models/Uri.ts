@@ -1,4 +1,4 @@
-import { Utils, URI as Uri } from 'vscode-uri';
+import { URI as Uri, Utils } from 'vscode-uri';
 export { URI as Uri } from 'vscode-uri';
 
 export const { basename, dirname, extname, joinPath, resolvePath } = Utils;

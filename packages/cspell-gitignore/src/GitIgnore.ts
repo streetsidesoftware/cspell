@@ -1,7 +1,8 @@
 import * as path from 'path';
-import { contains } from '.';
+
 import type { IsIgnoredExResult } from './GitIgnoreFile';
 import { GitIgnoreHierarchy, loadGitIgnore } from './GitIgnoreFile';
+import { contains } from '.';
 
 /**
  * Class to cache and process `.gitignore` file queries.

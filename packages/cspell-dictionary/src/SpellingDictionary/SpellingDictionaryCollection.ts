@@ -1,5 +1,6 @@
 import { CASE_INSENSITIVE_PREFIX } from 'cspell-trie-lib';
 import { genSequence } from 'gensequence';
+
 import { clean } from '../util/clean';
 import { isDefined } from '../util/util';
 import * as Defaults from './defaults';

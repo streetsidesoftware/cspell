@@ -1,8 +1,9 @@
-import { Trie } from '../lib/trie';
-import { importTrie } from '../lib/io/importExport';
-import * as fs from 'fs-extra';
 import * as path from 'path';
 import * as zlib from 'zlib';
+import * as fs from 'fs-extra';
+
+import { importTrie } from '../lib/io/importExport';
+import { Trie } from '../lib/trie';
 
 export async function readTrieFileFromConfig(configLocation: string): Promise<Trie> {
     const json = await fs.readFile(configLocation, 'utf-8');

@@ -1,10 +1,11 @@
 import * as path from 'path';
+
 import type { DictionaryDefinitionInternal } from '../../Models/CSpellSettingsInternalDef';
 import { mapDictDefToInternal } from '../../Settings/DictionarySettings';
+import { getCSpellIO } from '../../static';
 import { clean } from '../../util/util';
 import type { LoadOptions } from './DictionaryLoader';
 import { DictionaryLoader } from './DictionaryLoader';
-import { getCSpellIO } from '../../static';
 jest.mock('../../util/logger');
 
 const root = path.join(__dirname, '../../..');

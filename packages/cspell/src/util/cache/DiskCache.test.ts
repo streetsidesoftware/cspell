@@ -1,8 +1,9 @@
-import { createFromFile } from 'file-entry-cache';
 import * as path from 'path';
+import { createFromFile } from 'file-entry-cache';
+
 import * as fileHelper from '../../util/fileHelper';
 import type { CachedFileResult, CSpellCacheMeta } from './DiskCache';
-import { DiskCache, __testing__ } from './DiskCache';
+import { __testing__, DiskCache } from './DiskCache';
 
 const { calcVersion } = __testing__;
 

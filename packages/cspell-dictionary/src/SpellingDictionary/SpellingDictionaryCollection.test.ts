@@ -1,11 +1,12 @@
 import * as Trie from 'cspell-trie-lib';
-import type { SpellingDictionaryOptions } from '.';
+
 import { createFailedToLoadDictionary, createSpellingDictionary } from './createSpellingDictionary';
 import { createFlagWordsDictionary } from './FlagWordsDictionary';
 import { createIgnoreWordsDictionary } from './IgnoreWordsDictionary';
 import { CompoundWordsMethod } from './SpellingDictionary';
 import { createCollection } from './SpellingDictionaryCollection';
 import { SpellingDictionaryFromTrie } from './SpellingDictionaryFromTrie';
+import type { SpellingDictionaryOptions } from '.';
 
 describe('Verify using multiple dictionaries', () => {
     const wordsA = [

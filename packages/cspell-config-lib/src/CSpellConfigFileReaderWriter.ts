@@ -1,5 +1,5 @@
 import type { CSpellConfigFile } from './CSpellConfigFile';
-import type { Deserializer, DeserializerParams, DeserializerNext } from './Deserializer';
+import type { Deserializer, DeserializerNext, DeserializerParams } from './Deserializer';
 import type { IO } from './IO';
 
 export const defaultNextDeserializer: DeserializerNext = (content: DeserializerParams) => {

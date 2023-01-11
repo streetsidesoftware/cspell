@@ -1,4 +1,4 @@
-import type { DictionaryDefinitionPreferred, BaseSetting, DictionaryId, DictionaryPath } from '@cspell/cspell-types';
+import type { BaseSetting, DictionaryDefinitionPreferred, DictionaryId, DictionaryPath } from '@cspell/cspell-types';
 
 interface ChangesToBase {
     type: 'suggestions' | 'words';

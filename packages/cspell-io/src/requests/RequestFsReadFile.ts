@@ -1,5 +1,6 @@
 import type { ServiceRequestFactoryRequestType } from '@cspell/cspell-service-bus';
 import { requestFactory } from '@cspell/cspell-service-bus';
+
 import type { TextFileResource } from '../models/FileResource';
 
 const RequestType = 'fs:readFile' as const;

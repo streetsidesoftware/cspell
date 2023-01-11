@@ -2,6 +2,7 @@ import { opAppend, opFilter, opMap, pipeSync } from '@cspell/cspell-pipe/sync';
 import type { CSpellUserSettings } from '@cspell/cspell-types';
 import type { Sequence } from 'gensequence';
 import { genSequence } from 'gensequence';
+
 import type { ExtendedSuggestion } from '../Models/Suggestion';
 import { getSpellDictInterface } from '../SpellingDictionary';
 import * as Text from '../util/text';

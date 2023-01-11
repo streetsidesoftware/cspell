@@ -1,6 +1,6 @@
+import type { SuggestionCostMapDef } from '../models/suggestionCostsDef';
 import { distanceAStarWeighted } from './distanceAStarWeighted';
 import { levenshteinDistance } from './levenshtein';
-import type { SuggestionCostMapDef } from '../models/suggestionCostsDef';
 import type { WeightMap } from './weightedMaps';
 import { addDefToWeightMap, createWeightMap } from './weightedMaps';
 

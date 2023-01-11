@@ -1,5 +1,5 @@
-import strip from 'strip-ansi';
 import chalk from 'chalk';
+import strip from 'strip-ansi';
 
 export interface Table {
     header: string[];

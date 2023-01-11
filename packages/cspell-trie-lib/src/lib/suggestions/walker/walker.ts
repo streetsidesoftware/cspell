@@ -1,6 +1,6 @@
-import type { TrieNode, ChildMap } from '../../TrieNode';
+import type { ChildMap, TrieNode } from '../../TrieNode';
 import type { WalkerIterator } from './walkerTypes';
-import { CompoundWordsMethod, WORD_SEPARATOR, JOIN_SEPARATOR } from './walkerTypes';
+import { CompoundWordsMethod, JOIN_SEPARATOR, WORD_SEPARATOR } from './walkerTypes';
 
 /**
  * Walks the Trie and yields a value at each node.

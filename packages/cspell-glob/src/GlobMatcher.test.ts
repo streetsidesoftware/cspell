@@ -1,4 +1,6 @@
 import * as path from 'path';
+import mm from 'micromatch';
+
 import type { GlobMatchOptions, MatcherMode } from './GlobMatcher';
 import { GlobMatcher } from './GlobMatcher';
 import type {
@@ -8,8 +10,6 @@ import type {
     GlobPatternWithOptionalRoot,
     PathInterface,
 } from './GlobMatcherTypes';
-
-import mm from 'micromatch';
 
 const defaultCwdWin32 = 'C:\\user\\home\\project\\testing';
 const defaultCwdPosix = '/user/home/project/testing';

@@ -1,4 +1,5 @@
 import * as path from 'path';
+
 import { run } from './app';
 
 describe('app', () => {

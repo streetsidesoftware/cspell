@@ -1,4 +1,5 @@
 import type { TextOffset } from '@cspell/cspell-types';
+
 import { PairingHeap } from './PairingHeap';
 import { escapeRegEx } from './regexHelper';
 import {

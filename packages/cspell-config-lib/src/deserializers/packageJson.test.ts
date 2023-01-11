@@ -1,6 +1,6 @@
-import { deserializerPackageJson } from './packageJson';
-import { json } from '../test-helpers/util';
 import { defaultNextDeserializer } from '../CSpellConfigFileReaderWriter';
+import { json } from '../test-helpers/util';
+import { deserializerPackageJson } from './packageJson';
 
 const oc = expect.objectContaining;
 const next = defaultNextDeserializer;

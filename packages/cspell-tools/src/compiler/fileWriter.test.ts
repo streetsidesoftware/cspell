@@ -1,6 +1,7 @@
-import { readFile, mkdir } from 'fs/promises';
-import { loremIpsum } from 'lorem-ipsum';
+import { mkdir, readFile } from 'fs/promises';
 import * as path from 'path';
+import { loremIpsum } from 'lorem-ipsum';
+
 import * as fileWriter from './fileWriter';
 
 const mkdirp = async (p: string) => {

@@ -1,5 +1,5 @@
+import type { Feature, Features } from './features';
 import * as features from './features';
-import type { Features, Feature } from './features';
 
 describe('features', () => {
     test('exports', () => {

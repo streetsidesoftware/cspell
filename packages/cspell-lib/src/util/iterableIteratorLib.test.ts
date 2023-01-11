@@ -1,4 +1,4 @@
-import { toIterableIterator, concatIterables } from './iterableIteratorLib';
+import { concatIterables, toIterableIterator } from './iterableIteratorLib';
 
 describe('Validate Iterable Iterators', () => {
     test('toIterableIterator', () => {

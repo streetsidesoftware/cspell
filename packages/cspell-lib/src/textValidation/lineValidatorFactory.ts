@@ -4,6 +4,7 @@ import type { CachingDictionary, SearchOptions, SpellingDictionary } from 'cspel
 import { createCachingDictionary } from 'cspell-dictionary';
 import type { Sequence } from 'gensequence';
 import { genSequence } from 'gensequence';
+
 import type { ValidationResult } from '../Models/ValidationResult';
 import * as RxPat from '../Settings/RegExpPatterns';
 import * as Text from '../util/text';

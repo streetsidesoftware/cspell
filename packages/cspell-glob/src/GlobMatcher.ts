@@ -1,12 +1,13 @@
-import mm from 'micromatch';
 import * as Path from 'path';
-import { normalizeGlobPatterns, doesRootContainPath, normalizeGlobToRoot } from './globHelper';
+import mm from 'micromatch';
+
+import { doesRootContainPath, normalizeGlobPatterns, normalizeGlobToRoot } from './globHelper';
 import type {
-    PathInterface,
     GlobMatch,
     GlobPattern,
-    GlobPatternWithRoot,
     GlobPatternNormalized,
+    GlobPatternWithRoot,
+    PathInterface,
 } from './GlobMatcherTypes';
 
 // cspell:ignore fname

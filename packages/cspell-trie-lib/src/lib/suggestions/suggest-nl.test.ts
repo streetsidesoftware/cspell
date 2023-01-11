@@ -1,7 +1,8 @@
 import assert from 'assert';
+
+import { readRawDictionaryFile, readSampleTrie } from '../../test/dictionaries.test.helper';
 import type { SuggestionResult, WeightMap } from '..';
 import { mapDictionaryInformationToWeightMap } from '..';
-import { readRawDictionaryFile, readSampleTrie } from '../../test/dictionaries.test.helper';
 import type { DictionaryInformation } from '../models/DictionaryInformation';
 import { clean } from '../utils/util';
 import { DEFAULT_COMPOUNDED_WORD_SEPARATOR } from './suggestCollector';

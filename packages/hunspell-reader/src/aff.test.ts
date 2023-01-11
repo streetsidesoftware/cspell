@@ -1,6 +1,7 @@
 import assert from 'assert';
-import * as fs from 'fs-extra';
 import * as path from 'path';
+import * as fs from 'fs-extra';
+
 import { Aff, affWordToColoredString, asAffWord, compareAff, filterAff, flagsToString } from './aff';
 import type { AffWord } from './affDef';
 import * as AffReader from './affReader';

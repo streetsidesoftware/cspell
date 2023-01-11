@@ -1,5 +1,5 @@
-import glob from 'glob';
 import { promisify } from 'util';
+import glob from 'glob';
 
 const pGlob = promisify(glob);
 

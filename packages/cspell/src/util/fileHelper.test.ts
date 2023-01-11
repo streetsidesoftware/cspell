@@ -1,7 +1,8 @@
-import { isDir, isFile, isNotDir, readFileInfo, readFileListFile, readFileListFiles } from './fileHelper';
 import * as path from 'path';
-import { IOError } from './errors';
+
 import { asyncIterableToArray } from './async';
+import { IOError } from './errors';
+import { isDir, isFile, isNotDir, readFileInfo, readFileListFile, readFileListFiles } from './fileHelper';
 
 const packageRoot = path.join(__dirname, '../..');
 const fixtures = path.join(packageRoot, 'fixtures/fileHelper');

@@ -1,7 +1,8 @@
-import * as fReader from './fileReader';
 import { promises as fs } from 'fs';
-import { isUrlLike, toURL } from './util';
+
 import { pathToRoot } from '../../test/helper';
+import * as fReader from './fileReader';
+import { isUrlLike, toURL } from './util';
 
 const oc = expect.objectContaining;
 

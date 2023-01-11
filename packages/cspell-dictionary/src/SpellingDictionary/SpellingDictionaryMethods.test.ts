@@ -1,4 +1,4 @@
-import { impersonateCollector, suggestionCollector, hasOptionToSearchOption } from './SpellingDictionaryMethods';
+import { hasOptionToSearchOption, impersonateCollector, suggestionCollector } from './SpellingDictionaryMethods';
 
 describe('SpellingDictionaryMethods', () => {
     test('impersonateCollector', () => {

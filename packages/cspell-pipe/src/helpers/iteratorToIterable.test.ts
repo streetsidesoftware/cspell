@@ -1,6 +1,7 @@
 import { describe, expect, test } from 'vitest';
-import { asyncIteratorToAsyncIterable, iteratorToIterable } from './iteratorToIterable.js';
+
 import { opFlattenSync } from '../operators/flatten.js';
+import { asyncIteratorToAsyncIterable, iteratorToIterable } from './iteratorToIterable.js';
 import { toArrayAsync } from './toArray.js';
 
 describe('iteratorToIterable', () => {

@@ -1,5 +1,6 @@
-import { streamWordsFromFile } from './iterateWordsFromFile';
 import * as path from 'path';
+
+import { streamWordsFromFile } from './iterateWordsFromFile';
 
 const samples = path.join(__dirname, '..', '..', '..', 'Samples', 'dicts');
 

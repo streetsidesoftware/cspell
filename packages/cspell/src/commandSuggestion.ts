@@ -1,5 +1,6 @@
 import type { Command } from 'commander';
 import { Option as CommanderOption } from 'commander';
+
 import * as App from './application';
 import { emitSuggestionResult } from './emitters/suggestionsEmitter';
 import type { SuggestionOptions } from './options';

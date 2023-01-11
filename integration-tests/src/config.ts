@@ -1,6 +1,7 @@
-import type { Config, Repository } from './configDef';
 import * as fs from 'fs';
 import * as Path from 'path';
+
+import type { Config, Repository } from './configDef';
 
 const configLocation = Path.resolve(Path.join(__dirname, '..', 'config'));
 const configFile = Path.join(configLocation, 'config.json');

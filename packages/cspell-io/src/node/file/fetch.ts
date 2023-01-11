@@ -1,5 +1,6 @@
 import type { Headers } from 'node-fetch';
 import nodeFetch from 'node-fetch';
+
 import { FetchUrlError } from './FetchError';
 
 export const fetch = nodeFetch;

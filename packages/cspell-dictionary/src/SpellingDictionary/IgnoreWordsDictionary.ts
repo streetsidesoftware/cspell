@@ -1,6 +1,9 @@
 import { opFilter, opMap, pipe } from '@cspell/cspell-pipe/sync';
 import type { CompoundWordsMethod, SuggestionResult } from 'cspell-trie-lib';
 import { parseDictionaryLines } from 'cspell-trie-lib';
+
+import { createSpellingDictionary } from './createSpellingDictionary';
+import * as Defaults from './defaults';
 import type {
     FindResult,
     HasOptions,
@@ -9,8 +12,6 @@ import type {
     SpellingDictionaryOptions,
     SuggestOptions,
 } from './SpellingDictionary';
-import * as Defaults from './defaults';
-import { createSpellingDictionary } from './createSpellingDictionary';
 
 const NormalizeForm = 'NFC' as const;
 

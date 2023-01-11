@@ -1,11 +1,12 @@
 import assert from 'assert';
 import { promises as fs } from 'fs';
 import * as path from 'path';
+
 import type { TextDocument } from '../Models/TextDocument';
 import { createTextDocument } from '../Models/TextDocument';
+import type { ValidationIssue } from '../Models/ValidationIssue';
 import { AutoCache } from '../util/simpleCache';
 import { DocumentValidator } from './docValidator';
-import type { ValidationIssue } from '../Models/ValidationIssue';
 
 const docCache = new AutoCache(_loadDoc, 100);
 const fixturesDir = path.join(__dirname, '../../fixtures');

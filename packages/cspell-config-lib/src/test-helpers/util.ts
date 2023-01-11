@@ -1,5 +1,5 @@
-import * as path from 'path';
 import { promises as fs } from 'fs';
+import * as path from 'path';
 
 export function json(obj: unknown, indent: string | number = 2): string {
     return JSON.stringify(obj, null, indent) + '\n';
