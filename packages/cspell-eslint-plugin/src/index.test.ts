@@ -1,6 +1,6 @@
+import { RuleTester } from 'eslint';
 import * as fs from 'fs';
 import * as path from 'path';
-import { RuleTester } from 'eslint';
 
 import * as Rule from './index';
 

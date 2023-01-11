@@ -1,7 +1,7 @@
-import { promises as fs } from 'fs';
-import * as path from 'path';
 import type { CSpellReporter } from '@cspell/cspell-types';
 import { MessageTypes } from '@cspell/cspell-types';
+import { promises as fs } from 'fs';
+import * as path from 'path';
 
 import { getReporter } from '.';
 

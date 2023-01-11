@@ -1,5 +1,5 @@
-import * as path from 'path';
 import findUp from 'find-up';
+import * as path from 'path';
 
 /**
  * Parse a directory and return its root

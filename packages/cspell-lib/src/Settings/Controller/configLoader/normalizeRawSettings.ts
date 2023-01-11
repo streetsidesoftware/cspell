@@ -1,5 +1,5 @@
-import * as path from 'path';
 import type { CSpellUserSettings, GlobDef, LanguageSetting, ReporterSettings } from '@cspell/cspell-types';
+import * as path from 'path';
 
 import { resolveFile } from '../../../util/resolveFile';
 import type { OptionalOrUndefined } from '../../../util/types';

@@ -1,5 +1,5 @@
-import * as Path from 'path';
 import Configstore from 'configstore';
+import * as Path from 'path';
 
 // eslint-disable-next-line jest/no-mocks-import
 import {

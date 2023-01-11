@@ -6,8 +6,8 @@ import { CachingDictionary, SpellingDictionaryCollection, SuggestionResult } fro
 export { SpellingDictionary, SpellingDictionaryCollection, SuggestOptions, SuggestionCollector, SuggestionResult } from 'cspell-dictionary';
 import { WeightMap } from 'cspell-trie-lib';
 export { CompoundWordsMethod } from 'cspell-trie-lib';
-export { asyncIterableToArray, readFile, readFileSync, writeToFile, writeToFileIterable, writeToFileIterableP } from 'cspell-io';
 import { URI } from 'vscode-uri';
+export { asyncIterableToArray, readFile, readFileSync, writeToFile, writeToFileIterable, writeToFileIterableP } from 'cspell-io';
 
 type ExclusionFunction = (fileUri: string) => boolean;
 type FileExclusionFunction = (file: string) => boolean;
@@ -115,9 +115,6 @@ declare namespace index_link_d {
   };
 }
 
-declare const createSpellingDictionary: typeof cspellDictModule.createSpellingDictionary;
-declare const createCollection: typeof cspellDictModule.createCollection;
-
 /**
  * The keys of an object where the values cannot be undefined.
  */
@@ -153,6 +150,9 @@ interface DictionaryDefinitionInternal extends Readonly<DictionaryDefinitionPref
 }
 
 declare function refreshDictionaryCache(maxAge?: number): Promise<void>;
+
+declare const createSpellingDictionary: typeof cspellDictModule.createSpellingDictionary;
+declare const createCollection: typeof cspellDictModule.createCollection;
 
 type LoadOptions = DictionaryDefinitionInternal;
 
@@ -369,9 +369,8 @@ interface TextDocumentContentChangeEvent {
 declare function createTextDocument({ uri, content, languageId, locale, version, }: CreateTextDocumentParams): TextDocument;
 declare function updateTextDocument(doc: TextDocument, edits: TextDocumentContentChangeEvent[], version?: number): TextDocument;
 
-/**
- * Handles loading of `.pnp.js` and `.pnp.js` files.
- */
+declare const currentSettingsFileVersion = "0.2";
+declare const ENV_CSPELL_GLOB_ROOT = "CSPELL_GLOB_ROOT";
 
 type LoaderResult = URI | undefined;
 
@@ -430,6 +429,11 @@ declare function readSettings(filename: string, defaultValues: CSpellSettingsWST
 declare function readSettings(filename: string, relativeTo: string): CSpellSettingsI$1;
 declare function readSettings(filename: string, relativeTo: string, defaultValues: CSpellSettingsWST$1): CSpellSettingsI$1;
 
+declare class ImportError extends Error {
+    readonly cause: Error | undefined;
+    constructor(msg: string, cause?: Error | unknown);
+}
+
 type CSpellSettingsWST = AdvancedCSpellSettingsWithSourceTrace;
 type CSpellSettingsWSTO = OptionalOrUndefined<AdvancedCSpellSettingsWithSourceTrace>;
 type CSpellSettingsI = CSpellSettingsInternal;
@@ -464,16 +468,8 @@ interface ConfigurationDependencies {
 }
 declare function extractDependencies(settings: CSpellSettingsWSTO | CSpellSettingsI): ConfigurationDependencies;
 
-declare const currentSettingsFileVersion = "0.2";
-declare const ENV_CSPELL_GLOB_ROOT = "CSPELL_GLOB_ROOT";
-
 declare function getDefaultSettings(useDefaultDictionaries?: boolean): CSpellSettingsInternal;
 declare function getDefaultBundledSettings(): CSpellSettingsInternal;
-
-declare class ImportError extends Error {
-    readonly cause: Error | undefined;
-    constructor(msg: string, cause?: Error | unknown);
-}
 
 declare function combineTextAndLanguageSettings(settings: CSpellUserSettings, text: string, languageId: string | string[]): CSpellSettingsInternal;
 

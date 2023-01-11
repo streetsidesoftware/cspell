@@ -1,5 +1,5 @@
-import * as Path from 'path';
 import mm from 'micromatch';
+import * as Path from 'path';
 
 import { doesRootContainPath, normalizeGlobPatterns, normalizeGlobToRoot } from './globHelper';
 import type {

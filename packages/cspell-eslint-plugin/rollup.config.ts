@@ -2,10 +2,10 @@
  * Rollup Config.
  */
 
-import { readFileSync } from 'fs';
 import rollupPluginJson from '@rollup/plugin-json';
 import rollupPluginNodeResolve from '@rollup/plugin-node-resolve';
 import rollupPluginTypescript from '@rollup/plugin-typescript';
+import { readFileSync } from 'fs';
 import type { RollupOptions } from 'rollup';
 import rollupPluginDts from 'rollup-plugin-dts';
 

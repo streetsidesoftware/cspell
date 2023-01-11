@@ -1,8 +1,8 @@
-import { promises as fs } from 'fs';
-import * as path from 'path';
 import type { CSpellReporter } from '@cspell/cspell-types';
 import { MessageTypes } from '@cspell/cspell-types';
+import { promises as fs } from 'fs';
 import mkdirp from 'mkdirp';
+import * as path from 'path';
 
 import type { CSpellJSONReporterOutput } from './CSpellJSONReporterOutput';
 import type { CSpellJSONReporterSettings } from './CSpellJSONReporterSettings';

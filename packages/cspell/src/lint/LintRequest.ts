@@ -1,5 +1,5 @@
-import * as path from 'path';
 import type { CSpellReporter, Issue } from '@cspell/cspell-types';
+import * as path from 'path';
 
 import type { LinterOptions } from '../options';
 import type { GlobSrcInfo } from '../util/glob';

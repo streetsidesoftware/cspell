@@ -1,4 +1,3 @@
-import * as path from 'path';
 import type {
     CSpellReporter,
     Issue,
@@ -11,6 +10,7 @@ import type {
 import chalk from 'chalk';
 import type { ImportError, SpellingDictionaryLoadError } from 'cspell-lib';
 import { isSpellingDictionaryLoadError } from 'cspell-lib';
+import * as path from 'path';
 import { URI } from 'vscode-uri';
 
 import type { LinterCliOptions } from './options';

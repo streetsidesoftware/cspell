@@ -1,5 +1,5 @@
-import * as path from 'path';
 import mm from 'micromatch';
+import * as path from 'path';
 
 import type { GlobMatchOptions, MatcherMode } from './GlobMatcher';
 import { GlobMatcher } from './GlobMatcher';

@@ -1,5 +1,5 @@
-import * as path from 'path';
 import type { CSpellSettingsWithSourceTrace, CSpellUserSettings, ImportFileRef } from '@cspell/cspell-types';
+import * as path from 'path';
 import { URI } from 'vscode-uri';
 
 import { logError, logWarning } from '../../../util/logger';

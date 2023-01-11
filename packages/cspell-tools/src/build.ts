@@ -1,5 +1,5 @@
-import * as path from 'path';
 import { cosmiconfig } from 'cosmiconfig';
+import * as path from 'path';
 
 import { compile } from './compiler';
 import type { Target } from './config';

@@ -1,5 +1,5 @@
-import { assert } from 'console';
 import type { CSpellReporter } from '@cspell/cspell-types';
+import { assert } from 'console';
 import type { CSpellApplicationOptions, Issue, ProgressItem, RunResult } from 'cspell';
 import { checkText, lint, trace } from 'cspell';
 import { run } from 'cspell/dist/app';

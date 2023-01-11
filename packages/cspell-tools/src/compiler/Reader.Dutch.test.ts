@@ -1,5 +1,5 @@
-import * as path from 'path';
 import { opFilter, opTake, pipe } from '@cspell/cspell-pipe/sync';
+import * as path from 'path';
 
 import type { ReaderOptions } from './Reader';
 import { createReader } from './Reader';

@@ -1,6 +1,6 @@
 import { join } from 'path';
-import { promisify } from 'util';
 import rimraf from 'rimraf';
+import { promisify } from 'util';
 
 import { CaptureLogger } from './CaptureLogger';
 import { addRepository as configAddRepository } from './config';

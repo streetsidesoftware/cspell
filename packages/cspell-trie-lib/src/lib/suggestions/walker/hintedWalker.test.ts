@@ -1,9 +1,9 @@
 import { parseLinesToDictionary } from '../../SimpleDictionaryParser';
 import { createTriFromList, orderTrie } from '../../trie-util';
-import { hintedWalker } from './hintedWalker';
-import type { YieldResult } from './walkerTypes';
 import type { HintedWalkerIterator } from '.';
 import { CompoundWordsMethod } from '.';
+import { hintedWalker } from './hintedWalker';
+import type { YieldResult } from './walkerTypes';
 
 describe('Validate Util Functions', () => {
     test('Hinted Walker', () => {

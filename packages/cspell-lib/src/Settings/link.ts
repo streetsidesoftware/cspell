@@ -1,6 +1,6 @@
+import type { CSpellSettingsWithSourceTrace } from '@cspell/cspell-types';
 import * as fs from 'fs';
 import * as Path from 'path';
-import type { CSpellSettingsWithSourceTrace } from '@cspell/cspell-types';
 
 import { clean } from '../util/util';
 import { readRawSettings } from './Controller/configLoader';

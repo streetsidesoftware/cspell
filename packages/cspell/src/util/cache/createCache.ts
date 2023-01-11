@@ -1,13 +1,13 @@
-import assert from 'assert';
-import path from 'path';
-import { stat } from 'fs-extra';
 import type { CacheSettings, CSpellSettings } from '@cspell/cspell-types';
+import assert from 'assert';
+import { stat } from 'fs-extra';
+import path from 'path';
 
 import { isError } from '../errors';
+import type { CacheOptions } from '.';
 import type { CSpellLintResultCache } from './CSpellLintResultCache';
 import { DiskCache } from './DiskCache';
 import { DummyCache } from './DummyCache';
-import type { CacheOptions } from '.';
 
 // cspell:word cspellcache
 export const DEFAULT_CACHE_LOCATION = '.cspellcache';

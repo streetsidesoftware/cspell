@@ -1,6 +1,6 @@
-import os from 'os';
 import { createCommand } from 'commander';
 import * as commander from 'commander';
+import os from 'os';
 
 import { check } from './check';
 import type { ListRepositoryOptions } from './repositoryHelper';

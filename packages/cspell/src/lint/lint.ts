@@ -1,5 +1,3 @@
-import * as path from 'path';
-import { format } from 'util';
 import { isAsyncIterable, operators, opFilter, pipeAsync, pipeSync } from '@cspell/cspell-pipe';
 import type { CSpellReporter, CSpellSettings, Glob, Issue, RunResult, TextDocumentOffset } from '@cspell/cspell-types';
 import { MessageTypes } from '@cspell/cspell-types';
@@ -8,6 +6,8 @@ import { findRepoRoot, GitIgnore } from 'cspell-gitignore';
 import { type GlobMatchOptions, type GlobPatternNormalized, type GlobPatternWithRoot, GlobMatcher } from 'cspell-glob';
 import type { Logger, ValidationIssue } from 'cspell-lib';
 import * as cspell from 'cspell-lib';
+import * as path from 'path';
+import { format } from 'util';
 import { URI } from 'vscode-uri';
 
 import { getFeatureFlags } from '../featureFlags';

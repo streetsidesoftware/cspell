@@ -6,9 +6,9 @@ import { createCSpellSettingsInternal } from '../Models/CSpellSettingsInternalDe
 import { PatternRegExp } from '../Models/PatternRegExp';
 import { resolveFile } from '../util/resolveFile';
 import { readSettings } from './Controller/configLoader';
+import { mergeSettings } from './index';
 import * as LanguageSettings from './LanguageSettings';
 import * as RegPat from './RegExpPatterns';
-import { mergeSettings } from './index';
 
 const defaultConfigFileModuleRef = '@cspell/cspell-bundled-dicts/cspell-default.json';
 

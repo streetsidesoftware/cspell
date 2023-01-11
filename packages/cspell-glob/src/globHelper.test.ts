@@ -1,7 +1,8 @@
+import mm from 'micromatch';
 import { posix, win32 } from 'path';
 import * as path from 'path';
-import mm from 'micromatch';
 
+import type { NormalizeOptions } from '.';
 import {
     __testing__,
     fileOrGlobToGlob,
@@ -16,7 +17,6 @@ import type {
     GlobPatternWithRoot,
     PathInterface,
 } from './GlobMatcherTypes';
-import type { NormalizeOptions } from '.';
 
 const { rebaseGlob, trimGlob, isGlobalGlob } = __testing__;
 

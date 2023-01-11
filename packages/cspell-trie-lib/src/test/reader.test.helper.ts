@@ -1,6 +1,6 @@
+import * as fs from 'fs-extra';
 import * as path from 'path';
 import * as zlib from 'zlib';
-import * as fs from 'fs-extra';
 
 import { importTrie } from '../lib/io/importExport';
 import { Trie } from '../lib/trie';

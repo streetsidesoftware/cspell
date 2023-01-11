@@ -1,4 +1,3 @@
-import * as path from 'path';
 import type {
     CustomDictionaryScope,
     DictionaryDefinition,
@@ -10,6 +9,7 @@ import type {
 } from '@cspell/cspell-types';
 import type { WeightMap } from 'cspell-trie-lib';
 import { mapDictionaryInformationToWeightMap } from 'cspell-trie-lib';
+import * as path from 'path';
 
 import type {
     CSpellSettingsInternal,

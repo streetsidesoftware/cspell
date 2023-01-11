@@ -1,11 +1,11 @@
 import * as path from 'path';
 import { resolve as r } from 'path';
 
+import type { CreateCacheSettings } from '.';
 import type { CacheOptions } from './CacheOptions';
 import { __testing__, calcCacheSettings, createCache } from './createCache';
 import { DiskCache } from './DiskCache';
 import { DummyCache } from './DummyCache';
-import type { CreateCacheSettings } from '.';
 
 jest.mock('./DiskCache');
 

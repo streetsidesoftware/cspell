@@ -1,15 +1,15 @@
-import assert from 'assert';
-import { promises as fs, readFileSync, statSync } from 'fs';
-import type { URL } from 'url';
-import { fileURLToPath } from 'url';
-import { gunzipSync, gzipSync } from 'zlib';
+import type { ServiceBus } from '@cspell/cspell-service-bus';
 import {
     createResponse,
     createResponseFail,
     isServiceResponseFailure,
     isServiceResponseSuccess,
 } from '@cspell/cspell-service-bus';
-import type { ServiceBus } from '@cspell/cspell-service-bus';
+import assert from 'assert';
+import { promises as fs, readFileSync, statSync } from 'fs';
+import type { URL } from 'url';
+import { fileURLToPath } from 'url';
+import { gunzipSync, gzipSync } from 'zlib';
 
 import { toError } from '../../errors';
 import { decodeDataUrl } from '../../node/dataUrl';

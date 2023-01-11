@@ -1,9 +1,9 @@
 import { genSequence } from 'gensequence';
 
+import { createTriFromList } from '.';
 import { consolidate } from './consolidate';
 import { convertToTrieRefNodes } from './convertToTrieRefNodes';
 import type { TrieRefNode } from './trieRef';
-import { createTriFromList } from '.';
 
 describe('Validate convertToTrieRefNodes', () => {
     test('Simple Convert', () => {

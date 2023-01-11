@@ -1,6 +1,6 @@
+import type { CSpellUserSettings } from '@cspell/cspell-types';
 import * as fs from 'fs/promises';
 import * as path from 'path';
-import type { CSpellUserSettings } from '@cspell/cspell-types';
 
 import { createCSpellSettingsInternal as csi } from '../Models/CSpellSettingsInternalDef';
 import { getDefaultBundledSettings, loadConfig } from '../Settings';

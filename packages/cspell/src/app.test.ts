@@ -1,9 +1,9 @@
-import * as Path from 'path';
-import * as readline from 'readline';
-import * as Util from 'util';
 import chalk from 'chalk';
 import * as Commander from 'commander';
+import * as Path from 'path';
+import * as readline from 'readline';
 import stripAnsi from 'strip-ansi';
+import * as Util from 'util';
 import { URI } from 'vscode-uri';
 
 import * as app from './app';

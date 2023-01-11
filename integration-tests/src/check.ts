@@ -1,5 +1,5 @@
-import * as Path from 'path';
 import Chalk from 'chalk';
+import * as Path from 'path';
 import * as Shell from 'shelljs';
 
 import { readConfig, resolveArgs } from './config';

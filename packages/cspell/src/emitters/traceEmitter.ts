@@ -1,5 +1,5 @@
-import * as Path from 'path';
 import chalk from 'chalk';
+import * as Path from 'path';
 import strip from 'strip-ansi';
 
 import type { TraceResult } from '../application';

@@ -1,7 +1,7 @@
-import * as path from 'path';
 import { GlobMatcher } from 'cspell-glob';
 import mm from 'micromatch';
 import minimatch from 'minimatch';
+import * as path from 'path';
 
 import { calcGlobs, normalizeGlobsToRoot } from './glob';
 

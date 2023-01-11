@@ -1,9 +1,9 @@
+import { CompoundWordsMethod, suggestionCollector } from './index';
 import { parseDictionary } from './SimpleDictionaryParser';
 import type { SuggestionOptions } from './suggestions/genSuggestionsOptions';
 import type { SuggestionCollectorOptions } from './suggestions/suggestCollector';
 import { defaultTrieOptions, Trie } from './trie';
 import { clean, isWordTerminationNode, normalizeWordToLowercase, orderTrie } from './trie-util';
-import { CompoundWordsMethod, suggestionCollector } from './index';
 
 describe('Validate Trie Class', () => {
     const NumSuggestions: SuggestionOptions = { numSuggestions: 10 };

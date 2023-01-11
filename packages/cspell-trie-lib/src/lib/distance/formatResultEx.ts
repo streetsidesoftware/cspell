@@ -1,6 +1,6 @@
+import type { WeightMap } from '.';
 import type { ExResult } from './distanceAStarWeighted';
 import { distanceAStarWeightedEx } from './distanceAStarWeighted';
-import type { WeightMap } from '.';
 
 function pL(s: string, w: number) {
     const strWidth = vizWidth(s);

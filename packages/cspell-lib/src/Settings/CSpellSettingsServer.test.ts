@@ -1,5 +1,5 @@
-import * as path from 'path';
 import type { CSpellUserSettings } from '@cspell/cspell-types';
+import * as path from 'path';
 
 import { createCSpellSettingsInternal as csi } from '../Models/CSpellSettingsInternalDef';
 import {

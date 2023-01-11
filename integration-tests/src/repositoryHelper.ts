@@ -1,8 +1,8 @@
-import * as fs from 'fs';
-import * as Path from 'path';
 import { Octokit } from '@octokit/rest';
 import Chalk from 'chalk';
+import * as fs from 'fs';
 import mkdirp from 'mkdirp';
+import * as Path from 'path';
 import { simpleGit } from 'simple-git';
 
 import * as Config from './config';

@@ -1,6 +1,6 @@
-import * as path from 'path';
 import * as fs from 'fs-extra';
 import { genSequence } from 'gensequence';
+import * as path from 'path';
 
 import * as Aff from './aff';
 import * as AffReader from './affReader';

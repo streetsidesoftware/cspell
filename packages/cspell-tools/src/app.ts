@@ -1,7 +1,7 @@
 // For large dictionaries, it is necessary to increase the memory limit.
 
-import * as path from 'path';
 import type * as program from 'commander';
+import * as path from 'path';
 
 import type { CompileAppOptions, CompileTrieAppOptions } from './AppOptions';
 import { build } from './build';

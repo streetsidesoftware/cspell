@@ -1,6 +1,6 @@
-import assert from 'assert';
 import type { MappedText } from '@cspell/cspell-types';
 import type { Range } from '@cspell/cspell-types/Parser';
+import assert from 'assert';
 
 /**
  * Extract a substring from a TextMap.

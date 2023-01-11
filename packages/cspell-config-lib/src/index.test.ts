@@ -1,10 +1,10 @@
 import { promises as fs } from 'fs';
 import { URI } from 'vscode-uri';
 
-import { fixtures } from './test-helpers/fixtures';
-import { copyFile, tempPath } from './test-helpers/util';
 import * as index from './index';
 import { createReaderWriter } from './index';
+import { fixtures } from './test-helpers/fixtures';
+import { copyFile, tempPath } from './test-helpers/util';
 
 describe('index', () => {
     test('index', () => {

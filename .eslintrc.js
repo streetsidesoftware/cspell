@@ -67,9 +67,9 @@ const config = {
                 ],
                 'import/no-unresolved': 'off',
                 '@typescript-eslint/consistent-type-imports': 'error',
-                'import/order': 'error',
-                // 'simple-import-sort/imports': 'error',
-                // 'simple-import-sort/exports': 'error',
+                // 'import/order': 'error',
+                'simple-import-sort/imports': 'error',
+                'simple-import-sort/exports': 'error',
             },
         },
         {
