@@ -1,0 +1,25 @@
+{
+  "name": "test-cspell-lib",
+  "version": "6.18.1",
+  "description": "Pure testing package for cspell-lib.",
+  "bin": "bin.js",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "clean": "shx rm -rf dist .tsbuildinfo",
+    "build": "pnpm run compile",
+    "clean-build": "pnpm run clean && pnpm run build",
+    "compile": "tsc -p .",
+    "test": "node bin.js"
+  },
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "cspell-lib": "workspace:*"
+  },
+  "main": "index.js",
+  "engines": {
+    "node": ">=14"
+  },
+  "keywords": []
+}
