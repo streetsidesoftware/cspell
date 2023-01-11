@@ -1,6 +1,6 @@
 import * as cspell from '../index';
 import * as path from 'path';
-import * as fsp from 'fs-extra';
+import * as fsp from 'fs';
 
 const samples = path.join(__dirname, '..', '..', 'samples');
 const sampleFilename = path.join(samples, 'src', 'sample.py');

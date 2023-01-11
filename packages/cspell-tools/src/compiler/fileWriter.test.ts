@@ -1,7 +1,11 @@
-import * as fileWriter from './fileWriter';
+import { readFile, mkdir } from 'fs/promises';
 import { loremIpsum } from 'lorem-ipsum';
 import * as path from 'path';
-import { mkdirp, readFile } from 'fs-extra';
+import * as fileWriter from './fileWriter';
+
+const mkdirp = async (p: string) => {
+    await mkdir(p, { recursive: true });
+};
 
 describe('Validate the writer', () => {
     test('tests writing an Rx.Observable and reading it back.', async () => {

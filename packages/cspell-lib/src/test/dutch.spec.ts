@@ -1,10 +1,10 @@
 import * as cspell from '../index';
 import * as path from 'path';
-import * as fsp from 'fs-extra';
+import * as fs from 'fs';
 import * as util from '../util/util';
 
 const sampleFilename = path.join(__dirname, '..', '..', 'samples', 'Dutch.txt');
-const text = fsp.readFileSync(sampleFilename, 'utf8').toString();
+const text = fs.readFileSync(sampleFilename, 'utf8').toString();
 const dutchConfig = require.resolve('@cspell/dict-nl-nl/cspell-ext.json');
 
 describe('Validate that Dutch text is correctly checked.', () => {
