@@ -2,6 +2,8 @@
   "name": "test-cspell-lib",
   "version": "6.18.1",
   "description": "Pure testing package for cspell-lib.",
+  "bin": "bin.js",
+  "type": "commonjs",
   "private": true,
   "scripts": {
     "clean": "shx rm -rf dist .tsbuildinfo",
@@ -9,7 +11,7 @@
     "build-dev": "tsc -p tsconfig.dev.json",
     "clean-build": "pnpm run clean && pnpm run build",
     "compile": "tsc -p .",
-    "test": "node dist"
+    "test": "node bin.js"
   },
   "author": "",
   "license": "MIT",

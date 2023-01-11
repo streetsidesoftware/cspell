@@ -13,15 +13,13 @@ async function checkSpelling(phrase: string) {
     return result.issues;
 }
 
-async function run() {
+export async function run() {
     console.log(`Start: ${new Date().toISOString()}`);
     const r = await checkSpelling('These are my coztom wordz.');
     console.log(`End: ${new Date().toISOString()}`);
-    console.log(r);
+    // console.log(r);
     assert(r.length === 1, 'Make sure we got 1 spelling issue back.');
     assert(r[0].text === 'coztom');
     assert(r[0].suggestions?.includes('cuztom'));
     // console.log('%o', r);
 }
-
-run();
