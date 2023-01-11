@@ -1,4 +1,4 @@
-import { RemoveUndefined } from './types';
+import type { RemoveUndefined } from './types';
 
 // alias for uniqueFilterFnGenerator
 export const uniqueFn = uniqueFilterFnGenerator;

@@ -1,7 +1,7 @@
 import { createReaderWriter } from './createReaderWriter';
 import { CSpellConfigFileReaderWriterImpl } from './CSpellConfigFileReaderWriter';
 import { defaultDeserializers } from './deserializers';
-import { IO } from './IO';
+import type { IO } from './IO';
 
 describe('createReaderWriter', () => {
     test('createReaderWriter default', () => {

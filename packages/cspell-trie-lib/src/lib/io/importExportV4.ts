@@ -22,9 +22,11 @@
  */
 
 import { opConcatMap, opFilter, pipe } from '@cspell/cspell-pipe/sync';
-import { genSequence, Sequence } from 'gensequence';
+import type { Sequence } from 'gensequence';
+import { genSequence } from 'gensequence';
 import { trieNodeToRoot } from '../trie-util';
-import { FLAG_WORD, TrieNode, TrieRoot } from '../TrieNode';
+import type { TrieNode, TrieRoot } from '../TrieNode';
+import { FLAG_WORD } from '../TrieNode';
 import { bufferLines } from '../utils/bufferLines';
 
 const EOW = '$'; // End of word

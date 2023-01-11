@@ -1,5 +1,5 @@
-import { ImportFileRef } from '@cspell/cspell-types';
-import { CSpellSettingsWST } from './configLoader';
+import type { ImportFileRef } from '@cspell/cspell-types';
+import type { CSpellSettingsWST } from './configLoader';
 
 export function extractImportErrors(settings: CSpellSettingsWST): ImportFileRefWithError[] {
     const imports = mergeImportRefs(settings);

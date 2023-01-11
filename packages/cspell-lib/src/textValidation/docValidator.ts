@@ -1,34 +1,39 @@
 import { opConcatMap, opMap, pipeSync } from '@cspell/cspell-pipe/sync';
-import {
+import type {
     CSpellSettingsWithSourceTrace,
     CSpellUserSettings,
-    IssueType,
     MappedText,
     ParsedText,
     PnPSettings,
 } from '@cspell/cspell-types';
+import { IssueType } from '@cspell/cspell-types';
 import assert from 'assert';
 import { GlobMatcher } from 'cspell-glob';
-import { CSpellSettingsInternal, CSpellSettingsInternalFinalized } from '../Models/CSpellSettingsInternalDef';
-import { ExtendedSuggestion } from '../Models/Suggestion';
-import { TextDocument, TextDocumentLine, updateTextDocument } from '../Models/TextDocument';
-import { ValidationIssue } from '../Models/ValidationIssue';
+import type { CSpellSettingsInternal, CSpellSettingsInternalFinalized } from '../Models/CSpellSettingsInternalDef';
+import type { ExtendedSuggestion } from '../Models/Suggestion';
+import type { TextDocument, TextDocumentLine } from '../Models/TextDocument';
+import { updateTextDocument } from '../Models/TextDocument';
+import type { ValidationIssue } from '../Models/ValidationIssue';
 import { finalizeSettings, loadConfig, mergeSettings, searchForConfig } from '../Settings';
 import { loadConfigSync, searchForConfigSync } from '../Settings/Controller/configLoader';
-import { DirectiveIssue, validateInDocumentSettings } from '../Settings/InDocSettings';
-import { getDictionaryInternal, getDictionaryInternalSync, SpellingDictionaryCollection } from '../SpellingDictionary';
+import type { DirectiveIssue } from '../Settings/InDocSettings';
+import { validateInDocumentSettings } from '../Settings/InDocSettings';
+import type { SpellingDictionaryCollection } from '../SpellingDictionary';
+import { getDictionaryInternal, getDictionaryInternalSync } from '../SpellingDictionary';
 import { toError } from '../util/errors';
 import { AutoCache } from '../util/simpleCache';
-import { MatchRange } from '../util/TextRange';
+import type { MatchRange } from '../util/TextRange';
 import { createTimer } from '../util/timer';
 import { clean } from '../util/util';
 import { determineTextDocumentSettings } from './determineTextDocumentSettings';
-import { TextValidator, textValidatorFactory } from './lineValidatorFactory';
-import { createMappedTextSegmenter, SimpleRange } from './parsedText';
+import type { TextValidator } from './lineValidatorFactory';
+import { textValidatorFactory } from './lineValidatorFactory';
+import type { SimpleRange } from './parsedText';
+import { createMappedTextSegmenter } from './parsedText';
 import { calcTextInclusionRanges, defaultMaxDuplicateProblems, defaultMaxNumberOfProblems } from './textValidator';
-import type { MappedTextValidationResult } from './ValidationTypes';
-import { ValidationOptions } from './ValidationTypes';
-import { settingsToValidateOptions, ValidateTextOptions } from './validator';
+import type { MappedTextValidationResult, ValidationOptions } from './ValidationTypes';
+import type { ValidateTextOptions } from './validator';
+import { settingsToValidateOptions } from './validator';
 
 export interface DocumentValidatorOptions extends ValidateTextOptions {
     /**

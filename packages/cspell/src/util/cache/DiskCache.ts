@@ -5,7 +5,8 @@ import { dirname, isAbsolute as isAbsolutePath, relative as relativePath, resolv
 import type { FileResult } from '../../util/fileHelper';
 import { readFileInfo } from '../../util/fileHelper';
 import type { CSpellLintResultCache } from './CSpellLintResultCache';
-import { createFromFile, FileDescriptor, FileEntryCache, normalizePath } from './fileEntryCache';
+import type { FileDescriptor, FileEntryCache } from './fileEntryCache';
+import { createFromFile, normalizePath } from './fileEntryCache';
 import { ShallowObjectCollection } from './ObjectCollection';
 
 export type CachedFileResult = Omit<FileResult, 'fileInfo' | 'elapsedTimeMs' | 'cached'>;

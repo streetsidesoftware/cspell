@@ -1,6 +1,6 @@
 import { isServiceResponseSuccess, ServiceBus } from '@cspell/cspell-service-bus';
 import { compareStats } from './common/stat';
-import { CSpellIO } from './CSpellIO';
+import type { CSpellIO } from './CSpellIO';
 import { ErrorNotImplemented } from './errors/ErrorNotImplemented';
 import { registerHandlers } from './handlers/node/file';
 import type { TextFileResource } from './models/FileResource';

@@ -1,7 +1,7 @@
-import { MatchRuleResult, NCaptures, NPatternBeginEnd, Rule } from '../grammarNormalized';
+import type { MatchRuleResult, NCaptures, NPatternBeginEnd, Rule } from '../grammarNormalized';
 import { extractScope } from '../grammarNormalizer';
 import { segmentMatch } from '../matchResult';
-import { Scope } from '../scope';
+import type { Scope } from '../scope';
 import type { MatchResult, MatchSegment, Range, TokenizedText } from '../types';
 import { isDefined } from '../util';
 

@@ -1,6 +1,7 @@
 import { opFilter, opMap, pipe } from '@cspell/cspell-pipe/sync';
-import { CompoundWordsMethod, parseDictionaryLines, SuggestionResult } from 'cspell-trie-lib';
-import {
+import type { CompoundWordsMethod, SuggestionResult } from 'cspell-trie-lib';
+import { parseDictionaryLines } from 'cspell-trie-lib';
+import type {
     FindResult,
     HasOptions,
     SearchOptions,

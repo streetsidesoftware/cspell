@@ -1,6 +1,6 @@
-import { CSpellConfigFile } from './CSpellConfigFile';
-import { Deserializer, DeserializerParams, DeserializerNext } from './Deserializer';
-import { IO } from './IO';
+import type { CSpellConfigFile } from './CSpellConfigFile';
+import type { Deserializer, DeserializerParams, DeserializerNext } from './Deserializer';
+import type { IO } from './IO';
 
 export const defaultNextDeserializer: DeserializerNext = (content: DeserializerParams) => {
     throw new Error(`Unable to parse config file: "${content.uri}"`);

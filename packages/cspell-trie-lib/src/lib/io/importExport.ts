@@ -1,6 +1,7 @@
 import { toDistributableIterable } from '@cspell/cspell-pipe';
-import { Sequence, genSequence } from 'gensequence';
-import { TrieRoot } from '../TrieNode';
+import type { Sequence } from 'gensequence';
+import { genSequence } from 'gensequence';
+import type { TrieRoot } from '../TrieNode';
 import * as iv1 from './importExportV1';
 import * as iv2 from './importExportV2';
 import * as iv3 from './importExportV3';

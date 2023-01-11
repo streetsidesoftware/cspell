@@ -1,7 +1,7 @@
 import { createRequestHandler } from './createRequestHandler';
-import { Handler, HandleRequestFn } from './handlers';
+import type { Handler, HandleRequestFn } from './handlers';
 import { ServiceRequest } from './request';
-import { ServiceRequestFactory } from './ServiceRequestFactory';
+import type { ServiceRequestFactory } from './ServiceRequestFactory';
 
 export function requestFactory<T extends string, P, R>(requestType: T): ServiceRequestFactory<ServiceRequest<T, P, R>> {
     type Request = ServiceRequest<T, P, R>;

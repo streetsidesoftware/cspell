@@ -1,6 +1,6 @@
 import { opFilter, opFlatten, opMap, pipe } from '@cspell/cspell-pipe/sync';
 import type { HunspellCosts, HunspellInformation } from '../models/DictionaryInformation';
-import { Locale } from '../models/locale';
+import type { Locale } from '../models/locale';
 import type { SuggestionCostMapDef } from '../models/suggestionCostsDef';
 import { caseForms } from '../utils/text';
 import { isDefined, unique as uniqueU } from '../utils/util';

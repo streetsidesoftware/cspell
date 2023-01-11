@@ -1,7 +1,7 @@
 import { parser } from './TypeScriptParser';
 import { promises as fs } from 'fs';
 import * as path from 'path';
-import { ParseResult } from '@cspell/cspell-types/Parser';
+import type { ParseResult } from '@cspell/cspell-types/Parser';
 
 const fixtures = path.join(__dirname, '../../../fixtures');
 

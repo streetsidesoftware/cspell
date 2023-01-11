@@ -1,7 +1,7 @@
 import { walker } from './walker';
 import type { YieldResult } from './walkerTypes';
 import { orderTrie, createTriFromList } from '../../trie-util';
-import { WalkerIterator } from '.';
+import type { WalkerIterator } from '.';
 
 describe('Validate Util Functions', () => {
     test('Tests Walker', () => {

@@ -7,7 +7,7 @@ import {
 } from './globHelper';
 import { win32, posix } from 'path';
 import * as path from 'path';
-import {
+import type {
     GlobPattern,
     GlobPatternNormalized,
     GlobPatternWithOptionalRoot,
@@ -15,7 +15,7 @@ import {
     PathInterface,
 } from './GlobMatcherTypes';
 import mm from 'micromatch';
-import { NormalizeOptions } from '.';
+import type { NormalizeOptions } from '.';
 
 const { rebaseGlob, trimGlob, isGlobalGlob } = __testing__;
 

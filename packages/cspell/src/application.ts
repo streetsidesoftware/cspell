@@ -1,23 +1,21 @@
 import { opMap, opTap, pipeAsync, toAsyncIterable } from '@cspell/cspell-pipe';
 import type { CSpellReporter, RunResult } from '@cspell/cspell-types';
+import type { CheckTextInfo, FeatureFlags, SuggestionsForWordResult, TraceResult } from 'cspell-lib';
 import {
     checkTextDocument,
-    CheckTextInfo,
-    FeatureFlags,
     getDefaultSettings,
     getGlobalSettings,
     mergeSettings,
     SuggestionError,
-    SuggestionsForWordResult,
     suggestionsForWords,
-    TraceResult,
     traceWordsAsync,
 } from 'cspell-lib';
 import { getReporter } from './cli-reporter';
-import { TimedSuggestionsForWordResult } from './emitters/suggestionsEmitter';
+import type { TimedSuggestionsForWordResult } from './emitters/suggestionsEmitter';
 import { getFeatureFlags, parseFeatureFlags } from './featureFlags';
 import { LintRequest, runLint } from './lint';
-import { BaseOptions, fixLegacy, LegacyOptions, LinterCliOptions, SuggestionOptions, TraceOptions } from './options';
+import type { BaseOptions, LegacyOptions, LinterCliOptions, SuggestionOptions, TraceOptions } from './options';
+import { fixLegacy } from './options';
 import { simpleRepl } from './repl';
 import { fileInfoToDocument, readConfig, readFileInfo } from './util/fileHelper';
 import { readStdin } from './util/stdin';

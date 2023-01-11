@@ -1,4 +1,5 @@
-import { describe, expect, test, afterEach, vi, beforeEach, SpyInstance } from 'vitest';
+import type { SpyInstance } from 'vitest';
+import { describe, expect, test, afterEach, vi, beforeEach } from 'vitest';
 
 import * as app from './app';
 import * as path from 'path';

@@ -1,4 +1,4 @@
-import { ServiceRequest } from './request';
+import type { ServiceRequest } from './request';
 
 export class ErrorUnhandledRequest extends Error {
     constructor(readonly request: ServiceRequest) {

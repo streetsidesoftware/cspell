@@ -1,5 +1,5 @@
 import * as helpers from './helpers';
-import { SuggestionResult, Feature } from './entities';
+import type { SuggestionResult, Feature } from './entities';
 import { FeatureMap } from './helpers';
 
 describe('Validate Suggest Helpers', () => {

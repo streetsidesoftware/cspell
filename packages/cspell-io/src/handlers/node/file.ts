@@ -1,9 +1,9 @@
+import type { ServiceBus } from '@cspell/cspell-service-bus';
 import {
     createResponse,
     createResponseFail,
     isServiceResponseFailure,
     isServiceResponseSuccess,
-    ServiceBus,
 } from '@cspell/cspell-service-bus';
 import assert from 'assert';
 import { promises as fs, readFileSync, statSync } from 'fs';
@@ -22,7 +22,8 @@ import {
     RequestFsWriteFile,
     RequestZlibInflate,
 } from '../../requests';
-import { URL, fileURLToPath } from 'url';
+import type { URL } from 'url';
+import { fileURLToPath } from 'url';
 
 const isGzFileRegExp = /\.gz($|[?#])/;
 

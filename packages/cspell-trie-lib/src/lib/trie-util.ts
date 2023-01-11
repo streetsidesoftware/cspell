@@ -1,8 +1,11 @@
-import { genSequence, Sequence } from 'gensequence';
+import type { Sequence } from 'gensequence';
+import { genSequence } from 'gensequence';
 import { defaultTrieOptions } from './constants';
-import { ChildMap, FLAG_WORD, PartialTrieOptions, TrieNode, TrieOptions, TrieRoot } from './TrieNode';
+import type { PartialTrieOptions, TrieNode, TrieOptions, TrieRoot } from './TrieNode';
+import { ChildMap, FLAG_WORD } from './TrieNode';
 import type { PartialWithUndefined, RemoveUndefined } from './types';
-import { walker, YieldResult } from './walker';
+import type { YieldResult } from './walker';
+import { walker } from './walker';
 
 export function insert(text: string, node: TrieNode = {}): TrieNode {
     if (text.length) {

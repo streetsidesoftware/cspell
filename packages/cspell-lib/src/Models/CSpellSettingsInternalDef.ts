@@ -1,4 +1,4 @@
-import {
+import type {
     AdvancedCSpellSettingsWithSourceTrace,
     CSpellSettingsWithSourceTrace,
     DictionaryDefinitionAugmented,
@@ -6,8 +6,8 @@ import {
     DictionaryDefinitionPreferred,
     Parser,
 } from '@cspell/cspell-types';
-import { WeightMap } from 'cspell-trie-lib';
-import { OptionalOrUndefined } from '../util/types';
+import type { WeightMap } from 'cspell-trie-lib';
+import type { OptionalOrUndefined } from '../util/types';
 import { clean } from '../util/util';
 
 export const SymbolCSpellSettingsInternal = Symbol('CSpellSettingsInternal');

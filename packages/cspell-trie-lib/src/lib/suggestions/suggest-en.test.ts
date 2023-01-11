@@ -1,13 +1,15 @@
 import { readRawDictionaryFile, readTrie } from '../../test/dictionaries.test.helper';
 import { genCompoundableSuggestions, suggest } from './suggest';
-import { suggestionCollector, SuggestionCollectorOptions, SuggestionResult } from './suggestCollector';
+import type { SuggestionCollectorOptions, SuggestionResult } from './suggestCollector';
+import { suggestionCollector } from './suggestCollector';
 import { createTimer } from '../utils/timer';
 import { CompoundWordsMethod } from './walker';
 import { clean } from '../trie-util';
-import { DictionaryInformation } from '../models/DictionaryInformation';
-import { mapDictionaryInformationToWeightMap, WeightMap } from '..';
+import type { DictionaryInformation } from '../models/DictionaryInformation';
+import type { WeightMap } from '..';
+import { mapDictionaryInformationToWeightMap } from '..';
 import assert from 'assert';
-import { SuggestionOptions } from './genSuggestionsOptions';
+import type { SuggestionOptions } from './genSuggestionsOptions';
 
 function getTrie() {
     return readTrie('@cspell/dict-en_us/cspell-ext.json');

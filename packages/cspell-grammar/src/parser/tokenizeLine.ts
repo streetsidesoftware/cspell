@@ -1,5 +1,5 @@
 import assert from 'assert';
-import { NGrammar, Rule } from './grammarNormalized';
+import type { NGrammar, Rule } from './grammarNormalized';
 import { extractScope } from './grammarNormalizer';
 import { applyCaptureToBeginOrMatch, applyCaptureToEnd } from './processors/procMatchingRule';
 import type { DocumentLine, LineOffsetAnchored, TokenizedLine, TokenizedLineResult, TokenizedText } from './types';

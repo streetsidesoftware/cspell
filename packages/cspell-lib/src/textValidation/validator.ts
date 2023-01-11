@@ -1,9 +1,11 @@
-import { CSpellUserSettings, IssueType } from '@cspell/cspell-types';
-import { CSpellSettingsInternalFinalized } from '../Models/CSpellSettingsInternalDef';
+import type { CSpellUserSettings } from '@cspell/cspell-types';
+import { IssueType } from '@cspell/cspell-types';
+import type { CSpellSettingsInternalFinalized } from '../Models/CSpellSettingsInternalDef';
 import { createTextDocument } from '../Models/TextDocument';
 import type { ValidationIssue } from '../Models/ValidationIssue';
 import * as Settings from '../Settings';
-import { DirectiveIssue, validateInDocumentSettings } from '../Settings/InDocSettings';
+import type { DirectiveIssue } from '../Settings/InDocSettings';
+import { validateInDocumentSettings } from '../Settings/InDocSettings';
 import { CompoundWordsMethod, getDictionaryInternal } from '../SpellingDictionary';
 import { clean } from '../util/util';
 import { validateText as validateFullText } from './textValidator';

@@ -1,7 +1,8 @@
-import { GenSuggestionOptionsStrict, SuggestionOptions } from './genSuggestionsOptions';
+import type { GenSuggestionOptionsStrict, SuggestionOptions } from './genSuggestionsOptions';
 import { parseDictionary } from '../SimpleDictionaryParser';
 import * as Sug from './suggestAStar';
-import { SuggestionCollector, suggestionCollector, SuggestionCollectorOptions } from './suggestCollector';
+import type { SuggestionCollector, SuggestionCollectorOptions } from './suggestCollector';
+import { suggestionCollector } from './suggestCollector';
 import { Trie } from '../trie';
 import { CompoundWordsMethod } from './walker';
 import { clean } from '../trie-util';

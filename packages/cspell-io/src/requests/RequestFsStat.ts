@@ -1,5 +1,6 @@
-import { requestFactory, ServiceRequestFactoryRequestType } from '@cspell/cspell-service-bus';
-import { Stats } from '../models';
+import type { ServiceRequestFactoryRequestType } from '@cspell/cspell-service-bus';
+import { requestFactory } from '@cspell/cspell-service-bus';
+import type { Stats } from '../models';
 
 const RequestTypeStat = 'fs:stat' as const;
 interface RequestStatParams {

@@ -1,6 +1,7 @@
 import { opConcatMap, opFilter, opTake, pipe } from '@cspell/cspell-pipe/sync';
-import { SpellingDictionary } from 'cspell-dictionary';
-import { genSequence, Sequence } from 'gensequence';
+import type { SpellingDictionary } from 'cspell-dictionary';
+import type { Sequence } from 'gensequence';
+import { genSequence } from 'gensequence';
 import type { ValidationResult } from '../Models/ValidationResult';
 import * as Text from '../util/text';
 import * as TextRange from '../util/TextRange';

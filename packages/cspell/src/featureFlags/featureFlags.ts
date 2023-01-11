@@ -1,4 +1,5 @@
-import { FeatureFlags, getSystemFeatureFlags } from 'cspell-lib';
+import type { FeatureFlags } from 'cspell-lib';
+import { getSystemFeatureFlags } from 'cspell-lib';
 
 export function getFeatureFlags(): FeatureFlags {
     return getSystemFeatureFlags();

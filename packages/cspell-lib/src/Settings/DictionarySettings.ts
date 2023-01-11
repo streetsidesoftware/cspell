@@ -5,18 +5,20 @@ import type {
     DictionaryDefinitionCustom,
     DictionaryFileTypes,
     ReplaceMap,
+    DictionaryInformation,
 } from '@cspell/cspell-types';
 import * as path from 'path';
 import { resolveFile } from '../util/resolveFile';
-import {
+import type {
     CSpellSettingsInternal,
     DictionaryDefinitionInternal,
     DictionaryDefinitionInternalWithSource,
 } from '../Models/CSpellSettingsInternalDef';
-import { createDictionaryReferenceCollection, DictionaryReferenceCollection } from './DictionaryReferenceCollection';
-import { mapDictionaryInformationToWeightMap, WeightMap } from 'cspell-trie-lib';
-import { DictionaryInformation } from '@cspell/cspell-types';
-import { RequireOptional, UnionFields } from '../util/types';
+import type { DictionaryReferenceCollection } from './DictionaryReferenceCollection';
+import { createDictionaryReferenceCollection } from './DictionaryReferenceCollection';
+import type { WeightMap } from 'cspell-trie-lib';
+import { mapDictionaryInformationToWeightMap } from 'cspell-trie-lib';
+import type { RequireOptional, UnionFields } from '../util/types';
 import { clean } from '../util/util';
 
 export type DefMapArrayItem = [string, DictionaryDefinitionInternal];

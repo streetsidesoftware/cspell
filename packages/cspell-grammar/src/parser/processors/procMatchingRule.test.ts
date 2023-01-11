@@ -1,5 +1,5 @@
 import assert from 'assert';
-import { GrammarDef } from '../grammarDefinition';
+import type { GrammarDef } from '../grammarDefinition';
 import { normalizeGrammar } from '../grammarNormalizer';
 import { ScopePool } from '../scope';
 import type { TokenizedText } from '../types';

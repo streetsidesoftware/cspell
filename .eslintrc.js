@@ -66,6 +66,7 @@ const config = {
                     },
                 ],
                 'import/no-unresolved': 'off',
+                '@typescript-eslint/consistent-type-imports': 'error',
             },
         },
         {

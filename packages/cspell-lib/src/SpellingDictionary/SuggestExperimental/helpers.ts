@@ -1,4 +1,4 @@
-import { SuggestionResult, Feature } from './entities';
+import type { SuggestionResult, Feature } from './entities';
 
 /**
  * Comparison function to return the best (highest score) results first.

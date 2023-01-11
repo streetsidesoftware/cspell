@@ -1,6 +1,6 @@
-import { Issue, RunResult } from '@cspell/cspell-types';
-import { URI as Uri } from 'vscode-uri';
-import { Repository } from '../configDef';
+import type { Issue, RunResult } from '@cspell/cspell-types';
+import type { URI as Uri } from 'vscode-uri';
+import type { Repository } from '../configDef';
 
 export type Report = {
     fileIssues: SortedFileIssues;

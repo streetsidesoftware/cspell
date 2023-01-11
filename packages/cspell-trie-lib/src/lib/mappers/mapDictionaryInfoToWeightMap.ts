@@ -1,5 +1,6 @@
-import { SuggestionCostMapDef } from '..';
-import { addAdjustment, createWeightMap, PenaltyAdjustment, WeightMap } from '../distance/weightedMaps';
+import type { SuggestionCostMapDef } from '..';
+import type { PenaltyAdjustment, WeightMap } from '../distance/weightedMaps';
+import { addAdjustment, createWeightMap } from '../distance/weightedMaps';
 import type { DictionaryInformation } from '../models/DictionaryInformation';
 import { mapDictionaryInformation, mapDictionaryInformationToAdjustment } from './mapDictionaryInfo';
 

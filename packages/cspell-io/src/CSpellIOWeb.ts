@@ -1,4 +1,4 @@
-import { CSpellIO } from './CSpellIO';
+import type { CSpellIO } from './CSpellIO';
 import { ErrorNotImplemented } from './errors/ErrorNotImplemented';
 import { compareStats } from './common/stat';
 import type { Stats } from './models/Stats';

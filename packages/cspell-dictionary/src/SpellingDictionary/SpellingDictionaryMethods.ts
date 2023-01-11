@@ -1,8 +1,9 @@
-import { DictionaryInformation } from '@cspell/cspell-types';
-import { mapDictionaryInformationToWeightMap, SuggestionResult, WeightMap } from 'cspell-trie-lib';
+import type { DictionaryInformation } from '@cspell/cspell-types';
+import type { SuggestionResult, WeightMap } from 'cspell-trie-lib';
+import { mapDictionaryInformationToWeightMap } from 'cspell-trie-lib';
 import { clean } from '../util/clean';
 import { isUpperCase, removeUnboundAccents, ucFirst } from '../util/text';
-import { HasOptions, SearchOptions, SuggestArgs, SuggestOptions } from './SpellingDictionary';
+import type { HasOptions, SearchOptions, SuggestArgs, SuggestOptions } from './SpellingDictionary';
 
 export { impersonateCollector, suggestionCollector } from 'cspell-trie-lib';
 

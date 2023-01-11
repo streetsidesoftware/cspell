@@ -1,7 +1,7 @@
 import { createTriFromList } from '.';
 import { consolidate } from './consolidate';
 import { genSequence } from 'gensequence';
-import { TrieNode } from './TrieNode';
+import type { TrieNode } from './TrieNode';
 import { readFile } from 'fs-extra';
 import * as path from 'path';
 import { iteratorTrieWords, countNodes, createTrieRoot } from './trie-util';

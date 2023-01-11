@@ -1,5 +1,5 @@
-import { GrammarDef, Pattern, Repository } from '..';
-import {
+import type { GrammarDef, Pattern, Repository } from '..';
+import type {
     Captures,
     PatternBeginEnd,
     PatternInclude,
@@ -8,7 +8,7 @@ import {
     PatternName,
     PatternPatterns,
 } from './grammarDefinition';
-import {
+import type {
     GrammarRule,
     MatchRuleResult,
     NCaptures,
@@ -27,7 +27,8 @@ import {
 } from './grammarNormalized';
 import { isPatternBeginEnd, isPatternInclude, isPatternMatch, isPatternPatterns } from './grammarTypesHelpers';
 import { createMatchResult, createSimpleMatchResult } from './matchResult';
-import { Scope, ScopePool } from './scope';
+import type { Scope } from './scope';
+import { ScopePool } from './scope';
 import type { LineOffsetAnchored, MatchResult } from './types';
 
 export function normalizeGrammar(grammar: GrammarDef): NGrammar {

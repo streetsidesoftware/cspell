@@ -1,7 +1,7 @@
 import * as Shell from 'shelljs';
 import * as Path from 'path';
 import { readConfig, resolveArgs } from './config';
-import { Repository } from './configDef';
+import type { Repository } from './configDef';
 import { execAsync } from './sh';
 import { addRepository, checkoutRepositoryAsync, repositoryDir } from './repositoryHelper';
 import { checkAgainstSnapshot } from './snapshots';
@@ -9,7 +9,7 @@ import { shouldCheckRepo } from './shouldCheckRepo';
 import Chalk from 'chalk';
 import { formatExecOutput } from './outputHelper';
 import { PrefixLogger } from './PrefixLogger';
-import { Logger } from './types';
+import type { Logger } from './types';
 
 const config = readConfig();
 const cspellArgs = '-u --no-progress --relative --show-context --gitignore --gitignore-root=. ';

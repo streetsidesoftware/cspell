@@ -1,4 +1,5 @@
-import { requestFactory, ServiceRequestFactoryRequestType } from '@cspell/cspell-service-bus';
+import type { ServiceRequestFactoryRequestType } from '@cspell/cspell-service-bus';
+import { requestFactory } from '@cspell/cspell-service-bus';
 
 const RequestType = 'zlib:inflate' as const;
 interface RequestParams {

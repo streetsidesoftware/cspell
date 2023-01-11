@@ -1,12 +1,11 @@
+import type { SpellingDictionary, SpellingDictionaryCollection } from 'cspell-dictionary';
 import {
     createCollection,
     createForbiddenWordsDictionary,
     createIgnoreWordsDictionary,
     createSpellingDictionary,
-    SpellingDictionary,
-    SpellingDictionaryCollection,
 } from 'cspell-dictionary';
-import { CSpellSettingsInternal, DictionaryDefinitionInternal } from '../Models/CSpellSettingsInternalDef';
+import type { CSpellSettingsInternal, DictionaryDefinitionInternal } from '../Models/CSpellSettingsInternalDef';
 import { calcDictionaryDefsToLoad } from '../Settings/DictionarySettings';
 import { isDefined } from '../util/util';
 import { loadDictionary, loadDictionarySync, refreshCacheEntries } from './DictionaryLoader';

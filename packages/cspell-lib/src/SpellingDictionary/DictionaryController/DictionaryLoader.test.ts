@@ -1,8 +1,9 @@
 import * as path from 'path';
-import { DictionaryDefinitionInternal } from '../../Models/CSpellSettingsInternalDef';
+import type { DictionaryDefinitionInternal } from '../../Models/CSpellSettingsInternalDef';
 import { mapDictDefToInternal } from '../../Settings/DictionarySettings';
 import { clean } from '../../util/util';
-import { LoadOptions, DictionaryLoader } from './DictionaryLoader';
+import type { LoadOptions } from './DictionaryLoader';
+import { DictionaryLoader } from './DictionaryLoader';
 import { getCSpellIO } from '../../static';
 jest.mock('../../util/logger');
 

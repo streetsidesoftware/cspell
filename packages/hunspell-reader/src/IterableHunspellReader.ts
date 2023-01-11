@@ -1,10 +1,11 @@
 import * as fs from 'fs-extra';
-import { genSequence, Sequence } from 'gensequence';
+import type { Sequence } from 'gensequence';
+import { genSequence } from 'gensequence';
 import { decode } from 'iconv-lite';
-import { Aff } from './aff';
+import type { Aff } from './aff';
 import type { AffWord } from './affDef';
 import { parseAffFileToAff } from './affReader';
-import { WordInfo } from './types';
+import type { WordInfo } from './types';
 import { filterOrderedList } from './util';
 
 const defaultEncoding = 'UTF-8';

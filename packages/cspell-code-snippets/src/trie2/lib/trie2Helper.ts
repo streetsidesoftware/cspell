@@ -1,5 +1,7 @@
-import { Trie2, isTrieNode2Branch } from './trie2';
-import { TrieNode2, END_OF_WORD } from './TrieNode2';
+import type { Trie2 } from './trie2';
+import { isTrieNode2Branch } from './trie2';
+import type { TrieNode2 } from './TrieNode2';
+import { END_OF_WORD } from './TrieNode2';
 
 export function displayTrie2(trie: Trie2, sort = false, dot = '.'): string {
     function* walk(nodes: TrieNode2[], prefix: string): Generator<string> {

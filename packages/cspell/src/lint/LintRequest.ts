@@ -1,7 +1,8 @@
 import type { CSpellReporter, Issue } from '@cspell/cspell-types';
 import * as path from 'path';
-import { LinterOptions } from '../options';
-import { calcExcludeGlobInfo, GlobSrcInfo } from '../util/glob';
+import type { LinterOptions } from '../options';
+import type { GlobSrcInfo } from '../util/glob';
+import { calcExcludeGlobInfo } from '../util/glob';
 import * as util from '../util/util';
 
 const defaultContextRange = 20;

@@ -2,9 +2,9 @@ import type { Issue, RunResult } from '@cspell/cspell-types';
 import * as fs from 'fs-extra';
 import * as path from 'path';
 import { resolve as r } from 'path';
-import { TraceOptions } from '.';
+import type { TraceOptions } from '.';
 import * as App from './application';
-import { LinterOptions } from './options';
+import type { LinterOptions } from './options';
 import { InMemoryReporter } from './util/InMemoryReporter';
 import { asyncIterableToArray } from './util/async';
 

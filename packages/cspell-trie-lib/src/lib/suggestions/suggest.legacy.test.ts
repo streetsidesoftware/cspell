@@ -1,8 +1,8 @@
 import { Trie } from '../trie';
 import { isWordTerminationNode } from '../trie-util';
-import { TrieNode } from '../TrieNode';
+import type { TrieNode } from '../TrieNode';
 import * as Sug from './suggest';
-import { SuggestionResultBase } from './suggestCollector';
+import type { SuggestionResultBase } from './suggestCollector';
 import { walker } from './walker';
 
 describe('Validate Suggest', () => {

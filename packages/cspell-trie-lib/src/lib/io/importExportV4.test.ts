@@ -3,7 +3,7 @@ import { genSequence } from 'gensequence';
 import * as Trie from '..';
 import { resolveSample as resolveSamplePath } from '../../test/samples';
 import { consolidate } from '../consolidate';
-import { TrieNode } from '../TrieNode';
+import type { TrieNode } from '../TrieNode';
 import * as v3 from './importExportV3';
 import { importTrie, serializeTrie, __testing__ } from './importExportV4';
 

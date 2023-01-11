@@ -1,15 +1,16 @@
 import { clean, isWordTerminationNode } from '../trie-util';
-import { TrieRoot } from '../TrieNode';
-import { createSuggestionOptions, GenSuggestionOptions, SuggestionOptions } from './genSuggestionsOptions';
+import type { TrieRoot } from '../TrieNode';
+import type { GenSuggestionOptions, SuggestionOptions } from './genSuggestionsOptions';
+import { createSuggestionOptions } from './genSuggestionsOptions';
 import { visualLetterMaskMap } from './orthography';
-import {
+import type {
     MaxCost,
-    suggestionCollector,
     SuggestionCollectorOptions,
     SuggestionGenerator,
     SuggestionResult,
     SuggestionResultBase,
 } from './suggestCollector';
+import { suggestionCollector } from './suggestCollector';
 import { CompoundWordsMethod, hintedWalker, JOIN_SEPARATOR, WORD_SEPARATOR } from './walker';
 
 const baseCost = 100;

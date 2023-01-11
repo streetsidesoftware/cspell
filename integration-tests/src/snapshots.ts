@@ -1,6 +1,6 @@
 import * as fs from 'fs';
 import * as Path from 'path';
-import { Repository } from './configDef';
+import type { Repository } from './configDef';
 import * as Shell from 'shelljs';
 import * as Diff from 'jest-diff';
 

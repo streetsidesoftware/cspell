@@ -1,4 +1,5 @@
-import { createTextDocument, isTextDocument, TextDocument, updateTextDocument } from './TextDocument';
+import type { TextDocument } from './TextDocument';
+import { createTextDocument, isTextDocument, updateTextDocument } from './TextDocument';
 import { Uri } from './Uri';
 
 describe('TextDocument', () => {

@@ -1,4 +1,5 @@
-import { TrieNode, FLAG_WORD, TrieRoot } from './TrieNode';
+import type { TrieNode, TrieRoot } from './TrieNode';
+import { FLAG_WORD } from './TrieNode';
 import { trieNodeToRoot } from './trie-util';
 
 /**

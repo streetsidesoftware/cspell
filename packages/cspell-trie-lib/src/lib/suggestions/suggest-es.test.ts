@@ -1,5 +1,6 @@
-import { DictionaryInformation } from '@cspell/cspell-types';
-import { mapDictionaryInformationToWeightMap, WeightMap } from '..';
+import type { DictionaryInformation } from '@cspell/cspell-types';
+import type { WeightMap } from '..';
+import { mapDictionaryInformationToWeightMap } from '..';
 import { readTrie } from '../../test/dictionaries.test.helper';
 import { distanceAStarWeightedEx } from '../distance/distanceAStarWeighted';
 import { formatExResult } from '../distance/formatResultEx';

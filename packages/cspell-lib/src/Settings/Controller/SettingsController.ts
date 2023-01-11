@@ -1,4 +1,4 @@
-import { CSpellIO } from 'cspell-io';
+import type { CSpellIO } from 'cspell-io';
 
 /**
  * The settings controller manages requests to resolve configuration settings and files.

@@ -1,5 +1,6 @@
 import * as path from 'path';
-import { createReader, ReaderOptions } from './Reader';
+import type { ReaderOptions } from './Reader';
+import { createReader } from './Reader';
 
 const samples = path.join(__dirname, '..', '..', '..', 'Samples', 'dicts');
 

@@ -1,4 +1,4 @@
-import { MappedText } from '@cspell/cspell-types';
+import type { MappedText } from '@cspell/cspell-types';
 import { extractTextMapRangeOrigin, doesIntersect } from './TextMap';
 
 describe('TextMap', () => {

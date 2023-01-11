@@ -1,4 +1,5 @@
-import { CSpellIO, CSpellIONode } from 'cspell-io';
+import type { CSpellIO } from 'cspell-io';
+import { CSpellIONode } from 'cspell-io';
 
 const cspellIO = new CSpellIONode();
 

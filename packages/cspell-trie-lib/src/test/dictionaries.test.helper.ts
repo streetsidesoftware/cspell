@@ -1,6 +1,6 @@
 import { promises as fs } from 'fs';
 import * as path from 'path';
-import { Trie } from '../lib/trie';
+import type { Trie } from '../lib/trie';
 import { readTrieFile, readTrieFileFromConfig } from './reader.test.helper';
 import { resolveGlobalDict, resolveGlobalSample } from './samples';
 

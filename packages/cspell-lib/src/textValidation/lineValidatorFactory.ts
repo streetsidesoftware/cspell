@@ -1,7 +1,9 @@
 import { opConcatMap, opFilter, opMap, pipe, toArray } from '@cspell/cspell-pipe/sync';
-import { ParsedText } from '@cspell/cspell-types';
-import { CachingDictionary, createCachingDictionary, SearchOptions, SpellingDictionary } from 'cspell-dictionary';
-import { genSequence, Sequence } from 'gensequence';
+import type { ParsedText } from '@cspell/cspell-types';
+import type { CachingDictionary, SearchOptions, SpellingDictionary } from 'cspell-dictionary';
+import { createCachingDictionary } from 'cspell-dictionary';
+import type { Sequence } from 'gensequence';
+import { genSequence } from 'gensequence';
 import type { ValidationResult } from '../Models/ValidationResult';
 import * as RxPat from '../Settings/RegExpPatterns';
 import * as Text from '../util/text';

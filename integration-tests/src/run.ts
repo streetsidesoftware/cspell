@@ -1,5 +1,6 @@
 import { check } from './check';
-import { addRepository, listRepositories, ListRepositoryOptions } from './repositoryHelper';
+import type { ListRepositoryOptions } from './repositoryHelper';
+import { addRepository, listRepositories } from './repositoryHelper';
 import { createCommand } from 'commander';
 import * as commander from 'commander';
 import os from 'os';

@@ -1,7 +1,8 @@
-import { Dispatcher } from './Dispatcher';
+import type { Dispatcher } from './Dispatcher';
 import { ErrorServiceRequestDepthExceeded, ErrorUnhandledRequest, UnhandledHandlerError } from './errors';
 import type { Handler, HandlerFn, HandleRequest } from './handlers';
-import { createResponseFail, RequestResponseType, ServiceRequest } from './request';
+import type { RequestResponseType, ServiceRequest } from './request';
+import { createResponseFail } from './request';
 
 const MAX_DEPTH = 10;
 

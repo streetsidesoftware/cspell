@@ -1,6 +1,6 @@
 import * as Path from 'path';
 import strip from 'strip-ansi';
-import { TraceResult } from '../application';
+import type { TraceResult } from '../application';
 import { pad, width } from '../util/util';
 import chalk from 'chalk';
 

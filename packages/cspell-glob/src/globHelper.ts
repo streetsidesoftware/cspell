@@ -1,6 +1,6 @@
 /* eslint-disable no-irregular-whitespace */
 import * as Path from 'path';
-import {
+import type {
     GlobPattern,
     GlobPatternNormalized,
     GlobPatternWithOptionalRoot,

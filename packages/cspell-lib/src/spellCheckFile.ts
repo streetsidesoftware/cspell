@@ -2,12 +2,14 @@ import type { CSpellSettingsWithSourceTrace, CSpellUserSettings } from '@cspell/
 import { readFile } from 'fs/promises';
 import { URI, Utils as UriUtils } from 'vscode-uri';
 import { isGenerated, isGeneratedFile } from './LanguageIds';
-import { createTextDocument, TextDocument } from './Models/TextDocument';
-import { DocumentValidator, DocumentValidatorOptions } from './textValidation';
+import type { TextDocument } from './Models/TextDocument';
+import { createTextDocument } from './Models/TextDocument';
+import type { DocumentValidatorOptions } from './textValidation';
+import { DocumentValidator } from './textValidation';
 import { determineTextDocumentSettings } from './textValidation/determineTextDocumentSettings';
 import { isError } from './util/errors';
 import { clean } from './util/util';
-import { ValidateTextOptions, ValidationIssue } from './validator';
+import type { ValidateTextOptions, ValidationIssue } from './validator';
 
 export interface SpellCheckFileOptions extends ValidateTextOptions {
     /**

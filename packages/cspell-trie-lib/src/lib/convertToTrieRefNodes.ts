@@ -1,5 +1,6 @@
-import { TrieNode, FLAG_WORD } from './TrieNode';
-import { TrieRefNode } from './trieRef';
+import type { TrieNode } from './TrieNode';
+import { FLAG_WORD } from './TrieNode';
+import type { TrieRefNode } from './trieRef';
 import { genSequence } from 'gensequence';
 
 const MinReferenceCount = 3;

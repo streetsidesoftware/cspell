@@ -1,10 +1,10 @@
-import { CacheSettings, CSpellSettings } from '@cspell/cspell-types';
+import type { CacheSettings, CSpellSettings } from '@cspell/cspell-types';
 import assert from 'assert';
 import { stat } from 'fs-extra';
 import path from 'path';
-import { CacheOptions } from '.';
+import type { CacheOptions } from '.';
 import { isError } from '../errors';
-import { CSpellLintResultCache } from './CSpellLintResultCache';
+import type { CSpellLintResultCache } from './CSpellLintResultCache';
 import { DiskCache } from './DiskCache';
 import { DummyCache } from './DummyCache';
 

@@ -1,4 +1,5 @@
-import { getLogger, log, logError, Logger, logWarning, setLogger } from './logger';
+import type { Logger } from './logger';
+import { getLogger, log, logError, logWarning, setLogger } from './logger';
 
 const logger: Logger = {
     log: jest.fn(),

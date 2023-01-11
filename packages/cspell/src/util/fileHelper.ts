@@ -1,11 +1,13 @@
 import * as cspell from 'cspell-lib';
-import { CSpellUserSettings, Document, fileToDocument, Issue } from 'cspell-lib';
+import type { CSpellUserSettings, Document, Issue } from 'cspell-lib';
+import { fileToDocument } from 'cspell-lib';
 import { promises as fsp } from 'fs';
 import getStdin from 'get-stdin';
 import * as path from 'path';
 import { asyncAwait, asyncFlatten, asyncMap, asyncPipe, mergeAsyncIterables } from './async';
 import { IOError, toApplicationError, toError } from './errors';
-import { GlobOptions, globP } from './glob';
+import type { GlobOptions } from './glob';
+import { globP } from './glob';
 import { readStdin } from './stdin';
 
 const UTF8: BufferEncoding = 'utf8';

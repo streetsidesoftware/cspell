@@ -8,13 +8,12 @@ import * as cspell from 'cspell-lib';
 import * as path from 'path';
 import { format } from 'util';
 import { URI } from 'vscode-uri';
-import type { CSpellLintResultCache } from '../util/cache';
-import { calcCacheSettings, createCache, CreateCacheSettings } from '../util/cache';
+import type { CSpellLintResultCache, CreateCacheSettings } from '../util/cache';
+import { calcCacheSettings, createCache } from '../util/cache';
 import { CheckFailed, toApplicationError, toError } from '../util/errors';
+import type { ConfigInfo, FileResult } from '../util/fileHelper';
 import {
-    ConfigInfo,
     fileInfoToDocument,
-    FileResult,
     findFiles,
     isNotDir,
     readConfig,
@@ -26,7 +25,7 @@ import { buildGlobMatcher, extractGlobsFromMatcher, extractPatterns, normalizeGl
 import { loadReporters, mergeReporters } from '../util/reporters';
 import { getTimeMeasurer } from '../util/timer';
 import * as util from '../util/util';
-import { LintRequest } from './LintRequest';
+import type { LintRequest } from './LintRequest';
 import chalk from 'chalk';
 import { getFeatureFlags } from '../featureFlags';
 // eslint-disable-next-line @typescript-eslint/no-var-requires

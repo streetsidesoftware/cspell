@@ -1,7 +1,7 @@
 import { pipe } from '@cspell/cspell-pipe/sync';
 import { COMPOUND_FIX, FORBID_PREFIX, importTrie, Trie } from 'cspell-trie-lib';
 import * as HR from 'hunspell-reader';
-import { AffWord } from 'hunspell-reader';
+import type { AffWord } from 'hunspell-reader';
 import { readTextFile, readTextFileLines } from './readTextFile';
 import { parseFileLines } from './wordListParser';
 

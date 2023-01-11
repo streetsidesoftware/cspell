@@ -1,4 +1,5 @@
-import { TrieNode2, TrieNode2EOW, TrieNode2Branch, TrieNode2Root, END_OF_WORD as EOW } from './TrieNode2';
+import type { TrieNode2, TrieNode2EOW, TrieNode2Branch, TrieNode2Root } from './TrieNode2';
+import { END_OF_WORD as EOW } from './TrieNode2';
 
 export class Trie2 {
     constructor(readonly root: TrieNode2Root) {}

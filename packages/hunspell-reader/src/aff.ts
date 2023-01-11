@@ -1,9 +1,10 @@
 import * as GS from 'gensequence';
-import { genSequence as gs, Sequence } from 'gensequence';
+import type { Sequence } from 'gensequence';
+import { genSequence as gs } from 'gensequence';
 import * as util from 'util';
 import type { AffInfo, AffTransformFlags, AffWord, AffWordFlags, Fx, Rule, Substitution } from './affDef';
 import { Converter } from './converter';
-import { Mapping } from './types';
+import type { Mapping } from './types';
 import { filterOrderedList, isDefined } from './util';
 
 const log = false;

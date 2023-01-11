@@ -1,12 +1,7 @@
 import { assert } from './assert';
-import {
-    createResponse,
-    createResponseFail,
-    isServiceResponseFailure,
-    isServiceResponseSuccess,
-    RequestResponseType,
-} from './request';
-import { ServiceRequestFactory } from './ServiceRequestFactory';
+import type { RequestResponseType } from './request';
+import { createResponse, createResponseFail, isServiceResponseFailure, isServiceResponseSuccess } from './request';
+import type { ServiceRequestFactory } from './ServiceRequestFactory';
 import { requestFactory } from './requestFactory';
 import {
     createSystemServiceBus,

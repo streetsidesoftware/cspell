@@ -1,7 +1,8 @@
 import { CASE_INSENSITIVE_PREFIX, COMPOUND_FIX, FORBID_PREFIX } from './constants';
 import { memorizeLastCall } from './utils/memorizeLastCall';
 import { mergeDefaults } from './trie-util';
-import { FLAG_WORD, TrieNode, TrieRoot } from './TrieNode';
+import type { TrieNode, TrieRoot } from './TrieNode';
+import { FLAG_WORD } from './TrieNode';
 import type { PartialWithUndefined } from './types';
 
 type Root = PartialWithUndefined<TrieRoot>;

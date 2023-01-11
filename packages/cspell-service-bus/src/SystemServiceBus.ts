@@ -1,10 +1,11 @@
 import { assert } from './assert';
 import { createServiceBus, ServiceBus } from './bus';
-import { Dispatcher } from './Dispatcher';
-import { Handler, HandleRequest, HandleRequestFn, HandlerNext } from './handlers';
+import type { Dispatcher } from './Dispatcher';
+import type { Handler, HandleRequest, HandleRequestFn, HandlerNext } from './handlers';
 import { createRequestHandler } from './createRequestHandler';
-import { createResponse, RequestResponseType, ServiceRequest } from './request';
-import { ServiceRequestFactory, ServiceRequestFactoryRequestType } from './ServiceRequestFactory';
+import type { RequestResponseType, ServiceRequest } from './request';
+import { createResponse } from './request';
+import type { ServiceRequestFactory, ServiceRequestFactoryRequestType } from './ServiceRequestFactory';
 import { requestFactory } from './requestFactory';
 import { ErrorDuplicateSubsystem } from './errors';
 

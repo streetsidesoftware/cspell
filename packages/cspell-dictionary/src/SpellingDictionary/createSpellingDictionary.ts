@@ -1,6 +1,6 @@
 import { buildTrieFast, parseDictionaryLines } from 'cspell-trie-lib';
 import { deepEqual } from 'fast-equals';
-import { IterableLike } from '../util/IterableLike';
+import type { IterableLike } from '../util/IterableLike';
 import { AutoWeakCache, SimpleCache } from '../util/simpleCache';
 import type { DictionaryInfo, SpellingDictionary, SpellingDictionaryOptions } from './SpellingDictionary';
 import { SpellingDictionaryFromTrie } from './SpellingDictionaryFromTrie';

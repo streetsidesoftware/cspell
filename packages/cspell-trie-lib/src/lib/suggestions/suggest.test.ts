@@ -1,15 +1,11 @@
-import { GenSuggestionOptions, SuggestionOptions } from './genSuggestionsOptions';
+import type { GenSuggestionOptions, SuggestionOptions } from './genSuggestionsOptions';
 import { parseDictionary } from '../SimpleDictionaryParser';
 import { Trie } from '../trie';
 import { cleanCopy } from '../utils/util';
 import * as Walker from './walker';
 import { genCompoundableSuggestions, genSuggestions, suggest } from './suggest';
-import {
-    compSuggestionResults,
-    isSuggestionResult,
-    suggestionCollector,
-    SuggestionCollectorOptions,
-} from './suggestCollector';
+import type { SuggestionCollectorOptions } from './suggestCollector';
+import { compSuggestionResults, isSuggestionResult, suggestionCollector } from './suggestCollector';
 
 const defaultOptions: SuggestionCollectorOptions = {
     numSuggestions: 10,

@@ -1,6 +1,7 @@
 import { isDefined } from '../../trie-util';
-import { TrieNode, TrieRoot } from '../../TrieNode';
-import { CompoundWordsMethod, JOIN_SEPARATOR, WORD_SEPARATOR, YieldResult } from './walkerTypes';
+import type { TrieNode, TrieRoot } from '../../TrieNode';
+import type { YieldResult } from './walkerTypes';
+import { CompoundWordsMethod, JOIN_SEPARATOR, WORD_SEPARATOR } from './walkerTypes';
 
 /**
  * Ask for the next result.

@@ -1,4 +1,4 @@
-import { UndefinedToOptional } from '../types';
+import type { UndefinedToOptional } from '../types';
 
 export function isDefined<T>(a: T | undefined): a is T {
     return a !== undefined;
