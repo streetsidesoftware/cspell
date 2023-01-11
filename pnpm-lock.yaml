@@ -717,11 +717,131 @@ importers:
     dependencies:
       '@cspell/cspell-types': link:../../packages/cspell-types
 
-  test-packages/cspell-cli:
+  test-packages/cspell-eslint-plugin/test-cspell-eslint-plugin:
+    specifiers:
+      '@cspell/eslint-plugin': workspace:*
+      '@typescript-eslint/eslint-plugin': ^5.48.1
+      '@typescript-eslint/parser': ^5.48.1
+      eslint: ^8.31.0
+      eslint-config-prettier: ^8.6.0
+      eslint-plugin-import: ^2.26.0
+      eslint-plugin-jest: ^27.2.1
+      eslint-plugin-node: ^11.1.0
+      eslint-plugin-prettier: ^4.2.1
+      eslint-plugin-promise: ^6.1.1
+      prettier: ^2.8.2
+      typescript: ^4.9.4
+    devDependencies:
+      '@cspell/eslint-plugin': link:../../../packages/cspell-eslint-plugin
+      '@typescript-eslint/eslint-plugin': 5.48.1_3jon24igvnqaqexgwtxk6nkpse
+      '@typescript-eslint/parser': 5.48.1_iukboom6ndih5an6iafl45j2fe
+      eslint: 8.31.0
+      eslint-config-prettier: 8.6.0_eslint@8.31.0
+      eslint-plugin-import: 2.26.0_qdjeohovcytra7xto5vgmxssaq
+      eslint-plugin-jest: 27.2.1_ohsifnwenhmxgcp7mend4dnv74
+      eslint-plugin-node: 11.1.0_eslint@8.31.0
+      eslint-plugin-prettier: 4.2.1_iu5s7nk6dw7o3tajefwfiqfmge
+      eslint-plugin-promise: 6.1.1_eslint@8.31.0
+      prettier: 2.8.2
+      typescript: 4.9.4
+
+  test-packages/cspell-glob/test-cspell-glob:
+    specifiers:
+      cspell-glob: workspace:*
+    dependencies:
+      cspell-glob: link:../../../packages/cspell-glob
+
+  test-packages/cspell-io/test-cspell-io:
+    specifiers:
+      cspell-io: workspace:*
+    dependencies:
+      cspell-io: link:../../../packages/cspell-io
+
+  test-packages/cspell-lib/test-cspell-lib:
+    specifiers:
+      cspell-lib: workspace:*
+    dependencies:
+      cspell-lib: link:../../../packages/cspell-lib
+
+  test-packages/cspell-lib/test-cspell-lib-webpack:
+    specifiers:
+      '@cspell/cspell-bundled-dicts': workspace:*
+      '@cspell/cspell-types': workspace:*
+      cspell-lib: workspace:*
+      jest: ^29.3.1
+      ts-loader: ^9.4.2
+      typescript: ^4.9.4
+      webpack: ^5.75.0
+      webpack-cli: ^5.0.1
+    dependencies:
+      '@cspell/cspell-bundled-dicts': link:../../../packages/cspell-bundled-dicts
+    devDependencies:
+      '@cspell/cspell-types': link:../../../packages/cspell-types
+      cspell-lib: link:../../../packages/cspell-lib
+      jest: 29.3.1
+      ts-loader: 9.4.2_3fkjkrd3audxnith3e7fo4fnxi
+      typescript: 4.9.4
+      webpack: 5.75.0_webpack-cli@5.0.1
+      webpack-cli: 5.0.1_webpack@5.75.0
+
+  test-packages/cspell-pipe/test-cspell-pipe:
+    specifiers:
+      '@cspell/cspell-pipe': workspace:*
+      vitest: ^0.26.3
+    dependencies:
+      '@cspell/cspell-pipe': link:../../../packages/cspell-pipe
+    devDependencies:
+      vitest: 0.26.3
+
+  test-packages/cspell-pipe/test-cspell-pipe-esm:
+    specifiers:
+      '@cspell/cspell-pipe': workspace:*
+      vitest: ^0.26.3
+    dependencies:
+      '@cspell/cspell-pipe': link:../../../packages/cspell-pipe
+    devDependencies:
+      vitest: 0.26.3
+
+  test-packages/cspell-pipe/test-cspell-pipe-rollup:
+    specifiers:
+      '@cspell/cspell-pipe': workspace:*
+      '@rollup/plugin-commonjs': ^24.0.0
+      '@rollup/plugin-json': ^6.0.0
+      '@rollup/plugin-node-resolve': ^15.0.1
+      '@rollup/plugin-typescript': ^11.0.0
+      rollup: ^3.9.1
+      vitest: ^0.26.3
+    dependencies:
+      '@cspell/cspell-pipe': link:../../../packages/cspell-pipe
+    devDependencies:
+      '@rollup/plugin-commonjs': 24.0.0_rollup@3.9.1
+      '@rollup/plugin-json': 6.0.0_rollup@3.9.1
+      '@rollup/plugin-node-resolve': 15.0.1_rollup@3.9.1
+      '@rollup/plugin-typescript': 11.0.0_esmavzhadgk2idmxtiodxm33ma
+      rollup: 3.9.1
+      vitest: 0.26.3
+
+  test-packages/cspell-tools/test-cspell-tools:
+    specifiers:
+      '@cspell/cspell-tools': workspace:*
+      cspell: workspace:*
+    dependencies:
+      '@cspell/cspell-tools': link:../../../packages/cspell-tools
+      cspell: link:../../../packages/cspell
+
+  test-packages/cspell/test-cspell:
+    specifiers:
+      '@cspell/cspell-types': workspace:*
+      cspell: workspace:*
+    dependencies:
+      '@cspell/cspell-types': link:../../../packages/cspell-types
+      cspell: link:../../../packages/cspell
+
+  test-packages/cspell/test-cspell-cli:
     specifiers:
       cspell: workspace:*
     dependencies:
-      cspell: link:../../packages/cspell
+      cspell: link:../../../packages/cspell
 
   test-packages/dictionaries/companies:
     specifiers:
@@ -739,134 +859,28 @@ importers:
       '@cspell/cspell-tools': link:../../../packages/cspell-tools
       cspell: link:../../../packages/cspell
 
-  test-packages/example-cspell-lib-single-doc:
+  test-packages/examples/example-cspell-lib-single-doc:
     specifiers:
       cspell-lib: workspace:*
     dependencies:
-      cspell-lib: link:../../packages/cspell-lib
+      cspell-lib: link:../../../packages/cspell-lib
 
-  test-packages/test-cspell:
+  test-packages/yarn2/test-yarn3-med:
     specifiers:
-      '@cspell/cspell-types': workspace:*
-      cspell: workspace:*
-    dependencies:
-      '@cspell/cspell-types': link:../../packages/cspell-types
-      cspell: link:../../packages/cspell
-
-  test-packages/test-cspell-eslint-plugin:
-    specifiers:
-      '@cspell/eslint-plugin': workspace:*
-      '@typescript-eslint/eslint-plugin': ^5.48.1
-      '@typescript-eslint/parser': ^5.48.1
-      eslint: ^8.31.0
-      eslint-config-prettier: ^8.6.0
-      eslint-plugin-import: ^2.26.0
-      eslint-plugin-jest: ^27.2.1
-      eslint-plugin-node: ^11.1.0
-      eslint-plugin-prettier: ^4.2.1
-      eslint-plugin-promise: ^6.1.1
-      prettier: ^2.8.2
-      typescript: ^4.9.4
+      '@cspell/cspell-types': ^6.5.0
+      '@cspell/dict-medicalterms': ^2.0.0
     devDependencies:
-      '@cspell/eslint-plugin': link:../../packages/cspell-eslint-plugin
-      '@typescript-eslint/eslint-plugin': 5.48.1_3jon24igvnqaqexgwtxk6nkpse
-      '@typescript-eslint/parser': 5.48.1_iukboom6ndih5an6iafl45j2fe
-      eslint: 8.31.0
-      eslint-config-prettier: 8.6.0_eslint@8.31.0
-      eslint-plugin-import: 2.26.0_qdjeohovcytra7xto5vgmxssaq
-      eslint-plugin-jest: 27.2.1_ohsifnwenhmxgcp7mend4dnv74
-      eslint-plugin-node: 11.1.0_eslint@8.31.0
-      eslint-plugin-prettier: 4.2.1_iu5s7nk6dw7o3tajefwfiqfmge
-      eslint-plugin-promise: 6.1.1_eslint@8.31.0
-      prettier: 2.8.2
-      typescript: 4.9.4
+      '@cspell/cspell-types': link:../../../packages/cspell-types
+      '@cspell/dict-medicalterms': 2.0.0
 
-  test-packages/test-cspell-glob:
+  test-packages/yarn2/test-yarn3-sci:
     specifiers:
-      cspell-glob: workspace:*
+      '@cspell/cspell-types': ^6.5.0
+      '@cspell/dict-scientific-terms-us': ^2.0.0
     dependencies:
-      cspell-glob: link:../../packages/cspell-glob
-
-  test-packages/test-cspell-io:
-    specifiers:
-      cspell-io: workspace:*
-    dependencies:
-      cspell-io: link:../../packages/cspell-io
-
-  test-packages/test-cspell-lib:
-    specifiers:
-      cspell-lib: workspace:*
-    dependencies:
-      cspell-lib: link:../../packages/cspell-lib
-
-  test-packages/test-cspell-lib-webpack:
-    specifiers:
-      '@cspell/cspell-bundled-dicts': workspace:*
-      '@cspell/cspell-types': workspace:*
-      cspell-lib: workspace:*
-      jest: ^29.3.1
-      ts-loader: ^9.4.2
-      typescript: ^4.9.4
-      webpack: ^5.75.0
-      webpack-cli: ^5.0.1
-    dependencies:
-      '@cspell/cspell-bundled-dicts': link:../../packages/cspell-bundled-dicts
+      '@cspell/dict-scientific-terms-us': 2.0.0
     devDependencies:
-      '@cspell/cspell-types': link:../../packages/cspell-types
-      cspell-lib: link:../../packages/cspell-lib
-      jest: 29.3.1
-      ts-loader: 9.4.2_3fkjkrd3audxnith3e7fo4fnxi
-      typescript: 4.9.4
-      webpack: 5.75.0_webpack-cli@5.0.1
-      webpack-cli: 5.0.1_webpack@5.75.0
-
-  test-packages/test-cspell-pipe:
-    specifiers:
-      '@cspell/cspell-pipe': workspace:*
-      vitest: ^0.26.3
-    dependencies:
-      '@cspell/cspell-pipe': link:../../packages/cspell-pipe
-    devDependencies:
-      vitest: 0.26.3
-
-  test-packages/test-cspell-pipe-esm:
-    specifiers:
-      '@cspell/cspell-pipe': workspace:*
-      vitest: ^0.26.3
-    dependencies:
-      '@cspell/cspell-pipe': link:../../packages/cspell-pipe
-    devDependencies:
-      vitest: 0.26.3
-
-  test-packages/test-cspell-pipe-rollup:
-    specifiers:
-      '@cspell/cspell-pipe': workspace:*
-      '@rollup/plugin-commonjs': ^24.0.0
-      '@rollup/plugin-json': ^6.0.0
-      '@rollup/plugin-node-resolve': ^15.0.1
-      '@rollup/plugin-typescript': ^11.0.0
-      rollup: ^3.9.1
-      vitest: ^0.26.3
-    dependencies:
-      '@cspell/cspell-pipe': link:../../packages/cspell-pipe
-    devDependencies:
-      '@rollup/plugin-commonjs': 24.0.0_rollup@3.9.1
-      '@rollup/plugin-json': 6.0.0_rollup@3.9.1
-      '@rollup/plugin-node-resolve': 15.0.1_rollup@3.9.1
-      '@rollup/plugin-typescript': 11.0.0_esmavzhadgk2idmxtiodxm33ma
-      rollup: 3.9.1
-      vitest: 0.26.3
-
-  test-packages/test-cspell-tools:
-    specifiers:
-      '@cspell/cspell-tools': workspace:*
-      cspell: workspace:*
-    dependencies:
-      '@cspell/cspell-tools': link:../../packages/cspell-tools
-      cspell: link:../../packages/cspell
-
-  test-packages/yarn2:
-    specifiers: {}
+      '@cspell/cspell-types': link:../../../packages/cspell-types
 
   website:
     specifiers:
@@ -1475,7 +1489,7 @@ packages:
       '@babel/core': ^7.0.0-0
     dependencies:
       '@babel/core': 7.12.9
-      '@babel/helper-plugin-utils': 7.10.4
+      '@babel/helper-plugin-utils': 7.20.2
       '@babel/plugin-syntax-object-rest-spread': 7.8.3_@babel+core@7.12.9
       '@babel/plugin-transform-parameters': 7.20.7_@babel+core@7.12.9
     dev: false
@@ -2523,6 +2537,10 @@ packages:
     resolution: {integrity: sha512-9j3t1UXsy3M1B8+LN8wPO73KzX7v94GBfefWKSMJDpBvDUnOjwxabnj9ICBOVErBPwURS+LkjJbgVXkvr1OiPQ==}
     dev: true
 
+  /@cspell/dict-medicalterms/2.0.0:
+    resolution: {integrity: sha512-My/vWkaqp6X22MA9Kn08sv+9PDxbWHiCnOtf9oE3WFBXTIDP+K2J4j4ioZfUg6Q3r0erQnnA16QUVkZ5eKffFQ==}
+    dev: true
+
   /@cspell/dict-nl-nl/1.0.35:
     resolution: {integrity: sha512-acqP639XKYbWuMgdR589bLzyO6kBNlKvHnbDTgrhBjDVZZaIGbhcNR9EsgNP9W8Q4b+Sl1R7bsW6Xr2W4nxaqg==}
     dev: true
@@ -2568,6 +2586,10 @@ packages:
 
   /@cspell/dict-scala/4.0.0:
     resolution: {integrity: sha512-ugdjt66/Ah34yF3u3DUNjCHXnBqIuxUUfdeBobbGxfm29CNgidrISV1NUh+xi8tPynMzSTpGbBiArFBH6on5XQ==}
+    dev: false
+
+  /@cspell/dict-scientific-terms-us/2.0.0:
+    resolution: {integrity: sha512-AwAGd4+Ek5oa/ipGzXCHj2q9RXcxPP/EmwuXh+voPi6jBCM3Void7r47cjMx6gsmNddmFzIIPOuJk90uoDKZzg==}
     dev: false
 
   /@cspell/dict-software-terms/3.1.0:
@@ -5058,7 +5080,7 @@ packages:
     resolution: {integrity: sha512-9K4zoImiZc3HlIp6AVUDE4CWYx22a+lhSZMYNpbjW04+YF0KWj4pJXnEMjdnFTiQibFFmElcsasJXDbdI/EPhA==}
     dependencies:
       '@types/eslint': 8.4.10
-      '@types/estree': 0.0.51
+      '@types/estree': 1.0.0
 
   /@types/eslint/8.4.10:
     resolution: {integrity: sha512-Sl/HOqN8NKPmhWo2VBEPm0nvHnu2LL3v9vKo8MEq0EtbJ4eVzGPl41VNPvn5E1i5poMk4/XD8UriLHpJvEP/Nw==}
@@ -5300,7 +5322,7 @@ packages:
   /@types/sax/1.2.4:
     resolution: {integrity: sha512-pSAff4IAxJjfAXUG6tFkO7dsSbTmf8CtUpfhhZ5VhkRpC4628tJhh3+V6H1E+/Gs9piSzYKT5yzHO5M4GG9jkw==}
     dependencies:
-      '@types/node': 17.0.45
+      '@types/node': 18.11.18
     dev: false
 
   /@types/scheduler/0.16.2:
