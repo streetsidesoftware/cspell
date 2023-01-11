@@ -1,10 +1,10 @@
 import * as cspell from '../index';
 import * as path from 'path';
-import * as fsp from 'fs-extra';
+import * as fs from 'fs';
 import * as util from '../util/util';
 
 const sampleFilename = path.join(__dirname, '../../samples/Seattle.fa.md');
-const text = fsp.readFileSync(sampleFilename, 'utf8').toString();
+const text = fs.readFileSync(sampleFilename, 'utf8').toString();
 const frenchConfig = require.resolve('@cspell/dict-fa-ir/cspell-ext.json');
 
 describe('Validate that Persian text is correctly checked.', () => {

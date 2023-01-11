@@ -1,5 +1,5 @@
 import type { CSpellSettingsWithSourceTrace, CSpellUserSettings } from '@cspell/cspell-types';
-import { readFile } from 'fs-extra';
+import { readFile } from 'fs/promises';
 import { URI, Utils as UriUtils } from 'vscode-uri';
 import { isGenerated, isGeneratedFile } from './LanguageIds';
 import { createTextDocument, TextDocument } from './Models/TextDocument';

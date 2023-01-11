@@ -1,5 +1,5 @@
 import * as Commander from 'commander';
-import * as fs from 'fs-extra';
+import * as fs from 'fs/promises';
 import * as path from 'path';
 import * as app from './app';
 import { readTextFile } from './compiler/readTextFile';

@@ -1,5 +1,5 @@
 import type { CSpellUserSettings } from '@cspell/cspell-types';
-import * as fs from 'fs-extra';
+import * as fs from 'fs/promises';
 import * as path from 'path';
 import { createCSpellSettingsInternal as csi } from '../Models/CSpellSettingsInternalDef';
 import { getDefaultBundledSettings, loadConfig } from '../Settings';
@@ -9,6 +9,9 @@ import * as Dictionaries from './Dictionaries';
 import { isSpellingDictionaryLoadError } from './SpellingDictionaryError';
 
 // cspell:ignore café rhône
+const mkdirp = async (p: string) => {
+    await fs.mkdir(p, { recursive: true });
+};
 
 const root = path.resolve(__dirname, '../..');
 const samples = path.join(root, 'samples');
@@ -182,7 +185,7 @@ describe('Validate Refresh', () => {
         log(`Start: ${expect.getState().currentTestName}; ts: ${Date.now()}`);
         const tempDictPath = tempPath('words.txt');
         const tempDictPathNotFound = tempPath('not-found.txt');
-        await fs.mkdirp(path.dirname(tempDictPath));
+        await mkdirp(path.dirname(tempDictPath));
         await fs.writeFile(tempDictPath, 'one\ntwo\nthree\n');
         const settings = getDefaultBundledSettings();
         const defs = (settings.dictionaryDefinitions || []).concat([
@@ -229,7 +232,7 @@ describe('Validate Refresh', () => {
     test('Refresh Dictionary Cache Sync', async () => {
         log(`Start: ${expect.getState().currentTestName}; ts: ${Date.now()}`);
         const tempDictPath = tempPath('words_sync.txt');
-        await fs.mkdirp(path.dirname(tempDictPath));
+        await mkdirp(path.dirname(tempDictPath));
         await fs.writeFile(tempDictPath, 'one\ntwo\nthree\n');
         const settings = getDefaultBundledSettings();
         const defs = (settings.dictionaryDefinitions || []).concat([

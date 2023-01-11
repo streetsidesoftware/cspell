@@ -1,11 +1,15 @@
-import { opMap, pipe, opAppend } from '@cspell/cspell-pipe/sync';
+import { opAppend, opMap, pipe } from '@cspell/cspell-pipe/sync';
 import * as Trie from 'cspell-trie-lib';
-import { mkdirp } from 'fs-extra';
+import { mkdir } from 'fs/promises';
 import * as path from 'path';
 import { CompileOptions } from './CompileOptions';
 import { writeSeqToFile } from './fileWriter';
 import { getLogger } from './logger';
 import { normalizeTargetWords } from './wordListParser';
+
+const mkdirp = async (p: string) => {
+    await mkdir(p, { recursive: true });
+};
 
 // Indicate that a word list has already been processed.
 const wordListHeader = `

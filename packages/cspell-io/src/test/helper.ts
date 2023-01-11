@@ -1,5 +1,9 @@
 import * as path from 'path';
-import { mkdirp } from 'fs-extra';
+import { mkdir } from 'fs/promises';
+
+const mkdirp = async (p: string) => {
+    await mkdir(p, { recursive: true });
+};
 
 const pathPackageRoot = path.join(__dirname, '../..');
 const pathSamples = path.join(pathPackageRoot, 'samples');
