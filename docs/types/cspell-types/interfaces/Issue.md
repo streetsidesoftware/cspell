@@ -38,7 +38,7 @@ Omit.col
 
 #### Defined in
 
-[TextOffset.ts:21](https://github.com/streetsidesoftware/cspell/blob/8b25077/packages/cspell-types/src/TextOffset.ts#L21)
+[TextOffset.ts:21](https://github.com/streetsidesoftware/cspell/blob/d20c1f2/packages/cspell-types/src/TextOffset.ts#L21)
 
 ___
 
@@ -50,7 +50,7 @@ text surrounding the issue text
 
 #### Defined in
 
-[CSpellReporter.ts:16](https://github.com/streetsidesoftware/cspell/blob/8b25077/packages/cspell-types/src/CSpellReporter.ts#L16)
+[CSpellReporter.ts:16](https://github.com/streetsidesoftware/cspell/blob/d20c1f2/packages/cspell-types/src/CSpellReporter.ts#L16)
 
 ___
 
@@ -62,7 +62,7 @@ true if the issue has been flagged as a forbidden word.
 
 #### Defined in
 
-[CSpellReporter.ts:20](https://github.com/streetsidesoftware/cspell/blob/8b25077/packages/cspell-types/src/CSpellReporter.ts#L20)
+[CSpellReporter.ts:20](https://github.com/streetsidesoftware/cspell/blob/d20c1f2/packages/cspell-types/src/CSpellReporter.ts#L20)
 
 ___
 
@@ -74,7 +74,7 @@ Issues are spelling issues unless otherwise specified.
 
 #### Defined in
 
-[CSpellReporter.ts:32](https://github.com/streetsidesoftware/cspell/blob/8b25077/packages/cspell-types/src/CSpellReporter.ts#L32)
+[CSpellReporter.ts:32](https://github.com/streetsidesoftware/cspell/blob/d20c1f2/packages/cspell-types/src/CSpellReporter.ts#L32)
 
 ___
 
@@ -90,7 +90,7 @@ Omit.length
 
 #### Defined in
 
-[TextOffset.ts:14](https://github.com/streetsidesoftware/cspell/blob/8b25077/packages/cspell-types/src/TextOffset.ts#L14)
+[TextOffset.ts:14](https://github.com/streetsidesoftware/cspell/blob/d20c1f2/packages/cspell-types/src/TextOffset.ts#L14)
 
 ___
 
@@ -104,7 +104,7 @@ Omit.line
 
 #### Defined in
 
-[TextOffset.ts:22](https://github.com/streetsidesoftware/cspell/blob/8b25077/packages/cspell-types/src/TextOffset.ts#L22)
+[TextOffset.ts:22](https://github.com/streetsidesoftware/cspell/blob/d20c1f2/packages/cspell-types/src/TextOffset.ts#L22)
 
 ___
 
@@ -116,7 +116,7 @@ Optional message to show.
 
 #### Defined in
 
-[CSpellReporter.ts:36](https://github.com/streetsidesoftware/cspell/blob/8b25077/packages/cspell-types/src/CSpellReporter.ts#L36)
+[CSpellReporter.ts:36](https://github.com/streetsidesoftware/cspell/blob/d20c1f2/packages/cspell-types/src/CSpellReporter.ts#L36)
 
 ___
 
@@ -132,7 +132,7 @@ Omit.offset
 
 #### Defined in
 
-[TextOffset.ts:10](https://github.com/streetsidesoftware/cspell/blob/8b25077/packages/cspell-types/src/TextOffset.ts#L10)
+[TextOffset.ts:10](https://github.com/streetsidesoftware/cspell/blob/d20c1f2/packages/cspell-types/src/TextOffset.ts#L10)
 
 ___
 
@@ -146,7 +146,7 @@ Omit.row
 
 #### Defined in
 
-[TextOffset.ts:20](https://github.com/streetsidesoftware/cspell/blob/8b25077/packages/cspell-types/src/TextOffset.ts#L20)
+[TextOffset.ts:20](https://github.com/streetsidesoftware/cspell/blob/d20c1f2/packages/cspell-types/src/TextOffset.ts#L20)
 
 ___
 
@@ -158,7 +158,7 @@ An optional array of replacement strings.
 
 #### Defined in
 
-[CSpellReporter.ts:24](https://github.com/streetsidesoftware/cspell/blob/8b25077/packages/cspell-types/src/CSpellReporter.ts#L24)
+[CSpellReporter.ts:24](https://github.com/streetsidesoftware/cspell/blob/d20c1f2/packages/cspell-types/src/CSpellReporter.ts#L24)
 
 ___
 
@@ -170,7 +170,7 @@ An optional array of suggestions.
 
 #### Defined in
 
-[CSpellReporter.ts:28](https://github.com/streetsidesoftware/cspell/blob/8b25077/packages/cspell-types/src/CSpellReporter.ts#L28)
+[CSpellReporter.ts:28](https://github.com/streetsidesoftware/cspell/blob/d20c1f2/packages/cspell-types/src/CSpellReporter.ts#L28)
 
 ___
 
@@ -187,7 +187,7 @@ Omit.text
 
 #### Defined in
 
-[TextOffset.ts:6](https://github.com/streetsidesoftware/cspell/blob/8b25077/packages/cspell-types/src/TextOffset.ts#L6)
+[TextOffset.ts:6](https://github.com/streetsidesoftware/cspell/blob/d20c1f2/packages/cspell-types/src/TextOffset.ts#L6)
 
 ___
 
@@ -201,4 +201,4 @@ Omit.uri
 
 #### Defined in
 
-[TextOffset.ts:18](https://github.com/streetsidesoftware/cspell/blob/8b25077/packages/cspell-types/src/TextOffset.ts#L18)
+[TextOffset.ts:18](https://github.com/streetsidesoftware/cspell/blob/d20c1f2/packages/cspell-types/src/TextOffset.ts#L18)
