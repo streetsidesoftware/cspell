@@ -805,8 +805,11 @@ importers:
   test-packages/cspell-pipe/test-cspell-pipe-rollup:
     specifiers:
       '@cspell/cspell-pipe': workspace:*
+      vitest: ^0.26.3
     dependencies:
       '@cspell/cspell-pipe': link:../../../packages/cspell-pipe
+    devDependencies:
+      vitest: 0.26.3
 
   test-packages/cspell-tools/test-cspell-tools:
     specifiers:
@@ -815,6 +818,33 @@ importers:
     dependencies:
       '@cspell/cspell-tools': link:../../../packages/cspell-tools
       cspell: link:../../../packages/cspell
+
+  test-packages/cspell-types/test-cspell-types-cjs:
+    specifiers:
+      '@cspell/cspell-types': workspace:*
+      vitest: ^0.26.3
+    dependencies:
+      '@cspell/cspell-types': link:../../../packages/cspell-types
+    devDependencies:
+      vitest: 0.26.3
+
+  test-packages/cspell-types/test-cspell-types-esm:
+    specifiers:
+      '@cspell/cspell-types': workspace:*
+      vitest: ^0.26.3
+    dependencies:
+      '@cspell/cspell-types': link:../../../packages/cspell-types
+    devDependencies:
+      vitest: 0.26.3
+
+  test-packages/cspell-types/test-cspell-types-rollup:
+    specifiers:
+      '@cspell/cspell-types': workspace:*
+      vitest: ^0.26.3
+    dependencies:
+      '@cspell/cspell-types': link:../../../packages/cspell-types
+    devDependencies:
+      vitest: 0.26.3
 
   test-packages/cspell/test-cspell:
     specifiers:
