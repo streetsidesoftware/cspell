@@ -3,6 +3,7 @@ import type { DictionaryDefinition, DictionaryDefinitionLegacy } from '@cspell/c
 import * as fsp from 'fs/promises';
 import * as os from 'os';
 import * as path from 'path';
+
 import { getDefaultBundledSettings } from './DefaultSettings';
 import { createDictionaryReferenceCollection as createRefCol } from './DictionaryReferenceCollection';
 import * as DictSettings from './DictionarySettings';

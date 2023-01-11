@@ -1,5 +1,6 @@
 import { opAppend, pipe } from '@cspell/cspell-pipe/sync';
 import type { CompoundWordsMethod, SuggestionCollector, SuggestionResult } from 'cspell-trie-lib';
+
 import { mapperRemoveCaseAndAccents } from '../util/textMappers';
 import * as defaults from './defaults';
 import type {
@@ -11,7 +12,7 @@ import type {
     SpellingDictionaryOptions,
     SuggestOptions,
 } from './SpellingDictionary';
-import { processEntriesToTyposDef, type TypoEntry, type TyposDef } from './Typos';
+import { type TypoEntry, type TyposDef, processEntriesToTyposDef } from './Typos';
 import { extractAllSuggestions, extractIgnoreValues } from './Typos/util';
 
 interface Found {

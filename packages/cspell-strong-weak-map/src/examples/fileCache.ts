@@ -1,5 +1,6 @@
-import { StrongWeakMap } from '..';
 import { promises as fs } from 'fs';
+
+import { StrongWeakMap } from '..';
 
 const cache = new StrongWeakMap<string, Promise<string>>();
 

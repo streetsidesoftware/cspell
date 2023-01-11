@@ -1,7 +1,8 @@
-import * as fileWriter from './fileWriter';
 import { loremIpsum } from 'lorem-ipsum';
-import { readFile } from './fileReader';
+
 import { makePathToFile, pathToTemp } from '../../test/helper';
+import { readFile } from './fileReader';
+import * as fileWriter from './fileWriter';
 
 describe('Validate the writer', () => {
     test.each`

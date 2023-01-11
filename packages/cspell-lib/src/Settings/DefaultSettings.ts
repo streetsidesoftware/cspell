@@ -1,5 +1,6 @@
 import type { PredefinedPatterns, RegExpPatternDefinition } from '@cspell/cspell-types';
 import { parsers } from 'cspell-grammar';
+
 import type { CSpellSettingsInternal } from '../Models/CSpellSettingsInternalDef';
 import { createCSpellSettingsInternal } from '../Models/CSpellSettingsInternalDef';
 import { PatternRegExp } from '../Models/PatternRegExp';

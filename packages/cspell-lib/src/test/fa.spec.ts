@@ -1,6 +1,7 @@
-import * as cspell from '../index';
-import * as path from 'path';
 import * as fs from 'fs';
+import * as path from 'path';
+
+import * as cspell from '../index';
 import * as util from '../util/util';
 
 const sampleFilename = path.join(__dirname, '../../samples/Seattle.fa.md');

@@ -1,6 +1,6 @@
+import type { Dispatcher } from './Dispatcher';
 import type { RequestResponseType, ServiceRequest } from './request';
 import type { ServiceRequestFactory, ServiceRequestFactoryRequestType } from './ServiceRequestFactory';
-import type { Dispatcher } from './Dispatcher';
 
 export type HandleRequestFn<R extends ServiceRequest> = (
     request: R,

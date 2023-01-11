@@ -1,5 +1,6 @@
-import { createLapRecorder, createTimer, polyHrTime } from './timer';
 import { promisify } from 'util';
+
+import { createLapRecorder, createTimer, polyHrTime } from './timer';
 
 const delay = promisify(setTimeout);
 

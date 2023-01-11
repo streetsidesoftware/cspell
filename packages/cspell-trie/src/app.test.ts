@@ -1,6 +1,7 @@
-import * as app from './app';
 import * as Commander from 'commander';
 import * as Path from 'path';
+
+import * as app from './app';
 
 const projectRoot = Path.join(__dirname, '..');
 

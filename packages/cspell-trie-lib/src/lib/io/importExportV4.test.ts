@@ -1,11 +1,12 @@
 import { readFile, writeFile } from 'fs-extra';
 import { genSequence } from 'gensequence';
-import * as Trie from '..';
+
 import { resolveSample as resolveSamplePath } from '../../test/samples';
+import * as Trie from '..';
 import { consolidate } from '../consolidate';
 import type { TrieNode } from '../TrieNode';
 import * as v3 from './importExportV3';
-import { importTrie, serializeTrie, __testing__ } from './importExportV4';
+import { __testing__, importTrie, serializeTrie } from './importExportV4';
 
 const sampleFile = resolveSamplePath('sampleV4.trie');
 

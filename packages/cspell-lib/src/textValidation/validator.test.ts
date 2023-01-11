@@ -1,9 +1,10 @@
 import type { CSpellSettings } from '@cspell/cspell-types';
 import { loremIpsum } from 'lorem-ipsum';
-import type { ValidationIssue } from '.';
+
 import { mergeSettings } from '../Settings';
 import { getDefaultSettings } from '../Settings/DefaultSettings';
 import * as tds from '../Settings/TextDocumentSettings';
+import type { ValidationIssue } from '.';
 import * as Validator from './validator';
 
 // cSpell:ignore brouwn jumpped lazzy wrongg mispelled ctrip nmove mischecked

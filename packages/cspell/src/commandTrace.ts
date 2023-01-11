@@ -1,5 +1,6 @@
 import type { Command } from 'commander';
 import { Option as CommanderOption } from 'commander';
+
 import * as App from './application';
 import { emitTraceResults } from './emitters/traceEmitter';
 import type { TraceOptions } from './options';

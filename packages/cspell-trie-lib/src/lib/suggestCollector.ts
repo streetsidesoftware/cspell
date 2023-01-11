@@ -1,13 +1,6 @@
 /**
  * This file is here to support code the referenced suggest directly and limit the exports.
  */
-export {
-    compSuggestionResults,
-    defaultSuggestionCollectorOptions,
-    impersonateCollector,
-    isSuggestionResult,
-    suggestionCollector,
-} from './suggestions/suggestCollector';
 export type {
     Cost,
     FilterWordFn,
@@ -19,4 +12,11 @@ export type {
     SuggestionCollectorOptions,
     SuggestionGenerator,
     SuggestionResult,
+} from './suggestions/suggestCollector';
+export {
+    compSuggestionResults,
+    defaultSuggestionCollectorOptions,
+    impersonateCollector,
+    isSuggestionResult,
+    suggestionCollector,
 } from './suggestions/suggestCollector';

@@ -5,6 +5,7 @@ import type {
     ReporterSettings,
     RunResult,
 } from '@cspell/cspell-types';
+
 import { ApplicationError, toError } from './errors';
 
 type StandardEmitters = Omit<CSpellReporter, 'result'>;

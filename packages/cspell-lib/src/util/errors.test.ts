@@ -1,4 +1,4 @@
-import { isErrnoException, isError, toError, UnknownError, __testing__ } from './errors';
+import { __testing__, isErrnoException, isError, toError, UnknownError } from './errors';
 
 class MyError extends Error {
     constructor(msg: string) {

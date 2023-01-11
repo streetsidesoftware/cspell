@@ -1,4 +1,5 @@
 import { describe, expect, test } from 'vitest';
+
 import { toArray } from '../helpers/index.js';
 import { pipeAsync, pipeSync } from '../pipe.js';
 import { opUnique } from './unique.js';

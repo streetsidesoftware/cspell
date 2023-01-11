@@ -1,4 +1,4 @@
-import { red, green, cyan } from 'chalk';
+import { cyan, green, red } from 'chalk';
 import { format } from 'util';
 
 export interface ExecOutput {

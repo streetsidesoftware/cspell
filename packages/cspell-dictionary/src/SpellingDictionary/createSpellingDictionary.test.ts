@@ -1,4 +1,5 @@
 import type { DictionaryInformation } from '@cspell/cspell-types';
+
 import type { SpellingDictionaryOptions } from '.';
 import { createFailedToLoadDictionary, createSpellingDictionary } from './createSpellingDictionary';
 

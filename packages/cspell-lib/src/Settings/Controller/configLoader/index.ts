@@ -1,4 +1,5 @@
 export {
+    __testing__,
     clearCachedSettingsFiles,
     ConfigLoader,
     createConfigLoader,
@@ -15,7 +16,6 @@ export {
     searchForConfig,
     searchForConfigSync,
     sectionCSpell,
-    __testing__,
 } from './configLoader';
 export { extractImportErrors, ImportFileRefWithError } from './extractImportErrors';
 export { readSettings } from './readSettings';

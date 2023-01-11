@@ -1,4 +1,5 @@
-import { pipe, opMap, opConcatMap, opFilter } from '@cspell/cspell-pipe/sync';
+import { opConcatMap, opFilter, opMap, pipe } from '@cspell/cspell-pipe/sync';
+
 import * as Text from './text';
 
 const regNonWord = /[^\p{L}\p{M}' ]+/giu;

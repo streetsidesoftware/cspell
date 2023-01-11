@@ -1,5 +1,6 @@
 import type { Sequence } from 'gensequence';
 import { genSequence } from 'gensequence';
+
 import { defaultTrieOptions } from './constants';
 import type { PartialTrieOptions, TrieNode, TrieOptions, TrieRoot } from './TrieNode';
 import { ChildMap, FLAG_WORD } from './TrieNode';

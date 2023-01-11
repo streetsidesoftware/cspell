@@ -1,5 +1,6 @@
-import { resolveModuleSync } from './resolve';
 import * as Path from 'path';
+
+import { resolveModuleSync } from './resolve';
 
 const found = {
     error: undefined,

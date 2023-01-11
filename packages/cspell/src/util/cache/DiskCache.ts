@@ -2,6 +2,7 @@ import assert from 'assert';
 import * as crypto from 'crypto';
 import * as fs from 'fs';
 import { dirname, isAbsolute as isAbsolutePath, relative as relativePath, resolve as resolvePath } from 'path';
+
 import type { FileResult } from '../../util/fileHelper';
 import { readFileInfo } from '../../util/fileHelper';
 import type { CSpellLintResultCache } from './CSpellLintResultCache';

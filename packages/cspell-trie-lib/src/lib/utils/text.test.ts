@@ -1,4 +1,4 @@
-import { expandRange, expandCharacterSet } from './text';
+import { expandCharacterSet, expandRange } from './text';
 
 describe('text', () => {
     test.each`

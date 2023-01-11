@@ -1,4 +1,5 @@
 import type { TextOffset } from '@cspell/cspell-types';
+
 import * as RegPat from '../Settings/RegExpPatterns';
 import { regExMatchCommonHexFormats, regExMatchUrls } from '../Settings/RegExpPatterns';
 import { calculateTextDocumentOffsets } from './text';

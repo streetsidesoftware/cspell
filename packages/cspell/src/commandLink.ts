@@ -1,4 +1,5 @@
 import type { Command } from 'commander';
+
 import {
     addPathsToGlobalImports,
     addPathsToGlobalImportsResultToTable,

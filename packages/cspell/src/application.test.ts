@@ -2,11 +2,12 @@ import type { Issue, RunResult } from '@cspell/cspell-types';
 import * as fs from 'fs-extra';
 import * as path from 'path';
 import { resolve as r } from 'path';
+
 import type { TraceOptions } from '.';
 import * as App from './application';
 import type { LinterOptions } from './options';
-import { InMemoryReporter } from './util/InMemoryReporter';
 import { asyncIterableToArray } from './util/async';
+import { InMemoryReporter } from './util/InMemoryReporter';
 
 const getStdinResult = {
     value: '',

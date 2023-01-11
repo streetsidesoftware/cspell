@@ -1,2 +1,2 @@
-export * from './TrieNode2';
 export * from './trie2';
+export * from './TrieNode2';

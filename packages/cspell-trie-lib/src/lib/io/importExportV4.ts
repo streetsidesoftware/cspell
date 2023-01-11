@@ -24,6 +24,7 @@
 import { opConcatMap, opFilter, pipe } from '@cspell/cspell-pipe/sync';
 import type { Sequence } from 'gensequence';
 import { genSequence } from 'gensequence';
+
 import { trieNodeToRoot } from '../trie-util';
 import type { TrieNode, TrieRoot } from '../TrieNode';
 import { FLAG_WORD } from '../TrieNode';

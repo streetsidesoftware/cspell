@@ -1,4 +1,5 @@
 import assert from 'assert';
+
 import type { MappedText } from './types';
 
 export function appendMappedText(a: MappedText, b: MappedText): MappedText {

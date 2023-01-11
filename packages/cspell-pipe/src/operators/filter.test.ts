@@ -1,5 +1,6 @@
 /* eslint-disable unicorn/no-array-callback-reference */
 import { describe, expect, test } from 'vitest';
+
 import { toArray, toAsyncIterable } from '../helpers/index.js';
 import { pipeAsync, pipeSync } from '../pipe.js';
 import { opFilter, opFilterAsync } from './filter.js';

@@ -1,4 +1,4 @@
-import { uniqueFilter, hrTimeToSeconds, batch, filterOrderedList } from './util';
+import { batch, filterOrderedList, hrTimeToSeconds, uniqueFilter } from './util';
 
 describe('Test util functions', () => {
     it('Test hrTimeToSeconds', () => {

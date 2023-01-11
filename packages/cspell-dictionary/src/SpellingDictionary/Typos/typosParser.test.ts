@@ -1,4 +1,4 @@
-import { parseTyposFile, createTyposDefFromEntries, processEntriesToTyposDef } from './typosParser';
+import { createTyposDefFromEntries, parseTyposFile, processEntriesToTyposDef } from './typosParser';
 
 describe('TypoParser', () => {
     test.each`

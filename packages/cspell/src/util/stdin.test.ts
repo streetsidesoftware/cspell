@@ -1,6 +1,7 @@
 import * as readline from 'readline';
-import { readStdin } from './stdin';
+
 import { asyncIterableToArray, mergeAsyncIterables } from './async';
+import { readStdin } from './stdin';
 
 jest.mock('readline');
 const mockCreateInterface = jest.mocked(readline.createInterface);

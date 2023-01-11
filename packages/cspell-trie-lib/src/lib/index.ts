@@ -1,6 +1,6 @@
 export { consolidate } from './consolidate';
-export { createWeightedMap, editDistance, editDistanceWeighted } from './distance';
 export type { WeightMap } from './distance';
+export { createWeightedMap, editDistance, editDistanceWeighted } from './distance';
 export type { FindFullResult } from './find';
 export { ExportOptions, importTrie, serializeTrie } from './io/importExport';
 export { mapDictionaryInformationToWeightMap } from './mappers/mapDictionaryInfoToWeightMap';
@@ -10,8 +10,9 @@ export {
     parseDictionary,
     parseDictionaryLines,
 } from './SimpleDictionaryParser';
-export { impersonateCollector, suggestionCollector } from './suggestCollector';
 export type { MaxCost, SuggestionCollector, SuggestionResult } from './suggestCollector';
+export { impersonateCollector, suggestionCollector } from './suggestCollector';
+export type { FindWordOptions, PartialTrieOptions, TrieOptions } from './trie';
 export {
     CASE_INSENSITIVE_PREFIX,
     COMPOUND,
@@ -24,7 +25,6 @@ export {
     OPTIONAL_COMPOUND_FIX,
     Trie,
 } from './trie';
-export type { FindWordOptions, PartialTrieOptions, TrieOptions } from './trie';
 export {
     countNodes,
     countWords,
@@ -49,5 +49,5 @@ export {
 } from './trie-util';
 export { buildTrie, buildTrieFast, TrieBuilder } from './TrieBuilder';
 export { ChildMap, FLAG_WORD, TrieNode, TrieRoot } from './TrieNode';
-export { CompoundWordsMethod, hintedWalker, JOIN_SEPARATOR, walker, WORD_SEPARATOR } from './walker';
 export type { HintedWalkerIterator, Hinting, WalkerIterator, YieldResult } from './walker';
+export { CompoundWordsMethod, hintedWalker, JOIN_SEPARATOR, walker, WORD_SEPARATOR } from './walker';

@@ -1,7 +1,8 @@
 import type { CSpellReporter, ReporterSettings } from '@cspell/cspell-types';
 import { MessageTypes } from '@cspell/cspell-types';
+
 import { InMemoryReporter } from './InMemoryReporter';
-import { mergeReporters, loadReporters } from './reporters';
+import { loadReporters, mergeReporters } from './reporters';
 
 describe('mergeReporters', () => {
     it('processes a single reporter', async () => {

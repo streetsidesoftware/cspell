@@ -1,9 +1,10 @@
-import { tokenizedLinesToMarkdown } from './visualizeAsMD';
+import { promises as fs, readFileSync } from 'fs';
+import * as path from 'path';
+
+import { tokenizeText } from '..';
 import { TypeScript } from '../grammars';
 import { normalizeGrammar } from '../parser/grammarNormalizer';
-import { tokenizeText } from '..';
-import * as path from 'path';
-import { promises as fs, readFileSync } from 'fs';
+import { tokenizedLinesToMarkdown } from './visualizeAsMD';
 
 const pathPackage = path.join(__dirname, '../..');
 const pathSamples = path.join(pathPackage, 'samples');

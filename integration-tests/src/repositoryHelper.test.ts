@@ -1,9 +1,10 @@
-import { checkoutRepositoryAsync, repositoryDir, addRepository } from './repositoryHelper';
-import { CaptureLogger } from './CaptureLogger';
-import rimraf from 'rimraf';
 import { join } from 'path';
+import rimraf from 'rimraf';
 import { promisify } from 'util';
+
+import { CaptureLogger } from './CaptureLogger';
 import { addRepository as configAddRepository } from './config';
+import { addRepository, checkoutRepositoryAsync, repositoryDir } from './repositoryHelper';
 
 const rm = promisify(rimraf);
 const defaultTimeout = 60000;

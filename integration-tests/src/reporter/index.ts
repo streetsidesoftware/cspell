@@ -1,10 +1,11 @@
 import type { CSpellReporter, Issue, RunResult } from '@cspell/cspell-types';
 import { URI, Utils as UriUtils } from 'vscode-uri';
-import { generateReport } from './reportGenerator';
-import { stringify } from './stringify';
+
 import { readConfig } from '../config';
 import type { Repository } from '../configDef';
 import { writeSnapshotRaw } from '../snapshots';
+import { generateReport } from './reportGenerator';
+import { stringify } from './stringify';
 
 const noopReporter = () => {
     return;

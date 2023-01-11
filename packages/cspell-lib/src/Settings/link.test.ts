@@ -1,14 +1,16 @@
-import { addPathsToGlobalImports, listGlobalImports, removePathsFromGlobalImports, __testing__ } from './link';
 import Configstore from 'configstore';
+import * as Path from 'path';
+
 // eslint-disable-next-line jest/no-mocks-import
 import {
     clearData as clearConfigstore,
-    setData as setConfigstore,
     clearMocks,
-    mockSetData,
     getConfigstoreLocation,
+    mockSetData,
+    setData as setConfigstore,
 } from '../__mocks__/configstore';
-import * as Path from 'path';
+import { __testing__, addPathsToGlobalImports, listGlobalImports, removePathsFromGlobalImports } from './link';
+
 const findPackageForCSpellConfig = __testing__.findPackageForCSpellConfig;
 
 jest.mock('configstore');

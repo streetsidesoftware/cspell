@@ -2,6 +2,7 @@ import * as fs from 'fs-extra';
 import type { Sequence } from 'gensequence';
 import { genSequence } from 'gensequence';
 import { decode } from 'iconv-lite';
+
 import type { Aff } from './aff';
 import type { AffWord } from './affDef';
 import { parseAffFileToAff } from './affReader';

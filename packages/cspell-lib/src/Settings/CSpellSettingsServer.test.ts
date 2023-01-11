@@ -1,7 +1,9 @@
 import type { CSpellUserSettings } from '@cspell/cspell-types';
 import * as path from 'path';
+
 import { createCSpellSettingsInternal as csi } from '../Models/CSpellSettingsInternalDef';
 import {
+    __testing__ as __configLoader_testing__,
     clearCachedSettingsFiles,
     extractImportErrors,
     getCachedFileSize,
@@ -9,10 +11,9 @@ import {
     loadConfig,
     readSettings,
     readSettingsFiles,
-    __testing__ as __configLoader_testing__,
 } from './Controller/configLoader';
 import { calcOverrideSettings, checkFilenameMatchesGlob, getSources, mergeSettings } from './CSpellSettingsServer';
-import { getDefaultBundledSettings, _defaultSettings } from './DefaultSettings';
+import { _defaultSettings, getDefaultBundledSettings } from './DefaultSettings';
 
 const rootCspellLib = path.resolve(path.join(__dirname, '../..'));
 const samplesDir = path.resolve(rootCspellLib, 'samples');

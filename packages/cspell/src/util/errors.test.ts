@@ -1,4 +1,4 @@
-import { CheckFailed, ApplicationError, toError, isError, toApplicationError, IOError } from './errors';
+import { ApplicationError, CheckFailed, IOError, isError, toApplicationError, toError } from './errors';
 
 const oc = expect.objectContaining;
 

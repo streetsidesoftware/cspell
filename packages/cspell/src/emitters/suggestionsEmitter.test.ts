@@ -1,7 +1,8 @@
+import chalk from 'chalk';
+import type { SuggestedWord } from 'cspell-lib';
+
 import type { EmitSuggestionOptions } from './suggestionsEmitter';
 import { emitSuggestionResult } from './suggestionsEmitter';
-import type { SuggestedWord } from 'cspell-lib';
-import chalk from 'chalk';
 
 chalk.level = 0;
 

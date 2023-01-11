@@ -1,4 +1,5 @@
-import { opCombine as opPipe, opConcatMap, opFilter, opMap, type Operator } from '@cspell/cspell-pipe/sync';
+import { type Operator, opCombine as opPipe, opConcatMap, opFilter, opMap } from '@cspell/cspell-pipe/sync';
+
 import {
     CASE_INSENSITIVE_PREFIX,
     COMPOUND_FIX,

@@ -1,4 +1,5 @@
 import * as Trie from 'cspell-trie-lib';
+
 import type { SpellingDictionaryOptions } from '.';
 import { createFailedToLoadDictionary, createSpellingDictionary } from './createSpellingDictionary';
 import { createFlagWordsDictionary } from './FlagWordsDictionary';

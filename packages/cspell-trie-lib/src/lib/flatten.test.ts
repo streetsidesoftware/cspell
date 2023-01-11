@@ -1,6 +1,7 @@
+import { genSequence } from 'gensequence';
+
 import { createTriFromList } from '.';
 import { flattenToTrieRefNodeArray, flattenToTrieRefNodeIterable } from './flatten';
-import { genSequence } from 'gensequence';
 import type { TrieRefNode } from './trieRef';
 
 describe('Validate Flatten', () => {

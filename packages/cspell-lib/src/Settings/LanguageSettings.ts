@@ -6,6 +6,7 @@ import type {
     LocaleId,
     Settings,
 } from '@cspell/cspell-types';
+
 import { memorizerAll } from '../util/Memorizer';
 import { doSetsIntersect } from '../util/util';
 import * as SpellSettings from './CSpellSettingsServer';

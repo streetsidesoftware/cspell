@@ -1,5 +1,6 @@
 import { describe, expect, test } from 'vitest';
-import { pipeAsync, pipeSync, toArray, opTap } from '../index.js';
+
+import { opTap, pipeAsync, pipeSync, toArray } from '../index.js';
 import { fibonacci } from '../test/fibonacci.js';
 import { opTake } from './take.js';
 

@@ -1,4 +1,5 @@
 import type { CSpellUserSettings } from '@cspell/cspell-types';
+
 import * as ExclusionHelper from './exclusionHelper';
 import { clearCachedSettingsFiles } from './Settings';
 import { toInternalSettings } from './Settings/CSpellSettingsServer';
@@ -7,20 +8,11 @@ import type { SpellingDictionaryCollection } from './SpellingDictionary';
 import { getDictionaryInternal, refreshDictionaryCache } from './SpellingDictionary';
 import * as Text from './util/text';
 
-export * from '@cspell/cspell-types';
-export {
-    asyncIterableToArray,
-    readFile,
-    readFileSync,
-    writeToFile,
-    writeToFileIterable,
-    writeToFileIterableP,
-} from 'cspell-io';
 export { ExcludeFilesGlobMap, ExclusionFunction } from './exclusionHelper';
 export { FeatureFlag, FeatureFlags, getSystemFeatureFlags, UnknownFeatureFlagError } from './FeatureFlags';
 export { getLanguagesForBasename as getLanguageIdsForBaseFilename, getLanguagesForExt } from './LanguageIds';
-export { createTextDocument, updateTextDocument } from './Models/TextDocument';
 export type { CreateTextDocumentParams, TextDocument, TextDocumentLine } from './Models/TextDocument';
+export { createTextDocument, updateTextDocument } from './Models/TextDocument';
 export * from './Settings';
 export { defaultFileName as defaultSettingsFilename } from './Settings';
 export {
@@ -52,11 +44,11 @@ export {
     SuggestionResult,
     SuggestOptions,
 } from './SpellingDictionary';
-export { SuggestionError, suggestionsForWord, suggestionsForWords } from './suggestions';
 export type { SuggestedWord, SuggestionOptions, SuggestionsForWordResult } from './suggestions';
+export { SuggestionError, suggestionsForWord, suggestionsForWords } from './suggestions';
 export { DocumentValidator, DocumentValidatorOptions } from './textValidation';
-export { traceWords, traceWordsAsync } from './trace';
 export type { TraceOptions, TraceResult } from './trace';
+export { traceWords, traceWordsAsync } from './trace';
 export { getLogger, Logger, setLogger } from './util/logger';
 export { resolveFile } from './util/resolveFile';
 export {
@@ -69,7 +61,16 @@ export {
     validateText,
     ValidationIssue,
 } from './validator';
-export { Text, Link };
+export * from '@cspell/cspell-types';
+export {
+    asyncIterableToArray,
+    readFile,
+    readFileSync,
+    writeToFile,
+    writeToFileIterable,
+    writeToFileIterableP,
+} from 'cspell-io';
+export { Link, Text };
 export { ExclusionHelper };
 
 export async function clearCachedFiles(): Promise<void> {

@@ -1,6 +1,7 @@
-import { emitTraceResults } from './traceEmitter';
 import strip from 'strip-ansi';
+
 import type { TraceResult } from '../application';
+import { emitTraceResults } from './traceEmitter';
 
 describe('traceEmitter', () => {
     test('empty', () => {

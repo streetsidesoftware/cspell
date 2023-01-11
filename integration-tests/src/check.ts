@@ -1,14 +1,15 @@
-import * as Shell from 'shelljs';
+import Chalk from 'chalk';
 import * as Path from 'path';
+import * as Shell from 'shelljs';
+
 import { readConfig, resolveArgs } from './config';
 import type { Repository } from './configDef';
-import { execAsync } from './sh';
-import { addRepository, checkoutRepositoryAsync, repositoryDir } from './repositoryHelper';
-import { checkAgainstSnapshot } from './snapshots';
-import { shouldCheckRepo } from './shouldCheckRepo';
-import Chalk from 'chalk';
 import { formatExecOutput } from './outputHelper';
 import { PrefixLogger } from './PrefixLogger';
+import { addRepository, checkoutRepositoryAsync, repositoryDir } from './repositoryHelper';
+import { execAsync } from './sh';
+import { shouldCheckRepo } from './shouldCheckRepo';
+import { checkAgainstSnapshot } from './snapshots';
 import type { Logger } from './types';
 
 const config = readConfig();

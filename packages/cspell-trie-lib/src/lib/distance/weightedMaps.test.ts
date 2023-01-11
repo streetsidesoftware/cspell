@@ -2,12 +2,12 @@ import type { SuggestionCostMapDef } from '../models/suggestionCostsDef';
 import { DEFAULT_COMPOUNDED_WORD_SEPARATOR } from '../suggestions/suggestCollector';
 import type { CostPosition, PenaltyAdjustment } from './weightedMaps';
 import {
+    __testing__,
     addAdjustment,
     addDefToWeightMap,
     createWeightMap,
     lookupReplaceCost,
     prettyPrintWeightMap,
-    __testing__,
 } from './weightedMaps';
 
 const { splitMapSubstrings, splitMap, findTrieCostPrefixes, normalizeDef } = __testing__;

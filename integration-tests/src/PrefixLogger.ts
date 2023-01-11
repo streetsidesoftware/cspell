@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
+import { errorWithPrefix, logWithPrefix } from './outputHelper';
 import type { Logger } from './types';
-import { logWithPrefix, errorWithPrefix } from './outputHelper';
 
 export class PrefixLogger implements Logger {
     constructor(readonly prefix: string) {}

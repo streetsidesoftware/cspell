@@ -2,12 +2,12 @@
  * Rollup Config.
  */
 
+import rollupPluginJson from '@rollup/plugin-json';
 import rollupPluginNodeResolve from '@rollup/plugin-node-resolve';
 import rollupPluginTypescript from '@rollup/plugin-typescript';
-import rollupPluginJson from '@rollup/plugin-json';
-import rollupPluginDts from 'rollup-plugin-dts';
-import type { RollupOptions } from 'rollup';
 import { readFileSync } from 'fs';
+import type { RollupOptions } from 'rollup';
+import rollupPluginDts from 'rollup-plugin-dts';
 
 const pkgContent = readFileSync('./package.json', 'utf-8');
 const pkg = JSON.parse(pkgContent);

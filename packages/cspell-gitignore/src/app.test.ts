@@ -1,8 +1,8 @@
+import * as path from 'path';
 import type { SpyInstance } from 'vitest';
-import { describe, expect, test, afterEach, vi, beforeEach } from 'vitest';
+import { afterEach, beforeEach, describe, expect, test, vi } from 'vitest';
 
 import * as app from './app';
-import * as path from 'path';
 
 describe('app', () => {
     let log: SpyInstance<Parameters<typeof console.log>>;

@@ -1,5 +1,3 @@
-export { GlobMatchOptions, GlobMatcher } from './GlobMatcher';
-export * from './GlobMatcherTypes';
 export {
     fileOrGlobToGlob,
     isGlobPatternNormalized,
@@ -8,3 +6,5 @@ export {
     normalizeGlobPatterns,
     NormalizeOptions,
 } from './globHelper';
+export { GlobMatcher, GlobMatchOptions } from './GlobMatcher';
+export * from './GlobMatcherTypes';

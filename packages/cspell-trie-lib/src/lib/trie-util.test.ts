@@ -1,10 +1,10 @@
 import {
-    createTriFromList,
-    has,
-    findNode,
     countNodes,
-    isCircular,
     countWords,
+    createTriFromList,
+    findNode,
+    has,
+    isCircular,
     iteratorTrieWords,
     mergeDefaults,
 } from './trie-util';

@@ -1,5 +1,6 @@
-import { escapeRegEx } from './escapeRegEx';
 import * as path from 'path';
+
+import { escapeRegEx } from './escapeRegEx';
 
 const rootCspellTools = path.join(__dirname, '../..');
 const rootRepo = path.join(rootCspellTools, '../..');

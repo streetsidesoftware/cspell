@@ -1,4 +1,5 @@
 import type { CharacterSet, ReplaceMap } from '@cspell/cspell-types';
+
 import { escapeRegEx } from './regexHelper';
 
 export type ReplaceMapper = (src: string) => string;

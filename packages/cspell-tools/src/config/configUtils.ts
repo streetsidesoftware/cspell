@@ -1,4 +1,4 @@
-import type { DictionarySource, FilePath, FileSource, FileListSource } from '../config';
+import type { DictionarySource, FileListSource, FilePath, FileSource } from '../config';
 
 export function isFilePath(source: DictionarySource): source is FilePath {
     return typeof source === 'string';

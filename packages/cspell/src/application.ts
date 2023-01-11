@@ -10,6 +10,7 @@ import {
     suggestionsForWords,
     traceWordsAsync,
 } from 'cspell-lib';
+
 import { getReporter } from './cli-reporter';
 import type { TimedSuggestionsForWordResult } from './emitters/suggestionsEmitter';
 import { getFeatureFlags, parseFeatureFlags } from './featureFlags';
@@ -21,8 +22,8 @@ import { fileInfoToDocument, readConfig, readFileInfo } from './util/fileHelper'
 import { readStdin } from './util/stdin';
 import { getTimeMeasurer } from './util/timer';
 import * as util from './util/util';
-export { IncludeExcludeFlag } from 'cspell-lib';
 export type { TraceResult } from 'cspell-lib';
+export { IncludeExcludeFlag } from 'cspell-lib';
 
 export type AppError = NodeJS.ErrnoException;
 

@@ -1,8 +1,9 @@
 import { cosmiconfig } from 'cosmiconfig';
+import * as path from 'path';
+
 import { compile } from './compiler';
 import type { Target } from './config';
 import { normalizeConfig } from './config';
-import * as path from 'path';
 
 export interface BuildOptions {
     /** Optional path to config file */

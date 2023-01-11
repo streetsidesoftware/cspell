@@ -1,6 +1,6 @@
-import { IterableHunspellReader } from './IterableHunspellReader';
-import * as AffReader from './affReader';
 import * as Aff from './aff';
+import * as AffReader from './affReader';
+import { IterableHunspellReader } from './IterableHunspellReader';
 
 describe('HunspellReader DE', function () {
     it('tests transforming `Arbeit/A-`', () => {

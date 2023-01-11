@@ -1,6 +1,7 @@
+import strip from 'strip-ansi';
+
 import type { Table } from './table';
 import { tableToLines } from './table';
-import strip from 'strip-ansi';
 
 describe('Validate table.ts', () => {
     test('tableToLines', () => {

@@ -1,10 +1,11 @@
 /**
  * Handles loading of `.pnp.js` and `.pnp.js` files.
  */
-import { URI } from 'vscode-uri';
-import importFresh from 'import-fresh';
-import findUp from 'find-up';
 import clearModule from 'clear-module';
+import findUp from 'find-up';
+import importFresh from 'import-fresh';
+import { URI } from 'vscode-uri';
+
 import { UnsupportedPnpFile } from './ImportError';
 
 const defaultPnpFiles = ['.pnp.cjs', '.pnp.js'];

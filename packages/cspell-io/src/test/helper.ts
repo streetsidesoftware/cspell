@@ -1,5 +1,5 @@
-import * as path from 'path';
 import { mkdir } from 'fs/promises';
+import * as path from 'path';
 
 const mkdirp = async (p: string) => {
     await mkdir(p, { recursive: true });

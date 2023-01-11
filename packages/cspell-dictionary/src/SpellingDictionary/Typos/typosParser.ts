@@ -1,4 +1,5 @@
 import assert from 'assert';
+
 import type { TypoEntry, TyposDef, TyposDefValue } from './typos';
 import { appendToDef, createTyposDef } from './util';
 

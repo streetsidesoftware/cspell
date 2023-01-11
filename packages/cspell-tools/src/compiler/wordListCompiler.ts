@@ -2,6 +2,7 @@ import { opAppend, opMap, pipe } from '@cspell/cspell-pipe/sync';
 import * as Trie from 'cspell-trie-lib';
 import { mkdir } from 'fs/promises';
 import * as path from 'path';
+
 import type { CompileOptions } from './CompileOptions';
 import { writeSeqToFile } from './fileWriter';
 import { getLogger } from './logger';

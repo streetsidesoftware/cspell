@@ -1,5 +1,6 @@
-import { isUrlLike, toURL, urlBasename, urlDirname, basename } from './util';
 import * as path from 'path';
+
+import { basename, isUrlLike, toURL, urlBasename, urlDirname } from './util';
 
 const root = path.join(__dirname, '../..');
 const oc = expect.objectContaining;

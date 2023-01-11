@@ -1,7 +1,8 @@
-import * as GS from 'gensequence';
 import type { Sequence } from 'gensequence';
+import * as GS from 'gensequence';
 import { genSequence as gs } from 'gensequence';
 import * as util from 'util';
+
 import type { AffInfo, AffTransformFlags, AffWord, AffWordFlags, Fx, Rule, Substitution } from './affDef';
 import { Converter } from './converter';
 import type { Mapping } from './types';

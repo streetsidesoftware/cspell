@@ -5,6 +5,7 @@ import {
     createIgnoreWordsDictionary,
     createSpellingDictionary,
 } from 'cspell-dictionary';
+
 import type { CSpellSettingsInternal, DictionaryDefinitionInternal } from '../Models/CSpellSettingsInternalDef';
 import { calcDictionaryDefsToLoad } from '../Settings/DictionarySettings';
 import { isDefined } from '../util/util';

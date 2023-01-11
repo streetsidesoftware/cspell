@@ -1,7 +1,8 @@
 import * as fs from 'fs-extra';
 import * as zlib from 'zlib';
-import { normalizeWordToLowercase } from '.';
+
 import { resolveGlobalDict } from '../test/samples';
+import { normalizeWordToLowercase } from '.';
 import type { FindFullResult, PartialFindOptions } from './find';
 import { findWord } from './find';
 import { importTrie } from './io/importExport';

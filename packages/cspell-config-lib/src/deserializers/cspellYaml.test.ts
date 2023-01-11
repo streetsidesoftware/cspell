@@ -1,6 +1,7 @@
-import { deserializerCSpellYaml } from './cspellYaml';
 import { stringify } from 'yaml';
+
 import { defaultNextDeserializer } from '../CSpellConfigFileReaderWriter';
+import { deserializerCSpellYaml } from './cspellYaml';
 
 const oc = expect.objectContaining;
 const next = defaultNextDeserializer;

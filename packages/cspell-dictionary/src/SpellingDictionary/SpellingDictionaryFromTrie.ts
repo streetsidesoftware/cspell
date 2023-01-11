@@ -7,6 +7,7 @@ import type {
     WeightMap,
 } from 'cspell-trie-lib';
 import { CompoundWordsMethod, importTrie, suggestionCollector, Trie } from 'cspell-trie-lib';
+
 import { autoCache, createCache01 } from '../util/AutoCache';
 import { clean } from '../util/clean';
 import { createMapper } from '../util/repMap';

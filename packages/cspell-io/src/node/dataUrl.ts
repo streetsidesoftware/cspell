@@ -1,6 +1,7 @@
-import * as fsPath from 'path';
-import { toURL } from './file/util';
 import { promises as fs } from 'fs';
+import * as fsPath from 'path';
+
+import { toURL } from './file/util';
 
 /**
  * Generates a string of the following format:

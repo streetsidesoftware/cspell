@@ -1,8 +1,9 @@
-import { __testMethods__ } from './SpellingDictionaryMethods';
+import { Trie } from 'cspell-trie-lib';
+
+import type { SpellingDictionaryOptions } from '.';
 import { createSpellingDictionary } from './createSpellingDictionary';
 import { SpellingDictionaryFromTrie } from './SpellingDictionaryFromTrie';
-import { Trie } from 'cspell-trie-lib';
-import type { SpellingDictionaryOptions } from '.';
+import { __testMethods__ } from './SpellingDictionaryMethods';
 
 // cSpell:ignore aple
 

@@ -7,7 +7,10 @@ import {
 } from '@cspell/cspell-service-bus';
 import assert from 'assert';
 import { promises as fs, readFileSync, statSync } from 'fs';
+import type { URL } from 'url';
+import { fileURLToPath } from 'url';
 import { gunzipSync, gzipSync } from 'zlib';
+
 import { toError } from '../../errors';
 import { decodeDataUrl } from '../../node/dataUrl';
 import { fetchURL } from '../../node/file/fetch';
@@ -22,8 +25,6 @@ import {
     RequestFsWriteFile,
     RequestZlibInflate,
 } from '../../requests';
-import type { URL } from 'url';
-import { fileURLToPath } from 'url';
 
 const isGzFileRegExp = /\.gz($|[?#])/;
 

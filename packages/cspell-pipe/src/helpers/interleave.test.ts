@@ -1,4 +1,5 @@
 import { describe, expect, test } from 'vitest';
+
 import { interleave } from './interleave.js';
 
 describe('distribute', () => {

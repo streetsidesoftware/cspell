@@ -42,7 +42,7 @@ const config = {
         ecmaVersion: 2020,
         sourceType: 'module',
     },
-    plugins: ['import', 'unicorn'],
+    plugins: ['import', 'unicorn', 'simple-import-sort'],
     overrides: [
         {
             files: '**/*.ts',
@@ -67,6 +67,9 @@ const config = {
                 ],
                 'import/no-unresolved': 'off',
                 '@typescript-eslint/consistent-type-imports': 'error',
+                // 'import/order': 'error',
+                'simple-import-sort/imports': 'error',
+                'simple-import-sort/exports': 'error',
             },
         },
         {

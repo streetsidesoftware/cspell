@@ -1,5 +1,5 @@
 import Configstore from 'configstore';
-import { getLogger } from '../util/logger';
+
 // eslint-disable-next-line jest/no-mocks-import
 import {
     clearData as clearConfigstore,
@@ -8,6 +8,7 @@ import {
     mockAll,
     mockSetData,
 } from '../__mocks__/configstore';
+import { getLogger } from '../util/logger';
 import { getGlobalConfigPath, getRawGlobalSettings, writeRawGlobalSettings } from './GlobalSettings';
 
 const logger = getLogger();

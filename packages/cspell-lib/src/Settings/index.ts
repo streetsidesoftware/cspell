@@ -1,3 +1,4 @@
+export { currentSettingsFileVersion, ENV_CSPELL_GLOB_ROOT } from './constants';
 export {
     clearCachedSettingsFiles,
     defaultConfigFilenames,
@@ -14,6 +15,8 @@ export {
     searchForConfig,
     sectionCSpell,
 } from './Controller/configLoader';
+export { ImportError } from './Controller/ImportError';
+export type { ConfigurationDependencies, ImportFileRefWithError } from './CSpellSettingsServer';
 export {
     calcOverrideSettings,
     checkFilenameMatchesGlob,
@@ -23,7 +26,4 @@ export {
     mergeInDocSettings,
     mergeSettings,
 } from './CSpellSettingsServer';
-export { currentSettingsFileVersion, ENV_CSPELL_GLOB_ROOT } from './constants';
-export type { ConfigurationDependencies, ImportFileRefWithError } from './CSpellSettingsServer';
-export { getDefaultSettings, getDefaultBundledSettings } from './DefaultSettings';
-export { ImportError } from './Controller/ImportError';
+export { getDefaultBundledSettings, getDefaultSettings } from './DefaultSettings';

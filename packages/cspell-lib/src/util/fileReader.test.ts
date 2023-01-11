@@ -1,6 +1,7 @@
-import * as fileReader from './fileReader';
 import { promises as fs } from 'fs';
 import * as path from 'path';
+
+import * as fileReader from './fileReader';
 
 describe('Validate file reader', () => {
     test('Catches errors for non-existent files', () => {

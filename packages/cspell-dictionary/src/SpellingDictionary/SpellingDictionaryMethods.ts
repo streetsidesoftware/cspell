@@ -1,6 +1,7 @@
 import type { DictionaryInformation } from '@cspell/cspell-types';
 import type { SuggestionResult, WeightMap } from 'cspell-trie-lib';
 import { mapDictionaryInformationToWeightMap } from 'cspell-trie-lib';
+
 import { clean } from '../util/clean';
 import { isUpperCase, removeUnboundAccents, ucFirst } from '../util/text';
 import type { HasOptions, SearchOptions, SuggestArgs, SuggestOptions } from './SpellingDictionary';

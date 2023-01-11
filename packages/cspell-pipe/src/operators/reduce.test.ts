@@ -1,4 +1,5 @@
 import { describe, expect, test } from 'vitest';
+
 import { toAsyncIterable } from '../helpers/index.js';
 import { toArrayAsync } from '../helpers/toArray.js';
 import { opReduceAsync, opReduceSync } from './reduce.js';

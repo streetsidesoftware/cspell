@@ -2,12 +2,13 @@
 
 import type * as program from 'commander';
 import * as path from 'path';
+
 import type { CompileAppOptions, CompileTrieAppOptions } from './AppOptions';
+import { build } from './build';
+import { processCompileAction } from './compile';
 import * as compiler from './compiler';
 import { logWithTimestamp } from './compiler/logWithTimestamp';
-import { processCompileAction } from './compile';
 import type { FeatureFlags } from './FeatureFlags';
-import { build } from './build';
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const npmPackage = require(path.join(__dirname, '..', 'package.json'));

@@ -2,5 +2,5 @@ export { RequestFsReadBinaryFile, RequestFsReadBinaryFileSync } from './RequestF
 export { RequestFsReadFile } from './RequestFsReadFile';
 export { RequestFsReadFileSync } from './RequestFsReadFileSync';
 export { RequestFsStat, RequestFsStatSync } from './RequestFsStat';
-export { RequestZlibInflate } from './RequestZlibInflate';
 export { RequestFsWriteFile } from './RequestFsWriteFile';
+export { RequestZlibInflate } from './RequestZlibInflate';

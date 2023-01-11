@@ -1,6 +1,6 @@
 import * as fs from 'fs';
-import * as zlib from 'zlib';
 import * as stream from 'stream';
+import * as zlib from 'zlib';
 
 export function writeToFile(filename: string, data: string): NodeJS.WritableStream {
     return writeToFileIterable(filename, [data]);

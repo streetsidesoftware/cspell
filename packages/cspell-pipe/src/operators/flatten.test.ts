@@ -1,7 +1,8 @@
 import { describe, expect, test } from 'vitest';
-import { opFlatten } from './flatten.js';
+
 import { toArray } from '../helpers/index.js';
 import { pipeAsync, pipeSync } from '../pipe.js';
+import { opFlatten } from './flatten.js';
 
 describe('Validate flatten', () => {
     test.each`

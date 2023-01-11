@@ -1,6 +1,7 @@
 // cSpell:ignore jpegs outing dirs lcode outring outrings
 
 import { toArray } from '@cspell/cspell-pipe/sync';
+
 import type { ParseFileOptions } from './wordListParser';
 import { normalizeTargetWords, parseFileLines } from './wordListParser';
 

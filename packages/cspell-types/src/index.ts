@@ -1,7 +1,6 @@
 // Using old-style of `type` exports because the new style breaks some integrations.
-export { ConfigFields } from './configFields';
 export type { CSpellUserSettingsFields } from './configFields';
-export { IssueType, MessageTypes } from './CSpellReporter';
+export { ConfigFields } from './configFields';
 export type {
     CSpellReporter,
     CSpellReporterModule,
@@ -23,6 +22,7 @@ export type {
     RunResult,
     SpellingErrorEmitter,
 } from './CSpellReporter';
+export { IssueType, MessageTypes } from './CSpellReporter';
 export type {
     AdvancedCSpellSettings,
     AdvancedCSpellSettingsWithSourceTrace,

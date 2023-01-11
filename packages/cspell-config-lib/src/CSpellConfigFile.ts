@@ -1,4 +1,5 @@
 import type { CSpellSettings } from '@cspell/cspell-types';
+
 import type { Serializer } from './Serializer';
 
 export interface CSpellConfigFile {

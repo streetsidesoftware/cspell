@@ -1,5 +1,6 @@
 /* eslint-disable unicorn/no-array-callback-reference */
 import { describe, expect, test, vi } from 'vitest';
+
 import { toArray } from '../helpers/index.js';
 import { pipeAsync, pipeSync } from '../pipe.js';
 import { opMap } from './map.js';

@@ -1,13 +1,3 @@
-export {
-    createCachingDictionary,
-    createCollection,
-    createFailedToLoadDictionary,
-    createFlagWordsDictionary,
-    createForbiddenWordsDictionary,
-    createIgnoreWordsDictionary,
-    createSpellingDictionary,
-    createSpellingDictionaryFromTrieFile,
-} from './SpellingDictionary';
 export type {
     CachingDictionary,
     FindOptions,
@@ -20,4 +10,14 @@ export type {
     SuggestionCollector,
     SuggestionResult,
     SuggestOptions,
+} from './SpellingDictionary';
+export {
+    createCachingDictionary,
+    createCollection,
+    createFailedToLoadDictionary,
+    createFlagWordsDictionary,
+    createForbiddenWordsDictionary,
+    createIgnoreWordsDictionary,
+    createSpellingDictionary,
+    createSpellingDictionaryFromTrieFile,
 } from './SpellingDictionary';

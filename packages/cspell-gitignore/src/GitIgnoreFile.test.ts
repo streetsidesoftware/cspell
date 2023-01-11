@@ -1,8 +1,8 @@
-import { describe, expect, test } from 'vitest';
-
 import { GlobMatcher } from 'cspell-glob';
 import * as path from 'path';
-import { GitIgnoreFile, GitIgnoreHierarchy, loadGitIgnore, __testing__ } from './GitIgnoreFile';
+import { describe, expect, test } from 'vitest';
+
+import { __testing__, GitIgnoreFile, GitIgnoreHierarchy, loadGitIgnore } from './GitIgnoreFile';
 
 const { mustBeHierarchical } = __testing__;
 

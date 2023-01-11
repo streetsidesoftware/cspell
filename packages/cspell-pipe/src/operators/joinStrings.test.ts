@@ -1,7 +1,8 @@
 import { describe, expect, test } from 'vitest';
-import { opJoinStrings } from './joinStrings.js';
+
 import { toArray } from '../helpers/index.js';
 import { pipeAsync, pipeSync } from '../pipe.js';
+import { opJoinStrings } from './joinStrings.js';
 
 describe('Validate flatten', () => {
     test.each`

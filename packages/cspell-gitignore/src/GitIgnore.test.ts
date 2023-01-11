@@ -1,6 +1,6 @@
+import * as path from 'path';
 import { describe, expect, test } from 'vitest';
 
-import * as path from 'path';
 import { GitIgnore } from './GitIgnore';
 
 const pkg = path.resolve(__dirname, '..');

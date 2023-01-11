@@ -1,6 +1,6 @@
+import type { Handler, HandleRequestFn, HandlerFn } from './handlers';
 import type { IsARequest, ServiceRequest } from './request';
 import type { ServiceRequestFactory } from './ServiceRequestFactory';
-import type { HandleRequestFn, Handler, HandlerFn } from './handlers';
 
 export function createRequestHandler<T extends ServiceRequest>(
     requestDef: ServiceRequestFactory<T>,

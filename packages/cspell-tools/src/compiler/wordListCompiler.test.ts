@@ -6,6 +6,7 @@ import { importTrie, isCircular, iteratorTrieWords, serializeTrie } from 'cspell
 import * as fsp from 'fs/promises';
 import { uniqueFilter } from 'hunspell-reader/dist/util';
 import * as path from 'path';
+
 import { spyOnConsole } from '../test/console';
 import { createTestHelper } from '../test/TestHelper';
 import type { CompileOptions } from './CompileOptions';
@@ -15,7 +16,7 @@ import { setLogger } from './logger';
 import type { ReaderOptions } from './Reader';
 import { readTextFile } from './readTextFile';
 import type { CompileTrieOptions } from './wordListCompiler';
-import { compileTrie as _compileTrie, compileWordList as _compileWordList, __testing__ } from './wordListCompiler';
+import { __testing__, compileTrie as _compileTrie, compileWordList as _compileWordList } from './wordListCompiler';
 import { normalizeTargetWords } from './wordListParser';
 
 const testHelper = createTestHelper(__filename);

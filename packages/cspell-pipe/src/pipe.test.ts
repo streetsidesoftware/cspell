@@ -1,8 +1,9 @@
 /* eslint-disable unicorn/no-array-callback-reference */
 import { describe, expect, test } from 'vitest';
+
 import { toArray, toAsyncIterable } from './helpers/index.js';
-import { opAwaitAsync, opFilter, opMap } from './operators/index.js';
 import { pipeAsync, pipeSync } from './index.js';
+import { opAwaitAsync, opFilter, opMap } from './operators/index.js';
 
 describe('Validate async', () => {
     test('mergeAsyncIterables', async () => {

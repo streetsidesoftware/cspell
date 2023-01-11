@@ -1,4 +1,5 @@
 import { describe, expect, test } from 'vitest';
+
 import { opMap, opTake } from '../operators/index.js';
 import { pipeSync } from '../pipe.js';
 import { toDistributableIterable } from './distribute.js';

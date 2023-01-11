@@ -1,7 +1,8 @@
-import { CSpellIONode } from './CSpellIONode';
-import { makePathToFile, pathToSample as ps, pathToTemp } from './test/helper';
 import { promises as fs } from 'fs';
+
+import { CSpellIONode } from './CSpellIONode';
 import { toURL } from './node/file/util';
+import { makePathToFile, pathToSample as ps, pathToTemp } from './test/helper';
 
 const sc = expect.stringContaining;
 const oc = expect.objectContaining;

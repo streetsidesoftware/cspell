@@ -1,4 +1,5 @@
 import * as path from 'path';
+
 import type { DictionaryDefinitionInternal } from '../Models/CSpellSettingsInternalDef';
 import { mapDictDefToInternal } from '../Settings/DictionarySettings';
 import { clean } from '../util/util';

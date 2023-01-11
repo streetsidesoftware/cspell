@@ -1,6 +1,7 @@
 // cSpell:ignore jpegs outing dirs lcode outring outrings
 
 import { opFilter, pipe } from '@cspell/cspell-pipe/sync';
+
 import { legacyLineToWords } from './legacyLineToWords';
 
 describe('Validate legacyLineToWords', () => {

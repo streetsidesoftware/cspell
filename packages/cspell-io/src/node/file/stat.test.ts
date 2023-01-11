@@ -1,5 +1,6 @@
-import { getStat, getStatSync } from './stat';
 import { join } from 'path';
+
+import { getStat, getStatSync } from './stat';
 
 const oc = expect.objectContaining;
 const sc = expect.stringContaining;

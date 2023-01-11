@@ -5,6 +5,7 @@ import * as readline from 'readline';
 import stripAnsi from 'strip-ansi';
 import * as Util from 'util';
 import { URI } from 'vscode-uri';
+
 import * as app from './app';
 import * as Link from './link';
 import { mergeAsyncIterables } from './util/async';

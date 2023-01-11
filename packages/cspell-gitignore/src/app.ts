@@ -1,6 +1,6 @@
-import { GitIgnore, findRepoRoot } from '.';
-
 import * as path from 'path';
+
+import { findRepoRoot, GitIgnore } from '.';
 
 type OptionParser = (params: string[]) => string[];
 

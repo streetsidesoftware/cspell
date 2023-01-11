@@ -1,12 +1,14 @@
 import type { CSpellSettingsWithSourceTrace, CSpellUserSettings, ImportFileRef } from '@cspell/cspell-types';
 import * as path from 'path';
 import { URI } from 'vscode-uri';
+
 import { logError, logWarning } from '../../../util/logger';
 import { currentSettingsFileVersion, ENV_CSPELL_GLOB_ROOT } from '../../constants';
 import type { ImportFileRefWithError } from '../../CSpellSettingsServer';
 import { extractDependencies, getSources, mergeSettings } from '../../CSpellSettingsServer';
-import { getDefaultBundledSettings, _defaultSettings } from '../../DefaultSettings';
+import { _defaultSettings, getDefaultBundledSettings } from '../../DefaultSettings';
 import {
+    __testing__ as __configLoader_testing__,
     clearCachedSettingsFiles,
     getCachedFileSize,
     getGlobalSettings,
@@ -17,7 +19,6 @@ import {
     readRawSettings,
     readSettingsFiles,
     searchForConfig,
-    __testing__ as __configLoader_testing__,
 } from './configLoader';
 import { extractImportErrors } from './extractImportErrors';
 import { readSettings } from './readSettings';

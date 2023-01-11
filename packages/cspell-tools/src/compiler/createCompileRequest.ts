@@ -1,4 +1,5 @@
 import * as path from 'path';
+
 import type { CompileCommonAppOptions } from '../AppOptions';
 import type { CompileRequest, DictionaryFormats, Target } from '../config';
 

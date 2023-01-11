@@ -1,14 +1,15 @@
 import { opFlatten, opMap, pipeSync } from '@cspell/cspell-pipe/sync';
+
+import type { PenaltyAdjustment } from '../distance/weightedMaps';
 import type { CharacterSetCosts, DictionaryInformation } from '../models/DictionaryInformation';
 import { parseLocale } from '../models/locale';
 import type { SuggestionCostMapDef } from '../models/suggestionCostsDef';
+import type { ArrayItem } from '../types';
 import { isDefined } from '../utils/util';
 import type { EditCostsRequired } from './mapCosts';
 import { mapEditCosts } from './mapCosts';
 import { hunspellInformationToSuggestionCostDef } from './mapHunspellInformation';
-import type { PenaltyAdjustment } from '../distance/weightedMaps';
 import { calcFirstCharacterReplaceDefs, parseAccents, parseAlphabet } from './mapToSuggestionCostDef';
-import type { ArrayItem } from '../types';
 
 export function mapDictionaryInformation(dictInfo: DictionaryInformation): SuggestionCostMapDef[] {
     const _locale = dictInfo.locale;

@@ -1,4 +1,4 @@
-import { memorizer, callOnce, memorizerAll } from './Memorizer';
+import { callOnce, memorizer, memorizerAll } from './Memorizer';
 
 describe('Validate Memorizer', () => {
     test('the memorizer works', () => {

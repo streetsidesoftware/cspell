@@ -1,4 +1,5 @@
 import type { Glob } from '@cspell/cspell-types';
+
 import { extractGlobsFromExcludeFilesGlobMap, generateExclusionFunctionForUri } from './exclusionHelper';
 
 describe('Verify Exclusion Helper functions', () => {
