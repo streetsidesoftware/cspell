@@ -6,7 +6,7 @@ import { UnsupportedPnpFile } from './ImportError';
 
 const rootCspellLib = path.resolve(path.join(__dirname, '../../..'));
 const root = path.resolve(rootCspellLib, '../..');
-const uriTestPackages = URI.file(path.join(root, 'test-packages'));
+const uriTestPackages = URI.file(path.join(root, 'test-packages/yarn'));
 const uriDirectory = URI.file(__dirname);
 const uriYarn2TestMed = UriUtils.joinPath(uriTestPackages, 'yarn2/test-yarn3-med');
 const uriYarn2TestSci = UriUtils.joinPath(uriTestPackages, 'yarn2/test-yarn3-sci');

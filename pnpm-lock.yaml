@@ -865,22 +865,8 @@ importers:
     dependencies:
       cspell-lib: link:../../../packages/cspell-lib
 
-  test-packages/yarn2/test-yarn3-med:
-    specifiers:
-      '@cspell/cspell-types': ^6.5.0
-      '@cspell/dict-medicalterms': ^2.0.0
-    devDependencies:
-      '@cspell/cspell-types': link:../../../packages/cspell-types
-      '@cspell/dict-medicalterms': 2.0.0
-
-  test-packages/yarn2/test-yarn3-sci:
-    specifiers:
-      '@cspell/cspell-types': ^6.5.0
-      '@cspell/dict-scientific-terms-us': ^2.0.0
-    dependencies:
-      '@cspell/dict-scientific-terms-us': 2.0.0
-    devDependencies:
-      '@cspell/cspell-types': link:../../../packages/cspell-types
+  test-packages/yarn/yarn2:
+    specifiers: {}
 
   website:
     specifiers:
@@ -2537,10 +2523,6 @@ packages:
     resolution: {integrity: sha512-9j3t1UXsy3M1B8+LN8wPO73KzX7v94GBfefWKSMJDpBvDUnOjwxabnj9ICBOVErBPwURS+LkjJbgVXkvr1OiPQ==}
     dev: true
 
-  /@cspell/dict-medicalterms/2.0.0:
-    resolution: {integrity: sha512-My/vWkaqp6X22MA9Kn08sv+9PDxbWHiCnOtf9oE3WFBXTIDP+K2J4j4ioZfUg6Q3r0erQnnA16QUVkZ5eKffFQ==}
-    dev: true
-
   /@cspell/dict-nl-nl/1.0.35:
     resolution: {integrity: sha512-acqP639XKYbWuMgdR589bLzyO6kBNlKvHnbDTgrhBjDVZZaIGbhcNR9EsgNP9W8Q4b+Sl1R7bsW6Xr2W4nxaqg==}
     dev: true
@@ -2586,10 +2568,6 @@ packages:
 
   /@cspell/dict-scala/4.0.0:
     resolution: {integrity: sha512-ugdjt66/Ah34yF3u3DUNjCHXnBqIuxUUfdeBobbGxfm29CNgidrISV1NUh+xi8tPynMzSTpGbBiArFBH6on5XQ==}
-    dev: false
-
-  /@cspell/dict-scientific-terms-us/2.0.0:
-    resolution: {integrity: sha512-AwAGd4+Ek5oa/ipGzXCHj2q9RXcxPP/EmwuXh+voPi6jBCM3Void7r47cjMx6gsmNddmFzIIPOuJk90uoDKZzg==}
     dev: false
 
   /@cspell/dict-software-terms/3.1.0:
