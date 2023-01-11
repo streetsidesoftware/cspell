@@ -1,0 +1,35 @@
+{
+  "name": "test-cspell-lib",
+  "version": "6.18.1",
+  "description": "Pure testing package for cspell-lib.",
+  "bin": "bin.mjs",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "clean": "shx rm -rf dist .tsbuildinfo",
+    "build": "pnpm build:plugin && pnpm build:rollup",
+    "build:plugin": "tsc -p tsconfig.plugin.json",
+    "build:rollup": "rollup -c rollup.config.mjs",
+    "clean-build": "pnpm run clean && pnpm run build",
+    "compile": "tsc -p .",
+    "test": "pnpm test:esm && pnpm test:cjs",
+    "test:esm": "node bin.mjs",
+    "test:cjs": "node bin.cjs"
+  },
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "@cspell/cspell-bundled-dicts": "workspace:*",
+    "import-fresh": "^3.3.0"
+  },
+  "devDependencies": {
+    "cspell-lib": "workspace:*",
+    "magic-string": "^0.27.0"
+  },
+  "main": "dist/index.cjs",
+  "module": "dist/index.mjs",
+  "engines": {
+    "node": ">=14"
+  },
+  "keywords": []
+}
