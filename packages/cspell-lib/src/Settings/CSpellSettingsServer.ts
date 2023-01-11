@@ -11,13 +11,9 @@ import type {
 import assert from 'assert';
 import { GlobMatcher } from 'cspell-glob';
 import * as path from 'path';
-import {
-    createCSpellSettingsInternal as csi,
-    CSpellSettingsInternal,
-    CSpellSettingsInternalFinalized,
-    isCSpellSettingsInternal,
-} from '../Models/CSpellSettingsInternalDef';
-import { OptionalOrUndefined } from '../util/types';
+import type { CSpellSettingsInternal, CSpellSettingsInternalFinalized } from '../Models/CSpellSettingsInternalDef';
+import { createCSpellSettingsInternal as csi, isCSpellSettingsInternal } from '../Models/CSpellSettingsInternalDef';
+import type { OptionalOrUndefined } from '../util/types';
 import * as util from '../util/util';
 import { configSettingsFileVersion0_1, ENV_CSPELL_GLOB_ROOT } from './constants';
 import { calcDictionaryDefsToLoad, mapDictDefsToInternal } from './DictionarySettings';

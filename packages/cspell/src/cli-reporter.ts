@@ -8,10 +8,11 @@ import type {
     ProgressItem,
     RunResult,
 } from '@cspell/cspell-types';
-import { ImportError, isSpellingDictionaryLoadError, SpellingDictionaryLoadError } from 'cspell-lib';
+import type { ImportError, SpellingDictionaryLoadError } from 'cspell-lib';
+import { isSpellingDictionaryLoadError } from 'cspell-lib';
 import * as path from 'path';
 import { URI } from 'vscode-uri';
-import { LinterCliOptions } from './options';
+import type { LinterCliOptions } from './options';
 
 const templateIssue = `{green $filename}:{yellow $row:$col} - $message ({red $text})`;
 const templateIssueWithSuggestions = `{green $filename}:{yellow $row:$col} - $message ({red $text}) Suggestions: {yellow [$suggestions]}`;

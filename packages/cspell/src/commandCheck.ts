@@ -1,7 +1,8 @@
-import { Command, Option as CommanderOption } from 'commander';
+import type { Command } from 'commander';
+import { Option as CommanderOption } from 'commander';
 import * as App from './application';
 import { checkText } from './application';
-import { BaseOptions } from './options';
+import type { BaseOptions } from './options';
 import { CheckFailed } from './util/errors';
 import chalk from 'chalk';
 

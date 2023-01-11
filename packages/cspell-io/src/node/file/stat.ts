@@ -1,7 +1,7 @@
 import { promises as fs, statSync } from 'fs';
 import { format } from 'util';
 import { fetchHead } from './fetch';
-import { Stats } from '../../models/Stats';
+import type { Stats } from '../../models/Stats';
 import { isFileURL, isUrlLike, toURL } from './util';
 
 export async function getStat(filenameOrUri: string): Promise<Stats | Error> {

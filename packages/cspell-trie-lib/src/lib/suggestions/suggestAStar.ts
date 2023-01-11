@@ -1,9 +1,11 @@
-import { TrieRoot, TrieNode } from '../TrieNode';
+import type { TrieRoot, TrieNode } from '../TrieNode';
 import { CompoundWordsMethod, JOIN_SEPARATOR, WORD_SEPARATOR } from './walker';
-import { SuggestionGenerator, suggestionCollector, SuggestionResult } from './suggestCollector';
+import type { SuggestionGenerator, SuggestionResult } from './suggestCollector';
+import { suggestionCollector } from './suggestCollector';
 import { PairingHeap } from '../utils/PairingHeap';
 import { visualLetterMaskMap } from './orthography';
-import { createSuggestionOptions, GenSuggestionOptionsStrict, SuggestionOptions } from './genSuggestionsOptions';
+import type { GenSuggestionOptionsStrict, SuggestionOptions } from './genSuggestionsOptions';
+import { createSuggestionOptions } from './genSuggestionsOptions';
 
 export function* genCompoundableSuggestions(
     root: TrieRoot,

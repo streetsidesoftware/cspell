@@ -1,4 +1,5 @@
-import { emitSuggestionResult, EmitSuggestionOptions } from './suggestionsEmitter';
+import type { EmitSuggestionOptions } from './suggestionsEmitter';
+import { emitSuggestionResult } from './suggestionsEmitter';
 import type { SuggestedWord } from 'cspell-lib';
 import chalk from 'chalk';
 

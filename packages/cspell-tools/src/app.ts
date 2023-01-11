@@ -1,12 +1,12 @@
 // For large dictionaries, it is necessary to increase the memory limit.
 
-import * as program from 'commander';
+import type * as program from 'commander';
 import * as path from 'path';
 import type { CompileAppOptions, CompileTrieAppOptions } from './AppOptions';
 import * as compiler from './compiler';
 import { logWithTimestamp } from './compiler/logWithTimestamp';
 import { processCompileAction } from './compile';
-import { FeatureFlags } from './FeatureFlags';
+import type { FeatureFlags } from './FeatureFlags';
 import { build } from './build';
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires

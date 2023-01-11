@@ -1,8 +1,9 @@
 import { opMap, pipe } from '@cspell/cspell-pipe/sync';
-import { buildTrieFast, CompoundWordsMethod, parseDictionaryLines, SuggestionResult, Trie } from 'cspell-trie-lib';
+import type { CompoundWordsMethod, SuggestionResult, Trie } from 'cspell-trie-lib';
+import { buildTrieFast, parseDictionaryLines } from 'cspell-trie-lib';
 import { defaultOptions } from './createSpellingDictionary';
 import * as Defaults from './defaults';
-import {
+import type {
     FindResult,
     HasOptions,
     IgnoreCaseOption,
@@ -13,7 +14,8 @@ import {
 } from './SpellingDictionary';
 import { SpellingDictionaryFromTrie } from './SpellingDictionaryFromTrie';
 import { suggestArgsToSuggestOptions } from './SpellingDictionaryMethods';
-import { createTyposDictionary, TyposDictionary } from './TyposDictionary';
+import type { TyposDictionary } from './TyposDictionary';
+import { createTyposDictionary } from './TyposDictionary';
 
 class FlagWordsDictionaryTrie extends SpellingDictionaryFromTrie {
     readonly containsNoSuggestWords = false;

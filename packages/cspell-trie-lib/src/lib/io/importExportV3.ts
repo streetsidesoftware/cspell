@@ -1,5 +1,7 @@
-import { TrieNode, FLAG_WORD, TrieRoot } from '../TrieNode';
-import { Sequence, genSequence } from 'gensequence';
+import type { TrieNode, TrieRoot } from '../TrieNode';
+import { FLAG_WORD } from '../TrieNode';
+import type { Sequence } from 'gensequence';
+import { genSequence } from 'gensequence';
 import { bufferLines } from '../utils/bufferLines';
 import { trieNodeToRoot } from '../trie-util';
 

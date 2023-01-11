@@ -1,5 +1,5 @@
-import { Trie } from './trie';
-import { TrieNode } from './TrieNode';
+import type { Trie } from './trie';
+import type { TrieNode } from './TrieNode';
 
 export interface WalkItem {
     /** prefix so far */

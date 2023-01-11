@@ -1,6 +1,7 @@
-import { autoCache, CacheStats, extractStats } from '../util/AutoCache';
-import { SearchOptions, SpellingDictionary } from './SpellingDictionary';
-import { SpellingDictionaryCollection } from './SpellingDictionaryCollection';
+import type { CacheStats } from '../util/AutoCache';
+import { autoCache, extractStats } from '../util/AutoCache';
+import type { SearchOptions, SpellingDictionary } from './SpellingDictionary';
+import type { SpellingDictionaryCollection } from './SpellingDictionaryCollection';
 import { canonicalSearchOptions } from './SpellingDictionaryMethods';
 
 interface CallStats {

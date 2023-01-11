@@ -1,7 +1,8 @@
-import { CSpellConfigFileReaderWriter, CSpellConfigFileReaderWriterImpl } from './CSpellConfigFileReaderWriter';
+import type { CSpellConfigFileReaderWriter } from './CSpellConfigFileReaderWriter';
+import { CSpellConfigFileReaderWriterImpl } from './CSpellConfigFileReaderWriter';
 import { promises as fs } from 'fs';
-import { IO } from './IO';
-import { Deserializer } from './Deserializer';
+import type { IO } from './IO';
+import type { Deserializer } from './Deserializer';
 import { defaultDeserializers } from './deserializers';
 
 const defaultIO: IO = {

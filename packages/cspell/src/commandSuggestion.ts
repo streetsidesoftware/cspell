@@ -1,7 +1,8 @@
-import { Command, Option as CommanderOption } from 'commander';
+import type { Command } from 'commander';
+import { Option as CommanderOption } from 'commander';
 import * as App from './application';
 import { emitSuggestionResult } from './emitters/suggestionsEmitter';
-import { SuggestionOptions } from './options';
+import type { SuggestionOptions } from './options';
 import { CheckFailed } from './util/errors';
 
 // interface InitOptions extends Options {}

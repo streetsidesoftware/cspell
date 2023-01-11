@@ -3,7 +3,7 @@ import { URI, Utils as UriUtils } from 'vscode-uri';
 import { generateReport } from './reportGenerator';
 import { stringify } from './stringify';
 import { readConfig } from '../config';
-import { Repository } from '../configDef';
+import type { Repository } from '../configDef';
 import { writeSnapshotRaw } from '../snapshots';
 
 const noopReporter = () => {

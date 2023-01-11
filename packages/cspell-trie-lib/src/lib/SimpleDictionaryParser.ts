@@ -7,7 +7,7 @@ import {
     LINE_COMMENT,
     OPTIONAL_COMPOUND_FIX,
 } from './constants';
-import { Trie } from './trie';
+import type { Trie } from './trie';
 import { normalizeWord, normalizeWordForCaseInsensitive } from './trie-util';
 import { buildTrieFast } from './TrieBuilder';
 

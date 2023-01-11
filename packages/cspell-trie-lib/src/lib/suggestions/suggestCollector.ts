@@ -1,9 +1,10 @@
-import { editDistanceWeighted, WeightMap } from '..';
+import type { WeightMap } from '..';
+import { editDistanceWeighted } from '..';
 import { addDefToWeightMap } from '../distance/weightedMaps';
-import { RequireOptional } from '../types';
+import type { RequireOptional } from '../types';
 import { createTimer } from '../utils/timer';
 import { clean, regexQuote, replaceAllFactory } from '../utils/util';
-import { GenSuggestionOptions, GenSuggestionOptionsStrict } from './genSuggestionsOptions';
+import type { GenSuggestionOptions, GenSuggestionOptionsStrict } from './genSuggestionsOptions';
 import { WORD_SEPARATOR } from './walker';
 
 const defaultMaxNumberSuggestions = 10;

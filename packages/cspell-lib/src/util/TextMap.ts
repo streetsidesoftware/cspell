@@ -1,5 +1,5 @@
-import { MappedText } from '@cspell/cspell-types';
-import { Range } from '@cspell/cspell-types/Parser';
+import type { MappedText } from '@cspell/cspell-types';
+import type { Range } from '@cspell/cspell-types/Parser';
 import assert from 'assert';
 
 /**

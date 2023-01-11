@@ -1,5 +1,5 @@
 import assert from 'assert';
-import { MappedText } from './types';
+import type { MappedText } from './types';
 
 export function appendMappedText(a: MappedText, b: MappedText): MappedText {
     if (!a.map && !b.map) {

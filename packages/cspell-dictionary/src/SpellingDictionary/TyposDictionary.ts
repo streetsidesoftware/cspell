@@ -1,8 +1,8 @@
 import { opAppend, pipe } from '@cspell/cspell-pipe/sync';
-import { CompoundWordsMethod, SuggestionCollector, SuggestionResult } from 'cspell-trie-lib';
+import type { CompoundWordsMethod, SuggestionCollector, SuggestionResult } from 'cspell-trie-lib';
 import { mapperRemoveCaseAndAccents } from '../util/textMappers';
 import * as defaults from './defaults';
-import {
+import type {
     FindResult,
     HasOptions,
     IgnoreCaseOption,

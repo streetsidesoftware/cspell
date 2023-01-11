@@ -8,18 +8,14 @@ import { uniqueFilter } from 'hunspell-reader/dist/util';
 import * as path from 'path';
 import { spyOnConsole } from '../test/console';
 import { createTestHelper } from '../test/TestHelper';
-import { CompileOptions } from './CompileOptions';
+import type { CompileOptions } from './CompileOptions';
 import { streamWordsFromFile } from './iterateWordsFromFile';
 import { legacyLineToWords } from './legacyLineToWords';
 import { setLogger } from './logger';
-import { ReaderOptions } from './Reader';
+import type { ReaderOptions } from './Reader';
 import { readTextFile } from './readTextFile';
-import {
-    compileTrie as _compileTrie,
-    CompileTrieOptions,
-    compileWordList as _compileWordList,
-    __testing__,
-} from './wordListCompiler';
+import type { CompileTrieOptions } from './wordListCompiler';
+import { compileTrie as _compileTrie, compileWordList as _compileWordList, __testing__ } from './wordListCompiler';
 import { normalizeTargetWords } from './wordListParser';
 
 const testHelper = createTestHelper(__filename);

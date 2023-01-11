@@ -1,4 +1,4 @@
-import { SuggestionResult } from './entities';
+import type { SuggestionResult } from './entities';
 import { compareResults } from './helpers';
 
 export class SuggestionCollector {

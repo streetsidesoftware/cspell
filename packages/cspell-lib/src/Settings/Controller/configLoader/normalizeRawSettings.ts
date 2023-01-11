@@ -1,7 +1,7 @@
-import { CSpellUserSettings, GlobDef, LanguageSetting, ReporterSettings } from '@cspell/cspell-types';
+import type { CSpellUserSettings, GlobDef, LanguageSetting, ReporterSettings } from '@cspell/cspell-types';
 import * as path from 'path';
 import { resolveFile } from '../../../util/resolveFile';
-import { OptionalOrUndefined } from '../../../util/types';
+import type { OptionalOrUndefined } from '../../../util/types';
 import * as util from '../../../util/util';
 import { mapDictDefsToInternal } from '../../DictionarySettings';
 import { toGlobDef } from './toGlobDef';

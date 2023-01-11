@@ -1,18 +1,11 @@
-import { genSequence, Sequence } from 'gensequence';
+import type { Sequence } from 'gensequence';
+import { genSequence } from 'gensequence';
 import { CASE_INSENSITIVE_PREFIX, COMPOUND_FIX, FORBID_PREFIX, OPTIONAL_COMPOUND_FIX } from './constants';
-import {
-    createFindOptions,
-    FindFullResult,
-    findLegacyCompound,
-    FindOptions,
-    findWord,
-    findWordNode,
-    isForbiddenWord,
-    PartialFindOptions,
-} from './find';
+import type { FindFullResult, FindOptions, PartialFindOptions } from './find';
+import { createFindOptions, findLegacyCompound, findWord, findWordNode, isForbiddenWord } from './find';
 import { genSuggestions, suggest } from './suggest';
-import { SuggestionCollector, SuggestionResult } from './suggestCollector';
-import { SuggestionOptions } from './suggestions/genSuggestionsOptions';
+import type { SuggestionCollector, SuggestionResult } from './suggestCollector';
+import type { SuggestionOptions } from './suggestions/genSuggestionsOptions';
 import {
     clean,
     countWords,
@@ -23,9 +16,10 @@ import {
     mergeOptionalWithDefaults,
     orderTrie,
 } from './trie-util';
-import { PartialTrieOptions, TrieNode, TrieOptions, TrieRoot } from './TrieNode';
+import type { PartialTrieOptions, TrieNode, TrieOptions, TrieRoot } from './TrieNode';
 import { replaceAllFactory } from './utils/util';
-import { CompoundWordsMethod, walker, WalkerIterator } from './walker';
+import type { CompoundWordsMethod, WalkerIterator } from './walker';
+import { walker } from './walker';
 
 export {
     CASE_INSENSITIVE_PREFIX,

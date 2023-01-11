@@ -11,7 +11,7 @@ import { autoCache, createCache01 } from '../util/AutoCache';
 import { clean } from '../util/clean';
 import { createMapper } from '../util/repMap';
 import * as Defaults from './defaults';
-import {
+import type {
     FindResult,
     HasOptions,
     SpellingDictionary,

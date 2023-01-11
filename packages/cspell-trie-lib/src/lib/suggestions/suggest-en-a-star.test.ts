@@ -1,12 +1,8 @@
 import { readTrie } from '../../test/dictionaries.test.helper';
-import { GenSuggestionOptionsStrict } from './genSuggestionsOptions';
+import type { GenSuggestionOptionsStrict } from './genSuggestionsOptions';
 import { genCompoundableSuggestions, suggest } from './suggestAStar';
-import {
-    suggestionCollector,
-    SuggestionCollectorOptions,
-    SuggestionResult,
-    SuggestionCollector,
-} from './suggestCollector';
+import type { SuggestionCollectorOptions, SuggestionResult, SuggestionCollector } from './suggestCollector';
+import { suggestionCollector } from './suggestCollector';
 import { createTimer } from '../utils/timer';
 import { CompoundWordsMethod } from './walker';
 import { clean } from '../trie-util';

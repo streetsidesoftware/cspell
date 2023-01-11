@@ -1,20 +1,15 @@
 // cspell:ignore TSESTree
 import type { TSESTree } from '@typescript-eslint/types';
 import assert from 'assert';
-import {
-    createTextDocument,
-    CSpellSettings,
-    DocumentValidator,
-    refreshDictionaryCache,
-    TextDocument,
-    ValidationIssue,
-} from 'cspell-lib';
+import type { CSpellSettings, TextDocument, ValidationIssue } from 'cspell-lib';
+import { createTextDocument, DocumentValidator, refreshDictionaryCache } from 'cspell-lib';
 import type { Rule } from 'eslint';
 import type { Comment, Identifier, ImportSpecifier, Literal, Node, TemplateElement } from 'estree';
 import * as path from 'path';
 import { format } from 'util';
 import { addWordToCustomWordList } from './customWordList';
-import { CustomWordListFile, normalizeOptions, Options } from './options';
+import type { CustomWordListFile, Options } from './options';
+import { normalizeOptions } from './options';
 import optionsSchema from './_auto_generated_/options.schema.json';
 
 const schema = optionsSchema as unknown as Rule.RuleMetaData['schema'];

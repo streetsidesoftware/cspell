@@ -1,4 +1,4 @@
-import { CostPosition } from '../distance/weightedMaps';
+import type { CostPosition } from '../distance/weightedMaps';
 import type { DictionaryInformation } from '../models/DictionaryInformation';
 import { mapDictionaryInformationToWeightMap } from './mapDictionaryInfoToWeightMap';
 

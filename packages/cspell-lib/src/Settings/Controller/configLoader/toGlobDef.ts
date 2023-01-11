@@ -1,4 +1,4 @@
-import { Glob, GlobDef } from '@cspell/cspell-types';
+import type { Glob, GlobDef } from '@cspell/cspell-types';
 
 export function toGlobDef(g: undefined, root: string | undefined, source: string | undefined): undefined;
 export function toGlobDef(g: Glob, root: string | undefined, source: string | undefined): GlobDef;

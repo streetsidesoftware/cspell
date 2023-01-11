@@ -1,6 +1,7 @@
 import * as path from 'path';
-import { GlobMatcher, GlobMatchOptions, MatcherMode } from './GlobMatcher';
-import {
+import type { GlobMatchOptions, MatcherMode } from './GlobMatcher';
+import { GlobMatcher } from './GlobMatcher';
+import type {
     GlobMatch,
     GlobPattern,
     GlobPatternNormalized,

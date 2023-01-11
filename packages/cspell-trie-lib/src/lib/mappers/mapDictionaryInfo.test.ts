@@ -1,4 +1,4 @@
-import { DictionaryInformation } from '../models/DictionaryInformation';
+import type { DictionaryInformation } from '../models/DictionaryInformation';
 import { mapDictionaryInformation } from './mapDictionaryInfo';
 
 describe('mapDictionaryInfo', () => {

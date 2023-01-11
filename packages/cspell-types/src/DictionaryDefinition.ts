@@ -1,4 +1,4 @@
-import { DictionaryInformation } from './DictionaryInformation';
+import type { DictionaryInformation } from './DictionaryInformation';
 
 export type DictionaryDefinition =
     | DictionaryDefinitionPreferred

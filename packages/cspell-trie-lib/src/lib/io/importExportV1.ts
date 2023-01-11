@@ -1,6 +1,8 @@
-import { TrieNode, FLAG_WORD, ChildMap, TrieRoot } from '../TrieNode';
-import { TrieRefNode } from '../trieRef';
-import { Sequence, genSequence } from 'gensequence';
+import type { TrieNode, TrieRoot } from '../TrieNode';
+import { FLAG_WORD, ChildMap } from '../TrieNode';
+import type { TrieRefNode } from '../trieRef';
+import type { Sequence } from 'gensequence';
+import { genSequence } from 'gensequence';
 import { convertToTrieRefNodes } from '../convertToTrieRefNodes';
 import { trieNodeToRoot } from '../trie-util';
 

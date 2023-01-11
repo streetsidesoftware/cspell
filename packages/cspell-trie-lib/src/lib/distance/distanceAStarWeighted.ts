@@ -1,6 +1,6 @@
 import assert from 'assert';
 import { PairingHeap } from '../utils/PairingHeap';
-import { WeightMap } from './weightedMaps';
+import type { WeightMap } from './weightedMaps';
 
 /**
  * Calculate the edit distance between two words using an A* algorithm.

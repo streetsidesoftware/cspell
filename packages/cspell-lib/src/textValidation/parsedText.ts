@@ -1,7 +1,7 @@
-import { MappedText, TextOffset } from '@cspell/cspell-types';
+import type { MappedText, TextOffset } from '@cspell/cspell-types';
 import type { ValidationIssue } from '../Models/ValidationIssue';
 import { extractTextMapRangeOrigin } from '../util/TextMap';
-import * as TextRange from '../util/TextRange';
+import type * as TextRange from '../util/TextRange';
 
 export type Offset = number;
 

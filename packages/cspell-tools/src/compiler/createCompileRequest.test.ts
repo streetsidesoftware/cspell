@@ -1,4 +1,4 @@
-import { CompileCommonAppOptions } from '../AppOptions';
+import type { CompileCommonAppOptions } from '../AppOptions';
 import { createCompileRequest } from './createCompileRequest';
 
 describe('createCompileRequest', () => {

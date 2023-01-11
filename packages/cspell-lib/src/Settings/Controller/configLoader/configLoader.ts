@@ -6,14 +6,17 @@ import type {
     Source,
 } from '@cspell/cspell-types';
 import * as json from 'comment-json';
-import { cosmiconfig, cosmiconfigSync, Options as CosmicOptions, OptionsSync as CosmicOptionsSync } from 'cosmiconfig';
-import { CSpellIO, getDefaultCSpellIO } from 'cspell-io';
+import type { Options as CosmicOptions, OptionsSync as CosmicOptionsSync } from 'cosmiconfig';
+import { cosmiconfig, cosmiconfigSync } from 'cosmiconfig';
+import type { CSpellIO } from 'cspell-io';
+import { getDefaultCSpellIO } from 'cspell-io';
 import * as path from 'path';
 import { URI } from 'vscode-uri';
-import { createCSpellSettingsInternal as csi, CSpellSettingsInternal } from '../../../Models/CSpellSettingsInternalDef';
+import type { CSpellSettingsInternal } from '../../../Models/CSpellSettingsInternalDef';
+import { createCSpellSettingsInternal as csi } from '../../../Models/CSpellSettingsInternalDef';
 import { logError, logWarning } from '../../../util/logger';
 import { resolveFile } from '../../../util/resolveFile';
-import { OptionalOrUndefined } from '../../../util/types';
+import type { OptionalOrUndefined } from '../../../util/types';
 import {
     configSettingsFileVersion0_1,
     configSettingsFileVersion0_2,
@@ -23,7 +26,8 @@ import {
 import { mergeSettings } from '../../CSpellSettingsServer';
 import { getRawGlobalSettings } from '../../GlobalSettings';
 import { ImportError } from '../ImportError';
-import { LoaderResult, pnpLoader } from '../pnpLoader';
+import type { LoaderResult } from '../pnpLoader';
+import { pnpLoader } from '../pnpLoader';
 import {
     normalizeCacheSettings,
     normalizeDictionaryDefs,

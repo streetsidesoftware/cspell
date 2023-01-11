@@ -1,5 +1,5 @@
-import { Handler, HandleRequestFn } from './handlers';
-import { ServiceRequest } from './request';
+import type { Handler, HandleRequestFn } from './handlers';
+import type { ServiceRequest } from './request';
 
 export interface ServiceRequestFactory<R extends ServiceRequest, P = R['params'], T extends string = R['type']> {
     type: T;

@@ -1,9 +1,10 @@
-import { CSpellUserSettings } from '@cspell/cspell-types';
+import type { CSpellUserSettings } from '@cspell/cspell-types';
 import * as ExclusionHelper from './exclusionHelper';
 import { clearCachedSettingsFiles } from './Settings';
 import { toInternalSettings } from './Settings/CSpellSettingsServer';
 import * as Link from './Settings/index.link';
-import { getDictionaryInternal, refreshDictionaryCache, SpellingDictionaryCollection } from './SpellingDictionary';
+import type { SpellingDictionaryCollection } from './SpellingDictionary';
+import { getDictionaryInternal, refreshDictionaryCache } from './SpellingDictionary';
 import * as Text from './util/text';
 
 export * from '@cspell/cspell-types';

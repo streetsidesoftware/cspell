@@ -1,7 +1,7 @@
-import { CSpellConfigFile } from './CSpellConfigFile';
+import type { CSpellConfigFile } from './CSpellConfigFile';
 import { CSpellConfigFileReaderWriterImpl } from './CSpellConfigFileReaderWriter';
 import { defaultDeserializers } from './deserializers';
-import { IO } from './IO';
+import type { IO } from './IO';
 import { json } from './test-helpers/util';
 
 const oc = expect.objectContaining;

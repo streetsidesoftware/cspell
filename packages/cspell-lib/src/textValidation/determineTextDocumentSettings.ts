@@ -1,8 +1,8 @@
-import { CSpellUserSettings } from '@cspell/cspell-types';
+import type { CSpellUserSettings } from '@cspell/cspell-types';
 import * as path from 'path';
 import { getLanguagesForBasename } from '../LanguageIds';
-import { CSpellSettingsInternal } from '../Models/CSpellSettingsInternalDef';
-import { TextDocument } from '../Models/TextDocument';
+import type { CSpellSettingsInternal } from '../Models/CSpellSettingsInternalDef';
+import type { TextDocument } from '../Models/TextDocument';
 import { calcOverrideSettings, getDefaultSettings, getGlobalSettings, mergeSettings } from '../Settings';
 import { combineTextAndLanguageSettings } from '../Settings/TextDocumentSettings';
 

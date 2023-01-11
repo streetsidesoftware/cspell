@@ -3,7 +3,8 @@ import * as path from 'path';
 import { URI } from 'vscode-uri';
 import { logError, logWarning } from '../../../util/logger';
 import { currentSettingsFileVersion, ENV_CSPELL_GLOB_ROOT } from '../../constants';
-import { extractDependencies, getSources, ImportFileRefWithError, mergeSettings } from '../../CSpellSettingsServer';
+import type { ImportFileRefWithError } from '../../CSpellSettingsServer';
+import { extractDependencies, getSources, mergeSettings } from '../../CSpellSettingsServer';
 import { getDefaultBundledSettings, _defaultSettings } from '../../DefaultSettings';
 import {
     clearCachedSettingsFiles,

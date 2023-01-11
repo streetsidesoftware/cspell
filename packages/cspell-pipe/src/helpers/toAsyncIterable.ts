@@ -1,4 +1,4 @@
-import { AnyIterable } from '../internalTypes.js';
+import type { AnyIterable } from '../internalTypes.js';
 
 export function mergeAsyncIterables<T>(iter: Iterable<T>): AsyncIterable<T>;
 export function mergeAsyncIterables<T>(iter: AsyncIterable<T>): AsyncIterable<T>;

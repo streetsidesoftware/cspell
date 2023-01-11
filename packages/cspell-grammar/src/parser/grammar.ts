@@ -1,5 +1,5 @@
-import { GrammarDef } from './grammarDefinition';
-import { NGrammar } from './grammarNormalized';
+import type { GrammarDef } from './grammarDefinition';
+import type { NGrammar } from './grammarNormalized';
 import { normalizeGrammar } from './grammarNormalizer';
 
 export type Grammar = NGrammar;

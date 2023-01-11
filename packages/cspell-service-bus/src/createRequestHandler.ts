@@ -1,5 +1,5 @@
 import type { IsARequest, ServiceRequest } from './request';
-import { ServiceRequestFactory } from './ServiceRequestFactory';
+import type { ServiceRequestFactory } from './ServiceRequestFactory';
 import type { HandleRequestFn, Handler, HandlerFn } from './handlers';
 
 export function createRequestHandler<T extends ServiceRequest>(

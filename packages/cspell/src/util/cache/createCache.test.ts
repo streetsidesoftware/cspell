@@ -1,7 +1,7 @@
 import * as path from 'path';
 import { resolve as r } from 'path';
-import { CreateCacheSettings } from '.';
-import { CacheOptions } from './CacheOptions';
+import type { CreateCacheSettings } from '.';
+import type { CacheOptions } from './CacheOptions';
 import { calcCacheSettings, createCache, __testing__ } from './createCache';
 import { DiskCache } from './DiskCache';
 import { DummyCache } from './DummyCache';

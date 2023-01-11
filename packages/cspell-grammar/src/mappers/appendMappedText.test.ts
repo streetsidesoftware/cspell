@@ -1,5 +1,5 @@
 import { appendMappedText } from './appendMappedText';
-import { MappedText } from './types';
+import type { MappedText } from './types';
 
 describe('appendMappedText', () => {
     test.each`

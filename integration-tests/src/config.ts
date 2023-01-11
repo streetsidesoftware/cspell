@@ -1,4 +1,4 @@
-import { Config, Repository } from './configDef';
+import type { Config, Repository } from './configDef';
 import * as fs from 'fs';
 import * as Path from 'path';
 

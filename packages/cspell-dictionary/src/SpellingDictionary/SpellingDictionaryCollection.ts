@@ -3,8 +3,7 @@ import { genSequence } from 'gensequence';
 import { clean } from '../util/clean';
 import { isDefined } from '../util/util';
 import * as Defaults from './defaults';
-import {
-    CompoundWordsMethod,
+import type {
     FindResult,
     HasOptions,
     SearchOptions,
@@ -15,6 +14,7 @@ import {
     SuggestionResult,
     SuggestOptions,
 } from './SpellingDictionary';
+import { CompoundWordsMethod } from './SpellingDictionary';
 import {
     defaultNumSuggestions,
     hasOptionToSearchOption,

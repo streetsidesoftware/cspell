@@ -1,4 +1,4 @@
-import { CSpellConfigFile } from './CSpellConfigFile';
+import type { CSpellConfigFile } from './CSpellConfigFile';
 
 export interface DeserializerParams {
     uri: string;

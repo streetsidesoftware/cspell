@@ -1,6 +1,6 @@
 import { Link } from 'cspell-lib';
 import chalk from 'chalk';
-import { Table } from './util/table';
+import type { Table } from './util/table';
 
 export const listGlobalImports = Link.listGlobalImports;
 export const addPathsToGlobalImports = Link.addPathsToGlobalImports;

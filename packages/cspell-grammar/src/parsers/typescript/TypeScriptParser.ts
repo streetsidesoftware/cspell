@@ -1,12 +1,12 @@
 import { pipe, opFlatten, opMap } from '@cspell/cspell-pipe/sync';
-import { ParsedText, ParseResult, Scope, ScopeChain } from '@cspell/cspell-types/Parser';
+import type { ParsedText, ParseResult, Scope, ScopeChain } from '@cspell/cspell-types/Parser';
 import { compileGrammar } from '../..';
 import { grammar } from '../../grammars/typescript';
 import { appendMappedText } from '../../mappers/appendMappedText';
 import { mapRawString } from '../../mappers/typescript';
 import { createParser } from '../../parser/parser';
 import { ScopePool } from '../../parser/scope';
-import { TokenizedLine } from '../../parser/types';
+import type { TokenizedLine } from '../../parser/types';
 
 const tsGrammar = compileGrammar(grammar);
 

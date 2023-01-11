@@ -1,7 +1,8 @@
 import { opAppend, opFilter, opMap, pipeSync } from '@cspell/cspell-pipe/sync';
 import type { CSpellUserSettings } from '@cspell/cspell-types';
-import { genSequence, Sequence } from 'gensequence';
-import { ExtendedSuggestion } from '../Models/Suggestion';
+import type { Sequence } from 'gensequence';
+import { genSequence } from 'gensequence';
+import type { ExtendedSuggestion } from '../Models/Suggestion';
 import { getSpellDictInterface } from '../SpellingDictionary';
 import * as Text from '../util/text';
 import { clean, isDefined } from '../util/util';

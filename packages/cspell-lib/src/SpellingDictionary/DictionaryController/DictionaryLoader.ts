@@ -1,13 +1,13 @@
 import { opConcatMap, opFilter, opMap, pipe } from '@cspell/cspell-pipe/sync';
 import type { DictionaryFileTypes } from '@cspell/cspell-types';
+import type { SpellingDictionary } from 'cspell-dictionary';
 import {
     createFailedToLoadDictionary,
     createSpellingDictionary,
     createSpellingDictionaryFromTrieFile,
-    SpellingDictionary,
 } from 'cspell-dictionary';
-import { CSpellIO, Stats } from 'cspell-io';
-import { DictionaryDefinitionInternal } from '../../Models/CSpellSettingsInternalDef';
+import type { CSpellIO, Stats } from 'cspell-io';
+import type { DictionaryDefinitionInternal } from '../../Models/CSpellSettingsInternalDef';
 import { toError } from '../../util/errors';
 import { StrongWeakMap } from '@cspell/strong-weak-map';
 import { SpellingDictionaryLoadError } from '../SpellingDictionaryError';

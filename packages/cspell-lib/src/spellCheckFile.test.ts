@@ -3,15 +3,13 @@ import * as Path from 'path';
 import { posix } from 'path';
 import { URI } from 'vscode-uri';
 import { ImportError } from './Settings/Controller/ImportError';
+import type { Document, SpellCheckFileOptions, SpellCheckFileResult } from './spellCheckFile';
 import {
     determineFinalDocumentSettings,
-    Document,
     fileToDocument,
     fileToTextDocument,
     spellCheckDocument,
     spellCheckFile,
-    SpellCheckFileOptions,
-    SpellCheckFileResult,
 } from './spellCheckFile';
 
 const samples = Path.resolve(__dirname, '../samples');

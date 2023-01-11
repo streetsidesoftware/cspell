@@ -1,5 +1,5 @@
 import type { Stats } from './models';
-import { BufferEncoding } from './models/BufferEncoding';
+import type { BufferEncoding } from './models/BufferEncoding';
 import type { TextFileResource } from './models/FileResource';
 
 export type UrlOrFilename = string | URL;

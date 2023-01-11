@@ -1,4 +1,5 @@
-import { FeatureFlags, FeatureFlag, getSystemFeatureFlags } from './FeatureFlags';
+import type { FeatureFlag } from './FeatureFlags';
+import { FeatureFlags, getSystemFeatureFlags } from './FeatureFlags';
 
 describe('FeatureFlags', () => {
     const flags: FeatureFlag[] = [

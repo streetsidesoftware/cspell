@@ -1,12 +1,15 @@
-import { CSpellUserSettings } from '@cspell/cspell-types';
+import type { CSpellUserSettings } from '@cspell/cspell-types';
 import assert from 'assert';
-import { isTextDocument, TextDocument } from '../Models/TextDocument';
+import type { TextDocument } from '../Models/TextDocument';
+import { isTextDocument } from '../Models/TextDocument';
 import type { ValidationIssue } from '../Models/ValidationIssue';
 import * as Settings from '../Settings';
-import { Document, resolveDocumentToTextDocument } from '../spellCheckFile';
-import { MatchRange } from '../util/TextRange';
+import type { Document } from '../spellCheckFile';
+import { resolveDocumentToTextDocument } from '../spellCheckFile';
+import type { MatchRange } from '../util/TextRange';
 import { clean } from '../util/util';
-import { DocumentValidator, DocumentValidatorOptions } from './docValidator';
+import type { DocumentValidatorOptions } from './docValidator';
+import { DocumentValidator } from './docValidator';
 import { calcTextInclusionRanges } from './textValidator';
 import { validateText } from './validator';
 

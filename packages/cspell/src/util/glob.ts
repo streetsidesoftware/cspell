@@ -1,5 +1,6 @@
 import type { CSpellUserSettings, Glob } from '@cspell/cspell-types';
-import { fileOrGlobToGlob, GlobMatcher, GlobPatternWithRoot } from 'cspell-glob';
+import type { GlobPatternWithRoot } from 'cspell-glob';
+import { fileOrGlobToGlob, GlobMatcher } from 'cspell-glob';
 import glob from 'glob';
 import * as path from 'path';
 

@@ -1,7 +1,8 @@
 import { parseDictionary } from './SimpleDictionaryParser';
-import { Trie } from './trie';
+import type { Trie } from './trie';
 import { findWord } from './find';
-import { WalkNext, WalkItem, compoundWalker, compoundWords } from './compoundWalker';
+import type { WalkNext, WalkItem } from './compoundWalker';
+import { compoundWalker, compoundWords } from './compoundWalker';
 
 // cspell:ignore errorerror
 

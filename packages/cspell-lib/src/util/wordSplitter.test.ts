@@ -1,5 +1,6 @@
 import type { TextOffset } from '@cspell/cspell-types';
-import { SortedBreaks, split, __testing__ } from './wordSplitter';
+import type { SortedBreaks } from './wordSplitter';
+import { split, __testing__ } from './wordSplitter';
 
 const generateWordBreaks = __testing__.generateWordBreaks;
 

@@ -1,4 +1,5 @@
-import { Table, tableToLines } from './table';
+import type { Table } from './table';
+import { tableToLines } from './table';
 import strip from 'strip-ansi';
 
 describe('Validate table.ts', () => {

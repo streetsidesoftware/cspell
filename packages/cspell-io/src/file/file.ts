@@ -1,6 +1,6 @@
 import { getDefaultCSpellIO } from '../CSpellIONode';
 import { toError } from '../errors';
-import { Stats } from '../models';
+import type { Stats } from '../models';
 import type { BufferEncoding } from '../models/BufferEncoding';
 import type {
     getStat as GetStatFn,

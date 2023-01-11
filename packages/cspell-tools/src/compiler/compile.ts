@@ -2,21 +2,19 @@ import { pipeAsync, toArray } from '@cspell/cspell-pipe';
 import { opAwaitAsync, opMapAsync } from '@cspell/cspell-pipe/operators';
 import { opConcatMap, opMap, pipe } from '@cspell/cspell-pipe/sync';
 import * as path from 'path';
-import {
+import type {
     CompileRequest,
     CompileSourceOptions,
     CompileTargetOptions,
     DictionarySource,
     FilePath,
     FileSource,
-    isFileListSource,
-    isFilePath,
-    isFileSource,
     Target,
 } from '../config';
+import { isFileListSource, isFilePath, isFileSource } from '../config';
 import { streamWordsFromFile } from './iterateWordsFromFile';
 import { logWithTimestamp } from './logWithTimestamp';
-import { ReaderOptions } from './Reader';
+import type { ReaderOptions } from './Reader';
 import { readTextFile } from './readTextFile';
 import { compileTrie, compileWordList } from './wordListCompiler';
 import { normalizeTargetWords } from './wordListParser';

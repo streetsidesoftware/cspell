@@ -1,4 +1,5 @@
-import { __testing__, ReporterIssue } from './cli-reporter';
+import type { ReporterIssue } from './cli-reporter';
+import { __testing__ } from './cli-reporter';
 
 const { formatIssue } = __testing__;
 

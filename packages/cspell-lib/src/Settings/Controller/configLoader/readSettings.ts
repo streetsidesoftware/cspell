@@ -1,4 +1,5 @@
-import { CSpellSettingsI, CSpellSettingsWST, getDefaultConfigLoader } from './configLoader';
+import type { CSpellSettingsI, CSpellSettingsWST } from './configLoader';
+import { getDefaultConfigLoader } from './configLoader';
 
 /**
  * Read / import a cspell configuration file.

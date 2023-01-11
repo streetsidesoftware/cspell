@@ -1,6 +1,6 @@
 import { createTriFromList } from '.';
 import { genSequence } from 'gensequence';
-import { TrieRefNode } from './trieRef';
+import type { TrieRefNode } from './trieRef';
 import { convertToTrieRefNodes } from './convertToTrieRefNodes';
 import { consolidate } from './consolidate';
 

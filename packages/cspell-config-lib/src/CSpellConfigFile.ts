@@ -1,5 +1,5 @@
-import { CSpellSettings } from '@cspell/cspell-types';
-import { Serializer } from './Serializer';
+import type { CSpellSettings } from '@cspell/cspell-types';
+import type { Serializer } from './Serializer';
 
 export interface CSpellConfigFile {
     readonly uri: string;

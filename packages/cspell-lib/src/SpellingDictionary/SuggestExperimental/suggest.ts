@@ -1,6 +1,6 @@
-import { Trie, WalkerIterator } from 'cspell-trie-lib';
+import type { Trie, WalkerIterator } from 'cspell-trie-lib';
 
-import { SuggestionResult } from './entities';
+import type { SuggestionResult } from './entities';
 
 import { wordToFeatures } from './helpers';
 

@@ -1,15 +1,11 @@
 import type { CSpellSettings, DictionaryId, LocaleId } from '@cspell/cspell-types';
 import { genSequence } from 'gensequence';
-import { LanguageId } from './LanguageIds';
+import type { LanguageId } from './LanguageIds';
 import { finalizeSettings, mergeSettings } from './Settings';
 import { toInternalSettings } from './Settings/CSpellSettingsServer';
 import { calcSettingsForLanguageId } from './Settings/LanguageSettings';
-import {
-    getDictionaryInternal,
-    HasOptions,
-    refreshDictionaryCache,
-    SpellingDictionaryCollection,
-} from './SpellingDictionary';
+import type { HasOptions, SpellingDictionaryCollection } from './SpellingDictionary';
+import { getDictionaryInternal, refreshDictionaryCache } from './SpellingDictionary';
 import * as util from './util/util';
 
 export interface TraceResult {

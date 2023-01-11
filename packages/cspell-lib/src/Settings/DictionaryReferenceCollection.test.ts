@@ -1,4 +1,4 @@
-import { DictionaryReference } from '../../../cspell-types/dist';
+import type { DictionaryReference } from '../../../cspell-types/dist';
 import { createDictionaryReferenceCollection } from './DictionaryReferenceCollection';
 
 describe('DictionaryReferenceCollection', () => {

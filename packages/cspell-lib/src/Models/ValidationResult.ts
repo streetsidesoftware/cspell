@@ -1,4 +1,4 @@
-import { TextOffset as TextOffsetRW, Issue } from '@cspell/cspell-types';
+import type { TextOffset as TextOffsetRW, Issue } from '@cspell/cspell-types';
 
 export interface ValidationResult extends TextOffsetRW, Pick<Issue, 'message' | 'issueType'> {
     line: TextOffsetRW;

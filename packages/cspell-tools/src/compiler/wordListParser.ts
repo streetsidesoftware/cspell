@@ -1,7 +1,7 @@
 import { opCombine, opCombine as opPipe, opFilter, opMap, type Operator } from '@cspell/cspell-pipe/sync';
 import { createDictionaryLineParser } from 'cspell-trie-lib';
 import { uniqueFilter } from 'hunspell-reader/dist/util';
-import { CompileOptions } from './CompileOptions';
+import type { CompileOptions } from './CompileOptions';
 import { legacyLineToWords } from './legacyLineToWords';
 
 export function normalizeTargetWords(options: CompileOptions): Operator<string> {
