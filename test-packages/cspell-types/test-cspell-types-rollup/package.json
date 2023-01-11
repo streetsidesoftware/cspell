@@ -11,7 +11,6 @@
   "scripts": {
     "clean": "shx rm -rf dist .tsbuildinfo",
     "build": "rollup -c rollup.config.mjs",
-    "build-dev": "tsc -p tsconfig.dev.json",
     "clean-build": "pnpm run clean && pnpm run build",
     "compile": "tsc -p .",
     "test": "pnpm test:unit && pnpm test:smoke",
