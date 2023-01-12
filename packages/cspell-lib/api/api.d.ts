@@ -376,6 +376,7 @@ type LoaderResult = URI | undefined;
 
 type CSpellSettingsWST$1 = CSpellSettingsWithSourceTrace;
 type CSpellSettingsI$1 = CSpellSettingsInternal;
+
 type PnPSettings = OptionalOrUndefined<PnPSettings$1>;
 declare const sectionCSpell = "cSpell";
 declare const defaultFileName = "cspell.json";
@@ -391,13 +392,6 @@ declare function loadConfig(file: string, pnpSettings?: PnPSettings): Promise<CS
 declare function loadPnP(pnpSettings: PnPSettings, searchFrom: URI): Promise<LoaderResult>;
 declare function loadPnPSync(pnpSettings: PnPSettings, searchFrom: URI): LoaderResult;
 declare function readRawSettings(filename: string, relativeTo?: string): CSpellSettingsWST$1;
-/**
- *
- * @param filenames - settings files to read
- * @returns combined configuration
- * @deprecated true
- */
-declare function readSettingsFiles(filenames: string[]): CSpellSettingsI$1;
 declare function getGlobalSettings(): CSpellSettingsI$1;
 declare function getCachedFileSize(): number;
 declare function clearCachedSettingsFiles(): void;
@@ -428,6 +422,14 @@ declare function readSettings(filename: string, defaultValues: CSpellSettingsWST
  */
 declare function readSettings(filename: string, relativeTo: string): CSpellSettingsI$1;
 declare function readSettings(filename: string, relativeTo: string, defaultValues: CSpellSettingsWST$1): CSpellSettingsI$1;
+
+/**
+ *
+ * @param filenames - settings files to read
+ * @returns combined configuration
+ * @deprecated true
+ */
+declare function readSettingsFiles(filenames: string[]): CSpellSettingsI$1;
 
 declare class ImportError extends Error {
     readonly cause: Error | undefined;

@@ -17,9 +17,9 @@ import {
     loadPnP,
     loadPnPSync,
     readRawSettings,
-    readSettingsFiles,
     searchForConfig,
 } from './configLoader';
+import { readSettingsFiles } from './readSettingsFiles';
 import { extractImportErrors } from './extractImportErrors';
 import { readSettings } from './readSettings';
 
