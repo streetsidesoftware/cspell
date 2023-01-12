@@ -285,38 +285,7 @@ interface DocumentWithText extends Document {
     text: string;
 }
 
-interface FeatureFlag {
-    name: string;
-    description: string;
-}
-type FlagTypes = string | boolean;
-/**
- * Feature Flags are used to turn on/off features.
- * These are primarily used before a feature has been fully released.
- */
-declare class FeatureFlags {
-    private flags;
-    private flagValues;
-    constructor(flags?: FeatureFlag[]);
-    register(flag: FeatureFlag): this;
-    register(name: string, description: string): this;
-    getFlag(flag: string): FlagTypes | undefined;
-    getFlagBool(flag: string): boolean | undefined;
-    setFlag(flag: string, value?: FlagTypes): this;
-    getFlagInfo(flag: string): FeatureFlag | undefined;
-    getFlags(): FeatureFlag[];
-    getFlagValues(): Map<string, FlagTypes>;
-    reset(): this;
-}
-declare class UnknownFeatureFlagError extends Error {
-    readonly flag: string;
-    constructor(flag: string);
-}
-declare function getSystemFeatureFlags(): FeatureFlags;
-
-type LanguageId = string;
-declare function getLanguagesForExt(ext: string): string[];
-declare function getLanguagesForBasename(basename: string): string[];
+declare function isBinaryFile(filenameUri: URI, languageId?: string | string[]): boolean;
 
 type DocumentUri = URI;
 interface Position {
@@ -379,6 +348,44 @@ interface TextDocumentContentChangeEvent {
 }
 declare function createTextDocument({ uri, content, languageId, locale, version, }: CreateTextDocumentParams): TextDocument;
 declare function updateTextDocument(doc: TextDocument, edits: TextDocumentContentChangeEvent[], version?: number): TextDocument;
+
+declare function fileToDocument(file: string): Document;
+declare function fileToDocument(file: string, text: string, languageId?: string, locale?: string): DocumentWithText;
+declare function fileToDocument(file: string, text?: string, languageId?: string, locale?: string): Document | DocumentWithText;
+declare function fileToTextDocument(file: string): Promise<TextDocument>;
+
+interface FeatureFlag {
+    name: string;
+    description: string;
+}
+type FlagTypes = string | boolean;
+/**
+ * Feature Flags are used to turn on/off features.
+ * These are primarily used before a feature has been fully released.
+ */
+declare class FeatureFlags {
+    private flags;
+    private flagValues;
+    constructor(flags?: FeatureFlag[]);
+    register(flag: FeatureFlag): this;
+    register(name: string, description: string): this;
+    getFlag(flag: string): FlagTypes | undefined;
+    getFlagBool(flag: string): boolean | undefined;
+    setFlag(flag: string, value?: FlagTypes): this;
+    getFlagInfo(flag: string): FeatureFlag | undefined;
+    getFlags(): FeatureFlag[];
+    getFlagValues(): Map<string, FlagTypes>;
+    reset(): this;
+}
+declare class UnknownFeatureFlagError extends Error {
+    readonly flag: string;
+    constructor(flag: string);
+}
+declare function getSystemFeatureFlags(): FeatureFlags;
+
+type LanguageId = string;
+declare function getLanguagesForExt(ext: string): string[];
+declare function getLanguagesForBasename(basename: string): string[];
 
 declare const currentSettingsFileVersion = "0.2";
 declare const ENV_CSPELL_GLOB_ROOT = "CSPELL_GLOB_ROOT";
@@ -757,11 +764,6 @@ interface DetermineFinalDocumentSettingsResult {
  * @param settings - The near final settings. Should already be the combination of all configuration files.
  */
 declare function determineFinalDocumentSettings(document: DocumentWithText, settings: CSpellUserSettings): DetermineFinalDocumentSettingsResult;
-declare function isBinaryFile(filenameUri: URI, languageId?: string | string[]): boolean;
-declare function fileToDocument(file: string): Document;
-declare function fileToDocument(file: string, text: string, languageId?: string, locale?: string): DocumentWithText;
-declare function fileToDocument(file: string, text?: string, languageId?: string, locale?: string): Document | DocumentWithText;
-declare function fileToTextDocument(file: string): Promise<TextDocument>;
 
 interface SuggestedWordBase extends SuggestionResult {
     dictionaries: string[];

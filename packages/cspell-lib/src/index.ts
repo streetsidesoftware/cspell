@@ -9,6 +9,7 @@ import { getDictionaryInternal, refreshDictionaryCache } from './SpellingDiction
 import * as Text from './util/text';
 
 export type { Document } from './Document';
+export { fileToDocument, fileToTextDocument, isBinaryFile } from './Document';
 export { ExcludeFilesGlobMap, ExclusionFunction } from './exclusionHelper';
 export { FeatureFlag, FeatureFlags, getSystemFeatureFlags, UnknownFeatureFlagError } from './FeatureFlags';
 export { getLanguagesForBasename as getLanguageIdsForBaseFilename, getLanguagesForExt } from './LanguageIds';
@@ -23,9 +24,6 @@ export {
 export {
     determineFinalDocumentSettings,
     DetermineFinalDocumentSettingsResult,
-    fileToDocument,
-    fileToTextDocument,
-    isBinaryFile,
     spellCheckDocument,
     spellCheckFile,
     SpellCheckFileOptions,

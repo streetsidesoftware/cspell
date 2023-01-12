@@ -6,7 +6,7 @@ import type { TextDocument } from '../Models/TextDocument';
 import { isTextDocument } from '../Models/TextDocument';
 import type { ValidationIssue } from '../Models/ValidationIssue';
 import * as Settings from '../Settings';
-import { resolveDocumentToTextDocument } from '../spellCheckFile';
+import { resolveDocumentToTextDocument } from '../Document/resolveDocument';
 import type { MatchRange } from '../util/TextRange';
 import { clean } from '../util/util';
 import type { DocumentValidatorOptions } from './docValidator';

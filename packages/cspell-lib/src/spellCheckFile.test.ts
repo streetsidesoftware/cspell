@@ -6,13 +6,8 @@ import { URI } from 'vscode-uri';
 import { ImportError } from './Settings/Controller/ImportError';
 import type { SpellCheckFileOptions, SpellCheckFileResult } from './spellCheckFile';
 import { Document } from './Document';
-import {
-    determineFinalDocumentSettings,
-    fileToDocument,
-    fileToTextDocument,
-    spellCheckDocument,
-    spellCheckFile,
-} from './spellCheckFile';
+import { determineFinalDocumentSettings, spellCheckDocument, spellCheckFile } from './spellCheckFile';
+import { fileToDocument, fileToTextDocument } from './Document/resolveDocument';
 
 const samples = Path.resolve(__dirname, '../samples');
 const testFixtures = Path.resolve(__dirname, '../../../test-fixtures');
