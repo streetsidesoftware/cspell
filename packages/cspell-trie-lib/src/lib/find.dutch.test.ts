@@ -5,8 +5,8 @@ import { resolveGlobalDict } from '../test/samples';
 import type { FindFullResult, PartialFindOptions } from './find';
 import { findWord } from './find';
 import { importTrie } from './io/importExport';
-import { normalizeWordToLowercase } from './trie-util';
 import type { TrieNode } from './TrieNode';
+import { normalizeWordToLowercase } from './utils/normalizeWord';
 
 const dutchDictionary = resolveGlobalDict('nl_nl.trie.gz');
 

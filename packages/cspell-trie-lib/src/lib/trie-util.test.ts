@@ -1,13 +1,5 @@
-import {
-    countNodes,
-    countWords,
-    createTriFromList,
-    findNode,
-    has,
-    isCircular,
-    iteratorTrieWords,
-    mergeDefaults,
-} from './trie-util';
+import { countNodes, countWords, createTriFromList, findNode, has, isCircular, iteratorTrieWords } from './trie-util';
+import { mergeDefaults } from './utils/mergeDefaults';
 
 describe('Validate Util Functions', () => {
     test('createTriFromList', () => {

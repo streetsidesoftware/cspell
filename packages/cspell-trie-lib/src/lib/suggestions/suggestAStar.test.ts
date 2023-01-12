@@ -1,6 +1,6 @@
 import { parseDictionary } from '../SimpleDictionaryParser';
 import { Trie } from '../trie';
-import { clean } from '../trie-util';
+import { clean } from '../utils/clean';
 import type { GenSuggestionOptionsStrict, SuggestionOptions } from './genSuggestionsOptions';
 import * as Sug from './suggestAStar';
 import type { SuggestionCollector, SuggestionCollectorOptions } from './suggestCollector';

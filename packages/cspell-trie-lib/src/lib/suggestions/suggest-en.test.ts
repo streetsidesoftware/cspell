@@ -4,7 +4,7 @@ import { readRawDictionaryFile, readTrie } from '../../test/dictionaries.test.he
 import type { WeightMap } from '../distance';
 import { mapDictionaryInformationToWeightMap } from '../mappers/mapDictionaryInfoToWeightMap';
 import type { DictionaryInformation } from '../models/DictionaryInformation';
-import { clean } from '../trie-util';
+import { clean } from '../utils/clean';
 import { createTimer } from '../utils/timer';
 import type { SuggestionOptions } from './genSuggestionsOptions';
 import { genCompoundableSuggestions, suggest } from './suggest';

@@ -1,5 +1,6 @@
-import { clean, isWordTerminationNode } from '../trie-util';
+import { isWordTerminationNode } from '../trie-util';
 import type { TrieRoot } from '../TrieNode';
+import { clean } from '../utils/clean';
 import type { GenSuggestionOptions, SuggestionOptions } from './genSuggestionsOptions';
 import { createSuggestionOptions } from './genSuggestionsOptions';
 import { visualLetterMaskMap } from './orthography';

@@ -1,12 +1,11 @@
 import type { Sequence } from 'gensequence';
 import { genSequence } from 'gensequence';
 
-import { defaultTrieOptions } from './constants';
-import { walker } from './suggestions/walker';
+import { walker } from './suggestions/walker/walker';
 import type { YieldResult } from './suggestions/walker/walkerTypes';
-import type { PartialTrieOptions, TrieNode, TrieOptions, TrieRoot } from './TrieNode';
+import type { PartialTrieOptions, TrieNode, TrieRoot } from './TrieNode';
 import { ChildMap, FLAG_WORD } from './TrieNode';
-import type { PartialWithUndefined, RemoveUndefined } from './types';
+import { mergeOptionalWithDefaults } from './utils/mergeOptionalWithDefaults';
 
 export function insert(text: string, node: TrieNode = {}): TrieNode {
     if (text.length) {
@@ -53,10 +52,6 @@ export function iteratorTrieWords(node: TrieNode): Sequence<string> {
     return walk(node)
         .filter((r) => isWordTerminationNode(r.node))
         .map((r) => r.text);
-}
-
-export function mergeOptionalWithDefaults(options: PartialTrieOptions): TrieOptions {
-    return mergeDefaults(options, defaultTrieOptions);
 }
 
 export function createTrieRoot(options: PartialTrieOptions): TrieRoot {
@@ -176,70 +171,10 @@ export function isCircular(root: TrieNode): boolean {
     return walk(root).isCircular;
 }
 
-/**
- * Creates a new object of type T based upon the field values from `value`.
- * n[k] = value[k] ?? default[k] where k must be a field in default.
- * Note: it will remove fields not in defaultValue!
- * @param value
- * @param defaultValue
- */
-export function mergeDefaults<T extends object>(value: PartialWithUndefined<T> | undefined, defaultValue: T): T {
-    const result = { ...defaultValue };
-    if (value) {
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        for (const [k, v] of Object.entries(value) as [keyof T, any][]) {
-            if (k in result) {
-                result[k] = v ?? result[k];
-            }
-        }
-    }
-    return result;
-}
-
 export function trieNodeToRoot(node: TrieNode, options: PartialTrieOptions): TrieRoot {
     const newOptions = mergeOptionalWithDefaults(options);
     return {
         ...newOptions,
         c: node.c || new Map<string, TrieNode>(),
     };
-}
-
-/**
- * Normalize word unicode.
- * @param text - text to normalize
- * @returns returns a word normalized to `NFC`
- */
-export const normalizeWord = (text: string): string => text.normalize();
-
-/**
- * converts text to lower case and removes any accents.
- * @param text - text to convert
- * @returns lowercase word without accents
- * @deprecated true
- */
-export const normalizeWordToLowercase = (text: string): string =>
-    text.toLowerCase().normalize('NFD').replace(/\p{M}/gu, '');
-
-/**
- * generate case insensitive forms of a word
- * @param text - text to convert
- * @returns the forms of the word.
- */
-export const normalizeWordForCaseInsensitive = (text: string): string[] => {
-    const t = text.toLowerCase();
-    return [t, t.normalize('NFD').replace(/\p{M}/gu, '')];
-};
-
-export function isDefined<T>(t: T | undefined): t is T {
-    return t !== undefined;
-}
-
-export function clean<T extends object>(t: T): RemoveUndefined<T> {
-    const copy = { ...t };
-    for (const key of Object.keys(copy) as (keyof T)[]) {
-        if (copy[key] === undefined) {
-            delete copy[key];
-        }
-    }
-    return copy as RemoveUndefined<T>;
 }

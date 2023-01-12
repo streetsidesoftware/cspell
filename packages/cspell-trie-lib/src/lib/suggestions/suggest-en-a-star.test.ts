@@ -1,5 +1,5 @@
 import { readTrie } from '../../test/dictionaries.test.helper';
-import { clean } from '../trie-util';
+import { clean } from '../utils/clean';
 import { createTimer } from '../utils/timer';
 import type { GenSuggestionOptionsStrict } from './genSuggestionsOptions';
 import { genCompoundableSuggestions, suggest } from './suggestAStar';

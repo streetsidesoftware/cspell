@@ -8,16 +8,16 @@ import { genSuggestions, suggest } from './suggest';
 import type { SuggestionCollector, SuggestionResult } from './suggestCollector';
 import type { SuggestionOptions } from './suggestions/genSuggestionsOptions';
 import {
-    clean,
     countWords,
     createTriFromList,
     insert,
     isWordTerminationNode,
     iteratorTrieWords,
-    mergeOptionalWithDefaults,
     orderTrie,
 } from './trie-util';
 import type { PartialTrieOptions, TrieNode, TrieOptions, TrieRoot } from './TrieNode';
+import { clean } from './utils/clean';
+import { mergeOptionalWithDefaults } from './utils/mergeOptionalWithDefaults';
 import { replaceAllFactory } from './utils/util';
 import type { CompoundWordsMethod, WalkerIterator } from './walker';
 import { walker } from './walker';

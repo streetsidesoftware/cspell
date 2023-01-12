@@ -34,20 +34,18 @@ export {
     has,
     insert,
     isCircular,
-    isDefined,
     isWordTerminationNode,
     iterateTrie,
     iteratorTrieWords,
-    mergeDefaults,
-    mergeOptionalWithDefaults,
-    normalizeWord,
-    normalizeWordForCaseInsensitive,
-    normalizeWordToLowercase,
     orderTrie,
     trieNodeToRoot,
     walk,
 } from './trie-util';
 export { buildTrie, buildTrieFast, TrieBuilder } from './TrieBuilder';
 export { ChildMap, FLAG_WORD, TrieNode, TrieRoot } from './TrieNode';
+export { isDefined } from './utils/isDefined';
+export { mergeDefaults } from './utils/mergeDefaults';
+export { mergeOptionalWithDefaults } from './utils/mergeOptionalWithDefaults';
+export { normalizeWord, normalizeWordForCaseInsensitive, normalizeWordToLowercase } from './utils/normalizeWord';
 export type { HintedWalkerIterator, Hinting, WalkerIterator, YieldResult } from './walker';
 export { CompoundWordsMethod, hintedWalker, JOIN_SEPARATOR, walker, WORD_SEPARATOR } from './walker';

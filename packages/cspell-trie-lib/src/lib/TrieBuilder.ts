@@ -1,8 +1,9 @@
 import { consolidate } from './consolidate';
 import type { PartialTrieOptions, TrieOptions } from './trie';
 import { Trie } from './trie';
-import { createTrieRoot, createTriFromList, mergeOptionalWithDefaults, trieNodeToRoot } from './trie-util';
+import { createTrieRoot, createTriFromList, trieNodeToRoot } from './trie-util';
 import type { TrieNode, TrieRoot } from './TrieNode';
+import { mergeOptionalWithDefaults } from './utils/mergeOptionalWithDefaults';
 import { SecondChanceCache } from './utils/secondChanceCache';
 
 /**

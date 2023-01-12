@@ -9,8 +9,8 @@ import {
     OPTIONAL_COMPOUND_FIX,
 } from './constants';
 import type { Trie } from './trie';
-import { normalizeWord, normalizeWordForCaseInsensitive } from './trie-util';
 import { buildTrieFast } from './TrieBuilder';
+import { normalizeWord, normalizeWordForCaseInsensitive } from './utils/normalizeWord';
 
 export interface ParseDictionaryOptions {
     compoundCharacter: string;
