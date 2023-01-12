@@ -17,7 +17,7 @@
 
 #### Defined in
 
-[CSpellReporter.ts:41](https://github.com/streetsidesoftware/cspell/blob/8b25077/packages/cspell-types/src/CSpellReporter.ts#L41)
+[CSpellReporter.ts:41](https://github.com/streetsidesoftware/cspell/blob/d20c1f2/packages/cspell-types/src/CSpellReporter.ts#L41)
 
 ___
 
@@ -27,4 +27,4 @@ ___
 
 #### Defined in
 
-[CSpellReporter.ts:40](https://github.com/streetsidesoftware/cspell/blob/8b25077/packages/cspell-types/src/CSpellReporter.ts#L40)
+[CSpellReporter.ts:40](https://github.com/streetsidesoftware/cspell/blob/d20c1f2/packages/cspell-types/src/CSpellReporter.ts#L40)
