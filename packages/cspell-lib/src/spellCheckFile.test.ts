@@ -4,7 +4,8 @@ import { posix } from 'path';
 import { URI } from 'vscode-uri';
 
 import { ImportError } from './Settings/Controller/ImportError';
-import type { Document, SpellCheckFileOptions, SpellCheckFileResult } from './spellCheckFile';
+import type { SpellCheckFileOptions, SpellCheckFileResult } from './spellCheckFile';
+import { Document } from './Document';
 import {
     determineFinalDocumentSettings,
     fileToDocument,

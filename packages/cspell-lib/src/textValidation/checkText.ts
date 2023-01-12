@@ -1,11 +1,11 @@
 import type { CSpellUserSettings } from '@cspell/cspell-types';
 import assert from 'assert';
 
+import type { Document } from '../Document';
 import type { TextDocument } from '../Models/TextDocument';
 import { isTextDocument } from '../Models/TextDocument';
 import type { ValidationIssue } from '../Models/ValidationIssue';
 import * as Settings from '../Settings';
-import type { Document } from '../spellCheckFile';
 import { resolveDocumentToTextDocument } from '../spellCheckFile';
 import type { MatchRange } from '../util/TextRange';
 import { clean } from '../util/util';

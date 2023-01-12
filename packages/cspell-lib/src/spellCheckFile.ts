@@ -2,6 +2,7 @@ import type { CSpellSettingsWithSourceTrace, CSpellUserSettings } from '@cspell/
 import { readFile } from 'fs/promises';
 import { URI, Utils as UriUtils } from 'vscode-uri';
 
+import type { Document, DocumentWithText } from './Document';
 import { isGenerated, isGeneratedFile } from './LanguageIds';
 import type { TextDocument } from './Models/TextDocument';
 import { createTextDocument } from './Models/TextDocument';
@@ -11,6 +12,8 @@ import { determineTextDocumentSettings } from './textValidation/determineTextDoc
 import { isError } from './util/errors';
 import { clean } from './util/util';
 import type { ValidateTextOptions, ValidationIssue } from './validator';
+
+const defaultEncoding: BufferEncoding = 'utf8';
 
 export interface SpellCheckFileOptions extends ValidateTextOptions {
     /**
@@ -42,20 +45,6 @@ export interface SpellCheckFileResult {
     issues: ValidationIssue[];
     checked: boolean;
     errors: Error[] | undefined;
-}
-
-const defaultEncoding: BufferEncoding = 'utf8';
-
-export type UriString = string;
-
-export interface DocumentWithText extends Document {
-    text: string;
-}
-export interface Document {
-    uri: UriString;
-    text?: string;
-    languageId?: string;
-    locale?: string;
 }
 
 /**

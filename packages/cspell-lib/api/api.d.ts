@@ -274,6 +274,17 @@ declare namespace text_d {
   };
 }
 
+interface Document {
+    uri: UriString;
+    text?: string;
+    languageId?: string;
+    locale?: string;
+}
+type UriString = string;
+interface DocumentWithText extends Document {
+    text: string;
+}
+
 interface FeatureFlag {
     name: string;
     description: string;
@@ -714,16 +725,6 @@ interface SpellCheckFileResult {
     issues: ValidationIssue[];
     checked: boolean;
     errors: Error[] | undefined;
-}
-type UriString = string;
-interface DocumentWithText extends Document {
-    text: string;
-}
-interface Document {
-    uri: UriString;
-    text?: string;
-    languageId?: string;
-    locale?: string;
 }
 /**
  * Spell Check a file
