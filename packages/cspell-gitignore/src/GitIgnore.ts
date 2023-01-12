@@ -53,6 +53,7 @@ export class GitIgnore {
         this.resolvedGitIgnoreHierarchies.set(directory, found);
         return find;
     }
+
     filterOutIgnored(files: string[]): Promise<string[]>;
     filterOutIgnored(files: Iterable<string>): Promise<string[]>;
     filterOutIgnored(files: AsyncIterable<string>): AsyncIterable<string>;
@@ -87,6 +88,11 @@ export class GitIgnore {
 
     peekGitIgnoreHierarchy(directory: string): Promise<GitIgnoreHierarchy> | undefined {
         return this.knownGitIgnoreHierarchies.get(directory);
+    }
+
+    async getGlobs(directory: string): Promise<string[]> {
+        const hierarchy = await this.findGitIgnoreHierarchy(directory);
+        return hierarchy.getGlobs(directory);
     }
 
     private cleanCachedEntries() {
