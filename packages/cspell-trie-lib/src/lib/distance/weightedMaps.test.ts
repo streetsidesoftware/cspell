@@ -1,5 +1,5 @@
+import { OPTIONAL_COMPOUND_FIX } from '../constants';
 import type { SuggestionCostMapDef } from '../models/suggestionCostsDef';
-import { DEFAULT_COMPOUNDED_WORD_SEPARATOR } from '../suggestions/suggestCollector';
 import type { CostPosition, PenaltyAdjustment } from './weightedMaps';
 import {
     __testing__,
@@ -216,7 +216,7 @@ describe('Validate weightedMaps', () => {
 });
 
 function sep(s: string): string {
-    return s.replace(/[|+]/g, DEFAULT_COMPOUNDED_WORD_SEPARATOR);
+    return s.replace(/[|+]/g, OPTIONAL_COMPOUND_FIX);
 }
 
 // function mo(...opts: Partial<SuggestionCostMapDef>[]): Partial<SuggestionCostMapDef> {
