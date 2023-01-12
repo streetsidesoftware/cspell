@@ -1,8 +1,8 @@
 import { readFile } from 'fs-extra';
 
 import { resolveSample } from '../../test/samples';
-import * as Trie from '..';
 import { consolidate } from '../consolidate';
+import * as Trie from '../index';
 import { iteratorTrieWords } from '../trie-util';
 import { importTrie, serializeTrie } from './importExportV1';
 

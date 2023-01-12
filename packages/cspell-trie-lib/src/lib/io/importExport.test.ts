@@ -1,7 +1,7 @@
 import { readFile } from 'fs-extra';
 
 import { resolveSample } from '../../test/samples';
-import * as Trie from '..';
+import * as Trie from '../index';
 import { importTrie, serializeTrie } from './importExport';
 
 describe('Import/Export', () => {

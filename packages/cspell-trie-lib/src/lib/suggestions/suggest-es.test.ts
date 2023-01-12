@@ -1,10 +1,10 @@
 import type { DictionaryInformation } from '@cspell/cspell-types';
 
 import { readTrie } from '../../test/dictionaries.test.helper';
-import type { WeightMap } from '..';
-import { mapDictionaryInformationToWeightMap } from '..';
+import type { WeightMap } from '../distance';
 import { distanceAStarWeightedEx } from '../distance/distanceAStarWeighted';
 import { formatExResult } from '../distance/formatResultEx';
+import { mapDictionaryInformationToWeightMap } from '../mappers/mapDictionaryInfoToWeightMap';
 import { parseLinesToDictionary } from '../SimpleDictionaryParser';
 
 function getTrie() {

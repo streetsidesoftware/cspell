@@ -1,4 +1,4 @@
-import * as index from '.';
+import * as index from './index';
 
 describe('index', () => {
     test('verify api', () => {

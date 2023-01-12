@@ -1,4 +1,4 @@
-import type { GrammarDef, Pattern, Repository } from '..';
+import type { GrammarDef, Pattern, Repository } from '../parser';
 import type {
     Captures,
     PatternBeginEnd,

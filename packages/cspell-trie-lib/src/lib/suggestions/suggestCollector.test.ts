@@ -1,9 +1,10 @@
-import type { SuggestionResult, WeightMap } from '..';
-import { createWeightedMap, editDistance, impersonateCollector, mapDictionaryInformationToWeightMap } from '..';
+import type { WeightMap } from '../distance';
+import { createWeightedMap, editDistance } from '../distance';
 import { formattedDistance } from '../distance/formatResultEx';
+import { mapDictionaryInformationToWeightMap } from '../mappers/mapDictionaryInfoToWeightMap';
 import { clean } from '../utils/util';
-import type { SuggestionCollectorOptions, SuggestionGenerator } from './suggestCollector';
-import { DEFAULT_COMPOUNDED_WORD_SEPARATOR, suggestionCollector } from './suggestCollector';
+import type { SuggestionCollectorOptions, SuggestionGenerator, SuggestionResult } from './suggestCollector';
+import { DEFAULT_COMPOUNDED_WORD_SEPARATOR, impersonateCollector, suggestionCollector } from './suggestCollector';
 
 const defaultOptions: SuggestionCollectorOptions = {
     numSuggestions: 10,

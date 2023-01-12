@@ -1,8 +1,8 @@
 import mm from 'micromatch';
-import { posix, win32 } from 'path';
 import * as path from 'path';
+import { posix, win32 } from 'path';
 
-import type { NormalizeOptions } from '.';
+import type { NormalizeOptions } from './globHelper';
 import {
     __testing__,
     fileOrGlobToGlob,

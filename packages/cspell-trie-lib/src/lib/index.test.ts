@@ -1,4 +1,4 @@
-import * as Trie from '.';
+import * as Trie from './index';
 
 describe('Experiment with Tries', () => {
     test('Adds words to a Trie and takes them back out.', () => {

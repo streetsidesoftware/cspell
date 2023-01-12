@@ -3,9 +3,8 @@ import { genSequence } from 'gensequence';
 import * as path from 'path';
 
 import { resolveGlobalSample } from '../test/samples';
-import { createTriFromList } from '.';
 import { consolidate } from './consolidate';
-import { countNodes, createTrieRoot, iteratorTrieWords } from './trie-util';
+import { countNodes, createTrieRoot, createTriFromList, iteratorTrieWords } from './trie-util';
 import { buildTrie } from './TrieBuilder';
 import type { TrieNode } from './TrieNode';
 

@@ -2,11 +2,11 @@ import type { Sequence } from 'gensequence';
 import { genSequence } from 'gensequence';
 
 import { defaultTrieOptions } from './constants';
+import { walker } from './suggestions/walker';
+import type { YieldResult } from './suggestions/walker/walkerTypes';
 import type { PartialTrieOptions, TrieNode, TrieOptions, TrieRoot } from './TrieNode';
 import { ChildMap, FLAG_WORD } from './TrieNode';
 import type { PartialWithUndefined, RemoveUndefined } from './types';
-import type { YieldResult } from './walker';
-import { walker } from './walker';
 
 export function insert(text: string, node: TrieNode = {}): TrieNode {
     if (text.length) {

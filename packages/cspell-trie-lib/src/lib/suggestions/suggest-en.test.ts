@@ -1,8 +1,8 @@
 import assert from 'assert';
 
 import { readRawDictionaryFile, readTrie } from '../../test/dictionaries.test.helper';
-import type { WeightMap } from '..';
-import { mapDictionaryInformationToWeightMap } from '..';
+import type { WeightMap } from '../distance';
+import { mapDictionaryInformationToWeightMap } from '../mappers/mapDictionaryInfoToWeightMap';
 import type { DictionaryInformation } from '../models/DictionaryInformation';
 import { clean } from '../trie-util';
 import { createTimer } from '../utils/timer';

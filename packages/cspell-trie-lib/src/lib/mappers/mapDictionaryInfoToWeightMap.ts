@@ -1,7 +1,7 @@
-import type { SuggestionCostMapDef } from '..';
 import type { PenaltyAdjustment, WeightMap } from '../distance/weightedMaps';
 import { addAdjustment, createWeightMap } from '../distance/weightedMaps';
 import type { DictionaryInformation } from '../models/DictionaryInformation';
+import type { SuggestionCostMapDef } from '../models/suggestionCostsDef';
 import { mapDictionaryInformation, mapDictionaryInformationToAdjustment } from './mapDictionaryInfo';
 
 const defaultDefs: SuggestionCostMapDef[] = [
