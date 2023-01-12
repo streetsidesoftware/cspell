@@ -1,5 +1,5 @@
 import type { WeightMap } from '../distance';
-import { CompoundWordsMethod } from './walker';
+import { CompoundWordsMethod } from '../walker';
 
 export interface GenSuggestionOptionsStrict {
     /**

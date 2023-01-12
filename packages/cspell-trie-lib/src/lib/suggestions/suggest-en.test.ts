@@ -6,11 +6,11 @@ import { mapDictionaryInformationToWeightMap } from '../mappers/mapDictionaryInf
 import type { DictionaryInformation } from '../models/DictionaryInformation';
 import { clean } from '../utils/clean';
 import { createTimer } from '../utils/timer';
+import { CompoundWordsMethod } from '../walker';
 import type { SuggestionOptions } from './genSuggestionsOptions';
 import { genCompoundableSuggestions, suggest } from './suggest';
 import type { SuggestionCollectorOptions, SuggestionResult } from './suggestCollector';
 import { suggestionCollector } from './suggestCollector';
-import { CompoundWordsMethod } from './walker';
 
 function getTrie() {
     return readTrie('@cspell/dict-en_us/cspell-ext.json');

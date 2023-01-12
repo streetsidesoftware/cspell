@@ -4,8 +4,8 @@ import { addDefToWeightMap } from '../distance/weightedMaps';
 import type { RequireOptional } from '../types';
 import { createTimer } from '../utils/timer';
 import { clean, regexQuote, replaceAllFactory } from '../utils/util';
+import { WORD_SEPARATOR } from '../walker';
 import type { GenSuggestionOptions, GenSuggestionOptionsStrict } from './genSuggestionsOptions';
-import { WORD_SEPARATOR } from './walker';
 
 const defaultMaxNumberSuggestions = 10;
 

@@ -1,6 +1,7 @@
 import { isWordTerminationNode } from '../trie-util';
 import type { TrieRoot } from '../TrieNode';
 import { clean } from '../utils/clean';
+import { CompoundWordsMethod, hintedWalker, JOIN_SEPARATOR, WORD_SEPARATOR } from '../walker';
 import type { GenSuggestionOptions, SuggestionOptions } from './genSuggestionsOptions';
 import { createSuggestionOptions } from './genSuggestionsOptions';
 import { visualLetterMaskMap } from './orthography';
@@ -12,7 +13,6 @@ import type {
     SuggestionResultBase,
 } from './suggestCollector';
 import { suggestionCollector } from './suggestCollector';
-import { CompoundWordsMethod, hintedWalker, JOIN_SEPARATOR, WORD_SEPARATOR } from './walker';
 
 const baseCost = 100;
 const swapCost = 75;

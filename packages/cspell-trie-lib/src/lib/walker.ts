@@ -1,1 +1,1 @@
-export * from './suggestions/walker/index';
+export * from './walker/index';

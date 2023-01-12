@@ -1,9 +1,9 @@
 import { Trie } from '../trie';
 import { isWordTerminationNode } from '../trie-util';
 import type { TrieNode } from '../TrieNode';
+import { walker } from '../walker';
 import * as Sug from './suggest';
 import type { SuggestionResultBase } from './suggestCollector';
-import { walker } from './walker';
 
 describe('Validate Suggest', () => {
     test('Tests suggestions against Legacy Suggestion generator', () => {
