@@ -1,5 +1,5 @@
-import { OPTIONAL_COMPOUND_FIX } from '../constants';
 import type { SuggestionCostMapDef } from '../models/suggestionCostsDef';
+import { DEFAULT_COMPOUNDED_WORD_SEPARATOR } from '../suggestions/constants';
 
 export type WeightedRepMapTrie = Record<string, WeightedRepTrieNode>;
 
@@ -415,7 +415,7 @@ function normalizeDef(def: SuggestionCostMapDef): SuggestionCostMapDef {
 }
 
 function normalizeMap(map: string): string {
-    return map.replace(matchPossibleWordSeparators, OPTIONAL_COMPOUND_FIX);
+    return map.replace(matchPossibleWordSeparators, DEFAULT_COMPOUNDED_WORD_SEPARATOR);
 }
 
 export const __testing__ = {

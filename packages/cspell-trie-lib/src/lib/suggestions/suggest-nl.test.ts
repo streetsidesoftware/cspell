@@ -5,8 +5,8 @@ import type { WeightMap } from '../distance';
 import { mapDictionaryInformationToWeightMap } from '../mappers/mapDictionaryInfoToWeightMap';
 import type { DictionaryInformation } from '../models/DictionaryInformation';
 import { clean } from '../utils/util';
+import { DEFAULT_COMPOUNDED_WORD_SEPARATOR } from './constants';
 import type { SuggestionResult } from './suggestCollector';
-import { DEFAULT_COMPOUNDED_WORD_SEPARATOR } from './suggestCollector';
 
 function getTrie() {
     return readSampleTrie('nl_nl.trie.gz');

@@ -5,6 +5,7 @@ import type { RequireOptional } from '../types';
 import { createTimer } from '../utils/timer';
 import { clean, regexQuote, replaceAllFactory } from '../utils/util';
 import { WORD_SEPARATOR } from '../walker';
+import { DEFAULT_COMPOUNDED_WORD_SEPARATOR } from './constants';
 import type { GenSuggestionOptions, GenSuggestionOptionsStrict } from './genSuggestionsOptions';
 
 const defaultMaxNumberSuggestions = 10;
@@ -23,8 +24,6 @@ const regexSeparator = new RegExp(`[${regexQuote(WORD_SEPARATOR)}]`, 'g');
 
 const wordLengthCost = [0, 50, 25, 5, 0];
 const EXTRA_WORD_COST = 5;
-
-export const DEFAULT_COMPOUNDED_WORD_SEPARATOR = '∙';
 
 /** time in ms */
 const DEFAULT_COLLECTOR_TIMEOUT = 1000;
