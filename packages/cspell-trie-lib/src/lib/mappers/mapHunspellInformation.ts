@@ -5,6 +5,7 @@ import type { Locale } from '../models/locale';
 import type { SuggestionCostMapDef } from '../models/suggestionCostsDef';
 import { caseForms } from '../utils/text';
 import { isDefined, unique as uniqueU } from '../utils/util';
+import { joinLetters } from './joinLetters';
 import { mapHunspellCosts } from './mapCosts';
 import {
     calcCostsForAccentedLetters,
@@ -240,17 +241,6 @@ function parseCaps(value: string, costs: Costs): SuggestionCostMapDef | undefine
         map,
         replace: cost,
     };
-}
-
-/**
- * Bring letters / strings together.
- * - `['a', 'b'] => 'ab'`
- * - `['a', 'bc'] => 'a(bc)'`
- * @param letters - letters to join
- */
-export function joinLetters(letters: string[]): string {
-    const v = [...letters];
-    return v.map((a) => (a.length > 1 || !a.length ? `(${a})` : a)).join('');
 }
 
 function reducer<T, U = T>(fn: (acc: U, val: T, i: number) => U, initialVal: U) {
