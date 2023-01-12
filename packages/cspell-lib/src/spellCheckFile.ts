@@ -11,8 +11,6 @@ import { determineTextDocumentSettings } from './textValidation/determineTextDoc
 import { isError } from './util/errors';
 import type { ValidateTextOptions, ValidationIssue } from './validator';
 
-export const defaultEncoding: BufferEncoding = 'utf8';
-
 export interface SpellCheckFileOptions extends ValidateTextOptions {
     /**
      * Optional path to a configuration file.

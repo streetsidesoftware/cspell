@@ -1,8 +1,8 @@
 import { URI, Utils as UriUtils } from 'vscode-uri';
 
 import { isGenerated, isGeneratedFile } from '../LanguageIds';
-import { normalizeLanguageIds } from './normalizeLanguageIds';
 import type { Document } from './Document';
+import { normalizeLanguageIds } from './normalizeLanguageIds';
 
 export function isBinaryDoc(document: Document): boolean {
     return isBinaryFile(URI.parse(document.uri), document.languageId);

@@ -19,9 +19,9 @@ import {
     readRawSettings,
     searchForConfig,
 } from './configLoader';
-import { readSettingsFiles } from './readSettingsFiles';
 import { extractImportErrors } from './extractImportErrors';
 import { readSettings } from './readSettings';
+import { readSettingsFiles } from './readSettingsFiles';
 
 const { normalizeCacheSettings, validateRawConfigExports, validateRawConfigVersion, getDefaultConfigLoaderInternal } =
     __configLoader_testing__;

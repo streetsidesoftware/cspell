@@ -3,9 +3,10 @@ import { URI } from 'vscode-uri';
 
 import type { TextDocument } from '../Models/TextDocument';
 import { createTextDocument } from '../Models/TextDocument';
-import { defaultEncoding } from '../spellCheckFile';
 import { clean } from '../util/util';
-import type { Document, DocumentWithText } from '.';
+import type { Document, DocumentWithText } from './Document';
+
+const defaultEncoding: BufferEncoding = 'utf8';
 
 export function fileToDocument(file: string): Document;
 export function fileToDocument(file: string, text: string, languageId?: string, locale?: string): DocumentWithText;
