@@ -4,7 +4,7 @@ import { loremIpsum } from 'lorem-ipsum';
 import { mergeSettings } from '../Settings';
 import { getDefaultSettings } from '../Settings/DefaultSettings';
 import * as tds from '../Settings/TextDocumentSettings';
-import type { ValidationIssue } from '.';
+import type { ValidationIssue } from '../validator';
 import * as Validator from './validator';
 
 // cSpell:ignore brouwn jumpped lazzy wrongg mispelled ctrip nmove mischecked

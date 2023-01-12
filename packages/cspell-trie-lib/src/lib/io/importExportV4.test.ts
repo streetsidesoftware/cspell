@@ -2,8 +2,8 @@ import { readFile, writeFile } from 'fs-extra';
 import { genSequence } from 'gensequence';
 
 import { resolveSample as resolveSamplePath } from '../../test/samples';
-import * as Trie from '..';
 import { consolidate } from '../consolidate';
+import * as Trie from '../index';
 import type { TrieNode } from '../TrieNode';
 import * as v3 from './importExportV3';
 import { __testing__, importTrie, serializeTrie } from './importExportV4';

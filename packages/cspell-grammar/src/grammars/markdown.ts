@@ -1,5 +1,5 @@
 /* eslint-disable no-useless-escape */
-import type { GrammarDef, Repository } from '..';
+import type { GrammarDef, Repository } from '../parser';
 
 const repository: Repository = {
     frontMatter: { patterns: [] },

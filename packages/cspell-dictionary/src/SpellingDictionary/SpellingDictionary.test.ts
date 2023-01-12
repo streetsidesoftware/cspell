@@ -1,7 +1,7 @@
 import { Trie } from 'cspell-trie-lib';
 
-import type { SpellingDictionaryOptions } from '.';
 import { createSpellingDictionary } from './createSpellingDictionary';
+import type { SpellingDictionaryOptions } from './SpellingDictionary';
 import { SpellingDictionaryFromTrie } from './SpellingDictionaryFromTrie';
 import { __testMethods__ } from './SpellingDictionaryMethods';
 

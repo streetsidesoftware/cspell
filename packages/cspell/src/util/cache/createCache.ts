@@ -4,7 +4,7 @@ import { stat } from 'fs-extra';
 import path from 'path';
 
 import { isError } from '../errors';
-import type { CacheOptions } from '.';
+import type { CacheOptions } from './CacheOptions';
 import type { CSpellLintResultCache } from './CSpellLintResultCache';
 import { DiskCache } from './DiskCache';
 import { DummyCache } from './DummyCache';

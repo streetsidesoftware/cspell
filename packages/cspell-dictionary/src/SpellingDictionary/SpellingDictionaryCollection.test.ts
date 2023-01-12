@@ -1,9 +1,9 @@
 import * as Trie from 'cspell-trie-lib';
 
-import type { SpellingDictionaryOptions } from '.';
 import { createFailedToLoadDictionary, createSpellingDictionary } from './createSpellingDictionary';
 import { createFlagWordsDictionary } from './FlagWordsDictionary';
 import { createIgnoreWordsDictionary } from './IgnoreWordsDictionary';
+import type { SpellingDictionaryOptions } from './SpellingDictionary';
 import { CompoundWordsMethod } from './SpellingDictionary';
 import { createCollection } from './SpellingDictionaryCollection';
 import { SpellingDictionaryFromTrie } from './SpellingDictionaryFromTrie';

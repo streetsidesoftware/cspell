@@ -3,7 +3,7 @@ import { MessageTypes } from '@cspell/cspell-types';
 import { promises as fs } from 'fs';
 import * as path from 'path';
 
-import { getReporter } from '.';
+import { getReporter } from './index';
 
 const mockWriteFile = jest.spyOn(fs, 'writeFile');
 

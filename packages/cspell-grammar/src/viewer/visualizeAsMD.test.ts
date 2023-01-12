@@ -1,8 +1,8 @@
 import { promises as fs, readFileSync } from 'fs';
 import * as path from 'path';
 
-import { tokenizeText } from '..';
 import { TypeScript } from '../grammars';
+import { tokenizeText } from '../parser';
 import { normalizeGrammar } from '../parser/grammarNormalizer';
 import { tokenizedLinesToMarkdown } from './visualizeAsMD';
 

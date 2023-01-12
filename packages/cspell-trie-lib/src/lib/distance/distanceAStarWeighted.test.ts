@@ -1,4 +1,4 @@
-import { mapDictionaryInformationToWeightMap } from '..';
+import { mapDictionaryInformationToWeightMap } from '../mappers/mapDictionaryInfoToWeightMap';
 import type { SuggestionCostMapDef } from '../models/suggestionCostsDef';
 import { distanceAStarWeighted, distanceAStarWeightedEx } from './distanceAStarWeighted';
 import { formatExResult } from './formatResultEx';

@@ -1,4 +1,4 @@
-import { defaultDeserializers } from '.';
+import { defaultDeserializers } from './index';
 
 describe('index', () => {
     test('defaultDeserializers', () => {

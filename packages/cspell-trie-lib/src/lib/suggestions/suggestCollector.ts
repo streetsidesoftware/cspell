@@ -1,5 +1,5 @@
-import type { WeightMap } from '..';
-import { editDistanceWeighted } from '..';
+import type { WeightMap } from '../distance';
+import { editDistanceWeighted } from '../distance';
 import { addDefToWeightMap } from '../distance/weightedMaps';
 import type { RequireOptional } from '../types';
 import { createTimer } from '../utils/timer';

@@ -1,4 +1,4 @@
-import type { GrammarDef, Repository } from '..';
+import type { GrammarDef, Repository } from '../parser';
 
 const repository: Repository = {
     statements: {
