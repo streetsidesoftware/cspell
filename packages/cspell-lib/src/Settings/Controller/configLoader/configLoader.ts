@@ -22,6 +22,7 @@ import { getRawGlobalSettings } from '../../GlobalSettings';
 import { ImportError } from '../ImportError';
 import type { LoaderResult } from '../pnpLoader';
 import { pnpLoader } from '../pnpLoader';
+import { defaultSettings } from './defaultSettings';
 import {
     normalizeCacheSettings,
     normalizeDictionaryDefs,
@@ -92,12 +93,6 @@ function parseJson(_filename: string, content: string) {
 }
 
 export const defaultConfigFilenames = Object.freeze(searchPlaces.concat());
-
-export const defaultSettings: CSpellSettingsI = csi({
-    id: 'default',
-    name: 'default',
-    version: currentSettingsFileVersion,
-});
 
 const defaultPnPSettings: PnPSettings = {};
 

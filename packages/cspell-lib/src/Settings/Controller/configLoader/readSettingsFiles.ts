@@ -1,5 +1,5 @@
 import { mergeSettings } from '../../CSpellSettingsServer';
-import { defaultSettings } from './configLoader';
+import { defaultSettings } from './defaultSettings';
 import { readSettings } from './readSettings';
 import type { CSpellSettingsI } from './types';
 
