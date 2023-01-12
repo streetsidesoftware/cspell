@@ -31,7 +31,7 @@ Optional description.
 
 #### Defined in
 
-[DictionaryDefinition.ts:25](https://github.com/streetsidesoftware/cspell/blob/8b25077/packages/cspell-types/src/DictionaryDefinition.ts#L25)
+[DictionaryDefinition.ts:25](https://github.com/streetsidesoftware/cspell/blob/d20c1f2/packages/cspell-types/src/DictionaryDefinition.ts#L25)
 
 ___
 
@@ -50,7 +50,7 @@ Name Format:
 
 #### Defined in
 
-[DictionaryDefinition.ts:23](https://github.com/streetsidesoftware/cspell/blob/8b25077/packages/cspell-types/src/DictionaryDefinition.ts#L23)
+[DictionaryDefinition.ts:23](https://github.com/streetsidesoftware/cspell/blob/d20c1f2/packages/cspell-types/src/DictionaryDefinition.ts#L23)
 
 ___
 
@@ -68,7 +68,7 @@ possible suggestions.
 
 #### Defined in
 
-[DictionaryDefinition.ts:39](https://github.com/streetsidesoftware/cspell/blob/8b25077/packages/cspell-types/src/DictionaryDefinition.ts#L39)
+[DictionaryDefinition.ts:39](https://github.com/streetsidesoftware/cspell/blob/d20c1f2/packages/cspell-types/src/DictionaryDefinition.ts#L39)
 
 ___
 
@@ -80,7 +80,7 @@ Replacement pairs.
 
 #### Defined in
 
-[DictionaryDefinition.ts:27](https://github.com/streetsidesoftware/cspell/blob/8b25077/packages/cspell-types/src/DictionaryDefinition.ts#L27)
+[DictionaryDefinition.ts:27](https://github.com/streetsidesoftware/cspell/blob/d20c1f2/packages/cspell-types/src/DictionaryDefinition.ts#L27)
 
 ___
 
@@ -101,7 +101,7 @@ C is the slowest to load due to the need to split each line based upon code spli
 
 #### Defined in
 
-[DictionaryDefinition.ts:49](https://github.com/streetsidesoftware/cspell/blob/8b25077/packages/cspell-types/src/DictionaryDefinition.ts#L49)
+[DictionaryDefinition.ts:49](https://github.com/streetsidesoftware/cspell/blob/d20c1f2/packages/cspell-types/src/DictionaryDefinition.ts#L49)
 
 ___
 
@@ -113,4 +113,4 @@ Use Compounds.
 
 #### Defined in
 
-[DictionaryDefinition.ts:29](https://github.com/streetsidesoftware/cspell/blob/8b25077/packages/cspell-types/src/DictionaryDefinition.ts#L29)
+[DictionaryDefinition.ts:29](https://github.com/streetsidesoftware/cspell/blob/d20c1f2/packages/cspell-types/src/DictionaryDefinition.ts#L29)
