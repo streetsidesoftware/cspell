@@ -1,10 +1,10 @@
 import { opFlatten, opMap, pipe } from '@cspell/cspell-pipe/sync';
 import type { ParsedText, ParseResult, Scope, ScopeChain } from '@cspell/cspell-types/Parser';
 
-import { compileGrammar } from '../..';
 import { grammar } from '../../grammars/typescript';
 import { appendMappedText } from '../../mappers/appendMappedText';
 import { mapRawString } from '../../mappers/typescript';
+import { compileGrammar } from '../../parser/grammar';
 import { createParser } from '../../parser/parser';
 import { ScopePool } from '../../parser/scope';
 import type { TokenizedLine } from '../../parser/types';
