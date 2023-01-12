@@ -8,6 +8,8 @@ import type { SpellingDictionaryCollection } from './SpellingDictionary';
 import { getDictionaryInternal, refreshDictionaryCache } from './SpellingDictionary';
 import * as Text from './util/text';
 
+export type { Document } from './Document';
+export { fileToDocument, fileToTextDocument, isBinaryFile } from './Document';
 export { ExcludeFilesGlobMap, ExclusionFunction } from './exclusionHelper';
 export { FeatureFlag, FeatureFlags, getSystemFeatureFlags, UnknownFeatureFlagError } from './FeatureFlags';
 export { getLanguagesForBasename as getLanguageIdsForBaseFilename, getLanguagesForExt } from './LanguageIds';
@@ -22,10 +24,6 @@ export {
 export {
     determineFinalDocumentSettings,
     DetermineFinalDocumentSettingsResult,
-    Document,
-    fileToDocument,
-    fileToTextDocument,
-    isBinaryFile,
     spellCheckDocument,
     spellCheckFile,
     SpellCheckFileOptions,

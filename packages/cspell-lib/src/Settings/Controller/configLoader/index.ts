@@ -12,10 +12,10 @@ export {
     loadPnP,
     loadPnPSync,
     readRawSettings,
-    readSettingsFiles,
     searchForConfig,
     searchForConfigSync,
     sectionCSpell,
 } from './configLoader';
 export { extractImportErrors, ImportFileRefWithError } from './extractImportErrors';
 export { readSettings } from './readSettings';
+export { readSettingsFiles } from './readSettingsFiles';

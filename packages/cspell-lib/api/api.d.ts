@@ -274,38 +274,18 @@ declare namespace text_d {
   };
 }
 
-interface FeatureFlag {
-    name: string;
-    description: string;
+interface Document {
+    uri: UriString;
+    text?: string;
+    languageId?: string;
+    locale?: string;
 }
-type FlagTypes = string | boolean;
-/**
- * Feature Flags are used to turn on/off features.
- * These are primarily used before a feature has been fully released.
- */
-declare class FeatureFlags {
-    private flags;
-    private flagValues;
-    constructor(flags?: FeatureFlag[]);
-    register(flag: FeatureFlag): this;
-    register(name: string, description: string): this;
-    getFlag(flag: string): FlagTypes | undefined;
-    getFlagBool(flag: string): boolean | undefined;
-    setFlag(flag: string, value?: FlagTypes): this;
-    getFlagInfo(flag: string): FeatureFlag | undefined;
-    getFlags(): FeatureFlag[];
-    getFlagValues(): Map<string, FlagTypes>;
-    reset(): this;
+type UriString = string;
+interface DocumentWithText extends Document {
+    text: string;
 }
-declare class UnknownFeatureFlagError extends Error {
-    readonly flag: string;
-    constructor(flag: string);
-}
-declare function getSystemFeatureFlags(): FeatureFlags;
 
-type LanguageId = string;
-declare function getLanguagesForExt(ext: string): string[];
-declare function getLanguagesForBasename(basename: string): string[];
+declare function isBinaryFile(filenameUri: URI, languageId?: string | string[]): boolean;
 
 type DocumentUri = URI;
 interface Position {
@@ -369,6 +349,44 @@ interface TextDocumentContentChangeEvent {
 declare function createTextDocument({ uri, content, languageId, locale, version, }: CreateTextDocumentParams): TextDocument;
 declare function updateTextDocument(doc: TextDocument, edits: TextDocumentContentChangeEvent[], version?: number): TextDocument;
 
+declare function fileToDocument(file: string): Document;
+declare function fileToDocument(file: string, text: string, languageId?: string, locale?: string): DocumentWithText;
+declare function fileToDocument(file: string, text?: string, languageId?: string, locale?: string): Document | DocumentWithText;
+declare function fileToTextDocument(file: string): Promise<TextDocument>;
+
+interface FeatureFlag {
+    name: string;
+    description: string;
+}
+type FlagTypes = string | boolean;
+/**
+ * Feature Flags are used to turn on/off features.
+ * These are primarily used before a feature has been fully released.
+ */
+declare class FeatureFlags {
+    private flags;
+    private flagValues;
+    constructor(flags?: FeatureFlag[]);
+    register(flag: FeatureFlag): this;
+    register(name: string, description: string): this;
+    getFlag(flag: string): FlagTypes | undefined;
+    getFlagBool(flag: string): boolean | undefined;
+    setFlag(flag: string, value?: FlagTypes): this;
+    getFlagInfo(flag: string): FeatureFlag | undefined;
+    getFlags(): FeatureFlag[];
+    getFlagValues(): Map<string, FlagTypes>;
+    reset(): this;
+}
+declare class UnknownFeatureFlagError extends Error {
+    readonly flag: string;
+    constructor(flag: string);
+}
+declare function getSystemFeatureFlags(): FeatureFlags;
+
+type LanguageId = string;
+declare function getLanguagesForExt(ext: string): string[];
+declare function getLanguagesForBasename(basename: string): string[];
+
 declare const currentSettingsFileVersion = "0.2";
 declare const ENV_CSPELL_GLOB_ROOT = "CSPELL_GLOB_ROOT";
 
@@ -376,6 +394,7 @@ type LoaderResult = URI | undefined;
 
 type CSpellSettingsWST$1 = CSpellSettingsWithSourceTrace;
 type CSpellSettingsI$1 = CSpellSettingsInternal;
+
 type PnPSettings = OptionalOrUndefined<PnPSettings$1>;
 declare const sectionCSpell = "cSpell";
 declare const defaultFileName = "cspell.json";
@@ -391,13 +410,6 @@ declare function loadConfig(file: string, pnpSettings?: PnPSettings): Promise<CS
 declare function loadPnP(pnpSettings: PnPSettings, searchFrom: URI): Promise<LoaderResult>;
 declare function loadPnPSync(pnpSettings: PnPSettings, searchFrom: URI): LoaderResult;
 declare function readRawSettings(filename: string, relativeTo?: string): CSpellSettingsWST$1;
-/**
- *
- * @param filenames - settings files to read
- * @returns combined configuration
- * @deprecated true
- */
-declare function readSettingsFiles(filenames: string[]): CSpellSettingsI$1;
 declare function getGlobalSettings(): CSpellSettingsI$1;
 declare function getCachedFileSize(): number;
 declare function clearCachedSettingsFiles(): void;
@@ -428,6 +440,14 @@ declare function readSettings(filename: string, defaultValues: CSpellSettingsWST
  */
 declare function readSettings(filename: string, relativeTo: string): CSpellSettingsI$1;
 declare function readSettings(filename: string, relativeTo: string, defaultValues: CSpellSettingsWST$1): CSpellSettingsI$1;
+
+/**
+ *
+ * @param filenames - settings files to read
+ * @returns combined configuration
+ * @deprecated true
+ */
+declare function readSettingsFiles(filenames: string[]): CSpellSettingsI$1;
 
 declare class ImportError extends Error {
     readonly cause: Error | undefined;
@@ -713,16 +733,6 @@ interface SpellCheckFileResult {
     checked: boolean;
     errors: Error[] | undefined;
 }
-type UriString = string;
-interface DocumentWithText extends Document {
-    text: string;
-}
-interface Document {
-    uri: UriString;
-    text?: string;
-    languageId?: string;
-    locale?: string;
-}
 /**
  * Spell Check a file
  * @param file - absolute path to file to read and check.
@@ -754,11 +764,6 @@ interface DetermineFinalDocumentSettingsResult {
  * @param settings - The near final settings. Should already be the combination of all configuration files.
  */
 declare function determineFinalDocumentSettings(document: DocumentWithText, settings: CSpellUserSettings): DetermineFinalDocumentSettingsResult;
-declare function isBinaryFile(filenameUri: URI, languageId?: string | string[]): boolean;
-declare function fileToDocument(file: string): Document;
-declare function fileToDocument(file: string, text: string, languageId?: string, locale?: string): DocumentWithText;
-declare function fileToDocument(file: string, text?: string, languageId?: string, locale?: string): Document | DocumentWithText;
-declare function fileToTextDocument(file: string): Promise<TextDocument>;
 
 interface SuggestedWordBase extends SuggestionResult {
     dictionaries: string[];

@@ -6,13 +6,9 @@ import { genSequence } from 'gensequence';
 import type { ValidationResult } from '../Models/ValidationResult';
 import * as Text from '../util/text';
 import * as TextRange from '../util/TextRange';
+import { defaultMaxDuplicateProblems, defaultMaxNumberOfProblems } from './defaultConstants';
 import { lineValidatorFactory } from './lineValidatorFactory';
 import type { IncludeExcludeOptions, LineSegment, TextOffsetRO, ValidationOptions } from './ValidationTypes';
-
-export const defaultMaxNumberOfProblems = 200;
-export const defaultMaxDuplicateProblems = 5;
-export const defaultMinWordLength = 4;
-export const minWordSplitLen = 3;
 
 /**
  * @deprecated

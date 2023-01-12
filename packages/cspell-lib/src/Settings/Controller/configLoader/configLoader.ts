@@ -1,10 +1,4 @@
-import type {
-    CSpellSettingsWithSourceTrace,
-    CSpellUserSettings,
-    ImportFileRef,
-    PnPSettings as PnPSettingsStrict,
-    Source,
-} from '@cspell/cspell-types';
+import type { CSpellUserSettings, ImportFileRef, PnPSettings as PnPSettingsStrict, Source } from '@cspell/cspell-types';
 import * as json from 'comment-json';
 import type { Options as CosmicOptions, OptionsSync as CosmicOptionsSync } from 'cosmiconfig';
 import { cosmiconfig, cosmiconfigSync } from 'cosmiconfig';
@@ -13,7 +7,6 @@ import { getDefaultCSpellIO } from 'cspell-io';
 import * as path from 'path';
 import { URI } from 'vscode-uri';
 
-import type { CSpellSettingsInternal } from '../../../Models/CSpellSettingsInternalDef';
 import { createCSpellSettingsInternal as csi } from '../../../Models/CSpellSettingsInternalDef';
 import { logError, logWarning } from '../../../util/logger';
 import { resolveFile } from '../../../util/resolveFile';
@@ -29,6 +22,7 @@ import { getRawGlobalSettings } from '../../GlobalSettings';
 import { ImportError } from '../ImportError';
 import type { LoaderResult } from '../pnpLoader';
 import { pnpLoader } from '../pnpLoader';
+import { defaultSettings } from './defaultSettings';
 import {
     normalizeCacheSettings,
     normalizeDictionaryDefs,
@@ -39,10 +33,8 @@ import {
     normalizeReporters,
     normalizeSettingsGlobs,
 } from './normalizeRawSettings';
-import { readSettings } from './readSettings';
+import type { CSpellSettingsI, CSpellSettingsWST } from './types';
 
-export type CSpellSettingsWST = CSpellSettingsWithSourceTrace;
-export type CSpellSettingsI = CSpellSettingsInternal;
 type CSpellSettingsVersion = Exclude<CSpellUserSettings['version'], undefined>;
 type PnPSettings = OptionalOrUndefined<PnPSettingsStrict>;
 
@@ -101,12 +93,6 @@ function parseJson(_filename: string, content: string) {
 }
 
 export const defaultConfigFilenames = Object.freeze(searchPlaces.concat());
-
-const defaultSettings: CSpellSettingsI = csi({
-    id: 'default',
-    name: 'default',
-    version: currentSettingsFileVersion,
-});
 
 const defaultPnPSettings: PnPSettings = {};
 
@@ -484,16 +470,6 @@ export function readRawSettings(filename: string, relativeTo?: string): CSpellSe
     relativeTo = relativeTo || process.cwd();
     const ref = resolveFilename(filename, relativeTo);
     return gcl()._readConfig(ref);
-}
-
-/**
- *
- * @param filenames - settings files to read
- * @returns combined configuration
- * @deprecated true
- */
-export function readSettingsFiles(filenames: string[]): CSpellSettingsI {
-    return filenames.map((filename) => readSettings(filename)).reduce((a, b) => mergeSettings(a, b), defaultSettings);
 }
 
 function resolveFilename(filename: string, relativeTo: string): ImportFileRef {

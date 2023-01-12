@@ -5,8 +5,8 @@ import type { CharacterSetCosts } from '../models/DictionaryInformation';
 import type { SuggestionCostMapDef } from '../models/suggestionCostsDef';
 import { accentForms, caseForms, expandCharacterSet, stripAccents, stripNonAccents } from '../utils/text';
 import { clean } from '../utils/util';
+import { joinLetters } from './joinLetters';
 import type { EditCostsRequired } from './mapCosts';
-import { joinLetters } from './mapHunspellInformation';
 
 export function parseAlphabet(
     cs: CharacterSetCosts,

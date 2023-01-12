@@ -10,9 +10,9 @@ import * as RxPat from '../Settings/RegExpPatterns';
 import * as Text from '../util/text';
 import { clean } from '../util/util';
 import { split } from '../util/wordSplitter';
+import { defaultMinWordLength } from './defaultConstants';
 import { isWordValidWithEscapeRetry } from './isWordValid';
 import { mapRangeBackToOriginalPos } from './parsedText';
-import { defaultMinWordLength } from './textValidator';
 import type {
     LineSegment,
     LineValidatorFn,

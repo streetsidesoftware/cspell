@@ -1,11 +1,11 @@
 import { readTrie } from '../../test/dictionaries.test.helper';
-import { clean } from '../trie-util';
+import { clean } from '../utils/clean';
 import { createTimer } from '../utils/timer';
+import { CompoundWordsMethod } from '../walker';
 import type { GenSuggestionOptionsStrict } from './genSuggestionsOptions';
 import { genCompoundableSuggestions, suggest } from './suggestAStar';
 import type { SuggestionCollector, SuggestionCollectorOptions, SuggestionResult } from './suggestCollector';
 import { suggestionCollector } from './suggestCollector';
-import { CompoundWordsMethod } from './walker';
 
 function getTrie() {
     return readTrie('@cspell/dict-en_us/cspell-ext.json');

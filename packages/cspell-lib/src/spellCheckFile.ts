@@ -1,15 +1,14 @@
 import type { CSpellSettingsWithSourceTrace, CSpellUserSettings } from '@cspell/cspell-types';
-import { readFile } from 'fs/promises';
-import { URI, Utils as UriUtils } from 'vscode-uri';
+import { URI } from 'vscode-uri';
 
-import { isGenerated, isGeneratedFile } from './LanguageIds';
-import type { TextDocument } from './Models/TextDocument';
+import type { Document, DocumentWithText } from './Document';
+import { isBinaryDoc } from './Document/isBinaryDoc';
+import { documentToTextDocument, resolveDocument } from './Document/resolveDocument';
 import { createTextDocument } from './Models/TextDocument';
 import type { DocumentValidatorOptions } from './textValidation';
 import { DocumentValidator } from './textValidation';
 import { determineTextDocumentSettings } from './textValidation/determineTextDocumentSettings';
 import { isError } from './util/errors';
-import { clean } from './util/util';
 import type { ValidateTextOptions, ValidationIssue } from './validator';
 
 export interface SpellCheckFileOptions extends ValidateTextOptions {
@@ -42,20 +41,6 @@ export interface SpellCheckFileResult {
     issues: ValidationIssue[];
     checked: boolean;
     errors: Error[] | undefined;
-}
-
-const defaultEncoding: BufferEncoding = 'utf8';
-
-export type UriString = string;
-
-export interface DocumentWithText extends Document {
-    text: string;
-}
-export interface Document {
-    uri: UriString;
-    text?: string;
-    languageId?: string;
-    locale?: string;
 }
 
 /**
@@ -152,29 +137,6 @@ async function spellCheckFullDocument(
     return result;
 }
 
-async function readDocument(filename: string, encoding: BufferEncoding = defaultEncoding): Promise<DocumentWithText> {
-    const text = await readFile(filename, encoding);
-    const uri = URI.file(filename).toString();
-
-    return {
-        uri,
-        text,
-    };
-}
-
-function resolveDocument(document: DocumentWithText | Document, encoding?: BufferEncoding): Promise<DocumentWithText> {
-    if (isDocumentWithText(document)) return Promise.resolve(document);
-    const uri = URI.parse(document.uri);
-    if (uri.scheme !== 'file') {
-        throw new Error(`Unsupported schema: "${uri.scheme}", open "${uri.toString()}"`);
-    }
-    return readDocument(uri.fsPath, encoding);
-}
-
-function isDocumentWithText(doc: DocumentWithText | Document): doc is DocumentWithText {
-    return doc.text !== undefined;
-}
-
 export interface DetermineFinalDocumentSettingsResult {
     document: DocumentWithText;
     settings: CSpellSettingsWithSourceTrace;
@@ -206,56 +168,4 @@ export function determineFinalDocumentSettings(
         document,
         settings: determineTextDocumentSettings(doc, settings),
     };
-}
-
-export function isBinaryDoc(document: Document): boolean {
-    return isBinaryFile(URI.parse(document.uri), document.languageId);
-}
-
-export function isBinaryFile(filenameUri: URI, languageId?: string | string[]): boolean {
-    if (languageId) {
-        const ids = normalizeLanguageIds(languageId);
-        if (ids.length) return isGenerated(ids);
-    }
-    const filename = UriUtils.basename(filenameUri);
-    return isGeneratedFile(filename);
-}
-
-function normalizeLanguageIds(languageId: string | string[]): string[] {
-    return (Array.isArray(languageId) ? languageId.join(',') : languageId).split(',').map((s) => s.trim());
-}
-
-export function fileToDocument(file: string): Document;
-export function fileToDocument(file: string, text: string, languageId?: string, locale?: string): DocumentWithText;
-export function fileToDocument(
-    file: string,
-    text?: string,
-    languageId?: string,
-    locale?: string
-): Document | DocumentWithText;
-export function fileToDocument(
-    file: string,
-    text?: string,
-    languageId?: string,
-    locale?: string
-): Document | DocumentWithText {
-    return clean({
-        uri: URI.file(file).toString(),
-        text,
-        languageId,
-        locale,
-    });
-}
-
-export async function fileToTextDocument(file: string): Promise<TextDocument> {
-    return documentToTextDocument(await resolveDocument(fileToDocument(file)));
-}
-
-function documentToTextDocument(document: DocumentWithText): TextDocument {
-    const { uri, text: content, languageId, locale } = document;
-    return createTextDocument({ uri, content, languageId, locale });
-}
-
-export async function resolveDocumentToTextDocument(doc: Document): Promise<TextDocument> {
-    return documentToTextDocument(await resolveDocument(doc));
 }

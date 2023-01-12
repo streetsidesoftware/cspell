@@ -6,7 +6,7 @@ import { createCSpellSettingsInternal } from '../Models/CSpellSettingsInternalDe
 import { PatternRegExp } from '../Models/PatternRegExp';
 import { resolveFile } from '../util/resolveFile';
 import { readSettings } from './Controller/configLoader';
-import { mergeSettings } from './index';
+import { mergeSettings } from './CSpellSettingsServer';
 import * as LanguageSettings from './LanguageSettings';
 import * as RegPat from './RegExpPatterns';
 

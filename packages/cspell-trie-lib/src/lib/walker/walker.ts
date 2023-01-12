@@ -1,4 +1,4 @@
-import type { ChildMap, TrieNode } from '../../TrieNode';
+import type { ChildMap, TrieNode } from '../TrieNode';
 import type { WalkerIterator } from './walkerTypes';
 import { CompoundWordsMethod, JOIN_SEPARATOR, WORD_SEPARATOR } from './walkerTypes';
 

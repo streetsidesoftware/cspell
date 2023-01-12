@@ -1,4 +1,4 @@
-import { createTriFromList, orderTrie } from '../../trie-util';
+import { createTriFromList, orderTrie } from '../trie-util';
 import { walker } from './walker';
 import type { WalkerIterator, YieldResult } from './walkerTypes';
 

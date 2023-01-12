@@ -17,11 +17,11 @@ import {
     loadPnP,
     loadPnPSync,
     readRawSettings,
-    readSettingsFiles,
     searchForConfig,
 } from './configLoader';
 import { extractImportErrors } from './extractImportErrors';
 import { readSettings } from './readSettings';
+import { readSettingsFiles } from './readSettingsFiles';
 
 const { normalizeCacheSettings, validateRawConfigExports, validateRawConfigVersion, getDefaultConfigLoaderInternal } =
     __configLoader_testing__;
