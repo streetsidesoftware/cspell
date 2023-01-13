@@ -35,7 +35,8 @@ export async function globP(pattern: string | string[], options?: GlobOptions): 
     const normPatterns = useJoinPatterns ? joinPatterns(rawPatterns) : rawPatterns;
     const useOptions: FastGlobOptions = { cwd, onlyFiles, dot, ignore, absolute: true };
 
-    const absolutePaths = await glob(normPatterns, useOptions);
+    const compare = new Intl.Collator('en').compare;
+    const absolutePaths = (await glob(normPatterns, useOptions)).sort(compare);
     const relativePaths = absolutePaths.map((absFilename) => path.relative(cwd, absFilename));
     return relativePaths;
 }
