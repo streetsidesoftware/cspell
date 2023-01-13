@@ -1,7 +1,8 @@
 import type { CSpellUserSettings, Glob } from '@cspell/cspell-types';
 import type { GlobPatternWithRoot } from 'cspell-glob';
 import { fileOrGlobToGlob, GlobMatcher } from 'cspell-glob';
-import glob from 'glob';
+import type { Options as FastGlobOptions } from 'fast-glob';
+import glob from 'fast-glob';
 import * as path from 'path';
 
 /**
@@ -12,10 +13,8 @@ export interface GlobOptions {
     root?: string | undefined;
     dot?: boolean | undefined;
     nodir?: boolean | undefined; // cspell:ignore nodir
-    ignore?: string | ReadonlyArray<string> | undefined;
+    ignore?: string | Array<string> | undefined;
 }
-
-type IGlob = ReturnType<typeof glob>;
 
 const defaultExcludeGlobs = ['node_modules/**'];
 
@@ -28,47 +27,21 @@ const useJoinPatterns = process.env['CSPELL_SINGLE_GLOB'];
  * @param options - search options.
  */
 export async function globP(pattern: string | string[], options?: GlobOptions): Promise<string[]> {
-    const root = options?.root || process.cwd();
-    const opts = options || { root };
+    const cwd = options?.root || options?.cwd || process.cwd();
+    const ignore = typeof options?.ignore === 'string' ? [options.ignore] : options?.ignore;
+    const onlyFiles = options?.nodir;
+    const dot = options?.dot;
     const rawPatterns = typeof pattern === 'string' ? [pattern] : pattern;
     const normPatterns = useJoinPatterns ? joinPatterns(rawPatterns) : rawPatterns;
-    const globPState: GlobPState = {
-        options: { ...opts, root },
-    };
+    const useOptions: FastGlobOptions = { cwd, onlyFiles, dot, ignore, absolute: true };
 
-    const globResults = normPatterns.map(async (pat) => {
-        globPState.options = { ...opts, root: root, cwd: root };
-        const absolutePaths = (await _globP(pat, globPState)).map((filename) => path.resolve(root, filename));
-        const relativeToRoot = absolutePaths.map((absFilename) => path.relative(root, absFilename));
-        return relativeToRoot;
-    });
-    const results = new Set(flatten(await Promise.all(globResults)));
-    return [...results];
+    const absolutePaths = await glob(normPatterns, useOptions);
+    const relativePaths = absolutePaths.map((absFilename) => path.relative(cwd, absFilename));
+    return relativePaths;
 }
 
 function joinPatterns(globs: string[]): string[] {
     return globs.length <= 1 ? globs : [`{${globs.join(',')}}`];
-}
-
-interface GlobPState {
-    options: GlobOptions;
-    glob?: IGlob;
-}
-
-function _globP(pattern: string, state: GlobPState): Promise<string[]> {
-    if (!pattern) {
-        return Promise.resolve([]);
-    }
-    return new Promise<string[]>((resolve, reject) => {
-        const cb = (err: Error | null | undefined, matches: string[]) => {
-            if (err) {
-                reject(err);
-            }
-            resolve(matches);
-        };
-        const options = { ...(state.glob || {}), ...state.options };
-        state.glob = glob(pattern, options, cb);
-    });
 }
 
 export function calcGlobs(commandLineExclude: string[] | undefined): { globs: string[]; source: string } {
@@ -151,14 +124,4 @@ export function extractGlobsFromMatcher(globMatcher: GlobMatcher): string[] {
 
 export function normalizeGlobsToRoot(globs: Glob[], root: string, isExclude: boolean): string[] {
     return extractGlobsFromMatcher(buildGlobMatcher(globs, root, isExclude));
-}
-
-function* flatten<T>(src: Iterable<T | T[]>): IterableIterator<T> {
-    for (const item of src) {
-        if (Array.isArray(item)) {
-            yield* item;
-        } else {
-            yield item;
-        }
-    }
 }
