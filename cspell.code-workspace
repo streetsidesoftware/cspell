@@ -55,6 +55,17 @@
                 "console": "integratedTerminal",
                 "internalConsoleOptions": "neverOpen",
                 "disableOptimisticBPs": true
+            },
+            {
+                "type": "node",
+                "request": "launch",
+                "name": "ViTest: Current Test File",
+                "autoAttachChildProcesses": true,
+                "skipFiles": ["<node_internals>/**", "**/node_modules/**"],
+                "program": "${workspaceRoot:cspell-monorepo}/node_modules/vitest/vitest.mjs",
+                "args": ["run", "${relativeFile}"],
+                "smartStep": true,
+                "console": "integratedTerminal"
             }
         ],
         "compounds": []

@@ -30,16 +30,30 @@ describe('GitIgnoreFile', () => {
         const gif = await loadGitIgnore(path.join(__dirname, '../../..'));
         expect(gif?.isIgnored(require.resolve('vitest'))).toBe(true);
     });
+
+    test('getGlobs', () => {
+        const gif = sampleGitIgnoreFile();
+        expect(gif.getGlobs(__dirname).sort()).toEqual([
+            '**/*.test.*',
+            '**/*.test.*/**',
+            '**/node_modules',
+            '**/node_modules/**',
+            'coverage/**',
+            'temp',
+            'temp/**',
+        ]);
+    });
 });
 
 describe('GitIgnoreHierarchy', () => {
     test.each`
-        file                         | expected
-        ${__filename}                | ${true}
-        ${p('GitIgnoreFiles.ts')}    | ${false}
-        ${require.resolve('vitest')} | ${true}
-        ${p('package-lock.json')}    | ${false}
+        file                              | expected
+        ${rel(__filename)}                | ${true}
+        ${rel(p('GitIgnoreFiles.ts'))}    | ${false}
+        ${rel(require.resolve('vitest'))} | ${true}
+        ${rel(p('package-lock.json'))}    | ${false}
     `('GitIgnoreHierarchy $file', async ({ file, expected }) => {
+        file = p(file);
         // cspell:ignore gifs
         const gifs = [];
         const gi = await loadGitIgnore(path.join(__dirname, '../../..'));
@@ -59,12 +73,13 @@ describe('GitIgnoreHierarchy', () => {
     });
 
     test.each`
-        file                         | expected
-        ${__filename}                | ${{ matched: true, gitIgnoreFile: p('./.gitignore'), line: undefined, glob: '*.test.*', root: __dirname }}
-        ${p('GitIgnoreFiles.ts')}    | ${undefined}
-        ${require.resolve('vitest')} | ${{ matched: true, gitIgnoreFile, glob: 'node_modules/', line: 59, root: pathRepo }}
-        ${p('package-lock.json')}    | ${undefined}
+        file                              | expected
+        ${rel(__filename)}                | ${{ matched: true, gitIgnoreFile: p('./.gitignore'), line: 5, glob: '*.test.*', root: __dirname }}
+        ${rp('GitIgnoreFiles.ts')}        | ${undefined}
+        ${rel(require.resolve('vitest'))} | ${{ matched: true, gitIgnoreFile, glob: 'node_modules/', line: 59, root: pathRepo }}
+        ${rp('package-lock.json')}        | ${undefined}
     `('ignoreEx $file', async ({ file, expected }) => {
+        file = p(file);
         // cspell:ignore gifs
         const gifs = [];
         const gi = await loadGitIgnore(path.join(__dirname, '../../..'));
@@ -74,8 +89,27 @@ describe('GitIgnoreHierarchy', () => {
         expect(gih.isIgnoredEx(file)).toEqual(expected);
     });
 
-    function p(...files: string[]): string {
-        return path.resolve(__dirname, ...files);
+    test('getGlobs', async () => {
+        const gifs = [];
+        const gi = await loadGitIgnore(path.join(__dirname, '../../..'));
+        if (gi) gifs.push(gi);
+        gifs.push(sampleGitIgnoreFile());
+        const gih = new GitIgnoreHierarchy(gifs);
+        expect(gih.getGlobs(__dirname).sort()).toEqual(
+            expect.arrayContaining(['**/*.cpuprofile', '**/*.cpuprofile/**', '**/*.test.*', '**/*.test.*/**'])
+        );
+    });
+
+    function rel(filename: string): string {
+        return path.relative(__dirname, filename);
+    }
+
+    function rp(...filename: string[]): string {
+        return rel(p(...filename));
+    }
+
+    function p(...filename: string[]): string {
+        return path.resolve(__dirname, ...filename);
     }
 });
 
@@ -85,16 +119,13 @@ const sampleGitIgnore = `
 node_modules
 *.test.*
 
+/temp
+/coverage/**
+
 `;
 
-function sampleGlobMatcher(): GlobMatcher {
-    return new GlobMatcher(sampleGitIgnore, __dirname);
-}
-
 function sampleGitIgnoreFile(): GitIgnoreFile {
-    const m = sampleGlobMatcher();
-    const file = path.join(m.root, '.gitignore');
-    return new GitIgnoreFile(m, file);
+    return GitIgnoreFile.parseGitignore(sampleGitIgnore, path.join(__dirname, '.gitignore'));
 }
 
 // function oc<T>(v: Partial<T>): T {
