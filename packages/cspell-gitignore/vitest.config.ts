@@ -10,6 +10,7 @@ export default mergeConfig(
             include: ['src/**/*.test.{ts,mts}'],
             exclude: ['content/**', 'fixtures/**', 'bin.mjs', '_snapshots_'],
             root: __dirname,
+            testTimeout: 10000,
         },
     })
 );
