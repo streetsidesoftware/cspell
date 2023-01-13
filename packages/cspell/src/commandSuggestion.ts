@@ -61,7 +61,7 @@ export function commandSuggestion(prog: Command): Command {
             'Force the number of suggested to be limited, by not including suggestions that have the same edit cost.'
         )
         .option('--stdin', 'Use stdin for input.')
-        .addOption(new CommanderOption('--repl', 'REPL interface for looking up suggestions.').hideHelp())
+        .addOption(new CommanderOption('--repl', 'REPL interface for looking up suggestions.'))
         .option('-v, --verbose', 'Show detailed output.', count, 0)
         .option(
             '-d, --dictionary <dictionary name>',
