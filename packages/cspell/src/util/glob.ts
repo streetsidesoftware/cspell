@@ -33,7 +33,7 @@ export async function globP(pattern: string | string[], options?: GlobOptions): 
     const dot = options?.dot;
     const rawPatterns = typeof pattern === 'string' ? [pattern] : pattern;
     const normPatterns = useJoinPatterns ? joinPatterns(rawPatterns) : rawPatterns;
-    const useOptions: FastGlobOptions = { cwd, onlyFiles, dot, ignore, absolute: true };
+    const useOptions: FastGlobOptions = { cwd, onlyFiles, dot, ignore, absolute: true, followSymbolicLinks: false };
 
     const compare = new Intl.Collator('en').compare;
     const absolutePaths = (await glob(normPatterns, useOptions)).sort(compare);
