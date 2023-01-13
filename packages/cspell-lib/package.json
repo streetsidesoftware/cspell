@@ -23,7 +23,7 @@
     "coverage": "jest --coverage",
     "test-watch": "jest --watch",
     "prepublishOnly": "pnpm run clean-build",
-    "test": "jest",
+    "test": "jest --maxWorkers=1",
     "test:update-snapshot": "jest --updateSnapshot"
   },
   "repository": {
