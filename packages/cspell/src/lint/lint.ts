@@ -380,6 +380,24 @@ async function determineFilesToCheck(
             globOptions.dot = enableGlobDot;
         }
 
+        if (gitIgnore) {
+            // Add the gitignore file in the root to the globs to improve performance.
+            const [gitIgnoredGlobs, gitIncludedGlobs] = await gitIgnore.getGlobs(root);
+
+            allGlobs.push(...gitIncludedGlobs);
+            fileGlobs.push(...gitIncludedGlobs);
+
+            let globOptionsIgnore: string[] = [];
+            if (Array.isArray(globOptions.ignore)) {
+                globOptionsIgnore = globOptions.ignore;
+            } else if (typeof globOptions.ignore === 'string') {
+                globOptionsIgnore = [globOptions.ignore];
+            }
+
+            globOptionsIgnore.push(...gitIgnoredGlobs);
+            globOptions.ignore = globOptionsIgnore;
+        }
+
         const filterFiles = opFilter(filterFilesFn(globMatcher));
         const foundFiles = await (hasFileLists
             ? useFileLists(fileLists, allGlobs, root, enableGlobDot)
