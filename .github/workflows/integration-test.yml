@@ -149,7 +149,8 @@ jobs:
         id: step-cache-run
         uses: actions/cache@v3
         with:
-          key: int-repo-${{ steps.repo-hash.outputs.value }}-${{ fromJSON(steps.step-repo-info.outputs.repo-info).commit }}
+          key: integration-run-result-${{ steps.repo-hash.outputs.value }}-${{ fromJSON(steps.step-repo-info.outputs.repo-info).commit }}
+          # We just need a path, its contents isn't important. We really just care if the key was cached.
           path: |
             integration-tests/tsconfig.json
 
