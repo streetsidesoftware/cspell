@@ -33,7 +33,7 @@ runs:
         packages/*/dist
         integration-tests/dist
         CACHE_PATH" >> $GITHUB_ENV
-        echo "CACHE_KEY=int-build-${{ hashFiles(
+        echo "CACHE_KEY=integrations-build-${{ hashFiles(
             'integration-tests/src/**/*.ts', 'integration-tests/tsconfig.json',
             '*-lock.yaml', 'packages/*/src/**/*.ts', 'packages/*/tsconfig.json'
           ) }}" >> $GITHUB_ENV
