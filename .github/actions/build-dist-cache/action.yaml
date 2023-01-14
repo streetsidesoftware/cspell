@@ -35,37 +35,30 @@ runs:
     - run: pnpm i
       shell: bash
 
-    - name: Calc Key and Path
-      shell: bash
-      id: key_and_path
-      run: |
-        echo "CACHE_PATH<<CACHE_PATH
-        packages/*/dist
-        integration-tests/dist
-        CACHE_PATH" >> $GITHUB_ENV
-        echo "CACHE_KEY=integrations-build-${{ hashFiles(
-            'integration-tests/src/**/*.ts', 'integration-tests/tsconfig.json',
-            '*-lock.yaml', 'packages/*/src/**/*.ts', 'packages/*/tsconfig.json'
-          ) }}" >> $GITHUB_ENV
-
     - id: cache-path
       uses: ./.github/actions/output
       with:
-        value: ${{ env.CACHE_PATH }}
+        value: |
+          packages/*/dist
+          integration-tests/dist
         show: true
 
     - id: cache-key
       uses: ./.github/actions/output
       with:
-        value: ${{ env.CACHE_KEY }}
+        value: >-
+          integrations-build-${{ hashFiles(
+            'integration-tests/src/**/*.ts', 'integration-tests/tsconfig.json',
+            '*-lock.yaml', 'packages/*/src/**/*.ts', 'packages/*/tsconfig.json'
+          ) }}
         show: true
 
     - name: Cache Build
       id: step-cache-build
       uses: actions/cache@v3
       with:
-        key: ${{ env.CACHE_KEY }}
-        path: ${{ env.CACHE_PATH }}
+        key: ${{ steps.cache-key.outputs.value }}
+        path: ${{ steps.cache-path.outputs.value }}
 
     - name: Cached Results
       run: |
@@ -95,9 +88,9 @@ runs:
       with:
         text: |
           ## Build
-          - key: ${{ env.CACHE_KEY }}
+          - key: ${{ steps.cache-key.outputs.value }}
           - path:
           ```
-          ${{ env.CACHE_PATH }}
+          ${{ steps.cache-path.outputs.value }}
           ```
           - hit: ${{ steps.step-cache-build.outputs.cache-hit || 'Miss' }}
