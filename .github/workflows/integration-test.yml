@@ -77,7 +77,7 @@ jobs:
 
       - name: Show build Result
         env:
-          outputs: ${{ toJSON() }}
+          outputs: ${{ toJSON(steps.build-cache.outputs) }}
         run: |
           echo build-cache: "$outputs"
 
