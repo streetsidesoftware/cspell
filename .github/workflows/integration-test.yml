@@ -153,8 +153,8 @@ jobs:
         with:
           value: |
             step.repo-hash: "${{ steps.repo-hash.outputs.value }}"
-            env.repo-hash:  "${{ env.repo-hash }}"
-            env.repo-info: ${{ env.repo-info }}
+            env.repo-hash:  "${{ steps.step-repo-info.outputs.repo-hash }}"
+            env.repo-info: ${{ steps.step-repo-info.outputs.repo-info }}
             $repo-hash
 
       - name: Cache Integration Run
