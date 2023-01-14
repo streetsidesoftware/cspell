@@ -6,13 +6,10 @@ description: Build the repo and store it in the cache.
 outputs:
   key:
     description: Cache Key
-    value: ${{ steps.output-key-and-path.outputs.key }}
+    value: ${{ steps.cache-key.outputs.value }}
   path:
     description: Cache Path
-    value: ${{ steps.output-key-and-path.outputs.path }}
-  path-env:
-    description: Cache Path
-    value: ${{ env.CACHE_PATH }}
+    value: ${{ steps.cache-path.outputs.value }}
 
 runs:
   using: "composite"
@@ -50,6 +47,18 @@ runs:
         echo key=$CACHE_KEY >> $GITHUB_OUTPUT
         echo path=$output_path >> $GITHUB_OUTPUT
       shell: bash
+
+    - id: cache-path
+      uses: .github/actions/echo
+      with:
+        value: ${{ env.CACHE_PATH }}
+        show: true
+
+    - id: cache-key
+      uses: .github/actions/echo
+      with:
+        value: ${{ env.CACHE_KEY }}
+        show: true
 
     - name: Cache Build
       id: step-cache-build
