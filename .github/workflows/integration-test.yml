@@ -10,18 +10,18 @@ on:
       - "*-lock.yaml"
       - ".github/workflows/integration-test.yml"
       - "!docs/**"
-  push:
-    branches:
-      - main
-    paths:
-      - "packages/**/package.json"
-      - "packages/**/*-lock.yaml"
-      - "packages/**/*.ts"
-      - "integration-tests/**"
-      - "package.json"
-      - "*-lock.yaml"
-      - ".github/workflows/integration-test.yml"
-      - "!docs/**"
+  # push:
+  #   branches:
+  #     - main
+  #   paths:
+  #     - "packages/**/package.json"
+  #     - "packages/**/*-lock.yaml"
+  #     - "packages/**/*.ts"
+  #     - "integration-tests/**"
+  #     - "package.json"
+  #     - "*-lock.yaml"
+  #     - ".github/workflows/integration-test.yml"
+  #     - "!docs/**"
   # Run on demand
   workflow_dispatch:
     inputs:
@@ -38,7 +38,7 @@ env:
   NPM_VERSION: "8"
 
 jobs:
-  calc-ref:
+  prepare:
     runs-on: ubuntu-latest
     env:
       REF_BRANCH: ${{ github.event.inputs.ref || github.ref }}
@@ -46,50 +46,70 @@ jobs:
       ref: ${{ env.REF_BRANCH }}
       runs_on: ${{ env.RUNS_ON }}
       node_version: ${{ env.NODE_VERSION }}
+      repos: ${{ steps.load-integrations.outputs.repos }}
     steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          ref: ${{ env.REF_BRANCH }}
+
+      - name: Start Prepare
+        uses: ./.github/actions/summary
+        with:
+          text: |
+            # Prepare Integration
+
+            - ref: "${{ env.REF_BRANCH }}"
+            - runs_on: "${{ env.RUNS_ON }}"
+            - node_version: ${{ env.NODE_VERSION }}
+
+      - name: load-integrations
+        id: load-integrations
+        uses: ./.github/actions/list-integration-repos
+
       - name: Refs
-        run: |
-          echo ref: "${{ env.REF_BRANCH }}"
-          echo runs_on: "${{ env.RUNS_ON }}"
-          echo node_version: ${{ env.NODE_VERSION }}
+        uses: ./.github/actions/summary
+        with:
+          text: |
+            ## Integrations
+            ```json
+            ${{ steps.load-integrations.outputs.repos }}
+            ```
 
-  load-integrations:
-    needs:
-      - calc-ref
-    uses: ./.github/workflows/reuseable-list-integration-repos.yml
-    with:
-      ref: ${{ needs.calc-ref.outputs.ref }}
+      - name: Pre-build and cache
+        uses: ./.github/actions/build-for-integrations
+        with:
+          show-summary: true
+          node-version: ${{ env.NODE_VERSION }}
+          use-setup: true
 
-  build:
-    needs:
-      - calc-ref
-    uses: "./.github/workflows/reuseable-build-dist-cache.yml"
-    with:
-      ref: ${{ needs.calc-ref.outputs.ref }}
+      - name: Done
+        uses: ./.github/actions/summary
+        with:
+          text: |
+            ## Done
 
   integration-tests:
     needs:
-      - calc-ref
-      - load-integrations
-      - build
+      - prepare
     runs-on: ${{ matrix.os }}
 
     env:
-      REF_BRANCH: ${{ needs.calc-ref.outputs.ref }}
+      REF_BRANCH: ${{ needs.prepare.outputs.ref }}
 
     strategy:
       # the integration tests are independent, so we want to run them all.
       fail-fast: false
       matrix:
         node-version:
-          - ${{ needs.calc-ref.outputs.node_version }}
+          - ${{ needs.prepare.outputs.node_version }}
 
         os:
-          - ${{ needs.calc-ref.outputs.runs_on }}
+          - ${{ needs.prepare.outputs.runs_on }}
 
         # List of repositories to check.
         # Use `repo-list.sh` in `integration-tests` to generate.
-        repo: ${{ fromJSON(needs.load-integrations.outputs.repos) }}
+        repo: ${{ fromJSON(needs.prepare.outputs.repos) }}
         # repo:
         #   - prettier/prettier
         #   - typescript-eslint/typescript-eslint
@@ -98,51 +118,62 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
-      - name: Setup pnpm
-        uses: pnpm/action-setup@v2.2.4
-
-      - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v3
+      - id: repo-hash
+        uses: ./.github/actions/echo
         with:
-          node-version: ${{ matrix.node-version }}
-          cache: "pnpm"
-
-      - run: pnpm -v
+          value: >-
+            ${{ hashFiles(
+              'integration-tests/tsconfig.json',
+              'integration-tests/config/repositories/${{matrix.repo}}/**',
+              'integration-tests/snapshots/${{ matrix.repo }}/*',
+              'integration-tests/repositories/*',
+              'integration-tests/src/**/*.ts', 'integration-tests/tsconfig.json',
+              'packages/*/src/**/*.ts', 'packages/*/tsconfig.json',
+              'packages/*/*.ts',
+              '*-lock.yaml'
+            ) }}
 
       - name: Repo Info
         id: step-repo-info
         run: |
           echo "repo-info=$(jq -c '.repositories[] | select(.path == "${{ matrix.repo }}")' integration-tests/config/config.json)" >> $GITHUB_OUTPUT
-          echo "repo-hash=${{ hashFiles(
-            'integration-tests/tsconfig.json',
-            'integration-tests/config/repositories/${{matrix.repo}}/**',
-            'integration-tests/snapshots/${{ matrix.repo }}/*',
-            'integration-tests/repositories/*',
-            'integration-tests/src/**/*.ts', 'integration-tests/tsconfig.json',
-            'packages/*/src/**/*.ts', 'packages/*/tsconfig.json',
-            'packages/*/*.ts',
-            '*-lock.yaml'
-          ) }}"  >> $GITHUB_OUTPUT
+
+      - uses: ./.github/actions/echo
+        with:
+          value: |
+            step.repo-hash: "${{ steps.repo-hash.outputs.value }}"
+            env.repo-info: ${{ steps.step-repo-info.outputs.repo-info }}
+            $repo-hash
 
       - name: Cache Integration Run
         id: step-cache-run
         uses: actions/cache@v3
         with:
-          key: int-repo-${{ steps.step-repo-info.outputs.repo-hash }}-${{ fromJSON(steps.step-repo-info.outputs.repo-info).commit }}
+          key: integration-run-result-${{ steps.repo-hash.outputs.value }}-${{ fromJSON(steps.step-repo-info.outputs.repo-info).commit }}
+          # We just need a path, its contents isn't important. We really just care if the key was cached.
           path: |
             integration-tests/tsconfig.json
 
-      - name: Cache Build
-        id: step-cache-build
-        uses: actions/cache@v3
+      - uses: ./.github/actions/echo
         with:
-          key: ${{ needs.build.outputs.key }}
-          path: ${{ needs.build.outputs.path }}
+          value: |
+            Run Cache: ${{ steps.step-cache-run.outputs.cache-hit && 'Hit' || 'Miss' }}
 
-      - name: Cached Results
-        run: |
-          echo Build Cache: ${{ steps.step-cache-build.outputs.cache-hit && 'Hit' || 'Miss' }}
-          echo Run Cache: ${{ steps.step-cache-run.outputs.cache-hit && 'Hit' || 'Miss' }}
+      - name: Setup Env
+        if: ${{ !steps.step-cache-run.outputs.cache-hit }}
+        uses: ./.github/actions/setup
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - id: step-cache-build
+        if: ${{ !steps.step-cache-run.outputs.cache-hit }}
+        uses: ./.github/actions/build-for-integrations
+
+      - uses: ./.github/actions/echo
+        if: ${{ !steps.step-cache-run.outputs.cache-hit }}
+        with:
+          value: |
+            Run Cache: ${{ steps.step-cache-run.outputs.cache-hit && 'Hit' || 'Miss' }}
 
       - name: Cache Integration Test Repository Files
         if: ${{ !steps.step-cache-run.outputs.cache-hit }}
@@ -151,20 +182,6 @@ jobs:
           key: int-repo-temp-files-${{ matrix.repo }}-${{ fromJSON(steps.step-repo-info.outputs.repo-info).commit }}
           path: |
             integration-tests/repositories/temp/${{ matrix.repo }}
-
-      - name: pnpm CI
-        if: ${{ !steps.step-cache-build.outputs.cache-hit || !steps.step-cache-run.outputs.cache-hit }}
-        run: pnpm i
-
-      - name: Has pnpm has failed?
-        if: ${{ failure() }}
-        run: |
-          ls -alF /home/runner/.pnpm/_logs/*.log
-          cat /home/runner/.pnpm/_logs/*.log
-
-      - name: Build
-        if: ${{ !steps.step-cache-build.outputs.cache-hit }}
-        run: pnpm run build
 
       - name: Run Integration Tests ${{ matrix.repo }}
         if: ${{ !steps.step-cache-run.outputs.cache-hit }}

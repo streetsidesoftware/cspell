@@ -1,0 +1,25 @@
+name: echo
+description: Echo the input as output
+
+inputs:
+  value:
+    description: The Value to return.
+    required: true
+  show:
+    description: Show the value in the console.
+    default: "true"
+    required: false
+outputs:
+  value:
+    description: The value that was input.
+    value: ${{ inputs.value }}
+runs:
+  using: "composite"
+  steps:
+    - name: Show
+      if: inputs.show
+      shell: bash
+      env:
+        VALUE: ${{ inputs.value }}
+      run: |
+        echo "$VALUE"

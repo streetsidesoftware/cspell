@@ -1,0 +1,16 @@
+name: Summary
+description: Send markdown to the step summary
+
+inputs:
+  text:
+    description: The markdown text to send.
+    required: true
+runs:
+  using: "composite"
+  steps:
+    - name: write
+      shell: bash
+      env:
+        VALUE: ${{ inputs.text }}
+      run: |
+        echo "$VALUE" >> $GITHUB_STEP_SUMMARY
