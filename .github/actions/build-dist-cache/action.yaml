@@ -9,7 +9,10 @@ outputs:
     value: ${{ steps.output-key-and-path.outputs.key }}
   path:
     description: Cache Path
-    value: ${{ fromJSON(steps.output-key-and-path.outputs.path) }}
+    value: ${{ steps.output-key-and-path.outputs.path }}
+  path-env:
+    description: Cache Path
+    value: ${{ env.CACHE_PATH }}
 
 runs:
   using: "composite"
