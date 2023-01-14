@@ -1,0 +1,32 @@
+name: list-integration-repos
+description: Export list of repositories to check.
+
+# Uses `integration-test/repo-list.sh`to generate.
+
+outputs:
+  repos:
+    description: JSON list of integration test repositories
+    value: ${{ env.REPOS }}
+
+runs:
+  using: "composite"
+  steps:
+    - name: Inputs
+      shell: bash
+      env:
+        INPUTS: ${{ toJSON(inputs) }}
+      run: |
+        echo "inputs: $INPUTS"
+
+    - name: Gen List
+      shell: bash
+      run: |
+        cd integration-tests
+        echo "REPOS<<HEREDOC" >> $GITHUB_ENV
+        ./repo-list.sh >> $GITHUB_ENV
+        echo HEREDOC >> $GITHUB_ENV
+
+    - name: Show List
+      shell: bash
+      run: |
+        echo "$REPOS"

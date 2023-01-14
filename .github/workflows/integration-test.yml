@@ -10,18 +10,18 @@ on:
       - "*-lock.yaml"
       - ".github/workflows/integration-test.yml"
       - "!docs/**"
-  push:
-    branches:
-      - main
-    paths:
-      - "packages/**/package.json"
-      - "packages/**/*-lock.yaml"
-      - "packages/**/*.ts"
-      - "integration-tests/**"
-      - "package.json"
-      - "*-lock.yaml"
-      - ".github/workflows/integration-test.yml"
-      - "!docs/**"
+  # push:
+  #   branches:
+  #     - main
+  #   paths:
+  #     - "packages/**/package.json"
+  #     - "packages/**/*-lock.yaml"
+  #     - "packages/**/*.ts"
+  #     - "integration-tests/**"
+  #     - "package.json"
+  #     - "*-lock.yaml"
+  #     - ".github/workflows/integration-test.yml"
+  #     - "!docs/**"
   # Run on demand
   workflow_dispatch:
     inputs:
@@ -46,19 +46,20 @@ jobs:
       ref: ${{ env.REF_BRANCH }}
       runs_on: ${{ env.RUNS_ON }}
       node_version: ${{ env.NODE_VERSION }}
+      repos: ${{ steps.load-integrations.output.repos }}
     steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          ref: ${{ env.REF_BRANCH }}
+      - name: load-integrations
+        id: load-integrations
+        uses: ./.github/actions/list-integration-repos
       - name: Refs
         run: |
           echo ref: "${{ env.REF_BRANCH }}"
           echo runs_on: "${{ env.RUNS_ON }}"
           echo node_version: ${{ env.NODE_VERSION }}
-
-  load-integrations:
-    needs:
-      - calc-ref
-    uses: ./.github/workflows/reuseable-list-integration-repos.yml
-    with:
-      ref: ${{ needs.calc-ref.outputs.ref }}
 
   build:
     needs:
@@ -70,7 +71,6 @@ jobs:
   integration-tests:
     needs:
       - calc-ref
-      - load-integrations
       - build
     runs-on: ${{ matrix.os }}
 
@@ -89,7 +89,7 @@ jobs:
 
         # List of repositories to check.
         # Use `repo-list.sh` in `integration-tests` to generate.
-        repo: ${{ fromJSON(needs.load-integrations.outputs.repos) }}
+        repo: ${{ fromJSON(needs.calc-ref.outputs.repos) }}
         # repo:
         #   - prettier/prettier
         #   - typescript-eslint/typescript-eslint
