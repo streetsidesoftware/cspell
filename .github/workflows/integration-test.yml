@@ -119,6 +119,21 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
+      - id: repo-hash
+        uses: ./.github/actions/echo
+        with:
+          value: >-
+            ${{ hashFiles(
+              'integration-tests/tsconfig.json',
+              'integration-tests/config/repositories/${{matrix.repo}}/**',
+              'integration-tests/snapshots/${{ matrix.repo }}/*',
+              'integration-tests/repositories/*',
+              'integration-tests/src/**/*.ts', 'integration-tests/tsconfig.json',
+              'packages/*/src/**/*.ts', 'packages/*/tsconfig.json',
+              'packages/*/*.ts',
+              '*-lock.yaml'
+            ) }}
+
       - name: Repo Info
         id: step-repo-info
         run: |
@@ -133,6 +148,14 @@ jobs:
             'packages/*/*.ts',
             '*-lock.yaml'
           ) }}"  >> $GITHUB_OUTPUT
+
+      - uses: ./.github/actions/echo
+        with:
+          value: |
+            step.repo-hash: "${{ steps.repo-hash.outputs.value }}"
+            env.repo-hash:  "${{ env.repo-hash }}"
+            env.repo-info: ${{ env.repo-info }}
+            $repo-hash
 
       - name: Cache Integration Run
         id: step-cache-run
