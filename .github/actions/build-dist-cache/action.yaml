@@ -55,7 +55,7 @@ runs:
         show: true
 
     - id: cache-key
-      uses: .github/actions/echo
+      uses: ./.github/actions/echo
       with:
         value: ${{ env.CACHE_KEY }}
         show: true
