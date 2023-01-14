@@ -51,7 +51,7 @@ runs:
       uses: ./.github/actions/output
       with:
         value: >-
-          integrations-build-${{ hashFiles(
+          integrations-build--${{ hashFiles(
             'integration-tests/src/**/*.ts', 'integration-tests/tsconfig.json',
             '*-lock.yaml', 'packages/*/src/**/*.ts', 'packages/*/tsconfig.json'
           ) }}
