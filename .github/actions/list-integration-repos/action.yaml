@@ -27,7 +27,7 @@ runs:
 
     - name: Set Outputs
       id: result
-      uses: ./.github/actions/output
+      uses: streetsidesoftware/action-set-output@v1
       with:
         value: ${{ env.REPOS }}
         show: true
