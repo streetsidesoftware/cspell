@@ -80,7 +80,7 @@ jobs:
           echo load-integrations: "$load_integrations"
 
       - id: build-cache
-        uses: ./.github/actions/build-dist-cache
+        uses: ./.github/actions/build-for-integrations
         with:
           show-summary: true
 
@@ -138,22 +138,11 @@ jobs:
         id: step-repo-info
         run: |
           echo "repo-info=$(jq -c '.repositories[] | select(.path == "${{ matrix.repo }}")' integration-tests/config/config.json)" >> $GITHUB_OUTPUT
-          echo "repo-hash=${{ hashFiles(
-            'integration-tests/tsconfig.json',
-            'integration-tests/config/repositories/${{matrix.repo}}/**',
-            'integration-tests/snapshots/${{ matrix.repo }}/*',
-            'integration-tests/repositories/*',
-            'integration-tests/src/**/*.ts', 'integration-tests/tsconfig.json',
-            'packages/*/src/**/*.ts', 'packages/*/tsconfig.json',
-            'packages/*/*.ts',
-            '*-lock.yaml'
-          ) }}"  >> $GITHUB_OUTPUT
 
       - uses: ./.github/actions/echo
         with:
           value: |
             step.repo-hash: "${{ steps.repo-hash.outputs.value }}"
-            env.repo-hash:  "${{ steps.step-repo-info.outputs.repo-hash }}"
             env.repo-info: ${{ steps.step-repo-info.outputs.repo-info }}
             $repo-hash
 
@@ -161,7 +150,7 @@ jobs:
         id: step-cache-run
         uses: actions/cache@v3
         with:
-          key: int-repo-${{ steps.step-repo-info.outputs.repo-hash }}-${{ fromJSON(steps.step-repo-info.outputs.repo-info).commit }}
+          key: int-repo-${{ steps.repo-hash.outputs.value }}-${{ fromJSON(steps.step-repo-info.outputs.repo-info).commit }}
           path: |
             integration-tests/tsconfig.json
 
@@ -178,7 +167,7 @@ jobs:
 
       - id: step-cache-build
         if: ${{ !steps.step-cache-run.outputs.cache-hit }}
-        uses: ./.github/actions/build-dist-cache
+        uses: ./.github/actions/build-for-integrations
 
       - uses: ./.github/actions/echo
         if: ${{ !steps.step-cache-run.outputs.cache-hit }}
