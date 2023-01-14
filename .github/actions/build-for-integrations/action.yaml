@@ -40,7 +40,7 @@ runs:
         echo "inputs: $INPUTS"
 
     - id: cache-path
-      uses: ./.github/actions/output
+      uses: streetsidesoftware/action-set-output@v1
       with:
         value: |
           packages/*/dist
@@ -48,7 +48,7 @@ runs:
         show: true
 
     - id: cache-key
-      uses: ./.github/actions/output
+      uses: streetsidesoftware/action-set-output@v1
       with:
         value: >-
           integrations-build-${{ hashFiles(
