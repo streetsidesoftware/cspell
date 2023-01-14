@@ -59,19 +59,22 @@ jobs:
           text: |
             # Prepare Integration
 
+            - ref: "${{ env.REF_BRANCH }}"
+            - runs_on: "${{ env.RUNS_ON }}"
+            - node_version: ${{ env.NODE_VERSION }}
+
       - name: load-integrations
         id: load-integrations
         uses: ./.github/actions/list-integration-repos
 
       - name: Refs
-        uses: ./.github/actions/echo
+        uses: ./.github/actions/summary
         with:
           value: |
-            ref: "${{ env.REF_BRANCH }}"
-            runs_on: "${{ env.RUNS_ON }}"
-            node_version: ${{ env.NODE_VERSION }}
-            load-integrations:
-            ${{ toJSON(steps.load-integrations.outputs) }}
+            ## Integrations
+            ```json
+            ${{ steps.load-integrations.outputs }}
+            ```
 
       - name: Pre-build and cache
         uses: ./.github/actions/build-for-integrations
