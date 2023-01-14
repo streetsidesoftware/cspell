@@ -43,7 +43,7 @@ runs:
         output_path: ${{ toJSON(env.CACHE_PATH ) }}
       run: |
         echo key=$CACHE_KEY
-        echo "path=$CACHE_PATH"
+        echo path=$output_path
         echo key=$CACHE_KEY >> $GITHUB_OUTPUT
         echo path=$output_path >> $GITHUB_OUTPUT
       shell: bash
