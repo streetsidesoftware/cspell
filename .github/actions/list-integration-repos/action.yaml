@@ -6,7 +6,7 @@ description: Export list of repositories to check.
 outputs:
   repos:
     description: JSON list of integration test repositories
-    value: ${{ env.REPOS }}
+    value: ${{ steps.result.output.repos }}
 
 runs:
   using: "composite"
@@ -27,6 +27,8 @@ runs:
         echo HEREDOC >> $GITHUB_ENV
 
     - name: Show List
+      id: result
       shell: bash
       run: |
         echo "$REPOS"
+        echo repos=$REPOS >> $GITHUB_OUTPUT
