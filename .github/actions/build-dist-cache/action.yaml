@@ -42,9 +42,9 @@ runs:
       run: |
         echo key=${{ env.CACHE_KEY }}
         echo "path=${{ env.CACHE_PATH }}"
-        echo key=${{ env.CACHE_KEY }} >> $GITHUB_OUTPUT
+        echo key=$CACHE_KEY >> $GITHUB_OUTPUT
         echo "path=<<CACHE_PATH
-        ${{ env.CACHE_PATH }}
+        $CACHE_PATH
         CACHE_PATH" >> $GITHUB_OUTPUT
       shell: bash
 
