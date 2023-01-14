@@ -40,22 +40,22 @@ runs:
         echo "inputs: $INPUTS"
 
     - id: cache-path
-      uses: ./.github/actions/output
+      uses: streetsidesoftware/action-set-output@v1
       with:
         value: |
           packages/*/dist
           integration-tests/dist
-        show: true
+        debug: true
 
     - id: cache-key
-      uses: ./.github/actions/output
+      uses: streetsidesoftware/action-set-output@v1
       with:
         value: >-
           integrations-build-${{ hashFiles(
             'integration-tests/src/**/*.ts', 'integration-tests/tsconfig.json',
             '*-lock.yaml', 'packages/*/src/**/*.ts', 'packages/*/tsconfig.json'
           ) }}
-        show: true
+        debug: true
 
     - name: Cache Build
       id: step-cache-build
