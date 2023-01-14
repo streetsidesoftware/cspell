@@ -57,12 +57,12 @@ jobs:
         uses: ./.github/actions/list-integration-repos
       - name: Refs
         env:
-          load-integrations: ${{ steps.load-integrations.output }}
+          load-integrations: ${{ toJSON(steps.load-integrations.output) }}
         run: |
           echo ref: "${{ env.REF_BRANCH }}"
           echo runs_on: "${{ env.RUNS_ON }}"
           echo node_version: ${{ env.NODE_VERSION }}
-          echo ${{ env.load-integrations }}
+          echo load-integrations: "${{ env.load-integrations }}"
 
   build:
     needs:
