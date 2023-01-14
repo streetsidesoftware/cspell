@@ -41,9 +41,11 @@ runs:
     - id: output-key-and-path
       run: |
         echo key=${{ env.CACHE_KEY }}
-        echo path=${{ env.CACHE_PATH }}
+        echo "path=${{ env.CACHE_PATH }}"
         echo key=${{ env.CACHE_KEY }} >> $GITHUB_OUTPUT
-        echo path=${{ env.CACHE_PATH }} >> $GITHUB_OUTPUT
+        echo "path=<<CACHE_PATH
+        ${{ env.CACHE_PATH }}
+        CACHE_PATH" >> $GITHUB_OUTPUT
       shell: bash
 
     - name: Cache Build
