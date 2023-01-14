@@ -6,7 +6,7 @@ description: Export list of repositories to check.
 outputs:
   repos:
     description: JSON list of integration test repositories
-    value: ${{ steps.result.output.repos }}
+    value: ${{ env.REPOS }}
 
 runs:
   using: "composite"
@@ -31,4 +31,5 @@ runs:
       shell: bash
       run: |
         echo "$REPOS"
-        echo repos=$REPOS >> $GITHUB_OUTPUT
+
+      # echo repos=$REPOS >> $GITHUB_OUTPUT
