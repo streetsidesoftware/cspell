@@ -38,7 +38,7 @@ env:
   NPM_VERSION: "8"
 
 jobs:
-  build-ref:
+  prepare:
     runs-on: ubuntu-latest
     env:
       REF_BRANCH: ${{ github.event.inputs.ref || github.ref }}
@@ -55,6 +55,12 @@ jobs:
         with:
           ref: ${{ env.REF_BRANCH }}
 
+      - name: Start Prepare
+        uses: ./.github/actions/summary
+        with:
+          text: |
+            # Prepare Integration
+
       - name: Setup Env
         uses: ./.github/actions/setup
         with:
@@ -63,6 +69,7 @@ jobs:
       - name: load-integrations
         id: load-integrations
         uses: ./.github/actions/list-integration-repos
+
       - name: Refs
         env:
           load_integrations: ${{ toJSON(steps.load-integrations.outputs) }}
@@ -74,52 +81,48 @@ jobs:
 
       - id: build-cache
         uses: ./.github/actions/build-dist-cache
+        with:
+          show-summary: true
 
-      - name: Show build Result
-        env:
-          outputs: ${{ toJSON(steps.build-cache.outputs) }}
-        run: |
-          echo build-cache: "$outputs"
+      - name: Done
+        uses: ./.github/actions/summary
+        with:
+          text: |
+            ## Done
 
   integration-tests:
     needs:
-      - build-ref
+      - prepare
     runs-on: ${{ matrix.os }}
 
     env:
-      REF_BRANCH: ${{ needs.build-ref.outputs.ref }}
+      REF_BRANCH: ${{ needs.prepare.outputs.ref }}
 
     strategy:
       # the integration tests are independent, so we want to run them all.
       fail-fast: false
       matrix:
         node-version:
-          - ${{ needs.build-ref.outputs.node_version }}
+          - ${{ needs.prepare.outputs.node_version }}
 
         os:
-          - ${{ needs.build-ref.outputs.runs_on }}
+          - ${{ needs.prepare.outputs.runs_on }}
 
         # List of repositories to check.
         # Use `repo-list.sh` in `integration-tests` to generate.
-        repo: ${{ fromJSON(needs.build-ref.outputs.repos) }}
-        # repo:
-        #   - prettier/prettier
+        # repo: ${{ fromJSON(needs.prepare.outputs.repos) }}
+        repo:
+          - prettier/prettier
         #   - typescript-eslint/typescript-eslint
 
     steps:
       - name: Checkout
         uses: actions/checkout@v3
 
-      - name: Setup pnpm
-        uses: pnpm/action-setup@v2.2.4
-
-      - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v3
+      - name: Setup Env
+        uses: ./.github/actions/setup
         with:
           node-version: ${{ matrix.node-version }}
-          cache: "pnpm"
-
-      - run: pnpm -v
 
       - name: Repo Info
         id: step-repo-info
@@ -148,8 +151,8 @@ jobs:
         id: step-cache-build
         uses: actions/cache@v3
         with:
-          key: ${{ needs.build-ref.outputs.cache-key }}
-          path: ${{ needs.build-ref.outputs.cache-path }}
+          key: ${{ needs.prepare.outputs.cache-key }}
+          path: ${{ needs.prepare.outputs.cache-path }}
 
       - name: Cached Results
         run: |

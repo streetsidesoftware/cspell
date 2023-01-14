@@ -4,7 +4,7 @@ description: Build the repo and store it in the cache.
 inputs:
   show-summary:
     description: Show a build summary.
-    default: "true"
+    required: false
 
 outputs:
   key:
@@ -13,6 +13,13 @@ outputs:
   path:
     description: Cache Path
     value: ${{ steps.cache-path.outputs.value }}
+  cache-hit:
+    description: |
+      Indicates that the cache was hit.
+      Return values:
+      - 'true' - the cache was used.
+      - '' - the cache was not used.
+    value: ${{ steps.step-cache-build.outputs.cache-hit }}
 
 runs:
   using: "composite"
@@ -93,4 +100,4 @@ runs:
           ```
           ${{ env.CACHE_PATH }}
           ```
-          - hit: ${{ steps.step-cache-build.outputs.cache-hit && 'Hit' || 'Miss' }}
+          - hit: ${{ steps.step-cache-build.outputs.cache-hit || 'Miss' }}
