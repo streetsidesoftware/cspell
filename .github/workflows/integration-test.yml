@@ -65,15 +65,21 @@ jobs:
         uses: ./.github/actions/list-integration-repos
       - name: Refs
         env:
-          load-integrations: ${{ toJSON(steps.load-integrations.outputs) }}
+          load_integrations: ${{ toJSON(steps.load-integrations.outputs) }}
         run: |
           echo ref: "${{ env.REF_BRANCH }}"
           echo runs_on: "${{ env.RUNS_ON }}"
           echo node_version: ${{ env.NODE_VERSION }}
-          echo load-integrations: "${{ env.load-integrations }}"
+          echo load-integrations: "$load_integrations"
 
       - id: build-cache
         uses: ./.github/actions/build-dist-cache
+
+      - name: Show build Result
+        env:
+          outputs: ${{ toJSON() }}
+        run: |
+          echo build-cache: "$outputs"
 
   integration-tests:
     needs:
