@@ -73,7 +73,7 @@ jobs:
           text: |
             ## Integrations
             ```json
-            ${{ steps.load-integrations.outputs }}
+            ${{ steps.load-integrations.outputs.repos }}
             ```
 
       - name: Pre-build and cache
