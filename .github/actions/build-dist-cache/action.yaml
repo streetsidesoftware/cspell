@@ -49,13 +49,13 @@ runs:
           ) }}" >> $GITHUB_ENV
 
     - id: cache-path
-      uses: ./.github/actions/echo
+      uses: ./.github/actions/output
       with:
         value: ${{ env.CACHE_PATH }}
         show: true
 
     - id: cache-key
-      uses: ./.github/actions/echo
+      uses: ./.github/actions/output
       with:
         value: ${{ env.CACHE_KEY }}
         show: true

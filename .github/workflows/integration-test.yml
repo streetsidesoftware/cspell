@@ -119,11 +119,6 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
-      - name: Setup Env
-        uses: ./.github/actions/setup
-        with:
-          node-version: ${{ matrix.node-version }}
-
       - name: Repo Info
         id: step-repo-info
         run: |
@@ -147,13 +142,26 @@ jobs:
           path: |
             integration-tests/tsconfig.json
 
-      - id: build-cache
+      - uses: ./.github/actions/echo
+        with:
+          value: |
+            Run Cache: ${{ steps.step-cache-run.outputs.cache-hit && 'Hit' || 'Miss' }}
+
+      - name: Setup Env
+        if: ${{ !steps.step-cache-run.outputs.cache-hit }}
+        uses: ./.github/actions/setup
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - id: step-cache-build
+        if: ${{ !steps.step-cache-run.outputs.cache-hit }}
         uses: ./.github/actions/build-dist-cache
 
-      - name: Cached Results
-        run: |
-          echo Build Cache: ${{ steps.step-cache-build.outputs.cache-hit && 'Hit' || 'Miss' }}
-          echo Run Cache: ${{ steps.step-cache-run.outputs.cache-hit && 'Hit' || 'Miss' }}
+      - uses: ./.github/actions/echo
+        if: ${{ !steps.step-cache-run.outputs.cache-hit }}
+        with:
+          value: |
+            Run Cache: ${{ steps.step-cache-run.outputs.cache-hit && 'Hit' || 'Miss' }}
 
       - name: Cache Integration Test Repository Files
         if: ${{ !steps.step-cache-run.outputs.cache-hit }}
@@ -162,20 +170,6 @@ jobs:
           key: int-repo-temp-files-${{ matrix.repo }}-${{ fromJSON(steps.step-repo-info.outputs.repo-info).commit }}
           path: |
             integration-tests/repositories/temp/${{ matrix.repo }}
-
-      - name: pnpm CI
-        if: ${{ !steps.step-cache-build.outputs.cache-hit || !steps.step-cache-run.outputs.cache-hit }}
-        run: pnpm i
-
-      - name: Has pnpm has failed?
-        if: ${{ failure() }}
-        run: |
-          ls -alF /home/runner/.pnpm/_logs/*.log
-          cat /home/runner/.pnpm/_logs/*.log
-
-      - name: Build
-        if: ${{ !steps.step-cache-build.outputs.cache-hit }}
-        run: pnpm run build
 
       - name: Run Integration Tests ${{ matrix.repo }}
         if: ${{ !steps.step-cache-run.outputs.cache-hit }}
