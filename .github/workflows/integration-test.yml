@@ -46,7 +46,7 @@ jobs:
       ref: ${{ env.REF_BRANCH }}
       runs_on: ${{ env.RUNS_ON }}
       node_version: ${{ env.NODE_VERSION }}
-      repos: ${{ steps.load-integrations.output.repos }}
+      repos: ${{ steps.load-integrations.outputs.repos }}
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -57,7 +57,7 @@ jobs:
         uses: ./.github/actions/list-integration-repos
       - name: Refs
         env:
-          load-integrations: ${{ toJSON(steps.load-integrations.output) }}
+          load-integrations: ${{ toJSON(steps.load-integrations.outputs) }}
         run: |
           echo ref: "${{ env.REF_BRANCH }}"
           echo runs_on: "${{ env.RUNS_ON }}"
@@ -92,9 +92,9 @@ jobs:
 
         # List of repositories to check.
         # Use `repo-list.sh` in `integration-tests` to generate.
-        repo: ${{ fromJSON(needs.calc-ref.outputs.repos) }}
-        # repo:
-        #   - prettier/prettier
+        # repo: ${{ fromJSON(needs.calc-ref.outputs.repos) }}
+        repo:
+          - prettier/prettier
         #   - typescript-eslint/typescript-eslint
 
     steps:
