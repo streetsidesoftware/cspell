@@ -3,9 +3,9 @@ Repository: mdx-js/mdx
 Url: https://github.com/mdx-js/mdx
 Args: ["--config=${repoConfig}/cspell.json","**/*.*"]
 Summary:
-  files: 161
-  filesWithIssues: 101
-  issues: 1272
+  files: 151
+  filesWithIssues: 92
+  issues: 1158
   errors: 0
 Errors: []
 
@@ -273,35 +273,35 @@ issues:
   - "docs/migrating/v2.server.mdx:336:43     	remarkplugins       	U   	remarkPlugins`][mdx-options-remarkplugins]"
   - "docs/migrating/v2.server.mdx:655:40     	codemods            	U   	we’re able to create codemods from now on."
   - "docs/migrating/v2.server.mdx:690:44     	optionsrecmaplugins 	U   	recmaplugins]: /packages/mdx/#optionsrecmaplugins"
-  - "docs/packages/mdx.server.md:156:58  	strikethrough   	U   	Tables, footnotes, strikethrough, task lists, literal"
-  - "docs/packages/mdx.server.md:194:23  	Rehype          	U   	#### `options.remarkRehypeOptions`"
-  - "docs/packages/mdx.server.md:214:26  	mkdn            	U   	markdown', '.mdown', '.mkdn', '.mkd', '.mdwn',"
-  - "docs/packages/mdx.server.md:214:43  	mdwn            	U   	'.mkdn', '.mkd', '.mdwn', '.mkdown', '.ron'"
-  - "docs/packages/mdx.server.md:214:52  	mkdown          	U   	'.mkd', '.mdwn', '.mkdown', '.ron']`)."
-  - "docs/packages/mdx.server.md:503:22  	QAAQ            	U   	mappings: ';;aAAaA,QAAQ;YAAQ;;;;;;;;iBAE3B'"
-  - "docs/packages/mdx.server.md:503:27  	YAAQ            	U   	mappings: ';;aAAaA,QAAQ;YAAQ;;;;;;;;iBAE3B',"
-  - "docs/packages/mdx.server.md:669:31  	compat          	U   	pragmaImportSource: 'preact/compat'"
-  - "docs/packages/mdx.server.md:803:10  	OMDX            	U   	`Promise<OMDXModule>` — Promise that"
-  - "docs/packages/mdx.server.md:951:33  	mdxjs           	U   	micromark-extension-mdxjs`][micromark-extension"
-  - "docs/packages/mdx.server.md:977:3   	rehypejs        	U   	[`rehypejs/rehype-highlight`][rehype"
-  - "docs/packages/mdx.server.md:992:29  	astring         	U   	final step is done by [astring][], a"
-  - "docs/packages/remark-mdx.server.md:121:22   	autolinks   	U   	— Turn off HTML, autolinks, and indented code"
-  - "docs/packages/rollup.server.md:94:11    	picomatch   	U   	List of [`picomatch`][pico] patterns to"
   - "packages/esbuild/lib/index.js:23:9      	extnames    	U   	import {extnamesToRegex} from '@mdx-js"
   - "packages/esbuild/lib/index.js:72:62     	onloadremote	U   	namespace: remoteNamespace}, onloadremote)"
+  - "packages/esbuild/test/index.test.js:243:48  	mdxjs   	U   	esm && esm.type === 'mdxjsEsm')"
   - "packages/loader/lib/index.js:75:13      	fpath   	U   	const fpath = path.relative(this"
   - "packages/mdx/lib/core.js:3:32       	Pluggable   	U   	typedef {import('unified').PluggableList} PluggableList"
   - "packages/mdx/lib/core.js:4:51       	Recma       	U   	recma-document.js').RecmaDocumentOptions} RecmaDocument"
+  - "packages/mdx/lib/core.js:7:53       	Rehype      	U   	rehype').Options} RemarkRehypeOptions"
   - "packages/mdx/lib/evaluate.js:22:10      	compiletime 	U   	const {compiletime, runtime} = resolveEvaluateOp"
   - "packages/mdx/lib/plugin/recma-document.js:45:21     	Estree      	U   	import {positionFromEstree} from 'unist-util-position"
   - "packages/mdx/lib/plugin/recma-document.js:452:17    	declarators 	U   	const declarators = node.specifiers"
+  - "packages/mdx/lib/plugin/recma-stringify.js:14:66    	astring 	U   	small wrapper around `astring` to add"
+  - "packages/mdx/readme.md:156:58   	strikethrough   	U   	Tables, footnotes, strikethrough, task lists, literal"
+  - "packages/mdx/readme.md:214:26   	mkdn            	U   	markdown', '.mdown', '.mkdn', '.mkd', '.mdwn',"
+  - "packages/mdx/readme.md:214:43   	mdwn            	U   	'.mkdn', '.mkd', '.mdwn', '.mkdown', '.ron'"
+  - "packages/mdx/readme.md:214:52   	mkdown          	U   	'.mkd', '.mdwn', '.mkdown', '.ron']`)."
+  - "packages/mdx/readme.md:503:22   	QAAQ            	U   	mappings: ';;aAAaA,QAAQ;YAAQ;;;;;;;;iBAE3B'"
+  - "packages/mdx/readme.md:503:27   	YAAQ            	U   	mappings: ';;aAAaA,QAAQ;YAAQ;;;;;;;;iBAE3B',"
+  - "packages/mdx/readme.md:669:31   	compat          	U   	pragmaImportSource: 'preact/compat'"
+  - "packages/mdx/readme.md:803:10   	OMDX            	U   	`Promise<OMDXModule>` — Promise that"
+  - "packages/mdx/readme.md:977:3    	rehypejs        	U   	[`rehypejs/rehype-highlight`][rehype"
   - "packages/mdx/test/compile.js:1034:31    	setext      	U   	should support headings (setext) (`=` -> `<h1>`)'"
   - "packages/mdx/test/compile.js:1079:99    	describedby 	U   	footnote-ref=\"true\" aria-describedby=\"footnote-label\">1<"
   - "packages/mdx/test/compile.js:1489:21    	rexporting  	U   	'should support rexporting something as a default"
   - "packages/register/lib/index.cjs:4:7     	deasync 	U   	const deasync = require('deasync'"
   - "packages/remark-mdx/index.js:3:59       	Micromark   	U   	extension-mdxjs').Options} MicromarkOptions"
+  - "packages/remark-mdx/readme.md:121:22    	autolinks   	U   	— Turn off HTML, autolinks, and indented code"
   - "packages/remark-mdx/test/index.js:317:15    	onvisit 	U   	visit(tree, onvisit)"
   - "packages/rollup/lib/index.js:2:30       	pluginutils 	U   	typedef {import('@rollup/pluginutils').FilterPattern} FilterPatter"
+  - "packages/rollup/lib/index.js:8:14       	picomatch   	U   	* List of picomatch patterns to include"
   - "packages/rollup/test/index.test.js:37:15    	OAAU    	U   	';;;MAAaA,OAAU,GAAA,MAAAC,GAAA,CAAAC"
   - "packages/rollup/test/index.test.js:37:20    	GAAA    	U   	';;;MAAaA,OAAU,GAAA,MAAAC,GAAA,CAAAC,QAAA"
   - "packages/rollup/test/index.test.js:37:25    	MAAAC   	U   	';;;MAAaA,OAAU,GAAA,MAAAC,GAAA,CAAAC,QAAA,EAAA"

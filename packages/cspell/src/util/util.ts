@@ -20,7 +20,14 @@ export function unique<T>(src: T[]): T[] {
     return [...new Set(src)];
 }
 
-export function clean<T extends object>(src: T): T {
+/**
+ * Make all properties in T required
+ */
+type RemoveUndefined<T extends object> = {
+    [P in keyof T]: T[P] extends undefined ? never : T[P];
+};
+
+export function clean<T extends object>(src: T): RemoveUndefined<T> {
     const r = src;
     type keyOfT = keyof T;
     type keysOfT = keyOfT[];
@@ -29,7 +36,7 @@ export function clean<T extends object>(src: T): T {
             delete r[key];
         }
     }
-    return r;
+    return r as RemoveUndefined<T>;
 }
 
 export function padWidth(s: string, target: number): number {
