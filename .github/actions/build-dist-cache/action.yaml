@@ -6,10 +6,10 @@ description: Build the repo and store it in the cache.
 outputs:
   key:
     description: Cache Key
-    value: ${{ steps.key_and_path.outputs.key }}
+    value: ${{ steps.output-key-and-path.outputs.key }}
   path:
     description: Cache Path
-    value: ${{ steps.key_and_path.outputs.path }}
+    value: ${{ steps.output-key-and-path.outputs.path }}
 
 runs:
   using: "composite"
@@ -38,7 +38,7 @@ runs:
             '*-lock.yaml', 'packages/*/src/**/*.ts', 'packages/*/tsconfig.json'
           ) }}" >> $GITHUB_ENV
 
-    - id: key_and_path
+    - id: output-key-and-path
       run: |
         echo key=${{ env.CACHE_KEY }}
         echo path=${{ env.CACHE_PATH }}
