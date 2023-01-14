@@ -1,0 +1,76 @@
+name: Build and Cache Dist
+description: Build the repo and store it in the cache.
+
+# Uses `integration-test/repo-list.sh`to generate.
+
+outputs:
+  key:
+    description: Cache Key
+    value: ${{ steps.key_and_path.outputs.key }}
+  path:
+    description: Cache Path
+    value: ${{ steps.key_and_path.outputs.path }}
+
+runs:
+  using: "composite"
+
+  steps:
+    - name: Inputs
+      shell: bash
+      env:
+        INPUTS: ${{ toJSON(inputs || github.event.inputs) }}
+      run: |
+        echo "inputs: $INPUTS"
+
+    - run: pnpm i
+      shell: bash
+
+    - name: Calc Key and Path
+      shell: bash
+      id: key_and_path
+      run: |
+        echo "CACHE_PATH<<CACHE_PATH
+        packages/*/dist
+        integration-tests/dist
+        CACHE_PATH" >> $GITHUB_ENV
+        echo "CACHE_KEY=int-build-${{ hashFiles(
+            'integration-tests/src/**/*.ts', 'integration-tests/tsconfig.json',
+            '*-lock.yaml', 'packages/*/src/**/*.ts', 'packages/*/tsconfig.json'
+          ) }}" >> $GITHUB_ENV
+
+    - id: key_and_path
+      run: |
+        echo key=${{ env.CACHE_KEY }}
+        echo path=${{ env.CACHE_PATH }}
+        echo key=${{ env.CACHE_KEY }} >> $GITHUB_OUTPUT
+        echo path=${{ env.CACHE_PATH }} >> $GITHUB_OUTPUT
+      shell: bash
+
+    - name: Cache Build
+      id: step-cache-build
+      uses: actions/cache@v3
+      with:
+        key: ${{ env.CACHE_KEY }}
+        path: ${{ env.CACHE_PATH }}
+
+    - name: Cached Results
+      run: |
+        echo Build Cache: ${{ steps.step-cache-build.outputs.cache-hit && 'Hit' || 'Miss' }}
+      shell: bash
+
+    - name: Pnpm CI
+      if: ${{ !steps.step-cache-build.outputs.cache-hit }}
+      run: pnpm i
+      shell: bash
+
+    - name: Has Pnpm has failed?
+      if: ${{ failure() }}
+      run: |
+        ls -alF /home/runner/.pnpm/_logs/*.log
+        cat /home/runner/.pnpm/_logs/*.log
+      shell: bash
+
+    - name: Build
+      if: ${{ !steps.step-cache-build.outputs.cache-hit }}
+      run: pnpm run build
+      shell: bash

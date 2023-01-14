@@ -38,7 +38,7 @@ env:
   NPM_VERSION: "8"
 
 jobs:
-  calc-ref:
+  build-ref:
     runs-on: ubuntu-latest
     env:
       REF_BRANCH: ${{ github.event.inputs.ref || github.ref }}
@@ -47,11 +47,19 @@ jobs:
       runs_on: ${{ env.RUNS_ON }}
       node_version: ${{ env.NODE_VERSION }}
       repos: ${{ steps.load-integrations.outputs.repos }}
+      cache-key: ${{ steps.build-cache.outputs.key }}
+      cache-path: ${{ steps.build-cache.outputs.path }}
     steps:
       - name: Checkout
         uses: actions/checkout@v3
         with:
           ref: ${{ env.REF_BRANCH }}
+
+      - name: Setup Env
+        uses: ./.github/actions/setup
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+
       - name: load-integrations
         id: load-integrations
         uses: ./.github/actions/list-integration-repos
@@ -64,37 +72,32 @@ jobs:
           echo node_version: ${{ env.NODE_VERSION }}
           echo load-integrations: "${{ env.load-integrations }}"
 
-  build:
-    needs:
-      - calc-ref
-    uses: "./.github/workflows/reuseable-build-dist-cache.yml"
-    with:
-      ref: ${{ needs.calc-ref.outputs.ref }}
+      - id: build-cache
+        uses: ./.github/actions/build-dist-cache
 
   integration-tests:
     needs:
-      - calc-ref
-      - build
+      - build-ref
     runs-on: ${{ matrix.os }}
 
     env:
-      REF_BRANCH: ${{ needs.calc-ref.outputs.ref }}
+      REF_BRANCH: ${{ needs.build-ref.outputs.ref }}
 
     strategy:
       # the integration tests are independent, so we want to run them all.
       fail-fast: false
       matrix:
         node-version:
-          - ${{ needs.calc-ref.outputs.node_version }}
+          - ${{ needs.build-ref.outputs.node_version }}
 
         os:
-          - ${{ needs.calc-ref.outputs.runs_on }}
+          - ${{ needs.build-ref.outputs.runs_on }}
 
         # List of repositories to check.
         # Use `repo-list.sh` in `integration-tests` to generate.
-        # repo: ${{ fromJSON(needs.calc-ref.outputs.repos) }}
-        repo:
-          - prettier/prettier
+        repo: ${{ fromJSON(needs.build-ref.outputs.repos) }}
+        # repo:
+        #   - prettier/prettier
         #   - typescript-eslint/typescript-eslint
 
     steps:
@@ -139,8 +142,8 @@ jobs:
         id: step-cache-build
         uses: actions/cache@v3
         with:
-          key: ${{ needs.build.outputs.key }}
-          path: ${{ needs.build.outputs.path }}
+          key: ${{ needs.build-ref.outputs.cache-key }}
+          path: ${{ needs.build-ref.outputs.cache-path }}
 
       - name: Cached Results
         run: |
