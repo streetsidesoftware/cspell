@@ -10,7 +10,6 @@ import * as path from 'path';
  */
 function normalize(content) {
     content = content.replace(/\r/g, '');
-    content = content.replace(/^(?!(\s*\d+\/\d+|CSpell).*)/gm, '');
     content = content.replace(/^\s*\d+\/\d+/gm, '');
     content = content.replace(/\n\n/g, '\n');
     content = content.replace(/[\d.]+ms/g, ' ms');
