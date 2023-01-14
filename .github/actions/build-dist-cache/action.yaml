@@ -49,7 +49,7 @@ runs:
       shell: bash
 
     - id: cache-path
-      uses: .github/actions/echo
+      uses: ./.github/actions/echo
       with:
         value: ${{ env.CACHE_PATH }}
         show: true
