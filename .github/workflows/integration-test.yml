@@ -109,9 +109,9 @@ jobs:
 
         # List of repositories to check.
         # Use `repo-list.sh` in `integration-tests` to generate.
-        # repo: ${{ fromJSON(needs.prepare.outputs.repos) }}
-        repo:
-          - prettier/prettier
+        repo: ${{ fromJSON(needs.prepare.outputs.repos) }}
+        # repo:
+        #   - prettier/prettier
         #   - typescript-eslint/typescript-eslint
 
     steps:
