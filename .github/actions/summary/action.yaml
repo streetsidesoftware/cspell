@@ -9,7 +9,7 @@ runs:
   using: "composite"
   steps:
     - name: write
-      shell: "" # Use the default shell
+      shell: bash
       env:
         VALUE: ${{ inputs.text }}
       run: |
