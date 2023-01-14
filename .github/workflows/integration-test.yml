@@ -147,12 +147,8 @@ jobs:
           path: |
             integration-tests/tsconfig.json
 
-      - name: Cache Build
-        id: step-cache-build
-        uses: actions/cache@v3
-        with:
-          key: ${{ needs.prepare.outputs.cache-key }}
-          path: ${{ needs.prepare.outputs.cache-path }}
+      - id: build-cache
+        uses: ./.github/actions/build-dist-cache
 
       - name: Cached Results
         run: |
