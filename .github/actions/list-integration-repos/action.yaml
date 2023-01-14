@@ -6,17 +6,16 @@ description: Export list of repositories to check.
 outputs:
   repos:
     description: JSON list of integration test repositories
-    value: ${{ steps.result.outputs.repos }}
+    value: ${{ steps.result.outputs.value }}
 
 runs:
   using: "composite"
   steps:
     - name: Inputs
-      shell: bash
-      env:
-        INPUTS: ${{ toJSON(inputs) }}
-      run: |
-        echo "inputs: $INPUTS"
+      uses: ./.github/actions/echo
+      with:
+        value: |
+          inputs: ${{ toJSON(inputs) }}
 
     - name: Gen List
       shell: bash
@@ -26,9 +25,9 @@ runs:
         ./repo-list.sh >> $GITHUB_ENV
         echo HEREDOC >> $GITHUB_ENV
 
-    - name: Show List
+    - name: Set Outputs
       id: result
-      shell: bash
-      run: |
-        echo "$REPOS"
-        echo repos=$REPOS >> $GITHUB_OUTPUT
+      uses: ./.github/actions/output
+      with:
+        value: ${{ env.REPOS }}
+        show: true

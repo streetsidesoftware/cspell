@@ -5,6 +5,13 @@ inputs:
   show-summary:
     description: Show a build summary.
     required: false
+  node-version:
+    required: false
+    description: The version of Node to use.
+  use-setup:
+    required: false
+    description: |
+      Run node setup if it is necessary to build.
 
 outputs:
   key:
@@ -62,6 +69,12 @@ runs:
       with:
         value: >-
           Build Cache: ${{ steps.step-cache-build.outputs.cache-hit && 'Hit' || 'Miss' }}
+
+    - name: Setup Env
+      if: ${{ !steps.step-cache-build.outputs.cache-hit && inputs.use-setup }}
+      uses: ./.github/actions/setup
+      with:
+        node-version: ${{ inputs.node-version }}
 
     - name: Pnpm CI
       if: ${{ !steps.step-cache-build.outputs.cache-hit }}

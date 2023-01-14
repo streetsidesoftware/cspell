@@ -47,8 +47,6 @@ jobs:
       runs_on: ${{ env.RUNS_ON }}
       node_version: ${{ env.NODE_VERSION }}
       repos: ${{ steps.load-integrations.outputs.repos }}
-      cache-key: ${{ steps.build-cache.outputs.key }}
-      cache-path: ${{ steps.build-cache.outputs.path }}
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -61,28 +59,26 @@ jobs:
           text: |
             # Prepare Integration
 
-      - name: Setup Env
-        uses: ./.github/actions/setup
-        with:
-          node-version: ${{ env.NODE_VERSION }}
-
       - name: load-integrations
         id: load-integrations
         uses: ./.github/actions/list-integration-repos
 
       - name: Refs
-        env:
-          load_integrations: ${{ toJSON(steps.load-integrations.outputs) }}
-        run: |
-          echo ref: "${{ env.REF_BRANCH }}"
-          echo runs_on: "${{ env.RUNS_ON }}"
-          echo node_version: ${{ env.NODE_VERSION }}
-          echo load-integrations: "$load_integrations"
+        uses: ./.github/actions/echo
+        with:
+          value: |
+            ref: "${{ env.REF_BRANCH }}"
+            runs_on: "${{ env.RUNS_ON }}"
+            node_version: ${{ env.NODE_VERSION }}
+            load-integrations:
+            ${{ toJSON(steps.load-integrations.outputs) }}
 
-      - id: build-cache
+      - name: Pre-build and cache
         uses: ./.github/actions/build-for-integrations
         with:
           show-summary: true
+          node-version: ${{ env.NODE_VERSION }}
+          use-setup: true
 
       - name: Done
         uses: ./.github/actions/summary
