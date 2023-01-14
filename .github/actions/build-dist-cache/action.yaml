@@ -1,7 +1,10 @@
 name: Build and Cache Dist
 description: Build the repo and store it in the cache.
 
-# Uses `integration-test/repo-list.sh`to generate.
+inputs:
+  show-summary:
+    description: Show a build summary.
+    default: "true"
 
 outputs:
   key:
@@ -37,16 +40,6 @@ runs:
             'integration-tests/src/**/*.ts', 'integration-tests/tsconfig.json',
             '*-lock.yaml', 'packages/*/src/**/*.ts', 'packages/*/tsconfig.json'
           ) }}" >> $GITHUB_ENV
-
-    - id: output-key-and-path
-      env:
-        output_path: ${{ toJSON(env.CACHE_PATH ) }}
-      run: |
-        echo key=$CACHE_KEY
-        echo path=$output_path
-        echo key=$CACHE_KEY >> $GITHUB_OUTPUT
-        echo path=$output_path >> $GITHUB_OUTPUT
-      shell: bash
 
     - id: cache-path
       uses: ./.github/actions/echo
@@ -88,3 +81,16 @@ runs:
       if: ${{ !steps.step-cache-build.outputs.cache-hit }}
       run: pnpm run build
       shell: bash
+
+    - name: Summary
+      if: inputs.show-summary == 'true'
+      uses: ./.github/actions/summary
+      with:
+        text: |
+          ## Build
+          - key: ${{ env.CACHE_KEY }}
+          - path:
+          ```
+          ${{ env.CACHE_PATH }}
+          ```
+          - hit: ${{ steps.step-cache-build.outputs.cache-hit && 'Hit' || 'Miss' }}
