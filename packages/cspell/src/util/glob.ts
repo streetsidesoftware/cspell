@@ -3,7 +3,9 @@ import type { GlobPatternWithRoot } from 'cspell-glob';
 import { fileOrGlobToGlob, GlobMatcher } from 'cspell-glob';
 import type { Options as FastGlobOptions } from 'fast-glob';
 import glob from 'fast-glob';
+import { promises as fs } from 'fs';
 import * as path from 'path';
+import { posix } from 'path';
 
 /**
  * This is a subset of IOptions from 'glob'.
@@ -18,9 +20,6 @@ export interface GlobOptions {
 
 const defaultExcludeGlobs = ['node_modules/**'];
 
-// Note this is to allow experimenting with using a single glob
-const useJoinPatterns = process.env['CSPELL_SINGLE_GLOB'];
-
 /**
  *
  * @param pattern - glob patterns and NOT file paths. It can be a file path turned into a glob.
@@ -31,28 +30,19 @@ export async function globP(pattern: string | string[], options?: GlobOptions): 
     const ignore = typeof options?.ignore === 'string' ? [options.ignore] : options?.ignore;
     const onlyFiles = options?.nodir;
     const dot = options?.dot;
-    const rawPatterns = typeof pattern === 'string' ? [pattern] : pattern;
-    const normPatterns = useJoinPatterns ? joinPatterns(rawPatterns) : rawPatterns;
+    const patterns = typeof pattern === 'string' ? [pattern] : pattern;
     const useOptions: FastGlobOptions = { cwd, onlyFiles, dot, ignore, absolute: true, followSymbolicLinks: false };
 
     const compare = new Intl.Collator('en').compare;
-    const absolutePaths = (await glob(normPatterns, useOptions)).sort(compare);
+    const absolutePaths = (await glob(patterns, useOptions)).sort(compare);
     const relativePaths = absolutePaths.map((absFilename) => path.relative(cwd, absFilename));
     return relativePaths;
 }
 
-function joinPatterns(globs: string[]): string[] {
-    return globs.length <= 1 ? globs : [`{${globs.join(',')}}`];
-}
-
 export function calcGlobs(commandLineExclude: string[] | undefined): { globs: string[]; source: string } {
-    const globs = (commandLineExclude || [])
-        .map((glob) => glob.split(/(?<!\\)\s+/g))
-        .map((globs) => globs.map((g) => g.replace(/\\ /g, ' ')))
-        .reduce((s, globs) => {
-            globs.forEach((g) => s.add(g));
-            return s;
-        }, new Set<string>());
+    const globs = new Set(
+        (commandLineExclude || []).flatMap((glob) => glob.split(/(?<!\\)\s+/g)).map((g) => g.replace(/\\ /g, ' '))
+    );
     const commandLineExcludes = {
         globs: [...globs],
         source: 'arguments',
@@ -125,4 +115,53 @@ export function extractGlobsFromMatcher(globMatcher: GlobMatcher): string[] {
 
 export function normalizeGlobsToRoot(globs: Glob[], root: string, isExclude: boolean): string[] {
     return extractGlobsFromMatcher(buildGlobMatcher(globs, root, isExclude));
+}
+
+const isPossibleGlobRegExp = /[*{}()?[]/;
+
+/**
+ * If a 'glob' is a path to a directory, then append `**` so that
+ * directory searches work.
+ * @param glob - a glob, file, or directory
+ * @param root - root to use.
+ * @returns `**` is appended directories.
+ */
+async function adjustPossibleDirectory(glob: Glob, root: string): Promise<Glob> {
+    const g =
+        typeof glob === 'string'
+            ? {
+                  glob,
+                  root,
+              }
+            : {
+                  glob: glob.glob,
+                  root: glob.root ?? root,
+              };
+
+    // Do not ask the file system to look up obvious glob patterns.
+    if (isPossibleGlobRegExp.test(g.glob)) {
+        return glob;
+    }
+
+    const dirPath = path.resolve(g.root, g.glob);
+    try {
+        const stat = await fs.stat(dirPath);
+        if (stat.isDirectory()) {
+            const useGlob = posix.join(posixPath(g.glob), '**');
+            return typeof glob === 'string' ? useGlob : { ...glob, glob: useGlob };
+        }
+    } catch (e) {
+        // it was not possible to access the dirPath, no problem, just let the file glob search look for it.
+        return glob;
+    }
+    return glob;
+}
+
+function posixPath(p: string): string {
+    return path.sep === '\\' ? p.replace(/\\/g, '/') : p;
+}
+
+export async function normalizeFileOrGlobsToRoot(globs: Glob[], root: string): Promise<string[]> {
+    const adjustedGlobs = await Promise.all(globs.map((g) => adjustPossibleDirectory(g, root)));
+    return normalizeGlobsToRoot(adjustedGlobs, root, false);
 }
