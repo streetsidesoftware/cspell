@@ -374,34 +374,19 @@ async function determineFilesToCheck(
         const globsToExclude = (configInfo.config.ignorePaths || []).concat(excludeGlobs);
         const globMatcher = buildGlobMatcher(globsToExclude, root, true);
         const ignoreGlobs = extractGlobsFromMatcher(globMatcher);
+
+        const gitIgnoredGlobs = gitIgnore ? await gitIgnore.getGlobs(root) : [];
+
         // cspell:word nodir
         const globOptions: GlobOptions = {
             root,
             cwd: root,
-            ignore: ignoreGlobs.concat(normalizedExcludes),
+            ignore: ignoreGlobs.concat(normalizedExcludes).concat(gitIgnoredGlobs),
             nodir: true,
         };
         const enableGlobDot = cfg.enableGlobDot ?? configInfo.config.enableGlobDot;
         if (enableGlobDot !== undefined) {
             globOptions.dot = enableGlobDot;
-        }
-
-        if (gitIgnore) {
-            // Add the gitignore file in the root to the globs to improve performance.
-            const [gitIgnoredGlobs, gitIncludedGlobs] = await gitIgnore.getGlobs(root);
-
-            allGlobs.push(...gitIncludedGlobs);
-            fileGlobs.push(...gitIncludedGlobs);
-
-            let globOptionsIgnore: string[] = [];
-            if (Array.isArray(globOptions.ignore)) {
-                globOptionsIgnore = globOptions.ignore;
-            } else if (typeof globOptions.ignore === 'string') {
-                globOptionsIgnore = [globOptions.ignore];
-            }
-
-            globOptionsIgnore.push(...gitIgnoredGlobs);
-            globOptions.ignore = globOptionsIgnore;
         }
 
         const filterFiles = opFilter(filterFilesFn(globMatcher));
