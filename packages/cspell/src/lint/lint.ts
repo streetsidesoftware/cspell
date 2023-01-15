@@ -24,7 +24,13 @@ import {
     readFileListFiles,
 } from '../util/fileHelper';
 import type { GlobOptions } from '../util/glob';
-import { buildGlobMatcher, extractGlobsFromMatcher, extractPatterns, normalizeGlobsToRoot } from '../util/glob';
+import {
+    buildGlobMatcher,
+    extractGlobsFromMatcher,
+    extractPatterns,
+    normalizeFileOrGlobsToRoot,
+    normalizeGlobsToRoot,
+} from '../util/glob';
 import { loadReporters, mergeReporters } from '../util/reporters';
 import { getTimeMeasurer } from '../util/timer';
 import * as util from '../util/util';
@@ -266,7 +272,7 @@ export async function runLint(cfg: LintRequest): Promise<RunResult> {
         }
         header(fileGlobs, excludeGlobs);
 
-        checkGlobs(cfg.fileGlobs, reporter);
+        checkGlobs(fileGlobs, reporter);
 
         reporter.info(`Config Files Found:\n    ${configInfo.source}\n`, MessageTypes.Info);
 
@@ -340,9 +346,9 @@ async function determineGlobs(configInfo: ConfigInfo, cfg: LintRequest): Promise
     const gitignoreRoots = cfg.options.gitignoreRoot ?? configInfo.config.gitignoreRoot;
     const gitIgnore = useGitignore ? await generateGitIgnore(gitignoreRoots) : undefined;
 
-    const cliGlobs: Glob[] = cfg.fileGlobs;
+    const cliGlobs: string[] = cfg.fileGlobs;
     const allGlobs: Glob[] = cliGlobs.length ? cliGlobs : configInfo.config.files || [];
-    const combinedGlobs = normalizeGlobsToRoot(allGlobs, cfg.root, false);
+    const combinedGlobs = await normalizeFileOrGlobsToRoot(allGlobs, cfg.root);
     const cliExcludeGlobs = extractPatterns(cfg.excludes).map((p) => p.glob);
     const normalizedExcludes = normalizeGlobsToRoot(cliExcludeGlobs, cfg.root, true);
     const includeGlobs = combinedGlobs.filter((g) => !g.startsWith('!'));
