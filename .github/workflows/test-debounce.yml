@@ -38,3 +38,4 @@ jobs:
           value: |
             Needs: ${{ toJSON( needs ) }}
             Context: ${{ toJSON( job ) }}
+            GitHub: ${{ toJSON( github) }}
