@@ -1,0 +1,95 @@
+name: Simple Workflow Debounce
+description: Determine if a workflow / job should run.
+
+inputs:
+  tag:
+    description: Optional name of the debounce tag.
+    required: false
+  hash:
+    description: Optional hash as part debounce tag.
+    required: false
+  timeout:
+    description: The timeout in seconds. Defaults to 60.
+    required: false
+  debug:
+    description: Show Debug Info
+    required: false
+outputs:
+  ok:
+    description: Returns `true` if it is "oK" to run the workflow/job, otherwise ''.
+    value: ${{ inputs.tag }}
+  bock:
+    description: Returns `true` if the workflow/job should be dropped, otherwise ''.
+    value: ${{ !inputs.tag || '' }}
+
+runs:
+  using: "composite"
+  steps:
+    - name: Show
+      if: inputs.debug
+      shell: bash
+      env:
+        INPUTS: ${{ toJSON(inputs) }}
+        RUNNER: ${{ toJSON(runner) }}
+      run: |
+        echo "$debug"
+        echo "$RUNNER"
+
+    - name: Set Hash File Name
+      id: hash_file
+      uses: ./.github/actions/output
+      with:
+        value: ${{ runner.temp }}/debounce_hash_file.txt
+
+    # To generate the name of the cache file, we need to hash the inputs.
+    # 1. Write input to a file.
+    # 2. Use hashFiles to calc hash
+
+    - name: Build hash file
+      shell: bash
+      env:
+        HASH_FILE_CONTENT: |
+          ${{ inputs.tag }}
+          ${{ inputs.hash }}
+      run: |
+        echo "$HASH_FILE_CONTENT" > ${{ steps.hash_file.outputs.value }}
+
+    - name: Calc Filename
+      id: cache-path
+      uses: ./.github/actions/output
+      with:
+        value: ${{ runner.temp }}/_debounce-${{ hashFiles(steps.hash_file.outputs.value) }}.txt
+
+    - id: cache-key
+      uses: streetsidesoftware/action-set-output@v1
+      with:
+        value: >-
+          debounce-${{ inputs.tag }}-${{ inputs.hash }}
+        debug: true
+
+    - uses: actions/cache/restore@v3
+      id: cache
+      with:
+        key: ${{ steps.cache-key.outputs.value }}
+        path: ${{ steps.cache-path.outputs.value }}
+
+    - name: Cached Results
+      if: inputs.debug
+      uses: ./.github/actions/echo
+      with:
+        value: >-
+          Cache: ${{ toJSON(steps.cache) }}
+
+    - name: Save Cache
+      id: cache_save
+      uses: actions/cache/save@v3
+      with:
+        key: ${{ steps.cache-key.outputs.value }}
+        path: ${{ steps.cache-path.outputs.value }}
+
+    - name: Cache Save Results
+      if: inputs.debug
+      uses: ./.github/actions/echo
+      with:
+        value: >-
+          Cache: ${{ toJSON(steps.cache_save) }}
