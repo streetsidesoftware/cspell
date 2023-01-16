@@ -80,6 +80,11 @@ runs:
         value: >-
           Cache: ${{ toJSON(steps.cache) }}
 
+    - name: Write Timestamp
+      shell: bash
+      run: |
+        date +%s > ${{ steps.cache-path.outputs.value }}
+
     - name: Save Cache
       id: cache_save
       uses: actions/cache/save@v3
