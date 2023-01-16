@@ -17,7 +17,7 @@ inputs:
 outputs:
   ok:
     description: Returns `true` if it is "oK" to run the workflow/job, otherwise ''.
-    value: ${{ inputs.tag }}
+    value: ${{ !!inputs.tag || '' }}
   bock:
     description: Returns `true` if the workflow/job should be dropped, otherwise ''.
     value: ${{ !inputs.tag || '' }}
@@ -70,8 +70,10 @@ runs:
     - uses: actions/cache/restore@v3
       id: cache
       with:
-        key: ${{ steps.cache-key.outputs.value }}
+        key: ${{ steps.cache-key.outputs.value }}-${{github.run_id}}-${{github.run_number}}-${{github.run_attempt}}
         path: ${{ steps.cache-path.outputs.value }}
+        restore-keys: |
+          ${{ steps.cache-key.outputs.value }}
 
     - name: Cached Results
       if: inputs.debug
@@ -89,7 +91,7 @@ runs:
       id: cache_save
       uses: actions/cache/save@v3
       with:
-        key: ${{ steps.cache-key.outputs.value }}
+        key: ${{ steps.cache-key.outputs.value }}-${{github.run_id}}-${{github.run_number}}-${{github.run_attempt}}
         path: ${{ steps.cache-path.outputs.value }}
 
     - name: Cache Save Results
@@ -98,3 +100,18 @@ runs:
       with:
         value: >-
           Cache: ${{ toJSON(steps.cache_save) }}
+
+    - uses: actions/cache/restore@v3
+      id: cache-restore
+      with:
+        key: ${{ steps.cache-key.outputs.value }}-${{github.run_id}}-${{github.run_number}}-${{github.run_attempt}}
+        path: ${{ steps.cache-path.outputs.value }}
+        restore-keys: |
+          ${{ steps.cache-key.outputs.value }}
+
+    - name: Cached Results
+      if: inputs.debug
+      uses: ./.github/actions/echo
+      with:
+        value: >-
+          Cache: ${{ toJSON(steps.cache-restore) }}
