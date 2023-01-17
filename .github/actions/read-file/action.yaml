@@ -18,6 +18,6 @@ runs:
       env:
         FILENAME: ${{ inputs.filename }}
       run: |
-        echo "value=<<<_@@_READ_FILE_@@_" >> $GITHUB_OUTPUT
+        echo "value<<_@@_READ_FILE_@@_" >> $GITHUB_OUTPUT
         cat $FILENAME >> $GITHUB_OUTPUT
         echo "_@@_READ_FILE_@@_" >> $GITHUB_OUTPUT
