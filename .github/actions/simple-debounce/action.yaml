@@ -25,7 +25,7 @@ outputs:
 runs:
   using: "composite"
   steps:
-    - name: Show
+    - name: Show Input
       if: inputs.debug
       shell: bash
       env:
@@ -42,16 +42,19 @@ runs:
         value: ${{ inputs.timeout || 60 }}
 
     - name: Calc Timestamp
+      # Do all the math. It is not currently possible to do any arithmetic in the workflow expressions.
       id: timestamp
       shell: bash
       run: |
-        export TIMESTAMP=$(date +%s.%4N)
+        export TIMESTAMP=$(date +%s.%6N)
         echo timestamp-double=$TIMESTAMP >> $GITHUB_OUTPUT
         echo timestamp=$(echo $TIMESTAMP / 1 | bc) >> $GITHUB_OUTPUT
+        echo timeout-before=$(echo $TIMESTAMP / ${{steps.timeout.outputs.value}} | bc) >> $GITHUB_OUTPUT
         echo block=$(echo $TIMESTAMP / ${{steps.timeout.outputs.value}} | bc) >> $GITHUB_OUTPUT
         echo block-prev=$(echo $TIMESTAMP / ${{steps.timeout.outputs.value}} - 1 | bc) >> $GITHUB_OUTPUT
 
     - name: Show Timestamp
+      if: inputs.debug
       uses: ./.github/actions/echo
       with:
         value: ${{ toJSON(steps.timestamp.outputs) }}
@@ -64,6 +67,7 @@ runs:
           {
             "timestamp": ${{steps.timestamp.outputs.timestamp}},
             "timestamp-double": ${{steps.timestamp.outputs.timestamp-double}},
+            "timeout-before": ${{steps.timestamp.outputs.timeout-before}}
             "block": ${{steps.timestamp.outputs.block}},
             "block-prev": ${{steps.timestamp.outputs.block-prev}},
 
@@ -73,15 +77,16 @@ runs:
           }
 
     - name: Show Cache Content
+      if: inputs.debug
       uses: ./.github/actions/echo
       with:
-        value: ${{ steps.timestamp_info.output.value }}
+        value: ${{ steps.timestamp_info.outputs.value }}
 
     - name: Calc Filename
       id: cache-path
       uses: ./.github/actions/output
       with:
-        value: ${{ runner.temp }}/_debounce-.txt
+        value: ${{ runner.temp }}/_debounce-${{ fromJSON(steps.timestamp_info.outputs.value).timestamp-double }}
 
     - id: cache-key
       uses: streetsidesoftware/action-set-output@v1
@@ -89,6 +94,12 @@ runs:
         value: >-
           debounce-${{ inputs.tag }}-${{ inputs.hash }}
         debug: true
+
+    - name: Show Filename
+      if: inputs.debug
+      uses: ./.github/actions/echo
+      with:
+        value: ${{ steps.cache-path.outputs.value }}
 
     # - uses: actions/cache/restore@v3
     #   id: cache
