@@ -13,6 +13,11 @@ jobs:
   debounce:
     runs-on: ubuntu-latest
 
+    strategy:
+      fail-fast: true
+      matrix:
+        run_num: [1, 2, 3, 4]
+
     outputs:
       ok: ${{ steps.debounce.outputs.ok }}
       block: ${{ steps.debounce.outputs.block }}
