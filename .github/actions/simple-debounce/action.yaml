@@ -61,7 +61,7 @@ runs:
 
     - name: Make Cache Content
       id: timestamp_info
-      uses: ./.github/actions/output
+      uses: ./.github/actions/output-json
       with:
         value: |
           {
@@ -80,13 +80,13 @@ runs:
       if: inputs.debug
       uses: ./.github/actions/echo
       with:
-        value: ${{ steps.timestamp_info.outputs.value }}
+        value: ${{ toJSON(steps.timestamp_info.outputs) }}
 
     - name: Calc Filename
       id: cache-path
       uses: ./.github/actions/output
       with:
-        value: ${{ runner.temp }}/_debounce-${{ fromJSON(steps.timestamp_info.outputs.value).timestamp-double }}
+        value: ${{ runner.temp }}/_debounce-${{ steps.timestamp_info.outputs.value.timestamp-double }}
 
     - id: cache-key
       uses: streetsidesoftware/action-set-output@v1
