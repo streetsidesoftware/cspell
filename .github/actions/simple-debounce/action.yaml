@@ -217,18 +217,18 @@ runs:
         key: ${{ steps.cache-key.outputs.value }}-${{ env._debounce_block }}
         path: ${{ steps.cache-path.outputs.value }}
 
-    - name: Show Cached Block File
-      if: inputs.debug
-      uses: ./.github/actions/echo
-      with:
-        value: ${{ steps.cache_block.outputs.value }}
-
     - name: Read Cached File
       id: cache_file_block
       if: steps.cache_block.outputs.cache-matched-key
       uses: ./.github/actions/read-file
       with:
         filename: ${{ steps.cache-path.outputs.value }}
+
+    - name: Show Cached Block File
+      if: inputs.debug
+      uses: ./.github/actions/echo
+      with:
+        value: ${{ steps.cache_file_block.outputs.value }}
 
     - name: Were we the ones that wrote the block?
       id: stop-3
