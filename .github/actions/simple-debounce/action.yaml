@@ -45,7 +45,7 @@ runs:
       id: timestamp
       shell: bash
       run: |
-        env TIMESTAMP=$(data +%s.%4N)
+        env TIMESTAMP=$(date +%s.%4N)
         echo full-timestamp=$TIMESTAMP >> $GITHUB_OUTPUT
         echo timestamp=$(echo $TIMESTAMP / 1 | bc) >> $GITHUB_OUTPUT
         echo block=$(echo $TIMESTAMP / ${{steps.timeout.outputs.value}} | bc) >> $GITHUB_OUTPUT
