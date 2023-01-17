@@ -17,10 +17,10 @@ inputs:
 outputs:
   ok:
     description: Returns `true` if it is "oK" to run the workflow/job, otherwise ''.
-    value: ${{ !!inputs.tag || '' }}
+    value: ${{ steps.results.outputs.value }}
   bock:
     description: Returns `true` if the workflow/job should be dropped, otherwise ''.
-    value: ${{ !inputs.tag || '' }}
+    value: ${{ !steps.results.outputs.value || '' }}
 
 runs:
   using: "composite"
@@ -100,7 +100,7 @@ runs:
       uses: streetsidesoftware/action-set-output@v1
       with:
         value: >-
-          debounce-${{ inputs.tag }}-${{ inputs.hash }}
+          _debounce-${{ inputs.tag }}-${{ inputs.hash }}
         debug: true
 
     - name: Show Filename
@@ -111,7 +111,7 @@ runs:
 
     - name: Try to restore the cache entry
       uses: actions/cache/restore@v3
-      id: cache-main
+      id: cache_main
       with:
         key: ${{ steps.cache-key.outputs.value }}-stub
         path: ${{ steps.cache-path.outputs.value }}
@@ -119,12 +119,13 @@ runs:
           ${{ steps.cache-key.outputs.value }}
 
     - uses: ./.github/actions/echo
+      if: inputs.debug
       with:
-        value: ${{ toJSON(steps.cache-main.outputs) }}
+        value: ${{ toJSON(steps.cache_main.outputs) }}
 
     - name: Read Cached File
       id: cache_file_main
-      if: steps.cache-main.outputs.cache-hit
+      if: steps.cache_main.outputs.cache-matched-key
       uses: ./.github/actions/read-file
       with:
         filename: ${{ steps.cache-path.outputs.value }}
@@ -138,66 +139,102 @@ runs:
       shell: bash
       run: |
         echo "_debounce_stop=${{
-          steps.cache_file_main.outputs.value &&
-          fromJSON(steps.cache_file_main.outputs.value).timestamp < fromJSON(steps.timestamp_info.outputs.value).timeout-before &&
-          fromJSON(steps.cache_file_main.outputs.value).block < fromJSON(steps.timestamp_info.outputs.value).block
+          !(
+            steps.cache_file_main.outputs.value &&
+            fromJSON(steps.cache_file_main.outputs.value).timestamp < fromJSON(steps.timestamp_info.outputs.value).timeout-before &&
+            fromJSON(steps.cache_file_main.outputs.value).block < fromJSON(steps.timestamp_info.outputs.value).block
+          )
           || '' }}" >> $GITHUB_ENV
 
     - name: Write File
+      if: ${{ !env._debounce_stop }}
       uses: ./.github/actions/write-file
       with:
         filename: ${{ steps.cache-path.outputs.value }}
         value: ${{ steps.timestamp_info.outputs.value }}
 
+    # Write twice to the cache
+
     - name: Save to Cache
-      id: save-to-cache
+      id: save-to-cache_block_prev
+      if: ${{ !env._debounce_stop }}
+      uses: actions/cache/save@v3
+      with:
+        key: ${{ steps.cache-key.outputs.value }}-${{ env._debounce_block-prev }}
+        path: ${{ steps.cache-path.outputs.value }}
+
+    - name: Save to Cache
+      id: save-to-cache-block
+      if: ${{ !env._debounce_stop }}
       uses: actions/cache/save@v3
       with:
         key: ${{ steps.cache-key.outputs.value }}-${{ env._debounce_block }}
         path: ${{ steps.cache-path.outputs.value }}
 
-    # - name: Cached Results
-    #   if: inputs.debug
-    #   uses: ./.github/actions/echo
-    #   with:
-    #     value: >-
-    #       Cache: ${{ toJSON(steps.cache) }}
+    # Read them back, oldest to newest
 
-    # - name: Write Timestamp
-    #   shell: bash
-    #   run: |
-    #     date +%s > ${{ steps.cache-path.outputs.value }}
+    - name: Read Block-prev from Cache
+      id: cache_block_prev
+      if: ${{ !env._debounce_stop }}
+      uses: actions/cache/restore@v3
+      with:
+        key: ${{ steps.cache-key.outputs.value }}-${{ env._debounce_block-prev }}
+        path: ${{ steps.cache-path.outputs.value }}
 
-    # - name: Save Cache
-    #   id: cache_save
-    #   uses: actions/cache/save@v3
-    #   with:
-    #     key: ${{ steps.cache-key.outputs.value }}-${{github.run_id}}-${{github.run_number}}-${{github.run_attempt}}
-    #     path: ${{ steps.cache-path.outputs.value }}
+    - name: Read Cached File
+      id: cache_file_block_prev
+      if: steps.cache_block_prev.outputs.cache-matched-key
+      uses: ./.github/actions/read-file
+      with:
+        filename: ${{ steps.cache-path.outputs.value }}
 
-    # - name: Cache Save Results
-    #   if: inputs.debug
-    #   uses: ./.github/actions/echo
-    #   with:
-    #     value: >-
-    #       Cache: ${{ toJSON(steps.cache_save) }}
+    - name: Should we go forward?
+      id: stop-2
+      if: steps.cache_block_prev.outputs.cache-matched-key
+      shell: bash
+      run: |
+        echo "_debounce_stop=${{
+          !(
+            steps.cache_file_block_prev.outputs.value == steps.timestamp_info.outputs.value ||
+            (
+              fromJSON(steps.cache_file_block_prev.outputs.value).timestamp < fromJSON(steps.timestamp_info.outputs.value).timeout-before &&
+              fromJSON(steps.cache_file_block_prev.outputs.value).block < fromJSON(steps.timestamp_info.outputs.value).block
+            )
+          )
+          || '' }}" >> $GITHUB_ENV
 
-    # - uses: actions/cache/restore@v3
-    #   id: cache-restore
-    #   with:
-    #     key: ${{ steps.cache-key.outputs.value }}-${{github.run_id}}-${{github.run_number}}-${{github.run_attempt}}
-    #     path: ${{ steps.cache-path.outputs.value }}
-    #     restore-keys: |
-    #       ${{ steps.cache-key.outputs.value }}
+    - name: Read Block from Cache
+      id: cache_block
+      if: ${{ !env._debounce_stop }}
+      uses: actions/cache/restore@v3
+      with:
+        key: ${{ steps.cache-key.outputs.value }}-${{ env._debounce_block }}
+        path: ${{ steps.cache-path.outputs.value }}
 
-    # - name: Cached Results
-    #   if: inputs.debug
-    #   uses: ./.github/actions/echo
-    #   with:
-    #     value: >-
-    #       Cache: ${{ toJSON(steps.cache-restore) }}
+    - name: Read Cached File
+      id: cache_file_block
+      if: steps.cache_block.outputs.cache-matched-key
+      uses: ./.github/actions/read-file
+      with:
+        filename: ${{ steps.cache-path.outputs.value }}
+
+    - name: Should we go forward?
+      id: stop-2
+      if: steps.cache_block.outputs.cache-matched-key
+      shell: bash
+      run: |
+        echo "_debounce_stop=${{
+          !(
+            steps.cache_file_block.outputs.value == steps.timestamp_info.outputs.value ||
+            (
+              fromJSON(steps.cache_file_block.outputs.value).timestamp < fromJSON(steps.timestamp_info.outputs.value).timeout-before &&
+              fromJSON(steps.cache_file_block.outputs.value).block < fromJSON(steps.timestamp_info.outputs.value).block
+            )
+          )
+          || '' }}" >> $GITHUB_ENV
 
     - name: Output Results
+      id: results
       uses: ./.github/actions/output
       with:
         value: ${{ !env._debounce_stop || '' }}
