@@ -1,0 +1,23 @@
+name: Read a File
+description: Read a file and return its contents.
+
+inputs:
+  filename:
+    description: The path to the file to read.
+    required: true
+outputs:
+  value:
+    description: The content of the file.
+    value: ${{ steps.read-file.outputs.value }}
+runs:
+  using: "composite"
+  steps:
+    - name: Read File
+      id: read-file
+      shell: bash
+      env:
+        FILENAME: ${{ inputs.filename }}
+      run: |
+        echo "value=<<<_@@_READ_FILE_@@_" >> $GITHUB_OUTPUT
+        cat $FILENAME >> $GITHUB_OUTPUT
+        echo "_@@_READ_FILE_@@_" >> $GITHUB_OUTPUT
