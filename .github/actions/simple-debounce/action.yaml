@@ -62,7 +62,7 @@ runs:
       with:
         value: |
           {
-            "timestamp": ${{(steps.timestamp.outputs.timestamp}},
+            "timestamp": ${{steps.timestamp.outputs.timestamp}},
             "timestamp-full": ${{steps.timestamp.outputs.timestamp-full}},
             "block": ${{steps.timestamp.outputs.block}},
             "block-prev": ${{steps.timestamp.outputs.block-prev}},
