@@ -94,7 +94,7 @@ runs:
       id: cache-path
       uses: ./.github/actions/output
       with:
-        value: ${{ runner.temp }}/_debounce-${{github.run_id}}-${{github.run_number}}-${{github.run_attempt}}-${{ fromJSON(steps.timestamp_info.outputs.value).timestamp-double }}.txt
+        value: ${{ runner.temp }}/_debounce-cache-file.json
 
     - id: cache-key
       uses: streetsidesoftware/action-set-output@v1
