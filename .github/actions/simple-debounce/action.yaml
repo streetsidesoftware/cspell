@@ -164,3 +164,7 @@ runs:
     #   with:
     #     value: >-
     #       Cache: ${{ toJSON(steps.cache-restore) }}
+
+    - name: Clean Up
+      shell: bash
+      run: echo "" > $GITHUB_ENV
