@@ -94,7 +94,13 @@ runs:
       id: cache-path
       uses: ./.github/actions/output
       with:
-        value: ${{ runner.temp }}/_debounce-${{ fromJSON(steps.timestamp_info.outputs.value).timestamp-double }}
+        value: ${{ runner.temp }}/_debounce-${{github.run_id}}-${{github.run_number}}-${{github.run_attempt}}-${{ fromJSON(steps.timestamp_info.outputs.value).timestamp-double }}
+
+    - name: Write File
+      uses: ./.github/actions/write-file
+      with:
+        filename: ${{ steps.cache-path.outputs.value }}.txt
+        value: ${{ steps.timestamp_info.outputs.value }}
 
     - id: cache-key
       uses: streetsidesoftware/action-set-output@v1
@@ -114,15 +120,37 @@ runs:
       id: cache-main
       with:
         key: ${{ steps.cache-key.outputs.value }}-stub
-        path: ${{ steps.cache-path.outputs.value }}
+        path: ${{ steps.cache-path.outputs.value }}.main.txt
         restore-keys: |
           ${{ steps.cache-key.outputs.value }}
 
+    - name: Read Cached File
+      id: cache_file_main
+      if: steps.cache-main.outputs.cache-hit
+      uses: ./.github/actions/read-file
+      with:
+        filename: ${{ steps.cache-path.outputs.value }}.main.txt
+
+    - uses: ./.github/actions/echo
+      with:
+        value: ${{ steps.cache_file_main.outputs.value }}
+
     - name: Should we go forward?
       id: stop-1
-      uses: ./.github/actions/output
+      shell: bash
+      run: |
+        echo "_debounce_stop=${{
+          steps.cache_file_main.outputs.value &&
+          fromJSON(steps.cache_file_main.outputs.value).timestamp < fromJSON(steps.timestamp_info.outputs.value).timestamp &&
+          fromJSON(steps.cache_file_main.outputs.value).block < fromJSON(steps.timestamp_info.outputs.value).block
+          || '' }}" >> $GITHUB_ENV
+
+    - name: Save to Cache
+      id: save-to-cache
+      uses: actions/cache/save@v3
       with:
-        value: ${{ !steps.cache-main.outputs.cache-hit || '' }}
+        key: ${{ steps.cache-key.outputs.value }}-${{ env._debounce_block }}
+        path: ${{ steps.cache-path.outputs.value }}.txt
 
     # - name: Cached Results
     #   if: inputs.debug
@@ -165,6 +193,7 @@ runs:
     #     value: >-
     #       Cache: ${{ toJSON(steps.cache-restore) }}
 
-    - name: Clean Up
-      shell: bash
-      run: echo "" > $GITHUB_ENV
+    - name: Output Results
+      uses: ./.github/actions/output
+      with:
+        value: ${{ !env._debounce_stop || '' }}
