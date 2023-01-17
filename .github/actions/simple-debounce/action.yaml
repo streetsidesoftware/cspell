@@ -136,15 +136,13 @@ runs:
 
     - name: Should we go forward?
       id: stop-1
+      if: steps.cache_file_main.outputs.value
       shell: bash
       run: |
         echo "_debounce_stop=${{
           !(
-            !steps.cache_file_main.outputs.value ||
-            (
-              fromJSON(steps.cache_file_main.outputs.value).timestamp < fromJSON(steps.timestamp_info.outputs.value).timeout-before &&
-              fromJSON(steps.cache_file_main.outputs.value).block < fromJSON(steps.timestamp_info.outputs.value).block
-            )
+            fromJSON(steps.cache_file_main.outputs.value).timestamp < fromJSON(steps.timestamp_info.outputs.value).timeout-before &&
+            fromJSON(steps.cache_file_main.outputs.value).block < fromJSON(steps.timestamp_info.outputs.value).block
           )
           || '' }}" >> $GITHUB_ENV
 
@@ -190,6 +188,12 @@ runs:
       with:
         filename: ${{ steps.cache-path.outputs.value }}
 
+    - name: Show Cached Block-Prev File
+      if: inputs.debug
+      uses: ./.github/actions/echo
+      with:
+        value: ${{ steps.cache_file_block_prev.outputs.value }}
+
     - name: Should we go forward?
       id: stop-2
       if: steps.cache_block_prev.outputs.cache-matched-key
@@ -212,6 +216,12 @@ runs:
       with:
         key: ${{ steps.cache-key.outputs.value }}-${{ env._debounce_block }}
         path: ${{ steps.cache-path.outputs.value }}
+
+    - name: Show Cached Block File
+      if: inputs.debug
+      uses: ./.github/actions/echo
+      with:
+        value: ${{ steps.cache_block.outputs.value }}
 
     - name: Read Cached File
       id: cache_file_block
