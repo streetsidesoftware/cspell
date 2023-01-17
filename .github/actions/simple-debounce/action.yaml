@@ -49,7 +49,7 @@ runs:
         export TIMESTAMP=$(date +%s.%6N)
         echo timestamp-double=$TIMESTAMP >> $GITHUB_OUTPUT
         echo timestamp=$(echo $TIMESTAMP / 1 | bc) >> $GITHUB_OUTPUT
-        echo timeout-before=$(echo $TIMESTAMP - ${{steps.timeout.outputs.value}} | bc) >> $GITHUB_OUTPUT
+        echo timeout-before=$(echo $TIMESTAMP / 1 - ${{steps.timeout.outputs.value}} | bc) >> $GITHUB_OUTPUT
         echo block=$(echo $TIMESTAMP / ${{steps.timeout.outputs.value}} | bc) >> $GITHUB_OUTPUT
         echo block-prev=$(echo $TIMESTAMP / ${{steps.timeout.outputs.value}} - 1 | bc) >> $GITHUB_OUTPUT
 
@@ -139,7 +139,7 @@ runs:
       run: |
         echo "_debounce_stop=${{
           steps.cache_file_main.outputs.value &&
-          fromJSON(steps.cache_file_main.outputs.value).timestamp < fromJSON(steps.timestamp_info.outputs.value).timestamp &&
+          fromJSON(steps.cache_file_main.outputs.value).timestamp < fromJSON(steps.timestamp_info.outputs.value).timeout-before &&
           fromJSON(steps.cache_file_main.outputs.value).block < fromJSON(steps.timestamp_info.outputs.value).block
           || '' }}" >> $GITHUB_ENV
 
