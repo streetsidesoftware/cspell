@@ -46,7 +46,7 @@ runs:
       shell: bash
       run: |
         export TIMESTAMP=$(date +%s.%4N)
-        echo full-timestamp=$TIMESTAMP >> $GITHUB_OUTPUT
+        echo timestamp-double=$TIMESTAMP >> $GITHUB_OUTPUT
         echo timestamp=$(echo $TIMESTAMP / 1 | bc) >> $GITHUB_OUTPUT
         echo block=$(echo $TIMESTAMP / ${{steps.timeout.outputs.value}} | bc) >> $GITHUB_OUTPUT
         echo block-prev=$(echo $TIMESTAMP / ${{steps.timeout.outputs.value}} - 1 | bc) >> $GITHUB_OUTPUT
@@ -63,7 +63,7 @@ runs:
         value: |
           {
             "timestamp": ${{steps.timestamp.outputs.timestamp}},
-            "timestamp-full": ${{steps.timestamp.outputs.timestamp-full}},
+            "timestamp-double": ${{steps.timestamp.outputs.timestamp-double}},
             "block": ${{steps.timestamp.outputs.block}},
             "block-prev": ${{steps.timestamp.outputs.block-prev}},
 
