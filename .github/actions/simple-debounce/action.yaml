@@ -140,9 +140,11 @@ runs:
       run: |
         echo "_debounce_stop=${{
           !(
-            steps.cache_file_main.outputs.value &&
-            fromJSON(steps.cache_file_main.outputs.value).timestamp < fromJSON(steps.timestamp_info.outputs.value).timeout-before &&
-            fromJSON(steps.cache_file_main.outputs.value).block < fromJSON(steps.timestamp_info.outputs.value).block
+            !steps.cache_file_main.outputs.value ||
+            (
+              fromJSON(steps.cache_file_main.outputs.value).timestamp < fromJSON(steps.timestamp_info.outputs.value).timeout-before &&
+              fromJSON(steps.cache_file_main.outputs.value).block < fromJSON(steps.timestamp_info.outputs.value).block
+            )
           )
           || '' }}" >> $GITHUB_ENV
 
