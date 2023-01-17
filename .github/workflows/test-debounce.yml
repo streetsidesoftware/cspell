@@ -21,6 +21,8 @@ jobs:
     outputs:
       ok: ${{ steps.debounce.outputs.ok }}
       block: ${{ steps.debounce.outputs.block }}
+      run_num: ${{ matrix.run_num }}
+      debounce_info: ${{ toJSON(steps.debounce.outputs) }}
 
     steps:
       - uses: actions/checkout@v3
@@ -43,5 +45,3 @@ jobs:
         with:
           value: |
             Needs: ${{ toJSON( needs ) }}
-            Context: ${{ toJSON( job ) }}
-            GitHub: ${{ toJSON( github) }}

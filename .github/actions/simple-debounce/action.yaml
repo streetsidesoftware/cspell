@@ -21,6 +21,15 @@ outputs:
   bock:
     description: Returns `true` if the workflow/job should be dropped, otherwise ''.
     value: ${{ !steps.results.outputs.value || '' }}
+  timestamp:
+    description: The current timestamp
+    value: ${{steps.timestamp.outputs.timestamp}}
+  timeout-before:
+    description: If the previous request was before `timeout-before`, then the current request will be accepted.
+    value: ${{steps.timestamp.outputs.timeout-before}}
+  time-block:
+    description: The time block id, used as the key
+    value: ${{steps.timestamp.outputs.block}}
 
 runs:
   using: "composite"
@@ -81,14 +90,6 @@ runs:
       uses: ./.github/actions/echo
       with:
         value: ${{ steps.timestamp_info.outputs.value }}
-
-    - name: Set Variables
-      shell: bash
-      run: |
-        echo "_debounce_timestamp-double=${{ fromJSON(steps.timestamp_info.outputs.value).timestamp-double }}" >> $GITHUB_ENV
-        echo "_debounce_block=${{ fromJSON(steps.timestamp_info.outputs.value).block }}" >> $GITHUB_ENV
-        echo "_debounce_block-prev=${{ fromJSON(steps.timestamp_info.outputs.value).block-prev }}" >> $GITHUB_ENV
-        echo "_debounce_timeout-before=${{ fromJSON(steps.timestamp_info.outputs.value).timeout-before }}" >> $GITHUB_ENV
 
     - name: Calc Filename
       id: cache-path
@@ -160,7 +161,7 @@ runs:
       if: ${{ !env._debounce_stop }}
       uses: actions/cache/save@v3
       with:
-        key: ${{ steps.cache-key.outputs.value }}-${{ env._debounce_block-prev }}
+        key: ${{ steps.cache-key.outputs.value }}-${{ steps.timeout.outputs.block-prev }}
         path: ${{ steps.cache-path.outputs.value }}
 
     - name: Save to Cache
@@ -168,7 +169,7 @@ runs:
       if: ${{ !env._debounce_stop }}
       uses: actions/cache/save@v3
       with:
-        key: ${{ steps.cache-key.outputs.value }}-${{ env._debounce_block }}
+        key: ${{ steps.cache-key.outputs.value }}-${{ steps.timeout.outputs.block }}
         path: ${{ steps.cache-path.outputs.value }}
 
     # Read them back, oldest to newest
@@ -178,7 +179,7 @@ runs:
       if: ${{ !env._debounce_stop }}
       uses: actions/cache/restore@v3
       with:
-        key: ${{ steps.cache-key.outputs.value }}-${{ env._debounce_block-prev }}
+        key: ${{ steps.cache-key.outputs.value }}-${{ steps.timeout.outputs.block-prev }}
         path: ${{ steps.cache-path.outputs.value }}
 
     - name: Read Cached File
@@ -214,7 +215,7 @@ runs:
       if: ${{ !env._debounce_stop }}
       uses: actions/cache/restore@v3
       with:
-        key: ${{ steps.cache-key.outputs.value }}-${{ env._debounce_block }}
+        key: ${{ steps.cache-key.outputs.value }}-${{ steps.timeout.outputs.block }}
         path: ${{ steps.cache-path.outputs.value }}
 
     - name: Read Cached File
