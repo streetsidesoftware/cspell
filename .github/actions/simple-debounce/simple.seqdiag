@@ -1,0 +1,27 @@
+title Simple Debounce
+
+participant "Event 1" as E1
+participant "Workflow 1" as W1
+participant "Debounce\nInstance" as B1
+database "Cache-Outer" as G
+database Cache
+
+
+E1->*W1: trigger
+W1->*B1: should run?
+Cache->B1: Read:\n Timestamp Entry
+note over B1: Should Update?
+B1-->W1: No
+W1-->E1: Stop
+note over B1: Yes
+activate B1
+B1->G: Write:\n Timestamp Entry
+G->Cache: Write
+Cache->B1: Read
+note over B1: Was it our write?
+B1-->W1: No
+W1-->E1: Stop
+note over B1: Yes
+B1->W1: Yes
+deactivate B1
+destroy B1
