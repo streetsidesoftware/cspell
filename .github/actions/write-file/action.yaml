@@ -1,0 +1,21 @@
+name: Write a File
+description: Read a file and return its contents.
+
+inputs:
+  filename:
+    description: The path to the file to read.
+    required: true
+  value:
+    description: The content to write
+    required: true
+runs:
+  using: "composite"
+  steps:
+    - name: Write File
+      id: read-file
+      shell: bash
+      env:
+        FILENAME: ${{ inputs.filename }}
+        CONTENT: ${{ inputs.value }}
+      run: |
+        echo "$CONTENT" > $FILENAME

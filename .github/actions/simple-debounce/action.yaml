@@ -1,0 +1,247 @@
+name: Simple Workflow Debounce
+description: Determine if a workflow / job should run.
+
+inputs:
+  tag:
+    description: Optional name of the debounce tag.
+    required: false
+  hash:
+    description: Optional hash as part debounce tag.
+    required: false
+  timeout:
+    description: The timeout in seconds. Defaults to 60.
+    required: false
+  debug:
+    description: Show Debug Info
+    required: false
+outputs:
+  ok:
+    description: Returns `true` if it is "oK" to run the workflow/job, otherwise ''.
+    value: ${{ steps.results.outputs.value }}
+  bock:
+    description: Returns `true` if the workflow/job should be dropped, otherwise ''.
+    value: ${{ !steps.results.outputs.value || '' }}
+  timestamp:
+    description: The current timestamp
+    value: ${{steps.timestamp.outputs.timestamp}}
+  timeout-before:
+    description: If the previous request was before `timeout-before`, then the current request will be accepted.
+    value: ${{steps.timestamp.outputs.timeout-before}}
+  time-block:
+    description: The time block id, used as the key
+    value: ${{steps.timestamp.outputs.block}}
+
+runs:
+  using: "composite"
+  steps:
+    - name: Show Input
+      if: inputs.debug
+      shell: bash
+      env:
+        INPUTS: ${{ toJSON(inputs) }}
+        RUNNER: ${{ toJSON(runner) }}
+      run: |
+        echo "$debug"
+        echo "$RUNNER"
+
+    - name: Calc timeout
+      id: timeout
+      uses: ./.github/actions/output
+      with:
+        value: ${{ inputs.timeout || 60 }}
+
+    - name: Calc Timestamp
+      # Do all the math. It is not currently possible to do any arithmetic in the workflow expressions.
+      id: timestamp
+      shell: bash
+      run: |
+        export TIMESTAMP=$(date +%s.%6N)
+        echo timestamp-double=$TIMESTAMP >> $GITHUB_OUTPUT
+        echo timestamp=$(echo $TIMESTAMP / 1 | bc) >> $GITHUB_OUTPUT
+        echo timeout-before=$(echo $TIMESTAMP / 1 - ${{steps.timeout.outputs.value}} | bc) >> $GITHUB_OUTPUT
+        echo block=$(echo $TIMESTAMP / ${{steps.timeout.outputs.value}} | bc) >> $GITHUB_OUTPUT
+        echo block-prev=$(echo $TIMESTAMP / ${{steps.timeout.outputs.value}} - 1 | bc) >> $GITHUB_OUTPUT
+
+    - name: Show Timestamp
+      if: inputs.debug
+      uses: ./.github/actions/echo
+      with:
+        value: ${{ toJSON(steps.timestamp.outputs) }}
+
+    - name: Make Cache Content
+      id: timestamp_info
+      uses: ./.github/actions/output
+      with:
+        value: |
+          {
+            "timestamp": ${{steps.timestamp.outputs.timestamp}},
+            "timestamp-double": ${{steps.timestamp.outputs.timestamp-double}},
+            "timeout-before": ${{steps.timestamp.outputs.timeout-before}},
+            "block": ${{steps.timestamp.outputs.block}},
+            "block-prev": ${{steps.timestamp.outputs.block-prev}},
+
+            "run_id": "${{github.run_id}}",
+            "run_number": ${{github.run_number}},
+            "run_attempt": ${{github.run_attempt}}
+          }
+
+    - name: Show Cache Content
+      if: inputs.debug
+      uses: ./.github/actions/echo
+      with:
+        value: ${{ steps.timestamp_info.outputs.value }}
+
+    - name: Calc Filename
+      id: cache-path
+      uses: ./.github/actions/output
+      with:
+        value: ${{ runner.temp }}/_debounce-cache-file.json
+
+    - id: cache-key
+      uses: streetsidesoftware/action-set-output@v1
+      with:
+        value: >-
+          _debounce-${{ inputs.tag }}-${{ inputs.hash }}
+        debug: true
+
+    - name: Show Filename
+      if: inputs.debug
+      uses: ./.github/actions/echo
+      with:
+        value: ${{ steps.cache-path.outputs.value }}
+
+    - name: Try to restore the cache entry
+      uses: actions/cache/restore@v3
+      id: cache_main
+      with:
+        key: ${{ steps.cache-key.outputs.value }}-stub
+        path: ${{ steps.cache-path.outputs.value }}
+        restore-keys: |
+          ${{ steps.cache-key.outputs.value }}
+
+    - uses: ./.github/actions/echo
+      if: inputs.debug
+      with:
+        value: ${{ toJSON(steps.cache_main.outputs) }}
+
+    - name: Read Cached File
+      id: cache_file_main
+      if: steps.cache_main.outputs.cache-matched-key
+      uses: ./.github/actions/read-file
+      with:
+        filename: ${{ steps.cache-path.outputs.value }}
+
+    - uses: ./.github/actions/echo
+      with:
+        value: ${{ steps.cache_file_main.outputs.value }}
+
+    - name: Should we go forward?
+      id: stop-1
+      if: steps.cache_file_main.outputs.value
+      shell: bash
+      run: |
+        echo "_debounce_stop=${{
+          !(
+            fromJSON(steps.cache_file_main.outputs.value).timestamp < fromJSON(steps.timestamp_info.outputs.value).timeout-before &&
+            fromJSON(steps.cache_file_main.outputs.value).block < fromJSON(steps.timestamp_info.outputs.value).block
+          )
+          || '' }}" >> $GITHUB_ENV
+
+    - name: Write File
+      if: ${{ !env._debounce_stop }}
+      uses: ./.github/actions/write-file
+      with:
+        filename: ${{ steps.cache-path.outputs.value }}
+        value: ${{ steps.timestamp_info.outputs.value }}
+
+    # Write twice to the cache
+
+    - name: Save to Cache
+      id: save-to-cache_block_prev
+      if: ${{ !env._debounce_stop }}
+      uses: actions/cache/save@v3
+      with:
+        key: ${{ steps.cache-key.outputs.value }}-${{ steps.timeout.outputs.block-prev }}
+        path: ${{ steps.cache-path.outputs.value }}
+
+    - name: Save to Cache
+      id: save-to-cache-block
+      if: ${{ !env._debounce_stop }}
+      uses: actions/cache/save@v3
+      with:
+        key: ${{ steps.cache-key.outputs.value }}-${{ steps.timeout.outputs.block }}
+        path: ${{ steps.cache-path.outputs.value }}
+
+    # Read them back, oldest to newest
+
+    - name: Read Block-prev from Cache
+      id: cache_block_prev
+      if: ${{ !env._debounce_stop }}
+      uses: actions/cache/restore@v3
+      with:
+        key: ${{ steps.cache-key.outputs.value }}-${{ steps.timeout.outputs.block-prev }}
+        path: ${{ steps.cache-path.outputs.value }}
+
+    - name: Read Cached File
+      id: cache_file_block_prev
+      if: steps.cache_block_prev.outputs.cache-matched-key
+      uses: ./.github/actions/read-file
+      with:
+        filename: ${{ steps.cache-path.outputs.value }}
+
+    - name: Show Cached Block-Prev File
+      if: inputs.debug
+      uses: ./.github/actions/echo
+      with:
+        value: ${{ steps.cache_file_block_prev.outputs.value }}
+
+    - name: Should we go forward?
+      id: stop-2
+      if: steps.cache_block_prev.outputs.cache-matched-key
+      shell: bash
+      run: |
+        echo "_debounce_stop=${{
+          !(
+            steps.cache_file_block_prev.outputs.value == steps.timestamp_info.outputs.value ||
+            (
+              fromJSON(steps.cache_file_block_prev.outputs.value).timestamp < fromJSON(steps.timestamp_info.outputs.value).timeout-before &&
+              fromJSON(steps.cache_file_block_prev.outputs.value).block < fromJSON(steps.timestamp_info.outputs.value).block
+            )
+          )
+          || '' }}" >> $GITHUB_ENV
+
+    - name: Read Block from Cache
+      id: cache_block
+      if: ${{ !env._debounce_stop }}
+      uses: actions/cache/restore@v3
+      with:
+        key: ${{ steps.cache-key.outputs.value }}-${{ steps.timeout.outputs.block }}
+        path: ${{ steps.cache-path.outputs.value }}
+
+    - name: Read Cached File
+      id: cache_file_block
+      if: steps.cache_block.outputs.cache-matched-key
+      uses: ./.github/actions/read-file
+      with:
+        filename: ${{ steps.cache-path.outputs.value }}
+
+    - name: Show Cached Block File
+      if: inputs.debug
+      uses: ./.github/actions/echo
+      with:
+        value: ${{ steps.cache_file_block.outputs.value }}
+
+    - name: Were we the ones that wrote the block?
+      id: stop-3
+      if: steps.cache_block.outputs.cache-matched-key
+      shell: bash
+      run: |
+        echo "_debounce_stop=${{
+          !steps.cache_file_block.outputs.value == steps.timestamp_info.outputs.value
+          || '' }}" >> $GITHUB_ENV
+
+    - name: Output Results
+      id: results
+      uses: ./.github/actions/output
+      with:
+        value: ${{ !env._debounce_stop || '' }}
