@@ -94,13 +94,7 @@ runs:
       id: cache-path
       uses: ./.github/actions/output
       with:
-        value: ${{ runner.temp }}/_debounce-${{github.run_id}}-${{github.run_number}}-${{github.run_attempt}}-${{ fromJSON(steps.timestamp_info.outputs.value).timestamp-double }}
-
-    - name: Write File
-      uses: ./.github/actions/write-file
-      with:
-        filename: ${{ steps.cache-path.outputs.value }}.txt
-        value: ${{ steps.timestamp_info.outputs.value }}
+        value: ${{ runner.temp }}/_debounce-${{github.run_id}}-${{github.run_number}}-${{github.run_attempt}}-${{ fromJSON(steps.timestamp_info.outputs.value).timestamp-double }}.txt
 
     - id: cache-key
       uses: streetsidesoftware/action-set-output@v1
@@ -120,16 +114,20 @@ runs:
       id: cache-main
       with:
         key: ${{ steps.cache-key.outputs.value }}-stub
-        path: ${{ steps.cache-path.outputs.value }}.main.txt
+        path: ${{ steps.cache-path.outputs.value }}
         restore-keys: |
           ${{ steps.cache-key.outputs.value }}
+
+    - uses: ./.github/actions/echo
+      with:
+        value: ${{ toJSON(steps.cache-main.outputs) }}
 
     - name: Read Cached File
       id: cache_file_main
       if: steps.cache-main.outputs.cache-hit
       uses: ./.github/actions/read-file
       with:
-        filename: ${{ steps.cache-path.outputs.value }}.main.txt
+        filename: ${{ steps.cache-path.outputs.value }}
 
     - uses: ./.github/actions/echo
       with:
@@ -145,12 +143,18 @@ runs:
           fromJSON(steps.cache_file_main.outputs.value).block < fromJSON(steps.timestamp_info.outputs.value).block
           || '' }}" >> $GITHUB_ENV
 
+    - name: Write File
+      uses: ./.github/actions/write-file
+      with:
+        filename: ${{ steps.cache-path.outputs.value }}
+        value: ${{ steps.timestamp_info.outputs.value }}
+
     - name: Save to Cache
       id: save-to-cache
       uses: actions/cache/save@v3
       with:
         key: ${{ steps.cache-key.outputs.value }}-${{ env._debounce_block }}
-        path: ${{ steps.cache-path.outputs.value }}.txt
+        path: ${{ steps.cache-path.outputs.value }}
 
     # - name: Cached Results
     #   if: inputs.debug
