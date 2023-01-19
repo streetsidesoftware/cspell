@@ -94,7 +94,6 @@ importers:
       '@cspell/cspell-types': workspace:*
       '@cspell/dict-de-de': ^3.0.2
       '@octokit/rest': ^19.0.5
-      '@types/mkdirp': ^1.0.2
       '@types/node': ^18.11.18
       '@types/rimraf': ^3.0.2
       '@types/shelljs': ^0.8.11
@@ -103,7 +102,6 @@ importers:
       cspell: workspace:*
       jest: ^29.3.1
       jest-diff: ^29.3.1
-      mkdirp: ^1.0.4
       shelljs: ^0.8.5
       simple-git: ^3.16.0
       vscode-uri: ^3.0.7
@@ -113,14 +111,12 @@ importers:
       chalk: 4.1.2
       commander: 10.0.0
       jest-diff: 29.3.1
-      mkdirp: 1.0.4
       shelljs: 0.8.5
       simple-git: 3.16.0
       vscode-uri: 3.0.7
     devDependencies:
       '@cspell/cspell-bundled-dicts': link:../packages/cspell-bundled-dicts
       '@cspell/dict-de-de': 3.0.2
-      '@types/mkdirp': 1.0.2
       '@types/node': 18.11.18
       '@types/rimraf': 3.0.2
       '@types/shelljs': 0.8.11
@@ -460,13 +456,8 @@ importers:
   packages/cspell-json-reporter:
     specifiers:
       '@cspell/cspell-types': workspace:*
-      '@types/mkdirp': ^1.0.2
-      mkdirp: ^1.0.4
     dependencies:
       '@cspell/cspell-types': link:../cspell-types
-      mkdirp: 1.0.4
-    devDependencies:
-      '@types/mkdirp': 1.0.2
 
   packages/cspell-lib:
     specifiers:
@@ -5245,12 +5236,6 @@ packages:
 
   /@types/minimist/1.2.2:
     resolution: {integrity: sha512-jhuKLIRrhvCPLqwPcx6INqmKeiA5EWrsCOPhrlFSrbrmU4ZMPjj5Ul/oLCMDO98XRUIwVm78xICz4EPCektzeQ==}
-    dev: true
-
-  /@types/mkdirp/1.0.2:
-    resolution: {integrity: sha512-o0K1tSO0Dx5X6xlU5F1D6625FawhC3dU3iqr25lluNv/+/QIVH8RLNEiVokgIZo+mz+87w/3Mkg/VvQS+J51fQ==}
-    dependencies:
-      '@types/node': 18.11.18
     dev: true
 
   /@types/ms/0.7.31:
@@ -11927,6 +11912,7 @@ packages:
     resolution: {integrity: sha512-vVqVZQyf3WLx2Shd0qJ9xuvqgAyKPLAiqITEtqW0oIUjzo3PePDd6fW9iFz30ef7Ysp/oiWqbhszeGWW2T6Gzw==}
     engines: {node: '>=10'}
     hasBin: true
+    dev: true
 
   /mlly/1.1.0:
     resolution: {integrity: sha512-cwzBrBfwGC1gYJyfcy8TcZU1f+dbH/T+TuOhtYP2wLv/Fb51/uV7HJQfBPtEupZ2ORLRU1EKFS/QfS3eo9+kBQ==}
