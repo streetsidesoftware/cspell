@@ -10,9 +10,9 @@ const mockWriteFile = jest.spyOn(fs, 'writeFile');
 jest.mock('fs', () => ({
     promises: {
         writeFile: async () => undefined,
+        mkdir: async () => undefined,
     },
 }));
-jest.mock('mkdirp', () => jest.fn().mockResolvedValue(undefined));
 
 describe('getReporter', () => {
     beforeEach(() => {

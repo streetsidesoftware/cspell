@@ -1,7 +1,6 @@
 import { Octokit } from '@octokit/rest';
 import Chalk from 'chalk';
 import * as fs from 'fs';
-import mkdirp from 'mkdirp';
 import * as Path from 'path';
 import { simpleGit } from 'simple-git';
 
@@ -12,6 +11,10 @@ import { shouldCheckRepo } from './shouldCheckRepo';
 import type { Logger } from './types';
 
 export const repositoryDir = Path.resolve(Path.join(__dirname, '../repositories/temp'));
+
+function mkdirp(p: string) {
+    return fs.promises.mkdir(p, { recursive: true });
+}
 
 const minCommitDepth = 10; // To handle race condition with respect to commits.
 
