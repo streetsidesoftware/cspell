@@ -91,7 +91,7 @@ Or you can specify a path to a config file with the `--config <path>` argument o
   "dictionaries": ["spanish", "ruby", "corp-terms", "fonts"],
   // Define each dictionary:
   //  - Relative paths are relative to the config file.
-  //  - URLs will be retrieved via HTTP GET one word per line.
+  //  - URLs will be retrieved via HTTP GET
   "dictionaryDefinitions": [
       { "name": "spanish", "path": "./spanish-words.txt"},
       { "name": "ruby", "path": "./ruby.txt"},
