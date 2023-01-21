@@ -85,7 +85,7 @@ Or you can specify a path to a config file with the `--config <path>` argument o
 
   ```javascript
   "language": "en",
-  // Dictionaries "spanish", "ruby", and "corp-term" will always be checked.
+  // Dictionaries "spanish", "ruby", and "corp-terms" will always be checked.
   // Including "spanish" in the list of dictionaries means both Spanish and English
   // words will be considered correct.
   "dictionaries": ["spanish", "ruby", "corp-terms", "fonts"],
@@ -96,7 +96,7 @@ Or you can specify a path to a config file with the `--config <path>` argument o
       { "name": "spanish", "path": "./spanish-words.txt"},
       { "name": "ruby", "path": "./ruby.txt"},
       {
-        "name": "company-terms",
+        "name": "corp-terms",
         "path": "https://shared-company-repository/cspell-terms.txt"
       },
   ],
