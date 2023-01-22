@@ -11,7 +11,7 @@ The `trace` command is used to search for words in the CSpell dictionaries.
 
 ## Command: `trace` - See which dictionaries contain a word
 
-Trace shows a the list of known dictionaries and a `*` next to the ones that contain the word.
+Trace shows the list of known dictionaries and a `*` next to the ones that contain the word.
 
 A `!` will appear next to the ones where the word is forbidden.
 
