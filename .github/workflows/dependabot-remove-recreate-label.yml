@@ -15,9 +15,8 @@ jobs:
       pull-requests: write
       contents: write
     steps:
-      - uses: actions/checkout@v3
-
       - name: Remove Labels
+        if: contains(github.actor, 'dependabot')
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
