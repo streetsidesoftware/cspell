@@ -3,7 +3,7 @@ Repository: RustPython/RustPython
 Url: "https://github.com/RustPython/RustPython.git"
 Args: ["**"]
 Lines:
- CSpell: Files checked: 682, Issues found: 4015 in 370 files
+ CSpell: Files checked: 683, Issues found: 4015 in 370 files
  exit code: 1
 ./Cargo.toml:18:44     - Unknown word (pylib)      -- derive", "jit", "vm", "pylib", "stdlib", "wasm/lib
 ./Cargo.toml:26:49     - Unknown word (flamescope) -- flame-it", "flame", "flamescope"]
@@ -107,14 +107,14 @@ Lines:
 ./compiler/ast/asdl_rs.py:14:1      - Unknown word (AUTOGEN)    -- AUTOGEN_MESSAGE = "// File automatica
 ./compiler/ast/asdl_rs.py:198:9     - Unknown word (rustname)   -- rustname = get_rust_type(name
 ./compiler/ast/asdl_rs.py:209:9     - Unknown word (enumname)   -- enumname = rustname = get_rust
-./compiler/ast/asdl_rs.py:259:13    - Unknown word (datadef)    -- datadef = f"{dataname}{generics
+./compiler/ast/asdl_rs.py:264:13    - Unknown word (datadef)    -- datadef = f"{dataname}{generics
 ./compiler/ast/asdl_rs.py:2:31      - Unknown word (ASDL)       -- Generate Rust code from an ASDL description."""
-./compiler/ast/asdl_rs.py:360:9     - Unknown word (structname) -- structname = get_rust_type(name
+./compiler/ast/asdl_rs.py:365:9     - Unknown word (structname) -- structname = get_rust_type(name
 ./compiler/ast/asdl_rs.py:42:5      - Unknown word (unaryop)    -- unaryop = Invert | Not | UAdd
-./compiler/ast/asdl_rs.py:431:18    - Unknown word (classdef)   -- self.gen_classdef(cons.name, cons.fields
-./compiler/ast/asdl_rs.py:532:22    - Unknown word (fromobj)    -- self.gen_sum_fromobj(sum, name, enumname
-./compiler/ast/asdl_rs.py:584:36    - Unknown word (sumname)    -- sum_fromobj(self, sum, sumname, enumname, depth):
-./compiler/ast/asdl_rs.py:600:44    - Unknown word (prodname)   -- fromobj(self, product, prodname, structname, depth)
+./compiler/ast/asdl_rs.py:436:18    - Unknown word (classdef)   -- self.gen_classdef(cons.name, cons.fields
+./compiler/ast/asdl_rs.py:537:22    - Unknown word (fromobj)    -- self.gen_sum_fromobj(sum, name, enumname
+./compiler/ast/asdl_rs.py:589:36    - Unknown word (sumname)    -- sum_fromobj(self, sum, sumname, enumname, depth):
+./compiler/ast/asdl_rs.py:605:44    - Unknown word (prodname)   -- fromobj(self, product, prodname, structname, depth)
 ./compiler/ast/src/ast_gen.rs:119:20    - Unknown word (Withitem)   -- items: Vec<Withitem<U>>,
 ./compiler/ast/src/ast_gen.rs:138:23    - Unknown word (Excepthandler) -- handlers: Vec<Excepthandler<U>>,
 ./compiler/ast/src/ast_gen.rs:172:13    - Unknown word (Boolop)        -- op: Boolop,
@@ -122,9 +122,9 @@ Lines:
 ./compiler/ast/src/ast_gen.rs:232:18    - Unknown word (Cmpop)         -- ops: Vec<Cmpop>,
 ./compiler/ast/src/lib.rs:5:5       - Unknown word (impls)      -- mod impls;
 ./compiler/ast/src/unparse.rs:20:14     - Unknown word (BXOR)       -- BOR, BXOR, BAND, SHIFT, ARITH
-./compiler/ast/src/unparse.rs:259:43    - Unknown word (genexp)     -- make sure a single genexp doesn't get double parens
+./compiler/ast/src/unparse.rs:263:43    - Unknown word (genexp)     -- make sure a single genexp doesn't get double parens
 ./compiler/ast/src/unparse.rs:26:8      - Unknown word (Unparser)   -- struct Unparser<'a> {
-./compiler/ast/src/unparse.rs:286:60    - Unknown word (joinedstr)  -- values } => self.unparse_joinedstr(values, false)?,
+./compiler/ast/src/unparse.rs:290:60    - Unknown word (joinedstr)  -- values } => self.unparse_joinedstr(values, false)?,
 ./compiler/ast/src/unparse.rs:51:22     - Unknown word (opprec)     -- macro_rules! opprec {
 ./compiler/ast/src/unparse.rs:52:15     - Unknown word (opty)       -- ($opty:ident, $x:expr, $enu
 ./compiler/ast/src/unparse.rs:92:21     - Unknown word (rassoc)     -- let rassoc = matches!(op, Operator
@@ -142,13 +142,13 @@ Lines:
 ./compiler/codegen/src/compile.rs:207:13    - Unknown word (kwonlyarg)  -- kwonlyarg_count: 0,
 ./compiler/codegen/src/compile.rs:217:13    - Unknown word (cellvar)    -- cellvar_cache: IndexSet::default
 ./compiler/codegen/src/compile.rs:218:13    - Unknown word (freevar)    -- freevar_cache: IndexSet::default
-./compiler/codegen/src/compile.rs:2226:23   - Unknown word (setcomp)        -- "<setcomp>",
-./compiler/codegen/src/compile.rs:2249:23   - Unknown word (dictcomp)       -- "<dictcomp>",
-./compiler/codegen/src/compile.rs:2271:46   - Unknown word (genexpr)        -- compile_comprehension("<genexpr>", None, generators
-./compiler/codegen/src/compile.rs:2317:28   - Unknown word (subkeywords)    -- for (is_unpacking, subkeywords) in &groupby {
-./compiler/codegen/src/compile.rs:2324:25   - Unknown word (subsize)        -- let mut subsize = 0;
-./compiler/codegen/src/compile.rs:2845:39   - Unknown word (codeobjects)    -- value.display_expand_codeobjects().to_string(),
-./compiler/codegen/src/compile.rs:2888:24   - Unknown word (woohoo)         -- async with woohoo():
+./compiler/codegen/src/compile.rs:2232:23   - Unknown word (setcomp)        -- "<setcomp>",
+./compiler/codegen/src/compile.rs:2255:23   - Unknown word (dictcomp)       -- "<dictcomp>",
+./compiler/codegen/src/compile.rs:2277:46   - Unknown word (genexpr)        -- compile_comprehension("<genexpr>", None, generators
+./compiler/codegen/src/compile.rs:2323:28   - Unknown word (subkeywords)    -- for (is_unpacking, subkeywords) in &groupby {
+./compiler/codegen/src/compile.rs:2330:25   - Unknown word (subsize)        -- let mut subsize = 0;
+./compiler/codegen/src/compile.rs:2851:39   - Unknown word (codeobjects)    -- value.display_expand_codeobjects().to_string(),
+./compiler/codegen/src/compile.rs:2894:24   - Unknown word (woohoo)         -- async with woohoo():
 ./compiler/codegen/src/compile.rs:327:40    - Unknown word (codeinfo)   -- cache(self.current_codeinfo());
 ./compiler/codegen/src/compile.rs:602:39    - Unknown word (fromlist)   -- from .... import (*fromlist)
 ./compiler/codegen/src/compile.rs:830:61    - Unknown word (augassign)  -- value } => self.compile_augassign(target, op, value)?
@@ -160,7 +160,7 @@ Lines:
 ./compiler/codegen/src/ir.rs:296:12    - Unknown word (cellname)    -- fn get_cellname(&self, i: usize) ->
 ./compiler/codegen/src/ir.rs:48:26     - Unknown word (petgraph)   -- TODO: look into using petgraph for handling blocks
 ./compiler/codegen/src/symboltable.rs:110:45    - Unknown word (unallowed)  -- assignment to detect unallowed re-assignment to iterator
-./compiler/codegen/src/symboltable.rs:1273:31   - Unknown word (namedexpr)  -- && symbol.is_assign_namedexpr_in_comprehension*/
+./compiler/codegen/src/symboltable.rs:1270:31   - Unknown word (namedexpr)  -- && symbol.is_assign_namedexpr_in_comprehension*/
 ./compiler/codegen/src/symboltable.rs:19:66     - Unknown word (subscopes)  -- scope, and has a list of subscopes in this scope.
 ./compiler/codegen/src/symboltable.rs:534:24    - Unknown word (Compr)      -- AssignedNamedExprInCompr,
 ./compiler/codegen/src/symboltable.rs:744:36    - Unknown word (mymodule)   -- // `import mymodule as myalias`
@@ -1169,7 +1169,7 @@ Lines:
 ./vm/src/types/slot.rs:121:41    - Unknown word (STACKLESS)  -- default: Py_TPFLAGS_HAVE_STACKLESS_EXTENSION | Py_TPFLAGS
 ./vm/src/types/slot.rs:125:43    - Unknown word (Subclassable) -- types created in Python. Subclassable and are a
 ./vm/src/types/slot.rs:83:11     - Unknown word (weaklist)   -- // tp_weaklist
-./vm/src/vm/mod.rs:534:29    - Unknown word (pyiter)     -- return self.map_pyiter(value, func);
+./vm/src/vm/mod.rs:541:29    - Unknown word (pyiter)     -- return self.map_pyiter(value, func);
 ./vm/src/vm/setting.rs:40:10     - Unknown word (Xfoo)       -- /// -Xfoo[=bar]
 ./vm/src/vm/setting.rs:52:10     - Unknown word (Wfoo)       -- /// -Wfoo
 ./vm/src/vm/thread.rs:38:24     - Unknown word (intp)       -- let vm_owns_obj = |intp: NonNull<VirtualMachine
