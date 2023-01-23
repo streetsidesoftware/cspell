@@ -5,7 +5,7 @@ Args: ["**/*.go"]
 Summary:
   files: 225
   filesWithIssues: 208
-  issues: 3485
+  issues: 3486
   errors: 0
 Errors: []
 
@@ -48,14 +48,15 @@ issues:
   - "caddyconfig/caddyfile/formatter_test.go:332:10  	ACMEEMAIL   	U   	email {$ACMEEMAIL}"
   - "caddyconfig/caddyfile/formatter.go:216:8    	Caddyfiles  	U   	// ...Caddyfiles should, however, end"
   - "caddyconfig/caddyfile/parse_test.go:180:12  	testdata    	U   	import testdata/import_test1.txt`, false"
-  - "caddyconfig/caddyfile/parse_test.go:552:13  	foofoobarbar	U   	expect: \"foofoobarbar\","
-  - "caddyconfig/caddyfile/parse_test.go:564:13  	foobarfoobar	U   	expect: \"foobarfoobar\","
-  - "caddyconfig/caddyfile/parse_test.go:576:13  	foobarbaz   	U   	expect: \"foobarbaz\","
-  - "caddyconfig/caddyfile/parse.go:176:19   	redeclaration   	U   	return p.Errf(\"redeclaration of previously declared"
-  - "caddyconfig/caddyfile/parse.go:185:57   	namespacing     	U   	across files/snippets by namespacing them. Without"
-  - "caddyconfig/caddyfile/parse.go:331:7    	globbing        	U   	// or globbing pattern. When the function"
-  - "caddyconfig/caddyfile/parse.go:555:42   	parens          	U   	is a single key with parens. Nothing else qualifies"
-  - "caddyconfig/caddyfile/parse.go:564:23   	curlies         	U   	/ snippet must have curlies."
+  - "caddyconfig/caddyfile/parse_test.go:202:56  	dotfiles    	U   	continue to read all dotfiles in a dir."
+  - "caddyconfig/caddyfile/parse_test.go:569:13  	foofoobarbar	U   	expect: \"foofoobarbar\","
+  - "caddyconfig/caddyfile/parse_test.go:581:13  	foobarfoobar	U   	expect: \"foobarfoobar\","
+  - "caddyconfig/caddyfile/parse_test.go:593:13  	foobarbaz   	U   	expect: \"foobarbaz\","
+  - "caddyconfig/caddyfile/parse.go:168:19   	redeclaration   	U   	return p.Errf(\"redeclaration of previously declared"
+  - "caddyconfig/caddyfile/parse.go:177:57   	namespacing     	U   	across files/snippets by namespacing them. Without"
+  - "caddyconfig/caddyfile/parse.go:323:7    	globbing        	U   	// or globbing pattern. When the function"
+  - "caddyconfig/caddyfile/parse.go:567:42   	parens          	U   	is a single key with parens. Nothing else qualifies"
+  - "caddyconfig/caddyfile/parse.go:576:23   	curlies         	U   	/ snippet must have curlies."
   - "caddyconfig/configadapters.go:49:4      	structs 	U   	// structs that require a json"
   - "caddyconfig/httpcaddyfile/addresses_fuzz.go:17:9    	httpcaddyfile   	U   	package httpcaddyfile"
   - "caddyconfig/httpcaddyfile/addresses.go:20:7     	netip       	U   	\"net/netip\""
@@ -76,8 +77,8 @@ issues:
   - "caddyconfig/httpcaddyfile/builtins.go:269:8     	ALPN            	U   	cp.ALPN = args"
   - "caddyconfig/httpcaddyfile/builtins.go:492:8     	Vals            	U   	configVals := []ConfigValue{}"
   - "caddyconfig/httpcaddyfile/builtins.go:508:14    	subdirectives   	U   	// some tls subdirectives are shortcuts that implicitly"
-  - "caddyconfig/httpcaddyfile/builtins.go:734:22    	Subroute        	U   	sr := new(caddyhttp.Subroute)"
-  - "caddyconfig/httpcaddyfile/builtins.go:746:41    	subroute        	U   	which return a literal subroute instead of a route"
+  - "caddyconfig/httpcaddyfile/builtins.go:741:35    	Subroute        	U   	caddyhttp.Route, caddyhttp.Subroute:"
+  - "caddyconfig/httpcaddyfile/builtins.go:743:84    	subroute        	U   	than an HTTP route or subroute: %#v (only handler directives"
   - "caddyconfig/httpcaddyfile/directives.go:79:7    	fastcgi     	U   	\"php_fastcgi\","
   - "caddyconfig/httpcaddyfile/directives.go:96:15   	unmarshaling	U   	// associated unmarshaling (setup) function. When"
   - "caddyconfig/httpcaddyfile/directives.go:243:58  	vals        	U   	caddyhttp.Route type) in vals to the"
@@ -89,11 +90,11 @@ issues:
   - "caddyconfig/httpcaddyfile/httptype.go:280:12    	Cvtr        	U   	if storageCvtr, ok := options[\"storage"
   - "caddyconfig/httpcaddyfile/httptype.go:643:11    	cval        	U   	for _, cval := range sblock.pile"
   - "caddyconfig/httpcaddyfile/httptype.go:665:17    	reqs        	U   	// not log reqs to any host unless it"
-  - "caddyconfig/httpcaddyfile/httptype.go:1128:3    	hostm       	U   	hostm caddyhttp.MatchHost"
-  - "caddyconfig/httpcaddyfile/httptype.go:1129:3    	pathm       	U   	pathm caddyhttp.MatchPath"
-  - "caddyconfig/httpcaddyfile/httptype.go:1299:5    	hostport    	U   	\"{hostport}\", \"{http.request.hostport"
-  - "caddyconfig/httpcaddyfile/httptype.go:1381:25   	unexported  	U   	Mostly borrowed from unexported method in caddyhttp"
-  - "caddyconfig/httpcaddyfile/httptype.go:1388:3    	laddrs      	U   	laddrs, err := caddy.ParseNetworkAdd"
+  - "caddyconfig/httpcaddyfile/httptype.go:1130:3    	hostm       	U   	hostm caddyhttp.MatchHost"
+  - "caddyconfig/httpcaddyfile/httptype.go:1131:3    	pathm       	U   	pathm caddyhttp.MatchPath"
+  - "caddyconfig/httpcaddyfile/httptype.go:1301:5    	hostport    	U   	\"{hostport}\", \"{http.request.hostport"
+  - "caddyconfig/httpcaddyfile/httptype.go:1383:25   	unexported  	U   	Mostly borrowed from unexported method in caddyhttp"
+  - "caddyconfig/httpcaddyfile/httptype.go:1390:3    	laddrs      	U   	laddrs, err := caddy.ParseNetworkAdd"
   - "caddyconfig/httpcaddyfile/options_test.go:17:22     	caddytest   	U   	// are present in: caddytest/integration/caddyfile"
   - "caddyconfig/httpcaddyfile/options.go:43:43      	ACMEDNS 	U   	\"acme_dns\", parseOptACMEDNS)"
   - "caddyconfig/httpcaddyfile/options.go:44:43      	ACMEEAB 	U   	\"acme_eab\", parseOptACMEEAB)"
