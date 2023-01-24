@@ -99,9 +99,9 @@ const colorLevel = chalk.level;
 
 describe('Validate cli', () => {
     const logger = makeLogger();
-    const error = jest.spyOn(console, 'error').mockName('console.error').mockImplementation(logger.error);
-    const log = jest.spyOn(console, 'log').mockName('console.log').mockImplementation(logger.log);
-    const info = jest.spyOn(console, 'info').mockName('console.info').mockImplementation(logger.info);
+    let error = jest.spyOn(console, 'error').mockName('console.error').mockImplementation(logger.error);
+    let log = jest.spyOn(console, 'log').mockName('console.log').mockImplementation(logger.log);
+    let info = jest.spyOn(console, 'info').mockName('console.info').mockImplementation(logger.info);
     const listGlobalImports = jest.spyOn(Link, 'listGlobalImports').mockName('istGlobalImports');
     const addPathsToGlobalImports = jest.spyOn(Link, 'addPathsToGlobalImports').mockName('addPathsToGlobalImports');
     const removePathsFromGlobalImports = jest
@@ -111,10 +111,11 @@ describe('Validate cli', () => {
     const captureStderr = new RecordStdStream('stderr');
 
     beforeEach(() => {
-        log.mockClear();
-        error.mockClear();
         mockCreateInterface.mockClear();
         logger.clear();
+        error = jest.spyOn(console, 'error').mockName('console.error').mockImplementation(logger.error);
+        log = jest.spyOn(console, 'log').mockName('console.log').mockImplementation(logger.log);
+        info = jest.spyOn(console, 'info').mockName('console.info').mockImplementation(logger.info);
         captureStdout.startCapture();
         captureStderr.startCapture();
         chalk.level = 3;

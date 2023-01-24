@@ -3,12 +3,16 @@ import type { FeatureFlag } from './FeatureFlags';
 import { createFeatureFlags } from './FeatureFlags';
 import { parseFlags } from './parseFlags';
 
-const { consoleOutput } = spyOnConsole();
+const consoleSpy = spyOnConsole();
 
 describe('parseFlags', () => {
     const features: FeatureFlag[] = [mkFeature('flag1'), mkFeature('compress'), mkFeature('advanced')];
 
     beforeEach(() => {
+        consoleSpy.attach();
+    });
+
+    afterEach(() => {
         jest.resetAllMocks();
     });
 
@@ -29,7 +33,7 @@ describe('parseFlags', () => {
         const ff = createFeatureFlags();
         ff.registerFeatures(features);
         expect(() => parseFlags(ff, ['mistaken:true'])).toThrow();
-        expect(consoleOutput()).toMatchSnapshot();
+        expect(consoleSpy.consoleOutput()).toMatchSnapshot();
     });
 });
 

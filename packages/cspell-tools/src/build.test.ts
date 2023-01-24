@@ -6,13 +6,15 @@ import { createTestHelper } from './test/TestHelper';
 
 const helper = createTestHelper(__filename);
 
-spyOnConsole();
+const consoleSpy = spyOnConsole();
 setLogger(console.log);
 
 describe('build action', () => {
     beforeEach(() => {
         helper.beginTest();
         helper.clearTempDir();
+        consoleSpy.attach();
+        setLogger(console.log);
     });
 
     test.each`

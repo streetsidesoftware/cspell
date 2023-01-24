@@ -1,12 +1,3 @@
-import type { CSpellReporter } from '@cspell/cspell-types';
-import { MessageTypes } from '@cspell/cspell-types';
-import { promises as fs } from 'fs';
-import * as path from 'path';
-
-import { getReporter } from './index';
-
-const mockWriteFile = jest.spyOn(fs, 'writeFile');
-
 jest.mock('fs', () => ({
     promises: {
         writeFile: async () => undefined,
@@ -14,8 +5,22 @@ jest.mock('fs', () => ({
     },
 }));
 
+import type { CSpellReporter } from '@cspell/cspell-types';
+import { MessageTypes } from '@cspell/cspell-types';
+import { promises as fs } from 'fs';
+import * as path from 'path';
+
+import { getReporter } from './index';
+
 describe('getReporter', () => {
+    let mockWriteFile = jest.spyOn(fs, 'writeFile');
+
     beforeEach(() => {
+        jest.resetAllMocks();
+        mockWriteFile = jest.spyOn(fs, 'writeFile');
+    });
+
+    afterEach(() => {
         jest.resetAllMocks();
         mockWriteFile.mockReset();
     });

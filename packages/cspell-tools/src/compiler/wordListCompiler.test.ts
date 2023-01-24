@@ -27,8 +27,8 @@ const sampleDictEn = path.join(samples, 'en_US.txt');
 
 const wordListHeader = __testing__.wordListHeader;
 
-const { consoleOutput } = spyOnConsole();
-setLogger(console.log);
+const consoleSpy = spyOnConsole();
+const consoleOutput = consoleSpy.consoleOutput;
 
 const readOptions: ReaderOptions = {
     splitWords: false,
@@ -40,6 +40,8 @@ describe('Validate the wordListCompiler', () => {
         testHelper.cdToTempDir();
         temp = testHelper.resolveTemp();
         jest.resetAllMocks();
+        consoleSpy.attach();
+        setLogger(console.log);
     });
 
     test.each`
@@ -140,6 +142,11 @@ describe('Validate the wordListCompiler', () => {
 });
 
 describe('Validate Larger Dictionary', () => {
+    beforeEach(() => {
+        consoleSpy.attach();
+        setLogger(console.log);
+    });
+
     test('en_US hunspell', async () => {
         const source = await streamWordsFromFile(sampleDictEnUS, readOptions);
         const words = [...pipe(source, opTake(5000))];

@@ -14,11 +14,12 @@ function sample(...parts: string[]): string {
     return path.resolve(pathSamples, ...parts);
 }
 
-spyOnConsole();
+const consoleSpy = spyOnConsole();
 
 describe('compile', () => {
     beforeAll(() => {
         testHelper.clearTempDir();
+        consoleSpy.attach();
     });
 
     beforeEach(() => {
