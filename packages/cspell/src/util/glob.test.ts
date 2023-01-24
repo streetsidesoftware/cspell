@@ -1,6 +1,8 @@
 import { GlobMatcher } from 'cspell-glob';
-import mm from 'micromatch';
-import minimatch from 'minimatch';
+import type { Options as MicromatchOptions } from 'micromatch';
+import micromatch from 'micromatch';
+import type { MinimatchOptions } from 'minimatch';
+import { minimatch } from 'minimatch';
 import * as path from 'path';
 
 import { calcGlobs, normalizeGlobsToRoot } from './glob';
@@ -17,7 +19,7 @@ describe('Validate minimatch assumptions', () => {
     interface TestCase {
         pattern: string;
         file: string;
-        options: minimatch.IOptions;
+        options: MinimatchOptions;
         expected: boolean;
     }
 
@@ -54,11 +56,104 @@ describe('Validate minimatch assumptions', () => {
         ${'{!*.js,*.ts}'}      | ${'!index.js'}                        | ${{}}                  | ${true}  | ${'nested negative - exact match'}
         ${'{!*.js,*.ts}'}      | ${'index.ts'}                         | ${{}}                  | ${true}  | ${'nested negative'}
         ${'{*.js,!index.js}'}  | ${'index.js'}                         | ${{}}                  | ${true}  | ${'nested negative does not work as expected'}
-        ${'{!!index.js,*.ts}'} | ${'index.js'}                         | ${{}}                  | ${false} | ${'nested negative does not work as expected'}
-    `('assume glob "$pattern" matches "$file" is $expected', ({ pattern, file, options, expected }: TestCase) => {
-        const r = minimatch(file, pattern, options);
-        expect(r).toBe(expected);
-    });
+        ${'{!!index.js,*.ts}'} | ${'index.js'}                         | ${{}}                  | ${false} | ${'double negative is not a positive'}
+        ${'{!index.js,*.ts}'}  | ${'index.js'}                         | ${{}}                  | ${false} | ${''}
+        ${'{!index.js,*.js}'}  | ${'index.js'}                         | ${{}}                  | ${true}  | ${'negation does NOT prevent match'}
+    `(
+        'assume glob "$pattern" matches "$file" is $expected $comment',
+        ({ pattern, file, options, expected }: TestCase) => {
+            const r = minimatch(file, pattern, options);
+            expect(r).toBe(expected);
+        }
+    );
+});
+
+describe('Validate micromatch assumptions', () => {
+    interface TestCase {
+        pattern: string;
+        ignore: string | string[] | undefined;
+        file: string;
+        options: MicromatchOptions;
+        expected: boolean;
+    }
+
+    const jsPattern = '*.{js,jsx}';
+    const mdPattern = '*.md';
+    const nodePattern = '{node_modules,node_modules/**}';
+    const nestedPattern = `{**/temp/**,{${jsPattern},${mdPattern},${nodePattern}}}`;
+
+    test.each`
+        pattern                | ignore                   | file                                  | options                | expected | comment
+        ${'*.json'}            | ${undefined}             | ${'package.json'}                     | ${{}}                  | ${true}  | ${''}
+        ${'**/*.json'}         | ${undefined}             | ${'package.json'}                     | ${{}}                  | ${true}  | ${''}
+        ${'node_modules'}      | ${undefined}             | ${'node_modules/cspell/package.json'} | ${{}}                  | ${false} | ${''}
+        ${'node_modules/'}     | ${undefined}             | ${'node_modules/cspell/package.json'} | ${{}}                  | ${false} | ${'tailing slash (not like .gitignore)'}
+        ${'node_modules/'}     | ${undefined}             | ${'node_modules'}                     | ${{}}                  | ${false} | ${''}
+        ${'node_modules/**'}   | ${undefined}             | ${'node_modules/cspell/package.json'} | ${{}}                  | ${true}  | ${''}
+        ${'node_modules/**/*'} | ${undefined}             | ${'node_modules/package.json'}        | ${{}}                  | ${true}  | ${''}
+        ${'node_modules/**'}   | ${undefined}             | ${'node_modules'}                     | ${{}}                  | ${true}  | ${'Note: Minimatch and Micromatch do not give the same result.'}
+        ${'node_modules/**/*'} | ${undefined}             | ${'node_modules'}                     | ${{}}                  | ${false} | ${''}
+        ${'*.json'}            | ${undefined}             | ${'src/package.json'}                 | ${{}}                  | ${false} | ${''}
+        ${'*.json'}            | ${undefined}             | ${'src/package.json'}                 | ${{ matchBase: true }} | ${true}  | ${'check matchBase behavior, option not used by cspell'}
+        ${'*.yml'}             | ${undefined}             | ${'.github/workflows/test.yml'}       | ${{ matchBase: true }} | ${true}  | ${'check matchBase behavior, option not used by cspell'}
+        ${'**/*.yml'}          | ${undefined}             | ${'.github/workflows/test.yml'}       | ${{}}                  | ${false} | ${''}
+        ${'**/*.yml'}          | ${undefined}             | ${'.github/workflows/test.yml'}       | ${{ dot: true }}       | ${true}  | ${'dot is used by default for excludes'}
+        ${'{*.json,*.yaml}'}   | ${undefined}             | ${'package.json'}                     | ${{}}                  | ${true}  | ${''}
+        ${nestedPattern}       | ${undefined}             | ${'index.js'}                         | ${{}}                  | ${true}  | ${'Nested {} is supported'}
+        ${nestedPattern}       | ${undefined}             | ${'node_modules/cspell/package.json'} | ${{}}                  | ${true}  | ${'Nested {} is supported'}
+        ${nestedPattern}       | ${undefined}             | ${'testing/temp/file.bin'}            | ${{}}                  | ${true}  | ${'Nested {} is supported'}
+        ${'# comment'}         | ${undefined}             | ${'comment'}                          | ${{}}                  | ${false} | ${'Comments do not match'}
+        ${' *.js '}            | ${undefined}             | ${'index.js'}                         | ${{}}                  | ${false} | ${'Spaces are NOT ignored'}
+        ${'!*.js'}             | ${undefined}             | ${'index.js'}                         | ${{}}                  | ${false} | ${'Negations work'}
+        ${'!!*.js'}            | ${undefined}             | ${'index.js'}                         | ${{}}                  | ${true}  | ${'double negative'}
+        ${'{!*.js,*.ts}'}      | ${undefined}             | ${'index.js'}                         | ${{}}                  | ${false} | ${'nested negative - do not work (are not expected to)'}
+        ${'{!*.js,*.ts}'}      | ${undefined}             | ${'!index.js'}                        | ${{}}                  | ${true}  | ${'nested negative - exact match'}
+        ${'{!*.js,*.ts}'}      | ${undefined}             | ${'index.ts'}                         | ${{}}                  | ${true}  | ${'nested negative'}
+        ${'{*.js,!index.js}'}  | ${undefined}             | ${'index.js'}                         | ${{}}                  | ${true}  | ${'nested negative does not work as expected'}
+        ${'{!!index.js,*.ts}'} | ${undefined}             | ${'index.js'}                         | ${{}}                  | ${false} | ${'double negative is not a positive'}
+        ${'{!index.js,*.ts}'}  | ${undefined}             | ${'index.js'}                         | ${{}}                  | ${false} | ${''}
+        ${'{!index.js,*.js}'}  | ${undefined}             | ${'index.js'}                         | ${{}}                  | ${true}  | ${'negation does NOT prevent match'}
+        ${'**'}                | ${'*.json'}              | ${'package.json'}                     | ${{}}                  | ${false} | ${''}
+        ${'**'}                | ${'**/*.json'}           | ${'package.json'}                     | ${{}}                  | ${false} | ${''}
+        ${'**'}                | ${'node_modules'}        | ${'node_modules/cspell/package.json'} | ${{}}                  | ${true}  | ${''}
+        ${'**'}                | ${'node_modules/'}       | ${'node_modules/cspell/package.json'} | ${{}}                  | ${true}  | ${'tailing slash (not like .gitignore)'}
+        ${'**'}                | ${'node_modules/'}       | ${'node_modules'}                     | ${{}}                  | ${true}  | ${''}
+        ${'**'}                | ${'node_modules/**'}     | ${'node_modules/cspell/package.json'} | ${{}}                  | ${false} | ${''}
+        ${'**'}                | ${'node_modules/**/*'}   | ${'node_modules/package.json'}        | ${{}}                  | ${false} | ${''}
+        ${'**'}                | ${'node_modules/**'}     | ${'node_modules'}                     | ${{}}                  | ${false} | ${'Note: Minimatch and Micromatch do not give the same result.'}
+        ${'**'}                | ${'node_modules/**/*'}   | ${'node_modules'}                     | ${{}}                  | ${true}  | ${''}
+        ${'**'}                | ${'*.json'}              | ${'src/package.json'}                 | ${{}}                  | ${true}  | ${''}
+        ${'**'}                | ${'*.json'}              | ${'src/package.json'}                 | ${{ matchBase: true }} | ${false} | ${'check matchBase behavior, option not used by cspell'}
+        ${'**'}                | ${'*.yml'}               | ${'.github/workflows/test.yml'}       | ${{ matchBase: true }} | ${false} | ${'check matchBase behavior, option not used by cspell'}
+        ${'**'}                | ${'**/*.yml'}            | ${'.github/workflows/test.yml'}       | ${{}}                  | ${false} | ${'Ignore works against .paths by default.'}
+        ${'**'}                | ${'**/*.yml'}            | ${'.github/workflows/test.yml'}       | ${{ dot: true }}       | ${false} | ${'dot is used by default for excludes'}
+        ${'**'}                | ${'{*.json,*.yaml}'}     | ${'package.json'}                     | ${{}}                  | ${false} | ${''}
+        ${'**'}                | ${nestedPattern}         | ${'index.js'}                         | ${{}}                  | ${false} | ${'Nested {} is supported'}
+        ${'**'}                | ${nestedPattern}         | ${'node_modules/cspell/package.json'} | ${{}}                  | ${false} | ${'Nested {} is supported'}
+        ${'**'}                | ${nestedPattern}         | ${'testing/temp/file.bin'}            | ${{}}                  | ${false} | ${'Nested {} is supported'}
+        ${'**'}                | ${'# comment'}           | ${'comment'}                          | ${{}}                  | ${true}  | ${'Comments do not match'}
+        ${'**'}                | ${' *.js '}              | ${'index.js'}                         | ${{}}                  | ${true}  | ${'Spaces are NOT ignored'}
+        ${'**'}                | ${'!*.js'}               | ${'index.js'}                         | ${{}}                  | ${true}  | ${'Negations work'}
+        ${'**'}                | ${'!!*.js'}              | ${'index.js'}                         | ${{}}                  | ${false} | ${'double negative'}
+        ${'**'}                | ${'{!*.js,*.ts}'}        | ${'index.js'}                         | ${{}}                  | ${true}  | ${'nested negative'}
+        ${'**'}                | ${'{!*.js,*.ts}'}        | ${'index.ts'}                         | ${{}}                  | ${false} | ${'NOT working as expected. index.ts should NOT be allowed'}
+        ${'**'}                | ${'{*.js,!index.js}'}    | ${'test.js'}                          | ${{}}                  | ${false} | ${'nested negative ignore does NOT work as expected.'}
+        ${'**'}                | ${'{*.js,!index.js}'}    | ${'index.js'}                         | ${{}}                  | ${false} | ${'nested negative ignore does NOT work as expected.'}
+        ${'**'}                | ${['*.js']}              | ${'code.js'}                          | ${{}}                  | ${false} | ${''}
+        ${'**'}                | ${['*.js', '!index.js']} | ${'code.js'}                          | ${{}}                  | ${false} | ${''}
+        ${'**'}                | ${['*.js', '!index.js']} | ${'index.js'}                         | ${{}}                  | ${false} | ${'Negative ignore DOES NOT WORK'}
+        ${'**'}                | ${'{!!index.js,*.ts}'}   | ${'index.js'}                         | ${{}}                  | ${true}  | ${'double negative is not a positive'}
+        ${'**'}                | ${'{!index.js,*.ts}'}    | ${'index.js'}                         | ${{}}                  | ${true}  | ${''}
+        ${'**'}                | ${'{!index.js,*.js}'}    | ${'index.js'}                         | ${{}}                  | ${false} | ${'negative ignores DO NOT WORK'}
+        ${'**'}                | ${['!index.js', '*.js']} | ${'index.js'}                         | ${{}}                  | ${false} | ${'negative ignores DO NOT WORK'}
+    `(
+        'micromatch glob: "$pattern" ignore: $ignore matches "$file" is $expected $comment',
+        ({ pattern, ignore, file, options, expected }: TestCase) => {
+            ignore && (options.ignore = ignore);
+            const r = micromatch([file], pattern, options);
+            expect(r).toEqual(expected ? [file] : []);
+        }
+    );
 });
 
 describe('Validate internal functions', () => {
@@ -123,7 +218,7 @@ describe('Validate internal functions', () => {
             const relToRoot = path.relative(root, file);
 
             expect(globMatcher.match(file)).toBe(expectedToMatch);
-            expect(mm.isMatch(relToRoot, expectedGlobs, { dot: true })).toBe(expectedToMatch);
+            expect(micromatch.isMatch(relToRoot, expectedGlobs, { dot: true })).toBe(expectedToMatch);
         }
     );
 
@@ -157,7 +252,7 @@ describe('Validate internal functions', () => {
             const relToRoot = path.relative(root, file);
 
             expect(globMatcher.match(file)).toBe(expectedToMatch);
-            expect(mm.isMatch(relToRoot, expectedGlobs)).toBe(expectedToMatch);
+            expect(micromatch.isMatch(relToRoot, expectedGlobs)).toBe(expectedToMatch);
         }
     );
 });
