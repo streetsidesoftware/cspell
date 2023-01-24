@@ -26,7 +26,7 @@ function getCommander() {
     return new Commander.Command();
 }
 
-const { consoleOutput } = spyOnConsole();
+const consoleSpy = spyOnConsole();
 
 describe('Validate the application', () => {
     beforeAll(() => {
@@ -38,6 +38,7 @@ describe('Validate the application', () => {
         testHelper.cp(path.join(pathSamples, 'cities.txt'), '.');
         testHelper.cd('.');
         jest.resetAllMocks();
+        consoleSpy.attach();
     });
 
     test('app compile-trie', async () => {
@@ -185,7 +186,7 @@ describe('Validate the application', () => {
         commander.on('--help', mock);
         await expect(app.run(commander, argv())).rejects.toThrow(Commander.CommanderError);
         expect(mock.mock.calls.length).toBe(1);
-        expect(consoleOutput()).toMatchSnapshot();
+        expect(consoleSpy.consoleOutput()).toMatchSnapshot();
     });
 
     test('app --help', async () => {
@@ -194,7 +195,7 @@ describe('Validate the application', () => {
         commander.on('--help', mock);
         await expect(app.run(commander, argv('--help'))).rejects.toThrow(Commander.CommanderError);
         expect(mock.mock.calls.length).toBe(1);
-        expect(consoleOutput()).toMatchSnapshot();
+        expect(consoleSpy.consoleOutput()).toMatchSnapshot();
     });
 
     test('app -V', async () => {
@@ -203,6 +204,6 @@ describe('Validate the application', () => {
         commander.on('option:version', mock);
         await expect(app.run(commander, argv('-V'))).rejects.toThrow(Commander.CommanderError);
         expect(mock.mock.calls.length).toBe(1);
-        expect(consoleOutput()).toMatchSnapshot();
+        expect(consoleSpy.consoleOutput()).toMatchSnapshot();
     });
 });
