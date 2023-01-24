@@ -15,6 +15,11 @@ jobs:
       pull-requests: write
       contents: write
     steps:
+      - name: Debug
+        env:
+          GITHUB: ${{ toJSON(github) }}
+        run: echo "$GITHUB"
+
       - name: Remove Labels
         if: contains(github.actor, 'dependabot')
         env:
