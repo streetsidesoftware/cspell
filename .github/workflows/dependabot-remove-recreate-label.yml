@@ -15,6 +15,8 @@ jobs:
       pull-requests: write
       contents: write
     steps:
+      - uses: actions/checkout@v3
+
       - name: Debug
         env:
           GITHUB: ${{ toJSON(github) }}
