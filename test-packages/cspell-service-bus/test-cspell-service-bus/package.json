@@ -1,0 +1,28 @@
+{
+  "name": "test-cspell-service-bus",
+  "version": "6.19.2",
+  "description": "Pure testing package for @cspell/cspell-service-bus.",
+  "private": true,
+  "type": "commonjs",
+  "bin": "./bin.cjs",
+  "scripts": {
+    "clean": "shx rm -rf dist .tsbuildinfo",
+    "build": "pnpm run compile",
+    "build-dev": "tsc -p tsconfig.dev.json",
+    "clean-build": "pnpm run clean && pnpm run build",
+    "compile": "tsc -p .",
+    "test": "pnpm test:unit && pnpm test:smoke",
+    "test:smoke": "node ./bin.cjs",
+    "test:unit": "jest"
+  },
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "@cspell/cspell-service-bus": "workspace:*"
+  },
+  "main": "index.js",
+  "keywords": [],
+  "devDependencies": {
+    "vitest": "^0.28.2"
+  }
+}

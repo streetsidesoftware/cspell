@@ -566,9 +566,11 @@ importers:
     specifiers:
       '@types/node': ^18.11.18
       jest: ^29.4.0
+      vitest: ^0.28.2
     devDependencies:
       '@types/node': 18.11.18
       jest: 29.4.0_@types+node@18.11.18
+      vitest: 0.28.2
 
   packages/cspell-strong-weak-map:
     specifiers: {}
@@ -805,6 +807,33 @@ importers:
       vitest: ^0.28.2
     dependencies:
       '@cspell/cspell-pipe': link:../../../packages/cspell-pipe
+    devDependencies:
+      vitest: 0.28.2
+
+  test-packages/cspell-service-bus/test-cspell-service-bus:
+    specifiers:
+      '@cspell/cspell-service-bus': workspace:*
+      vitest: ^0.28.2
+    dependencies:
+      '@cspell/cspell-service-bus': link:../../../packages/cspell-service-bus
+    devDependencies:
+      vitest: 0.28.2
+
+  test-packages/cspell-service-bus/test-cspell-service-bus-esm:
+    specifiers:
+      '@cspell/cspell-service-bus': workspace:*
+      vitest: ^0.28.2
+    dependencies:
+      '@cspell/cspell-service-bus': link:../../../packages/cspell-service-bus
+    devDependencies:
+      vitest: 0.28.2
+
+  test-packages/cspell-service-bus/test-cspell-service-bus-rollup:
+    specifiers:
+      '@cspell/cspell-service-bus': workspace:*
+      vitest: ^0.28.2
+    dependencies:
+      '@cspell/cspell-service-bus': link:../../../packages/cspell-service-bus
     devDependencies:
       vitest: 0.28.2
 
@@ -5332,7 +5361,7 @@ packages:
   /@types/sax/1.2.4:
     resolution: {integrity: sha512-pSAff4IAxJjfAXUG6tFkO7dsSbTmf8CtUpfhhZ5VhkRpC4628tJhh3+V6H1E+/Gs9piSzYKT5yzHO5M4GG9jkw==}
     dependencies:
-      '@types/node': 17.0.45
+      '@types/node': 18.11.18
     dev: false
 
   /@types/scheduler/0.16.2:
@@ -15166,7 +15195,7 @@ packages:
       '@babel/core': 7.20.12
       bs-logger: 0.2.6
       fast-json-stable-stringify: 2.1.0
-      jest: 29.4.0
+      jest: 29.4.0_@types+node@18.11.18
       jest-util: 29.4.0
       json5: 2.2.3
       lodash.memoize: 4.1.2

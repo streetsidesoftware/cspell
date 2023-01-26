@@ -1,11 +1,12 @@
-import { createRequestHandler } from './createRequestHandler';
-import type { Handler, HandleRequestFn } from './handlers';
-import { ServiceRequest } from './request';
-import type { ServiceRequestFactory } from './ServiceRequestFactory';
+import { createRequestHandler } from './createRequestHandler.js';
+import type { Handler, HandleRequestFn } from './handlers.js';
+import type { ServiceRequest } from './request.js';
+import { ServiceRequestCls } from './request.js';
+import type { ServiceRequestFactory } from './ServiceRequestFactory.js';
 
 export function requestFactory<T extends string, P, R>(requestType: T): ServiceRequestFactory<ServiceRequest<T, P, R>> {
-    type Request = ServiceRequest<T, P, R>;
-    class RequestClass extends ServiceRequest<T, P, R> {
+    type Request = ServiceRequestCls<T, P, R>;
+    class RequestClass extends ServiceRequestCls<T, P, R> {
         static type = requestType;
         private constructor(params: P) {
             super(requestType, params);

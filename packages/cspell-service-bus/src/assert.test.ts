@@ -1,4 +1,6 @@
-import { assert } from './assert';
+import { describe, expect, test } from 'vitest';
+
+import { assert } from './assert.js';
 
 function catchError<T>(fn: () => T): Error | T {
     try {

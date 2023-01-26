@@ -9,7 +9,7 @@ class BaseServiceRequest<T extends string, P, R> implements ServiceRequest<T, P,
     constructor(readonly type: T, readonly params: P) {}
 }
 
-export class ServiceRequest<T extends string, P, R> extends BaseServiceRequest<T, P, R> {
+export class ServiceRequestCls<T extends string, P, R> extends BaseServiceRequest<T, P, R> {
     constructor(type: T, params: P) {
         super(type, params);
     }

@@ -1,5 +1,6 @@
+/* eslint-disable node/no-unpublished-import */
 /* eslint-disable @typescript-eslint/no-misused-new */
-import type { MagicStringOptions, SourceMap, SourceMapOptions, UpdateOptions } from 'magic-string';
+import type { MagicStringOptions, SourceMap, SourceMapOptions } from 'magic-string';
 import MS from 'magic-string';
 
 export interface MagicString {

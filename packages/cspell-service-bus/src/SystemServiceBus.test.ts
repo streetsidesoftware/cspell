@@ -1,13 +1,15 @@
-import { assert } from './assert';
-import type { RequestResponseType } from './request';
-import { createResponse, createResponseFail, isServiceResponseFailure, isServiceResponseSuccess } from './request';
-import { requestFactory } from './requestFactory';
-import type { ServiceRequestFactory } from './ServiceRequestFactory';
+import { describe, expect, test } from 'vitest';
+
+import { assert } from './assert.js';
+import type { RequestResponseType } from './request.js';
+import { createResponse, createResponseFail, isServiceResponseFailure, isServiceResponseSuccess } from './request.js';
+import { requestFactory } from './requestFactory.js';
+import type { ServiceRequestFactory } from './ServiceRequestFactory.js';
 import {
     createSystemServiceBus,
     RequestCreateSubsystemFactory,
     RequestRegisterHandlerFactory,
-} from './SystemServiceBus';
+} from './SystemServiceBus.js';
 
 const TypeRequestFsReadFile = 'fs:readFile' as const;
 const RequestFsReadFile = requestFactory<typeof TypeRequestFsReadFile, { readonly uri: string }, string>(

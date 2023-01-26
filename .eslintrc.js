@@ -45,7 +45,7 @@ const config = {
     plugins: ['import', 'unicorn', 'simple-import-sort'],
     overrides: [
         {
-            files: '**/*.ts',
+            files: ['**/*.ts', '**/*.mts'],
             extends: ['plugin:@typescript-eslint/recommended', 'plugin:import/typescript'],
             parser: '@typescript-eslint/parser',
             plugins: ['@typescript-eslint'],

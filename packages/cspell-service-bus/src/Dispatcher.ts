@@ -1,4 +1,4 @@
-import type { RequestResponseType, ServiceRequest } from './request';
+import type { RequestResponseType, ServiceRequest } from './request.js';
 
 export interface Dispatcher {
     dispatch<R extends ServiceRequest>(request: R): RequestResponseType<R>;
