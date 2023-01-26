@@ -57,5 +57,14 @@ const configs = [
         ],
         plugins,
     },
+    {
+        ...common,
+        input: 'src/Parser/index.ts',
+        output: [
+            { ...common.output, file: 'dist/cjs/Parser/index.cjs', format: 'cjs' },
+            // { ...common.output, file: pkg.module, format: 'es' },
+        ],
+        plugins,
+    },
 ];
 export default configs;

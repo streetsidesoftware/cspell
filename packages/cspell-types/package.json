@@ -6,21 +6,18 @@
   "version": "6.19.2",
   "description": "Types for cspell and cspell-lib",
   "type": "module",
-  "main": "dist/cjs/index.cjs",
-  "module": "dist/esm/index.js",
-  "typings": "dist/esm/index.d.ts",
+  "main": "./dist/cjs/index.cjs",
+  "module": "./dist/esm/index.js",
   "exports": {
     ".": {
       "import": "./dist/esm/index.js",
-      "require": "./dist/csj/index.cjs"
+      "types": "./dist/esm/index.d.ts",
+      "require": "./dist/cjs/index.cjs"
     },
     "./Parser": {
-      "import": "./dist/esm/Parser.js",
-      "require": "./dist/csj/Parser.cjs"
-    },
-    "./Parser.js": {
-      "import": "./dist/esm/Parser.js",
-      "require": "./dist/csj/Parser.js"
+      "import": "./dist/esm/Parser/index.js",
+      "types": "./dist/esm/Parser/index.d.ts",
+      "require": "./dist/cjs/Parser/index.cjs"
     },
     "./cspell.schema.json": {
       "import": "./cspell.schema.json",
@@ -32,6 +29,24 @@
     },
     "./ajv.config.js": {
       "require": "./ajv.config.cjs"
+    }
+  },
+  "types": "index.d.ts",
+  "typesVersions": {
+    "*": {
+      "index.d.ts": [
+        "dist/esm/index.d.ts"
+      ],
+      "dist/esm/index.d.ts": [
+        "dist/esm/index.d.ts"
+      ],
+      "Parser": [
+        "dist/esm/Parser/index.d.ts"
+      ],
+      "*": [
+        "dist/esm/*.d.ts",
+        "dist/esm/*/index.d.ts"
+      ]
     }
   },
   "scripts": {

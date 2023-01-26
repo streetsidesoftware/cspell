@@ -1,6 +1,6 @@
 import type { DictionaryDefinition, DictionaryReference } from './DictionaryDefinition.js';
 import type { Features } from './features.js';
-import type { Parser, ParserName } from './Parser.js';
+import type { Parser, ParserName } from './Parser/index.js';
 import type { Serializable } from './types.js';
 
 /**
