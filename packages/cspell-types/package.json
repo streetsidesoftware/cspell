@@ -5,39 +5,49 @@
   },
   "version": "6.19.2",
   "description": "Types for cspell and cspell-lib",
-  "type": "commonjs",
-  "main": "dist/index.js",
-  "typings": "dist/index.d.ts",
-  "typesVersions": {
-    "*": {
-      "*": [
-        "dist/*"
-      ],
-      "dist/index.d.ts": [
-        "dist/index.d.ts"
-      ],
-      "index.d.ts": [
-        "dist/index.d.ts"
-      ]
-    }
-  },
+  "type": "module",
+  "main": "dist/cjs/index.cjs",
+  "module": "dist/esm/index.js",
+  "typings": "dist/esm/index.d.ts",
   "exports": {
-    ".": "./dist/index.js",
-    "./Parser": "./dist/Parser.js",
-    "./Parser.js": "./dist/Parser.js",
-    "./cspell.schema.json": "./cspell.schema.json",
-    "./ajv.config": "./ajv.config.js",
-    "./ajv.config.js": "./ajv.config.js"
+    ".": {
+      "import": "./dist/esm/index.js",
+      "require": "./dist/csj/index.cjs"
+    },
+    "./Parser": {
+      "import": "./dist/esm/Parser.js",
+      "require": "./dist/csj/Parser.cjs"
+    },
+    "./Parser.js": {
+      "import": "./dist/esm/Parser.js",
+      "require": "./dist/csj/Parser.js"
+    },
+    "./cspell.schema.json": {
+      "import": "./cspell.schema.json",
+      "require": "./cspell.schema.json"
+    },
+    "./ajv.config": {
+      "import": "./ajv.config.cjs",
+      "require": "./ajv.config.cjs"
+    },
+    "./ajv.config.js": {
+      "require": "./ajv.config.cjs"
+    }
   },
   "scripts": {
     "clean": "shx rm -rf dist coverage .tsbuildinfo",
-    "build": "pnpm run compile && pnpm run build-schema",
-    "build-dev": "tsc -p tsconfig.dev.json",
+    "build": "pnpm build:cjs && pnpm build:esm && pnpm run build-schema",
+    "build:cjs": "rollup -c rollup.config.mjs",
+    "build:esm": "tsc -p tsconfig.esm.json",
+    "build:dev": "tsc -p tsconfig.dev.json",
     "build-schema": "ts-json-schema-generator --no-top-ref --path src/CSpellSettingsDef.ts --type CSpellSettings --validation-keywords markdownDescription  --validation-keywords scope --validation-keywords deprecated --validation-keywords deprecationMessage -o  ./cspell.schema.json && shx cp ./cspell.schema.json ../..",
     "clean-build": "pnpm run clean && pnpm run build",
-    "compile": "tsc -p .",
-    "test-schema": "ajv -s ./cspell.schema.json -d \"cspell.test.{json,yaml}\" -c ./ajv.config.js",
-    "test": "jest && pnpm run test-schema",
+    "coverage": "pnpm coverage:vitest && pnpm coverage:fix",
+    "coverage:vitest": "vitest run --coverage",
+    "coverage:fix": "nyc report --temp-dir \"$(pwd)/coverage\" --reporter lcov --report-dir \"$(pwd)/coverage\" --cwd ../..",
+    "test": "pnpm test:unit && pnpm test:schema",
+    "test:unit": "vitest run",
+    "test:schema": "ajv -s ./cspell.schema.json -d \"cspell.test.{json,yaml}\" -c ./ajv.config.cjs",
     "prepare": "echo Skip Building Types"
   },
   "repository": {
@@ -66,6 +76,7 @@
     "ajv-cli": "^5.0.0",
     "jest": "^29.4.0",
     "ts-json-schema-generator": "^1.2.0",
-    "typescript": "^4.9.4"
+    "typescript": "^4.9.4",
+    "vitest": "^0.28.2"
   }
 }

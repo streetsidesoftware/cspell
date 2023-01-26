@@ -1,4 +1,4 @@
-import type { SuggestionCostsDefs } from './suggestionCostsDef';
+import type { SuggestionCostsDefs } from './suggestionCostsDef.js';
 
 /**
  * Use by dictionary authors to help improve the quality of suggestions

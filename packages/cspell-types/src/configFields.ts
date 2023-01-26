@@ -1,4 +1,4 @@
-import type { CSpellUserSettings } from './CSpellSettingsDef';
+import type { CSpellUserSettings } from './CSpellSettingsDef.js';
 
 export type ConfigKeys = Exclude<keyof CSpellUserSettings, '$schema' | 'version' | 'id'>;
 

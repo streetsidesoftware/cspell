@@ -45,6 +45,8 @@ function getPlugins(tsconfig = 'tsconfig.esm.json') {
     ];
 }
 
+const plugins = getPlugins();
+
 /** @type {import('rollup').RollupOptions[]} */
 const configs = [
     {
@@ -53,7 +55,7 @@ const configs = [
             { ...common.output, file: pkg.main, format: 'cjs' },
             // { ...common.output, file: pkg.module, format: 'es' },
         ],
-        plugins: getPlugins(),
+        plugins,
     },
 ];
 export default configs;

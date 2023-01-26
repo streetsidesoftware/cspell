@@ -1,6 +1,6 @@
 // Using old-style of `type` exports because the new style breaks some integrations.
-export type { CSpellUserSettingsFields } from './configFields';
-export { ConfigFields } from './configFields';
+export type { CSpellUserSettingsFields } from './configFields.js';
+export { ConfigFields } from './configFields.js';
 export type {
     CSpellReporter,
     CSpellReporterModule,
@@ -21,8 +21,8 @@ export type {
     ResultEmitter,
     RunResult,
     SpellingErrorEmitter,
-} from './CSpellReporter';
-export { IssueType, MessageTypes } from './CSpellReporter';
+} from './CSpellReporter.js';
+export { IssueType, MessageTypes } from './CSpellReporter.js';
 export type {
     AdvancedCSpellSettings,
     AdvancedCSpellSettingsWithSourceTrace,
@@ -80,7 +80,7 @@ export type {
     VersionLatest,
     VersionLegacy,
     WorkspaceTrustSettings,
-} from './CSpellSettingsDef';
+} from './CSpellSettingsDef.js';
 export type {
     CustomDictionaryPath,
     CustomDictionaryScope,
@@ -99,10 +99,10 @@ export type {
     DictionaryReference,
     ReplaceEntry,
     ReplaceMap,
-} from './DictionaryDefinition';
-export type { CharacterSet, CharacterSetCosts, DictionaryInformation, EditCosts } from './DictionaryInformation';
-export type { Feature, Features } from './features';
-export type { ParsedText, Parser, ParseResult, ParserName, ParserOptions } from './Parser';
-export type { SuggestionCostMapDef, SuggestionCostsDefs } from './suggestionCostsDef';
-export type { MappedText } from './TextMap';
-export type { TextDocumentOffset, TextOffset } from './TextOffset';
+} from './DictionaryDefinition.js';
+export type { CharacterSet, CharacterSetCosts, DictionaryInformation, EditCosts } from './DictionaryInformation.js';
+export type { Feature, Features } from './features.js';
+export type { ParsedText, Parser, ParseResult, ParserName, ParserOptions } from './Parser.js';
+export type { SuggestionCostMapDef, SuggestionCostsDefs } from './suggestionCostsDef.js';
+export type { MappedText } from './TextMap.js';
+export type { TextDocumentOffset, TextOffset } from './TextOffset.js';

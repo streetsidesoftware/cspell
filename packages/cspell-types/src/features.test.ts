@@ -1,5 +1,7 @@
-import type { Feature, Features } from './features';
-import * as features from './features';
+import { describe, expect, test } from 'vitest';
+
+import type { Feature, Features } from './features.js';
+import * as features from './features.js';
 
 describe('features', () => {
     test('exports', () => {
