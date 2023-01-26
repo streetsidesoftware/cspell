@@ -1,5 +1,5 @@
+import { reduceAsync, reduceSync } from '@cspell/cspell-pipe';
 import { reduce } from '@cspell/cspell-pipe/sync/index.js';
-import { reduceSync, reduceAsync } from '@cspell/cspell-pipe';
 
 export function sumValues(numbers: Iterable<number>): number {
     return reduce(numbers, (a, b) => a + b, 0);

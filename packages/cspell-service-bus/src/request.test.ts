@@ -1,10 +1,12 @@
+import { describe, expect, test } from 'vitest';
+
 import {
     __testing__,
     isInstanceOfFn,
     isServiceResponseFailure,
     isServiceResponseSuccess,
-    ServiceRequest,
-} from './request';
+    ServiceRequestCls,
+} from './request.js';
 
 const { BaseServiceRequest } = __testing__;
 
@@ -31,10 +33,10 @@ describe('request', () => {
     });
 
     test.each`
-        request                                                | kind                  | expected
-        ${new ServiceRequest('ServiceRequestSync', undefined)} | ${BaseServiceRequest} | ${true}
-        ${new ServiceRequest('ServiceRequestSync', undefined)} | ${ServiceRequest}     | ${true}
-        ${{ type: 'static' }}                                  | ${BaseServiceRequest} | ${false}
+        request                                                   | kind                  | expected
+        ${new ServiceRequestCls('ServiceRequestSync', undefined)} | ${BaseServiceRequest} | ${true}
+        ${new ServiceRequestCls('ServiceRequestSync', undefined)} | ${ServiceRequestCls}  | ${true}
+        ${{ type: 'static' }}                                     | ${BaseServiceRequest} | ${false}
     `('isInstanceOfFn $request.type', ({ request, kind, expected }) => {
         const fn = isInstanceOfFn(kind);
         expect(fn(request)).toEqual(expected);

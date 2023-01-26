@@ -11,36 +11,10 @@
   "author": "Jason Dent <jason@streetsidesoftware.nl>",
   "homepage": "https://github.com/streetsidesoftware/cspell/tree/main/packages/cspell-service-bus#readme",
   "license": "MIT",
-  "main": "dist/index.js",
-  "directories": {
-    "dist": "dist"
-  },
-  "exports": {
-    ".": {
-      "require": "./dist/index.js"
-    },
-    "./*": {
-      "require": "./dist/*.js"
-    },
-    "./index": "./dist/index.js",
-    "./index.js": "./dist/index.js",
-    "./index.d.ts": "./dist/index.d.ts"
-  },
-  "typings": "dist/index.d.ts",
-  "typesVersions": {
-    "*": {
-      "index.d.ts": [
-        "dist/index.d.ts"
-      ],
-      "dist/index.d.ts": [
-        "dist/index.d.ts"
-      ],
-      "*": [
-        "dist/*",
-        "dist/*/index.d.ts"
-      ]
-    }
-  },
+  "type": "module",
+  "main": "dist/cjs/index.cjs",
+  "module": "dist/esm/index.js",
+  "types": "dist/types/index.d.ts",
   "files": [
     "dist",
     "!**/__mocks__",
@@ -50,14 +24,18 @@
     "!**/*.map"
   ],
   "scripts": {
-    "build": "tsc -p .",
-    "build-dev": "tsc -p tsconfig.dev.json",
+    "build": "pnpm run clean && pnpm run build:cjs && pnpm run build:esm && pnpm run build:types",
+    "build:cjs": "rollup -c rollup.config.mjs",
+    "build:esm": "tsc -p tsconfig.esm.json",
+    "build:types": "tsc --emitDeclarationOnly --declaration --declarationDir dist/types",
     "watch": "tsc -p . -w",
     "clean": "shx rm -rf dist coverage .tsbuildinfo",
     "clean-build": "pnpm run clean && pnpm run build",
-    "coverage": "jest --coverage",
-    "test-watch": "jest --watch",
-    "test": "jest"
+    "coverage": "pnpm coverage:vitest && pnpm coverage:fix",
+    "coverage:vitest": "vitest run --coverage",
+    "coverage:fix": "nyc report --temp-dir \"$(pwd)/coverage\" --reporter lcov --report-dir \"$(pwd)/coverage\" --cwd ../..",
+    "test-watch": "vitest --watch",
+    "test": "vitest run"
   },
   "repository": {
     "type": "git",
@@ -71,6 +49,6 @@
   },
   "devDependencies": {
     "@types/node": "^18.11.18",
-    "jest": "^29.4.0"
+    "vitest": "^0.28.2"
   }
 }

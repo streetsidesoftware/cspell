@@ -1,4 +1,6 @@
+/* eslint-disable node/no-extraneous-import */
 import type { Plugin } from 'rollup';
+
 import MagicString from './magic-string.mjs';
 
 const codeSnippet = `\

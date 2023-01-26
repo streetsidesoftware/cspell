@@ -1,6 +1,6 @@
-import type { Dispatcher } from './Dispatcher';
-import type { RequestResponseType, ServiceRequest } from './request';
-import type { ServiceRequestFactory, ServiceRequestFactoryRequestType } from './ServiceRequestFactory';
+import type { Dispatcher } from './Dispatcher.js';
+import type { RequestResponseType, ServiceRequest } from './request.js';
+import type { ServiceRequestFactory, ServiceRequestFactoryRequestType } from './ServiceRequestFactory.js';
 
 export type HandleRequestFn<R extends ServiceRequest> = (
     request: R,

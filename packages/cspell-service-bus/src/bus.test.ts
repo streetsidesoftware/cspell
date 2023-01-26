@@ -1,11 +1,13 @@
-import { createServiceBus } from './bus';
-import { createIsRequestHandler } from './createRequestHandler';
-import type { Dispatcher } from './Dispatcher';
-import type { Handler } from './handlers';
-import type { ServiceResponse } from './request';
-import { createResponse as response, ServiceRequest } from './request';
-import { requestFactory } from './requestFactory';
-import type { ServiceRequestFactoryRequestType } from './ServiceRequestFactory';
+import { describe, expect, test } from 'vitest';
+
+import { createServiceBus } from './bus.js';
+import { createIsRequestHandler } from './createRequestHandler.js';
+import type { Dispatcher } from './Dispatcher.js';
+import type { Handler } from './handlers.js';
+import type { ServiceRequest, ServiceResponse } from './request.js';
+import { createResponse as response, ServiceRequestCls } from './request.js';
+import { requestFactory } from './requestFactory.js';
+import type { ServiceRequestFactoryRequestType } from './ServiceRequestFactory.js';
 
 function calcFib(request: FibRequest): ServiceResponse<number> {
     let a = 0,
@@ -32,7 +34,7 @@ const StringLengthRequestFactory = requestFactory<'calc-string-length', { readon
     'calc-string-length'
 );
 
-class StringToUpperRequest extends ServiceRequest<'toUpper', { readonly str: string }, string> {
+class StringToUpperRequest extends ServiceRequestCls<'toUpper', { readonly str: string }, string> {
     constructor(readonly str: string) {
         super('toUpper', { str });
     }
@@ -41,13 +43,13 @@ class StringToUpperRequest extends ServiceRequest<'toUpper', { readonly str: str
     }
 }
 
-class DoNotHandleRequest extends ServiceRequest<'Do Not Handle', undefined, undefined> {
+class DoNotHandleRequest extends ServiceRequestCls<'Do Not Handle', undefined, undefined> {
     constructor() {
         super('Do Not Handle', undefined);
     }
 }
 
-class RetryAgainRequest extends ServiceRequest<'Retry Again Request', undefined, undefined> {
+class RetryAgainRequest extends ServiceRequestCls<'Retry Again Request', undefined, undefined> {
     constructor() {
         super('Retry Again Request', undefined);
     }
@@ -95,7 +97,7 @@ describe('Service Bus', () => {
         ${new StringToUpperRequest('hello')}                   | ${response('HELLO')}
         ${new DoNotHandleRequest()}                            | ${{ error: Error('Unhandled Request: Do Not Handle') }}
         ${new RetryAgainRequest()}                             | ${{ error: Error('Service Request Depth 10 Exceeded: Retry Again Request') }}
-        ${new ServiceRequest('throw', undefined)}              | ${{ error: Error('Unhandled Error in Handler: handlerThrowErrorOnRequest') }}
+        ${new ServiceRequestCls('throw', undefined)}           | ${{ error: Error('Unhandled Error in Handler: handlerThrowErrorOnRequest') }}
     `('serviceBus handle request: $request.type', ({ request, expected }) => {
         expect(bus.dispatch(request)).toEqual(expected);
     });

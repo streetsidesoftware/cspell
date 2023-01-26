@@ -1,8 +1,8 @@
-import type { Dispatcher } from './Dispatcher';
-import { ErrorServiceRequestDepthExceeded, ErrorUnhandledRequest, UnhandledHandlerError } from './errors';
-import type { Handler, HandleRequest, HandlerFn } from './handlers';
-import type { RequestResponseType, ServiceRequest } from './request';
-import { createResponseFail } from './request';
+import type { Dispatcher } from './Dispatcher.js';
+import { ErrorServiceRequestDepthExceeded, ErrorUnhandledRequest, UnhandledHandlerError } from './errors.js';
+import type { Handler, HandleRequest, HandlerFn } from './handlers.js';
+import type { RequestResponseType, ServiceRequest } from './request.js';
+import { createResponseFail } from './request.js';
 
 const MAX_DEPTH = 10;
 
