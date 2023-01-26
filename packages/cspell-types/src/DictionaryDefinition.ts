@@ -1,4 +1,4 @@
-import type { DictionaryInformation } from './DictionaryInformation';
+import type { DictionaryInformation } from './DictionaryInformation.js';
 
 export type DictionaryDefinition =
     | DictionaryDefinitionPreferred

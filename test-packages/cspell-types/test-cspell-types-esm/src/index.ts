@@ -6,12 +6,14 @@ import {
     MessageTypes,
 } from '@cspell/cspell-types';
 
+import { parserName } from './parser.js';
+
 export function gatherIssues(text: string): Issue[] {
     const issues: Issue[] = [];
 
     const emitMsg: MessageEmitter = (msg, mt) => {
         if (mt === MessageTypes.Debug) {
-            console.log(msg);
+            console.log(msg + parserName);
         }
     };
 

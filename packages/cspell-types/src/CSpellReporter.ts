@@ -1,4 +1,4 @@
-import type { TextDocumentOffset, TextOffset } from './TextOffset';
+import type { TextDocumentOffset, TextOffset } from './TextOffset.js';
 
 export interface Suggestion {
     /**

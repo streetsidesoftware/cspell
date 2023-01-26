@@ -1,7 +1,7 @@
-import type { DictionaryDefinition, DictionaryReference } from './DictionaryDefinition';
-import type { Features } from './features';
-import type { Parser, ParserName } from './Parser';
-import type { Serializable } from './types';
+import type { DictionaryDefinition, DictionaryReference } from './DictionaryDefinition.js';
+import type { Features } from './features.js';
+import type { Parser, ParserName } from './Parser/index.js';
+import type { Serializable } from './types.js';
 
 /**
  * These settings come from user and workspace settings.
