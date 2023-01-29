@@ -72,3 +72,17 @@ Tidelift will coordinate the fix and disclosure.
 | cspell | 4.x     | 10.x | Paid support only[^1] | 2022-05-01  |
 
 [^1]: [Support - Street Side Software](https://streetsidesoftware.com/support/#maintenance-agreements)
+
+<!--- @@inject: static/footer.md --->
+
+<br/>
+
+---
+
+<p align="center">
+Brought to you by <a href="https://streetsidesoftware.com" title="Street Side Software">
+<img width="16" alt="Street Side Software Logo" src="https://i.imgur.com/CyduuVY.png" /> Street Side Software
+</a>
+</p>
+
+<!--- @@inject-end: static/footer.md --->
