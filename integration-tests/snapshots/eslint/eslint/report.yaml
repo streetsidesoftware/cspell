@@ -3,9 +3,9 @@ Repository: eslint/eslint
 Url: https://github.com/eslint/eslint
 Args: ["**","--exclude=bin/**","--exclude=CHANGELOG.md","--exclude=_data","--exclude=tests/bench/large.js","--exclude=docs/src/_includes","--exclude=docs/src/assets/{fonts,s?css,images}"]
 Summary:
-  files: 1823
-  filesWithIssues: 1231
-  issues: 5414
+  files: 1825
+  filesWithIssues: 1232
+  issues: 5418
   errors: 0
 Errors: []
 
@@ -51,12 +51,12 @@ issues:
   - "docs/src/assets/scss/docs.scss:119:44   	Csvg    	U   	data:image/svg+xml,%3Csvg width='45' height='"
   - "docs/src/assets/scss/docs.scss:119:216  	Cpath   	U   	fill='%23ECFDF3'/%3E%3Cpath d='M30.5 16L19.5 27L"
   - "docs/src/assets/scss/docs.scss:119:339  	Crect   	U   	linejoin='round'/%3E%3Crect x='1.5' y='1' width"
-  - "docs/src/assets/scss/docs.scss:147:6    	anchorjs	U   	.anchorjs-link {"
+  - "docs/src/assets/scss/docs.scss:156:6    	anchorjs	U   	.anchorjs-link {"
   - "docs/src/assets/scss/syntax-highlighter.scss:88:8       	atrule  	U   	.token.atrule,"
   - "docs/src/assets/scss/syntax-highlighter.scss:123:39     	nums    	U   	variant-numeric: tabular-nums;"
   - "docs/src/assets/scss/tokens/typography.scss:67:10   	Twemoji 	U   	\"Twemoji Country Flags\","
-  - "docs/src/contribute/architecture/index.md:64:264    	espree      	U   	the given text with `espree` (or whatever the configured"
-  - "docs/src/contribute/architecture/index.md:66:29     	estraverse  	U   	the AST is available, `estraverse` is used to traverse"
+  - "docs/src/contribute/architecture/index.md:66:264    	espree      	U   	the given text with `espree` (or whatever the configured"
+  - "docs/src/contribute/architecture/index.md:68:29     	estraverse  	U   	the AST is available, `estraverse` is used to traverse"
   - "docs/src/contribute/governance.md:73:35     	committership   	U   	important to recognize that committership is a privilege, not"
   - "docs/src/contribute/governance.md:87:106    	triaging        	U   	the project through triaging of issues, fixing bugs"
   - "docs/src/contribute/governance.md:150:64    	Tweetdeck       	U   	ESLint Twitter Account on Tweetdeck"
@@ -66,29 +66,28 @@ issues:
   - "docs/src/contribute/package-json-conventions.md:16:87   	preprepare  	U   	ostinstall\" / \"prepublish\" / \"preprepare\" / \"prepare\" / \"postprepare"
   - "docs/src/contribute/package-json-conventions.md:16:114  	postprepare 	U   	preprepare\" / \"prepare\" / \"postprepare\" / \"prepack\" / \"postpack"
   - "docs/src/contribute/package-json-conventions.md:16:142  	postpack    	U   	postprepare\" / \"prepack\" / \"postpack\" / \"prepublishOnly\""
-  - "docs/src/contribute/propose-new-rule.md:41:149  	roadmap 	U   	focus on the overall roadmap. Once a rule is accepted"
-  - "docs/src/contribute/work-on-issue.md:12:588     	bikeshedding	U   	evaluating`, and/or `needs bikeshedding`, and issues that cannot"
-  - "docs/src/extend/code-path-analysis.md:361:5     	hoge	U   	hoge();"
-  - "docs/src/extend/code-path-analysis.md:406:9     	fuga	U   	fuga();"
+  - "docs/src/contribute/propose-new-rule.md:45:149  	roadmap 	U   	focus on the overall roadmap. Once a rule is accepted"
+  - "docs/src/contribute/work-on-issue.md:16:588     	bikeshedding	U   	evaluating`, and/or `needs bikeshedding`, and issues that cannot"
+  - "docs/src/extend/code-path-analysis.md:383:5     	hoge	U   	hoge();"
+  - "docs/src/extend/code-path-analysis.md:432:9     	fuga	U   	fuga();"
   - "docs/src/extend/custom-formatters.md:56:9       	eslintformatter 	U   	* `\"eslintformatter\"`"
   - "docs/src/extend/custom-formatters.md:94:29      	Gruntfile       	U   	filePath: \"/path/to/Gruntfile.js\","
   - "docs/src/extend/custom-formatters.md:249:14     	concat          	U   	.concat(summary.warnings)"
   - "docs/src/extend/custom-formatters.md:389:61     	Guake           	U   	www.iterm2.com/) or [Guake](http://guake-project"
   - "docs/src/extend/custom-parsers.md:57:44     	rewritable  	U   	of all nodes must be rewritable. ESLint sets each node"
+  - "docs/src/extend/custom-processors.md:21:13      	preprocess  	U   	preprocess: function(text, filename"
+  - "docs/src/extend/custom-processors.md:32:13      	postprocess 	U   	postprocess: function(messages,"
+  - "docs/src/extend/custom-processors.md:41:21      	Autofix     	U   	supportsAutofix: true // (optional,"
+  - "docs/src/extend/custom-processors.md:67:37      	autofixes   	U   	ESLint will not perform autofixes when a processor is"
+  - "docs/src/extend/custom-processors.md:69:107     	autofixable 	U   	reported problems. All autofixable problems will have a"
   - "docs/src/extend/custom-rules-deprecated.md:153:4    	endraw      	U   	{% endraw %}"
   - "docs/src/extend/custom-rules-deprecated.md:442:36   	doublequote 	U   	[\"Strings must use doublequote.\"]"
   - "docs/src/extend/custom-rules-deprecated.md:533:1    	camelcase   	U   	camelcase |"
   - "docs/src/extend/custom-rules-deprecated.md:580:81   	rulesdir    	U   	interface) using the `--rulesdir` option to specify the"
   - "docs/src/extend/custom-rules.md:435:79  	multipass   	U   	without triggering multipass fixes. Each suggestion"
-  - "docs/src/extend/plugins.md:4:23     	plugings    	U   	key: working with plugings"
   - "docs/src/extend/plugins.md:33:46    	unprefixed  	U   	ESLint, you would use the unprefixed plugin name, followed"
   - "docs/src/extend/plugins.md:33:162   	myplugin    	U   	named `eslint-plugin-myplugin`, then in your configuration"
-  - "docs/src/extend/plugins.md:67:13    	preprocess  	U   	preprocess: function(text, filename"
-  - "docs/src/extend/plugins.md:78:13    	postprocess 	U   	postprocess: function(messages,"
-  - "docs/src/extend/plugins.md:87:21    	Autofix     	U   	supportsAutofix: true // (optional,"
-  - "docs/src/extend/plugins.md:113:37   	autofixes   	U   	ESLint will not perform autofixes when a processor is"
-  - "docs/src/extend/plugins.md:115:107  	autofixable 	U   	reported problems. All autofixable problems will have a"
-  - "docs/src/extend/plugins.md:242:4    	eslintplugin	U   	* `eslintplugin`"
+  - "docs/src/extend/plugins.md:153:4    	eslintplugin	U   	* `eslintplugin`"
   - "docs/src/extend/scope-manager-interface.md:6:125    	escope      	U   	eslint-scope), a fork of [escope](https://github.com"
   - "docs/src/extend/scope-manager-interface.md:218:100  	redeclared  	U   	If this variable is redeclared, this array includes"
   - "docs/src/extend/selectors.md:54:58      	esquery 	U   	were adapted from the [esquery](https://github.com"
@@ -397,6 +396,7 @@ issues:
   - "README.md:292:5     	sponsorsstart   	U   	<!--sponsorsstart-->"
   - "README.md:295:127   	RIDI            	U   	dcf3/logo.png\" alt=\"RIDI\" height=\"96\"></a> <a"
   - "README.md:297:243   	Nrwl            	U   	logo.png\" alt=\"Nx (by Nrwl)\" height=\"32\"></a>"
+  - "README.md:297:850   	Transloadit     	U   	com/u/125754?v=4\" alt=\"Transloadit\" height=\"32\"></a> <a"
   - "README.md:298:5     	sponsorsend     	U   	<!--sponsorsend-->"
   - "templates/blogpost.md.ejs:8:5       	eslintbot   	U   	- eslintbot"
   - "templates/blogpost.md.ejs:18:10     	linkify     	U   	function linkify(line) {"
