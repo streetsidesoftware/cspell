@@ -3,7 +3,7 @@ Repository: eslint/eslint
 Url: "https://github.com/eslint/eslint"
 Args: ["**","--exclude=bin/**","--exclude=CHANGELOG.md","--exclude=_data","--exclude=tests/bench/large.js","--exclude=docs/src/_includes","--exclude=docs/src/assets/{fonts,s?css,images}"]
 Lines:
- CSpell: Files checked: 1823, Issues found: 5414 in 1231 files
+ CSpell: Files checked: 1825, Issues found: 5418 in 1232 files
  exit code: 1
 ./LICENSE:1:58      - Unknown word (openjsf)    -- other contributors, <www.openjsf.org>
 ./Makefile.js:145:88    - Unknown word (ined)               -- followed by the string "ined".
@@ -30,6 +30,7 @@ Lines:
 ./README.md:292:5     - Unknown word (sponsorsstart) -- <!--sponsorsstart-->
 ./README.md:295:127   - Unknown word (RIDI)          -- dcf3/logo.png" alt="RIDI" height="96"></a> <a
 ./README.md:297:243   - Unknown word (Nrwl)          -- logo.png" alt="Nx (by Nrwl)" height="32"></a>
+./README.md:297:850   - Unknown word (Transloadit)   -- com/u/125754?v=4" alt="Transloadit" height="32"></a> <a
 ./README.md:298:5     - Unknown word (sponsorsend)   -- <!--sponsorsend-->
 ./conf/config-schema.js:14:5      - Unknown word (fileoverview) -- * @fileoverview Defines a schema for
 ./conf/config-schema.js:8:63      - Unknown word (nzakas)     -- file, please contact @nzakas first.
@@ -72,12 +73,12 @@ Lines:
 ./docs/src/assets/scss/docs.scss:119:216   - Unknown word (Cpath)      -- fill='%23ECFDF3'/%3E%3Cpath d='M30.5 16L19.5 27L
 ./docs/src/assets/scss/docs.scss:119:339   - Unknown word (Crect)      -- linejoin='round'/%3E%3Crect x='1.5' y='1' width
 ./docs/src/assets/scss/docs.scss:119:44    - Unknown word (Csvg)       -- data:image/svg+xml,%3Csvg width='45' height='
-./docs/src/assets/scss/docs.scss:147:6     - Unknown word (anchorjs)   -- .anchorjs-link {
+./docs/src/assets/scss/docs.scss:156:6     - Unknown word (anchorjs)   -- .anchorjs-link {
 ./docs/src/assets/scss/syntax-highlighter.scss:123:39    - Unknown word (nums)       -- variant-numeric: tabular-nums;
 ./docs/src/assets/scss/syntax-highlighter.scss:88:8      - Unknown word (atrule)     -- .token.atrule,
 ./docs/src/assets/scss/tokens/typography.scss:67:10     - Unknown word (Twemoji)    -- "Twemoji Country Flags",
-./docs/src/contribute/architecture/index.md:64:264    - Unknown word (espree)     -- the given text with `espree` (or whatever the configured
-./docs/src/contribute/architecture/index.md:66:29     - Unknown word (estraverse) -- the AST is available, `estraverse` is used to traverse
+./docs/src/contribute/architecture/index.md:66:264    - Unknown word (espree)     -- the given text with `espree` (or whatever the configured
+./docs/src/contribute/architecture/index.md:68:29     - Unknown word (estraverse) -- the AST is available, `estraverse` is used to traverse
 ./docs/src/contribute/governance.md:150:64    - Unknown word (Tweetdeck)     -- ESLint Twitter Account on Tweetdeck
 ./docs/src/contribute/governance.md:73:35     - Unknown word (committership) -- important to recognize that committership is a privilege, not
 ./docs/src/contribute/governance.md:87:106    - Unknown word (triaging)      -- the project through triaging of issues, fixing bugs
@@ -87,29 +88,28 @@ Lines:
 ./docs/src/contribute/package-json-conventions.md:16:142    - Unknown word (postpack)    -- postprepare" / "prepack" / "postpack" / "prepublishOnly"
 ./docs/src/contribute/package-json-conventions.md:16:29     - Unknown word (preinstall) -- cycle = "prepare" / "preinstall" / "install" / "postinstall
 ./docs/src/contribute/package-json-conventions.md:16:87     - Unknown word (preprepare) -- ostinstall" / "prepublish" / "preprepare" / "prepare" / "postprepare
-./docs/src/contribute/propose-new-rule.md:41:149    - Unknown word (roadmap)    -- focus on the overall roadmap. Once a rule is accepted
-./docs/src/contribute/work-on-issue.md:12:588    - Unknown word (bikeshedding) -- evaluating`, and/or `needs bikeshedding`, and issues that cannot
-./docs/src/extend/code-path-analysis.md:361:5     - Unknown word (hoge)       -- hoge();
-./docs/src/extend/code-path-analysis.md:406:9     - Unknown word (fuga)       -- fuga();
+./docs/src/contribute/propose-new-rule.md:45:149    - Unknown word (roadmap)    -- focus on the overall roadmap. Once a rule is accepted
+./docs/src/contribute/work-on-issue.md:16:588    - Unknown word (bikeshedding) -- evaluating`, and/or `needs bikeshedding`, and issues that cannot
+./docs/src/extend/code-path-analysis.md:383:5     - Unknown word (hoge)       -- hoge();
+./docs/src/extend/code-path-analysis.md:432:9     - Unknown word (fuga)       -- fuga();
 ./docs/src/extend/custom-formatters.md:249:14    - Unknown word (concat)          -- .concat(summary.warnings)
 ./docs/src/extend/custom-formatters.md:389:61    - Unknown word (Guake)           -- www.iterm2.com/) or [Guake](http://guake-project
 ./docs/src/extend/custom-formatters.md:56:9      - Unknown word (eslintformatter) -- * `"eslintformatter"`
 ./docs/src/extend/custom-formatters.md:94:29     - Unknown word (Gruntfile)       -- filePath: "/path/to/Gruntfile.js",
 ./docs/src/extend/custom-parsers.md:57:44     - Unknown word (rewritable) -- of all nodes must be rewritable. ESLint sets each node
+./docs/src/extend/custom-processors.md:21:13     - Unknown word (preprocess) -- preprocess: function(text, filename
+./docs/src/extend/custom-processors.md:32:13     - Unknown word (postprocess) -- postprocess: function(messages,
+./docs/src/extend/custom-processors.md:41:21     - Unknown word (Autofix)     -- supportsAutofix: true // (optional,
+./docs/src/extend/custom-processors.md:67:37     - Unknown word (autofixes)   -- ESLint will not perform autofixes when a processor is
+./docs/src/extend/custom-processors.md:69:107    - Unknown word (autofixable) -- reported problems. All autofixable problems will have a
 ./docs/src/extend/custom-rules-deprecated.md:153:4     - Unknown word (endraw)     -- {% endraw %}
 ./docs/src/extend/custom-rules-deprecated.md:442:36    - Unknown word (doublequote) -- ["Strings must use doublequote."]
 ./docs/src/extend/custom-rules-deprecated.md:533:1     - Unknown word (camelcase)   -- camelcase |
 ./docs/src/extend/custom-rules-deprecated.md:580:81    - Unknown word (rulesdir)    -- interface) using the `--rulesdir` option to specify the
 ./docs/src/extend/custom-rules.md:435:79    - Unknown word (multipass)  -- without triggering multipass fixes. Each suggestion
-./docs/src/extend/plugins.md:113:37    - Unknown word (autofixes)   -- ESLint will not perform autofixes when a processor is
-./docs/src/extend/plugins.md:115:107   - Unknown word (autofixable) -- reported problems. All autofixable problems will have a
-./docs/src/extend/plugins.md:242:4     - Unknown word (eslintplugin) -- * `eslintplugin`
+./docs/src/extend/plugins.md:153:4     - Unknown word (eslintplugin) -- * `eslintplugin`
 ./docs/src/extend/plugins.md:33:162    - Unknown word (myplugin)   -- named `eslint-plugin-myplugin`, then in your configuration
 ./docs/src/extend/plugins.md:33:46     - Unknown word (unprefixed) -- ESLint, you would use the unprefixed plugin name, followed
-./docs/src/extend/plugins.md:4:23      - Unknown word (plugings)   -- key: working with plugings
-./docs/src/extend/plugins.md:67:13     - Unknown word (preprocess) -- preprocess: function(text, filename
-./docs/src/extend/plugins.md:78:13     - Unknown word (postprocess) -- postprocess: function(messages,
-./docs/src/extend/plugins.md:87:21     - Unknown word (Autofix)     -- supportsAutofix: true // (optional,
 ./docs/src/extend/scope-manager-interface.md:218:100   - Unknown word (redeclared) -- If this variable is redeclared, this array includes
 ./docs/src/extend/scope-manager-interface.md:6:125     - Unknown word (escope)     -- eslint-scope), a fork of [escope](https://github.com
 ./docs/src/extend/selectors.md:140:405   - Unknown word (Fpath)      -- so: `[value=/some\u002Fpath/]`.

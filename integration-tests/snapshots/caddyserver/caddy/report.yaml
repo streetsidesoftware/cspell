@@ -5,7 +5,7 @@ Args: ["**/*.go"]
 Summary:
   files: 225
   filesWithIssues: 208
-  issues: 3486
+  issues: 3489
   errors: 0
 Errors: []
 
@@ -88,18 +88,18 @@ issues:
   - "caddyconfig/httpcaddyfile/httptype.go:30:43     	caddypki    	U   	caddyserver/caddy/v2/modules/caddypki\""
   - "caddyconfig/httpcaddyfile/httptype.go:258:5     	annnd       	U   	// annnd the top-level config"
   - "caddyconfig/httpcaddyfile/httptype.go:280:12    	Cvtr        	U   	if storageCvtr, ok := options[\"storage"
-  - "caddyconfig/httpcaddyfile/httptype.go:643:11    	cval        	U   	for _, cval := range sblock.pile"
-  - "caddyconfig/httpcaddyfile/httptype.go:665:17    	reqs        	U   	// not log reqs to any host unless it"
-  - "caddyconfig/httpcaddyfile/httptype.go:1130:3    	hostm       	U   	hostm caddyhttp.MatchHost"
-  - "caddyconfig/httpcaddyfile/httptype.go:1131:3    	pathm       	U   	pathm caddyhttp.MatchPath"
-  - "caddyconfig/httpcaddyfile/httptype.go:1301:5    	hostport    	U   	\"{hostport}\", \"{http.request.hostport"
-  - "caddyconfig/httpcaddyfile/httptype.go:1383:25   	unexported  	U   	Mostly borrowed from unexported method in caddyhttp"
-  - "caddyconfig/httpcaddyfile/httptype.go:1390:3    	laddrs      	U   	laddrs, err := caddy.ParseNetworkAdd"
+  - "caddyconfig/httpcaddyfile/httptype.go:654:11    	cval        	U   	for _, cval := range sblock.pile"
+  - "caddyconfig/httpcaddyfile/httptype.go:676:17    	reqs        	U   	// not log reqs to any host unless it"
+  - "caddyconfig/httpcaddyfile/httptype.go:1141:3    	hostm       	U   	hostm caddyhttp.MatchHost"
+  - "caddyconfig/httpcaddyfile/httptype.go:1142:3    	pathm       	U   	pathm caddyhttp.MatchPath"
+  - "caddyconfig/httpcaddyfile/httptype.go:1312:5    	hostport    	U   	\"{hostport}\", \"{http.request.hostport"
+  - "caddyconfig/httpcaddyfile/httptype.go:1394:25   	unexported  	U   	Mostly borrowed from unexported method in caddyhttp"
+  - "caddyconfig/httpcaddyfile/httptype.go:1401:3    	laddrs      	U   	laddrs, err := caddy.ParseNetworkAdd"
   - "caddyconfig/httpcaddyfile/options_test.go:17:22     	caddytest   	U   	// are present in: caddytest/integration/caddyfile"
   - "caddyconfig/httpcaddyfile/options.go:43:43      	ACMEDNS 	U   	\"acme_dns\", parseOptACMEDNS)"
   - "caddyconfig/httpcaddyfile/options.go:44:43      	ACMEEAB 	U   	\"acme_eab\", parseOptACMEEAB)"
   - "caddyconfig/httpcaddyfile/pkiapp.go:65:33   	CAID	U   	ID = caddypki.DefaultCAID"
-  - "caddyconfig/httpcaddyfile/serveroptions.go:156:5    	protos  	U   	protos := d.RemainingArgs("
+  - "caddyconfig/httpcaddyfile/serveroptions.go:166:5    	protos  	U   	protos := d.RemainingArgs("
   - "caddyconfig/httpcaddyfile/tlsapp.go:52:53   	hostless    	U   	server block with a hostless"
   - "caddyconfig/httpcaddyfile/tlsapp.go:55:22   	Hostless    	U   	httpsHostsSharedWithHostlessKey := make(map[string"
   - "caddyconfig/httpcaddyfile/tlsapp.go:197:38  	Tailscale   	U   	as desired (see the Tailscale listener plugin), so"
@@ -346,7 +346,7 @@ issues:
   - "modules/caddyhttp/tracing/tracer.go:12:53   	otlptracegrpc   	U   	exporters/otlp/otlptrace/otlptracegrpc\""
   - "modules/caddyhttp/tracing/tracer.go:15:2    	sdktrace        	U   	sdktrace \"go.opentelemetry.io"
   - "modules/caddyhttp/tracing/tracer.go:16:2    	semconv         	U   	semconv \"go.opentelemetry.io"
-  - "modules/caddyhttp/tracing/tracer.go:104:56  	Schemaless      	U   	Default(), resource.NewSchemaless("
+  - "modules/caddyhttp/tracing/tracer.go:110:56  	Schemaless      	U   	Default(), resource.NewSchemaless("
   - "modules/caddypki/acmeserver/acmeserver.go:15:9      	acmeserver  	U   	package acmeserver"
   - "modules/caddypki/acmeserver/acmeserver.go:30:14     	smallstep   	U   	\"github.com/smallstep/certificates/acme\""
   - "modules/caddypki/acmeserver/acmeserver.go:32:55     	nosql       	U   	certificates/acme/db/nosql\""

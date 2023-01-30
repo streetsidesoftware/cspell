@@ -3,7 +3,7 @@ Repository: RustPython/RustPython
 Url: "https://github.com/RustPython/RustPython.git"
 Args: ["**"]
 Lines:
- CSpell: Files checked: 683, Issues found: 4015 in 370 files
+ CSpell: Files checked: 683, Issues found: 4016 in 370 files
  exit code: 1
 ./Cargo.toml:18:44     - Unknown word (pylib)      -- derive", "jit", "vm", "pylib", "stdlib", "wasm/lib
 ./Cargo.toml:26:49     - Unknown word (flamescope) -- flame-it", "flame", "flamescope"]
@@ -339,6 +339,7 @@ Lines:
 ./extra_tests/snippets/protocol_index_bad.py:23:9      - Unknown word (delslice)   -- def run_delslice():
 ./extra_tests/snippets/stdlib_array.py:104:29    - Unknown word (enviroment) -- as 2 bytes character enviroment with CPython is failing
 ./extra_tests/snippets/stdlib_array.py:112:8     - Unknown word (arrayiterator) -- # test arrayiterator name
+./extra_tests/snippets/stdlib_array.py:116:3     - Unknown word (teset)         -- # teset array.__contains__
 ./extra_tests/snippets/stdlib_array.py:85:16     - Unknown word (frombytes)  -- def test_array_frombytes():
 ./extra_tests/snippets/stdlib_binascii.py:18:3      - Unknown word (unhexlify)  -- # unhexlify tests
 ./extra_tests/snippets/stdlib_binascii.py:47:33     - Unknown word (Ghvbg)      -- equal(dec_b64(b"UnVzdFB5dGhvbg==\n"), b"RustPython
@@ -547,15 +548,15 @@ Lines:
 ./stdlib/Cargo.toml:66:1      - Unknown word (puruspe)    -- puruspe = "0.1.5"
 ./stdlib/build.rs:25:39     - Unknown word (osslconf)   -- println!("cargo:rustc-cfg=osslconf=\"{conf}\"");
 ./stdlib/build.rs:8:39      - Unknown word (ossl)       -- println!("cargo:rustc-cfg=ossl101");
-./stdlib/src/array.rs:1134:48   - Unknown word (reconstructor) -- module.get_attr("_array_reconstructor", vm)?;
-./stdlib/src/array.rs:1326:12   - Unknown word (Reconstructor) -- struct ReconstructorArgs {
-./stdlib/src/array.rs:1328:9    - Unknown word (arraytype)     -- arraytype: PyTypeRef,
-./stdlib/src/array.rs:1332:9    - Unknown word (mformat)       -- mformat_code: MachineFormatCode
-./stdlib/src/array.rs:44:43     - Unknown word (scode)      -- $t:ty, $c:literal, $scode:literal)),*$(,)?) =
-./stdlib/src/array.rs:55:34     - Unknown word (typecode)   -- "bad typecode (must be b, B, u, h
-./stdlib/src/array.rs:781:12    - Unknown word (fromunicode) -- fn fromunicode(zelf: PyRef<Self>, obj
-./stdlib/src/array.rs:831:12    - Unknown word (fromfile)    -- fn fromfile(&self, f: PyObjectRef
-./stdlib/src/array.rs:925:12    - Unknown word (tolist)      -- fn tolist(&self, vm: &VirtualMachine
+./stdlib/src/array.rs:1162:48   - Unknown word (reconstructor) -- module.get_attr("_array_reconstructor", vm)?;
+./stdlib/src/array.rs:1371:12   - Unknown word (Reconstructor) -- struct ReconstructorArgs {
+./stdlib/src/array.rs:1373:9    - Unknown word (arraytype)     -- arraytype: PyTypeRef,
+./stdlib/src/array.rs:1377:9    - Unknown word (mformat)       -- mformat_code: MachineFormatCode
+./stdlib/src/array.rs:72:43     - Unknown word (scode)      -- $t:ty, $c:literal, $scode:literal)),*$(,)?) =
+./stdlib/src/array.rs:809:12    - Unknown word (fromunicode) -- fn fromunicode(zelf: PyRef<Self>, obj
+./stdlib/src/array.rs:83:34     - Unknown word (typecode)   -- "bad typecode (must be b, B, u, h
+./stdlib/src/array.rs:859:12    - Unknown word (fromfile)    -- fn fromfile(&self, f: PyObjectRef
+./stdlib/src/array.rs:953:12    - Unknown word (tolist)      -- fn tolist(&self, vm: &VirtualMachine
 ./stdlib/src/binascii.rs:102:15    - Unknown word (CRCTAB)     -- const CRCTAB_HQX: [u16; 256] = [
 ./stdlib/src/binascii.rs:209:28    - Unknown word (uuencodes)  -- // there are a few uuencodes out there that use
 ./stdlib/src/binascii.rs:254:28    - Unknown word (roken)      -- // roken case from broken python
