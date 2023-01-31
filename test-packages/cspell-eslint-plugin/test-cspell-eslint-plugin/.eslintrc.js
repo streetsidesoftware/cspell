@@ -22,10 +22,17 @@ const config = {
     },
     overrides: [
         {
-            files: '**/*.ts',
+            files: ['**/*.ts', '**/*.tsx'],
             extends: ['plugin:@typescript-eslint/recommended', 'plugin:import/typescript'],
             parser: '@typescript-eslint/parser',
             plugins: ['@typescript-eslint'],
+            parserOptions: {
+                ecmaFeatures: {
+                    jsx: true,
+                },
+                ecmaVersion: 2020,
+                sourceType: 'module',
+            },
             rules: {
                 '@typescript-eslint/no-unused-vars': ['error', { argsIgnorePattern: '^_', varsIgnorePattern: '^_' }],
                 'node/no-missing-import': [

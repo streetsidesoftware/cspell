@@ -365,12 +365,14 @@ importers:
       cspell-lib: workspace:*
       eslint: ^8.33.0
       eslint-plugin-react: ^7.32.2
+      estree-walker: ^2.0.2
       mocha: ^10.2.0
       rollup: ^3.12.0
       rollup-plugin-dts: ^5.1.1
       ts-json-schema-generator: ^1.2.0
     dependencies:
       cspell-lib: link:../cspell-lib
+      estree-walker: 2.0.2
     devDependencies:
       '@rollup/plugin-commonjs': 24.0.1_rollup@3.12.0
       '@rollup/plugin-json': 6.0.0_rollup@3.12.0
@@ -700,6 +702,7 @@ importers:
   test-packages/cspell-eslint-plugin/test-cspell-eslint-plugin:
     specifiers:
       '@cspell/eslint-plugin': workspace:*
+      '@types/react': ^18.0.27
       '@typescript-eslint/eslint-plugin': ^5.49.0
       '@typescript-eslint/parser': ^5.49.0
       eslint: ^8.33.0
@@ -710,9 +713,13 @@ importers:
       eslint-plugin-prettier: ^4.2.1
       eslint-plugin-promise: ^6.1.1
       prettier: ^2.8.3
+      react: ^17.0.2
       typescript: ^4.9.4
+    dependencies:
+      react: 17.0.2
     devDependencies:
       '@cspell/eslint-plugin': link:../../../packages/cspell-eslint-plugin
+      '@types/react': 18.0.27
       '@typescript-eslint/eslint-plugin': 5.49.0_rsaczafy73x3xqauzesvzbsgzy
       '@typescript-eslint/parser': 5.49.0_zkdaqh7it7uc4cvz2haft7rc6u
       eslint: 8.33.0
@@ -8569,7 +8576,6 @@ packages:
 
   /estree-walker/2.0.2:
     resolution: {integrity: sha512-Rfkk/Mp/DL7JVje3u18FxFujQlTNR2q6QfMSMB7AvCBx91NGj/ba3kCfza0f6dVDbw7YlRf/nDrn7pQrCCyQ/w==}
-    dev: true
 
   /esutils/2.0.3:
     resolution: {integrity: sha512-kVscqXk4OCp68SZ0dkgEKVi6/8ij300KBWTJq32P/dYeWTSwK41WyTxalN1eRmA5Z9UU/LX9D7FWSmV9SAYx6g==}
@@ -15354,7 +15360,7 @@ packages:
       '@babel/core': 7.20.12
       bs-logger: 0.2.6
       fast-json-stable-stringify: 2.1.0
-      jest: 29.4.1
+      jest: 29.4.1_@types+node@18.11.18
       jest-util: 29.4.1
       json5: 2.2.3
       lodash.memoize: 4.1.2

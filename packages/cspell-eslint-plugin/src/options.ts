@@ -18,6 +18,8 @@ export interface Options extends Check {
     debugMode?: boolean;
 }
 
+export type RequiredOptions = Required<Options>;
+
 export interface Check {
     /**
      * Ignore import and require names
@@ -103,14 +105,16 @@ export const defaultCheckOptions: Required<Check> = {
     ignoreImports: true,
 };
 
-export const defaultOptions: Required<Options> = {
+export const defaultOptions: RequiredOptions = {
     ...defaultCheckOptions,
     numSuggestions: 8,
     generateSuggestions: true,
     debugMode: false,
 };
 
-export function normalizeOptions(opts: Options | undefined): Required<Options> {
-    const options: Required<Options> = Object.assign({}, defaultOptions, opts || {});
+export type WorkerOptions = RequiredOptions & { cwd: string };
+
+export function normalizeOptions(opts: Options | undefined, cwd: string): WorkerOptions {
+    const options: WorkerOptions = Object.assign({}, defaultOptions, opts || {}, { cwd });
     return options;
 }

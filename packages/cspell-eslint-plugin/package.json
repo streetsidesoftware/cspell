@@ -36,7 +36,7 @@
     "build": "pnpm run build-schema && pnpm run build-rollup",
     "build-rollup": "rollup --config rollup.config.ts --configPlugin typescript",
     "build-schema": "ts-json-schema-generator --no-top-ref --expose none --path src/options.ts --type Options  -o  ./src/_auto_generated_/options.schema.json",
-    "watch": "pnpm run build-rollup -- --watch",
+    "watch": "pnpm run build-rollup --watch",
     "clean": "shx rm -rf dist coverage .tsbuildinfo",
     "clean-build": "pnpm run clean && pnpm run build",
     "coverage": "echo coverage",
@@ -72,6 +72,7 @@
     "ts-json-schema-generator": "^1.2.0"
   },
   "dependencies": {
-    "cspell-lib": "workspace:*"
+    "cspell-lib": "workspace:*",
+    "estree-walker": "^2.0.2"
   }
 }

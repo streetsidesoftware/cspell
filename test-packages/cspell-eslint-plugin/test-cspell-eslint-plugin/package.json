@@ -4,8 +4,8 @@
   "description": "Pure testing package for @cspell/eslint-plugin-cspell.",
   "private": true,
   "scripts": {
-    "eslint": "eslint -c .eslintrc.js .",
-    "test": "pnpm run eslint"
+    "test:eslint": "eslint -c .eslintrc.js .",
+    "test": "pnpm test:eslint"
   },
   "engines": {
     "node": ">=14"
@@ -16,6 +16,7 @@
   "keywords": [],
   "devDependencies": {
     "@cspell/eslint-plugin": "workspace:*",
+    "@types/react": "^18.0.27",
     "@typescript-eslint/eslint-plugin": "^5.49.0",
     "@typescript-eslint/parser": "^5.49.0",
     "eslint": "^8.33.0",
@@ -27,5 +28,8 @@
     "eslint-plugin-promise": "^6.1.1",
     "prettier": "^2.8.3",
     "typescript": "^4.9.4"
+  },
+  "dependencies": {
+    "react": "^17.0.2"
   }
 }
