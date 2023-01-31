@@ -1,1 +1,1 @@
-export { type LoadOptions, DictionaryLoader } from './DictionaryLoader';
+export { DictionaryLoader, type LoadOptions } from './DictionaryLoader';
