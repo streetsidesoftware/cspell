@@ -1,4 +1,4 @@
-import { readFile } from 'fs-extra';
+import { readFile } from 'fs/promises';
 
 import { resolveSample } from '../../test/samples';
 import * as Trie from '../index';

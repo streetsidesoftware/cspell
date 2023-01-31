@@ -1,4 +1,4 @@
-import * as fs from 'fs-extra';
+import { readdirSync } from 'fs';
 import { genSequence } from 'gensequence';
 import * as path from 'path';
 
@@ -131,8 +131,7 @@ describe('HunspellReader read dictionaries', function () {
 });
 
 describe('Validated loading all dictionaries in the `dictionaries` directory.', () => {
-    const dictionaries = fs
-        .readdirSync(DICTIONARY_LOCATIONS)
+    const dictionaries = readdirSync(DICTIONARY_LOCATIONS)
         .filter((dic) => !!dic.match(/\.aff$/))
         .map((base) => path.join(DICTIONARY_LOCATIONS, base));
     it('Make sure we found some sample dictionaries', () => {
