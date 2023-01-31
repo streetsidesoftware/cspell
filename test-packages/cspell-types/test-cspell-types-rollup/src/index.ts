@@ -1,9 +1,9 @@
 import {
     type Issue,
-    type MessageEmitter,
-    type SpellingErrorEmitter,
     IssueType,
+    type MessageEmitter,
     MessageTypes,
+    type SpellingErrorEmitter,
 } from '@cspell/cspell-types';
 
 export function gatherIssues(text: string): Issue[] {

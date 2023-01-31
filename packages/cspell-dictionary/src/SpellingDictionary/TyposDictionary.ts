@@ -12,7 +12,7 @@ import type {
     SpellingDictionaryOptions,
     SuggestOptions,
 } from './SpellingDictionary';
-import { type TypoEntry, type TyposDef, processEntriesToTyposDef } from './Typos';
+import { processEntriesToTyposDef, type TypoEntry, type TyposDef } from './Typos';
 import { extractAllSuggestions, extractIgnoreValues } from './Typos/util';
 
 interface Found {

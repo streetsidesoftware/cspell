@@ -3,7 +3,7 @@ import type { CSpellReporter, CSpellSettings, Glob, Issue, RunResult, TextDocume
 import { MessageTypes } from '@cspell/cspell-types';
 import chalk from 'chalk';
 import { findRepoRoot, GitIgnore } from 'cspell-gitignore';
-import { type GlobMatchOptions, type GlobPatternNormalized, type GlobPatternWithRoot, GlobMatcher } from 'cspell-glob';
+import { GlobMatcher, type GlobMatchOptions, type GlobPatternNormalized, type GlobPatternWithRoot } from 'cspell-glob';
 import type { Logger, ValidationIssue } from 'cspell-lib';
 import * as cspell from 'cspell-lib';
 import * as path from 'path';
