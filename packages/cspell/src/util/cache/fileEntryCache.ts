@@ -5,7 +5,7 @@
 export type { FileDescriptor } from 'file-entry-cache';
 import type { FileEntryCache as FecFileEntryCache } from 'file-entry-cache';
 import * as file_entry_cache from 'file-entry-cache';
-import * as fs from 'fs-extra';
+import { mkdirSync } from 'fs';
 import * as path from 'path';
 
 export type FileEntryCache = FecFileEntryCache;
@@ -13,7 +13,7 @@ export type FileEntryCache = FecFileEntryCache;
 export function createFromFile(pathToCache: string, useCheckSum: boolean, useRelative: boolean): FileEntryCache {
     const absPathToCache = path.resolve(pathToCache);
     const relDir = path.dirname(absPathToCache);
-    fs.mkdirpSync(relDir);
+    mkdirSync(relDir, { recursive: true });
     const create = wrap(() => file_entry_cache.createFromFile(absPathToCache, useCheckSum));
     const feCache = create();
     const cacheWrapper: FileEntryCache = {

@@ -1,4 +1,4 @@
-import { readFile } from 'fs-extra';
+import { readFile } from 'fs/promises';
 import { genSequence } from 'gensequence';
 import * as path from 'path';
 

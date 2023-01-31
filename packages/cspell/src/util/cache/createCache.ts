@@ -1,6 +1,6 @@
 import type { CacheSettings, CSpellSettings } from '@cspell/cspell-types';
 import assert from 'assert';
-import { stat } from 'fs-extra';
+import { stat } from 'fs/promises';
 import path from 'path';
 
 import { isError } from '../errors';

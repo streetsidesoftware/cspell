@@ -1,5 +1,5 @@
 import type { Issue, RunResult } from '@cspell/cspell-types';
-import * as fs from 'fs-extra';
+import * as fs from 'fs/promises';
 import * as path from 'path';
 import { resolve as r } from 'path';
 
@@ -221,7 +221,7 @@ describe('Linter File Caching', () => {
     `('lint caching with $root $comment', async ({ runs, root }: TestCase) => {
         const reporter = new InMemoryReporter();
         const cacheLocation = tempLocation('.cspellcache');
-        await fs.remove(cacheLocation).catch(() => undefined);
+        await fs.rm(cacheLocation, { recursive: true }).catch(() => undefined);
 
         for (const run of runs) {
             const { fileGlobs, options, expected } = run;

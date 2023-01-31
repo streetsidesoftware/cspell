@@ -1,5 +1,5 @@
 import assert from 'assert';
-import * as fs from 'fs-extra';
+import { readdirSync } from 'fs';
 import * as path from 'path';
 
 import { Aff, affWordToColoredString, asAffWord, compareAff, filterAff, flagsToString } from './aff';
@@ -196,8 +196,7 @@ describe('Test Aff', () => {
 
 describe('Validated loading all dictionaries in the `dictionaries` directory.', () => {
     function getDictionaries() {
-        return fs
-            .readdirSync(DICTIONARY_LOCATIONS)
+        return readdirSync(DICTIONARY_LOCATIONS)
             .filter((dic) => !!dic.match(/\.aff$/))
             .map((base) => path.join(DICTIONARY_LOCATIONS, base));
     }

@@ -1,5 +1,5 @@
 import assert from 'assert';
-import { readFile } from 'fs-extra';
+import { readFile } from 'fs/promises';
 import { decode } from 'iconv-lite';
 
 import { Aff } from './aff';

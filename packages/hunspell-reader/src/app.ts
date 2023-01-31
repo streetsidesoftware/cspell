@@ -1,6 +1,6 @@
 // cSpell:ignore findup
 import { program as commander } from 'commander';
-import * as fs from 'fs-extra';
+import { createWriteStream, openSync, writeSync } from 'fs';
 import type { Sequence } from 'gensequence';
 import { genSequence } from 'gensequence';
 
@@ -69,7 +69,7 @@ function appendRules(aff: AffWord): AffWord {
 function writeSeqToFile(seq: Sequence<string>, outFile: string | undefined): Promise<void> {
     return new Promise((resolve, reject) => {
         let resolved = false;
-        const out = outFile ? fs.createWriteStream(outFile) : process.stdout;
+        const out = outFile ? createWriteStream(outFile) : process.stdout;
         const bufferedSeq = genSequence(batch(seq, 500)).map((batch) => batch.join(''));
         const dataStream = iterableToStream(bufferedSeq);
         const fileStream = dataStream.pipe(out);
@@ -209,8 +209,8 @@ async function actionPrime(hunspellDicFilename: string, options: Options) {
     if (sort) {
         log('Sorting...');
         const data = words.toArray().sort().join('');
-        const fd = outputFile ? fs.openSync(outputFile, 'w') : 1;
-        fs.writeSync(fd, data);
+        const fd = outputFile ? openSync(outputFile, 'w') : 1;
+        writeSync(fd, data);
     } else {
         await writeSeqToFile(words, outputFile);
     }

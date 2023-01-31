@@ -1,7 +1,7 @@
 import type * as commander from 'commander';
 import * as Trie from 'cspell-trie-lib';
-import * as fs from 'fs-extra';
-import { mkdirp } from 'fs-extra';
+import { createWriteStream as fsCreateWriteStream } from 'fs';
+import * as fsp from 'fs/promises';
 import type { Sequence } from 'gensequence';
 import { genSequence } from 'gensequence';
 import * as path from 'path';
@@ -76,7 +76,7 @@ export function run(program: commander.Command, argv: string[]): Promise<command
 }
 
 async function fileToLines(filename: string): Promise<Sequence<string>> {
-    const buffer = await fs.readFile(filename);
+    const buffer = await fsp.readFile(filename);
     const file = (filename.match(/\.gz$/) ? zlib.gunzipSync(buffer) : buffer).toString(UTF8);
     return genSequence(file.split(/\r?\n/));
 }
@@ -84,7 +84,7 @@ async function fileToLines(filename: string): Promise<Sequence<string>> {
 function createWriteStream(filename?: string): Promise<NodeJS.WritableStream> {
     return !filename
         ? Promise.resolve(process.stdout)
-        : mkdirp(path.dirname(filename)).then(() => fs.createWriteStream(filename));
+        : fsp.mkdir(path.dirname(filename), { recursive: true }).then(() => fsCreateWriteStream(filename));
 }
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any

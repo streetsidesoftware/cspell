@@ -1,4 +1,4 @@
-import * as fs from 'fs-extra';
+import * as fs from 'fs/promises';
 import type { Sequence } from 'gensequence';
 import { genSequence } from 'gensequence';
 import { decode } from 'iconv-lite';

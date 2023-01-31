@@ -1,4 +1,4 @@
-import { readFile, writeFile } from 'fs-extra';
+import { readFile, writeFile } from 'fs/promises';
 import { genSequence } from 'gensequence';
 
 import { resolveSample as resolveSamplePath } from '../../test/samples';

@@ -1,4 +1,4 @@
-import * as fs from 'fs-extra';
+import * as fs from 'fs/promises';
 import * as zlib from 'zlib';
 
 import { resolveGlobalDict } from '../test/samples';
