@@ -1,13 +1,9 @@
 // cspell:ignore TSESTree
-import { refreshDictionaryCache } from 'cspell-lib';
 import type { Rule } from 'eslint';
-import * as path from 'path';
 
 import optionsSchema from './_auto_generated_/options.schema.json';
-import { addWordToCustomWordList } from './customWordList';
-import type { CustomWordListFile } from './options';
 import { normalizeOptions } from './options';
-import { type Issue, spellCheck, walkTree } from './worker';
+import { type Issue, spellCheck, walkTree } from './spellCheck';
 
 const schema = optionsSchema as unknown as Rule.RuleMetaData['schema'];
 
@@ -86,36 +82,9 @@ function create(context: Rule.RuleContext): Rule.RuleListener {
             };
         }
 
-        function createAddWordToDictionaryFix(word: string): Rule.SuggestionReportDescriptor | undefined {
-            if (!isCustomWordListFile(options.customWordListFile) || !options.customWordListFile.addWords) {
-                return undefined;
-            }
-
-            const dictFile = path.resolve(context.getCwd(), options.customWordListFile.path);
-
-            const data = { word, dictionary: path.basename(dictFile) };
-            const messageId: MessageIds = 'addWordToDictionary';
-
-            return {
-                messageId,
-                data,
-                fix: (_fixer) => {
-                    // This wrapper is a hack to delay applying the fix until it is actually used.
-                    // But it is not reliable, since ESLint + extension will randomly read the value.
-                    return new WrapFix({ range: [start, end], text: word }, () => {
-                        refreshDictionaryCache(0);
-                        addWordToCustomWordList(dictFile, word);
-                    });
-                },
-            };
-        }
-
         log('Suggestions: %o', issue.suggestions);
         const suggestions: Rule.ReportDescriptorOptions['suggest'] = issue.suggestions?.map(createSug);
-        const addWordFix = createAddWordToDictionaryFix(issue.word);
-
-        const suggest =
-            suggestions || addWordFix ? (suggestions || []).concat(addWordFix ? [addWordFix] : []) : undefined;
+        const suggest = suggestions;
 
         const des: Rule.ReportDescriptor = {
             messageId,
@@ -169,32 +138,3 @@ export const configs = {
         },
     },
 };
-
-/**
- * This wrapper is used to add a
- */
-class WrapFix implements Rule.Fix {
-    /**
-     *
-     * @param fix - the example Fix
-     * @param onGetText - called when `fix.text` is accessed
-     * @param limit - limit the number of times onGetText is called. Set it to `-1` for infinite.
-     */
-    constructor(private fix: Rule.Fix, private onGetText: () => void, private limit = 1) {}
-
-    get range() {
-        return this.fix.range;
-    }
-
-    get text() {
-        if (this.limit) {
-            this.limit--;
-            this.onGetText();
-        }
-        return this.fix.text;
-    }
-}
-
-function isCustomWordListFile(value: string | CustomWordListFile | undefined): value is CustomWordListFile {
-    return !!value && typeof value === 'object';
-}
