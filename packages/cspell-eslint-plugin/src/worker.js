@@ -1,3 +1,6 @@
+/* eslint-disable import/no-unresolved */
+/* eslint-disable node/no-missing-import */
+/* eslint-disable node/no-unsupported-features/es-syntax */
 // @ts-check
 
 /**
@@ -23,7 +26,6 @@ runAsWorker(
      */
     async (filename, text, root, options) => {
         if (!spellChecker) {
-            // eslint-disable-next-line node/no-unsupported-features/es-syntax
             spellChecker = await import('./spellCheck');
         }
 
