@@ -399,6 +399,12 @@ type PnPSettings = OptionalOrUndefined<PnPSettings$1>;
 declare const sectionCSpell = "cSpell";
 declare const defaultFileName = "cspell.json";
 declare const defaultConfigFilenames: readonly string[];
+/**
+ *
+ * @param searchFrom the directory / file to start searching from.
+ * @param pnpSettings - related to Using Yarn PNP.
+ * @returns the resulting settings
+ */
 declare function searchForConfig(searchFrom: string | undefined, pnpSettings?: PnPSettings): Promise<CSpellSettingsI$1 | undefined>;
 /**
  * Load a CSpell configuration files.
@@ -603,6 +609,13 @@ declare class DocumentValidator {
      */
     constructor(doc: TextDocument, options: DocumentValidatorOptions, settings: CSpellUserSettings);
     get ready(): boolean;
+    /**
+     * Prepare to validate a document.
+     * This will load all the necessary configuration and dictionaries.
+     *
+     * @deprecated
+     * @deprecationMessage Use the async `prepare` method.
+     */
     prepareSync(): void;
     prepare(): Promise<void>;
     private _prepareAsync;
