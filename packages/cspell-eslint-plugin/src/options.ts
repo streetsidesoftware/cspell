@@ -86,12 +86,6 @@ export interface CustomWordListFile {
      * File format: 1 word per line
      */
     path: CustomWordListFilePath;
-    /**
-     * **Experimental**: Provide a fix option to add words to the file.
-     *
-     * Note: this does not yet work perfectly.
-     */
-    addWords?: boolean;
 }
 
 export const defaultCheckOptions: Required<Check> = {

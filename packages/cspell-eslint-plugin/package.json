@@ -33,10 +33,10 @@
     "!**/*.map"
   ],
   "scripts": {
-    "build": "pnpm run build-schema && pnpm run build-rollup",
-    "build-rollup": "rollup --config rollup.config.ts --configPlugin typescript",
-    "build-schema": "ts-json-schema-generator --no-top-ref --expose none --path src/options.ts --type Options  -o  ./src/_auto_generated_/options.schema.json",
-    "watch": "pnpm run build-rollup --watch",
+    "build": "pnpm build:schema && pnpm build:src",
+    "build:src": "tsc -p .",
+    "build:schema": "ts-json-schema-generator --no-top-ref --expose none --path src/options.ts --type Options  -o  ./src/_auto_generated_/options.schema.json",
+    "watch": "tsc -p . --watch",
     "clean": "shx rm -rf dist coverage .tsbuildinfo",
     "clean-build": "pnpm run clean && pnpm run build",
     "coverage": "echo coverage",
@@ -54,10 +54,6 @@
     "node": ">=14"
   },
   "devDependencies": {
-    "@rollup/plugin-commonjs": "^24.0.1",
-    "@rollup/plugin-json": "^6.0.0",
-    "@rollup/plugin-node-resolve": "^15.0.1",
-    "@rollup/plugin-typescript": "^11.0.0",
     "@types/eslint": "^8.4.10",
     "@types/estree": "^1.0.0",
     "@types/node": "^18.11.18",
@@ -67,12 +63,11 @@
     "eslint": "^8.33.0",
     "eslint-plugin-react": "^7.32.2",
     "mocha": "^10.2.0",
-    "rollup": "^3.12.0",
-    "rollup-plugin-dts": "^5.1.1",
     "ts-json-schema-generator": "^1.2.0"
   },
   "dependencies": {
     "cspell-lib": "workspace:*",
-    "estree-walker": "^2.0.2"
+    "estree-walker": "^2.0.2",
+    "synckit": "^0.8.5"
   }
 }

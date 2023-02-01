@@ -4,15 +4,12 @@ import assert from 'assert';
 import type { CSpellSettings, TextDocument, ValidationIssue } from 'cspell-lib';
 import { createTextDocument, DocumentValidator, refreshDictionaryCache } from 'cspell-lib';
 import type { Comment, Identifier, ImportSpecifier, Literal, Node, TemplateElement } from 'estree';
-import { walk } from 'estree-walker';
 import * as path from 'path';
 import { format } from 'util';
 
+import type { ASTNode, JSXText } from './ASTNode';
 import type { CustomWordListFile, WorkerOptions } from './options';
-
-interface JSXText extends Omit<Literal, 'type'> {
-    type: 'JSXText';
-}
+import { walkTree } from './walkTree';
 
 export interface Issue {
     start: number;
@@ -21,8 +18,6 @@ export interface Issue {
     severity: 'Forbidden' | 'Unknown' | 'Hint';
     suggestions: string[] | undefined;
 }
-
-type ASTNode = (Node | Comment | JSXText) & { parent?: Node };
 
 const defaultSettings: CSpellSettings = {
     patterns: [
@@ -41,12 +36,16 @@ function log(...args: Parameters<typeof console.log>) {
     console.log(...args);
 }
 
-export function spellCheck(filename: string, text: string, root: Node, options: WorkerOptions): Issue[] {
+type SpellCheckFn = typeof spellCheck;
+
+export type SpellCheckSyncFn = (...p: Parameters<SpellCheckFn>) => Awaited<ReturnType<SpellCheckFn>>;
+
+export async function spellCheck(filename: string, text: string, root: Node, options: WorkerOptions): Promise<Issue[]> {
     const toIgnore = new Set<string>();
     const importedIdentifiers = new Set<string>();
     isDebugMode = options.debugMode || false;
     const validator = getDocValidator(filename, text, options);
-    validator.prepareSync();
+    await validator.prepare();
     const issues: Issue[] = [];
 
     function checkLiteral(node: Literal | ASTNode) {
@@ -372,19 +371,4 @@ function getTextDocument(filename: string, content: string): TextDocument {
 
 function isCustomWordListFile(value: string | CustomWordListFile | undefined): value is CustomWordListFile {
     return !!value && typeof value === 'object';
-}
-
-export function walkTree(node: ASTNode, enter: (node: ASTNode, parent: ASTNode | undefined, key: string) => void) {
-    const visited = new Set<object>();
-
-    walk(node, {
-        enter: function (node, parent, key) {
-            if (visited.has(node) || key === 'tokens') {
-                this.skip();
-                return;
-            }
-            visited.add(node);
-            enter(node as ASTNode, parent as ASTNode, key);
-        },
-    });
 }

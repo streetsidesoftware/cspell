@@ -78,7 +78,14 @@ export class DocumentValidator {
         return this._ready;
     }
 
-    prepareSync() {
+    /**
+     * Prepare to validate a document.
+     * This will load all the necessary configuration and dictionaries.
+     *
+     * @deprecated
+     * @deprecationMessage Use the async `prepare` method.
+     */
+    prepareSync(): void {
         // @todo
         // Determine doc settings.
         // Calc include ranges

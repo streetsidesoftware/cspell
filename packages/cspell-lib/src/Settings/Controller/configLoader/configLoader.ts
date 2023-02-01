@@ -390,6 +390,12 @@ function normalizeSearchForConfigResult(
     };
 }
 
+/**
+ *
+ * @param searchFrom the directory / file to start searching from.
+ * @param pnpSettings - related to Using Yarn PNP.
+ * @returns the resulting settings
+ */
 export function searchForConfig(
     searchFrom: string | undefined,
     pnpSettings: PnPSettings = defaultPnPSettings
@@ -401,6 +407,14 @@ export function searchForConfig(
     ).then((r) => (r.filepath ? r.config : undefined));
 }
 
+/**
+ *
+ * @param searchFrom the directory / file to start searching from.
+ * @param pnpSettings - related to Using Yarn PNP.
+ * @returns the resulting settings
+ * @deprecated
+ * @deprecationMessage Use `searchForConfig`. It is very difficult to support Sync files when settings include web requests.
+ */
 export function searchForConfigSync(
     searchFrom: string | undefined,
     pnpSettings: PnPSettings = defaultPnPSettings
