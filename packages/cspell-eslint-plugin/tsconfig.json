@@ -1,10 +1,11 @@
 {
     "extends": "./tsconfig.base.json",
     "compilerOptions": {
-        "pretty": true,
-        "module": "ES2020",
-        "rootDir": ".",
-        "noEmit": true
+        "rootDir": "./src",
+        "outDir": "./dist/",
+        "target": "ES2018"
     },
-    "exclude": ["fixtures/**"]
+    "include": [
+        "./src"
+    ]
 }
