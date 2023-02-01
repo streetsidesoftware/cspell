@@ -1,11 +1,15 @@
 // cspell:ignore TSESTree
 import type { Rule } from 'eslint';
+import { createSyncFn } from 'synckit';
 
 import optionsSchema from './_auto_generated_/options.schema.json';
 import { normalizeOptions } from './options';
-import { type Issue, spellCheck, walkTree } from './spellCheck';
+import type { Issue, SpellCheckSyncFn } from './spellCheck';
+import { walkTree } from './walkTree';
 
 const schema = optionsSchema as unknown as Rule.RuleMetaData['schema'];
+
+const spellCheck: SpellCheckSyncFn = createSyncFn(require.resolve('./worker'), undefined, 30000);
 
 interface PluginRules {
     ['spellchecker']: Rule.RuleModule;
