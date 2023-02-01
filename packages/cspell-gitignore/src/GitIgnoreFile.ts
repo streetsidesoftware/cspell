@@ -51,9 +51,9 @@ export class GitIgnoreFile {
     static parseGitignore(content: string, gitignoreFilename: string): GitIgnoreFile {
         const options = { root: path.dirname(gitignoreFilename) };
         const globs = content
-            .split('\n')
+            .split(/\r?\n/g)
             .map((glob, index) => ({
-                glob: glob.replace(/#.*/, '').trim(),
+                glob: glob.replace(/^#.*/, ''),
                 source: gitignoreFilename,
                 line: index + 1,
             }))

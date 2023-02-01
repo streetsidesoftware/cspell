@@ -17,13 +17,20 @@ describe('GitIgnoreFile', () => {
     });
 
     test.each`
-        file                                       | expected
-        ${__filename}                              | ${true}
-        ${path.join(__dirname, 'file.ts')}         | ${false}
-        ${path.join(__dirname, '../file.test.ts')} | ${false}
+        file                                             | expected
+        ${__filename}                                    | ${true}
+        ${path.join(__dirname, 'file.ts')}               | ${false}
+        ${path.join(__dirname, '../file.test.ts')}       | ${false}
+        ${path.join(__dirname, '/src/file.test.ts')}     | ${true}
+        ${path.join(__dirname, 'hello.py')}              | ${false}
+        ${path.join(__dirname, 'hello#')}                | ${true}
+        ${path.join(__dirname, '#tag')}                  | ${false}
+        ${path.join(__dirname, 'src/hidden#/source.py')} | ${true}
     `('isIgnored $file', ({ file, expected }) => {
         const gif = sampleGitIgnoreFile();
         expect(gif.isIgnored(file)).toBe(expected);
+        const gifWin = sampleGitIgnoreFileWin();
+        expect(gifWin.isIgnored(file)).toBe(expected);
     });
 
     test('loadGitIgnoreFile .gitignore', async () => {
@@ -34,6 +41,8 @@ describe('GitIgnoreFile', () => {
     test('getGlobs', () => {
         const gif = sampleGitIgnoreFile();
         expect(gif.getGlobs(__dirname).sort()).toEqual([
+            '**/*#',
+            '**/*#/**',
             '**/*.test.*',
             '**/*.test.*/**',
             '**/node_modules',
@@ -122,10 +131,15 @@ node_modules
 /temp
 /coverage/**
 
+*#
 `;
 
 function sampleGitIgnoreFile(): GitIgnoreFile {
     return GitIgnoreFile.parseGitignore(sampleGitIgnore, path.join(__dirname, '.gitignore'));
+}
+
+function sampleGitIgnoreFileWin(): GitIgnoreFile {
+    return GitIgnoreFile.parseGitignore(sampleGitIgnore.replace(/\r?\n/, '\r\n'), path.join(__dirname, '.gitignore'));
 }
 
 // function oc<T>(v: Partial<T>): T {
