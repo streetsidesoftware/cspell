@@ -18,6 +18,7 @@ export type {
     ProgressFileComplete,
     ProgressItem,
     ProgressTypes,
+    ReporterConfiguration,
     ResultEmitter,
     RunResult,
     SpellingErrorEmitter,

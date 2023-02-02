@@ -1,3 +1,4 @@
+import type { ReporterConfigurationBase } from './CSpellReporter.js';
 import type { DictionaryDefinition, DictionaryReference } from './DictionaryDefinition.js';
 import type { Features } from './features.js';
 import type { Parser, ParserName } from './Parser/index.js';
@@ -111,7 +112,16 @@ export interface FileSettings extends ExtendableSettings, CommandLineSettings {
     readonly?: boolean;
 
     /**
-     * Custom reporters configuration.
+     * Define which reports to use.
+     * `default` - is a special name for the default cli reporter.
+     *
+     * Examples:
+     * - `["default"]` - to use the default reporter
+     * - `["@cspell/cspell-json-reporter"]` - use the cspell JSON reporter.
+     * - `[["@cspell/cspell-json-reporter", { "outFile": "out.json" }]]`
+     * - `[ "default", ["@cspell/cspell-json-reporter", { "outFile": "out.json" }]]` - Use both the default reporter and the cspell-json-reporter.
+     *
+     * @default ["default"]
      */
     reporters?: ReporterSettings[];
 
@@ -226,28 +236,7 @@ export interface Settings extends ReportingConfiguration, BaseSetting, PnPSettin
     loadDefaultConfiguration?: boolean;
 }
 
-export interface ReportingConfiguration extends SuggestionsConfiguration {
-    /**
-     * The maximum number of problems to report in a file.
-     *
-     * @default 100
-     */
-    maxNumberOfProblems?: number;
-
-    /**
-     * The maximum number of times the same word can be flagged as an error in a file.
-     *
-     * @default 5
-     */
-    maxDuplicateProblems?: number;
-
-    /**
-     * The minimum length of a word before checking it against a dictionary.
-     *
-     * @default 4
-     */
-    minWordLength?: number;
-}
+export interface ReportingConfiguration extends ReporterConfigurationBase, SuggestionsConfiguration {}
 
 export interface SuggestionsConfiguration {
     /**
@@ -770,9 +759,29 @@ interface BaseSource {
 }
 
 /**
- * Reporter name or reporter name + reporter config.
+ * The module or path to the the reporter to load.
  */
-export type ReporterSettings = string | [string] | [string, Serializable];
+export type ReporterModuleName = string;
+
+/**
+ * Options to send to the reporter. These are defined by the reporter.
+ */
+export type ReporterOptions = Serializable;
+
+/**
+ * Declare a reporter to use.
+ *
+ * `default` - is a special name for the default cli reporter.
+ *
+ * Examples:
+ * - `"default"` - to use the default reporter
+ * - `"@cspell/cspell-json-reporter"` - use the cspell JSON reporter.
+ * - `["@cspell/cspell-json-reporter", { "outFile": "out.json" }]`
+ */
+export type ReporterSettings =
+    | ReporterModuleName
+    | [name: ReporterModuleName]
+    | [name: ReporterModuleName, options: ReporterOptions];
 
 /**
  * Experimental Configuration / Options

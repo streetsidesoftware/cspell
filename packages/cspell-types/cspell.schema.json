@@ -904,7 +904,7 @@
           "type": "number"
         },
         "maxNumberOfProblems": {
-          "default": 100,
+          "default": 10000,
           "description": "The maximum number of problems to report in a file.",
           "type": "number"
         },
@@ -1105,14 +1105,23 @@
       },
       "type": "array"
     },
+    "ReporterModuleName": {
+      "description": "The module or path to the the reporter to load.",
+      "type": "string"
+    },
+    "ReporterOptions": {
+      "$ref": "#/definitions/Serializable",
+      "description": "Options to send to the reporter. These are defined by the reporter."
+    },
     "ReporterSettings": {
       "anyOf": [
         {
-          "type": "string"
+          "$ref": "#/definitions/ReporterModuleName"
         },
         {
           "items": {
-            "type": "string"
+            "$ref": "#/definitions/ReporterModuleName",
+            "title": "name"
           },
           "maxItems": 1,
           "minItems": 1,
@@ -1121,10 +1130,12 @@
         {
           "items": [
             {
-              "type": "string"
+              "$ref": "#/definitions/ReporterModuleName",
+              "title": "name"
             },
             {
-              "$ref": "#/definitions/Serializable"
+              "$ref": "#/definitions/ReporterOptions",
+              "title": "options"
             }
           ],
           "maxItems": 2,
@@ -1132,7 +1143,7 @@
           "type": "array"
         }
       ],
-      "description": "Reporter name or reporter name + reporter config."
+      "description": "Declare a reporter to use.\n\n`default` - is a special name for the default cli reporter.\n\nExamples:\n- `\"default\"` - to use the default reporter\n- `\"@cspell/cspell-json-reporter\"` - use the cspell JSON reporter.\n- `[\"@cspell/cspell-json-reporter\", { \"outFile\": \"out.json\" }]`"
     },
     "Serializable": {
       "anyOf": [
@@ -1373,7 +1384,7 @@
       "type": "number"
     },
     "maxNumberOfProblems": {
-      "default": 100,
+      "default": 10000,
       "description": "The maximum number of problems to report in a file.",
       "type": "number"
     },
@@ -1434,7 +1445,10 @@
       "type": "boolean"
     },
     "reporters": {
-      "description": "Custom reporters configuration.",
+      "default": [
+        "default"
+      ],
+      "description": "Define which reports to use. `default` - is a special name for the default cli reporter.\n\nExamples:\n- `[\"default\"]` - to use the default reporter\n- `[\"@cspell/cspell-json-reporter\"]` - use the cspell JSON reporter.\n- `[[\"@cspell/cspell-json-reporter\", { \"outFile\": \"out.json\" }]]`\n- `[ \"default\", [\"@cspell/cspell-json-reporter\", { \"outFile\": \"out.json\" }]]` - Use both the default reporter and the cspell-json-reporter.",
       "items": {
         "$ref": "#/definitions/ReporterSettings"
       },

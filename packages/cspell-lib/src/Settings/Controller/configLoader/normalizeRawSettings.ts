@@ -57,6 +57,7 @@ export function normalizeReporters(settings: NormalizeReporters, pathToSettingsF
     const folder = path.dirname(pathToSettingsFile);
 
     function resolve(s: string): string {
+        if (s === 'default') return s;
         const r = resolveFile(s, folder);
         if (!r.found) {
             throw new Error(`Not found: "${s}"`);

@@ -19,6 +19,7 @@ import type { BaseOptions, LegacyOptions, LinterCliOptions, SuggestionOptions, T
 import { fixLegacy } from './options';
 import { simpleRepl } from './repl';
 import { fileInfoToDocument, readConfig, readFileInfo } from './util/fileHelper';
+import { finalizeReporter } from './util/reporters';
 import { readStdin } from './util/stdin';
 import { getTimeMeasurer } from './util/timer';
 import * as util from './util/util';
@@ -29,7 +30,11 @@ export type AppError = NodeJS.ErrnoException;
 
 export function lint(fileGlobs: string[], options: LinterCliOptions, reporter?: CSpellReporter): Promise<RunResult> {
     options = fixLegacy(options);
-    const cfg = new LintRequest(fileGlobs, options, reporter ?? getReporter({ ...options, fileGlobs }));
+    const cfg = new LintRequest(
+        fileGlobs,
+        options,
+        finalizeReporter(reporter) ?? getReporter({ ...options, fileGlobs })
+    );
     return runLint(cfg);
 }
 

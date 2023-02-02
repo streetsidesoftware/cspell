@@ -1,5 +1,4 @@
 import type {
-    CSpellReporter,
     Issue,
     MessageType,
     ProgressFileBegin,
@@ -14,6 +13,7 @@ import * as path from 'path';
 import { URI } from 'vscode-uri';
 
 import type { LinterCliOptions } from './options';
+import type { FinalizedReporter } from './util/reporters';
 
 const templateIssue = `{green $filename}:{yellow $row:$col} - $message ({red $text})`;
 const templateIssueWithSuggestions = `{green $filename}:{yellow $row:$col} - $message ({red $text}) Suggestions: {yellow [$suggestions]}`;
@@ -118,7 +118,7 @@ export interface ReporterOptions
     fileGlobs: string[];
 }
 
-export function getReporter(options: ReporterOptions): CSpellReporter {
+export function getReporter(options: ReporterOptions): FinalizedReporter {
     const issueTemplate = options.wordsOnly
         ? templateIssueWordsOnly
         : options.legacy
@@ -161,7 +161,7 @@ export function getReporter(options: ReporterOptions): CSpellReporter {
         }
         if (result.cachedFiles) {
             console.error(
-                'CSpell: Files checked: %d (%d from cache), Issues found: %d in %d files',
+                'CSpell\x3a Files checked: %d (%d from cache), Issues found: %d in %d files',
                 result.files,
                 result.cachedFiles,
                 result.issues,
@@ -171,7 +171,7 @@ export function getReporter(options: ReporterOptions): CSpellReporter {
         }
 
         console.error(
-            'CSpell: Files checked: %d, Issues found: %d in %d files',
+            'CSpell\x3a Files checked: %d, Issues found: %d in %d files',
             result.files,
             result.issues,
             result.filesWithIssues.size

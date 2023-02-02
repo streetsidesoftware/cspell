@@ -4,6 +4,15 @@ import { MessageTypes } from '@cspell/cspell-types';
 import { InMemoryReporter } from './InMemoryReporter';
 import { loadReporters, mergeReporters } from './reporters';
 
+const defaultReporter: CSpellReporter = {
+    issue: jest.fn(),
+    info: jest.fn(),
+    debug: jest.fn(),
+    error: jest.fn(),
+    progress: jest.fn(),
+    result: jest.fn(),
+};
+
 describe('mergeReporters', () => {
     it('processes a single reporter', async () => {
         const reporter = new InMemoryReporter();
@@ -23,7 +32,7 @@ describe('mergeReporters', () => {
 
     test('loadReporters', () => {
         const reporters: ReporterSettings[] = [['@cspell/cspell-json-reporter', { outFile: 'out.json' }]];
-        const loaded = loadReporters({ reporters });
+        const loaded = loadReporters({ reporters }, defaultReporter, {});
         expect(loaded).toEqual([expect.objectContaining({})]);
     });
 
@@ -34,23 +43,23 @@ describe('mergeReporters', () => {
         ${'@cspell/cspell-unknown-reporter'}   | ${"Failed to load reporter @cspell/cspell-unknown-reporter: Cannot find module '@cspell/cspell-unknown-reporter' from 'src/util/reporters.ts'"}
     `('loadReporters fail $reporter', ({ reporter, expected }) => {
         const reporters: ReporterSettings[] = [reporter];
-        const fn = () => loadReporters({ reporters });
+        const fn = () => loadReporters({ reporters }, defaultReporter, {});
         expect(fn).toThrow(expected);
     });
 });
 
 async function runReporter(reporter: CSpellReporter): Promise<void> {
-    reporter.debug('foo');
-    reporter.debug('bar');
+    reporter.debug?.('foo');
+    reporter.debug?.('bar');
 
-    reporter.error('something went wrong', new Error('oh geez'));
+    reporter.error?.('something went wrong', new Error('oh geez'));
 
-    reporter.info('some logs', MessageTypes.Info);
-    reporter.info('some warnings', MessageTypes.Warning);
-    reporter.info('some debug logs', MessageTypes.Debug);
+    reporter.info?.('some logs', MessageTypes.Info);
+    reporter.info?.('some warnings', MessageTypes.Warning);
+    reporter.info?.('some debug logs', MessageTypes.Debug);
 
     // cSpell:disable
-    reporter.issue({
+    reporter.issue?.({
         text: 'fulll',
         offset: 13,
         line: { text: 'This text is fulll of errrorrrs.', offset: 0 },
@@ -61,7 +70,7 @@ async function runReporter(reporter: CSpellReporter): Promise<void> {
     });
     // cSpell:enable
 
-    reporter.progress({
+    reporter.progress?.({
         type: 'ProgressFileComplete',
         fileNum: 1,
         fileCount: 1,
@@ -71,7 +80,7 @@ async function runReporter(reporter: CSpellReporter): Promise<void> {
         numErrors: 2,
     });
 
-    await reporter.result({
+    await reporter.result?.({
         files: 1,
         filesWithIssues: new Set(['text.txt']),
         issues: 2,
