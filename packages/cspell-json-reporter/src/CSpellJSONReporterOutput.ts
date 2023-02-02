@@ -15,19 +15,19 @@ export type CSpellJSONReporterOutput = {
     /**
      * CSpell execution logs
      */
-    info: Array<{ message: string; msgType: MessageType }>;
+    info?: Array<{ message: string; msgType: MessageType }>;
     /**
      * CSpell debug logs
      */
-    debug: Array<{ message: string }>;
+    debug?: Array<{ message: string }>;
     /**
      * CSpell error logs
      */
-    error: Array<{ message: string; error: ErrorLike }>;
+    error?: Array<{ message: string; error: ErrorLike }>;
     /**
      * CSpell file progress logs
      */
-    progress: Array<ProgressItem | ProgressFileComplete>;
+    progress?: Array<ProgressItem | ProgressFileComplete>;
     /**
      * Execution result
      */

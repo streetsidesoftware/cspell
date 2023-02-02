@@ -26,7 +26,7 @@ describe('getReporter', () => {
     });
 
     it('throws for invalid config', () => {
-        expect(() => getReporter({})).toThrowErrorMatchingSnapshot();
+        expect(() => getReporter({ outFile: {} })).toThrowErrorMatchingSnapshot();
     });
 
     it('saves json to file', async () => {
@@ -38,6 +38,21 @@ describe('getReporter', () => {
         expect(mockWriteFile.mock.calls[0][1]).toMatchSnapshot();
     });
 
+    it.each`
+        settings
+        ${undefined}
+        ${{ outFile: undefined }}
+        ${{ outFile: 'stdout' }}
+        ${{ outFile: 'stderr' }}
+    `('saves json to stdout/stderr $settings', async ({ settings }) => {
+        const stdout = jest.spyOn(console, 'log'); // .mockImplementation(() => undefined);
+        const stderr = jest.spyOn(console, 'error'); // .mockImplementation(() => undefined);
+        const reporter = getReporter(settings);
+        await runReporter(reporter);
+        expect(joinCalls(stderr.mock.calls)).toMatchSnapshot();
+        expect(joinCalls(stdout.mock.calls)).toMatchSnapshot();
+    });
+
     it('saves additional data', async () => {
         const reporter = getReporter({ outFile: 'out.json', verbose: true, debug: true, progress: true });
         await runReporter(reporter);
@@ -46,6 +61,11 @@ describe('getReporter', () => {
         expect(mockWriteFile.mock.calls[0][1]).toMatchSnapshot();
     });
 });
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+function joinCalls(calls: any[][]): string {
+    return calls.map((call) => call.join('<>')).join('\n');
+}
 
 async function runReporter(reporter: Required<CSpellReporter>): Promise<void> {
     reporter.debug('foo');

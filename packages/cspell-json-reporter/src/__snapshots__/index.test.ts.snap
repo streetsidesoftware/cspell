@@ -115,4 +115,192 @@ exports[`getReporter saves json to file 1`] = `
 }"
 `;
 
+exports[`getReporter saves json to stdout/stderr {"outFile": "stderr"} 1`] = `
+"{
+    "issues": [
+        {
+            "text": "fulll",
+            "offset": 13,
+            "line": {
+                "text": "This text is fulll of errrorrrs.",
+                "offset": 0
+            },
+            "row": 1,
+            "col": 14,
+            "uri": "text.txt",
+            "context": {
+                "text": "This text is fulll of errrorrrs.",
+                "offset": 0
+            }
+        }
+    ],
+    "info": [
+        {
+            "message": "some warnings",
+            "msgType": "Warning"
+        }
+    ],
+    "debug": [],
+    "error": [
+        {
+            "message": "something went wrong",
+            "error": {}
+        }
+    ],
+    "progress": [],
+    "result": {
+        "files": 1,
+        "filesWithIssues": [
+            "text.txt"
+        ],
+        "issues": 2,
+        "errors": 1,
+        "cachedFiles": 0
+    }
+}"
+`;
+
+exports[`getReporter saves json to stdout/stderr {"outFile": "stderr"} 2`] = `""`;
+
+exports[`getReporter saves json to stdout/stderr {"outFile": "stdout"} 1`] = `""`;
+
+exports[`getReporter saves json to stdout/stderr {"outFile": "stdout"} 2`] = `
+"{
+    "issues": [
+        {
+            "text": "fulll",
+            "offset": 13,
+            "line": {
+                "text": "This text is fulll of errrorrrs.",
+                "offset": 0
+            },
+            "row": 1,
+            "col": 14,
+            "uri": "text.txt",
+            "context": {
+                "text": "This text is fulll of errrorrrs.",
+                "offset": 0
+            }
+        }
+    ],
+    "info": [
+        {
+            "message": "some warnings",
+            "msgType": "Warning"
+        }
+    ],
+    "debug": [],
+    "error": [
+        {
+            "message": "something went wrong",
+            "error": {}
+        }
+    ],
+    "progress": [],
+    "result": {
+        "files": 1,
+        "filesWithIssues": [
+            "text.txt"
+        ],
+        "issues": 2,
+        "errors": 1,
+        "cachedFiles": 0
+    }
+}"
+`;
+
+exports[`getReporter saves json to stdout/stderr {"outFile": undefined} 1`] = `""`;
+
+exports[`getReporter saves json to stdout/stderr {"outFile": undefined} 2`] = `
+"{
+    "issues": [
+        {
+            "text": "fulll",
+            "offset": 13,
+            "line": {
+                "text": "This text is fulll of errrorrrs.",
+                "offset": 0
+            },
+            "row": 1,
+            "col": 14,
+            "uri": "text.txt",
+            "context": {
+                "text": "This text is fulll of errrorrrs.",
+                "offset": 0
+            }
+        }
+    ],
+    "info": [
+        {
+            "message": "some warnings",
+            "msgType": "Warning"
+        }
+    ],
+    "debug": [],
+    "error": [
+        {
+            "message": "something went wrong",
+            "error": {}
+        }
+    ],
+    "progress": [],
+    "result": {
+        "files": 1,
+        "filesWithIssues": [
+            "text.txt"
+        ],
+        "issues": 2,
+        "errors": 1,
+        "cachedFiles": 0
+    }
+}"
+`;
+
+exports[`getReporter saves json to stdout/stderr undefined 1`] = `""`;
+
+exports[`getReporter saves json to stdout/stderr undefined 2`] = `
+"{
+    "issues": [
+        {
+            "text": "fulll",
+            "offset": 13,
+            "line": {
+                "text": "This text is fulll of errrorrrs.",
+                "offset": 0
+            },
+            "row": 1,
+            "col": 14,
+            "uri": "text.txt",
+            "context": {
+                "text": "This text is fulll of errrorrrs.",
+                "offset": 0
+            }
+        }
+    ],
+    "info": [
+        {
+            "message": "some warnings",
+            "msgType": "Warning"
+        }
+    ],
+    "debug": [],
+    "error": [
+        {
+            "message": "something went wrong",
+            "error": {}
+        }
+    ],
+    "progress": [],
+    "result": {
+        "files": 1,
+        "filesWithIssues": [
+            "text.txt"
+        ],
+        "issues": 2,
+        "errors": 1,
+        "cachedFiles": 0
+    }
+}"
+`;
+
 exports[`getReporter throws for invalid config 1`] = `"cspell-json-reporter settings.outFile must be a string"`;

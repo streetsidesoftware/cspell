@@ -1,4 +1,4 @@
-import type { CSpellReporter } from '@cspell/cspell-types';
+import type { CSpellReporter, ReporterConfiguration } from '@cspell/cspell-types';
 import { MessageTypes } from '@cspell/cspell-types';
 import { promises as fs } from 'fs';
 import * as path from 'path';
@@ -14,49 +14,75 @@ function mkdirp(p: string) {
 
 const noopReporter = () => undefined;
 
-export function getReporter(settings: unknown | CSpellJSONReporterSettings): Required<CSpellReporter> {
-    validateSettings(settings);
-    const reportData: Omit<CSpellJSONReporterOutput, 'result'> = {
-        issues: [],
-        info: [],
-        debug: [],
-        error: [],
-        progress: [],
-    };
+const STDOUT = 'stdout';
+const STDERR = 'stderr';
+
+type Data = Omit<CSpellJSONReporterOutput, 'result'>;
+
+export function getReporter(
+    settings: unknown | CSpellJSONReporterSettings,
+    cliOptions?: ReporterConfiguration
+): Required<CSpellReporter> {
+    const useSettings = normalizeSettings(settings);
+    const reportData: Data = { issues: [], info: [], debug: [], error: [], progress: [] };
     return {
         issue: (issue) => {
             reportData.issues.push(issue);
         },
         info: (message, msgType) => {
-            if (msgType === MessageTypes.Debug && !settings.debug) {
+            if (msgType === MessageTypes.Debug && !useSettings.debug) {
                 return;
             }
-            if (msgType === MessageTypes.Info && !settings.verbose) {
+            if (msgType === MessageTypes.Info && !useSettings.verbose) {
                 return;
             }
-            reportData.info.push({ message, msgType });
+            reportData.info = push(reportData.info, { message, msgType });
         },
-        debug: settings.debug
+        debug: useSettings.debug
             ? (message) => {
-                  reportData.debug.push({ message });
+                  reportData.debug = push(reportData.debug, { message });
               }
             : noopReporter,
         error: (message, error) => {
-            reportData.error.push({ message, error });
+            reportData.error = push(reportData.error, { message, error });
         },
-        progress: settings.progress
+        progress: useSettings.progress
             ? (item) => {
-                  reportData.progress.push(item);
+                  reportData.progress = push(reportData.progress, item);
               }
             : noopReporter,
         result: async (result) => {
-            const outFilePath = path.join(process.cwd(), settings.outFile);
+            const outFile = useSettings.outFile || STDOUT;
             const output = {
                 ...reportData,
                 result,
             };
+            const jsonData = JSON.stringify(output, setToJSONReplacer, 4);
+            if (outFile === STDOUT) {
+                console.log(jsonData);
+                return;
+            }
+            if (outFile === STDERR) {
+                console.error(jsonData);
+                return;
+            }
+            const outFilePath = path.join(cliOptions?.root ?? process.cwd(), outFile);
             await mkdirp(path.dirname(outFilePath));
-            return fs.writeFile(outFilePath, JSON.stringify(output, setToJSONReplacer, 4));
+            return fs.writeFile(outFilePath, jsonData);
         },
     };
+}
+
+function normalizeSettings(settings: unknown | CSpellJSONReporterSettings): CSpellJSONReporterSettings {
+    if (settings === undefined) return { outFile: STDOUT };
+    validateSettings(settings);
+    return settings;
+}
+
+function push<T>(src: T[] | undefined, value: T): T[] {
+    if (src) {
+        src.push(value);
+        return src;
+    }
+    return [value];
 }
