@@ -37,10 +37,10 @@ describe('mergeReporters', () => {
     });
 
     test.each`
-        reporter                               | expected
-        ${['@cspell/cspell-json-reporter']}    | ${'Failed to load reporter @cspell/cspell-json-reporter: cspell-json-reporter settings must be an object'}
-        ${['@cspell/cspell-unknown-reporter']} | ${"Failed to load reporter @cspell/cspell-unknown-reporter: Cannot find module '@cspell/cspell-unknown-reporter' from 'src/util/reporters.ts'"}
-        ${'@cspell/cspell-unknown-reporter'}   | ${"Failed to load reporter @cspell/cspell-unknown-reporter: Cannot find module '@cspell/cspell-unknown-reporter' from 'src/util/reporters.ts'"}
+        reporter                                   | expected
+        ${['@cspell/cspell-json-reporter', false]} | ${'Failed to load reporter @cspell/cspell-json-reporter: cspell-json-reporter settings must be an object'}
+        ${['@cspell/cspell-unknown-reporter']}     | ${"Failed to load reporter @cspell/cspell-unknown-reporter: Cannot find module '@cspell/cspell-unknown-reporter' from 'src/util/reporters.ts'"}
+        ${'@cspell/cspell-unknown-reporter'}       | ${"Failed to load reporter @cspell/cspell-unknown-reporter: Cannot find module '@cspell/cspell-unknown-reporter' from 'src/util/reporters.ts'"}
     `('loadReporters fail $reporter', ({ reporter, expected }) => {
         const reporters: ReporterSettings[] = [reporter];
         const fn = () => loadReporters({ reporters }, defaultReporter, {});
