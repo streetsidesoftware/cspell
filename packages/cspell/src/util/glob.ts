@@ -114,10 +114,13 @@ export function extractGlobsFromMatcher(globMatcher: GlobMatcher): string[] {
 }
 
 export function normalizeGlobsToRoot(globs: Glob[], root: string, isExclude: boolean): string[] {
-    return extractGlobsFromMatcher(buildGlobMatcher(globs, root, isExclude));
+    const urls = globs.filter((g): g is string => typeof g === 'string' && isPossibleUrlRegExp.test(g));
+    const onlyGlobs = globs.filter((g) => typeof g !== 'string' || !isPossibleUrlRegExp.test(g));
+    return [urls, extractGlobsFromMatcher(buildGlobMatcher(onlyGlobs, root, isExclude))].flatMap((a) => a);
 }
 
 const isPossibleGlobRegExp = /[*{}()?[]/;
+const isPossibleUrlRegExp = /^[-a-z_0-9]{3,}:\/\//;
 
 /**
  * If a 'glob' is a path to a directory, then append `**` so that
@@ -140,6 +143,10 @@ async function adjustPossibleDirectory(glob: Glob, root: string): Promise<Glob> 
 
     // Do not ask the file system to look up obvious glob patterns.
     if (isPossibleGlobRegExp.test(g.glob)) {
+        return glob;
+    }
+
+    if (isPossibleUrlRegExp.test(g.glob)) {
         return glob;
     }
 
