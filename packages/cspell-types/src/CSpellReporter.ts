@@ -158,6 +158,10 @@ interface ReporterCommandLineOptions {
      * unique errors per file only.
      */
     unique?: boolean;
+    /**
+     * root directory, defaults to `cwd`
+     */
+    root?: string;
 }
 
 export interface ReporterConfiguration extends ReporterCommandLineOptions, ReporterConfigurationBase {}

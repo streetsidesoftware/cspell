@@ -37,7 +37,52 @@ or `cspell.json`
 - `info` - CSpell execution logs if `settings.verbose` is enabled
 - `debug` - CSpell debug logs if `settings.debug` is enabled
 
-See [CSpellJSONReporterOutput](https://github.com/streetsidesoftware/cspell/blob/main/packages/cspell-json-reporter/src/CSpellJSONReporterOutput.ts) for more info.
+<details>
+<summary>JSON Output Definition</summary>
+
+<!--- @@inject: src/CSpellJSONReporterOutput.ts --->
+
+```ts
+import type {
+  ErrorLike,
+  Issue,
+  MessageType,
+  ProgressFileComplete,
+  ProgressItem,
+  RunResult,
+} from '@cspell/cspell-types';
+
+export type CSpellJSONReporterOutput = {
+  /**
+   * Found spelling issues
+   */
+  issues: Array<Issue>;
+  /**
+   * CSpell execution logs
+   */
+  info: Array<{ message: string; msgType: MessageType }>;
+  /**
+   * CSpell debug logs
+   */
+  debug: Array<{ message: string }>;
+  /**
+   * CSpell error logs
+   */
+  error: Array<{ message: string; error: ErrorLike }>;
+  /**
+   * CSpell file progress logs
+   */
+  progress: Array<ProgressItem | ProgressFileComplete>;
+  /**
+   * Execution result
+   */
+  result: RunResult;
+};
+```
+
+<!--- @@inject-end: src/CSpellJSONReporterOutput.ts --->
+
+</details>
 
 ## Settings
 
@@ -48,4 +93,38 @@ Possible settings:
 - `debug` (default: false) - enable saving of debug logs
 - `progress` (default: false) - enable saving of file progress logs
 
-See [CSpellJSONReporterSettings](https://github.com/streetsidesoftware/cspell/blob/main/packages/cspell-json-reporter/src/CSpellJSONReporterSettings.ts) for more info.
+<details>
+<summary>Reporter Settings</summary>
+
+<!--- @@inject: src/CSpellJSONReporterSettings.ts --->
+
+```ts
+/**
+ * CSpell-json-reporter settings type definition
+ */
+export type CSpellJSONReporterSettings = {
+  /**
+   * Output JSON file path
+   */
+  outFile: string;
+  /**
+   * Add more information about the files being checked and the configuration
+   * @default false
+   */
+  verbose?: boolean;
+  /**
+   * Add information useful for debugging cspell.json files
+   * @default false
+   */
+  debug?: boolean;
+  /**
+   * Add progress messages
+   * @default false
+   */
+  progress?: boolean;
+};
+```
+
+<!--- @@inject-end: src/CSpellJSONReporterSettings.ts --->
+
+</details>
