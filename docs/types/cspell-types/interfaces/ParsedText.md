@@ -23,7 +23,7 @@ Used to delegate parsing the contents of `text` to another parser.
 
 #### Defined in
 
-[Parser/index.ts:51](https://github.com/streetsidesoftware/cspell/blob/d85344c/packages/cspell-types/src/Parser/index.ts#L51)
+[Parser/index.ts:51](https://github.com/streetsidesoftware/cspell/blob/5bd8203/packages/cspell-types/src/Parser/index.ts#L51)
 
 ___
 
@@ -37,7 +37,7 @@ See: SourceMap
 
 #### Defined in
 
-[Parser/index.ts:46](https://github.com/streetsidesoftware/cspell/blob/d85344c/packages/cspell-types/src/Parser/index.ts#L46)
+[Parser/index.ts:46](https://github.com/streetsidesoftware/cspell/blob/5bd8203/packages/cspell-types/src/Parser/index.ts#L46)
 
 ___
 
@@ -49,7 +49,7 @@ start and end offsets of the text
 
 #### Defined in
 
-[Parser/index.ts:34](https://github.com/streetsidesoftware/cspell/blob/d85344c/packages/cspell-types/src/Parser/index.ts#L34)
+[Parser/index.ts:34](https://github.com/streetsidesoftware/cspell/blob/5bd8203/packages/cspell-types/src/Parser/index.ts#L34)
 
 ___
 
@@ -61,7 +61,7 @@ The raw text before it has been transformed
 
 #### Defined in
 
-[Parser/index.ts:30](https://github.com/streetsidesoftware/cspell/blob/d85344c/packages/cspell-types/src/Parser/index.ts#L30)
+[Parser/index.ts:30](https://github.com/streetsidesoftware/cspell/blob/5bd8203/packages/cspell-types/src/Parser/index.ts#L30)
 
 ___
 
@@ -75,7 +75,7 @@ based upon the value of the scope.
 
 #### Defined in
 
-[Parser/index.ts:40](https://github.com/streetsidesoftware/cspell/blob/d85344c/packages/cspell-types/src/Parser/index.ts#L40)
+[Parser/index.ts:40](https://github.com/streetsidesoftware/cspell/blob/5bd8203/packages/cspell-types/src/Parser/index.ts#L40)
 
 ___
 
@@ -87,4 +87,4 @@ The text extracted and possibly transformed
 
 #### Defined in
 
-[Parser/index.ts:26](https://github.com/streetsidesoftware/cspell/blob/d85344c/packages/cspell-types/src/Parser/index.ts#L26)
+[Parser/index.ts:26](https://github.com/streetsidesoftware/cspell/blob/5bd8203/packages/cspell-types/src/Parser/index.ts#L26)

@@ -27,7 +27,7 @@ Define cache settings.
 
 #### Defined in
 
-[CSpellSettingsDef.ts:351](https://github.com/streetsidesoftware/cspell/blob/d85344c/packages/cspell-types/src/CSpellSettingsDef.ts#L351)
+[CSpellSettingsDef.ts:340](https://github.com/streetsidesoftware/cspell/blob/5bd8203/packages/cspell-types/src/CSpellSettingsDef.ts#L340)
 
 ___
 
@@ -43,4 +43,4 @@ false
 
 #### Defined in
 
-[CSpellSettingsDef.ts:356](https://github.com/streetsidesoftware/cspell/blob/d85344c/packages/cspell-types/src/CSpellSettingsDef.ts#L356)
+[CSpellSettingsDef.ts:345](https://github.com/streetsidesoftware/cspell/blob/5bd8203/packages/cspell-types/src/CSpellSettingsDef.ts#L345)

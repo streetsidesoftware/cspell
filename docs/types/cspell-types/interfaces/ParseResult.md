@@ -18,7 +18,7 @@
 
 #### Defined in
 
-[Parser/index.ts:17](https://github.com/streetsidesoftware/cspell/blob/d85344c/packages/cspell-types/src/Parser/index.ts#L17)
+[Parser/index.ts:17](https://github.com/streetsidesoftware/cspell/blob/5bd8203/packages/cspell-types/src/Parser/index.ts#L17)
 
 ___
 
@@ -28,7 +28,7 @@ ___
 
 #### Defined in
 
-[Parser/index.ts:18](https://github.com/streetsidesoftware/cspell/blob/d85344c/packages/cspell-types/src/Parser/index.ts#L18)
+[Parser/index.ts:18](https://github.com/streetsidesoftware/cspell/blob/5bd8203/packages/cspell-types/src/Parser/index.ts#L18)
 
 ___
 
@@ -38,4 +38,4 @@ ___
 
 #### Defined in
 
-[Parser/index.ts:19](https://github.com/streetsidesoftware/cspell/blob/d85344c/packages/cspell-types/src/Parser/index.ts#L19)
+[Parser/index.ts:19](https://github.com/streetsidesoftware/cspell/blob/5bd8203/packages/cspell-types/src/Parser/index.ts#L19)
