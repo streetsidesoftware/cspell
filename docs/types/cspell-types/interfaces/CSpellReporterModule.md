@@ -12,17 +12,18 @@
 
 ### getReporter
 
-• **getReporter**: (`settings`: `unknown`) => [`CSpellReporter`](CSpellReporter.md)
+• **getReporter**: (`settings`: `unknown`, `config`: [`ReporterConfiguration`](ReporterConfiguration.md)) => [`CSpellReporter`](CSpellReporter.md)
 
 #### Type declaration
 
-▸ (`settings`): [`CSpellReporter`](CSpellReporter.md)
+▸ (`settings`, `config`): [`CSpellReporter`](CSpellReporter.md)
 
 ##### Parameters
 
 | Name | Type |
 | :------ | :------ |
 | `settings` | `unknown` |
+| `config` | [`ReporterConfiguration`](ReporterConfiguration.md) |
 
 ##### Returns
 
@@ -30,4 +31,4 @@
 
 #### Defined in
 
-[CSpellReporter.ts:122](https://github.com/streetsidesoftware/cspell/blob/d85344c/packages/cspell-types/src/CSpellReporter.ts#L122)
+[CSpellReporter.ts:170](https://github.com/streetsidesoftware/cspell/blob/5bd8203/packages/cspell-types/src/CSpellReporter.ts#L170)

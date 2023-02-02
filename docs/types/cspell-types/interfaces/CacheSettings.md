@@ -27,7 +27,7 @@ Format of the cache file.
 
 #### Defined in
 
-[CSpellSettingsDef.ts:341](https://github.com/streetsidesoftware/cspell/blob/d85344c/packages/cspell-types/src/CSpellSettingsDef.ts#L341)
+[CSpellSettingsDef.ts:330](https://github.com/streetsidesoftware/cspell/blob/5bd8203/packages/cspell-types/src/CSpellSettingsDef.ts#L330)
 
 ___
 
@@ -44,7 +44,7 @@ A prefix of `${cwd}` is replaced with the current working directory.
 
 #### Defined in
 
-[CSpellSettingsDef.ts:327](https://github.com/streetsidesoftware/cspell/blob/d85344c/packages/cspell-types/src/CSpellSettingsDef.ts#L327)
+[CSpellSettingsDef.ts:316](https://github.com/streetsidesoftware/cspell/blob/5bd8203/packages/cspell-types/src/CSpellSettingsDef.ts#L316)
 
 ___
 
@@ -60,7 +60,7 @@ Strategy to use for detecting changed files, default: metadata
 
 #### Defined in
 
-[CSpellSettingsDef.ts:333](https://github.com/streetsidesoftware/cspell/blob/d85344c/packages/cspell-types/src/CSpellSettingsDef.ts#L333)
+[CSpellSettingsDef.ts:322](https://github.com/streetsidesoftware/cspell/blob/5bd8203/packages/cspell-types/src/CSpellSettingsDef.ts#L322)
 
 ___
 
@@ -76,4 +76,4 @@ false
 
 #### Defined in
 
-[CSpellSettingsDef.ts:316](https://github.com/streetsidesoftware/cspell/blob/d85344c/packages/cspell-types/src/CSpellSettingsDef.ts#L316)
+[CSpellSettingsDef.ts:305](https://github.com/streetsidesoftware/cspell/blob/5bd8203/packages/cspell-types/src/CSpellSettingsDef.ts#L305)

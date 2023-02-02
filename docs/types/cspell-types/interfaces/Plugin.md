@@ -22,4 +22,4 @@ Plugin API
 
 #### Defined in
 
-[CSpellSettingsDef.ts:822](https://github.com/streetsidesoftware/cspell/blob/d85344c/packages/cspell-types/src/CSpellSettingsDef.ts#L822)
+[CSpellSettingsDef.ts:831](https://github.com/streetsidesoftware/cspell/blob/5bd8203/packages/cspell-types/src/CSpellSettingsDef.ts#L831)
