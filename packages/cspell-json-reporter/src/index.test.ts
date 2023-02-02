@@ -47,7 +47,7 @@ describe('getReporter', () => {
     });
 });
 
-async function runReporter(reporter: CSpellReporter): Promise<void> {
+async function runReporter(reporter: Required<CSpellReporter>): Promise<void> {
     reporter.debug('foo');
     reporter.debug('bar');
 

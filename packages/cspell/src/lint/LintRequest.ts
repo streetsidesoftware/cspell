@@ -1,9 +1,10 @@
-import type { CSpellReporter, Issue } from '@cspell/cspell-types';
+import type { Issue } from '@cspell/cspell-types';
 import * as path from 'path';
 
 import type { LinterOptions } from '../options';
 import type { GlobSrcInfo } from '../util/glob';
 import { calcExcludeGlobInfo } from '../util/glob';
+import type { FinalizedReporter } from '../util/reporters';
 import * as util from '../util/util';
 
 const defaultContextRange = 20;
@@ -26,7 +27,7 @@ export class LintRequest {
     constructor(
         readonly fileGlobs: string[],
         readonly options: LinterOptions & Deprecated,
-        readonly reporter: CSpellReporter
+        readonly reporter: FinalizedReporter
     ) {
         this.root = path.resolve(options.root || process.cwd());
         this.configFile = options.config;

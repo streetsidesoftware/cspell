@@ -14,7 +14,7 @@ function mkdirp(p: string) {
 
 const noopReporter = () => undefined;
 
-export function getReporter(settings: unknown | CSpellJSONReporterSettings): CSpellReporter {
+export function getReporter(settings: unknown | CSpellJSONReporterSettings): Required<CSpellReporter> {
     validateSettings(settings);
     const reportData: Omit<CSpellJSONReporterOutput, 'result'> = {
         issues: [],

@@ -1,5 +1,12 @@
 import { isAsyncIterable, operators, opFilter, pipeAsync, pipeSync } from '@cspell/cspell-pipe';
-import type { CSpellReporter, CSpellSettings, Glob, Issue, RunResult, TextDocumentOffset } from '@cspell/cspell-types';
+import type {
+    CSpellSettings,
+    Glob,
+    Issue,
+    ReporterConfiguration,
+    RunResult,
+    TextDocumentOffset,
+} from '@cspell/cspell-types';
 import { MessageTypes } from '@cspell/cspell-types';
 import chalk from 'chalk';
 import { findRepoRoot, GitIgnore } from 'cspell-gitignore';
@@ -31,6 +38,7 @@ import {
     normalizeFileOrGlobsToRoot,
     normalizeGlobsToRoot,
 } from '../util/glob';
+import type { FinalizedReporter } from '../util/reporters';
 import { loadReporters, mergeReporters } from '../util/reporters';
 import { getTimeMeasurer } from '../util/timer';
 import * as util from '../util/util';
@@ -260,7 +268,13 @@ export async function runLint(cfg: LintRequest): Promise<RunResult> {
         if (cfg.options.defaultConfiguration !== undefined) {
             configInfo.config.loadDefaultConfiguration = cfg.options.defaultConfiguration;
         }
-        reporter = mergeReporters(cfg.reporter, ...loadReporters(configInfo.config));
+        const reporterConfig: ReporterConfiguration = {
+            maxNumberOfProblems: configInfo.config.maxNumberOfProblems,
+            maxDuplicateProblems: configInfo.config.maxDuplicateProblems,
+            minWordLength: configInfo.config.minWordLength,
+            ...cfg.options,
+        };
+        reporter = mergeReporters(...loadReporters(configInfo.config, cfg.reporter, reporterConfig));
         cspell.setLogger(getLoggerFromReporter(reporter));
 
         const globInfo = await determineGlobs(configInfo, cfg);
@@ -327,7 +341,7 @@ interface AppGlobInfo {
     normalizedExcludes: string[];
 }
 
-function checkGlobs(globs: string[], reporter: CSpellReporter) {
+function checkGlobs(globs: string[], reporter: FinalizedReporter) {
     globs
         .filter((g) => g.startsWith("'") || g.endsWith("'"))
         .map((glob) => chalk.yellow(glob))
@@ -361,7 +375,7 @@ async function determineGlobs(configInfo: ConfigInfo, cfg: LintRequest): Promise
 async function determineFilesToCheck(
     configInfo: ConfigInfo,
     cfg: LintRequest,
-    reporter: CSpellReporter,
+    reporter: FinalizedReporter,
     globInfo: AppGlobInfo
 ): Promise<string[] | AsyncIterable<string>> {
     async function _determineFilesToCheck(): Promise<string[] | AsyncIterable<string>> {
@@ -483,7 +497,7 @@ function yesNo(value: boolean) {
     return value ? 'Yes' : 'No';
 }
 
-function getLoggerFromReporter(reporter: CSpellReporter): Logger {
+function getLoggerFromReporter(reporter: FinalizedReporter): Logger {
     const log: Logger['log'] = (...params) => {
         const msg = format(...params);
         reporter.info(msg, 'Info');

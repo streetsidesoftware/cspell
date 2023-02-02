@@ -2,6 +2,7 @@ import type {
     CSpellReporter,
     CSpellReporterModule,
     FileSettings,
+    ReporterConfiguration,
     ReporterSettings,
     RunResult,
 } from '@cspell/cspell-types';
@@ -21,24 +22,28 @@ function callAll<P>(methods: ((...p: P[]) => void)[]): (...p: P[]) => void {
     };
 }
 
+export type FinalizedReporter = Required<CSpellReporter>;
+
 function extractEmitter<K extends keyof StandardEmitters>(
     reporters: ReadonlyArray<StandardEmitters>,
     emitterName: K
-): StandardEmitters[K][] {
+): FinalizedReporter[K][] {
     // The `bind` is used in case the reporter is a class.
-    return reporters.map((r) => r[emitterName].bind(r) as StandardEmitters[K]);
+    return reporters
+        .map((r) => r[emitterName]?.bind(r) as StandardEmitters[K])
+        .filter((r): r is FinalizedReporter[K] => !!r);
 }
 
-function mergeResultEmitters(reporters: ReadonlyArray<CSpellReporter>): CSpellReporter['result'] {
+function mergeResultEmitters(reporters: ReadonlyArray<CSpellReporter>): FinalizedReporter['result'] {
     return async (result: RunResult) => {
-        await Promise.all(reporters.map((reporter) => reporter.result(result)));
+        await Promise.all(reporters.map((reporter) => reporter.result?.(result)));
     };
 }
 
 /**
  * Mergers several cspell reporters into a single one
  */
-export function mergeReporters(...reporters: ReadonlyArray<CSpellReporter>): CSpellReporter {
+export function mergeReporters(...reporters: ReadonlyArray<CSpellReporter>): FinalizedReporter {
     return {
         issue: callAll(extractEmitter(reporters, 'issue')),
         info: callAll(extractEmitter(reporters, 'info')),
@@ -49,24 +54,38 @@ export function mergeReporters(...reporters: ReadonlyArray<CSpellReporter>): CSp
     };
 }
 
-function loadReporter(reporterSettings: ReporterSettings): CSpellReporter | undefined {
-    if (!Array.isArray(reporterSettings)) {
-        reporterSettings = [reporterSettings];
-    }
-    const [moduleName, settings] = reporterSettings;
-
-    try {
-        // eslint-disable-next-line @typescript-eslint/no-var-requires
-        const { getReporter }: CSpellReporterModule = require(moduleName);
-        return getReporter(settings);
-    } catch (e: unknown) {
-        throw new ApplicationError(`Failed to load reporter ${moduleName}: ${toError(e).message}`);
-    }
-}
-
 /**
  * Loads reporter modules configured in cspell config file
  */
-export function loadReporters({ reporters = [] }: Pick<FileSettings, 'reporters'>): ReadonlyArray<CSpellReporter> {
+export function loadReporters(
+    { reporters = ['default'] }: Pick<FileSettings, 'reporters'>,
+    defaultReporter: CSpellReporter,
+    config: ReporterConfiguration
+): ReadonlyArray<CSpellReporter> {
+    function loadReporter(reporterSettings: ReporterSettings): CSpellReporter | undefined {
+        if (reporterSettings === 'default') return defaultReporter;
+        if (!Array.isArray(reporterSettings)) {
+            reporterSettings = [reporterSettings];
+        }
+        const [moduleName, settings] = reporterSettings;
+
+        try {
+            // eslint-disable-next-line @typescript-eslint/no-var-requires
+            const { getReporter }: CSpellReporterModule = require(moduleName);
+            return getReporter(settings, config);
+        } catch (e: unknown) {
+            throw new ApplicationError(`Failed to load reporter ${moduleName}: ${toError(e).message}`);
+        }
+    }
+
+    reporters = !reporters.length ? ['default'] : [...reporters];
+
     return reporters.map(loadReporter).filter((v: CSpellReporter | undefined): v is CSpellReporter => v !== undefined);
+}
+
+export function finalizeReporter(reporter: undefined): undefined;
+export function finalizeReporter(reporter: CSpellReporter): FinalizedReporter;
+export function finalizeReporter(reporter: CSpellReporter | undefined): FinalizedReporter | undefined;
+export function finalizeReporter(reporter: CSpellReporter | undefined): FinalizedReporter | undefined {
+    return reporter && mergeReporters(reporter);
 }
