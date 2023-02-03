@@ -114,13 +114,37 @@ each line can only refer to previous lines.
 
 How to walk the data to see if "talks" is in it.
 
-1. Start with the root at offset 8.
-2. t found goto 7
-3. a found goto 6
-4. l found goto 5
-5. k found goto 4
-6. s found stop (goto 0 is stop).
+1.  Start with the root at offset 8.
+1.  t found goto 7
+1.  a found goto 6
+1.  l found goto 5
+1.  k found goto 4
+1.  s found stop (goto 0 is stop).
 
 <!---
     cspell:word DAFSA DAWG
 -->
+
+## CSpell for Enterprise
+
+<!--- @@inject: ../../static/tidelift.md --->
+
+Available as part of the Tidelift Subscription.
+
+The maintainers of cspell and thousands of other packages are working with Tidelift to deliver commercial support and maintenance for the open source packages you use to build your applications. Save time, reduce risk, and improve code health, while paying the maintainers of the exact packages you use. [Learn more.](https://tidelift.com/subscription/pkg/npm-cspell?utm_source=npm-cspell&utm_medium=referral&utm_campaign=enterprise&utm_term=repo)
+
+<!--- @@inject-end: ../../static/tidelift.md --->
+
+<!--- @@inject: ../../static/footer.md --->
+
+<br/>
+
+---
+
+<p align="center">
+Brought to you by <a href="https://streetsidesoftware.com" title="Street Side Software">
+<img width="16" alt="Street Side Software Logo" src="https://i.imgur.com/CyduuVY.png" /> Street Side Software
+</a>
+</p>
+
+<!--- @@inject-end: ../../static/footer.md --->
