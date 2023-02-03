@@ -60,19 +60,19 @@ export type CSpellJSONReporterOutput = {
   /**
    * CSpell execution logs
    */
-  info: Array<{ message: string; msgType: MessageType }>;
+  info?: Array<{ message: string; msgType: MessageType }>;
   /**
    * CSpell debug logs
    */
-  debug: Array<{ message: string }>;
+  debug?: Array<{ message: string }>;
   /**
    * CSpell error logs
    */
-  error: Array<{ message: string; error: ErrorLike }>;
+  error?: Array<{ message: string; error: ErrorLike }>;
   /**
    * CSpell file progress logs
    */
-  progress: Array<ProgressItem | ProgressFileComplete>;
+  progress?: Array<ProgressItem | ProgressFileComplete>;
   /**
    * Execution result
    */
@@ -104,9 +104,17 @@ Possible settings:
  */
 export type CSpellJSONReporterSettings = {
   /**
-   * Output JSON file path
+   * Path to the output file.
+   *
+   * Relative paths are relative to the current working directory.
+   *
+   * Special values:
+   * - `stdout` - write the JSON to `stdout`.
+   * - `stderr` - write the JSON to `stderr`.
+   *
+   * @default stdout
    */
-  outFile: string;
+  outFile?: string;
   /**
    * Add more information about the files being checked and the configuration
    * @default false
