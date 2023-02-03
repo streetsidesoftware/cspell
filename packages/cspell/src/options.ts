@@ -67,6 +67,12 @@ export interface LinterOptions extends BaseOptions, Omit<CacheOptions, 'version'
      * Stop processing and exit if an issue or error is found.
      */
     failFast?: boolean;
+
+    /**
+     * Optional list of reporters to use, overriding any specified in the
+     * configuration.
+     */
+    reporter?: string[];
 }
 
 export interface TraceOptions extends BaseOptions {

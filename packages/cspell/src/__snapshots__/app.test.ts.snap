@@ -87,6 +87,31 @@ exports[`Validate cli app --no-fail-fast with config Expect Error: [Function Che
 2/2 [90m./samples/fail-fast/second-fail.txt[39m"
 `;
 
+exports[`Validate cli app Explicit file:// Expect Error: undefined 1`] = `[]`;
+
+exports[`Validate cli app Explicit file:// Expect Error: undefined 2`] = `
+"error	 0.00ms
+error	CSpell: Files checked: 1, Issues found: 0 in 0 files"
+`;
+
+exports[`Validate cli app Explicit file:// Expect Error: undefined 3`] = `
+"
+1/1 [90m./fixtures/misc/star-not.md[39m"
+`;
+
+exports[`Validate cli app Explicit not found file:// Expect Error: [Function CheckFailed] 1`] = `[]`;
+
+exports[`Validate cli app Explicit not found file:// Expect Error: [Function CheckFailed] 2`] = `
+"error	Linter: File not found: "./fixtures/misc/not-fond.md"
+error	 0.00ms skipped X
+error	CSpell: Files checked: 1, Issues found: 0 in 1 files"
+`;
+
+exports[`Validate cli app Explicit not found file:// Expect Error: [Function CheckFailed] 3`] = `
+"
+1/1 [90m./fixtures/misc/not-fond.md[39m"
+`;
+
 exports[`Validate cli app LICENSE Expect Error: undefined 1`] = `[]`;
 
 exports[`Validate cli app LICENSE Expect Error: undefined 2`] = `
@@ -430,7 +455,24 @@ exports[`Validate cli app must find with error Expect Error: [Function CheckFail
 
 exports[`Validate cli app no-args Expect Error: outputHelp 1`] = `
 [
-  "Usage: cspell lint [options] [globs...]",
+  "Usage: cspell lint [options] [globs...] [file://<path> ...] [stdin[://<path>]]",
+  "",
+  "Patterns:",
+  " - [globs...]            Glob Patterns",
+  " - [stdin]               Read from "stdin" assume text file.",
+  " - [stdin://<path>]      Read from "stdin", use <path> for file type and config.",
+  " - [file://<path>]       Check the file at <path>",
+  "",
+  "Examples:",
+  "    cspell .                        Recursively check all files.",
+  "    cspell lint .                   The same as "cspell ."",
+  "    cspell "*.js"                   Check all .js files in the current directory",
+  "    cspell "**/*.js"                Check all .js files recursively",
+  "    cspell "src/**/*.js"            Only check .js under src",
+  "    cspell "**/*.txt" "**/*.js"     Check both .js and .txt files.",
+  "    cspell "**/*.{txt,js,md}"       Check .txt, .js, and .md files.",
+  "    cat LICENSE | cspell stdin      Check stdin",
+  "    cspell stdin://docs/doc.md      Check stdin as if it was "./docs/doc.md"",
   "",
   "Check spelling",
   "",
@@ -485,16 +527,25 @@ exports[`Validate cli app no-args Expect Error: outputHelp 1`] = `
   "                               dictionaries.",
   "  --debug                      Output information useful for debugging",
   "                               cspell.json files.",
+  "  --reporter <module|path>     Specify one or more reporters to use.",
   "  -h, --help                   display help for command",
   "",
+  "More Examples:",
   "",
-  "Examples:",
-  "    cspell "*.js"                   Check all .js files in the current directory",
-  "    cspell "**/*.js"                Check all .js files from the current directory",
-  "    cspell "src/**/*.js"            Only check .js under src",
-  "    cspell "**/*.txt" "**/*.js"     Check both .js and .txt files.",
-  "    cspell "**/*.{txt,js,md}"       Check .txt, .js, and .md files.",
-  "    cat LICENSE | cspell stdin      Check stdin",
+  "    cspell "**/*.js" --reporter @cspell/cspell-json-reporter",
+  "        This will spell check all ".js" files recursively and use",
+  "        "@cspell/cspell-json-reporter".",
+  "",
+  "    cspell . --reporter default",
+  "        This will force the default reporter to be used overriding",
+  "        any reporters defined in the configuration.",
+  "",
+  "    cspell . --reporter ./<path>/reporter.cjs",
+  "        Use a custom reporter. See API for details.",
+  "",
+  "References:",
+  "    https://cspell.org",
+  "    https://github.com/streetsidesoftware/cspell",
   "",
   "",
 ]

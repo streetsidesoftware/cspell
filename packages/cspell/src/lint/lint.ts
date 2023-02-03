@@ -274,7 +274,10 @@ export async function runLint(cfg: LintRequest): Promise<RunResult> {
             minWordLength: configInfo.config.minWordLength,
             ...cfg.options,
         };
-        reporter = mergeReporters(...loadReporters(configInfo.config, cfg.reporter, reporterConfig));
+
+        const reporters = cfg.options.reporter ?? configInfo.config.reporters;
+
+        reporter = mergeReporters(...loadReporters(reporters, cfg.reporter, reporterConfig));
         cspell.setLogger(getLoggerFromReporter(reporter));
 
         const globInfo = await determineGlobs(configInfo, cfg);
