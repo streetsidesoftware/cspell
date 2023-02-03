@@ -2,7 +2,15 @@ import * as path from 'path';
 
 import { asyncIterableToArray } from './async';
 import { IOError } from './errors';
-import { isDir, isFile, isNotDir, readFileInfo, readFileListFile, readFileListFiles } from './fileHelper';
+import {
+    isDir,
+    isFile,
+    isNotDir,
+    readFileInfo,
+    readFileListFile,
+    readFileListFiles,
+    resolveFilename,
+} from './fileHelper';
 
 const packageRoot = path.join(__dirname, '../..');
 const fixtures = path.join(packageRoot, 'fixtures/fileHelper');
@@ -40,13 +48,14 @@ describe('fileHelper', () => {
     });
 
     test.each`
-        filename       | handleNotFound | expected
-        ${__dirname}   | ${true}        | ${{ filename: __dirname, text: '', errorCode: 'EISDIR' }}
-        ${'not_found'} | ${true}        | ${{ filename: r(__dirname, 'not_found'), text: '', errorCode: 'ENOENT' }}
-        ${__filename}  | ${true}        | ${oc({ filename: __filename, text: expect.stringMatching(/.+\n/) })}
-        ${__filename}  | ${false}       | ${oc({ filename: __filename, text: expect.stringMatching(/.+\n/) })}
+        filename                                                | handleNotFound | expected
+        ${__dirname}                                            | ${true}        | ${{ filename: __dirname, text: '', errorCode: 'EISDIR' }}
+        ${'not_found'}                                          | ${true}        | ${{ filename: r(__dirname, 'not_found'), text: '', errorCode: 'ENOENT' }}
+        ${__filename}                                           | ${true}        | ${oc({ filename: __filename, text: expect.stringMatching(/.+\n/) })}
+        ${__filename}                                           | ${false}       | ${oc({ filename: __filename, text: expect.stringMatching(/.+\n/) })}
+        ${'file://' + path.relative(process.cwd(), __filename)} | ${false}       | ${oc({ filename: __filename, text: expect.stringMatching(/this bit of text/) })}
     `('readFile handle $filename $handleNotFound', async ({ filename, handleNotFound, expected }) => {
-        filename = r(__dirname, filename);
+        filename = filename.startsWith('file:') ? filename : path.relative(process.cwd(), r(__dirname, filename));
         await expect(readFileInfo(filename, undefined, handleNotFound)).resolves.toEqual(expected);
     });
 
@@ -87,5 +96,17 @@ describe('fileHelper', () => {
     `('isDir $filename', async ({ filename, expected }) => {
         filename = r(__dirname, filename);
         expect(await isNotDir(filename)).toBe(expected);
+    });
+
+    test.each`
+        filename               | cwd          | expected
+        ${__filename}          | ${undefined} | ${__filename}
+        ${__dirname}           | ${undefined} | ${__dirname}
+        ${'not_found'}         | ${__dirname} | ${path.join(__dirname, 'not_found')}
+        ${'not_found'}         | ${undefined} | ${path.resolve('not_found')}
+        ${'stdin'}             | ${undefined} | ${'stdin://'}
+        ${'stdin://source.ts'} | ${undefined} | ${'stdin://' + path.resolve('source.ts')}
+    `('resolveFilename $filename $cwd', async ({ filename, cwd, expected }) => {
+        expect(resolveFilename(filename, cwd)).toBe(expected);
     });
 });

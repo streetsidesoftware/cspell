@@ -369,7 +369,9 @@ async function determineGlobs(configInfo: ConfigInfo, cfg: LintRequest): Promise
     const excludeGlobs = combinedGlobs.filter((g) => g.startsWith('!')).concat(normalizedExcludes);
     const fileGlobs: string[] = includeGlobs;
 
-    return { allGlobs, gitIgnore, fileGlobs, excludeGlobs, normalizedExcludes };
+    const appGlobs = { allGlobs, gitIgnore, fileGlobs, excludeGlobs, normalizedExcludes };
+    // console.log('%o', appGlobs);
+    return appGlobs;
 }
 
 async function determineFilesToCheck(

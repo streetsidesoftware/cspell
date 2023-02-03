@@ -4,15 +4,15 @@ import { fileToDocument } from 'cspell-lib';
 import { promises as fsp } from 'fs';
 import getStdin from 'get-stdin';
 import * as path from 'path';
+import { fileURLToPath, pathToFileURL } from 'url';
 
 import { asyncAwait, asyncFlatten, asyncMap, asyncPipe, mergeAsyncIterables } from './async';
+import { FileProtocol, STDIN, STDINProtocol, UTF8 } from './constants';
 import { IOError, toApplicationError, toError } from './errors';
 import type { GlobOptions } from './glob';
 import { globP } from './glob';
 import { readStdin } from './stdin';
 
-const UTF8: BufferEncoding = 'utf8';
-const STDIN = 'stdin';
 export interface ConfigInfo {
     source: string;
     config: CSpellUserSettings;
@@ -58,9 +58,9 @@ export function fileInfoToDocument(
     languageId = languageId || undefined;
     locale = locale || undefined;
 
-    if (filename === STDIN) {
+    if (filename === STDIN || filename.startsWith(STDINProtocol)) {
         return {
-            uri: 'stdin:///',
+            uri: filename === STDIN ? 'stdin:///' : filename,
             text,
             languageId,
             locale,
@@ -73,13 +73,26 @@ interface ReadFileInfoResult extends FileInfo {
     text: string;
 }
 
+export function resolveFilename(filename: string, cwd?: string): string {
+    cwd = cwd || process.cwd();
+    if (filename === STDIN) return STDINProtocol;
+    if (filename.startsWith(FileProtocol)) {
+        const url = new URL(filename.slice(FileProtocol.length), pathToFileURL(cwd + path.sep));
+        return fileURLToPath(url);
+    }
+    const scheme = filename.startsWith(STDINProtocol) ? STDINProtocol : '';
+    const pathname = filename.slice(scheme.length);
+
+    return scheme + path.resolve(cwd, pathname);
+}
+
 export function readFileInfo(
     filename: string,
     encoding: BufferEncoding = UTF8,
     handleNotFound = false
 ): Promise<ReadFileInfoResult> {
-    filename = filename !== STDIN ? path.resolve(filename) : filename;
-    const pText = filename === STDIN ? getStdin() : fsp.readFile(filename, encoding);
+    filename = resolveFilename(filename);
+    const pText = filename.startsWith(STDINProtocol) ? getStdin() : fsp.readFile(filename, encoding);
     return pText.then(
         (text) => ({ text, filename }),
         (e) => {
@@ -102,11 +115,15 @@ export function readFile(filename: string, encoding: BufferEncoding = UTF8): Pro
  * @param globPatterns patterns or stdin
  */
 export async function findFiles(globPatterns: string[], options: GlobOptions): Promise<string[]> {
-    const globPats = globPatterns.filter((filename) => filename !== STDIN);
-    const stdin = globPats.length < globPatterns.length ? [STDIN] : [];
+    const stdin: string[] = [];
+    const globPats = globPatterns.filter((filename) =>
+        filename !== STDIN && !filename.startsWith(STDINProtocol) && !filename.startsWith(FileProtocol)
+            ? true
+            : (stdin.push(filename), false)
+    );
     const globResults = globPats.length ? await globP(globPats, options) : [];
     const cwd = options.cwd || process.cwd();
-    return stdin.concat(globResults.map((filename) => path.resolve(cwd, filename)));
+    return [...stdin, ...globResults].map((filename) => resolveFilename(filename, cwd));
 }
 
 export function calcFinalConfigInfo(
@@ -136,10 +153,6 @@ export function calcFinalConfigInfo(
         text,
         languageIds,
     };
-}
-
-function resolveFilename(filename: string): string {
-    return path.resolve(filename);
 }
 
 const resolveFilenames = asyncMap(resolveFilename);
