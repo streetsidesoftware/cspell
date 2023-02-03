@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 6.21.0 (2023-02-03)
+
+**Note:** Version bump only for package test-cspell-types-cjs
+
 ## 6.20.1 (2023-02-01)
 
 ### Bug Fixes
