@@ -32,7 +32,7 @@ describe('mergeReporters', () => {
 
     test('loadReporters', () => {
         const reporters: ReporterSettings[] = [['@cspell/cspell-json-reporter', { outFile: 'out.json' }]];
-        const loaded = loadReporters({ reporters }, defaultReporter, {});
+        const loaded = loadReporters(reporters, defaultReporter, {});
         expect(loaded).toEqual([expect.objectContaining({})]);
     });
 
@@ -43,7 +43,7 @@ describe('mergeReporters', () => {
         ${'@cspell/cspell-unknown-reporter'}       | ${"Failed to load reporter @cspell/cspell-unknown-reporter: Cannot find module '@cspell/cspell-unknown-reporter' from 'src/util/reporters.ts'"}
     `('loadReporters fail $reporter', ({ reporter, expected }) => {
         const reporters: ReporterSettings[] = [reporter];
-        const fn = () => loadReporters({ reporters }, defaultReporter, {});
+        const fn = () => loadReporters(reporters, defaultReporter, {});
         expect(fn).toThrow(expected);
     });
 });
