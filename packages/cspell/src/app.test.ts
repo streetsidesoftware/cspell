@@ -169,6 +169,7 @@ describe('Validate cli', () => {
         ${'--no-fail-fast with config'}                | ${['-r', failFastRoot, '--no-fail-fast', '-c', failFastConfig, '*.txt']}          | ${app.CheckFailed} | ${true}  | ${true}  | ${false}
         ${'issue-2998 --language-id'}                  | ${['-r', pathFix('issue-2998'), '-v', '--language-id=fix', 'fix-words.txt']}      | ${undefined}       | ${true}  | ${false} | ${true}
         ${'Explicit file://'}                          | ${['-r', pathFix('misc'), 'file://star-not.md']}                                  | ${undefined}       | ${true}  | ${false} | ${false}
+        ${'Explicit not found file://'}                | ${['-r', pathFix('misc'), 'file://not-fond.md']}                                  | ${app.CheckFailed} | ${true}  | ${false} | ${false}
         ${'typos'}                                     | ${['-r', pathFix('features/typos'), '--no-progress', '--show-suggestions', '**']} | ${app.CheckFailed} | ${true}  | ${true}  | ${false}
     `('app $msg Expect Error: $errorCheck', async ({ testArgs, errorCheck, eError, eLog, eInfo }: TestCase) => {
         chalk.level = 1;
