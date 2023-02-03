@@ -58,7 +58,7 @@ export function mergeReporters(...reporters: ReadonlyArray<CSpellReporter>): Fin
  * Loads reporter modules configured in cspell config file
  */
 export function loadReporters(
-    { reporters = ['default'] }: Pick<FileSettings, 'reporters'>,
+    reporters: FileSettings['reporters'],
     defaultReporter: CSpellReporter,
     config: ReporterConfiguration
 ): ReadonlyArray<CSpellReporter> {
@@ -78,7 +78,7 @@ export function loadReporters(
         }
     }
 
-    reporters = !reporters.length ? ['default'] : [...reporters];
+    reporters = !reporters || !reporters.length ? ['default'] : [...reporters];
 
     return reporters.map(loadReporter).filter((v: CSpellReporter | undefined): v is CSpellReporter => v !== undefined);
 }

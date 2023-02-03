@@ -8,15 +8,44 @@ import { CheckFailed } from './util/errors';
 
 // interface InitOptions extends Options {}
 
-const usage = `
+const usage = `\
+[options] [globs...] [file://<path> ...] [stdin[://<path>]]
+
+Patterns:
+ - [globs...]            Glob Patterns
+ - [stdin]               Read from "stdin" assume text file.
+ - [stdin://<path>]      Read from "stdin", use <path> for file type and config.
+ - [file://<path>]       Check the file at <path>
 
 Examples:
+    cspell .                        Recursively check all files.
+    cspell lint .                   The same as "cspell ."
     cspell "*.js"                   Check all .js files in the current directory
-    cspell "**/*.js"                Check all .js files from the current directory
+    cspell "**/*.js"                Check all .js files recursively
     cspell "src/**/*.js"            Only check .js under src
     cspell "**/*.txt" "**/*.js"     Check both .js and .txt files.
     cspell "**/*.{txt,js,md}"       Check .txt, .js, and .md files.
     cat LICENSE | cspell stdin      Check stdin
+    cspell stdin://docs/doc.md      Check stdin as if it was "./docs/doc.md"\
+`;
+
+const advanced = `
+More Examples:
+
+    cspell "**/*.js" --reporter @cspell/cspell-json-reporter
+        This will spell check all ".js" files recursively and use
+        "@cspell/cspell-json-reporter".
+
+    cspell . --reporter default
+        This will force the default reporter to be used overriding
+        any reporters defined in the configuration.
+
+    cspell . --reporter ./<path>/reporter.cjs
+        Use a custom reporter. See API for details.
+
+References:
+    https://cspell.org
+    https://github.com/streetsidesoftware/cspell
 `;
 
 function collect(value: string, previous: string[] | undefined): string[] {
@@ -111,7 +140,9 @@ export function commandLint(prog: Command): Command {
             new CommanderOption('--no-default-configuration', 'Do not load the default configuration and dictionaries.')
         )
         .option('--debug', 'Output information useful for debugging cspell.json files.')
-        .addHelpText('after', usage)
+        .option('--reporter <module|path>', 'Specify one or more reporters to use.', collect)
+        .usage(usage)
+        .addHelpText('after', advanced)
         .arguments('[globs...]')
         .action((fileGlobs: string[], options: LinterCliOptions) => {
             App.parseApplicationFeatureFlags(options.flag);
