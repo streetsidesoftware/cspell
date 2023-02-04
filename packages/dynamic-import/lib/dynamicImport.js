@@ -18,7 +18,7 @@ let pImportResolve;
  * @returns the loaded module.
  */
 export async function dynamicImportFrom(moduleName, paths) {
-    paths = Array.isArray(paths) ? paths : [paths];
+    paths = Array.isArray(paths) ? paths : paths ? [paths] : undefined;
     if (!paths || !paths.length || typeof moduleName !== 'string') {
         try {
             return await dImport(moduleName);

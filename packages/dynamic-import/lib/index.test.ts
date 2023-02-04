@@ -17,7 +17,7 @@ describe('index', () => {
         ${'../fixtures/hello_world.mjs'}                                      | ${undefined}
         ${'./hello_world.mjs'}                                                | ${[path.join(__dirname, '../fixtures')]}
         ${'./hello_world.mjs'}                                                | ${path.join(__dirname, '../fixtures')}
-        ${'./hello_world.mjs'}                                                | ${pathToFileURL(path.join(__dirname, '../fixtures'))}
+        ${'./hello_world.mjs'}                                                | ${pathToFileURL(path.join(__dirname, '../fixtures/'))}
         ${'./hello_world.mjs'}                                                | ${[__dirname, path.join(__dirname, '../fixtures')]}
         ${path.join(__dirname, '../fixtures/hello_world.mjs')}                | ${undefined}
         ${pathToFileURL(path.join(__dirname, '../fixtures/hello_world.mjs'))} | ${undefined}

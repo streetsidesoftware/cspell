@@ -904,9 +904,11 @@ importers:
 
   test-packages/dynamic-import/test-dynamic-import-cjs:
     specifiers:
+      '@cspell/cspell-pipe': workspace:*
       '@cspell/dynamic-import': workspace:*
       vitest: ^0.28.4
     dependencies:
+      '@cspell/cspell-pipe': link:../../../packages/cspell-pipe
       '@cspell/dynamic-import': link:../../../packages/dynamic-import
     devDependencies:
       vitest: 0.28.4

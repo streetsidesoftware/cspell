@@ -1,4 +1,4 @@
-import { dynamicImportFrom } from './lib/index.js';
+import { dynamicImport } from './lib/index.js';
 import { pathToFileURL, fileURLToPath } from 'node:url';
 import * as path from 'node:path';
 
@@ -11,5 +11,5 @@ callHello(pathToFileURL('./fixtures/hello_world.mjs'), [fileURLToPath(fixtures)]
 
 async function callHello(file, paths) {
     console.log('%o %o', file.toString(), paths?.toString());
-    (await dynamicImportFrom(file, paths)).sayHello('Bob.');
+    (await dynamicImport(file, paths)).sayHello('Bob.');
 }
