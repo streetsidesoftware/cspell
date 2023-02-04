@@ -28,7 +28,7 @@ export { IncludeExcludeFlag } from 'cspell-lib';
 
 export type AppError = NodeJS.ErrnoException;
 
-export function lint(fileGlobs: string[], options: LinterCliOptions, reporter?: CSpellReporter): Promise<RunResult> {
+export function lint(fileGlobs: string[], options: LinterCliOptions, reporter?: Partial<CSpellReporter>): Promise<RunResult> {
     options = fixLegacy(options);
     const cfg = new LintRequest(
         fileGlobs,
