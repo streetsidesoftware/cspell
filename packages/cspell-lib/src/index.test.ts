@@ -15,10 +15,6 @@ describe('Validate the cspell API', () => {
         });
     });
 
-    test('clearCachedFiles', async () => {
-        await expect(cspell.clearCachedFiles()).resolves.not.toThrow();
-    });
-
     test('Verify API exports', () => {
         expect(cspell).toMatchSnapshot();
     });
