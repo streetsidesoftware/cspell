@@ -902,6 +902,35 @@ importers:
       '@cspell/cspell-tools': link:../../../packages/cspell-tools
       cspell: link:../../../packages/cspell
 
+  test-packages/dynamic-import/test-dynamic-import-cjs:
+    specifiers:
+      '@cspell/dynamic-import': workspace:*
+      vitest: ^0.28.4
+    dependencies:
+      '@cspell/dynamic-import': link:../../../packages/dynamic-import
+    devDependencies:
+      vitest: 0.28.4
+
+  test-packages/dynamic-import/test-dynamic-import-esm:
+    specifiers:
+      '@cspell/cspell-pipe': workspace:*
+      '@cspell/dynamic-import': workspace:*
+      vitest: ^0.28.4
+    dependencies:
+      '@cspell/cspell-pipe': link:../../../packages/cspell-pipe
+      '@cspell/dynamic-import': link:../../../packages/dynamic-import
+    devDependencies:
+      vitest: 0.28.4
+
+  test-packages/dynamic-import/test-dynamic-import-rollup:
+    specifiers:
+      '@cspell/dynamic-import': workspace:*
+      vitest: ^0.28.4
+    dependencies:
+      '@cspell/dynamic-import': link:../../../packages/dynamic-import
+    devDependencies:
+      vitest: 0.28.4
+
   test-packages/examples/example-cspell-lib-single-doc:
     specifiers:
       cspell-lib: workspace:*

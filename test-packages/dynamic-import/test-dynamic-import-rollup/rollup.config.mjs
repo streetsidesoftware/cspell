@@ -1,5 +1,6 @@
 /* eslint-disable node/no-extraneous-import */
 import rollupPluginNodeResolve from '@rollup/plugin-node-resolve';
+import rollupPluginTypescript from '@rollup/plugin-typescript';
 import rollupPluginJson from '@rollup/plugin-json';
 import rollupPluginCommonjs from '@rollup/plugin-commonjs';
 import { readFileSync } from 'fs';
@@ -8,11 +9,13 @@ const pkg = JSON.parse(readFileSync('./package.json', 'utf-8'));
 
 /** @type {import('rollup').RollupOptions} */
 const common = {
-    input: 'lib/index.js',
+    input: 'src/index.mts',
 
     output: {
         sourcemap: true,
     },
+
+    // external: ['@cspell/cspell-pipe', '@cspell/cspell-pipe/sync'],
 
     treeshake: {
         annotations: true,
@@ -20,13 +23,17 @@ const common = {
         propertyReadSideEffects: false,
         unknownGlobalSideEffects: false,
     },
+    external: ['@cspell/dynamic-import'],
 };
 
 /**
  * Get new instances of all the common plugins.
  */
-function getPlugins() {
+function getPlugins(tsconfig = 'tsconfig.json') {
     return [
+        rollupPluginTypescript({
+            tsconfig,
+        }),
         rollupPluginNodeResolve({
             mainFields: ['module', 'exports', 'es', 'es6', 'esm', 'main'],
             extensions: ['.ts', '.js', '.mjs', '.mts', '.node', '.json'],
@@ -36,18 +43,32 @@ function getPlugins() {
             transformMixedEsModules: true,
         }),
         rollupPluginJson(),
+        // rollupPluginTerser({
+        //     ecma: 2018,
+        //     warnings: true,
+        //     compress: { drop_console: false },
+        //     format: { comments: false },
+        //     sourceMap: true,
+        // }),
     ];
 }
 
-const plugins = getPlugins();
-
+// browser-friendly UMD build
+// CommonJS (for Node) and ES module (for bundlers) build.
+// (We could have three entries in the configuration array
+// instead of two, but it's quicker to generate multiple
+// builds from a single configuration where possible, using
+// an array for the `output` option, where we can specify
+// `file` and `format` for each target)
 /** @type {import('rollup').RollupOptions[]} */
 const configs = [
     {
         ...common,
-        output: [{ ...common.output, file: pkg.main, format: 'cjs' }],
-        plugins,
-        external: ['import-meta-resolve'],
+        output: [
+            { ...common.output, file: pkg.main, format: 'cjs' },
+            { ...common.output, file: pkg.module, format: 'es' },
+        ],
+        plugins: getPlugins(),
     },
 ];
 export default configs;

@@ -1,0 +1,36 @@
+{
+  "name": "test-dynamic-import-rollup",
+  "version": "6.21.0",
+  "description": "Pure testing package for @cspell/dynamic-import.",
+  "private": true,
+  "bin": {
+    "mjs": "bin.mjs",
+    "csj": "bin.cjs"
+  },
+  "browser": "./dist/browser.js",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.mjs",
+  "type": "module",
+  "scripts": {
+    "clean": "shx rm -rf dist .tsbuildinfo",
+    "build": "rollup -c rollup.config.mjs",
+    "build-dev": "tsc -p tsconfig.dev.json",
+    "clean-build": "pnpm run clean && pnpm run build",
+    "compile": "tsc -p .",
+    "test": "pnpm test:unit && pnpm test:smoke",
+    "test:smoke": "node ./bin.mjs && node ./bin.cjs",
+    "test:unit": "vitest run"
+  },
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "@cspell/dynamic-import": "workspace:*"
+  },
+  "keywords": [],
+  "devDependencies": {
+    "vitest": "^0.28.4"
+  },
+  "engines": {
+    "node": ">=14"
+  }
+}
