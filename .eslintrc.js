@@ -45,6 +45,22 @@ const config = {
     plugins: ['import', 'unicorn', 'simple-import-sort'],
     overrides: [
         {
+            file: ['**/*.js'],
+            parserOptions: {
+                ecmaVersion: 2020,
+                sourceType: 'module',
+            },
+            rules: {
+                'node/no-unsupported-features/es-syntax': [
+                    'error',
+                    {
+                        version: '>=13.0.0',
+                        ignores: ['modules'],
+                    },
+                ],
+            },
+        },
+        {
             files: ['**/*.ts', '**/*.mts'],
             extends: ['plugin:@typescript-eslint/recommended', 'plugin:import/typescript'],
             parser: '@typescript-eslint/parser',

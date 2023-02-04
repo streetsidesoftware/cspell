@@ -134,6 +134,7 @@ importers:
       '@cspell/cspell-json-reporter': workspace:*
       '@cspell/cspell-pipe': workspace:*
       '@cspell/cspell-types': workspace:*
+      '@cspell/dynamic-import': workspace:*
       '@types/file-entry-cache': ^5.0.2
       '@types/glob': ^8.0.1
       '@types/imurmurhash': ^0.1.1
@@ -159,6 +160,7 @@ importers:
       vscode-uri: ^3.0.7
     dependencies:
       '@cspell/cspell-pipe': link:../cspell-pipe
+      '@cspell/dynamic-import': link:../dynamic-import
       chalk: 4.1.2
       commander: 10.0.0
       cspell-gitignore: link:../cspell-gitignore
@@ -644,6 +646,23 @@ importers:
       jest: 29.4.1
       ts-json-schema-generator: 1.2.0
       typescript: 4.9.5
+      vitest: 0.28.4
+
+  packages/dynamic-import:
+    specifiers:
+      '@rollup/plugin-commonjs': ^24.0.1
+      '@rollup/plugin-json': ^6.0.0
+      '@rollup/plugin-node-resolve': ^15.0.1
+      import-meta-resolve: ^2.2.1
+      rollup: ^3.13.0
+      vitest: ^0.28.4
+    dependencies:
+      import-meta-resolve: 2.2.1
+    devDependencies:
+      '@rollup/plugin-commonjs': 24.0.1_rollup@3.13.0
+      '@rollup/plugin-json': 6.0.0_rollup@3.13.0
+      '@rollup/plugin-node-resolve': 15.0.1_rollup@3.13.0
+      rollup: 3.13.0
       vitest: 0.28.4
 
   packages/hunspell-reader:
@@ -5316,7 +5335,7 @@ packages:
   /@types/sax/1.2.4:
     resolution: {integrity: sha512-pSAff4IAxJjfAXUG6tFkO7dsSbTmf8CtUpfhhZ5VhkRpC4628tJhh3+V6H1E+/Gs9piSzYKT5yzHO5M4GG9jkw==}
     dependencies:
-      '@types/node': 17.0.45
+      '@types/node': 18.11.18
     dev: false
 
   /@types/scheduler/0.16.2:
@@ -9795,6 +9814,10 @@ packages:
     dependencies:
       pkg-dir: 4.2.0
       resolve-cwd: 3.0.0
+
+  /import-meta-resolve/2.2.1:
+    resolution: {integrity: sha512-C6lLL7EJPY44kBvA80gq4uMsVFw5x3oSKfuMl1cuZ2RkI5+UJqQXgn+6hlUew0y4ig7Ypt4CObAAIzU53Nfpuw==}
+    dev: false
 
   /imurmurhash/0.1.4:
     resolution: {integrity: sha512-JmXMZ6wuvDmLiHEml9ykzqO6lwFbof0GG4IkcGaENdCRDDmMVnny7s5HsIgHCbaq0w2MyPhDqkhTUgS2LU2PHA==}
