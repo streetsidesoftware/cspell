@@ -1,11 +1,5 @@
-import type { CSpellUserSettings } from '@cspell/cspell-types';
-
 import * as ExclusionHelper from './exclusionHelper';
-import { clearCachedSettingsFiles } from './Settings';
-import { toInternalSettings } from './Settings/CSpellSettingsServer';
 import * as Link from './Settings/index.link';
-import type { SpellingDictionaryCollection } from './SpellingDictionary';
-import { getDictionaryInternal, refreshDictionaryCache } from './SpellingDictionary';
 import * as Text from './util/text';
 
 export type { Document } from './Document';
@@ -15,7 +9,36 @@ export { FeatureFlag, FeatureFlags, getSystemFeatureFlags, UnknownFeatureFlagErr
 export { getLanguagesForBasename as getLanguageIdsForBaseFilename, getLanguagesForExt } from './LanguageIds';
 export type { CreateTextDocumentParams, TextDocument, TextDocumentLine } from './Models/TextDocument';
 export { createTextDocument, updateTextDocument } from './Models/TextDocument';
-export * from './Settings';
+export {
+    calcOverrideSettings,
+    checkFilenameMatchesGlob,
+    clearCachedSettingsFiles,
+    type ConfigurationDependencies,
+    currentSettingsFileVersion,
+    defaultConfigFilenames,
+    defaultFileName,
+    ENV_CSPELL_GLOB_ROOT,
+    extractDependencies,
+    extractImportErrors,
+    finalizeSettings,
+    getCachedFileSize,
+    getDefaultBundledSettings,
+    getDefaultSettings,
+    getGlobalSettings,
+    getSources,
+    ImportError,
+    type ImportFileRefWithError,
+    loadConfig,
+    loadPnP,
+    loadPnPSync,
+    mergeInDocSettings,
+    mergeSettings,
+    readRawSettings,
+    readSettings,
+    readSettingsFiles,
+    searchForConfig,
+    sectionCSpell,
+} from './Settings';
 export { defaultFileName as defaultSettingsFilename } from './Settings';
 export {
     combineTextAndLanguageSettings,
@@ -70,11 +93,5 @@ export {
 } from 'cspell-io';
 export { Link, Text };
 export { ExclusionHelper };
-
-export async function clearCachedFiles(): Promise<void> {
-    await Promise.all([clearCachedSettingsFiles(), refreshDictionaryCache(0)]);
-}
-
-export function getDictionary(settings: CSpellUserSettings): Promise<SpellingDictionaryCollection> {
-    return getDictionaryInternal(toInternalSettings(settings));
-}
+export { clearCachedFiles } from './clearCachedFiles';
+export { getDictionary } from './getDictionary';

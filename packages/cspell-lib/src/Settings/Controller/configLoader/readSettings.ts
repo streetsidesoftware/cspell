@@ -9,7 +9,6 @@ import type { CSpellSettingsI, CSpellSettingsWST } from './types';
  *   - relative path `./path/to/file` (relative to the current working directory)
  *   - package `@cspell/dict-typescript/cspell-ext.json`
  */
-
 export function readSettings(filename: string): CSpellSettingsI;
 export function readSettings(filename: string, defaultValues: CSpellSettingsWST): CSpellSettingsI;
 /**

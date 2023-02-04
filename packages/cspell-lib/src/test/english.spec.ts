@@ -1,3 +1,4 @@
+import * as getDictionary from '../getDictionary';
 import * as cspell from '../index';
 import { validateText } from '../validator';
 
@@ -11,7 +12,7 @@ describe('Validate English', () => {
         const text = '{ "name": "Jansons"}';
         const fileSettings = cspell.combineTextAndLanguageSettings(settings, text, languageIds);
         const finalSettings = cspell.finalizeSettings(fileSettings);
-        const dict = await cspell.getDictionary(finalSettings);
+        const dict = await getDictionary.getDictionary(finalSettings);
 
         const startTime = process.hrtime();
         // cspell:ignore installsallnecessary
