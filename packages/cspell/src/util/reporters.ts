@@ -70,8 +70,10 @@ export function loadReporters(
         const [moduleName, settings] = reporterSettings;
 
         try {
+            const fullPath = require.resolve(moduleName, { paths: [process.cwd(), __dirname] });
+            console.log('Reporter:\n module %o\n path: %o', moduleName, fullPath);
             // eslint-disable-next-line @typescript-eslint/no-var-requires
-            const { getReporter }: CSpellReporterModule = require(moduleName);
+            const { getReporter }: CSpellReporterModule = require(fullPath);
             return getReporter(settings, config);
         } catch (e: unknown) {
             throw new ApplicationError(`Failed to load reporter ${moduleName}: ${toError(e).message}`);
