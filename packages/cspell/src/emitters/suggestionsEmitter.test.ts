@@ -1,5 +1,6 @@
 import chalk from 'chalk';
 import type { SuggestedWord } from 'cspell-lib';
+import { describe, expect, test, vi } from 'vitest';
 
 import type { EmitSuggestionOptions } from './suggestionsEmitter';
 import { emitSuggestionResult } from './suggestionsEmitter';
@@ -15,7 +16,7 @@ describe('suggestionsEmitter', () => {
         ${'walk'} | ${sw('walk', 0)} | ${sw('walked', 2, { forbidden: true })}                  | ${opts({ verbose: 1 })}
         ${'walk'} | ${sw('walk', 0)} | ${sw('walked', 2, { forbidden: true, noSuggest: true })} | ${opts({ verbose: 1 })}
     `('emitSuggestionResult $word $sug1 $sug2 $options', ({ word, sug1, sug2, options }) => {
-        const log = jest.fn();
+        const log = vi.fn();
         const sr = {
             word,
             suggestions: [sug1, sug2].filter((a) => !!a),

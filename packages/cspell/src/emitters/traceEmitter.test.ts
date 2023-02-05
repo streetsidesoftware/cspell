@@ -1,4 +1,5 @@
 import strip from 'strip-ansi';
+import { describe, expect, test, vi } from 'vitest';
 
 import type { TraceResult } from '../application';
 import { emitTraceResults } from './traceEmitter';
@@ -6,14 +7,14 @@ import { emitTraceResults } from './traceEmitter';
 describe('traceEmitter', () => {
     test('empty', () => {
         const lines: string[] = [];
-        jest.spyOn(console, 'log').mockImplementation((a) => lines.push(strip(a)));
+        vi.spyOn(console, 'log').mockImplementation((a) => lines.push(strip(a)));
         emitTraceResults([], { cwd: '/', lineWidth: 80 });
         expect(lines).toEqual(['Word F Dictionary           Dictionary Location           ']);
     });
 
     test('narrow screen with compound words', () => {
         const lines: string[] = [];
-        jest.spyOn(console, 'log').mockImplementation((a) => lines.push(strip(a)));
+        vi.spyOn(console, 'log').mockImplementation((a) => lines.push(strip(a)));
         const lineWidth = 80;
         emitTraceResults(sampleResults(), { cwd: '/this_is_a_very/long/path', lineWidth });
         expect(lines.reduce((a, b) => Math.max(a, b.length), 0)).toBeLessThanOrEqual(lineWidth);

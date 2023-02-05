@@ -1,4 +1,5 @@
 import * as path from 'path';
+import { describe, test, expect } from 'vitest';
 
 import { asyncIterableToArray } from './async';
 import { IOError } from './errors';

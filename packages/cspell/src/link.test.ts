@@ -1,3 +1,5 @@
+import { describe, expect, test } from 'vitest';
+
 import { addPathsToGlobalImportsResultToTable, listGlobalImportsResultToTable } from './link';
 
 const esc = expect.stringContaining;

@@ -1,3 +1,5 @@
+import { describe, expect, test } from 'vitest';
+
 import type { ReporterIssue } from './cli-reporter';
 import { __testing__ } from './cli-reporter';
 

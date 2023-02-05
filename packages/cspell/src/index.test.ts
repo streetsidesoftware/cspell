@@ -1,3 +1,5 @@
+import { describe, expect, test } from 'vitest';
+
 // Make sure the types are exported.
 import type { CSpellApplicationOptions } from './index';
 import * as index from './index';

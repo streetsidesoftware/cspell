@@ -6,6 +6,7 @@ export type { FileDescriptor } from 'file-entry-cache';
 import type { FileEntryCache as FecFileEntryCache } from 'file-entry-cache';
 import * as file_entry_cache from 'file-entry-cache';
 import { mkdirSync } from 'fs';
+import { isMainThread } from 'node:worker_threads';
 import * as path from 'path';
 
 export type FileEntryCache = FecFileEntryCache;
@@ -71,10 +72,10 @@ export function createFromFile(pathToCache: string, useCheckSum: boolean, useRel
         return (...params: P) => {
             const cwd = process.cwd();
             try {
-                process.chdir(relDir);
+                isMainThread && process.chdir(relDir);
                 return fn(cwd, ...params);
             } finally {
-                process.chdir(cwd);
+                isMainThread && process.chdir(cwd);
             }
         };
     }
