@@ -2,16 +2,13 @@ import type { Issue, RunResult } from '@cspell/cspell-types';
 import * as fs from 'fs/promises';
 import * as path from 'path';
 import { resolve as r } from 'path';
-import { describe, expect, test, vi } from 'vitest';
+import getStdin from 'get-stdin';
+import { describe, expect, test, vi, afterEach } from 'vitest';
 
 import * as App from './application';
 import type { LinterOptions, TraceOptions } from './options';
 import { asyncIterableToArray } from './util/async';
 import { InMemoryReporter } from './util/InMemoryReporter';
-
-const getStdinResult = {
-    value: '',
-};
 
 const packageRoot = r(__dirname, '..');
 const samplesRoot = r(packageRoot, 'samples');
@@ -24,15 +21,17 @@ const sampleOptions = { root: samplesRoot };
 const oc = expect.objectContaining;
 const ac = expect.arrayContaining;
 
-vi.mock('get-stdin', () => {
-    return vi.fn(() => Promise.resolve(getStdinResult.value));
-});
+vi.mock('get-stdin', () => ({ default: vi.fn() }));
 
 const timeout = 10000;
 
 const testOptions = { timeout };
 
 describe('Validate the Application', () => {
+    afterEach(() => {
+        vi.resetAllMocks();
+    });
+
     test(
         'Tests running the application',
         () => {
@@ -147,12 +146,15 @@ describe('Validate the Application', () => {
             const files = ['stdin'];
             const options = { ...sampleOptions, wordsOnly: true, unique: true, debug: true };
             const reporter = new InMemoryReporter();
+
             // cspell:ignore texxt
-            getStdinResult.value = `
-            This is some texxt to test out reding from stdin.
-            cspell:ignore badspellingintext
-            We can ignore values within the text: badspellingintext
-        `;
+            const text = `
+                This is some texxt to test out reding from stdin.
+                cspell:ignore badspellingintext
+                We can ignore values within the text: badspellingintext
+            `;
+            const mockGetStdin = vi.mocked(getStdin).mockImplementation(async () => text);
+
             const lint = App.lint(files, options, reporter);
             const result = await lint;
             expect(result.files).toBe(1);

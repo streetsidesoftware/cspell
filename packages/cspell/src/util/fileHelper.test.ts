@@ -1,5 +1,6 @@
 import * as path from 'path';
-import { describe, test, expect } from 'vitest';
+import { describe, test, expect, vi, afterEach } from 'vitest';
+import getStdin from 'get-stdin';
 
 import { asyncIterableToArray } from './async';
 import { IOError } from './errors';
@@ -13,6 +14,10 @@ import {
     resolveFilename,
 } from './fileHelper';
 
+vi.mock('get-stdin', () => ({
+    default: vi.fn(),
+}));
+
 const packageRoot = path.join(__dirname, '../..');
 const fixtures = path.join(packageRoot, 'fixtures/fileHelper');
 const fileListFile = path.join(fixtures, 'file-list.txt');
@@ -22,14 +27,16 @@ const oc = expect.objectContaining;
 const r = path.resolve;
 
 describe('fileHelper', () => {
+    afterEach(() => {
+        vi.clearAllMocks();
+    });
+
     test('readFileListFile', async () => {
         try {
             const files = ['a', 'b', 'c'];
-            process.stdin.isTTY = false;
+            const mockGetStdin = vi.mocked(getStdin);
+            mockGetStdin.mockImplementation(async () => files.join('\n'));
             const pResult = readFileListFile('stdin');
-            process.stdin.push(files.join('\n'));
-            // need to delay the `end` event or it might become a race condition.
-            setTimeout(() => process.stdin.emit('end'), 1);
             const r = await pResult;
             expect(r).toEqual(files.map((f) => path.resolve(f)));
         } finally {
