@@ -1,6 +1,6 @@
 import type { CSpellReporter, ReporterSettings } from '@cspell/cspell-types';
 import { MessageTypes } from '@cspell/cspell-types';
-import { describe, test, expect, vi } from 'vitest';
+import { describe, expect, test, vi } from 'vitest';
 
 import { InMemoryReporter } from './InMemoryReporter';
 import { loadReporters, mergeReporters } from './reporters';

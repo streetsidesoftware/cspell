@@ -1,3 +1,4 @@
+/* eslint-disable node/shebang */
 import assert from 'assert';
 import { getPipes } from './dist/index.js';
 
@@ -7,4 +8,4 @@ async function t() {
     assert(typeof pipes.opFirst === 'function');
 }
 
-await t();
+t();

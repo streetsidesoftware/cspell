@@ -1,5 +1,5 @@
 import * as readline from 'readline';
-import { describe, test, expect, vi } from 'vitest';
+import { describe, expect, test, vi } from 'vitest';
 
 import { asyncIterableToArray, mergeAsyncIterables } from './async';
 import { readStdin } from './stdin';

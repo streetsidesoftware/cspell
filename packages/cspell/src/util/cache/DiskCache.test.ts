@@ -1,11 +1,10 @@
-import { afterEach, beforeEach, describe, expect, test, vi, type Mock } from 'vitest';
-
 import { createFromFile } from 'file-entry-cache';
 import * as path from 'path';
+import { afterEach, beforeEach, describe, expect, type Mock, test, vi } from 'vitest';
 
 import * as fileHelper from '../../util/fileHelper';
 import type { CachedFileResult, CSpellCacheMeta } from './DiskCache';
-import { DiskCache, __testing__ } from './DiskCache';
+import { __testing__, DiskCache } from './DiskCache';
 
 const { calcVersion } = __testing__;
 

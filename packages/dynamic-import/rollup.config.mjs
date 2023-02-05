@@ -1,4 +1,3 @@
-/* eslint-disable node/no-extraneous-import */
 import rollupPluginNodeResolve from '@rollup/plugin-node-resolve';
 import rollupPluginJson from '@rollup/plugin-json';
 import rollupPluginCommonjs from '@rollup/plugin-commonjs';

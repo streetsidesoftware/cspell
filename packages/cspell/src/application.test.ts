@@ -1,9 +1,9 @@
 import type { Issue, RunResult } from '@cspell/cspell-types';
 import * as fs from 'fs/promises';
+import getStdin from 'get-stdin';
 import * as path from 'path';
 import { resolve as r } from 'path';
-import getStdin from 'get-stdin';
-import { describe, expect, test, vi, afterEach } from 'vitest';
+import { afterEach, describe, expect, test, vi } from 'vitest';
 
 import * as App from './application';
 import type { LinterOptions, TraceOptions } from './options';
@@ -153,7 +153,7 @@ describe('Validate the Application', () => {
                 cspell:ignore badspellingintext
                 We can ignore values within the text: badspellingintext
             `;
-            const mockGetStdin = vi.mocked(getStdin).mockImplementation(async () => text);
+            vi.mocked(getStdin).mockImplementation(async () => text);
 
             const lint = App.lint(files, options, reporter);
             const result = await lint;

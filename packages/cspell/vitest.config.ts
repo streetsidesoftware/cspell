@@ -1,3 +1,4 @@
+// eslint-disable-next-line node/no-extraneous-import
 import { mergeConfig } from 'vite';
 import { defineConfig } from 'vitest/config';
 

@@ -1,6 +1,6 @@
-import * as path from 'path';
-import { describe, test, expect, vi, afterEach } from 'vitest';
 import getStdin from 'get-stdin';
+import * as path from 'path';
+import { afterEach, describe, expect, test, vi } from 'vitest';
 
 import { asyncIterableToArray } from './async';
 import { IOError } from './errors';

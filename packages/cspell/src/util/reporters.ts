@@ -6,8 +6,8 @@ import type {
     ReporterSettings,
     RunResult,
 } from '@cspell/cspell-types';
-
 import { dynamicImport } from '@cspell/dynamic-import';
+
 import { ApplicationError, toError } from './errors';
 
 type StandardEmitters = Omit<CSpellReporter, 'result'>;

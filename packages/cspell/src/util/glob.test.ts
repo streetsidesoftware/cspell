@@ -4,7 +4,7 @@ import micromatch from 'micromatch';
 import type { MinimatchOptions } from 'minimatch';
 import { minimatch } from 'minimatch';
 import * as path from 'path';
-import { describe, test, expect, vi } from 'vitest';
+import { describe, expect, test, vi } from 'vitest';
 
 import { calcGlobs, normalizeGlobsToRoot } from './glob';
 

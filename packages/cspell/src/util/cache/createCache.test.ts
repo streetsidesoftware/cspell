@@ -4,7 +4,7 @@ import { beforeEach, describe, expect, test, vi } from 'vitest';
 
 import type { CacheOptions } from './CacheOptions';
 import type { CreateCacheSettings } from './createCache';
-import { calcCacheSettings, createCache, __testing__ } from './createCache';
+import { __testing__, calcCacheSettings, createCache } from './createCache';
 import { DiskCache } from './DiskCache';
 import { DummyCache } from './DummyCache';
 
