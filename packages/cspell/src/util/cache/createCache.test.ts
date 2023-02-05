@@ -1,5 +1,6 @@
 import * as path from 'path';
 import { resolve as r } from 'path';
+import { beforeEach, describe, expect, test, vi } from 'vitest';
 
 import type { CacheOptions } from './CacheOptions';
 import type { CreateCacheSettings } from './createCache';
@@ -7,9 +8,9 @@ import { __testing__, calcCacheSettings, createCache } from './createCache';
 import { DiskCache } from './DiskCache';
 import { DummyCache } from './DummyCache';
 
-jest.mock('./DiskCache');
+vi.mock('./DiskCache');
 
-const mockedDiskCache = jest.mocked(DiskCache);
+const mockedDiskCache = vi.mocked(DiskCache);
 
 const version = '5.20.0-alpha.192';
 

@@ -277,7 +277,7 @@ export async function runLint(cfg: LintRequest): Promise<RunResult> {
 
         const reporters = cfg.options.reporter ?? configInfo.config.reporters;
 
-        reporter = mergeReporters(...loadReporters(reporters, cfg.reporter, reporterConfig));
+        reporter = mergeReporters(...(await loadReporters(reporters, cfg.reporter, reporterConfig)));
         cspell.setLogger(getLoggerFromReporter(reporter));
 
         const globInfo = await determineGlobs(configInfo, cfg);

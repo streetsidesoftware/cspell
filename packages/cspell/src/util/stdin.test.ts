@@ -1,10 +1,11 @@
 import * as readline from 'readline';
+import { describe, expect, test, vi } from 'vitest';
 
 import { asyncIterableToArray, mergeAsyncIterables } from './async';
 import { readStdin } from './stdin';
 
-jest.mock('readline');
-const mockCreateInterface = jest.mocked(readline.createInterface);
+vi.mock('readline');
+const mockCreateInterface = vi.mocked(readline.createInterface);
 
 describe('stdin', () => {
     test('reading stdin', async () => {

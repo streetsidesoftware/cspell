@@ -1,6 +1,6 @@
 /* eslint-disable import/no-unresolved */
 /* eslint-disable node/no-missing-import */
-/* eslint-disable node/no-unsupported-features/es-syntax */
+
 // @ts-check
 
 /**

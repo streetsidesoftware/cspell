@@ -1,31 +1,31 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1
 
-exports[`suggestionsEmitter emitSuggestionResult walk {"compoundWord": undefined, "cost": 0, "dictionaries": [Array], "forbidden": false, "noSuggest": false, "word": "walk"} {"compoundWord": undefined, "cost": 2, "dictionaries": [Array], "forbidden": false, "noSuggest": false, "word": "walked"} {"verbose": 1} 1`] = `
+exports[`suggestionsEmitter > emitSuggestionResult 'walk' { word: 'walk', cost: +0, …(4) } { word: 'walked', cost: 2, …(4) } { verbose: 1 } 1`] = `
 "walk:
  - walk      -    0 dict-a
  - walked    -    2 dict-a"
 `;
 
-exports[`suggestionsEmitter emitSuggestionResult walk {"compoundWord": undefined, "cost": 0, "dictionaries": [Array], "forbidden": false, "noSuggest": false, "word": "walk"} {"compoundWord": undefined, "cost": 2, "dictionaries": [Array], "forbidden": false, "noSuggest": false, "word": "walked"} {} 1`] = `
-"walk:
- - walk
- - walked"
-`;
-
-exports[`suggestionsEmitter emitSuggestionResult walk {"compoundWord": undefined, "cost": 0, "dictionaries": [Array], "forbidden": false, "noSuggest": false, "word": "walk"} {"compoundWord": undefined, "cost": 2, "dictionaries": [Array], "forbidden": false, "noSuggest": true, "word": "walked"} {"verbose": 1} 1`] = `
+exports[`suggestionsEmitter > emitSuggestionResult 'walk' { word: 'walk', cost: +0, …(4) } { word: 'walked', cost: 2, …(4) } { verbose: 1 } 2`] = `
 "walk:
  - walk      -    0 dict-a
  - walked  N -    2 dict-a"
 `;
 
-exports[`suggestionsEmitter emitSuggestionResult walk {"compoundWord": undefined, "cost": 0, "dictionaries": [Array], "forbidden": false, "noSuggest": false, "word": "walk"} {"compoundWord": undefined, "cost": 2, "dictionaries": [Array], "forbidden": true, "noSuggest": false, "word": "walked"} {"verbose": 1} 1`] = `
+exports[`suggestionsEmitter > emitSuggestionResult 'walk' { word: 'walk', cost: +0, …(4) } { word: 'walked', cost: 2, …(4) } { verbose: 1 } 3`] = `
 "walk:
  - walk      -    0 dict-a
  - walked X  -    2 dict-a"
 `;
 
-exports[`suggestionsEmitter emitSuggestionResult walk {"compoundWord": undefined, "cost": 0, "dictionaries": [Array], "forbidden": false, "noSuggest": false, "word": "walk"} {"compoundWord": undefined, "cost": 2, "dictionaries": [Array], "forbidden": true, "noSuggest": true, "word": "walked"} {"verbose": 1} 1`] = `
+exports[`suggestionsEmitter > emitSuggestionResult 'walk' { word: 'walk', cost: +0, …(4) } { word: 'walked', cost: 2, …(4) } { verbose: 1 } 4`] = `
 "walk:
  - walk      -    0 dict-a
  - walked XN -    2 dict-a"
+`;
+
+exports[`suggestionsEmitter > emitSuggestionResult 'walk' { word: 'walk', cost: +0, …(4) } { word: 'walked', cost: 2, …(4) } {} 1`] = `
+"walk:
+ - walk
+ - walked"
 `;

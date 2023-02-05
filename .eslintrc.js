@@ -100,6 +100,16 @@ const config = {
                 'unicorn/filename-case': 'off',
             },
         },
+        {
+            files: ['**/*.js'],
+            parserOptions: {
+                ecmaVersion: 2020,
+                sourceType: 'module',
+            },
+            rules: {
+                'node/no-unsupported-features/es-syntax': 'off',
+            },
+        },
     ],
     settings: {
         'import/parsers': {

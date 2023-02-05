@@ -1,8 +1,8 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1
 
-exports[`Validate cli app --fail-fast no option Expect Error: [Function CheckFailed] 1`] = `[]`;
+exports[`Validate cli > app '--fail-fast no option' Expect Error: [Function CheckFailed] 1`] = `[]`;
 
-exports[`Validate cli app --fail-fast no option Expect Error: [Function CheckFailed] 2`] = `
+exports[`Validate cli > app '--fail-fast no option' Expect Error: [Function CheckFailed] 2`] = `
 "error	 0.00ms X
 log	./samples/fail-fast/first-fail.txt:1:1 - Unknown word (iamtypo)
 error	 0.00ms X
@@ -10,39 +10,39 @@ log	./samples/fail-fast/second-fail.txt:1:1 - Unknown word (iamtypotoo)
 error	CSpell: Files checked: 2, Issues found: 2 in 2 files"
 `;
 
-exports[`Validate cli app --fail-fast no option Expect Error: [Function CheckFailed] 3`] = `
+exports[`Validate cli > app '--fail-fast no option' Expect Error: [Function CheckFailed] 3`] = `
 "
 1/2 [90m./samples/fail-fast/first-fail.txt[39m
 2/2 [90m./samples/fail-fast/second-fail.txt[39m"
 `;
 
-exports[`Validate cli app --fail-fast with config Expect Error: [Function CheckFailed] 1`] = `[]`;
+exports[`Validate cli > app '--fail-fast with config' Expect Error: [Function CheckFailed] 1`] = `[]`;
 
-exports[`Validate cli app --fail-fast with config Expect Error: [Function CheckFailed] 2`] = `
+exports[`Validate cli > app '--fail-fast with config' Expect Error: [Function CheckFailed] 2`] = `
 "error	 0.00ms X
 log	./samples/fail-fast/first-fail.txt:1:1 - Unknown word (iamtypo)
 error	CSpell: Files checked: 1, Issues found: 1 in 1 files"
 `;
 
-exports[`Validate cli app --fail-fast with config Expect Error: [Function CheckFailed] 3`] = `
+exports[`Validate cli > app '--fail-fast with config' Expect Error: [Function CheckFailed] 3`] = `
 "
 1/2 [90m./samples/fail-fast/first-fail.txt[39m"
 `;
 
-exports[`Validate cli app --fail-fast with option Expect Error: [Function CheckFailed] 1`] = `[]`;
+exports[`Validate cli > app '--fail-fast with option' Expect Error: [Function CheckFailed] 1`] = `[]`;
 
-exports[`Validate cli app --fail-fast with option Expect Error: [Function CheckFailed] 2`] = `
+exports[`Validate cli > app '--fail-fast with option' Expect Error: [Function CheckFailed] 2`] = `
 "error	 0.00ms X
 log	./samples/fail-fast/first-fail.txt:1:1 - Unknown word (iamtypo)
 error	CSpell: Files checked: 1, Issues found: 1 in 1 files"
 `;
 
-exports[`Validate cli app --fail-fast with option Expect Error: [Function CheckFailed] 3`] = `
+exports[`Validate cli > app '--fail-fast with option' Expect Error: [Function CheckFailed] 3`] = `
 "
 1/2 [90m./samples/fail-fast/first-fail.txt[39m"
 `;
 
-exports[`Validate cli app --help Expect Error: outputHelp 1`] = `
+exports[`Validate cli > app '--help' Expect Error: 'outputHelp' 1`] = `
 [
   "Usage: cspell [options] [command]",
   "",
@@ -67,13 +67,13 @@ exports[`Validate cli app --help Expect Error: outputHelp 1`] = `
 ]
 `;
 
-exports[`Validate cli app --help Expect Error: outputHelp 2`] = `""`;
+exports[`Validate cli > app '--help' Expect Error: 'outputHelp' 2`] = `""`;
 
-exports[`Validate cli app --help Expect Error: outputHelp 3`] = `""`;
+exports[`Validate cli > app '--help' Expect Error: 'outputHelp' 3`] = `""`;
 
-exports[`Validate cli app --no-fail-fast with config Expect Error: [Function CheckFailed] 1`] = `[]`;
+exports[`Validate cli > app '--no-fail-fast with config' Expect Error: [Function CheckFailed] 1`] = `[]`;
 
-exports[`Validate cli app --no-fail-fast with config Expect Error: [Function CheckFailed] 2`] = `
+exports[`Validate cli > app '--no-fail-fast with config' Expect Error: [Function CheckFailed] 2`] = `
 "error	 0.00ms X
 log	./samples/fail-fast/first-fail.txt:1:1 - Unknown word (iamtypo)
 error	 0.00ms X
@@ -81,66 +81,66 @@ log	./samples/fail-fast/second-fail.txt:1:1 - Unknown word (iamtypotoo)
 error	CSpell: Files checked: 2, Issues found: 2 in 2 files"
 `;
 
-exports[`Validate cli app --no-fail-fast with config Expect Error: [Function CheckFailed] 3`] = `
+exports[`Validate cli > app '--no-fail-fast with config' Expect Error: [Function CheckFailed] 3`] = `
 "
 1/2 [90m./samples/fail-fast/first-fail.txt[39m
 2/2 [90m./samples/fail-fast/second-fail.txt[39m"
 `;
 
-exports[`Validate cli app Explicit file:// Expect Error: undefined 1`] = `[]`;
+exports[`Validate cli > app 'Explicit file://' Expect Error: undefined 1`] = `[]`;
 
-exports[`Validate cli app Explicit file:// Expect Error: undefined 2`] = `
+exports[`Validate cli > app 'Explicit file://' Expect Error: undefined 2`] = `
 "error	 0.00ms
 error	CSpell: Files checked: 1, Issues found: 0 in 0 files"
 `;
 
-exports[`Validate cli app Explicit file:// Expect Error: undefined 3`] = `
+exports[`Validate cli > app 'Explicit file://' Expect Error: undefined 3`] = `
 "
 1/1 [90m./fixtures/misc/star-not.md[39m"
 `;
 
-exports[`Validate cli app Explicit not found file:// Expect Error: [Function CheckFailed] 1`] = `[]`;
+exports[`Validate cli > app 'Explicit not found file://' Expect Error: [Function CheckFailed] 1`] = `[]`;
 
-exports[`Validate cli app Explicit not found file:// Expect Error: [Function CheckFailed] 2`] = `
-"error	Linter: File not found: "./fixtures/misc/not-fond.md"
+exports[`Validate cli > app 'Explicit not found file://' Expect Error: [Function CheckFailed] 2`] = `
+"error	Linter: File not found: \\"./fixtures/misc/not-fond.md\\"
 error	 0.00ms skipped X
 error	CSpell: Files checked: 1, Issues found: 0 in 1 files"
 `;
 
-exports[`Validate cli app Explicit not found file:// Expect Error: [Function CheckFailed] 3`] = `
+exports[`Validate cli > app 'Explicit not found file://' Expect Error: [Function CheckFailed] 3`] = `
 "
 1/1 [90m./fixtures/misc/not-fond.md[39m"
 `;
 
-exports[`Validate cli app LICENSE Expect Error: undefined 1`] = `[]`;
+exports[`Validate cli > app 'LICENSE' Expect Error: undefined 1`] = `[]`;
 
-exports[`Validate cli app LICENSE Expect Error: undefined 2`] = `
+exports[`Validate cli > app 'LICENSE' Expect Error: undefined 2`] = `
 "error	 0.00ms
 error	CSpell: Files checked: 1, Issues found: 0 in 0 files"
 `;
 
-exports[`Validate cli app LICENSE Expect Error: undefined 3`] = `
+exports[`Validate cli > app 'LICENSE' Expect Error: undefined 3`] = `
 "
 1/1 [90m./LICENSE[39m"
 `;
 
-exports[`Validate cli app bad config Expect Error: [Function CheckFailed] 1`] = `[]`;
+exports[`Validate cli > app 'bad config' Expect Error: [Function CheckFailed] 1`] = `[]`;
 
-exports[`Validate cli app bad config Expect Error: [Function CheckFailed] 2`] = `
-"error	Configuration Error: Failed to find config file at: "./src/app.test.ts"
+exports[`Validate cli > app 'bad config' Expect Error: [Function CheckFailed] 2`] = `
+"error	Configuration Error: Failed to find config file at: \\"./src/app.test.ts\\"
 error	CSpell: Files checked: 0, Issues found: 0 in 0 files"
 `;
 
-exports[`Validate cli app bad config Expect Error: [Function CheckFailed] 3`] = `""`;
+exports[`Validate cli > app 'bad config' Expect Error: [Function CheckFailed] 3`] = `""`;
 
-exports[`Validate cli app check LICENSE Expect Error: undefined 1`] = `
+exports[`Validate cli > app 'check LICENSE' Expect Error: undefined 1`] = `
 [
   "[97mMIT License[39m",
   "[97m[39m",
   "[97mCopyright (c) 2017 Jason Dent[39m",
   "[97m[39m",
   "[97mPermission is hereby granted, free of charge, to any person obtaining a copy[39m",
-  "[97mof this software and associated documentation files (the "Software"), to deal[39m",
+  "[97mof this software and associated documentation files (the \\"Software\\"), to deal[39m",
   "[97min the Software without restriction, including without limitation the rights[39m",
   "[97mto use, copy, modify, merge, publish, distribute, sublicense, and/or sell[39m",
   "[97mcopies of the Software, and to permit persons to whom the Software is[39m",
@@ -149,7 +149,7 @@ exports[`Validate cli app check LICENSE Expect Error: undefined 1`] = `
   "[97mThe above copyright notice and this permission notice shall be included in all[39m",
   "[97mcopies or substantial portions of the Software.[39m",
   "[97m[39m",
-  "[97mTHE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR[39m",
+  "[97mTHE SOFTWARE IS PROVIDED \\"AS IS\\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR[39m",
   "[97mIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,[39m",
   "[97mFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE[39m",
   "[97mAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER[39m",
@@ -160,16 +160,16 @@ exports[`Validate cli app check LICENSE Expect Error: undefined 1`] = `
 ]
 `;
 
-exports[`Validate cli app check LICENSE Expect Error: undefined 2`] = `
+exports[`Validate cli > app 'check LICENSE' Expect Error: undefined 2`] = `
 "log	Check file: ./LICENSE
 log	
 log	
 log	"
 `;
 
-exports[`Validate cli app check LICENSE Expect Error: undefined 3`] = `""`;
+exports[`Validate cli > app 'check LICENSE' Expect Error: undefined 3`] = `""`;
 
-exports[`Validate cli app check help Expect Error: outputHelp 1`] = `
+exports[`Validate cli > app 'check help' Expect Error: 'outputHelp' 1`] = `
 [
   "Usage: cspell check [options] <files...>",
   "",
@@ -190,24 +190,24 @@ exports[`Validate cli app check help Expect Error: outputHelp 1`] = `
 ]
 `;
 
-exports[`Validate cli app check help Expect Error: outputHelp 2`] = `""`;
+exports[`Validate cli > app 'check help' Expect Error: 'outputHelp' 2`] = `""`;
 
-exports[`Validate cli app check help Expect Error: outputHelp 3`] = `""`;
+exports[`Validate cli > app 'check help' Expect Error: 'outputHelp' 3`] = `""`;
 
-exports[`Validate cli app check missing Expect Error: [Function CheckFailed] 1`] = `[]`;
+exports[`Validate cli > app 'check missing' Expect Error: [Function CheckFailed] 1`] = `[]`;
 
-exports[`Validate cli app check missing Expect Error: [Function CheckFailed] 2`] = `
+exports[`Validate cli > app 'check missing' Expect Error: [Function CheckFailed] 2`] = `
 "log	Check file: ./missing-file.txt
 log	
-error	File not found "./missing-file.txt""
+error	File not found \\"./missing-file.txt\\""
 `;
 
-exports[`Validate cli app check missing Expect Error: [Function CheckFailed] 3`] = `""`;
+exports[`Validate cli > app 'check missing' Expect Error: [Function CheckFailed] 3`] = `""`;
 
-exports[`Validate cli app check with spelling errors Expect Error: [Function CheckFailed] 1`] = `
+exports[`Validate cli > app 'check with spelling errors' Expect Error: [Function CheckFailed] 1`] = `
 [
   "[97m                              [[39m[31mNEDERLANDS[39m[97m][39m",
-  "[97m        U [39m[31mwordt[39m[97m [39m[31mvriendelijk[39m[97m [39m[31mverzocht[39m[97m om dit [39m[31mbestand[39m[97m ("README_nl_NL.txt")[39m",
+  "[97m        U [39m[31mwordt[39m[97m [39m[31mvriendelijk[39m[97m [39m[31mverzocht[39m[97m om dit [39m[31mbestand[39m[97m (\\"README_nl_NL.txt\\")[39m",
   "[97m      te [39m[31mlezen[39m[97m en mee te [39m[31mleveren[39m[97m bij [39m[31miedere[39m[97m [39m[31mkopie[39m[97m van dit [39m[31mtaalhulpbestand[39m[97m.[39m",
   "[97m[39m",
   "[97m1. [39m[31mNaam[39m[97m: [39m[31mNederlandstalige[39m[97m [39m[31mwoordenlijst[39m[97m [39m[31mvoor[39m[97m [39m[31mspellingcontrole[39m[97m - OpenTaal[39m",
@@ -235,7 +235,7 @@ exports[`Validate cli app check with spelling errors Expect Error: [Function Che
   "[97m   en het project [39m[31mprofessionaliseren[39m[97m. Uw [39m[31mdonatie[39m[97m is van harte [39m[31mwelkom[39m[97m op[39m",
   "[97m   [39m[31mrekeningnummer[39m[97m 15.62.32.782 t.n.v. [39m[31mStichting[39m[97m OpenTaal. Uw [39m[31mgiften[39m[97m [39m[31mzijn[39m[97m[39m",
   "[97m   [39m[31maftrekbaar[39m[97m van de [39m[31mbelasting[39m[97m. [39m[31mStichting[39m[97m OpenTaal is [39m[31mnamelijk[39m[97m door de[39m",
-  "[97m   [39m[31mBelastingdienst[39m[97m [39m[31merkend[39m[97m als [39m[31mANBI[39m[97m, [39m[31moftewel[39m[97m "[39m[31mAlgemeen[39m[97m Nut [39m[31mBeogende[39m[97m [39m[31mInstelling[39m[97m".[39m",
+  "[97m   [39m[31mBelastingdienst[39m[97m [39m[31merkend[39m[97m als [39m[31mANBI[39m[97m, [39m[31moftewel[39m[97m \\"[39m[31mAlgemeen[39m[97m Nut [39m[31mBeogende[39m[97m [39m[31mInstelling[39m[97m\\".[39m",
   "[97m   Zie: [39m[90mhttp://belastingdienst.nl/anbi/[39m[97m[39m",
   "[97m8. [39m[31mMeedoen[39m[97m: [39m[31mIedereen[39m[97m is [39m[31mwelkom[39m[97m om mee te [39m[31mdoen[39m[97m. Meld [39m[31mfouten[39m[97m, [39m[31mdiscussieer[39m[97m mee op[39m",
   "[97m   de [39m[31mmailinglijst[39m[97m of [39m[31mdraai[39m[97m Harvester. Door bij te [39m[31mdragen[39m[97m aan het project [39m[31mstemt[39m[97m[39m",
@@ -254,7 +254,7 @@ exports[`Validate cli app check with spelling errors Expect Error: [Function Che
   "[97m10.Contact: [39m[31mStichting[39m[97m OpenTaal, [39m[90mhttp://www.opentaal.org,[39m[97m [39m[90mbestuur@opentaal.org[39m[97m[39m",
   "[97m_________________________________________________________________________________[39m",
   "[97m                                [ENGLISH][39m",
-  "[97m        You are kindly requested to read this file "README_nl_NL.txt"[39m",
+  "[97m        You are kindly requested to read this file \\"README_nl_NL.txt\\"[39m",
   "[97m     and to keep a copy of it with every copy you make of this language file.[39m",
   "[97m[39m",
   "[97m1. Name: Dutch word list for spell checking - OpenTaal[39m",
@@ -303,39 +303,39 @@ exports[`Validate cli app check with spelling errors Expect Error: [Function Che
 ]
 `;
 
-exports[`Validate cli app check with spelling errors Expect Error: [Function CheckFailed] 2`] = `
+exports[`Validate cli > app 'check with spelling errors' Expect Error: [Function CheckFailed] 2`] = `
 "log	Check file: ./samples/Dutch.txt
 log	
 log	
 log	"
 `;
 
-exports[`Validate cli app check with spelling errors Expect Error: [Function CheckFailed] 3`] = `""`;
+exports[`Validate cli > app 'check with spelling errors' Expect Error: [Function CheckFailed] 3`] = `""`;
 
-exports[`Validate cli app cspell-bad.json Expect Error: undefined 1`] = `[]`;
+exports[`Validate cli > app 'cspell-bad.json' Expect Error: undefined 1`] = `[]`;
 
-exports[`Validate cli app cspell-bad.json Expect Error: undefined 2`] = `
+exports[`Validate cli > app 'cspell-bad.json' Expect Error: undefined 2`] = `
 "error	 0.00ms
 error	CSpell: Files checked: 1, Issues found: 0 in 0 files"
 `;
 
-exports[`Validate cli app cspell-bad.json Expect Error: undefined 3`] = `
+exports[`Validate cli > app 'cspell-bad.json' Expect Error: undefined 3`] = `
 "
 1/1 [90m./src/app.test.ts[39m"
 `;
 
-exports[`Validate cli app cspell-import-missing.json Expect Error: [Function CheckFailed] 1`] = `[]`;
+exports[`Validate cli > app 'cspell-import-missing.json' Expect Error: [Function CheckFailed] 1`] = `[]`;
 
-exports[`Validate cli app cspell-import-missing.json Expect Error: [Function CheckFailed] 2`] = `
-"error	Configuration Error: Failed to read config file: "./samples/intentionally-missing-file.json"
+exports[`Validate cli > app 'cspell-import-missing.json' Expect Error: [Function CheckFailed] 2`] = `
+"error	Configuration Error: Failed to read config file: \\"./samples/intentionally-missing-file.json\\"
 error	CSpell: Files checked: 0, Issues found: 0 in 0 files"
 `;
 
-exports[`Validate cli app cspell-import-missing.json Expect Error: [Function CheckFailed] 3`] = `""`;
+exports[`Validate cli > app 'cspell-import-missing.json' Expect Error: [Function CheckFailed] 3`] = `""`;
 
-exports[`Validate cli app current_file --verbose Expect Error: undefined 1`] = `[]`;
+exports[`Validate cli > app 'current_file --verbose' Expect Error: undefined 1`] = `[]`;
 
-exports[`Validate cli app current_file --verbose Expect Error: undefined 2`] = `
+exports[`Validate cli > app 'current_file --verbose' Expect Error: undefined 2`] = `
 "info	
 info	cspell;
 info	Date: Sat, 03 Apr 2021 11:25:33 GMT
@@ -369,38 +369,38 @@ error	 0.00ms
 error	CSpell: Files checked: 1, Issues found: 0 in 0 files"
 `;
 
-exports[`Validate cli app current_file --verbose Expect Error: undefined 3`] = `
+exports[`Validate cli > app 'current_file --verbose' Expect Error: undefined 3`] = `
 "
 1/1 [90m./src/app.test.ts[39m"
 `;
 
-exports[`Validate cli app current_file Expect Error: undefined 1`] = `[]`;
+exports[`Validate cli > app 'current_file languageId' Expect Error: undefined 1`] = `[]`;
 
-exports[`Validate cli app current_file Expect Error: undefined 2`] = `
+exports[`Validate cli > app 'current_file languageId' Expect Error: undefined 2`] = `
 "error	 0.00ms
 error	CSpell: Files checked: 1, Issues found: 0 in 0 files"
 `;
 
-exports[`Validate cli app current_file Expect Error: undefined 3`] = `
+exports[`Validate cli > app 'current_file languageId' Expect Error: undefined 3`] = `
 "
 1/1 [90m./src/app.test.ts[39m"
 `;
 
-exports[`Validate cli app current_file languageId Expect Error: undefined 1`] = `[]`;
+exports[`Validate cli > app 'current_file' Expect Error: undefined 1`] = `[]`;
 
-exports[`Validate cli app current_file languageId Expect Error: undefined 2`] = `
+exports[`Validate cli > app 'current_file' Expect Error: undefined 2`] = `
 "error	 0.00ms
 error	CSpell: Files checked: 1, Issues found: 0 in 0 files"
 `;
 
-exports[`Validate cli app current_file languageId Expect Error: undefined 3`] = `
+exports[`Validate cli > app 'current_file' Expect Error: undefined 3`] = `
 "
 1/1 [90m./src/app.test.ts[39m"
 `;
 
-exports[`Validate cli app issue-2998 --language-id Expect Error: undefined 1`] = `[]`;
+exports[`Validate cli > app 'issue-2998 --language-id' Expect Error: undefined 1`] = `[]`;
 
-exports[`Validate cli app issue-2998 --language-id Expect Error: undefined 2`] = `
+exports[`Validate cli > app 'issue-2998 --language-id' Expect Error: undefined 2`] = `
 "info	
 info	cspell;
 info	Date: Sat, 03 Apr 2021 11:25:33 GMT
@@ -426,53 +426,53 @@ error	 0.00ms
 error	CSpell: Files checked: 1, Issues found: 0 in 0 files"
 `;
 
-exports[`Validate cli app issue-2998 --language-id Expect Error: undefined 3`] = `
+exports[`Validate cli > app 'issue-2998 --language-id' Expect Error: undefined 3`] = `
 "
 1/1 [90m./fixtures/issue-2998/fix-words.txt[39m"
 `;
 
-exports[`Validate cli app link 1`] = `""`;
+exports[`Validate cli > app 'link add' 1`] = `""`;
 
-exports[`Validate cli app link add 1`] = `""`;
+exports[`Validate cli > app 'link list' 1`] = `""`;
 
-exports[`Validate cli app link list 1`] = `""`;
+exports[`Validate cli > app 'link ls' 1`] = `""`;
 
-exports[`Validate cli app link ls 1`] = `""`;
+exports[`Validate cli > app 'link remove' 1`] = `""`;
 
-exports[`Validate cli app link remove 1`] = `""`;
+exports[`Validate cli > app 'link' 1`] = `""`;
 
-exports[`Validate cli app must find force no error Expect Error: undefined 1`] = `[]`;
+exports[`Validate cli > app 'must find force no error' Expect Error: undefined 1`] = `[]`;
 
-exports[`Validate cli app must find force no error Expect Error: undefined 2`] = `"error	CSpell: Files checked: 0, Issues found: 0 in 0 files"`;
+exports[`Validate cli > app 'must find force no error' Expect Error: undefined 2`] = `"error	CSpell: Files checked: 0, Issues found: 0 in 0 files"`;
 
-exports[`Validate cli app must find force no error Expect Error: undefined 3`] = `""`;
+exports[`Validate cli > app 'must find force no error' Expect Error: undefined 3`] = `""`;
 
-exports[`Validate cli app must find with error Expect Error: [Function CheckFailed] 1`] = `[]`;
+exports[`Validate cli > app 'must find with error' Expect Error: [Function CheckFailed] 1`] = `[]`;
 
-exports[`Validate cli app must find with error Expect Error: [Function CheckFailed] 2`] = `"error	CSpell: Files checked: 0, Issues found: 0 in 0 files"`;
+exports[`Validate cli > app 'must find with error' Expect Error: [Function CheckFailed] 2`] = `"error	CSpell: Files checked: 0, Issues found: 0 in 0 files"`;
 
-exports[`Validate cli app must find with error Expect Error: [Function CheckFailed] 3`] = `""`;
+exports[`Validate cli > app 'must find with error' Expect Error: [Function CheckFailed] 3`] = `""`;
 
-exports[`Validate cli app no-args Expect Error: outputHelp 1`] = `
+exports[`Validate cli > app 'no-args' Expect Error: 'outputHelp' 1`] = `
 [
   "Usage: cspell lint [options] [globs...] [file://<path> ...] [stdin[://<path>]]",
   "",
   "Patterns:",
   " - [globs...]            Glob Patterns",
-  " - [stdin]               Read from "stdin" assume text file.",
-  " - [stdin://<path>]      Read from "stdin", use <path> for file type and config.",
+  " - [stdin]               Read from \\"stdin\\" assume text file.",
+  " - [stdin://<path>]      Read from \\"stdin\\", use <path> for file type and config.",
   " - [file://<path>]       Check the file at <path>",
   "",
   "Examples:",
   "    cspell .                        Recursively check all files.",
-  "    cspell lint .                   The same as "cspell ."",
-  "    cspell "*.js"                   Check all .js files in the current directory",
-  "    cspell "**/*.js"                Check all .js files recursively",
-  "    cspell "src/**/*.js"            Only check .js under src",
-  "    cspell "**/*.txt" "**/*.js"     Check both .js and .txt files.",
-  "    cspell "**/*.{txt,js,md}"       Check .txt, .js, and .md files.",
+  "    cspell lint .                   The same as \\"cspell .\\"",
+  "    cspell \\"*.js\\"                   Check all .js files in the current directory",
+  "    cspell \\"**/*.js\\"                Check all .js files recursively",
+  "    cspell \\"src/**/*.js\\"            Only check .js under src",
+  "    cspell \\"**/*.txt\\" \\"**/*.js\\"     Check both .js and .txt files.",
+  "    cspell \\"**/*.{txt,js,md}\\"       Check .txt, .js, and .md files.",
   "    cat LICENSE | cspell stdin      Check stdin",
-  "    cspell stdin://docs/doc.md      Check stdin as if it was "./docs/doc.md"",
+  "    cspell stdin://docs/doc.md      Check stdin as if it was \\"./docs/doc.md\\"",
   "",
   "Check spelling",
   "",
@@ -481,10 +481,10 @@ exports[`Validate cli app no-args Expect Error: outputHelp 1`] = `
   "                               looks for cspell.json in the current directory.",
   "  -v, --verbose                Display more information about the files being",
   "                               checked and the configuration.",
-  "  --locale <locale>            Set language locales. i.e. "en,fr" for English",
-  "                               and French, or "en-GB" for British English.",
+  "  --locale <locale>            Set language locales. i.e. \\"en,fr\\" for English",
+  "                               and French, or \\"en-GB\\" for British English.",
   "  --language-id <language>     Force programming language for unknown",
-  "                               extensions. i.e. "php" or "scala"",
+  "                               extensions. i.e. \\"php\\" or \\"scala\\"",
   "  --words-only                 Only output the words not found in the",
   "                               dictionaries.",
   "  -u, --unique                 Only output the first instance of a word not",
@@ -509,9 +509,9 @@ exports[`Validate cli app no-args Expect Error: outputHelp 1`] = `
   "  --no-cache                   Do not use cache.",
   "  --cache-reset                Reset the cache file.",
   "  --cache-strategy <strategy>  Strategy to use for detecting changed files.",
-  "                               (choices: "metadata", "content")",
+  "                               (choices: \\"metadata\\", \\"content\\")",
   "  --cache-location <path>      Path to the cache file or directory. (default:",
-  "                               ".cspellcache")",
+  "                               \\".cspellcache\\")",
   "  --dot                        Include files and directories starting with \`.\`",
   "                               (period) when matching globs.",
   "  --gitignore                  Ignore files matching glob patterns found in",
@@ -532,9 +532,9 @@ exports[`Validate cli app no-args Expect Error: outputHelp 1`] = `
   "",
   "More Examples:",
   "",
-  "    cspell "**/*.js" --reporter @cspell/cspell-json-reporter",
-  "        This will spell check all ".js" files recursively and use",
-  "        "@cspell/cspell-json-reporter".",
+  "    cspell \\"**/*.js\\" --reporter @cspell/cspell-json-reporter",
+  "        This will spell check all \\".js\\" files recursively and use",
+  "        \\"@cspell/cspell-json-reporter\\".",
   "",
   "    cspell . --reporter default",
   "        This will force the default reporter to be used overriding",
@@ -551,19 +551,19 @@ exports[`Validate cli app no-args Expect Error: outputHelp 1`] = `
 ]
 `;
 
-exports[`Validate cli app no-args Expect Error: outputHelp 2`] = `""`;
+exports[`Validate cli > app 'no-args' Expect Error: 'outputHelp' 2`] = `""`;
 
-exports[`Validate cli app no-args Expect Error: outputHelp 3`] = `""`;
+exports[`Validate cli > app 'no-args' Expect Error: 'outputHelp' 3`] = `""`;
 
-exports[`Validate cli app not found error by default Expect Error: [Function CheckFailed] 1`] = `[]`;
+exports[`Validate cli > app 'not found error by default' Expect Error: [Function CheckFailed] 1`] = `[]`;
 
-exports[`Validate cli app not found error by default Expect Error: [Function CheckFailed] 2`] = `"error	CSpell: Files checked: 0, Issues found: 0 in 0 files"`;
+exports[`Validate cli > app 'not found error by default' Expect Error: [Function CheckFailed] 2`] = `"error	CSpell: Files checked: 0, Issues found: 0 in 0 files"`;
 
-exports[`Validate cli app not found error by default Expect Error: [Function CheckFailed] 3`] = `""`;
+exports[`Validate cli > app 'not found error by default' Expect Error: [Function CheckFailed] 3`] = `""`;
 
-exports[`Validate cli app samples/Dutch.txt Expect Error: [Function CheckFailed] 1`] = `[]`;
+exports[`Validate cli > app 'samples/Dutch.txt' Expect Error: [Function CheckFailed] 1`] = `[]`;
 
-exports[`Validate cli app samples/Dutch.txt Expect Error: [Function CheckFailed] 2`] = `
+exports[`Validate cli > app 'samples/Dutch.txt' Expect Error: [Function CheckFailed] 2`] = `
 "error	 0.00ms X
 log	./samples/Dutch.txt:1:32 - Unknown word (NEDERLANDS)
 log	./samples/Dutch.txt:2:11 - Unknown word (wordt)
@@ -757,21 +757,14 @@ log	./samples/Dutch.txt:78:18 - Unknown word (ANBI)
 error	CSpell: Files checked: 1, Issues found: 189 in 1 files"
 `;
 
-exports[`Validate cli app samples/Dutch.txt Expect Error: [Function CheckFailed] 3`] = `
+exports[`Validate cli > app 'samples/Dutch.txt' Expect Error: [Function CheckFailed] 3`] = `
 "
 1/1 [90m./samples/Dutch.txt[39m"
 `;
 
-exports[`Validate cli app success suggest run with ["suggest", "café", "--num-suggestions=1", "--no-include-ties"] 1`] = `[]`;
+exports[`Validate cli > app 'trace café' Expect Error: undefined 1`] = `[]`;
 
-exports[`Validate cli app success suggest run with ["suggest", "café", "--num-suggestions=1", "--no-include-ties"] 2`] = `
-"café:
- - café"
-`;
-
-exports[`Validate cli app success trace café run with ["trace", "café"] 1`] = `[]`;
-
-exports[`Validate cli app success trace café run with ["trace", "café"] 2`] = `
+exports[`Validate cli > app 'trace café' Expect Error: undefined 2`] = `
 "Word F Dictionary           Dictionary Location           
 café - [flagWords]*         From Settings \`flagWords\`
 café - [ignoreWords]*       From Settings \`ignoreWords\`
@@ -826,66 +819,9 @@ café - web-services         ../../node_modules/.pnpm...erms/dict/webServices.t
 café - workspace*           ../../cspell-dict.txt"
 `;
 
-exports[`Validate cli app success trace hello run with ["trace", "--locale=en-gb", "hello"] 1`] = `[]`;
+exports[`Validate cli > app 'trace hello' Expect Error: undefined 1`] = `[]`;
 
-exports[`Validate cli app success trace hello run with ["trace", "--locale=en-gb", "hello"] 2`] = `
-"Word  F Dictionary           Dictionary Location           
-hello - [flagWords]*         From Settings \`flagWords\`
-hello - [ignoreWords]*       From Settings \`ignoreWords\`
-hello - [words]*             From Settings \`words\`
-hello - ada                  ../../node_modules/.pnpm...ll/dict-ada/dict/ada.txt
-hello - aws*                 ../../node_modules/.pnpm...pell/dict-aws/aws.txt.gz
-hello - bash                 ../../node_modules/.pnpm...bash/dict/bash-words.txt
-hello - companies*           ../../node_modules/.pnpm...anies/dict/companies.txt
-hello * cpp                  ../../node_modules/.pnpm...pell/dict-cpp/cpp.txt.gz
-hello - cpp-refined          ../../node_modules/.pnpm...t-cpp/cpp-refined.txt.gz
-hello - cryptocurrencies*    ../../node_modules/.pnpm.../cryptocurrencies.txt.gz
-hello - csharp               ../../node_modules/.pnpm...ict-csharp/csharp.txt.gz
-hello - css                  ../../node_modules/.pnpm...ll/dict-css/dict/css.txt
-hello - dart                 ../../node_modules/.pnpm...ll/dict-dart/dart.txt.gz
-hello - django               ../../node_modules/.pnpm...t-django/dict/django.txt
-hello - docker               ../../node_modules/.pnpm...cker/docker-words.txt.gz
-hello - dotnet               ../../node_modules/.pnpm...t-dotnet/dict/dotnet.txt
-hello - elixir               ../../node_modules/.pnpm...t-elixir/dict/elixir.txt
-hello * en_us                ../../node_modules/.pnpm...dict-en_us/en_US.trie.gz
-hello * en-gb*               ../../node_modules/.pnpm...dict-en-gb/en_GB.trie.gz
-hello - filetypes*           ../../node_modules/.pnpm...letypes/filetypes.txt.gz
-hello - fonts                ../../node_modules/.pnpm.../dict-fonts/fonts.txt.gz
-hello - fullstack            ../../node_modules/.pnpm...stack/dict/fullstack.txt
-hello - gaming-terms         ../../node_modules/.pnpm...ms/dict/gaming-terms.txt
-hello * golang               ../../node_modules/.pnpm.../dict-golang/dict/go.txt
-hello - haskell              ../../node_modules/.pnpm...haskell/dict/haskell.txt
-hello - html                 ../../node_modules/.pnpm...ll/dict-html/html.txt.gz
-hello - html-symbol-entitie  ../../node_modules/.pnpm...entities/entities.txt.gz
-hello - java                 ../../node_modules/.pnpm...dict-java/dict/java.trie
-hello - k8s                  ../../node_modules/.pnpm...ll/dict-k8s/dict/k8s.txt
-hello - latex                ../../node_modules/.pnpm...ict-latex/dict/latex.txt
-hello - lorem-ipsum          ../../node_modules/.pnpm...-ipsum/dictionary.txt.gz
-hello - lua                  ../../node_modules/.pnpm...ll/dict-lua/dict/lua.txt
-hello - networking-terms     ../../node_modules/.pnpm...dict/networkingTerms.txt
-hello * node                 ../../node_modules/.pnpm.../dict-node/dict/node.txt
-hello - npm                  ../../node_modules/.pnpm...ll/dict-npm/dict/npm.txt
-hello - php                  ../../node_modules/.pnpm...ll/dict-php/dict/php.txt
-hello - powershell           ../../node_modules/.pnpm...hell/dict/powershell.txt
-hello - public-licenses*     ../../node_modules/.pnpm...s/public-licenses.txt.gz
-hello - python               ../../node_modules/.pnpm...ict-python/python.txt.gz
-hello - python-common        ../../node_modules/.pnpm...hon/python-common.txt.gz
-hello - r                    ../../node_modules/.pnpm.../@cspell/dict-r/r.txt.gz
-hello - ruby                 ../../node_modules/.pnpm.../dict-ruby/dict/ruby.txt
-hello - rust                 ../../node_modules/.pnpm.../dict-rust/dict/rust.txt
-hello - scala                ../../node_modules/.pnpm...ict-scala/dict/scala.txt
-hello - softwareTerms*       ../../node_modules/.pnpm...s/dict/softwareTerms.txt
-hello - sql                  ../../node_modules/.pnpm...pell/dict-sql/sql.txt.gz
-hello - svelte               ../../node_modules/.pnpm...t-svelte/dict/svelte.txt
-hello - swift                ../../node_modules/.pnpm.../dict-swift/swift.txt.gz
-hello - typescript           ../../node_modules/.pnpm...ript/dict/typescript.txt
-hello - web-services         ../../node_modules/.pnpm...rms/dict/webServices.txt
-hello - workspace*           ../../cspell-dict.txt"
-`;
-
-exports[`Validate cli app success trace hello run with ["trace", "hello"] 1`] = `[]`;
-
-exports[`Validate cli app success trace hello run with ["trace", "hello"] 2`] = `
+exports[`Validate cli > app 'trace hello' Expect Error: undefined 2`] = `
 "Word  F Dictionary           Dictionary Location           
 hello - [flagWords]*         From Settings \`flagWords\`
 hello - [ignoreWords]*       From Settings \`ignoreWords\`
@@ -940,286 +876,9 @@ hello - web-services         ../../node_modules/.pnpm...rms/dict/webServices.txt
 hello - workspace*           ../../cspell-dict.txt"
 `;
 
-exports[`Validate cli app suggest ["sug", "--stdin", "-d=en_us", "-v"] 1`] = `[]`;
+exports[`Validate cli > app 'trace hello' Expect Error: undefined 3`] = `[]`;
 
-exports[`Validate cli app suggest ["sug", "--stdin", "-d=en_us", "-v"] 2`] = `
-"mexico:
- - Mexico      -    1 en_us
- - medico      -  100 en_us
- - medic       -  190 en_us
- - melic       -  190 en_us
- - mesic       -  190 en_us
- - metic       -  190 en_us
- - Mexican     -  191 en_us
- - Mexico's    -  191 en_us"
-`;
-
-exports[`Validate cli app suggest ["sug", "--stdin", "-d=en_us", "-v"] 3`] = `""`;
-
-exports[`Validate cli app suggest ["sug", "dutch", "--dictionaries=en_us", "--dictionary=en-gb", "-v", "--num-suggestions=2"] 1`] = `[]`;
-
-exports[`Validate cli app suggest ["sug", "dutch", "--dictionaries=en_us", "--dictionary=en-gb", "-v", "--num-suggestions=2"] 2`] = `
-"dutch:
- - dutch    -    0 en-gb, en_us
- - Dutch    -    1 en_us"
-`;
-
-exports[`Validate cli app suggest ["sug", "dutch", "--dictionaries=en_us", "--dictionary=en-gb", "-v", "--num-suggestions=2"] 3`] = `""`;
-
-exports[`Validate cli app suggest ["sug", "dutch", "--dictionaries=en_us", "-v", "--num-suggestions=2"] 1`] = `[]`;
-
-exports[`Validate cli app suggest ["sug", "dutch", "--dictionaries=en_us", "-v", "--num-suggestions=2"] 2`] = `
-"dutch:
- - dutch    -    0 en_us
- - Dutch    -    1 en_us"
-`;
-
-exports[`Validate cli app suggest ["sug", "dutch", "--dictionaries=en_us", "-v", "--num-suggestions=2"] 3`] = `""`;
-
-exports[`Validate cli app suggest ["sug", "dutch", "--dictionaries=en_us", "-v", "--num-suggestions=2"] 4`] = `[]`;
-
-exports[`Validate cli app suggest ["sug", "dutch", "--dictionaries=en_us", "-v", "--num-suggestions=2"] 5`] = `
-"dutch:
- - dutch    -    0 en_us
- - Dutch    -    1 en_us"
-`;
-
-exports[`Validate cli app suggest ["sug", "dutch", "--dictionaries=en_us", "-v", "--num-suggestions=2"] 6`] = `""`;
-
-exports[`Validate cli app suggest ["sug", "dutch", "-d=en_us", "-d=en-gb", "-v", "--num-suggestions=2"] 1`] = `[]`;
-
-exports[`Validate cli app suggest ["sug", "dutch", "-d=en_us", "-d=en-gb", "-v", "--num-suggestions=2"] 2`] = `
-"dutch:
- - dutch    -    0 en-gb, en_us
- - Dutch    -    1 en_us"
-`;
-
-exports[`Validate cli app suggest ["sug", "dutch", "-d=en_us", "-d=en-gb", "-v", "--num-suggestions=2"] 3`] = `""`;
-
-exports[`Validate cli app suggest ["sug", "mexico", "-d=en_us", "-v", "--num-suggestions=0"] 1`] = `[]`;
-
-exports[`Validate cli app suggest ["sug", "mexico", "-d=en_us", "-v", "--num-suggestions=0"] 2`] = `
-"mexico:
- <no suggestions>"
-`;
-
-exports[`Validate cli app suggest ["sug", "mexico", "-d=en_us", "-v", "--num-suggestions=0"] 3`] = `""`;
-
-exports[`Validate cli app suggest ["sug", "mexico", "-d=en_us", "-v"] 1`] = `[]`;
-
-exports[`Validate cli app suggest ["sug", "mexico", "-d=en_us", "-v"] 2`] = `
-"mexico:
- - Mexico      -    1 en_us
- - medico      -  100 en_us
- - medic       -  190 en_us
- - melic       -  190 en_us
- - mesic       -  190 en_us
- - metic       -  190 en_us
- - Mexican     -  191 en_us
- - Mexico's    -  191 en_us"
-`;
-
-exports[`Validate cli app suggest ["sug", "mexico", "-d=en_us", "-v"] 3`] = `""`;
-
-exports[`Validate cli app suggest ["sug", "mexico", "-d=en_us"] 1`] = `[]`;
-
-exports[`Validate cli app suggest ["sug", "mexico", "-d=en_us"] 2`] = `
-"mexico:
- - Mexico
- - medico
- - medic
- - melic
- - mesic
- - metic
- - Mexican
- - Mexico's"
-`;
-
-exports[`Validate cli app suggest ["sug", "mexico", "-d=en_us"] 3`] = `""`;
-
-exports[`Validate cli app suggest ["sug", "mexico", "-d=en-gb"] 1`] = `[]`;
-
-exports[`Validate cli app suggest ["sug", "mexico", "-d=en-gb"] 2`] = `
-"mexico:
- - mexico
- - medico
- - mexico's
- - mexican
- - medicos
- - medich
- - medici
- - medics
- - melick"
-`;
-
-exports[`Validate cli app suggest ["sug", "mexico", "-d=en-gb"] 3`] = `""`;
-
-exports[`Validate cli app suggest ["sug", "mexico", "-d=en-us"] 1`] = `[]`;
-
-exports[`Validate cli app suggest ["sug", "mexico", "-d=en-us"] 2`] = `""`;
-
-exports[`Validate cli app suggest ["sug", "mexico", "-d=en-us"] 3`] = `"Unknown dictionary: "en-us""`;
-
-exports[`Validate cli app suggest ["sug"] 1`] = `
-[
-  "Usage: cspell suggestions|sug [options] [words...]",
-  "",
-  "Spelling Suggestions for words.",
-  "",
-  "Options:",
-  "  -c, --config <cspell.json>            Configuration file to use.  By default",
-  "                                        cspell looks for cspell.json in the",
-  "                                        current directory.",
-  "  --locale <locale>                     Set language locales. i.e. "en,fr" for",
-  "                                        English and French, or "en-GB" for",
-  "                                        British English.",
-  "  --language-id <language>              Use programming language. i.e. "php" or",
-  "                                        "scala".",
-  "  -s, --no-strict                       Ignore case and accents when searching",
-  "                                        for words.",
-  "  --ignore-case                         Alias of --no-strict.",
-  "  --num-changes <number>                Number of changes allowed to a word",
-  "                                        (default: 4)",
-  "  --num-suggestions <number>            Number of suggestions (default: 8)",
-  "  --no-include-ties                     Force the number of suggested to be",
-  "                                        limited, by not including suggestions",
-  "                                        that have the same edit cost.",
-  "  --stdin                               Use stdin for input.",
-  "  --repl                                REPL interface for looking up",
-  "                                        suggestions.",
-  "  -v, --verbose                         Show detailed output.",
-  "  -d, --dictionary <dictionary name>    Use the dictionary specified. Only",
-  "                                        dictionaries specified will be used.",
-  "  --dictionaries <dictionary names...>  Use the dictionaries specified. Only",
-  "                                        dictionaries specified will be used.",
-  "  --no-color                            Turn off color.",
-  "  --color                               Force color",
-  "  -h, --help                            display help for command",
-  "",
-]
-`;
-
-exports[`Validate cli app suggest ["sug"] 2`] = `""`;
-
-exports[`Validate cli app suggest ["sug"] 3`] = `""`;
-
-exports[`Validate cli app trace café Expect Error: undefined 1`] = `[]`;
-
-exports[`Validate cli app trace café Expect Error: undefined 2`] = `
-"Word F Dictionary           Dictionary Location           
-café - [flagWords]*         From Settings \`flagWords\`
-café - [ignoreWords]*       From Settings \`ignoreWords\`
-café - [words]*             From Settings \`words\`
-café - ada                  ../../node_modules/.pnpm...ell/dict-ada/dict/ada.txt
-café - aws*                 ../../node_modules/.pnpm...spell/dict-aws/aws.txt.gz
-café - bash                 ../../node_modules/.pnpm...-bash/dict/bash-words.txt
-café - companies*           ../../node_modules/.pnpm...panies/dict/companies.txt
-café - cpp                  ../../node_modules/.pnpm...spell/dict-cpp/cpp.txt.gz
-café - cpp-refined          ../../node_modules/.pnpm...ct-cpp/cpp-refined.txt.gz
-café - cryptocurrencies*    ../../node_modules/.pnpm...s/cryptocurrencies.txt.gz
-café - csharp               ../../node_modules/.pnpm...dict-csharp/csharp.txt.gz
-café - css                  ../../node_modules/.pnpm...ell/dict-css/dict/css.txt
-café - dart                 ../../node_modules/.pnpm...ell/dict-dart/dart.txt.gz
-café - django               ../../node_modules/.pnpm...ct-django/dict/django.txt
-café - docker               ../../node_modules/.pnpm...ocker/docker-words.txt.gz
-café - dotnet               ../../node_modules/.pnpm...ct-dotnet/dict/dotnet.txt
-café - elixir               ../../node_modules/.pnpm...ct-elixir/dict/elixir.txt
-café * en_us*               ../../node_modules/.pnpm.../dict-en_us/en_US.trie.gz
-café * en-gb                ../../node_modules/.pnpm.../dict-en-gb/en_GB.trie.gz
-café - filetypes*           ../../node_modules/.pnpm...iletypes/filetypes.txt.gz
-café - fonts                ../../node_modules/.pnpm...l/dict-fonts/fonts.txt.gz
-café - fullstack            ../../node_modules/.pnpm...lstack/dict/fullstack.txt
-café - gaming-terms         ../../node_modules/.pnpm...rms/dict/gaming-terms.txt
-café - golang               ../../node_modules/.pnpm...l/dict-golang/dict/go.txt
-café - haskell              ../../node_modules/.pnpm...-haskell/dict/haskell.txt
-café - html                 ../../node_modules/.pnpm...ell/dict-html/html.txt.gz
-café - html-symbol-entitie  ../../node_modules/.pnpm...-entities/entities.txt.gz
-café - java                 ../../node_modules/.pnpm.../dict-java/dict/java.trie
-café - k8s                  ../../node_modules/.pnpm...ell/dict-k8s/dict/k8s.txt
-café - latex                ../../node_modules/.pnpm...dict-latex/dict/latex.txt
-café - lorem-ipsum          ../../node_modules/.pnpm...m-ipsum/dictionary.txt.gz
-café - lua                  ../../node_modules/.pnpm...ell/dict-lua/dict/lua.txt
-café - networking-terms     ../../node_modules/.pnpm.../dict/networkingTerms.txt
-café - node                 ../../node_modules/.pnpm...l/dict-node/dict/node.txt
-café - npm                  ../../node_modules/.pnpm...ell/dict-npm/dict/npm.txt
-café - php                  ../../node_modules/.pnpm...ell/dict-php/dict/php.txt
-café - powershell           ../../node_modules/.pnpm...shell/dict/powershell.txt
-café - public-licenses*     ../../node_modules/.pnpm...es/public-licenses.txt.gz
-café - python               ../../node_modules/.pnpm...dict-python/python.txt.gz
-café - python-common        ../../node_modules/.pnpm...thon/python-common.txt.gz
-café - r                    ../../node_modules/.pnpm...s/@cspell/dict-r/r.txt.gz
-café - ruby                 ../../node_modules/.pnpm...l/dict-ruby/dict/ruby.txt
-café - rust                 ../../node_modules/.pnpm...l/dict-rust/dict/rust.txt
-café - scala                ../../node_modules/.pnpm...dict-scala/dict/scala.txt
-café - softwareTerms*       ../../node_modules/.pnpm...ms/dict/softwareTerms.txt
-café - sql                  ../../node_modules/.pnpm...spell/dict-sql/sql.txt.gz
-café - svelte               ../../node_modules/.pnpm...ct-svelte/dict/svelte.txt
-café - swift                ../../node_modules/.pnpm...l/dict-swift/swift.txt.gz
-café - typescript           ../../node_modules/.pnpm...cript/dict/typescript.txt
-café - web-services         ../../node_modules/.pnpm...erms/dict/webServices.txt
-café - workspace*           ../../cspell-dict.txt"
-`;
-
-exports[`Validate cli app trace hello Expect Error: undefined 1`] = `[]`;
-
-exports[`Validate cli app trace hello Expect Error: undefined 2`] = `
-"Word  F Dictionary           Dictionary Location           
-hello - [flagWords]*         From Settings \`flagWords\`
-hello - [ignoreWords]*       From Settings \`ignoreWords\`
-hello - [words]*             From Settings \`words\`
-hello - ada                  ../../node_modules/.pnpm...ll/dict-ada/dict/ada.txt
-hello - aws*                 ../../node_modules/.pnpm...pell/dict-aws/aws.txt.gz
-hello - bash                 ../../node_modules/.pnpm...bash/dict/bash-words.txt
-hello - companies*           ../../node_modules/.pnpm...anies/dict/companies.txt
-hello * cpp                  ../../node_modules/.pnpm...pell/dict-cpp/cpp.txt.gz
-hello - cpp-refined          ../../node_modules/.pnpm...t-cpp/cpp-refined.txt.gz
-hello - cryptocurrencies*    ../../node_modules/.pnpm.../cryptocurrencies.txt.gz
-hello - csharp               ../../node_modules/.pnpm...ict-csharp/csharp.txt.gz
-hello - css                  ../../node_modules/.pnpm...ll/dict-css/dict/css.txt
-hello - dart                 ../../node_modules/.pnpm...ll/dict-dart/dart.txt.gz
-hello - django               ../../node_modules/.pnpm...t-django/dict/django.txt
-hello - docker               ../../node_modules/.pnpm...cker/docker-words.txt.gz
-hello - dotnet               ../../node_modules/.pnpm...t-dotnet/dict/dotnet.txt
-hello - elixir               ../../node_modules/.pnpm...t-elixir/dict/elixir.txt
-hello * en_us*               ../../node_modules/.pnpm...dict-en_us/en_US.trie.gz
-hello * en-gb                ../../node_modules/.pnpm...dict-en-gb/en_GB.trie.gz
-hello - filetypes*           ../../node_modules/.pnpm...letypes/filetypes.txt.gz
-hello - fonts                ../../node_modules/.pnpm.../dict-fonts/fonts.txt.gz
-hello - fullstack            ../../node_modules/.pnpm...stack/dict/fullstack.txt
-hello - gaming-terms         ../../node_modules/.pnpm...ms/dict/gaming-terms.txt
-hello * golang               ../../node_modules/.pnpm.../dict-golang/dict/go.txt
-hello - haskell              ../../node_modules/.pnpm...haskell/dict/haskell.txt
-hello - html                 ../../node_modules/.pnpm...ll/dict-html/html.txt.gz
-hello - html-symbol-entitie  ../../node_modules/.pnpm...entities/entities.txt.gz
-hello - java                 ../../node_modules/.pnpm...dict-java/dict/java.trie
-hello - k8s                  ../../node_modules/.pnpm...ll/dict-k8s/dict/k8s.txt
-hello - latex                ../../node_modules/.pnpm...ict-latex/dict/latex.txt
-hello - lorem-ipsum          ../../node_modules/.pnpm...-ipsum/dictionary.txt.gz
-hello - lua                  ../../node_modules/.pnpm...ll/dict-lua/dict/lua.txt
-hello - networking-terms     ../../node_modules/.pnpm...dict/networkingTerms.txt
-hello * node                 ../../node_modules/.pnpm.../dict-node/dict/node.txt
-hello - npm                  ../../node_modules/.pnpm...ll/dict-npm/dict/npm.txt
-hello - php                  ../../node_modules/.pnpm...ll/dict-php/dict/php.txt
-hello - powershell           ../../node_modules/.pnpm...hell/dict/powershell.txt
-hello - public-licenses*     ../../node_modules/.pnpm...s/public-licenses.txt.gz
-hello - python               ../../node_modules/.pnpm...ict-python/python.txt.gz
-hello - python-common        ../../node_modules/.pnpm...hon/python-common.txt.gz
-hello - r                    ../../node_modules/.pnpm.../@cspell/dict-r/r.txt.gz
-hello - ruby                 ../../node_modules/.pnpm.../dict-ruby/dict/ruby.txt
-hello - rust                 ../../node_modules/.pnpm.../dict-rust/dict/rust.txt
-hello - scala                ../../node_modules/.pnpm...ict-scala/dict/scala.txt
-hello - softwareTerms*       ../../node_modules/.pnpm...s/dict/softwareTerms.txt
-hello - sql                  ../../node_modules/.pnpm...pell/dict-sql/sql.txt.gz
-hello - svelte               ../../node_modules/.pnpm...t-svelte/dict/svelte.txt
-hello - swift                ../../node_modules/.pnpm.../dict-swift/swift.txt.gz
-hello - typescript           ../../node_modules/.pnpm...ript/dict/typescript.txt
-hello - web-services         ../../node_modules/.pnpm...rms/dict/webServices.txt
-hello - workspace*           ../../cspell-dict.txt"
-`;
-
-exports[`Validate cli app trace hello Expect Error: undefined 3`] = `[]`;
-
-exports[`Validate cli app trace hello Expect Error: undefined 4`] = `
+exports[`Validate cli > app 'trace hello' Expect Error: undefined 4`] = `
 "Word  F Dictionary           Dictionary Location           
 hello - [flagWords]*         From Settings \`flagWords\`
 hello - [ignoreWords]*       From Settings \`ignoreWords\`
@@ -1274,7 +933,7 @@ hello - web-services         ../../node_modules/.pnpm...rms/dict/webServices.txt
 hello - workspace*           ../../cspell-dict.txt"
 `;
 
-exports[`Validate cli app trace help Expect Error: outputHelp 1`] = `
+exports[`Validate cli > app 'trace help' Expect Error: 'outputHelp' 1`] = `
 [
   "Usage: cspell trace [options] [words...]",
   "",
@@ -1283,9 +942,9 @@ exports[`Validate cli app trace help Expect Error: outputHelp 1`] = `
   "Options:",
   "  -c, --config <cspell.json>  Configuration file to use.  By default cspell",
   "                              looks for cspell.json in the current directory.",
-  "  --locale <locale>           Set language locales. i.e. "en,fr" for English",
-  "                              and French, or "en-GB" for British English.",
-  "  --language-id <language>    Use programming language. i.e. "php" or "scala"",
+  "  --locale <locale>           Set language locales. i.e. \\"en,fr\\" for English",
+  "                              and French, or \\"en-GB\\" for British English.",
+  "  --language-id <language>    Use programming language. i.e. \\"php\\" or \\"scala\\"",
   "  --allow-compound-words      Turn on allowCompoundWords",
   "  --no-allow-compound-words   Turn off allowCompoundWords",
   "  --no-ignore-case            Do not ignore case and accents when searching for",
@@ -1300,11 +959,11 @@ exports[`Validate cli app trace help Expect Error: outputHelp 1`] = `
 ]
 `;
 
-exports[`Validate cli app trace help Expect Error: outputHelp 2`] = `""`;
+exports[`Validate cli > app 'trace help' Expect Error: 'outputHelp' 2`] = `""`;
 
-exports[`Validate cli app trace missing dictionary Expect Error: [Function CheckFailed] 1`] = `[]`;
+exports[`Validate cli > app 'trace missing dictionary' Expect Error: [Function CheckFailed] 1`] = `[]`;
 
-exports[`Validate cli app trace missing dictionary Expect Error: [Function CheckFailed] 2`] = `
+exports[`Validate cli > app 'trace missing dictionary' Expect Error: [Function CheckFailed] 2`] = `
 "Word  F Dictionary           Dictionary Location           
 hello - [flagWords]*         From Settings \`flagWords\`
 hello - [ignoreWords]*       From Settings \`ignoreWords\`
@@ -1361,9 +1020,9 @@ hello - web-services         ../../node_modules/.pnpm...rms/dict/webServices.txt
 hello - workspace*           ../../cspell-dict.txt"
 `;
 
-exports[`Validate cli app trace not-in-any-dictionary Expect Error: [Function CheckFailed] 1`] = `[]`;
+exports[`Validate cli > app 'trace not-in-any-dictionary' Expect Error: [Function CheckFailed] 1`] = `[]`;
 
-exports[`Validate cli app trace not-in-any-dictionary Expect Error: [Function CheckFailed] 2`] = `
+exports[`Validate cli > app 'trace not-in-any-dictionary' Expect Error: [Function CheckFailed] 2`] = `
 "Word                  F Dictionary           Dictionary Location           
 not-in-any-dictionary - [flagWords]*         From Settings \`flagWords\`
 not-in-any-dictionary - [ignoreWords]*       From Settings \`ignoreWords\`
@@ -1418,20 +1077,20 @@ not-in-any-dictionary - web-services         ../../node_modul.../webServices.txt
 not-in-any-dictionary - workspace*           ../../cspell-dict.txt"
 `;
 
-exports[`Validate cli app typos Expect Error: [Function CheckFailed] 1`] = `[]`;
+exports[`Validate cli > app 'typos' Expect Error: [Function CheckFailed] 1`] = `[]`;
 
-exports[`Validate cli app typos Expect Error: [Function CheckFailed] 2`] = `
+exports[`Validate cli > app 'typos' Expect Error: [Function CheckFailed] 2`] = `
 "log	./fixtures/features/typos/test.md:5:3 - Forbidden word (blacklist) Suggestions: [denylist*, blacklists, backlist, blacklist's, blacklisted]
 log	./fixtures/features/typos/test.md:6:3 - Forbidden word (whitelist) Suggestions: [allowlist*, whitelists, whitelisted, whitefish, whitest]
 log	./fixtures/features/typos/test.md:7:3 - Forbidden word (rad) Suggestions: [cool*, rda, rads, raid, rand]
 error	CSpell: Files checked: 2, Issues found: 3 in 1 files"
 `;
 
-exports[`Validate cli app typos Expect Error: [Function CheckFailed] 3`] = `""`;
+exports[`Validate cli > app 'typos' Expect Error: [Function CheckFailed] 3`] = `""`;
 
-exports[`Validate cli app with errors and excludes Expect Error: [Function CheckFailed] 1`] = `[]`;
+exports[`Validate cli > app 'with errors and excludes' Expect Error: [Function CheckFailed] 1`] = `[]`;
 
-exports[`Validate cli app with errors and excludes Expect Error: [Function CheckFailed] 2`] = `
+exports[`Validate cli > app 'with errors and excludes' Expect Error: [Function CheckFailed] 2`] = `
 "error	 0.00ms
 error	 0.00ms
 error	 0.00ms
@@ -1448,7 +1107,7 @@ log	./samples/text.txt:5:32 - Unknown word (reead)
 error	CSpell: Files checked: 6, Issues found: 7 in 1 files"
 `;
 
-exports[`Validate cli app with errors and excludes Expect Error: [Function CheckFailed] 3`] = `
+exports[`Validate cli > app 'with errors and excludes' Expect Error: [Function CheckFailed] 3`] = `
 "
 1/6 [90m./samples/cspell-bad.json[39m
 2/6 [90m./samples/cspell-includes.json[39m
@@ -1458,9 +1117,9 @@ exports[`Validate cli app with errors and excludes Expect Error: [Function Check
 6/6 [90m./samples/text.txt[39m"
 `;
 
-exports[`Validate cli app with forbidden words Expect Error: [Function CheckFailed] 1`] = `[]`;
+exports[`Validate cli > app 'with forbidden words' Expect Error: [Function CheckFailed] 1`] = `[]`;
 
-exports[`Validate cli app with forbidden words Expect Error: [Function CheckFailed] 2`] = `
+exports[`Validate cli > app 'with forbidden words' Expect Error: [Function CheckFailed] 2`] = `
 "error	 0.00ms X
 log	./samples/src/sample-with-forbidden-words.md:3:3 - Forbidden word (behaviour)
 log	./samples/src/sample-with-forbidden-words.md:4:3 - Forbidden word (flavour)
@@ -1468,14 +1127,14 @@ log	./samples/src/sample-with-forbidden-words.md:5:3 - Forbidden word (colour)
 error	CSpell: Files checked: 1, Issues found: 3 in 1 files"
 `;
 
-exports[`Validate cli app with forbidden words Expect Error: [Function CheckFailed] 3`] = `
+exports[`Validate cli > app 'with forbidden words' Expect Error: [Function CheckFailed] 3`] = `
 "
 1/1 [90m./samples/src/sample-with-forbidden-words.md[39m"
 `;
 
-exports[`Validate cli app with spelling errors --debug Dutch.txt Expect Error: [Function CheckFailed] 1`] = `[]`;
+exports[`Validate cli > app 'with spelling errors --debug Dutch.txt' Expect Error: [Function CheckFailed] 1`] = `[]`;
 
-exports[`Validate cli app with spelling errors --debug Dutch.txt Expect Error: [Function CheckFailed] 2`] = `
+exports[`Validate cli > app 'with spelling errors --debug Dutch.txt' Expect Error: [Function CheckFailed] 2`] = `
 "./samples/Dutch.txt:1:32 - Unknown word (NEDERLANDS)
 ./samples/Dutch.txt:2:11 - Unknown word (wordt)
 ./samples/Dutch.txt:2:17 - Unknown word (vriendelijk)
@@ -1667,15 +1326,15 @@ exports[`Validate cli app with spelling errors --debug Dutch.txt Expect Error: [
 ./samples/Dutch.txt:78:18 - Unknown word (ANBI)"
 `;
 
-exports[`Validate cli app with spelling errors --silent Dutch.txt Expect Error: [Function CheckFailed] 1`] = `[]`;
+exports[`Validate cli > app 'with spelling errors --silent Dutch.t…' Expect Error: [Function CheckFailed] 1`] = `[]`;
 
-exports[`Validate cli app with spelling errors --silent Dutch.txt Expect Error: [Function CheckFailed] 2`] = `""`;
+exports[`Validate cli > app 'with spelling errors --silent Dutch.t…' Expect Error: [Function CheckFailed] 2`] = `""`;
 
-exports[`Validate cli app with spelling errors --silent Dutch.txt Expect Error: [Function CheckFailed] 3`] = `""`;
+exports[`Validate cli > app 'with spelling errors --silent Dutch.t…' Expect Error: [Function CheckFailed] 3`] = `""`;
 
-exports[`Validate cli app with spelling errors Dutch.txt --legacy Expect Error: [Function CheckFailed] 1`] = `[]`;
+exports[`Validate cli > app 'with spelling errors Dutch.txt --lega…' Expect Error: [Function CheckFailed] 1`] = `[]`;
 
-exports[`Validate cli app with spelling errors Dutch.txt --legacy Expect Error: [Function CheckFailed] 2`] = `
+exports[`Validate cli > app 'with spelling errors Dutch.txt --lega…' Expect Error: [Function CheckFailed] 2`] = `
 "error	 0.00ms X
 log	./samples/Dutch.txt[1, 32]: Unknown word: NEDERLANDS
 log	./samples/Dutch.txt[2, 11]: Unknown word: wordt
@@ -1869,215 +1528,14 @@ log	./samples/Dutch.txt[78, 18]: Unknown word: ANBI
 error	CSpell: Files checked: 1, Issues found: 189 in 1 files"
 `;
 
-exports[`Validate cli app with spelling errors Dutch.txt --legacy Expect Error: [Function CheckFailed] 3`] = `
+exports[`Validate cli > app 'with spelling errors Dutch.txt --lega…' Expect Error: [Function CheckFailed] 3`] = `
 "
 1/1 [90m./samples/Dutch.txt[39m"
 `;
 
-exports[`Validate cli app with spelling errors Dutch.txt Expect Error: [Function CheckFailed] 1`] = `[]`;
+exports[`Validate cli > app 'with spelling errors Dutch.txt words …' Expect Error: [Function CheckFailed] 1`] = `[]`;
 
-exports[`Validate cli app with spelling errors Dutch.txt Expect Error: [Function CheckFailed] 2`] = `
-"error	 0.00ms X
-log	./samples/Dutch.txt:1:32 - Unknown word (NEDERLANDS)
-log	./samples/Dutch.txt:2:11 - Unknown word (wordt)
-log	./samples/Dutch.txt:2:17 - Unknown word (vriendelijk)
-log	./samples/Dutch.txt:2:29 - Unknown word (verzocht)
-log	./samples/Dutch.txt:2:45 - Unknown word (bestand)
-log	./samples/Dutch.txt:3:10 - Unknown word (lezen)
-log	./samples/Dutch.txt:3:26 - Unknown word (leveren)
-log	./samples/Dutch.txt:3:38 - Unknown word (iedere)
-log	./samples/Dutch.txt:3:45 - Unknown word (kopie)
-log	./samples/Dutch.txt:3:59 - Unknown word (taalhulpbestand)
-log	./samples/Dutch.txt:5:4 - Unknown word (Naam)
-log	./samples/Dutch.txt:5:10 - Unknown word (Nederlandstalige)
-log	./samples/Dutch.txt:5:27 - Unknown word (woordenlijst)
-log	./samples/Dutch.txt:5:40 - Unknown word (voor)
-log	./samples/Dutch.txt:5:45 - Unknown word (spellingcontrole)
-log	./samples/Dutch.txt:6:4 - Unknown word (Versie)
-log	./samples/Dutch.txt:6:11 - Unknown word (woordenlijst)
-log	./samples/Dutch.txt:6:32 - Unknown word (versie)
-log	./samples/Dutch.txt:6:39 - Unknown word (spellingcontrole)
-log	./samples/Dutch.txt:7:4 - Unknown word (Vereisten)
-log	./samples/Dutch.txt:7:33 - Unknown word (hoger)
-log	./samples/Dutch.txt:8:4 - Unknown word (Keurmerk)
-log	./samples/Dutch.txt:8:22 - Unknown word (Nederlandse)
-log	./samples/Dutch.txt:8:34 - Unknown word (Taalunie)
-log	./samples/Dutch.txt:8:47 - Unknown word (lijst)
-log	./samples/Dutch.txt:8:57 - Unknown word (basiswoorden)
-log	./samples/Dutch.txt:9:13 - Unknown word (draagt)
-log	./samples/Dutch.txt:9:24 - Unknown word (keurmerk)
-log	./samples/Dutch.txt:9:40 - Unknown word (Nederlandse)
-log	./samples/Dutch.txt:9:52 - Unknown word (Taalunie)
-log	./samples/Dutch.txt:9:62 - Unknown word (Voor)
-log	./samples/Dutch.txt:9:67 - Unknown word (meer)
-log	./samples/Dutch.txt:10:4 - Unknown word (informatie)
-log	./samples/Dutch.txt:11:4 - Unknown word (Auteursrechten)
-log	./samples/Dutch.txt:11:60 - Unknown word (Brouwer)
-log	./samples/Dutch.txt:12:11 - Unknown word (Nederlandstalige)
-log	./samples/Dutch.txt:12:32 - Unknown word (Gebruikersgroep)
-log	./samples/Dutch.txt:13:4 - Unknown word (Licenties)
-log	./samples/Dutch.txt:13:24 - Unknown word (heeft)
-log	./samples/Dutch.txt:13:34 - Unknown word (doel)
-log	./samples/Dutch.txt:13:42 - Unknown word (vrij)
-log	./samples/Dutch.txt:13:47 - Unknown word (beschikbare)
-log	./samples/Dutch.txt:13:59 - Unknown word (Nederlandstalige)
-log	./samples/Dutch.txt:14:4 - Unknown word (taalhulpbestanden)
-log	./samples/Dutch.txt:14:25 - Unknown word (ontwikkelen)
-log	./samples/Dutch.txt:14:43 - Unknown word (verspreiden)
-log	./samples/Dutch.txt:14:70 - Unknown word (gebruik)
-log	./samples/Dutch.txt:15:4 - Unknown word (mogelijk)
-log	./samples/Dutch.txt:15:16 - Unknown word (maken)
-log	./samples/Dutch.txt:15:22 - Unknown word (zijn)
-log	./samples/Dutch.txt:15:30 - Unknown word (taalhulpbestanden)
-log	./samples/Dutch.txt:15:55 - Unknown word (beschikbaar)
-log	./samples/Dutch.txt:15:67 - Unknown word (onder)
-log	./samples/Dutch.txt:16:4 - Unknown word (onderstaande)
-log	./samples/Dutch.txt:16:18 - Unknown word (liberale)
-log	./samples/Dutch.txt:16:27 - Unknown word (licenties)
-log	./samples/Dutch.txt:16:37 - Unknown word (naar)
-log	./samples/Dutch.txt:16:42 - Unknown word (keuze)
-log	./samples/Dutch.txt:16:55 - Unknown word (gebruiker)
-log	./samples/Dutch.txt:16:68 - Unknown word (wordt)
-log	./samples/Dutch.txt:17:4 - Unknown word (zeerste)
-log	./samples/Dutch.txt:17:12 - Unknown word (aangeraden)
-log	./samples/Dutch.txt:17:26 - Unknown word (voorafgaand)
-log	./samples/Dutch.txt:17:46 - Unknown word (gebruik)
-log	./samples/Dutch.txt:17:54 - Unknown word (kennis)
-log	./samples/Dutch.txt:17:64 - Unknown word (nemen)
-log	./samples/Dutch.txt:18:4 - Unknown word (toepasselijke)
-log	./samples/Dutch.txt:18:18 - Unknown word (licentie)
-log	./samples/Dutch.txt:19:12 - Unknown word (herziene)
-log	./samples/Dutch.txt:19:21 - Unknown word (versie)
-log	./samples/Dutch.txt:20:6 - Unknown word (Volledige)
-log	./samples/Dutch.txt:20:16 - Unknown word (licentie)
-log	./samples/Dutch.txt:21:6 - Unknown word (Samenvatting)
-log	./samples/Dutch.txt:22:25 - Unknown word (Naamsvermelding)
-log	./samples/Dutch.txt:22:46 - Unknown word (unported)
-log	./samples/Dutch.txt:23:6 - Unknown word (Volledige)
-log	./samples/Dutch.txt:23:16 - Unknown word (licentie)
-log	./samples/Dutch.txt:24:6 - Unknown word (Samenvatting)
-log	./samples/Dutch.txt:25:4 - Unknown word (Steun)
-log	./samples/Dutch.txt:25:36 - Unknown word (vrijwilligersproject)
-log	./samples/Dutch.txt:25:57 - Unknown word (zonder)
-log	./samples/Dutch.txt:25:64 - Unknown word (winstoogmerk)
-log	./samples/Dutch.txt:26:13 - Unknown word (kleine)
-log	./samples/Dutch.txt:26:21 - Unknown word (financiële)
-log	./samples/Dutch.txt:26:32 - Unknown word (steun)
-log	./samples/Dutch.txt:26:51 - Unknown word (meer)
-log	./samples/Dutch.txt:26:56 - Unknown word (activiteiten)
-log	./samples/Dutch.txt:26:69 - Unknown word (ontplooien)
-log	./samples/Dutch.txt:27:19 - Unknown word (professionaliseren)
-log	./samples/Dutch.txt:27:42 - Unknown word (donatie)
-log	./samples/Dutch.txt:27:63 - Unknown word (welkom)
-log	./samples/Dutch.txt:28:4 - Unknown word (rekeningnummer)
-log	./samples/Dutch.txt:28:39 - Unknown word (Stichting)
-log	./samples/Dutch.txt:28:62 - Unknown word (giften)
-log	./samples/Dutch.txt:28:69 - Unknown word (zijn)
-log	./samples/Dutch.txt:29:4 - Unknown word (aftrekbaar)
-log	./samples/Dutch.txt:29:22 - Unknown word (belasting)
-log	./samples/Dutch.txt:29:33 - Unknown word (Stichting)
-log	./samples/Dutch.txt:29:55 - Unknown word (namelijk)
-log	./samples/Dutch.txt:30:4 - Unknown word (Belastingdienst)
-log	./samples/Dutch.txt:30:20 - Unknown word (erkend)
-log	./samples/Dutch.txt:30:31 - Unknown word (ANBI)
-log	./samples/Dutch.txt:30:37 - Unknown word (oftewel)
-log	./samples/Dutch.txt:30:46 - Unknown word (Algemeen)
-log	./samples/Dutch.txt:30:59 - Unknown word (Beogende)
-log	./samples/Dutch.txt:30:68 - Unknown word (Instelling)
-log	./samples/Dutch.txt:32:4 - Unknown word (Meedoen)
-log	./samples/Dutch.txt:32:13 - Unknown word (Iedereen)
-log	./samples/Dutch.txt:32:25 - Unknown word (welkom)
-log	./samples/Dutch.txt:32:42 - Unknown word (doen)
-log	./samples/Dutch.txt:32:53 - Unknown word (fouten)
-log	./samples/Dutch.txt:32:61 - Unknown word (discussieer)
-log	./samples/Dutch.txt:33:7 - Unknown word (mailinglijst)
-log	./samples/Dutch.txt:33:23 - Unknown word (draai)
-log	./samples/Dutch.txt:33:52 - Unknown word (dragen)
-log	./samples/Dutch.txt:33:75 - Unknown word (stemt)
-log	./samples/Dutch.txt:34:6 - Unknown word (ermee)
-log	./samples/Dutch.txt:34:22 - Unknown word (bijdrage)
-log	./samples/Dutch.txt:34:39 - Unknown word (desbetreffende)
-log	./samples/Dutch.txt:34:54 - Unknown word (taalhulpbestand)
-log	./samples/Dutch.txt:34:70 - Unknown word (beschikbaar)
-log	./samples/Dutch.txt:35:4 - Unknown word (komt)
-log	./samples/Dutch.txt:35:9 - Unknown word (onder)
-log	./samples/Dutch.txt:35:15 - Unknown word (vrije)
-log	./samples/Dutch.txt:35:27 - Unknown word (opensource)
-log	./samples/Dutch.txt:35:38 - Unknown word (licenties)
-log	./samples/Dutch.txt:35:49 - Unknown word (Indien)
-log	./samples/Dutch.txt:35:62 - Unknown word (wenst)
-log	./samples/Dutch.txt:36:4 - Unknown word (naam)
-log	./samples/Dutch.txt:36:23 - Unknown word (genoemd)
-log	./samples/Dutch.txt:36:31 - Unknown word (worden)
-log	./samples/Dutch.txt:36:42 - Unknown word (ontvangen)
-log	./samples/Dutch.txt:36:55 - Unknown word (schriftelijk)
-log	./samples/Dutch.txt:36:68 - Unknown word (verzoek)
-log	./samples/Dutch.txt:37:4 - Unknown word (daarvoor)
-log	./samples/Dutch.txt:37:13 - Unknown word (graag)
-log	./samples/Dutch.txt:38:4 - Unknown word (Rechten)
-log	./samples/Dutch.txt:38:16 - Unknown word (derden)
-log	./samples/Dutch.txt:38:33 - Unknown word (respecteert)
-log	./samples/Dutch.txt:38:48 - Unknown word (rechten)
-log	./samples/Dutch.txt:38:60 - Unknown word (derden)
-log	./samples/Dutch.txt:39:13 - Unknown word (gegevens)
-log	./samples/Dutch.txt:39:22 - Unknown word (vrij)
-log	./samples/Dutch.txt:39:27 - Unknown word (beschikbaar)
-log	./samples/Dutch.txt:39:39 - Unknown word (houden)
-log	./samples/Dutch.txt:39:47 - Unknown word (Voor)
-log	./samples/Dutch.txt:39:52 - Unknown word (bijdragen)
-log	./samples/Dutch.txt:40:6 - Unknown word (daarom)
-log	./samples/Dutch.txt:40:13 - Unknown word (niet)
-log	./samples/Dutch.txt:40:18 - Unknown word (zonder)
-log	./samples/Dutch.txt:40:25 - Unknown word (toestemming)
-log	./samples/Dutch.txt:40:37 - Unknown word (gebruikmaken)
-log	./samples/Dutch.txt:40:54 - Unknown word (beschermde)
-log	./samples/Dutch.txt:40:65 - Unknown word (naslagwerken)
-log	./samples/Dutch.txt:41:4 - Unknown word (zoals)
-log	./samples/Dutch.txt:41:10 - Unknown word (woordenboeken)
-log	./samples/Dutch.txt:41:36 - Unknown word (toegestaan)
-log	./samples/Dutch.txt:41:50 - Unknown word (gebruik)
-log	./samples/Dutch.txt:41:61 - Unknown word (maken)
-log	./samples/Dutch.txt:42:4 - Unknown word (materialen)
-log	./samples/Dutch.txt:42:22 - Unknown word (Nederlandse)
-log	./samples/Dutch.txt:42:34 - Unknown word (Taalunie)
-log	./samples/Dutch.txt:42:44 - Unknown word (zoals)
-log	./samples/Dutch.txt:42:53 - Unknown word (leidraad)
-log	./samples/Dutch.txt:42:68 - Unknown word (woordenlijst)
-log	./samples/Dutch.txt:43:4 - Unknown word (Indien)
-log	./samples/Dutch.txt:43:17 - Unknown word (mening)
-log	./samples/Dutch.txt:43:42 - Unknown word (inbreuk)
-log	./samples/Dutch.txt:43:50 - Unknown word (maakt)
-log	./samples/Dutch.txt:43:62 - Unknown word (rechten)
-log	./samples/Dutch.txt:44:4 - Unknown word (verzoeken)
-log	./samples/Dutch.txt:44:19 - Unknown word (hierover)
-log	./samples/Dutch.txt:44:31 - Unknown word (spoedig)
-log	./samples/Dutch.txt:44:39 - Unknown word (mogelijk)
-log	./samples/Dutch.txt:44:48 - Unknown word (schriftelijk)
-log	./samples/Dutch.txt:45:7 - Unknown word (nemen)
-log	./samples/Dutch.txt:46:13 - Unknown word (Stichting)
-log	./samples/Dutch.txt:59:56 - Unknown word (Brouwer)
-log	./samples/Dutch.txt:60:11 - Unknown word (Nederlandstalige)
-log	./samples/Dutch.txt:60:32 - Unknown word (Gebruikersgroep)
-log	./samples/Dutch.txt:68:42 - Unknown word (unported)
-log	./samples/Dutch.txt:74:39 - Unknown word (RABONL)
-log	./samples/Dutch.txt:74:49 - Unknown word (IBAN)
-log	./samples/Dutch.txt:74:59 - Unknown word (RABO)
-log	./samples/Dutch.txt:75:4 - Unknown word (Stichting)
-log	./samples/Dutch.txt:77:58 - Unknown word (algemeen)
-log	./samples/Dutch.txt:77:71 - Unknown word (beogende)
-log	./samples/Dutch.txt:78:4 - Unknown word (instelling)
-log	./samples/Dutch.txt:78:18 - Unknown word (ANBI)
-error	CSpell: Files checked: 1, Issues found: 189 in 1 files"
-`;
-
-exports[`Validate cli app with spelling errors Dutch.txt Expect Error: [Function CheckFailed] 3`] = `
-"
-1/1 [90m./samples/Dutch.txt[39m"
-`;
-
-exports[`Validate cli app with spelling errors Dutch.txt words only Expect Error: [Function CheckFailed] 1`] = `[]`;
-
-exports[`Validate cli app with spelling errors Dutch.txt words only Expect Error: [Function CheckFailed] 2`] = `
+exports[`Validate cli > app 'with spelling errors Dutch.txt words …' Expect Error: [Function CheckFailed] 2`] = `
 "error	 0.00ms X
 log	NEDERLANDS
 log	wordt
@@ -2271,7 +1729,549 @@ log	ANBI
 error	CSpell: Files checked: 1, Issues found: 189 in 1 files"
 `;
 
-exports[`Validate cli app with spelling errors Dutch.txt words only Expect Error: [Function CheckFailed] 3`] = `
+exports[`Validate cli > app 'with spelling errors Dutch.txt words …' Expect Error: [Function CheckFailed] 3`] = `
 "
 1/1 [90m./samples/Dutch.txt[39m"
 `;
+
+exports[`Validate cli > app 'with spelling errors Dutch.txt' Expect Error: [Function CheckFailed] 1`] = `[]`;
+
+exports[`Validate cli > app 'with spelling errors Dutch.txt' Expect Error: [Function CheckFailed] 2`] = `
+"error	 0.00ms X
+log	./samples/Dutch.txt:1:32 - Unknown word (NEDERLANDS)
+log	./samples/Dutch.txt:2:11 - Unknown word (wordt)
+log	./samples/Dutch.txt:2:17 - Unknown word (vriendelijk)
+log	./samples/Dutch.txt:2:29 - Unknown word (verzocht)
+log	./samples/Dutch.txt:2:45 - Unknown word (bestand)
+log	./samples/Dutch.txt:3:10 - Unknown word (lezen)
+log	./samples/Dutch.txt:3:26 - Unknown word (leveren)
+log	./samples/Dutch.txt:3:38 - Unknown word (iedere)
+log	./samples/Dutch.txt:3:45 - Unknown word (kopie)
+log	./samples/Dutch.txt:3:59 - Unknown word (taalhulpbestand)
+log	./samples/Dutch.txt:5:4 - Unknown word (Naam)
+log	./samples/Dutch.txt:5:10 - Unknown word (Nederlandstalige)
+log	./samples/Dutch.txt:5:27 - Unknown word (woordenlijst)
+log	./samples/Dutch.txt:5:40 - Unknown word (voor)
+log	./samples/Dutch.txt:5:45 - Unknown word (spellingcontrole)
+log	./samples/Dutch.txt:6:4 - Unknown word (Versie)
+log	./samples/Dutch.txt:6:11 - Unknown word (woordenlijst)
+log	./samples/Dutch.txt:6:32 - Unknown word (versie)
+log	./samples/Dutch.txt:6:39 - Unknown word (spellingcontrole)
+log	./samples/Dutch.txt:7:4 - Unknown word (Vereisten)
+log	./samples/Dutch.txt:7:33 - Unknown word (hoger)
+log	./samples/Dutch.txt:8:4 - Unknown word (Keurmerk)
+log	./samples/Dutch.txt:8:22 - Unknown word (Nederlandse)
+log	./samples/Dutch.txt:8:34 - Unknown word (Taalunie)
+log	./samples/Dutch.txt:8:47 - Unknown word (lijst)
+log	./samples/Dutch.txt:8:57 - Unknown word (basiswoorden)
+log	./samples/Dutch.txt:9:13 - Unknown word (draagt)
+log	./samples/Dutch.txt:9:24 - Unknown word (keurmerk)
+log	./samples/Dutch.txt:9:40 - Unknown word (Nederlandse)
+log	./samples/Dutch.txt:9:52 - Unknown word (Taalunie)
+log	./samples/Dutch.txt:9:62 - Unknown word (Voor)
+log	./samples/Dutch.txt:9:67 - Unknown word (meer)
+log	./samples/Dutch.txt:10:4 - Unknown word (informatie)
+log	./samples/Dutch.txt:11:4 - Unknown word (Auteursrechten)
+log	./samples/Dutch.txt:11:60 - Unknown word (Brouwer)
+log	./samples/Dutch.txt:12:11 - Unknown word (Nederlandstalige)
+log	./samples/Dutch.txt:12:32 - Unknown word (Gebruikersgroep)
+log	./samples/Dutch.txt:13:4 - Unknown word (Licenties)
+log	./samples/Dutch.txt:13:24 - Unknown word (heeft)
+log	./samples/Dutch.txt:13:34 - Unknown word (doel)
+log	./samples/Dutch.txt:13:42 - Unknown word (vrij)
+log	./samples/Dutch.txt:13:47 - Unknown word (beschikbare)
+log	./samples/Dutch.txt:13:59 - Unknown word (Nederlandstalige)
+log	./samples/Dutch.txt:14:4 - Unknown word (taalhulpbestanden)
+log	./samples/Dutch.txt:14:25 - Unknown word (ontwikkelen)
+log	./samples/Dutch.txt:14:43 - Unknown word (verspreiden)
+log	./samples/Dutch.txt:14:70 - Unknown word (gebruik)
+log	./samples/Dutch.txt:15:4 - Unknown word (mogelijk)
+log	./samples/Dutch.txt:15:16 - Unknown word (maken)
+log	./samples/Dutch.txt:15:22 - Unknown word (zijn)
+log	./samples/Dutch.txt:15:30 - Unknown word (taalhulpbestanden)
+log	./samples/Dutch.txt:15:55 - Unknown word (beschikbaar)
+log	./samples/Dutch.txt:15:67 - Unknown word (onder)
+log	./samples/Dutch.txt:16:4 - Unknown word (onderstaande)
+log	./samples/Dutch.txt:16:18 - Unknown word (liberale)
+log	./samples/Dutch.txt:16:27 - Unknown word (licenties)
+log	./samples/Dutch.txt:16:37 - Unknown word (naar)
+log	./samples/Dutch.txt:16:42 - Unknown word (keuze)
+log	./samples/Dutch.txt:16:55 - Unknown word (gebruiker)
+log	./samples/Dutch.txt:16:68 - Unknown word (wordt)
+log	./samples/Dutch.txt:17:4 - Unknown word (zeerste)
+log	./samples/Dutch.txt:17:12 - Unknown word (aangeraden)
+log	./samples/Dutch.txt:17:26 - Unknown word (voorafgaand)
+log	./samples/Dutch.txt:17:46 - Unknown word (gebruik)
+log	./samples/Dutch.txt:17:54 - Unknown word (kennis)
+log	./samples/Dutch.txt:17:64 - Unknown word (nemen)
+log	./samples/Dutch.txt:18:4 - Unknown word (toepasselijke)
+log	./samples/Dutch.txt:18:18 - Unknown word (licentie)
+log	./samples/Dutch.txt:19:12 - Unknown word (herziene)
+log	./samples/Dutch.txt:19:21 - Unknown word (versie)
+log	./samples/Dutch.txt:20:6 - Unknown word (Volledige)
+log	./samples/Dutch.txt:20:16 - Unknown word (licentie)
+log	./samples/Dutch.txt:21:6 - Unknown word (Samenvatting)
+log	./samples/Dutch.txt:22:25 - Unknown word (Naamsvermelding)
+log	./samples/Dutch.txt:22:46 - Unknown word (unported)
+log	./samples/Dutch.txt:23:6 - Unknown word (Volledige)
+log	./samples/Dutch.txt:23:16 - Unknown word (licentie)
+log	./samples/Dutch.txt:24:6 - Unknown word (Samenvatting)
+log	./samples/Dutch.txt:25:4 - Unknown word (Steun)
+log	./samples/Dutch.txt:25:36 - Unknown word (vrijwilligersproject)
+log	./samples/Dutch.txt:25:57 - Unknown word (zonder)
+log	./samples/Dutch.txt:25:64 - Unknown word (winstoogmerk)
+log	./samples/Dutch.txt:26:13 - Unknown word (kleine)
+log	./samples/Dutch.txt:26:21 - Unknown word (financiële)
+log	./samples/Dutch.txt:26:32 - Unknown word (steun)
+log	./samples/Dutch.txt:26:51 - Unknown word (meer)
+log	./samples/Dutch.txt:26:56 - Unknown word (activiteiten)
+log	./samples/Dutch.txt:26:69 - Unknown word (ontplooien)
+log	./samples/Dutch.txt:27:19 - Unknown word (professionaliseren)
+log	./samples/Dutch.txt:27:42 - Unknown word (donatie)
+log	./samples/Dutch.txt:27:63 - Unknown word (welkom)
+log	./samples/Dutch.txt:28:4 - Unknown word (rekeningnummer)
+log	./samples/Dutch.txt:28:39 - Unknown word (Stichting)
+log	./samples/Dutch.txt:28:62 - Unknown word (giften)
+log	./samples/Dutch.txt:28:69 - Unknown word (zijn)
+log	./samples/Dutch.txt:29:4 - Unknown word (aftrekbaar)
+log	./samples/Dutch.txt:29:22 - Unknown word (belasting)
+log	./samples/Dutch.txt:29:33 - Unknown word (Stichting)
+log	./samples/Dutch.txt:29:55 - Unknown word (namelijk)
+log	./samples/Dutch.txt:30:4 - Unknown word (Belastingdienst)
+log	./samples/Dutch.txt:30:20 - Unknown word (erkend)
+log	./samples/Dutch.txt:30:31 - Unknown word (ANBI)
+log	./samples/Dutch.txt:30:37 - Unknown word (oftewel)
+log	./samples/Dutch.txt:30:46 - Unknown word (Algemeen)
+log	./samples/Dutch.txt:30:59 - Unknown word (Beogende)
+log	./samples/Dutch.txt:30:68 - Unknown word (Instelling)
+log	./samples/Dutch.txt:32:4 - Unknown word (Meedoen)
+log	./samples/Dutch.txt:32:13 - Unknown word (Iedereen)
+log	./samples/Dutch.txt:32:25 - Unknown word (welkom)
+log	./samples/Dutch.txt:32:42 - Unknown word (doen)
+log	./samples/Dutch.txt:32:53 - Unknown word (fouten)
+log	./samples/Dutch.txt:32:61 - Unknown word (discussieer)
+log	./samples/Dutch.txt:33:7 - Unknown word (mailinglijst)
+log	./samples/Dutch.txt:33:23 - Unknown word (draai)
+log	./samples/Dutch.txt:33:52 - Unknown word (dragen)
+log	./samples/Dutch.txt:33:75 - Unknown word (stemt)
+log	./samples/Dutch.txt:34:6 - Unknown word (ermee)
+log	./samples/Dutch.txt:34:22 - Unknown word (bijdrage)
+log	./samples/Dutch.txt:34:39 - Unknown word (desbetreffende)
+log	./samples/Dutch.txt:34:54 - Unknown word (taalhulpbestand)
+log	./samples/Dutch.txt:34:70 - Unknown word (beschikbaar)
+log	./samples/Dutch.txt:35:4 - Unknown word (komt)
+log	./samples/Dutch.txt:35:9 - Unknown word (onder)
+log	./samples/Dutch.txt:35:15 - Unknown word (vrije)
+log	./samples/Dutch.txt:35:27 - Unknown word (opensource)
+log	./samples/Dutch.txt:35:38 - Unknown word (licenties)
+log	./samples/Dutch.txt:35:49 - Unknown word (Indien)
+log	./samples/Dutch.txt:35:62 - Unknown word (wenst)
+log	./samples/Dutch.txt:36:4 - Unknown word (naam)
+log	./samples/Dutch.txt:36:23 - Unknown word (genoemd)
+log	./samples/Dutch.txt:36:31 - Unknown word (worden)
+log	./samples/Dutch.txt:36:42 - Unknown word (ontvangen)
+log	./samples/Dutch.txt:36:55 - Unknown word (schriftelijk)
+log	./samples/Dutch.txt:36:68 - Unknown word (verzoek)
+log	./samples/Dutch.txt:37:4 - Unknown word (daarvoor)
+log	./samples/Dutch.txt:37:13 - Unknown word (graag)
+log	./samples/Dutch.txt:38:4 - Unknown word (Rechten)
+log	./samples/Dutch.txt:38:16 - Unknown word (derden)
+log	./samples/Dutch.txt:38:33 - Unknown word (respecteert)
+log	./samples/Dutch.txt:38:48 - Unknown word (rechten)
+log	./samples/Dutch.txt:38:60 - Unknown word (derden)
+log	./samples/Dutch.txt:39:13 - Unknown word (gegevens)
+log	./samples/Dutch.txt:39:22 - Unknown word (vrij)
+log	./samples/Dutch.txt:39:27 - Unknown word (beschikbaar)
+log	./samples/Dutch.txt:39:39 - Unknown word (houden)
+log	./samples/Dutch.txt:39:47 - Unknown word (Voor)
+log	./samples/Dutch.txt:39:52 - Unknown word (bijdragen)
+log	./samples/Dutch.txt:40:6 - Unknown word (daarom)
+log	./samples/Dutch.txt:40:13 - Unknown word (niet)
+log	./samples/Dutch.txt:40:18 - Unknown word (zonder)
+log	./samples/Dutch.txt:40:25 - Unknown word (toestemming)
+log	./samples/Dutch.txt:40:37 - Unknown word (gebruikmaken)
+log	./samples/Dutch.txt:40:54 - Unknown word (beschermde)
+log	./samples/Dutch.txt:40:65 - Unknown word (naslagwerken)
+log	./samples/Dutch.txt:41:4 - Unknown word (zoals)
+log	./samples/Dutch.txt:41:10 - Unknown word (woordenboeken)
+log	./samples/Dutch.txt:41:36 - Unknown word (toegestaan)
+log	./samples/Dutch.txt:41:50 - Unknown word (gebruik)
+log	./samples/Dutch.txt:41:61 - Unknown word (maken)
+log	./samples/Dutch.txt:42:4 - Unknown word (materialen)
+log	./samples/Dutch.txt:42:22 - Unknown word (Nederlandse)
+log	./samples/Dutch.txt:42:34 - Unknown word (Taalunie)
+log	./samples/Dutch.txt:42:44 - Unknown word (zoals)
+log	./samples/Dutch.txt:42:53 - Unknown word (leidraad)
+log	./samples/Dutch.txt:42:68 - Unknown word (woordenlijst)
+log	./samples/Dutch.txt:43:4 - Unknown word (Indien)
+log	./samples/Dutch.txt:43:17 - Unknown word (mening)
+log	./samples/Dutch.txt:43:42 - Unknown word (inbreuk)
+log	./samples/Dutch.txt:43:50 - Unknown word (maakt)
+log	./samples/Dutch.txt:43:62 - Unknown word (rechten)
+log	./samples/Dutch.txt:44:4 - Unknown word (verzoeken)
+log	./samples/Dutch.txt:44:19 - Unknown word (hierover)
+log	./samples/Dutch.txt:44:31 - Unknown word (spoedig)
+log	./samples/Dutch.txt:44:39 - Unknown word (mogelijk)
+log	./samples/Dutch.txt:44:48 - Unknown word (schriftelijk)
+log	./samples/Dutch.txt:45:7 - Unknown word (nemen)
+log	./samples/Dutch.txt:46:13 - Unknown word (Stichting)
+log	./samples/Dutch.txt:59:56 - Unknown word (Brouwer)
+log	./samples/Dutch.txt:60:11 - Unknown word (Nederlandstalige)
+log	./samples/Dutch.txt:60:32 - Unknown word (Gebruikersgroep)
+log	./samples/Dutch.txt:68:42 - Unknown word (unported)
+log	./samples/Dutch.txt:74:39 - Unknown word (RABONL)
+log	./samples/Dutch.txt:74:49 - Unknown word (IBAN)
+log	./samples/Dutch.txt:74:59 - Unknown word (RABO)
+log	./samples/Dutch.txt:75:4 - Unknown word (Stichting)
+log	./samples/Dutch.txt:77:58 - Unknown word (algemeen)
+log	./samples/Dutch.txt:77:71 - Unknown word (beogende)
+log	./samples/Dutch.txt:78:4 - Unknown word (instelling)
+log	./samples/Dutch.txt:78:18 - Unknown word (ANBI)
+error	CSpell: Files checked: 1, Issues found: 189 in 1 files"
+`;
+
+exports[`Validate cli > app 'with spelling errors Dutch.txt' Expect Error: [Function CheckFailed] 3`] = `
+"
+1/1 [90m./samples/Dutch.txt[39m"
+`;
+
+exports[`Validate cli > app success 'suggest' run with [ 'suggest', 'café', …(2) ] 1`] = `[]`;
+
+exports[`Validate cli > app success 'suggest' run with [ 'suggest', 'café', …(2) ] 2`] = `
+"café:
+ - café"
+`;
+
+exports[`Validate cli > app success 'trace café' run with [ 'trace', 'café' ] 1`] = `[]`;
+
+exports[`Validate cli > app success 'trace café' run with [ 'trace', 'café' ] 2`] = `
+"Word F Dictionary           Dictionary Location           
+café - [flagWords]*         From Settings \`flagWords\`
+café - [ignoreWords]*       From Settings \`ignoreWords\`
+café - [words]*             From Settings \`words\`
+café - ada                  ../../node_modules/.pnpm...ell/dict-ada/dict/ada.txt
+café - aws*                 ../../node_modules/.pnpm...spell/dict-aws/aws.txt.gz
+café - bash                 ../../node_modules/.pnpm...-bash/dict/bash-words.txt
+café - companies*           ../../node_modules/.pnpm...panies/dict/companies.txt
+café - cpp                  ../../node_modules/.pnpm...spell/dict-cpp/cpp.txt.gz
+café - cpp-refined          ../../node_modules/.pnpm...ct-cpp/cpp-refined.txt.gz
+café - cryptocurrencies*    ../../node_modules/.pnpm...s/cryptocurrencies.txt.gz
+café - csharp               ../../node_modules/.pnpm...dict-csharp/csharp.txt.gz
+café - css                  ../../node_modules/.pnpm...ell/dict-css/dict/css.txt
+café - dart                 ../../node_modules/.pnpm...ell/dict-dart/dart.txt.gz
+café - django               ../../node_modules/.pnpm...ct-django/dict/django.txt
+café - docker               ../../node_modules/.pnpm...ocker/docker-words.txt.gz
+café - dotnet               ../../node_modules/.pnpm...ct-dotnet/dict/dotnet.txt
+café - elixir               ../../node_modules/.pnpm...ct-elixir/dict/elixir.txt
+café * en_us*               ../../node_modules/.pnpm.../dict-en_us/en_US.trie.gz
+café * en-gb                ../../node_modules/.pnpm.../dict-en-gb/en_GB.trie.gz
+café - filetypes*           ../../node_modules/.pnpm...iletypes/filetypes.txt.gz
+café - fonts                ../../node_modules/.pnpm...l/dict-fonts/fonts.txt.gz
+café - fullstack            ../../node_modules/.pnpm...lstack/dict/fullstack.txt
+café - gaming-terms         ../../node_modules/.pnpm...rms/dict/gaming-terms.txt
+café - golang               ../../node_modules/.pnpm...l/dict-golang/dict/go.txt
+café - haskell              ../../node_modules/.pnpm...-haskell/dict/haskell.txt
+café - html                 ../../node_modules/.pnpm...ell/dict-html/html.txt.gz
+café - html-symbol-entitie  ../../node_modules/.pnpm...-entities/entities.txt.gz
+café - java                 ../../node_modules/.pnpm.../dict-java/dict/java.trie
+café - k8s                  ../../node_modules/.pnpm...ell/dict-k8s/dict/k8s.txt
+café - latex                ../../node_modules/.pnpm...dict-latex/dict/latex.txt
+café - lorem-ipsum          ../../node_modules/.pnpm...m-ipsum/dictionary.txt.gz
+café - lua                  ../../node_modules/.pnpm...ell/dict-lua/dict/lua.txt
+café - networking-terms     ../../node_modules/.pnpm.../dict/networkingTerms.txt
+café - node                 ../../node_modules/.pnpm...l/dict-node/dict/node.txt
+café - npm                  ../../node_modules/.pnpm...ell/dict-npm/dict/npm.txt
+café - php                  ../../node_modules/.pnpm...ell/dict-php/dict/php.txt
+café - powershell           ../../node_modules/.pnpm...shell/dict/powershell.txt
+café - public-licenses*     ../../node_modules/.pnpm...es/public-licenses.txt.gz
+café - python               ../../node_modules/.pnpm...dict-python/python.txt.gz
+café - python-common        ../../node_modules/.pnpm...thon/python-common.txt.gz
+café - r                    ../../node_modules/.pnpm...s/@cspell/dict-r/r.txt.gz
+café - ruby                 ../../node_modules/.pnpm...l/dict-ruby/dict/ruby.txt
+café - rust                 ../../node_modules/.pnpm...l/dict-rust/dict/rust.txt
+café - scala                ../../node_modules/.pnpm...dict-scala/dict/scala.txt
+café - softwareTerms*       ../../node_modules/.pnpm...ms/dict/softwareTerms.txt
+café - sql                  ../../node_modules/.pnpm...spell/dict-sql/sql.txt.gz
+café - svelte               ../../node_modules/.pnpm...ct-svelte/dict/svelte.txt
+café - swift                ../../node_modules/.pnpm...l/dict-swift/swift.txt.gz
+café - typescript           ../../node_modules/.pnpm...cript/dict/typescript.txt
+café - web-services         ../../node_modules/.pnpm...erms/dict/webServices.txt
+café - workspace*           ../../cspell-dict.txt"
+`;
+
+exports[`Validate cli > app success 'trace hello' run with [ 'trace', '--locale=en-gb', 'hello' ] 1`] = `[]`;
+
+exports[`Validate cli > app success 'trace hello' run with [ 'trace', '--locale=en-gb', 'hello' ] 2`] = `
+"Word  F Dictionary           Dictionary Location           
+hello - [flagWords]*         From Settings \`flagWords\`
+hello - [ignoreWords]*       From Settings \`ignoreWords\`
+hello - [words]*             From Settings \`words\`
+hello - ada                  ../../node_modules/.pnpm...ll/dict-ada/dict/ada.txt
+hello - aws*                 ../../node_modules/.pnpm...pell/dict-aws/aws.txt.gz
+hello - bash                 ../../node_modules/.pnpm...bash/dict/bash-words.txt
+hello - companies*           ../../node_modules/.pnpm...anies/dict/companies.txt
+hello * cpp                  ../../node_modules/.pnpm...pell/dict-cpp/cpp.txt.gz
+hello - cpp-refined          ../../node_modules/.pnpm...t-cpp/cpp-refined.txt.gz
+hello - cryptocurrencies*    ../../node_modules/.pnpm.../cryptocurrencies.txt.gz
+hello - csharp               ../../node_modules/.pnpm...ict-csharp/csharp.txt.gz
+hello - css                  ../../node_modules/.pnpm...ll/dict-css/dict/css.txt
+hello - dart                 ../../node_modules/.pnpm...ll/dict-dart/dart.txt.gz
+hello - django               ../../node_modules/.pnpm...t-django/dict/django.txt
+hello - docker               ../../node_modules/.pnpm...cker/docker-words.txt.gz
+hello - dotnet               ../../node_modules/.pnpm...t-dotnet/dict/dotnet.txt
+hello - elixir               ../../node_modules/.pnpm...t-elixir/dict/elixir.txt
+hello * en_us                ../../node_modules/.pnpm...dict-en_us/en_US.trie.gz
+hello * en-gb*               ../../node_modules/.pnpm...dict-en-gb/en_GB.trie.gz
+hello - filetypes*           ../../node_modules/.pnpm...letypes/filetypes.txt.gz
+hello - fonts                ../../node_modules/.pnpm.../dict-fonts/fonts.txt.gz
+hello - fullstack            ../../node_modules/.pnpm...stack/dict/fullstack.txt
+hello - gaming-terms         ../../node_modules/.pnpm...ms/dict/gaming-terms.txt
+hello * golang               ../../node_modules/.pnpm.../dict-golang/dict/go.txt
+hello - haskell              ../../node_modules/.pnpm...haskell/dict/haskell.txt
+hello - html                 ../../node_modules/.pnpm...ll/dict-html/html.txt.gz
+hello - html-symbol-entitie  ../../node_modules/.pnpm...entities/entities.txt.gz
+hello - java                 ../../node_modules/.pnpm...dict-java/dict/java.trie
+hello - k8s                  ../../node_modules/.pnpm...ll/dict-k8s/dict/k8s.txt
+hello - latex                ../../node_modules/.pnpm...ict-latex/dict/latex.txt
+hello - lorem-ipsum          ../../node_modules/.pnpm...-ipsum/dictionary.txt.gz
+hello - lua                  ../../node_modules/.pnpm...ll/dict-lua/dict/lua.txt
+hello - networking-terms     ../../node_modules/.pnpm...dict/networkingTerms.txt
+hello * node                 ../../node_modules/.pnpm.../dict-node/dict/node.txt
+hello - npm                  ../../node_modules/.pnpm...ll/dict-npm/dict/npm.txt
+hello - php                  ../../node_modules/.pnpm...ll/dict-php/dict/php.txt
+hello - powershell           ../../node_modules/.pnpm...hell/dict/powershell.txt
+hello - public-licenses*     ../../node_modules/.pnpm...s/public-licenses.txt.gz
+hello - python               ../../node_modules/.pnpm...ict-python/python.txt.gz
+hello - python-common        ../../node_modules/.pnpm...hon/python-common.txt.gz
+hello - r                    ../../node_modules/.pnpm.../@cspell/dict-r/r.txt.gz
+hello - ruby                 ../../node_modules/.pnpm.../dict-ruby/dict/ruby.txt
+hello - rust                 ../../node_modules/.pnpm.../dict-rust/dict/rust.txt
+hello - scala                ../../node_modules/.pnpm...ict-scala/dict/scala.txt
+hello - softwareTerms*       ../../node_modules/.pnpm...s/dict/softwareTerms.txt
+hello - sql                  ../../node_modules/.pnpm...pell/dict-sql/sql.txt.gz
+hello - svelte               ../../node_modules/.pnpm...t-svelte/dict/svelte.txt
+hello - swift                ../../node_modules/.pnpm.../dict-swift/swift.txt.gz
+hello - typescript           ../../node_modules/.pnpm...ript/dict/typescript.txt
+hello - web-services         ../../node_modules/.pnpm...rms/dict/webServices.txt
+hello - workspace*           ../../cspell-dict.txt"
+`;
+
+exports[`Validate cli > app success 'trace hello' run with [ 'trace', 'hello' ] 1`] = `[]`;
+
+exports[`Validate cli > app success 'trace hello' run with [ 'trace', 'hello' ] 2`] = `
+"Word  F Dictionary           Dictionary Location           
+hello - [flagWords]*         From Settings \`flagWords\`
+hello - [ignoreWords]*       From Settings \`ignoreWords\`
+hello - [words]*             From Settings \`words\`
+hello - ada                  ../../node_modules/.pnpm...ll/dict-ada/dict/ada.txt
+hello - aws*                 ../../node_modules/.pnpm...pell/dict-aws/aws.txt.gz
+hello - bash                 ../../node_modules/.pnpm...bash/dict/bash-words.txt
+hello - companies*           ../../node_modules/.pnpm...anies/dict/companies.txt
+hello * cpp                  ../../node_modules/.pnpm...pell/dict-cpp/cpp.txt.gz
+hello - cpp-refined          ../../node_modules/.pnpm...t-cpp/cpp-refined.txt.gz
+hello - cryptocurrencies*    ../../node_modules/.pnpm.../cryptocurrencies.txt.gz
+hello - csharp               ../../node_modules/.pnpm...ict-csharp/csharp.txt.gz
+hello - css                  ../../node_modules/.pnpm...ll/dict-css/dict/css.txt
+hello - dart                 ../../node_modules/.pnpm...ll/dict-dart/dart.txt.gz
+hello - django               ../../node_modules/.pnpm...t-django/dict/django.txt
+hello - docker               ../../node_modules/.pnpm...cker/docker-words.txt.gz
+hello - dotnet               ../../node_modules/.pnpm...t-dotnet/dict/dotnet.txt
+hello - elixir               ../../node_modules/.pnpm...t-elixir/dict/elixir.txt
+hello * en_us*               ../../node_modules/.pnpm...dict-en_us/en_US.trie.gz
+hello * en-gb                ../../node_modules/.pnpm...dict-en-gb/en_GB.trie.gz
+hello - filetypes*           ../../node_modules/.pnpm...letypes/filetypes.txt.gz
+hello - fonts                ../../node_modules/.pnpm.../dict-fonts/fonts.txt.gz
+hello - fullstack            ../../node_modules/.pnpm...stack/dict/fullstack.txt
+hello - gaming-terms         ../../node_modules/.pnpm...ms/dict/gaming-terms.txt
+hello * golang               ../../node_modules/.pnpm.../dict-golang/dict/go.txt
+hello - haskell              ../../node_modules/.pnpm...haskell/dict/haskell.txt
+hello - html                 ../../node_modules/.pnpm...ll/dict-html/html.txt.gz
+hello - html-symbol-entitie  ../../node_modules/.pnpm...entities/entities.txt.gz
+hello - java                 ../../node_modules/.pnpm...dict-java/dict/java.trie
+hello - k8s                  ../../node_modules/.pnpm...ll/dict-k8s/dict/k8s.txt
+hello - latex                ../../node_modules/.pnpm...ict-latex/dict/latex.txt
+hello - lorem-ipsum          ../../node_modules/.pnpm...-ipsum/dictionary.txt.gz
+hello - lua                  ../../node_modules/.pnpm...ll/dict-lua/dict/lua.txt
+hello - networking-terms     ../../node_modules/.pnpm...dict/networkingTerms.txt
+hello * node                 ../../node_modules/.pnpm.../dict-node/dict/node.txt
+hello - npm                  ../../node_modules/.pnpm...ll/dict-npm/dict/npm.txt
+hello - php                  ../../node_modules/.pnpm...ll/dict-php/dict/php.txt
+hello - powershell           ../../node_modules/.pnpm...hell/dict/powershell.txt
+hello - public-licenses*     ../../node_modules/.pnpm...s/public-licenses.txt.gz
+hello - python               ../../node_modules/.pnpm...ict-python/python.txt.gz
+hello - python-common        ../../node_modules/.pnpm...hon/python-common.txt.gz
+hello - r                    ../../node_modules/.pnpm.../@cspell/dict-r/r.txt.gz
+hello - ruby                 ../../node_modules/.pnpm.../dict-ruby/dict/ruby.txt
+hello - rust                 ../../node_modules/.pnpm.../dict-rust/dict/rust.txt
+hello - scala                ../../node_modules/.pnpm...ict-scala/dict/scala.txt
+hello - softwareTerms*       ../../node_modules/.pnpm...s/dict/softwareTerms.txt
+hello - sql                  ../../node_modules/.pnpm...pell/dict-sql/sql.txt.gz
+hello - svelte               ../../node_modules/.pnpm...t-svelte/dict/svelte.txt
+hello - swift                ../../node_modules/.pnpm.../dict-swift/swift.txt.gz
+hello - typescript           ../../node_modules/.pnpm...ript/dict/typescript.txt
+hello - web-services         ../../node_modules/.pnpm...rms/dict/webServices.txt
+hello - workspace*           ../../cspell-dict.txt"
+`;
+
+exports[`Validate cli > app suggest [ 'sug' ] 1`] = `
+[
+  "Usage: cspell suggestions|sug [options] [words...]",
+  "",
+  "Spelling Suggestions for words.",
+  "",
+  "Options:",
+  "  -c, --config <cspell.json>            Configuration file to use.  By default",
+  "                                        cspell looks for cspell.json in the",
+  "                                        current directory.",
+  "  --locale <locale>                     Set language locales. i.e. \\"en,fr\\" for",
+  "                                        English and French, or \\"en-GB\\" for",
+  "                                        British English.",
+  "  --language-id <language>              Use programming language. i.e. \\"php\\" or",
+  "                                        \\"scala\\".",
+  "  -s, --no-strict                       Ignore case and accents when searching",
+  "                                        for words.",
+  "  --ignore-case                         Alias of --no-strict.",
+  "  --num-changes <number>                Number of changes allowed to a word",
+  "                                        (default: 4)",
+  "  --num-suggestions <number>            Number of suggestions (default: 8)",
+  "  --no-include-ties                     Force the number of suggested to be",
+  "                                        limited, by not including suggestions",
+  "                                        that have the same edit cost.",
+  "  --stdin                               Use stdin for input.",
+  "  --repl                                REPL interface for looking up",
+  "                                        suggestions.",
+  "  -v, --verbose                         Show detailed output.",
+  "  -d, --dictionary <dictionary name>    Use the dictionary specified. Only",
+  "                                        dictionaries specified will be used.",
+  "  --dictionaries <dictionary names...>  Use the dictionaries specified. Only",
+  "                                        dictionaries specified will be used.",
+  "  --no-color                            Turn off color.",
+  "  --color                               Force color",
+  "  -h, --help                            display help for command",
+  "",
+]
+`;
+
+exports[`Validate cli > app suggest [ 'sug' ] 2`] = `""`;
+
+exports[`Validate cli > app suggest [ 'sug' ] 3`] = `""`;
+
+exports[`Validate cli > app suggest [ 'sug', '--stdin', '-d=en_us', '-v' ] 1`] = `[]`;
+
+exports[`Validate cli > app suggest [ 'sug', '--stdin', '-d=en_us', '-v' ] 2`] = `
+"mexico:
+ - Mexico      -    1 en_us
+ - medico      -  100 en_us
+ - medic       -  190 en_us
+ - melic       -  190 en_us
+ - mesic       -  190 en_us
+ - metic       -  190 en_us
+ - Mexican     -  191 en_us
+ - Mexico's    -  191 en_us"
+`;
+
+exports[`Validate cli > app suggest [ 'sug', '--stdin', '-d=en_us', '-v' ] 3`] = `""`;
+
+exports[`Validate cli > app suggest [ 'sug', 'dutch', '-d=en_us', …(3) ] 1`] = `[]`;
+
+exports[`Validate cli > app suggest [ 'sug', 'dutch', '-d=en_us', …(3) ] 2`] = `
+"dutch:
+ - dutch    -    0 en-gb, en_us
+ - Dutch    -    1 en_us"
+`;
+
+exports[`Validate cli > app suggest [ 'sug', 'dutch', '-d=en_us', …(3) ] 3`] = `""`;
+
+exports[`Validate cli > app suggest [ 'sug', 'dutch', …(3) ] 1`] = `[]`;
+
+exports[`Validate cli > app suggest [ 'sug', 'dutch', …(3) ] 2`] = `
+"dutch:
+ - dutch    -    0 en_us
+ - Dutch    -    1 en_us"
+`;
+
+exports[`Validate cli > app suggest [ 'sug', 'dutch', …(3) ] 3`] = `""`;
+
+exports[`Validate cli > app suggest [ 'sug', 'dutch', …(3) ] 4`] = `[]`;
+
+exports[`Validate cli > app suggest [ 'sug', 'dutch', …(3) ] 5`] = `
+"dutch:
+ - dutch    -    0 en_us
+ - Dutch    -    1 en_us"
+`;
+
+exports[`Validate cli > app suggest [ 'sug', 'dutch', …(3) ] 6`] = `""`;
+
+exports[`Validate cli > app suggest [ 'sug', 'dutch', …(4) ] 1`] = `[]`;
+
+exports[`Validate cli > app suggest [ 'sug', 'dutch', …(4) ] 2`] = `
+"dutch:
+ - dutch    -    0 en-gb, en_us
+ - Dutch    -    1 en_us"
+`;
+
+exports[`Validate cli > app suggest [ 'sug', 'dutch', …(4) ] 3`] = `""`;
+
+exports[`Validate cli > app suggest [ 'sug', 'mexico', '-d=en_us' ] 1`] = `[]`;
+
+exports[`Validate cli > app suggest [ 'sug', 'mexico', '-d=en_us' ] 2`] = `
+"mexico:
+ - Mexico
+ - medico
+ - medic
+ - melic
+ - mesic
+ - metic
+ - Mexican
+ - Mexico's"
+`;
+
+exports[`Validate cli > app suggest [ 'sug', 'mexico', '-d=en_us' ] 3`] = `""`;
+
+exports[`Validate cli > app suggest [ 'sug', 'mexico', '-d=en_us', '-v' ] 1`] = `[]`;
+
+exports[`Validate cli > app suggest [ 'sug', 'mexico', '-d=en_us', '-v' ] 2`] = `
+"mexico:
+ - Mexico      -    1 en_us
+ - medico      -  100 en_us
+ - medic       -  190 en_us
+ - melic       -  190 en_us
+ - mesic       -  190 en_us
+ - metic       -  190 en_us
+ - Mexican     -  191 en_us
+ - Mexico's    -  191 en_us"
+`;
+
+exports[`Validate cli > app suggest [ 'sug', 'mexico', '-d=en_us', '-v' ] 3`] = `""`;
+
+exports[`Validate cli > app suggest [ 'sug', 'mexico', '-d=en_us', …(2) ] 1`] = `[]`;
+
+exports[`Validate cli > app suggest [ 'sug', 'mexico', '-d=en_us', …(2) ] 2`] = `
+"mexico:
+ <no suggestions>"
+`;
+
+exports[`Validate cli > app suggest [ 'sug', 'mexico', '-d=en_us', …(2) ] 3`] = `""`;
+
+exports[`Validate cli > app suggest [ 'sug', 'mexico', '-d=en-gb' ] 1`] = `[]`;
+
+exports[`Validate cli > app suggest [ 'sug', 'mexico', '-d=en-gb' ] 2`] = `
+"mexico:
+ - mexico
+ - medico
+ - mexico's
+ - mexican
+ - medicos
+ - medich
+ - medici
+ - medics
+ - melick"
+`;
+
+exports[`Validate cli > app suggest [ 'sug', 'mexico', '-d=en-gb' ] 3`] = `""`;
+
+exports[`Validate cli > app suggest [ 'sug', 'mexico', '-d=en-us' ] 1`] = `[]`;
+
+exports[`Validate cli > app suggest [ 'sug', 'mexico', '-d=en-us' ] 2`] = `""`;
+
+exports[`Validate cli > app suggest [ 'sug', 'mexico', '-d=en-us' ] 3`] = `"Unknown dictionary: \\"en-us\\""`;

@@ -1,3 +1,5 @@
+import { describe, expect, test } from 'vitest';
+
 import { Collection, ShallowObjectCollection } from './ObjectCollection';
 
 const objects = (function () {

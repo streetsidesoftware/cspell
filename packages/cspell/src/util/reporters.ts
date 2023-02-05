@@ -6,6 +6,7 @@ import type {
     ReporterSettings,
     RunResult,
 } from '@cspell/cspell-types';
+import { dynamicImport } from '@cspell/dynamic-import';
 
 import { ApplicationError, toError } from './errors';
 
@@ -57,12 +58,12 @@ export function mergeReporters(...reporters: ReadonlyArray<CSpellReporter>): Fin
 /**
  * Loads reporter modules configured in cspell config file
  */
-export function loadReporters(
+export async function loadReporters(
     reporters: FileSettings['reporters'],
     defaultReporter: CSpellReporter,
     config: ReporterConfiguration
-): ReadonlyArray<CSpellReporter> {
-    function loadReporter(reporterSettings: ReporterSettings): CSpellReporter | undefined {
+): Promise<ReadonlyArray<CSpellReporter>> {
+    async function loadReporter(reporterSettings: ReporterSettings): Promise<CSpellReporter | undefined> {
         if (reporterSettings === 'default') return defaultReporter;
         if (!Array.isArray(reporterSettings)) {
             reporterSettings = [reporterSettings];
@@ -70,8 +71,7 @@ export function loadReporters(
         const [moduleName, settings] = reporterSettings;
 
         try {
-            // eslint-disable-next-line @typescript-eslint/no-var-requires
-            const { getReporter }: CSpellReporterModule = require(moduleName);
+            const { getReporter }: CSpellReporterModule = await dynamicImport(moduleName, [process.cwd(), __dirname]);
             return getReporter(settings, config);
         } catch (e: unknown) {
             throw new ApplicationError(`Failed to load reporter ${moduleName}: ${toError(e).message}`);
@@ -80,7 +80,8 @@ export function loadReporters(
 
     reporters = !reporters || !reporters.length ? ['default'] : [...reporters];
 
-    return reporters.map(loadReporter).filter((v: CSpellReporter | undefined): v is CSpellReporter => v !== undefined);
+    const loadedReporters = await Promise.all(reporters.map(loadReporter));
+    return loadedReporters.filter((v: CSpellReporter | undefined): v is CSpellReporter => v !== undefined);
 }
 
 export function finalizeReporter(reporter: undefined): undefined;

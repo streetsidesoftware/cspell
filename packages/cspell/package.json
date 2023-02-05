@@ -46,11 +46,13 @@
     "clean-build": "pnpm run clean && pnpm run build",
     "compile": "tsc -p .",
     "watch": "tsc --watch -p .",
-    "coverage": "jest --coverage",
-    "test-watch": "jest --watch",
+    "coverage": "pnpm coverage:vitest && pnpm coverage:fix",
+    "coverage:vitest": "vitest run --coverage",
+    "coverage:fix": "nyc report --temp-dir \"$(pwd)/coverage\" --reporter lcov --report-dir \"$(pwd)/coverage\" --cwd ../..",
+    "test-watch": "vitest",
     "prepublishOnly": "pnpm run clean-build",
-    "test": "jest --maxWorkers=1",
-    "test:update-snapshot": "jest --updateSnapshot"
+    "test": "vitest run",
+    "test:update-snapshot": "vitest run --updateSnapshot"
   },
   "repository": {
     "type": "git",
@@ -75,6 +77,7 @@
   "homepage": "https://streetsidesoftware.github.io/cspell/",
   "dependencies": {
     "@cspell/cspell-pipe": "workspace:*",
+    "@cspell/dynamic-import": "workspace:*",
     "chalk": "^4.1.2",
     "commander": "^10.0.0",
     "cspell-gitignore": "workspace:*",
@@ -100,10 +103,10 @@
     "@types/imurmurhash": "^0.1.1",
     "@types/micromatch": "^4.0.2",
     "@types/semver": "^7.3.13",
-    "jest": "^29.4.1",
     "micromatch": "^4.0.5",
     "minimatch": "^6.1.6",
     "rollup": "^3.13.0",
-    "rollup-plugin-dts": "^5.1.1"
+    "rollup-plugin-dts": "^5.1.1",
+    "vitest": "^0.28.4"
   }
 }

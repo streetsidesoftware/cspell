@@ -1,0 +1,32 @@
+{
+  "name": "test-dynamic-import-cjs",
+  "version": "6.21.0",
+  "description": "Pure testing package for @cspell/dynamic-import.",
+  "private": true,
+  "type": "commonjs",
+  "bin": "./bin.cjs",
+  "scripts": {
+    "clean": "shx rm -rf dist .tsbuildinfo",
+    "build": "pnpm run compile",
+    "build-dev": "tsc -p tsconfig.dev.json",
+    "clean-build": "pnpm run clean && pnpm run build",
+    "compile": "tsc -p .",
+    "test": "pnpm test:unit && pnpm test:smoke",
+    "test:smoke": "node ./bin.cjs",
+    "test:unit": "vitest run"
+  },
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "@cspell/cspell-pipe": "workspace:*",
+    "@cspell/dynamic-import": "workspace:*"
+  },
+  "main": "index.js",
+  "keywords": [],
+  "devDependencies": {
+    "vitest": "^0.28.4"
+  },
+  "engines": {
+    "node": ">=14"
+  }
+}

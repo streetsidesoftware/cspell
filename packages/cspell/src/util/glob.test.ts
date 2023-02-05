@@ -4,6 +4,7 @@ import micromatch from 'micromatch';
 import type { MinimatchOptions } from 'minimatch';
 import { minimatch } from 'minimatch';
 import * as path from 'path';
+import { describe, expect, test, vi } from 'vitest';
 
 import { calcGlobs, normalizeGlobsToRoot } from './glob';
 
@@ -11,8 +12,8 @@ const getStdinResult = {
     value: '',
 };
 
-jest.mock('get-stdin', () => {
-    return jest.fn(() => Promise.resolve(getStdinResult.value));
+vi.mock('get-stdin', () => {
+    return vi.fn(() => Promise.resolve(getStdinResult.value));
 });
 
 describe('Validate minimatch assumptions', () => {

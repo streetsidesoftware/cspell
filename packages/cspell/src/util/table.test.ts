@@ -1,4 +1,5 @@
 import strip from 'strip-ansi';
+import { describe, expect, test } from 'vitest';
 
 import type { Table } from './table';
 import { tableToLines } from './table';

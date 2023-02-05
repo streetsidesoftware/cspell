@@ -1,8 +1,10 @@
+import { describe, expect, test, vi } from 'vitest';
+
 import { getFeatureFlags, parseFeatureFlags } from './featureFlags';
 
 describe('featureFlags', () => {
     test('Unknown flag', () => {
-        const warn = jest.spyOn(console, 'warn').mockImplementation();
+        const warn = vi.spyOn(console, 'warn').mockImplementation(() => undefined);
         parseFeatureFlags(['unknown-flag']);
         expect(warn).toHaveBeenCalledWith('Unknown flag: "unknown-flag"');
     });

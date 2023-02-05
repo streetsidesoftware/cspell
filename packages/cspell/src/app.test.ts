@@ -4,14 +4,15 @@ import * as Path from 'path';
 import * as readline from 'readline';
 import stripAnsi from 'strip-ansi';
 import * as Util from 'util';
+import { afterEach, beforeEach, type Constructable, describe, expect, test, vi } from 'vitest';
 import { URI } from 'vscode-uri';
 
 import * as app from './app';
 import * as Link from './link';
 import { mergeAsyncIterables } from './util/async';
 
-jest.mock('readline');
-const mockCreateInterface = jest.mocked(readline.createInterface);
+vi.mock('readline');
+const mockCreateInterface = vi.mocked(readline.createInterface);
 
 const hideOutput = true;
 
@@ -39,7 +40,7 @@ function pathFix(...parts: string[]): string {
 }
 
 // [message, args, resolve, error, log, info]
-type ErrorCheck = undefined | jest.Constructable | string | RegExp;
+type ErrorCheck = undefined | Constructable | string | RegExp;
 
 interface TestCase {
     msg: string;
@@ -99,12 +100,12 @@ const colorLevel = chalk.level;
 
 describe('Validate cli', () => {
     const logger = makeLogger();
-    let error = jest.spyOn(console, 'error').mockName('console.error').mockImplementation(logger.error);
-    let log = jest.spyOn(console, 'log').mockName('console.log').mockImplementation(logger.log);
-    let info = jest.spyOn(console, 'info').mockName('console.info').mockImplementation(logger.info);
-    const listGlobalImports = jest.spyOn(Link, 'listGlobalImports').mockName('istGlobalImports');
-    const addPathsToGlobalImports = jest.spyOn(Link, 'addPathsToGlobalImports').mockName('addPathsToGlobalImports');
-    const removePathsFromGlobalImports = jest
+    let error = vi.spyOn(console, 'error').mockName('console.error').mockImplementation(logger.error);
+    let log = vi.spyOn(console, 'log').mockName('console.log').mockImplementation(logger.log);
+    let info = vi.spyOn(console, 'info').mockName('console.info').mockImplementation(logger.info);
+    const listGlobalImports = vi.spyOn(Link, 'listGlobalImports').mockName('istGlobalImports');
+    const addPathsToGlobalImports = vi.spyOn(Link, 'addPathsToGlobalImports').mockName('addPathsToGlobalImports');
+    const removePathsFromGlobalImports = vi
         .spyOn(Link, 'removePathsFromGlobalImports')
         .mockName('removePathsFromGlobalImports');
     const captureStdout = new RecordStdStream();
@@ -113,9 +114,9 @@ describe('Validate cli', () => {
     beforeEach(() => {
         mockCreateInterface.mockClear();
         logger.clear();
-        error = jest.spyOn(console, 'error').mockName('console.error').mockImplementation(logger.error);
-        log = jest.spyOn(console, 'log').mockName('console.log').mockImplementation(logger.log);
-        info = jest.spyOn(console, 'info').mockName('console.info').mockImplementation(logger.info);
+        error = vi.spyOn(console, 'error').mockName('console.error').mockImplementation(logger.error);
+        log = vi.spyOn(console, 'log').mockName('console.log').mockImplementation(logger.log);
+        info = vi.spyOn(console, 'info').mockName('console.info').mockImplementation(logger.info);
         captureStdout.startCapture();
         captureStderr.startCapture();
         chalk.level = 3;
@@ -177,17 +178,15 @@ describe('Validate cli', () => {
         const args = argv(...testArgs);
         const result = app.run(commander, args);
         if (!errorCheck) {
-            // eslint-disable-next-line jest/no-conditional-expect
             await expect(result).resolves.toBeUndefined();
         } else {
-            // eslint-disable-next-line jest/no-conditional-expect
             await expect(result).rejects.toThrow(errorCheck);
         }
-        // eslint-disable-next-line jest/no-conditional-expect
+
         eError ? expect(error).toHaveBeenCalled() : expect(error).not.toHaveBeenCalled();
-        // eslint-disable-next-line jest/no-conditional-expect
+
         eLog ? expect(log).toHaveBeenCalled() : expect(log).not.toHaveBeenCalled();
-        // eslint-disable-next-line jest/no-conditional-expect
+
         eInfo ? expect(info).toHaveBeenCalled() : expect(info).not.toHaveBeenCalled();
         expect(captureStdout.text).toMatchSnapshot();
         expect(logger.normalizedHistory()).toMatchSnapshot();
@@ -209,17 +208,15 @@ describe('Validate cli', () => {
         const args = argv(...testArgs);
         const result = app.run(commander, args);
         if (!errorCheck) {
-            // eslint-disable-next-line jest/no-conditional-expect
             await expect(result).resolves.toBeUndefined();
         } else {
-            // eslint-disable-next-line jest/no-conditional-expect
             await expect(result).rejects.toThrow(errorCheck);
         }
-        // eslint-disable-next-line jest/no-conditional-expect
+
         eError ? expect(error).toHaveBeenCalled() : expect(error).not.toHaveBeenCalled();
-        // eslint-disable-next-line jest/no-conditional-expect
+
         eLog ? expect(log).toHaveBeenCalled() : expect(log).not.toHaveBeenCalled();
-        // eslint-disable-next-line jest/no-conditional-expect
+
         eInfo ? expect(info).toHaveBeenCalled() : expect(info).not.toHaveBeenCalled();
         expect(captureStdout.text).toMatchSnapshot();
         expect(normalizeLogCalls(log.mock.calls)).toMatchSnapshot();
@@ -255,17 +252,15 @@ describe('Validate cli', () => {
         const args = argv(...testArgs);
         const result = app.run(commander, args);
         if (!errorCheck) {
-            // eslint-disable-next-line jest/no-conditional-expect
             await expect(result).resolves.toBeUndefined();
         } else {
-            // eslint-disable-next-line jest/no-conditional-expect
             await expect(result).rejects.toThrow(errorCheck);
         }
-        // eslint-disable-next-line jest/no-conditional-expect
+
         eError ? expect(error).toHaveBeenCalled() : expect(error).not.toHaveBeenCalled();
-        // eslint-disable-next-line jest/no-conditional-expect
+
         eLog ? expect(log).toHaveBeenCalled() : expect(log).not.toHaveBeenCalled();
-        // eslint-disable-next-line jest/no-conditional-expect
+
         eInfo ? expect(info).toHaveBeenCalled() : expect(info).not.toHaveBeenCalled();
         expect(normalizeOutput(captureStdout.text)).toMatchSnapshot();
     });
@@ -296,10 +291,8 @@ describe('Validate cli', () => {
         const args = argv(...testArgs);
         const result = app.run(commander, args);
         if (!errorCheck) {
-            // eslint-disable-next-line jest/no-conditional-expect
             await expect(result).resolves.toBeUndefined();
         } else {
-            // eslint-disable-next-line jest/no-conditional-expect
             await expect(result).rejects.toThrow(errorCheck);
         }
         expect(captureStdout.text).toMatchSnapshot();
