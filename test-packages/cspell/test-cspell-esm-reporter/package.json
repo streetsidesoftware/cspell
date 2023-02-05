@@ -1,14 +1,16 @@
 {
-  "name": "test-cspell-cli",
+  "name": "test-cspell-esm-reporter",
   "version": "6.21.0",
   "description": "cli for cspell",
   "private": "true",
-  "main": "index.js",
+  "type": "module",
+  "module": "index.js",
   "bin": {
     "cspell-cli": "index.js"
   },
   "scripts": {
-    "test": "node ./index.js \"**\""
+    "build": "tsc -p .",
+    "test": "node ./index.js . --reporter=./dist/reporter.js"
   },
   "repository": {
     "type": "git",
@@ -24,6 +26,10 @@
   },
   "homepage": "https://github.com/streetsidesoftware/cspell-cli#readme",
   "dependencies": {
+    "@cspell/cspell-types": "workspace:^",
     "cspell": "workspace:*"
+  },
+  "devDependencies": {
+    "typescript": "^4.9.5"
   }
 }

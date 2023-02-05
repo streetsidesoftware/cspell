@@ -886,6 +886,17 @@ importers:
     dependencies:
       cspell: link:../../../packages/cspell
 
+  test-packages/cspell/test-cspell-esm-reporter:
+    specifiers:
+      '@cspell/cspell-types': workspace:^
+      cspell: workspace:*
+      typescript: ^4.9.5
+    dependencies:
+      '@cspell/cspell-types': link:../../../packages/cspell-types
+      cspell: link:../../../packages/cspell
+    devDependencies:
+      typescript: 4.9.5
+
   test-packages/dictionaries/companies:
     specifiers:
       '@cspell/cspell-tools': workspace:*
