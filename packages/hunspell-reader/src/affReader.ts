@@ -397,7 +397,7 @@ export function parseAff(affFileContent: string, encoding: string = UTF8): AffIn
     return collectionToAffInfo(affFieldCollectionTable, encoding);
 }
 
-export function parseAffFileToAff(filename: string, encoding?: string) {
+export function parseAffFileToAff(filename: string, encoding?: string): Promise<Aff> {
     return parseAffFile(filename, encoding).then((affInfo) => new Aff(affInfo));
 }
 
