@@ -2,7 +2,7 @@ import { opConcatMap, opMap, pipe } from '@cspell/cspell-pipe/sync';
 import type { DictionaryInformation, SuggestionCostMapDef } from '@cspell/cspell-types';
 
 import type { AffInfo, Fx, Substitution } from './affDef';
-import { removeAccents, toRange, toUnicodeCode } from './textUtils';
+import { removeAccents, toRange } from './textUtils';
 
 export function affToDicInfo(aff: AffInfo, locale: string): DictionaryInformation {
     const alphabetInfo = extractAlphabet(aff, locale);
@@ -12,7 +12,7 @@ export function affToDicInfo(aff: AffInfo, locale: string): DictionaryInformatio
         ...extractSuggestionEditCosts(aff, alphabetInfo),
         locale,
         alphabet: toRange(alphabetInfo.alphabet, 5),
-        accents: toUnicodeCode(toRange([...alphabetInfo.accents].sort().join(''))),
+        accents: toRange([...alphabetInfo.accents].sort().join('')),
     };
 }
 

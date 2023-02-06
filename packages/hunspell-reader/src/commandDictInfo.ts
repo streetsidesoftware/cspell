@@ -3,6 +3,7 @@ import { Command } from 'commander';
 
 import { parseAffFile } from './affReader';
 import { affToDicInfo } from './affToDicInfo';
+import { escapeUnicodeCode } from './textUtils';
 
 export function getCommand(): Command {
     const commander = new Command('cspell-dict-info');
@@ -23,5 +24,6 @@ async function action(hunspellFile: string, locale: string): Promise<void> {
 
     const info = affToDicInfo(aff, locale);
 
-    console.log(JSON.stringify(info, null, 2));
+    const rawJson = JSON.stringify(info, null, 2);
+    console.log(escapeUnicodeCode(rawJson));
 }
