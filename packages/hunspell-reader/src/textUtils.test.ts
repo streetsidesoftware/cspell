@@ -1,17 +1,18 @@
-import { removeAccents, removeLooseAccents, toRange, toUnicodeCode } from './textUtils';
+import { escapeUnicodeCode, removeAccents, removeLooseAccents, toRange } from './textUtils';
 
 describe('textUtils', () => {
+    // cspell:ignore résumé sume
     test.each`
-        text                       | expected
-        ${'abc'}                   | ${'abc'}
-        ${'café'}                  | ${'caf\\u00e9'}
-        ${'café'.normalize('NFD')} | ${'cafe\\u0301'}
-        ${'abc\nabc'}              | ${'abc\\u000aabc'}
-    `('toUnicodeCode $text', ({ text, expected }) => {
-        const result = toUnicodeCode(text);
+        text                                        | regexp       | expected
+        ${'abc'}                                    | ${undefined} | ${'"abc"'}
+        ${'café'}                                   | ${undefined} | ${'"café"'}
+        ${'café'.normalize('NFD')}                  | ${undefined} | ${'"cafe\\u0301"'}
+        ${'à la mode café résumé'.normalize('NFD')} | ${undefined} | ${'"a\\u0300 la mode cafe\\u0301 re\\u0301sume\\u0301"'}
+        ${'abc\nabc'}                               | ${undefined} | ${'"abc\\nabc"'}
+    `('escapeUnicodeCode $text', ({ text, regexp, expected }) => {
+        const result = escapeUnicodeCode(JSON.stringify(text), regexp);
         expect(result).toBe(expected);
-        const json = `"${result}"`;
-        expect(JSON.parse(json)).toBe(text);
+        expect(JSON.parse(result)).toBe(text);
     });
 
     test.each`

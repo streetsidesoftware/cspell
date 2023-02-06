@@ -1,18 +1,30 @@
-export function toUnicodeCode(s: string): string {
+/**
+ * Escape Unicode Characters
+ * @param text
+ * @param regexp
+ * @returns
+ */
+export function escapeUnicodeCode(text: string, regexp = /\p{M}/gu): string {
+    return text.replace(regexp, replaceWithUnicode);
+}
+
+function replaceWithUnicode(substring: string): string {
     const start = 0x20;
     const end = 0x7a;
     let val = '';
-    for (let i = 0; i < s.length; ++i) {
-        const char = s[i];
+    for (let i = 0; i < substring.length; ++i) {
+        const char = substring[i];
         const code = char.charCodeAt(0);
         if (code >= start && code <= end) {
             val += char;
             continue;
         }
-        val += '\\u' + ('000' + code.toString(16)).slice(-4);
+        const hex = '0000' + code.toString(16);
+        val += code < 256 ? '\\x' + hex.slice(-2) : '\\u' + hex.slice(-4);
     }
     return val;
 }
+
 /**
  * Converts a string of letters in ranges.
  *
