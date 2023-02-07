@@ -7,8 +7,8 @@ import type { Comment, Identifier, ImportSpecifier, Literal, Node, TemplateEleme
 import * as path from 'path';
 import { format } from 'util';
 
+import type { CustomWordListFile, WorkerOptions } from '../common/options';
 import type { ASTNode, JSXText } from './ASTNode';
-import type { CustomWordListFile, WorkerOptions } from './options';
 import { walkTree } from './walkTree';
 
 export interface Issue {

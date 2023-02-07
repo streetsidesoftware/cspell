@@ -5,14 +5,14 @@
 
 /**
  * @typedef {import('estree').Node} Node
- * @typedef {import('./spellCheck').Issue} Issue
- * @typedef {import('./options').WorkerOptions} WorkerOptions
+ * @typedef {import('./spellCheck.js').Issue} Issue
+ * @typedef {import('../common/options').WorkerOptions} WorkerOptions
  */
 
 const { runAsWorker } = require('synckit');
 
 /**
- * @type {typeof import('./spellCheck')}
+ * @type {typeof import('./spellCheck.js')}
  */
 let spellChecker;
 
@@ -26,7 +26,7 @@ runAsWorker(
      */
     async (filename, text, root, options) => {
         if (!spellChecker) {
-            spellChecker = await import('./spellCheck');
+            spellChecker = await import('./spellCheck.js');
         }
 
         return spellChecker.spellCheck(filename, text, root, options);

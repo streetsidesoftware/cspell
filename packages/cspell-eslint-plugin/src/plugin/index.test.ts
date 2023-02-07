@@ -4,7 +4,7 @@ import * as path from 'path';
 
 import * as Rule from './index';
 
-const root = path.resolve(__dirname, '..');
+const root = path.resolve(__dirname, '../..');
 const fixturesDir = path.join(root, 'fixtures');
 
 const parsers: Record<string, string | undefined> = {
