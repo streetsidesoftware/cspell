@@ -1,12 +1,10 @@
+import { promises as fs } from 'fs';
 import { join } from 'path';
-import rimraf from 'rimraf';
-import { promisify } from 'util';
 
 import { CaptureLogger } from './CaptureLogger';
 import { addRepository as configAddRepository } from './config';
 import { addRepository, checkoutRepositoryAsync, repositoryDir } from './repositoryHelper';
 
-const rm = promisify(rimraf);
 const defaultTimeout = 60000;
 
 jest.mock('./config');
@@ -46,7 +44,7 @@ describe('Validate repository helper', () => {
         'checkoutRepositoryAsync $msg $repo $path $commit',
         async ({ repo, path, commit, expected }: TestCase) => {
             const logger = new CaptureLogger();
-            await rm(join(repositoryDir, path));
+            await fs.rm(join(repositoryDir, path), { recursive: true });
             commit = commit || 'main';
             expect(await checkoutRepositoryAsync(logger, repo, path, commit, undefined)).toBe(expected);
             // console.log(logger.logs);
