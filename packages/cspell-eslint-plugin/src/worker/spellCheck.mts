@@ -7,9 +7,9 @@ import type { Comment, Identifier, ImportSpecifier, Literal, Node, TemplateEleme
 import * as path from 'path';
 import { format } from 'util';
 
-import type { ASTNode, JSXText } from './ASTNode';
-import type { CustomWordListFile, WorkerOptions } from './options';
-import { walkTree } from './walkTree';
+import type { CustomWordListFile, WorkerOptions } from '../common/options.js';
+import type { ASTNode, JSXText } from './ASTNode.mjs';
+import { walkTree } from './walkTree.mjs';
 
 export interface Issue {
     start: number;

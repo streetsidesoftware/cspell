@@ -17,25 +17,25 @@
   "homepage": "https://github.com/streetsidesoftware/cspell/tree/main/packages/cspell-eslint-plugin#readme",
   "license": "MIT",
   "exports": {
-    "types": "./dist/index.d.ts",
-    "import": "./dist/index.mjs",
-    "require": "./dist/index.js",
-    "default": "./dist/index.js"
+    "types": "./dist/plugin/index.d.ts",
+    "require": "./dist/plugin/index.js",
+    "default": "./dist/plugin/index.js"
   },
-  "main": "dist/index.js",
-  "module": "dist/index.mjs",
-  "types": "dist/index.d.ts",
+  "type": "commonjs",
+  "main": "dist/plugin/index.js",
+  "types": "dist/plugin/index.d.ts",
   "files": [
     "dist",
     "!**/__mocks__",
+    "!**/*.tsbuildInfo",
     "!**/*.test.*",
     "!**/*.spec.*",
     "!**/*.map"
   ],
   "scripts": {
     "build": "pnpm build:schema && pnpm build:src",
-    "build:src": "tsc -p .",
-    "build:schema": "ts-json-schema-generator --no-top-ref --expose none --path src/options.ts --type Options  -o  ./src/_auto_generated_/options.schema.json",
+    "build:src": "tsc -b ./tsconfig.json",
+    "build:schema": "ts-json-schema-generator --no-top-ref --expose none --path src/common/options.ts --type Options  -o  ./src/_auto_generated_/options.schema.json",
     "watch": "tsc -p . --watch",
     "clean": "shx rm -rf dist coverage .tsbuildinfo",
     "clean-build": "pnpm run clean && pnpm run build",
@@ -67,7 +67,7 @@
   },
   "dependencies": {
     "cspell-lib": "workspace:*",
-    "estree-walker": "^2.0.2",
+    "estree-walker": "^3.0.3",
     "synckit": "^0.8.5"
   }
 }

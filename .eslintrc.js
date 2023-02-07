@@ -101,7 +101,7 @@ const config = {
             },
         },
         {
-            files: ['**/*.js'],
+            files: ['**/*.js', '**/*.mjs'],
             parserOptions: {
                 ecmaVersion: 2020,
                 sourceType: 'module',

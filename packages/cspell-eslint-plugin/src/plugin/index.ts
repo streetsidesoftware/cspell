@@ -1,2 +1,2 @@
+export type { Options } from '../common/options';
 export { configs, rules } from './cspell-eslint-plugin';
-export type { Options } from './options';

@@ -2,14 +2,13 @@
 import type { Rule } from 'eslint';
 import { createSyncFn } from 'synckit';
 
-import optionsSchema from './_auto_generated_/options.schema.json';
-import { normalizeOptions } from './options';
-import type { Issue, SpellCheckSyncFn } from './spellCheck';
-import { walkTree } from './walkTree';
+import optionsSchema from '../_auto_generated_/options.schema.json';
+import type { Issue, SpellCheckSyncFn } from '../worker/spellCheck.mjs';
+import { normalizeOptions } from './defaultCheckOptions';
 
 const schema = optionsSchema as unknown as Rule.RuleMetaData['schema'];
 
-const spellCheck: SpellCheckSyncFn = createSyncFn(require.resolve('./worker'), undefined, 30000);
+const spellCheck: SpellCheckSyncFn = createSyncFn(require.resolve('../worker/worker.mjs'), undefined, 30000);
 
 interface PluginRules {
     ['spellchecker']: Rule.RuleModule;
@@ -42,23 +41,10 @@ function log(...args: Parameters<typeof console.log>) {
     console.log(...args);
 }
 
-const debugTree = false;
-
-function dumpTree(context: Rule.RuleContext) {
-    if (!debugTree) return;
-
-    walkTree(context.getSourceCode().ast, function (node, _parent, key) {
-        const withValue: { type: string; value?: unknown } = node;
-        console.log('key: %o, node: %o', key, { type: node.type, value: withValue.value });
-    });
-}
-
 function create(context: Rule.RuleContext): Rule.RuleListener {
     const options = normalizeOptions(context.options[0], context.getCwd());
     isDebugMode = options.debugMode || false;
     isDebugMode && logContext(context);
-
-    dumpTree(context);
 
     function reportIssue(issue: Issue) {
         const messageId: MessageIds = issue.severity === 'Forbidden' ? 'wordForbidden' : 'wordUnknown';
