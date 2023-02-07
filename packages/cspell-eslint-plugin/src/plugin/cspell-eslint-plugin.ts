@@ -3,12 +3,12 @@ import type { Rule } from 'eslint';
 import { createSyncFn } from 'synckit';
 
 import optionsSchema from '../_auto_generated_/options.schema.json';
-import type { Issue, SpellCheckSyncFn } from '../worker/spellCheck';
+import type { Issue, SpellCheckSyncFn } from '../worker/spellCheck.mjs';
 import { normalizeOptions } from './defaultCheckOptions';
 
 const schema = optionsSchema as unknown as Rule.RuleMetaData['schema'];
 
-const spellCheck: SpellCheckSyncFn = createSyncFn(require.resolve('../worker/worker.js'), undefined, 30000);
+const spellCheck: SpellCheckSyncFn = createSyncFn(require.resolve('../worker/worker.mjs'), undefined, 30000);
 
 interface PluginRules {
     ['spellchecker']: Rule.RuleModule;

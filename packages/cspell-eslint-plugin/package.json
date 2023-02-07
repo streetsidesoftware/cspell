@@ -21,6 +21,7 @@
     "require": "./dist/plugin/index.js",
     "default": "./dist/plugin/index.js"
   },
+  "type": "commonjs",
   "main": "dist/plugin/index.js",
   "types": "dist/plugin/index.d.ts",
   "files": [
@@ -33,7 +34,7 @@
   ],
   "scripts": {
     "build": "pnpm build:schema && pnpm build:src",
-    "build:src": "tsc -p .",
+    "build:src": "tsc -b ./tsconfig.json",
     "build:schema": "ts-json-schema-generator --no-top-ref --expose none --path src/common/options.ts --type Options  -o  ./src/_auto_generated_/options.schema.json",
     "watch": "tsc -p . --watch",
     "clean": "shx rm -rf dist coverage .tsbuildinfo",
@@ -54,7 +55,6 @@
   },
   "devDependencies": {
     "@types/eslint": "^8.21.0",
-    "@types/estree": "^1.0.0",
     "@types/node": "^18.11.19",
     "@typescript-eslint/parser": "^5.50.0",
     "@typescript-eslint/types": "^5.50.0",
@@ -66,7 +66,7 @@
   },
   "dependencies": {
     "cspell-lib": "workspace:*",
-    "estree-walker": "^2.0.2",
+    "estree-walker": "^3.0.3",
     "synckit": "^0.8.5"
   }
 }
