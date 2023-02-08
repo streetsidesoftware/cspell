@@ -6,31 +6,20 @@
     "language": "en",
     "allowCompoundWords": false,
     // words - list of words to be always considered correct
-    "words": [
-        "disj",
-        "gensequence",
-        "xregexp",
-        "sampletrace"
-    ],
+    "words": ["disj", "gensequence", "xregexp", "sampletrace"],
     "maxNumberOfProblems": 10000,
-    "ignorePaths": [
-        "forbidden-words.txt"
-    ],
+    "ignorePaths": ["forbidden-words.txt"],
     // flagWords - list of words to be always considered incorrect
     // This is useful for offensive words and common spelling errors.
     // For example "hte" should be "the"
-    "flagWords": [
-        "hte"
-    ],
+    "flagWords": ["hte"],
     "dictionaryDefinitions": [
         {
             "name": "forbidden-words",
             "path": "./forbidden-words.txt"
         }
     ],
-    "dictionaries": [
-        "forbidden-words"
-    ],
+    "dictionaries": ["forbidden-words"],
     "languageSettings": [
         {
             // VSCode languageId. i.e. typescript, java, go, cpp, javascript, markdown, latex
@@ -42,14 +31,9 @@
             "locale": "*",
             // By default the whole text of a file is included for spell checking
             // Adding patterns to the "includeRegExpList" to only include matching patterns
-            "includeRegExpList": [
-                "CStyleComment",
-                "string"
-            ],
+            "includeRegExpList": ["CStyleComment", "string"],
             // To exclude patterns, add them to "ignoreRegExpList"
-            "ignoreRegExpList": [
-                "/#include.*/"
-            ],
+            "ignoreRegExpList": ["/#include.*/"],
             // regex patterns than can be used with ignoreRegExpList or includeRegExpList
             // Example: "pattern": [{ "name": "mdash", "pattern": "&mdash;" }]
             // This could be included in "ignoreRegExpList": ["mdash"]
@@ -60,9 +44,7 @@
                 }
             ],
             // List of dictionaries to enable by name in `dictionaryDefinitions`
-            "dictionaries": [
-                "cpp"
-            ],
+            "dictionaries": ["cpp"],
             // Dictionary definitions can also be supplied here. They are only used iff "languageId" and "locale" match.
             "dictionaryDefinitions": []
         }
@@ -70,16 +52,12 @@
     "overrides": [
         {
             "filename": "**/{*.py}",
-            "ignoreRegExpList": [
-                "/'s\\b/"
-            ]
+            "ignoreRegExpList": ["/'s\\b/"]
         },
         {
             "language": "en",
             "filename": "**/{*.c,*.cpp}",
-            "ignoreRegExpList": [
-                "/'s\\b/"
-            ],
+            "ignoreRegExpList": ["/'s\\b/"],
             "dictionaryDefinitions": [],
             "allowCompoundWords": false
         },
