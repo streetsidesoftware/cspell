@@ -6,12 +6,6 @@ A spell checker plugin for ESLint based upon CSpell.
 
 This plugin is still in active development as part of the CSpell suite of tools and applications.
 
-## In Combination with CSpell
-
-Due to the nature of how files are parsed, the `cspell` command line tool and this ESLint plugin will give different results.
-It is recommended that either ESLint or `cspell` checks a file, but not both. Use `ignorePaths` setting in `cspell.json` to
-tell the `cspell` command line tool to ignore files checked by ESLint.
-
 ## Quick Setup
 
 - Install `@cspell/eslint-plugin` as a dev-dependency
@@ -109,3 +103,21 @@ Example:
   }
 }
 ```
+
+## In Combination with CSpell
+
+Due to the nature of how files are parsed, the `cspell` command line tool and this ESLint plugin will give different results.
+It is recommended that either ESLint or `cspell` checks a file, but not both. Use `ignorePaths` setting in `cspell.json` to
+tell the `cspell` command line tool to ignore files checked by ESLint.
+
+Differences:
+
+- The CSpell parser is generic across all file types. It just breaks an entire document into words and tests them against the dictionaries. Everything is checked, comments, code, strings, etc.
+
+- The CSpell ESLint plugin uses the [AST](https://dev.to/akshay9677/what-the-heck-is-an-abstract-syntax-tree-ast--3kk5) (a way to identify the meaning of the individual parts of your code) provided by ESLint to only check literal strings, identifiers, and comments. See [Options](#options) on selecting what to check.
+
+Example spell checked with ESLint CSpell Plugin:
+<img width="749" alt="image" src="https://user-images.githubusercontent.com/3740137/216295162-38ddf6a0-3873-4e48-b3a5-65fd421dae94.png">
+
+Example spell checked with just `cspell`:
+<img width="744" alt="image" src="https://user-images.githubusercontent.com/3740137/216295368-024c1065-2432-4d10-b204-7eb0589695e6.png">
