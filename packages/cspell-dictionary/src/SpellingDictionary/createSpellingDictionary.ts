@@ -4,12 +4,9 @@ import { deepEqual } from 'fast-equals';
 import type { IterableLike } from '../util/IterableLike';
 import { AutoWeakCache, SimpleCache } from '../util/simpleCache';
 import type { DictionaryInfo, SpellingDictionary, SpellingDictionaryOptions } from './SpellingDictionary';
+import { defaultOptions } from './SpellingDictionary';
 import { SpellingDictionaryFromTrie } from './SpellingDictionaryFromTrie';
 import { createWeightMapFromDictionaryInformation } from './SpellingDictionaryMethods';
-
-export const defaultOptions: SpellingDictionaryOptions = Object.freeze({
-    weightMap: undefined,
-});
 
 type CreateSpellingDictionaryParams = Parameters<typeof createSpellingDictionary>;
 

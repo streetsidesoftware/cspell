@@ -1,7 +1,8 @@
 import type { DictionaryInformation, ReplaceMap } from '@cspell/cspell-types';
 import type { CompoundWordsMethod, SuggestionCollector, SuggestionResult, WeightMap } from 'cspell-trie-lib';
 
-export { CompoundWordsMethod, SuggestionCollector, SuggestionResult } from 'cspell-trie-lib';
+export type { DictionaryDefinitionInline } from '@cspell/cspell-types';
+export { CompoundWordsMethod, type SuggestionCollector, type SuggestionResult } from 'cspell-trie-lib';
 
 export interface SearchOptions {
     /**
@@ -165,3 +166,7 @@ export type SuggestArgs =
               ignoreCase?: boolean
           ) => SuggestionResult[]
       >;
+
+export const defaultOptions: SpellingDictionaryOptions = Object.freeze({
+    weightMap: undefined,
+});

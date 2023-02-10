@@ -18,6 +18,7 @@ export {
     createFlagWordsDictionary,
     createForbiddenWordsDictionary,
     createIgnoreWordsDictionary,
+    createInlineSpellingDictionary,
     createSpellingDictionary,
     createSpellingDictionaryFromTrieFile,
 } from './SpellingDictionary';
