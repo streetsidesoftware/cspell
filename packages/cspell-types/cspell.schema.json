@@ -681,7 +681,7 @@
           "type": "boolean"
         },
         "flagWords": {
-          "description": "List of words to always be considered incorrect.",
+          "description": "List of words to always be considered incorrect. Words found in `flagWords` override `words`.\n\nFormat of `flagWords`\n- single word entry - `word`\n- with suggestions - `word:suggestion` or `word->suggestion, suggestions`\n\nExample: ```ts \"flagWords\": [   \"color: colour\",   \"incase: in case, encase\",   \"canot->cannot\",   \"cancelled->canceled\" ] ```",
           "items": {
             "type": "string"
           },
@@ -769,7 +769,7 @@
           "type": "array"
         },
         "words": {
-          "description": "List of words to be always considered correct.",
+          "description": "List of words to be considered correct.",
           "items": {
             "type": "string"
           },
@@ -853,7 +853,7 @@
           "description": "Glob pattern or patterns to match against."
         },
         "flagWords": {
-          "description": "List of words to always be considered incorrect.",
+          "description": "List of words to always be considered incorrect. Words found in `flagWords` override `words`.\n\nFormat of `flagWords`\n- single word entry - `word`\n- with suggestions - `word:suggestion` or `word->suggestion, suggestions`\n\nExample: ```ts \"flagWords\": [   \"color: colour\",   \"incase: in case, encase\",   \"canot->cannot\",   \"cancelled->canceled\" ] ```",
           "items": {
             "type": "string"
           },
@@ -963,7 +963,7 @@
           "type": "boolean"
         },
         "words": {
-          "description": "List of words to be always considered correct.",
+          "description": "List of words to be considered correct.",
           "items": {
             "type": "string"
           },
@@ -1293,7 +1293,7 @@
       "type": "array"
     },
     "flagWords": {
-      "description": "List of words to always be considered incorrect.",
+      "description": "List of words to always be considered incorrect. Words found in `flagWords` override `words`.\n\nFormat of `flagWords`\n- single word entry - `word`\n- with suggestions - `word:suggestion` or `word->suggestion, suggestions`\n\nExample: ```ts \"flagWords\": [   \"color: colour\",   \"incase: in case, encase\",   \"canot->cannot\",   \"cancelled->canceled\" ] ```",
       "items": {
         "type": "string"
       },
@@ -1501,7 +1501,7 @@
       "description": "Configuration format version of the settings file.\n\nThis controls how the settings in the configuration file behave."
     },
     "words": {
-      "description": "List of words to be always considered correct.",
+      "description": "List of words to be considered correct.",
       "items": {
         "type": "string"
       },

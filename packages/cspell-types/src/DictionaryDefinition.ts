@@ -1,9 +1,11 @@
 import type { DictionaryInformation } from './DictionaryInformation.js';
+import type { InlineDictionary } from './InlineDictionary.js';
 
 export type DictionaryDefinition =
     | DictionaryDefinitionPreferred
     | DictionaryDefinitionCustom
     | DictionaryDefinitionAugmented
+    | DictionaryDefinitionInline
     | DictionaryDefinitionAlternate
     | DictionaryDefinitionLegacy;
 
@@ -61,12 +63,60 @@ export interface DictionaryDefinitionPreferred extends DictionaryDefinitionBase 
      */
     file?: undefined;
 }
+
 /**
  * Used to provide extra data related to the dictionary
  */
 export interface DictionaryDefinitionAugmented extends DictionaryDefinitionPreferred {
     dictionaryInformation?: DictionaryInformation;
 }
+
+/**
+ * Inline Dictionary Definition
+ *
+ * All words are defined inline.
+ */
+interface DictionaryDefinitionInlineBase extends DictionaryDefinitionBase, InlineDictionary {
+    /**
+     * Not used
+     * @hidden
+     */
+    path?: undefined;
+    /**
+     * Note used
+     * @deprecated true
+     * @deprecationMessage Use `path` instead.
+     * @hidden
+     */
+    file?: undefined;
+}
+
+export interface DictionaryDefinitionInlineWords
+    extends DictionaryDefinitionInlineBase,
+        Required<Pick<InlineDictionary, 'words'>> {
+    words: string[];
+}
+
+export interface DictionaryDefinitionInlineFlagWords
+    extends DictionaryDefinitionInlineBase,
+        Required<Pick<InlineDictionary, 'flagWords'>> {
+    flagWords: string[];
+}
+
+export interface DictionaryDefinitionInlineIgnoreWords
+    extends DictionaryDefinitionInlineBase,
+        Required<Pick<InlineDictionary, 'ignoreWords'>> {
+    ignoreWords: string[];
+}
+
+/**
+ * @hidden
+ */
+export type DictionaryDefinitionInline =
+    | DictionaryDefinitionInlineWords
+    | DictionaryDefinitionInlineIgnoreWords
+    | DictionaryDefinitionInlineFlagWords;
+
 /**
  * Only for legacy dictionary definitions.
  * @deprecated true
