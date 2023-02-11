@@ -18,7 +18,9 @@ import type {
     DictionaryFileDefinitionInternalWithSource,
 } from '../Models/CSpellSettingsInternalDef';
 import { isDictionaryDefinitionInlineInternal } from '../Models/CSpellSettingsInternalDef';
+import { AutoResolveWeakCache } from '../util/AutoResolve';
 import { resolveFile } from '../util/resolveFile';
+import { AutoWeakCache } from '../util/simpleCache';
 import type { RequireOptional, UnionFields } from '../util/types';
 import { clean } from '../util/util';
 import type { DictionaryReferenceCollection } from './DictionaryReferenceCollection';
@@ -79,12 +81,24 @@ export function mapDictDefsToInternal(
     return defs?.map((def) => mapDictDefToInternal(def, pathToSettingsFile));
 }
 
+const internalDefs = new AutoResolveWeakCache<DictionaryDefinition, DictionaryDefinitionInternalWithSource>();
+
 export function mapDictDefToInternal(
+    def: DictionaryDefinition,
+    pathToSettingsFile: string
+): DictionaryDefinitionInternalWithSource {
+    return internalDefs.get(def, (def) => _mapDictDefToInternal(def, pathToSettingsFile));
+}
+
+function _mapDictDefToInternal(
     def: DictionaryDefinition,
     pathToSettingsFile: string
 ): DictionaryDefinitionInternalWithSource {
     if (isDictionaryDefinitionWithSource(def)) {
         return def;
+    }
+    if (isDictionaryDefinitionInlineInternal(def)) {
+        return { ...def, __source: pathToSettingsFile };
     }
 
     return new _DictionaryDefinitionInternalWithSource(def, pathToSettingsFile);
