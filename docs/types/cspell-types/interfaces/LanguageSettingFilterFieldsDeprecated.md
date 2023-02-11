@@ -25,7 +25,7 @@ The language id.  Ex: "typescript", "html", or "php".  "*" -- will match all lan
 
 #### Defined in
 
-[CSpellSettingsDef.ts:557](https://github.com/streetsidesoftware/cspell/blob/5bd8203/packages/cspell-types/src/CSpellSettingsDef.ts#L557)
+[CSpellSettingsDef.ts:546](https://github.com/streetsidesoftware/cspell/blob/b805b11/packages/cspell-types/src/CSpellSettingsDef.ts#L546)
 
 ___
 
@@ -45,4 +45,4 @@ Use `locale` instead.
 
 #### Defined in
 
-[CSpellSettingsDef.ts:563](https://github.com/streetsidesoftware/cspell/blob/5bd8203/packages/cspell-types/src/CSpellSettingsDef.ts#L563)
+[CSpellSettingsDef.ts:552](https://github.com/streetsidesoftware/cspell/blob/b805b11/packages/cspell-types/src/CSpellSettingsDef.ts#L552)

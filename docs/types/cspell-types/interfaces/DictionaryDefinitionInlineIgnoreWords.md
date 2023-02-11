@@ -1,34 +1,28 @@
-[@cspell/cspell-types](../README.md) / [Exports](../modules.md) / DictionaryDefinitionAlternate
+[@cspell/cspell-types](../README.md) / [Exports](../modules.md) / DictionaryDefinitionInlineIgnoreWords
 
-# Interface: DictionaryDefinitionAlternate
-
-Only for legacy dictionary definitions.
-
-**`Deprecated`**
-
-true
-
-**`Deprecation Message`**
-
-Use `DictionaryDefinitionPreferred` instead.
+# Interface: DictionaryDefinitionInlineIgnoreWords
 
 ## Hierarchy
 
-- [`DictionaryDefinitionBase`](DictionaryDefinitionBase.md)
+- `DictionaryDefinitionInlineBase`
 
-  ↳ **`DictionaryDefinitionAlternate`**
+- `Required`<`Pick`<`InlineDictionary`, ``"ignoreWords"``\>\>
+
+  ↳ **`DictionaryDefinitionInlineIgnoreWords`**
 
 ## Table of contents
 
 ### Properties
 
-- [description](DictionaryDefinitionAlternate.md#description)
-- [file](DictionaryDefinitionAlternate.md#file)
-- [name](DictionaryDefinitionAlternate.md#name)
-- [noSuggest](DictionaryDefinitionAlternate.md#nosuggest)
-- [repMap](DictionaryDefinitionAlternate.md#repmap)
-- [type](DictionaryDefinitionAlternate.md#type)
-- [useCompounds](DictionaryDefinitionAlternate.md#usecompounds)
+- [description](DictionaryDefinitionInlineIgnoreWords.md#description)
+- [flagWords](DictionaryDefinitionInlineIgnoreWords.md#flagwords)
+- [ignoreWords](DictionaryDefinitionInlineIgnoreWords.md#ignorewords)
+- [name](DictionaryDefinitionInlineIgnoreWords.md#name)
+- [noSuggest](DictionaryDefinitionInlineIgnoreWords.md#nosuggest)
+- [repMap](DictionaryDefinitionInlineIgnoreWords.md#repmap)
+- [type](DictionaryDefinitionInlineIgnoreWords.md#type)
+- [useCompounds](DictionaryDefinitionInlineIgnoreWords.md#usecompounds)
+- [words](DictionaryDefinitionInlineIgnoreWords.md#words)
 
 ## Properties
 
@@ -40,7 +34,7 @@ Optional description.
 
 #### Inherited from
 
-[DictionaryDefinitionBase](DictionaryDefinitionBase.md).[description](DictionaryDefinitionBase.md#description)
+DictionaryDefinitionInlineBase.description
 
 #### Defined in
 
@@ -48,23 +42,47 @@ Optional description.
 
 ___
 
-### file
+### flagWords
 
-• **file**: `string`
+• `Optional` **flagWords**: `string`[]
 
-Path to the file, only for legacy dictionary definitions.
+List of words to always be considered incorrect. Words found in `flagWords` override `words`.
 
-**`Deprecated`**
+Format of `flagWords`
+- single word entry - `word`
+- with suggestions - `word:suggestion` or `word->suggestion, suggestions`
 
-true
+Example:
+```ts
+"flagWords": [
+  "color: colour",
+  "incase: in case, encase",
+  "canot->cannot",
+  "cancelled->canceled"
+]
+```
 
-**`Deprecation Message`**
+#### Inherited from
 
-Use `path` instead.
+DictionaryDefinitionInlineBase.flagWords
 
 #### Defined in
 
-[DictionaryDefinition.ts:135](https://github.com/streetsidesoftware/cspell/blob/b805b11/packages/cspell-types/src/DictionaryDefinition.ts#L135)
+[InlineDictionary.ts:25](https://github.com/streetsidesoftware/cspell/blob/b805b11/packages/cspell-types/src/InlineDictionary.ts#L25)
+
+___
+
+### ignoreWords
+
+• **ignoreWords**: `string`[]
+
+#### Overrides
+
+DictionaryDefinitionInlineBase.ignoreWords
+
+#### Defined in
+
+[DictionaryDefinition.ts:109](https://github.com/streetsidesoftware/cspell/blob/b805b11/packages/cspell-types/src/DictionaryDefinition.ts#L109)
 
 ___
 
@@ -83,7 +101,7 @@ Name Format:
 
 #### Inherited from
 
-[DictionaryDefinitionBase](DictionaryDefinitionBase.md).[name](DictionaryDefinitionBase.md#name)
+DictionaryDefinitionInlineBase.name
 
 #### Defined in
 
@@ -105,7 +123,7 @@ possible suggestions.
 
 #### Inherited from
 
-[DictionaryDefinitionBase](DictionaryDefinitionBase.md).[noSuggest](DictionaryDefinitionBase.md#nosuggest)
+DictionaryDefinitionInlineBase.noSuggest
 
 #### Defined in
 
@@ -121,7 +139,7 @@ Replacement pairs.
 
 #### Inherited from
 
-[DictionaryDefinitionBase](DictionaryDefinitionBase.md).[repMap](DictionaryDefinitionBase.md#repmap)
+DictionaryDefinitionInlineBase.repMap
 
 #### Defined in
 
@@ -146,7 +164,7 @@ C is the slowest to load due to the need to split each line based upon code spli
 
 #### Inherited from
 
-[DictionaryDefinitionBase](DictionaryDefinitionBase.md).[type](DictionaryDefinitionBase.md#type)
+DictionaryDefinitionInlineBase.type
 
 #### Defined in
 
@@ -162,8 +180,24 @@ Use Compounds.
 
 #### Inherited from
 
-[DictionaryDefinitionBase](DictionaryDefinitionBase.md).[useCompounds](DictionaryDefinitionBase.md#usecompounds)
+DictionaryDefinitionInlineBase.useCompounds
 
 #### Defined in
 
 [DictionaryDefinition.ts:31](https://github.com/streetsidesoftware/cspell/blob/b805b11/packages/cspell-types/src/DictionaryDefinition.ts#L31)
+
+___
+
+### words
+
+• `Optional` **words**: `string`[]
+
+List of words to be considered correct.
+
+#### Inherited from
+
+DictionaryDefinitionInlineBase.words
+
+#### Defined in
+
+[InlineDictionary.ts:5](https://github.com/streetsidesoftware/cspell/blob/b805b11/packages/cspell-types/src/InlineDictionary.ts#L5)

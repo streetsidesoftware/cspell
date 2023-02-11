@@ -94,7 +94,7 @@ Url to JSON Schema
 
 #### Defined in
 
-[CSpellSettingsDef.ts:37](https://github.com/streetsidesoftware/cspell/blob/5bd8203/packages/cspell-types/src/CSpellSettingsDef.ts#L37)
+[CSpellSettingsDef.ts:38](https://github.com/streetsidesoftware/cspell/blob/b805b11/packages/cspell-types/src/CSpellSettingsDef.ts#L38)
 
 ___
 
@@ -108,7 +108,7 @@ ___
 
 #### Defined in
 
-[CSpellSettingsDef.ts:24](https://github.com/streetsidesoftware/cspell/blob/5bd8203/packages/cspell-types/src/CSpellSettingsDef.ts#L24)
+[CSpellSettingsDef.ts:25](https://github.com/streetsidesoftware/cspell/blob/b805b11/packages/cspell-types/src/CSpellSettingsDef.ts#L25)
 
 ___
 
@@ -122,7 +122,7 @@ ___
 
 #### Defined in
 
-[CSpellSettingsDef.ts:25](https://github.com/streetsidesoftware/cspell/blob/5bd8203/packages/cspell-types/src/CSpellSettingsDef.ts#L25)
+[CSpellSettingsDef.ts:26](https://github.com/streetsidesoftware/cspell/blob/b805b11/packages/cspell-types/src/CSpellSettingsDef.ts#L26)
 
 ___
 
@@ -142,7 +142,7 @@ false
 
 #### Defined in
 
-[CSpellSettingsDef.ts:441](https://github.com/streetsidesoftware/cspell/blob/5bd8203/packages/cspell-types/src/CSpellSettingsDef.ts#L441)
+[CSpellSettingsDef.ts:430](https://github.com/streetsidesoftware/cspell/blob/b805b11/packages/cspell-types/src/CSpellSettingsDef.ts#L430)
 
 ___
 
@@ -158,7 +158,7 @@ Define cache settings.
 
 #### Defined in
 
-[CSpellSettingsDef.ts:340](https://github.com/streetsidesoftware/cspell/blob/5bd8203/packages/cspell-types/src/CSpellSettingsDef.ts#L340)
+[CSpellSettingsDef.ts:341](https://github.com/streetsidesoftware/cspell/blob/b805b11/packages/cspell-types/src/CSpellSettingsDef.ts#L341)
 
 ___
 
@@ -182,7 +182,7 @@ false
 
 #### Defined in
 
-[CSpellSettingsDef.ts:452](https://github.com/streetsidesoftware/cspell/blob/5bd8203/packages/cspell-types/src/CSpellSettingsDef.ts#L452)
+[CSpellSettingsDef.ts:441](https://github.com/streetsidesoftware/cspell/blob/b805b11/packages/cspell-types/src/CSpellSettingsDef.ts#L441)
 
 ___
 
@@ -198,7 +198,7 @@ Optional description of configuration.
 
 #### Defined in
 
-[CSpellSettingsDef.ts:416](https://github.com/streetsidesoftware/cspell/blob/5bd8203/packages/cspell-types/src/CSpellSettingsDef.ts#L416)
+[CSpellSettingsDef.ts:417](https://github.com/streetsidesoftware/cspell/blob/b805b11/packages/cspell-types/src/CSpellSettingsDef.ts#L417)
 
 ___
 
@@ -221,7 +221,7 @@ and [Custom Dictionaries](https://cspell.org/docs/dictionaries-custom/) for more
 
 #### Defined in
 
-[CSpellSettingsDef.ts:478](https://github.com/streetsidesoftware/cspell/blob/5bd8203/packages/cspell-types/src/CSpellSettingsDef.ts#L478)
+[CSpellSettingsDef.ts:467](https://github.com/streetsidesoftware/cspell/blob/b805b11/packages/cspell-types/src/CSpellSettingsDef.ts#L467)
 
 ___
 
@@ -246,7 +246,7 @@ For example, you can use the following to add a custom dictionary:
 
 #### Defined in
 
-[CSpellSettingsDef.ts:466](https://github.com/streetsidesoftware/cspell/blob/5bd8203/packages/cspell-types/src/CSpellSettingsDef.ts#L466)
+[CSpellSettingsDef.ts:455](https://github.com/streetsidesoftware/cspell/blob/b805b11/packages/cspell-types/src/CSpellSettingsDef.ts#L455)
 
 ___
 
@@ -285,7 +285,7 @@ kotlin      // enable checking for kotlin
 
 #### Defined in
 
-[CSpellSettingsDef.ts:218](https://github.com/streetsidesoftware/cspell/blob/5bd8203/packages/cspell-types/src/CSpellSettingsDef.ts#L218)
+[CSpellSettingsDef.ts:219](https://github.com/streetsidesoftware/cspell/blob/b805b11/packages/cspell-types/src/CSpellSettingsDef.ts#L219)
 
 ___
 
@@ -307,7 +307,7 @@ false
 
 #### Defined in
 
-[CSpellSettingsDef.ts:89](https://github.com/streetsidesoftware/cspell/blob/5bd8203/packages/cspell-types/src/CSpellSettingsDef.ts#L89)
+[CSpellSettingsDef.ts:90](https://github.com/streetsidesoftware/cspell/blob/b805b11/packages/cspell-types/src/CSpellSettingsDef.ts#L90)
 
 ___
 
@@ -327,7 +327,7 @@ true
 
 #### Defined in
 
-[CSpellSettingsDef.ts:422](https://github.com/streetsidesoftware/cspell/blob/5bd8203/packages/cspell-types/src/CSpellSettingsDef.ts#L422)
+[CSpellSettingsDef.ts:423](https://github.com/streetsidesoftware/cspell/blob/b805b11/packages/cspell-types/src/CSpellSettingsDef.ts#L423)
 
 ___
 
@@ -343,7 +343,7 @@ languageIds for the files to spell check.
 
 #### Defined in
 
-[CSpellSettingsDef.ts:200](https://github.com/streetsidesoftware/cspell/blob/5bd8203/packages/cspell-types/src/CSpellSettingsDef.ts#L200)
+[CSpellSettingsDef.ts:201](https://github.com/streetsidesoftware/cspell/blob/b805b11/packages/cspell-types/src/CSpellSettingsDef.ts#L201)
 
 ___
 
@@ -363,7 +363,7 @@ false
 
 #### Defined in
 
-[CSpellSettingsDef.ts:345](https://github.com/streetsidesoftware/cspell/blob/5bd8203/packages/cspell-types/src/CSpellSettingsDef.ts#L345)
+[CSpellSettingsDef.ts:346](https://github.com/streetsidesoftware/cspell/blob/b805b11/packages/cspell-types/src/CSpellSettingsDef.ts#L346)
 
 ___
 
@@ -373,7 +373,9 @@ ___
 
 Configure CSpell features.
 
-- Added with `v5.16.0`.
+**`Version`**
+
+5.16.0
 
 #### Inherited from
 
@@ -381,7 +383,7 @@ Configure CSpell features.
 
 #### Defined in
 
-[CSpellSettingsDef.ts:149](https://github.com/streetsidesoftware/cspell/blob/5bd8203/packages/cspell-types/src/CSpellSettingsDef.ts#L149)
+[CSpellSettingsDef.ts:150](https://github.com/streetsidesoftware/cspell/blob/b805b11/packages/cspell-types/src/CSpellSettingsDef.ts#L150)
 
 ___
 
@@ -399,7 +401,7 @@ Glob patterns are relative to the `globRoot` of the configuration file that defi
 
 #### Defined in
 
-[CSpellSettingsDef.ts:80](https://github.com/streetsidesoftware/cspell/blob/5bd8203/packages/cspell-types/src/CSpellSettingsDef.ts#L80)
+[CSpellSettingsDef.ts:81](https://github.com/streetsidesoftware/cspell/blob/b805b11/packages/cspell-types/src/CSpellSettingsDef.ts#L81)
 
 ___
 
@@ -407,7 +409,21 @@ ___
 
 • `Optional` **flagWords**: `string`[]
 
-List of words to always be considered incorrect.
+List of words to always be considered incorrect. Words found in `flagWords` override `words`.
+
+Format of `flagWords`
+- single word entry - `word`
+- with suggestions - `word:suggestion` or `word->suggestion, suggestions`
+
+Example:
+```ts
+"flagWords": [
+  "color: colour",
+  "incase: in case, encase",
+  "canot->cannot",
+  "cancelled->canceled"
+]
+```
 
 #### Inherited from
 
@@ -415,7 +431,7 @@ List of words to always be considered incorrect.
 
 #### Defined in
 
-[CSpellSettingsDef.ts:428](https://github.com/streetsidesoftware/cspell/blob/5bd8203/packages/cspell-types/src/CSpellSettingsDef.ts#L428)
+[InlineDictionary.ts:25](https://github.com/streetsidesoftware/cspell/blob/b805b11/packages/cspell-types/src/InlineDictionary.ts#L25)
 
 ___
 
@@ -431,7 +447,7 @@ Tells the spell checker to searching for `.gitignore` files when it reaches a ma
 
 #### Defined in
 
-[CSpellSettingsDef.ts:137](https://github.com/streetsidesoftware/cspell/blob/5bd8203/packages/cspell-types/src/CSpellSettingsDef.ts#L137)
+[CSpellSettingsDef.ts:138](https://github.com/streetsidesoftware/cspell/blob/b805b11/packages/cspell-types/src/CSpellSettingsDef.ts#L138)
 
 ___
 
@@ -458,7 +474,7 @@ Special Values:
 
 #### Defined in
 
-[CSpellSettingsDef.ts:73](https://github.com/streetsidesoftware/cspell/blob/5bd8203/packages/cspell-types/src/CSpellSettingsDef.ts#L73)
+[CSpellSettingsDef.ts:74](https://github.com/streetsidesoftware/cspell/blob/b805b11/packages/cspell-types/src/CSpellSettingsDef.ts#L74)
 
 ___
 
@@ -474,7 +490,7 @@ Optional identifier.
 
 #### Defined in
 
-[CSpellSettingsDef.ts:410](https://github.com/streetsidesoftware/cspell/blob/5bd8203/packages/cspell-types/src/CSpellSettingsDef.ts#L410)
+[CSpellSettingsDef.ts:411](https://github.com/streetsidesoftware/cspell/blob/b805b11/packages/cspell-types/src/CSpellSettingsDef.ts#L411)
 
 ___
 
@@ -492,7 +508,7 @@ Glob patterns are relative to the `globRoot` of the configuration file that defi
 
 #### Defined in
 
-[CSpellSettingsDef.ts:96](https://github.com/streetsidesoftware/cspell/blob/5bd8203/packages/cspell-types/src/CSpellSettingsDef.ts#L96)
+[CSpellSettingsDef.ts:97](https://github.com/streetsidesoftware/cspell/blob/b805b11/packages/cspell-types/src/CSpellSettingsDef.ts#L97)
 
 ___
 
@@ -516,7 +532,7 @@ While you can create your own patterns, you can also leverage several patterns t
 
 #### Defined in
 
-[CSpellSettingsDef.ts:502](https://github.com/streetsidesoftware/cspell/blob/5bd8203/packages/cspell-types/src/CSpellSettingsDef.ts#L502)
+[CSpellSettingsDef.ts:491](https://github.com/streetsidesoftware/cspell/blob/b805b11/packages/cspell-types/src/CSpellSettingsDef.ts#L491)
 
 ___
 
@@ -533,7 +549,7 @@ also in the `flagWords`.
 
 #### Defined in
 
-[CSpellSettingsDef.ts:434](https://github.com/streetsidesoftware/cspell/blob/5bd8203/packages/cspell-types/src/CSpellSettingsDef.ts#L434)
+[InlineDictionary.ts:31](https://github.com/streetsidesoftware/cspell/blob/b805b11/packages/cspell-types/src/InlineDictionary.ts#L31)
 
 ___
 
@@ -551,7 +567,7 @@ See [Importing / Extending Configuration](https://cspell.org/configuration/impor
 
 #### Defined in
 
-[CSpellSettingsDef.ts:56](https://github.com/streetsidesoftware/cspell/blob/5bd8203/packages/cspell-types/src/CSpellSettingsDef.ts#L56)
+[CSpellSettingsDef.ts:57](https://github.com/streetsidesoftware/cspell/blob/b805b11/packages/cspell-types/src/CSpellSettingsDef.ts#L57)
 
 ___
 
@@ -572,7 +588,7 @@ While you can create your own patterns, you can also leverage several patterns t
 
 #### Defined in
 
-[CSpellSettingsDef.ts:512](https://github.com/streetsidesoftware/cspell/blob/5bd8203/packages/cspell-types/src/CSpellSettingsDef.ts#L512)
+[CSpellSettingsDef.ts:501](https://github.com/streetsidesoftware/cspell/blob/b805b11/packages/cspell-types/src/CSpellSettingsDef.ts#L501)
 
 ___
 
@@ -598,7 +614,7 @@ For example:
 
 #### Defined in
 
-[CSpellSettingsDef.ts:197](https://github.com/streetsidesoftware/cspell/blob/5bd8203/packages/cspell-types/src/CSpellSettingsDef.ts#L197)
+[CSpellSettingsDef.ts:198](https://github.com/streetsidesoftware/cspell/blob/b805b11/packages/cspell-types/src/CSpellSettingsDef.ts#L198)
 
 ___
 
@@ -614,7 +630,7 @@ Forces the spell checker to assume a give language id. Used mainly as an Overrid
 
 #### Defined in
 
-[CSpellSettingsDef.ts:228](https://github.com/streetsidesoftware/cspell/blob/5bd8203/packages/cspell-types/src/CSpellSettingsDef.ts#L228)
+[CSpellSettingsDef.ts:229](https://github.com/streetsidesoftware/cspell/blob/b805b11/packages/cspell-types/src/CSpellSettingsDef.ts#L229)
 
 ___
 
@@ -632,7 +648,7 @@ See [Language Settings](https://cspell.org/configuration/language-settings/) for
 
 #### Defined in
 
-[CSpellSettingsDef.ts:225](https://github.com/streetsidesoftware/cspell/blob/5bd8203/packages/cspell-types/src/CSpellSettingsDef.ts#L225)
+[CSpellSettingsDef.ts:226](https://github.com/streetsidesoftware/cspell/blob/b805b11/packages/cspell-types/src/CSpellSettingsDef.ts#L226)
 
 ___
 
@@ -653,7 +669,7 @@ true
 
 #### Defined in
 
-[CSpellSettingsDef.ts:236](https://github.com/streetsidesoftware/cspell/blob/5bd8203/packages/cspell-types/src/CSpellSettingsDef.ts#L236)
+[CSpellSettingsDef.ts:237](https://github.com/streetsidesoftware/cspell/blob/b805b11/packages/cspell-types/src/CSpellSettingsDef.ts#L237)
 
 ___
 
@@ -673,7 +689,7 @@ The maximum number of times the same word can be flagged as an error in a file.
 
 #### Defined in
 
-[CSpellReporter.ts:134](https://github.com/streetsidesoftware/cspell/blob/5bd8203/packages/cspell-types/src/CSpellReporter.ts#L134)
+[CSpellReporter.ts:134](https://github.com/streetsidesoftware/cspell/blob/b805b11/packages/cspell-types/src/CSpellReporter.ts#L134)
 
 ___
 
@@ -693,7 +709,7 @@ The maximum number of problems to report in a file.
 
 #### Defined in
 
-[CSpellReporter.ts:127](https://github.com/streetsidesoftware/cspell/blob/5bd8203/packages/cspell-types/src/CSpellReporter.ts#L127)
+[CSpellReporter.ts:127](https://github.com/streetsidesoftware/cspell/blob/b805b11/packages/cspell-types/src/CSpellReporter.ts#L127)
 
 ___
 
@@ -713,7 +729,7 @@ The minimum length of a word before checking it against a dictionary.
 
 #### Defined in
 
-[CSpellReporter.ts:141](https://github.com/streetsidesoftware/cspell/blob/5bd8203/packages/cspell-types/src/CSpellReporter.ts#L141)
+[CSpellReporter.ts:141](https://github.com/streetsidesoftware/cspell/blob/b805b11/packages/cspell-types/src/CSpellReporter.ts#L141)
 
 ___
 
@@ -729,7 +745,7 @@ Optional name of configuration.
 
 #### Defined in
 
-[CSpellSettingsDef.ts:413](https://github.com/streetsidesoftware/cspell/blob/5bd8203/packages/cspell-types/src/CSpellSettingsDef.ts#L413)
+[CSpellSettingsDef.ts:414](https://github.com/streetsidesoftware/cspell/blob/b805b11/packages/cspell-types/src/CSpellSettingsDef.ts#L414)
 
 ___
 
@@ -749,7 +765,7 @@ false
 
 #### Defined in
 
-[CSpellSettingsDef.ts:103](https://github.com/streetsidesoftware/cspell/blob/5bd8203/packages/cspell-types/src/CSpellSettingsDef.ts#L103)
+[CSpellSettingsDef.ts:104](https://github.com/streetsidesoftware/cspell/blob/b805b11/packages/cspell-types/src/CSpellSettingsDef.ts#L104)
 
 ___
 
@@ -771,7 +787,7 @@ possible suggestions.
 
 #### Defined in
 
-[CSpellSettingsDef.ts:489](https://github.com/streetsidesoftware/cspell/blob/5bd8203/packages/cspell-types/src/CSpellSettingsDef.ts#L489)
+[CSpellSettingsDef.ts:478](https://github.com/streetsidesoftware/cspell/blob/b805b11/packages/cspell-types/src/CSpellSettingsDef.ts#L478)
 
 ___
 
@@ -791,7 +807,7 @@ Number of suggestions to make.
 
 #### Defined in
 
-[CSpellSettingsDef.ts:247](https://github.com/streetsidesoftware/cspell/blob/5bd8203/packages/cspell-types/src/CSpellSettingsDef.ts#L247)
+[CSpellSettingsDef.ts:248](https://github.com/streetsidesoftware/cspell/blob/b805b11/packages/cspell-types/src/CSpellSettingsDef.ts#L248)
 
 ___
 
@@ -824,7 +840,7 @@ For example:
 
 #### Defined in
 
-[CSpellSettingsDef.ts:182](https://github.com/streetsidesoftware/cspell/blob/5bd8203/packages/cspell-types/src/CSpellSettingsDef.ts#L182)
+[CSpellSettingsDef.ts:183](https://github.com/streetsidesoftware/cspell/blob/b805b11/packages/cspell-types/src/CSpellSettingsDef.ts#L183)
 
 ___
 
@@ -844,7 +860,7 @@ Parser to use for the file content
 
 #### Defined in
 
-[CSpellSettingsDef.ts:822](https://github.com/streetsidesoftware/cspell/blob/5bd8203/packages/cspell-types/src/CSpellSettingsDef.ts#L822)
+[CSpellSettingsDef.ts:811](https://github.com/streetsidesoftware/cspell/blob/b805b11/packages/cspell-types/src/CSpellSettingsDef.ts#L811)
 
 ___
 
@@ -882,7 +898,7 @@ For example:
 
 #### Defined in
 
-[CSpellSettingsDef.ts:539](https://github.com/streetsidesoftware/cspell/blob/5bd8203/packages/cspell-types/src/CSpellSettingsDef.ts#L539)
+[CSpellSettingsDef.ts:528](https://github.com/streetsidesoftware/cspell/blob/b805b11/packages/cspell-types/src/CSpellSettingsDef.ts#L528)
 
 ___
 
@@ -902,7 +918,7 @@ ExperimentalFileSettings.plugins
 
 #### Defined in
 
-[CSpellSettingsDef.ts:799](https://github.com/streetsidesoftware/cspell/blob/5bd8203/packages/cspell-types/src/CSpellSettingsDef.ts#L799)
+[CSpellSettingsDef.ts:788](https://github.com/streetsidesoftware/cspell/blob/b805b11/packages/cspell-types/src/CSpellSettingsDef.ts#L788)
 
 ___
 
@@ -922,7 +938,7 @@ The PnP files to search for. Note: `.mjs` files are not currently supported.
 
 #### Defined in
 
-[CSpellSettingsDef.ts:288](https://github.com/streetsidesoftware/cspell/blob/5bd8203/packages/cspell-types/src/CSpellSettingsDef.ts#L288)
+[CSpellSettingsDef.ts:289](https://github.com/streetsidesoftware/cspell/blob/b805b11/packages/cspell-types/src/CSpellSettingsDef.ts#L289)
 
 ___
 
@@ -944,7 +960,7 @@ false
 
 #### Defined in
 
-[CSpellSettingsDef.ts:112](https://github.com/streetsidesoftware/cspell/blob/5bd8203/packages/cspell-types/src/CSpellSettingsDef.ts#L112)
+[CSpellSettingsDef.ts:113](https://github.com/streetsidesoftware/cspell/blob/b805b11/packages/cspell-types/src/CSpellSettingsDef.ts#L113)
 
 ___
 
@@ -971,7 +987,7 @@ Examples:
 
 #### Defined in
 
-[CSpellSettingsDef.ts:126](https://github.com/streetsidesoftware/cspell/blob/5bd8203/packages/cspell-types/src/CSpellSettingsDef.ts#L126)
+[CSpellSettingsDef.ts:127](https://github.com/streetsidesoftware/cspell/blob/b805b11/packages/cspell-types/src/CSpellSettingsDef.ts#L127)
 
 ___
 
@@ -991,7 +1007,7 @@ true
 
 #### Defined in
 
-[CSpellSettingsDef.ts:385](https://github.com/streetsidesoftware/cspell/blob/5bd8203/packages/cspell-types/src/CSpellSettingsDef.ts#L385)
+[CSpellSettingsDef.ts:386](https://github.com/streetsidesoftware/cspell/blob/b805b11/packages/cspell-types/src/CSpellSettingsDef.ts#L386)
 
 ___
 
@@ -1005,7 +1021,7 @@ ___
 
 #### Defined in
 
-[CSpellSettingsDef.ts:23](https://github.com/streetsidesoftware/cspell/blob/5bd8203/packages/cspell-types/src/CSpellSettingsDef.ts#L23)
+[CSpellSettingsDef.ts:24](https://github.com/streetsidesoftware/cspell/blob/b805b11/packages/cspell-types/src/CSpellSettingsDef.ts#L24)
 
 ___
 
@@ -1025,7 +1041,7 @@ true
 
 #### Defined in
 
-[CSpellSettingsDef.ts:391](https://github.com/streetsidesoftware/cspell/blob/5bd8203/packages/cspell-types/src/CSpellSettingsDef.ts#L391)
+[CSpellSettingsDef.ts:392](https://github.com/streetsidesoftware/cspell/blob/b805b11/packages/cspell-types/src/CSpellSettingsDef.ts#L392)
 
 ___
 
@@ -1049,7 +1065,7 @@ Range: between 1 and 5.
 
 #### Defined in
 
-[CSpellSettingsDef.ts:265](https://github.com/streetsidesoftware/cspell/blob/5bd8203/packages/cspell-types/src/CSpellSettingsDef.ts#L265)
+[CSpellSettingsDef.ts:266](https://github.com/streetsidesoftware/cspell/blob/b805b11/packages/cspell-types/src/CSpellSettingsDef.ts#L266)
 
 ___
 
@@ -1069,7 +1085,7 @@ The maximum amount of time in milliseconds to generate suggestions for a word.
 
 #### Defined in
 
-[CSpellSettingsDef.ts:254](https://github.com/streetsidesoftware/cspell/blob/5bd8203/packages/cspell-types/src/CSpellSettingsDef.ts#L254)
+[CSpellSettingsDef.ts:255](https://github.com/streetsidesoftware/cspell/blob/b805b11/packages/cspell-types/src/CSpellSettingsDef.ts#L255)
 
 ___
 
@@ -1089,7 +1105,7 @@ false
 
 #### Defined in
 
-[CSpellSettingsDef.ts:132](https://github.com/streetsidesoftware/cspell/blob/5bd8203/packages/cspell-types/src/CSpellSettingsDef.ts#L132)
+[CSpellSettingsDef.ts:133](https://github.com/streetsidesoftware/cspell/blob/b805b11/packages/cspell-types/src/CSpellSettingsDef.ts#L133)
 
 ___
 
@@ -1113,7 +1129,7 @@ false
 
 #### Defined in
 
-[CSpellSettingsDef.ts:281](https://github.com/streetsidesoftware/cspell/blob/5bd8203/packages/cspell-types/src/CSpellSettingsDef.ts#L281)
+[CSpellSettingsDef.ts:282](https://github.com/streetsidesoftware/cspell/blob/b805b11/packages/cspell-types/src/CSpellSettingsDef.ts#L282)
 
 ___
 
@@ -1129,7 +1145,7 @@ Words to add to global dictionary -- should only be in the user config file.
 
 #### Defined in
 
-[CSpellSettingsDef.ts:49](https://github.com/streetsidesoftware/cspell/blob/5bd8203/packages/cspell-types/src/CSpellSettingsDef.ts#L49)
+[CSpellSettingsDef.ts:50](https://github.com/streetsidesoftware/cspell/blob/b805b11/packages/cspell-types/src/CSpellSettingsDef.ts#L50)
 
 ___
 
@@ -1145,7 +1161,7 @@ Verify that the in-document directives are correct.
 
 #### Defined in
 
-[CSpellSettingsDef.ts:142](https://github.com/streetsidesoftware/cspell/blob/5bd8203/packages/cspell-types/src/CSpellSettingsDef.ts#L142)
+[CSpellSettingsDef.ts:143](https://github.com/streetsidesoftware/cspell/blob/b805b11/packages/cspell-types/src/CSpellSettingsDef.ts#L143)
 
 ___
 
@@ -1167,7 +1183,7 @@ This controls how the settings in the configuration file behave.
 
 #### Defined in
 
-[CSpellSettingsDef.ts:46](https://github.com/streetsidesoftware/cspell/blob/5bd8203/packages/cspell-types/src/CSpellSettingsDef.ts#L46)
+[CSpellSettingsDef.ts:47](https://github.com/streetsidesoftware/cspell/blob/b805b11/packages/cspell-types/src/CSpellSettingsDef.ts#L47)
 
 ___
 
@@ -1175,7 +1191,7 @@ ___
 
 • `Optional` **words**: `string`[]
 
-List of words to be always considered correct.
+List of words to be considered correct.
 
 #### Inherited from
 
@@ -1183,4 +1199,4 @@ List of words to be always considered correct.
 
 #### Defined in
 
-[CSpellSettingsDef.ts:425](https://github.com/streetsidesoftware/cspell/blob/5bd8203/packages/cspell-types/src/CSpellSettingsDef.ts#L425)
+[InlineDictionary.ts:5](https://github.com/streetsidesoftware/cspell/blob/b805b11/packages/cspell-types/src/InlineDictionary.ts#L5)
