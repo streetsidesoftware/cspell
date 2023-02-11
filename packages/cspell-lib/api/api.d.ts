@@ -1,12 +1,11 @@
 /// <reference types="node" />
-import { Glob, CSpellSettingsWithSourceTrace, TextOffset, TextDocumentOffset, AdvancedCSpellSettingsWithSourceTrace, Parser, DictionaryDefinitionPreferred, DictionaryDefinitionAugmented, DictionaryDefinitionCustom, PnPSettings as PnPSettings$1, ImportFileRef, CSpellUserSettings, Issue, MappedText, ParsedText, LocaleId, CSpellSettings } from '@cspell/cspell-types';
+import { Glob, CSpellSettingsWithSourceTrace, TextOffset, TextDocumentOffset, AdvancedCSpellSettingsWithSourceTrace, Parser, DictionaryDefinitionInline, DictionaryDefinitionPreferred, DictionaryDefinitionAugmented, DictionaryDefinitionCustom, PnPSettings as PnPSettings$1, ImportFileRef, CSpellUserSettings, Issue, MappedText, ParsedText, LocaleId, CSpellSettings } from '@cspell/cspell-types';
 export * from '@cspell/cspell-types';
 import { URI } from 'vscode-uri';
 import { WeightMap } from 'cspell-trie-lib';
 export { CompoundWordsMethod } from 'cspell-trie-lib';
-import * as cspellDictModule from 'cspell-dictionary';
 import { CachingDictionary, SpellingDictionaryCollection, SuggestionResult } from 'cspell-dictionary';
-export { SpellingDictionary, SpellingDictionaryCollection, SuggestOptions, SuggestionCollector, SuggestionResult } from 'cspell-dictionary';
+export { SpellingDictionary, SpellingDictionaryCollection, SuggestOptions, SuggestionCollector, SuggestionResult, createSpellingDictionary, createCollection as createSpellingDictionaryCollection } from 'cspell-dictionary';
 export { asyncIterableToArray, readFile, readFileSync, writeToFile, writeToFileIterable, writeToFileIterableP } from 'cspell-io';
 
 type ExclusionFunction = (fileUri: string) => boolean;
@@ -365,7 +364,12 @@ interface CSpellSettingsInternalFinalized extends CSpellSettingsInternal {
     includeRegExpList: RegExp[];
 }
 type DictionaryDefinitionCustomUniqueFields = Omit<DictionaryDefinitionCustom, keyof DictionaryDefinitionPreferred>;
-interface DictionaryDefinitionInternal extends Readonly<DictionaryDefinitionPreferred>, Readonly<Partial<DictionaryDefinitionCustomUniqueFields>>, Readonly<DictionaryDefinitionAugmented> {
+type DictionaryDefinitionInternal = DictionaryFileDefinitionInternal | DictionaryDefinitionInlineInternal;
+type DictionaryDefinitionInlineInternal = DictionaryDefinitionInline & {
+    /** The path to the config file that contains this dictionary definition */
+    readonly __source?: string | undefined;
+};
+interface DictionaryFileDefinitionInternal extends Readonly<DictionaryDefinitionPreferred>, Readonly<Partial<DictionaryDefinitionCustomUniqueFields>>, Readonly<DictionaryDefinitionAugmented> {
     /**
      * Optional weight map used to improve suggestions.
      */
@@ -500,9 +504,6 @@ interface ValidationIssue extends ValidationResult {
 }
 
 declare function refreshDictionaryCache(maxAge?: number): Promise<void>;
-
-declare const createSpellingDictionary: typeof cspellDictModule.createSpellingDictionary;
-declare const createCollection: typeof cspellDictModule.createCollection;
 
 type LoadOptions = DictionaryDefinitionInternal;
 
@@ -898,4 +899,4 @@ declare function clearCachedFiles(): Promise<void>;
  */
 declare function getDictionary(settings: CSpellUserSettings): Promise<SpellingDictionaryCollection>;
 
-export { CheckTextInfo, ConfigurationDependencies, CreateTextDocumentParams, DetermineFinalDocumentSettingsResult, Document, DocumentValidator, DocumentValidatorOptions, ENV_CSPELL_GLOB_ROOT, ExcludeFilesGlobMap, ExclusionFunction, exclusionHelper_d as ExclusionHelper, FeatureFlag, FeatureFlags, ImportError, ImportFileRefWithError, IncludeExcludeFlag, IncludeExcludeOptions, index_link_d as Link, Logger, SpellCheckFileOptions, SpellCheckFileResult, SpellingDictionaryLoadError, SuggestedWord, SuggestionError, SuggestionOptions, SuggestionsForWordResult, text_d as Text, TextDocument, TextDocumentLine, TextInfoItem, TraceOptions, TraceResult, UnknownFeatureFlagError, ValidationIssue, calcOverrideSettings, checkFilenameMatchesGlob, checkText, checkTextDocument, clearCachedFiles, clearCachedSettingsFiles, combineTextAndLanguageSettings, combineTextAndLanguageSettings as constructSettingsForText, createSpellingDictionary, createCollection as createSpellingDictionaryCollection, createTextDocument, currentSettingsFileVersion, defaultConfigFilenames, defaultFileName, defaultFileName as defaultSettingsFilename, determineFinalDocumentSettings, extractDependencies, extractImportErrors, fileToDocument, fileToTextDocument, finalizeSettings, getCachedFileSize, getDefaultBundledSettings, getDefaultSettings, getDictionary, getGlobalSettings, getLanguagesForBasename as getLanguageIdsForBaseFilename, getLanguagesForExt, getLogger, getSources, getSystemFeatureFlags, isBinaryFile, isSpellingDictionaryLoadError, loadConfig, loadPnP, loadPnPSync, mergeInDocSettings, mergeSettings, readRawSettings, readSettings, readSettingsFiles, refreshDictionaryCache, resolveFile, searchForConfig, sectionCSpell, setLogger, spellCheckDocument, spellCheckFile, suggestionsForWord, suggestionsForWords, traceWords, traceWordsAsync, updateTextDocument, validateText };
+export { CheckTextInfo, ConfigurationDependencies, CreateTextDocumentParams, DetermineFinalDocumentSettingsResult, Document, DocumentValidator, DocumentValidatorOptions, ENV_CSPELL_GLOB_ROOT, ExcludeFilesGlobMap, ExclusionFunction, exclusionHelper_d as ExclusionHelper, FeatureFlag, FeatureFlags, ImportError, ImportFileRefWithError, IncludeExcludeFlag, IncludeExcludeOptions, index_link_d as Link, Logger, SpellCheckFileOptions, SpellCheckFileResult, SpellingDictionaryLoadError, SuggestedWord, SuggestionError, SuggestionOptions, SuggestionsForWordResult, text_d as Text, TextDocument, TextDocumentLine, TextInfoItem, TraceOptions, TraceResult, UnknownFeatureFlagError, ValidationIssue, calcOverrideSettings, checkFilenameMatchesGlob, checkText, checkTextDocument, clearCachedFiles, clearCachedSettingsFiles, combineTextAndLanguageSettings, combineTextAndLanguageSettings as constructSettingsForText, createTextDocument, currentSettingsFileVersion, defaultConfigFilenames, defaultFileName, defaultFileName as defaultSettingsFilename, determineFinalDocumentSettings, extractDependencies, extractImportErrors, fileToDocument, fileToTextDocument, finalizeSettings, getCachedFileSize, getDefaultBundledSettings, getDefaultSettings, getDictionary, getGlobalSettings, getLanguagesForBasename as getLanguageIdsForBaseFilename, getLanguagesForExt, getLogger, getSources, getSystemFeatureFlags, isBinaryFile, isSpellingDictionaryLoadError, loadConfig, loadPnP, loadPnPSync, mergeInDocSettings, mergeSettings, readRawSettings, readSettings, readSettingsFiles, refreshDictionaryCache, resolveFile, searchForConfig, sectionCSpell, setLogger, spellCheckDocument, spellCheckFile, suggestionsForWord, suggestionsForWords, traceWords, traceWordsAsync, updateTextDocument, validateText };

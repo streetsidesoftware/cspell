@@ -1,6 +1,10 @@
 import * as path from 'path';
 
-import type { DictionaryDefinitionInternal } from '../../Models/CSpellSettingsInternalDef';
+import type {
+    DictionaryDefinitionInlineInternal,
+    DictionaryDefinitionInternal,
+    DictionaryFileDefinitionInternal,
+} from '../../Models/CSpellSettingsInternalDef';
 import { mapDictDefToInternal } from '../../Settings/DictionarySettings';
 import { getCSpellIO } from '../../static';
 import { clean } from '../../util/util';
@@ -168,8 +172,25 @@ describe('Validate DictionaryLoader', () => {
         ${dDef({ name: 'words', path: dict('cities.txt'), type: 'S' })} | ${'York'}     | ${false}
         ${dDef({ name: 'words', path: dict('cities.txt'), type: 'W' })} | ${'New York'} | ${false}
         ${dDef({ name: 'words', path: dict('cities.txt'), type: 'W' })} | ${'York'}     | ${true}
+        ${dDef({ name: 'words', path: dict('cities.txt'), type: 'W' })} | ${'York'}     | ${true}
     `('sync load dict has word $def $word', ({ def, word, hasWord }) => {
         const d = dictionaryLoader.loadDictionarySync(def);
+        expect(d.has(word)).toBe(hasWord);
+    });
+
+    test.each`
+        def                                                | word      | hasWord
+        ${dDef({ name: 'words', words: ['New', 'York'] })} | ${'York'} | ${true}
+    `('sync load inline dict has word $def $word', ({ def, word, hasWord }) => {
+        const d = dictionaryLoader.loadDictionarySync(def);
+        expect(d.has(word)).toBe(hasWord);
+    });
+
+    test.each`
+        def                                                | word      | hasWord
+        ${dDef({ name: 'words', words: ['New', 'York'] })} | ${'York'} | ${true}
+    `('sync load inline dict has word $def $word', async ({ def, word, hasWord }) => {
+        const d = await dictionaryLoader.loadDictionary(def);
         expect(d.has(word)).toBe(hasWord);
     });
 
@@ -197,11 +218,14 @@ function dict(file: string): string {
     return path.resolve(dictDir, file);
 }
 
-interface DDef extends Partial<DictionaryDefinitionInternal> {
+interface DDefFile extends Partial<DictionaryFileDefinitionInternal> {
     name: string;
     path: string;
 }
 
+type DDef = DDefFile | DictionaryDefinitionInlineInternal;
+
 function dDef(opts: DDef): DictionaryDefinitionInternal {
-    return di(opts, __filename);
+    const def = di(opts, __filename);
+    return def;
 }

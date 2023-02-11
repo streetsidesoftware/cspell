@@ -1,6 +1,9 @@
 import * as path from 'path';
 
-import type { DictionaryDefinitionInternal } from '../Models/CSpellSettingsInternalDef';
+import type {
+    DictionaryDefinitionInternal,
+    DictionaryFileDefinitionInternal,
+} from '../Models/CSpellSettingsInternalDef';
 import { mapDictDefToInternal } from '../Settings/DictionarySettings';
 import { clean } from '../util/util';
 import type { LoadOptions } from './DictionaryLoader';
@@ -135,6 +138,25 @@ describe('Validate DictionaryLoader', () => {
         ${dDef({ name: 'words', path: dict('cities.txt'), type: 'S' })} | ${'York'}     | ${false}
         ${dDef({ name: 'words', path: dict('cities.txt'), type: 'W' })} | ${'New York'} | ${false}
         ${dDef({ name: 'words', path: dict('cities.txt'), type: 'W' })} | ${'York'}     | ${true}
+        ${{ name: 'cities', words: ['Paris', 'New York'] }}             | ${'New York'} | ${true}
+    `('sync load dict has word $def $word', async ({ def, word, hasWord }) => {
+        const d = await loadDictionary(def);
+        expect(d.has(word)).toBe(hasWord);
+    });
+
+    test.each`
+        def                                                             | word          | hasWord
+        ${dDef({ name: 'words', path: sample('words.txt.gz') })}        | ${'apple'}    | ${true}
+        ${dDef({ name: 'words', path: dict('cities.trie.gz') })}        | ${'apple'}    | ${false}
+        ${dDef({ name: 'words', path: dict('cities.trie.gz') })}        | ${'New York'} | ${true}
+        ${dDef({ name: 'words', path: dict('cities.txt') })}            | ${'York'}     | ${false}
+        ${dDef({ name: 'words', path: dict('cities.txt'), type: 'C' })} | ${'New York'} | ${false}
+        ${dDef({ name: 'words', path: dict('cities.txt'), type: 'C' })} | ${'York'}     | ${true}
+        ${dDef({ name: 'words', path: dict('cities.txt'), type: 'S' })} | ${'New York'} | ${true}
+        ${dDef({ name: 'words', path: dict('cities.txt'), type: 'S' })} | ${'York'}     | ${false}
+        ${dDef({ name: 'words', path: dict('cities.txt'), type: 'W' })} | ${'New York'} | ${false}
+        ${dDef({ name: 'words', path: dict('cities.txt'), type: 'W' })} | ${'York'}     | ${true}
+        ${{ name: 'cities', words: ['Paris', 'New York'] }}             | ${'New York'} | ${true}
     `('sync load dict has word $def $word', ({ def, word, hasWord }) => {
         const d = loadDictionarySync(def);
         expect(d.has(word)).toBe(hasWord);
@@ -164,7 +186,7 @@ function dict(file: string): string {
     return path.resolve(dictDir, file);
 }
 
-interface DDef extends Partial<DictionaryDefinitionInternal> {
+interface DDef extends Partial<DictionaryFileDefinitionInternal> {
     name: string;
     path: string;
 }

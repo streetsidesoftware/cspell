@@ -6,6 +6,8 @@
  * ```
  */
 
+import { autoResolve } from './util/AutoResolve';
+
 // cspell:ignore cljs cljx cson iname pcregrep fsscript gradle shtml xhtml mdoc aspx jshtm gitconfig bowerrc
 // cspell:ignore jshintrc jscsrc eslintrc babelrc webmanifest mdown markdn psgi phtml pssc psrc gypi rhistory
 // cspell:ignore rprofile cshtml gemspec cginc ebuild zshrc zprofile zlogin zlogout zshenv dsql ascx axml
@@ -310,15 +312,8 @@ function doesSetContainAnyOf(
 
 export function buildLanguageExtensionMapSet(defs: LanguageDefinitions): ExtensionToLanguageIdMapSet {
     return defs.reduce((map, def) => {
-        function getMapSet(value: string) {
-            const found = map.get(value);
-            if (found) return found;
-            const s = new Set<string>();
-            map.set(value, s);
-            return s;
-        }
         function addId(value: string) {
-            getMapSet(value).add(def.id);
+            autoResolve(map, value, () => new Set<string>()).add(def.id);
         }
 
         def.extensions.forEach(addId);

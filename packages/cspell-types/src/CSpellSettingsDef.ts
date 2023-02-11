@@ -1,6 +1,7 @@
 import type { ReporterConfigurationBase } from './CSpellReporter.js';
 import type { DictionaryDefinition, DictionaryReference } from './DictionaryDefinition.js';
 import type { Features } from './features.js';
+import type { InlineDictionary } from './InlineDictionary.js';
 import type { Parser, ParserName } from './Parser/index.js';
 import type { Serializable } from './types.js';
 
@@ -405,7 +406,7 @@ export interface OverrideFilterFields {
     filename: Glob | Glob[];
 }
 
-export interface BaseSetting extends ExperimentalBaseSettings {
+export interface BaseSetting extends InlineDictionary, ExperimentalBaseSettings {
     /** Optional identifier. */
     id?: string;
 
@@ -420,18 +421,6 @@ export interface BaseSetting extends ExperimentalBaseSettings {
      * @default true
      */
     enabled?: boolean;
-
-    /** List of words to be always considered correct. */
-    words?: string[];
-
-    /** List of words to always be considered incorrect. */
-    flagWords?: string[];
-
-    /**
-     * List of words to be ignored. An ignored word will not show up as an error, even if it is
-     * also in the `flagWords`.
-     */
-    ignoreWords?: string[];
 
     /**
      * True to enable compound word checking. See [Case Sensitivity](https://cspell.org/docs/case-sensitive/) for more details.

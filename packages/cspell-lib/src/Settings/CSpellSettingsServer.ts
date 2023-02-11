@@ -14,6 +14,7 @@ import * as path from 'path';
 
 import type { CSpellSettingsInternal, CSpellSettingsInternalFinalized } from '../Models/CSpellSettingsInternalDef';
 import { createCSpellSettingsInternal as csi, isCSpellSettingsInternal } from '../Models/CSpellSettingsInternalDef';
+import { AutoResolveWeakCache } from '../util/AutoResolve';
 import type { OptionalOrUndefined } from '../util/types';
 import * as util from '../util/util';
 import { configSettingsFileVersion0_1, ENV_CSPELL_GLOB_ROOT } from './constants';
@@ -380,7 +381,9 @@ export interface ConfigurationDependencies {
 export function extractDependencies(settings: CSpellSettingsWSTO | CSpellSettingsI): ConfigurationDependencies {
     const settingsI = toInternalSettings(settings);
     const configFiles = [...(mergeImportRefs(settingsI) || [])].map(([filename]) => filename);
-    const dictionaryFiles = calcDictionaryDefsToLoad(settingsI).map((dict) => dict.path);
+    const dictionaryFiles = calcDictionaryDefsToLoad(settingsI)
+        .map((dict) => dict.path)
+        .filter(util.isDefined);
 
     return {
         configFiles,
@@ -407,26 +410,26 @@ function resolveParser(settings: CSpellSettingsI): Parser | undefined {
     return parser;
 }
 
-const parserCache = new WeakMap<Exclude<CSpellSettingsI['plugins'], undefined>, Map<string, Parser>>();
+const parserCache = new AutoResolveWeakCache<Exclude<CSpellSettingsI['plugins'], undefined>, Map<string, Parser>>();
 const emptyParserMap = new Map<string, Parser>();
+
+function* parsers(plugins: Plugin[]) {
+    for (const plugin of plugins) {
+        if (!plugin.parsers) continue;
+        for (const parser of plugin.parsers) {
+            yield [parser.name, parser] as const;
+        }
+    }
+}
+
+function mapPlugins(plugins: Exclude<CSpellSettingsI['plugins'], undefined>): Map<string, Parser> {
+    return new Map(parsers(plugins));
+}
 
 function extractParsers(plugins: CSpellSettingsI['plugins']): Map<string, Parser> {
     if (!plugins || !plugins.length) return emptyParserMap;
-    const found = parserCache.get(plugins);
-    if (found) return found;
 
-    function* parsers(plugins: Plugin[]) {
-        for (const plugin of plugins) {
-            if (!plugin.parsers) continue;
-            for (const parser of plugin.parsers) {
-                yield [parser.name, parser] as const;
-            }
-        }
-    }
-
-    const map = new Map(parsers(plugins));
-    parserCache.set(plugins, map);
-    return map;
+    return parserCache.get(plugins, mapPlugins);
 }
 
 export const __testing__ = {
