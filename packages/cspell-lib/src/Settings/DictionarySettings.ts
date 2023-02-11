@@ -15,7 +15,9 @@ import type {
     CSpellSettingsInternal,
     DictionaryDefinitionInternal,
     DictionaryDefinitionInternalWithSource,
+    DictionaryFileDefinitionInternalWithSource,
 } from '../Models/CSpellSettingsInternalDef';
+import { isDictionaryDefinitionInlineInternal } from '../Models/CSpellSettingsInternalDef';
 import { resolveFile } from '../util/resolveFile';
 import type { RequireOptional, UnionFields } from '../util/types';
 import { clean } from '../util/util';
@@ -88,12 +90,6 @@ export function mapDictDefToInternal(
     return new _DictionaryDefinitionInternalWithSource(def, pathToSettingsFile);
 }
 
-export function isDictionaryDefinitionWithSource(
-    d: DictionaryDefinition | DictionaryDefinitionInternalWithSource
-): d is DictionaryDefinitionInternalWithSource {
-    return d instanceof _DictionaryDefinitionInternalWithSource;
-}
-
 function determineName(filename: string, options: DictionaryDefinition): string {
     return options.name || path.basename(filename);
 }
@@ -114,15 +110,33 @@ type DictDef = Partial<
     UnionFields<UnionFields<DictionaryDefinition, DictionaryDefinitionAugmented>, DictionaryDefinitionCustom>
 >;
 
+export function isDictionaryDefinitionWithSource(
+    d: DictionaryDefinition | DictionaryDefinitionInternalWithSource
+): d is DictionaryDefinitionInternalWithSource {
+    return isDictionaryFileDefinitionInternalWithSource(d) || isDictionaryDefinitionInlineInternalWithSource(d);
+}
+
 export function isDictionaryDefinitionInternal(
     def: DictionaryDefinition | DictionaryDefinitionInternal
 ): def is DictionaryDefinitionInternal {
     return def instanceof _DictionaryDefinitionInternalWithSource;
 }
 
-type DDI = Omit<RequireOptional<DictionaryDefinitionInternalWithSource>, '__source' | 'weightMap' | 'toJSON'>;
+export function isDictionaryFileDefinitionInternalWithSource(
+    def: DictionaryDefinition | DictionaryDefinitionInternal
+): def is DictionaryFileDefinitionInternalWithSource {
+    return def instanceof _DictionaryDefinitionInternalWithSource;
+}
 
-class _DictionaryDefinitionInternalWithSource implements DictionaryDefinitionInternalWithSource {
+export function isDictionaryDefinitionInlineInternalWithSource(
+    def: DictionaryDefinition | DictionaryDefinitionInternal
+): def is DictionaryDefinitionInternalWithSource {
+    return isDictionaryDefinitionInlineInternal(def) && !!def.__source;
+}
+
+type DDI = Omit<RequireOptional<DictionaryFileDefinitionInternalWithSource>, '__source' | 'weightMap' | 'toJSON'>;
+
+class _DictionaryDefinitionInternalWithSource implements DictionaryFileDefinitionInternalWithSource {
     private _weightMap: WeightMap | undefined;
     readonly name: string;
     readonly path: string;

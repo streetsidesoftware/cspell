@@ -4,12 +4,18 @@ import { StrongWeakMap } from '@cspell/strong-weak-map';
 import type { SpellingDictionary } from 'cspell-dictionary';
 import {
     createFailedToLoadDictionary,
+    createInlineSpellingDictionary,
     createSpellingDictionary,
     createSpellingDictionaryFromTrieFile,
 } from 'cspell-dictionary';
 import type { CSpellIO, Stats } from 'cspell-io';
 
-import type { DictionaryDefinitionInternal } from '../../Models/CSpellSettingsInternalDef';
+import type {
+    DictionaryDefinitionInlineInternal,
+    DictionaryDefinitionInternal,
+    DictionaryFileDefinitionInternal,
+} from '../../Models/CSpellSettingsInternalDef';
+import { isDictionaryDefinitionInlineInternal } from '../../Models/CSpellSettingsInternalDef';
 import { toError } from '../../util/errors';
 import { SpellingDictionaryLoadError } from '../SpellingDictionaryError';
 
@@ -33,6 +39,8 @@ const loadersSync: SyncLoaders = {
 
 export type LoadOptions = DictionaryDefinitionInternal;
 
+type LoadFileOptions = DictionaryFileDefinitionInternal;
+
 enum LoadingState {
     Loaded = 0,
     Loading = 1,
@@ -40,7 +48,7 @@ enum LoadingState {
 
 interface CacheEntry {
     uri: string;
-    options: LoadOptions;
+    options: LoadFileOptions;
     ts: number;
     stat: Stats | Error | undefined;
     dictionary: SpellingDictionary | undefined;
@@ -78,6 +86,7 @@ interface SyncLoaders {
 
 export class DictionaryLoader {
     private dictionaryCache = new StrongWeakMap<string, CacheEntry>();
+    private inlineDictionaryCache = new WeakMap<DictionaryDefinitionInlineInternal, SpellingDictionary>();
     private dictionaryCacheByDef = new StrongWeakMap<
         DictionaryDefinitionInternal,
         { key: string; entry: CacheEntry }
@@ -91,6 +100,9 @@ export class DictionaryLoader {
     }
 
     public loadDictionary(def: DictionaryDefinitionInternal): Promise<SpellingDictionary> {
+        if (isDictionaryDefinitionInlineInternal(def)) {
+            return Promise.resolve(this.loadInlineDict(def));
+        }
         const { key, entry } = this.getCacheEntry(def);
         if (entry) {
             return entry.pending.then(([dictionary]) => dictionary);
@@ -101,6 +113,9 @@ export class DictionaryLoader {
     }
 
     public loadDictionarySync(def: DictionaryDefinitionInternal): SpellingDictionary {
+        if (isDictionaryDefinitionInlineInternal(def)) {
+            return this.loadInlineDict(def);
+        }
         const { key, entry } = this.getCacheEntry(def);
         if (entry?.dictionary && entry.loadingState === LoadingState.Loaded) {
             return entry.dictionary;
@@ -119,7 +134,7 @@ export class DictionaryLoader {
         await Promise.all([...this.dictionaryCache.values()].map((entry) => this.refreshEntry(entry, maxAge, now)));
     }
 
-    private getCacheEntry(def: DictionaryDefinitionInternal): { key: string; entry: CacheEntry | undefined } {
+    private getCacheEntry(def: DictionaryFileDefinitionInternal): { key: string; entry: CacheEntry | undefined } {
         const defEntry = this.dictionaryCacheByDef.get(def);
         if (defEntry) {
             return defEntry;
@@ -158,7 +173,7 @@ export class DictionaryLoader {
         }
     }
 
-    private loadEntry(uri: string, options: LoadOptions, now = Date.now()): CacheEntry {
+    private loadEntry(uri: string, options: LoadFileOptions, now = Date.now()): CacheEntry {
         options = this.normalizeOptions(uri, options);
         const pDictionary = load(this.reader, uri, options).catch((e) =>
             createFailedToLoadDictionary(
@@ -191,7 +206,7 @@ export class DictionaryLoader {
         return entry;
     }
 
-    private loadEntrySync(uri: string, options: LoadOptions, now = Date.now()): CacheEntrySync {
+    private loadEntrySync(uri: string, options: LoadFileOptions, now = Date.now()): CacheEntrySync {
         options = this.normalizeOptions(uri, options);
         const stat = this.getStatSync(uri);
         const sig = now + Math.random();
@@ -250,9 +265,17 @@ export class DictionaryLoader {
         return !isError(b) && !this.cspellIO.compareStats(a, b);
     }
 
-    private normalizeOptions(uri: string, options: LoadOptions): LoadOptions {
+    private normalizeOptions(uri: string, options: LoadFileOptions): LoadFileOptions {
         if (options.name) return options;
         return { ...options, name: this.cspellIO.uriBasename(uri) };
+    }
+
+    private loadInlineDict(def: DictionaryDefinitionInlineInternal): SpellingDictionary {
+        const found = this.inlineDictionaryCache.get(def);
+        if (found) return found;
+        const dict = createInlineSpellingDictionary(def, def.__source || 'memory');
+        this.inlineDictionaryCache.set(def, dict);
+        return dict;
     }
 }
 
@@ -272,7 +295,7 @@ function toReaderSync(cspellIO: CSpellIO): ReaderSync {
 
 const importantOptionKeys: (keyof DictionaryDefinitionInternal)[] = ['name', 'noSuggest', 'useCompounds', 'type'];
 
-function calcKey(def: DictionaryDefinitionInternal) {
+function calcKey(def: DictionaryFileDefinitionInternal) {
     const path = def.path;
     const loaderType = determineType(path, def);
     const optValues = importantOptionKeys.map((k) => def[k]?.toString() || '');

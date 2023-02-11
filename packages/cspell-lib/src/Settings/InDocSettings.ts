@@ -4,7 +4,7 @@ import type { Sequence } from 'gensequence';
 import { genSequence } from 'gensequence';
 
 import type { ExtendedSuggestion } from '../Models/Suggestion';
-import { getSpellDictInterface } from '../SpellingDictionary';
+import { createSpellingDictionary } from '../SpellingDictionary';
 import * as Text from '../util/text';
 import { clean, isDefined } from '../util/util';
 import { mergeInDocSettings } from './CSpellSettingsServer';
@@ -76,14 +76,9 @@ const allDirectiveSuggestions: ExtendedSuggestion[] = [
     ),
 ];
 
-const dictInDocSettings = getSpellDictInterface().createSpellingDictionary(
-    allDirectives,
-    'Directives',
-    'Directive List',
-    {
-        supportNonStrictSearches: false,
-    }
-);
+const dictInDocSettings = createSpellingDictionary(allDirectives, 'Directives', 'Directive List', {
+    supportNonStrictSearches: false,
+});
 
 const EmptyWords: string[] = [];
 Object.freeze(EmptyWords);

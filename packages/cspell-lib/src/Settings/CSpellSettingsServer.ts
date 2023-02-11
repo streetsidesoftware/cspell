@@ -380,7 +380,9 @@ export interface ConfigurationDependencies {
 export function extractDependencies(settings: CSpellSettingsWSTO | CSpellSettingsI): ConfigurationDependencies {
     const settingsI = toInternalSettings(settings);
     const configFiles = [...(mergeImportRefs(settingsI) || [])].map(([filename]) => filename);
-    const dictionaryFiles = calcDictionaryDefsToLoad(settingsI).map((dict) => dict.path);
+    const dictionaryFiles = calcDictionaryDefsToLoad(settingsI)
+        .map((dict) => dict.path)
+        .filter(util.isDefined);
 
     return {
         configFiles,

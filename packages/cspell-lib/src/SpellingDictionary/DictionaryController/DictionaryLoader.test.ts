@@ -1,7 +1,8 @@
+import assert from 'assert';
 import * as path from 'path';
 
-import type { DictionaryDefinitionInternal } from '../../Models/CSpellSettingsInternalDef';
-import { mapDictDefToInternal } from '../../Settings/DictionarySettings';
+import type { DictionaryFileDefinitionInternal } from '../../Models/CSpellSettingsInternalDef';
+import { isDictionaryFileDefinitionInternalWithSource, mapDictDefToInternal } from '../../Settings/DictionarySettings';
 import { getCSpellIO } from '../../static';
 import { clean } from '../../util/util';
 import type { LoadOptions } from './DictionaryLoader';
@@ -197,11 +198,13 @@ function dict(file: string): string {
     return path.resolve(dictDir, file);
 }
 
-interface DDef extends Partial<DictionaryDefinitionInternal> {
+interface DDef extends Partial<DictionaryFileDefinitionInternal> {
     name: string;
     path: string;
 }
 
-function dDef(opts: DDef): DictionaryDefinitionInternal {
-    return di(opts, __filename);
+function dDef(opts: DDef): DictionaryFileDefinitionInternal {
+    const def = di(opts, __filename);
+    assert(isDictionaryFileDefinitionInternalWithSource(def));
+    return def;
 }
