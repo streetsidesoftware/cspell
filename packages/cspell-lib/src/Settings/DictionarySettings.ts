@@ -20,7 +20,6 @@ import type {
 import { isDictionaryDefinitionInlineInternal } from '../Models/CSpellSettingsInternalDef';
 import { AutoResolveWeakCache } from '../util/AutoResolve';
 import { resolveFile } from '../util/resolveFile';
-import { AutoWeakCache } from '../util/simpleCache';
 import type { RequireOptional, UnionFields } from '../util/types';
 import { clean } from '../util/util';
 import type { DictionaryReferenceCollection } from './DictionaryReferenceCollection';
