@@ -195,6 +195,9 @@
           "$ref": "#/definitions/DictionaryDefinitionAugmented"
         },
         {
+          "$ref": "#/definitions/DictionaryDefinitionInline"
+        },
+        {
           "$ref": "#/definitions/DictionaryDefinitionAlternate"
         }
       ]
@@ -342,6 +345,188 @@
         "addWords",
         "name",
         "path"
+      ],
+      "type": "object"
+    },
+    "DictionaryDefinitionInline": {
+      "anyOf": [
+        {
+          "$ref": "#/definitions/DictionaryDefinitionInlineWords"
+        },
+        {
+          "$ref": "#/definitions/DictionaryDefinitionInlineIgnoreWords"
+        },
+        {
+          "$ref": "#/definitions/DictionaryDefinitionInlineFlagWords"
+        }
+      ],
+      "description": "Inline Dictionary Definitions"
+    },
+    "DictionaryDefinitionInlineFlagWords": {
+      "additionalProperties": false,
+      "properties": {
+        "description": {
+          "description": "Optional description.",
+          "type": "string"
+        },
+        "flagWords": {
+          "description": "List of words to always be considered incorrect. Words found in `flagWords` override `words`.\n\nFormat of `flagWords`\n- single word entry - `word`\n- with suggestions - `word:suggestion` or `word->suggestion, suggestions`\n\nExample: ```ts \"flagWords\": [   \"color: colour\",   \"incase: in case, encase\",   \"canot->cannot\",   \"cancelled->canceled\" ] ```",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "ignoreWords": {
+          "description": "List of words to be ignored. An ignored word will not show up as an error, even if it is also in the `flagWords`.",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "name": {
+          "$ref": "#/definitions/DictionaryId",
+          "description": "This is the name of a dictionary.\n\nName Format:\n- Must contain at least 1 number or letter.\n- Spaces are allowed.\n- Leading and trailing space will be removed.\n- Names ARE case-sensitive.\n- Must not contain `*`, `!`, `;`, `,`, `{`, `}`, `[`, `]`, `~`."
+        },
+        "noSuggest": {
+          "description": "Indicate that suggestions should not come from this dictionary. Words in this dictionary are considered correct, but will not be used when making spell correction suggestions.\n\nNote: if a word is suggested by another dictionary, but found in this dictionary, it will be removed from the set of possible suggestions.",
+          "type": "boolean"
+        },
+        "repMap": {
+          "$ref": "#/definitions/ReplaceMap",
+          "description": "Replacement pairs."
+        },
+        "type": {
+          "$ref": "#/definitions/DictionaryFileTypes",
+          "default": "S",
+          "description": "Type of file: S - single word per line, W - each line can contain one or more words separated by space, C - each line is treated like code (Camel Case is allowed). Default is S. C is the slowest to load due to the need to split each line based upon code splitting rules."
+        },
+        "useCompounds": {
+          "description": "Use Compounds.",
+          "type": "boolean"
+        },
+        "words": {
+          "description": "List of words to be considered correct.",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        }
+      },
+      "required": [
+        "flagWords",
+        "name"
+      ],
+      "type": "object"
+    },
+    "DictionaryDefinitionInlineIgnoreWords": {
+      "additionalProperties": false,
+      "properties": {
+        "description": {
+          "description": "Optional description.",
+          "type": "string"
+        },
+        "flagWords": {
+          "description": "List of words to always be considered incorrect. Words found in `flagWords` override `words`.\n\nFormat of `flagWords`\n- single word entry - `word`\n- with suggestions - `word:suggestion` or `word->suggestion, suggestions`\n\nExample: ```ts \"flagWords\": [   \"color: colour\",   \"incase: in case, encase\",   \"canot->cannot\",   \"cancelled->canceled\" ] ```",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "ignoreWords": {
+          "description": "List of words to be ignored. An ignored word will not show up as an error, even if it is also in the `flagWords`.",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "name": {
+          "$ref": "#/definitions/DictionaryId",
+          "description": "This is the name of a dictionary.\n\nName Format:\n- Must contain at least 1 number or letter.\n- Spaces are allowed.\n- Leading and trailing space will be removed.\n- Names ARE case-sensitive.\n- Must not contain `*`, `!`, `;`, `,`, `{`, `}`, `[`, `]`, `~`."
+        },
+        "noSuggest": {
+          "description": "Indicate that suggestions should not come from this dictionary. Words in this dictionary are considered correct, but will not be used when making spell correction suggestions.\n\nNote: if a word is suggested by another dictionary, but found in this dictionary, it will be removed from the set of possible suggestions.",
+          "type": "boolean"
+        },
+        "repMap": {
+          "$ref": "#/definitions/ReplaceMap",
+          "description": "Replacement pairs."
+        },
+        "type": {
+          "$ref": "#/definitions/DictionaryFileTypes",
+          "default": "S",
+          "description": "Type of file: S - single word per line, W - each line can contain one or more words separated by space, C - each line is treated like code (Camel Case is allowed). Default is S. C is the slowest to load due to the need to split each line based upon code splitting rules."
+        },
+        "useCompounds": {
+          "description": "Use Compounds.",
+          "type": "boolean"
+        },
+        "words": {
+          "description": "List of words to be considered correct.",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        }
+      },
+      "required": [
+        "ignoreWords",
+        "name"
+      ],
+      "type": "object"
+    },
+    "DictionaryDefinitionInlineWords": {
+      "additionalProperties": false,
+      "properties": {
+        "description": {
+          "description": "Optional description.",
+          "type": "string"
+        },
+        "flagWords": {
+          "description": "List of words to always be considered incorrect. Words found in `flagWords` override `words`.\n\nFormat of `flagWords`\n- single word entry - `word`\n- with suggestions - `word:suggestion` or `word->suggestion, suggestions`\n\nExample: ```ts \"flagWords\": [   \"color: colour\",   \"incase: in case, encase\",   \"canot->cannot\",   \"cancelled->canceled\" ] ```",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "ignoreWords": {
+          "description": "List of words to be ignored. An ignored word will not show up as an error, even if it is also in the `flagWords`.",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "name": {
+          "$ref": "#/definitions/DictionaryId",
+          "description": "This is the name of a dictionary.\n\nName Format:\n- Must contain at least 1 number or letter.\n- Spaces are allowed.\n- Leading and trailing space will be removed.\n- Names ARE case-sensitive.\n- Must not contain `*`, `!`, `;`, `,`, `{`, `}`, `[`, `]`, `~`."
+        },
+        "noSuggest": {
+          "description": "Indicate that suggestions should not come from this dictionary. Words in this dictionary are considered correct, but will not be used when making spell correction suggestions.\n\nNote: if a word is suggested by another dictionary, but found in this dictionary, it will be removed from the set of possible suggestions.",
+          "type": "boolean"
+        },
+        "repMap": {
+          "$ref": "#/definitions/ReplaceMap",
+          "description": "Replacement pairs."
+        },
+        "type": {
+          "$ref": "#/definitions/DictionaryFileTypes",
+          "default": "S",
+          "description": "Type of file: S - single word per line, W - each line can contain one or more words separated by space, C - each line is treated like code (Camel Case is allowed). Default is S. C is the slowest to load due to the need to split each line based upon code splitting rules."
+        },
+        "useCompounds": {
+          "description": "Use Compounds.",
+          "type": "boolean"
+        },
+        "words": {
+          "description": "List of words to be considered correct.",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        }
+      },
+      "required": [
+        "name",
+        "words"
       ],
       "type": "object"
     },
@@ -1283,7 +1468,7 @@
     },
     "features": {
       "$ref": "#/definitions/Features",
-      "description": "Configure CSpell features.\n\n- Added with `v5.16.0`."
+      "description": "Configure CSpell features."
     },
     "files": {
       "description": "Glob patterns of files to be checked.\n\nGlob patterns are relative to the `globRoot` of the configuration file that defines them.",
