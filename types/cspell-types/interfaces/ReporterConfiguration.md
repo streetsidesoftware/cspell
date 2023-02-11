@@ -37,7 +37,7 @@ ReporterCommandLineOptions.debug
 
 #### Defined in
 
-[CSpellReporter.ts:152](https://github.com/streetsidesoftware/cspell/blob/5bd8203/packages/cspell-types/src/CSpellReporter.ts#L152)
+[CSpellReporter.ts:152](https://github.com/streetsidesoftware/cspell/blob/b805b11/packages/cspell-types/src/CSpellReporter.ts#L152)
 
 ___
 
@@ -57,7 +57,7 @@ ReporterConfigurationBase.maxDuplicateProblems
 
 #### Defined in
 
-[CSpellReporter.ts:134](https://github.com/streetsidesoftware/cspell/blob/5bd8203/packages/cspell-types/src/CSpellReporter.ts#L134)
+[CSpellReporter.ts:134](https://github.com/streetsidesoftware/cspell/blob/b805b11/packages/cspell-types/src/CSpellReporter.ts#L134)
 
 ___
 
@@ -77,7 +77,7 @@ ReporterConfigurationBase.maxNumberOfProblems
 
 #### Defined in
 
-[CSpellReporter.ts:127](https://github.com/streetsidesoftware/cspell/blob/5bd8203/packages/cspell-types/src/CSpellReporter.ts#L127)
+[CSpellReporter.ts:127](https://github.com/streetsidesoftware/cspell/blob/b805b11/packages/cspell-types/src/CSpellReporter.ts#L127)
 
 ___
 
@@ -97,7 +97,7 @@ ReporterConfigurationBase.minWordLength
 
 #### Defined in
 
-[CSpellReporter.ts:141](https://github.com/streetsidesoftware/cspell/blob/5bd8203/packages/cspell-types/src/CSpellReporter.ts#L141)
+[CSpellReporter.ts:141](https://github.com/streetsidesoftware/cspell/blob/b805b11/packages/cspell-types/src/CSpellReporter.ts#L141)
 
 ___
 
@@ -113,7 +113,7 @@ ReporterCommandLineOptions.root
 
 #### Defined in
 
-[CSpellReporter.ts:164](https://github.com/streetsidesoftware/cspell/blob/5bd8203/packages/cspell-types/src/CSpellReporter.ts#L164)
+[CSpellReporter.ts:164](https://github.com/streetsidesoftware/cspell/blob/b805b11/packages/cspell-types/src/CSpellReporter.ts#L164)
 
 ___
 
@@ -129,7 +129,7 @@ ReporterCommandLineOptions.unique
 
 #### Defined in
 
-[CSpellReporter.ts:160](https://github.com/streetsidesoftware/cspell/blob/5bd8203/packages/cspell-types/src/CSpellReporter.ts#L160)
+[CSpellReporter.ts:160](https://github.com/streetsidesoftware/cspell/blob/b805b11/packages/cspell-types/src/CSpellReporter.ts#L160)
 
 ___
 
@@ -145,7 +145,7 @@ ReporterCommandLineOptions.verbose
 
 #### Defined in
 
-[CSpellReporter.ts:148](https://github.com/streetsidesoftware/cspell/blob/5bd8203/packages/cspell-types/src/CSpellReporter.ts#L148)
+[CSpellReporter.ts:148](https://github.com/streetsidesoftware/cspell/blob/b805b11/packages/cspell-types/src/CSpellReporter.ts#L148)
 
 ___
 
@@ -161,4 +161,4 @@ ReporterCommandLineOptions.wordsOnly
 
 #### Defined in
 
-[CSpellReporter.ts:156](https://github.com/streetsidesoftware/cspell/blob/5bd8203/packages/cspell-types/src/CSpellReporter.ts#L156)
+[CSpellReporter.ts:156](https://github.com/streetsidesoftware/cspell/blob/b805b11/packages/cspell-types/src/CSpellReporter.ts#L156)
