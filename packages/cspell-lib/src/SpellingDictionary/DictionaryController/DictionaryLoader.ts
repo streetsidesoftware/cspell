@@ -16,6 +16,7 @@ import type {
     DictionaryFileDefinitionInternal,
 } from '../../Models/CSpellSettingsInternalDef';
 import { isDictionaryDefinitionInlineInternal } from '../../Models/CSpellSettingsInternalDef';
+import { AutoResolveWeakCache } from '../../util/AutoResolve';
 import { toError } from '../../util/errors';
 import { SpellingDictionaryLoadError } from '../SpellingDictionaryError';
 
@@ -86,7 +87,7 @@ interface SyncLoaders {
 
 export class DictionaryLoader {
     private dictionaryCache = new StrongWeakMap<string, CacheEntry>();
-    private inlineDictionaryCache = new WeakMap<DictionaryDefinitionInlineInternal, SpellingDictionary>();
+    private inlineDictionaryCache = new AutoResolveWeakCache<DictionaryDefinitionInlineInternal, SpellingDictionary>();
     private dictionaryCacheByDef = new StrongWeakMap<
         DictionaryDefinitionInternal,
         { key: string; entry: CacheEntry }
@@ -271,11 +272,9 @@ export class DictionaryLoader {
     }
 
     private loadInlineDict(def: DictionaryDefinitionInlineInternal): SpellingDictionary {
-        const found = this.inlineDictionaryCache.get(def);
-        if (found) return found;
-        const dict = createInlineSpellingDictionary(def, def.__source || 'memory');
-        this.inlineDictionaryCache.set(def, dict);
-        return dict;
+        return this.inlineDictionaryCache.get(def, (def) =>
+            createInlineSpellingDictionary(def, def.__source || 'memory')
+        );
     }
 }
 
