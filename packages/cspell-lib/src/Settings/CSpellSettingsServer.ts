@@ -383,7 +383,7 @@ export function extractDependencies(settings: CSpellSettingsWSTO | CSpellSetting
     const configFiles = [...(mergeImportRefs(settingsI) || [])].map(([filename]) => filename);
     const dictionaryFiles = calcDictionaryDefsToLoad(settingsI)
         .map((dict) => dict.path)
-        .filter(util.isDefined);
+        .filter((file): file is string => !!file);
 
     return {
         configFiles,
