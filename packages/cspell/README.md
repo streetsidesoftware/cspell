@@ -644,7 +644,7 @@ The spell checker includes a set of default dictionaries.
 ### Miscellaneous Dictionaries
 
 - **fonts** - long list of fonts - to assist with _css_
-- **filetypes** - list of file typescript
+- **filetypes** - list of file types
 - **npm** - list of top 500+ package names on npm.
 
 ### Dictionary Definition
