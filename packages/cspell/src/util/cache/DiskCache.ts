@@ -209,7 +209,7 @@ export class DiskCache implements CSpellLintResultCache {
     }
 
     private getFileDep(file: string): Dependency {
-        assert(isAbsolutePath(file));
+        assert(isAbsolutePath(file), `Dependency must be absolute "${file}"`);
         const f = this.toRelFile(file);
         let h: string;
         try {
