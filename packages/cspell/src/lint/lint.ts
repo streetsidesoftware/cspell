@@ -393,11 +393,14 @@ async function determineFilesToCheck(
         const globsToExclude = (configInfo.config.ignorePaths || []).concat(excludeGlobs);
         const globMatcher = buildGlobMatcher(globsToExclude, root, true);
         const ignoreGlobs = extractGlobsFromMatcher(globMatcher);
+
+        const gitIgnoredGlobs = gitIgnore ? await gitIgnore.getGlobs(root) : [];
+
         // cspell:word nodir
         const globOptions: GlobOptions = {
             root,
             cwd: root,
-            ignore: ignoreGlobs.concat(normalizedExcludes),
+            ignore: ignoreGlobs.concat(normalizedExcludes).concat(gitIgnoredGlobs),
             nodir: true,
         };
         const enableGlobDot = cfg.enableGlobDot ?? configInfo.config.enableGlobDot;
