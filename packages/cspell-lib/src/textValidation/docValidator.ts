@@ -21,6 +21,8 @@ import type { DirectiveIssue } from '../Settings/InDocSettings';
 import { validateInDocumentSettings } from '../Settings/InDocSettings';
 import type { SpellingDictionaryCollection } from '../SpellingDictionary';
 import { getDictionaryInternal, getDictionaryInternalSync } from '../SpellingDictionary';
+import type { WordSuggestion } from '../suggestions';
+import { calcSuggestionAdjustedToToMatchCase } from '../suggestions';
 import { toError } from '../util/errors';
 import { AutoCache } from '../util/simpleCache';
 import type { MatchRange } from '../util/TextRange';
@@ -415,9 +417,18 @@ export class DocumentValidator {
             timeout: settings.suggestionsTimeout,
             numChanges: settings.suggestionNumChanges,
         };
-        return dict
-            .suggest(text, sugOptions)
-            .map(({ word, isPreferred }) => (isPreferred ? { word, isPreferred } : { word }));
+
+        const locale = this._preparations.config.language;
+        const rawSuggestions = dict.suggest(text, sugOptions);
+        const sugsWithAlt = calcSuggestionAdjustedToToMatchCase(
+            text,
+            rawSuggestions,
+            locale,
+            sugOptions.ignoreCase,
+            dict
+        );
+
+        return sugsWithAlt.map(sanitizeSuggestion);
     }
 
     public getFinalizedDocSettings(): CSpellSettingsInternal {
@@ -444,6 +455,14 @@ export class DocumentValidator {
     public _getPreparations(): Preparations | undefined {
         return this._preparations;
     }
+}
+
+function sanitizeSuggestion(sug: WordSuggestion): ExtendedSuggestion {
+    const { word, isPreferred, wordAdjustedToMatchCase } = sug;
+    if (isPreferred && wordAdjustedToMatchCase) return { word, wordAdjustedToMatchCase, isPreferred };
+    if (isPreferred) return { word, isPreferred };
+    if (wordAdjustedToMatchCase) return { word, wordAdjustedToMatchCase };
+    return { word };
 }
 
 interface Preparations {

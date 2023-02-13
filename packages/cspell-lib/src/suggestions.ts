@@ -4,23 +4,26 @@ import assert from 'assert';
 import type { LanguageId } from './LanguageIds';
 import { finalizeSettings, getDefaultSettings, getGlobalSettings, mergeSettings } from './Settings';
 import { calcSettingsForLanguageId, isValidLocaleIntlFormat, normalizeLocaleIntl } from './Settings/LanguageSettings';
-import type { FindOptions, SpellingDictionaryCollection, SuggestionResult, SuggestOptions } from './SpellingDictionary';
+import type { SpellingDictionaryCollection, SuggestionResult, SuggestOptions } from './SpellingDictionary';
 import { getDictionaryInternal, refreshDictionaryCache } from './SpellingDictionary';
 import { createAutoResolveCache } from './util/AutoResolve';
 import { memorizeLastCall } from './util/memorizeLastCall';
 import * as util from './util/util';
 
-interface SuggestedWordBase extends SuggestionResult {
+export interface WordSuggestion extends SuggestionResult {
     /**
      * The suggested word adjusted to match the original case.
      */
     wordAdjustedToMatchCase?: string;
+}
 
+interface SuggestedWordBase extends WordSuggestion {
     /**
      * dictionary names
      */
     dictionaries: string[];
 }
+
 export interface SuggestedWord extends SuggestedWordBase {
     noSuggest: boolean;
     forbidden: boolean;
@@ -155,10 +158,10 @@ async function _suggestionsForWord(
         : settings;
     const { dictionaryCollection, allDictionaryCollection } = await determineDictionaries(config);
 
-    return suggestionsForWordSync(word, options, settings, dictionaryCollection, allDictionaryCollection);
+    return _suggestionsForWordSync(word, options, settings, dictionaryCollection, allDictionaryCollection);
 }
 
-export function suggestionsForWordSync(
+function _suggestionsForWordSync(
     word: string,
     options: SuggestionOptions,
     settings: CSpellSettings,
@@ -183,7 +186,6 @@ export function suggestionsForWordSync(
     const suggestionsByDictionary = dictionaryCollection.dictionaries.flatMap((dict) =>
         dict.suggest(word, opts).map((r) => ({ ...r, dictName: dict.name }))
     );
-    const findOpts: FindOptions = {};
     const locale = adjustLocale(language || config.language || undefined);
     const collator = Intl.Collator(locale);
     const combined = limitResults(
@@ -191,9 +193,15 @@ export function suggestionsForWordSync(
         numSuggestions,
         includeTies
     );
-    adjustCase(combined, word, locale, ignoreCase, extendsDictionaryCollection, findOpts);
-    const allSugs = combined.map((sug) => {
-        const found = extendsDictionaryCollection.find(sug.word, findOpts);
+    const sugsAdjusted = calcSuggestionAdjustedToToMatchCase(
+        word,
+        combined,
+        locale,
+        ignoreCase,
+        extendsDictionaryCollection
+    );
+    const allSugs = sugsAdjusted.map((sug) => {
+        const found = extendsDictionaryCollection.find(sug.word);
         return {
             ...sug,
             forbidden: found?.forbidden || false,
@@ -226,7 +234,7 @@ function combine(suggestions: SuggestionResultWithDictionaryName[]): SuggestedWo
     return [...words.values()];
 }
 
-function adjustLocale(locale: string | undefined): string | string[] | undefined {
+function adjustLocale(locale: string | string[] | undefined): string | string[] | undefined {
     if (!locale) return undefined;
     const locales = [...normalizeLocaleIntl(locale)].filter((locale) => isValidLocaleIntlFormat(locale));
     if (!locales.length) return undefined;
@@ -234,34 +242,32 @@ function adjustLocale(locale: string | undefined): string | string[] | undefined
     return locales;
 }
 
-function adjustCase(
-    combined: SuggestedWordBase[],
-    word: string,
+export function calcSuggestionAdjustedToToMatchCase<T extends SuggestionResult>(
+    originalWord: string,
+    sugs: T[],
     locale: string | string[] | undefined,
     ignoreCase: boolean,
-    allDictionaryCollection: SpellingDictionaryCollection,
-    findOpts: FindOptions
-): void {
-    const knownSugs = new Set(combined.map((sug) => sug.word));
-    const matchStyle = { ...analyzeCase(word), locale, ignoreCase };
+    dict: SpellingDictionaryCollection
+): (T & WordSuggestion)[] {
+    locale = adjustLocale(locale);
+    const knownSugs = new Set(sugs.map((sug) => sug.word));
+    const matchStyle = { ...analyzeCase(originalWord), locale, ignoreCase };
     /* Add adjusted words */
-    combined.forEach((sug) => {
+    return sugs.map((sug) => {
         const alt = matchCase(sug.word, !!sug.isPreferred, matchStyle);
-        if (alt !== sug.word && !knownSugs.has(alt)) {
-            const found = allDictionaryCollection.find(alt, findOpts);
-            if (!found || !found.forbidden || !found.noSuggest) {
-                sug.wordAdjustedToMatchCase = alt;
-                knownSugs.add(alt);
-            }
+        if (alt === sug.word || knownSugs.has(alt)) return sug;
+
+        const found = dict.find(alt);
+        if (!found || !found.forbidden || !found.noSuggest) {
+            knownSugs.add(alt);
+            return { ...sug, wordAdjustedToMatchCase: alt };
         }
+
+        return sug;
     });
 }
 
-function limitResults<T extends SuggestedWordBase>(
-    suggestions: T[],
-    numSuggestions: number,
-    includeTies: boolean
-): T[] {
+function limitResults<T extends WordSuggestion>(suggestions: T[], numSuggestions: number, includeTies: boolean): T[] {
     let cost = suggestions[0]?.cost;
     let i = 0;
     for (; i < suggestions.length; ++i) {

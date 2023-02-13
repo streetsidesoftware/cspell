@@ -4,7 +4,7 @@ export * from '@cspell/cspell-types';
 import { URI } from 'vscode-uri';
 import { WeightMap } from 'cspell-trie-lib';
 export { CompoundWordsMethod } from 'cspell-trie-lib';
-import { CachingDictionary, SpellingDictionaryCollection, SuggestionResult, SuggestOptions } from 'cspell-dictionary';
+import { CachingDictionary, SpellingDictionaryCollection, SuggestOptions, SuggestionResult } from 'cspell-dictionary';
 export { SpellingDictionary, SpellingDictionaryCollection, SuggestOptions, SuggestionCollector, SuggestionResult, createSpellingDictionary, createCollection as createSpellingDictionaryCollection } from 'cspell-dictionary';
 export { asyncIterableToArray, readFile, readFileSync, writeToFile, writeToFileIterable, writeToFileIterableP } from 'cspell-io';
 
@@ -488,8 +488,18 @@ declare function getDefaultBundledSettings(): CSpellSettingsInternal;
 declare function combineTextAndLanguageSettings(settings: CSpellUserSettings, text: string, languageId: string | string[]): CSpellSettingsInternal;
 
 interface ExtendedSuggestion {
+    /**
+     * The suggestion.
+     */
     word: string;
+    /**
+     * The word is preferred above others, except other "preferred" words.
+     */
     isPreferred?: boolean;
+    /**
+     * The suggested word adjusted to match the original case.
+     */
+    wordAdjustedToMatchCase?: string;
 }
 
 interface ValidationResult extends TextOffset, Pick<Issue, 'message' | 'issueType'> {
@@ -780,11 +790,13 @@ interface DetermineFinalDocumentSettingsResult {
  */
 declare function determineFinalDocumentSettings(document: DocumentWithText, settings: CSpellUserSettings): DetermineFinalDocumentSettingsResult;
 
-interface SuggestedWordBase extends SuggestionResult {
+interface WordSuggestion extends SuggestionResult {
     /**
      * The suggested word adjusted to match the original case.
      */
     wordAdjustedToMatchCase?: string;
+}
+interface SuggestedWordBase extends WordSuggestion {
     /**
      * dictionary names
      */
