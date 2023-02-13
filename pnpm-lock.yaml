@@ -4324,7 +4324,7 @@ packages:
       npmlog: 7.0.1
       p-map: 4.0.0
       p-pipe: 3.1.0
-      pacote: 15.0.8
+      pacote: 15.1.0
       path: 0.12.7
       pify: 5.0.0
       read-package-json: 6.0.0
@@ -4464,7 +4464,7 @@ packages:
       npm-pick-manifest: 8.0.1
       npm-registry-fetch: 14.0.3
       npmlog: 7.0.1
-      pacote: 15.0.8
+      pacote: 15.1.0
       parse-conflict-json: 3.0.0
       proc-log: 3.0.0
       promise-all-reject-late: 1.0.1
@@ -4536,7 +4536,7 @@ packages:
     dependencies:
       cacache: 17.0.4
       json-parse-even-better-errors: 3.0.0
-      pacote: 15.0.8
+      pacote: 15.1.0
       semver: 7.3.8
     transitivePeerDependencies:
       - bluebird
@@ -12814,8 +12814,8 @@ packages:
       semver: 6.3.0
     dev: false
 
-  /pacote/15.0.8:
-    resolution: {integrity: sha512-UlcumB/XS6xyyIMwg/WwMAyUmga+RivB5KgkRwA1hZNtrx+0Bt41KxHCvg1kr0pZ/ZeD8qjhW4fph6VaYRCbLw==}
+  /pacote/15.1.0:
+    resolution: {integrity: sha512-FFcjtIl+BQNfeliSm7MZz5cpdohvUV1yjGnqgVM4UnVF7JslRY0ImXAygdaCDV0jjUADEWu4y5xsDV8brtrTLg==}
     engines: {node: ^14.17.0 || ^16.13.0 || >=18.0.0}
     hasBin: true
     dependencies:
@@ -12834,6 +12834,7 @@ packages:
       promise-retry: 2.0.1
       read-package-json: 6.0.0
       read-package-json-fast: 3.0.2
+      sigstore: 1.0.0
       ssri: 10.0.1
       tar: 6.1.13
     transitivePeerDependencies:
@@ -14674,6 +14675,18 @@ packages:
   /signal-exit/3.0.7:
     resolution: {integrity: sha512-wnD2ZE+l+SPC/uoS0vXeE9L1+0wuaMqKlfz9AMUo38JsyLSBWSFcHR1Rri62LZc12vLr1gb3jl7iwQhgwpAbGQ==}
 
+  /sigstore/1.0.0:
+    resolution: {integrity: sha512-e+qfbn/zf1+rCza/BhIA//Awmf0v1pa5HQS8Xk8iXrn9bgytytVLqYD0P7NSqZ6IELTgq+tcDvLPkQjNHyWLNg==}
+    engines: {node: ^14.17.0 || ^16.13.0 || >=18.0.0}
+    hasBin: true
+    dependencies:
+      make-fetch-happen: 11.0.3
+      tuf-js: 1.0.0
+    transitivePeerDependencies:
+      - bluebird
+      - supports-color
+    dev: true
+
   /simple-git/3.16.0:
     resolution: {integrity: sha512-zuWYsOLEhbJRWVxpjdiXl6eyAyGo/KzVW+KFhhw9MqEEJttcq+32jTWSGyxTdf9e/YCohxRE+9xpWFj9FdiJNw==}
     dependencies:
@@ -15435,6 +15448,17 @@ packages:
     dependencies:
       tslib: 1.14.1
       typescript: 4.9.5
+    dev: true
+
+  /tuf-js/1.0.0:
+    resolution: {integrity: sha512-1dxsQwESDzACJjTdYHQ4wJ1f/of7jALWKfJEHSBWUQB/5UTJUx9SW6GHXp4mZ1KvdBRJCpGjssoPFGi4hvw8/A==}
+    engines: {node: ^14.17.0 || ^16.13.0 || >=18.0.0}
+    dependencies:
+      make-fetch-happen: 11.0.3
+      minimatch: 6.2.0
+    transitivePeerDependencies:
+      - bluebird
+      - supports-color
     dev: true
 
   /type-check/0.4.0:
