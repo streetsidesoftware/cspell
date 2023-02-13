@@ -3,7 +3,7 @@ Repository: mdx-js/mdx
 Url: "https://github.com/mdx-js/mdx"
 Args: ["--config=../../../../config/repositories/mdx-js/mdx/cspell.json","**/*.*"]
 Lines:
- CSpell: Files checked: 151, Issues found: 1163 in 92 files
+ CSpell: Files checked: 152, Issues found: 1182 in 95 files
  exit code: 1
 ./docs/_asset/index.client.js:15:9      - Unknown word (nljson)     -- const nljson = document.querySelector
 ./docs/_asset/index.css:286:21    - Unknown word (squircle)           -- mask-image: paint(squircle);
@@ -221,13 +221,13 @@ Lines:
 ./docs/docs/getting-started.server.mdx:241:12    - Unknown word (esbuild’s)       -- configure [esbuild’s `target`](https://esbuild
 ./docs/docs/getting-started.server.mdx:515:6     - Unknown word (Astro)           -- #### Astro
 ./docs/docs/getting-started.server.mdx:521:5     - Unknown word (astro)           -- npx astro add mdx
-./docs/docs/getting-started.server.mdx:528:5     - Unknown word (Astro’s)         -- see Astro’s [Framework components
-./docs/docs/getting-started.server.mdx:537:27    - Unknown word (CRACO)           -- Note**: rewiring with CRACO (see below) is currently
-./docs/docs/getting-started.server.mdx:571:15    - Unknown word (craco)           -- ```js path="craco.config.js"
+./docs/docs/getting-started.server.mdx:526:58    - Unknown word (Astro’s)         -- your MDX files, see Astro’s
+./docs/docs/getting-started.server.mdx:540:27    - Unknown word (CRACO)           -- Note**: rewiring with CRACO is currently required
+./docs/docs/getting-started.server.mdx:575:15    - Unknown word (craco)           -- ```js path="craco.config.js"
 ./docs/docs/getting-started.server.mdx:90:12     - Unknown word (razzle)     -- [¶ Razzle][razzle],
 ./docs/docs/getting-started.server.mdx:90:4      - Unknown word (Razzle)     -- [¶ Razzle][razzle],
-./docs/docs/getting-started.server.mdx:965:43    - Unknown word (optionsjsximportsource) -- importsource]: /packages/mdx/#optionsjsximportsource
-./docs/docs/getting-started.server.mdx:967:31    - Unknown word (optionsjsx)             -- jsx]: /packages/mdx/#optionsjsx
+./docs/docs/getting-started.server.mdx:968:43    - Unknown word (optionsjsximportsource) -- importsource]: /packages/mdx/#optionsjsximportsource
+./docs/docs/getting-started.server.mdx:970:31    - Unknown word (optionsjsx)             -- jsx]: /packages/mdx/#optionsjsx
 ./docs/docs/troubleshooting-mdx.server.mdx:146:42    - Unknown word (falsey)             -- pragma` is defined as a falsey value (the default is
 ./docs/docs/troubleshooting-mdx.server.mdx:26:63     - Unknown word (migation)   -- Migrating from v1 to v2][migation-v2].
 ./docs/docs/troubleshooting-mdx.server.mdx:271:1     - Unknown word (IIFE)               -- IIFE, or move it out to a
@@ -236,8 +236,8 @@ Lines:
 ./docs/docs/troubleshooting-mdx.server.mdx:38:23     - Unknown word (jsxs)               -- * [`` Expected `jsxs` given to `evaluate
 ./docs/docs/troubleshooting-mdx.server.mdx:40:80     - Unknown word (importexports)      -- error`](#could-not-parse-importexports-with-acorn-error)
 ./docs/docs/troubleshooting-mdx.server.mdx:70:4      - Unknown word (sindresorhus)       -- **@sindresorhus**](https://gist.github
-./docs/docs/using-mdx.server.mdx:204:29    - Unknown word (rebass)     -- Box, Heading} from 'rebass'
-./docs/docs/using-mdx.server.mdx:438:50    - Unknown word (optionsproviderimportsource) -- source]: /packages/mdx/#optionsproviderimportsource
+./docs/docs/using-mdx.server.mdx:205:29    - Unknown word (rebass)     -- Box, Heading} from 'rebass'
+./docs/docs/using-mdx.server.mdx:444:50    - Unknown word (optionsproviderimportsource) -- source]: /packages/mdx/#optionsproviderimportsource
 ./docs/docs/what-is-mdx.server.mdx:159:5     - Unknown word (Autolinks)  -- * Autolinks do not work in MDX.
 ./docs/docs/what-is-mdx.server.mdx:349:26    - Unknown word (optionsformat) -- format]: /packages/mdx/#optionsformat
 ./docs/docs/what-is-mdx.server.mdx:359:2     - Unknown word (iife)          -- [iife]: https://developer
@@ -247,8 +247,8 @@ Lines:
 ./docs/guides/embed.server.mdx:72:10     - Unknown word (codepen)    -- Here’s a codepen, and some other blog
 ./docs/guides/math.server.mdx:18:52     - Unknown word (mathjax)    -- (KaTeX) or [`rehype-mathjax`][rehype-mathjax]
 ./docs/guides/math.server.mdx:57:34     - Unknown word (mathml)     -- span className="katex-mathml">
-./docs/guides/mdx-on-demand.server.mdx:97:27     - Unknown word (compilefile) -- compile]: /packages/mdx/#compilefile-options
-./docs/guides/mdx-on-demand.server.mdx:99:23     - Unknown word (runfunctionbody) -- run]: /packages/mdx/#runfunctionbody-options
+./docs/guides/mdx-on-demand.server.mdx:113:27    - Unknown word (compilefile) -- compile]: /packages/mdx/#compilefile-options
+./docs/guides/mdx-on-demand.server.mdx:115:23    - Unknown word (runfunctionbody) -- run]: /packages/mdx/#runfunctionbody-options
 ./docs/guides/syntax-highlighting.server.mdx:138:54    - Unknown word (thise)      -- after the language (in thise case, `js`).
 ./docs/guides/syntax-highlighting.server.mdx:156:22    - Unknown word (unist)      -- import {visit} from 'unist-util-visit'
 ./docs/guides/syntax-highlighting.server.mdx:190:2     - Unknown word (onelement)  -- `onelement` handler:
@@ -271,17 +271,19 @@ Lines:
 ./docs/migrating/v2.server.mdx:336:43    - Unknown word (remarkplugins)        -- remarkPlugins`][mdx-options-remarkplugins]
 ./docs/migrating/v2.server.mdx:655:40    - Unknown word (codemods)             -- we’re able to create codemods from now on.
 ./docs/migrating/v2.server.mdx:690:44    - Unknown word (optionsrecmaplugins)  -- recmaplugins]: /packages/mdx/#optionsrecmaplugins
-./packages/esbuild/lib/index.js:23:9      - Unknown word (extnames)   -- import {extnamesToRegex} from '@mdx-js
-./packages/esbuild/lib/index.js:72:62     - Unknown word (onloadremote) -- namespace: remoteNamespace}, onloadremote)
-./packages/esbuild/test/index.test.js:243:48    - Unknown word (mdxjs)      -- esm && esm.type === 'mdxjsEsm')
-./packages/loader/lib/index.js:75:13     - Unknown word (fpath)      -- const fpath = path.relative(this
+./packages/esbuild/lib/index.js:25:9      - Unknown word (extnames)   -- import {extnamesToRegex} from '@mdx-js
+./packages/esbuild/lib/index.js:74:62     - Unknown word (onloadremote) -- namespace: remoteNamespace}, onloadremote)
+./packages/esbuild/test/index.test.js:242:48    - Unknown word (mdxjs)      -- esm && esm.type === 'mdxjsEsm')
+./packages/loader/lib/index.js:87:13     - Unknown word (fpath)      -- const fpath = path.relative(this
+./packages/mdx/lib/core.js:2:53      - Unknown word (Rehype)     -- rehype').Options} RemarkRehypeOptions
 ./packages/mdx/lib/core.js:3:32      - Unknown word (Pluggable)  -- typedef {import('unified').PluggableList} PluggableList
-./packages/mdx/lib/core.js:4:51      - Unknown word (Recma)      -- recma-document.js').RecmaDocumentOptions} RecmaDocument
-./packages/mdx/lib/core.js:7:53      - Unknown word (Rehype)     -- rehype').Options} RemarkRehypeOptions
-./packages/mdx/lib/evaluate.js:22:10     - Unknown word (compiletime) -- const {compiletime, runtime} = resolveEvaluateOp
-./packages/mdx/lib/plugin/recma-document.js:452:17    - Unknown word (declarators) -- const declarators = node.specifiers
-./packages/mdx/lib/plugin/recma-document.js:45:21     - Unknown word (Estree)     -- import {positionFromEstree} from 'unist-util-position
-./packages/mdx/lib/plugin/recma-stringify.js:14:66     - Unknown word (astring)    -- small wrapper around `astring` to add
+./packages/mdx/lib/core.js:5:64      - Unknown word (Recma)      -- js').Options} RehypeRecmaOptions
+./packages/mdx/lib/evaluate.js:23:10     - Unknown word (compiletime) -- const {compiletime, runtime} = resolveEvaluateOp
+./packages/mdx/lib/plugin/recma-document.js:473:17    - Unknown word (declarators) -- const declarators = node.specifiers
+./packages/mdx/lib/plugin/recma-document.js:52:21     - Unknown word (Estree)     -- import {positionFromEstree} from 'unist-util-position
+./packages/mdx/lib/plugin/recma-stringify.js:15:66     - Unknown word (astring)    -- small wrapper around `astring` to add
+./packages/mdx/lib/run.js:12:6      - Unknown word (Anthing)    -- * Anthing.
+./packages/mdx/readme.md:1011:3    - Unknown word (rehypejs)      -- [`rehypejs/rehype-highlight`][rehype
 ./packages/mdx/readme.md:156:58    - Unknown word (strikethrough) -- Tables, footnotes, strikethrough, task lists, literal
 ./packages/mdx/readme.md:214:26    - Unknown word (mkdn)          -- markdown', '.mdown', '.mkdn', '.mkd', '.mdwn',
 ./packages/mdx/readme.md:214:43    - Unknown word (mdwn)          -- '.mkdn', '.mkd', '.mdwn', '.mkdown', '.ron'
@@ -289,17 +291,15 @@ Lines:
 ./packages/mdx/readme.md:503:22    - Unknown word (QAAQ)          -- mappings: ';;aAAaA,QAAQ;YAAQ;;;;;;;;iBAE3B'
 ./packages/mdx/readme.md:503:27    - Unknown word (YAAQ)          -- mappings: ';;aAAaA,QAAQ;YAAQ;;;;;;;;iBAE3B',
 ./packages/mdx/readme.md:669:31    - Unknown word (compat)        -- pragmaImportSource: 'preact/compat'
-./packages/mdx/readme.md:803:10    - Unknown word (OMDX)          -- `Promise<OMDXModule>` — Promise that
-./packages/mdx/readme.md:977:3     - Unknown word (rehypejs)      -- [`rehypejs/rehype-highlight`][rehype
-./packages/mdx/test/compile.js:1034:31   - Unknown word (setext)     -- should support headings (setext) (`=` -> `<h1>`)'
-./packages/mdx/test/compile.js:1079:99   - Unknown word (describedby) -- footnote-ref="true" aria-describedby="footnote-label">1<
-./packages/mdx/test/compile.js:1489:21   - Unknown word (rexporting)  -- 'should support rexporting something as a default
+./packages/mdx/test/compile.js:1088:31   - Unknown word (setext)     -- should support headings (setext) (`=` -> `<h1>`)'
+./packages/mdx/test/compile.js:1133:99   - Unknown word (describedby) -- footnote-ref="true" aria-describedby="footnote-label">1<
+./packages/mdx/test/compile.js:1583:21   - Unknown word (rexporting)  -- 'should support rexporting something as a default
 ./packages/register/lib/index.cjs:4:7       - Unknown word (deasync)    -- const deasync = require('deasync'
 ./packages/remark-mdx/index.js:3:59      - Unknown word (Micromark)  -- extension-mdxjs').Options} MicromarkOptions
 ./packages/remark-mdx/readme.md:121:22    - Unknown word (autolinks)  -- — Turn off HTML, autolinks, and indented code
 ./packages/remark-mdx/test/index.js:317:15    - Unknown word (onvisit)    -- visit(tree, onvisit)
+./packages/rollup/lib/index.js:14:14     - Unknown word (picomatch)   -- * List of picomatch patterns to include
 ./packages/rollup/lib/index.js:2:30      - Unknown word (pluginutils) -- typedef {import('@rollup/pluginutils').FilterPattern} FilterPatter
-./packages/rollup/lib/index.js:8:14      - Unknown word (picomatch)   -- * List of picomatch patterns to include
 ./packages/rollup/test/index.test.js:37:104    - Unknown word (CAAA)       -- AAE7B,IAAA,QAAA,EAAA,CAAA,SAAA,EAAAD,GAAA,CAAA
 ./packages/rollup/test/index.test.js:37:109    - Unknown word (SAAA)       -- IAAA,QAAA,EAAA,CAAA,SAAA,EAAAD,GAAA,CAAA,OAAA
 ./packages/rollup/test/index.test.js:37:114    - Unknown word (EAAAD)      -- QAAA,EAAA,CAAA,SAAA,EAAAD,GAAA,CAAA,OAAA,EAAA

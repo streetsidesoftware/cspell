@@ -3,9 +3,9 @@ Repository: eslint/eslint
 Url: https://github.com/eslint/eslint
 Args: ["**","--exclude=bin/**","--exclude=CHANGELOG.md","--exclude=_data","--exclude=tests/bench/large.js","--exclude=docs/src/_includes","--exclude=docs/src/assets/{fonts,s?css,images}"]
 Summary:
-  files: 1826
-  filesWithIssues: 1233
-  issues: 5418
+  files: 1828
+  filesWithIssues: 1235
+  issues: 5411
   errors: 0
 Errors: []
 
@@ -84,7 +84,7 @@ issues:
   - "docs/src/extend/custom-rules-deprecated.md:442:36   	doublequote 	U   	[\"Strings must use doublequote.\"]"
   - "docs/src/extend/custom-rules-deprecated.md:533:1    	camelcase   	U   	camelcase |"
   - "docs/src/extend/custom-rules-deprecated.md:580:81   	rulesdir    	U   	interface) using the `--rulesdir` option to specify the"
-  - "docs/src/extend/custom-rules.md:435:79  	multipass   	U   	without triggering multipass fixes. Each suggestion"
+  - "docs/src/extend/custom-rules.md:416:79  	multipass   	U   	without triggering multipass fixes. Each suggestion"
   - "docs/src/extend/plugins.md:33:46    	unprefixed  	U   	ESLint, you would use the unprefixed plugin name, followed"
   - "docs/src/extend/plugins.md:33:162   	myplugin    	U   	named `eslint-plugin-myplugin`, then in your configuration"
   - "docs/src/extend/plugins.md:153:4    	eslintplugin	U   	* `eslintplugin`"
@@ -94,6 +94,7 @@ issues:
   - "docs/src/extend/selectors.md:140:405    	Fpath   	U   	so: `[value=/some\\u002Fpath/]`."
   - "docs/src/extend/shareable-configs.md:15:281     	myconfig    	U   	such as `eslint-config-myconfig`."
   - "docs/src/extend/shareable-configs.md:39:186     	eslintconfig	U   	using the `eslint` and `eslintconfig` keywords so others"
+  - "docs/src/extend/ways-to-extend.md:54:49     	Espree  	U   	in JavaScript parser (Espree), but custom parsers"
   - "docs/src/integrate/nodejs-api.md:211:35     	omittable   	U   	parameter `options` is omittable."
   - "docs/src/integrate/nodejs-api.md:478:35     	Fvar        	U   	new SourceCode(\"\\uFEFFvar foo = bar;\", ast);"
   - "docs/src/integrate/nodejs-api.md:641:59     	autofixing  	U   	except that it also runs autofixing logic, similar to the"
@@ -109,7 +110,6 @@ issues:
   - "docs/src/rules/array-bracket-newline.md:44:5    	dosomething 	U   	dosomething();"
   - "docs/src/rules/arrow-body-style.md:48:12    	retv	U   	let foo = (retv, name) => {"
   - "docs/src/rules/arrow-parens.md:15:79    	arity   	U   	parameters regardless of arity. For example:"
-  - "docs/src/rules/arrow-parens.md:136:15   	falsey  	U   	console.log('falsey value returned');"
   - "docs/src/rules/brace-style.md:25:54     	Stroustrup  	U   	brace style is called Stroustrup, in which the `else"
   - "docs/src/rules/brace-style.md:36:26     	Allman      	U   	Another style is called [Allman](https://en.wikipedia"
   - "docs/src/rules/brace-style.md:60:5      	stroustrup  	U   	* `\"stroustrup\"` enforces Stroustrup"
@@ -218,7 +218,6 @@ issues:
   - "docs/src/use/command-line-interface.md:519:17   	customformat	U   	npx eslint -f ./customformat.js file.js"
   - "docs/src/use/command-line-interface.md:604:1    	Autofixed   	U   	Autofixed files are not placed"
   - "docs/src/use/configure/configuration-files-new.md:218:564   	runtimes	U   	example, some older runtimes might only allow ECMAScript"
-  - "docs/src/use/configure/configuration-files-new.md:269:75    	Espree  	U   	rather than the default Espree parser, is used to parse"
   - "docs/src/use/configure/configuration-files.md:41:25     	myfiletotest	U   	eslint -c myconfig.json myfiletotest.js"
   - "docs/src/use/configure/ignore.md:34:186     	subdir      	U   	foo.js` but not `lib/subdir/foo.js`."
   - "docs/src/use/configure/ignore.md:102:200    	jshintignore	U   	example, you can use `.jshintignore` file because it has"
@@ -277,7 +276,6 @@ issues:
   - "lib/config/default-config.js:59:61      	globbed 	U   	ensure these files are globbed by default"
   - "lib/eslint/eslint-helpers.js:19:7       	fswalk      	U   	const fswalk = require(\"@nodelib"
   - "lib/eslint/eslint-helpers.js:19:26      	nodelib     	U   	const fswalk = require(\"@nodelib/fs.walk\");"
-  - "lib/eslint/eslint-helpers.js:226:36     	Errror      	U   	UnmatchedSearchPatternsErrror} If there is a pattern"
   - "lib/eslint/eslint-helpers.js:397:40     	prepopulated	U   	for the cwd, which is prepopulated in the searches map"
   - "lib/linter/code-path-analysis/code-path-state.js:159:31     	unflattened 	U   	{CodePathSegment[]} unflattenedFromSegments Segments"
   - "lib/linter/code-path-analysis/code-path-state.js:913:23     	Segs        	U   	const prevSegsOfLeavingSegment = [headOfLeav"
@@ -313,22 +311,21 @@ issues:
   - "lib/rules/jsx-quotes.js:21:23   	singlequote 	U   	description: \"singlequote\","
   - "lib/rules/keyword-spacing.js:148:18     	unexpect	U   	function unexpectSpaceBefore(token, pattern"
   - "lib/rules/lines-around-comment.js:22:22     	Nums	U   	function getEmptyLineNums(lines) {"
-  - "lib/rules/logical-assignment-operators.js:115:4     	falsyness   	U   	* falsyness checks: !value, !Boolean"
+  - "lib/rules/logical-assignment-operators.js:115:4     	falsiness   	U   	* falsiness checks: !value, !Boolean"
   - "lib/rules/no-caller.js:38:106   	calle   	U   	propertyName.match(/^calle[er]$/u)) {"
-  - "lib/rules/no-constant-binary-expression.js:18:59    	nullishness     	U   	statically knowable constant nullishness. Meaning,"
-  - "lib/rules/no-constant-binary-expression.js:26:21    	Nullishness     	U   	function hasConstantNullishness(scope, node) {"
-  - "lib/rules/no-constant-binary-expression.js:351:66   	constructures   	U   	useful for primitive constructures"
+  - "lib/rules/no-constant-binary-expression.js:18:59    	nullishness 	U   	statically knowable constant nullishness. Meaning,"
+  - "lib/rules/no-constant-binary-expression.js:26:21    	Nullishness 	U   	function hasConstantNullishness(scope, node) {"
   - "lib/rules/no-control-regex.js:8:34      	regexpp 	U   	RegExpValidator = require(\"regexpp\").RegExpValidator;"
   - "lib/rules/no-else-return.js:78:16   	Redeclaring 	U   	* Redeclaring any of these would cause"
   - "lib/rules/no-else-return.js:314:50  	codepath    	U   	node returns in every codepath."
   - "lib/rules/no-else-return.js:350:19  	consequents 	U   	const consequents = [];"
-  - "lib/rules/no-eval.js:75:12      	Pushs   	U   	* Pushs a `this` scope (non"
   - "lib/rules/no-extend-native.js:120:87    	Propert 	U   	callee, \"Object\", /^definePropert(?:y|ies)$/u)"
   - "lib/rules/no-extra-parens.js:2:27       	parenthesising  	U   	fileoverview Disallow parenthesising higher precedence subexpressi"
   - "lib/rules/no-extra-parens.js:2:60       	subexpressions  	U   	enthesising higher precedence subexpressions."
   - "lib/rules/no-extra-parens.js:255:52     	newed           	U   	constructor function is newed-up with parens"
   - "lib/rules/no-extra-parens.js:528:28     	logicals        	U   	* Evaluate binary logicals"
   - "lib/rules/no-extra-parens.js:534:19     	prec            	U   	const prec = precedence(node);"
+  - "lib/rules/no-extra-parens.js:775:81     	unparenthesized 	U   	left-hand side is an *unparenthesized*"
   - "lib/rules/no-implicit-coercion.js:14:39     	ndex	U   	PATTERN = /^(?:i|lastI)ndexOf$/u;"
   - "lib/rules/no-inline-comments.js:61:17   	postamble   	U   	postamble = endLine.slice(node"
   - "lib/rules/no-inline-comments.js:63:19   	Postamble   	U   	isPostambleEmpty = !postamble;"
@@ -346,7 +343,6 @@ issues:
   - "lib/rules/no-useless-escape.js:28:45    	Dfnp        	U   	ESCAPES = new Set(\"\\\\bcdDfnpPrsStvwWxu0123456789"
   - "lib/rules/no-useless-escape.js:28:52    	Stvw        	U   	new Set(\"\\\\bcdDfnpPrsStvwWxu0123456789]\");"
   - "lib/rules/no-useless-escape.js:29:17    	CHARCLASS   	U   	const REGEX_NON_CHARCLASS_ESCAPES = union(REGEX"
-  - "lib/rules/no-useless-return.js:200:26   	pushs   	U   	// Makes and pushs a new scope information"
   - "lib/rules/no-var.js:102:12  	Redeclared  	U   	function isRedeclared(variable) {"
   - "lib/rules/object-shorthand.js:102:34    	Longform	U   	expectedLiteralMethodLongform: \"Expected longform"
   - "lib/rules/object-shorthand.js:102:54    	longform	U   	eralMethodLongform: \"Expected longform method syntax for string"
@@ -442,7 +438,6 @@ issues:
   - "tests/lib/eslint/flat-eslint.js:4518:31 	unignores   	U   	cwd: `${root}-unignores`,"
   - "tests/lib/eslint/flat-eslint.js:4621:31 	reignore    	U   	cwd: `${root}-reignore`,"
   - "tests/lib/eslint/flat-eslint.js:4661:31 	dignore     	U   	cwd: `${root}-dignore`,"
-  - "tests/lib/eslint/flat-eslint.js:5273:48 	intepreted  	U   	files' they should be intepreted as relative to the config"
   - "tests/lib/linter/code-path-analysis/code-path-analyzer.js:30:16     	ESQUERY 	U   	const STANDARD_ESQUERY_OPTION = { visitorKeys"
   - "tests/lib/linter/config-comment-parser.js:165:41    	ELEVENTEEN  	U   	code = \"a: seventy, b:ELEVENTEEN\";"
   - "tests/lib/linter/linter.js:3357:1   	consolexlog     	U   	consolexlog(\"test2\");"
@@ -512,7 +507,6 @@ issues:
   - "tests/lib/rules/no-duplicate-imports.js:94:32   	modns   	U   	code: \"import * as modns from \\\"lodash-es\\\";"
   - "tests/lib/rules/no-eval.js:41:29    	noneval 	U   	{ code: \"globalThis.noneval('foo')\", env: { es2"
   - "tests/lib/rules/no-extra-parens.js:772:32   	ipaddr  	U   	code: \"const net = ipaddr.parseCIDR(/** @type"
-  - "tests/lib/rules/no-extra-parens.js:3325:31  	coment  	U   	/** extra coment */"
   - "tests/lib/rules/no-implicit-globals.js:26:15    	Redeclaration   	U   	const readonlyRedeclarationMessage = \"Unexpected"
   - "tests/lib/rules/no-inline-comments.js:127:37    	otherthing  	U   	ignorePattern: \"otherthing\""
   - "tests/lib/rules/no-invalid-regexp.js:70:35      	Nandinagari 	U   	RegExp('\\\\\\\\p{Script=Nandinagari}', 'u');\","
@@ -556,7 +550,6 @@ issues:
   - "tests/lib/rules/valid-jsdoc.js:103:60   	mytest  	U   	n* @param {string} p mytest\\n*/\\nFoo.bar = function"
   - "tests/lib/rules/valid-jsdoc.js:323:21   	Astnode 	U   	Astnode: \"ASTNode\""
   - "tests/lib/rules/valid-jsdoc.js:353:21   	astnode 	U   	astnode: \"ASTNode\""
-  - "tests/lib/rules/valid-jsdoc.js:544:80   	jsodc   	U   	different orders for jsodc tags"
   - "tests/lib/rules/valid-typeof.js:91:40   	umdefined   	U   	if (typeof bar === 'umdefined') {}\","
   - "tests/lib/shared/config-validator.js:438:104    	booya   	U   	rule\"), \"mock-rule\", \"booya\", \"tests\");"
   - "tests/lib/shared/config-validator.js:462:108    	frist   	U   	, \"mock-rule\", [2, \"frist\"], \"tests\");"
