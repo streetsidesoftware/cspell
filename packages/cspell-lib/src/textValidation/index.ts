@@ -6,6 +6,6 @@ export type { DocumentValidatorOptions } from './docValidator';
 export { DocumentValidator } from './docValidator';
 export type { Offset, SimpleRange } from './parsedText';
 export { calcTextInclusionRanges } from './textValidator';
+export type { ValidateTextOptions } from './ValidateTextOptions';
 export type { CheckOptions, IncludeExcludeOptions, ValidationOptions } from './ValidationTypes';
-export type { ValidateTextOptions } from './validator';
 export { validateText } from './validator';

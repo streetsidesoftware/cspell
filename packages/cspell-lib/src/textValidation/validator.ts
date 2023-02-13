@@ -1,34 +1,17 @@
 import type { CSpellUserSettings } from '@cspell/cspell-types';
 import { IssueType } from '@cspell/cspell-types';
 
-import type { CSpellSettingsInternalFinalized } from '../Models/CSpellSettingsInternalDef';
 import { createTextDocument } from '../Models/TextDocument';
 import type { ValidationIssue } from '../Models/ValidationIssue';
 import * as Settings from '../Settings';
 import type { DirectiveIssue } from '../Settings/InDocSettings';
 import { validateInDocumentSettings } from '../Settings/InDocSettings';
 import { CompoundWordsMethod, getDictionaryInternal } from '../SpellingDictionary';
-import { clean } from '../util/util';
+import { settingsToValidateOptions } from './settingsToValidateOptions';
 import { validateText as validateFullText } from './textValidator';
-import type { ValidationOptions } from './ValidationTypes';
+import type { ValidateTextOptions } from './ValidateTextOptions';
 
 export const diagSource = 'cSpell Checker';
-
-export interface ValidateTextOptions {
-    /**
-     * Generate suggestions where there are spelling issues.
-     */
-    generateSuggestions?: boolean;
-    /**
-     * The number of suggestions to generate. The higher the number the longer it takes.
-     */
-    numSuggestions?: number;
-
-    /**
-     * Verify that the in-document directives are correct.
-     */
-    validateDirectives?: boolean;
-}
 
 /**
  * @deprecated
@@ -50,14 +33,14 @@ export async function validateText(
     if (!options.generateSuggestions) {
         return issues;
     }
-    const sugOptions = clean({
+    const sugOptions = {
         numSuggestions: options.numSuggestions,
         compoundMethod: CompoundWordsMethod.NONE,
         includeTies: false,
         ignoreCase: !(settings.caseSensitive ?? false),
         timeout: settings.suggestionsTimeout,
         numChanges: settings.suggestionNumChanges,
-    });
+    };
     const withSugs = issues.map((t) => {
         const text = t.text;
         const suggestionsEx = dict
@@ -89,12 +72,4 @@ function mapValidationIssues(text: string, valIssues: Iterable<DirectiveIssue>):
     }
 
     return issues.map(toValidationIssue);
-}
-
-export function settingsToValidateOptions(settings: CSpellSettingsInternalFinalized): ValidationOptions {
-    const opt: ValidationOptions = {
-        ...settings,
-        ignoreCase: !(settings.caseSensitive ?? false),
-    };
-    return opt;
 }

@@ -2,7 +2,6 @@ import type { DictionaryInformation } from '@cspell/cspell-types';
 import type { SuggestionResult, WeightMap } from 'cspell-trie-lib';
 import { mapDictionaryInformationToWeightMap } from 'cspell-trie-lib';
 
-import { clean } from '../util/clean';
 import { isUpperCase, removeUnboundAccents, ucFirst } from '../util/text';
 import type { HasOptions, SearchOptions, SuggestArgs, SuggestOptions } from './SpellingDictionary';
 
@@ -97,14 +96,12 @@ export function suggestArgsToSuggestOptions(args: SuggestArgs): SuggestOptions {
     const suggestOptions: SuggestOptions =
         typeof options === 'object'
             ? options
-            : clean({
+            : {
                   numSuggestions: options,
                   compoundMethod,
                   numChanges,
                   ignoreCase,
-                  includeTies: undefined,
-                  timeout: undefined,
-              });
+              };
     return suggestOptions;
 }
 export function createWeightMapFromDictionaryInformation(di: undefined): undefined;

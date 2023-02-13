@@ -43,7 +43,10 @@ export function emitSuggestionResult(result: TimedSuggestionsForWordResult, opti
     }
 
     if (verbose) {
-        const mappedSugs = suggestions.map((s) => ({ ...s, w: handleRtl(s.compoundWord || s.word) }));
+        const mappedSugs = suggestions.map((s) => ({
+            ...s,
+            w: handleRtl(s.compoundWord || s.wordAdjustedToMatchCase || s.word),
+        }));
         const sugWidths = mappedSugs.map((s) => width(s.w));
         const maxWidth = sugWidths.reduce((max, len) => Math.max(max, len), 0);
         for (const sug of mappedSugs) {
@@ -63,7 +66,7 @@ export function emitSuggestionResult(result: TimedSuggestionsForWordResult, opti
             output.log(` - ${formatWord(w, sug)}${padding} ${forbid}${ignore} - ${chalk.yellow(strCost)} ${dicts}`);
         }
     } else {
-        const mappedSugs = suggestions.map((s) => ({ ...s, word: handleRtl(s.word) }));
+        const mappedSugs = suggestions.map((s) => ({ ...s, word: handleRtl(s.wordAdjustedToMatchCase || s.word) }));
         for (const r of mappedSugs) {
             output.log(` - ${formatWordSingle(r)}`);
         }
@@ -71,7 +74,25 @@ export function emitSuggestionResult(result: TimedSuggestionsForWordResult, opti
 }
 
 function formatWord(word: string, r: SuggestedWord): string {
-    return r.forbidden || r.noSuggest ? chalk.gray(chalk.strikethrough(word)) : word;
+    return r.forbidden || r.noSuggest
+        ? chalk.gray(chalk.strikethrough(word))
+        : word === r.wordAdjustedToMatchCase
+        ? diff(word, r.word)
+        : word;
+}
+
+function diff(wordA: string, wordB: string): string {
+    const a = [...wordA];
+    const b = [...wordB];
+    const parts: string[] = [];
+
+    for (let idx = 0; idx < a.length; ++idx) {
+        const aa = a[idx];
+        const bb = b[idx];
+        parts.push(aa === bb ? aa : chalk.yellow(aa));
+    }
+
+    return parts.join('');
 }
 
 function formatWordSingle(s: SuggestedWord): string {

@@ -4,7 +4,7 @@ export * from '@cspell/cspell-types';
 import { URI } from 'vscode-uri';
 import { WeightMap } from 'cspell-trie-lib';
 export { CompoundWordsMethod } from 'cspell-trie-lib';
-import { CachingDictionary, SpellingDictionaryCollection, SuggestionResult } from 'cspell-dictionary';
+import { CachingDictionary, SpellingDictionaryCollection, SuggestOptions, SuggestionResult } from 'cspell-dictionary';
 export { SpellingDictionary, SpellingDictionaryCollection, SuggestOptions, SuggestionCollector, SuggestionResult, createSpellingDictionary, createCollection as createSpellingDictionaryCollection } from 'cspell-dictionary';
 export { asyncIterableToArray, readFile, readFileSync, writeToFile, writeToFileIterable, writeToFileIterableP } from 'cspell-io';
 
@@ -488,8 +488,18 @@ declare function getDefaultBundledSettings(): CSpellSettingsInternal;
 declare function combineTextAndLanguageSettings(settings: CSpellUserSettings, text: string, languageId: string | string[]): CSpellSettingsInternal;
 
 interface ExtendedSuggestion {
+    /**
+     * The suggestion.
+     */
     word: string;
+    /**
+     * The word is preferred above others, except other "preferred" words.
+     */
     isPreferred?: boolean;
+    /**
+     * The suggested word adjusted to match the original case.
+     */
+    wordAdjustedToMatchCase?: string;
 }
 
 interface ValidationResult extends TextOffset, Pick<Issue, 'message' | 'issueType'> {
@@ -572,11 +582,6 @@ interface ValidateTextOptions {
      */
     validateDirectives?: boolean;
 }
-/**
- * @deprecated
- * @deprecationMessage Use spellCheckDocument
- */
-declare function validateText(text: string, settings: CSpellUserSettings, options?: ValidateTextOptions): Promise<ValidationIssue[]>;
 
 interface DocumentValidatorOptions extends ValidateTextOptions {
     /**
@@ -595,7 +600,6 @@ interface DocumentValidatorOptions extends ValidateTextOptions {
     noConfigSearch?: boolean;
 }
 declare class DocumentValidator {
-    readonly options: DocumentValidatorOptions;
     readonly settings: CSpellUserSettings;
     private _document;
     private _ready;
@@ -604,6 +608,7 @@ declare class DocumentValidator {
     private _preparations;
     private _preparationTime;
     private _suggestions;
+    readonly options: DocumentValidatorOptions;
     /**
      * @param doc - Document to validate
      * @param config - configuration to use (not finalized).
@@ -717,6 +722,12 @@ interface CheckTextOptions extends DocumentValidatorOptions {
  */
 declare function checkTextDocument(doc: TextDocument | Document, options: CheckTextOptions, settings?: CSpellUserSettings): Promise<CheckTextInfo>;
 
+/**
+ * @deprecated
+ * @deprecationMessage Use spellCheckDocument
+ */
+declare function validateText(text: string, settings: CSpellUserSettings, options?: ValidateTextOptions): Promise<ValidationIssue[]>;
+
 interface SpellCheckFileOptions extends ValidateTextOptions {
     /**
      * Optional path to a configuration file.
@@ -779,7 +790,16 @@ interface DetermineFinalDocumentSettingsResult {
  */
 declare function determineFinalDocumentSettings(document: DocumentWithText, settings: CSpellUserSettings): DetermineFinalDocumentSettingsResult;
 
-interface SuggestedWordBase extends SuggestionResult {
+interface WordSuggestion extends SuggestionResult {
+    /**
+     * The suggested word adjusted to match the original case.
+     */
+    wordAdjustedToMatchCase?: string;
+}
+interface SuggestedWordBase extends WordSuggestion {
+    /**
+     * dictionary names
+     */
     dictionaries: string[];
 }
 interface SuggestedWord extends SuggestedWordBase {
@@ -790,7 +810,8 @@ interface SuggestionsForWordResult {
     word: string;
     suggestions: SuggestedWord[];
 }
-interface SuggestionOptions {
+type FromSuggestOptions = Pick<SuggestOptions, 'numChanges' | 'numSuggestions' | 'includeTies'>;
+interface SuggestionOptions extends FromSuggestOptions {
     /**
      * languageId to use when determining file type.
      */
@@ -812,18 +833,18 @@ interface SuggestionOptions {
      * The number of suggestions to make.
      * @default 8
      */
-    numSuggestions?: number;
+    numSuggestions?: number | undefined;
     /**
      * Max number of changes / edits to the word to get to a suggestion matching suggestion.
      * @default 4
      */
-    numChanges?: number;
+    numChanges?: number | undefined;
     /**
      * If multiple suggestions have the same edit / change "cost", then included them even if
      * it causes more than `numSuggestions` to be returned.
      * @default true
      */
-    includeTies?: boolean;
+    includeTies?: boolean | undefined;
     /**
      * By default we want to use the default configuration, but there are cases
      * where someone might not want that.

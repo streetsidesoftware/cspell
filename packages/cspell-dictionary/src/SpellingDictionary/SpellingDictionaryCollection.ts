@@ -1,7 +1,6 @@
 import { CASE_INSENSITIVE_PREFIX } from 'cspell-trie-lib';
 import { genSequence } from 'gensequence';
 
-import { clean } from '../util/clean';
 import { isDefined } from '../util/util';
 import * as Defaults from './defaults';
 import type {
@@ -91,17 +90,15 @@ class SpellingDictionaryCollectionImpl implements SpellingDictionaryCollection {
                 !this.isNoSuggestWord(word, suggestOptions)
             );
         };
-        const collector = suggestionCollector(
-            word,
-            clean({
-                numSuggestions,
-                filter,
-                changeLimit: numChanges,
-                includeTies,
-                ignoreCase,
-                timeout,
-            })
-        );
+        const collectorOptions = {
+            numSuggestions,
+            filter,
+            changeLimit: numChanges,
+            includeTies,
+            ignoreCase,
+            timeout,
+        };
+        const collector = suggestionCollector(word, collectorOptions);
         this.genSuggestions(collector, suggestOptions);
         return collector.suggestions.map((r) => ({ ...r, word: r.word }));
     }

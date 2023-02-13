@@ -358,6 +358,7 @@ info	    Glob: coverage/** from ./cspell.json
 info	    Glob: dist/** from ./cspell.json
 info	    Glob: package.json from ./cspell.json
 info	    Glob: .cspell.json from ./cspell.json
+info	    Glob: cspell.json from ./cspell.json
 info	    Glob: .vscode/** from ./cspell.json
 info	    Glob: node_modules/** from command line
 info	
@@ -1080,10 +1081,13 @@ not-in-any-dictionary - workspace*           ../../cspell-dict.txt"
 exports[`Validate cli > app 'typos' Expect Error: [Function CheckFailed] 1`] = `[]`;
 
 exports[`Validate cli > app 'typos' Expect Error: [Function CheckFailed] 2`] = `
-"log	./fixtures/features/typos/test.md:5:3 - Forbidden word (blacklist) Suggestions: [denylist*, blacklists, backlist, blacklist's, blacklisted]
+"log	./fixtures/features/typos/code.ts:1:26 - Unknown word (Orangges) Suggestions: [Oranges, Orangiest, Orangier, orange's, Orange's]
+log	./fixtures/features/typos/test.md:5:3 - Forbidden word (blacklist) Suggestions: [denylist*, backlist, backlists, blacklight, blackfish]
 log	./fixtures/features/typos/test.md:6:3 - Forbidden word (whitelist) Suggestions: [allowlist*, whitelists, whitelisted, whitefish, whitest]
 log	./fixtures/features/typos/test.md:7:3 - Forbidden word (rad) Suggestions: [cool*, rda, rads, raid, rand]
-error	CSpell: Files checked: 2, Issues found: 3 in 1 files"
+log	./fixtures/features/typos/test.md:9:13 - Forbidden word (english) Suggestions: [English*, englished, english's, englisher, englishes]
+log	./fixtures/features/typos/test.md:9:38 - Forbidden word (Blacklisted) Suggestions: [Denylisted*, Blacklegged, Backlists, Backlist, Lackluster]
+error	CSpell: Files checked: 3, Issues found: 6 in 2 files"
 `;
 
 exports[`Validate cli > app 'typos' Expect Error: [Function CheckFailed] 3`] = `""`;

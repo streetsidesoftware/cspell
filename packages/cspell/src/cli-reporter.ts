@@ -226,7 +226,11 @@ function formatIssue(templateStr: string, issue: ReporterIssue, maxIssueTextWidt
 function formatSuggestions(issue: Issue): string {
     if (issue.suggestionsEx) {
         return issue.suggestionsEx
-            .map((sug) => (sug.isPreferred ? chalk.italic(chalk.bold(sug.word)) + '*' : sug.word))
+            .map((sug) =>
+                sug.isPreferred
+                    ? chalk.italic(chalk.bold(sug.wordAdjustedToMatchCase || sug.word)) + '*'
+                    : sug.wordAdjustedToMatchCase || sug.word
+            )
             .join(', ');
     }
     if (issue.suggestions) {

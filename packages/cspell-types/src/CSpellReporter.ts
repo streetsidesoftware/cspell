@@ -6,6 +6,10 @@ export interface Suggestion {
      */
     word: string;
     /**
+     * The suggested word adjusted to match the original case.
+     */
+    wordAdjustedToMatchCase?: string;
+    /**
      * `true` - if this suggestion can be an automatic fix.
      */
     isPreferred?: boolean;

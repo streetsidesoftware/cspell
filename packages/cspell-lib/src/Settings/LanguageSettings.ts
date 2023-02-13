@@ -56,9 +56,38 @@ export function normalizeLocale(locale: LocaleId | LocaleId[]): Set<LocaleId> {
     return _normalizeLocale(locale);
 }
 
+export function normalizeLocaleIntl(locale: LocaleId | LocaleId[]): Set<LocaleId> {
+    const values = [...normalizeLocale(locale)].map((locale) =>
+        locale.replace(/^([a-z]{2})-?([a-z]{2})$/, (_, lang: string, locale?: string) =>
+            locale ? `${lang}-${locale.toUpperCase()}` : lang
+        )
+    );
+    return new Set(values);
+}
+
 export function isLocaleInSet(locale: LocaleId | LocaleId[], setOfLocals: Set<LocaleId>): boolean {
     const locales = normalizeLocale(locale);
     return doSetsIntersect(locales, setOfLocals);
+}
+
+const regExpValidIntlLocaleStrict = /^[a-z]{2}(-[A-Z]{2})?$/;
+const regExpValidIntlLocale = new RegExp(regExpValidIntlLocaleStrict, 'i');
+
+/**
+ * Test if a locale should be ok with Intl
+ * @param locale - locale string
+ * @param strict - case must match
+ * @returns true if it matches the standard 2 letter or 4 letter forms.
+ */
+export function isValidLocaleIntlFormat(locale: LocaleId | LocaleId[], strict = false): boolean {
+    if (typeof locale === 'string')
+        return strict ? regExpValidIntlLocaleStrict.test(locale) : regExpValidIntlLocale.test(locale);
+
+    for (const item of locale) {
+        if (!isValidLocaleIntlFormat(item, strict)) return false;
+    }
+
+    return locale.length > 0;
 }
 
 export function calcSettingsForLanguage(

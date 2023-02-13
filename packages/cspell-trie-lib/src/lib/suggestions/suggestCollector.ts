@@ -124,7 +124,7 @@ export interface SuggestionCollectorOptions extends Omit<GenSuggestionOptionsStr
      * I.E. to remove forbidden terms.
      * @default () => true
      */
-    filter?: FilterWordFn;
+    filter?: FilterWordFn | undefined;
 
     /**
      * The number of letters that can be changed when looking for a match
@@ -136,7 +136,7 @@ export interface SuggestionCollectorOptions extends Omit<GenSuggestionOptionsStr
      * Include suggestions with tied cost even if the number is greater than `numSuggestions`.
      * @default true
      */
-    includeTies?: boolean;
+    includeTies?: boolean | undefined;
 
     /**
      * specify if case / accents should be ignored when looking for suggestions.

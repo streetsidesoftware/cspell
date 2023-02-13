@@ -126,6 +126,28 @@ describe('Validate LanguageSettings', () => {
         expect([...localeSet]).toEqual(expected);
     });
 
+    test.each`
+        locales                          | expected
+        ${''}                            | ${[]}
+        ${'en, en-GB, fr-fr, nl_NL'}     | ${['en', 'en-GB', 'fr-FR', 'nl-NL']}
+        ${['en, en-GB', 'fr-fr, nl_NL']} | ${['en', 'en-GB', 'fr-FR', 'nl-NL']}
+    `('normalizeLocaleIntl $locales', ({ locales, expected }) => {
+        const localeSet = LS.normalizeLocaleIntl(locales);
+        expect([...localeSet]).toEqual(expected);
+    });
+
+    test.each`
+        locales                              | strict       | expected
+        ${''}                                | ${undefined} | ${false}
+        ${'fr-fr'}                           | ${undefined} | ${true}
+        ${'fr-fr'}                           | ${true}      | ${false}
+        ${['en', 'en-GB', 'fr-FR', 'nl-NL']} | ${undefined} | ${true}
+        ${['en', 'en-GB', 'fr-FR', 'nl-NL']} | ${true}      | ${true}
+        ${['en, en-GB', 'fr-fr, nl_NL']}     | ${undefined} | ${false}
+    `('isValidLocaleIntlFormat $locales', ({ locales, strict, expected }) => {
+        expect(LS.isValidLocaleIntlFormat(locales, strict)).toEqual(expected);
+    });
+
     test('normalizeLocale $locales', () => {
         const localeSet = LS.normalizeLocale('en, en-GB, fr-fr,nl_NL');
         expect(localeSet.has('en')).toBe(true);
