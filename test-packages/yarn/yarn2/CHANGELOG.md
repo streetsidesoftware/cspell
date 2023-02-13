@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 6.24.0 (2023-02-13)
+
+**Note:** Version bump only for package test-yarn2
+
 ## 6.23.1 (2023-02-12)
 
 **Note:** Version bump only for package test-yarn2
