@@ -119,17 +119,7 @@ async function _suggestionsForWord(
     options: SuggestionOptions,
     settings: CSpellSettings
 ): Promise<SuggestionsForWordResult> {
-    const {
-        languageId,
-        locale: language,
-        strict = true,
-        numChanges = 4,
-        numSuggestions = 8,
-        includeTies = true,
-        includeDefaultConfig = true,
-        dictionaries,
-    } = options;
-    const ignoreCase = !strict;
+    const { languageId, locale: language, includeDefaultConfig = true, dictionaries } = options;
 
     async function determineDictionaries(config: CSpellSettings): Promise<{
         dictionaryCollection: SpellingDictionaryCollection;
@@ -164,6 +154,31 @@ async function _suggestionsForWord(
         ? mergeSettings(getDefaultSettings(settings.loadDefaultConfiguration ?? true), getGlobalSettings(), settings)
         : settings;
     const { dictionaryCollection, allDictionaryCollection } = await determineDictionaries(config);
+
+    return suggestionsForWordSync(word, options, settings, dictionaryCollection, allDictionaryCollection);
+}
+
+export function suggestionsForWordSync(
+    word: string,
+    options: SuggestionOptions,
+    settings: CSpellSettings,
+    dictionaryCollection: SpellingDictionaryCollection,
+    allDictionaryCollection?: SpellingDictionaryCollection
+): SuggestionsForWordResult {
+    const extendsDictionaryCollection = allDictionaryCollection || dictionaryCollection;
+    const {
+        locale: language,
+        strict = true,
+        numChanges = 4,
+        numSuggestions = 8,
+        includeTies = true,
+        includeDefaultConfig = true,
+    } = options;
+    const ignoreCase = !strict;
+
+    const config = includeDefaultConfig
+        ? mergeSettings(getDefaultSettings(settings.loadDefaultConfiguration ?? true), getGlobalSettings(), settings)
+        : settings;
     const opts: SuggestOptions = { ignoreCase, numChanges, numSuggestions, includeTies };
     const suggestionsByDictionary = dictionaryCollection.dictionaries.flatMap((dict) =>
         dict.suggest(word, opts).map((r) => ({ ...r, dictName: dict.name }))
@@ -176,9 +191,9 @@ async function _suggestionsForWord(
         numSuggestions,
         includeTies
     );
-    adjustCase(combined, word, locale, ignoreCase, allDictionaryCollection, findOpts);
+    adjustCase(combined, word, locale, ignoreCase, extendsDictionaryCollection, findOpts);
     const allSugs = combined.map((sug) => {
-        const found = allDictionaryCollection.find(sug.word, findOpts);
+        const found = extendsDictionaryCollection.find(sug.word, findOpts);
         return {
             ...sug,
             forbidden: found?.forbidden || false,
