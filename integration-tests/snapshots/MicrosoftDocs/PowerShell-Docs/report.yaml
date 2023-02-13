@@ -3,9 +3,9 @@ Repository: MicrosoftDocs/PowerShell-Docs
 Url: https://github.com/MicrosoftDocs/PowerShell-Docs.git
 Args: ["--config=../../../cspell-power-shell-docs.config.yaml","**"]
 Summary:
-  files: 2871
-  filesWithIssues: 1303
-  issues: 5995
+  files: 2872
+  filesWithIssues: 1308
+  issues: 6007
   errors: 0
 Errors: []
 
@@ -235,7 +235,7 @@ issues:
   - "reference/5.1/Microsoft.PowerShell.Core/Enter-PSSession.md:706:4    	etsn	U   	- `etsn`"
   - "reference/5.1/Microsoft.PowerShell.Core/Exit-PSSession.md:105:4     	exsn	U   	- `exsn`"
   - "reference/5.1/Microsoft.PowerShell.Core/Get-Command.md:115:24   	Childitem   	U   	Get-Command -Name Get-Childitem -Args Cert: -Syntax"
-  - "reference/5.1/Microsoft.PowerShell.Core/Get-Help.md:277:25  	SQLSERVER   	U   	Help Get-Item -Path SQLSERVER:\\DataCollection"
+  - "reference/5.1/Microsoft.PowerShell.Core/Get-Help.md:295:25  	SQLSERVER   	U   	Help Get-Item -Path SQLSERVER:\\DataCollection"
   - "reference/5.1/Microsoft.PowerShell.Core/Get-Module.md:203:63    	Moduletype  	U   	Table -Property Name, Moduletype, Path -Groupby Name"
   - "reference/5.1/Microsoft.PowerShell.Core/Get-Module.md:203:81    	Groupby     	U   	Name, Moduletype, Path -Groupby Name"
   - "reference/5.1/Microsoft.PowerShell.Core/Get-Module.md:331:36    	RSDGF       	U   	CimSession -ComputerName RSDGF03"
@@ -435,6 +435,7 @@ issues:
   - "reference/7.2/Microsoft.PowerShell.Core/About/about_Numeric_Literals.md:323:22  	behaviours  	U   	retain original behaviours when the value is in"
   - "reference/7.2/Microsoft.PowerShell.Core/About/about_Operators.md:306:46     	subshell	U   	it asynchronously in subshell as a job."
   - "reference/7.2/Microsoft.PowerShell.Core/About/about_Pipeline_Chain_Operators.md:175:25  	behaviour   	U   	of PowerShell 7, the behaviour of these syntaxes has"
+  - "reference/7.2/Microsoft.PowerShell.Core/About/about_PowerShell_Config.md:406:10     	Transcripting   	U   	- `EnableTranscripting` - When this setting"
   - "reference/7.2/Microsoft.PowerShell.Core/About/about_Preference_Variables.md:1022:4  	cscript     	U   	- `cscript.exe`"
   - "reference/7.2/Microsoft.PowerShell.Core/About/about_Preference_Variables.md:1023:4  	wscript     	U   	- `wscript.exe`"
   - "reference/7.2/Microsoft.PowerShell.Core/About/about_Preference_Variables.md:1043:8  	testexe     	U   	PS > testexe -echoargs $a 'a\" \"b"
@@ -736,6 +737,7 @@ issues:
   - "reference/docs-conceptual/dev-cross-plat/resolving-dependency-conflicts.md:718:2    	netcore 	U   	$netcore = \"netcoreapp3.1\""
   - "reference/docs-conceptual/dev-cross-plat/resolving-dependency-conflicts.md:791:93   	qualifed	U   	with the same fully qualifed"
   - "reference/docs-conceptual/dev-cross-plat/resolving-dependency-conflicts.md:881:9    	Strahl  	U   	- [Rick Strahl: When does a .NET assembly"
+  - "reference/docs-conceptual/dev-cross-plat/security/preventing-script-injection.md:48:36      	pwnd	U   	rocessById \"$pid; Write-Host 'pwnd!'\""
   - "reference/docs-conceptual/dev-cross-plat/vscode/How-To-Replicate-the-ISE-Experience-In-VSCode.md:118:27     	corbob  	U   	Thanks to the work of [@corbob][04], the PowerShell"
   - "reference/docs-conceptual/dev-cross-plat/vscode/understanding-file-encoding.md:202:54   	encodingtest	U   	Path]::GetTempPath()) 'encodingtest.ps1'"
   - "reference/docs-conceptual/dev-cross-plat/vscode/understanding-file-encoding.md:233:4    	rkeithhill's	U   	- @rkeithhill's [blog post about dealing"
@@ -1088,6 +1090,7 @@ issues:
   - "reference/docs-conceptual/install/Installing-PowerShell-on-Windows.md:286:28    	workarea        	U   	include the package in the workarea and add _OPENSRC_POWERSHELL"
   - "reference/docs-conceptual/install/Installing-PowerShell-on-Windows.md:286:46    	OPENSRC         	U   	the workarea and add _OPENSRC_POWERSHELL_ feature"
   - "reference/docs-conceptual/install/Installing-PowerShell-on-Windows.md:323:2     	ipaddr          	U   	$ipaddr = '<Nano Server IP address"
+  - "reference/docs-conceptual/install/microsoft-update-faq.yml:43:37    	lifecycles  	U   	information about support lifecycles, see"
   - "reference/docs-conceptual/install/PowerShell-on-ARM.md:60:1     	Raspbery	U   	Raspbery Pi"
   - "reference/docs-conceptual/lang-spec/chapter-02.md:366:2     	végösszeg       	U   	$végösszeg # Hungarian"
   - "reference/docs-conceptual/lang-spec/chapter-02.md:367:2     	итог            	U   	$итог # Russian"
@@ -1261,8 +1264,8 @@ issues:
   - "reference/docs-conceptual/toc.yml:337:63    	powershelltabcollection 	U   	ise/object-model/the-powershelltabcollection-object.md"
   - "reference/docs-conceptual/toc.yml:339:63    	powershelltab           	U   	ise/object-model/the-powershelltab-object.md"
   - "reference/docs-conceptual/toc.yml:374:56    	informationstream       	U   	powershell/wmf/whats-new/informationstream-overview.md"
-  - "reference/docs-conceptual/toc.yml:448:41    	cmdline                 	U   	dev-cross-plat/create-cmdline-predictor.md"
-  - "reference/docs-conceptual/toc.yml:508:38    	hackathons              	U   	community/contributing/hackathons.md"
+  - "reference/docs-conceptual/toc.yml:452:41    	cmdline                 	U   	dev-cross-plat/create-cmdline-predictor.md"
+  - "reference/docs-conceptual/toc.yml:512:38    	hackathons              	U   	community/contributing/hackathons.md"
   - "reference/docs-conceptual/whats-new/cmdlet-versions.md:221:107  	Notsupportedonmac   	U   	| ![Included][01] | NotsupportedonmacOS |"
   - "reference/docs-conceptual/whats-new/differences-from-windows-powershell.md:278:26   	inputformat 	U   	short hand to match `-inputformat`, which now needs to"
   - "reference/docs-conceptual/whats-new/differences-from-windows-powershell.md:307:25   	Paren       	U   	Preserve `$?` for **ParenExpression**, **SubExpression"
@@ -1333,8 +1336,8 @@ issues:
   - "reference/media/index/powershell_128.svg:5:21       	SVGID   	U   	<linearGradient id=\"SVGID_1_\" gradientUnits=\"userSpaceO"
   - "reference/media/shared/check-mark-button_2705.svg:3:12      	svgg	U   	<g id=\"svgg\">"
   - "reference/module/index.md:14:36     	windowsserver   	U   	FilterColumn1: powershell-7.2,windowsserver2022-ps"
-  - "reference/module/index.md:15:21     	azps            	U   	quickFilterColumn2: azps-9.3.0,win-mdop2-ps"
-  - "reference/module/index.md:15:36     	mdop            	U   	FilterColumn2: azps-9.3.0,win-mdop2-ps"
+  - "reference/module/index.md:15:21     	azps            	U   	quickFilterColumn2: azps-9.4.0,win-mdop2-ps"
+  - "reference/module/index.md:15:36     	mdop            	U   	FilterColumn2: azps-9.4.0,win-mdop2-ps"
   - "reference/module/index.md:16:21     	sqlserver       	U   	quickFilterColumn3: sqlserver-ps,systemcenter-ps-"
   - "reference/module/index.md:16:34     	systemcenter    	U   	ckFilterColumn3: sqlserver-ps,systemcenter-ps-2022"
   - "tests/Pester/Update-Help.Tests.ps1:24:34    	pshome      	U   	HelpInstallationPath = \"$pshome\\en-US\""

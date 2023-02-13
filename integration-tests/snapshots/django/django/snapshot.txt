@@ -3,7 +3,7 @@ Repository: django/django
 Url: "https://github.com/django/django.git"
 Args: ["**/*.{md,py}"]
 Lines:
- CSpell: Files checked: 2747, Issues found: 8258 in 915 files
+ CSpell: Files checked: 2747, Issues found: 8261 in 916 files
  exit code: 1
 ./django/__init__.py:12:26     - Unknown word (urlresolvers) -- Set the thread-local urlresolvers script prefix if `set
 ./django/apps/config.py:217:40    - Unknown word (qualname)   -- app_config_class.__qualname__,
@@ -198,11 +198,11 @@ Lines:
 ./django/contrib/gis/db/backends/postgis/const.py:61:10     - Unknown word (PIXTYPE)    -- BANDTYPE_PIXTYPE_MASK = 0x0F
 ./django/contrib/gis/db/backends/postgis/introspection.py:25:34     - Unknown word (typname)    -- "SELECT oid, typname "
 ./django/contrib/gis/db/backends/postgis/models.py:62:5      - Unknown word (srtext)     -- srtext = models.CharField(max
-./django/contrib/gis/db/backends/postgis/operations.py:165:44    - Unknown word (bytea)      -- is_psycopg3 else "%s::bytea"
-./django/contrib/gis/db/backends/postgis/operations.py:199:17    - Unknown word (vtup)       -- vtup = self.postgis_version
-./django/contrib/gis/db/backends/postgis/operations.py:233:21    - Unknown word (zmin)       -- xmin, ymin, zmin = map(float, ll.split
-./django/contrib/gis/db/backends/postgis/operations.py:234:21    - Unknown word (zmax)       -- xmax, ymax, zmax = map(float, ur.split
-./django/contrib/gis/db/backends/postgis/operations.py:87:70     - Unknown word (rast)       -- don't support mixed (rast-geom)
+./django/contrib/gis/db/backends/postgis/operations.py:167:44    - Unknown word (bytea)      -- is_psycopg3 else "%s::bytea"
+./django/contrib/gis/db/backends/postgis/operations.py:201:17    - Unknown word (vtup)       -- vtup = self.postgis_version
+./django/contrib/gis/db/backends/postgis/operations.py:235:21    - Unknown word (zmin)       -- xmin, ymin, zmin = map(float, ll.split
+./django/contrib/gis/db/backends/postgis/operations.py:236:21    - Unknown word (zmax)       -- xmax, ymax, zmax = map(float, ur.split
+./django/contrib/gis/db/backends/postgis/operations.py:83:70     - Unknown word (rast)       -- don't support mixed (rast-geom)
 ./django/contrib/gis/db/backends/postgis/pgraster.py:107:5     - Unknown word (rasterheader) -- rasterheader = (
 ./django/contrib/gis/db/backends/postgis/pgraster.py:147:9     - Unknown word (bandheader)   -- bandheader = pack(structure, (pixeltype
 ./django/contrib/gis/db/backends/postgis/pgraster.py:25:26     - Unknown word (hexlified)  -- Unpack little endian hexlified binary string into a
@@ -440,9 +440,9 @@ Lines:
 ./django/core/management/commands/makemessages.py:83:28     - Unknown word (djangojs)    -- if self.domain == "djangojs":
 ./django/core/management/commands/makemigrations.py:452:15    - Unknown word (mergeable)  -- # mergeable. For now, we always
 ./django/core/management/commands/runserver.py:14:1      - Unknown word (naiveip)    -- naiveip_re = _lazy_re_compile
-./django/core/management/commands/runserver.py:174:58    - Unknown word (tracebacks)  -- messages instead of ugly tracebacks.
-./django/core/management/commands/runserver.py:177:23    - Unknown word (EADDRINUSE)  -- errno.EADDRINUSE: "That port is already
-./django/core/management/commands/runserver.py:178:23    - Unknown word (EADDRNOTAVAIL) -- errno.EADDRNOTAVAIL: "That IP address can
+./django/core/management/commands/runserver.py:150:58    - Unknown word (tracebacks)  -- messages instead of ugly tracebacks.
+./django/core/management/commands/runserver.py:153:23    - Unknown word (EADDRINUSE)  -- errno.EADDRINUSE: "That port is already
+./django/core/management/commands/runserver.py:154:23    - Unknown word (EADDRNOTAVAIL) -- errno.EADDRNOTAVAIL: "That IP address can
 ./django/core/management/commands/runserver.py:41:67     - Unknown word (ipaddr)     -- Optional port number, or ipaddr:port"
 ./django/core/management/commands/runserver.py:51:16     - Unknown word (nothreading) -- "--nothreading",
 ./django/core/management/commands/sendtestemail.py:33:56     - Unknown word (gethostname) -- %s on %s" % (socket.gethostname(), timezone.now())
@@ -737,13 +737,13 @@ Lines:
 ./django/middleware/gzip.py:23:17     - Unknown word (gzipping)   -- # Avoid gzipping if we've already got
 ./django/middleware/gzip.py:37:17     - Unknown word (orignal)    -- orignal_iterator = response
 ./django/template/__init__.py:34:19     - Unknown word (smartif)    -- - django.template.smartif
-./django/template/base.py:249:36    - Unknown word (linebreak)  -- num, next in enumerate(linebreak_iter(self.source)):
-./django/template/base.py:521:25    - Unknown word (endtag)     -- def skip_past(self, endtag):
-./django/template/base.py:613:19    - Unknown word (strdq)      -- (?:%(i18n_open)s%(strdq)s%(i18n_close)s|
-./django/template/base.py:614:16    - Unknown word (strsq)      -- %(i18n_open)s%(strsq)s%(i18n_close)s|
-./django/template/base.py:757:9     - Unknown word (alen)       -- alen = len(args)
-./django/template/base.py:758:9     - Unknown word (dlen)       -- dlen = len(defaults or [
-./django/template/base.py:835:34    - Unknown word (bonafide)   -- # dealing with a bonafide variable
+./django/template/base.py:245:36    - Unknown word (linebreak)  -- num, next in enumerate(linebreak_iter(self.source)):
+./django/template/base.py:517:25    - Unknown word (endtag)     -- def skip_past(self, endtag):
+./django/template/base.py:609:19    - Unknown word (strdq)      -- (?:%(i18n_open)s%(strdq)s%(i18n_close)s|
+./django/template/base.py:610:16    - Unknown word (strsq)      -- %(i18n_open)s%(strsq)s%(i18n_close)s|
+./django/template/base.py:753:9     - Unknown word (alen)       -- alen = len(args)
+./django/template/base.py:754:9     - Unknown word (dlen)       -- dlen = len(defaults or [
+./django/template/base.py:831:34    - Unknown word (bonafide)   -- # dealing with a bonafide variable
 ./django/template/defaultfilters.py:183:5     - Unknown word (tupl)       -- tupl = d.as_tuple()
 ./django/template/defaultfilters.py:285:30    - Unknown word (titlecase)  -- Convert a string into titlecase."""
 ./django/template/defaultfilters.py:943:22    - Unknown word (cand)       -- * If value is 0, cand{{ value|pluralize:"y
@@ -1093,9 +1093,9 @@ Lines:
 ./tests/admin_changelist/tests.py:1240:23   - Unknown word (unorderedobject) -- "/unorderedobject/?p=%s" % page, superuser
 ./tests/admin_changelist/tests.py:1286:23   - Unknown word (orderedobject)   -- "/orderedobject/?p=%s" % page, superuser
 ./tests/admin_changelist/tests.py:1588:19   - Unknown word (describedby)     -- 'aria-describedby="searchbar_helptext
-./tests/admin_changelist/tests.py:1607:31   - Unknown word (jondoe)          -- user = User(username="jondoe", password="secret"
-./tests/admin_changelist/tests.py:1640:70   - Unknown word (foruser)         -- log 10 as admin_log foruser user %}")
-./tests/admin_changelist/tests.py:1917:58   - Unknown word (proxyuser)       -- admin:admin_changelist_proxyuser_changelist")
+./tests/admin_changelist/tests.py:1612:31   - Unknown word (jondoe)          -- user = User(username="jondoe", password="secret"
+./tests/admin_changelist/tests.py:1646:70   - Unknown word (foruser)         -- log 10 as admin_log foruser user %}")
+./tests/admin_changelist/tests.py:1923:58   - Unknown word (proxyuser)       -- admin:admin_changelist_proxyuser_changelist")
 ./tests/admin_changelist/tests.py:575:38    - Unknown word (chordsband) -- self.factory.get("/chordsband/", data={"members":
 ./tests/admin_changelist/tests.py:678:51    - Unknown word (Halvorson)  -- objects.create(name="Mary Halvorson")
 ./tests/admin_changelist/tests.py:679:59    - Unknown word (Finlayson)  -- create(name="Jonathan Finlayson")
@@ -1154,16 +1154,16 @@ Lines:
 ./tests/admin_ordering/tests.py:49:32     - Unknown word (Halen)      -- Band(name="Van Halen", bio="", rank=2),
 ./tests/admin_scripts/broken_app/models.py:1:23      - Unknown word (modelz)     -- from django.db import modelz # NOQA
 ./tests/admin_scripts/tests.py:1419:26   - Unknown word (scriptz)    -- apps=["admin_scriptz.broken_app"],
-./tests/admin_scripts/tests.py:1742:56   - Unknown word (trackback)  -- support --verbosity and --trackback options."""
-./tests/admin_scripts/tests.py:1857:25   - Unknown word (altert)     -- def test_help_short_altert(self):
-./tests/admin_scripts/tests.py:2105:33   - Unknown word (Erreur)     -- raise CommandError("Erreur personnalisée")
-./tests/admin_scripts/tests.py:2105:40   - Unknown word (personnalisée) -- CommandError("Erreur personnalisée")
-./tests/admin_scripts/tests.py:2452:49   - Unknown word (othertestproject) -- tartproject", "testproject", "othertestproject"]
-./tests/admin_scripts/tests.py:2517:63   - Unknown word (tarballtestproject) -- template", template_path, "tarballtestproject"]
-./tests/admin_scripts/tests.py:2536:14   - Unknown word (altlocation)        -- "altlocation",
-./tests/admin_scripts/tests.py:2618:14   - Unknown word (Procfile)           -- "Procfile",
-./tests/admin_scripts/tests.py:2810:42   - Unknown word (umasks)             -- only partially supports umasks and chmod.",
-./tests/admin_scripts/tests.py:3053:18   - Unknown word (rnserver)           -- args = ["rnserver", "--settings=test_project
+./tests/admin_scripts/tests.py:1745:56   - Unknown word (trackback)  -- support --verbosity and --trackback options."""
+./tests/admin_scripts/tests.py:1860:25   - Unknown word (altert)     -- def test_help_short_altert(self):
+./tests/admin_scripts/tests.py:2108:33   - Unknown word (Erreur)     -- raise CommandError("Erreur personnalisée")
+./tests/admin_scripts/tests.py:2108:40   - Unknown word (personnalisée) -- CommandError("Erreur personnalisée")
+./tests/admin_scripts/tests.py:2455:49   - Unknown word (othertestproject) -- tartproject", "testproject", "othertestproject"]
+./tests/admin_scripts/tests.py:2520:63   - Unknown word (tarballtestproject) -- template", template_path, "tarballtestproject"]
+./tests/admin_scripts/tests.py:2539:14   - Unknown word (altlocation)        -- "altlocation",
+./tests/admin_scripts/tests.py:2621:14   - Unknown word (Procfile)           -- "Procfile",
+./tests/admin_scripts/tests.py:2813:42   - Unknown word (umasks)             -- only partially supports umasks and chmod.",
+./tests/admin_scripts/tests.py:3056:18   - Unknown word (rnserver)           -- args = ["rnserver", "--settings=test_project
 ./tests/admin_scripts/tests.py:55:65     - Unknown word (sdict)      -- None, is_dir=False, sdict=None, extra=None):
 ./tests/admin_utils/test_logentry.py:242:14    - Unknown word (recentactions) -- def test_recentactions_without_content_type
 ./tests/admin_utils/test_logentry.py:75:74     - Unknown word (Historique) -- Modification de Title et Historique."
@@ -1289,18 +1289,18 @@ Lines:
 ./tests/admin_views/tests.py:7688:40   - Unknown word (usermessenger)                                                         -- reverse("admin:admin_views_usermessenger_changelist"),
 ./tests/admin_views/tests.py:771:44    - Unknown word (Karnataka)               -- objects.create(name="Karnataka")
 ./tests/admin_views/tests.py:785:63    - Unknown word (vodcast)                 -- reverse("admin:admin_views_vodcast_changelist"), {})
-./tests/admin_views/tests.py:8034:63   - Unknown word (emptymodelvisible)                                                     -- reverse("admin:admin_views_emptymodelvisible_add"))
-./tests/admin_views/tests.py:8040:63   - Unknown word (emptymodelhidden)                                                      -- reverse("admin:admin_views_emptymodelhidden_add"))
-./tests/admin_views/tests.py:8046:63   - Unknown word (emptymodelmixin)                                                       -- reverse("admin:admin_views_emptymodelmixin_add"))
-./tests/admin_views/tests.py:8086:79   - Unknown word (Rossi)                                                                 -- name="Mario", surname="Rossi")
-./tests/admin_views/tests.py:8088:54   - Unknown word (Bianchi)                                                              -- "Antonio", surname="Bianchi"
-./tests/admin_views/tests.py:8116:40   - Unknown word (parentwithdependentchildren)                                          -- reverse("admin:admin_views_parentwithdependentchildren_add"), post_data
+./tests/admin_views/tests.py:8049:63   - Unknown word (emptymodelvisible)                                                     -- reverse("admin:admin_views_emptymodelvisible_add"))
+./tests/admin_views/tests.py:8055:63   - Unknown word (emptymodelhidden)                                                      -- reverse("admin:admin_views_emptymodelhidden_add"))
+./tests/admin_views/tests.py:8061:63   - Unknown word (emptymodelmixin)                                                       -- reverse("admin:admin_views_emptymodelmixin_add"))
+./tests/admin_views/tests.py:8101:79   - Unknown word (Rossi)                                                                 -- name="Mario", surname="Rossi")
+./tests/admin_views/tests.py:8103:54   - Unknown word (Bianchi)                                                              -- "Antonio", surname="Bianchi"
 ./tests/admin_views/tests.py:811:53    - Unknown word (chapterxtra)             -- reverse("admin:admin_views_chapterxtra1_changelist")
-./tests/admin_views/tests.py:8143:9    - Unknown word (pwdc)                                                                 -- pwdc = ParentWithDependentChildren
-./tests/admin_views/tests.py:8336:40   - Unknown word (explicitlyprovidedpk)                                                 -- reverse("admin:admin_views_explicitlyprovidedpk_add"), post_data
-./tests/admin_views/tests.py:8350:40   - Unknown word (implicitlygeneratedpk)                                                -- reverse("admin:admin_views_implicitlygeneratedpk_add"), post_data
-./tests/admin_views/tests.py:8367:7    - Unknown word (Anonynous)                                                            -- * Anonynous/non-staff users are
-./tests/admin_views/tests.py:8418:14   - Unknown word (unkown)                                                               -- def test_unkown_url_without_trailing
+./tests/admin_views/tests.py:8131:40   - Unknown word (parentwithdependentchildren)                                          -- reverse("admin:admin_views_parentwithdependentchildren_add"), post_data
+./tests/admin_views/tests.py:8158:9    - Unknown word (pwdc)                                                                 -- pwdc = ParentWithDependentChildren
+./tests/admin_views/tests.py:8351:40   - Unknown word (explicitlyprovidedpk)                                                 -- reverse("admin:admin_views_explicitlyprovidedpk_add"), post_data
+./tests/admin_views/tests.py:8365:40   - Unknown word (implicitlygeneratedpk)                                                -- reverse("admin:admin_views_implicitlygeneratedpk_add"), post_data
+./tests/admin_views/tests.py:8382:7    - Unknown word (Anonynous)                                                            -- * Anonynous/non-staff users are
+./tests/admin_views/tests.py:8433:14   - Unknown word (unkown)                                                               -- def test_unkown_url_without_trailing
 ./tests/admin_views/tests.py:868:54    - Unknown word (notarealfield)           -- get(changelist_url, {"notarealfield": "5"})
 ./tests/admin_views/tests.py:989:47    - Unknown word (Choisir)                 -- assertNotContains(response, "Choisir une heure")
 ./tests/admin_views/tests.py:989:59    - Unknown word (heure)                   -- response, "Choisir une heure")
@@ -1855,9 +1855,9 @@ Lines:
 ./tests/gis_tests/geoapp/tests.py:702:19    - Unknown word (Forney)      -- name="Forney",
 ./tests/gis_tests/geoapp/tests.py:707:9     - Unknown word (forney)      -- forney_houston = GEOSGeometry
 ./tests/gis_tests/geoapp/tests.py:93:9      - Unknown word (nullstate)  -- nullstate = State(name="NullState
-./tests/gis_tests/geogapp/tests.py:152:13    - Unknown word (hzip)       -- hzip = Zipcode.objects.get
-./tests/gis_tests/geogapp/tests.py:163:28    - Unknown word (geolib)     -- # the database and geolib) include 5439084, 5
-./tests/gis_tests/geogapp/tests.py:81:19     - Unknown word (Bexar)      -- names = ["Bexar", "Galveston", "Harris
+./tests/gis_tests/geogapp/tests.py:101:19    - Unknown word (Bexar)      -- names = ["Bexar", "Galveston", "Harris
+./tests/gis_tests/geogapp/tests.py:172:13    - Unknown word (hzip)       -- hzip = Zipcode.objects.get
+./tests/gis_tests/geogapp/tests.py:183:28    - Unknown word (geolib)     -- # the database and geolib) include 5439084, 5
 ./tests/gis_tests/geos_tests/test_geos.py:1037:14   - Unknown word (threed)     -- def test_threed(self):
 ./tests/gis_tests/geos_tests/test_geos.py:1258:24   - Unknown word (nosrid)     -- def test_transform_nosrid(self):
 ./tests/gis_tests/geos_tests/test_geos.py:1301:9    - Unknown word (tgeoms)     -- tgeoms = get_geoms(self.geometries
@@ -2365,10 +2365,10 @@ Lines:
 ./tests/postgres_tests/array_default_migrations/0002_integerarraymodel_field_2.py:12:25     - Unknown word (integerarraydefaultmodel) -- model_name="integerarraydefaultmodel",
 ./tests/postgres_tests/migrations/0001_setup_extensions.py:41:31     - Unknown word (ossp)       -- CreateExtension("uuid-ossp"),
 ./tests/postgres_tests/migrations/0002_create_test_models.py:458:19    - Unknown word (bigints)    -- ("bigints", BigIntegerRangeField
-./tests/postgres_tests/test_aggregates.py:542:22    - Unknown word (hotelreservation) -- "hotelreservation__requirements",
-./tests/postgres_tests/test_aggregates.py:571:27    - Unknown word (stattestmodel)    -- ArrayAgg("stattestmodel__int1", ordering="-stattestmo
-./tests/postgres_tests/test_aggregates.py:865:19    - Unknown word (avgx)             -- def test_regr_avgx_general(self):
-./tests/postgres_tests/test_aggregates.py:869:19    - Unknown word (avgy)             -- def test_regr_avgy_general(self):
+./tests/postgres_tests/test_aggregates.py:330:33    - Unknown word (stattestmodel) -- array=ArrayAgg("stattestmodel__int1", filter=Q(stattestmode
+./tests/postgres_tests/test_aggregates.py:585:22    - Unknown word (hotelreservation) -- "hotelreservation__requirements",
+./tests/postgres_tests/test_aggregates.py:908:19    - Unknown word (avgx)             -- def test_regr_avgx_general(self):
+./tests/postgres_tests/test_aggregates.py:912:19    - Unknown word (avgy)             -- def test_regr_avgy_general(self):
 ./tests/postgres_tests/test_array.py:1068:32   - Unknown word (defg)                    -- field.clean("abc,c,defg")
 ./tests/postgres_tests/test_array.py:1285:14   - Unknown word (splitarraywidget)        -- def test_splitarraywidget_value_omitted_from_data
 ./tests/postgres_tests/test_array.py:923:38    - Unknown word (chartextarrayindexmodel) -- name = "postgres_tests_chartextarrayindexmodel"

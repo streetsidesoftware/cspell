@@ -3,7 +3,7 @@ Repository: MicrosoftDocs/PowerShell-Docs
 Url: "https://github.com/MicrosoftDocs/PowerShell-Docs.git"
 Args: ["--config=../../../cspell-power-shell-docs.config.yaml","**"]
 Lines:
- CSpell: Files checked: 2871, Issues found: 5995 in 1303 files
+ CSpell: Files checked: 2872, Issues found: 6007 in 1308 files
  exit code: 1
 ./LICENSE:139:15    - Unknown word (sublicensable)   -- non-sublicensable, non-exclusive, irrevocable
 ./LICENSE:205:34    - Unknown word (waivable)        -- under any voluntary or waivable statutory or compulsory
@@ -230,7 +230,7 @@ Lines:
 ./reference/5.1/Microsoft.PowerShell.Core/Enter-PSSession.md:706:4     - Unknown word (etsn)       -- - `etsn`
 ./reference/5.1/Microsoft.PowerShell.Core/Exit-PSSession.md:105:4     - Unknown word (exsn)       -- - `exsn`
 ./reference/5.1/Microsoft.PowerShell.Core/Get-Command.md:115:24    - Unknown word (Childitem)  -- Get-Command -Name Get-Childitem -Args Cert: -Syntax
-./reference/5.1/Microsoft.PowerShell.Core/Get-Help.md:277:25    - Unknown word (SQLSERVER)  -- Help Get-Item -Path SQLSERVER:\DataCollection
+./reference/5.1/Microsoft.PowerShell.Core/Get-Help.md:295:25    - Unknown word (SQLSERVER)  -- Help Get-Item -Path SQLSERVER:\DataCollection
 ./reference/5.1/Microsoft.PowerShell.Core/Get-Module.md:203:63    - Unknown word (Moduletype) -- Table -Property Name, Moduletype, Path -Groupby Name
 ./reference/5.1/Microsoft.PowerShell.Core/Get-Module.md:203:81    - Unknown word (Groupby)    -- Name, Moduletype, Path -Groupby Name
 ./reference/5.1/Microsoft.PowerShell.Core/Get-Module.md:331:36    - Unknown word (RSDGF)      -- CimSession -ComputerName RSDGF03
@@ -430,6 +430,7 @@ Lines:
 ./reference/7.2/Microsoft.PowerShell.Core/About/about_Numeric_Literals.md:323:22    - Unknown word (behaviours)  -- retain original behaviours when the value is in
 ./reference/7.2/Microsoft.PowerShell.Core/About/about_Operators.md:306:46    - Unknown word (subshell)   -- it asynchronously in subshell as a job.
 ./reference/7.2/Microsoft.PowerShell.Core/About/about_Pipeline_Chain_Operators.md:175:25    - Unknown word (behaviour)  -- of PowerShell 7, the behaviour of these syntaxes has
+./reference/7.2/Microsoft.PowerShell.Core/About/about_PowerShell_Config.md:406:10    - Unknown word (Transcripting) -- - `EnableTranscripting` - When this setting
 ./reference/7.2/Microsoft.PowerShell.Core/About/about_Preference_Variables.md:1022:4    - Unknown word (cscript)    -- - `cscript.exe`
 ./reference/7.2/Microsoft.PowerShell.Core/About/about_Preference_Variables.md:1023:4    - Unknown word (wscript)    -- - `wscript.exe`
 ./reference/7.2/Microsoft.PowerShell.Core/About/about_Preference_Variables.md:1043:8    - Unknown word (testexe)    -- PS > testexe -echoargs $a 'a" "b
@@ -731,6 +732,7 @@ Lines:
 ./reference/docs-conceptual/dev-cross-plat/resolving-dependency-conflicts.md:718:2     - Unknown word (netcore)    -- $netcore = "netcoreapp3.1"
 ./reference/docs-conceptual/dev-cross-plat/resolving-dependency-conflicts.md:791:93    - Unknown word (qualifed)   -- with the same fully qualifed
 ./reference/docs-conceptual/dev-cross-plat/resolving-dependency-conflicts.md:881:9     - Unknown word (Strahl)     -- - [Rick Strahl: When does a .NET assembly
+./reference/docs-conceptual/dev-cross-plat/security/preventing-script-injection.md:48:36     - Unknown word (pwnd)       -- rocessById "$pid; Write-Host 'pwnd!'"
 ./reference/docs-conceptual/dev-cross-plat/vscode/How-To-Replicate-the-ISE-Experience-In-VSCode.md:118:27    - Unknown word (corbob)     -- Thanks to the work of [@corbob][04], the PowerShell
 ./reference/docs-conceptual/dev-cross-plat/vscode/understanding-file-encoding.md:202:54    - Unknown word (encodingtest) -- Path]::GetTempPath()) 'encodingtest.ps1'
 ./reference/docs-conceptual/dev-cross-plat/vscode/understanding-file-encoding.md:233:4     - Unknown word (rkeithhill's) -- - @rkeithhill's [blog post about dealing
@@ -1084,6 +1086,7 @@ Lines:
 ./reference/docs-conceptual/install/install-alpine.md:46:5      - Unknown word (lttng)      -- lttng-ust
 ./reference/docs-conceptual/install/install-raspbian.md:43:11     - Unknown word (libunwind)  -- # Install libunwind8 and libssl1.0 - Regex
 ./reference/docs-conceptual/install/install-rhel.md:32:20     - Unknown word (assumeyes)  -- sudo yum install --assumeyes powershell
+./reference/docs-conceptual/install/microsoft-update-faq.yml:43:37     - Unknown word (lifecycles) -- information about support lifecycles, see
 ./reference/docs-conceptual/lang-spec/chapter-02.md:1316:36   - Unknown word (concatentaion) -- chapter-07.md#772-string-concatentaion
 ./reference/docs-conceptual/lang-spec/chapter-02.md:366:2     - Unknown word (végösszeg)  -- $végösszeg # Hungarian
 ./reference/docs-conceptual/lang-spec/chapter-02.md:367:2     - Unknown word (итог)       -- $итог # Russian
@@ -1256,8 +1259,8 @@ Lines:
 ./reference/docs-conceptual/toc.yml:337:63    - Unknown word (powershelltabcollection) -- ise/object-model/the-powershelltabcollection-object.md
 ./reference/docs-conceptual/toc.yml:339:63    - Unknown word (powershelltab)           -- ise/object-model/the-powershelltab-object.md
 ./reference/docs-conceptual/toc.yml:374:56    - Unknown word (informationstream)       -- powershell/wmf/whats-new/informationstream-overview.md
-./reference/docs-conceptual/toc.yml:448:41    - Unknown word (cmdline)                 -- dev-cross-plat/create-cmdline-predictor.md
-./reference/docs-conceptual/toc.yml:508:38    - Unknown word (hackathons)              -- community/contributing/hackathons.md
+./reference/docs-conceptual/toc.yml:452:41    - Unknown word (cmdline)                 -- dev-cross-plat/create-cmdline-predictor.md
+./reference/docs-conceptual/toc.yml:512:38    - Unknown word (hackathons)              -- community/contributing/hackathons.md
 ./reference/docs-conceptual/whats-new/What-s-New-in-PowerShell-72.md:129:11    - Unknown word (awakecoding) -- host by awakecoding · Pull Request #146
 ./reference/docs-conceptual/whats-new/What-s-New-in-PowerShell-73.md:100:12    - Unknown word (eugenesmlv) -- (Thanks @eugenesmlv!)
 ./reference/docs-conceptual/whats-new/What-s-New-in-PowerShell-73.md:106:85    - Unknown word (fflaten)    -- 4][17804]) (Thanks @fflaten!)
@@ -1328,8 +1331,8 @@ Lines:
 ./reference/media/index/powershell_128.svg:5:21      - Unknown word (SVGID)      -- <linearGradient id="SVGID_1_" gradientUnits="userSpaceO
 ./reference/media/shared/check-mark-button_2705.svg:3:12      - Unknown word (svgg)       -- <g id="svgg">
 ./reference/module/index.md:14:36     - Unknown word (windowsserver) -- FilterColumn1: powershell-7.2,windowsserver2022-ps
-./reference/module/index.md:15:21     - Unknown word (azps)          -- quickFilterColumn2: azps-9.3.0,win-mdop2-ps
-./reference/module/index.md:15:36     - Unknown word (mdop)          -- FilterColumn2: azps-9.3.0,win-mdop2-ps
+./reference/module/index.md:15:21     - Unknown word (azps)          -- quickFilterColumn2: azps-9.4.0,win-mdop2-ps
+./reference/module/index.md:15:36     - Unknown word (mdop)          -- FilterColumn2: azps-9.4.0,win-mdop2-ps
 ./reference/module/index.md:16:21     - Unknown word (sqlserver)     -- quickFilterColumn3: sqlserver-ps,systemcenter-ps-
 ./reference/module/index.md:16:34     - Unknown word (systemcenter)  -- ckFilterColumn3: sqlserver-ps,systemcenter-ps-2022
 ./tests/Pester/Update-Help.Tests.ps1:24:34     - Unknown word (pshome)     -- HelpInstallationPath = "$pshome\en-US"
