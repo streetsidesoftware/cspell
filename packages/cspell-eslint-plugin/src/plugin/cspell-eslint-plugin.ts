@@ -32,6 +32,7 @@ const meta: Rule.RuleMetaData = {
     },
     messages,
     hasSuggestions: true,
+    fixable: 'code',
     schema: [schema],
 };
 
@@ -41,8 +42,13 @@ function log(...args: Parameters<typeof console.log>) {
     console.log(...args);
 }
 
+function nullFix(): null {
+    return null;
+}
+
 function create(context: Rule.RuleContext): Rule.RuleListener {
     const options = normalizeOptions(context.options[0], context.getCwd());
+    const autoFix = options.autoFix;
     isDebugMode = options.debugMode || false;
     isDebugMode && logContext(context);
 
@@ -73,7 +79,16 @@ function create(context: Rule.RuleContext): Rule.RuleListener {
         }
 
         log('Suggestions: %o', issue.suggestions);
-        const suggestions: Rule.ReportDescriptorOptions['suggest'] = issue.suggestions?.map(createSug);
+
+        const fixable = issue.suggestionsEx?.filter((sug) => !!sug.isPreferred);
+        const canFix = fixable?.length === 1;
+        const preferredSuggestion = autoFix && canFix && fixable[0];
+        const fix = preferredSuggestion
+            ? fixFactory(preferredSuggestion.wordAdjustedToMatchCase || preferredSuggestion.word)
+            : nullFix;
+        const suggestions: Rule.ReportDescriptorOptions['suggest'] = issue.suggestionsEx?.map((sug) =>
+            createSug(sug.wordAdjustedToMatchCase || sug.word)
+        );
         const suggest = suggestions;
 
         const des: Rule.ReportDescriptor = {
@@ -81,6 +96,7 @@ function create(context: Rule.RuleContext): Rule.RuleListener {
             data,
             loc,
             suggest,
+            fix,
         };
         context.report(des);
     }
