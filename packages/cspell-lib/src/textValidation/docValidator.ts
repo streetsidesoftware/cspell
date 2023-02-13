@@ -31,10 +31,10 @@ import type { TextValidator } from './lineValidatorFactory';
 import { textValidatorFactory } from './lineValidatorFactory';
 import type { SimpleRange } from './parsedText';
 import { createMappedTextSegmenter } from './parsedText';
+import { settingsToValidateOptions } from './settingsToValidateOptions';
 import { calcTextInclusionRanges } from './textValidator';
+import type { ValidateTextOptions } from './ValidateTextOptions';
 import type { MappedTextValidationResult, ValidationOptions } from './ValidationTypes';
-import type { ValidateTextOptions } from './validator';
-import { settingsToValidateOptions } from './validator';
 
 export interface DocumentValidatorOptions extends ValidateTextOptions {
     /**
