@@ -25,7 +25,6 @@ import { toError } from '../util/errors';
 import { AutoCache } from '../util/simpleCache';
 import type { MatchRange } from '../util/TextRange';
 import { createTimer } from '../util/timer';
-import { clean } from '../util/util';
 import { defaultMaxDuplicateProblems, defaultMaxNumberOfProblems } from './defaultConstants';
 import { determineTextDocumentSettings } from './determineTextDocumentSettings';
 import type { TextValidator } from './lineValidatorFactory';
@@ -64,13 +63,19 @@ export class DocumentValidator {
     private _preparations: Preparations | undefined;
     private _preparationTime = -1;
     private _suggestions = new AutoCache((text: string) => this.genSuggestions(text), 1000);
+    readonly options: DocumentValidatorOptions;
 
     /**
      * @param doc - Document to validate
      * @param config - configuration to use (not finalized).
      */
-    constructor(doc: TextDocument, readonly options: DocumentValidatorOptions, readonly settings: CSpellUserSettings) {
+    constructor(doc: TextDocument, options: DocumentValidatorOptions, readonly settings: CSpellUserSettings) {
         this._document = doc;
+        this.options = { ...options };
+        const numSuggestions = this.options.numSuggestions ?? settings.numSuggestions;
+        if (numSuggestions !== undefined) {
+            this.options.numSuggestions = numSuggestions;
+        }
         // console.error(`DocumentValidator: ${doc.uri}`);
     }
 
@@ -402,14 +407,14 @@ export class DocumentValidator {
         assert(this._preparations, ERROR_NOT_PREPARED);
         const settings = this._preparations.docSettings;
         const dict = this._preparations.dictionary;
-        const sugOptions = clean({
+        const sugOptions = {
             compoundMethod: 0,
             numSuggestions: this.options.numSuggestions,
             includeTies: false,
             ignoreCase: !(settings.caseSensitive ?? false),
             timeout: settings.suggestionsTimeout,
             numChanges: settings.suggestionNumChanges,
-        });
+        };
         return dict
             .suggest(text, sugOptions)
             .map(({ word, isPreferred }) => (isPreferred ? { word, isPreferred } : { word }));
