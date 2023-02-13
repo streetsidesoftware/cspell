@@ -7,9 +7,9 @@ import type { SpellingDictionaryOptions } from '../SpellingDictionary';
 import { createCollection, createSpellingDictionary, getDictionaryInternal } from '../SpellingDictionary';
 import { FreqCounter } from '../util/FreqCounter';
 import * as Text from '../util/text';
+import { settingsToValidateOptions } from './settingsToValidateOptions';
 import { _testMethods, calcTextInclusionRanges, validateText } from './textValidator';
 import type { ValidationOptions } from './ValidationTypes';
-import { settingsToValidateOptions } from './settingsToValidateOptions';
 
 function sToV(settings: CSpellUserSettings) {
     return settingsToValidateOptions(finalizeSettings(settings));
