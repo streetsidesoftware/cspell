@@ -1,9 +1,10 @@
-import { createSuggestDictionary, SpellingDictionary, SpellingDictionaryCollection } from 'cspell-dictionary';
+import type { SpellingDictionary, SpellingDictionaryCollection } from 'cspell-dictionary';
 import {
     createCollection,
     createForbiddenWordsDictionary,
     createIgnoreWordsDictionary,
     createSpellingDictionary,
+    createSuggestDictionary,
 } from 'cspell-dictionary';
 
 import type { CSpellSettingsInternal, DictionaryDefinitionInternal } from '../Models/CSpellSettingsInternalDef';
