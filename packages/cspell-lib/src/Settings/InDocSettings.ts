@@ -128,13 +128,16 @@ export function getInDocumentSettings(text: string): CSpellUserSettings {
 
     const dictSettings = dict
         ? { dictionaries: dictionaries.concat(dictName), dictionaryDefinitions: dictionaryDefinitions.concat(dict) }
-        : { dictionaries, dictionaryDefinitions };
+        : clean({
+              dictionaries: dictionaries.length ? dictionaries : undefined,
+              dictionaryDefinitions: dictionaryDefinitions.length ? dictionaryDefinitions : undefined,
+          });
 
     const settings = {
         ...rest,
         ...dictSettings,
     };
-    console.log('InDocSettings: %o', settings);
+    // console.log('InDocSettings: %o', settings);
     return settings;
 }
 
