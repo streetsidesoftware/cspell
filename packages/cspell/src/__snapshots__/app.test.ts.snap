@@ -399,6 +399,16 @@ exports[`Validate cli > app 'current_file' Expect Error: undefined 3`] = `
 1/1 [90m./src/app.test.ts[39m"
 `;
 
+exports[`Validate cli > app 'inline suggest' Expect Error: [Function CheckFailed] 1`] = `[]`;
+
+exports[`Validate cli > app 'inline suggest' Expect Error: [Function CheckFailed] 2`] = `
+"log	./fixtures/features/inline-suggest/README.md:7:3 - Unknown word (bluelist) Suggestions: [blueList*, bluefish, bluesiest, blueish, bluest]
+log	./fixtures/features/inline-suggest/README.md:8:3 - Unknown word (blulist) Suggestions: [blueList*, bullish, bluish, bluest, blueish]
+error	CSpell: Files checked: 1, Issues found: 2 in 1 files"
+`;
+
+exports[`Validate cli > app 'inline suggest' Expect Error: [Function CheckFailed] 3`] = `""`;
+
 exports[`Validate cli > app 'issue-2998 --language-id' Expect Error: undefined 1`] = `[]`;
 
 exports[`Validate cli > app 'issue-2998 --language-id' Expect Error: undefined 2`] = `
@@ -769,6 +779,7 @@ exports[`Validate cli > app 'trace café' Expect Error: undefined 2`] = `
 "Word F Dictionary           Dictionary Location           
 café - [flagWords]*         From Settings \`flagWords\`
 café - [ignoreWords]*       From Settings \`ignoreWords\`
+café - [suggestWords]*      From Settings \`suggestWords\`
 café - [words]*             From Settings \`words\`
 café - ada                  ../../node_modules/.pnpm...ell/dict-ada/dict/ada.txt
 café - aws*                 ../../node_modules/.pnpm...spell/dict-aws/aws.txt.gz
@@ -826,6 +837,7 @@ exports[`Validate cli > app 'trace hello' Expect Error: undefined 2`] = `
 "Word  F Dictionary           Dictionary Location           
 hello - [flagWords]*         From Settings \`flagWords\`
 hello - [ignoreWords]*       From Settings \`ignoreWords\`
+hello - [suggestWords]*      From Settings \`suggestWords\`
 hello - [words]*             From Settings \`words\`
 hello - ada                  ../../node_modules/.pnpm...ll/dict-ada/dict/ada.txt
 hello - aws*                 ../../node_modules/.pnpm...pell/dict-aws/aws.txt.gz
@@ -883,6 +895,7 @@ exports[`Validate cli > app 'trace hello' Expect Error: undefined 4`] = `
 "Word  F Dictionary           Dictionary Location           
 hello - [flagWords]*         From Settings \`flagWords\`
 hello - [ignoreWords]*       From Settings \`ignoreWords\`
+hello - [suggestWords]*      From Settings \`suggestWords\`
 hello - [words]*             From Settings \`words\`
 hello - ada                  ../../node_modules/.pnpm...ll/dict-ada/dict/ada.txt
 hello - aws*                 ../../node_modules/.pnpm...pell/dict-aws/aws.txt.gz
@@ -968,6 +981,7 @@ exports[`Validate cli > app 'trace missing dictionary' Expect Error: [Function C
 "Word  F Dictionary           Dictionary Location           
 hello - [flagWords]*         From Settings \`flagWords\`
 hello - [ignoreWords]*       From Settings \`ignoreWords\`
+hello - [suggestWords]*      From Settings \`suggestWords\`
 hello - [words]*             From Settings \`words\`
 hello - ada                  ../../node_modules/.pnpm...ll/dict-ada/dict/ada.txt
 hello - aws*                 ../../node_modules/.pnpm...pell/dict-aws/aws.txt.gz
@@ -1027,6 +1041,7 @@ exports[`Validate cli > app 'trace not-in-any-dictionary' Expect Error: [Functio
 "Word                  F Dictionary           Dictionary Location           
 not-in-any-dictionary - [flagWords]*         From Settings \`flagWords\`
 not-in-any-dictionary - [ignoreWords]*       From Settings \`ignoreWords\`
+not-in-any-dictionary - [suggestWords]*      From Settings \`suggestWords\`
 not-in-any-dictionary - [words]*             From Settings \`words\`
 not-in-any-dictionary - ada                  ../../node_modul...ada/dict/ada.txt
 not-in-any-dictionary - aws*                 ../../node_modul...t-aws/aws.txt.gz
@@ -1952,6 +1967,7 @@ exports[`Validate cli > app success 'trace café' run with [ 'trace', 'café' ]
 "Word F Dictionary           Dictionary Location           
 café - [flagWords]*         From Settings \`flagWords\`
 café - [ignoreWords]*       From Settings \`ignoreWords\`
+café - [suggestWords]*      From Settings \`suggestWords\`
 café - [words]*             From Settings \`words\`
 café - ada                  ../../node_modules/.pnpm...ell/dict-ada/dict/ada.txt
 café - aws*                 ../../node_modules/.pnpm...spell/dict-aws/aws.txt.gz
@@ -2009,6 +2025,7 @@ exports[`Validate cli > app success 'trace hello' run with [ 'trace', '--locale=
 "Word  F Dictionary           Dictionary Location           
 hello - [flagWords]*         From Settings \`flagWords\`
 hello - [ignoreWords]*       From Settings \`ignoreWords\`
+hello - [suggestWords]*      From Settings \`suggestWords\`
 hello - [words]*             From Settings \`words\`
 hello - ada                  ../../node_modules/.pnpm...ll/dict-ada/dict/ada.txt
 hello - aws*                 ../../node_modules/.pnpm...pell/dict-aws/aws.txt.gz
@@ -2066,6 +2083,7 @@ exports[`Validate cli > app success 'trace hello' run with [ 'trace', 'hello' ] 
 "Word  F Dictionary           Dictionary Location           
 hello - [flagWords]*         From Settings \`flagWords\`
 hello - [ignoreWords]*       From Settings \`ignoreWords\`
+hello - [suggestWords]*      From Settings \`suggestWords\`
 hello - [words]*             From Settings \`words\`
 hello - ada                  ../../node_modules/.pnpm...ll/dict-ada/dict/ada.txt
 hello - aws*                 ../../node_modules/.pnpm...pell/dict-aws/aws.txt.gz
