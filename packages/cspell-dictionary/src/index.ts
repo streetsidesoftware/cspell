@@ -21,4 +21,5 @@ export {
     createInlineSpellingDictionary,
     createSpellingDictionary,
     createSpellingDictionaryFromTrieFile,
+    createSuggestDictionary,
 } from './SpellingDictionary';
