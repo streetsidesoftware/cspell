@@ -31,4 +31,4 @@
 
 #### Defined in
 
-[CSpellReporter.ts:174](https://github.com/streetsidesoftware/cspell/blob/9347337/packages/cspell-types/src/CSpellReporter.ts#L174)
+[CSpellReporter.ts:174](https://github.com/streetsidesoftware/cspell/blob/bc3346a/packages/cspell-types/src/CSpellReporter.ts#L174)
