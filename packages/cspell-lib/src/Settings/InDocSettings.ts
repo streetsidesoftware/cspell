@@ -1,5 +1,5 @@
 import { opAppend, opFilter, opMap, pipeSync } from '@cspell/cspell-pipe/sync';
-import type { CSpellUserSettings } from '@cspell/cspell-types';
+import type { CSpellUserSettings, DictionaryDefinitionInline } from '@cspell/cspell-types';
 import type { Sequence } from 'gensequence';
 import { genSequence } from 'gensequence';
 
@@ -98,7 +98,7 @@ export interface DirectiveIssue {
 }
 
 export function getInDocumentSettings(text: string): CSpellUserSettings {
-    const settings = getPossibleInDocSettings(text)
+    const collectedSettings = getPossibleInDocSettings(text)
         .concatMap((a) => parseSettingMatch(a))
         .reduce(
             (s, setting) => {
@@ -106,7 +106,35 @@ export function getInDocumentSettings(text: string): CSpellUserSettings {
             },
             { id: 'in-doc-settings' } as CSpellUserSettings
         );
-    // console.log('InDocSettings: %o', settings);
+    const dictName = `[in-document-dict-${nonce()}]`;
+    const {
+        words,
+        flagWords,
+        ignoreWords,
+        suggestWords,
+        dictionaries = [],
+        dictionaryDefinitions = [],
+        ...rest
+    } = collectedSettings;
+    const dict: DictionaryDefinitionInline | undefined =
+        (words || flagWords || ignoreWords || suggestWords) &&
+        clean({
+            name: dictName,
+            words,
+            flagWords,
+            ignoreWords,
+            suggestWords,
+        });
+
+    const dictSettings = dict
+        ? { dictionaries: dictionaries.concat(dictName), dictionaryDefinitions: dictionaryDefinitions.concat(dict) }
+        : { dictionaries, dictionaryDefinitions };
+
+    const settings = {
+        ...rest,
+        ...dictSettings,
+    };
+    console.log('InDocSettings: %o', settings);
     return settings;
 }
 
@@ -134,6 +162,8 @@ export const regExSpellingGuardBlock =
     /(\bc?spell(?:-?checker)?::?)\s*disable(?!-line|-next)\b[\s\S]*?((?:\1\s*enable\b)|$)/gi;
 export const regExSpellingGuardNext = /\bc?spell(?:-?checker)?::?\s*disable-next\b.*\s\s?.*/gi;
 export const regExSpellingGuardLine = /^.*\bc?spell(?:-?checker)?::?\s*disable-line\b.*/gim;
+
+const emptySettings: CSpellUserSettings = Object.freeze({});
 
 const issueMessages = {
     unknownDirective: 'Unknown CSpell directive',
@@ -204,12 +234,12 @@ function parseSettingMatch(matchArray: RegExpMatchArray): CSpellUserSettings[] {
 
 function parseCompoundWords(match: string): CSpellUserSettings {
     const allowCompoundWords = /enable/i.test(match);
-    return { id: 'in-doc-allowCompoundWords', allowCompoundWords };
+    return { allowCompoundWords };
 }
 
 function parseCaseSensitive(match: string): CSpellUserSettings {
     const caseSensitive = /enable/i.test(match);
-    return { id: 'in-doc-caseSensitive', caseSensitive };
+    return { caseSensitive };
 }
 
 function parseWords(match: string): CSpellUserSettings {
@@ -218,23 +248,25 @@ function parseWords(match: string): CSpellUserSettings {
         .split(/[,\s;]+/g)
         .slice(1)
         .filter((a) => !!a);
-    return { id: 'in-doc-words', words };
+    return { words };
 }
 
 function parseLocale(match: string): CSpellUserSettings {
     const parts = match.trim().split(/[\s,]+/);
     const language = parts.slice(1).join(',');
-    return language ? { id: 'in-doc-local', language } : {};
+    return language ? { language } : emptySettings;
 }
 
 function parseIgnoreWords(match: string): CSpellUserSettings {
     const wordsSetting = parseWords(match);
-    return clean({ id: 'in-doc-ignore', ignoreWords: wordsSetting.words });
+    const ignoreWords = wordsSetting.words;
+    return ignoreWords && ignoreWords.length ? { ignoreWords } : emptySettings;
 }
 
 function parseFlagWords(match: string): CSpellUserSettings {
     const wordsSetting = parseWords(match);
-    return clean({ id: 'in-doc-forbid', flagWords: wordsSetting.words });
+    const flagWords = wordsSetting.words;
+    return flagWords && flagWords.length ? { flagWords } : emptySettings;
 }
 
 function parseRegEx(match: string): string[] {
@@ -250,17 +282,17 @@ function parseRegEx(match: string): string[] {
 
 function parseIgnoreRegExp(match: string): CSpellUserSettings {
     const ignoreRegExpList = parseRegEx(match);
-    return { id: 'in-doc-ignoreRegExp', ignoreRegExpList };
+    return { ignoreRegExpList };
 }
 
 function parseIncludeRegExp(match: string): CSpellUserSettings {
     const includeRegExpList = parseRegEx(match);
-    return { id: 'in-doc-includeRegExp', includeRegExpList };
+    return { includeRegExpList };
 }
 
 function parseDictionaries(match: string): CSpellUserSettings {
     const dictionaries = match.split(/[,\s]+/g).slice(1);
-    return { id: 'in-doc-dictionaries', dictionaries };
+    return { dictionaries };
 }
 
 function getPossibleInDocSettings(text: string): Sequence<RegExpExecArray> {
@@ -290,6 +322,16 @@ export function getIgnoreWordsFromDocument(text: string): string[] {
 export function getIgnoreRegExpFromDocument(text: string): (string | RegExp)[] {
     const { ignoreRegExpList = [] } = getInDocumentSettings(text);
     return ignoreRegExpList;
+}
+
+function nonce(length = 6): string {
+    const dict = '01234567890';
+    const digits: string[] = [];
+    for (let i = 0; i < length; ++i) {
+        digits[i] = dict[Math.floor(Math.random() * 10)];
+    }
+
+    return digits.join('');
 }
 
 /**

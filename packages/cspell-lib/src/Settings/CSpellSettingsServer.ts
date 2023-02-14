@@ -142,8 +142,6 @@ function merge(
     if (doesLeftHaveRightAncestor(_left, _right)) {
         return _left;
     }
-    const leftId = _left.id || _left.languageId || '';
-    const rightId = _right.id || _right.languageId || '';
 
     const includeRegExpList = takeRightOtherwiseLeft(_left.includeRegExpList, _right.includeRegExpList);
 
@@ -155,8 +153,8 @@ function merge(
         ..._right,
         ...optionals,
         version,
-        id: [leftId, rightId].join('|'),
-        name: [_left.name || '', _right.name || ''].join('|'),
+        id: undefined,
+        name: undefined,
         words: mergeWordsCached(_left.words, _right.words),
         userWords: mergeWordsCached(_left.userWords, _right.userWords),
         flagWords: mergeWordsCached(_left.flagWords, _right.flagWords),
@@ -319,10 +317,8 @@ export function checkFilenameMatchesGlob(filename: string, globs: Glob | Glob[])
 }
 
 function mergeSources(left: CSpellSettingsWSTO, right: CSpellSettingsWSTO): Source {
-    const { source: a = { name: 'left' } } = left;
-    const { source: b = { name: 'right' } } = right;
     return {
-        name: [left.name || a.name, right.name || b.name].join('|'),
+        name: 'merged',
         sources: [left as CSpellSettingsWithSourceTrace, right as CSpellSettingsWithSourceTrace],
     };
 }
