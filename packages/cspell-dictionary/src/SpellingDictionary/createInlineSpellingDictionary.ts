@@ -1,3 +1,4 @@
+import { createAutoResolveWeakCache } from '../util/AutoResolve';
 import { isDefined } from '../util/util';
 import { createSpellingDictionary } from './createSpellingDictionary';
 import { createFlagWordsDictionary } from './FlagWordsDictionary';
@@ -6,18 +7,22 @@ import type { DictionaryDefinitionInline, SpellingDictionary } from './SpellingD
 import { createCollection } from './SpellingDictionaryCollection';
 import { createSuggestDictionary } from './SuggestDictionary';
 
+const cache = createAutoResolveWeakCache<DictionaryDefinitionInline, SpellingDictionary>();
+
 export function createInlineSpellingDictionary(
     inlineDict: DictionaryDefinitionInline,
     source: string
 ): SpellingDictionary {
-    const { words, flagWords, ignoreWords, suggestWords, name } = inlineDict;
+    return cache.get(inlineDict, () => {
+        const { words, flagWords, ignoreWords, suggestWords, name } = inlineDict;
 
-    const dictSources = [
-        words && createSpellingDictionary(words, name + '-words', source, inlineDict),
-        flagWords && createFlagWordsDictionary(flagWords, name + '-flag-words', source),
-        ignoreWords && createIgnoreWordsDictionary(ignoreWords, name + '-ignore-words', source),
-        suggestWords && createSuggestDictionary(suggestWords, name + '-suggest', source),
-    ].filter(isDefined);
+        const dictSources = [
+            words && createSpellingDictionary(words, name + '-words', source, inlineDict),
+            flagWords && createFlagWordsDictionary(flagWords, name + '-flag-words', source),
+            ignoreWords && createIgnoreWordsDictionary(ignoreWords, name + '-ignore-words', source),
+            suggestWords && createSuggestDictionary(suggestWords, name + '-suggest', source),
+        ].filter(isDefined);
 
-    return createCollection(dictSources, name);
+        return createCollection(dictSources, name);
+    });
 }

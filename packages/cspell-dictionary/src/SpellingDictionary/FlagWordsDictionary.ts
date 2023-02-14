@@ -2,6 +2,7 @@ import { opMap, pipe } from '@cspell/cspell-pipe/sync';
 import type { CompoundWordsMethod, SuggestionResult, Trie } from 'cspell-trie-lib';
 import { buildTrieFast, parseDictionaryLines } from 'cspell-trie-lib';
 
+import { createAutoResolveWeakCache } from '../util/AutoResolve';
 import * as Defaults from './defaults';
 import type {
     FindResult,
@@ -130,6 +131,8 @@ class FlagWordsDictionary implements SpellingDictionary {
     }
 }
 
+const createCache = createAutoResolveWeakCache<readonly string[], SpellingDictionary>();
+
 /**
  * Create a dictionary where all words are to be forbidden.
  * @param wordList - list of words
@@ -143,19 +146,21 @@ export function createFlagWordsDictionary(
     name: string,
     source: string
 ): SpellingDictionary {
-    const testSpecialCharacters = /[~*+]/;
+    return createCache.get(wordList, () => {
+        const testSpecialCharacters = /[~*+]/;
 
-    const { t: specialWords, f: typoWords } = bisect(
-        parseDictionaryLines(wordList, { stripCaseAndAccents: false }),
-        (line) => testSpecialCharacters.test(line)
-    );
+        const { t: specialWords, f: typoWords } = bisect(
+            parseDictionaryLines(wordList, { stripCaseAndAccents: false }),
+            (line) => testSpecialCharacters.test(line)
+        );
 
-    const trieDict = specialWords.size ? buildTrieDict(specialWords, name, source) : undefined;
-    const typosDict = createTyposDictionary(typoWords, name, source);
+        const trieDict = specialWords.size ? buildTrieDict(specialWords, name, source) : undefined;
+        const typosDict = createTyposDictionary(typoWords, name, source);
 
-    if (!trieDict) return typosDict;
+        if (!trieDict) return typosDict;
 
-    return new FlagWordsDictionary(name, source, typosDict, trieDict);
+        return new FlagWordsDictionary(name, source, typosDict, trieDict);
+    });
 }
 
 const regExpCleanIgnore = /^(!!)+/;
