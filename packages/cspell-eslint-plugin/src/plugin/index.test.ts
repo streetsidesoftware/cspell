@@ -124,6 +124,18 @@ ruleTester.run('cspell', Rule.rules.spellchecker, {
             ['Unknown word: "uuug"', 'Unknown word: "grrr"', 'Unknown word: "GRRRRRR"', 'Unknown word: "UUUUUG"'],
             { ignoreImports: false, customWordListFile: resolveFix('with-errors/creepyData.dict.txt') }
         ),
+        readInvalid(
+            'with-errors/auto-fix.ts',
+            [
+                'Forbidden word: "bluelist"',
+                'Forbidden word: "café"',
+                'Forbidden word: "Bluelist"',
+                'Forbidden word: "bluelist"',
+                'Forbidden word: "bluelist"',
+                'Forbidden word: "bluelist"',
+            ],
+            { ignoreImports: false, customWordListFile: resolveFix('with-errors/creepyData.dict.txt') }
+        ),
     ],
 });
 
