@@ -24,6 +24,12 @@ This plugin is still in active development as part of the CSpell suite of tools 
 ````ts
 interface Options {
   /**
+   * Automatically fix common mistakes.
+   * This is only possible if a single preferred suggestion is available.
+   * @default false
+   */
+  autoFix: boolean;
+  /**
    * Number of spelling suggestions to make.
    * @default 8
    */
@@ -99,10 +105,32 @@ Example:
 {
   "plugins": ["@cspell"],
   "rules": {
-    "@cspell/spellchecker": ["warn", { "checkComments": false }]
+    "@cspell/spellchecker": ["warn", { "checkComments": false, "autoFix": true }]
   }
 }
 ```
+
+## `autoFix`
+
+When enabled, `autoFix` corrects any spelling issues that have a single "preferred" suggestion. It attempts to match
+case and style, but it cannot guarantee correctness of code.
+
+### Preferred Suggestions
+
+CSpell offers the ability to flag words as incorrect and to provide suggestions.
+
+**`cspell.config.yaml`**
+
+```yaml
+words:
+  - allowlist
+flagWords:
+  - blacklist->allowlist
+```
+
+With this configuration, `blacklist` is flagged as forbidden and `allowlist` is the "preferred" suggestion. When `autoFix` is enabled, all instances of `blacklist` will be replaced with `allowlist`.
+
+CSpell will match case, but not word stems. `blacklist` and `Blacklist` will get replaced, but not `blacklists`.
 
 ## In Combination with CSpell
 
@@ -121,3 +149,9 @@ Example spell checked with ESLint CSpell Plugin:
 
 Example spell checked with just `cspell`:
 <img width="744" alt="image" src="https://user-images.githubusercontent.com/3740137/216295368-024c1065-2432-4d10-b204-7eb0589695e6.png">
+
+## CSpell for Enterprise
+
+<!--- @@inject: ../../static/tidelift.md --->
+
+<!--- @@inject: ../../static/footer.md --->
