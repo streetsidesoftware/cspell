@@ -13,8 +13,8 @@ import { GlobMatcher } from 'cspell-glob';
 import * as path from 'path';
 
 import type { CSpellSettingsInternal, CSpellSettingsInternalFinalized } from '../Models/CSpellSettingsInternalDef';
-import { createCSpellSettingsInternal as csi, isCSpellSettingsInternal } from '../Models/CSpellSettingsInternalDef';
-import { AutoResolveWeakCache } from '../util/AutoResolve';
+import { cleanCSpellSettingsInternal as csi, isCSpellSettingsInternal } from '../Models/CSpellSettingsInternalDef';
+import { autoResolveWeak, AutoResolveWeakCache } from '../util/AutoResolve';
 import type { OptionalOrUndefined } from '../util/types';
 import * as util from '../util/util';
 import { configSettingsFileVersion0_1, ENV_CSPELL_GLOB_ROOT } from './constants';
@@ -65,6 +65,13 @@ function mergeList<T>(left: T[] | undefined, right: T[] | undefined): T[] | unde
 const emptyWords: string[] = [];
 Object.freeze(emptyWords);
 
+const cachedMerges = new WeakMap<string[], WeakMap<string[], string[]>>();
+
+function _mergeWordsCached(left: string[], right: string[]): string[] {
+    const map = autoResolveWeak(cachedMerges, left, () => new WeakMap<string[], string[]>());
+    return autoResolveWeak(map, right, () => left.concat(right));
+}
+
 /**
  * Merges two lists of words.
  * Order is preserved.
@@ -80,7 +87,7 @@ function mergeWordsCached(left: string[] | undefined, right: string[] | undefine
     if (!left.length) return !right || right.length ? right : emptyWords;
     if (!right.length) return !left || left.length ? left : emptyWords;
 
-    return left.concat(right);
+    return _mergeWordsCached(left, right);
 }
 
 function mergeObjects(left: undefined, right: undefined): undefined;
@@ -154,6 +161,7 @@ function merge(
         userWords: mergeWordsCached(_left.userWords, _right.userWords),
         flagWords: mergeWordsCached(_left.flagWords, _right.flagWords),
         ignoreWords: mergeWordsCached(_left.ignoreWords, _right.ignoreWords),
+        suggestWords: mergeWordsCached(_left.suggestWords, _right.suggestWords),
         enabledLanguageIds: replaceIfNotEmpty(_left.enabledLanguageIds, _right.enabledLanguageIds),
         enableFiletypes: mergeList(_left.enableFiletypes, _right.enableFiletypes),
         ignoreRegExpList: mergeListUnique(_left.ignoreRegExpList, _right.ignoreRegExpList),

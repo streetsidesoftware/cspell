@@ -48,6 +48,7 @@ export const ConfigFields: CSpellUserSettingsFields = {
     spellCheckDelayMs: 'spellCheckDelayMs',
     suggestionNumChanges: 'suggestionNumChanges',
     suggestionsTimeout: 'suggestionsTimeout',
+    suggestWords: 'suggestWords',
     useGitignore: 'useGitignore',
     usePnP: 'usePnP',
     userWords: 'userWords',

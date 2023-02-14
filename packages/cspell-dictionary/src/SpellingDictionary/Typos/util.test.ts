@@ -2,13 +2,16 @@ import { appendToDef, createTyposDef, extractAllSuggestions, extractIgnoreValues
 
 describe('typos/util', () => {
     test.each`
-        def                     | entry              | expected
-        ${{}}                   | ${''}              | ${{}}
-        ${{ a: 'b' }}           | ${'a'}             | ${{ a: false }}
-        ${{}}                   | ${['a']}           | ${{ a: false }}
-        ${{}}                   | ${['a', 'b']}      | ${{ a: 'b' }}
-        ${{}}                   | ${['a', 'b', 'c']} | ${{ a: ['b', 'c'] }}
-        ${{ a: 'aa', b: 'bb' }} | ${{ a: 'aaa' }}    | ${{ a: 'aaa', b: 'bb' }}
+        def                     | entry                         | expected
+        ${{}}                   | ${''}                         | ${{}}
+        ${{ a: 'b' }}           | ${'a'}                        | ${{ a: 'b' }}
+        ${{}}                   | ${['a']}                      | ${{ a: false }}
+        ${{}}                   | ${['a', 'b']}                 | ${{ a: 'b' }}
+        ${{}}                   | ${['a', 'b', 'b', 'b', 'b']}  | ${{ a: 'b' }}
+        ${{}}                   | ${['a', 'b', 'c']}            | ${{ a: ['b', 'c'] }}
+        ${{ a: 'aa', b: 'bb' }} | ${{ a: 'aaa' }}               | ${{ a: ['aa', 'aaa'], b: 'bb' }}
+        ${{ a: 'aa', b: 'bb' }} | ${{ a: ['ab', 'aaa', 'ab'] }} | ${{ a: ['aa', 'ab', 'aaa'], b: 'bb' }}
+        ${{ a: 'aa', b: 'bb' }} | ${{ a: [] }}                  | ${{ a: 'aa', b: 'bb' }}
     `('appendToDef', ({ def, entry, expected }) => {
         expect(appendToDef(def, entry)).toEqual(expected);
     });

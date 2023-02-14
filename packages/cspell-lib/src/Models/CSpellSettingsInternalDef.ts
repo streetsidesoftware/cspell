@@ -56,6 +56,14 @@ export type DictionaryDefinitionInternalWithSource = DictionaryDefinitionInterna
     readonly __source: string;
 };
 
+export function cleanCSpellSettingsInternal(
+    parts: OptionalOrUndefined<Partial<CSpellSettingsInternal>> = {}
+): CSpellSettingsInternal {
+    const csi = clean(parts as CSpellSettingsInternal);
+    Object.assign(csi, { [SymbolCSpellSettingsInternal]: true });
+    return csi;
+}
+
 export function createCSpellSettingsInternal(
     parts: OptionalOrUndefined<Partial<CSpellSettingsInternal>> = {}
 ): CSpellSettingsInternal {
@@ -79,5 +87,5 @@ export function isDictionaryDefinitionInlineInternal(
 ): def is DictionaryDefinitionInlineInternal {
     if (def.path) return false;
     const defInline = def as DictionaryDefinitionInline;
-    return !!(defInline.words || defInline.flagWords || defInline.ignoreWords);
+    return !!(defInline.words || defInline.flagWords || defInline.ignoreWords || defInline.suggestWords);
 }

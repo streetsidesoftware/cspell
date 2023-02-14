@@ -4,6 +4,7 @@ import {
     createForbiddenWordsDictionary,
     createIgnoreWordsDictionary,
     createSpellingDictionary,
+    createSuggestDictionary,
 } from 'cspell-dictionary';
 
 import type { CSpellSettingsInternal, DictionaryDefinitionInternal } from '../Models/CSpellSettingsInternalDef';
@@ -39,7 +40,13 @@ function _getDictionaryInternal(
     settings: CSpellSettingsInternal,
     spellDictionaries: SpellingDictionary[]
 ): SpellingDictionaryCollection {
-    const { words = emptyWords, userWords = emptyWords, flagWords = emptyWords, ignoreWords = emptyWords } = settings;
+    const {
+        words = emptyWords,
+        userWords = emptyWords,
+        flagWords = emptyWords,
+        ignoreWords = emptyWords,
+        suggestWords = emptyWords,
+    } = settings;
 
     const settingsWordsDictionary = createSpellingDictionary(words, '[words]', 'From Settings `words`', {
         caseSensitive: true,
@@ -57,12 +64,18 @@ function _getDictionaryInternal(
         'From Settings `ignoreWords`'
     );
     const flagWordsDictionary = createForbiddenWordsDictionary(flagWords, '[flagWords]', 'From Settings `flagWords`');
+    const suggestWordsDictionary = createSuggestDictionary(
+        suggestWords,
+        '[suggestWords]',
+        'From Settings `suggestWords`'
+    );
     const dictionaries = [
         ...spellDictionaries,
         settingsWordsDictionary,
         settingsUserWordsDictionary,
         ignoreWordsDictionary,
         flagWordsDictionary,
+        suggestWordsDictionary,
     ].filter(isDefined);
     return createCollection(dictionaries, 'dictionary collection');
 }

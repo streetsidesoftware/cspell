@@ -68,6 +68,23 @@ export function sanitizeIntoTypoDef(dirtyDef: TyposDef | Record<string, unknown>
 }
 
 /**
+ * Parse Typos Entries
+ *
+ * Format:
+ * - `word:suggestion`
+ * - `word->suggestion`
+ * - `word: first, second, third suggestions`
+ *
+ * Note:
+ * ```plaintext
+ * yellow:blue, green
+ * ```
+ * Is the same as multiple entries with the same key and different suggestions.
+ * ```plaintext
+ * yellow:blue
+ * yellow:green
+ * ```
+ *
  * Used to process entries found in a `cspell.json` file.
  * @param entries - entries to process
  * @returns a TyposDef
