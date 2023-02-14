@@ -130,6 +130,7 @@ const settings = {
         '@cspell/dict-dotnet/cspell-ext.json',
         '@cspell/dict-elixir/cspell-ext.json',
         '@cspell/dict-en_us/cspell-ext.json',
+        '@cspell/dict-en-common-misspellings/cspell-ext.json',
         '@cspell/dict-en-gb/cspell-ext.json',
         '@cspell/dict-filetypes/cspell-ext.json',
         '@cspell/dict-fonts/cspell-ext.json',

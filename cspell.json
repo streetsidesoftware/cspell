@@ -47,7 +47,7 @@
         "**/node_modules/**",
         "**/tsconfig.json",
         "/.cspell",
-        "cspell.json",
+        "cspell*.{json,yaml}",
         "integration-tests/config/config.json",
         "integration-tests/config/repositories/**",
         "integration-tests/repositories/**",
@@ -71,5 +71,11 @@
     "words": [],
     "features": {
         "weighted-suggestions": true
-    }
+    },
+    "overrides": [
+        {
+            "filename": "**/CHANGELOG.md",
+            "words": ["webm"]
+        }
+    ]
 }

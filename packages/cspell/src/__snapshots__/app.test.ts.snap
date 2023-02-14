@@ -356,6 +356,7 @@ info	    Glob: node_modules from ./cspell.json
 info	    Glob: package-lock.json from ./cspell.json
 info	    Glob: coverage/** from ./cspell.json
 info	    Glob: dist/** from ./cspell.json
+info	    Glob: CHANGELOG.md from ./cspell.json
 info	    Glob: package.json from ./cspell.json
 info	    Glob: .cspell.json from ./cspell.json
 info	    Glob: cspell.json from ./cspell.json
@@ -365,7 +366,7 @@ info
 info	Checking: ./src/app.test.ts, File type: auto, Language: default
 info	Checked: ./src/app.test.ts, File type: typescript, Language: en ... Issues: 0 0.00S
 info	Config file Used: ./cspell.json
-info	Dictionaries Used: companies, filetypes, public-licenses, softwareTerms, workspace, aws, cryptocurrencies, en_us, fullstack, node, npm, svelte, typescript
+info	Dictionaries Used: companies, filetypes, public-licenses, softwareTerms, workspace, aws, cryptocurrencies, en_us, en-common-misspellings, fullstack, node, npm, svelte, typescript
 error	 0.00ms
 error	CSpell: Files checked: 1, Issues found: 0 in 0 files"
 `;
@@ -432,7 +433,7 @@ info
 info	Checking: ./fixtures/issue-2998/fix-words.txt, File type: fix, Language: default
 info	Checked: ./fixtures/issue-2998/fix-words.txt, File type: fix, Language: en ... Issues: 0 0.00S
 info	Config file Used: ./fixtures/issue-2998/cspell.json
-info	Dictionaries Used: companies, filetypes, public-licenses, softwareTerms, aws, cryptocurrencies, en_us, fixture
+info	Dictionaries Used: companies, filetypes, public-licenses, softwareTerms, aws, cryptocurrencies, en_us, en-common-misspellings, fixture
 error	 0.00ms
 error	CSpell: Files checked: 1, Issues found: 0 in 0 files"
 `;
@@ -796,7 +797,10 @@ café - docker               ../../node_modules/.pnpm...ocker/docker-words.txt.
 café - dotnet               ../../node_modules/.pnpm...ct-dotnet/dict/dotnet.txt
 café - elixir               ../../node_modules/.pnpm...ct-elixir/dict/elixir.txt
 café * en_us*               ../../node_modules/.pnpm.../dict-en_us/en_US.trie.gz
+café - en-common-misspelli* en-common-misspellings-suggest
 café * en-gb                ../../node_modules/.pnpm.../dict-en-gb/en_GB.trie.gz
+café - en-gb-common-misspe  en-gb-common-misspellings-suggest
+café - en-us-common-misspe  en-us-common-misspellings-suggest
 café - filetypes*           ../../node_modules/.pnpm...iletypes/filetypes.txt.gz
 café - fonts                ../../node_modules/.pnpm...l/dict-fonts/fonts.txt.gz
 café - fullstack            ../../node_modules/.pnpm...lstack/dict/fullstack.txt
@@ -854,7 +858,10 @@ hello - docker               ../../node_modules/.pnpm...cker/docker-words.txt.gz
 hello - dotnet               ../../node_modules/.pnpm...t-dotnet/dict/dotnet.txt
 hello - elixir               ../../node_modules/.pnpm...t-elixir/dict/elixir.txt
 hello * en_us*               ../../node_modules/.pnpm...dict-en_us/en_US.trie.gz
+hello - en-common-misspelli* en-common-misspellings-suggest
 hello * en-gb                ../../node_modules/.pnpm...dict-en-gb/en_GB.trie.gz
+hello - en-gb-common-misspe  en-gb-common-misspellings-suggest
+hello - en-us-common-misspe  en-us-common-misspellings-suggest
 hello - filetypes*           ../../node_modules/.pnpm...letypes/filetypes.txt.gz
 hello - fonts                ../../node_modules/.pnpm.../dict-fonts/fonts.txt.gz
 hello - fullstack            ../../node_modules/.pnpm...stack/dict/fullstack.txt
@@ -912,7 +919,10 @@ hello - docker               ../../node_modules/.pnpm...cker/docker-words.txt.gz
 hello - dotnet               ../../node_modules/.pnpm...t-dotnet/dict/dotnet.txt
 hello - elixir               ../../node_modules/.pnpm...t-elixir/dict/elixir.txt
 hello * en_us                ../../node_modules/.pnpm...dict-en_us/en_US.trie.gz
+hello - en-common-misspelli  en-common-misspellings-suggest
 hello * en-gb*               ../../node_modules/.pnpm...dict-en-gb/en_GB.trie.gz
+hello - en-gb-common-misspe* en-gb-common-misspellings-suggest
+hello - en-us-common-misspe  en-us-common-misspellings-suggest
 hello - filetypes*           ../../node_modules/.pnpm...letypes/filetypes.txt.gz
 hello - fonts                ../../node_modules/.pnpm.../dict-fonts/fonts.txt.gz
 hello - fullstack            ../../node_modules/.pnpm...stack/dict/fullstack.txt
@@ -998,7 +1008,10 @@ hello - docker               ../../node_modules/.pnpm...cker/docker-words.txt.gz
 hello - dotnet               ../../node_modules/.pnpm...t-dotnet/dict/dotnet.txt
 hello - elixir               ../../node_modules/.pnpm...t-elixir/dict/elixir.txt
 hello * en_us*               ../../node_modules/.pnpm...dict-en_us/en_US.trie.gz
+hello - en-common-misspelli* en-common-misspellings-suggest
 hello * en-gb                ../../node_modules/.pnpm...dict-en-gb/en_GB.trie.gz
+hello - en-gb-common-misspe  en-gb-common-misspellings-suggest
+hello - en-us-common-misspe  en-us-common-misspellings-suggest
 hello - filetypes*           ../../node_modules/.pnpm...letypes/filetypes.txt.gz
 hello - fonts                ../../node_modules/.pnpm.../dict-fonts/fonts.txt.gz
 hello - fullstack            ../../node_modules/.pnpm...stack/dict/fullstack.txt
@@ -1058,7 +1071,10 @@ not-in-any-dictionary - docker               ../../node_modul...ker-words.txt.gz
 not-in-any-dictionary - dotnet               ../../node_modul.../dict/dotnet.txt
 not-in-any-dictionary - elixir               ../../node_modul.../dict/elixir.txt
 not-in-any-dictionary - en_us*               ../../node_modul...us/en_US.trie.gz
+not-in-any-dictionary - en-common-misspelli* en-common-misspellings-suggest
 not-in-any-dictionary - en-gb                ../../node_modul...gb/en_GB.trie.gz
+not-in-any-dictionary - en-gb-common-misspe  en-gb-common-misspellings-suggest
+not-in-any-dictionary - en-us-common-misspe  en-us-common-misspellings-suggest
 not-in-any-dictionary - filetypes*           ../../node_modul...filetypes.txt.gz
 not-in-any-dictionary - fonts                ../../node_modul...nts/fonts.txt.gz
 not-in-any-dictionary - fullstack            ../../node_modul...ct/fullstack.txt
@@ -1984,7 +2000,10 @@ café - docker               ../../node_modules/.pnpm...ocker/docker-words.txt.
 café - dotnet               ../../node_modules/.pnpm...ct-dotnet/dict/dotnet.txt
 café - elixir               ../../node_modules/.pnpm...ct-elixir/dict/elixir.txt
 café * en_us*               ../../node_modules/.pnpm.../dict-en_us/en_US.trie.gz
+café - en-common-misspelli* en-common-misspellings-suggest
 café * en-gb                ../../node_modules/.pnpm.../dict-en-gb/en_GB.trie.gz
+café - en-gb-common-misspe  en-gb-common-misspellings-suggest
+café - en-us-common-misspe  en-us-common-misspellings-suggest
 café - filetypes*           ../../node_modules/.pnpm...iletypes/filetypes.txt.gz
 café - fonts                ../../node_modules/.pnpm...l/dict-fonts/fonts.txt.gz
 café - fullstack            ../../node_modules/.pnpm...lstack/dict/fullstack.txt
@@ -2042,7 +2061,10 @@ hello - docker               ../../node_modules/.pnpm...cker/docker-words.txt.gz
 hello - dotnet               ../../node_modules/.pnpm...t-dotnet/dict/dotnet.txt
 hello - elixir               ../../node_modules/.pnpm...t-elixir/dict/elixir.txt
 hello * en_us                ../../node_modules/.pnpm...dict-en_us/en_US.trie.gz
+hello - en-common-misspelli  en-common-misspellings-suggest
 hello * en-gb*               ../../node_modules/.pnpm...dict-en-gb/en_GB.trie.gz
+hello - en-gb-common-misspe* en-gb-common-misspellings-suggest
+hello - en-us-common-misspe  en-us-common-misspellings-suggest
 hello - filetypes*           ../../node_modules/.pnpm...letypes/filetypes.txt.gz
 hello - fonts                ../../node_modules/.pnpm.../dict-fonts/fonts.txt.gz
 hello - fullstack            ../../node_modules/.pnpm...stack/dict/fullstack.txt
@@ -2100,7 +2122,10 @@ hello - docker               ../../node_modules/.pnpm...cker/docker-words.txt.gz
 hello - dotnet               ../../node_modules/.pnpm...t-dotnet/dict/dotnet.txt
 hello - elixir               ../../node_modules/.pnpm...t-elixir/dict/elixir.txt
 hello * en_us*               ../../node_modules/.pnpm...dict-en_us/en_US.trie.gz
+hello - en-common-misspelli* en-common-misspellings-suggest
 hello * en-gb                ../../node_modules/.pnpm...dict-en-gb/en_GB.trie.gz
+hello - en-gb-common-misspe  en-gb-common-misspellings-suggest
+hello - en-us-common-misspe  en-us-common-misspellings-suggest
 hello - filetypes*           ../../node_modules/.pnpm...letypes/filetypes.txt.gz
 hello - fonts                ../../node_modules/.pnpm.../dict-fonts/fonts.txt.gz
 hello - fullstack            ../../node_modules/.pnpm...stack/dict/fullstack.txt
