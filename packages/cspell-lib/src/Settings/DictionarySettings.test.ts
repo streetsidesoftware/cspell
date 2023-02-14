@@ -3,6 +3,7 @@ import type { DictionaryDefinition, DictionaryDefinitionLegacy } from '@cspell/c
 import * as fsp from 'fs/promises';
 import * as os from 'os';
 import * as path from 'path';
+import { isDictionaryDefinitionInlineInternal } from '../Models/CSpellSettingsInternalDef';
 
 import { getDefaultBundledSettings } from './DefaultSettings';
 import { createDictionaryReferenceCollection as createRefCol } from './DictionaryReferenceCollection';
@@ -58,7 +59,10 @@ describe('Validate DictionarySettings', () => {
         const defaultDicts = defaultSettings.dictionaryDefinitions!;
         const dictIds = createRefCol(defaultDicts.map((def) => def.name));
         const mapDefs = DictSettings.filterDictDefsToLoad(dictIds, defaultSettings.dictionaryDefinitions!);
-        const access = mapDefs.map((def) => def.path!).map((path) => fsp.access(path));
+        const access = mapDefs
+            .filter((def) => !isDictionaryDefinitionInlineInternal(def))
+            .map((def) => def.path!)
+            .map((path) => fsp.access(path));
         expect(mapDefs.length).toBeGreaterThan(0);
         return Promise.all(access);
     });
@@ -68,7 +72,8 @@ describe('Validate DictionarySettings', () => {
         expect(dictionaryDefinitions?.length).toBeGreaterThan(1);
         dictionaryDefinitions?.forEach((def) => {
             expect(DictSettings.isDictionaryDefinitionWithSource(def)).toBe(true);
-            expect(path.isAbsolute(def.path || '')).toBe(true);
+            const isInline = isDictionaryDefinitionInlineInternal(def);
+            expect(isInline || path.isAbsolute(def.path || '')).toBe(true);
         });
     });
 
