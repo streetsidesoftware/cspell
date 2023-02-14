@@ -395,6 +395,13 @@
           "$ref": "#/definitions/ReplaceMap",
           "description": "Replacement pairs."
         },
+        "suggestWords": {
+          "description": "A list of suggested replacements for words. Suggested words provide a way to make preferred suggestions on word replacements. To hint at a preferred change, but not to require it.\n\nFormat of `suggestWords`\n- Single suggestion (possible auto fix)     - `word: suggestion`     - `word->suggestion`\n- Multiple suggestions (not auto fixable)    - `word: first, second, third`    - `word->first, second, third`",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
         "type": {
           "$ref": "#/definitions/DictionaryFileTypes",
           "default": "S",
@@ -451,6 +458,13 @@
           "$ref": "#/definitions/ReplaceMap",
           "description": "Replacement pairs."
         },
+        "suggestWords": {
+          "description": "A list of suggested replacements for words. Suggested words provide a way to make preferred suggestions on word replacements. To hint at a preferred change, but not to require it.\n\nFormat of `suggestWords`\n- Single suggestion (possible auto fix)     - `word: suggestion`     - `word->suggestion`\n- Multiple suggestions (not auto fixable)    - `word: first, second, third`    - `word->first, second, third`",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
         "type": {
           "$ref": "#/definitions/DictionaryFileTypes",
           "default": "S",
@@ -506,6 +520,13 @@
         "repMap": {
           "$ref": "#/definitions/ReplaceMap",
           "description": "Replacement pairs."
+        },
+        "suggestWords": {
+          "description": "A list of suggested replacements for words. Suggested words provide a way to make preferred suggestions on word replacements. To hint at a preferred change, but not to require it.\n\nFormat of `suggestWords`\n- Single suggestion (possible auto fix)     - `word: suggestion`     - `word->suggestion`\n- Multiple suggestions (not auto fixable)    - `word: first, second, third`    - `word->first, second, third`",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
         },
         "type": {
           "$ref": "#/definitions/DictionaryFileTypes",
@@ -953,6 +974,13 @@
           },
           "type": "array"
         },
+        "suggestWords": {
+          "description": "A list of suggested replacements for words. Suggested words provide a way to make preferred suggestions on word replacements. To hint at a preferred change, but not to require it.\n\nFormat of `suggestWords`\n- Single suggestion (possible auto fix)     - `word: suggestion`     - `word->suggestion`\n- Multiple suggestions (not auto fixable)    - `word: first, second, third`    - `word->first, second, third`",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
         "words": {
           "description": "List of words to be considered correct.",
           "items": {
@@ -1127,6 +1155,13 @@
             ".pnp.cjs"
           ],
           "description": "The PnP files to search for. Note: `.mjs` files are not currently supported.",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "suggestWords": {
+          "description": "A list of suggested replacements for words. Suggested words provide a way to make preferred suggestions on word replacements. To hint at a preferred change, but not to require it.\n\nFormat of `suggestWords`\n- Single suggestion (possible auto fix)     - `word: suggestion`     - `word->suggestion`\n- Multiple suggestions (not auto fixable)    - `word: first, second, third`    - `word->first, second, third`",
           "items": {
             "type": "string"
           },
@@ -1648,6 +1683,13 @@
       "deprecated": true,
       "description": "Delay in ms after a document has changed before checking it for spelling errors.",
       "type": "number"
+    },
+    "suggestWords": {
+      "description": "A list of suggested replacements for words. Suggested words provide a way to make preferred suggestions on word replacements. To hint at a preferred change, but not to require it.\n\nFormat of `suggestWords`\n- Single suggestion (possible auto fix)     - `word: suggestion`     - `word->suggestion`\n- Multiple suggestions (not auto fixable)    - `word: first, second, third`    - `word->first, second, third`",
+      "items": {
+        "type": "string"
+      },
+      "type": "array"
     },
     "suggestionNumChanges": {
       "default": 3,

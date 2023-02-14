@@ -29,4 +29,19 @@ export interface InlineDictionary {
      * also in the `flagWords`.
      */
     ignoreWords?: string[];
+
+    /**
+     * A list of suggested replacements for words.
+     * Suggested words provide a way to make preferred suggestions on word replacements.
+     * To hint at a preferred change, but not to require it.
+     *
+     * Format of `suggestWords`
+     * - Single suggestion (possible auto fix)
+     *     - `word: suggestion`
+     *     - `word->suggestion`
+     * - Multiple suggestions (not auto fixable)
+     *    - `word: first, second, third`
+     *    - `word->first, second, third`
+     */
+    suggestWords?: string[];
 }
