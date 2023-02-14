@@ -29,7 +29,7 @@
 
 #### Defined in
 
-[CSpellReporter.ts:89](https://github.com/streetsidesoftware/cspell/blob/9347337/packages/cspell-types/src/CSpellReporter.ts#L89)
+[CSpellReporter.ts:89](https://github.com/streetsidesoftware/cspell/blob/bc3346a/packages/cspell-types/src/CSpellReporter.ts#L89)
 
 ___
 
@@ -39,7 +39,7 @@ ___
 
 #### Defined in
 
-[CSpellReporter.ts:86](https://github.com/streetsidesoftware/cspell/blob/9347337/packages/cspell-types/src/CSpellReporter.ts#L86)
+[CSpellReporter.ts:86](https://github.com/streetsidesoftware/cspell/blob/bc3346a/packages/cspell-types/src/CSpellReporter.ts#L86)
 
 ___
 
@@ -53,7 +53,7 @@ ___
 
 #### Defined in
 
-[CSpellReporter.ts:80](https://github.com/streetsidesoftware/cspell/blob/9347337/packages/cspell-types/src/CSpellReporter.ts#L80)
+[CSpellReporter.ts:80](https://github.com/streetsidesoftware/cspell/blob/bc3346a/packages/cspell-types/src/CSpellReporter.ts#L80)
 
 ___
 
@@ -67,7 +67,7 @@ ___
 
 #### Defined in
 
-[CSpellReporter.ts:79](https://github.com/streetsidesoftware/cspell/blob/9347337/packages/cspell-types/src/CSpellReporter.ts#L79)
+[CSpellReporter.ts:79](https://github.com/streetsidesoftware/cspell/blob/bc3346a/packages/cspell-types/src/CSpellReporter.ts#L79)
 
 ___
 
@@ -81,7 +81,7 @@ ___
 
 #### Defined in
 
-[CSpellReporter.ts:81](https://github.com/streetsidesoftware/cspell/blob/9347337/packages/cspell-types/src/CSpellReporter.ts#L81)
+[CSpellReporter.ts:81](https://github.com/streetsidesoftware/cspell/blob/bc3346a/packages/cspell-types/src/CSpellReporter.ts#L81)
 
 ___
 
@@ -91,7 +91,7 @@ ___
 
 #### Defined in
 
-[CSpellReporter.ts:88](https://github.com/streetsidesoftware/cspell/blob/9347337/packages/cspell-types/src/CSpellReporter.ts#L88)
+[CSpellReporter.ts:88](https://github.com/streetsidesoftware/cspell/blob/bc3346a/packages/cspell-types/src/CSpellReporter.ts#L88)
 
 ___
 
@@ -101,7 +101,7 @@ ___
 
 #### Defined in
 
-[CSpellReporter.ts:87](https://github.com/streetsidesoftware/cspell/blob/9347337/packages/cspell-types/src/CSpellReporter.ts#L87)
+[CSpellReporter.ts:87](https://github.com/streetsidesoftware/cspell/blob/bc3346a/packages/cspell-types/src/CSpellReporter.ts#L87)
 
 ___
 
@@ -115,4 +115,4 @@ ___
 
 #### Defined in
 
-[CSpellReporter.ts:85](https://github.com/streetsidesoftware/cspell/blob/9347337/packages/cspell-types/src/CSpellReporter.ts#L85)
+[CSpellReporter.ts:85](https://github.com/streetsidesoftware/cspell/blob/bc3346a/packages/cspell-types/src/CSpellReporter.ts#L85)

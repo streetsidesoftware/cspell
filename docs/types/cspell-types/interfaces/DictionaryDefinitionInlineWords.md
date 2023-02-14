@@ -20,6 +20,7 @@
 - [name](DictionaryDefinitionInlineWords.md#name)
 - [noSuggest](DictionaryDefinitionInlineWords.md#nosuggest)
 - [repMap](DictionaryDefinitionInlineWords.md#repmap)
+- [suggestWords](DictionaryDefinitionInlineWords.md#suggestwords)
 - [type](DictionaryDefinitionInlineWords.md#type)
 - [useCompounds](DictionaryDefinitionInlineWords.md#usecompounds)
 - [words](DictionaryDefinitionInlineWords.md#words)
@@ -38,7 +39,7 @@ DictionaryDefinitionInlineBase.description
 
 #### Defined in
 
-[DictionaryDefinition.ts:27](https://github.com/streetsidesoftware/cspell/blob/9347337/packages/cspell-types/src/DictionaryDefinition.ts#L27)
+[DictionaryDefinition.ts:27](https://github.com/streetsidesoftware/cspell/blob/bc3346a/packages/cspell-types/src/DictionaryDefinition.ts#L27)
 
 ___
 
@@ -68,7 +69,7 @@ DictionaryDefinitionInlineBase.flagWords
 
 #### Defined in
 
-[InlineDictionary.ts:25](https://github.com/streetsidesoftware/cspell/blob/9347337/packages/cspell-types/src/InlineDictionary.ts#L25)
+[InlineDictionary.ts:25](https://github.com/streetsidesoftware/cspell/blob/bc3346a/packages/cspell-types/src/InlineDictionary.ts#L25)
 
 ___
 
@@ -85,7 +86,7 @@ DictionaryDefinitionInlineBase.ignoreWords
 
 #### Defined in
 
-[InlineDictionary.ts:31](https://github.com/streetsidesoftware/cspell/blob/9347337/packages/cspell-types/src/InlineDictionary.ts#L31)
+[InlineDictionary.ts:31](https://github.com/streetsidesoftware/cspell/blob/bc3346a/packages/cspell-types/src/InlineDictionary.ts#L31)
 
 ___
 
@@ -108,7 +109,7 @@ DictionaryDefinitionInlineBase.name
 
 #### Defined in
 
-[DictionaryDefinition.ts:25](https://github.com/streetsidesoftware/cspell/blob/9347337/packages/cspell-types/src/DictionaryDefinition.ts#L25)
+[DictionaryDefinition.ts:25](https://github.com/streetsidesoftware/cspell/blob/bc3346a/packages/cspell-types/src/DictionaryDefinition.ts#L25)
 
 ___
 
@@ -130,7 +131,7 @@ DictionaryDefinitionInlineBase.noSuggest
 
 #### Defined in
 
-[DictionaryDefinition.ts:41](https://github.com/streetsidesoftware/cspell/blob/9347337/packages/cspell-types/src/DictionaryDefinition.ts#L41)
+[DictionaryDefinition.ts:41](https://github.com/streetsidesoftware/cspell/blob/bc3346a/packages/cspell-types/src/DictionaryDefinition.ts#L41)
 
 ___
 
@@ -146,7 +147,33 @@ DictionaryDefinitionInlineBase.repMap
 
 #### Defined in
 
-[DictionaryDefinition.ts:29](https://github.com/streetsidesoftware/cspell/blob/9347337/packages/cspell-types/src/DictionaryDefinition.ts#L29)
+[DictionaryDefinition.ts:29](https://github.com/streetsidesoftware/cspell/blob/bc3346a/packages/cspell-types/src/DictionaryDefinition.ts#L29)
+
+___
+
+### suggestWords
+
+• `Optional` **suggestWords**: `string`[]
+
+A list of suggested replacements for words.
+Suggested words provide a way to make preferred suggestions on word replacements.
+To hint at a preferred change, but not to require it.
+
+Format of `suggestWords`
+- Single suggestion (possible auto fix)
+    - `word: suggestion`
+    - `word->suggestion`
+- Multiple suggestions (not auto fixable)
+   - `word: first, second, third`
+   - `word->first, second, third`
+
+#### Inherited from
+
+DictionaryDefinitionInlineBase.suggestWords
+
+#### Defined in
+
+[InlineDictionary.ts:46](https://github.com/streetsidesoftware/cspell/blob/bc3346a/packages/cspell-types/src/InlineDictionary.ts#L46)
 
 ___
 
@@ -171,7 +198,7 @@ DictionaryDefinitionInlineBase.type
 
 #### Defined in
 
-[DictionaryDefinition.ts:51](https://github.com/streetsidesoftware/cspell/blob/9347337/packages/cspell-types/src/DictionaryDefinition.ts#L51)
+[DictionaryDefinition.ts:51](https://github.com/streetsidesoftware/cspell/blob/bc3346a/packages/cspell-types/src/DictionaryDefinition.ts#L51)
 
 ___
 
@@ -187,7 +214,7 @@ DictionaryDefinitionInlineBase.useCompounds
 
 #### Defined in
 
-[DictionaryDefinition.ts:31](https://github.com/streetsidesoftware/cspell/blob/9347337/packages/cspell-types/src/DictionaryDefinition.ts#L31)
+[DictionaryDefinition.ts:31](https://github.com/streetsidesoftware/cspell/blob/bc3346a/packages/cspell-types/src/DictionaryDefinition.ts#L31)
 
 ___
 
@@ -201,4 +228,4 @@ DictionaryDefinitionInlineBase.words
 
 #### Defined in
 
-[DictionaryDefinition.ts:97](https://github.com/streetsidesoftware/cspell/blob/9347337/packages/cspell-types/src/DictionaryDefinition.ts#L97)
+[DictionaryDefinition.ts:97](https://github.com/streetsidesoftware/cspell/blob/bc3346a/packages/cspell-types/src/DictionaryDefinition.ts#L97)
