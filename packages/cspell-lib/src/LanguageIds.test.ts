@@ -100,21 +100,23 @@ describe('Validate LanguageIds', () => {
     });
 
     test.each`
-        filename          | expected
-        ${'README.md'}    | ${false}
-        ${'run.exe'}      | ${true}
-        ${'lib.obj'}      | ${true}
-        ${'lib.dll'}      | ${true}
-        ${'lib.o'}        | ${true}
-        ${'image.PNG'}    | ${true}
-        ${'image.JPG'}    | ${true}
-        ${'image.gif'}    | ${true}
-        ${'picture.jpeg'} | ${true}
-        ${'picture.jpg'}  | ${true}
-        ${'doc.txt'}      | ${false}
-        ${'lock'}         | ${false}
-        ${'Gemfile'}      | ${false}
-        ${'.cspellcache'} | ${false}
+        filename           | expected
+        ${'README.md'}     | ${false}
+        ${'run.exe'}       | ${true}
+        ${'lib.obj'}       | ${true}
+        ${'lib.dll'}       | ${true}
+        ${'lib.o'}         | ${true}
+        ${'image.PNG'}     | ${true}
+        ${'image.JPG'}     | ${true}
+        ${'image.gif'}     | ${true}
+        ${'picture.jpeg'}  | ${true}
+        ${'picture.jpg'}   | ${true}
+        ${'doc.txt'}       | ${false}
+        ${'lock'}          | ${false}
+        ${'Gemfile'}       | ${false}
+        ${'.cspellcache'}  | ${false}
+        ${'my-video.webm'} | ${true}
+        ${'my-logo.svg'}   | ${false}
     `('isGeneratedExt $filename => $expected', ({ filename, expected }) => {
         expect(LangId.isBinaryFile(filename)).toBe(expected);
     });
