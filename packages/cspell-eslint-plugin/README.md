@@ -144,14 +144,30 @@ Differences:
 
 - The CSpell ESLint plugin uses the [AST](https://dev.to/akshay9677/what-the-heck-is-an-abstract-syntax-tree-ast--3kk5) (a way to identify the meaning of the individual parts of your code) provided by ESLint to only check literal strings, identifiers, and comments. See [Options](#options) on selecting what to check.
 
-Example spell checked with ESLint CSpell Plugin:
-<img width="749" alt="image" src="https://user-images.githubusercontent.com/3740137/216295162-38ddf6a0-3873-4e48-b3a5-65fd421dae94.png">
+Example spell checked with ESLint CSpell Plugin: <img width="749" alt="image" src="https://user-images.githubusercontent.com/3740137/216295162-38ddf6a0-3873-4e48-b3a5-65fd421dae94.png">
 
-Example spell checked with just `cspell`:
-<img width="744" alt="image" src="https://user-images.githubusercontent.com/3740137/216295368-024c1065-2432-4d10-b204-7eb0589695e6.png">
+Example spell checked with just `cspell`: <img width="744" alt="image" src="https://user-images.githubusercontent.com/3740137/216295368-024c1065-2432-4d10-b204-7eb0589695e6.png">
 
 ## CSpell for Enterprise
 
 <!--- @@inject: ../../static/tidelift.md --->
 
+Available as part of the Tidelift Subscription.
+
+The maintainers of cspell and thousands of other packages are working with Tidelift to deliver commercial support and maintenance for the open source packages you use to build your applications. Save time, reduce risk, and improve code health, while paying the maintainers of the exact packages you use. [Learn more.](https://tidelift.com/subscription/pkg/npm-cspell?utm_source=npm-cspell&utm_medium=referral&utm_campaign=enterprise&utm_term=repo)
+
+<!--- @@inject-end: ../../static/tidelift.md --->
+
 <!--- @@inject: ../../static/footer.md --->
+
+<br/>
+
+---
+
+<p align="center">
+Brought to you by <a href="https://streetsidesoftware.com" title="Street Side Software">
+<img width="16" alt="Street Side Software Logo" src="https://i.imgur.com/CyduuVY.png" /> Street Side Software
+</a>
+</p>
+
+<!--- @@inject-end: ../../static/footer.md --->
