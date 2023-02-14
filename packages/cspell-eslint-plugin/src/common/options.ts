@@ -12,6 +12,13 @@ export interface Options extends Check {
     generateSuggestions: boolean;
 
     /**
+     * Automatically fix common mistakes.
+     * This is only possible if a single preferred suggestion is available.
+     * @default false
+     */
+    autoFix: boolean;
+
+    /**
      * Output debug logs
      * @default false
      */

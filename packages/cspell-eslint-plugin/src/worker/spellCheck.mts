@@ -17,6 +17,7 @@ export interface Issue {
     word: string;
     severity: 'Forbidden' | 'Unknown' | 'Hint';
     suggestions: string[] | undefined;
+    suggestionsEx: ValidationIssue['suggestionsEx'];
 }
 
 const defaultSettings: CSpellSettings = {
@@ -175,8 +176,9 @@ export async function spellCheck(filename: string, text: string, root: Node, opt
         const start = issue.offset;
         const end = issue.offset + (issue.length || issue.text.length);
         const suggestions = issue.suggestions;
+        const suggestionsEx = issue.suggestionsEx;
         const severity = issue.isFlagged ? 'Forbidden' : 'Unknown';
-        issues.push({ word, start, end, suggestions, severity });
+        issues.push({ word, start, end, suggestions, suggestionsEx, severity });
     }
 
     type NodeTypes = Node['type'] | Comment['type'] | 'JSXText';

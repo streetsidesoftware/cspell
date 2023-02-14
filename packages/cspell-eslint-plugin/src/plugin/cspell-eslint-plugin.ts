@@ -10,6 +10,21 @@ const schema = optionsSchema as unknown as Rule.RuleMetaData['schema'];
 
 const spellCheck: SpellCheckSyncFn = createSyncFn(require.resolve('../worker/worker.mjs'), undefined, 30000);
 
+interface ExtendedSuggestion {
+    /**
+     * The suggestion.
+     */
+    word: string;
+    /**
+     * The word is preferred above others, except other "preferred" words.
+     */
+    isPreferred?: boolean;
+    /**
+     * The suggested word adjusted to match the original case.
+     */
+    wordAdjustedToMatchCase?: string;
+}
+
 interface PluginRules {
     ['spellchecker']: Rule.RuleModule;
 }
@@ -17,8 +32,7 @@ interface PluginRules {
 const messages = {
     wordUnknown: 'Unknown word: "{{word}}"',
     wordForbidden: 'Forbidden word: "{{word}}"',
-    suggestWord: '{{word}}',
-    addWordToDictionary: 'Add "{{word}}" to {{dictionary}}',
+    suggestWord: '{{word}}{{preferred}}',
 } as const;
 
 type Messages = typeof messages;
@@ -32,6 +46,7 @@ const meta: Rule.RuleMetaData = {
     },
     messages,
     hasSuggestions: true,
+    fixable: 'code',
     schema: [schema],
 };
 
@@ -41,8 +56,13 @@ function log(...args: Parameters<typeof console.log>) {
     console.log(...args);
 }
 
+function nullFix(): null {
+    return null;
+}
+
 function create(context: Rule.RuleContext): Rule.RuleListener {
     const options = normalizeOptions(context.options[0], context.getCwd());
+    const autoFix = options.autoFix;
     isDebugMode = options.debugMode || false;
     isDebugMode && logContext(context);
 
@@ -61,8 +81,10 @@ function create(context: Rule.RuleContext): Rule.RuleListener {
             return (fixer) => fixer.replaceTextRange([start, end], word);
         }
 
-        function createSug(word: string): Rule.SuggestionReportDescriptor {
-            const data = { word };
+        function createSug(sug: ExtendedSuggestion): Rule.SuggestionReportDescriptor {
+            const word = sug.wordAdjustedToMatchCase || sug.word;
+            const preferred = sug.isPreferred ? '*' : '';
+            const data = { word, preferred };
             const messageId: MessageIds = 'suggestWord';
 
             return {
@@ -73,7 +95,14 @@ function create(context: Rule.RuleContext): Rule.RuleListener {
         }
 
         log('Suggestions: %o', issue.suggestions);
-        const suggestions: Rule.ReportDescriptorOptions['suggest'] = issue.suggestions?.map(createSug);
+
+        const fixable = issue.suggestionsEx?.filter((sug) => !!sug.isPreferred);
+        const canFix = fixable?.length === 1;
+        const preferredSuggestion = autoFix && canFix && fixable[0];
+        const fix = preferredSuggestion
+            ? fixFactory(preferredSuggestion.wordAdjustedToMatchCase || preferredSuggestion.word)
+            : nullFix;
+        const suggestions: Rule.ReportDescriptorOptions['suggest'] = issue.suggestionsEx?.map((sug) => createSug(sug));
         const suggest = suggestions;
 
         const des: Rule.ReportDescriptor = {
@@ -81,6 +110,7 @@ function create(context: Rule.RuleContext): Rule.RuleListener {
             data,
             loc,
             suggest,
+            fix,
         };
         context.report(des);
     }

@@ -3,6 +3,11 @@
   "additionalProperties": false,
   "definitions": {},
   "properties": {
+    "autoFix": {
+      "default": false,
+      "description": "Automatically fix common mistakes. This is only possible if a single preferred suggestion is available.",
+      "type": "boolean"
+    },
     "checkComments": {
       "default": true,
       "description": "Spell check comments",
@@ -78,7 +83,8 @@
   },
   "required": [
     "numSuggestions",
-    "generateSuggestions"
+    "generateSuggestions",
+    "autoFix"
   ],
   "type": "object"
 }
