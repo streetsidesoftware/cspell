@@ -8,5 +8,5 @@ const bluelist = ['one', 'two', 'three'];
 export function calcBluelist(names: string[]) {
     const bluelistSet = new Set(bluelist);
 
-    return names.filter(name => bluelistSet.has(name));
+    return names.filter((name) => bluelistSet.has(name));
 }
