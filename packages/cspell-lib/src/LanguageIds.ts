@@ -255,6 +255,7 @@ export const languageExtensionDefinitions: LanguageDefinitions = [
     { id: 'jar', extensions: ['.jar'], format: 'Binary' },
     { id: 'spv', extensions: ['.spv'], format: 'Binary', description: 'SPSS Output Document' },
     { id: 'mdb', extensions: ['.mdb'], format: 'Binary', description: 'Microsoft Access DB' },
+    { id: 'webm', extensions: ['.webm'], format: 'Binary', description: 'WebM is an audiovisual media file format.' },
 ];
 
 export type LanguageId = string;
