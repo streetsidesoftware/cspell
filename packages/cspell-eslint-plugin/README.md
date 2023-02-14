@@ -126,9 +126,13 @@ words:
   - allowlist
 flagWords:
   - blacklist->allowlist
+suggestWords:
+  - colour->color
 ```
 
 With this configuration, `blacklist` is flagged as forbidden and `allowlist` is the "preferred" suggestion. When `autoFix` is enabled, all instances of `blacklist` will be replaced with `allowlist`.
+
+When spell checking, if `colour` is not in one of the dictionaries, then `color` will be offered as the preferred suggestion. `suggestWords` are used to provide preferred suggestions, but will not flag any words as incorrect.
 
 CSpell will match case, but not word stems. `blacklist` and `Blacklist` will get replaced, but not `blacklists`.
 
@@ -171,3 +175,5 @@ Brought to you by <a href="https://streetsidesoftware.com" title="Street Side So
 </p>
 
 <!--- @@inject-end: ../../static/footer.md --->
+
+<!--- cspell:ignore colour --->
