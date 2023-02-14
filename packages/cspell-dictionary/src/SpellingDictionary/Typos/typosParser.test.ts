@@ -2,17 +2,17 @@ import { createTyposDefFromEntries, parseTyposFile, processEntriesToTyposDef } f
 
 describe('TypoParser', () => {
     test.each`
-        content                | expected
-        ${''}                  | ${{}}
-        ${'apple ->orange'}    | ${{ apple: 'orange' }}
-        ${'apple ->'}          | ${{ apple: false }}
-        ${'apple : , '}        | ${{ apple: false }}
-        ${'a: b, c'}           | ${{ a: ['b', 'c'] }}
-        ${'a: b; c; d:e'}      | ${{ a: 'b', c: false, d: 'e' }}
-        ${'a->b , c'}          | ${{ a: ['b', 'c'] }}
-        ${'a->b , c'}          | ${{ a: ['b', 'c'] }}
-        ${'a->b , c\nb'}       | ${{ a: ['b', 'c'], b: false }}
-        ${'a->b , c\nb\na->b'} | ${{ a: 'b', b: false }}
+        content                          | expected
+        ${''}                            | ${{}}
+        ${'apple ->orange'}              | ${{ apple: 'orange' }}
+        ${'apple ->'}                    | ${{ apple: false }}
+        ${'apple : , '}                  | ${{ apple: false }}
+        ${'a: b, c'}                     | ${{ a: ['b', 'c'] }}
+        ${'a: b; c; d:e'}                | ${{ a: 'b', c: false, d: 'e' }}
+        ${'a->b , c'}                    | ${{ a: ['b', 'c'] }}
+        ${'a->b , c'}                    | ${{ a: ['b', 'c'] }}
+        ${'a->b , c\nb'}                 | ${{ a: ['b', 'c'], b: false }}
+        ${'a->b , c\nb\na->b\na:d\na:c'} | ${{ a: ['b', 'c', 'd'], b: false }}
     `('parseTyposFile $content', ({ content, expected }) => {
         const result = parseTyposFile(content);
         expect(result).toEqual(expected);

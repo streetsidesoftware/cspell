@@ -2,6 +2,46 @@ import { opConcatMap, opFilter, pipe } from '@cspell/cspell-pipe/sync';
 
 import type { TypoEntry, TyposDef, TyposDefKey, TyposDefValue, TypoValueWithSuggestions } from './typos';
 
+function normalizeTyposDefValue(value: TyposDefValue): TyposDefValue {
+    if (!value) return false;
+    if (typeof value === 'string') return value;
+    const unique = [...new Set(value)];
+    return unique.length > 1 ? unique : unique.length === 1 ? unique[0] : false;
+}
+
+export function mergeDefEntry(targetDef: TyposDef, key: string, value: TyposDefValue): TyposDef {
+    const curValue = targetDef[key];
+    if (!curValue) {
+        targetDef[key] = normalizeTyposDefValue(value);
+        return targetDef;
+    }
+
+    if (!value) return targetDef;
+
+    const newValue = Array.isArray(curValue) ? curValue : [curValue];
+    if (Array.isArray(value)) {
+        newValue.push(...value);
+    } else {
+        newValue.push(value);
+    }
+
+    targetDef[key] = normalizeTyposDefValue(newValue);
+    return targetDef;
+}
+
+/**
+ * Merge in place the entries `fromDef` into `targetDef`
+ * @param targetDef - the target
+ * @param fromDef - the source
+ * @returns the target
+ */
+export function mergeDef(targetDef: TyposDef, fromDef: TyposDef): TyposDef {
+    for (const key of Object.keys(fromDef)) {
+        mergeDefEntry(targetDef, key, fromDef[key]);
+    }
+    return targetDef;
+}
+
 /**
  * Append an entry to a TyposDef.
  * @param def - modified in place
@@ -11,19 +51,19 @@ import type { TypoEntry, TyposDef, TyposDefKey, TyposDefValue, TypoValueWithSugg
 export function appendToDef(def: TyposDef, entry: TypoEntry | undefined): TyposDef {
     if (!entry) return def;
     if (typeof entry === 'string') {
-        def[entry] = false;
+        if (!def[entry]) {
+            def[entry] = false;
+        }
         return def;
     }
     if (Array.isArray(entry)) {
         const [key, ...sugs] = entry.map((s) => s.trim());
         if (!key) return def;
         const s = sugs.map((s) => s.trim()).filter((s) => !!s);
-        def[key] = !s.length ? false : s.length === 1 ? s[0] : s;
-        return def;
+        return mergeDefEntry(def, key, s);
     }
 
-    Object.assign(def, entry);
-    return def;
+    return mergeDef(def, entry);
 }
 
 export function createTyposDef(entries?: Iterable<[TyposDefKey, TyposDefValue]>): TyposDef {
