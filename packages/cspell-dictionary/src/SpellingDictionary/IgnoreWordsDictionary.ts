@@ -2,6 +2,7 @@ import { opFilter, opMap, pipe } from '@cspell/cspell-pipe/sync';
 import type { CompoundWordsMethod, SuggestionResult } from 'cspell-trie-lib';
 import { parseDictionaryLines } from 'cspell-trie-lib';
 
+import { createAutoResolveWeakCache } from '../util/AutoResolve';
 import { createSpellingDictionary } from './createSpellingDictionary';
 import * as Defaults from './defaults';
 import type {
@@ -96,6 +97,8 @@ class IgnoreWordsDictionary implements SpellingDictionary {
     }
 }
 
+const createCache = createAutoResolveWeakCache<readonly string[], SpellingDictionary>();
+
 /**
  * Create a dictionary where all words are to be ignored.
  * Ignored words override forbidden words.
@@ -109,22 +112,24 @@ export function createIgnoreWordsDictionary(
     name: string,
     source: string
 ): SpellingDictionary {
-    const testSpecialCharacters = /[*+]/;
+    return createCache.get(wordList, () => {
+        const testSpecialCharacters = /[*+]/;
 
-    const words = [...parseDictionaryLines(wordList, { stripCaseAndAccents: true })].map((w) =>
-        w.normalize(NormalizeForm)
-    );
+        const words = [...parseDictionaryLines(wordList, { stripCaseAndAccents: true })].map((w) =>
+            w.normalize(NormalizeForm)
+        );
 
-    const hasSpecial = words.findIndex((word) => testSpecialCharacters.test(word)) >= 0;
+        const hasSpecial = words.findIndex((word) => testSpecialCharacters.test(word)) >= 0;
 
-    if (hasSpecial) {
-        return createSpellingDictionary(words, name, source, {
-            caseSensitive: true,
-            noSuggest: true,
-            weightMap: undefined,
-            supportNonStrictSearches: true,
-        });
-    }
+        if (hasSpecial) {
+            return createSpellingDictionary(words, name, source, {
+                caseSensitive: true,
+                noSuggest: true,
+                weightMap: undefined,
+                supportNonStrictSearches: true,
+            });
+        }
 
-    return new IgnoreWordsDictionary(name, source, words);
+        return new IgnoreWordsDictionary(name, source, words);
+    });
 }

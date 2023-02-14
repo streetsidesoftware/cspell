@@ -1,6 +1,7 @@
 import { opAppend, pipe } from '@cspell/cspell-pipe/sync';
 import type { CompoundWordsMethod, SuggestionCollector, SuggestionResult } from 'cspell-trie-lib';
 
+import { createAutoResolveWeakCache } from '../util/AutoResolve';
 import { mapperRemoveCaseAndAccents } from '../util/textMappers';
 import * as defaults from './defaults';
 import type {
@@ -169,6 +170,8 @@ class TyposDictionaryImpl implements TyposDictionary {
     }
 }
 
+const createCache = createAutoResolveWeakCache<readonly string[] | TyposDef | Iterable<TypoEntry>, TyposDictionary>();
+
 /**
  * Create a dictionary where all words are to be forbidden.
  * @param entries - list of Typos Entries
@@ -181,6 +184,8 @@ export function createTyposDictionary(
     name: string,
     source: string
 ): TyposDictionary {
-    const def = processEntriesToTyposDef(entries);
-    return new TyposDictionaryImpl(name, source, def);
+    return createCache.get(entries, () => {
+        const def = processEntriesToTyposDef(entries);
+        return new TyposDictionaryImpl(name, source, def);
+    });
 }
