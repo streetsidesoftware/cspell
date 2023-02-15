@@ -8,16 +8,18 @@ import * as path from 'path';
 import { format } from 'util';
 
 import type { CustomWordListFile, WorkerOptions } from '../common/options.js';
-import type { ASTNode, JSXText } from './ASTNode.mjs';
+import type { ASTNode, JSXText, NodeType } from './ASTNode.mjs';
 import { walkTree } from './walkTree.mjs';
+
+type Suggestions = ValidationIssue['suggestionsEx'];
 
 export interface Issue {
     start: number;
     end: number;
     word: string;
     severity: 'Forbidden' | 'Unknown' | 'Hint';
-    suggestions: string[] | undefined;
-    suggestionsEx: ValidationIssue['suggestionsEx'];
+    suggestions: Suggestions;
+    nodeType: NodeType;
 }
 
 const defaultSettings: CSpellSettings = {
@@ -115,7 +117,7 @@ export async function spellCheck(filename: string, text: string, root: Node, opt
 
         const scope: string[] = calcScope(node);
         const result = validator.checkText(range, text, scope);
-        result.forEach((issue) => reportIssue(issue));
+        result.forEach((issue) => reportIssue(issue, node.type));
     }
 
     function calcScope(_node: ASTNode): string[] {
@@ -171,14 +173,13 @@ export async function spellCheck(filename: string, text: string, root: Node, opt
         return node.parent?.type === 'MemberExpression';
     }
 
-    function reportIssue(issue: ValidationIssue): void {
+    function reportIssue(issue: ValidationIssue, nodeType: NodeType): void {
         const word = issue.text;
         const start = issue.offset;
         const end = issue.offset + (issue.length || issue.text.length);
-        const suggestions = issue.suggestions;
-        const suggestionsEx = issue.suggestionsEx;
+        const suggestions = normalizeSuggestions(issue.suggestionsEx, nodeType);
         const severity = issue.isFlagged ? 'Forbidden' : 'Unknown';
-        issues.push({ word, start, end, suggestions, suggestionsEx, severity });
+        issues.push({ word, start, end, nodeType, suggestions, severity });
     }
 
     type NodeTypes = Node['type'] | Comment['type'] | 'JSXText';
@@ -373,4 +374,27 @@ function getTextDocument(filename: string, content: string): TextDocument {
 
 function isCustomWordListFile(value: string | CustomWordListFile | undefined): value is CustomWordListFile {
     return !!value && typeof value === 'object';
+}
+
+const needToAdjustSpace: Partial<Record<NodeType, true | undefined>> = {
+    Identifier: true,
+};
+
+const isSpecial = /[^\p{L}_0-9]/u;
+const allSpecial = /[^\p{L}_0-9]/gu;
+
+function normalizeSuggestions(suggestions: Suggestions, nodeType: NodeType): Suggestions {
+    if (!suggestions) return undefined;
+
+    if (!(nodeType in needToAdjustSpace)) return suggestions;
+
+    return suggestions.map((sug) => {
+        if (!isSpecial.test(sug.word)) return sug;
+        const s = { ...sug };
+        s.word = s.word.replace(allSpecial, '_');
+        if (s.wordAdjustedToMatchCase) {
+            s.wordAdjustedToMatchCase = s.wordAdjustedToMatchCase.replace(allSpecial, '_');
+        }
+        return s;
+    });
 }

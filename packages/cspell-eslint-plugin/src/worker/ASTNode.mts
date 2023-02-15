@@ -5,3 +5,5 @@ export interface JSXText extends Omit<Literal, 'type'> {
 }
 
 export type ASTNode = (Node | Comment | JSXText) & { parent?: Node };
+
+export type NodeType = ASTNode['type'];

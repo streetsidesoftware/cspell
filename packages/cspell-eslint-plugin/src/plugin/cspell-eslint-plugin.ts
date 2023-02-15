@@ -96,13 +96,13 @@ function create(context: Rule.RuleContext): Rule.RuleListener {
 
         log('Suggestions: %o', issue.suggestions);
 
-        const fixable = issue.suggestionsEx?.filter((sug) => !!sug.isPreferred);
+        const fixable = issue.suggestions?.filter((sug) => !!sug.isPreferred);
         const canFix = fixable?.length === 1;
         const preferredSuggestion = autoFix && canFix && fixable[0];
         const fix = preferredSuggestion
             ? fixFactory(preferredSuggestion.wordAdjustedToMatchCase || preferredSuggestion.word)
             : nullFix;
-        const suggestions: Rule.ReportDescriptorOptions['suggest'] = issue.suggestionsEx?.map((sug) => createSug(sug));
+        const suggestions: Rule.ReportDescriptorOptions['suggest'] = issue.suggestions?.map((sug) => createSug(sug));
         const suggest = suggestions;
 
         const des: Rule.ReportDescriptor = {
