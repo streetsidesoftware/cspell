@@ -1,6 +1,7 @@
 import { createTyposDictionary } from './TyposDictionary';
 
 // const oc = expect.objectContaining;
+const isPreferred = true;
 
 describe('TyposDictionary 1', () => {
     const dictWords = ['  english:English', 'grumpy', 'Avocado', 'avocadoS', '!avocado', 'crud'];
@@ -202,14 +203,14 @@ describe('TyposDictionary 2', () => {
     test.each`
         word         | expected
         ${''}        | ${[]}
-        ${'Avocado'} | ${[{ cost: 1, isPreferred: true, word: 'Avocado' }]}
-        ${'avocado'} | ${[{ cost: 1, isPreferred: true, word: 'Avocado' }]}
-        ${'cafe'}    | ${[{ cost: 1, isPreferred: true, word: 'café' }]}
-        ${'English'} | ${[{ word: 'English', isPreferred: true, cost: 1 }]}
-        ${'english'} | ${[{ word: 'English', isPreferred: true, cost: 1 }]}
+        ${'Avocado'} | ${[{ cost: 1, isPreferred, word: 'Avocado' }]}
+        ${'avocado'} | ${[{ cost: 1, isPreferred, word: 'Avocado' }]}
+        ${'cafe'}    | ${[{ cost: 1, isPreferred, word: 'café' }]}
+        ${'English'} | ${[{ word: 'English', isPreferred, cost: 1 }]}
+        ${'english'} | ${[{ word: 'English', isPreferred, cost: 1 }]}
         ${'grumpy'}  | ${[]}
         ${'Grumpy'}  | ${[]}
-        ${'wont'}    | ${[{ word: "won't", cost: 1 }, { word: 'will not', cost: 2 }]}
+        ${'wont'}    | ${[{ word: "won't", isPreferred, cost: 1 }, { word: 'will not', isPreferred, cost: 2 }]}
     `('suggest of "$word"', async ({ word, expected }) => {
         expect(dict.suggest(word)).toEqual(expected);
     });

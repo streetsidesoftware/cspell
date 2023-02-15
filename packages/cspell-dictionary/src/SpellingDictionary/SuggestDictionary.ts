@@ -98,17 +98,18 @@ class SuggestDictionaryImpl implements SuggestDictionary {
     private _suggest(word: string): SuggestionResult[] | undefined {
         if (!(word in this.typosDef)) return undefined;
         const sug = this.typosDef[word];
+        const isPreferred = true;
         if (!sug) return [];
         if (typeof sug === 'string') {
             return [
                 {
                     word: sug,
                     cost: 1,
-                    isPreferred: true,
+                    isPreferred,
                 },
             ];
         }
-        return sug.map((word, index) => ({ word, cost: index + 1 }));
+        return sug.map((word, index) => ({ word, cost: index + 1, isPreferred }));
     }
 
     genSuggestions(collector: SuggestionCollector): void {
