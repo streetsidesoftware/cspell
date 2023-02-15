@@ -83,6 +83,8 @@ const dictInDocSettings = createSpellingDictionary(allDirectives, 'Directives', 
 const EmptyWords: string[] = [];
 Object.freeze(EmptyWords);
 
+const staticInDocumentDictionaryName = `[in-document-dict]`;
+
 export interface DirectiveIssue {
     /**
      * the start and end offsets within the document of the issue.
@@ -106,7 +108,6 @@ export function getInDocumentSettings(text: string): CSpellUserSettings {
             },
             { id: 'in-doc-settings' } as CSpellUserSettings
         );
-    const dictName = `[in-document-dict-${nonce()}]`;
     const {
         words,
         flagWords,
@@ -119,7 +120,7 @@ export function getInDocumentSettings(text: string): CSpellUserSettings {
     const dict: DictionaryDefinitionInline | undefined =
         (words || flagWords || ignoreWords || suggestWords) &&
         clean({
-            name: dictName,
+            name: staticInDocumentDictionaryName,
             words,
             flagWords,
             ignoreWords,
@@ -127,7 +128,10 @@ export function getInDocumentSettings(text: string): CSpellUserSettings {
         });
 
     const dictSettings = dict
-        ? { dictionaries: dictionaries.concat(dictName), dictionaryDefinitions: dictionaryDefinitions.concat(dict) }
+        ? {
+              dictionaries: dictionaries.concat(staticInDocumentDictionaryName),
+              dictionaryDefinitions: dictionaryDefinitions.concat(dict),
+          }
         : clean({
               dictionaries: dictionaries.length ? dictionaries : undefined,
               dictionaryDefinitions: dictionaryDefinitions.length ? dictionaryDefinitions : undefined,
@@ -303,8 +307,8 @@ function getPossibleInDocSettings(text: string): Sequence<RegExpExecArray> {
 }
 
 function getWordsFromDocument(text: string): string[] {
-    const { words = EmptyWords } = getInDocumentSettings(text);
-    return words;
+    const dict = extractInDocDictionary(getInDocumentSettings(text));
+    return dict?.words || EmptyWords;
 }
 
 function parseEnable(_match: string): CSpellUserSettings {
@@ -317,24 +321,20 @@ function parseDisable(_match: string): CSpellUserSettings {
     return {};
 }
 
+export function extractInDocDictionary(settings: CSpellUserSettings): DictionaryDefinitionInline | undefined {
+    const inDocDicts = settings.dictionaryDefinitions?.filter((def) => def.name === staticInDocumentDictionaryName);
+    const dict = inDocDicts?.[0] as DictionaryDefinitionInline;
+    return dict;
+}
+
 export function getIgnoreWordsFromDocument(text: string): string[] {
-    const { ignoreWords = EmptyWords } = getInDocumentSettings(text);
-    return ignoreWords;
+    const dict = extractInDocDictionary(getInDocumentSettings(text));
+    return dict?.ignoreWords || EmptyWords;
 }
 
 export function getIgnoreRegExpFromDocument(text: string): (string | RegExp)[] {
     const { ignoreRegExpList = [] } = getInDocumentSettings(text);
     return ignoreRegExpList;
-}
-
-function nonce(length = 6): string {
-    const dict = '01234567890';
-    const digits: string[] = [];
-    for (let i = 0; i < length; ++i) {
-        digits[i] = dict[Math.floor(Math.random() * 10)];
-    }
-
-    return digits.join('');
 }
 
 /**
@@ -347,4 +347,5 @@ export const internal = {
     parseCompoundWords,
     parseIgnoreRegExp,
     parseIgnoreWords,
+    staticInDocumentDictionaryName,
 };
