@@ -1,4 +1,5 @@
-import { CSpellSettings, DictionaryDefinitionInline } from '@cspell/cspell-types';
+import type { CSpellSettings, DictionaryDefinitionInline } from '@cspell/cspell-types';
+
 import * as Text from '../util/text';
 import * as TextRange from '../util/TextRange';
 import { isDefined } from '../util/util';
