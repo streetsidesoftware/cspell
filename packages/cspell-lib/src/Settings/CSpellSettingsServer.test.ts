@@ -25,10 +25,8 @@ describe('Validate CSpellSettingsServer', () => {
         const right = csi({ name: 'Right' });
         expect(mergeSettings(left, right)).toEqual(
             csi({
-                name: 'Left|Right',
-                id: '|',
                 enabledLanguageIds: [],
-                source: { name: 'Left|Right', sources: [left, right] },
+                source: { name: 'merged', sources: [left, right] },
             })
         );
     });
@@ -39,10 +37,8 @@ describe('Validate CSpellSettingsServer', () => {
         expect(mergeSettings(left, enabled)).toEqual(
             csi({
                 enabled: true,
-                name: '|enabledName',
-                id: 'left|enabledId',
                 enabledLanguageIds: [],
-                source: { name: 'left|enabledName', sources: [csi(left), csi(enabled)] },
+                source: { name: 'merged', sources: [csi(left), csi(enabled)] },
             })
         );
     });
@@ -55,10 +51,8 @@ describe('Validate CSpellSettingsServer', () => {
         expect(mergeSettings(left, right)).toEqual(
             csi({
                 enabled: right.enabled,
-                name: '|',
-                id: [left.id, right.id].join('|'),
                 enabledLanguageIds: [],
-                source: { name: 'left|right', sources: [left, right] },
+                source: { name: 'merged', sources: [left, right] },
             })
         );
     });
@@ -69,10 +63,8 @@ describe('Validate CSpellSettingsServer', () => {
         expect(mergeSettings(a, b)).toEqual(
             csi({
                 enabled: false,
-                name: '|',
-                id: '|',
                 enabledLanguageIds: [],
-                source: { name: 'left|right', sources: [csi(a), csi(b)] },
+                source: { name: 'merged', sources: [csi(a), csi(b)] },
             })
         );
     });
@@ -100,13 +92,11 @@ describe('Validate CSpellSettingsServer', () => {
         expect(mergeSettings(left, right)).toEqual(
             csi({
                 enabled: right.enabled,
-                name: '|',
-                id: [left.id, right.id].join('|'),
                 enabledLanguageIds: [],
                 files: left.files?.concat(right.files || []),
                 ignorePaths: left.ignorePaths?.concat(right.ignorePaths || []),
                 overrides: left.overrides?.concat(right.overrides || []),
-                source: { name: 'left|right', sources: [left, right] },
+                source: { name: 'merged', sources: [left, right] },
             })
         );
     });
@@ -136,14 +126,12 @@ describe('Validate CSpellSettingsServer', () => {
         expect(mergeSettings(left, right)).toEqual(
             csi({
                 enabled: right.enabled,
-                name: '|',
-                id: [left.id, right.id].join('|'),
                 version: right.version,
                 enabledLanguageIds: [],
                 files: left.files?.concat(right.files || []),
                 ignorePaths: right.ignorePaths,
                 overrides: right.overrides,
-                source: { name: 'left|right', sources: [left, right] },
+                source: { name: 'merged', sources: [left, right] },
             })
         );
     });
