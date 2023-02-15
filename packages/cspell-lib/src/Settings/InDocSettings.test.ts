@@ -1,7 +1,11 @@
+import type { CSpellSettings, DictionaryDefinitionInline } from '@cspell/cspell-types';
+
 import * as Text from '../util/text';
 import * as TextRange from '../util/TextRange';
 import { isDefined } from '../util/util';
 import * as InDoc from './InDocSettings';
+
+const dictName = InDoc.internal.staticInDocumentDictionaryName;
 
 const oc = expect.objectContaining;
 const ac = expect.arrayContaining;
@@ -58,6 +62,12 @@ const x = imp.popoutlist;
 // cspell\x3aignore again
 `;
 
+const sampleInDocDict: DictionaryDefinitionInline = {
+    name: dictName,
+    words: ['const'],
+    ignoreWords: ['popoutlist', 'again'],
+};
+
 // cspell:disable
 const sampleTextWithBadRegexp = `
 # cspell\x3AignoreRegExp  "(foobar|foo_baz)"');
@@ -105,13 +115,13 @@ describe('Validate InDocSettings', () => {
         ${'cSpell\x3adisableCompoundWords\ncSpell\x3aenableCompoundWords'} | ${'cSpell\x3adisableCompoundWords\ncSpell\x3aenableCompoundWords'} | ${oc({ allowCompoundWords: true })}
         ${'sampleText'}                                                    | ${sampleText}                                                      | ${oc({ allowCompoundWords: true })}
         ${'sampleCode'}                                                    | ${sampleCode}                                                      | ${oc({ allowCompoundWords: true })}
-        ${'cSpell\x3aword apple'}                                          | ${USE_TEST}                                                        | ${oc({ words: ['apple'] })}
-        ${'/*cSpell\x3aword apple*/'}                                      | ${USE_TEST}                                                        | ${oc({ words: ['apple*/'] })}
-        ${'<!--- cSpell\x3aword apple -->'}                                | ${USE_TEST}                                                        | ${oc({ words: ['apple', '-->'] })}
-        ${'<!--- cSpell\x3aignoreWords apple -->'}                         | ${USE_TEST}                                                        | ${oc({ ignoreWords: ['apple', '-->'] })}
-        ${'<!--- cSpell\x3aforbidWords apple -->'}                         | ${USE_TEST}                                                        | ${oc({ flagWords: ['apple', '-->'] })}
-        ${'<!--- cSpell\x3aflag-words apple -->'}                          | ${USE_TEST}                                                        | ${oc({ flagWords: ['apple', '-->'] })}
-        ${'# cspell\x3aignore auto* *labeler'}                             | ${USE_TEST}                                                        | ${oc({ ignoreWords: ['auto*', '*labeler'] })}
+        ${'cSpell\x3aword apple'}                                          | ${USE_TEST}                                                        | ${oc(inDocDict({ words: ['apple'] }))}
+        ${'/*cSpell\x3aword apple*/'}                                      | ${USE_TEST}                                                        | ${oc(inDocDict({ words: ['apple*/'] }))}
+        ${'<!--- cSpell\x3aword apple -->'}                                | ${USE_TEST}                                                        | ${oc(inDocDict({ words: ['apple', '-->'] }))}
+        ${'<!--- cSpell\x3aignoreWords apple -->'}                         | ${USE_TEST}                                                        | ${oc(inDocDict({ ignoreWords: ['apple', '-->'] }))}
+        ${'<!--- cSpell\x3aforbidWords apple -->'}                         | ${USE_TEST}                                                        | ${oc(inDocDict({ flagWords: ['apple', '-->'] }))}
+        ${'<!--- cSpell\x3aflag-words apple -->'}                          | ${USE_TEST}                                                        | ${oc(inDocDict({ flagWords: ['apple', '-->'] }))}
+        ${'# cspell\x3aignore auto* *labeler'}                             | ${USE_TEST}                                                        | ${oc(inDocDict({ ignoreWords: ['auto*', '*labeler'] }))}
     `('detect compound words setting: $test', ({ test, text, expected }) => {
         expect(InDoc.getInDocumentSettings(text == USE_TEST ? test : text)).toEqual(expected);
         expect([...InDoc.validateInDocumentSettings(text, {})]).toEqual([]);
@@ -120,7 +130,7 @@ describe('Validate InDocSettings', () => {
     test.each`
         test                                      | text                                    | expected
         ${'Empty Doc'}                            | ${''}                                   | ${{ id: 'in-doc-settings' }}
-        ${'sampleTextWithIncompleteInDocSetting'} | ${sampleTextWithIncompleteInDocSetting} | ${oc({ words: ['const'], ignoreWords: ['popoutlist', 'again'], dictionaries: ['php'] })}
+        ${'sampleTextWithIncompleteInDocSetting'} | ${sampleTextWithIncompleteInDocSetting} | ${oc(inDocDict(sampleInDocDict, ['php']))}
         ${'enableCaseSensitive'}                  | ${'// cspell\x3aenableCaseSensitive'}   | ${oc({ caseSensitive: true })}
         ${'disableCaseSensitive'}                 | ${'// cspell\x3adisableCaseSensitive'}  | ${oc({ caseSensitive: false })}
     `('extract setting: $test', ({ text, expected }) => {
@@ -157,7 +167,7 @@ describe('Validate InDocSettings', () => {
 
     test('setting dictionaries for file', () => {
         const settings = InDoc.getInDocumentSettings(sampleCode);
-        expect(settings.dictionaries).toStrictEqual(['lorem-ipsum']);
+        expect(settings.dictionaries).toStrictEqual(['lorem-ipsum', '[in-document-dict]']);
     });
 
     test('bad ignoreRegExp', () => {
@@ -191,6 +201,19 @@ describe('Validate InDocSettings', () => {
         expect(result).toEqual(expected);
     });
 });
+
+function inDocDict(dict: Partial<DictionaryDefinitionInline>, dictionaries: string[] = []): CSpellSettings {
+    const def = {
+        name: dictName,
+        ...dict,
+    } as DictionaryDefinitionInline;
+
+    dictionaries = [...dictionaries, dictName];
+    return {
+        dictionaryDefinitions: [def],
+        dictionaries,
+    };
+}
 
 // cspell:disableCompoundWords
 // cspell:ignore localwords happydays arehere
