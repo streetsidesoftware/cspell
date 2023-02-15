@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 6.26.1 (2023-02-15)
+
+### Bug Fixes
+
+* improve Dynamic Import README.md ([#4178](https://github.com/streetsidesoftware/cspell/issues/4178)) ([4ad1133](https://github.com/streetsidesoftware/cspell/commit/4ad1133e6230969e9486d7e7a158cba5c3d75d7f))
+
 # 6.26.0 (2023-02-15)
 
 ### Features
