@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 6.26.0 (2023-02-15)
+
+### Features
+
+* All `flagWords` and `suggestWords` suggestions are preferred. ([#4176](https://github.com/streetsidesoftware/cspell-cli/issues/4176)) ([abfb09c](https://github.com/streetsidesoftware/cspell-cli/commit/abfb09c1fefe0b17aae332a23bb79017496c416a))
+
 # 6.25.0 (2023-02-14)
 
 ### Bug Fixes
