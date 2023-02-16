@@ -53,6 +53,7 @@ export async function calcCacheSettings(
     );
 
     const cacheStrategy = cacheOptions.cacheStrategy ?? cs.cacheStrategy ?? 'metadata';
+    const cacheFormat = cacheOptions.cacheFormat ?? cs.cacheFormat ?? 'legacy';
     const optionals: Partial<CreateCacheSettings> = {};
     if (cacheOptions.cacheReset) {
         optionals.reset = true;
@@ -63,7 +64,7 @@ export async function calcCacheSettings(
         cacheLocation,
         cacheStrategy,
         version: cacheOptions.version,
-        cacheFormat: cacheOptions.cacheFormat || 'legacy',
+        cacheFormat,
     };
 }
 
