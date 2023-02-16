@@ -11,7 +11,7 @@
   "scripts": {
     "clean": "shx rm -rf dist .tsbuildinfo",
     "build": "pnpm build:plugin && pnpm build:rollup",
-    "build:plugin": "tsc -p tsconfig.plugin.json",
+    "build:plugin": "tsc -p plugin/tsconfig.json",
     "build:rollup": "rollup -c rollup.config.mjs",
     "clean-build": "pnpm run clean && pnpm run build",
     "compile": "tsc -p .",
@@ -27,7 +27,7 @@
   },
   "devDependencies": {
     "cspell-lib": "workspace:*",
-    "magic-string": "^0.27.0"
+    "magic-string": "^0.29.0"
   },
   "main": "dist/index.cjs",
   "module": "dist/index.mjs",
