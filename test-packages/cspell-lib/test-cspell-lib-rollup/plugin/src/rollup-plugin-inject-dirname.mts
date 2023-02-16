@@ -1,7 +1,7 @@
 /* eslint-disable node/no-extraneous-import */
 import type { Plugin } from 'rollup';
 
-import MagicString from './magic-string.mjs';
+import { injectSnippet } from '../inject.mjs';
 
 const codeSnippet = `\
 import {fileURLToPath as $$inject_fileURLToPath} from 'url';
@@ -10,7 +10,7 @@ const __filename = $$inject_fileURLToPath(import.meta.url);
 const __dirname = $$inject_dirname(__filename);
 `;
 
-export default function injectDirname(): Plugin {
+export function injectDirname(): Plugin {
     return {
         name: 'inject-dirname',
         renderChunk: {
@@ -21,8 +21,15 @@ export default function injectDirname(): Plugin {
 
                 const ms = inject(code);
                 if (!ms) return;
-                const sm = ms.generateMap();
-                return { code: ms.toString(), map: sm };
+                return {
+                    code: ms.code,
+                    map: {
+                        ...ms.map,
+                        names: [],
+                        sources: [],
+                        version: 1,
+                    },
+                };
             },
         },
         writeBundle: {
@@ -36,13 +43,11 @@ export default function injectDirname(): Plugin {
     };
 }
 
-function inject(code: string): MagicString | undefined {
+function inject(code: string) {
     const pos = calcPosition(code);
     if (pos === undefined) return undefined;
 
-    const ms = new MagicString(code);
-
-    return ms.appendLeft(pos, codeSnippet);
+    return injectSnippet(code, pos, codeSnippet);
 }
 
 function calcPosition(code: string): number | undefined {

@@ -4,7 +4,7 @@ import rollupPluginTypescript from '@rollup/plugin-typescript';
 import rollupPluginJson from '@rollup/plugin-json';
 import rollupPluginCommonjs from '@rollup/plugin-commonjs';
 import { readFileSync } from 'fs';
-import injectDirname from './dist/plugin/rollup-plugin-inject-dirname.mjs';
+import { injectDirname } from './plugin/index.mjs';
 
 const pkg = JSON.parse(readFileSync('./package.json', 'utf-8'));
 
@@ -67,7 +67,7 @@ const configs = [
         ...common,
         output: [
             { ...common.output, file: pkg.main, format: 'cjs' },
-            { ...common.output, file: pkg.module, format: 'es', globals: { MyGlobalValueJason: '$$filename_Jason$$' } },
+            { ...common.output, file: pkg.module, format: 'es' },
         ],
         plugins: getPlugins(),
     },
