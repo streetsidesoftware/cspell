@@ -3,7 +3,7 @@
  */
 
 export type { FileDescriptor } from 'file-entry-cache';
-import { isMainThread } from 'node:worker_threads';
+import { isMainThread } from 'worker_threads';
 
 import type { FileEntryCache as FecFileEntryCache } from 'file-entry-cache';
 import * as file_entry_cache from 'file-entry-cache';
