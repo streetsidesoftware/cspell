@@ -53,8 +53,8 @@ jobs:
     env:
       REF_BRANCH: ${{ inputs.ref || github.event.inputs.ref }}
     outputs:
-      key: ${{ steps.calc-key.outputs.value }}
-      path: ${{ steps.calc-path.outputs.value }}
+      key: ${{ steps.build-and-cache.outputs.key }}
+      path: ${{ steps.build-and-cache.outputs.path }}
       ref: ${{ env.REF_BRANCH }}
     steps:
       - name: Inputs
@@ -68,66 +68,10 @@ jobs:
         with:
           ref: ${{ env.REF_BRANCH }}
 
-      - name: Setup pnpm
-        uses: pnpm/action-setup@v2.2.4
-
-      - name: Patch
-        if: ${{ inputs.patch }}
-        env:
-          PATCH: ${{ inputs.patch }}
-        run: |
-          echo "$PATCH" | git apply
-
-      - name: Use Node.js ${{ env.NODE_VERSION }}
-        uses: actions/setup-node@v3
+      - name: Pre-build and cache
+        id: build-and-cache
+        uses: ./.github/actions/build
         with:
+          show-summary: true
           node-version: ${{ env.NODE_VERSION }}
-          cache: "pnpm"
-
-      - run: pnpm -v
-      - run: pnpm i
-
-      - id: calc-path
-        uses: ./.github/actions/output
-        with:
-          value: |
-            packages/*/dist
-            integration-tests/dist
-      - id: calc-key
-        uses: ./.github/actions/output
-        with:
-          value: >-
-            int-build-${{ hashFiles(
-              'integration-tests/src/**/*.ts', 'integration-tests/tsconfig.json',
-              '*-lock.yaml', 'packages/*/src/**/*.ts', 'packages/*/tsconfig.json'
-            ) }}
-
-      - name: Show key and path
-        run: |
-          echo "key: ${{ steps.calc-key.outputs.value }}"
-          echo "path: ${{ steps.calc-path.outputs.value }}"
-
-      - name: Cache Build
-        id: step-cache-build
-        uses: actions/cache@v3
-        with:
-          key: ${{ steps.calc-key.outputs.value }}
-          path: ${{ steps.calc-path.outputs.value }}
-
-      - name: Cached Results
-        run: |
-          echo Build Cache: ${{ steps.step-cache-build.outputs.cache-hit && 'Hit' || 'Miss' }}
-
-      - name: Pnpm CI
-        if: ${{ !steps.step-cache-build.outputs.cache-hit }}
-        run: pnpm i
-
-      - name: Has Pnpm has failed?
-        if: ${{ failure() }}
-        run: |
-          ls -alF /home/runner/.pnpm/_logs/*.log
-          cat /home/runner/.pnpm/_logs/*.log
-
-      - name: Build
-        if: ${{ !steps.step-cache-build.outputs.cache-hit }}
-        run: pnpm run build
+          use-setup: true
