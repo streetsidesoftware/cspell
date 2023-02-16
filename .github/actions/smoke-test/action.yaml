@@ -31,13 +31,13 @@ runs:
           cspell-cache-${{ runner.os }}-smoke-test-
 
     - name: verify trace command
-      run: time pnpm run test:bin-trace
+      run: pnpm run test:bin-trace
       shell: ${{ inputs.shell }}
 
     - name: verify the spell checker runs
-      run: time pnpm run test:bin-spell
+      run: pnpm run test:bin-spell
       shell: ${{ inputs.shell }}
 
     - name: verify the check command
-      run: time pnpm run test:bin-check
+      run: pnpm run test:bin-check
       shell: ${{ inputs.shell }}
