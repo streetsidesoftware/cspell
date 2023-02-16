@@ -7,6 +7,15 @@ on:
       ref:
         description: Branch or hash
         required: false
+      os:
+        description: Operating System
+        required: false
+        type: string
+        options:
+          - ubuntu-latest
+          - windows-latest
+          - macos-latest
+        default: ubuntu-latest
   workflow_call:
     inputs:
       ref:
@@ -14,6 +23,10 @@ on:
         type: string
       patch:
         description: Optional patch to apply before building.
+        required: false
+        type: string
+      os:
+        description: Operating System
         required: false
         type: string
     outputs:
@@ -31,13 +44,12 @@ permissions:
   contents: read
 
 env:
-  RUNS_ON: ubuntu-latest
   NODE_VERSION: "16.x"
   NPM_VERSION: "8"
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ${{ inputs.os || 'ubuntu-latest' }}
     env:
       REF_BRANCH: ${{ inputs.ref || github.event.inputs.ref }}
     outputs:

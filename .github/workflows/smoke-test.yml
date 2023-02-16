@@ -4,18 +4,17 @@ on:
   workflow_dispatch:
   pull_request:
     paths:
-      - ".github/workflows/test.yml"
+      - ".github/workflows/smoke-test.yml"
       - "*-lock.yaml"
       - "package.json"
+      - "packages/**/*.cjs"
+      - "packages/**/*.cts"
       - "packages/**/*.js"
+      - "packages/**/*.mjs"
+      - "packages/**/*.mts"
       - "packages/**/*.ts"
       - "packages/**/package.json"
       - "packages/**/tsconfig.json"
-      - "test-packages/**/*.js"
-      - "test-packages/**/*.ts"
-      - "test-packages/**/package.json"
-      - "test-packages/**/tsconfig.json"
-      - "test-fixtures/**"
       - "tsconfig*.json"
       - "!docs/**"
       - "!website/**"
@@ -44,7 +43,10 @@ jobs:
       matrix:
         node-version:
           # List of supported node versions (latest is tested in `test-os`)
+          - "14.16.0"
           - 14.x
+          - 16.x
+          - 18.x
           - 19.x
 
         os:
