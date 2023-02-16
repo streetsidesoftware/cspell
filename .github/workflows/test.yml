@@ -146,6 +146,10 @@ jobs:
         with:
           use_cspell_cache: ${{ matrix.use_cspell_cache }}
 
+      - name: Test Yarn PNP
+        run: |
+          pnpm run test:bin-spell-yarn
+
       # Ensure the repository is clean after build & test
       - run: git --no-pager diff --exit-code
 

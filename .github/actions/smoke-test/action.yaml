@@ -24,21 +24,20 @@ runs:
       uses: actions/cache@v3
       if: ${{ inputs.use_cspell_cache == 'true' }}
       with:
-        key: cspell-cache-${{ runner.os }}-test-${{ hashFiles('**/*.ts', '**/*.md') }}
+        key: cspell-cache-${{ runner.os }}-smoke-test-${{ hashFiles('**/*.ts', '**/*.md') }}
         path: |
-          .cspell/.cspellcache
+          .cspellcache
         restore-keys: |
-          cspell-cache-${{ runner.os }}-test-
-          cspell-cache-${{ runner.os }}-
+          cspell-cache-${{ runner.os }}-smoke-test-
 
     - name: verify trace command
-      run: pnpm run test-bin-trace
+      run: pnpm run test:bin-trace
       shell: ${{ inputs.shell }}
 
     - name: verify the spell checker runs
-      run: pnpm run test-bin-spell
+      run: pnpm run test:bin-spell
       shell: ${{ inputs.shell }}
 
     - name: verify the check command
-      run: pnpm run test-bin-check
+      run: pnpm run test:bin-check
       shell: ${{ inputs.shell }}
