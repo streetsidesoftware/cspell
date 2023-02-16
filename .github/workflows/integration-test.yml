@@ -38,6 +38,19 @@ env:
   NPM_VERSION: "8"
 
 jobs:
+  pre-build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Pre-build and cache
+        id: build-and-cache
+        uses: ./.github/actions/build-for-integrations
+        with:
+          show-summary: true
+          use-setup: true
+
   prepare:
     runs-on: ubuntu-latest
     env:
@@ -92,6 +105,7 @@ jobs:
   integration-tests:
     needs:
       - prepare
+      - pre-build
     runs-on: ${{ matrix.os }}
 
     env:

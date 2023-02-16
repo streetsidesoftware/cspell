@@ -45,19 +45,34 @@ runs:
         value: |
           packages/*/dist
           integration-tests/dist
+          test-packages/*/dist
+          test-packages/*/*/dist
+          test-packages/*/*/*/dist
         debug: true
 
     - id: cache-key
       uses: streetsidesoftware/action-set-output@v1
       with:
         value: >-
-          integrations-build-${{ hashFiles(
+          build-${{ hashFiles(
             '*-lock.yaml',
             'integration-tests/src/**/*.ts',
             'integration-tests/tsconfig*.json',
-            'packages/*/src/**/*.ts',
+            'packages/**/tsconfig*.json',
+            'packages/*/src/**/*.cjs',
+            'packages/*/src/**/*.cts',
+            'packages/*/src/**/*.js',
+            'packages/*/src/**/*.mjs',
             'packages/*/src/**/*.mts',
-            'packages/*/tsconfig*.json'
+            'packages/*/src/**/*.ts',
+            'test-packages/**/*.cjs',
+            'test-packages/**/*.cts',
+            'test-packages/**/*.js',
+            'test-packages/**/*.mjs',
+            'test-packages/**/*.mts',
+            'test-packages/**/*.ts',
+            'test-packages/**/tsconfig*.json',
+            'tsconfig*.json'
           ) }}
         debug: true
 
