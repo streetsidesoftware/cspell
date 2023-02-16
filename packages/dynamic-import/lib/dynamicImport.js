@@ -1,6 +1,6 @@
 import { dImport } from './dImport.js';
-import { sep as pathSep } from 'node:path';
-import { pathToFileURL } from 'node:url';
+import { sep as pathSep } from 'path';
+import { pathToFileURL } from 'url';
 
 /**
  * Lazy load the importer so we can use an ESM packages inside a cjs file.
