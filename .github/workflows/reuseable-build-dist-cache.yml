@@ -53,8 +53,8 @@ jobs:
     env:
       REF_BRANCH: ${{ inputs.ref || github.event.inputs.ref }}
     outputs:
-      key: ${{ step.calc-key.outputs.value }}
-      path: ${{ step.calc-path.outputs.value }}
+      key: ${{ steps.calc-key.outputs.value }}
+      path: ${{ steps.calc-path.outputs.value }}
       ref: ${{ env.REF_BRANCH }}
     steps:
       - name: Inputs
@@ -103,15 +103,15 @@ jobs:
             ) }}
 
       - run: |
-          echo "key: ${{ step.calc-key.outputs.value }}"
-          echo "path: ${{ step.calc-path.outputs.value }}"
+          echo "key: ${{ steps.calc-key.outputs.value }}"
+          echo "path: ${{ steps.calc-path.outputs.value }}"
 
       - name: Cache Build
         id: step-cache-build
         uses: actions/cache@v3
         with:
-          key: ${{ step.calc-key.outputs.value }}
-          path: ${{ step.calc-path.outputs.value }}
+          key: ${{ steps.calc-key.outputs.value }}
+          path: ${{ steps.calc-path.outputs.value }}
 
       - name: Cached Results
         run: |
