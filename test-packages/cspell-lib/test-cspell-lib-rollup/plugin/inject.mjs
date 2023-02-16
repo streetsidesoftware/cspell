@@ -1,3 +1,4 @@
+// eslint-disable-next-line node/no-unpublished-import
 import MagicString from 'magic-string';
 
 export function injectSnippet(code, pos, codeSnippet) {
