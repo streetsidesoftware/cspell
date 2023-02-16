@@ -28,11 +28,6 @@ permissions:
   contents: read
 
 jobs:
-  build:
-    uses: "./.github/workflows/reuseable-build-dist-cache.yml"
-    with:
-      ref: ${{ github.ref }}
-
   build-ubuntu:
     runs-on: ubuntu-latest
     steps:
@@ -59,7 +54,7 @@ jobs:
           show-summary: true
           use-setup: true
 
-  smoke-test:
+  smoke-test-ubuntu:
     runs-on: ${{ matrix.os }}
     needs:
       - build-ubuntu
@@ -68,7 +63,6 @@ jobs:
       fail-fast: false
       matrix:
         node-version:
-          # List of supported node versions (latest is tested in `test-os`)
           - "14.16.0"
           - 14.x
           - 16.x
@@ -82,13 +76,51 @@ jobs:
           - true
           - ""
 
-        # include:
-        #   - os: windows-latest
-        #     use_cspell_cache: ""
-        #     node-version: 18.x
-        #   - os: macos-latest
-        #     use_cspell_cache: ""
-        #     node-version: 18.x
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Install
+        uses: ./.github/actions/setup
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Build
+        id: build
+        uses: ./.github/actions/build
+        with:
+          show-summary: true
+
+      - name: Cached Results
+        env:
+          BUILD_RESULTS: ${{ toJson(steps.build.outputs) }}
+        run: |
+          echo "Build Cache:
+            $BUILD_RESULTS
+          "
+
+      - name: Smoke Tests
+        uses: ./.github/actions/smoke-test
+        with:
+          use_cspell_cache: ${{ matrix.use_cspell_cache }}
+
+  smoke-test-windows:
+    runs-on: ${{ matrix.os }}
+    needs:
+      - build-windows
+
+    strategy:
+      fail-fast: false
+      matrix:
+        node-version:
+          - 18.x
+
+        os:
+          - windows-latest
+
+        use_cspell_cache:
+          - true
+          - ""
 
     steps:
       - name: Checkout
