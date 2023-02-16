@@ -7,6 +7,15 @@ on:
       ref:
         description: Branch or hash
         required: false
+      os:
+        description: Operating System
+        required: false
+        type: choice
+        options:
+          - ubuntu-latest
+          - windows-latest
+          - macos-latest
+        default: ubuntu-latest
   workflow_call:
     inputs:
       ref:
@@ -14,6 +23,10 @@ on:
         type: string
       patch:
         description: Optional patch to apply before building.
+        required: false
+        type: string
+      os:
+        description: Operating System
         required: false
         type: string
     outputs:
@@ -31,18 +44,17 @@ permissions:
   contents: read
 
 env:
-  RUNS_ON: ubuntu-latest
   NODE_VERSION: "16.x"
   NPM_VERSION: "8"
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ${{ inputs.os || 'ubuntu-latest' }}
     env:
       REF_BRANCH: ${{ inputs.ref || github.event.inputs.ref }}
     outputs:
-      key: ${{ env.CACHE_KEY }}
-      path: ${{ env.CACHE_PATH }}
+      key: ${{ steps.build-and-cache.outputs.key }}
+      path: ${{ steps.build-and-cache.outputs.path }}
       ref: ${{ env.REF_BRANCH }}
     steps:
       - name: Inputs
@@ -56,62 +68,10 @@ jobs:
         with:
           ref: ${{ env.REF_BRANCH }}
 
-      - name: Setup pnpm
-        uses: pnpm/action-setup@v2.2.4
-
-      - name: Patch
-        if: ${{ inputs.patch }}
-        env:
-          PATCH: ${{ inputs.patch }}
-        run: |
-          echo "$PATCH" | git apply
-
-      - name: Use Node.js ${{ env.NODE_VERSION }}
-        uses: actions/setup-node@v3
+      - name: Pre-build and cache
+        id: build-and-cache
+        uses: ./.github/actions/build
         with:
+          show-summary: true
           node-version: ${{ env.NODE_VERSION }}
-          cache: "pnpm"
-
-      - run: pnpm -v
-      - run: pnpm i
-
-      - name: Calc Key and Path
-        id: key-and-path
-        run: |
-          echo "CACHE_PATH<<CACHE_PATH
-          packages/*/dist
-          integration-tests/dist
-          CACHE_PATH" >> $GITHUB_ENV
-          echo "CACHE_KEY=int-build-${{ hashFiles(
-              'integration-tests/src/**/*.ts', 'integration-tests/tsconfig.json',
-              '*-lock.yaml', 'packages/*/src/**/*.ts', 'packages/*/tsconfig.json'
-            ) }}" >> $GITHUB_ENV
-
-      - run: |
-          echo key: ${{ env.CACHE_KEY }}
-          echo "path: ${{ env.CACHE_PATH }}"
-
-      - name: Cache Build
-        id: step-cache-build
-        uses: actions/cache@v3
-        with:
-          key: ${{ env.CACHE_KEY }}
-          path: ${{ env.CACHE_PATH }}
-
-      - name: Cached Results
-        run: |
-          echo Build Cache: ${{ steps.step-cache-build.outputs.cache-hit && 'Hit' || 'Miss' }}
-
-      - name: Pnpm CI
-        if: ${{ !steps.step-cache-build.outputs.cache-hit }}
-        run: pnpm i
-
-      - name: Has Pnpm has failed?
-        if: ${{ failure() }}
-        run: |
-          ls -alF /home/runner/.pnpm/_logs/*.log
-          cat /home/runner/.pnpm/_logs/*.log
-
-      - name: Build
-        if: ${{ !steps.step-cache-build.outputs.cache-hit }}
-        run: pnpm run build
+          use-setup: true

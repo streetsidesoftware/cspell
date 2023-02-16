@@ -1,0 +1,126 @@
+name: Build and Cache Dist
+description: Build the repo and store it in the cache.
+
+inputs:
+  show-summary:
+    description: Show a build summary.
+    required: false
+  node-version:
+    required: false
+    description: The version of Node to use.
+  use-setup:
+    required: false
+    description: |
+      Run node setup if it is necessary to build.
+
+outputs:
+  key:
+    description: Cache Key
+    value: ${{ steps.cache-key.outputs.value }}
+  path:
+    description: Cache Path
+    value: ${{ steps.cache-path.outputs.value }}
+  cache-hit:
+    description: |
+      Indicates that the cache was hit.
+      Return values:
+      - 'true' - the cache was used.
+      - '' - the cache was not used.
+    value: ${{ steps.step-cache-build.outputs.cache-hit }}
+
+runs:
+  using: "composite"
+
+  steps:
+    - name: Inputs
+      shell: bash
+      env:
+        INPUTS: ${{ toJSON(inputs || github.event.inputs) }}
+      run: |
+        echo "inputs: $INPUTS"
+
+    - id: cache-path
+      uses: streetsidesoftware/action-set-output@v1
+      with:
+        value: |
+          packages/*/dist
+          integration-tests/dist
+          test-packages/*/dist
+          test-packages/*/*/dist
+          test-packages/*/*/*/dist
+        debug: true
+
+    - id: cache-key
+      uses: streetsidesoftware/action-set-output@v1
+      with:
+        value: >-
+          build-${{ hashFiles(
+            '*-lock.yaml',
+            'integration-tests/src/**/*.ts',
+            'integration-tests/tsconfig*.json',
+            'packages/**/tsconfig*.json',
+            'packages/*/src/**/*.cjs',
+            'packages/*/src/**/*.cts',
+            'packages/*/src/**/*.js',
+            'packages/*/src/**/*.mjs',
+            'packages/*/src/**/*.mts',
+            'packages/*/src/**/*.ts',
+            'test-packages/**/*.cjs',
+            'test-packages/**/*.cts',
+            'test-packages/**/*.js',
+            'test-packages/**/*.mjs',
+            'test-packages/**/*.mts',
+            'test-packages/**/*.ts',
+            'test-packages/**/tsconfig*.json',
+            'tsconfig*.json'
+          ) }}
+        debug: true
+
+    - name: Cache Build
+      id: step-cache-build
+      uses: actions/cache@v3
+      with:
+        key: ${{ steps.cache-key.outputs.value }}
+        path: ${{ steps.cache-path.outputs.value }}
+
+    - name: Cached Results
+      uses: ./.github/actions/echo
+      with:
+        value: >-
+          Build Cache: ${{ steps.step-cache-build.outputs.cache-hit && 'Hit' || 'Miss' }}
+
+    - name: Setup Env
+      if: ${{ !steps.step-cache-build.outputs.cache-hit && inputs.use-setup }}
+      uses: ./.github/actions/setup
+      with:
+        node-version: ${{ inputs.node-version }}
+
+    - name: Pnpm CI
+      if: ${{ !steps.step-cache-build.outputs.cache-hit }}
+      run: pnpm i
+      shell: bash
+
+    - name: Has Pnpm has failed?
+      if: ${{ failure() }}
+      run: |
+        ls -alF /home/runner/.pnpm/_logs/*.log
+        cat /home/runner/.pnpm/_logs/*.log
+      shell: bash
+
+    - name: Build
+      if: ${{ !steps.step-cache-build.outputs.cache-hit }}
+      run: pnpm run build
+      shell: bash
+
+    - name: Summary
+      if: inputs.show-summary == 'true'
+      uses: ./.github/actions/summary
+      with:
+        text: |
+          ## Build
+          - key: ${{ steps.cache-key.outputs.value }}
+          - path:
+          ```
+          ${{ steps.cache-path.outputs.value }}
+          ```
+          - hit: ${{ steps.step-cache-build.outputs.cache-hit || 'Miss' }}
