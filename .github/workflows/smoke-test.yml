@@ -36,6 +36,9 @@ jobs:
   build-ubuntu:
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
       - name: Pre-build and cache
         id: build-and-cache
         uses: ./.github/actions/build
@@ -46,6 +49,9 @@ jobs:
   build-windows:
     runs-on: windows-latest
     steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
       - name: Pre-build and cache
         id: build-and-cache
         uses: ./.github/actions/build
