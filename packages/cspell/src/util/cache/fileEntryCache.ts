@@ -3,12 +3,11 @@
  */
 
 export type { FileDescriptor } from 'file-entry-cache';
-import { isMainThread } from 'node:worker_threads';
-
 import type { FileEntryCache as FecFileEntryCache } from 'file-entry-cache';
 import * as file_entry_cache from 'file-entry-cache';
 import { mkdirSync } from 'fs';
 import * as path from 'path';
+import { isMainThread } from 'worker_threads';
 
 export type FileEntryCache = FecFileEntryCache;
 
