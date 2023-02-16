@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 6.26.3 (2023-02-16)
+
+### Bug Fixes
+
+* Be able to read cache format from config ([#4190](https://github.com/streetsidesoftware/cspell/issues/4190)) ([6029893](https://github.com/streetsidesoftware/cspell/commit/60298938cd39669982ad1ca4293571242918761d))
+
 ## 6.26.2 (2023-02-16)
 
 ### Bug Fixes
