@@ -1,0 +1,89 @@
+name: " 🔥 Smoke Test"
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    uses: "./.github/workflows/reuseable-build-dist-cache.yml"
+    with:
+      ref: ${{ github.ref }}
+
+  smoke-test:
+    runs-on: ${{ matrix.os }}
+    needs:
+      - build
+
+    strategy:
+      matrix:
+        node-version:
+          # List of supported node versions (latest is tested in `test-os`)
+          - 14.x
+          - 19.x
+
+        os:
+          - ubuntu-latest
+
+        use_cspell_cache:
+          - true
+          - ""
+
+        # include:
+        #   - os: windows-latest
+        #     use_cspell_cache: ""
+        #     node-version: 18.x
+        #   - os: macos-latest
+        #     use_cspell_cache: ""
+        #     node-version: 18.x
+
+    steps:
+      - name: Show Build Results
+        run: |
+          echo "key: ${{ needs.build.outputs.key }}"
+          echo "path: ${{ needs.build.outputs.path }}"
+
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v2.2.4
+
+      - name: Use Node.js ${{ env.NODE_VERSION }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: "pnpm"
+
+      - run: pnpm -v
+
+      - name: Restore Build Cache
+        id: step-cache-build
+        uses: actions/cache@v3
+        with:
+          key: ${{ needs.build.outputs.key }}
+          path: ${{ needs.build.outputs.path }}
+
+      - name: Cached Results
+        run: |
+          echo Build Cache: ${{ steps.step-cache-build.outputs.cache-hit && 'Hit' || 'Miss' }}
+
+      - name: Install
+        run: pnpm i
+
+      - name: Has pnpm has failed?
+        if: ${{ failure() }}
+        run: |
+          ls -alF /home/runner/.pnpm/_logs/*.log
+          cat /home/runner/.pnpm/_logs/*.log
+
+      - name: Check Build
+        if: ${{ !steps.step-cache-build.outputs.cache-hit }}
+        run: exit 1
+
+      - name: Smoke Tests
+        uses: ./.github/actions/smoke-test
+        with:
+          use_cspell_cache: ${{ matrix.use_cspell_cache }}
