@@ -33,10 +33,30 @@ jobs:
     with:
       ref: ${{ github.ref }}
 
+  build-ubuntu:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Pre-build and cache
+        id: build-and-cache
+        uses: ./.github/actions/build
+        with:
+          show-summary: true
+          use-setup: true
+
+  build-windows:
+    runs-on: windows-latest
+    steps:
+      - name: Pre-build and cache
+        id: build-and-cache
+        uses: ./.github/actions/build
+        with:
+          show-summary: true
+          use-setup: true
+
   smoke-test:
     runs-on: ${{ matrix.os }}
     needs:
-      - build
+      - build-ubuntu
 
     strategy:
       fail-fast: false
@@ -65,48 +85,27 @@ jobs:
         #     node-version: 18.x
 
     steps:
-      - name: Show Build Results
-        run: |
-          echo "key: ${{ needs.build.outputs.key }}"
-          echo "path: ${{ needs.build.outputs.path }}"
-
       - name: Checkout
         uses: actions/checkout@v3
 
-      - name: Setup pnpm
-        uses: pnpm/action-setup@v2.2.4
-
-      - name: Use Node.js ${{ env.NODE_VERSION }}
-        uses: actions/setup-node@v3
+      - name: Build
+        id: build
+        uses: ./.github/actions/build
         with:
-          node-version: ${{ env.NODE_VERSION }}
-          cache: "pnpm"
-
-      - run: pnpm -v
-
-      - name: Restore Build Cache
-        id: step-cache-build
-        uses: actions/cache@v3
-        with:
-          key: ${{ needs.build.outputs.key }}
-          path: ${{ needs.build.outputs.path }}
+          show-summary: true
+          node-version: ${{ matrix.node-version }}
+          use-setup: true
 
       - name: Cached Results
+        env:
+          BUILD_RESULTS: ${{ toJson(steps.build.outputs) }}
         run: |
-          echo Build Cache: ${{ steps.step-cache-build.outputs.cache-hit && 'Hit' || 'Miss' }}
+          echo "Build Cache:
+            $BUILD_RESULTS
+          "
 
       - name: Install
         run: pnpm i
-
-      - name: Has pnpm has failed?
-        if: ${{ failure() }}
-        run: |
-          ls -alF /home/runner/.pnpm/_logs/*.log
-          cat /home/runner/.pnpm/_logs/*.log
-
-      - name: Check Build
-        if: ${{ !steps.step-cache-build.outputs.cache-hit }}
-        run: exit 1
 
       - name: Smoke Tests
         uses: ./.github/actions/smoke-test
