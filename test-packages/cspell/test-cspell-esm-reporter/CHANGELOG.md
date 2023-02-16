@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 6.26.2 (2023-02-16)
+
+### Bug Fixes
+
+* `node:worker_threads` breaks on node 14 ([#4185](https://github.com/streetsidesoftware/cspell-cli/issues/4185)) ([8654ac7](https://github.com/streetsidesoftware/cspell-cli/commit/8654ac7161b0ac558e864cfc116a9ad9ce6dc32e))
+
 ## 6.26.1 (2023-02-15)
 
 ### Bug Fixes
