@@ -2,6 +2,11 @@
     "$schema": "https://raw.githubusercontent.com/streetsidesoftware/cspell/main/cspell.schema.json",
     "version": "0.2",
     "name": "Run Config",
-    "files": ["**/*", ".github/**/*"],
-    "import": ["./cspell.json"]
+    "files": [
+        "test-packages/yarn/**"
+    ],
+    "ignorePaths": [],
+    "import": [
+        "./cspell.test.base.json"
+    ]
 }

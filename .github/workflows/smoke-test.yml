@@ -18,6 +18,7 @@ jobs:
       - build
 
     strategy:
+      fail-fast: false
       matrix:
         node-version:
           # List of supported node versions (latest is tested in `test-os`)
