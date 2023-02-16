@@ -102,7 +102,8 @@ jobs:
               '*-lock.yaml', 'packages/*/src/**/*.ts', 'packages/*/tsconfig.json'
             ) }}
 
-      - run: |
+      - name: Show key and path
+        run: |
           echo "key: ${{ steps.calc-key.outputs.value }}"
           echo "path: ${{ steps.calc-path.outputs.value }}"
 
