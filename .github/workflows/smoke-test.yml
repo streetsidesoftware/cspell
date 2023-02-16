@@ -94,13 +94,16 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
+      - name: Install
+        uses: ./.github/actions/setup
+        with:
+          node-version: ${{ matrix.node-version }}
+
       - name: Build
         id: build
         uses: ./.github/actions/build
         with:
           show-summary: true
-          node-version: ${{ matrix.node-version }}
-          use-setup: true
 
       - name: Cached Results
         env:
@@ -109,9 +112,6 @@ jobs:
           echo "Build Cache:
             $BUILD_RESULTS
           "
-
-      - name: Install
-        run: pnpm i
 
       - name: Smoke Tests
         uses: ./.github/actions/smoke-test
