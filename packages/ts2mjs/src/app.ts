@@ -30,7 +30,7 @@ interface CliOptions {
 
 export async function app(program = defaultCommand): Promise<Command> {
     program
-        .name('js2mjs')
+        .name('ts2mjs')
         .description('Rename ESM .js files to .mjs')
         .argument('<files...>', 'The files to rename.')
         .option('-k, --keep', 'Keep the original files.')
