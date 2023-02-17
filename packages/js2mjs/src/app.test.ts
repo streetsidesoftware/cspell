@@ -1,11 +1,12 @@
-import { describe, expect, test, afterEach, vi } from 'vitest';
 import { Command, CommanderError } from 'commander';
-import { run, app } from './app.js';
+import { afterEach, describe, expect, test, vi } from 'vitest';
+
+import { run } from './app.js';
 
 // const oc = (a: object) => expect.objectContaining(a);
 const sc = (s: string) => expect.stringContaining(s);
 const sm = (s: string | RegExp) => expect.stringMatching(s);
-const ac = <T extends any>(a: T[]) => expect.arrayContaining(a);
+const ac = <T>(a: T[]) => expect.arrayContaining(a);
 
 describe('app', () => {
     afterEach(() => {

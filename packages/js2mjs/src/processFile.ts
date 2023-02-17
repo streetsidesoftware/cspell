@@ -1,4 +1,5 @@
 import { dirname, join as pathJoin } from 'path';
+
 import { doesContain, isRelativePath } from './fileUtils.js';
 
 const isSupportedFile = /\.(m?js|d\.m?ts)$/;

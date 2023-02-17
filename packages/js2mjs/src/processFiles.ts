@@ -1,8 +1,9 @@
-import * as path from 'path';
-import { promises as fs } from 'fs';
-import { isSupportedFileType, processFile } from './processFile.js';
-import { rebaseFile } from './fileUtils.js';
 import chalk from 'chalk';
+import { promises as fs } from 'fs';
+import * as path from 'path';
+
+import { rebaseFile } from './fileUtils.js';
+import { isSupportedFileType, processFile } from './processFile.js';
 
 export interface Options {
     keep?: boolean | undefined;

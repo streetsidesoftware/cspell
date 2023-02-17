@@ -1,7 +1,8 @@
-import { describe, test, expect } from 'vitest';
+import { promises as fs } from 'fs';
+import { describe, expect, test } from 'vitest';
+
 import { processFile } from './processFile.js';
 import { resolveFixture } from './test.util.js';
-import { promises as fs } from 'fs';
 
 const ff = resolveFixture;
 

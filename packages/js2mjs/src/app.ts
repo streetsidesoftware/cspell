@@ -1,10 +1,13 @@
-import chalk, { colorNames } from 'chalk';
-import { Command, program as defaultCommand } from 'commander';
+import chalk from 'chalk';
+import type { Command } from 'commander';
+import { program as defaultCommand } from 'commander';
 import { promises as fs } from 'fs';
-import { fileURLToPath } from 'url';
 import * as path from 'path';
+import { fileURLToPath } from 'url';
+
 import { findFiles } from './findFiles.js';
-import { processFiles, Options as ProcessFilesOptions } from './processFiles.js';
+import type { Options as ProcessFilesOptions } from './processFiles.js';
+import { processFiles } from './processFiles.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);

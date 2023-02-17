@@ -1,4 +1,4 @@
-import { relative, isAbsolute, resolve } from 'path';
+import { isAbsolute, relative, resolve } from 'path';
 
 const regExpIsRelative = /^\.\.?[/\\]/;
 
