@@ -28,7 +28,7 @@ const common = {
 /**
  * Get new instances of all the common plugins.
  */
-function getPlugins(tsconfig = 'tsconfig.esm.json') {
+function getPlugins(tsconfig) {
     return [
         rollupPluginTypescript({
             tsconfig,
@@ -45,15 +45,16 @@ function getPlugins(tsconfig = 'tsconfig.esm.json') {
     ];
 }
 
-const plugins = getPlugins();
+const plugins = getPlugins('tsconfig.esm.json');
+// const pluginsCjs = getPlugins('tsconfig.cjs.json');
 
 /** @type {import('rollup').RollupOptions[]} */
 const configs = [
     {
         ...common,
         output: [
-            { ...common.output, file: pkg.main, format: 'cjs' },
-            // { ...common.output, file: pkg.module, format: 'es' },
+            // { ...common.output, file: pkg.main, format: 'cjs' },
+            { ...common.output, file: pkg.module, format: 'es' },
         ],
         plugins,
     },
@@ -61,8 +62,8 @@ const configs = [
         ...common,
         input: 'src/Parser/index.ts',
         output: [
-            { ...common.output, file: 'dist/cjs/Parser/index.cjs', format: 'cjs' },
-            // { ...common.output, file: pkg.module, format: 'es' },
+            // { ...common.output, file: 'dist/cjs/Parser/index.cjs', format: 'cjs' },
+            { ...common.output, file: pkg.module, format: 'es' },
         ],
         plugins,
     },
