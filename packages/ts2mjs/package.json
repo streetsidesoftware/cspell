@@ -1,9 +1,11 @@
 {
-  "name": "js2mjs",
+  "name": "ts2mjs",
   "version": "1.0.0",
-  "description": "Rename ESM .js files to .mjs",
-  "private": true,
-  "bin": "bin.mjs",
+  "description": "Rename TypeScript Created ESM .js files to .mjs",
+  "bin": {
+    "js2mjs": "bin.mjs",
+    "ts2mjs": "bin.mjs"
+  },
   "type": "module",
   "keywords": [
     "ESM",
@@ -17,7 +19,7 @@
   "license": "MIT",
   "scripts": {
     "build": "tsc -p .",
-    "build:fixtures": "tsc -p fixtures/sample",
+    "build:fixtures": "tsc -p fixtures/sample && ./bin.mjs . --root fixtures/sample/lib --output fixtures/sample/out ",
     "watch": "tsc -p . --watch",
     "coverage": "vitest run --coverage",
     "lint": "pnpm eslint && pnpm prettier",
