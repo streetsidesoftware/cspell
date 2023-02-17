@@ -7,10 +7,11 @@
   "bin": "./bin.cjs",
   "scripts": {
     "clean": "shx rm -rf dist .tsbuildinfo",
-    "build": "pnpm run compile",
+    "build": "pnpm build:node10 && pnpm build:cjs",
+    "build:node10": "tsc -p .",
+    "build:cjs": "tsc -p tsconfig.cjs.json",
     "build-dev": "tsc -p tsconfig.dev.json",
     "clean-build": "pnpm run clean && pnpm run build",
-    "compile": "tsc -p .",
     "test": "pnpm test:unit && pnpm test:smoke",
     "test:smoke": "node ./bin.cjs",
     "test:unit": "jest"

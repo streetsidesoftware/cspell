@@ -52,7 +52,6 @@
     "build:esm": "tsc -p tsconfig.esm.json && js2mjs . --root dist/esm",
     "build:cjs": "tsc -p tsconfig.cjs.json",
     "build:dev": "tsc -p tsconfig.dev.json",
-    "build:rollup": "rollup -c rollup.config.mjs",
     "build-schema": "ts-json-schema-generator --no-top-ref --path src/CSpellSettingsDef.ts --type CSpellSettings --validation-keywords markdownDescription  --validation-keywords scope --validation-keywords deprecated --validation-keywords deprecationMessage -o  ./cspell.schema.json && shx cp ./cspell.schema.json ../..",
     "clean-build": "pnpm run clean && pnpm run build",
     "coverage": "pnpm coverage:vitest && pnpm coverage:fix",

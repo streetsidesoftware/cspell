@@ -1,8 +1,11 @@
 {
     "$schema": "https://json.schemastore.org/tsconfig",
-    "extends": "./tsconfig.esm.json",
+    "extends": "../../tsconfig.cjs.json",
     "compilerOptions": {
-        "moduleResolution": "node",
-        "outDir": "dist/cjs",
-    }
+        "target": "ES2020",
+        "module": "CommonJS",
+        "moduleResolution": "node16",
+        "outDir": "dist/cjs"
+    },
+    "include": ["src"]
 }
