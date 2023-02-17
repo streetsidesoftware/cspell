@@ -5,55 +5,52 @@
   },
   "version": "6.26.3",
   "description": "Types for cspell and cspell-lib",
-  "type": "module",
-  "main": "./dist/cjs/index.cjs",
-  "module": "./dist/esm/index.js",
+  "type": "commonjs",
+  "main": "./dist/cjs/index.js",
+  "module": "./dist/esm/index.mjs",
   "exports": {
     ".": {
-      "import": "./dist/esm/index.js",
-      "types": "./dist/esm/index.d.ts",
-      "require": "./dist/cjs/index.cjs"
+      "import": "./dist/esm/index.mjs",
+      "require": "./dist/cjs/index.js"
     },
     "./Parser": {
-      "import": "./dist/esm/Parser/index.js",
-      "types": "./dist/esm/Parser/index.d.ts",
-      "require": "./dist/cjs/Parser/index.cjs"
+      "import": "./dist/esm/Parser/index.mjs",
+      "require": "./dist/cjs/Parser/index.js"
     },
     "./cspell.schema.json": {
       "import": "./cspell.schema.json",
       "require": "./cspell.schema.json"
     },
-    "./ajv.config": {
-      "import": "./ajv.config.cjs",
-      "require": "./ajv.config.cjs"
-    },
     "./ajv.config.js": {
-      "require": "./ajv.config.cjs"
+      "require": "./ajv.config.js"
     }
   },
   "types": "index.d.ts",
   "typesVersions": {
     "*": {
+      "*.d.mts": [
+        "dist/esm/*.d.mts"
+      ],
       "index.d.ts": [
-        "dist/esm/index.d.ts"
+        "dist/cjs/index.d.ts"
       ],
       "dist/esm/index.d.ts": [
         "dist/esm/index.d.ts"
       ],
       "Parser": [
-        "dist/esm/Parser/index.d.ts"
+        "dist/cjs/Parser/index.d.ts"
       ],
       "*": [
-        "dist/esm/*.d.ts",
-        "dist/esm/*/index.d.ts"
+        "dist/cjs/*.d.ts",
+        "dist/cjs/*/index.d.ts"
       ]
     }
   },
   "scripts": {
     "clean": "shx rm -rf dist coverage .tsbuildinfo",
     "build": "pnpm build:cjs && pnpm build:esm && pnpm run build-schema",
-    "build:cjs": "rollup -c rollup.config.mjs",
-    "build:esm": "tsc -p tsconfig.esm.json",
+    "build:esm": "tsc -p tsconfig.esm.json && js2mjs . --root dist/esm",
+    "build:cjs": "tsc -p tsconfig.cjs.json",
     "build:dev": "tsc -p tsconfig.dev.json",
     "build-schema": "ts-json-schema-generator --no-top-ref --path src/CSpellSettingsDef.ts --type CSpellSettings --validation-keywords markdownDescription  --validation-keywords scope --validation-keywords deprecated --validation-keywords deprecationMessage -o  ./cspell.schema.json && shx cp ./cspell.schema.json ../..",
     "clean-build": "pnpm run clean && pnpm run build",
@@ -62,7 +59,7 @@
     "coverage:fix": "nyc report --temp-dir \"$(pwd)/coverage\" --reporter lcov --report-dir \"$(pwd)/coverage\" --cwd ../..",
     "test": "pnpm test:unit && pnpm test:schema",
     "test:unit": "vitest run",
-    "test:schema": "ajv -s ./cspell.schema.json -d \"cspell.test.{json,yaml}\" -c ./ajv.config.cjs",
+    "test:schema": "ajv -s ./cspell.schema.json -d \"cspell.test.{json,yaml}\" -c ./ajv.config.js",
     "prepare": "echo Skip Building Types"
   },
   "repository": {
@@ -71,7 +68,7 @@
   },
   "files": [
     "dist",
-    "ajv.config.cjs",
+    "ajv.config.js",
     "cspell.schema.json",
     "!**/__mocks__",
     "!**/*.test.*",
@@ -90,6 +87,7 @@
   "devDependencies": {
     "ajv-cli": "^5.0.0",
     "jest": "^29.4.3",
+    "js2mjs": "workspace:*",
     "ts-json-schema-generator": "^1.2.0",
     "typescript": "^4.9.5",
     "vitest": "^0.28.5"

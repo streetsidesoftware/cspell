@@ -11,7 +11,7 @@ export default defineConfig({
             reportsDirectory: 'coverage',
             reporter: ['html', 'text', 'json'],
             exclude: [
-                'ajv.config.cjs',
+                'ajv.config.*',
                 'bin.mjs',
                 'bin.js',
                 'bin.cjs',

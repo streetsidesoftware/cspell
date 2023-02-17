@@ -1,9 +1,10 @@
 {
-    "extends": "../../../tsconfig.json",
+    "extends": "../../tsconfig.cjs.json",
     "compilerOptions": {
         "module": "CommonJS",
         "moduleResolution": "node16",
-        "outDir": "dist"
+        "outDir": "dist/cjs",
+        "types": ["node"]
     },
     "include": [
         "src"
