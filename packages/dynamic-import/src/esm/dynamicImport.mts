@@ -3,12 +3,12 @@ import { pathToFileURL } from 'url';
 
 /**
  * Dynamically import a module using `import`.
- * @param {string} moduleName - name of module, or relative path.
- * @param {(string | URL)[] | string | URL} paths - search paths
+ * @param moduleName - name of module, or relative path.
+ * @param paths - search paths
  * @returns the loaded module.
  */
 export async function dynamicImportFrom<Module>(
-    moduleName: string,
+    moduleName: string | URL,
     paths: string | URL | (string | URL)[] | undefined
 ): Promise<Module> {
     paths = Array.isArray(paths) ? paths : paths ? [paths] : undefined;

@@ -9,8 +9,12 @@ export default mergeConfig(
     defineConfig({
         test: {
             include: ['src/**/*.test.{ts,mts}'],
-            exclude: ['content/**', 'fixtures/**', 'bin.mjs', '_snapshots_'],
+            exclude: ['content/**', 'fixtures/**', 't.mjs', '_snapshots_'],
             root: __dirname,
+            coverage: {
+                all: false,
+                exclude: ['fixtures', 'test', 'test.cjs.mts'],
+            },
             testTimeout: 10000,
         },
     })
