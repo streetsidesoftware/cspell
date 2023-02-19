@@ -1,6 +1,7 @@
-import { dynamicImport } from '../cjs/index.js';
-import { pathToFileURL, fileURLToPath } from 'url';
 import * as path from 'path';
+import { fileURLToPath, pathToFileURL } from 'url';
+
+import { dynamicImport } from '../cjs/index.js';
 
 const fixtures = pathToFileURL('./fixtures/');
 
