@@ -16,9 +16,15 @@
   "homepage": "https://github.com/streetsidesoftware/cspell/tree/main/packages/dynamic-import#readme",
   "license": "MIT",
   "type": "module",
-  "main": "dist/cjs/index.cjs",
-  "module": "lib/index.js",
-  "types": "lib/index.d.ts",
+  "main": "dist/cjs.cjs",
+  "module": "dist/index.mjs",
+  "types": "dist/cjs.d.cts",
+  "exports": {
+    ".": {
+      "require": "./dist/cjs.cjs",
+      "import": "./dist/index.mjs"
+    }
+  },
   "files": [
     "lib",
     "dist",
@@ -29,8 +35,8 @@
     "!**/*.map"
   ],
   "scripts": {
-    "build": "pnpm build:cjs",
-    "build:cjs": "rollup -c rollup.config.mjs",
+    "build": "tsc -p .",
+    "clean-build": "shx rm -rf dist coverage && pnpm build",
     "coverage:vitest": "vitest run --coverage",
     "coverage:fix": "nyc report --temp-dir \"$(pwd)/coverage\" --reporter lcov --report-dir \"$(pwd)/coverage\" --cwd ../..",
     "test-watch": "vitest",
@@ -47,10 +53,6 @@
     "node": ">=14"
   },
   "devDependencies": {
-    "@rollup/plugin-commonjs": "^24.0.1",
-    "@rollup/plugin-json": "^6.0.0",
-    "@rollup/plugin-node-resolve": "^15.0.1",
-    "rollup": "^3.17.1",
     "vitest": "^0.28.5"
   },
   "dependencies": {

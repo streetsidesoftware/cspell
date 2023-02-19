@@ -1,0 +1,21 @@
+{
+    "$schema": "https://json.schemastore.org/tsconfig",
+    "extends": "../../tsconfig.esm.json",
+    "compilerOptions": {
+		"tsBuildInfoFile":"./dist/compile.cjs.tsbuildInfo",
+        "composite": true,
+        "skipLibCheck": true,
+        "target": "es2020",
+        "module": "CommonJS",
+        "moduleResolution": "node16",
+        "lib": ["es2020", "DOM"],
+        "outDir": "dist",
+        "types": ["node"]
+    },
+    "include": [
+        "src/**/*.cts"
+    ],
+	"references": [
+		{ "path": "./tsconfig.esm.json" }
+	]
+}
