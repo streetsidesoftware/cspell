@@ -3,8 +3,8 @@ import { fileURLToPath, pathToFileURL } from 'node:url';
 
 import { describe, expect, test } from 'vitest';
 
-import type * as helloWorld from '../fixtures/hello_world.mjs';
-import { dynamicImport } from '../lib/index.js';
+import type * as helloWorld from '../../fixtures/hello_world.mjs';
+import { dynamicImport } from './index.mjs';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
