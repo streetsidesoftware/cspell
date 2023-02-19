@@ -11,10 +11,16 @@
   "author": "Jason Dent <jason@streetsidesoftware.nl>",
   "homepage": "https://github.com/streetsidesoftware/cspell/tree/main/packages/cspell-service-bus#readme",
   "license": "MIT",
-  "type": "module",
-  "main": "dist/cjs/index.cjs",
-  "module": "dist/esm/index.js",
-  "types": "dist/types/index.d.ts",
+  "type": "commonjs",
+  "main": "dist/cjs/index.js",
+  "module": "dist/esm/index.mjs",
+  "types": "dist/cjs/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/esm/index.mjs",
+      "require": "./dist/cjs/index.js"
+    }
+  },
   "files": [
     "dist",
     "!**/__mocks__",
@@ -24,13 +30,13 @@
     "!**/*.map"
   ],
   "scripts": {
-    "build": "pnpm run clean && pnpm run build:cjs && pnpm run build:esm && pnpm run build:types",
-    "build:cjs": "rollup -c rollup.config.mjs",
-    "build:esm": "tsc -p tsconfig.esm.json",
-    "build:types": "tsc --emitDeclarationOnly --declaration --declarationDir dist/types",
+    "build": "pnpm run clean && pnpm run build:cjs && pnpm run build:esm",
+    "build:cjs": "tsc -p tsconfig.cjs.json",
+    "build:esm": "tsc -p tsconfig.esm.json && ts2mjs dist/esm",
+    "build:clean": "pnpm run clean && pnpm run build",
     "watch": "tsc -p . -w",
     "clean": "shx rm -rf dist coverage .tsbuildinfo",
-    "clean-build": "pnpm run clean && pnpm run build",
+    "clean-build": "pnpm build:clean",
     "coverage": "pnpm coverage:vitest && pnpm coverage:fix",
     "coverage:vitest": "vitest run --coverage",
     "coverage:fix": "nyc report --temp-dir \"$(pwd)/coverage\" --reporter lcov --report-dir \"$(pwd)/coverage\" --cwd ../..",

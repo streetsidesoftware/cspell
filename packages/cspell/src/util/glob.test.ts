@@ -1,12 +1,21 @@
 import { GlobMatcher } from 'cspell-glob';
 import type { Options as MicromatchOptions } from 'micromatch';
 import micromatch from 'micromatch';
-import type { MinimatchOptions } from 'minimatch';
 import { minimatch } from 'minimatch';
 import * as path from 'path';
 import { describe, expect, test, vi } from 'vitest';
 
 import { calcGlobs, normalizeGlobsToRoot } from './glob';
+
+interface MinimatchOptions {
+    windowsPathsNoEscape?: boolean;
+    allowWindowsEscape?: boolean;
+    partial?: boolean;
+    dot?: boolean;
+    matchBase?: boolean;
+    flipNegate?: boolean;
+    preserveMultipleSlashes?: boolean;
+}
 
 const getStdinResult = {
     value: '',

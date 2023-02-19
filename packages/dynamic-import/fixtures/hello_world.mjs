@@ -1,3 +1,5 @@
-export function sayHello(name) {
-    console.log('Hello ' + name);
+export function sayHello(name, log = false) {
+    const msg = 'Hello ' + name;
+    log && console.log(msg);
+    return msg;
 }
