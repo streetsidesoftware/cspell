@@ -15,14 +15,14 @@
   "author": "Jason Dent <jason@streetsidesoftware.nl>",
   "homepage": "https://github.com/streetsidesoftware/cspell/tree/main/packages/dynamic-import#readme",
   "license": "MIT",
-  "type": "module",
-  "main": "dist/cjs.cjs",
-  "module": "dist/esm/index.mjs",
-  "types": "dist/cjs/cjs.d.cts",
+  "type": "commonjs",
+  "main": "./dist/cjs/index.js",
+  "module": "./dist/esm/index.mjs",
+  "types": "./dist/cjs/index.d.ts",
   "exports": {
     ".": {
-      "require": "./dist/cjs.cjs",
-      "import": "./dist/index.mjs"
+      "require": "./dist/cjs/index.js",
+      "import": "./dist/esm/index.mjs"
     }
   },
   "files": [
@@ -35,13 +35,15 @@
     "!**/*.map"
   ],
   "scripts": {
-    "build": "tsc -p .",
+    "build": "tsc -b .",
     "build:clean": "shx rm -rf dist coverage && pnpm build",
     "clean-build": "pnpm build:clean",
+    "coverage": "pnpm coverage:vitest",
     "coverage:vitest": "vitest run --coverage",
     "coverage:fix": "nyc report --temp-dir \"$(pwd)/coverage\" --reporter lcov --report-dir \"$(pwd)/coverage\" --cwd ../..",
     "test-watch": "vitest",
-    "test": "vitest run"
+    "test": "vitest run",
+    "watch": "tsc -b . --watch"
   },
   "repository": {
     "type": "git",
@@ -54,6 +56,7 @@
     "node": ">=14"
   },
   "devDependencies": {
+    "vite": "^4.1.2",
     "vitest": "^0.28.5"
   },
   "dependencies": {

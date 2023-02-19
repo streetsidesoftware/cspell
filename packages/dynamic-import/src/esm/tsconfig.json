@@ -3,7 +3,10 @@
     "extends": "../../tsconfig.base.json",
     "compilerOptions": {
 		"tsBuildInfoFile":"../../dist/compile.esm.tsbuildInfo",
+        "composite": true,
+        "incremental": true,
         "skipLibCheck": true,
+        "rootDir": ".",
         "target": "es2020",
         "module": "ES2020",
         "moduleResolution": "node16",

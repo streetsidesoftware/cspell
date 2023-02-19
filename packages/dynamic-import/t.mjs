@@ -1,4 +1,4 @@
-import { dynamicImport } from './lib/index.js';
+import { dynamicImport } from './dist/esm/index.mjs';
 import { pathToFileURL, fileURLToPath } from 'node:url';
 import * as path from 'node:path';
 
