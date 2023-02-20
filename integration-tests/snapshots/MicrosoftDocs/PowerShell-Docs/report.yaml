@@ -4,8 +4,8 @@ Url: https://github.com/MicrosoftDocs/PowerShell-Docs.git
 Args: ["--config=../../../cspell-power-shell-docs.config.yaml","**"]
 Summary:
   files: 2872
-  filesWithIssues: 1308
-  issues: 6007
+  filesWithIssues: 1321
+  issues: 6116
   errors: 0
 Errors: []
 
@@ -276,8 +276,8 @@ issues:
   - "reference/5.1/Microsoft.PowerShell.Management/Convert-Path.md:146:30    	Normpath	U   	would use **Dirname**, **Normpath**, **Realpath**, **Join"
   - "reference/5.1/Microsoft.PowerShell.Management/Convert-Path.md:146:44    	Realpath	U   	Dirname**, **Normpath**, **Realpath**, **Join**, or other"
   - "reference/5.1/Microsoft.PowerShell.Management/Copy-Item.md:6:1      	Yuponline       	U   	Yuponline version: https://learn"
-  - "reference/5.1/Microsoft.PowerShell.Management/Copy-Item.md:57:22    	Logfiles        	U   	Copy-Item \"C:\\Wabash\\Logfiles\\mar1604.log.txt\" -Destination"
-  - "reference/5.1/Microsoft.PowerShell.Management/Copy-Item.md:155:32   	scriptingexample	U   	Item` cmdlet copies `scriptingexample.ps1` from the `D:\\Folder"
+  - "reference/5.1/Microsoft.PowerShell.Management/Copy-Item.md:76:22    	Logfiles        	U   	Copy-Item \"C:\\Wabash\\Logfiles\\mar1604.log.txt\" -Destination"
+  - "reference/5.1/Microsoft.PowerShell.Management/Copy-Item.md:174:32   	scriptingexample	U   	Item` cmdlet copies `scriptingexample.ps1` from the `D:\\Folder"
   - "reference/5.1/Microsoft.PowerShell.Management/Get-ChildItem.md:158:66   	hiddenfile  	U   	hidden files such as `hiddenfile.txt` that have a mode"
   - "reference/5.1/Microsoft.PowerShell.Management/Get-Clipboard.md:44:61    	Explorerby  	U   	clipboard in Windows Explorerby selecting them and pressing"
   - "reference/5.1/Microsoft.PowerShell.Management/Get-Content.md:238:26     	bytearray   	U   	Member -InputObject $bytearray"
@@ -292,7 +292,7 @@ issues:
   - "reference/5.1/Microsoft.PowerShell.Management/Join-Path.md:32:44    	childpath   	U   	Path \"path\" -ChildPath \"childpath\""
   - "reference/5.1/Microsoft.PowerShell.Management/Join-Path.md:101:87   	Subdir      	U   	Join-Path -ChildPath \"Subdir\""
   - "reference/5.1/Microsoft.PowerShell.Management/Move-Item.md:89:38    	Textfiles   	U   	are to be moved to `C:\\Textfiles` have the same name"
-  - "reference/5.1/Microsoft.PowerShell.Management/New-Item.md:44:49     	testfile	U   	file that is named \"testfile1.txt\" in the current"
+  - "reference/5.1/Microsoft.PowerShell.Management/New-Item.md:79:49     	testfile	U   	file that is named \"testfile1.txt\" in the current"
   - "reference/5.1/Microsoft.PowerShell.Management/New-ItemProperty.md:100:11    	multistring 	U   	$newValue.multistring"
   - "reference/5.1/Microsoft.PowerShell.Management/New-Service.md:62:57      	testservice 	U   	Service -Filter \"Name='testservice'\""
   - "reference/5.1/Microsoft.PowerShell.Management/New-Service.md:96:64      	myservice   	U   	example, `d:\\my share\\myservice.exe` should be specified"
@@ -304,6 +304,7 @@ issues:
   - "reference/5.1/Microsoft.PowerShell.Management/Remove-Computer.md:61:24      	Domaincredential	U   	Remove-Computer -UnjoinDomaincredential Domain01\\Admin01 -PassThru"
   - "reference/5.1/Microsoft.PowerShell.Management/Remove-EventLog.md:122:21     	nteventlogfile  	U   	Get-WmiObject win32_nteventlogfile -Filter \"logfilename"
   - "reference/5.1/Microsoft.PowerShell.Management/Remove-EventLog.md:122:45     	logfilename     	U   	nteventlogfile -Filter \"logfilename='TestLog'\" | foreach"
+  - "reference/5.1/Microsoft.PowerShell.Management/Remove-Item.md:419:11     	dyanamic	U   	This is a dyanamic parameter made available"
   - "reference/5.1/Microsoft.PowerShell.Management/Rename-ItemProperty.md:44:126     	oldconfig   	U   	SmpApplication\" key to \"oldconfig\"."
   - "reference/5.1/Microsoft.PowerShell.Management/Resolve-Path.md:231:4     	rvpa	U   	- `rvpa`"
   - "reference/5.1/Microsoft.PowerShell.Management/Restart-Computer.md:112:2     	Creds   	U   	$Creds = Get-Credential"
@@ -459,7 +460,7 @@ issues:
   - "reference/7.2/Microsoft.PowerShell.Management/Clear-RecycleBin.md:31:17     	readded 	U   	This cmdlet was readded in PowerShell 7."
   - "reference/7.2/Microsoft.PowerShell.Management/Get-Clipboard.md:30:39    	xclip   	U   	cmdlet requires the `xclip` utility to be in the"
   - "reference/7.2/Microsoft.PowerShell.Management/Get-Content.md:150:115    	singlequotes	U   	primary stream. Note the singlequotes to prevent variable"
-  - "reference/7.2/Microsoft.PowerShell.Management/Get-Item.md:137:30    	ntoskrnl	U   	C:\\Windows\\System32\\ntoskrnl.exe | Format-Table"
+  - "reference/7.2/Microsoft.PowerShell.Management/Get-Item.md:175:30    	ntoskrnl	U   	C:\\Windows\\System32\\ntoskrnl.exe | Format-Table"
   - "reference/7.2/Microsoft.PowerShell.Management/New-Service.md:84:16      	CCLCSWRPWPDTLOCRRC          	U   	$SDDL = \"D:(A;;CCLCSWRPWPDTLOCRRC;;;SY)(A;;CCDCLCSWRPWPDTLOCRSD"
   - "reference/7.2/Microsoft.PowerShell.Management/New-Service.md:84:44      	CCDCLCSWRPWPDTLOCRSDRCWDWO  	U   	CCLCSWRPWPDTLOCRRC;;;SY)(A;;CCDCLCSWRPWPDTLOCRSDRCWDWO;;;BA)(A;;CCLCSWLOCRRC"
   - "reference/7.2/Microsoft.PowerShell.Management/New-Service.md:84:80      	CCLCSWLOCRRC                	U   	SWRPWPDTLOCRSDRCWDWO;;;BA)(A;;CCLCSWLOCRRC;;;SU)\""
@@ -702,7 +703,7 @@ issues:
   - "reference/docs-conceptual/community/2023-updates.md:55:5    	Brinkmann   	U   	| JTBrinkmann | 1 |"
   - "reference/docs-conceptual/community/2023-updates.md:57:8    	Toso        	U   	| CarloToso | |"
   - "reference/docs-conceptual/community/community-update.yml:15:28      	quickstart  	U   	overview | quickstart | reference | tutorial"
-  - "reference/docs-conceptual/community/community-update.yml:46:21      	Helmick's   	U   	- text: Jason Helmick's - The Show"
+  - "reference/docs-conceptual/community/community-update.yml:48:21      	Helmick's   	U   	- text: Jason Helmick's - The Show"
   - "reference/docs-conceptual/community/contributing/general-markdown.md:218:41     	friendlyname    	U   	use Markdown syntax `[friendlyname](url-or-path)`."
   - "reference/docs-conceptual/community/contributing/general-markdown.md:243:7      	redirectedfrom  	U   	- `?redirectedfrom=MSDN` - added to the"
   - "reference/docs-conceptual/community/contributing/labelling-in-github.md:33:9    	editorsvcs          	U   	| `area-editorsvcs` | The PowerShell"
@@ -1264,8 +1265,8 @@ issues:
   - "reference/docs-conceptual/toc.yml:337:63    	powershelltabcollection 	U   	ise/object-model/the-powershelltabcollection-object.md"
   - "reference/docs-conceptual/toc.yml:339:63    	powershelltab           	U   	ise/object-model/the-powershelltab-object.md"
   - "reference/docs-conceptual/toc.yml:374:56    	informationstream       	U   	powershell/wmf/whats-new/informationstream-overview.md"
-  - "reference/docs-conceptual/toc.yml:452:41    	cmdline                 	U   	dev-cross-plat/create-cmdline-predictor.md"
-  - "reference/docs-conceptual/toc.yml:512:38    	hackathons              	U   	community/contributing/hackathons.md"
+  - "reference/docs-conceptual/toc.yml:454:41    	cmdline                 	U   	dev-cross-plat/create-cmdline-predictor.md"
+  - "reference/docs-conceptual/toc.yml:514:38    	hackathons              	U   	community/contributing/hackathons.md"
   - "reference/docs-conceptual/whats-new/cmdlet-versions.md:221:107  	Notsupportedonmac   	U   	| ![Included][01] | NotsupportedonmacOS |"
   - "reference/docs-conceptual/whats-new/differences-from-windows-powershell.md:278:26   	inputformat 	U   	short hand to match `-inputformat`, which now needs to"
   - "reference/docs-conceptual/whats-new/differences-from-windows-powershell.md:307:25   	Paren       	U   	Preserve `$?` for **ParenExpression**, **SubExpression"

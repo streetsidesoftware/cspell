@@ -3,7 +3,7 @@ Repository: MicrosoftDocs/PowerShell-Docs
 Url: "https://github.com/MicrosoftDocs/PowerShell-Docs.git"
 Args: ["--config=../../../cspell-power-shell-docs.config.yaml","**"]
 Lines:
- CSpell: Files checked: 2872, Issues found: 6007 in 1308 files
+ CSpell: Files checked: 2872, Issues found: 6116 in 1321 files
  exit code: 1
 ./LICENSE:139:15    - Unknown word (sublicensable)   -- non-sublicensable, non-exclusive, irrevocable
 ./LICENSE:205:34    - Unknown word (waivable)        -- under any voluntary or waivable statutory or compulsory
@@ -270,9 +270,9 @@ Lines:
 ./reference/5.1/Microsoft.PowerShell.LocalAccounts/Remove-LocalGroup.md:180:7     - Unknown word (IUSRS)      -- - IIS_IUSRS
 ./reference/5.1/Microsoft.PowerShell.Management/Convert-Path.md:146:30    - Unknown word (Normpath)   -- would use **Dirname**, **Normpath**, **Realpath**, **Join
 ./reference/5.1/Microsoft.PowerShell.Management/Convert-Path.md:146:44    - Unknown word (Realpath)   -- Dirname**, **Normpath**, **Realpath**, **Join**, or other
-./reference/5.1/Microsoft.PowerShell.Management/Copy-Item.md:155:32    - Unknown word (scriptingexample) -- Item` cmdlet copies `scriptingexample.ps1` from the `D:\Folder
-./reference/5.1/Microsoft.PowerShell.Management/Copy-Item.md:57:22     - Unknown word (Logfiles)   -- Copy-Item "C:\Wabash\Logfiles\mar1604.log.txt" -Destination
+./reference/5.1/Microsoft.PowerShell.Management/Copy-Item.md:174:32    - Unknown word (scriptingexample) -- Item` cmdlet copies `scriptingexample.ps1` from the `D:\Folder
 ./reference/5.1/Microsoft.PowerShell.Management/Copy-Item.md:6:1       - Unknown word (Yuponline)  -- Yuponline version: https://learn
+./reference/5.1/Microsoft.PowerShell.Management/Copy-Item.md:76:22     - Unknown word (Logfiles)   -- Copy-Item "C:\Wabash\Logfiles\mar1604.log.txt" -Destination
 ./reference/5.1/Microsoft.PowerShell.Management/Get-ChildItem.md:158:66    - Unknown word (hiddenfile) -- hidden files such as `hiddenfile.txt` that have a mode
 ./reference/5.1/Microsoft.PowerShell.Management/Get-Clipboard.md:44:61     - Unknown word (Explorerby) -- clipboard in Windows Explorerby selecting them and pressing
 ./reference/5.1/Microsoft.PowerShell.Management/Get-Content.md:238:26    - Unknown word (bytearray)  -- Member -InputObject $bytearray
@@ -287,7 +287,7 @@ Lines:
 ./reference/5.1/Microsoft.PowerShell.Management/Join-Path.md:101:87    - Unknown word (Subdir)     -- Join-Path -ChildPath "Subdir"
 ./reference/5.1/Microsoft.PowerShell.Management/Join-Path.md:32:44     - Unknown word (childpath)  -- Path "path" -ChildPath "childpath"
 ./reference/5.1/Microsoft.PowerShell.Management/Move-Item.md:89:38     - Unknown word (Textfiles)  -- are to be moved to `C:\Textfiles` have the same name
-./reference/5.1/Microsoft.PowerShell.Management/New-Item.md:44:49     - Unknown word (testfile)   -- file that is named "testfile1.txt" in the current
+./reference/5.1/Microsoft.PowerShell.Management/New-Item.md:79:49     - Unknown word (testfile)   -- file that is named "testfile1.txt" in the current
 ./reference/5.1/Microsoft.PowerShell.Management/New-ItemProperty.md:100:11    - Unknown word (multistring) -- $newValue.multistring
 ./reference/5.1/Microsoft.PowerShell.Management/New-Service.md:100:7     - Unknown word (myshare)     -- `'"d:\myshare\myservice.exe arg1 arg
 ./reference/5.1/Microsoft.PowerShell.Management/New-Service.md:62:57     - Unknown word (testservice) -- Service -Filter "Name='testservice'"
@@ -299,6 +299,7 @@ Lines:
 ./reference/5.1/Microsoft.PowerShell.Management/Remove-Computer.md:61:24     - Unknown word (Domaincredential) -- Remove-Computer -UnjoinDomaincredential Domain01\Admin01 -PassThru
 ./reference/5.1/Microsoft.PowerShell.Management/Remove-EventLog.md:122:21    - Unknown word (nteventlogfile) -- Get-WmiObject win32_nteventlogfile -Filter "logfilename
 ./reference/5.1/Microsoft.PowerShell.Management/Remove-EventLog.md:122:45    - Unknown word (logfilename)    -- nteventlogfile -Filter "logfilename='TestLog'" | foreach
+./reference/5.1/Microsoft.PowerShell.Management/Remove-Item.md:419:11    - Unknown word (dyanamic)   -- This is a dyanamic parameter made available
 ./reference/5.1/Microsoft.PowerShell.Management/Rename-ItemProperty.md:44:126    - Unknown word (oldconfig)  -- SmpApplication" key to "oldconfig".
 ./reference/5.1/Microsoft.PowerShell.Management/Resolve-Path.md:231:4     - Unknown word (rvpa)       -- - `rvpa`
 ./reference/5.1/Microsoft.PowerShell.Management/Restart-Computer.md:112:2     - Unknown word (Creds)      -- $Creds = Get-Credential
@@ -454,7 +455,7 @@ Lines:
 ./reference/7.2/Microsoft.PowerShell.Management/Clear-RecycleBin.md:31:17     - Unknown word (readded)    -- This cmdlet was readded in PowerShell 7.
 ./reference/7.2/Microsoft.PowerShell.Management/Get-Clipboard.md:30:39     - Unknown word (xclip)      -- cmdlet requires the `xclip` utility to be in the
 ./reference/7.2/Microsoft.PowerShell.Management/Get-Content.md:150:115   - Unknown word (singlequotes) -- primary stream. Note the singlequotes to prevent variable
-./reference/7.2/Microsoft.PowerShell.Management/Get-Item.md:137:30    - Unknown word (ntoskrnl)   -- C:\Windows\System32\ntoskrnl.exe | Format-Table
+./reference/7.2/Microsoft.PowerShell.Management/Get-Item.md:175:30    - Unknown word (ntoskrnl)   -- C:\Windows\System32\ntoskrnl.exe | Format-Table
 ./reference/7.2/Microsoft.PowerShell.Management/New-Service.md:84:16     - Unknown word (CCLCSWRPWPDTLOCRRC) -- $SDDL = "D:(A;;CCLCSWRPWPDTLOCRRC;;;SY)(A;;CCDCLCSWRPWPDTLOCRSD
 ./reference/7.2/Microsoft.PowerShell.Management/New-Service.md:84:44     - Unknown word (CCDCLCSWRPWPDTLOCRSDRCWDWO) -- CCLCSWRPWPDTLOCRRC;;;SY)(A;;CCDCLCSWRPWPDTLOCRSDRCWDWO;;;BA)(A;;CCLCSWLOCRRC
 ./reference/7.2/Microsoft.PowerShell.Management/New-Service.md:84:80     - Unknown word (CCLCSWLOCRRC)               -- SWRPWPDTLOCRSDRCWDWO;;;BA)(A;;CCLCSWLOCRRC;;;SU)"
@@ -697,7 +698,7 @@ Lines:
 ./reference/docs-conceptual/community/2023-updates.md:55:5      - Unknown word (Brinkmann)   -- | JTBrinkmann |     1      |
 ./reference/docs-conceptual/community/2023-updates.md:57:8      - Unknown word (Toso)        -- | CarloToso |            |
 ./reference/docs-conceptual/community/community-update.yml:15:28     - Unknown word (quickstart) -- overview | quickstart | reference | tutorial
-./reference/docs-conceptual/community/community-update.yml:46:21     - Unknown word (Helmick's)  -- - text: Jason Helmick's - The Show
+./reference/docs-conceptual/community/community-update.yml:48:21     - Unknown word (Helmick's)  -- - text: Jason Helmick's - The Show
 ./reference/docs-conceptual/community/contributing/general-markdown.md:218:41    - Unknown word (friendlyname) -- use Markdown syntax `[friendlyname](url-or-path)`.
 ./reference/docs-conceptual/community/contributing/general-markdown.md:243:7     - Unknown word (redirectedfrom) -- - `?redirectedfrom=MSDN` - added to the
 ./reference/docs-conceptual/community/contributing/labelling-in-github.md:161:11    - Unknown word (shiproom)          -- | `review-shiproom` | Shiproom discussion
@@ -1259,8 +1260,8 @@ Lines:
 ./reference/docs-conceptual/toc.yml:337:63    - Unknown word (powershelltabcollection) -- ise/object-model/the-powershelltabcollection-object.md
 ./reference/docs-conceptual/toc.yml:339:63    - Unknown word (powershelltab)           -- ise/object-model/the-powershelltab-object.md
 ./reference/docs-conceptual/toc.yml:374:56    - Unknown word (informationstream)       -- powershell/wmf/whats-new/informationstream-overview.md
-./reference/docs-conceptual/toc.yml:452:41    - Unknown word (cmdline)                 -- dev-cross-plat/create-cmdline-predictor.md
-./reference/docs-conceptual/toc.yml:512:38    - Unknown word (hackathons)              -- community/contributing/hackathons.md
+./reference/docs-conceptual/toc.yml:454:41    - Unknown word (cmdline)                 -- dev-cross-plat/create-cmdline-predictor.md
+./reference/docs-conceptual/toc.yml:514:38    - Unknown word (hackathons)              -- community/contributing/hackathons.md
 ./reference/docs-conceptual/whats-new/What-s-New-in-PowerShell-72.md:129:11    - Unknown word (awakecoding) -- host by awakecoding · Pull Request #146
 ./reference/docs-conceptual/whats-new/What-s-New-in-PowerShell-73.md:100:12    - Unknown word (eugenesmlv) -- (Thanks @eugenesmlv!)
 ./reference/docs-conceptual/whats-new/What-s-New-in-PowerShell-73.md:106:85    - Unknown word (fflaten)    -- 4][17804]) (Thanks @fflaten!)
