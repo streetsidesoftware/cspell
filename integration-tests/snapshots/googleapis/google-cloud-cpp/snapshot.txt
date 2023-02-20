@@ -3,7 +3,7 @@ Repository: googleapis/google-cloud-cpp
 Url: "https://github.com/googleapis/google-cloud-cpp.git"
 Args: ["--config=../../../../config/repositories/googleapis/google-cloud-cpp/cspell.json","**/*","-e","{*.BUILD,BUILD,CHANGELOG.md,*.sh,*.cfg,*.ps1,Dockerfile.*,*.Dockerfile,*.{yaml,xml,json,cmake}}"]
 Lines:
- CSpell: Files checked: 9841, Issues found: 71573 in 7767 files
+ CSpell: Files checked: 9897, Issues found: 72119 in 7816 files
  exit code: 1
 ./ARCHITECTURE.md:100:20    - Unknown word (bigtable)   -- - Bigtable has a [`bigtable::Table`](/google/cloud
 ./ARCHITECTURE.md:100:3     - Unknown word (Bigtable)   -- - Bigtable has a [`bigtable::Table
@@ -13,32 +13,34 @@ Lines:
 ./ARCHITECTURE.md:91:60     - Unknown word (proto)      -- a `service` in the `.proto` definitions
 ./BUILD.bazel:130:14    - Unknown word (skylib)     -- load("@bazel_skylib//rules:common_settings
 ./BUILD.bazel:40:5      - Unknown word (testonly)   -- testonly = True,
-./CMakeLists.txt:119:38    - Unknown word (GOOGLEAPIS) -- CLOUD_CPP_GEN_DOCS_FOR_GOOGLEAPIS_DEV
-./CMakeLists.txt:124:38    - Unknown word (REFDOC)     -- CLOUD_CPP_USE_MAIN_FOR_REFDOC_LINKS
-./CMakeLists.txt:125:42    - Unknown word (refdoc)     -- the version part for refdoc relative links" OFF
-./CMakeLists.txt:173:39    - Unknown word (protobufs)  -- target results in all protobufs being compiled.
-./CMakeLists.txt:176:8     - Unknown word (subproject) -- # Each subproject adds dependencies to
-./CMakeLists.txt:182:18    - Unknown word (Protobuf)   -- find_package(Protobuf REQUIRED QUIET)
-./CMakeLists.txt:195:64    - Unknown word (gmock)      -- GTest::gtest and GTest::gmock libraries.
+./CMakeLists.txt:104:38    - Unknown word (GOOGLEAPIS) -- CLOUD_CPP_GEN_DOCS_FOR_GOOGLEAPIS_DEV
+./CMakeLists.txt:109:38    - Unknown word (REFDOC)     -- CLOUD_CPP_USE_MAIN_FOR_REFDOC_LINKS
+./CMakeLists.txt:110:42    - Unknown word (refdoc)     -- the version part for refdoc relative links" OFF
+./CMakeLists.txt:158:39    - Unknown word (protobufs)  -- target results in all protobufs being compiled.
+./CMakeLists.txt:161:8     - Unknown word (subproject) -- # Each subproject adds dependencies to
+./CMakeLists.txt:167:18    - Unknown word (Protobuf)   -- find_package(Protobuf REQUIRED QUIET)
+./CMakeLists.txt:180:64    - Unknown word (gmock)      -- GTest::gtest and GTest::gmock libraries.
 ./CMakeLists.txt:20:13     - Unknown word (BUGREPORT)  -- set(PACKAGE_BUGREPORT "https://github.com
-./CMakeLists.txt:88:25     - Unknown word (DOPENSSL)   -- " cmake -DOPENSSL_ROOT_DIR=/usr/local
-./CMakeLists.txt:95:25     - Unknown word (DGOOGLE)    -- " cmake -DGOOGLE_CLOUD_CPP_ENABLE_MACOS
-./CMakeLists.txt:98:6      - Unknown word (ccache)     -- # If ccache is installed use it
-./CMakeLists.txt:99:32     - Unknown word (CCACHE)     -- GOOGLE_CLOUD_CPP_ENABLE_CCACHE "Automatically use ccache
-./README.md:576:35    - Unknown word (lgoogle)    -- names, e.g., by using `-lgoogle_cloud_cpp_bigtable`
+./CMakeLists.txt:73:25     - Unknown word (DOPENSSL)   -- " cmake -DOPENSSL_ROOT_DIR=/usr/local
+./CMakeLists.txt:80:25     - Unknown word (DGOOGLE)    -- " cmake -DGOOGLE_CLOUD_CPP_ENABLE_MACOS
+./CMakeLists.txt:83:6      - Unknown word (ccache)     -- # If ccache is installed use it
+./CMakeLists.txt:84:32     - Unknown word (CCACHE)     -- GOOGLE_CLOUD_CPP_ENABLE_CCACHE "Automatically use ccache
+./README.md:579:35    - Unknown word (lgoogle)    -- names, e.g., by using `-lgoogle_cloud_cpp_bigtable`
 ./README.md:8:4       - Unknown word (Codecov)    -- [![Codecov Coverage status][codecov
 ./SECURITY.md:3:46      - Unknown word (vulnz)      -- issue, please use [g.co/vulnz](https://g.co/vulnz
 ./bazel/BUILD.bazel:17:37     - Unknown word (subpackages) -- visibility = ["//:__subpackages__"])
-./bazel/google_cloud_cpp_deps.bzl:102:11    - Unknown word (protobuf)   -- # protobuf message. No changes
-./bazel/google_cloud_cpp_deps.bzl:124:17    - Unknown word (boringssl)  -- name = "boringssl",
-./bazel/google_cloud_cpp_deps.bzl:158:15    - Unknown word (libcurl)    -- # We need libcurl for the Google Cloud
-./bazel/google_cloud_cpp_deps.bzl:200:20    - Unknown word (opentelemetry) -- name = "io_opentelemetry_cpp",
-./bazel/google_cloud_cpp_deps.bzl:208:41    - Unknown word (docfx)         -- is only used in the docfx internal tool.
-./bazel/google_cloud_cpp_deps.bzl:208:7     - Unknown word (Pugi)          -- # PugiXML, this is only used
-./bazel/google_cloud_cpp_deps.bzl:211:28    - Unknown word (zeux)          -- name = "com_github_zeux_pugixml",
-./bazel/google_cloud_cpp_deps.bzl:211:33    - Unknown word (pugixml)       -- name = "com_github_zeux_pugixml",
-./bazel/google_cloud_cpp_deps.bzl:45:30     - Unknown word (googletest) -- Load rules_cc, used by googletest
-./bazel/google_cloud_cpp_deps.bzl:88:16     - Unknown word (googleapis) -- # Load the googleapis dependency.
+./bazel/deps-cache.py:111:13    - Unknown word (chksum)     -- chksum = hashlib.sha256(f.read
+./bazel/deps-cache.py:135:26    - Unknown word (gsutil)     -- subprocess.run(["gsutil", "-q", "cp", source
+./bazel/google_cloud_cpp_deps.bzl:107:11    - Unknown word (protobuf)   -- # protobuf message. No changes
+./bazel/google_cloud_cpp_deps.bzl:130:17    - Unknown word (boringssl)  -- name = "boringssl",
+./bazel/google_cloud_cpp_deps.bzl:166:15    - Unknown word (libcurl)    -- # We need libcurl for the Google Cloud
+./bazel/google_cloud_cpp_deps.bzl:211:20    - Unknown word (opentelemetry) -- name = "io_opentelemetry_cpp",
+./bazel/google_cloud_cpp_deps.bzl:220:41    - Unknown word (docfx)         -- is only used in the docfx internal tool.
+./bazel/google_cloud_cpp_deps.bzl:220:7     - Unknown word (Pugi)          -- # PugiXML, this is only used
+./bazel/google_cloud_cpp_deps.bzl:223:28    - Unknown word (zeux)          -- name = "com_github_zeux_pugixml",
+./bazel/google_cloud_cpp_deps.bzl:223:33    - Unknown word (pugixml)       -- name = "com_github_zeux_pugixml",
+./bazel/google_cloud_cpp_deps.bzl:46:30     - Unknown word (googletest) -- Load rules_cc, used by googletest
+./bazel/google_cloud_cpp_deps.bzl:93:16     - Unknown word (googleapis) -- # Load the googleapis dependency.
 ./ci/check-include-guards.gawk:26:1      - Unknown word (BEGINFILE)  -- BEGINFILE {
 ./ci/check-include-guards.gawk:32:16     - Unknown word (toupper)    -- guard_body=toupper(FILENAME)
 ./ci/check-include-guards.gawk:33:5      - Unknown word (gsub)       -- gsub("[/\\.]", "_", guard
@@ -54,7 +56,6 @@ Lines:
 ./ci/cloudbuild/notifiers/alerts/README.md:58:13     - Unknown word (eventarc)   -- gcloud beta eventarc triggers create send
 ./ci/cloudbuild/notifiers/alerts/function/function.cc:46:21     - Unknown word (cppcodec)   -- auto const data = cppcodec::base64_rfc4648::decode
 ./ci/cloudbuild/notifiers/logs/README.md:43:34     - Unknown word (publiclogs) -- cloud-cpp-community-publiclogs"
-./ci/cloudbuild/notifiers/logs/README.md:49:1      - Unknown word (gsutil)     -- gsutil iam ch \
 ./ci/cloudbuild/notifiers/logs/README.md:56:8      - Unknown word (buildpack)  -- We use buildpack to compile the code
 ./ci/cloudbuild/notifiers/logs/README.md:62:30     - Unknown word (buildpacks) -- build --builder gcr.io/buildpacks/builder:latest \
 ./ci/cloudbuild/notifiers/logs/README.md:63:44     - Unknown word (cloudevent) -- FUNCTION_SIGNATURE_TYPE=cloudevent" \
@@ -76,70 +77,71 @@ Lines:
 ./ci/etc/docuploader-requirements.in:2:1       - Unknown word (certifi)    -- certifi==2022.6.15
 ./ci/etc/docuploader-requirements.in:5:1       - Unknown word (colorlog)   -- colorlog==6.7.0
 ./ci/etc/docuploader-requirements.txt:5:43      - Unknown word (docuploader) -- generate-hashes ci/etc/docuploader-requirements.in
-./ci/etc/expected_install_directories:107:24    - Unknown word (binaryauthorization)     -- include/google/cloud/binaryauthorization
-./ci/etc/expected_install_directories:111:24    - Unknown word (certificatemanager)      -- include/google/cloud/certificatemanager
+./ci/etc/expected_install_directories:113:24    - Unknown word (binaryauthorization)     -- include/google/cloud/binaryauthorization
+./ci/etc/expected_install_directories:117:24    - Unknown word (certificatemanager)      -- include/google/cloud/certificatemanager
 ./ci/etc/expected_install_directories:11:22     - Unknown word (serviceusage)      -- /include/google/api/serviceusage
-./ci/etc/expected_install_directories:122:24    - Unknown word (clouddms)                -- include/google/cloud/clouddms
-./ci/etc/expected_install_directories:131:24    - Unknown word (contactcenterinsights)   -- include/google/cloud/contactcenterinsights
-./ci/etc/expected_install_directories:138:24    - Unknown word (containeranalysis)       -- include/google/cloud/containeranalysis
+./ci/etc/expected_install_directories:128:24    - Unknown word (clouddms)                -- include/google/cloud/clouddms
+./ci/etc/expected_install_directories:137:24    - Unknown word (contactcenterinsights)   -- include/google/cloud/contactcenterinsights
 ./ci/etc/expected_install_directories:13:18     - Unknown word (appengine)         -- ./include/google/appengine
-./ci/etc/expected_install_directories:141:24    - Unknown word (datacatalog)             -- include/google/cloud/datacatalog
-./ci/etc/expected_install_directories:145:24    - Unknown word (datamigration)           -- include/google/cloud/datamigration
-./ci/etc/expected_install_directories:148:24    - Unknown word (dataplex)                -- include/google/cloud/dataplex
-./ci/etc/expected_install_directories:152:24    - Unknown word (dataproc)                -- include/google/cloud/dataproc
-./ci/etc/expected_install_directories:156:24    - Unknown word (datastream)              -- include/google/cloud/datastream
-./ci/etc/expected_install_directories:167:24    - Unknown word (dialogflow)              -- include/google/cloud/dialogflow
-./ci/etc/expected_install_directories:180:24    - Unknown word (documentai)              -- include/google/cloud/documentai
-./ci/etc/expected_install_directories:184:24    - Unknown word (edgecontainer)           -- include/google/cloud/edgecontainer
-./ci/etc/expected_install_directories:194:24    - Unknown word (filestore)               -- include/google/cloud/filestore
-./ci/etc/expected_install_directories:202:24    - Unknown word (gameservices)            -- include/google/cloud/gameservices
-./ci/etc/expected_install_directories:207:24    - Unknown word (gkehub)                  -- include/google/cloud/gkehub
+./ci/etc/expected_install_directories:144:24    - Unknown word (containeranalysis)       -- include/google/cloud/containeranalysis
+./ci/etc/expected_install_directories:147:24    - Unknown word (datacatalog)             -- include/google/cloud/datacatalog
+./ci/etc/expected_install_directories:151:24    - Unknown word (datamigration)           -- include/google/cloud/datamigration
+./ci/etc/expected_install_directories:154:24    - Unknown word (dataplex)                -- include/google/cloud/dataplex
+./ci/etc/expected_install_directories:158:24    - Unknown word (dataproc)                -- include/google/cloud/dataproc
+./ci/etc/expected_install_directories:162:24    - Unknown word (datastream)              -- include/google/cloud/datastream
+./ci/etc/expected_install_directories:173:24    - Unknown word (dialogflow)              -- include/google/cloud/dialogflow
+./ci/etc/expected_install_directories:186:24    - Unknown word (documentai)              -- include/google/cloud/documentai
+./ci/etc/expected_install_directories:190:24    - Unknown word (edgecontainer)           -- include/google/cloud/edgecontainer
+./ci/etc/expected_install_directories:200:24    - Unknown word (filestore)               -- include/google/cloud/filestore
+./ci/etc/expected_install_directories:208:24    - Unknown word (gameservices)            -- include/google/cloud/gameservices
 ./ci/etc/expected_install_directories:20:24     - Unknown word (accessapproval)    -- include/google/cloud/accessapproval
-./ci/etc/expected_install_directories:211:24    - Unknown word (gkemulticloud)           -- include/google/cloud/gkemulticloud
-./ci/etc/expected_install_directories:244:24    - Unknown word (managedidentities)       -- include/google/cloud/managedidentities
-./ci/etc/expected_install_directories:259:24    - Unknown word (networkmanagement)       -- include/google/cloud/networkmanagement
+./ci/etc/expected_install_directories:213:24    - Unknown word (gkehub)                  -- include/google/cloud/gkehub
+./ci/etc/expected_install_directories:217:24    - Unknown word (gkemulticloud)           -- include/google/cloud/gkemulticloud
+./ci/etc/expected_install_directories:250:24    - Unknown word (managedidentities)       -- include/google/cloud/managedidentities
 ./ci/etc/expected_install_directories:25:24     - Unknown word (accesscontextmanager) -- include/google/cloud/accesscontextmanager
-./ci/etc/expected_install_directories:275:24    - Unknown word (orgpolicy)               -- include/google/cloud/orgpolicy
-./ci/etc/expected_install_directories:279:24    - Unknown word (osconfig)                -- include/google/cloud/osconfig
-./ci/etc/expected_install_directories:280:33    - Unknown word (agentendpoint)           -- google/cloud/osconfig/agentendpoint
-./ci/etc/expected_install_directories:285:24    - Unknown word (oslogin)                 -- include/google/cloud/oslogin
-./ci/etc/expected_install_directories:289:24    - Unknown word (policytroubleshooter)    -- include/google/cloud/policytroubleshooter
-./ci/etc/expected_install_directories:293:24    - Unknown word (privateca)               -- include/google/cloud/privateca
-./ci/etc/expected_install_directories:302:24    - Unknown word (pubsublite)              -- include/google/cloud/pubsublite
-./ci/etc/expected_install_directories:314:24    - Unknown word (resourcemanager)         -- include/google/cloud/resourcemanager
-./ci/etc/expected_install_directories:318:24    - Unknown word (resourcesettings)        -- include/google/cloud/resourcesettings
-./ci/etc/expected_install_directories:32:24     - Unknown word (apigeeconnect)        -- include/google/cloud/apigeeconnect
-./ci/etc/expected_install_directories:334:24    - Unknown word (secretmanager)           -- include/google/cloud/secretmanager
-./ci/etc/expected_install_directories:341:24    - Unknown word (securitycenter)          -- include/google/cloud/securitycenter
-./ci/etc/expected_install_directories:348:24    - Unknown word (servicedirectory)        -- include/google/cloud/servicedirectory
-./ci/etc/expected_install_directories:375:24    - Unknown word (storagetransfer)         -- include/google/cloud/storagetransfer
-./ci/etc/expected_install_directories:386:24    - Unknown word (texttospeech)            -- include/google/cloud/texttospeech
-./ci/etc/expected_install_directories:407:30    - Unknown word (livestream)              -- include/google/cloud/video/livestream
-./ci/etc/expected_install_directories:414:24    - Unknown word (videointelligence)       -- include/google/cloud/videointelligence
-./ci/etc/expected_install_directories:422:24    - Unknown word (vmmigration)             -- include/google/cloud/vmmigration
-./ci/etc/expected_install_directories:426:24    - Unknown word (vmwareengine)            -- include/google/cloud/vmwareengine
-./ci/etc/expected_install_directories:42:24     - Unknown word (artifactregistry)     -- include/google/cloud/artifactregistry
-./ci/etc/expected_install_directories:430:24    - Unknown word (vpcaccess)               -- include/google/cloud/vpcaccess
-./ci/etc/expected_install_directories:434:24    - Unknown word (webrisk)                 -- include/google/cloud/webrisk
-./ci/etc/expected_install_directories:438:24    - Unknown word (websecurityscanner)      -- include/google/cloud/websecurityscanner
-./ci/etc/expected_install_directories:455:27    - Unknown word (clouddebugger)          -- include/google/devtools/clouddebugger
-./ci/etc/expected_install_directories:457:27    - Unknown word (cloudprofiler)          -- include/google/devtools/cloudprofiler
-./ci/etc/expected_install_directories:459:27    - Unknown word (cloudtrace)             -- include/google/devtools/cloudtrace
-./ci/etc/expected_install_directories:478:29    - Unknown word (metricsscope)           -- include/google/monitoring/metricsscope
-./ci/etc/expected_install_directories:49:24     - Unknown word (assuredworkloads)     -- include/google/cloud/assuredworkloads
-./ci/etc/expected_install_directories:53:24     - Unknown word (automl)               -- include/google/cloud/automl
-./ci/etc/expected_install_directories:57:24     - Unknown word (baremetalsolution)    -- include/google/cloud/baremetalsolution
+./ci/etc/expected_install_directories:265:24    - Unknown word (networkmanagement)       -- include/google/cloud/networkmanagement
+./ci/etc/expected_install_directories:281:24    - Unknown word (orgpolicy)               -- include/google/cloud/orgpolicy
+./ci/etc/expected_install_directories:285:24    - Unknown word (osconfig)                -- include/google/cloud/osconfig
+./ci/etc/expected_install_directories:286:33    - Unknown word (agentendpoint)           -- google/cloud/osconfig/agentendpoint
+./ci/etc/expected_install_directories:291:24    - Unknown word (oslogin)                 -- include/google/cloud/oslogin
+./ci/etc/expected_install_directories:295:24    - Unknown word (policytroubleshooter)    -- include/google/cloud/policytroubleshooter
+./ci/etc/expected_install_directories:299:24    - Unknown word (privateca)               -- include/google/cloud/privateca
+./ci/etc/expected_install_directories:308:24    - Unknown word (pubsublite)              -- include/google/cloud/pubsublite
+./ci/etc/expected_install_directories:30:24     - Unknown word (advisorynotifications) -- include/google/cloud/advisorynotifications
+./ci/etc/expected_install_directories:320:24    - Unknown word (resourcemanager)         -- include/google/cloud/resourcemanager
+./ci/etc/expected_install_directories:324:24    - Unknown word (resourcesettings)        -- include/google/cloud/resourcesettings
+./ci/etc/expected_install_directories:340:24    - Unknown word (secretmanager)           -- include/google/cloud/secretmanager
+./ci/etc/expected_install_directories:347:24    - Unknown word (securitycenter)          -- include/google/cloud/securitycenter
+./ci/etc/expected_install_directories:354:24    - Unknown word (servicedirectory)        -- include/google/cloud/servicedirectory
+./ci/etc/expected_install_directories:381:24    - Unknown word (storagetransfer)         -- include/google/cloud/storagetransfer
+./ci/etc/expected_install_directories:38:24     - Unknown word (apigeeconnect)         -- include/google/cloud/apigeeconnect
+./ci/etc/expected_install_directories:392:24    - Unknown word (texttospeech)            -- include/google/cloud/texttospeech
+./ci/etc/expected_install_directories:413:30    - Unknown word (livestream)              -- include/google/cloud/video/livestream
+./ci/etc/expected_install_directories:420:24    - Unknown word (videointelligence)       -- include/google/cloud/videointelligence
+./ci/etc/expected_install_directories:428:24    - Unknown word (vmmigration)             -- include/google/cloud/vmmigration
+./ci/etc/expected_install_directories:432:24    - Unknown word (vmwareengine)            -- include/google/cloud/vmwareengine
+./ci/etc/expected_install_directories:436:24    - Unknown word (vpcaccess)               -- include/google/cloud/vpcaccess
+./ci/etc/expected_install_directories:440:24    - Unknown word (webrisk)                 -- include/google/cloud/webrisk
+./ci/etc/expected_install_directories:444:24    - Unknown word (websecurityscanner)      -- include/google/cloud/websecurityscanner
+./ci/etc/expected_install_directories:461:27    - Unknown word (clouddebugger)          -- include/google/devtools/clouddebugger
+./ci/etc/expected_install_directories:463:27    - Unknown word (cloudprofiler)          -- include/google/devtools/cloudprofiler
+./ci/etc/expected_install_directories:465:27    - Unknown word (cloudtrace)             -- include/google/devtools/cloudtrace
+./ci/etc/expected_install_directories:484:29    - Unknown word (metricsscope)           -- include/google/monitoring/metricsscope
+./ci/etc/expected_install_directories:48:24     - Unknown word (artifactregistry)      -- include/google/cloud/artifactregistry
+./ci/etc/expected_install_directories:55:24     - Unknown word (assuredworkloads)      -- include/google/cloud/assuredworkloads
+./ci/etc/expected_install_directories:59:24     - Unknown word (automl)                -- include/google/cloud/automl
 ./ci/etc/expected_install_directories:5:22      - Unknown word (apikeys)    -- /include/google/api/apikeys
-./ci/etc/expected_install_directories:65:24     - Unknown word (beyondcorp)           -- include/google/cloud/beyondcorp
-./ci/etc/expected_install_directories:66:35     - Unknown word (appconnections)       -- google/cloud/beyondcorp/appconnections
-./ci/etc/expected_install_directories:68:35     - Unknown word (appconnectors)        -- google/cloud/beyondcorp/appconnectors
-./ci/etc/expected_install_directories:70:35     - Unknown word (appgateways)          -- google/cloud/beyondcorp/appgateways
-./ci/etc/expected_install_directories:72:35     - Unknown word (clientconnectorservices) -- google/cloud/beyondcorp/clientconnectorservices
-./ci/etc/expected_install_directories:74:35     - Unknown word (clientgateways)          -- google/cloud/beyondcorp/clientgateways
-./ci/etc/expected_install_directories:79:33     - Unknown word (analyticshub)            -- google/cloud/bigquery/analyticshub
+./ci/etc/expected_install_directories:63:24     - Unknown word (baremetalsolution)     -- include/google/cloud/baremetalsolution
+./ci/etc/expected_install_directories:71:24     - Unknown word (beyondcorp)            -- include/google/cloud/beyondcorp
+./ci/etc/expected_install_directories:72:35     - Unknown word (appconnections)        -- google/cloud/beyondcorp/appconnections
+./ci/etc/expected_install_directories:74:35     - Unknown word (appconnectors)         -- google/cloud/beyondcorp/appconnectors
+./ci/etc/expected_install_directories:76:35     - Unknown word (appgateways)           -- google/cloud/beyondcorp/appgateways
+./ci/etc/expected_install_directories:78:35     - Unknown word (clientconnectorservices) -- google/cloud/beyondcorp/clientconnectorservices
 ./ci/etc/expected_install_directories:7:22      - Unknown word (servicecontrol) -- /include/google/api/servicecontrol
-./ci/etc/expected_install_directories:83:33     - Unknown word (datapolicies)            -- google/cloud/bigquery/datapolicies
-./ci/etc/expected_install_directories:85:33     - Unknown word (datatransfer)            -- google/cloud/bigquery/datatransfer
+./ci/etc/expected_install_directories:80:35     - Unknown word (clientgateways)          -- google/cloud/beyondcorp/clientgateways
+./ci/etc/expected_install_directories:85:33     - Unknown word (analyticshub)            -- google/cloud/bigquery/analyticshub
+./ci/etc/expected_install_directories:89:33     - Unknown word (datapolicies)            -- google/cloud/bigquery/datapolicies
+./ci/etc/expected_install_directories:91:33     - Unknown word (datatransfer)            -- google/cloud/bigquery/datatransfer
 ./ci/etc/expected_install_directories:9:22      - Unknown word (servicemanagement) -- /include/google/api/servicemanagement
 ./ci/etc/pip-tooling-requirements.txt:10:1      - Unknown word (tomli)      -- tomli==2.0.1 \
 ./ci/generate-markdown/README.md:12:4      - Unknown word (HOWTO)      -- ## HOWTO: Generate the markdown
@@ -153,9 +155,9 @@ Lines:
 ./ci/kokoro/windows/build-32.bat:27:6      - Unknown word (VCPKG)      -- set "VCPKG_OVERLAY_TRIPLETS=%cd
 ./ci/tsan_suppressions.txt:19:23     - Unknown word (Posix)      -- thread:ThreadInternalsPosix
 ./ci/verify_current_targets/BUILD.bazel:33:5      - Unknown word (srcs)       -- srcs = [
-./ci/verify_current_targets/CMakeLists.txt:46:47     - Unknown word (ARGN)       -- "${name}" PRIVATE ${ARGN})
-./ci/verify_current_targets/CMakeLists.txt:48:1      - Unknown word (endfunction) -- endfunction ()
-./ci/verify_current_targets/CMakeLists.txt:52:1      - Unknown word (endforeach)  -- endforeach ()
+./ci/verify_current_targets/CMakeLists.txt:50:47     - Unknown word (ARGN)       -- "${name}" PRIVATE ${ARGN})
+./ci/verify_current_targets/CMakeLists.txt:52:1      - Unknown word (endfunction) -- endfunction ()
+./ci/verify_current_targets/CMakeLists.txt:56:1      - Unknown word (endforeach)  -- endforeach ()
 ./ci/verify_current_targets/WORKSPACE.bazel:17:21     - Unknown word (Starlark)   -- # Add the necessary Starlark functions to fetch google
 ./ci/verify_quickstart/CMakeLists.txt:22:35     - Unknown word (DLIBRARIES) -- FATAL_ERROR "Missing -DLIBRARIES argument, for example
 ./ci/verify_quickstart/CMakeLists.txt:35:16     - Unknown word (DCMAKE)     -- "-DCMAKE_PREFIX_PATH=${CMAKE
@@ -177,9 +179,14 @@ Lines:
 ./doc/adr/2019-03-26-binary-distributions.md:16:64     - Unknown word (packageable) -- make our code easily packageable by
 ./doc/adr/2022-01-21-only-public-types-in-public-APIs.md:25:60     - Unknown word (backoff)    -- APIs using retry and backoff policies
 ./doc/adr/2022-11-11-multiple-versions-of-GCP-service-in-one-library.md:43:69     - Unknown word (protoc)     -- the types emitted by `protoc`. For
+./doc/compile-time-configuration.md:18:43     - Unknown word (ccmake)     -- developers can use [ccmake], or run `cmake -L`
+./doc/compile-time-configuration.md:62:29     - Unknown word (DBUILD)     -- tests are enabled via `-DBUILD_TESTING=ON`. You can
+./doc/compile-time-configuration.md:79:10     - Unknown word (cxxopt)     -- - Add `--cxxopt=-std=c++14` and `--host
+./doc/compile-time-configuration.md:81:40     - Unknown word (bazelrc)    -- options in your Bazel `.bazelrc` file.
+./doc/compile-time-configuration.md:91:46     - Unknown word (opentelementry) -- Add `--//:experimental-opentelementry=false` to your
 ./doc/contributor/README.md:62:2      - Unknown word (pkgs)       -- [pkgs.org](https://pkgs.org
 ./doc/contributor/README.md:62:32     - Unknown word (repology)   -- https://pkgs.org), [repology.org](https://repology
-./doc/contributor/howto-guide-adding-generated-libraries.md:119:32    - Unknown word (codegen)    -- generator:google-cloud-cpp-codegen -- \
+./doc/contributor/howto-guide-adding-generated-libraries.md:124:32    - Unknown word (codegen)    -- generator:google-cloud-cpp-codegen -- \
 ./doc/contributor/howto-guide-adding-generated-libraries.md:25:1      - Unknown word (subdir)     -- subdir="google/cloud/${library
 ./doc/contributor/howto-guide-adding-generated-libraries.md:31:23     - Unknown word (noshow)     -- bazel --batch query --noshow_progress --noshow_loading
 ./doc/contributor/howto-guide-adding-generated-libraries.md:71:43     - Unknown word (textproto)  -- generator/generator_config.textproto` and add the new service
@@ -192,14 +199,15 @@ Lines:
 ./doc/contributor/howto-guide-setup-development-workstation.md:101:27    - Unknown word (frontmatter)  -- mdformat-frontmatter==0.4.1 \
 ./doc/contributor/howto-guide-setup-development-workstation.md:115:14    - Unknown word (setuptools)   -- pip3 install setuptools wheel
 ./doc/contributor/howto-guide-setup-development-workstation.md:142:34    - Unknown word (clangd)       -- from source so that clangd can find all the symbols
-./doc/contributor/howto-guide-setup-development-workstation.md:208:6     - Unknown word (usermod)      -- sudo usermod -aG docker $USER
-./doc/contributor/howto-guide-setup-development-workstation.md:220:111   - Unknown word (ALLUSERSPROFILE) -- & SET "PATH=%PATH%;%ALLUSERSPROFILE%\chocolatey\bin"
-./doc/contributor/howto-guide-setup-development-workstation.md:226:1     - Unknown word (choco)           -- choco install -y visualstudio
-./doc/contributor/howto-guide-setup-development-workstation.md:226:100   - Unknown word (buildtools)      -- nativedesktop visualstudio2019buildtools
-./doc/contributor/howto-guide-setup-development-workstation.md:226:70    - Unknown word (nativedesktop)   -- visualstudio2019-workload-nativedesktop visualstudio2019buildtools
-./doc/contributor/howto-guide-setup-development-workstation.md:325:20    - Unknown word (Bcmake)          -- cmake -GNinja -S. -Bcmake-out/ \
-./doc/contributor/howto-guide-setup-development-workstation.md:362:31    - Unknown word (devbox)          -- e.g. VM=my-windows-devbox
-./doc/contributor/howto-guide-setup-development-workstation.md:368:30    - Unknown word (drawfork)        -- Googlers should consult go/drawfork before selecting an
+./doc/contributor/howto-guide-setup-development-workstation.md:159:29    - Unknown word (WERROR)       -- DGOOGLE_CLOUD_CPP_ENABLE_WERROR=ON \
+./doc/contributor/howto-guide-setup-development-workstation.md:210:6     - Unknown word (usermod)      -- sudo usermod -aG docker $USER
+./doc/contributor/howto-guide-setup-development-workstation.md:222:111   - Unknown word (ALLUSERSPROFILE) -- & SET "PATH=%PATH%;%ALLUSERSPROFILE%\chocolatey\bin"
+./doc/contributor/howto-guide-setup-development-workstation.md:228:1     - Unknown word (choco)           -- choco install -y visualstudio
+./doc/contributor/howto-guide-setup-development-workstation.md:228:100   - Unknown word (buildtools)      -- nativedesktop visualstudio2019buildtools
+./doc/contributor/howto-guide-setup-development-workstation.md:228:70    - Unknown word (nativedesktop)   -- visualstudio2019-workload-nativedesktop visualstudio2019buildtools
+./doc/contributor/howto-guide-setup-development-workstation.md:327:20    - Unknown word (Bcmake)          -- cmake -GNinja -S. -Bcmake-out/ \
+./doc/contributor/howto-guide-setup-development-workstation.md:364:31    - Unknown word (devbox)          -- e.g. VM=my-windows-devbox
+./doc/contributor/howto-guide-setup-development-workstation.md:370:30    - Unknown word (drawfork)        -- Googlers should consult go/drawfork before selecting an
 ./doc/contributor/howto-guide-setup-development-workstation.md:52:34     - Unknown word (libbenchmark) -- ares-dev libc-ares2 libbenchmark-dev libcurl4-openssl
 ./doc/contributor/howto-guide-setup-development-workstation.md:52:9      - Unknown word (libc)       -- libc-ares-dev libc-ares2
 ./doc/contributor/howto-guide-setup-development-workstation.md:65:13     - Unknown word (buildifier)   -- Install the buildifier tool, which we use to
@@ -208,28 +216,26 @@ Lines:
 ./doc/cpp-style-guide.md:54:11     - Unknown word (grpcpp)     -- #include <grpcpp/blorg.h>
 ./doc/cpp-style-guide.md:54:18     - Unknown word (blorg)      -- #include <grpcpp/blorg.h>
 ./doc/cpp-style-guide.md:58:11     - Unknown word (unistd)     -- #include <unistd.h>
-./doc/packaging.md:104:3     - Unknown word (ccmake)      -- [`ccmake`][ccmake], or `cmake
-./doc/packaging.md:1321:21   - Unknown word (epel)           -- sudo dnf install -y epel-release && \
-./doc/packaging.md:1558:1    - Unknown word (Abseiil)        -- Abseiil from source.
-./doc/packaging.md:1727:46   - Unknown word (rhscl)          -- -enable rhel-server-rhscl-7-rpms
-./doc/packaging.md:1727:54   - Unknown word (rpms)           -- rhel-server-rhscl-7-rpms
-./doc/packaging.md:1729:55   - Unknown word (devtoolset)     -- ccache cmake3 curl-devel devtoolset-7 gcc gcc-c++ \
+./doc/packaging.md:1313:21   - Unknown word (epel)           -- sudo dnf install -y epel-release && \
+./doc/packaging.md:1549:1    - Unknown word (Abseiil)        -- Abseiil from source.
+./doc/packaging.md:1717:46   - Unknown word (rhscl)          -- -enable rhel-server-rhscl-7-rpms
+./doc/packaging.md:1717:54   - Unknown word (rpms)           -- rhel-server-rhscl-7-rpms
+./doc/packaging.md:1719:55   - Unknown word (devtoolset)     -- ccache cmake3 curl-devel devtoolset-7 gcc gcc-c++ \
 ./doc/packaging.md:194:10    - Unknown word (DCRC)        -- -DCRC32C_BUILD_TESTS=OFF
 ./doc/packaging.md:196:22    - Unknown word (GLOG)        -- -DCRC32C_USE_GLOG=OFF \
-./doc/packaging.md:228:10    - Unknown word (makecache)   -- sudo dnf makecache && \
-./doc/packaging.md:229:39    - Unknown word (findutils)   -- y ccache cmake curl findutils gcc-c++ git make ninja
-./doc/packaging.md:230:17    - Unknown word (devel)       -- openssl-devel patch unzip tar wget
-./doc/packaging.md:259:6     - Unknown word (ldconfig)    -- sudo ldconfig
-./doc/packaging.md:295:8     - Unknown word (DJSON)       -- -DJSON_BuildTests=OFF \
-./doc/packaging.md:331:42    - Unknown word (automake)    -- -allow-downgrade -y automake ccache cmake curl \
-./doc/packaging.md:332:44    - Unknown word (libopenssl)  -- git gzip libcurl-devel libopenssl-devel \
-./doc/packaging.md:342:28    - Unknown word (usrlocal)    -- tee /etc/ld.so.conf.d/usrlocal.conf
-./doc/packaging.md:368:8     - Unknown word (DABSL)       -- -DABSL_BUILD_TESTING=OFF \
-./doc/packaging.md:388:10    - Unknown word (Dprotobuf)   -- -Dprotobuf_BUILD_TESTS=OFF \
-./doc/packaging.md:405:7     - Unknown word (buildconf)   -- ./buildconf && ./configure && make
-./doc/packaging.md:426:16    - Unknown word (PROTOBUF)    -- -DgRPC_PROTOBUF_PROVIDER=package \
-./doc/packaging.md:504:24    - Unknown word (noninteractive) -- export DEBIAN_FRONTEND=noninteractive
-./doc/packaging.md:55:24     - Unknown word (DBUILD)     -- cmake -H. -Bcmake-out -DBUILD_TESTING=OFF -DGOOGLE
+./doc/packaging.md:227:10    - Unknown word (makecache)   -- sudo dnf makecache && \
+./doc/packaging.md:228:39    - Unknown word (findutils)   -- y ccache cmake curl findutils gcc-c++ git make ninja
+./doc/packaging.md:229:17    - Unknown word (devel)       -- openssl-devel patch unzip tar wget
+./doc/packaging.md:258:6     - Unknown word (ldconfig)    -- sudo ldconfig
+./doc/packaging.md:294:8     - Unknown word (DJSON)       -- -DJSON_BuildTests=OFF \
+./doc/packaging.md:329:42    - Unknown word (automake)    -- -allow-downgrade -y automake ccache cmake curl \
+./doc/packaging.md:330:44    - Unknown word (libopenssl)  -- git gzip libcurl-devel libopenssl-devel \
+./doc/packaging.md:340:28    - Unknown word (usrlocal)    -- tee /etc/ld.so.conf.d/usrlocal.conf
+./doc/packaging.md:366:8     - Unknown word (DABSL)       -- -DABSL_BUILD_TESTING=OFF \
+./doc/packaging.md:386:10    - Unknown word (Dprotobuf)   -- -Dprotobuf_BUILD_TESTS=OFF \
+./doc/packaging.md:403:7     - Unknown word (buildconf)   -- ./buildconf && ./configure && make
+./doc/packaging.md:424:16    - Unknown word (PROTOBUF)    -- -DgRPC_PROTOBUF_PROVIDER=package \
+./doc/packaging.md:501:24    - Unknown word (noninteractive) -- export DEBIAN_FRONTEND=noninteractive
 ./doc/packaging.md:69:68     - Unknown word (msbuild)    -- generator from `make` (or msbuild on
 ./doc/packaging.md:71:16     - Unknown word (multicore)  -- advantage of multicore machines. Be aware that
 ./doc/packaging.md:74:65     - Unknown word (NCPU)       -- consider appending `-- -j ${NCPU}` to the
@@ -238,11 +244,35 @@ Lines:
 ./docfx/BUILD.bazel:15:27     - Unknown word (hdrs)       -- :docfx.bzl", "docfx_hdrs", "docfx_srcs")
 ./docfx/CMakeLists.txt:28:15     - Unknown word (Werror)     -- include(EnableWerror)
 ./docfx/CMakeLists.txt:60:10     - Unknown word (fname)      -- foreach (fname IN LISTS unit_tests
+./docfx/doxygen2markdown.cc:104:27    - Unknown word (linebreak)   -- <xsd:element name="linebreak" type="docEmptyType
+./docfx/doxygen2markdown.cc:105:27    - Unknown word (nonbreakablespace) -- <xsd:element name="nonbreakablespace" type="docEmptyType
+./docfx/doxygen2markdown.cc:140:27    - Unknown word (hruler)            -- <xsd:element name="hruler" type="docEmptyType
+./docfx/doxygen2markdown.cc:142:27    - Unknown word (programlisting)    -- <xsd:element name="programlisting" type="listingType"
+./docfx/doxygen2markdown.cc:144:27    - Unknown word (indexentry)        -- <xsd:element name="indexentry" type="docIndexEntryType
+./docfx/doxygen2markdown.cc:145:27    - Unknown word (orderedlist)       -- <xsd:element name="orderedlist" type="docListType"
+./docfx/doxygen2markdown.cc:147:27    - Unknown word (simplesect)        -- <xsd:element name="simplesect" type="docSimpleSectType
+./docfx/doxygen2markdown.cc:149:27    - Unknown word (variablelist)      -- <xsd:element name="variablelist" type="docVariableListType
+./docfx/doxygen2markdown.cc:153:27    - Unknown word (mscfile)           -- <xsd:element name="mscfile" type="docImageType
+./docfx/doxygen2markdown.cc:154:27    - Unknown word (diafile)           -- <xsd:element name="diafile" type="docImageType
+./docfx/doxygen2markdown.cc:155:27    - Unknown word (toclist)           -- <xsd:element name="toclist" type="docTocListType
+./docfx/doxygen2markdown.cc:157:27    - Unknown word (parameterlist)     -- <xsd:element name="parameterlist" type="docParamListType
+./docfx/doxygen2markdown.cc:158:27    - Unknown word (xrefsect)          -- <xsd:element name="xrefsect" type="docXRefSectType
+./docfx/doxygen2markdown.cc:159:27    - Unknown word (copydoc)           -- <xsd:element name="copydoc" type="docCopyType"
+./docfx/doxygen2markdown.cc:161:27    - Unknown word (parblock)          -- <xsd:element name="parblock" type="docParBlockType
+./docfx/doxygen2markdown.cc:77:27     - Unknown word (ulink)      -- <xsd:element name="ulink" type="docURLLink"
+./docfx/doxygen2markdown.cc:90:27     - Unknown word (htmlonly)   -- <xsd:element name="htmlonly" type="docHtmlOnlyType
+./docfx/doxygen2markdown.cc:91:27     - Unknown word (manonly)    -- <xsd:element name="manonly" type="xsd:string"
+./docfx/doxygen2markdown.cc:92:27     - Unknown word (xmlonly)    -- <xsd:element name="xmlonly" type="xsd:string"
+./docfx/doxygen2markdown.cc:93:27     - Unknown word (rtfonly)    -- <xsd:element name="rtfonly" type="xsd:string"
+./docfx/doxygen2markdown.cc:94:27     - Unknown word (latexonly)  -- <xsd:element name="latexonly" type="xsd:string"
+./docfx/doxygen2markdown.cc:95:27     - Unknown word (docbookonly) -- <xsd:element name="docbookonly" type="xsd:string"
+./docfx/doxygen2markdown.cc:99:27     - Unknown word (plantuml)    -- <xsd:element name="plantuml" type="docImageType
 ./docfx/doxygen2markdown.h:15:26     - Unknown word (DOCFX)      -- ifndef GOOGLE_CLOUD_CPP_DOCFX_DOXYGEN2MARKDOWN_H
-./docfx/doxygen2markdown_test.cc:25:3      - Unknown word (pugi)       -- pugi::xml_document doc;
-./docfx/doxygen2markdown_test.cc:41:10     - Unknown word (computeroutput) -- <computeroutput id="test-node">int f
-./docfx/doxygen2markdown_test.cc:65:38     - Unknown word (itemizedlist)   -- 'test-node'>Uh oh: <itemizedlist></itemizedlist></para
-./docfx/doxygen2markdown_test.cc:78:14     - Unknown word (listitem)       -- <listitem>1</listitem>
+./docfx/doxygen2markdown_test.cc:137:10    - Unknown word (itemizedlist)   -- <itemizedlist id='test-node'>
+./docfx/doxygen2markdown_test.cc:138:10    - Unknown word (listitem)       -- <listitem><para>Item 1</para>
+./docfx/doxygen2markdown_test.cc:139:49    - Unknown word (brrr)           -- Item 2: <computeroutput>brrr</computeroutput></para
+./docfx/doxygen2markdown_test.cc:24:3      - Unknown word (pugi)       -- pugi::xml_document doc;
+./docfx/doxygen2markdown_test.cc:76:10     - Unknown word (computeroutput) -- <computeroutput id="test-node">int f
 ./docfx/parse_arguments_test.cc:38:16     - Unknown word (STREQ)      -- EXPECT_STREQ(ex.what(),
 ./examples/BUILD.bazel:84:14     - Unknown word (GENDIR)     -- "-I$(GENDIR)/examples",
 ./examples/CMakeLists.txt:27:13     - Unknown word (Findg)      -- include(FindgRPC)
@@ -301,27 +331,27 @@ Lines:
 ./generator/CMakeLists.txt:228:26    - Unknown word (everytime)   -- build all the tests everytime they create a new package
 ./generator/CMakeLists.txt:52:25     - Unknown word (idempotency) -- internal/forwarding_idempotency_policy_generator.cc
 ./generator/generator.h:27:8      - Unknown word (microgenerator) -- * C++ microgenerator plugin entry point.
+./generator/generator_config.proto:133:11    - Unknown word (Idempotency) -- message IdempotencyOverride {
 ./generator/generator_config.proto:26:27     - Unknown word (rpcs)       -- repeated string omitted_rpcs = 4;
 ./generator/generator_config.proto:41:35     - Unknown word (gcpxx)      -- to true generate the `gcpxxV1` alias for our inline
 ./generator/generator_config.proto:48:42     - Unknown word (struct)     -- ServiceNameRetryTraits struct using the provided codes
 ./generator/generator_config.proto:96:24     - Unknown word (COMPAT)     -- LOCATION_DEPENDENT_COMPAT = 2;
-./generator/generator_config.textproto:105:47    - Unknown word (AUTOML)     -- var: "GOOGLE_CLOUD_CPP_AUTOML_PREDICTION_SERVICE_ENDPOINT
-./generator/generator_config.textproto:411:15    - Unknown word (Abac)       -- "SetLegacyAbac(std::string const&,
-./generator/generator_config.textproto:42:3      - Unknown word (Apigee)     -- # Apigee Connect
-./generator/generator_config.textproto:457:3     - Unknown word (Dataplex)   -- # Dataplex
-./generator/generator_config.textproto:479:3     - Unknown word (Dataproc)   -- # Dataproc
-./generator/generator_config.textproto:47:47     - Unknown word (APIGEE)     -- var: "GOOGLE_CLOUD_CPP_APIGEE_CONNECTION_SERVICE_ENDPOINT
-./generator/generator_config.textproto:530:3     - Unknown word (Datastream) -- # Datastream
-./generator/generator_config.textproto:546:3     - Unknown word (Dialogflow) -- # Dialogflow CX
-./generator/generator_config.textproto:552:47    - Unknown word (DIALOGFLOW) -- var: "GOOGLE_CLOUD_CPP_DIALOGFLOW_ENVIRONMENT_ENDPOINT
-./generator/generator_config.textproto:840:3     - Unknown word (Eventarc)   -- # Eventarc
-./generator/generator_config.textproto:855:3     - Unknown word (Filestore)  -- # Filestore
-./generator/generator_config.textproto:909:7     - Unknown word (Multicloud) -- # GKE Multicloud
+./generator/generator_config.textproto:114:47    - Unknown word (AUTOML)     -- var: "GOOGLE_CLOUD_CPP_AUTOML_PREDICTION_SERVICE_ENDPOINT
+./generator/generator_config.textproto:420:15    - Unknown word (Abac)       -- "SetLegacyAbac(std::string const&,
+./generator/generator_config.textproto:466:3     - Unknown word (Dataplex)   -- # Dataplex
+./generator/generator_config.textproto:488:3     - Unknown word (Dataproc)   -- # Dataproc
+./generator/generator_config.textproto:51:3      - Unknown word (Apigee)     -- # Apigee Connect
+./generator/generator_config.textproto:539:3     - Unknown word (Datastream) -- # Datastream
+./generator/generator_config.textproto:555:3     - Unknown word (Dialogflow) -- # Dialogflow CX
+./generator/generator_config.textproto:561:47    - Unknown word (DIALOGFLOW) -- var: "GOOGLE_CLOUD_CPP_DIALOGFLOW_ENVIRONMENT_ENDPOINT
+./generator/generator_config.textproto:56:47     - Unknown word (APIGEE)     -- var: "GOOGLE_CLOUD_CPP_APIGEE_CONNECTION_SERVICE_ENDPOINT
+./generator/generator_config.textproto:849:3     - Unknown word (Eventarc)   -- # Eventarc
+./generator/generator_config.textproto:864:3     - Unknown word (Filestore)  -- # Filestore
+./generator/generator_config.textproto:918:7     - Unknown word (Multicloud) -- # GKE Multicloud
 ./generator/integration_tests/BUILD.bazel:65:1      - Unknown word (filegroup)  -- filegroup(
 ./generator/integration_tests/backup.proto:27:40     - Unknown word (genproto)   -- "google.golang.org/genproto/googleapis/test/admin
 ./generator/integration_tests/backup.proto:29:19     - Unknown word (classname)  -- option java_outer_classname = "BackupProto";
 ./generator/integration_tests/golden/golden_kitchen_sink_connection_idempotency_policy.h:19:92     - Unknown word (IDEMPOTENCY) -- KITCHEN_SINK_CONNECTION_IDEMPOTENCY_POLICY_H
-./generator/integration_tests/golden/golden_kitchen_sink_connection_idempotency_policy.h:29:70     - Unknown word (Idempotency) -- ultGoldenKitchenSinkConnectionIdempotencyPolicy directly.
 ./generator/integration_tests/golden/v1/golden_kitchen_sink_client.h:213:43    - Unknown word (cloudresourcemanager) -- organizations/1234567890/logs/cloudresourcemanager.googleapis.com%2Factivity
 ./generator/integration_tests/golden/v1/golden_kitchen_sink_client.h:394:62    - Unknown word (bidir)                -- read-write RPCs (aka bidir streaming)
 ./generator/integration_tests/golden/v1/internal/golden_kitchen_sink_option_defaults.cc:39:8      - Unknown word (goldenkitchensink) -- "goldenkitchensink.googleapis.com");
@@ -346,8 +376,6 @@ Lines:
 ./generator/internal/predicate_utils_test.cc:973:44    - Unknown word (falsefragment) -- std::string("fragment0_falsefragment1_true"));
 ./generator/internal/printer_test.cc:37:33     - Unknown word (Inigo)      -- VarsDictionary vars{{"name", "Inigo Montoya"}};
 ./generator/internal/resolve_comment_references_test.cc:224:38    - Unknown word (Oneof)      -- ResolveCommentsReferenceTest, Oneof) {
-./generator/internal/scaffold_generator.cc:1075:15   - Unknown word (cxxopt)          -- build:linux --cxxopt=-std=c++14
-./generator/internal/scaffold_generator.cc:174:21    - Unknown word (bazelrc)    -- {"quickstart/.bazelrc", GenerateQuickstartBazelrc
 ./generator/internal/scaffold_generator.cc:546:2     - Unknown word (mainpage)   -- @mainpage $title$ C++ Client Library
 ./generator/internal/scaffold_generator.cc:559:2     - Unknown word (tableofcontents) -- @tableofcontents{HTML:2}
 ./generator/internal/scaffold_generator.cc:745:7     - Unknown word (tsch)            -- | csh/tsch | `setenv
@@ -372,6 +400,7 @@ Lines:
 ./google/cloud/accessapproval/quickstart/Makefile:30:60     - Unknown word (cflags)     -- config $(CLIENT_MODULE) --cflags)
 ./google/cloud/accessapproval/quickstart/README.md:40:25     - Unknown word (setenv)     -- csh/tsch | `setenv GOOGLE_APPLICATION_CREDENTIAL
 ./google/cloud/accesscontextmanager/access_context_manager_client.h:19:39     - Unknown word (ACCESSCONTEXTMANAGER) -- CLOUD_CPP_GOOGLE_CLOUD_ACCESSCONTEXTMANAGER_ACCESS_CONTEXT_MANAGER
+./google/cloud/advisorynotifications/v1/advisory_notifications_client.h:19:39     - Unknown word (ADVISORYNOTIFICATIONS) -- CLOUD_CPP_GOOGLE_CLOUD_ADVISORYNOTIFICATIONS_V1_ADVISORY_NOTIFICATIONS
 ./google/cloud/apigeeconnect/connection_client.h:19:39     - Unknown word (APIGEECONNECT) -- CLOUD_CPP_GOOGLE_CLOUD_APIGEECONNECT_CONNECTION_CLIENT_H
 ./google/cloud/apikeys/api_keys_client.h:19:39     - Unknown word (APIKEYS)    -- CLOUD_CPP_GOOGLE_CLOUD_APIKEYS_API_KEYS_CLIENT_H
 ./google/cloud/appengine/applications_client.h:189:127   - Unknown word (Fservice)   -- name"%3A"projects%2F-%2FserviceAccounts%2Funique_id
@@ -392,11 +421,8 @@ Lines:
 ./google/cloud/automl/auto_ml_client.h:729:7     - Unknown word (Undeploys)  -- /// Undeploys a model. If the model
 ./google/cloud/baremetalsolution/bare_metal_solution_client.h:19:39     - Unknown word (BAREMETALSOLUTION) -- CLOUD_CPP_GOOGLE_CLOUD_BAREMETALSOLUTION_BARE_METAL_SOLUTION
 ./google/cloud/beyondcorp/app_connections_client.h:20:39     - Unknown word (BEYONDCORP) -- CLOUD_CPP_GOOGLE_CLOUD_BEYONDCORP_APP_CONNECTIONS_CLIENT
-./google/cloud/bigquery/CMakeLists.txt:101:44    - Unknown word (QUICKSTART)  -- CLOUD_CPP_BIGQUERY_TEST_QUICKSTART_TABLE)
-./google/cloud/bigquery/CMakeLists.txt:63:42     - Unknown word (servicename) -- SOURCE_DIR}/mocks/mock_servicename_v2_connection.h
 ./google/cloud/bigquery/README.md:49:3      - Unknown word (constexpr)  -- constexpr int kMaxReadStreams
 ./google/cloud/bigquery/doc/bigquery-read-mock.dox:3:75      - Unknown word (googlemock) -- BigQueryRead application with googlemock
-./google/cloud/bigquery/doc/main.dox:45:2      - Unknown word (parblock)   -- @parblock
 ./google/cloud/bigquery/doc/main.dox:51:2      - Unknown word (endparblock) -- @endparblock
 ./google/cloud/bigquery/doc/main.dox:65:40     - Unknown word (bigqueryconnection) -- (which defaults to "bigqueryconnection.googleapis.com")
 ./google/cloud/bigquery/doc/main.dox:69:40     - Unknown word (bigquerystorage)    -- (which defaults to "bigquerystorage.googleapis.com")
@@ -405,7 +431,7 @@ Lines:
 ./google/cloud/bigquery/doc/main.dox:85:40     - Unknown word (bigquerymigration)    -- (which defaults to "bigquerymigration.googleapis.com")
 ./google/cloud/bigquery/doc/main.dox:93:40     - Unknown word (bigqueryreservation)  -- (which defaults to "bigqueryreservation.googleapis.com")
 ./google/cloud/bigtable/BUILD.bazel:99:22     - Unknown word (readrowsparser) -- name = "internal_readrowsparser_test",
-./google/cloud/bigtable/CMakeLists.txt:443:18    - Unknown word (DBIGTABLE)  -- PRIVATE -DBIGTABLE_CLIENT_FORCE_STATIC
+./google/cloud/bigtable/CMakeLists.txt:457:44    - Unknown word (QUICKSTART) -- CLOUD_CPP_BIGTABLE_TEST_QUICKSTART_TABLE)
 ./google/cloud/bigtable/README.md:27:35     - Unknown word (substr)     -- << "Usage: " << cmd.substr(last_slash + 1)
 ./google/cloud/bigtable/admin/integration_tests/admin_backup_integration_test.cc:41:11     - Unknown word (btadmin)    -- namespace btadmin = ::google::bigtable
 ./google/cloud/bigtable/admin/integration_tests/table_admin_integration_test.cc:221:19    - Unknown word (newfam)     -- mods[0].set_id("newfam");
@@ -618,7 +644,6 @@ Lines:
 ./google/cloud/internal/oauth2_authorized_user_credentials_test.cc:84:34     - Unknown word (THETOKEN)   -- "refresh_token", "1/THETOKEN"),
 ./google/cloud/internal/oauth2_compute_engine_credentials_test.cc:87:24     - Unknown word (mysupersecrettoken) -- "access_token": "mysupersecrettoken",
 ./google/cloud/internal/oauth2_compute_engine_credentials_test.cc:89:22     - Unknown word (tokentype)          -- "token_type": "tokentype"
-./google/cloud/internal/oauth2_credentials.h:93:6      - Unknown word (copydoc)    -- /// @copydoc AuthorizationHeader
 ./google/cloud/internal/oauth2_refreshing_credentials_wrapper.h:40:16     - Unknown word (refreshable) -- * Wrapper for refreshable parts of a Credentials
 ./google/cloud/internal/oauth2_service_account_credentials.cc:268:32    - Unknown word (notasecret) -- 2_parse(p12.get(), "notasecret", &pkey_raw, &cert_raw
 ./google/cloud/internal/oauth2_service_account_credentials.cc:293:51    - Unknown word (oneline)    -- decltype(openssl_free)> oneline(
@@ -850,14 +875,15 @@ Lines:
 ./google/cloud/storage/internal/curl_download_request_test.cc:100:56    - Unknown word (gunzipped)  -- body-transformations", "gunzipped"}},
 ./google/cloud/storage/internal/curl_download_request_test.cc:99:9      - Unknown word (guploader)  -- {"guploader",
 ./google/cloud/storage/internal/grpc_bucket_request_parser.cc:79:6      - Unknown word (subobject)  -- // subobject.
-./google/cloud/storage/internal/grpc_client.cc:215:14    - Unknown word (testbench)  -- auto const testbench =
+./google/cloud/storage/internal/grpc_client.cc:251:14    - Unknown word (testbench)  -- auto const testbench =
 ./google/cloud/storage/internal/grpc_object_request_parser_test.cc:62:33     - Unknown word (Cuakt)      -- md5) : StEvo2V/qoDCuaktZSw3IQ==
+./google/cloud/storage/internal/grpc_split_write_object_data.cc:75:23     - Unknown word (Subcord)    -- auto result = cord_.Subcord(offset_, n);
 ./google/cloud/storage/internal/object_requests_test.cc:239:61    - Unknown word (NEFCQ)      -- encryption-key: MTIzNEFCQ0Q="));
 ./google/cloud/storage/internal/object_requests_test.cc:259:61    - Unknown word (QUJDRD)     -- source-encryption-key: QUJDRDEyMzQ="));
 ./google/cloud/storage/internal/object_requests_test.cc:533:27    - Unknown word (sdlkj)      -- "&upload_id=xa298sd_sdlkj2";
 ./google/cloud/storage/internal/object_write_streambuf_test.cc:363:39    - Unknown word (Putn)       -- ectWriteStreambufTest, MixPutcPutn) {
 ./google/cloud/storage/internal/policy_document_request.cc:94:37     - Unknown word (LIBCPP)     -- 1900) && !defined(_LIBCPP_VERSION)
-./google/cloud/storage/internal/retry_client_test.cc:432:40    - Unknown word (Overcommit) -- yClientTest, UploadChunkHandleOvercommit) {
+./google/cloud/storage/internal/retry_client_test.cc:401:40    - Unknown word (Overcommit) -- yClientTest, UploadChunkHandleOvercommit) {
 ./google/cloud/storage/internal/signed_url_requests_test.cc:111:62    - Unknown word (Bbar)       -- -object?marker=foo%2Bbar)""";
 ./google/cloud/storage/internal/signed_url_requests_test.cc:225:58    - Unknown word (Fhtml)      -- response-content-type=text%2Fhtml)""";
 ./google/cloud/storage/internal/signed_url_requests_test.cc:304:62    - Unknown word (Bhost)      -- SignedHeaders=content-type%3Bhost"

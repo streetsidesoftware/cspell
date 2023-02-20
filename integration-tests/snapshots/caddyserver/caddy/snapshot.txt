@@ -3,7 +3,7 @@ Repository: caddyserver/caddy
 Url: "https://github.com/caddyserver/caddy.git"
 Args: ["**/*.go"]
 Lines:
- CSpell: Files checked: 227, Issues found: 3500 in 209 files
+ CSpell: Files checked: 228, Issues found: 3510 in 210 files
  exit code: 1
 ./admin.go:1045:33   - Unknown word (unsynchronized) -- This is a low-level, unsynchronized function; most callers
 ./admin.go:1081:31   - Unknown word (elems)          -- array = append(array, elems...)
@@ -43,16 +43,16 @@ Lines:
 ./caddyconfig/caddyfile/formatter_test.go:315:18    - Unknown word (redir)      -- input: `redir / /some/#/path`,
 ./caddyconfig/caddyfile/formatter_test.go:330:18    - Unknown word (matthewpi)  -- description: "matthewpi/vscode-caddyfile-support
 ./caddyconfig/caddyfile/formatter_test.go:332:10    - Unknown word (ACMEEMAIL)  -- email {$ACMEEMAIL}
-./caddyconfig/caddyfile/parse.go:168:19    - Unknown word (redeclaration) -- return p.Errf("redeclaration of previously declared
-./caddyconfig/caddyfile/parse.go:177:57    - Unknown word (namespacing)   -- across files/snippets by namespacing them. Without
-./caddyconfig/caddyfile/parse.go:323:7     - Unknown word (globbing)      -- // or globbing pattern. When the function
-./caddyconfig/caddyfile/parse.go:567:42    - Unknown word (parens)        -- is a single key with parens. Nothing else qualifies
-./caddyconfig/caddyfile/parse.go:576:23    - Unknown word (curlies)       -- / snippet must have curlies.
-./caddyconfig/caddyfile/parse_test.go:180:12    - Unknown word (testdata)   -- import testdata/import_test1.txt`, false
-./caddyconfig/caddyfile/parse_test.go:202:56    - Unknown word (dotfiles)   -- continue to read all dotfiles in a dir.
-./caddyconfig/caddyfile/parse_test.go:569:13    - Unknown word (foofoobarbar) -- expect: "foofoobarbar",
-./caddyconfig/caddyfile/parse_test.go:581:13    - Unknown word (foobarfoobar) -- expect: "foobarfoobar",
-./caddyconfig/caddyfile/parse_test.go:593:13    - Unknown word (foobarbaz)    -- expect: "foobarbaz",
+./caddyconfig/caddyfile/parse.go:167:19    - Unknown word (redeclaration) -- return p.Errf("redeclaration of previously declared
+./caddyconfig/caddyfile/parse.go:176:57    - Unknown word (namespacing)   -- across files/snippets by namespacing them.
+./caddyconfig/caddyfile/parse.go:321:7     - Unknown word (globbing)      -- // or globbing pattern. When the function
+./caddyconfig/caddyfile/parse.go:578:42    - Unknown word (parens)        -- is a single key with parens. Nothing else qualifies
+./caddyconfig/caddyfile/parse.go:587:23    - Unknown word (curlies)       -- / snippet must have curlies.
+./caddyconfig/caddyfile/parse_test.go:262:12    - Unknown word (testdata)   -- import testdata/import_test1.txt`, false
+./caddyconfig/caddyfile/parse_test.go:284:56    - Unknown word (dotfiles)   -- continue to read all dotfiles in a dir.
+./caddyconfig/caddyfile/parse_test.go:651:13    - Unknown word (foofoobarbar) -- expect: "foofoobarbar",
+./caddyconfig/caddyfile/parse_test.go:663:13    - Unknown word (foobarfoobar) -- expect: "foobarfoobar",
+./caddyconfig/caddyfile/parse_test.go:675:13    - Unknown word (foobarbaz)    -- expect: "foobarbaz",
 ./caddyconfig/configadapters.go:49:4      - Unknown word (structs)    -- // structs that require a json
 ./caddyconfig/httpcaddyfile/addresses.go:152:2     - Unknown word (sbaddrs)    -- sbaddrs := make([]sbAddrAssociation
 ./caddyconfig/httpcaddyfile/addresses.go:153:12    - Unknown word (sblocks)    -- for addr, sblocks := range addrToServerBlocks
@@ -74,7 +74,7 @@ Lines:
 ./caddyconfig/httpcaddyfile/builtins.go:741:35    - Unknown word (Subroute)      -- caddyhttp.Route, caddyhttp.Subroute:
 ./caddyconfig/httpcaddyfile/builtins.go:743:84    - Unknown word (subroute)      -- than an HTTP route or subroute: %#v (only handler directives
 ./caddyconfig/httpcaddyfile/builtins.go:79:8      - Unknown word (alpn)       -- // alpn
-./caddyconfig/httpcaddyfile/builtins_test.go:174:31    - Unknown word (htlm)       -- /old.html /new.html htlm
+./caddyconfig/httpcaddyfile/builtins_test.go:175:31    - Unknown word (htlm)       -- /old.html /new.html htlm
 ./caddyconfig/httpcaddyfile/directives.go:243:58    - Unknown word (vals)         -- caddyhttp.Route type) in vals to the
 ./caddyconfig/httpcaddyfile/directives.go:471:54    - Unknown word (hostnames)    -- of all the non-empty hostnames found in
 ./caddyconfig/httpcaddyfile/directives.go:79:7      - Unknown word (fastcgi)    -- "php_fastcgi",
@@ -124,10 +124,10 @@ Lines:
 ./cmd/commandfuncs.go:46:36     - Unknown word (envfile)    -- tCmdEnvfileFlag := fl.String("envfile")
 ./cmd/commandfuncs.go:57:30     - Unknown word (pingback)   -- craft the command with a pingback address and with a
 ./cmd/commands.go:33:47     - Unknown word (godoc)      -- the RegisterCommand() godoc.
-./cmd/commands.go:413:63    - Unknown word (manpages)    -- directory where the manpages are generated")
-./cmd/commands.go:439:12    - Unknown word (autoload)    -- $ echo "autoload -U compinit; compinit
-./cmd/commands.go:439:24    - Unknown word (compinit)    -- $ echo "autoload -U compinit; compinit" >> ~/.zshrc
-./cmd/commands.go:442:32    - Unknown word (fpath)       -- completion zsh > "${fpath[1]}/_%[1]s"
+./cmd/commands.go:421:63    - Unknown word (manpages)    -- directory where the manpages are generated")
+./cmd/commands.go:447:12    - Unknown word (autoload)    -- $ echo "autoload -U compinit; compinit
+./cmd/commands.go:447:24    - Unknown word (compinit)    -- $ echo "autoload -U compinit; compinit" >> ~/.zshrc
+./cmd/commands.go:450:32    - Unknown word (fpath)       -- completion zsh > "${fpath[1]}/_%[1]s"
 ./cmd/commands.go:71:40     - Unknown word (initialised) -- returns a list of commands initialised by
 ./cmd/main.go:219:11    - Unknown word (staticcheck) -- //nolint:staticcheck
 ./cmd/main.go:36:20     - Unknown word (pflag)      -- "github.com/spf13/pflag"

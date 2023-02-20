@@ -3,9 +3,9 @@ Repository: caddyserver/caddy
 Url: https://github.com/caddyserver/caddy.git
 Args: ["**/*.go"]
 Summary:
-  files: 227
-  filesWithIssues: 209
-  issues: 3500
+  files: 228
+  filesWithIssues: 210
+  issues: 3510
   errors: 0
 Errors: []
 
@@ -48,16 +48,16 @@ issues:
   - "caddyconfig/caddyfile/formatter_test.go:330:18  	matthewpi   	U   	description: \"matthewpi/vscode-caddyfile-support"
   - "caddyconfig/caddyfile/formatter_test.go:332:10  	ACMEEMAIL   	U   	email {$ACMEEMAIL}"
   - "caddyconfig/caddyfile/formatter.go:216:8    	Caddyfiles  	U   	// ...Caddyfiles should, however, end"
-  - "caddyconfig/caddyfile/parse_test.go:180:12  	testdata    	U   	import testdata/import_test1.txt`, false"
-  - "caddyconfig/caddyfile/parse_test.go:202:56  	dotfiles    	U   	continue to read all dotfiles in a dir."
-  - "caddyconfig/caddyfile/parse_test.go:569:13  	foofoobarbar	U   	expect: \"foofoobarbar\","
-  - "caddyconfig/caddyfile/parse_test.go:581:13  	foobarfoobar	U   	expect: \"foobarfoobar\","
-  - "caddyconfig/caddyfile/parse_test.go:593:13  	foobarbaz   	U   	expect: \"foobarbaz\","
-  - "caddyconfig/caddyfile/parse.go:168:19   	redeclaration   	U   	return p.Errf(\"redeclaration of previously declared"
-  - "caddyconfig/caddyfile/parse.go:177:57   	namespacing     	U   	across files/snippets by namespacing them. Without"
-  - "caddyconfig/caddyfile/parse.go:323:7    	globbing        	U   	// or globbing pattern. When the function"
-  - "caddyconfig/caddyfile/parse.go:567:42   	parens          	U   	is a single key with parens. Nothing else qualifies"
-  - "caddyconfig/caddyfile/parse.go:576:23   	curlies         	U   	/ snippet must have curlies."
+  - "caddyconfig/caddyfile/parse_test.go:262:12  	testdata    	U   	import testdata/import_test1.txt`, false"
+  - "caddyconfig/caddyfile/parse_test.go:284:56  	dotfiles    	U   	continue to read all dotfiles in a dir."
+  - "caddyconfig/caddyfile/parse_test.go:651:13  	foofoobarbar	U   	expect: \"foofoobarbar\","
+  - "caddyconfig/caddyfile/parse_test.go:663:13  	foobarfoobar	U   	expect: \"foobarfoobar\","
+  - "caddyconfig/caddyfile/parse_test.go:675:13  	foobarbaz   	U   	expect: \"foobarbaz\","
+  - "caddyconfig/caddyfile/parse.go:167:19   	redeclaration   	U   	return p.Errf(\"redeclaration of previously declared"
+  - "caddyconfig/caddyfile/parse.go:176:57   	namespacing     	U   	across files/snippets by namespacing them."
+  - "caddyconfig/caddyfile/parse.go:321:7    	globbing        	U   	// or globbing pattern. When the function"
+  - "caddyconfig/caddyfile/parse.go:578:42   	parens          	U   	is a single key with parens. Nothing else qualifies"
+  - "caddyconfig/caddyfile/parse.go:587:23   	curlies         	U   	/ snippet must have curlies."
   - "caddyconfig/configadapters.go:49:4      	structs 	U   	// structs that require a json"
   - "caddyconfig/httpcaddyfile/addresses_fuzz.go:17:9    	httpcaddyfile   	U   	package httpcaddyfile"
   - "caddyconfig/httpcaddyfile/addresses.go:20:7     	netip       	U   	\"net/netip\""
@@ -69,7 +69,7 @@ issues:
   - "caddyconfig/httpcaddyfile/addresses.go:164:23   	Sblocks     	U   	for otherAddr, otherSblocks := range addrToServerBlocks"
   - "caddyconfig/httpcaddyfile/addresses.go:200:5    	hport       	U   	if hport, ok := options[\"http"
   - "caddyconfig/httpcaddyfile/addresses.go:203:5    	hsport      	U   	if hsport, ok := options[\"https"
-  - "caddyconfig/httpcaddyfile/builtins_test.go:174:31   	htlm	U   	/old.html /new.html htlm"
+  - "caddyconfig/httpcaddyfile/builtins_test.go:175:31   	htlm	U   	/old.html /new.html htlm"
   - "caddyconfig/httpcaddyfile/builtins.go:35:14     	mholt           	U   	\"github.com/mholt/acmez/acme\""
   - "caddyconfig/httpcaddyfile/builtins.go:35:20     	acmez           	U   	\"github.com/mholt/acmez/acme\""
   - "caddyconfig/httpcaddyfile/builtins.go:79:8      	alpn            	U   	// alpn"
@@ -130,10 +130,10 @@ issues:
   - "cmd/commandfuncs.go:261:44  	USERPROFILE 	U   	== \"\" && os.Getenv(\"USERPROFILE\") == \"\" && !hasXDG"
   - "cmd/commands.go:33:47   	godoc       	U   	the RegisterCommand() godoc."
   - "cmd/commands.go:71:40   	initialised 	U   	returns a list of commands initialised by"
-  - "cmd/commands.go:413:63  	manpages    	U   	directory where the manpages are generated\")"
-  - "cmd/commands.go:439:12  	autoload    	U   	$ echo \"autoload -U compinit; compinit"
-  - "cmd/commands.go:439:24  	compinit    	U   	$ echo \"autoload -U compinit; compinit\" >> ~/.zshrc"
-  - "cmd/commands.go:442:32  	fpath       	U   	completion zsh > \"${fpath[1]}/_%[1]s\""
+  - "cmd/commands.go:421:63  	manpages    	U   	directory where the manpages are generated\")"
+  - "cmd/commands.go:447:12  	autoload    	U   	$ echo \"autoload -U compinit; compinit"
+  - "cmd/commands.go:447:24  	compinit    	U   	$ echo \"autoload -U compinit; compinit\" >> ~/.zshrc"
+  - "cmd/commands.go:450:32  	fpath       	U   	completion zsh > \"${fpath[1]}/_%[1]s\""
   - "cmd/main.go:36:20   	pflag       	U   	\"github.com/spf13/pflag\""
   - "cmd/main.go:219:11  	staticcheck 	U   	//nolint:staticcheck"
   - "cmd/packagesfuncs.go:39:8       	Pkgs    	U   	pluginPkgs, err := getPluginPackages"
