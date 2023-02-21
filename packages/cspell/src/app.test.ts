@@ -224,11 +224,12 @@ describe('Validate cli', () => {
     });
 
     test.each`
-        msg              | testArgs
-        ${'trace hello'} | ${['trace', 'hello']}
-        ${'trace café'}  | ${['trace', 'café'.normalize('NFD')]}
-        ${'trace hello'} | ${['trace', '--locale=en-gb', 'hello']}
-        ${'suggest'}     | ${['suggest', 'café'.normalize('NFD'), '--num-suggestions=1', '--no-include-ties']}
+        msg                           | testArgs
+        ${'trace hello --all'}        | ${['trace', 'hello', '--all']}
+        ${'trace hello --only-found'} | ${['trace', 'hello', '--only-found']}
+        ${'trace café'}               | ${['trace', 'café'.normalize('NFD')]}
+        ${'trace hello'}              | ${['trace', '--locale=en-gb', 'hello']}
+        ${'suggest'}                  | ${['suggest', 'café'.normalize('NFD'), '--num-suggestions=1', '--no-include-ties']}
     `('app success $msg run with $testArgs', async ({ testArgs }: TestCase) => {
         chalk.level = 0;
         const commander = getCommander();
