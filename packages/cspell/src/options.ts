@@ -79,6 +79,9 @@ export interface TraceOptions extends BaseOptions {
     stdin?: boolean;
     allowCompoundWords?: boolean;
     ignoreCase?: boolean;
+    all?: boolean;
+    onlyFound?: boolean;
+    dictionaryPath?: 'hide' | 'long' | 'short' | 'full';
 }
 
 export interface SuggestionOptions extends BaseOptions {
