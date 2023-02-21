@@ -40,9 +40,9 @@ class SpellingDictionaryCollectionImpl implements SpellingDictionaryCollection {
     readonly isDictionaryCaseSensitive: boolean;
     readonly containsNoSuggestWords: boolean;
 
-    constructor(readonly dictionaries: SpellingDictionary[], readonly name: string) {
+    constructor(readonly dictionaries: SpellingDictionary[], readonly name: string, source?: string) {
         this.dictionaries = this.dictionaries.sort((a, b) => b.size - a.size);
-        this.source = dictionaries.map((d) => d.name).join(', ');
+        this.source = source || dictionaries.map((d) => d.name).join(', ');
         this.isDictionaryCaseSensitive = this.dictionaries.reduce((a, b) => a || b.isDictionaryCaseSensitive, false);
         this.containsNoSuggestWords = this.dictionaries.reduce((a, b) => a || b.containsNoSuggestWords, false);
     }
@@ -128,8 +128,12 @@ class SpellingDictionaryCollectionImpl implements SpellingDictionaryCollection {
     };
 }
 
-export function createCollection(dictionaries: SpellingDictionary[], name: string): SpellingDictionaryCollection {
-    return new SpellingDictionaryCollectionImpl(dictionaries, name);
+export function createCollection(
+    dictionaries: SpellingDictionary[],
+    name: string,
+    source?: string
+): SpellingDictionaryCollection {
+    return new SpellingDictionaryCollectionImpl(dictionaries, name, source);
 }
 
 function isWordInAnyDictionary(

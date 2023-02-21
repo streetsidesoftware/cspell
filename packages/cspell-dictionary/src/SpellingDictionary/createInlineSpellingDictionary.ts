@@ -23,6 +23,6 @@ export function createInlineSpellingDictionary(
             suggestWords && createSuggestDictionary(suggestWords, name + '-suggest', source),
         ].filter(isDefined);
 
-        return createCollection(dictSources, name);
+        return createCollection(dictSources, name, source);
     });
 }

@@ -2,6 +2,7 @@ import type { Command } from 'commander';
 import { Option as CommanderOption } from 'commander';
 
 import * as App from './application';
+import { isDictionaryPathFormat } from './emitters/DictionaryPathFormat';
 import { emitTraceResults } from './emitters/traceEmitter';
 import type { TraceOptions } from './options';
 import { CheckFailed } from './util/errors';
@@ -28,6 +29,11 @@ export function commandTrace(prog: Command): Command {
         )
         .option('--allow-compound-words', 'Turn on allowCompoundWords')
         .addOption(new CommanderOption('--allowCompoundWords', 'Turn on allowCompoundWords').hideHelp())
+        .addOption(
+            new CommanderOption('--dictionary-path <format>', 'Configure how to display the dictionary path.')
+                .choices(['hide', 'short', 'long', 'full'])
+                .default('long', 'Display most of the path.')
+        )
         .option('--no-allow-compound-words', 'Turn off allowCompoundWords')
         .option('--no-ignore-case', 'Do not ignore case and accents when searching for words')
         .option('--stdin', 'Read words from stdin.')
@@ -46,8 +52,11 @@ export function commandTrace(prog: Command): Command {
         .action(async (words: string[], options: TraceCommandOptions) => {
             App.parseApplicationFeatureFlags(options.flag);
             let numFound = 0;
+            const dictionaryPathFormat = isDictionaryPathFormat(options.dictionaryPath)
+                ? options.dictionaryPath
+                : 'long';
             for await (const results of App.trace(words, options)) {
-                emitTraceResults(results, { cwd: process.cwd() });
+                emitTraceResults(results, { cwd: process.cwd(), dictionaryPathFormat });
                 numFound += results.reduce((n, r) => n + (r.found ? 1 : 0), 0);
                 const numErrors = results.map((r) => r.errors?.length || 0).reduce((n, r) => n + r, 0);
                 if (numErrors) {
