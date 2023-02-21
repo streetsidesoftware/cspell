@@ -5,7 +5,7 @@ Args: ["**","--exclude=**/Backup/**"]
 Summary:
   files: 509
   filesWithIssues: 485
-  issues: 16865
+  issues: 16848
   errors: 0
 Errors: []
 
@@ -1118,7 +1118,6 @@ issues:
   - "PowerShell/Clone-SQLLogin.ps1:19:37     	datat           	U   	erInstance is of string array datat ype, and can accept"
   - "PowerShell/Clone-SQLLogin.ps1:19:95     	spearated       	U   	sql instance names, spearated by comma. (mandatory"
   - "PowerShell/Clone-SQLLogin.ps1:34:13     	swich           	U   	This is a swich parameter, if present"
-  - "PowerShell/Clone-SQLLogin.ps1:75:10     	hashtable       	U   	[hashtable[]] $hta = @(); # a hashtable"
   - "PowerShell/Clone-SQLLogin.ps1:85:19     	sqlinstance     	U   	foreach ($sqlinstance in $ServerInstance)"
   - "PowerShell/Clone-SQLLogin.ps1:108:74    	addsrvrolemember	U   	% {$str += \"exec sp_addsrvrolemember @loginame = '$($newLogin"
   - "PowerShell/Clone-SQLLogin.ps1:108:92    	loginame        	U   	sp_addsrvrolemember @loginame = '$($newLogin)', @rolename"
@@ -1142,7 +1141,6 @@ issues:
   - "PowerShell/Create-Deploy-SQL-Script.ps1:68:6    	Tableurn        	U   	$PostTableurnCollection = new-object"
   - "PowerShell/Create-Deploy-SQL-Script.ps1:69:106  	doesnt          	U   	in SMO where the SMO doesnt check the version of"
   - "PowerShell/Create-Deploy-SQL-Script.ps1:70:9    	Dont            	U   	$TypesWeDontWant = '(?im)Roles|Federations"
-  - "PowerShell/Create-Deploy-SQL-Script.ps1:75:53   	notmatch        	U   	($_.PSChildName))\" -notmatch $TypesWeDontWant }"
   - "PowerShell/Create-Deploy-SQL-Script.ps1:81:58   	Childitem       	U   	ObjectType.PSPath)\") { Get-Childitem \"$($_.ObjectType.PSPath"
   - "PowerShell/Create-Deploy-SQL-Script.ps1:84:32   	notlike         	U   	GetType().BaseType -notlike '*smo*') { Get-Childitem"
   - "PowerShell/Create-Deploy-SQL-Script.ps1:87:32   	scriptable      	U   	check if the object is scriptable,"
@@ -1281,7 +1279,6 @@ issues:
   - "PowerShell/Export-SQLTableToCSV.ps1:249:18  	Shema               	U   	if ($ShemaName)"
   - "PowerShell/Export-SQLTableToCSV.ps1:267:19  	Dependecy           	U   	$tableDependecy = Invoke-Sqlcmd -ServerInstan"
   - "PowerShell/Export-SQLTableToCSV.ps1:268:20  	QUOTENAME           	U   	SELECT QUOTENAME(SCHEMA_NAME(t.schema"
-  - "PowerShell/Export-SQLTableToCSV.ps1:319:60  	notin               	U   	eCountOrderByColumns.Column1 -notin $CountOrderByColumns"
   - "PowerShell/Export-SQLTableToCSV.ps1:360:17  	Ordr                	U   	$OrdrByColumns + '\" queryout"
   - "PowerShell/Export-SQLTableToCSV.ps1:360:36  	queryout            	U   	$OrdrByColumns + '\" queryout \"' + $CSVPath + '['"
   - "PowerShell/Export-SQLTableToCSV.ps1:420:49  	DATABASEPROPERTYEX  	U   	CONVERT(VARCHAR(128), DATABASEPROPERTYEX('$DatabaseName', 'collation"
@@ -1479,7 +1476,6 @@ issues:
   - "PowerShell/Send-SqlDataToExcel.ps1:154:99   	autosize    	U   	WorkSheetname Gpwinners -autosize -TableName winners"
   - "PowerShell/Send-SqlDataToExcel.ps1:165:173  	ODFBC       	U   	made rather than an ODFBC connection string"
   - "PowerShell/Send-SqlDataToExcel.ps1:170:88   	lightroom   	U   	which maps to an adobe lightroom database and gets a"
-  - "PowerShell/Send-SqlDataToExcel.ps1:201:10   	Hashtable   	U   	[Hashtable]$PivotTableDefinition"
   - "PowerShell/Send-SqlDataToExcel.ps1:225:18   	Barchart    	U   	[Switch]$Barchart,"
   - "PowerShell/Send-SqlDataToExcel.ps1:237:18   	Passthru    	U   	[Switch]$Passthru"
   - "PowerShell/Send-SqlDataToExcel.ps1:254:61   	Odbc        	U   	TypeName System.Data.Odbc.OdbcConnection"
