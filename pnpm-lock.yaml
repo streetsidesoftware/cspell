@@ -40,7 +40,7 @@ importers:
       ts2mjs: ^1.1.1
       tslib: ^2.5.0
       typescript: ^4.9.5
-      vite: ^4.1.2
+      vite: ^4.1.3
       vitest: ^0.28.5
     devDependencies:
       '@cspell/dict-markdown': 2.0.1
@@ -79,7 +79,7 @@ importers:
       ts2mjs: 1.1.1
       tslib: 2.5.0
       typescript: 4.9.5
-      vite: 4.1.2_@types+node@18.14.0
+      vite: 4.1.3_@types+node@18.14.0
       vitest: 0.28.5
 
   doc-generator:
@@ -388,7 +388,7 @@ importers:
       '@vitest/coverage-istanbul': ^0.28.5
       cspell-glob: workspace:*
       find-up: ^5.0.0
-      vite: ^4.1.2
+      vite: ^4.1.3
       vitest: ^0.28.5
     dependencies:
       cspell-glob: link:../cspell-glob
@@ -397,7 +397,7 @@ importers:
       '@types/node': 18.14.0
       '@vitest/coverage-c8': 0.28.5
       '@vitest/coverage-istanbul': 0.28.5
-      vite: 4.1.2_@types+node@18.14.0
+      vite: 4.1.3_@types+node@18.14.0
       vitest: 0.28.5
 
   packages/cspell-glob:
@@ -639,12 +639,12 @@ importers:
   packages/dynamic-import:
     specifiers:
       import-meta-resolve: ^2.2.1
-      vite: ^4.1.2
+      vite: ^4.1.3
       vitest: ^0.28.5
     dependencies:
       import-meta-resolve: 2.2.1
     devDependencies:
-      vite: 4.1.2
+      vite: 4.1.3
       vitest: 0.28.5
 
   packages/hunspell-reader:
@@ -16069,7 +16069,7 @@ packages:
       picocolors: 1.0.0
       source-map: 0.6.1
       source-map-support: 0.5.21
-      vite: 4.1.2_@types+node@18.14.0
+      vite: 4.1.3_@types+node@18.14.0
     transitivePeerDependencies:
       - '@types/node'
       - less
@@ -16080,8 +16080,42 @@ packages:
       - terser
     dev: true
 
-  /vite/4.1.2:
+  /vite/4.1.2_@types+node@18.14.0:
     resolution: {integrity: sha512-MWDb9Rfy3DI8omDQySbMK93nQqStwbsQWejXRY2EBzEWKmLAXWb1mkI9Yw2IJrc+oCvPCI1Os5xSSIBYY6DEAw==}
+    engines: {node: ^14.18.0 || >=16.0.0}
+    hasBin: true
+    peerDependencies:
+      '@types/node': '>= 14'
+      less: '*'
+      sass: '*'
+      stylus: '*'
+      sugarss: '*'
+      terser: ^5.4.0
+    peerDependenciesMeta:
+      '@types/node':
+        optional: true
+      less:
+        optional: true
+      sass:
+        optional: true
+      stylus:
+        optional: true
+      sugarss:
+        optional: true
+      terser:
+        optional: true
+    dependencies:
+      '@types/node': 18.14.0
+      esbuild: 0.16.17
+      postcss: 8.4.21
+      resolve: 1.22.1
+      rollup: 3.17.1
+    optionalDependencies:
+      fsevents: 2.3.2
+    dev: true
+
+  /vite/4.1.3:
+    resolution: {integrity: sha512-0Zqo4/Fr/swSOBmbl+HAAhOjrqNwju+yTtoe4hQX9UsARdcuc9njyOdr6xU0DDnV7YP0RT6mgTTOiRtZgxfCxA==}
     engines: {node: ^14.18.0 || >=16.0.0}
     hasBin: true
     peerDependencies:
@@ -16113,8 +16147,8 @@ packages:
       fsevents: 2.3.2
     dev: true
 
-  /vite/4.1.2_@types+node@18.14.0:
-    resolution: {integrity: sha512-MWDb9Rfy3DI8omDQySbMK93nQqStwbsQWejXRY2EBzEWKmLAXWb1mkI9Yw2IJrc+oCvPCI1Os5xSSIBYY6DEAw==}
+  /vite/4.1.3_@types+node@18.14.0:
+    resolution: {integrity: sha512-0Zqo4/Fr/swSOBmbl+HAAhOjrqNwju+yTtoe4hQX9UsARdcuc9njyOdr6xU0DDnV7YP0RT6mgTTOiRtZgxfCxA==}
     engines: {node: ^14.18.0 || >=16.0.0}
     hasBin: true
     peerDependencies:
