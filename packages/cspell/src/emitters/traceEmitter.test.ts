@@ -3,7 +3,7 @@ import strip from 'strip-ansi';
 import { describe, expect, test, vi } from 'vitest';
 
 import type { TraceResult } from '../application';
-import { emitTraceResults, __testing__ } from './traceEmitter';
+import { __testing__, emitTraceResults } from './traceEmitter';
 
 const compareStr = Intl.Collator().compare;
 
