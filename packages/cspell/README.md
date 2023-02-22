@@ -242,12 +242,18 @@ Options:
                               looks for cspell.json in the current directory.
   --locale <locale>           Set language locales. i.e. "en,fr" for English
                               and French, or "en-GB" for British English.
-  --language-id <language>    Use programming language. i.e. "php" or "scala"
+  --language-id <language>    Use programming language. i.e. "php" or "scala".
   --allow-compound-words      Turn on allowCompoundWords
   --no-allow-compound-words   Turn off allowCompoundWords
+  --ignore-case               Ignore case and accents when searching for words.
   --no-ignore-case            Do not ignore case and accents when searching for
-                              words
+                              words.
+  --dictionary-path <format>  Configure how to display the dictionary path.
+                              (choices: "hide", "short", "long", "full",
+                              default: Display most of the path.)
   --stdin                     Read words from stdin.
+  --all                       Show all dictionaries.
+  --only-found                Show only dictionaries that have the words.
   --no-color                  Turn off color.
   --color                     Force color
   --no-default-configuration  Do not load the default configuration and
