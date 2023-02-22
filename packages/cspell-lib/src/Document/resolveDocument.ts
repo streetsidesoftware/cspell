@@ -3,6 +3,7 @@ import { URI } from 'vscode-uri';
 
 import type { TextDocument } from '../Models/TextDocument';
 import { createTextDocument } from '../Models/TextDocument';
+import { toUri } from '../Models/Uri';
 import { clean } from '../util/util';
 import type { Document, DocumentWithText } from './Document';
 
@@ -23,7 +24,7 @@ export function fileToDocument(
     locale?: string
 ): Document | DocumentWithText {
     return clean({
-        uri: URI.file(file).toString(),
+        uri: toUri(file).toString(),
         text,
         languageId,
         locale,

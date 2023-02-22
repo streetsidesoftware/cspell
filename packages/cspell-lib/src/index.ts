@@ -7,7 +7,7 @@ export { fileToDocument, fileToTextDocument, isBinaryFile } from './Document';
 export { ExcludeFilesGlobMap, ExclusionFunction } from './exclusionHelper';
 export { FeatureFlag, FeatureFlags, getSystemFeatureFlags, UnknownFeatureFlagError } from './FeatureFlags';
 export { getLanguagesForBasename as getLanguageIdsForBaseFilename, getLanguagesForExt } from './LanguageIds';
-export type { CreateTextDocumentParams, TextDocument, TextDocumentLine } from './Models/TextDocument';
+export type { CreateTextDocumentParams, TextDocument, TextDocumentLine, TextDocumentRef } from './Models/TextDocument';
 export { createTextDocument, updateTextDocument } from './Models/TextDocument';
 export {
     calcOverrideSettings,
@@ -67,7 +67,7 @@ export {
 } from './SpellingDictionary';
 export type { SuggestedWord, SuggestionOptions, SuggestionsForWordResult } from './suggestions';
 export { SuggestionError, suggestionsForWord, suggestionsForWords } from './suggestions';
-export { DocumentValidator, DocumentValidatorOptions } from './textValidation';
+export { DocumentValidator, DocumentValidatorOptions, shouldCheckDocument } from './textValidation';
 export type { TraceOptions, TraceResult } from './trace';
 export { traceWords, traceWordsAsync } from './trace';
 export { getLogger, Logger, setLogger } from './util/logger';

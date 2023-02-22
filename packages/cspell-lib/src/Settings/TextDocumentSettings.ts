@@ -7,9 +7,12 @@ import { calcSettingsForLanguageId } from './LanguageSettings';
 
 export function combineTextAndLanguageSettings(
     settings: CSpellUserSettings,
-    text: string,
+    text: string | undefined,
     languageId: string | string[]
 ): CSpellSettingsInternal {
+    if (!text) {
+        return CSpellSettingsServer.toInternalSettings(calcSettingsForLanguageId(settings, languageId));
+    }
     const docSettings = extractSettingsFromText(text);
     const settingsForText = CSpellSettingsServer.mergeSettings(settings, docSettings);
     const langSettings = calcSettingsForLanguageId(settingsForText, languageId);

@@ -3,7 +3,7 @@ export type { ValidationResult } from '../Models/ValidationResult';
 export type { CheckTextInfo, TextInfoItem } from './checkText';
 export { checkText, checkTextDocument, IncludeExcludeFlag } from './checkText';
 export type { DocumentValidatorOptions } from './docValidator';
-export { DocumentValidator } from './docValidator';
+export { DocumentValidator, shouldCheckDocument } from './docValidator';
 export type { Offset, SimpleRange } from './parsedText';
 export { calcTextInclusionRanges } from './textValidator';
 export type { ValidateTextOptions } from './ValidateTextOptions';

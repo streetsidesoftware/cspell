@@ -23,6 +23,30 @@ export interface TextDocumentLine {
     readonly position: Position;
 }
 
+export interface TextDocumentRef {
+    /**
+     * The associated URI for this document. Most documents have the __file__-scheme, indicating that they
+     * represent files on disk. However, some documents may have other schemes indicating that they are not
+     * available on disk.
+     */
+    readonly uri: DocumentUri;
+
+    /**
+     * The identifier of the language associated with this document.
+     */
+    readonly languageId?: string | string[] | undefined;
+
+    /**
+     * the raw Document Text
+     */
+    readonly text?: string | undefined;
+
+    /**
+     * The natural language locale.
+     */
+    readonly locale?: string | undefined;
+}
+
 /**
  * A simple text document. Not to be implemented. The document keeps the content
  * as string.

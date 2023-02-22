@@ -1,4 +1,4 @@
-import type { CSpellUserSettings, ImportFileRef, PnPSettings as PnPSettingsStrict, Source } from '@cspell/cspell-types';
+import type { CSpellUserSettings, ImportFileRef, Source } from '@cspell/cspell-types';
 import * as json from 'comment-json';
 import type { Options as CosmicOptions, OptionsSync as CosmicOptionsSync } from 'cosmiconfig';
 import { cosmiconfig, cosmiconfigSync } from 'cosmiconfig';
@@ -8,9 +8,9 @@ import * as path from 'path';
 import { URI } from 'vscode-uri';
 
 import { createCSpellSettingsInternal as csi } from '../../../Models/CSpellSettingsInternalDef';
+import { AutoResolveLRUCache } from '../../../util/AutoResolveLRUCache';
 import { logError, logWarning } from '../../../util/logger';
 import { resolveFile } from '../../../util/resolveFile';
-import type { OptionalOrUndefined } from '../../../util/types';
 import {
     configSettingsFileVersion0_1,
     configSettingsFileVersion0_2,
@@ -33,11 +33,11 @@ import {
     normalizeReporters,
     normalizeSettingsGlobs,
 } from './normalizeRawSettings';
+import type { PnPSettingsOptional } from './PnPSettings';
+import { defaultPnPSettings, normalizePnPSettings } from './PnPSettings';
 import type { CSpellSettingsI, CSpellSettingsWST } from './types';
 
 type CSpellSettingsVersion = Exclude<CSpellUserSettings['version'], undefined>;
-type PnPSettings = OptionalOrUndefined<PnPSettingsStrict>;
-
 const supportedCSpellConfigVersions: CSpellSettingsVersion[] = [configSettingsFileVersion0_2];
 
 const setOfSupportedConfigVersions = Object.freeze(new Set<string>(supportedCSpellConfigVersions));
@@ -45,6 +45,10 @@ const setOfSupportedConfigVersions = Object.freeze(new Set<string>(supportedCSpe
 export const sectionCSpell = 'cSpell';
 
 export const defaultFileName = 'cspell.json';
+
+const gcl = getDefaultConfigLoaderInternal;
+
+const CACHE_SIZE_SEARCH_CONFIG = 32;
 
 /**
  * Logic of the locations:
@@ -94,8 +98,6 @@ function parseJson(_filename: string, content: string) {
 
 export const defaultConfigFilenames = Object.freeze(searchPlaces.concat());
 
-const defaultPnPSettings: PnPSettings = {};
-
 let defaultConfigLoader: ConfigLoaderInternal | undefined = undefined;
 
 export class ConfigLoader {
@@ -137,10 +139,56 @@ export class ConfigLoader {
         relativeToOrDefault?: CSpellSettingsWST | string,
         defaultValue?: CSpellSettingsWST
     ): CSpellSettingsI {
-        const relativeTo = typeof relativeToOrDefault === 'string' ? relativeToOrDefault : process.cwd();
+        // console.log('Read Settings: %o', { filename, relativeToOrDefault });
+        const relativeTo = (typeof relativeToOrDefault === 'string' ? relativeToOrDefault : '') || process.cwd();
         defaultValue = defaultValue || (typeof relativeToOrDefault !== 'string' ? relativeToOrDefault : undefined);
         const ref = resolveFilename(filename, relativeTo);
         return this.importSettings(ref, defaultValue, defaultValue || defaultPnPSettings);
+    }
+
+    public async readSettingsAsync(
+        filename: string,
+        relativeTo?: string,
+        pnpSettings?: PnPSettingsOptional
+    ): Promise<CSpellSettingsI> {
+        const ref = resolveFilename(filename, relativeTo || process.cwd());
+        return this.importSettings(ref, undefined, pnpSettings || defaultPnPSettings);
+    }
+
+    /**
+     *
+     * @param searchFrom the directory / file to start searching from.
+     * @param pnpSettings - related to Using Yarn PNP.
+     * @returns the resulting settings
+     */
+    searchForConfig(
+        searchFrom: string | undefined,
+        pnpSettings: PnPSettingsOptional = defaultPnPSettings
+    ): Promise<CSpellSettingsI | undefined> {
+        pnpSettings = normalizePnPSettings(pnpSettings);
+        return this.searchConfigLRU.get({ searchFrom, pnpSettings }, (p) => this._searchForConfig(p));
+    }
+
+    private searchConfigLRU = new AutoResolveLRUCache<
+        {
+            searchFrom: string | undefined;
+            pnpSettings: PnPSettingsOptional;
+        },
+        Promise<CSpellSettingsI | undefined>
+    >(CACHE_SIZE_SEARCH_CONFIG, (a, b) => a.searchFrom === b.searchFrom && a.pnpSettings === b.pnpSettings);
+
+    private _searchForConfig(params: {
+        searchFrom: string | undefined;
+        pnpSettings: PnPSettingsOptional;
+    }): Promise<CSpellSettingsI | undefined> {
+        // console.log('_searchForConfig: %o', { params, stats: this.searchConfigLRU.stats() });
+        return gcl()
+            .normalizeSearchForConfigResultAsync(
+                params.searchFrom || process.cwd(),
+                this.cspellConfigExplorer.search(params.searchFrom),
+                params.pnpSettings
+            )
+            .then((r) => (r.filepath ? r.config : undefined));
     }
 
     public getGlobalSettings(): CSpellSettingsI {
@@ -156,6 +204,7 @@ export class ConfigLoader {
     }
 
     public clearCachedSettingsFiles(): void {
+        this.searchConfigLRU.clear();
         this.globalSettings = undefined;
         this.cachedFiles.clear();
         this.cspellConfigExplorer.clearCaches();
@@ -194,7 +243,7 @@ export class ConfigLoader {
     protected importSettings(
         fileRef: ImportFileRef,
         defaultValues: CSpellSettingsWST | undefined,
-        pnpSettings: PnPSettings
+        pnpSettings: PnPSettingsOptional
     ): CSpellSettingsI {
         defaultValues = defaultValues ?? defaultSettings;
         const { filename } = fileRef;
@@ -207,7 +256,7 @@ export class ConfigLoader {
             return cached;
         }
         const id = [path.basename(path.dirname(filename)), path.basename(filename)].join('/');
-        const name = id;
+        const name = '';
         const finalizeSettings: CSpellSettingsI = csi({ id, name, __importRef: importRef });
         this.cachedFiles.set(filename, finalizeSettings); // add an empty entry to prevent circular references.
         const settings: CSpellSettingsWST = { ...defaultValues, id, name, ...this.readConfig(importRef) };
@@ -227,7 +276,7 @@ export class ConfigLoader {
     protected normalizeSettings(
         rawSettings: CSpellSettingsWST,
         pathToSettingsFile: string,
-        pnpSettings: PnPSettings
+        pnpSettings: PnPSettingsOptional
     ): CSpellSettingsI {
         const id =
             rawSettings.id ||
@@ -236,10 +285,7 @@ export class ConfigLoader {
 
         // Try to load any .pnp files before reading dictionaries or other config files.
         const { usePnP = pnpSettings.usePnP, pnpFiles = pnpSettings.pnpFiles } = rawSettings;
-        const pnpSettingsToUse: PnPSettings = {
-            usePnP,
-            pnpFiles,
-        };
+        const pnpSettingsToUse: PnPSettingsOptional = normalizePnPSettings({ usePnP, pnpFiles });
         const pathToSettingsDir = path.dirname(pathToSettingsFile);
         loadPnPSync(pnpSettingsToUse, URI.file(pathToSettingsDir));
 
@@ -252,6 +298,7 @@ export class ConfigLoader {
             globRoot: resolveGlobRoot(rawSettings, pathToSettingsFile),
             languageSettings: normalizeLanguageSettings(rawSettings.languageSettings),
         };
+
         const pathToSettings = path.dirname(pathToSettingsFile);
         const normalizedDictionaryDefs = normalizeDictionaryDefs(settings, pathToSettingsFile);
         const normalizedSettingsGlobs = normalizeSettingsGlobs(settings, pathToSettingsFile);
@@ -310,6 +357,59 @@ class ConfigLoaderInternal extends ConfigLoader {
 
     readonly _readConfig = this.readConfig.bind(this);
     readonly _normalizeSettings = this.normalizeSettings.bind(this);
+
+    async normalizeSearchForConfigResultAsync(
+        searchPath: string,
+        searchResult: Promise<SearchForConfigResult | null>,
+        pnpSettings: PnPSettingsOptional
+    ): Promise<NormalizeSearchForConfigResult> {
+        let result: SearchForConfigResult | ImportError | undefined;
+        try {
+            result = (await searchResult) || undefined;
+        } catch (cause) {
+            result = new ImportError(`Failed to find config file at: "${searchPath}"`, cause);
+        }
+
+        return this.normalizeSearchForConfigResult(searchPath, result, pnpSettings);
+    }
+
+    normalizeSearchForConfigResult(
+        searchPath: string,
+        searchResult: SearchForConfigResult | ImportError | undefined,
+        pnpSettings: PnPSettingsOptional
+    ): NormalizeSearchForConfigResult {
+        const error = searchResult instanceof ImportError ? searchResult : undefined;
+        const result = searchResult instanceof ImportError ? undefined : searchResult;
+
+        const filepath = result?.filepath;
+        if (filepath) {
+            const cached = cachedFiles().get(filepath);
+            if (cached) {
+                return {
+                    config: cached,
+                    filepath,
+                    error,
+                };
+            }
+        }
+
+        const { config = csi({}) } = result || {};
+        const filename = result?.filepath ?? searchPath;
+        const importRef: ImportFileRef = { filename: filename, error };
+
+        const id = [path.basename(path.dirname(filename)), path.basename(filename)].join('/');
+        const name = result?.filepath ? id : `Config not found: ${id}`;
+        const finalizeSettings: CSpellSettingsI = csi({ id, name, __importRef: importRef });
+        const settings: CSpellSettingsI = { id, ...config };
+        cachedFiles().set(filename, finalizeSettings); // add an empty entry to prevent circular references.
+        Object.assign(finalizeSettings, this.normalizeSettings(settings, filename, pnpSettings));
+
+        return {
+            config: finalizeSettings,
+            filepath,
+            error,
+        };
+    }
 }
 
 function mergeSourceList(orig: Source[], append: Source[] | undefined): Source[] {
@@ -337,59 +437,6 @@ interface NormalizeSearchForConfigResult {
     error: ImportError | undefined;
 }
 
-async function normalizeSearchForConfigResultAsync(
-    searchPath: string,
-    searchResult: Promise<SearchForConfigResult | null>,
-    pnpSettings: PnPSettings
-): Promise<NormalizeSearchForConfigResult> {
-    let result: SearchForConfigResult | ImportError | undefined;
-    try {
-        result = (await searchResult) || undefined;
-    } catch (cause) {
-        result = new ImportError(`Failed to find config file at: "${searchPath}"`, cause);
-    }
-
-    return normalizeSearchForConfigResult(searchPath, result, pnpSettings);
-}
-
-function normalizeSearchForConfigResult(
-    searchPath: string,
-    searchResult: SearchForConfigResult | ImportError | undefined,
-    pnpSettings: PnPSettings
-): NormalizeSearchForConfigResult {
-    const error = searchResult instanceof ImportError ? searchResult : undefined;
-    const result = searchResult instanceof ImportError ? undefined : searchResult;
-
-    const filepath = result?.filepath;
-    if (filepath) {
-        const cached = cachedFiles().get(filepath);
-        if (cached) {
-            return {
-                config: cached,
-                filepath,
-                error,
-            };
-        }
-    }
-
-    const { config = csi({}) } = result || {};
-    const filename = result?.filepath ?? searchPath;
-    const importRef: ImportFileRef = { filename: filename, error };
-
-    const id = [path.basename(path.dirname(filename)), path.basename(filename)].join('/');
-    const name = result?.filepath ? id : `Config not found: ${id}`;
-    const finalizeSettings: CSpellSettingsI = csi({ id, name, __importRef: importRef });
-    const settings: CSpellSettingsI = { id, ...config };
-    cachedFiles().set(filename, finalizeSettings); // add an empty entry to prevent circular references.
-    Object.assign(finalizeSettings, gcl()._normalizeSettings(settings, filename, pnpSettings));
-
-    return {
-        config: finalizeSettings,
-        filepath,
-        error,
-    };
-}
-
 /**
  *
  * @param searchFrom the directory / file to start searching from.
@@ -398,13 +445,9 @@ function normalizeSearchForConfigResult(
  */
 export function searchForConfig(
     searchFrom: string | undefined,
-    pnpSettings: PnPSettings = defaultPnPSettings
+    pnpSettings: PnPSettingsOptional = defaultPnPSettings
 ): Promise<CSpellSettingsI | undefined> {
-    return normalizeSearchForConfigResultAsync(
-        searchFrom || process.cwd(),
-        cspellConfigExplorer().search(searchFrom),
-        pnpSettings
-    ).then((r) => (r.filepath ? r.config : undefined));
+    return gcl().searchForConfig(searchFrom, pnpSettings);
 }
 
 /**
@@ -417,15 +460,16 @@ export function searchForConfig(
  */
 export function searchForConfigSync(
     searchFrom: string | undefined,
-    pnpSettings: PnPSettings = defaultPnPSettings
+    pnpSettings: PnPSettingsOptional = defaultPnPSettings
 ): CSpellSettingsI | undefined {
+    pnpSettings = normalizePnPSettings(pnpSettings);
     let searchResult: SearchForConfigResult | ImportError | undefined;
     try {
         searchResult = cspellConfigExplorerSync().search(searchFrom) || undefined;
     } catch (err) {
         searchResult = new ImportError(`Failed to find config file from: "${searchFrom}"`, err);
     }
-    return normalizeSearchForConfigResult(searchFrom || process.cwd(), searchResult, pnpSettings).config;
+    return gcl().normalizeSearchForConfigResult(searchFrom || process.cwd(), searchResult, pnpSettings).config;
 }
 
 /**
@@ -434,14 +478,11 @@ export function searchForConfigSync(
  * @param pnpSettings - PnP settings
  * @returns normalized CSpellSettings
  */
-export function loadConfig(file: string, pnpSettings: PnPSettings = defaultPnPSettings): Promise<CSpellSettingsI> {
-    const cached = cachedFiles().get(path.resolve(file));
-    if (cached) {
-        return Promise.resolve(cached);
-    }
-    return normalizeSearchForConfigResultAsync(file, cspellConfigExplorer().load(file), pnpSettings).then(
-        (r) => r.config
-    );
+export async function loadConfig(
+    file: string,
+    pnpSettings: PnPSettingsOptional = defaultPnPSettings
+): Promise<CSpellSettingsI> {
+    return gcl().readSettingsAsync(file, undefined, pnpSettings);
 }
 
 /**
@@ -449,22 +490,17 @@ export function loadConfig(file: string, pnpSettings: PnPSettings = defaultPnPSe
  * @param filename - path or package reference to load.
  * @param pnpSettings - PnP settings
  * @returns normalized CSpellSettings
+ * @deprecated
  */
-export function loadConfigSync(filename: string, pnpSettings: PnPSettings = defaultPnPSettings): CSpellSettingsI {
-    const cached = cachedFiles().get(path.resolve(filename));
-    if (cached) {
-        return cached;
-    }
-    let searchResult: SearchForConfigResult | ImportError | undefined;
-    try {
-        searchResult = cspellConfigExplorerSync().load(filename) || undefined;
-    } catch (err) {
-        searchResult = new ImportError(`Failed to find config file at: "${filename}"`, err);
-    }
-    return normalizeSearchForConfigResult(filename, searchResult, pnpSettings).config;
+export function loadConfigSync(
+    filename: string,
+    pnpSettings: PnPSettingsOptional = defaultPnPSettings
+): CSpellSettingsI {
+    const pnp = normalizePnPSettings(pnpSettings);
+    return gcl().readSettings(filename, pnp);
 }
 
-export function loadPnP(pnpSettings: PnPSettings, searchFrom: URI): Promise<LoaderResult> {
+export function loadPnP(pnpSettings: PnPSettingsOptional, searchFrom: URI): Promise<LoaderResult> {
     if (!pnpSettings.usePnP) {
         return Promise.resolve(undefined);
     }
@@ -472,7 +508,7 @@ export function loadPnP(pnpSettings: PnPSettings, searchFrom: URI): Promise<Load
     return loader.load(searchFrom);
 }
 
-export function loadPnPSync(pnpSettings: PnPSettings, searchFrom: URI): LoaderResult {
+export function loadPnPSync(pnpSettings: PnPSettingsOptional, searchFrom: URI): LoaderResult {
     if (!pnpSettings.usePnP) {
         return undefined;
     }
@@ -585,14 +621,8 @@ export function getDefaultConfigLoader(): ConfigLoader {
     return getDefaultConfigLoaderInternal();
 }
 
-const gcl = getDefaultConfigLoaderInternal;
-
 function cachedFiles() {
     return gcl()._cachedFiles;
-}
-
-function cspellConfigExplorer() {
-    return gcl()._cspellConfigExplorer;
 }
 
 function cspellConfigExplorerSync() {

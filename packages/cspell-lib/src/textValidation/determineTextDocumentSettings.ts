@@ -3,7 +3,7 @@ import * as path from 'path';
 
 import { getLanguagesForBasename } from '../LanguageIds';
 import type { CSpellSettingsInternal } from '../Models/CSpellSettingsInternalDef';
-import type { TextDocument } from '../Models/TextDocument';
+import type { TextDocument, TextDocumentRef } from '../Models/TextDocument';
 import { calcOverrideSettings, getDefaultSettings, getGlobalSettings, mergeSettings } from '../Settings';
 import { combineTextAndLanguageSettings } from '../Settings/TextDocumentSettings';
 
@@ -20,7 +20,10 @@ import { combineTextAndLanguageSettings } from '../Settings/TextDocumentSettings
  * @param settings - The near final settings. Should already be the combination of all configuration files.
  */
 
-export function determineTextDocumentSettings(doc: TextDocument, settings: CSpellUserSettings): CSpellSettingsInternal {
+export function determineTextDocumentSettings(
+    doc: TextDocument | TextDocumentRef,
+    settings: CSpellUserSettings
+): CSpellSettingsInternal {
     const filename = doc.uri.fsPath;
     const settingsWithDefaults = mergeSettings(
         getDefaultSettings(settings.loadDefaultConfiguration ?? true),

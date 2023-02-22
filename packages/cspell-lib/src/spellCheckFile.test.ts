@@ -25,19 +25,6 @@ describe('Validate Spell Checking Files', () => {
         expected: Partial<SpellCheckFileResult>;
     }
 
-    function err(msg: string): Error {
-        return new ImportError(msg);
-    }
-
-    function eFailed(file: string): Error {
-        return err(`Failed to find config file at: "${s(file)}"`);
-    }
-
-    function errNoEnt(file: string): Error {
-        const message = `ENOENT: no such file or directory, open '${file}'`;
-        return expect.objectContaining(new Error(message));
-    }
-
     test.each`
         filename             | settings                    | options                                       | expected
         ${'src/not_found.c'} | ${{}}                       | ${{}}                                         | ${{ checked: false, errors: [errNoEnt('src/not_found.c')] }}
@@ -101,19 +88,6 @@ describe('Validate Spell Checking Documents', () => {
 
     function oc<T>(t: T): T {
         return expect.objectContaining(t);
-    }
-
-    function err(msg: string): Error {
-        return new ImportError(msg);
-    }
-
-    function eFailed(file: string): Error {
-        return err(`Failed to find config file at: "${s(file)}"`);
-    }
-
-    function errNoEnt(file: string): Error {
-        const message = `ENOENT: no such file or directory, open '${file}'`;
-        return expect.objectContaining(new Error(message));
     }
 
     function f(file: string): string {
@@ -263,4 +237,17 @@ function s(file: string) {
 
 function tf(file: string) {
     return Path.resolve(testFixtures, file);
+}
+
+function err(msg: string): Error {
+    return new ImportError(msg);
+}
+
+function errNoEnt(file: string): Error {
+    const message = `ENOENT: no such file or directory, open '${file}'`;
+    return expect.objectContaining(new Error(message));
+}
+
+function eFailed(file: string): Error {
+    return err(`Failed to read config file: "${s(file)}"`);
 }
