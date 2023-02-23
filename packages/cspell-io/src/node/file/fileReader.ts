@@ -6,7 +6,7 @@ import { fileURLToPath } from 'url';
 import { promisify } from 'util';
 import * as zlib from 'zlib';
 
-import { decodeUtf } from '../../common/transformUtf16';
+import { decoderUtf } from '../../common/transformUtf16';
 import type { BufferEncoding } from '../../models/BufferEncoding';
 import { fetch } from './fetch';
 import { FetchUrlError } from './FetchError';
@@ -46,8 +46,8 @@ async function _read(
     const stream = getStream();
     const collector = createCollector(encoding);
     return isZipped
-        ? pipeline(stream, zlib.createGunzip(), decodeUtf, collector)
-        : pipeline(stream, decodeUtf, collector);
+        ? pipeline(stream, zlib.createGunzip(), decoderUtf, collector)
+        : pipeline(stream, decoderUtf, collector);
 }
 
 export function readFileSync(filename: string, encoding: BufferEncoding = defaultEncoding): string {

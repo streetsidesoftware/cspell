@@ -1,10 +1,11 @@
-import { calcEncodingFromBom, decodeUtf16BE, decodeUtf16LE } from './encode-decode';
+import type { BufferEncodingExt } from './BufferEncoding';
+import { calcEncodingFromBom, decodeUtf16BE, decodeUtf16LE, encodeString } from './encode-decode';
 
 /**
  *
  * @param iterable
  */
-export async function* decodeUtf(
+export async function* decoderUtf(
     iterable: AsyncIterable<string | Buffer> | Iterable<string | Buffer>
 ): AsyncIterable<string> {
     let decoder: ((buf: Buffer) => string) | undefined = undefined;
@@ -38,6 +39,46 @@ export async function* decodeUtf(
     }
 }
 
+export function encoderUtf(iterable: Iterable<string>, encoding?: BufferEncodingExt): Iterable<Buffer>;
+export function encoderUtf(iterable: AsyncIterable<string>, encoding?: BufferEncodingExt): AsyncIterable<Buffer>;
+export function encoderUtf(
+    iterable: Iterable<string> | AsyncIterable<string>,
+    encoding?: BufferEncodingExt
+): Iterable<Buffer> | AsyncIterable<Buffer>;
+export function encoderUtf(
+    iterable: Iterable<string> | AsyncIterable<string>,
+    encoding?: BufferEncodingExt
+): Iterable<Buffer> | AsyncIterable<Buffer> {
+    return isAsyncIterable(iterable)
+        ? encoderUtfAsyncIterable(iterable, encoding)
+        : encoderUtfIterable(iterable, encoding);
+}
+
+function* encoderUtfIterable(iterable: Iterable<string>, encoding?: BufferEncodingExt): Iterable<Buffer> {
+    let useBom = true;
+
+    for (const chunk of iterable) {
+        yield encodeString(chunk, encoding, useBom);
+        useBom = false;
+    }
+}
+
+async function* encoderUtfAsyncIterable(
+    iterable: Iterable<string> | AsyncIterable<string>,
+    encoding?: BufferEncodingExt
+): AsyncIterable<Buffer> {
+    let useBom = true;
+
+    for await (const chunk of iterable) {
+        yield encodeString(chunk, encoding, useBom);
+        useBom = false;
+    }
+}
+
 function decodeUtf8(buf: Buffer): string {
     return buf.toString('utf8');
+}
+
+function isAsyncIterable<T>(v: Iterable<T> | AsyncIterable<T>): v is AsyncIterable<T> {
+    return v && typeof v === 'object' && !!(<AsyncIterable<T>>v)[Symbol.asyncIterator];
 }
