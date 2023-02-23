@@ -13,7 +13,7 @@ import { determineFinalDocumentSettings, spellCheckDocument, spellCheckFile } fr
 const samples = Path.resolve(__dirname, '../samples');
 const testFixtures = Path.resolve(__dirname, '../../../test-fixtures');
 const isWindows = process.platform === 'win32';
-const hasDriveLetter = /^[A-Z]:\\/;
+const hasDriveLetter = /^[A-Z]:\\/i;
 
 const oc = expect.objectContaining;
 const sc = expect.stringContaining;
