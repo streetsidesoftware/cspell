@@ -1,10 +1,11 @@
-import type { CSpellUserSettings } from '@cspell/cspell-types';
+import type { CSpellSettingsWithSourceTrace, CSpellUserSettings } from '@cspell/cspell-types';
 import * as Path from 'path';
 import { posix } from 'path';
 import { URI } from 'vscode-uri';
 
 import type { Document } from './Document';
 import { fileToDocument, fileToTextDocument } from './Document/resolveDocument';
+import type { CSpellSettingsInternal } from './Models/CSpellSettingsInternalDef';
 import { ImportError } from './Settings/Controller/ImportError';
 import type { SpellCheckFileOptions, SpellCheckFileResult } from './spellCheckFile';
 import { determineFinalDocumentSettings, spellCheckDocument, spellCheckFile } from './spellCheckFile';
@@ -43,7 +44,7 @@ describe('Validate Spell Checking Files', () => {
     `(
         'spellCheckFile $filename $settings $options',
         async ({ filename, settings, options, expected }: TestSpellCheckFile) => {
-            const r = await spellCheckFile(s(filename), options, settings);
+            const r = sanitizeSpellCheckFileResult(await spellCheckFile(s(filename), options, settings));
             expect(r).toEqual(oc(expected));
         }
     );
@@ -68,12 +69,11 @@ describe('Validate Determine settings', () => {
         ${doc(u('README.md'), '# README\n')}                                      | ${{ language: 'fr' }} | ${{ languageId: 'markdown', language: 'fr' }}  | ${'Language from settings'}
         ${doc(u('README.md'), '# README\n', undefined, 'en')}                     | ${{ language: 'fr' }} | ${{ languageId: 'markdown', language: 'en' }}  | ${'passed with doc'}
     `('determineFinalDocumentSettings($document, $settings) $expected $comment', ({ document, settings, expected }) => {
-        const r = determineFinalDocumentSettings(document, settings);
-        expect(r).toEqual(
-            expect.objectContaining({
-                settings: expect.objectContaining(expected),
-            })
-        );
+        const settingsResult = sanitizeSettings(determineFinalDocumentSettings(document, settings).settings, [
+            'languageId',
+            'language',
+        ]);
+        expect(settingsResult).toEqual(expect.objectContaining(expected));
     });
 });
 
@@ -141,7 +141,9 @@ describe('Validate Spell Checking Documents', () => {
     `(
         'spellCheckFile $uri $settings $options',
         async ({ uri, text, settings, options, expected }: TestSpellCheckFile) => {
-            const r = await spellCheckDocument(d(uri, text || undefined), options, settings);
+            const r = sanitizeSpellCheckFileResult(
+                await spellCheckDocument(d(uri, text || undefined), options, settings)
+            );
             expect(r).toEqual(oc(expected));
         }
     );
@@ -151,11 +153,47 @@ describe('Validate Spell Checking Documents', () => {
     `(
         'spellCheckFile fixtures $uri $settings $options',
         async ({ uri, text, settings, options, expected }: TestSpellCheckFile) => {
-            const r = await spellCheckDocument(d(uri, text || undefined), options, settings);
+            const r = sanitizeSpellCheckFileResult(
+                await spellCheckDocument(d(uri, text || undefined), options, settings)
+            );
             expect(r).toEqual(oc(expected));
         }
     );
 });
+
+function sanitizeSpellCheckFileResult(
+    spellCheckResult: SpellCheckFileResult,
+    cfgKeys?: (keyof CSpellUserSettings)[]
+): SpellCheckFileResult {
+    const {
+        checked,
+        document,
+        errors,
+        issues,
+        localConfigFilepath,
+        options,
+        settingsUsed: _settingsUsed,
+    } = spellCheckResult;
+    const settingsUsed = sanitizeSettings(_settingsUsed, cfgKeys);
+    return { checked, options, errors, issues, document, settingsUsed, localConfigFilepath };
+}
+
+function sanitizeSettings(
+    cs: CSpellSettingsInternal | CSpellSettingsWithSourceTrace,
+    keys: (keyof CSpellUserSettings)[] = ['languageId']
+): CSpellUserSettings {
+    const { __importRef, __imports, source: _source, dictionaryDefinitions: _dd, ...rest } = cs;
+    if (keys) {
+        const useKeys = new Set<string>(keys);
+        const r: Record<string, unknown> = rest;
+        for (const key of Object.keys(r)) {
+            if (!useKeys.has(key)) {
+                delete r[key];
+            }
+        }
+    }
+    return rest;
+}
 
 describe('Validate Uri assumptions', () => {
     interface UriComponents {
