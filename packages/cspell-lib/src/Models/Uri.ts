@@ -9,7 +9,6 @@ const isPossibleUri = /\w:\/\//;
 const isUrl = /^(file:|stdin:|https?:|s?ftp:)\/\//;
 
 export function toUri(uriOrFile: string | Uri): Uri {
-    if (uriOrFile instanceof Uri) return uriOrFile;
     if (Uri.isUri(uriOrFile)) return uriOrFile;
     if (isUrl.test(uriOrFile)) return Uri.parse(uriOrFile);
     return isFile.test(uriOrFile) && !isPossibleUri.test(uriOrFile)

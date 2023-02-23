@@ -22,7 +22,7 @@ describe('Uri', () => {
         ${undefined}                      | ${false}
         ${'uri://example.com'}            | ${false}
         ${Uri.parse('uri://example.com')} | ${true}
-    `('isUri', ({ uri, expected }) => {
+    `('isUri $uri', ({ uri, expected }) => {
         expect(isUri(uri)).toBe(expected);
     });
 
@@ -32,7 +32,7 @@ describe('Uri', () => {
         ${Uri.file(unTitleCase(__filename))} | ${unTitleCase(__filename)}
         ${toUri('D:\\programs\\code.exe')}   | ${'d:\\programs\\code.exe'}
         ${toUri('stdin://' + __filename)}    | ${__filename}
-    `('uriToFilePath', ({ uri, expected }) => {
+    `('uriToFilePath $uri', ({ uri, expected }) => {
         expect(uriToFilePath(uri)).toBe(expected);
     });
 
@@ -42,7 +42,7 @@ describe('Uri', () => {
         ${unTitleCase(__filename)}  | ${unTitleCase(__filename)}
         ${'D:\\programs\\code.exe'} | ${'d:\\programs\\code.exe'}
         ${'d:\\programs\\code.exe'} | ${'d:\\programs\\code.exe'}
-    `('uriToFilePath', ({ uri, expected }) => {
+    `('uriToFilePath $uri', ({ uri, expected }) => {
         expect(normalizeFsPath(uri)).toBe(expected);
     });
 });
