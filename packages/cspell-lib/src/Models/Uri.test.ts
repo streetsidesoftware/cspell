@@ -1,6 +1,6 @@
 import { URI } from 'vscode-uri';
 
-import { isUri, toUri, Uri, uriToFilePath } from './Uri';
+import { isUri, normalizeFsPath, toUri, Uri, uriToFilePath } from './Uri';
 
 describe('Uri', () => {
     test.each`
@@ -34,6 +34,16 @@ describe('Uri', () => {
         ${toUri('stdin://' + __filename)}    | ${__filename}
     `('uriToFilePath', ({ uri, expected }) => {
         expect(uriToFilePath(uri)).toBe(expected);
+    });
+
+    test.each`
+        uri                         | expected
+        ${titleCase(__filename)}    | ${unTitleCase(__filename)}
+        ${unTitleCase(__filename)}  | ${unTitleCase(__filename)}
+        ${'D:\\programs\\code.exe'} | ${'d:\\programs\\code.exe'}
+        ${'d:\\programs\\code.exe'} | ${'d:\\programs\\code.exe'}
+    `('uriToFilePath', ({ uri, expected }) => {
+        expect(normalizeFsPath(uri)).toBe(expected);
     });
 });
 

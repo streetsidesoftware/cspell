@@ -27,6 +27,6 @@ export function uriToFilePath(uri: Uri): string {
     return normalizeFsPath(uri.fsPath);
 }
 
-function normalizeFsPath(path: string): string {
+export function normalizeFsPath(path: string): string {
     return hasDriveLetter.test(path) ? path[0].toLowerCase() + path.slice(1) : path;
 }
