@@ -4,6 +4,7 @@ import * as path from 'path';
 import { getLanguagesForBasename } from '../LanguageIds';
 import type { CSpellSettingsInternal } from '../Models/CSpellSettingsInternalDef';
 import type { TextDocument, TextDocumentRef } from '../Models/TextDocument';
+import { uriToFilePath } from '../Models/Uri';
 import { calcOverrideSettings, getDefaultSettings, getGlobalSettings, mergeSettings } from '../Settings';
 import { combineTextAndLanguageSettings } from '../Settings/TextDocumentSettings';
 
@@ -24,7 +25,7 @@ export function determineTextDocumentSettings(
     doc: TextDocument | TextDocumentRef,
     settings: CSpellUserSettings
 ): CSpellSettingsInternal {
-    const filename = doc.uri.fsPath;
+    const filename = uriToFilePath(doc.uri);
     const settingsWithDefaults = mergeSettings(
         getDefaultSettings(settings.loadDefaultConfiguration ?? true),
         getGlobalSettings(),

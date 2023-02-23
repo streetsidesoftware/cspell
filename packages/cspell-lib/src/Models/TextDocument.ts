@@ -220,7 +220,7 @@ function isTextDocumentImpl(doc: TextDocument | unknown): doc is TextDocumentImp
 
 export async function loadTextDocument(filename: string | DocumentUri, languageId?: string): Promise<TextDocument> {
     const uri = Uri.toUri(filename);
-    const content = await fs.readFile(uri.fsPath, 'utf8');
+    const content = await fs.readFile(Uri.uriToFilePath(uri), 'utf8');
 
     return createTextDocument({ uri, languageId, content });
 }

@@ -6,6 +6,7 @@ import findUp from 'find-up';
 import importFresh from 'import-fresh';
 import { URI } from 'vscode-uri';
 
+import { uriToFilePath } from '../../Models/Uri';
 import { UnsupportedPnpFile } from './ImportError';
 
 const defaultPnpFiles = ['.pnp.cjs', '.pnp.js'];
@@ -94,7 +95,7 @@ export function pnpLoader(pnpFiles?: string[]): PnpLoader {
  * @param uriDirectory - directory to start at.
  */
 async function findPnpAndLoad(uriDirectory: URI, pnpFiles: string[]): Promise<LoaderResult> {
-    const found = await findUp(pnpFiles, { cwd: uriDirectory.fsPath });
+    const found = await findUp(pnpFiles, { cwd: uriToFilePath(uriDirectory) });
     return loadPnpIfNeeded(found);
 }
 
@@ -102,7 +103,7 @@ async function findPnpAndLoad(uriDirectory: URI, pnpFiles: string[]): Promise<Lo
  * @param uriDirectory - directory to start at.
  */
 function findPnpAndLoadSync(uriDirectory: URI, pnpFiles: string[]): LoaderResult {
-    const found = findUp.sync(pnpFiles, { cwd: uriDirectory.fsPath });
+    const found = findUp.sync(pnpFiles, { cwd: uriToFilePath(uriDirectory) });
     return loadPnpIfNeeded(found);
 }
 
@@ -140,7 +141,7 @@ export function clearPnPGlobalCache(): Promise<undefined> {
 async function _cleanCache(): Promise<undefined> {
     await Promise.all([...cachedRequests.values()].map(rejectToUndefined));
     const modules = [...cachedPnpImportsSync.values()];
-    modules.forEach((r) => r && clearModule.single(r.fsPath));
+    modules.forEach((r) => r && clearModule.single(uriToFilePath(r)));
     cachedRequests.clear();
     cachedRequestsSync.clear();
     cachedPnpImportsSync.clear();

@@ -15,6 +15,7 @@ import type { CSpellSettingsInternal, CSpellSettingsInternalFinalized } from '..
 import type { ExtendedSuggestion } from '../Models/Suggestion';
 import type { TextDocument, TextDocumentLine, TextDocumentRef } from '../Models/TextDocument';
 import { updateTextDocument } from '../Models/TextDocument';
+import { uriToFilePath } from '../Models/Uri';
 import type { ValidationIssue } from '../Models/ValidationIssue';
 import { finalizeSettings, loadConfig, mergeSettings, searchForConfig } from '../Settings';
 import { loadConfigSync, searchForConfigSync } from '../Settings/Controller/configLoader';
@@ -124,7 +125,7 @@ export class DocumentValidator {
         const matcher = new GlobMatcher(localConfig?.ignorePaths || [], { root: process.cwd(), dot: true });
         const uri = this._document.uri;
 
-        const shouldCheck = !matcher.match(uri.fsPath) && (docSettings.enabled ?? true);
+        const shouldCheck = !matcher.match(uriToFilePath(uri)) && (docSettings.enabled ?? true);
         const finalSettings = finalizeSettings(docSettings);
         const validateOptions = settingsToValidateOptions(finalSettings);
         const includeRanges = calcTextInclusionRanges(this._document.text, validateOptions);
@@ -182,7 +183,7 @@ export class DocumentValidator {
         const matcher = new GlobMatcher(localConfig?.ignorePaths || [], { root: process.cwd(), dot: true });
         const uri = this._document.uri;
 
-        const shouldCheck = !matcher.match(uri.fsPath) && (docSettings.enabled ?? true);
+        const shouldCheck = !matcher.match(uriToFilePath(uri)) && (docSettings.enabled ?? true);
 
         const finalSettings = finalizeSettings(docSettings);
         const validateOptions = settingsToValidateOptions(finalSettings);
@@ -492,7 +493,7 @@ async function searchForDocumentConfig(
 ): Promise<CSpellSettingsWithSourceTrace> {
     const { uri } = document;
     if (uri.scheme !== 'file') return Promise.resolve(defaultConfig);
-    return searchForConfig(path.dirname(uri.fsPath), pnpSettings).then((s) => s || defaultConfig);
+    return searchForConfig(path.dirname(uriToFilePath(uri)), pnpSettings).then((s) => s || defaultConfig);
 }
 
 function searchForDocumentConfigSync(
@@ -502,7 +503,7 @@ function searchForDocumentConfigSync(
 ): CSpellSettingsWithSourceTrace {
     const { uri } = document;
     if (uri.scheme !== 'file') defaultConfig;
-    return searchForConfigSync(uri.fsPath, pnpSettings) || defaultConfig;
+    return searchForConfigSync(uriToFilePath(uri), pnpSettings) || defaultConfig;
 }
 
 export async function shouldCheckDocument(
@@ -540,7 +541,7 @@ export async function shouldCheckDocument(
         const matcher = new GlobMatcher(localConfig?.ignorePaths || [], { root: process.cwd(), dot: true });
         const docSettings = determineTextDocumentSettings(doc, config);
         const uri = doc.uri;
-        return !matcher.match(uri.fsPath) && (docSettings.enabled ?? true);
+        return !matcher.match(uriToFilePath(uri)) && (docSettings.enabled ?? true);
     }
 
     return { errors, shouldCheck: await shouldCheck() };

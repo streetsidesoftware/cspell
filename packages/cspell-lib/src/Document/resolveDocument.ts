@@ -3,7 +3,7 @@ import { URI } from 'vscode-uri';
 
 import type { TextDocument } from '../Models/TextDocument';
 import { createTextDocument } from '../Models/TextDocument';
-import { toUri } from '../Models/Uri';
+import { toUri, uriToFilePath } from '../Models/Uri';
 import { clean } from '../util/util';
 import type { Document, DocumentWithText } from './Document';
 
@@ -61,7 +61,7 @@ export function resolveDocument(
     if (uri.scheme !== 'file') {
         throw new Error(`Unsupported schema: "${uri.scheme}", open "${uri.toString()}"`);
     }
-    return readDocument(uri.fsPath, encoding);
+    return readDocument(uriToFilePath(uri), encoding);
 }
 function isDocumentWithText(doc: DocumentWithText | Document): doc is DocumentWithText {
     return doc.text !== undefined;
