@@ -1,22 +1,27 @@
 import * as fs from 'fs';
-import * as stream from 'stream';
+import * as Stream from 'stream';
+import { promisify } from 'util';
 import * as zlib from 'zlib';
 
-export function writeToFile(filename: string, data: string): NodeJS.WritableStream {
-    return writeToFileIterable(filename, [data]);
+import type { BufferEncoding, BufferEncodingExt } from '../../common/BufferEncoding';
+import { encoderUtf } from '../../common/transformUtf16';
+
+const pipeline = promisify(Stream.pipeline);
+
+export function writeToFile(
+    filename: string,
+    data: string | Iterable<string> | AsyncIterable<string>,
+    encoding?: BufferEncoding
+): Promise<void> {
+    return writeToFileIterable(filename, typeof data === 'string' ? [data] : data, encoding);
 }
 
-export function writeToFileIterable(filename: string, data: Iterable<string>): NodeJS.WritableStream {
-    const sourceStream = stream.Readable.from(data);
-    const writeStream = fs.createWriteStream(filename);
-    const zip = filename.match(/\.gz$/) ? zlib.createGzip() : new stream.PassThrough();
-    return sourceStream.pipe(zip).pipe(writeStream);
-}
-
-export function writeToFileIterableP(filename: string, data: Iterable<string>): Promise<void> {
-    const stream = writeToFileIterable(filename, data);
-    return new Promise<void>((resolve, reject) => {
-        stream.on('finish', () => resolve());
-        stream.on('error', (e: Error) => reject(e));
-    });
+export function writeToFileIterable(
+    filename: string,
+    data: Iterable<string> | AsyncIterable<string>,
+    encoding?: BufferEncodingExt
+): Promise<void> {
+    const stream = Stream.Readable.from(encoderUtf(data, encoding));
+    const zip = filename.match(/\.gz$/) ? zlib.createGzip() : new Stream.PassThrough();
+    return pipeline(stream, zip, fs.createWriteStream(filename));
 }

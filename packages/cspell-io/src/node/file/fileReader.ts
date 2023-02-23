@@ -1,15 +1,20 @@
 // cSpell:ignore curr
 // cSpell:words zlib iconv
 import * as fs from 'fs';
+import * as Stream from 'stream';
 import { fileURLToPath } from 'url';
+import { promisify } from 'util';
 import * as zlib from 'zlib';
 
+import { decoderUtf } from '../../common/transformUtf16';
 import type { BufferEncoding } from '../../models/BufferEncoding';
 import { fetch } from './fetch';
 import { FetchUrlError } from './FetchError';
 import { isFileURL, isSupportedURL, isZipped, toURL } from './util';
 
 const defaultEncoding: BufferEncoding = 'utf8';
+
+const pipeline = promisify(Stream.pipeline);
 
 export async function readFile(filename: string | URL, encoding?: BufferEncoding): Promise<string> {
     const url = toURL(filename);
@@ -33,45 +38,31 @@ async function _fetchURL(url: URL, encoding?: BufferEncoding): Promise<string> {
     return _read(() => response.body, isZipped(url), encoding);
 }
 
-function _read(
+async function _read(
     getStream: () => NodeJS.ReadableStream,
     isZipped: boolean,
     encoding: BufferEncoding = defaultEncoding
 ): Promise<string> {
-    return new Promise((resolve, reject) => {
-        const data: string[] = [];
-        const stream = prepareFileStream(getStream, isZipped, encoding, reject);
-        let resolved = false;
-        function complete() {
-            resolve(data.join(''));
-            resolved = resolved || (resolve(data.join('')), true);
-        }
-        stream.on('error', reject);
-        stream.on('data', (d: string) => data.push(d));
-        stream.on('close', complete);
-        stream.on('end', complete);
-    });
-}
-
-function prepareFileStream(
-    getStream: () => NodeJS.ReadableStream,
-    isZipped: boolean,
-    encoding: BufferEncoding,
-    fnError: (e: Error) => void
-) {
-    const pipes: NodeJS.ReadWriteStream[] = [];
-    if (isZipped) {
-        pipes.push(zlib.createGunzip());
-    }
-    const fileStream = getStream();
-    fileStream.on('error', fnError);
-    const stream = pipes.reduce<NodeJS.ReadableStream>((s, p) => s.pipe(p).on('error', fnError), fileStream);
-    stream.setEncoding(encoding);
-    return stream;
+    const stream = getStream();
+    const collector = createCollector(encoding);
+    return isZipped
+        ? pipeline(stream, zlib.createGunzip(), decoderUtf, collector)
+        : pipeline(stream, decoderUtf, collector);
 }
 
 export function readFileSync(filename: string, encoding: BufferEncoding = defaultEncoding): string {
     const rawData = fs.readFileSync(filename);
     const data = isZipped(filename) ? zlib.gunzipSync(rawData) : rawData;
     return data.toString(encoding);
+}
+
+function createCollector(encoding: BufferEncoding) {
+    async function collect(iterable: AsyncIterable<string | Buffer>): Promise<string> {
+        const buf: string[] = [];
+        for await (const sb of iterable) {
+            buf.push(typeof sb === 'string' ? sb : sb.toString(encoding));
+        }
+        return buf.join('');
+    }
+    return collect;
 }

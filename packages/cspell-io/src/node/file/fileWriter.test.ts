@@ -16,7 +16,7 @@ describe('Validate the writer', () => {
         const filename = pathToTemp(baseFilename);
         await makePathToFile(filename);
 
-        await fileWriter.writeToFileIterableP(filename, data);
+        await fileWriter.writeToFile(filename, data);
         const result = await readFile(filename, 'utf8');
         expect(result).toBe(text);
     });
@@ -30,12 +30,7 @@ describe('Validate the writer', () => {
         const text = loremIpsum({ count: 1000, format: 'plain', units: 'words' }) + ' éåáí';
         const filename = pathToTemp(baseFilename);
         await makePathToFile(filename);
-
-        const wStream = fileWriter.writeToFile(filename, text);
-        await new Promise((resolve, reject) => {
-            wStream.on('close', resolve);
-            wStream.on('error', reject);
-        });
+        await fileWriter.writeToFile(filename, text);
 
         const result = await readFile(filename, 'utf8');
         expect(result).toBe(text);
