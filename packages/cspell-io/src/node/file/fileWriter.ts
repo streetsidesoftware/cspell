@@ -2,12 +2,18 @@ import * as fs from 'fs';
 import * as stream from 'stream';
 import * as zlib from 'zlib';
 
-export function writeToFile(filename: string, data: string): NodeJS.WritableStream {
-    return writeToFileIterable(filename, [data]);
+import type { BufferEncoding } from '../../common/BufferEncoding';
+
+export function writeToFile(filename: string, data: string, encoding?: BufferEncoding): NodeJS.WritableStream {
+    return writeToFileIterable(filename, [data], encoding);
 }
 
-export function writeToFileIterable(filename: string, data: Iterable<string>): NodeJS.WritableStream {
-    const sourceStream = stream.Readable.from(data);
+export function writeToFileIterable(
+    filename: string,
+    data: Iterable<string>,
+    encoding?: BufferEncoding
+): NodeJS.WritableStream {
+    const sourceStream = stream.Readable.from(data, { encoding });
     const writeStream = fs.createWriteStream(filename);
     const zip = filename.match(/\.gz$/) ? zlib.createGzip() : new stream.PassThrough();
     return sourceStream.pipe(zip).pipe(writeStream);

@@ -9,6 +9,10 @@ const oc = expect.objectContaining;
 describe('Validate the fileReader', () => {
     jest.setTimeout(10000);
 
+    afterEach(() => {
+        jest.resetAllMocks();
+    });
+
     test('tests reading a file', async () => {
         const expected = await fs.readFile(__filename, 'utf8');
         const result = await fReader.readFile(__filename, 'utf8');
@@ -31,13 +35,16 @@ describe('Validate the fileReader', () => {
     });
 
     test.each`
-        file                       | contains
-        ${'samples/cities.txt'}    | ${'San Francisco'}
-        ${'samples/cities.txt.gz'} | ${'San Francisco'}
+        file                            | contains
+        ${'samples/cities.txt'}         | ${'San Francisco'}
+        ${'samples/cities.txt.gz'}      | ${'San Francisco'}
+        ${'samples/cities.utf16be.txt'} | ${'San Francisco'}
+        ${'samples/cities.utf16le.txt'} | ${'San Francisco'}
     `('reading async files $file', async ({ file, contains }) => {
         const filename = pathToRoot(file);
         const content = await fReader.readFile(filename);
         expect(content).toContain(contains);
+        expect(content).toMatchSnapshot();
     });
 
     test.each`
