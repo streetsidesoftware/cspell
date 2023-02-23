@@ -142,7 +142,8 @@ describe('Validate Spell Checking Documents', () => {
         'spellCheckFile $uri $settings $options',
         async ({ uri, text, settings, options, expected }: TestSpellCheckFile) => {
             const r = sanitizeSpellCheckFileResult(
-                await spellCheckDocument(d(uri, text || undefined), options, settings)
+                await spellCheckDocument(d(uri, text || undefined), options, settings),
+                ['checked', 'errors', 'issues', 'localConfigFilepath', 'settingsUsed', 'document']
             );
             expect(r).toEqual(oc(expected));
         }
@@ -160,40 +161,6 @@ describe('Validate Spell Checking Documents', () => {
         }
     );
 });
-
-function sanitizeSpellCheckFileResult(
-    spellCheckResult: SpellCheckFileResult,
-    cfgKeys?: (keyof CSpellUserSettings)[]
-): SpellCheckFileResult {
-    const {
-        checked,
-        document,
-        errors,
-        issues,
-        localConfigFilepath,
-        options,
-        settingsUsed: _settingsUsed,
-    } = spellCheckResult;
-    const settingsUsed = sanitizeSettings(_settingsUsed, cfgKeys);
-    return { checked, options, errors, issues, document, settingsUsed, localConfigFilepath };
-}
-
-function sanitizeSettings(
-    cs: CSpellSettingsInternal | CSpellSettingsWithSourceTrace,
-    keys: (keyof CSpellUserSettings)[] = ['languageId']
-): CSpellUserSettings {
-    const { __importRef, __imports, source: _source, dictionaryDefinitions: _dd, ...rest } = cs;
-    if (keys) {
-        const useKeys = new Set<string>(keys);
-        const r: Record<string, unknown> = rest;
-        for (const key of Object.keys(r)) {
-            if (!useKeys.has(key)) {
-                delete r[key];
-            }
-        }
-    }
-    return rest;
-}
 
 describe('Validate Uri assumptions', () => {
     interface UriComponents {
@@ -288,4 +255,40 @@ function errNoEnt(file: string): Error {
 
 function eFailed(file: string): Error {
     return err(`Failed to read config file: "${s(file)}"`);
+}
+
+function sanitizeSpellCheckFileResult(
+    spellCheckResult: SpellCheckFileResult,
+    scKeys: (keyof SpellCheckFileResult)[] = ['checked', 'errors', 'issues', 'localConfigFilepath', 'document'],
+    cfgKeys?: (keyof CSpellUserSettings)[]
+): Partial<SpellCheckFileResult> {
+    const result = filterKeys(spellCheckResult, scKeys);
+    if (result.settingsUsed) {
+        result.settingsUsed = sanitizeSettings(spellCheckResult.settingsUsed, cfgKeys);
+    }
+    if (result.document) {
+        result.document = filterKeys(result.document, ['uri', 'languageId', 'locale']);
+    }
+
+    return result;
+}
+
+function sanitizeSettings(
+    cs: CSpellSettingsInternal | CSpellSettingsWithSourceTrace,
+    keys: (keyof CSpellUserSettings)[] = ['languageId']
+): CSpellUserSettings {
+    return filterKeys(cs, keys);
+}
+
+function filterKeys<T extends object, K extends keyof T>(obj: T, keys: K[]): Pick<T, K> {
+    const result = { ...obj };
+    const r = <Record<string, unknown>>result;
+    const strKeys: string[] = keys.map((a) => a.toString());
+    const keep = new Set<string>(strKeys);
+    for (const key of Object.keys(r)) {
+        if (!keep.has(key)) {
+            delete r[key];
+        }
+    }
+    return result;
 }
