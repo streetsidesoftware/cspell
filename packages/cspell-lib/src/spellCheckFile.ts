@@ -4,12 +4,12 @@ import type { Document, DocumentWithText } from './Document';
 import { isBinaryDoc } from './Document/isBinaryDoc';
 import { documentToTextDocument, resolveDocument } from './Document/resolveDocument';
 import { createTextDocument } from './Models/TextDocument';
-import type { Uri } from './util/Uri';
-import { toUri } from './util/Uri';
 import type { DocumentValidatorOptions } from './textValidation';
 import { DocumentValidator } from './textValidation';
 import { determineTextDocumentSettings } from './textValidation/determineTextDocumentSettings';
 import { isError } from './util/errors';
+import type { Uri } from './util/Uri';
+import { toUri } from './util/Uri';
 import type { ValidateTextOptions, ValidationIssue } from './validator';
 
 export interface SpellCheckFileOptions extends ValidateTextOptions {

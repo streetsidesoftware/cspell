@@ -7,11 +7,11 @@ import { getDefaultCSpellIO } from 'cspell-io';
 import * as path from 'path';
 
 import { createCSpellSettingsInternal as csi } from '../../../Models/CSpellSettingsInternalDef';
-import type { Uri } from '../../../util/Uri';
-import { toUri } from '../../../util/Uri';
 import { AutoResolveLRUCache } from '../../../util/AutoResolveLRUCache';
 import { logError, logWarning } from '../../../util/logger';
 import { resolveFile } from '../../../util/resolveFile';
+import type { Uri } from '../../../util/Uri';
+import { toUri } from '../../../util/Uri';
 import {
     configSettingsFileVersion0_1,
     configSettingsFileVersion0_2,
