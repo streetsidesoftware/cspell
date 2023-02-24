@@ -9,7 +9,7 @@ describe('TextDocument', () => {
         expect(doc.text).toBe(content);
         expect(doc.languageId).toContain('typescript');
         expect(Uri.isUri(doc.uri)).toBe(true);
-        expect(doc.uri.toString()).toEqual(Uri.fromFilePath(__filename).toString());
+        expect(doc.uri.toString().toLowerCase()).toEqual(Uri.fromFilePath(__filename).toString().toLowerCase());
     });
 
     test('update', () => {

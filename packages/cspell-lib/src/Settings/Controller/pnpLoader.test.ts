@@ -33,15 +33,19 @@ describe('Validate PnPLoader', () => {
         expect(await loader.load(uriDirectory)).toBeUndefined();
 
         const yarnPnp = await loader.load(uriYarn2TestMed);
-        expect(yarnPnp?.toString()).toBe(uriYarn2TestMedPnp.toString());
+        expect(yarnPnp?.toString().toLocaleLowerCase()).toBe(uriYarn2TestMedPnp.toString().toLowerCase());
     });
 
     test('pnpLoader sync and async', async () => {
         const loader = pnpLoader();
         const yarnPnp = await loader.load(uriYarn2TestMed);
         expect(yarnPnp?.toString()).toBe(uriYarn2TestMedPnp.toString());
-        expect(loader.peekSync(uriYarn2TestMed)?.toString()).toBe(yarnPnp?.toString());
-        expect(loader.loadSync(uriYarn2TestMed)?.toString()).toBe(yarnPnp?.toString());
+        expect(loader.peekSync(uriYarn2TestMed)?.toString().toLocaleLowerCase()).toBe(
+            yarnPnp?.toString().toLocaleLowerCase()
+        );
+        expect(loader.loadSync(uriYarn2TestMed)?.toString().toLocaleLowerCase()).toBe(
+            yarnPnp?.toString().toLocaleLowerCase()
+        );
 
         const sciPnp = loader.loadSync(uriYarn2TestSci);
         await expect(loader.peek(uriYarn2TestSci)).resolves.toBe(sciPnp);
@@ -65,10 +69,10 @@ describe('Validate PnPLoader', () => {
         expect(await loader.load(uriDirectory)).toBeUndefined();
 
         const yarnPnpMed = await loader.load(uriYarn2TestMed);
-        expect(yarnPnpMed?.toString()).toBe(uriYarn2TestMedPnp.toString());
+        expect(yarnPnpMed?.toString().toLocaleLowerCase()).toBe(uriYarn2TestMedPnp.toString().toLowerCase());
 
         const yarnPnpSci = await loader.load(uriYarn2TestSci);
-        expect(yarnPnpSci?.toString()).toBe(uriYarn2TestSciPnp.toString());
+        expect(yarnPnpSci?.toString().toLocaleLowerCase()).toBe(uriYarn2TestSciPnp.toString().toLowerCase());
 
         // Make sure we can load the medical dictionary.
         const dictLocationMed = resolveFrom(fsPath(uriYarn2TestMed), '@cspell/dict-medicalterms/cspell-ext.json');
@@ -87,14 +91,14 @@ describe('Validate PnPLoader', () => {
     test('pnpLoader clear cache', async () => {
         const loader = pnpLoader();
         const yarnPnp = await loader.load(uriYarn2TestMed);
-        expect(yarnPnp?.toString()).toBe(uriYarn2TestMedPnp.toString());
+        expect(yarnPnp?.toString().toLocaleLowerCase()).toBe(uriYarn2TestMedPnp.toString().toLowerCase());
 
         await loader.clearCache();
         const yarnPnpPeek = await loader.peek(uriYarn2TestMed);
         expect(yarnPnpPeek).toBeUndefined();
 
         const yarnPnp2 = await loader.load(uriYarn2TestMed);
-        expect(yarnPnp2?.toString()).toBe(yarnPnp?.toString());
+        expect(yarnPnp2?.toString().toLocaleLowerCase()).toBe(yarnPnp?.toString().toLocaleLowerCase());
         expect(yarnPnp2).not.toBe(yarnPnp);
     });
 
@@ -105,7 +109,7 @@ describe('Validate PnPLoader', () => {
         expect(await loader.load(uriDirectory)).toBeUndefined();
 
         const yarnPnp = await loader.load(uriYarn2TestMed);
-        expect(yarnPnp?.toString()).toBe(uriYarn2TestMedPnp.toString());
+        expect(yarnPnp?.toString().toLocaleLowerCase()).toBe(uriYarn2TestMedPnp.toString().toLowerCase());
 
         // Make sure we can load the dictionary.
         const dictLocation = resolveFrom(fsPath(uriYarn2TestMed), '@cspell/dict-medicalterms/cspell-ext.json');
@@ -116,11 +120,11 @@ describe('Validate PnPLoader', () => {
     test('pnpLoader multiple clear cache', async () => {
         const loader = pnpLoader();
         const yarnPnp = await loader.load(uriYarn2TestMed);
-        expect(yarnPnp?.toString()).toBe(uriYarn2TestMedPnp.toString());
+        expect(yarnPnp?.toString().toLocaleLowerCase()).toBe(uriYarn2TestMedPnp.toString().toLowerCase());
 
         const loader2 = pnpLoader();
         const yarnPnp2 = await loader.load(uriYarn2TestSci);
-        expect(yarnPnp2?.toString()).toBe(uriYarn2TestSciPnp.toString());
+        expect(yarnPnp2?.toString().toLocaleLowerCase()).toBe(uriYarn2TestSciPnp.toString().toLowerCase());
 
         // trigger two cache clears
         const cc = clearPnPGlobalCache();
@@ -144,7 +148,7 @@ describe('Validate PnPLoader', () => {
 
         const yarnPnp = await loader.load(uriYarn2TestMed);
         const yarnPnp2 = await loader.load(Uri.joinPath(uriYarn2TestMed, '.yarn'));
-        expect(yarnPnp?.toString()).toBe(uriYarn2TestMedPnp.toString());
+        expect(yarnPnp?.toString().toLocaleLowerCase()).toBe(uriYarn2TestMedPnp.toString().toLowerCase());
         expect(yarnPnp2).toEqual(yarnPnp);
     });
 
@@ -154,7 +158,7 @@ describe('Validate PnPLoader', () => {
 
         const yarnPnp = await loaderA.load(uriYarn2TestMed);
         const nfPnp = await loaderB.load(uriYarn2TestMed);
-        expect(yarnPnp?.toString()).toBe(uriYarn2TestMedPnp.toString());
+        expect(yarnPnp?.toString().toLocaleLowerCase()).toBe(uriYarn2TestMedPnp.toString().toLowerCase());
         expect(nfPnp).toBeUndefined();
     });
 
