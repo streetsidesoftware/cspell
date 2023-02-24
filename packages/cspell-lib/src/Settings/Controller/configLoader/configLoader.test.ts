@@ -1,8 +1,8 @@
 import type { CSpellSettingsWithSourceTrace, CSpellUserSettings, ImportFileRef } from '@cspell/cspell-types';
 import * as path from 'path';
-import { URI } from 'vscode-uri';
 
 import { logError, logWarning } from '../../../util/logger';
+import * as URI from '../../../util/Uri';
 import { currentSettingsFileVersion, ENV_CSPELL_GLOB_ROOT } from '../../constants';
 import type { ImportFileRefWithError } from '../../CSpellSettingsServer';
 import { extractDependencies, getSources, mergeSettings } from '../../CSpellSettingsServer';
@@ -466,7 +466,7 @@ describe('Validate search/load config files', () => {
     });
 
     test('loadPnPSync', () => {
-        expect(loadPnPSync({}, URI.file(__dirname))).toBeUndefined();
+        expect(loadPnPSync({}, URI.fromFilePath(__dirname))).toBeUndefined();
         // Look for a pnp file from the current location, but it won't be found.
         expect(loadPnPSync({ usePnP: true }, URI.file(__dirname))).toBeUndefined();
     });

@@ -43,6 +43,8 @@ export function fromFilePath(file: string): UriInstance {
     return UriImpl.file(file);
 }
 
+export const file = fromFilePath;
+
 export function parse(uri: string): UriInstance {
     return UriImpl.parse(uri);
 }
@@ -75,13 +77,19 @@ export function extname(uri: Uri): string {
     return Utils.extname(URI.from(uri));
 }
 
-export function joinPath(uri: Uri): UriInstance {
-    return UriImpl.from(Utils.joinPath(URI.from(uri)));
+export function joinPath(uri: Uri, ...paths: string[]): UriInstance {
+    return UriImpl.from(Utils.joinPath(URI.from(uri), ...paths));
 }
 
 export function resolvePath(uri: Uri, ...paths: string[]): UriInstance {
     return UriImpl.from(Utils.resolvePath(URI.from(uri), ...paths));
 }
+
+export function from(uri: Uri, ...parts: Partial<Uri>[]): UriInstance {
+    return UriImpl.from(uri, ...parts);
+}
+
+const keys: readonly (keyof Uri)[] = ['scheme', 'authority', 'path', 'query', 'fragment'] as const;
 
 class UriImpl implements UriInstance {
     readonly scheme: string;
@@ -90,10 +98,10 @@ class UriImpl implements UriInstance {
     readonly query?: string;
     readonly fragment?: string;
 
-    constructor(uri: Uri) {
-        this.scheme = uri.scheme;
+    constructor(uri: PartialWithUndefined<Uri>) {
+        this.scheme = uri.scheme || '';
         uri.authority && (this.authority = uri.authority);
-        this.path = uri.path;
+        this.path = uri.path || '';
         uri.query && (this.query = uri.query);
         uri.fragment && (this.fragment = uri.fragment);
     }
@@ -113,12 +121,27 @@ class UriImpl implements UriInstance {
         return { scheme, authority, path, query, fragment };
     }
 
+    with(change: Partial<Uri>): UriImpl {
+        const { scheme, authority, path, query, fragment } = this;
+        const u = { scheme, authority, path, query, fragment };
+        for (const key of keys) {
+            if (change[key] && typeof change[key] === 'string') {
+                u[key] = change[key] as string;
+            }
+        }
+        return new UriImpl(u);
+    }
+
     static isUri(uri: unknown): uri is UriImpl {
         return uri instanceof UriImpl;
     }
 
-    static from(uri: Uri): UriImpl {
-        return new UriImpl(uri);
+    static from(uri: Uri, ...parts: Partial<Uri>[]): UriImpl {
+        let u = new UriImpl(uri);
+        for (const part of parts) {
+            u = u.with(part);
+        }
+        return u;
     }
 
     static parse(uri: string): UriImpl {

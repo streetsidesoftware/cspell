@@ -1,7 +1,6 @@
 import type { CSpellSettingsWithSourceTrace, CSpellUserSettings } from '@cspell/cspell-types';
 import * as Path from 'path';
 import { posix } from 'path';
-import { URI } from 'vscode-uri';
 
 import type { Document } from './Document';
 import { fileToDocument, fileToTextDocument } from './Document/resolveDocument';
@@ -10,6 +9,7 @@ import { ImportError } from './Settings/Controller/ImportError';
 import type { SpellCheckFileOptions, SpellCheckFileResult } from './spellCheckFile';
 import { determineFinalDocumentSettings, spellCheckDocument, spellCheckFile } from './spellCheckFile';
 import { extendExpect } from './test/test.matchers';
+import * as URI from './util/Uri';
 
 const samples = Path.resolve(__dirname, '../samples');
 const testFixtures = Path.resolve(__dirname, '../../../test-fixtures');
@@ -171,7 +171,6 @@ describe('Validate Uri assumptions', () => {
         path: string;
         query: string;
         fragment: string;
-        fsPath?: string;
     }
 
     type PartialUri = Partial<UriComponents>;
@@ -211,8 +210,8 @@ describe('Validate Uri assumptions', () => {
 
     test.each`
         uri                                                      | expected                                                                                  | comment
-        ${u(__filename)}                                         | ${m(schema('file'), path(normalizePath(__filename)))}                                     | ${''}
-        ${'stdin:///'}                                           | ${m(schema('stdin'), path('/'), authority(''))}                                           | ${''}
+        ${u(__filename)}                                         | ${{ scheme: 'file', path: normalizePath(__filename) }}                                    | ${''}
+        ${'stdin:///'}                                           | ${{ scheme: 'stdin', path: '/' }}                                                         | ${''}
         ${'https://github.com/streetsidesoftware/cspell/issues'} | ${m(schema('https'), authority('github.com'), path('/streetsidesoftware/cspell/issues'))} | ${''}
         ${'C:\\home\\project\\file.js'}                          | ${m(schema('C'), path('\\home\\project\\file.js'))}                                       | ${'Windows path by "accident"'}
     `('URI assumptions uri: "$uri" $comment -- $expected', ({ uri, expected }: UriTestCase) => {
