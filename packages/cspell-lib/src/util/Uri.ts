@@ -43,6 +43,10 @@ export function fromFilePath(file: string): UriInstance {
     return UriImpl.file(file);
 }
 
+export function parse(uri: string): UriInstance {
+    return UriImpl.parse(uri);
+}
+
 export function normalizeFsPath(path: string): string {
     return hasDriveLetter.test(path) ? path[0].toLowerCase() + path.slice(1) : path;
 }
@@ -87,16 +91,20 @@ class UriImpl implements UriInstance {
     readonly fragment?: string;
 
     constructor(uri: Uri) {
-        const u = URI.from(uri);
-        this.scheme = u.scheme;
-        u.authority && (this.authority = u.authority);
-        this.path = u.path;
-        u.query && (this.query = u.query);
-        u.fragment && (this.fragment = u.fragment);
+        this.scheme = uri.scheme;
+        uri.authority && (this.authority = uri.authority);
+        this.path = uri.path;
+        uri.query && (this.query = uri.query);
+        uri.fragment && (this.fragment = uri.fragment);
     }
 
     toString(skipEncoding?: boolean): string {
-        return URI.from(this).toString(skipEncoding);
+        const base = `${this.scheme}://${this.authority || ''}${this.path}`;
+        const query = (this.query && `?${this.query}`) || '';
+        const fragment = (this.fragment && `#${this.fragment}`) || '';
+        const url = base + query + fragment;
+
+        return skipEncoding ? url : encodeURI(url);
     }
 
     toJson(): PartialWithUndefined<Uri> {
@@ -113,7 +121,12 @@ class UriImpl implements UriInstance {
     }
 
     static parse(uri: string): UriImpl {
-        return UriImpl.from(URI.parse(uri));
+        const u = URI.parse(uri);
+        // Is it relative?
+        if (u.scheme === 'stdin' && u.authority) {
+            return UriImpl.from({ ...u, scheme: u.scheme, path: u.authority + u.path, authority: '' });
+        }
+        return UriImpl.from(u);
     }
 
     static file(filename: string): UriImpl {

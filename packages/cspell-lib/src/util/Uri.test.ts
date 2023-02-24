@@ -1,7 +1,7 @@
 import { URI } from 'vscode-uri';
 
 import type { Uri } from './Uri';
-import { isUri, normalizeFsPath, toUri, uriToFilePath } from './Uri';
+import { fromFilePath, isUri, normalizeFsPath, parse, toUri, uriToFilePath } from './Uri';
 
 describe('Uri', () => {
     test.each`
@@ -32,14 +32,28 @@ describe('Uri', () => {
     const uriStdinFilename = uriFilename.with({ scheme: 'stdin' }).toString();
     const stdinFilename = uriStdinFilename.toString();
 
-    console.log('%o', { stdinFilename, uri: uriFilename.toString(), uriJ: JSON.parse(JSON.stringify(uriFilename)) });
+    test.each`
+        uri                                                     | expected
+        ${uriToFilePath(fromFilePath(__filename))}              | ${unTitleCase(__filename)}
+        ${parse('https://google.com/maps')}                     | ${{ scheme: 'https', authority: 'google.com', path: '/maps' }}
+        ${toUri('file:relative_file')}                          | ${{ scheme: 'file', path: '/relative_file' }}
+        ${toUri('stdin://relative/file/path')}                  | ${{ scheme: 'stdin', path: 'relative/file/path' }}
+        ${toUri('stdin://relative/file/path').toString()}       | ${'stdin://relative/file/path'}
+        ${toUri('stdin:///absolute-file-path').toString()}      | ${'stdin:///absolute-file-path'}
+        ${JSON.stringify(toUri('stdin:relative_file_path'))}    | ${'{"scheme":"stdin","path":"relative_file_path"}'}
+        ${JSON.stringify(toUri('stdin:relative/file/path'))}    | ${'{"scheme":"stdin","path":"relative/file/path"}'}
+        ${JSON.stringify(toUri('stdin://relative/file/path'))}  | ${'{"scheme":"stdin","path":"relative/file/path"}'}
+        ${JSON.stringify(toUri('stdin:///absolute-file-path'))} | ${'{"scheme":"stdin","path":"/absolute-file-path"}'}
+    `('uri assumptions $uri', ({ uri, expected }) => {
+        expect(uri).toEqual(expected);
+    });
 
     test.each`
         uri                                  | expected
         ${URI.file(titleCase(__filename))}   | ${unTitleCase(__filename)}
         ${URI.file(unTitleCase(__filename))} | ${unTitleCase(__filename)}
         ${toUri('D:\\programs\\code.exe')}   | ${'d:\\programs\\code.exe'}
-        ${toUri(stdinFilename)}              | ${__filename}
+        ${toUri(stdinFilename)}              | ${unTitleCase(__filename)}
     `('uriToFilePath $uri', ({ uri, expected }) => {
         expect(uriToFilePath(uri)).toBe(expected);
     });
