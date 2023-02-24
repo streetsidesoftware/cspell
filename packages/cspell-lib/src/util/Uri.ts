@@ -8,6 +8,10 @@ export interface Uri {
     readonly query?: string;
 }
 
+export interface UriInstance extends Uri {
+    toString(skipEncoding?: boolean): string;
+}
+
 interface HRef {
     href: string;
 }
@@ -17,7 +21,7 @@ const isPossibleUri = /\w:\/\//;
 
 const isUrl = /^(file:|stdin:|https?:|s?ftp:)\/\//;
 
-export function toUri(uriOrFile: string | Uri | URL): Uri {
+export function toUri(uriOrFile: string | Uri | URL): UriInstance {
     if (UriImpl.isUri(uriOrFile)) return uriOrFile;
     if (URI.isUri(uriOrFile)) return UriImpl.from(uriOrFile);
     if (uriOrFile instanceof URL) return UriImpl.parse(uriOrFile.toString());
@@ -35,7 +39,7 @@ export function uriToFilePath(uri: Uri): string {
     return normalizeFsPath(URI.from(uri).fsPath);
 }
 
-export function fromFilePath(file: string): Uri {
+export function fromFilePath(file: string): UriInstance {
     return UriImpl.file(file);
 }
 
@@ -47,7 +51,7 @@ function isUrlLike(url: unknown): url is HRef {
     return (!!url && typeof url === 'object' && typeof (<HRef>url).href === 'string') || false;
 }
 
-export function isUri(uri: unknown): uri is Uri {
+export function isUri(uri: unknown): uri is UriInstance {
     if (!uri || typeof uri !== 'object') return false;
     if (UriImpl.isUri(uri)) return true;
     if (URI.isUri(uri)) return true;
@@ -59,7 +63,7 @@ export function basename(uri: Uri): string {
     return Utils.basename(URI.from(uri));
 }
 
-export function dirname(uri: Uri): Uri {
+export function dirname(uri: Uri): UriInstance {
     return UriImpl.from(Utils.dirname(URI.from(uri)));
 }
 
@@ -67,15 +71,15 @@ export function extname(uri: Uri): string {
     return Utils.extname(URI.from(uri));
 }
 
-export function joinPath(uri: Uri): Uri {
+export function joinPath(uri: Uri): UriInstance {
     return UriImpl.from(Utils.joinPath(URI.from(uri)));
 }
 
-export function resolvePath(uri: Uri, ...paths: string[]): Uri {
+export function resolvePath(uri: Uri, ...paths: string[]): UriInstance {
     return UriImpl.from(Utils.resolvePath(URI.from(uri), ...paths));
 }
 
-class UriImpl implements Uri {
+class UriImpl implements UriInstance {
     readonly scheme: string;
     readonly authority?: string;
     readonly path: string;

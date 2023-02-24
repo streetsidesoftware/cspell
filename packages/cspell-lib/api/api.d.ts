@@ -113,6 +113,14 @@ declare namespace index_link_d {
   };
 }
 
+interface Uri {
+    readonly scheme: string;
+    readonly path: string;
+    readonly authority?: string;
+    readonly fragment?: string;
+    readonly query?: string;
+}
+
 declare function stringToRegExp(pattern: string | RegExp, defaultFlags?: string, forceFlags?: string): RegExp | undefined;
 
 declare function splitCamelCaseWordWithOffset(wo: TextOffset): Array<TextOffset>;
@@ -154,7 +162,7 @@ declare function camelToSnake(word: string): string;
 declare function matchCase(example: string, word: string): string;
 declare function textOffset(text: string, offset?: number): TextOffset;
 declare function extractText(textOffset: TextOffset, startPos: number, endPos: number): string;
-declare function calculateTextDocumentOffsets<T extends TextOffset>(uri: string, doc: string, wordOffsets: T[]): (TextDocumentOffset & T)[];
+declare function calculateTextDocumentOffsets<T extends TextOffset>(uri: string | Uri | URL, doc: string, wordOffsets: T[]): (TextDocumentOffset & T)[];
 declare function removeAccents(text: string): string;
 declare const __testing__: {
     regExWords: RegExp;
@@ -220,14 +228,6 @@ declare namespace text_d {
     text_d_textOffset as textOffset,
     text_d_ucFirst as ucFirst,
   };
-}
-
-interface Uri {
-    readonly scheme: string;
-    readonly path: string;
-    readonly authority?: string;
-    readonly fragment?: string;
-    readonly query?: string;
 }
 
 interface Document {
