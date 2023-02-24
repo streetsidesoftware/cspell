@@ -231,13 +231,12 @@ declare namespace text_d {
 }
 
 interface Document {
-    uri: UriOrString;
+    uri: UriString;
     text?: string;
     languageId?: string;
     locale?: string;
 }
 type UriString = string;
-type UriOrString = UriString | Uri;
 interface DocumentWithText extends Document {
     text: string;
 }

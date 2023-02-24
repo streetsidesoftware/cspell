@@ -33,17 +33,27 @@ describe('Uri', () => {
     const stdinFilename = uriStdinFilename.toString();
 
     test.each`
-        uri                                                     | expected
-        ${uriToFilePath(fromFilePath(__filename))}              | ${unTitleCase(__filename)}
-        ${parse('https://google.com/maps')}                     | ${{ scheme: 'https', authority: 'google.com', path: '/maps' }}
-        ${toUri('file:relative_file')}                          | ${{ scheme: 'file', path: '/relative_file' }}
-        ${toUri('stdin://relative/file/path')}                  | ${{ scheme: 'stdin', path: 'relative/file/path' }}
-        ${toUri('stdin://relative/file/path').toString()}       | ${'stdin://relative/file/path'}
-        ${toUri('stdin:///absolute-file-path').toString()}      | ${'stdin:///absolute-file-path'}
-        ${JSON.stringify(toUri('stdin:relative_file_path'))}    | ${'{"scheme":"stdin","path":"relative_file_path"}'}
-        ${JSON.stringify(toUri('stdin:relative/file/path'))}    | ${'{"scheme":"stdin","path":"relative/file/path"}'}
-        ${JSON.stringify(toUri('stdin://relative/file/path'))}  | ${'{"scheme":"stdin","path":"relative/file/path"}'}
-        ${JSON.stringify(toUri('stdin:///absolute-file-path'))} | ${'{"scheme":"stdin","path":"/absolute-file-path"}'}
+        uri                                                                | expected
+        ${toUri({ scheme: 'file', path: '/d:/a//sample.c' })}              | ${{ scheme: 'file', path: '/d:/a//sample.c' }}
+        ${toUri(URI.from({ scheme: 'file', path: 'd:/a//sample.c' }))}     | ${{ scheme: 'file', path: '/d:/a//sample.c' }}
+        ${toUri('file:///d%3A/a//sample.c')}                               | ${{ scheme: 'file', path: '/d:/a//sample.c' }}
+        ${toUri('file:///d:/a/src/sample.c')}                              | ${{ scheme: 'file', path: '/d:/a/src/sample.c' }}
+        ${toUri('file:///d:/a/src/sample.c').toString()}                   | ${new URL('file:///d:/a/src/sample.c').toString()}
+        ${toUri('file:///d:/a/src/sample.c').toString()}                   | ${'file:///d:/a/src/sample.c'}
+        ${toUri('file:///d:/a/src files/sample.c').toString()}             | ${new URL('file:///d:/a/src files/sample.c').toString()}
+        ${toUri('https://g.com/maps?lat=43.23&lon=-0.5#first')}            | ${{ scheme: 'https', path: '/maps', query: 'lat=43.23&lon=-0.5', fragment: 'first', authority: 'g.com' }}
+        ${toUri(new URL('https://g.com/maps?lat=43.23&lon=-0.5#first'))}   | ${{ scheme: 'https', path: '/maps', query: 'lat=43.23&lon=-0.5', fragment: 'first', authority: 'g.com' }}
+        ${toUri('https://g.com/maps?lat=43.23&lon=-0.5#first').toString()} | ${new URL('https://g.com/maps?lat=43.23&lon=-0.5#first').toString()}
+        ${uriToFilePath(fromFilePath(__filename))}                         | ${unTitleCase(__filename)}
+        ${parse('https://google.com/maps')}                                | ${{ scheme: 'https', authority: 'google.com', path: '/maps' }}
+        ${toUri('file:relative_file')}                                     | ${{ scheme: 'file', path: '/relative_file' }}
+        ${toUri('stdin://relative/file/path')}                             | ${{ scheme: 'stdin', path: 'relative/file/path' }}
+        ${toUri('stdin://relative/file/path').toString()}                  | ${'stdin://relative/file/path'}
+        ${toUri('stdin:///absolute-file-path').toString()}                 | ${'stdin:///absolute-file-path'}
+        ${JSON.stringify(toUri('stdin:relative_file_path'))}               | ${'{"scheme":"stdin","path":"relative_file_path"}'}
+        ${JSON.stringify(toUri('stdin:relative/file/path'))}               | ${'{"scheme":"stdin","path":"relative/file/path"}'}
+        ${JSON.stringify(toUri('stdin://relative/file/path'))}             | ${'{"scheme":"stdin","path":"relative/file/path"}'}
+        ${JSON.stringify(toUri('stdin:///absolute-file-path'))}            | ${'{"scheme":"stdin","path":"/absolute-file-path"}'}
     `('uri assumptions $uri', ({ uri, expected }) => {
         expect(uri).toEqual(expected);
     });

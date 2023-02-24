@@ -9,7 +9,7 @@ export interface Uri {
 }
 
 export interface UriInstance extends Uri {
-    toString(skipEncoding?: boolean): string;
+    toString(): string;
 }
 
 interface HRef {
@@ -98,13 +98,14 @@ class UriImpl implements UriInstance {
         uri.fragment && (this.fragment = uri.fragment);
     }
 
-    toString(skipEncoding?: boolean): string {
-        const base = `${this.scheme}://${this.authority || ''}${this.path}`;
+    toString(): string {
+        const path = this.path;
+        const base = `${this.scheme}://${this.authority || ''}${path}`;
         const query = (this.query && `?${this.query}`) || '';
         const fragment = (this.fragment && `#${this.fragment}`) || '';
         const url = base + query + fragment;
 
-        return skipEncoding ? url : encodeURI(url);
+        return encodeURI(url);
     }
 
     toJson(): PartialWithUndefined<Uri> {

@@ -1,7 +1,7 @@
 import type { Uri } from '../util/Uri';
 
 export interface Document {
-    uri: UriOrString;
+    uri: UriString;
     text?: string;
     languageId?: string;
     locale?: string;
