@@ -3,7 +3,7 @@ import { promises as fs } from 'fs';
 import { TextDocument as VsTextDocument } from 'vscode-languageserver-textdocument';
 
 import { getLanguagesForBasename } from '../LanguageIds';
-import * as Uri from './Uri';
+import * as Uri from '../util/Uri';
 
 export type DocumentUri = Uri.Uri;
 

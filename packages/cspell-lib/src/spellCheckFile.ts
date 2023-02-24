@@ -1,10 +1,11 @@
 import type { CSpellSettingsWithSourceTrace, CSpellUserSettings } from '@cspell/cspell-types';
-import { URI } from 'vscode-uri';
 
 import type { Document, DocumentWithText } from './Document';
 import { isBinaryDoc } from './Document/isBinaryDoc';
 import { documentToTextDocument, resolveDocument } from './Document/resolveDocument';
 import { createTextDocument } from './Models/TextDocument';
+import type { Uri } from './util/Uri';
+import { toUri } from './util/Uri';
 import type { DocumentValidatorOptions } from './textValidation';
 import { DocumentValidator } from './textValidation';
 import { determineTextDocumentSettings } from './textValidation/determineTextDocumentSettings';
@@ -50,12 +51,12 @@ export interface SpellCheckFileResult {
  * @param settings - default settings to use.
  */
 export function spellCheckFile(
-    file: string,
+    file: string | Uri | URL,
     options: SpellCheckFileOptions,
     settings: CSpellUserSettings
 ): Promise<SpellCheckFileResult> {
     const doc: Document = {
-        uri: URI.file(file).toString(),
+        uri: toUri(file).toString(),
     };
     return spellCheckDocument(doc, options, settings);
 }

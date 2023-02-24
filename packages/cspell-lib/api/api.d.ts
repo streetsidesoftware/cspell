@@ -1,7 +1,6 @@
 /// <reference types="node" />
 import { Glob, CSpellSettingsWithSourceTrace, TextOffset, TextDocumentOffset, AdvancedCSpellSettingsWithSourceTrace, Parser, DictionaryDefinitionInline, DictionaryDefinitionPreferred, DictionaryDefinitionAugmented, DictionaryDefinitionCustom, PnPSettings, ImportFileRef, CSpellUserSettings, Issue, MappedText, ParsedText, LocaleId, CSpellSettings } from '@cspell/cspell-types';
 export * from '@cspell/cspell-types';
-import { URI } from 'vscode-uri';
 import { WeightMap } from 'cspell-trie-lib';
 export { CompoundWordsMethod } from 'cspell-trie-lib';
 import { CachingDictionary, SpellingDictionaryCollection, SuggestOptions, SuggestionResult } from 'cspell-dictionary';
@@ -223,20 +222,29 @@ declare namespace text_d {
   };
 }
 
+interface Uri {
+    readonly scheme: string;
+    readonly path: string;
+    readonly authority?: string;
+    readonly fragment?: string;
+    readonly query?: string;
+}
+
 interface Document {
-    uri: UriString;
+    uri: UriOrString;
     text?: string;
     languageId?: string;
     locale?: string;
 }
 type UriString = string;
+type UriOrString = UriString | Uri;
 interface DocumentWithText extends Document {
     text: string;
 }
 
-declare function isBinaryFile(filenameUri: URI, languageId?: string | string[]): boolean;
+declare function isBinaryFile(filename: Uri | URL | string, languageId?: string | string[]): boolean;
 
-type DocumentUri = URI;
+type DocumentUri = Uri;
 interface Position {
     line: number;
     character: number;
@@ -403,7 +411,7 @@ declare class ImportError extends Error {
     constructor(msg: string, cause?: Error | unknown);
 }
 
-type LoaderResult = URI | undefined;
+type LoaderResult = Uri | undefined;
 
 type PnPSettingsOptional = OptionalOrUndefined<PnPSettings>;
 
@@ -427,8 +435,8 @@ declare function searchForConfig(searchFrom: string | undefined, pnpSettings?: P
  * @returns normalized CSpellSettings
  */
 declare function loadConfig(file: string, pnpSettings?: PnPSettingsOptional): Promise<CSpellSettingsI$1>;
-declare function loadPnP(pnpSettings: PnPSettingsOptional, searchFrom: URI): Promise<LoaderResult>;
-declare function loadPnPSync(pnpSettings: PnPSettingsOptional, searchFrom: URI): LoaderResult;
+declare function loadPnP(pnpSettings: PnPSettingsOptional, searchFrom: Uri): Promise<LoaderResult>;
+declare function loadPnPSync(pnpSettings: PnPSettingsOptional, searchFrom: Uri): LoaderResult;
 declare function readRawSettings(filename: string, relativeTo?: string): CSpellSettingsWST$1;
 declare function getGlobalSettings(): CSpellSettingsI$1;
 declare function getCachedFileSize(): number;
@@ -789,7 +797,7 @@ interface SpellCheckFileResult {
  * @param options - options to control checking
  * @param settings - default settings to use.
  */
-declare function spellCheckFile(file: string, options: SpellCheckFileOptions, settings: CSpellUserSettings): Promise<SpellCheckFileResult>;
+declare function spellCheckFile(file: string | Uri | URL, options: SpellCheckFileOptions, settings: CSpellUserSettings): Promise<SpellCheckFileResult>;
 /**
  * Spell Check a Document.
  * @param document - document to be checked. If `document.text` is `undefined` the file will be loaded

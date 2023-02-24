@@ -5,9 +5,10 @@ import { cosmiconfig, cosmiconfigSync } from 'cosmiconfig';
 import type { CSpellIO } from 'cspell-io';
 import { getDefaultCSpellIO } from 'cspell-io';
 import * as path from 'path';
-import { URI } from 'vscode-uri';
 
 import { createCSpellSettingsInternal as csi } from '../../../Models/CSpellSettingsInternalDef';
+import type { Uri } from '../../../util/Uri';
+import { toUri } from '../../../util/Uri';
 import { AutoResolveLRUCache } from '../../../util/AutoResolveLRUCache';
 import { logError, logWarning } from '../../../util/logger';
 import { resolveFile } from '../../../util/resolveFile';
@@ -287,7 +288,7 @@ export class ConfigLoader {
         const { usePnP = pnpSettings.usePnP, pnpFiles = pnpSettings.pnpFiles } = rawSettings;
         const pnpSettingsToUse: PnPSettingsOptional = normalizePnPSettings({ usePnP, pnpFiles });
         const pathToSettingsDir = path.dirname(pathToSettingsFile);
-        loadPnPSync(pnpSettingsToUse, URI.file(pathToSettingsDir));
+        loadPnPSync(pnpSettingsToUse, toUri(pathToSettingsDir));
 
         // Fix up dictionaryDefinitions
         const settings = {
@@ -500,7 +501,7 @@ export function loadConfigSync(
     return gcl().readSettings(filename, pnp);
 }
 
-export function loadPnP(pnpSettings: PnPSettingsOptional, searchFrom: URI): Promise<LoaderResult> {
+export function loadPnP(pnpSettings: PnPSettingsOptional, searchFrom: Uri): Promise<LoaderResult> {
     if (!pnpSettings.usePnP) {
         return Promise.resolve(undefined);
     }
@@ -508,7 +509,7 @@ export function loadPnP(pnpSettings: PnPSettingsOptional, searchFrom: URI): Prom
     return loader.load(searchFrom);
 }
 
-export function loadPnPSync(pnpSettings: PnPSettingsOptional, searchFrom: URI): LoaderResult {
+export function loadPnPSync(pnpSettings: PnPSettingsOptional, searchFrom: Uri): LoaderResult {
     if (!pnpSettings.usePnP) {
         return undefined;
     }

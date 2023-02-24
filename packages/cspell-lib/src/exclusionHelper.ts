@@ -1,8 +1,8 @@
 import type { Glob } from '@cspell/cspell-types';
 import { GlobMatcher } from 'cspell-glob';
-import { URI as Uri } from 'vscode-uri';
 
-import { uriToFilePath } from './Models/Uri';
+import type { Uri } from './util/Uri';
+import { toUri, uriToFilePath } from './util/Uri';
 
 const defaultAllowedSchemes = new Set(['file', 'untitled']);
 
@@ -57,7 +57,7 @@ export function generateExclusionFunctionForUri(
     }
 
     function testUriPath(uriPath: string): boolean {
-        const uri = Uri.parse(uriPath);
+        const uri = toUri(uriPath);
         return testUri(uri);
     }
     return testUriPath;

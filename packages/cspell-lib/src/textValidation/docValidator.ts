@@ -15,7 +15,6 @@ import type { CSpellSettingsInternal, CSpellSettingsInternalFinalized } from '..
 import type { ExtendedSuggestion } from '../Models/Suggestion';
 import type { TextDocument, TextDocumentLine, TextDocumentRef } from '../Models/TextDocument';
 import { updateTextDocument } from '../Models/TextDocument';
-import { uriToFilePath } from '../Models/Uri';
 import type { ValidationIssue } from '../Models/ValidationIssue';
 import { finalizeSettings, loadConfig, mergeSettings, searchForConfig } from '../Settings';
 import { loadConfigSync, searchForConfigSync } from '../Settings/Controller/configLoader';
@@ -29,6 +28,7 @@ import { toError } from '../util/errors';
 import { AutoCache } from '../util/simpleCache';
 import type { MatchRange } from '../util/TextRange';
 import { createTimer } from '../util/timer';
+import { uriToFilePath } from '../util/Uri';
 import { defaultMaxDuplicateProblems, defaultMaxNumberOfProblems } from './defaultConstants';
 import { determineTextDocumentSettings } from './determineTextDocumentSettings';
 import type { TextValidator } from './lineValidatorFactory';
