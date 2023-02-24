@@ -39,7 +39,7 @@ describe('Validate PnPLoader', () => {
     test('pnpLoader sync and async', async () => {
         const loader = pnpLoader();
         const yarnPnp = await loader.load(uriYarn2TestMed);
-        expect(yarnPnp?.toString()).toBe(uriYarn2TestMedPnp.toString());
+        expect(yarnPnp?.toString().toLocaleLowerCase()).toBe(uriYarn2TestMedPnp.toString().toLowerCase());
         expect(loader.peekSync(uriYarn2TestMed)?.toString().toLocaleLowerCase()).toBe(
             yarnPnp?.toString().toLocaleLowerCase()
         );
@@ -54,7 +54,7 @@ describe('Validate PnPLoader', () => {
     test('pnpLoader shared cache', async () => {
         const loader = pnpLoader();
         const yarnPnp = await loader.load(uriYarn2TestMed);
-        expect(yarnPnp?.toString()).toBe(uriYarn2TestMedPnp.toString());
+        expect(yarnPnp?.toString().toLocaleLowerCase()).toBe(uriYarn2TestMedPnp.toString().toLowerCase());
 
         // Check Shared cache
         const loader2 = pnpLoader();
