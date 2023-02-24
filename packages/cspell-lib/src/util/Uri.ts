@@ -36,7 +36,9 @@ export function toUri(uriOrFile: string | Uri | URL): UriInstance {
 const hasDriveLetter = /^[A-Z]:/i;
 
 export function uriToFilePath(uri: Uri): string {
-    return normalizeFsPath(URI.from(uri).fsPath);
+    const adj = uri.scheme === 'stdin' ? { scheme: 'file' } : {};
+
+    return normalizeFsPath(URI.from(UriImpl.from(uri, adj)).fsPath);
 }
 
 export function fromFilePath(file: string): UriInstance {
