@@ -4,7 +4,7 @@ import { promisify } from 'util';
 import * as zlib from 'zlib';
 
 import type { BufferEncoding, BufferEncodingExt } from '../../common/BufferEncoding';
-import { encoderUtf } from '../../common/transformUtf16';
+import { encoderTransformer } from '../../common/transformers';
 
 const pipeline = promisify(Stream.pipeline);
 
@@ -21,7 +21,7 @@ export function writeToFileIterable(
     data: Iterable<string> | AsyncIterable<string>,
     encoding?: BufferEncodingExt
 ): Promise<void> {
-    const stream = Stream.Readable.from(encoderUtf(data, encoding));
+    const stream = Stream.Readable.from(encoderTransformer(data, encoding));
     const zip = filename.match(/\.gz$/) ? zlib.createGzip() : new Stream.PassThrough();
     return pipeline(stream, zip, fs.createWriteStream(filename));
 }

@@ -25,6 +25,12 @@ ignorePaths:
   # GitBucket
   - "**/gitbucket/**/*.{xml,erd,spec,init,conf}"
   - "**/gitbucket/**/webapp/assets/**"
+  # ktaranov/sqlserver-kit
+  - "**/ktaranov/sqlserver-kit/**/Sample_Databases/TSQLV4.sql"
+  - "**/ktaranov/sqlserver-kit/**/Errors/**"
+  - "**/ktaranov/sqlserver-kit/**/Backup/**"
+  - "**/ktaranov/sqlserver-kit/**/*Transliteration*"
+  - "**/ktaranov/sqlserver-kit/**/*.vssettings" # cspell:ignore vssettings
 import:
   - ./cspell-reporter.json
   - ./cspell-latex.json
@@ -92,6 +98,9 @@ overrides:
       - html
       - svelte
       - html-symbol-entities
+  - filename: temp/ktaranov/sqlserver-kit
+    dictionaries:
+      - sql
 dictionaries:
   - custom-dictionary
 dictionaryDefinitions:
@@ -99,3 +108,4 @@ dictionaryDefinitions:
     path: ./.cspell/custom-dictionary.txt
     addWords: true
 # cspell:ignore sveltejs webp gitbucket
+# cspell:ignore ktaranov sqlserver TSQLV4

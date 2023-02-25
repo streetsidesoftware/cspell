@@ -139,7 +139,9 @@ describe('Validate DictionaryLoader', () => {
         ${dDef({ name: 'words', path: dict('cities.txt'), type: 'W' })} | ${'New York'} | ${false}
         ${dDef({ name: 'words', path: dict('cities.txt'), type: 'W' })} | ${'York'}     | ${true}
         ${{ name: 'cities', words: ['Paris', 'New York'] }}             | ${'New York'} | ${true}
-    `('sync load dict has word $def $word', async ({ def, word, hasWord }) => {
+        ${dDef({ name: 'words', path: dict('cities.utf16le.txt') })}    | ${'New York'} | ${true}
+        ${dDef({ name: 'words', path: dict('cities.utf16be.txt') })}    | ${'New York'} | ${true}
+    `('async load dict has word $def $word', async ({ def, word, hasWord }) => {
         const d = await loadDictionary(def);
         expect(d.has(word)).toBe(hasWord);
     });
@@ -157,6 +159,8 @@ describe('Validate DictionaryLoader', () => {
         ${dDef({ name: 'words', path: dict('cities.txt'), type: 'W' })} | ${'New York'} | ${false}
         ${dDef({ name: 'words', path: dict('cities.txt'), type: 'W' })} | ${'York'}     | ${true}
         ${{ name: 'cities', words: ['Paris', 'New York'] }}             | ${'New York'} | ${true}
+        ${dDef({ name: 'words', path: dict('cities.utf16le.txt') })}    | ${'New York'} | ${true}
+        ${dDef({ name: 'words', path: dict('cities.utf16be.txt') })}    | ${'New York'} | ${true}
     `('sync load dict has word $def $word', ({ def, word, hasWord }) => {
         const d = loadDictionarySync(def);
         expect(d.has(word)).toBe(hasWord);

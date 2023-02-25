@@ -1,3 +1,4 @@
+import { readFile as cioReadFile } from 'cspell-io';
 import type { CSpellUserSettings, Document, Issue } from 'cspell-lib';
 import * as cspell from 'cspell-lib';
 import { fileToDocument, isBinaryFile as isUriBinaryFile } from 'cspell-lib';
@@ -119,7 +120,7 @@ export function readFileInfo(
     handleNotFound = false
 ): Promise<ReadFileInfoResult> {
     filename = resolveFilename(filename);
-    const pText = filename.startsWith(STDINProtocol) ? getStdin() : fsp.readFile(filename, encoding);
+    const pText = filename.startsWith(STDINProtocol) ? getStdin() : cioReadFile(filename, encoding);
     return pText.then(
         (text) => ({ text, filename }),
         (e) => {
