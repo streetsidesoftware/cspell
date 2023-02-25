@@ -1,3 +1,4 @@
+import assert from 'assert';
 import { URI, Utils } from 'vscode-uri';
 
 export interface Uri {
@@ -20,6 +21,8 @@ const isFile = /^(?:[a-zA-Z]:|[/\\])/;
 const isPossibleUri = /\w:\/\//;
 
 const isUrl = /^(file:|stdin:|https?:|s?ftp:)\/\//;
+
+const STDIN_PROTOCOL = 'stdin:';
 
 export function toUri(uriOrFile: string | Uri | URL): UriInstance {
     if (UriImpl.isUri(uriOrFile)) return uriOrFile;
@@ -151,7 +154,7 @@ class UriImpl implements UriInstance {
     }
 
     static parse(uri: string): UriImpl {
-        if (uri.startsWith('stdin:')) {
+        if (uri.startsWith(STDIN_PROTOCOL)) {
             return UriImpl.from(parseStdinUri(uri));
         }
         const u = URI.parse(uri);
@@ -172,16 +175,24 @@ function normalizeFilePath(path: string): string {
 }
 
 function parseStdinUri(uri: string): Uri {
-    const m = uri.match(/^stdin:(?<slashes>[/]*)(?<path>.*)$/);
-    if (!m) {
-        return { scheme: 'stdin', path: '' };
-    }
-    const slashes = m.groups?.['slashes'] || '';
-    const pathEx = m.groups?.['path'] || '';
-    const [pathAndQuery, hash = ''] = pathEx.split('#', 2);
-    const [path, query = ''] = pathAndQuery.split('?', 2);
+    assert(uri.startsWith(STDIN_PROTOCOL));
 
-    const pathPrefix = slashes === '///' ? '/' : '';
+    const idxSlash = STDIN_PROTOCOL.length;
+    let idxSlashEnd = idxSlash;
+    for (; uri[idxSlashEnd] === '/'; ++idxSlashEnd) {
+        // empty
+    }
+    const pathStart = idxSlashEnd;
+    const iH = uri.indexOf('#', pathStart);
+    const idxHash = iH > 0 ? iH : uri.length;
+    const iQ = uri.indexOf('?', pathStart);
+    const idxQ = iQ > 0 && iQ < idxHash ? iQ : idxHash;
+    const pathEnd = idxQ;
+    const path = uri.slice(pathStart, pathEnd);
+    const query = idxQ < idxHash ? uri.slice(idxQ + 1, idxHash) : '';
+    const hash = uri.slice(idxHash + 1);
+
+    const pathPrefix = idxSlashEnd - idxSlash > 2 ? '/' : '';
 
     return {
         scheme: 'stdin',

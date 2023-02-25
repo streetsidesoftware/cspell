@@ -20,6 +20,12 @@ describe('Uri', () => {
         ${'stdin:///D:\\home\\prj\\code.c?q=42'}            | ${{ scheme: 'stdin', path: '/d:/home/prj/code.c', query: 'q=42' }}
         ${'stdin:///D:\\home\\prj\\code.c#README'}          | ${{ scheme: 'stdin', path: '/d:/home/prj/code.c', fragment: 'README' }}
         ${'stdin:///D:\\home\\prj\\code.c?q=42&a=9#README'} | ${{ scheme: 'stdin', path: '/d:/home/prj/code.c', query: 'q=42&a=9', fragment: 'README' }}
+        ${'stdin://readme.md?'}                             | ${{ scheme: 'stdin', path: 'readme.md' }}
+        ${'stdin://readme.md#'}                             | ${{ scheme: 'stdin', path: 'readme.md' }}
+        ${'stdin:#README'}                                  | ${{ scheme: 'stdin', path: '', fragment: 'README' }}
+        ${'stdin:?README'}                                  | ${{ scheme: 'stdin', path: '', query: 'README' }}
+        ${'stdin://readme.md?#README'}                      | ${{ scheme: 'stdin', path: 'readme.md', fragment: 'README' }}
+        ${'stdin://readme.md#?#README'}                     | ${{ scheme: 'stdin', path: 'readme.md', fragment: '?#README' }}
         ${encodeURI('stdin:///D:\\home\\prj\\code.c')}      | ${{ scheme: 'stdin', path: '/d:/home/prj/code.c' }}
         ${fromStdinFilePath('D:\\home\\prj\\code.c')}       | ${{ scheme: 'stdin', path: '/d:/home/prj/code.c' }}
         ${'example.com/'}                                   | ${URIparse('example.com/')}
