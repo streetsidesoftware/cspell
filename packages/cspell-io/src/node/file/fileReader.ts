@@ -6,7 +6,8 @@ import { fileURLToPath } from 'url';
 import { promisify } from 'util';
 import * as zlib from 'zlib';
 
-import { decoderUtf } from '../../common/transformUtf16';
+import { decode } from '../../common/encode-decode';
+import { createDecoderTransformer } from '../../common/transformers';
 import type { BufferEncoding } from '../../models/BufferEncoding';
 import { fetch } from './fetch';
 import { FetchUrlError } from './FetchError';
@@ -41,19 +42,19 @@ async function _fetchURL(url: URL, encoding?: BufferEncoding): Promise<string> {
 async function _read(
     getStream: () => NodeJS.ReadableStream,
     isZipped: boolean,
-    encoding: BufferEncoding = defaultEncoding
+    encoding?: BufferEncoding
 ): Promise<string> {
     const stream = getStream();
-    const collector = createCollector(encoding);
-    return isZipped
-        ? pipeline(stream, zlib.createGunzip(), decoderUtf, collector)
-        : pipeline(stream, decoderUtf, collector);
+    const decoder = createDecoderTransformer(encoding);
+    const collector = createCollector(encoding || defaultEncoding);
+    return isZipped ? pipeline(stream, zlib.createGunzip(), decoder, collector) : pipeline(stream, decoder, collector);
 }
 
-export function readFileSync(filename: string, encoding: BufferEncoding = defaultEncoding): string {
+export function readFileSync(filename: string, encoding?: BufferEncoding): string {
     const rawData = fs.readFileSync(filename);
     const data = isZipped(filename) ? zlib.gunzipSync(rawData) : rawData;
-    return data.toString(encoding);
+
+    return !encoding || encoding.startsWith('utf') ? decode(data) : data.toString(encoding);
 }
 
 function createCollector(encoding: BufferEncoding) {

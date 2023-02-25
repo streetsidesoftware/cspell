@@ -1,4 +1,4 @@
-import { decodeUtf, encodeString, swapBytes, swapBytesInPlace } from './encode-decode';
+import { decode, encodeString, swapBytes, swapBytesInPlace } from './encode-decode';
 
 const samples = ['This is a bit of text'];
 
@@ -60,7 +60,7 @@ describe('encode-decode', () => {
         ${''}         | ${undefined} | ${undefined}
     `('encode/decode $encoding $bom $text', ({ text, encoding }) => {
         const encoded = encodeString(text, encoding);
-        expect(decodeUtf(encoded, encoding)).toBe(text);
-        expect(decodeUtf(encoded)).toBe(text);
+        expect(decode(encoded, encoding)).toBe(text);
+        expect(decode(encoded)).toBe(text);
     });
 });

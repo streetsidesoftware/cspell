@@ -13,20 +13,18 @@ export function decodeUtf16BE(buf: Buffer): string {
     return decodeUtf16LE(swapBytes(buf));
 }
 
-export function decodeUtf(buf: Buffer, encoding?: BufferEncodingExt): string {
+export function decode(buf: Buffer, encoding?: BufferEncodingExt): string {
     switch (encoding) {
         case 'utf16be':
             return decodeUtf16BE(buf);
         case 'utf16le':
             return decodeUtf16LE(buf);
-        case 'utf8':
-            return buf.toString('utf8');
     }
-    if (buf.length < 2) return buf.toString('utf8');
+    if (buf.length < 2 || (encoding && !encoding.startsWith('utf'))) return buf.toString(encoding);
     const bom = (buf[0] << 8) | buf[1];
     if (bom === BOM_BE || (buf[0] === 0 && buf[1] !== 0)) return decodeUtf16BE(buf);
     if (bom === BOM_LE || (buf[0] !== 0 && buf[1] === 0)) return decodeUtf16LE(buf);
-    return buf.toString('utf8');
+    return buf.toString(encoding);
 }
 
 export function swapBytesInPlace(buf: Buffer): Buffer {
@@ -50,7 +48,7 @@ export function encodeString(str: string, encoding?: BufferEncodingExt, bom?: bo
         case 'utf16le':
             return encodeUtf16LE(str, bom);
     }
-    return Buffer.from(str, 'utf8');
+    return Buffer.from(str, encoding);
 }
 
 export function encodeUtf16LE(str: string, bom = true) {
