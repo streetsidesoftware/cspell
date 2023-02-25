@@ -1,8 +1,8 @@
 import { readFile } from 'fs/promises';
-import { URI } from 'vscode-uri';
 
 import type { TextDocument } from '../Models/TextDocument';
 import { createTextDocument } from '../Models/TextDocument';
+import * as Uri from '../util/Uri';
 import { clean } from '../util/util';
 import type { Document, DocumentWithText } from './Document';
 
@@ -23,7 +23,7 @@ export function fileToDocument(
     locale?: string
 ): Document | DocumentWithText {
     return clean({
-        uri: URI.file(file).toString(),
+        uri: Uri.toUri(file).toString(),
         text,
         languageId,
         locale,
@@ -44,7 +44,7 @@ export async function resolveDocumentToTextDocument(doc: Document): Promise<Text
 
 async function readDocument(filename: string, encoding: BufferEncoding = defaultEncoding): Promise<DocumentWithText> {
     const text = await readFile(filename, encoding);
-    const uri = URI.file(filename).toString();
+    const uri = Uri.toUri(filename).toString();
 
     return {
         uri,
@@ -56,11 +56,11 @@ export function resolveDocument(
     encoding?: BufferEncoding
 ): Promise<DocumentWithText> {
     if (isDocumentWithText(document)) return Promise.resolve(document);
-    const uri = URI.parse(document.uri);
+    const uri = Uri.toUri(document.uri);
     if (uri.scheme !== 'file') {
         throw new Error(`Unsupported schema: "${uri.scheme}", open "${uri.toString()}"`);
     }
-    return readDocument(uri.fsPath, encoding);
+    return readDocument(Uri.uriToFilePath(uri), encoding);
 }
 function isDocumentWithText(doc: DocumentWithText | Document): doc is DocumentWithText {
     return doc.text !== undefined;

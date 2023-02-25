@@ -1,6 +1,6 @@
+import * as Uri from '../util/Uri';
 import type { TextDocument } from './TextDocument';
 import { createTextDocument, isTextDocument, updateTextDocument } from './TextDocument';
-import { Uri } from './Uri';
 
 describe('TextDocument', () => {
     test('create', () => {
@@ -8,8 +8,8 @@ describe('TextDocument', () => {
         const doc = createTextDocument({ uri: __filename, content });
         expect(doc.text).toBe(content);
         expect(doc.languageId).toContain('typescript');
-        expect(doc.uri).toBeInstanceOf(Uri);
-        expect(doc.uri.toString()).toEqual(Uri.file(__filename).toString());
+        expect(Uri.isUri(doc.uri)).toBe(true);
+        expect(doc.uri.toString().toLowerCase()).toEqual(Uri.fromFilePath(__filename).toString().toLowerCase());
     });
 
     test('update', () => {

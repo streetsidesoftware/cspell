@@ -1,8 +1,8 @@
 import type { CSpellSettingsWithSourceTrace, CSpellUserSettings, ImportFileRef } from '@cspell/cspell-types';
 import * as path from 'path';
-import { URI } from 'vscode-uri';
 
 import { logError, logWarning } from '../../../util/logger';
+import * as URI from '../../../util/Uri';
 import { currentSettingsFileVersion, ENV_CSPELL_GLOB_ROOT } from '../../constants';
 import type { ImportFileRefWithError } from '../../CSpellSettingsServer';
 import { extractDependencies, getSources, mergeSettings } from '../../CSpellSettingsServer';
@@ -314,13 +314,6 @@ describe('Validate search/load config files', () => {
         clearCachedSettingsFiles();
     });
 
-    function importRefWithError(filename: string): ImportFileRefWithError {
-        return {
-            filename,
-            error: new Error(`Failed to find config file at: "${filename}"`),
-        };
-    }
-
     function readError(filename: string): ImportFileRefWithError {
         return {
             filename,
@@ -398,12 +391,6 @@ describe('Validate search/load config files', () => {
     `('Search sync check from $dir', async ({ dir, expectedConfig, expectedImportErrors }: TestSearchFrom) => {
         const searchResult = await searchForConfig(dir);
         expect(searchResult).toEqual(expect.objectContaining(expectedConfig));
-        if (searchResult?.__importRef) {
-            clearCachedSettingsFiles();
-            const loadResult = loadConfigSync(searchResult.__importRef?.filename);
-            // eslint-disable-next-line jest/no-conditional-expect
-            expect(loadResult).toEqual(searchResult);
-        }
         const errors = extractImportErrors(searchResult || {});
         expect(errors).toHaveLength(expectedImportErrors.length);
         expect(errors).toEqual(
@@ -422,8 +409,8 @@ describe('Validate search/load config files', () => {
 
     test.each`
         file                               | expectedConfig
-        ${samplesSrc}                      | ${cfg(importRefWithError(samplesSrc))}
-        ${s('bug-fixes')}                  | ${cfg(importRefWithError(s('bug-fixes')))}
+        ${samplesSrc}                      | ${cfg(readError(samplesSrc))}
+        ${s('bug-fixes')}                  | ${cfg(readError(s('bug-fixes')))}
         ${s('linked/cspell.config.js')}    | ${cfg(s('linked/cspell.config.js'))}
         ${s('js-config/cspell.config.js')} | ${cfg(s('js-config/cspell.config.js'))}
     `('Load from $file', async ({ file, expectedConfig }: TestLoadConfig) => {
@@ -435,8 +422,8 @@ describe('Validate search/load config files', () => {
 
     test.each`
         file                               | expectedConfig
-        ${samplesSrc}                      | ${cfg(importRefWithError(samplesSrc))}
-        ${s('bug-fixes')}                  | ${cfg(importRefWithError(s('bug-fixes')))}
+        ${samplesSrc}                      | ${cfg(readError(samplesSrc))}
+        ${s('bug-fixes')}                  | ${cfg(readError(s('bug-fixes')))}
         ${s('linked/cspell.config.js')}    | ${cfg(s('linked/cspell.config.js'))}
         ${s('js-config/cspell.config.js')} | ${cfg(s('js-config/cspell.config.js'))}
     `('Load sync from $file', ({ file, expectedConfig }: TestLoadConfig) => {
@@ -479,7 +466,7 @@ describe('Validate search/load config files', () => {
     });
 
     test('loadPnPSync', () => {
-        expect(loadPnPSync({}, URI.file(__dirname))).toBeUndefined();
+        expect(loadPnPSync({}, URI.fromFilePath(__dirname))).toBeUndefined();
         // Look for a pnp file from the current location, but it won't be found.
         expect(loadPnPSync({ usePnP: true }, URI.file(__dirname))).toBeUndefined();
     });

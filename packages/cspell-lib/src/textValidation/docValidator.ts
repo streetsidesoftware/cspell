@@ -9,10 +9,11 @@ import type {
 import { IssueType } from '@cspell/cspell-types';
 import assert from 'assert';
 import { GlobMatcher } from 'cspell-glob';
+import path from 'path';
 
 import type { CSpellSettingsInternal, CSpellSettingsInternalFinalized } from '../Models/CSpellSettingsInternalDef';
 import type { ExtendedSuggestion } from '../Models/Suggestion';
-import type { TextDocument, TextDocumentLine } from '../Models/TextDocument';
+import type { TextDocument, TextDocumentLine, TextDocumentRef } from '../Models/TextDocument';
 import { updateTextDocument } from '../Models/TextDocument';
 import type { ValidationIssue } from '../Models/ValidationIssue';
 import { finalizeSettings, loadConfig, mergeSettings, searchForConfig } from '../Settings';
@@ -27,6 +28,7 @@ import { toError } from '../util/errors';
 import { AutoCache } from '../util/simpleCache';
 import type { MatchRange } from '../util/TextRange';
 import { createTimer } from '../util/timer';
+import { uriToFilePath } from '../util/Uri';
 import { defaultMaxDuplicateProblems, defaultMaxNumberOfProblems } from './defaultConstants';
 import { determineTextDocumentSettings } from './determineTextDocumentSettings';
 import type { TextValidator } from './lineValidatorFactory';
@@ -56,6 +58,8 @@ export interface DocumentValidatorOptions extends ValidateTextOptions {
 }
 
 const ERROR_NOT_PREPARED = 'Validator Must be prepared before calling this function.';
+
+const skipValidation = false;
 
 export class DocumentValidator {
     private _document: TextDocument;
@@ -121,7 +125,7 @@ export class DocumentValidator {
         const matcher = new GlobMatcher(localConfig?.ignorePaths || [], { root: process.cwd(), dot: true });
         const uri = this._document.uri;
 
-        const shouldCheck = !matcher.match(uri.fsPath) && (docSettings.enabled ?? true);
+        const shouldCheck = !matcher.match(uriToFilePath(uri)) && (docSettings.enabled ?? true);
         const finalSettings = finalizeSettings(docSettings);
         const validateOptions = settingsToValidateOptions(finalSettings);
         const includeRanges = calcTextInclusionRanges(this._document.text, validateOptions);
@@ -179,7 +183,7 @@ export class DocumentValidator {
         const matcher = new GlobMatcher(localConfig?.ignorePaths || [], { root: process.cwd(), dot: true });
         const uri = this._document.uri;
 
-        const shouldCheck = !matcher.match(uri.fsPath) && (docSettings.enabled ?? true);
+        const shouldCheck = !matcher.match(uriToFilePath(uri)) && (docSettings.enabled ?? true);
 
         const finalSettings = finalizeSettings(docSettings);
         const validateOptions = settingsToValidateOptions(finalSettings);
@@ -301,6 +305,7 @@ export class DocumentValidator {
      * @returns the validation issues.
      */
     public checkDocument(forceCheck = false): ValidationIssue[] {
+        if (skipValidation) return [];
         assert(this._ready);
         assert(this._preparations, ERROR_NOT_PREPARED);
 
@@ -482,21 +487,62 @@ interface Preparations {
 }
 
 async function searchForDocumentConfig(
-    document: TextDocument,
+    document: TextDocumentRef,
     defaultConfig: CSpellSettingsWithSourceTrace,
     pnpSettings: PnPSettings
 ): Promise<CSpellSettingsWithSourceTrace> {
     const { uri } = document;
     if (uri.scheme !== 'file') return Promise.resolve(defaultConfig);
-    return searchForConfig(uri.fsPath, pnpSettings).then((s) => s || defaultConfig);
+    return searchForConfig(path.dirname(uriToFilePath(uri)), pnpSettings).then((s) => s || defaultConfig);
 }
 
 function searchForDocumentConfigSync(
-    document: TextDocument,
+    document: TextDocumentRef,
     defaultConfig: CSpellSettingsWithSourceTrace,
     pnpSettings: PnPSettings
 ): CSpellSettingsWithSourceTrace {
     const { uri } = document;
     if (uri.scheme !== 'file') defaultConfig;
-    return searchForConfigSync(uri.fsPath, pnpSettings) || defaultConfig;
+    return searchForConfigSync(uriToFilePath(uri), pnpSettings) || defaultConfig;
+}
+
+export async function shouldCheckDocument(
+    doc: TextDocumentRef,
+    options: DocumentValidatorOptions,
+    settings: CSpellUserSettings
+) {
+    const errors: Error[] = [];
+
+    function addPossibleError(error: Error | undefined | unknown) {
+        if (!error) return;
+        error = errors.push(toError(error));
+    }
+
+    function catchError<P>(p: Promise<P>): Promise<P | undefined> {
+        return p.catch((error) => {
+            addPossibleError(error);
+            return undefined;
+        });
+    }
+
+    async function shouldCheck(): Promise<boolean> {
+        const useSearchForConfig =
+            (!options.noConfigSearch && !settings.noConfigSearch) || options.noConfigSearch === false;
+        const pLocalConfig = options.configFile
+            ? catchError(loadConfig(options.configFile, settings))
+            : useSearchForConfig
+            ? catchError(searchForDocumentConfig(doc, settings, settings))
+            : undefined;
+        const localConfig = (await pLocalConfig) || {};
+
+        addPossibleError(localConfig?.__importRef?.error);
+
+        const config = mergeSettings(settings, localConfig);
+        const matcher = new GlobMatcher(localConfig?.ignorePaths || [], { root: process.cwd(), dot: true });
+        const docSettings = determineTextDocumentSettings(doc, config);
+        const uri = doc.uri;
+        return !matcher.match(uriToFilePath(uri)) && (docSettings.enabled ?? true);
+    }
+
+    return { errors, shouldCheck: await shouldCheck() };
 }

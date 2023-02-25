@@ -1,4 +1,5 @@
 import { isAsyncIterable, operators, opFilter, pipeAsync, pipeSync } from '@cspell/cspell-pipe';
+import { opMap, pipe } from '@cspell/cspell-pipe/sync';
 import type {
     CSpellSettings,
     Glob,
@@ -21,10 +22,12 @@ import { getFeatureFlags } from '../featureFlags';
 import type { CreateCacheSettings, CSpellLintResultCache } from '../util/cache';
 import { calcCacheSettings, createCache } from '../util/cache';
 import { CheckFailed, toApplicationError, toError } from '../util/errors';
-import type { ConfigInfo, FileResult } from '../util/fileHelper';
+import type { ConfigInfo, FileResult, ReadFileInfoResult } from '../util/fileHelper';
 import {
     fileInfoToDocument,
+    filenameToUri,
     findFiles,
+    isBinaryFile,
     isNotDir,
     readConfig,
     readFileInfo,
@@ -38,6 +41,7 @@ import {
     normalizeFileOrGlobsToRoot,
     normalizeGlobsToRoot,
 } from '../util/glob';
+import { prefetchIterable } from '../util/prefetch';
 import type { FinalizedReporter } from '../util/reporters';
 import { loadReporters, mergeReporters } from '../util/reporters';
 import { getTimeMeasurer } from '../util/timer';
@@ -46,6 +50,8 @@ import type { LintRequest } from './LintRequest';
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const npmPackage = require('../../package.json');
 const version = npmPackage.version;
+
+const BATCH_SIZE = 8;
 
 const { opFilterAsync } = operators;
 
@@ -64,11 +70,65 @@ export async function runLint(cfg: LintRequest): Promise<RunResult> {
     }
     return lintResult;
 
+    interface PrefetchResult {
+        fileResult?: FileResult | undefined;
+        fileInfo?: ReadFileInfoResult | undefined;
+        skip?: boolean | undefined;
+    }
+
+    interface PFCached extends PrefetchResult {
+        fileResult: FileResult;
+        fileInfo?: undefined;
+        skip?: undefined;
+    }
+
+    interface PFFile extends PrefetchResult {
+        fileResult?: undefined;
+        fileInfo: ReadFileInfoResult;
+        skip?: undefined;
+    }
+
+    interface PFSkipped extends PrefetchResult {
+        fileResult?: undefined;
+        fileInfo?: undefined;
+        skip: true;
+    }
+
+    interface PrefetchFileResult {
+        filename: string;
+        result?: Promise<PFCached | PFFile | PFSkipped>;
+    }
+
+    function prefetch(filename: string, configInfo: ConfigInfo, cache: CSpellLintResultCache): PrefetchFileResult {
+        if (isBinaryFile(filename, cfg.root)) return { filename, result: Promise.resolve({ skip: true }) };
+
+        async function fetch() {
+            const getElapsedTimeMs = getTimeMeasurer();
+            const cachedResult = await cache.getCachedLintResults(filename);
+            if (cachedResult) {
+                reporter.debug(`Filename: ${filename}, using cache`);
+                const fileResult = { ...cachedResult, elapsedTimeMs: getElapsedTimeMs() };
+                return { fileResult };
+            }
+            const uri = filenameToUri(filename, cfg.root);
+            const checkResult = await cspell.shouldCheckDocument({ uri }, {}, configInfo.config);
+            if (!checkResult.shouldCheck) return { skip: true } as const;
+            const fileInfo = await readFileInfo(filename, undefined, true);
+            return { fileInfo };
+        }
+
+        const result: Promise<PFCached | PFFile | PFSkipped> = fetch();
+        return { filename, result };
+    }
+
     async function processFile(
         filename: string,
         configInfo: ConfigInfo,
-        cache: CSpellLintResultCache
+        cache: CSpellLintResultCache,
+        prefetch: PrefetchResult | undefined
     ): Promise<FileResult> {
+        if (prefetch?.fileResult) return prefetch.fileResult;
+
         const getElapsedTimeMs = getTimeMeasurer();
         const cachedResult = await cache.getCachedLintResults(filename);
         if (cachedResult) {
@@ -87,7 +147,7 @@ export async function runLint(cfg: LintRequest): Promise<RunResult> {
             elapsedTimeMs: 0,
         };
 
-        const fileInfo = await readFileInfo(filename, undefined, true);
+        const fileInfo = prefetch?.fileInfo || (await readFileInfo(filename, undefined, true));
         if (fileInfo.errorCode) {
             if (fileInfo.errorCode !== 'EISDIR' && cfg.options.mustFindFiles) {
                 const err = toError(`File not found: "${filename}"`);
@@ -187,13 +247,61 @@ export async function runLint(cfg: LintRequest): Promise<RunResult> {
                 cached: result?.cached,
             });
 
+        function* prefetchFiles(files: string[]) {
+            const iter = prefetchIterable(
+                pipe(
+                    files,
+                    opMap((filename) => prefetch(filename, configInfo, cache))
+                ),
+                BATCH_SIZE
+            );
+            for (const v of iter) {
+                yield v;
+            }
+        }
+
+        async function* prefetchFilesAsync(files: string[] | AsyncIterable<string>) {
+            for await (const filename of files) {
+                yield prefetch(filename, configInfo, cache);
+            }
+        }
+
+        const emptyResult: FileResult = {
+            fileInfo: { filename: '' },
+            issues: [],
+            processed: false,
+            errors: 0,
+            configErrors: 0,
+            elapsedTimeMs: 1,
+        };
+
+        async function processPrefetchFileResult(pf: PrefetchFileResult, index: number) {
+            const { filename, result: pFetchResult } = pf;
+            const getElapsedTimeMs = getTimeMeasurer();
+            const fetchResult = await pFetchResult;
+            emitProgressBegin(filename, index, fileCount ?? index);
+            if (fetchResult?.skip) {
+                return {
+                    filename,
+                    fileNum: index,
+                    result: { ...emptyResult, fileInfo: { filename }, elapsedTimeMs: getElapsedTimeMs() },
+                };
+            }
+            const result = await processFile(filename, configInfo, cache, fetchResult);
+            return { filename, fileNum: index, result };
+        }
+
         async function* loadAndProcessFiles() {
             let i = 0;
-            for await (const filename of files) {
-                ++i;
-                emitProgressBegin(filename, i, fileCount ?? i);
-                const result = await processFile(filename, configInfo, cache);
-                yield { filename, fileNum: i, result };
+            if (isAsyncIterable(files)) {
+                for await (const pf of prefetchFilesAsync(files)) {
+                    yield processPrefetchFileResult(pf, ++i);
+                }
+            } else {
+                for (const pf of prefetchFiles(files)) {
+                    await pf.result;
+                    yield await processPrefetchFileResult(pf, ++i);
+                }
             }
         }
 
@@ -374,7 +482,6 @@ async function determineGlobs(configInfo: ConfigInfo, cfg: LintRequest): Promise
     const fileGlobs: string[] = includeGlobs;
 
     const appGlobs = { allGlobs, gitIgnore, fileGlobs, excludeGlobs, normalizedExcludes };
-    // console.log('%o', appGlobs);
     return appGlobs;
 }
 

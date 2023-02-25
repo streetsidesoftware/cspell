@@ -256,6 +256,7 @@ export const languageExtensionDefinitions: LanguageDefinitions = [
     { id: 'spv', extensions: ['.spv'], format: 'Binary', description: 'SPSS Output Document' },
     { id: 'mdb', extensions: ['.mdb'], format: 'Binary', description: 'Microsoft Access DB' },
     { id: 'webm', extensions: ['.webm'], format: 'Binary', description: 'WebM is an audiovisual media file format.' },
+    { id: 'trie', extensions: ['.trie'], format: 'Binary', description: 'CSpell dictionary file.' },
 ];
 
 export type LanguageId = string;
@@ -263,7 +264,7 @@ export type LanguageId = string;
 const binaryFormatIds = languageExtensionDefinitions.filter((d) => d.format === 'Binary').map((d) => d.id);
 export const binaryLanguages = new Set(['binary', 'image', 'video', 'fonts'].concat(binaryFormatIds));
 
-export const generatedFiles = new Set([...binaryLanguages, 'map', 'lock', 'pdf', 'cache_files', 'rsa', 'pem']);
+export const generatedFiles = new Set([...binaryLanguages, 'map', 'lock', 'pdf', 'cache_files', 'rsa', 'pem', 'trie']);
 
 export const languageIds: LanguageId[] = languageExtensionDefinitions.map(({ id }) => id);
 

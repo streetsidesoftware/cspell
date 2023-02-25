@@ -16,6 +16,8 @@ import {
     regExWords,
     regExWordsAndDigits,
 } from './textRegex';
+import type { Uri } from './Uri';
+import { toUri } from './Uri';
 import { scanMap } from './util';
 
 export { stringToRegExp } from './textRegex';
@@ -183,7 +185,7 @@ function offsetMap(offset: number) {
 }
 
 export function calculateTextDocumentOffsets<T extends TextOffset>(
-    uri: string,
+    uri: string | Uri | URL,
     doc: string,
     wordOffsets: T[]
 ): (TextDocumentOffset & T)[] {
@@ -223,9 +225,11 @@ export function calculateTextDocumentOffsets<T extends TextOffset>(
         return r;
     }
 
+    const _uri = toUri(uri).toString();
+
     return wordOffsets.map((wo) => {
         const [row, col] = findRowCol(wo.offset);
-        return { ...wo, row, col, doc, uri, line: calcLine(row) };
+        return { ...wo, row, col, doc, uri: _uri, line: calcLine(row) };
     });
 }
 

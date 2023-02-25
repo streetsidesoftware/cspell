@@ -1,6 +1,8 @@
 import type { Glob } from '@cspell/cspell-types';
 import { GlobMatcher } from 'cspell-glob';
-import { URI as Uri } from 'vscode-uri';
+
+import type { Uri } from './util/Uri';
+import { toUri, uriToFilePath } from './util/Uri';
 
 const defaultAllowedSchemes = new Set(['file', 'untitled']);
 
@@ -51,11 +53,11 @@ export function generateExclusionFunctionForUri(
             return true;
         }
 
-        return matchFn(uri.scheme === 'file' ? uri.fsPath : uri.path);
+        return matchFn(uri.scheme === 'file' || uri.scheme === 'stdin' ? uriToFilePath(uri) : uri.path);
     }
 
     function testUriPath(uriPath: string): boolean {
-        const uri = Uri.parse(uriPath);
+        const uri = toUri(uriPath);
         return testUri(uri);
     }
     return testUriPath;

@@ -1,3 +1,5 @@
+import type { Uri } from '../util/Uri';
+
 export interface Document {
     uri: UriString;
     text?: string;
@@ -6,6 +8,7 @@ export interface Document {
 }
 
 export type UriString = string;
+export type UriOrString = UriString | Uri;
 
 export interface DocumentWithText extends Document {
     text: string;

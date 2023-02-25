@@ -45,8 +45,8 @@ describe('getReporter', () => {
         ${{ outFile: 'stdout' }}
         ${{ outFile: 'stderr' }}
     `('saves json to stdout/stderr $settings', async ({ settings }) => {
-        const stdout = jest.spyOn(console, 'log'); // .mockImplementation(() => undefined);
-        const stderr = jest.spyOn(console, 'error'); // .mockImplementation(() => undefined);
+        const stdout = jest.spyOn(console, 'log').mockImplementation(() => undefined);
+        const stderr = jest.spyOn(console, 'error').mockImplementation(() => undefined);
         const reporter = getReporter(settings);
         await runReporter(reporter);
         expect(joinCalls(stderr.mock.calls)).toMatchSnapshot();

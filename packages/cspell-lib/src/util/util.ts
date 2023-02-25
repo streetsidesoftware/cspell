@@ -59,16 +59,6 @@ export function isDefined<T>(v: T | undefined): v is T {
     return v !== undefined;
 }
 
-export function* flattenIterable<T>(values: Iterable<Iterable<T>> | T[][]): Iterable<T> {
-    for (const v of values) {
-        yield* v;
-    }
-}
-
-export function flatten<T>(values: Iterable<Iterable<T>> | T[][]): T[] {
-    return [...flattenIterable(values)];
-}
-
 export async function asyncIterableToArray<T>(iter: Iterable<T> | AsyncIterable<T>): Promise<Awaited<T>[]> {
     const acc: Awaited<T>[] = [];
 
@@ -107,4 +97,16 @@ export function doSetsIntersect<T>(a: Set<T>, b: Set<T>): boolean {
         return false;
     }
     return a.size <= b.size ? compare(a, b) : compare(b, a);
+}
+
+export function isRecordEqual<T extends Record<string, unknown>>(a: T | undefined, b: T | undefined): boolean {
+    if (a === b) return true;
+    if (a === undefined || b === undefined) return false;
+    for (const key of Object.keys(a)) {
+        if (a[key] !== b[key]) return false;
+    }
+    for (const key of Object.keys(b)) {
+        if (a[key] !== b[key]) return false;
+    }
+    return true;
 }

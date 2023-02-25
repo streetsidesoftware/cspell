@@ -121,7 +121,20 @@ function isEmpty(obj: Object) {
     return Object.keys(obj).length === 0 && obj.constructor === Object;
 }
 
+const mergeCache = new AutoResolveWeakCache<
+    CSpellSettingsWSTO | CSpellSettingsI,
+    WeakMap<CSpellSettingsWSTO | CSpellSettingsI, CSpellSettingsI>
+>();
+
 function merge(
+    left: CSpellSettingsWSTO | CSpellSettingsI,
+    right: CSpellSettingsWSTO | CSpellSettingsI
+): CSpellSettingsI {
+    const map = mergeCache.get(left, () => new WeakMap());
+    return autoResolveWeak(map, right, () => _merge(left, right));
+}
+
+function _merge(
     left: CSpellSettingsWSTO | CSpellSettingsI,
     right: CSpellSettingsWSTO | CSpellSettingsI
 ): CSpellSettingsI {
@@ -148,13 +161,21 @@ function merge(
     const optionals = includeRegExpList?.length ? { includeRegExpList } : {};
     const version = max(_left.version, _right.version);
 
+    const valuesToClear = {
+        name: undefined,
+        id: undefined,
+        description: undefined,
+        globRoot: undefined,
+        import: undefined,
+        __importRef: undefined,
+    };
+
     const settings = csi({
         ..._left,
         ..._right,
         ...optionals,
+        ...valuesToClear,
         version,
-        id: undefined,
-        name: undefined,
         words: mergeWordsCached(_left.words, _right.words),
         userWords: mergeWordsCached(_left.userWords, _right.userWords),
         flagWords: mergeWordsCached(_left.flagWords, _right.flagWords),
@@ -174,12 +195,8 @@ function merge(
         overrides: versionBasedMergeList(_left.overrides, _right.overrides, version),
         features: mergeObjects(_left.features, _right.features),
         source: mergeSources(_left, _right),
-        description: undefined,
-        globRoot: undefined,
-        import: undefined,
         plugins: mergeList(_left.plugins, _right.plugins),
         __imports: mergeImportRefs(_left, _right),
-        __importRef: undefined,
     });
     return settings;
 }
@@ -283,6 +300,8 @@ function _finalizeSettings(settings: CSpellSettingsI): CSpellSettingsInternalFin
     return finalized;
 }
 
+const cacheInternalSettings = new AutoResolveWeakCache<CSpellSettingsI | CSpellSettingsWSTO, CSpellSettingsI>();
+
 export function toInternalSettings(settings: undefined): undefined;
 export function toInternalSettings(settings: CSpellSettingsI | CSpellSettingsWSTO): CSpellSettingsI;
 export function toInternalSettings(settings?: CSpellSettingsI | CSpellSettingsWSTO): CSpellSettingsI | undefined;
@@ -290,6 +309,10 @@ export function toInternalSettings(settings?: CSpellSettingsI | CSpellSettingsWS
     if (settings === undefined) return undefined;
     if (isCSpellSettingsInternal(settings)) return settings;
 
+    return cacheInternalSettings.get(settings, _toInternalSettings);
+}
+
+function _toInternalSettings(settings: CSpellSettingsI | CSpellSettingsWSTO): CSpellSettingsI {
     const { dictionaryDefinitions: defs, ...rest } = settings;
 
     const dictionaryDefinitions = mapDictDefsToInternal(

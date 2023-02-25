@@ -7,6 +7,7 @@ import type {
     Settings,
 } from '@cspell/cspell-types';
 
+import { autoResolve, autoResolveWeak } from '../util/AutoResolve';
 import { memorizerAll } from '../util/Memorizer';
 import { doSetsIntersect } from '../util/util';
 import * as SpellSettings from './CSpellSettingsServer';
@@ -90,7 +91,19 @@ export function isValidLocaleIntlFormat(locale: LocaleId | LocaleId[], strict = 
     return locale.length > 0;
 }
 
+const cacheCalcSettingsForLanguage = new WeakMap<LanguageSettings, Map<LanguageId, Map<LocaleId, BaseSetting>>>();
+
 export function calcSettingsForLanguage(
+    languageSettings: LanguageSettings,
+    languageId: LanguageId,
+    locale: LocaleId
+): BaseSetting {
+    const mapLang = autoResolveWeak(cacheCalcSettingsForLanguage, languageSettings, () => new Map());
+    const mapLocale = autoResolve(mapLang, languageId, () => new Map());
+    return autoResolve(mapLocale, locale, () => _calcSettingsForLanguage(languageSettings, languageId, locale));
+}
+
+function _calcSettingsForLanguage(
     languageSettings: LanguageSettings,
     languageId: LanguageId,
     locale: LocaleId

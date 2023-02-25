@@ -3,7 +3,7 @@ import { promises as fs } from 'fs';
 import { TextDocument as VsTextDocument } from 'vscode-languageserver-textdocument';
 
 import { getLanguagesForBasename } from '../LanguageIds';
-import * as Uri from './Uri';
+import * as Uri from '../util/Uri';
 
 export type DocumentUri = Uri.Uri;
 
@@ -21,6 +21,30 @@ export interface TextDocumentLine {
     readonly text: string;
     readonly offset: number;
     readonly position: Position;
+}
+
+export interface TextDocumentRef {
+    /**
+     * The associated URI for this document. Most documents have the __file__-scheme, indicating that they
+     * represent files on disk. However, some documents may have other schemes indicating that they are not
+     * available on disk.
+     */
+    readonly uri: DocumentUri;
+
+    /**
+     * The identifier of the language associated with this document.
+     */
+    readonly languageId?: string | string[] | undefined;
+
+    /**
+     * the raw Document Text
+     */
+    readonly text?: string | undefined;
+
+    /**
+     * The natural language locale.
+     */
+    readonly locale?: string | undefined;
 }
 
 /**
@@ -196,7 +220,7 @@ function isTextDocumentImpl(doc: TextDocument | unknown): doc is TextDocumentImp
 
 export async function loadTextDocument(filename: string | DocumentUri, languageId?: string): Promise<TextDocument> {
     const uri = Uri.toUri(filename);
-    const content = await fs.readFile(uri.fsPath, 'utf8');
+    const content = await fs.readFile(Uri.uriToFilePath(uri), 'utf8');
 
     return createTextDocument({ uri, languageId, content });
 }
