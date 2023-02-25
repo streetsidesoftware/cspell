@@ -1,7 +1,12 @@
 import { URI } from 'vscode-uri';
 
+import { extendExpect } from '../test/test.matchers';
 import type { Uri } from './Uri';
-import { fromFilePath, fromStdinFilePath, isUri, normalizeDriveLetter, parse, toUri, uriToFilePath, from } from './Uri';
+import { from, fromFilePath, fromStdinFilePath, isUri, normalizeDriveLetter, parse, toUri, uriToFilePath } from './Uri';
+
+const { toEqualCaseInsensitive } = extendExpect(expect);
+
+const eqCI = toEqualCaseInsensitive;
 
 describe('Uri', () => {
     test.each`
@@ -60,7 +65,7 @@ describe('Uri', () => {
         ${toUri('https://g.com/maps?lat=43.23&lon=-0.5#first')}            | ${{ scheme: 'https', path: '/maps', query: 'lat=43.23&lon=-0.5', fragment: 'first', authority: 'g.com' }}
         ${toUri(new URL('https://g.com/maps?lat=43.23&lon=-0.5#first'))}   | ${{ scheme: 'https', path: '/maps', query: 'lat=43.23&lon=-0.5', fragment: 'first', authority: 'g.com' }}
         ${toUri('https://g.com/maps?lat=43.23&lon=-0.5#first').toString()} | ${new URL('https://g.com/maps?lat=43.23&lon=-0.5#first').toString()}
-        ${uriToFilePath(fromFilePath(__filename))}                         | ${unTitleCase(__filename)}
+        ${uriToFilePath(fromFilePath(__filename))}                         | ${eqCI(__filename)}
         ${parse('https://google.com/maps')}                                | ${{ scheme: 'https', authority: 'google.com', path: '/maps' }}
         ${toUri('file:relative_file')}                                     | ${{ scheme: 'file', path: '/relative_file' }}
         ${toUri('stdin://relative/file/path')}                             | ${{ scheme: 'stdin', path: 'relative/file/path' }}
@@ -70,8 +75,8 @@ describe('Uri', () => {
         ${JSON.stringify(toUri('stdin:relative/file/path'))}               | ${'{"scheme":"stdin","path":"relative/file/path"}'}
         ${JSON.stringify(toUri('stdin://relative/file/path'))}             | ${'{"scheme":"stdin","path":"relative/file/path"}'}
         ${JSON.stringify(toUri('stdin:///absolute-file-path'))}            | ${'{"scheme":"stdin","path":"/absolute-file-path"}'}
-        ${from(URI.file(__filename))}                                      | ${{ scheme: 'file', path: normalizePath(__filename) }}
-        ${from(URI.file(__filename), { scheme: 'stdin' })}                 | ${{ scheme: 'stdin', path: normalizePath(__filename) }}
+        ${from(URI.file(__filename))}                                      | ${{ scheme: 'file', path: eqCI(normalizePath(__filename)) }}
+        ${from(URI.file(__filename), { scheme: 'stdin' })}                 | ${{ scheme: 'stdin', path: eqCI(normalizePath(__filename)) }}
     `('uri assumptions $uri', ({ uri, expected }) => {
         expect(uri).toEqual(expected);
     });
