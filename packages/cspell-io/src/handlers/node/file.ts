@@ -11,6 +11,7 @@ import type { URL } from 'url';
 import { fileURLToPath } from 'url';
 import { gunzipSync, gzipSync } from 'zlib';
 
+import { decode } from '../../common/encode-decode';
 import { toError } from '../../errors';
 import { decodeDataUrl } from '../../node/dataUrl';
 import { fetchURL } from '../../node/file/fetch';
@@ -152,7 +153,7 @@ const handleRequestFsReadBinaryFileData = RequestFsReadBinaryFile.createRequestH
 );
 
 function bufferToText(buf: Buffer, encoding: BufferEncoding): string {
-    return buf[0] === 0x1f && buf[1] === 0x8b ? bufferToText(gunzipSync(buf), encoding) : buf.toString(encoding);
+    return buf[0] === 0x1f && buf[1] === 0x8b ? decode(gunzipSync(buf), encoding) : decode(buf, encoding);
 }
 
 /**
