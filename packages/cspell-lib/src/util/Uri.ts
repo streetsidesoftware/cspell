@@ -20,7 +20,7 @@ interface HRef {
 const isFile = /^(?:[a-zA-Z]:|[/\\])/;
 const isPossibleUri = /\w:\/\//;
 
-const isUrl = /^(file:|stdin:|https?:|s?ftp:)\/\//;
+const isUrl = /^(file:|stdin:|https?:|s?ftp:)/;
 
 const STDIN_PROTOCOL = 'stdin:';
 

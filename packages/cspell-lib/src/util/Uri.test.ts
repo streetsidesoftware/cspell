@@ -1,7 +1,7 @@
 import { URI } from 'vscode-uri';
 
 import type { Uri } from './Uri';
-import { fromFilePath, fromStdinFilePath, isUri, normalizeDriveLetter, parse, toUri, uriToFilePath } from './Uri';
+import { fromFilePath, fromStdinFilePath, isUri, normalizeDriveLetter, parse, toUri, uriToFilePath, from } from './Uri';
 
 describe('Uri', () => {
     test.each`
@@ -28,6 +28,7 @@ describe('Uri', () => {
         ${'stdin://readme.md#?#README'}                     | ${{ scheme: 'stdin', path: 'readme.md', fragment: '?#README' }}
         ${encodeURI('stdin:///D:\\home\\prj\\code.c')}      | ${{ scheme: 'stdin', path: '/d:/home/prj/code.c' }}
         ${fromStdinFilePath('D:\\home\\prj\\code.c')}       | ${{ scheme: 'stdin', path: '/d:/home/prj/code.c' }}
+        ${fromStdinFilePath(__filename)}                    | ${{ scheme: 'stdin', path: normalizePath(__filename) }}
         ${'example.com/'}                                   | ${URIparse('example.com/')}
     `('toUri $uri', ({ uri, expected }) => {
         const u = toUri(uri);
@@ -44,7 +45,7 @@ describe('Uri', () => {
     });
 
     const uriFilename = URI.file(__filename);
-    const uriStdinFilename = uriFilename.with({ scheme: 'stdin' }).toString();
+    const uriStdinFilename = from(uriFilename, { scheme: 'stdin' });
     const stdinFilename = uriStdinFilename.toString();
 
     test.each`
@@ -69,6 +70,8 @@ describe('Uri', () => {
         ${JSON.stringify(toUri('stdin:relative/file/path'))}               | ${'{"scheme":"stdin","path":"relative/file/path"}'}
         ${JSON.stringify(toUri('stdin://relative/file/path'))}             | ${'{"scheme":"stdin","path":"relative/file/path"}'}
         ${JSON.stringify(toUri('stdin:///absolute-file-path'))}            | ${'{"scheme":"stdin","path":"/absolute-file-path"}'}
+        ${from(URI.file(__filename))}                                      | ${{ scheme: 'file', path: normalizePath(__filename) }}
+        ${from(URI.file(__filename), { scheme: 'stdin' })}                 | ${{ scheme: 'stdin', path: normalizePath(__filename) }}
     `('uri assumptions $uri', ({ uri, expected }) => {
         expect(uri).toEqual(expected);
     });
@@ -99,6 +102,11 @@ function titleCase(s: string): string {
 
 function unTitleCase(s: string): string {
     return s && s[0].toLowerCase() + s.slice(1);
+}
+
+function normalizePath(path: string): string {
+    const p = normalizeDriveLetter(path.replace(/\\/g, '/'));
+    return p.startsWith('/') ? p : '/' + p;
 }
 
 function URItoUri(uri: URI): Uri {
