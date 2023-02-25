@@ -9,7 +9,7 @@ import { ImportError } from './Settings/Controller/ImportError';
 import type { SpellCheckFileOptions, SpellCheckFileResult } from './spellCheckFile';
 import { determineFinalDocumentSettings, spellCheckDocument, spellCheckFile } from './spellCheckFile';
 import { extendExpect } from './test/test.matchers';
-import * as URI from './util/Uri';
+import * as Uri from './util/Uri';
 
 const samples = Path.resolve(__dirname, '../samples');
 const testFixtures = Path.resolve(__dirname, '../../../test-fixtures');
@@ -54,7 +54,7 @@ describe('Validate Spell Checking Files', () => {
 
 describe('Validate Determine settings', () => {
     function u(filename: string): string {
-        return URI.parse(Path.resolve(__dirname, filename)).toString();
+        return Uri.toUri(Path.resolve(__dirname, filename)).toString();
     }
 
     const doc = fileToDocument;
@@ -93,7 +93,7 @@ describe('Validate Spell Checking Documents', () => {
     }
 
     function f(file: string): string {
-        return URI.file(rpS(file)).toString();
+        return Uri.file(rpS(file)).toString();
     }
 
     function d(uri: string | Document, text?: string, languageId?: string): Document {
@@ -176,7 +176,7 @@ describe('Validate Uri assumptions', () => {
     type PartialUri = Partial<UriComponents>;
 
     function u(filename: string): string {
-        return URI.file(fixDriveLetter(filename)).toString();
+        return Uri.file(fixDriveLetter(filename)).toString();
     }
 
     function schema(scheme: string): PartialUri {
@@ -215,7 +215,7 @@ describe('Validate Uri assumptions', () => {
         ${'https://github.com/streetsidesoftware/cspell/issues'} | ${m(schema('https'), authority('github.com'), path('/streetsidesoftware/cspell/issues'))} | ${''}
         ${'C:\\home\\project\\file.js'}                          | ${m(schema('C'), path('\\home\\project\\file.js'))}                                       | ${'Windows path by "accident"'}
     `('URI assumptions uri: "$uri" $comment -- $expected', ({ uri, expected }: UriTestCase) => {
-        const u = URI.parse(uri);
+        const u = Uri.parse(uri);
         expect(u).toEqual(expect.objectContaining(expected));
     });
 });
