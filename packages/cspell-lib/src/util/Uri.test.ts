@@ -1,19 +1,28 @@
 import { URI } from 'vscode-uri';
 
 import type { Uri } from './Uri';
-import { fromFilePath, isUri, normalizeFsPath, parse, toUri, uriToFilePath } from './Uri';
+import { fromFilePath, fromStdinFilePath, isUri, normalizeDriveLetter, parse, toUri, uriToFilePath } from './Uri';
 
 describe('Uri', () => {
     test.each`
-        uri                                 | expected
-        ${'https://google.com'}             | ${URIparse('https://google.com')}
-        ${URIparse('https://google.com')}   | ${URIparse('https://google.com')}
-        ${URIfile(__filename)}              | ${URIfile(__filename)}
-        ${UriToString(URIfile(__filename))} | ${URIparse(URI.file(__filename).toString())}
-        ${'file.txt'}                       | ${URIfile('file.txt')}
-        ${'uri://example.com/'}             | ${URIparse('uri://example.com/')}
-        ${'i://example.com/'}               | ${URIparse('i://example.com/')}
-        ${'example.com/'}                   | ${URIparse('example.com/')}
+        uri                                                 | expected
+        ${'https://google.com'}                             | ${URIparse('https://google.com')}
+        ${URIparse('https://google.com')}                   | ${URIparse('https://google.com')}
+        ${URIfile(__filename)}                              | ${URIfile(__filename)}
+        ${UriToString(URIfile(__filename))}                 | ${URIparse(URI.file(__filename).toString())}
+        ${'file.txt'}                                       | ${URIfile('file.txt')}
+        ${'uri://example.com/'}                             | ${URIparse('uri://example.com/')}
+        ${'i://example.com/'}                               | ${URIparse('i://example.com/')}
+        ${'stdin:D:\\home\\prj\\code.c'}                    | ${{ scheme: 'stdin', path: 'd:/home/prj/code.c' }}
+        ${'stdin:/D:\\home\\prj\\code.c'}                   | ${{ scheme: 'stdin', path: 'd:/home/prj/code.c' }}
+        ${'stdin://D:\\home\\prj\\code.c'}                  | ${{ scheme: 'stdin', path: 'd:/home/prj/code.c' }}
+        ${'stdin:///D:\\home\\prj\\code.c'}                 | ${{ scheme: 'stdin', path: '/d:/home/prj/code.c' }}
+        ${'stdin:///D:\\home\\prj\\code.c?q=42'}            | ${{ scheme: 'stdin', path: '/d:/home/prj/code.c', query: 'q=42' }}
+        ${'stdin:///D:\\home\\prj\\code.c#README'}          | ${{ scheme: 'stdin', path: '/d:/home/prj/code.c', fragment: 'README' }}
+        ${'stdin:///D:\\home\\prj\\code.c?q=42&a=9#README'} | ${{ scheme: 'stdin', path: '/d:/home/prj/code.c', query: 'q=42&a=9', fragment: 'README' }}
+        ${encodeURI('stdin:///D:\\home\\prj\\code.c')}      | ${{ scheme: 'stdin', path: '/d:/home/prj/code.c' }}
+        ${fromStdinFilePath('D:\\home\\prj\\code.c')}       | ${{ scheme: 'stdin', path: '/d:/home/prj/code.c' }}
+        ${'example.com/'}                                   | ${URIparse('example.com/')}
     `('toUri $uri', ({ uri, expected }) => {
         const u = toUri(uri);
         expect(u).toEqual(expected);
@@ -62,7 +71,6 @@ describe('Uri', () => {
         uri                                  | expected
         ${URI.file(titleCase(__filename))}   | ${unTitleCase(__filename)}
         ${URI.file(unTitleCase(__filename))} | ${unTitleCase(__filename)}
-        ${toUri('D:\\programs\\code.exe')}   | ${'d:\\programs\\code.exe'}
         ${toUri(stdinFilename)}              | ${unTitleCase(__filename)}
     `('uriToFilePath $uri', ({ uri, expected }) => {
         expect(uriToFilePath(uri)).toBe(expected);
@@ -75,7 +83,7 @@ describe('Uri', () => {
         ${'D:\\programs\\code.exe'} | ${'d:\\programs\\code.exe'}
         ${'d:\\programs\\code.exe'} | ${'d:\\programs\\code.exe'}
     `('uriToFilePath $uri', ({ uri, expected }) => {
-        expect(normalizeFsPath(uri)).toBe(expected);
+        expect(normalizeDriveLetter(uri)).toBe(expected);
     });
 });
 

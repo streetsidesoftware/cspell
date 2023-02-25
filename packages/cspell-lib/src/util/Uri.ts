@@ -29,7 +29,7 @@ export function toUri(uriOrFile: string | Uri | URL): UriInstance {
     if (isUri(uriOrFile)) return UriImpl.from(uriOrFile);
     if (isUrl.test(uriOrFile)) return UriImpl.parse(uriOrFile);
     return isFile.test(uriOrFile) && !isPossibleUri.test(uriOrFile)
-        ? UriImpl.file(normalizeFsPath(uriOrFile))
+        ? UriImpl.file(normalizeDriveLetter(uriOrFile))
         : UriImpl.parse(uriOrFile);
 }
 
@@ -38,11 +38,15 @@ const hasDriveLetter = /^[A-Z]:/i;
 export function uriToFilePath(uri: Uri): string {
     const adj = uri.scheme === 'stdin' ? { scheme: 'file' } : {};
 
-    return normalizeFsPath(URI.from(UriImpl.from(uri, adj)).fsPath);
+    return normalizeDriveLetter(URI.from(UriImpl.from(uri, adj)).fsPath);
 }
 
 export function fromFilePath(file: string): UriInstance {
     return UriImpl.file(file);
+}
+
+export function fromStdinFilePath(path?: string): UriInstance {
+    return UriImpl.stdin(path);
 }
 
 export const file = fromFilePath;
@@ -51,7 +55,7 @@ export function parse(uri: string): UriInstance {
     return UriImpl.parse(uri);
 }
 
-export function normalizeFsPath(path: string): string {
+export function normalizeDriveLetter(path: string): string {
     return hasDriveLetter.test(path) ? path[0].toLowerCase() + path.slice(1) : path;
 }
 
@@ -147,17 +151,44 @@ class UriImpl implements UriInstance {
     }
 
     static parse(uri: string): UriImpl {
-        const u = URI.parse(uri);
-        // Is it relative?
-        if (u.scheme === 'stdin' && u.authority) {
-            return UriImpl.from({ ...u, scheme: u.scheme, path: u.authority + u.path, authority: '' });
+        if (uri.startsWith('stdin:')) {
+            return UriImpl.from(parseStdinUri(uri));
         }
+        const u = URI.parse(uri);
         return UriImpl.from(u);
     }
 
     static file(filename: string): UriImpl {
-        return UriImpl.from(URI.file(filename));
+        return UriImpl.from(URI.file(normalizeFilePath(filename)));
     }
+
+    static stdin(filePath = '') {
+        return UriImpl.from(UriImpl.file(filePath), { scheme: 'stdin' });
+    }
+}
+
+function normalizeFilePath(path: string): string {
+    return normalizeDriveLetter(path.replace(/\\/g, '/'));
+}
+
+function parseStdinUri(uri: string): Uri {
+    const m = uri.match(/^stdin:(?<slashes>[/]*)(?<path>.*)$/);
+    if (!m) {
+        return { scheme: 'stdin', path: '' };
+    }
+    const slashes = m.groups?.['slashes'] || '';
+    const pathEx = m.groups?.['path'] || '';
+    const [pathAndQuery, hash = ''] = pathEx.split('#', 2);
+    const [path, query = ''] = pathAndQuery.split('?', 2);
+
+    const pathPrefix = slashes === '///' ? '/' : '';
+
+    return {
+        scheme: 'stdin',
+        path: pathPrefix + normalizeFilePath(decodeURI(path)),
+        query: decodeURI(query),
+        fragment: decodeURI(hash),
+    };
 }
 
 type PartialWithUndefined<T> = {
@@ -166,4 +197,5 @@ type PartialWithUndefined<T> = {
 
 export const __testing__ = {
     UriImpl,
+    normalizeFilePath,
 };
