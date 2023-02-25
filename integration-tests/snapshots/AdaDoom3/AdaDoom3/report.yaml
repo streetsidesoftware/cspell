@@ -5,7 +5,7 @@ Args: ["**/*.*"]
 Summary:
   files: 103
   filesWithIssues: 97
-  issues: 3253
+  issues: 3238
   errors: 0
 Errors: []
 
@@ -268,7 +268,6 @@ issues:
   - "Engine/neo-api-vulkan.adb:107:17    	Subresource 	U   	vkGetImageSubresourceLayout"
   - "Engine/neo-api-vulkan.adb:125:15    	Swapchain   	U   	vkCreateSwapchainKHR"
   - "Engine/neo-api-vulkan.ads:65:8      	Subpass         	U   	-- VkSubpassContents"
-  - "Engine/neo-api-vulkan.ads:75:16     	Rasterization   	U   	-- VkPipelineRasterizationStateCreateFlags Int"
   - "Engine/neo-api-vulkan.ads:77:16     	Multisample     	U   	-- VkPipelineMultisampleStateCreateFlags Int"
   - "Engine/neo-api-vulkan.ads:110:15    	Mipmap          	U   	-- VkSamplerMipmapMode"
   - "Engine/neo-api-vulkan.ads:145:57    	vulkan          	U   	_C := To_Str_16_C (\"vulkan-1.dll\");"
@@ -290,7 +289,6 @@ issues:
   - "Engine/neo-api-vulkan.ads:643:74    	FFFC            	U   	Unsigned_C := 16#FFFF_FFFC#; -- To_Int_32_Unsigned"
   - "Engine/neo-api-vulkan.ads:644:74    	FFFB            	U   	Unsigned_C := 16#FFFF_FFFB#; -- To_Int_32_Unsigned"
   - "Engine/neo-api-vulkan.ads:645:74    	FFFA            	U   	Unsigned_C := 16#FFFF_FFFA#; -- To_Int_32_Unsigned"
-  - "Engine/neo-api-vulkan.ads:677:30    	RASTERIZATION   	U   	STRUCTURE_TYPE_PIPELINE_RASTERIZATION_STATE_CREATE_INFO"
   - "Engine/neo-api-vulkan.ads:678:30    	MULTISAMPLE     	U   	STRUCTURE_TYPE_PIPELINE_MULTISAMPLE_STATE_CREATE_INFO"
   - "Engine/neo-api-vulkan.ads:691:21    	FRAMEBUFFER     	U   	VK_STRUCTURE_TYPE_FRAMEBUFFER_CREATE_INFO"
   - "Engine/neo-api-vulkan.ads:708:21    	XLIB            	U   	VK_STRUCTURE_TYPE_XLIB_SURFACE_CREATE_INFO"
@@ -321,7 +319,6 @@ issues:
   - "Engine/neo-api-vulkan.ads:1954:7    	subresource     	U   	subresourceRange : VkImageSubresourceR"
   - "Engine/neo-api-vulkan.ads:2154:8    	Swapchains      	U   	pSwapchains : Ptr_Ptr"
   - "Engine/neo-api-vulkan.ads:2367:7    	rasterizer      	U   	rasterizerDiscardEnable : Int_Unsigned"
-  - "Engine/neo-api-vulkan.ads:2385:7    	rasterization   	U   	rasterizationSamples : Int_Unsigned"
   - "Engine/neo-api-vulkan.ads:2483:7    	subpass         	U   	subpass : Int_Unsigned"
   - "Engine/neo-api-vulkan.ads:2573:8    	Subpasses       	U   	pSubpasses : Ptr_VkSubpassDescripti"
   - "Engine/neo-api-vulkan.ads:2781:18   	AABBNV          	U   	type VkGeometryAABBNV;"
