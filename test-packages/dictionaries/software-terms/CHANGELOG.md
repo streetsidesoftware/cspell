@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 6.27.0 (2023-02-26)
+
+### Features
+
+* Support spell checking utf16 files with BOM ([#4232](https://github.com/streetsidesoftware/cspell-dicts/issues/4232)) ([8062f62](https://github.com/streetsidesoftware/cspell-dicts/commit/8062f621dff0432cd53ae17b1a22aaffd61f1b3b))
+
 ## 6.26.3 (2023-02-16)
 
 ### Bug Fixes
