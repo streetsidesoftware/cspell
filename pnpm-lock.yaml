@@ -7,6 +7,7 @@ importers:
       '@cspell/dict-markdown': ^2.0.1
       '@cspell/eslint-plugin': workspace:*
       '@lerna-lite/cli': ^1.15.1
+      '@rollup/plugin-alias': ^4.0.3
       '@rollup/plugin-commonjs': ^24.0.1
       '@rollup/plugin-json': ^6.0.0
       '@rollup/plugin-multi-entry': ^6.0.0
@@ -46,6 +47,7 @@ importers:
       '@cspell/dict-markdown': 2.0.1
       '@cspell/eslint-plugin': link:packages/cspell-eslint-plugin
       '@lerna-lite/cli': 1.15.1
+      '@rollup/plugin-alias': 4.0.3_rollup@3.17.3
       '@rollup/plugin-commonjs': 24.0.1_rollup@3.17.3
       '@rollup/plugin-json': 6.0.0_rollup@3.17.3
       '@rollup/plugin-multi-entry': 6.0.0_rollup@3.17.3
@@ -742,7 +744,6 @@ importers:
   test-packages/cspell-lib/test-cspell-lib-rollup:
     specifiers:
       '@cspell/cspell-bundled-dicts': workspace:*
-      '@rollup/plugin-alias': ^4.0.3
       cspell-lib: workspace:*
       import-fresh: ^3.3.0
       magic-string: ^0.29.0
@@ -750,7 +751,6 @@ importers:
       '@cspell/cspell-bundled-dicts': link:../../../packages/cspell-bundled-dicts
       import-fresh: 3.3.0
     devDependencies:
-      '@rollup/plugin-alias': 4.0.3
       cspell-lib: link:../../../packages/cspell-lib
       magic-string: 0.29.0
 
@@ -4721,7 +4721,7 @@ packages:
     resolution: {integrity: sha512-a5Sab1C4/icpTZVzZc5Ghpz88yQtGOyNqYXcZgOssB2uuAr+wF/MvN6bgtW32q7HHrvBki+BsZ0OuNv6EV3K9g==}
     dev: false
 
-  /@rollup/plugin-alias/4.0.3:
+  /@rollup/plugin-alias/4.0.3_rollup@3.17.3:
     resolution: {integrity: sha512-ZuDWE1q4PQDhvm/zc5Prun8sBpLJy41DMptYrS6MhAy9s9kL/doN1613BWfEchGVfKxzliJ3BjbOPizXX38DbQ==}
     engines: {node: '>=14.0.0'}
     peerDependencies:
@@ -4730,6 +4730,7 @@ packages:
       rollup:
         optional: true
     dependencies:
+      rollup: 3.17.3
       slash: 4.0.0
     dev: true
 
