@@ -388,7 +388,7 @@ importers:
   packages/cspell-gitignore:
     specifiers:
       '@types/node': ^18.14.2
-      '@vitest/coverage-c8': ^0.28.5
+      '@vitest/coverage-c8': ^0.29.1
       '@vitest/coverage-istanbul': ^0.28.5
       cspell-glob: workspace:*
       find-up: ^5.0.0
@@ -399,7 +399,7 @@ importers:
       find-up: 5.0.0
     devDependencies:
       '@types/node': 18.14.2
-      '@vitest/coverage-c8': 0.28.5
+      '@vitest/coverage-c8': 0.29.1_vitest@0.28.5
       '@vitest/coverage-istanbul': 0.28.5
       vite: 4.1.4_@types+node@18.14.2
       vitest: 0.28.5
@@ -5565,25 +5565,15 @@ packages:
       eslint-visitor-keys: 3.3.0
     dev: true
 
-  /@vitest/coverage-c8/0.28.5:
-    resolution: {integrity: sha512-zCNyurjudoG0BAqAgknvlBhkV2V9ZwyYLWOAGtHSDhL/St49MJT+V2p1G0yPaoqBbKOTATVnP5H2p1XL15H75g==}
+  /@vitest/coverage-c8/0.29.1_vitest@0.28.5:
+    resolution: {integrity: sha512-YQZp1xGNxOcZD/zQBvD4bNpUDMJW7+FhBAEBlgvJp+DQ+aNK+dKcoWOTfsod27KQhXSr6UUYI8EYXWCOQqY6Eg==}
+    peerDependencies:
+      vitest: '>=0.29.0 <1'
     dependencies:
       c8: 7.13.0
       picocolors: 1.0.0
       std-env: 3.3.2
       vitest: 0.28.5
-    transitivePeerDependencies:
-      - '@edge-runtime/vm'
-      - '@vitest/browser'
-      - '@vitest/ui'
-      - happy-dom
-      - jsdom
-      - less
-      - sass
-      - stylus
-      - sugarss
-      - supports-color
-      - terser
     dev: true
 
   /@vitest/coverage-istanbul/0.28.5:
@@ -16846,7 +16836,7 @@ packages:
       require-directory: 2.1.1
       string-width: 4.2.3
       y18n: 5.0.8
-      yargs-parser: 20.2.4
+      yargs-parser: 20.2.9
     dev: true
 
   /yargs/17.7.1:
