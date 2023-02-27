@@ -1,6 +1,7 @@
 /* eslint-disable node/no-extraneous-import */
 import rollupPluginNodeResolve from '@rollup/plugin-node-resolve';
 import rollupPluginTypescript from '@rollup/plugin-typescript';
+import alias from '@rollup/plugin-alias';
 import rollupPluginJson from '@rollup/plugin-json';
 import rollupPluginCommonjs from '@rollup/plugin-commonjs';
 import { readFileSync } from 'fs';
@@ -44,6 +45,10 @@ function getPlugins(tsconfig = 'tsconfig.json') {
         }),
         rollupPluginJson(),
         injectDirname(),
+        alias({
+            entries: [{ find: 'chalk', replacement: './lib/chalk.js' }],
+        }),
+
         // rollupPluginTerser({
         //     ecma: 2018,
         //     warnings: true,
