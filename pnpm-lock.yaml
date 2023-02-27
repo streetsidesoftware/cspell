@@ -471,7 +471,7 @@ importers:
       clear-module: ^4.1.2
       comment-json: ^4.2.3
       configstore: ^5.0.1
-      cosmiconfig: 8.0.0
+      cosmiconfig: ^8.1.0
       cspell-dict-nl-nl: ^1.1.2
       cspell-dictionary: workspace:*
       cspell-glob: workspace:*
@@ -500,7 +500,7 @@ importers:
       clear-module: 4.1.2
       comment-json: 4.2.3
       configstore: 5.0.1
-      cosmiconfig: 8.0.0
+      cosmiconfig: 8.1.0
       cspell-dictionary: link:../cspell-dictionary
       cspell-glob: link:../cspell-glob
       cspell-grammar: link:../cspell-grammar
@@ -565,7 +565,7 @@ importers:
       '@types/node': ^18.14.2
       '@types/shelljs': ^0.8.11
       commander: ^10.0.0
-      cosmiconfig: 8.0.0
+      cosmiconfig: ^8.1.0
       cspell-trie-lib: workspace:*
       gensequence: ^4.0.3
       glob: ^8.1.0
@@ -577,7 +577,7 @@ importers:
     dependencies:
       '@cspell/cspell-pipe': link:../cspell-pipe
       commander: 10.0.0
-      cosmiconfig: 8.0.0
+      cosmiconfig: 8.1.0
       cspell-trie-lib: link:../cspell-trie-lib
       gensequence: 4.0.3
       glob: 8.1.0
@@ -742,6 +742,7 @@ importers:
   test-packages/cspell-lib/test-cspell-lib-rollup:
     specifiers:
       '@cspell/cspell-bundled-dicts': workspace:*
+      '@rollup/plugin-alias': ^4.0.3
       cspell-lib: workspace:*
       import-fresh: ^3.3.0
       magic-string: ^0.29.0
@@ -749,6 +750,7 @@ importers:
       '@cspell/cspell-bundled-dicts': link:../../../packages/cspell-bundled-dicts
       import-fresh: 3.3.0
     devDependencies:
+      '@rollup/plugin-alias': 4.0.3
       cspell-lib: link:../../../packages/cspell-lib
       magic-string: 0.29.0
 
@@ -4719,6 +4721,18 @@ packages:
     resolution: {integrity: sha512-a5Sab1C4/icpTZVzZc5Ghpz88yQtGOyNqYXcZgOssB2uuAr+wF/MvN6bgtW32q7HHrvBki+BsZ0OuNv6EV3K9g==}
     dev: false
 
+  /@rollup/plugin-alias/4.0.3:
+    resolution: {integrity: sha512-ZuDWE1q4PQDhvm/zc5Prun8sBpLJy41DMptYrS6MhAy9s9kL/doN1613BWfEchGVfKxzliJ3BjbOPizXX38DbQ==}
+    engines: {node: '>=14.0.0'}
+    peerDependencies:
+      rollup: ^1.20.0||^2.0.0||^3.0.0
+    peerDependenciesMeta:
+      rollup:
+        optional: true
+    dependencies:
+      slash: 4.0.0
+    dev: true
+
   /@rollup/plugin-commonjs/24.0.1_rollup@3.17.3:
     resolution: {integrity: sha512-15LsiWRZk4eOGqvrJyu3z3DaBu5BhXIMeWnijSRvd8irrrg9SHpQ1pH+BUK4H6Z9wL9yOxZJMTLU+Au86XHxow==}
     engines: {node: '>=14.0.0'}
@@ -7321,16 +7335,6 @@ packages:
       yaml: 1.10.2
     dev: false
 
-  /cosmiconfig/8.0.0:
-    resolution: {integrity: sha512-da1EafcpH6b/TD8vDRaWV7xFINlHlF6zKsGwS1TsuVJTZRkquaS5HTMq7uq6h31619QjbsYl21gVDOm32KM1vQ==}
-    engines: {node: '>=14'}
-    dependencies:
-      import-fresh: 3.3.0
-      js-yaml: 4.1.0
-      parse-json: 5.2.0
-      path-type: 4.0.0
-    dev: false
-
   /cosmiconfig/8.1.0:
     resolution: {integrity: sha512-0tLZ9URlPGU7JsKq0DQOQ3FoRsYX8xDZ7xMiATQfaiGMz7EHowNkbU9u1coAOmnh9p/1ySpm0RB3JNWRXM5GCg==}
     engines: {node: '>=14'}
@@ -7339,7 +7343,6 @@ packages:
       js-yaml: 4.1.0
       parse-json: 5.2.0
       path-type: 4.0.0
-    dev: true
 
   /cross-fetch/3.1.5:
     resolution: {integrity: sha512-lvb1SBsI0Z7GDwmuid+mU3kWVBwTVUbe7S0H52yaaAdQOXq2YktTCZdlAcNKFzE6QtRz0snpw9bNiPeOIkkQvw==}
