@@ -1,10 +1,10 @@
-import { consolidate } from './consolidate';
-import type { PartialTrieOptions, TrieOptions } from './trie';
-import { Trie } from './trie';
-import { createTrieRoot, createTriFromList, trieNodeToRoot } from './trie-util';
-import type { TrieNode, TrieRoot } from './TrieNode';
-import { mergeOptionalWithDefaults } from './utils/mergeOptionalWithDefaults';
-import { SecondChanceCache } from './utils/secondChanceCache';
+import { consolidate } from './consolidate.js';
+import type { PartialTrieOptions, TrieOptions } from './trie.js';
+import { Trie } from './trie.js';
+import { createTrieRoot, createTriFromList, trieNodeToRoot } from './trie-util.js';
+import type { TrieNode, TrieRoot } from './TrieNode.js';
+import { mergeOptionalWithDefaults } from './utils/mergeOptionalWithDefaults.js';
+import { SecondChanceCache } from './utils/secondChanceCache.js';
 
 /**
  * Builds an optimized Trie from a Iterable<string>. It attempts to reduce the size of the trie

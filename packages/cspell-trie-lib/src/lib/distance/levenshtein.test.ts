@@ -1,4 +1,6 @@
-import { levenshteinDistance } from './levenshtein';
+import { describe, expect, test } from 'vitest';
+
+import { levenshteinDistance } from './levenshtein.js';
 
 describe('levenshtein', () => {
     test.each`

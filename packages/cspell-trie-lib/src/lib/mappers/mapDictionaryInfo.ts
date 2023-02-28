@@ -1,15 +1,15 @@
 import { opFlatten, opMap, pipeSync } from '@cspell/cspell-pipe/sync';
 
-import type { PenaltyAdjustment } from '../distance/weightedMaps';
-import type { CharacterSetCosts, DictionaryInformation } from '../models/DictionaryInformation';
-import { parseLocale } from '../models/locale';
-import type { SuggestionCostMapDef } from '../models/suggestionCostsDef';
-import type { ArrayItem } from '../types';
-import { isDefined } from '../utils/util';
-import type { EditCostsRequired } from './mapCosts';
-import { mapEditCosts } from './mapCosts';
-import { hunspellInformationToSuggestionCostDef } from './mapHunspellInformation';
-import { calcFirstCharacterReplaceDefs, parseAccents, parseAlphabet } from './mapToSuggestionCostDef';
+import type { PenaltyAdjustment } from '../distance/weightedMaps.js';
+import type { CharacterSetCosts, DictionaryInformation } from '../models/DictionaryInformation.js';
+import { parseLocale } from '../models/locale/index.js';
+import type { SuggestionCostMapDef } from '../models/suggestionCostsDef.js';
+import type { ArrayItem } from '../types.js';
+import { isDefined } from '../utils/util.js';
+import type { EditCostsRequired } from './mapCosts.js';
+import { mapEditCosts } from './mapCosts.js';
+import { hunspellInformationToSuggestionCostDef } from './mapHunspellInformation.js';
+import { calcFirstCharacterReplaceDefs, parseAccents, parseAlphabet } from './mapToSuggestionCostDef.js';
 
 export function mapDictionaryInformation(dictInfo: DictionaryInformation): SuggestionCostMapDef[] {
     const _locale = dictInfo.locale;

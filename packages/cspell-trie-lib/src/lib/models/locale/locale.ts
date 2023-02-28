@@ -1,4 +1,4 @@
-import { codes } from './knownLocales';
+import { codes } from './knownLocales.js';
 
 export interface LocaleInfo {
     locale: string;

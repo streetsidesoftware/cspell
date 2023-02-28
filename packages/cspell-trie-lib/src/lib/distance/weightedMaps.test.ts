@@ -1,6 +1,8 @@
-import type { SuggestionCostMapDef } from '../models/suggestionCostsDef';
-import { DEFAULT_COMPOUNDED_WORD_SEPARATOR } from '../suggestions/constants';
-import type { CostPosition, PenaltyAdjustment } from './weightedMaps';
+import { describe, expect, test } from 'vitest';
+
+import type { SuggestionCostMapDef } from '../models/suggestionCostsDef.js';
+import { DEFAULT_COMPOUNDED_WORD_SEPARATOR } from '../suggestions/constants.js';
+import type { CostPosition, PenaltyAdjustment } from './weightedMaps.js';
 import {
     __testing__,
     addAdjustment,
@@ -8,7 +10,7 @@ import {
     createWeightMap,
     lookupReplaceCost,
     prettyPrintWeightMap,
-} from './weightedMaps';
+} from './weightedMaps.js';
 
 const { splitMapSubstrings, splitMap, findTrieCostPrefixes, normalizeDef } = __testing__;
 

@@ -12,11 +12,11 @@ export type {
     SuggestionCollectorOptions,
     SuggestionGenerator,
     SuggestionResult,
-} from './suggestions/suggestCollector';
+} from './suggestions/suggestCollector.js';
 export {
     compSuggestionResults,
     defaultSuggestionCollectorOptions,
     impersonateCollector,
     isSuggestionResult,
     suggestionCollector,
-} from './suggestions/suggestCollector';
+} from './suggestions/suggestCollector.js';

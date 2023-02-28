@@ -1,4 +1,6 @@
-import { visualLetterGroups, visualLetterMaskMap } from './orthography';
+import { describe, expect, test } from 'vitest';
+
+import { visualLetterGroups, visualLetterMaskMap } from './orthography.js';
 
 describe('Validate orthography', () => {
     test('visualLetterMap', () => {

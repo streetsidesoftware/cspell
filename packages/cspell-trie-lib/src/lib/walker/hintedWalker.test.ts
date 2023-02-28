@@ -1,9 +1,11 @@
-import { parseLinesToDictionary } from '../SimpleDictionaryParser';
-import { createTriFromList, orderTrie } from '../trie-util';
-import type { HintedWalkerIterator } from './hintedWalker';
-import { hintedWalker } from './hintedWalker';
-import type { YieldResult } from './walkerTypes';
-import { CompoundWordsMethod } from './walkerTypes';
+import { describe, expect, test } from 'vitest';
+
+import { parseLinesToDictionary } from '../SimpleDictionaryParser.js';
+import { createTriFromList, orderTrie } from '../trie-util.js';
+import type { HintedWalkerIterator } from './hintedWalker.js';
+import { hintedWalker } from './hintedWalker.js';
+import type { YieldResult } from './walkerTypes.js';
+import { CompoundWordsMethod } from './walkerTypes.js';
 
 describe('Validate Util Functions', () => {
     test('Hinted Walker', () => {

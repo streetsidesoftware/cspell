@@ -1,11 +1,12 @@
 import type { DictionaryInformation } from '@cspell/cspell-types';
+import { describe, expect, test } from 'vitest';
 
-import { readTrie } from '../../test/dictionaries.test.helper';
-import type { WeightMap } from '../distance';
-import { distanceAStarWeightedEx } from '../distance/distanceAStarWeighted';
-import { formatExResult } from '../distance/formatResultEx';
-import { mapDictionaryInformationToWeightMap } from '../mappers/mapDictionaryInfoToWeightMap';
-import { parseLinesToDictionary } from '../SimpleDictionaryParser';
+import { readTrie } from '../../test/dictionaries.test.helper.js';
+import { distanceAStarWeightedEx } from '../distance/distanceAStarWeighted.js';
+import { formatExResult } from '../distance/formatResultEx.js';
+import type { WeightMap } from '../distance/index.js';
+import { mapDictionaryInformationToWeightMap } from '../mappers/mapDictionaryInfoToWeightMap.js';
+import { parseLinesToDictionary } from '../SimpleDictionaryParser.js';
 
 function getTrie() {
     return readTrie('@cspell/dict-es-es/cspell-ext.json');
@@ -27,23 +28,29 @@ describe('Validate Spanish Suggestions', () => {
         ${'nino'}      | ${false}   | ${['niño', 'ninfo', 'niños', 'nido', 'niña', 'nito', 'niñeo']}
         ${'barcelona'} | ${false}   | ${['Barcelona', 'parcelan', 'abretona', 'barceos', 'barcarola']}
         ${'Mexico'}    | ${false}   | ${['México', 'mexica', 'medico', 'medicó', 'médico']}
-    `('Tests suggestions "$word" ignoreCase: $ignoreCase', async ({ word, ignoreCase, expectedWords }) => {
-        jest.setTimeout(5000);
-        const trie = await getTrie();
-        const suggestions = trie.suggest(word, { numSuggestions: 4, ignoreCase });
-        expect(suggestions).toEqual(expectedWords);
-    });
+    `(
+        'Tests suggestions "$word" ignoreCase: $ignoreCase',
+        async ({ word, ignoreCase, expectedWords }) => {
+            const trie = await getTrie();
+            const suggestions = trie.suggest(word, { numSuggestions: 4, ignoreCase });
+            expect(suggestions).toEqual(expectedWords);
+        },
+        { timeout: 5000 }
+    );
 
     test.each`
         word      | ignoreCase | expectedWords
         ${'niño'} | ${false}   | ${[c('niño', 0), c('niños', 95), c('niña', 96), c('niñeo', 96)]}
         ${'nino'} | ${false}   | ${[c('niño', 1), c('ninfo', 96), c('niños', 96), c('nido', 97), c('niña', 97), c('nito', 97), c('niñeo', 97)]}
-    `('Tests suggestions "$word" ignoreCase: $ignoreCase', async ({ word, ignoreCase, expectedWords }) => {
-        jest.setTimeout(5000);
-        const trie = await getTrie();
-        const results = trie.suggestWithCost(word, { numSuggestions: 4, ignoreCase });
-        expect(results).toEqual(expectedWords);
-    });
+    `(
+        'Tests suggestions "$word" ignoreCase: $ignoreCase',
+        async ({ word, ignoreCase, expectedWords }) => {
+            const trie = await getTrie();
+            const results = trie.suggestWithCost(word, { numSuggestions: 4, ignoreCase });
+            expect(results).toEqual(expectedWords);
+        },
+        { timeout: 5000 }
+    );
 
     test.each`
         word      | ignoreCase | expectedWords
@@ -61,13 +68,16 @@ describe('Validate Spanish Suggestions', () => {
         ${'niño'} | ${false}   | ${[c('niño', 0), c('niños', 50), c('niña', 75), c('niñeo', 75)]}
         ${'nïño'} | ${false}   | ${[c('niño', 1), c('niños', 51), c('niña', 76), c('niñeo', 76)]}
         ${'nino'} | ${false}   | ${[c('niño', 1), c('niños', 51), c('niña', 76), c('niñeo', 76)]}
-    `('Tests suggestions weighted "$word" ignoreCase: $ignoreCase', async ({ word, ignoreCase, expectedWords }) => {
-        jest.setTimeout(5000);
-        const trie = await getTrie();
-        const wm = weightMap();
-        const results = trie.suggestWithCost(word, { numSuggestions: 4, ignoreCase, weightMap: wm });
-        expect(results).toEqual(expectedWords);
-    });
+    `(
+        'Tests suggestions weighted "$word" ignoreCase: $ignoreCase',
+        async ({ word, ignoreCase, expectedWords }) => {
+            const trie = await getTrie();
+            const wm = weightMap();
+            const results = trie.suggestWithCost(word, { numSuggestions: 4, ignoreCase, weightMap: wm });
+            expect(results).toEqual(expectedWords);
+        },
+        { timeout: 5000 }
+    );
     test.each`
         wordA     | wordB
         ${'niño'} | ${'niños'}

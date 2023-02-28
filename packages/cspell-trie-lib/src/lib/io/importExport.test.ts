@@ -1,8 +1,9 @@
 import { readFile } from 'fs/promises';
+import { describe, expect, test } from 'vitest';
 
-import { resolveSample } from '../../test/samples';
-import * as Trie from '../index';
-import { importTrie, serializeTrie } from './importExport';
+import { resolveSample } from '../../test/samples.js';
+import * as Trie from '../index.js';
+import { importTrie, serializeTrie } from './importExport.js';
 
 describe('Import/Export', () => {
     const pSampleWords = readFile(resolveSample('sample.txt'), 'utf8');

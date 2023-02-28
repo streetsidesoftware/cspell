@@ -1,5 +1,7 @@
-import { AutoCacheMap, AutoCacheWeakMap } from './autoCacheMap';
-import { isDefined } from './util';
+import { describe, expect, test, vi } from 'vitest';
+
+import { AutoCacheMap, AutoCacheWeakMap } from './autoCacheMap.js';
+import { isDefined } from './util.js';
 
 describe('autoCacheMap', () => {
     test('AutoCacheMap', () => {
@@ -9,7 +11,7 @@ describe('autoCacheMap', () => {
             return s.length;
         }
 
-        const fn = jest.fn(transform);
+        const fn = vi.fn(transform);
 
         const cache = new AutoCacheMap(fn);
 
@@ -27,7 +29,7 @@ describe('autoCacheMap', () => {
             return n.name.length;
         }
 
-        const fn = jest.fn(transform);
+        const fn = vi.fn(transform);
 
         const cache = new AutoCacheWeakMap(fn);
 

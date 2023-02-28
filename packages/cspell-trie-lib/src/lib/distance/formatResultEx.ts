@@ -1,6 +1,6 @@
-import type { ExResult } from './distanceAStarWeighted';
-import { distanceAStarWeightedEx } from './distanceAStarWeighted';
-import type { WeightMap } from './weightedMaps';
+import type { ExResult } from './distanceAStarWeighted.js';
+import { distanceAStarWeightedEx } from './distanceAStarWeighted.js';
+import type { WeightMap } from './weightedMaps.js';
 
 function pL(s: string, w: number) {
     const strWidth = vizWidth(s);

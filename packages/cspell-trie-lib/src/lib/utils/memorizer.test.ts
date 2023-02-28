@@ -1,10 +1,12 @@
-import { memorizer } from './memorizer';
+import { describe, expect, test, vi } from 'vitest';
+
+import { memorizer } from './memorizer.js';
 
 describe('memorizer', () => {
     test('memorizer', () => {
         const transform = (...args: string[]) => args.reduce((sum, s) => (sum += s.length), 0);
 
-        const fn = jest.fn(transform);
+        const fn = vi.fn(transform);
 
         const m = memorizer(fn);
 
@@ -23,7 +25,7 @@ describe('memorizer', () => {
             return `${a}: ${ai.toFixed(2)}, ${b}: ${bi?.toFixed(2) || '<>'}`;
         }
 
-        const fn = jest.fn(transform);
+        const fn = vi.fn(transform);
 
         const m = memorizer(fn);
 

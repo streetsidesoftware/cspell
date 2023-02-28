@@ -1,11 +1,13 @@
-import { readTrie } from '../../test/dictionaries.test.helper';
-import { clean } from '../utils/clean';
-import { createTimer } from '../utils/timer';
-import { CompoundWordsMethod } from '../walker';
-import type { GenSuggestionOptionsStrict } from './genSuggestionsOptions';
-import { genCompoundableSuggestions, suggest } from './suggestAStar';
-import type { SuggestionCollector, SuggestionCollectorOptions, SuggestionResult } from './suggestCollector';
-import { suggestionCollector } from './suggestCollector';
+import { describe, expect, test } from 'vitest';
+
+import { readTrie } from '../../test/dictionaries.test.helper.js';
+import { clean } from '../utils/clean.js';
+import { createTimer } from '../utils/timer.js';
+import { CompoundWordsMethod } from '../walker/index.js';
+import type { GenSuggestionOptionsStrict } from './genSuggestionsOptions.js';
+import { genCompoundableSuggestions, suggest } from './suggestAStar.js';
+import type { SuggestionCollector, SuggestionCollectorOptions, SuggestionResult } from './suggestCollector.js';
+import { suggestionCollector } from './suggestCollector.js';
 
 function getTrie() {
     return readTrie('@cspell/dict-en_us/cspell-ext.json');

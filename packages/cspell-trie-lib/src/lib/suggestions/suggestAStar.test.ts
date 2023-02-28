@@ -1,11 +1,13 @@
-import { parseDictionary } from '../SimpleDictionaryParser';
-import { Trie } from '../trie';
-import { clean } from '../utils/clean';
-import { CompoundWordsMethod } from '../walker';
-import type { GenSuggestionOptionsStrict, SuggestionOptions } from './genSuggestionsOptions';
-import * as Sug from './suggestAStar';
-import type { SuggestionCollector, SuggestionCollectorOptions } from './suggestCollector';
-import { suggestionCollector } from './suggestCollector';
+import { describe, expect, test } from 'vitest';
+
+import { parseDictionary } from '../SimpleDictionaryParser.js';
+import { Trie } from '../trie.js';
+import { clean } from '../utils/clean.js';
+import { CompoundWordsMethod } from '../walker/index.js';
+import type { GenSuggestionOptionsStrict, SuggestionOptions } from './genSuggestionsOptions.js';
+import * as Sug from './suggestAStar.js';
+import type { SuggestionCollector, SuggestionCollectorOptions } from './suggestCollector.js';
+import { suggestionCollector } from './suggestCollector.js';
 
 const defaultOptions: SuggestionCollectorOptions = {
     numSuggestions: 10,

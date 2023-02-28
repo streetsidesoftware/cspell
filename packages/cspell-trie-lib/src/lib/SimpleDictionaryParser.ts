@@ -7,10 +7,10 @@ import {
     IDENTITY_PREFIX,
     LINE_COMMENT,
     OPTIONAL_COMPOUND_FIX,
-} from './constants';
-import type { Trie } from './trie';
-import { buildTrieFast } from './TrieBuilder';
-import { normalizeWord, normalizeWordForCaseInsensitive } from './utils/normalizeWord';
+} from './constants.js';
+import type { Trie } from './trie.js';
+import { buildTrieFast } from './TrieBuilder.js';
+import { normalizeWord, normalizeWordForCaseInsensitive } from './utils/normalizeWord.js';
 
 export interface ParseDictionaryOptions {
     compoundCharacter: string;

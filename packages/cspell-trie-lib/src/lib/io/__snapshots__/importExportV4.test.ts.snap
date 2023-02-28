@@ -1,6 +1,6 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`Import/Export Read sample and ensure results match sample.txt {"addTrieBreaksToImproveDiffs": false} 1`] = `
+exports[`Import/Export > Read sample and ensure results match 'sample.txt' { addTrieBreaksToImproveDiffs: false } 1`] = `
 "#!/usr/bin/env cspell-trie reader
 TrieXv4
 base=10
@@ -60,7 +60,7 @@ lk#98<4
 "
 `;
 
-exports[`Import/Export Read sample and ensure results match sample.txt {} 1`] = `
+exports[`Import/Export > Read sample and ensure results match 'sample.txt' {} 1`] = `
 "#!/usr/bin/env cspell-trie reader
 TrieXv4
 base=10
@@ -120,7 +120,7 @@ lk#98<4
 "
 `;
 
-exports[`Import/Export Read sample and ensure results match sample2.txt {"addTrieBreaksToImproveDiffs": false} 1`] = `
+exports[`Import/Export > Read sample and ensure results match 'sample2.txt' { addTrieBreaksToImproveDiffs: false } 1`] = `
 "#!/usr/bin/env cspell-trie reader
 TrieXv4
 base=10
@@ -130,12 +130,12 @@ __DATA__
 [
 0,124,121,35,119,103,141,142,146,28,163
 ]
-\\#
-/* \\# */
+\\\\#
+/* \\\\# */
  
-/* \\#  */
-comment\\, not stored$9<9<3
-\\$$
+/* \\\\#  */
+comment\\\\, not stored$9<9<3
+\\\\$$
 B
 /* B */
 i
@@ -146,19 +146,19 @@ N
 e
 /* Ne */
 w York$8
-\\[
-/* \\[ */
+\\\\[
+/* \\\\[ */
 b
-/* \\[b */
-races\\]$8
-\\\\\\
-/* \\\\\\ */
- 
-/* \\\\\\  */
-single backslash$9<8
-\\\\\\
+/* \\\\[b */
+races\\\\]$8
+\\\\\\\\\\\\
 /* \\\\\\\\\\\\ */
- double backsla#58<9<6\\\\\\ triple backsl#74<9<8
+ 
+/* \\\\\\\\\\\\  */
+single backslash$9<8
+\\\\\\\\\\\\
+/* \\\\\\\\\\\\\\\\\\\\\\\\ */
+ double backsla#58<9<6\\\\\\\\\\\\ triple backsl#74<9<8
 a
 /* a */
 p#26<2
@@ -190,12 +190,12 @@ r
 /* r */
 e
 /* re */
-\\-w#33<4
+\\\\-w#33<4
 s
 /* s */
 p
 /* sp */
-ecial characters \\\`\\~\\!\\@\\#\\$\\%\\^\\&\\*\\(\\)\\_\\-\\+\\=\\[\\]\\\\\\\\{\\}\\|\\;\\'\\:\\"\\,\\.\\/\\<\\>\\?$9<9<9<9<9<6
+ecial characters \\\\\`\\\\~\\\\!\\\\@\\\\#\\\\$\\\\%\\\\^\\\\&\\\\*\\\\(\\\\)\\\\_\\\\-\\\\+\\\\=\\\\[\\\\]\\\\\\\\\\\\\\\\{\\\\}\\\\|\\\\;\\\\'\\\\:\\\\\\"\\\\,\\\\.\\\\/\\\\<\\\\>\\\\?$9<9<9<9<9<6
 t
 /* t */
 a
@@ -208,11 +208,11 @@ a
 lk#224<3
 o
 /* wo */
-rk\\'@7<i@1<s$$4
+rk\\\\'@7<i@1<s$$4
 "
 `;
 
-exports[`Import/Export Read sample and ensure results match sample2.txt {} 1`] = `
+exports[`Import/Export > Read sample and ensure results match 'sample2.txt' {} 1`] = `
 "#!/usr/bin/env cspell-trie reader
 TrieXv4
 base=10
@@ -222,12 +222,12 @@ __DATA__
 [
 0,124,121,35,119,103,141,142,146,28,163
 ]
-\\#
-/* \\# */
+\\\\#
+/* \\\\# */
  
-/* \\#  */
-comment\\, not stored$9<9<3
-\\$$
+/* \\\\#  */
+comment\\\\, not stored$9<9<3
+\\\\$$
 B
 /* B */
 i
@@ -238,19 +238,19 @@ N
 e
 /* Ne */
 w York$8
-\\[
-/* \\[ */
+\\\\[
+/* \\\\[ */
 b
-/* \\[b */
-races\\]$8
-\\\\\\
-/* \\\\\\ */
- 
-/* \\\\\\  */
-single backslash$9<8
-\\\\\\
+/* \\\\[b */
+races\\\\]$8
+\\\\\\\\\\\\
 /* \\\\\\\\\\\\ */
- double backsla#58<9<6\\\\\\ triple backsl#74<9<8
+ 
+/* \\\\\\\\\\\\  */
+single backslash$9<8
+\\\\\\\\\\\\
+/* \\\\\\\\\\\\\\\\\\\\\\\\ */
+ double backsla#58<9<6\\\\\\\\\\\\ triple backsl#74<9<8
 a
 /* a */
 p#26<2
@@ -282,12 +282,12 @@ r
 /* r */
 e
 /* re */
-\\-w#33<4
+\\\\-w#33<4
 s
 /* s */
 p
 /* sp */
-ecial characters \\\`\\~\\!\\@\\#\\$\\%\\^\\&\\*\\(\\)\\_\\-\\+\\=\\[\\]\\\\\\\\{\\}\\|\\;\\'\\:\\"\\,\\.\\/\\<\\>\\?$9<9<9<9<9<6
+ecial characters \\\\\`\\\\~\\\\!\\\\@\\\\#\\\\$\\\\%\\\\^\\\\&\\\\*\\\\(\\\\)\\\\_\\\\-\\\\+\\\\=\\\\[\\\\]\\\\\\\\\\\\\\\\{\\\\}\\\\|\\\\;\\\\'\\\\:\\\\\\"\\\\,\\\\.\\\\/\\\\<\\\\>\\\\?$9<9<9<9<9<6
 t
 /* t */
 a
@@ -300,11 +300,11 @@ a
 lk#224<3
 o
 /* wo */
-rk\\'@7<i@1<s$$4
+rk\\\\'@7<i@1<s$$4
 "
 `;
 
-exports[`Import/Export serialize DAWG {"base": 10, "optimizeSimpleReferences": false} 1`] = `
+exports[`Import/Export > serialize DAWG { base: 10 } 1`] = `
 "#!/usr/bin/env cspell-trie reader
 TrieXv4
 base=10
@@ -321,7 +321,7 @@ i
 g Apple$8
 r
 /* Br */
-aces\\: \\{\\}\\[\\]\\(\\)$9<5
+aces\\\\: \\\\{\\\\}\\\\[\\\\]\\\\(\\\\)$9<5
 N
 /* N */
 e
@@ -329,15 +329,15 @@ e
 w York$7
 u
 /* Nu */
-mbers \\0\\1\\2\\3\\4\\5\\6\\7\\8\\9$9<9
+mbers \\\\0\\\\1\\\\2\\\\3\\\\4\\\\5\\\\6\\\\7\\\\8\\\\9$9<9
 a
 /* a */
-\\/
-/* a\\/ */
+\\\\/
+/* a\\\\/ */
 b$c$2
 p#6<r
 /* ar */
-row \\<$7
+row \\\\<$7
 b
 /* b */
 i
@@ -355,10 +355,10 @@ e
 /* e */
 o
 /* eo */
-l \\\\n$3w \\$$4
+l \\\\\\\\n$3w \\\\$$4
 s
 /* es */
-cape \\\\\\$8
+cape \\\\\\\\\\\\$8
 f
 /* f */
 u
@@ -382,12 +382,12 @@ r
 /* r */
 e
 /* re */
-f \\#$5
+f \\\\#$5
 s
 /* s */
 l
 /* sl */
-ash \\/$7
+ash \\\\/$7
 t@6<
 w
 /* w */
@@ -395,7 +395,7 @@ a@7<2
 "
 `;
 
-exports[`Import/Export serialize DAWG {"base": 10, "optimizeSimpleReferences": true} 1`] = `
+exports[`Import/Export > serialize DAWG { base: 10, …(1) } 1`] = `
 "#!/usr/bin/env cspell-trie reader
 TrieXv4
 base=10
@@ -412,7 +412,7 @@ i
 g Apple$8
 r
 /* Br */
-aces\\: \\{\\}\\[\\]\\(\\)$9<5
+aces\\\\: \\\\{\\\\}\\\\[\\\\]\\\\(\\\\)$9<5
 N
 /* N */
 e
@@ -420,15 +420,15 @@ e
 w York$7
 u
 /* Nu */
-mbers \\0\\1\\2\\3\\4\\5\\6\\7\\8\\9$9<9
+mbers \\\\0\\\\1\\\\2\\\\3\\\\4\\\\5\\\\6\\\\7\\\\8\\\\9$9<9
 a
 /* a */
-\\/
-/* a\\/ */
+\\\\/
+/* a\\\\/ */
 b$c$2
 p#6<r
 /* ar */
-row \\<$7
+row \\\\<$7
 b
 /* b */
 i
@@ -446,10 +446,10 @@ e
 /* e */
 o
 /* eo */
-l \\\\n$3w \\$$4
+l \\\\\\\\n$3w \\\\$$4
 s
 /* es */
-cape \\\\\\$8
+cape \\\\\\\\\\\\$8
 f
 /* f */
 u
@@ -473,12 +473,12 @@ r
 /* r */
 e
 /* re */
-f \\#$5
+f \\\\#$5
 s
 /* s */
 l
 /* sl */
-ash \\/$7
+ash \\\\/$7
 t@6<
 w
 /* w */
@@ -486,7 +486,7 @@ a@7<2
 "
 `;
 
-exports[`Import/Export serialize DAWG {"base": 10} 1`] = `
+exports[`Import/Export > serialize DAWG { base: 10, …(1) } 2`] = `
 "#!/usr/bin/env cspell-trie reader
 TrieXv4
 base=10
@@ -503,7 +503,7 @@ i
 g Apple$8
 r
 /* Br */
-aces\\: \\{\\}\\[\\]\\(\\)$9<5
+aces\\\\: \\\\{\\\\}\\\\[\\\\]\\\\(\\\\)$9<5
 N
 /* N */
 e
@@ -511,15 +511,15 @@ e
 w York$7
 u
 /* Nu */
-mbers \\0\\1\\2\\3\\4\\5\\6\\7\\8\\9$9<9
+mbers \\\\0\\\\1\\\\2\\\\3\\\\4\\\\5\\\\6\\\\7\\\\8\\\\9$9<9
 a
 /* a */
-\\/
-/* a\\/ */
+\\\\/
+/* a\\\\/ */
 b$c$2
 p#6<r
 /* ar */
-row \\<$7
+row \\\\<$7
 b
 /* b */
 i
@@ -537,10 +537,10 @@ e
 /* e */
 o
 /* eo */
-l \\\\n$3w \\$$4
+l \\\\\\\\n$3w \\\\$$4
 s
 /* es */
-cape \\\\\\$8
+cape \\\\\\\\\\\\$8
 f
 /* f */
 u
@@ -564,12 +564,12 @@ r
 /* r */
 e
 /* re */
-f \\#$5
+f \\\\#$5
 s
 /* s */
 l
 /* sl */
-ash \\/$7
+ash \\\\/$7
 t@6<
 w
 /* w */
@@ -577,7 +577,7 @@ a@7<2
 "
 `;
 
-exports[`Import/Export serialize DAWG 10 1`] = `
+exports[`Import/Export > serialize DAWG 10 1`] = `
 "#!/usr/bin/env cspell-trie reader
 TrieXv4
 base=10
@@ -594,7 +594,7 @@ i
 g Apple$8
 r
 /* Br */
-aces\\: \\{\\}\\[\\]\\(\\)$9<5
+aces\\\\: \\\\{\\\\}\\\\[\\\\]\\\\(\\\\)$9<5
 N
 /* N */
 e
@@ -602,15 +602,15 @@ e
 w York$7
 u
 /* Nu */
-mbers \\0\\1\\2\\3\\4\\5\\6\\7\\8\\9$9<9
+mbers \\\\0\\\\1\\\\2\\\\3\\\\4\\\\5\\\\6\\\\7\\\\8\\\\9$9<9
 a
 /* a */
-\\/
-/* a\\/ */
+\\\\/
+/* a\\\\/ */
 b$c$2
 p#6<r
 /* ar */
-row \\<$7
+row \\\\<$7
 b
 /* b */
 i
@@ -628,10 +628,10 @@ e
 /* e */
 o
 /* eo */
-l \\\\n$3w \\$$4
+l \\\\\\\\n$3w \\\\$$4
 s
 /* es */
-cape \\\\\\$8
+cape \\\\\\\\\\\\$8
 f
 /* f */
 u
@@ -655,12 +655,12 @@ r
 /* r */
 e
 /* re */
-f \\#$5
+f \\\\#$5
 s
 /* s */
 l
 /* sl */
-ash \\/$7
+ash \\\\/$7
 t@6<
 w
 /* w */

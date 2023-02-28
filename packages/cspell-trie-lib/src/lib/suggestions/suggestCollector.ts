@@ -1,12 +1,12 @@
-import type { WeightMap } from '../distance';
-import { editDistanceWeighted } from '../distance';
-import { addDefToWeightMap } from '../distance/weightedMaps';
-import type { RequireOptional } from '../types';
-import { createTimer } from '../utils/timer';
-import { clean, regexQuote, replaceAllFactory } from '../utils/util';
-import { WORD_SEPARATOR } from '../walker';
-import { DEFAULT_COMPOUNDED_WORD_SEPARATOR } from './constants';
-import type { GenSuggestionOptions, GenSuggestionOptionsStrict } from './genSuggestionsOptions';
+import type { WeightMap } from '../distance/index.js';
+import { editDistanceWeighted } from '../distance/index.js';
+import { addDefToWeightMap } from '../distance/weightedMaps.js';
+import type { RequireOptional } from '../types.js';
+import { createTimer } from '../utils/timer.js';
+import { clean, regexQuote, replaceAllFactory } from '../utils/util.js';
+import { WORD_SEPARATOR } from '../walker/index.js';
+import { DEFAULT_COMPOUNDED_WORD_SEPARATOR } from './constants.js';
+import type { GenSuggestionOptions, GenSuggestionOptionsStrict } from './genSuggestionsOptions.js';
 
 const defaultMaxNumberSuggestions = 10;
 

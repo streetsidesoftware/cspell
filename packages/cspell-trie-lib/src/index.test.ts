@@ -1,4 +1,6 @@
-import * as lib from './index';
+import { describe, expect, test } from 'vitest';
+
+import * as lib from './index.js';
 
 describe('Validate index.ts', () => {
     test('index', () => {

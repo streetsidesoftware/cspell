@@ -1,4 +1,6 @@
-import { regexQuote, replaceAll, replaceAllFactory } from './util';
+import { describe, expect, test } from 'vitest';
+
+import { regexQuote, replaceAll, replaceAllFactory } from './util.js';
 
 describe('util', () => {
     // cspell:ignore aabbaab

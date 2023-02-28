@@ -1,11 +1,12 @@
 import { readFile, writeFile } from 'fs/promises';
 import { genSequence } from 'gensequence';
+import { describe, expect, test } from 'vitest';
 
-import { resolveSample as resolveSamplePath } from '../../test/samples';
-import { consolidate } from '../consolidate';
-import * as Trie from '../index';
-import type { TrieNode } from '../TrieNode';
-import { importTrie, serializeTrie } from './importExportV3';
+import { resolveSample as resolveSamplePath } from '../../test/samples.js';
+import { consolidate } from '../consolidate.js';
+import * as Trie from '../index.js';
+import type { TrieNode } from '../TrieNode.js';
+import { importTrie, serializeTrie } from './importExportV3.js';
 
 const sampleFile = resolveSamplePath('sampleV3.trie');
 

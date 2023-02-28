@@ -1,4 +1,6 @@
-import { SecondChanceCache } from './secondChanceCache';
+import { describe, expect, test } from 'vitest';
+
+import { SecondChanceCache } from './secondChanceCache.js';
 
 describe('Validate SecondChanceCache', () => {
     test('SecondChanceCache', () => {

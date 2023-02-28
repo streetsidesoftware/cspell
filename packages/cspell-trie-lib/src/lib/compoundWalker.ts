@@ -1,5 +1,5 @@
-import type { Trie } from './trie';
-import type { TrieNode } from './TrieNode';
+import type { Trie } from './trie.js';
+import type { TrieNode } from './TrieNode.js';
 
 export interface WalkItem {
     /** prefix so far */

@@ -1,6 +1,8 @@
-import { createTriFromList, orderTrie } from '../trie-util';
-import { walker } from './walker';
-import type { WalkerIterator, YieldResult } from './walkerTypes';
+import { describe, expect, test } from 'vitest';
+
+import { createTriFromList, orderTrie } from '../trie-util.js';
+import { walker } from './walker.js';
+import type { WalkerIterator, YieldResult } from './walkerTypes.js';
 
 describe('Validate Util Functions', () => {
     test('Tests Walker', () => {

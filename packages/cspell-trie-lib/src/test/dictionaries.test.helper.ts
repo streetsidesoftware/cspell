@@ -1,9 +1,9 @@
 import { promises as fs } from 'fs';
 import * as path from 'path';
 
-import type { Trie } from '../lib/trie';
-import { readTrieFile, readTrieFileFromConfig } from './reader.test.helper';
-import { resolveGlobalDict, resolveGlobalSample } from './samples';
+import type { Trie } from '../lib/trie.js';
+import { readTrieFile, readTrieFileFromConfig } from './reader.test.helper.js';
+import { resolveGlobalDict, resolveGlobalSample } from './samples.js';
 
 const tries = new Map<string, Promise<Trie>>();
 

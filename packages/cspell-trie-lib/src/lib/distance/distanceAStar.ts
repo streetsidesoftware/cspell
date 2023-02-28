@@ -1,4 +1,4 @@
-import { PairingHeap } from '../utils/PairingHeap';
+import { PairingHeap } from '../utils/PairingHeap.js';
 
 /**
  * Calculate the edit distance between two words using an A* algorithm.

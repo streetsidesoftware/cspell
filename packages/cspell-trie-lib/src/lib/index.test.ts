@@ -1,4 +1,6 @@
-import * as Trie from './index';
+import { describe, expect, test } from 'vitest';
+
+import * as Trie from './index.js';
 
 describe('Experiment with Tries', () => {
     test('Adds words to a Trie and takes them back out.', () => {

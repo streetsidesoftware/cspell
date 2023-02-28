@@ -1,11 +1,13 @@
-import { CompoundWordsMethod, suggestionCollector } from './index';
-import { parseDictionary } from './SimpleDictionaryParser';
-import type { SuggestionOptions } from './suggestions/genSuggestionsOptions';
-import type { SuggestionCollectorOptions } from './suggestions/suggestCollector';
-import { defaultTrieOptions, Trie } from './trie';
-import { isWordTerminationNode, orderTrie } from './trie-util';
-import { clean } from './utils/clean';
-import { normalizeWordToLowercase } from './utils/normalizeWord';
+import { describe, expect, test } from 'vitest';
+
+import { CompoundWordsMethod, suggestionCollector } from './index.js';
+import { parseDictionary } from './SimpleDictionaryParser.js';
+import type { SuggestionOptions } from './suggestions/genSuggestionsOptions.js';
+import type { SuggestionCollectorOptions } from './suggestions/suggestCollector.js';
+import { defaultTrieOptions, Trie } from './trie.js';
+import { isWordTerminationNode, orderTrie } from './trie-util.js';
+import { clean } from './utils/clean.js';
+import { normalizeWordToLowercase } from './utils/normalizeWord.js';
 
 describe('Validate Trie Class', () => {
     const NumSuggestions: SuggestionOptions = { numSuggestions: 10 };

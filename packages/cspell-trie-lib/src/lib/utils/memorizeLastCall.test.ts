@@ -1,4 +1,6 @@
-import { memorizeLastCall } from './memorizeLastCall';
+import { describe, expect, test } from 'vitest';
+
+import { memorizeLastCall } from './memorizeLastCall.js';
 
 describe('memorizeLastCall', () => {
     test('memorizeLastCall', () => {
