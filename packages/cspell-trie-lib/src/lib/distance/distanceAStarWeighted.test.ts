@@ -1,10 +1,12 @@
-import { mapDictionaryInformationToWeightMap } from '../mappers/mapDictionaryInfoToWeightMap';
-import type { SuggestionCostMapDef } from '../models/suggestionCostsDef';
-import { distanceAStarWeighted, distanceAStarWeightedEx } from './distanceAStarWeighted';
-import { formatExResult } from './formatResultEx';
-import { levenshteinDistance } from './levenshtein';
-import type { WeightMap } from './weightedMaps';
-import { addDefToWeightMap, createWeightMap } from './weightedMaps';
+import { describe, expect, test } from 'vitest';
+
+import { mapDictionaryInformationToWeightMap } from '../mappers/mapDictionaryInfoToWeightMap.js';
+import type { SuggestionCostMapDef } from '../models/suggestionCostsDef.js';
+import { distanceAStarWeighted, distanceAStarWeightedEx } from './distanceAStarWeighted.js';
+import { formatExResult } from './formatResultEx.js';
+import { levenshteinDistance } from './levenshtein.js';
+import type { WeightMap } from './weightedMaps.js';
+import { addDefToWeightMap, createWeightMap } from './weightedMaps.js';
 
 describe('distanceAStar', () => {
     test.each`

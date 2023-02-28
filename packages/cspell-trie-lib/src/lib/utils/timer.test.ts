@@ -1,6 +1,7 @@
 import { promisify } from 'util';
+import { describe, expect, test } from 'vitest';
 
-import { createTimer, polyHrTime } from './timer';
+import { createTimer, polyHrTime } from './timer.js';
 
 const delay = promisify(setTimeout);
 

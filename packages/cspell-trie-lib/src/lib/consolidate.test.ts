@@ -1,12 +1,13 @@
 import { readFile } from 'fs/promises';
 import { genSequence } from 'gensequence';
 import * as path from 'path';
+import { describe, expect, test } from 'vitest';
 
-import { resolveGlobalSample } from '../test/samples';
-import { consolidate } from './consolidate';
-import { countNodes, createTrieRoot, createTriFromList, iteratorTrieWords } from './trie-util';
-import { buildTrie } from './TrieBuilder';
-import type { TrieNode } from './TrieNode';
+import { resolveGlobalSample } from '../test/samples.js';
+import { consolidate } from './consolidate.js';
+import { countNodes, createTrieRoot, createTriFromList, iteratorTrieWords } from './trie-util.js';
+import { buildTrie } from './TrieBuilder.js';
+import type { TrieNode } from './TrieNode.js';
 
 const samples = resolveGlobalSample('dicts');
 const sampleEnglish = path.join(samples, 'en_US.txt');

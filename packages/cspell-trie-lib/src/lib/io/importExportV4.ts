@@ -25,10 +25,10 @@ import { opConcatMap, opFilter, pipe } from '@cspell/cspell-pipe/sync';
 import type { Sequence } from 'gensequence';
 import { genSequence } from 'gensequence';
 
-import { trieNodeToRoot } from '../trie-util';
-import type { TrieNode, TrieRoot } from '../TrieNode';
-import { FLAG_WORD } from '../TrieNode';
-import { bufferLines } from '../utils/bufferLines';
+import { trieNodeToRoot } from '../trie-util.js';
+import type { TrieNode, TrieRoot } from '../TrieNode.js';
+import { FLAG_WORD } from '../TrieNode.js';
+import { bufferLines } from '../utils/bufferLines.js';
 
 const EOW = '$'; // End of word
 const BACK = '<'; // Move up the tree

@@ -1,8 +1,10 @@
-import type { WalkItem, WalkNext } from './compoundWalker';
-import { compoundWalker, compoundWords } from './compoundWalker';
-import { findWord } from './find';
-import { parseDictionary } from './SimpleDictionaryParser';
-import type { Trie } from './trie';
+import { describe, expect, test } from 'vitest';
+
+import type { WalkItem, WalkNext } from './compoundWalker.js';
+import { compoundWalker, compoundWords } from './compoundWalker.js';
+import { findWord } from './find.js';
+import { parseDictionary } from './SimpleDictionaryParser.js';
+import type { Trie } from './trie.js';
 
 // cspell:ignore errorerror
 

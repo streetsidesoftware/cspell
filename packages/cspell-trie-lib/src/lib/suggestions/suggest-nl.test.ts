@@ -1,12 +1,13 @@
 import assert from 'assert';
+import { describe, expect, test } from 'vitest';
 
-import { readRawDictionaryFile, readSampleTrie } from '../../test/dictionaries.test.helper';
-import type { WeightMap } from '../distance';
-import { mapDictionaryInformationToWeightMap } from '../mappers/mapDictionaryInfoToWeightMap';
-import type { DictionaryInformation } from '../models/DictionaryInformation';
-import { clean } from '../utils/util';
-import { DEFAULT_COMPOUNDED_WORD_SEPARATOR } from './constants';
-import type { SuggestionResult } from './suggestCollector';
+import { readRawDictionaryFile, readSampleTrie } from '../../test/dictionaries.test.helper.js';
+import type { WeightMap } from '../distance/index.js';
+import { mapDictionaryInformationToWeightMap } from '../mappers/mapDictionaryInfoToWeightMap.js';
+import type { DictionaryInformation } from '../models/DictionaryInformation.js';
+import { clean } from '../utils/util.js';
+import { DEFAULT_COMPOUNDED_WORD_SEPARATOR } from './constants.js';
+import type { SuggestionResult } from './suggestCollector.js';
 
 function getTrie() {
     return readSampleTrie('nl_nl.trie.gz');

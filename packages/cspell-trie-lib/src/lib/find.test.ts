@@ -1,7 +1,9 @@
-import type { FindFullResult, PartialFindOptions } from './find';
-import { __testing__, createFindOptions, findLegacyCompound, findWord } from './find';
-import { parseDictionary } from './SimpleDictionaryParser';
-import { Trie } from './trie';
+import { describe, expect, test } from 'vitest';
+
+import type { FindFullResult, PartialFindOptions } from './find.js';
+import { __testing__, createFindOptions, findLegacyCompound, findWord } from './find.js';
+import { parseDictionary } from './SimpleDictionaryParser.js';
+import { Trie } from './trie.js';
 
 const findLegacyCompoundWord = __testing__.findLegacyCompoundWord;
 

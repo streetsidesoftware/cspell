@@ -1,5 +1,5 @@
-import type { SuggestionCostMapDef } from '../models/suggestionCostsDef';
-import { DEFAULT_COMPOUNDED_WORD_SEPARATOR } from '../suggestions/constants';
+import type { SuggestionCostMapDef } from '../models/suggestionCostsDef.js';
+import { DEFAULT_COMPOUNDED_WORD_SEPARATOR } from '../suggestions/constants.js';
 
 export type WeightedRepMapTrie = Record<string, WeightedRepTrieNode>;
 

@@ -1,6 +1,6 @@
-import { defaultTrieOptions } from '../constants';
-import type { PartialTrieOptions, TrieOptions } from '../TrieNode';
-import { mergeDefaults } from './mergeDefaults';
+import { defaultTrieOptions } from '../constants.js';
+import type { PartialTrieOptions, TrieOptions } from '../TrieNode.js';
+import { mergeDefaults } from './mergeDefaults.js';
 
 export function mergeOptionalWithDefaults(options: PartialTrieOptions): TrieOptions {
     return mergeDefaults(options, defaultTrieOptions);

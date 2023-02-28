@@ -1,9 +1,9 @@
-import { CASE_INSENSITIVE_PREFIX, COMPOUND_FIX, FORBID_PREFIX } from './constants';
-import type { TrieNode, TrieRoot } from './TrieNode';
-import { FLAG_WORD } from './TrieNode';
-import type { PartialWithUndefined } from './types';
-import { memorizeLastCall } from './utils/memorizeLastCall';
-import { mergeDefaults } from './utils/mergeDefaults';
+import { CASE_INSENSITIVE_PREFIX, COMPOUND_FIX, FORBID_PREFIX } from './constants.js';
+import type { TrieNode, TrieRoot } from './TrieNode.js';
+import { FLAG_WORD } from './TrieNode.js';
+import type { PartialWithUndefined } from './types.js';
+import { memorizeLastCall } from './utils/memorizeLastCall.js';
+import { mergeDefaults } from './utils/mergeDefaults.js';
 
 type Root = PartialWithUndefined<TrieRoot>;
 

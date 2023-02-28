@@ -1,5 +1,15 @@
-import { countNodes, countWords, createTriFromList, findNode, has, isCircular, iteratorTrieWords } from './trie-util';
-import { mergeDefaults } from './utils/mergeDefaults';
+import { describe, expect, test } from 'vitest';
+
+import {
+    countNodes,
+    countWords,
+    createTriFromList,
+    findNode,
+    has,
+    isCircular,
+    iteratorTrieWords,
+} from './trie-util.js';
+import { mergeDefaults } from './utils/mergeDefaults.js';
 
 describe('Validate Util Functions', () => {
     test('createTriFromList', () => {

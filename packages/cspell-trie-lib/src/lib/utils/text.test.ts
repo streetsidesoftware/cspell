@@ -1,4 +1,6 @@
-import { expandCharacterSet, expandRange } from './text';
+import { describe, expect, test } from 'vitest';
+
+import { expandCharacterSet, expandRange } from './text.js';
 
 describe('text', () => {
     test.each`

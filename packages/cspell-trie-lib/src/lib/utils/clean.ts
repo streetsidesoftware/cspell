@@ -1,4 +1,4 @@
-import type { RemoveUndefined } from '../types';
+import type { RemoveUndefined } from '../types.js';
 
 export function clean<T extends object>(t: T): RemoveUndefined<T> {
     const copy = { ...t };

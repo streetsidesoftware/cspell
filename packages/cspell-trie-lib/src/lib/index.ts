@@ -1,18 +1,18 @@
-export { consolidate } from './consolidate';
-export type { WeightMap } from './distance';
-export { createWeightedMap, editDistance, editDistanceWeighted } from './distance';
-export type { FindFullResult } from './find';
-export { ExportOptions, importTrie, serializeTrie } from './io/importExport';
-export { mapDictionaryInformationToWeightMap } from './mappers/mapDictionaryInfoToWeightMap';
-export type { SuggestionCostMapDef } from './models/suggestionCostsDef';
+export { consolidate } from './consolidate.js';
+export type { WeightMap } from './distance/index.js';
+export { createWeightedMap, editDistance, editDistanceWeighted } from './distance/index.js';
+export type { FindFullResult } from './find.js';
+export { ExportOptions, importTrie, serializeTrie } from './io/importExport.js';
+export { mapDictionaryInformationToWeightMap } from './mappers/mapDictionaryInfoToWeightMap.js';
+export type { SuggestionCostMapDef } from './models/suggestionCostsDef.js';
 export {
     createDictionaryLineParserMapper as createDictionaryLineParser,
     parseDictionary,
     parseDictionaryLines,
-} from './SimpleDictionaryParser';
-export type { MaxCost, SuggestionCollector, SuggestionResult } from './suggestCollector';
-export { impersonateCollector, suggestionCollector } from './suggestCollector';
-export type { FindWordOptions, PartialTrieOptions, TrieOptions } from './trie';
+} from './SimpleDictionaryParser.js';
+export type { MaxCost, SuggestionCollector, SuggestionResult } from './suggestCollector.js';
+export { impersonateCollector, suggestionCollector } from './suggestCollector.js';
+export type { FindWordOptions, PartialTrieOptions, TrieOptions } from './trie.js';
 export {
     CASE_INSENSITIVE_PREFIX,
     COMPOUND,
@@ -24,7 +24,7 @@ export {
     OPTIONAL_COMPOUND,
     OPTIONAL_COMPOUND_FIX,
     Trie,
-} from './trie';
+} from './trie.js';
 export {
     countNodes,
     countWords,
@@ -40,12 +40,12 @@ export {
     orderTrie,
     trieNodeToRoot,
     walk,
-} from './trie-util';
-export { buildTrie, buildTrieFast, TrieBuilder } from './TrieBuilder';
-export { ChildMap, FLAG_WORD, TrieNode, TrieRoot } from './TrieNode';
-export { isDefined } from './utils/isDefined';
-export { mergeDefaults } from './utils/mergeDefaults';
-export { mergeOptionalWithDefaults } from './utils/mergeOptionalWithDefaults';
-export { normalizeWord, normalizeWordForCaseInsensitive, normalizeWordToLowercase } from './utils/normalizeWord';
-export type { HintedWalkerIterator, Hinting, WalkerIterator, YieldResult } from './walker';
-export { CompoundWordsMethod, hintedWalker, JOIN_SEPARATOR, walker, WORD_SEPARATOR } from './walker';
+} from './trie-util.js';
+export { buildTrie, buildTrieFast, TrieBuilder } from './TrieBuilder.js';
+export { ChildMap, FLAG_WORD, TrieNode, TrieRoot } from './TrieNode.js';
+export { isDefined } from './utils/isDefined.js';
+export { mergeDefaults } from './utils/mergeDefaults.js';
+export { mergeOptionalWithDefaults } from './utils/mergeOptionalWithDefaults.js';
+export { normalizeWord, normalizeWordForCaseInsensitive, normalizeWordToLowercase } from './utils/normalizeWord.js';
+export type { HintedWalkerIterator, Hinting, WalkerIterator, YieldResult } from './walker/index.js';
+export { CompoundWordsMethod, hintedWalker, JOIN_SEPARATOR, walker, WORD_SEPARATOR } from './walker/index.js';

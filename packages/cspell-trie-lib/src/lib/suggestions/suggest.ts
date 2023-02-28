@@ -1,18 +1,18 @@
-import { isWordTerminationNode } from '../trie-util';
-import type { TrieRoot } from '../TrieNode';
-import { clean } from '../utils/clean';
-import { CompoundWordsMethod, hintedWalker, JOIN_SEPARATOR, WORD_SEPARATOR } from '../walker';
-import type { GenSuggestionOptions, SuggestionOptions } from './genSuggestionsOptions';
-import { createSuggestionOptions } from './genSuggestionsOptions';
-import { visualLetterMaskMap } from './orthography';
+import { isWordTerminationNode } from '../trie-util.js';
+import type { TrieRoot } from '../TrieNode.js';
+import { clean } from '../utils/clean.js';
+import { CompoundWordsMethod, hintedWalker, JOIN_SEPARATOR, WORD_SEPARATOR } from '../walker/index.js';
+import type { GenSuggestionOptions, SuggestionOptions } from './genSuggestionsOptions.js';
+import { createSuggestionOptions } from './genSuggestionsOptions.js';
+import { visualLetterMaskMap } from './orthography.js';
 import type {
     MaxCost,
     SuggestionCollectorOptions,
     SuggestionGenerator,
     SuggestionResult,
     SuggestionResultBase,
-} from './suggestCollector';
-import { suggestionCollector } from './suggestCollector';
+} from './suggestCollector.js';
+import { suggestionCollector } from './suggestCollector.js';
 
 const baseCost = 100;
 const swapCost = 75;

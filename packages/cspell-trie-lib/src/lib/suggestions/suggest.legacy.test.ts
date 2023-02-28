@@ -1,9 +1,11 @@
-import { Trie } from '../trie';
-import { isWordTerminationNode } from '../trie-util';
-import type { TrieNode } from '../TrieNode';
-import { walker } from '../walker';
-import * as Sug from './suggest';
-import type { SuggestionResultBase } from './suggestCollector';
+import { describe, expect, test } from 'vitest';
+
+import { Trie } from '../trie.js';
+import { isWordTerminationNode } from '../trie-util.js';
+import type { TrieNode } from '../TrieNode.js';
+import { walker } from '../walker/index.js';
+import * as Sug from './suggest.js';
+import type { SuggestionResultBase } from './suggestCollector.js';
 
 describe('Validate Suggest', () => {
     test('Tests suggestions against Legacy Suggestion generator', () => {

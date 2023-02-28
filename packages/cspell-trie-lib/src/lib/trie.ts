@@ -1,12 +1,12 @@
 import type { Sequence } from 'gensequence';
 import { genSequence } from 'gensequence';
 
-import { CASE_INSENSITIVE_PREFIX, COMPOUND_FIX, FORBID_PREFIX, OPTIONAL_COMPOUND_FIX } from './constants';
-import type { FindFullResult, FindOptions, PartialFindOptions } from './find';
-import { createFindOptions, findLegacyCompound, findWord, findWordNode, isForbiddenWord } from './find';
-import { genSuggestions, suggest } from './suggest';
-import type { SuggestionCollector, SuggestionResult } from './suggestCollector';
-import type { SuggestionOptions } from './suggestions/genSuggestionsOptions';
+import { CASE_INSENSITIVE_PREFIX, COMPOUND_FIX, FORBID_PREFIX, OPTIONAL_COMPOUND_FIX } from './constants.js';
+import type { FindFullResult, FindOptions, PartialFindOptions } from './find.js';
+import { createFindOptions, findLegacyCompound, findWord, findWordNode, isForbiddenWord } from './find.js';
+import { genSuggestions, suggest } from './suggest.js';
+import type { SuggestionCollector, SuggestionResult } from './suggestCollector.js';
+import type { SuggestionOptions } from './suggestions/genSuggestionsOptions.js';
 import {
     countWords,
     createTriFromList,
@@ -14,13 +14,13 @@ import {
     isWordTerminationNode,
     iteratorTrieWords,
     orderTrie,
-} from './trie-util';
-import type { PartialTrieOptions, TrieNode, TrieOptions, TrieRoot } from './TrieNode';
-import { clean } from './utils/clean';
-import { mergeOptionalWithDefaults } from './utils/mergeOptionalWithDefaults';
-import { replaceAllFactory } from './utils/util';
-import type { CompoundWordsMethod, WalkerIterator } from './walker';
-import { walker } from './walker';
+} from './trie-util.js';
+import type { PartialTrieOptions, TrieNode, TrieOptions, TrieRoot } from './TrieNode.js';
+import { clean } from './utils/clean.js';
+import { mergeOptionalWithDefaults } from './utils/mergeOptionalWithDefaults.js';
+import { replaceAllFactory } from './utils/util.js';
+import type { CompoundWordsMethod, WalkerIterator } from './walker/index.js';
+import { walker } from './walker/index.js';
 
 export {
     CASE_INSENSITIVE_PREFIX,
@@ -28,8 +28,8 @@ export {
     defaultTrieOptions,
     FORBID_PREFIX,
     OPTIONAL_COMPOUND_FIX,
-} from './constants';
-export { PartialTrieOptions, TrieOptions } from './TrieNode';
+} from './constants.js';
+export { PartialTrieOptions, TrieOptions } from './TrieNode.js';
 
 /** @deprecated */
 export const COMPOUND = COMPOUND_FIX;

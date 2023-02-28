@@ -1,5 +1,5 @@
-import type { TrieNode } from './TrieNode';
-import type { TrieRefNode } from './trieRef';
+import type { TrieNode } from './TrieNode.js';
+import type { TrieRefNode } from './trieRef.js';
 
 export interface Emitter {
     push: (n: TrieRefNode) => number;

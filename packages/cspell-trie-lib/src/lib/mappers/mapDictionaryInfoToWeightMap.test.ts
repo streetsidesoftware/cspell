@@ -1,6 +1,8 @@
-import type { CostPosition } from '../distance/weightedMaps';
-import type { DictionaryInformation } from '../models/DictionaryInformation';
-import { mapDictionaryInformationToWeightMap } from './mapDictionaryInfoToWeightMap';
+import { describe, expect, test } from 'vitest';
+
+import type { CostPosition } from '../distance/weightedMaps.js';
+import type { DictionaryInformation } from '../models/DictionaryInformation.js';
+import { mapDictionaryInformationToWeightMap } from './mapDictionaryInfoToWeightMap.js';
 
 describe('mapDictionaryInfoToWeightMap', () => {
     test.each`

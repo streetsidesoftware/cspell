@@ -1,12 +1,11 @@
 import { opFilter, opFlatten, opMap, opUnique, pipe } from '@cspell/cspell-pipe/sync';
-import { map } from 'gensequence/dist/operators';
 
-import type { CharacterSetCosts } from '../models/DictionaryInformation';
-import type { SuggestionCostMapDef } from '../models/suggestionCostsDef';
-import { accentForms, caseForms, expandCharacterSet, stripAccents, stripNonAccents } from '../utils/text';
-import { clean } from '../utils/util';
-import { joinLetters } from './joinLetters';
-import type { EditCostsRequired } from './mapCosts';
+import type { CharacterSetCosts } from '../models/DictionaryInformation.js';
+import type { SuggestionCostMapDef } from '../models/suggestionCostsDef.js';
+import { accentForms, caseForms, expandCharacterSet, stripAccents, stripNonAccents } from '../utils/text.js';
+import { clean } from '../utils/util.js';
+import { joinLetters } from './joinLetters.js';
+import type { EditCostsRequired } from './mapCosts.js';
 
 export function parseAlphabet(
     cs: CharacterSetCosts,
@@ -106,7 +105,7 @@ export function parseAccents(cs: CharacterSetCosts, _editCost: EditCostsRequired
     const accents = joinLetters([
         ...pipe(
             expandCharacterSet(cs.characters),
-            map((char) => stripNonAccents(char))
+            opMap((char) => stripNonAccents(char))
         ),
     ]);
 

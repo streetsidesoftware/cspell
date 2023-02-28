@@ -1,5 +1,7 @@
-import type { HunspellCosts, HunspellInformation } from '../models/DictionaryInformation';
-import { __testing__, hunspellInformationToSuggestionCostDef } from './mapHunspellInformation';
+import { describe, expect, test } from 'vitest';
+
+import type { HunspellCosts, HunspellInformation } from '../models/DictionaryInformation.js';
+import { __testing__, hunspellInformationToSuggestionCostDef } from './mapHunspellInformation.js';
 
 // cspell:ignore conv OCONV
 const {

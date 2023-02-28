@@ -1,18 +1,18 @@
 import { opFilter, opFlatten, opMap, pipe } from '@cspell/cspell-pipe/sync';
 
-import type { HunspellCosts, HunspellInformation } from '../models/DictionaryInformation';
-import type { Locale } from '../models/locale';
-import type { SuggestionCostMapDef } from '../models/suggestionCostsDef';
-import { caseForms } from '../utils/text';
-import { isDefined, unique as uniqueU } from '../utils/util';
-import { joinLetters } from './joinLetters';
-import { mapHunspellCosts } from './mapCosts';
+import type { HunspellCosts, HunspellInformation } from '../models/DictionaryInformation.js';
+import type { Locale } from '../models/locale/index.js';
+import type { SuggestionCostMapDef } from '../models/suggestionCostsDef.js';
+import { caseForms } from '../utils/text.js';
+import { isDefined, unique as uniqueU } from '../utils/util.js';
+import { joinLetters } from './joinLetters.js';
+import { mapHunspellCosts } from './mapCosts.js';
 import {
     calcCostsForAccentedLetters,
     calcFirstCharacterReplace,
     parseAlphabet,
     splitMap,
-} from './mapToSuggestionCostDef';
+} from './mapToSuggestionCostDef.js';
 
 interface Costs extends Required<HunspellCosts> {
     locale?: string[] | undefined;

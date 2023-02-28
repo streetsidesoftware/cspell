@@ -1,7 +1,7 @@
 import assert from 'assert';
 
-import { PairingHeap } from '../utils/PairingHeap';
-import type { WeightMap } from './weightedMaps';
+import { PairingHeap } from '../utils/PairingHeap.js';
+import type { WeightMap } from './weightedMaps.js';
 
 /**
  * Calculate the edit distance between two words using an A* algorithm.
