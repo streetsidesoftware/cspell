@@ -1,7 +1,9 @@
 import * as Commander from 'commander';
 import * as Path from 'path';
+import type { Constructable } from 'vitest';
+import { afterEach, describe, expect, test, vi } from 'vitest';
 
-import * as app from './app';
+import * as app from './app.js';
 
 const projectRoot = Path.join(__dirname, '..');
 
@@ -25,7 +27,7 @@ function pathTemp(...parts: string[]): string {
     return pathRoot('temp', ...parts);
 }
 
-type ErrorResult = undefined | jest.Constructable | string | RegExp;
+type ErrorResult = undefined | Constructable | string | RegExp;
 type Test = [string, string[], ErrorResult];
 const tests: Test[] = [
     t('No Args', [], Commander.CommanderError),
@@ -34,31 +36,63 @@ const tests: Test[] = [
 ];
 
 describe('Validate App', () => {
+    afterEach(() => {
+        vi.restoreAllMocks();
+    });
     test.each(tests)('%s', async (_: string, args: string[], errorResult: ErrorResult) => {
+        const out = createCollector();
+
         const commander = getCommander();
+        commander.configureOutput({ writeOut: out.stdout, writeErr: out.stderr });
         commander.exitOverride();
 
-        const error = jest.spyOn(console, 'error').mockImplementation();
-        const log = jest.spyOn(console, 'log').mockImplementation();
-        const info = jest.spyOn(console, 'info').mockImplementation();
+        vi.spyOn(console, 'error').mockImplementation(out.error);
+        vi.spyOn(console, 'log').mockImplementation(out.log);
+        vi.spyOn(console, 'info').mockImplementation(out.info);
+        vi.spyOn(console, 'warn').mockImplementation(out.warn);
 
-        try {
-            const result = app.run(commander, argv(...args));
-            if (errorResult) {
-                // eslint-disable-next-line jest/no-conditional-expect
-                await expect(result).rejects.toThrow(errorResult);
-            } else {
-                // eslint-disable-next-line jest/no-conditional-expect
-                await expect(result).resolves.not.toThrow();
-            }
-        } finally {
-            error.mockRestore();
-            log.mockRestore();
-            info.mockRestore();
+        const result = app.run(commander, argv(...args));
+        if (errorResult) {
+            await expect(result).rejects.toThrow(errorResult);
+        } else {
+            await expect(result).resolves.not.toThrow();
         }
+        expect(out.getText()).toMatchSnapshot();
     });
 });
 
 function t(testName: string, args: string[], errorResult: ErrorResult): Test {
     return [testName, args, errorResult];
+}
+
+interface Collector {
+    log(text: string): void;
+    info(text: string): void;
+    warn(text: string): void;
+    error(text: string): void;
+    stdout(text: string): void;
+    stderr(text: string): void;
+    lines: string[];
+    getText(): string;
+}
+
+function createCollector(): Collector {
+    const lines: string[] = [];
+
+    function handler(prefix: string): (text: string) => void {
+        return function (text: string) {
+            lines.push(prefix + text.split('\n').join('\n' + prefix));
+        };
+    }
+    function getText(): string {
+        return lines.join('\n');
+    }
+    const log = handler('[log]: ');
+    const info = handler('[info]: ');
+    const warn = handler('[warn]: ');
+    const error = handler('[error]: ');
+    const stdout = handler('[stdout]: ');
+    const stderr = handler('[stderr]: ');
+
+    return { lines, getText, log, info, warn, error, stdout, stderr };
 }

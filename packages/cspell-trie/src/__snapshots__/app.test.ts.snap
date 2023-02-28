@@ -1,0 +1,25 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Validate App > No Args 1`] = `
+"[stderr]: Usage: worker [options] [command]
+[stderr]: 
+[stderr]: Options:
+[stderr]:   -V, --version                 output the version number
+[stderr]:   -h, --help                    display help for command
+[stderr]: 
+[stderr]: Commands:
+[stderr]:   create [options] <file.txt>   Generate a file for use with cspell
+[stderr]:   reader [options] <file.trie>  Read a cspell trie file and output the list of
+[stderr]:                                 words.
+[stderr]:   help [command]                display help for command
+[stderr]: "
+`;
+
+exports[`Validate App > create file 1`] = `
+"[log]: Create Trie
+[log]: Generating...
+[log]: Processing Trie
+[log]: Export Trie"
+`;
+
+exports[`Validate App > read file 1`] = `"[log]: Reading Trie"`;

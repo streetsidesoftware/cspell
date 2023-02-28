@@ -6,14 +6,29 @@ import type { Sequence } from 'gensequence';
 import { genSequence } from 'gensequence';
 import * as path from 'path';
 import * as stream from 'stream';
+import { fileURLToPath } from 'url';
 import * as zlib from 'zlib';
 
 const UTF8: BufferEncoding = 'utf8';
 
-// eslint-disable-next-line @typescript-eslint/no-var-requires
-const packageInfo = require('../package.json');
-const version = packageInfo['version'];
-export function run(program: commander.Command, argv: string[]): Promise<commander.Command> {
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+interface PackageJson {
+    version: string;
+}
+
+async function getPackageInfo(): Promise<PackageJson> {
+    const packageInfo = await fsp.readFile(path.join(__dirname, '../package.json'), 'utf8');
+    return JSON.parse(packageInfo);
+}
+
+async function getPackageVersion() {
+    return (await getPackageInfo()).version;
+}
+
+export async function run(program: commander.Command, argv: string[]): Promise<commander.Command> {
+    const version = await getPackageVersion();
     program.version(version);
 
     program
