@@ -1,10 +1,4 @@
 {
-    "extends": "../../tsconfig.json",
-    "compilerOptions": {
-        "outDir": "dist",
-        "lib": ["ES2020", "ES2021.WeakRef"]
-    },
-    "include": [
-        "src/**/*.ts"
-    ]
+    "files": [],
+    "references": [ { "path": "./tsconfig.cjs.json" }, { "path": "./tsconfig.esm.json" }]
 }
