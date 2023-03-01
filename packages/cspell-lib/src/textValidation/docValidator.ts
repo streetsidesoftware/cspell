@@ -24,7 +24,7 @@ import type { SpellingDictionaryCollection } from '../SpellingDictionary';
 import { getDictionaryInternal, getDictionaryInternalSync } from '../SpellingDictionary';
 import type { WordSuggestion } from '../suggestions';
 import { calcSuggestionAdjustedToToMatchCase } from '../suggestions';
-import { toError } from '../util/errors';
+import { catchPromiseError, toError, wrapCall } from '../util/errors';
 import { AutoCache } from '../util/simpleCache';
 import type { MatchRange } from '../util/TextRange';
 import { createTimer } from '../util/timer';
@@ -110,12 +110,13 @@ export class DocumentValidator {
         const useSearchForConfig =
             (!options.noConfigSearch && !settings.noConfigSearch) || options.noConfigSearch === false;
         const optionsConfigFile = options.configFile;
-        const localConfig = optionsConfigFile
-            ? this.errorCatcherWrapper(() => loadConfigSync(optionsConfigFile, settings))
+        const localConfigFn = optionsConfigFile
+            ? () => loadConfigSync(optionsConfigFile, settings)
             : useSearchForConfig
-            ? this.errorCatcherWrapper(() => searchForDocumentConfigSync(this._document, settings, settings))
+            ? () => searchForDocumentConfigSync(this._document, settings, settings)
             : undefined;
 
+        const localConfig = localConfigFn && wrapCall(localConfigFn, (e) => this.addPossibleError(e))();
         this.addPossibleError(localConfig?.__importRef?.error);
 
         const config = mergeSettings(settings, localConfig);
@@ -168,11 +169,11 @@ export class DocumentValidator {
         const useSearchForConfig =
             (!options.noConfigSearch && !settings.noConfigSearch) || options.noConfigSearch === false;
         const pLocalConfig = options.configFile
-            ? this.catchError(loadConfig(options.configFile, settings))
+            ? loadConfig(options.configFile, settings)
             : useSearchForConfig
-            ? this.catchError(searchForDocumentConfig(this._document, settings, settings))
+            ? searchForDocumentConfig(this._document, settings, settings)
             : undefined;
-        const localConfig = (await pLocalConfig) || {};
+        const localConfig = (await catchPromiseError(pLocalConfig, (e) => this.addPossibleError(e))) || {};
 
         this.addPossibleError(localConfig?.__importRef?.error);
 
@@ -379,24 +380,9 @@ export class DocumentValidator {
         }
     }
 
-    private addPossibleError(error: Error | undefined | unknown) {
+    private addPossibleError(error: Error | undefined | unknown): undefined {
         if (!error) return;
         error = this.errors.push(toError(error));
-    }
-
-    private catchError<P>(p: Promise<P>): Promise<P | undefined> {
-        return p.catch((error) => {
-            this.addPossibleError(error);
-            return undefined;
-        });
-    }
-    private errorCatcherWrapper<P>(fn: () => P): P | undefined {
-        try {
-            return fn();
-        } catch (error) {
-            this.addPossibleError(error);
-        }
-        return undefined;
     }
 
     private _parse(): Iterable<ParsedText> {
@@ -506,34 +492,34 @@ function searchForDocumentConfigSync(
     return searchForConfigSync(uriToFilePath(uri), pnpSettings) || defaultConfig;
 }
 
+interface ShouldCheckDocumentResult {
+    errors: Error[];
+    shouldCheck: boolean;
+}
+
 export async function shouldCheckDocument(
     doc: TextDocumentRef,
     options: DocumentValidatorOptions,
     settings: CSpellUserSettings
-) {
+): Promise<ShouldCheckDocumentResult> {
     const errors: Error[] = [];
 
-    function addPossibleError(error: Error | undefined | unknown) {
-        if (!error) return;
+    function addPossibleError(error: Error | undefined | unknown): undefined {
+        if (!error) return undefined;
         error = errors.push(toError(error));
-    }
-
-    function catchError<P>(p: Promise<P>): Promise<P | undefined> {
-        return p.catch((error) => {
-            addPossibleError(error);
-            return undefined;
-        });
+        return undefined;
     }
 
     async function shouldCheck(): Promise<boolean> {
         const useSearchForConfig =
             (!options.noConfigSearch && !settings.noConfigSearch) || options.noConfigSearch === false;
         const pLocalConfig = options.configFile
-            ? catchError(loadConfig(options.configFile, settings))
+            ? loadConfig(options.configFile, settings)
             : useSearchForConfig
-            ? catchError(searchForDocumentConfig(doc, settings, settings))
+            ? searchForDocumentConfig(doc, settings, settings)
             : undefined;
-        const localConfig = (await pLocalConfig) || {};
+
+        const localConfig = (await catchPromiseError(pLocalConfig, addPossibleError)) || {};
 
         addPossibleError(localConfig?.__importRef?.error);
 
@@ -546,3 +532,7 @@ export async function shouldCheckDocument(
 
     return { errors, shouldCheck: await shouldCheck() };
 }
+
+export const __testing__ = {
+    sanitizeSuggestion,
+};

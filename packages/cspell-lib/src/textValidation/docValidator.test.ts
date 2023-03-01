@@ -1,18 +1,26 @@
+import type { CSpellUserSettings } from '@cspell/cspell-types';
 import assert from 'assert';
 import { promises as fs } from 'fs';
 import * as path from 'path';
+import { pathToFileURL } from 'url';
 
 import type { TextDocument } from '../Models/TextDocument';
 import { createTextDocument } from '../Models/TextDocument';
 import type { ValidationIssue } from '../Models/ValidationIssue';
+import type { WordSuggestion } from '../suggestions';
 import { AutoCache } from '../util/simpleCache';
-import { DocumentValidator } from './docValidator';
+import { toUri } from '../util/Uri';
+import type { DocumentValidatorOptions } from './docValidator';
+import { __testing__, DocumentValidator, shouldCheckDocument } from './docValidator';
 
 const docCache = new AutoCache(_loadDoc, 100);
 const fixturesDir = path.join(__dirname, '../../fixtures');
 
 const oc = expect.objectContaining;
 const ac = expect.arrayContaining;
+const sc = expect.stringContaining;
+
+const { sanitizeSuggestion } = __testing__;
 
 describe('docValidator', () => {
     test('DocumentValidator', () => {
@@ -117,6 +125,25 @@ describe('docValidator', () => {
         }
     );
 
+    test.each`
+        filename                                   | maxDuplicateProblems | expectedIssues                                                                                                                                                                                | expectedRawIssues
+        ${fix('sample-with-errors.ts')}            | ${undefined}         | ${['dockblock', 'Helllo']}                                                                                                                                                                    | ${undefined}
+        ${fix('sample-with-many-errors.ts')}       | ${undefined}         | ${['reciever', 'naame', 'naame', 'naame', 'reciever', 'Reciever', 'naame', 'Reciever', 'naame', 'kount', 'Reciever', 'kount', 'colector', 'recievers', 'Reciever', 'recievers', 'recievers']} | ${undefined}
+        ${fix('sample-with-many-errors.ts')}       | ${1}                 | ${['reciever', 'naame', 'Reciever', 'kount', 'colector', 'recievers']}                                                                                                                        | ${undefined}
+        ${fix('parser/sample.ts')}                 | ${1}                 | ${['serrors']}                                                                                                                                                                                | ${['\\x73errors']}
+        ${fix('sample-with-directives-errors.ts')} | ${1}                 | ${['disable-prev', 'ignored', 'world', 'enable-line']}                                                                                                                                        | ${undefined}
+    `(
+        'checkDocumentAsync $filename $maxDuplicateProblems',
+        async ({ filename, maxDuplicateProblems, expectedIssues, expectedRawIssues }) => {
+            const doc = await loadDoc(filename);
+            const dVal = new DocumentValidator(doc, { generateSuggestions: false }, { maxDuplicateProblems });
+            const r = await dVal.checkDocumentAsync();
+
+            expect(r.map((issue) => issue.text)).toEqual(expectedIssues);
+            expect(extractRawText(doc.text, r)).toEqual(expectedRawIssues ?? expectedIssues);
+        }
+    );
+
     test('updateDocumentText', () => {
         // cspell:ignore foor
         const expectedIssues = [
@@ -135,6 +162,52 @@ describe('docValidator', () => {
         dVal.updateDocumentText(doc.text + '# cspell:ignore foor\n');
         expect(dVal.checkDocument()).toEqual([]);
     });
+
+    function ws(ex: Partial<WordSuggestion>): Partial<WordSuggestion> {
+        return ex;
+    }
+
+    test.each`
+        sug                                                                   | expected
+        ${ws({ word: 'a' })}                                                  | ${{ word: 'a' }}
+        ${ws({ word: 'a', wordAdjustedToMatchCase: 'A' })}                    | ${{ word: 'a', wordAdjustedToMatchCase: 'A' }}
+        ${ws({ word: 'a', isPreferred: undefined })}                          | ${{ word: 'a' }}
+        ${ws({ word: 'a', isPreferred: false })}                              | ${{ word: 'a' }}
+        ${ws({ word: 'a', isPreferred: true })}                               | ${{ word: 'a', isPreferred: true }}
+        ${ws({ word: 'a', wordAdjustedToMatchCase: '', isPreferred: false })} | ${{ word: 'a' }}
+        ${ws({ word: 'a', wordAdjustedToMatchCase: 'A', isPreferred: true })} | ${{ word: 'a', wordAdjustedToMatchCase: 'A', isPreferred: true }}
+    `('sanitizeSuggestion $sug', ({ sug, expected }) => {
+        expect(sanitizeSuggestion(sug)).toEqual(expected);
+    });
+});
+
+describe('shouldCheckDocument', () => {
+    test.each`
+        file                            | options                           | settings                                  | expected
+        ${'src/code.ts'}                | ${opts()}                         | ${s()}                                    | ${true}
+        ${'src/code.ts'}                | ${opts({ noConfigSearch: true })} | ${s()}                                    | ${true}
+        ${'src/code.ts'}                | ${opts()}                         | ${s({ noConfigSearch: true })}            | ${true}
+        ${'src/code.ts'}                | ${opts()}                         | ${s({ loadDefaultConfiguration: false })} | ${true}
+        ${'src/code.ts'}                | ${opts({ noConfigSearch: true })} | ${s({ loadDefaultConfiguration: false })} | ${true}
+        ${'node_modules/mod/index.js'}  | ${opts()}                         | ${s()}                                    | ${false}
+        ${'node_modules/mod/index.js'}  | ${opts({ noConfigSearch: true })} | ${s()}                                    | ${true}
+        ${'node_modules/mod/index.js'}  | ${opts()}                         | ${s({ noConfigSearch: true })}            | ${true}
+        ${'node_modules/mod/index.js'}  | ${opts()}                         | ${s({ loadDefaultConfiguration: false })} | ${false}
+        ${'node_modules/mod/index.js'}  | ${opts({ noConfigSearch: true })} | ${s({ loadDefaultConfiguration: false })} | ${true}
+        ${'node_modules/mod/index.jpg'} | ${opts()}                         | ${s({ loadDefaultConfiguration: false })} | ${false}
+        ${'node_modules/mod/index.jpg'} | ${opts()}                         | ${s({ loadDefaultConfiguration: true })}  | ${false}
+        ${'src/code.ts'}                | ${opts({ configFile: '_nf_' })}   | ${s()}                                    | ${{ errors: [oc({ message: sc('Failed to read') })], shouldCheck: true }}
+    `(
+        'shouldCheckDocument file: $file options: $options settings: $settings',
+        async ({ file, options, settings, expected }) => {
+            const uri = toUri(pathToFileURL(file));
+            if (typeof expected === 'boolean') {
+                expected = { errors: [], shouldCheck: expected };
+            }
+            console.log(uri);
+            expect(await shouldCheckDocument({ uri }, options, settings)).toEqual(expected);
+        }
+    );
 });
 
 function extractRawText(text: string, issues: ValidationIssue[]): string[] {
@@ -165,4 +238,17 @@ function fix(...fixtureFile: string[]): string {
 
 function fixDict(...fixtureFile: string[]): string {
     return fix('../dictionaries', ...fixtureFile);
+}
+
+function opts(...options: DocumentValidatorOptions[]): DocumentValidatorOptions {
+    return merge({}, ...options);
+}
+
+function s(...settings: CSpellUserSettings[]): CSpellUserSettings {
+    return merge({}, ...settings);
+}
+
+function merge<T extends object>(first: T, ...rest: T[]): T {
+    if (!rest.length) return first;
+    return { ...first, ...merge(rest[0], ...rest.slice(1)) };
 }
