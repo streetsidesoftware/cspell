@@ -3,12 +3,11 @@ import assert from 'assert';
 import { promises as fs } from 'fs';
 import * as path from 'path';
 import { pathToFileURL } from 'url';
-import { ExtendedSuggestion } from '../Models/Suggestion';
 
 import type { TextDocument } from '../Models/TextDocument';
 import { createTextDocument } from '../Models/TextDocument';
 import type { ValidationIssue } from '../Models/ValidationIssue';
-import { WordSuggestion } from '../suggestions';
+import type { WordSuggestion } from '../suggestions';
 import { AutoCache } from '../util/simpleCache';
 import { toUri } from '../util/Uri';
 import type { DocumentValidatorOptions } from './docValidator';
