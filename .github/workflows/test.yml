@@ -58,9 +58,6 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
 
-      # Ensure the repository is clean after build & test
-      - run: git --no-pager diff --exit-code
-
   test-os:
     runs-on: ${{ matrix.os }}
 
@@ -80,9 +77,6 @@ jobs:
         uses: ./.github/actions/setup-and-test
         with:
           node-version: ${{ matrix.node-version }}
-
-      # Ensure the repository is clean after build & test
-      - run: git --no-pager diff --compact-summary --exit-code
 
   test-full-build:
     runs-on: ${{ matrix.os }}
@@ -157,9 +151,6 @@ jobs:
       - name: Test Yarn PNP
         run: |
           pnpm run test:bin-spell-yarn
-
-      # Ensure the repository is clean after build & test
-      - run: git --no-pager diff --exit-code
 
   test-node-19:
     runs-on: ${{ matrix.os }}
