@@ -3,9 +3,9 @@ import rollupPluginNodeResolve from '@rollup/plugin-node-resolve';
 import rollupPluginTypescript from '@rollup/plugin-typescript';
 import rollupPluginJson from '@rollup/plugin-json';
 import rollupPluginCommonjs from '@rollup/plugin-commonjs';
-import { readFileSync } from 'fs';
+// import { readFileSync } from 'fs';
 
-const pkg = JSON.parse(readFileSync('./package.json', 'utf-8'));
+// const pkg = JSON.parse(readFileSync('./package.json', 'utf-8'));
 
 /** @type {import('rollup').RollupOptions} */
 const common = {
