@@ -7,7 +7,6 @@
   "scripts": {
     "clean": "shx rm -rf dist coverage .tsbuildinfo",
     "build": "tsc -p .",
-    "build-dev": "tsc -p tsconfig.dev.json",
     "clean-build": "pnpm run clean && pnpm run build",
     "coverage": "jest --coverage",
     "test-watch": "jest --watch",

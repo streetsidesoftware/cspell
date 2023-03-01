@@ -8,7 +8,6 @@
   "scripts": {
     "clean": "shx rm -rf dist .tsbuildinfo",
     "build": "pnpm run compile",
-    "build-dev": "tsc -p tsconfig.dev.json",
     "clean-build": "pnpm run clean && pnpm run build",
     "compile": "tsc -p .",
     "test": "node bin.js"

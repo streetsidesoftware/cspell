@@ -31,11 +31,11 @@
     "!**/*.map"
   ],
   "scripts": {
-    "build": "pnpm run clean && pnpm run build:cjs && pnpm run build:esm",
+    "build": "tsc -b . && ts2mjs dist/esm",
     "build:cjs": "tsc -p tsconfig.cjs.json",
     "build:esm": "tsc -p tsconfig.esm.json && ts2mjs dist/esm",
     "build:clean": "pnpm run clean && pnpm run build",
-    "watch": "tsc -p . -w",
+    "watch": "tsc -b . -w",
     "clean": "shx rm -rf dist coverage .tsbuildinfo",
     "clean-build": "pnpm build:clean",
     "coverage": "pnpm coverage:vitest && pnpm coverage:fix",
@@ -54,7 +54,5 @@
   "engines": {
     "node": ">=14"
   },
-  "devDependencies": {
-    "@types/node": "^18.14.2"
-  }
+  "devDependencies": {}
 }

@@ -18,7 +18,6 @@
   "scripts": {
     "clean": "shx rm -rf dist temp coverage",
     "build": "tsc -p .",
-    "build-dev": "tsc -p tsconfig.dev.json",
     "clean-build": "pnpm run clean && pnpm run build",
     "coverage": "pnpm coverage:vitest && pnpm coverage:fix",
     "coverage:vitest": "vitest run --coverage",
@@ -49,7 +48,5 @@
   "engines": {
     "node": ">=14"
   },
-  "devDependencies": {
-    "@types/node": "^18.14.2"
-  }
+  "devDependencies": {}
 }

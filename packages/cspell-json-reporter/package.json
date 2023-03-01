@@ -28,7 +28,6 @@
   "scripts": {
     "clean": "shx rm -rf dist temp coverage .tsbuildinfo",
     "build": "pnpm run compile",
-    "build-dev": "tsc -p tsconfig.dev.json",
     "clean-build": "pnpm run clean && pnpm run build",
     "compile": "tsc -p .",
     "watch": "tsc --watch -p .",

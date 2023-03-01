@@ -29,7 +29,6 @@
   ],
   "scripts": {
     "build": "tsc -p .",
-    "build-dev": "tsc -p tsconfig.dev.json",
     "watch": "tsc -p . -w",
     "clean": "shx rm -rf dist coverage .tsbuildinfo",
     "clean-build": "pnpm run clean && pnpm run build",
@@ -53,7 +52,5 @@
     "cspell-glob": "workspace:*",
     "find-up": "^5.0.0"
   },
-  "devDependencies": {
-    "@types/node": "^18.14.2"
-  }
+  "devDependencies": {}
 }
