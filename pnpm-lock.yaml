@@ -827,6 +827,12 @@ importers:
     devDependencies:
       vitest: 0.29.1
 
+  test-packages/cspell-strong-weak-map/test-cspell-strong-weak-map:
+    specifiers:
+      '@cspell/strong-weak-map': workspace:*
+    dependencies:
+      '@cspell/strong-weak-map': link:../../../packages/cspell-strong-weak-map
+
   test-packages/cspell-tools/test-cspell-tools:
     specifiers:
       '@cspell/cspell-tools': workspace:*
