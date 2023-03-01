@@ -100,7 +100,7 @@ const config = {
             },
         },
         {
-            files: ['vitest.config.*', '**/*.test.*'],
+            files: ['vitest.config.*', '**/*.test.*', '**/test.*'],
             rules: {
                 'node/no-extraneous-import': 'off',
                 'node/no-extraneous-require': 'off',

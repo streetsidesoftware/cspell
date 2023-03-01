@@ -1,3 +1,5 @@
+import { describe, expect, test } from 'vitest';
+
 import { FetchUrlError } from './FetchError';
 import { toURL } from './util';
 

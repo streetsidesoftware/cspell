@@ -1,3 +1,5 @@
+import { describe, expect, test } from 'vitest';
+
 import { encodeUtf16BE, encodeUtf16LE } from './encode-decode';
 import { createDecoderTransformer, encoderTransformer } from './transformers';
 

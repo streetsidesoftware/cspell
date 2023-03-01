@@ -1,6 +1,7 @@
 import { loremIpsum } from 'lorem-ipsum';
+import { describe, expect, test } from 'vitest';
 
-import { makePathToFile, pathToTemp } from '../../test/helper';
+import { makePathToFile, pathToTemp } from '../../test/test.helper';
 import { readFile } from './fileReader';
 import * as fileWriter from './fileWriter';
 

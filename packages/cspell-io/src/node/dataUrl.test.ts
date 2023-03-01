@@ -1,4 +1,6 @@
-import { pathToSample } from '../test/helper';
+import { describe, expect, test } from 'vitest';
+
+import { pathToSample } from '../test/test.helper';
 import { decodeDataUrl, encodeDataUrl, encodeDataUrlFromFile, guessMimeType, toDataUrl } from './dataUrl';
 
 const sc = expect.stringContaining;

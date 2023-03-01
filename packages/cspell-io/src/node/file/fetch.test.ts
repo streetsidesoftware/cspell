@@ -1,3 +1,5 @@
+import { describe, expect, test } from 'vitest';
+
 import { fetch, fetchHead } from './fetch';
 
 describe('fetch', () => {

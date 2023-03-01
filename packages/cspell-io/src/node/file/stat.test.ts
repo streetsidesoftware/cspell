@@ -1,4 +1,5 @@
 import { join } from 'path';
+import { describe, expect, test } from 'vitest';
 
 import { getStat, getStatSync } from './stat';
 

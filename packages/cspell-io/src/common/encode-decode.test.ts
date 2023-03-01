@@ -1,3 +1,5 @@
+import { describe, expect, test } from 'vitest';
+
 import { decode, encodeString, swapBytes, swapBytesInPlace } from './encode-decode';
 
 const samples = ['This is a bit of text'];
