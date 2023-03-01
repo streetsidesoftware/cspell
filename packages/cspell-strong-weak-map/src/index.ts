@@ -1,1 +1,1 @@
-export { StrongWeakMap } from './StrongWeakMap';
+export { StrongWeakMap } from './StrongWeakMap.js';

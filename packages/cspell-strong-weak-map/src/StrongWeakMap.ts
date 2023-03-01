@@ -31,8 +31,10 @@ export class StrongWeakMap<K, V extends object> implements Map<K, V> {
         }
     }
     /**
-     * Returns a specified element from the Map object. If the value that is associated to the provided key is an object, then you will get a reference to that object and any change made to that object will effectively modify it inside the Map.
-     * @returns Returns the element associated with the specified key. If no element is associated with the specified key, undefined is returned.
+     * Returns a specified element from the Map object. You will get a reference to the value object and any change made to that
+     * object will effectively modify it inside the Map.
+     * @returns Returns the element associated with the specified key.
+     *   If no element is associated with the specified key, undefined is returned.
      */
     get(key: K): V | undefined {
         const ref = this.map.get(key);
@@ -44,6 +46,19 @@ export class StrongWeakMap<K, V extends object> implements Map<K, V> {
         }
         return value;
     }
+
+    /**
+     * Returns a specified element from the Map. If the element isn't found, the resolver function is called and the result is stored in the map and returned.
+     */
+    autoGet(key: K, resolver: (key: K) => V): V {
+        const found = this.get(key);
+        if (found) return found;
+
+        const created = resolver(key);
+        this.set(key, created);
+        return created;
+    }
+
     /**
      * Note: has will cause the value object to live longer.
      * See: [WeakRef - JavaScript | MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/WeakRef#notes_on_weakrefs)

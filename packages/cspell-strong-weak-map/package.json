@@ -14,35 +14,21 @@
   "author": "Jason Dent <jason@streetsidesoftware.nl>",
   "homepage": "https://github.com/streetsidesoftware/cspell/tree/main/packages/cspell-strong-weak-map#readme",
   "license": "MIT",
-  "main": "dist/index.js",
-  "directories": {
-    "dist": "dist"
-  },
+  "type": "commonjs",
+  "main": "dist/cjs/index.js",
+  "module": "dist/esm/index.mjs",
   "exports": {
     ".": {
-      "require": "./dist/index.js"
-    },
-    "./index": "./dist/index.js",
-    "./index.js": "./dist/index.js",
-    "./index.d.ts": "./dist/index.d.ts"
-  },
-  "typings": "dist/index.d.ts",
-  "typesVersions": {
-    "*": {
-      "index.d.ts": [
-        "dist/index.d.ts"
-      ],
-      "dist/index.d.ts": [
-        "dist/index.d.ts"
-      ],
-      "*": [
-        "dist/*",
-        "dist/*/index.d.ts"
-      ]
+      "import": "./dist/esm/index.mjs",
+      "require": "./dist/cjs/index.js"
     }
   },
+  "typings": "dist/cjs/index.d.ts",
   "files": [
     "dist",
+    "!dist/esm/**/*.js",
+    "!dist/esm/**/*.ts",
+    "!**/*.tsbuildInfo",
     "!**/__mocks__",
     "!**/*.spec.*",
     "!**/examples/**",
@@ -51,13 +37,18 @@
     "!**/*.map"
   ],
   "scripts": {
-    "build": "tsc -p .",
-    "watch": "tsc -p . -w",
+    "build": "tsc -b . && ts2mjs dist/esm",
+    "build:esm": "tsc -p tsconfig.esm.json",
+    "build:cjs": "tsc -p tsconfig.cjs.json",
+    "watch": "tsc -b . -w",
     "clean": "shx rm -rf dist coverage .tsbuildinfo",
     "clean-build": "pnpm run clean && pnpm run build",
-    "coverage": "node --expose-gc ../../node_modules/jest/bin/jest.js --coverage",
-    "test-watch": "node --expose-gc ../../node_modules/jest/bin/jest.js --watch",
-    "test": "node --expose-gc ../../node_modules/jest/bin/jest.js"
+    "coverage": "pnpm coverage:vitest && pnpm coverage:fix",
+    "coverage:vitest": "pnpm vitest run --coverage",
+    "coverage:fix": "nyc report --temp-dir \"$(pwd)/coverage\" --reporter lcov --report-dir \"$(pwd)/coverage\" --cwd ../..",
+    "test-watch": "pnpm vitest",
+    "test": "pnpm vitest run",
+    "vitest": "node --expose-gc ../../node_modules/vitest/vitest.mjs"
   },
   "repository": {
     "type": "git",

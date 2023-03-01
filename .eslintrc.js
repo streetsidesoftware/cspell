@@ -81,6 +81,7 @@ const config = {
         {
             files: ['vitest.config.*', '**/*.test.*'],
             rules: {
+                'node/no-extraneous-import': 'off',
                 'node/no-unpublished-import': 'off',
             },
         },

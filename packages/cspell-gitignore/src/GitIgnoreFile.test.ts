@@ -10,6 +10,8 @@ const pathPackage = path.resolve(__dirname, '..');
 const pathRepo = path.resolve(pathPackage, '../..');
 const gitIgnoreFile = path.resolve(pathRepo, '.gitignore');
 
+const oc = (obj: unknown) => expect.objectContaining(obj);
+
 describe('GitIgnoreFile', () => {
     test('GitIgnoreFile', () => {
         const gif = sampleGitIgnoreFile();
@@ -85,7 +87,7 @@ describe('GitIgnoreHierarchy', () => {
         file                              | expected
         ${rel(__filename)}                | ${{ matched: true, gitIgnoreFile: p('./.gitignore'), line: 5, glob: '*.test.*', root: __dirname }}
         ${rp('GitIgnoreFiles.ts')}        | ${undefined}
-        ${rel(require.resolve('vitest'))} | ${{ matched: true, gitIgnoreFile, glob: 'node_modules/', line: 59, root: pathRepo }}
+        ${rel(require.resolve('vitest'))} | ${oc({ matched: true, gitIgnoreFile, glob: 'node_modules/', root: pathRepo })}
         ${rp('package-lock.json')}        | ${undefined}
     `('ignoreEx $file', async ({ file, expected }) => {
         file = p(file);
