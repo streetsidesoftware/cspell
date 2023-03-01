@@ -102,7 +102,7 @@
     "!**/*.map"
   ],
   "scripts": {
-    "build": "pnpm build:esm && pnpm build:cjs",
+    "build": "tsc -b . && ts2mjs dist/esm",
     "build:cjs": "tsc -p tsconfig.cjs.json",
     "build:esm": "tsc -p tsconfig.esm.json && ts2mjs dist/esm",
     "watch": "tsc -p . -w",
