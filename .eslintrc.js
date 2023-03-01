@@ -79,13 +79,6 @@ const config = {
             },
         },
         {
-            files: ['vitest.config.*', '**/*.test.*'],
-            rules: {
-                'node/no-extraneous-import': 'off',
-                'node/no-unpublished-import': 'off',
-            },
-        },
-        {
             files: ['packages/cspell-pipe/**/*.ts'],
             extends: ['plugin:unicorn/recommended'],
             rules: {
@@ -104,6 +97,14 @@ const config = {
             },
             rules: {
                 'node/no-unsupported-features/es-syntax': 'off',
+            },
+        },
+        {
+            files: ['vitest.config.*', '**/*.test.*'],
+            rules: {
+                'node/no-extraneous-import': 'off',
+                'node/no-extraneous-require': 'off',
+                'node/no-unpublished-import': 'off',
             },
         },
     ],

@@ -161,7 +161,6 @@ importers:
       rollup-plugin-dts: ^5.2.0
       semver: ^7.3.8
       strip-ansi: ^6.0.1
-      vitest: ^0.29.2
       vscode-uri: ^3.0.7
     dependencies:
       '@cspell/cspell-pipe': link:../cspell-pipe
@@ -192,7 +191,6 @@ importers:
       minimatch: 7.4.1
       rollup: 3.17.3
       rollup-plugin-dts: 5.2.0_5h3uv6h5hdci4akcbsseut5pjq
-      vitest: 0.29.2
 
   packages/cspell-bundled-dicts:
     specifiers:
@@ -390,21 +388,13 @@ importers:
   packages/cspell-gitignore:
     specifiers:
       '@types/node': ^18.14.2
-      '@vitest/coverage-c8': ^0.29.2
-      '@vitest/coverage-istanbul': ^0.28.5
       cspell-glob: workspace:*
       find-up: ^5.0.0
-      vite: ^4.1.4
-      vitest: ^0.29.2
     dependencies:
       cspell-glob: link:../cspell-glob
       find-up: 5.0.0
     devDependencies:
       '@types/node': 18.14.2
-      '@vitest/coverage-c8': 0.29.2_vitest@0.29.2
-      '@vitest/coverage-istanbul': 0.28.5
-      vite: 4.1.4_@types+node@18.14.2
-      vitest: 0.29.2
 
   packages/cspell-glob:
     specifiers:
@@ -542,21 +532,15 @@ importers:
     specifiers:
       '@types/node': ^18.14.2
       globby: ^13.1.3
-      jest: ^29.4.3
-      vitest: ^0.29.2
     devDependencies:
       '@types/node': 18.14.2
       globby: 13.1.3
-      jest: 29.4.3_@types+node@18.14.2
-      vitest: 0.29.2
 
   packages/cspell-service-bus:
     specifiers:
       '@types/node': ^18.14.2
-      vitest: ^0.29.2
     devDependencies:
       '@types/node': 18.14.2
-      vitest: 0.29.2
 
   packages/cspell-strong-weak-map:
     specifiers: {}
@@ -602,14 +586,12 @@ importers:
       commander: ^10.0.0
       cspell-trie-lib: workspace:*
       gensequence: ^5.0.2
-      vitest: ^0.29.2
     dependencies:
       commander: 10.0.0
       cspell-trie-lib: link:../cspell-trie-lib
       gensequence: 5.0.2
     devDependencies:
       '@types/node': 18.14.2
-      vitest: 0.29.2
 
   packages/cspell-trie-lib:
     specifiers:
@@ -633,23 +615,16 @@ importers:
       ajv-cli: ^5.0.0
       ts-json-schema-generator: ^1.2.0
       typescript: ^4.9.5
-      vitest: ^0.29.2
     devDependencies:
       ajv-cli: 5.0.0
       ts-json-schema-generator: 1.2.0
       typescript: 4.9.5
-      vitest: 0.29.2
 
   packages/dynamic-import:
     specifiers:
       import-meta-resolve: ^2.2.1
-      vite: ^4.1.4
-      vitest: ^0.29.2
     dependencies:
       import-meta-resolve: 2.2.1
-    devDependencies:
-      vite: 4.1.4
-      vitest: 0.29.2
 
   packages/hunspell-reader:
     specifiers:
@@ -776,56 +751,38 @@ importers:
   test-packages/cspell-pipe/test-cspell-pipe:
     specifiers:
       '@cspell/cspell-pipe': workspace:*
-      vitest: ^0.29.2
     dependencies:
       '@cspell/cspell-pipe': link:../../../packages/cspell-pipe
-    devDependencies:
-      vitest: 0.29.2
 
   test-packages/cspell-pipe/test-cspell-pipe-esm:
     specifiers:
       '@cspell/cspell-pipe': workspace:*
-      vitest: ^0.29.2
     dependencies:
       '@cspell/cspell-pipe': link:../../../packages/cspell-pipe
-    devDependencies:
-      vitest: 0.29.2
 
   test-packages/cspell-pipe/test-cspell-pipe-rollup:
     specifiers:
       '@cspell/cspell-pipe': workspace:*
-      vitest: ^0.29.2
     dependencies:
       '@cspell/cspell-pipe': link:../../../packages/cspell-pipe
-    devDependencies:
-      vitest: 0.29.2
 
   test-packages/cspell-service-bus/test-cspell-service-bus:
     specifiers:
       '@cspell/cspell-service-bus': workspace:*
-      vitest: ^0.29.2
     dependencies:
       '@cspell/cspell-service-bus': link:../../../packages/cspell-service-bus
-    devDependencies:
-      vitest: 0.29.2
 
   test-packages/cspell-service-bus/test-cspell-service-bus-esm:
     specifiers:
       '@cspell/cspell-service-bus': workspace:*
-      vitest: ^0.29.2
     dependencies:
       '@cspell/cspell-service-bus': link:../../../packages/cspell-service-bus
-    devDependencies:
-      vitest: 0.29.2
 
   test-packages/cspell-service-bus/test-cspell-service-bus-rollup:
     specifiers:
       '@cspell/cspell-service-bus': workspace:*
-      vitest: ^0.29.2
     dependencies:
       '@cspell/cspell-service-bus': link:../../../packages/cspell-service-bus
-    devDependencies:
-      vitest: 0.29.2
 
   test-packages/cspell-strong-weak-map/test-cspell-strong-weak-map:
     specifiers:
@@ -844,38 +801,26 @@ importers:
   test-packages/cspell-trie-lib/test-cspell-trie-lib:
     specifiers:
       cspell-trie-lib: workspace:*
-      vitest: ^0.29.2
     dependencies:
       cspell-trie-lib: link:../../../packages/cspell-trie-lib
-    devDependencies:
-      vitest: 0.29.2
 
   test-packages/cspell-types/test-cspell-types-cjs:
     specifiers:
       '@cspell/cspell-types': workspace:*
-      vitest: ^0.29.2
     dependencies:
       '@cspell/cspell-types': link:../../../packages/cspell-types
-    devDependencies:
-      vitest: 0.29.2
 
   test-packages/cspell-types/test-cspell-types-esm:
     specifiers:
       '@cspell/cspell-types': workspace:*
-      vitest: ^0.29.2
     dependencies:
       '@cspell/cspell-types': link:../../../packages/cspell-types
-    devDependencies:
-      vitest: 0.29.2
 
   test-packages/cspell-types/test-cspell-types-rollup:
     specifiers:
       '@cspell/cspell-types': workspace:*
-      vitest: ^0.29.2
     dependencies:
       '@cspell/cspell-types': link:../../../packages/cspell-types
-    devDependencies:
-      vitest: 0.29.2
 
   test-packages/cspell/test-cspell:
     specifiers:
@@ -922,34 +867,25 @@ importers:
     specifiers:
       '@cspell/cspell-pipe': workspace:*
       '@cspell/dynamic-import': workspace:*
-      vitest: ^0.29.2
     dependencies:
       '@cspell/cspell-pipe': link:../../../packages/cspell-pipe
       '@cspell/dynamic-import': link:../../../packages/dynamic-import
-    devDependencies:
-      vitest: 0.29.2
 
   test-packages/dynamic-import/test-dynamic-import-esm:
     specifiers:
       '@cspell/cspell-pipe': workspace:*
       '@cspell/dynamic-import': workspace:*
-      vitest: ^0.29.2
     dependencies:
       '@cspell/cspell-pipe': link:../../../packages/cspell-pipe
       '@cspell/dynamic-import': link:../../../packages/dynamic-import
-    devDependencies:
-      vitest: 0.29.2
 
   test-packages/dynamic-import/test-dynamic-import-rollup:
     specifiers:
       '@cspell/cspell-pipe': workspace:*
       '@cspell/dynamic-import': workspace:*
-      vitest: ^0.29.2
     dependencies:
       '@cspell/cspell-pipe': link:../../../packages/cspell-pipe
       '@cspell/dynamic-import': link:../../../packages/dynamic-import
-    devDependencies:
-      vitest: 0.29.2
 
   test-packages/examples/example-cspell-lib-single-doc:
     specifiers:
@@ -5578,17 +5514,6 @@ packages:
       eslint-visitor-keys: 3.3.0
     dev: true
 
-  /@vitest/coverage-c8/0.29.2_vitest@0.29.2:
-    resolution: {integrity: sha512-NmD3WirQCeQjjKfHu4iEq18DVOBFbLn9TKVdMpyi5YW2EtnS+K22/WE+9/wRrepOhyeTxuEFgxUVkCAE1GhbnQ==}
-    peerDependencies:
-      vitest: '>=0.29.0 <1'
-    dependencies:
-      c8: 7.13.0
-      picocolors: 1.0.0
-      std-env: 3.3.2
-      vitest: 0.29.2
-    dev: true
-
   /@vitest/coverage-istanbul/0.28.5:
     resolution: {integrity: sha512-na1pkr3AVrdFflzuBXsBh1MvBfhSMrv4nfd4N8rm0HEJlvlbQc+GiqNwtwzfO8TPsXxcjNphSIMp5wvCy+0xrQ==}
     dependencies:
@@ -6568,25 +6493,6 @@ packages:
     resolution: {integrity: sha512-/Nf7TyzTx6S3yRJObOAV7956r8cr2+Oj8AC5dt8wSP3BQAoeX58NoHyCU8P8zGkNXStjTSi6fzO6F0pBdcYbEg==}
     engines: {node: '>= 0.8'}
     dev: false
-
-  /c8/7.13.0:
-    resolution: {integrity: sha512-/NL4hQTv1gBL6J6ei80zu3IiTrmePDKXKXOTLpHvcIWZTVYQlDhVWjjWvkhICylE8EwwnMVzDZugCvdx0/DIIA==}
-    engines: {node: '>=10.12.0'}
-    hasBin: true
-    dependencies:
-      '@bcoe/v8-coverage': 0.2.3
-      '@istanbuljs/schema': 0.1.3
-      find-up: 5.0.0
-      foreground-child: 2.0.0
-      istanbul-lib-coverage: 3.2.0
-      istanbul-lib-report: 3.0.0
-      istanbul-reports: 3.1.5
-      rimraf: 3.0.2
-      test-exclude: 6.0.0
-      v8-to-istanbul: 9.1.0
-      yargs: 16.2.0
-      yargs-parser: 20.2.9
-    dev: true
 
   /cac/6.7.14:
     resolution: {integrity: sha512-b6Ilus+c3RrdDk+JhLKUAQfzzgLEPy6wcXqS7f/xe1EETvsDP6GORG7SFuOs6cID5YkqchW/LXZbX5bc8j7ZcQ==}
@@ -16156,39 +16062,6 @@ packages:
       - sugarss
       - supports-color
       - terser
-    dev: true
-
-  /vite/4.1.4:
-    resolution: {integrity: sha512-3knk/HsbSTKEin43zHu7jTwYWv81f8kgAL99G5NWBcA1LKvtvcVAC4JjBH1arBunO9kQka+1oGbrMKOjk4ZrBg==}
-    engines: {node: ^14.18.0 || >=16.0.0}
-    hasBin: true
-    peerDependencies:
-      '@types/node': '>= 14'
-      less: '*'
-      sass: '*'
-      stylus: '*'
-      sugarss: '*'
-      terser: ^5.4.0
-    peerDependenciesMeta:
-      '@types/node':
-        optional: true
-      less:
-        optional: true
-      sass:
-        optional: true
-      stylus:
-        optional: true
-      sugarss:
-        optional: true
-      terser:
-        optional: true
-    dependencies:
-      esbuild: 0.16.17
-      postcss: 8.4.21
-      resolve: 1.22.1
-      rollup: 3.17.3
-    optionalDependencies:
-      fsevents: 2.3.2
     dev: true
 
   /vite/4.1.4_@types+node@18.14.2:
