@@ -22,15 +22,17 @@ jobs:
       - uses: actions/checkout@v3
 
       - name: Setup and Build
-        uses: ./.github/actions/install-build
+        uses: ./.github/actions/install-build-cache
         with:
-          node-version: ${{ matrix.node-version }}
+          node-version: 18.x
 
       - name: Lint
         run: pnpm run lint
 
       - name: PR Auto Fix Lint
-        env:
-          EVENT: ${{ toJson(github.event) }}
-        run: |
-          echo "$EVENT"
+        if: github.event.ref == 'refs/heads/main'
+        uses: ./.github/actions/pr
+        with:
+          commit-message: "ci: Fix Lint -- Workflow Bot"
+          app_id: ${{ secrets.AUTOMATION_APP_ID }}
+          app_private_key: ${{ secrets.AUTOMATION_PRIVATE_KEY }}
