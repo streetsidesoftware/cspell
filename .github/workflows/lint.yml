@@ -26,4 +26,11 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
 
-      - run: pnpm run lint-ci
+      - name: Lint
+        run: pnpm run lint
+
+      - name: PR Auto Fix Lint
+        env:
+          EVENT: ${{ toJson(github.event) }}
+        run: |
+          echo "$EVENT"
