@@ -8,7 +8,9 @@
 [![codecov](https://codecov.io/gh/streetsidesoftware/cspell/branch/main/graph/badge.svg?token=Dr4fi2Sy08)](https://codecov.io/gh/streetsidesoftware/cspell)
 [![Coverage Status](https://coveralls.io/repos/github/streetsidesoftware/cspell/badge.svg?branch=main)](https://coveralls.io/github/streetsidesoftware/cspell)
 
-The cspell mono-repo, a spell checker for code.
+The CSpell mono-repo, a spell checker for code.
+
+
 
 ## Support Future Development
 
