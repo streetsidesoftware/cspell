@@ -3,8 +3,8 @@ import * as Stream from 'stream';
 import { promisify } from 'util';
 import * as zlib from 'zlib';
 
-import type { BufferEncoding, BufferEncodingExt } from '../../common/BufferEncoding';
-import { encoderTransformer } from '../../common/transformers';
+import type { BufferEncoding, BufferEncodingExt } from '../../common/BufferEncoding.js';
+import { encoderTransformer } from '../../common/transformers.js';
 
 const pipeline = promisify(Stream.pipeline);
 

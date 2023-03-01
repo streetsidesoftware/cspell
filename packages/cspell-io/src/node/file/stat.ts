@@ -1,9 +1,9 @@
 import { promises as fs, statSync } from 'fs';
 import { format } from 'util';
 
-import type { Stats } from '../../models/Stats';
-import { fetchHead } from './fetch';
-import { isFileURL, isUrlLike, toURL } from './util';
+import type { Stats } from '../../models/Stats.js';
+import { fetchHead } from './fetch.js';
+import { isFileURL, isUrlLike, toURL } from './util.js';
 
 export async function getStat(filenameOrUri: string): Promise<Stats | Error> {
     if (isUrlLike(filenameOrUri)) {

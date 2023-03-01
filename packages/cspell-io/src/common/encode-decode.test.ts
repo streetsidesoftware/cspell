@@ -1,4 +1,6 @@
-import { decode, encodeString, swapBytes, swapBytesInPlace } from './encode-decode';
+import { describe, expect, test } from 'vitest';
+
+import { decode, encodeString, swapBytes, swapBytesInPlace } from './encode-decode.js';
 
 const samples = ['This is a bit of text'];
 

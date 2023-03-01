@@ -1,3 +1,3 @@
-export { readFile, readFileSync } from './fileReader';
-export { writeToFile, writeToFileIterable } from './fileWriter';
-export { getStat, getStatSync } from './stat';
+export { readFile, readFileSync } from './fileReader.js';
+export { writeToFile, writeToFileIterable } from './fileWriter.js';
+export { getStat, getStatSync } from './stat.js';

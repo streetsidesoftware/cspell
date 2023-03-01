@@ -1,6 +1,7 @@
 import { join } from 'path';
+import { describe, expect, test } from 'vitest';
 
-import { getStat, getStatSync } from './stat';
+import { getStat, getStatSync } from './stat.js';
 
 const oc = expect.objectContaining;
 const sc = expect.stringContaining;

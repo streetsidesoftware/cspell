@@ -2,7 +2,7 @@
     "$schema": "https://json.schemastore.org/tsconfig",
     "extends": "../../tsconfig.base.json",
     "compilerOptions": {
-		"tsBuildInfoFile":"../../dist/compile.cjs.tsbuildInfo",
+        "tsBuildInfoFile": "../../dist/compile.cjs.tsbuildInfo",
         "composite": true,
         "incremental": true,
         "skipLibCheck": true,
@@ -13,10 +13,6 @@
         "outDir": "../../dist/cjs",
         "types": ["node"]
     },
-    "include": [
-        "."
-    ],
-	"references": [
-		{ "path": "../esm/tsconfig.json" }
-	]
+    "include": ["."],
+    "references": [{ "path": "../esm/tsconfig.json" }]
 }

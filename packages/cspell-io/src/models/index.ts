@@ -1,1 +1,1 @@
-export type { Stats } from './Stats';
+export type { Stats } from './Stats.js';

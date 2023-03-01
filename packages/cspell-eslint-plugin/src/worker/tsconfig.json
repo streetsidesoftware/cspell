@@ -1,17 +1,13 @@
 {
-	"extends": "../../tsconfig.base.json",
-	"compilerOptions": {
-		"tsBuildInfoFile":"../../dist/worker/compile.tsbuildInfo",
+    "extends": "../../tsconfig.base.json",
+    "compilerOptions": {
+        "tsBuildInfoFile": "../../dist/worker/compile.tsbuildInfo",
         "target": "ES2020",
         "module": "ES2020",
         "moduleResolution": "node16",
-		"rootDir": ".",
-		"outDir": "../../dist/worker"
-	},
-	"include": [
-		"."
-	],
-    "references": [
-        { "path": "../common/tsconfig.json" }
-    ]
+        "rootDir": ".",
+        "outDir": "../../dist/worker"
+    },
+    "include": ["."],
+    "references": [{ "path": "../common/tsconfig.json" }]
 }

@@ -2,10 +2,13 @@
     "$schema": "https://json.schemastore.org/tsconfig",
     "extends": "../../tsconfig.cjs.json",
     "compilerOptions": {
-        "target": "ES2020",
+        "composite": true,
+        "tsBuildInfoFile": "dist/compile.cjs.tsbuildInfo",
         "module": "CommonJS",
         "moduleResolution": "node16",
-        "outDir": "dist/cjs"
+        "rootDir": "src",
+        "outDir": "dist/cjs",
+        "types": ["node"]
     },
     "include": ["src"]
 }

@@ -1,19 +1,19 @@
 import { isServiceResponseSuccess, ServiceBus } from '@cspell/cspell-service-bus';
 
-import { compareStats } from './common/stat';
-import type { CSpellIO } from './CSpellIO';
-import { ErrorNotImplemented } from './errors/ErrorNotImplemented';
-import { registerHandlers } from './handlers/node/file';
-import type { TextFileResource } from './models/FileResource';
-import type { Stats } from './models/Stats';
-import { toURL, urlBasename, urlDirname } from './node/file/util';
+import { compareStats } from './common/stat.js';
+import type { CSpellIO } from './CSpellIO.js';
+import { ErrorNotImplemented } from './errors/ErrorNotImplemented.js';
+import { registerHandlers } from './handlers/node/file.js';
+import type { TextFileResource } from './models/FileResource.js';
+import type { Stats } from './models/Stats.js';
+import { toURL, urlBasename, urlDirname } from './node/file/util.js';
 import {
     RequestFsReadFile,
     RequestFsReadFileSync,
     RequestFsStat,
     RequestFsStatSync,
     RequestFsWriteFile,
-} from './requests';
+} from './requests/index.js';
 
 let defaultCSpellIONode: CSpellIO | undefined = undefined;
 

@@ -1,6 +1,6 @@
-import type { Stats } from './models';
-import type { BufferEncoding } from './models/BufferEncoding';
-import type { TextFileResource } from './models/FileResource';
+import type { BufferEncoding } from './models/BufferEncoding.js';
+import type { TextFileResource } from './models/FileResource.js';
+import type { Stats } from './models/index.js';
 
 export type UrlOrFilename = string | URL;
 

@@ -1,7 +1,7 @@
 import type { ServiceRequestFactoryRequestType } from '@cspell/cspell-service-bus';
 import { requestFactory } from '@cspell/cspell-service-bus';
 
-import type { BinaryFileResource } from '../models/FileResource';
+import type { BinaryFileResource } from '../models/FileResource.js';
 
 const RequestType = 'fs:readBinaryFile' as const;
 interface RequestParams {

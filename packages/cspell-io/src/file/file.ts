@@ -1,13 +1,13 @@
-import { getDefaultCSpellIO } from '../CSpellIONode';
-import { toError } from '../errors';
-import type { Stats } from '../models';
-import type { BufferEncoding } from '../models/BufferEncoding';
+import { getDefaultCSpellIO } from '../CSpellIONode.js';
+import { toError } from '../errors/index.js';
+import type { BufferEncoding } from '../models/BufferEncoding.js';
+import type { Stats } from '../models/index.js';
 import type {
     getStat as GetStatFn,
     getStatSync as GetStatSyncFn,
     readFile as ReadFileFn,
     readFileSync as ReadFileSyncFn,
-} from '../node/file';
+} from '../node/file/index.js';
 
 export const readFile: typeof ReadFileFn = function (
     filename: string | URL,

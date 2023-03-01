@@ -1,4 +1,6 @@
-import { toArray } from './asyncIterable';
+import { describe, expect, test } from 'vitest';
+
+import { toArray } from './asyncIterable.js';
 
 describe('asyncIterable', () => {
     test('toArray', async () => {

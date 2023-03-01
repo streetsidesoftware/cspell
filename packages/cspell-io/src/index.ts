@@ -1,6 +1,6 @@
-export { toArray as asyncIterableToArray } from './async/asyncIterable';
-export type { CSpellIO } from './CSpellIO';
-export { CSpellIONode, getDefaultCSpellIO } from './CSpellIONode';
+export { toArray as asyncIterableToArray } from './async/asyncIterable.js';
+export type { CSpellIO } from './CSpellIO.js';
+export { CSpellIONode, getDefaultCSpellIO } from './CSpellIONode.js';
 export {
     getStat,
     getStatSync,
@@ -9,6 +9,6 @@ export {
     writeToFile,
     writeToFileIterable,
     writeToFileIterableP,
-} from './file';
-export type { Stats } from './models/Stats';
-export { encodeDataUrl, toDataUrl } from './node/dataUrl';
+} from './file/index.js';
+export type { Stats } from './models/Stats.js';
+export { encodeDataUrl, toDataUrl } from './node/dataUrl.js';

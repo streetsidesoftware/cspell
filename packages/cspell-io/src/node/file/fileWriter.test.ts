@@ -1,8 +1,9 @@
 import { loremIpsum } from 'lorem-ipsum';
+import { describe, expect, test } from 'vitest';
 
-import { makePathToFile, pathToTemp } from '../../test/helper';
-import { readFile } from './fileReader';
-import * as fileWriter from './fileWriter';
+import { makePathToFile, pathToTemp } from '../../test/test.helper.js';
+import { readFile } from './fileReader.js';
+import * as fileWriter from './fileWriter.js';
 
 describe('Validate the writer', () => {
     test.each`

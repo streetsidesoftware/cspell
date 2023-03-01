@@ -1,4 +1,4 @@
-import type { BufferEncodingExt } from './BufferEncoding';
+import type { BufferEncodingExt } from './BufferEncoding.js';
 
 const BOM_BE = 0xfeff;
 const BOM_LE = 0xfffe;

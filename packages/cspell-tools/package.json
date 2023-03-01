@@ -11,7 +11,6 @@
   },
   "scripts": {
     "build": "pnpm run build-schema && pnpm run compile",
-    "build-dev": "tsc -p tsconfig.dev.json",
     "build-schema": "ts-json-schema-generator --no-top-ref --path src/config/config.ts --type RunConfig --validation-keywords deprecated  -o  ./cspell-tools.config.schema.json",
     "compile": "tsc -p .",
     "watch": "tsc -p . -w",
@@ -63,7 +62,6 @@
   "devDependencies": {
     "@types/glob": "^8.1.0",
     "@types/jest": "^29.4.0",
-    "@types/node": "^18.14.2",
     "@types/shelljs": "^0.8.11",
     "jest": "^29.4.3",
     "lorem-ipsum": "^2.0.8",

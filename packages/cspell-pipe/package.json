@@ -102,10 +102,9 @@
     "!**/*.map"
   ],
   "scripts": {
-    "build": "pnpm build:esm && pnpm build:cjs",
+    "build": "tsc -b . && ts2mjs dist/esm",
     "build:cjs": "tsc -p tsconfig.cjs.json",
     "build:esm": "tsc -p tsconfig.esm.json && ts2mjs dist/esm",
-    "build-dev": "tsc -p tsconfig.dev.json",
     "watch": "tsc -p . -w",
     "clean": "shx rm -rf dist coverage .tsbuildinfo",
     "clean-build": "pnpm run clean && pnpm run build",
@@ -126,7 +125,6 @@
     "node": ">=14"
   },
   "devDependencies": {
-    "@types/node": "^18.14.2",
     "globby": "^13.1.3"
   }
 }

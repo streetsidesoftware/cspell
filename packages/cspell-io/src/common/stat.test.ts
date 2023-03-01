@@ -1,4 +1,6 @@
-import { compareStats } from './stat';
+import { describe, expect, test } from 'vitest';
+
+import { compareStats } from './stat.js';
 
 describe('stat', () => {
     const stats = {

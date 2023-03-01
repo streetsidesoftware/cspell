@@ -1,5 +1,6 @@
 import { mkdir } from 'fs/promises';
 import * as path from 'path';
+import { expect } from 'vitest';
 
 const mkdirp = async (p: string) => {
     await mkdir(p, { recursive: true });

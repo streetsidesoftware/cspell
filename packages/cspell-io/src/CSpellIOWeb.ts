@@ -1,8 +1,8 @@
-import { compareStats } from './common/stat';
-import type { CSpellIO } from './CSpellIO';
-import { ErrorNotImplemented } from './errors/ErrorNotImplemented';
-import type { TextFileResource } from './models/FileResource';
-import type { Stats } from './models/Stats';
+import { compareStats } from './common/stat.js';
+import type { CSpellIO } from './CSpellIO.js';
+import { ErrorNotImplemented } from './errors/ErrorNotImplemented.js';
+import type { TextFileResource } from './models/FileResource.js';
+import type { Stats } from './models/Stats.js';
 
 export class CSpellIOWeb implements CSpellIO {
     readFile(_uriOrFilename: string | URL): Promise<TextFileResource> {
