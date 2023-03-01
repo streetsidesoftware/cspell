@@ -93,6 +93,29 @@ describe('StrongWeakMap', () => {
         map.forEach(cb, thisArg);
         expect(_entries).toEqual(entries);
     });
+
+    test('autoGet', () => {
+        const entries = boxKeyValues([
+            ['a', 'a'],
+            ['b', 'b'],
+        ]);
+        const map = new StrongWeakMap(entries);
+        let count = 0;
+        function resolve(v: string) {
+            ++count;
+            return box(v);
+        }
+
+        expect(map.get('a')).toEqual(box('a'));
+        expect(map.autoGet('a', resolve)).toEqual(box('a'));
+        expect(count).toBe(0);
+        expect(map.autoGet('c', resolve)).toEqual(box('c'));
+        expect(count).toBe(1);
+        expect(map.autoGet('c', resolve)).toEqual(box('c'));
+        expect(count).toBe(1);
+        expect(map.autoGet('d', resolve)).toEqual(box('d'));
+        expect(count).toBe(2);
+    });
 });
 
 type Boxed<T> = T extends object ? T : { value: T };

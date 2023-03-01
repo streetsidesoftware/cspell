@@ -5,12 +5,5 @@ import { StrongWeakMap } from '../StrongWeakMap.js';
 const cache = new StrongWeakMap<string, Promise<string>>();
 
 export function readTextFile(filename: string, encoding: BufferEncoding = 'utf8'): Promise<string> {
-    const cached = cache.get(filename);
-    if (cached) return cached;
-
-    const content = fs.readFile(filename, encoding);
-
-    cache.set(filename, content);
-
-    return content;
+    return cache.autoGet(filename, () => fs.readFile(filename, encoding));
 }
