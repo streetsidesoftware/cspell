@@ -33,6 +33,11 @@ jobs:
         if: github.event.ref == 'refs/heads/main'
         uses: ./.github/actions/pr
         with:
+          body: |
+            # Fix Lint Issues
           commit-message: "ci: Fix Lint -- Workflow Bot"
+          branch: update-fix-lint
+          title: >-
+            ci: Fix Lint -- Workflow Bot
           app_id: ${{ secrets.AUTOMATION_APP_ID }}
           app_private_key: ${{ secrets.AUTOMATION_PRIVATE_KEY }}
