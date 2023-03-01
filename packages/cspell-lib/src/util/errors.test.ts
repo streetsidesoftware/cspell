@@ -1,4 +1,4 @@
-import { __testing__, isErrnoException, isError, toError, UnknownError } from './errors';
+import { __testing__, catchPromiseError, isErrnoException, isError, toError, UnknownError, wrapCall } from './errors';
 
 class MyError extends Error {
     constructor(msg: string) {
@@ -54,5 +54,39 @@ describe('errors', () => {
         ${'hello'}        | ${expect.any(UnknownError)}
     `('toError', ({ err, expected }) => {
         expect(toError(err)).toEqual(expected);
+    });
+
+    test('catchPromiseError', async () => {
+        await expect(catchPromiseError(Promise.resolve('hello'), () => undefined)).resolves.toBe('hello');
+        await expect(catchPromiseError(Promise.reject('hello'), () => undefined)).resolves.toBe(undefined);
+        await expect(catchPromiseError(Promise.reject('error'), (e) => e)).resolves.toBe('error');
+        await expect(
+            catchPromiseError(Promise.reject('error'), (e) => {
+                throw e;
+            })
+        ).rejects.toBe('error');
+    });
+
+    function tr(err: unknown) {
+        throw err;
+    }
+
+    function identity<T>(a: T): T {
+        return a;
+    }
+
+    test.each`
+        fn                 | param        | error        | expected
+        ${identity}        | ${undefined} | ${undefined} | ${undefined}
+        ${identity}        | ${'hello'}   | ${undefined} | ${'hello'}
+        ${() => tr('err')} | ${undefined} | ${'err'}     | ${undefined}
+    `('wrapCall', ({ fn, param, error, expected }) => {
+        let err: unknown = undefined;
+        function capture(e: unknown) {
+            err = e;
+            return undefined;
+        }
+        expect(wrapCall<unknown, unknown>(fn, capture)(param)).toEqual(expected);
+        expect(err).toEqual(error);
     });
 });

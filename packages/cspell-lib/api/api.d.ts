@@ -1,9 +1,9 @@
 /// <reference types="node" />
-import { Glob, CSpellSettingsWithSourceTrace, TextOffset, TextDocumentOffset, AdvancedCSpellSettingsWithSourceTrace, Parser, DictionaryDefinitionInline, DictionaryDefinitionPreferred, DictionaryDefinitionAugmented, DictionaryDefinitionCustom, PnPSettings, ImportFileRef, CSpellUserSettings, Issue, MappedText, ParsedText, LocaleId, CSpellSettings } from '@cspell/cspell-types';
+import { Glob, CSpellSettingsWithSourceTrace, TextOffset, TextDocumentOffset, AdvancedCSpellSettingsWithSourceTrace, Parser, DictionaryDefinitionInline, DictionaryDefinitionPreferred, DictionaryDefinitionAugmented, DictionaryDefinitionCustom, PnPSettings, ImportFileRef, CSpellUserSettings, Issue, LocaleId, CSpellSettings, MappedText, ParsedText } from '@cspell/cspell-types';
 export * from '@cspell/cspell-types';
 import { WeightMap } from 'cspell-trie-lib';
 export { CompoundWordsMethod } from 'cspell-trie-lib';
-import { CachingDictionary, SpellingDictionaryCollection, SuggestOptions, SuggestionResult } from 'cspell-dictionary';
+import { SuggestOptions, SuggestionResult, CachingDictionary, SpellingDictionaryCollection } from 'cspell-dictionary';
 export { SpellingDictionary, SpellingDictionaryCollection, SuggestOptions, SuggestionCollector, SuggestionResult, createSpellingDictionary, createCollection as createSpellingDictionaryCollection } from 'cspell-dictionary';
 export { asyncIterableToArray, readFile, readFileSync, writeToFile, writeToFileIterable, writeToFileIterableP } from 'cspell-io';
 
@@ -554,6 +554,75 @@ declare class SpellingDictionaryLoadError extends Error {
 }
 declare function isSpellingDictionaryLoadError(e: Error): e is SpellingDictionaryLoadError;
 
+interface WordSuggestion extends SuggestionResult {
+    /**
+     * The suggested word adjusted to match the original case.
+     */
+    wordAdjustedToMatchCase?: string;
+}
+interface SuggestedWordBase extends WordSuggestion {
+    /**
+     * dictionary names
+     */
+    dictionaries: string[];
+}
+interface SuggestedWord extends SuggestedWordBase {
+    noSuggest: boolean;
+    forbidden: boolean;
+}
+interface SuggestionsForWordResult {
+    word: string;
+    suggestions: SuggestedWord[];
+}
+type FromSuggestOptions = Pick<SuggestOptions, 'numChanges' | 'numSuggestions' | 'includeTies'>;
+interface SuggestionOptions extends FromSuggestOptions {
+    /**
+     * languageId to use when determining file type.
+     */
+    languageId?: LanguageId | LanguageId[];
+    /**
+     * Locale to use.
+     */
+    locale?: LocaleId;
+    /**
+     * Strict case and accent checking
+     * @default true
+     */
+    strict?: boolean;
+    /**
+     * List of dictionaries to use. If specified, only that list of dictionaries will be used.
+     */
+    dictionaries?: string[];
+    /**
+     * The number of suggestions to make.
+     * @default 8
+     */
+    numSuggestions?: number | undefined;
+    /**
+     * Max number of changes / edits to the word to get to a suggestion matching suggestion.
+     * @default 4
+     */
+    numChanges?: number | undefined;
+    /**
+     * If multiple suggestions have the same edit / change "cost", then included them even if
+     * it causes more than `numSuggestions` to be returned.
+     * @default true
+     */
+    includeTies?: boolean | undefined;
+    /**
+     * By default we want to use the default configuration, but there are cases
+     * where someone might not want that.
+     * @default true
+     */
+    includeDefaultConfig?: boolean;
+}
+declare function suggestionsForWords(words: Iterable<string> | AsyncIterable<string>, options?: SuggestionOptions, settings?: CSpellSettings): AsyncIterable<SuggestionsForWordResult>;
+declare function suggestionsForWord(word: string, options?: SuggestionOptions, settings?: CSpellSettings): Promise<SuggestionsForWordResult>;
+declare class SuggestionError extends Error {
+    readonly code: string;
+    constructor(message: string, code: string);
+}
+
 interface MatchRange {
     startPos: number;
     endPos: number;
@@ -681,8 +750,6 @@ declare class DocumentValidator {
     private defaultParser;
     private _checkParsedText;
     private addPossibleError;
-    private catchError;
-    private errorCatcherWrapper;
     private _parse;
     private getSuggestions;
     private genSuggestions;
@@ -715,10 +782,11 @@ interface Preparations {
     localConfig: CSpellUserSettings | undefined;
     localConfigFilepath: string | undefined;
 }
-declare function shouldCheckDocument(doc: TextDocumentRef, options: DocumentValidatorOptions, settings: CSpellUserSettings): Promise<{
+interface ShouldCheckDocumentResult {
     errors: Error[];
     shouldCheck: boolean;
-}>;
+}
+declare function shouldCheckDocument(doc: TextDocumentRef, options: DocumentValidatorOptions, settings: CSpellUserSettings): Promise<ShouldCheckDocumentResult>;
 
 /**
  * Annotate text with issues and include / exclude zones.
@@ -821,75 +889,6 @@ interface DetermineFinalDocumentSettingsResult {
  * @param settings - The near final settings. Should already be the combination of all configuration files.
  */
 declare function determineFinalDocumentSettings(document: DocumentWithText, settings: CSpellUserSettings): DetermineFinalDocumentSettingsResult;
-
-interface WordSuggestion extends SuggestionResult {
-    /**
-     * The suggested word adjusted to match the original case.
-     */
-    wordAdjustedToMatchCase?: string;
-}
-interface SuggestedWordBase extends WordSuggestion {
-    /**
-     * dictionary names
-     */
-    dictionaries: string[];
-}
-interface SuggestedWord extends SuggestedWordBase {
-    noSuggest: boolean;
-    forbidden: boolean;
-}
-interface SuggestionsForWordResult {
-    word: string;
-    suggestions: SuggestedWord[];
-}
-type FromSuggestOptions = Pick<SuggestOptions, 'numChanges' | 'numSuggestions' | 'includeTies'>;
-interface SuggestionOptions extends FromSuggestOptions {
-    /**
-     * languageId to use when determining file type.
-     */
-    languageId?: LanguageId | LanguageId[];
-    /**
-     * Locale to use.
-     */
-    locale?: LocaleId;
-    /**
-     * Strict case and accent checking
-     * @default true
-     */
-    strict?: boolean;
-    /**
-     * List of dictionaries to use. If specified, only that list of dictionaries will be used.
-     */
-    dictionaries?: string[];
-    /**
-     * The number of suggestions to make.
-     * @default 8
-     */
-    numSuggestions?: number | undefined;
-    /**
-     * Max number of changes / edits to the word to get to a suggestion matching suggestion.
-     * @default 4
-     */
-    numChanges?: number | undefined;
-    /**
-     * If multiple suggestions have the same edit / change "cost", then included them even if
-     * it causes more than `numSuggestions` to be returned.
-     * @default true
-     */
-    includeTies?: boolean | undefined;
-    /**
-     * By default we want to use the default configuration, but there are cases
-     * where someone might not want that.
-     * @default true
-     */
-    includeDefaultConfig?: boolean;
-}
-declare function suggestionsForWords(words: Iterable<string> | AsyncIterable<string>, options?: SuggestionOptions, settings?: CSpellSettings): AsyncIterable<SuggestionsForWordResult>;
-declare function suggestionsForWord(word: string, options?: SuggestionOptions, settings?: CSpellSettings): Promise<SuggestionsForWordResult>;
-declare class SuggestionError extends Error {
-    readonly code: string;
-    constructor(message: string, code: string);
-}
 
 interface TraceResult {
     word: string;
