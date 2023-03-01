@@ -1,9 +1,9 @@
 import { promises as fs } from 'fs';
 import { afterEach, describe, expect, test, vi } from 'vitest';
 
-import { pathToRoot } from '../../test/test.helper';
-import * as fReader from './fileReader';
-import { isUrlLike, toURL } from './util';
+import { pathToRoot } from '../../test/test.helper.js';
+import * as fReader from './fileReader.js';
+import { isUrlLike, toURL } from './util.js';
 
 const oc = expect.objectContaining;
 

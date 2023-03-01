@@ -1,4 +1,4 @@
-import type { Stats } from '../models/Stats';
+import type { Stats } from '../models/Stats.js';
 
 /**
  * Compare two Stats to see if they have the same value.

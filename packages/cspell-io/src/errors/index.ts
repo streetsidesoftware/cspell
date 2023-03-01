@@ -1,2 +1,2 @@
-export { toError } from './error';
-export { ErrorNotImplemented } from './ErrorNotImplemented';
+export { toError } from './error.js';
+export { ErrorNotImplemented } from './ErrorNotImplemented.js';

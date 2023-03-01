@@ -1,5 +1,5 @@
-import type { BufferEncodingExt } from './BufferEncoding';
-import { calcEncodingFromBom, decode, decodeUtf16BE, decodeUtf16LE, encodeString } from './encode-decode';
+import type { BufferEncodingExt } from './BufferEncoding.js';
+import { calcEncodingFromBom, decode, decodeUtf16BE, decodeUtf16LE, encodeString } from './encode-decode.js';
 
 export function createDecoderTransformer(
     encoding?: BufferEncodingExt

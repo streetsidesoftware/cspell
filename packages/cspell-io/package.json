@@ -2,8 +2,16 @@
   "name": "cspell-io",
   "version": "6.27.0",
   "description": "A library of useful I/O functions used across various cspell tools.",
-  "main": "dist/index.js",
-  "typings": "dist/index.d.ts",
+  "type": "commonjs",
+  "module": "dist/esm/index.mjs",
+  "main": "dist/cjs/index.js",
+  "typings": "dist/cjs/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/esm/index.mjs",
+      "require": "./dist/cjs/index.js"
+    }
+  },
   "files": [
     "dist",
     "!**/*.tsbuildInfo",
@@ -15,7 +23,8 @@
   "scripts": {
     "build": "tsc -b . && ts2mjs dist/esm",
     "build:esm": "tsc -p tsconfig.esm.json",
-    "watch": "tsc -b . -w",
+    "build:watch": "tsc -b . -w",
+    "watch": "pnpm build:watch",
     "clean": "shx rm -rf dist temp coverage .tsbuildinfo",
     "clean-build": "pnpm run clean && pnpm run build",
     "coverage": "pnpm coverage:vitest && pnpm coverage:fix",

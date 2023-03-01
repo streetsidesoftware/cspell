@@ -1,7 +1,7 @@
 import { promises as fs } from 'fs';
 import * as fsPath from 'path';
 
-import { toURL } from './file/util';
+import { toURL } from './file/util.js';
 
 /**
  * Generates a string of the following format:

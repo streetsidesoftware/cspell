@@ -1,7 +1,7 @@
 import type { ServiceRequestFactoryRequestType } from '@cspell/cspell-service-bus';
 import { requestFactory } from '@cspell/cspell-service-bus';
 
-import type { Stats } from '../models';
+import type { Stats } from '../models/index.js';
 
 const RequestTypeStat = 'fs:stat' as const;
 interface RequestStatParams {

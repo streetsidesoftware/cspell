@@ -1,7 +1,7 @@
 import { describe, expect, test } from 'vitest';
 
-import { encodeUtf16BE, encodeUtf16LE } from './encode-decode';
-import { createDecoderTransformer, encoderTransformer } from './transformers';
+import { encodeUtf16BE, encodeUtf16LE } from './encode-decode.js';
+import { createDecoderTransformer, encoderTransformer } from './transformers.js';
 
 const eBE = encodeUtf16BE;
 const eLE = encodeUtf16LE;

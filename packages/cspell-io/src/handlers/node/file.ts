@@ -11,11 +11,11 @@ import type { URL } from 'url';
 import { fileURLToPath } from 'url';
 import { gunzipSync, gzipSync } from 'zlib';
 
-import { decode } from '../../common/encode-decode';
-import { toError } from '../../errors';
-import { decodeDataUrl } from '../../node/dataUrl';
-import { fetchURL } from '../../node/file/fetch';
-import { getStatHttp } from '../../node/file/stat';
+import { decode } from '../../common/encode-decode.js';
+import { toError } from '../../errors/index.js';
+import { decodeDataUrl } from '../../node/dataUrl.js';
+import { fetchURL } from '../../node/file/fetch.js';
+import { getStatHttp } from '../../node/file/stat.js';
 import {
     RequestFsReadBinaryFile,
     RequestFsReadBinaryFileSync,
@@ -25,7 +25,7 @@ import {
     RequestFsStatSync,
     RequestFsWriteFile,
     RequestZlibInflate,
-} from '../../requests';
+} from '../../requests/index.js';
 
 const isGzFileRegExp = /\.gz($|[?#])/;
 

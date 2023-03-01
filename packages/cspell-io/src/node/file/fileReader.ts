@@ -6,12 +6,12 @@ import { fileURLToPath } from 'url';
 import { promisify } from 'util';
 import * as zlib from 'zlib';
 
-import { decode } from '../../common/encode-decode';
-import { createDecoderTransformer } from '../../common/transformers';
-import type { BufferEncoding } from '../../models/BufferEncoding';
-import { fetch } from './fetch';
-import { FetchUrlError } from './FetchError';
-import { isFileURL, isSupportedURL, isZipped, toURL } from './util';
+import { decode } from '../../common/encode-decode.js';
+import { createDecoderTransformer } from '../../common/transformers.js';
+import type { BufferEncoding } from '../../models/BufferEncoding.js';
+import { fetch } from './fetch.js';
+import { FetchUrlError } from './FetchError.js';
+import { isFileURL, isSupportedURL, isZipped, toURL } from './util.js';
 
 const defaultEncoding: BufferEncoding = 'utf8';
 

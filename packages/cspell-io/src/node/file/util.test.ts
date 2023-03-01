@@ -1,7 +1,7 @@
 import * as path from 'path';
 import { describe, expect, test } from 'vitest';
 
-import { basename, isUrlLike, toURL, urlBasename, urlDirname } from './util';
+import { basename, isUrlLike, toURL, urlBasename, urlDirname } from './util.js';
 
 const root = path.join(__dirname, '../..');
 const oc = expect.objectContaining;
