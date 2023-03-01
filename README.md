@@ -10,8 +10,6 @@
 
 The CSpell mono-repo, a spell checker for code.
 
-
-
 ## Support Future Development
 
 - Become a [<img src="https://github.githubassets.com/images/modules/site/icons/funding_platforms/patreon.svg" width="16" height="16" alt="Patreon">Patreon!](https://patreon.com/streetsidesoftware)
