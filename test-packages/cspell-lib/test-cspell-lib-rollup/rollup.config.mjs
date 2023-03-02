@@ -1,4 +1,3 @@
-/* eslint-disable node/no-extraneous-import */
 import rollupPluginNodeResolve from '@rollup/plugin-node-resolve';
 import rollupPluginTypescript from '@rollup/plugin-typescript';
 import alias from '@rollup/plugin-alias';
