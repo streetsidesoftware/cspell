@@ -65,11 +65,12 @@ Tidelift will coordinate the fix and disclosure.
 
 ## Versions
 
-|        | version | Node | Support               | End-Of-Life |
-| :----- | :------ | :--- | :-------------------- | :---------- |
-| cspell | 6.x     | 14.x | In Active Development | TBD         |
-| cspell | 5.x     | 12.x | Paid support only[^1] | 2022-10-01  |
-| cspell | 4.x     | 10.x | Paid support only[^1] | 2022-05-01  |
+|        | version | Node | Status               | Maintenance | End of Free Support |
+| :----- | :------ | :--- | :-------------------- | :---------- | :---------- |
+| cspell | 7.x     | 16.x | In Active Development | TBD | TBD         |
+| cspell | 6.x     | 14.14.x | Transitioning to Maintenance | 2023-04-01 | 2023-05-01         |
+| cspell | 5.x     | 12.x | Paid support only[^1] | - | 2022-10-01  |
+| cspell | 4.x     | 10.x | Paid support only[^1] | - | 2022-05-01  |
 
 [^1]: [Support - Street Side Software](https://streetsidesoftware.com/support/#maintenance-agreements)
 
