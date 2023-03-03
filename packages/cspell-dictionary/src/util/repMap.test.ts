@@ -1,6 +1,6 @@
 import { __testing__, createMapper } from './repMap';
 
-const { createMapperRegExp, charsetToRepMap } = __testing__;
+const { createMapperRegExp, charsetToRepMap, createTrie, calcAllEdits, applyEdits } = __testing__;
 
 describe('ReMap Tests', () => {
     test('empty replace map', () => {
@@ -109,3 +109,51 @@ describe('ReMap Tests', () => {
         expect(reg).toEqual(expected);
     });
 });
+
+describe('RepMapper', () => {
+    test.each`
+        repMap                        | ignoreChars  | expected
+        ${undefined}                  | ${undefined} | ${{}}
+        ${[['a', 'b']]}               | ${undefined} | ${{ children: { a: { rep: ['b'] } } }}
+        ${[['a', 'b'], ['a', 'b']]}   | ${undefined} | ${{ children: { a: { rep: ['b'] } } }}
+        ${[['a', 'b'], ['a', 'c']]}   | ${undefined} | ${{ children: { a: { rep: ['b', 'c'] } } }}
+        ${[['a', 'b'], ['a', 'c']]}   | ${'a'}       | ${{ children: { a: { rep: ['b', 'c', ''] } } }}
+        ${[['a', 'b'], ['a', 'c']]}   | ${'i'}       | ${{ children: { a: { rep: ['b', 'c'] }, i: { rep: [''] } } }}
+        ${[['a', 'b'], ['a', 'c']]}   | ${'i'}       | ${{ children: { a: { rep: ['b', 'c'] }, i: { rep: [''] } } }}
+        ${[['a|i', 'b'], ['a', 'c']]} | ${'i'}       | ${{ children: { a: { rep: ['b', 'c'] }, i: { rep: ['b', ''] } } }}
+    `('createTrie', ({ repMap, ignoreChars, expected }) => {
+        expect(createTrie(repMap, ignoreChars)).toEqual(expected);
+    });
+
+    test.each`
+        repMap                         | ignoreChars  | word       | expected
+        ${undefined}                   | ${undefined} | ${'hello'} | ${[]}
+        ${[['e', 'é']]}                | ${undefined} | ${'hello'} | ${[{ b: 1, e: 2, r: 'é' }]}
+        ${[['e', 'é'], ['o', 'ó']]}    | ${undefined} | ${'hello'} | ${[{ b: 1, e: 2, r: 'é' }, { b: 4, e: 5, r: 'ó' }]}
+        ${[['ll', 'y'], ['ll', 'el']]} | ${undefined} | ${'hello'} | ${[{ b: 2, e: 4, r: 'y' }, { b: 2, e: 4, r: 'el' }]}
+        ${[['f', 'ph'], ['ph', 'f']]}  | ${undefined} | ${'phone'} | ${[{ b: 0, e: 2, r: 'f' }]}
+    `('calcAllEdits', ({ repMap, ignoreChars, word, expected }) => {
+        const root = createTrie(repMap, ignoreChars);
+        expect(calcAllEdits(root, word)).toEqual(expected);
+    });
+
+    // cspell:ignore héllo helló hélló heyo heelo fone phoné phöne
+    test.each`
+        repMap                         | ignoreChars        | word          | expected
+        ${undefined}                   | ${undefined}       | ${'hello'}    | ${['hello']}
+        ${[['e', 'é']]}                | ${undefined}       | ${'hello'}    | ${['hello', 'héllo']}
+        ${[['e', 'é'], ['o', 'ó']]}    | ${undefined}       | ${'hello'}    | ${['hello', 'helló', 'héllo', 'hélló']}
+        ${[['ll', 'y'], ['ll', 'el']]} | ${undefined}       | ${'hello'}    | ${['hello', 'heyo', 'heelo']}
+        ${[['f', 'ph'], ['ph', 'f']]}  | ${undefined}       | ${'phone'}    | ${['phone', 'fone']}
+        ${[]}                          | ${'\u0300-\u0308'} | ${N('phoné')} | ${[N('phoné'), 'phone']}
+        ${[]}                          | ${'\u0300-\u0308'} | ${N('phöne')} | ${[N('phöne'), 'phone']}
+    `('applyEdits', ({ repMap, ignoreChars, word, expected }) => {
+        const root = createTrie(repMap, ignoreChars);
+        const edits = calcAllEdits(root, word);
+        expect(applyEdits(word, edits)).toEqual(expected);
+    });
+});
+
+function N(s: string, mode: 'NFD' | 'NFC' = 'NFD') {
+    return s.normalize(mode);
+}

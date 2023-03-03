@@ -47,5 +47,6 @@ export { isDefined } from './utils/isDefined.js';
 export { mergeDefaults } from './utils/mergeDefaults.js';
 export { mergeOptionalWithDefaults } from './utils/mergeOptionalWithDefaults.js';
 export { normalizeWord, normalizeWordForCaseInsensitive, normalizeWordToLowercase } from './utils/normalizeWord.js';
+export { expandCharacterSet } from './utils/text.js';
 export type { HintedWalkerIterator, Hinting, WalkerIterator, YieldResult } from './walker/index.js';
 export { CompoundWordsMethod, hintedWalker, JOIN_SEPARATOR, walker, WORD_SEPARATOR } from './walker/index.js';
