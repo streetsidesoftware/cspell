@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 6.28.0 (2023-03-03)
+
+### Features
+
+* Support multiple `repMap` combinations ([#4270](https://github.com/streetsidesoftware/cspell-dicts/issues/4270)) ([bbc3ed4](https://github.com/streetsidesoftware/cspell-dicts/commit/bbc3ed4a1edb704401f40cf8913a5a9f522562fc))
+
 # 6.27.0 (2023-02-26)
 
 ### Features
