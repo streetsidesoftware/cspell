@@ -155,6 +155,13 @@ export interface SpellingDictionary extends DictionaryInfo {
     suggest(word: string, suggestOptions: SuggestOptions): SuggestionResult[];
     genSuggestions(collector: SuggestionCollector, suggestOptions: SuggestOptions): void;
     mapWord(word: string): string;
+    /**
+     * Generates all possible word combinations by applying `repMap`.
+     * This acts a bit like brace expansions in globs.
+     * @param word - the word to map
+     * @returns array of adjusted words.
+     */
+    remapWord?: (word: string) => string[];
     readonly size: number;
     readonly isDictionaryCaseSensitive: boolean;
     getErrors?(): Error[];

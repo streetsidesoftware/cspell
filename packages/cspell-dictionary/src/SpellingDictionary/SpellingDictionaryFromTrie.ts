@@ -10,7 +10,7 @@ import { CompoundWordsMethod, importTrie, suggestionCollector, Trie } from 'cspe
 
 import { autoCache, createCache01 } from '../util/AutoCache';
 import { clean } from '../util/clean';
-import { createMapper } from '../util/repMap';
+import { createMapper, createRepMapper } from '../util/repMap';
 import * as Defaults from './defaults';
 import type {
     FindResult,
@@ -39,6 +39,7 @@ export class SpellingDictionaryFromTrie implements SpellingDictionary {
     readonly knownWords = new Set<string>();
     readonly unknownWords = new Set<string>();
     readonly mapWord: (word: string) => string;
+    readonly remapWord: (word: string) => string[];
     readonly type = 'SpellingDictionaryFromTrie';
     readonly isDictionaryCaseSensitive: boolean;
     readonly containsNoSuggestWords: boolean;
@@ -53,6 +54,7 @@ export class SpellingDictionaryFromTrie implements SpellingDictionary {
         size?: number
     ) {
         this.mapWord = createMapper(options.repMap, options.dictionaryInformation?.ignore);
+        this.remapWord = createRepMapper(options.repMap, options.dictionaryInformation?.ignore);
         this.isDictionaryCaseSensitive = options.caseSensitive ?? !trie.isLegacy;
         this.containsNoSuggestWords = options.noSuggest || false;
         this._size = size || 0;
@@ -109,7 +111,7 @@ export class SpellingDictionaryFromTrie implements SpellingDictionary {
         useCompounds: number | boolean | undefined,
         ignoreCase: boolean
     ): FindAnyFormResult | undefined {
-        const outerForms = outerWordForms(word, this.mapWord);
+        const outerForms = outerWordForms(word, this.remapWord ? this.remapWord : (word) => [this.mapWord(word)]);
 
         for (const form of outerForms) {
             const r = this._findAnyForm(form, useCompounds, ignoreCase);
@@ -265,11 +267,11 @@ function findCache(fn: FindFunction, size = 2000): FindFunction {
     return find;
 }
 
-function outerWordForms(word: string, mapWord: (word: string) => string): Set<string> {
+function outerWordForms(word: string, mapWord: (word: string) => string[]): Set<string> {
     const forms = pipe(
         [word],
         opConcatMap((word) => [word, word.normalize('NFC'), word.normalize('NFD')]),
-        opConcatMap((word) => [word, mapWord(word)])
+        opConcatMap((word) => [word, ...mapWord(word)])
     );
 
     return new Set(forms);
