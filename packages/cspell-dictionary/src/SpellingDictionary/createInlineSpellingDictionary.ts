@@ -1,11 +1,11 @@
-import { createAutoResolveWeakCache } from '../util/AutoResolve';
-import { isDefined } from '../util/util';
-import { createSpellingDictionary } from './createSpellingDictionary';
-import { createFlagWordsDictionary } from './FlagWordsDictionary';
-import { createIgnoreWordsDictionary } from './IgnoreWordsDictionary';
-import type { DictionaryDefinitionInline, SpellingDictionary } from './SpellingDictionary';
-import { createCollection } from './SpellingDictionaryCollection';
-import { createSuggestDictionary } from './SuggestDictionary';
+import { createAutoResolveWeakCache } from '../util/AutoResolve.js';
+import { isDefined } from '../util/util.js';
+import { createSpellingDictionary } from './createSpellingDictionary.js';
+import { createFlagWordsDictionary } from './FlagWordsDictionary.js';
+import { createIgnoreWordsDictionary } from './IgnoreWordsDictionary.js';
+import type { DictionaryDefinitionInline, SpellingDictionary } from './SpellingDictionary.js';
+import { createCollection } from './SpellingDictionaryCollection.js';
+import { createSuggestDictionary } from './SuggestDictionary.js';
 
 const cache = createAutoResolveWeakCache<DictionaryDefinitionInline, SpellingDictionary>();
 

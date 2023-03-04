@@ -1,6 +1,6 @@
 import { describe, expect, test } from 'vitest';
 
-import { __testing__, createMapper } from './repMap';
+import { __testing__, createMapper } from './repMap.js';
 
 const { createMapperRegExp, charsetToRepMap, createTrie, calcAllEdits, applyEdits } = __testing__;
 

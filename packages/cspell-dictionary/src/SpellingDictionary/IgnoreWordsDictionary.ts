@@ -2,9 +2,9 @@ import { opFilter, opMap, pipe } from '@cspell/cspell-pipe/sync';
 import type { CompoundWordsMethod, SuggestionResult } from 'cspell-trie-lib';
 import { parseDictionaryLines } from 'cspell-trie-lib';
 
-import { createAutoResolveWeakCache } from '../util/AutoResolve';
-import { createSpellingDictionary } from './createSpellingDictionary';
-import * as Defaults from './defaults';
+import { createAutoResolveWeakCache } from '../util/AutoResolve.js';
+import { createSpellingDictionary } from './createSpellingDictionary.js';
+import * as Defaults from './defaults.js';
 import type {
     FindResult,
     HasOptions,
@@ -12,7 +12,7 @@ import type {
     SpellingDictionary,
     SpellingDictionaryOptions,
     SuggestOptions,
-} from './SpellingDictionary';
+} from './SpellingDictionary.js';
 
 const NormalizeForm = 'NFC' as const;
 

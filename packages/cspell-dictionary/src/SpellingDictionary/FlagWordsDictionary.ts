@@ -2,8 +2,8 @@ import { opMap, pipe } from '@cspell/cspell-pipe/sync';
 import type { CompoundWordsMethod, SuggestionResult, Trie } from 'cspell-trie-lib';
 import { buildTrieFast, parseDictionaryLines } from 'cspell-trie-lib';
 
-import { createAutoResolveWeakCache } from '../util/AutoResolve';
-import * as Defaults from './defaults';
+import { createAutoResolveWeakCache } from '../util/AutoResolve.js';
+import * as Defaults from './defaults.js';
 import type {
     FindResult,
     HasOptions,
@@ -12,12 +12,12 @@ import type {
     SpellingDictionaryOptions,
     SuggestArgs,
     SuggestOptions,
-} from './SpellingDictionary';
-import { defaultOptions } from './SpellingDictionary';
-import { SpellingDictionaryFromTrie } from './SpellingDictionaryFromTrie';
-import { suggestArgsToSuggestOptions } from './SpellingDictionaryMethods';
-import type { TyposDictionary } from './TyposDictionary';
-import { createTyposDictionary } from './TyposDictionary';
+} from './SpellingDictionary.js';
+import { defaultOptions } from './SpellingDictionary.js';
+import { SpellingDictionaryFromTrie } from './SpellingDictionaryFromTrie.js';
+import { suggestArgsToSuggestOptions } from './SpellingDictionaryMethods.js';
+import type { TyposDictionary } from './TyposDictionary.js';
+import { createTyposDictionary } from './TyposDictionary.js';
 
 class FlagWordsDictionaryTrie extends SpellingDictionaryFromTrie {
     readonly containsNoSuggestWords = false;

@@ -1,10 +1,10 @@
 import { Trie } from 'cspell-trie-lib';
 import { describe, expect, test } from 'vitest';
 
-import { createSpellingDictionary } from './createSpellingDictionary';
-import type { SpellingDictionaryOptions } from './SpellingDictionary';
-import { SpellingDictionaryFromTrie } from './SpellingDictionaryFromTrie';
-import { __testMethods__ } from './SpellingDictionaryMethods';
+import { createSpellingDictionary } from './createSpellingDictionary.js';
+import type { SpellingDictionaryOptions } from './SpellingDictionary.js';
+import { SpellingDictionaryFromTrie } from './SpellingDictionaryFromTrie.js';
+import { __testMethods__ } from './SpellingDictionaryMethods.js';
 
 // cSpell:ignore aple
 

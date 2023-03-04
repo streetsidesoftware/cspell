@@ -1,6 +1,6 @@
 import { describe, expect, test } from 'vitest';
 
-import { createTyposDictionary } from './TyposDictionary';
+import { createTyposDictionary } from './TyposDictionary.js';
 
 // const oc = expect.objectContaining;
 const isPreferred = true;

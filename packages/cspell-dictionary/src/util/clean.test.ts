@@ -1,6 +1,6 @@
 import { describe, expect, test } from 'vitest';
 
-import { clean } from './clean';
+import { clean } from './clean.js';
 
 describe('Validate util', () => {
     test('tests clean up obj', () => {

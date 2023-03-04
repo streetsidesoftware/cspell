@@ -1,4 +1,9 @@
-import type { TermsDefKey, TermValueTypo, TermValueTypoNoSuggestions, TermValueTypoWithSuggestions } from '../Terms';
+import type {
+    TermsDefKey,
+    TermValueTypo,
+    TermValueTypoNoSuggestions,
+    TermValueTypoWithSuggestions,
+} from '../Terms/index.js';
 
 export type TypoValueNoSuggestions = TermValueTypoNoSuggestions;
 export type TypoValueWithSuggestions = TermValueTypoWithSuggestions;

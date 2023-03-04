@@ -1,6 +1,6 @@
 import { opConcatMap, opFilter, pipe } from '@cspell/cspell-pipe/sync';
 
-import type { TypoEntry, TyposDef, TyposDefKey, TyposDefValue, TypoValueWithSuggestions } from './typos';
+import type { TypoEntry, TyposDef, TyposDefKey, TyposDefValue, TypoValueWithSuggestions } from './typos.js';
 
 function normalizeTyposDefValue(value: TyposDefValue): TyposDefValue {
     if (!value) return false;

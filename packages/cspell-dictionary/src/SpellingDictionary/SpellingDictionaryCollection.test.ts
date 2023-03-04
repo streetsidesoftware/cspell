@@ -1,13 +1,13 @@
 import * as Trie from 'cspell-trie-lib';
 import { describe, expect, test } from 'vitest';
 
-import { createFailedToLoadDictionary, createSpellingDictionary } from './createSpellingDictionary';
-import { createFlagWordsDictionary } from './FlagWordsDictionary';
-import { createIgnoreWordsDictionary } from './IgnoreWordsDictionary';
-import type { SpellingDictionaryOptions } from './SpellingDictionary';
-import { CompoundWordsMethod } from './SpellingDictionary';
-import { createCollection } from './SpellingDictionaryCollection';
-import { SpellingDictionaryFromTrie } from './SpellingDictionaryFromTrie';
+import { createFailedToLoadDictionary, createSpellingDictionary } from './createSpellingDictionary.js';
+import { createFlagWordsDictionary } from './FlagWordsDictionary.js';
+import { createIgnoreWordsDictionary } from './IgnoreWordsDictionary.js';
+import type { SpellingDictionaryOptions } from './SpellingDictionary.js';
+import { CompoundWordsMethod } from './SpellingDictionary.js';
+import { createCollection } from './SpellingDictionaryCollection.js';
+import { SpellingDictionaryFromTrie } from './SpellingDictionaryFromTrie.js';
 
 describe('Verify using multiple dictionaries', () => {
     const wordsA = [

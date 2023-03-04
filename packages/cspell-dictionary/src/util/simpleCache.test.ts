@@ -1,6 +1,6 @@
 import { describe, expect, test, vi } from 'vitest';
 
-import { AutoCache, AutoWeakCache, SimpleCache, SimpleWeakCache } from './simpleCache';
+import { AutoCache, AutoWeakCache, SimpleCache, SimpleWeakCache } from './simpleCache.js';
 
 describe('AutoCache', () => {
     test.each`

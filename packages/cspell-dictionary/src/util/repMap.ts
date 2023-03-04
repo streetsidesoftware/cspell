@@ -1,8 +1,8 @@
 import type { CharacterSet, ReplaceEntry, ReplaceMap } from '@cspell/cspell-types';
 import { expandCharacterSet } from 'cspell-trie-lib';
 
-import { escapeRegEx } from './regexHelper';
-import { isDefined } from './util';
+import { escapeRegEx } from './regexHelper.js';
+import { isDefined } from './util.js';
 
 export type ReplaceMapper = (src: string) => string;
 

@@ -1,7 +1,7 @@
 import assert from 'assert';
 
-import type { TypoEntry, TyposDef, TyposDefValue } from './typos';
-import { appendToDef, createTyposDef } from './util';
+import type { TypoEntry, TyposDef, TyposDefValue } from './typos.js';
+import { appendToDef, createTyposDef } from './util.js';
 
 function assertString(v: unknown): v is string {
     assert(typeof v === 'string', 'A string was expected.');

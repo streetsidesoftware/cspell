@@ -1,12 +1,12 @@
 import { buildTrieFast, parseDictionaryLines } from 'cspell-trie-lib';
 import { deepEqual } from 'fast-equals';
 
-import type { IterableLike } from '../util/IterableLike';
-import { AutoWeakCache, SimpleCache } from '../util/simpleCache';
-import type { DictionaryInfo, SpellingDictionary, SpellingDictionaryOptions } from './SpellingDictionary';
-import { defaultOptions } from './SpellingDictionary';
-import { SpellingDictionaryFromTrie } from './SpellingDictionaryFromTrie';
-import { createWeightMapFromDictionaryInformation } from './SpellingDictionaryMethods';
+import type { IterableLike } from '../util/IterableLike.js';
+import { AutoWeakCache, SimpleCache } from '../util/simpleCache.js';
+import type { DictionaryInfo, SpellingDictionary, SpellingDictionaryOptions } from './SpellingDictionary.js';
+import { defaultOptions } from './SpellingDictionary.js';
+import { SpellingDictionaryFromTrie } from './SpellingDictionaryFromTrie.js';
+import { createWeightMapFromDictionaryInformation } from './SpellingDictionaryMethods.js';
 
 type CreateSpellingDictionaryParams = Parameters<typeof createSpellingDictionary>;
 

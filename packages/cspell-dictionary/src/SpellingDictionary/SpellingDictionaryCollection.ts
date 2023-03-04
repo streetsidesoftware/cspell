@@ -1,8 +1,8 @@
 import { CASE_INSENSITIVE_PREFIX } from 'cspell-trie-lib';
 import { genSequence } from 'gensequence';
 
-import { isDefined } from '../util/util';
-import * as Defaults from './defaults';
+import { isDefined } from '../util/util.js';
+import * as Defaults from './defaults.js';
 import type {
     FindResult,
     HasOptions,
@@ -13,14 +13,14 @@ import type {
     SuggestionCollector,
     SuggestionResult,
     SuggestOptions,
-} from './SpellingDictionary';
-import { CompoundWordsMethod } from './SpellingDictionary';
+} from './SpellingDictionary.js';
+import { CompoundWordsMethod } from './SpellingDictionary.js';
 import {
     defaultNumSuggestions,
     hasOptionToSearchOption,
     suggestArgsToSuggestOptions,
     suggestionCollector,
-} from './SpellingDictionaryMethods';
+} from './SpellingDictionaryMethods.js';
 
 function identityString(w: string): string {
     return w;

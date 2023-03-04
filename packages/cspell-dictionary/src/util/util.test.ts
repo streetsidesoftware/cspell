@@ -1,6 +1,6 @@
 import { describe, expect, test } from 'vitest';
 
-import { isDefined } from './util';
+import { isDefined } from './util.js';
 
 describe('Validate util', () => {
     test.each`

@@ -10,7 +10,7 @@ export type {
     SuggestionCollector,
     SuggestionResult,
     SuggestOptions,
-} from './SpellingDictionary';
+} from './SpellingDictionary/index.js';
 export {
     createCachingDictionary,
     createCollection,
@@ -22,4 +22,4 @@ export {
     createSpellingDictionary,
     createSpellingDictionaryFromTrieFile,
     createSuggestDictionary,
-} from './SpellingDictionary';
+} from './SpellingDictionary/index.js';

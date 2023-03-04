@@ -1,4 +1,4 @@
-import type { RemoveUndefined } from './types';
+import type { RemoveUndefined } from './types.js';
 /**
  * Delete all `undefined` fields from an object.
  * @param src - object to be cleaned

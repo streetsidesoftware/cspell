@@ -7,4 +7,4 @@ export {
     TermValueTypo,
     TermValueTypoNoSuggestions,
     TermValueTypoWithSuggestions,
-} from './terms';
+} from './terms.js';
