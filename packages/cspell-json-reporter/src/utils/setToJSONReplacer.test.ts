@@ -1,14 +1,16 @@
-import { setToJSONReplacer } from './setToJSONReplacer';
+import { describe, expect, test } from 'vitest';
+
+import { setToJSONReplacer } from './setToJSONReplacer.js';
 
 describe('setToJSONReplacer', () => {
-    it('converts Set to Array', () => {
+    test('converts Set to Array', () => {
         const input = {
             foo: new Set(['foo', 'bar', 123]),
         };
         expect(JSON.stringify(input, setToJSONReplacer)).toMatchSnapshot();
     });
 
-    it('ignores other values', () => {
+    test('ignores other values', () => {
         const input = {
             foo: 'bar',
             '123': '1',

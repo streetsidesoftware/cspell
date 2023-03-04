@@ -1,17 +1,17 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`validateSettings throws for invalid settings [] 1`] = `"cspell-json-reporter settings must be an object"`;
+exports[`validateSettings > throws for invalid settings 'hello' 1`] = `"cspell-json-reporter settings must be an object"`;
 
-exports[`validateSettings throws for invalid settings {"debug": [Array], "outFile": "foobar"} 1`] = `"cspell-json-reporter settings.debug must be a boolean"`;
+exports[`validateSettings > throws for invalid settings [] 1`] = `"cspell-json-reporter settings must be an object"`;
 
-exports[`validateSettings throws for invalid settings {"outFile": "foobar", "verbose": 123} 1`] = `"cspell-json-reporter settings.verbose must be a boolean"`;
+exports[`validateSettings > throws for invalid settings { outFile: 'foobar', debug: [] } 1`] = `"cspell-json-reporter settings.debug must be a boolean"`;
 
-exports[`validateSettings throws for invalid settings {"outFile": [Object]} 1`] = `"cspell-json-reporter settings.outFile must be a string"`;
+exports[`validateSettings > throws for invalid settings { outFile: 'foobar', verbose: 123 } 1`] = `"cspell-json-reporter settings.verbose must be a boolean"`;
 
-exports[`validateSettings throws for invalid settings {"outFile": 1} 1`] = `"cspell-json-reporter settings.outFile must be a string"`;
+exports[`validateSettings > throws for invalid settings { outFile: {} } 1`] = `"cspell-json-reporter settings.outFile must be a string"`;
 
-exports[`validateSettings throws for invalid settings false 1`] = `"cspell-json-reporter settings must be an object"`;
+exports[`validateSettings > throws for invalid settings { outFile: 1 } 1`] = `"cspell-json-reporter settings.outFile must be a string"`;
 
-exports[`validateSettings throws for invalid settings hello 1`] = `"cspell-json-reporter settings must be an object"`;
+exports[`validateSettings > throws for invalid settings false 1`] = `"cspell-json-reporter settings must be an object"`;
 
-exports[`validateSettings throws for invalid settings true 1`] = `"cspell-json-reporter settings must be an object"`;
+exports[`validateSettings > throws for invalid settings true 1`] = `"cspell-json-reporter settings must be an object"`;
