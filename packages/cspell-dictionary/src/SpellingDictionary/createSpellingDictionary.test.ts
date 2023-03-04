@@ -1,4 +1,5 @@
 import type { DictionaryInformation } from '@cspell/cspell-types';
+import { describe, expect, test } from 'vitest';
 
 import { createFailedToLoadDictionary, createSpellingDictionary } from './createSpellingDictionary';
 import type { SpellingDictionaryOptions } from './SpellingDictionary';

@@ -1,3 +1,5 @@
+import { describe, expect, test } from 'vitest';
+
 import * as Text from './text';
 
 // cSpell:ignore Ápple DBAs ctrip γάμμα

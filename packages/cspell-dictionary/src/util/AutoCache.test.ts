@@ -1,3 +1,5 @@
+import { describe, expect, test } from 'vitest';
+
 import { autoCache, extractStats } from './AutoCache';
 
 describe('AutoCache', () => {

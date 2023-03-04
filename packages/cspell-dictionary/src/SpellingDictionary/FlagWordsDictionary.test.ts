@@ -1,3 +1,5 @@
+import { describe, expect, test } from 'vitest';
+
 import { createFlagWordsDictionary } from './FlagWordsDictionary';
 
 // const oc = expect.objectContaining;

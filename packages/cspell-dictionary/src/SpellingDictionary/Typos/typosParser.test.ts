@@ -1,3 +1,5 @@
+import { describe, expect, test } from 'vitest';
+
 import { createTyposDefFromEntries, parseTyposFile, processEntriesToTyposDef } from './typosParser';
 
 describe('TypoParser', () => {

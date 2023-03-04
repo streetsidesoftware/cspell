@@ -1,4 +1,5 @@
 import type { DictionaryDefinitionInline } from '@cspell/cspell-types';
+import { describe, expect, test } from 'vitest';
 
 import { createInlineSpellingDictionary } from './createInlineSpellingDictionary';
 

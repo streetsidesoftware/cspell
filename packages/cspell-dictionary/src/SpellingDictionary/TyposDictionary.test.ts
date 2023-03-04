@@ -1,3 +1,5 @@
+import { describe, expect, test } from 'vitest';
+
 import { createTyposDictionary } from './TyposDictionary';
 
 // const oc = expect.objectContaining;

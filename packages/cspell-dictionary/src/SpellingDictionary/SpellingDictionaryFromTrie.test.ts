@@ -1,4 +1,5 @@
 import { buildTrieFast } from 'cspell-trie-lib';
+import { describe, expect, test } from 'vitest';
 
 import { __testing__, SpellingDictionaryFromTrie } from './SpellingDictionaryFromTrie';
 

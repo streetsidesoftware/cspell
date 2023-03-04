@@ -1,4 +1,5 @@
 import * as Trie from 'cspell-trie-lib';
+import { describe, expect, test } from 'vitest';
 
 import { createFailedToLoadDictionary, createSpellingDictionary } from './createSpellingDictionary';
 import { createFlagWordsDictionary } from './FlagWordsDictionary';

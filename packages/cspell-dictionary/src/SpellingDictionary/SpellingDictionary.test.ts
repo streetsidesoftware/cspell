@@ -1,4 +1,5 @@
 import { Trie } from 'cspell-trie-lib';
+import { describe, expect, test } from 'vitest';
 
 import { createSpellingDictionary } from './createSpellingDictionary';
 import type { SpellingDictionaryOptions } from './SpellingDictionary';

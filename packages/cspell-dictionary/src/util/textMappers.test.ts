@@ -1,3 +1,5 @@
+import { describe, expect, test } from 'vitest';
+
 import { mapperNormalizeNFC, mapperRemoveCaseAndAccents } from './textMappers';
 
 describe('textMappers', () => {

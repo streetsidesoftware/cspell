@@ -1,3 +1,5 @@
+import { describe, expect, test } from 'vitest';
+
 import { createIgnoreWordsDictionary } from './IgnoreWordsDictionary';
 
 // const oc = expect.objectContaining;

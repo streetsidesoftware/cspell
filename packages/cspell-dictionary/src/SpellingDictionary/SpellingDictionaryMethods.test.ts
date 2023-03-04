@@ -1,3 +1,5 @@
+import { describe, expect, test } from 'vitest';
+
 import { hasOptionToSearchOption, impersonateCollector, suggestionCollector } from './SpellingDictionaryMethods';
 
 describe('SpellingDictionaryMethods', () => {
