@@ -1,6 +1,6 @@
 import { AssertionError } from 'assert';
 
-import type { CSpellJSONReporterSettings } from '../CSpellJSONReporterSettings';
+import type { CSpellJSONReporterSettings } from '../CSpellJSONReporterSettings.js';
 
 function assertBooleanOrUndefined(key: string, value: unknown): asserts value is boolean | undefined {
     if (typeof value !== 'boolean' && value !== undefined) {

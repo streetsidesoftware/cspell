@@ -1,4 +1,6 @@
-jest.mock('fs', () => ({
+import { afterEach, beforeEach, describe, expect, test, vi } from 'vitest';
+
+vi.mock('fs', () => ({
     promises: {
         writeFile: async () => undefined,
         mkdir: async () => undefined,
@@ -10,26 +12,26 @@ import { MessageTypes } from '@cspell/cspell-types';
 import { promises as fs } from 'fs';
 import * as path from 'path';
 
-import { getReporter } from './index';
+import { getReporter } from './index.js';
 
 describe('getReporter', () => {
-    let mockWriteFile = jest.spyOn(fs, 'writeFile');
+    let mockWriteFile = vi.spyOn(fs, 'writeFile');
 
     beforeEach(() => {
-        jest.resetAllMocks();
-        mockWriteFile = jest.spyOn(fs, 'writeFile');
+        vi.resetAllMocks();
+        mockWriteFile = vi.spyOn(fs, 'writeFile');
     });
 
     afterEach(() => {
-        jest.resetAllMocks();
+        vi.resetAllMocks();
         mockWriteFile.mockReset();
     });
 
-    it('throws for invalid config', () => {
+    test('throws for invalid config', () => {
         expect(() => getReporter({ outFile: {} })).toThrowErrorMatchingSnapshot();
     });
 
-    it('saves json to file', async () => {
+    test('saves json to file', async () => {
         const reporter = getReporter({ outFile: 'out.json' });
         await runReporter(reporter);
         expect(mockWriteFile).toHaveBeenCalledTimes(1);
@@ -38,22 +40,22 @@ describe('getReporter', () => {
         expect(mockWriteFile.mock.calls[0][1]).toMatchSnapshot();
     });
 
-    it.each`
+    test.each`
         settings
         ${undefined}
         ${{ outFile: undefined }}
         ${{ outFile: 'stdout' }}
         ${{ outFile: 'stderr' }}
     `('saves json to stdout/stderr $settings', async ({ settings }) => {
-        const stdout = jest.spyOn(console, 'log').mockImplementation(() => undefined);
-        const stderr = jest.spyOn(console, 'error').mockImplementation(() => undefined);
+        const stdout = vi.spyOn(console, 'log').mockImplementation(() => undefined);
+        const stderr = vi.spyOn(console, 'error').mockImplementation(() => undefined);
         const reporter = getReporter(settings);
         await runReporter(reporter);
         expect(joinCalls(stderr.mock.calls)).toMatchSnapshot();
         expect(joinCalls(stdout.mock.calls)).toMatchSnapshot();
     });
 
-    it('saves additional data', async () => {
+    test('saves additional data', async () => {
         const reporter = getReporter({ outFile: 'out.json', verbose: true, debug: true, progress: true });
         await runReporter(reporter);
         expect(fs.writeFile).toHaveBeenCalledTimes(1);

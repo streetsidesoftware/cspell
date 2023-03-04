@@ -3,10 +3,10 @@ import { MessageTypes } from '@cspell/cspell-types';
 import { promises as fs } from 'fs';
 import * as path from 'path';
 
-import type { CSpellJSONReporterOutput } from './CSpellJSONReporterOutput';
-import type { CSpellJSONReporterSettings } from './CSpellJSONReporterSettings';
-import { setToJSONReplacer } from './utils/setToJSONReplacer';
-import { validateSettings } from './utils/validateSettings';
+import type { CSpellJSONReporterOutput } from './CSpellJSONReporterOutput.js';
+import type { CSpellJSONReporterSettings } from './CSpellJSONReporterSettings.js';
+import { setToJSONReplacer } from './utils/setToJSONReplacer.js';
+import { validateSettings } from './utils/validateSettings.js';
 
 function mkdirp(p: string) {
     return fs.mkdir(p, { recursive: true });
