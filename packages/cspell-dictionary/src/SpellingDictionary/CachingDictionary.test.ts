@@ -1,5 +1,7 @@
-import { createCachingDictionary } from './CachingDictionary';
-import { createSpellingDictionary } from './createSpellingDictionary';
+import { describe, expect, test } from 'vitest';
+
+import { createCachingDictionary } from './CachingDictionary.js';
+import { createSpellingDictionary } from './createSpellingDictionary.js';
 
 const oc = expect.objectContaining;
 

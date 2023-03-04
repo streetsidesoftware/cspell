@@ -1,4 +1,6 @@
-import { AutoCache, AutoWeakCache, SimpleCache, SimpleWeakCache } from './simpleCache';
+import { describe, expect, test, vi } from 'vitest';
+
+import { AutoCache, AutoWeakCache, SimpleCache, SimpleWeakCache } from './simpleCache.js';
 
 describe('AutoCache', () => {
     test.each`
@@ -14,7 +16,7 @@ describe('AutoCache', () => {
         ${[1, 2, 1, 2, 3, 1, 3, 2, 1, 2]}    | ${1} | ${[1, 2, 3, 2]}
         ${[1, 2, 1, 2, 3, 1, 3, 2, 1, 2, 3]} | ${1} | ${[1, 2, 3, 2, 3]}
     `('AutoCache $items $size', ({ items, size, expected }) => {
-        const mock = jest.fn((a) => a);
+        const mock = vi.fn((a) => a);
         const cache = new AutoCache(mock, size);
         for (const v of items) {
             const r = cache.get(v);
@@ -141,7 +143,7 @@ describe('AutoWeakCache', () => {
         ${[s(1), s(2), s(1), s(2), s(3), s(1), s(3), s(2), s(1), s(2)]}       | ${1} | ${[s(1), s(2), s(3), s(2)]}
         ${[s(1), s(2), s(1), s(2), s(3), s(1), s(3), s(2), s(1), s(2), s(3)]} | ${1} | ${[s(1), s(2), s(3), s(2), s(3)]}
     `('AutoWeakCache $items $size', ({ items, size, expected }) => {
-        const mock = jest.fn((a) => a);
+        const mock = vi.fn((a) => a);
         const cache = new AutoWeakCache(mock, size);
         for (const v of items) {
             const r = cache.get(v);

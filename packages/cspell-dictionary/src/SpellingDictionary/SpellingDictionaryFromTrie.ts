@@ -8,10 +8,10 @@ import type {
 } from 'cspell-trie-lib';
 import { CompoundWordsMethod, importTrie, suggestionCollector, Trie } from 'cspell-trie-lib';
 
-import { autoCache, createCache01 } from '../util/AutoCache';
-import { clean } from '../util/clean';
-import { createMapper, createRepMapper } from '../util/repMap';
-import * as Defaults from './defaults';
+import { autoCache, createCache01 } from '../util/AutoCache.js';
+import { clean } from '../util/clean.js';
+import { createMapper, createRepMapper } from '../util/repMap.js';
+import * as Defaults from './defaults.js';
 import type {
     FindResult,
     HasOptions,
@@ -19,7 +19,7 @@ import type {
     SpellingDictionaryOptions,
     SuggestArgs,
     SuggestOptions,
-} from './SpellingDictionary';
+} from './SpellingDictionary.js';
 import {
     createWeightMapFromDictionaryInformation,
     defaultNumSuggestions,
@@ -28,7 +28,7 @@ import {
     suggestArgsToSuggestOptions,
     wordSearchForms,
     wordSuggestFormsArray,
-} from './SpellingDictionaryMethods';
+} from './SpellingDictionaryMethods.js';
 
 const findWordOptionsCaseSensitive: FindWordOptions = Object.freeze({ caseSensitive: true });
 const findWordOptionsNotCaseSensitive: FindWordOptions = Object.freeze({ caseSensitive: false });

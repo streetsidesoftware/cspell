@@ -1,8 +1,8 @@
-import type { CacheStats } from '../util/AutoCache';
-import { autoCache, extractStats } from '../util/AutoCache';
-import type { SearchOptions, SpellingDictionary } from './SpellingDictionary';
-import type { SpellingDictionaryCollection } from './SpellingDictionaryCollection';
-import { canonicalSearchOptions } from './SpellingDictionaryMethods';
+import type { CacheStats } from '../util/AutoCache.js';
+import { autoCache, extractStats } from '../util/AutoCache.js';
+import type { SearchOptions, SpellingDictionary } from './SpellingDictionary.js';
+import type { SpellingDictionaryCollection } from './SpellingDictionaryCollection.js';
+import { canonicalSearchOptions } from './SpellingDictionaryMethods.js';
 
 interface CallStats {
     name: string;

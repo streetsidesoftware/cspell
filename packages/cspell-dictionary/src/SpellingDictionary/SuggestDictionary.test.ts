@@ -1,4 +1,6 @@
-import { createSuggestDictionary } from './SuggestDictionary';
+import { describe, expect, test } from 'vitest';
+
+import { createSuggestDictionary } from './SuggestDictionary.js';
 
 // const oc = expect.objectContaining;
 const isPreferred = true;

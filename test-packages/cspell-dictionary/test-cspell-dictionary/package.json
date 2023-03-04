@@ -1,0 +1,31 @@
+{
+  "name": "test-cspell-dictionary",
+  "version": "6.28.0",
+  "description": "Pure testing package for cspell-io. Its purpose is to verify cspell-io dependencies.",
+  "private": true,
+  "bin": {
+    "test-cjs": "./bin.cjs",
+    "test-mjs": "./bin.mjs",
+    "test-rollup-cjs": "./bin.rollup.cjs",
+    "test-rollup-mjs": "./bin.rollup.mjs"
+  },
+  "type": "commonjs",
+  "scripts": {
+    "clean": "shx rm -rf dist .rollup.cache",
+    "build": "pnpm build:ts && pnpm build:rollup",
+    "build:rollup": "rollup -c rollup.config.mjs",
+    "build:ts": "pnpm run compile && ts2mjs dist/esm",
+    "clean-build": "pnpm run clean && pnpm run build",
+    "compile": "tsc -b .",
+    "test": "pnpm test:unit && pnpm test:smoke",
+    "test:smoke": "node ./bin.mjs && node ./bin.cjs && node ./bin.rollup.mjs && node ./bin.rollup.cjs",
+    "test:unit": "vitest run"
+  },
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "cspell-dictionary": "workspace:*"
+  },
+  "main": "index.js",
+  "keywords": []
+}

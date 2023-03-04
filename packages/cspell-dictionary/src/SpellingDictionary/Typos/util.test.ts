@@ -1,4 +1,6 @@
-import { appendToDef, createTyposDef, extractAllSuggestions, extractIgnoreValues } from './util';
+import { describe, expect, test } from 'vitest';
+
+import { appendToDef, createTyposDef, extractAllSuggestions, extractIgnoreValues } from './util.js';
 
 describe('typos/util', () => {
     test.each`

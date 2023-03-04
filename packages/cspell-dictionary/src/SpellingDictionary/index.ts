@@ -1,11 +1,11 @@
-export { CachingDictionary, createCachingDictionary } from './CachingDictionary';
-export { createInlineSpellingDictionary } from './createInlineSpellingDictionary';
-export { createFailedToLoadDictionary, createSpellingDictionary } from './createSpellingDictionary';
+export { CachingDictionary, createCachingDictionary } from './CachingDictionary.js';
+export { createInlineSpellingDictionary } from './createInlineSpellingDictionary.js';
+export { createFailedToLoadDictionary, createSpellingDictionary } from './createSpellingDictionary.js';
 export {
     createFlagWordsDictionary,
     createFlagWordsDictionary as createForbiddenWordsDictionary,
-} from './FlagWordsDictionary';
-export { createIgnoreWordsDictionary } from './IgnoreWordsDictionary';
+} from './FlagWordsDictionary.js';
+export { createIgnoreWordsDictionary } from './IgnoreWordsDictionary.js';
 export type {
     DictionaryDefinitionInline,
     FindOptions,
@@ -17,8 +17,8 @@ export type {
     SuggestionCollector,
     SuggestionResult,
     SuggestOptions,
-} from './SpellingDictionary';
-export { createCollection, SpellingDictionaryCollection } from './SpellingDictionaryCollection';
-export { createSpellingDictionaryFromTrieFile } from './SpellingDictionaryFromTrie';
-export { createSuggestDictionary } from './SuggestDictionary';
-export { createTyposDictionary } from './TyposDictionary';
+} from './SpellingDictionary.js';
+export { createCollection, SpellingDictionaryCollection } from './SpellingDictionaryCollection.js';
+export { createSpellingDictionaryFromTrieFile } from './SpellingDictionaryFromTrie.js';
+export { createSuggestDictionary } from './SuggestDictionary.js';
+export { createTyposDictionary } from './TyposDictionary.js';

@@ -1,4 +1,6 @@
-import { hasOptionToSearchOption, impersonateCollector, suggestionCollector } from './SpellingDictionaryMethods';
+import { describe, expect, test } from 'vitest';
+
+import { hasOptionToSearchOption, impersonateCollector, suggestionCollector } from './SpellingDictionaryMethods.js';
 
 describe('SpellingDictionaryMethods', () => {
     test('impersonateCollector', () => {

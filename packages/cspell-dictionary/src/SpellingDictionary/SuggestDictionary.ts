@@ -1,9 +1,9 @@
 import { pipe } from '@cspell/cspell-pipe/sync';
 import type { CompoundWordsMethod, SuggestionCollector, SuggestionResult } from 'cspell-trie-lib';
 
-import { createAutoResolveWeakCache } from '../util/AutoResolve';
-import { mapperRemoveCaseAndAccents } from '../util/textMappers';
-import * as defaults from './defaults';
+import { createAutoResolveWeakCache } from '../util/AutoResolve.js';
+import { mapperRemoveCaseAndAccents } from '../util/textMappers.js';
+import * as defaults from './defaults.js';
 import type {
     FindResult,
     HasOptions,
@@ -12,9 +12,9 @@ import type {
     SpellingDictionary,
     SpellingDictionaryOptions,
     SuggestOptions,
-} from './SpellingDictionary';
-import { processEntriesToTyposDef, type TypoEntry, type TyposDef } from './Typos';
-import { extractAllSuggestions } from './Typos/util';
+} from './SpellingDictionary.js';
+import { processEntriesToTyposDef, type TypoEntry, type TyposDef } from './Typos/index.js';
+import { extractAllSuggestions } from './Typos/util.js';
 
 export interface SuggestDictionary extends SpellingDictionary {
     /**

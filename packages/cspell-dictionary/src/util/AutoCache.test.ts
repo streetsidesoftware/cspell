@@ -1,4 +1,6 @@
-import { autoCache, extractStats } from './AutoCache';
+import { describe, expect, test } from 'vitest';
+
+import { autoCache, extractStats } from './AutoCache.js';
 
 describe('AutoCache', () => {
     test.each`

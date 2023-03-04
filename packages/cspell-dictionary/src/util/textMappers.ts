@@ -1,4 +1,4 @@
-import { removeAccents } from './text';
+import { removeAccents } from './text.js';
 
 export function* mapperNormalizeNFC(words: Iterable<string>): Iterable<string> {
     for (const word of words) {
