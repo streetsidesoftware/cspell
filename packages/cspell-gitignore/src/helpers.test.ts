@@ -2,7 +2,7 @@ import * as path from 'path';
 import { win32 } from 'path';
 import { describe, expect, test } from 'vitest';
 
-import { contains, directoryRoot, factoryPathHelper, findRepoRoot, isParentOf, makeRelativeTo } from './helpers';
+import { contains, directoryRoot, factoryPathHelper, findRepoRoot, isParentOf, makeRelativeTo } from './helpers.js';
 
 const pkg = path.resolve(__dirname, '..');
 const gitRoot = path.resolve(pkg, '../..');

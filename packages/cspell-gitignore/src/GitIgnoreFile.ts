@@ -3,7 +3,7 @@ import { GlobMatcher } from 'cspell-glob';
 import { promises as fs } from 'fs';
 import * as path from 'path';
 
-import { isDefined, isParentOf, makeRelativeTo } from './helpers';
+import { isDefined, isParentOf, makeRelativeTo } from './helpers.js';
 
 export interface IsIgnoredExResult {
     glob: string | undefined;

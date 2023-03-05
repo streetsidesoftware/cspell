@@ -2,7 +2,7 @@ import { GlobMatcher } from 'cspell-glob';
 import * as path from 'path';
 import { describe, expect, test } from 'vitest';
 
-import { __testing__, GitIgnoreFile, GitIgnoreHierarchy, loadGitIgnore } from './GitIgnoreFile';
+import { __testing__, GitIgnoreFile, GitIgnoreHierarchy, loadGitIgnore } from './GitIgnoreFile.js';
 
 const { mustBeHierarchical } = __testing__;
 

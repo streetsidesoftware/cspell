@@ -1,7 +1,7 @@
 import * as path from 'path';
 import { describe, expect, test } from 'vitest';
 
-import { GitIgnore } from './GitIgnore';
+import { GitIgnore } from './GitIgnore.js';
 
 const pkg = path.resolve(__dirname, '..');
 const packages = path.resolve(pkg, '..');
