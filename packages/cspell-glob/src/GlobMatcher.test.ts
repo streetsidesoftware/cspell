@@ -1,15 +1,16 @@
 import mm from 'micromatch';
 import * as path from 'path';
+import { describe, expect, test } from 'vitest';
 
-import type { GlobMatchOptions, MatcherMode } from './GlobMatcher';
-import { GlobMatcher } from './GlobMatcher';
+import type { GlobMatchOptions, MatcherMode } from './GlobMatcher.js';
+import { GlobMatcher } from './GlobMatcher.js';
 import type {
     GlobMatch,
     GlobPattern,
     GlobPatternNormalized,
     GlobPatternWithOptionalRoot,
     PathInterface,
-} from './GlobMatcherTypes';
+} from './GlobMatcherTypes.js';
 
 const defaultCwdWin32 = 'C:\\user\\home\\project\\testing';
 const defaultCwdPosix = '/user/home/project/testing';
