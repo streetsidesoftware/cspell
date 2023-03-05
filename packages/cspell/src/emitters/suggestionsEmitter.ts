@@ -1,7 +1,7 @@
 import chalk from 'chalk';
 import type { SuggestedWord, SuggestionsForWordResult } from 'cspell-lib';
 
-import { padLeft, padWidth, width } from '../util/util';
+import { padLeft, padWidth, width } from '../util/util.js';
 
 export interface EmitSuggestionOptions {
     verbose?: number;

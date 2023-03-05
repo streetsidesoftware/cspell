@@ -2,8 +2,8 @@ import getStdin from 'get-stdin';
 import * as path from 'path';
 import { afterEach, describe, expect, test, vi } from 'vitest';
 
-import { asyncIterableToArray } from './async';
-import { IOError } from './errors';
+import { asyncIterableToArray } from './async.js';
+import { IOError } from './errors.js';
 import {
     isDir,
     isFile,
@@ -12,7 +12,7 @@ import {
     readFileListFile,
     readFileListFiles,
     resolveFilename,
-} from './fileHelper';
+} from './fileHelper.js';
 
 vi.mock('get-stdin', () => ({
     default: vi.fn(),

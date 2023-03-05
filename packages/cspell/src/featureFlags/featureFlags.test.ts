@@ -1,6 +1,6 @@
 import { describe, expect, test, vi } from 'vitest';
 
-import { getFeatureFlags, parseFeatureFlags } from './featureFlags';
+import { getFeatureFlags, parseFeatureFlags } from './featureFlags.js';
 
 describe('featureFlags', () => {
     test('Unknown flag', () => {

@@ -1,10 +1,10 @@
 import * as path from 'path';
 import { describe, expect, test } from 'vitest';
 
-import { CheckFailed } from '../app';
-import { InMemoryReporter } from '../util/InMemoryReporter';
-import { runLint } from './lint';
-import { LintRequest } from './LintRequest';
+import { CheckFailed } from '../app.js';
+import { InMemoryReporter } from '../util/InMemoryReporter.js';
+import { runLint } from './lint.js';
+import { LintRequest } from './LintRequest.js';
 
 const root = path.resolve(__dirname, '../..');
 const samples = path.resolve(root, 'samples');

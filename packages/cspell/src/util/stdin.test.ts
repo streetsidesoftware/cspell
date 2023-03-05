@@ -1,8 +1,8 @@
 import * as readline from 'readline';
 import { describe, expect, test, vi } from 'vitest';
 
-import { asyncIterableToArray, mergeAsyncIterables } from './async';
-import { readStdin } from './stdin';
+import { asyncIterableToArray, mergeAsyncIterables } from './async.js';
+import { readStdin } from './stdin.js';
 
 vi.mock('readline');
 const mockCreateInterface = vi.mocked(readline.createInterface);

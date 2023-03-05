@@ -11,18 +11,18 @@ import {
     traceWordsAsync,
 } from 'cspell-lib';
 
-import { getReporter } from './cli-reporter';
-import type { TimedSuggestionsForWordResult } from './emitters/suggestionsEmitter';
-import { getFeatureFlags, parseFeatureFlags } from './featureFlags';
-import { LintRequest, runLint } from './lint';
-import type { BaseOptions, LegacyOptions, LinterCliOptions, SuggestionOptions, TraceOptions } from './options';
-import { fixLegacy } from './options';
-import { simpleRepl } from './repl';
-import { fileInfoToDocument, readConfig, readFileInfo } from './util/fileHelper';
-import { finalizeReporter } from './util/reporters';
-import { readStdin } from './util/stdin';
-import { getTimeMeasurer } from './util/timer';
-import * as util from './util/util';
+import { getReporter } from './cli-reporter.js';
+import type { TimedSuggestionsForWordResult } from './emitters/suggestionsEmitter.js';
+import { getFeatureFlags, parseFeatureFlags } from './featureFlags/index.js';
+import { LintRequest, runLint } from './lint/index.js';
+import type { BaseOptions, LegacyOptions, LinterCliOptions, SuggestionOptions, TraceOptions } from './options.js';
+import { fixLegacy } from './options.js';
+import { simpleRepl } from './repl/index.js';
+import { fileInfoToDocument, readConfig, readFileInfo } from './util/fileHelper.js';
+import { finalizeReporter } from './util/reporters.js';
+import { readStdin } from './util/stdin.js';
+import { getTimeMeasurer } from './util/timer.js';
+import * as util from './util/util.js';
 export type { TraceResult } from 'cspell-lib';
 export { IncludeExcludeFlag } from 'cspell-lib';
 

@@ -2,17 +2,17 @@ import type { Command } from 'commander';
 import { Option as CommanderOption, program } from 'commander';
 import { satisfies as semverSatisfies } from 'semver';
 
-import { commandCheck } from './commandCheck';
-import { commandLink } from './commandLink';
-import { commandLint } from './commandLint';
-import { commandSuggestion } from './commandSuggestion';
-import { commandTrace } from './commandTrace';
-import { ApplicationError } from './util/errors';
+import { commandCheck } from './commandCheck.js';
+import { commandLink } from './commandLink.js';
+import { commandLint } from './commandLint.js';
+import { commandSuggestion } from './commandSuggestion.js';
+import { commandTrace } from './commandTrace.js';
+import { ApplicationError } from './util/errors.js';
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const npmPackage = require('../package.json');
 
-export { LinterCliOptions as Options } from './options';
-export { CheckFailed } from './util/errors';
+export { LinterCliOptions as Options } from './options.js';
+export { CheckFailed } from './util/errors.js';
 
 export async function run(command?: Command, argv?: string[]): Promise<void> {
     const prog = command || program;

@@ -1,7 +1,7 @@
 import chalk from 'chalk';
 import { Link } from 'cspell-lib';
 
-import type { Table } from './util/table';
+import type { Table } from './util/table.js';
 
 export const listGlobalImports = Link.listGlobalImports;
 export const addPathsToGlobalImports = Link.addPathsToGlobalImports;

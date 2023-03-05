@@ -1,10 +1,10 @@
 import type { Command } from 'commander';
 import { Option as CommanderOption } from 'commander';
 
-import * as App from './application';
-import { emitSuggestionResult } from './emitters/suggestionsEmitter';
-import type { SuggestionOptions } from './options';
-import { CheckFailed } from './util/errors';
+import * as App from './application.js';
+import { emitSuggestionResult } from './emitters/suggestionsEmitter.js';
+import type { SuggestionOptions } from './options.js';
+import { CheckFailed } from './util/errors.js';
 
 // interface InitOptions extends Options {}
 

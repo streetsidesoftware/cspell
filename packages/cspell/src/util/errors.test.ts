@@ -1,6 +1,6 @@
 import { describe, expect, test } from 'vitest';
 
-import { ApplicationError, CheckFailed, IOError, isError, toApplicationError, toError } from './errors';
+import { ApplicationError, CheckFailed, IOError, isError, toApplicationError, toError } from './errors.js';
 
 const oc = expect.objectContaining;
 

@@ -1,8 +1,7 @@
 #!/usr/bin/env node
-'use strict';
+import program from 'commander';
 
-const app = require('./dist/app');
-const program = require('commander');
+import * as app from './dist/esm/app.mjs';
 
 app.run(program, process.argv).catch((e) => {
     if (!(e instanceof program.CommanderError) && !(e instanceof app.CheckFailed)) {

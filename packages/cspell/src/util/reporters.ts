@@ -8,7 +8,7 @@ import type {
 } from '@cspell/cspell-types';
 import { dynamicImport } from '@cspell/dynamic-import';
 
-import { ApplicationError, toError } from './errors';
+import { ApplicationError, toError } from './errors.js';
 
 type StandardEmitters = Omit<CSpellReporter, 'result'>;
 

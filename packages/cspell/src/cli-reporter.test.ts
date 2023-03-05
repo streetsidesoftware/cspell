@@ -1,7 +1,7 @@
 import { describe, expect, test } from 'vitest';
 
-import type { ReporterIssue } from './cli-reporter';
-import { __testing__ } from './cli-reporter';
+import type { ReporterIssue } from './cli-reporter.js';
+import { __testing__ } from './cli-reporter.js';
 
 const { formatIssue } = __testing__;
 

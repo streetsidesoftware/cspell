@@ -1,8 +1,8 @@
 import strip from 'strip-ansi';
 import { describe, expect, test } from 'vitest';
 
-import type { Table } from './table';
-import { tableToLines } from './table';
+import type { Table } from './table.js';
+import { tableToLines } from './table.js';
 
 describe('Validate table.ts', () => {
     test('tableToLines', () => {

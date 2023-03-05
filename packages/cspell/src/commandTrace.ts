@@ -1,11 +1,11 @@
 import type { Command } from 'commander';
 import { Option as CommanderOption } from 'commander';
 
-import * as App from './application';
-import { isDictionaryPathFormat } from './emitters/DictionaryPathFormat';
-import { emitTraceResults } from './emitters/traceEmitter';
-import type { TraceOptions } from './options';
-import { CheckFailed } from './util/errors';
+import * as App from './application.js';
+import { isDictionaryPathFormat } from './emitters/DictionaryPathFormat.js';
+import { emitTraceResults } from './emitters/traceEmitter.js';
+import type { TraceOptions } from './options.js';
+import { CheckFailed } from './util/errors.js';
 
 // interface InitOptions extends Options {}
 
