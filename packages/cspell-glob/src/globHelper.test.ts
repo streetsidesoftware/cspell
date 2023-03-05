@@ -1,22 +1,23 @@
 import mm from 'micromatch';
 import * as path from 'path';
 import { posix, win32 } from 'path';
+import { describe, expect, test } from 'vitest';
 
-import type { NormalizeOptions } from './globHelper';
+import type { NormalizeOptions } from './globHelper.js';
 import {
     __testing__,
     fileOrGlobToGlob,
     normalizeGlobPattern,
     normalizeGlobPatterns,
     normalizeGlobToRoot,
-} from './globHelper';
+} from './globHelper.js';
 import type {
     GlobPattern,
     GlobPatternNormalized,
     GlobPatternWithOptionalRoot,
     GlobPatternWithRoot,
     PathInterface,
-} from './GlobMatcherTypes';
+} from './GlobMatcherTypes.js';
 
 const { rebaseGlob, trimGlob, isGlobalGlob } = __testing__;
 
@@ -184,7 +185,7 @@ describe('Validate Glob Normalization to root', () => {
         if (r) {
             const shouldMatch = !file.startsWith('!');
             const filename = file.replace(/!$/, '');
-            // eslint-disable-next-line jest/no-conditional-expect
+
             expect(mm.isMatch(filename, r)).toBe(shouldMatch);
         }
     });

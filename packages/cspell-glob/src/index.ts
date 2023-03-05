@@ -5,6 +5,6 @@ export {
     isGlobPatternWithRoot,
     normalizeGlobPatterns,
     NormalizeOptions,
-} from './globHelper';
-export { GlobMatcher, GlobMatchOptions } from './GlobMatcher';
-export * from './GlobMatcherTypes';
+} from './globHelper.js';
+export { GlobMatcher, GlobMatchOptions } from './GlobMatcher.js';
+export * from './GlobMatcherTypes.js';
