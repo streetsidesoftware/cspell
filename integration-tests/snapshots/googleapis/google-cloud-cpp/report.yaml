@@ -4,8 +4,8 @@ Url: https://github.com/googleapis/google-cloud-cpp.git
 Args: ["--config=${repoConfig}/cspell.json","**/*","-e","{*.BUILD,BUILD,CHANGELOG.md,*.sh,*.cfg,*.ps1,Dockerfile.*,*.Dockerfile,*.{yaml,xml,json,cmake}}"]
 Summary:
   files: 10573
-  filesWithIssues: 8295
-  issues: 78180
+  filesWithIssues: 8248
+  issues: 77693
   errors: 0
 Errors: []
 
@@ -310,7 +310,6 @@ issues:
   - "examples/CMakeLists.txt:31:9    	PROTO   	U   	PROTO_PATH_DIRECTORIES ${CMAKE"
   - "examples/gcs2cbt.cc:253:13  	cbta    	U   	namespace cbta = ::google::cloud::bigtable"
   - "examples/gcs2cbt.cc:256:51  	BIGTABLE	U   	, \"GOOGLE_CLOUD_CPP_BIGTABLE_TEST_INSTANCE_ID\","
-  - "examples/grpc_credential_types.cc:295:47    	bugprone	U   	argv[]) { // NOLINT(bugprone-exception-escape)"
   - "examples/README.md:36:52    	gserviceaccount 	U   	GOOGLE_CLOUD_PROJECT}.iam.gserviceaccount.com\""
   - "external/googleapis/CMakeLists.txt:17:9     	Googleapis  	U   	include(GoogleapisConfig)"
   - "external/googleapis/CMakeLists.txt:51:17    	httpbody    	U   	\"google/api/httpbody.proto\""
@@ -476,7 +475,6 @@ issues:
   - "google/cloud/bigtable/app_profile_config_test.cc:101:51     	xyzzy   	U   	ofileUpdateConfig().set_etag(\"xyzzy\").as_proto();"
   - "google/cloud/bigtable/async_read_stream_test.cc:29:11   	btproto     	U   	namespace btproto = ::google::bigtable"
   - "google/cloud/bigtable/async_read_stream_test.cc:153:24  	callables   	U   	streaming read RPC callables."
-  - "google/cloud/bigtable/async_row_reader.h:36:12      	NEXTLINE	U   	// NOLINTNEXTLINE(readability-identifier"
   - "google/cloud/bigtable/benchmarks/benchmark.cc:209:14    	nsamples	U   	auto const nsamples = result.operations"
   - "google/cloud/bigtable/benchmarks/bigtable_benchmark_test.cc:30:30   	barquaz 	U   	[] = \"--instance-id=barquaz\";"
   - "google/cloud/bigtable/benchmarks/BUILD.bazel:40:5       	linkopts	U   	linkopts = select({"
@@ -530,6 +528,7 @@ issues:
   - "google/cloud/bigtable/internal/rpc_policy_parameters.inc:46:26      	BIGTABLETABLEADMIN      	U   	ifndef GOOGLE_CLOUD_CPP_BIGTABLETABLEADMIN_DEFAULT_INITIAL_DELAY"
   - "google/cloud/bigtable/internal/unary_client_utils.h:63:8    	metafunction	U   	* A metafunction to determine if @p F"
   - "google/cloud/bigtable/metadata_update_policy_test.cc:73:55      	gccl	U   	header(), HasSubstr(\"gccl/\"));"
+  - "google/cloud/bigtable/mutations.h:159:15    	vexpressed  	U   	* in seconds,vexpressed as a `std::ratio<>`"
   - "google/cloud/bigtable/README.md:27:35   	substr  	U   	<< \"Usage: \" << cmd.substr(last_slash + 1)"
   - "google/cloud/bigtable/row_range_test.cc:149:31  	fooa    	U   	TRUE(range.Contains(\"fooa\"));"
   - "google/cloud/bigtable/row_range_test.cc:219:20  	AFFFF   	U   	std::string const kAFFFF00 = std::string(\"a\\xFF"
@@ -562,6 +561,7 @@ issues:
   - "google/cloud/certificatemanager/v1/certificate_manager_client.h:55:59   	subresource 	U   	certificates. It's a subresource of"
   - "google/cloud/channel/doc/main.dox:48:40     	cloudchannel	U   	(which defaults to \"cloudchannel.googleapis.com\")"
   - "google/cloud/channel/v1/cloud_channel_client.h:1386:7   	vaule   	U   	/// vaule must be different from"
+  - "google/cloud/completion_queue.h:182:54  	ning	U   	functor on a thread `Run()`ning the `CompletionQueue"
   - "google/cloud/composer/environments_client.h:223:43  	scikit      	U   	to set the version of scikit-learn to install in"
   - "google/cloud/composer/environments_client.h:225:8   	numpy       	U   	/// numpy, the `updateMask` parameter"
   - "google/cloud/composer/environments_client.h:226:47  	pypi        	U   	config.softwareConfig.pypiPackages.scikit-learn"
@@ -830,6 +830,7 @@ issues:
   - "google/cloud/spanner/value_test.cc:1141:14  	alphahex	U   	auto const alphahex = [](std::ostream& os"
   - "google/cloud/spanner/value_test.cc:1150:49  	manip   	U   	ostream&(std::ostream&)> manip;"
   - "google/cloud/spanner/value.cc:34:47     	subvalues   	U   	compare subtypes and subvalues."
+  - "google/cloud/spanner/value.h:116:9      	Nullness    	U   	* @par Nullness"
   - "google/cloud/spanner/value.h:349:6      	Metafunction	U   	// Metafunction that returns true if"
   - "google/cloud/status.cc:183:8    	keyspace    	U   	// The keyspace used here is separate"
   - "google/cloud/status.cc:183:50   	keyspaces   	U   	separate from other keyspaces (e.g.,"

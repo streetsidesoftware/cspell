@@ -1,0 +1,37 @@
+version: "0.2"
+language: en
+dictionaryDefinitions:
+  - name: google-custom-words
+    path: "./custom-words.txt"
+    description: Project Words
+
+dictionaries:
+  - google-custom-words
+
+ignorePaths:
+  - "**/{*.BUILD,BUILD,CHANGELOG.md,*.sh,*.cfg,*.ps1,Dockerfile.*,*.Dockerfile,*.{yaml,xml,json,cmake}}"
+
+languageSettings:
+  - languageId: cpp
+    allowCompoundWords: false
+    # Ignore Doxygen parameters (variable names) and clang-tidy directives.
+    ignoreRegExpList:
+      - >-
+        /@t?param.*/g
+      - >-
+        /@tparam.*/g
+      - >-
+        /@snippet.*/g
+      - >-
+        /NOLINT.*/g
+      - >-
+        /`.*?`/g
+      - >-
+        /@code[\s\S]*?@endcode/g
+  - languageId: python
+    allowCompoundWords: false
+
+ignoreWords:
+  - tparam
+  - NOLINT
+  - endcode

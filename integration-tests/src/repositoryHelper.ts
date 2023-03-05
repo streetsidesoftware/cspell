@@ -16,8 +16,6 @@ function mkdirp(p: string) {
     return fs.promises.mkdir(p, { recursive: true });
 }
 
-const minCommitDepth = 10; // To handle race condition with respect to commits.
-
 const githubUrlRegexp = /^(git@github\.com:|https:\/\/github\.com\/).+$/i;
 
 export async function addRepository(
@@ -83,13 +81,7 @@ export async function checkoutRepositoryAsync(
     if (!fs.existsSync(path)) {
         try {
             const repoInfo = await fetchRepositoryInfoForRepo(url);
-            const c = await cloneRepo(
-                logger,
-                url,
-                path,
-                commit === repoInfo.commit ? minCommitDepth : undefined,
-                !branch || branch === repoInfo.defaultBranch
-            );
+            const c = await cloneRepo(logger, url, path, !branch || branch === repoInfo.defaultBranch);
             if (!c) {
                 return false;
             }
@@ -116,15 +108,11 @@ async function cloneRepo(
     { log, error }: Logger,
     url: string,
     path: string,
-    depth: number | undefined,
     useSingleBranch: boolean
 ): Promise<boolean> {
-    log(`Cloning ${url} depth: ${depth || 'unlimited'}`);
+    log(`Cloning ${url}`);
     await mkdirp(Path.dirname(path));
-    const options = ['--no-checkout'];
-    if (depth) {
-        options.push(`--depth=${depth}`);
-    }
+    const options = ['--filter=tree:0'];
     if (useSingleBranch) {
         options.push('--single-branch');
     }
