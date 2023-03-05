@@ -3,7 +3,7 @@ Repository: googleapis/google-cloud-cpp
 Url: "https://github.com/googleapis/google-cloud-cpp.git"
 Args: ["--config=../../../../config/repositories/googleapis/google-cloud-cpp/cspell.json","**/*","-e","{*.BUILD,BUILD,CHANGELOG.md,*.sh,*.cfg,*.ps1,Dockerfile.*,*.Dockerfile,*.{yaml,xml,json,cmake}}"]
 Lines:
- CSpell: Files checked: 10573, Issues found: 77693 in 8248 files
+ CSpell: Files checked: 10658, Issues found: 78653 in 8332 files
  exit code: 1
 ./ARCHITECTURE.md:100:20    - Unknown word (bigtable)   -- - Bigtable has a [`bigtable::Table`](/google/cloud
 ./ARCHITECTURE.md:100:3     - Unknown word (Bigtable)   -- - Bigtable has a [`bigtable::Table
@@ -25,7 +25,7 @@ Lines:
 ./CMakeLists.txt:80:25     - Unknown word (DGOOGLE)    -- " cmake -DGOOGLE_CLOUD_CPP_ENABLE_MACOS
 ./CMakeLists.txt:83:6      - Unknown word (ccache)     -- # If ccache is installed use it
 ./CMakeLists.txt:84:32     - Unknown word (CCACHE)     -- GOOGLE_CLOUD_CPP_ENABLE_CCACHE "Automatically use ccache
-./README.md:582:35    - Unknown word (lgoogle)    -- names, e.g., by using `-lgoogle_cloud_cpp_bigtable`
+./README.md:585:35    - Unknown word (lgoogle)    -- names, e.g., by using `-lgoogle_cloud_cpp_bigtable`
 ./README.md:8:4       - Unknown word (Codecov)    -- [![Codecov Coverage status][codecov
 ./SECURITY.md:3:46      - Unknown word (vulnz)      -- issue, please use [g.co/vulnz](https://g.co/vulnz
 ./bazel/BUILD.bazel:17:37     - Unknown word (subpackages) -- visibility = ["//:__subpackages__"])
@@ -39,6 +39,7 @@ Lines:
 ./bazel/google_cloud_cpp_deps.bzl:220:7     - Unknown word (Pugi)          -- # PugiXML, this is only used
 ./bazel/google_cloud_cpp_deps.bzl:223:28    - Unknown word (zeux)          -- name = "com_github_zeux_pugixml",
 ./bazel/google_cloud_cpp_deps.bzl:223:33    - Unknown word (pugixml)       -- name = "com_github_zeux_pugixml",
+./bazel/google_cloud_cpp_deps.bzl:235:28    - Unknown word (jbeder)        -- name = "com_github_jbeder_yaml_cpp",
 ./bazel/google_cloud_cpp_deps.bzl:46:30     - Unknown word (googletest) -- Load rules_cc, used by googletest
 ./bazel/google_cloud_cpp_deps.bzl:93:16     - Unknown word (googleapis) -- # Load the googleapis dependency.
 ./ci/check-include-guards.gawk:26:1      - Unknown word (BEGINFILE)  -- BEGINFILE {
@@ -77,71 +78,72 @@ Lines:
 ./ci/etc/docuploader-requirements.in:2:1       - Unknown word (certifi)    -- certifi==2022.6.15
 ./ci/etc/docuploader-requirements.in:5:1       - Unknown word (colorlog)   -- colorlog==6.7.0
 ./ci/etc/docuploader-requirements.txt:5:43      - Unknown word (docuploader) -- generate-hashes ci/etc/docuploader-requirements.in
-./ci/etc/expected_install_directories:101:35    - Unknown word (clientgateways)          -- google/cloud/beyondcorp/clientgateways
-./ci/etc/expected_install_directories:107:33    - Unknown word (analyticshub)            -- google/cloud/bigquery/analyticshub
-./ci/etc/expected_install_directories:115:33    - Unknown word (datapolicies)            -- google/cloud/bigquery/datapolicies
-./ci/etc/expected_install_directories:119:33    - Unknown word (datatransfer)            -- google/cloud/bigquery/datatransfer
+./ci/etc/expected_install_directories:101:35    - Unknown word (clientconnectorservices) -- google/cloud/beyondcorp/clientconnectorservices
+./ci/etc/expected_install_directories:105:35    - Unknown word (clientgateways)          -- google/cloud/beyondcorp/clientgateways
+./ci/etc/expected_install_directories:111:33    - Unknown word (analyticshub)            -- google/cloud/bigquery/analyticshub
+./ci/etc/expected_install_directories:119:33    - Unknown word (datapolicies)            -- google/cloud/bigquery/datapolicies
 ./ci/etc/expected_install_directories:11:22     - Unknown word (serviceusage)      -- /include/google/api/serviceusage
+./ci/etc/expected_install_directories:123:33    - Unknown word (datatransfer)            -- google/cloud/bigquery/datatransfer
 ./ci/etc/expected_install_directories:13:18     - Unknown word (appengine)         -- ./include/google/appengine
-./ci/etc/expected_install_directories:153:24    - Unknown word (binaryauthorization)     -- include/google/cloud/binaryauthorization
-./ci/etc/expected_install_directories:158:24    - Unknown word (certificatemanager)      -- include/google/cloud/certificatemanager
-./ci/etc/expected_install_directories:173:24    - Unknown word (clouddms)                -- include/google/cloud/clouddms
-./ci/etc/expected_install_directories:183:24    - Unknown word (contactcenterinsights)   -- include/google/cloud/contactcenterinsights
-./ci/etc/expected_install_directories:193:24    - Unknown word (containeranalysis)       -- include/google/cloud/containeranalysis
-./ci/etc/expected_install_directories:198:24    - Unknown word (datacatalog)             -- include/google/cloud/datacatalog
-./ci/etc/expected_install_directories:203:24    - Unknown word (datamigration)           -- include/google/cloud/datamigration
-./ci/etc/expected_install_directories:208:24    - Unknown word (dataplex)                -- include/google/cloud/dataplex
+./ci/etc/expected_install_directories:157:24    - Unknown word (binaryauthorization)     -- include/google/cloud/binaryauthorization
+./ci/etc/expected_install_directories:162:24    - Unknown word (certificatemanager)      -- include/google/cloud/certificatemanager
+./ci/etc/expected_install_directories:177:24    - Unknown word (clouddms)                -- include/google/cloud/clouddms
+./ci/etc/expected_install_directories:187:24    - Unknown word (contactcenterinsights)   -- include/google/cloud/contactcenterinsights
+./ci/etc/expected_install_directories:197:24    - Unknown word (containeranalysis)       -- include/google/cloud/containeranalysis
+./ci/etc/expected_install_directories:202:24    - Unknown word (datacatalog)             -- include/google/cloud/datacatalog
 ./ci/etc/expected_install_directories:20:24     - Unknown word (accessapproval)    -- include/google/cloud/accessapproval
-./ci/etc/expected_install_directories:213:24    - Unknown word (dataproc)                -- include/google/cloud/dataproc
-./ci/etc/expected_install_directories:218:24    - Unknown word (datastream)              -- include/google/cloud/datastream
-./ci/etc/expected_install_directories:233:24    - Unknown word (dialogflow)              -- include/google/cloud/dialogflow
-./ci/etc/expected_install_directories:248:24    - Unknown word (documentai)              -- include/google/cloud/documentai
-./ci/etc/expected_install_directories:253:24    - Unknown word (edgecontainer)           -- include/google/cloud/edgecontainer
+./ci/etc/expected_install_directories:211:24    - Unknown word (datamigration)           -- include/google/cloud/datamigration
+./ci/etc/expected_install_directories:216:24    - Unknown word (dataplex)                -- include/google/cloud/dataplex
+./ci/etc/expected_install_directories:221:24    - Unknown word (dataproc)                -- include/google/cloud/dataproc
+./ci/etc/expected_install_directories:226:24    - Unknown word (datastream)              -- include/google/cloud/datastream
+./ci/etc/expected_install_directories:241:24    - Unknown word (dialogflow)              -- include/google/cloud/dialogflow
+./ci/etc/expected_install_directories:256:24    - Unknown word (documentai)              -- include/google/cloud/documentai
 ./ci/etc/expected_install_directories:25:24     - Unknown word (accesscontextmanager) -- include/google/cloud/accesscontextmanager
-./ci/etc/expected_install_directories:267:24    - Unknown word (filestore)               -- include/google/cloud/filestore
-./ci/etc/expected_install_directories:277:24    - Unknown word (gameservices)            -- include/google/cloud/gameservices
-./ci/etc/expected_install_directories:284:24    - Unknown word (gkehub)                  -- include/google/cloud/gkehub
-./ci/etc/expected_install_directories:289:24    - Unknown word (gkemulticloud)           -- include/google/cloud/gkemulticloud
+./ci/etc/expected_install_directories:261:24    - Unknown word (edgecontainer)           -- include/google/cloud/edgecontainer
+./ci/etc/expected_install_directories:275:24    - Unknown word (filestore)               -- include/google/cloud/filestore
+./ci/etc/expected_install_directories:285:24    - Unknown word (gameservices)            -- include/google/cloud/gameservices
+./ci/etc/expected_install_directories:292:24    - Unknown word (gkehub)                  -- include/google/cloud/gkehub
+./ci/etc/expected_install_directories:297:24    - Unknown word (gkemulticloud)           -- include/google/cloud/gkemulticloud
 ./ci/etc/expected_install_directories:30:24     - Unknown word (advisorynotifications) -- include/google/cloud/advisorynotifications
-./ci/etc/expected_install_directories:343:24    - Unknown word (managedidentities)       -- include/google/cloud/managedidentities
-./ci/etc/expected_install_directories:358:35    - Unknown word (metricsscope)            -- google/cloud/monitoring/metricsscope
-./ci/etc/expected_install_directories:371:24    - Unknown word (networkmanagement)       -- include/google/cloud/networkmanagement
-./ci/etc/expected_install_directories:390:24    - Unknown word (orgpolicy)               -- include/google/cloud/orgpolicy
-./ci/etc/expected_install_directories:395:24    - Unknown word (osconfig)                -- include/google/cloud/osconfig
-./ci/etc/expected_install_directories:396:33    - Unknown word (agentendpoint)           -- google/cloud/osconfig/agentendpoint
-./ci/etc/expected_install_directories:39:24     - Unknown word (apigeeconnect)         -- include/google/cloud/apigeeconnect
-./ci/etc/expected_install_directories:404:24    - Unknown word (oslogin)                 -- include/google/cloud/oslogin
-./ci/etc/expected_install_directories:409:24    - Unknown word (policytroubleshooter)    -- include/google/cloud/policytroubleshooter
-./ci/etc/expected_install_directories:414:24    - Unknown word (privateca)               -- include/google/cloud/privateca
-./ci/etc/expected_install_directories:427:24    - Unknown word (pubsublite)              -- include/google/cloud/pubsublite
-./ci/etc/expected_install_directories:441:24    - Unknown word (resourcemanager)         -- include/google/cloud/resourcemanager
-./ci/etc/expected_install_directories:446:24    - Unknown word (resourcesettings)        -- include/google/cloud/resourcesettings
-./ci/etc/expected_install_directories:466:24    - Unknown word (secretmanager)           -- include/google/cloud/secretmanager
-./ci/etc/expected_install_directories:474:24    - Unknown word (securitycenter)          -- include/google/cloud/securitycenter
-./ci/etc/expected_install_directories:484:24    - Unknown word (servicedirectory)        -- include/google/cloud/servicedirectory
-./ci/etc/expected_install_directories:518:24    - Unknown word (storagetransfer)         -- include/google/cloud/storagetransfer
-./ci/etc/expected_install_directories:533:24    - Unknown word (texttospeech)            -- include/google/cloud/texttospeech
-./ci/etc/expected_install_directories:54:24     - Unknown word (artifactregistry)      -- include/google/cloud/artifactregistry
-./ci/etc/expected_install_directories:557:30    - Unknown word (livestream)              -- include/google/cloud/video/livestream
-./ci/etc/expected_install_directories:570:24    - Unknown word (videointelligence)       -- include/google/cloud/videointelligence
-./ci/etc/expected_install_directories:580:24    - Unknown word (vmmigration)             -- include/google/cloud/vmmigration
-./ci/etc/expected_install_directories:585:24    - Unknown word (vmwareengine)            -- include/google/cloud/vmwareengine
-./ci/etc/expected_install_directories:589:24    - Unknown word (vpcaccess)               -- include/google/cloud/vpcaccess
-./ci/etc/expected_install_directories:594:24    - Unknown word (webrisk)                 -- include/google/cloud/webrisk
-./ci/etc/expected_install_directories:599:24    - Unknown word (websecurityscanner)     -- include/google/cloud/websecurityscanner
+./ci/etc/expected_install_directories:34:24     - Unknown word (alloydb)               -- include/google/cloud/alloydb
+./ci/etc/expected_install_directories:351:24    - Unknown word (managedidentities)       -- include/google/cloud/managedidentities
+./ci/etc/expected_install_directories:366:35    - Unknown word (metricsscope)            -- google/cloud/monitoring/metricsscope
+./ci/etc/expected_install_directories:379:24    - Unknown word (networkmanagement)       -- include/google/cloud/networkmanagement
+./ci/etc/expected_install_directories:398:24    - Unknown word (orgpolicy)               -- include/google/cloud/orgpolicy
+./ci/etc/expected_install_directories:403:24    - Unknown word (osconfig)                -- include/google/cloud/osconfig
+./ci/etc/expected_install_directories:404:33    - Unknown word (agentendpoint)           -- google/cloud/osconfig/agentendpoint
+./ci/etc/expected_install_directories:412:24    - Unknown word (oslogin)                 -- include/google/cloud/oslogin
+./ci/etc/expected_install_directories:417:24    - Unknown word (policytroubleshooter)    -- include/google/cloud/policytroubleshooter
+./ci/etc/expected_install_directories:422:24    - Unknown word (privateca)               -- include/google/cloud/privateca
+./ci/etc/expected_install_directories:435:24    - Unknown word (pubsublite)              -- include/google/cloud/pubsublite
+./ci/etc/expected_install_directories:43:24     - Unknown word (apigeeconnect)         -- include/google/cloud/apigeeconnect
+./ci/etc/expected_install_directories:449:24    - Unknown word (resourcemanager)         -- include/google/cloud/resourcemanager
+./ci/etc/expected_install_directories:454:24    - Unknown word (resourcesettings)        -- include/google/cloud/resourcesettings
+./ci/etc/expected_install_directories:474:24    - Unknown word (secretmanager)           -- include/google/cloud/secretmanager
+./ci/etc/expected_install_directories:482:24    - Unknown word (securitycenter)          -- include/google/cloud/securitycenter
+./ci/etc/expected_install_directories:492:24    - Unknown word (servicedirectory)        -- include/google/cloud/servicedirectory
+./ci/etc/expected_install_directories:526:24    - Unknown word (storagetransfer)         -- include/google/cloud/storagetransfer
+./ci/etc/expected_install_directories:541:24    - Unknown word (texttospeech)            -- include/google/cloud/texttospeech
+./ci/etc/expected_install_directories:565:30    - Unknown word (livestream)              -- include/google/cloud/video/livestream
+./ci/etc/expected_install_directories:578:24    - Unknown word (videointelligence)       -- include/google/cloud/videointelligence
+./ci/etc/expected_install_directories:588:24    - Unknown word (vmmigration)             -- include/google/cloud/vmmigration
+./ci/etc/expected_install_directories:58:24     - Unknown word (artifactregistry)      -- include/google/cloud/artifactregistry
+./ci/etc/expected_install_directories:593:24    - Unknown word (vmwareengine)            -- include/google/cloud/vmwareengine
+./ci/etc/expected_install_directories:597:24    - Unknown word (vpcaccess)               -- include/google/cloud/vpcaccess
 ./ci/etc/expected_install_directories:5:22      - Unknown word (apikeys)    -- /include/google/api/apikeys
-./ci/etc/expected_install_directories:620:27    - Unknown word (clouddebugger)          -- include/google/devtools/clouddebugger
-./ci/etc/expected_install_directories:622:27    - Unknown word (cloudprofiler)          -- include/google/devtools/cloudprofiler
-./ci/etc/expected_install_directories:624:27    - Unknown word (cloudtrace)             -- include/google/devtools/cloudtrace
-./ci/etc/expected_install_directories:64:24     - Unknown word (assuredworkloads)      -- include/google/cloud/assuredworkloads
-./ci/etc/expected_install_directories:69:24     - Unknown word (automl)                -- include/google/cloud/automl
-./ci/etc/expected_install_directories:74:24     - Unknown word (baremetalsolution)     -- include/google/cloud/baremetalsolution
+./ci/etc/expected_install_directories:602:24    - Unknown word (webrisk)                 -- include/google/cloud/webrisk
+./ci/etc/expected_install_directories:607:24    - Unknown word (websecurityscanner)     -- include/google/cloud/websecurityscanner
+./ci/etc/expected_install_directories:628:27    - Unknown word (clouddebugger)          -- include/google/devtools/clouddebugger
+./ci/etc/expected_install_directories:630:27    - Unknown word (cloudprofiler)          -- include/google/devtools/cloudprofiler
+./ci/etc/expected_install_directories:632:27    - Unknown word (cloudtrace)             -- include/google/devtools/cloudtrace
+./ci/etc/expected_install_directories:68:24     - Unknown word (assuredworkloads)      -- include/google/cloud/assuredworkloads
+./ci/etc/expected_install_directories:73:24     - Unknown word (automl)                -- include/google/cloud/automl
+./ci/etc/expected_install_directories:78:24     - Unknown word (baremetalsolution)     -- include/google/cloud/baremetalsolution
 ./ci/etc/expected_install_directories:7:22      - Unknown word (servicecontrol) -- /include/google/api/servicecontrol
-./ci/etc/expected_install_directories:84:24     - Unknown word (beyondcorp)            -- include/google/cloud/beyondcorp
-./ci/etc/expected_install_directories:85:35     - Unknown word (appconnections)        -- google/cloud/beyondcorp/appconnections
-./ci/etc/expected_install_directories:89:35     - Unknown word (appconnectors)         -- google/cloud/beyondcorp/appconnectors
-./ci/etc/expected_install_directories:93:35     - Unknown word (appgateways)           -- google/cloud/beyondcorp/appgateways
-./ci/etc/expected_install_directories:97:35     - Unknown word (clientconnectorservices) -- google/cloud/beyondcorp/clientconnectorservices
+./ci/etc/expected_install_directories:88:24     - Unknown word (beyondcorp)            -- include/google/cloud/beyondcorp
+./ci/etc/expected_install_directories:89:35     - Unknown word (appconnections)        -- google/cloud/beyondcorp/appconnections
+./ci/etc/expected_install_directories:93:35     - Unknown word (appconnectors)         -- google/cloud/beyondcorp/appconnectors
+./ci/etc/expected_install_directories:97:35     - Unknown word (appgateways)           -- google/cloud/beyondcorp/appgateways
 ./ci/etc/expected_install_directories:9:22      - Unknown word (servicemanagement) -- /include/google/api/servicemanagement
 ./ci/etc/pip-tooling-requirements.txt:10:1      - Unknown word (tomli)      -- tomli==2.0.1 \
 ./ci/generate-markdown/README.md:12:4      - Unknown word (HOWTO)      -- ## HOWTO: Generate the markdown
@@ -157,11 +159,14 @@ Lines:
 ./ci/verify_current_targets/CMakeLists.txt:52:1      - Unknown word (endfunction) -- endfunction ()
 ./ci/verify_current_targets/CMakeLists.txt:56:1      - Unknown word (endforeach)  -- endforeach ()
 ./ci/verify_current_targets/WORKSPACE.bazel:17:21     - Unknown word (Starlark)   -- # Add the necessary Starlark functions to fetch google
-./ci/verify_quickstart/CMakeLists.txt:22:35     - Unknown word (DLIBRARIES) -- FATAL_ERROR "Missing -DLIBRARIES argument, for example
-./ci/verify_quickstart/CMakeLists.txt:35:16     - Unknown word (DCMAKE)     -- "-DCMAKE_PREFIX_PATH=${CMAKE
-./ci/verify_quickstart/CMakeLists.txt:42:5      - Unknown word (externalproject) -- externalproject_add(
-./ci/verify_quickstart/CMakeLists.txt:72:57     - Unknown word (pkgconfig)       -- CMAKE_PREFIX_PATH}/lib64/pkgconfig:${CMAKE_PREFIX_PATH
-./ci/verify_quickstart/CMakeLists.txt:89:22     - Unknown word (STREQUAL)        -- if ("${feature}" STREQUAL "experimental-storage
+./ci/verify_quickstart/CMakeLists.txt:103:22    - Unknown word (STREQUAL)        -- if ("${feature}" STREQUAL "experimental-storage
+./ci/verify_quickstart/CMakeLists.txt:108:10    - Unknown word (vcpkg)           -- # In vcpkg we cannot use `_` in
+./ci/verify_quickstart/CMakeLists.txt:22:35     - Unknown word (DFEATURES)  -- FATAL_ERROR "Missing -DFEATURES argument, for example
+./ci/verify_quickstart/CMakeLists.txt:26:15     - Unknown word (QUICKSTART) -- option(VERIFY_QUICKSTART_ENABLE_MAKE "Test with
+./ci/verify_quickstart/CMakeLists.txt:42:16     - Unknown word (DCMAKE)     -- "-DCMAKE_PREFIX_PATH=${CMAKE
+./ci/verify_quickstart/CMakeLists.txt:50:16     - Unknown word (DVCPKG)     -- "-DVCPKG_TARGET_TRIPLET=${VCPKG
+./ci/verify_quickstart/CMakeLists.txt:53:5      - Unknown word (externalproject) -- externalproject_add(
+./ci/verify_quickstart/CMakeLists.txt:86:57     - Unknown word (pkgconfig)       -- CMAKE_PREFIX_PATH}/lib64/pkgconfig:${CMAKE_PREFIX_PATH
 ./cmake/templates/config.pc.in:15:10     - Unknown word (pcfiledir)  -- prefix=${pcfiledir}/../..
 ./cmake/templates/config.pc.in:17:1      - Unknown word (libdir)     -- libdir=@GOOGLE_CLOUD_CPP_PC
 ./cmake/templates/config.pc.in:17:29     - Unknown word (LIBDIR)     -- GOOGLE_CLOUD_CPP_PC_LIBDIR@
@@ -173,7 +178,6 @@ Lines:
 ./doc/adr/2018-10-30-storage-metadata-fields-and-optional.md:15:8      - Unknown word (chrono)     -- std::chrono::system_clock::time
 ./doc/adr/2019-01-04-error-reporting-with-statusor.md:13:43     - Unknown word (badbit)     -- report errors (e.g., [badbit][badbit-link] in the
 ./doc/adr/2019-03-26-binary-distributions.md:10:75     - Unknown word (dpkg)       -- might want to use (e.g., dpkg,
-./doc/adr/2019-03-26-binary-distributions.md:11:6      - Unknown word (vcpkg)      -- rpm, vcpkg).
 ./doc/adr/2019-03-26-binary-distributions.md:16:64     - Unknown word (packageable) -- make our code easily packageable by
 ./doc/adr/2022-01-21-only-public-types-in-public-APIs.md:25:60     - Unknown word (backoff)    -- APIs using retry and backoff policies
 ./doc/adr/2022-11-11-multiple-versions-of-GCP-service-in-one-library.md:43:69     - Unknown word (protoc)     -- the types emitted by `protoc`. For
@@ -241,68 +245,68 @@ Lines:
 ./doc/packaging.md:77:50     - Unknown word (physicalcpu) -- Linux, or `sysctl -n hw.physicalcpu` on macOS.
 ./doc/packaging.md:77:8      - Unknown word (nproc)      -- the `nproc` command on Linux, or
 ./docfx/BUILD.bazel:15:27     - Unknown word (hdrs)       -- :docfx.bzl", "docfx_hdrs", "docfx_srcs")
-./docfx/CMakeLists.txt:28:15     - Unknown word (Werror)     -- include(EnableWerror)
-./docfx/CMakeLists.txt:60:10     - Unknown word (fname)      -- foreach (fname IN LISTS unit_tests
-./docfx/doxygen2markdown.cc:426:27    - Unknown word (htmlonly)           -- <xsd:element name="htmlonly" type="docHtmlOnlyType
-./docfx/doxygen2markdown.cc:427:27    - Unknown word (manonly)            -- <xsd:element name="manonly" type="xsd:string"
-./docfx/doxygen2markdown.cc:428:27    - Unknown word (xmlonly)            -- <xsd:element name="xmlonly" type="xsd:string"
-./docfx/doxygen2markdown.cc:429:27    - Unknown word (rtfonly)            -- <xsd:element name="rtfonly" type="xsd:string"
-./docfx/doxygen2markdown.cc:430:27    - Unknown word (latexonly)          -- <xsd:element name="latexonly" type="xsd:string"
-./docfx/doxygen2markdown.cc:431:27    - Unknown word (docbookonly)        -- <xsd:element name="docbookonly" type="xsd:string"
-./docfx/doxygen2markdown.cc:435:27    - Unknown word (plantuml)           -- <xsd:element name="plantuml" type="docImageType
-./docfx/doxygen2markdown.cc:440:27    - Unknown word (linebreak)          -- <xsd:element name="linebreak" type="docEmptyType
-./docfx/doxygen2markdown.cc:441:27    - Unknown word (nonbreakablespace)  -- <xsd:element name="nonbreakablespace" type="docEmptyType
-./docfx/doxygen2markdown.cc:477:27    - Unknown word (hruler)             -- <xsd:element name="hruler" type="docEmptyType
-./docfx/doxygen2markdown.cc:481:27    - Unknown word (indexentry)         -- <xsd:element name="indexentry" type="docIndexEntryType
-./docfx/doxygen2markdown.cc:490:27    - Unknown word (mscfile)            -- <xsd:element name="mscfile" type="docImageType
-./docfx/doxygen2markdown.cc:491:27    - Unknown word (diafile)            -- <xsd:element name="diafile" type="docImageType
-./docfx/doxygen2markdown.cc:492:27    - Unknown word (toclist)            -- <xsd:element name="toclist" type="docTocListType
-./docfx/doxygen2markdown.cc:494:27    - Unknown word (parameterlist)      -- <xsd:element name="parameterlist" type="docParamListType
-./docfx/doxygen2markdown.cc:495:27    - Unknown word (xrefsect)           -- <xsd:element name="xrefsect" type="docXRefSectType
-./docfx/doxygen2markdown.cc:496:27    - Unknown word (copydoc)            -- <xsd:element name="copydoc" type="docCopyType"
-./docfx/doxygen2markdown.cc:498:27    - Unknown word (parblock)           -- <xsd:element name="parblock" type="docParBlockType
-./docfx/doxygen2markdown.cc:558:17    - Unknown word (Codeline)           -- if (AppendIfCodeline(os, ctx, child)) continue
-./docfx/doxygen2markdown.cc:576:29    - Unknown word (refkind)            -- xsd:attribute name="refkind" type="DoxRefKind"
-./docfx/doxygen2markdown.cc:64:27     - Unknown word (basecompoundref) -- <xsd:element name="basecompoundref" type="compoundRefType
-./docfx/doxygen2markdown.cc:65:27     - Unknown word (derivedcompoundref) -- <xsd:element name="derivedcompoundref" type="compoundRefType
-./docfx/doxygen2markdown.cc:67:27     - Unknown word (includedby)         -- <xsd:element name="includedby" type="incType" minOccurs
-./docfx/doxygen2markdown.cc:68:27     - Unknown word (incdepgraph)        -- <xsd:element name="incdepgraph" type="graphType" minOccurs
-./docfx/doxygen2markdown.cc:69:27     - Unknown word (invincdepgraph)     -- <xsd:element name="invincdepgraph" type="graphType" minOccurs
-./docfx/doxygen2markdown.cc:70:27     - Unknown word (innerdir)           -- <xsd:element name="innerdir" type="refType" minOccurs
-./docfx/doxygen2markdown.cc:71:27     - Unknown word (innerfile)          -- <xsd:element name="innerfile" type="refType" minOccurs
-./docfx/doxygen2markdown.cc:72:27     - Unknown word (innerclass)         -- <xsd:element name="innerclass" type="refType" minOccurs
-./docfx/doxygen2markdown.cc:73:27     - Unknown word (innernamespace)     -- <xsd:element name="innernamespace" type="refType" minOccurs
-./docfx/doxygen2markdown.cc:74:27     - Unknown word (innerpage)          -- <xsd:element name="innerpage" type="refType" minOccurs
-./docfx/doxygen2markdown.cc:75:27     - Unknown word (innergroup)         -- <xsd:element name="innergroup" type="refType" minOccurs
-./docfx/doxygen2markdown.cc:76:27     - Unknown word (templateparamlist)  -- <xsd:element name="templateparamlist" type="templateparamlistType
-./docfx/doxygen2markdown.cc:77:27     - Unknown word (sectiondef)         -- <xsd:element name="sectiondef" type="sectiondefType
-./docfx/doxygen2markdown.cc:78:27     - Unknown word (tableofcontents)    -- <xsd:element name="tableofcontents" type="tableofcontentsType
-./docfx/doxygen2markdown.cc:81:27     - Unknown word (inheritancegraph)   -- <xsd:element name="inheritancegraph" type="graphType" minOccurs
-./docfx/doxygen2markdown.cc:82:27     - Unknown word (collaborationgraph) -- <xsd:element name="collaborationgraph" type="graphType" minOccurs
-./docfx/doxygen2markdown.cc:85:27     - Unknown word (listofallmembers)   -- <xsd:element name="listofallmembers" type="listofallmembersType
-./docfx/doxygen2markdown.h:15:26     - Unknown word (DOCFX)      -- ifndef GOOGLE_CLOUD_CPP_DOCFX_DOXYGEN2MARKDOWN_H
-./docfx/doxygen2markdown_test.cc:235:10    - Unknown word (ulink)               -- <ulink id="test-node" url=
-./docfx/doxygen2markdown_test.cc:26:78     - Unknown word (indexpage)   -- XMLSchema-instance" id="indexpage" kind="page">
-./docfx/doxygen2markdown_test.cc:26:8      - Unknown word (compounddef) -- <compounddef xmlns:xsi="http://www
-./docfx/doxygen2markdown_test.cc:27:10     - Unknown word (compoundname) -- <compoundname>index</compoundname
-./docfx/doxygen2markdown_test.cc:29:10     - Unknown word (briefdescription) -- <briefdescription>
-./docfx/doxygen2markdown_test.cc:31:10     - Unknown word (detaileddescription) -- <detaileddescription>
-./docfx/doxygen2markdown_test.cc:32:29     - Unknown word (autotoc)             -- <sect1 id="index_1autotoc_md0">
-./docfx/doxygen2markdown_test.cc:35:20     - Unknown word (itemizedlist)        -- <para><itemizedlist>
-./docfx/doxygen2markdown_test.cc:36:16     - Unknown word (listitem)            -- <listitem><para><ref refid="classgoogle
-./docfx/doxygen2markdown_test.cc:36:36     - Unknown word (refid)               -- listitem><para><ref refid="classgoogle_1_1cloud
-./docfx/doxygen2markdown_test.cc:36:43     - Unknown word (classgoogle)         -- listitem><para><ref refid="classgoogle_1_1cloud_1_1Credentials
-./docfx/doxygen2markdown_test.cc:36:80     - Unknown word (kindref)             -- cloud_1_1Credentials" kindref="compound">Credentials
-./docfx/doxygen2markdown_test.cc:39:165    - Unknown word (computeroutput)      -- value on success and a <computeroutput>Status</computeroutput
-./docfx/doxygen2markdown_test.cc:44:16     - Unknown word (simplesect)          -- <simplesect kind="warning"><para
-./docfx/doxygen2markdown_test.cc:487:12    - Unknown word (orderedlist)         -- <orderedlist>
-./docfx/doxygen2markdown_test.cc:545:12    - Unknown word (programlisting)      -- <programlisting><codeline><highlight
-./docfx/doxygen2markdown_test.cc:545:28    - Unknown word (codeline)            -- <programlisting><codeline><highlight class="normal
-./docfx/doxygen2markdown_test.cc:588:49    - Unknown word (brrr)                -- Item 2: <computeroutput>brrr</computeroutput></para
-./docfx/doxygen2markdown_test.cc:684:10    - Unknown word (variablelist)        -- <variablelist id='test-node'>
-./docfx/doxygen2markdown_test.cc:685:12    - Unknown word (varlistentry)        -- <varlistentry><term>Class <ref refid
-./docfx/doxygen2markdown_test.cc:91:3      - Unknown word (pugi)                -- pugi::xml_document doc;
-./docfx/parse_arguments_test.cc:38:16     - Unknown word (STREQ)      -- EXPECT_STREQ(ex.what(),
+./docfx/CMakeLists.txt:29:15     - Unknown word (Werror)     -- include(EnableWerror)
+./docfx/CMakeLists.txt:73:10     - Unknown word (fname)      -- foreach (fname IN LISTS unit_tests
+./docfx/config.h:15:26     - Unknown word (DOCFX)      -- ifndef GOOGLE_CLOUD_CPP_DOCFX_CONFIG_H
+./docfx/doxygen2markdown.cc:340:27    - Unknown word (htmlonly)   -- <xsd:element name="htmlonly" type="docHtmlOnlyType
+./docfx/doxygen2markdown.cc:341:27    - Unknown word (manonly)    -- <xsd:element name="manonly" type="xsd:string"
+./docfx/doxygen2markdown.cc:342:27    - Unknown word (xmlonly)    -- <xsd:element name="xmlonly" type="xsd:string"
+./docfx/doxygen2markdown.cc:343:27    - Unknown word (rtfonly)    -- <xsd:element name="rtfonly" type="xsd:string"
+./docfx/doxygen2markdown.cc:344:27    - Unknown word (latexonly)  -- <xsd:element name="latexonly" type="xsd:string"
+./docfx/doxygen2markdown.cc:345:27    - Unknown word (docbookonly) -- <xsd:element name="docbookonly" type="xsd:string"
+./docfx/doxygen2markdown.cc:349:27    - Unknown word (plantuml)    -- <xsd:element name="plantuml" type="docImageType
+./docfx/doxygen2markdown.cc:354:27    - Unknown word (linebreak)   -- <xsd:element name="linebreak" type="docEmptyType
+./docfx/doxygen2markdown.cc:355:27    - Unknown word (nonbreakablespace) -- <xsd:element name="nonbreakablespace" type="docEmptyType
+./docfx/doxygen2markdown.cc:391:27    - Unknown word (hruler)            -- <xsd:element name="hruler" type="docEmptyType
+./docfx/doxygen2markdown.cc:395:27    - Unknown word (indexentry)        -- <xsd:element name="indexentry" type="docIndexEntryType
+./docfx/doxygen2markdown.cc:404:27    - Unknown word (mscfile)           -- <xsd:element name="mscfile" type="docImageType
+./docfx/doxygen2markdown.cc:405:27    - Unknown word (diafile)           -- <xsd:element name="diafile" type="docImageType
+./docfx/doxygen2markdown.cc:406:27    - Unknown word (toclist)           -- <xsd:element name="toclist" type="docTocListType
+./docfx/doxygen2markdown.cc:408:27    - Unknown word (parameterlist)     -- <xsd:element name="parameterlist" type="docParamListType
+./docfx/doxygen2markdown.cc:409:27    - Unknown word (xrefsect)          -- <xsd:element name="xrefsect" type="docXRefSectType
+./docfx/doxygen2markdown.cc:410:27    - Unknown word (copydoc)           -- <xsd:element name="copydoc" type="docCopyType"
+./docfx/doxygen2markdown.cc:412:27    - Unknown word (parblock)          -- <xsd:element name="parblock" type="docParBlockType
+./docfx/doxygen2markdown.cc:472:17    - Unknown word (Codeline)          -- if (AppendIfCodeline(os, ctx, child)) continue
+./docfx/doxygen2markdown.cc:490:29    - Unknown word (refkind)           -- xsd:attribute name="refkind" type="DoxRefKind"
+./docfx/doxygen2markdown_test.cc:254:10    - Unknown word (ulink)      -- <ulink id="test-node" url=
+./docfx/doxygen2markdown_test.cc:506:12    - Unknown word (orderedlist) -- <orderedlist>
+./docfx/doxygen2markdown_test.cc:564:28    - Unknown word (codeline)    -- <programlisting><codeline><highlight class="normal
+./docfx/doxygen2markdown_test.cc:607:49    - Unknown word (brrr)        -- Item 2: <computeroutput>brrr</computeroutput></para
+./docfx/doxygen2markdown_test.cc:703:10    - Unknown word (variablelist) -- <variablelist id='test-node'>
+./docfx/doxygen2markdown_test.cc:704:12    - Unknown word (varlistentry) -- <varlistentry><term>Class <ref refid
+./docfx/doxygen_pages.cc:47:27     - Unknown word (basecompoundref) -- <xsd:element name="basecompoundref" type="compoundRefType
+./docfx/doxygen_pages.cc:48:27     - Unknown word (derivedcompoundref) -- <xsd:element name="derivedcompoundref" type="compoundRefType
+./docfx/doxygen_pages.cc:50:27     - Unknown word (includedby)         -- <xsd:element name="includedby" type="incType" minOccurs
+./docfx/doxygen_pages.cc:51:27     - Unknown word (incdepgraph)        -- <xsd:element name="incdepgraph" type="graphType" minOccurs
+./docfx/doxygen_pages.cc:52:27     - Unknown word (invincdepgraph)     -- <xsd:element name="invincdepgraph" type="graphType" minOccurs
+./docfx/doxygen_pages.cc:53:27     - Unknown word (innerdir)           -- <xsd:element name="innerdir" type="refType" minOccurs
+./docfx/doxygen_pages.cc:54:27     - Unknown word (innerfile)          -- <xsd:element name="innerfile" type="refType" minOccurs
+./docfx/doxygen_pages.cc:55:27     - Unknown word (innerclass)         -- <xsd:element name="innerclass" type="refType" minOccurs
+./docfx/doxygen_pages.cc:56:27     - Unknown word (innernamespace)     -- <xsd:element name="innernamespace" type="refType" minOccurs
+./docfx/doxygen_pages.cc:57:27     - Unknown word (innerpage)          -- <xsd:element name="innerpage" type="refType" minOccurs
+./docfx/doxygen_pages.cc:58:27     - Unknown word (innergroup)         -- <xsd:element name="innergroup" type="refType" minOccurs
+./docfx/doxygen_pages.cc:59:27     - Unknown word (templateparamlist)  -- <xsd:element name="templateparamlist" type="templateparamlistType
+./docfx/doxygen_pages.cc:60:27     - Unknown word (sectiondef)         -- <xsd:element name="sectiondef" type="sectiondefType
+./docfx/doxygen_pages.cc:61:27     - Unknown word (tableofcontents)    -- <xsd:element name="tableofcontents" type="tableofcontentsType
+./docfx/doxygen_pages.cc:64:27     - Unknown word (inheritancegraph)   -- <xsd:element name="inheritancegraph" type="graphType" minOccurs
+./docfx/doxygen_pages.cc:65:27     - Unknown word (collaborationgraph) -- <xsd:element name="collaborationgraph" type="graphType" minOccurs
+./docfx/doxygen_pages.cc:66:27     - Unknown word (programlisting)     -- <xsd:element name="programlisting" type="listingType"
+./docfx/doxygen_pages.cc:68:27     - Unknown word (listofallmembers)   -- <xsd:element name="listofallmembers" type="listofallmembersType
+./docfx/doxygen_pages_test.cc:27:78     - Unknown word (indexpage)   -- XMLSchema-instance" id="indexpage" kind="page">
+./docfx/doxygen_pages_test.cc:27:8      - Unknown word (compounddef) -- <compounddef xmlns:xsi="http://www
+./docfx/doxygen_pages_test.cc:28:10     - Unknown word (compoundname) -- <compoundname>index</compoundname
+./docfx/doxygen_pages_test.cc:30:10     - Unknown word (briefdescription) -- <briefdescription>
+./docfx/doxygen_pages_test.cc:32:10     - Unknown word (detaileddescription) -- <detaileddescription>
+./docfx/doxygen_pages_test.cc:33:29     - Unknown word (autotoc)             -- <sect1 id="index_1autotoc_md0">
+./docfx/doxygen_pages_test.cc:36:20     - Unknown word (itemizedlist)        -- <para><itemizedlist>
+./docfx/doxygen_pages_test.cc:37:16     - Unknown word (listitem)            -- <listitem><para><ref refid="classgoogle
+./docfx/doxygen_pages_test.cc:37:36     - Unknown word (refid)               -- listitem><para><ref refid="classgoogle_1_1cloud
+./docfx/doxygen_pages_test.cc:37:43     - Unknown word (classgoogle)         -- listitem><para><ref refid="classgoogle_1_1cloud_1_1Credentials
+./docfx/doxygen_pages_test.cc:37:80     - Unknown word (kindref)             -- cloud_1_1Credentials" kindref="compound">Credentials
+./docfx/doxygen_pages_test.cc:40:165    - Unknown word (computeroutput)      -- value on success and a <computeroutput>Status</computeroutput
+./docfx/doxygen_pages_test.cc:45:16     - Unknown word (simplesect)          -- <simplesect kind="warning"><para
+./docfx/doxygen_pages_test.cc:92:3      - Unknown word (pugi)                -- pugi::xml_document doc;
+./docfx/parse_arguments_test.cc:39:16     - Unknown word (STREQ)      -- EXPECT_STREQ(ex.what(),
 ./examples/BUILD.bazel:84:14     - Unknown word (GENDIR)     -- "-I$(GENDIR)/examples",
 ./examples/CMakeLists.txt:27:13     - Unknown word (Findg)      -- include(FindgRPC)
 ./examples/CMakeLists.txt:31:9      - Unknown word (PROTO)      -- PROTO_PATH_DIRECTORIES ${CMAKE
@@ -330,9 +334,9 @@ Lines:
 ./external/googleapis/protolists/artifactregistry.list:10:61     - Unknown word (vpcsc)      -- artifactregistry/v1:vpcsc_config.proto
 ./external/googleapis/protolists/bigquery.list:3:63      - Unknown word (datapolicy) -- bigquery/datapolicies/v1:datapolicy.proto
 ./external/googleapis/protolists/connectors.list:1:52      - Unknown word (authconfig) -- cloud/connectors/v1:authconfig.proto
-./external/googleapis/protolists/datacatalog.list:6:57      - Unknown word (fileset)    -- cloud/datacatalog/v1:gcs_fileset_spec.proto
-./external/googleapis/protolists/datacatalog.list:8:53      - Unknown word (policytagmanager) -- cloud/datacatalog/v1:policytagmanager.proto
-./external/googleapis/protolists/datacatalog.list:9:53      - Unknown word (policytagmanagerserialization) -- cloud/datacatalog/v1:policytagmanagerserialization.proto
+./external/googleapis/protolists/datacatalog.list:10:53     - Unknown word (policytagmanagerserialization) -- cloud/datacatalog/v1:policytagmanagerserialization.proto
+./external/googleapis/protolists/datacatalog.list:7:57      - Unknown word (fileset)    -- cloud/datacatalog/v1:gcs_fileset_spec.proto
+./external/googleapis/protolists/datacatalog.list:9:53      - Unknown word (policytagmanager) -- cloud/datacatalog/v1:policytagmanager.proto
 ./external/googleapis/protolists/dataplex.list:5:50      - Unknown word (datascans)  -- google/cloud/dataplex/v1:datascans.proto
 ./external/googleapis/protolists/deploy.list:2:48      - Unknown word (deliverypipeline) -- google/cloud/deploy/v1:deliverypipeline_notification_payload
 ./external/googleapis/protolists/deploy.list:3:48      - Unknown word (jobrun)           -- google/cloud/deploy/v1:jobrun_notification_payload
@@ -350,32 +354,32 @@ Lines:
 ./external/googleapis/protolists/servicemanagement.list:2:57      - Unknown word (servicemanager) -- servicemanagement/v1:servicemanager.proto
 ./external/googleapis/protolists/shell.list:1:47      - Unknown word (cloudshell) -- google/cloud/shell/v1:cloudshell.proto
 ./external/googleapis/protolists/tasks.list:1:47      - Unknown word (cloudtasks) -- google/cloud/tasks/v2:cloudtasks.proto
-./generator/BUILD.bazel:93:39     - Unknown word (commandlineflag) -- google_absl//absl/flags:commandlineflag",
-./generator/CMakeLists.txt:118:22    - Unknown word (libprotoc)   -- protobuf::libprotoc)
-./generator/CMakeLists.txt:138:29    - Unknown word (SRCS)        -- protobuf_generate_cpp(PROTO_SRCS PROTO_HDRS generator
-./generator/CMakeLists.txt:138:40    - Unknown word (HDRS)        -- cpp(PROTO_SRCS PROTO_HDRS generator_config.proto
-./generator/CMakeLists.txt:141:40    - Unknown word (libprotobuf) -- PUBLIC protobuf::libprotobuf)
-./generator/CMakeLists.txt:218:62    - Unknown word (bigobj)      -- .obj file. Add the /bigobj option to
-./generator/CMakeLists.txt:228:26    - Unknown word (everytime)   -- build all the tests everytime they create a new package
-./generator/CMakeLists.txt:52:25     - Unknown word (idempotency) -- internal/forwarding_idempotency_policy_generator.cc
+./generator/BUILD.bazel:94:39     - Unknown word (commandlineflag) -- google_absl//absl/flags:commandlineflag",
+./generator/CMakeLists.txt:123:22    - Unknown word (libprotoc)   -- protobuf::libprotoc)
+./generator/CMakeLists.txt:143:29    - Unknown word (SRCS)        -- protobuf_generate_cpp(PROTO_SRCS PROTO_HDRS generator
+./generator/CMakeLists.txt:143:40    - Unknown word (HDRS)        -- cpp(PROTO_SRCS PROTO_HDRS generator_config.proto
+./generator/CMakeLists.txt:146:40    - Unknown word (libprotobuf) -- PUBLIC protobuf::libprotobuf)
+./generator/CMakeLists.txt:223:62    - Unknown word (bigobj)      -- .obj file. Add the /bigobj option to
+./generator/CMakeLists.txt:233:26    - Unknown word (everytime)   -- build all the tests everytime they create a new package
+./generator/CMakeLists.txt:56:25     - Unknown word (idempotency) -- internal/forwarding_idempotency_policy_generator.cc
 ./generator/generator.h:27:8      - Unknown word (microgenerator) -- * C++ microgenerator plugin entry point.
 ./generator/generator_config.proto:133:11    - Unknown word (Idempotency) -- message IdempotencyOverride {
 ./generator/generator_config.proto:26:27     - Unknown word (rpcs)       -- repeated string omitted_rpcs = 4;
 ./generator/generator_config.proto:41:35     - Unknown word (gcpxx)      -- to true generate the `gcpxxV1` alias for our inline
 ./generator/generator_config.proto:48:42     - Unknown word (struct)     -- ServiceNameRetryTraits struct using the provided codes
 ./generator/generator_config.proto:96:24     - Unknown word (COMPAT)     -- LOCATION_DEPENDENT_COMPAT = 2;
-./generator/generator_config.textproto:123:47    - Unknown word (AUTOML)     -- var: "GOOGLE_CLOUD_CPP_AUTOML_PREDICTION_SERVICE_ENDPOINT
-./generator/generator_config.textproto:465:15    - Unknown word (Abac)       -- "SetLegacyAbac(std::string const&,
-./generator/generator_config.textproto:516:3     - Unknown word (Dataplex)   -- # Dataplex
-./generator/generator_config.textproto:52:3      - Unknown word (Apigee)     -- # Apigee Connect
-./generator/generator_config.textproto:541:3     - Unknown word (Dataproc)   -- # Dataproc
-./generator/generator_config.textproto:58:47     - Unknown word (APIGEE)     -- var: "GOOGLE_CLOUD_CPP_APIGEE_CONNECTION_SERVICE_ENDPOINT
-./generator/generator_config.textproto:598:3     - Unknown word (Datastream) -- # Datastream
-./generator/generator_config.textproto:616:3     - Unknown word (Dialogflow) -- # Dialogflow CX
-./generator/generator_config.textproto:622:47    - Unknown word (DIALOGFLOW) -- var: "GOOGLE_CLOUD_CPP_DIALOGFLOW_ENVIRONMENT_ENDPOINT
-./generator/generator_config.textproto:912:3     - Unknown word (Eventarc)   -- # Eventarc
-./generator/generator_config.textproto:929:3     - Unknown word (Filestore)  -- # Filestore
-./generator/generator_config.textproto:990:7     - Unknown word (Multicloud) -- # GKE Multicloud
+./generator/generator_config.textproto:1007:7    - Unknown word (Multicloud) -- # GKE Multicloud
+./generator/generator_config.textproto:131:47    - Unknown word (AUTOML)     -- var: "GOOGLE_CLOUD_CPP_AUTOML_PREDICTION_SERVICE_ENDPOINT
+./generator/generator_config.textproto:473:15    - Unknown word (Abac)       -- "SetLegacyAbac(std::string const&,
+./generator/generator_config.textproto:533:3     - Unknown word (Dataplex)   -- # Dataplex
+./generator/generator_config.textproto:558:3     - Unknown word (Dataproc)   -- # Dataproc
+./generator/generator_config.textproto:60:3      - Unknown word (Apigee)     -- # Apigee Connect
+./generator/generator_config.textproto:615:3     - Unknown word (Datastream) -- # Datastream
+./generator/generator_config.textproto:633:3     - Unknown word (Dialogflow) -- # Dialogflow CX
+./generator/generator_config.textproto:639:47    - Unknown word (DIALOGFLOW) -- var: "GOOGLE_CLOUD_CPP_DIALOGFLOW_ENVIRONMENT_ENDPOINT
+./generator/generator_config.textproto:66:47     - Unknown word (APIGEE)     -- var: "GOOGLE_CLOUD_CPP_APIGEE_CONNECTION_SERVICE_ENDPOINT
+./generator/generator_config.textproto:929:3     - Unknown word (Eventarc)   -- # Eventarc
+./generator/generator_config.textproto:946:3     - Unknown word (Filestore)  -- # Filestore
 ./generator/integration_tests/BUILD.bazel:65:1      - Unknown word (filegroup)  -- filegroup(
 ./generator/integration_tests/backup.proto:27:40     - Unknown word (genproto)   -- "google.golang.org/genproto/googleapis/test/admin
 ./generator/integration_tests/backup.proto:29:19     - Unknown word (classname)  -- option java_outer_classname = "BackupProto";
@@ -399,7 +403,7 @@ Lines:
 ./generator/internal/descriptor_utils.cc:77:27     - Unknown word (CPPTYPE)    -- case FieldDescriptor::CPPTYPE_INT32:
 ./generator/internal/descriptor_utils.cc:98:5      - Unknown word (NOTREACHED) -- /*NOTREACHED*/
 ./generator/internal/descriptor_utils.h:172:7     - Unknown word (actools)    -- * go/actools-dynamic-routing-proposal
-./generator/internal/descriptor_utils_test.cc:1013:10   - Unknown word (endcond)    -- /// @endcond
+./generator/internal/descriptor_utils_test.cc:1025:10   - Unknown word (endcond)    -- /// @endcond
 ./generator/internal/predicate_utils_test.cc:679:46    - Unknown word (Repated)    -- PaginationExactlyOneRepatedStringResponse) {
 ./generator/internal/predicate_utils_test.cc:973:44    - Unknown word (falsefragment) -- std::string("fragment0_falsefragment1_true"));
 ./generator/internal/printer_test.cc:37:33     - Unknown word (Inigo)      -- VarsDictionary vars{{"name", "Inigo Montoya"}};
@@ -407,9 +411,8 @@ Lines:
 ./generator/internal/scaffold_generator.cc:546:2     - Unknown word (mainpage)   -- @mainpage $title$ C++ Client Library
 ./generator/internal/scaffold_generator.cc:745:7     - Unknown word (tsch)       -- | csh/tsch | `setenv
 ./generator/internal/scaffold_generator.cc:807:14    - Unknown word (gooogle)    -- cd $$HOME/gooogle-cloud-cpp/google/cloud
-./generator/internal/scaffold_generator.cc:835:21    - Unknown word (DGRPC)      -- bazel build --copt=-DGRPC_BAZEL_BUILD ...
-./generator/internal/scaffold_generator.cc:853:39    - Unknown word (Downloadfile) -- System.Net.WebClient).Downloadfile( ^
-./generator/internal/scaffold_generator.cc:993:8     - Unknown word (CXXLDFLAGS)   -- CLIENT_CXXLDFLAGS := $$(shell pkg-config
+./generator/internal/scaffold_generator.cc:845:39    - Unknown word (Downloadfile) -- System.Net.WebClient).Downloadfile( ^
+./generator/internal/scaffold_generator.cc:985:8     - Unknown word (CXXLDFLAGS)   -- CLIENT_CXXLDFLAGS := $$(shell pkg-config
 ./generator/internal/scaffold_generator.h:55:36     - Unknown word (refgroup)   -- name of the doxygen refgroup for options in a given
 ./generator/internal/scaffold_generator_test.cc:326:38    - Unknown word (CXXLD)      -- actual, HasSubstr("\t$(CXXLD) "));
 ./generator/internal/scaffold_generator_test.cc:360:37    - Unknown word (Bazelrc)    -- ScaffoldGenerator, QuickstartBazelrc) {
@@ -425,9 +428,11 @@ Lines:
 ./google/cloud/accessapproval/doc/options.dox:2:2       - Unknown word (defgroup)   -- @defgroup google-cloud-accessapproval
 ./google/cloud/accessapproval/quickstart/Makefile:18:12     - Unknown word (CXXFLAGS)   -- # The CXX, CXXFLAGS and CXXLD variables
 ./google/cloud/accessapproval/quickstart/Makefile:30:60     - Unknown word (cflags)     -- config $(CLIENT_MODULE) --cflags)
+./google/cloud/accessapproval/quickstart/README.md:130:21    - Unknown word (DGRPC)      -- bazel build --copt=-DGRPC_BAZEL_BUILD ...
 ./google/cloud/accessapproval/quickstart/README.md:40:25     - Unknown word (setenv)     -- csh/tsch | `setenv GOOGLE_APPLICATION_CREDENTIAL
 ./google/cloud/accesscontextmanager/access_context_manager_client.h:19:39     - Unknown word (ACCESSCONTEXTMANAGER) -- CLOUD_CPP_GOOGLE_CLOUD_ACCESSCONTEXTMANAGER_ACCESS_CONTEXT_MANAGER
 ./google/cloud/advisorynotifications/v1/advisory_notifications_client.h:19:39     - Unknown word (ADVISORYNOTIFICATIONS) -- CLOUD_CPP_GOOGLE_CLOUD_ADVISORYNOTIFICATIONS_V1_ADVISORY_NOTIFICATIONS
+./google/cloud/alloydb/v1/alloy_db_admin_client.h:19:39     - Unknown word (ALLOYDB)    -- CLOUD_CPP_GOOGLE_CLOUD_ALLOYDB_V1_ALLOY_DB_ADMIN_CLIENT
 ./google/cloud/apigeeconnect/connection_client.h:19:39     - Unknown word (APIGEECONNECT) -- CLOUD_CPP_GOOGLE_CLOUD_APIGEECONNECT_CONNECTION_CLIENT_H
 ./google/cloud/apikeys/api_keys_client.h:19:39     - Unknown word (APIKEYS)    -- CLOUD_CPP_GOOGLE_CLOUD_APIKEYS_API_KEYS_CLIENT_H
 ./google/cloud/appengine/applications_client.h:19:39     - Unknown word (APPENGINE)  -- CLOUD_CPP_GOOGLE_CLOUD_APPENGINE_APPLICATIONS_CLIENT
@@ -467,8 +472,11 @@ Lines:
 ./google/cloud/bigquery/doc/main.dox:93:40     - Unknown word (bigqueryreservation) -- (which defaults to "bigqueryreservation.googleapis.com")
 ./google/cloud/bigquery/v2/minimal/internal/job_request_test.cc:30:25     - Unknown word (useast)     -- request.set_location("useast");
 ./google/cloud/bigquery/v2/minimal/internal/job_request_test.cc:65:9      - Unknown word (myendpoint) -- {"myendpoint.google.com",
+./google/cloud/bigquery/v2/minimal/internal/job_response_test.cc:32:20     - Unknown word (jkind)      -- R"({"kind": "jkind",
+./google/cloud/bigquery/v2/minimal/internal/job_response_test.cc:33:20     - Unknown word (jtag)       -- "etag": "jtag",
+./google/cloud/bigquery/v2/minimal/internal/job_response_test.cc:35:25     - Unknown word (jself)      -- "self_link": "jselfLink",
+./google/cloud/bigquery/v2/minimal/internal/job_response_test.cc:36:26     - Unknown word (juser)      -- "user_email": "juserEmail",
 ./google/cloud/bigtable/BUILD.bazel:99:22     - Unknown word (readrowsparser) -- name = "internal_readrowsparser_test",
-./google/cloud/bigtable/CMakeLists.txt:457:44    - Unknown word (QUICKSTART) -- CLOUD_CPP_BIGTABLE_TEST_QUICKSTART_TABLE)
 ./google/cloud/bigtable/README.md:27:35     - Unknown word (substr)     -- << "Usage: " << cmd.substr(last_slash + 1)
 ./google/cloud/bigtable/admin/integration_tests/admin_backup_integration_test.cc:41:11     - Unknown word (btadmin)    -- namespace btadmin = ::google::bigtable
 ./google/cloud/bigtable/admin/integration_tests/table_admin_integration_test.cc:221:19    - Unknown word (newfam)     -- mods[0].set_id("newfam");
@@ -581,6 +589,7 @@ Lines:
 ./google/cloud/credentials.h:214:28    - Unknown word (cryptographical) -- account, as well as the cryptographical materials (a RSA private
 ./google/cloud/credentials.h:249:52    - Unknown word (OIDC)            -- supports OpenID Connect (OIDC), such as Microsoft
 ./google/cloud/datacatalog/data_catalog_client.h:19:39     - Unknown word (DATACATALOG) -- CLOUD_CPP_GOOGLE_CLOUD_DATACATALOG_DATA_CATALOG_CLIENT
+./google/cloud/datacatalog/doc/main.dox:50:40     - Unknown word (datalineage) -- (which defaults to "datalineage.googleapis.com")
 ./google/cloud/datacatalog/v1/data_catalog_client.cc:555:42    - Unknown word (Unstar)     -- cloud::datacatalog::v1::UnstarEntryResponse>
 ./google/cloud/datacatalog/v1/data_catalog_client.h:183:18    - Unknown word (Metastore)  -- /// * Dataproc Metastore services (`@dataproc
 ./google/cloud/datacatalog/v1/data_catalog_client.h:479:41    - Unknown word (FILESET)    -- create entries only with 'FILESET', 'CLUSTER', 'DATA_STREAM
@@ -658,7 +667,7 @@ Lines:
 ./google/cloud/internal/call_context.h:41:18     - Unknown word (nostd)      -- opentelemetry::nostd::shared_ptr<opentelemetry
 ./google/cloud/internal/compute_engine_util.h:26:49     - Unknown word (sevrre)     -- query a GCE metadata sevrre.
 ./google/cloud/internal/curl_impl.cc:165:35    - Unknown word (defrag)     -- 0) start_ = 0;  // defrag optimization
-./google/cloud/internal/curl_rest_client_integration_test.cc:106:21    - Unknown word (httbin)     -- // TODO(#8396): httbin.org doesn't send back
+./google/cloud/internal/curl_rest_client_integration_test.cc:103:21    - Unknown word (httbin)     -- // TODO(#8396): httbin.org doesn't send back
 ./google/cloud/internal/curl_rest_client_integration_test.cc:45:10     - Unknown word (httpbin)    -- auto httpbin_endpoint = google::cloud
 ./google/cloud/internal/curl_rest_client_integration_test.cc:45:62     - Unknown word (HTTPBIN)    -- cloud::internal::GetEnv("HTTPBIN_ENDPOINT");
 ./google/cloud/internal/curl_wrappers_test.cc:51:14     - Unknown word (Casse)      -- struct TestCasse {
@@ -801,8 +810,8 @@ Lines:
 ./google/cloud/spanner/instance_admin_client_test.cc:29:11     - Unknown word (gsai)       -- namespace gsai = ::google::spanner
 ./google/cloud/spanner/integration_tests/data_types_integration_test.cc:508:47    - Unknown word (datatypesbyjsonvalue) -- AllOf(HasSubstr("Index datatypesbyjsonvalue"),
 ./google/cloud/spanner/integration_tests/data_types_integration_test.cc:71:30     - Unknown word (Tmpl)       -- DataTypeIntegrationTestTmpl : public T {
-./google/cloud/spanner/internal/connection_impl_test.cc:2539:37   - Unknown word (BADDECAF)   -- { partition_token: "BADDECAF" }
-./google/cloud/spanner/internal/connection_impl_test.cc:2541:25   - Unknown word (CAFEDEAD)   -- transaction: { id: "CAFEDEAD" }
+./google/cloud/spanner/internal/connection_impl_test.cc:2570:37   - Unknown word (BADDECAF)   -- { partition_token: "BADDECAF" }
+./google/cloud/spanner/internal/connection_impl_test.cc:2572:25   - Unknown word (CAFEDEAD)   -- transaction: { id: "CAFEDEAD" }
 ./google/cloud/spanner/internal/connection_impl_test.cc:61:34     - Unknown word (Wmissing)   -- diagnostic ignored "-Wmissing-field-initializers"
 ./google/cloud/spanner/internal/logging_result_set_reader.cc:37:43     - Unknown word (unresumable) -- __func__ << "() << (unresumable)";
 ./google/cloud/spanner/internal/merge_chunk_test.cc:175:29    - Unknown word (Bools)      -- MergeChunk, CannotMergeBools) {
@@ -815,16 +824,16 @@ Lines:
 ./google/cloud/spanner/json.h:90:11     - Unknown word (reparsing)  -- * avoids reparsing. Therefore, applications
 ./google/cloud/spanner/keys.cc:58:46     - Unknown word (differencer) -- :MessageDifferencer differencer;
 ./google/cloud/spanner/mutations_test.cc:352:37    - Unknown word (ZXMA)       -- string_value: "Ynl0ZXMA" }
-./google/cloud/spanner/query_partition.cc:115:31    - Unknown word (varint)     -- route_to_leader = field.varint() != 0;
-./google/cloud/spanner/query_partition.cc:74:14     - Unknown word (Varint)     -- ->AddVarint(kRouteToLeaderFieldNumber
+./google/cloud/spanner/query_partition.cc:119:31    - Unknown word (varint)     -- route_to_leader = field.varint() != 0;
+./google/cloud/spanner/query_partition.cc:78:14     - Unknown word (Varint)     -- ->AddVarint(kRouteToLeaderFieldNumber
 ./google/cloud/spanner/samples/README.md:21:16     - Unknown word (bazelbuild) -- to workaround [bazelbuild/bazel#10621](https:
 ./google/cloud/spanner/samples/postgresql_samples.cc:197:56    - Unknown word (Trentor)    -- cloud::spanner::Value("Trentor")}}),
 ./google/cloud/spanner/samples/postgresql_samples.cc:317:44    - Unknown word (singerid)   -- SingerId will be folded to "singerid"
 ./google/cloud/spanner/samples/postgresql_samples.cc:351:36    - Unknown word (firstname)  -- Singers", {"singerid", "firstname", "lastname"})
 ./google/cloud/spanner/samples/postgresql_samples.cc:351:49    - Unknown word (lastname)   -- singerid", "firstname", "lastname"})
 ./google/cloud/spanner/samples/postgresql_samples.cc:438:40    - Unknown word (TIMESTAMPTZ) -- 11-03T09:35:01UTC'::TIMESTAMPTZ as timestamp
-./google/cloud/spanner/samples/samples.cc:3270:8    - Unknown word (songinfo)   -- auto songinfo = SongInfo(
-./google/cloud/spanner/samples/samples.cc:3711:11   - Unknown word (partitionable) -- auto is_partitionable = [](spanner::ExecutionPlan
+./google/cloud/spanner/samples/samples.cc:3271:8    - Unknown word (songinfo)   -- auto songinfo = SongInfo(
+./google/cloud/spanner/samples/samples.cc:3715:11   - Unknown word (partitionable) -- auto is_partitionable = [](spanner::ExecutionPlan
 ./google/cloud/spanner/value.cc:34:47     - Unknown word (subvalues)  -- compare subtypes and subvalues.
 ./google/cloud/spanner/value.h:116:9     - Unknown word (Nullness)   -- * @par Nullness
 ./google/cloud/spanner/value.h:349:6     - Unknown word (Metafunction) -- // Metafunction that returns true if
@@ -955,7 +964,7 @@ Lines:
 ./google/cloud/storage/quickstart/README.md:127:31    - Unknown word (Tbits)      -- large workloads (several Tbits/s of upload and/or download
 ./google/cloud/storage/testing/retry_tests.h:54:47     - Unknown word (oncall)     -- TypedExpectation<F>& oncall,
 ./google/cloud/storage/tests/conformance_tests.proto:82:24     - Unknown word (lexigraphical) -- E.1: Order them in lexigraphical order so it's the
-./google/cloud/storage/tests/curl_download_request_integration_test.cc:325:55    - Unknown word (nulltptr)   -- error("r_no_close.id()==nulltptr");
+./google/cloud/storage/tests/curl_download_request_integration_test.cc:332:55    - Unknown word (nulltptr)   -- error("r_no_close.id()==nulltptr");
 ./google/cloud/storage/tests/decompressive_transcoding_integration_test.cc:121:55    - Unknown word (Gunzipped)  -- scodingIntegrationTest, ResumeGunzippedDownloadJson) {
 ./google/cloud/storage/tests/decompressive_transcoding_integration_test.cc:47:5      - Unknown word (gzipped)    -- gzipped_contents_ = std::string
 ./google/cloud/storage/tests/object_read_headers_integration_test.cc:138:44    - Unknown word (uploadid)   -- IsSupersetOf({"x-guploader-uploadid", "x-goog-hash",

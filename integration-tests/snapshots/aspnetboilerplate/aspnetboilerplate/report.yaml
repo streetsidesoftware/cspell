@@ -3,9 +3,9 @@ Repository: aspnetboilerplate/aspnetboilerplate
 Url: https://github.com/aspnetboilerplate/aspnetboilerplate
 Args: ["**/*.{md,cs,cshtml}","--exclude=wwwroot","--exclude=**/*SampleApp.Tests/Web*"]
 Summary:
-  files: 2515
-  filesWithIssues: 807
-  issues: 2847
+  files: 2527
+  filesWithIssues: 814
+  issues: 2862
   errors: 0
 Errors: []
 
@@ -30,7 +30,7 @@ issues:
   - "doc/WebSite/Articles/Use-MassTransit-In-ABP/Index.md:92:132     	messsages   	U   	to receive and handle messsages. In this sample, we"
   - "doc/WebSite/Articles/Use-MassTransit-In-ABP/Index.md:145:24     	rabbitmq    	U   	config.Host(new Uri(\"rabbitmq://localhost/\"), host"
   - "doc/WebSite/AspNet-Core.md:187:26   	Dont        	U   	*WrapResult** and **DontWrapResult** attributes"
-  - "doc/WebSite/AspNet-Core.md:221:52   	Newtonsoft  	U   	two JsonConverter for Newtonsoft."
+  - "doc/WebSite/AspNet-Core.md:263:52   	Newtonsoft  	U   	two JsonConverter for Newtonsoft."
   - "doc/WebSite/Audit-Logging.md:81:13      	LINQ    	U   	(Use simple LINQ to find the selector"
   - "doc/WebSite/Audit-Logging.md:129:54     	proxying	U   	Boilerplate uses dynamic proxying and"
   - "doc/WebSite/Authorization.md:48:25      	localizable 	U   	**Display name**: A localizable string that can be used"
@@ -201,6 +201,7 @@ issues:
   - "src/Abp.EntityFramework/EntityFramework/Interceptors/WithNolockInterceptor.cs:13:110    	NOLOCK  	U   	Extent\\d+\\](?! WITH \\(NOLOCK\\)))\", RegexOptions.Multiline"
   - "src/Abp.EntityFrameworkCore/EntityFrameworkCore/Extensions/QueryableExtensions.cs:51:34     	Includable  	U   	Func<IQueryable<T>, IIncludableQueryable<T, object>"
   - "src/Abp.HangFire/Hangfire/Configuration/IAbpHangfireConfiguration.cs:13:30      	Hanfgire's  	U   	// Gets or sets the Hanfgire's <see cref=\"BackgroundJobServe"
+  - "src/Abp.HtmlSanitizer/HtmlSanitizer/AbpHtmlSanitizerActionFilter.cs:5:7     	Ganss   	U   	using Ganss.Xss;"
   - "src/Abp.NHibernate/NHibernate/EntityMappings/NhMappingExtensions.cs:8:55    	standart	U   	make mapping easier for standart columns."
   - "src/Abp.Quartz/Quartz/IQuartzScheduleJobManager.cs:31:13    	Unschedules 	U   	/// Unschedules a job."
   - "src/Abp.RedisCache.ProtoBuf/Runtime/Caching/Redis/ProtoBufRedisCacheSerializer.cs:11:34     	Seperator   	U   	private const string TypeSeperator = \"|\";"
@@ -236,8 +237,8 @@ issues:
   - "src/Abp.ZeroCore.EntityFrameworkCore/EntityHistory/EntityHistoryHelper.cs:135:47    	Unproxied   	U   	typeOfEntity = ProxyHelper.GetUnproxiedType(entityEntry.Entity"
   - "src/Abp.ZeroCore.IdentityServer4.EntityFrameworkCore/IdentityServer4/AbpZeroCoreIdentityServerEntityFrameworkCoreConfigurationExtensions.cs:31:60   	nvarchar	U   	over 4K converts to nvarchar(max) on SqlServer"
   - "src/Abp.ZeroCore.IdentityServer4.vNext/IdentityServer4vNext/AbpResourceOwnerPasswordValidator.cs:52:73      	Oidc	U   	GrantValidationResult(sub, OidcConstants.AuthenticationMethod"
-  - "src/Abp.ZeroCore/Authorization/Users/AbpUserStore.cs:2227:34    	userclaims  	U   	var query = from userclaims in _userClaimRepository"
-  - "src/Abp.ZeroCore/Authorization/Users/AbpUserStore.cs:2293:34    	userrole    	U   	var query = from userrole in _userRoleRepository"
+  - "src/Abp.ZeroCore/Authorization/Users/AbpUserStore.cs:2230:34    	userclaims  	U   	var query = from userclaims in _userClaimRepository"
+  - "src/Abp.ZeroCore/Authorization/Users/AbpUserStore.cs:2296:34    	userrole    	U   	var query = from userrole in _userRoleRepository"
   - "src/Abp/Aspects/AbpCrossCuttingConcerns.cs:68:35    	Applieds	U   	public static string[] GetApplieds(object obj)"
   - "src/Abp/Authorization/Permission.cs:51:66   	mykey   	U   	indexer like Permission[\"mykey\"]=data; </para>"
   - "src/Abp/Authorization/Permission.cs:52:26   	mydata  	U   	/// <para>object mydata=Permission[\"mykey\"]"

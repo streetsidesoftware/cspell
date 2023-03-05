@@ -4,8 +4,8 @@ Url: https://github.com/caddyserver/caddy.git
 Args: ["**/*.go"]
 Summary:
   files: 228
-  filesWithIssues: 210
-  issues: 3518
+  filesWithIssues: 209
+  issues: 3517
   errors: 0
 Errors: []
 
@@ -144,10 +144,9 @@ issues:
   - "cmd/removebinary_windows.go:34:67   	windir  	U   	filepath.Join(os.Getenv(\"windir\"), \"system32\", \"cmd"
   - "context.go:230:48   	deallocate  	U   	raw bytes; allow GC to deallocate"
   - "internal/metrics/metrics_test.go:19:28      	ohno	U   	method: strings.Repeat(\"ohno\", 9999), expected:"
-  - "listen_unix.go:18:72    	illumos 	U   	freebsd || hurd || illumos || ios || linux || netbsd"
-  - "listen.go:54:50     	swappable   	U   	servers become hot-swappable"
-  - "listen.go:80:6      	tconn       	U   	if tconn, ok := conn.(canSetKeepAlive"
-  - "listen.go:104:6     	expliclty   	U   	// expliclty assign it to nothing"
+  - "listen.go:51:50     	swappable   	U   	servers become hot-swappable"
+  - "listen.go:77:6      	tconn       	U   	if tconn, ok := conn.(canSetKeepAlive"
+  - "listen.go:101:6     	expliclty   	U   	// expliclty assign it to nothing"
   - "listeners_test.go:91:20     	unixpacket  	U   	input: \"unixpacket//foo/bar\","
   - "listeners.go:33:14      	quic        	U   	\"github.com/quic-go/quic-go\""
   - "listeners.go:124:27     	datagram    	U   	return a net.Listener; datagram-based networks (\"udp"
@@ -232,11 +231,11 @@ issues:
   - "modules/caddyhttp/fileserver/staticfiles.go:70:4    	Canonicalization	U   	// Canonicalization redirects are not issued"
   - "modules/caddyhttp/fileserver/staticfiles.go:118:51  	explictness     	U   	maximum clarity and explictness, use complete,"
   - "modules/caddyhttp/fileserver/staticfiles.go:156:2   	precompressors  	U   	precompressors map[string]encode"
-  - "modules/caddyhttp/fileserver/staticfiles.go:329:12  	canonicalization	U   	// if URL canonicalization is enabled, we need"
-  - "modules/caddyhttp/fileserver/staticfiles.go:426:3   	mtyp            	U   	mtyp := mime.TypeByExtension"
-  - "modules/caddyhttp/fileserver/staticfiles.go:491:3   	backoff         	U   	backoff := weakrand.Intn(maxBackoff"
-  - "modules/caddyhttp/fileserver/staticfiles.go:491:31  	Backoff         	U   	:= weakrand.Intn(maxBackoff-minBackoff) + minBackoff"
-  - "modules/caddyhttp/fileserver/staticfiles.go:502:74  	Caza            	U   	written by Nathaniel Caza."
+  - "modules/caddyhttp/fileserver/staticfiles.go:330:12  	canonicalization	U   	// if URL canonicalization is enabled, we need"
+  - "modules/caddyhttp/fileserver/staticfiles.go:427:3   	mtyp            	U   	mtyp := mime.TypeByExtension"
+  - "modules/caddyhttp/fileserver/staticfiles.go:492:3   	backoff         	U   	backoff := weakrand.Intn(maxBackoff"
+  - "modules/caddyhttp/fileserver/staticfiles.go:492:31  	Backoff         	U   	:= weakrand.Intn(maxBackoff-minBackoff) + minBackoff"
+  - "modules/caddyhttp/fileserver/staticfiles.go:503:74  	Caza            	U   	written by Nathaniel Caza."
   - "modules/caddyhttp/headers/headers_test.go:93:32     	lalala      	U   	Header-Suffix\": []string{\"lalala\"},"
   - "modules/caddyhttp/headers/headers_test.go:96:32     	foofoofoo   	U   	Me\": []string{\"foofoofoo\"},"
   - "modules/caddyhttp/headers/headers_test.go:216:11    	hdrs        	U   	for k, hdrs := range tc.respHeader"
@@ -309,7 +308,7 @@ issues:
   - "modules/caddyhttp/reverseproxy/streaming.go:213:8   	werr        	U   	nw, werr := dst.Write(buf[:nr"
   - "modules/caddyhttp/reverseproxy/streaming.go:250:37  	pascaldekloe	U   	connection. Thanks to @pascaldekloe who provided inspiration"
   - "modules/caddyhttp/reverseproxy/upstreams.go:113:2   	srvs        	U   	srvsMu.RLock()"
-  - "modules/caddyhttp/reverseproxy/upstreams.go:363:4   	failovers   	U   	// failovers, especially in conjunction"
+  - "modules/caddyhttp/reverseproxy/upstreams.go:395:4   	failovers   	U   	// failovers, especially in conjunction"
   - "modules/caddyhttp/rewrite/caddyfile.go:42:6     	rewr    	U   	var rewr Rewrite"
   - "modules/caddyhttp/rewrite/caddyfile.go:126:50   	substr  	U   	append(rewr.URISubstring, substrReplacer{"
   - "modules/caddyhttp/rewrite/rewrite_test.go:70:49     	Ffoo    	U   	GET\", \"/index.php?p=%2Ffoo%2Fbar\"),"
