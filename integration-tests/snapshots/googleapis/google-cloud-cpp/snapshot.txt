@@ -3,7 +3,7 @@ Repository: googleapis/google-cloud-cpp
 Url: "https://github.com/googleapis/google-cloud-cpp.git"
 Args: ["--config=../../../../config/repositories/googleapis/google-cloud-cpp/cspell.json","**/*","-e","{*.BUILD,BUILD,CHANGELOG.md,*.sh,*.cfg,*.ps1,Dockerfile.*,*.Dockerfile,*.{yaml,xml,json,cmake}}"]
 Lines:
- CSpell: Files checked: 10573, Issues found: 78180 in 8295 files
+ CSpell: Files checked: 10573, Issues found: 77693 in 8248 files
  exit code: 1
 ./ARCHITECTURE.md:100:20    - Unknown word (bigtable)   -- - Bigtable has a [`bigtable::Table`](/google/cloud
 ./ARCHITECTURE.md:100:3     - Unknown word (Bigtable)   -- - Bigtable has a [`bigtable::Table
@@ -309,7 +309,6 @@ Lines:
 ./examples/README.md:36:52     - Unknown word (gserviceaccount) -- GOOGLE_CLOUD_PROJECT}.iam.gserviceaccount.com"
 ./examples/gcs2cbt.cc:253:13    - Unknown word (cbta)       -- namespace cbta = ::google::cloud::bigtable
 ./examples/gcs2cbt.cc:256:51    - Unknown word (BIGTABLE)   -- , "GOOGLE_CLOUD_CPP_BIGTABLE_TEST_INSTANCE_ID",
-./examples/grpc_credential_types.cc:295:47    - Unknown word (bugprone)   -- argv[]) {  // NOLINT(bugprone-exception-escape)
 ./external/googleapis/CMakeLists.txt:108:16    - Unknown word (Protos)      -- include(CompileProtos)
 ./external/googleapis/CMakeLists.txt:118:27    - Unknown word (protolist)   -- google_cloud_cpp_load_protolist(protos "${file}")
 ./external/googleapis/CMakeLists.txt:17:9      - Unknown word (Googleapis) -- include(GoogleapisConfig)
@@ -477,7 +476,6 @@ Lines:
 ./google/cloud/bigtable/app_profile_config_test.cc:101:51    - Unknown word (xyzzy)      -- ofileUpdateConfig().set_etag("xyzzy").as_proto();
 ./google/cloud/bigtable/async_read_stream_test.cc:153:24    - Unknown word (callables)  -- streaming read RPC callables.
 ./google/cloud/bigtable/async_read_stream_test.cc:29:11     - Unknown word (btproto)    -- namespace btproto = ::google::bigtable
-./google/cloud/bigtable/async_row_reader.h:36:12     - Unknown word (NEXTLINE)   -- // NOLINTNEXTLINE(readability-identifier
 ./google/cloud/bigtable/benchmarks/BUILD.bazel:40:5      - Unknown word (linkopts)   -- linkopts = select({
 ./google/cloud/bigtable/benchmarks/BUILD.bazel:42:36     - Unknown word (lpthread)   -- conditions:default": ["-lpthread"],
 ./google/cloud/bigtable/benchmarks/benchmark.cc:209:14    - Unknown word (nsamples)   -- auto const nsamples = result.operations
@@ -529,6 +527,7 @@ Lines:
 ./google/cloud/bigtable/internal/rpc_policy_parameters.inc:46:26     - Unknown word (BIGTABLETABLEADMIN)    -- ifndef GOOGLE_CLOUD_CPP_BIGTABLETABLEADMIN_DEFAULT_INITIAL_DELAY
 ./google/cloud/bigtable/internal/unary_client_utils.h:63:8      - Unknown word (metafunction) -- * A metafunction to determine if @p F
 ./google/cloud/bigtable/metadata_update_policy_test.cc:73:55     - Unknown word (gccl)       -- header(), HasSubstr("gccl/"));
+./google/cloud/bigtable/mutations.h:159:15    - Unknown word (vexpressed) -- * in seconds,vexpressed as a `std::ratio<>`
 ./google/cloud/bigtable/row_range_test.cc:149:31    - Unknown word (fooa)       -- TRUE(range.Contains("fooa"));
 ./google/cloud/bigtable/row_range_test.cc:219:20    - Unknown word (AFFFF)      -- std::string const kAFFFF00 = std::string("a\xFF
 ./google/cloud/bigtable/row_set.h:72:32     - Unknown word (rowkeys)    -- function removes any rowkeys outside @p range, it
@@ -560,6 +559,7 @@ Lines:
 ./google/cloud/certificatemanager/v1/certificate_manager_client.h:55:59     - Unknown word (subresource) -- certificates. It's a subresource of
 ./google/cloud/channel/doc/main.dox:48:40     - Unknown word (cloudchannel) -- (which defaults to "cloudchannel.googleapis.com")
 ./google/cloud/channel/v1/cloud_channel_client.h:1386:7    - Unknown word (vaule)      -- /// vaule must be different from
+./google/cloud/completion_queue.h:182:54    - Unknown word (ning)       -- functor on a thread `Run()`ning the `CompletionQueue
 ./google/cloud/composer/environments_client.h:223:43    - Unknown word (scikit)     -- to set the version of scikit-learn to install in
 ./google/cloud/composer/environments_client.h:225:8     - Unknown word (numpy)      -- /// numpy, the `updateMask` parameter
 ./google/cloud/composer/environments_client.h:226:47    - Unknown word (pypi)       -- config.softwareConfig.pypiPackages.scikit-learn
@@ -826,6 +826,7 @@ Lines:
 ./google/cloud/spanner/samples/samples.cc:3270:8    - Unknown word (songinfo)   -- auto songinfo = SongInfo(
 ./google/cloud/spanner/samples/samples.cc:3711:11   - Unknown word (partitionable) -- auto is_partitionable = [](spanner::ExecutionPlan
 ./google/cloud/spanner/value.cc:34:47     - Unknown word (subvalues)  -- compare subtypes and subvalues.
+./google/cloud/spanner/value.h:116:9     - Unknown word (Nullness)   -- * @par Nullness
 ./google/cloud/spanner/value.h:349:6     - Unknown word (Metafunction) -- // Metafunction that returns true if
 ./google/cloud/spanner/value_test.cc:1141:14   - Unknown word (alphahex)   -- auto const alphahex = [](std::ostream& os
 ./google/cloud/spanner/value_test.cc:1150:49   - Unknown word (manip)      -- ostream&(std::ostream&)> manip;
