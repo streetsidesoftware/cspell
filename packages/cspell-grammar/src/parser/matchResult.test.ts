@@ -1,4 +1,6 @@
-import { createMatchResult, createSimpleMatchResult, segmentMatch } from './matchResult';
+import { describe, expect, test } from 'vitest';
+
+import { createMatchResult, createSimpleMatchResult, segmentMatch } from './matchResult.js';
 
 describe('matchResult', () => {
     test.each`

@@ -1,5 +1,5 @@
-import type { ScopePool } from './scope';
-import type { LineOffsetAnchored, MatchResult } from './types';
+import type { ScopePool } from './scope.js';
+import type { LineOffsetAnchored, MatchResult } from './types.js';
 
 export interface NGrammar {
     scopeName: NScopeSource;

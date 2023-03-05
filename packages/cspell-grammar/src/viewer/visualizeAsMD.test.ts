@@ -1,10 +1,11 @@
 import { promises as fs, readFileSync } from 'fs';
 import * as path from 'path';
+import { describe, expect, test } from 'vitest';
 
-import { TypeScript } from '../grammars';
-import { tokenizeText } from '../parser';
-import { normalizeGrammar } from '../parser/grammarNormalizer';
-import { tokenizedLinesToMarkdown } from './visualizeAsMD';
+import { TypeScript } from '../grammars/index.js';
+import { normalizeGrammar } from '../parser/grammarNormalizer.js';
+import { tokenizeText } from '../parser/index.js';
+import { tokenizedLinesToMarkdown } from './visualizeAsMD.js';
 
 const pathPackage = path.join(__dirname, '../..');
 const pathSamples = path.join(pathPackage, 'samples');

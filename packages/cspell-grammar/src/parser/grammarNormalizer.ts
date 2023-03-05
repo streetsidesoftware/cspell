@@ -1,4 +1,4 @@
-import type { GrammarDef, Pattern, Repository } from '../parser';
+import type { GrammarDef, Pattern, Repository } from '../parser/index.js';
 import type {
     Captures,
     PatternBeginEnd,
@@ -7,7 +7,7 @@ import type {
     PatternMatch,
     PatternName,
     PatternPatterns,
-} from './grammarDefinition';
+} from './grammarDefinition.js';
 import type {
     GrammarRule,
     MatchRuleResult,
@@ -24,12 +24,12 @@ import type {
     NScope,
     NScopeSource,
     Rule,
-} from './grammarNormalized';
-import { isPatternBeginEnd, isPatternInclude, isPatternMatch, isPatternPatterns } from './grammarTypesHelpers';
-import { createMatchResult, createSimpleMatchResult } from './matchResult';
-import type { Scope } from './scope';
-import { ScopePool } from './scope';
-import type { LineOffsetAnchored, MatchResult } from './types';
+} from './grammarNormalized.js';
+import { isPatternBeginEnd, isPatternInclude, isPatternMatch, isPatternPatterns } from './grammarTypesHelpers.js';
+import { createMatchResult, createSimpleMatchResult } from './matchResult.js';
+import type { Scope } from './scope.js';
+import { ScopePool } from './scope.js';
+import type { LineOffsetAnchored, MatchResult } from './types.js';
 
 export function normalizeGrammar(grammar: GrammarDef): NGrammar {
     return new ImplNGrammar(grammar);

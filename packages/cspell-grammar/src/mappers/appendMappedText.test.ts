@@ -1,5 +1,7 @@
-import { appendMappedText } from './appendMappedText';
-import type { MappedText } from './types';
+import { describe, expect, test } from 'vitest';
+
+import { appendMappedText } from './appendMappedText.js';
+import type { MappedText } from './types.js';
 
 describe('appendMappedText', () => {
     test.each`

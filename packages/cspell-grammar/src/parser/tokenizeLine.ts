@@ -1,9 +1,9 @@
 import assert from 'assert';
 
-import type { NGrammar, Rule } from './grammarNormalized';
-import { extractScope } from './grammarNormalizer';
-import { applyCaptureToBeginOrMatch, applyCaptureToEnd } from './processors/procMatchingRule';
-import type { DocumentLine, LineOffsetAnchored, TokenizedLine, TokenizedLineResult, TokenizedText } from './types';
+import type { NGrammar, Rule } from './grammarNormalized.js';
+import { extractScope } from './grammarNormalizer.js';
+import { applyCaptureToBeginOrMatch, applyCaptureToEnd } from './processors/procMatchingRule.js';
+import type { DocumentLine, LineOffsetAnchored, TokenizedLine, TokenizedLineResult, TokenizedText } from './types.js';
 
 export function tokenizeLine(line: DocumentLine, rule: Rule): TokenizedLineResult {
     const text = line.text;

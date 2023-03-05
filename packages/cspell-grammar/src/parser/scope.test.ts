@@ -1,7 +1,9 @@
-import { ScopePool } from './scope';
+import { describe, expect, test } from 'vitest';
+
+import { ScopePool } from './scope.js';
 
 describe('scope', () => {
-    it('ScopePool', () => {
+    test('ScopePool', () => {
         const pool = new ScopePool();
         const scopeVal1 = 'punctuation.definition.comment.ts comment.line.ts code.ts source.ts';
         const scope1 = pool.parseScope(scopeVal1);

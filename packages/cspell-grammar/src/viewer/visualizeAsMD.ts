@@ -1,5 +1,5 @@
-import type { TokenizedLine } from '../parser';
-import { toInlineCode } from './markdownHelper';
+import type { TokenizedLine } from '../parser/index.js';
+import { toInlineCode } from './markdownHelper.js';
 
 export function _tokenizedLineToMarkdown(line: TokenizedLine, indentation = ''): string {
     const markdownLines: string[] = [];

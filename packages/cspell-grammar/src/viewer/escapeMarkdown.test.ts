@@ -1,4 +1,6 @@
-import { escapeHtml, escapeMarkdown } from './escapeMarkdown';
+import { describe, expect, test } from 'vitest';
+
+import { escapeHtml, escapeMarkdown } from './escapeMarkdown.js';
 
 describe('escapeMarkdown', () => {
     test.each`

@@ -1,4 +1,4 @@
-import type { Scope } from './scope';
+import type { Scope } from './scope.js';
 
 export interface LineOffset extends Line {
     /**

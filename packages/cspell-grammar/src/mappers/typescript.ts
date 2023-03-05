@@ -2,7 +2,7 @@
  * Mappers for TypeScript and JavaScript
  */
 
-import type { MappedText } from './types';
+import type { MappedText } from './types.js';
 
 const hexChars: Record<string, number | undefined> = {
     '0': 0,

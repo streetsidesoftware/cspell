@@ -1,2 +1,2 @@
-export * as Markdown from './markdown';
-export * as TypeScript from './typescript';
+export * as Markdown from './markdown.js';
+export * as TypeScript from './typescript.js';

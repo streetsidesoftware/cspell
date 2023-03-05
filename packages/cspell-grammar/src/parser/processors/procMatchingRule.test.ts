@@ -1,10 +1,11 @@
 import assert from 'assert';
+import { describe, expect, test } from 'vitest';
 
-import type { GrammarDef } from '../grammarDefinition';
-import { normalizeGrammar } from '../grammarNormalizer';
-import { ScopePool } from '../scope';
-import type { TokenizedText } from '../types';
-import { applyCaptureToBeginOrMatch } from './procMatchingRule';
+import type { GrammarDef } from '../grammarDefinition.js';
+import { normalizeGrammar } from '../grammarNormalizer.js';
+import { ScopePool } from '../scope.js';
+import type { TokenizedText } from '../types.js';
+import { applyCaptureToBeginOrMatch } from './procMatchingRule.js';
 
 const pool = new ScopePool();
 

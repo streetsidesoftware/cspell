@@ -2,7 +2,7 @@ import type { ParsedText, Parser } from '@cspell/cspell-types/Parser';
 import { promises as fs } from 'fs';
 import * as path from 'path';
 
-import { parser as parserTypeScript } from './parsers/typescript';
+import { parser as parserTypeScript } from './parsers/typescript/index.js';
 
 const parsers: Record<string, Parser> = {
     '.ts': parserTypeScript,

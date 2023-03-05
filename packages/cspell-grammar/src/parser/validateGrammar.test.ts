@@ -1,7 +1,9 @@
-import * as MarkdownGrammar from '../grammars/markdown';
-import * as SimpleGrammar from '../grammars/simple';
-import * as TypeScriptGrammar from '../grammars/typescript';
-import { validate } from './validateGrammar';
+import { describe, expect, test } from 'vitest';
+
+import * as MarkdownGrammar from '../grammars/markdown.js';
+import * as SimpleGrammar from '../grammars/simple.js';
+import * as TypeScriptGrammar from '../grammars/typescript.js';
+import { validate } from './validateGrammar.js';
 
 describe('validateGrammar', () => {
     test.each`

@@ -1,7 +1,9 @@
-import { grammar as grammarTS } from '../grammars/typescript';
-import { extractScope, normalizeGrammar } from './grammarNormalizer';
-import { ScopePool } from './scope';
-import type { LineOffsetAnchored } from './types';
+import { describe, expect, test } from 'vitest';
+
+import { grammar as grammarTS } from '../grammars/typescript.js';
+import { extractScope, normalizeGrammar } from './grammarNormalizer.js';
+import { ScopePool } from './scope.js';
+import type { LineOffsetAnchored } from './types.js';
 
 const scopePool = new ScopePool();
 
