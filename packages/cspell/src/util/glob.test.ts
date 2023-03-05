@@ -1,11 +1,12 @@
 import { GlobMatcher } from 'cspell-glob';
+import type { Glob } from 'cspell-lib';
 import type { Options as MicromatchOptions } from 'micromatch';
 import micromatch from 'micromatch';
 import { minimatch } from 'minimatch';
 import * as path from 'path';
 import { describe, expect, test, vi } from 'vitest';
 
-import { calcGlobs, normalizeGlobsToRoot } from './glob';
+import { calcGlobs, normalizeGlobsToRoot } from './glob.js';
 
 interface MinimatchOptions {
     windowsPathsNoEscape?: boolean;
@@ -221,7 +222,7 @@ describe('Validate internal functions', () => {
                 root: globRoot,
                 mode: 'exclude',
             });
-            const patterns = globMatcher.patterns;
+            const patterns = globMatcher.patterns.map((g) => g as Glob);
             const r = normalizeGlobsToRoot(patterns, root, true);
             expect(r).toEqual(expectedGlobs);
 
@@ -255,7 +256,7 @@ describe('Validate internal functions', () => {
                 root: globRoot,
                 mode: 'include',
             });
-            const patterns = globMatcher.patterns;
+            const patterns = globMatcher.patterns.map((g) => g as Glob);
             const r = normalizeGlobsToRoot(patterns, root, false);
             expect(r).toEqual(expectedGlobs);
 

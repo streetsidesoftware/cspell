@@ -5,11 +5,11 @@ import * as readline from 'readline';
 import stripAnsi from 'strip-ansi';
 import * as Util from 'util';
 import { afterEach, beforeEach, type Constructable, describe, expect, test, vi } from 'vitest';
-import { URI } from 'vscode-uri';
 
-import * as app from './app';
-import * as Link from './link';
-import { mergeAsyncIterables } from './util/async';
+import { URI } from '../lib/uri.cjs';
+import * as app from './app.js';
+import * as Link from './link.js';
+import { mergeAsyncIterables } from './util/async.js';
 
 vi.mock('readline');
 const mockCreateInterface = vi.mocked(readline.createInterface);

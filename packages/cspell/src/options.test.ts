@@ -1,6 +1,6 @@
 import { describe, expect, test } from 'vitest';
 
-import { fixLegacy } from './options';
+import { fixLegacy } from './options.js';
 
 describe('options', () => {
     test.each`

@@ -6,9 +6,9 @@ import {
     listGlobalImports,
     listGlobalImportsResultToTable,
     removePathsFromGlobalImports,
-} from './link';
-import { CheckFailed } from './util/errors';
-import { tableToLines } from './util/table';
+} from './link.js';
+import { CheckFailed } from './util/errors.js';
+import { tableToLines } from './util/table.js';
 
 export function commandLink(prog: Command): Command {
     const linkCommand = prog

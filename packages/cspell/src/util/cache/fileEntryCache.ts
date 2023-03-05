@@ -4,7 +4,7 @@
 
 export type { FileDescriptor } from 'file-entry-cache';
 import type { FileEntryCache as FecFileEntryCache } from 'file-entry-cache';
-import * as file_entry_cache from 'file-entry-cache';
+import file_entry_cache from 'file-entry-cache';
 import { mkdirSync } from 'fs';
 import * as path from 'path';
 import { isMainThread } from 'worker_threads';

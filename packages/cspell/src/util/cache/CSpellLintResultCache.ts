@@ -1,4 +1,4 @@
-import type { FileResult } from '../../util/fileHelper';
+import type { FileResult } from '../../util/fileHelper.js';
 export interface CSpellLintResultCache {
     /**
      * Retrieve cached lint results for a given file name, if present in the cache.

@@ -1,6 +1,7 @@
 import { describe, expect, test } from 'vitest';
 
-import { addPathsToGlobalImportsResultToTable, listGlobalImportsResultToTable } from './link';
+import { addPathsToGlobalImportsResultToTable, listGlobalImportsResultToTable } from './link.js';
+import { clean } from './util/util.js';
 
 const esc = expect.stringContaining;
 
@@ -61,7 +62,7 @@ describe('Validate link.ts', () => {
                         error: 'failed',
                         settings: {},
                     },
-                ],
+                ].map((v) => clean(v)),
                 error: undefined,
             })
         ).toEqual({

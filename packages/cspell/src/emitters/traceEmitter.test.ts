@@ -2,8 +2,8 @@ import { posix, win32 } from 'path';
 import strip from 'strip-ansi';
 import { describe, expect, test, vi } from 'vitest';
 
-import type { TraceResult } from '../application';
-import { __testing__, emitTraceResults } from './traceEmitter';
+import type { TraceResult } from '../application.js';
+import { __testing__, emitTraceResults } from './traceEmitter.js';
 
 const compareStr = Intl.Collator().compare;
 

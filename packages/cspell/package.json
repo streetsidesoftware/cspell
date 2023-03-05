@@ -3,55 +3,56 @@
   "version": "6.28.0",
   "description": "A Spelling Checker for Code!",
   "funding": "https://github.com/streetsidesoftware/cspell?sponsor=1",
-  "main": "dist/index.js",
-  "typings": "dist/index.d.ts",
   "bin": {
-    "cspell": "bin.js"
+    "cspell": "bin.js",
+    "cspell-esm": "bin.mjs"
   },
+  "type": "commonjs",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "module": "esm/index.mjs",
   "exports": {
-    ".": "./dist/index.js",
-    "./app": "./dist/app.js",
-    "./bin": "./bin.js",
-    "./bin.js": "./bin.js",
-    "./application": "./dist/application.js",
-    "./dist/app": "./dist/app.js",
-    "./dist/application": "./dist/application.js"
-  },
-  "typesVersions": {
-    ">=4.0": {
-      "*": [
-        "dist/*",
-        "*"
-      ]
+    ".": {
+      "import": "./esm/index.mjs",
+      "require": "./dist/index.js"
     }
   },
-  "files:comment": "Due to a lerna bug, patterns like `!**/*.map` are not getting recursively honored",
   "files": [
     "bin.js",
+    "bin.mjs",
     "dist",
+    "lib/**/*.cjs",
+    "esm",
+    "!esm/**/*.js",
+    "!esm/**/*.ts",
     "!**/*.tsbuildInfo",
     "!**/__mocks__",
+    "!**/test/**",
     "!**/*.test.*",
     "!**/*.spec.*",
     "!**/*.map"
   ],
   "scripts": {
-    "clean": "shx rm -rf dist coverage .tsbuildinfo",
-    "build": "pnpm run compile && pnpm run build-api",
-    "build-api": "rollup -c rollup.config.mjs",
+    "clean": "shx rm -rf dist esm coverage .tsbuildinfo",
+    "build": "tsc -b . && ts2mjs esm && pnpm run build:api",
+    "build:api": "rollup -c rollup.config.mjs",
+    "build:cjs": "tsc -b tsconfig.cjs.json",
+    "build:esm": "tsc -b tsconfig.esm.json",
+    "build:esm:ts2mjs": "tsc -b tsconfig.esm.json && ts2mjs esm",
     "build:readme": "pnpm build:readme:help",
     "build:readme:help": "pnpm build:readme:help:lint && pnpm build:readme:help:trace && inject-markdown README.md && prettier -w README.md",
     "build:readme:help:lint": "./bin.js lint --help > static/help-lint.txt",
     "build:readme:help:trace": "./bin.js trace --help > static/help-trace.txt",
     "clean-build": "pnpm run clean && pnpm run build",
-    "compile": "tsc -p .",
-    "watch": "tsc --watch -p .",
     "coverage": "pnpm coverage:vitest && pnpm coverage:fix",
     "coverage:vitest": "vitest run --coverage",
     "coverage:fix": "nyc report --temp-dir \"$(pwd)/coverage\" --reporter lcov --report-dir \"$(pwd)/coverage\" --cwd ../..",
+    "test:watch": "vitest",
+    "test": "vitest run",
+    "watch": "tsc -b . -w",
+    "compile": "tsc -p .",
     "test-watch": "vitest",
     "prepublishOnly": "pnpm run clean-build",
-    "test": "vitest run",
     "test:update-snapshot": "vitest run --update"
   },
   "repository": {

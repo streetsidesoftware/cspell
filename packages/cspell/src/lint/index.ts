@@ -1,2 +1,2 @@
-export { runLint } from './lint';
-export { LintRequest } from './LintRequest';
+export { runLint } from './lint.js';
+export { LintRequest } from './LintRequest.js';

@@ -1,4 +1,4 @@
-import type { CSpellLintResultCache } from './CSpellLintResultCache';
+import type { CSpellLintResultCache } from './CSpellLintResultCache.js';
 
 /**
  * Dummy cache implementation that should be usd if caching option is disabled.

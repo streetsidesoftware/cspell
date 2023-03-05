@@ -2,9 +2,9 @@ import { createFromFile } from 'file-entry-cache';
 import * as path from 'path';
 import { afterEach, beforeEach, describe, expect, type Mock, test, vi } from 'vitest';
 
-import * as fileHelper from '../../util/fileHelper';
-import type { CachedFileResult, CSpellCacheMeta } from './DiskCache';
-import { __testing__, DiskCache } from './DiskCache';
+import * as fileHelper from '../../util/fileHelper.js';
+import type { CachedFileResult, CSpellCacheMeta } from './DiskCache.js';
+import { __testing__, DiskCache } from './DiskCache.js';
 
 const { calcVersion } = __testing__;
 

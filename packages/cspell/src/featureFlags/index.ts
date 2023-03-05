@@ -1,1 +1,1 @@
-export { getFeatureFlags, parseFeatureFlags } from './featureFlags';
+export { getFeatureFlags, parseFeatureFlags } from './featureFlags.js';

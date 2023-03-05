@@ -5,10 +5,10 @@ import * as path from 'path';
 import { resolve as r } from 'path';
 import { afterEach, describe, expect, test, vi } from 'vitest';
 
-import * as App from './application';
-import type { LinterOptions, TraceOptions } from './options';
-import { asyncIterableToArray } from './util/async';
-import { InMemoryReporter } from './util/InMemoryReporter';
+import * as App from './application.js';
+import type { LinterOptions, TraceOptions } from './options.js';
+import { asyncIterableToArray } from './util/async.js';
+import { InMemoryReporter } from './util/InMemoryReporter.js';
 
 const packageRoot = r(__dirname, '..');
 const samplesRoot = r(packageRoot, 'samples');

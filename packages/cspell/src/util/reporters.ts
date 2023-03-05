@@ -8,7 +8,8 @@ import type {
 } from '@cspell/cspell-types';
 import { dynamicImport } from '@cspell/dynamic-import';
 
-import { ApplicationError, toError } from './errors';
+import { pkgDir } from '../../lib/pkgInfo.cjs';
+import { ApplicationError, toError } from './errors.js';
 
 type StandardEmitters = Omit<CSpellReporter, 'result'>;
 
@@ -71,7 +72,7 @@ export async function loadReporters(
         const [moduleName, settings] = reporterSettings;
 
         try {
-            const { getReporter }: CSpellReporterModule = await dynamicImport(moduleName, [process.cwd(), __dirname]);
+            const { getReporter }: CSpellReporterModule = await dynamicImport(moduleName, [process.cwd(), pkgDir]);
             return getReporter(settings, config);
         } catch (e: unknown) {
             throw new ApplicationError(`Failed to load reporter ${moduleName}: ${toError(e).message}`);

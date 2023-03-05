@@ -6,14 +6,15 @@ import { promises as fsp } from 'fs';
 import getStdin from 'get-stdin';
 import * as path from 'path';
 import { fileURLToPath, pathToFileURL } from 'url';
-import { URI } from 'vscode-uri';
 
-import { asyncAwait, asyncFlatten, asyncMap, asyncPipe, mergeAsyncIterables } from './async';
-import { FileProtocol, STDIN, STDINProtocol, UTF8 } from './constants';
-import { IOError, toApplicationError, toError } from './errors';
-import type { GlobOptions } from './glob';
-import { globP } from './glob';
-import { readStdin } from './stdin';
+import { URI } from '../../lib/uri.cjs';
+import { asyncAwait, asyncFlatten, asyncMap, asyncPipe, mergeAsyncIterables } from './async.js';
+import { FileProtocol, STDIN, STDINProtocol, UTF8 } from './constants.js';
+import { IOError, toApplicationError, toError } from './errors.js';
+import type { GlobOptions } from './glob.js';
+import { globP } from './glob.js';
+import { readStdin } from './stdin.js';
+import { clean } from './util.js';
 
 const doesMatchUrl = /^(file|stdin|https?):\/\//;
 
@@ -65,12 +66,12 @@ export function fileInfoToDocument(
     const uri = filenameToUrlString(filename);
 
     if (uri.startsWith(STDINProtocol)) {
-        return {
+        return clean({
             uri,
             text,
             languageId,
             locale,
-        };
+        });
     }
 
     return fileToDocument(uri, text, languageId, locale);

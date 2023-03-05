@@ -3,12 +3,12 @@ import * as crypto from 'crypto';
 import * as fs from 'fs';
 import { dirname, isAbsolute as isAbsolutePath, relative as relativePath, resolve as resolvePath } from 'path';
 
-import type { FileResult } from '../../util/fileHelper';
-import { readFileInfo } from '../../util/fileHelper';
-import type { CSpellLintResultCache } from './CSpellLintResultCache';
-import type { FileDescriptor, FileEntryCache } from './fileEntryCache';
-import { createFromFile, normalizePath } from './fileEntryCache';
-import { ShallowObjectCollection } from './ObjectCollection';
+import type { FileResult } from '../../util/fileHelper.js';
+import { readFileInfo } from '../../util/fileHelper.js';
+import type { CSpellLintResultCache } from './CSpellLintResultCache.js';
+import type { FileDescriptor, FileEntryCache } from './fileEntryCache.js';
+import { createFromFile, normalizePath } from './fileEntryCache.js';
+import { ShallowObjectCollection } from './ObjectCollection.js';
 
 export type CachedFileResult = Omit<FileResult, 'fileInfo' | 'elapsedTimeMs' | 'cached'>;
 
@@ -18,11 +18,11 @@ export type CachedFileResult = Omit<FileResult, 'fileInfo' | 'elapsedTimeMs' | '
  */
 interface CachedData {
     /** meta version + suffix */
-    v?: string;
+    v?: string | undefined;
     /** results */
-    r?: CachedFileResult;
+    r?: CachedFileResult | undefined;
     /** dependencies */
-    d?: Dependency[];
+    d?: Dependency[] | undefined;
 }
 
 interface Dependency {

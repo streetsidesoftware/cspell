@@ -11,18 +11,18 @@ import {
     traceWordsAsync,
 } from 'cspell-lib';
 
-import { getReporter } from './cli-reporter';
-import type { TimedSuggestionsForWordResult } from './emitters/suggestionsEmitter';
-import { getFeatureFlags, parseFeatureFlags } from './featureFlags';
-import { LintRequest, runLint } from './lint';
-import type { BaseOptions, LegacyOptions, LinterCliOptions, SuggestionOptions, TraceOptions } from './options';
-import { fixLegacy } from './options';
-import { simpleRepl } from './repl';
-import { fileInfoToDocument, readConfig, readFileInfo } from './util/fileHelper';
-import { finalizeReporter } from './util/reporters';
-import { readStdin } from './util/stdin';
-import { getTimeMeasurer } from './util/timer';
-import * as util from './util/util';
+import { getReporter } from './cli-reporter.js';
+import type { TimedSuggestionsForWordResult } from './emitters/suggestionsEmitter.js';
+import { getFeatureFlags, parseFeatureFlags } from './featureFlags/index.js';
+import { LintRequest, runLint } from './lint/index.js';
+import type { BaseOptions, LegacyOptions, LinterCliOptions, SuggestionOptions, TraceOptions } from './options.js';
+import { fixLegacy } from './options.js';
+import { simpleRepl } from './repl/index.js';
+import { fileInfoToDocument, readConfig, readFileInfo } from './util/fileHelper.js';
+import { finalizeReporter } from './util/reporters.js';
+import { readStdin } from './util/stdin.js';
+import { getTimeMeasurer } from './util/timer.js';
+import * as util from './util/util.js';
 export type { TraceResult } from 'cspell-lib';
 export { IncludeExcludeFlag } from 'cspell-lib';
 
@@ -46,7 +46,7 @@ export async function* trace(words: string[], options: TraceOptions): AsyncItera
     const loadDefault = options.defaultConfiguration ?? configFile.config.loadDefaultConfiguration ?? true;
 
     const config = mergeSettings(getDefaultSettings(loadDefault), getGlobalSettings(), configFile.config);
-    yield* traceWordsAsync(iWords, config, { languageId, locale, ignoreCase, allowCompoundWords });
+    yield* traceWordsAsync(iWords, config, util.clean({ languageId, locale, ignoreCase, allowCompoundWords }));
 }
 
 export type CheckTextResult = CheckTextInfo;
@@ -65,7 +65,7 @@ export async function checkText(filename: string, options: BaseOptions & LegacyO
         language: locale,
         loadDefaultConfiguration: options.defaultConfiguration,
     });
-    return checkTextDocument(doc, checkOptions, settingsFromCommandLine);
+    return checkTextDocument(doc, util.clean({ ...checkOptions }), settingsFromCommandLine);
 }
 
 export async function* suggestions(
@@ -84,7 +84,7 @@ export async function* suggestions(
     }
     function mapEnd(v: SuggestionsForWordResult): TimedSuggestionsForWordResult {
         const elapsedTimeMs = timer?.();
-        return { ...v, elapsedTimeMs };
+        return elapsedTimeMs ? { ...v, elapsedTimeMs } : v;
     }
     const iWords = options.repl
         ? pipeAsync(toAsyncIterable(words, simpleRepl()), opTap(tapStart))
@@ -92,7 +92,10 @@ export async function* suggestions(
         ? pipeAsync(toAsyncIterable(words, readStdin()), opTap(tapStart))
         : words.map(mapStart);
     try {
-        const results = pipeAsync(suggestionsForWords(iWords, options, configFile.config), opMap(mapEnd));
+        const results = pipeAsync(
+            suggestionsForWords(iWords, util.clean({ ...options }), configFile.config),
+            opMap(mapEnd)
+        );
         yield* results;
     } catch (e) {
         if (!(e instanceof SuggestionError)) throw e;

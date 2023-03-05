@@ -2,8 +2,8 @@ import chalk from 'chalk';
 import type { SuggestedWord } from 'cspell-lib';
 import { describe, expect, test, vi } from 'vitest';
 
-import type { EmitSuggestionOptions } from './suggestionsEmitter';
-import { emitSuggestionResult } from './suggestionsEmitter';
+import type { EmitSuggestionOptions } from './suggestionsEmitter.js';
+import { emitSuggestionResult } from './suggestionsEmitter.js';
 
 chalk.level = 0;
 
