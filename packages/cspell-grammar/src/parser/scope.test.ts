@@ -1,6 +1,6 @@
 import { describe, expect, test } from 'vitest';
 
-import { ScopePool } from './scope';
+import { ScopePool } from './scope.js';
 
 describe('scope', () => {
     test('ScopePool', () => {

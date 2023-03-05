@@ -1,1 +1,1 @@
-export { parser } from './TypeScriptParser';
+export { parser } from './TypeScriptParser.js';

@@ -1,6 +1,6 @@
 import { describe, expect, test } from 'vitest';
 
-import { mapRawString } from './typescript';
+import { mapRawString } from './typescript.js';
 
 describe('mappers typescript', () => {
     // cspell:ignore Fingerspitzengef Fingerspitzengefühl ˈfɪŋɐˌʃpɪtsənɡəˌfyːl

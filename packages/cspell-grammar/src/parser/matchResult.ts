@@ -1,4 +1,4 @@
-import type { MatchResult, MatchSegment } from './types';
+import type { MatchResult, MatchSegment } from './types.js';
 
 /**
  * Try to assign group names and numbers to segments of the matching text.

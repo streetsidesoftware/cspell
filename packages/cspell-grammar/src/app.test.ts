@@ -1,7 +1,7 @@
 import * as path from 'path';
 import { describe, expect, test, vi } from 'vitest';
 
-import { run } from './app';
+import { run } from './app.js';
 
 describe('app', () => {
     test.each`

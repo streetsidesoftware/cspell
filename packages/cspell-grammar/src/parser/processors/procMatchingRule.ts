@@ -1,9 +1,9 @@
-import type { MatchRuleResult, NCaptures, NPatternBeginEnd, Rule } from '../grammarNormalized';
-import { extractScope } from '../grammarNormalizer';
-import { segmentMatch } from '../matchResult';
-import type { Scope } from '../scope';
-import type { MatchResult, MatchSegment, Range, TokenizedText } from '../types';
-import { isDefined } from '../util';
+import type { MatchRuleResult, NCaptures, NPatternBeginEnd, Rule } from '../grammarNormalized.js';
+import { extractScope } from '../grammarNormalizer.js';
+import { segmentMatch } from '../matchResult.js';
+import type { Scope } from '../scope.js';
+import type { MatchResult, MatchSegment, Range, TokenizedText } from '../types.js';
+import { isDefined } from '../util.js';
 
 /**
  * Apply the scopes to the line

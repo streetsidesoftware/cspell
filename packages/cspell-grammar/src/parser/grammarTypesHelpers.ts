@@ -5,7 +5,7 @@ import type {
     PatternInclude,
     PatternMatch,
     PatternPatterns,
-} from './grammarDefinition';
+} from './grammarDefinition.js';
 
 export function isPatternInclude(p: Pattern): p is PatternInclude {
     return !!(<PatternInclude>p).include;
