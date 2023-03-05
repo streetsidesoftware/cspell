@@ -1,3 +1,5 @@
+import { describe, expect, test } from 'vitest';
+
 import { grammar as grammarTS } from '../grammars/typescript';
 import { extractScope, normalizeGrammar } from './grammarNormalizer';
 import { ScopePool } from './scope';

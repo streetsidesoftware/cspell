@@ -1,5 +1,6 @@
 import { promises as fs, readFileSync } from 'fs';
 import * as path from 'path';
+import { describe, expect, test } from 'vitest';
 
 import { TypeScript } from '../grammars';
 import { tokenizeText } from '../parser';

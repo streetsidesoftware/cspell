@@ -1,3 +1,5 @@
+import { describe, expect, test } from 'vitest';
+
 import { appendMappedText } from './appendMappedText';
 import type { MappedText } from './types';
 

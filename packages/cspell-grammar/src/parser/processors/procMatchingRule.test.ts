@@ -1,4 +1,5 @@
 import assert from 'assert';
+import { describe, expect, test } from 'vitest';
 
 import type { GrammarDef } from '../grammarDefinition';
 import { normalizeGrammar } from '../grammarNormalizer';

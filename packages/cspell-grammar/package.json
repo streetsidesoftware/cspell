@@ -12,46 +12,63 @@
   "bin": {
     "cspell-grammar": "bin.js"
   },
-  "main": "dist/index.js",
-  "directories": {
-    "dist": "dist"
+  "type": "commonjs",
+  "main": "dist/cjs/index.js",
+  "types": "dist/cjs/index.d.ts",
+  "module": "dist/esm/index.mjs",
+  "exports": {
+    ".": {
+      "import": "./dist/esm/index.mjs",
+      "require": "./dist/cjs/index.js"
+    },
+    "./parsers/typescript": {
+      "import": "./dist/esm/parsers/typescript/index.mjs",
+      "require": "./dist/cjs/parsers/typescript/index.js"
+    }
   },
-  "typings": "index.d.ts",
   "typesVersions": {
     "*": {
-      "*": [
-        "dist/*"
-      ],
-      "parsers/*": [
-        "dist/parsers/*"
+      "index.js": [
+        "dist/cjs/index.d.ts"
       ],
       "index.d.ts": [
-        "dist/index.d.ts"
+        "dist/cjs/index.d.ts"
+      ],
+      "parsers/typescript": [
+        "dist/cjs/parsers/typescript/index.d.ts"
+      ],
+      "parsers/typescript/*.d.ts": [
+        "dist/cjs/parsers/typescript/*.d.ts"
+      ],
+      "*": [
+        "dist/cjs/*.d.ts",
+        "dist/cjs/*/index.d.ts"
       ]
     }
   },
-  "exports": {
-    ".": "./dist/index.js",
-    "./parsers/typescript": "./dist/parsers/typescript/index.js",
-    "./parsers/typescript/index.js": "./dist/parsers/typescript/index.js"
-  },
   "files": [
+    "bin.mjs",
     "dist",
-    "bin.js",
+    "!dist/esm/**/*.js",
+    "!dist/esm/**/*.ts",
     "!**/*.tsbuildInfo",
     "!**/__mocks__",
+    "!**/test/**",
     "!**/*.test.*",
     "!**/*.spec.*",
     "!**/*.map"
   ],
   "scripts": {
-    "build": "tsc -p .",
-    "watch": "tsc -p . -w",
     "clean": "shx rm -rf dist coverage .tsbuildinfo",
+    "build": "tsc -b . && ts2mjs dist/esm",
+    "build:esm": "tsc -p tsconfig.esm.json",
     "clean-build": "pnpm run clean && pnpm run build",
-    "coverage": "jest --coverage",
-    "test-watch": "jest --watch",
-    "test": "jest"
+    "coverage": "pnpm coverage:vitest && pnpm coverage:fix",
+    "coverage:vitest": "vitest run --coverage",
+    "coverage:fix": "nyc report --temp-dir \"$(pwd)/coverage\" --reporter lcov --report-dir \"$(pwd)/coverage\" --cwd ../..",
+    "test:watch": "vitest",
+    "test": "vitest run",
+    "watch": "tsc -b . -w"
   },
   "repository": {
     "type": "git",

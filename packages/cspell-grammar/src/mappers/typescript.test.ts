@@ -1,3 +1,5 @@
+import { describe, expect, test } from 'vitest';
+
 import { mapRawString } from './typescript';
 
 describe('mappers typescript', () => {

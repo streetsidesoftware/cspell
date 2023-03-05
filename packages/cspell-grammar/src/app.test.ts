@@ -1,4 +1,5 @@
 import * as path from 'path';
+import { describe, expect, test, vi } from 'vitest';
 
 import { run } from './app';
 
@@ -7,7 +8,7 @@ describe('app', () => {
         filename
         ${'TypeScript/sample1.ts'}
     `('app $filename', async ({ filename }) => {
-        const log = jest.spyOn(console, 'log').mockImplementation();
+        const log = vi.spyOn(console, 'log').mockImplementation(() => undefined);
         await run(['', '', r(filename)]);
         expect(log.mock.calls.map((c) => c.join(';')).join('\n')).toMatchSnapshot();
         log.mockRestore();

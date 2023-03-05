@@ -1,3 +1,5 @@
+import { describe, expect, test } from 'vitest';
+
 import { createMatchResult, createSimpleMatchResult, segmentMatch } from './matchResult';
 
 describe('matchResult', () => {

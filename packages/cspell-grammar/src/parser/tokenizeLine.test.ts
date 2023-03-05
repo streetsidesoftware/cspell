@@ -1,6 +1,7 @@
 import assert from 'assert';
 import { readFileSync } from 'fs';
 import * as path from 'path';
+import { describe, expect, test } from 'vitest';
 
 import { TypeScript } from '../grammars';
 import * as Simple from '../grammars/simple';
