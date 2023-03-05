@@ -3,11 +3,11 @@ import assert from 'assert';
 import { stat } from 'fs/promises';
 import path from 'path';
 
-import { isError } from '../errors';
-import type { CacheOptions } from './CacheOptions';
-import type { CSpellLintResultCache } from './CSpellLintResultCache';
-import { DiskCache } from './DiskCache';
-import { DummyCache } from './DummyCache';
+import { isError } from '../errors.js';
+import type { CacheOptions } from './CacheOptions.js';
+import type { CSpellLintResultCache } from './CSpellLintResultCache.js';
+import { DiskCache } from './DiskCache.js';
+import { DummyCache } from './DummyCache.js';
 
 // cspell:word cspellcache
 export const DEFAULT_CACHE_LOCATION = '.cspellcache';

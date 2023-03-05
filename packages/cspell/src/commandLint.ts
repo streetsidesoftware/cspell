@@ -1,10 +1,10 @@
 import type { Command } from 'commander';
 import { Option as CommanderOption } from 'commander';
 
-import * as App from './application';
-import type { LinterCliOptions } from './options';
-import { DEFAULT_CACHE_LOCATION } from './util/cache';
-import { CheckFailed } from './util/errors';
+import * as App from './application.js';
+import type { LinterCliOptions } from './options.js';
+import { DEFAULT_CACHE_LOCATION } from './util/cache/index.js';
+import { CheckFailed } from './util/errors.js';
 
 // interface InitOptions extends Options {}
 

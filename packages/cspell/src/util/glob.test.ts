@@ -5,7 +5,7 @@ import { minimatch } from 'minimatch';
 import * as path from 'path';
 import { describe, expect, test, vi } from 'vitest';
 
-import { calcGlobs, normalizeGlobsToRoot } from './glob';
+import { calcGlobs, normalizeGlobsToRoot } from './glob.js';
 
 interface MinimatchOptions {
     windowsPathsNoEscape?: boolean;

@@ -18,11 +18,11 @@ import * as path from 'path';
 import { format } from 'util';
 import { URI } from 'vscode-uri';
 
-import { getFeatureFlags } from '../featureFlags';
-import type { CreateCacheSettings, CSpellLintResultCache } from '../util/cache';
-import { calcCacheSettings, createCache } from '../util/cache';
-import { CheckFailed, toApplicationError, toError } from '../util/errors';
-import type { ConfigInfo, FileResult, ReadFileInfoResult } from '../util/fileHelper';
+import { getFeatureFlags } from '../featureFlags/index.js';
+import type { CreateCacheSettings, CSpellLintResultCache } from '../util/cache.js';
+import { calcCacheSettings, createCache } from '../util/cache.js';
+import { CheckFailed, toApplicationError, toError } from '../util/errors.js';
+import type { ConfigInfo, FileResult, ReadFileInfoResult } from '../util/fileHelper.js';
 import {
     fileInfoToDocument,
     filenameToUri,
@@ -32,21 +32,21 @@ import {
     readConfig,
     readFileInfo,
     readFileListFiles,
-} from '../util/fileHelper';
-import type { GlobOptions } from '../util/glob';
+} from '../util/fileHelper.js';
+import type { GlobOptions } from '../util/glob.js';
 import {
     buildGlobMatcher,
     extractGlobsFromMatcher,
     extractPatterns,
     normalizeFileOrGlobsToRoot,
     normalizeGlobsToRoot,
-} from '../util/glob';
-import { prefetchIterable } from '../util/prefetch';
-import type { FinalizedReporter } from '../util/reporters';
-import { loadReporters, mergeReporters } from '../util/reporters';
-import { getTimeMeasurer } from '../util/timer';
-import * as util from '../util/util';
-import type { LintRequest } from './LintRequest';
+} from '../util/glob.js';
+import { prefetchIterable } from '../util/prefetch.js';
+import type { FinalizedReporter } from '../util/reporters.js';
+import { loadReporters, mergeReporters } from '../util/reporters.js';
+import { getTimeMeasurer } from '../util/timer.js';
+import * as util from '../util/util.js';
+import type { LintRequest } from './LintRequest.js';
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const npmPackage = require('../../package.json');
 const version = npmPackage.version;

@@ -2,8 +2,8 @@ import type { CSpellReporter, ReporterSettings } from '@cspell/cspell-types';
 import { MessageTypes } from '@cspell/cspell-types';
 import { describe, expect, test, vi } from 'vitest';
 
-import { InMemoryReporter } from './InMemoryReporter';
-import { loadReporters, mergeReporters } from './reporters';
+import { InMemoryReporter } from './InMemoryReporter.js';
+import { loadReporters, mergeReporters } from './reporters.js';
 
 const defaultReporter: CSpellReporter = {
     issue: vi.fn(),

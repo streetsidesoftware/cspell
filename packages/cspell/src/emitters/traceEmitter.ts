@@ -2,9 +2,9 @@ import chalk from 'chalk';
 import * as iPath from 'path';
 import strip from 'strip-ansi';
 
-import type { TraceResult } from '../application';
-import { pad, width } from '../util/util';
-import type { DictionaryPathFormat } from './DictionaryPathFormat';
+import type { TraceResult } from '../application.js';
+import { pad, width } from '../util/util.js';
+import type { DictionaryPathFormat } from './DictionaryPathFormat.js';
 
 interface PathInterface {
     relative(from: string, to: string): string;

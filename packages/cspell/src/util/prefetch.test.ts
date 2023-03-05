@@ -3,7 +3,7 @@ import { opMap, opTake, pipe } from '@cspell/cspell-pipe/sync';
 import { promisify } from 'util';
 import { describe, expect, test } from 'vitest';
 
-import { prefetchIterable } from './prefetch';
+import { prefetchIterable } from './prefetch.js';
 
 const wait = promisify(setTimeout);
 

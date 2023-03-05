@@ -1,4 +1,4 @@
-import type { CacheOptions } from './util/cache';
+import type { CacheOptions } from './util/cache/index.js';
 
 export interface LinterOptions extends BaseOptions, Omit<CacheOptions, 'version'> {
     /**

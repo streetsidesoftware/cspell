@@ -1,9 +1,9 @@
 import { describe, expect, test } from 'vitest';
 
 // Make sure the types are exported.
-import type { CSpellApplicationOptions } from './index';
-import * as index from './index';
-import { InMemoryReporter } from './util/InMemoryReporter';
+import type { CSpellApplicationOptions } from './index.js';
+import * as index from './index.js';
+import { InMemoryReporter } from './util/InMemoryReporter.js';
 
 describe('Validate index.ts', () => {
     test('index', () => {
