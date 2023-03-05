@@ -637,6 +637,12 @@ importers:
       prettier: 2.8.4
       typescript: 4.9.5
 
+  test-packages/cspell-gitignore/test-cspell-gitignore:
+    specifiers:
+      cspell-gitignore: workspace:*
+    dependencies:
+      cspell-gitignore: link:../../../packages/cspell-gitignore
+
   test-packages/cspell-glob/test-cspell-glob:
     specifiers:
       cspell-glob: workspace:*
