@@ -358,11 +358,12 @@ describe('Validate search/load config files', () => {
     }
 
     test.each`
-        dir                         | expectedConfig                                                      | expectedImportErrors
-        ${samplesSrc}               | ${cfg(s('.cspell.json'))}                                           | ${[]}
-        ${s('bug-fixes/bug345.ts')} | ${cfg(s('bug-fixes/cspell.json'))}                                  | ${[]}
-        ${s('linked')}              | ${cfg(s('linked/cspell.config.js'))}                                | ${[]}
-        ${s('yaml-config')}         | ${cfg(s('yaml-config/cspell.yaml'), { id: 'Yaml Example Config' })} | ${['cspell-imports.json']}
+        dir                         | expectedConfig                                                                    | expectedImportErrors
+        ${samplesSrc}               | ${cfg(s('.cspell.json'))}                                                         | ${[]}
+        ${s('bug-fixes/bug345.ts')} | ${cfg(s('bug-fixes/cspell.json'))}                                                | ${[]}
+        ${s('linked')}              | ${cfg(s('linked/cspell.config.js'))}                                              | ${[]}
+        ${s('dot-config/src')}      | ${cfg(s('dot-config/.config/cspell.config.yaml'), { name: 'Nested in .config' })} | ${[]}
+        ${s('yaml-config')}         | ${cfg(s('yaml-config/cspell.yaml'), { id: 'Yaml Example Config' })}               | ${['cspell-imports.json']}
     `('Search from $dir', async ({ dir, expectedConfig, expectedImportErrors }: TestSearchFrom) => {
         const searchResult = await searchForConfig(dir);
         expect(searchResult).toEqual(expect.objectContaining(expectedConfig));

@@ -83,6 +83,21 @@ const searchPlaces = Object.freeze([
     // Dynamic config is looked for last
     'cspell.config.js',
     'cspell.config.cjs',
+    // .config
+    '.config/.cspell.json',
+    '.config/cspell.json',
+    '.config/.cSpell.json',
+    '.config/cSpell.json',
+    '.config/.cspell.jsonc',
+    '.config/cspell.jsonc',
+    '.config/cspell.config.json',
+    '.config/cspell.config.jsonc',
+    '.config/cspell.config.yaml',
+    '.config/cspell.config.yml',
+    '.config/cspell.yaml',
+    '.config/cspell.yml',
+    '.config/cspell.config.js',
+    '.config/cspell.config.cjs',
 ]);
 
 const cspellCosmiconfig: CosmicOptions & CosmicOptionsSync = {
