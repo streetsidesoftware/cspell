@@ -44,6 +44,8 @@ runs:
       with:
         value: |
           packages/*/dist
+          packages/*/esm
+          packages/*/lib
           integration-tests/dist
         debug: true
 
@@ -52,8 +54,12 @@ runs:
       with:
         value: >-
           integrations-build-${{ hashFiles(
-            'integration-tests/src/**/*.ts', 'integration-tests/tsconfig.json',
-            '*-lock.yaml', 'packages/*/src/**/*.ts', 'packages/*/tsconfig.json'
+            'integration-tests/src/**/*.ts',
+            'integration-tests/tsconfig.json',
+            '*-lock.yaml',
+            'packages/*/src/**/*.ts',
+            'packages/*/lib/**/*.cts',
+            'packages/*/tsconfig.json'
           ) }}
         debug: true
 

@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 'use strict';
 
-const app = require('./dist/app');
+const app = require('./dist/cjs/app');
 const program = require('commander');
 
 app.run(program, process.argv).catch((e) => {

@@ -3,12 +3,14 @@
   "version": "6.28.0",
   "description": "cli for cspell",
   "private": "true",
-  "main": "index.js",
   "bin": {
-    "cspell-cli": "index.js"
+    "cspell-cli": "bin.cjs",
+    "cspell-cli-esm": "bin.mjs"
   },
   "scripts": {
-    "test": "node ./index.js \"**\""
+    "test": "pnpm test:cjs && pnpm test:esm",
+    "test:cjs": "node ./bin.cjs .",
+    "test:esm": "node ./bin.mjs ."
   },
   "repository": {
     "type": "git",

@@ -1,0 +1,2066 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Validate cli > app '--fail-fast no option' Expect Error: [Function CheckFailed] 1`] = `[]`;
+
+exports[`Validate cli > app '--fail-fast no option' Expect Error: [Function CheckFailed] 2`] = `
+"error	 0.00ms X
+log	./samples/fail-fast/first-fail.txt:1:1 - Unknown word (iamtypo)
+error	 0.00ms X
+log	./samples/fail-fast/second-fail.txt:1:1 - Unknown word (iamtypotoo)
+error	CSpell: Files checked: 2, Issues found: 2 in 2 files"
+`;
+
+exports[`Validate cli > app '--fail-fast no option' Expect Error: [Function CheckFailed] 3`] = `
+"
+1/2 [90m./samples/fail-fast/first-fail.txt[39m
+2/2 [90m./samples/fail-fast/second-fail.txt[39m"
+`;
+
+exports[`Validate cli > app '--fail-fast with config' Expect Error: [Function CheckFailed] 1`] = `[]`;
+
+exports[`Validate cli > app '--fail-fast with config' Expect Error: [Function CheckFailed] 2`] = `
+"error	 0.00ms X
+log	./samples/fail-fast/first-fail.txt:1:1 - Unknown word (iamtypo)
+error	CSpell: Files checked: 1, Issues found: 1 in 1 files"
+`;
+
+exports[`Validate cli > app '--fail-fast with config' Expect Error: [Function CheckFailed] 3`] = `
+"
+1/2 [90m./samples/fail-fast/first-fail.txt[39m"
+`;
+
+exports[`Validate cli > app '--fail-fast with option' Expect Error: [Function CheckFailed] 1`] = `[]`;
+
+exports[`Validate cli > app '--fail-fast with option' Expect Error: [Function CheckFailed] 2`] = `
+"error	 0.00ms X
+log	./samples/fail-fast/first-fail.txt:1:1 - Unknown word (iamtypo)
+error	CSpell: Files checked: 1, Issues found: 1 in 1 files"
+`;
+
+exports[`Validate cli > app '--fail-fast with option' Expect Error: [Function CheckFailed] 3`] = `
+"
+1/2 [90m./samples/fail-fast/first-fail.txt[39m"
+`;
+
+exports[`Validate cli > app '--help' Expect Error: 'outputHelp' 1`] = `
+[
+  "Usage: cspell [options] [command]",
+  "",
+  "Spelling Checker for Code",
+  "",
+  "Options:",
+  "  -V, --version                         output the version number",
+  "  -h, --help                            display help for command",
+  "",
+  "Commands:",
+  "  lint [options] [globs...]             Check spelling",
+  "  trace [options] [words...]            Trace words -- Search for words in the",
+  "                                        configuration and dictionaries.",
+  "  check [options] <files...>            Spell check file(s) and display the",
+  "                                        result. The full file is displayed in",
+  "                                        color.",
+  "  suggestions|sug [options] [words...]  Spelling Suggestions for words.",
+  "  link                                  Link dictionaries and other settings to",
+  "                                        the cspell global config.",
+  "  help [command]                        display help for command",
+  "",
+]
+`;
+
+exports[`Validate cli > app '--help' Expect Error: 'outputHelp' 2`] = `""`;
+
+exports[`Validate cli > app '--help' Expect Error: 'outputHelp' 3`] = `""`;
+
+exports[`Validate cli > app '--no-fail-fast with config' Expect Error: [Function CheckFailed] 1`] = `[]`;
+
+exports[`Validate cli > app '--no-fail-fast with config' Expect Error: [Function CheckFailed] 2`] = `
+"error	 0.00ms X
+log	./samples/fail-fast/first-fail.txt:1:1 - Unknown word (iamtypo)
+error	 0.00ms X
+log	./samples/fail-fast/second-fail.txt:1:1 - Unknown word (iamtypotoo)
+error	CSpell: Files checked: 2, Issues found: 2 in 2 files"
+`;
+
+exports[`Validate cli > app '--no-fail-fast with config' Expect Error: [Function CheckFailed] 3`] = `
+"
+1/2 [90m./samples/fail-fast/first-fail.txt[39m
+2/2 [90m./samples/fail-fast/second-fail.txt[39m"
+`;
+
+exports[`Validate cli > app 'Explicit file://' Expect Error: undefined 1`] = `[]`;
+
+exports[`Validate cli > app 'Explicit file://' Expect Error: undefined 2`] = `
+"error	 0.00ms
+error	CSpell: Files checked: 1, Issues found: 0 in 0 files"
+`;
+
+exports[`Validate cli > app 'Explicit file://' Expect Error: undefined 3`] = `
+"
+1/1 [90m./fixtures/misc/star-not.md[39m"
+`;
+
+exports[`Validate cli > app 'Explicit not found file://' Expect Error: [Function CheckFailed] 1`] = `[]`;
+
+exports[`Validate cli > app 'Explicit not found file://' Expect Error: [Function CheckFailed] 2`] = `
+"error	Linter: File not found: \\"./fixtures/misc/not-fond.md\\"
+error	 0.00ms skipped X
+error	CSpell: Files checked: 1, Issues found: 0 in 1 files"
+`;
+
+exports[`Validate cli > app 'Explicit not found file://' Expect Error: [Function CheckFailed] 3`] = `
+"
+1/1 [90m./fixtures/misc/not-fond.md[39m"
+`;
+
+exports[`Validate cli > app 'LICENSE' Expect Error: undefined 1`] = `[]`;
+
+exports[`Validate cli > app 'LICENSE' Expect Error: undefined 2`] = `
+"error	 0.00ms
+error	CSpell: Files checked: 1, Issues found: 0 in 0 files"
+`;
+
+exports[`Validate cli > app 'LICENSE' Expect Error: undefined 3`] = `
+"
+1/1 [90m./LICENSE[39m"
+`;
+
+exports[`Validate cli > app 'bad config' Expect Error: [Function CheckFailed] 1`] = `[]`;
+
+exports[`Validate cli > app 'bad config' Expect Error: [Function CheckFailed] 2`] = `
+"error	Configuration Error: Failed to read config file: \\"./src/app/app.test.ts\\"
+error	CSpell: Files checked: 0, Issues found: 0 in 0 files"
+`;
+
+exports[`Validate cli > app 'bad config' Expect Error: [Function CheckFailed] 3`] = `""`;
+
+exports[`Validate cli > app 'check LICENSE' Expect Error: undefined 1`] = `
+[
+  "[97mMIT License[39m",
+  "[97m[39m",
+  "[97mCopyright (c) 2017 Jason Dent[39m",
+  "[97m[39m",
+  "[97mPermission is hereby granted, free of charge, to any person obtaining a copy[39m",
+  "[97mof this software and associated documentation files (the \\"Software\\"), to deal[39m",
+  "[97min the Software without restriction, including without limitation the rights[39m",
+  "[97mto use, copy, modify, merge, publish, distribute, sublicense, and/or sell[39m",
+  "[97mcopies of the Software, and to permit persons to whom the Software is[39m",
+  "[97mfurnished to do so, subject to the following conditions:[39m",
+  "[97m[39m",
+  "[97mThe above copyright notice and this permission notice shall be included in all[39m",
+  "[97mcopies or substantial portions of the Software.[39m",
+  "[97m[39m",
+  "[97mTHE SOFTWARE IS PROVIDED \\"AS IS\\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR[39m",
+  "[97mIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,[39m",
+  "[97mFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE[39m",
+  "[97mAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER[39m",
+  "[97mLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,[39m",
+  "[97mOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE[39m",
+  "[97mSOFTWARE.[39m",
+  "[97m[39m",
+]
+`;
+
+exports[`Validate cli > app 'check LICENSE' Expect Error: undefined 2`] = `
+"log	Check file: ./LICENSE
+log	
+log	
+log	"
+`;
+
+exports[`Validate cli > app 'check LICENSE' Expect Error: undefined 3`] = `""`;
+
+exports[`Validate cli > app 'check help' Expect Error: 'outputHelp' 1`] = `
+[
+  "Usage: cspell check [options] <files...>",
+  "",
+  "Spell check file(s) and display the result. The full file is displayed in",
+  "color.",
+  "",
+  "Options:",
+  "  -c, --config <cspell.json>  Configuration file to use.  By default cspell",
+  "                              looks for cspell.json in the current directory.",
+  "  --validate-directives       Validate in-document CSpell directives.",
+  "  --no-validate-directives    Do not validate in-document CSpell directives.",
+  "  --no-color                  Turn off color.",
+  "  --color                     Force color",
+  "  --no-default-configuration  Do not load the default configuration and",
+  "                              dictionaries.",
+  "  -h, --help                  display help for command",
+  "",
+]
+`;
+
+exports[`Validate cli > app 'check help' Expect Error: 'outputHelp' 2`] = `""`;
+
+exports[`Validate cli > app 'check help' Expect Error: 'outputHelp' 3`] = `""`;
+
+exports[`Validate cli > app 'check missing' Expect Error: [Function CheckFailed] 1`] = `[]`;
+
+exports[`Validate cli > app 'check missing' Expect Error: [Function CheckFailed] 2`] = `
+"log	Check file: ./missing-file.txt
+log	
+error	File not found \\"./missing-file.txt\\""
+`;
+
+exports[`Validate cli > app 'check missing' Expect Error: [Function CheckFailed] 3`] = `""`;
+
+exports[`Validate cli > app 'check with spelling errors' Expect Error: [Function CheckFailed] 1`] = `
+[
+  "[97m                              [[39m[31mNEDERLANDS[39m[97m][39m",
+  "[97m        U [39m[31mwordt[39m[97m [39m[31mvriendelijk[39m[97m [39m[31mverzocht[39m[97m om dit [39m[31mbestand[39m[97m (\\"README_nl_NL.txt\\")[39m",
+  "[97m      te [39m[31mlezen[39m[97m en mee te [39m[31mleveren[39m[97m bij [39m[31miedere[39m[97m [39m[31mkopie[39m[97m van dit [39m[31mtaalhulpbestand[39m[97m.[39m",
+  "[97m[39m",
+  "[97m1. [39m[31mNaam[39m[97m: [39m[31mNederlandstalige[39m[97m [39m[31mwoordenlijst[39m[97m [39m[31mvoor[39m[97m [39m[31mspellingcontrole[39m[97m - OpenTaal[39m",
+  "[97m2. [39m[31mVersie[39m[97m [39m[31mwoordenlijst[39m[97m: 2.00G; [39m[31mversie[39m[97m [39m[31mspellingcontrole[39m[97m: 2.00G.[39m",
+  "[97m3. [39m[31mVereisten[39m[97m: Hunspell 1.2.8 en [39m[31mhoger[39m[97m[39m",
+  "[97m4. [39m[31mKeurmerk[39m[97m Spelling [39m[31mNederlandse[39m[97m [39m[31mTaalunie[39m[97m: De [39m[31mlijst[39m[97m met [39m[31mbasiswoorden[39m[97m van[39m",
+  "[97m   OpenTaal [39m[31mdraagt[39m[97m het [39m[31mkeurmerk[39m[97m van de [39m[31mNederlandse[39m[97m [39m[31mTaalunie[39m[97m. [39m[31mVoor[39m[97m [39m[31mmeer[39m[97m[39m",
+  "[97m   [39m[31minformatie[39m[97m zie: [39m[90mhttp://www.taalunieversum.org/keurmerk[39m[97m[39m",
+  "[97m5. [39m[31mAuteursrechten[39m[97m: © 2006-2010 OpenTaal, © 2001-2005 Simon [39m[31mBrouwer[39m[97m e.a.,[39m",
+  "[97m   © 1996 [39m[31mNederlandstalige[39m[97m Tex [39m[31mGebruikersgroep[39m[97m[39m",
+  "[97m6. [39m[31mLicenties[39m[97m: OpenTaal [39m[31mheeft[39m[97m als [39m[31mdoel[39m[97m om [39m[31mvrij[39m[97m [39m[31mbeschikbare[39m[97m [39m[31mNederlandstalige[39m[97m[39m",
+  "[97m   [39m[31mtaalhulpbestanden[39m[97m te [39m[31montwikkelen[39m[97m en te [39m[31mverspreiden[39m[97m. Om breed (her)[39m[31mgebruik[39m[97m[39m",
+  "[97m   [39m[31mmogelijk[39m[97m te [39m[31mmaken[39m[97m [39m[31mzijn[39m[97m de [39m[31mtaalhulpbestanden[39m[97m gratis [39m[31mbeschikbaar[39m[97m [39m[31monder[39m[97m de twee[39m",
+  "[97m   [39m[31monderstaande[39m[97m, [39m[31mliberale[39m[97m [39m[31mlicenties[39m[97m [39m[31mnaar[39m[97m [39m[31mkeuze[39m[97m van de [39m[31mgebruiker[39m[97m. U [39m[31mwordt[39m[97m ten[39m",
+  "[97m   [39m[31mzeerste[39m[97m [39m[31maangeraden[39m[97m om [39m[31mvoorafgaand[39m[97m aan het [39m[31mgebruik[39m[97m [39m[31mkennis[39m[97m te [39m[31mnemen[39m[97m van de[39m",
+  "[97m   [39m[31mtoepasselijke[39m[97m [39m[31mlicentie[39m[97m.[39m",
+  "[97m   A. BSD ([39m[31mherziene[39m[97m [39m[31mversie[39m[97m):[39m",
+  "[97m   - [39m[31mVolledige[39m[97m [39m[31mlicentie[39m[97m: [39m[90mhttp://creativecommons.org/licenses/BSD/legalcode[39m[97m[39m",
+  "[97m   - [39m[31mSamenvatting[39m[97m: [39m[90mhttp://creativecommons.org/licenses/BSD/deed.nl[39m[97m[39m",
+  "[97m   B. Creative Commons, [39m[31mNaamsvermelding[39m[97m 3.0 ([39m[31munported[39m[97m)[39m",
+  "[97m   - [39m[31mVolledige[39m[97m [39m[31mlicentie[39m[97m: [39m[90mhttp://creativecommons.org/licenses/by/3.0/legalcode[39m[97m[39m",
+  "[97m   - [39m[31mSamenvatting[39m[97m: [39m[90mhttp://creativecommons.org/licenses/by/3.0/deed.nl[39m[97m[39m",
+  "[97m7. [39m[31mSteun[39m[97m OpenTaal: OpenTaal is een [39m[31mvrijwilligersproject[39m[97m [39m[31mzonder[39m[97m [39m[31mwinstoogmerk[39m[97m.[39m",
+  "[97m   Door uw ([39m[31mkleine[39m[97m) [39m[31mfinanciële[39m[97m [39m[31msteun[39m[97m kan OpenTaal [39m[31mmeer[39m[97m [39m[31mactiviteiten[39m[97m [39m[31montplooien[39m[97m[39m",
+  "[97m   en het project [39m[31mprofessionaliseren[39m[97m. Uw [39m[31mdonatie[39m[97m is van harte [39m[31mwelkom[39m[97m op[39m",
+  "[97m   [39m[31mrekeningnummer[39m[97m 15.62.32.782 t.n.v. [39m[31mStichting[39m[97m OpenTaal. Uw [39m[31mgiften[39m[97m [39m[31mzijn[39m[97m[39m",
+  "[97m   [39m[31maftrekbaar[39m[97m van de [39m[31mbelasting[39m[97m. [39m[31mStichting[39m[97m OpenTaal is [39m[31mnamelijk[39m[97m door de[39m",
+  "[97m   [39m[31mBelastingdienst[39m[97m [39m[31merkend[39m[97m als [39m[31mANBI[39m[97m, [39m[31moftewel[39m[97m \\"[39m[31mAlgemeen[39m[97m Nut [39m[31mBeogende[39m[97m [39m[31mInstelling[39m[97m\\".[39m",
+  "[97m   Zie: [39m[90mhttp://belastingdienst.nl/anbi/[39m[97m[39m",
+  "[97m8. [39m[31mMeedoen[39m[97m: [39m[31mIedereen[39m[97m is [39m[31mwelkom[39m[97m om mee te [39m[31mdoen[39m[97m. Meld [39m[31mfouten[39m[97m, [39m[31mdiscussieer[39m[97m mee op[39m",
+  "[97m   de [39m[31mmailinglijst[39m[97m of [39m[31mdraai[39m[97m Harvester. Door bij te [39m[31mdragen[39m[97m aan het project [39m[31mstemt[39m[97m[39m",
+  "[97m   u [39m[31mermee[39m[97m in dat uw [39m[31mbijdrage[39m[97m aan het [39m[31mdesbetreffende[39m[97m [39m[31mtaalhulpbestand[39m[97m [39m[31mbeschikbaar[39m[97m[39m",
+  "[97m   [39m[31mkomt[39m[97m [39m[31monder[39m[97m [39m[31mvrije[39m[97m en/of [39m[31mopensource[39m[97m [39m[31mlicenties[39m[97m. [39m[31mIndien[39m[97m u dat [39m[31mwenst[39m[97m, dan kan uw[39m",
+  "[97m   [39m[31mnaam[39m[97m op de website [39m[31mgenoemd[39m[97m [39m[31mworden[39m[97m. We [39m[31montvangen[39m[97m uw [39m[31mschriftelijk[39m[97m [39m[31mverzoek[39m[97m[39m",
+  "[97m   [39m[31mdaarvoor[39m[97m [39m[31mgraag[39m[97m.[39m",
+  "[97m9. [39m[31mRechten[39m[97m van [39m[31mderden[39m[97m: OpenTaal [39m[31mrespecteert[39m[97m de [39m[31mrechten[39m[97m van [39m[31mderden[39m[97m en[39m",
+  "[97m   wil haar [39m[31mgegevens[39m[97m [39m[31mvrij[39m[97m [39m[31mbeschikbaar[39m[97m [39m[31mhouden[39m[97m. [39m[31mVoor[39m[97m [39m[31mbijdragen[39m[97m aan het project mag[39m",
+  "[97m   u [39m[31mdaarom[39m[97m [39m[31mniet[39m[97m [39m[31mzonder[39m[97m [39m[31mtoestemming[39m[97m [39m[31mgebruikmaken[39m[97m van [39m[31mbeschermde[39m[97m [39m[31mnaslagwerken[39m[97m,[39m",
+  "[97m   [39m[31mzoals[39m[97m [39m[31mwoordenboeken[39m[97m. Wel is het [39m[31mtoegestaan[39m[97m om [39m[31mgebruik[39m[97m te [39m[31mmaken[39m[97m van de[39m",
+  "[97m   [39m[31mmaterialen[39m[97m van de [39m[31mNederlandse[39m[97m [39m[31mTaalunie[39m[97m, [39m[31mzoals[39m[97m de [39m[31mleidraad[39m[97m en de [39m[31mwoordenlijst[39m[97m.[39m",
+  "[97m   [39m[31mIndien[39m[97m u van [39m[31mmening[39m[97m bent dat OpenTaal [39m[31minbreuk[39m[97m [39m[31mmaakt[39m[97m op uw [39m[31mrechten[39m[97m, dan[39m",
+  "[97m   [39m[31mverzoeken[39m[97m we u [39m[31mhierover[39m[97m zo [39m[31mspoedig[39m[97m [39m[31mmogelijk[39m[97m [39m[31mschriftelijk[39m[97m contact met ons op[39m",
+  "[97m   te [39m[31mnemen[39m[97m.[39m",
+  "[97m10.Contact: [39m[31mStichting[39m[97m OpenTaal, [39m[90mhttp://www.opentaal.org,[39m[97m [39m[90mbestuur@opentaal.org[39m[97m[39m",
+  "[97m_________________________________________________________________________________[39m",
+  "[97m                                [ENGLISH][39m",
+  "[97m        You are kindly requested to read this file \\"README_nl_NL.txt\\"[39m",
+  "[97m     and to keep a copy of it with every copy you make of this language file.[39m",
+  "[97m[39m",
+  "[97m1. Name: Dutch word list for spell checking - OpenTaal[39m",
+  "[97m2. Version of words list: 2.00G; version spell checking: 2.00G[39m",
+  "[97m3. Requirements: Hunspell 1.2.8 and higher[39m",
+  "[97m4. Spelling Seal of Dutch Language Union: The OpenTaal list of lemmas has[39m",
+  "[97m   received the Spelling Seal of Approval from the Dutch Language Union, the[39m",
+  "[97m   formal Dutch language institute. For more information please see:[39m",
+  "[97m   [39m[90mhttp://www.taalunieversum.org/keurmerk/[39m[97m[39m",
+  "[97m5. Copyrights: © 2006-2010 OpenTaal, © 2001-2005 Simon [39m[31mBrouwer[39m[97m e.a.,[39m",
+  "[97m   © 1996 [39m[31mNederlandstalige[39m[97m Tex [39m[31mGebruikersgroep[39m[97m[39m",
+  "[97m6. Licenses: OpenTaal aims to create and publish free Dutch language files. To[39m",
+  "[97m   enable the broadest (re)use the language files are freely available under the[39m",
+  "[97m   below, liberal licenses at the discretion of the user. We strongly recommend[39m",
+  "[97m   to read the applicable license before usage.[39m",
+  "[97m   A. BSD (revised version):[39m",
+  "[97m   - Full license text: [39m[90mhttp://creativecommons.org/licenses/BSD/legalcode[39m[97m[39m",
+  "[97m   - Summary: [39m[90mhttp://creativecommons.org/licenses/BSD/deed.en[39m[97m[39m",
+  "[97m   B. Creative Commons, Attribution 3.0 ([39m[31munported[39m[97m)[39m",
+  "[97m   - Full license text: [39m[90mhttp://creativecommons.org/licenses/by/3.0/legalcode[39m[97m[39m",
+  "[97m   - Summary: [39m[90mhttp://creativecommons.org/licenses/by/3.0/deed.en[39m[97m[39m",
+  "[97m7. Support OpenTaal: OpenTaal is a non-profit volunteer project. With your[39m",
+  "[97m   (small) financial support OpenTaal will further expand its activities and[39m",
+  "[97m   enhance its professionalism. Your donation is welcome at[39m",
+  "[97m   account number: 15.62.32.782, BIC: [39m[31mRABONL[39m[97m2U, [39m[31mIBAN[39m[97m: NL88[39m[31mRABO[39m[97m0156232782 of[39m",
+  "[97m   [39m[31mStichting[39m[97m OpenTaal / OpenTaal Foundation. In the Netherlands your donations[39m",
+  "[97m   are tax deductible. OpenTaal Foundation has been designated by the Dutch Tax[39m",
+  "[97m   Administration as an Institution for General Benefit ([39m[31malgemeen[39m[97m nut [39m[31mbeogende[39m[97m[39m",
+  "[97m   [39m[31minstelling[39m[97m or [39m[31mANBI[39m[97m). Please see: [39m[90mhttp://belastingdienst.nl/anbi/[39m[97m[39m",
+  "[97m8. Participate: Everyone is welcome to participate. Please give feedback,[39m",
+  "[97m   discuss on the mailing list or run Harvester. By contributing to the project[39m",
+  "[97m   you agree that your contribution is available under free or/open source[39m",
+  "[97m   licenses. In case you wish, your name will be mentioned on the website. Your[39m",
+  "[97m   are invited to send us your written request.[39m",
+  "[97m9. Rights of third parties: OpenTaal respects the rights of third parties and[39m",
+  "[97m   aims to keep its data freely available. Therefore you may no use protected[39m",
+  "[97m   sources of third parties, i.e. dictionaries, without their permission when[39m",
+  "[97m   you contribute to the project. It is permitted to use the materials of the[39m",
+  "[97m   Dutch Language Union, i.e. their spelling instruction and word list. In case[39m",
+  "[97m   you believe OpenTaal is violating your rights, we ask you to send us a[39m",
+  "[97m   written notice as soon as possible.[39m",
+  "[97m10.Contact: OpenTaal Foundation, [39m[90mhttp://www.opentaal.org,[39m[97m [39m[90mbestuur@opentaal.org[39m[97m[39m",
+  "[97m[39m",
+  "[97mcspell:language en,nl[39m",
+  "[97m[39m",
+]
+`;
+
+exports[`Validate cli > app 'check with spelling errors' Expect Error: [Function CheckFailed] 2`] = `
+"log	Check file: ./samples/Dutch.txt
+log	
+log	
+log	"
+`;
+
+exports[`Validate cli > app 'check with spelling errors' Expect Error: [Function CheckFailed] 3`] = `""`;
+
+exports[`Validate cli > app 'cspell-bad.json' Expect Error: undefined 1`] = `[]`;
+
+exports[`Validate cli > app 'cspell-bad.json' Expect Error: undefined 2`] = `
+"error	 0.00ms
+error	CSpell: Files checked: 1, Issues found: 0 in 0 files"
+`;
+
+exports[`Validate cli > app 'cspell-bad.json' Expect Error: undefined 3`] = `
+"
+1/1 [90m./src/app/app.test.ts[39m"
+`;
+
+exports[`Validate cli > app 'cspell-import-missing.json' Expect Error: [Function CheckFailed] 1`] = `[]`;
+
+exports[`Validate cli > app 'cspell-import-missing.json' Expect Error: [Function CheckFailed] 2`] = `
+"error	Configuration Error: Failed to read config file: \\"./samples/intentionally-missing-file.json\\"
+error	CSpell: Files checked: 0, Issues found: 0 in 0 files"
+`;
+
+exports[`Validate cli > app 'cspell-import-missing.json' Expect Error: [Function CheckFailed] 3`] = `""`;
+
+exports[`Validate cli > app 'current_file --verbose' Expect Error: undefined 1`] = `[]`;
+
+exports[`Validate cli > app 'current_file --verbose' Expect Error: undefined 2`] = `
+"info	
+info	cspell;
+info	Date: Sat, 03 Apr 2021 11:25:33 GMT
+info	Options:
+info	    verbose:   Yes
+info	    config:    default
+info	    exclude:   node_modules/**
+info	    files:     src/app/app.test.ts
+info	    wordsOnly: No
+info	    unique:    No
+info	
+info	Config Files Found:
+info	    ./cspell.json
+info	
+info	Exclusion Globs: 
+info	    Glob: *.snap from ./cspell.json
+info	    Glob: node_modules from ./cspell.json
+info	    Glob: package-lock.json from ./cspell.json
+info	    Glob: coverage/** from ./cspell.json
+info	    Glob: dist/** from ./cspell.json
+info	    Glob: dist.*/** from ./cspell.json
+info	    Glob: temp/** from ./cspell.json
+info	    Glob: CHANGELOG.md from ./cspell.json
+info	    Glob: package.json from ./cspell.json
+info	    Glob: .cspell.json from ./cspell.json
+info	    Glob: cspell.json from ./cspell.json
+info	    Glob: .vscode/** from ./cspell.json
+info	    Glob: node_modules/** from command line
+info	
+info	Checking: ./src/app/app.test.ts, File type: auto, Language: default
+info	Checked: ./src/app/app.test.ts, File type: typescript, Language: en ... Issues: 0 0.00S
+info	Config file Used: ./cspell.json
+info	Dictionaries Used: companies, filetypes, public-licenses, softwareTerms, workspace, aws, cryptocurrencies, en_us, en-common-misspellings, fullstack, node, npm, svelte, typescript
+error	 0.00ms
+error	CSpell: Files checked: 1, Issues found: 0 in 0 files"
+`;
+
+exports[`Validate cli > app 'current_file --verbose' Expect Error: undefined 3`] = `
+"
+1/1 [90m./src/app/app.test.ts[39m"
+`;
+
+exports[`Validate cli > app 'current_file languageId' Expect Error: undefined 1`] = `[]`;
+
+exports[`Validate cli > app 'current_file languageId' Expect Error: undefined 2`] = `
+"error	 0.00ms
+error	CSpell: Files checked: 1, Issues found: 0 in 0 files"
+`;
+
+exports[`Validate cli > app 'current_file languageId' Expect Error: undefined 3`] = `
+"
+1/1 [90m./src/app/app.test.ts[39m"
+`;
+
+exports[`Validate cli > app 'current_file' Expect Error: undefined 1`] = `[]`;
+
+exports[`Validate cli > app 'current_file' Expect Error: undefined 2`] = `
+"error	 0.00ms
+error	CSpell: Files checked: 1, Issues found: 0 in 0 files"
+`;
+
+exports[`Validate cli > app 'current_file' Expect Error: undefined 3`] = `
+"
+1/1 [90m./src/app/app.test.ts[39m"
+`;
+
+exports[`Validate cli > app 'inline suggest' Expect Error: [Function CheckFailed] 1`] = `[]`;
+
+exports[`Validate cli > app 'inline suggest' Expect Error: [Function CheckFailed] 2`] = `
+"log	./fixtures/features/inline-suggest/README.md:7:3 - Unknown word (bluelist) Suggestions: [blueList*, bluefish, bluesiest, blueish, bluest]
+log	./fixtures/features/inline-suggest/README.md:8:3 - Unknown word (blulist) Suggestions: [blueList*, bullish, bluish, bluest, blueish]
+error	CSpell: Files checked: 1, Issues found: 2 in 1 files"
+`;
+
+exports[`Validate cli > app 'inline suggest' Expect Error: [Function CheckFailed] 3`] = `""`;
+
+exports[`Validate cli > app 'issue-2998 --language-id' Expect Error: undefined 1`] = `[]`;
+
+exports[`Validate cli > app 'issue-2998 --language-id' Expect Error: undefined 2`] = `
+"info	
+info	cspell;
+info	Date: Sat, 03 Apr 2021 11:25:33 GMT
+info	Options:
+info	    verbose:   Yes
+info	    config:    default
+info	    exclude:   node_modules/**
+info	    files:     fix-words.txt
+info	    wordsOnly: No
+info	    unique:    No
+info	
+info	Config Files Found:
+info	    ./fixtures/issue-2998/cspell.json
+info	
+info	Exclusion Globs: 
+info	    Glob: node_modules/** from command line
+info	
+info	Checking: ./fixtures/issue-2998/fix-words.txt, File type: fix, Language: default
+info	Checked: ./fixtures/issue-2998/fix-words.txt, File type: fix, Language: en ... Issues: 0 0.00S
+info	Config file Used: ./fixtures/issue-2998/cspell.json
+info	Dictionaries Used: companies, filetypes, public-licenses, softwareTerms, aws, cryptocurrencies, en_us, en-common-misspellings, fixture
+error	 0.00ms
+error	CSpell: Files checked: 1, Issues found: 0 in 0 files"
+`;
+
+exports[`Validate cli > app 'issue-2998 --language-id' Expect Error: undefined 3`] = `
+"
+1/1 [90m./fixtures/issue-2998/fix-words.txt[39m"
+`;
+
+exports[`Validate cli > app 'link add' 1`] = `""`;
+
+exports[`Validate cli > app 'link list' 1`] = `""`;
+
+exports[`Validate cli > app 'link ls' 1`] = `""`;
+
+exports[`Validate cli > app 'link remove' 1`] = `""`;
+
+exports[`Validate cli > app 'link' 1`] = `""`;
+
+exports[`Validate cli > app 'must find force no error' Expect Error: undefined 1`] = `[]`;
+
+exports[`Validate cli > app 'must find force no error' Expect Error: undefined 2`] = `"error	CSpell: Files checked: 0, Issues found: 0 in 0 files"`;
+
+exports[`Validate cli > app 'must find force no error' Expect Error: undefined 3`] = `""`;
+
+exports[`Validate cli > app 'must find with error' Expect Error: [Function CheckFailed] 1`] = `[]`;
+
+exports[`Validate cli > app 'must find with error' Expect Error: [Function CheckFailed] 2`] = `"error	CSpell: Files checked: 0, Issues found: 0 in 0 files"`;
+
+exports[`Validate cli > app 'must find with error' Expect Error: [Function CheckFailed] 3`] = `""`;
+
+exports[`Validate cli > app 'no-args' Expect Error: 'outputHelp' 1`] = `
+[
+  "Usage: cspell lint [options] [globs...] [file://<path> ...] [stdin[://<path>]]",
+  "",
+  "Patterns:",
+  " - [globs...]            Glob Patterns",
+  " - [stdin]               Read from \\"stdin\\" assume text file.",
+  " - [stdin://<path>]      Read from \\"stdin\\", use <path> for file type and config.",
+  " - [file://<path>]       Check the file at <path>",
+  "",
+  "Examples:",
+  "    cspell .                        Recursively check all files.",
+  "    cspell lint .                   The same as \\"cspell .\\"",
+  "    cspell \\"*.js\\"                   Check all .js files in the current directory",
+  "    cspell \\"**/*.js\\"                Check all .js files recursively",
+  "    cspell \\"src/**/*.js\\"            Only check .js under src",
+  "    cspell \\"**/*.txt\\" \\"**/*.js\\"     Check both .js and .txt files.",
+  "    cspell \\"**/*.{txt,js,md}\\"       Check .txt, .js, and .md files.",
+  "    cat LICENSE | cspell stdin      Check stdin",
+  "    cspell stdin://docs/doc.md      Check stdin as if it was \\"./docs/doc.md\\"",
+  "",
+  "Check spelling",
+  "",
+  "Options:",
+  "  -c, --config <cspell.json>   Configuration file to use.  By default cspell",
+  "                               looks for cspell.json in the current directory.",
+  "  -v, --verbose                Display more information about the files being",
+  "                               checked and the configuration.",
+  "  --locale <locale>            Set language locales. i.e. \\"en,fr\\" for English",
+  "                               and French, or \\"en-GB\\" for British English.",
+  "  --language-id <language>     Force programming language for unknown",
+  "                               extensions. i.e. \\"php\\" or \\"scala\\"",
+  "  --words-only                 Only output the words not found in the",
+  "                               dictionaries.",
+  "  -u, --unique                 Only output the first instance of a word not",
+  "                               found in the dictionaries.",
+  "  -e, --exclude <glob>         Exclude files matching the glob pattern. This",
+  "                               option can be used multiple times to add",
+  "                               multiple globs.",
+  "  --file-list <path or stdin>  Specify a list of files to be spell checked. The",
+  "                               list is filtered against the glob file patterns.",
+  "                               Note: the format is 1 file path per line.",
+  "  --no-issues                  Do not show the spelling errors.",
+  "  --no-progress                Turn off progress messages",
+  "  --no-summary                 Turn off summary message in console.",
+  "  -s, --silent                 Silent mode, suppress error messages.",
+  "  --fail-fast                  Exit after first file with an issue or error.",
+  "  -r, --root <root folder>     Root directory, defaults to current directory.",
+  "  --relative                   Issues are displayed relative to root.",
+  "  --show-context               Show the surrounding text around an issue.",
+  "  --show-suggestions           Show spelling suggestions.",
+  "  --no-must-find-files         Do not error if no files are found.",
+  "  --cache                      Use cache to only check changed files.",
+  "  --no-cache                   Do not use cache.",
+  "  --cache-reset                Reset the cache file.",
+  "  --cache-strategy <strategy>  Strategy to use for detecting changed files.",
+  "                               (choices: \\"metadata\\", \\"content\\")",
+  "  --cache-location <path>      Path to the cache file or directory. (default:",
+  "                               \\".cspellcache\\")",
+  "  --dot                        Include files and directories starting with \`.\`",
+  "                               (period) when matching globs.",
+  "  --gitignore                  Ignore files matching glob patterns found in",
+  "                               .gitignore files.",
+  "  --no-gitignore               Do NOT use .gitignore files.",
+  "  --gitignore-root <path>      Prevent searching for .gitignore files past",
+  "                               root.",
+  "  --validate-directives        Validate in-document CSpell directives.",
+  "  --no-validate-directives     Do not validate in-document CSpell directives.",
+  "  --no-color                   Turn off color.",
+  "  --color                      Force color.",
+  "  --no-default-configuration   Do not load the default configuration and",
+  "                               dictionaries.",
+  "  --debug                      Output information useful for debugging",
+  "                               cspell.json files.",
+  "  --reporter <module|path>     Specify one or more reporters to use.",
+  "  -h, --help                   display help for command",
+  "",
+  "More Examples:",
+  "",
+  "    cspell \\"**/*.js\\" --reporter @cspell/cspell-json-reporter",
+  "        This will spell check all \\".js\\" files recursively and use",
+  "        \\"@cspell/cspell-json-reporter\\".",
+  "",
+  "    cspell . --reporter default",
+  "        This will force the default reporter to be used overriding",
+  "        any reporters defined in the configuration.",
+  "",
+  "    cspell . --reporter ./<path>/reporter.cjs",
+  "        Use a custom reporter. See API for details.",
+  "",
+  "References:",
+  "    https://cspell.org",
+  "    https://github.com/streetsidesoftware/cspell",
+  "",
+  "",
+]
+`;
+
+exports[`Validate cli > app 'no-args' Expect Error: 'outputHelp' 2`] = `""`;
+
+exports[`Validate cli > app 'no-args' Expect Error: 'outputHelp' 3`] = `""`;
+
+exports[`Validate cli > app 'not found error by default' Expect Error: [Function CheckFailed] 1`] = `[]`;
+
+exports[`Validate cli > app 'not found error by default' Expect Error: [Function CheckFailed] 2`] = `"error	CSpell: Files checked: 0, Issues found: 0 in 0 files"`;
+
+exports[`Validate cli > app 'not found error by default' Expect Error: [Function CheckFailed] 3`] = `""`;
+
+exports[`Validate cli > app 'samples/Dutch.txt' Expect Error: [Function CheckFailed] 1`] = `[]`;
+
+exports[`Validate cli > app 'samples/Dutch.txt' Expect Error: [Function CheckFailed] 2`] = `
+"error	 0.00ms X
+log	./samples/Dutch.txt:1:32 - Unknown word (NEDERLANDS)
+log	./samples/Dutch.txt:2:11 - Unknown word (wordt)
+log	./samples/Dutch.txt:2:17 - Unknown word (vriendelijk)
+log	./samples/Dutch.txt:2:29 - Unknown word (verzocht)
+log	./samples/Dutch.txt:2:45 - Unknown word (bestand)
+log	./samples/Dutch.txt:3:10 - Unknown word (lezen)
+log	./samples/Dutch.txt:3:26 - Unknown word (leveren)
+log	./samples/Dutch.txt:3:38 - Unknown word (iedere)
+log	./samples/Dutch.txt:3:45 - Unknown word (kopie)
+log	./samples/Dutch.txt:3:59 - Unknown word (taalhulpbestand)
+log	./samples/Dutch.txt:5:4 - Unknown word (Naam)
+log	./samples/Dutch.txt:5:10 - Unknown word (Nederlandstalige)
+log	./samples/Dutch.txt:5:27 - Unknown word (woordenlijst)
+log	./samples/Dutch.txt:5:40 - Unknown word (voor)
+log	./samples/Dutch.txt:5:45 - Unknown word (spellingcontrole)
+log	./samples/Dutch.txt:6:4 - Unknown word (Versie)
+log	./samples/Dutch.txt:6:11 - Unknown word (woordenlijst)
+log	./samples/Dutch.txt:6:32 - Unknown word (versie)
+log	./samples/Dutch.txt:6:39 - Unknown word (spellingcontrole)
+log	./samples/Dutch.txt:7:4 - Unknown word (Vereisten)
+log	./samples/Dutch.txt:7:33 - Unknown word (hoger)
+log	./samples/Dutch.txt:8:4 - Unknown word (Keurmerk)
+log	./samples/Dutch.txt:8:22 - Unknown word (Nederlandse)
+log	./samples/Dutch.txt:8:34 - Unknown word (Taalunie)
+log	./samples/Dutch.txt:8:47 - Unknown word (lijst)
+log	./samples/Dutch.txt:8:57 - Unknown word (basiswoorden)
+log	./samples/Dutch.txt:9:13 - Unknown word (draagt)
+log	./samples/Dutch.txt:9:24 - Unknown word (keurmerk)
+log	./samples/Dutch.txt:9:40 - Unknown word (Nederlandse)
+log	./samples/Dutch.txt:9:52 - Unknown word (Taalunie)
+log	./samples/Dutch.txt:9:62 - Unknown word (Voor)
+log	./samples/Dutch.txt:9:67 - Unknown word (meer)
+log	./samples/Dutch.txt:10:4 - Unknown word (informatie)
+log	./samples/Dutch.txt:11:4 - Unknown word (Auteursrechten)
+log	./samples/Dutch.txt:11:60 - Unknown word (Brouwer)
+log	./samples/Dutch.txt:12:11 - Unknown word (Nederlandstalige)
+log	./samples/Dutch.txt:12:32 - Unknown word (Gebruikersgroep)
+log	./samples/Dutch.txt:13:4 - Unknown word (Licenties)
+log	./samples/Dutch.txt:13:24 - Unknown word (heeft)
+log	./samples/Dutch.txt:13:34 - Unknown word (doel)
+log	./samples/Dutch.txt:13:42 - Unknown word (vrij)
+log	./samples/Dutch.txt:13:47 - Unknown word (beschikbare)
+log	./samples/Dutch.txt:13:59 - Unknown word (Nederlandstalige)
+log	./samples/Dutch.txt:14:4 - Unknown word (taalhulpbestanden)
+log	./samples/Dutch.txt:14:25 - Unknown word (ontwikkelen)
+log	./samples/Dutch.txt:14:43 - Unknown word (verspreiden)
+log	./samples/Dutch.txt:14:70 - Unknown word (gebruik)
+log	./samples/Dutch.txt:15:4 - Unknown word (mogelijk)
+log	./samples/Dutch.txt:15:16 - Unknown word (maken)
+log	./samples/Dutch.txt:15:22 - Unknown word (zijn)
+log	./samples/Dutch.txt:15:30 - Unknown word (taalhulpbestanden)
+log	./samples/Dutch.txt:15:55 - Unknown word (beschikbaar)
+log	./samples/Dutch.txt:15:67 - Unknown word (onder)
+log	./samples/Dutch.txt:16:4 - Unknown word (onderstaande)
+log	./samples/Dutch.txt:16:18 - Unknown word (liberale)
+log	./samples/Dutch.txt:16:27 - Unknown word (licenties)
+log	./samples/Dutch.txt:16:37 - Unknown word (naar)
+log	./samples/Dutch.txt:16:42 - Unknown word (keuze)
+log	./samples/Dutch.txt:16:55 - Unknown word (gebruiker)
+log	./samples/Dutch.txt:16:68 - Unknown word (wordt)
+log	./samples/Dutch.txt:17:4 - Unknown word (zeerste)
+log	./samples/Dutch.txt:17:12 - Unknown word (aangeraden)
+log	./samples/Dutch.txt:17:26 - Unknown word (voorafgaand)
+log	./samples/Dutch.txt:17:46 - Unknown word (gebruik)
+log	./samples/Dutch.txt:17:54 - Unknown word (kennis)
+log	./samples/Dutch.txt:17:64 - Unknown word (nemen)
+log	./samples/Dutch.txt:18:4 - Unknown word (toepasselijke)
+log	./samples/Dutch.txt:18:18 - Unknown word (licentie)
+log	./samples/Dutch.txt:19:12 - Unknown word (herziene)
+log	./samples/Dutch.txt:19:21 - Unknown word (versie)
+log	./samples/Dutch.txt:20:6 - Unknown word (Volledige)
+log	./samples/Dutch.txt:20:16 - Unknown word (licentie)
+log	./samples/Dutch.txt:21:6 - Unknown word (Samenvatting)
+log	./samples/Dutch.txt:22:25 - Unknown word (Naamsvermelding)
+log	./samples/Dutch.txt:22:46 - Unknown word (unported)
+log	./samples/Dutch.txt:23:6 - Unknown word (Volledige)
+log	./samples/Dutch.txt:23:16 - Unknown word (licentie)
+log	./samples/Dutch.txt:24:6 - Unknown word (Samenvatting)
+log	./samples/Dutch.txt:25:4 - Unknown word (Steun)
+log	./samples/Dutch.txt:25:36 - Unknown word (vrijwilligersproject)
+log	./samples/Dutch.txt:25:57 - Unknown word (zonder)
+log	./samples/Dutch.txt:25:64 - Unknown word (winstoogmerk)
+log	./samples/Dutch.txt:26:13 - Unknown word (kleine)
+log	./samples/Dutch.txt:26:21 - Unknown word (financiële)
+log	./samples/Dutch.txt:26:32 - Unknown word (steun)
+log	./samples/Dutch.txt:26:51 - Unknown word (meer)
+log	./samples/Dutch.txt:26:56 - Unknown word (activiteiten)
+log	./samples/Dutch.txt:26:69 - Unknown word (ontplooien)
+log	./samples/Dutch.txt:27:19 - Unknown word (professionaliseren)
+log	./samples/Dutch.txt:27:42 - Unknown word (donatie)
+log	./samples/Dutch.txt:27:63 - Unknown word (welkom)
+log	./samples/Dutch.txt:28:4 - Unknown word (rekeningnummer)
+log	./samples/Dutch.txt:28:39 - Unknown word (Stichting)
+log	./samples/Dutch.txt:28:62 - Unknown word (giften)
+log	./samples/Dutch.txt:28:69 - Unknown word (zijn)
+log	./samples/Dutch.txt:29:4 - Unknown word (aftrekbaar)
+log	./samples/Dutch.txt:29:22 - Unknown word (belasting)
+log	./samples/Dutch.txt:29:33 - Unknown word (Stichting)
+log	./samples/Dutch.txt:29:55 - Unknown word (namelijk)
+log	./samples/Dutch.txt:30:4 - Unknown word (Belastingdienst)
+log	./samples/Dutch.txt:30:20 - Unknown word (erkend)
+log	./samples/Dutch.txt:30:31 - Unknown word (ANBI)
+log	./samples/Dutch.txt:30:37 - Unknown word (oftewel)
+log	./samples/Dutch.txt:30:46 - Unknown word (Algemeen)
+log	./samples/Dutch.txt:30:59 - Unknown word (Beogende)
+log	./samples/Dutch.txt:30:68 - Unknown word (Instelling)
+log	./samples/Dutch.txt:32:4 - Unknown word (Meedoen)
+log	./samples/Dutch.txt:32:13 - Unknown word (Iedereen)
+log	./samples/Dutch.txt:32:25 - Unknown word (welkom)
+log	./samples/Dutch.txt:32:42 - Unknown word (doen)
+log	./samples/Dutch.txt:32:53 - Unknown word (fouten)
+log	./samples/Dutch.txt:32:61 - Unknown word (discussieer)
+log	./samples/Dutch.txt:33:7 - Unknown word (mailinglijst)
+log	./samples/Dutch.txt:33:23 - Unknown word (draai)
+log	./samples/Dutch.txt:33:52 - Unknown word (dragen)
+log	./samples/Dutch.txt:33:75 - Unknown word (stemt)
+log	./samples/Dutch.txt:34:6 - Unknown word (ermee)
+log	./samples/Dutch.txt:34:22 - Unknown word (bijdrage)
+log	./samples/Dutch.txt:34:39 - Unknown word (desbetreffende)
+log	./samples/Dutch.txt:34:54 - Unknown word (taalhulpbestand)
+log	./samples/Dutch.txt:34:70 - Unknown word (beschikbaar)
+log	./samples/Dutch.txt:35:4 - Unknown word (komt)
+log	./samples/Dutch.txt:35:9 - Unknown word (onder)
+log	./samples/Dutch.txt:35:15 - Unknown word (vrije)
+log	./samples/Dutch.txt:35:27 - Unknown word (opensource)
+log	./samples/Dutch.txt:35:38 - Unknown word (licenties)
+log	./samples/Dutch.txt:35:49 - Unknown word (Indien)
+log	./samples/Dutch.txt:35:62 - Unknown word (wenst)
+log	./samples/Dutch.txt:36:4 - Unknown word (naam)
+log	./samples/Dutch.txt:36:23 - Unknown word (genoemd)
+log	./samples/Dutch.txt:36:31 - Unknown word (worden)
+log	./samples/Dutch.txt:36:42 - Unknown word (ontvangen)
+log	./samples/Dutch.txt:36:55 - Unknown word (schriftelijk)
+log	./samples/Dutch.txt:36:68 - Unknown word (verzoek)
+log	./samples/Dutch.txt:37:4 - Unknown word (daarvoor)
+log	./samples/Dutch.txt:37:13 - Unknown word (graag)
+log	./samples/Dutch.txt:38:4 - Unknown word (Rechten)
+log	./samples/Dutch.txt:38:16 - Unknown word (derden)
+log	./samples/Dutch.txt:38:33 - Unknown word (respecteert)
+log	./samples/Dutch.txt:38:48 - Unknown word (rechten)
+log	./samples/Dutch.txt:38:60 - Unknown word (derden)
+log	./samples/Dutch.txt:39:13 - Unknown word (gegevens)
+log	./samples/Dutch.txt:39:22 - Unknown word (vrij)
+log	./samples/Dutch.txt:39:27 - Unknown word (beschikbaar)
+log	./samples/Dutch.txt:39:39 - Unknown word (houden)
+log	./samples/Dutch.txt:39:47 - Unknown word (Voor)
+log	./samples/Dutch.txt:39:52 - Unknown word (bijdragen)
+log	./samples/Dutch.txt:40:6 - Unknown word (daarom)
+log	./samples/Dutch.txt:40:13 - Unknown word (niet)
+log	./samples/Dutch.txt:40:18 - Unknown word (zonder)
+log	./samples/Dutch.txt:40:25 - Unknown word (toestemming)
+log	./samples/Dutch.txt:40:37 - Unknown word (gebruikmaken)
+log	./samples/Dutch.txt:40:54 - Unknown word (beschermde)
+log	./samples/Dutch.txt:40:65 - Unknown word (naslagwerken)
+log	./samples/Dutch.txt:41:4 - Unknown word (zoals)
+log	./samples/Dutch.txt:41:10 - Unknown word (woordenboeken)
+log	./samples/Dutch.txt:41:36 - Unknown word (toegestaan)
+log	./samples/Dutch.txt:41:50 - Unknown word (gebruik)
+log	./samples/Dutch.txt:41:61 - Unknown word (maken)
+log	./samples/Dutch.txt:42:4 - Unknown word (materialen)
+log	./samples/Dutch.txt:42:22 - Unknown word (Nederlandse)
+log	./samples/Dutch.txt:42:34 - Unknown word (Taalunie)
+log	./samples/Dutch.txt:42:44 - Unknown word (zoals)
+log	./samples/Dutch.txt:42:53 - Unknown word (leidraad)
+log	./samples/Dutch.txt:42:68 - Unknown word (woordenlijst)
+log	./samples/Dutch.txt:43:4 - Unknown word (Indien)
+log	./samples/Dutch.txt:43:17 - Unknown word (mening)
+log	./samples/Dutch.txt:43:42 - Unknown word (inbreuk)
+log	./samples/Dutch.txt:43:50 - Unknown word (maakt)
+log	./samples/Dutch.txt:43:62 - Unknown word (rechten)
+log	./samples/Dutch.txt:44:4 - Unknown word (verzoeken)
+log	./samples/Dutch.txt:44:19 - Unknown word (hierover)
+log	./samples/Dutch.txt:44:31 - Unknown word (spoedig)
+log	./samples/Dutch.txt:44:39 - Unknown word (mogelijk)
+log	./samples/Dutch.txt:44:48 - Unknown word (schriftelijk)
+log	./samples/Dutch.txt:45:7 - Unknown word (nemen)
+log	./samples/Dutch.txt:46:13 - Unknown word (Stichting)
+log	./samples/Dutch.txt:59:56 - Unknown word (Brouwer)
+log	./samples/Dutch.txt:60:11 - Unknown word (Nederlandstalige)
+log	./samples/Dutch.txt:60:32 - Unknown word (Gebruikersgroep)
+log	./samples/Dutch.txt:68:42 - Unknown word (unported)
+log	./samples/Dutch.txt:74:39 - Unknown word (RABONL)
+log	./samples/Dutch.txt:74:49 - Unknown word (IBAN)
+log	./samples/Dutch.txt:74:59 - Unknown word (RABO)
+log	./samples/Dutch.txt:75:4 - Unknown word (Stichting)
+log	./samples/Dutch.txt:77:58 - Unknown word (algemeen)
+log	./samples/Dutch.txt:77:71 - Unknown word (beogende)
+log	./samples/Dutch.txt:78:4 - Unknown word (instelling)
+log	./samples/Dutch.txt:78:18 - Unknown word (ANBI)
+error	CSpell: Files checked: 1, Issues found: 189 in 1 files"
+`;
+
+exports[`Validate cli > app 'samples/Dutch.txt' Expect Error: [Function CheckFailed] 3`] = `
+"
+1/1 [90m./samples/Dutch.txt[39m"
+`;
+
+exports[`Validate cli > app 'trace café' Expect Error: undefined 1`] = `[]`;
+
+exports[`Validate cli > app 'trace café' Expect Error: undefined 2`] = `
+"Word F Dictionary             Dictionary Location
+café - [flagWords]*           From Settings \`flagWords\`
+café - [ignoreWords]*         From Settings \`ignoreWords\`
+café - [suggestWords]*        From Settings \`suggestWords\`
+café - [words]*               From Settings \`words\`
+café - aws*                   node_modules/@cspell/dict-aws/aws.txt.gz
+café - companies*             node_modules/@cspell/.../dict/companies.txt
+café - cryptocurrencies*      node_modules/@cspell/.../cryptocurrencies.txt.gz
+café * en_us*                 node_modules/@cspell/dict-en_us/en_US.trie.gz
+café - en-common-misspelling* node_modules/@cspell/.../dict-en.yaml
+café * en-gb                  node_modules/@cspell/dict-en-gb/en_GB.trie.gz
+café - filetypes*             node_modules/.../dict-filetypes/filetypes.txt.gz
+café - public-licenses*       node_modules/@cspell/.../public-licenses.txt.gz
+café - softwareTerms*         node_modules/@cspell/.../dict/softwareTerms.txt
+café - workspace*             ../../cspell-dict.txt"
+`;
+
+exports[`Validate cli > app 'trace hello' Expect Error: undefined 1`] = `[]`;
+
+exports[`Validate cli > app 'trace hello' Expect Error: undefined 2`] = `
+"Word  F Dictionary             Dictionary Location
+hello - [flagWords]*           From Settings \`flagWords\`
+hello - [ignoreWords]*         From Settings \`ignoreWords\`
+hello - [suggestWords]*        From Settings \`suggestWords\`
+hello - [words]*               From Settings \`words\`
+hello - aws*                   node_modules/@cspell/dict-aws/aws.txt.gz
+hello - companies*             node_modules/@cspell/.../dict/companies.txt
+hello * cpp                    node_modules/@cspell/dict-cpp/cpp.txt.gz
+hello - cryptocurrencies*      node_modules/@cspell/.../cryptocurrencies.txt.gz
+hello * en_us*                 node_modules/@cspell/dict-en_us/en_US.trie.gz
+hello - en-common-misspelling* node_modules/@cspell/.../dict-en.yaml
+hello * en-gb                  node_modules/@cspell/dict-en-gb/en_GB.trie.gz
+hello - filetypes*             node_modules/.../dict-filetypes/filetypes.txt.gz
+hello * golang                 node_modules/@cspell/dict-golang/dict/go.txt
+hello * node                   node_modules/@cspell/dict-node/dict/node.txt
+hello - public-licenses*       node_modules/@cspell/.../public-licenses.txt.gz
+hello - softwareTerms*         node_modules/@cspell/.../dict/softwareTerms.txt
+hello - workspace*             ../../cspell-dict.txt"
+`;
+
+exports[`Validate cli > app 'trace hello' Expect Error: undefined 3`] = `[]`;
+
+exports[`Validate cli > app 'trace hello' Expect Error: undefined 4`] = `
+"Word  F Dictionary                Dictionary Location
+hello - [flagWords]*              From Settings \`flagWords\`
+hello - [ignoreWords]*            From Settings \`ignoreWords\`
+hello - [suggestWords]*           From Settings \`suggestWords\`
+hello - [words]*                  From Settings \`words\`
+hello - aws*                      node_modules/@cspell/dict-aws/aws.txt.gz
+hello - companies*                node_modules/@cspell/.../dict/companies.txt
+hello * cpp                       node_modules/@cspell/dict-cpp/cpp.txt.gz
+hello - cryptocurrencies*         node_modules/.../cryptocurrencies.txt.gz
+hello * en_us                     node_modules/@cspell/dict-en_us/en_US.trie.gz
+hello * en-gb*                    node_modules/@cspell/dict-en-gb/en_GB.trie.gz
+hello - en-gb-common-misspelling* node_modules/@cspell/.../dict-en-gb.yaml
+hello - filetypes*                node_modules/@cspell/.../filetypes.txt.gz
+hello * golang                    node_modules/@cspell/dict-golang/dict/go.txt
+hello * node                      node_modules/@cspell/dict-node/dict/node.txt
+hello - public-licenses*          node_modules/.../public-licenses.txt.gz
+hello - softwareTerms*            node_modules/.../dict/softwareTerms.txt
+hello - workspace*                ../../cspell-dict.txt"
+`;
+
+exports[`Validate cli > app 'trace help' Expect Error: 'outputHelp' 1`] = `
+[
+  "Usage: cspell trace [options] [words...]",
+  "",
+  "Trace words -- Search for words in the configuration and dictionaries.",
+  "",
+  "Options:",
+  "  -c, --config <cspell.json>  Configuration file to use.  By default cspell",
+  "                              looks for cspell.json in the current directory.",
+  "  --locale <locale>           Set language locales. i.e. \\"en,fr\\" for English",
+  "                              and French, or \\"en-GB\\" for British English.",
+  "  --language-id <language>    Use programming language. i.e. \\"php\\" or \\"scala\\".",
+  "  --allow-compound-words      Turn on allowCompoundWords",
+  "  --no-allow-compound-words   Turn off allowCompoundWords",
+  "  --ignore-case               Ignore case and accents when searching for words.",
+  "  --no-ignore-case            Do not ignore case and accents when searching for",
+  "                              words.",
+  "  --dictionary-path <format>  Configure how to display the dictionary path.",
+  "                              (choices: \\"hide\\", \\"short\\", \\"long\\", \\"full\\",",
+  "                              default: Display most of the path.)",
+  "  --stdin                     Read words from stdin.",
+  "  --all                       Show all dictionaries.",
+  "  --only-found                Show only dictionaries that have the words.",
+  "  --no-color                  Turn off color.",
+  "  --color                     Force color",
+  "  --no-default-configuration  Do not load the default configuration and",
+  "                              dictionaries.",
+  "  -h, --help                  display help for command",
+  "",
+]
+`;
+
+exports[`Validate cli > app 'trace help' Expect Error: 'outputHelp' 2`] = `""`;
+
+exports[`Validate cli > app 'trace missing dictionary' Expect Error: [Function CheckFailed] 1`] = `[]`;
+
+exports[`Validate cli > app 'trace missing dictionary' Expect Error: [Function CheckFailed] 2`] = `
+"Word  F Dictionary             Dictionary Location
+hello - [flagWords]*           From Settings \`flagWords\`
+hello - [ignoreWords]*         From Settings \`ignoreWords\`
+hello - [suggestWords]*        From Settings \`suggestWords\`
+hello - [words]*               From Settings \`words\`
+hello - aws*                   node_modules/@cspell/dict-aws/aws.txt.gz
+hello - companies*             node_modules/@cspell/.../dict/companies.txt
+hello * cpp                    node_modules/@cspell/dict-cpp/cpp.txt.gz
+hello - cryptocurrencies*      node_modules/@cspell/.../cryptocurrencies.txt.gz
+hello * en_us*                 node_modules/@cspell/dict-en_us/en_US.trie.gz
+hello - en-common-misspelling* node_modules/@cspell/.../dict-en.yaml
+hello * en-gb                  node_modules/@cspell/dict-en-gb/en_GB.trie.gz
+hello - filetypes*             node_modules/.../dict-filetypes/filetypes.txt.gz
+hello * golang                 node_modules/@cspell/dict-golang/dict/go.txt
+hello - ignore words*          ../../cspell-ignore-words.txt
+hello * node                   node_modules/@cspell/dict-node/dict/node.txt
+hello - public-licenses*       node_modules/@cspell/.../public-licenses.txt.gz
+hello - softwareTerms*         node_modules/@cspell/.../dict/softwareTerms.txt
+hello - workspace*             ../../cspell-dict.txt"
+`;
+
+exports[`Validate cli > app 'trace not-in-any-dictionary' Expect Error: [Function CheckFailed] 1`] = `[]`;
+
+exports[`Validate cli > app 'trace not-in-any-dictionary' Expect Error: [Function CheckFailed] 2`] = `
+"Word                  F Dictionary             Dictionary Location
+not-in-any-dictionary - [flagWords]*           From Settings \`flagWords\`
+not-in-any-dictionary - [ignoreWords]*         From Settings \`ignoreWords\`
+not-in-any-dictionary - [suggestWords]*        From Settings \`suggestWords\`
+not-in-any-dictionary - [words]*               From Settings \`words\`
+not-in-any-dictionary - aws*                   node_modules/.../aws.txt.gz
+not-in-any-dictionary - companies*             node_modules/.../companies.txt
+not-in-any-dictionary - cryptocurrencies*      .../cryptocurrencies.txt.gz
+not-in-any-dictionary - en_us*                 node_modules/.../en_US.trie.gz
+not-in-any-dictionary - en-common-misspelling* node_modules/.../dict-en.yaml
+not-in-any-dictionary - filetypes*             node_modules/.../filetypes.txt.gz
+not-in-any-dictionary - public-licenses*       .../public-licenses.txt.gz
+not-in-any-dictionary - softwareTerms*         .../dict/softwareTerms.txt
+not-in-any-dictionary - workspace*             ../../cspell-dict.txt"
+`;
+
+exports[`Validate cli > app 'typos' Expect Error: [Function CheckFailed] 1`] = `[]`;
+
+exports[`Validate cli > app 'typos' Expect Error: [Function CheckFailed] 2`] = `
+"log	./fixtures/features/typos/code.ts:1:26 - Unknown word (Orangges) Suggestions: [Oranges, Orangiest, Orangier, orange's, Orange's]
+log	./fixtures/features/typos/test.md:5:3 - Forbidden word (blacklist) Suggestions: [denylist*, backlist, backlists, blacklight, blackfish]
+log	./fixtures/features/typos/test.md:6:3 - Forbidden word (whitelist) Suggestions: [allowlist*, whitelists, whitelisted, whitefish, whitest]
+log	./fixtures/features/typos/test.md:7:3 - Forbidden word (rad) Suggestions: [cool*, rda, rads, raid, rand]
+log	./fixtures/features/typos/test.md:9:13 - Forbidden word (english) Suggestions: [English*, englished, english's, englisher, englishes]
+log	./fixtures/features/typos/test.md:9:38 - Forbidden word (Blacklisted) Suggestions: [Denylisted*, Blacklegged, Backlists, Backlist, Lackluster]
+error	CSpell: Files checked: 3, Issues found: 6 in 2 files"
+`;
+
+exports[`Validate cli > app 'typos' Expect Error: [Function CheckFailed] 3`] = `""`;
+
+exports[`Validate cli > app 'with errors and excludes' Expect Error: [Function CheckFailed] 1`] = `[]`;
+
+exports[`Validate cli > app 'with errors and excludes' Expect Error: [Function CheckFailed] 2`] = `
+"error	 0.00ms
+error	 0.00ms
+error	 0.00ms
+error	 0.00ms
+error	 0.00ms
+error	 0.00ms X
+log	./samples/text.txt:1:14 - Unknown word (fulll)
+log	./samples/text.txt:1:23 - Unknown word (errrorrrs)
+log	./samples/text.txt:3:4 - Unknown word (hass)
+log	./samples/text.txt:3:9 - Unknown word (someissues)
+log	./samples/text.txt:3:23 - Unknown word (everyline)
+log	./samples/text.txt:5:24 - Unknown word (okkk)
+log	./samples/text.txt:5:32 - Unknown word (reead)
+error	CSpell: Files checked: 6, Issues found: 7 in 1 files"
+`;
+
+exports[`Validate cli > app 'with errors and excludes' Expect Error: [Function CheckFailed] 3`] = `
+"
+1/6 [90m./samples/cspell-bad.json[39m
+2/6 [90m./samples/cspell-includes.json[39m
+3/6 [90m./samples/cspell-missing-dict.json[39m
+4/6 [90m./samples/sample.c[39m
+5/6 [90m./samples/sample.py[39m
+6/6 [90m./samples/text.txt[39m"
+`;
+
+exports[`Validate cli > app 'with forbidden words' Expect Error: [Function CheckFailed] 1`] = `[]`;
+
+exports[`Validate cli > app 'with forbidden words' Expect Error: [Function CheckFailed] 2`] = `
+"error	 0.00ms X
+log	./samples/src/sample-with-forbidden-words.md:3:3 - Forbidden word (behaviour)
+log	./samples/src/sample-with-forbidden-words.md:4:3 - Forbidden word (flavour)
+log	./samples/src/sample-with-forbidden-words.md:5:3 - Forbidden word (colour)
+error	CSpell: Files checked: 1, Issues found: 3 in 1 files"
+`;
+
+exports[`Validate cli > app 'with forbidden words' Expect Error: [Function CheckFailed] 3`] = `
+"
+1/1 [90m./samples/src/sample-with-forbidden-words.md[39m"
+`;
+
+exports[`Validate cli > app 'with spelling errors --debug Dutch.txt' Expect Error: [Function CheckFailed] 1`] = `[]`;
+
+exports[`Validate cli > app 'with spelling errors --debug Dutch.txt' Expect Error: [Function CheckFailed] 2`] = `
+"./samples/Dutch.txt:1:32 - Unknown word (NEDERLANDS)
+./samples/Dutch.txt:2:11 - Unknown word (wordt)
+./samples/Dutch.txt:2:17 - Unknown word (vriendelijk)
+./samples/Dutch.txt:2:29 - Unknown word (verzocht)
+./samples/Dutch.txt:2:45 - Unknown word (bestand)
+./samples/Dutch.txt:3:10 - Unknown word (lezen)
+./samples/Dutch.txt:3:26 - Unknown word (leveren)
+./samples/Dutch.txt:3:38 - Unknown word (iedere)
+./samples/Dutch.txt:3:45 - Unknown word (kopie)
+./samples/Dutch.txt:3:59 - Unknown word (taalhulpbestand)
+./samples/Dutch.txt:5:4 - Unknown word (Naam)
+./samples/Dutch.txt:5:10 - Unknown word (Nederlandstalige)
+./samples/Dutch.txt:5:27 - Unknown word (woordenlijst)
+./samples/Dutch.txt:5:40 - Unknown word (voor)
+./samples/Dutch.txt:5:45 - Unknown word (spellingcontrole)
+./samples/Dutch.txt:6:4 - Unknown word (Versie)
+./samples/Dutch.txt:6:11 - Unknown word (woordenlijst)
+./samples/Dutch.txt:6:32 - Unknown word (versie)
+./samples/Dutch.txt:6:39 - Unknown word (spellingcontrole)
+./samples/Dutch.txt:7:4 - Unknown word (Vereisten)
+./samples/Dutch.txt:7:33 - Unknown word (hoger)
+./samples/Dutch.txt:8:4 - Unknown word (Keurmerk)
+./samples/Dutch.txt:8:22 - Unknown word (Nederlandse)
+./samples/Dutch.txt:8:34 - Unknown word (Taalunie)
+./samples/Dutch.txt:8:47 - Unknown word (lijst)
+./samples/Dutch.txt:8:57 - Unknown word (basiswoorden)
+./samples/Dutch.txt:9:13 - Unknown word (draagt)
+./samples/Dutch.txt:9:24 - Unknown word (keurmerk)
+./samples/Dutch.txt:9:40 - Unknown word (Nederlandse)
+./samples/Dutch.txt:9:52 - Unknown word (Taalunie)
+./samples/Dutch.txt:9:62 - Unknown word (Voor)
+./samples/Dutch.txt:9:67 - Unknown word (meer)
+./samples/Dutch.txt:10:4 - Unknown word (informatie)
+./samples/Dutch.txt:11:4 - Unknown word (Auteursrechten)
+./samples/Dutch.txt:11:60 - Unknown word (Brouwer)
+./samples/Dutch.txt:12:11 - Unknown word (Nederlandstalige)
+./samples/Dutch.txt:12:32 - Unknown word (Gebruikersgroep)
+./samples/Dutch.txt:13:4 - Unknown word (Licenties)
+./samples/Dutch.txt:13:24 - Unknown word (heeft)
+./samples/Dutch.txt:13:34 - Unknown word (doel)
+./samples/Dutch.txt:13:42 - Unknown word (vrij)
+./samples/Dutch.txt:13:47 - Unknown word (beschikbare)
+./samples/Dutch.txt:13:59 - Unknown word (Nederlandstalige)
+./samples/Dutch.txt:14:4 - Unknown word (taalhulpbestanden)
+./samples/Dutch.txt:14:25 - Unknown word (ontwikkelen)
+./samples/Dutch.txt:14:43 - Unknown word (verspreiden)
+./samples/Dutch.txt:14:70 - Unknown word (gebruik)
+./samples/Dutch.txt:15:4 - Unknown word (mogelijk)
+./samples/Dutch.txt:15:16 - Unknown word (maken)
+./samples/Dutch.txt:15:22 - Unknown word (zijn)
+./samples/Dutch.txt:15:30 - Unknown word (taalhulpbestanden)
+./samples/Dutch.txt:15:55 - Unknown word (beschikbaar)
+./samples/Dutch.txt:15:67 - Unknown word (onder)
+./samples/Dutch.txt:16:4 - Unknown word (onderstaande)
+./samples/Dutch.txt:16:18 - Unknown word (liberale)
+./samples/Dutch.txt:16:27 - Unknown word (licenties)
+./samples/Dutch.txt:16:37 - Unknown word (naar)
+./samples/Dutch.txt:16:42 - Unknown word (keuze)
+./samples/Dutch.txt:16:55 - Unknown word (gebruiker)
+./samples/Dutch.txt:16:68 - Unknown word (wordt)
+./samples/Dutch.txt:17:4 - Unknown word (zeerste)
+./samples/Dutch.txt:17:12 - Unknown word (aangeraden)
+./samples/Dutch.txt:17:26 - Unknown word (voorafgaand)
+./samples/Dutch.txt:17:46 - Unknown word (gebruik)
+./samples/Dutch.txt:17:54 - Unknown word (kennis)
+./samples/Dutch.txt:17:64 - Unknown word (nemen)
+./samples/Dutch.txt:18:4 - Unknown word (toepasselijke)
+./samples/Dutch.txt:18:18 - Unknown word (licentie)
+./samples/Dutch.txt:19:12 - Unknown word (herziene)
+./samples/Dutch.txt:19:21 - Unknown word (versie)
+./samples/Dutch.txt:20:6 - Unknown word (Volledige)
+./samples/Dutch.txt:20:16 - Unknown word (licentie)
+./samples/Dutch.txt:21:6 - Unknown word (Samenvatting)
+./samples/Dutch.txt:22:25 - Unknown word (Naamsvermelding)
+./samples/Dutch.txt:22:46 - Unknown word (unported)
+./samples/Dutch.txt:23:6 - Unknown word (Volledige)
+./samples/Dutch.txt:23:16 - Unknown word (licentie)
+./samples/Dutch.txt:24:6 - Unknown word (Samenvatting)
+./samples/Dutch.txt:25:4 - Unknown word (Steun)
+./samples/Dutch.txt:25:36 - Unknown word (vrijwilligersproject)
+./samples/Dutch.txt:25:57 - Unknown word (zonder)
+./samples/Dutch.txt:25:64 - Unknown word (winstoogmerk)
+./samples/Dutch.txt:26:13 - Unknown word (kleine)
+./samples/Dutch.txt:26:21 - Unknown word (financiële)
+./samples/Dutch.txt:26:32 - Unknown word (steun)
+./samples/Dutch.txt:26:51 - Unknown word (meer)
+./samples/Dutch.txt:26:56 - Unknown word (activiteiten)
+./samples/Dutch.txt:26:69 - Unknown word (ontplooien)
+./samples/Dutch.txt:27:19 - Unknown word (professionaliseren)
+./samples/Dutch.txt:27:42 - Unknown word (donatie)
+./samples/Dutch.txt:27:63 - Unknown word (welkom)
+./samples/Dutch.txt:28:4 - Unknown word (rekeningnummer)
+./samples/Dutch.txt:28:39 - Unknown word (Stichting)
+./samples/Dutch.txt:28:62 - Unknown word (giften)
+./samples/Dutch.txt:28:69 - Unknown word (zijn)
+./samples/Dutch.txt:29:4 - Unknown word (aftrekbaar)
+./samples/Dutch.txt:29:22 - Unknown word (belasting)
+./samples/Dutch.txt:29:33 - Unknown word (Stichting)
+./samples/Dutch.txt:29:55 - Unknown word (namelijk)
+./samples/Dutch.txt:30:4 - Unknown word (Belastingdienst)
+./samples/Dutch.txt:30:20 - Unknown word (erkend)
+./samples/Dutch.txt:30:31 - Unknown word (ANBI)
+./samples/Dutch.txt:30:37 - Unknown word (oftewel)
+./samples/Dutch.txt:30:46 - Unknown word (Algemeen)
+./samples/Dutch.txt:30:59 - Unknown word (Beogende)
+./samples/Dutch.txt:30:68 - Unknown word (Instelling)
+./samples/Dutch.txt:32:4 - Unknown word (Meedoen)
+./samples/Dutch.txt:32:13 - Unknown word (Iedereen)
+./samples/Dutch.txt:32:25 - Unknown word (welkom)
+./samples/Dutch.txt:32:42 - Unknown word (doen)
+./samples/Dutch.txt:32:53 - Unknown word (fouten)
+./samples/Dutch.txt:32:61 - Unknown word (discussieer)
+./samples/Dutch.txt:33:7 - Unknown word (mailinglijst)
+./samples/Dutch.txt:33:23 - Unknown word (draai)
+./samples/Dutch.txt:33:52 - Unknown word (dragen)
+./samples/Dutch.txt:33:75 - Unknown word (stemt)
+./samples/Dutch.txt:34:6 - Unknown word (ermee)
+./samples/Dutch.txt:34:22 - Unknown word (bijdrage)
+./samples/Dutch.txt:34:39 - Unknown word (desbetreffende)
+./samples/Dutch.txt:34:54 - Unknown word (taalhulpbestand)
+./samples/Dutch.txt:34:70 - Unknown word (beschikbaar)
+./samples/Dutch.txt:35:4 - Unknown word (komt)
+./samples/Dutch.txt:35:9 - Unknown word (onder)
+./samples/Dutch.txt:35:15 - Unknown word (vrije)
+./samples/Dutch.txt:35:27 - Unknown word (opensource)
+./samples/Dutch.txt:35:38 - Unknown word (licenties)
+./samples/Dutch.txt:35:49 - Unknown word (Indien)
+./samples/Dutch.txt:35:62 - Unknown word (wenst)
+./samples/Dutch.txt:36:4 - Unknown word (naam)
+./samples/Dutch.txt:36:23 - Unknown word (genoemd)
+./samples/Dutch.txt:36:31 - Unknown word (worden)
+./samples/Dutch.txt:36:42 - Unknown word (ontvangen)
+./samples/Dutch.txt:36:55 - Unknown word (schriftelijk)
+./samples/Dutch.txt:36:68 - Unknown word (verzoek)
+./samples/Dutch.txt:37:4 - Unknown word (daarvoor)
+./samples/Dutch.txt:37:13 - Unknown word (graag)
+./samples/Dutch.txt:38:4 - Unknown word (Rechten)
+./samples/Dutch.txt:38:16 - Unknown word (derden)
+./samples/Dutch.txt:38:33 - Unknown word (respecteert)
+./samples/Dutch.txt:38:48 - Unknown word (rechten)
+./samples/Dutch.txt:38:60 - Unknown word (derden)
+./samples/Dutch.txt:39:13 - Unknown word (gegevens)
+./samples/Dutch.txt:39:22 - Unknown word (vrij)
+./samples/Dutch.txt:39:27 - Unknown word (beschikbaar)
+./samples/Dutch.txt:39:39 - Unknown word (houden)
+./samples/Dutch.txt:39:47 - Unknown word (Voor)
+./samples/Dutch.txt:39:52 - Unknown word (bijdragen)
+./samples/Dutch.txt:40:6 - Unknown word (daarom)
+./samples/Dutch.txt:40:13 - Unknown word (niet)
+./samples/Dutch.txt:40:18 - Unknown word (zonder)
+./samples/Dutch.txt:40:25 - Unknown word (toestemming)
+./samples/Dutch.txt:40:37 - Unknown word (gebruikmaken)
+./samples/Dutch.txt:40:54 - Unknown word (beschermde)
+./samples/Dutch.txt:40:65 - Unknown word (naslagwerken)
+./samples/Dutch.txt:41:4 - Unknown word (zoals)
+./samples/Dutch.txt:41:10 - Unknown word (woordenboeken)
+./samples/Dutch.txt:41:36 - Unknown word (toegestaan)
+./samples/Dutch.txt:41:50 - Unknown word (gebruik)
+./samples/Dutch.txt:41:61 - Unknown word (maken)
+./samples/Dutch.txt:42:4 - Unknown word (materialen)
+./samples/Dutch.txt:42:22 - Unknown word (Nederlandse)
+./samples/Dutch.txt:42:34 - Unknown word (Taalunie)
+./samples/Dutch.txt:42:44 - Unknown word (zoals)
+./samples/Dutch.txt:42:53 - Unknown word (leidraad)
+./samples/Dutch.txt:42:68 - Unknown word (woordenlijst)
+./samples/Dutch.txt:43:4 - Unknown word (Indien)
+./samples/Dutch.txt:43:17 - Unknown word (mening)
+./samples/Dutch.txt:43:42 - Unknown word (inbreuk)
+./samples/Dutch.txt:43:50 - Unknown word (maakt)
+./samples/Dutch.txt:43:62 - Unknown word (rechten)
+./samples/Dutch.txt:44:4 - Unknown word (verzoeken)
+./samples/Dutch.txt:44:19 - Unknown word (hierover)
+./samples/Dutch.txt:44:31 - Unknown word (spoedig)
+./samples/Dutch.txt:44:39 - Unknown word (mogelijk)
+./samples/Dutch.txt:44:48 - Unknown word (schriftelijk)
+./samples/Dutch.txt:45:7 - Unknown word (nemen)
+./samples/Dutch.txt:46:13 - Unknown word (Stichting)
+./samples/Dutch.txt:59:56 - Unknown word (Brouwer)
+./samples/Dutch.txt:60:11 - Unknown word (Nederlandstalige)
+./samples/Dutch.txt:60:32 - Unknown word (Gebruikersgroep)
+./samples/Dutch.txt:68:42 - Unknown word (unported)
+./samples/Dutch.txt:74:39 - Unknown word (RABONL)
+./samples/Dutch.txt:74:49 - Unknown word (IBAN)
+./samples/Dutch.txt:74:59 - Unknown word (RABO)
+./samples/Dutch.txt:75:4 - Unknown word (Stichting)
+./samples/Dutch.txt:77:58 - Unknown word (algemeen)
+./samples/Dutch.txt:77:71 - Unknown word (beogende)
+./samples/Dutch.txt:78:4 - Unknown word (instelling)
+./samples/Dutch.txt:78:18 - Unknown word (ANBI)"
+`;
+
+exports[`Validate cli > app 'with spelling errors --silent Dutch.t…' Expect Error: [Function CheckFailed] 1`] = `[]`;
+
+exports[`Validate cli > app 'with spelling errors --silent Dutch.t…' Expect Error: [Function CheckFailed] 2`] = `""`;
+
+exports[`Validate cli > app 'with spelling errors --silent Dutch.t…' Expect Error: [Function CheckFailed] 3`] = `""`;
+
+exports[`Validate cli > app 'with spelling errors Dutch.txt --lega…' Expect Error: [Function CheckFailed] 1`] = `[]`;
+
+exports[`Validate cli > app 'with spelling errors Dutch.txt --lega…' Expect Error: [Function CheckFailed] 2`] = `
+"error	 0.00ms X
+log	./samples/Dutch.txt[1, 32]: Unknown word: NEDERLANDS
+log	./samples/Dutch.txt[2, 11]: Unknown word: wordt
+log	./samples/Dutch.txt[2, 17]: Unknown word: vriendelijk
+log	./samples/Dutch.txt[2, 29]: Unknown word: verzocht
+log	./samples/Dutch.txt[2, 45]: Unknown word: bestand
+log	./samples/Dutch.txt[3, 10]: Unknown word: lezen
+log	./samples/Dutch.txt[3, 26]: Unknown word: leveren
+log	./samples/Dutch.txt[3, 38]: Unknown word: iedere
+log	./samples/Dutch.txt[3, 45]: Unknown word: kopie
+log	./samples/Dutch.txt[3, 59]: Unknown word: taalhulpbestand
+log	./samples/Dutch.txt[5, 4]: Unknown word: Naam
+log	./samples/Dutch.txt[5, 10]: Unknown word: Nederlandstalige
+log	./samples/Dutch.txt[5, 27]: Unknown word: woordenlijst
+log	./samples/Dutch.txt[5, 40]: Unknown word: voor
+log	./samples/Dutch.txt[5, 45]: Unknown word: spellingcontrole
+log	./samples/Dutch.txt[6, 4]: Unknown word: Versie
+log	./samples/Dutch.txt[6, 11]: Unknown word: woordenlijst
+log	./samples/Dutch.txt[6, 32]: Unknown word: versie
+log	./samples/Dutch.txt[6, 39]: Unknown word: spellingcontrole
+log	./samples/Dutch.txt[7, 4]: Unknown word: Vereisten
+log	./samples/Dutch.txt[7, 33]: Unknown word: hoger
+log	./samples/Dutch.txt[8, 4]: Unknown word: Keurmerk
+log	./samples/Dutch.txt[8, 22]: Unknown word: Nederlandse
+log	./samples/Dutch.txt[8, 34]: Unknown word: Taalunie
+log	./samples/Dutch.txt[8, 47]: Unknown word: lijst
+log	./samples/Dutch.txt[8, 57]: Unknown word: basiswoorden
+log	./samples/Dutch.txt[9, 13]: Unknown word: draagt
+log	./samples/Dutch.txt[9, 24]: Unknown word: keurmerk
+log	./samples/Dutch.txt[9, 40]: Unknown word: Nederlandse
+log	./samples/Dutch.txt[9, 52]: Unknown word: Taalunie
+log	./samples/Dutch.txt[9, 62]: Unknown word: Voor
+log	./samples/Dutch.txt[9, 67]: Unknown word: meer
+log	./samples/Dutch.txt[10, 4]: Unknown word: informatie
+log	./samples/Dutch.txt[11, 4]: Unknown word: Auteursrechten
+log	./samples/Dutch.txt[11, 60]: Unknown word: Brouwer
+log	./samples/Dutch.txt[12, 11]: Unknown word: Nederlandstalige
+log	./samples/Dutch.txt[12, 32]: Unknown word: Gebruikersgroep
+log	./samples/Dutch.txt[13, 4]: Unknown word: Licenties
+log	./samples/Dutch.txt[13, 24]: Unknown word: heeft
+log	./samples/Dutch.txt[13, 34]: Unknown word: doel
+log	./samples/Dutch.txt[13, 42]: Unknown word: vrij
+log	./samples/Dutch.txt[13, 47]: Unknown word: beschikbare
+log	./samples/Dutch.txt[13, 59]: Unknown word: Nederlandstalige
+log	./samples/Dutch.txt[14, 4]: Unknown word: taalhulpbestanden
+log	./samples/Dutch.txt[14, 25]: Unknown word: ontwikkelen
+log	./samples/Dutch.txt[14, 43]: Unknown word: verspreiden
+log	./samples/Dutch.txt[14, 70]: Unknown word: gebruik
+log	./samples/Dutch.txt[15, 4]: Unknown word: mogelijk
+log	./samples/Dutch.txt[15, 16]: Unknown word: maken
+log	./samples/Dutch.txt[15, 22]: Unknown word: zijn
+log	./samples/Dutch.txt[15, 30]: Unknown word: taalhulpbestanden
+log	./samples/Dutch.txt[15, 55]: Unknown word: beschikbaar
+log	./samples/Dutch.txt[15, 67]: Unknown word: onder
+log	./samples/Dutch.txt[16, 4]: Unknown word: onderstaande
+log	./samples/Dutch.txt[16, 18]: Unknown word: liberale
+log	./samples/Dutch.txt[16, 27]: Unknown word: licenties
+log	./samples/Dutch.txt[16, 37]: Unknown word: naar
+log	./samples/Dutch.txt[16, 42]: Unknown word: keuze
+log	./samples/Dutch.txt[16, 55]: Unknown word: gebruiker
+log	./samples/Dutch.txt[16, 68]: Unknown word: wordt
+log	./samples/Dutch.txt[17, 4]: Unknown word: zeerste
+log	./samples/Dutch.txt[17, 12]: Unknown word: aangeraden
+log	./samples/Dutch.txt[17, 26]: Unknown word: voorafgaand
+log	./samples/Dutch.txt[17, 46]: Unknown word: gebruik
+log	./samples/Dutch.txt[17, 54]: Unknown word: kennis
+log	./samples/Dutch.txt[17, 64]: Unknown word: nemen
+log	./samples/Dutch.txt[18, 4]: Unknown word: toepasselijke
+log	./samples/Dutch.txt[18, 18]: Unknown word: licentie
+log	./samples/Dutch.txt[19, 12]: Unknown word: herziene
+log	./samples/Dutch.txt[19, 21]: Unknown word: versie
+log	./samples/Dutch.txt[20, 6]: Unknown word: Volledige
+log	./samples/Dutch.txt[20, 16]: Unknown word: licentie
+log	./samples/Dutch.txt[21, 6]: Unknown word: Samenvatting
+log	./samples/Dutch.txt[22, 25]: Unknown word: Naamsvermelding
+log	./samples/Dutch.txt[22, 46]: Unknown word: unported
+log	./samples/Dutch.txt[23, 6]: Unknown word: Volledige
+log	./samples/Dutch.txt[23, 16]: Unknown word: licentie
+log	./samples/Dutch.txt[24, 6]: Unknown word: Samenvatting
+log	./samples/Dutch.txt[25, 4]: Unknown word: Steun
+log	./samples/Dutch.txt[25, 36]: Unknown word: vrijwilligersproject
+log	./samples/Dutch.txt[25, 57]: Unknown word: zonder
+log	./samples/Dutch.txt[25, 64]: Unknown word: winstoogmerk
+log	./samples/Dutch.txt[26, 13]: Unknown word: kleine
+log	./samples/Dutch.txt[26, 21]: Unknown word: financiële
+log	./samples/Dutch.txt[26, 32]: Unknown word: steun
+log	./samples/Dutch.txt[26, 51]: Unknown word: meer
+log	./samples/Dutch.txt[26, 56]: Unknown word: activiteiten
+log	./samples/Dutch.txt[26, 69]: Unknown word: ontplooien
+log	./samples/Dutch.txt[27, 19]: Unknown word: professionaliseren
+log	./samples/Dutch.txt[27, 42]: Unknown word: donatie
+log	./samples/Dutch.txt[27, 63]: Unknown word: welkom
+log	./samples/Dutch.txt[28, 4]: Unknown word: rekeningnummer
+log	./samples/Dutch.txt[28, 39]: Unknown word: Stichting
+log	./samples/Dutch.txt[28, 62]: Unknown word: giften
+log	./samples/Dutch.txt[28, 69]: Unknown word: zijn
+log	./samples/Dutch.txt[29, 4]: Unknown word: aftrekbaar
+log	./samples/Dutch.txt[29, 22]: Unknown word: belasting
+log	./samples/Dutch.txt[29, 33]: Unknown word: Stichting
+log	./samples/Dutch.txt[29, 55]: Unknown word: namelijk
+log	./samples/Dutch.txt[30, 4]: Unknown word: Belastingdienst
+log	./samples/Dutch.txt[30, 20]: Unknown word: erkend
+log	./samples/Dutch.txt[30, 31]: Unknown word: ANBI
+log	./samples/Dutch.txt[30, 37]: Unknown word: oftewel
+log	./samples/Dutch.txt[30, 46]: Unknown word: Algemeen
+log	./samples/Dutch.txt[30, 59]: Unknown word: Beogende
+log	./samples/Dutch.txt[30, 68]: Unknown word: Instelling
+log	./samples/Dutch.txt[32, 4]: Unknown word: Meedoen
+log	./samples/Dutch.txt[32, 13]: Unknown word: Iedereen
+log	./samples/Dutch.txt[32, 25]: Unknown word: welkom
+log	./samples/Dutch.txt[32, 42]: Unknown word: doen
+log	./samples/Dutch.txt[32, 53]: Unknown word: fouten
+log	./samples/Dutch.txt[32, 61]: Unknown word: discussieer
+log	./samples/Dutch.txt[33, 7]: Unknown word: mailinglijst
+log	./samples/Dutch.txt[33, 23]: Unknown word: draai
+log	./samples/Dutch.txt[33, 52]: Unknown word: dragen
+log	./samples/Dutch.txt[33, 75]: Unknown word: stemt
+log	./samples/Dutch.txt[34, 6]: Unknown word: ermee
+log	./samples/Dutch.txt[34, 22]: Unknown word: bijdrage
+log	./samples/Dutch.txt[34, 39]: Unknown word: desbetreffende
+log	./samples/Dutch.txt[34, 54]: Unknown word: taalhulpbestand
+log	./samples/Dutch.txt[34, 70]: Unknown word: beschikbaar
+log	./samples/Dutch.txt[35, 4]: Unknown word: komt
+log	./samples/Dutch.txt[35, 9]: Unknown word: onder
+log	./samples/Dutch.txt[35, 15]: Unknown word: vrije
+log	./samples/Dutch.txt[35, 27]: Unknown word: opensource
+log	./samples/Dutch.txt[35, 38]: Unknown word: licenties
+log	./samples/Dutch.txt[35, 49]: Unknown word: Indien
+log	./samples/Dutch.txt[35, 62]: Unknown word: wenst
+log	./samples/Dutch.txt[36, 4]: Unknown word: naam
+log	./samples/Dutch.txt[36, 23]: Unknown word: genoemd
+log	./samples/Dutch.txt[36, 31]: Unknown word: worden
+log	./samples/Dutch.txt[36, 42]: Unknown word: ontvangen
+log	./samples/Dutch.txt[36, 55]: Unknown word: schriftelijk
+log	./samples/Dutch.txt[36, 68]: Unknown word: verzoek
+log	./samples/Dutch.txt[37, 4]: Unknown word: daarvoor
+log	./samples/Dutch.txt[37, 13]: Unknown word: graag
+log	./samples/Dutch.txt[38, 4]: Unknown word: Rechten
+log	./samples/Dutch.txt[38, 16]: Unknown word: derden
+log	./samples/Dutch.txt[38, 33]: Unknown word: respecteert
+log	./samples/Dutch.txt[38, 48]: Unknown word: rechten
+log	./samples/Dutch.txt[38, 60]: Unknown word: derden
+log	./samples/Dutch.txt[39, 13]: Unknown word: gegevens
+log	./samples/Dutch.txt[39, 22]: Unknown word: vrij
+log	./samples/Dutch.txt[39, 27]: Unknown word: beschikbaar
+log	./samples/Dutch.txt[39, 39]: Unknown word: houden
+log	./samples/Dutch.txt[39, 47]: Unknown word: Voor
+log	./samples/Dutch.txt[39, 52]: Unknown word: bijdragen
+log	./samples/Dutch.txt[40, 6]: Unknown word: daarom
+log	./samples/Dutch.txt[40, 13]: Unknown word: niet
+log	./samples/Dutch.txt[40, 18]: Unknown word: zonder
+log	./samples/Dutch.txt[40, 25]: Unknown word: toestemming
+log	./samples/Dutch.txt[40, 37]: Unknown word: gebruikmaken
+log	./samples/Dutch.txt[40, 54]: Unknown word: beschermde
+log	./samples/Dutch.txt[40, 65]: Unknown word: naslagwerken
+log	./samples/Dutch.txt[41, 4]: Unknown word: zoals
+log	./samples/Dutch.txt[41, 10]: Unknown word: woordenboeken
+log	./samples/Dutch.txt[41, 36]: Unknown word: toegestaan
+log	./samples/Dutch.txt[41, 50]: Unknown word: gebruik
+log	./samples/Dutch.txt[41, 61]: Unknown word: maken
+log	./samples/Dutch.txt[42, 4]: Unknown word: materialen
+log	./samples/Dutch.txt[42, 22]: Unknown word: Nederlandse
+log	./samples/Dutch.txt[42, 34]: Unknown word: Taalunie
+log	./samples/Dutch.txt[42, 44]: Unknown word: zoals
+log	./samples/Dutch.txt[42, 53]: Unknown word: leidraad
+log	./samples/Dutch.txt[42, 68]: Unknown word: woordenlijst
+log	./samples/Dutch.txt[43, 4]: Unknown word: Indien
+log	./samples/Dutch.txt[43, 17]: Unknown word: mening
+log	./samples/Dutch.txt[43, 42]: Unknown word: inbreuk
+log	./samples/Dutch.txt[43, 50]: Unknown word: maakt
+log	./samples/Dutch.txt[43, 62]: Unknown word: rechten
+log	./samples/Dutch.txt[44, 4]: Unknown word: verzoeken
+log	./samples/Dutch.txt[44, 19]: Unknown word: hierover
+log	./samples/Dutch.txt[44, 31]: Unknown word: spoedig
+log	./samples/Dutch.txt[44, 39]: Unknown word: mogelijk
+log	./samples/Dutch.txt[44, 48]: Unknown word: schriftelijk
+log	./samples/Dutch.txt[45, 7]: Unknown word: nemen
+log	./samples/Dutch.txt[46, 13]: Unknown word: Stichting
+log	./samples/Dutch.txt[59, 56]: Unknown word: Brouwer
+log	./samples/Dutch.txt[60, 11]: Unknown word: Nederlandstalige
+log	./samples/Dutch.txt[60, 32]: Unknown word: Gebruikersgroep
+log	./samples/Dutch.txt[68, 42]: Unknown word: unported
+log	./samples/Dutch.txt[74, 39]: Unknown word: RABONL
+log	./samples/Dutch.txt[74, 49]: Unknown word: IBAN
+log	./samples/Dutch.txt[74, 59]: Unknown word: RABO
+log	./samples/Dutch.txt[75, 4]: Unknown word: Stichting
+log	./samples/Dutch.txt[77, 58]: Unknown word: algemeen
+log	./samples/Dutch.txt[77, 71]: Unknown word: beogende
+log	./samples/Dutch.txt[78, 4]: Unknown word: instelling
+log	./samples/Dutch.txt[78, 18]: Unknown word: ANBI
+error	CSpell: Files checked: 1, Issues found: 189 in 1 files"
+`;
+
+exports[`Validate cli > app 'with spelling errors Dutch.txt --lega…' Expect Error: [Function CheckFailed] 3`] = `
+"
+1/1 [90m./samples/Dutch.txt[39m"
+`;
+
+exports[`Validate cli > app 'with spelling errors Dutch.txt words …' Expect Error: [Function CheckFailed] 1`] = `[]`;
+
+exports[`Validate cli > app 'with spelling errors Dutch.txt words …' Expect Error: [Function CheckFailed] 2`] = `
+"error	 0.00ms X
+log	NEDERLANDS
+log	wordt
+log	vriendelijk
+log	verzocht
+log	bestand
+log	lezen
+log	leveren
+log	iedere
+log	kopie
+log	taalhulpbestand
+log	Naam
+log	Nederlandstalige
+log	woordenlijst
+log	voor
+log	spellingcontrole
+log	Versie
+log	woordenlijst
+log	versie
+log	spellingcontrole
+log	Vereisten
+log	hoger
+log	Keurmerk
+log	Nederlandse
+log	Taalunie
+log	lijst
+log	basiswoorden
+log	draagt
+log	keurmerk
+log	Nederlandse
+log	Taalunie
+log	Voor
+log	meer
+log	informatie
+log	Auteursrechten
+log	Brouwer
+log	Nederlandstalige
+log	Gebruikersgroep
+log	Licenties
+log	heeft
+log	doel
+log	vrij
+log	beschikbare
+log	Nederlandstalige
+log	taalhulpbestanden
+log	ontwikkelen
+log	verspreiden
+log	gebruik
+log	mogelijk
+log	maken
+log	zijn
+log	taalhulpbestanden
+log	beschikbaar
+log	onder
+log	onderstaande
+log	liberale
+log	licenties
+log	naar
+log	keuze
+log	gebruiker
+log	wordt
+log	zeerste
+log	aangeraden
+log	voorafgaand
+log	gebruik
+log	kennis
+log	nemen
+log	toepasselijke
+log	licentie
+log	herziene
+log	versie
+log	Volledige
+log	licentie
+log	Samenvatting
+log	Naamsvermelding
+log	unported
+log	Volledige
+log	licentie
+log	Samenvatting
+log	Steun
+log	vrijwilligersproject
+log	zonder
+log	winstoogmerk
+log	kleine
+log	financiële
+log	steun
+log	meer
+log	activiteiten
+log	ontplooien
+log	professionaliseren
+log	donatie
+log	welkom
+log	rekeningnummer
+log	Stichting
+log	giften
+log	zijn
+log	aftrekbaar
+log	belasting
+log	Stichting
+log	namelijk
+log	Belastingdienst
+log	erkend
+log	ANBI
+log	oftewel
+log	Algemeen
+log	Beogende
+log	Instelling
+log	Meedoen
+log	Iedereen
+log	welkom
+log	doen
+log	fouten
+log	discussieer
+log	mailinglijst
+log	draai
+log	dragen
+log	stemt
+log	ermee
+log	bijdrage
+log	desbetreffende
+log	taalhulpbestand
+log	beschikbaar
+log	komt
+log	onder
+log	vrije
+log	opensource
+log	licenties
+log	Indien
+log	wenst
+log	naam
+log	genoemd
+log	worden
+log	ontvangen
+log	schriftelijk
+log	verzoek
+log	daarvoor
+log	graag
+log	Rechten
+log	derden
+log	respecteert
+log	rechten
+log	derden
+log	gegevens
+log	vrij
+log	beschikbaar
+log	houden
+log	Voor
+log	bijdragen
+log	daarom
+log	niet
+log	zonder
+log	toestemming
+log	gebruikmaken
+log	beschermde
+log	naslagwerken
+log	zoals
+log	woordenboeken
+log	toegestaan
+log	gebruik
+log	maken
+log	materialen
+log	Nederlandse
+log	Taalunie
+log	zoals
+log	leidraad
+log	woordenlijst
+log	Indien
+log	mening
+log	inbreuk
+log	maakt
+log	rechten
+log	verzoeken
+log	hierover
+log	spoedig
+log	mogelijk
+log	schriftelijk
+log	nemen
+log	Stichting
+log	Brouwer
+log	Nederlandstalige
+log	Gebruikersgroep
+log	unported
+log	RABONL
+log	IBAN
+log	RABO
+log	Stichting
+log	algemeen
+log	beogende
+log	instelling
+log	ANBI
+error	CSpell: Files checked: 1, Issues found: 189 in 1 files"
+`;
+
+exports[`Validate cli > app 'with spelling errors Dutch.txt words …' Expect Error: [Function CheckFailed] 3`] = `
+"
+1/1 [90m./samples/Dutch.txt[39m"
+`;
+
+exports[`Validate cli > app 'with spelling errors Dutch.txt' Expect Error: [Function CheckFailed] 1`] = `[]`;
+
+exports[`Validate cli > app 'with spelling errors Dutch.txt' Expect Error: [Function CheckFailed] 2`] = `
+"error	 0.00ms X
+log	./samples/Dutch.txt:1:32 - Unknown word (NEDERLANDS)
+log	./samples/Dutch.txt:2:11 - Unknown word (wordt)
+log	./samples/Dutch.txt:2:17 - Unknown word (vriendelijk)
+log	./samples/Dutch.txt:2:29 - Unknown word (verzocht)
+log	./samples/Dutch.txt:2:45 - Unknown word (bestand)
+log	./samples/Dutch.txt:3:10 - Unknown word (lezen)
+log	./samples/Dutch.txt:3:26 - Unknown word (leveren)
+log	./samples/Dutch.txt:3:38 - Unknown word (iedere)
+log	./samples/Dutch.txt:3:45 - Unknown word (kopie)
+log	./samples/Dutch.txt:3:59 - Unknown word (taalhulpbestand)
+log	./samples/Dutch.txt:5:4 - Unknown word (Naam)
+log	./samples/Dutch.txt:5:10 - Unknown word (Nederlandstalige)
+log	./samples/Dutch.txt:5:27 - Unknown word (woordenlijst)
+log	./samples/Dutch.txt:5:40 - Unknown word (voor)
+log	./samples/Dutch.txt:5:45 - Unknown word (spellingcontrole)
+log	./samples/Dutch.txt:6:4 - Unknown word (Versie)
+log	./samples/Dutch.txt:6:11 - Unknown word (woordenlijst)
+log	./samples/Dutch.txt:6:32 - Unknown word (versie)
+log	./samples/Dutch.txt:6:39 - Unknown word (spellingcontrole)
+log	./samples/Dutch.txt:7:4 - Unknown word (Vereisten)
+log	./samples/Dutch.txt:7:33 - Unknown word (hoger)
+log	./samples/Dutch.txt:8:4 - Unknown word (Keurmerk)
+log	./samples/Dutch.txt:8:22 - Unknown word (Nederlandse)
+log	./samples/Dutch.txt:8:34 - Unknown word (Taalunie)
+log	./samples/Dutch.txt:8:47 - Unknown word (lijst)
+log	./samples/Dutch.txt:8:57 - Unknown word (basiswoorden)
+log	./samples/Dutch.txt:9:13 - Unknown word (draagt)
+log	./samples/Dutch.txt:9:24 - Unknown word (keurmerk)
+log	./samples/Dutch.txt:9:40 - Unknown word (Nederlandse)
+log	./samples/Dutch.txt:9:52 - Unknown word (Taalunie)
+log	./samples/Dutch.txt:9:62 - Unknown word (Voor)
+log	./samples/Dutch.txt:9:67 - Unknown word (meer)
+log	./samples/Dutch.txt:10:4 - Unknown word (informatie)
+log	./samples/Dutch.txt:11:4 - Unknown word (Auteursrechten)
+log	./samples/Dutch.txt:11:60 - Unknown word (Brouwer)
+log	./samples/Dutch.txt:12:11 - Unknown word (Nederlandstalige)
+log	./samples/Dutch.txt:12:32 - Unknown word (Gebruikersgroep)
+log	./samples/Dutch.txt:13:4 - Unknown word (Licenties)
+log	./samples/Dutch.txt:13:24 - Unknown word (heeft)
+log	./samples/Dutch.txt:13:34 - Unknown word (doel)
+log	./samples/Dutch.txt:13:42 - Unknown word (vrij)
+log	./samples/Dutch.txt:13:47 - Unknown word (beschikbare)
+log	./samples/Dutch.txt:13:59 - Unknown word (Nederlandstalige)
+log	./samples/Dutch.txt:14:4 - Unknown word (taalhulpbestanden)
+log	./samples/Dutch.txt:14:25 - Unknown word (ontwikkelen)
+log	./samples/Dutch.txt:14:43 - Unknown word (verspreiden)
+log	./samples/Dutch.txt:14:70 - Unknown word (gebruik)
+log	./samples/Dutch.txt:15:4 - Unknown word (mogelijk)
+log	./samples/Dutch.txt:15:16 - Unknown word (maken)
+log	./samples/Dutch.txt:15:22 - Unknown word (zijn)
+log	./samples/Dutch.txt:15:30 - Unknown word (taalhulpbestanden)
+log	./samples/Dutch.txt:15:55 - Unknown word (beschikbaar)
+log	./samples/Dutch.txt:15:67 - Unknown word (onder)
+log	./samples/Dutch.txt:16:4 - Unknown word (onderstaande)
+log	./samples/Dutch.txt:16:18 - Unknown word (liberale)
+log	./samples/Dutch.txt:16:27 - Unknown word (licenties)
+log	./samples/Dutch.txt:16:37 - Unknown word (naar)
+log	./samples/Dutch.txt:16:42 - Unknown word (keuze)
+log	./samples/Dutch.txt:16:55 - Unknown word (gebruiker)
+log	./samples/Dutch.txt:16:68 - Unknown word (wordt)
+log	./samples/Dutch.txt:17:4 - Unknown word (zeerste)
+log	./samples/Dutch.txt:17:12 - Unknown word (aangeraden)
+log	./samples/Dutch.txt:17:26 - Unknown word (voorafgaand)
+log	./samples/Dutch.txt:17:46 - Unknown word (gebruik)
+log	./samples/Dutch.txt:17:54 - Unknown word (kennis)
+log	./samples/Dutch.txt:17:64 - Unknown word (nemen)
+log	./samples/Dutch.txt:18:4 - Unknown word (toepasselijke)
+log	./samples/Dutch.txt:18:18 - Unknown word (licentie)
+log	./samples/Dutch.txt:19:12 - Unknown word (herziene)
+log	./samples/Dutch.txt:19:21 - Unknown word (versie)
+log	./samples/Dutch.txt:20:6 - Unknown word (Volledige)
+log	./samples/Dutch.txt:20:16 - Unknown word (licentie)
+log	./samples/Dutch.txt:21:6 - Unknown word (Samenvatting)
+log	./samples/Dutch.txt:22:25 - Unknown word (Naamsvermelding)
+log	./samples/Dutch.txt:22:46 - Unknown word (unported)
+log	./samples/Dutch.txt:23:6 - Unknown word (Volledige)
+log	./samples/Dutch.txt:23:16 - Unknown word (licentie)
+log	./samples/Dutch.txt:24:6 - Unknown word (Samenvatting)
+log	./samples/Dutch.txt:25:4 - Unknown word (Steun)
+log	./samples/Dutch.txt:25:36 - Unknown word (vrijwilligersproject)
+log	./samples/Dutch.txt:25:57 - Unknown word (zonder)
+log	./samples/Dutch.txt:25:64 - Unknown word (winstoogmerk)
+log	./samples/Dutch.txt:26:13 - Unknown word (kleine)
+log	./samples/Dutch.txt:26:21 - Unknown word (financiële)
+log	./samples/Dutch.txt:26:32 - Unknown word (steun)
+log	./samples/Dutch.txt:26:51 - Unknown word (meer)
+log	./samples/Dutch.txt:26:56 - Unknown word (activiteiten)
+log	./samples/Dutch.txt:26:69 - Unknown word (ontplooien)
+log	./samples/Dutch.txt:27:19 - Unknown word (professionaliseren)
+log	./samples/Dutch.txt:27:42 - Unknown word (donatie)
+log	./samples/Dutch.txt:27:63 - Unknown word (welkom)
+log	./samples/Dutch.txt:28:4 - Unknown word (rekeningnummer)
+log	./samples/Dutch.txt:28:39 - Unknown word (Stichting)
+log	./samples/Dutch.txt:28:62 - Unknown word (giften)
+log	./samples/Dutch.txt:28:69 - Unknown word (zijn)
+log	./samples/Dutch.txt:29:4 - Unknown word (aftrekbaar)
+log	./samples/Dutch.txt:29:22 - Unknown word (belasting)
+log	./samples/Dutch.txt:29:33 - Unknown word (Stichting)
+log	./samples/Dutch.txt:29:55 - Unknown word (namelijk)
+log	./samples/Dutch.txt:30:4 - Unknown word (Belastingdienst)
+log	./samples/Dutch.txt:30:20 - Unknown word (erkend)
+log	./samples/Dutch.txt:30:31 - Unknown word (ANBI)
+log	./samples/Dutch.txt:30:37 - Unknown word (oftewel)
+log	./samples/Dutch.txt:30:46 - Unknown word (Algemeen)
+log	./samples/Dutch.txt:30:59 - Unknown word (Beogende)
+log	./samples/Dutch.txt:30:68 - Unknown word (Instelling)
+log	./samples/Dutch.txt:32:4 - Unknown word (Meedoen)
+log	./samples/Dutch.txt:32:13 - Unknown word (Iedereen)
+log	./samples/Dutch.txt:32:25 - Unknown word (welkom)
+log	./samples/Dutch.txt:32:42 - Unknown word (doen)
+log	./samples/Dutch.txt:32:53 - Unknown word (fouten)
+log	./samples/Dutch.txt:32:61 - Unknown word (discussieer)
+log	./samples/Dutch.txt:33:7 - Unknown word (mailinglijst)
+log	./samples/Dutch.txt:33:23 - Unknown word (draai)
+log	./samples/Dutch.txt:33:52 - Unknown word (dragen)
+log	./samples/Dutch.txt:33:75 - Unknown word (stemt)
+log	./samples/Dutch.txt:34:6 - Unknown word (ermee)
+log	./samples/Dutch.txt:34:22 - Unknown word (bijdrage)
+log	./samples/Dutch.txt:34:39 - Unknown word (desbetreffende)
+log	./samples/Dutch.txt:34:54 - Unknown word (taalhulpbestand)
+log	./samples/Dutch.txt:34:70 - Unknown word (beschikbaar)
+log	./samples/Dutch.txt:35:4 - Unknown word (komt)
+log	./samples/Dutch.txt:35:9 - Unknown word (onder)
+log	./samples/Dutch.txt:35:15 - Unknown word (vrije)
+log	./samples/Dutch.txt:35:27 - Unknown word (opensource)
+log	./samples/Dutch.txt:35:38 - Unknown word (licenties)
+log	./samples/Dutch.txt:35:49 - Unknown word (Indien)
+log	./samples/Dutch.txt:35:62 - Unknown word (wenst)
+log	./samples/Dutch.txt:36:4 - Unknown word (naam)
+log	./samples/Dutch.txt:36:23 - Unknown word (genoemd)
+log	./samples/Dutch.txt:36:31 - Unknown word (worden)
+log	./samples/Dutch.txt:36:42 - Unknown word (ontvangen)
+log	./samples/Dutch.txt:36:55 - Unknown word (schriftelijk)
+log	./samples/Dutch.txt:36:68 - Unknown word (verzoek)
+log	./samples/Dutch.txt:37:4 - Unknown word (daarvoor)
+log	./samples/Dutch.txt:37:13 - Unknown word (graag)
+log	./samples/Dutch.txt:38:4 - Unknown word (Rechten)
+log	./samples/Dutch.txt:38:16 - Unknown word (derden)
+log	./samples/Dutch.txt:38:33 - Unknown word (respecteert)
+log	./samples/Dutch.txt:38:48 - Unknown word (rechten)
+log	./samples/Dutch.txt:38:60 - Unknown word (derden)
+log	./samples/Dutch.txt:39:13 - Unknown word (gegevens)
+log	./samples/Dutch.txt:39:22 - Unknown word (vrij)
+log	./samples/Dutch.txt:39:27 - Unknown word (beschikbaar)
+log	./samples/Dutch.txt:39:39 - Unknown word (houden)
+log	./samples/Dutch.txt:39:47 - Unknown word (Voor)
+log	./samples/Dutch.txt:39:52 - Unknown word (bijdragen)
+log	./samples/Dutch.txt:40:6 - Unknown word (daarom)
+log	./samples/Dutch.txt:40:13 - Unknown word (niet)
+log	./samples/Dutch.txt:40:18 - Unknown word (zonder)
+log	./samples/Dutch.txt:40:25 - Unknown word (toestemming)
+log	./samples/Dutch.txt:40:37 - Unknown word (gebruikmaken)
+log	./samples/Dutch.txt:40:54 - Unknown word (beschermde)
+log	./samples/Dutch.txt:40:65 - Unknown word (naslagwerken)
+log	./samples/Dutch.txt:41:4 - Unknown word (zoals)
+log	./samples/Dutch.txt:41:10 - Unknown word (woordenboeken)
+log	./samples/Dutch.txt:41:36 - Unknown word (toegestaan)
+log	./samples/Dutch.txt:41:50 - Unknown word (gebruik)
+log	./samples/Dutch.txt:41:61 - Unknown word (maken)
+log	./samples/Dutch.txt:42:4 - Unknown word (materialen)
+log	./samples/Dutch.txt:42:22 - Unknown word (Nederlandse)
+log	./samples/Dutch.txt:42:34 - Unknown word (Taalunie)
+log	./samples/Dutch.txt:42:44 - Unknown word (zoals)
+log	./samples/Dutch.txt:42:53 - Unknown word (leidraad)
+log	./samples/Dutch.txt:42:68 - Unknown word (woordenlijst)
+log	./samples/Dutch.txt:43:4 - Unknown word (Indien)
+log	./samples/Dutch.txt:43:17 - Unknown word (mening)
+log	./samples/Dutch.txt:43:42 - Unknown word (inbreuk)
+log	./samples/Dutch.txt:43:50 - Unknown word (maakt)
+log	./samples/Dutch.txt:43:62 - Unknown word (rechten)
+log	./samples/Dutch.txt:44:4 - Unknown word (verzoeken)
+log	./samples/Dutch.txt:44:19 - Unknown word (hierover)
+log	./samples/Dutch.txt:44:31 - Unknown word (spoedig)
+log	./samples/Dutch.txt:44:39 - Unknown word (mogelijk)
+log	./samples/Dutch.txt:44:48 - Unknown word (schriftelijk)
+log	./samples/Dutch.txt:45:7 - Unknown word (nemen)
+log	./samples/Dutch.txt:46:13 - Unknown word (Stichting)
+log	./samples/Dutch.txt:59:56 - Unknown word (Brouwer)
+log	./samples/Dutch.txt:60:11 - Unknown word (Nederlandstalige)
+log	./samples/Dutch.txt:60:32 - Unknown word (Gebruikersgroep)
+log	./samples/Dutch.txt:68:42 - Unknown word (unported)
+log	./samples/Dutch.txt:74:39 - Unknown word (RABONL)
+log	./samples/Dutch.txt:74:49 - Unknown word (IBAN)
+log	./samples/Dutch.txt:74:59 - Unknown word (RABO)
+log	./samples/Dutch.txt:75:4 - Unknown word (Stichting)
+log	./samples/Dutch.txt:77:58 - Unknown word (algemeen)
+log	./samples/Dutch.txt:77:71 - Unknown word (beogende)
+log	./samples/Dutch.txt:78:4 - Unknown word (instelling)
+log	./samples/Dutch.txt:78:18 - Unknown word (ANBI)
+error	CSpell: Files checked: 1, Issues found: 189 in 1 files"
+`;
+
+exports[`Validate cli > app 'with spelling errors Dutch.txt' Expect Error: [Function CheckFailed] 3`] = `
+"
+1/1 [90m./samples/Dutch.txt[39m"
+`;
+
+exports[`Validate cli > app success 'suggest' run with [ 'suggest', 'café', …(2) ] 1`] = `[]`;
+
+exports[`Validate cli > app success 'suggest' run with [ 'suggest', 'café', …(2) ] 2`] = `
+"café:
+ - café"
+`;
+
+exports[`Validate cli > app success 'trace café' run with [ 'trace', 'café' ] 1`] = `[]`;
+
+exports[`Validate cli > app success 'trace café' run with [ 'trace', 'café' ] 2`] = `
+"Word F Dictionary             Dictionary Location
+café - [flagWords]*           From Settings \`flagWords\`
+café - [ignoreWords]*         From Settings \`ignoreWords\`
+café - [suggestWords]*        From Settings \`suggestWords\`
+café - [words]*               From Settings \`words\`
+café - aws*                   node_modules/@cspell/dict-aws/aws.txt.gz
+café - companies*             node_modules/@cspell/.../dict/companies.txt
+café - cryptocurrencies*      node_modules/@cspell/.../cryptocurrencies.txt.gz
+café * en_us*                 node_modules/@cspell/dict-en_us/en_US.trie.gz
+café - en-common-misspelling* node_modules/@cspell/.../dict-en.yaml
+café * en-gb                  node_modules/@cspell/dict-en-gb/en_GB.trie.gz
+café - filetypes*             node_modules/.../dict-filetypes/filetypes.txt.gz
+café - public-licenses*       node_modules/@cspell/.../public-licenses.txt.gz
+café - softwareTerms*         node_modules/@cspell/.../dict/softwareTerms.txt
+café - workspace*             ../../cspell-dict.txt"
+`;
+
+exports[`Validate cli > app success 'trace hello --all' run with [ 'trace', 'hello', '--all' ] 1`] = `[]`;
+
+exports[`Validate cli > app success 'trace hello --all' run with [ 'trace', 'hello', '--all' ] 2`] = `
+"Word  F Dictionary                Dictionary Location
+hello - [flagWords]*              From Settings \`flagWords\`
+hello - [ignoreWords]*            From Settings \`ignoreWords\`
+hello - [suggestWords]*           From Settings \`suggestWords\`
+hello - [words]*                  From Settings \`words\`
+hello - ada                       node_modules/@cspell/dict-ada/dict/ada.txt
+hello - aws*                      node_modules/@cspell/dict-aws/aws.txt.gz
+hello - bash                      node_modules/@cspell/.../dict/bash-words.txt
+hello - companies*                node_modules/@cspell/.../dict/companies.txt
+hello * cpp                       node_modules/@cspell/dict-cpp/cpp.txt.gz
+hello - cpp-refined               node_modules/.../dict-cpp/cpp-refined.txt.gz
+hello - cryptocurrencies*         node_modules/.../cryptocurrencies.txt.gz
+hello - csharp                    node_modules/@cspell/dict-csharp/csharp.txt.gz
+hello - css                       node_modules/@cspell/dict-css/dict/css.txt
+hello - dart                      node_modules/@cspell/dict-dart/dart.txt.gz
+hello - django                    node_modules/@cspell/.../dict/django.txt
+hello - docker                    node_modules/@cspell/.../docker-words.txt.gz
+hello - dotnet                    node_modules/@cspell/.../dict/dotnet.txt
+hello - elixir                    node_modules/@cspell/.../dict/elixir.txt
+hello * en_us*                    node_modules/@cspell/dict-en_us/en_US.trie.gz
+hello - en-common-misspellings*   node_modules/@cspell/.../dict-en.yaml
+hello * en-gb                     node_modules/@cspell/dict-en-gb/en_GB.trie.gz
+hello - en-gb-common-misspelling  node_modules/@cspell/.../dict-en-gb.yaml
+hello - en-us-common-misspelling  node_modules/@cspell/.../dict-en-us.yaml
+hello - filetypes*                node_modules/@cspell/.../filetypes.txt.gz
+hello - fonts                     node_modules/@cspell/dict-fonts/fonts.txt.gz
+hello - fullstack                 node_modules/@cspell/.../dict/fullstack.txt
+hello - gaming-terms              node_modules/@cspell/.../dict/gaming-terms.txt
+hello * golang                    node_modules/@cspell/dict-golang/dict/go.txt
+hello - haskell                   node_modules/@cspell/.../dict/haskell.txt
+hello - html                      node_modules/@cspell/dict-html/dict/html.txt
+hello - html-symbol-entities      node_modules/@cspell/.../entities.txt.gz
+hello - java                      node_modules/@cspell/dict-java/dict/java.trie
+hello - k8s                       node_modules/@cspell/dict-k8s/dict/k8s.txt
+hello - latex                     node_modules/@cspell/dict-latex/dict/latex.txt
+hello - lorem-ipsum               node_modules/@cspell/.../dictionary.txt.gz
+hello - lua                       node_modules/@cspell/dict-lua/dict/lua.txt
+hello - networking-terms          node_modules/.../dict/networkingTerms.txt
+hello * node                      node_modules/@cspell/dict-node/dict/node.txt
+hello - npm                       node_modules/@cspell/dict-npm/dict/npm.txt
+hello - php                       node_modules/@cspell/dict-php/dict/php.txt
+hello - powershell                node_modules/@cspell/.../dict/powershell.txt
+hello - public-licenses*          node_modules/.../public-licenses.txt.gz
+hello - python                    node_modules/@cspell/dict-python/python.txt.gz
+hello - python-common             node_modules/@cspell/.../python-common.txt.gz
+hello - r                         node_modules/@cspell/dict-r/r.txt.gz
+hello - ruby                      node_modules/@cspell/dict-ruby/dict/ruby.txt
+hello - rust                      node_modules/@cspell/dict-rust/dict/rust.txt
+hello - scala                     node_modules/@cspell/dict-scala/dict/scala.txt
+hello - softwareTerms*            node_modules/.../dict/softwareTerms.txt
+hello - sql                       node_modules/@cspell/dict-sql/sql.txt.gz
+hello - svelte                    node_modules/@cspell/.../dict/svelte.txt
+hello - swift                     node_modules/@cspell/dict-swift/swift.txt.gz
+hello - typescript                node_modules/@cspell/.../dict/typescript.txt
+hello - web-services              node_modules/@cspell/.../dict/webServices.txt
+hello - workspace*                ../../cspell-dict.txt"
+`;
+
+exports[`Validate cli > app success 'trace hello --only-found' run with [ 'trace', 'hello', '--only-found' ] 1`] = `[]`;
+
+exports[`Validate cli > app success 'trace hello --only-found' run with [ 'trace', 'hello', '--only-found' ] 2`] = `
+"Word  F Dictionary           Dictionary Location
+hello * cpp                  node_modules/@cspell/dict-cpp/cpp.txt.gz
+hello * en_us*               node_modules/@cspell/dict-en_us/en_US.trie.gz
+hello * en-gb                node_modules/@cspell/dict-en-gb/en_GB.trie.gz
+hello * golang               node_modules/@cspell/dict-golang/dict/go.txt
+hello * node                 node_modules/@cspell/dict-node/dict/node.txt"
+`;
+
+exports[`Validate cli > app success 'trace hello' run with [ 'trace', '--locale=en-gb', 'hello' ] 1`] = `[]`;
+
+exports[`Validate cli > app success 'trace hello' run with [ 'trace', '--locale=en-gb', 'hello' ] 2`] = `
+"Word  F Dictionary                Dictionary Location
+hello - [flagWords]*              From Settings \`flagWords\`
+hello - [ignoreWords]*            From Settings \`ignoreWords\`
+hello - [suggestWords]*           From Settings \`suggestWords\`
+hello - [words]*                  From Settings \`words\`
+hello - aws*                      node_modules/@cspell/dict-aws/aws.txt.gz
+hello - companies*                node_modules/@cspell/.../dict/companies.txt
+hello * cpp                       node_modules/@cspell/dict-cpp/cpp.txt.gz
+hello - cryptocurrencies*         node_modules/.../cryptocurrencies.txt.gz
+hello * en_us                     node_modules/@cspell/dict-en_us/en_US.trie.gz
+hello * en-gb*                    node_modules/@cspell/dict-en-gb/en_GB.trie.gz
+hello - en-gb-common-misspelling* node_modules/@cspell/.../dict-en-gb.yaml
+hello - filetypes*                node_modules/@cspell/.../filetypes.txt.gz
+hello * golang                    node_modules/@cspell/dict-golang/dict/go.txt
+hello * node                      node_modules/@cspell/dict-node/dict/node.txt
+hello - public-licenses*          node_modules/.../public-licenses.txt.gz
+hello - softwareTerms*            node_modules/.../dict/softwareTerms.txt
+hello - workspace*                ../../cspell-dict.txt"
+`;
+
+exports[`Validate cli > app suggest [ 'sug' ] 1`] = `
+[
+  "Usage: cspell suggestions|sug [options] [words...]",
+  "",
+  "Spelling Suggestions for words.",
+  "",
+  "Options:",
+  "  -c, --config <cspell.json>            Configuration file to use.  By default",
+  "                                        cspell looks for cspell.json in the",
+  "                                        current directory.",
+  "  --locale <locale>                     Set language locales. i.e. \\"en,fr\\" for",
+  "                                        English and French, or \\"en-GB\\" for",
+  "                                        British English.",
+  "  --language-id <language>              Use programming language. i.e. \\"php\\" or",
+  "                                        \\"scala\\".",
+  "  -s, --no-strict                       Ignore case and accents when searching",
+  "                                        for words.",
+  "  --ignore-case                         Alias of --no-strict.",
+  "  --num-changes <number>                Number of changes allowed to a word",
+  "                                        (default: 4)",
+  "  --num-suggestions <number>            Number of suggestions (default: 8)",
+  "  --no-include-ties                     Force the number of suggested to be",
+  "                                        limited, by not including suggestions",
+  "                                        that have the same edit cost.",
+  "  --stdin                               Use stdin for input.",
+  "  --repl                                REPL interface for looking up",
+  "                                        suggestions.",
+  "  -v, --verbose                         Show detailed output.",
+  "  -d, --dictionary <dictionary name>    Use the dictionary specified. Only",
+  "                                        dictionaries specified will be used.",
+  "  --dictionaries <dictionary names...>  Use the dictionaries specified. Only",
+  "                                        dictionaries specified will be used.",
+  "  --no-color                            Turn off color.",
+  "  --color                               Force color",
+  "  -h, --help                            display help for command",
+  "",
+]
+`;
+
+exports[`Validate cli > app suggest [ 'sug' ] 2`] = `""`;
+
+exports[`Validate cli > app suggest [ 'sug' ] 3`] = `""`;
+
+exports[`Validate cli > app suggest [ 'sug', '--stdin', '-d=en_us', '-v' ] 1`] = `[]`;
+
+exports[`Validate cli > app suggest [ 'sug', '--stdin', '-d=en_us', '-v' ] 2`] = `
+"mexico:
+ - Mexico      -    1 en_us
+ - medico      -  100 en_us
+ - medic       -  190 en_us
+ - melic       -  190 en_us
+ - mesic       -  190 en_us
+ - metic       -  190 en_us
+ - Mexican     -  191 en_us
+ - Mexico's    -  191 en_us"
+`;
+
+exports[`Validate cli > app suggest [ 'sug', '--stdin', '-d=en_us', '-v' ] 3`] = `""`;
+
+exports[`Validate cli > app suggest [ 'sug', 'dutch', '-d=en_us', …(3) ] 1`] = `[]`;
+
+exports[`Validate cli > app suggest [ 'sug', 'dutch', '-d=en_us', …(3) ] 2`] = `
+"dutch:
+ - dutch    -    0 en-gb, en_us
+ - Dutch    -    1 en_us"
+`;
+
+exports[`Validate cli > app suggest [ 'sug', 'dutch', '-d=en_us', …(3) ] 3`] = `""`;
+
+exports[`Validate cli > app suggest [ 'sug', 'dutch', …(3) ] 1`] = `[]`;
+
+exports[`Validate cli > app suggest [ 'sug', 'dutch', …(3) ] 2`] = `
+"dutch:
+ - dutch    -    0 en_us
+ - Dutch    -    1 en_us"
+`;
+
+exports[`Validate cli > app suggest [ 'sug', 'dutch', …(3) ] 3`] = `""`;
+
+exports[`Validate cli > app suggest [ 'sug', 'dutch', …(3) ] 4`] = `[]`;
+
+exports[`Validate cli > app suggest [ 'sug', 'dutch', …(3) ] 5`] = `
+"dutch:
+ - dutch    -    0 en_us
+ - Dutch    -    1 en_us"
+`;
+
+exports[`Validate cli > app suggest [ 'sug', 'dutch', …(3) ] 6`] = `""`;
+
+exports[`Validate cli > app suggest [ 'sug', 'dutch', …(4) ] 1`] = `[]`;
+
+exports[`Validate cli > app suggest [ 'sug', 'dutch', …(4) ] 2`] = `
+"dutch:
+ - dutch    -    0 en-gb, en_us
+ - Dutch    -    1 en_us"
+`;
+
+exports[`Validate cli > app suggest [ 'sug', 'dutch', …(4) ] 3`] = `""`;
+
+exports[`Validate cli > app suggest [ 'sug', 'mexico', '-d=en_us' ] 1`] = `[]`;
+
+exports[`Validate cli > app suggest [ 'sug', 'mexico', '-d=en_us' ] 2`] = `
+"mexico:
+ - Mexico
+ - medico
+ - medic
+ - melic
+ - mesic
+ - metic
+ - Mexican
+ - Mexico's"
+`;
+
+exports[`Validate cli > app suggest [ 'sug', 'mexico', '-d=en_us' ] 3`] = `""`;
+
+exports[`Validate cli > app suggest [ 'sug', 'mexico', '-d=en_us', '-v' ] 1`] = `[]`;
+
+exports[`Validate cli > app suggest [ 'sug', 'mexico', '-d=en_us', '-v' ] 2`] = `
+"mexico:
+ - Mexico      -    1 en_us
+ - medico      -  100 en_us
+ - medic       -  190 en_us
+ - melic       -  190 en_us
+ - mesic       -  190 en_us
+ - metic       -  190 en_us
+ - Mexican     -  191 en_us
+ - Mexico's    -  191 en_us"
+`;
+
+exports[`Validate cli > app suggest [ 'sug', 'mexico', '-d=en_us', '-v' ] 3`] = `""`;
+
+exports[`Validate cli > app suggest [ 'sug', 'mexico', '-d=en_us', …(2) ] 1`] = `[]`;
+
+exports[`Validate cli > app suggest [ 'sug', 'mexico', '-d=en_us', …(2) ] 2`] = `
+"mexico:
+ <no suggestions>"
+`;
+
+exports[`Validate cli > app suggest [ 'sug', 'mexico', '-d=en_us', …(2) ] 3`] = `""`;
+
+exports[`Validate cli > app suggest [ 'sug', 'mexico', '-d=en-gb' ] 1`] = `[]`;
+
+exports[`Validate cli > app suggest [ 'sug', 'mexico', '-d=en-gb' ] 2`] = `
+"mexico:
+ - mexico
+ - medico
+ - mexico's
+ - mexican
+ - medicos
+ - medich
+ - medici
+ - medics
+ - melick"
+`;
+
+exports[`Validate cli > app suggest [ 'sug', 'mexico', '-d=en-gb' ] 3`] = `""`;
+
+exports[`Validate cli > app suggest [ 'sug', 'mexico', '-d=en-us' ] 1`] = `[]`;
+
+exports[`Validate cli > app suggest [ 'sug', 'mexico', '-d=en-us' ] 2`] = `""`;
+
+exports[`Validate cli > app suggest [ 'sug', 'mexico', '-d=en-us' ] 3`] = `"Unknown dictionary: \\"en-us\\""`;
