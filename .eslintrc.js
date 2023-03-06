@@ -32,6 +32,7 @@ const config = {
         'docs/docsV2/**',
         'integration-tests/repositories/**',
         'packages/*/fixtures/**',
+        'packages/*/esm/**',
         'test-fixtures/**',
         'test-packages/*/test-cspell-eslint-plugin',
         'test-packages/*/test-cspell-eslint-plugin/**',
