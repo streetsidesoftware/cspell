@@ -559,10 +559,17 @@ export function clearCachedSettingsFiles(): void {
     return gcl().clearCachedSettingsFiles();
 }
 
+const nestedConfigDirectories: Record<string, true> = {
+    '.vscode': true,
+    '.config': true,
+};
+
 function resolveGlobRoot(settings: CSpellSettingsWST, pathToSettingsFile: string): string {
     const settingsFileDirRaw = path.dirname(pathToSettingsFile);
-    const isVSCode = path.basename(settingsFileDirRaw) === '.vscode';
-    const settingsFileDir = isVSCode ? path.dirname(settingsFileDirRaw) : settingsFileDirRaw;
+    const settingsFileDirName = path.basename(settingsFileDirRaw);
+    const isNestedConfig = settingsFileDirName in nestedConfigDirectories;
+    const isVSCode = settingsFileDirName === '.vscode';
+    const settingsFileDir = isNestedConfig ? path.dirname(settingsFileDirRaw) : settingsFileDirRaw;
     const envGlobRoot = process.env[ENV_CSPELL_GLOB_ROOT];
     const defaultGlobRoot = envGlobRoot ?? '${cwd}';
     const rawRoot =
