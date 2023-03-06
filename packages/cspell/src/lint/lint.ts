@@ -16,11 +16,12 @@ import type { Logger, ValidationIssue } from 'cspell-lib';
 import * as cspell from 'cspell-lib';
 import * as path from 'path';
 import { format } from 'util';
-import { URI } from 'vscode-uri';
 
+import { npmPackage } from '../../lib/pkgInfo.cjs';
+import { URI } from '../../lib/uri.cjs';
 import { getFeatureFlags } from '../featureFlags/index.js';
-import type { CreateCacheSettings, CSpellLintResultCache } from '../util/cache.js';
-import { calcCacheSettings, createCache } from '../util/cache.js';
+import type { CreateCacheSettings, CSpellLintResultCache } from '../util/cache/index.js';
+import { calcCacheSettings, createCache } from '../util/cache/index.js';
 import { CheckFailed, toApplicationError, toError } from '../util/errors.js';
 import type { ConfigInfo, FileResult, ReadFileInfoResult } from '../util/fileHelper.js';
 import {
@@ -47,8 +48,7 @@ import { loadReporters, mergeReporters } from '../util/reporters.js';
 import { getTimeMeasurer } from '../util/timer.js';
 import * as util from '../util/util.js';
 import type { LintRequest } from './LintRequest.js';
-// eslint-disable-next-line @typescript-eslint/no-var-requires
-const npmPackage = require('../../package.json');
+
 const version = npmPackage.version;
 
 const BATCH_SIZE = 8;
@@ -169,7 +169,7 @@ export async function runLint(cfg: LintRequest): Promise<RunResult> {
         try {
             const { showSuggestions: generateSuggestions, validateDirectives } = cfg.options;
             const numSuggestions = configInfo.config.numSuggestions ?? 5;
-            const validateOptions = { generateSuggestions, numSuggestions, validateDirectives };
+            const validateOptions = util.clean({ generateSuggestions, numSuggestions, validateDirectives });
             const r = await cspell.spellCheckDocument(doc, validateOptions, configInfo.config);
             spellResult = r;
             result.processed = r.checked;
@@ -214,7 +214,7 @@ export async function runLint(cfg: LintRequest): Promise<RunResult> {
         const context = cfg.showContext
             ? extractContext(tdo, cfg.showContext)
             : { text: tdo.line.text.trimEnd(), offset: tdo.line.offset };
-        return { ...tdo, context };
+        return util.clean({ ...tdo, context });
     }
 
     async function processFiles(
@@ -236,16 +236,18 @@ export async function runLint(cfg: LintRequest): Promise<RunResult> {
             });
 
         const emitProgressComplete = (filename: string, fileNum: number, fileCount: number, result: FileResult) =>
-            reporter.progress({
-                type: 'ProgressFileComplete',
-                fileNum,
-                fileCount,
-                filename,
-                elapsedTimeMs: result?.elapsedTimeMs,
-                processed: result?.processed,
-                numErrors: result?.issues.length || result?.errors,
-                cached: result?.cached,
-            });
+            reporter.progress(
+                util.clean({
+                    type: 'ProgressFileComplete',
+                    fileNum,
+                    fileCount,
+                    filename,
+                    elapsedTimeMs: result?.elapsedTimeMs,
+                    processed: result?.processed,
+                    numErrors: result?.issues.length || result?.errors,
+                    cached: result?.cached,
+                })
+            );
 
         function* prefetchFiles(files: string[]) {
             const iter = prefetchIterable(
@@ -377,12 +379,12 @@ export async function runLint(cfg: LintRequest): Promise<RunResult> {
         if (cfg.options.defaultConfiguration !== undefined) {
             configInfo.config.loadDefaultConfiguration = cfg.options.defaultConfiguration;
         }
-        const reporterConfig: ReporterConfiguration = {
+        const reporterConfig: ReporterConfiguration = util.clean({
             maxNumberOfProblems: configInfo.config.maxNumberOfProblems,
             maxDuplicateProblems: configInfo.config.maxDuplicateProblems,
             minWordLength: configInfo.config.minWordLength,
             ...cfg.options,
-        };
+        });
 
         const reporters = cfg.options.reporter ?? configInfo.config.reporters;
 
@@ -475,7 +477,7 @@ async function determineGlobs(configInfo: ConfigInfo, cfg: LintRequest): Promise
     const cliGlobs: string[] = cfg.fileGlobs;
     const allGlobs: Glob[] = cliGlobs.length ? cliGlobs : configInfo.config.files || [];
     const combinedGlobs = await normalizeFileOrGlobsToRoot(allGlobs, cfg.root);
-    const cliExcludeGlobs = extractPatterns(cfg.excludes).map((p) => p.glob);
+    const cliExcludeGlobs = extractPatterns(cfg.excludes).map((p) => p.glob as Glob);
     const normalizedExcludes = normalizeGlobsToRoot(cliExcludeGlobs, cfg.root, true);
     const includeGlobs = combinedGlobs.filter((g) => !g.startsWith('!'));
     const excludeGlobs = combinedGlobs.filter((g) => g.startsWith('!')).concat(normalizedExcludes);

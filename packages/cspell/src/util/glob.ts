@@ -7,6 +7,8 @@ import { promises as fs } from 'fs';
 import * as path from 'path';
 import { posix } from 'path';
 
+import { clean } from './util.js';
+
 /**
  * This is a subset of IOptions from 'glob'.
  */
@@ -31,7 +33,14 @@ export async function globP(pattern: string | string[], options?: GlobOptions): 
     const onlyFiles = options?.nodir;
     const dot = options?.dot;
     const patterns = typeof pattern === 'string' ? [pattern] : pattern;
-    const useOptions: FastGlobOptions = { cwd, onlyFiles, dot, ignore, absolute: true, followSymbolicLinks: false };
+    const useOptions: FastGlobOptions = clean({
+        cwd,
+        onlyFiles,
+        dot,
+        ignore,
+        absolute: true,
+        followSymbolicLinks: false,
+    });
 
     const compare = new Intl.Collator('en').compare;
     const absolutePaths = (await glob(patterns, useOptions)).sort(compare);

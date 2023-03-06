@@ -10,8 +10,8 @@ import chalk from 'chalk';
 import type { ImportError, SpellingDictionaryLoadError } from 'cspell-lib';
 import { isSpellingDictionaryLoadError } from 'cspell-lib';
 import * as path from 'path';
-import { URI } from 'vscode-uri';
 
+import { URI } from '../lib/uri.cjs';
 import type { LinterCliOptions } from './options.js';
 import type { FinalizedReporter } from './util/reporters.js';
 

@@ -6,8 +6,9 @@
         "module": "CommonJS",
         "moduleResolution": "node16",
         "rootDir": "src",
-        "outDir": "dist/cjs",
+        "outDir": "dist",
         "types": ["node"]
     },
-    "include": ["src"]
+    "include": ["src"],
+    "references": [{ "path": "./lib" }]
 }

@@ -94,7 +94,7 @@ export interface SuggestionOptions extends BaseOptions {
     /**
      * List of dictionaries to use. If specified, only that list of dictionaries will be used.
      */
-    dictionaries?: string[];
+    dictionaries?: string[] | undefined;
 
     /**
      * The number of suggestions to make.
@@ -118,7 +118,7 @@ export interface SuggestionOptions extends BaseOptions {
     /**
      * Use stdin for the input
      */
-    useStdin?: boolean;
+    useStdin?: boolean | undefined;
 
     /**
      * Use REPL interface for making suggestions.
