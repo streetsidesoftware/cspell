@@ -44,6 +44,8 @@ runs:
       with:
         value: |
           packages/*/dist
+          packages/*/esm
+          packages/*/lib
           integration-tests/dist
           test-packages/*/dist
           test-packages/*/*/dist
@@ -59,6 +61,7 @@ runs:
             'integration-tests/src/**/*.ts',
             'integration-tests/tsconfig*.json',
             'packages/**/tsconfig*.json',
+            'packages/*/lib/**/*.cts',
             'packages/*/src/**/*.cjs',
             'packages/*/src/**/*.cts',
             'packages/*/src/**/*.js',
