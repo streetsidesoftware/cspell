@@ -18,10 +18,13 @@
     }
   },
   "files": [
+    "bin.js",
     "bin.mjs",
     "dist",
-    "!dist/esm/**/*.js",
-    "!dist/esm/**/*.ts",
+    "lib/**/*.cjs",
+    "esm",
+    "!esm/**/*.js",
+    "!esm/**/*.ts",
     "!**/*.tsbuildInfo",
     "!**/__mocks__",
     "!**/test/**",
@@ -30,8 +33,8 @@
     "!**/*.map"
   ],
   "scripts": {
-    "clean": "shx rm -rf dist dist.* coverage .tsbuildinfo",
-    "build": "tsc -b . && ts2mjs dist.esm && pnpm run build:api",
+    "clean": "shx rm -rf dist esm coverage .tsbuildinfo",
+    "build": "tsc -b . && ts2mjs esm && pnpm run build:api",
     "build:api": "rollup -c rollup.config.mjs",
     "build:cjs": "tsc -p tsconfig.cjs.json",
     "build:esm": "tsc -p tsconfig.esm.json",
