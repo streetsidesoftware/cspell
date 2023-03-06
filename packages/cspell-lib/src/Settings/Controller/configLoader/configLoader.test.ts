@@ -409,11 +409,12 @@ describe('Validate search/load config files', () => {
     }
 
     test.each`
-        file                               | expectedConfig
-        ${samplesSrc}                      | ${cfg(readError(samplesSrc))}
-        ${s('bug-fixes')}                  | ${cfg(readError(s('bug-fixes')))}
-        ${s('linked/cspell.config.js')}    | ${cfg(s('linked/cspell.config.js'))}
-        ${s('js-config/cspell.config.js')} | ${cfg(s('js-config/cspell.config.js'))}
+        file                                          | expectedConfig
+        ${samplesSrc}                                 | ${cfg(readError(samplesSrc))}
+        ${s('bug-fixes')}                             | ${cfg(readError(s('bug-fixes')))}
+        ${s('linked/cspell.config.js')}               | ${cfg(s('linked/cspell.config.js'))}
+        ${s('dot-config/.config/cspell.config.yaml')} | ${cfg(s('dot-config/.config/cspell.config.yaml'), { name: 'Nested in .config', globRoot: s('dot-config') })}
+        ${s('js-config/cspell.config.js')}            | ${cfg(s('js-config/cspell.config.js'))}
     `('Load from $file', async ({ file, expectedConfig }: TestLoadConfig) => {
         const searchResult = await loadConfig(file);
         expect(searchResult).toEqual(oc(expectedConfig));
@@ -422,11 +423,12 @@ describe('Validate search/load config files', () => {
     });
 
     test.each`
-        file                               | expectedConfig
-        ${samplesSrc}                      | ${cfg(readError(samplesSrc))}
-        ${s('bug-fixes')}                  | ${cfg(readError(s('bug-fixes')))}
-        ${s('linked/cspell.config.js')}    | ${cfg(s('linked/cspell.config.js'))}
-        ${s('js-config/cspell.config.js')} | ${cfg(s('js-config/cspell.config.js'))}
+        file                                          | expectedConfig
+        ${samplesSrc}                                 | ${cfg(readError(samplesSrc))}
+        ${s('bug-fixes')}                             | ${cfg(readError(s('bug-fixes')))}
+        ${s('linked/cspell.config.js')}               | ${cfg(s('linked/cspell.config.js'))}
+        ${s('dot-config/.config/cspell.config.yaml')} | ${cfg(s('dot-config/.config/cspell.config.yaml'), { name: 'Nested in .config', globRoot: s('dot-config') })}
+        ${s('js-config/cspell.config.js')}            | ${cfg(s('js-config/cspell.config.js'))}
     `('Load sync from $file', ({ file, expectedConfig }: TestLoadConfig) => {
         const searchResult = loadConfigSync(file);
         expect(searchResult).toEqual(oc(expectedConfig));
