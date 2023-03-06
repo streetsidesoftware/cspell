@@ -8,35 +8,33 @@
     "cspell-esm": "bin.mjs"
   },
   "type": "commonjs",
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
-  "module": "esm/index.mjs",
+  "main": "dist/cjs/index.js",
+  "types": "dist/cjs/index.d.ts",
+  "module": "dist/esm/index.mjs",
   "exports": {
     ".": {
-      "import": "./esm/index.mjs",
-      "require": "./dist/index.js"
+      "import": "./dist/esm/index.mjs",
+      "require": "./dist/cjs/index.js"
     },
     "./app": {
-      "import": "./esm/app.mjs",
-      "require": "./dist/app.js"
+      "import": "./dist/esm/app.mjs",
+      "require": "./dist/cjs/app.js"
     },
     "./bin": {
       "import": "./bin.mjs",
       "require": "./bin.js"
     },
     "./application": {
-      "import": "./esm/application.mjs",
-      "require": "./dist/application.js"
+      "import": "./dist/esm/application.mjs",
+      "require": "./dist/cjs/application.js"
     }
   },
   "files": [
     "bin.js",
     "bin.mjs",
     "dist",
-    "lib/**/*.cjs",
-    "esm",
-    "!esm/**/*.js",
-    "!esm/**/*.ts",
+    "!dist/esm/**/*.js",
+    "!dist/esm/**/*.ts",
     "!**/*.tsbuildInfo",
     "!**/__mocks__",
     "!**/test/**",
@@ -45,12 +43,13 @@
     "!**/*.map"
   ],
   "scripts": {
-    "clean": "shx rm -rf dist esm coverage .tsbuildinfo",
-    "build": "tsc -b . && ts2mjs esm && pnpm run build:api",
+    "clean": "shx rm -rf dist esm coverage temp .tsbuildinfo",
+    "build": "tsc -b . && ts2mjs dist/esm && pnpm run build:api",
     "build:api": "rollup -c rollup.config.mjs",
     "build:cjs": "tsc -b tsconfig.cjs.json",
     "build:esm": "tsc -b tsconfig.esm.json",
-    "build:esm:ts2mjs": "tsc -b tsconfig.esm.json && ts2mjs esm",
+    "build:esm:ts2mjs": "tsc -b tsconfig.esm.json && ts2mjs dist/esm",
+    "build:lib": "tsc -b src/lib/tsconfig.json",
     "build:readme": "pnpm build:readme:help",
     "build:readme:help": "pnpm build:readme:help:lint && pnpm build:readme:help:trace && inject-markdown README.md && prettier -w README.md",
     "build:readme:help:lint": "./bin.js lint --help > static/help-lint.txt",

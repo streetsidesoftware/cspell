@@ -1,13 +1,13 @@
 {
-    "extends": "../../../tsconfig.cjs.json",
+    "extends": "../../../../tsconfig.cjs.json",
     "compilerOptions": {
         "allowJs": false,
         "composite": true,
-        "tsBuildInfoFile": "../dist/compile.lib.tsbuildInfo",
+        "tsBuildInfoFile": "../../temp/compile.lib.tsbuildInfo",
         "module": "CommonJS",
         "moduleResolution": "node16",
         "rootDir": ".",
-        "outDir": ".",
+        "outDir": "../../dist/lib",
         "types": ["node"]
     },
     "files": ["./pkgInfo.cts", "./uri.cts", "file-entry-cache.cts"]

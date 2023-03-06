@@ -7,10 +7,11 @@ import { afterEach, describe, expect, test, vi } from 'vitest';
 
 import * as App from './application.js';
 import type { LinterOptions, TraceOptions } from './options.js';
+import { pathPackageRoot, pathSamples } from './test/test.helper.js';
 import { asyncIterableToArray } from './util/async.js';
 import { InMemoryReporter } from './util/InMemoryReporter.js';
 
-const packageRoot = r(__dirname, '..');
+const packageRoot = pathPackageRoot;
 const samplesRoot = r(packageRoot, 'samples');
 const fixturesRoot = r(packageRoot, 'fixtures');
 const featuresRoot = r(fixturesRoot, 'features');
@@ -283,11 +284,11 @@ function sampleTests(): SampleTest[] {
     // cspell:disable
     return [
         {
-            file: path.resolve(path.join(__dirname, '../samples/src/drives.ps1')),
+            file: path.join(pathSamples, './src/drives.ps1'),
             issues: ['Woude', 'Woude'],
         },
         {
-            file: path.resolve(path.join(__dirname, '../../cspell-lib/samples/src/drives.ps1')),
+            file: path.join(pathPackageRoot, '../cspell-lib/samples/src/drives.ps1'),
             issues: ['Woude', 'Woude'],
         },
         { file: 'samples/src/drives.ps1', issues: ['Woude', 'Woude'] },
@@ -311,11 +312,11 @@ function sampleTests(): SampleTest[] {
             issues: ['includegraphics', 'Zotero'],
         },
         {
-            file: path.resolve(path.join(__dirname, '../samples/src/drives.ps1')),
+            file: path.join(pathSamples, './src/drives.ps1'),
             issues: ['Woude', 'Woude'],
         },
         {
-            file: path.resolve(path.join(__dirname, '../../cspell-lib/samples/src/drives.ps1')),
+            file: path.join(pathPackageRoot, '../cspell-lib/samples/src/drives.ps1'),
             issues: ['Woude', 'Woude'],
         },
     ];

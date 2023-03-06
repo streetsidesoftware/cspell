@@ -2,11 +2,12 @@ import * as path from 'path';
 import { describe, expect, test } from 'vitest';
 
 import { CheckFailed } from '../app.js';
+import { pathPackageRoot } from '../test/test.helper.js';
 import { InMemoryReporter } from '../util/InMemoryReporter.js';
 import { runLint } from './lint.js';
 import { LintRequest } from './LintRequest.js';
 
-const root = path.resolve(__dirname, '../..');
+const root = pathPackageRoot;
 const samples = path.resolve(root, 'samples');
 const latexSamples = path.resolve(samples, 'latex');
 const failFastSamples = path.resolve(samples, 'fail-fast');

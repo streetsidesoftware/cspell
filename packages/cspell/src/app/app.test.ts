@@ -9,6 +9,7 @@ import { afterEach, beforeEach, type Constructable, describe, expect, test, vi }
 import { URI } from '../lib/uri.cjs';
 import * as app from './app.js';
 import * as Link from './link.js';
+import { pathPackageRoot } from './test/test.helper.js';
 import { mergeAsyncIterables } from './util/async.js';
 
 vi.mock('readline');
@@ -16,7 +17,7 @@ const mockCreateInterface = vi.mocked(readline.createInterface);
 
 const hideOutput = true;
 
-const projectRoot = Path.join(__dirname, '..');
+const projectRoot = pathPackageRoot;
 const projectRootUri = URI.file(projectRoot);
 
 function argv(...args: string[]): string[] {

@@ -2,6 +2,7 @@ import getStdin from 'get-stdin';
 import * as path from 'path';
 import { afterEach, describe, expect, test, vi } from 'vitest';
 
+import { pathPackageRoot } from '../test/test.helper.js';
 import { asyncIterableToArray } from './async.js';
 import { IOError } from './errors.js';
 import {
@@ -18,7 +19,7 @@ vi.mock('get-stdin', () => ({
     default: vi.fn(),
 }));
 
-const packageRoot = path.join(__dirname, '../..');
+const packageRoot = pathPackageRoot;
 const fixtures = path.join(packageRoot, 'fixtures/fileHelper');
 const fileListFile = path.join(fixtures, 'file-list.txt');
 const fileListFile2 = path.join(fixtures, 'nested/file-list-2.txt');
