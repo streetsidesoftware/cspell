@@ -3,7 +3,7 @@ Repository: php/php-src
 Url: "https://github.com/php/php-src.git"
 Args: ["--config=../../../../config/repositories/php/php-src/cspell.json","**/*.{md,c,h,php}"]
 Lines:
- CSpell: Files checked: 1852, Issues found: 44497 in 1316 files
+ CSpell: Files checked: 1852, Issues found: 44498 in 1316 files
  exit code: 1
 ./CODING_STANDARDS.md:105:23    - Unknown word (intvl)        -- // Could be 'date_intvl_create_from_date_str
 ./CODING_STANDARDS.md:114:8     - Unknown word (setclientencoding) -- pg_setclientencoding
@@ -3950,14 +3950,15 @@ Lines:
 ./ext/opcache/jit/dynasm/dasm_mips.h:24:46     - Unknown word (IMMS)       -- LABEL_PC, DASM_IMM, DASM_IMMS,
 ./ext/opcache/jit/dynasm/dasm_ppc.h:24:46     - Unknown word (IMMSH)      -- LABEL_PC, DASM_IMM, DASM_IMMSH,
 ./ext/opcache/jit/dynasm/dasm_proto.h:24:14     - Unknown word (FDEF)       -- #ifndef DASM_FDEF
+./ext/opcache/jit/dynasm/dasm_x86.h:129:35    - Unknown word (Warray)     -- diagnostic ignored "-Warray-bounds"
 ./ext/opcache/jit/dynasm/dasm_x86.h:22:31     - Unknown word (SETLABEL)   -- VREG, DASM_SPACE, DASM_SETLABEL, DASM_REL_A, DASM_REL
-./ext/opcache/jit/dynasm/dasm_x86.h:323:16    - Unknown word (lpos)       -- int lofs, lpos = b[pos];
-./ext/opcache/jit/dynasm/dasm_x86.h:324:25    - Unknown word (noshrink)   -- if (lpos < 0) goto noshrink; /* Ext global? */
-./ext/opcache/jit/dynasm/dasm_x86.h:367:9     - Unknown word (dasmb)      -- #define dasmb(x) *cp++ = (unsigned
-./ext/opcache/jit/dynasm/dasm_x86.h:372:9     - Unknown word (dasmw)      -- #define dasmw(x) \
-./ext/opcache/jit/dynasm/dasm_x86.h:374:9     - Unknown word (dasmd)      -- #define dasmd(x) \
-./ext/opcache/jit/dynasm/dasm_x86.h:376:9     - Unknown word (dasmq)      -- #define dasmq(x) \
-./ext/opcache/jit/dynasm/dasm_x86.h:383:23    - Unknown word (dasma)      -- static unsigned char *dasma_(unsigned char *cp,
+./ext/opcache/jit/dynasm/dasm_x86.h:330:16    - Unknown word (lpos)       -- int lofs, lpos = b[pos];
+./ext/opcache/jit/dynasm/dasm_x86.h:331:25    - Unknown word (noshrink)   -- if (lpos < 0) goto noshrink; /* Ext global? */
+./ext/opcache/jit/dynasm/dasm_x86.h:374:9     - Unknown word (dasmb)      -- #define dasmb(x) *cp++ = (unsigned
+./ext/opcache/jit/dynasm/dasm_x86.h:379:9     - Unknown word (dasmw)      -- #define dasmw(x) \
+./ext/opcache/jit/dynasm/dasm_x86.h:381:9     - Unknown word (dasmd)      -- #define dasmd(x) \
+./ext/opcache/jit/dynasm/dasm_x86.h:383:9     - Unknown word (dasmq)      -- #define dasmq(x) \
+./ext/opcache/jit/dynasm/dasm_x86.h:390:23    - Unknown word (dasma)      -- static unsigned char *dasma_(unsigned char *cp,
 ./ext/opcache/jit/dynasm/minilua.c:1014:13   - Unknown word (resetstack)       -- static void resetstack(lua_State*L,int status
 ./ext/opcache/jit/dynasm/minilua.c:1039:17   - Unknown word (rawrunprotected)  -- static int luaD_rawrunprotected(lua_State*L,Pfunc f
 ./ext/opcache/jit/dynasm/minilua.c:1050:13   - Unknown word (correctstack)     -- static void correctstack(lua_State*L,TValue*oldstack
@@ -4808,76 +4809,76 @@ Lines:
 ./ext/openssl/openssl.c:2584:5    - Unknown word (keypbe)          -- keypbe (default 3DES)
 ./ext/openssl/openssl.c:2585:14   - Unknown word (caname)          -- friendly_caname
 ./ext/openssl/openssl.c:2588:60   - Unknown word (extracerts)      -- find(Z_ARRVAL_P(args), "extracerts", sizeof("extracerts
-./ext/openssl/openssl.c:2717:21   - Unknown word (zextracerts)     -- zval *zout = NULL, zextracerts, zcert, zpkey;
-./ext/openssl/openssl.c:2717:34   - Unknown word (zcert)           -- NULL, zextracerts, zcert, zpkey;
-./ext/openssl/openssl.c:2782:10   - Unknown word (zextracert)      -- zval zextracert;
+./ext/openssl/openssl.c:2719:21   - Unknown word (zextracerts)     -- zval *zout = NULL, zextracerts, zcert, zpkey;
+./ext/openssl/openssl.c:2719:34   - Unknown word (zcert)           -- NULL, zextracerts, zcert, zpkey;
+./ext/openssl/openssl.c:2784:10   - Unknown word (zextracert)      -- zval zextracert;
 ./ext/openssl/openssl.c:289:33    - Unknown word (BIGNUM)     -- RSA_set0_key(RSA *r, BIGNUM *n, BIGNUM *e, BIGNUM
 ./ext/openssl/openssl.c:306:76    - Unknown word (iqmp)       -- BIGNUM *dmq1, BIGNUM *iqmp)
-./ext/openssl/openssl.c:3292:20   - Unknown word (privkey)         -- /* {{{ Generates a privkey and CSR */
-./ext/openssl/openssl.c:3380:11   - Unknown word (shortnames)      -- bool use_shortnames = 1;
-./ext/openssl/openssl.c:3439:12   - Unknown word (tpubkey)         -- EVP_PKEY *tpubkey = php_openssl_extract
-./ext/openssl/openssl.c:3466:65   - Unknown word (rwflag)          -- *buf, int size, int rwflag, void *userdata)
-./ext/openssl/openssl.c:3499:10   - Unknown word (zphrase)         -- zval * zphrase;
-./ext/openssl/openssl.c:3676:8    - Unknown word (randfile)        -- char *randfile = php_openssl_conf_get
-./ext/openssl/openssl.c:3676:84   - Unknown word (RANDFILE)        -- req->section_name, "RANDFILE");
-./ext/openssl/openssl.c:3689:16   - Unknown word (paramgen)        -- if (EVP_PKEY_paramgen_init(ctx) <= 0) {
-./ext/openssl/openssl.c:3826:2    - Unknown word (OSSL)            -- OSSL_PARAM *params = NULL
-./ext/openssl/openssl.c:3868:15   - Unknown word (fromdata)        -- if (EVP_PKEY_fromdata_init(ctx) <= 0 ||
-./ext/openssl/openssl.c:3869:43   - Unknown word (KEYPAIR)         -- ctx, &pkey, EVP_PKEY_KEYPAIR, params) <= 0) {
-./ext/openssl/openssl.c:4072:54   - Unknown word (CONSTTIME)       -- time, priv_key, BN_FLG_CONSTTIME);
+./ext/openssl/openssl.c:3294:20   - Unknown word (privkey)         -- /* {{{ Generates a privkey and CSR */
+./ext/openssl/openssl.c:3382:11   - Unknown word (shortnames)      -- bool use_shortnames = 1;
+./ext/openssl/openssl.c:3441:12   - Unknown word (tpubkey)         -- EVP_PKEY *tpubkey = php_openssl_extract
+./ext/openssl/openssl.c:3468:65   - Unknown word (rwflag)          -- *buf, int size, int rwflag, void *userdata)
+./ext/openssl/openssl.c:3501:10   - Unknown word (zphrase)         -- zval * zphrase;
+./ext/openssl/openssl.c:3678:8    - Unknown word (randfile)        -- char *randfile = php_openssl_conf_get
+./ext/openssl/openssl.c:3678:84   - Unknown word (RANDFILE)        -- req->section_name, "RANDFILE");
+./ext/openssl/openssl.c:3691:16   - Unknown word (paramgen)        -- if (EVP_PKEY_paramgen_init(ctx) <= 0) {
+./ext/openssl/openssl.c:3828:2    - Unknown word (OSSL)            -- OSSL_PARAM *params = NULL
+./ext/openssl/openssl.c:3870:15   - Unknown word (fromdata)        -- if (EVP_PKEY_fromdata_init(ctx) <= 0 ||
+./ext/openssl/openssl.c:3871:43   - Unknown word (KEYPAIR)         -- ctx, &pkey, EVP_PKEY_KEYPAIR, params) <= 0) {
+./ext/openssl/openssl.c:4074:54   - Unknown word (CONSTTIME)       -- time, priv_key, BN_FLG_CONSTTIME);
 ./ext/openssl/openssl.c:40:18     - Unknown word (winutil)    -- # include "win32/winutil.h"
-./ext/openssl/openssl.c:4227:53   - Unknown word (eckey)           -- init_legacy_ec(EC_KEY *eckey, zval *data, bool *is
-./ext/openssl/openssl.c:4734:15   - Unknown word (pbio)            -- unsigned int pbio_len;
-./ext/openssl/openssl.c:5061:74   - Unknown word (ECDH)            -- remote and local DH or ECDH key */
-./ext/openssl/openssl.c:5178:8    - Unknown word (Verifys)         -- /* {{{ Verifys that the data block
-./ext/openssl/openssl.c:5186:21   - Unknown word (datain)          -- BIO * in = NULL, * datain = NULL, * dataout =
-./ext/openssl/openssl.c:5186:38   - Unknown word (dataout)         -- * datain = NULL, * dataout = NULL, * p7bout  =
-./ext/openssl/openssl.c:5192:9    - Unknown word (signersfilename) -- char * signersfilename = NULL;
-./ext/openssl/openssl.c:5194:9    - Unknown word (datafilename)    -- char * datafilename = NULL;
-./ext/openssl/openssl.c:5196:11   - Unknown word (bfilename)       -- char * p7bfilename = NULL;
-./ext/openssl/openssl.c:5258:9    - Unknown word (certout)         -- BIO *certout;
-./ext/openssl/openssl.c:5308:79   - Unknown word (recipcerts)      -- the certificates in recipcerts and output the result
-./ext/openssl/openssl.c:5311:24   - Unknown word (zheaders)        -- zval * zrecipcerts, * zheaders = NULL;
-./ext/openssl/openssl.c:5311:9    - Unknown word (zrecipcerts)     -- zval * zrecipcerts, * zheaders = NULL;
-./ext/openssl/openssl.c:5319:12   - Unknown word (cipherid)        -- zend_long cipherid = PHP_OPENSSL_CIPHER
-./ext/openssl/openssl.c:5321:9    - Unknown word (infilename)      -- char * infilename = NULL;
-./ext/openssl/openssl.c:5323:9    - Unknown word (outfilename)     -- char * outfilename = NULL;
-./ext/openssl/openssl.c:5328:46   - Unknown word (ppza)            -- parameters(ZEND_NUM_ARGS(), "ppza!|ll", &infilename,
-./ext/openssl/openssl.c:5447:22   - Unknown word (crls)            -- STACK_OF(X509_CRL) *crls = NULL;
-./ext/openssl/openssl.c:5540:61   - Unknown word (signcert)        -- file named infile with signcert/signkey and output the
-./ext/openssl/openssl.c:5540:70   - Unknown word (signkey)         -- infile with signcert/signkey and output the result
-./ext/openssl/openssl.c:5547:8    - Unknown word (zprivkey)        -- zval *zprivkey, * zheaders;
-./ext/openssl/openssl.c:5559:9    - Unknown word (extracertsfilename) -- char * extracertsfilename = NULL;
-./ext/openssl/openssl.c:5660:118  - Unknown word (recipcert)          -- file name outfilename.  recipcert is a CERT for one of
-./ext/openssl/openssl.c:5660:165  - Unknown word (recipkey)           -- one of the recipients. recipkey specifies the private
-./ext/openssl/openssl.c:5747:24   - Unknown word (sigbio)             -- BIO *certout = NULL, *sigbio = NULL;
+./ext/openssl/openssl.c:4229:53   - Unknown word (eckey)           -- init_legacy_ec(EC_KEY *eckey, zval *data, bool *is
+./ext/openssl/openssl.c:4736:15   - Unknown word (pbio)            -- unsigned int pbio_len;
+./ext/openssl/openssl.c:5063:74   - Unknown word (ECDH)            -- remote and local DH or ECDH key */
+./ext/openssl/openssl.c:5180:8    - Unknown word (Verifys)         -- /* {{{ Verifys that the data block
+./ext/openssl/openssl.c:5188:21   - Unknown word (datain)          -- BIO * in = NULL, * datain = NULL, * dataout =
+./ext/openssl/openssl.c:5188:38   - Unknown word (dataout)         -- * datain = NULL, * dataout = NULL, * p7bout  =
+./ext/openssl/openssl.c:5194:9    - Unknown word (signersfilename) -- char * signersfilename = NULL;
+./ext/openssl/openssl.c:5196:9    - Unknown word (datafilename)    -- char * datafilename = NULL;
+./ext/openssl/openssl.c:5198:11   - Unknown word (bfilename)       -- char * p7bfilename = NULL;
+./ext/openssl/openssl.c:5260:9    - Unknown word (certout)         -- BIO *certout;
+./ext/openssl/openssl.c:5314:79   - Unknown word (recipcerts)      -- the certificates in recipcerts and output the result
+./ext/openssl/openssl.c:5317:24   - Unknown word (zheaders)        -- zval * zrecipcerts, * zheaders = NULL;
+./ext/openssl/openssl.c:5317:9    - Unknown word (zrecipcerts)     -- zval * zrecipcerts, * zheaders = NULL;
+./ext/openssl/openssl.c:5325:12   - Unknown word (cipherid)        -- zend_long cipherid = PHP_OPENSSL_CIPHER
+./ext/openssl/openssl.c:5327:9    - Unknown word (infilename)      -- char * infilename = NULL;
+./ext/openssl/openssl.c:5329:9    - Unknown word (outfilename)     -- char * outfilename = NULL;
+./ext/openssl/openssl.c:5334:46   - Unknown word (ppza)            -- parameters(ZEND_NUM_ARGS(), "ppza!|ll", &infilename,
+./ext/openssl/openssl.c:5453:22   - Unknown word (crls)            -- STACK_OF(X509_CRL) *crls = NULL;
+./ext/openssl/openssl.c:5546:61   - Unknown word (signcert)        -- file named infile with signcert/signkey and output the
+./ext/openssl/openssl.c:5546:70   - Unknown word (signkey)         -- infile with signcert/signkey and output the result
+./ext/openssl/openssl.c:5553:8    - Unknown word (zprivkey)        -- zval *zprivkey, * zheaders;
+./ext/openssl/openssl.c:5565:9    - Unknown word (extracertsfilename) -- char * extracertsfilename = NULL;
+./ext/openssl/openssl.c:5666:118  - Unknown word (recipcert)          -- file name outfilename.  recipcert is a CERT for one of
+./ext/openssl/openssl.c:5666:165  - Unknown word (recipkey)           -- one of the recipients. recipkey specifies the private
+./ext/openssl/openssl.c:5753:24   - Unknown word (sigbio)             -- BIO *certout = NULL, *sigbio = NULL;
 ./ext/openssl/openssl.c:604:53    - Unknown word (calist)     -- setup_verify(zval * calist, uint32_t arg_num);
-./ext/openssl/openssl.c:6804:27   - Unknown word (sealdata)           -- *pubkeys, *pubkey, *sealdata, *ekeys, *iv = NULL
-./ext/openssl/openssl.c:6804:38   - Unknown word (ekeys)              -- pubkey, *sealdata, *ekeys, *iv = NULL;
-./ext/openssl/openssl.c:6804:8    - Unknown word (pubkeys)            -- zval *pubkeys, *pubkey, *sealdata
-./ext/openssl/openssl.c:6805:13   - Unknown word (pubkeysht)          -- HashTable *pubkeysht;
-./ext/openssl/openssl.c:6806:13   - Unknown word (pkeys)              -- EVP_PKEY **pkeys;
-./ext/openssl/openssl.c:6807:22   - Unknown word (eksl)               -- int i, len1, len2, *eksl, nkeys, iv_len;
-./ext/openssl/openssl.c:6816:46   - Unknown word (szzas)              -- parameters(ZEND_NUM_ARGS(), "szzas|z", &data, &data_len
-./ext/openssl/openssl.c:6830:19   - Unknown word (cipherbyname)       -- cipher = EVP_get_cipherbyname(method);
+./ext/openssl/openssl.c:6814:27   - Unknown word (sealdata)           -- *pubkeys, *pubkey, *sealdata, *ekeys, *iv = NULL
+./ext/openssl/openssl.c:6814:38   - Unknown word (ekeys)              -- pubkey, *sealdata, *ekeys, *iv = NULL;
+./ext/openssl/openssl.c:6814:8    - Unknown word (pubkeys)            -- zval *pubkeys, *pubkey, *sealdata
+./ext/openssl/openssl.c:6815:13   - Unknown word (pubkeysht)          -- HashTable *pubkeysht;
+./ext/openssl/openssl.c:6816:13   - Unknown word (pkeys)              -- EVP_PKEY **pkeys;
+./ext/openssl/openssl.c:6817:22   - Unknown word (eksl)               -- int i, len1, len2, *eksl, nkeys, iv_len;
+./ext/openssl/openssl.c:6826:46   - Unknown word (szzas)              -- parameters(ZEND_NUM_ARGS(), "szzas|z", &data, &data_len
+./ext/openssl/openssl.c:6840:19   - Unknown word (cipherbyname)       -- cipher = EVP_get_cipherbyname(method);
 ./ext/openssl/openssl.c:689:62    - Unknown word (timestr)    -- time_t(ASN1_UTCTIME * timestr) /* {{{ */
-./ext/openssl/openssl.c:6930:18   - Unknown word (opendata)           -- zval *privkey, *opendata;
-./ext/openssl/openssl.c:6937:9    - Unknown word (ekey)               -- char * ekey;
-./ext/openssl/openssl.c:6943:46   - Unknown word (szszs)              -- parameters(ZEND_NUM_ARGS(), "szszs|s!", &data, &data_len
+./ext/openssl/openssl.c:6940:18   - Unknown word (opendata)           -- zval *privkey, *opendata;
+./ext/openssl/openssl.c:6947:9    - Unknown word (ekey)               -- char * ekey;
+./ext/openssl/openssl.c:6953:46   - Unknown word (szszs)              -- parameters(ZEND_NUM_ARGS(), "szszs|s!", &data, &data_len
 ./ext/openssl/openssl.c:699:12    - Unknown word (thetime)    -- struct tm thetime;
 ./ext/openssl/openssl.c:700:9     - Unknown word (strbuf)     -- char * strbuf;
 ./ext/openssl/openssl.c:701:9     - Unknown word (thestr)     -- char * thestr;
 ./ext/openssl/openssl.c:702:7     - Unknown word (gmadjust)   -- long gmadjust = 0;
 ./ext/openssl/openssl.c:705:89    - Unknown word (GENERALIZEDTIME) -- type(timestr) != V_ASN1_GENERALIZEDTIME) {
-./ext/openssl/openssl.c:7106:85   - Unknown word (binhex)             -- method, returns raw or binhex encoded string */
-./ext/openssl/openssl.c:7183:10   - Unknown word (CIPH)               -- * EVP_CIPH_OCB_MODE, because LibreSSL
-./ext/openssl/openssl.c:7196:13   - Unknown word (chacha)             -- # ifdef NID_chacha20_poly1305
-./ext/openssl/openssl.c:7281:16   - Unknown word (ppassword)          -- const char **ppassword, size_t *ppassword_len
-./ext/openssl/openssl.c:7354:17   - Unknown word (poutbuf)            -- zend_string **poutbuf, int *poutlen, const
-./ext/openssl/openssl.c:7354:31   - Unknown word (poutlen)            -- string **poutbuf, int *poutlen, const char *data, size
-./ext/openssl/openssl.c:7377:43   - Unknown word (verifycation)       -- NULL, E_WARNING, "Tag verifycation failed");
-./ext/openssl/openssl.c:7494:50   - Unknown word (lszsl)              -- ZEND_NUM_ARGS(), "sss|lszsl", &data, &data_len,
-./ext/openssl/openssl.c:7714:8    - Unknown word (zstrong)            -- zval *zstrong_result_returned = NULL
+./ext/openssl/openssl.c:7116:85   - Unknown word (binhex)             -- method, returns raw or binhex encoded string */
+./ext/openssl/openssl.c:7193:10   - Unknown word (CIPH)               -- * EVP_CIPH_OCB_MODE, because LibreSSL
+./ext/openssl/openssl.c:7206:13   - Unknown word (chacha)             -- # ifdef NID_chacha20_poly1305
+./ext/openssl/openssl.c:7291:16   - Unknown word (ppassword)          -- const char **ppassword, size_t *ppassword_len
+./ext/openssl/openssl.c:7364:17   - Unknown word (poutbuf)            -- zend_string **poutbuf, int *poutlen, const
+./ext/openssl/openssl.c:7364:31   - Unknown word (poutlen)            -- string **poutbuf, int *poutlen, const char *data, size
+./ext/openssl/openssl.c:7387:43   - Unknown word (verifycation)       -- NULL, E_WARNING, "Tag verifycation failed");
+./ext/openssl/openssl.c:7504:50   - Unknown word (lszsl)              -- ZEND_NUM_ARGS(), "sss|lszsl", &data, &data_len,
+./ext/openssl/openssl.c:7724:8    - Unknown word (zstrong)            -- zval *zstrong_result_returned = NULL
 ./ext/openssl/openssl.c:775:65    - Unknown word (overcorrect)     -- Otherwise, we need to overcorrect and
 ./ext/openssl/openssl.c:793:13    - Unknown word (nconf)           -- X509V3_set_nconf(&ctx, config);
 ./ext/openssl/openssl.c:810:14    - Unknown word (NCONF)           -- char *str = NCONF_get_string(conf, group
@@ -7147,9 +7148,9 @@ Lines:
 ./ext/phar/tar.c:993:8     - Unknown word (nostub)        -- goto nostub;
 ./ext/phar/util.c:1510:11   - Unknown word (tempsig)    -- size_t tempsig;
 ./ext/phar/util.c:1513:10   - Unknown word (pfile)      -- char *pfile;
-./ext/phar/util.c:2025:12   - Unknown word (newmanifest) -- HashTable newmanifest;
-./ext/phar/util.c:2027:23   - Unknown word (objphar)     -- phar_archive_object *objphar;
-./ext/phar/util.c:2070:21   - Unknown word (newpphar)    -- phar_archive_data *newpphar;
+./ext/phar/util.c:2033:12   - Unknown word (newmanifest) -- HashTable newmanifest;
+./ext/phar/util.c:2035:23   - Unknown word (objphar)     -- phar_archive_object *objphar;
+./ext/phar/util.c:2078:21   - Unknown word (newpphar)    -- phar_archive_data *newpphar;
 ./ext/phar/util.c:37:30     - Unknown word (signverify) -- int phar_call_openssl_signverify(int is_sign, php_stream
 ./ext/phar/zip.c:1124:21   - Unknown word (applysignature) -- static int phar_zip_applysignature(phar_archive_data *phar
 ./ext/phar/zip.c:1209:8    - Unknown word (temperr)        -- char *temperr = NULL;
@@ -8352,25 +8353,25 @@ Lines:
 ./ext/standard/md5.c:14:14     - Unknown word (Lachlan)    -- | Lachlan Roche
 ./ext/standard/md5.c:15:14     - Unknown word (Alessandro) -- | Alessandro Astarita <aleast@capri
 ./ext/standard/md5.c:15:25     - Unknown word (Astarita)   -- Alessandro Astarita <aleast@capri.it>
-./ext/standard/metaphone.c:103:4     - Unknown word (accesssing) -- * accesssing the array directly.
-./ext/standard/metaphone.c:136:4     - Unknown word (phonize)    -- /* phonize one letter
-./ext/standard/metaphone.c:140:9     - Unknown word (Phonize)    -- #define Phonize(c) { \
-./ext/standard/metaphone.c:161:9     - Unknown word (Isbreak)    -- #define Isbreak(c) (!isalpha(c))
-./ext/standard/metaphone.c:166:36    - Unknown word (phonization) -- /* point in the phonization we're at. */
+./ext/standard/metaphone.c:100:9     - Unknown word (MAKESOFT)   -- #define MAKESOFT(c) (encode(c) & 8)
+./ext/standard/metaphone.c:103:9     - Unknown word (NOGHTOF)    -- #define NOGHTOF(c) (encode(c) & 16
+./ext/standard/metaphone.c:110:4     - Unknown word (accesssing) -- * accesssing the array directly.
+./ext/standard/metaphone.c:143:4     - Unknown word (phonize)    -- /* phonize one letter
+./ext/standard/metaphone.c:147:9     - Unknown word (Phonize)    -- #define Phonize(c) { \
+./ext/standard/metaphone.c:168:9     - Unknown word (Isbreak)    -- #define Isbreak(c) (!isalpha(c))
+./ext/standard/metaphone.c:173:36    - Unknown word (phonization) -- /* point in the phonization we're at. */
 ./ext/standard/metaphone.c:18:52     - Unknown word (Schwern)    -- Metaphone-1.96" by Michael G Schwern <schwern@pobox.com>
-./ext/standard/metaphone.c:256:15    - Unknown word (metaphoning) -- /* On to the metaphoning */
-./ext/standard/metaphone.c:260:42    - Unknown word (eariler)     -- letters to skip because an eariler encoding handled
-./ext/standard/metaphone.c:267:29    - Unknown word (phonome)     -- skip the C.  So the phonome SCI invades both S and
-./ext/standard/metaphone.c:334:24    - Unknown word (GNED)        -- * else dropped if -GNED, -GN,
+./ext/standard/metaphone.c:263:15    - Unknown word (metaphoning) -- /* On to the metaphoning */
+./ext/standard/metaphone.c:267:42    - Unknown word (eariler)     -- letters to skip because an eariler encoding handled
+./ext/standard/metaphone.c:274:29    - Unknown word (phonome)     -- skip the C.  So the phonome SCI invades both S and
+./ext/standard/metaphone.c:341:24    - Unknown word (GNED)        -- * else dropped if -GNED, -GN,
 ./ext/standard/metaphone.c:68:21     - Unknown word (metachar)   -- /* this used to be "metachar.h" */
 ./ext/standard/metaphone.c:71:4      - Unknown word (Metachar)   -- /* Metachar.h ... little bits about
-./ext/standard/metaphone.c:84:41     - Unknown word (AEIOU)      -- (ENCODE(c) & 1)		/* AEIOU */
-./ext/standard/metaphone.c:84:9      - Unknown word (isvowel)    -- #define isvowel(c) (ENCODE(c) & 1)
-./ext/standard/metaphone.c:87:41     - Unknown word (FJMNR)      -- (ENCODE(c) & 2)		/* FJMNR */
-./ext/standard/metaphone.c:90:41     - Unknown word (CGPST)      -- (ENCODE(c) & 4)		/* CGPST */
-./ext/standard/metaphone.c:90:9      - Unknown word (AFFECTH)    -- #define AFFECTH(c) (ENCODE(c) & 4)
-./ext/standard/metaphone.c:93:9      - Unknown word (MAKESOFT)   -- #define MAKESOFT(c) (ENCODE(c) & 8)
-./ext/standard/metaphone.c:96:9      - Unknown word (NOGHTOF)    -- #define NOGHTOF(c) (ENCODE(c) & 16
+./ext/standard/metaphone.c:91:41     - Unknown word (AEIOU)      -- (encode(c) & 1)		/* AEIOU */
+./ext/standard/metaphone.c:91:9      - Unknown word (isvowel)    -- #define isvowel(c) (encode(c) & 1)
+./ext/standard/metaphone.c:94:41     - Unknown word (FJMNR)      -- (encode(c) & 2)		/* FJMNR */
+./ext/standard/metaphone.c:97:41     - Unknown word (CGPST)      -- (encode(c) & 4)		/* CGPST */
+./ext/standard/metaphone.c:97:9      - Unknown word (AFFECTH)    -- #define AFFECTH(c) (encode(c) & 4)
 ./ext/standard/microtime.c:102:12    - Unknown word (pwho)       -- zend_long pwho = 0;
 ./ext/standard/net.c:138:4     - Unknown word (ifacename)  -- 'ifacename' => array(
 ./ext/standard/net.c:146:10    - Unknown word (netmnask)   -- 'netmnask' => '255.0.0.0',

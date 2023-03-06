@@ -3,7 +3,7 @@ Repository: RustPython/RustPython
 Url: "https://github.com/RustPython/RustPython.git"
 Args: ["**"]
 Lines:
- CSpell: Files checked: 716, Issues found: 3920 in 369 files
+ CSpell: Files checked: 716, Issues found: 3923 in 369 files
  exit code: 1
 ./Cargo.toml:132:62    - Unknown word (redoxer)    -- to compile/check with redoxer
 ./Cargo.toml:18:44     - Unknown word (pylib)      -- derive", "jit", "vm", "pylib", "stdlib", "wasm/lib
@@ -595,7 +595,8 @@ Lines:
 ./stdlib/src/grp.rs:81:8      - Unknown word (getgrall)   -- fn getgrall(vm: &VirtualMachine
 ./stdlib/src/grp.rs:82:67     - Unknown word (fgetgrent)  -- thread safe. Could use fgetgrent_r, but this is easier
 ./stdlib/src/grp.rs:83:16     - Unknown word (GETGRALL)   -- static GETGRALL: parking_lot::Mutex
-./stdlib/src/hashlib.rs:27:9      - Unknown word (usedforsecurity) -- usedforsecurity: bool,
+./stdlib/src/hashlib.rs:146:43    - Unknown word (HASHXOF)         -- "hashlib", name = "HASHXOF")]
+./stdlib/src/hashlib.rs:28:9      - Unknown word (usedforsecurity) -- usedforsecurity: bool,
 ./stdlib/src/json/machinery.rs:44:7      - Unknown word (fedcba)     -- //fedcba9876543210_fedcba987
 ./stdlib/src/json/machinery.rs:5:30      - Unknown word (LOJKINE)    -- Copyright (c) 2018, Ophir LOJKINE
 ./stdlib/src/json/machinery.rs:82:55     - Unknown word (uxxxx)      -- outside the BMP get 2 '\uxxxx' sequences to represent
@@ -816,16 +817,16 @@ Lines:
 ./vm/src/builtins/complex.rs:389:8     - Unknown word (rpow)       -- fn rpow(
 ./vm/src/builtins/complex.rs:57:61     - Unknown word (coereced)   -- complex originally or coereced into one
 ./vm/src/builtins/descriptor.rs:94:33     - Unknown word (objclass)   -- "<descriptor>.__objclass__.__qualname__ is not
-./vm/src/builtins/dict.rs:1037:17   - Unknown word (dictview)             -- ref dictview @ Self => {
-./vm/src/builtins/dict.rs:1052:18   - Unknown word (dictkeys)             -- ref _dictkeys @ PyDictKeys => {}
+./vm/src/builtins/dict.rs:1058:17   - Unknown word (dictview)             -- ref dictview @ Self => {
+./vm/src/builtins/dict.rs:1073:18   - Unknown word (dictkeys)             -- ref _dictkeys @ PyDictKeys => {}
 ./vm/src/builtins/dict.rs:14:5      - Unknown word (dictdatatype) -- dictdatatype::{self, DictKey},
-./vm/src/builtins/dict.rs:370:13    - Unknown word (dicted)       -- let dicted: Result<PyDictRef,
-./vm/src/builtins/dict.rs:946:10    - Unknown word (keyiterator)  -- dict_keyiterator_type,
-./vm/src/builtins/dict.rs:947:10    - Unknown word (reversekeyiterator) -- dict_reversekeyiterator_type,
-./vm/src/builtins/dict.rs:959:10    - Unknown word (valueiterator)      -- dict_valueiterator_type,
-./vm/src/builtins/dict.rs:960:10    - Unknown word (reversevalueiterator) -- dict_reversevalueiterator_type,
-./vm/src/builtins/dict.rs:972:10    - Unknown word (itemiterator)         -- dict_itemiterator_type,
-./vm/src/builtins/dict.rs:973:10    - Unknown word (reverseitemiterator)  -- dict_reverseitemiterator_type,
+./vm/src/builtins/dict.rs:371:13    - Unknown word (dicted)       -- let dicted: Result<PyDictRef,
+./vm/src/builtins/dict.rs:967:10    - Unknown word (keyiterator)  -- dict_keyiterator_type,
+./vm/src/builtins/dict.rs:968:10    - Unknown word (reversekeyiterator) -- dict_reversekeyiterator_type,
+./vm/src/builtins/dict.rs:980:10    - Unknown word (valueiterator)      -- dict_valueiterator_type,
+./vm/src/builtins/dict.rs:981:10    - Unknown word (reversevalueiterator) -- dict_reversevalueiterator_type,
+./vm/src/builtins/dict.rs:993:10    - Unknown word (itemiterator)         -- dict_itemiterator_type,
+./vm/src/builtins/dict.rs:994:10    - Unknown word (reverseitemiterator)  -- dict_reverseitemiterator_type,
 ./vm/src/builtins/float.rs:198:8     - Unknown word (getformat)  -- fn getformat(spec: PyStrRef, vm:
 ./vm/src/builtins/float.rs:284:8     - Unknown word (rdivmod)    -- fn rdivmod(
 ./vm/src/builtins/float.rs:302:8     - Unknown word (rfloordiv)  -- fn rfloordiv(
