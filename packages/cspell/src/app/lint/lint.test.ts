@@ -16,6 +16,12 @@ const filesToCheck = path.resolve(root, 'fixtures/features/file-list/files-to-ch
 const filesToCheckWithMissing = path.resolve(root, 'fixtures/features/file-list/files-to-check-missing.txt');
 const configSamples = path.resolve(samples, 'config');
 
+// console.error('%o', {
+//     root,
+//     samples,
+//     filesToCheckWithMissing,
+// });
+
 const oc = expect.objectContaining;
 const j = path.join;
 
@@ -52,8 +58,8 @@ describe('Linter Validation Tests', () => {
         ${['**/*.md']}      | ${{ root, config: j(root, 'cspell.json'), fileLists: [filesToCheck] }}                                 | ${oc({ errors: 0, files: 1 })} | ${oc({ errorCount: 0, errors: [], issues: [] })}
         ${['**/*.ts']}      | ${{ root, config: j(root, 'cspell.json'), fileLists: [filesToCheck] }}                                 | ${oc({ errors: 0, files: 1 })} | ${oc({ errorCount: 0, errors: [], issues: [] })}
         ${[]}               | ${{ root, config: j(root, 'cspell.json'), fileLists: ['missing-file.txt'] }}                           | ${oc({ errors: 1, files: 0 })} | ${oc({ errorCount: 1, errors: [expect.any(Error)], issues: [] })}
-        ${['**']}           | ${{ root, config: j(root, 'cspell.json'), fileLists: [filesToCheckWithMissing] }}                      | ${oc({ errors: 0, files: 3 })} | ${oc({ errorCount: 0, errors: [], issues: [] })}
-        ${['**']}           | ${{ root, config: j(root, 'cspell.json'), fileLists: [filesToCheckWithMissing], mustFindFiles: true }} | ${oc({ errors: 1, files: 3 })} | ${oc({ errorCount: 1, errors: [expect.anything()], issues: [] })}
+        ${[]}               | ${{ root, config: j(root, 'cspell.json'), fileLists: [filesToCheckWithMissing] }}                      | ${oc({ errors: 0, files: 3 })} | ${oc({ errorCount: 0, errors: [], issues: [] })}
+        ${[]}               | ${{ root, config: j(root, 'cspell.json'), fileLists: [filesToCheckWithMissing], mustFindFiles: true }} | ${oc({ errors: 1, files: 3 })} | ${oc({ errorCount: 1, errors: [expect.anything()], issues: [] })}
         ${["'**'"]}         | ${{ root, config: j(root, 'cspell.json'), mustFindFiles: true }}                                       | ${oc({ errors: 0, files: 0 })} | ${oc({ errorCount: 1, errors: [expect.any(CheckFailed)], issues: [] })}
         ${['**']}           | ${{ root: j(configSamples, 'yaml-regexp') }}                                                           | ${oc({ errors: 0, files: 2 })} | ${oc({ errorCount: 0, errors: [], issues: [oc({ text: 'checkedd' })] })}
     `('runLint $files $options', async ({ files, options, expectedRunResult, expectedReport }) => {

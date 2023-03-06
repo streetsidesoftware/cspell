@@ -127,7 +127,7 @@ exports[`Validate cli > app 'LICENSE' Expect Error: undefined 3`] = `
 exports[`Validate cli > app 'bad config' Expect Error: [Function CheckFailed] 1`] = `[]`;
 
 exports[`Validate cli > app 'bad config' Expect Error: [Function CheckFailed] 2`] = `
-"error	Configuration Error: Failed to read config file: \\"./src/app.test.ts\\"
+"error	Configuration Error: Failed to read config file: \\"./src/app/app.test.ts\\"
 error	CSpell: Files checked: 0, Issues found: 0 in 0 files"
 `;
 
@@ -321,7 +321,7 @@ error	CSpell: Files checked: 1, Issues found: 0 in 0 files"
 
 exports[`Validate cli > app 'cspell-bad.json' Expect Error: undefined 3`] = `
 "
-1/1 [90m./src/app.test.ts[39m"
+1/1 [90m./src/app/app.test.ts[39m"
 `;
 
 exports[`Validate cli > app 'cspell-import-missing.json' Expect Error: [Function CheckFailed] 1`] = `[]`;
@@ -343,7 +343,7 @@ info	Options:
 info	    verbose:   Yes
 info	    config:    default
 info	    exclude:   node_modules/**
-info	    files:     src/app.test.ts
+info	    files:     src/app/app.test.ts
 info	    wordsOnly: No
 info	    unique:    No
 info	
@@ -357,6 +357,7 @@ info	    Glob: package-lock.json from ./cspell.json
 info	    Glob: coverage/** from ./cspell.json
 info	    Glob: dist/** from ./cspell.json
 info	    Glob: dist.*/** from ./cspell.json
+info	    Glob: temp/** from ./cspell.json
 info	    Glob: CHANGELOG.md from ./cspell.json
 info	    Glob: package.json from ./cspell.json
 info	    Glob: .cspell.json from ./cspell.json
@@ -364,8 +365,8 @@ info	    Glob: cspell.json from ./cspell.json
 info	    Glob: .vscode/** from ./cspell.json
 info	    Glob: node_modules/** from command line
 info	
-info	Checking: ./src/app.test.ts, File type: auto, Language: default
-info	Checked: ./src/app.test.ts, File type: typescript, Language: en ... Issues: 0 0.00S
+info	Checking: ./src/app/app.test.ts, File type: auto, Language: default
+info	Checked: ./src/app/app.test.ts, File type: typescript, Language: en ... Issues: 0 0.00S
 info	Config file Used: ./cspell.json
 info	Dictionaries Used: companies, filetypes, public-licenses, softwareTerms, workspace, aws, cryptocurrencies, en_us, en-common-misspellings, fullstack, node, npm, svelte, typescript
 error	 0.00ms
@@ -374,7 +375,7 @@ error	CSpell: Files checked: 1, Issues found: 0 in 0 files"
 
 exports[`Validate cli > app 'current_file --verbose' Expect Error: undefined 3`] = `
 "
-1/1 [90m./src/app.test.ts[39m"
+1/1 [90m./src/app/app.test.ts[39m"
 `;
 
 exports[`Validate cli > app 'current_file languageId' Expect Error: undefined 1`] = `[]`;
@@ -386,7 +387,7 @@ error	CSpell: Files checked: 1, Issues found: 0 in 0 files"
 
 exports[`Validate cli > app 'current_file languageId' Expect Error: undefined 3`] = `
 "
-1/1 [90m./src/app.test.ts[39m"
+1/1 [90m./src/app/app.test.ts[39m"
 `;
 
 exports[`Validate cli > app 'current_file' Expect Error: undefined 1`] = `[]`;
@@ -398,7 +399,7 @@ error	CSpell: Files checked: 1, Issues found: 0 in 0 files"
 
 exports[`Validate cli > app 'current_file' Expect Error: undefined 3`] = `
 "
-1/1 [90m./src/app.test.ts[39m"
+1/1 [90m./src/app/app.test.ts[39m"
 `;
 
 exports[`Validate cli > app 'inline suggest' Expect Error: [Function CheckFailed] 1`] = `[]`;
