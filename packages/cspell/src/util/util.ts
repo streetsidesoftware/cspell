@@ -1,3 +1,5 @@
+import type { RemoveUndefined } from './types.js';
+
 // alias for uniqueFilterFnGenerator
 export const uniqueFn = uniqueFilterFnGenerator;
 
@@ -19,13 +21,6 @@ export function uniqueFilterFnGenerator<T>(extractFn?: (v: T) => T): FilterFn<T>
 export function unique<T>(src: T[]): T[] {
     return [...new Set(src)];
 }
-
-/**
- * Make all properties in T required
- */
-type RemoveUndefined<T extends object> = {
-    [P in keyof T]: T[P] extends undefined ? never : T[P];
-};
 
 export function clean<T extends object>(src: T): RemoveUndefined<T> {
     const r = src;

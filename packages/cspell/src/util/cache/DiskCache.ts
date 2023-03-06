@@ -18,11 +18,11 @@ export type CachedFileResult = Omit<FileResult, 'fileInfo' | 'elapsedTimeMs' | '
  */
 interface CachedData {
     /** meta version + suffix */
-    v?: string;
+    v?: string | undefined;
     /** results */
-    r?: CachedFileResult;
+    r?: CachedFileResult | undefined;
     /** dependencies */
-    d?: Dependency[];
+    d?: Dependency[] | undefined;
 }
 
 interface Dependency {

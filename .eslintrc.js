@@ -25,6 +25,7 @@ const config = {
         '**/coverage/**',
         '**/cspell-default.config.js',
         '**/dist/**',
+        '**/dist.*/**',
         '**/node_modules/**',
         '**/.docusaurus/**',
         'docs/_site/**',

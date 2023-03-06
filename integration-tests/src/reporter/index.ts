@@ -1,11 +1,13 @@
 import type { CSpellReporter, Issue, RunResult } from '@cspell/cspell-types';
-import { URI, Utils as UriUtils } from 'vscode-uri';
+import * as vscodeUri from 'vscode-uri';
 
 import { readConfig } from '../config';
 import type { Repository } from '../configDef';
 import { writeSnapshotRaw } from '../snapshots';
 import { generateReport } from './reportGenerator';
 import { stringify } from './stringify';
+
+const { URI, Utils: UriUtils } = vscodeUri;
 
 const noopReporter = () => {
     return;
@@ -46,13 +48,13 @@ export function getReporter(): CSpellReporter {
     return reporter;
 }
 
-function extractRepositoryPath(root: URI): string {
+function extractRepositoryPath(root: vscodeUri.URI): string {
     const b = UriUtils.basename(root);
     const a = UriUtils.basename(UriUtils.dirname(root));
     return [a, b].join('/');
 }
 
-function fetchRepositoryInfo(root: URI): Repository | undefined {
+function fetchRepositoryInfo(root: vscodeUri.URI): Repository | undefined {
     const config = readConfig();
     const reps = new Map(config.repositories.map((r) => [r.path, r]));
     const path = extractRepositoryPath(root);
