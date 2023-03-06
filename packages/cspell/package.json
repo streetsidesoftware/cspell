@@ -8,13 +8,13 @@
     "cspell-esm": "bin.mjs"
   },
   "type": "commonjs",
-  "main": "dist/cjs/index.js",
-  "types": "dist/cjs/index.d.ts",
-  "module": "dist/esm/index.mjs",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "module": "esm/index.mjs",
   "exports": {
     ".": {
-      "import": "./dist/esm/index.mjs",
-      "require": "./dist/cjs/index.js"
+      "import": "./esm/index.mjs",
+      "require": "./dist/index.js"
     }
   },
   "files": [

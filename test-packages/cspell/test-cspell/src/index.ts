@@ -2,7 +2,6 @@ import type { CSpellReporter } from '@cspell/cspell-types';
 import { assert } from 'console';
 import type { CSpellApplicationOptions, Issue, ProgressItem, RunResult } from 'cspell';
 import { checkText, lint, trace } from 'cspell';
-import { run } from 'cspell/dist/app';
 
 async function test() {
     console.log('start');
@@ -10,7 +9,7 @@ async function test() {
     /**
      * The main goal here is to make sure it compiles. The unit tests are validation that it compiled as expected.
      */
-    const functions = [checkText, lint, trace, run];
+    const functions = [checkText, lint, trace];
 
     functions.forEach((fn) => assert(typeof fn === 'function', "typeof %o === 'function'", fn));
 
