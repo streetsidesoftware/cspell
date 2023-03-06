@@ -1,14 +1,14 @@
-import { createFromFile } from 'file-entry-cache';
 import * as path from 'path';
 import { afterEach, beforeEach, describe, expect, type Mock, test, vi } from 'vitest';
 
+import { createFromFile } from '../../../lib/file-entry-cache.cjs';
 import * as fileHelper from '../../util/fileHelper.js';
 import type { CachedFileResult, CSpellCacheMeta } from './DiskCache.js';
 import { __testing__, DiskCache } from './DiskCache.js';
 
 const { calcVersion } = __testing__;
 
-vi.mock('file-entry-cache', () => ({
+vi.mock('../../../lib/file-entry-cache.cjs', () => ({
     createFromFile: vi.fn().mockReturnValue({
         getFileDescriptor: vi.fn(),
         reconcile: vi.fn(),

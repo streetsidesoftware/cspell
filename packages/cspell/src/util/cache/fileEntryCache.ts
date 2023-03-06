@@ -2,12 +2,13 @@
  * This is a wrapper for 'file-entry-cache'
  */
 
-export type { FileDescriptor } from 'file-entry-cache';
-import type { FileEntryCache as FecFileEntryCache } from 'file-entry-cache';
-import file_entry_cache from 'file-entry-cache';
+export type { FileDescriptor } from '../../../lib/file-entry-cache.cjs';
 import { mkdirSync } from 'fs';
 import * as path from 'path';
 import { isMainThread } from 'worker_threads';
+
+import type { FileEntryCache as FecFileEntryCache } from '../../../lib/file-entry-cache.cjs';
+import * as fec from '../../../lib/file-entry-cache.cjs';
 
 export type FileEntryCache = FecFileEntryCache;
 
@@ -15,7 +16,7 @@ export function createFromFile(pathToCache: string, useCheckSum: boolean, useRel
     const absPathToCache = path.resolve(pathToCache);
     const relDir = path.dirname(absPathToCache);
     mkdirSync(relDir, { recursive: true });
-    const create = wrap(() => file_entry_cache.createFromFile(absPathToCache, useCheckSum));
+    const create = wrap(() => fec.createFromFile(absPathToCache, useCheckSum));
     const feCache = create();
     const cacheWrapper: FileEntryCache = {
         get cache() {
