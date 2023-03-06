@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 import { program } from 'commander';
 
-import * as app from './dist.esm/app.mjs';
+import * as app from './esm/app.mjs';
 
 app.run(program, process.argv).catch((e) => {
     if (!(e instanceof program.CommanderError) && !(e instanceof app.CheckFailed)) {
