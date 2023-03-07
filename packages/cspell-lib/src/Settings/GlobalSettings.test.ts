@@ -10,7 +10,8 @@ interface MockConfigStore extends ConfigStore {
     all: unknown;
     path: string;
     size: number;
-    set: (v: unknown) => void;
+    set(v: Record<string, unknown>): void;
+    set(k: string, v: unknown): void;
     has(k: string): boolean;
     get(k: string): unknown;
     delete(k: string): void;
@@ -21,28 +22,36 @@ interface MockConfigStore extends ConfigStore {
 }
 
 function createMockConfigStore() {
-    let _all: unknown = undefined;
-    let _name = 'name';
+    let _all: Record<string, unknown> | undefined = undefined;
     let _path = 'path';
 
     const mock_getAll = vi.fn(() => _all);
-    const mock_setAll = vi.fn((v) => (_all = v));
-    const mock_getPath = vi.fn(() => _path);
+    const mock_set = vi.fn((vk: string | Record<string, unknown>, v?: unknown) => {
+        if (typeof vk === 'string') {
+            (_all = _all || {})[vk] = v;
+            return _all;
+        }
+        _all = vk;
+        return _all;
+    });
+    const mock_getPath = vi.fn(() => {
+        return _path;
+    });
 
-    const store: MockConfigStore = vi.fn((name) => {
-        _name = name;
-        _path = `/User/HOME/.config/${name}.json`;
+    const store: MockConfigStore = vi.fn((id) => {
+        _path = `/User/local/data/.config/configstore/${id}.json`;
+        return store;
     }) as unknown as MockConfigStore;
-    store.prototype.set = mock_setAll;
+    store.set = mock_set;
     Object.defineProperty(store, 'all', {
         get: mock_getAll,
-        set: mock_setAll,
+        set: mock_set,
     });
     Object.defineProperty(store, 'path', {
         get: mock_getPath,
     });
     Object.defineProperty(store, 'mock_getAll', { value: mock_getAll });
-    Object.defineProperty(store, 'mock_setAll', { value: mock_setAll });
+    Object.defineProperty(store, 'mock_setAll', { value: mock_set });
     Object.defineProperty(store, 'mock_getPath', { value: mock_getPath });
 
     return store;
@@ -80,7 +89,7 @@ describe('Validate GlobalSettings', () => {
                 filename: undefined,
             },
         });
-        // mockSetData('version', '0.2.0');
+        mockImpl.set('version', '0.2.0');
         const s2 = getRawGlobalSettings();
         expect(s2).toEqual({
             version: '0.2.0',
@@ -95,6 +104,9 @@ describe('Validate GlobalSettings', () => {
     test('getRawGlobalSettings with Error', () => {
         const mockImpl = createMockConfigStore();
         mockConfigstore.mockImplementation(mockImpl);
+        mockImpl.mock_getAll.mockImplementation(() => {
+            throw new Error('fail');
+        });
         const s = getRawGlobalSettings();
         expect(s).toEqual({
             source: {
@@ -120,7 +132,8 @@ describe('Validate GlobalSettings', () => {
         const mockImpl = createMockConfigStore();
         mockConfigstore.mockImplementation(mockImpl);
         const updated = { import: ['hello'] };
-        mockImpl.mock_setAll.mockImplementation(() => {
+        const mockSet = vi.mocked(mockImpl.set);
+        mockSet.mockImplementation(() => {
             throw new Error('fail');
         });
         const error1 = writeRawGlobalSettings(updated);
