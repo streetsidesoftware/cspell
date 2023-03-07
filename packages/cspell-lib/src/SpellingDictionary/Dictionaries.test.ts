@@ -173,7 +173,6 @@ describe('Validate getDictionary', () => {
         async ({ configFile, expectedErrors }: TestLoadFromConfig) => {
             const settings = await loadConfig(configFile);
             if (!settings) {
-                // eslint-disable-next-line jest/no-conditional-expect
                 expect(settings).toBeDefined();
                 return;
             }
@@ -289,7 +288,8 @@ describe('Validate Refresh', () => {
 
 function tempPath(file: string) {
     const testState = expect.getState();
-    return path.join(__dirname, '../../temp', testState.currentTestName || 'test', file);
+    const testName = (testState.currentTestName || 'test').replace(/[^-a-z0-9]/gi, '_');
+    return path.join(__dirname, '../../temp', testName, file);
 }
 
 function sleep(ms: number): Promise<void> {
