@@ -370,7 +370,7 @@ describe('Validate search/load config files', () => {
         expect(searchResult).toEqual(expect.objectContaining(expectedConfig));
         if (searchResult?.__importRef) {
             const loadResult = await loadConfig(searchResult.__importRef?.filename);
-            // eslint-disable-next-line jest/no-conditional-expect
+
             expect(loadResult).toEqual(searchResult);
         }
         const errors = extractImportErrors(searchResult || {});
