@@ -1,4 +1,5 @@
 import { Trie } from 'cspell-trie-lib';
+import { describe, expect, test } from 'vitest';
 
 import { compareResults } from './helpers';
 import * as suggest from './suggest';

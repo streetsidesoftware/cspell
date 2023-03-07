@@ -1,5 +1,6 @@
 import type { CSpellSettingsWithSourceTrace, CSpellUserSettings, ImportFileRef } from '@cspell/cspell-types';
 import * as path from 'path';
+import { beforeEach, describe, expect, test, vi } from 'vitest';
 
 import { logError, logWarning } from '../../../util/logger';
 import * as URI from '../../../util/Uri';
@@ -36,10 +37,10 @@ const samplesSrc = path.join(samplesDir, 'src');
 const testFixtures = path.join(root, 'test-fixtures');
 const oc = expect.objectContaining;
 
-jest.mock('../../../util/logger');
+vi.mock('../../../util/logger');
 
-const mockedLogError = jest.mocked(logError);
-const mockedLogWarning = jest.mocked(logWarning);
+const mockedLogError = vi.mocked(logError);
+const mockedLogWarning = vi.mocked(logWarning);
 
 describe('Validate CSpellSettingsServer', () => {
     test.each`
@@ -369,7 +370,7 @@ describe('Validate search/load config files', () => {
         expect(searchResult).toEqual(expect.objectContaining(expectedConfig));
         if (searchResult?.__importRef) {
             const loadResult = await loadConfig(searchResult.__importRef?.filename);
-            // eslint-disable-next-line jest/no-conditional-expect
+
             expect(loadResult).toEqual(searchResult);
         }
         const errors = extractImportErrors(searchResult || {});

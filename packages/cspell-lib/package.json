@@ -20,11 +20,13 @@
     "clean-build": "pnpm run clean && pnpm run build",
     "compile": "tsc -p .",
     "watch": "tsc --watch -p .",
-    "coverage": "jest --coverage",
-    "test-watch": "jest --watch",
+    "coverage": "pnpm coverage:vitest && pnpm coverage:fix",
+    "coverage:vitest": "vitest run --coverage",
+    "coverage:fix": "nyc report --temp-dir \"$(pwd)/coverage\" --reporter lcov --report-dir \"$(pwd)/coverage\" --cwd ../..",
+    "test-watch": "vitest",
     "prepublishOnly": "pnpm run clean-build",
-    "test": "jest --maxWorkers=1",
-    "test:update-snapshot": "jest --updateSnapshot"
+    "test": "vitest run",
+    "test:update-snapshot": "vitest run -u"
   },
   "repository": {
     "type": "git",

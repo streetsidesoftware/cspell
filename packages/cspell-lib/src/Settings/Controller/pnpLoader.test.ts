@@ -1,5 +1,6 @@
 import path from 'path';
 import resolveFrom from 'resolve-from';
+import { describe, expect, test } from 'vitest';
 
 import * as Uri from '../../util/Uri';
 import { UnsupportedPnpFile } from './ImportError';

@@ -1,10 +1,12 @@
+import { describe, expect, test, vi } from 'vitest';
+
 import { memorizerWeak } from './memorizerWeak';
 
 describe('memorizer Weak', () => {
     test('memorizer', () => {
         const transform = (...args: (readonly [string])[]) => args.reduce((sum, s) => (sum += s.length), 0);
 
-        const fn = jest.fn(transform);
+        const fn = vi.fn(transform);
 
         const m = memorizerWeak(fn);
 
@@ -30,7 +32,7 @@ describe('memorizer Weak', () => {
             return `${a}: ${ai.toFixed(2)}, ${b}: ${bi?.toFixed(2) || '<>'}`;
         }
 
-        const fn = jest.fn(transform);
+        const fn = vi.fn(transform);
 
         const m = memorizerWeak(fn);
 

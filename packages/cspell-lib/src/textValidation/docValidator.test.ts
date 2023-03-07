@@ -3,6 +3,7 @@ import assert from 'assert';
 import { promises as fs } from 'fs';
 import * as path from 'path';
 import { pathToFileURL } from 'url';
+import { describe, expect, test } from 'vitest';
 
 import type { TextDocument } from '../Models/TextDocument';
 import { createTextDocument } from '../Models/TextDocument';
@@ -204,7 +205,6 @@ describe('shouldCheckDocument', () => {
             if (typeof expected === 'boolean') {
                 expected = { errors: [], shouldCheck: expected };
             }
-            console.log(uri);
             expect(await shouldCheckDocument({ uri }, options, settings)).toEqual(expected);
         }
     );

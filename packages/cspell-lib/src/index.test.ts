@@ -1,3 +1,5 @@
+import { describe, expect, test } from 'vitest';
+
 import * as cspell from './index';
 
 describe('Validate the cspell API', () => {

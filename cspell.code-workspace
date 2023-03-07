@@ -35,32 +35,12 @@
             {
                 "type": "node",
                 "request": "launch",
-                "name": "Test: Jest current-file",
-
-                "program": "${fileWorkspaceFolder}/node_modules/jest/bin/jest.js",
-                "cwd": "${fileWorkspaceFolder}",
-                "args": ["--runInBand", "${fileBasename}"],
-                "console": "integratedTerminal",
-                "internalConsoleOptions": "neverOpen"
-            },
-            {
-                "type": "node",
-                "request": "launch",
-                "name": "Test: Jest Entire Folder",
-                "program": "${fileWorkspaceFolder}/node_modules/jest/bin/jest.js",
-                "cwd": "${fileWorkspaceFolder}",
-                "args": ["--runInBand"],
-                "console": "integratedTerminal",
-                "internalConsoleOptions": "neverOpen"
-            },
-            {
-                "type": "node",
-                "request": "launch",
                 "name": "ViTest: Current Test File",
                 "autoAttachChildProcesses": true,
                 "skipFiles": ["<node_internals>/**", "**/node_modules/**"],
                 "program": "${workspaceRoot:cspell-monorepo}/node_modules/vitest/vitest.mjs",
                 "args": ["run", "${relativeFile}"],
+                "cwd": "${fileWorkspaceFolder}",
                 "smartStep": true,
                 "console": "integratedTerminal"
             }

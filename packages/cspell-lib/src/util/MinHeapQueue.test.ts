@@ -1,3 +1,5 @@
+import { describe, expect, test } from 'vitest';
+
 import { compare } from './Comparable';
 import { __testing__, MinHeapQueue } from './MinHeapQueue';
 

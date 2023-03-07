@@ -1,3 +1,5 @@
+import { describe, expect, test, vi } from 'vitest';
+
 import { callOnce, memorizer, memorizerAll } from './Memorizer';
 
 describe('Validate Memorizer', () => {
@@ -88,12 +90,12 @@ describe('callOnce', () => {
 });
 
 describe('memorizerAll', () => {
-    it('memorizerAll', () => {
+    test('memorizerAll', () => {
         function echo(...a: (string | number | undefined)[]): (string | number | undefined)[] {
             return a;
         }
 
-        const mock = jest.fn(echo);
+        const mock = vi.fn(echo);
         const fn = memorizerAll(mock);
         expect(fn('a')).toEqual(['a']);
         expect(fn('b')).toEqual(['b']);

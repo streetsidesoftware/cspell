@@ -1,4 +1,5 @@
 import * as path from 'path';
+import { describe, expect, test } from 'vitest';
 
 import { loadTextDocument } from '../Models/TextDocument';
 import { loadConfig } from '../Settings';

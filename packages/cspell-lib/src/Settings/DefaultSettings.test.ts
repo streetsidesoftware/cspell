@@ -1,3 +1,5 @@
+import { describe, expect, test } from 'vitest';
+
 import * as DefaultSettings from './DefaultSettings';
 
 describe('Validate Default Settings', () => {

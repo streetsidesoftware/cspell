@@ -1,3 +1,5 @@
+import { describe, expect, test } from 'vitest';
+
 import * as repMap from './repMap';
 
 describe('ReMap Tests', () => {

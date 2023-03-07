@@ -1,3 +1,5 @@
+import { describe, expect, test } from 'vitest';
+
 import { mapRangeBackToOriginalPos, mapRangeToLocal } from './parsedText';
 
 describe('parsedText', () => {

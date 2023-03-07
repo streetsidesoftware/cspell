@@ -1,9 +1,9 @@
 import type { CSpellSettings, CSpellSettingsWithSourceTrace } from '@cspell/cspell-types';
-import ConfigStore from 'configstore';
 import { format } from 'util';
 
 import { isErrnoException } from '../util/errors';
 import { logError } from '../util/logger';
+import { ConfigStore } from './cfgStore';
 
 const packageName = 'cspell';
 
@@ -26,7 +26,10 @@ export function getRawGlobalSettings(): GlobalSettingsWithSource {
     };
 
     try {
+        // console.warn('%o', ConfigStore);
         const cfgStore = new ConfigStore(packageName);
+        // console.warn('%o', cfgStore);
+
         const cfg = cfgStore.all;
         // Only populate globalConf is there are values.
         if (cfg && Object.keys(cfg).length) {

@@ -1,3 +1,5 @@
+import { describe, expect, test } from 'vitest';
+
 import { PairingHeap } from './PairingHeap';
 
 describe('PairingHeap', () => {

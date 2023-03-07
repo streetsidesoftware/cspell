@@ -1,6 +1,7 @@
 import type { TextOffset } from '@cspell/cspell-types';
 import fs from 'fs';
 import Path from 'path';
+import { describe, expect, test } from 'vitest';
 
 import { calculateTextDocumentOffsets } from '../util/text';
 import * as TextRange from '../util/TextRange';

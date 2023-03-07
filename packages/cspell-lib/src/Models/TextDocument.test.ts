@@ -1,3 +1,5 @@
+import { describe, expect, test } from 'vitest';
+
 import * as Uri from '../util/Uri';
 import type { TextDocument } from './TextDocument';
 import { createTextDocument, isTextDocument, updateTextDocument } from './TextDocument';

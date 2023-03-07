@@ -1,10 +1,12 @@
+import { describe, expect, test, vi } from 'vitest';
+
 import { AutoResolveLastNCalls, AutoResolveLRUCache } from './AutoResolveLRUCache';
 import { isRecordEqual } from './util';
 
 describe('AutoResolveLRUCache', () => {
     test('AutoResolveLRUCache', () => {
         const ar = new AutoResolveLRUCache<Record<string, unknown>, string[]>(3, isRecordEqual);
-        const fn = jest.fn((obj: Record<string, unknown>) => Object.keys(obj));
+        const fn = vi.fn((obj: Record<string, unknown>) => Object.keys(obj));
         AutoResolveLRUCache.assertValid(ar);
         expect(ar.get({})).toBe(undefined);
         expect(ar.get({}, fn)).toEqual([]);
@@ -22,7 +24,7 @@ describe('AutoResolveLRUCache', () => {
 
     test('AutoResolveLastNCalls', () => {
         const ar = new AutoResolveLastNCalls<[string], number>(3);
-        const fn = jest.fn(([s]: [string]) => s.length);
+        const fn = vi.fn(([s]: [string]) => s.length);
         expect(ar.get([''])).toBe(undefined);
         AutoResolveLRUCache.assertValid(ar);
         expect(ar.stats()).toEqual({ hits: 0, misses: 1, size: 0, added: 0, removed: 0 });

@@ -1,3 +1,5 @@
+import { describe, expect, test } from 'vitest';
+
 import { FreqCounter } from './FreqCounter';
 
 describe('Validate FreqCounter', () => {

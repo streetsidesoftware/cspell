@@ -1,13 +1,15 @@
+import { beforeEach, describe, expect, test, vi } from 'vitest';
+
 import type { Logger } from './logger';
 import { getLogger, log, logError, logWarning, setLogger } from './logger';
 
 const logger: Logger = {
-    log: jest.fn(),
-    warn: jest.fn(),
-    error: jest.fn(),
+    log: vi.fn(),
+    warn: vi.fn(),
+    error: vi.fn(),
 };
 
-const mockLogger = jest.mocked(logger);
+const mockLogger = vi.mocked(logger);
 
 describe('logger', () => {
     beforeEach(() => {

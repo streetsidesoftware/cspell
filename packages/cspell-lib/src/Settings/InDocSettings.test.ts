@@ -1,4 +1,5 @@
 import type { CSpellSettings, DictionaryDefinitionInline } from '@cspell/cspell-types';
+import { describe, expect, test } from 'vitest';
 
 import * as Text from '../util/text';
 import * as TextRange from '../util/TextRange';

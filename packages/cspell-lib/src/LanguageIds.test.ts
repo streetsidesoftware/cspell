@@ -1,3 +1,5 @@
+import { describe, expect, test } from 'vitest';
+
 import * as LangId from './LanguageIds';
 
 describe('Validate LanguageIds', () => {

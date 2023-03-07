@@ -1,5 +1,6 @@
 import type { CSpellSettings } from '@cspell/cspell-types';
 import { loremIpsum } from 'lorem-ipsum';
+import { describe, expect, test } from 'vitest';
 
 import { mergeSettings } from '../Settings';
 import { getDefaultSettings } from '../Settings/DefaultSettings';
