@@ -1,3 +1,5 @@
+import { describe, expect, test } from 'vitest';
+
 import * as checkText from './checkText';
 import { IncludeExcludeFlag } from './checkText';
 

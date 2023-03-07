@@ -1,4 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import type { Mock } from 'vitest';
+import { vi } from 'vitest';
 
 const data: Record<string, any> = {};
 
@@ -12,9 +14,9 @@ export function setData(keyValue: string | any, value?: any): void {
     Object.assign(data, keyValue);
 }
 
-export const mockSetData = jest.fn(setData);
+export const mockSetData = vi.fn(setData);
 
-export const mockAll = jest.fn(() => data);
+export const mockAll: Mock<[], Record<string, any>> = vi.fn(() => data);
 
 export function clearData(): void {
     for (const key of Object.keys(data)) {
@@ -22,7 +24,7 @@ export function clearData(): void {
     }
 }
 
-export const mockClearData = jest.fn(clearData);
+export const mockClearData = vi.fn(clearData);
 
 export function clearMocks() {
     mockAll.mockClear();
@@ -36,7 +38,7 @@ export function getConfigstoreLocation(id?: string) {
     return `/User/local/data/.config/configstore/${id}.json`;
 }
 
-const mock = jest.fn().mockImplementation((id: string) => {
+const mock = vi.fn().mockImplementation((id: string) => {
     const r = {
         path: getConfigstoreLocation(id),
         set: mockSetData,

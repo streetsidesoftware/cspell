@@ -1,3 +1,5 @@
+import { describe, expect, test } from 'vitest';
+
 import { ImportError, UnsupportedPnpFile, UnsupportedSchema } from './ImportError';
 
 describe('ImportError', () => {

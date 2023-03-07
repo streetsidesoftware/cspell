@@ -1,3 +1,5 @@
+import { describe, expect, test } from 'vitest';
+
 import { PatternRegExp } from './PatternRegExp';
 
 describe('Pattern', () => {

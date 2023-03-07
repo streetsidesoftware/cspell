@@ -1,3 +1,5 @@
+import { describe, expect, test } from 'vitest';
+
 import { concatIterables, toIterableIterator } from './iterableIteratorLib';
 
 describe('Validate Iterable Iterators', () => {

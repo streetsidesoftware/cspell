@@ -1,3 +1,5 @@
+import { describe, expect, test, vi } from 'vitest';
+
 import { memorizeLastCall } from './memorizeLastCall';
 
 describe('memorizeLastCall', () => {
@@ -6,7 +8,7 @@ describe('memorizeLastCall', () => {
             return v * 2;
         }
 
-        const fn = jest.fn(calc);
+        const fn = vi.fn(calc);
         const m = memorizeLastCall(fn);
 
         const calls = [1, 1, 2, 1, 3, 3, 3, 3, 2, 1];
@@ -20,7 +22,7 @@ describe('memorizeLastCall', () => {
             return letter.repeat(repeat);
         }
 
-        const fn = jest.fn(calc);
+        const fn = vi.fn(calc);
         const m = memorizeLastCall(fn);
 
         m('h', 1);

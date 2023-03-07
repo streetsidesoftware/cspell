@@ -1,3 +1,5 @@
+import { describe, expect, test } from 'vitest';
+
 import * as search from './search';
 
 describe('validate the search', () => {

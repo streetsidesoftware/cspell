@@ -1,6 +1,7 @@
 import type { CSpellSettingsWithSourceTrace, CSpellUserSettings } from '@cspell/cspell-types';
 import * as Path from 'path';
 import { posix } from 'path';
+import { describe, expect, test } from 'vitest';
 
 import type { Document } from './Document';
 import { fileToDocument, fileToTextDocument } from './Document/resolveDocument';

@@ -1,3 +1,5 @@
+import { describe, expect, test } from 'vitest';
+
 import { __testing__, catchPromiseError, isErrnoException, isError, toError, UnknownError, wrapCall } from './errors';
 
 class MyError extends Error {

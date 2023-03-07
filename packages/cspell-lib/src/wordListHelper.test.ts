@@ -1,6 +1,8 @@
+import { describe, expect, test, vi } from 'vitest';
+
 import * as wlh from './wordListHelper';
 
-jest.mock('./util/logger');
+vi.mock('./util/logger');
 
 describe('Validate wordListHelper', () => {
     test('tests splitLineIntoWords', () => {

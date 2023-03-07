@@ -1,4 +1,5 @@
 import type { RegExpPatternDefinition } from '@cspell/cspell-types';
+import { describe, expect, test } from 'vitest';
 
 import { isDefined } from '../util/util';
 import { resolvePatterns } from './patterns';

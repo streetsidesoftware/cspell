@@ -1,4 +1,5 @@
 import { createCachingDictionary, createSpellingDictionary } from 'cspell-dictionary';
+import { describe, expect, test } from 'vitest';
 
 import type { SpellingDictionaryOptions } from '../SpellingDictionary';
 import { createCollection } from '../SpellingDictionary';

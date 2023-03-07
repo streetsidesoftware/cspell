@@ -1,24 +1,17 @@
-import Configstore from 'configstore';
 import * as Path from 'path';
+import { afterEach, describe, expect, test, vi } from 'vitest';
 
-// eslint-disable-next-line jest/no-mocks-import
-import {
-    clearData as clearConfigstore,
-    clearMocks,
-    getConfigstoreLocation,
-    mockSetData,
-    setData as setConfigstore,
-} from '../__mocks__/configstore';
+import { getRawGlobalSettings, writeRawGlobalSettings } from './GlobalSettings';
 import { __testing__, addPathsToGlobalImports, listGlobalImports, removePathsFromGlobalImports } from './link';
+
+vi.mock('./GlobalSettings');
 
 const findPackageForCSpellConfig = __testing__.findPackageForCSpellConfig;
 
-jest.mock('configstore');
+const mock_getRawGlobalSettings = vi.mocked(getRawGlobalSettings);
+const mock_writeRawGlobalSettings = vi.mocked(writeRawGlobalSettings);
 
-const mockConfigstore = Configstore as jest.Mock<Configstore>;
-
-const configFileLocation = getConfigstoreLocation();
-
+const configFileLocation = '/Users/home/.config/store';
 const pathPython = require.resolve('@cspell/dict-python/cspell-ext.json');
 const pathCpp = require.resolve('@cspell/dict-cpp/cspell-ext.json');
 const pathHtml = require.resolve('@cspell/dict-html/cspell-ext.json');
@@ -26,13 +19,14 @@ const pathCss = require.resolve('@cspell/dict-css/cspell-ext.json');
 const python = require.resolve('@cspell/dict-python/cspell-ext.json');
 
 describe('Validate Link.ts', () => {
-    beforeEach(() => {
-        mockConfigstore.mockClear();
-        clearMocks();
-        clearConfigstore();
+    afterEach(() => {
+        vi.clearAllMocks();
     });
 
     test('listGlobalImports configstore empty', () => {
+        mock_getRawGlobalSettings.mockReturnValue({
+            source: { filename: undefined, name: 'CSpell Configstore' },
+        });
         const r = listGlobalImports();
         expect(r).toEqual({
             list: [],
@@ -40,12 +34,14 @@ describe('Validate Link.ts', () => {
                 source: { filename: undefined, name: 'CSpell Configstore' },
             },
         });
-        expect(mockSetData).not.toHaveBeenCalled();
+        expect(mock_getRawGlobalSettings).toHaveBeenCalledOnce();
+        expect(mock_writeRawGlobalSettings).not.toHaveBeenCalled();
     });
 
     test('listGlobalImports configstore empty import', () => {
-        setConfigstore({
+        mock_getRawGlobalSettings.mockReturnValue({
             import: [],
+            source: { filename: configFileLocation, name: 'CSpell Configstore' },
         });
         const r = listGlobalImports();
         expect(r).toEqual({
@@ -58,8 +54,9 @@ describe('Validate Link.ts', () => {
     });
 
     test('listGlobalImports with imports', () => {
-        setConfigstore({
+        mock_getRawGlobalSettings.mockReturnValue({
             import: [python],
+            source: { filename: configFileLocation, name: 'CSpell Configstore' },
         });
         const r = listGlobalImports();
         expect(r).toEqual(
@@ -79,8 +76,9 @@ describe('Validate Link.ts', () => {
 
     test('listGlobalImports with import errors', () => {
         const filename = '__not_found_file_.ext';
-        setConfigstore({
+        mock_getRawGlobalSettings.mockReturnValue({
             import: [filename],
+            source: { filename: configFileLocation, name: 'CSpell Configstore' },
         });
         const r = listGlobalImports();
         expect(r).toEqual(
@@ -96,12 +94,14 @@ describe('Validate Link.ts', () => {
                 }),
             })
         );
-        expect(mockSetData).not.toHaveBeenCalled();
+        expect(mock_getRawGlobalSettings).toHaveBeenCalledOnce();
+        expect(mock_writeRawGlobalSettings).not.toHaveBeenCalled();
     });
 
     test('addPathsToGlobalImports', () => {
-        setConfigstore({
+        mock_getRawGlobalSettings.mockReturnValue({
             import: [pathPython, pathCss],
+            source: { filename: configFileLocation, name: 'CSpell Configstore' },
         });
 
         const r = addPathsToGlobalImports([pathCpp, pathPython, pathHtml]);
@@ -115,7 +115,7 @@ describe('Validate Link.ts', () => {
                 expect.objectContaining({ filename: pathHtml }),
             ],
         });
-        expect(mockSetData).toHaveBeenCalledWith({
+        expect(mock_writeRawGlobalSettings).toHaveBeenCalledWith({
             import: [pathPython, pathCss, pathCpp, pathHtml],
         });
     });
@@ -123,8 +123,9 @@ describe('Validate Link.ts', () => {
     test('addPathsToGlobalImports with errors', () => {
         const pathNotFound = '__not_found_file_.ext';
 
-        setConfigstore({
+        mock_getRawGlobalSettings.mockReturnValue({
             import: [pathPython],
+            source: { filename: configFileLocation, name: 'CSpell Configstore' },
         });
 
         const r = addPathsToGlobalImports([pathCpp, pathPython, pathNotFound]);
@@ -142,12 +143,13 @@ describe('Validate Link.ts', () => {
                 }),
             ],
         });
-        expect(mockSetData).not.toHaveBeenCalled();
+        expect(mock_writeRawGlobalSettings).not.toHaveBeenCalled();
     });
 
     test('removePathsFromGlobalImports', () => {
-        setConfigstore({
+        mock_getRawGlobalSettings.mockReturnValue({
             import: [pathCpp, pathPython, pathCss, pathHtml],
+            source: { filename: configFileLocation, name: 'CSpell Configstore' },
         });
 
         const r = removePathsFromGlobalImports([pathCpp, '@cspell/dict-css']);
@@ -158,14 +160,15 @@ describe('Validate Link.ts', () => {
             removed: [pathCpp, pathCss],
         });
 
-        expect(mockSetData).toHaveBeenCalledWith({
+        expect(mock_writeRawGlobalSettings).toHaveBeenCalledWith({
             import: [pathPython, pathHtml],
         });
     });
 
     test('removePathsFromGlobalImports with unknown', () => {
-        setConfigstore({
+        mock_getRawGlobalSettings.mockReturnValue({
             import: [pathCpp, pathPython, pathCss, pathHtml],
+            source: { filename: configFileLocation, name: 'CSpell Configstore' },
         });
 
         const r = removePathsFromGlobalImports([
@@ -182,14 +185,15 @@ describe('Validate Link.ts', () => {
             removed: [pathCpp, pathHtml],
         });
 
-        expect(mockSetData).toHaveBeenCalledWith({
+        expect(mock_writeRawGlobalSettings).toHaveBeenCalledWith({
             import: [pathPython, pathCss],
         });
     });
 
     test('removePathsFromGlobalImports with nothing to remove', () => {
-        setConfigstore({
+        mock_getRawGlobalSettings.mockReturnValue({
             import: [pathCpp, pathPython, pathCss, pathHtml],
+            source: { filename: configFileLocation, name: 'CSpell Configstore' },
         });
 
         const r = removePathsFromGlobalImports(['@cspell/dict-unknown', 'cspell-ext.json', 'python/cspell-ext.json']);
@@ -200,7 +204,7 @@ describe('Validate Link.ts', () => {
             removed: [],
         });
 
-        expect(mockSetData).not.toHaveBeenCalled();
+        expect(mock_writeRawGlobalSettings).not.toHaveBeenCalled();
     });
 
     test('findPackageForCSpellConfig', () => {

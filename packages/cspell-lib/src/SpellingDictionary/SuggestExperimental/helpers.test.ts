@@ -1,3 +1,5 @@
+import { describe, expect, test } from 'vitest';
+
 import type { Feature, SuggestionResult } from './entities';
 import * as helpers from './helpers';
 import { FeatureMap } from './helpers';

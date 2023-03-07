@@ -1,4 +1,5 @@
 import type { DictionaryReference } from '@cspell/cspell-types';
+import { describe, expect, test } from 'vitest';
 
 import { createDictionaryReferenceCollection } from './DictionaryReferenceCollection';
 

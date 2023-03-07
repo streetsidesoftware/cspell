@@ -3,6 +3,7 @@ import type { DictionaryDefinition, DictionaryDefinitionLegacy } from '@cspell/c
 import * as fsp from 'fs/promises';
 import * as os from 'os';
 import * as path from 'path';
+import { describe, expect, test } from 'vitest';
 
 import { isDictionaryDefinitionInlineInternal } from '../Models/CSpellSettingsInternalDef';
 import { getDefaultBundledSettings } from './DefaultSettings';

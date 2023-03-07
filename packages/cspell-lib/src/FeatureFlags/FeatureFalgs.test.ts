@@ -1,3 +1,5 @@
+import { describe, expect, test } from 'vitest';
+
 import type { FeatureFlag } from './FeatureFlags';
 import { FeatureFlags, getSystemFeatureFlags } from './FeatureFlags';
 

@@ -1,3 +1,5 @@
+import { describe, expect, test } from 'vitest';
+
 import type { SuggestionOptions } from './suggestions';
 import { SuggestionError, suggestionsForWord, suggestionsForWords } from './suggestions';
 import { asyncIterableToArray } from './util/util';
@@ -5,8 +7,9 @@ import { asyncIterableToArray } from './util/util';
 const oc = expect.objectContaining;
 const ac = expect.arrayContaining;
 
+const timeout = 20000;
+
 describe('suggestions', () => {
-    jest.setTimeout(20000);
     test.each`
         word       | options                                 | settings                       | expected
         ${'apple'} | ${undefined}                            | ${undefined}                   | ${ac([sug('apple', 0, ['en_us']), sug('Apple', 1, ['en_us', 'companies'])])}
@@ -28,7 +31,8 @@ describe('suggestions', () => {
             expect(resultsAsync).toHaveLength(1);
             expect(resultsAsync[0].word).toEqual(word);
             expect(resultsAsync[0].suggestions).toEqual(expected);
-        }
+        },
+        { timeout }
     );
 
     test.each`
@@ -38,7 +42,8 @@ describe('suggestions', () => {
         'suggestionsForWord ERRORS word: "$word", opts: $options, settings: $settings',
         async ({ word, options, settings }) => {
             await expect(suggestionsForWord(word, options, settings)).rejects.toThrow(SuggestionError);
-        }
+        },
+        { timeout }
     );
 
     function opt(opt: Partial<SuggestionOptions>): SuggestionOptions {

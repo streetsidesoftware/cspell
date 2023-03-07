@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import type { CSpellUserSettings } from '@cspell/cspell-types';
+import { describe, expect, test } from 'vitest';
 
 import { getGlobalSettings } from './Controller/configLoader';
 import { mergeSettings } from './CSpellSettingsServer';

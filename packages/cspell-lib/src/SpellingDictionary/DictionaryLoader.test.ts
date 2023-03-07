@@ -1,4 +1,5 @@
 import * as path from 'path';
+import { describe, expect, test, vi } from 'vitest';
 
 import type {
     DictionaryDefinitionInternal,
@@ -8,7 +9,8 @@ import { mapDictDefToInternal } from '../Settings/DictionarySettings';
 import { clean } from '../util/util';
 import type { LoadOptions } from './DictionaryLoader';
 import { loadDictionary, loadDictionarySync, refreshCacheEntries } from './DictionaryLoader';
-jest.mock('../util/logger');
+
+vi.mock('../util/logger');
 
 const root = path.join(__dirname, '..', '..');
 const samples = path.join(root, 'samples');

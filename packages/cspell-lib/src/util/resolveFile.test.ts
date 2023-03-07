@@ -1,8 +1,8 @@
-/* eslint-disable node/no-missing-require */
 import { parse } from 'comment-json';
 import * as fs from 'fs';
 import * as os from 'os';
 import * as path from 'path';
+import { describe, expect, test } from 'vitest';
 
 import { resolveFile } from './resolveFile';
 
@@ -15,9 +15,13 @@ const defaultConfigLocation = path.dirname(defaultConfigFile);
 
 const config = readConfig(defaultConfigFile);
 
-const ext = path.extname(__filename);
 const notFound = '1fgh0dld6y56cr1wls.r9bp0ckc00ds0gna.json';
 const userNotFound = path.join('~', notFound);
+
+const rr = {
+    '@cspell/dict-cpp/cspell-ext.json': require.resolve('@cspell/dict-cpp/cspell-ext.json'),
+    vitest: require.resolve('vitest'),
+};
 
 describe('Validate resolveFile', () => {
     interface ResolveFileTest {
@@ -27,19 +31,17 @@ describe('Validate resolveFile', () => {
         found: boolean;
     }
     test.each`
-        filename                                      | relativeTo              | expected                                               | found
-        ${__filename}                                 | ${__dirname}            | ${__filename}                                          | ${true}
-        ${'.' + path.sep + path.basename(__filename)} | ${__dirname}            | ${__filename}                                          | ${true}
-        ${'.' + path.sep + notFound}                  | ${__dirname}            | ${path.resolve(__dirname, notFound)}                   | ${false}
-        ${path.relative(__dirname, __filename)}       | ${__dirname}            | ${__filename}                                          | ${true}
-        ${'@cspell/dict-cpp/cspell-ext.json'}         | ${__dirname}            | ${require.resolve('@cspell/dict-cpp/cspell-ext.json')} | ${true}
-        ${'cspell-ext.json'}                          | ${__dirname}            | ${path.resolve(__dirname, 'cspell-ext.json')}          | ${false}
-        ${`./resolveFile${ext}`}                      | ${__dirname}            | ${require.resolve('./resolveFile')}                    | ${true}
-        ${`resolveFile${ext}`}                        | ${__dirname}            | ${require.resolve('./resolveFile')}                    | ${true}
-        ${'jest'}                                     | ${__dirname}            | ${require.resolve('jest')}                             | ${true}
-        ${userNotFound}                               | ${__dirname}            | ${path.resolve(path.join(os.homedir(), notFound))}     | ${false}
-        ${'https://google.com/file.txt'}              | ${__dirname}            | ${'https://google.com/file.txt'}                       | ${true}
-        ${'file.txt'}                                 | ${'https://google.com'} | ${'https://google.com/file.txt'}                       | ${true}
+        filename                                      | relativeTo              | expected                                           | found
+        ${__filename}                                 | ${__dirname}            | ${__filename}                                      | ${true}
+        ${'.' + path.sep + path.basename(__filename)} | ${__dirname}            | ${__filename}                                      | ${true}
+        ${'.' + path.sep + notFound}                  | ${__dirname}            | ${path.resolve(__dirname, notFound)}               | ${false}
+        ${path.relative(__dirname, __filename)}       | ${__dirname}            | ${__filename}                                      | ${true}
+        ${'@cspell/dict-cpp/cspell-ext.json'}         | ${__dirname}            | ${rr['@cspell/dict-cpp/cspell-ext.json']}          | ${true}
+        ${'cspell-ext.json'}                          | ${__dirname}            | ${path.resolve(__dirname, 'cspell-ext.json')}      | ${false}
+        ${'vitest'}                                   | ${__dirname}            | ${rr['vitest']}                                    | ${true}
+        ${userNotFound}                               | ${__dirname}            | ${path.resolve(path.join(os.homedir(), notFound))} | ${false}
+        ${'https://google.com/file.txt'}              | ${__dirname}            | ${'https://google.com/file.txt'}                   | ${true}
+        ${'file.txt'}                                 | ${'https://google.com'} | ${'https://google.com/file.txt'}                   | ${true}
     `('resolveFile "$filename" rel "$relativeTo"', ({ filename, relativeTo, expected, found }: ResolveFileTest) => {
         const r = resolveFile(filename, relativeTo);
         expect(r.filename).toBe(expected);

@@ -1,4 +1,5 @@
 import type { TextOffset } from '@cspell/cspell-types';
+import { describe, expect, test, vi } from 'vitest';
 
 import type { SortedBreaks } from './wordSplitter';
 import { __testing__, split } from './wordSplitter';
@@ -167,7 +168,7 @@ describe('Validate wordSplitter', () => {
             offset: 142,
         };
         const offset = line.offset;
-        const h = jest.fn();
+        const h = vi.fn();
         const hasCalls: string[] = [];
         h.mockImplementation((t) => {
             hasCalls.push(t.text);
@@ -212,7 +213,7 @@ describe('Validate wordSplitter', () => {
         const line = findLine(doc, text);
         const offset = line.offset + line.text.indexOf(text);
         expect(offset).toBeGreaterThan(0);
-        const h = jest.fn();
+        const h = vi.fn();
         const hasCalls: string[] = [];
         h.mockImplementation((t) => {
             hasCalls.push(t.text);

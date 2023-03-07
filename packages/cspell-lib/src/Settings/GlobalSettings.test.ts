@@ -1,4 +1,5 @@
 import Configstore from 'configstore';
+import { beforeEach, describe, expect, test, vi } from 'vitest';
 
 // eslint-disable-next-line jest/no-mocks-import
 import {
@@ -12,9 +13,9 @@ import { getLogger } from '../util/logger';
 import { getGlobalConfigPath, getRawGlobalSettings, writeRawGlobalSettings } from './GlobalSettings';
 
 const logger = getLogger();
-const mockLog = jest.spyOn(logger, 'log').mockImplementation();
-const mockError = jest.spyOn(logger, 'error').mockImplementation();
-const mockConfigstore = jest.mocked(Configstore, { shallow: true });
+const mockLog = vi.spyOn(logger, 'log').mockImplementation(() => undefined);
+const mockError = vi.spyOn(logger, 'error').mockImplementation(() => undefined);
+const mockConfigstore = vi.mocked(Configstore);
 
 describe('Validate GlobalSettings', () => {
     beforeEach(() => {
