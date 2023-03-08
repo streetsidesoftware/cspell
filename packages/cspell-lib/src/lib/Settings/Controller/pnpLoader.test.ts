@@ -2,17 +2,18 @@ import path from 'path';
 import resolveFrom from 'resolve-from';
 import { describe, expect, test } from 'vitest';
 
+import { pathPackageSamples, pathRepoRoot } from '../../../test-util/test.locations';
 import * as Uri from '../../util/Uri';
 import { UnsupportedPnpFile } from './ImportError';
 import { clearPnPGlobalCache, pnpLoader } from './pnpLoader';
 
-const rootCspellLib = path.resolve(path.join(__dirname, '../../..'));
-const root = path.resolve(rootCspellLib, '../..');
+const root = pathRepoRoot;
 const uriTestPackages = Uri.fromFilePath(path.join(root, 'test-packages/yarn'));
-const uriDirectory = Uri.fromFilePath(__dirname);
+const uriSamples = Uri.fromFilePath(pathPackageSamples);
+const uriDirectory = uriSamples;
 const uriYarn2TestMed = Uri.joinPath(uriTestPackages, 'yarn2/test-yarn3-med');
 const uriYarn2TestSci = Uri.joinPath(uriTestPackages, 'yarn2/test-yarn3-sci');
-const uriBadPnp = Uri.joinPath(uriDirectory, '../../../samples/bad-pnp');
+const uriBadPnp = Uri.joinPath(uriSamples, './bad-pnp');
 const uriYarn2TestMedPnp = Uri.joinPath(uriYarn2TestMed, '.pnp.cjs');
 const uriYarn2TestSciPnp = Uri.joinPath(uriYarn2TestSci, '.pnp.cjs');
 

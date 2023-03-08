@@ -2,6 +2,7 @@ import type { TextOffset } from '@cspell/cspell-types';
 import fs from 'fs';
 import Path from 'path';
 import { describe, expect, test } from 'vitest';
+import { pathPackageSamples } from '../../test-util/test.locations';
 
 import { calculateTextDocumentOffsets } from '../util/text';
 import * as TextRange from '../util/TextRange';
@@ -589,4 +590,4 @@ pAqEAuV4DNoxQKKWmhVv+J0ptMWD25Pnpxeq5sXzghfJnslJlQND
 const sampleCode2LF = sampleCodeSrc.replace(/\r?\n/g, '\n');
 const sampleCode2CRLF = sampleCode2LF.replace(/\n/g, '\r\n');
 
-const sampleBug345 = fs.readFileSync(Path.join(__dirname, '../../samples/bug-fixes/bug345.ts'), 'utf-8');
+const sampleBug345 = fs.readFileSync(Path.join(pathPackageSamples, './bug-fixes/bug345.ts'), 'utf-8');

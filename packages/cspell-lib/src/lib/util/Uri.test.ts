@@ -1,7 +1,7 @@
 import { describe, expect, test } from 'vitest';
 import { URI } from 'vscode-uri';
 
-import { extendExpect } from '../test/test.matchers';
+import { extendExpect } from '../../test-util/test.matchers';
 import type { Uri } from './Uri';
 import { from, fromFilePath, fromStdinFilePath, isUri, normalizeDriveLetter, parse, toUri, uriToFilePath } from './Uri';
 

@@ -2,6 +2,7 @@ import type { CSpellUserSettings } from '@cspell/cspell-types';
 import * as path from 'path';
 import { describe, expect, test } from 'vitest';
 
+import { pathPackageRoot, pathPackageSamples } from '../../test-util/test.locations';
 import { createCSpellSettingsInternal as csi } from '../Models/CSpellSettingsInternalDef';
 import {
     __testing__ as __configLoader_testing__,
@@ -16,8 +17,8 @@ import {
 import { calcOverrideSettings, checkFilenameMatchesGlob, getSources, mergeSettings } from './CSpellSettingsServer';
 import { _defaultSettings, getDefaultBundledSettings } from './DefaultSettings';
 
-const rootCspellLib = path.resolve(path.join(__dirname, '../..'));
-const samplesDir = path.resolve(rootCspellLib, 'samples');
+const samplesDir = pathPackageSamples;
+const pathSrc = path.join(pathPackageRoot, 'src');
 const oc = expect.objectContaining;
 
 describe('Validate CSpellSettingsServer', () => {
@@ -178,9 +179,9 @@ describe('Validate CSpellSettingsServer', () => {
 
     test.each`
         filename                                              | relativeTo   | refFilename
-        ${r('../../cspell.config.json')}                      | ${undefined} | ${r('../../cspell.config.json')}
-        ${r('../../cspell.config.json')}                      | ${__dirname} | ${r('../../cspell.config.json')}
-        ${'@cspell/cspell-bundled-dicts/cspell-default.json'} | ${__dirname} | ${require.resolve('@cspell/cspell-bundled-dicts/cspell-default.json')}
+        ${rpr('./cspell.config.json')}                        | ${undefined} | ${rpr('./cspell.config.json')}
+        ${rpr('./cspell.config.json')}                        | ${pathSrc}   | ${rpr('./cspell.config.json')}
+        ${'@cspell/cspell-bundled-dicts/cspell-default.json'} | ${pathSrc}   | ${require.resolve('@cspell/cspell-bundled-dicts/cspell-default.json')}
         ${'@cspell/cspell-bundled-dicts/cspell-default.json'} | ${undefined} | ${require.resolve('@cspell/cspell-bundled-dicts/cspell-default.json')}
     `('tests readSettings $filename $relativeTo', ({ filename, relativeTo, refFilename }) => {
         const settings = readSettings(filename, relativeTo);
@@ -190,28 +191,28 @@ describe('Validate CSpellSettingsServer', () => {
     });
 
     test('tests loading project cspell.json file', () => {
-        const filename = path.join(__dirname, '..', '..', 'samples', 'linked', 'cspell-missing.json');
+        const filename = path.join(pathPackageSamples, 'linked/cspell-missing.json');
         const settings = readSettings(filename);
         expect(Object.keys(settings)).not.toHaveLength(0);
         expect(settings.words).toBeUndefined();
     });
 
     test('tests loading a cSpell.json file', () => {
-        const filename = path.join(__dirname, '..', '..', 'samples', 'linked', 'cspell-import.json');
+        const filename = path.join(pathPackageSamples, 'linked/cspell-import.json');
         const settings = readSettings(filename);
         expect(Object.keys(settings)).not.toHaveLength(0);
         expect(settings.words).toEqual(expect.arrayContaining(['import']));
     });
 
     test('readSettingsFiles cSpell.json', () => {
-        const filename = path.join(__dirname, '..', '..', 'samples', 'linked', 'cspell-import.json');
+        const filename = path.join(pathPackageSamples, 'linked/cspell-import.json');
         const settings = readSettingsFiles([filename]);
         expect(Object.keys(settings)).not.toHaveLength(0);
         expect(settings.words).toEqual(expect.arrayContaining(['import']));
     });
 
     test('tests loading a cSpell.json with multiple imports file', () => {
-        const filename = path.join(__dirname, '..', '..', 'samples', 'linked', 'cspell-imports.json');
+        const filename = path.join(pathPackageSamples, 'linked/cspell-imports.json');
         const settings = readSettings(filename);
         expect(Object.keys(settings)).not.toHaveLength(0);
         expect(settings.words).toEqual(expect.arrayContaining(['import']));
@@ -221,7 +222,7 @@ describe('Validate CSpellSettingsServer', () => {
     });
 
     test('tests loading a cSpell.json with a missing import file', () => {
-        const filename = path.join(__dirname, '..', '..', 'samples', 'linked', 'cspell-import-missing.json');
+        const filename = path.join(pathPackageSamples, 'linked/cspell-import-missing.json');
         const settings = readSettings(filename);
         expect(settings.__importRef?.filename).toBe(path.resolve(filename));
         expect(settings.__imports?.size).toBe(2);
@@ -295,21 +296,21 @@ describe('Validate CSpellSettingsServer', () => {
 
 describe('Validate Overrides', () => {
     test.each`
-        file                               | glob                                      | expected
-        ${'nested/dir/spell.test.ts'}      | ${'nested/**'}                            | ${false /* nested/** tests against the current dir not __dirname */}
-        ${'nested/dir/spell.test.ts'}      | ${{ glob: 'nested/**', root: __dirname }} | ${true /* setting the root to __dirname will allow this to be true. */}
-        ${'nested/dir/spell.test.ts'}      | ${'nested'}                               | ${true}
-        ${'nested/dir/spell.test.ts'}      | ${'*.ts'}                                 | ${true}
-        ${'nested/dir/spell.test.ts'}      | ${'**/*.ts'}                              | ${true}
-        ${'nested/dir/spell.test.ts'}      | ${['**/*.ts']}                            | ${true}
-        ${'nested/dir/spell.test.ts'}      | ${['**/dir/**/*.ts']}                     | ${true}
-        ${'nested/dir/spell.test.js'}      | ${['**/*.ts']}                            | ${false}
-        ${'nested/dir/spell.test.js'}      | ${['*.ts', '*.test.js']}                  | ${true}
-        ${'/cspell-dicts/nl_NL/Dutch.txt'} | ${'**/nl_NL/**'}                          | ${true /* the file is a root filename but the glob is global */}
-        ${'/cspell-dicts/nl_NL/Dutch.txt'} | ${'/**/nl_NL/**'}                         | ${false /* the file is a root filename */}
-        ${'cspell-dicts/nl_NL/Dutch.txt'}  | ${'**/nl_NL/**'}                          | ${true}
+        file                               | glob                                    | expected
+        ${'nested/dir/spell.test.ts'}      | ${'nested/**'}                          | ${false /* nested/** tests against the current dir not `samples` */}
+        ${'nested/dir/spell.test.ts'}      | ${{ glob: 'nested/**', root: rs('.') }} | ${true /* setting the root to `samples` will allow this to be true. */}
+        ${'nested/dir/spell.test.ts'}      | ${'nested'}                             | ${true}
+        ${'nested/dir/spell.test.ts'}      | ${'*.ts'}                               | ${true}
+        ${'nested/dir/spell.test.ts'}      | ${'**/*.ts'}                            | ${true}
+        ${'nested/dir/spell.test.ts'}      | ${['**/*.ts']}                          | ${true}
+        ${'nested/dir/spell.test.ts'}      | ${['**/dir/**/*.ts']}                   | ${true}
+        ${'nested/dir/spell.test.js'}      | ${['**/*.ts']}                          | ${false}
+        ${'nested/dir/spell.test.js'}      | ${['*.ts', '*.test.js']}                | ${true}
+        ${'/cspell-dicts/nl_NL/Dutch.txt'} | ${'**/nl_NL/**'}                        | ${true /* the file is a root filename but the glob is global */}
+        ${'/cspell-dicts/nl_NL/Dutch.txt'} | ${'/**/nl_NL/**'}                       | ${false /* the file is a root filename */}
+        ${'cspell-dicts/nl_NL/Dutch.txt'}  | ${'**/nl_NL/**'}                        | ${true}
     `('checkFilenameMatchesGlob "$file" against "$glob" expect: $expected', ({ file, glob, expected }) => {
-        file = path.resolve(__dirname, file);
+        file = rs(file);
         expect(checkFilenameMatchesGlob(file, glob)).toBe(expected);
     });
 
@@ -319,18 +320,28 @@ describe('Validate Overrides', () => {
         ${'nested/docs/NL/myDoc.lex'} | ${{ languageId: 'lex', language: 'en' }}
         ${'nested/docs/NL/myDoc.txt'} | ${{ languageId: 'plaintext', language: 'en,nl' }}
     `('calcOverrideSettings $file expected $expected', ({ file, expected }) => {
-        file = path.resolve(__dirname, file);
+        file = rs(file);
         const r = calcOverrideSettings(sampleSettings, file);
         expect(r).toEqual(expect.objectContaining(expected));
     });
 });
 
-function p(...parts: string[]): string {
-    return path.join(...parts);
+/**
+ * resolve relative to samples
+ * @param parts - path segments
+ * @returns
+ */
+function rs(...parts: string[]): string {
+    return path.resolve(pathPackageSamples, ...parts);
 }
 
-function r(...parts: string[]): string {
-    return path.resolve(__dirname, p(...parts));
+/**
+ * resolve relative to package root
+ * @param parts - path segments
+ * @returns
+ */
+function rpr(...parts: string[]): string {
+    return path.resolve(pathPackageRoot, ...parts);
 }
 
 const rawSampleSettings: CSpellUserSettings = {

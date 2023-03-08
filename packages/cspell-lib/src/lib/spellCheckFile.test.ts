@@ -3,17 +3,18 @@ import * as Path from 'path';
 import { posix } from 'path';
 import { describe, expect, test } from 'vitest';
 
+import { pathPackageSamples, pathRepoTestFixtures } from '../test-util';
+import { extendExpect } from '../test-util/test.matchers';
 import type { Document } from './Document';
 import { fileToDocument, fileToTextDocument } from './Document/resolveDocument';
 import type { CSpellSettingsInternal } from './Models/CSpellSettingsInternalDef';
 import { ImportError } from './Settings/Controller/ImportError';
 import type { SpellCheckFileOptions, SpellCheckFileResult } from './spellCheckFile';
 import { determineFinalDocumentSettings, spellCheckDocument, spellCheckFile } from './spellCheckFile';
-import { extendExpect } from './test/test.matchers';
 import * as Uri from './util/Uri';
 
-const samples = Path.resolve(__dirname, '../samples');
-const testFixtures = Path.resolve(__dirname, '../../../test-fixtures');
+const samples = pathPackageSamples;
+const testFixtures = pathRepoTestFixtures;
 const hasDriveLetter = /^[A-Z]:\\/i;
 
 const { toEqualCaseInsensitive: expectToEqualCaseInsensitive } = extendExpect(expect);
@@ -55,7 +56,7 @@ describe('Validate Spell Checking Files', () => {
 
 describe('Validate Determine settings', () => {
     function u(filename: string): string {
-        return Uri.toUri(Path.resolve(__dirname, filename)).toString();
+        return Uri.toUri(Path.resolve(pathPackageSamples, filename)).toString();
     }
 
     const doc = fileToDocument;
