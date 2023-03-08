@@ -1,10 +1,9 @@
 {
-    "extends": "../../tsconfig.cjs.json",
-    "compilerOptions": {
-        "skipLibCheck": true,
-        "exactOptionalPropertyTypes": true, // make this true
-        "strictFunctionTypes": false,
-        "outDir": "dist"
-    },
-    "include": ["src/**/*.ts", "src/**/*.test.ts"]
+    "files": [],
+    "references": [
+        { "path": "./tsconfig.cjs.json" },
+        { "path": "./tsconfig.esm.json" },
+        { "path": "./src/lib-cjs" },
+        { "path": "./src/test-util" }
+    ]
 }
