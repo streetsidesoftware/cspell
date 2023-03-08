@@ -216,7 +216,7 @@ describe('Validate Glob resolution', () => {
         );
     });
 
-    test('Using ENV_CSPELL_GLOB_ROOT as __dirname', () => {
+    test('Using ENV_CSPELL_GLOB_ROOT', () => {
         process.env[ENV_CSPELL_GLOB_ROOT] = path.dirname(srcSampleSettingsFilename);
         const settingsV = normalizeSettings(rawSampleSettings, srcSampleSettingsFilename, {});
         const settingsV1 = normalizeSettings(rawSampleSettingsV1, srcSampleSettingsFilename, {});
