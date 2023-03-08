@@ -1,6 +1,7 @@
 import type { PredefinedPatterns, RegExpPatternDefinition } from '@cspell/cspell-types';
 import { parsers } from 'cspell-grammar';
 
+import { pkgDirectory } from '../../lib-cjs/index.cjs';
 import type { CSpellSettingsInternal } from '../Models/CSpellSettingsInternalDef';
 import { createCSpellSettingsInternal } from '../Models/CSpellSettingsInternalDef';
 import { PatternRegExp } from '../Models/PatternRegExp';
@@ -164,7 +165,7 @@ const getSettings = (function () {
 })();
 
 function resolveConfigModule(configModuleName: string) {
-    return resolveFile(configModuleName, __dirname).filename;
+    return resolveFile(configModuleName, pkgDirectory).filename;
 }
 
 function normalizePattern(pat: RegExpPatternDefinition): RegExpPatternDefinition {
