@@ -1,0 +1,14 @@
+{
+    "extends": "../../tsconfig.cjs.json",
+    "compilerOptions": {
+        "composite": true,
+        "tsBuildInfoFile": "temp/compile.cjs.tsbuildInfo",
+        "module": "CommonJS",
+        "moduleResolution": "node16",
+        "rootDir": "src/lib",
+        "outDir": "dist/cjs",
+        "types": ["node"]
+    },
+    "include": ["src/app"],
+    "references": [{ "path": "./src/lib-cjs" }]
+}
