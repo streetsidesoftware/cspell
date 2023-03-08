@@ -2,6 +2,7 @@ import { opCombine, opCombine as opPipe, type Operator, opFilter, opMap } from '
 import { createDictionaryLineParser } from 'cspell-trie-lib';
 import { uniqueFilter } from 'hunspell-reader/dist/util';
 
+import type { AllowedSplitWords } from './AllowedSplitWords';
 import type { CompileOptions } from './CompileOptions';
 import { legacyLineToWords } from './legacyLineToWords';
 
@@ -72,6 +73,8 @@ export interface ParseFileOptions {
      * @default false
      */
     legacy?: boolean;
+
+    allowedSplitWords: AllowedSplitWords;
 }
 
 type ParseFileOptionsRequired = Required<ParseFileOptions>;
@@ -84,6 +87,7 @@ const _defaultOptions: ParseFileOptionsRequired = {
     split: false,
     splitKeepBoth: false,
     // splitSeparator: regExpSplit,
+    allowedSplitWords: { has: () => true },
 };
 
 export const defaultParseDictionaryOptions: ParseFileOptionsRequired = Object.freeze(_defaultOptions);
@@ -100,7 +104,8 @@ export const setOfCSpellDirectiveFlags = ['no-split', 'split', 'keep-case', 'no-
  */
 export function createParseFileLineMapper(options?: Partial<ParseFileOptions>): Operator<string> {
     const _options = options || _defaultOptions;
-    const { splitKeepBoth = _defaultOptions.splitKeepBoth } = _options;
+    const { splitKeepBoth = _defaultOptions.splitKeepBoth, allowedSplitWords = _defaultOptions.allowedSplitWords } =
+        _options;
 
     let { legacy = _defaultOptions.legacy } = _options;
 
@@ -185,7 +190,7 @@ export function createParseFileLineMapper(options?: Partial<ParseFileOptions>): 
     function* splitWords(lines: Iterable<string>): Iterable<string> {
         for (const line of lines) {
             if (legacy) {
-                yield* legacyLineToWords(line, keepCase);
+                yield* legacyLineToWords(line, keepCase, allowedSplitWords);
                 continue;
             }
             if (split) {
@@ -231,9 +236,6 @@ export function createParseFileLineMapper(options?: Partial<ParseFileOptions>): 
  * @param _options - defines prefixes used when parsing lines.
  * @returns words that have been normalized.
  */
-export function parseFileLines(
-    lines: Iterable<string> | string,
-    options?: Partial<ParseFileOptions>
-): Iterable<string> {
+export function parseFileLines(lines: Iterable<string> | string, options: Partial<ParseFileOptions>): Iterable<string> {
     return createParseFileLineMapper(options)(typeof lines === 'string' ? [lines] : lines);
 }

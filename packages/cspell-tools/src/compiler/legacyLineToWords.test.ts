@@ -2,7 +2,10 @@
 
 import { opFilter, pipe } from '@cspell/cspell-pipe/sync';
 
+import { defaultAllowedSplitWords } from './AllowedSplitWords';
 import { legacyLineToWords } from './legacyLineToWords';
+
+const allowed = defaultAllowedSplitWords;
 
 describe('Validate legacyLineToWords', () => {
     beforeEach(() => {
@@ -28,7 +31,7 @@ describe('Validate legacyLineToWords', () => {
         ${'kDNSServiceErr_BadSig'}                                     | ${['k', 'dns', 'service', 'err', 'bad', 'sig']}
         ${'apd_get_active_symbols'}                                    | ${['apd', 'get', 'active', 'symbols']}
     `('legacy splitting lines $line', ({ line, expectedResult }: { line: string; expectedResult: string[] }) => {
-        expect([...pipe(legacyLineToWords(line, false), opFilter(distinct()))]).toEqual(expectedResult);
+        expect([...pipe(legacyLineToWords(line, false, allowed), opFilter(distinct()))]).toEqual(expectedResult);
     });
 });
 

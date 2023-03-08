@@ -3,7 +3,7 @@ import * as fs from 'fs/promises';
 import * as path from 'path';
 
 import * as app from './app';
-import { readTextFile } from './compiler/readTextFile';
+import { readTextFile } from './compiler/readers/readTextFile';
 import { getSystemFeatureFlags } from './FeatureFlags';
 import { spyOnConsole } from './test/console';
 import { createTestHelper } from './test/TestHelper';

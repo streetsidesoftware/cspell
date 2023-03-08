@@ -1,13 +1,13 @@
 import * as path from 'path';
 
-import type { ReaderOptions } from './Reader';
 import { createReader } from './Reader';
+import type { ReaderOptions } from './readers/ReaderOptions';
 
 const samples = path.join(__dirname, '..', '..', '..', 'Samples', 'dicts');
 
-const readerOptions: ReaderOptions = {
-    splitWords: false,
-};
+const readerOptions: ReaderOptions = {};
+
+const sc = expect.stringContaining;
 
 describe('Validate the iterateWordsFromFile', () => {
     test('streamWordsFromFile: hunspell', async () => {
@@ -28,11 +28,11 @@ describe('Validate the iterateWordsFromFile', () => {
 
     test.each`
         file                      | options                  | expected
-        ${'cities.txt'}           | ${{ splitWords: false }} | ${'New York|New Amsterdam|Los Angeles|San Francisco|New Delhi|Mexico City|London|Paris'}
-        ${'cities.txt'}           | ${{ splitWords: true }}  | ${'New|York|Amsterdam|Los|Angeles|San|Francisco|Delhi|Mexico|City|London|Paris'}
-        ${'cities.txt'}           | ${{ legacy: true }}      | ${'new york|new|york|new amsterdam|amsterdam|los angeles|los|angeles|san francisco|san|francisco|new delhi|delhi|mexico city|mexico|city|london|paris'}
+        ${'cities.txt'}           | ${{ splitWords: false }} | ${'New York|New Amsterdam|Los Angeles|San Francisco|New Delhi|Mexico City|London|Paris|'}
+        ${'cities.txt'}           | ${{ splitWords: true }}  | ${'New York|New Amsterdam|Los Angeles|San Francisco|New Delhi|Mexico City|London|Paris|'}
+        ${'cities.txt'}           | ${{ legacy: true }}      | ${'New York|New Amsterdam|Los Angeles|San Francisco|New Delhi|Mexico City|London|Paris|'}
         ${'hunspell/example.aff'} | ${{}}                    | ${'hello|rework|reworked|tried|try|work|worked'}
-    `('stream words from text', async ({ file, options, expected }) => {
+    `('stream words from text $file $options', async ({ file, options, expected }) => {
         const reader = await createReader(path.resolve(samples, file), options);
         const results = [...reader];
         expect(results.join('|')).toBe(expected);
@@ -40,7 +40,7 @@ describe('Validate the iterateWordsFromFile', () => {
 
     test('annotatedWords: trie', async () => {
         const reader = await createReader(path.join(samples, 'cities.trie.gz'), readerOptions);
-        const results = [...reader.words];
+        const results = [...reader.lines];
         expect(results.join('|')).toBe(
             'amsterdam|angeles|city|delhi|francisco|london|los|los angeles' +
                 '|mexico|mexico city|new|new amsterdam|new delhi|new york|paris|san|san francisco|york'
@@ -49,19 +49,19 @@ describe('Validate the iterateWordsFromFile', () => {
 
     test('annotatedWords: text - cities.txt', async () => {
         const reader = await createReader(path.join(samples, 'cities.txt'), readerOptions);
-        const results = [...reader.words];
+        const results = [...reader.lines];
         // the results are sorted
         expect(results.join('|')).toBe(
-            'New York|New Amsterdam|Los Angeles|San Francisco|New Delhi|Mexico City|London|Paris'
+            'New York|New Amsterdam|Los Angeles|San Francisco|New Delhi|Mexico City|London|Paris|'
         );
     });
 
     test('annotatedWords: text - sampleCodeDic.txt', async () => {
         const reader = await createReader(path.join(samples, 'sampleCodeDic.txt'), readerOptions);
-        const results = [...reader.words];
+        const results = [...reader.lines];
         // cspell:ignore codecode errorerror codemsg
         // the results are sorted
-        expect(results.join('|')).toBe('Error*|+error*|Code*|+code*|*msg|!err|!Errorerror|!Codemsg|Café|!codecode');
+        expect(results.join('|')).toEqual(sc('# Sample Dictionary||# It possible'));
     });
 
     function s(a: string, on: string | RegExp = '|'): string[] {

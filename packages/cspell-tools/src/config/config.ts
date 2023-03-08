@@ -44,6 +44,17 @@ export interface CompileTargetOptions {
      * @default: true
      */
     sort?: boolean | undefined;
+
+    /**
+     * Words in the `allowedSplitWords` are considered correct and can be used
+     * as a basis for splitting compound words.
+     *
+     * If entries can be split so that all the words in the entry are allowed,
+     * then only the individual words are added, otherwise the entire entry is added.
+     * This is to prevent misspellings in CamelCase words from being introduced into the
+     * dictionary.
+     */
+    allowedSplitWords?: FilePath[] | undefined;
 }
 
 export interface Target extends CompileTargetOptions {
@@ -77,6 +88,8 @@ export interface Target extends CompileTargetOptions {
     /**
      * Words from the sources that are found in `excludeWordsFrom` files
      * will not be added to the dictionary.
+     *
+     * @version TBD
      */
     excludeWordsFrom?: FilePath[] | undefined;
 
@@ -123,4 +136,6 @@ export interface CompileSourceOptions {
      * @default false
      */
     keepRawCase?: boolean | undefined;
+
+    allowedSplitWords?: FilePath[] | undefined;
 }

@@ -13,10 +13,11 @@ import type {
     Target,
 } from '../config';
 import { isFileListSource, isFilePath, isFileSource } from '../config';
-import { streamWordsFromFile } from './iterateWordsFromFile';
+import { createAllowedSplitWords } from './createAllowedSplitWords';
 import { logWithTimestamp } from './logWithTimestamp';
-import type { ReaderOptions } from './Reader';
-import { readTextFile } from './readTextFile';
+import { readTextFile } from './readers/readTextFile';
+import type { SourceReaderOptions } from './SourceReader';
+import { streamSourceWordsFromFile } from './streamSourceWordsFromFile';
 import { compileTrie, compileWordList } from './wordListCompiler';
 import { normalizeTargetWords } from './wordListParser';
 
@@ -54,6 +55,7 @@ export async function compileTarget(target: Target, options: CompileSourceOption
 
     const { format, sources, trieBase, sort = true, generateNonStrict = false } = target;
     const targetDirectory = path.resolve(rootDir, target.targetDirectory ?? process.cwd());
+
     const generateNonStrictTrie = target.generateNonStrict ?? true;
 
     const name = normalizeTargetName(target.name);
@@ -172,10 +174,18 @@ async function readFileSource(fileSource: FileSource, sourceOptions: CompileSour
 
     // console.warn('fileSource: %o,\n targetOptions %o, \n opt: %o', fileSource, targetOptions, opt);
 
-    const readerOptions: ReaderOptions = { maxDepth, legacy, splitWords, keepCase: keepRawCase };
+    const allowedSplitWords = await createAllowedSplitWords(sourceOptions.allowedSplitWords);
+
+    const readerOptions: SourceReaderOptions = {
+        maxDepth,
+        legacy,
+        splitWords,
+        keepCase: keepRawCase,
+        allowedSplitWords,
+    };
 
     logWithTimestamp(`Reading ${path.basename(filename)}`);
-    const stream = await streamWordsFromFile(filename, readerOptions);
+    const stream = await streamSourceWordsFromFile(filename, readerOptions);
     logWithTimestamp(`Done reading ${path.basename(filename)}`);
     const f: FileToProcess = {
         src: filename,
