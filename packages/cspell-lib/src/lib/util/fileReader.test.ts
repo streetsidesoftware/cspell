@@ -21,8 +21,7 @@ describe('Validate file reader', () => {
     test.each`
         file
         ${__filename}
-    `('reading files "$file"', async ({ file }) => {
-        const filename = path.resolve(__dirname, file);
+    `('reading files "$file"', async ({ file: filename }) => {
         const expected = (await fs.readFile(filename, 'utf-8')).split(/\r?\n/g);
         const content = [...(await fileReader.readLines(filename))];
         expect(content).toEqual(expected);
@@ -31,8 +30,7 @@ describe('Validate file reader', () => {
     test.each`
         file
         ${__filename}
-    `('reading files sync "$file"', async ({ file }) => {
-        const filename = path.resolve(__dirname, file);
+    `('reading files sync "$file"', async ({ file: filename }) => {
         const expected = (await fs.readFile(filename, 'utf-8')).split(/\r?\n/g);
         const content = fileReader.readLinesSync(filename);
         expect(content).toEqual(expected);
