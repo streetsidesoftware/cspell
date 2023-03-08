@@ -1,3 +1,1 @@
-import { join } from 'path';
-
-export const pkgDirectory = join(__dirname, '../..');
+export const srcDirectory = __dirname;

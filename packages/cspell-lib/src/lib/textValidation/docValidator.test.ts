@@ -100,9 +100,21 @@ describe('docValidator', () => {
         const range = [offset, offset + text.length] as const;
         const result = dVal.checkText(range, text, []);
         expect(result).toEqual(expected);
-        for (const r of result) {
-            expect(r.suggestions).toBe(r.suggestions);
-        }
+        expect(dVal.prepTime).toBeGreaterThan(0);
+    });
+
+    test.each`
+        filename                        | text        | expected
+        ${fix('sample-with-errors.ts')} | ${'Helllo'} | ${[oc({ text: 'Helllo', suggestions: ac(['hello']) })]}
+    `('checkText Async suggestions $filename "$text"', async ({ filename, text, expected }) => {
+        const doc = await loadDoc(filename);
+        const dVal = new DocumentValidator(doc, { generateSuggestions: true }, {});
+        await dVal.prepare();
+        const offset = doc.text.indexOf(text);
+        assert(offset >= 0);
+        const range = [offset, offset + text.length] as const;
+        const result = dVal.checkText(range, text, []);
+        expect(result).toEqual(expected);
         expect(dVal.prepTime).toBeGreaterThan(0);
     });
 
