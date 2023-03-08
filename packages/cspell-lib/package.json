@@ -22,7 +22,7 @@
     "clean": "shx rm -rf dist coverage temp .tsbuildinfo",
     "clean-build": "pnpm clean && pnpm build",
     "build": "tsc -b . && ts2mjs dist/esm && pnpm run build:api",
-    "build:api": "rollup -c rollup.config.mjs",
+    "build:api": "rollup -c api/rollup.config.mjs",
     "build:cjs": "tsc -b tsconfig.cjs.json",
     "build:esm": "tsc -b tsconfig.esm.json",
     "build:esm:ts2mjs": "tsc -b tsconfig.esm.json && ts2mjs dist/esm",
