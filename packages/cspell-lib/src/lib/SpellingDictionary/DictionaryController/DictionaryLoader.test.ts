@@ -1,6 +1,7 @@
 import * as path from 'path';
 import { describe, expect, test, vi } from 'vitest';
 
+import { pathPackageRoot } from '../../../test-util/test.locations';
 import type {
     DictionaryDefinitionInlineInternal,
     DictionaryDefinitionInternal,
@@ -13,7 +14,7 @@ import type { LoadOptions } from './DictionaryLoader';
 import { DictionaryLoader } from './DictionaryLoader';
 vi.mock('../../util/logger');
 
-const root = path.join(__dirname, '../../..');
+const root = pathPackageRoot;
 const samples = path.join(root, 'samples');
 
 const cspellIO = getCSpellIO();

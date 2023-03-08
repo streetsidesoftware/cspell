@@ -1,6 +1,7 @@
 import * as path from 'path';
 import { describe, expect, test, vi } from 'vitest';
 
+import { pathPackageRoot, pathPackageSamples } from '../../test-util/test.locations';
 import type {
     DictionaryDefinitionInternal,
     DictionaryFileDefinitionInternal,
@@ -12,8 +13,8 @@ import { loadDictionary, loadDictionarySync, refreshCacheEntries } from './Dicti
 
 vi.mock('../util/logger');
 
-const root = path.join(__dirname, '..', '..');
-const samples = path.join(root, 'samples');
+const root = pathPackageRoot;
+const samples = pathPackageSamples;
 
 const di = mapDictDefToInternal;
 
