@@ -3,6 +3,7 @@ import * as fs from 'fs/promises';
 import * as path from 'path';
 import { describe, expect, test } from 'vitest';
 
+import { pathPackageRoot } from '../../test-util/test.locations';
 import { createCSpellSettingsInternal as csi } from '../Models/CSpellSettingsInternalDef';
 import { getDefaultBundledSettings, loadConfig } from '../Settings';
 import { createDictionaryReferenceCollection } from '../Settings/DictionaryReferenceCollection';
@@ -15,7 +16,7 @@ const mkdirp = async (p: string) => {
     await fs.mkdir(p, { recursive: true });
 };
 
-const root = path.resolve(__dirname, '../..');
+const root = pathPackageRoot;
 const samples = path.join(root, 'samples');
 
 const debug = false;
@@ -289,7 +290,7 @@ describe('Validate Refresh', () => {
 function tempPath(file: string) {
     const testState = expect.getState();
     const testName = (testState.currentTestName || 'test').replace(/[^-a-z0-9]/gi, '_');
-    return path.join(__dirname, '../../temp', testName, file);
+    return path.join(pathPackageRoot, 'temp', testName, file);
 }
 
 function sleep(ms: number): Promise<void> {
