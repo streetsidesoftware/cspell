@@ -9,7 +9,6 @@ import {
     regExAllUpper,
     regExFirstUpper,
     regExIgnoreCharacters,
-    regExLines,
     regExSplitWords,
     regExSplitWords2,
     regExUpperSOrIng,
@@ -65,8 +64,14 @@ export function matchToTextOffset(reg: RegExp, text: TextOffset): Iterable<TextO
     );
 }
 
-export function extractLinesOfText(text: string): Iterable<TextOffset> {
-    return matchStringToTextOffset(regExLines, text);
+export function* extractLinesOfText(text: string): Iterable<TextOffset> {
+    let i = 0;
+    for (let j = text.indexOf('\n', i); j >= 0; j = text.indexOf('\n', i)) {
+        const end = j + 1;
+        yield { text: text.slice(i, end), offset: i };
+        i = end;
+    }
+    yield { text: text.slice(i, text.length), offset: i };
 }
 
 /**
