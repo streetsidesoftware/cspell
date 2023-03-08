@@ -1,6 +1,6 @@
 import type { ReplaceMap } from '@cspell/cspell-types';
 
-import { escapeRegEx } from './regexHelper';
+import { escapeRegEx } from './regexHelper.js';
 
 export type ReplaceMapper = (src: string) => string;
 

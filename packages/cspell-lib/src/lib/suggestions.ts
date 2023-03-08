@@ -1,14 +1,18 @@
 import type { CSpellSettings, LocaleId } from '@cspell/cspell-types';
 import assert from 'assert';
 
-import type { LanguageId } from './LanguageIds';
-import { finalizeSettings, getDefaultSettings, getGlobalSettings, mergeSettings } from './Settings';
-import { calcSettingsForLanguageId, isValidLocaleIntlFormat, normalizeLocaleIntl } from './Settings/LanguageSettings';
-import type { SpellingDictionaryCollection, SuggestionResult, SuggestOptions } from './SpellingDictionary';
-import { getDictionaryInternal, refreshDictionaryCache } from './SpellingDictionary';
-import { createAutoResolveCache } from './util/AutoResolve';
-import { memorizeLastCall } from './util/memorizeLastCall';
-import * as util from './util/util';
+import type { LanguageId } from './LanguageIds.js';
+import { finalizeSettings, getDefaultSettings, getGlobalSettings, mergeSettings } from './Settings/index.js';
+import {
+    calcSettingsForLanguageId,
+    isValidLocaleIntlFormat,
+    normalizeLocaleIntl,
+} from './Settings/LanguageSettings.js';
+import type { SpellingDictionaryCollection, SuggestionResult, SuggestOptions } from './SpellingDictionary/index.js';
+import { getDictionaryInternal, refreshDictionaryCache } from './SpellingDictionary/index.js';
+import { createAutoResolveCache } from './util/AutoResolve.js';
+import { memorizeLastCall } from './util/memorizeLastCall.js';
+import * as util from './util/util.js';
 
 export interface WordSuggestion extends SuggestionResult {
     /**

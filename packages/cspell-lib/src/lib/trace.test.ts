@@ -1,9 +1,9 @@
 import type { CSpellSettings } from '@cspell/cspell-types';
 import { describe, expect, test } from 'vitest';
 
-import { getDefaultSettings, mergeSettings } from './Settings';
-import type { TraceResult } from './trace';
-import { traceWords } from './trace';
+import { getDefaultSettings, mergeSettings } from './Settings/index.js';
+import type { TraceResult } from './trace.js';
+import { traceWords } from './trace.js';
 
 const timeout = 10000;
 

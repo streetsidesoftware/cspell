@@ -7,13 +7,13 @@ import {
     pathPackageSamples,
     pathRepoRoot,
     pathRepoTestFixtures,
-} from '../../../../test-util/test.locations';
-import { logError, logWarning } from '../../../util/logger';
-import * as URI from '../../../util/Uri';
-import { currentSettingsFileVersion, ENV_CSPELL_GLOB_ROOT } from '../../constants';
-import type { ImportFileRefWithError } from '../../CSpellSettingsServer';
-import { extractDependencies, getSources, mergeSettings } from '../../CSpellSettingsServer';
-import { _defaultSettings, getDefaultBundledSettings } from '../../DefaultSettings';
+} from '../../../../test-util/test.locations.js';
+import { logError, logWarning } from '../../../util/logger.js';
+import * as URI from '../../../util/Uri.js';
+import { currentSettingsFileVersion, ENV_CSPELL_GLOB_ROOT } from '../../constants.js';
+import type { ImportFileRefWithError } from '../../CSpellSettingsServer.js';
+import { extractDependencies, getSources, mergeSettings } from '../../CSpellSettingsServer.js';
+import { _defaultSettings, getDefaultBundledSettings } from '../../DefaultSettings.js';
 import {
     __testing__ as __configLoader_testing__,
     clearCachedSettingsFiles,
@@ -25,10 +25,10 @@ import {
     loadPnPSync,
     readRawSettings,
     searchForConfig,
-} from './configLoader';
-import { extractImportErrors } from './extractImportErrors';
-import { readSettings } from './readSettings';
-import { readSettingsFiles } from './readSettingsFiles';
+} from './configLoader.js';
+import { extractImportErrors } from './extractImportErrors.js';
+import { readSettings } from './readSettings.js';
+import { readSettingsFiles } from './readSettingsFiles.js';
 
 const { normalizeCacheSettings, validateRawConfigExports, validateRawConfigVersion, getDefaultConfigLoaderInternal } =
     __configLoader_testing__;

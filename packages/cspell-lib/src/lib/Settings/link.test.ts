@@ -1,8 +1,8 @@
 import * as Path from 'path';
 import { afterEach, describe, expect, test, vi } from 'vitest';
 
-import { getRawGlobalSettings, writeRawGlobalSettings } from './GlobalSettings';
-import { __testing__, addPathsToGlobalImports, listGlobalImports, removePathsFromGlobalImports } from './link';
+import { getRawGlobalSettings, writeRawGlobalSettings } from './GlobalSettings.js';
+import { __testing__, addPathsToGlobalImports, listGlobalImports, removePathsFromGlobalImports } from './link.js';
 
 vi.mock('./GlobalSettings');
 

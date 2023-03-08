@@ -1,10 +1,10 @@
 import { readFile } from 'fs/promises';
 
-import type { TextDocument } from '../Models/TextDocument';
-import { createTextDocument } from '../Models/TextDocument';
-import * as Uri from '../util/Uri';
-import { clean } from '../util/util';
-import type { Document, DocumentWithText } from './Document';
+import type { TextDocument } from '../Models/TextDocument.js';
+import { createTextDocument } from '../Models/TextDocument.js';
+import * as Uri from '../util/Uri.js';
+import { clean } from '../util/util.js';
+import type { Document, DocumentWithText } from './Document.js';
 
 const defaultEncoding: BufferEncoding = 'utf8';
 

@@ -4,5 +4,5 @@ export type {
     ListGlobalImportsResults,
     RemovePathsFromGlobalImportsResult,
     ResolveSettingsResult,
-} from './link';
-export { addPathsToGlobalImports, listGlobalImports, removePathsFromGlobalImports } from './link';
+} from './link.js';
+export { addPathsToGlobalImports, listGlobalImports, removePathsFromGlobalImports } from './link.js';

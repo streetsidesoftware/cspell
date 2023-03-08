@@ -2,8 +2,8 @@ import * as fsp from 'fs/promises';
 import * as path from 'path';
 import { describe, expect, test } from 'vitest';
 
-import { pathPackageSamples } from '../../test-util/test.locations';
-import * as cspell from '../index';
+import { pathPackageSamples } from '../../test-util/test.locations.js';
+import * as cspell from '../index.js';
 
 const sampleFilename = path.join(pathPackageSamples, 'src/sample.go');
 const sampleFile = fsp.readFile(sampleFilename, 'utf8').then((buffer) => buffer.toString());

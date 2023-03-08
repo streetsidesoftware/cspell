@@ -5,9 +5,9 @@ import clearModule from 'clear-module';
 import findUp from 'find-up';
 import importFresh from 'import-fresh';
 
-import type { Uri } from '../../util/Uri';
-import { toUri, uriToFilePath } from '../../util/Uri';
-import { UnsupportedPnpFile } from './ImportError';
+import type { Uri } from '../../util/Uri.js';
+import { toUri, uriToFilePath } from '../../util/Uri.js';
+import { UnsupportedPnpFile } from './ImportError.js';
 
 const defaultPnpFiles = ['.pnp.cjs', '.pnp.js'];
 

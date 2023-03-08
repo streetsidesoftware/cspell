@@ -1,8 +1,8 @@
 import { describe, expect, test } from 'vitest';
 
-import * as getDictionary from '../getDictionary';
-import * as cspell from '../index';
-import { validateText } from '../validator';
+import * as getDictionary from '../getDictionary.js';
+import * as cspell from '../index.js';
+import { validateText } from '../validator.js';
 
 const timeout = 10000;
 

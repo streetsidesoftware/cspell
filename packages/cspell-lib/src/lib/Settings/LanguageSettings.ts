@@ -7,9 +7,9 @@ import type {
     Settings,
 } from '@cspell/cspell-types';
 
-import { autoResolve, autoResolveWeak, createAutoResolveCache } from '../util/AutoResolve';
-import { doSetsIntersect } from '../util/util';
-import * as SpellSettings from './CSpellSettingsServer';
+import { autoResolve, autoResolveWeak, createAutoResolveCache } from '../util/AutoResolve.js';
+import { doSetsIntersect } from '../util/util.js';
+import * as SpellSettings from './CSpellSettingsServer.js';
 
 // LanguageSettings are a collection of LanguageSetting.  They are applied in order, matching against the languageId.
 // Dictionaries are concatenated together.

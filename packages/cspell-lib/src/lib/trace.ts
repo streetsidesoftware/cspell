@@ -1,13 +1,13 @@
 import type { CSpellSettings, DictionaryId, LocaleId } from '@cspell/cspell-types';
 import { genSequence } from 'gensequence';
 
-import type { LanguageId } from './LanguageIds';
-import { finalizeSettings, mergeSettings } from './Settings';
-import { toInternalSettings } from './Settings/CSpellSettingsServer';
-import { calcSettingsForLanguageId } from './Settings/LanguageSettings';
-import type { HasOptions, SpellingDictionaryCollection } from './SpellingDictionary';
-import { getDictionaryInternal, refreshDictionaryCache } from './SpellingDictionary';
-import * as util from './util/util';
+import type { LanguageId } from './LanguageIds.js';
+import { toInternalSettings } from './Settings/CSpellSettingsServer.js';
+import { finalizeSettings, mergeSettings } from './Settings/index.js';
+import { calcSettingsForLanguageId } from './Settings/LanguageSettings.js';
+import type { HasOptions, SpellingDictionaryCollection } from './SpellingDictionary/index.js';
+import { getDictionaryInternal, refreshDictionaryCache } from './SpellingDictionary/index.js';
+import * as util from './util/util.js';
 
 export interface TraceResult {
     word: string;

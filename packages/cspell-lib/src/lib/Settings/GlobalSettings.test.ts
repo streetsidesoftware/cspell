@@ -1,9 +1,9 @@
 import type { Mock } from 'vitest';
 import { afterEach, describe, expect, test, vi } from 'vitest';
 
-import { getLogger } from '../util/logger';
-import { ConfigStore } from './cfgStore';
-import { getGlobalConfigPath, getRawGlobalSettings, writeRawGlobalSettings } from './GlobalSettings';
+import { getLogger } from '../util/logger.js';
+import { ConfigStore } from './cfgStore.js';
+import { getGlobalConfigPath, getRawGlobalSettings, writeRawGlobalSettings } from './GlobalSettings.js';
 
 interface MockConfigStore extends ConfigStore {
     (name: string): MockConfigStore;

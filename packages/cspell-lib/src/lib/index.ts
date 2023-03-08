@@ -1,14 +1,19 @@
-import * as ExclusionHelper from './exclusionHelper';
-import * as Link from './Settings/index.link';
-import * as Text from './util/text';
+import * as ExclusionHelper from './exclusionHelper.js';
+import * as Link from './Settings/index.link.js';
+import * as Text from './util/text.js';
 
-export type { Document } from './Document';
-export { fileToDocument, fileToTextDocument, isBinaryFile } from './Document';
-export { ExcludeFilesGlobMap, ExclusionFunction } from './exclusionHelper';
-export { FeatureFlag, FeatureFlags, getSystemFeatureFlags, UnknownFeatureFlagError } from './FeatureFlags';
-export { getLanguagesForBasename as getLanguageIdsForBaseFilename, getLanguagesForExt } from './LanguageIds';
-export type { CreateTextDocumentParams, TextDocument, TextDocumentLine, TextDocumentRef } from './Models/TextDocument';
-export { createTextDocument, updateTextDocument } from './Models/TextDocument';
+export type { Document } from './Document/index.js';
+export { fileToDocument, fileToTextDocument, isBinaryFile } from './Document/index.js';
+export { ExcludeFilesGlobMap, ExclusionFunction } from './exclusionHelper.js';
+export { FeatureFlag, FeatureFlags, getSystemFeatureFlags, UnknownFeatureFlagError } from './FeatureFlags/index.js';
+export { getLanguagesForBasename as getLanguageIdsForBaseFilename, getLanguagesForExt } from './LanguageIds.js';
+export type {
+    CreateTextDocumentParams,
+    TextDocument,
+    TextDocumentLine,
+    TextDocumentRef,
+} from './Models/TextDocument.js';
+export { createTextDocument, updateTextDocument } from './Models/TextDocument.js';
 export {
     calcOverrideSettings,
     checkFilenameMatchesGlob,
@@ -38,12 +43,12 @@ export {
     readSettingsFiles,
     searchForConfig,
     sectionCSpell,
-} from './Settings';
-export { defaultFileName as defaultSettingsFilename } from './Settings';
+} from './Settings/index.js';
+export { defaultFileName as defaultSettingsFilename } from './Settings/index.js';
 export {
     combineTextAndLanguageSettings,
     combineTextAndLanguageSettings as constructSettingsForText,
-} from './Settings/TextDocumentSettings';
+} from './Settings/TextDocumentSettings.js';
 export {
     determineFinalDocumentSettings,
     DetermineFinalDocumentSettingsResult,
@@ -51,7 +56,7 @@ export {
     spellCheckFile,
     SpellCheckFileOptions,
     SpellCheckFileResult,
-} from './spellCheckFile';
+} from './spellCheckFile.js';
 export {
     CompoundWordsMethod,
     createSpellingDictionary,
@@ -64,14 +69,14 @@ export {
     SuggestionCollector,
     SuggestionResult,
     SuggestOptions,
-} from './SpellingDictionary';
-export type { SuggestedWord, SuggestionOptions, SuggestionsForWordResult } from './suggestions';
-export { SuggestionError, suggestionsForWord, suggestionsForWords } from './suggestions';
-export { DocumentValidator, DocumentValidatorOptions, shouldCheckDocument } from './textValidation';
-export type { TraceOptions, TraceResult } from './trace';
-export { traceWords, traceWordsAsync } from './trace';
-export { getLogger, Logger, setLogger } from './util/logger';
-export { resolveFile } from './util/resolveFile';
+} from './SpellingDictionary/index.js';
+export type { SuggestedWord, SuggestionOptions, SuggestionsForWordResult } from './suggestions.js';
+export { SuggestionError, suggestionsForWord, suggestionsForWords } from './suggestions.js';
+export { DocumentValidator, DocumentValidatorOptions, shouldCheckDocument } from './textValidation/index.js';
+export type { TraceOptions, TraceResult } from './trace.js';
+export { traceWords, traceWordsAsync } from './trace.js';
+export { getLogger, Logger, setLogger } from './util/logger.js';
+export { resolveFile } from './util/resolveFile.js';
 export {
     checkText,
     checkTextDocument,
@@ -81,7 +86,7 @@ export {
     TextInfoItem,
     validateText,
     ValidationIssue,
-} from './validator';
+} from './validator.js';
 export * from '@cspell/cspell-types';
 export {
     asyncIterableToArray,
@@ -93,5 +98,5 @@ export {
 } from 'cspell-io';
 export { Link, Text };
 export { ExclusionHelper };
-export { clearCachedFiles } from './clearCachedFiles';
-export { getDictionary } from './getDictionary';
+export { clearCachedFiles } from './clearCachedFiles.js';
+export { getDictionary } from './getDictionary.js';

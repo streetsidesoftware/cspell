@@ -1,9 +1,18 @@
 import { describe, expect, test } from 'vitest';
 import { URI } from 'vscode-uri';
 
-import { extendExpect } from '../../test-util/test.matchers';
-import type { Uri } from './Uri';
-import { from, fromFilePath, fromStdinFilePath, isUri, normalizeDriveLetter, parse, toUri, uriToFilePath } from './Uri';
+import { extendExpect } from '../../test-util/test.matchers.js';
+import type { Uri } from './Uri.js';
+import {
+    from,
+    fromFilePath,
+    fromStdinFilePath,
+    isUri,
+    normalizeDriveLetter,
+    parse,
+    toUri,
+    uriToFilePath,
+} from './Uri.js';
 
 const { toEqualCaseInsensitive } = extendExpect(expect);
 

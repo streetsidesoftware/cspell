@@ -1,4 +1,4 @@
-import type { IterableLike } from './IterableLike';
+import type { IterableLike } from './IterableLike.js';
 
 export function* toIterableIterator<T>(i: IterableLike<T>): IterableIterator<T> {
     yield* i;

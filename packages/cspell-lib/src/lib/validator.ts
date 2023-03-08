@@ -4,5 +4,5 @@ export type {
     TextInfoItem,
     ValidateTextOptions,
     ValidationIssue,
-} from './textValidation';
-export { checkText, checkTextDocument, IncludeExcludeFlag, validateText } from './textValidation';
+} from './textValidation/index.js';
+export { checkText, checkTextDocument, IncludeExcludeFlag, validateText } from './textValidation/index.js';

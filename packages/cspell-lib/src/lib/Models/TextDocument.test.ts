@@ -1,8 +1,8 @@
 import { describe, expect, test } from 'vitest';
 
-import * as Uri from '../util/Uri';
-import type { TextDocument } from './TextDocument';
-import { createTextDocument, isTextDocument, updateTextDocument } from './TextDocument';
+import * as Uri from '../util/Uri.js';
+import type { TextDocument } from './TextDocument.js';
+import { createTextDocument, isTextDocument, updateTextDocument } from './TextDocument.js';
 
 describe('TextDocument', () => {
     test('create', () => {

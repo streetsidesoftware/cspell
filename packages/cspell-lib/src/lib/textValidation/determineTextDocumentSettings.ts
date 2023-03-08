@@ -1,12 +1,12 @@
 import type { CSpellUserSettings } from '@cspell/cspell-types';
 import * as path from 'path';
 
-import { getLanguagesForBasename } from '../LanguageIds';
-import type { CSpellSettingsInternal } from '../Models/CSpellSettingsInternalDef';
-import type { TextDocument, TextDocumentRef } from '../Models/TextDocument';
-import { calcOverrideSettings, getDefaultSettings, getGlobalSettings, mergeSettings } from '../Settings';
-import { combineTextAndLanguageSettings } from '../Settings/TextDocumentSettings';
-import { uriToFilePath } from '../util/Uri';
+import { getLanguagesForBasename } from '../LanguageIds.js';
+import type { CSpellSettingsInternal } from '../Models/CSpellSettingsInternalDef.js';
+import type { TextDocument, TextDocumentRef } from '../Models/TextDocument.js';
+import { calcOverrideSettings, getDefaultSettings, getGlobalSettings, mergeSettings } from '../Settings/index.js';
+import { combineTextAndLanguageSettings } from '../Settings/TextDocumentSettings.js';
+import { uriToFilePath } from '../util/Uri.js';
 
 /**
  * Combines all relevant setting values into a final configuration to be used for spell checking.

@@ -1,8 +1,8 @@
 import { describe, expect, test } from 'vitest';
 
-import type { Feature, SuggestionResult } from './entities';
-import * as helpers from './helpers';
-import { FeatureMap } from './helpers';
+import type { Feature, SuggestionResult } from './entities.js';
+import * as helpers from './helpers.js';
+import { FeatureMap } from './helpers.js';
 
 describe('Validate Suggest Helpers', () => {
     test('compareResult', () => {

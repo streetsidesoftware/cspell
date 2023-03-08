@@ -1,7 +1,7 @@
 import { describe, expect, test } from 'vitest';
 
-import * as checkText from './checkText';
-import { IncludeExcludeFlag } from './checkText';
+import * as checkText from './checkText.js';
+import { IncludeExcludeFlag } from './checkText.js';
 
 // cSpell:ignore brouwn jumpped lazzy wrongg mispelled ctrip nmove mischecked
 

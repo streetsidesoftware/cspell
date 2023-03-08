@@ -1,8 +1,7 @@
 import { promises as fs } from 'fs';
-import * as path from 'path';
 import { describe, expect, test } from 'vitest';
 
-import * as fileReader from './fileReader';
+import * as fileReader from './fileReader.js';
 
 describe('Validate file reader', () => {
     test('Catches errors for non-existent files', () => {

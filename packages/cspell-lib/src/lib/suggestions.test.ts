@@ -1,8 +1,8 @@
 import { describe, expect, test } from 'vitest';
 
-import type { SuggestionOptions } from './suggestions';
-import { SuggestionError, suggestionsForWord, suggestionsForWords } from './suggestions';
-import { asyncIterableToArray } from './util/util';
+import type { SuggestionOptions } from './suggestions.js';
+import { SuggestionError, suggestionsForWord, suggestionsForWords } from './suggestions.js';
+import { asyncIterableToArray } from './util/util.js';
 
 const oc = expect.objectContaining;
 const ac = expect.arrayContaining;

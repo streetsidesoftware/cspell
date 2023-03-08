@@ -2,12 +2,12 @@ import type { TextOffset } from '@cspell/cspell-types';
 import fs from 'fs';
 import Path from 'path';
 import { describe, expect, test } from 'vitest';
-import { pathPackageSamples } from '../../test-util/test.locations';
+import { pathPackageSamples } from '../../test-util/test.locations.js';
 
-import { calculateTextDocumentOffsets } from '../util/text';
-import * as TextRange from '../util/TextRange';
-import * as RegPat from './RegExpPatterns';
-import { regExMatchCommonHexFormats, regExMatchUrls } from './RegExpPatterns';
+import { calculateTextDocumentOffsets } from '../util/text.js';
+import * as TextRange from '../util/TextRange.js';
+import * as RegPat from './RegExpPatterns.js';
+import { regExMatchCommonHexFormats, regExMatchUrls } from './RegExpPatterns.js';
 
 const matchUrl = regExMatchUrls;
 const matchHexValues = regExMatchCommonHexFormats;

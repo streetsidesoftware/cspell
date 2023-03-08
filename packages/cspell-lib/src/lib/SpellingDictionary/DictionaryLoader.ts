@@ -1,10 +1,10 @@
 import type { SpellingDictionary } from 'cspell-dictionary';
 import type { CSpellIO } from 'cspell-io';
 
-import type { DictionaryDefinitionInternal } from '../Models/CSpellSettingsInternalDef';
-import { getCSpellIO } from '../static';
-import { DictionaryLoader } from './DictionaryController';
-export type { LoadOptions } from './DictionaryController';
+import type { DictionaryDefinitionInternal } from '../Models/CSpellSettingsInternalDef.js';
+import { getCSpellIO } from '../static.js';
+import { DictionaryLoader } from './DictionaryController/index.js';
+export type { LoadOptions } from './DictionaryController/index.js';
 
 let loader: DictionaryLoader | undefined;
 

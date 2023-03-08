@@ -1,4 +1,4 @@
-import { isError } from '../../util/errors';
+import { isError } from '../../util/errors.js';
 
 export class ImportError extends Error {
     readonly cause: Error | undefined;

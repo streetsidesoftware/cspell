@@ -1,7 +1,7 @@
 import { beforeEach, describe, expect, test, vi } from 'vitest';
 
-import type { Logger } from './logger';
-import { getLogger, log, logError, logWarning, setLogger } from './logger';
+import type { Logger } from './logger.js';
+import { getLogger, log, logError, logWarning, setLogger } from './logger.js';
 
 const logger: Logger = {
     log: vi.fn(),

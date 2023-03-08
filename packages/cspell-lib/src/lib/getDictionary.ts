@@ -1,8 +1,8 @@
 import type { CSpellUserSettings } from '@cspell/cspell-types';
 
-import { toInternalSettings } from './Settings/CSpellSettingsServer';
-import type { SpellingDictionaryCollection } from './SpellingDictionary';
-import { getDictionaryInternal } from './SpellingDictionary';
+import { toInternalSettings } from './Settings/CSpellSettingsServer.js';
+import type { SpellingDictionaryCollection } from './SpellingDictionary/index.js';
+import { getDictionaryInternal } from './SpellingDictionary/index.js';
 
 /**
  * Load a dictionary collection defined by the settings.

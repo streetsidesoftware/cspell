@@ -1,10 +1,10 @@
 import * as path from 'path';
 import { describe, expect, test } from 'vitest';
 
-import { pathPackageSamples } from '../../test-util/test.locations';
-import { loadTextDocument } from '../Models/TextDocument';
-import { loadConfig } from '../Settings';
-import { determineTextDocumentSettings } from './determineTextDocumentSettings';
+import { pathPackageSamples } from '../../test-util/test.locations.js';
+import { loadTextDocument } from '../Models/TextDocument.js';
+import { loadConfig } from '../Settings/index.js';
+import { determineTextDocumentSettings } from './determineTextDocumentSettings.js';
 
 const samples = pathPackageSamples;
 const cfgPath = path.join(samples, '.cspell.json');

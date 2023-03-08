@@ -1,15 +1,15 @@
 import * as path from 'path';
 import { describe, expect, test, vi } from 'vitest';
 
-import { pathPackageRoot, pathPackageSamples } from '../../test-util/test.locations';
+import { pathPackageRoot, pathPackageSamples } from '../../test-util/test.locations.js';
 import type {
     DictionaryDefinitionInternal,
     DictionaryFileDefinitionInternal,
-} from '../Models/CSpellSettingsInternalDef';
-import { mapDictDefToInternal } from '../Settings/DictionarySettings';
-import { clean } from '../util/util';
-import type { LoadOptions } from './DictionaryLoader';
-import { loadDictionary, loadDictionarySync, refreshCacheEntries } from './DictionaryLoader';
+} from '../Models/CSpellSettingsInternalDef.js';
+import { mapDictDefToInternal } from '../Settings/DictionarySettings.js';
+import { clean } from '../util/util.js';
+import type { LoadOptions } from './DictionaryLoader.js';
+import { loadDictionary, loadDictionarySync, refreshCacheEntries } from './DictionaryLoader.js';
 
 vi.mock('../util/logger');
 

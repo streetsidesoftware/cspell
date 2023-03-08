@@ -1,6 +1,6 @@
 import { describe, expect, test } from 'vitest';
 
-import { IssueCode } from './cspell.cache';
+import { IssueCode } from './cspell.cache.js';
 
 describe('Cache', () => {
     test('IssueCode', () => {

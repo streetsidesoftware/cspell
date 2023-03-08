@@ -1,7 +1,7 @@
 import type { Pattern, RegExpPatternDefinition } from '@cspell/cspell-types';
 
-import { stringToRegExp } from '../util/textRegex';
-import { isDefined } from '../util/util';
+import { stringToRegExp } from '../util/textRegex.js';
+import { isDefined } from '../util/util.js';
 
 export function resolvePatterns(
     regExpList: (string | RegExp)[] = [],

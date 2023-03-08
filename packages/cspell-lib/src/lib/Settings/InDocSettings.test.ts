@@ -1,10 +1,10 @@
 import type { CSpellSettings, DictionaryDefinitionInline } from '@cspell/cspell-types';
 import { describe, expect, test } from 'vitest';
 
-import * as Text from '../util/text';
-import * as TextRange from '../util/TextRange';
-import { isDefined } from '../util/util';
-import * as InDoc from './InDocSettings';
+import * as Text from '../util/text.js';
+import * as TextRange from '../util/TextRange.js';
+import { isDefined } from '../util/util.js';
+import * as InDoc from './InDocSettings.js';
 
 const dictName = InDoc.internal.staticInDocumentDictionaryName;
 

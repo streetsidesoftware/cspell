@@ -1,7 +1,7 @@
 import type { CSpellSettings, PnPSettings } from '@cspell/cspell-types';
 
-import type { OptionalOrUndefined } from '../../../util/types';
-import { clean } from '../../../util/util';
+import type { OptionalOrUndefined } from '../../../util/types.js';
+import { clean } from '../../../util/util.js';
 
 export type PnPSettingsOptional = OptionalOrUndefined<PnPSettings>;
 

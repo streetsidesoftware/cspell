@@ -1,6 +1,6 @@
 import { describe, expect, test } from 'vitest';
 
-import * as DefaultSettings from './DefaultSettings';
+import * as DefaultSettings from './DefaultSettings.js';
 
 describe('Validate Default Settings', () => {
     test('the static default settings', () => {

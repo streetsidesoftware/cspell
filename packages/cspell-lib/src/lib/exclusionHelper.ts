@@ -1,8 +1,8 @@
 import type { Glob } from '@cspell/cspell-types';
 import { GlobMatcher } from 'cspell-glob';
 
-import type { Uri } from './util/Uri';
-import { toUri, uriToFilePath } from './util/Uri';
+import type { Uri } from './util/Uri.js';
+import { toUri, uriToFilePath } from './util/Uri.js';
 
 const defaultAllowedSchemes = new Set(['file', 'untitled']);
 

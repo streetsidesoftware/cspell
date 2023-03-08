@@ -5,14 +5,14 @@ import { createCachingDictionary } from 'cspell-dictionary';
 import type { Sequence } from 'gensequence';
 import { genSequence } from 'gensequence';
 
-import type { ValidationResult } from '../Models/ValidationResult';
-import * as RxPat from '../Settings/RegExpPatterns';
-import * as Text from '../util/text';
-import { clean } from '../util/util';
-import { split } from '../util/wordSplitter';
-import { defaultMinWordLength } from './defaultConstants';
-import { isWordValidWithEscapeRetry } from './isWordValid';
-import { mapRangeBackToOriginalPos } from './parsedText';
+import type { ValidationResult } from '../Models/ValidationResult.js';
+import * as RxPat from '../Settings/RegExpPatterns.js';
+import * as Text from '../util/text.js';
+import { clean } from '../util/util.js';
+import { split } from '../util/wordSplitter.js';
+import { defaultMinWordLength } from './defaultConstants.js';
+import { isWordValidWithEscapeRetry } from './isWordValid.js';
+import { mapRangeBackToOriginalPos } from './parsedText.js';
 import type {
     LineSegment,
     LineValidatorFn,
@@ -21,7 +21,7 @@ import type {
     TextValidatorFn,
     ValidationOptions,
     ValidationResultRO,
-} from './ValidationTypes';
+} from './ValidationTypes.js';
 
 interface LineValidator {
     fn: LineValidatorFn;

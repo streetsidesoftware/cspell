@@ -1,6 +1,6 @@
 import { describe, expect, test } from 'vitest';
 
-import { PatternRegExp } from './PatternRegExp';
+import { PatternRegExp } from './PatternRegExp.js';
 
 describe('Pattern', () => {
     test.each`

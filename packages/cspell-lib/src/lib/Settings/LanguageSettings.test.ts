@@ -2,11 +2,11 @@
 import type { CSpellUserSettings } from '@cspell/cspell-types';
 import { describe, expect, test } from 'vitest';
 
-import { getGlobalSettings } from './Controller/configLoader';
-import { mergeSettings } from './CSpellSettingsServer';
-import { getDefaultBundledSettings } from './DefaultSettings';
-import * as LS from './LanguageSettings';
-import { calcSettingsForLanguage, calcUserSettingsForLanguage } from './LanguageSettings';
+import { getGlobalSettings } from './Controller/configLoader/index.js';
+import { mergeSettings } from './CSpellSettingsServer.js';
+import { getDefaultBundledSettings } from './DefaultSettings.js';
+import * as LS from './LanguageSettings.js';
+import { calcSettingsForLanguage, calcUserSettingsForLanguage } from './LanguageSettings.js';
 
 const extraSettings: CSpellUserSettings = {
     ignoreRegExpList: ['binary'],

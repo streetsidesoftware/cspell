@@ -1,1 +1,1 @@
-export type { CSpellCache } from './cspell.cache';
+export type { CSpellCache } from './cspell.cache.js';

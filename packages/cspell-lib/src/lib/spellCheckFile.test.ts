@@ -3,15 +3,15 @@ import * as Path from 'path';
 import { posix } from 'path';
 import { describe, expect, test } from 'vitest';
 
-import { pathPackageSamples, pathRepoTestFixtures } from '../test-util';
-import { extendExpect } from '../test-util/test.matchers';
-import type { Document } from './Document';
-import { fileToDocument, fileToTextDocument } from './Document/resolveDocument';
-import type { CSpellSettingsInternal } from './Models/CSpellSettingsInternalDef';
-import { ImportError } from './Settings/Controller/ImportError';
-import type { SpellCheckFileOptions, SpellCheckFileResult } from './spellCheckFile';
-import { determineFinalDocumentSettings, spellCheckDocument, spellCheckFile } from './spellCheckFile';
-import * as Uri from './util/Uri';
+import { pathPackageSamples, pathRepoTestFixtures } from '../test-util/index.js';
+import { extendExpect } from '../test-util/test.matchers.js';
+import type { Document } from './Document/index.js';
+import { fileToDocument, fileToTextDocument } from './Document/resolveDocument.js';
+import type { CSpellSettingsInternal } from './Models/CSpellSettingsInternalDef.js';
+import { ImportError } from './Settings/Controller/ImportError.js';
+import type { SpellCheckFileOptions, SpellCheckFileResult } from './spellCheckFile.js';
+import { determineFinalDocumentSettings, spellCheckDocument, spellCheckFile } from './spellCheckFile.js';
+import * as Uri from './util/Uri.js';
 
 const samples = pathPackageSamples;
 const testFixtures = pathRepoTestFixtures;

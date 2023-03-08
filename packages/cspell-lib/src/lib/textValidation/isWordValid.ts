@@ -1,6 +1,6 @@
 import type { CachingDictionary } from 'cspell-dictionary';
 
-import type { TextOffsetRO } from './ValidationTypes';
+import type { TextOffsetRO } from './ValidationTypes.js';
 
 export function hasWordCheck(dict: CachingDictionary, word: string): boolean {
     word = word.replace(/\\/g, '');

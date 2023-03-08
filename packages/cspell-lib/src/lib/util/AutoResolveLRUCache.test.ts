@@ -1,7 +1,7 @@
 import { describe, expect, test, vi } from 'vitest';
 
-import { AutoResolveLastNCalls, AutoResolveLRUCache } from './AutoResolveLRUCache';
-import { isRecordEqual } from './util';
+import { AutoResolveLastNCalls, AutoResolveLRUCache } from './AutoResolveLRUCache.js';
+import { isRecordEqual } from './util.js';
 
 describe('AutoResolveLRUCache', () => {
     test('AutoResolveLRUCache', () => {

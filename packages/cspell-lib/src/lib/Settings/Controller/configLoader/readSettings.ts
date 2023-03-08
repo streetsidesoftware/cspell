@@ -1,5 +1,5 @@
-import { getDefaultConfigLoader } from './configLoader';
-import type { CSpellSettingsI, CSpellSettingsWST } from './types';
+import { getDefaultConfigLoader } from './configLoader.js';
+import type { CSpellSettingsI, CSpellSettingsWST } from './types.js';
 
 /**
  * Read / import a cspell configuration file.

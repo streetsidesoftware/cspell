@@ -3,12 +3,12 @@ import type { SpellingDictionary } from 'cspell-dictionary';
 import type { Sequence } from 'gensequence';
 import { genSequence } from 'gensequence';
 
-import type { ValidationResult } from '../Models/ValidationResult';
-import * as Text from '../util/text';
-import * as TextRange from '../util/TextRange';
-import { defaultMaxDuplicateProblems, defaultMaxNumberOfProblems } from './defaultConstants';
-import { lineValidatorFactory } from './lineValidatorFactory';
-import type { IncludeExcludeOptions, LineSegment, TextOffsetRO, ValidationOptions } from './ValidationTypes';
+import type { ValidationResult } from '../Models/ValidationResult.js';
+import * as Text from '../util/text.js';
+import * as TextRange from '../util/TextRange.js';
+import { defaultMaxDuplicateProblems, defaultMaxNumberOfProblems } from './defaultConstants.js';
+import { lineValidatorFactory } from './lineValidatorFactory.js';
+import type { IncludeExcludeOptions, LineSegment, TextOffsetRO, ValidationOptions } from './ValidationTypes.js';
 
 /**
  * @deprecated

@@ -1,6 +1,6 @@
 import { describe, expect, test } from 'vitest';
 
-import * as TextRange from './TextRange';
+import * as TextRange from './TextRange.js';
 
 const { makeSortedMatchRangeArray } = TextRange.__testing__;
 

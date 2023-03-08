@@ -1,6 +1,6 @@
 import { describe, expect, test } from 'vitest';
 
-import { FreqCounter } from './FreqCounter';
+import { FreqCounter } from './FreqCounter.js';
 
 describe('Validate FreqCounter', () => {
     test('Creating an empty Counter', () => {

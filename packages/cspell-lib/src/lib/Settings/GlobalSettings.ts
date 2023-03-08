@@ -1,9 +1,9 @@
 import type { CSpellSettings, CSpellSettingsWithSourceTrace } from '@cspell/cspell-types';
 import { format } from 'util';
 
-import { isErrnoException } from '../util/errors';
-import { logError } from '../util/logger';
-import { ConfigStore } from './cfgStore';
+import { isErrnoException } from '../util/errors.js';
+import { logError } from '../util/logger.js';
+import { ConfigStore } from './cfgStore.js';
 
 const packageName = 'cspell';
 

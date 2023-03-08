@@ -3,13 +3,13 @@ import * as fs from 'fs/promises';
 import * as path from 'path';
 import { describe, expect, test } from 'vitest';
 
-import { pathPackageRoot } from '../../test-util/test.locations';
-import { createCSpellSettingsInternal as csi } from '../Models/CSpellSettingsInternalDef';
-import { getDefaultBundledSettings, loadConfig } from '../Settings';
-import { createDictionaryReferenceCollection } from '../Settings/DictionaryReferenceCollection';
-import { filterDictDefsToLoad, mapDictDefToInternal } from '../Settings/DictionarySettings';
-import * as Dictionaries from './Dictionaries';
-import { isSpellingDictionaryLoadError } from './SpellingDictionaryError';
+import { pathPackageRoot } from '../../test-util/test.locations.js';
+import { createCSpellSettingsInternal as csi } from '../Models/CSpellSettingsInternalDef.js';
+import { createDictionaryReferenceCollection } from '../Settings/DictionaryReferenceCollection.js';
+import { filterDictDefsToLoad, mapDictDefToInternal } from '../Settings/DictionarySettings.js';
+import { getDefaultBundledSettings, loadConfig } from '../Settings/index.js';
+import * as Dictionaries from './Dictionaries.js';
+import { isSpellingDictionaryLoadError } from './SpellingDictionaryError.js';
 
 // cspell:ignore café rhône
 const mkdirp = async (p: string) => {

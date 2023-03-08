@@ -3,11 +3,11 @@ import type { CSpellUserSettings, DictionaryDefinitionInline } from '@cspell/csp
 import type { Sequence } from 'gensequence';
 import { genSequence } from 'gensequence';
 
-import type { ExtendedSuggestion } from '../Models/Suggestion';
-import { createSpellingDictionary } from '../SpellingDictionary';
-import * as Text from '../util/text';
-import { clean, isDefined } from '../util/util';
-import { mergeInDocSettings } from './CSpellSettingsServer';
+import type { ExtendedSuggestion } from '../Models/Suggestion.js';
+import { createSpellingDictionary } from '../SpellingDictionary/index.js';
+import * as Text from '../util/text.js';
+import { clean, isDefined } from '../util/util.js';
+import { mergeInDocSettings } from './CSpellSettingsServer.js';
 
 // cspell:ignore gimuy
 const regExMatchRegEx = /\/.*\/[gimuy]*/;

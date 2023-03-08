@@ -5,15 +5,15 @@ import * as path from 'path';
 import { pathToFileURL } from 'url';
 import { describe, expect, test } from 'vitest';
 
-import { pathPackageFixtures, pathPackageRoot } from '../../test-util/test.locations';
-import type { TextDocument } from '../Models/TextDocument';
-import { createTextDocument } from '../Models/TextDocument';
-import type { ValidationIssue } from '../Models/ValidationIssue';
-import type { WordSuggestion } from '../suggestions';
-import { AutoCache } from '../util/simpleCache';
-import { toUri } from '../util/Uri';
-import type { DocumentValidatorOptions } from './docValidator';
-import { __testing__, DocumentValidator, shouldCheckDocument } from './docValidator';
+import { pathPackageFixtures, pathPackageRoot } from '../../test-util/test.locations.js';
+import type { TextDocument } from '../Models/TextDocument.js';
+import { createTextDocument } from '../Models/TextDocument.js';
+import type { ValidationIssue } from '../Models/ValidationIssue.js';
+import type { WordSuggestion } from '../suggestions.js';
+import { AutoCache } from '../util/simpleCache.js';
+import { toUri } from '../util/Uri.js';
+import type { DocumentValidatorOptions } from './docValidator.js';
+import { __testing__, DocumentValidator, shouldCheckDocument } from './docValidator.js';
 
 const docCache = new AutoCache(_loadDoc, 100);
 const fixturesDir = pathPackageFixtures;

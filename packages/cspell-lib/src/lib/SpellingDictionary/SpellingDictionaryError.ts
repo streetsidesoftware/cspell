@@ -1,4 +1,4 @@
-import type { LoadOptions } from './DictionaryLoader';
+import type { LoadOptions } from './DictionaryLoader.js';
 
 export class SpellingDictionaryLoadError extends Error {
     readonly name: string;

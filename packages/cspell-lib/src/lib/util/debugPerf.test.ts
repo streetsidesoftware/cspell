@@ -1,6 +1,6 @@
 import { describe, expect, test, vi } from 'vitest';
 
-import { perfFn } from './debugPerf';
+import { perfFn } from './debugPerf.js';
 
 describe('debugPerf', () => {
     test('perfFn with callback', () => {

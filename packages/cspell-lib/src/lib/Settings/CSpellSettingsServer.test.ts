@@ -2,8 +2,8 @@ import type { CSpellUserSettings } from '@cspell/cspell-types';
 import * as path from 'path';
 import { describe, expect, test } from 'vitest';
 
-import { pathPackageRoot, pathPackageSamples } from '../../test-util/test.locations';
-import { createCSpellSettingsInternal as csi } from '../Models/CSpellSettingsInternalDef';
+import { pathPackageRoot, pathPackageSamples } from '../../test-util/test.locations.js';
+import { createCSpellSettingsInternal as csi } from '../Models/CSpellSettingsInternalDef.js';
 import {
     __testing__ as __configLoader_testing__,
     clearCachedSettingsFiles,
@@ -13,9 +13,9 @@ import {
     loadConfig,
     readSettings,
     readSettingsFiles,
-} from './Controller/configLoader';
-import { calcOverrideSettings, checkFilenameMatchesGlob, getSources, mergeSettings } from './CSpellSettingsServer';
-import { _defaultSettings, getDefaultBundledSettings } from './DefaultSettings';
+} from './Controller/configLoader/index.js';
+import { calcOverrideSettings, checkFilenameMatchesGlob, getSources, mergeSettings } from './CSpellSettingsServer.js';
+import { _defaultSettings, getDefaultBundledSettings } from './DefaultSettings.js';
 
 const samplesDir = pathPackageSamples;
 const pathSrc = path.join(pathPackageRoot, 'src');

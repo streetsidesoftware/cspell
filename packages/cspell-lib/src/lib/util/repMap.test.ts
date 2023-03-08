@@ -1,6 +1,6 @@
 import { describe, expect, test } from 'vitest';
 
-import * as repMap from './repMap';
+import * as repMap from './repMap.js';
 
 describe('ReMap Tests', () => {
     test('empty replace map', () => {

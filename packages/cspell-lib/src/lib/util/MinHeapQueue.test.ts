@@ -1,7 +1,7 @@
 import { describe, expect, test } from 'vitest';
 
-import { compare } from './Comparable';
-import { __testing__, MinHeapQueue } from './MinHeapQueue';
+import { compare } from './Comparable.js';
+import { __testing__, MinHeapQueue } from './MinHeapQueue.js';
 
 const { addToHeap, takeFromHeap } = __testing__;
 

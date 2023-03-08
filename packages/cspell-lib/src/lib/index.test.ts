@@ -1,6 +1,6 @@
 import { describe, expect, test } from 'vitest';
 
-import * as cspell from './index';
+import * as cspell from './index.js';
 
 describe('Validate the cspell API', () => {
     test('Tests the default configuration', () => {

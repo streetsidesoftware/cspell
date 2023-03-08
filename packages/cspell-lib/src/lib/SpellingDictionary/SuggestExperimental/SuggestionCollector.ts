@@ -1,5 +1,5 @@
-import type { SuggestionResult } from './entities';
-import { compareResults } from './helpers';
+import type { SuggestionResult } from './entities.js';
+import { compareResults } from './helpers.js';
 
 export class SuggestionCollector {
     private results: SuggestionResult[] = [];

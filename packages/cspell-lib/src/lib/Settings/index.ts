@@ -1,4 +1,4 @@
-export { currentSettingsFileVersion, ENV_CSPELL_GLOB_ROOT } from './constants';
+export { currentSettingsFileVersion, ENV_CSPELL_GLOB_ROOT } from './constants.js';
 export {
     clearCachedSettingsFiles,
     defaultConfigFilenames,
@@ -14,9 +14,9 @@ export {
     readSettingsFiles,
     searchForConfig,
     sectionCSpell,
-} from './Controller/configLoader';
-export { ImportError } from './Controller/ImportError';
-export type { ConfigurationDependencies, ImportFileRefWithError } from './CSpellSettingsServer';
+} from './Controller/configLoader/index.js';
+export { ImportError } from './Controller/ImportError.js';
+export type { ConfigurationDependencies, ImportFileRefWithError } from './CSpellSettingsServer.js';
 export {
     calcOverrideSettings,
     checkFilenameMatchesGlob,
@@ -25,5 +25,5 @@ export {
     getSources,
     mergeInDocSettings,
     mergeSettings,
-} from './CSpellSettingsServer';
-export { getDefaultBundledSettings, getDefaultSettings } from './DefaultSettings';
+} from './CSpellSettingsServer.js';
+export { getDefaultBundledSettings, getDefaultSettings } from './DefaultSettings.js';

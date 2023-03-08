@@ -1,6 +1,6 @@
 import { describe, expect, test } from 'vitest';
 
-import { SuggestionCollector } from './SuggestionCollector';
+import { SuggestionCollector } from './SuggestionCollector.js';
 
 describe('SuggestionCollector', () => {
     test('Quick tests, no real logic', () => {

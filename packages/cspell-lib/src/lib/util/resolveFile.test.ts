@@ -4,7 +4,7 @@ import * as os from 'os';
 import * as path from 'path';
 import { describe, expect, test } from 'vitest';
 
-import { resolveFile } from './resolveFile';
+import { resolveFile } from './resolveFile.js';
 
 interface Config {
     import: string[];

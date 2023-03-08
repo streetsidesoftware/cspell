@@ -1,4 +1,4 @@
-import type { Uri } from '../util/Uri';
+import type { Uri } from '../util/Uri.js';
 
 export interface Document {
     uri: UriString;

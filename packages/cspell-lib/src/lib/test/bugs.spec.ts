@@ -2,8 +2,8 @@ import * as fsp from 'fs/promises';
 import * as path from 'path';
 import { describe, expect, test } from 'vitest';
 
-import { pathPackageSamples } from '../../test-util/test.locations';
-import * as cspell from '../index';
+import { pathPackageSamples } from '../../test-util/test.locations.js';
+import * as cspell from '../index.js';
 
 const samples = path.join(pathPackageSamples, 'bug-fixes');
 const configFile = path.join(samples, 'cspell.json');

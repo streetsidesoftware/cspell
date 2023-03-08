@@ -1,7 +1,7 @@
 import type { DictionaryReference } from '@cspell/cspell-types';
 import { describe, expect, test } from 'vitest';
 
-import { createDictionaryReferenceCollection } from './DictionaryReferenceCollection';
+import { createDictionaryReferenceCollection } from './DictionaryReferenceCollection.js';
 
 describe('DictionaryReferenceCollection', () => {
     const dicts: DictionaryReference[] = ['typescript', '!!json', '!json', '!cpp', ' custom-dict ', '! python'];

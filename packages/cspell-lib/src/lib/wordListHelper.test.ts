@@ -1,6 +1,6 @@
 import { describe, expect, test, vi } from 'vitest';
 
-import * as wlh from './wordListHelper';
+import * as wlh from './wordListHelper.js';
 
 vi.mock('./util/logger');
 

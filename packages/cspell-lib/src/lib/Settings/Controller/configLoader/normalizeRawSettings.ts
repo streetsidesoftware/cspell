@@ -1,11 +1,11 @@
 import type { CSpellUserSettings, GlobDef, LanguageSetting, ReporterSettings } from '@cspell/cspell-types';
 import * as path from 'path';
 
-import { resolveFile } from '../../../util/resolveFile';
-import type { OptionalOrUndefined } from '../../../util/types';
-import * as util from '../../../util/util';
-import { mapDictDefsToInternal } from '../../DictionarySettings';
-import { toGlobDef } from './toGlobDef';
+import { resolveFile } from '../../../util/resolveFile.js';
+import type { OptionalOrUndefined } from '../../../util/types.js';
+import * as util from '../../../util/util.js';
+import { mapDictDefsToInternal } from '../../DictionarySettings.js';
+import { toGlobDef } from './toGlobDef.js';
 
 interface NormalizableFields {
     version?: string | number;

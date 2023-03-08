@@ -5,10 +5,10 @@ import * as os from 'os';
 import * as path from 'path';
 import { describe, expect, test } from 'vitest';
 
-import { isDictionaryDefinitionInlineInternal } from '../Models/CSpellSettingsInternalDef';
-import { getDefaultBundledSettings } from './DefaultSettings';
-import { createDictionaryReferenceCollection as createRefCol } from './DictionaryReferenceCollection';
-import * as DictSettings from './DictionarySettings';
+import { isDictionaryDefinitionInlineInternal } from '../Models/CSpellSettingsInternalDef.js';
+import { getDefaultBundledSettings } from './DefaultSettings.js';
+import { createDictionaryReferenceCollection as createRefCol } from './DictionaryReferenceCollection.js';
+import * as DictSettings from './DictionarySettings.js';
 
 const defaultSettings = getDefaultBundledSettings();
 const oc = expect.objectContaining;

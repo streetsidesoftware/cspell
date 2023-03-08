@@ -2,9 +2,9 @@ import * as fs from 'fs';
 import * as path from 'path';
 import { describe, expect, test } from 'vitest';
 
-import { pathPackageSamples } from '../../test-util/test.locations';
-import * as cspell from '../index';
-import * as util from '../util/util';
+import { pathPackageSamples } from '../../test-util/test.locations.js';
+import * as cspell from '../index.js';
+import * as util from '../util/util.js';
 
 const sampleFilename = path.join(pathPackageSamples, 'Seattle.fa.md');
 const text = fs.readFileSync(sampleFilename, 'utf8').toString();

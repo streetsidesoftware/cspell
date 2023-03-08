@@ -1,3 +1,3 @@
-export * from './Dictionaries';
-export * from './SpellingDictionary';
-export * from './SpellingDictionaryError';
+export * from './Dictionaries.js';
+export * from './SpellingDictionary.js';
+export * from './SpellingDictionaryError.js';

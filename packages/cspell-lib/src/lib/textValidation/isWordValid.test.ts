@@ -1,9 +1,9 @@
 import { createCachingDictionary, createSpellingDictionary } from 'cspell-dictionary';
 import { describe, expect, test } from 'vitest';
 
-import type { SpellingDictionaryOptions } from '../SpellingDictionary';
-import { createCollection } from '../SpellingDictionary';
-import { __testing__ } from './isWordValid';
+import type { SpellingDictionaryOptions } from '../SpellingDictionary/index.js';
+import { createCollection } from '../SpellingDictionary/index.js';
+import { __testing__ } from './isWordValid.js';
 
 const { hasWordCheck } = __testing__;
 

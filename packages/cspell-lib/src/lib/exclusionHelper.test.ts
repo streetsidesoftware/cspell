@@ -1,7 +1,7 @@
 import type { Glob } from '@cspell/cspell-types';
 import { describe, expect, test } from 'vitest';
 
-import { extractGlobsFromExcludeFilesGlobMap, generateExclusionFunctionForUri } from './exclusionHelper';
+import { extractGlobsFromExcludeFilesGlobMap, generateExclusionFunctionForUri } from './exclusionHelper.js';
 
 describe('Verify Exclusion Helper functions', () => {
     test('checks extractGlobsFromExcludeFilesGlobMap', () => {

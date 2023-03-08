@@ -1,16 +1,16 @@
 import type { CSpellSettingsWithSourceTrace, CSpellUserSettings } from '@cspell/cspell-types';
 
-import type { Document, DocumentWithText } from './Document';
-import { isBinaryDoc } from './Document/isBinaryDoc';
-import { documentToTextDocument, resolveDocument } from './Document/resolveDocument';
-import { createTextDocument } from './Models/TextDocument';
-import type { DocumentValidatorOptions } from './textValidation';
-import { DocumentValidator } from './textValidation';
-import { determineTextDocumentSettings } from './textValidation/determineTextDocumentSettings';
-import { isError } from './util/errors';
-import type { Uri } from './util/Uri';
-import { toUri } from './util/Uri';
-import type { ValidateTextOptions, ValidationIssue } from './validator';
+import type { Document, DocumentWithText } from './Document/index.js';
+import { isBinaryDoc } from './Document/isBinaryDoc.js';
+import { documentToTextDocument, resolveDocument } from './Document/resolveDocument.js';
+import { createTextDocument } from './Models/TextDocument.js';
+import { determineTextDocumentSettings } from './textValidation/determineTextDocumentSettings.js';
+import type { DocumentValidatorOptions } from './textValidation/index.js';
+import { DocumentValidator } from './textValidation/index.js';
+import { isError } from './util/errors.js';
+import type { Uri } from './util/Uri.js';
+import { toUri } from './util/Uri.js';
+import type { ValidateTextOptions, ValidationIssue } from './validator.js';
 
 export interface SpellCheckFileOptions extends ValidateTextOptions {
     /**

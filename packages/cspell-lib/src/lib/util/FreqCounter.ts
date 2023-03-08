@@ -1,4 +1,4 @@
-import type { IterableLike } from './IterableLike';
+import type { IterableLike } from './IterableLike.js';
 
 export class FreqCounter<T> {
     private _total = 0;

@@ -1,4 +1,4 @@
-import { createTimer } from './timer';
+import { createTimer } from './timer.js';
 
 /**
  * Measure and log result.

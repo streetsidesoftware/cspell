@@ -1,8 +1,8 @@
-import { isGenerated, isGeneratedFile } from '../LanguageIds';
-import type { Uri } from '../util/Uri';
-import { basename, toUri } from '../util/Uri';
-import type { Document } from './Document';
-import { normalizeLanguageIds } from './normalizeLanguageIds';
+import { isGenerated, isGeneratedFile } from '../LanguageIds.js';
+import type { Uri } from '../util/Uri.js';
+import { basename, toUri } from '../util/Uri.js';
+import type { Document } from './Document.js';
+import { normalizeLanguageIds } from './normalizeLanguageIds.js';
 
 export function isBinaryDoc(document: Document): boolean {
     return isBinaryFile(toUri(document.uri), document.languageId);

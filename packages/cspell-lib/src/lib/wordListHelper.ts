@@ -1,8 +1,8 @@
 // cSpell:enableCompoundWords
-import { readLines } from './util/fileReader';
-import { concatIterables, toIterableIterator } from './util/iterableIteratorLib';
-import { logError } from './util/logger';
-import * as Text from './util/text';
+import { readLines } from './util/fileReader.js';
+import { concatIterables, toIterableIterator } from './util/iterableIteratorLib.js';
+import { logError } from './util/logger.js';
+import * as Text from './util/text.js';
 
 const regExpWordsWithSpaces = /^\s*\p{L}+(?:\s+\p{L}+){0,3}$/u;
 

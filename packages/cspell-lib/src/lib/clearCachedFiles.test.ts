@@ -1,6 +1,6 @@
 import { describe, expect, test } from 'vitest';
 
-import * as clearCachedFiles from './clearCachedFiles';
+import * as clearCachedFiles from './clearCachedFiles.js';
 
 describe('clearCachedFiles', () => {
     test('clearCachedFiles', async () => {

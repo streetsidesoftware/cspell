@@ -4,5 +4,5 @@ export {
     pathPackageSamples,
     pathRepoRoot,
     pathRepoTestFixtures,
-} from './test.locations';
-export { extendExpect } from './test.matchers';
+} from './test.locations.js';
+export { extendExpect } from './test.matchers.js';

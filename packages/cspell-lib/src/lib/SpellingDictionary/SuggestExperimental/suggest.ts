@@ -1,7 +1,7 @@
 import type { Trie, WalkerIterator } from 'cspell-trie-lib';
 
-import type { SuggestionResult } from './entities';
-import { wordToFeatures } from './helpers';
+import type { SuggestionResult } from './entities.js';
+import { wordToFeatures } from './helpers.js';
 
 const defaultMinScore = 0.35;
 

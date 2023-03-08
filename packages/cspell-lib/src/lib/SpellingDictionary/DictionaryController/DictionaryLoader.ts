@@ -14,11 +14,11 @@ import type {
     DictionaryDefinitionInlineInternal,
     DictionaryDefinitionInternal,
     DictionaryFileDefinitionInternal,
-} from '../../Models/CSpellSettingsInternalDef';
-import { isDictionaryDefinitionInlineInternal } from '../../Models/CSpellSettingsInternalDef';
-import { AutoResolveWeakCache } from '../../util/AutoResolve';
-import { toError } from '../../util/errors';
-import { SpellingDictionaryLoadError } from '../SpellingDictionaryError';
+} from '../../Models/CSpellSettingsInternalDef.js';
+import { isDictionaryDefinitionInlineInternal } from '../../Models/CSpellSettingsInternalDef.js';
+import { AutoResolveWeakCache } from '../../util/AutoResolve.js';
+import { toError } from '../../util/errors.js';
+import { SpellingDictionaryLoadError } from '../SpellingDictionaryError.js';
 
 const MAX_AGE = 10000;
 

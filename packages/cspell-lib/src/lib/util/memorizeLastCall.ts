@@ -1,4 +1,4 @@
-import { isArrayEqual } from './util';
+import { isArrayEqual } from './util.js';
 
 /**
  * Create a function that memorizes the last call. If the next call is called with the same arguments, the

@@ -1,18 +1,18 @@
 import type { CSpellUserSettings } from '@cspell/cspell-types';
 import assert from 'assert';
 
-import type { Document } from '../Document';
-import { resolveDocumentToTextDocument } from '../Document/resolveDocument';
-import type { TextDocument } from '../Models/TextDocument';
-import { isTextDocument } from '../Models/TextDocument';
-import type { ValidationIssue } from '../Models/ValidationIssue';
-import * as Settings from '../Settings';
-import type { MatchRange } from '../util/TextRange';
-import { clean } from '../util/util';
-import type { DocumentValidatorOptions } from './docValidator';
-import { DocumentValidator } from './docValidator';
-import { calcTextInclusionRanges } from './textValidator';
-import { validateText } from './validator';
+import type { Document } from '../Document/index.js';
+import { resolveDocumentToTextDocument } from '../Document/resolveDocument.js';
+import type { TextDocument } from '../Models/TextDocument.js';
+import { isTextDocument } from '../Models/TextDocument.js';
+import type { ValidationIssue } from '../Models/ValidationIssue.js';
+import * as Settings from '../Settings/index.js';
+import type { MatchRange } from '../util/TextRange.js';
+import { clean } from '../util/util.js';
+import type { DocumentValidatorOptions } from './docValidator.js';
+import { DocumentValidator } from './docValidator.js';
+import { calcTextInclusionRanges } from './textValidator.js';
+import { validateText } from './validator.js';
 
 /**
  * Annotate text with issues and include / exclude zones.

@@ -6,7 +6,7 @@
  * ```
  */
 
-import { autoResolve } from './util/AutoResolve';
+import { autoResolve } from './util/AutoResolve.js';
 
 // cspell:ignore cljs cljx cson iname pcregrep fsscript gradle shtml xhtml mdoc aspx jshtm gitconfig bowerrc
 // cspell:ignore jshintrc jscsrc eslintrc babelrc webmanifest mdown markdn psgi phtml pssc psrc gypi rhistory

@@ -1,17 +1,17 @@
 import * as path from 'path';
 import { describe, expect, test, vi } from 'vitest';
 
-import { pathPackageRoot } from '../../../test-util/test.locations';
+import { pathPackageRoot } from '../../../test-util/test.locations.js';
 import type {
     DictionaryDefinitionInlineInternal,
     DictionaryDefinitionInternal,
     DictionaryFileDefinitionInternal,
-} from '../../Models/CSpellSettingsInternalDef';
-import { mapDictDefToInternal } from '../../Settings/DictionarySettings';
-import { getCSpellIO } from '../../static';
-import { clean } from '../../util/util';
-import type { LoadOptions } from './DictionaryLoader';
-import { DictionaryLoader } from './DictionaryLoader';
+} from '../../Models/CSpellSettingsInternalDef.js';
+import { mapDictDefToInternal } from '../../Settings/DictionarySettings.js';
+import { getCSpellIO } from '../../static.js';
+import { clean } from '../../util/util.js';
+import type { LoadOptions } from './DictionaryLoader.js';
+import { DictionaryLoader } from './DictionaryLoader.js';
 vi.mock('../../util/logger');
 
 const root = pathPackageRoot;

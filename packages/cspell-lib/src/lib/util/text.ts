@@ -2,7 +2,7 @@ import { opConcatMap, opMap, pipe } from '@cspell/cspell-pipe/sync';
 import type { TextDocumentOffset, TextOffset } from '@cspell/cspell-types';
 import { sequenceFromRegExpMatch } from 'gensequence';
 
-import { binarySearch } from './search';
+import { binarySearch } from './search.js';
 import {
     regExAccents,
     regExAllLower,
@@ -15,12 +15,12 @@ import {
     regExUpperSOrIng,
     regExWords,
     regExWordsAndDigits,
-} from './textRegex';
-import type { Uri } from './Uri';
-import { toUri } from './Uri';
-import { scanMap } from './util';
+} from './textRegex.js';
+import type { Uri } from './Uri.js';
+import { toUri } from './Uri.js';
+import { scanMap } from './util.js';
 
-export { stringToRegExp } from './textRegex';
+export { stringToRegExp } from './textRegex.js';
 
 // CSpell:ignore ings ning gimuy tsmerge
 

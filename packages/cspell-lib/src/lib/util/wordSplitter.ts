@@ -1,7 +1,7 @@
 import type { TextOffset } from '@cspell/cspell-types';
 
-import { PairingHeap } from './PairingHeap';
-import { escapeRegEx } from './regexHelper';
+import { PairingHeap } from './PairingHeap.js';
+import { escapeRegEx } from './regexHelper.js';
 import {
     regExDanglingQuote,
     regExEscapeCharacters,
@@ -10,7 +10,7 @@ import {
     regExSplitWords2,
     regExTrailingEndings,
     regExWordsAndDigits,
-} from './textRegex';
+} from './textRegex.js';
 
 const ignoreBreak: readonly number[] = Object.freeze([] as number[]);
 

@@ -10,8 +10,8 @@ import type {
 } from '@cspell/cspell-types';
 import type { WeightMap } from 'cspell-trie-lib';
 
-import type { OptionalOrUndefined } from '../util/types';
-import { clean } from '../util/util';
+import type { OptionalOrUndefined } from '../util/types.js';
+import { clean } from '../util/util.js';
 
 export const SymbolCSpellSettingsInternal = Symbol('CSpellSettingsInternal');
 

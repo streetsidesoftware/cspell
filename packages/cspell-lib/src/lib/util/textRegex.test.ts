@@ -11,7 +11,7 @@ import {
     regExSplitWords2,
     regExTrailingEndings,
     stringToRegExp,
-} from './textRegex';
+} from './textRegex.js';
 
 describe('Validate textRegex', () => {
     // cspell:ignore CODE'ing

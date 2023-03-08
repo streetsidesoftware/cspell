@@ -1,6 +1,14 @@
 import { describe, expect, test } from 'vitest';
 
-import { __testing__, catchPromiseError, isErrnoException, isError, toError, UnknownError, wrapCall } from './errors';
+import {
+    __testing__,
+    catchPromiseError,
+    isErrnoException,
+    isError,
+    toError,
+    UnknownError,
+    wrapCall,
+} from './errors.js';
 
 class MyError extends Error {
     constructor(msg: string) {

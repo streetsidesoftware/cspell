@@ -2,8 +2,8 @@ import { opConcatMap, pipe, toArray } from '@cspell/cspell-pipe/sync';
 import type { TextOffset } from '@cspell/cspell-types';
 import { describe, expect, test } from 'vitest';
 
-import * as Text from './text';
-import { splitCamelCaseWord } from './text';
+import * as Text from './text.js';
+import { splitCamelCaseWord } from './text.js';
 
 // cSpell:ignore Ápple DBAs ctrip γάμμα
 

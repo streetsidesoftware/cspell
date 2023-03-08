@@ -1,15 +1,15 @@
 import type { CSpellUserSettings } from '@cspell/cspell-types';
 import { IssueType } from '@cspell/cspell-types';
 
-import { createTextDocument } from '../Models/TextDocument';
-import type { ValidationIssue } from '../Models/ValidationIssue';
-import * as Settings from '../Settings';
-import type { DirectiveIssue } from '../Settings/InDocSettings';
-import { validateInDocumentSettings } from '../Settings/InDocSettings';
-import { CompoundWordsMethod, getDictionaryInternal } from '../SpellingDictionary';
-import { settingsToValidateOptions } from './settingsToValidateOptions';
-import { validateText as validateFullText } from './textValidator';
-import type { ValidateTextOptions } from './ValidateTextOptions';
+import { createTextDocument } from '../Models/TextDocument.js';
+import type { ValidationIssue } from '../Models/ValidationIssue.js';
+import * as Settings from '../Settings/index.js';
+import type { DirectiveIssue } from '../Settings/InDocSettings.js';
+import { validateInDocumentSettings } from '../Settings/InDocSettings.js';
+import { CompoundWordsMethod, getDictionaryInternal } from '../SpellingDictionary/index.js';
+import { settingsToValidateOptions } from './settingsToValidateOptions.js';
+import { validateText as validateFullText } from './textValidator.js';
+import type { ValidateTextOptions } from './ValidateTextOptions.js';
 
 export const diagSource = 'cSpell Checker';
 

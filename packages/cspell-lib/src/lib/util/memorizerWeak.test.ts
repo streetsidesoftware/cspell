@@ -1,6 +1,6 @@
 import { describe, expect, test, vi } from 'vitest';
 
-import { memorizerWeak } from './memorizerWeak';
+import { memorizerWeak } from './memorizerWeak.js';
 
 describe('memorizer Weak', () => {
     test('memorizer', () => {

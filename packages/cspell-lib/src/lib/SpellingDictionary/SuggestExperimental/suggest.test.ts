@@ -1,8 +1,8 @@
 import { Trie } from 'cspell-trie-lib';
 import { describe, expect, test } from 'vitest';
 
-import { compareResults } from './helpers';
-import * as suggest from './suggest';
+import { compareResults } from './helpers.js';
+import * as suggest from './suggest.js';
 
 describe('Validate Suggest', () => {
     test('suggestions', () => {

@@ -12,14 +12,14 @@ import assert from 'assert';
 import { GlobMatcher } from 'cspell-glob';
 import * as path from 'path';
 
-import type { CSpellSettingsInternal, CSpellSettingsInternalFinalized } from '../Models/CSpellSettingsInternalDef';
-import { cleanCSpellSettingsInternal as csi, isCSpellSettingsInternal } from '../Models/CSpellSettingsInternalDef';
-import { autoResolveWeak, AutoResolveWeakCache } from '../util/AutoResolve';
-import type { OptionalOrUndefined } from '../util/types';
-import * as util from '../util/util';
-import { configSettingsFileVersion0_1, ENV_CSPELL_GLOB_ROOT } from './constants';
-import { calcDictionaryDefsToLoad, mapDictDefsToInternal } from './DictionarySettings';
-import { resolvePatterns } from './patterns';
+import type { CSpellSettingsInternal, CSpellSettingsInternalFinalized } from '../Models/CSpellSettingsInternalDef.js';
+import { cleanCSpellSettingsInternal as csi, isCSpellSettingsInternal } from '../Models/CSpellSettingsInternalDef.js';
+import { autoResolveWeak, AutoResolveWeakCache } from '../util/AutoResolve.js';
+import type { OptionalOrUndefined } from '../util/types.js';
+import * as util from '../util/util.js';
+import { configSettingsFileVersion0_1, ENV_CSPELL_GLOB_ROOT } from './constants.js';
+import { calcDictionaryDefsToLoad, mapDictDefsToInternal } from './DictionarySettings.js';
+import { resolvePatterns } from './patterns.js';
 
 type CSpellSettingsWST = AdvancedCSpellSettingsWithSourceTrace;
 type CSpellSettingsWSTO = OptionalOrUndefined<AdvancedCSpellSettingsWithSourceTrace>;

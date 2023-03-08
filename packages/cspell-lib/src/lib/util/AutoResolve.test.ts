@@ -1,6 +1,6 @@
 import { describe, expect, test, vi } from 'vitest';
 
-import { createAutoResolveCache, createAutoResolveWeakCache } from './AutoResolve';
+import { createAutoResolveCache, createAutoResolveWeakCache } from './AutoResolve.js';
 
 describe('AutoResolve', () => {
     test('createAutoResolveCache', () => {

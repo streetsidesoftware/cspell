@@ -6,24 +6,24 @@ import type { CSpellIO } from 'cspell-io';
 import { getDefaultCSpellIO } from 'cspell-io';
 import * as path from 'path';
 
-import { createCSpellSettingsInternal as csi } from '../../../Models/CSpellSettingsInternalDef';
-import { AutoResolveLRUCache } from '../../../util/AutoResolveLRUCache';
-import { logError, logWarning } from '../../../util/logger';
-import { resolveFile } from '../../../util/resolveFile';
-import type { Uri } from '../../../util/Uri';
-import { toUri } from '../../../util/Uri';
+import { createCSpellSettingsInternal as csi } from '../../../Models/CSpellSettingsInternalDef.js';
+import { AutoResolveLRUCache } from '../../../util/AutoResolveLRUCache.js';
+import { logError, logWarning } from '../../../util/logger.js';
+import { resolveFile } from '../../../util/resolveFile.js';
+import type { Uri } from '../../../util/Uri.js';
+import { toUri } from '../../../util/Uri.js';
 import {
     configSettingsFileVersion0_1,
     configSettingsFileVersion0_2,
     currentSettingsFileVersion,
     ENV_CSPELL_GLOB_ROOT,
-} from '../../constants';
-import { mergeSettings } from '../../CSpellSettingsServer';
-import { getRawGlobalSettings } from '../../GlobalSettings';
-import { ImportError } from '../ImportError';
-import type { LoaderResult } from '../pnpLoader';
-import { pnpLoader } from '../pnpLoader';
-import { defaultSettings } from './defaultSettings';
+} from '../../constants.js';
+import { mergeSettings } from '../../CSpellSettingsServer.js';
+import { getRawGlobalSettings } from '../../GlobalSettings.js';
+import { ImportError } from '../ImportError.js';
+import type { LoaderResult } from '../pnpLoader.js';
+import { pnpLoader } from '../pnpLoader.js';
+import { defaultSettings } from './defaultSettings.js';
 import {
     normalizeCacheSettings,
     normalizeDictionaryDefs,
@@ -33,10 +33,10 @@ import {
     normalizeRawConfig,
     normalizeReporters,
     normalizeSettingsGlobs,
-} from './normalizeRawSettings';
-import type { PnPSettingsOptional } from './PnPSettings';
-import { defaultPnPSettings, normalizePnPSettings } from './PnPSettings';
-import type { CSpellSettingsI, CSpellSettingsWST } from './types';
+} from './normalizeRawSettings.js';
+import type { PnPSettingsOptional } from './PnPSettings.js';
+import { defaultPnPSettings, normalizePnPSettings } from './PnPSettings.js';
+import type { CSpellSettingsI, CSpellSettingsWST } from './types.js';
 
 type CSpellSettingsVersion = Exclude<CSpellUserSettings['version'], undefined>;
 const supportedCSpellConfigVersions: CSpellSettingsVersion[] = [configSettingsFileVersion0_2];

@@ -1,6 +1,6 @@
 import { describe, expect, test } from 'vitest';
 
-import * as LangId from './LanguageIds';
+import * as LangId from './LanguageIds.js';
 
 describe('Validate LanguageIds', () => {
     test.each`

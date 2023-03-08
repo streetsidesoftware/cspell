@@ -2,15 +2,15 @@ import { opConcatMap, opMap, pipeSync } from '@cspell/cspell-pipe/sync';
 import type { CSpellUserSettings, TextOffset } from '@cspell/cspell-types';
 import { describe, expect, test } from 'vitest';
 
-import { createCSpellSettingsInternal as csi } from '../Models/CSpellSettingsInternalDef';
-import { finalizeSettings } from '../Settings';
-import type { SpellingDictionaryOptions } from '../SpellingDictionary';
-import { createCollection, createSpellingDictionary, getDictionaryInternal } from '../SpellingDictionary';
-import { FreqCounter } from '../util/FreqCounter';
-import * as Text from '../util/text';
-import { settingsToValidateOptions } from './settingsToValidateOptions';
-import { _testMethods, calcTextInclusionRanges, validateText } from './textValidator';
-import type { ValidationOptions } from './ValidationTypes';
+import { createCSpellSettingsInternal as csi } from '../Models/CSpellSettingsInternalDef.js';
+import { finalizeSettings } from '../Settings/index.js';
+import type { SpellingDictionaryOptions } from '../SpellingDictionary/index.js';
+import { createCollection, createSpellingDictionary, getDictionaryInternal } from '../SpellingDictionary/index.js';
+import { FreqCounter } from '../util/FreqCounter.js';
+import * as Text from '../util/text.js';
+import { settingsToValidateOptions } from './settingsToValidateOptions.js';
+import { _testMethods, calcTextInclusionRanges, validateText } from './textValidator.js';
+import type { ValidationOptions } from './ValidationTypes.js';
 
 function sToV(settings: CSpellUserSettings) {
     return settingsToValidateOptions(finalizeSettings(settings));

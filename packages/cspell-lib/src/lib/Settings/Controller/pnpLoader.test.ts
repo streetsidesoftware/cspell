@@ -2,10 +2,10 @@ import path from 'path';
 import resolveFrom from 'resolve-from';
 import { describe, expect, test } from 'vitest';
 
-import { pathPackageSamples, pathRepoRoot } from '../../../test-util/test.locations';
-import * as Uri from '../../util/Uri';
-import { UnsupportedPnpFile } from './ImportError';
-import { clearPnPGlobalCache, pnpLoader } from './pnpLoader';
+import { pathPackageSamples, pathRepoRoot } from '../../../test-util/test.locations.js';
+import * as Uri from '../../util/Uri.js';
+import { UnsupportedPnpFile } from './ImportError.js';
+import { clearPnPGlobalCache, pnpLoader } from './pnpLoader.js';
 
 const root = pathRepoRoot;
 const uriTestPackages = Uri.fromFilePath(path.join(root, 'test-packages/yarn'));

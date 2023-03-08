@@ -1,3 +1,3 @@
-export type { Document, DocumentWithText, UriString } from './Document';
-export { isBinaryFile } from './isBinaryDoc';
-export { fileToDocument, fileToTextDocument } from './resolveDocument';
+export type { Document, DocumentWithText, UriString } from './Document.js';
+export { isBinaryFile } from './isBinaryDoc.js';
+export { fileToDocument, fileToTextDocument } from './resolveDocument.js';

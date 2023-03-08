@@ -2,11 +2,11 @@ import type { CSpellSettings } from '@cspell/cspell-types';
 import { loremIpsum } from 'lorem-ipsum';
 import { describe, expect, test } from 'vitest';
 
-import { mergeSettings } from '../Settings';
-import { getDefaultSettings } from '../Settings/DefaultSettings';
-import * as tds from '../Settings/TextDocumentSettings';
-import type { ValidationIssue } from '../validator';
-import * as Validator from './validator';
+import { getDefaultSettings } from '../Settings/DefaultSettings.js';
+import { mergeSettings } from '../Settings/index.js';
+import * as tds from '../Settings/TextDocumentSettings.js';
+import type { ValidationIssue } from '../validator.js';
+import * as Validator from './validator.js';
 
 // cSpell:ignore brouwn jumpped lazzy wrongg mispelled ctrip nmove mischecked
 

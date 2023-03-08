@@ -15,7 +15,7 @@ export {
     searchForConfig,
     searchForConfigSync,
     sectionCSpell,
-} from './configLoader';
-export { extractImportErrors, ImportFileRefWithError } from './extractImportErrors';
-export { readSettings } from './readSettings';
-export { readSettingsFiles } from './readSettingsFiles';
+} from './configLoader.js';
+export { extractImportErrors, ImportFileRefWithError } from './extractImportErrors.js';
+export { readSettings } from './readSettings.js';
+export { readSettingsFiles } from './readSettingsFiles.js';

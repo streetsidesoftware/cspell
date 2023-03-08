@@ -16,14 +16,14 @@ import type {
     DictionaryDefinitionInternal,
     DictionaryDefinitionInternalWithSource,
     DictionaryFileDefinitionInternalWithSource,
-} from '../Models/CSpellSettingsInternalDef';
-import { isDictionaryDefinitionInlineInternal } from '../Models/CSpellSettingsInternalDef';
-import { AutoResolveWeakCache } from '../util/AutoResolve';
-import { resolveFile } from '../util/resolveFile';
-import type { RequireOptional, UnionFields } from '../util/types';
-import { clean } from '../util/util';
-import type { DictionaryReferenceCollection } from './DictionaryReferenceCollection';
-import { createDictionaryReferenceCollection } from './DictionaryReferenceCollection';
+} from '../Models/CSpellSettingsInternalDef.js';
+import { isDictionaryDefinitionInlineInternal } from '../Models/CSpellSettingsInternalDef.js';
+import { AutoResolveWeakCache } from '../util/AutoResolve.js';
+import { resolveFile } from '../util/resolveFile.js';
+import type { RequireOptional, UnionFields } from '../util/types.js';
+import { clean } from '../util/util.js';
+import type { DictionaryReferenceCollection } from './DictionaryReferenceCollection.js';
+import { createDictionaryReferenceCollection } from './DictionaryReferenceCollection.js';
 
 export type DefMapArrayItem = [string, DictionaryDefinitionInternal];
 

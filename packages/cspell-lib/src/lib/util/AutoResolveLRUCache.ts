@@ -1,6 +1,6 @@
 import assert from 'assert';
 
-import { isArrayEqual } from './util';
+import { isArrayEqual } from './util.js';
 
 interface LLNode<T> {
     value: T;

@@ -7,10 +7,10 @@ import {
     createSuggestDictionary,
 } from 'cspell-dictionary';
 
-import type { CSpellSettingsInternal, DictionaryDefinitionInternal } from '../Models/CSpellSettingsInternalDef';
-import { calcDictionaryDefsToLoad } from '../Settings/DictionarySettings';
-import { isDefined } from '../util/util';
-import { loadDictionary, loadDictionarySync, refreshCacheEntries } from './DictionaryLoader';
+import type { CSpellSettingsInternal, DictionaryDefinitionInternal } from '../Models/CSpellSettingsInternalDef.js';
+import { calcDictionaryDefsToLoad } from '../Settings/DictionarySettings.js';
+import { isDefined } from '../util/util.js';
+import { loadDictionary, loadDictionarySync, refreshCacheEntries } from './DictionaryLoader.js';
 
 export function loadDictionaryDefs(defsToLoad: DictionaryDefinitionInternal[]): Promise<SpellingDictionary>[] {
     return defsToLoad.map(loadDictionary);

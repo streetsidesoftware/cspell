@@ -1,6 +1,6 @@
 import { describe, expect, test } from 'vitest';
 
-import * as search from './search';
+import * as search from './search.js';
 
 describe('validate the search', () => {
     test('the results of binary search', () => {
