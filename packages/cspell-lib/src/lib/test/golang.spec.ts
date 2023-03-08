@@ -2,9 +2,10 @@ import * as fsp from 'fs/promises';
 import * as path from 'path';
 import { describe, expect, test } from 'vitest';
 
+import { pathPackageSamples } from '../../test-util/test.locations';
 import * as cspell from '../index';
 
-const sampleFilename = path.join(__dirname, '..', '..', 'samples', 'src', 'sample.go');
+const sampleFilename = path.join(pathPackageSamples, 'src/sample.go');
 const sampleFile = fsp.readFile(sampleFilename, 'utf8').then((buffer) => buffer.toString());
 
 const timeout = 10000;

@@ -2,9 +2,10 @@ import * as fsp from 'fs/promises';
 import * as path from 'path';
 import { describe, expect, test } from 'vitest';
 
+import { pathPackageSamples } from '../../test-util/test.locations';
 import * as cspell from '../index';
 
-const samples = path.join(__dirname, '..', '..', 'samples', 'bug-fixes');
+const samples = path.join(pathPackageSamples, 'bug-fixes');
 const configFile = path.join(samples, 'cspell.json');
 
 const files = ['bug345.ts', '../src/sample.go'];

@@ -2,9 +2,10 @@ import * as fsp from 'fs';
 import * as path from 'path';
 import { describe, expect, test } from 'vitest';
 
+import { pathPackageSamples } from '../../test-util/test.locations';
 import * as cspell from '../index';
 
-const samples = path.join(__dirname, '..', '..', 'samples');
+const samples = pathPackageSamples;
 const sampleFilename = path.join(samples, 'src', 'sample.py');
 const sampleConfig = path.join(samples, '.cspell.json');
 const text = fsp.readFileSync(sampleFilename, 'utf8').toString();
