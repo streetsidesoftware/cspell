@@ -1,11 +1,12 @@
 import * as path from 'path';
 import { describe, expect, test } from 'vitest';
 
+import { pathPackageSamples } from '../../test-util/test.locations';
 import { loadTextDocument } from '../Models/TextDocument';
 import { loadConfig } from '../Settings';
 import { determineTextDocumentSettings } from './determineTextDocumentSettings';
 
-const samples = path.resolve(__dirname, '../../samples');
+const samples = pathPackageSamples;
 const cfgPath = path.join(samples, '.cspell.json');
 const oc = expect.objectContaining;
 
