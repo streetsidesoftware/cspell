@@ -2,6 +2,12 @@ import type { CSpellSettingsWithSourceTrace, CSpellUserSettings, ImportFileRef }
 import * as path from 'path';
 import { beforeEach, describe, expect, test, vi } from 'vitest';
 
+import {
+    pathPackageRoot,
+    pathPackageSamples,
+    pathRepoRoot,
+    pathRepoTestFixtures,
+} from '../../../../test-util/test.locations';
 import { logError, logWarning } from '../../../util/logger';
 import * as URI from '../../../util/Uri';
 import { currentSettingsFileVersion, ENV_CSPELL_GLOB_ROOT } from '../../constants';
@@ -30,11 +36,12 @@ const { normalizeCacheSettings, validateRawConfigExports, validateRawConfigVersi
 const loader = getDefaultConfigLoaderInternal();
 const normalizeSettings = loader._normalizeSettings.bind(loader);
 
-const rootCspellLib = path.resolve(path.join(__dirname, '../../../..'));
-const root = path.resolve(rootCspellLib, '../..');
-const samplesDir = path.resolve(rootCspellLib, 'samples');
+const rootCspellLib = pathPackageRoot;
+const root = pathRepoRoot;
+const samplesDir = pathPackageSamples;
 const samplesSrc = path.join(samplesDir, 'src');
-const testFixtures = path.join(root, 'test-fixtures');
+const testFixtures = pathRepoTestFixtures;
+
 const oc = expect.objectContaining;
 
 vi.mock('../../../util/logger');
@@ -42,12 +49,14 @@ vi.mock('../../../util/logger');
 const mockedLogError = vi.mocked(logError);
 const mockedLogWarning = vi.mocked(logWarning);
 
+const uriSrcDir = URI.file(rp('src/lib'));
+
 describe('Validate CSpellSettingsServer', () => {
     test.each`
         filename                                              | relativeTo   | refFilename
-        ${rr('cspell.config.json')}                           | ${undefined} | ${rr('cspell.config.json')}
-        ${rr('cspell.config.json')}                           | ${__dirname} | ${rr('cspell.config.json')}
-        ${'@cspell/cspell-bundled-dicts/cspell-default.json'} | ${__dirname} | ${require.resolve('@cspell/cspell-bundled-dicts/cspell-default.json')}
+        ${rp('cspell.config.json')}                           | ${undefined} | ${rp('cspell.config.json')}
+        ${rp('cspell.config.json')}                           | ${rp('src')} | ${rp('cspell.config.json')}
+        ${'@cspell/cspell-bundled-dicts/cspell-default.json'} | ${rp()}      | ${require.resolve('@cspell/cspell-bundled-dicts/cspell-default.json')}
         ${'@cspell/cspell-bundled-dicts/cspell-default.json'} | ${undefined} | ${require.resolve('@cspell/cspell-bundled-dicts/cspell-default.json')}
     `('tests readSettings $filename $relativeTo', ({ filename, relativeTo, refFilename }) => {
         const settings = readSettings(filename, relativeTo);
@@ -193,24 +202,24 @@ describe('Validate Glob resolution', () => {
     test('normalized settings', () => {
         expect(sampleSettings).not.toEqual(sampleSettingsV1);
         expect(sampleSettings.globRoot).not.toEqual(sampleSettingsV1.globRoot);
-        expect(sampleSettings.globRoot).toBe(__dirname);
+        expect(sampleSettings.globRoot).toBe(path.dirname(srcSampleSettingsFilename));
         expect(sampleSettingsV1.globRoot).toEqual('${cwd}');
         expect(sampleSettings.ignorePaths).toEqual(
             expect.arrayContaining([
-                { glob: 'node_modules', root: sampleSettings.globRoot, source: sampleSettingsFilename },
+                { glob: 'node_modules', root: sampleSettings.globRoot, source: srcSampleSettingsFilename },
             ])
         );
         expect(sampleSettingsV1.ignorePaths).toEqual(
             expect.arrayContaining([
-                { glob: 'node_modules', root: sampleSettingsV1.globRoot, source: sampleSettingsFilename },
+                { glob: 'node_modules', root: sampleSettingsV1.globRoot, source: srcSampleSettingsFilename },
             ])
         );
     });
 
     test('Using ENV_CSPELL_GLOB_ROOT as __dirname', () => {
-        process.env[ENV_CSPELL_GLOB_ROOT] = __dirname;
-        const settingsV = normalizeSettings(rawSampleSettings, __filename, {});
-        const settingsV1 = normalizeSettings(rawSampleSettingsV1, __filename, {});
+        process.env[ENV_CSPELL_GLOB_ROOT] = path.dirname(srcSampleSettingsFilename);
+        const settingsV = normalizeSettings(rawSampleSettings, srcSampleSettingsFilename, {});
+        const settingsV1 = normalizeSettings(rawSampleSettingsV1, srcSampleSettingsFilename, {});
 
         expect(settingsV).toEqual(sampleSettings);
         expect(settingsV1).not.toEqual(sampleSettingsV1);
@@ -221,9 +230,9 @@ describe('Validate Glob resolution', () => {
     });
 
     test('Using ENV_CSPELL_GLOB_ROOT as without shared hierarchy', () => {
-        process.env[ENV_CSPELL_GLOB_ROOT] = rr('samples');
-        const settingsV = normalizeSettings(rawSampleSettings, __filename, {});
-        const settingsV1 = normalizeSettings(rawSampleSettingsV1, __filename, {});
+        process.env[ENV_CSPELL_GLOB_ROOT] = rp('samples');
+        const settingsV = normalizeSettings(rawSampleSettings, srcSampleSettingsFilename, {});
+        const settingsV1 = normalizeSettings(rawSampleSettingsV1, srcSampleSettingsFilename, {});
 
         expect(settingsV.version).toEqual(currentSettingsFileVersion);
 
@@ -256,7 +265,7 @@ describe('Validate Glob resolution', () => {
 
     test.each`
         from
-        ${__dirname}
+        ${rp('src/lib')}
         ${undefined}
     `('globs from config file (search) $from', async ({ from }) => {
         const config = await searchForConfig(from);
@@ -286,23 +295,23 @@ describe('Validate Glob resolution', () => {
     });
 
     test.each`
-        settings                                          | file                | expected
-        ${{}}                                             | ${r('cspell.json')} | ${oc({ name: 'configLoader/cspell.json' })}
-        ${{ gitignoreRoot: '.' }}                         | ${r('cspell.json')} | ${oc({ name: 'configLoader/cspell.json', gitignoreRoot: [__dirname] })}
-        ${{ gitignoreRoot: '..' }}                        | ${r('cspell.json')} | ${oc({ gitignoreRoot: [r('..')] })}
-        ${{ gitignoreRoot: ['.', '..'] }}                 | ${r('cspell.json')} | ${oc({ gitignoreRoot: [r('.'), r('..')] })}
-        ${{ reporters: ['../../../../README.md'] }}       | ${r('cspell.json')} | ${oc({ reporters: [rr('README.md')] })}
-        ${{ reporters: [['../../../../README.md']] }}     | ${r('cspell.json')} | ${oc({ reporters: [[rr('README.md')]] })}
-        ${{ reporters: [['../../../../README.md', {}]] }} | ${r('cspell.json')} | ${oc({ reporters: [[rr('README.md'), {}]] })}
+        settings                                                  | file                      | expected
+        ${{}}                                                     | ${rSrcLib('cspell.json')} | ${oc({ name: 'lib/cspell.json' })}
+        ${{ gitignoreRoot: '.' }}                                 | ${rSrcLib('cspell.json')} | ${oc({ name: 'lib/cspell.json', gitignoreRoot: [rSrcLib('.')] })}
+        ${{ gitignoreRoot: '..' }}                                | ${rSrcLib('cspell.json')} | ${oc({ gitignoreRoot: [rSrcLib('..')] })}
+        ${{ gitignoreRoot: ['.', '..'] }}                         | ${rSrcLib('cspell.json')} | ${oc({ gitignoreRoot: [rSrcLib('.'), rSrcLib('..')] })}
+        ${{ reporters: [relCwd(rSample('reporter.cjs'))] }}       | ${rSrcLib('cspell.json')} | ${oc({ reporters: [rSample('reporter.cjs')] })}
+        ${{ reporters: [[relCwd(rSample('reporter.cjs'))]] }}     | ${rSrcLib('cspell.json')} | ${oc({ reporters: [[rSample('reporter.cjs')]] })}
+        ${{ reporters: [[relCwd(rSample('reporter.cjs')), {}]] }} | ${rSrcLib('cspell.json')} | ${oc({ reporters: [[rSample('reporter.cjs'), {}]] })}
     `('normalizeSettings $settings', ({ settings, file, expected }) => {
         expect(normalizeSettings(settings, file, {})).toEqual(expected);
     });
 
     test.each`
-        settings                            | file                | expected
-        ${{ reporters: ['./reporter.js'] }} | ${r('cspell.json')} | ${'Not found: "./reporter.js"'}
-        ${{ reporters: [{}] }}              | ${r('cspell.json')} | ${'Invalid Reporter'}
-        ${{ reporters: [[{}]] }}            | ${r('cspell.json')} | ${'Invalid Reporter'}
+        settings                            | file                      | expected
+        ${{ reporters: ['./reporter.js'] }} | ${rSrcLib('cspell.json')} | ${'Not found: "./reporter.js"'}
+        ${{ reporters: [{}] }}              | ${rSrcLib('cspell.json')} | ${'Invalid Reporter'}
+        ${{ reporters: [[{}]] }}            | ${rSrcLib('cspell.json')} | ${'Invalid Reporter'}
     `('normalizeSettings with Error $settings', ({ settings, file, expected }) => {
         expect(() => normalizeSettings(settings, file, {})).toThrow(expected);
     });
@@ -349,7 +358,7 @@ describe('Validate search/load config files', () => {
     }
 
     function s(filename: string): string {
-        return relSamples(filename);
+        return rSample(filename);
     }
 
     interface TestSearchFrom {
@@ -464,15 +473,15 @@ describe('Validate search/load config files', () => {
     });
 
     test('loadPnP', async () => {
-        await expect(loadPnP({}, URI.file(__dirname))).resolves.toBeUndefined();
+        await expect(loadPnP({}, uriSrcDir)).resolves.toBeUndefined();
         // Look for a pnp file from the current location, but it won't be found.
-        await expect(loadPnP({ usePnP: true }, URI.file(__dirname))).resolves.toBeUndefined();
+        await expect(loadPnP({ usePnP: true }, uriSrcDir)).resolves.toBeUndefined();
     });
 
     test('loadPnPSync', () => {
-        expect(loadPnPSync({}, URI.fromFilePath(__dirname))).toBeUndefined();
+        expect(loadPnPSync({}, uriSrcDir)).toBeUndefined();
         // Look for a pnp file from the current location, but it won't be found.
-        expect(loadPnPSync({ usePnP: true }, URI.file(__dirname))).toBeUndefined();
+        expect(loadPnPSync({ usePnP: true }, uriSrcDir)).toBeUndefined();
     });
 
     test('config needing PnP', async () => {
@@ -521,8 +530,8 @@ describe('Validate Normalize Settings', () => {
         ${{ cache: {} }}                                 | ${{ cache: {} }}
         ${{ cache: { useCache: false } }}                | ${{ cache: { useCache: false } }}
         ${{ cache: { useCache: undefined } }}            | ${{ cache: { useCache: undefined } }}
-        ${{ cache: { cacheLocation: '.cache' } }}        | ${{ cache: { cacheLocation: r(root, '.cache') } }}
-        ${{ cache: { cacheLocation: '${cwd}/.cache' } }} | ${{ cache: { cacheLocation: r(process.cwd(), '.cache') } }}
+        ${{ cache: { cacheLocation: '.cache' } }}        | ${{ cache: { cacheLocation: rr('.cache') } }}
+        ${{ cache: { cacheLocation: '${cwd}/.cache' } }} | ${{ cache: { cacheLocation: rr(process.cwd(), '.cache') } }}
     `('normalizeCacheSettings', ({ config, expected }) => {
         expect(normalizeCacheSettings(config, root)).toEqual(expected);
     });
@@ -531,7 +540,7 @@ describe('Validate Normalize Settings', () => {
 describe('Validate Dependencies', () => {
     test.each`
         filename                    | relativeTo   | expected
-        ${rr('cspell.config.json')} | ${undefined} | ${{ configFiles: [r(root, 'cspell.json'), rr('cspell.config.json')], dictionaryFiles: [r(root, 'cspell-dict.txt'), r(root, 'cspell-ignore-words.txt')] }}
+        ${rp('cspell.config.json')} | ${undefined} | ${{ configFiles: [rr('cspell.json'), rp('cspell.config.json')], dictionaryFiles: [rr('cspell-dict.txt'), rr('cspell-ignore-words.txt')] }}
     `('tests readSettings $filename $relativeTo', ({ filename, relativeTo, expected }) => {
         const settings = readSettings(filename, relativeTo);
         const dependencies = extractDependencies(settings);
@@ -539,20 +548,39 @@ describe('Validate Dependencies', () => {
     });
 });
 
-function p(...parts: string[]): string {
-    return path.join(...parts);
+/**
+ * Resolve relative to src/lib
+ */
+function rSrcLib(...parts: string[]): string {
+    return path.resolve(rp('src/lib'), ...parts);
 }
 
-function r(...parts: string[]): string {
-    return path.resolve(__dirname, p(...parts));
+/**
+ * Resolve relative to CSpellLib Root
+ */
+function rp(...parts: string[]): string {
+    return path.resolve(rootCspellLib, ...parts);
 }
 
+/**
+ * Resolve relative to Repo Root
+ */
 function rr(...parts: string[]): string {
-    return path.resolve(rootCspellLib, p(...parts));
+    return path.resolve(pathRepoRoot, ...parts);
 }
 
-function relSamples(file: string) {
+/**
+ * Resolve sample file
+ */
+function rSample(file: string) {
     return path.resolve(samplesDir, file);
+}
+
+/**
+ * return the file relative to the current working directory
+ */
+function relCwd(file: string) {
+    return path.relative(process.cwd(), file);
 }
 
 const rawSampleSettings: CSpellUserSettings = {
@@ -576,6 +604,6 @@ const rawSampleSettings: CSpellUserSettings = {
 };
 
 const rawSampleSettingsV1: CSpellUserSettings = { ...rawSampleSettings, version: '0.1' };
-const sampleSettingsFilename = __filename;
-const sampleSettings = normalizeSettings(rawSampleSettings, sampleSettingsFilename, {});
-const sampleSettingsV1 = normalizeSettings(rawSampleSettingsV1, sampleSettingsFilename, {});
+const srcSampleSettingsFilename = rp('src/test/cspell.json');
+const sampleSettings = normalizeSettings(rawSampleSettings, srcSampleSettingsFilename, {});
+const sampleSettingsV1 = normalizeSettings(rawSampleSettingsV1, srcSampleSettingsFilename, {});
