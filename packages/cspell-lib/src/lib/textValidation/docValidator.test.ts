@@ -5,6 +5,7 @@ import * as path from 'path';
 import { pathToFileURL } from 'url';
 import { describe, expect, test } from 'vitest';
 
+import { pathPackageFixtures, pathPackageRoot } from '../../test-util/test.locations';
 import type { TextDocument } from '../Models/TextDocument';
 import { createTextDocument } from '../Models/TextDocument';
 import type { ValidationIssue } from '../Models/ValidationIssue';
@@ -15,7 +16,7 @@ import type { DocumentValidatorOptions } from './docValidator';
 import { __testing__, DocumentValidator, shouldCheckDocument } from './docValidator';
 
 const docCache = new AutoCache(_loadDoc, 100);
-const fixturesDir = path.join(__dirname, '../../fixtures');
+const fixturesDir = pathPackageFixtures;
 
 const oc = expect.objectContaining;
 const ac = expect.arrayContaining;
@@ -35,7 +36,7 @@ describe('docValidator', () => {
     test.each`
         filename
         ${__filename}
-        ${path.join(__dirname, '../../package.json')}
+        ${path.join(pathPackageRoot, 'package.json')}
     `('DocumentValidator prepare $filename', async ({ filename }) => {
         const doc = await loadDoc(filename);
         const dVal = new DocumentValidator(doc, {}, {});
