@@ -53,7 +53,7 @@ function _compare<T>(a: T, b: T): number {
     return 0;
 }
 
-export function compare<T>(a: ComparableFilter<T>, b: ComparableFilter<T>): number {
+export function compare<T extends Comparable>(a: T, b: T): number {
     return _compare(a, b);
 }
 

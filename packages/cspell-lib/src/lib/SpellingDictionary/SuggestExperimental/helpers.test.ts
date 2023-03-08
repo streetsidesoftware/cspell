@@ -111,20 +111,22 @@ describe('Validate Suggest Helpers', () => {
         const comp = (a: Feature, b: Feature) => a[0].localeCompare(b[0]);
         const features = helpers.wordToFeatures('^hello$');
         expect([...features].sort(comp)).toEqual(
-            [
-                ['h', 1],
-                ['e', 1],
-                ['l', 2],
-                ['o', 1],
-                ['^', 1],
-                ['$', 1],
-                ['^h', 1],
-                ['he', 1],
-                ['el', 1],
-                ['ll', 1],
-                ['lo', 1],
-                ['o$', 1],
-            ].sort(comp)
+            (
+                [
+                    ['h', 1],
+                    ['e', 1],
+                    ['l', 2],
+                    ['o', 1],
+                    ['^', 1],
+                    ['$', 1],
+                    ['^h', 1],
+                    ['he', 1],
+                    ['el', 1],
+                    ['ll', 1],
+                    ['lo', 1],
+                    ['o$', 1],
+                ] as Feature[]
+            ).sort(comp)
         );
     });
 

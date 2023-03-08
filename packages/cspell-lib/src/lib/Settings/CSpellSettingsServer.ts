@@ -112,7 +112,7 @@ export function mergeSettings(
     left: CSpellSettingsWSTO | CSpellSettingsI,
     ...settings: (CSpellSettingsWSTO | CSpellSettingsI | undefined)[]
 ): CSpellSettingsI {
-    const rawSettings = settings.filter((a) => !!a).reduce<CSpellSettingsI>(merge, toInternalSettings(left));
+    const rawSettings = settings.filter(util.isDefined).reduce<CSpellSettingsI>(merge, toInternalSettings(left));
     return util.clean(rawSettings);
 }
 

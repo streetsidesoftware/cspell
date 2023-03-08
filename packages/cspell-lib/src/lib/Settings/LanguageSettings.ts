@@ -7,8 +7,7 @@ import type {
     Settings,
 } from '@cspell/cspell-types';
 
-import { autoResolve, autoResolveWeak } from '../util/AutoResolve';
-import { memorizerAll } from '../util/Memorizer';
+import { autoResolve, autoResolveWeak, createAutoResolveCache } from '../util/AutoResolve';
 import { doSetsIntersect } from '../util/util';
 import * as SpellSettings from './CSpellSettingsServer';
 
@@ -36,7 +35,12 @@ function stringToList(sList: string): string[] {
         .filter((s) => !!s);
 }
 
-const _normalizeLanguageId = memorizerAll(__normalizeLanguageId);
+function memorizer<K, V>(resolver: (k: K) => V): (k: K) => V {
+    const cache = createAutoResolveCache<K, V>();
+    return (k: K) => cache.get(k, resolver);
+}
+
+const _normalizeLanguageId = memorizer(__normalizeLanguageId);
 function __normalizeLanguageId(langId: LanguageId): Set<LanguageId> {
     const langIds = stringToList(langId);
     return new Set<LanguageId>(langIds.map((a) => a.toLowerCase()));
@@ -46,7 +50,7 @@ export function normalizeLanguageId(langId: LanguageId | LanguageId[]): Set<Lang
     return _normalizeLanguageId(typeof langId === 'string' ? langId : langId.join(','));
 }
 
-const _normalizeLocale = memorizerAll(__normalizeLocale);
+const _normalizeLocale = memorizer(__normalizeLocale);
 function __normalizeLocale(locale: LocaleId): Set<LocaleId> {
     const locales = localesToList(locale);
     return new Set<LocaleId>(locales.map((locale) => locale.toLowerCase().replace(/[^a-z]/g, '')));
