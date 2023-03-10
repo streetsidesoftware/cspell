@@ -2,7 +2,9 @@
 
 import { opFilter, pipe } from '@cspell/cspell-pipe/sync';
 
+import { resolvePathToFixture } from '../test/TestHelper';
 import { defaultAllowedSplitWords } from './AllowedSplitWords';
+import { createAllowedSplitWords } from './createAllowedSplitWords';
 import { legacyLineToWords } from './legacyLineToWords';
 
 const allowed = defaultAllowedSplitWords;
@@ -16,21 +18,36 @@ describe('Validate legacyLineToWords', () => {
         line                                                           | expectedResult
         ${'hello'}                                                     | ${['hello']}
         ${'AppendIterator::getArrayIterator'}                          | ${['append', 'iterator', 'get', 'array']}
-        ${'Austin Martin'}                                             | ${['austin martin', 'austin', 'martin']}
+        ${'Austin Martin'}                                             | ${['austin', 'martin']}
         ${'JPEGsBLOBs'}                                                | ${['jpegs', 'blobs']}
-        ${'CURLs CURLing' /* Sadly we cannot do this one correctly */} | ${['curls curling', 'curls', 'curling']}
+        ${'CURLs CURLing' /* Sadly we cannot do this one correctly */} | ${['curls', 'curling']}
         ${'DNSTable Lookup'}                                           | ${['dns', 'table', 'lookup']}
         ${'OUTRing'}                                                   | ${['outring']}
         ${'OUTRings'}                                                  | ${['outrings']}
         ${'DIRs'}                                                      | ${['dirs']}
         ${'AVGAspect'}                                                 | ${['avg', 'aspect']}
-        ${'New York'}                                                  | ${['new york', 'new', 'york']}
+        ${'New York'}                                                  | ${['new', 'york']}
         ${'Namespace DNSLookup'}                                       | ${['namespace', 'dns', 'lookup']}
         ${'well-educated'}                                             | ${['well', 'educated']}
         ${'CURLcode'}                                                  | ${['cur', 'lcode']}
         ${'kDNSServiceErr_BadSig'}                                     | ${['k', 'dns', 'service', 'err', 'bad', 'sig']}
         ${'apd_get_active_symbols'}                                    | ${['apd', 'get', 'active', 'symbols']}
     `('legacy splitting lines $line', ({ line, expectedResult }: { line: string; expectedResult: string[] }) => {
+        expect([...pipe(legacyLineToWords(line, false, allowed), opFilter(distinct()))]).toEqual(expectedResult);
+    });
+
+    test.each`
+        line                                  | expectedResult
+        ${'hello'}                            | ${['hello']}
+        ${'AppendIterator::getArrayIterator'} | ${['AppendIterator', 'getArrayIterator']}
+        ${'Namespace DNSLookup'}              | ${['Namespace', 'DNSLookup']}
+        ${'well-educated'}                    | ${['well', 'educated']}
+        ${'CURLcode'}                         | ${['CURLcode']}
+        ${'RedGreen'}                         | ${['red', 'green']}
+        ${'kDNSServiceErr_BadSig'}            | ${['kDNSServiceErr', 'BadSig']}
+        ${'apd_get_active_symbols'}           | ${['apd', 'get', 'active', 'symbols']}
+    `('legacy splitting lines $line', async ({ line, expectedResult }: { line: string; expectedResult: string[] }) => {
+        const allowed = await createAllowedSplitWords([resolvePathToFixture('dicts/colors.trie')]);
         expect([...pipe(legacyLineToWords(line, false, allowed), opFilter(distinct()))]).toEqual(expectedResult);
     });
 });

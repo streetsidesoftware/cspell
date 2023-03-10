@@ -4,9 +4,11 @@ import { createReader } from './Reader';
 
 class AllowedSplitWordsImpl implements AllowedSplitWords {
     private words: Set<string> | undefined;
+    readonly size: number;
 
     constructor(source: Iterable<string> | undefined) {
         this.words = source && (source instanceof Set ? source : new Set(source));
+        this.size = this.words?.size || 0;
     }
 
     public has(word: string) {
@@ -24,7 +26,7 @@ export async function createAllowedSplitWords(files: FilePath[] | undefined) {
 
     const sources = await Promise.all(files.map((file) => readFile(file)));
 
-    const value = new AllowedSplitWordsImpl(sources.flatMap((a) => a));
+    const value = new AllowedSplitWordsImpl(sources.flatMap((a) => a).filter((a) => !!a));
     cache.set(files, value);
     return value;
 }
