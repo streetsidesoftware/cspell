@@ -1,14 +1,12 @@
 import { opFilter, opTake, pipe } from '@cspell/cspell-pipe/sync';
 import * as path from 'path';
 
-import type { ReaderOptions } from './Reader';
 import { createReader } from './Reader';
+import type { ReaderOptions } from './readers/ReaderOptions';
 
 const samples = path.join(__dirname, '../../../Samples/dicts');
 
-const readerOptions: ReaderOptions = {
-    splitWords: false,
-};
+const readerOptions: ReaderOptions = {};
 
 describe('Validate the Reader with Dutch', () => {
     const pReaderDutch = createReader(path.join(samples, 'hunspell', 'Dutch.aff'), readerOptions);
@@ -18,7 +16,7 @@ describe('Validate the Reader with Dutch', () => {
         const regBoek = /^.?boek.{0,2}\b/i; // cspell:ignore boek boeken boeker boeket boekje
         const results = [
             ...pipe(
-                reader.words,
+                reader.lines,
                 opFilter((word) => regBoek.test(word)),
                 opTake(8)
             ),

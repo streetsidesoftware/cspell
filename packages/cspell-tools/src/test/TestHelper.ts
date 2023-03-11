@@ -62,6 +62,8 @@ export function createTestHelper(testFilename?: string): TestHelper {
     return new TestHelperImpl(testFilename || expect.getState().testPath || 'test');
 }
 
+const fixtureDir = path.join(packageRoot, 'fixtures');
+
 class TestHelperImpl implements TestHelper {
     readonly packageRoot = packageRoot;
     readonly repoRoot = repoRoot;
@@ -72,7 +74,7 @@ class TestHelperImpl implements TestHelper {
 
     constructor(testFilename: string) {
         this.tempDir = path.join(tempDirBase, path.relative(packageRoot, testFilename));
-        this.fixtureDir = path.join(packageRoot, 'fixtures');
+        this.fixtureDir = fixtureDir;
     }
 
     beginTest(): void {
@@ -171,4 +173,8 @@ class TestHelperImpl implements TestHelper {
             return false;
         }
     }
+}
+
+export function resolvePathToFixture(...segments: string[]): string {
+    return path.resolve(fixtureDir, ...segments);
 }

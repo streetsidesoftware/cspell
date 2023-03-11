@@ -10,14 +10,15 @@ import * as path from 'path';
 import { spyOnConsole } from '../test/console';
 import { createTestHelper } from '../test/TestHelper';
 import type { CompileOptions } from './CompileOptions';
-import { streamWordsFromFile } from './iterateWordsFromFile';
 import { legacyLineToWords } from './legacyLineToWords';
 import { setLogger } from './logger';
-import type { ReaderOptions } from './Reader';
-import { readTextFile } from './readTextFile';
+import { readTextFile } from './readers/readTextFile';
+import type { SourceReaderOptions } from './SourceReader';
+import { streamSourceWordsFromFile } from './streamSourceWordsFromFile';
 import type { CompileTrieOptions } from './wordListCompiler';
 import { __testing__, compileTrie as _compileTrie, compileWordList as _compileWordList } from './wordListCompiler';
 import { normalizeTargetWords } from './wordListParser';
+import { defaultAllowedSplitWords } from './WordsCollection';
 
 const testHelper = createTestHelper(__filename);
 
@@ -30,8 +31,11 @@ const wordListHeader = __testing__.wordListHeader;
 const consoleSpy = spyOnConsole();
 const consoleOutput = consoleSpy.consoleOutput;
 
-const readOptions: ReaderOptions = {
+const allowedSplitWords = defaultAllowedSplitWords;
+
+const readOptions: SourceReaderOptions = {
     splitWords: false,
+    allowedSplitWords,
 };
 
 describe('Validate the wordListCompiler', () => {
@@ -49,7 +53,7 @@ describe('Validate the wordListCompiler', () => {
         ${'cities.txt'}
         ${'cities.txt.gz'}
     `('reading and normalizing to text file: $destFile', async ({ destFile }) => {
-        const source = [...(await streamWordsFromFile(path.join(samples, 'cities.txt'), readOptions))];
+        const source = [...(await streamSourceWordsFromFile(path.join(samples, 'cities.txt'), readOptions))];
         const destName = path.join(temp, destFile);
         await compileWordList(source, destName, compileOpt(false, false));
         const result = await readTextFile(destName);
@@ -59,7 +63,7 @@ describe('Validate the wordListCompiler', () => {
     });
 
     test('compiling to a file without split', async () => {
-        const source = await streamWordsFromFile(path.join(samples, 'cities.txt'), readOptions);
+        const source = await streamSourceWordsFromFile(path.join(samples, 'cities.txt'), readOptions);
         const destName = path.join(temp, 'cities2.txt');
         await compileWordList(source, destName, compileOpt(true));
         const output = await fsp.readFile(destName, 'utf8');
@@ -91,7 +95,7 @@ describe('Validate the wordListCompiler', () => {
         ${'cities.trie'}
         ${'cities.trie.gz'}
     `('reading and normalizing to $destFile', async ({ destFile }) => {
-        const source = [...(await streamWordsFromFile(path.join(samples, 'cities.txt'), readOptions))];
+        const source = [...(await streamSourceWordsFromFile(path.join(samples, 'cities.txt'), readOptions))];
         const destName = path.join(temp, destFile);
         await compileTrie(source, destName, compileOpt(true));
         const resultFile = await readTextFile(destName);
@@ -103,7 +107,7 @@ describe('Validate the wordListCompiler', () => {
     });
 
     test('a simple hunspell dictionary depth 0', async () => {
-        const source = await streamWordsFromFile(path.join(samples, 'hunspell', 'example.dic'), {
+        const source = await streamSourceWordsFromFile(path.join(samples, 'hunspell', 'example.dic'), {
             ...readOptions,
             maxDepth: 0,
         });
@@ -115,7 +119,7 @@ describe('Validate the wordListCompiler', () => {
     });
 
     test('a simple hunspell dictionary depth 1', async () => {
-        const source = await streamWordsFromFile(path.join(samples, 'hunspell/example.dic'), {
+        const source = await streamSourceWordsFromFile(path.join(samples, 'hunspell/example.dic'), {
             ...readOptions,
             maxDepth: 1,
         });
@@ -148,7 +152,7 @@ describe('Validate Larger Dictionary', () => {
     });
 
     test('en_US hunspell', async () => {
-        const source = await streamWordsFromFile(sampleDictEnUS, readOptions);
+        const source = await streamSourceWordsFromFile(sampleDictEnUS, readOptions);
         const words = [...pipe(source, opTake(5000))];
         const trie = normalizeWordsToTrie(words);
         expect(isCircular(trie)).toBe(false);
@@ -158,7 +162,7 @@ describe('Validate Larger Dictionary', () => {
     }, 60000);
 
     test('en_US word list', async () => {
-        const source = await streamWordsFromFile(sampleDictEn, readOptions);
+        const source = await streamSourceWordsFromFile(sampleDictEn, readOptions);
         const words = [...source];
         const trie = Trie.consolidate(normalizeWordsToTrie(words));
         expect(isCircular(trie)).toBe(false);
@@ -193,7 +197,7 @@ function normalizeWordsToTrie(words: Iterable<string>): Trie.TrieRoot {
 function legacyNormalizeWords(lines: Iterable<string>): Iterable<string> {
     return pipe(
         lines,
-        opConcatMap((line) => legacyLineToWords(line, true))
+        opConcatMap((line) => legacyLineToWords(line, true, allowedSplitWords))
     );
 }
 

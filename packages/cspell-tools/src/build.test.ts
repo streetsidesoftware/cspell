@@ -1,6 +1,6 @@
 import { build } from './build';
 import { setLogger } from './compiler';
-import { readTextFile } from './compiler/readTextFile';
+import { readTextFile } from './compiler/readers/readTextFile';
 import { spyOnConsole } from './test/console';
 import { createTestHelper } from './test/TestHelper';
 

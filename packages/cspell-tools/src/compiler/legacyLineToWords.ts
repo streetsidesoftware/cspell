@@ -1,37 +1,64 @@
 import { opConcatMap, opFilter, opMap, pipe } from '@cspell/cspell-pipe/sync';
 
 import * as Text from './text';
+import type { AllowedSplitWordsCollection } from './WordsCollection';
 
-const regNonWord = /[^\p{L}\p{M}' ]+/giu;
+const regNonWord = /[^\p{L}\p{M}' \d]+/giu;
 const regExpSpaceOrDash = /[- ]+/g;
-const regExpRepeatChars = /(.)\1{4,}/i;
+const regExpRepeatChars = /(.)\1{5}/i;
+const regExpIsNumber = /^\d+$/;
 
-export function legacyLineToWords(line: string, keepCase: boolean): Iterable<string> {
+export function legacyLineToWords(
+    line: string,
+    keepCase: boolean,
+    allowedSplitWords: AllowedSplitWordsCollection
+): Iterable<string> {
     // Remove punctuation and non-letters.
     const filteredLine = line.replace(regNonWord, '|');
     const wordGroups = filteredLine.split('|');
 
     const words = pipe(
         wordGroups,
-        opConcatMap((a) => [a, ...a.split(regExpSpaceOrDash)]),
-        opConcatMap((a) => splitCamelCase(a)),
+        opConcatMap((a) => [...a.split(regExpSpaceOrDash)]),
+        opConcatMap((a) => splitCamelCaseIfAllowed(a, allowedSplitWords, keepCase)),
         opMap((a) => a.trim()),
         opFilter((a) => !!a),
-        opFilter((s) => !regExpRepeatChars.test(s)),
-        opMap((a) => (keepCase ? a : a.toLowerCase()))
+        opFilter((s) => !regExpRepeatChars.test(s))
     );
 
     return words;
 }
 
-export function* legacyLinesToWords(lines: Iterable<string>, keepCase = false): Iterable<string> {
+export function* legacyLinesToWords(
+    lines: Iterable<string>,
+    keepCase: boolean,
+    allowedSplitWords: AllowedSplitWordsCollection
+): Iterable<string> {
     for (const line of lines) {
-        yield* legacyLineToWords(line, keepCase);
+        yield* legacyLineToWords(line, keepCase, allowedSplitWords);
     }
 }
 
+function splitCamelCaseIfAllowed(word: string, allowedWords: AllowedSplitWordsCollection, keepCase: boolean): string[] {
+    const split = [...splitCamelCase(word)].map((a) => (keepCase ? a : a.toLowerCase()));
+    const missing = split.find((w) => isUnknown(w, allowedWords));
+    const words = missing === undefined ? split : [word];
+    return keepCase ? words : words.map(adjustCase);
+}
+
+function adjustCase(word: string): string {
+    if (word[0].toLowerCase() == word[0]) return word;
+    if (word.slice(1).toLowerCase() === word.slice(1)) return word[0].toLowerCase() + word.slice(1);
+    if (word.toUpperCase() === word) return word.toLowerCase();
+    return word;
+}
+
+function isUnknown(word: string, allowedWords: AllowedSplitWordsCollection): boolean {
+    return word.length > 3 && !allowedWords.has(word);
+}
+
 function splitCamelCase(word: string): Iterable<string> {
-    const splitWords = Text.splitCamelCaseWord(word);
+    const splitWords = Text.splitCamelCaseWord(word).filter((word) => !regExpIsNumber.test(word));
     // We only want to preserve this: "New York" and not "Namespace DNSLookup"
     if (splitWords.length > 1 && regExpSpaceOrDash.test(word)) {
         return pipe(
