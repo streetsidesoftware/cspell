@@ -9,7 +9,6 @@ import * as path from 'path';
 
 import { spyOnConsole } from '../test/console';
 import { createTestHelper } from '../test/TestHelper';
-import { defaultAllowedSplitWords } from './AllowedSplitWords';
 import type { CompileOptions } from './CompileOptions';
 import { legacyLineToWords } from './legacyLineToWords';
 import { setLogger } from './logger';
@@ -19,6 +18,7 @@ import { streamSourceWordsFromFile } from './streamSourceWordsFromFile';
 import type { CompileTrieOptions } from './wordListCompiler';
 import { __testing__, compileTrie as _compileTrie, compileWordList as _compileWordList } from './wordListCompiler';
 import { normalizeTargetWords } from './wordListParser';
+import { defaultAllowedSplitWords } from './WordsCollection';
 
 const testHelper = createTestHelper(__filename);
 

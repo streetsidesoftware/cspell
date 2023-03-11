@@ -1,7 +1,7 @@
-import type { AllowedSplitWords } from './AllowedSplitWords';
 import { createReader } from './Reader';
 import type { Reader } from './readers/ReaderOptions';
 import { parseFileLines } from './wordListParser';
+import type { AllowedSplitWordsCollection } from './WordsCollection';
 
 export interface SourceReaderOptions {
     /**
@@ -21,7 +21,7 @@ export interface SourceReaderOptions {
 
     keepCase?: boolean;
 
-    allowedSplitWords: AllowedSplitWords;
+    allowedSplitWords: AllowedSplitWordsCollection;
 }
 
 export type AnnotatedWord = string;

@@ -13,7 +13,7 @@ import type {
     Target,
 } from '../config';
 import { isFileListSource, isFilePath, isFileSource } from '../config';
-import { createAllowedSplitWords } from './createAllowedSplitWords';
+import { createAllowedSplitWords } from './createWordsCollection';
 import { logWithTimestamp } from './logWithTimestamp';
 import { readTextFile } from './readers/readTextFile';
 import type { SourceReaderOptions } from './SourceReader';

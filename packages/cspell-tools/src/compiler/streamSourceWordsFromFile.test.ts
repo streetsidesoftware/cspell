@@ -1,7 +1,7 @@
 import * as path from 'path';
 
-import { defaultAllowedSplitWords } from './AllowedSplitWords';
 import { streamSourceWordsFromFile } from './streamSourceWordsFromFile';
+import { defaultAllowedSplitWords } from './WordsCollection';
 
 const samples = path.join(__dirname, '..', '..', '..', 'Samples', 'dicts');
 

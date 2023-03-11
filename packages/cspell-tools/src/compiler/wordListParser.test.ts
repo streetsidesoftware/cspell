@@ -2,9 +2,9 @@
 
 import { toArray } from '@cspell/cspell-pipe/sync';
 
-import { defaultAllowedSplitWords } from './AllowedSplitWords';
 import type { ParseFileOptions } from './wordListParser';
 import { normalizeTargetWords, parseFileLines } from './wordListParser';
+import { defaultAllowedSplitWords } from './WordsCollection';
 
 describe('Validate the wordListCompiler', () => {
     beforeEach(() => {

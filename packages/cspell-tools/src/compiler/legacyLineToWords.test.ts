@@ -3,9 +3,9 @@
 import { opFilter, pipe } from '@cspell/cspell-pipe/sync';
 
 import { resolvePathToFixture } from '../test/TestHelper';
-import { defaultAllowedSplitWords } from './AllowedSplitWords';
-import { createAllowedSplitWords } from './createAllowedSplitWords';
+import { createAllowedSplitWords } from './createWordsCollection';
 import { legacyLineToWords } from './legacyLineToWords';
+import { defaultAllowedSplitWords } from './WordsCollection';
 
 const allowed = defaultAllowedSplitWords;
 
@@ -40,7 +40,7 @@ describe('Validate legacyLineToWords', () => {
         line                                  | expectedResult
         ${'hello'}                            | ${['hello']}
         ${'AppendIterator::getArrayIterator'} | ${['AppendIterator', 'getArrayIterator']}
-        ${'Namespace DNSLookup'}              | ${['Namespace', 'DNSLookup']}
+        ${'Namespace DNSLookup'}              | ${['namespace', 'DNSLookup']}
         ${'well-educated'}                    | ${['well', 'educated']}
         ${'CURLcode'}                         | ${['CURLcode']}
         ${'RedGreen'}                         | ${['red', 'green']}

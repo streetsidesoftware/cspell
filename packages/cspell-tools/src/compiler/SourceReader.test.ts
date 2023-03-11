@@ -1,8 +1,8 @@
 import * as path from 'path';
 
-import { defaultAllowedSplitWords } from './AllowedSplitWords';
 import type { SourceReaderOptions } from './SourceReader';
 import { createSourceReader } from './SourceReader';
+import { defaultAllowedSplitWords } from './WordsCollection';
 
 const samples = path.join(__dirname, '..', '..', '..', 'Samples', 'dicts');
 

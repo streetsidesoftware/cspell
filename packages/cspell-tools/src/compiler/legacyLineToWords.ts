@@ -1,7 +1,7 @@
 import { opConcatMap, opFilter, opMap, pipe } from '@cspell/cspell-pipe/sync';
 
-import type { AllowedSplitWords } from './AllowedSplitWords';
 import * as Text from './text';
+import type { AllowedSplitWordsCollection } from './WordsCollection';
 
 const regNonWord = /[^\p{L}\p{M}' \d]+/giu;
 const regExpSpaceOrDash = /[- ]+/g;
@@ -11,7 +11,7 @@ const regExpIsNumber = /^\d+$/;
 export function legacyLineToWords(
     line: string,
     keepCase: boolean,
-    allowedSplitWords: AllowedSplitWords
+    allowedSplitWords: AllowedSplitWordsCollection
 ): Iterable<string> {
     // Remove punctuation and non-letters.
     const filteredLine = line.replace(regNonWord, '|');
@@ -32,14 +32,14 @@ export function legacyLineToWords(
 export function* legacyLinesToWords(
     lines: Iterable<string>,
     keepCase: boolean,
-    allowedSplitWords: AllowedSplitWords
+    allowedSplitWords: AllowedSplitWordsCollection
 ): Iterable<string> {
     for (const line of lines) {
         yield* legacyLineToWords(line, keepCase, allowedSplitWords);
     }
 }
 
-function splitCamelCaseIfAllowed(word: string, allowedWords: AllowedSplitWords, keepCase: boolean): string[] {
+function splitCamelCaseIfAllowed(word: string, allowedWords: AllowedSplitWordsCollection, keepCase: boolean): string[] {
     const split = [...splitCamelCase(word)].map((a) => (keepCase ? a : a.toLowerCase()));
     const missing = split.find((w) => isUnknown(w, allowedWords));
     const words = missing === undefined ? split : [word];
@@ -53,7 +53,7 @@ function adjustCase(word: string): string {
     return word;
 }
 
-function isUnknown(word: string, allowedWords: AllowedSplitWords): boolean {
+function isUnknown(word: string, allowedWords: AllowedSplitWordsCollection): boolean {
     return word.length > 3 && !allowedWords.has(word);
 }
 

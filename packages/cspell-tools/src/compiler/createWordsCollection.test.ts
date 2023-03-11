@@ -1,5 +1,5 @@
 import { resolvePathToFixture } from '../test/TestHelper';
-import { createAllowedSplitWords } from './createAllowedSplitWords';
+import { createAllowedSplitWords } from './createWordsCollection';
 
 describe('createAllowedSplitWords', () => {
     test.each`

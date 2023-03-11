@@ -2,11 +2,9 @@ import { opCombine, opCombine as opPipe, type Operator, opFilter, opMap } from '
 import { createDictionaryLineParser } from 'cspell-trie-lib';
 import { uniqueFilter } from 'hunspell-reader/dist/util';
 
-import type { AllowedSplitWords } from './AllowedSplitWords';
 import type { CompileOptions } from './CompileOptions';
 import { legacyLineToWords } from './legacyLineToWords';
-
-const compareWords = Intl.Collator().compare;
+import type { AllowedSplitWordsCollection } from './WordsCollection';
 
 export function normalizeTargetWords(options: CompileOptions): Operator<string> {
     const lineParser = createDictionaryLineParser({
@@ -33,13 +31,13 @@ function createInlineBufferedSort(bufferSize = 1000): (lines: Iterable<string>) 
         for (const line of lines) {
             buffer.push(line);
             if (buffer.length >= bufferSize) {
-                buffer.sort(compareWords);
+                buffer.sort();
                 yield* buffer;
                 buffer.length = 0;
             }
         }
 
-        buffer.sort(compareWords);
+        buffer.sort();
         yield* buffer;
     }
 
@@ -76,7 +74,7 @@ export interface ParseFileOptions {
      */
     legacy?: boolean;
 
-    allowedSplitWords: AllowedSplitWords;
+    allowedSplitWords: AllowedSplitWordsCollection;
 }
 
 type ParseFileOptionsRequired = Required<ParseFileOptions>;
