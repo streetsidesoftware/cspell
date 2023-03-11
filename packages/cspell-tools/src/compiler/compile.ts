@@ -51,8 +51,6 @@ export async function compile(request: CompileRequest, options?: CompileOptions)
 export async function compileTarget(target: Target, options: CompileSourceOptions, rootDir: string): Promise<void> {
     logWithTimestamp(`Start compile: ${target.name}`);
 
-    // console.log('Target: %o', target);
-
     const { format, sources, trieBase, sort = true, generateNonStrict = false } = target;
     const targetDirectory = path.resolve(rootDir, target.targetDirectory ?? process.cwd());
 
@@ -174,7 +172,9 @@ async function readFileSource(fileSource: FileSource, sourceOptions: CompileSour
 
     // console.warn('fileSource: %o,\n targetOptions %o, \n opt: %o', fileSource, targetOptions, opt);
 
-    const allowedSplitWords = await createAllowedSplitWords(sourceOptions.allowedSplitWords);
+    const allowedSplitWords = await createAllowedSplitWords(
+        fileSource.allowedSplitWords || sourceOptions.allowedSplitWords
+    );
 
     const readerOptions: SourceReaderOptions = {
         maxDepth,

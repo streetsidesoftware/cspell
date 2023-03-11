@@ -6,6 +6,8 @@ import type { AllowedSplitWords } from './AllowedSplitWords';
 import type { CompileOptions } from './CompileOptions';
 import { legacyLineToWords } from './legacyLineToWords';
 
+const compareWords = Intl.Collator().compare;
+
 export function normalizeTargetWords(options: CompileOptions): Operator<string> {
     const lineParser = createDictionaryLineParser({
         stripCaseAndAccents: options.generateNonStrict,
@@ -31,13 +33,13 @@ function createInlineBufferedSort(bufferSize = 1000): (lines: Iterable<string>) 
         for (const line of lines) {
             buffer.push(line);
             if (buffer.length >= bufferSize) {
-                buffer.sort();
+                buffer.sort(compareWords);
                 yield* buffer;
                 buffer.length = 0;
             }
         }
 
-        buffer.sort();
+        buffer.sort(compareWords);
         yield* buffer;
     }
 
@@ -87,7 +89,7 @@ const _defaultOptions: ParseFileOptionsRequired = {
     split: false,
     splitKeepBoth: false,
     // splitSeparator: regExpSplit,
-    allowedSplitWords: { has: () => true },
+    allowedSplitWords: { has: () => true, size: 0 },
 };
 
 export const defaultParseDictionaryOptions: ParseFileOptionsRequired = Object.freeze(_defaultOptions);

@@ -44,7 +44,7 @@ describe('Validate legacyLineToWords', () => {
         ${'well-educated'}                    | ${['well', 'educated']}
         ${'CURLcode'}                         | ${['CURLcode']}
         ${'RedGreen'}                         | ${['red', 'green']}
-        ${'kDNSServiceErr_BadSig'}            | ${['kDNSServiceErr', 'BadSig']}
+        ${'kDNSServiceErr_BadSig'}            | ${['kDNSServiceErr', 'bad', 'sig']}
         ${'apd_get_active_symbols'}           | ${['apd', 'get', 'active', 'symbols']}
     `('legacy splitting lines $line', async ({ line, expectedResult }: { line: string; expectedResult: string[] }) => {
         const allowed = await createAllowedSplitWords([resolvePathToFixture('dicts/colors.trie')]);

@@ -27,6 +27,12 @@
     "FileListSource": {
       "additionalProperties": false,
       "properties": {
+        "allowedSplitWords": {
+          "items": {
+            "$ref": "#/definitions/FilePath"
+          },
+          "type": "array"
+        },
         "keepRawCase": {
           "default": false,
           "description": "Do not generate lower case / accent free versions of words.",
@@ -65,6 +71,12 @@
     "FileSource": {
       "additionalProperties": false,
       "properties": {
+        "allowedSplitWords": {
+          "items": {
+            "$ref": "#/definitions/FilePath"
+          },
+          "type": "array"
+        },
         "filename": {
           "$ref": "#/definitions/FilePath"
         },

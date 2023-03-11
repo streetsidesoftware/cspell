@@ -18,8 +18,9 @@ class AllowedSplitWordsImpl implements AllowedSplitWords {
 
 const cache = new WeakMap<FilePath[], AllowedSplitWords>();
 
-export async function createAllowedSplitWords(files: FilePath[] | undefined) {
+export async function createAllowedSplitWords(files: FilePath | FilePath[] | undefined) {
     if (!files || !files.length) return new AllowedSplitWordsImpl(undefined);
+    files = Array.isArray(files) ? files : [files];
 
     const cached = cache.get(files);
     if (cached) return cached;

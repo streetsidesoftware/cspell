@@ -1,5 +1,6 @@
 import * as path from 'path';
 
+import { defaultAllowedSplitWords } from './AllowedSplitWords';
 import type { SourceReaderOptions } from './SourceReader';
 import { createSourceReader } from './SourceReader';
 
@@ -7,11 +8,7 @@ const samples = path.join(__dirname, '..', '..', '..', 'Samples', 'dicts');
 
 const readerOptions: SourceReaderOptions = {
     splitWords: false,
-    allowedSplitWords: {
-        has() {
-            return true;
-        },
-    },
+    allowedSplitWords: defaultAllowedSplitWords,
 };
 
 describe('Validate the iterateWordsFromFile', () => {
@@ -35,7 +32,7 @@ describe('Validate the iterateWordsFromFile', () => {
         file                      | options                  | expected
         ${'cities.txt'}           | ${{ splitWords: false }} | ${'New York|New Amsterdam|Los Angeles|San Francisco|New Delhi|Mexico City|London|Paris'}
         ${'cities.txt'}           | ${{ splitWords: true }}  | ${'New|York|Amsterdam|Los|Angeles|San|Francisco|Delhi|Mexico|City|London|Paris'}
-        ${'cities.txt'}           | ${{ legacy: true }}      | ${'new york|new|york|new amsterdam|amsterdam|los angeles|los|angeles|san francisco|san|francisco|new delhi|delhi|mexico city|mexico|city|london|paris'}
+        ${'cities.txt'}           | ${{ legacy: true }}      | ${'new|york|amsterdam|los|angeles|san|francisco|delhi|mexico|city|london|paris'}
         ${'hunspell/example.aff'} | ${{}}                    | ${'hello|rework|reworked|tried|try|work|worked'}
     `('stream words from text $file $options', async ({ file, options, expected }) => {
         const reader = await createSourceReader(path.resolve(samples, file), options);

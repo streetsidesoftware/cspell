@@ -54,7 +54,7 @@ export interface CompileTargetOptions {
      * This is to prevent misspellings in CamelCase words from being introduced into the
      * dictionary.
      */
-    allowedSplitWords?: FilePath[] | undefined;
+    allowedSplitWords?: FilePath | FilePath[] | undefined;
 }
 
 export interface Target extends CompileTargetOptions {
@@ -137,5 +137,5 @@ export interface CompileSourceOptions {
      */
     keepRawCase?: boolean | undefined;
 
-    allowedSplitWords?: FilePath[] | undefined;
+    allowedSplitWords?: FilePath | FilePath[] | undefined;
 }
