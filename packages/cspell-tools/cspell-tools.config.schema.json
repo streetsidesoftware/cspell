@@ -28,10 +28,17 @@
       "additionalProperties": false,
       "properties": {
         "allowedSplitWords": {
-          "items": {
-            "$ref": "#/definitions/FilePath"
-          },
-          "type": "array"
+          "anyOf": [
+            {
+              "$ref": "#/definitions/FilePath"
+            },
+            {
+              "items": {
+                "$ref": "#/definitions/FilePath"
+              },
+              "type": "array"
+            }
+          ]
         },
         "keepRawCase": {
           "default": false,
@@ -72,10 +79,17 @@
       "additionalProperties": false,
       "properties": {
         "allowedSplitWords": {
-          "items": {
-            "$ref": "#/definitions/FilePath"
-          },
-          "type": "array"
+          "anyOf": [
+            {
+              "$ref": "#/definitions/FilePath"
+            },
+            {
+              "items": {
+                "$ref": "#/definitions/FilePath"
+              },
+              "type": "array"
+            }
+          ]
         },
         "filename": {
           "$ref": "#/definitions/FilePath"
@@ -112,11 +126,18 @@
       "additionalProperties": false,
       "properties": {
         "allowedSplitWords": {
-          "description": "Words in the `allowedSplitWords` are considered correct and can be used as a basis for splitting compound words.\n\nIf entries can be split so that all the words in the entry are allowed, then only the individual words are added, otherwise the entire entry is added. This is to prevent misspellings in CamelCase words from being introduced into the dictionary.",
-          "items": {
-            "$ref": "#/definitions/FilePath"
-          },
-          "type": "array"
+          "anyOf": [
+            {
+              "$ref": "#/definitions/FilePath"
+            },
+            {
+              "items": {
+                "$ref": "#/definitions/FilePath"
+              },
+              "type": "array"
+            }
+          ],
+          "description": "Words in the `allowedSplitWords` are considered correct and can be used as a basis for splitting compound words.\n\nIf entries can be split so that all the words in the entry are allowed, then only the individual words are added, otherwise the entire entry is added. This is to prevent misspellings in CamelCase words from being introduced into the dictionary."
         },
         "compress": {
           "default": ": false",
@@ -175,11 +196,18 @@
   },
   "properties": {
     "allowedSplitWords": {
-      "description": "Words in the `allowedSplitWords` are considered correct and can be used as a basis for splitting compound words.\n\nIf entries can be split so that all the words in the entry are allowed, then only the individual words are added, otherwise the entire entry is added. This is to prevent misspellings in CamelCase words from being introduced into the dictionary.",
-      "items": {
-        "$ref": "#/definitions/FilePath"
-      },
-      "type": "array"
+      "anyOf": [
+        {
+          "$ref": "#/definitions/FilePath"
+        },
+        {
+          "items": {
+            "$ref": "#/definitions/FilePath"
+          },
+          "type": "array"
+        }
+      ],
+      "description": "Words in the `allowedSplitWords` are considered correct and can be used as a basis for splitting compound words.\n\nIf entries can be split so that all the words in the entry are allowed, then only the individual words are added, otherwise the entire entry is added. This is to prevent misspellings in CamelCase words from being introduced into the dictionary."
     },
     "generateNonStrict": {
       "default": true,
