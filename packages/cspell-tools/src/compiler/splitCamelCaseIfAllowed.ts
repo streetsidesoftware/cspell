@@ -34,7 +34,7 @@ function isUnknown(word: string, allowedWords: AllowedSplitWordsCollection): boo
 }
 
 function splitCamelCase(word: string): Iterable<string> {
-    const splitWords = Text.splitCamelCaseWord(word).filter((word) => !regExpIsNumber.test(word));
+    const splitWords = Text.splitCamelCaseWord(word, false).filter((word) => !regExpIsNumber.test(word));
     // We only want to preserve this: "New York" and not "Namespace DNSLookup"
     if (splitWords.length > 1 && regExpSpaceOrDash.test(word)) {
         return splitWords.flatMap((w) => w.split(regExpSpaceOrDash));

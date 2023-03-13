@@ -23,11 +23,21 @@ export async function compileWordList(
     destFilename: string,
     options: CompileOptions
 ): Promise<void> {
-    const filter = normalizeTargetWords(options);
+    const finalLines = normalize(lines, options);
 
-    const finalSeq = pipe(wordListHeaderLines, opAppend(pipe(lines, filter)));
+    const finalSeq = pipe(wordListHeaderLines, opAppend(finalLines));
 
     return createWordListTarget(destFilename)(finalSeq);
+}
+
+function normalize(lines: Iterable<string>, options: CompileOptions): Iterable<string> {
+    const filter = normalizeTargetWords(options);
+
+    const iter = pipe(lines, filter);
+    if (!options.sort) return iter;
+
+    const result = new Set(iter);
+    return [...result].sort();
 }
 
 function createWordListTarget(destFilename: string): (seq: Iterable<string>) => Promise<void> {
