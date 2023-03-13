@@ -17,13 +17,19 @@ class AllowedSplitWordsImpl implements AllowedSplitWordsCollection {
     }
 }
 
-export async function createAllowedSplitWords(
+export async function createAllowedSplitWordsFromFiles(
     files: FilePath | FilePath[] | undefined
 ): Promise<AllowedSplitWordsCollection> {
     if (!files || !files.length) return defaultAllowedSplitWords;
 
-    const collection = await createWordsCollection(files);
+    const collection = await createWordsCollectionFromFiles(files);
     return new AllowedSplitWordsImpl(collection);
+}
+
+export function createAllowedSplitWords(words: Iterable<string> | undefined): AllowedSplitWordsCollection {
+    if (!words) return defaultAllowedSplitWords;
+
+    return new AllowedSplitWordsImpl(createWordsCollection(words));
 }
 
 async function readFile(filename: string) {
@@ -33,7 +39,7 @@ async function readFile(filename: string) {
 
 const cache = new WeakMap<FilePath[], WordsCollection>();
 
-export async function createWordsCollection(files: FilePath | FilePath[]): Promise<WordsCollection> {
+export async function createWordsCollectionFromFiles(files: FilePath | FilePath[]): Promise<WordsCollection> {
     files = Array.isArray(files) ? files : [files];
 
     const cached = cache.get(files);
@@ -41,16 +47,20 @@ export async function createWordsCollection(files: FilePath | FilePath[]): Promi
 
     const sources = await Promise.all(files.map((file) => readFile(file)));
 
-    const collection = new Set(
-        sources
-            .flatMap((a) => a)
-            .map((a) => a.trim())
-            .filter((a) => !!a)
-            .filter((a) => !a.startsWith('#'))
-    );
+    const collection = createWordsCollection(sources.flatMap((a) => a));
 
     cache.set(files, collection);
     return collection;
+}
+
+export function createWordsCollection(words: Iterable<string>): WordsCollection {
+    if (words instanceof Set) return words;
+
+    const arrWords = (Array.isArray(words) ? words : [...words])
+        .map((a) => a.trim())
+        .filter((a) => !!a)
+        .filter((a) => !a.startsWith('#'));
+    return new Set(arrWords);
 }
 
 class ExcludeWordsCollectionImpl implements ExcludeWordsCollection {
@@ -67,11 +77,15 @@ class ExcludeWordsCollectionImpl implements ExcludeWordsCollection {
     }
 }
 
-export async function createExcludeWordsCollection(
+export async function createExcludeWordsCollectionFromFiles(
     files: FilePath | FilePath[] | undefined
 ): Promise<ExcludeWordsCollection> {
     if (!files || !files.length) return defaultExcludeWordsCollection;
 
-    const collection = await createWordsCollection(files);
+    const collection = await createWordsCollectionFromFiles(files);
     return new ExcludeWordsCollectionImpl(collection);
+}
+
+export function createExcludeWordsCollection(words: Iterable<string> | undefined): ExcludeWordsCollection {
+    return new ExcludeWordsCollectionImpl(words ? createWordsCollection(words) : new Set());
 }

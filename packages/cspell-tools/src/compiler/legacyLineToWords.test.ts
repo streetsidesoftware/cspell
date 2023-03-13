@@ -3,7 +3,7 @@
 import { opFilter, pipe } from '@cspell/cspell-pipe/sync';
 
 import { resolvePathToFixture } from '../test/TestHelper';
-import { createAllowedSplitWords } from './createWordsCollection';
+import { createAllowedSplitWordsFromFiles } from './createWordsCollection';
 import { legacyLineToWords } from './legacyLineToWords';
 import { defaultAllowedSplitWords } from './WordsCollection';
 
@@ -40,14 +40,14 @@ describe('Validate legacyLineToWords', () => {
         line                                  | expectedResult
         ${'hello'}                            | ${['hello']}
         ${'AppendIterator::getArrayIterator'} | ${['AppendIterator', 'getArrayIterator']}
-        ${'Namespace DNSLookup'}              | ${['namespace', 'DNSLookup']}
+        ${'Namespace DNSLookup'}              | ${['Namespace', 'DNSLookup']}
         ${'well-educated'}                    | ${['well', 'educated']}
         ${'CURLcode'}                         | ${['CURLcode']}
         ${'RedGreen'}                         | ${['red', 'green']}
-        ${'kDNSServiceErr_BadSig'}            | ${['kDNSServiceErr', 'bad', 'sig']}
+        ${'kDNSServiceErr_BadSig'}            | ${['kDNSServiceErr', 'BadSig']}
         ${'apd_get_active_symbols'}           | ${['apd', 'get', 'active', 'symbols']}
     `('legacy splitting lines $line', async ({ line, expectedResult }: { line: string; expectedResult: string[] }) => {
-        const allowed = await createAllowedSplitWords([resolvePathToFixture('dicts/colors.trie')]);
+        const allowed = await createAllowedSplitWordsFromFiles([resolvePathToFixture('dicts/colors.trie')]);
         expect([...pipe(legacyLineToWords(line, false, allowed), opFilter(distinct()))]).toEqual(expectedResult);
     });
 });

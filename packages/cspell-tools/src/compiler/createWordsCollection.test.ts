@@ -1,5 +1,5 @@
 import { resolvePathToFixture } from '../test/TestHelper';
-import { createAllowedSplitWords } from './createWordsCollection';
+import { createAllowedSplitWordsFromFiles } from './createWordsCollection';
 
 describe('createAllowedSplitWords', () => {
     test.each`
@@ -13,7 +13,7 @@ describe('createAllowedSplitWords', () => {
     `('createAllowedSplitWords $files $has', async ({ files, expectedSize, has, expected }) => {
         const fixFiles: string[] | undefined = Array.isArray(files) ? files : !files ? undefined : [files];
         const allowedFiles = fixFiles?.map((file) => resolvePathToFixture(file));
-        const allowed = await createAllowedSplitWords(allowedFiles);
+        const allowed = await createAllowedSplitWordsFromFiles(allowedFiles);
         expect(allowed.size).toBe(expectedSize);
         expect(allowed.has(has)).toBe(expected);
     });

@@ -13,7 +13,7 @@ import type {
     Target,
 } from '../config';
 import { isFileListSource, isFilePath, isFileSource } from '../config';
-import { createAllowedSplitWords } from './createWordsCollection';
+import { createAllowedSplitWordsFromFiles } from './createWordsCollection';
 import { logWithTimestamp } from './logWithTimestamp';
 import { readTextFile } from './readers/readTextFile';
 import type { SourceReaderOptions } from './SourceReader';
@@ -172,7 +172,7 @@ async function readFileSource(fileSource: FileSource, sourceOptions: CompileSour
 
     // console.warn('fileSource: %o,\n targetOptions %o, \n opt: %o', fileSource, targetOptions, opt);
 
-    const allowedSplitWords = await createAllowedSplitWords(
+    const allowedSplitWords = await createAllowedSplitWordsFromFiles(
         fileSource.allowedSplitWords || sourceOptions.allowedSplitWords
     );
 
