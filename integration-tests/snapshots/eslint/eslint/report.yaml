@@ -5,7 +5,7 @@ Args: ["**","--exclude=bin/**","--exclude=CHANGELOG.md","--exclude=_data","--exc
 Summary:
   files: 1839
   filesWithIssues: 1241
-  issues: 5451
+  issues: 5459
   errors: 0
 Errors: []
 
@@ -74,7 +74,8 @@ issues:
   - "docs/src/extend/custom-formatters.md:201:14     	concat          	U   	.concat(warnings)"
   - "docs/src/extend/custom-formatters.md:251:61     	Guake           	U   	www.iterm2.com/) or [Guake](http://guake-project"
   - "docs/src/extend/custom-formatters.md:273:9      	eslintformatter 	U   	* `\"eslintformatter\"`"
-  - "docs/src/extend/custom-parsers.md:57:44     	rewritable  	U   	of all nodes must be rewritable. ESLint sets each node"
+  - "docs/src/extend/custom-parsers.md:62:44     	rewritable  	U   	of all nodes must be rewritable. Before any rules have"
+  - "docs/src/extend/custom-parsers.md:103:27    	myparser    	U   	install eslint-parser-myparser --save-dev"
   - "docs/src/extend/custom-processors.md:21:13      	preprocess  	U   	preprocess: function(text, filename"
   - "docs/src/extend/custom-processors.md:32:13      	postprocess 	U   	postprocess: function(messages,"
   - "docs/src/extend/custom-processors.md:41:21      	Autofix     	U   	supportsAutofix: true // (optional,"
@@ -433,9 +434,9 @@ issues:
   - "tests/lib/cli-engine/cli-engine.js:6578:52  	extendees           	U   	config file and linear extendees.\", () => {"
   - "tests/lib/cli.js:322:56     	fakeformatter   	U   	await cli.execute(`-f fakeformatter ${filePath}`);"
   - "tests/lib/config/flat-config-array.js:153:22    	noniterable 	U   	it(\"should allow noniterable baseConfig objects\""
-  - "tests/lib/config/flat-config-array.js:904:43    	truex       	U   	foo: \"truex\""
-  - "tests/lib/config/flat-config-array.js:1414:29   	foox        	U   	foox: [1, \"bar\"]"
-  - "tests/lib/config/flat-config-array.js:1436:30   	doesnt      	U   	\"doesnt-exist/match\": \"error"
+  - "tests/lib/config/flat-config-array.js:1205:43   	truex       	U   	foo: \"truex\""
+  - "tests/lib/config/flat-config-array.js:1715:29   	foox        	U   	foox: [1, \"bar\"]"
+  - "tests/lib/config/flat-config-array.js:1737:30   	doesnt      	U   	\"doesnt-exist/match\": \"error"
   - "tests/lib/eslint/flat-eslint.js:932:57  	doesnotexist	U   	lintFiles([\"subdir1\", \"doesnotexist/*.js\"]);"
   - "tests/lib/eslint/flat-eslint.js:1007:58 	doesexist   	U   	await eslint.lintFiles([\"doesexist/*.js\"]);"
   - "tests/lib/eslint/flat-eslint.js:1410:30 	reignoring  	U   	it(\"should allow reignoring of previously ignored"
