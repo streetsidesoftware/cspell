@@ -111,8 +111,7 @@ export function createParseFileLineMapper(options?: Partial<ParseFileOptions>): 
 
     let { split = _defaultOptions.split, keepCase = legacy ? false : _defaultOptions.keepCase } = _options;
 
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    function isString(line: any | string): line is string {
+    function isString(line: unknown | string): line is string {
         return typeof line === 'string';
     }
 
