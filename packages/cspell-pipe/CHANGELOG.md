@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 6.29.1 (2023-03-13)
+
+**Note:** Version bump only for package @cspell/cspell-pipe
+
 # 6.29.0 (2023-03-11)
 
 **Note:** Version bump only for package @cspell/cspell-pipe
