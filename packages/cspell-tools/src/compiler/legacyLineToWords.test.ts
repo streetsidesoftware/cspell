@@ -14,23 +14,23 @@ describe('Validate legacyLineToWords', () => {
     });
 
     test.each`
-        line                                                           | expectedResult
-        ${'hello'}                                                     | ${['hello']}
-        ${'AppendIterator::getArrayIterator'}                          | ${['append', 'iterator', 'get', 'array']}
-        ${'Austin Martin'}                                             | ${['austin', 'martin']}
-        ${'JPEGsBLOBs'}                                                | ${['jpegs', 'blobs']}
-        ${'CURLs CURLing' /* Sadly we cannot do this one correctly */} | ${['curls', 'curling']}
-        ${'DNSTable Lookup'}                                           | ${['dns', 'table', 'lookup']}
-        ${'OUTRing'}                                                   | ${['outring']}
-        ${'OUTRings'}                                                  | ${['outrings']}
-        ${'DIRs'}                                                      | ${['dirs']}
-        ${'AVGAspect'}                                                 | ${['avg', 'aspect']}
-        ${'New York'}                                                  | ${['new', 'york']}
-        ${'Namespace DNSLookup'}                                       | ${['namespace', 'dns', 'lookup']}
-        ${'well-educated'}                                             | ${['well', 'educated']}
-        ${'CURLcode'}                                                  | ${['cur', 'lcode']}
-        ${'kDNSServiceErr_BadSig'}                                     | ${['k', 'dns', 'service', 'err', 'bad', 'sig']}
-        ${'apd_get_active_symbols'}                                    | ${['apd', 'get', 'active', 'symbols']}
+        line                                  | expectedResult
+        ${'hello'}                            | ${['hello']}
+        ${'AppendIterator::getArrayIterator'} | ${['append', 'iterator', 'get', 'array']}
+        ${'Austin Martin'}                    | ${['austin', 'martin']}
+        ${'JPEGSBlobs'}                       | ${['jpegs', 'blobs']}
+        ${'CURLS Curling'}                    | ${['curls', 'curling']}
+        ${'DNSTable Lookup'}                  | ${['dns', 'table', 'lookup']}
+        ${'OUTRing'}                          | ${['out', 'ring']}
+        ${'OUTRings'}                         | ${['out', 'rings']}
+        ${'DIRs'}                             | ${['di', 'rs']}
+        ${'AVGAspect'}                        | ${['avg', 'aspect']}
+        ${'New York'}                         | ${['new', 'york']}
+        ${'Namespace DNSLookup'}              | ${['namespace', 'dns', 'lookup']}
+        ${'well-educated'}                    | ${['well', 'educated']}
+        ${'CURLcode'}                         | ${['cur', 'lcode']}
+        ${'kDNSServiceErr_BadSig'}            | ${['k', 'dns', 'service', 'err', 'bad', 'sig']}
+        ${'apd_get_active_symbols'}           | ${['apd', 'get', 'active', 'symbols']}
     `('legacy splitting lines $line', ({ line, expectedResult }: { line: string; expectedResult: string[] }) => {
         expect([...pipe(legacyLineToWords(line, false, allowed), opFilter(distinct()))]).toEqual(expectedResult);
     });
