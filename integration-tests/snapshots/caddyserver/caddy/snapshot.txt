@@ -3,7 +3,7 @@ Repository: caddyserver/caddy
 Url: "https://github.com/caddyserver/caddy.git"
 Args: ["**/*.go"]
 Lines:
- CSpell: Files checked: 228, Issues found: 3517 in 209 files
+ CSpell: Files checked: 228, Issues found: 3520 in 209 files
  exit code: 1
 ./admin.go:1045:33   - Unknown word (unsynchronized) -- This is a low-level, unsynchronized function; most callers
 ./admin.go:1081:31   - Unknown word (elems)          -- array = append(array, elems...)
@@ -146,10 +146,10 @@ Lines:
 ./listeners.go:292:38    - Unknown word (netw)       -- returns true if the netw is a unix network.
 ./listeners.go:33:14     - Unknown word (quic)       -- "github.com/quic-go/quic-go"
 ./listeners.go:432:10    - Unknown word (QUIC)       -- // ListenQUIC returns a quic.EarlyListener
-./listeners.go:455:17    - Unknown word (Quic)       -- return &sharedQuicListener{EarlyListener
-./listeners.go:534:7     - Unknown word (fcpc)       -- func (fcpc *fakeClosePacketConn
-./listeners.go:568:25    - Unknown word (hotswappable) -- someone would need a hotswappable QUIC-only (not http
-./listeners.go:572:7     - Unknown word (fcql)         -- func (fcql *fakeCloseQuicListener
+./listeners.go:456:17    - Unknown word (Quic)       -- return &sharedQuicListener{EarlyListener
+./listeners.go:535:7     - Unknown word (fcpc)       -- func (fcpc *fakeClosePacketConn
+./listeners.go:569:25    - Unknown word (hotswappable) -- someone would need a hotswappable QUIC-only (not http
+./listeners.go:573:7     - Unknown word (fcql)         -- func (fcql *fakeCloseQuicListener
 ./listeners_test.go:91:20     - Unknown word (unixpacket) -- input: "unixpacket//foo/bar",
 ./logging.go:258:7     - Unknown word (wdest)      -- func (wdest writerDestructor) Destruct
 ./logging.go:369:10    - Unknown word (superspace) -- // be a superspace or subspace of an item
@@ -192,9 +192,10 @@ Lines:
 ./modules/caddyhttp/encode/brotli/brotli_precompressed.go:9:29      - Unknown word (Precompressed) -- RegisterModule(BrotliPrecompressed{})
 ./modules/caddyhttp/encode/caddyfile.go:44:8      - Unknown word (zstd)       -- // zstd
 ./modules/caddyhttp/encode/encode.go:19:65     - Unknown word (Httpgzip)   -- Copyright (c) 2015 The Httpgzip Authors.
-./modules/caddyhttp/encode/encode.go:262:4     - Unknown word (deallocates) -- // deallocates any active resources
-./modules/caddyhttp/encode/encode.go:316:2     - Unknown word (prefs)       -- prefs := []encodingPreference
-./modules/caddyhttp/encode/encode.go:52:59     - Unknown word (Mmatcher)   -- against this ResponseMmatcher.
+./modules/caddyhttp/encode/encode.go:218:25    - Unknown word (middlewares) -- status assuming http middlewares will track its status
+./modules/caddyhttp/encode/encode.go:276:4     - Unknown word (deallocates) -- // deallocates any active resources
+./modules/caddyhttp/encode/encode.go:330:2     - Unknown word (prefs)       -- prefs := []encodingPreference
+./modules/caddyhttp/encode/encode.go:54:59     - Unknown word (Mmatcher)   -- against this ResponseMmatcher.
 ./modules/caddyhttp/encode/gzip/gzip.go:24:14     - Unknown word (klauspost)  -- "github.com/klauspost/compress/gzip"
 ./modules/caddyhttp/encode/gzip/gzip_precompressed.go:1:9       - Unknown word (caddygzip)  -- package caddygzip
 ./modules/caddyhttp/encode/zstd/zstd.go:28:20     - Unknown word (Zstandard)  -- // Zstd can create Zstandard encoders.
@@ -207,9 +208,9 @@ Lines:
 ./modules/caddyhttp/fileserver/browse.go:47:7      - Unknown word (fsrv)       -- func (fsrv *FileServer) serveBrowse
 ./modules/caddyhttp/fileserver/browse.go:53:49     - Unknown word (hrefs)      -- trailing slash because hrefs to
 ./modules/caddyhttp/fileserver/browsetplcontext.go:114:37    - Unknown word (browseable) -- parent directory is browseable.
-./modules/caddyhttp/fileserver/browsetplcontext.go:147:2     - Unknown word (lpath)      -- lpath := l.Path
-./modules/caddyhttp/fileserver/browsetplcontext.go:158:67    - Unknown word (unescaping) -- the loop rather than unescaping the
-./modules/caddyhttp/fileserver/browsetplcontext.go:301:24    - Unknown word (namedirfirst) -- sortByNameDirFirst = "namedirfirst"
+./modules/caddyhttp/fileserver/browsetplcontext.go:150:2     - Unknown word (lpath)      -- lpath := l.Path
+./modules/caddyhttp/fileserver/browsetplcontext.go:161:67    - Unknown word (unescaping) -- the loop rather than unescaping the
+./modules/caddyhttp/fileserver/browsetplcontext.go:314:24    - Unknown word (namedirfirst) -- sortByNameDirFirst = "namedirfirst"
 ./modules/caddyhttp/fileserver/browsetplcontext_test.go:33:10     - Unknown word (quux)       -- {"/qux/quux/corge/", []crumb{
 ./modules/caddyhttp/fileserver/browsetplcontext_test.go:33:15     - Unknown word (corge)      -- {"/qux/quux/corge/", []crumb{
 ./modules/caddyhttp/fileserver/browsetplcontext_test.go:39:6      - Unknown word (مجلد)       -- {"/مجلد/", []crumb{
@@ -263,7 +264,6 @@ Lines:
 ./modules/caddyhttp/metrics_test.go:10:50     - Unknown word (testutil)   -- client_golang/prometheus/testutil"
 ./modules/caddyhttp/requestbody/caddyfile.go:15:9      - Unknown word (requestbody) -- package requestbody
 ./modules/caddyhttp/responsewriter_test.go:23:6      - Unknown word (barebones)  -- // a barebones http.ResponseWriter
-./modules/caddyhttp/responsewriter_test.go:64:22     - Unknown word (middlewares) -- // what we expect middlewares to do:
 ./modules/caddyhttp/reverseproxy/addresses.go:47:20     - Unknown word (proxying)   -- // a backend and proxying to it, so we cannot
 ./modules/caddyhttp/reverseproxy/admin.go:26:28     - Unknown word (Upstreams)  -- RegisterModule(adminUpstreams{})
 ./modules/caddyhttp/reverseproxy/caddyfile.go:690:56    - Unknown word (subroutes)  -- httpcaddyfile.Helper to parse subroutes.
@@ -337,8 +337,9 @@ Lines:
 ./modules/caddyhttp/tracing/module.go:29:5      - Unknown word (otel)       -- // otel implements opentelemetry
 ./modules/caddyhttp/tracing/module_test.go:105:3     - Unknown word (traceparent) -- traceparent := request.Header.Get
 ./modules/caddyhttp/tracing/module_test.go:105:38    - Unknown word (Traceparent) -- request.Header.Get("Traceparent")
+./modules/caddyhttp/tracing/tracer.go:10:56     - Unknown word (otelhttp)   -- instrumentation/net/http/otelhttp"
 ./modules/caddyhttp/tracing/tracer.go:110:56    - Unknown word (Schemaless)    -- Default(), resource.NewSchemaless(
-./modules/caddyhttp/tracing/tracer.go:11:56     - Unknown word (otelhttp)   -- instrumentation/net/http/otelhttp"
+./modules/caddyhttp/tracing/tracer.go:11:43     - Unknown word (autoprop)   -- contrib/propagators/autoprop"
 ./modules/caddyhttp/tracing/tracer.go:12:38     - Unknown word (otlp)       -- entelemetry.io/otel/exporters/otlp/otlptrace/otlptracegrpc
 ./modules/caddyhttp/tracing/tracer.go:12:43     - Unknown word (otlptrace)  -- otel/exporters/otlp/otlptrace/otlptracegrpc"
 ./modules/caddyhttp/tracing/tracer.go:12:53     - Unknown word (otlptracegrpc) -- exporters/otlp/otlptrace/otlptracegrpc"

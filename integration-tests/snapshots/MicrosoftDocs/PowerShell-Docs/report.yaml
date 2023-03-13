@@ -4,8 +4,8 @@ Url: https://github.com/MicrosoftDocs/PowerShell-Docs.git
 Args: ["--config=../../../cspell-power-shell-docs.config.yaml","**"]
 Summary:
   files: 2872
-  filesWithIssues: 1315
-  issues: 6008
+  filesWithIssues: 1316
+  issues: 6011
   errors: 0
 Errors: []
 
@@ -63,6 +63,7 @@ issues:
   - "reference/5.1/Microsoft.PowerShell.Core/About/about_Calculated_Properties.md:51:6       	formatstring	U   	- `formatstring` - optional"
   - "reference/5.1/Microsoft.PowerShell.Core/About/about_Calculated_Properties.md:211:15     	Fullname    	U   	Format-List Fullname,"
   - "reference/5.1/Microsoft.PowerShell.Core/About/about_Calculated_Properties.md:251:21     	Metacontent 	U   	'' {'Metacontent'}"
+  - "reference/5.1/Microsoft.PowerShell.Core/About/about_Character_Encoding.md:162:4     	bigendianutf	U   	- `bigendianutf32`: Encodes in UTF-"
   - "reference/5.1/Microsoft.PowerShell.Core/About/about_Classes.md:281:2    	ints        	U   	$ints = [FunWithIntegers]"
   - "reference/5.1/Microsoft.PowerShell.Core/About/about_Classes.md:637:25   	devtype     	U   	hidden [DeviceType]$devtype = [DeviceType]::Undefined"
   - "reference/5.1/Microsoft.PowerShell.Core/About/about_Classes.md:784:14   	baseclass   	U   	base class ([baseclass]$this) on invocation"
@@ -254,6 +255,8 @@ issues:
   - "reference/5.1/Microsoft.PowerShell.Core/Register-PSSessionConfiguration.md:121:15   	Descritor   	U   	the **SecurityDescritorSDDL** parameter to specify"
   - "reference/5.1/Microsoft.PowerShell.Core/Register-PSSessionConfiguration.md:126:61   	GWGX        	U   	FA;GA;;;WD)(AU;FA;SA;GWGX;;WD)\""
   - "reference/5.1/Microsoft.PowerShell.Core/Remove-PSSession.md:108:7   	Serv	U   	with `Serv`."
+  - "reference/5.1/Microsoft.PowerShell.Core/Remove-PSSnapin.md:158:4    	rsnp	U   	- `rsnp`"
+  - "reference/5.1/Microsoft.PowerShell.Core/Resume-Job.md:399:4     	rujb	U   	- `rujb`"
   - "reference/5.1/Microsoft.PowerShell.Core/Save-Help.md:141:64     	Fileshare   	U   	files in the `\\\\Server01\\Fileshare01` folder."
   - "reference/5.1/Microsoft.PowerShell.Core/Start-Job.md:583:4      	sajb	U   	- `sajb`"
   - "reference/5.1/Microsoft.PowerShell.Core/Stop-Job.md:412:4   	spjb	U   	- `spjb`"
@@ -286,6 +289,7 @@ issues:
   - "reference/5.1/Microsoft.PowerShell.Management/Get-Transaction.md:80:14      	hklm	U   	Set-Location hklm:\\software"
   - "reference/5.1/Microsoft.PowerShell.Management/Get-WmiObject.md:234:56   	localizable 	U   	amended information is localizable information, such as"
   - "reference/5.1/Microsoft.PowerShell.Management/Get-WmiObject.md:311:69   	ntlmdomain  	U   	authority setting to `ntlmdomain:<DomainName>`, where"
+  - "reference/5.1/Microsoft.PowerShell.Management/Get-WmiObject.md:624:4    	gwmi        	U   	- `gwmi`"
   - "reference/5.1/Microsoft.PowerShell.Management/Invoke-WmiMethod.md:115:3     	Wmiclass	U   	([Wmiclass]'Win32_Process').GetMethodPar"
   - "reference/5.1/Microsoft.PowerShell.Management/Join-Path.md:32:44    	childpath   	U   	Path \"path\" -ChildPath \"childpath\""
   - "reference/5.1/Microsoft.PowerShell.Management/Join-Path.md:101:87   	Subdir      	U   	Join-Path -ChildPath \"Subdir\""
@@ -415,7 +419,6 @@ issues:
   - "reference/7.2/Microsoft.PowerShell.Core/About/about_Environment_Variables.md:320:16     	UPDATECHECK 	U   	- **POWERSHELL_UPDATECHECK**"
   - "reference/7.2/Microsoft.PowerShell.Core/About/about_Experimental_Features.md:45:16      	experimentname  	U   	`<modulename>.<experimentname>`. The `ExperimentAction"
   - "reference/7.2/Microsoft.PowerShell.Core/About/about_Experimental_Features.md:69:31      	PSSSH           	U   	Experimental(\"MyRemoting.PSSSHRemoting\", \"Show\")]"
-  - "reference/7.2/Microsoft.PowerShell.Core/About/about_FileSystem_Provider.md:400:4    	bigendianutf	U   	- `bigendianutf32`: Encodes in UTF-"
   - "reference/7.2/Microsoft.PowerShell.Core/About/about_Format.ps1xml.md:358:30     	Mygciview   	U   	Export-FormatData -Path ./Mygciview.Format.ps1xml"
   - "reference/7.2/Microsoft.PowerShell.Core/About/about_Functions_Argument_Completion.md:265:37     	pswh	U   	toryCompleter(ContainingFile=\"pswh.exe\", Depth=2)]"
   - "reference/7.2/Microsoft.PowerShell.Core/About/about_Group_Policy_Settings.md:58:10      	gpedit  	U   	editor (`gpedit.msc`)."
@@ -842,7 +845,6 @@ issues:
   - "reference/docs-conceptual/developer/format/list-view-basic.md:21:41     	prependpath 	U   	`Update-formatdata -prependpath PathToFormattingFile"
   - "reference/docs-conceptual/developer/format/list-view-labels.md:74:20    	DISPLAYNAME 	U   	<Label>DISPLAYNAME property</Label>"
   - "reference/docs-conceptual/developer/format/list-view-labels.md:82:20    	SERVICETYPE 	U   	<Label>SERVICETYPE property</Label>"
-  - "reference/docs-conceptual/developer/format/loading-and-exporting-formatting-data.md:36:84   	Sessionstateformatentry 	U   	Automation.Runspaces.Sessionstateformatentry?Displayproperty=Fullname"
   - "reference/docs-conceptual/developer/format/selectioncondition-element-for-entryselectedby-for-enumerableexpansion-format.md:67:90   	Diplaying   	U   	Defining Conditions for Diplaying Data](./defining-conditions"
   - "reference/docs-conceptual/developer/format/wide-view-basic.md:40:111    	Servicename 	U   	viceprocess.Servicecontroller.Servicename](/dotnet/api/System"
   - "reference/docs-conceptual/developer/help/how-to-add-notes-to-a-cmdlet-help-topic.md:15:56   	alertset	U   	using a single `<maml:alertset>` node. There are no"
@@ -1333,8 +1335,8 @@ issues:
   - "reference/media/index/powershell_128.svg:5:21       	SVGID   	U   	<linearGradient id=\"SVGID_1_\" gradientUnits=\"userSpaceO"
   - "reference/media/shared/check-mark-button-2705.svg:3:12      	svgg	U   	<g id=\"svgg\">"
   - "reference/module/index.md:14:36     	windowsserver   	U   	FilterColumn1: powershell-7.2,windowsserver2022-ps"
-  - "reference/module/index.md:15:21     	azps            	U   	quickFilterColumn2: azps-9.4.0,win-mdop2-ps"
-  - "reference/module/index.md:15:36     	mdop            	U   	FilterColumn2: azps-9.4.0,win-mdop2-ps"
+  - "reference/module/index.md:15:21     	azps            	U   	quickFilterColumn2: azps-9.5.0,win-mdop2-ps"
+  - "reference/module/index.md:15:36     	mdop            	U   	FilterColumn2: azps-9.5.0,win-mdop2-ps"
   - "reference/module/index.md:16:21     	sqlserver       	U   	quickFilterColumn3: sqlserver-ps,systemcenter-ps-"
   - "reference/module/index.md:16:34     	systemcenter    	U   	ckFilterColumn3: sqlserver-ps,systemcenter-ps-2022"
   - "tests/Pester/Update-Help.Tests.ps1:24:34    	pshome      	U   	HelpInstallationPath = \"$pshome\\en-US\""

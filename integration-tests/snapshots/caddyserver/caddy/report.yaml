@@ -5,7 +5,7 @@ Args: ["**/*.go"]
 Summary:
   files: 228
   filesWithIssues: 209
-  issues: 3517
+  issues: 3520
   errors: 0
 Errors: []
 
@@ -152,10 +152,10 @@ issues:
   - "listeners.go:124:27     	datagram    	U   	return a net.Listener; datagram-based networks (\"udp"
   - "listeners.go:292:38     	netw        	U   	returns true if the netw is a unix network."
   - "listeners.go:432:10     	QUIC        	U   	// ListenQUIC returns a quic.EarlyListener"
-  - "listeners.go:455:17     	Quic        	U   	return &sharedQuicListener{EarlyListener"
-  - "listeners.go:534:7      	fcpc        	U   	func (fcpc *fakeClosePacketConn"
-  - "listeners.go:568:25     	hotswappable	U   	someone would need a hotswappable QUIC-only (not http"
-  - "listeners.go:572:7      	fcql        	U   	func (fcql *fakeCloseQuicListener"
+  - "listeners.go:456:17     	Quic        	U   	return &sharedQuicListener{EarlyListener"
+  - "listeners.go:535:7      	fcpc        	U   	func (fcpc *fakeClosePacketConn"
+  - "listeners.go:569:25     	hotswappable	U   	someone would need a hotswappable QUIC-only (not http"
+  - "listeners.go:573:7      	fcql        	U   	func (fcql *fakeCloseQuicListener"
   - "logging.go:258:7    	wdest       	U   	func (wdest writerDestructor) Destruct"
   - "logging.go:369:10   	superspace  	U   	// be a superspace or subspace of an item"
   - "logging.go:440:21   	shorcut     	U   	// at all, so just shorcut to a nop core instead"
@@ -197,9 +197,10 @@ issues:
   - "modules/caddyhttp/encode/brotli/brotli_precompressed.go:12:81   	brotli          	U   	files precompressed with brotli encoding."
   - "modules/caddyhttp/encode/caddyfile.go:44:8      	zstd	U   	// zstd"
   - "modules/caddyhttp/encode/encode.go:19:65    	Httpgzip    	U   	Copyright (c) 2015 The Httpgzip Authors."
-  - "modules/caddyhttp/encode/encode.go:52:59    	Mmatcher    	U   	against this ResponseMmatcher."
-  - "modules/caddyhttp/encode/encode.go:262:4    	deallocates 	U   	// deallocates any active resources"
-  - "modules/caddyhttp/encode/encode.go:316:2    	prefs       	U   	prefs := []encodingPreference"
+  - "modules/caddyhttp/encode/encode.go:54:59    	Mmatcher    	U   	against this ResponseMmatcher."
+  - "modules/caddyhttp/encode/encode.go:218:25   	middlewares 	U   	status assuming http middlewares will track its status"
+  - "modules/caddyhttp/encode/encode.go:276:4    	deallocates 	U   	// deallocates any active resources"
+  - "modules/caddyhttp/encode/encode.go:330:2    	prefs       	U   	prefs := []encodingPreference"
   - "modules/caddyhttp/encode/gzip/gzip_precompressed.go:1:9     	caddygzip   	U   	package caddygzip"
   - "modules/caddyhttp/encode/gzip/gzip.go:24:14     	klauspost   	U   	\"github.com/klauspost/compress/gzip\""
   - "modules/caddyhttp/encode/zstd/zstd_precompressed.go:1:9     	caddyzstd   	U   	package caddyzstd"
@@ -215,9 +216,9 @@ issues:
   - "modules/caddyhttp/fileserver/browsetplcontext_test.go:33:15     	corge   	U   	{\"/qux/quux/corge/\", []crumb{"
   - "modules/caddyhttp/fileserver/browsetplcontext_test.go:39:6      	مجلد    	U   	{\"/مجلد/\", []crumb{"
   - "modules/caddyhttp/fileserver/browsetplcontext.go:114:37     	browseable  	U   	parent directory is browseable."
-  - "modules/caddyhttp/fileserver/browsetplcontext.go:147:2      	lpath       	U   	lpath := l.Path"
-  - "modules/caddyhttp/fileserver/browsetplcontext.go:158:67     	unescaping  	U   	the loop rather than unescaping the"
-  - "modules/caddyhttp/fileserver/browsetplcontext.go:301:24     	namedirfirst	U   	sortByNameDirFirst = \"namedirfirst\""
+  - "modules/caddyhttp/fileserver/browsetplcontext.go:150:2      	lpath       	U   	lpath := l.Path"
+  - "modules/caddyhttp/fileserver/browsetplcontext.go:161:67     	unescaping  	U   	the loop rather than unescaping the"
+  - "modules/caddyhttp/fileserver/browsetplcontext.go:314:24     	namedirfirst	U   	sortByNameDirFirst = \"namedirfirst\""
   - "modules/caddyhttp/fileserver/caddyfile.go:80:5      	fsys            	U   	fsys, ok := unm.(fs.FS)"
   - "modules/caddyhttp/fileserver/caddyfile.go:119:6     	precompress     	U   	precompress, ok := inst.(encode"
   - "modules/caddyhttp/fileserver/caddyfile.go:121:46    	precompressor   	U   	\"module %s is not a precompressor; is %T\", modID, inst"
@@ -268,7 +269,6 @@ issues:
   - "modules/caddyhttp/metrics.go:135:2      	wrec        	U   	wrec := NewResponseRecorder"
   - "modules/caddyhttp/requestbody/caddyfile.go:15:9     	requestbody 	U   	package requestbody"
   - "modules/caddyhttp/responsewriter_test.go:23:6       	barebones   	U   	// a barebones http.ResponseWriter"
-  - "modules/caddyhttp/responsewriter_test.go:64:22      	middlewares 	U   	// what we expect middlewares to do:"
   - "modules/caddyhttp/reverseproxy/addresses.go:47:20   	proxying	U   	// a backend and proxying to it, so we cannot"
   - "modules/caddyhttp/reverseproxy/admin.go:26:28   	Upstreams   	U   	RegisterModule(adminUpstreams{})"
   - "modules/caddyhttp/reverseproxy/caddyfile.go:690:56  	subroutes   	U   	httpcaddyfile.Helper to parse subroutes."
@@ -342,7 +342,8 @@ issues:
   - "modules/caddyhttp/tracing/module_test.go:105:38     	Traceparent 	U   	request.Header.Get(\"Traceparent\")"
   - "modules/caddyhttp/tracing/module.go:29:5    	otel            	U   	// otel implements opentelemetry"
   - "modules/caddyhttp/tracing/module.go:29:21   	opentelemetry   	U   	// otel implements opentelemetry related logic."
-  - "modules/caddyhttp/tracing/tracer.go:11:56   	otelhttp        	U   	instrumentation/net/http/otelhttp\""
+  - "modules/caddyhttp/tracing/tracer.go:10:56   	otelhttp        	U   	instrumentation/net/http/otelhttp\""
+  - "modules/caddyhttp/tracing/tracer.go:11:43   	autoprop        	U   	contrib/propagators/autoprop\""
   - "modules/caddyhttp/tracing/tracer.go:12:38   	otlp            	U   	entelemetry.io/otel/exporters/otlp/otlptrace/otlptracegrpc"
   - "modules/caddyhttp/tracing/tracer.go:12:43   	otlptrace       	U   	otel/exporters/otlp/otlptrace/otlptracegrpc\""
   - "modules/caddyhttp/tracing/tracer.go:12:53   	otlptracegrpc   	U   	exporters/otlp/otlptrace/otlptracegrpc\""
