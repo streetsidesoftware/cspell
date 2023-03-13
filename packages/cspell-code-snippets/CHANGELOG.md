@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 6.29.2 (2023-03-13)
+
+### Bug Fixes
+
+* (cspell-tools) Delay splitting _ till later ([#4309](https://github.com/streetsidesoftware/cspell/issues/4309)) ([0e517d1](https://github.com/streetsidesoftware/cspell/commit/0e517d13a6611e4d8a4f826a7d8d75352f5be4df))
+
 ## 6.29.1 (2023-03-13)
 
 **Note:** Version bump only for package @cspell/cspell-code-snippets
