@@ -11,6 +11,6 @@ export function splitCamelCaseWord(word: string): string[] {
     const wPrime = word.replace(regExUpperSOrIng, (s) => s[0] + s.slice(1).toLowerCase());
     const pass1 = wPrime.replace(regExSplitWords, '$1|$2');
     const pass2 = pass1.replace(regExSplitWords2, '$1|$2');
-    const pass3 = pass2.replace(/\d+/g, '|');
+    const pass3 = pass2.replace(/[\d_]+/g, '|');
     return pass3.split('|').filter((a) => !!a);
 }

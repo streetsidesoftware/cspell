@@ -9,21 +9,28 @@ export function splitCamelCaseIfAllowed(
     allowedWords: AllowedSplitWordsCollection,
     keepCase: boolean
 ): string[] {
-    const split = [...splitCamelCase(word)].map((a) => (keepCase ? a : a.toLowerCase()));
+    const split = [...splitCamelCase(word)];
+    if (split.length == 1) return adjustCases(split, allowedWords, keepCase);
     const missing = split.find((w) => isUnknown(w, allowedWords));
-    if (missing) return [word];
-    return split.map((word) => adjustCase(word, keepCase));
+    if (missing !== undefined) return [word];
+    return adjustCases(split, allowedWords, keepCase);
 }
 
-function adjustCase(word: string, keepCase: boolean): string {
-    if (word[0].toLowerCase() == word[0]) return word;
-    if (word.slice(1).toLowerCase() === word.slice(1)) return word.toLowerCase();
+function adjustCases(words: string[], allowedWords: AllowedSplitWordsCollection, keepCase: boolean): string[] {
+    return words.map((w) => adjustCase(w, allowedWords, keepCase));
+}
+
+function adjustCase(word: string, allowedWords: AllowedSplitWordsCollection, keepCase: boolean): string {
+    const lc = word.toLowerCase();
+    if (!allowedWords.has(lc)) return word;
+    if (lc === word) return word;
+    if (word.slice(1).toLowerCase() === word.slice(1)) return lc;
     if (!keepCase && word.toUpperCase() === word) return word.toLowerCase();
     return word;
 }
 
 function isUnknown(word: string, allowedWords: AllowedSplitWordsCollection): boolean {
-    return word.length > 3 && !allowedWords.has(word) && !allowedWords.has(word.toLowerCase());
+    return !allowedWords.has(word) && !allowedWords.has(word.toLowerCase());
 }
 
 function splitCamelCase(word: string): Iterable<string> {

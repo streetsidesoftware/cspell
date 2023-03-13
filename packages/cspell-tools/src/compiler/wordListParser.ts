@@ -4,6 +4,7 @@ import { uniqueFilter } from 'hunspell-reader/dist/util';
 
 import type { CompileOptions } from './CompileOptions';
 import { legacyLineToWords } from './legacyLineToWords';
+import { splitCamelCaseIfAllowed } from './splitCamelCaseIfAllowed';
 import type { AllowedSplitWordsCollection } from './WordsCollection';
 
 export function normalizeTargetWords(options: CompileOptions): Operator<string> {
@@ -193,7 +194,12 @@ export function createParseFileLineMapper(options?: Partial<ParseFileOptions>): 
                 continue;
             }
             if (split) {
-                yield* splitLine(line);
+                const words = splitLine(line);
+                if (!allowedSplitWords.size) {
+                    yield* words;
+                } else {
+                    yield* words.flatMap((word) => splitCamelCaseIfAllowed(word, allowedSplitWords, keepCase));
+                }
                 if (!splitKeepBoth) continue;
             }
             yield line.replace(/["]/g, '');

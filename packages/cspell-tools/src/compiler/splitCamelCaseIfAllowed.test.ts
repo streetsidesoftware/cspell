@@ -7,6 +7,8 @@ describe('splitCamelCaseIfAllowed', () => {
         ${''}           | ${false} | ${undefined}          | ${[]}
         ${'hello'}      | ${false} | ${undefined}          | ${['hello']}
         ${'helloThere'} | ${false} | ${['hello', 'there']} | ${['hello', 'there']}
+        ${'helloThere'} | ${false} | ${['hello', 'There']} | ${['hello', 'There']}
+        ${'helloThere'} | ${true}  | ${['hello', 'There']} | ${['hello', 'There']}
         ${'ERRORCode'}  | ${false} | ${['error', 'code']}  | ${['error', 'code']}
         ${'ERRORCode'}  | ${true}  | ${['error', 'code']}  | ${['ERROR', 'code']}
         ${'ERRORCode'}  | ${true}  | ${['code']}           | ${['ERRORCode']}
