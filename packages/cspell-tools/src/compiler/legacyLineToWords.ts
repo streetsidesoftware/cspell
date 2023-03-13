@@ -3,7 +3,7 @@ import { opConcatMap, opFilter, opMap, pipe } from '@cspell/cspell-pipe/sync';
 import { regExpSpaceOrDash, splitCamelCaseIfAllowed } from './splitCamelCaseIfAllowed';
 import type { AllowedSplitWordsCollection } from './WordsCollection';
 
-const regNonWord = /[^\p{L}\p{M}' \d]+/giu;
+const regNonWord = /[^\p{L}\p{M}' _\d]+/giu;
 const regExpRepeatChars = /(.)\1{5}/i;
 
 export function legacyLineToWords(
