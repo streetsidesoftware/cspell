@@ -15,7 +15,7 @@ describe('splitCamelCaseIfAllowed', () => {
         ${'ERRORCode'}                     | ${false} | ${['code']}                         | ${['ERRORCode']}
         ${'ErrorCode'}                     | ${true}  | ${['error', 'code']}                | ${['error', 'code']}
         ${'xmlUCSIsCatZ'}                  | ${true}  | ${['xml', 'UCS', 'is', 'cat', 'z']} | ${['xml', 'UCS', 'is', 'cat', 'z']}
-        ${'ADP_ConnectionStateMsg_Closed'} | ${true}  | ${undefined}                        | ${['xml', 'UCS', 'is', 'cat', 'z']}
+        ${'ADP_ConnectionStateMsg_Closed'} | ${true}  | ${undefined}                        | ${['ADP', 'connection', 'state', 'msg', 'closed']}
     `('splitCamelCaseIfAllowed $text $keepCase $allowed', ({ text, keepCase, allowed, expected }) => {
         allowed = createAllowedSplitWords(allowed);
         expect(splitCamelCaseIfAllowed(text, allowed, keepCase)).toEqual(expected);
