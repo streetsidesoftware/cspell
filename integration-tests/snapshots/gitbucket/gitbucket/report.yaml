@@ -5,7 +5,7 @@ Args: ["**"]
 Summary:
   files: 411
   filesWithIssues: 397
-  issues: 2164
+  issues: 2171
   errors: 0
 Errors: []
 
@@ -33,6 +33,7 @@ issues:
   - "build.sbt:65:41     	testcontainers  	U   	%% \"testcontainers-scala\" % \"0."
   - "build.sbt:68:40     	eddsa           	U   	% \"eddsa\""
   - "build.sbt:69:40     	woothee         	U   	woothee\" % \"woothee-java\""
+  - "build.sbt:84:1      	scalac          	U   	scalacOptions := Seq("
   - "build.sbt:89:5      	Wunused         	U   	\"-Wunused:imports\","
   - "build.sbt:90:5      	Wconf           	U   	\"-Wconf:cat=unused&src=twirl"
   - "build.sbt:92:11     	javac           	U   	compile / javacOptions ++= Seq(\"-target"
@@ -153,6 +154,7 @@ issues:
   - "src/main/java/JettyLauncher.java:170:36     	KEYMANAGERPASSWORD  	U   	\" or GITBUCKET_KEYMANAGERPASSWORD environment variable"
   - "src/main/java/JettyLauncher.java:194:18     	sess                	U   	File sessDir = new File(getGitBucketHom"
   - "src/main/java/JettyLauncher.java:200:34     	fsds                	U   	FileSessionDataStore fsds = new FileSessionDataStore"
+  - "src/main/scala/gitbucket/core/api/ApiPullRequest.scala:16:3     	mergeable   	U   	mergeable: Option[Boolean],"
   - "src/main/scala/gitbucket/core/api/CreateARelease.scala:5:10     	commitish   	U   	target_commitish: Option[String],"
   - "src/main/scala/gitbucket/core/controller/AccountController.scala:88:58      	maxlength   	U   	name\", text(required, maxlength(100), identifier, uniqueUserN"
   - "src/main/scala/gitbucket/core/controller/AccountController.scala:214:5      	ctype       	U   	ctype: WebHookContentType"

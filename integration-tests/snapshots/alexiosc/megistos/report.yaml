@@ -5,7 +5,7 @@ Args: ["--config=${repoConfig}/cspell.json","**/*.{md,c,h,html}"]
 Summary:
   files: 747
   filesWithIssues: 740
-  issues: 55039
+  issues: 55088
   errors: 0
 Errors: []
 
@@ -969,7 +969,6 @@ issues:
   - "ATTIC/intl/finddomain.c:91:24   	nflist  	U   	retval = _nl_make_l10nflist (&_nl_loaded_domains"
   - "ATTIC/intl/finddomain.c:183:27  	runp    	U   	struct loaded_l10nfile *runp = _nl_loaded_domains"
   - "ATTIC/intl/gettextP.h:20:10     	GETTEXTP	U   	#ifndef _GETTEXTP_H"
-  - "ATTIC/intl/gettextP.h:40:48     	SUNPRO  	U   	GNUC__ || defined __SUNPRO_C || defined __cplusplus"
   - "ATTIC/intl/gmo.h:138:16     	sysdepref   	U   	nls_uint32 sysdepref;"
   - "ATTIC/intl/hash-string.h:30:9       	HASHWORDBITS	U   	#define HASHWORDBITS 32"
   - "ATTIC/intl/hash-string.h:33:27      	hashpjw     	U   	Defines the so called `hashpjw' function by P.J. Weinberger"
@@ -1020,7 +1019,6 @@ issues:
   - "ATTIC/intl/localename.c:191:10  	SUBLANG         	U   	# ifndef SUBLANG_ARABIC_SAUDI_ARABIA"
   - "ATTIC/intl/localename.c:287:31  	DARUSSALAM      	U   	SUBLANG_MALAY_BRUNEI_DARUSSALAM"
   - "ATTIC/intl/localename.c:302:32  	RICA            	U   	SUBLANG_SPANISH_COSTA_RICA"
-  - "ATTIC/intl/localename.c:370:62  	SUSV            	U   	format. Neither do SUSV2 and"
   - "ATTIC/intl/localename.c:425:3   	LANGID          	U   	LANGID langid;"
   - "ATTIC/intl/localename.c:425:10  	langid          	U   	LANGID langid;"
   - "ATTIC/intl/localename.c:444:12  	LANGIDFROMLCID  	U   	langid = LANGIDFROMLCID (lcid);"
@@ -4851,6 +4849,7 @@ issues:
   - "ATTIC/src/modules/gallups/gallups.c:59:11   	beautifications     	U   	* source beautifications"
   - "ATTIC/src/modules/gallups/gallups.c:71:28   	Gallups             	U   	improved version of Gallups Module"
   - "ATTIC/src/modules/gallups/gallups.c:106:15  	gallupinfo          	U   	struct gallup gallupinfo, *ginfo = &gallupinfo"
+  - "ATTIC/src/modules/gallups/gallups.c:106:28  	ginfo               	U   	gallup gallupinfo, *ginfo = &gallupinfo;"
   - "ATTIC/src/modules/gallups/gallups.c:114:9   	gscpath             	U   	char *gscpath = NULL;"
   - "ATTIC/src/modules/gallups/gallups.c:115:9   	galnew              	U   	int galnew_days;"
   - "ATTIC/src/modules/gallups/gallups.c:117:9   	tempstr             	U   	char tempstr[16384];"
@@ -6742,6 +6741,7 @@ issues:
   - "src/libmegistos/visual/put.c:64:1       	vputscreen  	U   	vputscreen(unsigned char *source"
   - "src/libmegistos/visual/put.c:72:1       	vputblock   	U   	vputblock(unsigned char *source"
   - "src/libmegistos/visual/put.c:74:18      	ofss        	U   	register char *ofss=source;"
+  - "src/libmegistos/visual/put.c:75:18      	ofst        	U   	register char *ofst;"
   - "src/libmegistos/visual/put.c:97:1       	vgetblock   	U   	vgetblock(unsigned char *target"
   - "src/libmegistos/visual/put.c:119:1      	vfputblock  	U   	vfputblock(const char *fname, int"
   - "src/libmegistos/visual/screen.c:65:1    	initcolours 	U   	initcolours()"

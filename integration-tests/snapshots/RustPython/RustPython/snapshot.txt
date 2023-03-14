@@ -3,7 +3,7 @@ Repository: RustPython/RustPython
 Url: "https://github.com/RustPython/RustPython.git"
 Args: ["**"]
 Lines:
- CSpell: Files checked: 717, Issues found: 3929 in 369 files
+ CSpell: Files checked: 717, Issues found: 3913 in 369 files
  exit code: 1
 ./Cargo.toml:133:62    - Unknown word (redoxer)    -- to compile/check with redoxer
 ./Cargo.toml:19:44     - Unknown word (pylib)      -- derive", "jit", "vm", "pylib", "stdlib", "wasm/lib
@@ -205,7 +205,6 @@ Lines:
 ./derive-impl/src/pyclass.rs:41:30     - Unknown word (pymember)   -- Self::Member => "pymember",
 ./derive-impl/src/pyclass.rs:556:34    - Unknown word (funcdef)    -- ctx.make_funcdef(#py_name, Self::#ident
 ./derive-impl/src/pyclass.rs:84:18     - Unknown word (pyitems)    -- let (pyitems, cfgs) = attrs_to_content
-./derive-impl/src/pyclass.rs:84:27     - Unknown word (cfgs)       -- let (pyitems, cfgs) = attrs_to_content
 ./derive-impl/src/pyclass.rs:85:17     - Unknown word (pyitem)     -- for pyitem in pyitems.iter().rev
 ./derive-impl/src/pymodule.rs:148:5     - Unknown word (pyattrs)    -- pyattrs: Vec<usize>,
 ./derive-impl/src/pymodule.rs:3:26      - Unknown word (idents)     -- format_doc, iter_use_idents, pyclass_ident_and_attrs
@@ -599,7 +598,6 @@ Lines:
 ./stdlib/src/hashlib.rs:28:9      - Unknown word (usedforsecurity) -- usedforsecurity: bool,
 ./stdlib/src/json/machinery.rs:44:7      - Unknown word (fedcba)     -- //fedcba9876543210_fedcba987
 ./stdlib/src/json/machinery.rs:5:30      - Unknown word (LOJKINE)    -- Copyright (c) 2018, Ophir LOJKINE
-./stdlib/src/json/machinery.rs:82:55     - Unknown word (uxxxx)      -- outside the BMP get 2 '\uxxxx' sequences to represent
 ./stdlib/src/lib.rs:111:27    - Unknown word (sysmodule)       -- // crate::vm::sysmodule::sysconfigdata_name
 ./stdlib/src/lib.rs:111:38    - Unknown word (sysconfigdata)   -- crate::vm::sysmodule::sysconfigdata_name() => sysconfigdata
 ./stdlib/src/lib.rs:22:5      - Unknown word (pyexpat)    -- mod pyexpat;
@@ -730,7 +728,6 @@ Lines:
 ./stdlib/src/ssl.rs:231:22    - Unknown word (SSLEOF)     -- #[pyattr(name = "SSLEOFError", once)]
 ./stdlib/src/ssl.rs:470:43    - Unknown word (SSLV)       -- options |= SslOptions::NO_SSLV2;
 ./stdlib/src/ssl.rs:530:31    - Unknown word (cipherlist) -- fn set_ciphers(&self, cipherlist: PyStrRef, vm: &VirtualMachin
-./stdlib/src/ssl.rs:642:48    - Unknown word (cafile)     -- None, None) = (&args.cafile, &args.capath, &args
 ./stdlib/src/ssl.rs:642:76    - Unknown word (cadata)     -- &args.capath, &args.cadata) {
 ./stdlib/src/ssl.rs:81:33     - Unknown word (ECDH)       -- ifdef SSL_OP_SINGLE_ECDH_USE
 ./stdlib/src/syslog.rs:130:19    - Unknown word (maskpri)    -- fn setlogmask(maskpri: i32) -> i32 {
@@ -1145,6 +1142,7 @@ Lines:
 ./vm/src/stdlib/winapi.rs:69:8      - Unknown word (husize)        -- fn husize(h: HANDLE) -> usize
 ./vm/src/stdlib/winreg.rs:193:24    - Unknown word (regval)     -- .and_then(|regval| {
 ./vm/src/stdlib/winreg.rs:50:77     - Unknown word (QWORD)      -- MULTI_SZ, REG_NONE, REG_QWORD,
+./vm/src/stdlib/winreg.rs:85:36     - Unknown word (predef)     -- let null_key = RegKey::predef(0 as ::winreg::HKEY
 ./vm/src/types/slot.rs:243:28    - Unknown word (TPFLAGS)    -- CPython default: Py_TPFLAGS_HAVE_STACKLESS_EXTENSION
 ./vm/src/types/slot.rs:243:41    - Unknown word (STACKLESS)  -- default: Py_TPFLAGS_HAVE_STACKLESS_EXTENSION | Py_TPFLAGS
 ./vm/src/types/slot.rs:247:43    - Unknown word (Subclassable) -- types created in Python. Subclassable and are a
