@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 6.29.3 (2023-03-14)
+
+### Bug Fixes
+
+* Add option to not auto stem during split ([#4310](https://github.com/streetsidesoftware/cspell-dicts/issues/4310)) ([23059da](https://github.com/streetsidesoftware/cspell-dicts/commit/23059dafd9ead91ef67cadf78a368e924b3436f6))
+
 ## 6.29.2 (2023-03-13)
 
 ### Bug Fixes
