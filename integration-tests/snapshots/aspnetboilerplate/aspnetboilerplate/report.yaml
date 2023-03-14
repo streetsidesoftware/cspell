@@ -4,8 +4,8 @@ Url: https://github.com/aspnetboilerplate/aspnetboilerplate
 Args: ["**/*.{md,cs,cshtml}","--exclude=wwwroot","--exclude=**/*SampleApp.Tests/Web*"]
 Summary:
   files: 2527
-  filesWithIssues: 814
-  issues: 2862
+  filesWithIssues: 843
+  issues: 3012
   errors: 0
 Errors: []
 
@@ -223,6 +223,7 @@ issues:
   - "src/Abp.Web.Common/Web/Http/HttpEncode.cs:18:199    	backcompat  	U   	unless turned off by backcompat switch)"
   - "src/Abp.Web.Common/Web/Models/DefaultErrorInfoConverter.cs:15:76    	wlll	U   	ErrorInfo this way. It works wlll but I think we should"
   - "src/Abp.Web.Common/Web/Mvc/Alerts/PageAlertMessageRenderer.cs:18:142    	dismisable  	U   	Dismissible ? \"alert-dismisable\" : \"\")} role=\\\"alert"
+  - "src/Abp.Web.Mvc/Web/Mvc/Extensions/HtmlHelperResourceExtensions.cs:40:42    	stylesheet  	U   	html.Raw(\"<link rel=\\\"stylesheet\\\" type=\\\"text/css\\\""
   - "src/Abp.Web.Mvc/Web/Mvc/Resources/Embedded/EmbeddedResourceVirtualPathProvider.cs:33:17     	dependecy   	U   	var dependecyFilenames = new StringCollecti"
   - "src/Abp.Web.Mvc/Web/Security/AntiForgery/AbpAntiForgeryManagerMvcExtensions.cs:41:78    	cookine 	U   	tpContextBase context, string cookineName)"
   - "src/Abp.Zero.Common/Application/Editions/EditionfeatureCacheItem.cs:7:18    	Editionfeature  	U   	public class EditionfeatureCacheItem"
@@ -239,11 +240,13 @@ issues:
   - "src/Abp.ZeroCore.IdentityServer4.vNext/IdentityServer4vNext/AbpResourceOwnerPasswordValidator.cs:52:73      	Oidc	U   	GrantValidationResult(sub, OidcConstants.AuthenticationMethod"
   - "src/Abp.ZeroCore/Authorization/Users/AbpUserStore.cs:2230:34    	userclaims  	U   	var query = from userclaims in _userClaimRepository"
   - "src/Abp.ZeroCore/Authorization/Users/AbpUserStore.cs:2296:34    	userrole    	U   	var query = from userrole in _userRoleRepository"
+  - "src/Abp/AbpKernelModule.cs:30:19    	Remoting	U   	using Abp.Runtime.Remoting;"
   - "src/Abp/Aspects/AbpCrossCuttingConcerns.cs:68:35    	Applieds	U   	public static string[] GetApplieds(object obj)"
   - "src/Abp/Authorization/Permission.cs:51:66   	mykey   	U   	indexer like Permission[\"mykey\"]=data; </para>"
   - "src/Abp/Authorization/Permission.cs:52:26   	mydata  	U   	/// <para>object mydata=Permission[\"mykey\"]"
   - "src/Abp/BackgroundJobs/BackgroundJobInfo.cs:43:28   	multiplated 	U   	/// This amount is multiplated by last wait time to"
   - "src/Abp/BackgroundJobs/BackgroundJobInfo.cs:81:41   	continously 	U   	true if this job is continously failed and will not"
+  - "src/Abp/BackgroundJobs/IBackgroundJobManager.cs:42:39   	successfull 	U   	returns><c>True</c> on a successfull state transition, <c"
   - "src/Abp/Collections/Extensions/ListExtensions.cs:41:48      	sortet  	U   	sorted\">List with the sortet items</param>"
   - "src/Abp/Configuration/SettingDefinitionGroup.cs:9:56    	togehter	U   	group some settings togehter."
   - "src/Abp/Configuration/Startup/ILocalizationConfiguration.cs:45:84   	Sentense	U   	from 'PascalCase' to a 'Sentense case'"
@@ -495,7 +498,6 @@ issues:
   - "test/Abp.NHibernate.Tests/Basic_Repository_Tests.cs:43:61   	halil   	U   	new Person() { Name = \"halil\" });"
   - "test/Abp.NHibernate.Tests/Basic_Repository_Tests.cs:92:92   	yunus   	U   	user => user.Name = \"yunus\");"
   - "test/Abp.NHibernate.Tests/Transaction_Tests.cs:24:49    	Transation  	U   	Complete_Uow_Without_Transation()"
-  - "test/Abp.RedisCache.Tests/ProtoBufRedisCacheSerializer_Test.cs:25:17    	proto   	U   	var protoBufSerializer = new ProtoBufRe"
   - "test/Abp.TestBase.Tests/Application/Services/Validation_Tests.cs:38:44      	Nesned  	U   	Should_Work_With_Right_Nesned_Inputs()"
   - "test/Abp.TestBase.Tests/Application/Services/Validation_Tests.cs:133:45     	Dtos    	U   	Should_Normalize_Nested_Dtos()"
   - "test/Abp.TestBase.Tests/Application/Services/Validation_Tests.cs:284:75     	greather	U   	\"MyIntValue must be greather than or equal to 18"
@@ -574,7 +576,6 @@ issues:
   - "test/Abp.ZeroCore.Tests/Zero/MultiLingual/MultiLingual_Mapping_Tests.cs:166:17  	volosoft	U   	var volosoftOffice = offices.Items"
   - "test/Abp.ZeroCore.Tests/Zero/Redis/PerRequestRedisCache/AbpPerRequestRedisCache_Test.cs:246:127 	redisdb 	U   	it should go to the redisdb again"
   - "test/Abp.ZeroCore.Tests/Zero/Sessions/Session_Override_Tests.cs:47:37   	Carluccio's 	U   	Name = \"Carluccio's\","
-  - "test/aspnet-core-demo/AbpAspNetCoreDemo.PlugIn/Views/Blog/Index.cshtml:2:16     	stylesheet  	U   	<link rel=\"stylesheet\" href=\"~/Views/Blog"
   - "test/aspnet-core-demo/AbpAspNetCoreDemo/Views/Home/Index.cshtml:12:39   	listbox     	U   	carousel-inner\" role=\"listbox\">"
   - "test/aspnet-core-demo/AbpAspNetCoreDemo/Views/Home/Index.cshtml:59:22   	glyphicon   	U   	<span class=\"glyphicon glyphicon-chevron-left"
   - "test/aspnet-core-demo/AbpAspNetCoreDemo/Views/Home/Index.cshtml:81:80   	appsetting  	U   	LinkID=699562\">Add an appsetting in config and access"
