@@ -2,15 +2,13 @@ import { opConcatMap, opFilter, opMap, pipe, toArray } from '@cspell/cspell-pipe
 import type { ParsedText } from '@cspell/cspell-types';
 import type { CachingDictionary, SearchOptions, SpellingDictionary } from 'cspell-dictionary';
 import { createCachingDictionary } from 'cspell-dictionary';
-import type { Sequence } from 'gensequence';
-import { genSequence } from 'gensequence';
 
-import type { ValidationResult } from '../Models/ValidationResult.js';
 import * as RxPat from '../Settings/RegExpPatterns.js';
 import * as Text from '../util/text.js';
 import { clean } from '../util/util.js';
 import { split } from '../util/wordSplitter.js';
 import { defaultMinWordLength } from './defaultConstants.js';
+import type { ValidationIssue } from './index.js';
 import { isWordValidWithEscapeRetry } from './isWordValid.js';
 import { mapRangeBackToOriginalPos } from './parsedText.js';
 import type {
@@ -19,8 +17,8 @@ import type {
     MappedTextValidationResult,
     TextOffsetRO,
     TextValidatorFn,
+    ValidationIssueRO,
     ValidationOptions,
-    ValidationResultRO,
 } from './ValidationTypes.js';
 
 interface LineValidator {
@@ -66,18 +64,30 @@ export function lineValidatorFactory(sDict: SpellingDictionary, options: Validat
         return dictCol.isNoSuggestWord(word);
     }
 
+    function getSuggestions(word: string) {
+        return dictCol.getPreferredSuggestions(word);
+    }
+
     function isWordFlagged(word: TextOffsetRO): boolean {
         const isIgnored = isWordIgnored(word.text);
         const isFlagged = !isIgnored && testForFlaggedWord(word);
         return isFlagged;
     }
 
-    function checkFlagWords(word: ValidationResult): ValidationResultRO {
+    function annotateIsFlagged(word: ValidationIssue): ValidationIssueRO {
         word.isFlagged = isWordFlagged(word);
         return word;
     }
 
-    function checkWord(word: ValidationResultRO): ValidationResultRO {
+    function annotateIssue(issue: ValidationIssue): ValidationIssue {
+        const sugs = getSuggestions(issue.text);
+        if (sugs && sugs.length) {
+            issue.suggestionsEx = sugs;
+        }
+        return issue;
+    }
+
+    function checkWord(word: ValidationIssueRO): ValidationIssueRO {
         const isIgnored = isWordIgnored(word.text);
         const { isFlagged = !isIgnored && testForFlaggedWord(word) } = word;
         const isFound = isFlagged ? undefined : isIgnored || isWordValidWithEscapeRetry(dictCol, word, word.line);
@@ -92,7 +102,7 @@ export function lineValidatorFactory(sDict: SpellingDictionary, options: Validat
             );
         }
 
-        function checkFullWord(vr: ValidationResultRO): Iterable<ValidationResultRO> {
+        function checkFullWord(vr: ValidationIssueRO): Iterable<ValidationIssueRO> {
             if (vr.isFlagged) {
                 return [vr];
             }
@@ -102,7 +112,7 @@ export function lineValidatorFactory(sDict: SpellingDictionary, options: Validat
                     Text.extractWordsFromCodeTextOffset(vr),
                     opFilter(filterAlreadyChecked),
                     opMap((t) => ({ ...t, line: vr.line })),
-                    opMap(checkFlagWords),
+                    opMap(annotateIsFlagged),
                     opFilter(rememberFilter((wo) => wo.text.length >= minWordLength || !!wo.isFlagged)),
                     opMap((wo) => (wo.isFlagged ? wo : checkWord(wo))),
                     opFilter(rememberFilter((wo) => wo.isFlagged || !wo.isFound)),
@@ -126,7 +136,7 @@ export function lineValidatorFactory(sDict: SpellingDictionary, options: Validat
 
         function checkPossibleWords(possibleWord: TextOffsetRO) {
             if (isWordFlagged(possibleWord)) {
-                const vr: ValidationResultRO = {
+                const vr: ValidationIssueRO = {
                     ...possibleWord,
                     line: lineSegment.line,
                     isFlagged: true,
@@ -134,12 +144,12 @@ export function lineValidatorFactory(sDict: SpellingDictionary, options: Validat
                 return [vr];
             }
 
-            const mismatches: ValidationResult[] = toArray(
+            const mismatches: ValidationIssue[] = toArray(
                 pipe(
                     Text.extractWordsFromTextOffset(possibleWord),
                     opFilter(filterAlreadyChecked),
                     opMap((wo) => ({ ...wo, line: lineSegment.line })),
-                    opMap(checkFlagWords),
+                    opMap(annotateIsFlagged),
                     opFilter(rememberFilter((wo) => wo.text.length >= minWordLength || !!wo.isFlagged)),
                     opConcatMap(checkFullWord)
                 )
@@ -149,18 +159,17 @@ export function lineValidatorFactory(sDict: SpellingDictionary, options: Validat
                 const splitResult = split(lineSegment.segment, possibleWord.offset, splitterIsValid);
                 const nonMatching = splitResult.words.filter((w) => !w.isFound);
                 if (nonMatching.length < mismatches.length) {
-                    return nonMatching.map((w) => ({ ...w, line: lineSegment.line })).map(checkFlagWords);
+                    return nonMatching.map((w) => ({ ...w, line: lineSegment.line })).map(annotateIsFlagged);
                 }
             }
             return mismatches;
         }
 
-        const checkedPossibleWords: Sequence<ValidationResult> = genSequence(
-            pipe(
-                Text.extractPossibleWordsFromTextOffset(lineSegment.segment),
-                opFilter(filterAlreadyChecked),
-                opConcatMap(checkPossibleWords)
-            )
+        const checkedPossibleWords: Iterable<ValidationIssue> = pipe(
+            Text.extractPossibleWordsFromTextOffset(lineSegment.segment),
+            opFilter(filterAlreadyChecked),
+            opConcatMap(checkPossibleWords),
+            opMap(annotateIssue)
         );
         return checkedPossibleWords;
     };
@@ -182,11 +191,11 @@ export function textValidatorFactory(dict: SpellingDictionary, options: Validati
         const srcOffset = srcRange[0];
         const segment = { text, offset: 0 };
         const lineSegment: LineSegment = { line: segment, segment };
-        function mapBackToOriginSimple(vr: ValidationResult): MappedTextValidationResult {
-            const { text, offset, isFlagged, isFound } = vr;
+        function mapBackToOriginSimple(vr: ValidationIssue): MappedTextValidationResult {
+            const { text, offset, isFlagged, isFound, suggestionsEx } = vr;
             const r = mapRangeBackToOriginalPos([offset, offset + text.length], map);
             const range = [r[0] + srcOffset, r[1] + srcOffset] as [number, number];
-            return { text, range, isFlagged, isFound };
+            return { text, range, isFlagged, isFound, suggestionsEx };
         }
         return [...lineValidatorFn(lineSegment)].map(mapBackToOriginSimple);
     }

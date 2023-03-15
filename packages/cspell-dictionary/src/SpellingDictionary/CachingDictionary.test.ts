@@ -2,12 +2,16 @@ import { describe, expect, test } from 'vitest';
 
 import { createCachingDictionary } from './CachingDictionary.js';
 import { createSpellingDictionary } from './createSpellingDictionary.js';
+import { createCollection } from './SpellingDictionaryCollection.js';
+import { createSuggestDictionary } from './SuggestDictionary.js';
 
 const oc = expect.objectContaining;
 
 describe('CachingDictionary', () => {
     const words = ['apple', 'banana', 'orange', 'grape', 'mango', '!pear'];
-    const dict = createSpellingDictionary(words, '[words]', 'source');
+    const dictWords = createSpellingDictionary(words, '[words]', 'source');
+    const sugDict = createSuggestDictionary(['red:green', 'up:down'], '[suggestions]', 'source');
+    const dict = createCollection([dictWords, sugDict], 'collection');
 
     test('hits', () => {
         const cd = createCachingDictionary(dict, {});
@@ -54,5 +58,16 @@ describe('CachingDictionary', () => {
     `('isForbidden $word', ({ word, expected }) => {
         const cd = createCachingDictionary(dict, {});
         expect(cd.isForbidden(word)).toBe(expected);
+    });
+
+    test.each`
+        word       | expected
+        ${'apple'} | ${[]}
+        ${'up'}    | ${[{ word: 'down', cost: 1, isPreferred: true }]}
+        ${'red'}   | ${[{ word: 'green', cost: 1, isPreferred: true }]}
+        ${'green'} | ${[]}
+    `('getPreferredSuggestions $word', ({ word, expected }) => {
+        const cd = createCachingDictionary(dict, {});
+        expect(cd.getPreferredSuggestions(word)).toEqual(expected);
     });
 });

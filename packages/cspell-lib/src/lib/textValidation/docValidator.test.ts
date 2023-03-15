@@ -93,7 +93,7 @@ describe('docValidator', () => {
         ${fix('sample-with-errors.ts')} | ${'Helllo'} | ${[oc({ text: 'Helllo', suggestions: ac(['hello']) })]}
     `('checkText suggestions $filename "$text"', async ({ filename, text, expected }) => {
         const doc = await loadDoc(filename);
-        const dVal = new DocumentValidator(doc, { generateSuggestions: true }, {});
+        const dVal = new DocumentValidator(doc, { generateSuggestions: true }, { suggestionsTimeout: 10000 });
         dVal.prepareSync();
         const offset = doc.text.indexOf(text);
         assert(offset >= 0);
@@ -108,7 +108,7 @@ describe('docValidator', () => {
         ${fix('sample-with-errors.ts')} | ${'Helllo'} | ${[oc({ text: 'Helllo', suggestions: ac(['hello']) })]}
     `('checkText Async suggestions $filename "$text"', async ({ filename, text, expected }) => {
         const doc = await loadDoc(filename);
-        const dVal = new DocumentValidator(doc, { generateSuggestions: true }, {});
+        const dVal = new DocumentValidator(doc, { generateSuggestions: true }, { suggestionsTimeout: 10000 });
         await dVal.prepare();
         const offset = doc.text.indexOf(text);
         assert(offset >= 0);
@@ -138,6 +138,22 @@ describe('docValidator', () => {
             expect(extractRawText(doc.text, r)).toEqual(expectedRawIssues ?? expectedIssues);
         }
     );
+
+    function mkI(text: string, ...sug: string[]) {
+        return { text, suggestionsEx: sug.map((word) => ({ word, isPreferred: true })) };
+    }
+
+    test.each`
+        filename                               | expectedIssues
+        ${fix('sample-with-common-errors.md')} | ${expect.arrayContaining([mkI('acceptible', 'acceptable'), mkI('accidently', 'accidentally')]) /* cspell:disable-line */}
+    `('checkDocument with preferred $filename', async ({ filename, maxDuplicateProblems, expectedIssues }) => {
+        const doc = await loadDoc(filename);
+        const dVal = new DocumentValidator(doc, { generateSuggestions: false }, { maxDuplicateProblems });
+        await dVal.prepare();
+        const r = dVal.checkDocument().map(({ text, suggestionsEx }) => ({ text, suggestionsEx }));
+
+        expect(r).toEqual(expectedIssues);
+    });
 
     test.each`
         filename                                   | maxDuplicateProblems | expectedIssues                                                                                                                                                                                | expectedRawIssues

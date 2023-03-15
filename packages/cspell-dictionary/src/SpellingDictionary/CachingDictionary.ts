@@ -1,6 +1,6 @@
 import type { CacheStats } from '../util/AutoCache.js';
 import { autoCache, extractStats } from '../util/AutoCache.js';
-import type { SearchOptions, SpellingDictionary } from './SpellingDictionary.js';
+import type { PreferredSuggestion, SearchOptions, SpellingDictionary } from './SpellingDictionary.js';
 import type { SpellingDictionaryCollection } from './SpellingDictionaryCollection.js';
 import { canonicalSearchOptions } from './SpellingDictionaryMethods.js';
 
@@ -10,9 +10,12 @@ interface CallStats {
     has: CacheStats;
     isNoSuggestWord: CacheStats;
     isForbidden: CacheStats;
+    getPreferredSuggestions: CacheStats;
 }
 
 let dictionaryCounter = 0;
+
+const DefaultAutoCacheSize = 1000;
 
 /**
  * Caching Dictionary remembers method calls to increase performance.
@@ -24,6 +27,7 @@ export interface CachingDictionary {
     isNoSuggestWord(word: string): boolean;
     isForbidden(word: string): boolean;
     stats(): CallStats;
+    getPreferredSuggestions(word: string): PreferredSuggestion[] | undefined;
 }
 
 class CachedDict implements CachingDictionary {
@@ -34,9 +38,16 @@ class CachedDict implements CachingDictionary {
         // console.log(`CachedDict for ${this.name}`);
     }
 
-    readonly has = autoCache((word: string) => this.dict.has(word, this.options));
-    readonly isNoSuggestWord = autoCache((word: string) => this.dict.isNoSuggestWord(word, this.options));
-    readonly isForbidden = autoCache((word: string) => this.dict.isForbidden(word));
+    readonly has = autoCache((word: string) => this.dict.has(word, this.options), DefaultAutoCacheSize);
+    readonly isNoSuggestWord = autoCache(
+        (word: string) => this.dict.isNoSuggestWord(word, this.options),
+        DefaultAutoCacheSize
+    );
+    readonly isForbidden = autoCache((word: string) => this.dict.isForbidden(word), DefaultAutoCacheSize);
+    readonly getPreferredSuggestions = autoCache(
+        (word: string) => this.dict.getPreferredSuggestions?.(word),
+        DefaultAutoCacheSize
+    );
 
     stats(): CallStats {
         return {
@@ -45,6 +56,7 @@ class CachedDict implements CachingDictionary {
             has: extractStats(this.has),
             isNoSuggestWord: extractStats(this.isNoSuggestWord),
             isForbidden: extractStats(this.isForbidden),
+            getPreferredSuggestions: extractStats(this.getPreferredSuggestions),
         };
     }
 }

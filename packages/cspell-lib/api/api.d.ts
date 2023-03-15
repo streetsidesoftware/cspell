@@ -537,8 +537,8 @@ interface ValidationResult extends TextOffset, Pick<Issue, 'message' | 'issueTyp
 }
 
 interface ValidationIssue extends ValidationResult {
-    suggestions?: string[];
-    suggestionsEx?: ExtendedSuggestion[];
+    suggestions?: string[] | undefined;
+    suggestionsEx?: ExtendedSuggestion[] | undefined;
 }
 
 declare function refreshDictionaryCache(maxAge?: number): Promise<void>;
@@ -642,7 +642,7 @@ interface IncludeExcludeOptions {
     ignoreRegExpList?: RegExp[];
     includeRegExpList?: RegExp[];
 }
-type LineValidatorFn = (line: LineSegment) => Iterable<ValidationResult>;
+type LineValidatorFn = (line: LineSegment) => Iterable<ValidationIssue>;
 interface LineSegment {
     line: TextOffsetRO;
     segment: TextOffsetRO;
@@ -650,6 +650,7 @@ interface LineSegment {
 interface MappedTextValidationResult extends MappedText {
     isFlagged?: boolean | undefined;
     isFound?: boolean | undefined;
+    suggestionsEx?: ExtendedSuggestion[] | undefined;
 }
 type TextValidatorFn = (text: MappedText) => Iterable<MappedTextValidationResult>;
 
@@ -753,6 +754,7 @@ declare class DocumentValidator {
     private _parse;
     private getSuggestions;
     private genSuggestions;
+    private adjustSuggestions;
     getFinalizedDocSettings(): CSpellSettingsInternal;
     /**
      * Returns true if the final result of the configuration calculation results

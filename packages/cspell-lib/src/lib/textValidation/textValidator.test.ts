@@ -1,4 +1,4 @@
-import { opConcatMap, opMap, pipeSync } from '@cspell/cspell-pipe/sync';
+import { opConcatMap, opMap, pipeSync, toArray } from '@cspell/cspell-pipe/sync';
 import type { CSpellUserSettings, TextOffset } from '@cspell/cspell-types';
 import { describe, expect, test } from 'vitest';
 
@@ -21,15 +21,15 @@ function sToV(settings: CSpellUserSettings) {
 describe('Validate textValidator functions', () => {
     test('tests textValidator no word compounds', async () => {
         const dictCol = await getSpellingDictionaryCollection();
-        const result = validateText(sampleText, dictCol, sToV({}));
-        const errors = result.map((wo) => wo.text).toArray();
+        const result = [...validateText(sampleText, dictCol, sToV({}))];
+        const errors = result.map((wo) => wo.text);
         expect(errors).toEqual(['giraffe', 'lightbrown', 'whiteberry', 'redberry']);
     });
 
     test('tests textValidator with word compounds', async () => {
         const dictCol = await getSpellingDictionaryCollection();
-        const result = validateText(sampleText, dictCol, sToV({ allowCompoundWords: true }));
-        const errors = result.map((wo) => wo.text).toArray();
+        const result = [...validateText(sampleText, dictCol, sToV({ allowCompoundWords: true }))];
+        const errors = result.map((wo) => wo.text);
         expect(errors).toEqual(['giraffe', 'whiteberry']);
     });
 
@@ -37,18 +37,15 @@ describe('Validate textValidator functions', () => {
     test('tests ignoring words that consist of a single repeated letter', async () => {
         const dictCol = await getSpellingDictionaryCollection();
         const text = ' tttt gggg xxxxxxx jjjjj xxxkxxxx xxxbxxxx \n' + sampleText;
-        const result = validateText(text, dictCol, sToV({ allowCompoundWords: true }));
-        const errors = result
-            .map((wo) => wo.text)
-            .toArray()
-            .sort();
+        const result = [...validateText(text, dictCol, sToV({ allowCompoundWords: true }))];
+        const errors = result.map((wo) => wo.text).sort();
         expect(errors).toEqual(['giraffe', 'whiteberry', 'xxxbxxxx', 'xxxkxxxx']);
     });
 
     test('tests trailing s, ed, ing, etc. are attached to the words', async () => {
         const dictEmpty = await createSpellingDictionary([], 'empty', 'test', opts());
         const text = 'We have PUBLISHed multiple FIXesToThePROBLEMs';
-        const result = validateText(text, dictEmpty, sToV({})).toArray();
+        const result = [...validateText(text, dictEmpty, sToV({}))];
         const errors = result.map((wo) => wo.text);
         expect(errors).toEqual(['have', 'PUBLISHed', 'multiple', 'FIXes', 'PROBLEMs']);
     });
@@ -65,7 +62,7 @@ describe('Validate textValidator functions', () => {
         const options: ValidationOptions = {
             ignoreCase: false,
         };
-        const result = validateText(text, dict, options).toArray();
+        const result = [...validateText(text, dict, options)];
         const errors = result.map((wo) => wo.text);
         expect(errors).toEqual(['have', 'published', 'multiple', 'fixestotheproblems', 'issues']);
     });
@@ -82,7 +79,7 @@ describe('Validate textValidator functions', () => {
         const options: ValidationOptions = {
             ignoreCase: true,
         };
-        const result = validateText(text, dict, options).toArray();
+        const result = [...validateText(text, dict, options)];
         const errors = result.map((wo) => wo.text);
         expect(errors).toEqual(['have', 'published', 'multiple']);
     });
@@ -111,7 +108,7 @@ describe('Validate textValidator functions', () => {
             ignoreCase: false,
             flagWords,
         };
-        const result = validateText(text, dict, options).toArray();
+        const result = [...validateText(text, dict, options)];
         const errors = result.map((wo) => wo.text);
         expect(errors).toEqual(['have', 'published', 'VeryBadProblem', 'paris']);
     });
@@ -119,11 +116,8 @@ describe('Validate textValidator functions', () => {
     test('tests trailing s, ed, ing, etc.', async () => {
         const dictWords = await getSpellingDictionaryCollection();
         const text = 'We have PUBLISHed multiple FIXesToThePROBLEMs';
-        const result = validateText(text, dictWords, sToV({ allowCompoundWords: true }));
-        const errors = result
-            .map((wo) => wo.text)
-            .toArray()
-            .sort();
+        const result = [...validateText(text, dictWords, sToV({ allowCompoundWords: true }))];
+        const errors = result.map((wo) => wo.text).sort();
         expect(errors).toEqual([]);
     });
 
@@ -132,25 +126,24 @@ describe('Validate textValidator functions', () => {
         // cspell:disable
         const text = `We should’ve done a better job, but we couldn\\'t have known.`;
         // cspell:enable
-        const result = validateText(text, dictWords, sToV({ allowCompoundWords: false }));
-        const errors = result
-            .map((wo) => wo.text)
-            .toArray()
-            .sort();
+        const result = [...validateText(text, dictWords, sToV({ allowCompoundWords: false }))];
+        const errors = result.map((wo) => wo.text).sort();
         expect(errors).toEqual([]);
     });
 
     test('tests maxDuplicateProblems', async () => {
         const dict = await createSpellingDictionary([], 'empty', 'test', opts());
         const text = sampleText;
-        const result = validateText(
-            text,
-            dict,
-            sToV({
-                maxNumberOfProblems: 1000,
-                maxDuplicateProblems: 1,
-            })
-        );
+        const result = [
+            ...validateText(
+                text,
+                dict,
+                sToV({
+                    maxNumberOfProblems: 1000,
+                    maxDuplicateProblems: 1,
+                })
+            ),
+        ];
         const freq = FreqCounter.create(result.map((t) => t.text));
         expect(freq.total).toBe(freq.counters.size);
         const words = freq.counters.keys();
