@@ -1,4 +1,4 @@
-import { opConcatMap, opMap, pipeSync, toArray } from '@cspell/cspell-pipe/sync';
+import { opConcatMap, opMap, pipeSync } from '@cspell/cspell-pipe/sync';
 import type { CSpellUserSettings, TextOffset } from '@cspell/cspell-types';
 import { describe, expect, test } from 'vitest';
 
