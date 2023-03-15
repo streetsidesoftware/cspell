@@ -188,4 +188,19 @@ describe('ForbiddenWordsDictionaryTrie', () => {
     `('suggest of "$word"', async ({ word, expected }) => {
         expect(dict.suggest(word)).toEqual(expected);
     });
+
+    test.each`
+        word          | expected
+        ${'avocado'}  | ${[]}
+        ${'Avocado'}  | ${[]}
+        ${''}         | ${[]}
+        ${'English'}  | ${[]}
+        ${'english'}  | ${[]}
+        ${'avocadoS'} | ${[]}
+        ${'AvocadoS'} | ${[]}
+        ${'grumpy'}   | ${[]}
+        ${'Grumpy'}   | ${[]}
+    `('suggest of "$word"', async ({ word, expected }) => {
+        expect(dict.getPreferredSuggestions?.(word)).toEqual(expected);
+    });
 });

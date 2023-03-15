@@ -216,4 +216,19 @@ describe('TyposDictionary 2', () => {
     `('suggest of "$word"', async ({ word, expected }) => {
         expect(dict.suggest(word)).toEqual(expected);
     });
+
+    test.each`
+        word         | expected
+        ${''}        | ${[]}
+        ${'Avocado'} | ${[{ cost: 1, isPreferred, word: 'Avocado' }]}
+        ${'avocado'} | ${[{ cost: 1, isPreferred, word: 'Avocado' }]}
+        ${'cafe'}    | ${[{ cost: 1, isPreferred, word: 'café' }]}
+        ${'English'} | ${[{ word: 'English', isPreferred, cost: 1 }]}
+        ${'english'} | ${[{ word: 'English', isPreferred, cost: 1 }]}
+        ${'grumpy'}  | ${[]}
+        ${'Grumpy'}  | ${[]}
+        ${'wont'}    | ${[{ word: "won't", isPreferred, cost: 1 }, { word: 'will not', isPreferred, cost: 2 }]}
+    `('suggest of "$word"', async ({ word, expected }) => {
+        expect(dict.getPreferredSuggestions(word)).toEqual(expected);
+    });
 });

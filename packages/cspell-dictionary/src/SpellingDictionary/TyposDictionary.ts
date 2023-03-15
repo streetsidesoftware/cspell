@@ -8,6 +8,7 @@ import type {
     FindResult,
     HasOptions,
     IgnoreCaseOption,
+    PreferredSuggestion,
     SearchOptions,
     SpellingDictionary,
     SpellingDictionaryOptions,
@@ -22,6 +23,7 @@ interface Found {
 }
 
 export interface TyposDictionary extends SpellingDictionary {
+    getPreferredSuggestions: (word: string) => PreferredSuggestion[];
     isForbidden(word: string, ignoreCaseAndAccents?: IgnoreCaseOption): boolean;
     /**
      * Determine if the word can appear in a list of suggestions.
@@ -30,6 +32,10 @@ export interface TyposDictionary extends SpellingDictionary {
      * @returns true if a word is suggested, otherwise false.
      */
     isSuggestedWord(word: string, ignoreCaseAndAccents?: IgnoreCaseOption): boolean;
+}
+
+interface TyposSuggestionResult extends SuggestionResult {
+    isPreferred: true;
 }
 
 class TyposDictionaryImpl implements TyposDictionary {
@@ -137,10 +143,10 @@ class TyposDictionaryImpl implements TyposDictionary {
     ): SuggestionResult[];
     suggest(word: string, suggestOptions: SuggestOptions): SuggestionResult[];
     public suggest(word: string): SuggestionResult[] {
-        return this._suggest(word) || this._suggest(word.toLowerCase()) || [];
+        return this.getPreferredSuggestions(word);
     }
 
-    private _suggest(word: string): SuggestionResult[] | undefined {
+    private _suggest(word: string): TyposSuggestionResult[] | undefined {
         if (this.ignoreWords.has(word)) return [];
         if (!(word in this.typosDef)) return undefined;
         const sug = this.typosDef[word];
@@ -162,6 +168,11 @@ class TyposDictionaryImpl implements TyposDictionary {
         const sugs = this.suggest(collector.word);
         sugs.forEach((result) => collector.add(result));
     }
+
+    getPreferredSuggestions(word: string): TyposSuggestionResult[] {
+        return this._suggest(word) || this._suggest(word.toLowerCase()) || [];
+    }
+
     mapWord(word: string): string {
         return word;
     }

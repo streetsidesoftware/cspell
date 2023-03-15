@@ -104,4 +104,54 @@ describe('SuggestDictionary 2', () => {
     `('suggest of "$word"', async ({ word, expected }) => {
         expect(dict.suggest(word)).toEqual(expected);
     });
+
+    test.each`
+        word         | expected
+        ${''}        | ${[]}
+        ${'Avocado'} | ${[{ cost: 1, isPreferred, word: 'Avocado' }]}
+        ${'avocado'} | ${[{ cost: 1, isPreferred, word: 'Avocado' }]}
+        ${'cafe'}    | ${[{ cost: 1, isPreferred, word: 'café' }]}
+        ${'English'} | ${[{ word: 'English', isPreferred, cost: 1 }]}
+        ${'english'} | ${[{ word: 'English', isPreferred, cost: 1 }]}
+        ${'grumpy'}  | ${[]}
+        ${'red'}     | ${[{ cost: 1, isPreferred, word: 'green' }]}
+        ${'green'}   | ${[]}
+        ${'blue'}    | ${[{ cost: 1, isPreferred, word: 'purple' }, { cost: 2, isPreferred, word: 'cyan' }]}
+        ${'yellow'}  | ${[{ cost: 1, isPreferred, word: 'white' }, { cost: 2, isPreferred, word: 'black' }]}
+        ${'Grumpy'}  | ${[]}
+        ${'wont'}    | ${[{ word: "won't", isPreferred, cost: 1 }, { word: 'will not', isPreferred, cost: 2 }]}
+    `('suggest of "$word"', async ({ word, expected }) => {
+        expect(dict.getPreferredSuggestions(word)).toEqual(expected);
+    });
+
+    test('getErrors', () => {
+        expect(dict.getErrors?.()).toEqual([]);
+    });
+
+    test.each`
+        word         | ignoreCase   | expected
+        ${'purple'}  | ${true}      | ${true}
+        ${'Avocado'} | ${true}      | ${true}
+        ${'avocado'} | ${false}     | ${false}
+        ${'cafe'}    | ${undefined} | ${false}
+        ${'cafe'}    | ${true}      | ${true}
+        ${'café'}    | ${true}      | ${true}
+        ${'English'} | ${true}      | ${true}
+        ${'english'} | ${false}     | ${false}
+        ${'english'} | ${true}      | ${true}
+        ${'red'}     | ${true}      | ${false}
+        ${'green'}   | ${true}      | ${true}
+        ${'Green'}   | ${true}      | ${true}
+        ${'blue'}    | ${true}      | ${false}
+        ${'yellow'}  | ${true}      | ${false}
+    `('isSuggestedWord "$word" ignore case $ignoreCase', async ({ word, ignoreCase, expected }) => {
+        expect(dict.isSuggestedWord(word, ignoreCase)).toEqual(expected);
+    });
+
+    test.each`
+        word        | expected
+        ${'purple'} | ${'purple'}
+    `('mapWord "$word"', async ({ word, expected }) => {
+        expect(dict.mapWord(word)).toEqual(expected);
+    });
 });

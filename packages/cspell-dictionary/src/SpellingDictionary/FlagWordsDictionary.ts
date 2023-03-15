@@ -116,6 +116,9 @@ class FlagWordsDictionary implements SpellingDictionary {
         const suggestOptions = suggestArgsToSuggestOptions(args);
         return this.dictTypos.suggest(word, suggestOptions);
     }
+    getPreferredSuggestions(word: string) {
+        return this.dictTypos.getPreferredSuggestions(word);
+    }
     genSuggestions(): void {
         return;
     }

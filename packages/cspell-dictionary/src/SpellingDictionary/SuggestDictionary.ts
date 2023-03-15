@@ -8,6 +8,7 @@ import type {
     FindResult,
     HasOptions,
     IgnoreCaseOption,
+    PreferredSuggestion,
     SearchOptions,
     SpellingDictionary,
     SpellingDictionaryOptions,
@@ -17,6 +18,7 @@ import { processEntriesToTyposDef, type TypoEntry, type TyposDef } from './Typos
 import { extractAllSuggestions } from './Typos/util.js';
 
 export interface SuggestDictionary extends SpellingDictionary {
+    getPreferredSuggestions: (word: string) => PreferredSuggestion[];
     /**
      * Determine if the word can appear in a list of suggestions.
      * @param word - word
@@ -24,6 +26,10 @@ export interface SuggestDictionary extends SpellingDictionary {
      * @returns true if a word is suggested, otherwise false.
      */
     isSuggestedWord(word: string, ignoreCaseAndAccents?: IgnoreCaseOption): boolean;
+}
+
+interface PreferredSuggestionResult extends SuggestionResult {
+    isPreferred: true;
 }
 
 class SuggestDictionaryImpl implements SuggestDictionary {
@@ -92,10 +98,10 @@ class SuggestDictionaryImpl implements SuggestDictionary {
     ): SuggestionResult[];
     suggest(word: string, suggestOptions: SuggestOptions): SuggestionResult[];
     public suggest(word: string): SuggestionResult[] {
-        return this._suggest(word) || this._suggest(word.toLowerCase()) || [];
+        return this.getPreferredSuggestions(word);
     }
 
-    private _suggest(word: string): SuggestionResult[] | undefined {
+    private _suggest(word: string): PreferredSuggestionResult[] | undefined {
         if (!(word in this.typosDef)) return undefined;
         const sug = this.typosDef[word];
         const isPreferred = true;
@@ -112,10 +118,15 @@ class SuggestDictionaryImpl implements SuggestDictionary {
         return sug.map((word, index) => ({ word, cost: index + 1, isPreferred }));
     }
 
+    getPreferredSuggestions(word: string): PreferredSuggestionResult[] {
+        return this._suggest(word) || this._suggest(word.toLowerCase()) || [];
+    }
+
     genSuggestions(collector: SuggestionCollector): void {
         const sugs = this.suggest(collector.word);
         sugs.forEach((result) => collector.add(result));
     }
+
     mapWord(word: string): string {
         return word;
     }

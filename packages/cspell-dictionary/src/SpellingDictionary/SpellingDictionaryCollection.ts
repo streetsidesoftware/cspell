@@ -100,11 +100,22 @@ class SpellingDictionaryCollectionImpl implements SpellingDictionaryCollection {
         };
         const collector = suggestionCollector(word, collectorOptions);
         this.genSuggestions(collector, suggestOptions);
-        return collector.suggestions.map((r) => ({ ...r, word: r.word }));
+        return collector.suggestions;
     }
 
     public get size(): number {
         return this.dictionaries.reduce((a, b) => a + b.size, 0);
+    }
+
+    getPreferredSuggestions(word: string) {
+        const sugs = this.dictionaries.flatMap((dict) => dict.getPreferredSuggestions?.(word)).filter(isDefined);
+        if (sugs.length <= 1) return sugs;
+        const unique = new Set<string>();
+        return sugs.filter((sug) => {
+            if (unique.has(sug.word)) return false;
+            unique.add(sug.word);
+            return true;
+        });
     }
 
     public genSuggestions(collector: SuggestionCollector, suggestOptions: SuggestOptions): void {
