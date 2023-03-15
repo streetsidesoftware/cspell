@@ -220,11 +220,12 @@ export function suggestionCollector(wordToMatch: string, options: SuggestionColl
     }
 
     function adjustCost(sug: SuggestionResultBase): SuggestionResultBase {
+        if (sug.isPreferred) return sug;
         const words = sug.word.split(regexSeparator);
         const extraCost =
             words.map((w) => wordLengthCost[w.length] || 0).reduce((a, b) => a + b, 0) +
             (words.length - 1) * EXTRA_WORD_COST;
-        return { word: sug.word, cost: sug.cost + extraCost, isPreferred: sug.isPreferred };
+        return { word: sug.word, cost: sug.cost + extraCost };
     }
 
     function collectSuggestion(suggestion: SuggestionResultBase): MaxCost {
@@ -295,9 +296,9 @@ export function suggestionCollector(wordToMatch: string, options: SuggestionColl
         const nWordToMatch = wordToMatch.normalize(NF);
         const rawValues = [...sugs.values()];
         const values = weightMap
-            ? rawValues.map(({ word, isPreferred }) => ({
+            ? rawValues.map(({ word, cost, isPreferred }) => ({
                   word,
-                  cost: editDistanceWeighted(nWordToMatch, word.normalize(NF), weightMap, 110),
+                  cost: isPreferred ? cost : editDistanceWeighted(nWordToMatch, word.normalize(NF), weightMap, 110),
                   isPreferred,
               }))
             : rawValues;

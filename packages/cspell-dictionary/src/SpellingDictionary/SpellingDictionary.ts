@@ -55,6 +55,15 @@ export interface SuggestOptions {
 
 export type FindOptions = SearchOptions;
 
+export interface Suggestion {
+    word: string;
+    isPreferred?: boolean | undefined;
+}
+
+export interface PreferredSuggestion extends Suggestion {
+    isPreferred: true;
+}
+
 export interface FindResult {
     /** the text found, otherwise `false` */
     found: string | false;
@@ -153,6 +162,9 @@ export interface SpellingDictionary extends DictionaryInfo {
      * @param suggestOptions - options
      */
     suggest(word: string, suggestOptions: SuggestOptions): SuggestionResult[];
+
+    getPreferredSuggestions?: (word: string) => PreferredSuggestion[];
+
     genSuggestions(collector: SuggestionCollector, suggestOptions: SuggestOptions): void;
     mapWord(word: string): string;
     /**

@@ -4,10 +4,11 @@ import { describe, expect, test } from 'vitest';
 import { createFailedToLoadDictionary, createSpellingDictionary } from './createSpellingDictionary.js';
 import { createFlagWordsDictionary } from './FlagWordsDictionary.js';
 import { createIgnoreWordsDictionary } from './IgnoreWordsDictionary.js';
-import type { SpellingDictionaryOptions } from './SpellingDictionary.js';
+import type { SpellingDictionaryOptions, SuggestionResult } from './SpellingDictionary.js';
 import { CompoundWordsMethod } from './SpellingDictionary.js';
 import { createCollection } from './SpellingDictionaryCollection.js';
 import { SpellingDictionaryFromTrie } from './SpellingDictionaryFromTrie.js';
+import { createSuggestDictionary } from './SuggestDictionary.js';
 
 describe('Verify using multiple dictionaries', () => {
     const wordsA = [
@@ -349,8 +350,12 @@ describe('Verify using multiple dictionaries', () => {
         expect(dictCollection.isForbidden(word)).toEqual(expected);
     });
 
-    function sr(word: string, cost: number) {
-        return { word, cost };
+    function sr(word: string, cost: number, isPreferred?: boolean) {
+        const r: SuggestionResult = { word, cost };
+        if (isPreferred !== undefined) {
+            r.isPreferred = isPreferred;
+        }
+        return r;
     }
 
     test.each`
@@ -374,6 +379,44 @@ describe('Verify using multiple dictionaries', () => {
 
         const dictCollection = createCollection(dicts, 'test');
         expect(dictCollection.suggest(word, 2)).toEqual(expected);
+    });
+
+    test.each`
+        word         | expected
+        ${'bananas'} | ${[sr('banana', 94)]}
+        ${'reg'}     | ${[sr('red', 1, true)]}
+        ${'apple'}   | ${[sr('banana', 1, true), sr('grape', 2, true)]}
+        ${'orange'}  | ${[sr('lemon', 1, true), sr('grape', 291)]}
+        ${'ignored'} | ${[]}
+    `('suggestions with preferred: "$word"', ({ word, expected }) => {
+        const dicts = [
+            createSpellingDictionary(wordsA, 'wordsA', 'test', undefined),
+            createSuggestDictionary(['reg:red', 'apple:banana'], 'suggest_words', 'test'),
+            createFlagWordsDictionary(['apple:banana,grape', 'orange:lemon'], 'flag_words', 'test'),
+            dictIgnore,
+        ];
+
+        const dictCollection = createCollection(dicts, 'test');
+        expect(dictCollection.suggest(word, 2)).toEqual(expected);
+    });
+
+    test.each`
+        word         | expected
+        ${'banana'}  | ${[]}
+        ${'reg'}     | ${[sr('red', 1, true)]}
+        ${'apple'}   | ${[sr('banana', 1, true), sr('grape', 2, true)]}
+        ${'orange'}  | ${[sr('lemon', 1, true)]}
+        ${'ignored'} | ${[]}
+    `('getPreferredSuggestions: "$word"', ({ word, expected }) => {
+        const dicts = [
+            createSpellingDictionary(wordsA, 'wordsA', 'test', undefined),
+            createSuggestDictionary(['reg:red', 'apple:banana'], 'suggest_words', 'test'),
+            createFlagWordsDictionary(['apple:banana,grape', 'orange:lemon'], 'flag_words', 'test'),
+            dictIgnore,
+        ];
+
+        const dictCollection = createCollection(dicts, 'test');
+        expect(dictCollection.getPreferredSuggestions?.(word)).toEqual(expected);
     });
 
     test('checks for suggestions with flagged words', async () => {
