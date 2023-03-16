@@ -150,7 +150,7 @@ jobs:
       body: |
         ## Update Integration Repositories
       commit-message: "ci: Workflow Bot -- Update Integration Snapshots"
-      branch: ${{ env.NEW_BRANCH }}
+      branch: ${{ env.NEW_BRANCH }}-${{ env.REF_BRANCH }}
       title: "ci: Workflow Bot -- Update Integration Snapshots (${{ env.REF_BRANCH }})"
 
     steps:
