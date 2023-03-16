@@ -518,6 +518,7 @@ exports[`Validate cli > app 'no-args' Expect Error: 'outputHelp' 1`] = `
   "  --relative                   Issues are displayed relative to root.",
   "  --show-context               Show the surrounding text around an issue.",
   "  --show-suggestions           Show spelling suggestions.",
+  "  --no-show-suggestions        Do not show spelling suggestions or fixes.",
   "  --no-must-find-files         Do not error if no files are found.",
   "  --cache                      Use cache to only check changed files.",
   "  --no-cache                   Do not use cache.",
@@ -922,15 +923,43 @@ not-in-any-dictionary - softwareTerms*         .../dict/softwareTerms.txt
 not-in-any-dictionary - workspace*             ../../cspell-dict.txt"
 `;
 
-exports[`Validate cli > app 'typos' Expect Error: [Function CheckFailed] 1`] = `[]`;
+exports[`Validate cli > app 'typos --no-show-suggestions' Expect Error: [Function CheckFailed] 1`] = `[]`;
 
-exports[`Validate cli > app 'typos' Expect Error: [Function CheckFailed] 2`] = `
+exports[`Validate cli > app 'typos --no-show-suggestions' Expect Error: [Function CheckFailed] 2`] = `
+"log	./fixtures/features/typos/code.ts:1:26 - Unknown word (Orangges)
+log	./fixtures/features/typos/test.md:5:3 - Forbidden word (blacklist)
+log	./fixtures/features/typos/test.md:6:3 - Forbidden word (whitelist)
+log	./fixtures/features/typos/test.md:7:3 - Forbidden word (rad)
+log	./fixtures/features/typos/test.md:9:13 - Forbidden word (english)
+log	./fixtures/features/typos/test.md:9:38 - Forbidden word (Blacklisted)
+error	CSpell: Files checked: 3, Issues found: 6 in 2 files"
+`;
+
+exports[`Validate cli > app 'typos --no-show-suggestions' Expect Error: [Function CheckFailed] 3`] = `""`;
+
+exports[`Validate cli > app 'typos --show-suggestions' Expect Error: [Function CheckFailed] 1`] = `[]`;
+
+exports[`Validate cli > app 'typos --show-suggestions' Expect Error: [Function CheckFailed] 2`] = `
 "log	./fixtures/features/typos/code.ts:1:26 - Unknown word (Orangges) Suggestions: [Oranges, Orangiest, Orangier, orange's, Orange's]
 log	./fixtures/features/typos/test.md:5:3 - Forbidden word (blacklist) Suggestions: [denylist*, backlist, backlists, blacklight, blackfish]
 log	./fixtures/features/typos/test.md:6:3 - Forbidden word (whitelist) Suggestions: [allowlist*, whitelists, whitelisted, whitefish, whitest]
 log	./fixtures/features/typos/test.md:7:3 - Forbidden word (rad) Suggestions: [cool*, rda, rads, raid, rand]
 log	./fixtures/features/typos/test.md:9:13 - Forbidden word (english) Suggestions: [English*, englished, english's, englisher, englishes]
 log	./fixtures/features/typos/test.md:9:38 - Forbidden word (Blacklisted) Suggestions: [Denylisted*, Blacklegged, Backlists, Backlist, Lackluster]
+error	CSpell: Files checked: 3, Issues found: 6 in 2 files"
+`;
+
+exports[`Validate cli > app 'typos --show-suggestions' Expect Error: [Function CheckFailed] 3`] = `""`;
+
+exports[`Validate cli > app 'typos' Expect Error: [Function CheckFailed] 1`] = `[]`;
+
+exports[`Validate cli > app 'typos' Expect Error: [Function CheckFailed] 2`] = `
+"log	./fixtures/features/typos/code.ts:1:26 - Unknown word (Orangges)
+log	./fixtures/features/typos/test.md:5:3 - Forbidden word (blacklist) fix: (denylist)
+log	./fixtures/features/typos/test.md:6:3 - Forbidden word (whitelist) fix: (allowlist)
+log	./fixtures/features/typos/test.md:7:3 - Forbidden word (rad) fix: (cool)
+log	./fixtures/features/typos/test.md:9:13 - Forbidden word (english) fix: (English)
+log	./fixtures/features/typos/test.md:9:38 - Forbidden word (Blacklisted) fix: (Denylisted)
 error	CSpell: Files checked: 3, Issues found: 6 in 2 files"
 `;
 
