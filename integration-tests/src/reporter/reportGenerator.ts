@@ -38,9 +38,9 @@ export function generateReport(data: ReportData): Report {
     function relative(uri: string) {
         if (uri.startsWith(rootUri)) {
             const r = uri.slice(rootUri.length);
-            return r.startsWith('/') ? r.slice(1) : r;
+            return decodeURI(r.startsWith('/') ? r.slice(1) : r);
         }
-        return uri;
+        return decodeURI(uri);
     }
     issues.forEach((issue) => {
         const uri = issue.uri || '';
@@ -76,14 +76,22 @@ export function generateReport(data: ReportData): Report {
 }
 
 function formatIssue(file: string, issue: Issue): string {
-    const { row, col, isFlagged, text, context } = issue;
+    const { row, col, isFlagged, text, context, suggestionsEx } = issue;
+    const suggestions =
+        suggestionsEx &&
+        suggestionsEx
+            .filter((s) => s.isPreferred)
+            .map((s) => s.wordAdjustedToMatchCase || s.word)
+            .filter((s) => !!s)
+            .join(', ');
+    const fix = suggestions ? ` (${suggestions})` : '';
     const issueType = isFlagged ? 'F' : 'U';
     const ctx = context.text
         .replace(/\s+/g, ' ')
         // eslint-disable-next-line no-control-regex
-        .replace(/[\u0000-\u001F]+/g, '')
+        .replace(/[\u0000-\u001F]+/g, '') // remove control characters
         .trim();
-    const line = `${file}:${row}:${col}\t${text}\t${issueType}\t${ctx}`;
+    const line = `${file}:${row}:${col}\t${text}${fix}\t${issueType}\t${ctx}`;
     return line.trim();
 }
 
@@ -99,7 +107,7 @@ function padLines(issueLines: string[]): string[] {
 
     const lines = splitLines
         .map((lineCols) => lineCols.map((t, i) => padText(t, paddedWidths[i])))
-        .map((parts) => parts.join('\t').trim());
+        .map((parts) => tabToSpace(parts.join('\t').trim()));
     return lines;
 }
 
@@ -122,6 +130,18 @@ function calcPathWidth(path: string): number {
     parts[1] = Math.max(parts[1] || 0, 4);
     parts[2] = Math.max(parts[2] || 0, 3);
     return parts.reduce((a, b) => a + b, parts.length - 1);
+}
+
+function tabToSpace(text: string, tabWidth = 4): string {
+    const parts = text.split('\t');
+    let result = parts[0];
+
+    for (let i = 1; i < parts.length; ++i) {
+        const pad = ' '.repeat(tabWidth - (result.length % tabWidth));
+        result += pad + parts[i];
+    }
+
+    return result;
 }
 
 export const __testing__ = {
