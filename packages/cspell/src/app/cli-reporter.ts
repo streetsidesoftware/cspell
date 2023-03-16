@@ -15,7 +15,8 @@ import { URI } from '../lib/uri.cjs';
 import type { LinterCliOptions } from './options.js';
 import type { FinalizedReporter } from './util/reporters.js';
 
-const templateIssue = `{green $filename}:{yellow $row:$col} - $message ({red $text})`;
+const templateIssue = `{green $filename}:{yellow $row:$col} - $message ({red $text}) $quickFix`;
+const templateIssueNoFix = `{green $filename}:{yellow $row:$col} - $message ({red $text})`;
 const templateIssueWithSuggestions = `{green $filename}:{yellow $row:$col} - $message ({red $text}) Suggestions: {yellow [$suggestions]}`;
 const templateIssueWithContext = `{green $filename}:{yellow $row:$col} $padRowCol- $message ({red $text})$padContext -- {gray $contextLeft}{red {underline $text}}{gray $contextRight}`;
 const templateIssueWithContextWithSuggestions = `{green $filename}:{yellow $row:$col} $padRowCol- $message ({red $text})$padContext -- {gray $contextLeft}{red {underline $text}}{gray $contextRight}\n\t Suggestions: {yellow [$suggestions]}`;
@@ -129,6 +130,8 @@ export function getReporter(options: ReporterOptions): FinalizedReporter {
             : templateIssueWithContext
         : options.showSuggestions
         ? templateIssueWithSuggestions
+        : options.showSuggestions === false
+        ? templateIssueNoFix
         : templateIssue;
     const { fileGlobs, silent, summary, issues, progress, verbose, debug } = options;
 
@@ -216,11 +219,12 @@ function formatIssue(templateStr: string, issue: ReporterIssue, maxIssueTextWidt
         $suggestions: suggestions,
         $text: text,
         $uri: uri,
+        $quickFix: formatQuickFix(issue),
     };
 
     const t = template(templateStr.replace(/\$message/g, message));
 
-    return substitute(chalk(t), substitutions);
+    return substitute(chalk(t), substitutions).trimEnd();
 }
 
 function formatSuggestions(issue: Issue): string {
@@ -237,6 +241,16 @@ function formatSuggestions(issue: Issue): string {
         return issue.suggestions.join(', ');
     }
     return '';
+}
+
+function formatQuickFix(issue: Issue): string {
+    if (!issue.suggestionsEx?.length) return '';
+    const preferred = issue.suggestionsEx
+        .filter((sug) => sug.isPreferred)
+        .map((sug) => sug.wordAdjustedToMatchCase || sug.word);
+    if (!preferred.length) return '';
+    const fixes = preferred.map((w) => chalk.italic(chalk.yellow(w)));
+    return `fix: (${fixes.join(', ')})`;
 }
 
 class TS extends Array<string> {

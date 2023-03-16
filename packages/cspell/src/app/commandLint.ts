@@ -102,6 +102,11 @@ export function commandLint(prog: Command): Command {
         .option('--relative', 'Issues are displayed relative to root.')
         .option('--show-context', 'Show the surrounding text around an issue.')
         .option('--show-suggestions', 'Show spelling suggestions.')
+        .addOption(
+            new CommanderOption('--no-show-suggestions', 'Do not show spelling suggestions or fixes.').default(
+                undefined
+            )
+        )
         .addOption(new CommanderOption('--must-find-files', 'Error if no files are found.').default(true).hideHelp())
         .option('--no-must-find-files', 'Do not error if no files are found.')
         // The following options are planned features

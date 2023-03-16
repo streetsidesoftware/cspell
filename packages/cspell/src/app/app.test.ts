@@ -172,7 +172,9 @@ describe('Validate cli', () => {
         ${'issue-2998 --language-id'}                  | ${['-r', pathFix('issue-2998'), '-v', '--language-id=fix', 'fix-words.txt']}              | ${undefined}       | ${true}  | ${false} | ${true}
         ${'Explicit file://'}                          | ${['-r', pathFix('misc'), 'file://star-not.md']}                                          | ${undefined}       | ${true}  | ${false} | ${false}
         ${'Explicit not found file://'}                | ${['-r', pathFix('misc'), 'file://not-fond.md']}                                          | ${app.CheckFailed} | ${true}  | ${false} | ${false}
-        ${'typos'}                                     | ${['-r', pathFix('features/typos'), '--no-progress', '--show-suggestions', '**']}         | ${app.CheckFailed} | ${true}  | ${true}  | ${false}
+        ${'typos'}                                     | ${['-r', pathFix('features/typos'), '--no-progress', '.']}                                | ${app.CheckFailed} | ${true}  | ${true}  | ${false}
+        ${'typos --no-show-suggestions'}               | ${['-r', pathFix('features/typos'), '--no-progress', '--no-show-suggestions', '.']}       | ${app.CheckFailed} | ${true}  | ${true}  | ${false}
+        ${'typos --show-suggestions'}                  | ${['-r', pathFix('features/typos'), '--no-progress', '--show-suggestions', '**']}         | ${app.CheckFailed} | ${true}  | ${true}  | ${false}
         ${'inline suggest'}                            | ${['-r', pathFix('features/inline-suggest'), '--no-progress', '--show-suggestions', '.']} | ${app.CheckFailed} | ${true}  | ${true}  | ${false}
     `('app $msg Expect Error: $errorCheck', async ({ testArgs, errorCheck, eError, eLog, eInfo }: TestCase) => {
         chalk.level = 1;

@@ -27,7 +27,8 @@ describe('cli-reporter', () => {
         ${genIssue('$col')}    | ${'$row:$col:$text'}                                 | ${'6:23:$col'}
         ${genIssue('$col')}    | ${'$row:$col:$text - $contextFull'}                  | ${'6:23:$col - := $row + $col;'}
         ${genIssue('message')} | ${'$row:$col:$text - $contextFull'}                  | ${'8:36:message - adRowCol,$message,$text,$pa'}
-        ${genIssue('used')}    | ${'$contextLeft:$text:$contextRight - $contextFull'} | ${'rds to be :used: for some  - rds to be used for some '}
+        ${genIssue('used')}    | ${'$contextLeft:$text:$contextRight - $contextFull'} | ${'rds to be :used: for some  - rds to be used for some'}
+        ${genIssue('used')}    | ${'"$contextFull"'}                                  | ${'"rds to be used for some "'}
     `('formatIssue', ({ issue, template, expected }) => {
         expect(formatIssue(template, issue, 200)).toBe(expected);
     });
