@@ -3,7 +3,7 @@ Repository: django/django
 Url: "https://github.com/django/django.git"
 Args: ["**/*.{md,py}"]
 Lines:
- CSpell: Files checked: 2747, Issues found: 8313 in 917 files
+ CSpell: Files checked: 2747, Issues found: 8317 in 917 files
  exit code: 1
 ./django/__init__.py:12:26     - Unknown word (urlresolvers) -- Set the thread-local urlresolvers script prefix if `set
 ./django/apps/config.py:217:40    - Unknown word (qualname)   -- app_config_class.__qualname__,
@@ -133,6 +133,7 @@ Lines:
 ./django/contrib/admin/templatetags/admin_urls.py:12:11     - Unknown word (urlname)    -- def admin_urlname(value, arg):
 ./django/contrib/admin/templatetags/base.py:14:26     - Unknown word (varkw)      -- params, varargs, varkw, defaults, kwonly, kwonly
 ./django/contrib/admin/templatetags/base.py:14:43     - Unknown word (kwonly)     -- varargs, varkw, defaults, kwonly, kwonly_defaults, _
+./django/contrib/admin/views/main.py:292:53    - Unknown word (doseq)      -- urlencode(sorted(p.items()), doseq=True)
 ./django/contrib/admin/widgets.py:16:31     - Unknown word (Truncator)  -- django.utils.text import Truncator
 ./django/contrib/admin/widgets.py:43:48     - Unknown word (selectfilter) -- attrs"]["class"] = "selectfilter"
 ./django/contrib/admindocs/utils.py:103:27    - Unknown word (rolename)   -- create_reference_role(rolename, urlbase):
@@ -733,6 +734,7 @@ Lines:
 ./django/http/response.py:591:37    - Unknown word (getbuffer)  -- elif hasattr(filelike, "getbuffer"):
 ./django/http/response.py:593:42    - Unknown word (nbytes)     -- filelike.getbuffer().nbytes - filelike.tell()
 ./django/http/response.py:610:19    - Unknown word (uncompressing) -- # uncompressing files.
+./django/http/response.py:612:42    - Unknown word (brotli)        -- br": "application/x-brotli",
 ./django/middleware/common.py:124:13    - Unknown word (referer)    -- referer = request.META.get(
 ./django/middleware/common.py:124:46    - Unknown word (REFERER)    -- request.META.get("HTTP_REFERER", "")
 ./django/middleware/csrf.py:445:62    - Unknown word (MITM)       -- (man-in-the-middle, MITM) sends a
@@ -765,7 +767,6 @@ Lines:
 ./django/template/response.py:113:17    - Unknown word (newretval)  -- newretval = post_callback(retval
 ./django/templatetags/tz.py:14:7      - Unknown word (datetimeobject) -- class datetimeobject(datetime):
 ./django/templatetags/tz.py:56:32     - Unknown word (exceptionsm)    -- Filters must never raise exceptionsm, so catch everything
-./django/test/client.py:461:49    - Unknown word (doseq)      -- STRING": urlencode(data, doseq=True),
 ./django/test/html.py:17:6      - Unknown word (autoplay)   -- "autoplay",
 ./django/test/html.py:231:40    - Unknown word (getpos)         -- HTMLParseError(msg, self.getpos())
 ./django/test/html.py:23:6      - Unknown word (formnovalidate) -- "formnovalidate",
@@ -1111,7 +1112,7 @@ Lines:
 ./tests/admin_filters/tests.py:1008:14   - Unknown word (listfilter)                 -- def test_listfilter_genericrelation(self
 ./tests/admin_filters/tests.py:1142:14   - Unknown word (fieldlistfilter)            -- def test_fieldlistfilter_underscorelookup_tuple
 ./tests/admin_filters/tests.py:1144:18   - Unknown word (fieldpath)                  -- Ensure ('fieldpath', ClassName ) lookups
-./tests/admin_filters/tests.py:1731:61   - Unknown word (EMPT)                       -- objects.create(code="EMPT", description="")
+./tests/admin_filters/tests.py:1834:61   - Unknown word (EMPT)                       -- objects.create(code="EMPT", description="")
 ./tests/admin_filters/tests.py:26:15     - Unknown word (dictlist)   -- def select_by(dictlist, key, value):
 ./tests/admin_filters/tests.py:307:11    - Unknown word (improvedbook) -- ("improvedbook", EmptyFieldListFilter
 ./tests/admin_filters/tests.py:340:13    - Unknown word (djangonaut)   -- cls.djangonaut_book = Book.objects
@@ -1170,8 +1171,8 @@ Lines:
 ./tests/admin_utils/test_logentry.py:242:14    - Unknown word (recentactions) -- def test_recentactions_without_content_type
 ./tests/admin_utils/test_logentry.py:75:74     - Unknown word (Historique) -- Modification de Title et Historique."
 ./tests/admin_utils/test_logentry.py:87:62     - Unknown word (Ajout)      -- get_change_message(), "Ajout.")
-./tests/admin_utils/tests.py:174:25    - Unknown word (sadmin)     -- '<img src="%sadmin/img/icon-unknown.svg
-./tests/admin_utils/tests.py:426:74    - Unknown word (Aother)     -- ), "something_0Aor_0Aother")
+./tests/admin_utils/tests.py:175:25    - Unknown word (sadmin)     -- '<img src="%sadmin/img/icon-unknown.svg
+./tests/admin_utils/tests.py:427:74    - Unknown word (Aother)     -- ), "something_0Aor_0Aother")
 ./tests/admin_views/admin.py:137:5     - Unknown word (Vodcast)    -- Vodcast,
 ./tests/admin_views/admin.py:493:11    - Unknown word (titletranslation) -- "=titletranslation__text",
 ./tests/admin_views/admin.py:552:29    - Unknown word (subslug)          -- prepopulated_fields = {"subslug": ("subtitle",)}
@@ -2507,7 +2508,7 @@ Lines:
 ./tests/responses/test_fileresponse.py:237:16    - Unknown word (mkfifo)       -- os.mkfifo(pipe_file)
 ./tests/responses/test_fileresponse.py:238:53    - Unknown word (RDONLY)       -- open(pipe_file, os.O_RDONLY | os.O_NONBLOCK)
 ./tests/responses/test_fileresponse.py:238:67    - Unknown word (NONBLOCK)     -- os.O_RDONLY | os.O_NONBLOCK)
-./tests/responses/test_fileresponse.py:270:49    - Unknown word (opendocument) -- application/vnd.oasis.opendocument.text",
+./tests/responses/test_fileresponse.py:272:49    - Unknown word (opendocument) -- application/vnd.oasis.opendocument.text",
 ./tests/responses/tests.py:154:19    - Unknown word (textiowrapper) -- def test_wrap_textiowrapper(self):
 ./tests/responses/tests.py:32:38     - Unknown word (qwer)       -- writelines(["asdf\n", "qwer\n"])
 ./tests/responses/tests.py:84:34     - Unknown word (J'attendrai) -- HttpResponse(status="J'attendrai")

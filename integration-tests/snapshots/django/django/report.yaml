@@ -5,7 +5,7 @@ Args: ["**/*.{md,py}"]
 Summary:
   files: 2747
   filesWithIssues: 917
-  issues: 8313
+  issues: 8317
   errors: 0
 Errors: []
 
@@ -138,6 +138,7 @@ issues:
   - "django/contrib/admin/templatetags/admin_urls.py:12:11   	urlname 	U   	def admin_urlname(value, arg):"
   - "django/contrib/admin/templatetags/base.py:14:26     	varkw   	U   	params, varargs, varkw, defaults, kwonly, kwonly"
   - "django/contrib/admin/templatetags/base.py:14:43     	kwonly  	U   	varargs, varkw, defaults, kwonly, kwonly_defaults, _"
+  - "django/contrib/admin/views/main.py:292:53   	doseq   	U   	urlencode(sorted(p.items()), doseq=True)"
   - "django/contrib/admin/widgets.py:16:31   	Truncator   	U   	django.utils.text import Truncator"
   - "django/contrib/admin/widgets.py:43:48   	selectfilter	U   	attrs\"][\"class\"] = \"selectfilter\""
   - "django/contrib/admindocs/utils.py:64:10     	doctitle	U   	\"doctitle_xform\": True,"
@@ -738,6 +739,7 @@ issues:
   - "django/http/response.py:591:37  	getbuffer       	U   	elif hasattr(filelike, \"getbuffer\"):"
   - "django/http/response.py:593:42  	nbytes          	U   	filelike.getbuffer().nbytes - filelike.tell()"
   - "django/http/response.py:610:19  	uncompressing   	U   	# uncompressing files."
+  - "django/http/response.py:612:42  	brotli          	U   	br\": \"application/x-brotli\","
   - "django/middleware/common.py:124:13  	referer 	U   	referer = request.META.get("
   - "django/middleware/common.py:124:46  	REFERER 	U   	request.META.get(\"HTTP_REFERER\", \"\")"
   - "django/middleware/csrf.py:445:62    	MITM	U   	(man-in-the-middle, MITM) sends a"
@@ -770,7 +772,6 @@ issues:
   - "django/template/response.py:113:17  	newretval   	U   	newretval = post_callback(retval"
   - "django/templatetags/tz.py:14:7      	datetimeobject  	U   	class datetimeobject(datetime):"
   - "django/templatetags/tz.py:56:32     	exceptionsm     	U   	Filters must never raise exceptionsm, so catch everything"
-  - "django/test/client.py:461:49    	doseq   	U   	STRING\": urlencode(data, doseq=True),"
   - "django/test/html.py:17:6    	autoplay        	U   	\"autoplay\","
   - "django/test/html.py:23:6    	formnovalidate  	U   	\"formnovalidate\","
   - "django/test/html.py:26:6    	itemscope       	U   	\"itemscope\","
@@ -1125,7 +1126,7 @@ issues:
   - "tests/admin_filters/tests.py:1008:14    	listfilter                  	U   	def test_listfilter_genericrelation(self"
   - "tests/admin_filters/tests.py:1142:14    	fieldlistfilter             	U   	def test_fieldlistfilter_underscorelookup_tuple"
   - "tests/admin_filters/tests.py:1144:18    	fieldpath                   	U   	Ensure ('fieldpath', ClassName ) lookups"
-  - "tests/admin_filters/tests.py:1731:61    	EMPT                        	U   	objects.create(code=\"EMPT\", description=\"\")"
+  - "tests/admin_filters/tests.py:1834:61    	EMPT                        	U   	objects.create(code=\"EMPT\", description=\"\")"
   - "tests/admin_inlines/admin.py:9:9        	Famiglia    	U   	CapoFamiglia,"
   - "tests/admin_inlines/admin.py:15:5       	Consigliere 	U   	Consigliere,"
   - "tests/admin_inlines/admin.py:54:5       	Sotto       	U   	SottoCapo,"
@@ -1175,8 +1176,8 @@ issues:
   - "tests/admin_utils/test_logentry.py:75:74    	Historique      	U   	Modification de Title et Historique.\""
   - "tests/admin_utils/test_logentry.py:87:62    	Ajout           	U   	get_change_message(), \"Ajout.\")"
   - "tests/admin_utils/test_logentry.py:242:14   	recentactions   	U   	def test_recentactions_without_content_type"
-  - "tests/admin_utils/tests.py:174:25   	sadmin  	U   	'<img src=\"%sadmin/img/icon-unknown.svg"
-  - "tests/admin_utils/tests.py:426:74   	Aother  	U   	), \"something_0Aor_0Aother\")"
+  - "tests/admin_utils/tests.py:175:25   	sadmin  	U   	'<img src=\"%sadmin/img/icon-unknown.svg"
+  - "tests/admin_utils/tests.py:427:74   	Aother  	U   	), \"something_0Aor_0Aother\")"
   - "tests/admin_views/admin.py:86:15    	UUIDPK          	U   	ParentWithUUIDPK,"
   - "tests/admin_views/admin.py:137:5    	Vodcast         	U   	Vodcast,"
   - "tests/admin_views/admin.py:493:11   	titletranslation	U   	\"=titletranslation__text\","
@@ -2512,7 +2513,7 @@ issues:
   - "tests/responses/test_fileresponse.py:237:16     	mkfifo      	U   	os.mkfifo(pipe_file)"
   - "tests/responses/test_fileresponse.py:238:53     	RDONLY      	U   	open(pipe_file, os.O_RDONLY | os.O_NONBLOCK)"
   - "tests/responses/test_fileresponse.py:238:67     	NONBLOCK    	U   	os.O_RDONLY | os.O_NONBLOCK)"
-  - "tests/responses/test_fileresponse.py:270:49     	opendocument	U   	application/vnd.oasis.opendocument.text\","
+  - "tests/responses/test_fileresponse.py:272:49     	opendocument	U   	application/vnd.oasis.opendocument.text\","
   - "tests/responses/tests.py:32:38      	qwer            	U   	writelines([\"asdf\\n\", \"qwer\\n\"])"
   - "tests/responses/tests.py:84:34      	J'attendrai     	U   	HttpResponse(status=\"J'attendrai\")"
   - "tests/responses/tests.py:154:19     	textiowrapper   	U   	def test_wrap_textiowrapper(self):"
