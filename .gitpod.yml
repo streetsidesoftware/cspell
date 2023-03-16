@@ -1,9 +1,13 @@
 tasks:
-  - init: pnpm install
-    command: pnpm run build
+  - name: Setup and Build
+    init: |
+      pnpm install
+      pnpm run build
 vscode:
   extensions:
     - streetsidesoftware.code-spell-checker
+    - dbaeumer.vscode-eslint
+    - esbenp.prettier-vscode
 github:
   prebuilds:
     master: true
