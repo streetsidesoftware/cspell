@@ -3,9 +3,9 @@ Repository: eslint/eslint
 Url: https://github.com/eslint/eslint
 Args: ["**","--exclude=bin/**","--exclude=CHANGELOG.md","--exclude=_data","--exclude=tests/bench/large.js","--exclude=docs/src/_includes","--exclude=docs/src/assets/{fonts,s?css,images}"]
 Summary:
-  files: 1839
-  filesWithIssues: 1241
-  issues: 5459
+  files: 1840
+  filesWithIssues: 1242
+  issues: 5460
   errors: 0
 Errors: []
 
@@ -103,6 +103,7 @@ issues:
   - "docs/src/library/alert.md:9:12      	shortcode   	U   	There is a shortcode for each type of alert"
   - "docs/src/maintain/manage-issues.md:31:4     	Triaging	U   	## Triaging Process"
   - "docs/src/maintain/manage-releases.md:14:3       	Prereleases 	U   	* Prereleases that are not considered"
+  - "docs/src/maintain/overview.md:33:6      	Stackaid	U   	* [**Stackaid.us**](https://simulation"
   - "docs/src/pages/component-library.html:7:45      	shortcodes  	U   	on the left includes shortcodes, macros and partials"
   - "docs/src/pages/rules.md:48:9    	endfor  	U   	{%- endfor -%}"
   - "docs/src/rules/accessor-pairs.md:267:7      	Quux	U   	const Quux = class {"
@@ -126,7 +127,8 @@ issues:
   - "docs/src/rules/eqeqeq.md:2:8        	eqeqeq  	U   	title: eqeqeq"
   - "docs/src/rules/eqeqeq.md:39:150     	typeof  	U   	of the operands is a `typeof` expression, or if both"
   - "docs/src/rules/generator-star-spacing.md:85:40      	configurability 	U   	rule allows further configurability via overrides per function"
-  - "docs/src/rules/guard-for-in.md:5:16     	builtins	U   	- no-prototype-builtins"
+  - "docs/src/rules/guard-for-in.md:6:16     	builtins    	U   	- no-prototype-builtins"
+  - "docs/src/rules/guard-for-in.md:21:5     	codebases   	U   	For codebases that do not support"
   - "docs/src/rules/id-denylist.md:7:102     	Karlton 	U   	naming things.\" — Phil Karlton"
   - "docs/src/rules/indent-legacy.md:28:16   	Crockford   	U   	* Four spaces: Crockford"
   - "docs/src/rules/indent-legacy.md:91:76   	declarators 	U   	indentation level for `var` declarators; can also take an object"
@@ -201,7 +203,6 @@ issues:
   - "docs/src/rules/padding-line-between-statements.md:37:24     	LINEBREAK   	U   	{ \"blankLine\": LINEBREAK_TYPE, \"prev\": STATEMENT"
   - "docs/src/rules/padding-line-between-statements.md:81:9      	singleline  	U   	* `\"singleline-const\"` is single-line"
   - "docs/src/rules/prefer-named-capture-group.md:21:19      	cauli   	U   	const regex = /(?:cauli|sun)flower/;"
-  - "docs/src/rules/quotes.md:20:6       	codebases   	U   	Many codebases require strings to be"
   - "docs/src/rules/radix.md:10:305  	autodetected	U   	, `parseInt()` also autodetected octal literals, which"
   - "docs/src/rules/radix.md:24:72   	autodetects 	U   	so that it no longer autodetects octal literals and instead"
   - "docs/src/rules/space-unary-ops.md:12:101    	nonwords	U   	operators and after/before `nonwords` unary operators."
@@ -279,7 +280,7 @@ issues:
   - "lib/cli-engine/lint-result-cache.js:14:58   	jsonify 	U   	stable-stringify-without-jsonify\");"
   - "lib/cli-engine/xml-escape.js:29:26      	apos	U   	return \"&apos;\";"
   - "lib/cli.js:28:38    	humanwhocodes   	U   	ModuleImporter } = require(\"@humanwhocodes/module-importer\");"
-  - "lib/config/default-config.js:59:61      	globbed 	U   	ensure these files are globbed by default"
+  - "lib/config/default-config.js:56:61      	globbed 	U   	ensure these files are globbed by default"
   - "lib/eslint/eslint-helpers.js:19:7       	fswalk      	U   	const fswalk = require(\"@nodelib"
   - "lib/eslint/eslint-helpers.js:19:26      	nodelib     	U   	const fswalk = require(\"@nodelib/fs.walk\");"
   - "lib/eslint/eslint-helpers.js:397:40     	prepopulated	U   	for the cwd, which is prepopulated in the searches map"
@@ -433,10 +434,10 @@ issues:
   - "tests/lib/cli-engine/cli-engine.js:6350:87  	myconf              	U   	config node_modules/myconf/.eslintrc.json',\","
   - "tests/lib/cli-engine/cli-engine.js:6578:52  	extendees           	U   	config file and linear extendees.\", () => {"
   - "tests/lib/cli.js:322:56     	fakeformatter   	U   	await cli.execute(`-f fakeformatter ${filePath}`);"
-  - "tests/lib/config/flat-config-array.js:153:22    	noniterable 	U   	it(\"should allow noniterable baseConfig objects\""
-  - "tests/lib/config/flat-config-array.js:1205:43   	truex       	U   	foo: \"truex\""
-  - "tests/lib/config/flat-config-array.js:1715:29   	foox        	U   	foox: [1, \"bar\"]"
-  - "tests/lib/config/flat-config-array.js:1737:30   	doesnt      	U   	\"doesnt-exist/match\": \"error"
+  - "tests/lib/config/flat-config-array.js:154:22    	noniterable 	U   	it(\"should allow noniterable baseConfig objects\""
+  - "tests/lib/config/flat-config-array.js:1207:43   	truex       	U   	foo: \"truex\""
+  - "tests/lib/config/flat-config-array.js:1679:29   	foox        	U   	foox: [1, \"bar\"]"
+  - "tests/lib/config/flat-config-array.js:1701:30   	doesnt      	U   	\"doesnt-exist/match\": \"error"
   - "tests/lib/eslint/flat-eslint.js:932:57  	doesnotexist	U   	lintFiles([\"subdir1\", \"doesnotexist/*.js\"]);"
   - "tests/lib/eslint/flat-eslint.js:1007:58 	doesexist   	U   	await eslint.lintFiles([\"doesexist/*.js\"]);"
   - "tests/lib/eslint/flat-eslint.js:1410:30 	reignoring  	U   	it(\"should allow reignoring of previously ignored"
