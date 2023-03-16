@@ -44,7 +44,7 @@ describe('Validate repository helper', () => {
         'checkoutRepositoryAsync $msg $repo $path $commit',
         async ({ repo, path, commit, expected }: TestCase) => {
             const logger = new CaptureLogger();
-            await fs.rm(join(repositoryDir, path), { recursive: true });
+            await fs.rm(join(repositoryDir, path), { recursive: true, force: true });
             commit = commit || 'main';
             expect(await checkoutRepositoryAsync(logger, repo, path, commit, undefined)).toBe(expected);
             // console.log(logger.logs);

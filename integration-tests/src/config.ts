@@ -1,3 +1,4 @@
+import assert from 'assert';
 import * as fs from 'fs';
 import * as Path from 'path';
 
@@ -6,6 +7,12 @@ import type { Config, Repository } from './configDef';
 const configLocation = Path.resolve(Path.join(__dirname, '..', 'config'));
 const configFile = Path.join(configLocation, 'config.json');
 const repoConfigs = 'config/repositories';
+const pathRoot = '../../../..';
+const pathRepoConfig = Path.join(pathRoot, repoConfigs);
+const pathCommonRepoRoot = Path.join(pathRoot, 'repositories');
+const pathCommonRepoCSpellConfig = Path.join(pathCommonRepoRoot, 'cspell.yaml');
+const pathCommonRepoBase = Path.join(pathCommonRepoRoot, 'temp');
+const pathReporter = Path.join(pathRoot, 'dist/reporter/index.js');
 
 const defaultConfig: Config = {
     repositories: [],
@@ -21,9 +28,31 @@ export function readConfig(): Config {
     }
 }
 
+function fixPlaceHolders(text: string, placeHolderReplacements: Record<string, string>): string {
+    for (const [key, value] of Object.entries(placeHolderReplacements)) {
+        assert(key.startsWith('${'), 'Placeholder must start with "${"');
+        assert(key.endsWith('}'), 'Placeholder must end with "}"');
+        text = text.replace(key, value);
+    }
+
+    assert(!text.includes('${'), `Still contains placeholder ${text}`);
+
+    return text;
+}
+
 export function resolveArgs(rep: Repository): Repository {
-    const repoConfigLocation = Path.join('..', '..', '..', '..', repoConfigs, rep.path);
-    const args = rep.args.map((a) => a.replace('${repoConfig}', repoConfigLocation));
+    const repoConfigLocation = Path.join(pathRepoConfig, rep.path);
+
+    const placeHolderReplacements = {
+        '${repoConfig}': repoConfigLocation,
+        '${commonRoot}': pathCommonRepoRoot,
+        '${commonBase}': pathCommonRepoBase,
+        '${commonConfig}': pathCommonRepoCSpellConfig,
+        '${pathReporter}': pathReporter,
+        '${repoPath}': rep.path,
+    };
+
+    const args = rep.args.map((a) => fixPlaceHolders(a, placeHolderReplacements));
     return { ...rep, args };
 }
 
