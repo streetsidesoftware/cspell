@@ -1,7 +1,5 @@
 import { opConcatMap, opFilter, opTake, pipe } from '@cspell/cspell-pipe/sync';
 import type { SpellingDictionary } from 'cspell-dictionary';
-import type { Sequence } from 'gensequence';
-import { genSequence } from 'gensequence';
 
 import type { ValidationResult } from '../Models/ValidationResult.js';
 import * as Text from '../util/text.js';
@@ -18,7 +16,7 @@ export function validateText(
     text: string,
     dict: SpellingDictionary,
     options: ValidationOptions
-): Sequence<ValidationResult> {
+): Iterable<ValidationResult> {
     const { maxNumberOfProblems = defaultMaxNumberOfProblems, maxDuplicateProblems = defaultMaxDuplicateProblems } =
         options;
 
@@ -43,7 +41,7 @@ export function validateText(
         opTake(maxNumberOfProblems)
     );
 
-    return genSequence(iter);
+    return iter;
 }
 
 export function calcTextInclusionRanges(text: string, options: IncludeExcludeOptions): TextRange.MatchRange[] {

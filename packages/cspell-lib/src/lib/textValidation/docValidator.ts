@@ -20,7 +20,7 @@ import { loadConfigSync, searchForConfigSync } from '../Settings/Controller/conf
 import { finalizeSettings, loadConfig, mergeSettings, searchForConfig } from '../Settings/index.js';
 import type { DirectiveIssue } from '../Settings/InDocSettings.js';
 import { validateInDocumentSettings } from '../Settings/InDocSettings.js';
-import type { SpellingDictionaryCollection } from '../SpellingDictionary/index.js';
+import type { SpellingDictionaryCollection, SuggestionResult } from '../SpellingDictionary/index.js';
 import { getDictionaryInternal, getDictionaryInternalSync } from '../SpellingDictionary/index.js';
 import type { WordSuggestion } from '../suggestions.js';
 import { calcSuggestionAdjustedToToMatchCase } from '../suggestions.js';
@@ -262,19 +262,24 @@ export class DocumentValidator {
         const document = this._document;
         let line: TextDocumentLine | undefined = undefined;
         function mapToIssue(issue: MappedTextValidationResult): ValidationIssue {
-            const { range, text, isFlagged, isFound } = issue;
+            const { range, text, isFlagged, isFound, suggestionsEx } = issue;
             const offset = range[0];
             const length = range[1] - range[0];
             assert(!line || line.offset <= offset);
             if (!line || line.offset + line.text.length <= offset) {
                 line = document.lineAt(offset);
             }
-            return { text, offset, line, length, isFlagged, isFound };
+            return { text, offset, line, length, isFlagged, isFound, suggestionsEx };
         }
         const issues = [...pipeSync(segmenter(parsedText), opConcatMap(textValidator.validate), opMap(mapToIssue))];
 
         if (!this.options.generateSuggestions) {
-            return issues;
+            return issues.map((issue) => {
+                if (!issue.suggestionsEx) return issue;
+                const suggestionsEx = this.adjustSuggestions(issue.text, issue.suggestionsEx);
+                const suggestions = suggestionsEx.map((s) => s.word);
+                return { ...issue, suggestionsEx, suggestions };
+            });
         }
         const withSugs = issues.map((t) => {
             // lazy suggestion calculation.
@@ -409,13 +414,24 @@ export class DocumentValidator {
             numChanges: settings.suggestionNumChanges,
         };
 
-        const locale = this._preparations.config.language;
         const rawSuggestions = dict.suggest(text, sugOptions);
+        return this.adjustSuggestions(text, rawSuggestions);
+    }
+
+    private adjustSuggestions(
+        text: string,
+        rawSuggestions: (ExtendedSuggestion | SuggestionResult)[]
+    ): ExtendedSuggestion[] {
+        assert(this._preparations, ERROR_NOT_PREPARED);
+        const settings = this._preparations.docSettings;
+        const ignoreCase = !(settings.caseSensitive ?? false);
+        const locale = this._preparations.config.language;
+        const dict = this._preparations.dictionary;
         const sugsWithAlt = calcSuggestionAdjustedToToMatchCase(
             text,
-            rawSuggestions,
+            rawSuggestions.map(mapSug),
             locale,
-            sugOptions.ignoreCase,
+            ignoreCase,
             dict
         );
 
@@ -480,6 +496,10 @@ async function searchForDocumentConfig(
     const { uri } = document;
     if (uri.scheme !== 'file') return Promise.resolve(defaultConfig);
     return searchForConfig(path.dirname(uriToFilePath(uri)), pnpSettings).then((s) => s || defaultConfig);
+}
+
+function mapSug(sug: ExtendedSuggestion | SuggestionResult): SuggestionResult {
+    return { cost: 999, ...sug };
 }
 
 function searchForDocumentConfigSync(

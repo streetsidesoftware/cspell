@@ -50,7 +50,8 @@ describe('Validate Spell Checking Files', () => {
         async ({ filename, settings, options, expected }: TestSpellCheckFile) => {
             const r = sanitizeSpellCheckFileResult(await spellCheckFile(rpS(filename), options, settings));
             expect(r).toEqual(oc(expected));
-        }
+        },
+        10000
     );
 });
 

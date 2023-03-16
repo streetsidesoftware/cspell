@@ -1,6 +1,7 @@
 import type { MappedText, TextOffset as TextOffsetRW } from '@cspell/cspell-types';
 
-import type { ValidationResult } from '../Models/ValidationResult.js';
+import type { ExtendedSuggestion } from '../Models/Suggestion.js';
+import type { ValidationIssue } from '../Models/ValidationIssue.js';
 
 export type TextOffsetRO = Readonly<TextOffsetRW>;
 
@@ -31,9 +32,9 @@ export interface WordRangeAcc {
     rangePos: number;
 }
 
-export type ValidationResultRO = Readonly<ValidationResult>;
+export type ValidationIssueRO = Readonly<ValidationIssue>;
 
-export type LineValidatorFn = (line: LineSegment) => Iterable<ValidationResult>;
+export type LineValidatorFn = (line: LineSegment) => Iterable<ValidationIssue>;
 
 export interface LineSegment {
     line: TextOffsetRO;
@@ -43,6 +44,7 @@ export interface LineSegment {
 export interface MappedTextValidationResult extends MappedText {
     isFlagged?: boolean | undefined;
     isFound?: boolean | undefined;
+    suggestionsEx?: ExtendedSuggestion[] | undefined;
 }
 
 export type TextValidatorFn = (text: MappedText) => Iterable<MappedTextValidationResult>;
