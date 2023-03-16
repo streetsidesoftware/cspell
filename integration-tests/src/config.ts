@@ -12,7 +12,7 @@ const pathRepoConfig = Path.join(pathRoot, repoConfigs);
 const pathCommonRepoRoot = Path.join(pathRoot, 'repositories');
 const pathCommonRepoCSpellConfig = Path.join(pathCommonRepoRoot, 'cspell.yaml');
 const pathCommonRepoBase = Path.join(pathCommonRepoRoot, 'temp');
-const pathReporter = Path.join(pathRoot, 'dist/reporter/index.js');
+const pathReporter = Path.join(pathRoot, 'custom-reporter.js');
 
 const defaultConfig: Config = {
     repositories: [],
@@ -40,8 +40,13 @@ function fixPlaceHolders(text: string, placeHolderReplacements: Record<string, s
     return text;
 }
 
-export function resolveArgs(rep: Repository): Repository {
-    const repoConfigLocation = Path.join(pathRepoConfig, rep.path);
+export function resolveRepArgs(rep: Repository): Repository {
+    const args = resolveArgs(rep.path, rep.args);
+    return { ...rep, args };
+}
+
+export function resolveArgs(repPath: string, args: string[]): string[] {
+    const repoConfigLocation = Path.join(pathRepoConfig, repPath);
 
     const placeHolderReplacements = {
         '${repoConfig}': repoConfigLocation,
@@ -49,11 +54,10 @@ export function resolveArgs(rep: Repository): Repository {
         '${commonBase}': pathCommonRepoBase,
         '${commonConfig}': pathCommonRepoCSpellConfig,
         '${pathReporter}': pathReporter,
-        '${repoPath}': rep.path,
+        '${repoPath}': repPath,
     };
 
-    const args = rep.args.map((a) => fixPlaceHolders(a, placeHolderReplacements));
-    return { ...rep, args };
+    return args.map((a) => fixPlaceHolders(a, placeHolderReplacements));
 }
 
 export function writeConfig(config: Config): void {

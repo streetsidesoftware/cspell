@@ -91,8 +91,7 @@ function formatIssue(file: string, issue: Issue): string {
         // eslint-disable-next-line no-control-regex
         .replace(/[\u0000-\u001F]+/g, '') // remove control characters
         .trim();
-    // remove `&& ''` in a later diff
-    const line = `${file}:${row}:${col}\t${text}${fix && ''}\t${issueType}\t${ctx}`;
+    const line = `${file}:${row}:${col}\t${text}${fix}\t${issueType}\t${ctx}`;
     return line.trim();
 }
 

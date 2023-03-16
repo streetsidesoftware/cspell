@@ -2,7 +2,7 @@ import Chalk from 'chalk';
 import * as Path from 'path';
 import * as Shell from 'shelljs';
 
-import { readConfig, resolveArgs } from './config';
+import { readConfig, resolveArgs, resolveRepArgs } from './config';
 import type { Repository } from './configDef';
 import { formatExecOutput } from './outputHelper';
 import { PrefixLogger } from './PrefixLogger';
@@ -13,10 +13,11 @@ import { checkAgainstSnapshot } from './snapshots';
 import type { Logger } from './types';
 
 const config = readConfig();
-const cspellArgs = '-u --no-progress --relative --show-context --gitignore --gitignore-root=. ';
+const cspellArgs =
+    '-u --no-progress --relative --show-context --gitignore --gitignore-root=. --reporter=default --reporter=${pathReporter}';
 const jsCspell = JSON.stringify(Path.resolve(__dirname, '..', '..', 'bin.js'));
 
-const cspellCommand = `node ${jsCspell} ${cspellArgs}`;
+const cspellCommand = `node ${jsCspell}`;
 
 let checkCount = 0;
 
@@ -59,7 +60,7 @@ async function execCheckAndUpdate(rep: Repository, options: CheckAndUpdateOption
         const oldCommit = rep.commit;
         try {
             const updatedRep = mustBeDefined(await addRepository(logger, rep.url, rep.branch));
-            rep = resolveArgs(updatedRep);
+            rep = resolveRepArgs(updatedRep);
         } catch (e) {
             log(color`******** fail ********`);
             return Promise.resolve({ success: false, rep, elapsedTime: 0 });
@@ -86,6 +87,7 @@ async function execCheck(context: CheckContext, update: boolean): Promise<CheckR
     const { rep, logger, color } = context;
     const name = rep.path;
     const path = Path.join(repositoryDir, rep.path);
+    const cmdToExec = resolveArgs(rep.path, [cspellCommand, cspellArgs]).join(' ');
     const { log } = logger;
     ++checkCount;
 
@@ -105,7 +107,7 @@ async function execCheck(context: CheckContext, update: boolean): Promise<CheckR
         return Promise.resolve({ success: false, rep, elapsedTime: 0 });
     }
     log(time());
-    const cspellResult = await execCommand(logger, path, cspellCommand, rep.args);
+    const cspellResult = await execCommand(logger, path, cmdToExec, rep.args);
     log(resultReport(cspellResult));
     log(time());
     log(color`\n************ Checking Results ************`);
@@ -290,7 +292,9 @@ function tf(v: boolean | undefined): 'true' | 'false' {
 
 export async function check(patterns: string[], options: CheckOptions): Promise<void> {
     const { exclude, update, updateSnapshots, fail, parallelLimit } = options;
-    const matching = config.repositories.filter((rep) => shouldCheckRepo(rep, { patterns, exclude })).map(resolveArgs);
+    const matching = config.repositories
+        .filter((rep) => shouldCheckRepo(rep, { patterns, exclude }))
+        .map(resolveRepArgs);
 
     console.log(`
 Check

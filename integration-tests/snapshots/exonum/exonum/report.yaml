@@ -1,0 +1,18 @@
+---
+Repository: exonum/exonum
+Url: https://github.com/exonum/exonum.git
+Args: '["**/*.{rs,md,py,proto}"]'
+Summary:
+  files: 421
+  filesWithIssues: 3
+  issues: 8
+  errors: 0
+Errors: []
+
+issues:
+  - "exonum/src/runtime/versioning.rs:97:66          defences    U       Exonum provides following defences."
+  - "test-suite/exonum-py-tests/suite/process_manager.py:44:88       preexec     U       stderr=subprocess.PIPE, preexec_fn=os.setsid"
+  - "test-suite/exonum-py-tests/suite/process_manager.py:44:102      setsid      U       PIPE, preexec_fn=os.setsid"
+  - "test-suite/exonum-py-tests/suite/process_manager.py:57:57       SIGKILL     U       process.pid), signal.SIGKILL)"
+  - "test-suite/rust-runtime-proto/src/proto/service.proto:42:3          sfixed      U       sfixed32 fixed_i32 = 9;"
+  - "test-suite/rust-runtime-proto/src/proto/service.proto:47:3          sint        U       sint32 s_i32 = 14;"
