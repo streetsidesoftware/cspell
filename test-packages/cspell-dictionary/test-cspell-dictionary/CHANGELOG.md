@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 6.30.0 (2023-03-16)
+
+**Note:** Version bump only for package test-cspell-dictionary
+
 ## 6.29.3 (2023-03-14)
 
 ### Bug Fixes
