@@ -3,7 +3,7 @@ Repository: eslint/eslint
 Url: "https://github.com/eslint/eslint"
 Args: ["**","--exclude=bin/**","--exclude=CHANGELOG.md","--exclude=_data","--exclude=tests/bench/large.js","--exclude=docs/src/_includes","--exclude=docs/src/assets/{fonts,s?css,images}"]
 Lines:
- CSpell: Files checked: 1839, Issues found: 5459 in 1241 files
+ CSpell: Files checked: 1840, Issues found: 5460 in 1242 files
  exit code: 1
 ./LICENSE:1:58      - Unknown word (openjsf)    -- other contributors, <www.openjsf.org>
 ./Makefile.js:145:88    - Unknown word (ined)               -- followed by the string "ined".
@@ -126,6 +126,7 @@ Lines:
 ./docs/src/library/alert.md:9:12      - Unknown word (shortcode)  -- There is a shortcode for each type of alert
 ./docs/src/maintain/manage-issues.md:31:4      - Unknown word (Triaging)   -- ## Triaging Process
 ./docs/src/maintain/manage-releases.md:14:3      - Unknown word (Prereleases) -- * Prereleases that are not considered
+./docs/src/maintain/overview.md:33:6      - Unknown word (Stackaid)   -- * [**Stackaid.us**](https://simulation
 ./docs/src/pages/component-library.html:7:45      - Unknown word (shortcodes) -- on the left includes shortcodes, macros and partials
 ./docs/src/pages/rules.md:48:9      - Unknown word (endfor)     -- {%- endfor -%}
 ./docs/src/rules/accessor-pairs.md:267:7     - Unknown word (Quux)       -- const Quux = class {
@@ -149,7 +150,8 @@ Lines:
 ./docs/src/rules/eqeqeq.md:2:8       - Unknown word (eqeqeq)     -- title: eqeqeq
 ./docs/src/rules/eqeqeq.md:39:150    - Unknown word (typeof)     -- of the operands is a `typeof` expression, or if both
 ./docs/src/rules/generator-star-spacing.md:85:40     - Unknown word (configurability) -- rule allows further configurability via overrides per function
-./docs/src/rules/guard-for-in.md:5:16      - Unknown word (builtins)   -- - no-prototype-builtins
+./docs/src/rules/guard-for-in.md:21:5      - Unknown word (codebases)  -- For codebases that do not support
+./docs/src/rules/guard-for-in.md:6:16      - Unknown word (builtins)   -- - no-prototype-builtins
 ./docs/src/rules/id-denylist.md:7:102     - Unknown word (Karlton)    -- naming things." — Phil Karlton
 ./docs/src/rules/indent-legacy.md:28:16     - Unknown word (Crockford)  -- * Four spaces: Crockford
 ./docs/src/rules/indent-legacy.md:402:8     - Unknown word (boop)        -- qux, boop) {
@@ -224,7 +226,6 @@ Lines:
 ./docs/src/rules/padding-line-between-statements.md:37:24     - Unknown word (LINEBREAK)  -- { "blankLine": LINEBREAK_TYPE, "prev": STATEMENT
 ./docs/src/rules/padding-line-between-statements.md:81:9      - Unknown word (singleline) -- * `"singleline-const"` is single-line
 ./docs/src/rules/prefer-named-capture-group.md:21:19     - Unknown word (cauli)      -- const regex = /(?:cauli|sun)flower/;
-./docs/src/rules/quotes.md:20:6      - Unknown word (codebases)  -- Many codebases require strings to be
 ./docs/src/rules/radix.md:10:305    - Unknown word (autodetected) -- , `parseInt()` also autodetected octal literals, which
 ./docs/src/rules/radix.md:24:72     - Unknown word (autodetects)  -- so that it no longer autodetects octal literals and instead
 ./docs/src/rules/space-unary-ops.md:12:101    - Unknown word (nonwords)   -- operators and after/before `nonwords` unary operators.
@@ -302,7 +303,7 @@ Lines:
 ./lib/cli-engine/lint-result-cache.js:14:58     - Unknown word (jsonify)    -- stable-stringify-without-jsonify");
 ./lib/cli-engine/xml-escape.js:29:26     - Unknown word (apos)       -- return "&apos;";
 ./lib/cli.js:28:38     - Unknown word (humanwhocodes) -- ModuleImporter } = require("@humanwhocodes/module-importer");
-./lib/config/default-config.js:59:61     - Unknown word (globbed)    -- ensure these files are globbed by default
+./lib/config/default-config.js:56:61     - Unknown word (globbed)    -- ensure these files are globbed by default
 ./lib/eslint/eslint-helpers.js:19:26     - Unknown word (nodelib)    -- const fswalk = require("@nodelib/fs.walk");
 ./lib/eslint/eslint-helpers.js:19:7      - Unknown word (fswalk)     -- const fswalk = require("@nodelib
 ./lib/eslint/eslint-helpers.js:397:40    - Unknown word (prepopulated) -- for the cwd, which is prepopulated in the searches map
@@ -428,10 +429,10 @@ Lines:
 ./tests/lib/cli-engine/cli-engine.js:6350:87   - Unknown word (myconf)              -- config node_modules/myconf/.eslintrc.json',",
 ./tests/lib/cli-engine/cli-engine.js:6578:52   - Unknown word (extendees)           -- config file and linear extendees.", () => {
 ./tests/lib/cli.js:322:56    - Unknown word (fakeformatter) -- await cli.execute(`-f fakeformatter ${filePath}`);
-./tests/lib/config/flat-config-array.js:1205:43   - Unknown word (truex)       -- foo: "truex"
-./tests/lib/config/flat-config-array.js:153:22    - Unknown word (noniterable) -- it("should allow noniterable baseConfig objects"
-./tests/lib/config/flat-config-array.js:1715:29   - Unknown word (foox)        -- foox: [1, "bar"]
-./tests/lib/config/flat-config-array.js:1737:30   - Unknown word (doesnt)      -- "doesnt-exist/match": "error
+./tests/lib/config/flat-config-array.js:1207:43   - Unknown word (truex)       -- foo: "truex"
+./tests/lib/config/flat-config-array.js:154:22    - Unknown word (noniterable) -- it("should allow noniterable baseConfig objects"
+./tests/lib/config/flat-config-array.js:1679:29   - Unknown word (foox)        -- foox: [1, "bar"]
+./tests/lib/config/flat-config-array.js:1701:30   - Unknown word (doesnt)      -- "doesnt-exist/match": "error
 ./tests/lib/eslint/flat-eslint.js:1007:58   - Unknown word (doesexist)    -- await eslint.lintFiles(["doesexist/*.js"]);
 ./tests/lib/eslint/flat-eslint.js:1410:30   - Unknown word (reignoring)   -- it("should allow reignoring of previously ignored
 ./tests/lib/eslint/flat-eslint.js:4535:31   - Unknown word (unignores)    -- cwd: `${root}-unignores`,

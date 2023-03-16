@@ -3,7 +3,7 @@ Repository: googleapis/google-cloud-cpp
 Url: "https://github.com/googleapis/google-cloud-cpp.git"
 Args: ["--config=../../../../config/repositories/googleapis/google-cloud-cpp/cspell.json","**/*","-e","{*.BUILD,BUILD,CHANGELOG.md,*.sh,*.cfg,*.ps1,Dockerfile.*,*.Dockerfile,*.{yaml,xml,json,cmake}}"]
 Lines:
- CSpell: Files checked: 10674, Issues found: 78721 in 8343 files
+ CSpell: Files checked: 10680, Issues found: 78903 in 8345 files
  exit code: 1
 ./ARCHITECTURE.md:100:20    - Unknown word (bigtable)   -- - Bigtable has a [`bigtable::Table`](/google/cloud
 ./ARCHITECTURE.md:100:3     - Unknown word (Bigtable)   -- - Bigtable has a [`bigtable::Table
@@ -25,7 +25,7 @@ Lines:
 ./CMakeLists.txt:80:25     - Unknown word (DGOOGLE)    -- " cmake -DGOOGLE_CLOUD_CPP_ENABLE_MACOS
 ./CMakeLists.txt:83:6      - Unknown word (ccache)     -- # If ccache is installed use it
 ./CMakeLists.txt:84:32     - Unknown word (CCACHE)     -- GOOGLE_CLOUD_CPP_ENABLE_CCACHE "Automatically use ccache
-./README.md:585:35    - Unknown word (lgoogle)    -- names, e.g., by using `-lgoogle_cloud_cpp_bigtable`
+./README.md:584:35    - Unknown word (lgoogle)    -- names, e.g., by using `-lgoogle_cloud_cpp_bigtable`
 ./README.md:8:4       - Unknown word (Codecov)    -- [![Codecov Coverage status][codecov
 ./SECURITY.md:3:46      - Unknown word (vulnz)      -- issue, please use [g.co/vulnz](https://g.co/vulnz
 ./bazel/BUILD.bazel:17:37     - Unknown word (subpackages) -- visibility = ["//:__subpackages__"])
@@ -195,55 +195,55 @@ Lines:
 ./doc/contributor/howto-guide-declare-a-library-ga.md:113:36    - Unknown word (quickstarts) -- the GA targets in the quickstarts
 ./doc/contributor/howto-guide-declare-a-library-ga.md:47:1      - Unknown word (mapfile)    -- mapfile -t ga < <(cmake -DCMAKE
 ./doc/contributor/howto-guide-forks-and-pull-requests.md:116:14    - Unknown word (Googler)    -- If you are a Googler, when you submit your
-./doc/contributor/howto-guide-setup-cmake-environment.md:12:31     - Unknown word (Conda)      -- https://vcpkg.io), [Conda](https://conda.io),
-./doc/contributor/howto-guide-setup-cmake-environment.md:64:48     - Unknown word (buildsystems) -- $HOME/vcpkg/scripts/buildsystems/vcpkg.cmake
-./doc/contributor/howto-guide-setup-cmake-environment.md:85:23     - Unknown word (ctest)        -- env -C build-out/home ctest --output-on-failure
-./doc/contributor/howto-guide-setup-development-workstation.md:101:27    - Unknown word (frontmatter)  -- mdformat-frontmatter==0.4.1 \
-./doc/contributor/howto-guide-setup-development-workstation.md:115:14    - Unknown word (setuptools)   -- pip3 install setuptools wheel
-./doc/contributor/howto-guide-setup-development-workstation.md:142:34    - Unknown word (clangd)       -- from source so that clangd can find all the symbols
-./doc/contributor/howto-guide-setup-development-workstation.md:159:29    - Unknown word (WERROR)       -- DGOOGLE_CLOUD_CPP_ENABLE_WERROR=ON \
-./doc/contributor/howto-guide-setup-development-workstation.md:210:6     - Unknown word (usermod)      -- sudo usermod -aG docker $USER
-./doc/contributor/howto-guide-setup-development-workstation.md:222:111   - Unknown word (ALLUSERSPROFILE) -- & SET "PATH=%PATH%;%ALLUSERSPROFILE%\chocolatey\bin"
-./doc/contributor/howto-guide-setup-development-workstation.md:228:1     - Unknown word (choco)           -- choco install -y visualstudio
-./doc/contributor/howto-guide-setup-development-workstation.md:228:100   - Unknown word (buildtools)      -- nativedesktop visualstudio2019buildtools
-./doc/contributor/howto-guide-setup-development-workstation.md:228:70    - Unknown word (nativedesktop)   -- visualstudio2019-workload-nativedesktop visualstudio2019buildtools
-./doc/contributor/howto-guide-setup-development-workstation.md:229:34    - Unknown word (bazelisk)        -- install -y git cmake ninja bazelisk
-./doc/contributor/howto-guide-setup-development-workstation.md:327:20    - Unknown word (Bcmake)          -- cmake -GNinja -S. -Bcmake-out/ \
-./doc/contributor/howto-guide-setup-development-workstation.md:364:31    - Unknown word (devbox)          -- e.g. VM=my-windows-devbox
-./doc/contributor/howto-guide-setup-development-workstation.md:370:30    - Unknown word (drawfork)        -- Googlers should consult go/drawfork before selecting an
-./doc/contributor/howto-guide-setup-development-workstation.md:52:34     - Unknown word (libbenchmark) -- ares-dev libc-ares2 libbenchmark-dev libcurl4-openssl
-./doc/contributor/howto-guide-setup-development-workstation.md:52:9      - Unknown word (libc)       -- libc-ares-dev libc-ares2
-./doc/contributor/howto-guide-setup-development-workstation.md:65:13     - Unknown word (buildifier)   -- Install the buildifier tool, which we use to
-./doc/contributor/howto-guide-setup-development-workstation.md:72:9      - Unknown word (shfmt)        -- Install shfmt tool, which we use to
-./doc/contributor/howto-guide-setup-development-workstation.md:97:10     - Unknown word (mdformat)     -- Install `mdformat`, which we use to format
+./doc/contributor/howto-guide-setup-cmake-environment.md:12:34     - Unknown word (Conda)      -- https://vcpkg.io), or [Conda](https://conda.io),
+./doc/contributor/howto-guide-setup-cmake-environment.md:63:48     - Unknown word (buildsystems) -- $HOME/vcpkg/scripts/buildsystems/vcpkg.cmake
+./doc/contributor/howto-guide-setup-cmake-environment.md:84:23     - Unknown word (ctest)        -- env -C build-out/home ctest --output-on-failure
+./doc/contributor/howto-guide-setup-development-workstation.md:100:27    - Unknown word (frontmatter)  -- mdformat-frontmatter==0.4.1 \
+./doc/contributor/howto-guide-setup-development-workstation.md:114:14    - Unknown word (setuptools)   -- pip3 install setuptools wheel
+./doc/contributor/howto-guide-setup-development-workstation.md:141:34    - Unknown word (clangd)       -- from source so that clangd can find all the symbols
+./doc/contributor/howto-guide-setup-development-workstation.md:158:29    - Unknown word (WERROR)       -- DGOOGLE_CLOUD_CPP_ENABLE_WERROR=ON \
+./doc/contributor/howto-guide-setup-development-workstation.md:209:6     - Unknown word (usermod)      -- sudo usermod -aG docker $USER
+./doc/contributor/howto-guide-setup-development-workstation.md:221:111   - Unknown word (ALLUSERSPROFILE) -- & SET "PATH=%PATH%;%ALLUSERSPROFILE%\chocolatey\bin"
+./doc/contributor/howto-guide-setup-development-workstation.md:227:1     - Unknown word (choco)           -- choco install -y visualstudio
+./doc/contributor/howto-guide-setup-development-workstation.md:227:100   - Unknown word (buildtools)      -- nativedesktop visualstudio2019buildtools
+./doc/contributor/howto-guide-setup-development-workstation.md:227:70    - Unknown word (nativedesktop)   -- visualstudio2019-workload-nativedesktop visualstudio2019buildtools
+./doc/contributor/howto-guide-setup-development-workstation.md:228:34    - Unknown word (bazelisk)        -- install -y git cmake ninja bazelisk
+./doc/contributor/howto-guide-setup-development-workstation.md:326:20    - Unknown word (Bcmake)          -- cmake -GNinja -S. -Bcmake-out/ \
+./doc/contributor/howto-guide-setup-development-workstation.md:363:31    - Unknown word (devbox)          -- e.g. VM=my-windows-devbox
+./doc/contributor/howto-guide-setup-development-workstation.md:369:30    - Unknown word (drawfork)        -- Googlers should consult go/drawfork before selecting an
+./doc/contributor/howto-guide-setup-development-workstation.md:51:34     - Unknown word (libbenchmark) -- ares-dev libc-ares2 libbenchmark-dev libcurl4-openssl
+./doc/contributor/howto-guide-setup-development-workstation.md:51:9      - Unknown word (libc)       -- libc-ares-dev libc-ares2
+./doc/contributor/howto-guide-setup-development-workstation.md:64:13     - Unknown word (buildifier)   -- Install the buildifier tool, which we use to
+./doc/contributor/howto-guide-setup-development-workstation.md:71:9      - Unknown word (shfmt)        -- Install shfmt tool, which we use to
+./doc/contributor/howto-guide-setup-development-workstation.md:96:10     - Unknown word (mdformat)     -- Install `mdformat`, which we use to format
 ./doc/cpp-style-guide.md:54:11     - Unknown word (grpcpp)     -- #include <grpcpp/blorg.h>
 ./doc/cpp-style-guide.md:54:18     - Unknown word (blorg)      -- #include <grpcpp/blorg.h>
 ./doc/cpp-style-guide.md:58:11     - Unknown word (unistd)     -- #include <unistd.h>
-./doc/packaging.md:1313:21   - Unknown word (epel)           -- sudo dnf install -y epel-release && \
-./doc/packaging.md:1549:1    - Unknown word (Abseiil)        -- Abseiil from source.
-./doc/packaging.md:1717:46   - Unknown word (rhscl)          -- -enable rhel-server-rhscl-7-rpms
-./doc/packaging.md:1717:54   - Unknown word (rpms)           -- rhel-server-rhscl-7-rpms
-./doc/packaging.md:1719:55   - Unknown word (devtoolset)     -- ccache cmake3 curl-devel devtoolset-7 gcc gcc-c++ \
-./doc/packaging.md:194:10    - Unknown word (DCRC)        -- -DCRC32C_BUILD_TESTS=OFF
-./doc/packaging.md:196:22    - Unknown word (GLOG)        -- -DCRC32C_USE_GLOG=OFF \
-./doc/packaging.md:227:10    - Unknown word (makecache)   -- sudo dnf makecache && \
-./doc/packaging.md:228:39    - Unknown word (findutils)   -- y ccache cmake curl findutils gcc-c++ git make ninja
-./doc/packaging.md:229:17    - Unknown word (devel)       -- openssl-devel patch unzip tar wget
-./doc/packaging.md:258:6     - Unknown word (ldconfig)    -- sudo ldconfig
-./doc/packaging.md:294:8     - Unknown word (DJSON)       -- -DJSON_BuildTests=OFF \
-./doc/packaging.md:329:42    - Unknown word (automake)    -- -allow-downgrade -y automake ccache cmake curl \
-./doc/packaging.md:330:44    - Unknown word (libopenssl)  -- git gzip libcurl-devel libopenssl-devel \
-./doc/packaging.md:340:28    - Unknown word (usrlocal)    -- tee /etc/ld.so.conf.d/usrlocal.conf
-./doc/packaging.md:366:8     - Unknown word (DABSL)       -- -DABSL_BUILD_TESTING=OFF \
-./doc/packaging.md:386:10    - Unknown word (Dprotobuf)   -- -Dprotobuf_BUILD_TESTS=OFF \
-./doc/packaging.md:403:7     - Unknown word (buildconf)   -- ./buildconf && ./configure && make
-./doc/packaging.md:424:16    - Unknown word (PROTOBUF)    -- -DgRPC_PROTOBUF_PROVIDER=package \
-./doc/packaging.md:501:24    - Unknown word (noninteractive) -- export DEBIAN_FRONTEND=noninteractive
-./doc/packaging.md:69:68     - Unknown word (msbuild)    -- generator from `make` (or msbuild on
-./doc/packaging.md:71:16     - Unknown word (multicore)  -- advantage of multicore machines. Be aware that
-./doc/packaging.md:74:65     - Unknown word (NCPU)       -- consider appending `-- -j ${NCPU}` to the
-./doc/packaging.md:77:50     - Unknown word (physicalcpu) -- Linux, or `sysctl -n hw.physicalcpu` on macOS.
-./doc/packaging.md:77:8      - Unknown word (nproc)      -- the `nproc` command on Linux, or
+./doc/packaging.md:1312:21   - Unknown word (epel)           -- sudo dnf install -y epel-release && \
+./doc/packaging.md:1548:1    - Unknown word (Abseiil)        -- Abseiil from source.
+./doc/packaging.md:1716:46   - Unknown word (rhscl)          -- -enable rhel-server-rhscl-7-rpms
+./doc/packaging.md:1716:54   - Unknown word (rpms)           -- rhel-server-rhscl-7-rpms
+./doc/packaging.md:1718:55   - Unknown word (devtoolset)     -- ccache cmake3 curl-devel devtoolset-7 gcc gcc-c++ \
+./doc/packaging.md:193:10    - Unknown word (DCRC)        -- -DCRC32C_BUILD_TESTS=OFF
+./doc/packaging.md:195:22    - Unknown word (GLOG)        -- -DCRC32C_USE_GLOG=OFF \
+./doc/packaging.md:226:10    - Unknown word (makecache)   -- sudo dnf makecache && \
+./doc/packaging.md:227:39    - Unknown word (findutils)   -- y ccache cmake curl findutils gcc-c++ git make ninja
+./doc/packaging.md:228:17    - Unknown word (devel)       -- openssl-devel patch unzip tar wget
+./doc/packaging.md:257:6     - Unknown word (ldconfig)    -- sudo ldconfig
+./doc/packaging.md:293:8     - Unknown word (DJSON)       -- -DJSON_BuildTests=OFF \
+./doc/packaging.md:328:42    - Unknown word (automake)    -- -allow-downgrade -y automake ccache cmake curl \
+./doc/packaging.md:329:44    - Unknown word (libopenssl)  -- git gzip libcurl-devel libopenssl-devel \
+./doc/packaging.md:339:28    - Unknown word (usrlocal)    -- tee /etc/ld.so.conf.d/usrlocal.conf
+./doc/packaging.md:365:8     - Unknown word (DABSL)       -- -DABSL_BUILD_TESTING=OFF \
+./doc/packaging.md:385:10    - Unknown word (Dprotobuf)   -- -Dprotobuf_BUILD_TESTS=OFF \
+./doc/packaging.md:402:7     - Unknown word (buildconf)   -- ./buildconf && ./configure && make
+./doc/packaging.md:423:16    - Unknown word (PROTOBUF)    -- -DgRPC_PROTOBUF_PROVIDER=package \
+./doc/packaging.md:500:24    - Unknown word (noninteractive) -- export DEBIAN_FRONTEND=noninteractive
+./doc/packaging.md:68:68     - Unknown word (msbuild)    -- generator from `make` (or msbuild on
+./doc/packaging.md:70:16     - Unknown word (multicore)  -- advantage of multicore machines. Be aware that
+./doc/packaging.md:73:65     - Unknown word (NCPU)       -- consider appending `-- -j ${NCPU}` to the
+./doc/packaging.md:76:50     - Unknown word (physicalcpu) -- Linux, or `sysctl -n hw.physicalcpu` on macOS.
+./doc/packaging.md:76:8      - Unknown word (nproc)      -- the `nproc` command on Linux, or
 ./docfx/BUILD.bazel:15:27     - Unknown word (hdrs)       -- :docfx.bzl", "docfx_hdrs", "docfx_srcs")
 ./docfx/CMakeLists.txt:29:15     - Unknown word (Werror)     -- include(EnableWerror)
 ./docfx/CMakeLists.txt:73:10     - Unknown word (fname)      -- foreach (fname IN LISTS unit_tests
@@ -412,10 +412,10 @@ Lines:
 ./generator/internal/printer_test.cc:37:33     - Unknown word (Inigo)      -- VarsDictionary vars{{"name", "Inigo Montoya"}};
 ./generator/internal/resolve_comment_references_test.cc:224:38    - Unknown word (Oneof)      -- ResolveCommentsReferenceTest, Oneof) {
 ./generator/internal/scaffold_generator.cc:546:2     - Unknown word (mainpage)   -- @mainpage $title$ C++ Client Library
-./generator/internal/scaffold_generator.cc:745:7     - Unknown word (tsch)       -- | csh/tsch | `setenv
-./generator/internal/scaffold_generator.cc:807:14    - Unknown word (gooogle)    -- cd $$HOME/gooogle-cloud-cpp/google/cloud
-./generator/internal/scaffold_generator.cc:845:39    - Unknown word (Downloadfile) -- System.Net.WebClient).Downloadfile( ^
-./generator/internal/scaffold_generator.cc:985:8     - Unknown word (CXXLDFLAGS)   -- CLIENT_CXXLDFLAGS := $$(shell pkg-config
+./generator/internal/scaffold_generator.cc:744:7     - Unknown word (tsch)       -- | csh/tsch | `setenv
+./generator/internal/scaffold_generator.cc:806:14    - Unknown word (gooogle)    -- cd $$HOME/gooogle-cloud-cpp/google/cloud
+./generator/internal/scaffold_generator.cc:844:39    - Unknown word (Downloadfile) -- System.Net.WebClient).Downloadfile( ^
+./generator/internal/scaffold_generator.cc:984:8     - Unknown word (CXXLDFLAGS)   -- CLIENT_CXXLDFLAGS := $$(shell pkg-config
 ./generator/internal/scaffold_generator.h:55:36     - Unknown word (refgroup)   -- name of the doxygen refgroup for options in a given
 ./generator/internal/scaffold_generator_test.cc:326:38    - Unknown word (CXXLD)      -- actual, HasSubstr("\t$(CXXLD) "));
 ./generator/internal/scaffold_generator_test.cc:360:37    - Unknown word (Bazelrc)    -- ScaffoldGenerator, QuickstartBazelrc) {
@@ -473,14 +473,14 @@ Lines:
 ./google/cloud/bigquery/doc/main.dox:69:40     - Unknown word (bigquerystorage) -- (which defaults to "bigquerystorage.googleapis.com")
 ./google/cloud/bigquery/doc/main.dox:85:40     - Unknown word (bigquerymigration) -- (which defaults to "bigquerymigration.googleapis.com")
 ./google/cloud/bigquery/doc/main.dox:93:40     - Unknown word (bigqueryreservation) -- (which defaults to "bigqueryreservation.googleapis.com")
+./google/cloud/bigquery/v2/minimal/internal/job_client_test.cc:36:20     - Unknown word (jkind)      -- R"({"kind": "jkind",
+./google/cloud/bigquery/v2/minimal/internal/job_client_test.cc:37:20     - Unknown word (jtag)       -- "etag": "jtag",
+./google/cloud/bigquery/v2/minimal/internal/job_client_test.cc:39:25     - Unknown word (jself)      -- "self_link": "jselfLink",
+./google/cloud/bigquery/v2/minimal/internal/job_client_test.cc:40:26     - Unknown word (juser)      -- "user_email": "juserEmail",
 ./google/cloud/bigquery/v2/minimal/internal/job_idempotency_policy_test.cc:25:20     - Unknown word (Policyt)    -- TEST(JobIdempotencyPolicytTest, GetJob) {
 ./google/cloud/bigquery/v2/minimal/internal/job_options_test.cc:25:9      - Unknown word (Optionst)   -- TEST(JobOptionstTest, DefaultOptions
 ./google/cloud/bigquery/v2/minimal/internal/job_request_test.cc:30:25     - Unknown word (useast)     -- request.set_location("useast");
-./google/cloud/bigquery/v2/minimal/internal/job_request_test.cc:65:9      - Unknown word (myendpoint) -- {"myendpoint.google.com",
-./google/cloud/bigquery/v2/minimal/internal/job_response_test.cc:32:20     - Unknown word (jkind)      -- R"({"kind": "jkind",
-./google/cloud/bigquery/v2/minimal/internal/job_response_test.cc:33:20     - Unknown word (jtag)       -- "etag": "jtag",
-./google/cloud/bigquery/v2/minimal/internal/job_response_test.cc:35:25     - Unknown word (jself)      -- "self_link": "jselfLink",
-./google/cloud/bigquery/v2/minimal/internal/job_response_test.cc:36:26     - Unknown word (juser)      -- "user_email": "juserEmail",
+./google/cloud/bigquery/v2/minimal/internal/job_request_test.cc:67:9      - Unknown word (myendpoint) -- {"myendpoint.google.com",
 ./google/cloud/bigtable/BUILD.bazel:99:22     - Unknown word (readrowsparser) -- name = "internal_readrowsparser_test",
 ./google/cloud/bigtable/README.md:27:35     - Unknown word (substr)     -- << "Usage: " << cmd.substr(last_slash + 1)
 ./google/cloud/bigtable/admin/integration_tests/admin_backup_integration_test.cc:41:11     - Unknown word (btadmin)    -- namespace btadmin = ::google::bigtable
@@ -507,7 +507,7 @@ Lines:
 ./google/cloud/bigtable/client_options_test.cc:87:46     - Unknown word (testinstanceadmin) -- InstanceAdminEndpointOption>("testinstanceadmin.googleapis.com")
 ./google/cloud/bigtable/column_family.h:154:43    - Unknown word (Differencer) -- protobuf::util::MessageDifferencer::Equivalent(a.gc_rule
 ./google/cloud/bigtable/data_client.h:45:22     - Unknown word (Bigtable's) -- * Connects to Cloud Bigtable's data manipulation APIs
-./google/cloud/bigtable/doc/bigtable-main.dox:37:51     - Unknown word (howto)      -- development workstation][howto-setup-dev-workstation
+./google/cloud/bigtable/doc/bigtable-main.dox:36:51     - Unknown word (howto)      -- development workstation][howto-setup-dev-workstation
 ./google/cloud/bigtable/doc/bigtable-samples-grpc-credentials.dox:41:33     - Unknown word (googleusercontent) -- client_id": "XXXXXX.apps.googleusercontent.com",
 ./google/cloud/bigtable/doc/bigtable-samples-grpc-credentials.dox:57:71     - Unknown word (endl)              -- < ex.what() << std::endl;
 ./google/cloud/bigtable/doc/migrating-from-dataclient.dox:3:22      - Unknown word (dataclient) -- page migrating-from-dataclient Migrating from `DataClient
@@ -644,7 +644,7 @@ Lines:
 ./google/cloud/google_cloud_cpp_rest_internal_unit_tests.bzl:26:37     - Unknown word (sigpipe)    -- curl_wrappers_disable_sigpipe_handler_test.cc",
 ./google/cloud/ids/doc/main.dox:9:12      - Unknown word (Palo)       -- built with Palo Alto Networks technologies
 ./google/cloud/internal/README.md:1:30      - Unknown word (gogle)      -- Implementation Details for gogle/cloud/\*.{h,cc}
-./google/cloud/internal/async_connection_ready_test.cc:74:39     - Unknown word (SUBCHANNEL) -- SetInt(GRPC_ARG_USE_LOCAL_SUBCHANNEL_POOL, 1);
+./google/cloud/internal/async_connection_ready_test.cc:76:39     - Unknown word (SUBCHANNEL) -- SetInt(GRPC_ARG_USE_LOCAL_SUBCHANNEL_POOL, 1);
 ./google/cloud/internal/base64_transforms_test.cc:36:9      - Unknown word (abcdefghi)  -- {"abcdefghi", "YWJjZGVmZ2hp"},
 ./google/cloud/internal/base64_transforms_test.cc:37:33     - Unknown word (hpag)       -- abcdefghij", "YWJjZGVmZ2hpag=="},
 ./google/cloud/internal/base64_transforms_test.cc:37:9      - Unknown word (abcdefghij) -- {"abcdefghij", "YWJjZGVmZ2hpag==
@@ -689,7 +689,7 @@ Lines:
 ./google/cloud/internal/external_account_token_source_aws_test.cc:98:48     - Unknown word (imdsv)      -- SessionToken = "test-imdsv2-token";
 ./google/cloud/internal/external_account_token_source_url_test.cc:62:26     - Unknown word (parseable)  -- full error payload, parseable as an error info.
 ./google/cloud/internal/filesystem_test.cc:50:41     - Unknown word (Bitxor)     -- PermissionsOperatorBitxor) {
-./google/cloud/internal/future_impl.h:742:10    - Unknown word (unwrapper)  -- auto unwrapper = [](std::shared_ptr
+./google/cloud/internal/future_impl.h:743:10    - Unknown word (unwrapper)  -- auto unwrapper = [](std::shared_ptr
 ./google/cloud/internal/future_then_meta.h:20:11     - Unknown word (metafunctions) -- * Define metafunctions used in the implementation
 ./google/cloud/internal/getenv.cc:17:13     - Unknown word (dupenv)     -- // We need _dupenv_s()
 ./google/cloud/internal/make_jwt_assertion.cc:27:7      - Unknown word (Urlsafe)    -- UrlsafeBase64Encode(header)
@@ -966,7 +966,7 @@ Lines:
 ./google/cloud/storage/parallel_uploads_test.cc:753:50    - Unknown word (Cration)    -- FileOneStreamFailsUponCration) {
 ./google/cloud/storage/policy_document_test.cc:158:8     - Unknown word (asdfasdfasdf) -- "asdfasdfasdf", "asdfasdfasdf"};
 ./google/cloud/storage/policy_document_test.cc:199:14    - Unknown word (rsaposttest)  -- "rsaposttest, access_id=foo@foo.com
-./google/cloud/storage/quickstart/README.md:127:31    - Unknown word (Tbits)      -- large workloads (several Tbits/s of upload and/or download
+./google/cloud/storage/quickstart/README.md:126:31    - Unknown word (Tbits)      -- large workloads (several Tbits/s of upload and/or download
 ./google/cloud/storage/testing/retry_tests.h:54:47     - Unknown word (oncall)     -- TypedExpectation<F>& oncall,
 ./google/cloud/storage/tests/conformance_tests.proto:82:24     - Unknown word (lexigraphical) -- E.1: Order them in lexigraphical order so it's the
 ./google/cloud/storage/tests/curl_download_request_integration_test.cc:332:55    - Unknown word (nulltptr)   -- error("r_no_close.id()==nulltptr");

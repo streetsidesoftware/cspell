@@ -5,7 +5,7 @@ Args: ["--config=../../../cspell-power-shell-docs.config.yaml","**"]
 Summary:
   files: 2872
   filesWithIssues: 1317
-  issues: 6021
+  issues: 6018
   errors: 0
 Errors: []
 
@@ -478,6 +478,7 @@ issues:
   - "reference/7.3/Microsoft.PowerShell.Core/About/about_Calling_Generic_Methods.md:61:9     	Linq	U   	`System.Linq.Enumerable` class to"
   - "reference/7.3/Microsoft.PowerShell.Core/About/about_Preference_Variables.md:1054:29 	robocopy	U   	native commands, like [robocopy][02] use non-zero exit"
   - "reference/7.3/Microsoft.PowerShell.Core/Switch-Process.md:12:43     	execv   	U   	the cmdlet calls the `execv()` function to provide"
+  - "reference/7.4/Microsoft.PowerShell.Core/About/about_CommonParameters.md:46:23   	proga   	U   	**ProgressAction** (proga)"
   - "reference/7.4/Microsoft.PowerShell.Core/Get-Command.md:463:22   	Damerau 	U   	calculated using the Damerau Levenshtein Distance"
   - "reference/docs-conceptual/community/2020-updates.md:38:3    	doctordns       	U   	| doctordns | 3"
   - "reference/docs-conceptual/community/2020-updates.md:39:3    	chadbaldwin     	U   	| chadbaldwin | 1"
@@ -827,17 +828,6 @@ issues:
   - "reference/docs-conceptual/developer/ets/overview.md:32:47   	typeless	U   	scripting language is _typeless_ in that a variable"
   - "reference/docs-conceptual/developer/ets/typeconverters.md:42:67     	Regx	U   	Results of call to `Regx(valueToConvert)`."
   - "reference/docs-conceptual/developer/format/creating-a-list-view.md:219:348  	Servicetype 	U   	viceprocess.Servicecontroller.Servicetype](/dotnet/api/System"
-  - "reference/docs-conceptual/developer/format/creating-a-wide-view.md:17:1     	AEADISRV    	U   	AEADISRV"
-  - "reference/docs-conceptual/developer/format/creating-a-wide-view.md:17:30    	agrsmsvc    	U   	agrsmsvc"
-  - "reference/docs-conceptual/developer/format/creating-a-wide-view.md:18:5     	evxx        	U   	Ati2evxx"
-  - "reference/docs-conceptual/developer/format/creating-a-wide-view.md:21:1     	Crypserv    	U   	Crypserv"
-  - "reference/docs-conceptual/developer/format/creating-a-wide-view.md:22:33    	Dtct        	U   	DevDtct2"
-  - "reference/docs-conceptual/developer/format/creating-a-wide-view.md:23:30    	dpupdchk    	U   	Service dpupdchk"
-  - "reference/docs-conceptual/developer/format/creating-a-wide-view.md:27:1     	hpqwmiex    	U   	hpqwmiex"
-  - "reference/docs-conceptual/developer/format/creating-a-wide-view.md:27:30    	hpservice   	U   	hpservice"
-  - "reference/docs-conceptual/developer/format/creating-a-wide-view.md:30:1     	ipoint      	U   	ipoint"
-  - "reference/docs-conceptual/developer/format/creating-a-wide-view.md:32:1     	MSAS        	U   	MSASCui"
-  - "reference/docs-conceptual/developer/format/creating-a-wide-view.md:74:213   	Processname 	U   	Diagnostics.Process.Processname](/dotnet/api/System"
   - "reference/docs-conceptual/developer/format/customcontrolname-element-for-expressionbinding-for-controls-for-configuration-format.md:27:20   	Nameof  	U   	<CustomControlName>NameofCustomControl</CustomControlNa"
   - "reference/docs-conceptual/developer/format/defaultsettings-element-format.md:23:58      	Fortable	U   	berOfProperties</PropertyCountFortable>"
   - "reference/docs-conceptual/developer/format/format-schema-xml-reference.md:63:42     	Bindine 	U   	Element for ExpressionBindine for Controls for View"
@@ -1279,8 +1269,11 @@ issues:
   - "reference/docs-conceptual/whats-new/What-s-New-in-PowerShell-73.md:100:12   	eugenesmlv          	U   	(Thanks @eugenesmlv!)"
   - "reference/docs-conceptual/whats-new/What-s-New-in-PowerShell-73.md:106:85   	fflaten             	U   	4][17804]) (Thanks @fflaten!)"
   - "reference/docs-conceptual/whats-new/What-s-New-in-PowerShell-73.md:108:9    	noprofileloadtime   	U   	- Add `-noprofileloadtime` switch to pwsh ([#"
-  - "reference/docs-conceptual/whats-new/What-s-New-in-PowerShell-74.md:42:30    	dkaszews	U   	0][17780]) (Thanks @dkaszews!)"
-  - "reference/docs-conceptual/whats-new/What-s-New-in-PowerShell-74.md:58:78    	wmentha 	U   	1][17191]) (Thanks @wmentha!)"
+  - "reference/docs-conceptual/whats-new/What-s-New-in-PowerShell-74.md:50:26    	webcmdlets      	U   	Fix using xml -Body in webcmdlets without an encoding"
+  - "reference/docs-conceptual/whats-new/What-s-New-in-PowerShell-74.md:55:3     	Webcmdlets      	U   	- Webcmdlets display an error on"
+  - "reference/docs-conceptual/whats-new/What-s-New-in-PowerShell-74.md:67:81    	stevenebutler   	U   	9][19249]) (Thanks @stevenebutler!)"
+  - "reference/docs-conceptual/whats-new/What-s-New-in-PowerShell-74.md:72:30    	dkaszews        	U   	0][17780]) (Thanks @dkaszews!)"
+  - "reference/docs-conceptual/whats-new/What-s-New-in-PowerShell-74.md:93:78    	wmentha         	U   	1][17191]) (Thanks @wmentha!)"
   - "reference/docs-conceptual/windows-powershell/ise/object-model/Other-Useful-Scripting-Objects.md:27:40   	Mycommand   	U   	ortedConsoleApplications.Add('Mycommand')"
   - "reference/docs-conceptual/windows-powershell/ise/object-model/The-ISEFile-Object.md:62:2    	fullpath	U   	$fullpath = \"c:\\temp\\newname.txt"
   - "reference/docs-conceptual/windows-powershell/ise/object-model/The-ISEFile-Object.md:62:22   	newname 	U   	fullpath = \"c:\\temp\\newname.txt\""
