@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 6.30.1 (2023-03-17)
+
+### Bug Fixes
+
+* Update cosmiconfig to fix config loading issue. ([#4330](https://github.com/streetsidesoftware/cspell/issues/4330)) ([4a0bae5](https://github.com/streetsidesoftware/cspell/commit/4a0bae53074de54b748ce6b7124f585e28d2175e))
+
 # 6.30.0 (2023-03-16)
 
 **Note:** Version bump only for package test-cspell-lib-rollup
