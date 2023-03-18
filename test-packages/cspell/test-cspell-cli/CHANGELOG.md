@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 6.30.2 (2023-03-18)
+
+### Bug Fixes
+
+* lock cosmiconfig to 8.0.0 ([#4335](https://github.com/streetsidesoftware/cspell-cli/issues/4335)) ([0f37e2c](https://github.com/streetsidesoftware/cspell-cli/commit/0f37e2cfa4b854c49f82b01bce57abb3c2c7f9ab))
+
 ## 6.30.1 (2023-03-17)
 
 ### Bug Fixes
