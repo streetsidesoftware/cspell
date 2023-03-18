@@ -1,10 +1,13 @@
 // cspell:ignore TSESTree
 import type { Rule } from 'eslint';
+import { readFileSync } from 'fs';
+import { join as pathJoin } from 'path';
 import { createSyncFn } from 'synckit';
 
-import optionsSchema from '../_auto_generated_/options.schema.json';
 import type { Issue, SpellCheckSyncFn } from '../worker/spellCheck.mjs';
 import { normalizeOptions } from './defaultCheckOptions';
+
+const optionsSchema = JSON.parse(readFileSync(pathJoin(__dirname, '../../assets/options.schema.json'), 'utf8'));
 
 const schema = optionsSchema as unknown as Rule.RuleMetaData['schema'];
 

@@ -25,6 +25,7 @@
   "main": "dist/plugin/index.js",
   "types": "dist/plugin/index.d.ts",
   "files": [
+    "assets",
     "dist",
     "!**/__mocks__",
     "!**/*.tsbuildInfo",
@@ -35,7 +36,7 @@
   "scripts": {
     "build": "pnpm build:schema && pnpm build:src",
     "build:src": "tsc -b ./tsconfig.json",
-    "build:schema": "ts-json-schema-generator --no-top-ref --expose none --path src/common/options.ts --type Options  -o  ./src/_auto_generated_/options.schema.json",
+    "build:schema": "ts-json-schema-generator --no-top-ref --expose none --path src/common/options.ts --type Options  -o  ./assets/options.schema.json",
     "watch": "tsc -p . --watch",
     "clean": "shx rm -rf dist coverage .tsbuildinfo",
     "clean-build": "pnpm run clean && pnpm run build",

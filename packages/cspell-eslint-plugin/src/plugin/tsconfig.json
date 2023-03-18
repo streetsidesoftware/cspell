@@ -1,14 +1,11 @@
 {
     "extends": "../../tsconfig.base.json",
     "compilerOptions": {
+        "moduleResolution": "node",
         "tsBuildInfoFile": "../../dist/plugin/compile.tsbuildInfo",
         "rootDir": ".",
         "outDir": "../../dist/plugin"
     },
     "include": ["."],
-    "references": [
-        { "path": "../_auto_generated_/tsconfig.json" },
-        { "path": "../common/tsconfig.json" },
-        { "path": "../worker/tsconfig.json" }
-    ]
+    "references": [{ "path": "../common/tsconfig.json" }, { "path": "../worker/tsconfig.json" }]
 }

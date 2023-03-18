@@ -11,9 +11,8 @@ export interface GlobalSettingsWithSource extends Partial<GlobalCSpellSettings> 
     source: CSpellSettingsWithSourceTrace['source'];
 }
 
-export interface GlobalCSpellSettings {
-    import: CSpellSettings['import'];
-}
+// eslint-disable-next-line @typescript-eslint/no-empty-interface
+export interface GlobalCSpellSettings extends Required<Pick<CSpellSettings, 'import'>> {}
 
 export function getRawGlobalSettings(): GlobalSettingsWithSource {
     const name = 'CSpell Configstore';
