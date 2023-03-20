@@ -99,3 +99,162 @@ exports[`Validate wordSplitter > Extract all possible word breaks to 'well-educa
   "well-educated",
 ]
 `;
+
+exports[`Validate wordSplitter > split \`'+flow.tensor'\` in doc 1`] = `
+Map {
+  "flow" => 1,
+  "flow." => 1,
+  "tensor" => 1,
+  ".tensor" => 1,
+  "flow.tensor" => 1,
+  "+flow" => 1,
+  "+flow." => 1,
+  "+flow.tensor" => 1,
+}
+`;
+
+exports[`Validate wordSplitter > split \`'\\'twas the night'\` in doc 1`] = `
+Map {
+  "twas" => 1,
+  "'twas" => 1,
+}
+`;
+
+exports[`Validate wordSplitter > split \`'-torch.tensor+64'\` in doc 1`] = `
+Map {
+  "torch" => 1,
+  "tensor" => 1,
+  "tensor+" => 1,
+  "tensor+64" => 1,
+  "torch." => 1,
+  ".tensor" => 1,
+}
+`;
+
+exports[`Validate wordSplitter > split \`'0.7e1-count+56'\` in doc 1`] = `
+Map {
+  "count" => 1,
+}
+`;
+
+exports[`Validate wordSplitter > split \`'64-bit'\` in doc 1`] = `
+Map {
+  "bit" => 1,
+}
+`;
+
+exports[`Validate wordSplitter > split \`'64bit'\` in doc 1`] = `
+Map {
+  "bit" => 1,
+}
+`;
+
+exports[`Validate wordSplitter > split \`'128-bit'\` in doc 1`] = `
+Map {
+  "bit" => 1,
+}
+`;
+
+exports[`Validate wordSplitter > split \`'256-sha'\` in doc 1`] = `
+Map {
+  "sha" => 1,
+  "-sha" => 1,
+  "256-sha" => 1,
+}
+`;
+
+exports[`Validate wordSplitter > split \`'REFACTOR\\'d'\` in doc 1`] = `
+Map {
+  "REFACTOR" => 1,
+  "REFACTOR'" => 1,
+  "REFACTOR'd" => 1,
+}
+`;
+
+exports[`Validate wordSplitter > split \`'begin+end29'\` in doc 1`] = `
+Map {
+  "begin" => 1,
+  "end" => 1,
+  "end29" => 1,
+  "begin+" => 1,
+  "+end" => 1,
+}
+`;
+
+exports[`Validate wordSplitter > split \`'dogs\\''\` in doc 1`] = `
+Map {
+  "dogs" => 1,
+  "dogs'" => 1,
+}
+`;
+
+exports[`Validate wordSplitter > split \`'êphoneStatic'\` in doc 1`] = `
+Map {
+  "êphone" => 1,
+  "Static" => 1,
+}
+`;
+
+exports[`Validate wordSplitter > split \`'geschäft'\` in doc 1`] = `
+Map {
+  "geschäft" => 1,
+}
+`;
+
+exports[`Validate wordSplitter > split \`'îphoneStatic'\` in doc 1`] = `
+Map {
+  "îphone" => 1,
+  "Static" => 1,
+}
+`;
+
+exports[`Validate wordSplitter > split \`'n\\'cpp'\` in doc 1`] = `
+Map {
+  "cpp" => 1,
+}
+`;
+
+exports[`Validate wordSplitter > split \`'n\\'log'\` in doc 1`] = `
+Map {
+  "log" => 1,
+  "log'" => 1,
+  "'log" => 1,
+  "'log'" => 1,
+  "n" => 1,
+  "n'" => 1,
+  "n'log" => 1,
+  "n'log'" => 1,
+}
+`;
+
+exports[`Validate wordSplitter > split \`'nstatic'\` in doc 1`] = `
+Map {
+  "static" => 1,
+}
+`;
+
+exports[`Validate wordSplitter > split \`'planets’'\` in doc 1`] = `
+Map {
+  "planets" => 1,
+  "planets’" => 1,
+}
+`;
+
+exports[`Validate wordSplitter > split \`'static'\` in doc 1`] = `
+Map {
+  "static" => 1,
+}
+`;
+
+exports[`Validate wordSplitter > split \`'techo'\` in doc 1`] = `
+Map {
+  "echo" => 1,
+}
+`;
+
+exports[`Validate wordSplitter > split \`'î\\'cpp'\` in doc 1`] = `
+Map {
+  "î" => 1,
+  "cpp" => 1,
+}
+`;

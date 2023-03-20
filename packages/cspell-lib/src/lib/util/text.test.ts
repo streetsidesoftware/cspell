@@ -23,14 +23,17 @@ describe('Util Text', () => {
         expect(Text.stringToRegExp(pattern)).toEqual(expected);
     });
 
-    test('splits words', () => {
-        expect(splitCamelCaseWord('hello')).toEqual(['hello']);
-        expect(splitCamelCaseWord('helloThere')).toEqual(['hello', 'There']);
-        expect(splitCamelCaseWord('HelloThere')).toEqual(['Hello', 'There']);
-        expect(splitCamelCaseWord('BigÁpple')).toEqual(['Big', 'Ápple']);
-        expect(splitCamelCaseWord('ASCIIToUTF16')).toEqual(['ASCII', 'To', 'UTF16']);
-        expect(splitCamelCaseWord('URLsAndDBAs')).toEqual(['Urls', 'And', 'Dbas']);
-        expect(splitCamelCaseWord('WALKingRUNning')).toEqual(['Walking', 'Running']);
+    test.each`
+        word                | expected
+        ${'hello'}          | ${'hello'.split('|')}
+        ${'helloThere'}     | ${['hello', 'There']}
+        ${'HelloThere'}     | ${['Hello', 'There']}
+        ${'BigÁpple'}       | ${['Big', 'Ápple']}
+        ${'ASCIIToUTF16'}   | ${['ASCII', 'To', 'UTF16']}
+        ${'URLsAndDBAs'}    | ${['Urls', 'And', 'Dbas']}
+        ${'WALKingRUNning'} | ${['Walking', 'Running']}
+    `('splitCamelCaseWord $word', ({ word, expected }) => {
+        expect(splitCamelCaseWord(word)).toEqual(expected);
     });
 
     test('extract word from text', () => {
@@ -328,7 +331,7 @@ describe('Validate individual regexp', () => {
         testName                 | regexp                 | text                           | expectedResult
         ${'regExWordsAndDigits'} | ${regExWordsAndDigits} | ${''}                          | ${[]}
         ${'regExWordsAndDigits'} | ${regExWordsAndDigits} | ${" x = 'Don\\'t'"}            | ${['x', 1, "'Don\\'t'", 5]}
-        ${'regExWordsAndDigits'} | ${regExWordsAndDigits} | ${'12345'}                     | ${[]}
+        ${'regExWordsAndDigits'} | ${regExWordsAndDigits} | ${'12345'}                     | ${['12345', 0]}
         ${'regExWordsAndDigits'} | ${regExWordsAndDigits} | ${'12345a'}                    | ${['12345a', 0]}
         ${'regExWordsAndDigits'} | ${regExWordsAndDigits} | ${'geschäft'}                  | ${['geschäft', 0]}
         ${'regExWordsAndDigits'} | ${regExWordsAndDigits} | ${'geschäft'.normalize('NFD')} | ${['geschäft'.normalize('NFD'), 0]}
@@ -336,6 +339,7 @@ describe('Validate individual regexp', () => {
         ${'regExWordsAndDigits'} | ${regExWordsAndDigits} | ${'b12345a'}                   | ${['b12345a', 0]}
         ${'regExWordsAndDigits'} | ${regExWordsAndDigits} | ${'b12_345a'}                  | ${['b12_345a', 0]}
         ${'regExWordsAndDigits'} | ${regExWordsAndDigits} | ${'well-educated'}             | ${['well-educated', 0]}
+        ${'regExWordsAndDigits'} | ${regExWordsAndDigits} | ${'.test.each.name `twas'}     | ${['.test.each.name', 0, '`twas', 16]}
         ${'regExWordsAndDigits'} | ${regExWordsAndDigits} | ${'DB\\Driver\\Manager'}       | ${['DB', 0, 'Driver', 3, 'Manager', 10]}
     `('$testName `$text`', ({ regexp, text, expectedResult }: RegExpTestCase) => {
         const r = match(regexp, text);

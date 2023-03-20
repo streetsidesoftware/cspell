@@ -5,6 +5,7 @@ import { escapeRegEx } from './regexHelper.js';
 import {
     regExDanglingQuote,
     regExEscapeCharacters,
+    regExNumericLiteral,
     regExPossibleWordBreaks,
     regExSplitWords,
     regExSplitWords2,
@@ -52,6 +53,8 @@ export function split(
     const lineOffset = line.offset;
     const requested = new Map<number, boolean>();
 
+    const regExpIgnoreSegment = /^[-.+\d_eE'`\\\s]+$/;
+
     if (!relWordToSplit.text) {
         const text = rebaseTextOffset(relWordToSplit);
         return {
@@ -89,6 +92,10 @@ export function split(
     }
 
     function has(word: TextOffset): boolean {
+        if (regExpIgnoreSegment.test(word.text)) {
+            return true;
+        }
+
         const i = word.offset;
         const j = word.text.length;
         let v = i + (j << 20);
@@ -131,6 +138,11 @@ function findNextWordText({ text, offset }: TextOffset): TextOffset {
             text: '',
             offset: offset + text.length,
         };
+    }
+
+    // Skip numeric literals.
+    if (regExNumericLiteral.test(m[0])) {
+        return findNextWordText({ text, offset: offset + m[0].length });
     }
 
     return {
@@ -451,4 +463,5 @@ function mergeSortedBreaks(...maps: SortedBreaks[]): SortedBreaks {
 
 export const __testing__ = {
     generateWordBreaks,
+    findNextWordText,
 };
