@@ -5,7 +5,7 @@ Args: '["--config=${repoConfig}/cspell.json","**/*.{md,c,h,php}"]'
 Summary:
   files: 1852
   filesWithIssues: 1316
-  issues: 44623
+  issues: 44625
   errors: 0
 Errors: []
 
@@ -6701,7 +6701,6 @@ issues:
   - "ext/pgsql/pgsql.c:4162:61       attnotnull          U       typname, a.attlen, a.attnotnull, a.atthasdef, a.attndims"
   - "ext/pgsql/pgsql.c:4176:40       nspname             U       &querystr, \"' AND n.nspname = '\");"
   - "ext/pgsql/pgsql.c:4206:19       attnonull           U       /* pg_attribute.attnonull */"
-  - "ext/pgsql/pgsql.c:4218:33       pesudo              U       assoc_bool_ex(&elem, \"is pesudo\", sizeof(\"is pesudo"
   - "ext/pgsql/pgsql.c:4296:45       bpchar              U       literal(type_name, \"bpchar\") || zend_string_equals"
   - "ext/pgsql/pgsql.c:4305:45       tinterval           U       literal(type_name, \"tinterval\"))"
   - "ext/pgsql/pgsql.c:4311:109      timetz              U       literal(type_name, \"timetz\"))"
@@ -8634,7 +8633,7 @@ issues:
   - "sapi/apache2handler/apache_config.c:116:22      PHPINI          U       return \"Only first PHPINIDir directive honored"
   - "sapi/apache2handler/php_apache.h:72:7           xbithack    U       bool xbithack;"
   - "sapi/apache2handler/php_functions_arginfo.h:15:17       getallheaders       U       #define arginfo_getallheaders arginfo_apache_request"
-  - "sapi/apache2handler/sapi_apache2.c:594:9        PHPAP       U       #define PHPAP_INI_OFF php_apache_ini"
+  - "sapi/apache2handler/sapi_apache2.c:603:9        PHPAP       U       #define PHPAP_INI_OFF php_apache_ini"
   - "sapi/cgi/cgi_main.c:16:19       Mansell         U       | FastCGI: Ben Mansell <php@slimyhorror.com"
   - "sapi/cgi/cgi_main.c:77:12       unixlib         U       # include <unixlib/local.h>"
   - "sapi/cgi/cgi_main.c:78:7        riscosify       U       int __riscosify_control = __RISCOSIFY"
@@ -8739,10 +8738,10 @@ issues:
   - "sapi/fpm/fpm/fpm_main.c:141:12      nodaemonize     U       {'F', 0, \"nodaemonize\"},"
   - "sapi/fpm/fpm/fpm_main.c:426:2       vzlog           U       vzlog(\"\", 0, type, fmt, args"
   - "sapi/fpm/fpm/fpm_main.c:1132:12     tflag           U       int tflag = 0;"
-  - "sapi/fpm/fpm/fpm_main.c:1165:14     snlen           U       int snlen = strlen(env_script"
-  - "sapi/fpm/fpm/fpm_main.c:1593:48     deiniting       U       without finishing or deiniting the ini builder, call"
-  - "sapi/fpm/fpm/fpm_main.c:1795:8      writeval        U       int writeval = 0;"
-  - "sapi/fpm/fpm/fpm_main.c:1818:5      onced           U       /* onced forked tell zlog to"
+  - "sapi/fpm/fpm/fpm_main.c:1171:17     snlen           U       size_t snlen = strlen(env_script"
+  - "sapi/fpm/fpm/fpm_main.c:1613:48     deiniting       U       without finishing or deiniting the ini builder, call"
+  - "sapi/fpm/fpm/fpm_main.c:1815:8      writeval        U       int writeval = 0;"
+  - "sapi/fpm/fpm/fpm_main.c:1838:5      onced           U       /* onced forked tell zlog to"
   - "sapi/fpm/fpm/fpm_php.h:20:4         uploadprogress      U       \"uploadprogress.file.filename_template"
   - "sapi/fpm/fpm/fpm_php.h:21:4         xdebug              U       \"xdebug.output_dir\", \\"
   - "sapi/fpm/fpm/fpm_php.h:24:4         xmms                U       \"xmms.path\", \\"
@@ -9315,7 +9314,7 @@ issues:
   - "Zend/zend_gdb.c:34:14       NOACTION    U       ZEND_GDBJIT_NOACTION,"
   - "Zend/zend_generators.h:36:490       microoptimization       U       nodes (unnecessary, is microoptimization) and go down to the"
   - "Zend/zend_globals.h:98:19       yytnamerr       U       /* Refer to zend_yytnamerr() in zend_language_parser"
-  - "Zend/zend_hash.c:2197:42        ined    U       element may point to UNDEF-ined slots */"
+  - "Zend/zend_hash.c:2207:42        ined    U       element may point to UNDEF-ined slots */"
   - "Zend/zend_inheritance.c:918:15      precv                   U       zend_op *precv = NULL;"
   - "Zend/zend_inheritance.c:1025:5      returntypewillchange    U       \"returntypewillchange\","
   - "Zend/zend_inheritance.c:1048:21     delayable               U       static void perform_delayable_implementation_check"
@@ -9352,7 +9351,7 @@ issues:
   - "Zend/zend_range_check.h:42:29       zlong               U       define ZEND_LONG_INT_OVFL(zlong) UNEXPECTED((zlong)"
   - "Zend/zend_range_check.h:43:24       UDFL                U       define ZEND_LONG_INT_UDFL(zlong) UNEXPECTED((zlong"
   - "Zend/zend_signal.c:87:31        qtmp        U       signal_queue_t *queue, *qtmp;"
-  - "Zend/zend_signal.c:165:31       procmask    U       BEGIN_CRITICAL(); /* procmask to protect handler_defer"
+  - "Zend/zend_signal.c:161:31       procmask    U       BEGIN_CRITICAL(); /* procmask to protect handler_defer"
   - "Zend/zend_stream.h:83:23        fseeki      U       define zend_fseek _fseeki64"
   - "Zend/zend_stream.h:84:23        ftelli      U       define zend_ftell _ftelli64"
   - "Zend/zend_string.c:381:26       FNNAME      U       ifndef I_REPLACE_SONAME_FNNAME_ZU"
@@ -9365,7 +9364,7 @@ issues:
   - "Zend/zend_string.c:452:4        negq        U       \"negq %1\\n\\t\""
   - "Zend/zend_string.c:454:4        shlq        U       \"shlq %b1, %0\\n\\t\""
   - "Zend/zend_string.c:456:4        movzbq      U       \"movzbq %b0, %0\\n\\t\""
-  - "Zend/zend_string.h:631:38       tryfrom     U       TRYFROM_LOWERCASE, \"tryfrom\") \\"
+  - "Zend/zend_string.h:633:38       tryfrom     U       TRYFROM_LOWERCASE, \"tryfrom\") \\"
   - "Zend/zend_strtod_int.h:51:12        INFNAN      U       #ifndef NO_INFNAN_CHECK"
   - "Zend/zend_strtod.c:43:41        SIGPLAN         U       Accurately\" [Proc. ACM SIGPLAN '90, pp. 92-101]."
   - "Zend/zend_strtod.c:54:47        roundoff        U       (e-k) with just one roundoff."

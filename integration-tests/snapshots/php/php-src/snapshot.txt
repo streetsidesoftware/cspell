@@ -3,7 +3,7 @@ Repository: php/php-src
 Url: "https://github.com/php/php-src.git"
 Args: ["--config=../../../../config/repositories/php/php-src/cspell.json","**/*.{md,c,h,php}"]
 Lines:
- CSpell: Files checked: 1852, Issues found: 44623 in 1316 files
+ CSpell: Files checked: 1852, Issues found: 44625 in 1316 files
  exit code: 1
 ./CODING_STANDARDS.md:105:23    - Unknown word (intvl)        -- // Could be 'date_intvl_create_from_date_str
 ./CODING_STANDARDS.md:114:8     - Unknown word (setclientencoding) -- pg_setclientencoding
@@ -224,7 +224,7 @@ Lines:
 ./Zend/zend_gdb.c:34:14     - Unknown word (NOACTION)   -- ZEND_GDBJIT_NOACTION,
 ./Zend/zend_generators.h:36:490    - Unknown word (microoptimization) -- nodes (unnecessary, is microoptimization) and go down to the
 ./Zend/zend_globals.h:98:19     - Unknown word (yytnamerr)  -- /* Refer to zend_yytnamerr() in zend_language_parser
-./Zend/zend_hash.c:2197:42   - Unknown word (ined)       -- element may point to UNDEF-ined slots */
+./Zend/zend_hash.c:2207:42   - Unknown word (ined)       -- element may point to UNDEF-ined slots */
 ./Zend/zend_inheritance.c:1025:5    - Unknown word (returntypewillchange) -- "returntypewillchange",
 ./Zend/zend_inheritance.c:1048:21   - Unknown word (delayable)            -- static void perform_delayable_implementation_check
 ./Zend/zend_inheritance.c:1936:53   - Unknown word (fnname)               -- functions(zend_string *fnname, zend_function *fn,
@@ -260,7 +260,7 @@ Lines:
 ./Zend/zend_range_check.h:26:4      - Unknown word (overcomplicate) -- overcomplicate things. */
 ./Zend/zend_range_check.h:42:29     - Unknown word (zlong)          -- define ZEND_LONG_INT_OVFL(zlong) UNEXPECTED((zlong)
 ./Zend/zend_range_check.h:43:24     - Unknown word (UDFL)           -- define ZEND_LONG_INT_UDFL(zlong) UNEXPECTED((zlong
-./Zend/zend_signal.c:165:31    - Unknown word (procmask)   -- BEGIN_CRITICAL(); /* procmask to protect handler_defer
+./Zend/zend_signal.c:161:31    - Unknown word (procmask)   -- BEGIN_CRITICAL(); /* procmask to protect handler_defer
 ./Zend/zend_signal.c:87:31     - Unknown word (qtmp)       -- signal_queue_t *queue, *qtmp;
 ./Zend/zend_stream.h:83:23     - Unknown word (fseeki)     -- define zend_fseek _fseeki64
 ./Zend/zend_stream.h:84:23     - Unknown word (ftelli)     -- define zend_ftell _ftelli64
@@ -274,7 +274,7 @@ Lines:
 ./Zend/zend_string.c:452:4     - Unknown word (negq)       -- "negq %1\n\t"
 ./Zend/zend_string.c:454:4     - Unknown word (shlq)       -- "shlq %b1, %0\n\t"
 ./Zend/zend_string.c:456:4     - Unknown word (movzbq)     -- "movzbq %b0, %0\n\t"
-./Zend/zend_string.h:631:38    - Unknown word (tryfrom)    -- TRYFROM_LOWERCASE, "tryfrom") \
+./Zend/zend_string.h:633:38    - Unknown word (tryfrom)    -- TRYFROM_LOWERCASE, "tryfrom") \
 ./Zend/zend_strtod.c:136:37    - Unknown word (DNAN)       -- Series 700/800 machines, -DNAN_WORD0=0x7ff40000 works
 ./Zend/zend_strtod.c:1496:1    - Unknown word (bigtens)    -- bigtens[] = { 1e16, 1e32, 1e
 ./Zend/zend_strtod.c:1497:21   - Unknown word (tinytens)   -- static CONST double tinytens[] = { 1e-16, 1e-32,
@@ -6994,7 +6994,6 @@ Lines:
 ./ext/pgsql/pgsql.c:4162:61   - Unknown word (attnotnull)     -- typname, a.attlen, a.attnotnull, a.atthasdef, a.attndims
 ./ext/pgsql/pgsql.c:4176:40   - Unknown word (nspname)        -- &querystr, "' AND n.nspname = '");
 ./ext/pgsql/pgsql.c:4206:19   - Unknown word (attnonull)      -- /* pg_attribute.attnonull */
-./ext/pgsql/pgsql.c:4218:33   - Unknown word (pesudo)         -- assoc_bool_ex(&elem, "is pesudo", sizeof("is pesudo
 ./ext/pgsql/pgsql.c:4296:45   - Unknown word (bpchar)         -- literal(type_name, "bpchar") || zend_string_equals
 ./ext/pgsql/pgsql.c:4305:45   - Unknown word (tinterval)      -- literal(type_name, "tinterval"))
 ./ext/pgsql/pgsql.c:4311:109  - Unknown word (timetz)         -- literal(type_name, "timetz"))
@@ -8945,7 +8944,7 @@ Lines:
 ./sapi/apache2handler/apache_config.c:43:9      - Unknown word (phpapdebug) -- #define phpapdebug(a) fprintf a
 ./sapi/apache2handler/php_apache.h:72:7      - Unknown word (xbithack)   -- bool xbithack;
 ./sapi/apache2handler/php_functions_arginfo.h:15:17     - Unknown word (getallheaders) -- #define arginfo_getallheaders arginfo_apache_request
-./sapi/apache2handler/sapi_apache2.c:594:9     - Unknown word (PHPAP)      -- #define PHPAP_INI_OFF php_apache_ini
+./sapi/apache2handler/sapi_apache2.c:603:9     - Unknown word (PHPAP)      -- #define PHPAP_INI_OFF php_apache_ini
 ./sapi/cgi/cgi_main.c:127:14    - Unknown word (pgroup)     -- static pid_t pgroup;
 ./sapi/cgi/cgi_main.c:1284:14   - Unknown word (pilen)      -- size_t pilen = env_path_info ? strlen
 ./sapi/cgi/cgi_main.c:1446:44   - Unknown word (unvalidated) -- allows servers to pass on unvalidated Authorization data
@@ -9048,11 +9047,11 @@ Lines:
 ./sapi/fpm/fpm/fpm_log.c:228:13    - Unknown word (mili)       -- /* mili/miliseconds are supported
 ./sapi/fpm/fpm/fpm_log.c:86:23     - Unknown word (kvcopy)     -- struct key_value_s *kvcopy = calloc(1, sizeof(
 ./sapi/fpm/fpm/fpm_main.c:1132:12   - Unknown word (tflag)       -- int tflag = 0;
-./sapi/fpm/fpm/fpm_main.c:1165:14   - Unknown word (snlen)       -- int snlen = strlen(env_script
+./sapi/fpm/fpm/fpm_main.c:1171:17   - Unknown word (snlen)       -- size_t snlen = strlen(env_script
 ./sapi/fpm/fpm/fpm_main.c:141:12    - Unknown word (nodaemonize) -- {'F', 0, "nodaemonize"},
-./sapi/fpm/fpm/fpm_main.c:1593:48   - Unknown word (deiniting)   -- without finishing or deiniting the ini builder, call
-./sapi/fpm/fpm/fpm_main.c:1795:8    - Unknown word (writeval)    -- int writeval = 0;
-./sapi/fpm/fpm/fpm_main.c:1818:5    - Unknown word (onced)       -- /* onced forked tell zlog to
+./sapi/fpm/fpm/fpm_main.c:1613:48   - Unknown word (deiniting)   -- without finishing or deiniting the ini builder, call
+./sapi/fpm/fpm/fpm_main.c:1815:8    - Unknown word (writeval)    -- int writeval = 0;
+./sapi/fpm/fpm/fpm_main.c:1838:5    - Unknown word (onced)       -- /* onced forked tell zlog to
 ./sapi/fpm/fpm/fpm_main.c:426:2     - Unknown word (vzlog)       -- vzlog("", 0, type, fmt, args
 ./sapi/fpm/fpm/fpm_php.h:20:4      - Unknown word (uploadprogress) -- "uploadprogress.file.filename_template
 ./sapi/fpm/fpm/fpm_php.h:21:4      - Unknown word (xdebug)         -- "xdebug.output_dir", \

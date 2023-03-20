@@ -3,7 +3,7 @@ Repository: django/django
 Url: "https://github.com/django/django.git"
 Args: ["**/*.{md,py}"]
 Lines:
- CSpell: Files checked: 2747, Issues found: 8317 in 917 files
+ CSpell: Files checked: 2747, Issues found: 8310 in 915 files
  exit code: 1
 ./django/__init__.py:12:26     - Unknown word (urlresolvers) -- Set the thread-local urlresolvers script prefix if `set
 ./django/apps/config.py:217:40    - Unknown word (qualname)   -- app_config_class.__qualname__,
@@ -368,9 +368,9 @@ Lines:
 ./django/contrib/staticfiles/handlers.py:9:39      - Unknown word (ASGI)       -- handlers.asgi import ASGIHandler
 ./django/contrib/staticfiles/management/commands/findstatic.py:9:14      - Unknown word (staticfile) -- label = "staticfile"
 ./django/contrib/staticfiles/management/commands/runserver.py:14:16     - Unknown word (nostatic)   -- "--nostatic",
-./django/contrib/staticfiles/storage.py:154:58    - Unknown word (myfont)     -- face hack, like url(myfont.eot?#iefix")
-./django/contrib/staticfiles/storage.py:154:70    - Unknown word (iefix)      -- like url(myfont.eot?#iefix")
-./django/contrib/staticfiles/storage.py:204:23    - Unknown word (matchobj)   -- def converter(matchobj):
+./django/contrib/staticfiles/storage.py:162:58    - Unknown word (myfont)     -- face hack, like url(myfont.eot?#iefix")
+./django/contrib/staticfiles/storage.py:162:70    - Unknown word (iefix)      -- like url(myfont.eot?#iefix")
+./django/contrib/staticfiles/storage.py:212:23    - Unknown word (matchobj)   -- def converter(matchobj):
 ./django/contrib/syndication/views.py:40:9      - Unknown word (feedgen)    -- feedgen = self.get_feed(obj
 ./django/contrib/syndication/views.py:84:24     - Unknown word (argcount)   -- # Check co_argcount rather than try/excepting
 ./django/core/cache/backends/base.py:175:15    - Unknown word (atouch)     -- async def atouch(self, key, timeout=DEFAULT
@@ -410,7 +410,6 @@ Lines:
 ./django/core/files/storage/memory.py:2:52      - Unknown word (Seán)            -- BSD) by Cody Soyland, Seán Hayes, Tore Birkeland
 ./django/core/files/storage/memory.py:2:69      - Unknown word (Birkeland)       -- Soyland, Seán Hayes, Tore Birkeland,
 ./django/core/files/storage/memory.py:3:10      - Unknown word (Presta)          -- and Nick Presta.
-./django/core/files/utils.py:29:54     - Unknown word (underlaying) -- forward file methods to an underlaying file
 ./django/core/handlers/asgi.py:173:39    - Unknown word (asend)        -- signals.request_started.asend(sender=self.__class
 ./django/core/handlers/asgi.py:267:47    - Unknown word (aiter)        -- aclosing() when consuming aiter.
 ./django/core/handlers/asgi.py:71:19     - Unknown word (multiprocess) -- "wsgi.multiprocess": True,
@@ -495,7 +494,7 @@ Lines:
 ./django/db/backends/mysql/base.py:56:29     - Unknown word (reraises)   -- exception instances and reraises them with the correct
 ./django/db/backends/mysql/creation.py:67:14     - Unknown word (mysqldump)  -- "mysqldump",
 ./django/db/backends/mysql/creation.py:86:48     - Unknown word (SIGPIPE)    -- dump_proc to receive a SIGPIPE if the load process
-./django/db/backends/mysql/features.py:150:46    - Unknown word (nonaggregated) -- GROUP BY cannot contain nonaggregated column when "
+./django/db/backends/mysql/features.py:151:46    - Unknown word (nonaggregated) -- GROUP BY cannot contain nonaggregated column when "
 ./django/db/backends/mysql/introspection.py:29:20     - Unknown word (NEWDECIMAL) -- FIELD_TYPE.NEWDECIMAL: "DecimalField",
 ./django/db/backends/mysql/introspection.py:326:39    - Unknown word (colseq)     -- non_unique, index, colseq, column, order, type
 ./django/db/backends/mysql/introspection.py:37:20     - Unknown word (LONGLONG)   -- FIELD_TYPE.LONGLONG: "BigIntegerField",
@@ -663,9 +662,9 @@ Lines:
 ./django/db/models/query.py:1047:15   - Unknown word (alatest)    -- async def alatest(self, *fields):
 ./django/db/models/query.py:1060:15   - Unknown word (afirst)     -- async def afirst(self):
 ./django/db/models/query.py:1073:15   - Unknown word (alast)      -- async def alast(self):
-./django/db/models/query.py:1244:15   - Unknown word (aexists)    -- async def aexists(self):
-./django/db/models/query.py:1268:15   - Unknown word (acontains)  -- async def acontains(self, obj):
-./django/db/models/query.py:1283:15   - Unknown word (aexplain)   -- async def aexplain(self, *, format=None
+./django/db/models/query.py:1251:15   - Unknown word (aexists)    -- async def aexists(self):
+./django/db/models/query.py:1275:15   - Unknown word (acontains)  -- async def acontains(self, obj):
+./django/db/models/query.py:1290:15   - Unknown word (aexplain)   -- async def aexplain(self, *, format=None
 ./django/db/models/query.py:238:17    - Unknown word (rowfactory) -- rowfactory = operator.itemgetter
 ./django/db/models/query.py:542:15    - Unknown word (aiterator)  -- async def aiterator(self, chunk_size=20
 ./django/db/models/query.py:586:15    - Unknown word (aaggregate) -- async def aaggregate(self, *args, **kwargs
@@ -700,7 +699,6 @@ Lines:
 ./django/db/models/sql/query.py:454:40    - Unknown word (realising)     -- # requires complex realising.
 ./django/db/models/sql/query.py:464:50    - Unknown word (repointed)     -- sure the aggregates are repointed to them.
 ./django/db/models/sql/query.py:615:15    - Unknown word (revrel)        -- # revrel__col=1 & revrel__col
-./django/db/models/sql/query.py:702:26    - Unknown word (caling)        -- # by recursively caling this function.
 ./django/db/models/sql/query.py:828:20    - Unknown word (louter)        -- parent_louter = (
 ./django/db/transaction.py:162:17    - Unknown word (reentrancy) -- This allows reentrancy even if the same AtomicWrappe
 ./django/db/utils.py:121:26    - Unknown word (ispkg)      -- for _, name, ispkg in pkgutil.iter_modules
@@ -1374,7 +1372,6 @@ Lines:
 ./tests/apps/tests.py:347:33    - Unknown word (lazya)       -- for model_name in ["lazya", "lazyb", "lazyb",
 ./tests/apps/tests.py:347:42    - Unknown word (lazyb)       -- model_name in ["lazya", "lazyb", "lazyb", "lazyc",
 ./tests/apps/tests.py:347:60    - Unknown word (lazyc)       -- "lazyb", "lazyb", "lazyc", "lazya"]
-./tests/asgi/tests.py:64:32     - Unknown word (interator)  -- FileResponse as an async interator. With a sync iterator
 ./tests/async/test_async_model_methods.py:14:9      - Unknown word (refetched)  -- refetched = await SimpleModel
 ./tests/async/test_async_queryset.py:253:44    - Unknown word (simplemodel)   -- id, field FROM async_simplemodel WHERE created=%s"
 ./tests/async/test_async_queryset.py:51:52     - Unknown word (relatedmodels) -- objects.prefetch_related("relatedmodels").aiterator()
@@ -1414,7 +1411,6 @@ Lines:
 ./tests/auth_tests/test_forms.py:756:61    - Unknown word (caractères)   -- contenir au minimum 12 caractères.",
 ./tests/auth_tests/test_forms.py:833:31    - Unknown word (oldpassword)  -- user.set_password(" oldpassword ")
 ./tests/auth_tests/test_hashers.py:287:38    - Unknown word (letmein)    -- encoded = make_password("letmein", hasher="bcrypt")
-./tests/auth_tests/test_hashers.py:348:77    - Unknown word (algorith)   -- Unknown password hashing algorith"):
 ./tests/auth_tests/test_hashers.py:372:31    - Unknown word (badencoded) -- passwords = ("lètmein_badencoded", "", None)
 ./tests/auth_tests/test_hashers.py:391:53    - Unknown word (Dbzziq)     -- sha1$720000$seasalt2$2DDbzziqCtfldrRSNAaF8oA9OMw=
 ./tests/auth_tests/test_hashers.py:391:59    - Unknown word (Ctfldr)     -- 00$seasalt2$2DDbzziqCtfldrRSNAaF8oA9OMw="
@@ -1614,7 +1610,6 @@ Lines:
 ./tests/field_deconstruction/tests.py:432:28    - Unknown word (barness)    -- upload_to="foo/barness", width_field="width
 ./tests/file_storage/test_generate_filename.py:10:7      - Unknown word (AWSS)       -- class AWSS3Storage(Storage):
 ./tests/file_storage/test_generate_filename.py:173:24    - Unknown word (awss)       -- def test_filefield_awss3_storage(self):
-./tests/file_storage/test_inmemory_storage.py:164:38    - Unknown word (chage)      -- accessed time should chage after consecutive opening
 ./tests/file_storage/tests.py:646:73    - Unknown word (Trac)       -- than underscores, like Trac.
 ./tests/file_storage/tests.py:727:34    - Unknown word (stringio)   -- storage.save("tests/stringio", output)
 ./tests/file_storage/tests.py:740:60    - Unknown word (AUFS)       -- filename length (e.g. AUFS has 242).
@@ -1645,7 +1640,6 @@ Lines:
 ./tests/fixtures_regress/tests.py:538:16    - Unknown word (mtoself)         -- "m2mtoself.json",
 ./tests/fixtures_regress/tests.py:680:22    - Unknown word (Cryptonomicon)   -- "name": "Cryptonomicon", "author": ["Neal Stephenson
 ./tests/fixtures_regress/tests.py:802:50    - Unknown word (Egan)            -- Permutation City by Greg Egan (available at Angus
-./tests/fixtures_regress/tests.py:814:27    - Unknown word (foreing)         -- Natural keys with foreing keys in dependencies
 ./tests/fixtures_regress/tests.py:86:41     - Unknown word (anatinus)   -- name="Ornithorhynchus anatinus",
 ./tests/flatpages_tests/test_csrf.py:49:19     - Unknown word (sekrit)     -- url="/sekrit/",
 ./tests/flatpages_tests/test_csrf.py:50:20     - Unknown word (Sekrit)     -- title="Sekrit Flatpage",
@@ -2276,12 +2270,12 @@ Lines:
 ./tests/migrations/test_state.py:127:28    - Unknown word (foodnodefaultmanager) -- "migrations", "foodnodefaultmanager"
 ./tests/migrations/test_state.py:130:28    - Unknown word (foodorderedmanagers)  -- "migrations", "foodorderedmanagers"
 ./tests/migrations/test_state.py:1797:15   - Unknown word (searchablelocation)   -- ["searchablelocation_ptr", "name", "bus_routes
-./tests/migrations/test_writer.py:272:37    - Unknown word (föobár)     -- assertSerializedEqual("föobár")
-./tests/migrations/test_writer.py:280:41    - Unknown word (nbár)       -- assertSerializedEqual("föo\nbár")
-./tests/migrations/test_writer.py:288:38    - Unknown word (lalalala)   -- assertSerializedEqual({"lalalala": ["yeah", "no", "maybe
-./tests/migrations/test_writer.py:771:24    - Unknown word (frozensets) -- def test_serialize_frozensets(self):
-./tests/migrations/test_writer.py:948:47    - Unknown word (keepends)   -- output.splitlines(keepends=True)[0], r"^[^#\s]
-./tests/migrations/test_writer.py:977:14    - Unknown word (enumfield)  -- # an enumfield that takes the enum
+./tests/migrations/test_writer.py:273:37    - Unknown word (föobár)     -- assertSerializedEqual("föobár")
+./tests/migrations/test_writer.py:281:41    - Unknown word (nbár)       -- assertSerializedEqual("föo\nbár")
+./tests/migrations/test_writer.py:289:38    - Unknown word (lalalala)   -- assertSerializedEqual({"lalalala": ["yeah", "no", "maybe
+./tests/migrations/test_writer.py:772:24    - Unknown word (frozensets) -- def test_serialize_frozensets(self):
+./tests/migrations/test_writer.py:954:47    - Unknown word (keepends)   -- output.splitlines(keepends=True)[0], r"^[^#\s]
+./tests/migrations/test_writer.py:983:14    - Unknown word (enumfield)  -- # an enumfield that takes the enum
 ./tests/model_fields/models.py:138:5     - Unknown word (nbfield)    -- nbfield = models.BooleanField
 ./tests/model_fields/models.py:407:5     - Unknown word (floatf)     -- floatf = models.FloatField
 ./tests/model_fields/models.py:71:7      - Unknown word (Choiceful)  -- class Choiceful(models.Model):
@@ -2612,9 +2606,9 @@ Lines:
 ./tests/staticfiles_tests/test_management.py:179:14    - Unknown word (collectstatis) -- def test_collectstatis_check(self):
 ./tests/staticfiles_tests/test_storage.py:108:57    - Unknown word (webfont)    -- font.b8d603e42714.svg#webfontIyfZbseF", content)
 ./tests/staticfiles_tests/test_storage.py:108:67    - Unknown word (Zbse)       -- e42714.svg#webfontIyfZbseF", content)
-./tests/staticfiles_tests/test_storage.py:311:45    - Unknown word (GURL)       -- assertIn(b"/*# sOuRcEMaPpInGURL=source_map.css.map
-./tests/staticfiles_tests/test_storage.py:372:63    - Unknown word (nonutf)     -- TEST_ROOT, "project", "nonutf8")],
-./tests/staticfiles_tests/test_storage.py:609:14    - Unknown word (collectstatistic) -- def test_collectstatistic_no_post_process_replaced
+./tests/staticfiles_tests/test_storage.py:265:45    - Unknown word (GURL)       -- assertIn(b"/*# sOuRcEMaPpInGURL=source_map.css.map
+./tests/staticfiles_tests/test_storage.py:326:63    - Unknown word (nonutf)     -- TEST_ROOT, "project", "nonutf8")],
+./tests/staticfiles_tests/test_storage.py:563:14    - Unknown word (collectstatistic) -- def test_collectstatistic_no_post_process_replaced
 ./tests/staticfiles_tests/test_templatetags.py:12:60     - Unknown word (Fchars)     -- , "/static/special%3Fchars%26quoted.html"
 ./tests/swappable_models/tests.py:34:45     - Unknown word (alternatearticle) -- swappable_models", "alternatearticle"), apps_models)
 ./tests/syndication_tests/feeds.py:227:18    - Unknown word (sarticle)   -- return "%sarticle/%s/" % (item.entry.get
@@ -2746,7 +2740,6 @@ Lines:
 ./tests/template_tests/test_parser.py:24:31     - Unknown word (sometag)    -- TokenType.BLOCK, 'sometag _("Page not found")
 ./tests/template_tests/test_response.py:207:14    - Unknown word (repickling) -- def test_repickling(self):
 ./tests/template_tests/test_response.py:69:11     - Unknown word (rebaking)   -- # rebaking doesn't change the rendered
-./tests/template_tests/tests.py:34:48     - Unknown word (strack)     -- should keep original strack trace when reraising
 ./tests/template_tests/urls.py:25:16     - Unknown word (Юникод)     -- re_path(r"^Юникод/(\w+)/$", views.client
 ./tests/test_client/tests.py:1072:42   - Unknown word (faketoken)  -- authorization": "Bearer faketoken",
 ./tests/test_client/tests.py:257:60    - Unknown word (Gladwell)   -- title><author>Malcolm Gladwell</author></book>
