@@ -7,9 +7,11 @@ import {
     regExDanglingQuote,
     regExFirstUpper,
     regExMatchRegExParts,
+    regExNumericLiteral,
     regExSplitWords,
     regExSplitWords2,
     regExTrailingEndings,
+    regExWordsAndDigits,
     stringToRegExp,
 } from './textRegex.js';
 
@@ -138,6 +140,39 @@ describe('Validate textRegex', () => {
     `('regExMatchRegExParts "$value"', ({ value, expected }) => {
         const r = value.match(regExMatchRegExParts);
         expect(r ? [...r] : r).toEqual(expected);
+    });
+
+    test.each`
+        value        | expected
+        ${''}        | ${null}
+        ${'-22'}     | ${['-22']}
+        ${'-.e6'}    | ${null}
+        ${'-1.e6'}   | ${['-1.e6']}
+        ${'-1.e-6'}  | ${['-1.e-6']}
+        ${'.1e-6'}   | ${['.1e-6']}
+        ${'.1e10'}   | ${['.1e10']}
+        ${'.1e+10'}  | ${['.1e+10']}
+        ${'+.1e+10'} | ${['+.1e+10']}
+    `('regExNumericLiteral "$value"', ({ value, expected }) => {
+        const r = value.match(regExNumericLiteral);
+        expect(r ? [...r] : r).toEqual(expected);
+    });
+
+    test.each`
+        value                | expected
+        ${''}                | ${null}
+        ${',happy birthday'} | ${['happy', 1]}
+        ${'-22'}             | ${['-22', 0]}
+        ${'-.e6'}            | ${['-.e6', 0]}
+        ${'-1.e6'}           | ${['-1.e6', 0]}
+        ${'-1.e-6'}          | ${['-1.e-6', 0]}
+        ${'.1e-6'}           | ${['.1e-6', 0]}
+        ${'.1e10'}           | ${['.1e10', 0]}
+        ${'.1e+10'}          | ${['.1e+10', 0]}
+        ${'+.1e+10'}         | ${['+.1e+10', 0]}
+    `('regExWordsAndDigits "$value"', ({ value, expected }) => {
+        const r = new RegExp(regExWordsAndDigits).exec(value);
+        expect(r ? [...r, r.index] : r).toEqual(expected);
     });
 
     const examplePattern = `/

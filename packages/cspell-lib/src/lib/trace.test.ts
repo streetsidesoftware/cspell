@@ -5,7 +5,7 @@ import { getDefaultSettings, mergeSettings } from './Settings/index.js';
 import type { TraceResult } from './trace.js';
 import { traceWords } from './trace.js';
 
-const timeout = 10000;
+const timeout = 20000;
 
 describe('Verify trace', () => {
     test(

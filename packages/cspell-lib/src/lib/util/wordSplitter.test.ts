@@ -1,10 +1,11 @@
 import type { TextOffset } from '@cspell/cspell-types';
 import { describe, expect, test, vi } from 'vitest';
 
+import { autoResolve } from './AutoResolve.js';
 import type { SortedBreaks } from './wordSplitter.js';
 import { __testing__, split } from './wordSplitter.js';
 
-const generateWordBreaks = __testing__.generateWordBreaks;
+const { generateWordBreaks, findNextWordText } = __testing__;
 
 const words = sampleWordSet();
 const regHasLetters = /\p{L}/u;
@@ -36,6 +37,7 @@ describe('Validate wordSplitter', () => {
     test.each`
         text                | expected
         ${'hello'}          | ${['hello']}
+        ${'hello'}          | ${['hello']}
         ${'well-educated'}  | ${['well', 'educated']}
         ${'ERRORCode'}      | ${['ERROR', 'Code']}
         ${'MOVSX_r_rm16'}   | ${['MOVSX', 'r', 'rm']}
@@ -56,6 +58,21 @@ describe('Validate wordSplitter', () => {
         const breaks = extractBreaks(posBreaks);
         const r = applyWordBreaks(line, breaks);
         expect(r.map((t) => t.text)).toEqual(expected);
+    });
+
+    test.each`
+        text                 | expected
+        ${'hello'}           | ${{ text: 'hello', offset: 0 }}
+        ${'1.25e7 hello'}    | ${{ text: 'hello', offset: 7 }}
+        ${'2+hello.there+'}  | ${{ text: '2+hello.there+', offset: 0 }}
+        ${'well-educated'}   | ${{ text: 'well-educated', offset: 0 }}
+        ${'ERRORCode'}       | ${{ text: 'ERRORCode', offset: 0 }}
+        ${'93 MOVSX_r_rm16'} | ${{ text: 'MOVSX_r_rm16', offset: 3 }}
+        ${'32bit-checksum'}  | ${{ text: '32bit-checksum', offset: 0 }}
+        ${' camelCase'}      | ${{ text: 'camelCase', offset: 1 }}
+    `('findNextWordText $text', ({ text, expected }: TestApplyWordBreaks) => {
+        const r = findNextWordText({ text, offset: 0 });
+        expect(r).toEqual(expected);
     });
 
     test.each`
@@ -191,40 +208,47 @@ describe('Validate wordSplitter', () => {
 
     // cspell:ignore nstatic techo n'cpp n'log refactor'd î
     test.each`
-        text              | expectedWords      | calls
-        ${'static'}       | ${'static'}        | ${1}
-        ${'nstatic'}      | ${'static'}        | ${1}
-        ${'techo'}        | ${'echo'}          | ${1}
-        ${`n'cpp`}        | ${'cpp'}           | ${1}
-        ${`î'cpp`}        | ${'î|cpp'}         | ${2}
-        ${`îphoneStatic`} | ${'îphone|Static'} | ${2}
-        ${`êphoneStatic`} | ${'êphone|Static'} | ${2}
-        ${`geschäft`}     | ${'geschäft'}      | ${1}
-        ${`n'log`}        | ${'log'}           | ${9}
-        ${'64-bit'}       | ${'bit'}           | ${1}
-        ${'128-bit'}      | ${'bit'}           | ${1}
-        ${'256-sha'}      | ${'256-sha'}       | ${6}
-        ${`REFACTOR'd`}   | ${'REFACTOR'}      | ${3}
-        ${`dogs'`}        | ${`dogs'`}         | ${2}
-        ${`planets’`}     | ${`planets’`}      | ${2}
+        text                  | expectedWords      | calls
+        ${'static'}           | ${'static'}        | ${1}
+        ${'nstatic'}          | ${'static'}        | ${1}
+        ${'techo'}            | ${'echo'}          | ${1}
+        ${`n'cpp`}            | ${'cpp'}           | ${1}
+        ${`î'cpp`}            | ${'î|cpp'}         | ${2}
+        ${`îphoneStatic`}     | ${'îphone|Static'} | ${2}
+        ${`êphoneStatic`}     | ${'êphone|Static'} | ${2}
+        ${`geschäft`}         | ${'geschäft'}      | ${1}
+        ${`n'log`}            | ${'log'}           | ${8}
+        ${'64-bit'}           | ${'bit'}           | ${1}
+        ${'128-bit'}          | ${'bit'}           | ${1}
+        ${'256-sha'}          | ${'256-sha'}       | ${3}
+        ${'64bit'}            | ${'bit'}           | ${1}
+        ${`REFACTOR'd`}       | ${'REFACTOR'}      | ${3}
+        ${`dogs'`}            | ${`dogs'`}         | ${2}
+        ${`planets’`}         | ${`planets’`}      | ${2}
+        ${'0.7e1-count+56'}   | ${`e|count`}       | ${1}
+        ${'+flow.tensor'}     | ${`flow|.tensor`}  | ${8}
+        ${'-torch.tensor+64'} | ${'torch|.tensor'} | ${6}
+        ${"'twas the night"}  | ${"'twas"}         | ${2}
+        ${'begin+end29'}      | ${'begin|+end'}    | ${5}
     `('split `$text` in doc', ({ text, expectedWords, calls }: TestSplit2) => {
         const expectedWordSegments = splitTov(expectedWords);
         const doc = sampleText();
         const line = findLine(doc, text);
         const offset = line.offset + line.text.indexOf(text);
         expect(offset).toBeGreaterThan(0);
-        const h = vi.fn();
-        const hasCalls: string[] = [];
-        h.mockImplementation((t) => {
-            hasCalls.push(t.text);
+        const hasCalls = new Map<string, number>();
+        const h = vi.fn((t) => {
+            const n = autoResolve(hasCalls, t.text, () => 0);
+            hasCalls.set(t.text, n + 1);
             return has(t);
         });
         const r = split(line, offset, h);
-        // console.log(hasCalls);
+        // console.log('%o', r);
         expect(r.endOffset).toBe(r.text.offset + r.text.text.length);
         expect(r.words).toEqual(expect.arrayContaining(expectedWordSegments.map(expect.objectContaining)));
         expect(r.words).toHaveLength(expectedWordSegments.length);
         expect(h).toHaveBeenCalledTimes(calls);
+        expect(hasCalls).toMatchSnapshot();
     });
 });
 
@@ -326,14 +350,20 @@ function findLine(doc: string, text: string): TextOffset {
 
 function sampleWordSet() {
     const words = `
+    .tensor
+    torch
+    'twas
     _errorcode42
     2SD
+    begin
+    +end
     64-bit
     bit checksum
     camel case
     can't
     code42
     const
+    count
     cpp
     CVTPD2PS
     CVTTSD
@@ -385,6 +415,16 @@ function sampleText() {
     - The planets’ atmospheres (multiple planets).
 
     128-bit values
+    64bit values
+
+    x = +flow.tensor
+    declare solid = -torch.tensor+64
+
+    quote: 'twas the night
+
+    begin+end29
+
+    0.7e1-count+56
 
     î'cpp
     îphoneStatic
