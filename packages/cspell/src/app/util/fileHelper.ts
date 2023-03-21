@@ -174,7 +174,11 @@ export function calcFinalConfigInfo(
         fileSettings,
         settingsFromCommandLine
     );
-    const languageIds = settings.languageId ? [settings.languageId] : cspell.getLanguageIdsForBaseFilename(basename);
+    const languageIds = settings.languageId
+        ? Array.isArray(settings.languageId)
+            ? settings.languageId
+            : [settings.languageId]
+        : cspell.getLanguageIdsForBaseFilename(basename);
     const config = cspell.constructSettingsForText(settings, text, languageIds);
     return {
         configInfo: { ...configInfo, config },

@@ -166,7 +166,7 @@ export function calcSettingsForLanguageId(
     baseSettings: CSpellUserSettings,
     languageId: LanguageId[] | LanguageId
 ): CSpellUserSettings {
-    const langIds: string[] = ['*'].concat(languageId instanceof Array ? languageId : [languageId]);
+    const langIds: string[] = ['*', ...normalizeLanguageId(languageId)];
     const langSettings = langIds.reduce((settings, languageId) => {
         return calcUserSettingsForLanguage(settings, languageId);
     }, baseSettings);

@@ -1,6 +1,6 @@
 import { opCombine, opCombine as opPipe, type Operator, opFilter, opMap } from '@cspell/cspell-pipe/sync';
 import { createDictionaryLineParser } from 'cspell-trie-lib';
-import { uniqueFilter } from 'hunspell-reader/dist/util';
+import { uniqueFilter } from 'hunspell-reader';
 
 import type { CompileOptions } from './CompileOptions';
 import { legacyLineToWords } from './legacyLineToWords';
