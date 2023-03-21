@@ -24,7 +24,7 @@
 
 ### languageId
 
-• **languageId**: `string` \| `string`[]
+• **languageId**: [`MatchingFileType`](../modules.md#matchingfiletype)
 
 The language id.  Ex: "typescript", "html", or "php".  "*" -- will match all languages.
 
@@ -34,7 +34,7 @@ The language id.  Ex: "typescript", "html", or "php".  "*" -- will match all lan
 
 #### Defined in
 
-[CSpellSettingsDef.ts:539](https://github.com/streetsidesoftware/cspell/blob/bc3346a/packages/cspell-types/src/CSpellSettingsDef.ts#L539)
+[CSpellSettingsDef.ts:539](https://github.com/streetsidesoftware/cspell/blob/c69f8c4/packages/cspell-types/src/CSpellSettingsDef.ts#L539)
 
 ___
 
@@ -58,7 +58,7 @@ Use `locale` instead.
 
 #### Defined in
 
-[CSpellSettingsDef.ts:552](https://github.com/streetsidesoftware/cspell/blob/bc3346a/packages/cspell-types/src/CSpellSettingsDef.ts#L552)
+[CSpellSettingsDef.ts:552](https://github.com/streetsidesoftware/cspell/blob/c69f8c4/packages/cspell-types/src/CSpellSettingsDef.ts#L552)
 
 ___
 
@@ -74,4 +74,4 @@ The locale filter, matches against the language. This can be a comma separated l
 
 #### Defined in
 
-[CSpellSettingsDef.ts:541](https://github.com/streetsidesoftware/cspell/blob/bc3346a/packages/cspell-types/src/CSpellSettingsDef.ts#L541)
+[CSpellSettingsDef.ts:541](https://github.com/streetsidesoftware/cspell/blob/c69f8c4/packages/cspell-types/src/CSpellSettingsDef.ts#L541)
