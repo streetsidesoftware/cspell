@@ -50,7 +50,7 @@ false
 
 #### Defined in
 
-[CSpellSettingsDef.ts:430](https://github.com/streetsidesoftware/cspell/blob/bc3346a/packages/cspell-types/src/CSpellSettingsDef.ts#L430)
+[CSpellSettingsDef.ts:430](https://github.com/streetsidesoftware/cspell/blob/c69f8c4/packages/cspell-types/src/CSpellSettingsDef.ts#L430)
 
 ___
 
@@ -70,7 +70,7 @@ false
 
 #### Defined in
 
-[CSpellSettingsDef.ts:441](https://github.com/streetsidesoftware/cspell/blob/bc3346a/packages/cspell-types/src/CSpellSettingsDef.ts#L441)
+[CSpellSettingsDef.ts:441](https://github.com/streetsidesoftware/cspell/blob/c69f8c4/packages/cspell-types/src/CSpellSettingsDef.ts#L441)
 
 ___
 
@@ -82,7 +82,7 @@ Optional description of configuration.
 
 #### Defined in
 
-[CSpellSettingsDef.ts:417](https://github.com/streetsidesoftware/cspell/blob/bc3346a/packages/cspell-types/src/CSpellSettingsDef.ts#L417)
+[CSpellSettingsDef.ts:417](https://github.com/streetsidesoftware/cspell/blob/c69f8c4/packages/cspell-types/src/CSpellSettingsDef.ts#L417)
 
 ___
 
@@ -101,7 +101,7 @@ and [Custom Dictionaries](https://cspell.org/docs/dictionaries-custom/) for more
 
 #### Defined in
 
-[CSpellSettingsDef.ts:467](https://github.com/streetsidesoftware/cspell/blob/bc3346a/packages/cspell-types/src/CSpellSettingsDef.ts#L467)
+[CSpellSettingsDef.ts:467](https://github.com/streetsidesoftware/cspell/blob/c69f8c4/packages/cspell-types/src/CSpellSettingsDef.ts#L467)
 
 ___
 
@@ -122,7 +122,7 @@ For example, you can use the following to add a custom dictionary:
 
 #### Defined in
 
-[CSpellSettingsDef.ts:455](https://github.com/streetsidesoftware/cspell/blob/bc3346a/packages/cspell-types/src/CSpellSettingsDef.ts#L455)
+[CSpellSettingsDef.ts:455](https://github.com/streetsidesoftware/cspell/blob/c69f8c4/packages/cspell-types/src/CSpellSettingsDef.ts#L455)
 
 ___
 
@@ -138,7 +138,7 @@ true
 
 #### Defined in
 
-[CSpellSettingsDef.ts:423](https://github.com/streetsidesoftware/cspell/blob/bc3346a/packages/cspell-types/src/CSpellSettingsDef.ts#L423)
+[CSpellSettingsDef.ts:423](https://github.com/streetsidesoftware/cspell/blob/c69f8c4/packages/cspell-types/src/CSpellSettingsDef.ts#L423)
 
 ___
 
@@ -168,7 +168,7 @@ InlineDictionary.flagWords
 
 #### Defined in
 
-[InlineDictionary.ts:25](https://github.com/streetsidesoftware/cspell/blob/bc3346a/packages/cspell-types/src/InlineDictionary.ts#L25)
+[InlineDictionary.ts:25](https://github.com/streetsidesoftware/cspell/blob/c69f8c4/packages/cspell-types/src/InlineDictionary.ts#L25)
 
 ___
 
@@ -180,7 +180,7 @@ Optional identifier.
 
 #### Defined in
 
-[CSpellSettingsDef.ts:411](https://github.com/streetsidesoftware/cspell/blob/bc3346a/packages/cspell-types/src/CSpellSettingsDef.ts#L411)
+[CSpellSettingsDef.ts:411](https://github.com/streetsidesoftware/cspell/blob/c69f8c4/packages/cspell-types/src/CSpellSettingsDef.ts#L411)
 
 ___
 
@@ -200,7 +200,7 @@ While you can create your own patterns, you can also leverage several patterns t
 
 #### Defined in
 
-[CSpellSettingsDef.ts:491](https://github.com/streetsidesoftware/cspell/blob/bc3346a/packages/cspell-types/src/CSpellSettingsDef.ts#L491)
+[CSpellSettingsDef.ts:491](https://github.com/streetsidesoftware/cspell/blob/c69f8c4/packages/cspell-types/src/CSpellSettingsDef.ts#L491)
 
 ___
 
@@ -217,7 +217,7 @@ InlineDictionary.ignoreWords
 
 #### Defined in
 
-[InlineDictionary.ts:31](https://github.com/streetsidesoftware/cspell/blob/bc3346a/packages/cspell-types/src/InlineDictionary.ts#L31)
+[InlineDictionary.ts:31](https://github.com/streetsidesoftware/cspell/blob/c69f8c4/packages/cspell-types/src/InlineDictionary.ts#L31)
 
 ___
 
@@ -234,7 +234,7 @@ While you can create your own patterns, you can also leverage several patterns t
 
 #### Defined in
 
-[CSpellSettingsDef.ts:501](https://github.com/streetsidesoftware/cspell/blob/bc3346a/packages/cspell-types/src/CSpellSettingsDef.ts#L501)
+[CSpellSettingsDef.ts:501](https://github.com/streetsidesoftware/cspell/blob/c69f8c4/packages/cspell-types/src/CSpellSettingsDef.ts#L501)
 
 ___
 
@@ -246,7 +246,7 @@ Optional name of configuration.
 
 #### Defined in
 
-[CSpellSettingsDef.ts:414](https://github.com/streetsidesoftware/cspell/blob/bc3346a/packages/cspell-types/src/CSpellSettingsDef.ts#L414)
+[CSpellSettingsDef.ts:414](https://github.com/streetsidesoftware/cspell/blob/c69f8c4/packages/cspell-types/src/CSpellSettingsDef.ts#L414)
 
 ___
 
@@ -264,7 +264,7 @@ possible suggestions.
 
 #### Defined in
 
-[CSpellSettingsDef.ts:478](https://github.com/streetsidesoftware/cspell/blob/bc3346a/packages/cspell-types/src/CSpellSettingsDef.ts#L478)
+[CSpellSettingsDef.ts:478](https://github.com/streetsidesoftware/cspell/blob/c69f8c4/packages/cspell-types/src/CSpellSettingsDef.ts#L478)
 
 ___
 
@@ -284,7 +284,7 @@ ExperimentalBaseSettings.parser
 
 #### Defined in
 
-[CSpellSettingsDef.ts:811](https://github.com/streetsidesoftware/cspell/blob/bc3346a/packages/cspell-types/src/CSpellSettingsDef.ts#L811)
+[CSpellSettingsDef.ts:813](https://github.com/streetsidesoftware/cspell/blob/c69f8c4/packages/cspell-types/src/CSpellSettingsDef.ts#L813)
 
 ___
 
@@ -318,7 +318,7 @@ For example:
 
 #### Defined in
 
-[CSpellSettingsDef.ts:528](https://github.com/streetsidesoftware/cspell/blob/bc3346a/packages/cspell-types/src/CSpellSettingsDef.ts#L528)
+[CSpellSettingsDef.ts:528](https://github.com/streetsidesoftware/cspell/blob/c69f8c4/packages/cspell-types/src/CSpellSettingsDef.ts#L528)
 
 ___
 
@@ -344,7 +344,7 @@ InlineDictionary.suggestWords
 
 #### Defined in
 
-[InlineDictionary.ts:46](https://github.com/streetsidesoftware/cspell/blob/bc3346a/packages/cspell-types/src/InlineDictionary.ts#L46)
+[InlineDictionary.ts:46](https://github.com/streetsidesoftware/cspell/blob/c69f8c4/packages/cspell-types/src/InlineDictionary.ts#L46)
 
 ___
 
@@ -360,4 +360,4 @@ InlineDictionary.words
 
 #### Defined in
 
-[InlineDictionary.ts:5](https://github.com/streetsidesoftware/cspell/blob/bc3346a/packages/cspell-types/src/InlineDictionary.ts#L5)
+[InlineDictionary.ts:5](https://github.com/streetsidesoftware/cspell/blob/c69f8c4/packages/cspell-types/src/InlineDictionary.ts#L5)

@@ -41,7 +41,7 @@ ReporterConfigurationBase.maxDuplicateProblems
 
 #### Defined in
 
-[CSpellReporter.ts:138](https://github.com/streetsidesoftware/cspell/blob/bc3346a/packages/cspell-types/src/CSpellReporter.ts#L138)
+[CSpellReporter.ts:138](https://github.com/streetsidesoftware/cspell/blob/c69f8c4/packages/cspell-types/src/CSpellReporter.ts#L138)
 
 ___
 
@@ -61,7 +61,7 @@ ReporterConfigurationBase.maxNumberOfProblems
 
 #### Defined in
 
-[CSpellReporter.ts:131](https://github.com/streetsidesoftware/cspell/blob/bc3346a/packages/cspell-types/src/CSpellReporter.ts#L131)
+[CSpellReporter.ts:131](https://github.com/streetsidesoftware/cspell/blob/c69f8c4/packages/cspell-types/src/CSpellReporter.ts#L131)
 
 ___
 
@@ -81,7 +81,7 @@ ReporterConfigurationBase.minWordLength
 
 #### Defined in
 
-[CSpellReporter.ts:145](https://github.com/streetsidesoftware/cspell/blob/bc3346a/packages/cspell-types/src/CSpellReporter.ts#L145)
+[CSpellReporter.ts:145](https://github.com/streetsidesoftware/cspell/blob/c69f8c4/packages/cspell-types/src/CSpellReporter.ts#L145)
 
 ___
 
@@ -101,7 +101,7 @@ Number of suggestions to make.
 
 #### Defined in
 
-[CSpellSettingsDef.ts:248](https://github.com/streetsidesoftware/cspell/blob/bc3346a/packages/cspell-types/src/CSpellSettingsDef.ts#L248)
+[CSpellSettingsDef.ts:248](https://github.com/streetsidesoftware/cspell/blob/c69f8c4/packages/cspell-types/src/CSpellSettingsDef.ts#L248)
 
 ___
 
@@ -125,7 +125,7 @@ Range: between 1 and 5.
 
 #### Defined in
 
-[CSpellSettingsDef.ts:266](https://github.com/streetsidesoftware/cspell/blob/bc3346a/packages/cspell-types/src/CSpellSettingsDef.ts#L266)
+[CSpellSettingsDef.ts:266](https://github.com/streetsidesoftware/cspell/blob/c69f8c4/packages/cspell-types/src/CSpellSettingsDef.ts#L266)
 
 ___
 
@@ -145,4 +145,4 @@ The maximum amount of time in milliseconds to generate suggestions for a word.
 
 #### Defined in
 
-[CSpellSettingsDef.ts:255](https://github.com/streetsidesoftware/cspell/blob/bc3346a/packages/cspell-types/src/CSpellSettingsDef.ts#L255)
+[CSpellSettingsDef.ts:255](https://github.com/streetsidesoftware/cspell/blob/c69f8c4/packages/cspell-types/src/CSpellSettingsDef.ts#L255)

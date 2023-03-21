@@ -38,7 +38,7 @@ When `true`, let's the spell checker know that words can be added to this dictio
 
 #### Defined in
 
-[DictionaryDefinition.ts:193](https://github.com/streetsidesoftware/cspell/blob/bc3346a/packages/cspell-types/src/DictionaryDefinition.ts#L193)
+[DictionaryDefinition.ts:193](https://github.com/streetsidesoftware/cspell/blob/c69f8c4/packages/cspell-types/src/DictionaryDefinition.ts#L193)
 
 ___
 
@@ -54,7 +54,7 @@ Optional description.
 
 #### Defined in
 
-[DictionaryDefinition.ts:27](https://github.com/streetsidesoftware/cspell/blob/bc3346a/packages/cspell-types/src/DictionaryDefinition.ts#L27)
+[DictionaryDefinition.ts:27](https://github.com/streetsidesoftware/cspell/blob/c69f8c4/packages/cspell-types/src/DictionaryDefinition.ts#L27)
 
 ___
 
@@ -77,7 +77,7 @@ Name Format:
 
 #### Defined in
 
-[DictionaryDefinition.ts:25](https://github.com/streetsidesoftware/cspell/blob/bc3346a/packages/cspell-types/src/DictionaryDefinition.ts#L25)
+[DictionaryDefinition.ts:25](https://github.com/streetsidesoftware/cspell/blob/c69f8c4/packages/cspell-types/src/DictionaryDefinition.ts#L25)
 
 ___
 
@@ -99,7 +99,7 @@ possible suggestions.
 
 #### Defined in
 
-[DictionaryDefinition.ts:41](https://github.com/streetsidesoftware/cspell/blob/bc3346a/packages/cspell-types/src/DictionaryDefinition.ts#L41)
+[DictionaryDefinition.ts:41](https://github.com/streetsidesoftware/cspell/blob/c69f8c4/packages/cspell-types/src/DictionaryDefinition.ts#L41)
 
 ___
 
@@ -115,7 +115,7 @@ Path to custom dictionary text file.
 
 #### Defined in
 
-[DictionaryDefinition.ts:182](https://github.com/streetsidesoftware/cspell/blob/bc3346a/packages/cspell-types/src/DictionaryDefinition.ts#L182)
+[DictionaryDefinition.ts:182](https://github.com/streetsidesoftware/cspell/blob/c69f8c4/packages/cspell-types/src/DictionaryDefinition.ts#L182)
 
 ___
 
@@ -131,7 +131,7 @@ Replacement pairs.
 
 #### Defined in
 
-[DictionaryDefinition.ts:29](https://github.com/streetsidesoftware/cspell/blob/bc3346a/packages/cspell-types/src/DictionaryDefinition.ts#L29)
+[DictionaryDefinition.ts:29](https://github.com/streetsidesoftware/cspell/blob/c69f8c4/packages/cspell-types/src/DictionaryDefinition.ts#L29)
 
 ___
 
@@ -144,7 +144,7 @@ Scope values: `user`, `workspace`, `folder`.
 
 #### Defined in
 
-[DictionaryDefinition.ts:188](https://github.com/streetsidesoftware/cspell/blob/bc3346a/packages/cspell-types/src/DictionaryDefinition.ts#L188)
+[DictionaryDefinition.ts:188](https://github.com/streetsidesoftware/cspell/blob/c69f8c4/packages/cspell-types/src/DictionaryDefinition.ts#L188)
 
 ___
 
@@ -169,7 +169,7 @@ C is the slowest to load due to the need to split each line based upon code spli
 
 #### Defined in
 
-[DictionaryDefinition.ts:51](https://github.com/streetsidesoftware/cspell/blob/bc3346a/packages/cspell-types/src/DictionaryDefinition.ts#L51)
+[DictionaryDefinition.ts:51](https://github.com/streetsidesoftware/cspell/blob/c69f8c4/packages/cspell-types/src/DictionaryDefinition.ts#L51)
 
 ___
 
@@ -185,4 +185,4 @@ Use Compounds.
 
 #### Defined in
 
-[DictionaryDefinition.ts:31](https://github.com/streetsidesoftware/cspell/blob/bc3346a/packages/cspell-types/src/DictionaryDefinition.ts#L31)
+[DictionaryDefinition.ts:31](https://github.com/streetsidesoftware/cspell/blob/c69f8c4/packages/cspell-types/src/DictionaryDefinition.ts#L31)
