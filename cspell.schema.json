@@ -913,17 +913,7 @@
           "description": "List of regular expression patterns or defined pattern names to match for spell checking.\n\nIf this property is defined, only text matching the included patterns will be checked.\n\nWhile you can create your own patterns, you can also leverage several patterns that are [built-in to CSpell](https://github.com/streetsidesoftware/cspell/blob/main/packages/cspell-lib/src/Settings/DefaultSettings.ts#L22)."
         },
         "languageId": {
-          "anyOf": [
-            {
-              "$ref": "#/definitions/LanguageId"
-            },
-            {
-              "items": {
-                "$ref": "#/definitions/LanguageIdSingle"
-              },
-              "type": "array"
-            }
-          ],
+          "$ref": "#/definitions/MatchingFileType",
           "description": "The language id.  Ex: \"typescript\", \"html\", or \"php\".  \"*\" -- will match all languages."
         },
         "local": {
@@ -997,6 +987,19 @@
     "LocaleId": {
       "description": "This is a written language locale like: 'en', 'en-GB', 'fr', 'es', 'de', etc.",
       "type": "string"
+    },
+    "MatchingFileType": {
+      "anyOf": [
+        {
+          "$ref": "#/definitions/LanguageId"
+        },
+        {
+          "items": {
+            "$ref": "#/definitions/LanguageId"
+          },
+          "type": "array"
+        }
+      ]
     },
     "OverrideSettings": {
       "additionalProperties": false,
@@ -1096,8 +1099,8 @@
           "description": "Sets the locale."
         },
         "languageId": {
-          "$ref": "#/definitions/LanguageId",
-          "description": "Sets the programming language id."
+          "$ref": "#/definitions/MatchingFileType",
+          "description": "Sets the programming language id to match file type."
         },
         "languageSettings": {
           "description": "Additional settings for individual languages.\n\nSee [Language Settings](https://cspell.org/configuration/language-settings/) for more details.",
@@ -1583,7 +1586,7 @@
       "description": "Current active spelling language. This specifies the language locale to use in choosing the general dictionary.\n\nFor example:\n\n- \"en-GB\" for British English.\n- \"en,nl\" to enable both English and Dutch."
     },
     "languageId": {
-      "$ref": "#/definitions/LanguageId",
+      "$ref": "#/definitions/MatchingFileType",
       "description": "Forces the spell checker to assume a give language id. Used mainly as an Override."
     },
     "languageSettings": {

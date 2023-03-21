@@ -22,10 +22,11 @@ import { validateText } from './validator.js';
  * @deprecated
  */
 export async function checkText(text: string, settings: CSpellUserSettings): Promise<CheckTextInfo> {
+    const languageId = settings.languageId || 'plaintext';
     const doc = clean({
         uri: '',
         text,
-        languageId: settings.languageId || 'plaintext',
+        languageId: Array.isArray(languageId) ? languageId.join(',') : languageId,
         locale: settings.language,
     });
     return checkTextDocument(doc, { noConfigSearch: true }, { loadDefaultConfiguration: false, ...settings });

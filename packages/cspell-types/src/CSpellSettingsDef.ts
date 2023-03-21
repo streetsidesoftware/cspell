@@ -226,7 +226,7 @@ export interface Settings extends ReportingConfiguration, BaseSetting, PnPSettin
     languageSettings?: LanguageSetting[];
 
     /** Forces the spell checker to assume a give language id. Used mainly as an Override. */
-    languageId?: LanguageId;
+    languageId?: MatchingFileType;
 
     /**
      * By default, the bundled dictionary configurations are loaded. Explicitly setting this to `false`
@@ -394,8 +394,8 @@ export interface LegacySettings {
 }
 
 export interface OverrideSettings extends Settings, OverrideFilterFields {
-    /** Sets the programming language id. */
-    languageId?: LanguageId;
+    /** Sets the programming language id to match file type. */
+    languageId?: MatchingFileType;
 
     /** Sets the locale. */
     language?: LocaleId;
@@ -536,14 +536,14 @@ export interface LanguageSettingFilterFields
 
 export interface LanguageSettingFilterFieldsPreferred {
     /** The language id.  Ex: "typescript", "html", or "php".  "*" -- will match all languages. */
-    languageId: LanguageId | LanguageIdSingle[];
+    languageId: MatchingFileType;
     /** The locale filter, matches against the language. This can be a comma separated list. "*" will match all locales. */
     locale?: LocaleId | LocaleId[];
 }
 
 export interface LanguageSettingFilterFieldsDeprecated {
     /** The language id.  Ex: "typescript", "html", or "php".  "*" -- will match all languages. */
-    languageId: LanguageId | LanguageIdSingle[];
+    languageId: MatchingFileType;
     /**
      * Deprecated - The locale filter, matches against the language. This can be a comma separated list. "*" will match all locales.
      * @deprecated true
@@ -664,6 +664,8 @@ export type LanguageIdMultiple = string;
 export type LanguageIdMultipleNeg = string;
 
 export type LanguageId = LanguageIdSingle | LanguageIdMultiple | LanguageIdMultipleNeg;
+
+export type MatchingFileType = LanguageId | LanguageId[];
 
 /**
  * A File System Path. Relative paths are relative to the configuration file.
