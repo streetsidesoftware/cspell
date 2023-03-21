@@ -7,3 +7,4 @@ export {
     type WordInfo,
 } from './IterableHunspellReader';
 export { IterableHunspellReader as HunspellReader } from './IterableHunspellReader';
+export { uniqueFilter } from './util';

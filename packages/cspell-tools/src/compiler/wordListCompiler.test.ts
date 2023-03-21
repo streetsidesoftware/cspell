@@ -4,7 +4,7 @@ import { opConcatMap, opTake, pipe, toArray } from '@cspell/cspell-pipe/sync';
 import * as Trie from 'cspell-trie-lib';
 import { importTrie, isCircular, iteratorTrieWords, serializeTrie } from 'cspell-trie-lib';
 import * as fsp from 'fs/promises';
-import { uniqueFilter } from 'hunspell-reader/dist/util';
+import { uniqueFilter } from 'hunspell-reader';
 import * as path from 'path';
 
 import { spyOnConsole } from '../test/console';
