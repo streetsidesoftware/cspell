@@ -168,13 +168,16 @@ describe('Validate CSpellSettingsServer', () => {
     test.each`
         left                                              | right                                              | expected
         ${{}}                                             | ${{}}                                              | ${csi({})}
+        ${{ words: null }}                                | ${{}}                                              | ${csi({})}
+        ${{}}                                             | ${{ words: null }}                                 | ${csi({})}
         ${{ dictionaries: ['a'] }}                        | ${{ dictionaries: ['b'] }}                         | ${oc(csi({ dictionaries: ['a', 'b'] }))}
         ${{ features: {} }}                               | ${{}}                                              | ${oc(csi({ features: {} }))}
         ${{ features: { 'weighted-suggestions': true } }} | ${{}}                                              | ${oc(csi({ features: { 'weighted-suggestions': true } }))}
         ${{ features: { 'weighted-suggestions': true } }} | ${{ features: { 'weighted-suggestions': false } }} | ${oc(csi({ features: { 'weighted-suggestions': false } }))}
         ${{ features: { 'weighted-suggestions': true } }} | ${{ features: { 'new-feature': true } }}           | ${oc({ features: { 'weighted-suggestions': true, 'new-feature': true } })}
     `('mergeSettings $left with $right', ({ left, right, expected }) => {
-        expect(mergeSettings(left, right)).toEqual(expected);
+        const merged = mergeSettings(left, right);
+        expect(merged).toEqual(expected);
     });
 
     test.each`
