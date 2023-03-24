@@ -25,10 +25,6 @@ type CSpellSettingsWST = AdvancedCSpellSettingsWithSourceTrace;
 type CSpellSettingsWSTO = OptionalOrUndefined<AdvancedCSpellSettingsWithSourceTrace>;
 type CSpellSettingsI = CSpellSettingsInternal;
 
-function _unique<T>(a: T[]): T[] {
-    return [...new Set(a)];
-}
-
 /**
  * Merges two lists and removes duplicates.  Order is NOT preserved.
  */
@@ -38,11 +34,11 @@ function mergeListUnique<T>(left: undefined, right: T[]): T[];
 function mergeListUnique<T>(left: T[], right: undefined): T[];
 function mergeListUnique<T>(left: T[] | undefined, right: T[] | undefined): T[] | undefined;
 function mergeListUnique<T>(left: T[] | undefined, right: T[] | undefined): T[] | undefined {
-    if (left === undefined) return right;
-    if (right === undefined) return left;
+    if (!Array.isArray(left)) return Array.isArray(right) ? right : undefined;
+    if (!Array.isArray(right)) return left;
     if (!right.length) return left;
     if (!left.length) return right;
-    return _unique([...left, ...right]);
+    return [...new Set([...left, ...right])];
 }
 
 /**
@@ -55,8 +51,8 @@ function mergeList<T>(left: undefined, right: T[]): T[];
 function mergeList<T>(left: T[], right: undefined): T[];
 function mergeList<T>(left: T[] | undefined, right: T[] | undefined): T[] | undefined;
 function mergeList<T>(left: T[] | undefined, right: T[] | undefined): T[] | undefined {
-    if (left === undefined) return right;
-    if (right === undefined) return left;
+    if (!Array.isArray(left)) return Array.isArray(right) ? right : undefined;
+    if (!Array.isArray(right)) return left;
     if (!left.length) return right;
     if (!right.length) return left;
     return left.concat(right);
@@ -82,10 +78,10 @@ function mergeWordsCached(left: undefined, right: string[]): string[];
 function mergeWordsCached(left: string[], right: undefined): string[];
 function mergeWordsCached(left: string[] | undefined, right: string[] | undefined): string[] | undefined;
 function mergeWordsCached(left: string[] | undefined, right: string[] | undefined): string[] | undefined {
-    if (left === undefined) return !right || right.length ? right : emptyWords;
-    if (right === undefined) return !left || left.length ? left : emptyWords;
-    if (!left.length) return !right || right.length ? right : emptyWords;
-    if (!right.length) return !left || left.length ? left : emptyWords;
+    if (!Array.isArray(left) || !left.length) {
+        return Array.isArray(right) ? (right.length ? right : emptyWords) : undefined;
+    }
+    if (!Array.isArray(right) || !right.length) return left;
 
     return _mergeWordsCached(left, right);
 }
@@ -95,8 +91,8 @@ function mergeObjects<T>(left: T, right: undefined): T;
 function mergeObjects<T>(left: T, right: T): T;
 function mergeObjects<T>(left: undefined, right: T): T;
 function mergeObjects<T>(left?: T, right?: T): T | undefined {
-    if (left === undefined) return right;
-    if (right === undefined) return left;
+    if (!left || typeof left !== 'object') return !right || typeof right !== 'object' ? undefined : right;
+    if (!right || typeof right !== 'object') return left;
     return { ...left, ...right };
 }
 
