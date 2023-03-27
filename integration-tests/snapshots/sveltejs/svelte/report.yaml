@@ -3,9 +3,9 @@ Repository: sveltejs/svelte
 Url: https://github.com/sveltejs/svelte.git
 Args: '["**"]'
 Summary:
-  files: 5368
-  filesWithIssues: 498
-  issues: 3657
+  files: 5376
+  filesWithIssues: 502
+  issues: 3694
   errors: 0
 Errors: []
 
@@ -204,8 +204,8 @@ issues:
   - "site/content/docs/05-compile-time.md:199:2          preprocessors       U       preprocessors: Array<{"
   - "site/content/docs/06-accessibility-warnings.md:47:51        Autofocusing    U       not used on elements. Autofocusing elements can cause usability"
   - "site/content/docs/06-accessibility-warnings.md:58:230       screenreader    U       AT compatibility, and screenreader users."
-  - "site/content/docs/06-accessibility-warnings.md:356:41       labeledby       U       aria attribute 'aria-labeledby' (did you mean 'labelledby"
-  - "site/content/docs/06-accessibility-warnings.md:367:26       toooltip        U       A11y: Unknown role 'toooltip' (did you mean 'tooltip"
+  - "site/content/docs/06-accessibility-warnings.md:367:41       labeledby       U       aria attribute 'aria-labeledby' (did you mean 'labelledby"
+  - "site/content/docs/06-accessibility-warnings.md:378:26       toooltip        U       A11y: Unknown role 'toooltip' (did you mean 'tooltip"
   - "site/content/examples/00-introduction/01-dynamic-attributes/App.svelte:3:19         Astley      U       let name = 'Rick Astley';"
   - "site/content/examples/03-logic/03-each-blocks/App.svelte:3:14           aiyzn       U       { id: 'J---aiyznGQ', name: 'Keyboard"
   - "site/content/examples/03-logic/03-each-blocks/App.svelte:4:31           Maru        U       z_AbfPXTKms', name: 'Maru' },"
@@ -267,7 +267,7 @@ issues:
   - "src/compiler/compile/compiler_warnings.ts:74:10         idlist              U       case 'idlist':"
   - "src/compiler/compile/compiler_warnings.ts:83:10         tokenlist           U       case 'tokenlist':"
   - "src/compiler/compile/compiler_warnings.ts:167:19        Screenreaders       U       message: 'A11y: Screenreaders already announce <img"
-  - "src/compiler/compile/compiler_warnings.ts:217:15        eachblock           U       invalid_rest_eachblock_binding: (rest_element"
+  - "src/compiler/compile/compiler_warnings.ts:221:15        eachblock           U       invalid_rest_eachblock_binding: (rest_element"
   - "src/compiler/compile/Component.ts:25:8          fuzzymatch      U       import fuzzymatch from '../utils/fuzzymatch"
   - "src/compiler/compile/Component.ts:82:2          hoistable       U       hoistable_nodes: Set<Node> = new"
   - "src/compiler/compile/css/Selector.ts:296:17         combinators     U       // TODO other combinators"
@@ -276,10 +276,10 @@ issues:
   - "src/compiler/compile/css/Stylesheet.ts:224:17       atrules         U       // TODO other atrules"
   - "src/compiler/compile/css/Stylesheet.ts:230:15       atrule          U       // if the atrule has children, leave"
   - "src/compiler/compile/nodes/Element.ts:67:12         labelable       U       const a11y_labelable = new Set(["
-  - "src/compiler/compile/nodes/Element.ts:541:13        proptypes       U       // aria-proptypes"
-  - "src/compiler/compile/nodes/Element.ts:717:46        noopener        U       _blank\" should have noopener or noreferrer: https"
-  - "src/compiler/compile/nodes/Element.ts:717:58        noreferrer      U       should have noopener or noreferrer: https://developer.chrome"
-  - "src/compiler/compile/nodes/Element.ts:1143:36       aeiou           U       starts_with_vowel = /^[aeiou]/;"
+  - "src/compiler/compile/nodes/Element.ts:597:13        proptypes       U       // aria-proptypes"
+  - "src/compiler/compile/nodes/Element.ts:788:46        noopener        U       _blank\" should have noopener or noreferrer: https"
+  - "src/compiler/compile/nodes/Element.ts:788:58        noreferrer      U       should have noopener or noreferrer: https://developer.chrome"
+  - "src/compiler/compile/nodes/Element.ts:1214:36       aeiou           U       starts_with_vowel = /^[aeiou]/;"
   - "src/compiler/compile/nodes/shared/get_const_tags.ts:21:9        consts      U       const consts_nodes = const_tags.map"
   - "src/compiler/compile/nodes/shared/is_contextual.ts:13:5         hoistables      U       // hoistables, module declarations"
   - "src/compiler/compile/nodes/shared/Node.ts:17:10         innerhtml       U       can_use_innerhtml: boolean;"
@@ -296,14 +296,14 @@ issues:
   - "src/compiler/compile/render_dom/wrappers/Element/fix_attribute_casing.ts:1:1343         onbegin     U       offset onabort onactivate onbegin onclick onend onerror"
   - "src/compiler/compile/render_dom/wrappers/Element/fix_attribute_casing.ts:1:1458         onrepeat    U       onmouseover onmouseup onrepeat onresize onscroll onunload"
   - "src/compiler/compile/render_dom/wrappers/Element/index.ts:68:18         elementresize       U       event_names: ['elementresize'],"
-  - "src/compiler/compile/render_dom/wrappers/Element/index.ts:430:97        unclaimable         U       nodes`); // if we're in unclaimable territory, i.e. <head"
-  - "src/compiler/compile/render_dom/wrappers/Element/index.ts:477:31        outgroup            U       that belong to the same outgroup as an outroing element"
-  - "src/compiler/compile/render_dom/wrappers/Element/index.ts:477:46        outroing            U       same outgroup as an outroing element..."
-  - "src/compiler/compile/render_dom/wrappers/Element/index.ts:482:11        textcontent         U       // skip textcontent for <template>. append"
-  - "src/compiler/compile/render_dom/wrappers/Element/index.ts:503:6         quasis              U       quasis: []"
-  - "src/compiler/compile/render_dom/wrappers/Element/index.ts:693:62        animationframe      U       name(`${this.var.name}_animationframe`);"
-  - "src/compiler/compile/render_dom/wrappers/Element/index.ts:768:16        initialise          U       const should_initialise = ("
-  - "src/compiler/compile/render_dom/wrappers/Element/index.ts:1058:37       outro'd             U       hide elements that have outro'd (unless they belong"
+  - "src/compiler/compile/render_dom/wrappers/Element/index.ts:434:97        unclaimable         U       nodes`); // if we're in unclaimable territory, i.e. <head"
+  - "src/compiler/compile/render_dom/wrappers/Element/index.ts:481:31        outgroup            U       that belong to the same outgroup as an outroing element"
+  - "src/compiler/compile/render_dom/wrappers/Element/index.ts:481:46        outroing            U       same outgroup as an outroing element..."
+  - "src/compiler/compile/render_dom/wrappers/Element/index.ts:486:11        textcontent         U       // skip textcontent for <template>. append"
+  - "src/compiler/compile/render_dom/wrappers/Element/index.ts:507:6         quasis              U       quasis: []"
+  - "src/compiler/compile/render_dom/wrappers/Element/index.ts:698:62        animationframe      U       name(`${this.var.name}_animationframe`);"
+  - "src/compiler/compile/render_dom/wrappers/Element/index.ts:773:16        initialise          U       const should_initialise = ("
+  - "src/compiler/compile/render_dom/wrappers/Element/index.ts:1062:37       outro'd             U       hide elements that have outro'd (unless they belong"
   - "src/compiler/compile/render_dom/wrappers/Fragment.ts:49:10          trimmable       U       function trimmable_at(child: INode, next"
   - "src/compiler/compile/render_dom/wrappers/shared/Wrapper.ts:89:37        renderable      U       Wrapper class is not renderable');"
   - "src/compiler/compile/render_dom/wrappers/Window.ts:83:38        onwindow                U       block.get_unique_name(`onwindow${event}`);"
@@ -1667,6 +1667,8 @@ issues:
   - "test/preprocess/samples/script-multiple/output.svelte:2:2           replaceme       U       replaceme"
   - "test/preprocess/samples/script-multiple/output.svelte:8:2           replacemetoo    U       replacemetoo"
   - "test/runtime-puppeteer/samples/component-css-custom-properties-dynamic-svg/_config.js:12:52         qzlp    U       \"10\" class=\"svelte-1qzlp1k\"></circle>"
+  - "test/runtime-puppeteer/samples/component-event-handler-contenteditable-false/_config.js:10:21       bcde        U       component.text = 'bcde';"
+  - "test/runtime-puppeteer/samples/component-event-handler-contenteditable-false/_config.js:11:34       bcdea       U       equal(div.textContent, 'bcdea');"
   - "test/runtime-puppeteer/samples/inline-style-directive-important/_config.js:3:21         szzkfu      U       <h1 class=\"svelte-szzkfu\" style=\"background-color"
   - "test/runtime/samples/animation-css/_config.js:21:7          divs    U       let divs = target.querySelectorAll"
   - "test/runtime/samples/attribute-casing/_config.js:3:15           SHOUTY          U       <div class='SHOUTY'>YELL</div>"
@@ -1745,7 +1747,7 @@ issues:
   - "test/validator/samples/a11y-click-events-have-key-events/warnings.json:4:119        keyup       U       by an on:keydown, on:keyup, or on:keypress event"
   - "test/validator/samples/a11y-figcaption-wrong-place/warnings.json:4:22           figcaption      U       \"message\": \"A11y: <figcaption> must be first or last"
   - "test/validator/samples/a11y-iframe-has-title/warnings.json:4:22         iframe      U       \"message\": \"A11y: <iframe> element should have"
-  - "test/validator/samples/a11y-mouse-events-have-key-events/warnings.json:32:30        mouseout    U       message\": \"A11y: on:mouseout must be accompanied"
+  - "test/validator/samples/a11y-interactive-supports-focus/warnings.json:236:24         mouseout    U       message\": \"A11y: on:mouseout must be accompanied"
   - "test/validator/samples/a11y-no-abstract-roles/input.svelte:6:12         roletype        U       <div role=\"roletype\"/>"
   - "test/validator/samples/a11y-no-abstract-roles/input.svelte:8:12         sectionhead     U       <div role=\"sectionhead\"/>"
   - "test/validator/samples/a11y-no-access-key/warnings.json:2:16        accesskey       U       \"code\": \"a11y-accesskey\","
