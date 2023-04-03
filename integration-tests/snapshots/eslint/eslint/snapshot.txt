@@ -3,7 +3,7 @@ Repository: eslint/eslint
 Url: "https://github.com/eslint/eslint"
 Args: ["**","--exclude=bin/**","--exclude=CHANGELOG.md","--exclude=_data","--exclude=tests/bench/large.js","--exclude=docs/src/_includes","--exclude=docs/src/assets/{fonts,s?css,images}"]
 Lines:
- CSpell: Files checked: 1842, Issues found: 5466 in 1243 files
+ CSpell: Files checked: 1843, Issues found: 5475 in 1244 files
  exit code: 1
 ./Makefile.js:145:88    - Unknown word (ined)               -- followed by the string "ined".
 ./Makefile.js:151:48    - Unknown word (blogpost)           -- render(cat("./templates/blogpost.md.ejs"), renderContext
@@ -360,7 +360,6 @@ Lines:
 ./lib/rules/no-inline-comments.js:61:17     - Unknown word (postamble)  -- postamble = endLine.slice(node
 ./lib/rules/no-inline-comments.js:63:19     - Unknown word (Postamble)  -- isPostambleEmpty = !postamble;
 ./lib/rules/no-invalid-regexp.js:13:22     - Unknown word (dgimsuy)    -- const validFlags = /[dgimsuy]/gu;
-./lib/rules/no-misleading-character-class.js:15:7      - Unknown word (REGEXPP)    -- const REGEXPP_LATEST_ECMA_VERSION
 ./lib/rules/no-mixed-requires.js:182:62    - Unknown word (Declarators) -- The list of VariableDeclarators.
 ./lib/rules/no-mixed-requires.js:78:66     - Unknown word (iojs)       -- per nodejs v0.12.2 and iojs v0.7.1
 ./lib/rules/no-new-native-nonconstructor.js:32:18     - Unknown word (Nonconstructor) -- noNewNonconstructor: "`{{name}}` cannot
@@ -380,7 +379,8 @@ Lines:
 ./lib/rules/prefer-object-spread.js:174:4     - Unknown word (Autofixes)   -- * Autofixes the Object.assign call
 ./lib/rules/prefer-object-spread.js:177:24    - Unknown word (autofixer)   -- @returns {Function} autofixer - replaces the Object
 ./lib/rules/prefer-object-spread.js:62:42     - Unknown word (sourcecode) -- sourceCode in context sourcecode object
-./lib/rules/prefer-regex-literals.js:256:21    - Unknown word (Regexpp)    -- function getRegexppEcmaVersion(ecmaVersion
+./lib/rules/prefer-regex-literals.js:16:9      - Unknown word (REGEXPP)    -- const { REGEXPP_LATEST_ECMA_VERSION
+./lib/rules/prefer-regex-literals.js:255:21    - Unknown word (Regexpp)    -- function getRegexppEcmaVersion(ecmaVersion
 ./lib/rules/quotes.js:41:17     - Unknown word (unescaping) -- * escaping and unescaping as necessary.
 ./lib/rules/sort-vars.js:53:23     - Unknown word (unfixable)  -- const unfixable = idDeclarations.some
 ./lib/rules/space-unary-ops.js:130:28    - Unknown word (Doesnt)     -- function verifyWordDoesntHaveSpaces(node, firstToken
@@ -457,10 +457,10 @@ Lines:
 ./tests/lib/linter/source-code-fixer.js:77:19     - Unknown word (removeend)    -- message: "removeend",
 ./tests/lib/linter/source-code-fixer.js:84:19     - Unknown word (nofix)        -- message: "nofix"
 ./tests/lib/options.js:359:71    - Unknown word (morerules)  -- trcOptions.parse("--rulesdir /morerules");
-./tests/lib/rule-tester/flat-rule-tester.js:1102:36   - Unknown word (somefile)   -- filename: "somefile.js"
-./tests/lib/rule-tester/flat-rule-tester.js:2227:33   - Unknown word (outpt)      -- outpt: "var baz;"
-./tests/lib/rule-tester/flat-rule-tester.js:2580:15   - Unknown word (Subclassing) -- describe("Subclassing", () => {
-./tests/lib/rule-tester/flat-rule-tester.js:987:22    - Unknown word (noeval)     -- "noeval('foo')"
+./tests/lib/rule-tester/flat-rule-tester.js:1104:36   - Unknown word (somefile)   -- filename: "somefile.js"
+./tests/lib/rule-tester/flat-rule-tester.js:2229:33   - Unknown word (outpt)      -- outpt: "var baz;"
+./tests/lib/rule-tester/flat-rule-tester.js:2582:15   - Unknown word (Subclassing) -- describe("Subclassing", () => {
+./tests/lib/rule-tester/flat-rule-tester.js:989:22    - Unknown word (noeval)     -- "noeval('foo')"
 ./tests/lib/rules/array-bracket-newline.js:57:50     - Unknown word (ndosomething) -- [\nfunction foo() {\ndosomething();\n}\n];",
 ./tests/lib/rules/array-bracket-spacing.js:51:47     - Unknown word (n'qux)      -- [{\n'bar': 'baz', \n'qux': [{ 'bar': 'baz' }
 ./tests/lib/rules/array-bracket-spacing.js:51:76     - Unknown word (n'quxx)     -- { 'bar': 'baz' }], \n'quxx': 1 \n}]", options:
@@ -545,8 +545,9 @@ Lines:
 ./tests/lib/rules/prefer-template.js:168:27    - Unknown word (unescapes)  -- code: "foo + 'unescapes an escaped single quote
 ./tests/lib/rules/quotes.js:532:24    - Unknown word (notoctal)   -- code: "var notoctal = '\\0'",
 ./tests/lib/rules/require-unicode-regexp.js:26:15     - Unknown word (gimuy)      -- "/foo/gimuy",
-./tests/lib/rules/require-unicode-regexp.js:33:25     - Unknown word (gimu)       -- "const flags = 'gimu'; new RegExp('foo',
-./tests/lib/rules/require-unicode-regexp.js:52:25     - Unknown word (gimy)       -- code: "/foo/gimy",
+./tests/lib/rules/require-unicode-regexp.js:36:25     - Unknown word (gimu)       -- "const flags = 'gimu'; new RegExp('foo',
+./tests/lib/rules/require-unicode-regexp.js:71:25     - Unknown word (gimy)       -- code: "/foo/gimy",
+./tests/lib/rules/require-unicode-regexp.js:77:39     - Unknown word (gimyu)      -- output: "/foo/gimyu"
 ./tests/lib/rules/semi.js:119:66    - Unknown word (mylib)      -- named2 } from 'src/mylib';", parserOptions:
 ./tests/lib/rules/sort-keys.js:261:24    - Unknown word (abce)       -- // abce
 ./tests/lib/rules/spaced-comment.js:115:54    - Unknown word (xmldoc)     -- comment\n//----\n/// xmldoc style comment\n//!<

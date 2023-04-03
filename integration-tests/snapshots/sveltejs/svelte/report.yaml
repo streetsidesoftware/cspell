@@ -3,9 +3,9 @@ Repository: sveltejs/svelte
 Url: https://github.com/sveltejs/svelte.git
 Args: '["**"]'
 Summary:
-  files: 5376
-  filesWithIssues: 502
-  issues: 3694
+  files: 5404
+  filesWithIssues: 514
+  issues: 3720
   errors: 0
 Errors: []
 
@@ -292,7 +292,7 @@ issues:
   - "src/compiler/compile/render_dom/wrappers/Element/Attribute.ts:15:11         textlike                U       const non_textlike_input_types = new Set"
   - "src/compiler/compile/render_dom/wrappers/Element/Attribute.ts:73:26         doublecheck             U       // @ts-ignore todo: doublecheck this, but looks to be"
   - "src/compiler/compile/render_dom/wrappers/Element/Attribute.ts:342:2         allowpaymentrequest     U       allowpaymentrequest: { property_name: 'allowPayme"
-  - "src/compiler/compile/render_dom/wrappers/Element/Attribute.ts:368:33        bgsound                 U       applies_to: ['audio', 'bgsound', 'video'] },"
+  - "src/compiler/compile/render_dom/wrappers/Element/Attribute.ts:367:33        bgsound                 U       applies_to: ['audio', 'bgsound', 'video'] },"
   - "src/compiler/compile/render_dom/wrappers/Element/fix_attribute_casing.ts:1:1343         onbegin     U       offset onabort onactivate onbegin onclick onend onerror"
   - "src/compiler/compile/render_dom/wrappers/Element/fix_attribute_casing.ts:1:1458         onrepeat    U       onmouseover onmouseup onrepeat onresize onscroll onunload"
   - "src/compiler/compile/render_dom/wrappers/Element/index.ts:68:18         elementresize       U       event_names: ['elementresize'],"
@@ -304,7 +304,7 @@ issues:
   - "src/compiler/compile/render_dom/wrappers/Element/index.ts:698:62        animationframe      U       name(`${this.var.name}_animationframe`);"
   - "src/compiler/compile/render_dom/wrappers/Element/index.ts:773:16        initialise          U       const should_initialise = ("
   - "src/compiler/compile/render_dom/wrappers/Element/index.ts:1062:37       outro'd             U       hide elements that have outro'd (unless they belong"
-  - "src/compiler/compile/render_dom/wrappers/Fragment.ts:49:10          trimmable       U       function trimmable_at(child: INode, next"
+  - "src/compiler/compile/render_dom/wrappers/Fragment.ts:50:10          trimmable       U       function trimmable_at(child: INode, next"
   - "src/compiler/compile/render_dom/wrappers/shared/Wrapper.ts:89:37        renderable      U       Wrapper class is not renderable');"
   - "src/compiler/compile/render_dom/wrappers/Window.ts:83:38        onwindow                U       block.get_unique_name(`onwindow${event}`);"
   - "src/compiler/compile/render_dom/wrappers/Window.ts:162:38       onlinestatuschanged     U       block.get_unique_name('onlinestatuschanged');"
@@ -312,6 +312,8 @@ issues:
   - "src/compiler/compile/utils/__test__.ts:8:2          CONTENTEDITABLE     U       CONTENTEDITABLE_BINDINGS"
   - "src/compiler/compile/utils/contenteditable.ts:28:45         contentenditable    U       node's attributes are 'contentenditable'."
   - "src/compiler/parse/errors.ts:61:22          autoclosed      U       invalid_closing_tag_autoclosed: (name: string, reason"
+  - "src/compiler/parse/read/css-tree-cq/css_tree_parse.ts:1:8           nocheck     U       // @ts-nocheck"
+  - "src/compiler/parse/read/css-tree-cq/css_tree_parse.ts:4:65          csstree     U       modules/css-tree/dist/csstree.esm.js';"
   - "src/compiler/parse/utils/entities.ts:35:3           leftrightsquigarrow     U       'leftrightsquigarrow;': 8621,"
   - "src/compiler/parse/utils/entities.ts:39:3           Longleftrightarrow      U       'Longleftrightarrow;': 10234,"
   - "src/compiler/parse/utils/entities.ts:50:3           blacktriangleright      U       'blacktriangleright;': 9656,"
@@ -1591,7 +1593,7 @@ issues:
   - "src/compiler/utils/globals.ts:785:3         onwebkittransitionend           U       'onwebkittransitionend',"
   - "src/compiler/utils/mapped_code.ts:114:6         unswitched      U       // unswitched loops are faster"
   - "src/runtime/action/index.ts:13:5        newprop     U       * newprop?: string;"
-  - "src/runtime/internal/dom.ts:446:194     dont    U       createNode: () => R, dontUpdateLastIndex: boolean"
+  - "src/runtime/internal/dom.ts:450:194     dont    U       createNode: () => R, dontUpdateLastIndex: boolean"
   - "src/runtime/internal/scheduler.ts:53:5          flushidx        U       let flushidx = 0; // Do *not* move"
   - "src/runtime/internal/scheduler.ts:57:5          Reentrancy      U       // Reentrancy is ok afterwards for"
   - "src/runtime/internal/ssr.ts:6:70        FDEF        U       [\\s'\">/=\\u{FDD0}-\\u{FDEF}\\u{FFFE}\\u{FFFF}\\u{"
@@ -1675,6 +1677,7 @@ issues:
   - "test/runtime/samples/attribute-casing/_config.js:6:25           hellooooo       U       text textLength=100>hellooooo</text>"
   - "test/runtime/samples/attribute-casing/main.svelte:3:6           viewbox         U       <svg viewbox='0 0 100 100' id='one"
   - "test/runtime/samples/attribute-casing/main.svelte:4:8           textlength      U       <text textlength=100>hellooooo</text"
+  - "test/runtime/samples/attribute-microdata/_config.js:1:84        microdata       U       node with regards to microdata attributes https://developer"
   - "test/runtime/samples/attribute-null-classnames-no-style/_config.js:19:32        nulltest            U       equal(div.className, 'nulltest');"
   - "test/runtime/samples/attribute-null-classnames-no-style/_config.js:23:32        undefinedtest       U       equal(div.className, 'undefinedtest');"
   - "test/runtime/samples/binding-this-with-context/_config.js:8:7           elems       U       let elems = target.querySelectorAll"
@@ -1682,10 +1685,11 @@ issues:
   - "test/runtime/samples/component-binding-each-remount-keyed/main.svelte:14:6          vals    U       let vals = [1, 2, 3];"
   - "test/runtime/samples/component-slot-fallback-2/_config.js:3:26          Blub    U       ssrHtml: '<input value=\"Blub\"> <input value=\"Blub"
   - "test/runtime/samples/component-template-inline-mutation/_config.js:3:9          btns    U       const btns = target.querySelectorAll"
+  - "test/runtime/samples/const-tag-await-then-destructuring-computed-in-computed/main.svelte:23:28          leng    U       await promise2 catch { [`leng${th}`]: l, [`wid${th"
   - "test/runtime/samples/const-tag-each-const/_config.js:17:13          nums    U       component.nums = [1, 2, 3];"
   - "test/runtime/samples/const-tag-each-const/main.svelte:3:6           foos    U       let foos = ["
-  - "test/runtime/samples/const-tag-each-destructure-computed-props/main.svelte:34:27        sideone     U       side${area}${i++}`]: sideone,"
-  - "test/runtime/samples/const-tag-each-destructure-computed-props/main.svelte:35:27        sidetwo     U       side${area}${i++}`]: sidetwo"
+  - "test/runtime/samples/const-tag-each-destructure-computed-in-computed/main.svelte:40:26          sideone     U       side${area}${i++}`]: sideone,"
+  - "test/runtime/samples/const-tag-each-destructure-computed-in-computed/main.svelte:41:26          sidetwo     U       side${area}${i++}`]: sidetwo"
   - "test/runtime/samples/const-tag-hoisting/main.svelte:6:18        hypercubed      U       <div>{n} ^ 4 = {hypercubed}</div>"
   - "test/runtime/samples/css-vars-escape/_config.js:3:70        uhoh    U       onload=&quot;alert('uhoh')&quot; data-nothing"
   - "test/runtime/samples/deconflict-globals/_config.js:8:34         bestest     U       hereby declare Svelte the bestest framework.</p>"
