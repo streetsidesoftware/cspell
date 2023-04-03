@@ -24,7 +24,7 @@
     "clean-dist": "shx rm -rf \"packages/*/dist\"",
     "clean": "shx rm -rf \"{*,*/*}/{.tsbuildinfo,temp,coverage}\" lcov.info && pnpm -r run clean",
     "coverage-collect": "globcat packages/*/coverage/lcov.info > lcov.info",
-    "coverage": "pnpm --stream -r run coverage && pnpm run coverage-collect",
+    "coverage": "pnpm --stream -r --workspace-concurrency=1 run coverage && pnpm run coverage-collect",
     "eslint-fix": "eslint . --fix --cache",
     "eslint-fix-no-cache": "eslint . --fix",
     "ib": "pnpm install && pnpm run build",
@@ -98,7 +98,7 @@
     "@types/node": "^18.15.10",
     "@typescript-eslint/eslint-plugin": "^5.56.0",
     "@typescript-eslint/parser": "^5.56.0",
-    "@vitest/coverage-istanbul": "^0.28.5",
+    "@vitest/coverage-istanbul": "^0.29.8",
     "ajv-cli": "^5.0.0",
     "eslint": "^8.36.0",
     "eslint-config-prettier": "^8.8.0",
@@ -124,6 +124,6 @@
     "tslib": "^2.5.0",
     "typescript": "^5.0.2",
     "vite": "^4.2.1",
-    "vitest": "^0.29.7"
+    "vitest": "^0.29.8"
   }
 }
