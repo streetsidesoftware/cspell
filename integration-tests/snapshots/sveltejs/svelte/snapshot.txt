@@ -3,7 +3,7 @@ Repository: sveltejs/svelte
 Url: "https://github.com/sveltejs/svelte.git"
 Args: ["**"]
 Lines:
- CSpell: Files checked: 5376, Issues found: 3694 in 502 files
+ CSpell: Files checked: 5404, Issues found: 3720 in 514 files
  exit code: 1
 ./CONTRIBUTING.md:22:5      - Unknown word (Triaging)   -- ### Triaging issues and pull requests
 ./CONTRIBUTING.md:36:5      - Unknown word (Roadmap)    -- ### Roadmap
@@ -286,7 +286,7 @@ Lines:
 ./src/compiler/compile/render_dom/wrappers/EachBlock.ts:243:16    - Unknown word (unkeyed)    -- this.render_unkeyed(args);
 ./src/compiler/compile/render_dom/wrappers/Element/Attribute.ts:15:11     - Unknown word (textlike)   -- const non_textlike_input_types = new Set
 ./src/compiler/compile/render_dom/wrappers/Element/Attribute.ts:342:2     - Unknown word (allowpaymentrequest) -- allowpaymentrequest: { property_name: 'allowPayme
-./src/compiler/compile/render_dom/wrappers/Element/Attribute.ts:368:33    - Unknown word (bgsound)             -- applies_to: ['audio', 'bgsound', 'video'] },
+./src/compiler/compile/render_dom/wrappers/Element/Attribute.ts:367:33    - Unknown word (bgsound)             -- applies_to: ['audio', 'bgsound', 'video'] },
 ./src/compiler/compile/render_dom/wrappers/Element/Attribute.ts:73:26     - Unknown word (doublecheck) -- // @ts-ignore todo: doublecheck this, but looks to be
 ./src/compiler/compile/render_dom/wrappers/Element/fix_attribute_casing.ts:1:1343    - Unknown word (onbegin)    -- offset onabort onactivate onbegin onclick onend onerror
 ./src/compiler/compile/render_dom/wrappers/Element/fix_attribute_casing.ts:1:1458    - Unknown word (onrepeat)   -- onmouseover onmouseup onrepeat onresize onscroll onunload
@@ -299,7 +299,7 @@ Lines:
 ./src/compiler/compile/render_dom/wrappers/Element/index.ts:68:18     - Unknown word (elementresize) -- event_names: ['elementresize'],
 ./src/compiler/compile/render_dom/wrappers/Element/index.ts:698:62    - Unknown word (animationframe) -- name(`${this.var.name}_animationframe`);
 ./src/compiler/compile/render_dom/wrappers/Element/index.ts:773:16    - Unknown word (initialise)     -- const should_initialise = (
-./src/compiler/compile/render_dom/wrappers/Fragment.ts:49:10     - Unknown word (trimmable)  -- function trimmable_at(child: INode, next
+./src/compiler/compile/render_dom/wrappers/Fragment.ts:50:10     - Unknown word (trimmable)  -- function trimmable_at(child: INode, next
 ./src/compiler/compile/render_dom/wrappers/Window.ts:162:38    - Unknown word (onlinestatuschanged) -- block.get_unique_name('onlinestatuschanged');
 ./src/compiler/compile/render_dom/wrappers/Window.ts:83:38     - Unknown word (onwindow)   -- block.get_unique_name(`onwindow${event}`);
 ./src/compiler/compile/render_dom/wrappers/shared/Wrapper.ts:89:37     - Unknown word (renderable) -- Wrapper class is not renderable');
@@ -307,6 +307,8 @@ Lines:
 ./src/compiler/compile/utils/__test__.ts:8:2       - Unknown word (CONTENTEDITABLE) -- CONTENTEDITABLE_BINDINGS
 ./src/compiler/compile/utils/contenteditable.ts:28:45     - Unknown word (contentenditable) -- node's attributes are 'contentenditable'.
 ./src/compiler/parse/errors.ts:61:22     - Unknown word (autoclosed) -- invalid_closing_tag_autoclosed: (name: string, reason
+./src/compiler/parse/read/css-tree-cq/css_tree_parse.ts:1:8       - Unknown word (nocheck)    -- // @ts-nocheck
+./src/compiler/parse/read/css-tree-cq/css_tree_parse.ts:4:65      - Unknown word (csstree)    -- modules/css-tree/dist/csstree.esm.js';
 ./src/compiler/parse/utils/entities.ts:1000:3    - Unknown word (subsub)     -- 'subsub;': 10965,
 ./src/compiler/parse/utils/entities.ts:1001:3    - Unknown word (subsup)     -- 'subsup;': 10963,
 ./src/compiler/parse/utils/entities.ts:1002:3    - Unknown word (succeq)     -- 'succeq;': 10928,
@@ -1586,7 +1588,7 @@ Lines:
 ./src/compiler/utils/globals.ts:785:3     - Unknown word (onwebkittransitionend)      -- 'onwebkittransitionend',
 ./src/compiler/utils/mapped_code.ts:114:6     - Unknown word (unswitched) -- // unswitched loops are faster
 ./src/runtime/action/index.ts:13:5      - Unknown word (newprop)    -- * newprop?: string;
-./src/runtime/internal/dom.ts:446:194   - Unknown word (dont)       -- createNode: () => R, dontUpdateLastIndex: boolean
+./src/runtime/internal/dom.ts:450:194   - Unknown word (dont)       -- createNode: () => R, dontUpdateLastIndex: boolean
 ./src/runtime/internal/scheduler.ts:53:5      - Unknown word (flushidx)   -- let flushidx = 0;  // Do *not* move
 ./src/runtime/internal/scheduler.ts:57:5      - Unknown word (Reentrancy) -- // Reentrancy is ok afterwards for
 ./src/runtime/internal/ssr.ts:6:256     - Unknown word (AFFFE)      -- u{9FFFE}\u{9FFFF}\u{AFFFE}\u{AFFFF}\u{BFFFE}\u
@@ -1670,6 +1672,7 @@ Lines:
 ./test/runtime/samples/attribute-casing/_config.js:6:25      - Unknown word (hellooooo)  -- text textLength=100>hellooooo</text>
 ./test/runtime/samples/attribute-casing/main.svelte:3:6       - Unknown word (viewbox)    -- <svg viewbox='0 0 100 100' id='one
 ./test/runtime/samples/attribute-casing/main.svelte:4:8       - Unknown word (textlength) -- <text textlength=100>hellooooo</text
+./test/runtime/samples/attribute-microdata/_config.js:1:84      - Unknown word (microdata)  -- node with regards to microdata attributes https://developer
 ./test/runtime/samples/attribute-null-classnames-no-style/_config.js:19:32     - Unknown word (nulltest)   -- equal(div.className, 'nulltest');
 ./test/runtime/samples/attribute-null-classnames-no-style/_config.js:23:32     - Unknown word (undefinedtest) -- equal(div.className, 'undefinedtest');
 ./test/runtime/samples/binding-this-with-context/_config.js:8:7       - Unknown word (elems)      -- let elems = target.querySelectorAll
@@ -1677,10 +1680,11 @@ Lines:
 ./test/runtime/samples/component-binding-each-remount-keyed/main.svelte:14:6      - Unknown word (vals)       -- let vals = [1, 2, 3];
 ./test/runtime/samples/component-slot-fallback-2/_config.js:3:26      - Unknown word (Blub)       -- ssrHtml: '<input value="Blub"> <input value="Blub
 ./test/runtime/samples/component-template-inline-mutation/_config.js:3:9       - Unknown word (btns)       -- const btns = target.querySelectorAll
+./test/runtime/samples/const-tag-await-then-destructuring-computed-in-computed/main.svelte:23:28     - Unknown word (leng)       -- await promise2 catch { [`leng${th}`]: l, [`wid${th
 ./test/runtime/samples/const-tag-each-const/_config.js:17:13     - Unknown word (nums)       -- component.nums = [1, 2, 3];
 ./test/runtime/samples/const-tag-each-const/main.svelte:3:6       - Unknown word (foos)       -- let foos = [
-./test/runtime/samples/const-tag-each-destructure-computed-props/main.svelte:34:27     - Unknown word (sideone)    -- side${area}${i++}`]: sideone,
-./test/runtime/samples/const-tag-each-destructure-computed-props/main.svelte:35:27     - Unknown word (sidetwo)    -- side${area}${i++}`]: sidetwo
+./test/runtime/samples/const-tag-each-destructure-computed-in-computed/main.svelte:40:26     - Unknown word (sideone)    -- side${area}${i++}`]: sideone,
+./test/runtime/samples/const-tag-each-destructure-computed-in-computed/main.svelte:41:26     - Unknown word (sidetwo)    -- side${area}${i++}`]: sidetwo
 ./test/runtime/samples/const-tag-hoisting/main.svelte:6:18      - Unknown word (hypercubed) -- <div>{n} ^ 4 = {hypercubed}</div>
 ./test/runtime/samples/css-vars-escape/_config.js:3:70      - Unknown word (uhoh)       -- onload=&quot;alert('uhoh')&quot; data-nothing
 ./test/runtime/samples/deconflict-globals/_config.js:8:34      - Unknown word (bestest)    -- hereby declare Svelte the bestest framework.</p>
