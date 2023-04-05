@@ -12,12 +12,8 @@
     "./cspell-ext.json": "./cspell-ext.json"
   },
   "scripts": {
-    "build-software-terms": "cat source-files.txt | xargs cspell-tools-cli compile --split --no-compress -o ./dict -M softwareTerms.txt",
-    "build-networking-terms": "cat source-files-networking.txt | xargs cspell-tools-cli compile --split --no-compress -o ./dict -M networkingTerms.txt",
-    "build": "npm run build-software-terms && npm run build-networking-terms",
-    "test": "npm run test-software-terms && npm run test-networking-terms",
-    "test-software-terms": "cat \"src/software-terms.txt\" | cspell -v -c ./cspell-ext.json \"--local=*\" \"--languageId=*\" stdin",
-    "test-networking-terms": "cat source-files-networking.txt | xargs cat | cspell -v \"--local=*\" \"--languageId=*\" stdin"
+    "build": "cspell-tools-cli build",
+    "test": "cspell -c ./cspell-ext.json \"--local=*\" \"--languageId=*\" src/*.txt"
   },
   "repository": {
     "type": "git",

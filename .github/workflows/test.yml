@@ -42,10 +42,10 @@ jobs:
     strategy:
       matrix:
         node-version:
-          # List of supported node versions (latest is tested in `test-os`)
-          - 14.x
+          # List of supported node versions (latest is tested in `test-os`)          
           - 16.x
           - 18.x
+          - 19.x
 
         os:
           - ubuntu-latest
@@ -123,7 +123,7 @@ jobs:
       matrix:
         node-version:
           # List of supported node versions (latest is tested in `test-os`)
-          - 14.x
+          - 16.x
           - 19.x
 
         os:
