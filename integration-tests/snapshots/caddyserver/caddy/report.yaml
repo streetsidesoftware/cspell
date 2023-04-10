@@ -4,8 +4,8 @@ Url: https://github.com/caddyserver/caddy.git
 Args: '["**/*.go"]'
 Summary:
   files: 231
-  filesWithIssues: 209
-  issues: 3335
+  filesWithIssues: 210
+  issues: 3348
   errors: 0
 Errors: []
 
@@ -268,7 +268,7 @@ issues:
   - "modules/caddyhttp/reverseproxy/reverseproxy.go:810:32       backported          U       Forward 1xx status codes, backported from https://github"
   - "modules/caddyhttp/reverseproxy/reverseproxy.go:1380:56      libcurl             U       standard but still sent by libcurl and rejected by e.g"
   - "modules/caddyhttp/reverseproxy/reverseproxy.go:1384:16      canonicalized       U       \"Te\", // canonicalized version of \"TE\""
-  - "modules/caddyhttp/reverseproxy/selectionpolicies.go:518:65      hashable    U       from pool based on a hashable string s."
+  - "modules/caddyhttp/reverseproxy/selectionpolicies.go:601:65      hashable    U       from pool based on a hashable string s."
   - "modules/caddyhttp/reverseproxy/streaming.go:68:22       cancelation     U       // Ensure that the cancelation of a request closes"
   - "modules/caddyhttp/reverseproxy/streaming.go:123:2       errc            U       errc := make(chan error,"
   - "modules/caddyhttp/reverseproxy/streaming.go:202:7       rerr            U       nr, rerr := src.Read(buf)"
