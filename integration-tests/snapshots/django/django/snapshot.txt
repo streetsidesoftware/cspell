@@ -3,7 +3,7 @@ Repository: django/django
 Url: "https://github.com/django/django.git"
 Args: ["**/*.{md,py}"]
 Lines:
- CSpell: Files checked: 2747, Issues found: 8323 in 916 files
+ CSpell: Files checked: 2748, Issues found: 8323 in 916 files
  exit code: 1
 ./django/__init__.py:12:26     - Unknown word (urlresolvers) -- Set the thread-local urlresolvers script prefix if `set
 ./django/apps/config.py:217:40    - Unknown word (qualname)   -- app_config_class.__qualname__,
@@ -353,8 +353,8 @@ Lines:
 ./django/contrib/postgres/operations.py:2:16      - Unknown word (oids)       -- get_citext_oids,
 ./django/contrib/postgres/operations.py:92:22     - Unknown word (pgcrypto)   -- self.name = "pgcrypto"
 ./django/contrib/postgres/search.py:145:20    - Unknown word (setweight)  -- sql = "setweight({}, {})".format(sql
-./django/contrib/postgres/search.py:192:19    - Unknown word (plainto)    -- "plain": "plainto_tsquery",
-./django/contrib/postgres/search.py:193:20    - Unknown word (phraseto)   -- "phrase": "phraseto_tsquery",
+./django/contrib/postgres/search.py:189:19    - Unknown word (plainto)    -- "plain": "plainto_tsquery",
+./django/contrib/postgres/search.py:190:20    - Unknown word (phraseto)   -- "phrase": "phraseto_tsquery",
 ./django/contrib/postgres/search.py:34:17     - Unknown word (tsvector)   -- return "tsvector"
 ./django/contrib/postgres/search.py:39:17     - Unknown word (tsquery)    -- return "tsquery"
 ./django/contrib/postgres/search.py:68:21     - Unknown word (regconfig)  -- return "%s::regconfig" % sql, params
@@ -411,9 +411,9 @@ Lines:
 ./django/core/files/storage/memory.py:2:52      - Unknown word (Seán)            -- BSD) by Cody Soyland, Seán Hayes, Tore Birkeland
 ./django/core/files/storage/memory.py:2:69      - Unknown word (Birkeland)       -- Soyland, Seán Hayes, Tore Birkeland,
 ./django/core/files/storage/memory.py:3:10      - Unknown word (Presta)          -- and Nick Presta.
-./django/core/handlers/asgi.py:173:39    - Unknown word (asend)        -- signals.request_started.asend(sender=self.__class
-./django/core/handlers/asgi.py:267:47    - Unknown word (aiter)        -- aclosing() when consuming aiter.
-./django/core/handlers/asgi.py:71:19     - Unknown word (multiprocess) -- "wsgi.multiprocess": True,
+./django/core/handlers/asgi.py:174:39    - Unknown word (asend)        -- signals.request_started.asend(sender=self.__class
+./django/core/handlers/asgi.py:302:47    - Unknown word (aiter)        -- aclosing() when consuming aiter.
+./django/core/handlers/asgi.py:72:19     - Unknown word (multiprocess) -- "wsgi.multiprocess": True,
 ./django/core/handlers/base.py:193:58    - Unknown word (subthread)  -- synchronous view, run it in a subthread.
 ./django/core/handlers/wsgi.py:177:53    - Unknown word (lighttpd)   -- not every web server (lighttpd!) passes this
 ./django/core/handlers/wsgi.py:19:38     - Unknown word (werkzeug)   -- implementation from werkzeug.wsgi.LimitedStream
@@ -533,8 +533,8 @@ Lines:
 ./django/db/backends/oracle/operations.py:98:30     - Unknown word (IYYY)       -- extract_param = "IYYY"
 ./django/db/backends/oracle/schema.py:187:40    - Unknown word (uppercased) -- properly shortened and uppercased identifier as returned
 ./django/db/backends/oracle/utils.py:96:25     - Unknown word (makedsn)    -- return Database.makedsn(host, int(settings_dict
-./django/db/backends/postgresql/base.py:239:73    - Unknown word (poolers)     -- default to keep connection poolers
-./django/db/backends/postgresql/base.py:455:13    - Unknown word (qparts)      -- qparts = [sql.SQL("SELECT
+./django/db/backends/postgresql/base.py:245:73    - Unknown word (poolers)     -- default to keep connection poolers
+./django/db/backends/postgresql/base.py:454:13    - Unknown word (qparts)      -- qparts = [sql.SQL("SELECT
 ./django/db/backends/postgresql/base.py:53:62     - Unknown word (tzloader)   -- adapters_template, register_tzloader
 ./django/db/backends/postgresql/base.py:55:39     - Unknown word (timestamptz) -- OID = adapters.types["timestamptz"].oid
 ./django/db/backends/postgresql/base.py:55:5      - Unknown word (TIMESTAMPTZ) -- TIMESTAMPTZ_OID = adapters.types
@@ -691,16 +691,16 @@ Lines:
 ./django/db/models/sql/datastructures.py:30:26     - Unknown word (sometable)  -- LEFT OUTER JOIN "sometable" T1
 ./django/db/models/sql/datastructures.py:31:14     - Unknown word (othertable) -- ON ("othertable"."sometable_id" = "sometable
 ./django/db/models/sql/datastructures.py:67:24     - Unknown word (nullabled)  -- # Is this join nullabled?
-./django/db/models/sql/query.py:1357:28   - Unknown word (unreffing)     -- is responsible for unreffing the joins used.
-./django/db/models/sql/query.py:1466:40   - Unknown word (someval)       -- is null, then col != someval will result in SQL
-./django/db/models/sql/query.py:2299:44   - Unknown word (datastructure) -- that we can use a set datastructure. We do the foo__bar
-./django/db/models/sql/query.py:2562:5    - Unknown word (dirn)          -- dirn = ORDER_DIR[default
+./django/db/models/sql/query.py:1361:28   - Unknown word (unreffing)     -- is responsible for unreffing the joins used.
+./django/db/models/sql/query.py:1470:40   - Unknown word (someval)       -- is null, then col != someval will result in SQL
+./django/db/models/sql/query.py:2303:44   - Unknown word (datastructure) -- that we can use a set datastructure. We do the foo__bar
+./django/db/models/sql/query.py:2566:5    - Unknown word (dirn)          -- dirn = ORDER_DIR[default
 ./django/db/models/sql/query.py:275:58    - Unknown word (unsubstituted) -- params() to see the unsubstituted string).
 ./django/db/models/sql/query.py:291:53    - Unknown word (deepcopied)    -- work when a Query is deepcopied."""
 ./django/db/models/sql/query.py:454:40    - Unknown word (realising)     -- # requires complex realising.
-./django/db/models/sql/query.py:464:50    - Unknown word (repointed)     -- sure the aggregates are repointed to them.
-./django/db/models/sql/query.py:615:15    - Unknown word (revrel)        -- # revrel__col=1 & revrel__col
-./django/db/models/sql/query.py:828:20    - Unknown word (louter)        -- parent_louter = (
+./django/db/models/sql/query.py:467:50    - Unknown word (repointed)     -- sure the aggregates are repointed to them.
+./django/db/models/sql/query.py:618:15    - Unknown word (revrel)        -- # revrel__col=1 & revrel__col
+./django/db/models/sql/query.py:832:20    - Unknown word (louter)        -- parent_louter = (
 ./django/db/transaction.py:162:17    - Unknown word (reentrancy) -- This allows reentrancy even if the same AtomicWrappe
 ./django/db/utils.py:121:26    - Unknown word (ispkg)      -- for _, name, ispkg in pkgutil.iter_modules
 ./django/db/utils.py:125:21    - Unknown word (reprs)      -- backend_reprs = map(repr, sorted(builtin
@@ -1333,10 +1333,10 @@ Lines:
 ./tests/admin_widgets/tests.py:960:56    - Unknown word (clocklink)            -- find_element(By.ID, "clocklink0")
 ./tests/admin_widgets/tests.py:971:45    - Unknown word (timelist)             -- XPATH, "//ul[@class='timelist']/li/a"
 ./tests/aggregation/test_filter_argument.py:142:9     - Unknown word (aggs)       -- aggs = Author.objects.annotate
-./tests/aggregation/tests.py:1053:9    - Unknown word (thedate)    -- thedate = timezone.now()
-./tests/aggregation/tests.py:1069:14   - Unknown word (nonaggregate) -- def test_nonaggregate_aggregation_throws(self
-./tests/aggregation/tests.py:1680:45   - Unknown word (outeref)      -- ggregation_exists_multivalued_outeref(self):
-./tests/aggregation/tests.py:572:35    - Unknown word (xprice)     -- Book.objects.annotate(xprice=F("price"))
+./tests/aggregation/tests.py:1054:9    - Unknown word (thedate)    -- thedate = timezone.now()
+./tests/aggregation/tests.py:1070:14   - Unknown word (nonaggregate) -- def test_nonaggregate_aggregation_throws(self
+./tests/aggregation/tests.py:1681:45   - Unknown word (outeref)      -- ggregation_exists_multivalued_outeref(self):
+./tests/aggregation/tests.py:573:35    - Unknown word (xprice)     -- Book.objects.annotate(xprice=F("price"))
 ./tests/aggregation_regress/tests.py:1620:9    - Unknown word (wmpk)         -- wmpk = WithManualPK.objects
 ./tests/aggregation_regress/tests.py:162:29    - Unknown word (Pappa's)    -- name="Mamma and Pappa's Books",
 ./tests/aggregation_regress/tests.py:1753:14   - Unknown word (fobj)         -- def test_fobj_group_by(self):
@@ -1468,7 +1468,7 @@ Lines:
 ./tests/backends/oracle/tests.py:47:68     - Unknown word (sysdate)                                                     -- 1936-12-29 00:00' < sysdate"
 ./tests/backends/postgresql/test_introspection.py:24:77     - Unknown word (pers)       -- person_id_seq RENAME TO pers_seq")
 ./tests/backends/postgresql/test_server_side_cursors.py:56:9      - Unknown word (asser)      -- def asserNotUsesCursor(self, queryset
-./tests/backends/postgresql/tests.py:314:15    - Unknown word (awef)       -- a = ["awef"]
+./tests/backends/postgresql/tests.py:344:15    - Unknown word (awef)       -- a = ["awef"]
 ./tests/backends/sqlite/test_operations.py:36:40     - Unknown word (verylongmodelnamezzzzzzzzzzzzzzzzzzzzzz) -- DELETE FROM "backends_verylongmodelnamezzzzzzzzzzzzzzzzzzzzzz'
 ./tests/backends/sqlite/test_operations.py:84:24     - Unknown word (verylongmodelnamezzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz) -- "'backends_verylongmodelnamezzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz"
 ./tests/backends/test_utils.py:77:24     - Unknown word (Nera)       -- ("Asia/Ust+Nera", ("Asia/Ust+Nera",
@@ -1578,7 +1578,7 @@ Lines:
 ./tests/dbshell/test_postgresql.py:137:21    - Unknown word (sésame)       -- password = "sésame"
 ./tests/dbshell/test_postgresql.py:36:14     - Unknown word (nopass)     -- def test_nopass(self):
 ./tests/dbshell/test_postgresql.py:94:41     - Unknown word (custompgpass) -- "passfile": "~/.custompgpass",
-./tests/decorators/tests.py:317:16    - Unknown word (argumented) -- # Test for argumented decorator
+./tests/decorators/tests.py:308:16    - Unknown word (argumented) -- # Test for argumented decorator
 ./tests/defer_regress/tests.py:148:22    - Unknown word (ofield)     -- # side has o2ofield or unique FK) - the
 ./tests/defer_regress/tests.py:300:21    - Unknown word (defered)    -- def test_delete_defered_model(self):
 ./tests/delete/tests.py:151:25    - Unknown word (qscount)    -- def test_do_nothing_qscount(self):
@@ -2385,12 +2385,12 @@ Lines:
 ./tests/postgres_tests/test_operations.py:188:36    - Unknown word (extention)  -- "test_allow_create_extention"
 ./tests/postgres_tests/test_operations.py:361:21    - Unknown word (phonebook)  -- "german_phonebook_test",
 ./tests/postgres_tests/test_operations.py:363:29    - Unknown word (phonebk)    -- locale="de-u-co-phonebk",
-./tests/postgres_tests/test_search.py:100:35    - Unknown word (cadeau)     -- dialogue="Oh. Un beau cadeau. Oui oui.",
-./tests/postgres_tests/test_search.py:154:49    - Unknown word (cadeaux)    -- vector=SearchQuery("cadeaux", config="french")
-./tests/postgres_tests/test_search.py:206:26    - Unknown word (minstrelbravely) -- ).filter(search="minstrelbravely")
-./tests/postgres_tests/test_search.py:66:50     - Unknown word (Bedemir)    -- objects.create(name="Bedemir")
-./tests/postgres_tests/test_search.py:66:9      - Unknown word (bedemir)    -- bedemir = Character.objects
-./tests/postgres_tests/test_search.py:94:79     - Unknown word (Ramper)     -- Master Ruiz' de lu la Ramper"
+./tests/postgres_tests/test_search.py:153:49    - Unknown word (cadeaux)    -- vector=SearchQuery("cadeaux", config="french")
+./tests/postgres_tests/test_search.py:211:26    - Unknown word (minstrelbravely) -- ).filter(search="minstrelbravely")
+./tests/postgres_tests/test_search.py:65:50     - Unknown word (Bedemir)    -- objects.create(name="Bedemir")
+./tests/postgres_tests/test_search.py:65:9      - Unknown word (bedemir)    -- bedemir = Character.objects
+./tests/postgres_tests/test_search.py:93:79     - Unknown word (Ramper)     -- Master Ruiz' de lu la Ramper"
+./tests/postgres_tests/test_search.py:99:35     - Unknown word (cadeau)     -- dialogue="Oh. Un beau cadeau. Oui oui.",
 ./tests/postgres_tests/test_trigram.py:39:20     - Unknown word (Gumby)      -- field="Gumby rides on the path of
 ./tests/postgres_tests/test_trigram.py:42:68     - Unknown word (Middlesborough) -- trigram_word_similar="Middlesborough"),
 ./tests/prefetch_related/test_prefetch_related_objects.py:17:48     - Unknown word (Wuthering)  -- objects.create(title="Wuthering Heights")
