@@ -58,13 +58,13 @@ cspell
 with:
 
 ```
-docker run -v -i -t $PWD:/workdir ghcr.io/streetsidesoftware/cspell:latest
+docker run -it -v $PWD:/workdir ghcr.io/streetsidesoftware/cspell:latest
 ```
 
 **Example:**
 
 ```sh
-docker run -v -i -t $PWD:/workdir ghcr.io/streetsidesoftware/cspell:latest lint --help
+docker run -it -v $PWD:/workdir ghcr.io/streetsidesoftware/cspell:latest lint --help
 ```
 
 ## Basic Usage
