@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 7.0.0-alpha.1 (2023-04-14)
+
+**Note:** Version bump only for package test-cspell-strong-weak-map
+
 ## 6.31.2 (2023-04-14)
 
 **Note:** Version bump only for package test-cspell-strong-weak-map
