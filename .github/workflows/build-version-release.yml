@@ -18,14 +18,6 @@ on:
         description: Alpha prerelease
       dry_run:
         description: "Dry Run"
-        type: choice
-        options:
-          - "yes"
-          - "no"
-        default: "yes"
-        required: false
-      dry_run2:
-        description: "Dry Run"
         type: boolean
         default: true
 
@@ -40,7 +32,7 @@ permissions:
 env:
   USE_NEXT: ${{ inputs.prerelease }}
   BUMP: ${{ (inputs.bump != 'auto' && inputs.bump) || '' }}
-  DRY_RUN: ${{ (inputs.dry_run == 'yes' && '--dry-run') || '' }}
+  DRY_RUN: ${{ (inputs.dry_run && '--dry-run') || '' }}
 
 jobs:
   release_version:
