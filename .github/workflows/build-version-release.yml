@@ -104,3 +104,4 @@ jobs:
 
       - name: Push Version
         run: pnpm lerna version --conventional-commits --sync-workspace-lock --changelog-preset conventionalcommits --yes ${{ env.MODE }} ${{ env.DRY_RUN }} ${{ env.BUMP }}
+# cspell:ignore pnpx envinfo conventionalcommits
