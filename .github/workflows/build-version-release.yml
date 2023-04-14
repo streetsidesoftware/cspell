@@ -7,21 +7,19 @@ on:
         description: "Version Bump"
         type: choice
         options:
-          - "alpha"
           - "patch"
           - "minor"
           - "major"
           - "auto"
         default: "auto"
         required: true
+      prerelease:
+        type: boolean
+        description: Alpha prerelease
       dry_run:
         description: "Dry Run"
-        type: choice
-        options:
-          - "yes"
-          - "no"
-        default: "yes"
-        required: false
+        type: boolean
+        default: true
 
   workflow_call:
     secrets:
@@ -32,14 +30,24 @@ permissions:
   contents: read
 
 env:
-  USE_NEXT: ${{ inputs.bump == 'alpha' }}
-  BUMP: ${{ (inputs.bump != 'auto' && inputs.bump != 'alpha' && inputs.bump) || '' }}
-  DRY_RUN: ${{ (inputs.dry_run == 'yes' && '--git-dry-run') || '' }}
+  USE_NEXT: ${{ inputs.prerelease }}
+  BUMP: ${{ (inputs.bump != 'auto' && inputs.bump) || '' }}
+  DRY_RUN: ${{ (inputs.dry_run && '--dry-run') || '' }}
 
 jobs:
   release_version:
     runs-on: ubuntu-latest
     steps:
+      - name: Show Inputs
+        env:
+          INPUTS: ${{ toJSON(inputs) }}
+
+        run: |
+          echo "$INPUTS"
+          echo USE_NEXT: "$USE_NEXT"
+          echo BUMP: "$BUMP"
+          echo DRY_RUN: "$DRY_RUN"
+
       - uses: tibdex/github-app-token@b62528385c34dbc9f38e5f4225ac829252d1ea92 # v1.5 # cspell:ignore tibdex
         if: ${{ !env.DRY_RUN && !inputs.token }}
         id: generate-token
