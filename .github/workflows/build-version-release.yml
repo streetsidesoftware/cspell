@@ -98,5 +98,10 @@ jobs:
       - name: Install
         run: pnpm i
 
+      # - name: Debug
+      #   run: |
+      #     pnpx envinfo --system --npmPackages '@lerna-lite/*' --binaries --browsers
+
       - name: Push Version
-        run: pnpm lerna version --conventional-commits --sync-workspace-lock --yes ${{ env.MODE }} ${{ env.DRY_RUN }} ${{ env.BUMP }}
+        run: pnpm lerna version --conventional-commits --sync-workspace-lock --changelog-preset conventionalcommits --yes ${{ env.MODE }} ${{ env.DRY_RUN }} ${{ env.BUMP }}
+# cspell:ignore pnpx envinfo conventionalcommits
