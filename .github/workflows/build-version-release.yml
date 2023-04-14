@@ -48,10 +48,6 @@ jobs:
           echo BUMP: "$BUMP"
           echo DRY_RUN: "$DRY_RUN"
 
-      - name: Debug
-        run: |
-          npx envinfo --system --npmPackages '@lerna-lite/*' --binaries --browsers
-
       - uses: tibdex/github-app-token@b62528385c34dbc9f38e5f4225ac829252d1ea92 # v1.5 # cspell:ignore tibdex
         if: ${{ !env.DRY_RUN && !inputs.token }}
         id: generate-token
@@ -86,7 +82,7 @@ jobs:
       - name: Mode
         env:
           MODE: >
-            ${{ (env.USE_NEXT == 'true' && '--conventional-prerelease')
+            ${{ (env.USE_NEXT == 'true' && '--conventional-prerelease --dist-tag next')
             || (contains(env.VERSION, 'alpha') && '--conventional-graduate')
             || ''
             }}
@@ -102,9 +98,9 @@ jobs:
       - name: Install
         run: pnpm i
 
-      - name: Debug
-        run: |
-          pnpx envinfo --system --npmPackages '@lerna-lite/*' --binaries --browsers
+      # - name: Debug
+      #   run: |
+      #     pnpx envinfo --system --npmPackages '@lerna-lite/*' --binaries --browsers
 
       - name: Push Version
-        run: pnpm lerna version --conventional-commits --sync-workspace-lock --yes ${{ env.MODE }} ${{ env.DRY_RUN }} ${{ env.BUMP }}
+        run: pnpm lerna version --conventional-commits --sync-workspace-lock --changelog-preset conventionalcommits --yes ${{ env.MODE }} ${{ env.DRY_RUN }} ${{ env.BUMP }}
