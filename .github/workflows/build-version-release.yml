@@ -42,6 +42,16 @@ jobs:
   release_version:
     runs-on: ubuntu-latest
     steps:
+      - name: Show Inputs
+        env:
+          INPUTS: ${{ toJSON(inputs) }}
+
+        run: |
+          echo "$INPUTS"
+          echo USE_NEXT: "$USE_NEXT"
+          echo BUMP: "$BUMP"
+          echo DRY_RUN: "$DRY_RUN"
+
       - uses: tibdex/github-app-token@b62528385c34dbc9f38e5f4225ac829252d1ea92 # v1.5 # cspell:ignore tibdex
         if: ${{ !env.DRY_RUN && !inputs.token }}
         id: generate-token
