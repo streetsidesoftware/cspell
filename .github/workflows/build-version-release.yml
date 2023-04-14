@@ -104,7 +104,7 @@ jobs:
 
       - name: Debug
         run: |
-          npx envinfo --system --npmPackages '@lerna-lite/*' --binaries --browsers
+          pnpx envinfo --system --npmPackages '@lerna-lite/*' --binaries --browsers
 
       - name: Push Version
         run: pnpm lerna version --conventional-commits --sync-workspace-lock --yes ${{ env.MODE }} ${{ env.DRY_RUN }} ${{ env.BUMP }}
