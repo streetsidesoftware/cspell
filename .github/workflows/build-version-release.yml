@@ -48,6 +48,10 @@ jobs:
           echo BUMP: "$BUMP"
           echo DRY_RUN: "$DRY_RUN"
 
+      - name: Debug
+        run: |
+          npx envinfo --system --npmPackages '@lerna-lite/*' --binaries --browsers
+
       - uses: tibdex/github-app-token@b62528385c34dbc9f38e5f4225ac829252d1ea92 # v1.5 # cspell:ignore tibdex
         if: ${{ !env.DRY_RUN && !inputs.token }}
         id: generate-token
