@@ -31,7 +31,7 @@ permissions:
 
 env:
   USE_NEXT: ${{ inputs.prerelease }}
-  BUMP: ${{ (inputs.bump != 'auto' && inputs.bump) || '' }}
+  BUMP: ${{ (inputs.bump != 'auto' && inputs.prerelease && 'pre') || '' }}${{ (inputs.bump != 'auto' && inputs.bump) || '' }}
   DRY_RUN: ${{ (inputs.dry_run && '--dry-run') || '' }}
 
 jobs:
