@@ -13,6 +13,9 @@ on:
           - "auto"
         default: "auto"
         required: true
+      prerelease:
+        type: boolean
+        description: Alpha prerelease
       dry_run:
         description: "Dry Run"
         type: choice
@@ -21,9 +24,6 @@ on:
           - "no"
         default: "yes"
         required: false
-      prerelease:
-        type: boolean
-        description: Alpha prerelease
 
   workflow_call:
     secrets:
@@ -36,7 +36,7 @@ permissions:
 env:
   USE_NEXT: ${{ inputs.prerelease }}
   BUMP: ${{ (inputs.bump != 'auto' && inputs.bump) || '' }}
-  DRY_RUN: ${{ (inputs.dry_run == 'yes' && '--git-dry-run') || '' }}
+  DRY_RUN: ${{ (inputs.dry_run == 'yes' && '--dry-run') || '' }}
 
 jobs:
   release_version:
