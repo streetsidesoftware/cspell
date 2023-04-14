@@ -7,7 +7,6 @@ on:
         description: "Version Bump"
         type: choice
         options:
-          - "alpha"
           - "patch"
           - "minor"
           - "major"
@@ -22,6 +21,9 @@ on:
           - "no"
         default: "yes"
         required: false
+      prerelease:
+        type: boolean
+        description: Alpha prerelease
 
   workflow_call:
     secrets:
@@ -32,8 +34,8 @@ permissions:
   contents: read
 
 env:
-  USE_NEXT: ${{ inputs.bump == 'alpha' }}
-  BUMP: ${{ (inputs.bump != 'auto' && inputs.bump != 'alpha' && inputs.bump) || '' }}
+  USE_NEXT: ${{ inputs.prerelease }}
+  BUMP: ${{ (inputs.bump != 'auto' && inputs.bump) || '' }}
   DRY_RUN: ${{ (inputs.dry_run == 'yes' && '--git-dry-run') || '' }}
 
 jobs:
