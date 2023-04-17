@@ -3,7 +3,7 @@ Repository: RustPython/RustPython
 Url: "https://github.com/RustPython/RustPython.git"
 Args: ["**"]
 Lines:
- CSpell: Files checked: 718, Issues found: 2723 in 298 files
+ CSpell: Files checked: 718, Issues found: 2726 in 298 files
  exit code: 1
 ./Cargo.toml:130:62    - Unknown word (redoxer)    -- to compile/check with redoxer
 ./Cargo.toml:16:44     - Unknown word (pylib)      -- derive", "jit", "vm", "pylib", "stdlib", "wasm/lib
@@ -66,7 +66,7 @@ Lines:
 ./common/src/bytes.rs:11:13     - Unknown word (squote)     -- let mut squote = 0;
 ./common/src/bytes.rs:12:13     - Unknown word (dquote)     -- let mut dquote = 0;
 ./common/src/float_ops.rs:5:8       - Unknown word (ufrexp)     -- pub fn ufrexp(value: f64) -> (f64
-./common/src/format.rs:1086:39   - Unknown word (ddfe)       -- FormatPart::Literal("}ddfe".to_owned()),
+./common/src/format.rs:1091:39   - Unknown word (ddfe)       -- FormatPart::Literal("}ddfe".to_owned()),
 ./common/src/hash.rs:21:25     - Unknown word (siphash)    -- const ALGO: &str = "siphash24";
 ./common/src/hash.rs:67:58     - Unknown word (hashf)      -- E>(&self, iter: I, hashf: F) -> Result<PyHash
 ./common/src/lib.rs:9:9       - Unknown word (boxvec)     -- pub mod boxvec;
@@ -193,9 +193,9 @@ Lines:
 ./extra_tests/snippets/builtin_str.py:174:72    - Unknown word (yetanother) -- ehaha\x85another\u2028yetanother\u2029last\r\n.'.splitlines
 ./extra_tests/snippets/builtin_str.py:340:7     - Unknown word (isisprintable) -- # str.isisprintable
 ./extra_tests/snippets/builtin_str.py:37:21     - Unknown word (xyxyxy)     -- assert "xy" * 3 == "xyxyxy"
-./extra_tests/snippets/builtin_str.py:616:10    - Unknown word (foobarfoo)     -- s = 'foobarfoo'
-./extra_tests/snippets/builtin_str.py:627:28    - Unknown word (afoo)          -- assert s.removeprefix('afoo') == s_ref
-./extra_tests/snippets/builtin_str.py:672:28    - Unknown word (fooa)          -- assert s.removesuffix('fooa') == s_ref
+./extra_tests/snippets/builtin_str.py:645:10    - Unknown word (foobarfoo)     -- s = 'foobarfoo'
+./extra_tests/snippets/builtin_str.py:656:28    - Unknown word (afoo)          -- assert s.removeprefix('afoo') == s_ref
+./extra_tests/snippets/builtin_str.py:701:28    - Unknown word (fooa)          -- assert s.removesuffix('fooa') == s_ref
 ./extra_tests/snippets/builtin_str_encode.py:11:42     - Unknown word (estás)     -- UnicodeEncodeError, "¿como estás?".encode, "ascii")
 ./extra_tests/snippets/builtin_str_encode.py:19:25     - Unknown word (𝕐𝕥)       -- round_trip("☢🐣 ᖇ𝓤𝕊тⓟ𝕐𝕥卄σ𝔫 ♬👣")
 ./extra_tests/snippets/builtin_str_encode.py:20:19     - Unknown word (ק𝔂t)       -- round_trip("💀👌 ק𝔂tℍⓞ𝓷 ３  🔥👤")
@@ -354,6 +354,7 @@ Lines:
 ./extra_tests/snippets/syntax_class.py:229:20    - Unknown word (dbca)       -- assert D().f() == 'dbca', "Mro resolution using
 ./extra_tests/snippets/syntax_class.py:269:17    - Unknown word (mcls)       -- def __new__(mcls):
 ./extra_tests/snippets/syntax_class.py:48:9      - Unknown word (kungfu)     -- def kungfu(x):
+./extra_tests/snippets/syntax_del.py:30:5      - Unknown word (mytest)     -- mytest = MyTest()
 ./extra_tests/snippets/syntax_fstring.py:144:1     - Unknown word (tenπ)       -- tenπ = 31.4
 ./extra_tests/snippets/syntax_fstring.py:16:14     - Unknown word (tersing)    -- # lets start tersing
 ./extra_tests/snippets/syntax_fstring.py:22:24     - Unknown word (barfoo)     -- assert f"{foo}foo" == 'barfoo'
@@ -891,12 +892,12 @@ Lines:
 ./vm/src/stdlib/sys.rs:495:17    - Unknown word (osvi)               -- let osvi = &mut version as LPOSVERSION
 ./vm/src/stdlib/sys.rs:496:59    - Unknown word (OSVERSIONINFOW)     -- accepts a pointer of OSVERSIONINFOW, but winapi crate's
 ./vm/src/stdlib/sys.rs:52:11     - Unknown word (MAXUNICODE) -- const MAXUNICODE: u32 = std::char::MAX
-./vm/src/stdlib/sys.rs:618:19    - Unknown word (profilefunc)        -- fn setprofile(profilefunc: PyObjectRef, vm: &VirtualMac
-./vm/src/stdlib/sys.rs:646:17    - Unknown word (tracefunc)          -- fn settrace(tracefunc: PyObjectRef, vm: &VirtualMac
-./vm/src/stdlib/sys.rs:707:18    - Unknown word (PYTHONSAFEPATH)     -- /// -P, `PYTHONSAFEPATH`
-./vm/src/stdlib/sys.rs:757:51    - Unknown word (PYTHREAD)           -- stdlib::thread::_thread::PYTHREAD_NAME,
-./vm/src/stdlib/sys.rs:855:9     - Unknown word (releaselevel)       -- releaselevel: &'static str,
-./vm/src/stdlib/sys.rs:865:36    - Unknown word (RELEASELEVEL)       -- releaselevel: version::RELEASELEVEL,
+./vm/src/stdlib/sys.rs:625:19    - Unknown word (profilefunc)        -- fn setprofile(profilefunc: PyObjectRef, vm: &VirtualMac
+./vm/src/stdlib/sys.rs:653:17    - Unknown word (tracefunc)          -- fn settrace(tracefunc: PyObjectRef, vm: &VirtualMac
+./vm/src/stdlib/sys.rs:714:18    - Unknown word (PYTHONSAFEPATH)     -- /// -P, `PYTHONSAFEPATH`
+./vm/src/stdlib/sys.rs:764:51    - Unknown word (PYTHREAD)           -- stdlib::thread::_thread::PYTHREAD_NAME,
+./vm/src/stdlib/sys.rs:862:9     - Unknown word (releaselevel)       -- releaselevel: &'static str,
+./vm/src/stdlib/sys.rs:872:36    - Unknown word (RELEASELEVEL)       -- releaselevel: version::RELEASELEVEL,
 ./vm/src/stdlib/sys.rs:93:33     - Unknown word (BASEPREFIX) -- option_env!("RUSTPYTHON_BASEPREFIX").unwrap_or_else(||
 ./vm/src/stdlib/sysconfigdata.rs:20:19     - Unknown word (GETRANDOM)  -- "HAVE_GETRANDOM" => 1,
 ./vm/src/stdlib/thread.rs:297:25    - Unknown word (sents)      -- SENTINELS.with(|sents| {
@@ -972,19 +973,19 @@ Lines:
 ./wasm/tests/conftest.py:34:12     - Unknown word (sessionfinish) -- def pytest_sessionfinish(session):
 ./wasm/tests/conftest.py:92:5      - Unknown word (wdriver)       -- def wdriver(request):
 ./wasm/tests/requirements.txt:3:1       - Unknown word (certifi)    -- certifi
-./whats_left.py:100:22    - Unknown word (testcapi)   -- '_testbuffer', '_testcapi', '_testimportmultiple
-./whats_left.py:100:35    - Unknown word (testimportmultiple) -- testbuffer', '_testcapi', '_testimportmultiple', '_testinternalcapi
-./whats_left.py:100:58    - Unknown word (testinternalcapi)   -- testimportmultiple', '_testinternalcapi', '_testmultiphase'
-./whats_left.py:100:7     - Unknown word (testbuffer) -- '_testbuffer', '_testcapi', '_testimportmu
-./whats_left.py:100:79    - Unknown word (testmultiphase)     -- testinternalcapi', '_testmultiphase',
-./whats_left.py:363:9     - Unknown word (implementeds)       -- not_implementeds = {}
-./whats_left.py:386:5     - Unknown word (rustpymods)         -- rustpymods = {mod: dir_of_mod_or
-./whats_left.py:397:18    - Unknown word (cpymod)             -- for modname, cpymod in cpymods.items():
-./whats_left.py:398:9     - Unknown word (rustpymod)          -- rustpymod = rustpymods.get(modname
+./whats_left.py:100:18    - Unknown word (xxsubtype)  -- 'xxmodule', 'xxsubtype', 'xxlimited', '_xxtestfuzz
+./whats_left.py:100:31    - Unknown word (xxlimited)  -- xxmodule', 'xxsubtype', 'xxlimited', '_xxtestfuzz'
+./whats_left.py:100:45    - Unknown word (xxtestfuzz) -- xxsubtype', 'xxlimited', '_xxtestfuzz'
+./whats_left.py:100:6     - Unknown word (xxmodule)   -- 'xxmodule', 'xxsubtype', 'xxlimited
+./whats_left.py:101:22    - Unknown word (testcapi)   -- '_testbuffer', '_testcapi', '_testimportmultiple
+./whats_left.py:101:35    - Unknown word (testimportmultiple) -- testbuffer', '_testcapi', '_testimportmultiple', '_testinternalcapi
+./whats_left.py:101:58    - Unknown word (testinternalcapi)   -- testimportmultiple', '_testinternalcapi', '_testmultiphase'
+./whats_left.py:101:7     - Unknown word (testbuffer) -- '_testbuffer', '_testcapi', '_testimportmu
+./whats_left.py:101:79    - Unknown word (testmultiphase)     -- testinternalcapi', '_testmultiphase',
+./whats_left.py:364:9     - Unknown word (implementeds)       -- not_implementeds = {}
+./whats_left.py:387:5     - Unknown word (rustpymods)         -- rustpymods = {mod: dir_of_mod_or
+./whats_left.py:398:18    - Unknown word (cpymod)             -- for modname, cpymod in cpymods.items():
+./whats_left.py:399:9     - Unknown word (rustpymod)          -- rustpymod = rustpymods.get(modname
 ./whats_left.py:5:3       - Unknown word (cpymods)    -- # cpymods - a dictionary mapping
-./whats_left.py:78:6      - Unknown word (fpectl)     -- "fpectl",
-./whats_left.py:81:6      - Unknown word (macpath)    -- "macpath",
-./whats_left.py:99:18     - Unknown word (xxsubtype)  -- 'xxmodule', 'xxsubtype', 'xxlimited', '_xxtestfuzz
-./whats_left.py:99:31     - Unknown word (xxlimited)  -- xxmodule', 'xxsubtype', 'xxlimited', '_xxtestfuzz'
-./whats_left.py:99:45     - Unknown word (xxtestfuzz) -- xxsubtype', 'xxlimited', '_xxtestfuzz'
-./whats_left.py:99:6      - Unknown word (xxmodule)   -- 'xxmodule', 'xxsubtype', 'xxlimited
+./whats_left.py:79:6      - Unknown word (fpectl)     -- "fpectl",
+./whats_left.py:82:6      - Unknown word (macpath)    -- "macpath",

@@ -5,7 +5,7 @@ Args: '["**/*.{ts,js,md}"]'
 Summary:
   files: 50
   filesWithIssues: 43
-  issues: 469
+  issues: 466
   errors: 0
 Errors: []
 
@@ -70,12 +70,11 @@ issues:
   - "docs/advanced/patterns_by_usecase.md:405:114        blackboxed          U       the resultant type is blackboxed into a generic JSX.Element"
   - "docs/advanced/patterns_by_usecase.md:420:32         doesnt (doesn't)    U       \ude2d Error, `disabled` doesnt exist on anchor element"
   - "docs/advanced/patterns_by_usecase.md:504:91         jpavon              U       solutions. _thanks to [@jpavon](https://github.com"
-  - "docs/advanced/patterns_by_usecase.md:718:19         keyof               U       | (T1 & { [K in keyof T2]?: undefined })"
-  - "docs/advanced/patterns_by_usecase.md:728:9          diegohaz            U       Thanks [diegohaz](https://twitter.com"
-  - "docs/advanced/patterns_by_usecase.md:741:19         typecheck           U       {/* these all typecheck */}"
-  - "docs/advanced/patterns_by_usecase.md:905:9          instanceof          U       if (e instanceof InvalidDateFormatError"
-  - "docs/advanced/patterns_by_usecase.md:930:21         mydate              U       let result = parse(\"mydate\");"
-  - "docs/advanced/patterns_by_usecase.md:952:43         Formik              U       value: T) => Option<U>): FormikOption<U>;"
+  - "docs/advanced/patterns_by_usecase.md:781:19         typecheck           U       {/* these all typecheck */}"
+  - "docs/advanced/patterns_by_usecase.md:833:24         keyof               U       type Omit<T, K extends keyof T> = Pick<T, Exclude"
+  - "docs/advanced/patterns_by_usecase.md:945:9          instanceof          U       if (e instanceof InvalidDateFormatError"
+  - "docs/advanced/patterns_by_usecase.md:970:21         mydate              U       let result = parse(\"mydate\");"
+  - "docs/advanced/patterns_by_usecase.md:992:43         Formik              U       value: T) => Option<U>): FormikOption<U>;"
   - "docs/advanced/patterns_by_version.md:128:186        codebases               U       files. This lets large codebases scale without recompiling"
   - "docs/advanced/patterns_by_version.md:135:45         subproject              U       / tells TSC it is a subproject of a larger project"
   - "docs/advanced/patterns_by_version.md:136:83         dont                    U       since project references dont have access to source"
@@ -99,10 +98,10 @@ issues:
   - "docs/basic/editor-integration.md:13:5           peitalin    U       - peitalin/vim-jsx-typescript"
   - "docs/basic/examples.md:8:8          Awad's          U       - [Ben Awad's 14 hour Fullstack React"
   - "docs/basic/examples.md:9:12         Realworld       U       - [Cypress Realworld App](https://github"
-  - "docs/basic/getting-started/basic-type-examples.md:89:110        typechecked     U       pull/56210), this code typechecked but had a runtime error"
-  - "docs/basic/getting-started/basic-type-examples.md:101:22        Typecheck       U       // After React 18: Typecheck error \"Type '{}' is"
-  - "docs/basic/getting-started/basic-type-examples.md:108:10        pomle           U       [Thanks @pomle for raising this.](https"
-  - "docs/basic/getting-started/basic-type-examples.md:132:38        orta            U       until You Need Type - [orta](https://twitter.com"
+  - "docs/basic/getting-started/basic-type-examples.md:103:110       typechecked     U       pull/56210), this code typechecked but had a runtime error"
+  - "docs/basic/getting-started/basic-type-examples.md:115:22        Typecheck       U       // After React 18: Typecheck error \"Type '{}' is"
+  - "docs/basic/getting-started/basic-type-examples.md:122:10        pomle           U       [Thanks @pomle for raising this.](https"
+  - "docs/basic/getting-started/basic-type-examples.md:146:38        orta            U       until You Need Type - [orta](https://twitter.com"
   - "docs/basic/getting-started/context.md:86:22         preferrable     U       However, it would be preferrable to not have to check"
   - "docs/basic/getting-started/forms-and-events.md:45:173       Hubelbauer      U       contributed by @TomasHubelbauer_):"
   - "docs/basic/getting-started/forms-and-events.md:58:318       artisanally     U       inferred method as more... _artisanally hand-rolled_. Either"
