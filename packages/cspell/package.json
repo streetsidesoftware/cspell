@@ -4,33 +4,30 @@
   "description": "A Spelling Checker for Code!",
   "funding": "https://github.com/streetsidesoftware/cspell?sponsor=1",
   "bin": {
-    "cspell": "bin.js",
+    "cspell": "bin.mjs",
     "cspell-esm": "bin.mjs"
   },
-  "type": "commonjs",
-  "main": "dist/cjs/index.js",
-  "types": "dist/cjs/index.d.ts",
+  "type": "module",
+  "types": "dist/esm/index.d.mts",
   "module": "dist/esm/index.mjs",
   "exports": {
     ".": {
-      "import": "./dist/esm/index.mjs",
-      "require": "./dist/cjs/index.js"
+      "import": "./dist/esm/index.mjs"
     },
     "./app": {
-      "import": "./dist/esm/app.mjs",
-      "require": "./dist/cjs/app.js"
+      "import": "./dist/esm/app.mjs"
     },
     "./bin": {
-      "import": "./bin.mjs",
-      "require": "./bin.js"
+      "import": "./bin.mjs"
+    },
+    "./bin.mjs": {
+      "import": "./bin.mjs"
     },
     "./application": {
-      "import": "./dist/esm/application.mjs",
-      "require": "./dist/cjs/application.js"
+      "import": "./dist/esm/application.mjs"
     }
   },
   "files": [
-    "bin.js",
     "bin.mjs",
     "dist",
     "!dist/esm/**/*.js",
@@ -46,14 +43,13 @@
     "clean": "shx rm -rf dist coverage temp .tsbuildinfo",
     "build": "tsc -b . && ts2mjs dist/esm && pnpm run build:api",
     "build:api": "rollup -c rollup.config.mjs",
-    "build:cjs": "tsc -b tsconfig.cjs.json",
     "build:esm": "tsc -b tsconfig.esm.json",
     "build:esm:ts2mjs": "tsc -b tsconfig.esm.json && ts2mjs dist/esm",
     "build:lib": "tsc -b src/lib/tsconfig.json",
     "build:readme": "pnpm build:readme:help",
     "build:readme:help": "pnpm build:readme:help:lint && pnpm build:readme:help:trace && inject-markdown README.md && prettier -w README.md",
-    "build:readme:help:lint": "./bin.js lint --help > static/help-lint.txt",
-    "build:readme:help:trace": "./bin.js trace --help > static/help-trace.txt",
+    "build:readme:help:lint": "./bin.mjs lint --help > static/help-lint.txt",
+    "build:readme:help:trace": "./bin.mjs trace --help > static/help-trace.txt",
     "clean-build": "pnpm run clean && pnpm run build",
     "coverage": "pnpm coverage:vitest && pnpm coverage:fix",
     "coverage:vitest": "vitest run --coverage",
@@ -90,7 +86,8 @@
   "dependencies": {
     "@cspell/cspell-pipe": "workspace:*",
     "@cspell/dynamic-import": "workspace:*",
-    "chalk": "^4.1.2",
+    "chalk": "^5.2.0",
+    "chalk-template": "^1.0.0",
     "commander": "^10.0.1",
     "cspell-gitignore": "workspace:*",
     "cspell-glob": "workspace:*",
@@ -99,10 +96,9 @@
     "fast-glob": "^3.2.12",
     "fast-json-stable-stringify": "^2.1.0",
     "file-entry-cache": "^6.0.1",
-    "get-stdin": "^8.0.0",
-    "imurmurhash": "^0.1.4",
+    "get-stdin": "^9.0.0",
     "semver": "^7.5.0",
-    "strip-ansi": "^6.0.1",
+    "strip-ansi": "^7.0.1",
     "vscode-uri": "^3.0.7"
   },
   "engines": {
@@ -113,10 +109,9 @@
     "@cspell/cspell-types": "workspace:*",
     "@types/file-entry-cache": "^5.0.2",
     "@types/glob": "^8.1.0",
-    "@types/imurmurhash": "^0.1.1",
     "@types/micromatch": "^4.0.2",
     "@types/semver": "^7.3.13",
     "micromatch": "^4.0.5",
-    "minimatch": "^7.4.6"
+    "minimatch": "^9.0.0"
   }
 }

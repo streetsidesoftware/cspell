@@ -23,7 +23,7 @@
     "clean": "echo clean",
     "clean-build": "pnpm run clean && pnpm run build",
     "watch": "pnpm run build --watch",
-    "test": "node ../../bin.js \"**/*.{txt,md,ts}\"",
+    "test": "node ../../bin.mjs \"**/*.{txt,md,ts}\"",
     "update-fix-en-gb": "pnpm add @cspell/dict-en-gb@1.1.33",
     "update-dictionaries": "pnpm update --latest \"@cspell/dict-*\" && pnpm run update-fix-en-gb"
   },
