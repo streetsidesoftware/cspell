@@ -1,5 +1,7 @@
 import assert from 'assert';
-import { URI, Utils } from 'vscode-uri';
+import * as vscodeUriPkg from 'vscode-uri';
+
+const { URI, Utils } = vscodeUriPkg;
 
 export interface Uri {
     readonly scheme: string;

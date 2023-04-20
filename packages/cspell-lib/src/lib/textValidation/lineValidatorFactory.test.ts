@@ -2,7 +2,7 @@ import type { SpellingDictionary } from 'cspell-dictionary';
 import { createCollection, createSpellingDictionary, createSuggestDictionary } from 'cspell-dictionary';
 import { describe, expect, test } from 'vitest';
 
-import { textValidatorFactory } from './lineValidatorFactory';
+import { textValidatorFactory } from './lineValidatorFactory.js';
 
 const oc = expect.objectContaining;
 

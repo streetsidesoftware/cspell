@@ -2,7 +2,7 @@
  * Handles loading of `.pnp.js` and `.pnp.js` files.
  */
 import clearModule from 'clear-module';
-import findUp from 'find-up';
+import { findUp, findUpSync } from 'find-up';
 import importFresh from 'import-fresh';
 
 import type { Uri } from '../../util/Uri.js';
@@ -103,7 +103,7 @@ async function findPnpAndLoad(uriDirectory: Uri, pnpFiles: string[]): Promise<Lo
  * @param uriDirectory - directory to start at.
  */
 function findPnpAndLoadSync(uriDirectory: Uri, pnpFiles: string[]): LoaderResult {
-    const found = findUp.sync(pnpFiles, { cwd: uriToFilePath(uriDirectory) });
+    const found = findUpSync(pnpFiles, { cwd: uriToFilePath(uriDirectory) });
     return loadPnpIfNeeded(found);
 }
 
