@@ -3,9 +3,9 @@ Repository: MicrosoftDocs/PowerShell-Docs
 Url: https://github.com/MicrosoftDocs/PowerShell-Docs.git
 Args: '["--config=../../../cspell-power-shell-docs.config.yaml","**"]'
 Summary:
-  files: 2873
-  filesWithIssues: 1295
-  issues: 5829
+  files: 2676
+  filesWithIssues: 1234
+  issues: 5677
   errors: 0
 Errors: []
 
@@ -128,8 +128,8 @@ issues:
   - "reference/5.1/Microsoft.PowerShell.Core/About/about_Redirection.md:81:13        fakepath    U       dir 'C:\\', 'fakepath' 2>&1 > .\\dir.log"
   - "reference/5.1/Microsoft.PowerShell.Core/About/about_Regular_Expressions.md:39:32        csplit              U       , `-creplace`, or `-csplit`"
   - "reference/5.1/Microsoft.PowerShell.Core/About/about_Regular_Expressions.md:40:41        casesensitive       U       statement, use the `-casesensitive` option"
-  - "reference/5.1/Microsoft.PowerShell.Core/About/about_Regular_Expressions.md:200:3        Singleline          U       **Singleline** and **Multiline**"
-  - "reference/5.1/Microsoft.PowerShell.Core/About/about_Regular_Expressions.md:327:34       keyname             U       capturing group, use `?<keyname>` to store captured"
+  - "reference/5.1/Microsoft.PowerShell.Core/About/about_Regular_Expressions.md:201:3        Singleline          U       **Singleline** and **Multiline**"
+  - "reference/5.1/Microsoft.PowerShell.Core/About/about_Regular_Expressions.md:328:34       keyname             U       capturing group, use `?<keyname>` to store captured"
   - "reference/5.1/Microsoft.PowerShell.Core/About/about_Remote_Output.md:79:19          MACHINENAME     U       ## DISPLAYING THE MACHINENAME PROPERTY"
   - "reference/5.1/Microsoft.PowerShell.Core/About/about_Remote_Troubleshooting.md:271:43        startuptype         U       ComputerName $servers -startuptype Automatic"
   - "reference/5.1/Microsoft.PowerShell.Core/About/about_Remote_Troubleshooting.md:486:33        trustedhosts        U       wsman:localhost\\client\\trustedhosts -Value *"
@@ -377,17 +377,6 @@ issues:
   - "reference/5.1/Microsoft.WSMan.Management/Invoke-WSManAction.md:68:28        stopservice         U       WSManAction -Action stopservice -ResourceURI wmicimv"
   - "reference/5.1/Microsoft.WSMan.Management/Invoke-WSManAction.md:89:109       currentdirectory    U       commandline=\"notepad.exe\";currentdirectory=\"C:\\\"}"
   - "reference/5.1/Microsoft.WSMan.Management/Set-WSManInstance.md:79:68         Sizekb      U       ValueSet @{MaxEnvelopeSizekb = \"200\"}"
-  - "reference/5.1/PackageManagement/Find-PackageProvider.md:57:29       Gistprovider    U       PackageProvider -Name \"Gistprovider\" -Source \"PSGallery"
-  - "reference/5.1/PackageManagement/Save-Package.md:78:82       Verion      U       specify a **RequiredVerion**. The"
-  - "reference/5.1/PackageManagement/Unregister-PackageSource.md:87:6        pkgsource       U       PS> $pkgsource = Get-PackageSource"
-  - "reference/5.1/PowershellGet/Find-Module.md:561:4        fimo    U       - `fimo`"
-  - "reference/5.1/PowershellGet/Find-Script.md:73:1         respository     U       respository."
-  - "reference/5.1/PowershellGet/Get-InstalledScript.md:50:65        Scri    U       begins with **Required-Scri**."
-  - "reference/5.1/PowershellGet/Install-Module.md:528:4         inmo    U       - `inmo`"
-  - "reference/5.1/PowershellGet/Install-Script.md:62:62         pattif      U       2.0 C:\\Users\\pattif\\Documents\\WindowsPowerShell"
-  - "reference/5.1/PowershellGet/New-ScriptFileInfo.md:45:24         Scriptfile      U       Path = \"C:\\Test\\Temp-Scriptfile.ps1\""
-  - "reference/5.1/PowershellGet/Publish-Module.md:417:4         pumo    U       - `pumo`"
-  - "reference/5.1/PowershellGet/Update-Module.md:375:4          upmo    U       - `upmo`"
   - "reference/5.1/PSDiagnostics/Enable-WSManTrace.md:36:23          wsmlog      U       The session is named `wsmlog`."
   - "reference/5.1/PSDiagnostics/Start-Trace.md:42:49        wsmtraces               U       env:windir\\system32\\wsmtraces.log\""
   - "reference/5.1/PSDiagnostics/Start-Trace.md:43:28        bincirc                 U       Format = 'bincirc'"
@@ -737,6 +726,7 @@ issues:
   - "reference/docs-conceptual/dev-cross-plat/create-cmdline-predictor.md:140:29         paramref    U       /// returned in <paramref name=\"session\"/>, starting"
   - "reference/docs-conceptual/dev-cross-plat/create-standard-library-binary-Module.md:131:12        globaljson      U       dotnet new globaljson --sdk-version 2.1.0"
   - "reference/docs-conceptual/dev-cross-plat/create-standard-library-binary-Module.md:300:12        psmodule        U       dotnet new psmodule"
+  - "reference/docs-conceptual/dev-cross-plat/performance/script-authoring-considerations.md:150:29      Finalizers      U       [GC]::WaitForPendingFinalizers()"
   - "reference/docs-conceptual/dev-cross-plat/resolving-dependency-conflicts.md:718:2        netcore     U       $netcore = \"netcoreapp3.1\""
   - "reference/docs-conceptual/dev-cross-plat/resolving-dependency-conflicts.md:791:93       qualifed    U       with the same fully qualifed"
   - "reference/docs-conceptual/dev-cross-plat/resolving-dependency-conflicts.md:881:9        Strahl      U       - [Rick Strahl: When does a .NET assembly"
@@ -1044,26 +1034,6 @@ issues:
   - "reference/docs-conceptual/developer/windows-powershell-reference-whats-new.md:35:26         mshshort    U       commands provided by mshshort, and a configuration"
   - "reference/docs-conceptual/developer/windows-powershell-reference.md:72:40       Cmdletmetadataattribute     U       Automation.Internal.Cmdletmetadataattribute](/dotnet/api/System"
   - "reference/docs-conceptual/dsc/overview.md:26:3          Automanage      U       Automanage."
-  - "reference/docs-conceptual/gallery/concepts/media/publishing-guidelines/CosmosDB.svg:1:47        xlink       U       org/2000/svg\" xmlns:xlink=\"http://www.w3.org/"
-  - "reference/docs-conceptual/gallery/concepts/media/publishing-guidelines/CosmosDB.svg:1:542       Verdana     U       family=\"DejaVu Sans,Verdana,Geneva,sans-serif\" font"
-  - "reference/docs-conceptual/gallery/concepts/package-manifest-affecting-ui.md:117:57      RELEASENOTES    U       information comes from the `.RELEASENOTES` keyword in the comment"
-  - "reference/docs-conceptual/gallery/concepts/package-manifest-affecting-ui.md:150:56      PROJECTURI      U       information comes from the `.PROJECTURI` keyword in the comment"
-  - "reference/docs-conceptual/gallery/concepts/package-manifest-affecting-ui.md:153:51      LICENSEURI      U       information comes from the `.LICENSEURI` keyword in the comment"
-  - "reference/docs-conceptual/gallery/concepts/package-manifest-affecting-ui.md:161:48      ICONURI         U       information comes from the `.ICONURI` keyword in the comment"
-  - "reference/docs-conceptual/gallery/concepts/package-manifest-affecting-ui.md:268:3       VSTS            U       | VSTS |"
-  - "reference/docs-conceptual/gallery/concepts/script-prerelease-support.md:160:26      Installedscript     U       windows\\system32> Get-Installedscript TestPackage"
-  - "reference/docs-conceptual/gallery/concepts/script-prerelease-support.md:161:104     testpackage         U       criteria and script names 'testpackage'."
-  - "reference/docs-conceptual/gallery/getting-started.md:137:16         msecnd      U       - `az818661.vo.msecnd.net` - CDN hostname"
-  - "reference/docs-conceptual/gallery/how-to/getting-support/gdpr-dsr-policy.md:95:28       psgallery       U       Script Get-repository psgallery"
-  - "reference/docs-conceptual/gallery/how-to/publishing-packages/creating-an-account.md:12:1        hotmail     U       hotmail.com."
-  - "reference/docs-conceptual/gallery/how-to/working-with-packages/deploy-to-azure-automation.md:30:18          Vianet      U       > [Azure China 21Vianet](/azure/china/)."
-  - "reference/docs-conceptual/gallery/how-to/working-with-packages/manual-download.md:35:20         rels        U       - A folder named `_rels` - contains a `.rels"
-  - "reference/docs-conceptual/gallery/how-to/working-with-packages/manual-download.md:59:35         azurerm     U       name. For example, `azurerm.storage.5.0.4-preview"
-  - "reference/docs-conceptual/gallery/toc.yml:5:22          psget               U       href: installing-psget.md"
-  - "reference/docs-conceptual/gallery/toc.yml:35:48         filelist            U       working-with-packages/filelist-view.md"
-  - "reference/docs-conceptual/gallery/toc.yml:49:52         apikeys             U       managing-profile/creating-apikeys.md"
-  - "reference/docs-conceptual/gallery/toc.yml:51:41         psrepositories      U       to/working-with-local-psrepositories.md"
-  - "reference/docs-conceptual/gallery/toc.yml:61:35         psedition           U       href: concepts/script-psedition-support.md"
   - "reference/docs-conceptual/install/install-alpine.md:33:13       terminfo    U       ncurses-terminfo-base \\"
   - "reference/docs-conceptual/install/install-alpine.md:35:5        libgcc      U       libgcc \\"
   - "reference/docs-conceptual/install/install-alpine.md:36:5        libintl     U       libintl \\"
@@ -1159,6 +1129,7 @@ issues:
   - "reference/docs-conceptual/learn/deep-dives/everything-about-pscustomobject.md:129:2         myobject    U       $myobject.psobject.properties"
   - "reference/docs-conceptual/learn/deep-dives/everything-about-shouldprocess.md:38:51          importantfile       U       9 AM 0 importantfile.txt"
   - "reference/docs-conceptual/learn/deep-dives/everything-about-string-substitutions.md:237:20      parbold     U       Thank you [/u/real_parbold][18] for that one."
+  - "reference/docs-conceptual/learn/deep-dives/everything-about-switch.md:430:2         filelist    U       :filelist foreach($path in $logs"
   - "reference/docs-conceptual/learn/ps101/00-introduction.md:3:24           mikefrobbins    U       custom: Contributor-mikefrobbins"
   - "reference/docs-conceptual/learn/ps101/00-introduction.md:5:14           mirobb          U       ms.reviewer: mirobb"
   - "reference/docs-conceptual/learn/ps101/00-introduction.md:19:66          Leanpub         U       the original book from Leanpub at"
@@ -1330,6 +1301,7 @@ issues:
   - "reference/index.yml:112:34      powershellsdk       U       url: /dotnet/api/?view=powershellsdk-7.3.0"
   - "reference/index.yml:151:45      stackoverflow       U       hubs/powershell/logo_stackoverflow.svg"
   - "reference/index.yml:166:14      Spiceworks          U       - title: Spiceworks"
+  - "reference/media/index/av_colors_128.svg:3:74        xlink       U       org/2000/svg\" xmlns:xlink=\"http://www.w3.org/"
   - "reference/media/index/av_colors_128.svg:6:19        evenodd     U       <path fill-rule=\"evenodd\" clip-rule=\"evenodd"
   - "reference/media/index/powershell_128.svg:5:21           SVGID       U       <linearGradient id=\"SVGID_1_\" gradientUnits=\"userSpaceO"
   - "reference/media/shared/check-mark-button-2705.svg:3:12          svgg    U       <g id=\"svgg\">"
@@ -1343,6 +1315,7 @@ issues:
   - "tests/Pester/Update-Help.Tests.ps1:43:65        eefcb           U       PowerShell.Management_eefcb906-b326-4e99-9f54-8b"
   - "tests/PowerShellDocsTests.psm1:27:9         logerror    U       logerror \"TEST FAILURES\""
   - "tests/PowerShellDocsTests.psm1:35:20        testfail    U       foreach ( $testfail in $failures )"
+  - "tools/build-updatedhelp.ps1:4:23        respository     U       1. Clone the docs respository"
   - "tools/build-updatedhelp.ps1:8:18        updatedhelp     U       2. Run build-updatedhelp.ps1 for the version"
   - "tools/build-updatedhelp.ps1:30:20       Platyps         U       $needPandoc = $needPlatyps = $true"
   - "tools/build-updatedhelp.ps1:36:47       doctools        U       Join-Path $tempDir \"doctools\") -ItemType Directory"

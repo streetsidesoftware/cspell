@@ -3,9 +3,9 @@ Repository: wireapp/wire-webapp
 Url: https://github.com/wireapp/wire-webapp.git
 Args: '["src/script/**/*.{js,ts,tsx,md}"]'
 Summary:
-  files: 949
-  filesWithIssues: 119
-  issues: 375
+  files: 953
+  filesWithIssues: 120
+  issues: 377
   errors: 0
 Errors: []
 
@@ -56,19 +56,21 @@ issues:
   - "src/script/calling/CallingRepository.test.ts:607:28         reqh            U       requestConfig, // `cfg_reqh`,"
   - "src/script/calling/CallingRepository.test.ts:608:28         acbrh           U       => {}) as any, // `acbrh`,"
   - "src/script/calling/CallingRepository.test.ts:609:19         vstateh         U       () => {}, // `vstateh`,"
-  - "src/script/calling/CallingRepository.ts:43:3        VSTREAMS            U       VSTREAMS,"
-  - "src/script/calling/CallingRepository.ts:119:18      Subconversation     U       export interface SubconversationEpochInfoMember {"
-  - "src/script/calling/CallingRepository.ts:122:6       subconv             U       in_subconv: boolean;"
-  - "src/script/calling/CallingRepository.ts:880:5       subconversation     U       subconversationData: SubconversationData"
-  - "src/script/calling/CallingRepository.ts:886:7       convid              U       convid: serializedConversationId"
-  - "src/script/calling/CallingRepository.ts:1171:47     Recepients          U       rtParticipantsToCallingMessageRecepients = (participants: Participant"
-  - "src/script/calling/CallingRepository.ts:1429:108    vrecv               U       isSendingVideo(!!member.vrecv));"
+  - "src/script/calling/CallingRepository.ts:44:3        VSTREAMS            U       VSTREAMS,"
+  - "src/script/calling/CallingRepository.ts:120:18      Subconversation     U       export interface SubconversationEpochInfoMember {"
+  - "src/script/calling/CallingRepository.ts:123:6       subconv             U       in_subconv: boolean;"
+  - "src/script/calling/CallingRepository.ts:881:5       subconversation     U       subconversationData: SubconversationData"
+  - "src/script/calling/CallingRepository.ts:887:7       convid              U       convid: serializedConversationId"
+  - "src/script/calling/CallingRepository.ts:1172:47     Recepients          U       rtParticipantsToCallingMessageRecepients = (participants: Participant"
+  - "src/script/calling/CallingRepository.ts:1430:108    vrecv               U       isSendingVideo(!!member.vrecv));"
+  - "src/script/calling/CallingRepository.ts:1437:37     aestab              U       isAudioEstablished(member.aestab === AUDIO_STATE.ESTABLISHED"
   - "src/script/client/ClientRepository.test.ts:159:38       Respy       U       as any).getEnv().allowRespy(true);"
-  - "src/script/components/calling/CallParticipantsListItem/CallParticipantItemContent/CallParticipantItemContent.tsx:83:30          UNFOCUSABLE     U       tabIndex={TabIndex.UNFOCUSABLE}"
+  - "src/script/components/calling/CallParticipantsListItem/CallParticipantItemContent/CallParticipantItemContent.tsx:87:30          UNFOCUSABLE     U       tabIndex={TabIndex.UNFOCUSABLE}"
+  - "src/script/components/calling/CallParticipantsListItem/CallParticipantsListItem.test.tsx:152:54         unestablishd    U       text if user is in unestablishd audio state', () =>"
   - "src/script/components/calling/FullscreenVideoCall.styles.ts:37:52       inversed    U       accent-color-highlight-inversed);"
   - "src/script/components/calling/FullscreenVideoCall.tsx:431:36        screnn      U       aria-labelledby=\"screnn-share-label\""
-  - "src/script/components/calling/GroupVideoGrid.test.tsx:35:16         Anot        U       user.name('Anot Heruser');"
-  - "src/script/components/calling/GroupVideoGrid.test.tsx:35:21         Heruser     U       user.name('Anot Heruser');"
+  - "src/script/components/calling/GroupVideoGrid.test.tsx:49:28         Anot        U       participant.user.name('Anot Heruser');"
+  - "src/script/components/calling/GroupVideoGrid.test.tsx:49:33         Heruser     U       participant.user.name('Anot Heruser');"
   - "src/script/components/calling/GroupVideoGrid.tsx:143:76         xsmall      U       fontSize: 'var(--font-size-xsmall)', fontWeight: 500}"
   - "src/script/components/DragableClickWrapper.tsx:24:11        Dragable    U       interface DragableClickWrapperProps {"
   - "src/script/components/DropFileArea/DropFileArea.test.tsx:28:22          chucknorris     U       const pngFileName = 'chucknorris.png';"
@@ -172,6 +174,5 @@ issues:
   - "src/script/util/StringUtil.ts:213:50        charachters     U       replace accents its charachters"
   - "src/script/util/util.test.ts:130:65         AQABAAAAA       U       image/gif;base64,R0lGODlhAQABAAAAACw=');"
   - "src/script/view_model/CallingViewModel.test.ts:166:50       emmited     U       after mls service has emmited \"newEpoch\" event', async"
-  - "src/script/view_model/CallingViewModel.ts:317:20        aestab              U       if (member.aestab === AUDIO_STATE.ESTABLISHED"
   - "src/script/view_model/CallingViewModel.ts:337:81        ourselfes           U       dropped), we remove ourselfes from subconversation"
   - "src/script/view_model/CallingViewModel.ts:340:73        subconversations    U       detect stale clients in subconversations"
