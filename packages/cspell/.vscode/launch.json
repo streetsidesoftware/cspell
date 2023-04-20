@@ -8,30 +8,30 @@
             "type": "node",
             "request": "launch",
             "name": "cspell: Run",
-            "program": "${workspaceRoot}/bin.js",
+            "program": "${workspaceRoot}/bin.mjs",
             "args": ["--cache", "--no-progress", "**"],
             "cwd": "${workspaceRoot}",
-            "outFiles": ["${workspaceRoot}/dist/**/*.js"],
+            "outFiles": ["${workspaceRoot}/dist/**"],
             "sourceMaps": true
         },
         {
             "type": "node",
             "request": "launch",
             "name": "cspell: Run no args",
-            "program": "${workspaceRoot}/bin.js",
+            "program": "${workspaceRoot}/bin.mjs",
             "args": [],
             "cwd": "${workspaceRoot}",
-            "outFiles": ["${workspaceRoot}/dist/**/*.js"],
+            "outFiles": ["${workspaceRoot}/dist/**"],
             "sourceMaps": true
         },
         {
             "type": "node",
             "request": "launch",
             "name": "cspell: Run CSpell against current file",
-            "program": "${workspaceRoot}/bin.js",
+            "program": "${workspaceRoot}/bin.mjs",
             "args": ["-v", "${file}"],
             "cwd": "${workspaceRoot}",
-            "outFiles": ["${workspaceRoot}/dist/**/*.js"],
+            "outFiles": ["${workspaceRoot}/dist/**"],
             "sourceMaps": true,
             "preLaunchTask": "npm: build"
         },
@@ -39,10 +39,10 @@
             "type": "node",
             "request": "launch",
             "name": "cspell: Run CSpell against stdin",
-            "program": "${workspaceRoot}/bin.js",
+            "program": "${workspaceRoot}/bin.mjs",
             "args": ["-v", "stdin"],
             "cwd": "${workspaceRoot}",
-            "outFiles": ["${workspaceRoot}/dist/**/*.js"],
+            "outFiles": ["${workspaceRoot}/dist/**"],
             "sourceMaps": true,
             "preLaunchTask": "npm: build",
             "console": "integratedTerminal"
@@ -51,17 +51,17 @@
             "type": "node",
             "request": "launch",
             "name": "cspell: Run Trace",
-            "program": "${workspaceRoot}/bin.js",
+            "program": "${workspaceRoot}/bin.mjs",
             "args": ["trace", "about"],
             "cwd": "${workspaceRoot}",
-            "outFiles": ["${workspaceRoot}/dist/**/*.js"],
+            "outFiles": ["${workspaceRoot}/dist/**"],
             "sourceMaps": true
         },
         {
             "type": "node",
             "request": "launch",
             "name": "cspell: Run Check",
-            "program": "${workspaceRoot}/bin.js",
+            "program": "${workspaceRoot}/bin.mjs",
             "args": [
                 "check",
                 "--config",
@@ -69,64 +69,28 @@
                 "${workspaceRoot}/samples/src/sample.c"
             ],
             "cwd": "${workspaceRoot}",
-            "outFiles": ["${workspaceRoot}/dist/**/*.js"],
+            "outFiles": ["${workspaceRoot}/dist/**"],
             "sourceMaps": true
         },
         {
             "type": "node",
             "request": "launch",
             "name": "cspell: Run Link",
-            "program": "${workspaceRoot}/bin.js",
+            "program": "${workspaceRoot}/bin.mjs",
             "args": ["link"],
             "cwd": "${workspaceRoot}",
-            "outFiles": ["${workspaceRoot}/dist/**/*.js"],
+            "outFiles": ["${workspaceRoot}/dist/**"],
             "sourceMaps": true
         },
         {
             "type": "node",
             "request": "launch",
             "name": "cspell: Run Link Add",
-            "program": "${workspaceRoot}/bin.js",
+            "program": "${workspaceRoot}/bin.mjs",
             "args": ["link", "add", "cspell-dict-nl-nl/cspell-ext.json"],
             "cwd": "${workspaceRoot}/../cspell-lib",
-            "outFiles": ["${workspaceRoot}/dist/**/*.js"],
+            "outFiles": ["${workspaceRoot}/dist/**"],
             "sourceMaps": true
-        },
-        {
-            "type": "node",
-            "request": "launch",
-            "name": "cspell: Run bad glob",
-            "program": "${workspaceRoot}/dist/app.js",
-            "args": ["-v", "src", "**/*.test.ts"],
-            "cwd": "${workspaceRoot}",
-            "outFiles": ["${workspaceRoot}/dist/**/*.js"],
-            "sourceMaps": true
-        },
-        {
-            "type": "node",
-            "request": "launch",
-            "name": "cspell: Jest current-file",
-            "program": "${workspaceFolder}/../../node_modules/jest/bin/jest.js",
-            "args": ["--runInBand", "${file}"],
-            "console": "integratedTerminal",
-            "internalConsoleOptions": "neverOpen",
-            "disableOptimisticBPs": true,
-            "windows": {
-                "program": "${workspaceFolder}/../../node_modules/jest/bin/jest"
-            }
-        },
-        {
-            "type": "node",
-            "request": "launch",
-            "name": "cspell: Jest All",
-            "program": "${workspaceFolder}/../../node_modules/jest/bin/jest.js",
-            "args": ["--runInBand"],
-            "console": "integratedTerminal",
-            "internalConsoleOptions": "neverOpen",
-            "disableOptimisticBPs": true,
-            "windows": {
-                "program": "${workspaceFolder}/../../node_modules/jest/bin/jest"
-            }
         }
     ]
 }

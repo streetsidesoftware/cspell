@@ -1,8 +1,9 @@
 {
   "name": "test-cspell",
   "version": "7.0.0-alpha.1",
-  "description": "Pure testing package for cspell-io. Its purpose is to verify cspell-io dependencies.",
+  "description": "Pure testing package for cspell.",
   "private": true,
+  "type": "module",
   "scripts": {
     "clean": "shx rm -rf dist .tsbuildinfo",
     "build": "pnpm run compile",
@@ -16,6 +17,5 @@
     "@cspell/cspell-types": "workspace:*",
     "cspell": "workspace:*"
   },
-  "main": "index.js",
   "keywords": []
 }
