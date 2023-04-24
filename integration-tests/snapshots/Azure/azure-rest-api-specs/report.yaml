@@ -3,9 +3,9 @@ Repository: Azure/azure-rest-api-specs
 Url: https://github.com/Azure/azure-rest-api-specs.git
 Args: '["--config=cSpell.json","**/*.{md,ts,js}"]'
 Summary:
-  files: 2034
-  filesWithIssues: 794
-  issues: 2515
+  files: 2040
+  filesWithIssues: 799
+  issues: 2531
   errors: 0
 Errors: []
 
@@ -163,8 +163,7 @@ issues:
   - "specification/communication/resource-manager/readme.md:1:3          vsonline    U       # vsonline"
   - "specification/compute/resource-manager/readme.az.md:5:21        cloudservice    U       ``` yaml $(az) && $(cloudservice)"
   - "specification/compute/resource-manager/readme.az.md:83:14       sshkey          U       group: sshkey"
-  - "specification/compute/resource-manager/readme.md:241:136        reousrce        U       property, not necessary a reousrce. So it does not always"
-  - "specification/compute/resource-manager/readme.md:276:23         Cloudservice    U       - Microsoft.Compute/CloudserviceRP/stable/2022-09-04"
+  - "specification/compute/resource-manager/readme.md:284:23         Cloudservice    U       - Microsoft.Compute/CloudserviceRP/stable/2022-09-04"
   - "specification/confidentialledger/data-plane/readme.md:10:151        identityservice     U       ntialLedger/stable/2022-05-13/identityservice.json` for the most up"
   - "specification/connectedvmware/resource-manager/readme.azureresourceschema.md:9:17           connectedvmware     U       - tag: schema-connectedvmware-2020-10-01-preview"
   - "specification/consumption/resource-manager/readme.md:227:20         jianyexi    U       approved-by: \"@jianyexi\""
@@ -232,6 +231,7 @@ issues:
   - "specification/hybridaks/resource-manager/readme.az.md:10:14         hybridaks               U       group: hybridaks provisionedcluster"
   - "specification/hybridaks/resource-manager/readme.az.md:10:24         provisionedcluster      U       group: hybridaks provisionedcluster"
   - "specification/hybridaks/resource-manager/readme.python.md:10:26         hybridcontainerservice      U       package-name: azure-mgmt-hybridcontainerservice"
+  - "specification/hybridcloud/resource-manager/readme.az.md:9:17        hybridcloud     U       extensions: hybridcloud"
   - "specification/hybridcompute/resource-manager/readme.az.md:7:17          connectedmachine    U       extensions: connectedmachine"
   - "specification/hybridcompute/resource-manager/readme.go.md:9:14          hybridcompute       U       namespace: hybridcompute"
   - "specification/hybridconnectivity/resource-manager/readme.az.md:9:17         hybridconnectivity      U       extensions: hybridconnectivity"
@@ -272,10 +272,10 @@ issues:
   - "specification/monitor/resource-manager/readme.az.md:13:27       amcs    U       namespace: azure.mgmt.amcs"
   - "specification/monitor/resource-manager/readme.csharp.md:52:65       asumming    U       api-specs, clone it (asumming at C:\\Repos)"
   - "specification/monitor/resource-manager/readme.go.md:13:42       armmonitor              U       resourcemanager/monitor/armmonitor"
-  - "specification/monitor/resource-manager/readme.go.md:45:34       monitorlegacy           U       package-2016-03-preview-monitorlegacy"
-  - "specification/monitor/resource-manager/readme.go.md:49:26       scheduledqueryrules     U       tag: package-2021-08-scheduledqueryrules"
-  - "specification/monitor/resource-manager/readme.go.md:159:12      datacollection          U       namespace: datacollection"
-  - "specification/monitor/resource-manager/readme.go.md:189:12      activitylogs            U       namespace: activitylogs"
+  - "specification/monitor/resource-manager/readme.go.md:44:34       monitorlegacy           U       package-2016-03-preview-monitorlegacy"
+  - "specification/monitor/resource-manager/readme.go.md:48:26       scheduledqueryrules     U       tag: package-2021-08-scheduledqueryrules"
+  - "specification/monitor/resource-manager/readme.go.md:158:12      datacollection          U       namespace: datacollection"
+  - "specification/monitor/resource-manager/readme.go.md:188:12      activitylogs            U       namespace: activitylogs"
   - "specification/msi/resource-manager/readme.go.md:14:38       armmsi      U       resourcemanager/msi/armmsi"
   - "specification/mysql/resource-manager/readme.go.md:11:42         singleservers           U       track2) && $(package-singleservers)"
   - "specification/mysql/resource-manager/readme.go.md:13:40         armmysql                U       resourcemanager/mysql/armmysql"
@@ -350,6 +350,7 @@ issues:
   - "specification/nginx/resource-manager/readme.md:40:9         NGINXPLUS       U       - NGINX.NGINXPLUS/stable/2022-08-01/swagger"
   - "specification/oep/resource-manager/readme.go.md:8:38        armoep      U       resourcemanager/oep/armoep"
   - "specification/orbital/resource-manager/readme.go.md:8:42        armorbital      U       resourcemanager/orbital/armorbital"
+  - "specification/paloaltonetworks/resource-manager/readme.java.md:6:15         Palo    U       service-name: PaloAlto Networks Ngfw"
   - "specification/paloaltonetworks/resource-manager/readme.typescript.md:9:29           paloaltonetworksngfw    U       package-name: \"@azure/arm-paloaltonetworksngfw\""
   - "specification/peering/resource-manager/readme.cli.md:9:12           peerasns                    U       \"^.*[/]peerasns[/].*$\": \"peering asn"
   - "specification/peering/resource-manager/readme.cli.md:11:12          legacypeerings              U       \"^.*[/]legacypeerings$\": \"peering legacy\""
@@ -424,7 +425,7 @@ issues:
   - "specification/sql/resource-manager/readme.md:2379:40        sqlmanagement       U       csharp-sdks-folder)/sqlmanagement/Microsoft.Azure.Management"
   - "specification/storage/data-plane/Azure.Storage.Files.DataLake/readme.md:82:34       predfined       U       These parameters are predfined by storage specifications"
   - "specification/storage/resource-manager/readme.go.md:14:42       armstorage      U       resourcemanager/storage/armstorage"
-  - "specification/storagecache/resource-manager/readme.md:41:55         amlfilesystem       U       preview/2023-03-01-preview/amlfilesystem.json"
+  - "specification/storagecache/resource-manager/readme.md:41:46         amlfilesystem       U       torageCache/stable/2023-05-01/amlfilesystem.json"
   - "specification/storagemover/resource-manager/readme.az.md:9:17           storagemover    U       extensions: storagemover"
   - "specification/support/resource-manager/readme.go.md:14:42       armsupport      U       resourcemanager/support/armsupport"
   - "specification/synapse/data-plane/readme.go.md:59:12         accesscontrol               U       namespace: accesscontrol"
