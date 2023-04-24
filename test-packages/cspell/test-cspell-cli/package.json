@@ -3,14 +3,13 @@
   "version": "7.0.0-alpha.1",
   "description": "cli for cspell",
   "private": "true",
+  "type": "module",
   "bin": {
-    "cspell-cli": "bin.cjs",
+    "cspell-cli": "bin.mjs",
     "cspell-cli-esm": "bin.mjs"
   },
   "scripts": {
-    "test": "pnpm test:cjs && pnpm test:esm",
-    "test:cjs": "node ./bin.cjs .",
-    "test:esm": "node ./bin.mjs ."
+    "test": "node ./bin.mjs ."
   },
   "repository": {
     "type": "git",

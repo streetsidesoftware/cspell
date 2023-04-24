@@ -23,7 +23,7 @@
     "clean": "echo clean",
     "clean-build": "pnpm run clean && pnpm run build",
     "watch": "pnpm run build --watch",
-    "test": "node ../../bin.js \"**/*.{txt,md,ts}\"",
+    "test": "node ../../bin.mjs \"**/*.{txt,md,ts}\"",
     "update-fix-en-gb": "pnpm add @cspell/dict-en-gb@1.1.33",
     "update-dictionaries": "pnpm update --latest \"@cspell/dict-*\" && pnpm run update-fix-en-gb"
   },
@@ -56,7 +56,7 @@
     "@cspell/dict-django": "^4.0.2",
     "@cspell/dict-docker": "^1.1.6",
     "@cspell/dict-dotnet": "^5.0.0",
-    "@cspell/dict-elixir": "^4.0.2",
+    "@cspell/dict-elixir": "^4.0.3",
     "@cspell/dict-en-common-misspellings": "^1.0.2",
     "@cspell/dict-en-gb": "1.1.33",
     "@cspell/dict-en_us": "^4.3.2",

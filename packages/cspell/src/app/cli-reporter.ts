@@ -7,6 +7,7 @@ import type {
     RunResult,
 } from '@cspell/cspell-types';
 import chalk from 'chalk';
+import chalkTemplate from 'chalk-template';
 import type { ImportError, SpellingDictionaryLoadError } from 'cspell-lib';
 import { isSpellingDictionaryLoadError } from 'cspell-lib';
 import * as path from 'path';
@@ -224,7 +225,7 @@ function formatIssue(templateStr: string, issue: ReporterIssue, maxIssueTextWidt
 
     const t = template(templateStr.replace(/\$message/g, message));
 
-    return substitute(chalk(t), substitutions).trimEnd();
+    return substitute(chalkTemplate(t), substitutions).trimEnd();
 }
 
 function formatSuggestions(issue: Issue): string {

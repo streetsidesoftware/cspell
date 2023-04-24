@@ -1,3 +1,3 @@
 #!/usr/bin/env node
 
-import {} from 'cspell/bin';
+import {} from 'cspell/bin.mjs';

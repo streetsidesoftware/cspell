@@ -3,9 +3,9 @@ Repository: wireapp/wire-webapp
 Url: https://github.com/wireapp/wire-webapp.git
 Args: '["src/script/**/*.{js,ts,tsx,md}"]'
 Summary:
-  files: 953
-  filesWithIssues: 120
-  issues: 377
+  files: 956
+  filesWithIssues: 122
+  issues: 410
   errors: 0
 Errors: []
 
@@ -119,7 +119,7 @@ issues:
   - "src/script/conversation/ConversationRepository.test.ts:63:10        Unmock          U       jest.deepUnmock('axios');"
   - "src/script/conversation/ConversationRepository.test.ts:286:34       Gregor          U       b.name('René, Benny, Gregor, Lipis');"
   - "src/script/conversation/ConversationRepository.test.ts:286:42       Lipis           U       René, Benny, Gregor, Lipis');"
-  - "src/script/conversation/ConversationRepository.test.ts:590:42       msdownload      U       type: 'application/x-msdownload',"
+  - "src/script/conversation/ConversationRepository.test.ts:591:42       msdownload      U       type: 'application/x-msdownload',"
   - "src/script/conversation/ConversationRepository.ts:186:46        agains      U       client mismatch handler agains the message repository"
   - "src/script/conversation/ConversationState.test.ts:37:29         groupid     U       conversation.groupId = `groupid-${randomUUID()}`;"
   - "src/script/conversation/linkPreviews/blackList.test.ts:23:18        youtu       U       it('blacklists youtu.be links', () => {"
@@ -162,7 +162,7 @@ issues:
   - "src/script/util/ArrayUtil.ts:37:54          referencial     U       matching function in case referencial equality is not enough"
   - "src/script/util/ComponentUtil.ts:44:97          everytime       U       the onUpdate callback everytime one observable updates"
   - "src/script/util/ComponentUtil.ts:46:29          containinig     U       param object The object containinig some observable properties"
-  - "src/script/util/DataDog.ts:50:12        datadoghq       U       site: 'datadoghq.eu',"
+  - "src/script/util/DataDog.ts:52:12        datadoghq       U       site: 'datadoghq.eu',"
   - "src/script/util/DebugUtil.ts:97:5           keyboardjs      U       keyboardjs.bind('command+shift"
   - "src/script/util/Entropy.test.ts:22:7        seedrandom      U       const seedrandom = require('seedrandom"
   - "src/script/util/Entropy.test.ts:98:21       dimensonial     U       'Calculate %d-dimensonial entropy on: %s',"
@@ -170,9 +170,24 @@ issues:
   - "src/script/util/Entropy.test.ts:235:11      randomdata      U       const randomdata = new Uint8Array([."
   - "src/script/util/Entropy.ts:44:83        multipe     U       differences on, containing a multipe of `n` elements"
   - "src/script/util/localStorage.ts:21:41       localstorage    U       browser's instance of localstorage if present."
+  - "src/script/util/messageRenderer.test.ts:118:58      ohoh            U       quot;javascript:alert('ohoh!')&quot;&gt;what?&lt"
+  - "src/script/util/messageRenderer.test.ts:162:15      endlines        U       it('renders endlines to <br>', () => {"
+  - "src/script/util/messageRenderer.test.ts:189:28      doop            U       expect(renderMessage('[doop](http://www.example"
+  - "src/script/util/messageRenderer.test.ts:194:22      deeplink        U       it('renders a wire deeplink from markdown notation"
+  - "src/script/util/messageRenderer.test.ts:248:28      sometext        U       expect(renderMessage('[sometext](https://some.domain"
+  - "src/script/util/messageRenderer.test.ts:272:31      charachters     U       escapes links with html charachters on their title', ()"
+  - "src/script/util/messageRenderer.test.ts:292:7       conversts       U       it('conversts unicode links to punycode"
+  - "src/script/util/messageRenderer.test.ts:302:15      confusables     U       it('unicode confusables generate a code', ("
+  - "src/script/util/messageRenderer.test.ts:330:39      bien            U       bonjour @felix, tu vas bien @felix?',"
+  - "src/script/util/messageRenderer.test.ts:334:12      salut           U       'salut <span class=\"message"
+  - "src/script/util/messageRenderer.test.ts:516:29      redcarpet       U       '```ruby\\nrequire \\'redcarpet\\'\\nmarkdown = Redcarpet"
+  - "src/script/util/messageRenderer.test.ts:516:53      Redcarpet       U       redcarpet\\'\\nmarkdown = Redcarpet.new(\"Hello World!\")"
+  - "src/script/util/messageRenderer.test.ts:572:102     anotherlink     U       www.link.com and www.anotherlink.net.'),"
+  - "src/script/util/messageRenderer.test.ts:595:23      blockquotes     U       it('does not render blockquotes', () => {"
+  - "src/script/util/messageRenderer.test.ts:617:43      fulltitle       U       calling__voice_channel__fulltitle';"
   - "src/script/util/SanitizationUtil.test.ts:38:39          Unsanitzed      U       name(`<script>alert('Unsanitzed');</script>`);"
-  - "src/script/util/StringUtil.ts:213:50        charachters     U       replace accents its charachters"
   - "src/script/util/util.test.ts:130:65         AQABAAAAA       U       image/gif;base64,R0lGODlhAQABAAAAACw=');"
+  - "src/script/util/worker.ts:26:59         instanciate     U       creation function that will instanciate the worker (only called"
   - "src/script/view_model/CallingViewModel.test.ts:166:50       emmited     U       after mls service has emmited \"newEpoch\" event', async"
   - "src/script/view_model/CallingViewModel.ts:337:81        ourselfes           U       dropped), we remove ourselfes from subconversation"
   - "src/script/view_model/CallingViewModel.ts:340:73        subconversations    U       detect stale clients in subconversations"

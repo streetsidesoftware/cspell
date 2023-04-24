@@ -15,7 +15,7 @@ import type { Logger } from './types';
 const config = readConfig();
 const cspellArgs =
     '-u --no-progress --relative --show-context --gitignore --gitignore-root=. --reporter=default --reporter=${pathReporter}';
-const jsCspell = JSON.stringify(Path.resolve(__dirname, '..', '..', 'bin.js'));
+const jsCspell = JSON.stringify(Path.resolve(__dirname, '../../bin.mjs'));
 
 const cspellCommand = `node ${jsCspell}`;
 
