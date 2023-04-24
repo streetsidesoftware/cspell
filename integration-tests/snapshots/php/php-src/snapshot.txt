@@ -111,7 +111,7 @@ Lines:
 ./Zend/Optimizer/zend_inference.c:29:58     - Unknown word (Pereira)    -- de Assis Costa and F. Pereira.
 ./Zend/Optimizer/zend_inference.c:3029:7    - Unknown word (Typehinting) -- /* Typehinting */
 ./Zend/Optimizer/zend_inference.c:30:49     - Unknown word (SBLP)       -- in Range Analysis", SBLP'12.
-./Zend/Optimizer/zend_inference.h:223:46    - Unknown word (raena)      -- inference(zend_arena **raena, const zend_op_array
+./Zend/Optimizer/zend_inference.h:223:54    - Unknown word (raena)      -- inference(zend_arena **raena, const zend_op_array
 ./Zend/Optimizer/zend_optimizer.c:1349:8    - Unknown word (recalc)     -- zend_recalc_live_ranges(op_array
 ./Zend/Optimizer/zend_ssa.c:241:19    - Unknown word (essa)       -- static void place_essa_pis(
 ./Zend/Optimizer/zend_worklist.h:15:20     - Unknown word (Wingo)      -- | Authors: Andy Wingo <wingo@igalia.com>
@@ -1073,9 +1073,9 @@ Lines:
 ./ext/date/lib/fallbackmap.h:41:5      - Unknown word (nzst)       -- { "nzst", 0,  720 * 60, "Pacific
 ./ext/date/lib/fallbackmap.h:42:5      - Unknown word (nzdt)       -- { "nzdt", 1,  780 * 60, "Pacific
 ./ext/date/lib/fallbackmap.h:4:5       - Unknown word (akdt)       -- { "akdt", 1, -480 * 60, "America
-./ext/date/lib/interval.c:247:11    - Unknown word (hmsf)       -- timelib_hmsf_to_decimal_hour(earliest
-./ext/date/lib/interval.c:61:45     - Unknown word (TZID)       -- times with the same TZID, we use the y-s + us
-./ext/date/lib/interval.c:90:44     - Unknown word (tzid)       -- time *timelib_diff_with_tzid(timelib_time *one, timelib
+./ext/date/lib/interval.c:196:11    - Unknown word (hmsf)       -- timelib_hmsf_to_decimal_hour(earliest
+./ext/date/lib/interval.c:42:45     - Unknown word (TZID)       -- times with the same TZID, we use the y-s + us
+./ext/date/lib/interval.c:71:44     - Unknown word (tzid)       -- time *timelib_diff_with_tzid(timelib_time *one, timelib
 ./ext/date/lib/parse_iso_intervals.c:185:10    - Unknown word (yych)       -- YYCTYPE yych;
 ./ext/date/lib/parse_iso_intervals.c:186:15    - Unknown word (yyaccept)   -- unsigned int yyaccept = 0;
 ./ext/date/lib/parse_iso_intervals.c:187:29    - Unknown word (yybm)       -- const unsigned char yybm[] = {
@@ -1194,7 +1194,8 @@ Lines:
 ./ext/date/lib/timezonemap.h:94:33     - Unknown word (Kralendijk)  -- 0, -14400, "America/Kralendijk" },
 ./ext/date/lib/timezonemap.h:96:33     - Unknown word (Marigot)     -- 0, -14400, "America/Marigot" },
 ./ext/date/lib/timezonemap.h:992:5     - Unknown word (sast)         -- { "sast", 0,   7200, "Africa
-./ext/date/lib/tm2unixtime.c:64:14     - Unknown word (leapyear)   -- timelib_sll leapyear;
+./ext/date/lib/tm2unixtime.c:476:72    - Unknown word (halfly)     -- in that day that only halfly fits in the int64_t
+./ext/date/lib/tm2unixtime.c:72:14     - Unknown word (leapyear)   -- timelib_sll leapyear;
 ./ext/date/lib/unixtime2tm.c:216:32    - Unknown word (gmttime)    -- otherwise it converts it to gmttime. This is only done when
 ./ext/date/php_date.c:100:31    - Unknown word (hhmm)       -- EST, EDT) and the +/-hhmm offset specified in
 ./ext/date/php_date.c:119:5     - Unknown word (CFWS)       -- * CFWS =
@@ -3109,7 +3110,7 @@ Lines:
 ./ext/intl/normalizer/normalizer_normalize.c:67:62     - Unknown word (uinput)     -- long form, const UChar *uinput, int32_t uinput_len
 ./ext/intl/normalizer/normalizer_normalize.c:92:11     - Unknown word (uret)       -- UChar* uret_buf = NULL;
 ./ext/intl/php_intl.c:183:15    - Unknown word (Spoofchecker) -- /* Register 'Spoofchecker' PHP class */
-./ext/intl/php_intl.c:254:9     - Unknown word (UCONFIG)      -- #ifndef UCONFIG_NO_FORMATTING
+./ext/intl/php_intl.c:254:6     - Unknown word (UCONFIG)      -- #if !UCONFIG_NO_FORMATTING
 ./ext/intl/php_intl.c:256:14    - Unknown word (tzdata)       -- const char *tzdata_ver = NULL;
 ./ext/intl/php_intl.c:65:12     - Unknown word (spoofchecker) -- # include "spoofchecker/spoofchecker_class.h
 ./ext/intl/php_intl.stub.php:103:4     - Unknown word (PINFO)           -- /* PINFO ERROR CODES */
@@ -3614,30 +3615,30 @@ Lines:
 ./ext/mysqlnd/mysqlnd_wireprotocol.c:1031:131  - Unknown word (resultset)  -- state, buf, buf_len, "resultset header", PROT_RSET_HEADER
 ./ext/mysqlnd/mysqlnd_wireprotocol.c:1302:15   - Unknown word (allocing)   -- DBG_INF_FMT("allocing root.");
 ./ext/mysqlnd/mysqlnd_wireprotocol.c:42:9      - Unknown word (EODATA)     -- #define EODATA_MARKER 0xFE
-./ext/oci8/oci8.c:1075:23   - Unknown word (connactions)  -- /* all persistent connactions are in use, fallback
-./ext/oci8/oci8.c:121:39    - Unknown word (charsetid)    -- php_oci_create_env(ub2 charsetid);
-./ext/oci8/oci8.c:1329:8    - Unknown word (Handlefrees)  -- /* No Handlefrees for session pool connections
-./ext/oci8/oci8.c:1437:19   - Unknown word (SESSRLS)      -- rlsMode |= OCI_SESSRLS_DROPSESS;
-./ext/oci8/oci8.c:1437:27   - Unknown word (DROPSESS)     -- rlsMode |= OCI_SESSRLS_DROPSESS;
-./ext/oci8/oci8.c:1632:21   - Unknown word (invokedstatement) -- php_oci_statement *invokedstatement; /* statement this
-./ext/oci8/oci8.c:1844:7    - Unknown word (iserror)          -- bool iserror = 0;
-./ext/oci8/oci8.c:1845:6    - Unknown word (poolmode)         -- ub4 poolmode = OCI_DEFAULT;	/* Mode
-./ext/oci8/oci8.c:1849:14   - Unknown word (sessionpool)      -- /* Allocate sessionpool out of persistent memory
-./ext/oci8/oci8.c:1872:95   - Unknown word (poolh)            -- dvoid **) &session_pool->poolh, OCI_HTYPE_SPOOL, (size
-./ext/oci8/oci8.c:1940:134  - Unknown word (poolname)         -- OraText **)&session_pool->poolname, &session_pool->poolname
-./ext/oci8/oci8.c:1958:18   - Unknown word (SESSPOOL)         -- if (DTRACE_OCI8_SESSPOOL_CREATE_ENABLED()) {
-./ext/oci8/oci8.c:2003:60   - Unknown word (hashedpassword)   -- *username**edition**hashedpassword**dbname**charset */
-./ext/oci8/oci8.c:2047:10   - Unknown word (retenv)           -- OCIEnv *retenv = NULL;
-./ext/oci8/oci8.c:2248:151  - Unknown word (STMTCACHESIZE)    -- size, 0, (ub4) OCI_ATTR_STMTCACHESIZE, OCI_G(err)));
-./ext/oci8/oci8.c:2347:20   - Unknown word (numbusy)          -- ub4 numfree = 0, numbusy = 0, numopen = 0;
-./ext/oci8/oci8.c:2347:33   - Unknown word (numopen)          -- numfree = 0, numbusy = 0, numopen = 0;
-./ext/oci8/oci8.c:2347:7    - Unknown word (numfree)          -- ub4 numfree = 0, numbusy = 0, numopen
-./ext/oci8/oci8.c:2364:239  - Unknown word (SESSGET)          -- NULL, NULL, NULL, OCI_SESSGET_SPOOL));
-./ext/oci8/oci8.c:457:64    - Unknown word (pconnections) -- extensions, we release pconnections when oci_close
-./ext/oci8/oci8.c:75:32     - Unknown word (LIBPATH)    -- PHP_OCI8_LIB_PATH_MSG "LIBPATH"
-./ext/oci8/oci8.c:864:5     - Unknown word (DRCP)         -- /* DRCP: connection_class is
-./ext/oci8/oci8.c:87:8      - Unknown word (psessionpool) -- int le_psessionpool;
-./ext/oci8/oci8.c:987:45    - Unknown word (pingp)        -- (*(connection->next_pingp) > 0) && (timestamp
+./ext/oci8/oci8.c:1077:23   - Unknown word (connactions)  -- /* all persistent connactions are in use, fallback
+./ext/oci8/oci8.c:123:39    - Unknown word (charsetid)    -- php_oci_create_env(ub2 charsetid);
+./ext/oci8/oci8.c:1331:8    - Unknown word (Handlefrees)  -- /* No Handlefrees for session pool connections
+./ext/oci8/oci8.c:1439:19   - Unknown word (SESSRLS)      -- rlsMode |= OCI_SESSRLS_DROPSESS;
+./ext/oci8/oci8.c:1439:27   - Unknown word (DROPSESS)     -- rlsMode |= OCI_SESSRLS_DROPSESS;
+./ext/oci8/oci8.c:1634:21   - Unknown word (invokedstatement) -- php_oci_statement *invokedstatement; /* statement this
+./ext/oci8/oci8.c:1846:7    - Unknown word (iserror)          -- bool iserror = 0;
+./ext/oci8/oci8.c:1847:6    - Unknown word (poolmode)         -- ub4 poolmode = OCI_DEFAULT;	/* Mode
+./ext/oci8/oci8.c:1851:14   - Unknown word (sessionpool)      -- /* Allocate sessionpool out of persistent memory
+./ext/oci8/oci8.c:1874:95   - Unknown word (poolh)            -- dvoid **) &session_pool->poolh, OCI_HTYPE_SPOOL, (size
+./ext/oci8/oci8.c:1942:134  - Unknown word (poolname)         -- OraText **)&session_pool->poolname, &session_pool->poolname
+./ext/oci8/oci8.c:1960:18   - Unknown word (SESSPOOL)         -- if (DTRACE_OCI8_SESSPOOL_CREATE_ENABLED()) {
+./ext/oci8/oci8.c:2005:60   - Unknown word (hashedpassword)   -- *username**edition**hashedpassword**dbname**charset */
+./ext/oci8/oci8.c:2049:10   - Unknown word (retenv)           -- OCIEnv *retenv = NULL;
+./ext/oci8/oci8.c:2250:151  - Unknown word (STMTCACHESIZE)    -- size, 0, (ub4) OCI_ATTR_STMTCACHESIZE, OCI_G(err)));
+./ext/oci8/oci8.c:2349:20   - Unknown word (numbusy)          -- ub4 numfree = 0, numbusy = 0, numopen = 0;
+./ext/oci8/oci8.c:2349:33   - Unknown word (numopen)          -- numfree = 0, numbusy = 0, numopen = 0;
+./ext/oci8/oci8.c:2349:7    - Unknown word (numfree)          -- ub4 numfree = 0, numbusy = 0, numopen
+./ext/oci8/oci8.c:2366:239  - Unknown word (SESSGET)          -- NULL, NULL, NULL, OCI_SESSGET_SPOOL));
+./ext/oci8/oci8.c:459:64    - Unknown word (pconnections) -- extensions, we release pconnections when oci_close
+./ext/oci8/oci8.c:77:32     - Unknown word (LIBPATH)    -- PHP_OCI8_LIB_PATH_MSG "LIBPATH"
+./ext/oci8/oci8.c:866:5     - Unknown word (DRCP)         -- /* DRCP: connection_class is
+./ext/oci8/oci8.c:89:8      - Unknown word (psessionpool) -- int le_psessionpool;
+./ext/oci8/oci8.c:989:45    - Unknown word (pingp)        -- (*(connection->next_pingp) > 0) && (timestamp
 ./ext/oci8/oci8.stub.php:111:17    - Unknown word (RSET)       -- * @cvalue SQLT_RSET
 ./ext/oci8/oci8.stub.php:86:17     - Unknown word (CLOB)       -- * @cvalue SQLT_CLOB
 ./ext/oci8/oci8_arginfo.h:107:49    - Unknown word (ocisetbufferinglob) -- TYPE_INFO_EX(arginfo_ocisetbufferinglob, 0, 2, _IS_BOOL, 0)
@@ -7841,8 +7842,8 @@ Lines:
 ./ext/spl/spl_iterators.c:159:11    - Unknown word (SPLDUAL)      -- #define Z_SPLDUAL_IT_P(zv) spl_dual_it
 ./ext/spl/spl_iterators.c:161:42    - Unknown word (objzval)      -- AND_CHECK_DUAL_IT(var, objzval) \
 ./ext/spl/spl_iterators.c:214:77    - Unknown word (zthis)        -- object *object, zval *zthis)
-./ext/spl/spl_iterators.c:2210:8    - Unknown word (zpos)            -- zval zpos;
-./ext/spl/spl_iterators.c:2646:58   - Unknown word (Unsetting)       -- InvalidArgumentException, "Unsetting flag CALL_TO_STRING
+./ext/spl/spl_iterators.c:2212:8    - Unknown word (zpos)            -- zval zpos;
+./ext/spl/spl_iterators.c:2648:58   - Unknown word (Unsetting)       -- InvalidArgumentException, "Unsetting flag CALL_TO_STRING
 ./ext/spl/spl_iterators.c:336:88    - Unknown word (nextelement)  -- object->nextElement, "nextelement", NULL);
 ./ext/spl/spl_iterators.c:411:90    - Unknown word (beginchildren) -- object->beginChildren, "beginchildren", NULL);
 ./ext/spl/spl_iterators.c:425:87    - Unknown word (endchildren)   -- object->endChildren, "endchildren", NULL);
