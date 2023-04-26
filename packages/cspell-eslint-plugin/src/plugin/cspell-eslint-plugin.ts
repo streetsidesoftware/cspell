@@ -4,7 +4,7 @@ import { readFileSync } from 'fs';
 import { join as pathJoin } from 'path';
 import { createSyncFn } from 'synckit';
 
-import type { Issue, SpellCheckSyncFn } from '../worker/spellCheck.mjs';
+import type { Issue, SpellCheckSyncFn } from '../worker/types';
 import { normalizeOptions } from './defaultCheckOptions';
 
 const optionsSchema = JSON.parse(readFileSync(pathJoin(__dirname, '../../assets/options.schema.json'), 'utf8'));
@@ -99,13 +99,14 @@ function create(context: Rule.RuleContext): Rule.RuleListener {
 
         log('Suggestions: %o', issue.suggestions);
 
-        const fixable = issue.suggestions?.filter((sug) => !!sug.isPreferred);
+        const issueSuggestions = issue.suggestions;
+        const fixable = issueSuggestions?.filter((sug) => !!sug.isPreferred);
         const canFix = fixable?.length === 1;
         const preferredSuggestion = autoFix && canFix && fixable[0];
         const fix = preferredSuggestion
             ? fixFactory(preferredSuggestion.wordAdjustedToMatchCase || preferredSuggestion.word)
             : nullFix;
-        const suggestions: Rule.ReportDescriptorOptions['suggest'] = issue.suggestions?.map((sug) => createSug(sug));
+        const suggestions: Rule.ReportDescriptorOptions['suggest'] = issueSuggestions?.map((sug) => createSug(sug));
         const suggest = suggestions;
 
         const des: Rule.ReportDescriptor = {

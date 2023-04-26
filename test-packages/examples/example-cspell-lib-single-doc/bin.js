@@ -1,5 +1,5 @@
 #!/usr/bin/env node
 
-const { run } = require('./dist/index');
+import { run } from './dist/index.js';
 
 run();

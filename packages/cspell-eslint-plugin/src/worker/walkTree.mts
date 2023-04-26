@@ -1,7 +1,7 @@
 import type { Node } from 'estree-walker';
 import { walk } from 'estree-walker';
 
-import type { ASTNode } from './ASTNode.mjs';
+import type { ASTNode } from './ASTNode.js';
 
 type Key = string | number | symbol | null | undefined;
 

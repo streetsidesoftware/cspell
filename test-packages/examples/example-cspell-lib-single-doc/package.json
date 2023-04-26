@@ -3,6 +3,7 @@
   "version": "7.0.0-alpha.1",
   "description": "Pure testing package for cspell-io. Its purpose is to verify cspell-io dependencies.",
   "private": true,
+  "type": "module",
   "bin": "bin.js",
   "scripts": {
     "clean": "shx rm -rf dist",
@@ -10,14 +11,13 @@
     "watch": "tsc -p --watch",
     "clean-build": "pnpm run clean && pnpm run build",
     "compile": "tsc -p .",
-    "test": "node bin src/index.ts"
+    "test": "node bin.js src/index.ts"
   },
   "author": "",
   "license": "MIT",
   "dependencies": {
     "cspell-lib": "workspace:*"
   },
-  "main": "index.js",
   "engines": {
     "node": ">=16"
   },

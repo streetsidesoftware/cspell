@@ -8,19 +8,9 @@ import * as path from 'path';
 import { format } from 'util';
 
 import type { CustomWordListFile, WorkerOptions } from '../common/options.js';
-import type { ASTNode, JSXText, NodeType } from './ASTNode.mjs';
+import type { ASTNode, JSXText, NodeType } from './ASTNode.js';
+import type { Issue, Suggestions } from './types.js';
 import { walkTree } from './walkTree.mjs';
-
-type Suggestions = ValidationIssue['suggestionsEx'];
-
-export interface Issue {
-    start: number;
-    end: number;
-    word: string;
-    severity: 'Forbidden' | 'Unknown' | 'Hint';
-    suggestions: Suggestions;
-    nodeType: NodeType;
-}
 
 const defaultSettings: CSpellSettings = {
     patterns: [
@@ -38,10 +28,6 @@ function log(...args: Parameters<typeof console.log>) {
     if (!isDebugMode) return;
     console.log(...args);
 }
-
-type SpellCheckFn = typeof spellCheck;
-
-export type SpellCheckSyncFn = (...p: Parameters<SpellCheckFn>) => Awaited<ReturnType<SpellCheckFn>>;
 
 export async function spellCheck(filename: string, text: string, root: Node, options: WorkerOptions): Promise<Issue[]> {
     const toIgnore = new Set<string>();

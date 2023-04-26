@@ -4,20 +4,20 @@ const path = require('path');
 /**@type {import('webpack').Configuration}*/
 const config = {
     entry: {
-        main: './src/index.ts',
+        main: './src/index.mts',
     },
     target: 'node',
     module: {
         rules: [
             {
-                test: /\.tsx?$/,
+                test: /\.[mc]?tsx?$/,
                 use: 'ts-loader',
                 exclude: /node_modules/,
             },
         ],
     },
     resolve: {
-        extensions: ['.tsx', '.ts', '.js'],
+        extensions: ['.tsx', '.ts', '.js', '.mts'],
     },
     node: {
         __filename: false,
@@ -27,11 +27,14 @@ const config = {
     externalsPresets: {
         node: true,
     },
+    // experiments: {
+    //     outputModule: true,
+    // },
     externals: [/^@cspell\/cspell-bundled-dicts/],
     output: {
         path: path.resolve(__dirname, 'dist'),
         filename: '[name].js',
-        libraryTarget: 'commonjs2',
+        libraryTarget: 'commonjs',
     },
 };
 

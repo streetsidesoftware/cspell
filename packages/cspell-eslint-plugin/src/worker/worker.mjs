@@ -5,7 +5,7 @@
 
 /**
  * @typedef {import('estree').Node} Node
- * @typedef {import('./spellCheck.mjs').Issue} Issue
+ * @typedef {import('./types.js').Issue} Issue
  * @typedef {import('../common/options.js').WorkerOptions} WorkerOptions
  */
 

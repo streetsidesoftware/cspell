@@ -1,5 +1,5 @@
 import assert from 'assert';
-import { URI, Utils } from 'vscode-uri';
+import { URI, Utils } from '../../lib-cjs/vscodeUri.cjs';
 
 export interface Uri {
     readonly scheme: string;
