@@ -1,4 +1,5 @@
 import assert from 'assert';
+
 import { URI, Utils } from '../../lib-cjs/vscodeUri.cjs';
 
 export interface Uri {
