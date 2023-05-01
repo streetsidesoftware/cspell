@@ -3,7 +3,7 @@ Repository: php/php-src
 Url: "https://github.com/php/php-src.git"
 Args: ["--config=../../../../config/repositories/php/php-src/cspell.json","**/*.{md,c,h,php}"]
 Lines:
- CSpell: Files checked: 1849, Issues found: 44636 in 1315 files
+ CSpell: Files checked: 1849, Issues found: 44639 in 1315 files
  exit code: 1
 ./CODING_STANDARDS.md:105:23    - Unknown word (intvl)        -- // Could be 'date_intvl_create_from_date_str
 ./CODING_STANDARDS.md:114:8     - Unknown word (setclientencoding) -- pg_setclientencoding
@@ -81,10 +81,10 @@ Lines:
 ./Zend/Optimizer/dce.c:38:33     - Unknown word (postdominance) -- postdominator tree and of postdominance frontiers, which does
 ./Zend/Optimizer/dce.c:38:7      - Unknown word (postdominator) -- * postdominator tree and of postdominance
 ./Zend/Optimizer/dfa_pass.c:122:12    - Unknown word (shiftlist)  -- uint32_t *shiftlist;
-./Zend/Optimizer/dfa_pass.c:1637:43   - Unknown word (foat)       -- .CV [undef,null,int,foat] ->#v.CV, int(1) =>
+./Zend/Optimizer/dfa_pass.c:1646:43   - Unknown word (foat)       -- .CV [undef,null,int,foat] ->#v.CV, int(1) =>
 ./Zend/Optimizer/dfa_pass.c:407:19    - Unknown word (needly)     -- zend_op *send_needly;
 ./Zend/Optimizer/dfa_pass.c:727:30    - Unknown word (jmps)       -- int zend_dfa_optimize_jmps(zend_op_array *op_array
-./Zend/Optimizer/dfa_pass.c:948:19    - Unknown word (jmptable)   -- HashTable *jmptable = Z_ARRVAL_P(CT_CONSTANT
+./Zend/Optimizer/dfa_pass.c:955:19    - Unknown word (jmptable)   -- HashTable *jmptable = Z_ARRVAL_P(CT_CONSTANT
 ./Zend/Optimizer/escape_analysis.c:28:23     - Unknown word (Mossenbock) -- T. Kotzmann and H. Mossenbock. Escape analysis  in
 ./Zend/Optimizer/escape_analysis.c:28:7      - Unknown word (Kotzmann)   -- * T. Kotzmann and H. Mossenbock. Escape
 ./Zend/Optimizer/escape_analysis.c:396:19    - Unknown word (Equi)       -- /* 1. Build EES (Equi-Escape Sets) */
@@ -191,7 +191,7 @@ Lines:
 ./Zend/zend_compile.c:5588:45   - Unknown word (JUMPTABLES) -- options) & ZEND_COMPILE_NO_JUMPTABLES) {
 ./Zend/zend_compile.c:6027:17   - Unknown word (multicatch) -- uint32_t *jmp_multicatch = safe_emalloc(sizeof
 ./Zend/zend_compile.c:7142:7    - Unknown word (varvars)    -- bool varvars_used;
-./Zend/zend_compile.c:9136:7    - Unknown word (Unparenthesized) -- "Unparenthesized `a ? b : c ? d : e`
+./Zend/zend_compile.c:9130:7    - Unknown word (Unparenthesized) -- "Unparenthesized `a ? b : c ? d : e`
 ./Zend/zend_constants.c:182:16    - Unknown word (haltname)   -- zend_string *haltname;
 ./Zend/zend_cpuinfo.c:34:50     - Unknown word (subfunc)    -- uint32_t func, uint32_t subfunc, zend_cpu_info *cpuinfo
 ./Zend/zend_cpuinfo.c:58:103    - Unknown word (cpuidex)    -- IX86)) /* use MSVC __cpuidex intrin */
@@ -7025,9 +7025,9 @@ Lines:
 ./ext/pgsql/pgsql_arginfo.h:260:20    - Unknown word (loimport)     -- #define arginfo_pg_loimport arginfo_pg_lo_import
 ./ext/pgsql/pgsql_arginfo.h:268:20    - Unknown word (loexport)     -- #define arginfo_pg_loexport arginfo_pg_lo_export
 ./ext/pgsql/pgsql_arginfo.h:297:20    - Unknown word (clientencoding) -- #define arginfo_pg_clientencoding arginfo_pg_dbname
-./ext/pgsql/pgsql_arginfo.h:709:47    - Unknown word (PQERRORS)       -- PGSQL_ERRORS_TERSE", PQERRORS_TERSE, CONST_PERSISTENT
-./ext/pgsql/pgsql_arginfo.h:756:30    - Unknown word (NONLOCALIZED)   -- defined(PG_DIAG_SEVERITY_NONLOCALIZED)
+./ext/pgsql/pgsql_arginfo.h:753:47    - Unknown word (PQERRORS)       -- PGSQL_ERRORS_TERSE", PQERRORS_TERSE, CONST_PERSISTENT
 ./ext/pgsql/pgsql_arginfo.h:79:20     - Unknown word (numfields)    -- #define arginfo_pg_numfields arginfo_pg_num_rows
+./ext/pgsql/pgsql_arginfo.h:800:30    - Unknown word (NONLOCALIZED)   -- defined(PG_DIAG_SEVERITY_NONLOCALIZED)
 ./ext/pgsql/pgsql_arginfo.h:83:20     - Unknown word (cmdtuples)    -- #define arginfo_pg_cmdtuples arginfo_pg_num_rows
 ./ext/pgsql/php_pgsql.h:134:5     - Unknown word (geometoric) -- /* geometoric */
 ./ext/pgsql/tests/README.md:12:41     - Unknown word (createdb)   -- and database, type `createdb test` from command prompt
@@ -7560,86 +7560,87 @@ Lines:
 ./ext/sockets/sockets.c:2460:28   - Unknown word (getaddrino)  -- AF_UNIX sockets via getaddrino are not implemented
 ./ext/sockets/sockets.c:2610:2    - Unknown word (WSAPROTOCOL) -- WSAPROTOCOL_INFO wi;
 ./ext/sockets/sockets.c:932:11    - Unknown word (addrbuf)    -- char addrbuf[INET6_ADDRSTRLEN];
-./ext/sockets/sockets.stub.php:1015:8    - Unknown word (EBADE)        -- #ifdef EBADE
-./ext/sockets/sockets.stub.php:1023:8    - Unknown word (EBADR)        -- #ifdef EBADR
-./ext/sockets/sockets.stub.php:1031:8    - Unknown word (EXFULL)       -- #ifdef EXFULL
-./ext/sockets/sockets.stub.php:1039:8    - Unknown word (ENOANO)       -- #ifdef ENOANO
-./ext/sockets/sockets.stub.php:1047:8    - Unknown word (EBADRQC)      -- #ifdef EBADRQC
-./ext/sockets/sockets.stub.php:1055:8    - Unknown word (EBADSLT)      -- #ifdef EBADSLT
-./ext/sockets/sockets.stub.php:1063:8    - Unknown word (ENOSTR)       -- #ifdef ENOSTR
-./ext/sockets/sockets.stub.php:1071:8    - Unknown word (ENODATA)      -- #ifdef ENODATA
-./ext/sockets/sockets.stub.php:1079:8    - Unknown word (ETIME)        -- #ifdef ETIME
-./ext/sockets/sockets.stub.php:1087:8    - Unknown word (ENOSR)        -- #ifdef ENOSR
-./ext/sockets/sockets.stub.php:1095:8    - Unknown word (ENONET)       -- #ifdef ENONET
-./ext/sockets/sockets.stub.php:1103:19   - Unknown word (EREMOTE)      -- #ifdef PHP_SOCKET_EREMOTE
-./ext/sockets/sockets.stub.php:1111:8    - Unknown word (ENOLINK)      -- #ifdef ENOLINK
-./ext/sockets/sockets.stub.php:1119:8    - Unknown word (EADV)         -- #ifdef EADV
-./ext/sockets/sockets.stub.php:1127:8    - Unknown word (ESRMNT)       -- #ifdef ESRMNT
-./ext/sockets/sockets.stub.php:1129:4    - Unknown word (Srmount)      -- * Srmount error
-./ext/sockets/sockets.stub.php:1135:8    - Unknown word (ECOMM)        -- #ifdef ECOMM
-./ext/sockets/sockets.stub.php:1143:8    - Unknown word (EPROTO)       -- #ifdef EPROTO
-./ext/sockets/sockets.stub.php:1151:8    - Unknown word (EMULTIHOP)    -- #ifdef EMULTIHOP
-./ext/sockets/sockets.stub.php:1153:4    - Unknown word (Multihop)     -- * Multihop attempted
-./ext/sockets/sockets.stub.php:1159:8    - Unknown word (EBADMSG)      -- #ifdef EBADMSG
-./ext/sockets/sockets.stub.php:1167:8    - Unknown word (ENOTUNIQ)     -- #ifdef ENOTUNIQ
-./ext/sockets/sockets.stub.php:1175:8    - Unknown word (EBADFD)       -- #ifdef EBADFD
-./ext/sockets/sockets.stub.php:1183:8    - Unknown word (EREMCHG)      -- #ifdef EREMCHG
-./ext/sockets/sockets.stub.php:1191:8    - Unknown word (ERESTART)     -- #ifdef ERESTART
-./ext/sockets/sockets.stub.php:1199:8    - Unknown word (ESTRPIPE)     -- #ifdef ESTRPIPE
-./ext/sockets/sockets.stub.php:1215:19   - Unknown word (ENOTSOCK)     -- #ifdef PHP_SOCKET_ENOTSOCK
-./ext/sockets/sockets.stub.php:1223:19   - Unknown word (EDESTADDRREQ) -- #ifdef PHP_SOCKET_EDESTADDRREQ
-./ext/sockets/sockets.stub.php:1231:19   - Unknown word (EMSGSIZE)     -- #ifdef PHP_SOCKET_EMSGSIZE
-./ext/sockets/sockets.stub.php:1239:19   - Unknown word (EPROTOTYPE)   -- #ifdef PHP_SOCKET_EPROTOTYPE
+./ext/sockets/sockets.stub.php:1006:8    - Unknown word (ENOCSI)       -- #ifdef ENOCSI
+./ext/sockets/sockets.stub.php:1022:8    - Unknown word (EBADE)        -- #ifdef EBADE
+./ext/sockets/sockets.stub.php:1030:8    - Unknown word (EBADR)        -- #ifdef EBADR
+./ext/sockets/sockets.stub.php:1038:8    - Unknown word (EXFULL)       -- #ifdef EXFULL
+./ext/sockets/sockets.stub.php:1046:8    - Unknown word (ENOANO)       -- #ifdef ENOANO
+./ext/sockets/sockets.stub.php:1054:8    - Unknown word (EBADRQC)      -- #ifdef EBADRQC
+./ext/sockets/sockets.stub.php:1062:8    - Unknown word (EBADSLT)      -- #ifdef EBADSLT
+./ext/sockets/sockets.stub.php:1070:8    - Unknown word (ENOSTR)       -- #ifdef ENOSTR
+./ext/sockets/sockets.stub.php:1078:8    - Unknown word (ENODATA)      -- #ifdef ENODATA
+./ext/sockets/sockets.stub.php:1086:8    - Unknown word (ETIME)        -- #ifdef ETIME
+./ext/sockets/sockets.stub.php:1094:8    - Unknown word (ENOSR)        -- #ifdef ENOSR
+./ext/sockets/sockets.stub.php:1102:8    - Unknown word (ENONET)       -- #ifdef ENONET
+./ext/sockets/sockets.stub.php:1110:19   - Unknown word (EREMOTE)      -- #ifdef PHP_SOCKET_EREMOTE
+./ext/sockets/sockets.stub.php:1118:8    - Unknown word (ENOLINK)      -- #ifdef ENOLINK
+./ext/sockets/sockets.stub.php:1126:8    - Unknown word (EADV)         -- #ifdef EADV
+./ext/sockets/sockets.stub.php:1134:8    - Unknown word (ESRMNT)       -- #ifdef ESRMNT
+./ext/sockets/sockets.stub.php:1136:4    - Unknown word (Srmount)      -- * Srmount error
+./ext/sockets/sockets.stub.php:1142:8    - Unknown word (ECOMM)        -- #ifdef ECOMM
+./ext/sockets/sockets.stub.php:1150:8    - Unknown word (EPROTO)       -- #ifdef EPROTO
+./ext/sockets/sockets.stub.php:1158:8    - Unknown word (EMULTIHOP)    -- #ifdef EMULTIHOP
+./ext/sockets/sockets.stub.php:1160:4    - Unknown word (Multihop)     -- * Multihop attempted
+./ext/sockets/sockets.stub.php:1166:8    - Unknown word (EBADMSG)      -- #ifdef EBADMSG
+./ext/sockets/sockets.stub.php:1174:8    - Unknown word (ENOTUNIQ)     -- #ifdef ENOTUNIQ
+./ext/sockets/sockets.stub.php:1182:8    - Unknown word (EBADFD)       -- #ifdef EBADFD
+./ext/sockets/sockets.stub.php:1190:8    - Unknown word (EREMCHG)      -- #ifdef EREMCHG
+./ext/sockets/sockets.stub.php:1198:8    - Unknown word (ERESTART)     -- #ifdef ERESTART
+./ext/sockets/sockets.stub.php:1206:8    - Unknown word (ESTRPIPE)     -- #ifdef ESTRPIPE
+./ext/sockets/sockets.stub.php:1222:19   - Unknown word (ENOTSOCK)     -- #ifdef PHP_SOCKET_ENOTSOCK
+./ext/sockets/sockets.stub.php:1230:19   - Unknown word (EDESTADDRREQ) -- #ifdef PHP_SOCKET_EDESTADDRREQ
+./ext/sockets/sockets.stub.php:1238:19   - Unknown word (EMSGSIZE)     -- #ifdef PHP_SOCKET_EMSGSIZE
 ./ext/sockets/sockets.stub.php:123:12    - Unknown word (DONTWAIT)   -- #ifdef MSG_DONTWAIT
-./ext/sockets/sockets.stub.php:1247:19   - Unknown word (ENOPROTOOPT)  -- #ifdef PHP_SOCKET_ENOPROTOOPT
-./ext/sockets/sockets.stub.php:1255:19   - Unknown word (EPROTONOSUPPORT) -- #ifdef PHP_SOCKET_EPROTONOSUPPORT
-./ext/sockets/sockets.stub.php:1263:19   - Unknown word (ESOCKTNOSUPPORT) -- #ifdef PHP_SOCKET_ESOCKTNOSUPPORT
-./ext/sockets/sockets.stub.php:1271:19   - Unknown word (EOPNOTSUPP)      -- #ifdef PHP_SOCKET_EOPNOTSUPP
-./ext/sockets/sockets.stub.php:1279:19   - Unknown word (EPFNOSUPPORT)    -- #ifdef PHP_SOCKET_EPFNOSUPPORT
-./ext/sockets/sockets.stub.php:1287:19   - Unknown word (EAFNOSUPPORT)    -- #ifdef PHP_SOCKET_EAFNOSUPPORT
-./ext/sockets/sockets.stub.php:1295:19   - Unknown word (EADDRINUSE)      -- #ifdef PHP_SOCKET_EADDRINUSE
-./ext/sockets/sockets.stub.php:1303:19   - Unknown word (EADDRNOTAVAIL)   -- #ifdef PHP_SOCKET_EADDRNOTAVAIL
-./ext/sockets/sockets.stub.php:1311:19   - Unknown word (ENETDOWN)        -- #ifdef PHP_SOCKET_ENETDOWN
-./ext/sockets/sockets.stub.php:1319:19   - Unknown word (ENETUNREACH)     -- #ifdef PHP_SOCKET_ENETUNREACH
-./ext/sockets/sockets.stub.php:1327:19   - Unknown word (ENETRESET)       -- #ifdef PHP_SOCKET_ENETRESET
-./ext/sockets/sockets.stub.php:1335:19   - Unknown word (ECONNABORTED)    -- #ifdef PHP_SOCKET_ECONNABORTED
-./ext/sockets/sockets.stub.php:1343:19   - Unknown word (ECONNRESET)      -- #ifdef PHP_SOCKET_ECONNRESET
-./ext/sockets/sockets.stub.php:1351:19   - Unknown word (ENOBUFS)         -- #ifdef PHP_SOCKET_ENOBUFS
-./ext/sockets/sockets.stub.php:1359:19   - Unknown word (EISCONN)         -- #ifdef PHP_SOCKET_EISCONN
-./ext/sockets/sockets.stub.php:1367:19   - Unknown word (ENOTCONN)        -- #ifdef PHP_SOCKET_ENOTCONN
-./ext/sockets/sockets.stub.php:1375:19   - Unknown word (ESHUTDOWN)       -- #ifdef PHP_SOCKET_ESHUTDOWN
-./ext/sockets/sockets.stub.php:1383:19   - Unknown word (ETOOMANYREFS)    -- #ifdef PHP_SOCKET_ETOOMANYREFS
-./ext/sockets/sockets.stub.php:1391:19   - Unknown word (ETIMEDOUT)       -- #ifdef PHP_SOCKET_ETIMEDOUT
-./ext/sockets/sockets.stub.php:1399:19   - Unknown word (ECONNREFUSED)    -- #ifdef PHP_SOCKET_ECONNREFUSED
-./ext/sockets/sockets.stub.php:1407:19   - Unknown word (EHOSTDOWN)       -- #ifdef PHP_SOCKET_EHOSTDOWN
-./ext/sockets/sockets.stub.php:1415:19   - Unknown word (EHOSTUNREACH)    -- #ifdef PHP_SOCKET_EHOSTUNREACH
-./ext/sockets/sockets.stub.php:1423:19   - Unknown word (EALREADY)        -- #ifdef PHP_SOCKET_EALREADY
-./ext/sockets/sockets.stub.php:1431:19   - Unknown word (EINPROGRESS)     -- #ifdef PHP_SOCKET_EINPROGRESS
-./ext/sockets/sockets.stub.php:1439:8    - Unknown word (EISNAM)          -- #ifdef EISNAM
-./ext/sockets/sockets.stub.php:1447:8    - Unknown word (EREMOTEIO)       -- #ifdef EREMOTEIO
+./ext/sockets/sockets.stub.php:1246:19   - Unknown word (EPROTOTYPE)   -- #ifdef PHP_SOCKET_EPROTOTYPE
+./ext/sockets/sockets.stub.php:1254:19   - Unknown word (ENOPROTOOPT)  -- #ifdef PHP_SOCKET_ENOPROTOOPT
+./ext/sockets/sockets.stub.php:1262:19   - Unknown word (EPROTONOSUPPORT) -- #ifdef PHP_SOCKET_EPROTONOSUPPORT
+./ext/sockets/sockets.stub.php:1270:19   - Unknown word (ESOCKTNOSUPPORT) -- #ifdef PHP_SOCKET_ESOCKTNOSUPPORT
+./ext/sockets/sockets.stub.php:1278:19   - Unknown word (EOPNOTSUPP)      -- #ifdef PHP_SOCKET_EOPNOTSUPP
+./ext/sockets/sockets.stub.php:1286:19   - Unknown word (EPFNOSUPPORT)    -- #ifdef PHP_SOCKET_EPFNOSUPPORT
+./ext/sockets/sockets.stub.php:1294:19   - Unknown word (EAFNOSUPPORT)    -- #ifdef PHP_SOCKET_EAFNOSUPPORT
+./ext/sockets/sockets.stub.php:1302:19   - Unknown word (EADDRINUSE)      -- #ifdef PHP_SOCKET_EADDRINUSE
+./ext/sockets/sockets.stub.php:1310:19   - Unknown word (EADDRNOTAVAIL)   -- #ifdef PHP_SOCKET_EADDRNOTAVAIL
+./ext/sockets/sockets.stub.php:1318:19   - Unknown word (ENETDOWN)        -- #ifdef PHP_SOCKET_ENETDOWN
+./ext/sockets/sockets.stub.php:1326:19   - Unknown word (ENETUNREACH)     -- #ifdef PHP_SOCKET_ENETUNREACH
+./ext/sockets/sockets.stub.php:1334:19   - Unknown word (ENETRESET)       -- #ifdef PHP_SOCKET_ENETRESET
+./ext/sockets/sockets.stub.php:1342:19   - Unknown word (ECONNABORTED)    -- #ifdef PHP_SOCKET_ECONNABORTED
+./ext/sockets/sockets.stub.php:1350:19   - Unknown word (ECONNRESET)      -- #ifdef PHP_SOCKET_ECONNRESET
+./ext/sockets/sockets.stub.php:1358:19   - Unknown word (ENOBUFS)         -- #ifdef PHP_SOCKET_ENOBUFS
+./ext/sockets/sockets.stub.php:1366:19   - Unknown word (EISCONN)         -- #ifdef PHP_SOCKET_EISCONN
+./ext/sockets/sockets.stub.php:1374:19   - Unknown word (ENOTCONN)        -- #ifdef PHP_SOCKET_ENOTCONN
+./ext/sockets/sockets.stub.php:1382:19   - Unknown word (ESHUTDOWN)       -- #ifdef PHP_SOCKET_ESHUTDOWN
+./ext/sockets/sockets.stub.php:1390:19   - Unknown word (ETOOMANYREFS)    -- #ifdef PHP_SOCKET_ETOOMANYREFS
+./ext/sockets/sockets.stub.php:1398:19   - Unknown word (ETIMEDOUT)       -- #ifdef PHP_SOCKET_ETIMEDOUT
+./ext/sockets/sockets.stub.php:1406:19   - Unknown word (ECONNREFUSED)    -- #ifdef PHP_SOCKET_ECONNREFUSED
+./ext/sockets/sockets.stub.php:1414:19   - Unknown word (EHOSTDOWN)       -- #ifdef PHP_SOCKET_EHOSTDOWN
+./ext/sockets/sockets.stub.php:1422:19   - Unknown word (EHOSTUNREACH)    -- #ifdef PHP_SOCKET_EHOSTUNREACH
+./ext/sockets/sockets.stub.php:1430:19   - Unknown word (EALREADY)        -- #ifdef PHP_SOCKET_EALREADY
+./ext/sockets/sockets.stub.php:1438:19   - Unknown word (EINPROGRESS)     -- #ifdef PHP_SOCKET_EINPROGRESS
+./ext/sockets/sockets.stub.php:1446:8    - Unknown word (EISNAM)          -- #ifdef EISNAM
 ./ext/sockets/sockets.stub.php:144:17    - Unknown word (CLOEXEC)    -- #ifdef MSG_CMSG_CLOEXEC
-./ext/sockets/sockets.stub.php:1455:19   - Unknown word (EDQUOT)          -- #ifdef PHP_SOCKET_EDQUOT
-./ext/sockets/sockets.stub.php:1463:8    - Unknown word (ENOMEDIUM)       -- #ifdef ENOMEDIUM
-./ext/sockets/sockets.stub.php:1471:8    - Unknown word (EMEDIUMTYPE)     -- #ifdef EMEDIUMTYPE
-./ext/sockets/sockets.stub.php:1485:14   - Unknown word (ESTALE)          -- const SOCKET_ESTALE = UNKNOWN;
-./ext/sockets/sockets.stub.php:1535:12   - Unknown word (IPPROTO)         -- * @cvalue IPPROTO_IP
-./ext/sockets/sockets.stub.php:1579:15   - Unknown word (CANONNAME)       -- * @cvalue AI_CANONNAME
-./ext/sockets/sockets.stub.php:1584:15   - Unknown word (NUMERICHOST)     -- * @cvalue AI_NUMERICHOST
-./ext/sockets/sockets.stub.php:1603:15   - Unknown word (ADDRCONFIG)      -- * @cvalue AI_ADDRCONFIG
-./ext/sockets/sockets.stub.php:1618:11   - Unknown word (NUMERICSERV)     -- #ifdef AI_NUMERICSERV
-./ext/sockets/sockets.stub.php:1633:19   - Unknown word (RECVPKTINFO)     -- #if (defined(IPV6_RECVPKTINFO) && HAVE_IPV6)
-./ext/sockets/sockets.stub.php:1642:17   - Unknown word (PKTINFO)         -- * @cvalue IPV6_PKTINFO
-./ext/sockets/sockets.stub.php:1646:19   - Unknown word (RECVHOPLIMIT)    -- #if (defined(IPV6_RECVHOPLIMIT) && HAVE_IPV6)
-./ext/sockets/sockets.stub.php:1654:17   - Unknown word (HOPLIMIT)        -- * @cvalue IPV6_HOPLIMIT
-./ext/sockets/sockets.stub.php:1659:19   - Unknown word (RECVTCLASS)      -- #if (defined(IPV6_RECVTCLASS) && HAVE_IPV6)
-./ext/sockets/sockets.stub.php:1667:17   - Unknown word (TCLASS)          -- * @cvalue IPV6_TCLASS
+./ext/sockets/sockets.stub.php:1454:8    - Unknown word (EREMOTEIO)       -- #ifdef EREMOTEIO
+./ext/sockets/sockets.stub.php:1462:19   - Unknown word (EDQUOT)          -- #ifdef PHP_SOCKET_EDQUOT
+./ext/sockets/sockets.stub.php:1470:8    - Unknown word (ENOMEDIUM)       -- #ifdef ENOMEDIUM
+./ext/sockets/sockets.stub.php:1478:8    - Unknown word (EMEDIUMTYPE)     -- #ifdef EMEDIUMTYPE
+./ext/sockets/sockets.stub.php:1492:14   - Unknown word (ESTALE)          -- const SOCKET_ESTALE = UNKNOWN;
+./ext/sockets/sockets.stub.php:1542:12   - Unknown word (IPPROTO)         -- * @cvalue IPPROTO_IP
+./ext/sockets/sockets.stub.php:1586:15   - Unknown word (CANONNAME)       -- * @cvalue AI_CANONNAME
+./ext/sockets/sockets.stub.php:1591:15   - Unknown word (NUMERICHOST)     -- * @cvalue AI_NUMERICHOST
+./ext/sockets/sockets.stub.php:1610:15   - Unknown word (ADDRCONFIG)      -- * @cvalue AI_ADDRCONFIG
+./ext/sockets/sockets.stub.php:1625:11   - Unknown word (NUMERICSERV)     -- #ifdef AI_NUMERICSERV
+./ext/sockets/sockets.stub.php:1640:19   - Unknown word (RECVPKTINFO)     -- #if (defined(IPV6_RECVPKTINFO) && HAVE_IPV6)
+./ext/sockets/sockets.stub.php:1649:17   - Unknown word (PKTINFO)         -- * @cvalue IPV6_PKTINFO
+./ext/sockets/sockets.stub.php:1653:19   - Unknown word (RECVHOPLIMIT)    -- #if (defined(IPV6_RECVHOPLIMIT) && HAVE_IPV6)
+./ext/sockets/sockets.stub.php:1661:17   - Unknown word (HOPLIMIT)        -- * @cvalue IPV6_HOPLIMIT
+./ext/sockets/sockets.stub.php:1666:19   - Unknown word (RECVTCLASS)      -- #if (defined(IPV6_RECVTCLASS) && HAVE_IPV6)
 ./ext/sockets/sockets.stub.php:166:15    - Unknown word (REUSEADDR)  -- * @cvalue SO_REUSEADDR
-./ext/sockets/sockets.stub.php:1689:16   - Unknown word (CREDS)           -- * @cvalue SCM_CREDS
+./ext/sockets/sockets.stub.php:1674:17   - Unknown word (TCLASS)          -- * @cvalue IPV6_TCLASS
+./ext/sockets/sockets.stub.php:1696:16   - Unknown word (CREDS)           -- * @cvalue SCM_CREDS
 ./ext/sockets/sockets.stub.php:169:11    - Unknown word (REUSEPORT)  -- #ifdef SO_REUSEPORT
-./ext/sockets/sockets.stub.php:1758:16   - Unknown word (DONTFRAG)        -- #if defined(IP_DONTFRAG)
-./ext/sockets/sockets.stub.php:1927:13   - Unknown word (SOCKATMARK)      -- #ifdef HAVE_SOCKATMARK
-./ext/sockets/sockets.stub.php:1928:17   - Unknown word (atmark)          -- function socket_atmark(Socket $socket): bool
-./ext/sockets/sockets.stub.php:1951:17   - Unknown word (addrinfo)        -- function socket_addrinfo_lookup(string $host
+./ext/sockets/sockets.stub.php:1765:16   - Unknown word (DONTFRAG)        -- #if defined(IP_DONTFRAG)
+./ext/sockets/sockets.stub.php:1934:13   - Unknown word (SOCKATMARK)      -- #ifdef HAVE_SOCKATMARK
+./ext/sockets/sockets.stub.php:1935:17   - Unknown word (atmark)          -- function socket_atmark(Socket $socket): bool
+./ext/sockets/sockets.stub.php:1958:17   - Unknown word (addrinfo)        -- function socket_addrinfo_lookup(string $host
 ./ext/sockets/sockets.stub.php:205:15    - Unknown word (OOBINLINE)  -- * @cvalue SO_OOBINLINE
 ./ext/sockets/sockets.stub.php:210:15    - Unknown word (SNDBUF)     -- * @cvalue SO_SNDBUF
 ./ext/sockets/sockets.stub.php:215:15    - Unknown word (RCVBUF)     -- * @cvalue SO_RCVBUF
@@ -7665,34 +7666,33 @@ Lines:
 ./ext/sockets/sockets.stub.php:599:16    - Unknown word (MCAST)        -- * @cvalue PHP_MCAST_JOIN_GROUP
 ./ext/sockets/sockets.stub.php:64:16     - Unknown word (WAITALL)    -- * @cvalue MSG_WAITALL
 ./ext/sockets/sockets.stub.php:69:16     - Unknown word (CTRUNC)     -- * @cvalue MSG_CTRUNC
-./ext/sockets/sockets.stub.php:703:8     - Unknown word (ENXIO)        -- #ifdef ENXIO
-./ext/sockets/sockets.stub.php:719:19    - Unknown word (EBADF)        -- #ifdef PHP_SOCKET_EBADF
-./ext/sockets/sockets.stub.php:759:8     - Unknown word (ENOTBLK)      -- #ifdef ENOTBLK
-./ext/sockets/sockets.stub.php:767:8     - Unknown word (EBUSY)        -- #ifdef EBUSY
-./ext/sockets/sockets.stub.php:775:8     - Unknown word (EEXIST)       -- #ifdef EEXIST
-./ext/sockets/sockets.stub.php:783:8     - Unknown word (EXDEV)        -- #ifdef EXDEV
-./ext/sockets/sockets.stub.php:791:8     - Unknown word (ENODEV)       -- #ifdef ENODEV
-./ext/sockets/sockets.stub.php:839:8     - Unknown word (ENOTTY)       -- #ifdef ENOTTY
+./ext/sockets/sockets.stub.php:710:8     - Unknown word (ENXIO)        -- #ifdef ENXIO
+./ext/sockets/sockets.stub.php:726:19    - Unknown word (EBADF)        -- #ifdef PHP_SOCKET_EBADF
+./ext/sockets/sockets.stub.php:766:8     - Unknown word (ENOTBLK)      -- #ifdef ENOTBLK
+./ext/sockets/sockets.stub.php:774:8     - Unknown word (EBUSY)        -- #ifdef EBUSY
+./ext/sockets/sockets.stub.php:782:8     - Unknown word (EEXIST)       -- #ifdef EEXIST
+./ext/sockets/sockets.stub.php:790:8     - Unknown word (EXDEV)        -- #ifdef EXDEV
+./ext/sockets/sockets.stub.php:798:8     - Unknown word (ENODEV)       -- #ifdef ENODEV
+./ext/sockets/sockets.stub.php:846:8     - Unknown word (ENOTTY)       -- #ifdef ENOTTY
 ./ext/sockets/sockets.stub.php:84:16     - Unknown word (DONTROUTE)  -- * @cvalue MSG_DONTROUTE
-./ext/sockets/sockets.stub.php:855:8     - Unknown word (ESPIPE)       -- #ifdef ESPIPE
-./ext/sockets/sockets.stub.php:863:8     - Unknown word (EROFS)        -- #ifdef EROFS
-./ext/sockets/sockets.stub.php:871:8     - Unknown word (EMLINK)       -- #ifdef EMLINK
-./ext/sockets/sockets.stub.php:879:8     - Unknown word (EPIPE)        -- #ifdef EPIPE
-./ext/sockets/sockets.stub.php:895:8     - Unknown word (ENOLCK)       -- #ifdef ENOLCK
-./ext/sockets/sockets.stub.php:903:8     - Unknown word (ENOSYS)       -- #ifdef ENOSYS
-./ext/sockets/sockets.stub.php:911:19    - Unknown word (ENOTEMPTY)    -- #ifdef PHP_SOCKET_ENOTEMPTY
-./ext/sockets/sockets.stub.php:927:19    - Unknown word (EWOULDBLOCK)  -- #ifdef PHP_SOCKET_EWOULDBLOCK
-./ext/sockets/sockets.stub.php:935:8     - Unknown word (ENOMSG)       -- #ifdef ENOMSG
-./ext/sockets/sockets.stub.php:943:8     - Unknown word (EIDRM)        -- #ifdef EIDRM
-./ext/sockets/sockets.stub.php:951:8     - Unknown word (ECHRNG)       -- #ifdef ECHRNG
-./ext/sockets/sockets.stub.php:959:11    - Unknown word (NSYNC)        -- #ifdef EL2NSYNC
-./ext/sockets/sockets.stub.php:983:8     - Unknown word (ELNRNG)       -- #ifdef ELNRNG
-./ext/sockets/sockets.stub.php:991:8     - Unknown word (EUNATCH)      -- #ifdef EUNATCH
-./ext/sockets/sockets.stub.php:999:8     - Unknown word (ENOCSI)       -- #ifdef ENOCSI
-./ext/sockets/sockets_arginfo.h:1000:33   - Unknown word (CBPF)               -- SO_ATTACH_REUSEPORT_CBPF)
-./ext/sockets/sockets_arginfo.h:1009:17   - Unknown word (QUICKACK)           -- #if defined(TCP_QUICKACK)
-./ext/sockets/sockets_arginfo.h:1021:16   - Unknown word (PMTUDISC)           -- #if defined(IP_PMTUDISC_DO)
-./ext/sockets/sockets_arginfo.h:1039:26   - Unknown word (CSCOV)              -- defined(UDPLITE_SEND_CSCOV)
+./ext/sockets/sockets.stub.php:862:8     - Unknown word (ESPIPE)       -- #ifdef ESPIPE
+./ext/sockets/sockets.stub.php:870:8     - Unknown word (EROFS)        -- #ifdef EROFS
+./ext/sockets/sockets.stub.php:878:8     - Unknown word (EMLINK)       -- #ifdef EMLINK
+./ext/sockets/sockets.stub.php:886:8     - Unknown word (EPIPE)        -- #ifdef EPIPE
+./ext/sockets/sockets.stub.php:902:8     - Unknown word (ENOLCK)       -- #ifdef ENOLCK
+./ext/sockets/sockets.stub.php:910:8     - Unknown word (ENOSYS)       -- #ifdef ENOSYS
+./ext/sockets/sockets.stub.php:918:19    - Unknown word (ENOTEMPTY)    -- #ifdef PHP_SOCKET_ENOTEMPTY
+./ext/sockets/sockets.stub.php:934:19    - Unknown word (EWOULDBLOCK)  -- #ifdef PHP_SOCKET_EWOULDBLOCK
+./ext/sockets/sockets.stub.php:942:8     - Unknown word (ENOMSG)       -- #ifdef ENOMSG
+./ext/sockets/sockets.stub.php:950:8     - Unknown word (EIDRM)        -- #ifdef EIDRM
+./ext/sockets/sockets.stub.php:958:8     - Unknown word (ECHRNG)       -- #ifdef ECHRNG
+./ext/sockets/sockets.stub.php:966:11    - Unknown word (NSYNC)        -- #ifdef EL2NSYNC
+./ext/sockets/sockets.stub.php:990:8     - Unknown word (ELNRNG)       -- #ifdef ELNRNG
+./ext/sockets/sockets.stub.php:998:8     - Unknown word (EUNATCH)      -- #ifdef EUNATCH
+./ext/sockets/sockets_arginfo.h:1003:33   - Unknown word (CBPF)               -- SO_ATTACH_REUSEPORT_CBPF)
+./ext/sockets/sockets_arginfo.h:1012:17   - Unknown word (QUICKACK)           -- #if defined(TCP_QUICKACK)
+./ext/sockets/sockets_arginfo.h:1024:16   - Unknown word (PMTUDISC)           -- #if defined(IP_PMTUDISC_DO)
+./ext/sockets/sockets_arginfo.h:1042:26   - Unknown word (CSCOV)              -- defined(UDPLITE_SEND_CSCOV)
 ./ext/sockets/sockets_arginfo.h:200:56    - Unknown word (wsaprotocol) -- MASK_EX(arginfo_socket_wsaprotocol_info_export, 0, 2, MAY
 ./ext/sockets/sockets_arginfo.h:369:17    - Unknown word (ERRQUEUE)    -- #if defined(MSG_ERRQUEUE)
 ./ext/sockets/sockets_arginfo.h:381:17    - Unknown word (WAITFORONE)  -- #if defined(MSG_WAITFORONE)
@@ -7706,20 +7706,20 @@ Lines:
 ./ext/sockets/sockets_arginfo.h:491:20    - Unknown word (NLATTR)       -- #if defined(SKF_AD_NLATTR)
 ./ext/sockets/sockets_arginfo.h:506:20    - Unknown word (RXHASH)       -- #if defined(SKF_AD_RXHASH)
 ./ext/sockets/sockets_arginfo.h:527:25    - Unknown word (TPID)         -- defined(SKF_AD_VLAN_TPID)
-./ext/sockets/sockets_arginfo.h:895:42    - Unknown word (WSAESTALE)    -- CONSTANT("SOCKET_ESTALE", WSAESTALE, CONST_PERSISTENT);
-./ext/sockets/sockets_arginfo.h:898:33    - Unknown word (EDISCON)      -- LONG_CONSTANT("SOCKET_EDISCON", WSAEDISCON, CONST
-./ext/sockets/sockets_arginfo.h:898:43    - Unknown word (WSAEDISCON)   -- CONSTANT("SOCKET_EDISCON", WSAEDISCON, CONST_PERSISTENT);
-./ext/sockets/sockets_arginfo.h:901:33    - Unknown word (SYSNOTREADY)  -- LONG_CONSTANT("SOCKET_SYSNOTREADY", WSASYSNOTREADY, CONST
-./ext/sockets/sockets_arginfo.h:901:47    - Unknown word (WSASYSNOTREADY) -- SOCKET_SYSNOTREADY", WSASYSNOTREADY, CONST_PERSISTENT);
-./ext/sockets/sockets_arginfo.h:904:33    - Unknown word (VERNOTSUPPORTED) -- LONG_CONSTANT("SOCKET_VERNOTSUPPORTED", WSAVERNOTSUPPORTED
-./ext/sockets/sockets_arginfo.h:904:51    - Unknown word (WSAVERNOTSUPPORTED) -- SOCKET_VERNOTSUPPORTED", WSAVERNOTSUPPORTED, CONST_PERSISTENT);
-./ext/sockets/sockets_arginfo.h:907:33    - Unknown word (NOTINITIALISED)     -- LONG_CONSTANT("SOCKET_NOTINITIALISED", WSANOTINITIALISED
-./ext/sockets/sockets_arginfo.h:907:50    - Unknown word (WSANOTINITIALISED)  -- SOCKET_NOTINITIALISED", WSANOTINITIALISED, CONST_PERSISTENT);
-./ext/sockets/sockets_arginfo.h:910:50    - Unknown word (WSAHOST)            -- SOCKET_HOST_NOT_FOUND", WSAHOST_NOT_FOUND, CONST_PERSISTENT
-./ext/sockets/sockets_arginfo.h:913:45    - Unknown word (WSATRY)             -- "SOCKET_TRY_AGAIN", WSATRY_AGAIN, CONST_PERSISTENT
-./ext/sockets/sockets_arginfo.h:916:47    - Unknown word (WSANO)              -- SOCKET_NO_RECOVERY", WSANO_RECOVERY, CONST_PERSISTENT
-./ext/sockets/sockets_arginfo.h:930:21    - Unknown word (UDPLITE)            -- #if defined(IPPROTO_UDPLITE)
-./ext/sockets/sockets_arginfo.h:950:29    - Unknown word (CANONIDN)           -- REGISTER_LONG_CONSTANT("AI_CANONIDN", AI_CANONIDN, CONST
+./ext/sockets/sockets_arginfo.h:898:42    - Unknown word (WSAESTALE)    -- CONSTANT("SOCKET_ESTALE", WSAESTALE, CONST_PERSISTENT);
+./ext/sockets/sockets_arginfo.h:901:33    - Unknown word (EDISCON)      -- LONG_CONSTANT("SOCKET_EDISCON", WSAEDISCON, CONST
+./ext/sockets/sockets_arginfo.h:901:43    - Unknown word (WSAEDISCON)   -- CONSTANT("SOCKET_EDISCON", WSAEDISCON, CONST_PERSISTENT);
+./ext/sockets/sockets_arginfo.h:904:33    - Unknown word (SYSNOTREADY)  -- LONG_CONSTANT("SOCKET_SYSNOTREADY", WSASYSNOTREADY, CONST
+./ext/sockets/sockets_arginfo.h:904:47    - Unknown word (WSASYSNOTREADY) -- SOCKET_SYSNOTREADY", WSASYSNOTREADY, CONST_PERSISTENT);
+./ext/sockets/sockets_arginfo.h:907:33    - Unknown word (VERNOTSUPPORTED) -- LONG_CONSTANT("SOCKET_VERNOTSUPPORTED", WSAVERNOTSUPPORTED
+./ext/sockets/sockets_arginfo.h:907:51    - Unknown word (WSAVERNOTSUPPORTED) -- SOCKET_VERNOTSUPPORTED", WSAVERNOTSUPPORTED, CONST_PERSISTENT);
+./ext/sockets/sockets_arginfo.h:910:33    - Unknown word (NOTINITIALISED)     -- LONG_CONSTANT("SOCKET_NOTINITIALISED", WSANOTINITIALISED
+./ext/sockets/sockets_arginfo.h:910:50    - Unknown word (WSANOTINITIALISED)  -- SOCKET_NOTINITIALISED", WSANOTINITIALISED, CONST_PERSISTENT);
+./ext/sockets/sockets_arginfo.h:913:50    - Unknown word (WSAHOST)            -- SOCKET_HOST_NOT_FOUND", WSAHOST_NOT_FOUND, CONST_PERSISTENT
+./ext/sockets/sockets_arginfo.h:916:45    - Unknown word (WSATRY)             -- "SOCKET_TRY_AGAIN", WSATRY_AGAIN, CONST_PERSISTENT
+./ext/sockets/sockets_arginfo.h:919:47    - Unknown word (WSANO)              -- SOCKET_NO_RECOVERY", WSANO_RECOVERY, CONST_PERSISTENT
+./ext/sockets/sockets_arginfo.h:933:21    - Unknown word (UDPLITE)            -- #if defined(IPPROTO_UDPLITE)
+./ext/sockets/sockets_arginfo.h:953:29    - Unknown word (CANONIDN)           -- REGISTER_LONG_CONSTANT("AI_CANONIDN", AI_CANONIDN, CONST
 ./ext/sockets/windows_common.h:109:33    - Unknown word (WSAEPROCLIM) -- EPROCLIM WSAEPROCLIM
 ./ext/sockets/windows_common.h:18:9      - Unknown word (NTDDI)      -- #define NTDDI_XP NTDDI_WINXP /* bug
 ./ext/sodium/README.md:10:8      - Unknown word (Libsodium)  -- [Using Libsodium in PHP Projects](https
@@ -7863,21 +7863,22 @@ Lines:
 ./ext/sqlite3/sqlite3.c:208:8     - Unknown word (errtext)    -- char *errtext = NULL;
 ./ext/sqlite3/sqlite3.c:2124:6    - Unknown word (authreturn) -- int authreturn = SQLITE_DENY;
 ./ext/sqlite3/sqlite3.c:2351:37   - Unknown word (threasafe)  -- load if this wasn't a threasafe library loaded */
-./ext/standard/array.c:1369:15   - Unknown word (thash)      -- HashTable *thash;
-./ext/standard/array.c:2679:57   - Unknown word (lstep)      -- ulong) start - end) / lstep; \
-./ext/standard/array.c:2693:15   - Unknown word (zhigh)      -- zval *zlow, *zhigh, *zstep = NULL, tmp
-./ext/standard/array.c:2693:23   - Unknown word (zstep)      -- zval *zlow, *zhigh, *zstep = NULL, tmp;
-./ext/standard/array.c:2693:8    - Unknown word (zlow)       -- zval *zlow, *zhigh, *zstep = NULL
-./ext/standard/array.c:4140:12   - Unknown word (arrlen)     -- zend_long arrlen;
-./ext/standard/array.c:4254:8    - Unknown word (colval)     -- zval *colval, *data, rv;
-./ext/standard/array.c:4520:8    - Unknown word (bucketindex) -- struct bucketindex {
-./ext/standard/array.c:4542:30   - Unknown word (cmpdata)     -- bucketindex *arTmp, *cmpdata, *lastkept;
-./ext/standard/array.c:4542:40   - Unknown word (lastkept)    -- ucketindex *arTmp, *cmpdata, *lastkept;
-./ext/standard/array.c:5593:28   - Unknown word (sawp)        -- void array_bucket_p_sawp(void *p, void *q) /
-./ext/standard/array.c:5750:32   - Unknown word (bada)        -- actual sort magic - bada-bim, bada-boom. */
-./ext/standard/array.c:5798:15   - Unknown word (randval)     -- zend_long i, randval;
-./ext/standard/array.c:5939:23   - Unknown word (binop)       -- static void php_array_binop(INTERNAL_FUNCTION_PARAMETERS
-./ext/standard/array.c:6015:13   - Unknown word (htbl)        -- HashTable *htbl;
+./ext/standard/array.c:1377:15   - Unknown word (thash)      -- HashTable *thash;
+./ext/standard/array.c:2687:57   - Unknown word (lstep)      -- ulong) start - end) / lstep; \
+./ext/standard/array.c:2701:15   - Unknown word (zhigh)      -- zval *zlow, *zhigh, *zstep = NULL, tmp
+./ext/standard/array.c:2701:23   - Unknown word (zstep)      -- zval *zlow, *zhigh, *zstep = NULL, tmp;
+./ext/standard/array.c:2701:8    - Unknown word (zlow)       -- zval *zlow, *zhigh, *zstep = NULL
+./ext/standard/array.c:3970:42   - Unknown word (sequentialized) -- holes, it might get sequentialized */
+./ext/standard/array.c:4175:12   - Unknown word (arrlen)         -- zend_long arrlen;
+./ext/standard/array.c:4289:8    - Unknown word (colval)         -- zval *colval, *data, rv;
+./ext/standard/array.c:4555:8    - Unknown word (bucketindex)    -- struct bucketindex {
+./ext/standard/array.c:4577:30   - Unknown word (cmpdata)        -- bucketindex *arTmp, *cmpdata, *lastkept;
+./ext/standard/array.c:4577:40   - Unknown word (lastkept)       -- ucketindex *arTmp, *cmpdata, *lastkept;
+./ext/standard/array.c:5647:28   - Unknown word (sawp)           -- void array_bucket_p_sawp(void *p, void *q) /
+./ext/standard/array.c:5804:32   - Unknown word (bada)           -- actual sort magic - bada-bim, bada-boom. */
+./ext/standard/array.c:5852:15   - Unknown word (randval)        -- zend_long i, randval;
+./ext/standard/array.c:5993:23   - Unknown word (binop)          -- static void php_array_binop(INTERNAL_FUNCTION_PARAMETERS
+./ext/standard/array.c:6069:13   - Unknown word (htbl)           -- HashTable *htbl;
 ./ext/standard/assert.c:197:7     - Unknown word (oldint)     -- bool oldint;
 ./ext/standard/assert.c:35:9      - Unknown word (ASSERTG)    -- #define ASSERTG(v) ZEND_MODULE_GLOBALS
 ./ext/standard/base64.c:100:46    - Unknown word (bbcc)       -- (x.val[1], 2),  /* [bbcc_cc00] */
@@ -7955,18 +7956,18 @@ Lines:
 ./ext/standard/basic_functions.stub.php:1475:8    - Unknown word (NOSTR)      -- #ifdef NOSTR
 ./ext/standard/basic_functions.stub.php:1512:90   - Unknown word (STDFLAGS)   -- PHP_OUTPUT_HANDLER_STDFLAGS): bool {}
 ./ext/standard/basic_functions.stub.php:176:21    - Unknown word (PERDIR)     -- * @cvalue ZEND_INI_PERDIR
-./ext/standard/basic_functions.stub.php:1913:13   - Unknown word (NANOSLEEP)  -- #ifdef HAVE_NANOSLEEP
-./ext/standard/basic_functions.stub.php:2039:13   - Unknown word (GETLOADAVG) -- #ifdef HAVE_GETLOADAVG
-./ext/standard/basic_functions.stub.php:2047:4    - Unknown word (browscap)   -- /* browscap.c */
-./ext/standard/basic_functions.stub.php:2125:33   - Unknown word (GETIFADDRS) -- defined(PHP_WIN32) || HAVE_GETIFADDRS || defined(__PASE__
-./ext/standard/basic_functions.stub.php:2684:10   - Unknown word (fdatasync)  -- function fdatasync($stream): bool {}
-./ext/standard/basic_functions.stub.php:2752:4    - Unknown word (filestat)   -- /* filestat.c */
-./ext/standard/basic_functions.stub.php:2927:4    - Unknown word (iptc)       -- /* iptc.c */
+./ext/standard/basic_functions.stub.php:1922:13   - Unknown word (NANOSLEEP)  -- #ifdef HAVE_NANOSLEEP
+./ext/standard/basic_functions.stub.php:2048:13   - Unknown word (GETLOADAVG) -- #ifdef HAVE_GETLOADAVG
+./ext/standard/basic_functions.stub.php:2056:4    - Unknown word (browscap)   -- /* browscap.c */
+./ext/standard/basic_functions.stub.php:2134:33   - Unknown word (GETIFADDRS) -- defined(PHP_WIN32) || HAVE_GETIFADDRS || defined(__PASE__
+./ext/standard/basic_functions.stub.php:2693:10   - Unknown word (fdatasync)  -- function fdatasync($stream): bool {}
+./ext/standard/basic_functions.stub.php:2761:4    - Unknown word (filestat)   -- /* filestat.c */
+./ext/standard/basic_functions.stub.php:2936:4    - Unknown word (iptc)       -- /* iptc.c */
 ./ext/standard/basic_functions.stub.php:309:14    - Unknown word (SQRTPI)     -- * @cvalue M_SQRTPI
-./ext/standard/basic_functions.stub.php:3156:4    - Unknown word (streamsfuncs) -- /* streamsfuncs.c */
 ./ext/standard/basic_functions.stub.php:319:14    - Unknown word (LNPI)       -- * @cvalue M_LNPI
-./ext/standard/basic_functions.stub.php:3338:17   - Unknown word (isatty)       -- function stream_isatty($stream): bool {}
-./ext/standard/basic_functions.stub.php:3531:26   - Unknown word (conv)         -- function sapi_windows_cp_conv(int|string $in_codepage
+./ext/standard/basic_functions.stub.php:3207:4    - Unknown word (streamsfuncs) -- /* streamsfuncs.c */
+./ext/standard/basic_functions.stub.php:3389:17   - Unknown word (isatty)       -- function stream_isatty($stream): bool {}
+./ext/standard/basic_functions.stub.php:3636:26   - Unknown word (conv)         -- function sapi_windows_cp_conv(int|string $in_codepage
 ./ext/standard/basic_functions.stub.php:424:20    - Unknown word (HINFO)      -- * @cvalue PHP_DNS_HINFO
 ./ext/standard/basic_functions.stub.php:451:20    - Unknown word (NAPTR)      -- * @cvalue PHP_DNS_NAPTR
 ./ext/standard/basic_functions.stub.php:500:15    - Unknown word (NOQUOTES)   -- * @cvalue ENT_NOQUOTES
@@ -8145,9 +8146,9 @@ Lines:
 ./ext/standard/file.c:1006:9    - Unknown word (inputlen)   -- size_t inputlen;
 ./ext/standard/file.c:1228:6    - Unknown word (oldumask)   -- int oldumask;
 ./ext/standard/file.c:1539:33   - Unknown word (deststream) -- *srcstream = NULL, *deststream = NULL;
-./ext/standard/file.c:1771:12   - Unknown word (csvline)    -- smart_str csvline = {0};
-./ext/standard/file.c:1965:9    - Unknown word (tptr)       -- char *tptr = temp;
-./ext/standard/file.c:2225:4    - Unknown word (Tokenizes)  -- Tokenizes an HTML file for get
+./ext/standard/file.c:1772:12   - Unknown word (csvline)    -- smart_str csvline = {0};
+./ext/standard/file.c:1966:9    - Unknown word (tptr)       -- char *tptr = temp;
+./ext/standard/file.c:2226:4    - Unknown word (Tokenizes)  -- Tokenizes an HTML file for get
 ./ext/standard/file.c:466:14    - Unknown word (srcstream)  -- php_stream *srcstream = NULL;
 ./ext/standard/file.stub.php:271:24    - Unknown word (RDWR)       -- @cvalue STREAM_SHUT_RDWR
 ./ext/standard/file.stub.php:412:19    - Unknown word (XPORT)      -- * @cvalue STREAM_XPORT_BIND

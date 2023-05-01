@@ -3,7 +3,7 @@ Repository: caddyserver/caddy
 Url: "https://github.com/caddyserver/caddy.git"
 Args: ["**/*.go"]
 Lines:
- CSpell: Files checked: 232, Issues found: 3351 in 211 files
+ CSpell: Files checked: 233, Issues found: 3365 in 212 files
  exit code: 1
 ./admin.go:1315:21   - Unknown word (pidfile)     -- // PIDFile writes a pidfile to the file at filename
 ./admin.go:427:24    - Unknown word (loggable)    -- zap.Array("origins", loggableURLArray(handler.allowedOrigin
@@ -164,7 +164,7 @@ Lines:
 ./modules/caddyhttp/encode/encode.go:19:65     - Unknown word (Httpgzip)   -- Copyright (c) 2015 The Httpgzip Authors.
 ./modules/caddyhttp/encode/encode.go:218:25    - Unknown word (middlewares) -- status assuming http middlewares will track its status
 ./modules/caddyhttp/encode/encode.go:276:4     - Unknown word (deallocates) -- // deallocates any active resources
-./modules/caddyhttp/encode/encode.go:330:2     - Unknown word (prefs)       -- prefs := []encodingPreference
+./modules/caddyhttp/encode/encode.go:335:2     - Unknown word (prefs)       -- prefs := []encodingPreference
 ./modules/caddyhttp/encode/encode.go:54:59     - Unknown word (Mmatcher)   -- against this ResponseMmatcher.
 ./modules/caddyhttp/encode/gzip/gzip.go:24:14     - Unknown word (klauspost)  -- "github.com/klauspost/compress/gzip"
 ./modules/caddyhttp/encode/gzip/gzip_precompressed.go:1:9       - Unknown word (caddygzip)  -- package caddygzip
@@ -280,6 +280,8 @@ Lines:
 ./modules/caddyhttp/routes.go:334:19    - Unknown word (Ifaces)     -- for _, matcherSetIfaces := range matcherSets
 ./modules/caddyhttp/server.go:72:15     - Unknown word (alives)     -- // when keep-alives are enabled. If zero
 ./modules/caddyhttp/server.go:93:21     - Unknown word (unrouted)   -- // By default, all unrouted requests receive a
+./modules/caddyhttp/server_test.go:12:14     - Unknown word (stretchr)   -- "github.com/stretchr/testify/assert"
+./modules/caddyhttp/server_test.go:19:9      - Unknown word (Syncer)     -- type nopSyncer writeFunc
 ./modules/caddyhttp/staticresp.go:270:60    - Unknown word (unflagged)  -- fmt.Errorf("too many unflagged arguments")
 ./modules/caddyhttp/subroute.go:55:22     - Unknown word (subrouting) -- / Provision sets up subrouting.
 ./modules/caddyhttp/templates/templates.go:128:18    - Unknown word (mydir)      -- // {{listFiles "/mydir"}}
@@ -290,22 +292,22 @@ Lines:
 ./modules/caddyhttp/templates/templates.go:60:15     - Unknown word (cookiename) -- // {{.Cookie "cookiename"}}
 ./modules/caddyhttp/templates/templates.go:99:114    - Unknown word (defitions)  -- stack. If there are no defitions, the filepath will be
 ./modules/caddyhttp/templates/templates.go:99:150    - Unknown word (defition)   -- filepath will be the defition name. Any {{ define
-./modules/caddyhttp/templates/tplcontext.go:167:2     - Unknown word (virt)       -- virtReq, err := http.NewRequest
-./modules/caddyhttp/templates/tplcontext.go:32:14     - Unknown word (alecthomas) -- "github.com/alecthomas/chroma/v2/formatters
-./modules/caddyhttp/templates/tplcontext.go:36:14     - Unknown word (yuin)       -- "github.com/yuin/goldmark"
-./modules/caddyhttp/templates/tplcontext.go:36:19     - Unknown word (goldmark)   -- "github.com/yuin/goldmark"
-./modules/caddyhttp/templates/tplcontext.go:40:2      - Unknown word (gmhtml)     -- gmhtml "github.com/yuin/goldmark
-./modules/caddyhttp/templates/tplcontext.go:419:12    - Unknown word (dataerr)    -- dataint, dataerr := strconv.ParseUint
-./modules/caddyhttp/templates/tplcontext.go:419:3     - Unknown word (dataint)    -- dataint, dataerr := strconv
-./modules/caddyhttp/templates/tplcontext.go:426:3     - Unknown word (timelayout) -- timelayout := time.RFC1123Z
-./modules/caddyhttp/templates/tplcontext.go:441:24    - Unknown word (niladic)    -- WrappedHeader wraps niladic functions so that they
+./modules/caddyhttp/templates/tplcontext.go:169:2     - Unknown word (virt)       -- virtReq, err := http.NewRequest
+./modules/caddyhttp/templates/tplcontext.go:33:14     - Unknown word (alecthomas) -- "github.com/alecthomas/chroma/v2/formatters
+./modules/caddyhttp/templates/tplcontext.go:37:14     - Unknown word (yuin)       -- "github.com/yuin/goldmark"
+./modules/caddyhttp/templates/tplcontext.go:37:19     - Unknown word (goldmark)   -- "github.com/yuin/goldmark"
+./modules/caddyhttp/templates/tplcontext.go:41:2      - Unknown word (gmhtml)     -- gmhtml "github.com/yuin/goldmark
+./modules/caddyhttp/templates/tplcontext.go:436:12    - Unknown word (dataerr)    -- dataint, dataerr := strconv.ParseUint
+./modules/caddyhttp/templates/tplcontext.go:436:3     - Unknown word (dataint)    -- dataint, dataerr := strconv
+./modules/caddyhttp/templates/tplcontext.go:443:3     - Unknown word (timelayout) -- timelayout := time.RFC1123Z
+./modules/caddyhttp/templates/tplcontext.go:458:24    - Unknown word (niladic)    -- WrappedHeader wraps niladic functions so that they
 ./modules/caddyhttp/templates/tplcontext_test.go:489:75    - Unknown word (ctxtest)    -- tplContext.Root), "caddy_ctxtest")
 ./modules/caddyhttp/tracing/module.go:29:21     - Unknown word (opentelemetry) -- // otel implements opentelemetry related logic.
 ./modules/caddyhttp/tracing/module.go:29:5      - Unknown word (otel)       -- // otel implements opentelemetry
 ./modules/caddyhttp/tracing/module_test.go:105:3     - Unknown word (traceparent) -- traceparent := request.Header.Get
 ./modules/caddyhttp/tracing/module_test.go:105:38    - Unknown word (Traceparent) -- request.Header.Get("Traceparent")
 ./modules/caddyhttp/tracing/tracer.go:10:56     - Unknown word (otelhttp)   -- instrumentation/net/http/otelhttp"
-./modules/caddyhttp/tracing/tracer.go:110:56    - Unknown word (Schemaless)    -- Default(), resource.NewSchemaless(
+./modules/caddyhttp/tracing/tracer.go:118:56    - Unknown word (Schemaless)    -- Default(), resource.NewSchemaless(
 ./modules/caddyhttp/tracing/tracer.go:11:43     - Unknown word (autoprop)   -- contrib/propagators/autoprop"
 ./modules/caddyhttp/tracing/tracer.go:12:38     - Unknown word (otlp)       -- entelemetry.io/otel/exporters/otlp/otlptrace/otlptracegrpc
 ./modules/caddyhttp/tracing/tracer.go:12:43     - Unknown word (otlptrace)  -- otel/exporters/otlp/otlptrace/otlptracegrpc"
