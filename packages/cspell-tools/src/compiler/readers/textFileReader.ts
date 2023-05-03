@@ -1,5 +1,5 @@
-import type { BaseReader } from './ReaderOptions';
-import { readTextFile } from './readTextFile';
+import type { BaseReader } from './ReaderOptions.js';
+import { readTextFile } from './readTextFile.js';
 
 export async function textFileReader(filename: string): Promise<BaseReader> {
     const content = await readTextFile(filename);

@@ -1,5 +1,7 @@
-import { resolvePathToFixture } from '../test/TestHelper';
-import { createAllowedSplitWordsFromFiles } from './createWordsCollection';
+import { describe, expect, test } from 'vitest';
+
+import { resolvePathToFixture } from '../test/TestHelper.js';
+import { createAllowedSplitWordsFromFiles } from './createWordsCollection.js';
 
 describe('createAllowedSplitWords', () => {
     test.each`

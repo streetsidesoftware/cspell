@@ -1,7 +1,7 @@
 import { importTrie, Trie } from 'cspell-trie-lib';
 
-import type { BaseReader } from './ReaderOptions';
-import { readTextFileLines } from './readTextFile';
+import type { BaseReader } from './ReaderOptions.js';
+import { readTextFileLines } from './readTextFile.js';
 
 export async function trieFileReader(filename: string): Promise<BaseReader> {
     const trieRoot = importTrie(await readTextFileLines(filename));

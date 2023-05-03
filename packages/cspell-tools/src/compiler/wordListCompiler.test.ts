@@ -6,21 +6,22 @@ import { importTrie, isCircular, iteratorTrieWords, serializeTrie } from 'cspell
 import * as fsp from 'fs/promises';
 import { uniqueFilter } from 'hunspell-reader';
 import * as path from 'path';
+import { beforeEach, describe, expect, test, vi } from 'vitest';
 
-import { spyOnConsole } from '../test/console';
-import { createTestHelper } from '../test/TestHelper';
-import type { CompileOptions } from './CompileOptions';
-import { legacyLineToWords } from './legacyLineToWords';
-import { setLogger } from './logger';
-import { readTextFile } from './readers/readTextFile';
-import type { SourceReaderOptions } from './SourceReader';
-import { streamSourceWordsFromFile } from './streamSourceWordsFromFile';
-import type { CompileTrieOptions } from './wordListCompiler';
-import { __testing__, compileTrie as _compileTrie, compileWordList as _compileWordList } from './wordListCompiler';
-import { normalizeTargetWords } from './wordListParser';
-import { defaultAllowedSplitWords } from './WordsCollection';
+import { spyOnConsole } from '../test/console.js';
+import { createTestHelper } from '../test/TestHelper.js';
+import type { CompileOptions } from './CompileOptions.js';
+import { legacyLineToWords } from './legacyLineToWords.js';
+import { setLogger } from './logger.js';
+import { readTextFile } from './readers/readTextFile.js';
+import type { SourceReaderOptions } from './SourceReader.js';
+import { streamSourceWordsFromFile } from './streamSourceWordsFromFile.js';
+import type { CompileTrieOptions } from './wordListCompiler.js';
+import { __testing__, compileTrie as _compileTrie, compileWordList as _compileWordList } from './wordListCompiler.js';
+import { normalizeTargetWords } from './wordListParser.js';
+import { defaultAllowedSplitWords } from './WordsCollection.js';
 
-const testHelper = createTestHelper(__filename);
+const testHelper = createTestHelper(import.meta.url);
 
 const samples = path.join(testHelper.packageRoot, '../Samples/dicts');
 const sampleDictEnUS = path.join(samples, 'hunspell', 'en_US.dic');
@@ -43,7 +44,7 @@ describe('Validate the wordListCompiler', () => {
     beforeEach(() => {
         testHelper.cdToTempDir();
         temp = testHelper.resolveTemp();
-        jest.resetAllMocks();
+        vi.resetAllMocks();
         consoleSpy.attach();
         setLogger(console.log);
     });

@@ -4,6 +4,13 @@
   "description": "A library for reading Hunspell Dictionary Files",
   "bin": "bin.js",
   "type": "module",
+  "module": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js"
+    }
+  },
   "files": [
     "dist",
     "bin.js",

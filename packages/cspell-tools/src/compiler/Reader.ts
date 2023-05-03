@@ -1,7 +1,7 @@
-import type { BaseReader, Reader, ReaderOptions } from './readers/ReaderOptions';
-import { readHunspellFiles } from './readers/readHunspellFiles';
-import { textFileReader } from './readers/textFileReader';
-import { trieFileReader } from './readers/trieFileReader';
+import type { BaseReader, Reader, ReaderOptions } from './readers/ReaderOptions.js';
+import { readHunspellFiles } from './readers/readHunspellFiles.js';
+import { textFileReader } from './readers/textFileReader.js';
+import { trieFileReader } from './readers/trieFileReader.js';
 
 export const regHunspellFile = /\.(dic|aff)$/i;
 

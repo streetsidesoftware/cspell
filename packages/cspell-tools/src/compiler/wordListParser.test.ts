@@ -1,14 +1,15 @@
 // cSpell:ignore jpegs outing dirs lcode outring outrings
 
 import { toArray } from '@cspell/cspell-pipe/sync';
+import { beforeEach, describe, expect, test, vi } from 'vitest';
 
-import type { ParseFileOptions } from './wordListParser';
-import { normalizeTargetWords, parseFileLines } from './wordListParser';
-import { defaultAllowedSplitWords } from './WordsCollection';
+import type { ParseFileOptions } from './wordListParser.js';
+import { normalizeTargetWords, parseFileLines } from './wordListParser.js';
+import { defaultAllowedSplitWords } from './WordsCollection.js';
 
 describe('Validate the wordListCompiler', () => {
     beforeEach(() => {
-        jest.resetAllMocks();
+        vi.resetAllMocks();
     });
 
     test.each`

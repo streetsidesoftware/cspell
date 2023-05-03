@@ -1,14 +1,15 @@
 import * as Commander from 'commander';
 import * as fs from 'fs/promises';
 import * as path from 'path';
+import { beforeAll, beforeEach, describe, expect, test, vi } from 'vitest';
 
-import * as app from './app';
-import { readTextFile } from './compiler/readers/readTextFile';
-import { getSystemFeatureFlags } from './FeatureFlags';
-import { spyOnConsole } from './test/console';
-import { createTestHelper } from './test/TestHelper';
+import * as app from './app.js';
+import { readTextFile } from './compiler/readers/readTextFile.js';
+import { getSystemFeatureFlags } from './FeatureFlags/index.js';
+import { spyOnConsole } from './test/console.js';
+import { createTestHelper } from './test/TestHelper.js';
 
-const testHelper = createTestHelper(__filename);
+const testHelper = createTestHelper(import.meta.url);
 
 const projectRoot = testHelper.packageRoot;
 const relPathTemp = 'app-out';
@@ -37,7 +38,7 @@ describe('Validate the application', () => {
         testHelper.createTempDir();
         testHelper.cp(path.join(pathSamples, 'cities.txt'), '.');
         testHelper.cd('.');
-        jest.resetAllMocks();
+        vi.resetAllMocks();
         consoleSpy.attach();
     });
 
@@ -86,7 +87,7 @@ describe('Validate the application', () => {
         );
         const ff = getSystemFeatureFlags().fork();
         await expect(app.run(commander, args, ff)).resolves.toBeUndefined();
-        const words = await readTextFile(path.join(pathTemp(), 'out/cities.compound.trie'));
+        const words = await readTextFile(pathTemp('out/cities.compound.trie'));
         expect(words).toMatchSnapshot();
     });
 
@@ -182,7 +183,7 @@ describe('Validate the application', () => {
 
     test('app no args', async () => {
         const commander = getCommander();
-        const mock = jest.fn();
+        const mock = vi.fn();
         commander.on('--help', mock);
         await expect(app.run(commander, argv())).rejects.toThrow(Commander.CommanderError);
         expect(mock.mock.calls.length).toBe(1);
@@ -191,7 +192,7 @@ describe('Validate the application', () => {
 
     test('app --help', async () => {
         const commander = getCommander();
-        const mock = jest.fn();
+        const mock = vi.fn();
         commander.on('--help', mock);
         await expect(app.run(commander, argv('--help'))).rejects.toThrow(Commander.CommanderError);
         expect(mock.mock.calls.length).toBe(1);
@@ -200,7 +201,7 @@ describe('Validate the application', () => {
 
     test('app -V', async () => {
         const commander = getCommander();
-        const mock = jest.fn();
+        const mock = vi.fn();
         commander.on('option:version', mock);
         await expect(app.run(commander, argv('-V'))).rejects.toThrow(Commander.CommanderError);
         expect(mock.mock.calls.length).toBe(1);

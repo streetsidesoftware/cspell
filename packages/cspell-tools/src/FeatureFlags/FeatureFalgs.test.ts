@@ -1,5 +1,7 @@
-import type { FeatureFlag } from './FeatureFlags';
-import { FeatureFlags, getSystemFeatureFlags } from './FeatureFlags';
+import { describe, expect, test } from 'vitest';
+
+import type { FeatureFlag } from './FeatureFlags.js';
+import { FeatureFlags, getSystemFeatureFlags } from './FeatureFlags.js';
 
 describe('FeatureFlags', () => {
     const flags: FeatureFlag[] = [

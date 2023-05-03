@@ -1,7 +1,7 @@
 import * as path from 'path';
 
-import type { CompileCommonAppOptions } from '../AppOptions';
-import type { CompileRequest, DictionaryFormats, Target } from '../config';
+import type { CompileCommonAppOptions } from '../AppOptions.js';
+import type { CompileRequest, DictionaryFormats, Target } from '../config/index.js';
 
 export function createCompileRequest(sources: string[], options: CompileCommonAppOptions): CompileRequest {
     const { max_depth, maxDepth, experimental = [], split, keepRawCase, useLegacySplitter } = options;

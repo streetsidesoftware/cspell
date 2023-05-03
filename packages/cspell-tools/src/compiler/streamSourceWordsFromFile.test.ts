@@ -1,9 +1,13 @@
 import * as path from 'path';
+import { describe, expect, test } from 'vitest';
 
-import { streamSourceWordsFromFile } from './streamSourceWordsFromFile';
-import { defaultAllowedSplitWords } from './WordsCollection';
+import { test_dirname } from '../test/TestHelper.js';
+import { streamSourceWordsFromFile } from './streamSourceWordsFromFile.js';
+import { defaultAllowedSplitWords } from './WordsCollection.js';
 
-const samples = path.join(__dirname, '..', '..', '..', 'Samples', 'dicts');
+const _dirname = test_dirname(import.meta.url);
+
+const samples = path.join(_dirname, '../../../Samples/dicts');
 
 const allowedSplitWords = defaultAllowedSplitWords;
 

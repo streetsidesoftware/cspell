@@ -3,10 +3,10 @@ import * as Trie from 'cspell-trie-lib';
 import { mkdir } from 'fs/promises';
 import * as path from 'path';
 
-import type { CompileOptions } from './CompileOptions';
-import { writeSeqToFile } from './fileWriter';
-import { getLogger } from './logger';
-import { normalizeTargetWords } from './wordListParser';
+import type { CompileOptions } from './CompileOptions.js';
+import { writeSeqToFile } from './fileWriter.js';
+import { getLogger } from './logger.js';
+import { normalizeTargetWords } from './wordListParser.js';
 
 const mkdirp = async (p: string) => {
     await mkdir(p, { recursive: true });

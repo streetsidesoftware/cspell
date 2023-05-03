@@ -1,12 +1,13 @@
 import * as path from 'path';
+import { beforeAll, beforeEach, describe, expect, test } from 'vitest';
 
-import type { CompileRequest, Target } from '../config';
-import { spyOnConsole } from '../test/console';
-import { createTestHelper } from '../test/TestHelper';
-import { compile } from './compile';
-import { readTextFile } from './readers/readTextFile';
+import type { CompileRequest, Target } from '../config/index.js';
+import { spyOnConsole } from '../test/console.js';
+import { createTestHelper } from '../test/TestHelper.js';
+import { compile } from './compile.js';
+import { readTextFile } from './readers/readTextFile.js';
 
-const testHelper = createTestHelper(__filename);
+const testHelper = createTestHelper(import.meta.url);
 
 const pathSamples = path.join(testHelper.packageRoot, '../Samples/dicts');
 

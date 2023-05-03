@@ -1,16 +1,17 @@
 // cSpell:ignore jpegs outing dirs lcode outring outrings
 
 import { opFilter, pipe } from '@cspell/cspell-pipe/sync';
+import { beforeEach, describe, expect, test, vi } from 'vitest';
 
-import { createAllowedSplitWords } from './createWordsCollection';
-import { legacyLineToWords } from './legacyLineToWords';
-import { defaultAllowedSplitWords } from './WordsCollection';
+import { createAllowedSplitWords } from './createWordsCollection.js';
+import { legacyLineToWords } from './legacyLineToWords.js';
+import { defaultAllowedSplitWords } from './WordsCollection.js';
 
 const allowed = defaultAllowedSplitWords;
 
 describe('Validate legacyLineToWords', () => {
     beforeEach(() => {
-        jest.resetAllMocks();
+        vi.resetAllMocks();
     });
 
     test.each`

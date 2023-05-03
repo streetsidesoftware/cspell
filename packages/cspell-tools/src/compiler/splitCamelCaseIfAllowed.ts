@@ -1,5 +1,5 @@
-import * as Text from './text';
-import type { AllowedSplitWordsCollection } from './WordsCollection';
+import * as Text from './text.js';
+import type { AllowedSplitWordsCollection } from './WordsCollection.js';
 
 export const regExpSpaceOrDash = /[- ]+/g;
 export const regExpIsNumber = /^\d+$/;

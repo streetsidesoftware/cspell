@@ -1,8 +1,13 @@
+import assert from 'assert';
 import { promises as fs } from 'fs';
 import * as path from 'path';
 import * as shell from 'shelljs';
+import { fileURLToPath } from 'url';
+import { expect } from 'vitest';
 
-const packageRoot = path.join(__dirname, '../..');
+const _dirname = test_dirname(import.meta.url);
+
+const packageRoot = path.join(_dirname, '../..');
 const repoRoot = path.join(packageRoot, '../..');
 const tempDirBase = path.join(packageRoot, 'temp');
 
@@ -58,7 +63,10 @@ export interface TestHelper {
     fileExists(path: string): Promise<boolean>;
 }
 
-export function createTestHelper(testFilename?: string): TestHelper {
+export function createTestHelper(testFilenameUrl: string): TestHelper {
+    testFilenameUrl && assert(testFilenameUrl.startsWith('file:'));
+    const testFilename = testFilenameUrl && test_filename(testFilenameUrl);
+    console.warn('%o\n%o', testFilenameUrl, testFilename);
     return new TestHelperImpl(testFilename || expect.getState().testPath || 'test');
 }
 
@@ -177,4 +185,12 @@ class TestHelperImpl implements TestHelper {
 
 export function resolvePathToFixture(...segments: string[]): string {
     return path.resolve(fixtureDir, ...segments);
+}
+
+export function test_dirname(importMetaUrl: string): string {
+    return path.dirname(test_filename(importMetaUrl));
+}
+
+export function test_filename(importMetaUrl: string): string {
+    return fileURLToPath(importMetaUrl);
 }

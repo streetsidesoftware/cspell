@@ -1,10 +1,12 @@
-import { build } from './build';
-import { setLogger } from './compiler';
-import { readTextFile } from './compiler/readers/readTextFile';
-import { spyOnConsole } from './test/console';
-import { createTestHelper } from './test/TestHelper';
+import { beforeEach, describe, expect, test } from 'vitest';
 
-const helper = createTestHelper(__filename);
+import { build } from './build.js';
+import { setLogger } from './compiler/index.js';
+import { readTextFile } from './compiler/readers/readTextFile.js';
+import { spyOnConsole } from './test/console.js';
+import { createTestHelper } from './test/TestHelper.js';
+
+const helper = createTestHelper(import.meta.url);
 
 const consoleSpy = spyOnConsole();
 setLogger(console.log);

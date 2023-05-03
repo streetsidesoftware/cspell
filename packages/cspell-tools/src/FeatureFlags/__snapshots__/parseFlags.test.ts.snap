@@ -1,8 +1,8 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`parseFlags parseFlags 1`] = `Map {}`;
+exports[`parseFlags > parseFlags 1`] = `Map {}`;
 
-exports[`parseFlags parseFlags 2`] = `
+exports[`parseFlags > parseFlags 2`] = `
 Map {
   "compress" => true,
   "advanced" => false,
@@ -10,7 +10,7 @@ Map {
 }
 `;
 
-exports[`parseFlags parseFlags 3`] = `
+exports[`parseFlags > parseFlags 3`] = `
 Map {
   "compress" => "level1",
   "advanced" => true,
@@ -18,13 +18,13 @@ Map {
 }
 `;
 
-exports[`parseFlags parseFlags 4`] = `
+exports[`parseFlags > parseFlags 4`] = `
 Map {
-  "compress" => ""yes"",
+  "compress" => "\\"yes\\"",
 }
 `;
 
-exports[`parseFlags unknown flag 1`] = `
+exports[`parseFlags > unknown flag 1`] = `
 {
   "error": "Unknown feature flag: mistaken
 Valid Flags:

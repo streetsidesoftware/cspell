@@ -11,15 +11,15 @@ import type {
     FilePath,
     FileSource,
     Target,
-} from '../config';
-import { isFileListSource, isFilePath, isFileSource } from '../config';
-import { createAllowedSplitWordsFromFiles } from './createWordsCollection';
-import { logWithTimestamp } from './logWithTimestamp';
-import { readTextFile } from './readers/readTextFile';
-import type { SourceReaderOptions } from './SourceReader';
-import { streamSourceWordsFromFile } from './streamSourceWordsFromFile';
-import { compileTrie, compileWordList } from './wordListCompiler';
-import { normalizeTargetWords } from './wordListParser';
+} from '../config/index.js';
+import { isFileListSource, isFilePath, isFileSource } from '../config/index.js';
+import { createAllowedSplitWordsFromFiles } from './createWordsCollection.js';
+import { logWithTimestamp } from './logWithTimestamp.js';
+import { readTextFile } from './readers/readTextFile.js';
+import type { SourceReaderOptions } from './SourceReader.js';
+import { streamSourceWordsFromFile } from './streamSourceWordsFromFile.js';
+import { compileTrie, compileWordList } from './wordListCompiler.js';
+import { normalizeTargetWords } from './wordListParser.js';
 
 interface CompileOptions {
     /**
