@@ -1,6 +1,6 @@
 import { describe, expect, test } from 'vitest';
 
-import { escapeUnicodeCode, removeAccents, removeLooseAccents, toRange } from './textUtils';
+import { escapeUnicodeCode, removeAccents, removeLooseAccents, toRange } from './textUtils.js';
 
 describe('textUtils', () => {
     // cspell:ignore résumé sume

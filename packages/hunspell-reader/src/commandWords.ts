@@ -4,11 +4,11 @@ import { createWriteStream, openSync, writeSync } from 'fs';
 import type { Sequence } from 'gensequence';
 import { genSequence } from 'gensequence';
 
-import { asAffWord } from './aff';
-import type { AffWord } from './affDef';
-import { IterableHunspellReader } from './IterableHunspellReader';
-import { iterableToStream } from './iterableToStream';
-import { batch, uniqueFilter } from './util';
+import { asAffWord } from './aff.js';
+import type { AffWord } from './affDef.js';
+import { IterableHunspellReader } from './IterableHunspellReader.js';
+import { iterableToStream } from './iterableToStream.js';
+import { batch, uniqueFilter } from './util.js';
 
 const uniqueHistorySize = 500000;
 

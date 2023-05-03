@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 
-import { batch, filterOrderedList, hrTimeToSeconds, uniqueFilter } from './util';
+import { batch, filterOrderedList, hrTimeToSeconds, uniqueFilter } from './util.js';
 
 describe('Test util functions', () => {
     it('Test hrTimeToSeconds', () => {

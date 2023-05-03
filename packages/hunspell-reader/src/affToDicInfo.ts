@@ -1,8 +1,8 @@
 import { opConcatMap, opMap, pipe } from '@cspell/cspell-pipe/sync';
 import type { DictionaryInformation, SuggestionCostMapDef } from '@cspell/cspell-types';
 
-import type { AffInfo, Fx, Substitution } from './affDef';
-import { removeAccents, toRange } from './textUtils';
+import type { AffInfo, Fx, Substitution } from './affDef.js';
+import { removeAccents, toRange } from './textUtils.js';
 
 export function affToDicInfo(aff: AffInfo, locale: string): DictionaryInformation {
     const alphabetInfo = extractAlphabet(aff, locale);

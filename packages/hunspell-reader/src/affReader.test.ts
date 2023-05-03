@@ -2,8 +2,8 @@ import assert from 'assert';
 import * as path from 'path';
 import { describe, expect, it, test } from 'vitest';
 
-import * as aff from './affReader';
-import { testing } from './affReader';
+import * as aff from './affReader.js';
+import { testing } from './affReader.js';
 
 const dictionaryPath = path.resolve(__dirname, '../dictionaries');
 

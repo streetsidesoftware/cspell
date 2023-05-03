@@ -3,10 +3,10 @@ import * as GS from 'gensequence';
 import { genSequence as gs } from 'gensequence';
 import * as util from 'util';
 
-import type { AffInfo, AffTransformFlags, AffWord, AffWordFlags, Fx, Rule, Substitution } from './affDef';
-import { Converter } from './converter';
-import type { Mapping } from './types';
-import { filterOrderedList, isDefined } from './util';
+import type { AffInfo, AffTransformFlags, AffWord, AffWordFlags, Fx, Rule, Substitution } from './affDef.js';
+import { Converter } from './converter.js';
+import type { Mapping } from './types.js';
+import { filterOrderedList, isDefined } from './util.js';
 
 const log = false;
 

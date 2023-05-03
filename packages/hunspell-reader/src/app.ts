@@ -1,10 +1,12 @@
 import { program } from 'commander';
+import { readFileSync } from 'fs';
 
-import { getCommand as getDictInfoCommand } from './commandDictInfo';
-import { getCommand as commandWords } from './commandWords';
+import { getCommand as getDictInfoCommand } from './commandDictInfo.js';
+import { getCommand as commandWords } from './commandWords.js';
 
-// eslint-disable-next-line @typescript-eslint/no-var-requires
-const packageInfo = require('../package.json');
+const pkgRaw = readFileSync(new URL('../package.json', import.meta.url), 'utf8');
+
+const packageInfo = JSON.parse(pkgRaw);
 const version = packageInfo['version'];
 
 program.version(version);

@@ -3,9 +3,9 @@ import { genSequence } from 'gensequence';
 import * as path from 'path';
 import { describe, expect, it, test } from 'vitest';
 
-import * as Aff from './aff';
-import * as AffReader from './affReader';
-import { IterableHunspellReader } from './IterableHunspellReader';
+import * as Aff from './aff.js';
+import * as AffReader from './affReader.js';
+import { IterableHunspellReader } from './IterableHunspellReader.js';
 
 const DICTIONARY_LOCATIONS = path.join(__dirname, '..', 'dictionaries');
 

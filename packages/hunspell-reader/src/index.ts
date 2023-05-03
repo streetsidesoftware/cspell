@@ -1,10 +1,10 @@
-export type { AffInfo, AffWord } from './affDef';
-export { parseAff, parseAffFile as readAffFile } from './affReader';
+export type { AffInfo, AffWord } from './affDef.js';
+export { parseAff, parseAffFile as readAffFile } from './affReader.js';
 export {
     createMatchingWordsFilter,
     type HunspellSrcData,
     IterableHunspellReader,
     type WordInfo,
-} from './IterableHunspellReader';
-export { IterableHunspellReader as HunspellReader } from './IterableHunspellReader';
-export { uniqueFilter } from './util';
+} from './IterableHunspellReader.js';
+export { IterableHunspellReader as HunspellReader } from './IterableHunspellReader.js';
+export { uniqueFilter } from './util.js';

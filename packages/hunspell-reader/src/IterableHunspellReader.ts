@@ -1,17 +1,18 @@
 import * as fs from 'fs/promises';
 import type { Sequence } from 'gensequence';
 import { genSequence } from 'gensequence';
-import { decode } from 'iconv-lite';
+import pkgIconvLite from 'iconv-lite';
 
-import type { Aff } from './aff';
-import type { AffWord } from './affDef';
-import { parseAffFileToAff } from './affReader';
-import type { WordInfo } from './types';
-import { filterOrderedList } from './util';
+import type { Aff } from './aff.js';
+import type { AffWord } from './affDef.js';
+import { parseAffFileToAff } from './affReader.js';
+import type { WordInfo } from './types.js';
+import { filterOrderedList } from './util.js';
 
+const { decode } = pkgIconvLite;
 const defaultEncoding = 'UTF-8';
 
-export { WordInfo } from './types';
+export { WordInfo } from './types.js';
 
 export interface HunspellSrcData {
     /** The Aff rules to use with the dictionary entries */

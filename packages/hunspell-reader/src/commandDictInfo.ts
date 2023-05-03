@@ -1,9 +1,9 @@
 // cSpell:ignore findup
 import { Command } from 'commander';
 
-import { parseAffFile } from './affReader';
-import { affToDicInfo } from './affToDicInfo';
-import { escapeUnicodeCode } from './textUtils';
+import { parseAffFile } from './affReader.js';
+import { affToDicInfo } from './affToDicInfo.js';
+import { escapeUnicodeCode } from './textUtils.js';
 
 export function getCommand(): Command {
     const commander = new Command('cspell-dict-info');
