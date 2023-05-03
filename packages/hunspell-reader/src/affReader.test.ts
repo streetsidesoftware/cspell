@@ -1,5 +1,6 @@
 import assert from 'assert';
 import * as path from 'path';
+import { describe, expect, it, test } from 'vitest';
 
 import * as aff from './affReader';
 import { testing } from './affReader';

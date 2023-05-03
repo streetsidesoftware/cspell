@@ -1,4 +1,5 @@
 import path from 'path';
+import { describe, expect, test } from 'vitest';
 
 import { parseAffFile } from './affReader';
 import { affToDicInfo } from './affToDicInfo';

@@ -1,3 +1,5 @@
+import { describe, expect, test } from 'vitest';
+
 import { escapeUnicodeCode, removeAccents, removeLooseAccents, toRange } from './textUtils';
 
 describe('textUtils', () => {

@@ -13,14 +13,15 @@
     "!**/*.test.*"
   ],
   "scripts": {
-    "test-unit": "jest",
+    "test-unit": "vitest run",
     "test-spelling": "cspell \"src/**/*.ts\" \"*.md\"",
-    "smoke-test": "../bin.js words ./dictionaries/nl -n 100",
+    "smoke-test": "./bin.js words ./dictionaries/nl -n 100",
     "test": "pnpm run test-unit",
     "build": "tsc -p .",
-    "lint": "prettier -w \"**/*.{md,yaml,yml,json,ts}\"",
     "clean": "shx rm -rf dist coverage .tsbuildinfo",
-    "coverage": "jest --coverage",
+    "coverage": "pnpm coverage:vitest && pnpm coverage:fix",
+    "coverage:vitest": "vitest run --coverage",
+    "coverage:fix": "nyc report --temp-dir \"$(pwd)/coverage\" --reporter lcov --report-dir \"$(pwd)/coverage\" --cwd ../..",
     "watch": "tsc -w"
   },
   "repository": {

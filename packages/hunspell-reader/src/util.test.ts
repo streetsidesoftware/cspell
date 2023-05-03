@@ -1,3 +1,5 @@
+import { describe, expect, it } from 'vitest';
+
 import { batch, filterOrderedList, hrTimeToSeconds, uniqueFilter } from './util';
 
 describe('Test util functions', () => {

@@ -1,3 +1,5 @@
+import { describe, expect, it } from 'vitest';
+
 import * as Conv from './converter';
 
 describe('Test Converter', () => {

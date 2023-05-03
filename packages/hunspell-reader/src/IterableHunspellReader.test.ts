@@ -1,6 +1,7 @@
 import { readdirSync } from 'fs';
 import { genSequence } from 'gensequence';
 import * as path from 'path';
+import { describe, expect, it, test } from 'vitest';
 
 import * as Aff from './aff';
 import * as AffReader from './affReader';
@@ -69,50 +70,66 @@ describe('Basic Validation of the Reader', () => {
     });
 });
 
+const timeout = 10000;
+
 describe('HunspellReader En', function () {
     // We are reading big files, so we need to give it some time.
-    jest.setTimeout(10000);
     const aff = __dirname + '/../dictionaries/en_US.aff';
     const dic = __dirname + '/../dictionaries/en_US.dic';
     const pReader = IterableHunspellReader.createFromFiles(aff, dic);
 
-    it('reads dict entries', async () => {
-        const reader = await pReader;
-        const values = reader.dicWordsSeq().skip(10000).take(10).toArray();
-        expect(values.length).toBe(10);
-    });
+    it(
+        'reads dict entries',
+        async () => {
+            const reader = await pReader;
+            const values = reader.dicWordsSeq().skip(10000).take(10).toArray();
+            expect(values.length).toBe(10);
+        },
+        timeout
+    );
 
-    it('reads words with info', async () => {
-        const reader = await pReader;
-        const values = reader.seqWords().skip(10000).take(10).toArray();
-        expect(values.length).toBe(10);
-    });
+    it(
+        'reads words with info',
+        async () => {
+            const reader = await pReader;
+            const values = reader.seqWords().skip(10000).take(10).toArray();
+            expect(values.length).toBe(10);
+        },
+        timeout
+    );
 
-    it('reads words', async () => {
-        const reader = await pReader;
-        const values = genSequence(reader).skip(10000).take(10).toArray();
-        expect(values.length).toBe(10);
-    });
+    it(
+        'reads words',
+        async () => {
+            const reader = await pReader;
+            const values = genSequence(reader).skip(10000).take(10).toArray();
+            expect(values.length).toBe(10);
+        },
+        timeout
+    );
 
-    it('tests iterating through dictionary entry transformations', async () => {
-        const reader = await pReader;
-        const dicEntries: { word: string; index: number }[] = [];
+    it(
+        'tests iterating through dictionary entry transformations',
+        async () => {
+            const reader = await pReader;
+            const dicEntries: { word: string; index: number }[] = [];
 
-        function recordEntries(word: string, index: number) {
-            dicEntries.push({ word, index });
-        }
+            function recordEntries(word: string, index: number) {
+                dicEntries.push({ word, index });
+            }
 
-        const values = reader.seqTransformDictionaryEntries(recordEntries, 2).skip(100).take(10).toArray();
-        // Note the current implementation of Sequence will pre-fetch the next iteration
-        // causing 1 more than expected to be recorded.
-        expect(dicEntries).toHaveLength(111);
-        expect(values[1][0].dic).toBe(dicEntries[101].word);
-    });
+            const values = reader.seqTransformDictionaryEntries(recordEntries, 2).skip(100).take(10).toArray();
+            // Note the current implementation of Sequence will pre-fetch the next iteration
+            // causing 1 more than expected to be recorded.
+            expect(dicEntries).toHaveLength(111);
+            expect(values[1][0].dic).toBe(dicEntries[101].word);
+        },
+        timeout
+    );
 });
 
 describe('HunspellReader read dictionaries', function () {
     // We are reading big files, so we need to give it some time.
-    jest.setTimeout(10000);
 
     test.each`
         hunDic
@@ -120,14 +137,18 @@ describe('HunspellReader read dictionaries', function () {
         ${'nl'}
         ${'Portuguese (Brazilian)'}
         ${'en_US'}
-    `('reads words with info from "$hunDic"', async ({ hunDic }) => {
-        const aff = __dirname + `/../dictionaries/${hunDic}.aff`;
-        const dic = __dirname + `/../dictionaries/${hunDic}.dic`;
-        const reader = await IterableHunspellReader.createFromFiles(aff, dic);
-        const values = reader.seqWords().skip(200).take(200).toArray();
-        expect(values.length).toBe(200);
-        expect(values).toMatchSnapshot();
-    });
+    `(
+        'reads words with info from "$hunDic"',
+        async ({ hunDic }) => {
+            const aff = __dirname + `/../dictionaries/${hunDic}.aff`;
+            const dic = __dirname + `/../dictionaries/${hunDic}.dic`;
+            const reader = await IterableHunspellReader.createFromFiles(aff, dic);
+            const values = reader.seqWords().skip(200).take(200).toArray();
+            expect(values.length).toBe(200);
+            expect(values).toMatchSnapshot();
+        },
+        timeout
+    );
 });
 
 describe('Validated loading all dictionaries in the `dictionaries` directory.', () => {

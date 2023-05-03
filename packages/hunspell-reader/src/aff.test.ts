@@ -1,6 +1,7 @@
 import assert from 'assert';
 import { readdirSync } from 'fs';
 import * as path from 'path';
+import { describe, expect, it } from 'vitest';
 
 import { Aff, affWordToColoredString, asAffWord, compareAff, filterAff, flagsToString } from './aff';
 import type { AffWord } from './affDef';

@@ -1,3 +1,5 @@
+import { describe, expect, it } from 'vitest';
+
 import * as Aff from './aff';
 import * as AffReader from './affReader';
 import { IterableHunspellReader } from './IterableHunspellReader';
