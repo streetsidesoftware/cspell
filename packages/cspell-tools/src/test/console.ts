@@ -1,9 +1,11 @@
-import { normalizeOutput } from './normalizeOutput';
+import { vi } from 'vitest';
+
+import { normalizeOutput } from './normalizeOutput.js';
 
 export function spyOnConsole() {
     const con = {
-        log: jest.spyOn(console, 'log').mockImplementation(),
-        error: jest.spyOn(console, 'error').mockImplementation(),
+        log: vi.spyOn(console, 'log').mockImplementation(() => undefined),
+        error: vi.spyOn(console, 'error').mockImplementation(() => undefined),
         consoleOutput,
         attach,
         reset,
@@ -21,8 +23,8 @@ export function spyOnConsole() {
 
     function attach() {
         reset();
-        con.log = jest.spyOn(console, 'log').mockImplementation();
-        con.error = jest.spyOn(console, 'error').mockImplementation();
+        con.log = vi.spyOn(console, 'log').mockImplementation(() => undefined);
+        con.error = vi.spyOn(console, 'error').mockImplementation(() => undefined);
     }
 
     function reset() {
@@ -30,5 +32,9 @@ export function spyOnConsole() {
         con.error.mockRestore();
     }
 
-    return con;
+    return {
+        consoleOutput,
+        attach,
+        reset,
+    };
 }

@@ -1,7 +1,7 @@
-import { createReader } from './Reader';
-import type { Reader } from './readers/ReaderOptions';
-import { parseFileLines } from './wordListParser';
-import type { AllowedSplitWordsCollection } from './WordsCollection';
+import { createReader } from './Reader.js';
+import type { Reader } from './readers/ReaderOptions.js';
+import { parseFileLines } from './wordListParser.js';
+import type { AllowedSplitWordsCollection } from './WordsCollection.js';
 
 export interface SourceReaderOptions {
     /**

@@ -1,8 +1,11 @@
 import * as path from 'path';
 
-import { escapeRegEx } from './escapeRegEx';
+import { escapeRegEx } from './escapeRegEx.js';
+import { test_dirname } from './TestHelper.js';
 
-const rootCspellTools = path.join(__dirname, '../..');
+const _dirname = test_dirname(import.meta.url);
+
+const rootCspellTools = path.join(_dirname, '../..');
 const rootRepo = path.join(rootCspellTools, '../..');
 
 /**

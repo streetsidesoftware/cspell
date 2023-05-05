@@ -1,12 +1,10 @@
 #!/usr/bin/env node
 
-'use strict';
+import { program, CommanderError } from 'commander';
+import { run } from './dist/app.js';
 
-const app = require('./dist/app');
-const program = require('commander');
-
-app.run(program, process.argv).catch((e) => {
-    if (!(e instanceof program.CommanderError)) {
+run(program, process.argv).catch((e) => {
+    if (!(e instanceof CommanderError)) {
         console.log(e);
     }
     process.exitCode = 1;

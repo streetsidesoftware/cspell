@@ -9,6 +9,6 @@ export type {
     FileSource,
     RunConfig,
     Target,
-} from './config';
-export { isFileListSource, isFilePath, isFileSource } from './configUtils';
-export { normalizeConfig } from './normalizeConfig';
+} from './config.js';
+export { isFileListSource, isFilePath, isFileSource } from './configUtils.js';
+export { normalizeConfig } from './normalizeConfig.js';

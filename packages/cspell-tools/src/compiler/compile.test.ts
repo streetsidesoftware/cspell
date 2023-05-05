@@ -1,12 +1,13 @@
 import * as path from 'path';
+import { beforeAll, beforeEach, describe, expect, test } from 'vitest';
 
-import type { CompileRequest, Target } from '../config';
-import { spyOnConsole } from '../test/console';
-import { createTestHelper } from '../test/TestHelper';
-import { compile } from './compile';
-import { readTextFile } from './readers/readTextFile';
+import type { CompileRequest, Target } from '../config/index.js';
+import { spyOnConsole } from '../test/console.js';
+import { createTestHelper } from '../test/TestHelper.js';
+import { compile } from './compile.js';
+import { readTextFile } from './readers/readTextFile.js';
 
-const testHelper = createTestHelper(__filename);
+const testHelper = createTestHelper(import.meta.url);
 
 const pathSamples = path.join(testHelper.packageRoot, '../Samples/dicts');
 
@@ -18,12 +19,11 @@ const consoleSpy = spyOnConsole();
 
 describe('compile', () => {
     beforeAll(() => {
-        testHelper.clearTempDir();
         consoleSpy.attach();
     });
 
     beforeEach(() => {
-        testHelper.cdToTempDir();
+        testHelper.clearTempDir();
     });
 
     test.each`
@@ -38,7 +38,7 @@ describe('compile', () => {
     `(
         'compile $file fmt: $format gz: $compress alt: $generateNonStrict',
         async ({ format, file, generateNonStrict, compress }) => {
-            const targetDirectory = `.`;
+            const targetDirectory = t(`.`);
             const target: Target = {
                 name: 'myDictionary',
                 targetDirectory,
@@ -61,3 +61,7 @@ describe('compile', () => {
         }
     );
 });
+
+function t(...parts: string[]): string {
+    return testHelper.resolveTemp(...parts);
+}

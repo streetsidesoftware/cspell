@@ -1,2 +1,2 @@
-export { FeatureFlag, FeatureFlags, getSystemFeatureFlags, UnknownFeatureFlagError } from './FeatureFlags';
-export { parseFlags } from './parseFlags';
+export { FeatureFlag, FeatureFlags, getSystemFeatureFlags, UnknownFeatureFlagError } from './FeatureFlags.js';
+export { parseFlags } from './parseFlags.js';

@@ -1,4 +1,4 @@
-import type { Dictionary } from './types';
+import type { Dictionary } from './types.js';
 
 export interface ConvItem {
     from: string;

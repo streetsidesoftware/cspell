@@ -1,6 +1,6 @@
 import * as path from 'path';
 
-import type { RunConfig } from './config';
+import type { RunConfig } from './config.js';
 
 type CosmiconfigResult = {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any

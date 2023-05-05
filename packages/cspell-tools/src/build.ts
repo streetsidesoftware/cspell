@@ -1,15 +1,19 @@
 import { cosmiconfig } from 'cosmiconfig';
 import * as path from 'path';
 
-import { compile } from './compiler';
-import type { Target } from './config';
-import { normalizeConfig } from './config';
+import { compile } from './compiler/index.js';
+import type { CompileRequest, Target } from './config/index.js';
+import { normalizeConfig } from './config/index.js';
 
 export interface BuildOptions {
     /** Optional path to config file */
-    config?: string;
+    config?: string | undefined;
 
-    root?: string;
+    /** Used to resolve relative paths in the config. */
+    root?: string | undefined;
+
+    /** Current working directory */
+    cwd?: string | undefined;
 }
 
 const moduleName = 'cspell-tools';
@@ -27,21 +31,26 @@ export async function build(targets: string[] | undefined, options: BuildOptions
         return !targets || allowedTargets.has(target.name);
     }
 
-    if (options.root) {
-        process.chdir(path.resolve(options.root));
-    }
+    const searchDir = path.resolve(options.root || options.cwd || '.');
+
     const explorer = cosmiconfig(moduleName, {
         searchPlaces,
-        stopDir: path.resolve('.'),
+        stopDir: searchDir,
         transform: normalizeConfig,
     });
 
-    const config = await (options.config ? explorer.load(options.config) : explorer.search('.'));
+    const config = await (options.config ? explorer.load(options.config) : explorer.search(searchDir));
 
     if (!config?.config) {
         console.error('root: %s', options.root);
         throw 'cspell-tools.config not found.';
     }
 
-    await compile(config.config, { filter });
+    const buildInfo: CompileRequest = normalizeRequest(config.config, options.root || path.dirname(config.filepath));
+    await compile(buildInfo, { filter, cwd: options.cwd });
+}
+
+function normalizeRequest(buildInfo: CompileRequest, root: string): CompileRequest {
+    const { rootDir = root, targets = [] } = buildInfo;
+    return { rootDir, targets };
 }

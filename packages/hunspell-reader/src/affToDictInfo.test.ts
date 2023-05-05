@@ -1,7 +1,8 @@
 import path from 'path';
+import { describe, expect, test } from 'vitest';
 
-import { parseAffFile } from './affReader';
-import { affToDicInfo } from './affToDicInfo';
+import { parseAffFile } from './affReader.js';
+import { affToDicInfo } from './affToDicInfo.js';
 
 const dictionaries = path.join(__dirname, '../dictionaries');
 const sampleAff = path.join(dictionaries, 'Portuguese (Brazilian).aff');

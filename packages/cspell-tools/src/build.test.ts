@@ -1,10 +1,12 @@
-import { build } from './build';
-import { setLogger } from './compiler';
-import { readTextFile } from './compiler/readers/readTextFile';
-import { spyOnConsole } from './test/console';
-import { createTestHelper } from './test/TestHelper';
+import { beforeEach, describe, expect, test } from 'vitest';
 
-const helper = createTestHelper(__filename);
+import { build } from './build.js';
+import { setLogger } from './compiler/index.js';
+import { readTextFile } from './compiler/readers/readTextFile.js';
+import { spyOnConsole } from './test/console.js';
+import { createTestHelper } from './test/TestHelper.js';
+
+const helper = createTestHelper(import.meta.url);
 
 const consoleSpy = spyOnConsole();
 setLogger(console.log);
@@ -18,17 +20,15 @@ describe('build action', () => {
     });
 
     test.each`
-        currentDir                       | config                                                    | target
-        ${f('build-single-target-json')} | ${undefined}                                              | ${tBuild('build-single-target-json/colors.txt')}
+        sourceRoot                       | config                                                    | target
+        ${f('build-single-target-json')} | ${undefined}                                              | ${tBuilds('build-single-target-json/colors.txt')}
         ${'.'}                           | ${f('build-single-target-yaml/cspell-tools.config.yaml')} | ${'my/colors.txt'}
-        ${f('build-single-trie')}        | ${undefined}                                              | ${tBuild('build-single-trie/cities.trie')}
-        ${f('build-source-list')}        | ${undefined}                                              | ${tBuild('build-source-list/source-list.txt')}
+        ${f('build-single-trie')}        | ${undefined}                                              | ${tBuilds('build-single-trie/cities.trie')}
+        ${f('build-source-list')}        | ${undefined}                                              | ${tBuilds('build-source-list/source-list.txt')}
         ${'.'}                           | ${f('build-combo/cspell-tools.config.yaml')}              | ${'color-cities-code.txt'}
-    `('build', async ({ currentDir, config, target }) => {
-        helper.mkdir(currentDir);
-        helper.cd(currentDir);
-        await expect(build(undefined, { config })).resolves.toBeUndefined();
-        const content = await readTextFile(target);
+    `('build %#', async ({ sourceRoot, config, target }) => {
+        await expect(build(undefined, { config, root: t(sourceRoot), cwd: t() })).resolves.toBeUndefined();
+        const content = await readTextFile(t(target));
         expect(content).toMatchSnapshot();
     });
 
@@ -37,35 +37,29 @@ describe('build action', () => {
         ${undefined}  | ${cfgYaml('build-multi-target')} | ${['colors.txt', 'code.txt', 'cities.txt']}
         ${['colors']} | ${cfgYaml('build-multi-target')} | ${['colors.txt', '!code.txt', '!cities.txt']}
     `(
-        'build multi',
+        'build multi %#',
         async ({ targets, config, builds }: { targets: string[] | undefined; config: string; builds: string[] }) => {
-            helper.cdToTempDir();
-            await expect(build(targets, { config })).resolves.toBeUndefined();
+            await expect(build(targets, { config, cwd: t() })).resolves.toBeUndefined();
             const shouldExist = builds.filter((a) => !a.startsWith('!'));
             const shouldNotExist = builds.filter((a) => a.startsWith('!')).map((a) => a.slice(1));
             for (const build of shouldExist) {
-                const content = await readTextFile(build);
+                const content = await readTextFile(t(build));
                 expect(content).toMatchSnapshot();
             }
             for (const build of shouldNotExist) {
-                const found = await helper.fileExists(build);
+                const found = await helper.fileExists(t(build));
                 expect(found && build).toBe(false);
             }
         }
     );
 });
 
-/**
- * resolve build target
- * @param parts
- * @returns
- */
-function tBuild(...parts: string[]): string {
-    return t('builds', ...parts);
+function tBuilds(...parts: string[]): string {
+    return helper.packageTemp('builds', ...parts);
 }
 
 function t(...parts: string[]): string {
-    return helper.packageTemp(...parts);
+    return helper.resolveTemp(...parts);
 }
 
 function f(...parts: string[]): string {

@@ -1,7 +1,7 @@
-import type { FilePath } from '../config/config';
-import { createReader } from './Reader';
-import type { AllowedSplitWordsCollection, ExcludeWordsCollection, WordsCollection } from './WordsCollection';
-import { defaultAllowedSplitWords, defaultExcludeWordsCollection } from './WordsCollection';
+import type { FilePath } from '../config/config.js';
+import { createReader } from './Reader.js';
+import type { AllowedSplitWordsCollection, ExcludeWordsCollection, WordsCollection } from './WordsCollection.js';
+import { defaultAllowedSplitWords, defaultExcludeWordsCollection } from './WordsCollection.js';
 
 class AllowedSplitWordsImpl implements AllowedSplitWordsCollection {
     private words: WordsCollection;

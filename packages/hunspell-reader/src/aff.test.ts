@@ -1,11 +1,12 @@
 import assert from 'assert';
 import { readdirSync } from 'fs';
 import * as path from 'path';
+import { describe, expect, it } from 'vitest';
 
-import { Aff, affWordToColoredString, asAffWord, compareAff, filterAff, flagsToString } from './aff';
-import type { AffWord } from './affDef';
-import * as AffReader from './affReader';
-import { parseAffFileToAff } from './affReader';
+import { Aff, affWordToColoredString, asAffWord, compareAff, filterAff, flagsToString } from './aff.js';
+import type { AffWord } from './affDef.js';
+import * as AffReader from './affReader.js';
+import { parseAffFileToAff } from './affReader.js';
 
 const isLoggerOn = false;
 const DICTIONARY_LOCATIONS = path.join(__dirname, '..', 'dictionaries');

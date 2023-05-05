@@ -1,4 +1,6 @@
-import { isFileListSource, isFilePath, isFileSource } from './configUtils';
+import { describe, expect, test } from 'vitest';
+
+import { isFileListSource, isFilePath, isFileSource } from './configUtils.js';
 
 describe('config', () => {
     test.each`

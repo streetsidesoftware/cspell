@@ -1,17 +1,17 @@
 // For large dictionaries, it is necessary to increase the memory limit.
 
 import type * as program from 'commander';
-import * as path from 'path';
+import { readFileSync } from 'fs';
 
-import type { CompileAppOptions, CompileTrieAppOptions } from './AppOptions';
-import { build } from './build';
-import { processCompileAction } from './compile';
-import * as compiler from './compiler';
-import { logWithTimestamp } from './compiler/logWithTimestamp';
-import type { FeatureFlags } from './FeatureFlags';
+import type { CompileAppOptions, CompileTrieAppOptions } from './AppOptions.js';
+import { build } from './build.js';
+import { processCompileAction } from './compile.js';
+import * as compiler from './compiler/index.js';
+import { logWithTimestamp } from './compiler/logWithTimestamp.js';
+import type { FeatureFlags } from './FeatureFlags/index.js';
 
-// eslint-disable-next-line @typescript-eslint/no-var-requires
-const npmPackage = require(path.join(__dirname, '..', 'package.json'));
+const npmPackageRaw = readFileSync(new URL('../package.json', import.meta.url), 'utf8');
+const npmPackage = JSON.parse(npmPackageRaw);
 
 compiler.setLogger(logWithTimestamp);
 

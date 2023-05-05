@@ -1,18 +1,23 @@
 import * as Commander from 'commander';
 import * as fs from 'fs/promises';
 import * as path from 'path';
+import { beforeAll, beforeEach, describe, expect, test, vi } from 'vitest';
 
-import * as app from './app';
-import { readTextFile } from './compiler/readers/readTextFile';
-import { getSystemFeatureFlags } from './FeatureFlags';
-import { spyOnConsole } from './test/console';
-import { createTestHelper } from './test/TestHelper';
+import * as app from './app.js';
+import { readTextFile } from './compiler/readers/readTextFile.js';
+import { getSystemFeatureFlags } from './FeatureFlags/index.js';
+import { spyOnConsole } from './test/console.js';
+import { createTestHelper } from './test/TestHelper.js';
 
-const testHelper = createTestHelper(__filename);
+const testHelper = createTestHelper(import.meta.url);
 
 const projectRoot = testHelper.packageRoot;
-const relPathTemp = 'app-out';
+const _relPathTemp = 'app-out';
 const pathSamples = path.join(projectRoot, '../Samples/dicts');
+
+function relPathTemp(...parts: string[]) {
+    return pathTemp(_relPathTemp, ...parts);
+}
 
 function pathTemp(...parts: string[]) {
     return testHelper.resolveTemp(...parts);
@@ -36,38 +41,37 @@ describe('Validate the application', () => {
     beforeEach(() => {
         testHelper.createTempDir();
         testHelper.cp(path.join(pathSamples, 'cities.txt'), '.');
-        testHelper.cd('.');
-        jest.resetAllMocks();
+        vi.resetAllMocks();
         consoleSpy.attach();
     });
 
     test('app compile-trie', async () => {
         const commander = getCommander();
-        const args = argv('compile-trie', '-n', 'cities.txt');
+        const args = argv('compile-trie', '-n', 'cities.txt', '-o', pathTemp());
         await expect(app.run(commander, args)).resolves.toBeUndefined();
     });
 
     test('app compile-trie compress', async () => {
         const commander = getCommander();
-        const args = argv('compile-trie', 'cities.txt');
+        const args = argv('compile-trie', 'cities.txt', '-o', pathTemp());
         await expect(app.run(commander, args)).resolves.toBeUndefined();
     });
 
     test('app compile-trie -o', async () => {
         const commander = getCommander();
-        const args = argv('compile-trie', '-n', 'cities.txt', '-o', relPathTemp);
+        const args = argv('compile-trie', '-n', 'cities.txt', '-o', relPathTemp());
         await expect(app.run(commander, args)).resolves.toBeUndefined();
     });
 
     test('app compile', async () => {
         const commander = getCommander();
-        const args = argv('compile', '-n', 'cities.txt', '-o', relPathTemp);
+        const args = argv('compile', '-n', 'cities.txt', '-o', relPathTemp());
         await expect(app.run(commander, args)).resolves.toBeUndefined();
     });
 
     test('app compile-trie max depth', async () => {
         const commander = getCommander();
-        const args = argv('compile-trie', '-n', '-m', '0', 'cities.txt', '-o', relPathTemp);
+        const args = argv('compile-trie', '-n', '-m', '0', 'cities.txt', '-o', relPathTemp());
         await expect(app.run(commander, args)).resolves.toBeUndefined();
     });
 
@@ -80,13 +84,13 @@ describe('Validate the application', () => {
             '--trie-base=10',
             '--experimental=compound',
             '--merge=out/cities.compound',
+            pathTemp('cities.txt'),
             '-o',
-            pathTemp(),
-            'cities.txt'
+            pathTemp()
         );
         const ff = getSystemFeatureFlags().fork();
         await expect(app.run(commander, args, ff)).resolves.toBeUndefined();
-        const words = await readTextFile(path.join(pathTemp(), 'out/cities.compound.trie'));
+        const words = await readTextFile(pathTemp('out/cities.compound.trie'));
         expect(words).toMatchSnapshot();
     });
 
@@ -97,31 +101,32 @@ describe('Validate the application', () => {
             '-n',
             '--experimental',
             'compound',
-            '--merge',
-            'out/cities.compound',
-            'cities.txt'
+            '--merge=out/cities.compound',
+            pathTemp('cities.txt'),
+            '-o',
+            pathTemp()
         );
         await expect(app.run(commander, args)).resolves.toBeUndefined();
-        const words = await readTextFile(path.join(pathTemp(), 'out/cities.compound.txt'));
+        const words = await readTextFile(pathTemp('out/cities.compound.txt'));
         expect(words).toMatchSnapshot();
     });
 
     test('app compile with compression', async () => {
         const commander = getCommander();
-        const args = argv('compile', 'cities.txt', '-o', relPathTemp);
+        const args = argv('compile', pathTemp('cities.txt'), '-o', relPathTemp());
         await expect(app.run(commander, args)).resolves.toBeUndefined();
-        const words = await readTextFile(path.join(relPathTemp, 'cities.txt.gz'));
+        const words = await readTextFile(relPathTemp('cities.txt.gz'));
         expect(words).toMatchSnapshot();
     });
 
     test('app compile merge legacy', async () => {
         const commander = getCommander();
-        const targetDir = relPathTemp;
+        const targetDir = relPathTemp();
         const name = 'merge';
         const target = name + '.txt';
-        const pathSamples = path.join(projectRoot, '..', 'Samples', 'dicts');
+        const pathSamples = path.join(projectRoot, '../Samples/dicts');
         const cities = path.join(pathSamples, 'cities.txt');
-        const exampleHunspell = path.join(pathSamples, 'hunspell', 'example.dic');
+        const exampleHunspell = path.join(pathSamples, 'hunspell/example.dic');
         const args = argv(
             'compile',
             '-n',
@@ -140,7 +145,7 @@ describe('Validate the application', () => {
 
     test('app compile merge', async () => {
         const commander = getCommander();
-        const targetDir = relPathTemp;
+        const targetDir = relPathTemp();
         const name = 'merge';
         const target = name + '.txt';
         const pathSamples = path.join(projectRoot, '..', 'Samples', 'dicts');
@@ -154,7 +159,7 @@ describe('Validate the application', () => {
 
     test('app compile merge with defaults', async () => {
         const commander = getCommander();
-        const targetDir = relPathTemp;
+        const targetDir = relPathTemp();
         const name = 'merge';
         const target = name + '.txt';
         const pathSamples = path.join(projectRoot, '..', 'Samples', 'dicts');
@@ -168,7 +173,7 @@ describe('Validate the application', () => {
 
     test('app compile merge with defaults --keep-raw-case', async () => {
         const commander = getCommander();
-        const targetDir = relPathTemp;
+        const targetDir = relPathTemp();
         const name = 'merge';
         const target = name + '.txt';
         const pathSamples = path.join(projectRoot, '..', 'Samples', 'dicts');
@@ -182,7 +187,7 @@ describe('Validate the application', () => {
 
     test('app no args', async () => {
         const commander = getCommander();
-        const mock = jest.fn();
+        const mock = vi.fn();
         commander.on('--help', mock);
         await expect(app.run(commander, argv())).rejects.toThrow(Commander.CommanderError);
         expect(mock.mock.calls.length).toBe(1);
@@ -191,7 +196,7 @@ describe('Validate the application', () => {
 
     test('app --help', async () => {
         const commander = getCommander();
-        const mock = jest.fn();
+        const mock = vi.fn();
         commander.on('--help', mock);
         await expect(app.run(commander, argv('--help'))).rejects.toThrow(Commander.CommanderError);
         expect(mock.mock.calls.length).toBe(1);
@@ -200,7 +205,7 @@ describe('Validate the application', () => {
 
     test('app -V', async () => {
         const commander = getCommander();
-        const mock = jest.fn();
+        const mock = vi.fn();
         commander.on('option:version', mock);
         await expect(app.run(commander, argv('-V'))).rejects.toThrow(Commander.CommanderError);
         expect(mock.mock.calls.length).toBe(1);

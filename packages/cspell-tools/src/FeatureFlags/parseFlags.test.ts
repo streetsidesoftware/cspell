@@ -1,7 +1,9 @@
-import { spyOnConsole } from '../test/console';
-import type { FeatureFlag } from './FeatureFlags';
-import { createFeatureFlags } from './FeatureFlags';
-import { parseFlags } from './parseFlags';
+import { afterEach, beforeEach, describe, expect, test, vi } from 'vitest';
+
+import { spyOnConsole } from '../test/console.js';
+import type { FeatureFlag } from './FeatureFlags.js';
+import { createFeatureFlags } from './FeatureFlags.js';
+import { parseFlags } from './parseFlags.js';
 
 const consoleSpy = spyOnConsole();
 
@@ -13,7 +15,7 @@ describe('parseFlags', () => {
     });
 
     afterEach(() => {
-        jest.resetAllMocks();
+        vi.resetAllMocks();
     });
 
     test.each`

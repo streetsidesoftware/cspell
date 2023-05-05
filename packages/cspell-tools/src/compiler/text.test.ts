@@ -1,4 +1,6 @@
-import { splitCamelCaseWord } from './text';
+import { describe, expect, test } from 'vitest';
+
+import { splitCamelCaseWord } from './text.js';
 
 describe('split', () => {
     test.each`

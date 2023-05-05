@@ -1,6 +1,8 @@
-import * as Aff from './aff';
-import * as AffReader from './affReader';
-import { IterableHunspellReader } from './IterableHunspellReader';
+import { describe, expect, it } from 'vitest';
+
+import * as Aff from './aff.js';
+import * as AffReader from './affReader.js';
+import { IterableHunspellReader } from './IterableHunspellReader.js';
 
 describe('HunspellReader DE', function () {
     it('tests transforming `Arbeit/A-`', () => {

@@ -11,21 +11,26 @@ import type {
     FilePath,
     FileSource,
     Target,
-} from '../config';
-import { isFileListSource, isFilePath, isFileSource } from '../config';
-import { createAllowedSplitWordsFromFiles } from './createWordsCollection';
-import { logWithTimestamp } from './logWithTimestamp';
-import { readTextFile } from './readers/readTextFile';
-import type { SourceReaderOptions } from './SourceReader';
-import { streamSourceWordsFromFile } from './streamSourceWordsFromFile';
-import { compileTrie, compileWordList } from './wordListCompiler';
-import { normalizeTargetWords } from './wordListParser';
+} from '../config/index.js';
+import { isFileListSource, isFilePath, isFileSource } from '../config/index.js';
+import { createAllowedSplitWordsFromFiles } from './createWordsCollection.js';
+import { logWithTimestamp } from './logWithTimestamp.js';
+import { readTextFile } from './readers/readTextFile.js';
+import type { SourceReaderOptions } from './SourceReader.js';
+import { streamSourceWordsFromFile } from './streamSourceWordsFromFile.js';
+import { compileTrie, compileWordList } from './wordListCompiler.js';
+import { normalizeTargetWords } from './wordListParser.js';
 
 interface CompileOptions {
     /**
      * Optional filter function to filter targets.
      */
     filter?: (target: Target) => boolean;
+
+    /**
+     * The current working directory. Defaults to process.cwd()
+     */
+    cwd?: string;
 }
 
 export async function compile(request: CompileRequest, options?: CompileOptions): Promise<void> {
@@ -34,6 +39,7 @@ export async function compile(request: CompileRequest, options?: CompileOptions)
     // console.log('Request: %o', request);
 
     const rootDir = path.resolve(request.rootDir || '.');
+    const cwd = options?.cwd;
     const targetOptions: CompileTargetOptions = {
         sort: request.sort,
         generateNonStrict: request.generateNonStrict,
@@ -43,16 +49,21 @@ export async function compile(request: CompileRequest, options?: CompileOptions)
         const keep = options?.filter?.(target) ?? true;
         if (!keep) continue;
         const adjustedTarget: Target = { ...targetOptions, ...target };
-        await compileTarget(adjustedTarget, request, rootDir);
+        await compileTarget(adjustedTarget, request, rootDir, cwd);
     }
     logWithTimestamp(`Complete.`);
 }
 
-export async function compileTarget(target: Target, options: CompileSourceOptions, rootDir: string): Promise<void> {
+export async function compileTarget(
+    target: Target,
+    options: CompileSourceOptions,
+    rootDir: string,
+    cwd?: string
+): Promise<void> {
     logWithTimestamp(`Start compile: ${target.name}`);
 
     const { format, sources, trieBase, sort = true, generateNonStrict = false } = target;
-    const targetDirectory = path.resolve(rootDir, target.targetDirectory ?? process.cwd());
+    const targetDirectory = path.resolve(rootDir, target.targetDirectory ?? cwd ?? process.cwd());
 
     const generateNonStrictTrie = target.generateNonStrict ?? true;
 

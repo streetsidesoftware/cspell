@@ -1,7 +1,7 @@
 import { opConcatMap, opFilter, opMap, pipe } from '@cspell/cspell-pipe/sync';
 
-import { regExpSpaceOrDash, splitCamelCaseIfAllowed } from './splitCamelCaseIfAllowed';
-import type { AllowedSplitWordsCollection } from './WordsCollection';
+import { regExpSpaceOrDash, splitCamelCaseIfAllowed } from './splitCamelCaseIfAllowed.js';
+import type { AllowedSplitWordsCollection } from './WordsCollection.js';
 
 const regNonWord = /[^\p{L}\p{M}' _\d]+/giu;
 const regExpRepeatChars = /(.)\1{5}/i;

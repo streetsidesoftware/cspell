@@ -2,10 +2,10 @@
   "name": "@cspell/cspell-tools",
   "version": "7.0.0-alpha.1",
   "description": "Tools to assist with the development of cSpell",
-  "typings": "dist/index.d.ts",
   "publishConfig": {
     "access": "public"
   },
+  "type": "module",
   "bin": {
     "cspell-tools-cli": "bin.js"
   },
@@ -16,9 +16,11 @@
     "watch": "tsc -p . -w",
     "clean-build": "pnpm run clean && pnpm run build",
     "clean": "shx rm -rf dist temp coverage .tsbuildinfo",
-    "coverage": "jest --coverage",
+    "coverage": "pnpm coverage:vitest && pnpm coverage:fix",
+    "coverage:vitest": "vitest run --coverage",
+    "coverage:fix": "nyc report --temp-dir \"$(pwd)/coverage\" --reporter lcov --report-dir \"$(pwd)/coverage\" --cwd ../..",
     "test-watch": "jest --watch",
-    "test": "jest",
+    "test": "vitest run",
     "update-snapshot": "jest --updateSnapshot"
   },
   "repository": {

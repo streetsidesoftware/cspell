@@ -1,10 +1,12 @@
 import assert from 'assert';
 import { readFile } from 'fs/promises';
-import { decode } from 'iconv-lite';
+import pkgIconvLite from 'iconv-lite';
 
-import { Aff } from './aff';
-import type { AffInfo, Fx, Rep, SubstitutionSet } from './affDef';
-import { cleanObject, isDefined } from './util';
+import { Aff } from './aff.js';
+import type { AffInfo, Fx, Rep, SubstitutionSet } from './affDef.js';
+import { cleanObject, isDefined } from './util.js';
+
+const { decode } = pkgIconvLite;
 
 const fixRegex = {
     SFX: { m: /$/, r: '$' },
