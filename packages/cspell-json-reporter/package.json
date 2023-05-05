@@ -37,7 +37,7 @@
     "url": "git+https://github.com/streetsidesoftware/cspell.git"
   },
   "scripts": {
-    "clean": "shx rm -rf dist coverage .tsbuildinfo",
+    "clean": "shx rm -rf dist temp coverage \"*.tsbuildInfo\"",
     "build": "tsc -b . && ts2mjs dist/esm",
     "build:esm": "tsc -p tsconfig.esm.json",
     "clean-build": "pnpm run clean && pnpm run build",

@@ -24,7 +24,7 @@
     "smoke-test": "./bin.js words ./dictionaries/nl -n 100",
     "test": "pnpm run test-unit",
     "build": "tsc -p .",
-    "clean": "shx rm -rf dist coverage .tsbuildinfo",
+    "clean": "shx rm -rf dist temp coverage \"*.tsbuildInfo\"",
     "coverage": "pnpm coverage:vitest && pnpm coverage:fix",
     "coverage:vitest": "vitest run --coverage",
     "coverage:fix": "nyc report --temp-dir \"$(pwd)/coverage\" --reporter lcov --report-dir \"$(pwd)/coverage\" --cwd ../..",

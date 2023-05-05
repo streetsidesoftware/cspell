@@ -13,7 +13,7 @@
   "scripts": {
     "build": "tsc -p .",
     "clean": "pnpm run clean-dist && pnpm run clean-repos",
-    "clean-dist": "shx rm -rf dist .tsbuildinfo",
+    "clean-dist": "shx rm -rf dist coverage \"*.tsbuildInfo\"",
     "clean-repos": "shx rm -rf repositories/temp temp",
     "clean-build": "pnpm run clean && pnpm run build",
     "integration-tests": "node tester.js check -f",

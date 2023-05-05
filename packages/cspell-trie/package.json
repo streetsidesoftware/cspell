@@ -16,7 +16,7 @@
     "!**/*.map"
   ],
   "scripts": {
-    "clean": "shx rm -rf dist temp coverage",
+    "clean": "shx rm -rf dist temp coverage \"*.tsbuildInfo\"",
     "build": "tsc -p .",
     "clean-build": "pnpm run clean && pnpm run build",
     "coverage": "pnpm coverage:vitest && pnpm coverage:fix",

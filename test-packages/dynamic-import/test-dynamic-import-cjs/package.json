@@ -6,7 +6,7 @@
   "type": "commonjs",
   "bin": "./bin.cjs",
   "scripts": {
-    "clean": "shx rm -rf dist .tsbuildinfo",
+    "clean": "shx rm -rf dist temp coverage \"*.tsbuildInfo\"",
     "build": "pnpm run compile",
     "clean-build": "pnpm run clean && pnpm run build",
     "compile": "tsc -p .",

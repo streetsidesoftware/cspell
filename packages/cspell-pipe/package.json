@@ -106,7 +106,7 @@
     "build:cjs": "tsc -p tsconfig.cjs.json",
     "build:esm": "tsc -p tsconfig.esm.json && ts2mjs dist/esm",
     "watch": "tsc -p . -w",
-    "clean": "shx rm -rf dist coverage .tsbuildinfo",
+    "clean": "shx rm -rf dist temp coverage \"*.tsbuildInfo\"",
     "clean-build": "pnpm run clean && pnpm run build",
     "coverage": "pnpm coverage:vitest && pnpm coverage:fix",
     "coverage:vitest": "vitest run --coverage",

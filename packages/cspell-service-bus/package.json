@@ -36,7 +36,7 @@
     "build:esm": "tsc -p tsconfig.esm.json && ts2mjs dist/esm",
     "build:clean": "pnpm run clean && pnpm run build",
     "watch": "tsc -b . -w",
-    "clean": "shx rm -rf dist coverage .tsbuildinfo",
+    "clean": "shx rm -rf dist temp coverage \"*.tsbuildInfo\"",
     "clean-build": "pnpm build:clean",
     "coverage": "pnpm coverage:vitest && pnpm coverage:fix",
     "coverage:vitest": "vitest run --coverage",
