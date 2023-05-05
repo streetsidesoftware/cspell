@@ -23,7 +23,7 @@
     "!**/*.map"
   ],
   "scripts": {
-    "clean": "shx rm -rf dist coverage temp .tsbuildinfo",
+    "clean": "shx rm -rf dist temp coverage \"*.tsbuildInfo\"",
     "clean-build": "pnpm clean && pnpm build",
     "build": "tsc -b . && ts2mjs dist/esm && pnpm run build:api",
     "build:api": "rollup -c api/rollup.config.mjs",

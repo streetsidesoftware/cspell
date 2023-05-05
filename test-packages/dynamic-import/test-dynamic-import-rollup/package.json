@@ -12,7 +12,7 @@
   "module": "./dist/index.mjs",
   "type": "module",
   "scripts": {
-    "clean": "shx rm -rf dist .tsbuildinfo",
+    "clean": "shx rm -rf dist temp coverage \"*.tsbuildInfo\"",
     "build": "rollup -c rollup.config.mjs",
     "clean-build": "pnpm run clean && pnpm run build",
     "compile": "tsc -p .",

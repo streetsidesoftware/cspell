@@ -9,7 +9,7 @@
   "type": "module",
   "private": true,
   "scripts": {
-    "clean": "shx rm -rf dist .tsbuildinfo",
+    "clean": "shx rm -rf dist temp coverage \"*.tsbuildInfo\"",
     "build": "pnpm build:plugin && pnpm build:rollup",
     "build:plugin": "tsc -p plugin/tsconfig.json",
     "build:rollup": "rollup -c rollup.config.mjs",

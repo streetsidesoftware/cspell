@@ -20,7 +20,7 @@
   "scripts": {
     "build": "tsc -p .",
     "build-dict": "cspell-tools-cli compile compatibility-words.txt",
-    "clean": "echo clean",
+    "clean": "shx rm -rf dist temp coverage \"*.tsbuildInfo\"",
     "clean-build": "pnpm run clean && pnpm run build",
     "watch": "pnpm run build --watch",
     "test": "node ../../bin.mjs \"**/*.{txt,md,ts}\"",

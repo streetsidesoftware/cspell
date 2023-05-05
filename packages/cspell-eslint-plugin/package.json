@@ -38,7 +38,7 @@
     "build:src": "tsc -b ./tsconfig.json",
     "build:schema": "ts-json-schema-generator --no-top-ref --expose none --path src/common/options.ts --type Options  -o  ./assets/options.schema.json",
     "watch": "tsc -p . --watch",
-    "clean": "shx rm -rf dist coverage .tsbuildinfo",
+    "clean": "shx rm -rf dist temp coverage \"*.tsbuildInfo\"",
     "clean-build": "pnpm run clean && pnpm run build",
     "coverage": "echo coverage",
     "test-watch": "pnpm run test -- --watch",

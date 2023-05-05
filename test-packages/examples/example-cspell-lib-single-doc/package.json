@@ -6,7 +6,7 @@
   "type": "module",
   "bin": "bin.js",
   "scripts": {
-    "clean": "shx rm -rf dist",
+    "clean": "shx rm -rf dist temp coverage \"*.tsbuildInfo\"",
     "build": "pnpm run compile",
     "watch": "tsc -p --watch",
     "clean-build": "pnpm run clean && pnpm run build",

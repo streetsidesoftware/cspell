@@ -5,7 +5,7 @@
   "private": true,
   "files": [],
   "scripts": {
-    "clean": "shx rm -rf dist coverage .tsbuildinfo",
+    "clean": "shx rm -rf dist temp coverage \"*.tsbuildInfo\"",
     "build": "tsc -p .",
     "clean-build": "pnpm run clean && pnpm run build",
     "coverage": "jest --coverage",
