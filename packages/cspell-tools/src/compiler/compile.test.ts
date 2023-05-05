@@ -19,12 +19,11 @@ const consoleSpy = spyOnConsole();
 
 describe('compile', () => {
     beforeAll(() => {
-        testHelper.clearTempDir();
         consoleSpy.attach();
     });
 
     beforeEach(() => {
-        testHelper.cdToTempDir();
+        testHelper.clearTempDir();
     });
 
     test.each`
@@ -39,7 +38,7 @@ describe('compile', () => {
     `(
         'compile $file fmt: $format gz: $compress alt: $generateNonStrict',
         async ({ format, file, generateNonStrict, compress }) => {
-            const targetDirectory = `.`;
+            const targetDirectory = t(`.`);
             const target: Target = {
                 name: 'myDictionary',
                 targetDirectory,
@@ -62,3 +61,7 @@ describe('compile', () => {
         }
     );
 });
+
+function t(...parts: string[]): string {
+    return testHelper.resolveTemp(...parts);
+}

@@ -42,7 +42,6 @@ const readOptions: SourceReaderOptions = {
 describe('Validate the wordListCompiler', () => {
     let temp = '.';
     beforeEach(() => {
-        testHelper.cdToTempDir();
         temp = testHelper.resolveTemp();
         vi.resetAllMocks();
         consoleSpy.attach();

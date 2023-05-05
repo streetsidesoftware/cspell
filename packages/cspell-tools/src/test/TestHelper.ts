@@ -45,10 +45,6 @@ export interface TestHelper {
      */
     cp(from: string, to: string): void;
 
-    cd(dir: string): void;
-
-    cdToTempDir(...parts: string[]): void;
-
     packageTemp(...parts: string[]): string;
 
     /**
@@ -66,7 +62,6 @@ export interface TestHelper {
 export function createTestHelper(testFilenameUrl: string): TestHelper {
     testFilenameUrl && assert(testFilenameUrl.startsWith('file:'));
     const testFilename = testFilenameUrl && test_filename(testFilenameUrl);
-    console.warn('%o\n%o', testFilenameUrl, testFilename);
     return new TestHelperImpl(testFilename || expect.getState().testPath || 'test');
 }
 
@@ -135,22 +130,6 @@ class TestHelperImpl implements TestHelper {
      */
     cp(src: string, dest: string): void {
         shell.cp(this.resolveTemp(src), this.resolveTemp(dest));
-    }
-
-    /**
-     * Change the current directory
-     * @param dir
-     */
-    cd(dir: string): void {
-        shell.cd(this.resolveTemp(dir));
-    }
-
-    /**
-     * Change dir to temp directory unique to the current test.
-     */
-    cdToTempDir(...parts: string[]): void {
-        this.createTempDir(...parts);
-        this.cd('.');
     }
 
     /**
