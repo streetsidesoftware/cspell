@@ -4,12 +4,11 @@
   "description": "Pure testing package for cspell-dictionary. Its purpose is to verify cspell-dictionary dependencies.",
   "private": true,
   "bin": {
-    "test-cjs": "./bin.cjs",
     "test-mjs": "./bin.mjs",
     "test-rollup-cjs": "./bin.rollup.cjs",
     "test-rollup-mjs": "./bin.rollup.mjs"
   },
-  "type": "commonjs",
+  "type": "module",
   "scripts": {
     "clean": "shx rm -rf dist .rollup.cache",
     "build": "pnpm build:ts && pnpm build:rollup",

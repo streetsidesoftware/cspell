@@ -4,13 +4,11 @@
   "description": "Pure testing package",
   "private": true,
   "bin": {
-    "test-cjs": "./bin.cjs",
     "test-mjs": "./bin.mjs",
     "test-rollup-cjs": "./bin.rollup.cjs",
     "test-rollup-mjs": "./bin.rollup.mjs"
   },
-  "type": "commonjs",
-  "main": "./dist/cjs/index.js",
+  "type": "module",
   "module": "./dist/esm/index.mjs",
   "browser": "./dist/browser/index.mjs",
   "scripts": {
