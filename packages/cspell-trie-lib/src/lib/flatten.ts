@@ -22,7 +22,7 @@ export function flattenToTrieRefNode(root: TrieNode, nodes: Emitter): number {
     function convert(n: TrieNode): number {
         const r = copy(n);
         if (n.c) {
-            const children = [...n.c].sort((a, b) => (a[0] < b[0] ? -1 : 1));
+            const children = Object.entries(n.c).sort((a, b) => (a[0] < b[0] ? -1 : 1));
             r.r = children.map((c) => [c[0], convert(c[1])] as [string, number]);
         }
 
@@ -67,9 +67,11 @@ export function flattenToTrieRefNodeIterable(root: TrieNode): IterableIterator<T
         }
         const stack: StackElement[] = [];
 
-        function addToStack(c: Map<string, TrieNode> | undefined, p: TrieRefNode) {
+        function addToStack(c: Record<string, TrieNode> | undefined, p: TrieRefNode) {
             if (!c) return;
-            const children = [...c.entries()].map(([k, n]) => ({ k, n, p })).sort((a, b) => (a.k < b.k ? 1 : -1));
+            const children = Object.entries(c)
+                .map(([k, n]) => ({ k, n, p }))
+                .sort((a, b) => (a.k < b.k ? 1 : -1));
             stack.push(...children);
         }
 

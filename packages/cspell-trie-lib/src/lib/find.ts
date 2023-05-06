@@ -183,7 +183,7 @@ export function findCompoundNode(
         let r: TrieNode | undefined = root;
         let i;
         for (i = 0; i < prefix.length && r; ++i) {
-            r = r.c?.get(prefix[i]);
+            r = r.c?.[prefix[i]];
         }
         const caseMatched = s.caseMatched && prefix[0] !== ignoreCasePrefix;
         return {
@@ -203,7 +203,7 @@ export function findCompoundNode(
         const s = stack[i];
         const h = w[i++];
         const n = s.cr || s.n;
-        const c = n?.c?.get(h);
+        const c = n?.c?.[h];
         if (c && i < word.length) {
             // Go deeper.
             caseMatched = s.caseMatched;
@@ -213,8 +213,10 @@ export function findCompoundNode(
             node = node || c;
 
             // We did not find the word backup and take the first unused compound branch
-            while (--i > 0 && (!stack[i].compoundPrefix || !stack[i].n?.c?.has(compoundCharacter))) {
-                /* empty */
+            while (--i > 0) {
+                const s = stack[i];
+                if (!s.compoundPrefix || !s.n?.c) continue;
+                if (compoundCharacter in s.n.c) break;
             }
             if (i >= 0 && stack[i].compoundPrefix) {
                 compoundUsed = i > 0;
@@ -277,7 +279,7 @@ function walk(root: Root | TrieNode | undefined, word: string): TrieNode | undef
     let i = 0;
     while (n && i < word.length) {
         const h = w[i++];
-        n = n.c?.get(h);
+        n = n.c?.[h];
     }
 
     return n;
@@ -316,7 +318,7 @@ function findLegacyCompoundNode(
         const s = stack[i];
         const h = w[i++];
         const n = s.cr || s.n;
-        const c = n?.c?.get(h);
+        const c = n?.c?.[h];
         if (c && i < wLen) {
             // Go deeper.
             stack[i] = {
@@ -385,7 +387,7 @@ function findLegacyCompoundWord(roots: (TrieNode | undefined)[], word: string, m
 }
 
 export function isForbiddenWord(root: Root | TrieNode | undefined, word: string, forbiddenPrefix: string): boolean {
-    return findWordExact(root?.c?.get(forbiddenPrefix), word);
+    return findWordExact(root?.c?.[forbiddenPrefix], word);
 }
 
 export const createFindOptions = memorizeLastCall(_createFindOptions);

@@ -4,7 +4,7 @@ import { genSequence } from 'gensequence';
 import { convertToTrieRefNodes } from '../convertToTrieRefNodes.js';
 import { trieNodeToRoot } from '../trie-util.js';
 import type { TrieNode, TrieRoot } from '../TrieNode.js';
-import { ChildMap, FLAG_WORD } from '../TrieNode.js';
+import { FLAG_WORD } from '../TrieNode.js';
 import type { TrieRefNode } from '../trieRef.js';
 
 const EOW = '*';
@@ -133,7 +133,7 @@ export function importTrie(linesX: Iterable<string> | IterableIterator<string>):
             .filter((a) => !!a)
             .map<[string, number]>((a) => [a[0], Number.parseInt(a.slice(1) || '0', radix)])
             .map<[string, TrieNode]>(([k, i]) => [k, nodes[i]]);
-        const cNode = children.length ? { c: new ChildMap(children) } : {};
+        const cNode = children.length ? { c: Object.fromEntries(children) } : {};
         return { ...cNode, ...flags };
     }
 

@@ -38,19 +38,19 @@ function* hintedWalkerNext(
     const compoundCharacter = root.compoundCharacter;
     const noCaseCharacter = root.stripCaseAndAccentsPrefix;
 
-    const rawRoots = [root, ignoreCase ? root.c.get(noCaseCharacter) : undefined].filter(isDefined);
+    const rawRoots = [root, ignoreCase ? root.c[noCaseCharacter] : undefined].filter(isDefined);
 
     const specialRootsPrefix = existMap([compoundCharacter, noCaseCharacter, root.forbiddenWordPrefix]);
     function filterRoot(root: TrieNode): TrieNode {
-        const children = root.c?.entries();
-        const c = children && [...children].filter(([v]) => !(v in specialRootsPrefix));
+        const children = root.c && Object.entries(root.c);
+        const c = children?.filter(([v]) => !(v in specialRootsPrefix));
         return {
-            c: c && new Map(c),
+            c: c && Object.fromEntries(c),
         };
     }
 
     const roots = rawRoots.map(filterRoot);
-    const compoundRoots = rawRoots.map((r) => r.c?.get(compoundCharacter)).filter(isDefined);
+    const compoundRoots = rawRoots.map((r) => r.c?.[compoundCharacter]).filter(isDefined);
     const setOfCompoundRoots = new Set(compoundRoots);
     const rootsForCompoundMethods = roots.concat(compoundRoots);
 
@@ -77,24 +77,24 @@ function* hintedWalkerNext(
 
             // First yield the hints
             yield* [...hints]
-                .filter((a) => c.has(a))
+                .filter((a) => a in c)
                 .map((letter) => ({
                     letter,
                     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-                    node: c.get(letter)!,
+                    node: c[letter]!,
                     hintOffset: hintOffset + 1,
                 }));
             // We don't want to suggest the compound character.
             hints.add(compoundCharacter);
             // Then yield everything else.
-            yield* [...c]
+            yield* Object.entries(c)
                 .filter((a) => !hints.has(a[0]))
                 .map(([letter, node]) => ({
                     letter,
                     node,
                     hintOffset: hintOffset + 1,
                 }));
-            if (c.has(compoundCharacter) && !setOfCompoundRoots.has(n)) {
+            if (compoundCharacter in c && !setOfCompoundRoots.has(n)) {
                 for (const compoundRoot of compoundRoots) {
                     for (const child of children(compoundRoot, hintOffset)) {
                         const { letter, node, hintOffset } = child;

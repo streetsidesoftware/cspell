@@ -18,10 +18,10 @@ export function* walker(
 
     function* children(n: TrieNode): IterableIterator<[string, TrieNode]> {
         if (n.c) {
-            yield* n.c;
+            yield* Object.entries(n.c);
         }
         if (n.f) {
-            yield* roots[compoundingMethod];
+            yield* Object.entries(roots[compoundingMethod]);
         }
     }
 

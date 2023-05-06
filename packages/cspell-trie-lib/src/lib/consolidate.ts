@@ -14,7 +14,7 @@ export function consolidate(root: TrieRoot): TrieRoot {
 
     function signature(n: TrieNode): string {
         const isWord = n.f ? '*' : '';
-        const ref = n.c ? JSON.stringify([...n.c.entries()].map(([k, n]) => [k, cached.get(n)])) : '';
+        const ref = n.c ? JSON.stringify(Object.entries(n.c).map(([k, n]) => [k, cached.get(n)])) : '';
         return isWord + ref;
     }
 
@@ -23,7 +23,7 @@ export function consolidate(root: TrieRoot): TrieRoot {
         let r: TrieNode | undefined;
         // istanbul ignore else
         if (n.c) {
-            for (const c of n.c.values()) {
+            for (const c of Object.values(n.c)) {
                 r = findEow(c);
                 // istanbul ignore else
                 if (r) break;
@@ -32,9 +32,9 @@ export function consolidate(root: TrieRoot): TrieRoot {
         return r;
     }
 
-    function compareMaps(a: [string, TrieNode][], b: Map<string, TrieNode>): boolean {
+    function compareMaps(a: [string, TrieNode][], b: Record<string, TrieNode>): boolean {
         for (const e of a) {
-            if (b.get(e[0]) !== e[1]) return false;
+            if (b[e[0]] !== e[1]) return false;
         }
         return a.length === b.size;
     }
@@ -47,9 +47,9 @@ export function consolidate(root: TrieRoot): TrieRoot {
 
         const orig = n;
         if (n.c) {
-            const children = [...n.c].map((c) => [c[0], deepCopy(c[1])] as [string, TrieNode]);
+            const children = Object.entries(n.c).map((c) => [c[0], deepCopy(c[1])] as [string, TrieNode]);
             if (!compareMaps(children, n.c)) {
-                n = { f: n.f, c: new Map(children) };
+                n = { f: n.f, c: Object.fromEntries(children) };
             }
         }
         const sig = signature(n);
@@ -73,10 +73,10 @@ export function consolidate(root: TrieRoot): TrieRoot {
             return knownMap.get(n) || deepCopy(n);
         }
         if (n.c) {
-            const children = [...n.c]
+            const children = Object.entries(n.c)
                 .sort((a, b) => (a[0] < b[0] ? -1 : 1))
                 .map((c) => [c[0], process(c[1])] as [string, TrieNode]);
-            n.c = new Map(children);
+            n.c = Object.fromEntries(children);
         }
         const sig = signature(n);
         const ref = signatures.get(sig);

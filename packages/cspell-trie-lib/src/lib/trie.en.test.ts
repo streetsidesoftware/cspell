@@ -36,17 +36,24 @@ describe('Validate English Trie', () => {
         interface CountResult {
             nodes: number;
             refs: number;
+            refsByCount: number[];
+            alphabet: Map<string, number>;
         }
         function countNodesAndRefs(root: TrieNode): CountResult {
-            const result: CountResult = { nodes: 0, refs: 0 };
+            const result: CountResult = { nodes: 0, refs: 0, refsByCount: [], alphabet: new Map() };
             const seen = new Set<TrieNode>();
             function walker(node: TrieNode) {
                 if (seen.has(node)) return;
                 seen.add(node);
                 result.nodes += 1;
                 if (!node.c) return;
-                result.refs += node.c.size;
-                for (const child of node.c.values()) {
+                const size = Object.entries(node.c).length;
+                result.refsByCount[size] = (result.refsByCount[size] || 0) + 1;
+                result.refs += size;
+                for (const [key, child] of Object.entries(node.c)) {
+                    for (const char of key.normalize('NFD')) {
+                        incEntry(result.alphabet, char);
+                    }
                     walker(child);
                 }
             }
@@ -57,8 +64,16 @@ describe('Validate English Trie', () => {
         const trie = await pTrie;
         const root = trie.root;
         const r = countNodesAndRefs(root);
-        // console.log('%o', r);
-        // console.log(`Expected size to be ${(r.nodes + r.refs) * 4}`);
+        const calc = {
+            'Expected size': r.nodes + r.refs * 4,
+            Average: r.refs / r.nodes,
+        };
+        console.log('Result: %o', r);
+        console.log('Calculations: %o', calc);
         expect(r.nodes).toBeGreaterThan(1000);
     });
 });
+
+function incEntry<K>(map: Map<K, number>, key: K) {
+    map.set(key, (map.get(key) || 0) + 1);
+}

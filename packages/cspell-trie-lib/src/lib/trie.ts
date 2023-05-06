@@ -51,7 +51,7 @@ export class Trie {
     constructor(readonly root: TrieRoot, private count?: number) {
         this._options = mergeOptionalWithDefaults(root);
         this.isLegacy = this.calcIsLegacy();
-        this.hasForbidden = !!root.c.get(root.forbiddenWordPrefix);
+        this.hasForbidden = !!root.c[root.forbiddenWordPrefix];
         this._findOptionsDefaults = {
             caseInsensitivePrefix: this._options.stripCaseAndAccentsPrefix,
             compoundFix: this._options.compoundCharacter,
@@ -230,9 +230,9 @@ export class Trie {
     private calcIsLegacy(): boolean {
         const c = this.root.c;
         return !(
-            c?.get(this._options.compoundCharacter) ||
-            c?.get(this._options.stripCaseAndAccentsPrefix) ||
-            c?.get(this._options.forbiddenWordPrefix)
+            (c && c[this._options.compoundCharacter]) ||
+            c[this._options.stripCaseAndAccentsPrefix] ||
+            c[this._options.forbiddenWordPrefix]
         );
     }
 

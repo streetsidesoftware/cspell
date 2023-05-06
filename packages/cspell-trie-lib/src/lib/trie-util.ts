@@ -2,7 +2,7 @@ import type { Sequence } from 'gensequence';
 import { genSequence } from 'gensequence';
 
 import type { PartialTrieOptions, TrieNode, TrieRoot } from './TrieNode.js';
-import { ChildMap, FLAG_WORD } from './TrieNode.js';
+import { FLAG_WORD } from './TrieNode.js';
 import { mergeOptionalWithDefaults } from './utils/mergeOptionalWithDefaults.js';
 import { walker } from './walker/walker.js';
 import type { YieldResult } from './walker/walkerTypes.js';
@@ -11,8 +11,9 @@ export function insert(text: string, node: TrieNode = {}): TrieNode {
     if (text.length) {
         const head = text[0];
         const tail = text.slice(1);
-        node.c = node.c || new ChildMap();
-        node.c.set(head, insert(tail, node.c.get(head)));
+        const c = node.c || Object.create(null);
+        c[head] = insert(tail, c[head]);
+        node.c = c;
     } else {
         node.f = (node.f || 0) | FLAG_WORD;
     }
@@ -29,9 +30,9 @@ export function isWordTerminationNode(node: TrieNode): boolean {
 export function orderTrie(node: TrieNode): void {
     if (!node.c) return;
 
-    const nodes = [...node.c].sort(([a], [b]) => (a < b ? -1 : 1));
-    node.c = new Map(nodes);
-    for (const n of node.c) {
+    const nodes = Object.entries(node.c).sort(([a], [b]) => (a < b ? -1 : 1));
+    node.c = Object.fromEntries(nodes);
+    for (const n of nodes) {
         orderTrie(n[1]);
     }
 }
@@ -58,7 +59,7 @@ export function createTrieRoot(options: PartialTrieOptions): TrieRoot {
     const fullOptions = mergeOptionalWithDefaults(options);
     return {
         ...fullOptions,
-        c: new Map<string, TrieNode>(),
+        c: Object.create(null),
     };
 }
 
@@ -75,9 +76,8 @@ export function createTriFromList(words: Iterable<string>, options?: PartialTrie
 export function has(node: TrieNode, word: string): boolean {
     let h = word.slice(0, 1);
     let t = word.slice(1);
-    while (node.c && node.c.has(h)) {
-        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-        node = node.c.get(h)!;
+    while (node.c && h in node.c) {
+        node = node.c[h];
         h = t.slice(0, 1);
         t = t.slice(1);
     }
@@ -90,7 +90,7 @@ export function findNode(node: TrieNode, prefix: string): TrieNode | undefined {
     let t = prefix.slice(1);
     let n: TrieNode | undefined = node;
     while (h.length && n && n.c) {
-        n = n.c.get(h);
+        n = n.c[h];
         h = t.slice(0, 1);
         t = t.slice(1);
     }
@@ -104,7 +104,7 @@ export function countNodes(root: TrieNode): number {
         if (seen.has(n)) return;
         seen.add(n);
         if (n.c) {
-            [...n.c.values()].forEach((n) => walk(n));
+            Object.values(n.c).forEach((n) => walk(n));
         }
     }
 
@@ -129,7 +129,7 @@ export function countWords(root: TrieNode): number {
             return cnt;
         }
 
-        for (const c of n.c.values()) {
+        for (const c of Object.values(n.c)) {
             cnt += walk(c);
         }
         visited.set(n, cnt);
@@ -154,7 +154,7 @@ export function isCircular(root: TrieNode): boolean {
         inStack.add(n);
         let r: Reduce = { isCircular: false, allSeen: true };
         if (n.c) {
-            r = [...n.c.values()].reduce((acc: Reduce, n: TrieNode) => {
+            r = Object.values(n.c).reduce((acc: Reduce, n: TrieNode) => {
                 if (acc.isCircular) return acc;
                 const r = walk(n);
                 r.allSeen = r.allSeen && acc.allSeen;
@@ -175,6 +175,6 @@ export function trieNodeToRoot(node: TrieNode, options: PartialTrieOptions): Tri
     const newOptions = mergeOptionalWithDefaults(options);
     return {
         ...newOptions,
-        c: node.c || new Map<string, TrieNode>(),
+        c: node.c || Object.create(null),
     };
 }
