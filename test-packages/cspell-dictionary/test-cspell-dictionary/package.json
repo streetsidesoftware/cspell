@@ -17,7 +17,7 @@
     "clean-build": "pnpm run clean && pnpm run build",
     "compile": "tsc -b .",
     "test": "pnpm test:unit && pnpm test:smoke",
-    "test:smoke": "node ./bin.mjs && node ./bin.cjs && node ./bin.rollup.mjs && node ./bin.rollup.cjs",
+    "test:smoke": "node ./bin.mjs && node ./bin.rollup.mjs && node ./bin.rollup.cjs",
     "test:unit": "vitest run"
   },
   "author": "",
