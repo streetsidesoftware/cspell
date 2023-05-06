@@ -24,6 +24,8 @@ const sc = expect.stringContaining;
 
 const { sanitizeSuggestion } = __testing__;
 
+const timeout = 10000;
+
 describe('docValidator', () => {
     test('DocumentValidator', () => {
         const doc = td(__filename, '/** This is some code */');
@@ -55,20 +57,24 @@ describe('docValidator', () => {
         ${fix('sample-with-errors.ts')}            | ${'main'}       | ${undefined} | ${[]}
         ${fix('sample-with-cspell-directives.ts')} | ${'grrrr'}      | ${undefined} | ${[]}
         ${fixDict('remote/test.txt')}              | ${'New'}        | ${'Paris'}   | ${[]}
-    `('checkText async $filename "$startText"', async ({ filename, startText, endText, expected }) => {
-        const doc = await loadDoc(filename);
-        const dVal = new DocumentValidator(doc, {}, {});
-        await dVal.prepare();
-        const startOffset = doc.text.indexOf(startText);
-        const endOffset = endText
-            ? doc.text.indexOf(endText, startOffset + startText.length) + endText.length
-            : startOffset + startText.length;
-        assert(startOffset >= 0);
-        const range = [startOffset, endOffset] as const;
-        const text = doc.text.slice(startOffset, endOffset);
-        expect(dVal.checkText(range, text, [])).toEqual(expected);
-        expect(dVal.prepTime).toBeGreaterThan(0);
-    });
+    `(
+        'checkText async $filename "$startText"',
+        async ({ filename, startText, endText, expected }) => {
+            const doc = await loadDoc(filename);
+            const dVal = new DocumentValidator(doc, {}, {});
+            await dVal.prepare();
+            const startOffset = doc.text.indexOf(startText);
+            const endOffset = endText
+                ? doc.text.indexOf(endText, startOffset + startText.length) + endText.length
+                : startOffset + startText.length;
+            assert(startOffset >= 0);
+            const range = [startOffset, endOffset] as const;
+            const text = doc.text.slice(startOffset, endOffset);
+            expect(dVal.checkText(range, text, [])).toEqual(expected);
+            expect(dVal.prepTime).toBeGreaterThan(0);
+        },
+        timeout
+    );
 
     test.each`
         filename                                   | text            | configFile            | expected

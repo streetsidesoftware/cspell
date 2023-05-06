@@ -41,8 +41,10 @@ var __importStar =
     };
 Object.defineProperty(exports, '__esModule', { value: true });
 exports.createFromFile = void 0;
-const file_entry_cache = __importStar(require('file-entry-cache'));
+/* This is to work around a bug in file-entry-cache that uses `this` */
+const fileEntryCache = __importStar(require('file-entry-cache'));
 function createFromFile(pathToCache, useChecksum) {
-    return file_entry_cache.createFromFile(pathToCache, useChecksum);
+    return fileEntryCache.createFromFile(pathToCache, useChecksum);
 }
 exports.createFromFile = createFromFile;
+//# sourceMappingURL=file-entry-cache.cjs.map
