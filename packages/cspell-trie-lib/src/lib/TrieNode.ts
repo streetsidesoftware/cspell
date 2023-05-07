@@ -2,7 +2,8 @@ import type { PartialWithUndefined } from './types.js';
 
 export const FLAG_WORD = 1;
 
-export class ChildMap extends Map<string, TrieNode> {}
+export type ChildMap = Record<string, TrieNode>;
+
 export interface TrieNode {
     f?: number | undefined; // flags
     c?: ChildMap | undefined;

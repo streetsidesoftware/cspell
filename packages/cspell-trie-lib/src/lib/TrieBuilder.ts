@@ -70,14 +70,14 @@ export class TrieBuilder {
 
     private signature(n: TrieNode): string {
         const isWord = n.f ? '*' : '';
-        const ref = n.c ? JSON.stringify([...n.c.entries()].map(([k, n]) => [k, this.cached.get(n)])) : '';
+        const ref = n.c ? JSON.stringify(Object.entries(n.c).map(([k, n]) => [k, this.cached.get(n)])) : '';
         return isWord + ref;
     }
 
     private _canBeCached(n: TrieNode): boolean {
         if (!n.c) return true;
-        for (const v of n.c) {
-            if (!this.cached.has(v[1])) return false;
+        for (const v of Object.values(n.c)) {
+            if (!this.cached.has(v)) return false;
         }
         return true;
     }
@@ -94,10 +94,10 @@ export class TrieBuilder {
         if (Object.isFrozen(n)) return n;
         // istanbul ignore else
         if (n.c) {
-            const c = [...n.c]
+            const c = Object.entries(n.c)
                 .sort((a, b) => (a[0] < b[0] ? -1 : 1))
                 .map(([k, n]) => [k, this.freeze(n)] as [string, TrieNode]);
-            n.c = new Map(c);
+            n.c = Object.fromEntries(c);
             Object.freeze(n.c);
         }
         return Object.freeze(n);
@@ -124,11 +124,17 @@ export class TrieBuilder {
     }
 
     private addChild(node: TrieNode, head: string, child: TrieNode): TrieNode {
-        if (node.c?.get(head) !== child) {
-            if (!node.c || Object.isFrozen(node)) {
-                node = { ...node, c: new Map(node.c ?? []) };
+        if (node.c?.[head] !== child) {
+            let c = node.c || Object.create(null);
+            if (Object.isFrozen(c)) {
+                c = Object.assign(Object.create(null), c);
             }
-            node.c?.set(head, child);
+            c[head] = child;
+            if (Object.isFrozen(node)) {
+                node = { ...node, c };
+            } else {
+                node.c = c;
+            }
         }
         return Object.isFrozen(child) ? this.tryToCache(node) : node;
     }
@@ -168,7 +174,7 @@ export class TrieBuilder {
         }
         const head = s[0];
         const tail = s.slice(1);
-        const cNode = node.c?.get(head);
+        const cNode = node.c?.[head];
         const child = cNode ? this._insert(cNode, tail, d + 1) : this.buildTail(tail);
         node = this.addChild(node, head, child);
         this.storeTransform(orig, s, node);
@@ -233,6 +239,6 @@ export class TrieBuilder {
 
 function copyIfFrozen(n: TrieNode): TrieNode {
     if (!Object.isFrozen(n)) return n;
-    const c = n.c ? new Map(n.c) : undefined;
+    const c = n.c ? Object.assign(Object.create(null), n.c) : undefined;
     return { f: n.f, c };
 }

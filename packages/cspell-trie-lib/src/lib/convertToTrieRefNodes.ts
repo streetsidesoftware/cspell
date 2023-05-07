@@ -28,7 +28,7 @@ export function convertToTrieRefNodes(root: TrieNode): IterableIterator<TrieRefN
             return;
         }
         tallies.set(n, 1);
-        for (const c of n.c?.values() || []) {
+        for (const c of (n.c && Object.values(n.c)) || []) {
             tally(c);
         }
     }
@@ -43,7 +43,7 @@ export function convertToTrieRefNodes(root: TrieNode): IterableIterator<TrieRefN
             rollupTally.set(n, sum);
             return sum;
         }
-        const sum = [...n.c.values()].reduce((acc, v) => acc + rollup(v), tallies.get(n) || 0);
+        const sum = Object.values(n.c).reduce((acc, v) => acc + rollup(v), tallies.get(n) || 0);
         rollupTally.set(n, sum);
         return sum;
     }
@@ -63,7 +63,7 @@ export function convertToTrieRefNodes(root: TrieNode): IterableIterator<TrieRefN
             return;
         }
 
-        const children = [...(n.c?.values() || [])].sort(
+        const children = ((n.c && Object.values(n.c)) || []).sort(
             (a, b) => (rollupTally.get(b) || 0) - (rollupTally.get(a) || 0)
         );
 
@@ -78,7 +78,9 @@ export function convertToTrieRefNodes(root: TrieNode): IterableIterator<TrieRefN
     function convert(n: TrieNode): TrieRefNode {
         const { f, c } = n;
         const r = c
-            ? [...c].sort((a, b) => (a[0] < b[0] ? -1 : 1)).map(([s, n]) => [s, cached.get(n)] as [string, number])
+            ? Object.entries(c)
+                  .sort((a, b) => (a[0] < b[0] ? -1 : 1))
+                  .map(([s, n]) => [s, cached.get(n)] as [string, number])
             : undefined;
         const rn: TrieRefNode = r ? (f ? { f, r } : { r }) : { f };
         return rn;

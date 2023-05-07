@@ -169,7 +169,7 @@ export function serializeTrie(root: TrieRoot, options: ExportOptions | number = 
                 yield* emit(comment_begin + chars + comment_end);
             }
             cache.set(node, count++);
-            const c = [...node.c].sort((a, b) => (a[0] < b[0] ? -1 : 1));
+            const c = Object.entries(node.c).sort((a, b) => (a[0] < b[0] ? -1 : 1));
             for (const [s, n] of c) {
                 wordChars[depth] = s;
                 yield* emit(escape(s));
@@ -235,7 +235,7 @@ function buildReferenceMap(root: TrieRoot, base: number): ReferenceMap {
         }
         refCount.set(node, { c: 1, n: nodeCount++ });
         if (!node.c) return;
-        for (const child of node.c.values()) {
+        for (const child of Object.values(node.c)) {
             walk(child);
         }
     }
@@ -334,7 +334,7 @@ function parseStream(radix: number, iter: Iterable<string>): TrieRoot {
                 const top = stack[stack.length - 1];
                 const p = stack[stack.length - 2].node;
                 const n = isIndexRef ? refIndex[r] : r;
-                p.c?.set(top.s, nodes[n]);
+                p.c && (p.c[top.s] = nodes[n]);
                 const rr = { root, nodes, stack, parser: undefined };
                 return s === EOR ? rr : parserMain(rr, s);
             }
@@ -389,9 +389,10 @@ function parseStream(radix: number, iter: Iterable<string>): TrieRoot {
         const { root, nodes, stack } = acc;
         const top = stack[stack.length - 1];
         const node = top.node;
-        node.c = node.c ?? new Map<string, TrieNode>();
+        const c = node.c ?? Object.create(null);
         const n = { f: undefined, c: undefined, n: nodes.length };
-        node.c.set(s, n);
+        c[s] = n;
+        node.c = c;
         stack.push({ node: n, s });
         nodes.push(n);
         return { root, nodes, stack, parser };
@@ -406,7 +407,7 @@ function parseStream(radix: number, iter: Iterable<string>): TrieRoot {
         if (!node.c) {
             top.node = eow;
             const p = stack[stack.length - 2].node;
-            p.c?.set(top.s, eow);
+            p.c && (p.c[top.s] = eow);
             nodes.pop();
         }
         stack.pop();

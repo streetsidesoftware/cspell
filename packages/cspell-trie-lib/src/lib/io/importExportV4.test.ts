@@ -140,7 +140,7 @@ function toTree(root: TrieNode): string {
     function* walk(n: TrieNode, prefix: string): Generator<string> {
         const nextPrefix = '.'.repeat(prefix.length);
         if (n.c) {
-            for (const c of [...n.c].sort((a, b) => (a[0] < b[0] ? -1 : 1))) {
+            for (const c of Object.entries(n.c).sort((a, b) => (a[0] < b[0] ? -1 : 1))) {
                 yield* walk(c[1], prefix + c[0]);
                 prefix = nextPrefix;
             }

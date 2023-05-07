@@ -167,11 +167,11 @@ export function* genCompoundableSuggestions(
     }
 
     function opCompoundWord(best: Candidate): void {
-        if (!best.n.c?.get(compoundIndicator)) return;
+        if (!best.n.c?.[compoundIndicator]) return;
         const i = best.i;
         const s = '';
         nodes.forEach((node) => {
-            const n = node.c?.get(compoundIndicator);
+            const n = node.c?.[compoundIndicator];
             if (!n) return;
             const e: Edge = { p: best, n, i, s, c: opCosts.wordBreak, a: Action.CompoundWord };
             addEdge(best, e);
@@ -183,7 +183,7 @@ export function* genCompoundableSuggestions(
         if (!children) return;
         const i = best.i;
         const c = bc;
-        for (const [s, n] of children) {
+        for (const [s, n] of Object.entries(children)) {
             const e: Edge = { p: best, n, i, s, c, a: Action.Insert };
             addEdge(best, e);
         }
@@ -205,7 +205,7 @@ export function* genCompoundableSuggestions(
 
     function opIdentity(best: Candidate): void {
         const s = word[best.i];
-        const n = best.n.c?.get(s);
+        const n = best.n.c?.[s];
         if (!n) return;
         const i = best.i + 1;
         const e: Edge = { p: best, n, i, s, c: 0, a: Action.Identity };
@@ -219,7 +219,7 @@ export function* genCompoundableSuggestions(
         const wg = visualLetterMaskMap[wc] || 0;
         const i = best.i + 1;
         const cost = bc + (best.i ? 0 : opCosts.firstLetterBias);
-        for (const [s, n] of children) {
+        for (const [s, n] of Object.entries(children)) {
             if (s == wc) continue;
             const sg = visualLetterMaskMap[s] || 0;
             const c = wg & sg ? mapSugCost : cost;
@@ -236,8 +236,8 @@ export function* genCompoundableSuggestions(
         const wc1 = word[i];
         const wc2 = word[i2];
         if (wc1 === wc2) return;
-        const n = best.n.c?.get(wc2);
-        const n2 = n?.c?.get(wc1);
+        const n = best.n.c?.[wc2];
+        const n2 = n?.c?.[wc1];
         if (!n || !n2) return;
         const e: Edge = {
             p: best,
@@ -258,7 +258,7 @@ export function* genCompoundableSuggestions(
         if (!children || len <= i2) return;
         const wc1 = word[i];
         const wc2 = word[i2];
-        const n = best.n.c?.get(wc1);
+        const n = best.n.c?.[wc1];
         if (!n) return;
         if (wc1 === wc2) {
             // convert double letter to single
@@ -266,7 +266,7 @@ export function* genCompoundableSuggestions(
             addEdge(best, e);
             return;
         }
-        const n2 = n?.c?.get(wc1);
+        const n2 = n?.c?.[wc1];
         if (!n2) return;
         // convert single to double letter
         const e: Edge = { p: best, n: n2, i: i2, s: wc1 + wc1, c: opCosts.duplicateLetterCost, a: Action.Insert };
@@ -513,7 +513,7 @@ function determineInitialNodes(root: TrieRoot | TrieRoot[], ignoreCase: boolean)
     const noCaseNodes = ignoreCase
         ? roots
               .filter((r) => r.stripCaseAndAccentsPrefix)
-              .map((n) => n.c?.get(n.stripCaseAndAccentsPrefix))
+              .map((n) => n.c?.[n.stripCaseAndAccentsPrefix])
               .filter(isDefined)
         : [];
     const nodes: TrieNode[] = rootNodes.concat(noCaseNodes);

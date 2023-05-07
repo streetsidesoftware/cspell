@@ -33,8 +33,8 @@ describe('Validate Util Functions', () => {
         const n1 = findNode(trie, 'sampl');
         const n2 = findNode(trie, 'samp');
         expect(n0?.f).toBeTruthy();
-        expect(n1?.c?.get('e')).toBe(n0);
-        expect(n2?.c?.get('l')).toBe(n1);
+        expect(n1?.c?.['e']).toBe(n0);
+        expect(n2?.c?.['l']).toBe(n1);
     });
 
     test('countNodes', () => {
@@ -46,7 +46,7 @@ describe('Validate Util Functions', () => {
         const trie = createTriFromList(words);
         expect(isCircular(trie)).toBe(false);
         const n = findNode(trie, 'samp');
-        n?.c?.set('x', trie);
+        n && n.c && (n.c['x'] = trie);
         expect(isCircular(trie)).toBe(true);
     });
 
@@ -54,7 +54,7 @@ describe('Validate Util Functions', () => {
         const trie = createTriFromList(words);
         expect(countWords(trie)).toBe(19);
         const n = findNode(trie, 'samp');
-        n?.c?.set('x', trie);
+        n && n.c && (n.c['x'] = trie);
         expect(isCircular(trie)).toBe(true);
         expect(countWords(trie)).toBe(19);
     });

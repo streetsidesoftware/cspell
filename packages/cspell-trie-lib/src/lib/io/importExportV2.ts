@@ -3,7 +3,7 @@ import { genSequence } from 'gensequence';
 
 import { trieNodeToRoot } from '../trie-util.js';
 import type { TrieNode, TrieRoot } from '../TrieNode.js';
-import { ChildMap, FLAG_WORD } from '../TrieNode.js';
+import { FLAG_WORD } from '../TrieNode.js';
 
 const EOW = '*';
 export const DATA = '__DATA__';
@@ -36,7 +36,7 @@ function leaves(node: TrieRefNode): Sequence<LeafResult> {
         if (!ref.c) {
             yield { n: ref, p };
         } else {
-            for (const n of ref.c) {
+            for (const n of Object.entries(ref.c)) {
                 yield* walk(n[1], n[0], ref);
             }
         }
@@ -70,8 +70,8 @@ function flattenToReferences(node: TrieRefNode): Sequence<TrieRefNode> {
                 if (leaf.p && leaf.p.c) {
                     leaf.p.r = leaf.p.r || [];
                     leaf.p.r.push(m);
-                    leaf.p.c.delete(leaf.n.s);
-                    if (!leaf.p.c.size) {
+                    delete leaf.p.c[leaf.n.s];
+                    if (!Object.entries(leaf.p.c).length) {
                         delete leaf.p.c;
                     }
                 }
@@ -199,7 +199,7 @@ export function importTrie(linesX: Iterable<string> | IterableIterator<string>):
             .map((r) => nodes[r])
             .sort((a, b) => (a.s < b.s ? -1 : 1))
             .map((n) => [n.s, n]);
-        const cNode = children.length ? { c: new ChildMap(children) } : {};
+        const cNode = children.length ? { c: Object.fromEntries(children) } : {};
         return { s: letter, ...cNode, ...flags };
     }
 
@@ -215,7 +215,7 @@ export function importTrie(linesX: Iterable<string> | IterableIterator<string>):
                 nodes.push(root);
                 return { root, nodes };
             },
-            { nodes: [], root: { s: '', c: new Map<string, TrieNode>() } }
+            { nodes: [], root: { s: '', c: Object.create(null) } }
         );
 
     return trieNodeToRoot(n.root, {});

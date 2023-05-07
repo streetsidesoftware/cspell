@@ -128,7 +128,7 @@ export function serializeTrie(root: TrieRoot, options: ExportOptions | number = 
                 yield* emit(EOL);
             }
             cache.set(node, count++);
-            const c = [...node.c].sort((a, b) => (a[0] < b[0] ? -1 : 1));
+            const c = Object.entries(node.c).sort((a, b) => (a[0] < b[0] ? -1 : 1));
             for (const [s, n] of c) {
                 wordChars[depth] = s;
                 yield* emit(escape(s));
@@ -152,9 +152,11 @@ export function serializeTrie(root: TrieRoot, options: ExportOptions | number = 
     }
 
     function _calcShouldSimpleRef(node: TrieNode): boolean {
-        if (node.c?.size !== 1) return false;
-        const [n] = [...node.c.values()];
-        return !!n.f && (n.c === undefined || n.c.size === 0);
+        if (!node.c) return false;
+        const values = Object.values(node.c);
+        if (values.length !== 1) return false;
+        const n = values[0];
+        return !!n.f && (!n.c || !Object.values(n.c).length);
     }
 
     function shouldSimpleRef(node: TrieNode): boolean {
@@ -247,7 +249,7 @@ function parseStream(radix: number): Reducer {
                 const r = parseInt(ref, radix);
                 const top = stack[stack.length - 1];
                 const p = stack[stack.length - 2].node;
-                p.c?.set(top.s, nodes[r]);
+                p.c && (p.c[top.s] = nodes[r]);
                 return { root, nodes, stack, parser: undefined };
             }
             ref = ref + s;
@@ -280,9 +282,10 @@ function parseStream(radix: number): Reducer {
         const { root, nodes, stack } = acc;
         const top = stack[stack.length - 1];
         const node = top.node;
-        node.c = node.c ?? new Map<string, TrieNode>();
+        const c = node.c ?? Object.create(null);
+        node.c = c;
         const n = { f: undefined, c: undefined, n: nodes.length };
-        node.c.set(s, n);
+        c[s] = n;
         stack.push({ node: n, s });
         nodes.push(n);
         return { root, nodes, stack, parser };
@@ -297,7 +300,7 @@ function parseStream(radix: number): Reducer {
         if (!node.c) {
             top.node = eow;
             const p = stack[stack.length - 2].node;
-            p.c?.set(top.s, eow);
+            p.c && (p.c[top.s] = eow);
             nodes.pop();
         }
         stack.pop();
