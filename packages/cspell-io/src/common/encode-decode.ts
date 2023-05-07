@@ -28,12 +28,7 @@ export function decode(buf: Buffer, encoding?: BufferEncodingExt): string {
 }
 
 export function swapBytesInPlace(buf: Buffer): Buffer {
-    for (let i = 0; i < buf.length - 1; i += 2) {
-        const v = buf[i];
-        buf[i] = buf[i + 1];
-        buf[i + 1] = v;
-    }
-    return buf;
+    return buf.swap16();
 }
 
 export function swapBytes(buf: Buffer): Buffer {

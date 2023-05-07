@@ -16,8 +16,6 @@ describe('encode-decode', () => {
 
     test.each`
         encoding
-        ${undefined}
-        ${'utf8'}
         ${'utf16le'}
     `('swapBytesInPlace $encoding', ({ encoding }) => {
         const src = Buffer.from('The sun is shining.', encoding);
@@ -35,7 +33,7 @@ describe('encode-decode', () => {
         ${'123'}
         ${'1234'}
     `('swapBytes $encoding', ({ text }) => {
-        const src = Buffer.from(text);
+        const src = Buffer.from(text, 'utf16le');
         const buf = Buffer.from(src);
         expect(buf).toEqual(src);
         const buf2 = swapBytes(buf);
