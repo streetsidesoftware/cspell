@@ -3,9 +3,9 @@ Repository: Azure/azure-rest-api-specs
 Url: https://github.com/Azure/azure-rest-api-specs.git
 Args: '["--config=cSpell.json","**/*.{md,ts,js}"]'
 Summary:
-  files: 2051
+  files: 2049
   filesWithIssues: 809
-  issues: 2587
+  issues: 2591
   errors: 0
 Errors: []
 
@@ -25,10 +25,11 @@ issues:
   - "documentation/api-scenario/references/ApiScenarioDefinition.md:278:29       somedomain      U       value: $(serviceName).somedomain.com"
   - "documentation/api-scenario/references/ErrorCodeReference.md:32:31       blobnfs     U       \"namespacePath\":\"/blobnfs\""
   - "documentation/ci-fix.md:9:76        supress (suppress)      U       not a word and need to supress the error in that file"
-  - "documentation/ci-fix.md:60:216      guildance               U       github comment with guildance on how to fix."
-  - "documentation/ci-fix.md:143:87      Qumulo                  U       Name} folder, like [Qumulo.Manaement](https://github"
-  - "documentation/ci-fix.md:143:94      Manaement               U       folder, like [Qumulo.Manaement](https://github.com"
-  - "documentation/ci-fix.md:144:255     geneates                U       swagger automatically when geneates the swagger, you should"
+  - "documentation/ci-fix.md:17:18       contosowidgetmanager    U       cd specification/contosowidgetmanager"
+  - "documentation/ci-fix.md:56:216      guildance               U       github comment with guildance on how to fix."
+  - "documentation/ci-fix.md:139:87      Qumulo                  U       Name} folder, like [Qumulo.Manaement](https://github"
+  - "documentation/ci-fix.md:139:94      Manaement               U       folder, like [Qumulo.Manaement](https://github.com"
+  - "documentation/ci-fix.md:140:255     geneates                U       swagger automatically when geneates the swagger, you should"
   - "documentation/code-gen/configure-cli.md:93:48       azext       U       $(az-output-folder)/azext_communication/vendored"
   - "documentation/code-gen/configure-cli.md:103:91      commmand    U       passed by user in their commmand line which should points"
   - "documentation/code-gen/configure-cli.md:115:62      offazure    U       packages like migrate and offazure."
@@ -71,7 +72,6 @@ issues:
   - "documentation/typespec-end-to-end-scenarios.md:179:38       compliation         U       should verify TypeSpec compliation"
   - "documentation/typespec-end-to-end-scenarios.md:181:31       lanauge             U       Optionally CI generated key lanauge SDKs changes can be"
   - "documentation/typespec-structure-guidelines.md:46:7         confidentialledger      U       -> confidentialledger"
-  - "documentation/typespec-structure-guidelines.md:118:7        contosowidgetmanager    U       -> contosowidgetmanager"
   - "documentation/x-ms-examples.md:105:29       testrg      U       resourceGroupName\": \"testrg123\","
   - "documentation/x-ms-examples.md:106:30       testacc     U       storageAccountName\": \"testacc6141\","
   - "profiles/definitions/hybrid-2018-03-01.md:99:13         georegions      U       - georegions"
@@ -100,7 +100,6 @@ issues:
   - "README.md:173:521       enitity             U       latter supports the enitity type sharing cross components"
   - "scripts/prettier-swagger-plugin.ts:4:25         hardline    U       const { concat, indent, hardline, join } = doc.builders"
   - "scripts/prettier-swagger-plugin.ts:83:17        estree      U       astFormat: 'estree-swagger-customized'"
-  - "scripts/utils.ts:7:29           logissue    U       console.log(`##vso[task.logissue type=${type}]${line"
   - "SECURITY.md:13:72       MSRC    U       Security Response Center (MSRC) at [https://msrc.microsoft"
   - "SECURITY.md:17:205      msrc    U       found at [microsoft.com/msrc](https://aka.ms/opensource"
   - "specification/addons/resource-manager/readme.go.md:14:41        armaddons       U       resourcemanager/addons/armaddons"
@@ -187,10 +186,10 @@ issues:
   - "specification/cosmos-db/data-plane/readme.md:49:46          outputm     U       only supports XML input/outputm which is not supported"
   - "specification/cosmos-db/resource-manager/readme.go.md:14:41         armcosmos       U       resourcemanager/cosmos/armcosmos"
   - "specification/cosmos-db/resource-manager/readme.md:42:44        mongorbac       U       DocumentDB/stable/2023-04-15/mongorbac.json"
-  - "specification/cost-management/resource-manager/readme.md:44:63          generatecostdetailsreport       U       0-01/costmanagement.generatecostdetailsreport.json"
-  - "specification/cost-management/resource-manager/readme.md:45:63          generatedetailedcostreport      U       0-01/costmanagement.generatedetailedcostreport.json"
-  - "specification/cost-management/resource-manager/readme.md:174:57         costallocation                  U       preview/2020-03-01-preview/costallocation.json"
-  - "specification/cost-management/resource-manager/readme.md:263:52         Operatio                        U       Response schema of OperatioAPI does not match Arm"
+  - "specification/cost-management/resource-manager/readme.md:46:72          generatecostdetailsreport       U       preview/costmanagement.generatecostdetailsreport.json"
+  - "specification/cost-management/resource-manager/readme.md:47:72          generatedetailedcostreport      U       preview/costmanagement.generatedetailedcostreport.json"
+  - "specification/cost-management/resource-manager/readme.md:191:57         costallocation                  U       preview/2020-03-01-preview/costallocation.json"
+  - "specification/cost-management/resource-manager/readme.md:280:52         Operatio                        U       Response schema of OperatioAPI does not match Arm"
   - "specification/cpim/resource-manager/readme.go.md:17:14          azureadexternalidentities       U       namespace: azureadexternalidentities"
   - "specification/customerlockbox/resource-manager/readme.csharp.md:14:40       customerlockbox     U       csharp-sdks-folder)/customerlockbox/management/Microsoft"
   - "specification/customproviders/resource-manager/readme.terraform.md:18:19        resourceproviders       U       - IdPortion: \"resourceproviders\""
@@ -236,7 +235,7 @@ issues:
   - "specification/graphservicesprod/resource-manager/readme.csharp.md:14:40         graphservicesprod       U       csharp-sdks-folder)/graphservicesprod/management/Microsoft"
   - "specification/graphservicesprod/resource-manager/readme.python.md:10:26         graphservices       U       package-name: azure-mgmt-graphservices"
   - "specification/guestconfiguration/resource-manager/readme.az.md:7:15         guestconfig     U       extensions: guestconfig"
-  - "specification/hdinsight/resource-manager/readme.md:42:53        vmsize      U       CapabilitiesResult.properties.vmsize_filters"
+  - "specification/hdinsight/resource-manager/readme.md:43:53        vmsize      U       CapabilitiesResult.properties.vmsize_filters"
   - "specification/healthcareapis/resource-manager/readme.cli.md:13:18       authenticationconfiguration     U       \"/properties/authenticationconfiguration\": \"Authentication*/"
   - "specification/healthcareapis/resource-manager/readme.cli.md:14:18       corsconfiguration               U       \"/properties/corsconfiguration\": \"Cors*/\""
   - "specification/healthcareapis/resource-manager/readme.cli.md:15:18       cosmosdbconfiguration           U       \"/properties/cosmosdbconfiguration\": \"CosmosDb*/\""
@@ -263,6 +262,7 @@ issues:
   - "specification/logz/resource-manager/readme.go.md:14:39          armlogz     U       resourcemanager/logz/armlogz"
   - "specification/m365securityandcompliance/resource-manager/readme.go.md:9:18          securityandcompliance       U       namespace: m365securityandcompliance"
   - "specification/maintenance/resource-manager/readme.az.md:17:26       applyupdate     U       group: maintenance applyupdate"
+  - "specification/maintenance/resource-manager/readme.md:198:45         Mantenance      U       operation supported by Mantenance RP."
   - "specification/managednetwork/resource-manager/readme.cli.md:8:25        managednetwork                      U       namespace: azure.mgmt.managednetwork"
   - "specification/managednetwork/resource-manager/readme.cli.md:11:37       scopeassignments                    U       microsoft.managednetwork/scopeassignments([/][^/]*)?$\": \"managed"
   - "specification/managednetwork/resource-manager/readme.cli.md:12:12       managednetworkgroups                U       \"^.*[/]managednetworkgroups([/][^/]*)?$\": \"managed"
@@ -364,7 +364,7 @@ issues:
   - "specification/oep/resource-manager/readme.go.md:8:38        armoep      U       resourcemanager/oep/armoep"
   - "specification/orbital/resource-manager/readme.go.md:8:42        armorbital      U       resourcemanager/orbital/armorbital"
   - "specification/paloaltonetworks/resource-manager/readme.java.md:6:15         Palo    U       service-name: PaloAlto Networks Ngfw"
-  - "specification/paloaltonetworks/resource-manager/readme.typescript.md:9:29           paloaltonetworksngfw    U       package-name: \"@azure/arm-paloaltonetworksngfw\""
+  - "specification/paloaltonetworks/resource-manager/readme.python.md:10:26          paloaltonetworksngfw    U       package-name: azure-mgmt-paloaltonetworksngfw"
   - "specification/peering/resource-manager/readme.cli.md:9:12           peerasns                    U       \"^.*[/]peerasns[/].*$\": \"peering asn"
   - "specification/peering/resource-manager/readme.cli.md:11:12          legacypeerings              U       \"^.*[/]legacypeerings$\": \"peering legacy\""
   - "specification/peering/resource-manager/readme.cli.md:12:12          peeringlocations            U       \"^.*[/]peeringlocations$\": \"peering location"
@@ -419,8 +419,8 @@ issues:
   - "specification/saas/resource-manager/readme.go.md:13:45          saasresources       U       providers/Microsoft.SaaS/saasresources/{resourceId}/listAccessToken"
   - "specification/saas/resource-manager/readme.md:65:47         exsisting       U       tenant level and its an exsisting API"
   - "specification/scvmm/resource-manager/readme.go.md:8:40          armscvmm    U       resourcemanager/scvmm/armscvmm"
-  - "specification/search/data-plane/Azure.Search/readme.md:314:1        vararg          U       vararg-properties: >-"
-  - "specification/search/data-plane/Azure.Search/readme.md:378:33       fasterxml       U       replace(/(import com.fasterxml.jackson.annotation.JsonProper"
+  - "specification/search/data-plane/Azure.Search/readme.md:353:1        vararg          U       vararg-properties: >-"
+  - "specification/search/data-plane/Azure.Search/readme.md:417:33       fasterxml       U       replace(/(import com.fasterxml.jackson.annotation.JsonProper"
   - "specification/search/resource-manager/readme.go.md:14:41        armsearch       U       resourcemanager/search/armsearch"
   - "specification/security/resource-manager/readme.csharp.md:32:40          securitycenter      U       csharp-sdks-folder)/securitycenter/Microsoft.Azure.Management"
   - "specification/securitydevops/resource-manager/readme.az.md:9:17         securitydevops      U       extensions: securitydevops"
@@ -430,8 +430,8 @@ issues:
   - "specification/servicebus/resource-manager/readme.md:42:51       networksets         U       preview/2021-01-01-preview/networksets.json"
   - "specification/servicefabric/resource-manager/readme.md:98:54        managedcluster      U       preview/2020-01-01-preview/managedcluster.json"
   - "specification/servicefabric/resource-manager/readme.python.md:31:36         Managedcluster      U       $['operationId'] = 'Managedcluster_List'"
-  - "specification/servicefabricmanagedclusters/resource-manager/readme.md:78:54         managedapplication              U       preview/2023-02-01-preview/managedapplication.json"
-  - "specification/servicefabricmanagedclusters/resource-manager/readme.md:221:40        servicefabricmanagedclusters    U       csharp-sdks-folder)/servicefabricmanagedclusters/Microsoft.Azure.Management"
+  - "specification/servicefabricmanagedclusters/resource-manager/readme.md:78:54         managedapplication              U       preview/2023-03-01-preview/managedapplication.json"
+  - "specification/servicefabricmanagedclusters/resource-manager/readme.md:232:40        servicefabricmanagedclusters    U       csharp-sdks-folder)/servicefabricmanagedclusters/Microsoft.Azure.Management"
   - "specification/servicelinker/resource-manager/readme.csharp.md:14:40         servicelinker       U       csharp-sdks-folder)/servicelinker/management/Microsoft"
   - "specification/signalr/resource-manager/readme.go.md:14:42       armsignalr      U       resourcemanager/signalr/armsignalr"
   - "specification/sphere/resource-manager/readme.azureresourceschema.md:9:17        azuresphere     U       - tag: schema-azuresphere-2022-09-01-preview"

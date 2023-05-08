@@ -3,16 +3,17 @@ Repository: sveltejs/svelte
 Url: https://github.com/sveltejs/svelte.git
 Args: '["**"]'
 Summary:
-  files: 5413
-  filesWithIssues: 515
-  issues: 3734
+  files: 5433
+  filesWithIssues: 518
+  issues: 3749
   errors: 0
 Errors: []
 
 issues:
-  - "CONTRIBUTING.md:22:5        Triaging    U       ### Triaging issues and pull requests"
-  - "CONTRIBUTING.md:36:5        Roadmap     U       ### Roadmap"
-  - "CONTRIBUTING.md:38:72       roadmap     U       take a look at [our roadmap](https://svelte.dev"
+  - "CONTRIBUTING.md:22:5        Triaging            U       ### Triaging issues and pull requests"
+  - "CONTRIBUTING.md:36:5        Roadmap             U       ### Roadmap"
+  - "CONTRIBUTING.md:38:72       roadmap             U       take a look at [our roadmap](https://svelte.dev"
+  - "CONTRIBUTING.md:65:164      aswell (as well)    U       lot on the compiler aswell. For that reason, please"
   - "elements/index.d.ts:5:20        Asana                       U       // Definitions by: Asana <https://asana.com>"
   - "elements/index.d.ts:9:20        Benoit                      U       // Benoit Benezech <https://github"
   - "elements/index.d.ts:9:27        Benezech                    U       Benoit Benezech <https://github.com"
@@ -266,8 +267,8 @@ issues:
   - "site/content/tutorial/15-context/01-context-api/text.md:7:32        Mapbox      U       example app using a [Mapbox GL](https://docs.mapbox"
   - "src/compiler/compile/compiler_warnings.ts:74:10         idlist              U       case 'idlist':"
   - "src/compiler/compile/compiler_warnings.ts:83:10         tokenlist           U       case 'tokenlist':"
-  - "src/compiler/compile/compiler_warnings.ts:167:19        Screenreaders       U       message: 'A11y: Screenreaders already announce <img"
-  - "src/compiler/compile/compiler_warnings.ts:221:15        eachblock           U       invalid_rest_eachblock_binding: (rest_element"
+  - "src/compiler/compile/compiler_warnings.ts:171:19        Screenreaders       U       message: 'A11y: Screenreaders already announce <img"
+  - "src/compiler/compile/compiler_warnings.ts:225:15        eachblock           U       invalid_rest_eachblock_binding: (rest_element"
   - "src/compiler/compile/Component.ts:25:8          fuzzymatch      U       import fuzzymatch from '../utils/fuzzymatch"
   - "src/compiler/compile/Component.ts:82:2          hoistable       U       hoistable_nodes: Set<Node> = new"
   - "src/compiler/compile/css/Selector.ts:296:17         combinators     U       // TODO other combinators"
@@ -279,7 +280,7 @@ issues:
   - "src/compiler/compile/nodes/Element.ts:600:13        proptypes       U       // aria-proptypes"
   - "src/compiler/compile/nodes/Element.ts:789:46        noopener        U       _blank\" should have noopener or noreferrer: https"
   - "src/compiler/compile/nodes/Element.ts:789:58        noreferrer      U       should have noopener or noreferrer: https://developer.chrome"
-  - "src/compiler/compile/nodes/Element.ts:1218:36       aeiou           U       starts_with_vowel = /^[aeiou]/;"
+  - "src/compiler/compile/nodes/Element.ts:1230:36       aeiou           U       starts_with_vowel = /^[aeiou]/;"
   - "src/compiler/compile/nodes/shared/get_const_tags.ts:21:9        consts      U       const consts_nodes = const_tags.map"
   - "src/compiler/compile/nodes/shared/is_contextual.ts:13:5         hoistables      U       // hoistables, module declarations"
   - "src/compiler/compile/nodes/shared/Node.ts:17:10         innerhtml       U       can_use_innerhtml: boolean;"
@@ -314,6 +315,9 @@ issues:
   - "src/compiler/compile/render_dom/wrappers/Window.ts:164:38       onlinestatuschanged     U       block.get_unique_name('onlinestatuschanged');"
   - "src/compiler/compile/render_ssr/index.ts:58:23          unsubscriptions     U       const reactive_store_unsubscriptions = reactive_stores.map"
   - "src/compiler/compile/utils/__test__.ts:8:2          CONTENTEDITABLE     U       CONTENTEDITABLE_BINDINGS"
+  - "src/compiler/compile/utils/a11y.ts:271:3        bday        U       'bday',"
+  - "src/compiler/compile/utils/a11y.ts:290:3        impp        U       'impp'"
+  - "src/compiler/compile/utils/a11y.ts:322:21       webauthn    U       if (tokens[0] === 'webauthn') {"
   - "src/compiler/compile/utils/contenteditable.ts:28:45         contentenditable    U       node's attributes are 'contentenditable'."
   - "src/compiler/parse/errors.ts:61:22          autoclosed      U       invalid_closing_tag_autoclosed: (name: string, reason"
   - "src/compiler/parse/read/css-tree-cq/css_tree_parse.ts:1:8           nocheck     U       // @ts-nocheck"
@@ -1751,6 +1755,7 @@ issues:
   - "test/validator/index.ts:169:17      foriegn (foreign)       U       namespace: 'foriegn'"
   - "test/validator/samples/a11y-aria-activedescendant/warnings.json:3:45        tabindex    U       activedescendant-has-tabindex\","
   - "test/validator/samples/a11y-aria-proptypes-number/warnings.json:4:40        valuemax    U       The value of 'aria-valuemax' must be of type number"
+  - "test/validator/samples/a11y-autocomplete-valid/input.svelte:10:72       WEBAUTHN    U       SHIPPING WORK EMAIL WEBAUTHN\" />"
   - "test/validator/samples/a11y-click-events-have-key-events/warnings.json:4:107        keydown     U       accompanied by an on:keydown, on:keyup, or on:keypress"
   - "test/validator/samples/a11y-click-events-have-key-events/warnings.json:4:119        keyup       U       by an on:keydown, on:keyup, or on:keypress event"
   - "test/validator/samples/a11y-figcaption-wrong-place/warnings.json:4:22           figcaption      U       \"message\": \"A11y: <figcaption> must be first or last"
