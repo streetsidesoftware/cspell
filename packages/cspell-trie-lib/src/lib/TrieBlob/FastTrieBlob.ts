@@ -170,7 +170,7 @@ export class FastTrieBlob {
             }
         }
 
-        return new TrieBlob(binNodes, this.charToIndexMap, this.charIndex);
+        return new TrieBlob(binNodes, this.charIndex);
     }
 
     static create(words: string[] | Iterable<string>): FastTrieBlob {

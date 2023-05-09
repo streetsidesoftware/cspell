@@ -2,11 +2,15 @@ const NodeHeaderNumChildrenBits = 8;
 const NodeHeaderNumChildrenShift = 0;
 
 export class TrieBlob {
-    constructor(
-        private nodes: Uint32Array,
-        private charToIndexMap: Record<string, number>,
-        private charIndex: string[]
-    ) {}
+    private charToIndexMap: Record<string, number>;
+    constructor(private nodes: Uint32Array, private charIndex: string[]) {
+        this.charToIndexMap = Object.create(null);
+        for (let i = 0; i < charIndex.length; ++i) {
+            const char = charIndex[i];
+            this.charToIndexMap[char.normalize('NFC')] = i;
+            this.charToIndexMap[char.normalize('NFD')] = i;
+        }
+    }
 
     has(word: string): boolean {
         const numChildrenMask = TrieBlob.NodeMaskNumChildren;
