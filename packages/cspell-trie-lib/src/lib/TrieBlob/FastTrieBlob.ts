@@ -9,6 +9,10 @@ export class FastTrieBlob {
     private charIndex: string[] = [''];
     private nodes: FastTrieBlobNode[] = [[0], [NodeMaskEOW]];
 
+    private lookUpCharIndex(char: string): number {
+        return this.charToIndexMap[char] ?? -1;
+    }
+
     private getCharIndex(char: string): number {
         let idx = this.charToIndexMap[char];
         if (idx) return idx;
@@ -41,6 +45,27 @@ export class FastTrieBlob {
             this._insert(w);
         }
         return this;
+    }
+
+    has(word: string): boolean {
+        const nodes = this.nodes;
+        const letterIndexes = [...word].map((char) => this.lookUpCharIndex(char));
+        let nodeIdx = 0;
+        let node = nodes[nodeIdx];
+        for (let p = 0; p < letterIndexes.length; ++p, node = nodes[nodeIdx]) {
+            const letterIdx = letterIndexes[p];
+            const count = node.length;
+            let i = count - 1;
+            for (; i > 0; --i) {
+                if ((node[i] & NodeMaskChildCharIndex) === letterIdx) {
+                    break;
+                }
+            }
+            if (i < 1) return false;
+            nodeIdx = node[i] >>> NodeChildRefShift;
+        }
+
+        return !!(node[0] & NodeMaskEOW);
     }
 
     private _insert(word: string): this {
@@ -108,5 +133,10 @@ export class FastTrieBlob {
                 word: word + letter,
             };
         }
+    }
+
+    static create(words: string[] | Iterable<string>): FastTrieBlob {
+        const ft = new FastTrieBlob();
+        return ft.insert(words);
     }
 }

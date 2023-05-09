@@ -1,9 +1,9 @@
 import { describe, expect, test } from 'vitest';
 
-import { createTriFromList } from '../../index.js';
 import { readTrie } from '../../test/dictionaries.test.helper.js';
 import type { TrieNode } from '../TrieNode.js';
 import { FastTrieBlob } from './FastTrieBlob.js';
+import { measure } from './test/perf.js';
 
 function getTrie() {
     return readTrie('@cspell/dict-en_us/cspell-ext.json');
@@ -11,8 +11,15 @@ function getTrie() {
 
 const timeout = 10000;
 
-describe('Validate English Trie', () => {
+describe('FastTrieBlob', () => {
+    test('insert', () => {});
+});
+
+describe('Validate English FastTrieBlob', async () => {
     const pTrie = getTrie();
+    const sampleTrie = await pTrie;
+    const sampleWordsLarge = [...sampleTrie.words()];
+    const fastTrieBlob = FastTrieBlob.create(sampleWordsLarge);
 
     // cspell:ignore setsid macukrainian
     test.each`
@@ -79,25 +86,22 @@ describe('Validate English Trie', () => {
         expect(r.nodes).toBeGreaterThan(1000);
     });
 
-    test('x', async () => {
-        const trie = await pTrie;
-        const words = trie.words().toArray();
-
+    test('insert', () => {
+        const words = sampleWordsLarge.slice(1000, 6000);
         const ft = new FastTrieBlob();
         measure('FastTrieBlob', () => ft.insert(words));
         const result = [...ft.words()];
         expect(result).toEqual(words);
-        measure('createTriFromList', () => createTriFromList(words));
+    });
+
+    test('has', () => {
+        const words = sampleWordsLarge.slice(1000, 6000);
+        for (const word of words) {
+            expect(fastTrieBlob.has(word)).toBe(true);
+        }
     });
 });
 
 function incEntry<K>(map: Map<K, number>, key: K) {
     map.set(key, (map.get(key) || 0) + 1);
-}
-
-function measure(name: string, fn: () => void) {
-    const start = performance.now();
-    fn();
-    const end = performance.now();
-    console.log(`${name} ${(end - start).toFixed(3)} milliseconds.`);
 }
