@@ -13,7 +13,7 @@ export class TrieBlob {
     }
 
     has(word: string): boolean {
-        const numChildrenMask = TrieBlob.NodeMaskNumChildren;
+        const NodeMaskNumChildren = TrieBlob.NodeMaskNumChildren;
         const NodeMaskChildCharIndex = TrieBlob.NodeMaskChildCharIndex;
         const NodeChildRefShift = TrieBlob.NodeChildRefShift;
         const nodes = this.nodes;
@@ -22,7 +22,7 @@ export class TrieBlob {
         let node = nodes[nodeIdx];
         for (let p = 0; p < letterIndexes.length; ++p, node = nodes[nodeIdx]) {
             const letterIdx = letterIndexes[p];
-            const count = node & numChildrenMask;
+            const count = node & NodeMaskNumChildren;
             let i = count - 1;
             for (; i > 0; --i) {
                 if ((nodes[i + nodeIdx] & NodeMaskChildCharIndex) === letterIdx) {
@@ -34,6 +34,45 @@ export class TrieBlob {
         }
 
         return (node & TrieBlob.NodeMaskEOW) === TrieBlob.NodeMaskEOW;
+    }
+
+    *words(): Iterable<string> {
+        interface StackItem {
+            nodeIdx: number;
+            pos: number;
+            word: string;
+        }
+        const NodeMaskNumChildren = TrieBlob.NodeMaskNumChildren;
+        const NodeMaskEOW = TrieBlob.NodeMaskEOW;
+        const NodeMaskChildCharIndex = TrieBlob.NodeMaskChildCharIndex;
+        const NodeChildRefShift = TrieBlob.NodeChildRefShift;
+        const nodes = this.nodes;
+        const stack: StackItem[] = [{ nodeIdx: 0, pos: 0, word: '' }];
+        let depth = 0;
+
+        while (depth >= 0) {
+            const { nodeIdx, pos, word } = stack[depth];
+            const node = nodes[nodeIdx];
+
+            if (!pos && node & NodeMaskEOW) {
+                yield word;
+            }
+            const len = node & NodeMaskNumChildren;
+            if (pos >= len - 1) {
+                --depth;
+                continue;
+            }
+            const nextPos = ++stack[depth].pos;
+            const entry = nodes[nodeIdx + nextPos];
+            const charIdx = entry & NodeMaskChildCharIndex;
+            const letter = this.charIndex[charIdx];
+            ++depth;
+            stack[depth] = {
+                nodeIdx: entry >>> NodeChildRefShift,
+                pos: 0,
+                word: word + letter,
+            };
+        }
     }
 
     private lookUpCharIndex(char: string): number {
