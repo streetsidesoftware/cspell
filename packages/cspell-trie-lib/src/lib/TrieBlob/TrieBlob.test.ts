@@ -1,9 +1,16 @@
 import { describe, expect, test } from 'vitest';
 
-import { TrieBlob } from './TrieBlob.js';
+import { createTrieBlob } from './createTrieBlob.js';
 
 describe('TrieBlob', () => {
     test('Constructor', () => {
-        expect(new TrieBlob()).toBeDefined();
+        const tb = createTrieBlob(['one', 'two']);
+        expect(tb).toBeDefined();
+    });
+
+    test('has', () => {
+        const tb = createTrieBlob(['one', 'two']);
+        expect(tb.has('one')).toBe(true);
+        expect(tb.has('zero')).toBe(false);
     });
 });

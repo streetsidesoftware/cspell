@@ -1,8 +1,12 @@
+import { assert } from 'console';
+
+import { TrieBlob } from './TrieBlob.js';
+
 type FastTrieBlobNode = number[];
-const NodeMaskEOW = 0x00000001;
+const NodeMaskEOW = TrieBlob.NodeMaskEOW;
 // const NodeMaskNumChildren = 0x000000ff;
-const NodeChildRefShift = 8;
-const NodeMaskChildCharIndex = 0x000000ff;
+const NodeChildRefShift = TrieBlob.NodeChildRefShift;
+const NodeMaskChildCharIndex = TrieBlob.NodeMaskChildCharIndex;
 
 export class FastTrieBlob {
     private charToIndexMap: Record<string, number> = Object.create(null);
@@ -133,6 +137,40 @@ export class FastTrieBlob {
                 word: word + letter,
             };
         }
+    }
+
+    toTrieBlob(): TrieBlob {
+        const nodes = this.nodes;
+        function calcNodeToIndex(nodes: number[][]): number[] {
+            let offset = 0;
+            const idx: number[] = [];
+            for (let i = 0; i < nodes.length; ++i) {
+                idx[i] = offset;
+                offset += nodes[i].length;
+            }
+            return idx;
+        }
+
+        const nodeElementCount = this.nodes.reduce((a, b) => a + b.length, 0);
+        const nodeToIndex = calcNodeToIndex(nodes);
+        const binNodes = new Uint32Array(nodeElementCount);
+        const lenShift = TrieBlob.NodeMaskNumChildrenShift;
+        const refShift = TrieBlob.NodeChildRefShift;
+
+        let offset = 0;
+        for (let i = 0; i < nodes.length; ++i) {
+            const node = nodes[i];
+            assert(offset === nodeToIndex[i]);
+            binNodes[offset++] = (node.length << lenShift) | node[0];
+            for (let j = 1; j < node.length; ++j) {
+                const v = node[j];
+                const nodeRef = v >>> NodeChildRefShift;
+                const charIndex = v & NodeMaskChildCharIndex;
+                binNodes[offset++] = (nodeToIndex[nodeRef] << refShift) | charIndex;
+            }
+        }
+
+        return new TrieBlob(binNodes, this.charToIndexMap, this.charIndex);
     }
 
     static create(words: string[] | Iterable<string>): FastTrieBlob {

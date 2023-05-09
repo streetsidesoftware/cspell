@@ -14,34 +14,43 @@ export async function measureFastBlob(which: string | undefined, method: string 
     const trie = await getTrie();
     const words = trie.words().toArray();
 
-    const ft = new FastTrieBlob();
-
-    if (match(which, 'blob')) {
-        measure('FastTrieBlob', () => ft.insert(words));
+    if (filterTest(which, 'blob')) {
+        const ft = measure('blob.FastTrieBlob \t\t', () => FastTrieBlob.create(words));
+        const trie = measure('blob.FastTrieBlob.toTrieBlob \t', () => ft.toTrieBlob());
 
         switch (method) {
             case 'has':
-                measure('FastTrieBlob.has', () => words.forEach((word) => assert(ft.has(word))));
+                measure('blob.TrieBlob.has \t\t', () => words.forEach((word) => assert(trie.has(word))));
                 break;
         }
     }
 
-    if (match(which, 'trie')) {
+    if (filterTest(which, 'fast')) {
+        const ft = measure('fast.FastTrieBlob \t\t', () => FastTrieBlob.create(words));
+
+        switch (method) {
+            case 'has':
+                measure('fast.FastTrieBlob.has \t\t', () => words.forEach((word) => assert(ft.has(word))));
+                break;
+        }
+    }
+
+    if (filterTest(which, 'trie')) {
         const root = createTrieRoot({});
 
-        measure('createTriFromList', () => insertWords(root, words));
+        measure('trie.createTriFromList \t\t', () => insertWords(root, words));
         const trie = new Trie(root);
 
         switch (method) {
             case 'has':
-                measure('Trie.has', () => words.forEach((word) => assert(trie.hasWord(word, true))));
+                measure('trie.Trie.has \t\t\t', () => words.forEach((word) => assert(trie.hasWord(word, true))));
                 break;
         }
     }
 }
 
-function match(value: string | undefined, expected: string): boolean {
-    return !value || value === expected;
+function filterTest(value: string | undefined, expected: string): boolean {
+    return !value || value === expected || value == 'all';
 }
 
 function insertWords(root: TrieNode, words: string[]) {
