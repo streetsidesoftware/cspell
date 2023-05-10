@@ -7,17 +7,17 @@ import { mergeOptionalWithDefaults } from './utils/mergeOptionalWithDefaults.js'
 import { walker } from './walker/walker.js';
 import type { YieldResult } from './walker/walkerTypes.js';
 
-export function insert(text: string, node: TrieNode = {}): TrieNode {
-    if (text.length) {
-        const head = text[0];
-        const tail = text.slice(1);
+export function insert(text: string, root: TrieNode = {}): TrieNode {
+    let node = root;
+    for (let i = 0; i < text.length; ++i) {
+        const head = text[i];
         const c = node.c || Object.create(null);
-        c[head] = insert(tail, c[head]);
         node.c = c;
-    } else {
-        node.f = (node.f || 0) | FLAG_WORD;
+        node = c[head] || {};
+        c[head] = node;
     }
-    return node;
+    node.f = (node.f || 0) | FLAG_WORD;
+    return root;
 }
 
 export function isWordTerminationNode(node: TrieNode): boolean {

@@ -1,5 +1,7 @@
 import { promises as fs } from 'fs';
+import { resolve as importResolve } from 'import-meta-resolve';
 import * as path from 'path';
+import { fileURLToPath } from 'url';
 
 import type { Trie } from '../lib/trie.js';
 import { readTrieFile, readTrieFileFromConfig } from './reader.test.helper.js';
@@ -9,7 +11,7 @@ const tries = new Map<string, Promise<Trie>>();
 
 export function readTrie(name: string): Promise<Trie> {
     return memorize(name, tries, (name) => {
-        const pkgLocation = require.resolve(name);
+        const pkgLocation = fileURLToPath(importResolve(name, import.meta.url));
         return readTrieFileFromConfig(pkgLocation);
     });
 }
