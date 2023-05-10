@@ -1,4 +1,4 @@
-import type { TrieNode } from '../TrieNode.js';
+import type { TrieNode } from '../TrieNode/TrieNode.js';
 import type { WalkerIterator } from './walkerTypes.js';
 import { CompoundWordsMethod, JOIN_SEPARATOR, WORD_SEPARATOR } from './walkerTypes.js';
 

@@ -3,7 +3,7 @@ import { describe, expect, test } from 'vitest';
 
 import { consolidate } from './consolidate.js';
 import { convertToTrieRefNodes } from './convertToTrieRefNodes.js';
-import { createTriFromList } from './trie-util.js';
+import { createTriFromList } from './TrieNode/trie-util.js';
 import type { TrieRefNode } from './trieRef.js';
 
 describe('Validate convertToTrieRefNodes', () => {

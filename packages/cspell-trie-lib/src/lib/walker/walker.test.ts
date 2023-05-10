@@ -1,6 +1,6 @@
 import { describe, expect, test } from 'vitest';
 
-import { createTriFromList, orderTrie } from '../trie-util.js';
+import { createTriFromList, orderTrie } from '../TrieNode/trie-util.js';
 import { walker } from './walker.js';
 import type { WalkerIterator, YieldResult } from './walkerTypes.js';
 

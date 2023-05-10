@@ -1,6 +1,6 @@
 import { describe, expect, test } from 'vitest';
 
-import { createTriFromList } from '../trie-util.js';
+import { createTriFromList } from '../TrieNode/trie-util.js';
 import { FastTrieBlob } from './FastTrieBlob.js';
 
 describe('FastTrieBlob', () => {

@@ -1,7 +1,7 @@
 import { describe, expect, test } from 'vitest';
 
 import { parseLinesToDictionary } from '../SimpleDictionaryParser.js';
-import { createTriFromList, orderTrie } from '../trie-util.js';
+import { createTriFromList, orderTrie } from '../TrieNode/trie-util.js';
 import type { HintedWalkerIterator } from './hintedWalker.js';
 import { hintedWalker } from './hintedWalker.js';
 import type { YieldResult } from './walkerTypes.js';

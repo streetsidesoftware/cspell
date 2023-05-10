@@ -4,7 +4,7 @@ import { describe, expect, test } from 'vitest';
 import { resolveSample } from '../../test/samples.js';
 import { consolidate } from '../consolidate.js';
 import * as Trie from '../index.js';
-import { iteratorTrieWords } from '../trie-util.js';
+import { iteratorTrieWords } from '../TrieNode/trie-util.js';
 import { importTrie, serializeTrie } from './importExportV1.js';
 
 describe('Import/Export', () => {

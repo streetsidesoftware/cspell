@@ -2,7 +2,7 @@ import { toDistributableIterable } from '@cspell/cspell-pipe';
 import type { Sequence } from 'gensequence';
 import { genSequence } from 'gensequence';
 
-import type { TrieRoot } from '../TrieNode.js';
+import type { TrieRoot } from '../TrieNode/TrieNode.js';
 import * as iv1 from './importExportV1.js';
 import * as iv2 from './importExportV2.js';
 import * as iv3 from './importExportV3.js';

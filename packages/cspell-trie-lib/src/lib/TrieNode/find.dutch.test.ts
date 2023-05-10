@@ -2,12 +2,12 @@ import * as fs from 'fs/promises';
 import { describe, expect, test } from 'vitest';
 import * as zlib from 'zlib';
 
-import { resolveGlobalDict } from '../test/samples.js';
+import { resolveGlobalDict } from '../../test/samples.js';
+import { importTrie } from '../io/importExport.js';
+import { normalizeWordToLowercase } from '../utils/normalizeWord.js';
 import type { FindFullResult, PartialFindOptions } from './find.js';
 import { findWord } from './find.js';
-import { importTrie } from './io/importExport.js';
 import type { TrieNode } from './TrieNode.js';
-import { normalizeWordToLowercase } from './utils/normalizeWord.js';
 
 const dutchDictionary = resolveGlobalDict('nl_nl.trie.gz');
 

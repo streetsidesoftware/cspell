@@ -1,9 +1,9 @@
 import type { Sequence } from 'gensequence';
 import { genSequence } from 'gensequence';
 
-import { trieNodeToRoot } from '../trie-util.js';
-import type { TrieNode, TrieRoot } from '../TrieNode.js';
-import { FLAG_WORD } from '../TrieNode.js';
+import { trieNodeToRoot } from '../TrieNode/trie-util.js';
+import type { TrieNode, TrieRoot } from '../TrieNode/TrieNode.js';
+import { FLAG_WORD } from '../TrieNode/TrieNode.js';
 import { bufferLines } from '../utils/bufferLines.js';
 
 const EOW = '$'; // End of word

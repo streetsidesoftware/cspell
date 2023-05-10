@@ -1,5 +1,5 @@
-import { isWordTerminationNode } from '../trie-util.js';
-import type { TrieRoot } from '../TrieNode.js';
+import { isWordTerminationNode } from '../TrieNode/trie-util.js';
+import type { TrieRoot } from '../TrieNode/TrieNode.js';
 import { clean } from '../utils/clean.js';
 import { CompoundWordsMethod, hintedWalker, JOIN_SEPARATOR, WORD_SEPARATOR } from '../walker/index.js';
 import type { GenSuggestionOptions, SuggestionOptions } from './genSuggestionsOptions.js';

@@ -1,7 +1,7 @@
 import { describe, expect, test } from 'vitest';
 
 import { readTrie } from '../../../test/dictionaries.test.helper.js';
-import type { TrieNode } from '../../TrieNode.js';
+import type { TrieNode } from '../../TrieNode/TrieNode.js';
 
 function getTrie() {
     return readTrie('@cspell/dict-en_us/cspell-ext.json');

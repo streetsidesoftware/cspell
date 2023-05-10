@@ -1,4 +1,4 @@
-import type { TrieNode, TrieRoot } from '../TrieNode.js';
+import type { TrieNode, TrieRoot } from '../TrieNode/TrieNode.js';
 import { TrieBlob } from './TrieBlob.js';
 
 type FastTrieBlobNode = number[];

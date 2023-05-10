@@ -2,7 +2,7 @@ import { genSequence } from 'gensequence';
 import { describe, expect, test } from 'vitest';
 
 import { flattenToTrieRefNodeArray, flattenToTrieRefNodeIterable } from './flatten.js';
-import { createTriFromList } from './trie-util.js';
+import { createTriFromList } from './TrieNode/trie-util.js';
 import type { TrieRefNode } from './trieRef.js';
 
 describe('Validate Flatten', () => {
