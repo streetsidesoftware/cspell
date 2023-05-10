@@ -44,11 +44,12 @@ export class TrieBlob {
         const NodeMaskChildCharIndex = TrieBlob.NodeMaskChildCharIndex;
         const NodeChildRefShift = TrieBlob.NodeChildRefShift;
         const nodes = this.nodes;
-        const letterIndexes = [...word].map((char) => this.lookUpCharIndex(char));
+        const len = word.length;
+        const charToIndexMap = this.charToIndexMap;
         let nodeIdx = 0;
         let node = nodes[nodeIdx];
-        for (let p = 0; p < letterIndexes.length; ++p, node = nodes[nodeIdx]) {
-            const letterIdx = letterIndexes[p];
+        for (let p = 0; p < len; ++p, node = nodes[nodeIdx]) {
+            const letterIdx = charToIndexMap[word[p]];
             const count = node & NodeMaskNumChildren;
             let i = count - 1;
             for (; i > 0; --i) {

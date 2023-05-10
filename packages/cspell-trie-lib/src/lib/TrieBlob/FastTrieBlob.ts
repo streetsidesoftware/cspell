@@ -1,5 +1,3 @@
-import { assert } from 'console';
-
 import type { TrieNode, TrieRoot } from '../TrieNode.js';
 import { TrieBlob } from './TrieBlob.js';
 
@@ -58,11 +56,11 @@ export class FastTrieBlob {
 
     has(word: string): boolean {
         const nodes = this.nodes;
-        const letterIndexes = [...word].map((char) => this.lookUpCharIndex(char));
+        const len = word.length;
         let nodeIdx = 0;
         let node = nodes[nodeIdx];
-        for (let p = 0; p < letterIndexes.length; ++p, node = nodes[nodeIdx]) {
-            const letterIdx = letterIndexes[p];
+        for (let p = 0; p < len; ++p, node = nodes[nodeIdx]) {
+            const letterIdx = this.lookUpCharIndex(word[p]);
             const count = node.length;
             let i = count - 1;
             for (; i > 0; --i) {
@@ -82,10 +80,10 @@ export class FastTrieBlob {
         if (!word) return this;
         const IdxEOW = 1;
         const nodes = this.nodes;
-        const letterIndexes = [...word].map((char) => this.getCharIndex(char));
+        const len = word.length;
         let nodeIdx = 0;
-        for (let p = 0; p < letterIndexes.length; ++p) {
-            const letterIdx = letterIndexes[p];
+        for (let p = 0; p < len; ++p) {
+            const letterIdx = this.getCharIndex(word[p]);
             const node = nodes[nodeIdx];
             const count = node.length;
             let i = count - 1;
@@ -96,14 +94,14 @@ export class FastTrieBlob {
             }
             if (i > 0) {
                 nodeIdx = node[i] >>> NodeChildRefShift;
-                if (nodeIdx === 1 && p < letterIndexes.length - 1) {
+                if (nodeIdx === 1 && p < len - 1) {
                     nodeIdx = this.nodes.push([NodeMaskEOW]) - 1;
                     node[i] = (nodeIdx << NodeChildRefShift) | letterIdx;
                 }
                 continue;
             }
 
-            nodeIdx = p < letterIndexes.length - 1 ? this.nodes.push([0]) - 1 : IdxEOW;
+            nodeIdx = p < len - 1 ? this.nodes.push([0]) - 1 : IdxEOW;
             node.push((nodeIdx << NodeChildRefShift) | letterIdx);
         }
 
@@ -148,16 +146,17 @@ export class FastTrieBlob {
         const nodes = this.nodes;
         function calcNodeToIndex(nodes: number[][]): number[] {
             let offset = 0;
-            const idx: number[] = [];
+            const idx: number[] = Array(nodes.length + 1);
             for (let i = 0; i < nodes.length; ++i) {
                 idx[i] = offset;
                 offset += nodes[i].length;
             }
+            idx[nodes.length] = offset;
             return idx;
         }
 
-        const nodeElementCount = this.nodes.reduce((a, b) => a + b.length, 0);
         const nodeToIndex = calcNodeToIndex(nodes);
+        const nodeElementCount = nodeToIndex[nodeToIndex.length - 1];
         const binNodes = new Uint32Array(nodeElementCount);
         const lenShift = TrieBlob.NodeMaskNumChildrenShift;
         const refShift = TrieBlob.NodeChildRefShift;
@@ -165,7 +164,7 @@ export class FastTrieBlob {
         let offset = 0;
         for (let i = 0; i < nodes.length; ++i) {
             const node = nodes[i];
-            assert(offset === nodeToIndex[i]);
+            // assert(offset === nodeToIndex[i]);
             binNodes[offset++] = (node.length << lenShift) | node[0];
             for (let j = 1; j < node.length; ++j) {
                 const v = node[j];

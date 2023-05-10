@@ -12,6 +12,16 @@ function getTrie() {
     return readTrie('@cspell/dict-en_us/cspell-ext.json');
 }
 
+function hasWords(words: string[], method: (word: string) => boolean): boolean {
+    const len = words.length;
+    let success = true;
+    for (let i = 0; i < len; ++i) {
+        success = method(words[i]) && success;
+    }
+    assert(success);
+    return success;
+}
+
 export async function measureFastBlob(which: string | undefined, method: string | undefined) {
     const trie = await getTrie();
     const words = trie.words().toArray();
@@ -22,7 +32,8 @@ export async function measureFastBlob(which: string | undefined, method: string 
 
         switch (method) {
             case 'has':
-                measure('blob.TrieBlob.has \t\t', () => words.forEach((word) => assert(trieBlob.has(word))));
+                measure('blob.TrieBlob.has \t\t', () => hasWords(words, (word) => trieBlob.has(word)));
+                measure('blob.TrieBlob.has \t\t', () => hasWords(words, (word) => trieBlob.has(word)));
                 break;
             case 'dump':
                 writeFileSync('./TrieBlob.en.json', JSON.stringify(trieBlob, null, 2), 'utf8');
@@ -33,8 +44,8 @@ export async function measureFastBlob(which: string | undefined, method: string 
                     const tb = measure('blob.TrieBlob.decodeBin \t', () => {
                         return TrieBlob.decodeBin(readFileSync('./TrieBlob.en.trieb'));
                     });
-                    measure('blob.TrieBlob.has \t\t', () => words.forEach((word) => assert(tb.has(word))));
-                    measure('blob.TrieBlob.has \t\t', () => words.forEach((word) => assert(tb.has(word))));
+                    measure('blob.TrieBlob.has \t\t', () => hasWords(words, (word) => tb.has(word)));
+                    measure('blob.TrieBlob.has \t\t', () => hasWords(words, (word) => tb.has(word)));
                 }
                 break;
         }
@@ -45,7 +56,8 @@ export async function measureFastBlob(which: string | undefined, method: string 
 
         switch (method) {
             case 'has':
-                measure('fast.FastTrieBlob.has \t\t', () => words.forEach((word) => assert(ft.has(word))));
+                measure('fast.FastTrieBlob.has \t\t', () => hasWords(words, (word) => ft.has(word)));
+                measure('fast.FastTrieBlob.has \t\t', () => hasWords(words, (word) => ft.has(word)));
                 break;
         }
     }
@@ -58,7 +70,8 @@ export async function measureFastBlob(which: string | undefined, method: string 
 
         switch (method) {
             case 'has':
-                measure('trie.Trie.has \t\t\t', () => words.forEach((word) => assert(trie.hasWord(word, true))));
+                measure('trie.Trie.has \t\t\t', () => hasWords(words, (word) => trie.hasWord(word, true)));
+                measure('trie.Trie.has \t\t\t', () => hasWords(words, (word) => trie.hasWord(word, true)));
                 break;
         }
     }
