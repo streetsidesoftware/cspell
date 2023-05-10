@@ -5,14 +5,18 @@ const HEADER_SIZE_UINT32 = 8;
 const HEADER_SIZE = HEADER_SIZE_UINT32 * 4;
 
 const HEADER_OFFSET = 0;
-const HEADER_OFFSET_ENDIAN = HEADER_OFFSET + 8;
-const HEADER_OFFSET_NODES = HEADER_OFFSET_ENDIAN + 4;
+const HEADER_OFFSET_SIG = HEADER_OFFSET;
+const HEADER_OFFSET_ENDIAN = HEADER_OFFSET_SIG + 8;
+const HEADER_OFFSET_VERSION = HEADER_OFFSET_ENDIAN + 4;
+const HEADER_OFFSET_NODES = HEADER_OFFSET_VERSION + 4;
 const HEADER_OFFSET_NODES_LEN = HEADER_OFFSET_NODES + 4;
 const HEADER_OFFSET_CHAR_INDEX = HEADER_OFFSET_NODES_LEN + 4;
 const HEADER_OFFSET_CHAR_INDEX_LEN = HEADER_OFFSET_CHAR_INDEX + 4;
 
 const HEADER = {
-    offset: HEADER_OFFSET,
+    header: HEADER_OFFSET,
+    sig: HEADER_OFFSET_SIG,
+    version: HEADER_OFFSET_VERSION,
     endian: HEADER_OFFSET_ENDIAN,
     nodes: HEADER_OFFSET_NODES,
     nodesLen: HEADER_OFFSET_NODES_LEN,
@@ -21,6 +25,7 @@ const HEADER = {
 } as const;
 
 const headerSig = 'TrieBlob';
+const version = '00.01.00';
 const endianSig = 0x04030201;
 
 export class TrieBlob {
@@ -117,7 +122,8 @@ export class TrieBlob {
         const buffer = Buffer.alloc(size);
         const header = new DataView(buffer.buffer);
         const nodeData = new Uint8Array(this.nodes.buffer);
-        buffer.write(headerSig, 0, 'utf8');
+        buffer.write(headerSig, HEADER.sig, 'utf8');
+        buffer.write(version, HEADER.version, 'utf8');
         header.setUint32(HEADER.endian, endianSig, useLittle);
         header.setUint32(HEADER.nodes, nodeOffset, useLittle);
         header.setUint32(HEADER.nodesLen, this.nodes.length, useLittle);
