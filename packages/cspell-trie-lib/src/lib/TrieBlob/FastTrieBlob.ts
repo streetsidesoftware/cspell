@@ -1,5 +1,6 @@
 import { assert } from 'console';
 
+import type { TrieNode, TrieRoot } from '../TrieNode.js';
 import { TrieBlob } from './TrieBlob.js';
 
 type FastTrieBlobNode = number[];
@@ -12,6 +13,7 @@ export class FastTrieBlob {
     private charToIndexMap: Record<string, number> = Object.create(null);
     private charIndex: string[] = [''];
     private nodes: FastTrieBlobNode[] = [[0], [NodeMaskEOW]];
+    private _readonly = false;
 
     private lookUpCharIndex(char: string): number {
         return this.charToIndexMap[char] ?? -1;
@@ -33,6 +35,9 @@ export class FastTrieBlob {
     }
 
     insert(word: string | Iterable<string> | string[]): this {
+        if (this.isReadonly()) {
+            throw new Error('FastTrieBlob is readonly');
+        }
         if (typeof word === 'string') {
             return this._insert(word);
         }
@@ -173,8 +178,59 @@ export class FastTrieBlob {
         return new TrieBlob(binNodes, this.charIndex);
     }
 
-    static create(words: string[] | Iterable<string>): FastTrieBlob {
+    isReadonly(): boolean {
+        return this._readonly;
+    }
+
+    freeze(): this {
+        this._readonly = true;
+        return this;
+    }
+
+    static fromWordList(words: string[] | Iterable<string>): FastTrieBlob {
         const ft = new FastTrieBlob();
         return ft.insert(words);
     }
+
+    static fromTrieRoot(root: TrieRoot): FastTrieBlob {
+        const tf = new FastTrieBlob();
+        const IdxEOW = 1;
+
+        const known = new Map<TrieNode, number>([[root, 0]]);
+
+        function resolveNode(n: TrieNode): number {
+            if (n.f && !n.c) return IdxEOW;
+            const node = [n.f ? NodeMaskEOW : 0];
+            return tf.nodes.push(node) - 1;
+        }
+
+        function walk(n: TrieNode): number {
+            const found = known.get(n);
+            if (found) return found;
+            const nodeIdx = resolveMap(known, n, resolveNode);
+            const node = tf.nodes[nodeIdx];
+            if (!n.c) return nodeIdx;
+            const children = Object.entries(n.c);
+            node.length = children.length + 1;
+            for (let p = 0; p < children.length; ++p) {
+                const [char, childNode] = children[p];
+                const letterIdx = tf.getCharIndex(char);
+                const childIdx = walk(childNode);
+                node[p + 1] = (childIdx << NodeChildRefShift) | letterIdx;
+            }
+            return nodeIdx;
+        }
+
+        walk(root);
+
+        return tf.freeze();
+    }
+}
+
+function resolveMap<K, V>(map: Map<K, V>, key: K, resolve: (key: K) => V): V {
+    const r = map.get(key);
+    if (r !== undefined) return r;
+    const v = resolve(key);
+    map.set(key, v);
+    return v;
 }

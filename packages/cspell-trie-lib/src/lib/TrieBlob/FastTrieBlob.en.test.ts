@@ -12,7 +12,7 @@ describe('Validate English FastTrieBlob', async () => {
     const pTrie = getTrie();
     const sampleTrie = await pTrie;
     const sampleWordsLarge = [...sampleTrie.words()];
-    const fastTrieBlob = FastTrieBlob.create(sampleWordsLarge);
+    const fastTrieBlob = FastTrieBlob.fromWordList(sampleWordsLarge);
 
     test('insert', () => {
         const words = sampleWordsLarge.slice(1000, 6000);
@@ -27,5 +27,10 @@ describe('Validate English FastTrieBlob', async () => {
         for (const word of words) {
             expect(fastTrieBlob.has(word)).toBe(true);
         }
+    });
+
+    test('fromTrieRoot', () => {
+        const ft = FastTrieBlob.fromTrieRoot(sampleTrie.root);
+        expect(ft.has('hello')).toBe(true);
     });
 });
