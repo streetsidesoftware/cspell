@@ -1,8 +1,8 @@
 import { describe, expect, test } from 'vitest';
 
 import { Trie } from '../trie.js';
-import { isWordTerminationNode } from '../trie-util.js';
-import type { TrieNode } from '../TrieNode.js';
+import { isWordTerminationNode } from '../TrieNode/trie-util.js';
+import type { TrieNode } from '../TrieNode/TrieNode.js';
 import { walker } from '../walker/index.js';
 import * as Sug from './suggest.js';
 import type { SuggestionResultBase } from './suggestCollector.js';

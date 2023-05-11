@@ -74,7 +74,7 @@ export async function run(program: commander.Command, argv: string[]): Promise<c
             const pOutputStream = createWriteStream(outputFile);
             const lines = await fileToLines(filename);
             const root = Trie.importTrie(lines);
-            const words: Sequence<string> = Trie.iteratorTrieWords(root);
+            const words: Sequence<string> = genSequence(Trie.iteratorTrieWords(root));
             const outputStream = await pOutputStream;
             return new Promise((resolve) => {
                 stream.Readable.from(words.map((a) => a + '\n'))

@@ -24,10 +24,10 @@ function hasWords(words: string[], method: (word: string) => boolean): boolean {
 
 export async function measureFastBlob(which: string | undefined, method: string | undefined) {
     const trie = await getTrie();
-    const words = trie.words().toArray();
+    const words = [...trie.words()];
 
     if (filterTest(which, 'blob')) {
-        const ft = measure('blob.FastTrieBlob \t\t', () => FastTrieBlob.fromTrieRoot(trie.root));
+        const ft = measure('blob.FastTrieBlob.fromTrieRoot \t', () => FastTrieBlob.fromTrieRoot(trie.root));
         const trieBlob = measure('blob.FastTrieBlob.toTrieBlob \t', () => ft.toTrieBlob());
 
         switch (method) {
@@ -52,7 +52,7 @@ export async function measureFastBlob(which: string | undefined, method: string 
     }
 
     if (filterTest(which, 'fast')) {
-        const ft = measure('fast.FastTrieBlob \t\t', () => FastTrieBlob.fromWordList(words));
+        const ft = measure('fast.FastTrieBlob.fromWordList \t', () => FastTrieBlob.fromWordList(words));
 
         switch (method) {
             case 'has':

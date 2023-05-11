@@ -1,9 +1,9 @@
 import { describe, expect, test } from 'vitest';
 
+import { parseDictionary } from '../SimpleDictionaryParser.js';
+import { Trie } from '../trie.js';
 import type { FindFullResult, PartialFindOptions } from './find.js';
 import { __testing__, createFindOptions, findLegacyCompound, findWord } from './find.js';
-import { parseDictionary } from './SimpleDictionaryParser.js';
-import { Trie } from './trie.js';
 
 const findLegacyCompoundWord = __testing__.findLegacyCompoundWord;
 

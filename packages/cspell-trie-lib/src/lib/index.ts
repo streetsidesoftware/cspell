@@ -1,7 +1,6 @@
 export { consolidate } from './consolidate.js';
 export type { WeightMap } from './distance/index.js';
 export { createWeightedMap, editDistance, editDistanceWeighted } from './distance/index.js';
-export type { FindFullResult } from './find.js';
 export { ExportOptions, importTrie, serializeTrie } from './io/importExport.js';
 export { mapDictionaryInformationToWeightMap } from './mappers/mapDictionaryInfoToWeightMap.js';
 export type { SuggestionCostMapDef } from './models/suggestionCostsDef.js';
@@ -25,6 +24,8 @@ export {
     OPTIONAL_COMPOUND_FIX,
     Trie,
 } from './trie.js';
+export { buildTrie, buildTrieFast, TrieBuilder } from './TrieBuilder.js';
+export type { FindFullResult } from './TrieNode/find.js';
 export {
     countNodes,
     countWords,
@@ -40,9 +41,8 @@ export {
     orderTrie,
     trieNodeToRoot,
     walk,
-} from './trie-util.js';
-export { buildTrie, buildTrieFast, TrieBuilder } from './TrieBuilder.js';
-export { ChildMap, FLAG_WORD, TrieNode, TrieRoot } from './TrieNode.js';
+} from './TrieNode/trie-util.js';
+export { ChildMap, FLAG_WORD, TrieNode, TrieRoot } from './TrieNode/TrieNode.js';
 export { isDefined } from './utils/isDefined.js';
 export { mergeDefaults } from './utils/mergeDefaults.js';
 export { mergeOptionalWithDefaults } from './utils/mergeOptionalWithDefaults.js';

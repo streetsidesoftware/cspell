@@ -1,7 +1,7 @@
 import { genSequence } from 'gensequence';
 
-import type { TrieNode } from './TrieNode.js';
-import { FLAG_WORD } from './TrieNode.js';
+import type { TrieNode } from './TrieNode/TrieNode.js';
+import { FLAG_WORD } from './TrieNode/TrieNode.js';
 import type { TrieRefNode } from './trieRef.js';
 
 const MinReferenceCount = 3;

@@ -1,6 +1,6 @@
-import { trieNodeToRoot } from './trie-util.js';
-import type { TrieNode, TrieRoot } from './TrieNode.js';
-import { FLAG_WORD } from './TrieNode.js';
+import { trieNodeToRoot } from './TrieNode/trie-util.js';
+import type { TrieNode, TrieRoot } from './TrieNode/TrieNode.js';
+import { FLAG_WORD } from './TrieNode/TrieNode.js';
 
 /**
  * Consolidate to DAWG

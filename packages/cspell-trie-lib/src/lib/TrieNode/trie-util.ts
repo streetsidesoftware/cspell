@@ -1,11 +1,10 @@
-import type { Sequence } from 'gensequence';
-import { genSequence } from 'gensequence';
+import { opFilter, opMap, pipe } from '@cspell/cspell-pipe/sync';
 
+import { mergeOptionalWithDefaults } from '../utils/mergeOptionalWithDefaults.js';
+import { walker } from '../walker/walker.js';
+import type { YieldResult } from '../walker/walkerTypes.js';
 import type { PartialTrieOptions, TrieNode, TrieRoot } from './TrieNode.js';
 import { FLAG_WORD } from './TrieNode.js';
-import { mergeOptionalWithDefaults } from './utils/mergeOptionalWithDefaults.js';
-import { walker } from './walker/walker.js';
-import type { YieldResult } from './walker/walkerTypes.js';
 
 export function insert(text: string, root: TrieNode = {}): TrieNode {
     let node = root;
@@ -40,8 +39,8 @@ export function orderTrie(node: TrieNode): void {
 /**
  * Generator an iterator that will walk the Trie parent then children in a depth first fashion that preserves sorted order.
  */
-export function walk(node: TrieNode): Sequence<YieldResult> {
-    return genSequence(walker(node));
+export function walk(node: TrieNode): Iterable<YieldResult> {
+    return walker(node);
 }
 
 export const iterateTrie = walk;
@@ -49,10 +48,12 @@ export const iterateTrie = walk;
 /**
  * Generate a Iterator that can walk a Trie and yield the words.
  */
-export function iteratorTrieWords(node: TrieNode): Sequence<string> {
-    return walk(node)
-        .filter((r) => isWordTerminationNode(r.node))
-        .map((r) => r.text);
+export function iteratorTrieWords(node: TrieNode): Iterable<string> {
+    return pipe(
+        walk(node),
+        opFilter((r) => isWordTerminationNode(r.node)),
+        opMap((r) => r.text)
+    );
 }
 
 export function createTrieRoot(options: PartialTrieOptions): TrieRoot {

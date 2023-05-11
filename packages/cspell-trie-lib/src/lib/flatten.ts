@@ -1,4 +1,4 @@
-import type { TrieNode } from './TrieNode.js';
+import type { TrieNode } from './TrieNode/TrieNode.js';
 import type { TrieRefNode } from './trieRef.js';
 
 export interface Emitter {

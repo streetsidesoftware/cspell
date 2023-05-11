@@ -1,10 +1,10 @@
 import { describe, expect, test } from 'vitest';
 
+import { parseDictionary } from '../SimpleDictionaryParser.js';
+import type { Trie } from '../trie.js';
 import type { WalkItem, WalkNext } from './compoundWalker.js';
 import { compoundWalker, compoundWords } from './compoundWalker.js';
 import { findWord } from './find.js';
-import { parseDictionary } from './SimpleDictionaryParser.js';
-import type { Trie } from './trie.js';
 
 // cspell:ignore errorerror
 

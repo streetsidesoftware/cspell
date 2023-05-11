@@ -1,12 +1,11 @@
-import type { Sequence } from 'gensequence';
-import { genSequence } from 'gensequence';
+import { opAppend, opFilter, opMap, pipe } from '@cspell/cspell-pipe/sync';
 
 import { CASE_INSENSITIVE_PREFIX, COMPOUND_FIX, FORBID_PREFIX, OPTIONAL_COMPOUND_FIX } from './constants.js';
-import type { FindFullResult, FindOptions, PartialFindOptions } from './find.js';
-import { createFindOptions, findLegacyCompound, findWord, findWordNode, isForbiddenWord } from './find.js';
 import { genSuggestions, suggest } from './suggest.js';
 import type { SuggestionCollector, SuggestionResult } from './suggestCollector.js';
 import type { SuggestionOptions } from './suggestions/genSuggestionsOptions.js';
+import type { FindFullResult, FindOptions, PartialFindOptions } from './TrieNode/find.js';
+import { createFindOptions, findLegacyCompound, findWord, findWordNode, isForbiddenWord } from './TrieNode/find.js';
 import {
     countWords,
     createTriFromList,
@@ -14,8 +13,8 @@ import {
     isWordTerminationNode,
     iteratorTrieWords,
     orderTrie,
-} from './trie-util.js';
-import type { PartialTrieOptions, TrieNode, TrieOptions, TrieRoot } from './TrieNode.js';
+} from './TrieNode/trie-util.js';
+import type { PartialTrieOptions, TrieNode, TrieOptions, TrieRoot } from './TrieNode/TrieNode.js';
 import { clean } from './utils/clean.js';
 import { mergeOptionalWithDefaults } from './utils/mergeOptionalWithDefaults.js';
 import { replaceAllFactory } from './utils/util.js';
@@ -29,7 +28,7 @@ export {
     FORBID_PREFIX,
     OPTIONAL_COMPOUND_FIX,
 } from './constants.js';
-export { PartialTrieOptions, TrieOptions } from './TrieNode.js';
+export { PartialTrieOptions, TrieOptions } from './TrieNode/TrieNode.js';
 
 /** @deprecated */
 export const COMPOUND = COMPOUND_FIX;
@@ -156,13 +155,15 @@ export class Trie {
     /**
      * Provides an ordered sequence of words with the prefix of text.
      */
-    completeWord(text: string): Sequence<string> {
+    completeWord(text: string): Iterable<string> {
         const n = this.find(text);
         const compoundChar = this.options.compoundCharacter;
-        const subNodes = iteratorTrieWords(n || {})
-            .filter((w) => w[w.length - 1] !== compoundChar)
-            .map((suffix) => text + suffix);
-        return genSequence(n && isWordTerminationNode(n) ? [text] : []).concat(subNodes);
+        const subNodes = pipe(
+            iteratorTrieWords(n || {}),
+            opFilter((w) => w[w.length - 1] !== compoundChar),
+            opMap((suffix) => text + suffix)
+        );
+        return pipe(n && isWordTerminationNode(n) ? [text] : [], opAppend(subNodes));
     }
 
     /**
@@ -210,7 +211,7 @@ export class Trie {
     /**
      * Returns an iterator that can be used to get all words in the trie. For some dictionaries, this can result in millions of words.
      */
-    words(): Sequence<string> {
+    words(): Iterable<string> {
         return iteratorTrieWords(this.root);
     }
 

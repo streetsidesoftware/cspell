@@ -5,7 +5,7 @@ import { parseDictionary } from './SimpleDictionaryParser.js';
 import type { SuggestionOptions } from './suggestions/genSuggestionsOptions.js';
 import type { SuggestionCollectorOptions } from './suggestions/suggestCollector.js';
 import { defaultTrieOptions, Trie } from './trie.js';
-import { isWordTerminationNode, orderTrie } from './trie-util.js';
+import { isWordTerminationNode, orderTrie } from './TrieNode/trie-util.js';
 import { clean } from './utils/clean.js';
 import { normalizeWordToLowercase } from './utils/normalizeWord.js';
 

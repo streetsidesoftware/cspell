@@ -1,4 +1,4 @@
-import type { Trie } from './trie.js';
+import type { Trie } from '../trie.js';
 import type { TrieNode } from './TrieNode.js';
 
 export interface WalkItem {

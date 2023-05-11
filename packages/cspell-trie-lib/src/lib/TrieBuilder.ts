@@ -1,8 +1,8 @@
 import { consolidate } from './consolidate.js';
 import type { PartialTrieOptions, TrieOptions } from './trie.js';
 import { Trie } from './trie.js';
-import { createTrieRoot, createTriFromList, trieNodeToRoot } from './trie-util.js';
-import type { TrieNode, TrieRoot } from './TrieNode.js';
+import { createTrieRoot, createTriFromList, trieNodeToRoot } from './TrieNode/trie-util.js';
+import type { TrieNode, TrieRoot } from './TrieNode/TrieNode.js';
 import { mergeOptionalWithDefaults } from './utils/mergeOptionalWithDefaults.js';
 import { SecondChanceCache } from './utils/secondChanceCache.js';
 

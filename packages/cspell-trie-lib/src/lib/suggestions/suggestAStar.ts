@@ -1,4 +1,4 @@
-import type { TrieNode, TrieRoot } from '../TrieNode.js';
+import type { TrieNode, TrieRoot } from '../TrieNode/TrieNode.js';
 import { PairingHeap } from '../utils/PairingHeap.js';
 import { CompoundWordsMethod, JOIN_SEPARATOR, WORD_SEPARATOR } from '../walker/index.js';
 import type { GenSuggestionOptionsStrict, SuggestionOptions } from './genSuggestionsOptions.js';

@@ -1,4 +1,4 @@
-import type { PartialWithUndefined } from './types.js';
+import type { PartialWithUndefined } from '../types.js';
 
 export const FLAG_WORD = 1;
 

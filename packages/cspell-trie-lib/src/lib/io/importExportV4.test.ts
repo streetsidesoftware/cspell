@@ -5,7 +5,7 @@ import { describe, expect, test } from 'vitest';
 import { resolveSample as resolveSamplePath } from '../../test/samples.js';
 import { consolidate } from '../consolidate.js';
 import * as Trie from '../index.js';
-import type { TrieNode } from '../TrieNode.js';
+import type { TrieNode } from '../TrieNode/TrieNode.js';
 import * as v3 from './importExportV3.js';
 import { __testing__, importTrie, serializeTrie } from './importExportV4.js';
 

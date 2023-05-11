@@ -21,13 +21,11 @@
  * ```
  */
 
-import { opConcatMap, opFilter, pipe } from '@cspell/cspell-pipe/sync';
-import type { Sequence } from 'gensequence';
-import { genSequence } from 'gensequence';
+import { opAppend, opConcatMap, opFilter, pipe, reduce } from '@cspell/cspell-pipe/sync';
 
-import { trieNodeToRoot } from '../trie-util.js';
-import type { TrieNode, TrieRoot } from '../TrieNode.js';
-import { FLAG_WORD } from '../TrieNode.js';
+import { trieNodeToRoot } from '../TrieNode/trie-util.js';
+import type { TrieNode, TrieRoot } from '../TrieNode/TrieNode.js';
+import { FLAG_WORD } from '../TrieNode/TrieNode.js';
 import { bufferLines } from '../utils/bufferLines.js';
 
 const EOW = '$'; // End of word
@@ -93,7 +91,7 @@ export interface ExportOptions {
 /**
  * Serialize a TrieRoot.
  */
-export function serializeTrie(root: TrieRoot, options: ExportOptions | number = 16): Sequence<string> {
+export function serializeTrie(root: TrieRoot, options: ExportOptions | number = 16): Iterable<string> {
     options = typeof options === 'number' ? { base: options } : options;
     const { base = 10, comment = '' } = options;
     const radix = base > 36 ? 36 : base < 10 ? 10 : base;
@@ -207,7 +205,7 @@ export function serializeTrie(root: TrieRoot, options: ExportOptions | number = 
             .replace(/.{110,130}[,]/g, '$&\n') +
         '\n]\n';
 
-    return genSequence([generateHeader(radix, comment), reference]).concat(lines);
+    return pipe([generateHeader(radix, comment), reference], opAppend(lines));
 }
 
 interface ReferenceMap {
@@ -478,14 +476,19 @@ function parseStream(radix: number, iter: Iterable<string>): TrieRoot {
         return parserStart({ ...acc, parser: parserStart }, s);
     }
 
-    genSequence(iter)
-        .concatMap((a) => a.split(''))
-        .reduce(parserMain, {
+    reduce(
+        pipe(
+            iter,
+            opConcatMap((a) => a.split(''))
+        ),
+        parserMain,
+        {
             nodes: [root],
             root,
             stack: [{ node: root, s: '' }],
             parser: parseReferenceIndex,
-        });
+        }
+    );
 
     return root;
 }

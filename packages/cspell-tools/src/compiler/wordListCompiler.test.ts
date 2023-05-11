@@ -157,7 +157,7 @@ describe('Validate Larger Dictionary', () => {
         const trie = normalizeWordsToTrie(words);
         expect(isCircular(trie)).toBe(false);
         const nWords = toArray(legacyNormalizeWords(words)).sort().filter(uniqueFilter(1000));
-        const results = iteratorTrieWords(trie).toArray().sort().filter(uniqueFilter(1000));
+        const results = [...iteratorTrieWords(trie)].sort().filter(uniqueFilter(1000));
         expect(results).toEqual(nWords);
     }, 60000);
 
@@ -167,11 +167,11 @@ describe('Validate Larger Dictionary', () => {
         const trie = Trie.consolidate(normalizeWordsToTrie(words));
         expect(isCircular(trie)).toBe(false);
         const nWords = toArray(legacyNormalizeWords(words)).sort().filter(uniqueFilter(1000));
-        const results = iteratorTrieWords(trie).toArray().sort();
+        const results = [...iteratorTrieWords(trie)].sort();
         expect(results).toEqual(nWords);
         const data = serializeTrie(trie, { base: 40 });
         const trie2 = importTrie(data);
-        const results2 = iteratorTrieWords(trie2).toArray();
+        const results2 = [...iteratorTrieWords(trie2)];
         expect(results2).toEqual(results);
     }, 60000);
 });
