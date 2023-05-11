@@ -4,7 +4,7 @@ import { trieNodeToRoot } from '../TrieNode/trie-util.js';
 import type { TrieNode, TrieRoot } from '../TrieNode/TrieNode.js';
 import { FLAG_WORD } from '../TrieNode/TrieNode.js';
 import { bufferLines } from '../utils/bufferLines.js';
-import { getGlobalPerfTimer, startTimer } from '../utils/timer.js';
+import { getGlobalPerfTimer } from '../utils/timer.js';
 
 const EOW = '$'; // End of word
 const BACK = '<'; // Move up the tree
@@ -277,7 +277,8 @@ function parseStream(radix: number): Reducer {
 
         const { nodes } = acc;
         nodes.pop();
-        return { ...acc, nodes, parser };
+        acc.parser = parser;
+        return acc;
     }
 
     function parseEscapeCharacter(acc: ReduceResults, _: string): ReduceResults {
@@ -285,20 +286,23 @@ function parseStream(radix: number): Reducer {
         const parser = function (acc: ReduceResults, s: string): ReduceResults {
             if (prev) {
                 s = characterMap.get(prev + s) || s;
-                return parseCharacter({ ...acc, parser: undefined }, s);
+                acc.parser = undefined;
+                return parseCharacter(acc, s);
             }
             if (s === ESCAPE) {
                 prev = s;
                 return acc;
             }
-            return parseCharacter({ ...acc, parser: undefined }, s);
+            acc.parser = undefined;
+            return parseCharacter(acc, s);
         };
-        return { ...acc, parser };
+        acc.parser = parser;
+        return acc;
     }
 
     function parseCharacter(acc: ReduceResults, s: string): ReduceResults {
         const parser = undefined;
-        const { root, nodes, stack } = acc;
+        const { nodes, stack } = acc;
         const top = stack[stack.length - 1];
         const node = top.node;
         const c = node.c ?? Object.create(null);
@@ -307,12 +311,13 @@ function parseStream(radix: number): Reducer {
         c[s] = n;
         stack.push({ node: n, s });
         nodes.push(n);
-        return { root, nodes, stack, parser };
+        acc.parser = parser;
+        return acc;
     }
 
     function parseEOW(acc: ReduceResults, _: string): ReduceResults {
         const parser = parseBack;
-        const { root, nodes, stack } = acc;
+        const { nodes, stack } = acc;
         const top = stack[stack.length - 1];
         const node = top.node;
         node.f = FLAG_WORD;
@@ -323,20 +328,23 @@ function parseStream(radix: number): Reducer {
             nodes.pop();
         }
         stack.pop();
-        return { root, nodes, stack, parser };
+        acc.parser = parser;
+        return acc;
     }
 
     const charactersBack = stringToCharSet(BACK + '23456789');
     function parseBack(acc: ReduceResults, s: string): ReduceResults {
         if (!(s in charactersBack)) {
-            return parserMain({ ...acc, parser: undefined }, s);
+            acc.parser = undefined;
+            return parserMain(acc, s);
         }
         let n = s === BACK ? 1 : parseInt(s, 10) - 1;
         const { stack } = acc;
         while (n-- > 0) {
             stack.pop();
         }
-        return { ...acc, parser: parseBack };
+        acc.parser = parseBack;
+        return acc;
     }
 
     function parseIgnore(acc: ReduceResults, _: string): ReduceResults {
