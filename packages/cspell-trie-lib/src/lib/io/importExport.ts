@@ -1,6 +1,4 @@
 import { toDistributableIterable } from '@cspell/cspell-pipe';
-import type { Sequence } from 'gensequence';
-import { genSequence } from 'gensequence';
 
 import type { TrieRoot } from '../TrieNode/TrieNode.js';
 import * as iv1 from './importExportV1.js';
@@ -15,7 +13,7 @@ export interface ExportOptions {
     addLineBreaksToImproveDiffs?: boolean;
 }
 
-type Serializer = (root: TrieRoot, options?: number | ExportOptions) => Sequence<string>;
+type Serializer = (root: TrieRoot, options?: number | ExportOptions) => Iterable<string>;
 
 const serializers: readonly Serializer[] = [
     iv1.serializeTrie,
@@ -35,7 +33,7 @@ const DEFAULT_VERSION = 3;
  * Even though it is possible to preserve the trie, dealing with very large tries can consume a lot of memory.
  * Considering this is the last step before exporting, it was decided to let this be destructive.
  */
-export function serializeTrie(root: TrieRoot, options: ExportOptions | number = 16): Sequence<string> {
+export function serializeTrie(root: TrieRoot, options: ExportOptions | number = 16): Iterable<string> {
     const version = typeof options !== 'number' && options.version ? options.version : DEFAULT_VERSION;
     const method = serializers[version];
     if (!method) {
@@ -44,7 +42,8 @@ export function serializeTrie(root: TrieRoot, options: ExportOptions | number = 
     return method(root, options);
 }
 
-export function importTrie(lines: Iterable<string> | IterableIterator<string>): TrieRoot {
+export function importTrie(lines: Iterable<string> | IterableIterator<string> | string[]): TrieRoot {
+    const aLines = Array.isArray(lines) ? lines : [...lines];
     function parseHeaderRows(headerRows: string[]): number {
         const header = headerRows.join('\n');
         const headerReg = /^\s*TrieXv(\d+)/m;
@@ -65,10 +64,10 @@ export function importTrie(lines: Iterable<string> | IterableIterator<string>): 
         return headerRows;
     }
 
-    const input = toDistributableIterable(lines);
+    const input = toDistributableIterable(aLines);
     const headerLines = readHeader(input);
     const version = parseHeaderRows(headerLines);
-    const stream = genSequence(headerLines).concat(input);
+    const stream = [...headerLines, ...input];
     const method = deserializers[version];
     if (!method) {
         throw new Error(`Unsupported version: ${version}`);

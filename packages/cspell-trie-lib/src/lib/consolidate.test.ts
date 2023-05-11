@@ -5,8 +5,8 @@ import { describe, expect, test } from 'vitest';
 
 import { resolveGlobalSample } from '../test/samples.js';
 import { consolidate } from './consolidate.js';
-import { countNodes, createTrieRoot, createTriFromList, iteratorTrieWords } from './TrieNode/trie-util.js';
 import { buildTrie } from './TrieBuilder.js';
+import { countNodes, createTrieRoot, createTriFromList, iteratorTrieWords } from './TrieNode/trie-util.js';
 import type { TrieNode } from './TrieNode/TrieNode.js';
 
 const samples = resolveGlobalSample('dicts');

@@ -24,7 +24,7 @@ function hasWords(words: string[], method: (word: string) => boolean): boolean {
 
 export async function measureFastBlob(which: string | undefined, method: string | undefined) {
     const trie = await getTrie();
-    const words = trie.words().toArray();
+    const words = [...trie.words()];
 
     if (filterTest(which, 'blob')) {
         const ft = measure('blob.FastTrieBlob \t\t', () => FastTrieBlob.fromTrieRoot(trie.root));

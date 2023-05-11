@@ -24,6 +24,8 @@ export {
     OPTIONAL_COMPOUND_FIX,
     Trie,
 } from './trie.js';
+export { buildTrie, buildTrieFast, TrieBuilder } from './TrieBuilder.js';
+export type { FindFullResult } from './TrieNode/find.js';
 export {
     countNodes,
     countWords,
@@ -40,8 +42,6 @@ export {
     trieNodeToRoot,
     walk,
 } from './TrieNode/trie-util.js';
-export { buildTrie, buildTrieFast, TrieBuilder } from './TrieBuilder.js';
-export type { FindFullResult } from './TrieNode/find.js';
 export { ChildMap, FLAG_WORD, TrieNode, TrieRoot } from './TrieNode/TrieNode.js';
 export { isDefined } from './utils/isDefined.js';
 export { mergeDefaults } from './utils/mergeDefaults.js';

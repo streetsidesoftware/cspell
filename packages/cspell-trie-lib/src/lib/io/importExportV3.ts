@@ -1,5 +1,4 @@
-import type { Sequence } from 'gensequence';
-import { genSequence } from 'gensequence';
+import { opAppend, opConcatMap, pipe, reduce } from '@cspell/cspell-pipe/sync';
 
 import { trieNodeToRoot } from '../TrieNode/trie-util.js';
 import type { TrieNode, TrieRoot } from '../TrieNode/TrieNode.js';
@@ -33,11 +32,11 @@ const WORDS_PER_LINE = 20;
 
 export const DATA = '__DATA__';
 
-function generateHeader(base: number, comment: string): Sequence<string> {
+function generateHeader(base: number, comment: string): Iterable<string> {
     const header = ['#!/usr/bin/env cspell-trie reader', 'TrieXv3', 'base=' + base]
         .concat(comment ? comment.split('\n').map((a) => '# ' + a) : [])
         .concat(['# Data:', DATA]);
-    return genSequence(header).map((a) => a + '\n');
+    return header.map((a) => a + '\n');
 }
 
 export interface ExportOptions {
@@ -58,7 +57,7 @@ export interface ExportOptions {
 /**
  * Serialize a TrieRoot.
  */
-export function serializeTrie(root: TrieRoot, options: ExportOptions | number = 16): Sequence<string> {
+export function serializeTrie(root: TrieRoot, options: ExportOptions | number = 16): Iterable<string> {
     options = typeof options === 'number' ? { base: options, addLineBreaksToImproveDiffs: false } : options;
     const { base = 16, comment = '', addLineBreaksToImproveDiffs: addBreaks = true } = options;
     const radix = base > 36 ? 36 : base < 10 ? 10 : base;
@@ -167,7 +166,7 @@ export function serializeTrie(root: TrieRoot, options: ExportOptions | number = 
         return rr;
     }
 
-    return generateHeader(radix, comment).concat(bufferLines(serialize(root), 1200, ''));
+    return pipe(generateHeader(radix, comment), opAppend(bufferLines(serialize(root), 1200, '')));
 }
 
 function* toIterableIterator<T>(iter: Iterable<T>): IterableIterator<T> {
@@ -226,14 +225,19 @@ export function importTrie(linesX: Iterable<string> | string): TrieRoot {
 
     readHeader(iter);
 
-    const n = genSequence(iter)
-        .concatMap((a) => a.split(''))
-        .reduce(parseStream(radix), {
+    const n = reduce(
+        pipe(
+            iter,
+            opConcatMap((a) => a.split(''))
+        ),
+        parseStream(radix),
+        {
             nodes: [root],
             root,
             stack: [{ node: root, s: '' }],
             parser: undefined,
-        });
+        }
+    );
     return n.root;
 }
 
