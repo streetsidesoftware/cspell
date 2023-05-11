@@ -88,12 +88,31 @@ export function createPerfTimer(): PerfTimer {
         const lineElements = [
             { name: 'Event Name', at: 'Time', elapsed: 'Elapsed' },
             { name: '----------', at: '----', elapsed: '-------' },
-            ...events.map((e) => ({
-                name: (e.name || '').replace(/\t/g, '  '),
-                at: `${t(e.at)}`,
-                elapsed: e.elapsed ? `${t(e.elapsed)}` : '--',
-            })),
+            ...mapEvents(),
         ];
+
+        function mapEvents(): { name: string; at: string; elapsed: string }[] {
+            const stack: number[] = [];
+
+            return events.map((e) => {
+                for (let s = stack.pop(); s; s = stack.pop()) {
+                    if (s >= e.at + (e.elapsed || 0)) {
+                        stack.push(s);
+                        break;
+                    }
+                }
+                const d = stack.length;
+                if (e.elapsed) {
+                    stack.push(e.at + e.elapsed);
+                }
+                return {
+                    name: '| '.repeat(d) + (e.name || '').replace(/\t/g, '  '),
+                    at: `${t(e.at)}`,
+                    elapsed: e.elapsed ? `${t(e.elapsed)}` : '--',
+                };
+            });
+        }
+
         function t(ms: number): string {
             return ms.toFixed(3) + 'ms';
         }
