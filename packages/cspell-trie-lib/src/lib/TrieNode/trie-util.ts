@@ -1,7 +1,5 @@
-import { opFilter, opMap, pipe } from '@cspell/cspell-pipe/sync';
-
 import { mergeOptionalWithDefaults } from '../utils/mergeOptionalWithDefaults.js';
-import { walker } from '../walker/walker.js';
+import { walker, walkerWords } from '../walker/walker.js';
 import type { YieldResult } from '../walker/walkerTypes.js';
 import type { PartialTrieOptions, TrieNode, TrieRoot } from './TrieNode.js';
 import { FLAG_WORD } from './TrieNode.js';
@@ -49,11 +47,7 @@ export const iterateTrie = walk;
  * Generate a Iterator that can walk a Trie and yield the words.
  */
 export function iteratorTrieWords(node: TrieNode): Iterable<string> {
-    return pipe(
-        walk(node),
-        opFilter((r) => isWordTerminationNode(r.node)),
-        opMap((r) => r.text)
-    );
+    return walkerWords(node);
 }
 
 export function createTrieRoot(options: PartialTrieOptions): TrieRoot {
