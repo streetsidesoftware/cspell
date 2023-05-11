@@ -26,11 +26,18 @@ function hasWords(words: string[], method: (word: string) => boolean): boolean {
 export async function measureFastBlob(which: string | undefined, method: string | undefined) {
     const timer = getGlobalPerfTimer();
     const trie = await timer.measureAsyncFn('getTrie', getTrie);
+    timer.start('words');
     const words = [...trie.words()];
-    const ft = timer.measureFn('blob.FastTrieBlob.fromTrieRoot \t', () => FastTrieBlob.fromTrieRoot(trie.root));
+    timer.stop('words');
 
+    timer.mark('done with setup');
+
+    timer.start('blob');
     if (filterTest(which, 'blob')) {
-        timer.measureFn('blob.FastTrieBlob.toTrieBlob \t', () => ft.toTrieBlob());
+        {
+            const ft = timer.measureFn('blob.FastTrieBlob.fromTrieRoot \t', () => FastTrieBlob.fromTrieRoot(trie.root));
+            timer.measureFn('blob.FastTrieBlob.toTrieBlob \t', () => ft.toTrieBlob());
+        }
         const trieBlob = timer.measureFn('blob.createTrieBlobFromTrieRoot\t', () =>
             createTrieBlobFromTrieRoot(trie.root)
         );
@@ -39,6 +46,11 @@ export async function measureFastBlob(which: string | undefined, method: string 
             case 'has':
                 timer.measureFn('blob.TrieBlob.has \t\t', () => hasWords(words, (word) => trieBlob.has(word)));
                 timer.measureFn('blob.TrieBlob.has \t\t', () => hasWords(words, (word) => trieBlob.has(word)));
+                break;
+            case 'words':
+                timer.start('blob.words');
+                [...trieBlob.words()];
+                timer.stop('blob.words');
                 break;
             case 'dump':
                 writeFileSync('./TrieBlob.en.json', JSON.stringify(trieBlob, null, 2), 'utf8');
@@ -55,7 +67,9 @@ export async function measureFastBlob(which: string | undefined, method: string 
                 break;
         }
     }
+    timer.stop('blob');
 
+    timer.start('fast');
     if (filterTest(which, 'fast')) {
         const ft = timer.measureFn('fast.FastTrieBlob.fromWordList \t', () => FastTrieBlob.fromWordList(words));
 
@@ -64,9 +78,16 @@ export async function measureFastBlob(which: string | undefined, method: string 
                 timer.measureFn('fast.FastTrieBlob.has \t\t', () => hasWords(words, (word) => ft.has(word)));
                 timer.measureFn('fast.FastTrieBlob.has \t\t', () => hasWords(words, (word) => ft.has(word)));
                 break;
+            case 'words':
+                timer.start('blob.words');
+                [...ft.words()];
+                timer.stop('blob.words');
+                break;
         }
     }
+    timer.stop('fast');
 
+    timer.start('trie');
     if (filterTest(which, 'trie')) {
         const root = createTrieRoot({});
 
@@ -80,6 +101,7 @@ export async function measureFastBlob(which: string | undefined, method: string 
                 break;
         }
     }
+    timer.stop('trie');
     timer.stop();
     timer.report();
 }
