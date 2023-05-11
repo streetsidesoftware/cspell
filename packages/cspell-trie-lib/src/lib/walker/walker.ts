@@ -6,27 +6,28 @@ import { CompoundWordsMethod, JOIN_SEPARATOR, WORD_SEPARATOR } from './walkerTyp
  * Walks the Trie and yields a value at each node.
  * next(goDeeper: boolean):
  */
-export function* walker(
-    root: TrieNode,
-    compoundingMethod: CompoundWordsMethod = CompoundWordsMethod.NONE
-): WalkerIterator {
-    const roots: { [index: number]: [string, TrieNode][] } = {
+function* compoundWalker(root: TrieNode, compoundingMethod: CompoundWordsMethod): WalkerIterator {
+    type Children = Array<[string, TrieNode]>;
+    const roots: { [index: number]: Children } = {
         [CompoundWordsMethod.NONE]: [],
         [CompoundWordsMethod.JOIN_WORDS]: [[JOIN_SEPARATOR, root]],
         [CompoundWordsMethod.SEPARATE_WORDS]: [[WORD_SEPARATOR, root]],
     };
 
-    function children(n: TrieNode): Array<[string, TrieNode]> {
-        if (n.c && n.f) {
-            return Object.entries(n.c).concat(roots[compoundingMethod]);
+    const rc = roots[compoundingMethod].length ? roots[compoundingMethod] : undefined;
+    const empty: Children = [];
+
+    function children(n: TrieNode): Children {
+        if (n.c && n.f && rc) {
+            return Object.entries(n.c).concat(rc);
         }
         if (n.c) {
             return Object.entries(n.c);
         }
-        if (n.f) {
-            return roots[compoundingMethod];
+        if (n.f && rc) {
+            return rc;
         }
-        return [];
+        return empty;
     }
 
     let depth = 0;
@@ -48,4 +49,47 @@ export function* walker(
         }
         depth -= 1;
     }
+}
+
+/**
+ * Walks the Trie and yields a value at each node.
+ * next(goDeeper: boolean):
+ */
+function* plainWalker(root: TrieNode): WalkerIterator {
+    type Children = Array<string>;
+    const empty: Children = [];
+    function children(n: TrieNode): string[] {
+        if (n.c) {
+            return Object.keys(n.c);
+        }
+        return empty;
+    }
+
+    let depth = 0;
+    const stack: { t: string; n: Record<string, TrieNode> | undefined; c: Children; ci: number }[] = [];
+    stack[depth] = { t: '', n: root.c, c: children(root), ci: 0 };
+    while (depth >= 0) {
+        let s = stack[depth];
+        let baseText = s.t;
+        while (s.ci < s.c.length && s.n) {
+            const char = s.c[s.ci++];
+            const node = s.n[char];
+            const text = baseText + char;
+            const goDeeper = yield { text, node, depth };
+            if (goDeeper ?? true) {
+                depth++;
+                baseText = text;
+                stack[depth] = { t: text, n: node.c, c: children(node), ci: 0 };
+            }
+            s = stack[depth];
+        }
+        depth -= 1;
+    }
+}
+
+export function walker(
+    root: TrieNode,
+    compoundingMethod: CompoundWordsMethod = CompoundWordsMethod.NONE
+): WalkerIterator {
+    return compoundingMethod === CompoundWordsMethod.NONE ? plainWalker(root) : compoundWalker(root, compoundingMethod);
 }
