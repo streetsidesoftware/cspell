@@ -4,10 +4,10 @@ import { readFileSync, writeFileSync } from 'fs';
 import type { TrieNode } from '../../../index.js';
 import { createTrieRoot, insert, Trie } from '../../../index.js';
 import { readTrie } from '../../../test/dictionaries.test.helper.js';
+import { getGlobalPerfTimer } from '../../utils/timer.js';
 import { createTrieBlobFromTrieRoot } from '../createTrieBlob.js';
 import { FastTrieBlob } from '../FastTrieBlob.js';
 import { TrieBlob } from '../TrieBlob.js';
-import { measure, measureAsync } from './perf.js';
 
 function getTrie() {
     return readTrie('@cspell/dict-en_us/cspell-ext.json');
@@ -24,18 +24,21 @@ function hasWords(words: string[], method: (word: string) => boolean): boolean {
 }
 
 export async function measureFastBlob(which: string | undefined, method: string | undefined) {
-    const trie = await measureAsync('getTrie \t\t\t', getTrie);
+    const timer = getGlobalPerfTimer();
+    const trie = await timer.measureAsyncFn('getTrie', getTrie);
     const words = [...trie.words()];
-    const ft = measure('blob.FastTrieBlob.fromTrieRoot \t', () => FastTrieBlob.fromTrieRoot(trie.root));
+    const ft = timer.measureFn('blob.FastTrieBlob.fromTrieRoot \t', () => FastTrieBlob.fromTrieRoot(trie.root));
 
     if (filterTest(which, 'blob')) {
-        measure('blob.FastTrieBlob.toTrieBlob \t', () => ft.toTrieBlob());
-        const trieBlob = measure('blob.createTrieBlobFromTrieRoot\t', () => createTrieBlobFromTrieRoot(trie.root));
+        timer.measureFn('blob.FastTrieBlob.toTrieBlob \t', () => ft.toTrieBlob());
+        const trieBlob = timer.measureFn('blob.createTrieBlobFromTrieRoot\t', () =>
+            createTrieBlobFromTrieRoot(trie.root)
+        );
 
         switch (method) {
             case 'has':
-                measure('blob.TrieBlob.has \t\t', () => hasWords(words, (word) => trieBlob.has(word)));
-                measure('blob.TrieBlob.has \t\t', () => hasWords(words, (word) => trieBlob.has(word)));
+                timer.measureFn('blob.TrieBlob.has \t\t', () => hasWords(words, (word) => trieBlob.has(word)));
+                timer.measureFn('blob.TrieBlob.has \t\t', () => hasWords(words, (word) => trieBlob.has(word)));
                 break;
             case 'dump':
                 writeFileSync('./TrieBlob.en.json', JSON.stringify(trieBlob, null, 2), 'utf8');
@@ -43,23 +46,23 @@ export async function measureFastBlob(which: string | undefined, method: string 
                 break;
             case 'decode':
                 {
-                    const tb = measure('blob.TrieBlob.decodeBin \t', () => {
+                    const tb = timer.measureFn('blob.TrieBlob.decodeBin \t', () => {
                         return TrieBlob.decodeBin(readFileSync('./TrieBlob.en.trieb'));
                     });
-                    measure('blob.TrieBlob.has \t\t', () => hasWords(words, (word) => tb.has(word)));
-                    measure('blob.TrieBlob.has \t\t', () => hasWords(words, (word) => tb.has(word)));
+                    timer.measureFn('blob.TrieBlob.has \t\t', () => hasWords(words, (word) => tb.has(word)));
+                    timer.measureFn('blob.TrieBlob.has \t\t', () => hasWords(words, (word) => tb.has(word)));
                 }
                 break;
         }
     }
 
     if (filterTest(which, 'fast')) {
-        const ft = measure('fast.FastTrieBlob.fromWordList \t', () => FastTrieBlob.fromWordList(words));
+        const ft = timer.measureFn('fast.FastTrieBlob.fromWordList \t', () => FastTrieBlob.fromWordList(words));
 
         switch (method) {
             case 'has':
-                measure('fast.FastTrieBlob.has \t\t', () => hasWords(words, (word) => ft.has(word)));
-                measure('fast.FastTrieBlob.has \t\t', () => hasWords(words, (word) => ft.has(word)));
+                timer.measureFn('fast.FastTrieBlob.has \t\t', () => hasWords(words, (word) => ft.has(word)));
+                timer.measureFn('fast.FastTrieBlob.has \t\t', () => hasWords(words, (word) => ft.has(word)));
                 break;
         }
     }
@@ -67,16 +70,18 @@ export async function measureFastBlob(which: string | undefined, method: string 
     if (filterTest(which, 'trie')) {
         const root = createTrieRoot({});
 
-        measure('trie.createTriFromList \t\t', () => insertWords(root, words));
+        timer.measureFn('trie.createTriFromList \t\t', () => insertWords(root, words));
         const trie = new Trie(root);
 
         switch (method) {
             case 'has':
-                measure('trie.Trie.has \t\t\t', () => hasWords(words, (word) => trie.hasWord(word, true)));
-                measure('trie.Trie.has \t\t\t', () => hasWords(words, (word) => trie.hasWord(word, true)));
+                timer.measureFn('trie.Trie.has \t\t\t', () => hasWords(words, (word) => trie.hasWord(word, true)));
+                timer.measureFn('trie.Trie.has \t\t\t', () => hasWords(words, (word) => trie.hasWord(word, true)));
                 break;
         }
     }
+    timer.stop();
+    timer.report();
 }
 
 function filterTest(value: string | undefined, expected: string): boolean {

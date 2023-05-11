@@ -1,8 +1,8 @@
 import { describe, expect, test } from 'vitest';
 
 import { readTrie } from '../../test/dictionaries.test.helper.js';
+import { measure } from '../utils/timer.js';
 import { FastTrieBlob } from './FastTrieBlob.js';
-import { measure } from './test/perf.js';
 
 function getTrie() {
     return readTrie('@cspell/dict-en_us/cspell-ext.json');
@@ -17,7 +17,7 @@ describe('Validate English FastTrieBlob', async () => {
     test('insert', () => {
         const words = sampleWordsLarge.slice(1000, 6000);
         const ft = new FastTrieBlob();
-        measure('FastTrieBlob', () => ft.insert(words));
+        ft.insert(words);
         const result = [...ft.words()];
         expect(result).toEqual(words);
     });

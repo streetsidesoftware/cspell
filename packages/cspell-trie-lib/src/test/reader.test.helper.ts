@@ -19,7 +19,6 @@ export async function readTrieFile(filename: string): Promise<Trie> {
         .readFile(filename)
         .then((buffer) => (filename.match(/\.gz$/) ? zlib.gunzipSync(buffer) : buffer))
         .then((buffer) => buffer.toString('utf8'));
-    const trieLines = trieFileContents.split('\n');
-    const trieNode = importTrie(trieLines);
+    const trieNode = importTrie(trieFileContents);
     return new Trie(trieNode);
 }
