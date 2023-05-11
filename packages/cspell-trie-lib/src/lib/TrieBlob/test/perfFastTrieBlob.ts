@@ -25,6 +25,7 @@ function hasWords(words: string[], method: (word: string) => boolean): boolean {
 
 export async function measureFastBlob(which: string | undefined, method: string | undefined) {
     const timer = getGlobalPerfTimer();
+    timer.start('measureFastBlob');
     const trie = await timer.measureAsyncFn('getTrie', getTrie);
     timer.start('words');
     const words = [...trie.words()];
@@ -102,6 +103,7 @@ export async function measureFastBlob(which: string | undefined, method: string 
         }
     }
     timer.stop('trie');
+    timer.stop('measureFastBlob');
     timer.stop();
     timer.report();
 }
