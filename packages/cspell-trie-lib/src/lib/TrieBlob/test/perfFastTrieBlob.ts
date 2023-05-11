@@ -4,9 +4,10 @@ import { readFileSync, writeFileSync } from 'fs';
 import type { TrieNode } from '../../../index.js';
 import { createTrieRoot, insert, Trie } from '../../../index.js';
 import { readTrie } from '../../../test/dictionaries.test.helper.js';
+import { createTrieBlobFromTrieRoot } from '../createTrieBlob.js';
 import { FastTrieBlob } from '../FastTrieBlob.js';
 import { TrieBlob } from '../TrieBlob.js';
-import { measure } from './perf.js';
+import { measure, measureAsync } from './perf.js';
 
 function getTrie() {
     return readTrie('@cspell/dict-en_us/cspell-ext.json');
@@ -23,12 +24,13 @@ function hasWords(words: string[], method: (word: string) => boolean): boolean {
 }
 
 export async function measureFastBlob(which: string | undefined, method: string | undefined) {
-    const trie = await getTrie();
+    const trie = await measureAsync('getTrie \t\t\t', getTrie);
     const words = [...trie.words()];
+    const ft = measure('blob.FastTrieBlob.fromTrieRoot \t', () => FastTrieBlob.fromTrieRoot(trie.root));
 
     if (filterTest(which, 'blob')) {
-        const ft = measure('blob.FastTrieBlob.fromTrieRoot \t', () => FastTrieBlob.fromTrieRoot(trie.root));
-        const trieBlob = measure('blob.FastTrieBlob.toTrieBlob \t', () => ft.toTrieBlob());
+        measure('blob.FastTrieBlob.toTrieBlob \t', () => ft.toTrieBlob());
+        const trieBlob = measure('blob.createTrieBlobFromTrieRoot\t', () => createTrieBlobFromTrieRoot(trie.root));
 
         switch (method) {
             case 'has':

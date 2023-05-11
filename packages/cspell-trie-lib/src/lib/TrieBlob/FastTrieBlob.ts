@@ -1,4 +1,5 @@
 import type { TrieNode, TrieRoot } from '../TrieNode/TrieNode.js';
+import { resolveMap } from './resolveMap.js';
 import { TrieBlob } from './TrieBlob.js';
 
 type FastTrieBlobNode = number[];
@@ -165,7 +166,7 @@ export class FastTrieBlob {
         for (let i = 0; i < nodes.length; ++i) {
             const node = nodes[i];
             // assert(offset === nodeToIndex[i]);
-            binNodes[offset++] = (node.length << lenShift) | node[0];
+            binNodes[offset++] = ((node.length - 1) << lenShift) | node[0];
             for (let j = 1; j < node.length; ++j) {
                 const v = node[j];
                 const nodeRef = v >>> NodeChildRefShift;
@@ -224,12 +225,4 @@ export class FastTrieBlob {
 
         return tf.freeze();
     }
-}
-
-function resolveMap<K, V>(map: Map<K, V>, key: K, resolve: (key: K) => V): V {
-    const r = map.get(key);
-    if (r !== undefined) return r;
-    const v = resolve(key);
-    map.set(key, v);
-    return v;
 }

@@ -17,7 +17,7 @@ describe('FastTrieBlob', () => {
         expect(words.findIndex((word) => !ft.has(word))).toBe(-1);
     });
 
-    test('', () => {
+    test('createTriFromList', () => {
         const root = createTriFromList(words);
         const ft = FastTrieBlob.fromTrieRoot(root);
         expect(ft.has('walk')).toBe(true);

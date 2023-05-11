@@ -1,10 +1,11 @@
 import { describe, expect, test } from 'vitest';
 
-import { createTrieBlob } from './createTrieBlob.js';
+import { createTriFromList } from '../TrieNode/trie-util.js';
+import { createTrieBlob, createTrieBlobFromTrieRoot } from './createTrieBlob.js';
 import { TrieBlob } from './TrieBlob.js';
 
 describe('TrieBlob', () => {
-    const sampleWords = ['one', 'two', 'three', 'four', 'walk', 'walking', 'walks', 'wall', 'walls', 'walled'];
+    const sampleWords = ['one', 'two', 'three', 'four', 'walk', 'walking', 'walks', 'wall', 'walls', 'walled'].sort();
 
     test('Constructor', () => {
         const tb = createTrieBlob(['one', 'two']);
@@ -29,5 +30,11 @@ describe('TrieBlob', () => {
         const r = TrieBlob.decodeBin(bin);
         expect(r).toEqual(tb);
         expect([...r.words()]).toEqual(sampleWords);
+    });
+
+    test('createTrieBlobFromTrieRoot', () => {
+        const root = createTriFromList(sampleWords);
+        const trieBlob = createTrieBlobFromTrieRoot(root);
+        expect([...trieBlob.words()]).toEqual(sampleWords);
     });
 });
