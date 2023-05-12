@@ -1,5 +1,3 @@
-import { toDistributableIterable } from '@cspell/cspell-pipe';
-
 import type { TrieRoot } from '../TrieNode/TrieNode.js';
 import * as iv1 from './importExportV1.js';
 import * as iv2 from './importExportV2.js';
@@ -23,7 +21,15 @@ const serializers: readonly Serializer[] = [
     iv4.serializeTrie,
 ] as const;
 
-const deserializers = [iv1.importTrie, iv1.importTrie, iv2.importTrie, iv3.importTrie, iv4.importTrie] as const;
+type Deserializer = (data: string[]) => TrieRoot;
+
+const deserializers: readonly Deserializer[] = [
+    iv1.importTrie,
+    iv1.importTrie,
+    iv2.importTrie,
+    iv3.importTrie,
+    iv4.importTrie,
+] as const;
 
 const DEFAULT_VERSION = 3;
 
@@ -42,17 +48,21 @@ export function serializeTrie(root: TrieRoot, options: ExportOptions | number = 
     return method(root, options);
 }
 
-export function importTrie(lines: Iterable<string> | IterableIterator<string> | string[]): TrieRoot {
-    const aLines = Array.isArray(lines) ? lines : [...lines];
+const headerReg = /^\s*TrieXv(\d+)/m;
+
+export function importTrie(input: Iterable<string> | IterableIterator<string> | string[] | string): TrieRoot {
+    const lines = Array.isArray(input) ? input : typeof input === 'string' ? input.split('\n') : [...input];
     function parseHeaderRows(headerRows: string[]): number {
-        const header = headerRows.join('\n');
-        const headerReg = /^\s*TrieXv(\d+)/m;
-        const match = header.match(headerReg);
-        if (!match) throw new Error('Unknown file format');
-        return parseInt(match[1], 10);
+        for (let i = 0; i < headerRows.length; ++i) {
+            const match = headerRows[i].match(headerReg);
+            if (match) {
+                return parseInt(match[1], 10);
+            }
+        }
+        throw new Error('Unknown file format');
     }
 
-    function readHeader(iter: Iterable<string>) {
+    function readHeader(iter: string[]) {
         const headerRows: string[] = [];
         for (const entry of iter) {
             const line = entry.trim();
@@ -64,13 +74,11 @@ export function importTrie(lines: Iterable<string> | IterableIterator<string> | 
         return headerRows;
     }
 
-    const input = toDistributableIterable(aLines);
-    const headerLines = readHeader(input);
+    const headerLines = readHeader(lines);
     const version = parseHeaderRows(headerLines);
-    const stream = [...headerLines, ...input];
     const method = deserializers[version];
     if (!method) {
         throw new Error(`Unsupported version: ${version}`);
     }
-    return method(stream);
+    return method(lines);
 }

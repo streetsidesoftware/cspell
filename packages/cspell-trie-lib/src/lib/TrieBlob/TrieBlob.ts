@@ -51,7 +51,7 @@ export class TrieBlob {
         for (let p = 0; p < len; ++p, node = nodes[nodeIdx]) {
             const letterIdx = charToIndexMap[word[p]];
             const count = node & NodeMaskNumChildren;
-            let i = count - 1;
+            let i = count;
             for (; i > 0; --i) {
                 if ((nodes[i + nodeIdx] & NodeMaskChildCharIndex) === letterIdx) {
                     break;
@@ -81,12 +81,12 @@ export class TrieBlob {
         while (depth >= 0) {
             const { nodeIdx, pos, word } = stack[depth];
             const node = nodes[nodeIdx];
-
+            // pos is 0 when first entering a node
             if (!pos && node & NodeMaskEOW) {
                 yield word;
             }
             const len = node & NodeMaskNumChildren;
-            if (pos >= len - 1) {
+            if (pos >= len) {
                 --depth;
                 continue;
             }
@@ -101,10 +101,6 @@ export class TrieBlob {
                 word: word + letter,
             };
         }
-    }
-
-    private lookUpCharIndex(char: string): number {
-        return this.charToIndexMap[char] ?? -1;
     }
 
     toJSON() {

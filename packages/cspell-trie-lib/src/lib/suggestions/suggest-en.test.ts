@@ -6,7 +6,7 @@ import type { WeightMap } from '../distance/index.js';
 import { mapDictionaryInformationToWeightMap } from '../mappers/mapDictionaryInfoToWeightMap.js';
 import type { DictionaryInformation } from '../models/DictionaryInformation.js';
 import { clean } from '../utils/clean.js';
-import { createTimer } from '../utils/timer.js';
+import { startTimer } from '../utils/timer.js';
 import { CompoundWordsMethod } from '../walker/index.js';
 import type { SuggestionOptions } from './genSuggestionsOptions.js';
 import { genCompoundableSuggestions, suggest } from './suggest.js';
@@ -176,9 +176,9 @@ describe('Validate English Suggestions', () => {
             const trie = await getTrie();
             // cspell:ignore testscompundsuggestions
             const collector = suggestionCollector('testscompundsuggestions', opts(1, undefined, 3));
-            const timer = createTimer();
+            const timer = startTimer();
             collector.collect(genCompoundableSuggestions(trie.root, collector.word, SEPARATE_WORDS), suggestionTimeout);
-            const elapsed = timer.elapsed();
+            const elapsed = timer();
             expect(elapsed).toBeLessThan(suggestionTimeout * 4);
         },
         timeout

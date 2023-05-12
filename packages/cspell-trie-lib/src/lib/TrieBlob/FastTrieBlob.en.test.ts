@@ -1,8 +1,8 @@
+import { opSkip, opTake, pipe } from '@cspell/cspell-pipe/sync';
 import { describe, expect, test } from 'vitest';
 
 import { readTrie } from '../../test/dictionaries.test.helper.js';
 import { FastTrieBlob } from './FastTrieBlob.js';
-import { measure } from './test/perf.js';
 
 function getTrie() {
     return readTrie('@cspell/dict-en_us/cspell-ext.json');
@@ -11,26 +11,21 @@ function getTrie() {
 describe('Validate English FastTrieBlob', async () => {
     const pTrie = getTrie();
     const sampleTrie = await pTrie;
-    const sampleWordsLarge = [...sampleTrie.words()];
-    const fastTrieBlob = FastTrieBlob.fromWordList(sampleWordsLarge);
+    const sampleWordsLarge = [...pipe(sampleTrie.words(), opSkip(1000), opTake(6000))];
+    const fastTrieBlob = FastTrieBlob.fromTrieRoot(sampleTrie.root);
 
     test('insert', () => {
-        const words = sampleWordsLarge.slice(1000, 6000);
+        const words = sampleWordsLarge;
         const ft = new FastTrieBlob();
-        measure('FastTrieBlob', () => ft.insert(words));
+        ft.insert(words);
         const result = [...ft.words()];
         expect(result).toEqual(words);
     });
 
     test('has', () => {
-        const words = sampleWordsLarge.slice(1000, 6000);
+        const words = sampleWordsLarge;
         for (const word of words) {
             expect(fastTrieBlob.has(word)).toBe(true);
         }
-    });
-
-    test('fromTrieRoot', () => {
-        const ft = FastTrieBlob.fromTrieRoot(sampleTrie.root);
-        expect(ft.has('hello')).toBe(true);
     });
 });

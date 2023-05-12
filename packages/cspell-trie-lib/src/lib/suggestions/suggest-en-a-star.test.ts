@@ -2,7 +2,7 @@ import { describe, expect, test } from 'vitest';
 
 import { readTrie } from '../../test/dictionaries.test.helper.js';
 import { clean } from '../utils/clean.js';
-import { createTimer } from '../utils/timer.js';
+import { startTimer } from '../utils/timer.js';
 import { CompoundWordsMethod } from '../walker/index.js';
 import type { GenSuggestionOptionsStrict } from './genSuggestionsOptions.js';
 import { genCompoundableSuggestions, suggest } from './suggestAStar.js';
@@ -201,7 +201,7 @@ describe('Validate English Suggestions', () => {
             const trie = await getTrie();
             // cspell:ignore testscompundsuggestions
             const collector = suggestionCollector('testscompundsuggestions', opts(1, undefined, 3, false));
-            const timer = createTimer();
+            const timer = startTimer();
             collector.collect(
                 genCompoundableSuggestions(
                     trie.root,
@@ -210,7 +210,7 @@ describe('Validate English Suggestions', () => {
                 ),
                 suggestionTimeout
             );
-            const elapsed = timer.elapsed();
+            const elapsed = timer();
             expect(elapsed).toBeLessThan(suggestionTimeout * 4);
         },
         timeout

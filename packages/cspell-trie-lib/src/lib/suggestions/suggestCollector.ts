@@ -2,7 +2,7 @@ import type { WeightMap } from '../distance/index.js';
 import { editDistanceWeighted } from '../distance/index.js';
 import { addDefToWeightMap } from '../distance/weightedMaps.js';
 import type { RequireOptional } from '../types.js';
-import { createTimer } from '../utils/timer.js';
+import { startTimer } from '../utils/timer.js';
 import { clean, regexQuote, replaceAllFactory } from '../utils/util.js';
 import { WORD_SEPARATOR } from '../walker/index.js';
 import { DEFAULT_COMPOUNDED_WORD_SEPARATOR } from './constants.js';
@@ -256,11 +256,11 @@ export function suggestionCollector(wordToMatch: string, options: SuggestionColl
         timeout = Math.min(timeout, timeRemaining);
         if (timeout < 0) return;
 
-        const timer = createTimer();
+        const timer = startTimer();
 
         let ir: IteratorResult<SuggestionResultBase | Progress | undefined>;
         while (!(ir = src.next(stop || maxCost)).done) {
-            if (timer.elapsed() > timeout) {
+            if (timer() > timeout) {
                 stop = symStopProcessing;
             }
             const { value } = ir;
@@ -273,7 +273,7 @@ export function suggestionCollector(wordToMatch: string, options: SuggestionColl
             }
         }
 
-        timeRemaining -= timer.elapsed();
+        timeRemaining -= timer();
     }
 
     function cleanCompoundResult(sr: SuggestionResultBase): SuggestionResult {

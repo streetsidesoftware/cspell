@@ -1,9 +1,10 @@
-import { opAppend, opConcatMap, pipe, reduce } from '@cspell/cspell-pipe/sync';
+import { opAppend, pipe } from '@cspell/cspell-pipe/sync';
 
 import { trieNodeToRoot } from '../TrieNode/trie-util.js';
 import type { TrieNode, TrieRoot } from '../TrieNode/TrieNode.js';
 import { FLAG_WORD } from '../TrieNode/TrieNode.js';
 import { bufferLines } from '../utils/bufferLines.js';
+import { getGlobalPerfTimer } from '../utils/timer.js';
 
 const EOW = '$'; // End of word
 const BACK = '<'; // Move up the tree
@@ -13,10 +14,8 @@ const REF = '#'; // Start of Reference
 const EOR = ';'; // End of Reference
 const ESCAPE = '\\';
 
-const specialCharacters = new Set(
-    [EOW, BACK, EOL, REF, EOR, ESCAPE, LF]
-        .concat('0123456789'.split(''))
-        .concat('`~!@#$%^&*()_-+=[]{};:\'"<>,./?\\|'.split(''))
+const specialCharacters = stringToCharSet(
+    [EOW, BACK, EOL, REF, EOR, ESCAPE, LF, '0123456789', '`~!@#$%^&*()_-+=[]{};:\'"<>,./?\\|'].join('')
 );
 
 const specialCharacterMap = new Map([
@@ -73,7 +72,7 @@ export function serializeTrie(root: TrieRoot, options: ExportOptions | number = 
     }
 
     function escape(s: string): string {
-        return specialCharacters.has(s) ? ESCAPE + (specialCharacterMap.get(s) || s) : s;
+        return s in specialCharacters ? ESCAPE + (specialCharacterMap.get(s) || s) : s;
     }
 
     function* flush() {
@@ -169,10 +168,6 @@ export function serializeTrie(root: TrieRoot, options: ExportOptions | number = 
     return pipe(generateHeader(radix, comment), opAppend(bufferLines(serialize(root), 1200, '')));
 }
 
-function* toIterableIterator<T>(iter: Iterable<T>): IterableIterator<T> {
-    yield* iter;
-}
-
 interface Stack {
     node: TrieNode;
     s: string;
@@ -187,13 +182,16 @@ interface ReduceResults {
 
 type Reducer = (acc: ReduceResults, s: string) => ReduceResults;
 
-export function importTrie(linesX: Iterable<string> | string): TrieRoot {
-    linesX = typeof linesX === 'string' ? linesX.split(/^/m) : linesX;
+export function importTrie(linesX: string[] | Iterable<string> | string): TrieRoot {
+    const timer = getGlobalPerfTimer();
+    const timerStart = timer.start('importTrieV3');
+    const dataLines: string[] =
+        typeof linesX === 'string' ? linesX.split('\n') : Array.isArray(linesX) ? linesX : [...linesX];
+
     const root: TrieRoot = trieNodeToRoot({}, {});
 
     let radix = 16;
     const comment = /^\s*#/;
-    const iter = toIterableIterator(linesX);
 
     function parseHeaderRows(headerRows: string[]) {
         const header = headerRows.slice(0, 2).join('\n');
@@ -203,15 +201,20 @@ export function importTrie(linesX: Iterable<string> | string): TrieRoot {
         radix = Number.parseInt(header.replace(headerReg, '$1'), 10);
     }
 
-    function readHeader(iter: Iterator<string>) {
-        const headerRows: string[] = [];
-        // eslint-disable-next-line no-constant-condition
-        while (true) {
-            const next = iter.next();
-            if (next.done) {
-                break;
+    function findStartOfData(data: string[]): number {
+        for (let i = 0; i < data.length; ++i) {
+            const line = data[i];
+            if (line.includes(DATA)) {
+                return i;
             }
-            const line = next.value.trim().replace(/\r|\n/g, '');
+        }
+        return -1;
+    }
+
+    function readHeader(data: string[]) {
+        const headerRows: string[] = [];
+        for (const hLine of data) {
+            const line = hLine.trim();
             if (!line || comment.test(line)) {
                 continue;
             }
@@ -223,22 +226,34 @@ export function importTrie(linesX: Iterable<string> | string): TrieRoot {
         parseHeaderRows(headerRows);
     }
 
-    readHeader(iter);
+    const startOfData = findStartOfData(dataLines);
+    if (startOfData < 0) {
+        throw new Error('Unknown file format');
+    }
 
-    const n = reduce(
-        pipe(
-            iter,
-            opConcatMap((a) => a.split(''))
-        ),
-        parseStream(radix),
-        {
-            nodes: [root],
-            root,
-            stack: [{ node: root, s: '' }],
-            parser: undefined,
+    readHeader(dataLines.slice(0, startOfData));
+
+    let node: ReduceResults = {
+        nodes: [root],
+        root,
+        stack: [{ node: root, s: '' }],
+        parser: undefined,
+    };
+
+    const parser = parseStream(radix);
+
+    const timerParse = timer.start('importTrieV3.parse');
+
+    for (let i = startOfData + 1; i < dataLines.length; ++i) {
+        const line = dataLines[i];
+        for (let j = 0; j < line.length; ++j) {
+            node = parser(node, line[j]);
         }
-    );
-    return n.root;
+    }
+    timerParse();
+    timerStart();
+
+    return node.root;
 }
 
 function parseStream(radix: number): Reducer {
@@ -262,7 +277,8 @@ function parseStream(radix: number): Reducer {
 
         const { nodes } = acc;
         nodes.pop();
-        return { ...acc, nodes, parser };
+        acc.parser = parser;
+        return acc;
     }
 
     function parseEscapeCharacter(acc: ReduceResults, _: string): ReduceResults {
@@ -270,20 +286,23 @@ function parseStream(radix: number): Reducer {
         const parser = function (acc: ReduceResults, s: string): ReduceResults {
             if (prev) {
                 s = characterMap.get(prev + s) || s;
-                return parseCharacter({ ...acc, parser: undefined }, s);
+                acc.parser = undefined;
+                return parseCharacter(acc, s);
             }
             if (s === ESCAPE) {
                 prev = s;
                 return acc;
             }
-            return parseCharacter({ ...acc, parser: undefined }, s);
+            acc.parser = undefined;
+            return parseCharacter(acc, s);
         };
-        return { ...acc, parser };
+        acc.parser = parser;
+        return acc;
     }
 
     function parseCharacter(acc: ReduceResults, s: string): ReduceResults {
         const parser = undefined;
-        const { root, nodes, stack } = acc;
+        const { nodes, stack } = acc;
         const top = stack[stack.length - 1];
         const node = top.node;
         const c = node.c ?? Object.create(null);
@@ -292,12 +311,13 @@ function parseStream(radix: number): Reducer {
         c[s] = n;
         stack.push({ node: n, s });
         nodes.push(n);
-        return { root, nodes, stack, parser };
+        acc.parser = parser;
+        return acc;
     }
 
     function parseEOW(acc: ReduceResults, _: string): ReduceResults {
         const parser = parseBack;
-        const { root, nodes, stack } = acc;
+        const { nodes, stack } = acc;
         const top = stack[stack.length - 1];
         const node = top.node;
         node.f = FLAG_WORD;
@@ -308,20 +328,23 @@ function parseStream(radix: number): Reducer {
             nodes.pop();
         }
         stack.pop();
-        return { root, nodes, stack, parser };
+        acc.parser = parser;
+        return acc;
     }
 
-    const charactersBack = new Set((BACK + '23456789').split(''));
+    const charactersBack = stringToCharSet(BACK + '23456789');
     function parseBack(acc: ReduceResults, s: string): ReduceResults {
-        if (!charactersBack.has(s)) {
-            return parserMain({ ...acc, parser: undefined }, s);
+        if (!(s in charactersBack)) {
+            acc.parser = undefined;
+            return parserMain(acc, s);
         }
         let n = s === BACK ? 1 : parseInt(s, 10) - 1;
         const { stack } = acc;
         while (n-- > 0) {
             stack.pop();
         }
-        return { ...acc, parser: parseBack };
+        acc.parser = parseBack;
+        return acc;
     }
 
     function parseIgnore(acc: ReduceResults, _: string): ReduceResults {
