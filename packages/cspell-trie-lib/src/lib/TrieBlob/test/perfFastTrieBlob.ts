@@ -5,7 +5,7 @@ import type { TrieNode } from '../../../index.js';
 import { createTrieRoot, insert, Trie } from '../../../index.js';
 import { readTrie } from '../../../test/dictionaries.test.helper.js';
 import { getGlobalPerfTimer } from '../../utils/timer.js';
-import { walkerWords, walkerWordsITrie } from '../../walker/walker.js';
+import { walkerWordsITrie } from '../../walker/walker.js';
 import { createTrieBlobFromTrieRoot } from '../createTrieBlob.js';
 import { FastTrieBlob } from '../FastTrieBlob.js';
 import { TrieBlob } from '../TrieBlob.js';
