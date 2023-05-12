@@ -4,8 +4,8 @@ import { createTriFromList, orderTrie } from '../TrieNode/trie-util.js';
 import { walker } from './walker.js';
 import type { WalkerIterator, YieldResult } from './walkerTypes.js';
 
-describe('Validate Util Functions', () => {
-    test('Tests Walker', () => {
+describe('walker', () => {
+    test('walker', () => {
         const root = createTriFromList(sampleWords);
         orderTrie(root);
         const i = walker(root);

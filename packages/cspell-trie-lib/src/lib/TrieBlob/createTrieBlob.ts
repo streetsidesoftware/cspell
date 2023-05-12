@@ -61,5 +61,5 @@ export function createTrieBlobFromTrieRoot(root: TrieRoot): TrieBlob {
 
     walk(root);
 
-    return new TrieBlob(Uint32Array.from(nodes), charIndex);
+    return new TrieBlob(Uint32Array.from(nodes), charIndex, root);
 }

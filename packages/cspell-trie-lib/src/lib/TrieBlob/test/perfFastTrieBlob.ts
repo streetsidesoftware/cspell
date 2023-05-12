@@ -5,6 +5,7 @@ import type { TrieNode } from '../../../index.js';
 import { createTrieRoot, insert, Trie } from '../../../index.js';
 import { readTrie } from '../../../test/dictionaries.test.helper.js';
 import { getGlobalPerfTimer } from '../../utils/timer.js';
+import { walkerWordsITrie } from '../../walker/walker.js';
 import { createTrieBlobFromTrieRoot } from '../createTrieBlob.js';
 import { FastTrieBlob } from '../FastTrieBlob.js';
 import { TrieBlob } from '../TrieBlob.js';
@@ -52,10 +53,19 @@ export async function measureFastBlob(which: string | undefined, method: string 
                 timer.start('blob.words');
                 [...trieBlob.words()];
                 timer.stop('blob.words');
+
+                timer.start('blob.walkerWordsITrie');
+                [...walkerWordsITrie(TrieBlob.toITrieNodeRoot(trieBlob))];
+                timer.stop('blob.walkerWordsITrie');
                 break;
             case 'dump':
+                timer.start('blob.write.TrieBlob.en.json');
                 writeFileSync('./TrieBlob.en.json', JSON.stringify(trieBlob, null, 2), 'utf8');
+                timer.stop('blob.write.TrieBlob.en.json');
+
+                timer.start('blob.write.TrieBlob.en.trieb');
                 writeFileSync('./TrieBlob.en.trieb', trieBlob.encodeBin());
+                timer.stop('blob.write.TrieBlob.en.trieb');
                 break;
             case 'decode':
                 {
@@ -80,9 +90,9 @@ export async function measureFastBlob(which: string | undefined, method: string 
                 timer.measureFn('fast.FastTrieBlob.has \t\t', () => hasWords(words, (word) => ft.has(word)));
                 break;
             case 'words':
-                timer.start('blob.words');
+                timer.start('fast.words');
                 [...ft.words()];
-                timer.stop('blob.words');
+                timer.stop('fast.words');
                 break;
         }
     }
@@ -99,6 +109,11 @@ export async function measureFastBlob(which: string | undefined, method: string 
             case 'has':
                 timer.measureFn('trie.Trie.has \t\t\t', () => hasWords(words, (word) => trie.hasWord(word, true)));
                 timer.measureFn('trie.Trie.has \t\t\t', () => hasWords(words, (word) => trie.hasWord(word, true)));
+                break;
+            case 'words':
+                timer.start('trie.words');
+                [...trie.words()];
+                timer.stop('trie.words');
                 break;
         }
     }

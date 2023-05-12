@@ -1,4 +1,5 @@
-import type { TrieNode, TrieRoot } from '../TrieNode/TrieNode.js';
+import type { PartialTrieOptions, TrieNode, TrieOptions, TrieRoot } from '../TrieNode/TrieNode.js';
+import { mergeOptionalWithDefaults } from '../utils/mergeOptionalWithDefaults.js';
 import { resolveMap } from './resolveMap.js';
 import { TrieBlob } from './TrieBlob.js';
 
@@ -13,6 +14,12 @@ export class FastTrieBlob {
     private charIndex: string[] = [''];
     private nodes: FastTrieBlobNode[] = [[0], [NodeMaskEOW]];
     private _readonly = false;
+
+    readonly options: Readonly<TrieOptions>;
+
+    constructor(options?: PartialTrieOptions) {
+        this.options = mergeOptionalWithDefaults(options);
+    }
 
     private lookUpCharIndex(char: string): number {
         return this.charToIndexMap[char] ?? -1;
@@ -175,7 +182,7 @@ export class FastTrieBlob {
             }
         }
 
-        return new TrieBlob(binNodes, this.charIndex);
+        return new TrieBlob(binNodes, this.charIndex, this.options);
     }
 
     isReadonly(): boolean {
