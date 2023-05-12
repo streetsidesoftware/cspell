@@ -1,6 +1,7 @@
 import { describe, expect, test } from 'vitest';
 
 import { createTriFromList } from '../TrieNode/trie-util.js';
+import { walkerWordsITrie } from '../walker/walker.js';
 import { createTrieBlob, createTrieBlobFromTrieRoot } from './createTrieBlob.js';
 import { TrieBlob } from './TrieBlob.js';
 
@@ -36,5 +37,12 @@ describe('TrieBlob', () => {
         const root = createTriFromList(sampleWords);
         const trieBlob = createTrieBlobFromTrieRoot(root);
         expect([...trieBlob.words()]).toEqual(sampleWords);
+    });
+
+    test('toITrieNodeRoot', () => {
+        const root = createTriFromList(sampleWords);
+        const trieBlob = createTrieBlobFromTrieRoot(root);
+        const iter = walkerWordsITrie(TrieBlob.toITrieNodeRoot(trieBlob));
+        expect([...iter]).toEqual(sampleWords);
     });
 });

@@ -30,7 +30,7 @@ describe('Validate Trie Class', () => {
 
     test('Tests complete', () => {
         const trie = Trie.create(sampleWords);
-        expect([...trie.completeWord('lift')]).toEqual(sampleWords.filter((w) => w.slice(0, 4) === 'lift').sort());
+        expect([...trie.completeWord('lift')]).toEqual(sampleWords.filter((w) => w.startsWith('lift')).sort());
         expect([...trie.completeWord('life')]).toEqual([]);
         expect([...trie.completeWord('lifting')]).toEqual(['lifting']);
     });

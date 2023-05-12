@@ -1,3 +1,8 @@
+import { defaultTrieOptions } from '../constants.js';
+import type { ITrieNode, ITrieNodeRoot } from '../TrieNode/ITrieNode.js';
+import type { PartialTrieOptions, TrieOptions } from '../TrieNode/TrieNode.js';
+import { mergeOptionalWithDefaults } from '../utils/mergeOptionalWithDefaults.js';
+
 const NodeHeaderNumChildrenBits = 8;
 const NodeHeaderNumChildrenShift = 0;
 
@@ -29,8 +34,11 @@ const version = '00.01.00';
 const endianSig = 0x04030201;
 
 export class TrieBlob {
-    private charToIndexMap: Record<string, number>;
-    constructor(private nodes: Uint32Array, private charIndex: string[]) {
+    protected charToIndexMap: Record<string, number>;
+    readonly options: Readonly<TrieOptions>;
+
+    constructor(protected nodes: Uint32Array, protected charIndex: string[], options: PartialTrieOptions) {
+        this.options = mergeOptionalWithDefaults(options);
         this.charToIndexMap = Object.create(null);
         for (let i = 0; i < charIndex.length; ++i) {
             const char = charIndex[i];
@@ -106,7 +114,8 @@ export class TrieBlob {
     toJSON() {
         return {
             charIndex: this.charIndex,
-            nodes: splitString(Buffer.from(this.nodes.buffer).toString('base64')),
+            options: this.options,
+            nodes: splitString(Buffer.from(this.nodes.buffer, 128).toString('base64')),
         };
     }
 
@@ -153,7 +162,16 @@ export class TrieBlob {
             .toString('utf8')
             .split('\n');
         const nodes = new Uint32Array(blob.buffer).subarray(offsetNodes / 4, offsetNodes / 4 + lenNodes);
-        return new TrieBlob(nodes, charIndex);
+        return new TrieBlob(nodes, charIndex, defaultTrieOptions);
+    }
+
+    static toITrieNodeRoot(trie: TrieBlob): ITrieNodeRoot {
+        const trieData: TrieBlobInternals = {
+            nodes: trie.nodes,
+            charIndex: trie.charIndex,
+            charToIndexMap: trie.charToIndexMap,
+        };
+        return new TrieBlobIRoot(trieData, 0, trie.options);
     }
 
     static NodeMaskEOW = 0x00000100;
@@ -209,3 +227,80 @@ function splitString(s: string, len = 64): string[] {
 //     }
 //     console.log(values.join(' '));
 // }
+
+interface TrieBlobInternals {
+    readonly nodes: Uint32Array;
+    readonly charIndex: string[];
+    readonly charToIndexMap: Readonly<Record<string, number>>;
+}
+
+const EmptyKeys: readonly string[] = Object.freeze([]);
+
+class TrieBlobINode implements ITrieNode {
+    readonly size: number;
+    readonly node: number;
+    readonly eow: boolean;
+    keys: string[] | undefined;
+    charToIdx: Record<string, number> | undefined;
+
+    constructor(readonly trie: TrieBlobInternals, readonly nodeIdx: number) {
+        const node = trie.nodes[nodeIdx];
+        this.node = node;
+        this.eow = !!(node & TrieBlob.NodeMaskEOW);
+        this.size = node & TrieBlob.NodeMaskNumChildren;
+    }
+
+    /** get keys to children */
+    getKeys(): readonly string[] {
+        if (this.keys) return this.keys;
+        if (!this.size) return EmptyKeys;
+        const NodeMaskChildCharIndex = TrieBlob.NodeMaskChildCharIndex;
+        const charIndex = this.trie.charIndex;
+        const keys = Array<string>(this.size);
+        const offset = this.nodeIdx + 1;
+        const len = this.size;
+        for (let i = 0; i < len; ++i) {
+            const entry = this.trie.nodes[i + offset];
+            const charIdx = entry & NodeMaskChildCharIndex;
+            keys[i] = charIndex[charIdx];
+        }
+        this.keys = keys;
+        return keys;
+    }
+
+    /** get child ITrieNode */
+    get(char: string): ITrieNode | undefined {
+        const idx = this.getCharToIdxMap()[char];
+        if (idx === undefined) return undefined;
+        return this.child(idx);
+    }
+
+    has(char: string): boolean {
+        const idx = this.getCharToIdxMap()[char];
+        return idx !== undefined;
+    }
+
+    child(keyIdx: number): ITrieNode | undefined {
+        const n = this.trie.nodes[this.nodeIdx + keyIdx + 1];
+        const nodeIdx = n >>> TrieBlob.NodeChildRefShift;
+        return new TrieBlobINode(this.trie, nodeIdx);
+    }
+
+    getCharToIdxMap(): Record<string, number> {
+        const m = this.charToIdx;
+        if (m) return m;
+        const map: Record<string, number> = Object.create(null);
+        const keys = this.getKeys();
+        for (let i = 0; i < keys.length; ++i) {
+            map[keys[i]] = i;
+        }
+        this.charToIdx = map;
+        return map;
+    }
+}
+
+class TrieBlobIRoot extends TrieBlobINode implements ITrieNodeRoot {
+    constructor(trie: TrieBlobInternals, nodeIdx: number, readonly options: Readonly<TrieOptions>) {
+        super(trie, nodeIdx);
+    }
+}
