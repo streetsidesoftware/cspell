@@ -1,7 +1,7 @@
 import { consolidate } from './consolidate.js';
 import type { PartialTrieOptions, TrieOptions } from './trie.js';
 import { Trie } from './trie.js';
-import { createTrieRoot, createTriFromList, trieNodeToRoot } from './TrieNode/trie-util.js';
+import { createTrieFromList, createTrieRoot, trieNodeToRoot } from './TrieNode/trie-util.js';
 import type { TrieNode, TrieRoot } from './TrieNode/TrieNode.js';
 import { mergeOptionalWithDefaults } from './utils/mergeOptionalWithDefaults.js';
 import { SecondChanceCache } from './utils/secondChanceCache.js';
@@ -22,7 +22,7 @@ export function buildTrie(words: Iterable<string>, trieOptions?: PartialTrieOpti
  * @param trieOptions options for the Trie
  */
 export function buildTrieFast(words: Iterable<string>, trieOptions?: PartialTrieOptions): Trie {
-    const root = createTriFromList(words, trieOptions);
+    const root = createTrieFromList(words, trieOptions);
     return new Trie(root, undefined);
 }
 

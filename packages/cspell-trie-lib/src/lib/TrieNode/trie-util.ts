@@ -1,7 +1,10 @@
+import type { ITrieNodeRoot } from '../ITrieNode/ITrieNode.js';
+import type { PartialTrieOptions } from '../ITrieNode/TrieOptions.js';
 import { mergeOptionalWithDefaults } from '../utils/mergeOptionalWithDefaults.js';
 import { walker, walkerWords } from '../walker/walker.js';
 import type { YieldResult } from '../walker/walkerTypes.js';
-import type { PartialTrieOptions, TrieNode, TrieRoot } from './TrieNode.js';
+import { trieRootToITrieRoot } from './trie.js';
+import type { TrieNode, TrieRoot } from './TrieNode.js';
 import { FLAG_WORD } from './TrieNode.js';
 
 export function insert(text: string, root: TrieNode = {}): TrieNode {
@@ -58,7 +61,7 @@ export function createTrieRoot(options: PartialTrieOptions): TrieRoot {
     };
 }
 
-export function createTriFromList(words: Iterable<string>, options?: PartialTrieOptions): TrieRoot {
+export function createTrieFromList(words: Iterable<string>, options?: PartialTrieOptions): TrieRoot {
     const root = createTrieRoot(options);
     for (const word of words) {
         if (word.length) {
@@ -66,6 +69,10 @@ export function createTriFromList(words: Iterable<string>, options?: PartialTrie
         }
     }
     return root;
+}
+
+export function createITrieFromList(words: Iterable<string>, options?: PartialTrieOptions): ITrieNodeRoot {
+    return trieRootToITrieRoot(createTrieFromList(words, options));
 }
 
 export function has(node: TrieNode, word: string): boolean {

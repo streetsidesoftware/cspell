@@ -1,4 +1,4 @@
-import type { TrieOptions } from './TrieNode.js';
+import type { TrieOptions } from './TrieOptions.js';
 
 export interface ITrieNode {
     /** flag End of Word */
@@ -6,13 +6,17 @@ export interface ITrieNode {
     /** number of children */
     readonly size: number;
     /** get keys to children */
-    getKeys(): readonly string[];
+    keys(): readonly string[];
+    /** get keys to children */
+    values(): readonly ITrieNode[];
     /** get child ITrieNode */
     get(char: string): ITrieNode | undefined;
     /** get a child by the key index */
-    child(idx: number): ITrieNode | undefined;
+    child(idx: number): ITrieNode;
     /** has child */
     has(char: string): boolean;
+    /** `true` iff this node has children */
+    hasChildren(): boolean;
 }
 
 export interface ITrieNodeRoot extends ITrieNode {

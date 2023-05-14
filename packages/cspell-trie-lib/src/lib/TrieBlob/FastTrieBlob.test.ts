@@ -1,6 +1,6 @@
 import { describe, expect, test } from 'vitest';
 
-import { createTriFromList } from '../TrieNode/trie-util.js';
+import { createTrieFromList } from '../TrieNode/trie-util.js';
 import { FastTrieBlob } from './FastTrieBlob.js';
 
 describe('FastTrieBlob', () => {
@@ -18,7 +18,7 @@ describe('FastTrieBlob', () => {
     });
 
     test('createTriFromList', () => {
-        const root = createTriFromList(words);
+        const root = createTrieFromList(words);
         const ft = FastTrieBlob.fromTrieRoot(root);
         expect(ft.has('walk')).toBe(true);
         expect(words.findIndex((word) => !ft.has(word))).toBe(-1);

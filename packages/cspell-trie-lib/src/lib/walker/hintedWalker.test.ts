@@ -1,7 +1,7 @@
 import { describe, expect, test } from 'vitest';
 
 import { parseLinesToDictionary } from '../SimpleDictionaryParser.js';
-import { createTriFromList, orderTrie } from '../TrieNode/trie-util.js';
+import { createTrieFromList, orderTrie } from '../TrieNode/trie-util.js';
 import type { HintedWalkerIterator } from './hintedWalker.js';
 import { hintedWalker } from './hintedWalker.js';
 import type { YieldResult } from './walkerTypes.js';
@@ -9,7 +9,7 @@ import { CompoundWordsMethod } from './walkerTypes.js';
 
 describe('Validate Util Functions', () => {
     test('Hinted Walker', () => {
-        const root = createTriFromList(sampleWords);
+        const root = createTrieFromList(sampleWords);
         orderTrie(root);
         // cspell:ignore joty
         // prefer letters j, o, t, y before the others.
@@ -23,7 +23,7 @@ describe('Validate Util Functions', () => {
         ${'joty'}   | ${s('joy jowl talk lift walk')}
         ${'talked'} | ${s('talk lift jowl joy walk')}
     `('Hinted Walker with strange word list: "$word"', ({ word, expected }) => {
-        const root = createTriFromList([...sampleWords, 'joy++', 'talk++']);
+        const root = createTrieFromList([...sampleWords, 'joy++', 'talk++']);
         orderTrie(root);
         // cspell:ignore joty
         // prefer letters j, o, t, y before the others.

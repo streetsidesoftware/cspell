@@ -1,4 +1,5 @@
-import type { PartialTrieOptions, TrieNode, TrieOptions, TrieRoot } from '../TrieNode/TrieNode.js';
+import type { PartialTrieOptions, TrieOptions } from '../ITrieNode/TrieOptions.js';
+import type { TrieNode, TrieRoot } from '../TrieNode/TrieNode.js';
 import { mergeOptionalWithDefaults } from '../utils/mergeOptionalWithDefaults.js';
 import { resolveMap } from './resolveMap.js';
 import { TrieBlob } from './TrieBlob.js';

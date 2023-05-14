@@ -1,4 +1,4 @@
-import type { TrieNode, TrieRoot } from '../TrieNode/TrieNode.js';
+import type { ITrieNode, ITrieNodeRoot } from '../ITrieNode/ITrieNode.js';
 import { FastTrieBlob } from './FastTrieBlob.js';
 import { resolveMap } from './resolveMap.js';
 import { TrieBlob } from './TrieBlob.js';
@@ -8,17 +8,17 @@ export function createTrieBlob(words: string[]): TrieBlob {
     return ft.toTrieBlob();
 }
 
-export function createTrieBlobFromTrieRoot(root: TrieRoot): TrieBlob {
+export function createTrieBlobFromTrieRoot(root: ITrieNodeRoot): TrieBlob {
     const NodeMaskEOW = TrieBlob.NodeMaskEOW;
     const NodeChildRefShift = TrieBlob.NodeChildRefShift;
     const NodeMaskNumChildren = TrieBlob.NodeMaskNumChildren;
     const nodes: number[] = [];
     const charIndex: string[] = [''];
     const charMap: Record<string, number> = Object.create(null);
-    const known = new Map<TrieNode, number>();
+    const known = new Map<ITrieNode, number>();
 
     known.set(root, appendNode(root));
-    const IdxEOW = appendNode({ f: 1 });
+    const IdxEOW = nodes.push(NodeMaskEOW) - 1;
 
     function getCharIndex(char: string): number {
         const idx = charMap[char];
@@ -29,27 +29,27 @@ export function createTrieBlobFromTrieRoot(root: TrieRoot): TrieBlob {
         return newIdx;
     }
 
-    function appendNode(n: TrieNode): number {
-        const idx = nodes.push(n.f ? NodeMaskEOW : 0) - 1;
-        if (n.c) {
-            const keys = Object.keys(n.c).map((key) => getCharIndex(key));
+    function appendNode(n: ITrieNode): number {
+        const idx = nodes.push(n.eow ? NodeMaskEOW : 0) - 1;
+        if (n.hasChildren()) {
+            const keys = n.keys().map((key) => getCharIndex(key));
             nodes[idx] = nodes[idx] | (keys.length & NodeMaskNumChildren);
             nodes.push(...keys);
         }
         return idx;
     }
 
-    function resolveNode(n: TrieNode): number {
-        if (n.f && !n.c) return IdxEOW;
+    function resolveNode(n: ITrieNode): number {
+        if (n.eow && !n.hasChildren()) return IdxEOW;
         return appendNode(n);
     }
 
-    function walk(n: TrieNode): number {
+    function walk(n: ITrieNode): number {
         const found = known.get(n);
         if (found) return found;
         const nodeIdx = resolveMap(known, n, resolveNode);
-        if (!n.c) return nodeIdx;
-        const children = Object.values(n.c);
+        if (!n.hasChildren()) return nodeIdx;
+        const children = n.values();
         for (let p = 0; p < children.length; ++p) {
             const childNode = children[p];
             const childIdx = walk(childNode);
@@ -61,5 +61,5 @@ export function createTrieBlobFromTrieRoot(root: TrieRoot): TrieBlob {
 
     walk(root);
 
-    return new TrieBlob(Uint32Array.from(nodes), charIndex, root);
+    return new TrieBlob(Uint32Array.from(nodes), charIndex, root.options);
 }
