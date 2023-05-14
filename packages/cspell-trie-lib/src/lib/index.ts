@@ -30,7 +30,7 @@ export {
     countNodes,
     countWords,
     createTrieRoot,
-    createTriFromList,
+    createTrieFromList as createTriFromList,
     findNode,
     has,
     insert,

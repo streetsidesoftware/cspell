@@ -1,6 +1,6 @@
 import { defaultTrieOptions } from '../constants.js';
-import type { ITrieNode, ITrieNodeRoot } from '../TrieNode/ITrieNode.js';
-import type { PartialTrieOptions, TrieOptions } from '../TrieNode/TrieNode.js';
+import type { ITrieNode, ITrieNodeRoot } from '../ITrieNode/ITrieNode.js';
+import type { PartialTrieOptions, TrieOptions } from '../ITrieNode/TrieOptions.js';
 import { mergeOptionalWithDefaults } from '../utils/mergeOptionalWithDefaults.js';
 
 const NodeHeaderNumChildrenBits = 8;
@@ -166,11 +166,7 @@ export class TrieBlob {
     }
 
     static toITrieNodeRoot(trie: TrieBlob): ITrieNodeRoot {
-        const trieData: TrieBlobInternals = {
-            nodes: trie.nodes,
-            charIndex: trie.charIndex,
-            charToIndexMap: trie.charToIndexMap,
-        };
+        const trieData = new TrieBlobInternals(trie.nodes, trie.charIndex, trie.charToIndexMap);
         return new TrieBlobIRoot(trieData, 0, trie.options);
     }
 
@@ -228,19 +224,22 @@ function splitString(s: string, len = 64): string[] {
 //     console.log(values.join(' '));
 // }
 
-interface TrieBlobInternals {
-    readonly nodes: Uint32Array;
-    readonly charIndex: string[];
-    readonly charToIndexMap: Readonly<Record<string, number>>;
+class TrieBlobInternals {
+    constructor(
+        readonly nodes: Uint32Array,
+        readonly charIndex: string[],
+        readonly charToIndexMap: Readonly<Record<string, number>>
+    ) {}
 }
 
 const EmptyKeys: readonly string[] = Object.freeze([]);
+const EmptyNodes: readonly ITrieNode[] = Object.freeze([]);
 
 class TrieBlobINode implements ITrieNode {
     readonly size: number;
     readonly node: number;
     readonly eow: boolean;
-    keys: string[] | undefined;
+    private _keys: string[] | undefined;
     charToIdx: Record<string, number> | undefined;
 
     constructor(readonly trie: TrieBlobInternals, readonly nodeIdx: number) {
@@ -251,8 +250,8 @@ class TrieBlobINode implements ITrieNode {
     }
 
     /** get keys to children */
-    getKeys(): readonly string[] {
-        if (this.keys) return this.keys;
+    keys(): readonly string[] {
+        if (this._keys) return this._keys;
         if (!this.size) return EmptyKeys;
         const NodeMaskChildCharIndex = TrieBlob.NodeMaskChildCharIndex;
         const charIndex = this.trie.charIndex;
@@ -264,8 +263,12 @@ class TrieBlobINode implements ITrieNode {
             const charIdx = entry & NodeMaskChildCharIndex;
             keys[i] = charIndex[charIdx];
         }
-        this.keys = keys;
+        this._keys = keys;
         return keys;
+    }
+
+    values(): readonly ITrieNode[] {
+        return EmptyNodes;
     }
 
     /** get child ITrieNode */
@@ -280,7 +283,11 @@ class TrieBlobINode implements ITrieNode {
         return idx !== undefined;
     }
 
-    child(keyIdx: number): ITrieNode | undefined {
+    hasChildren(): boolean {
+        return this.size > 0;
+    }
+
+    child(keyIdx: number): ITrieNode {
         const n = this.trie.nodes[this.nodeIdx + keyIdx + 1];
         const nodeIdx = n >>> TrieBlob.NodeChildRefShift;
         return new TrieBlobINode(this.trie, nodeIdx);
@@ -290,7 +297,7 @@ class TrieBlobINode implements ITrieNode {
         const m = this.charToIdx;
         if (m) return m;
         const map: Record<string, number> = Object.create(null);
-        const keys = this.getKeys();
+        const keys = this.keys();
         for (let i = 0; i < keys.length; ++i) {
             map[keys[i]] = i;
         }

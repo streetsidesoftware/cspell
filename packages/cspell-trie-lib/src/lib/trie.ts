@@ -1,6 +1,7 @@
 import { opAppend, opFilter, opMap, pipe } from '@cspell/cspell-pipe/sync';
 
 import { CASE_INSENSITIVE_PREFIX, COMPOUND_FIX, FORBID_PREFIX, OPTIONAL_COMPOUND_FIX } from './constants.js';
+import type { PartialTrieOptions, TrieOptions } from './ITrieNode/TrieOptions.js';
 import { genSuggestions, suggest } from './suggest.js';
 import type { SuggestionCollector, SuggestionResult } from './suggestCollector.js';
 import type { SuggestionOptions } from './suggestions/genSuggestionsOptions.js';
@@ -8,13 +9,13 @@ import type { FindFullResult, FindOptions, PartialFindOptions } from './TrieNode
 import { createFindOptions, findLegacyCompound, findWord, findWordNode, isForbiddenWord } from './TrieNode/find.js';
 import {
     countWords,
-    createTriFromList,
+    createTrieFromList,
     insert,
     isWordTerminationNode,
     iteratorTrieWords,
     orderTrie,
 } from './TrieNode/trie-util.js';
-import type { PartialTrieOptions, TrieNode, TrieOptions, TrieRoot } from './TrieNode/TrieNode.js';
+import type { TrieNode, TrieRoot } from './TrieNode/TrieNode.js';
 import { clean } from './utils/clean.js';
 import { mergeOptionalWithDefaults } from './utils/mergeOptionalWithDefaults.js';
 import { replaceAllFactory } from './utils/util.js';
@@ -28,7 +29,7 @@ export {
     FORBID_PREFIX,
     OPTIONAL_COMPOUND_FIX,
 } from './constants.js';
-export { PartialTrieOptions, TrieOptions } from './TrieNode/TrieNode.js';
+export { PartialTrieOptions, TrieOptions } from './ITrieNode/TrieOptions.js';
 
 /** @deprecated */
 export const COMPOUND = COMPOUND_FIX;
@@ -238,7 +239,7 @@ export class Trie {
     }
 
     static create(words: Iterable<string> | IterableIterator<string>, options?: PartialTrieOptions): Trie {
-        const root = createTriFromList(words, options);
+        const root = createTrieFromList(words, options);
         orderTrie(root);
         return new Trie(root, undefined);
     }

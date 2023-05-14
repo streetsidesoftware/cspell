@@ -1,13 +1,15 @@
 import { describe, expect, test } from 'vitest';
 
-import { createTrieFromList, orderTrie } from '../TrieNode/trie-util.js';
+import { trieRootToITrieRoot } from '../TrieNode/trie.js';
+import { createTrieFromList } from '../TrieNode/trie-util.js';
 import { walker } from './walker.js';
 import type { WalkerIterator, YieldResult } from './walkerTypes.js';
 
 describe('walker', () => {
+    const trieNode = createTrieFromList(sampleWords.sort());
+    const root = trieRootToITrieRoot(trieNode);
+
     test('walker', () => {
-        const root = createTrieFromList(sampleWords);
-        orderTrie(root);
         const i = walker(root);
         const result = walkerToArray(i, 4);
         expect(result).toEqual(sampleWords.filter((a) => a.length <= 4).sort());
@@ -21,7 +23,7 @@ function walkerToArray(w: WalkerIterator, depth: number): string[] {
     const result: string[] = [];
     while (!(ir = w.next(goDeeper)).done) {
         const { text, node, depth } = ir.value;
-        if (node.f) {
+        if (node.eow) {
             result.push(text);
         }
         goDeeper = depth < maxDepth;

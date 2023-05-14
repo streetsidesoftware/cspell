@@ -4,6 +4,7 @@ import { readFileSync, writeFileSync } from 'fs';
 import type { TrieNode } from '../../../index.js';
 import { createTrieRoot, insert, Trie } from '../../../index.js';
 import { readTrie } from '../../../test/dictionaries.test.helper.js';
+import { trieRootToITrieRoot } from '../../TrieNode/trie.js';
 import { getGlobalPerfTimer } from '../../utils/timer.js';
 import { walkerWordsITrie } from '../../walker/walker.js';
 import { createTrieBlobFromTrieRoot } from '../createTrieBlob.js';
@@ -41,7 +42,7 @@ export async function measureFastBlob(which: string | undefined, method: string 
             timer.measureFn('blob.FastTrieBlob.toTrieBlob \t', () => ft.toTrieBlob());
         }
         const trieBlob = timer.measureFn('blob.createTrieBlobFromTrieRoot\t', () =>
-            createTrieBlobFromTrieRoot(trie.root)
+            createTrieBlobFromTrieRoot(trieRootToITrieRoot(trie.root))
         );
 
         switch (method) {

@@ -1,4 +1,4 @@
-import type { TrieOptions } from './TrieNode/TrieNode.js';
+import type { TrieOptions } from './ITrieNode/TrieOptions.js';
 
 export const COMPOUND_FIX = '+';
 export const OPTIONAL_COMPOUND_FIX = '*';
