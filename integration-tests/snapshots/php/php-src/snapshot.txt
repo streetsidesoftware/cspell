@@ -3,7 +3,7 @@ Repository: php/php-src
 Url: "https://github.com/php/php-src.git"
 Args: ["--config=../../../../config/repositories/php/php-src/cspell.json","**/*.{md,c,h,php}"]
 Lines:
- CSpell: Files checked: 1849, Issues found: 44684 in 1315 files
+ CSpell: Files checked: 1849, Issues found: 44697 in 1315 files
  exit code: 1
 ./CODING_STANDARDS.md:105:23    - Unknown word (intvl)        -- // Could be 'date_intvl_create_from_date_str
 ./CODING_STANDARDS.md:114:8     - Unknown word (setclientencoding) -- pg_setclientencoding
@@ -1462,87 +1462,87 @@ Lines:
 ./ext/enchant/enchant.c:747:9     - Unknown word (mislen)         -- size_t mislen, corlen;
 ./ext/enchant/enchant_arginfo.h:163:34    - Unknown word (MYSPELL)    -- LONG_CONSTANT("ENCHANT_MYSPELL", PHP_ENCHANT_MYSPELL
 ./ext/enchant/enchant_arginfo.h:166:28    - Unknown word (LIBENCHANT) -- REGISTER_STRING_CONSTANT("LIBENCHANT_VERSION", PHP_ENCHANT
-./ext/exif/exif.c:1222:14   - Unknown word (Autofocus)       -- { 0x0005, "AutofocusMode"},
-./ext/exif/exif.c:1245:37   - Unknown word (KYOCERA)         -- array tag_table_VND_KYOCERA = {
-./ext/exif/exif.c:1290:58   - Unknown word (OLYMP)           -- OLYMPUS OPTICAL CO.,LTD", "OLYMP\x00\x01\x00", 8,
-./ext/exif/exif.c:1298:40   - Unknown word (KONICA)          -- MINOLTA, "Minolta, KONICA MINOLTA", NULL,
-./ext/exif/exif.c:1299:38   - Unknown word (FOVEON)          -- VND_SIGMA, "SIGMA, FOVEON", "SIGMA\x
-./ext/exif/exif.c:1301:40   - Unknown word (CONTAX)          -- KYOCERA, "KYOCERA, CONTAX", "KYOCERA
-./ext/exif/exif.c:1351:6    - Unknown word (headername)      -- Get headername for tag_num or NULL
-./ext/exif/exif.c:1795:17   - Unknown word (sectionname)     -- /* {{{ exif_get_sectionname
-./ext/exif/exif.c:1806:17   - Unknown word (FPIX)            -- #define SECTION_FPIX 8
-./ext/exif/exif.c:1810:17   - Unknown word (WINXP)           -- #define SECTION_WINXP 12
-./ext/exif/exif.c:1811:17   - Unknown word (MAKERNOTE)       -- #define SECTION_MAKERNOTE 13
-./ext/exif/exif.c:1871:17   - Unknown word (sectionlist)     -- /* {{{ exif_get_sectionlist
-./ext/exif/exif.c:1872:19   - Unknown word (sectionnames)    -- Return list of sectionnames specified by sectionlist
-./ext/exif/exif.c:1900:16   - Unknown word (nexif)           -- stored in a nexif header
-./ext/exif/exif.c:1949:18   - Unknown word (Focalplane)      -- double FocalplaneUnits;
-./ext/exif/exif.c:233:37    - Unknown word (FILEEOF)    -- char *const EXIF_ERROR_FILEEOF = "Unexpected end
-./ext/exif/exif.c:235:37    - Unknown word (THUMBEOF)   -- char *const EXIF_ERROR_THUMBEOF = "Thumbnail goes IFD
-./ext/exif/exif.c:2369:13   - Unknown word (arglist)         -- va_list arglist;
-./ext/exif/exif.c:236:37    - Unknown word (FSREALLOC)  -- char *const EXIF_ERROR_FSREALLOC = "Illegal reallocating
-./ext/exif/exif.c:238:14    - Unknown word (ERRLOG)     -- #define EXIF_ERRLOG_FILEEOF(ImageInfo)
-./ext/exif/exif.c:2457:7    - Unknown word (tmpi)            -- zval tmpi;
-./ext/exif/exif.c:254:17    - Unknown word (URATIONAL)  -- #define TAG_FMT_URATIONAL 5
-./ext/exif/exif.c:259:17    - Unknown word (SRATIONAL)  -- #define TAG_FMT_SRATIONAL 10
-./ext/exif/exif.c:2610:27   - Unknown word (jdmarker)        -- this program.  (See jdmarker.c for a more complete
-./ext/exif/exif.c:2639:57   - Unknown word (datastream)      -- Image (beginning of datastream) */
-./ext/exif/exif.c:2647:35   - Unknown word (JFIFF)           -- 0xE0 /* JPEG: 'JFIFF' AND (additional 'JFXX
-./ext/exif/exif.c:2647:59   - Unknown word (JFXX)            -- JFIFF' AND (additional 'JFXX') */
-./ext/exif/exif.c:265:23    - Unknown word (tagformat)  -- static char *exif_get_tagformat(int format)
-./ext/exif/exif.c:2710:17   - Unknown word (markername)      -- /* {{{ exif_get_markername
-./ext/exif/exif.c:3046:43   - Unknown word (NOBREAK)         -- detect BOM: ZERO WIDTH NOBREAK SPACE (FEFF 16)
-./ext/exif/exif.c:3046:58   - Unknown word (FEFF)            -- WIDTH NOBREAK SPACE (FEFF 16)
-./ext/exif/exif.c:319:17    - Unknown word (SUBFILE)    -- #define TAG_NEW_SUBFILE 0x0
-./ext/exif/exif.c:319:66    - Unknown word (subfile)    -- FE /* New version of subfile tag */
-./ext/exif/exif.c:321:13    - Unknown word (IMAGEWIDTH) -- #define TAG_IMAGEWIDTH 0x
-./ext/exif/exif.c:322:13    - Unknown word (IMAGEHEIGHT) -- #define TAG_IMAGEHEIGHT 0x0
-./ext/exif/exif.c:3261:32   - Unknown word (cbuf)            -- value_ptr, tagname[64], cbuf[32], *outside=NULL;
-./ext/exif/exif.c:3262:39   - Unknown word (fgot)            -- count, offset_val, fpos, fgot;
-./ext/exif/exif.c:326:13    - Unknown word (TRESHHOLDING) -- #define TAG_TRESHHOLDING 0x01
-./ext/exif/exif.c:339:17    - Unknown word (SAMPPLE)      -- #define TAG_MIN_SAMPPLE_VALUE 0x0
+./ext/exif/exif.c:1017:19   - Unknown word (Sheed)           -- { 0x0077, "BurstSheed"},
+./ext/exif/exif.c:1241:14   - Unknown word (Autofocus)       -- { 0x0005, "AutofocusMode"},
+./ext/exif/exif.c:1264:37   - Unknown word (KYOCERA)         -- array tag_table_VND_KYOCERA = {
+./ext/exif/exif.c:1309:58   - Unknown word (OLYMP)           -- OLYMPUS OPTICAL CO.,LTD", "OLYMP\x00\x01\x00", 8,
+./ext/exif/exif.c:1317:40   - Unknown word (KONICA)          -- MINOLTA, "Minolta, KONICA MINOLTA", NULL,
+./ext/exif/exif.c:1318:38   - Unknown word (FOVEON)          -- VND_SIGMA, "SIGMA, FOVEON", "SIGMA\x
+./ext/exif/exif.c:1320:40   - Unknown word (CONTAX)          -- KYOCERA, "KYOCERA, CONTAX", "KYOCERA
+./ext/exif/exif.c:1370:6    - Unknown word (headername)      -- Get headername for tag_num or NULL
+./ext/exif/exif.c:1814:17   - Unknown word (sectionname)     -- /* {{{ exif_get_sectionname
+./ext/exif/exif.c:1825:17   - Unknown word (FPIX)            -- #define SECTION_FPIX 8
+./ext/exif/exif.c:1829:17   - Unknown word (WINXP)           -- #define SECTION_WINXP 12
+./ext/exif/exif.c:1830:17   - Unknown word (MAKERNOTE)       -- #define SECTION_MAKERNOTE 13
+./ext/exif/exif.c:1890:17   - Unknown word (sectionlist)     -- /* {{{ exif_get_sectionlist
+./ext/exif/exif.c:1891:19   - Unknown word (sectionnames)    -- Return list of sectionnames specified by sectionlist
+./ext/exif/exif.c:1919:16   - Unknown word (nexif)           -- stored in a nexif header
+./ext/exif/exif.c:1968:18   - Unknown word (Focalplane)      -- double FocalplaneUnits;
+./ext/exif/exif.c:2388:13   - Unknown word (arglist)         -- va_list arglist;
+./ext/exif/exif.c:2476:7    - Unknown word (tmpi)            -- zval tmpi;
+./ext/exif/exif.c:252:37    - Unknown word (FILEEOF)    -- char *const EXIF_ERROR_FILEEOF = "Unexpected end
+./ext/exif/exif.c:254:37    - Unknown word (THUMBEOF)   -- char *const EXIF_ERROR_THUMBEOF = "Thumbnail goes IFD
+./ext/exif/exif.c:255:37    - Unknown word (FSREALLOC)  -- char *const EXIF_ERROR_FSREALLOC = "Illegal reallocating
+./ext/exif/exif.c:257:14    - Unknown word (ERRLOG)     -- #define EXIF_ERRLOG_FILEEOF(ImageInfo)
+./ext/exif/exif.c:2629:27   - Unknown word (jdmarker)        -- this program.  (See jdmarker.c for a more complete
+./ext/exif/exif.c:2658:57   - Unknown word (datastream)      -- Image (beginning of datastream) */
+./ext/exif/exif.c:2666:35   - Unknown word (JFIFF)           -- 0xE0 /* JPEG: 'JFIFF' AND (additional 'JFXX
+./ext/exif/exif.c:2666:59   - Unknown word (JFXX)            -- JFIFF' AND (additional 'JFXX') */
+./ext/exif/exif.c:2729:17   - Unknown word (markername)      -- /* {{{ exif_get_markername
+./ext/exif/exif.c:273:17    - Unknown word (URATIONAL)  -- #define TAG_FMT_URATIONAL 5
+./ext/exif/exif.c:278:17    - Unknown word (SRATIONAL)  -- #define TAG_FMT_SRATIONAL 10
+./ext/exif/exif.c:284:23    - Unknown word (tagformat)  -- static char *exif_get_tagformat(int format)
+./ext/exif/exif.c:3065:43   - Unknown word (NOBREAK)         -- detect BOM: ZERO WIDTH NOBREAK SPACE (FEFF 16)
+./ext/exif/exif.c:3065:58   - Unknown word (FEFF)            -- WIDTH NOBREAK SPACE (FEFF 16)
+./ext/exif/exif.c:3280:32   - Unknown word (cbuf)            -- value_ptr, tagname[64], cbuf[32], *outside=NULL;
+./ext/exif/exif.c:3281:39   - Unknown word (fgot)            -- count, offset_val, fpos, fgot;
+./ext/exif/exif.c:338:17    - Unknown word (SUBFILE)    -- #define TAG_NEW_SUBFILE 0x0
+./ext/exif/exif.c:338:66    - Unknown word (subfile)    -- FE /* New version of subfile tag */
 ./ext/exif/exif.c:33:9      - Unknown word (EXIFERR)    -- #define EXIFERR_DC , const char *_file
-./ext/exif/exif.c:3479:22   - Unknown word (distacne)        -- /* Inidcates the distacne the autofocus camera
-./ext/exif/exif.c:3479:35   - Unknown word (autofocus)       -- Inidcates the distacne the autofocus camera is focused to
-./ext/exif/exif.c:3479:8    - Unknown word (Inidcates)       -- /* Inidcates the distacne the autofocus
-./ext/exif/exif.c:3491:36   - Unknown word (powershot's)     -- looking at the Cannon powershot's files, inches is the
-./ext/exif/exif.c:3497:60   - Unknown word (milimeter)       -- planeUnits = 1;    break;  /* milimeter */
-./ext/exif/exif.c:368:17    - Unknown word (SETMPUTER)    -- #define TAG_INK_SETMPUTER 0x014C
-./ext/exif/exif.c:3811:44   - Unknown word (mcom)            -- exif_read_data#error_mcom" EXIFERR_CC, ImageInfo
-./ext/exif/exif.c:3886:53   - Unknown word (Vivitar)         -- lead' software with Vivitar scanner
-./ext/exif/exif.c:403:13    - Unknown word (EXPOSURETIME) -- #define TAG_EXPOSURETIME 0x82
-./ext/exif/exif.c:404:13    - Unknown word (FNUMBER)      -- #define TAG_FNUMBER
-./ext/exif/exif.c:4071:47   - Unknown word (writeback)       -- would break the image on writeback: */
-./ext/exif/exif.c:408:22    - Unknown word (SENSITY)      -- define TAG_SPECTRAL_SENSITY 0x8824
-./ext/exif/exif.c:410:13    - Unknown word (ISOSPEED)     -- #define TAG_ISOSPEED
-./ext/exif/exif.c:4118:24   - Unknown word (expading)        -- /* if entry needs expading ifd cache and entry
-./ext/exif/exif.c:411:13    - Unknown word (OPTOELECTRIC) -- #define TAG_OPTOELECTRIC_CONVERSION_F 0x88
-./ext/exif/exif.c:413:13    - Unknown word (EXIFVERSION)  -- #define TAG_EXIFVERSION 0x9
-./ext/exif/exif.c:418:13    - Unknown word (SHUTTERSPEED) -- #define TAG_SHUTTERSPEED 0x92
-./ext/exif/exif.c:432:13    - Unknown word (USERCOMMENT)  -- #define TAG_USERCOMMENT 0x9
-./ext/exif/exif.c:4342:21   - Unknown word (imageinfo)       -- /* {{{ exif_discard_imageinfo
-./ext/exif/exif.c:451:13    - Unknown word (FOCALPLANE)   -- #define TAG_FOCALPLANE_X_RES 0xA
-./ext/exif/exif.c:475:21    - Unknown word (SPECIALMODE)  -- #define TAG_OLYMPUS_SPECIALMODE 0x0200
-./ext/exif/exif.c:476:21    - Unknown word (JPEGQUAL)     -- #define TAG_OLYMPUS_JPEGQUAL 0x0201
-./ext/exif/exif.c:4781:8    - Unknown word (imagefile)       -- char *imagefile;
-./ext/exif/exif.c:478:21    - Unknown word (DIGIZOOM)     -- #define TAG_OLYMPUS_DIGIZOOM 0x0204
-./ext/exif/exif.c:479:21    - Unknown word (SOFTWARERELEASE) -- #define TAG_OLYMPUS_SOFTWARERELEASE 0x0207
-./ext/exif/exif.c:480:21    - Unknown word (PICTINFO)        -- #define TAG_OLYMPUS_PICTINFO 0x0208
-./ext/exif/exif.c:481:21    - Unknown word (CAMERAID)        -- #define TAG_OLYMPUS_CAMERAID 0x0209
-./ext/exif/exif.c:496:13    - Unknown word (YCBCR)           -- #define PMI_YCBCR 6
+./ext/exif/exif.c:340:13    - Unknown word (IMAGEWIDTH) -- #define TAG_IMAGEWIDTH 0x
+./ext/exif/exif.c:341:13    - Unknown word (IMAGEHEIGHT) -- #define TAG_IMAGEHEIGHT 0x0
+./ext/exif/exif.c:345:13    - Unknown word (TRESHHOLDING) -- #define TAG_TRESHHOLDING 0x01
+./ext/exif/exif.c:3498:22   - Unknown word (distacne)        -- /* Inidcates the distacne the autofocus camera
+./ext/exif/exif.c:3498:35   - Unknown word (autofocus)       -- Inidcates the distacne the autofocus camera is focused to
+./ext/exif/exif.c:3498:8    - Unknown word (Inidcates)       -- /* Inidcates the distacne the autofocus
+./ext/exif/exif.c:3510:36   - Unknown word (powershot's)     -- looking at the Cannon powershot's files, inches is the
+./ext/exif/exif.c:3516:60   - Unknown word (milimeter)       -- planeUnits = 1;    break;  /* milimeter */
+./ext/exif/exif.c:358:17    - Unknown word (SAMPPLE)      -- #define TAG_MIN_SAMPPLE_VALUE 0x0
+./ext/exif/exif.c:3830:44   - Unknown word (mcom)            -- exif_read_data#error_mcom" EXIFERR_CC, ImageInfo
+./ext/exif/exif.c:387:17    - Unknown word (SETMPUTER)    -- #define TAG_INK_SETMPUTER 0x014C
+./ext/exif/exif.c:3905:53   - Unknown word (Vivitar)         -- lead' software with Vivitar scanner
+./ext/exif/exif.c:4094:47   - Unknown word (writeback)       -- would break the image on writeback: */
+./ext/exif/exif.c:4141:24   - Unknown word (expading)        -- /* if entry needs expading ifd cache and entry
+./ext/exif/exif.c:422:13    - Unknown word (EXPOSURETIME) -- #define TAG_EXPOSURETIME 0x82
+./ext/exif/exif.c:423:13    - Unknown word (FNUMBER)      -- #define TAG_FNUMBER
+./ext/exif/exif.c:427:22    - Unknown word (SENSITY)      -- define TAG_SPECTRAL_SENSITY 0x8824
+./ext/exif/exif.c:429:13    - Unknown word (ISOSPEED)     -- #define TAG_ISOSPEED
+./ext/exif/exif.c:430:13    - Unknown word (OPTOELECTRIC) -- #define TAG_OPTOELECTRIC_CONVERSION_F 0x88
+./ext/exif/exif.c:432:13    - Unknown word (EXIFVERSION)  -- #define TAG_EXIFVERSION 0x9
+./ext/exif/exif.c:4365:21   - Unknown word (imageinfo)       -- /* {{{ exif_discard_imageinfo
+./ext/exif/exif.c:437:13    - Unknown word (SHUTTERSPEED) -- #define TAG_SHUTTERSPEED 0x92
+./ext/exif/exif.c:451:13    - Unknown word (USERCOMMENT)  -- #define TAG_USERCOMMENT 0x9
+./ext/exif/exif.c:470:13    - Unknown word (FOCALPLANE)   -- #define TAG_FOCALPLANE_X_RES 0xA
+./ext/exif/exif.c:4804:8    - Unknown word (imagefile)       -- char *imagefile;
+./ext/exif/exif.c:494:21    - Unknown word (SPECIALMODE)  -- #define TAG_OLYMPUS_SPECIALMODE 0x0200
+./ext/exif/exif.c:495:21    - Unknown word (JPEGQUAL)     -- #define TAG_OLYMPUS_JPEGQUAL 0x0201
+./ext/exif/exif.c:497:21    - Unknown word (DIGIZOOM)     -- #define TAG_OLYMPUS_DIGIZOOM 0x0204
+./ext/exif/exif.c:498:21    - Unknown word (SOFTWARERELEASE) -- #define TAG_OLYMPUS_SOFTWARERELEASE 0x0207
+./ext/exif/exif.c:499:21    - Unknown word (PICTINFO)        -- #define TAG_OLYMPUS_PICTINFO 0x0208
+./ext/exif/exif.c:500:21    - Unknown word (CAMERAID)        -- #define TAG_OLYMPUS_CAMERAID 0x0209
+./ext/exif/exif.c:515:13    - Unknown word (YCBCR)           -- #define PMI_YCBCR 6
 ./ext/exif/exif.c:54:22     - Unknown word (asan)       -- include <sanitizer/asan_interface.h>
-./ext/exif/exif.c:587:14    - Unknown word (JPEGQ)           -- { 0x0207, "JPEGQTables"},
-./ext/exif/exif.c:588:14    - Unknown word (JPEGDC)          -- { 0x0208, "JPEGDCTables"},
-./ext/exif/exif.c:589:14    - Unknown word (JPEGAC)          -- { 0x0209, "JPEGACTables"},
-./ext/exif/exif.c:664:14    - Unknown word (Matteing)        -- { 0x80E3, "Matteing"}, /* obsoleted by
-./ext/exif/exif.c:681:22    - Unknown word (Sensity)         -- { 0x8824, "SpectralSensity"},
-./ext/exif/exif.c:684:14    - Unknown word (OECF)            -- { 0x8828, "OECF"},
-./ext/exif/exif.c:775:14    - Unknown word (GPSDOP)          -- { 0x000B, "GPSDOP"},
+./ext/exif/exif.c:606:14    - Unknown word (JPEGQ)           -- { 0x0207, "JPEGQTables"},
+./ext/exif/exif.c:607:14    - Unknown word (JPEGDC)          -- { 0x0208, "JPEGDCTables"},
+./ext/exif/exif.c:608:14    - Unknown word (JPEGAC)          -- { 0x0209, "JPEGACTables"},
+./ext/exif/exif.c:683:14    - Unknown word (Matteing)        -- { 0x80E3, "Matteing"}, /* obsoleted by
+./ext/exif/exif.c:700:22    - Unknown word (Sensity)         -- { 0x8824, "SpectralSensity"},
+./ext/exif/exif.c:703:14    - Unknown word (OECF)            -- { 0x8828, "OECF"},
+./ext/exif/exif.c:794:14    - Unknown word (GPSDOP)          -- { 0x000B, "GPSDOP"},
 ./ext/exif/exif.c:82:155    - Unknown word (Foveon)     -- Pentax, Minolta, Sigma, Foveon, Kyocera, Ricoh, AGFA
 ./ext/exif/exif.c:82:163    - Unknown word (Kyocera)    -- Minolta, Sigma, Foveon, Kyocera, Ricoh, AGFA, Epson
 ./ext/exif/exif.c:82:179    - Unknown word (AGFA)       -- Foveon, Kyocera, Ricoh, AGFA, Epson");
-./ext/exif/exif.c:917:17    - Unknown word (RGGB)            -- { 0xa021, "WB_RGGBLevelsUncorrected"},
-./ext/exif/exif.c:998:19    - Unknown word (Sheed)           -- { 0x0077, "BurstSheed"},
+./ext/exif/exif.c:936:17    - Unknown word (RGGB)            -- { 0xa021, "WB_RGGBLevelsUncorrected"},
 ./ext/exif/exif_arginfo.h:22:54     - Unknown word (imagetype)  -- MASK_EX(arginfo_exif_imagetype, 0, 1, MAY_BE_LONG|MAY
 ./ext/ext_skel.php:145:14    - Unknown word (sconfigure)  -- printf('%sconfigure%s', $file_prefix, PHP
 ./ext/ext_skel.php:146:14    - Unknown word (smake)       -- printf('%smake%2$s%2$s', $make_prefix
@@ -3263,7 +3263,7 @@ Lines:
 ./ext/intl/uchar/uchar_arginfo.h:676:35    - Unknown word (CASEFOLDED)   -- PROPERTY_CHANGES_WHEN_CASEFOLDED_value;
 ./ext/intl/uchar/uchar_arginfo.h:682:35    - Unknown word (CASEMAPPED)   -- PROPERTY_CHANGES_WHEN_CASEMAPPED_value;
 ./ext/intl/uchar/uchar_arginfo.h:936:29    - Unknown word (TITLECASE)    -- const_PROPERTY_SIMPLE_TITLECASE_MAPPING_value;
-./ext/json/json.c:166:15    - Unknown word (yyparse)    -- if (php_json_yyparse(&parser)) {
+./ext/json/json.c:181:15    - Unknown word (yyparse)    -- if (php_json_yyparse(&parser)) {
 ./ext/json/json_encoder.c:14:19     - Unknown word (Zelenka)    -- | Jakub Zelenka <bukka@php.net>
 ./ext/json/php_json_scanner.h:30:18     - Unknown word (ctxmarker)  -- php_json_ctype *ctxmarker; /* marker position
 ./ext/ldap/ldap.c:1014:13   - Unknown word (lderrno)         -- /* {{{ _get_lderrno */
@@ -4647,16 +4647,18 @@ Lines:
 ./ext/opcache/jit/zend_elf.h:71:15     - Unknown word (NOBITS)      -- ELFSECT_TYPE_NOBITS = 8,
 ./ext/opcache/jit/zend_elf.h:72:15     - Unknown word (DYNSYM)      -- ELFSECT_TYPE_DYNSYM = 11,
 ./ext/opcache/jit/zend_elf.h:85:12     - Unknown word (sectidx)     -- uint16_t sectidx;
-./ext/opcache/jit/zend_jit.c:1268:19   - Unknown word (STACKLESS)     -- flags = ZEND_CFG_STACKLESS | ZEND_CFG_NO_ENTRY
-./ext/opcache/jit/zend_jit.c:1321:17   - Unknown word (sccs)          -- zend_ssa_find_sccs(op_array, ssa);
-./ext/opcache/jit/zend_jit.c:161:17    - Unknown word (idom)       -- b = blocks[b].idom;
-./ext/opcache/jit/zend_jit.c:1669:65   - Unknown word (Wimmer)        -- SSA Form", Christian Wimmer and
-./ext/opcache/jit/zend_jit.c:3290:37   - Unknown word (requres)       -- |= MAY_BE_UNDEF; // requres type assignment
-./ext/opcache/jit/zend_jit.c:3990:8    - Unknown word (stackless)     -- /* stackless execution */
-./ext/opcache/jit/zend_jit.c:4671:51   - Unknown word (lbhybrid)      -- handler = dasm_labels[zend_lbhybrid_runtime_jit];
-./ext/opcache/jit/zend_jit.c:726:13    - Unknown word (VALGRIND)   -- #ifdef HAVE_VALGRIND
-./ext/opcache/jit/zend_jit.c:759:37    - Unknown word (Wtautological) -- diagnostic ignored "-Wtautological-compare"
-./ext/opcache/jit/zend_jit.c:956:7     - Unknown word (venners)       -- dasm_venners_size = 0;
+./ext/opcache/jit/zend_jit.c:1299:19   - Unknown word (STACKLESS)     -- flags = ZEND_CFG_STACKLESS | ZEND_CFG_NO_ENTRY
+./ext/opcache/jit/zend_jit.c:1352:17   - Unknown word (sccs)          -- zend_ssa_find_sccs(op_array, ssa);
+./ext/opcache/jit/zend_jit.c:149:27    - Unknown word (CLDEMOTE)   -- define ZEND_JIT_SUPPORT_CLDEMOTE 1
+./ext/opcache/jit/zend_jit.c:158:21    - Unknown word (cldemote)   -- #pragma GCC target("cldemote")
+./ext/opcache/jit/zend_jit.c:1700:65   - Unknown word (Wimmer)        -- SSA Form", Christian Wimmer and
+./ext/opcache/jit/zend_jit.c:186:17    - Unknown word (idom)       -- b = blocks[b].idom;
+./ext/opcache/jit/zend_jit.c:3321:37   - Unknown word (requres)       -- |= MAY_BE_UNDEF; // requres type assignment
+./ext/opcache/jit/zend_jit.c:4021:8    - Unknown word (stackless)     -- /* stackless execution */
+./ext/opcache/jit/zend_jit.c:4702:51   - Unknown word (lbhybrid)      -- handler = dasm_labels[zend_lbhybrid_runtime_jit];
+./ext/opcache/jit/zend_jit.c:751:13    - Unknown word (VALGRIND)   -- #ifdef HAVE_VALGRIND
+./ext/opcache/jit/zend_jit.c:784:37    - Unknown word (Wtautological) -- diagnostic ignored "-Wtautological-compare"
+./ext/opcache/jit/zend_jit.c:981:7     - Unknown word (venners)       -- dasm_venners_size = 0;
 ./ext/opcache/jit/zend_jit.h:41:73     - Unknown word (caled)      -- the most frequently caled on first request functions
 ./ext/opcache/jit/zend_jit_arm64.h:131:14    - Unknown word (FPTMP)          -- #define ZREG_FPTMP ZREG_V16
 ./ext/opcache/jit/zend_jit_arm64.h:24:2      - Unknown word (ZREG)       -- ZREG_NONE = -1,
@@ -8858,7 +8860,7 @@ Lines:
 ./main/streams/streams.c:169:8     - Unknown word (brlen)      -- int brlen;
 ./main/streams/streams.c:1703:10   - Unknown word (readchunk)    -- size_t readchunk = sizeof(buf);
 ./main/streams/streams.c:1705:9    - Unknown word (writeptr)     -- char *writeptr;
-./main/streams/streams.c:2341:8    - Unknown word (wrapperhash)  -- zval *wrapperhash;
+./main/streams/streams.c:2340:8    - Unknown word (wrapperhash)  -- zval *wrapperhash;
 ./main/streams/streams.c:432:25    - Unknown word (fopencookied) -- * If the stream was fopencookied, we must NOT touch anything
 ./main/streams/streams.c:433:20    - Unknown word (cookied)      -- * here, as the cookied stream relies on it
 ./main/streams/streams.c:481:45    - Unknown word (fdopened)     -- that might have been fdopened */
@@ -8866,12 +8868,12 @@ Lines:
 ./main/streams/streams.c:856:14    - Unknown word (readptr)      -- const char *readptr;
 ./main/streams/streams.c:901:8     - Unknown word (bufstart)     -- char *bufstart = buf;
 ./main/streams/streams.c:926:11    - Unknown word (cpysz)        -- size_t cpysz = 0;
-./main/streams/transports.c:160:13    - Unknown word (zbacklog)   -- zval *zbacklog = NULL;
+./main/streams/transports.c:162:13    - Unknown word (zbacklog)   -- zval *zbacklog = NULL;
 ./main/streams/userspace.c:107:20    - Unknown word (STATURL)    -- #define USERSTREAM_STATURL "url_stat"
-./main/streams/userspace.c:1382:15   - Unknown word (intstream)    -- php_stream * intstream = NULL;
+./main/streams/userspace.c:1381:15   - Unknown word (intstream)    -- php_stream * intstream = NULL;
 ./main/streams/userspace.c:292:16    - Unknown word (zfuncname)  -- zval zretval, zfuncname;
 ./main/streams/userspace.c:292:7     - Unknown word (zretval)    -- zval zretval, zfuncname;
-./main/streams/userspace.c:556:20    - Unknown word (userstreamop) -- static ssize_t php_userstreamop_write(php_stream *stream
+./main/streams/userspace.c:555:20    - Unknown word (userstreamop) -- static ssize_t php_userstreamop_write(php_stream *stream
 ./main/streams/userspace.c:73:35     - Unknown word (uwrap)      -- user_stream_wrapper * uwrap = (struct php_user_stream
 ./main/streams/userspace.c:91:13     - Unknown word (userstream) -- struct _php_userstream_data {
 ./main/streams/userspace.c:98:9      - Unknown word (USERSTREAM) -- #define USERSTREAM_OPEN "stream_open"
@@ -9043,10 +9045,10 @@ Lines:
 ./sapi/fpm/fpm/fpm_atomic.h:76:38     - Unknown word (Kubacki)    -- | __arm ) /* W-Mark Kubacki */
 ./sapi/fpm/fpm/fpm_atomic.h:90:42     - Unknown word (Ochab)      -- __sparc ) /* Marcin Ochab */
 ./sapi/fpm/fpm/fpm_atomic.h:92:8      - Unknown word (sparcv)     -- #if (__sparcv9 || __sparcv9__)
-./sapi/fpm/fpm/fpm_children.c:255:14    - Unknown word (pctl)       -- if (!fpm_pctl_can_spawn_children(
-./sapi/fpm/fpm/fpm_children.c:289:19    - Unknown word (PCTL)       -- fpm_pctl(FPM_PCTL_STATE_RELOADING, FPM
-./sapi/fpm/fpm/fpm_children.c:303:100   - Unknown word (notifyoncheck) -- exec child (e.g. s6-notifyoncheck)", pid, buf);
-./sapi/fpm/fpm/fpm_children.c:425:15    - Unknown word (SYSERROR)      -- zlog(ZLOG_SYSERROR, "fork() failed");
+./sapi/fpm/fpm/fpm_children.c:278:14    - Unknown word (pctl)       -- if (!fpm_pctl_can_spawn_children(
+./sapi/fpm/fpm/fpm_children.c:312:19    - Unknown word (PCTL)       -- fpm_pctl(FPM_PCTL_STATE_RELOADING, FPM
+./sapi/fpm/fpm/fpm_children.c:326:100   - Unknown word (notifyoncheck) -- exec child (e.g. s6-notifyoncheck)", pid, buf);
+./sapi/fpm/fpm/fpm_children.c:448:15    - Unknown word (SYSERROR)      -- zlog(ZLOG_SYSERROR, "fork() failed");
 ./sapi/fpm/fpm/fpm_conf.c:130:12    - Unknown word (setfib)     -- { "listen.setfib", &fpm_conf
 ./sapi/fpm/fpm/fpm_conf.c:133:13    - Unknown word (dumpable)   -- { "process.dumpable", &fpm_conf
 ./sapi/fpm/fpm/fpm_conf.c:148:5     - Unknown word (slowlog)    -- { "slowlog",
@@ -9083,10 +9085,10 @@ Lines:
 ./sapi/fpm/fpm/fpm_sockets.c:43:12     - Unknown word (routemax)   -- static int routemax = -1;
 ./sapi/fpm/fpm/fpm_sockets.c:548:25    - Unknown word (unacked)    -- cur_lq = info.__tcpi_unacked;
 ./sapi/fpm/fpm/fpm_sockets.c:72:10     - Unknown word (tmpenv)     -- char *tmpenv_value;
-./sapi/fpm/fpm/fpm_status.c:382:55    - Unknown word (openmetrics) -- from_table(_GET_str, "openmetrics")) {
-./sapi/fpm/fpm/fpm_status.c:387:13    - Unknown word (phpfpm)      -- "# HELP phpfpm_up Could pool %s using
+./sapi/fpm/fpm/fpm_status.c:387:55    - Unknown word (openmetrics) -- from_table(_GET_str, "openmetrics")) {
+./sapi/fpm/fpm/fpm_status.c:392:13    - Unknown word (phpfpm)      -- "# HELP phpfpm_up Could pool %s using
 ./sapi/fpm/fpm/fpm_stdio.c:162:32    - Unknown word (fscf)       -- FPM_STDIO_CMD_FLUSH "\0fscf"
-./sapi/fpm/fpm/fpm_stdio.c:394:44    - Unknown word (CLOSEXEC)   -- error_log_fd; /* for FD_CLOSEXEC to work */
+./sapi/fpm/fpm/fpm_stdio.c:392:44    - Unknown word (CLOSEXEC)   -- error_log_fd; /* for FD_CLOSEXEC to work */
 ./sapi/fpm/fpm/fpm_stdio.c:79:48     - Unknown word (daemonized) -- when PHP-FPM is not daemonized otherwise it might break
 ./sapi/fpm/fpm/fpm_systemd.c:37:13     - Unknown word (notifyf)    -- if (0 > sd_notifyf(0, "READY=1\n%s"
 ./sapi/fpm/fpm/fpm_systemd.c:63:15     - Unknown word (MAINPID)    -- "MAINPID=%lu",

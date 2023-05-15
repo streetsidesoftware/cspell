@@ -3,7 +3,7 @@ Repository: eslint/eslint
 Url: "https://github.com/eslint/eslint"
 Args: ["**","--exclude=bin/**","--exclude=CHANGELOG.md","--exclude=_data","--exclude=tests/bench/large.js","--exclude=docs/src/_includes","--exclude=docs/src/assets/{fonts,s?css,images}"]
 Lines:
- CSpell: Files checked: 1846, Issues found: 5473 in 1245 files
+ CSpell: Files checked: 1846, Issues found: 5479 in 1245 files
  exit code: 1
 ./Makefile.js:145:88    - Unknown word (ined)               -- followed by the string "ined".
 ./Makefile.js:151:48    - Unknown word (blogpost)           -- render(cat("./templates/blogpost.md.ejs"), renderContext
@@ -27,9 +27,11 @@ Lines:
 ./README.md:266:1     - Unknown word (Strek)       -- Strek
 ./README.md:275:5     - Unknown word (teamend)     -- <!--teamend-->
 ./README.md:282:5     - Unknown word (sponsorsstart) -- <!--sponsorsstart-->
-./README.md:287:1003  - Unknown word (Transloadit)   -- com/u/125754?v=4" alt="Transloadit" height="32"></a> <a
-./README.md:287:396   - Unknown word (Nrwl)          -- logo.png" alt="Nx (by Nrwl)" height="32"></a>
-./README.md:288:5     - Unknown word (sponsorsend)   -- <!--sponsorsend-->
+./README.md:287:1194  - Unknown word (Transloadit)      -- com/u/125754?v=4" alt="Transloadit" height="32"></a> <a
+./README.md:287:151   - Unknown word (Ilmaiset)      -- 1f1d/logo.png" alt="Ilmaiset Pitkävetovihjeet" height
+./README.md:287:160   - Unknown word (Pitkävetovihjeet) -- logo.png" alt="Ilmaiset Pitkävetovihjeet" height="32"></a> <a
+./README.md:287:587   - Unknown word (Nrwl)             -- logo.png" alt="Nx (by Nrwl)" height="32"></a>
+./README.md:288:5     - Unknown word (sponsorsend)      -- <!--sponsorsend-->
 ./conf/config-schema.js:14:5      - Unknown word (fileoverview) -- * @fileoverview Defines a schema for
 ./conf/config-schema.js:8:63      - Unknown word (nzakas)     -- file, please contact @nzakas first.
 ./conf/replacements.json:12:36     - Unknown word (parens)     -- wrap-func": ["no-extra-parens"],
@@ -123,6 +125,7 @@ Lines:
 ./docs/src/integrate/nodejs-api.md:641:59    - Unknown word (autofixing) -- except that it also runs autofixing logic, similar to the
 ./docs/src/library/alert.md:9:12      - Unknown word (shortcode)  -- There is a shortcode for each type of alert
 ./docs/src/maintain/manage-issues.md:31:4      - Unknown word (Triaging)   -- ## Triaging Process
+./docs/src/maintain/manage-issues.md:81:43     - Unknown word (assessement) -- assign an initial impact assessement (make your best guess
 ./docs/src/maintain/manage-releases.md:14:3      - Unknown word (Prereleases) -- * Prereleases that are not considered
 ./docs/src/maintain/overview.md:33:6      - Unknown word (Stackaid)   -- * [**Stackaid.us**](https://simulation
 ./docs/src/pages/component-library.html:7:45      - Unknown word (shortcodes) -- on the left includes shortcodes, macros and partials
@@ -299,7 +302,7 @@ Lines:
 ./lib/cli-engine/hash.js:12:25     - Unknown word (imurmurhash) -- const murmur = require("imurmurhash");
 ./lib/cli-engine/lint-result-cache.js:14:58     - Unknown word (jsonify)    -- stable-stringify-without-jsonify");
 ./lib/cli-engine/xml-escape.js:29:26     - Unknown word (apos)       -- return "&apos;";
-./lib/cli.js:28:38     - Unknown word (humanwhocodes) -- ModuleImporter } = require("@humanwhocodes/module-importer");
+./lib/cli.js:27:38     - Unknown word (humanwhocodes) -- ModuleImporter } = require("@humanwhocodes/module-importer");
 ./lib/config/default-config.js:56:61     - Unknown word (globbed)    -- ensure these files are globbed by default
 ./lib/eslint/eslint-helpers.js:19:26     - Unknown word (nodelib)    -- const fswalk = require("@nodelib/fs.walk");
 ./lib/eslint/eslint-helpers.js:19:7      - Unknown word (fswalk)     -- const fswalk = require("@nodelib
@@ -333,8 +336,7 @@ Lines:
 ./lib/rules/indent-legacy.js:4:48      - Unknown word (nodeca)     -- ported and modified from nodeca.
 ./lib/rules/indent-legacy.js:573:43    - Unknown word (IIEF)       -- that the node is an IIEF
 ./lib/rules/indent-legacy.js:918:66    - Unknown word (blockless)  -- for indentation for blockless nodes
-./lib/rules/indent.js:15:36     - Unknown word (sdsl)       -- OrderedMap } = require("js-sdsl");
-./lib/rules/indent.js:911:21    - Unknown word (Blockless)  -- function addBlocklessNodeIndent(node) {
+./lib/rules/indent.js:895:21    - Unknown word (Blockless)  -- function addBlocklessNodeIndent(node) {
 ./lib/rules/jsx-quotes.js:21:23     - Unknown word (singlequote) -- description: "singlequote",
 ./lib/rules/keyword-spacing.js:148:18    - Unknown word (unexpect)   -- function unexpectSpaceBefore(token, pattern
 ./lib/rules/lines-around-comment.js:22:22     - Unknown word (Nums)       -- function getEmptyLineNums(lines) {
@@ -387,9 +389,11 @@ Lines:
 ./lib/rules/utils/ast-utils.js:395:40    - Unknown word (samely)     -- a.b` and `a?.b` are samely.
 ./lib/rules/utils/patterns/letters.js:12:24     - Unknown word (Dulin)      -- Copyright 2013-2016 Dulin Marat and other contributors
 ./lib/shared/config-validator.js:286:55    - Unknown word (ECMAFEATURES) -- source, "ESLINT_LEGACY_ECMAFEATURES");
-./package.json:123:6     - Unknown word (eslump)     -- "eslump": "^3.0.0",
-./package.json:140:6     - Unknown word (memfs)      -- "memfs": "^3.0.1",
-./package.json:141:6     - Unknown word (metascraper) -- "metascraper": "^5.25.7",
+./lib/shared/string-utils.js:12:28     - Unknown word (graphemer)  -- Graphemer = require("graphemer").default;
+./lib/shared/string-utils.js:12:7      - Unknown word (Graphemer)  -- const Graphemer = require("graphemer
+./package.json:122:6     - Unknown word (eslump)     -- "eslump": "^3.0.0",
+./package.json:139:6     - Unknown word (memfs)      -- "memfs": "^3.0.1",
+./package.json:140:6     - Unknown word (metascraper) -- "metascraper": "^5.25.7",
 ./packages/eslint-config-eslint/default.yml:23:50     - Unknown word (namepath)   -- Point to a `@callback` namepath or `GenericCallback
 ./packages/eslint-config-eslint/default.yml:5:15      - Unknown word (jsdoc)      -- - "plugin:jsdoc/recommended"
 ./templates/blogpost.md.ejs:18:10     - Unknown word (linkify)    -- function linkify(line) {
@@ -430,12 +434,12 @@ Lines:
 ./tests/lib/config/flat-config-array.js:154:22    - Unknown word (noniterable) -- it("should allow noniterable baseConfig objects"
 ./tests/lib/config/flat-config-array.js:1745:29   - Unknown word (foox)        -- foox: [1, "bar"]
 ./tests/lib/config/flat-config-array.js:1767:30   - Unknown word (doesnt)      -- "doesnt-exist/match": "error
-./tests/lib/eslint/flat-eslint.js:1007:58   - Unknown word (doesexist)    -- await eslint.lintFiles(["doesexist/*.js"]);
-./tests/lib/eslint/flat-eslint.js:1410:30   - Unknown word (reignoring)   -- it("should allow reignoring of previously ignored
-./tests/lib/eslint/flat-eslint.js:4580:31   - Unknown word (unignores)    -- cwd: `${root}-unignores`,
-./tests/lib/eslint/flat-eslint.js:4683:31   - Unknown word (reignore)     -- cwd: `${root}-reignore`,
-./tests/lib/eslint/flat-eslint.js:4723:31   - Unknown word (dignore)      -- cwd: `${root}-dignore`,
-./tests/lib/eslint/flat-eslint.js:932:57    - Unknown word (doesnotexist) -- lintFiles(["subdir1", "doesnotexist/*.js"]);
+./tests/lib/eslint/flat-eslint.js:1038:58   - Unknown word (doesexist)    -- await eslint.lintFiles(["doesexist/*.js"]);
+./tests/lib/eslint/flat-eslint.js:1441:30   - Unknown word (reignoring)   -- it("should allow reignoring of previously ignored
+./tests/lib/eslint/flat-eslint.js:4611:31   - Unknown word (unignores)    -- cwd: `${root}-unignores`,
+./tests/lib/eslint/flat-eslint.js:4714:31   - Unknown word (reignore)     -- cwd: `${root}-reignore`,
+./tests/lib/eslint/flat-eslint.js:4754:31   - Unknown word (dignore)      -- cwd: `${root}-dignore`,
+./tests/lib/eslint/flat-eslint.js:963:57    - Unknown word (doesnotexist) -- lintFiles(["subdir1", "doesnotexist/*.js"]);
 ./tests/lib/linter/code-path-analysis/code-path-analyzer.js:30:16     - Unknown word (ESQUERY)    -- const STANDARD_ESQUERY_OPTION = { visitorKeys
 ./tests/lib/linter/config-comment-parser.js:165:41    - Unknown word (ELEVENTEEN) -- code = "a: seventy, b:ELEVENTEEN";
 ./tests/lib/linter/linter.js:3361:1    - Unknown word (consolexlog) -- consolexlog("test2");
@@ -564,6 +568,7 @@ Lines:
 ./tests/lib/shared/string-utils.js:37:9      - Unknown word (uppercases) -- it("uppercases the first letter of
 ./tests/performance/jshint.js:10050:6   - Unknown word (Fastpath)                -- // Fastpath empty strings
 ./tests/performance/jshint.js:10714:4   - Unknown word (Whoh)                    -- * Whoh there, Javascript, that
+./tests/performance/jshint.js:1078:26   - Unknown word (Kovalyov)      -- Copyright 2012 Anton Kovalyov (http://jshint.com)
 ./tests/performance/jshint.js:10871:10  - Unknown word (verifuint)               -- function verifuint(value, max) {
 ./tests/performance/jshint.js:10983:48  - Unknown word (wuint)                   -- pass that off to the wuint* functions. To do that
 ./tests/performance/jshint.js:11009:10  - Unknown word (verifsint)               -- function verifsint(value, max, min) {

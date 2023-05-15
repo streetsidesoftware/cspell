@@ -3,18 +3,18 @@ Repository: caddyserver/caddy
 Url: "https://github.com/caddyserver/caddy.git"
 Args: ["**/*.go"]
 Lines:
- CSpell: Files checked: 233, Issues found: 3388 in 212 files
+ CSpell: Files checked: 233, Issues found: 3408 in 212 files
  exit code: 1
-./admin.go:1315:21   - Unknown word (pidfile)     -- // PIDFile writes a pidfile to the file at filename
-./admin.go:427:24    - Unknown word (loggable)    -- zap.Array("origins", loggableURLArray(handler.allowedOrigin
+./admin.go:1320:21   - Unknown word (pidfile)     -- // PIDFile writes a pidfile to the file at filename
+./admin.go:432:24    - Unknown word (loggable)    -- zap.Array("origins", loggableURLArray(handler.allowedOrigin
 ./admin.go:43:14     - Unknown word (caddyserver) -- "github.com/caddyserver/certmagic"
 ./admin.go:43:26     - Unknown word (certmagic)   -- github.com/caddyserver/certmagic"
-./admin.go:444:16    - Unknown word (caddytls)    -- // import the caddytls package -- but it works
-./admin.go:447:33    - Unknown word (zerossl)     -- RawMessage(`{"module": "zerossl"}`),
+./admin.go:449:16    - Unknown word (caddytls)    -- // import the caddytls package -- but it works
+./admin.go:452:33    - Unknown word (zerossl)     -- RawMessage(`{"module": "zerossl"}`),
 ./admin.go:50:56     - Unknown word (overidden)   -- DefaultAdminListen` can be overidden
-./admin.go:544:23    - Unknown word (stdlib)      -- / convert logger to stdlib so it can be used by
-./admin.go:814:23    - Unknown word (Redir)       -- if err == errInternalRedir {
-./admin.go:917:29    - Unknown word (hasher)      -- etagHasher returns a the hasher we used on the config
+./admin.go:549:23    - Unknown word (stdlib)      -- / convert logger to stdlib so it can be used by
+./admin.go:819:23    - Unknown word (Redir)       -- if err == errInternalRedir {
+./admin.go:922:29    - Unknown word (hasher)      -- etagHasher returns a the hasher we used on the config
 ./admin_test.go:108:10    - Unknown word (unsynced)   -- err := unsyncedConfigAccess(tc.method
 ./admin_test.go:121:23    - Unknown word (Unmarshaling) -- t.Fatalf("Test %d: Unmarshaling expected config: %v
 ./admin_test.go:170:42    - Unknown word (etag)         -- config with the wrong etag
@@ -70,18 +70,18 @@ Lines:
 ./caddyconfig/httpcaddyfile/directives.go:243:58    - Unknown word (vals)       -- caddyhttp.Route type) in vals to the
 ./caddyconfig/httpcaddyfile/directives.go:472:54    - Unknown word (hostnames)  -- of all the non-empty hostnames found in
 ./caddyconfig/httpcaddyfile/directives.go:79:7      - Unknown word (fastcgi)    -- "php_fastcgi",
-./caddyconfig/httpcaddyfile/httptype.go:1143:3    - Unknown word (hostm)      -- hostm caddyhttp.MatchHost
-./caddyconfig/httpcaddyfile/httptype.go:1144:3    - Unknown word (pathm)      -- pathm caddyhttp.MatchPath
-./caddyconfig/httpcaddyfile/httptype.go:1314:5    - Unknown word (hostport)   -- "{hostport}", "{http.request.hostport
-./caddyconfig/httpcaddyfile/httptype.go:1404:3    - Unknown word (laddrs)     -- laddrs, err := caddy.ParseNetworkAdd
+./caddyconfig/httpcaddyfile/httptype.go:1150:3    - Unknown word (hostm)      -- hostm caddyhttp.MatchHost
+./caddyconfig/httpcaddyfile/httptype.go:1151:3    - Unknown word (pathm)      -- pathm caddyhttp.MatchPath
+./caddyconfig/httpcaddyfile/httptype.go:1321:5    - Unknown word (hostport)   -- "{hostport}", "{http.request.hostport
+./caddyconfig/httpcaddyfile/httptype.go:1411:3    - Unknown word (laddrs)     -- laddrs, err := caddy.ParseNetworkAdd
 ./caddyconfig/httpcaddyfile/httptype.go:260:5     - Unknown word (annnd)      -- // annnd the top-level config
 ./caddyconfig/httpcaddyfile/httptype.go:282:12    - Unknown word (Cvtr)       -- if storageCvtr, ok := options["storage
 ./caddyconfig/httpcaddyfile/httptype.go:30:43     - Unknown word (caddypki)   -- caddyserver/caddy/v2/modules/caddypki"
-./caddyconfig/httpcaddyfile/httptype.go:656:11    - Unknown word (cval)       -- for _, cval := range sblock.pile
+./caddyconfig/httpcaddyfile/httptype.go:663:11    - Unknown word (cval)       -- for _, cval := range sblock.pile
 ./caddyconfig/httpcaddyfile/httptype_test.go:17:11     - Unknown word (showdebug)  -- query showdebug=1
 ./caddyconfig/httpcaddyfile/httptype_test.go:34:12     - Unknown word (somepath)   -- path /somepath*
-./caddyconfig/httpcaddyfile/options.go:43:43     - Unknown word (ACMEDNS)    -- "acme_dns", parseOptACMEDNS)
-./caddyconfig/httpcaddyfile/options.go:44:43     - Unknown word (ACMEEAB)    -- "acme_eab", parseOptACMEEAB)
+./caddyconfig/httpcaddyfile/options.go:44:43     - Unknown word (ACMEDNS)    -- "acme_dns", parseOptACMEDNS)
+./caddyconfig/httpcaddyfile/options.go:45:43     - Unknown word (ACMEEAB)    -- "acme_eab", parseOptACMEEAB)
 ./caddyconfig/httpcaddyfile/options_test.go:17:22     - Unknown word (caddytest)  -- // are present in: caddytest/integration/caddyfile
 ./caddyconfig/httpcaddyfile/pkiapp.go:65:33     - Unknown word (CAID)       -- ID = caddypki.DefaultCAID
 ./caddyconfig/httpcaddyfile/tlsapp.go:197:38    - Unknown word (Tailscale)  -- as desired (see the Tailscale listener plugin), so
@@ -120,9 +120,13 @@ Lines:
 ./listen.go:51:50     - Unknown word (swappable)  -- servers become hot-swappable
 ./listen.go:77:6      - Unknown word (tconn)      -- if tconn, ok := conn.(canSetKeepAlive
 ./listeners.go:292:38    - Unknown word (netw)       -- returns true if the netw is a unix network.
-./listeners.go:544:7     - Unknown word (fcpc)       -- func (fcpc *fakeClosePacketConn
-./listeners.go:578:25    - Unknown word (hotswappable) -- someone would need a hotswappable QUIC-only (not http
-./listeners.go:582:7     - Unknown word (fcql)         -- func (fcql *fakeCloseQuicListener
+./listeners.go:452:20    - Unknown word (QUICTLS)    -- sqtc := newSharedQUICTLSConfig(tlsConf)
+./listeners.go:452:3     - Unknown word (sqtc)       -- sqtc := newSharedQUICTLSConfig
+./listeners.go:514:5     - Unknown word (Confs)      -- tlsConfs map[*tls.Config
+./listeners.go:541:5     - Unknown word (cacc)       -- if cacc, ok := sqtc.tlsConfs
+./listeners.go:618:7     - Unknown word (fcpc)       -- func (fcpc *fakeClosePacketConn
+./listeners.go:652:25    - Unknown word (hotswappable) -- someone would need a hotswappable QUIC-only (not http
+./listeners.go:656:7     - Unknown word (fcql)         -- func (fcql *fakeCloseQuicListener
 ./logging.go:258:7     - Unknown word (wdest)      -- func (wdest writerDestructor) Destruct
 ./logging.go:353:21    - Unknown word (shorcut)    -- // at all, so just shorcut to a nop core instead
 ./logging.go:425:10    - Unknown word (superspace) -- // be a superspace or subspace of an item
@@ -330,13 +334,13 @@ Lines:
 ./modules/caddytls/certmanagers.go:15:14     - Unknown word (tailscale)  -- "github.com/tailscale/tscert"
 ./modules/caddytls/certmanagers.go:15:24     - Unknown word (tscert)     -- github.com/tailscale/tscert"
 ./modules/caddytls/certselection.go:124:34    - Unknown word (interops)   -- a big.Int type that interops with JSON encodings
-./modules/caddytls/connpolicy.go:162:20    - Unknown word (SSLKEYLOGFILE) -- // Also known as "SSLKEYLOGFILE", TLS secrets will be
-./modules/caddytls/connpolicy.go:164:5     - Unknown word (Wireshark)     -- // Wireshark and other tools. This
-./modules/caddytls/connpolicy.go:268:17    - Unknown word (ACMETLS)       -- if a == acmez.ACMETLS1Protocol {
-./modules/caddytls/connpolicy.go:307:11    - Unknown word (destructable)  -- return destructableWriter{w}, err
-./modules/caddytls/connpolicy.go:388:27    - Unknown word (clientauth)    -- Active returns true if clientauth has an actionable configurati
-./modules/caddytls/connpolicy.go:397:46    - Unknown word (clientauth's)  -- sets up cfg to enforce clientauth's configuration.
-./modules/caddytls/connpolicy.go:556:33    - Unknown word (unmarshalable) -- PublicKeyAlgorithm is a JSON-unmarshalable wrapper type.
+./modules/caddytls/connpolicy.go:174:20    - Unknown word (SSLKEYLOGFILE) -- // Also known as "SSLKEYLOGFILE", TLS secrets will be
+./modules/caddytls/connpolicy.go:176:5     - Unknown word (Wireshark)     -- // Wireshark and other tools. This
+./modules/caddytls/connpolicy.go:281:17    - Unknown word (ACMETLS)       -- if a == acmez.ACMETLS1Protocol {
+./modules/caddytls/connpolicy.go:320:11    - Unknown word (destructable)  -- return destructableWriter{w}, err
+./modules/caddytls/connpolicy.go:401:27    - Unknown word (clientauth)    -- Active returns true if clientauth has an actionable configurati
+./modules/caddytls/connpolicy.go:410:46    - Unknown word (clientauth's)  -- sets up cfg to enforce clientauth's configuration.
+./modules/caddytls/connpolicy.go:569:33    - Unknown word (unmarshalable) -- PublicKeyAlgorithm is a JSON-unmarshalable wrapper type.
 ./modules/caddytls/distributedstek/distributedstek.go:15:12     - Unknown word (distributedstek) -- // Package distributedstek provides TLS session
 ./modules/caddytls/distributedstek/distributedstek.go:229:18    - Unknown word (godocs)          -- // again, see godocs for why timer is stopped
 ./modules/caddytls/distributedstek/distributedstek.go:45:38     - Unknown word (STEK)            -- implements a distributed STEK provider. This

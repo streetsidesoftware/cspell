@@ -3,9 +3,9 @@ Repository: aspnetboilerplate/aspnetboilerplate
 Url: https://github.com/aspnetboilerplate/aspnetboilerplate
 Args: '["**/*.{md,cs,cshtml}","--exclude=wwwroot","--exclude=**/*SampleApp.Tests/Web*"]'
 Summary:
-  files: 2528
-  filesWithIssues: 844
-  issues: 3015
+  files: 2540
+  filesWithIssues: 845
+  issues: 3019
   errors: 0
 Errors: []
 
@@ -30,7 +30,8 @@ issues:
   - "doc/WebSite/Articles/Use-MassTransit-In-ABP/Index.md:92:132         messsages       U       to receive and handle messsages. In this sample, we"
   - "doc/WebSite/Articles/Use-MassTransit-In-ABP/Index.md:145:24         rabbitmq        U       config.Host(new Uri(\"rabbitmq://localhost/\"), host"
   - "doc/WebSite/AspNet-Core.md:187:26       Dont            U       *WrapResult** and **DontWrapResult** attributes"
-  - "doc/WebSite/AspNet-Core.md:263:52       Newtonsoft      U       two JsonConverter for Newtonsoft."
+  - "doc/WebSite/AspNet-Core.md:246:79       nameof          U       IAccountAppService>(x => nameof(x.Register));"
+  - "doc/WebSite/AspNet-Core.md:269:52       Newtonsoft      U       two JsonConverter for Newtonsoft."
   - "doc/WebSite/Audit-Logging.md:81:13          LINQ        U       (Use simple LINQ to find the selector"
   - "doc/WebSite/Audit-Logging.md:129:54         proxying    U       Boilerplate uses dynamic proxying and"
   - "doc/WebSite/Authorization.md:48:25          localizable     U       **Display name**: A localizable string that can be used"
@@ -77,7 +78,6 @@ issues:
   - "doc/WebSite/Entity-Framework-Core.md:180:28         Assisgned       U       conditions and include the AssisgnedPerson property, pre"
   - "doc/WebSite/Entity-Framework-Core.md:235:1          overidden       U       overidden Delete method in your"
   - "doc/WebSite/Entity-Framework-Core.md:237:5          usea            U       and usea the default repository"
-  - "doc/WebSite/Entity-History.md:219:43        nameof          U       snapshot.IsPropertyChanged(nameof(MyEntity.MyProperty"
   - "doc/WebSite/Entity-History.md:221:23        stacktree       U       // var stacktree = snapshot.PropertyChangesSta"
   - "doc/WebSite/EntityFramework-Integration.md:4:9          familar         U       already familar with EntityFramework"
   - "doc/WebSite/EntityFramework-Integration.md:74:18        dbcontext       U       multiple dbcontext scenarios to share the"
@@ -201,7 +201,7 @@ issues:
   - "src/Abp.EntityFramework/EntityFramework/Interceptors/WithNolockInterceptor.cs:13:110        NOLOCK      U       Extent\\d+\\](?! WITH \\(NOLOCK\\)))\", RegexOptions.Multiline"
   - "src/Abp.EntityFrameworkCore/EntityFrameworkCore/Extensions/QueryableExtensions.cs:51:34         Includable      U       Func<IQueryable<T>, IIncludableQueryable<T, object>"
   - "src/Abp.HangFire/Hangfire/Configuration/IAbpHangfireConfiguration.cs:13:30          Hanfgire's      U       // Gets or sets the Hanfgire's <see cref=\"BackgroundJobServe"
-  - "src/Abp.HtmlSanitizer/HtmlSanitizer/AbpHtmlSanitizerActionFilter.cs:5:7         Ganss       U       using Ganss.Xss;"
+  - "src/Abp.HtmlSanitizer/HtmlSanitizer/AbpHtmlSanitizerModule.cs:5:7           Ganss       U       using Ganss.Xss;"
   - "src/Abp.NHibernate/NHibernate/EntityMappings/NhMappingExtensions.cs:8:55        standart    U       make mapping easier for standart columns."
   - "src/Abp.Quartz/Quartz/IQuartzScheduleJobManager.cs:31:13        Unschedules     U       /// Unschedules a job."
   - "src/Abp.RedisCache.ProtoBuf/Runtime/Caching/Redis/ProtoBufRedisCacheSerializer.cs:11:34         Seperator       U       private const string TypeSeperator = \"|\";"
@@ -576,6 +576,7 @@ issues:
   - "test/Abp.ZeroCore.Tests/Zero/MultiLingual/MultiLingual_Mapping_Tests.cs:166:17      volosoft    U       var volosoftOffice = offices.Items"
   - "test/Abp.ZeroCore.Tests/Zero/Redis/PerRequestRedisCache/AbpPerRequestRedisCache_Test.cs:246:127     redisdb     U       it should go to the redisdb again"
   - "test/Abp.ZeroCore.Tests/Zero/Sessions/Session_Override_Tests.cs:47:37       Carluccio's     U       Name = \"Carluccio's\","
+  - "test/aspnet-core-demo/AbpAspNetCoreDemo.Tests/Tests/SanitizerControllerTests.cs:115:30      malicioussite       U       InlineData(\"<a href='://malicioussite'>Please verify your"
   - "test/aspnet-core-demo/AbpAspNetCoreDemo/Views/Home/Index.cshtml:12:39       listbox         U       carousel-inner\" role=\"listbox\">"
   - "test/aspnet-core-demo/AbpAspNetCoreDemo/Views/Home/Index.cshtml:59:22       glyphicon       U       <span class=\"glyphicon glyphicon-chevron-left"
   - "test/aspnet-core-demo/AbpAspNetCoreDemo/Views/Home/Index.cshtml:81:80       appsetting      U       LinkID=699562\">Add an appsetting in config and access"
