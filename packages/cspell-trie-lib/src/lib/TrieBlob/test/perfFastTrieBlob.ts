@@ -7,7 +7,7 @@ import { readTrie } from '../../../test/dictionaries.test.helper.js';
 import { trieRootToITrieRoot } from '../../TrieNode/trie.js';
 import { getGlobalPerfTimer } from '../../utils/timer.js';
 import { walkerWordsITrie } from '../../walker/walker.js';
-import { createTrieBlobFromTrieRoot } from '../createTrieBlob.js';
+import { createTrieBlobFromITrieNodeRoot, createTrieBlobFromTrieRoot } from '../createTrieBlob.js';
 import { FastTrieBlob } from '../FastTrieBlob.js';
 import { TrieBlob } from '../TrieBlob.js';
 
@@ -42,7 +42,10 @@ export async function measureFastBlob(which: string | undefined, method: string 
             timer.measureFn('blob.FastTrieBlob.toTrieBlob \t', () => ft.toTrieBlob());
         }
         const trieBlob = timer.measureFn('blob.createTrieBlobFromTrieRoot\t', () =>
-            createTrieBlobFromTrieRoot(trieRootToITrieRoot(trie.root))
+            createTrieBlobFromTrieRoot(trie.root)
+        );
+        timer.measureFn('blob.createTrieBlobFromITrieNodeRoot\t', () =>
+            createTrieBlobFromITrieNodeRoot(trieRootToITrieRoot(trie.root))
         );
 
         switch (method) {

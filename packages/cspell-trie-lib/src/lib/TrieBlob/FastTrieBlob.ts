@@ -1,6 +1,8 @@
+import type { ITrieNodeRoot } from '../ITrieNode/ITrieNode.js';
 import type { PartialTrieOptions, TrieOptions } from '../ITrieNode/TrieOptions.js';
 import type { TrieNode, TrieRoot } from '../TrieNode/TrieNode.js';
 import { mergeOptionalWithDefaults } from '../utils/mergeOptionalWithDefaults.js';
+import { FastTrieBlobInternals, FastTrieBlobIRoot } from './FastTrieBlobIRoot.js';
 import { resolveMap } from './resolveMap.js';
 import { TrieBlob } from './TrieBlob.js';
 
@@ -233,4 +235,20 @@ export class FastTrieBlob {
 
         return tf.freeze();
     }
+
+    static toITrieNodeRoot(trie: FastTrieBlob): ITrieNodeRoot {
+        return new FastTrieBlobIRoot(
+            new FastTrieBlobInternals(trie.nodes, trie.charIndex, trie.charToIndexMap, {
+                NodeMaskEOW: NodeMaskEOW,
+                NodeMaskChildCharIndex: NodeMaskChildCharIndex,
+                NodeChildRefShift: NodeChildRefShift,
+            }),
+            0,
+            trie.options
+        );
+    }
+
+    static NodeMaskEOW = NodeMaskEOW;
+    static NodeChildRefShift = NodeChildRefShift;
+    static NodeMaskChildCharIndex = NodeMaskChildCharIndex;
 }

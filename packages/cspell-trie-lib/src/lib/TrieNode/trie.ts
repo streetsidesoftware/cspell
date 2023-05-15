@@ -1,4 +1,4 @@
-import type { ITrieNode, ITrieNodeRoot } from '../ITrieNode/ITrieNode.js';
+import type { ITrieNode, ITrieNodeId, ITrieNodeRoot } from '../ITrieNode/ITrieNode.js';
 import type { TrieOptions } from '../ITrieNode/TrieOptions.js';
 import type { TrieNode, TrieRoot } from './TrieNode.js';
 
@@ -14,8 +14,11 @@ const EmptyKeys: readonly string[] = Object.freeze([]);
 const EmptyValues: readonly ITrieNode[] = Object.freeze([]);
 
 class ImplITrieNode implements ITrieNode {
+    readonly id: TrieNode;
     private _keys: readonly string[] | undefined;
-    protected constructor(readonly node: TrieNode) {}
+    protected constructor(readonly node: TrieNode) {
+        this.id = node;
+    }
 
     /** flag End of Word */
     get eow(): boolean {
@@ -64,13 +67,8 @@ class ImplITrieNode implements ITrieNode {
         return !!this.node.c;
     }
 
-    protected static cachedNodes = new WeakMap<TrieNode, ITrieNode>();
     static toITrieNode(node: TrieNode): ITrieNode {
-        const found = this.cachedNodes.get(node);
-        if (found) return found;
-        const n = new this(node);
-        this.cachedNodes.set(node, n);
-        return n;
+        return new this(node);
     }
 }
 
@@ -87,12 +85,12 @@ class ImplITrieRoot extends ImplITrieNode implements ITrieNodeRoot {
         return false;
     }
 
-    protected static cachedNodes = new WeakMap<TrieRoot, ITrieNodeRoot>();
+    resolveId(id: ITrieNodeId): ITrieNode {
+        const n = id as TrieNode;
+        return new ImplITrieNode(n);
+    }
+
     static toITrieNode(node: TrieRoot): ITrieNodeRoot {
-        const found = this.cachedNodes.get(node);
-        if (found) return found;
-        const n = new this(node);
-        this.cachedNodes.set(node, n);
-        return n;
+        return new this(node);
     }
 }

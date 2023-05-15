@@ -1,4 +1,4 @@
-import type { ITrieNode } from './ITrieNode.js';
+import type { ITrieNode, ITrieNodeId } from './ITrieNode.js';
 import { walker, walkerWords } from './walker.js';
 import type { YieldResult } from './walkerTypes.js';
 
@@ -37,11 +37,11 @@ export function findNode(node: ITrieNode, word: string): ITrieNode | undefined {
 }
 
 export function countNodes(root: ITrieNode): number {
-    const seen = new Set<ITrieNode>();
+    const seen = new Set<ITrieNodeId>();
 
     function walk(n: ITrieNode) {
-        if (seen.has(n)) return;
-        seen.add(n);
+        if (seen.has(n.id)) return;
+        seen.add(n.id);
         for (let i = 0; i < n.size; ++i) {
             walk(n.child(i));
         }
@@ -52,10 +52,10 @@ export function countNodes(root: ITrieNode): number {
 }
 
 export function countWords(root: ITrieNode): number {
-    const visited = new Map<ITrieNode, number>();
+    const visited = new Map<ITrieNodeId, number>();
 
     function walk(n: ITrieNode): number {
-        const nestedCount = visited.get(n);
+        const nestedCount = visited.get(n.id);
         if (nestedCount !== undefined) {
             return nestedCount;
         }
