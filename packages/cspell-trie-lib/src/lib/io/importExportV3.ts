@@ -264,12 +264,13 @@ function parseStream(radix: number): Reducer {
 
         function parser(acc: ReduceResults, s: string): ReduceResults {
             if (s === EOR) {
-                const { root, nodes, stack } = acc;
+                const { nodes, stack } = acc;
                 const r = parseInt(ref, radix);
                 const top = stack[stack.length - 1];
                 const p = stack[stack.length - 2].node;
                 p.c && (p.c[top.s] = nodes[r]);
-                return { root, nodes, stack, parser: undefined };
+                acc.parser = undefined;
+                return acc;
             }
             ref = ref + s;
             return acc;
