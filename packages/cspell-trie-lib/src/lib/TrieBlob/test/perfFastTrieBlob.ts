@@ -8,7 +8,7 @@ import { trieRootToITrieRoot } from '../../TrieNode/trie.js';
 import { getGlobalPerfTimer } from '../../utils/timer.js';
 import { walkerWordsITrie } from '../../walker/walker.js';
 import { createTrieBlobFromITrieNodeRoot, createTrieBlobFromTrieRoot } from '../createTrieBlob.js';
-import { FastTrieBlob } from '../FastTrieBlob.js';
+import { FastTrieBlobBuilder } from '../FastTrieBlobBuilder.js';
 import { TrieBlob } from '../TrieBlob.js';
 
 function getTrie() {
@@ -38,7 +38,9 @@ export async function measureFastBlob(which: string | undefined, method: string 
     timer.start('blob');
     if (filterTest(which, 'blob')) {
         {
-            const ft = timer.measureFn('blob.FastTrieBlob.fromTrieRoot \t', () => FastTrieBlob.fromTrieRoot(trie.root));
+            const ft = timer.measureFn('blob.FastTrieBlobBuilder.fromTrieRoot \t', () =>
+                FastTrieBlobBuilder.fromTrieRoot(trie.root)
+            );
             timer.measureFn('blob.FastTrieBlob.toTrieBlob \t', () => ft.toTrieBlob());
         }
         const trieBlob = timer.measureFn('blob.createTrieBlobFromTrieRoot\t', () =>
@@ -86,14 +88,22 @@ export async function measureFastBlob(which: string | undefined, method: string 
 
     timer.start('fast');
     if (filterTest(which, 'fast')) {
-        const ft = timer.measureFn('fast.FastTrieBlob.fromWordList \t', () => FastTrieBlob.fromWordList(words));
+        const ftWordList = timer.measureFn('fast.FastTrieBlobBuilder.fromWordList', () =>
+            FastTrieBlobBuilder.fromWordList(words)
+        );
+        const ft = timer.measureFn('fast.FastTrieBlobBuilder.fromTrieRoot', () =>
+            FastTrieBlobBuilder.fromTrieRoot(trie.root)
+        );
 
         switch (method) {
             case 'has':
-                timer.measureFn('fast.FastTrieBlob.has \t\t', () => hasWords(words, (word) => ft.has(word)));
-                timer.measureFn('fast.FastTrieBlob.has \t\t', () => hasWords(words, (word) => ft.has(word)));
+                timer.measureFn('fast.FastTrieBlob.has', () => hasWords(words, (word) => ft.has(word)));
+                timer.measureFn('fast.FastTrieBlob.has', () => hasWords(words, (word) => ft.has(word)));
                 break;
             case 'words':
+                timer.start('fast.words.fromWordList');
+                [...ftWordList.words()];
+                timer.stop('fast.words.fromWordList');
                 timer.start('fast.words');
                 [...ft.words()];
                 timer.stop('fast.words');

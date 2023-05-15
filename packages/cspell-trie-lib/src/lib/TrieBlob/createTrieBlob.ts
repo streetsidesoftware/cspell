@@ -1,11 +1,11 @@
 import type { ITrieNode, ITrieNodeId, ITrieNodeRoot } from '../ITrieNode/ITrieNode.js';
 import type { TrieNode, TrieRoot } from '../TrieNode/TrieNode.js';
-import { FastTrieBlob } from './FastTrieBlob.js';
+import { FastTrieBlobBuilder } from './FastTrieBlobBuilder.js';
 import { resolveMap } from './resolveMap.js';
 import { TrieBlob } from './TrieBlob.js';
 
 export function createTrieBlob(words: string[]): TrieBlob {
-    const ft = FastTrieBlob.fromWordList(words);
+    const ft = FastTrieBlobBuilder.fromWordList(words);
     return ft.toTrieBlob();
 }
 

@@ -1,29 +1,6 @@
 import type { ITrieNode, ITrieNodeId, ITrieNodeRoot } from '../ITrieNode/ITrieNode.js';
 import type { TrieOptions } from '../ITrieNode/TrieOptions.js';
-
-interface BitMaskInfo {
-    readonly NodeMaskEOW: number;
-    readonly NodeMaskChildCharIndex: number;
-    readonly NodeChildRefShift: number;
-}
-
-export class FastTrieBlobInternals implements BitMaskInfo {
-    readonly NodeMaskEOW: number;
-    readonly NodeMaskChildCharIndex: number;
-    readonly NodeChildRefShift: number;
-
-    constructor(
-        readonly nodes: number[][],
-        readonly charIndex: string[],
-        readonly charToIndexMap: Readonly<Record<string, number>>,
-        maskInfo: BitMaskInfo
-    ) {
-        const { NodeMaskEOW, NodeMaskChildCharIndex, NodeChildRefShift } = maskInfo;
-        this.NodeMaskEOW = NodeMaskEOW;
-        this.NodeMaskChildCharIndex = NodeMaskChildCharIndex;
-        this.NodeChildRefShift = NodeChildRefShift;
-    }
-}
+import type { FastTrieBlobInternals } from './FastTrieBlobInternals.js';
 
 const EmptyKeys: readonly string[] = Object.freeze([]);
 const EmptyNodes: readonly ITrieNode[] = Object.freeze([]);
