@@ -3,17 +3,28 @@ import { resolve as importResolve } from 'import-meta-resolve';
 import * as path from 'path';
 import { fileURLToPath } from 'url';
 
+import { importFastTrieBlob } from '../lib/io/importExportV3FastBlob.js';
 import type { Trie } from '../lib/trie.js';
-import { readTrieFile, readTrieFileFromConfig } from './reader.test.helper.js';
+import type { FastTrieBlob } from '../lib/TrieBlob/FastTrieBlob.js';
+import { readRawDictionaryFileFromConfig, readTrieFile, readTrieFileFromConfig } from './reader.test.helper.js';
 import { resolveGlobalDict, resolveGlobalSample } from './samples.js';
 
 const tries = new Map<string, Promise<Trie>>();
 
-export function readTrie(name: string): Promise<Trie> {
+export function readTrieFromConfig(name: string): Promise<Trie> {
     return memorize(name, tries, (name) => {
         const pkgLocation = fileURLToPath(importResolve(name, import.meta.url));
         return readTrieFileFromConfig(pkgLocation);
     });
+}
+
+export async function readFastTrieBlobFromConfig(
+    pathOrPackage: string,
+    dictionaryName?: string
+): Promise<FastTrieBlob> {
+    const pkgLocation = fileURLToPath(importResolve(pathOrPackage, import.meta.url));
+    const buf = await readRawDictionaryFileFromConfig(pkgLocation, dictionaryName);
+    return importFastTrieBlob(buf.toString('utf8'));
 }
 
 const sampleTries = new Map<string, Promise<Trie>>();

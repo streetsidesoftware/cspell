@@ -27,8 +27,8 @@ describe('Validate Util Functions', () => {
         const n1 = findNode(trie, 'sampl');
         const n2 = findNode(trie, 'samp');
         expect(n0?.eow).toBeTruthy();
-        expect(n1?.get('e')).toBe(n0);
-        expect(n2?.get('l')).toBe(n1);
+        expect(n1?.get('e')?.id).toBe(n0?.id);
+        expect(n2?.get('l')?.id).toBe(n1?.id);
     });
 
     test('countNodes', () => {

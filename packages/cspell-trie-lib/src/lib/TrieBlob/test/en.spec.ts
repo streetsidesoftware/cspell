@@ -1,10 +1,10 @@
 import { describe, expect, test } from 'vitest';
 
-import { readTrie } from '../../../test/dictionaries.test.helper.js';
+import { readTrieFromConfig } from '../../../test/dictionaries.test.helper.js';
 import type { TrieNode } from '../../TrieNode/TrieNode.js';
 
 function getTrie() {
-    return readTrie('@cspell/dict-en_us/cspell-ext.json');
+    return readTrieFromConfig('@cspell/dict-en_us/cspell-ext.json');
 }
 
 const timeout = 10000;

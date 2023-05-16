@@ -1,7 +1,7 @@
 import assert from 'assert';
 import { describe, expect, test } from 'vitest';
 
-import { readRawDictionaryFile, readTrie } from '../../test/dictionaries.test.helper.js';
+import { readRawDictionaryFile, readTrieFromConfig } from '../../test/dictionaries.test.helper.js';
 import type { WeightMap } from '../distance/index.js';
 import { mapDictionaryInformationToWeightMap } from '../mappers/mapDictionaryInfoToWeightMap.js';
 import type { DictionaryInformation } from '../models/DictionaryInformation.js';
@@ -14,7 +14,7 @@ import type { SuggestionCollectorOptions, SuggestionResult } from './suggestColl
 import { suggestionCollector } from './suggestCollector.js';
 
 function getTrie() {
-    return readTrie('@cspell/dict-en_us/cspell-ext.json');
+    return readTrieFromConfig('@cspell/dict-en_us/cspell-ext.json');
 }
 
 const timeout = 10000;

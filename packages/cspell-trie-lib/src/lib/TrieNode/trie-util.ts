@@ -87,16 +87,13 @@ export function has(node: TrieNode, word: string): boolean {
     return !h.length && !!((node.f || 0) & FLAG_WORD);
 }
 
-export function findNode(node: TrieNode, prefix: string): TrieNode | undefined {
-    let h = prefix.slice(0, 1);
-    let t = prefix.slice(1);
-    let n: TrieNode | undefined = node;
-    while (h.length && n && n.c) {
-        n = n.c[h];
-        h = t.slice(0, 1);
-        t = t.slice(1);
+export function findNode(node: TrieNode, word: string): TrieNode | undefined {
+    for (let i = 0; i < word.length; ++i) {
+        const n = node.c?.[word[i]];
+        if (!n) return undefined;
+        node = n;
     }
-    return n;
+    return node;
 }
 
 export function countNodes(root: TrieNode): number {

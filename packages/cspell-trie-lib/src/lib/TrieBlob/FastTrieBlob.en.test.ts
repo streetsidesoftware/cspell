@@ -1,23 +1,22 @@
 import { opSkip, opTake, pipe } from '@cspell/cspell-pipe/sync';
 import { describe, expect, test } from 'vitest';
 
-import { readTrie } from '../../test/dictionaries.test.helper.js';
-import { FastTrieBlob } from './FastTrieBlob.js';
+import { readTrieFromConfig } from '../../test/dictionaries.test.helper.js';
+import { FastTrieBlobBuilder } from './FastTrieBlobBuilder.js';
 
 function getTrie() {
-    return readTrie('@cspell/dict-en_us/cspell-ext.json');
+    return readTrieFromConfig('@cspell/dict-en_us/cspell-ext.json');
 }
 
 describe('Validate English FastTrieBlob', async () => {
     const pTrie = getTrie();
     const sampleTrie = await pTrie;
     const sampleWordsLarge = [...pipe(sampleTrie.words(), opSkip(1000), opTake(6000))];
-    const fastTrieBlob = FastTrieBlob.fromTrieRoot(sampleTrie.root);
+    const fastTrieBlob = FastTrieBlobBuilder.fromTrieRoot(sampleTrie.root);
 
     test('insert', () => {
         const words = sampleWordsLarge;
-        const ft = new FastTrieBlob();
-        ft.insert(words);
+        const ft = FastTrieBlobBuilder.fromWordList(words);
         const result = [...ft.words()];
         expect(result).toEqual(words);
     });

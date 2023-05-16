@@ -1,13 +1,13 @@
 import { describe, expect, test } from 'vitest';
 
 import { createTrieFromList } from '../TrieNode/trie-util.js';
-import { FastTrieBlob } from './FastTrieBlob.js';
+import { FastTrieBlobBuilder } from './FastTrieBlobBuilder.js';
 
 describe('FastTrieBlob', () => {
     const words = ['one', 'two', 'three', 'four', 'walk', 'walking', 'walks', 'wall', 'walls', 'walled'];
 
     test('insert', () => {
-        const ft = new FastTrieBlob();
+        const ft = new FastTrieBlobBuilder();
         ft.insert(words);
         ft.insert('hello');
         expect(ft.has('hello')).toBe(true);
@@ -19,7 +19,7 @@ describe('FastTrieBlob', () => {
 
     test('createTriFromList', () => {
         const root = createTrieFromList(words);
-        const ft = FastTrieBlob.fromTrieRoot(root);
+        const ft = FastTrieBlobBuilder.fromTrieRoot(root);
         expect(ft.has('walk')).toBe(true);
         expect(words.findIndex((word) => !ft.has(word))).toBe(-1);
         expect(ft.has('hello')).toBe(false);

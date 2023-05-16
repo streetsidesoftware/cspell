@@ -72,7 +72,7 @@ export class Trie {
         return this.count !== undefined;
     }
 
-    get options(): TrieOptions {
+    get options(): Readonly<TrieOptions> {
         return this._options;
     }
 
