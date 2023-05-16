@@ -33,7 +33,7 @@ class FastTrieBlobINode implements ITrieNode {
             const charIdx = entry & NodeMaskChildCharIndex;
             keys[i] = charIndex[charIdx];
         }
-        return keys;
+        return Object.freeze(keys);
     }
 
     values(): readonly ITrieNode[] {

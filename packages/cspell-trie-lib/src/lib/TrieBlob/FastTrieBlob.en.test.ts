@@ -1,11 +1,11 @@
 import { opSkip, opTake, pipe } from '@cspell/cspell-pipe/sync';
 import { describe, expect, test } from 'vitest';
 
-import { readTrie } from '../../test/dictionaries.test.helper.js';
+import { readTrieFromConfig } from '../../test/dictionaries.test.helper.js';
 import { FastTrieBlobBuilder } from './FastTrieBlobBuilder.js';
 
 function getTrie() {
-    return readTrie('@cspell/dict-en_us/cspell-ext.json');
+    return readTrieFromConfig('@cspell/dict-en_us/cspell-ext.json');
 }
 
 describe('Validate English FastTrieBlob', async () => {

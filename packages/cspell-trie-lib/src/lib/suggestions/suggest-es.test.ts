@@ -1,7 +1,7 @@
 import type { DictionaryInformation } from '@cspell/cspell-types';
 import { describe, expect, test } from 'vitest';
 
-import { readTrie } from '../../test/dictionaries.test.helper.js';
+import { readTrieFromConfig } from '../../test/dictionaries.test.helper.js';
 import { distanceAStarWeightedEx } from '../distance/distanceAStarWeighted.js';
 import { formatExResult } from '../distance/formatResultEx.js';
 import type { WeightMap } from '../distance/index.js';
@@ -9,7 +9,7 @@ import { mapDictionaryInformationToWeightMap } from '../mappers/mapDictionaryInf
 import { parseLinesToDictionary } from '../SimpleDictionaryParser.js';
 
 function getTrie() {
-    return readTrie('@cspell/dict-es-es/cspell-ext.json');
+    return readTrieFromConfig('@cspell/dict-es-es/cspell-ext.json');
 }
 
 describe('Validate Spanish Suggestions', () => {

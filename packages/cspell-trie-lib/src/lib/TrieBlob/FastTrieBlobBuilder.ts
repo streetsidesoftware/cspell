@@ -1,6 +1,7 @@
 import type { PartialTrieOptions, TrieOptions } from '../ITrieNode/TrieOptions.js';
 import type { TrieNode, TrieRoot } from '../TrieNode/TrieNode.js';
 import { mergeOptionalWithDefaults } from '../utils/mergeOptionalWithDefaults.js';
+import type { BuilderCursor } from './BuilderCursor.js';
 import { FastTrieBlob } from './FastTrieBlob.js';
 import type { FastTrieBlobBitMaskInfo } from './FastTrieBlobBitMaskInfo.js';
 import { FastTrieBlobInternals } from './FastTrieBlobInternals.js';
@@ -15,6 +16,7 @@ export class FastTrieBlobBuilder {
     private nodes: FastTrieBlobNode[];
     private _readonly = false;
     private IdxEOW: number;
+    private _cursor: BuilderCursor | undefined;
 
     readonly options: Readonly<TrieOptions>;
     readonly bitMasksInfo: FastTrieBlobBitMaskInfo;
@@ -22,7 +24,7 @@ export class FastTrieBlobBuilder {
     constructor(options?: PartialTrieOptions, bitMasksInfo = FastTrieBlobBuilder.DefaultBitMaskInfo) {
         this.options = mergeOptionalWithDefaults(options);
         this.bitMasksInfo = bitMasksInfo;
-        this.nodes = [[0], [FastTrieBlobBuilder.NodeMaskEOW]];
+        this.nodes = [[0], Object.freeze([FastTrieBlobBuilder.NodeMaskEOW]) as number[]];
         this.IdxEOW = 1;
     }
 
@@ -63,6 +65,94 @@ export class FastTrieBlobBuilder {
         return this;
     }
 
+    get cursor(): BuilderCursor {
+        this._cursor ??= this.createCursor();
+        return this._cursor;
+    }
+
+    private createCursor(): BuilderCursor {
+        const NodeChildRefShift = this.bitMasksInfo.NodeChildRefShift;
+        const NodeMaskEOW = this.bitMasksInfo.NodeMaskEOW;
+        const LetterMask = this.bitMasksInfo.NodeMaskChildCharIndex;
+        interface StackItem {
+            nodeIdx: number;
+            pos: number;
+        }
+
+        assert(this.nodes.length === 2);
+        const eow = 1;
+        const eowShifted = eow << NodeChildRefShift;
+        const nodes = this.nodes;
+
+        const stack: StackItem[] = [{ nodeIdx: 0, pos: 0 }];
+
+        let nodeIdx = 0;
+        let depth = 0;
+
+        const insertChar = (char: string) => {
+            // console.warn('i %o', char);
+            const node = nodes[nodeIdx] ?? [0];
+            nodes[nodeIdx] = node;
+            const childIdx = nodes.length;
+            const letterIdx = this.getCharIndex(char);
+            const pos = node.push((childIdx << NodeChildRefShift) | letterIdx) - 1;
+            ++depth;
+            const s = stack[depth];
+            if (s) {
+                s.nodeIdx = nodeIdx;
+                s.pos = pos;
+            } else {
+                stack[depth] = { nodeIdx, pos };
+            }
+            nodeIdx = childIdx;
+        };
+
+        const markEOW = () => {
+            // console.warn('$');
+            const node = nodes[nodeIdx];
+            if (!node) {
+                // no children, set the parent to point to the common EOW.
+                const { pos, nodeIdx: pNodeIdx } = stack[depth];
+                const pNode = nodes[pNodeIdx];
+                pNode[pos] = (pNode[pos] & LetterMask) | eowShifted;
+            } else {
+                nodes[nodeIdx] = node;
+                node[0] |= NodeMaskEOW;
+            }
+        };
+
+        const reference = (nodeId: number) => {
+            // +1 is used because the EOW node was already added, but not counted.
+            const refNodeIdx = nodeId + 1;
+            // console.warn('r %o', { nodeId, nodeIdx, refNodeIdx, depth });
+            // assert(nodes[nodeIdx] === undefined);
+            // assert(nodes[refNodeIdx]);
+            Object.freeze(nodes[refNodeIdx]);
+            const s = stack[depth];
+            nodeIdx = s.nodeIdx;
+            const pos = s.pos;
+            const node = nodes[nodeIdx];
+            node[pos] = (refNodeIdx << NodeChildRefShift) | (node[pos] & LetterMask);
+            // depth -= 1;
+        };
+
+        const backStep = (num: number) => {
+            // console.warn('<< %o', num);
+            assert(num <= depth && num > 0);
+            depth -= num;
+            nodeIdx = stack[depth + 1].nodeIdx;
+        };
+
+        const c: BuilderCursor = {
+            insertChar,
+            markEOW,
+            reference,
+            backStep,
+        };
+
+        return c;
+    }
+
     private _insert(word: string): this {
         word = word.trim();
         if (!word) return this;
@@ -92,6 +182,7 @@ export class FastTrieBlobBuilder {
                 continue;
             }
 
+            // Not found, add a new node if it isn't the end of the word.
             nodeIdx = p < len - 1 ? this.nodes.push([0]) - 1 : IdxEOW;
             node.push((nodeIdx << NodeChildRefShift) | letterIdx);
         }
@@ -193,4 +284,9 @@ export class FastTrieBlobBuilder {
         NodeMaskChildCharIndex: FastTrieBlobBuilder.NodeMaskChildCharIndex,
         NodeChildRefShift: FastTrieBlobBuilder.NodeChildRefShift,
     };
+}
+
+function assert<T>(condition: T, message = 'Assert Failed'): asserts condition {
+    if (condition) return;
+    throw new Error(message);
 }

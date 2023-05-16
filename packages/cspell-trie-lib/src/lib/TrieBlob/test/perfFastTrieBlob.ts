@@ -3,7 +3,7 @@ import { readFileSync, writeFileSync } from 'fs';
 
 import type { TrieNode } from '../../../index.js';
 import { createTrieRoot, insert, Trie } from '../../../index.js';
-import { readTrie } from '../../../test/dictionaries.test.helper.js';
+import { readFastTrieBlobFromConfig, readTrieFromConfig } from '../../../test/dictionaries.test.helper.js';
 import { trieRootToITrieRoot } from '../../TrieNode/trie.js';
 import { getGlobalPerfTimer } from '../../utils/timer.js';
 import { walkerWordsITrie } from '../../walker/walker.js';
@@ -12,7 +12,11 @@ import { FastTrieBlobBuilder } from '../FastTrieBlobBuilder.js';
 import { TrieBlob } from '../TrieBlob.js';
 
 function getTrie() {
-    return readTrie('@cspell/dict-en_us/cspell-ext.json');
+    return readTrieFromConfig('@cspell/dict-en_us/cspell-ext.json');
+}
+
+function getFastTrieBlob() {
+    return readFastTrieBlobFromConfig('@cspell/dict-en_us/cspell-ext.json');
 }
 
 function hasWords(words: string[], method: (word: string) => boolean): boolean {
@@ -29,6 +33,7 @@ export async function measureFastBlob(which: string | undefined, method: string 
     const timer = getGlobalPerfTimer();
     timer.start('measureFastBlob');
     const trie = await timer.measureAsyncFn('getTrie', getTrie);
+    await timer.measureAsyncFn('readFastTrieBlobFromConfig', getFastTrieBlob);
     timer.start('words');
     const words = [...trie.words()];
     timer.stop('words');
