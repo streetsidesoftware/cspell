@@ -3,7 +3,7 @@ Repository: aspnetboilerplate/aspnetboilerplate
 Url: "https://github.com/aspnetboilerplate/aspnetboilerplate"
 Args: ["**/*.{md,cs,cshtml}","--exclude=wwwroot","--exclude=**/*SampleApp.Tests/Web*"]
 Lines:
- CSpell: Files checked: 2528, Issues found: 3015 in 844 files
+ CSpell: Files checked: 2540, Issues found: 3019 in 845 files
  exit code: 1
 ./CONTRIBUTING.md:28:30     - Unknown word (aspnetboilerplate) -- Documents are located in [/aspnetboilerplate/doc](https://github
 ./LICENSE.md:3:25      - Unknown word (Volosoft)   -- Copyright (c) 2013-2021 Volosoft (https://volosoft.com
@@ -27,7 +27,8 @@ Lines:
 ./doc/WebSite/Articles/Use-MassTransit-In-ABP/Index.md:23:32     - Unknown word (Swashbuckle) -- PackageReference Include="Swashbuckle.AspNetCore" Version
 ./doc/WebSite/Articles/Use-MassTransit-In-ABP/Index.md:92:132    - Unknown word (messsages)   -- to receive and handle messsages. In this sample, we
 ./doc/WebSite/AspNet-Core.md:187:26    - Unknown word (Dont)       -- *WrapResult** and **DontWrapResult** attributes
-./doc/WebSite/AspNet-Core.md:263:52    - Unknown word (Newtonsoft) -- two JsonConverter for Newtonsoft.
+./doc/WebSite/AspNet-Core.md:246:79    - Unknown word (nameof)     -- IAccountAppService>(x => nameof(x.Register));
+./doc/WebSite/AspNet-Core.md:269:52    - Unknown word (Newtonsoft) -- two JsonConverter for Newtonsoft.
 ./doc/WebSite/Audit-Logging.md:129:54    - Unknown word (proxying)   -- Boilerplate uses dynamic proxying and
 ./doc/WebSite/Audit-Logging.md:81:13     - Unknown word (LINQ)       -- (Use simple LINQ to find the selector
 ./doc/WebSite/Authorization.md:48:25     - Unknown word (localizable) -- **Display name**: A localizable string that can be used
@@ -74,7 +75,6 @@ Lines:
 ./doc/WebSite/Entity-Framework-Core.md:180:28    - Unknown word (Assisgned)  -- conditions and include the AssisgnedPerson property, pre
 ./doc/WebSite/Entity-Framework-Core.md:235:1     - Unknown word (overidden)  -- overidden Delete method in your
 ./doc/WebSite/Entity-Framework-Core.md:237:5     - Unknown word (usea)       -- and usea the default repository
-./doc/WebSite/Entity-History.md:219:43    - Unknown word (nameof)     -- snapshot.IsPropertyChanged(nameof(MyEntity.MyProperty
 ./doc/WebSite/Entity-History.md:221:23    - Unknown word (stacktree)  -- // var stacktree = snapshot.PropertyChangesSta
 ./doc/WebSite/EntityFramework-Integration.md:4:9       - Unknown word (familar)    -- already familar with EntityFramework
 ./doc/WebSite/EntityFramework-Integration.md:74:18     - Unknown word (dbcontext)  -- multiple dbcontext scenarios to share the
@@ -196,7 +196,7 @@ Lines:
 ./src/Abp.EntityFramework/EntityFramework/Interceptors/WithNolockInterceptor.cs:13:110    - Unknown word (NOLOCK)     -- Extent\d+\](?! WITH \(NOLOCK\)))", RegexOptions.Multiline
 ./src/Abp.EntityFrameworkCore/EntityFrameworkCore/Extensions/QueryableExtensions.cs:51:34     - Unknown word (Includable) -- Func<IQueryable<T>, IIncludableQueryable<T, object>
 ./src/Abp.HangFire/Hangfire/Configuration/IAbpHangfireConfiguration.cs:13:30     - Unknown word (Hanfgire's) -- // Gets or sets the Hanfgire's <see cref="BackgroundJobServe
-./src/Abp.HtmlSanitizer/HtmlSanitizer/AbpHtmlSanitizerActionFilter.cs:5:7       - Unknown word (Ganss)      -- using Ganss.Xss;
+./src/Abp.HtmlSanitizer/HtmlSanitizer/AbpHtmlSanitizerModule.cs:5:7       - Unknown word (Ganss)      -- using Ganss.Xss;
 ./src/Abp.NHibernate/NHibernate/EntityMappings/NhMappingExtensions.cs:8:55      - Unknown word (standart)   -- make mapping easier for standart columns.
 ./src/Abp.Quartz/Quartz/IQuartzScheduleJobManager.cs:31:13     - Unknown word (Unschedules) -- /// Unschedules a job.
 ./src/Abp.RedisCache.ProtoBuf/Runtime/Caching/Redis/ProtoBufRedisCacheSerializer.cs:11:34     - Unknown word (Seperator)  -- private const string TypeSeperator = "|";
@@ -571,6 +571,7 @@ Lines:
 ./test/Abp.ZeroCore.Tests/Zero/MultiLingual/MultiLingual_Mapping_Tests.cs:166:17    - Unknown word (volosoft)   -- var volosoftOffice = offices.Items
 ./test/Abp.ZeroCore.Tests/Zero/Redis/PerRequestRedisCache/AbpPerRequestRedisCache_Test.cs:246:127   - Unknown word (redisdb)    -- it should go to the redisdb again
 ./test/Abp.ZeroCore.Tests/Zero/Sessions/Session_Override_Tests.cs:47:37     - Unknown word (Carluccio's) -- Name = "Carluccio's",
+./test/aspnet-core-demo/AbpAspNetCoreDemo.Tests/Tests/SanitizerControllerTests.cs:115:30    - Unknown word (malicioussite) -- InlineData("<a href='://malicioussite'>Please verify your
 ./test/aspnet-core-demo/AbpAspNetCoreDemo/Views/Home/Index.cshtml:12:39     - Unknown word (listbox)    -- carousel-inner" role="listbox">
 ./test/aspnet-core-demo/AbpAspNetCoreDemo/Views/Home/Index.cshtml:59:22     - Unknown word (glyphicon)  -- <span class="glyphicon glyphicon-chevron-left
 ./test/aspnet-core-demo/AbpAspNetCoreDemo/Views/Home/Index.cshtml:81:80     - Unknown word (appsetting) -- LinkID=699562">Add an appsetting in config and access
