@@ -3,7 +3,7 @@ import { resolve as importResolve } from 'import-meta-resolve';
 import * as path from 'path';
 import { fileURLToPath } from 'url';
 
-import { importFastTrieBlob } from '../lib/io/importExportV3FastBlob.js';
+import { importFastTrieBlob } from '../lib/io/importV3FastBlob.js';
 import type { Trie } from '../lib/trie.js';
 import type { FastTrieBlob } from '../lib/TrieBlob/FastTrieBlob.js';
 import { readRawDictionaryFileFromConfig, readTrieFile, readTrieFileFromConfig } from './reader.test.helper.js';

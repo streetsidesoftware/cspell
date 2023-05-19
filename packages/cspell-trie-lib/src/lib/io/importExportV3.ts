@@ -182,11 +182,11 @@ interface ReduceResults {
 
 type Reducer = (acc: ReduceResults, s: string) => ReduceResults;
 
-export function importTrie(linesX: string[] | Iterable<string> | string): TrieRoot {
+export function importTrie(srcLines: string[] | Iterable<string> | string): TrieRoot {
     const timer = getGlobalPerfTimer();
     const timerStart = timer.start('importTrieV3');
     const dataLines: string[] =
-        typeof linesX === 'string' ? linesX.split('\n') : Array.isArray(linesX) ? linesX : [...linesX];
+        typeof srcLines === 'string' ? srcLines.split('\n') : Array.isArray(srcLines) ? srcLines : [...srcLines];
 
     const root: TrieRoot = trieNodeToRoot({}, {});
 

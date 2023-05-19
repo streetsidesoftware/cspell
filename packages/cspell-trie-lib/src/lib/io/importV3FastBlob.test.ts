@@ -9,7 +9,7 @@ import type { ITrieNode } from '../ITrieNode/ITrieNode.js';
 import { FastTrieBlob } from '../TrieBlob/FastTrieBlob.js';
 import { trieRootToITrieRoot } from '../TrieNode/trie.js';
 import { serializeTrie } from './importExportV3.js';
-import { importFastTrieBlob } from './importExportV3FastBlob.js';
+import { importFastTrieBlob } from './importV3FastBlob.js';
 
 const sampleFile = resolveSamplePath('sampleV3.trie');
 

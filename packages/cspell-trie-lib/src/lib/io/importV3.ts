@@ -1,6 +1,4 @@
-import type { BuilderCursor } from '../TrieBlob/BuilderCursor.js';
-import type { FastTrieBlob } from '../TrieBlob/FastTrieBlob.js';
-import { FastTrieBlobBuilder } from '../TrieBlob/FastTrieBlobBuilder.js';
+import type { BuilderCursor, TrieBuilder } from '../Builder/index.js';
 import { getGlobalPerfTimer } from '../utils/timer.js';
 
 const EOW = '$'; // End of word
@@ -27,7 +25,7 @@ interface ReduceResults {
 
 type Reducer = (acc: ReduceResults, s: string) => ReduceResults;
 
-export function importFastTrieBlob(linesX: string[] | Iterable<string> | string): FastTrieBlob {
+export function importTrie<T>(builder: TrieBuilder<T>, linesX: string[] | Iterable<string> | string): T {
     const timer = getGlobalPerfTimer();
     const timerStart = timer.start('importTrieV3');
     const dataLines: string[] =
@@ -76,8 +74,7 @@ export function importFastTrieBlob(linesX: string[] | Iterable<string> | string)
 
     readHeader(dataLines.slice(0, startOfData));
 
-    const builder = new FastTrieBlobBuilder();
-    const cursor = builder.cursor;
+    const cursor = builder.getCursor();
 
     let node: ReduceResults = {
         cursor,
@@ -108,7 +105,8 @@ function parseStream(radix: number): Reducer {
             if (s === EOR) {
                 const { cursor } = acc;
                 const r = parseInt(ref, radix);
-                cursor.reference(r);
+                // +1 is used because EOW node was added but not counted.
+                cursor.reference(r + 1);
                 acc.parser = undefined;
                 return acc;
             }
