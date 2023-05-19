@@ -1,4 +1,7 @@
 import type { BuilderCursor, TrieBuilder } from '../Builder/index.js';
+import type { TrieData } from '../TrieData.js';
+import { TrieNodeBuilder } from '../TrieNode/TrieNodeBuilder.js';
+import type { TrieNodeTrie } from '../TrieNode/TrieNodeTrie.js';
 import { getGlobalPerfTimer } from '../utils/timer.js';
 
 const EOW = '$'; // End of word
@@ -25,11 +28,19 @@ interface ReduceResults {
 
 type Reducer = (acc: ReduceResults, s: string) => ReduceResults;
 
-export function importTrie<T>(builder: TrieBuilder<T>, linesX: string[] | Iterable<string> | string): T {
+export function importTrieV3AsTrieRoot(srcLines: string[] | Iterable<string> | string): TrieNodeTrie {
+    const builder = new TrieNodeBuilder();
+    return importTrieV3WithBuilder(builder, srcLines);
+}
+
+export function importTrieV3WithBuilder<T extends TrieData>(
+    builder: TrieBuilder<T>,
+    srcLines: string[] | Iterable<string> | string
+): T {
     const timer = getGlobalPerfTimer();
     const timerStart = timer.start('importTrieV3');
     const dataLines: string[] =
-        typeof linesX === 'string' ? linesX.split('\n') : Array.isArray(linesX) ? linesX : [...linesX];
+        typeof srcLines === 'string' ? srcLines.split('\n') : Array.isArray(srcLines) ? srcLines : [...srcLines];
 
     let radix = 16;
     const comment = /^\s*#/;

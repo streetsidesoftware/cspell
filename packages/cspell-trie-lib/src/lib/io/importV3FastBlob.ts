@@ -1,7 +1,7 @@
 import type { BuilderCursor } from '../Builder/BuilderCursor.js';
 import type { FastTrieBlob } from '../TrieBlob/FastTrieBlob.js';
 import { FastTrieBlobBuilder } from '../TrieBlob/FastTrieBlobBuilder.js';
-import { importTrie } from './importV3.js';
+import { importTrieV3WithBuilder } from './importV3.js';
 
 interface ReduceResults {
     cursor: BuilderCursor;
@@ -10,6 +10,6 @@ interface ReduceResults {
 
 type Reducer = (acc: ReduceResults, s: string) => ReduceResults;
 
-export function importFastTrieBlob(srcLines: string[] | Iterable<string> | string): FastTrieBlob {
-    return importTrie(new FastTrieBlobBuilder(), srcLines);
+export function importTrieV3AsFastTrieBlob(srcLines: string[] | Iterable<string> | string): FastTrieBlob {
+    return importTrieV3WithBuilder(new FastTrieBlobBuilder(), srcLines);
 }

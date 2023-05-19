@@ -3,7 +3,7 @@ import { resolve as importResolve } from 'import-meta-resolve';
 import * as path from 'path';
 import { fileURLToPath } from 'url';
 
-import { importFastTrieBlob } from '../lib/io/importV3FastBlob.js';
+import { importTrieV3AsFastTrieBlob } from '../lib/io/importV3FastBlob.js';
 import type { Trie } from '../lib/trie.js';
 import type { FastTrieBlob } from '../lib/TrieBlob/FastTrieBlob.js';
 import { readRawDictionaryFileFromConfig, readTrieFile, readTrieFileFromConfig } from './reader.test.helper.js';
@@ -18,13 +18,25 @@ export function readTrieFromConfig(name: string): Promise<Trie> {
     });
 }
 
+export async function readAndProcessDictionaryFile<T>(
+    processor: (data: Buffer) => T,
+    pathOrPackage: string,
+    dictionaryName?: string
+) {
+    const pkgLocation = fileURLToPath(importResolve(pathOrPackage, import.meta.url));
+    const buf = await readRawDictionaryFileFromConfig(pkgLocation, dictionaryName);
+    return processor(buf);
+}
+
 export async function readFastTrieBlobFromConfig(
     pathOrPackage: string,
     dictionaryName?: string
 ): Promise<FastTrieBlob> {
-    const pkgLocation = fileURLToPath(importResolve(pathOrPackage, import.meta.url));
-    const buf = await readRawDictionaryFileFromConfig(pkgLocation, dictionaryName);
-    return importFastTrieBlob(buf.toString('utf8'));
+    return readAndProcessDictionaryFile(
+        (buf) => importTrieV3AsFastTrieBlob(buf.toString('utf8')),
+        pathOrPackage,
+        dictionaryName
+    );
 }
 
 const sampleTries = new Map<string, Promise<Trie>>();

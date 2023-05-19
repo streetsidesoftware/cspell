@@ -1,5 +1,6 @@
 import type { ITrieNodeRoot } from '../ITrieNode/ITrieNode.js';
 import type { PartialTrieOptions, TrieOptions } from '../ITrieNode/TrieOptions.js';
+import type { TrieData } from '../TrieData.js';
 import { mergeOptionalWithDefaults } from '../utils/mergeOptionalWithDefaults.js';
 import { extractInfo, type FastTrieBlobBitMaskInfo } from './FastTrieBlobBitMaskInfo.js';
 import { FastTrieBlobInternals } from './FastTrieBlobInternals.js';
@@ -10,7 +11,7 @@ type FastTrieBlobNode = number[];
 
 type CharIndexMap = Record<string, number>;
 
-export class FastTrieBlob {
+export class FastTrieBlob implements TrieData {
     private charToIndexMap: CharIndexMap;
     private _readonly = false;
 
@@ -158,6 +159,10 @@ export class FastTrieBlob {
         NodeMaskChildCharIndex: FastTrieBlob.NodeMaskChildCharIndex,
         NodeChildRefShift: FastTrieBlob.NodeChildRefShift,
     };
+
+    get iTrieRoot(): ITrieNodeRoot {
+        return FastTrieBlob.toITrieNodeRoot(this);
+    }
 }
 
 function createCharToIndexMap(charIndex: string[]): CharIndexMap {
