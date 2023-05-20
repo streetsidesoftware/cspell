@@ -8,7 +8,10 @@ import type { PartialWithUndefined } from '../types.js';
  * @param defaultValue
  */
 
-export function mergeDefaults<T extends object>(value: PartialWithUndefined<T> | undefined, defaultValue: T): T {
+export function mergeDefaults<T extends object>(
+    value: Readonly<PartialWithUndefined<T>> | undefined,
+    defaultValue: T
+): T {
     const result = { ...defaultValue };
     if (value) {
         // eslint-disable-next-line @typescript-eslint/no-explicit-any

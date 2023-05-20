@@ -1,6 +1,7 @@
-import type { BuilderCursor } from '../TrieBlob/BuilderCursor.js';
-import type { FastTrieBlob } from '../TrieBlob/FastTrieBlob.js';
-import { FastTrieBlobBuilder } from '../TrieBlob/FastTrieBlobBuilder.js';
+import type { BuilderCursor, TrieBuilder } from '../Builder/index.js';
+import type { TrieData } from '../TrieData.js';
+import { TrieNodeBuilder } from '../TrieNode/TrieNodeBuilder.js';
+import type { TrieNodeTrie } from '../TrieNode/TrieNodeTrie.js';
 import { getGlobalPerfTimer } from '../utils/timer.js';
 
 const EOW = '$'; // End of word
@@ -27,11 +28,19 @@ interface ReduceResults {
 
 type Reducer = (acc: ReduceResults, s: string) => ReduceResults;
 
-export function importFastTrieBlob(linesX: string[] | Iterable<string> | string): FastTrieBlob {
+export function importTrieV3AsTrieRoot(srcLines: string[] | Iterable<string> | string): TrieNodeTrie {
+    const builder = new TrieNodeBuilder();
+    return importTrieV3WithBuilder(builder, srcLines);
+}
+
+export function importTrieV3WithBuilder<T extends TrieData>(
+    builder: TrieBuilder<T>,
+    srcLines: string[] | Iterable<string> | string
+): T {
     const timer = getGlobalPerfTimer();
     const timerStart = timer.start('importTrieV3');
     const dataLines: string[] =
-        typeof linesX === 'string' ? linesX.split('\n') : Array.isArray(linesX) ? linesX : [...linesX];
+        typeof srcLines === 'string' ? srcLines.split('\n') : Array.isArray(srcLines) ? srcLines : [...srcLines];
 
     let radix = 16;
     const comment = /^\s*#/;
@@ -76,8 +85,7 @@ export function importFastTrieBlob(linesX: string[] | Iterable<string> | string)
 
     readHeader(dataLines.slice(0, startOfData));
 
-    const builder = new FastTrieBlobBuilder();
-    const cursor = builder.cursor;
+    const cursor = builder.getCursor();
 
     let node: ReduceResults = {
         cursor,
@@ -108,7 +116,8 @@ function parseStream(radix: number): Reducer {
             if (s === EOR) {
                 const { cursor } = acc;
                 const r = parseInt(ref, radix);
-                cursor.reference(r);
+                // +1 is used because EOW node was added but not counted.
+                cursor.reference(r + 1);
                 acc.parser = undefined;
                 return acc;
             }

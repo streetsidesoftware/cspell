@@ -5,6 +5,7 @@ import type { TrieNode } from '../../../index.js';
 import { createTrieRoot, insert, Trie } from '../../../index.js';
 import { readFastTrieBlobFromConfig, readTrieFromConfig } from '../../../test/dictionaries.test.helper.js';
 import { trieRootToITrieRoot } from '../../TrieNode/trie.js';
+import { buildTrieNodeTrieFromWords } from '../../TrieNode/TrieNodeBuilder.js';
 import { getGlobalPerfTimer } from '../../utils/timer.js';
 import { walkerWordsITrie } from '../../walker/walker.js';
 import { createTrieBlobFromITrieNodeRoot, createTrieBlobFromTrieRoot } from '../createTrieBlob.js';
@@ -29,9 +30,9 @@ function hasWords(words: string[], method: (word: string) => boolean): boolean {
     return success;
 }
 
-export async function measureFastBlob(which: string | undefined, method: string | undefined) {
+export async function measurePerf(which: string | undefined, method: string | undefined) {
     const timer = getGlobalPerfTimer();
-    timer.start('measureFastBlob');
+    timer.start('Measure Perf');
     const trie = await timer.measureAsyncFn('getTrie', getTrie);
     await timer.measureAsyncFn('readFastTrieBlobFromConfig', getFastTrieBlob);
     timer.start('words');
@@ -124,10 +125,12 @@ export async function measureFastBlob(which: string | undefined, method: string 
         timer.measureFn('trie.createTriFromList \t\t', () => insertWords(root, words));
         const trie = new Trie(root);
 
+        timer.measureFn('trie.buildTrieNodeTrieFromWords', () => buildTrieNodeTrieFromWords(words));
+
         switch (method) {
             case 'has':
-                timer.measureFn('trie.Trie.has \t\t\t', () => hasWords(words, (word) => trie.hasWord(word, true)));
-                timer.measureFn('trie.Trie.has \t\t\t', () => hasWords(words, (word) => trie.hasWord(word, true)));
+                timer.measureFn('trie.Trie.has', () => hasWords(words, (word) => trie.hasWord(word, true)));
+                timer.measureFn('trie.Trie.has', () => hasWords(words, (word) => trie.hasWord(word, true)));
                 break;
             case 'words':
                 timer.start('trie.words');
@@ -137,7 +140,7 @@ export async function measureFastBlob(which: string | undefined, method: string 
         }
     }
     timer.stop('trie');
-    timer.stop('measureFastBlob');
+    timer.stop('Measure Perf');
     timer.stop();
     timer.report();
 }
