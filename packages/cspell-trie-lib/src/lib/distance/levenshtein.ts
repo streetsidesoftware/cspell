@@ -18,7 +18,7 @@ export function levenshteinDistance(a: string, b: string): number {
         firstRow[i] = i;
     }
 
-    const matrix = [firstRow, [1].concat(firstRow), [2, 1].concat(firstRow)];
+    const matrix = [firstRow, [1, ...firstRow], [2, 1, ...firstRow]];
     let ppRow = matrix[0];
     let pRow = matrix[1];
 

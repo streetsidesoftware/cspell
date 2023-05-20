@@ -1,7 +1,7 @@
 import { describe, expect, test } from 'vitest';
 
-import { trieRootToITrieRoot } from '../TrieNode/trie.js';
-import { createTrieFromList } from '../TrieNode/trie-util.js';
+import { trieRootToITrieRoot } from '../../TrieNode/trie.js';
+import { createTrieFromList } from '../../TrieNode/trie-util.js';
 import { walker } from './walker.js';
 import type { WalkerIterator, YieldResult } from './walkerTypes.js';
 

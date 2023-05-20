@@ -72,6 +72,17 @@ class TrieBlobINode implements ITrieNode {
         return nodes;
     }
 
+    entries(): readonly (readonly [string, ITrieNode])[] {
+        const keys = this.keys();
+        const values = this.values();
+        const len = keys.length;
+        const entries: (readonly [string, ITrieNode])[] = Array(len);
+        for (let i = 0; i < len; ++i) {
+            entries[i] = [keys[i], values[i]] as const;
+        }
+        return entries;
+    }
+
     /** get child ITrieNode */
     get(char: string): ITrieNode | undefined {
         const idx = this.getCharToIdxMap()[char];

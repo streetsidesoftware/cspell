@@ -1,4 +1,4 @@
-import type { ITrieNode } from './ITrieNode.js';
+import type { ITrieNode } from '../ITrieNode.js';
 import type { WalkerIterator } from './walkerTypes.js';
 import { CompoundWordsMethod, JOIN_SEPARATOR, WORD_SEPARATOR } from './walkerTypes.js';
 

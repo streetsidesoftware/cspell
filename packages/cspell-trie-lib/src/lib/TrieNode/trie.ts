@@ -12,6 +12,7 @@ export function trieNodeToITrieNode(node: TrieNode): ITrieNode {
 
 const EmptyKeys: readonly string[] = Object.freeze([]);
 const EmptyValues: readonly ITrieNode[] = Object.freeze([]);
+const EmptyEntries: readonly (readonly [string, ITrieNode])[] = Object.freeze([]);
 
 class ImplITrieNode implements ITrieNode {
     readonly id: TrieNode;
@@ -42,6 +43,12 @@ class ImplITrieNode implements ITrieNode {
     /** get the child nodes */
     values(): readonly ITrieNode[] {
         return !this.node.c ? EmptyValues : Object.values(this.node.c).map((n) => ImplITrieNode.toITrieNode(n));
+    }
+
+    entries(): readonly (readonly [string, ITrieNode])[] {
+        return !this.node.c
+            ? EmptyEntries
+            : Object.entries(this.node.c).map(([k, n]) => [k, ImplITrieNode.toITrieNode(n)]);
     }
 
     /** get child ITrieNode */
