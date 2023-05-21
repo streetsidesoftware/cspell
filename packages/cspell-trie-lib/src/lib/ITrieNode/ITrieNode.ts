@@ -2,6 +2,8 @@ import type { TrieOptions } from './TrieOptions.js';
 
 export type ITrieNodeId = object | number | string;
 
+type Entry = readonly [string, ITrieNode];
+
 export interface ITrieNode {
     /**
      * ITrieNode instances are not unique. It is possible for multiple ITrieNode instances to
@@ -20,6 +22,8 @@ export interface ITrieNode {
     keys(): readonly string[];
     /** get keys to children */
     values(): readonly ITrieNode[];
+    /** get the children as key value pairs */
+    entries(): readonly Entry[];
     /** get child ITrieNode */
     get(char: string): ITrieNode | undefined;
     /** get a child by the key index */
