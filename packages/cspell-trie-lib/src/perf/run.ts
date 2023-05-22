@@ -1,4 +1,4 @@
-import { measurePerf } from './perfFastTrieBlob.js';
+import { measurePerf, PerfConfig } from './perfFastTrieBlob.js';
 
 const args = process.argv.slice(2);
 
@@ -10,7 +10,11 @@ Usage:
 - node run.js [type]
 - node run.js <type> [method]
 
-type - all, trie, blob, fast
+type:
+${Object.entries(PerfConfig)
+    .map(([name, opt]) => `- ${name} - ${opt.desc}`)
+    .join('\n')}
+
 method - words, has
 
 `);

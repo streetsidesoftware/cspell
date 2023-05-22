@@ -1,3 +1,4 @@
+import { readFile } from 'fs/promises';
 import { join, resolve } from 'path';
 import { fileURLToPath } from 'url';
 
@@ -17,4 +18,8 @@ export function resolveGlobalSample(samplePath: string): string {
 
 export function resolveGlobalDict(dictPath: string): string {
     return resolve(join(globalSamplesDir, 'dicts'), dictPath);
+}
+
+export function readSampleFile(samplePath: string): Promise<string> {
+    return readFile(resolveSample(samplePath), 'utf8');
 }

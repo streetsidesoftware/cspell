@@ -1,34 +1,48 @@
 import assert from 'assert';
 import { readFileSync, writeFileSync } from 'fs';
 
-import type { TrieNode } from '../../../index.js';
-import { createTrieRoot, insert, Trie } from '../../../index.js';
-import { readFastTrieBlobFromConfig, readTrieFromConfig } from '../../../test/dictionaries.test.helper.js';
-import { trieRootToITrieRoot } from '../../TrieNode/trie.js';
-import { buildTrieNodeTrieFromWords } from '../../TrieNode/TrieNodeBuilder.js';
-import { getGlobalPerfTimer } from '../../utils/timer.js';
-import { walkerWordsITrie } from '../../walker/walker.js';
-import { createTrieBlobFromITrieNodeRoot, createTrieBlobFromTrieRoot } from '../createTrieBlob.js';
-import { FastTrieBlobBuilder } from '../FastTrieBlobBuilder.js';
-import { TrieBlob } from '../TrieBlob.js';
+import type { TrieNode } from '../index.js';
+import { createTrieRoot, insert, Trie } from '../index.js';
+import { selectNearestWords } from '../lib/distance/levenshtein.js';
+import { createTrieBlobFromITrieNodeRoot, createTrieBlobFromTrieRoot } from '../lib/TrieBlob/createTrieBlob.js';
+import { FastTrieBlobBuilder } from '../lib/TrieBlob/FastTrieBlobBuilder.js';
+import { TrieBlob } from '../lib/TrieBlob/TrieBlob.js';
+import { trieRootToITrieRoot } from '../lib/TrieNode/trie.js';
+import { buildTrieNodeTrieFromWords } from '../lib/TrieNode/TrieNodeBuilder.js';
+import { getGlobalPerfTimer } from '../lib/utils/timer.js';
+import { walkerWordsITrie } from '../lib/walker/walker.js';
+import { readFastTrieBlobFromConfig, readTrieFromConfig } from '../test/dictionaries.test.helper.js';
+import { selectNearestWordsBruteForce } from './levenshtein.js';
 
-function getTrie() {
-    return readTrieFromConfig('@cspell/dict-en_us/cspell-ext.json');
+interface Options {
+    desc: string;
+    auto?: boolean;
 }
 
-function getFastTrieBlob() {
-    return readFastTrieBlobFromConfig('@cspell/dict-en_us/cspell-ext.json');
-}
+export const PerfConfig = {
+    all: { desc: 'Run all tests.' } as Options,
+    none: { desc: 'Only run setup.' } as Options,
+    blob: { desc: 'Run tests for TrieBlob' } as Options,
+    fast: { desc: 'Run tests for FastTrieBlob' } as Options,
+    trie: { desc: 'Run tests for original TrieNode' } as Options,
+    suggest: { desc: 'Run tests for spelling suggests algorithms', auto: false } as Options,
+} as const;
 
-function hasWords(words: string[], method: (word: string) => boolean): boolean {
-    const len = words.length;
-    let success = true;
-    for (let i = 0; i < len; ++i) {
-        success = method(words[i]) && success;
-    }
-    assert(success);
-    return success;
-}
+type PerfConfig = typeof PerfConfig;
+type PerfKey = keyof PerfConfig;
+
+type PerfNames = {
+    [K in PerfKey]: K;
+};
+
+const perf: PerfNames = {
+    all: 'all',
+    none: 'none',
+    blob: 'blob',
+    fast: 'fast',
+    trie: 'trie',
+    suggest: 'suggest',
+};
 
 export async function measurePerf(which: string | undefined, method: string | undefined) {
     const timer = getGlobalPerfTimer();
@@ -41,8 +55,17 @@ export async function measurePerf(which: string | undefined, method: string | un
 
     timer.mark('done with setup');
 
-    timer.start('blob');
-    if (filterTest(which, 'blob')) {
+    filterTest(which, perf.blob) && timer.measureFn('blob', perfBlob);
+    filterTest(which, perf.fast) && timer.measureFn('fast', perfFast);
+    filterTest(which, perf.trie) && timer.measureFn('trie', perfTrie);
+    filterTest(which, perf.suggest) && timer.measureFn('suggest', perfSuggest);
+
+    timer.stop('Measure Perf');
+    timer.stop();
+    timer.report();
+    return;
+
+    function perfBlob() {
         {
             const ft = timer.measureFn('blob.FastTrieBlobBuilder.fromTrieRoot \t', () =>
                 FastTrieBlobBuilder.fromTrieRoot(trie.root)
@@ -90,10 +113,8 @@ export async function measurePerf(which: string | undefined, method: string | un
                 break;
         }
     }
-    timer.stop('blob');
 
-    timer.start('fast');
-    if (filterTest(which, 'fast')) {
+    function perfFast() {
         const ftWordList = timer.measureFn('fast.FastTrieBlobBuilder.fromWordList', () =>
             FastTrieBlobBuilder.fromWordList(words)
         );
@@ -116,10 +137,8 @@ export async function measurePerf(which: string | undefined, method: string | un
                 break;
         }
     }
-    timer.stop('fast');
 
-    timer.start('trie');
-    if (filterTest(which, 'trie')) {
+    function perfTrie() {
         const root = createTrieRoot({});
 
         timer.measureFn('trie.createTriFromList \t\t', () => insertWords(root, words));
@@ -139,14 +158,35 @@ export async function measurePerf(which: string | undefined, method: string | un
                 break;
         }
     }
-    timer.stop('trie');
-    timer.stop('Measure Perf');
-    timer.stop();
-    timer.report();
+
+    function perfSuggest() {
+        const count = 8;
+        const maxEdits = 3;
+
+        timer.start('filter words');
+        const fWords = words.filter((w) => !w.startsWith('~'));
+        timer.stop('filter words');
+
+        timer.measureFn('selectNearestWordsBruteForce', () =>
+            selectNearestWordsBruteForce('nearest', fWords, count, maxEdits)
+        );
+
+        // const sr =
+        timer.measureFn('selectNearestWords', () => selectNearestWords('nearest', fWords, count, maxEdits));
+        // console.warn('%o', sr);
+        // const sc =
+        timer.measureFn('trie.suggestWithCost', () =>
+            trie.suggestWithCost('nearest', { ignoreCase: false, changeLimit: maxEdits })
+        );
+        // console.warn('%o', sc);
+    }
 }
 
-function filterTest(value: string | undefined, expected: string): boolean {
-    return !value || value === expected || value == 'all';
+function filterTest(value: string | undefined, expected: PerfKey): boolean {
+    if (value === expected) return true;
+    const cfg = PerfConfig[expected];
+
+    return (cfg.auto !== false && !value) || value == 'all';
 }
 
 function insertWords(root: TrieNode, words: string[]) {
@@ -155,4 +195,22 @@ function insertWords(root: TrieNode, words: string[]) {
             insert(word, root);
         }
     }
+}
+
+function getTrie() {
+    return readTrieFromConfig('@cspell/dict-en_us/cspell-ext.json');
+}
+
+function getFastTrieBlob() {
+    return readFastTrieBlobFromConfig('@cspell/dict-en_us/cspell-ext.json');
+}
+
+function hasWords(words: string[], method: (word: string) => boolean): boolean {
+    const len = words.length;
+    let success = true;
+    for (let i = 0; i < len; ++i) {
+        success = method(words[i]) && success;
+    }
+    assert(success);
+    return success;
 }
