@@ -12,8 +12,8 @@ Lines:
 ./Cargo.toml:76:1      - Unknown word (thiserror)  -- thiserror = "1.0"
 ./Cargo.toml:79:1      - Unknown word (widestring) -- widestring = "0.5.1"
 ./Cargo.toml:86:49     - Unknown word (flamescope) -- flame-it", "flame", "flamescope"]
-./DEVELOPMENT.md:110:5     - Unknown word (speedscope) -- The speedscope json format (default
-./DEVELOPMENT.md:128:26    - Unknown word (subcrates)  -- src`: using the other subcrates to bring rustpython
+./DEVELOPMENT.md:113:5     - Unknown word (speedscope) -- The speedscope json format (default
+./DEVELOPMENT.md:131:26    - Unknown word (subcrates)  -- src`: using the other subcrates to bring rustpython
 ./DEVELOPMENT.md:24:20     - Unknown word (rustup)     -- - If you have `rustup` on your system, enter
 ./DEVELOPMENT.md:33:72     - Unknown word (automake)   -- make sure autoconf, automake,
 ./DEVELOPMENT.md:43:49     - Unknown word (codestyle)  -- com/rust-lang/rustfmt) codestyle. Please format your
@@ -479,13 +479,13 @@ Lines:
 ./stdlib/src/mmap.rs:59:24     - Unknown word (DODUMP)      -- libc::MADV_DODUMP => Advice::DoDump,
 ./stdlib/src/mmap.rs:61:24     - Unknown word (HWPOISON)    -- libc::MADV_HWPOISON => Advice::HwPoison
 ./stdlib/src/mmap.rs:646:46    - Unknown word (rposition)             -- buf.windows(sub.len()).rposition(|window| window == sub
-./stdlib/src/posixsubprocess.rs:150:43    - Unknown word (SIGXFZ)     -- restore signals SIGPIPE, SIGXFZ, SIGXFSZ to SIG_DFL
+./stdlib/src/posixsubprocess.rs:168:43    - Unknown word (SIGXFZ)     -- restore signals SIGPIPE, SIGXFZ, SIGXFSZ to SIG_DFL
 ./stdlib/src/posixsubprocess.rs:28:17     - Unknown word (preexec)    -- if args.preexec_fn.is_some() {
 ./stdlib/src/posixsubprocess.rs:31:13     - Unknown word (cstrs)      -- let cstrs_to_ptrs = |cstrs: &
-./stdlib/src/posixsubprocess.rs:72:21     - Unknown word (cwrite)     -- p2cread: i32, p2cwrite: i32, c2pread: i32,
-./stdlib/src/posixsubprocess.rs:73:19     - Unknown word (errwrite)   -- errread: i32, errwrite: i32, errpipe_read:
-./stdlib/src/posixsubprocess.rs:73:34     - Unknown word (errpipe)    -- i32, errwrite: i32, errpipe_read: i32, errpipe_write
-./stdlib/src/posixsubprocess.rs:73:5      - Unknown word (errread)    -- errread: i32, errwrite: i32
+./stdlib/src/posixsubprocess.rs:77:7      - Unknown word (cwrite)     -- p2cwrite: i32,
+./stdlib/src/posixsubprocess.rs:80:5      - Unknown word (errread)    -- errread: i32,
+./stdlib/src/posixsubprocess.rs:81:5      - Unknown word (errwrite)   -- errwrite: i32,
+./stdlib/src/posixsubprocess.rs:82:5      - Unknown word (errpipe)    -- errpipe_read: i32,
 ./stdlib/src/pyexpat.rs:138:42    - Unknown word (isfinal)    -- self, data: PyStrRef, _isfinal: OptionalArg<bool>,
 ./stdlib/src/random.rs:135:25    - Unknown word (wordarray)  -- let wordarray = (0..words)
 ./stdlib/src/random.rs:16:16     - Unknown word (rngs)       -- use rand::{rngs::StdRng, RngCore, SeedableRng
@@ -673,12 +673,12 @@ Lines:
 ./vm/src/dictdatatype.rs:22:62     - Unknown word (pyhash)     -- compatible with actual pyhash value
 ./vm/src/dictdatatype.rs:685:29    - Unknown word (usecases)   -- dictionary. Typical usecases are:
 ./vm/src/frame.rs:350:13    - Unknown word (instrs)     -- let instrs = &self.code.instructions
-./vm/src/frame.rs:775:75    - Unknown word (binop)      -- op } => self.execute_binop(vm, op.get(arg)),
-./vm/src/frame.rs:782:74    - Unknown word (unop)       -- op } => self.execute_unop(vm, op.get(arg)),
-./vm/src/frame.rs:877:21    - Unknown word (aenter)     -- let aenter_res = vm
-./vm/src/frame.rs:881:21    - Unknown word (aexit)      -- let aexit = mgr
+./vm/src/frame.rs:786:75    - Unknown word (binop)      -- op } => self.execute_binop(vm, op.get(arg)),
+./vm/src/frame.rs:793:74    - Unknown word (unop)       -- op } => self.execute_unop(vm, op.get(arg)),
+./vm/src/frame.rs:888:21    - Unknown word (aenter)     -- let aenter_res = vm
+./vm/src/frame.rs:892:21    - Unknown word (aexit)      -- let aexit = mgr
 ./vm/src/frame.rs:91:6      - Unknown word (Lasti)      -- type Lasti = atomic::AtomicU32
-./vm/src/frame.rs:974:21    - Unknown word (aiterable)  -- let aiterable = self.pop_value();
+./vm/src/frame.rs:985:21    - Unknown word (aiterable)  -- let aiterable = self.pop_value();
 ./vm/src/function/argument.rs:120:13    - Unknown word (kwargc)     -- let kwargc = kwarg_names.len()
 ./vm/src/function/argument.rs:121:13    - Unknown word (posargc)    -- let posargc = total_argc - kwargc
 ./vm/src/function/argument.rs:123:13    - Unknown word (posargs)    -- let posargs = args.by_ref().take
