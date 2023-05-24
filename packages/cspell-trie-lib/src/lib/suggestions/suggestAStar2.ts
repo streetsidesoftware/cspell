@@ -1,5 +1,6 @@
-import type { ITrieNode, ITrieNodeRoot } from '../ITrieNode/ITrieNode.js';
+import type { ITrieNode } from '../ITrieNode/ITrieNode.js';
 import { CompoundWordsMethod, JOIN_SEPARATOR, WORD_SEPARATOR } from '../ITrieNode/walker/index.js';
+import type { TrieData } from '../TrieData.js';
 import { PairingHeap } from '../utils/PairingHeap.js';
 import { opCosts } from './constants.js';
 import type { GenSuggestionOptionsStrict, SuggestionOptions } from './genSuggestionsOptions.js';
@@ -23,7 +24,7 @@ function comparePath(a: PNode, b: PNode): number {
     return a.c - b.c || b.i - a.i;
 }
 
-export function suggestAStar(root: ITrieNodeRoot, word: string, options: SuggestionOptions): SuggestionResult[] {
+export function suggestAStar(trie: TrieData, word: string, options: SuggestionOptions): SuggestionResult[] {
     const opts = createSuggestionOptions(options);
     const collector = suggestionCollector(word, {
         numSuggestions: opts.numSuggestions,
@@ -32,15 +33,16 @@ export function suggestAStar(root: ITrieNodeRoot, word: string, options: Suggest
         ignoreCase: opts.ignoreCase,
         timeout: opts.timeout,
     });
-    collector.collect(getSuggestionsAStar(root, word, opts));
+    collector.collect(getSuggestionsAStar(trie, word, opts));
     return collector.suggestions;
 }
 
 export function* getSuggestionsAStar(
-    root: ITrieNodeRoot,
+    trie: TrieData,
     word: string,
     options: GenSuggestionOptionsStrict
 ): SuggestionGenerator {
+    const root = trie.getRoot();
     const { compoundMethod } = options;
     const pathHeap = new PairingHeap(comparePath);
     const resultHeap = new PairingHeap(compareSuggestion);

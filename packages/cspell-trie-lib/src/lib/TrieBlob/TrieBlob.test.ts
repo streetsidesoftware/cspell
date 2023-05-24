@@ -48,7 +48,7 @@ describe('TrieBlob', () => {
     test('toITrieNodeRoot', () => {
         const root = createITrieFromList(sampleWords);
         const trieBlob = createTrieBlobFromITrieNodeRoot(root);
-        const iter = walkerWordsITrie(TrieBlob.toITrieNodeRoot(trieBlob));
+        const iter = walkerWordsITrie(trieBlob.getRoot());
         expect([...iter]).toEqual(sampleWords);
     });
 });

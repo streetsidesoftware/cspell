@@ -14,6 +14,7 @@ type CharIndexMap = Record<string, number>;
 export class FastTrieBlob implements TrieData {
     private charToIndexMap: CharIndexMap;
     private _readonly = false;
+    private _forbidIdx: number;
 
     readonly options: Readonly<TrieOptions>;
 
@@ -25,6 +26,7 @@ export class FastTrieBlob implements TrieData {
     ) {
         this.options = mergeOptionalWithDefaults(options);
         this.charToIndexMap = createCharToIndexMap(charIndex);
+        this._forbidIdx = this._lookupChar(0, this.options.forbiddenWordPrefix);
     }
 
     private lookUpCharIndex(char: string): number {
@@ -32,12 +34,15 @@ export class FastTrieBlob implements TrieData {
     }
 
     has(word: string): boolean {
+        return this._has(0, word);
+    }
+
+    private _has(nodeIdx: number, word: string): boolean {
         const NodeMaskChildCharIndex = this.bitMasksInfo.NodeMaskChildCharIndex;
         const NodeChildRefShift = this.bitMasksInfo.NodeChildRefShift;
         const NodeMaskEOW = this.bitMasksInfo.NodeMaskEOW;
         const nodes = this.nodes;
         const len = word.length;
-        let nodeIdx = 0;
         let node = nodes[nodeIdx];
         for (let p = 0; p < len; ++p, node = nodes[nodeIdx]) {
             const letterIdx = this.lookUpCharIndex(word[p]);
@@ -50,6 +55,7 @@ export class FastTrieBlob implements TrieData {
             }
             if (i < 1) return false;
             nodeIdx = node[i] >>> NodeChildRefShift;
+            if (!nodeIdx) return false;
         }
 
         return !!(node[0] & NodeMaskEOW);
@@ -162,6 +168,30 @@ export class FastTrieBlob implements TrieData {
 
     get iTrieRoot(): ITrieNodeRoot {
         return FastTrieBlob.toITrieNodeRoot(this);
+    }
+
+    getRoot(): ITrieNodeRoot {
+        return this.iTrieRoot;
+    }
+
+    isForbiddenWord(word: string): boolean {
+        return !!this._forbidIdx && this._has(this._forbidIdx, word);
+    }
+
+    private _lookupChar(nodeIdx: number, char: string): number {
+        const NodeMaskChildCharIndex = this.bitMasksInfo.NodeMaskChildCharIndex;
+        const NodeChildRefShift = this.bitMasksInfo.NodeChildRefShift;
+        const nodes = this.nodes;
+        const node = nodes[nodeIdx];
+        const letterIdx = this.lookUpCharIndex(char);
+        const count = node.length;
+        let i = count - 1;
+        for (; i > 0; --i) {
+            if ((node[i] & NodeMaskChildCharIndex) === letterIdx) {
+                return node[i] >>> NodeChildRefShift;
+            }
+        }
+        return 0;
     }
 }
 

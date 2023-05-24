@@ -14,7 +14,7 @@ describe('Validate Suggest', () => {
 
     // cspell:ignore joyfullwalk
     test('Tests suggestions for valid word talks', () => {
-        const results = Sug.suggestAStar(trie.iTrieRoot, 'talks', { changeLimit: changeLimit });
+        const results = Sug.suggestAStar(trie, 'talks', { changeLimit: changeLimit });
         expect(results).toEqual([
             { cost: 0, word: 'talks' },
             { cost: 100, word: 'talk' },
@@ -26,7 +26,7 @@ describe('Validate Suggest', () => {
     });
 
     test('Tests suggestions for valid word', () => {
-        const results = Sug.suggestAStar(trie.iTrieRoot, 'talks', { changeLimit: changeLimit });
+        const results = Sug.suggestAStar(trie, 'talks', { changeLimit: changeLimit });
         const suggestions = results.map((s) => s.word);
         expect(suggestions).toEqual(expect.arrayContaining(['talks']));
         expect(suggestions).toEqual(expect.arrayContaining(['talk']));
@@ -37,7 +37,7 @@ describe('Validate Suggest', () => {
 
     test('Tests suggestions for invalid word', () => {
         // cspell:ignore tallk
-        const results = Sug.suggestAStar(trie.iTrieRoot, 'tallk', {});
+        const results = Sug.suggestAStar(trie, 'tallk', {});
         const suggestions = results.map((s) => s.word);
         expect(suggestions).toEqual(expect.arrayContaining(['talks']));
         expect(suggestions).toEqual(expect.arrayContaining(['talk']));
@@ -48,34 +48,34 @@ describe('Validate Suggest', () => {
 
     // cspell:ignore jernals
     test('Tests suggestions jernals', () => {
-        const results = Sug.suggestAStar(trie.iTrieRoot, 'jernals', {});
+        const results = Sug.suggestAStar(trie, 'jernals', {});
         const suggestions = results.map((s) => s.word);
         expect(suggestions).toEqual(['journals', 'journal']);
     });
 
     // cspell:ignore juornals
     test('Tests suggestions for `juornals` (reduced cost for swap)', () => {
-        const results = Sug.suggestAStar(trie.iTrieRoot, 'juornals', { changeLimit: changeLimit });
+        const results = Sug.suggestAStar(trie, 'juornals', { changeLimit: changeLimit });
         // console.warn('%o', results);
         const suggestions = results.map((s) => s.word);
         expect(suggestions).toEqual(['journals', 'journal', 'journalism', 'journalist']);
     });
 
     test('Tests suggestions for joyfull', () => {
-        const results = Sug.suggestAStar(trie.iTrieRoot, 'joyfull', { changeLimit: changeLimit });
+        const results = Sug.suggestAStar(trie, 'joyfull', { changeLimit: changeLimit });
         const suggestions = results.map((s) => s.word);
         expect(suggestions).toEqual(['joyful', 'joyfully', 'joyfuller', 'joyous', 'joyfullest']);
     });
 
     test('Tests suggestions', () => {
-        const results = Sug.suggestAStar(trie.iTrieRoot, '', {});
+        const results = Sug.suggestAStar(trie, '', {});
         const suggestions = results.map((s) => s.word);
         expect(suggestions).toEqual([]);
     });
 
     // cspell:ignore joyfull
     test('Tests suggestions with low max num', () => {
-        const results = Sug.suggestAStar(trie.iTrieRoot, 'joyfull', { numSuggestions: 2 });
+        const results = Sug.suggestAStar(trie, 'joyfull', { numSuggestions: 2 });
         const suggestions = results.map((s) => s.word);
         expect(suggestions).toEqual(['joyful', 'joyfully']);
     });
@@ -83,7 +83,7 @@ describe('Validate Suggest', () => {
     // cspell:ignore walkingtalkingjoy
     test('Tests compound suggestions', () => {
         const opts: SuggestionOptions = { numSuggestions: 1, compoundMethod: CompoundWordsMethod.SEPARATE_WORDS };
-        const results = Sug.suggestAStar(trie.iTrieRoot, 'walkingtalkingjoy', opts);
+        const results = Sug.suggestAStar(trie, 'walkingtalkingjoy', opts);
         const suggestions = results.map((s) => s.word);
         expect(suggestions).toEqual(['walking talking joy']);
     });
@@ -102,7 +102,7 @@ describe('Validate Suggest', () => {
             *tree
             !walkingtree
         `);
-        const r = Sug.suggestAStar(trie.iTrieRoot, word, { numSuggestions: 1 });
+        const r = Sug.suggestAStar(trie, word, { numSuggestions: 1 });
         expect(r).toEqual(expected);
     });
 });

@@ -12,6 +12,7 @@ import { FastTrieBlobBuilder } from '../lib/TrieBlob/FastTrieBlobBuilder.js';
 import { TrieBlob } from '../lib/TrieBlob/TrieBlob.js';
 import { trieRootToITrieRoot } from '../lib/TrieNode/trie.js';
 import { buildTrieNodeTrieFromWords } from '../lib/TrieNode/TrieNodeBuilder.js';
+import { TrieNodeTrie } from '../lib/TrieNode/TrieNodeTrie.js';
 import { getGlobalPerfTimer } from '../lib/utils/timer.js';
 import { walkerWordsITrie } from '../lib/walker/walker.js';
 import { readFastTrieBlobFromConfig, readTrieFromConfig } from '../test/dictionaries.test.helper.js';
@@ -51,6 +52,7 @@ export async function measurePerf(which: string | undefined, method: string | un
     const timer = getGlobalPerfTimer();
     timer.start('Measure Perf');
     const trie = await timer.measureAsyncFn('getTrie', getTrie);
+    const trieTrie = new TrieNodeTrie(trie.root);
     await timer.measureAsyncFn('readFastTrieBlobFromConfig', getFastTrieBlob);
     timer.start('words');
     const words = [...trie.words()];
@@ -93,7 +95,7 @@ export async function measurePerf(which: string | undefined, method: string | un
                 timer.stop('blob.words');
 
                 timer.start('blob.walkerWordsITrie');
-                [...walkerWordsITrie(TrieBlob.toITrieNodeRoot(trieBlob))];
+                [...walkerWordsITrie(trieBlob.getRoot())];
                 timer.stop('blob.walkerWordsITrie');
                 break;
             case 'dump':
@@ -188,7 +190,7 @@ export async function measurePerf(which: string | undefined, method: string | un
             suggestAStar(trie.root, 'nearest', { ignoreCase: false, changeLimit: maxEdits })
         );
         timer.measureFn('suggestAStar2', () =>
-            suggestAStar2(trieRootToITrieRoot(trie.root), 'nearest', { ignoreCase: false, changeLimit: maxEdits })
+            suggestAStar2(trieTrie, 'nearest', { ignoreCase: false, changeLimit: maxEdits })
         );
         // console.warn('%o', sc);
     }
