@@ -71,6 +71,7 @@ describe('Validate Suggest', () => {
     test('Tests suggestions for `juornals` (reduced cost for swap)', () => {
         const trie = Trie.create(sampleWords);
         const results = Sug.suggest(trie.root, 'juornals', { changeLimit: changeLimit });
+        // console.warn('%o', results);
         const suggestions = results.map((s) => s.word);
         expect(suggestions).toEqual(['journals', 'journal', 'journalism', 'journalist']);
     });

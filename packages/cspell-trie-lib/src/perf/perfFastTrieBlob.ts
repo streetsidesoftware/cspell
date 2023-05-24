@@ -4,6 +4,9 @@ import { readFileSync, writeFileSync } from 'fs';
 import type { TrieNode } from '../index.js';
 import { createTrieRoot, insert, Trie } from '../index.js';
 import { selectNearestWords } from '../lib/distance/levenshtein.js';
+import { suggest as suggestTrieNode } from '../lib/suggest.js';
+import { suggest as suggestAStar } from '../lib/suggestions/suggestAStar.js';
+import { suggestAStar as suggestAStar2 } from '../lib/suggestions/suggestAStar2.js';
 import { createTrieBlobFromITrieNodeRoot, createTrieBlobFromTrieRoot } from '../lib/TrieBlob/createTrieBlob.js';
 import { FastTrieBlobBuilder } from '../lib/TrieBlob/FastTrieBlobBuilder.js';
 import { TrieBlob } from '../lib/TrieBlob/TrieBlob.js';
@@ -177,6 +180,15 @@ export async function measurePerf(which: string | undefined, method: string | un
         // const sc =
         timer.measureFn('trie.suggestWithCost', () =>
             trie.suggestWithCost('nearest', { ignoreCase: false, changeLimit: maxEdits })
+        );
+        timer.measureFn('suggestTrieNode', () =>
+            suggestTrieNode(trie.root, 'nearest', { ignoreCase: false, changeLimit: maxEdits })
+        );
+        timer.measureFn('suggestAStar', () =>
+            suggestAStar(trie.root, 'nearest', { ignoreCase: false, changeLimit: maxEdits })
+        );
+        timer.measureFn('suggestAStar2', () =>
+            suggestAStar2(trieRootToITrieRoot(trie.root), 'nearest', { ignoreCase: false, changeLimit: maxEdits })
         );
         // console.warn('%o', sc);
     }

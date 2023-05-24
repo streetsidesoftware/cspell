@@ -2,6 +2,7 @@ import { isWordTerminationNode } from '../TrieNode/trie-util.js';
 import type { TrieRoot } from '../TrieNode/TrieNode.js';
 import { clean } from '../utils/clean.js';
 import { CompoundWordsMethod, hintedWalker, JOIN_SEPARATOR, WORD_SEPARATOR } from '../walker/index.js';
+import { opCosts } from './constants.js';
 import type { GenSuggestionOptions, SuggestionOptions } from './genSuggestionsOptions.js';
 import { createSuggestionOptions } from './genSuggestionsOptions.js';
 import { visualLetterMaskMap } from './orthography.js';
@@ -14,7 +15,7 @@ import type {
 } from './suggestCollector.js';
 import { suggestionCollector } from './suggestCollector.js';
 
-const baseCost = 100;
+const baseCost = opCosts.baseCost;
 const swapCost = 75;
 const postSwapCost = swapCost - baseCost;
 const insertSpaceCost = -1;

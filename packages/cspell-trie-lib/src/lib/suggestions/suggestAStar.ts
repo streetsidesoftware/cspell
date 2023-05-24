@@ -1,6 +1,7 @@
 import type { TrieNode, TrieRoot } from '../TrieNode/TrieNode.js';
 import { PairingHeap } from '../utils/PairingHeap.js';
 import { CompoundWordsMethod, JOIN_SEPARATOR, WORD_SEPARATOR } from '../walker/index.js';
+import { opCosts } from './constants.js';
 import type { GenSuggestionOptionsStrict, SuggestionOptions } from './genSuggestionsOptions.js';
 import { createSuggestionOptions } from './genSuggestionsOptions.js';
 import { visualLetterMaskMap } from './orthography.js';
@@ -25,15 +26,6 @@ export function* genCompoundableSuggestions(
 
         return b.i - a.i;
     }
-
-    const opCosts = {
-        baseCost: 100,
-        swapCost: 75,
-        duplicateLetterCost: 25,
-        visuallySimilar: 1,
-        firstLetterBias: 25,
-        wordBreak: 99,
-    } as const;
 
     const bc = opCosts.baseCost;
     const maxCostScale = 1.03 / 2;
