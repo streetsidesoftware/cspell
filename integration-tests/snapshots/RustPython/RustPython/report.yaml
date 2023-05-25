@@ -5,7 +5,7 @@ Args: '["**"]'
 Summary:
   files: 596
   filesWithIssues: 305
-  issues: 2689
+  issues: 2683
   errors: 0
 Errors: []
 
@@ -81,7 +81,6 @@ issues:
   - "extra_tests/jsontests.py:27:1           resultsfile     U       resultsfile = os.path.join(os.path"
   - "extra_tests/snippets/builtin_all.py:1:6         testutils       U       from testutils import assert_raises"
   - "extra_tests/snippets/builtin_bool.py:33:7           Falsey      U       class Falsey:"
-  - "extra_tests/snippets/builtin_bool.py:48:3           Bools       U       # Bools are also ints."
   - "extra_tests/snippets/builtin_bytearray.py:17:33         jilj                    U       bytearray(\"bla\", encoding=b\"jilj\")"
   - "extra_tests/snippets/builtin_bytearray.py:25:20         omkmok                  U       assert bytearray(b\"omkmok\\Xaa\") == bytearray("
   - "extra_tests/snippets/builtin_bytearray.py:54:23         abcdé                   U       assert len(bytearray(\"abcdé\", \"utf8\")) == 6"
@@ -333,7 +332,6 @@ issues:
   - "extra_tests/snippets/syntax_generator.py:124:13         coro            U       def wrapper(coro):"
   - "extra_tests/snippets/syntax_generator.py:171:13         yieldfrom       U       assert g.gi_yieldfrom is it"
   - "extra_tests/snippets/syntax_global_nonlocal.py:3:28         funkyness       U       global and nonlocal funkyness"
-  - "extra_tests/snippets/syntax_short_circuit_bool.py:1:38          bools       U       carefully avoids evaluating bools more than once in a"
   - "extra_tests/snippets/syntax_short_circuit_bool.py:14:14         booled      U       self.booled = False"
   - "extra_tests/snippets/syntax_statement.py:4:15           seperated (separated)       U       # small ones, seperated by ';':"
   - "extra_tests/snippets/syntax_try.py:35:12        kablam      U       print('kablam')"
@@ -366,7 +364,6 @@ issues:
   - "jit/src/lib.rs:285:23       wasmtime        U       TODO: confirm with wasmtime ppl that it's not unsound"
   - "jit/tests/common.rs:68:17       oparg       U       let mut oparg_state = OpArgState:"
   - "LICENSE-logo:36:7           creativecommons     U       wiki.creativecommons.org/Considerations_for"
-  - "LICENSE-logo:139:15         sublicensable       U       non-sublicensable, non-exclusive, irrevocable"
   - "LICENSE-logo:205:34         waivable            U       under any voluntary or waivable statutory or compulsory"
   - "pdc.sh:15:20        pycache         U       PRE_GLOBAL=(\"clear_pycache\")"
   - "pdc.sh:26:90        Dwarnings       U       cargo clippy --all -- -Dwarnings\" \"cargo test --all\""
