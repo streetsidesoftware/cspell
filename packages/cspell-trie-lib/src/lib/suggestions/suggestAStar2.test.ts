@@ -88,11 +88,13 @@ describe('Validate Suggest', () => {
         expect(suggestions).toEqual(['walking talking joy']);
     });
 
-    // cspell:ignore walkingtree talkingtree
-    test.skip.each`
+    // cspell:ignore walkingtree talkingtree talkingstick
+    test.each`
         word              | expected
-        ${'walkingstick'} | ${expect.arrayContaining([{ word: 'walkingstick', cost: 99 }])}
-        ${'walkingtree'}  | ${expect.arrayContaining([])}
+        ${'walkingstick'} | ${[{ word: 'walkingstick', cost: 99 }]}
+        ${'talkingstick'} | ${[{ word: 'talkingstick', cost: 99 }]}
+        ${'talkingtree'}  | ${[{ word: 'talkingtree', cost: 99 }]}
+        ${'walkingtree'}  | ${[{ word: 'walkingtree', cost: 99 } /* still suggested even if it is forbidden */]}
     `('that forbidden words are not included (collector)', ({ word, expected }) => {
         const trie = parseDict(`
             walk

@@ -1,4 +1,4 @@
-import type { ITrieNode } from '../ITrieNode/ITrieNode.js';
+import type { ITrieNode, TrieOptions } from '../ITrieNode/index.js';
 import { CompoundWordsMethod, JOIN_SEPARATOR, WORD_SEPARATOR } from '../ITrieNode/walker/index.js';
 import type { TrieData } from '../TrieData.js';
 import { PairingHeap } from '../utils/PairingHeap.js';
@@ -50,6 +50,9 @@ export function* getSuggestionsAStar(
     const BC = opCosts.baseCost;
     const DL = opCosts.duplicateLetterCost;
     const wordSeparator = compoundMethod === CompoundWordsMethod.JOIN_WORDS ? JOIN_SEPARATOR : WORD_SEPARATOR;
+    const sc = specialChars(trie.options);
+    const comp = trie.options.compoundCharacter;
+    const compRoot = root.get(comp);
 
     let limit = options.changeLimit * BC;
 
@@ -122,7 +125,7 @@ export function* getSuggestionsAStar(
 
             // Replace
             for (let j = 0; j < keys.length; ++j) {
-                if (j === mIdx) continue;
+                if (j === mIdx || keys[j] in sc) continue;
                 yield { n: n.child(j), i: i + 1, c: cost, s: keys[j], p };
             }
 
@@ -151,6 +154,13 @@ export function* getSuggestionsAStar(
         {
             // At the end of the word, only append is possible.
             for (let j = 0; j < keys.length; ++j) {
+                const char = keys[j];
+                if (char in sc) {
+                    if (char === comp && compRoot) {
+                        yield { n: compRoot, i, c: cost0 + opCosts.wordBreak, s: '', p };
+                    }
+                    continue;
+                }
                 yield { n: n.child(j), i, c: cost, s: keys[j], p };
             }
         }
@@ -168,12 +178,10 @@ function pNodeToWord(p: PNode): string {
     return parts.join('');
 }
 
-/**
- * Actions
- *
- * Delete:
- * - skips a character from the word effectively "deleting" it.
- * - i += 1;
- * - c = '';
- * - n stays the same.
- */
+function specialChars(options: TrieOptions): Record<string, true | undefined> {
+    const charSet: Record<string, true | undefined> = Object.create(null);
+    for (const c of Object.values(options)) {
+        charSet[c] = true;
+    }
+    return charSet;
+}
