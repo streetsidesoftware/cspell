@@ -17,11 +17,18 @@ interface PNode {
     c: Cost;
     i: WordIndex;
     s: string;
-    p?: PNode;
+    p?: PNode | undefined;
 }
 
+const ProgressFactor = opCosts.baseCost + 1;
+
+/**
+ * Compare Path Nodes.
+ * Balance the calculation between depth vs cost
+ * Slightly prefer depth over lower cost.
+ */
 function comparePath(a: PNode, b: PNode): number {
-    return a.c - b.c || b.i - a.i;
+    return a.c - b.c + (b.i - a.i) * ProgressFactor;
 }
 
 export function suggestAStar(trie: TrieData, word: string, options: SuggestionOptions): SuggestionResult[] {
@@ -59,13 +66,29 @@ export function* getSuggestionsAStar(
     pathHeap.add(rootPNode);
 
     let best = pathHeap.dequeue();
+    let maxSize = pathHeap.size;
+    let suggestionsGenerated = 0;
+    let nodesProcessed = 0;
     while (best) {
-        if (best.c > limit) break;
+        if (++nodesProcessed > 1000) {
+            if (suggestionsGenerated < 1) {
+                break;
+            }
+            nodesProcessed >>= 1;
+            suggestionsGenerated >>= 1;
+        }
+        if (best.c > limit) {
+            // break;
+            best = pathHeap.dequeue();
+            maxSize = Math.max(maxSize, pathHeap.size);
+            continue;
+        }
         processPath(best);
 
         for (const sug of resultHeap) {
             if (sug.cost > limit) continue;
             const action = yield sug;
+            ++suggestionsGenerated;
             if (typeof action === 'number') {
                 limit = action;
                 // console.log('%o', limit);
@@ -76,7 +99,9 @@ export function* getSuggestionsAStar(
         }
 
         best = pathHeap.dequeue();
+        maxSize = Math.max(maxSize, pathHeap.size);
     }
+    console.log('%o', { maxSize, suggestionsGenerated, nodesProcessed });
 
     return;
 
