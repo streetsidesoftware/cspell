@@ -185,9 +185,10 @@ export async function measurePerf(which: string | undefined, method: string | un
         timer.measureFn('suggestTrieNode', () =>
             suggestTrieNode(trie.root, 'nearest', { ignoreCase: false, changeLimit: maxEdits })
         );
-        timer.measureFn('suggestAStar2', () =>
+        const r = timer.measureFn('suggestAStar2', () =>
             suggestAStar2(trieTrie, 'nearest', { ignoreCase: false, changeLimit: maxEdits })
         );
+        console.log('%o', r);
         // timer.measureFn('suggestAStar', () =>
         //     suggestAStar(trie.root, 'nearest', { ignoreCase: false, changeLimit: maxEdits })
         // );

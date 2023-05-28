@@ -107,7 +107,27 @@ describe('Validate Suggest', () => {
         const r = Sug.suggestAStar(trie, word, { numSuggestions: 1 });
         expect(r).toEqual(expected);
     });
+
+    test.each`
+        a                   | b                   | expected
+        ${{ c: 100, i: 0 }} | ${{ c: 100, i: 0 }} | ${0}
+        ${{ c: 0, i: 0 }}   | ${{ c: 100, i: 0 }} | ${-1}
+        ${{ c: 100, i: 1 }} | ${{ c: 100, i: 0 }} | ${-1}
+        ${{ c: 200, i: 1 }} | ${{ c: 100, i: 0 }} | ${-1}
+        ${{ c: 100, i: 0 }} | ${{ c: 0, i: 0 }}   | ${1}
+        ${{ c: 100, i: 0 }} | ${{ c: 100, i: 1 }} | ${1}
+        ${{ c: 100, i: 0 }} | ${{ c: 200, i: 1 }} | ${1}
+    `('comparePath $a $b', ({ a, b, expected }) => {
+        const v = Sug.__testing__.comparePath(a, b);
+        expect(nCompare(v)).toBe(expected);
+    });
 });
+
+function nCompare(v: number): 1 | 0 | -1 {
+    if (v < 0) return -1;
+    if (v > 0) return 1;
+    return 0;
+}
 
 const sampleWords = [
     'walk',
