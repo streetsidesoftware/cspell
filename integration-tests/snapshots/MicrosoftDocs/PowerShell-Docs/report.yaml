@@ -3,9 +3,9 @@ Repository: MicrosoftDocs/PowerShell-Docs
 Url: https://github.com/MicrosoftDocs/PowerShell-Docs.git
 Args: '["--config=../../../cspell-power-shell-docs.config.yaml","**"]'
 Summary:
-  files: 2678
-  filesWithIssues: 1234
-  issues: 5703
+  files: 2679
+  filesWithIssues: 1239
+  issues: 5711
   errors: 0
 Errors: []
 
@@ -352,6 +352,8 @@ issues:
   - "reference/5.1/Microsoft.PowerShell.Utility/Out-File.md:150:26       logfile         U       $logFile = \"$pwd\\logfile.txt\""
   - "reference/5.1/Microsoft.PowerShell.Utility/Out-GridView.md:114:5        examle          U       The examle uses `ogv`, which is"
   - "reference/5.1/Microsoft.PowerShell.Utility/Out-GridView.md:372:4        displayname     U       `displayname:net`"
+  - "reference/5.1/Microsoft.PowerShell.Utility/Read-Host.md:66:17       Osan            U       \"'New York; Osan; Koforidua'\""
+  - "reference/5.1/Microsoft.PowerShell.Utility/Read-Host.md:66:23       Koforidua       U       \"'New York; Osan; Koforidua'\""
   - "reference/5.1/Microsoft.PowerShell.Utility/Register-EngineEvent.md:83:28        messagedata     U       Event: {0}\" -f $event.messagedata | Out-File c:\\temp\\MyEvents"
   - "reference/5.1/Microsoft.PowerShell.Utility/Register-ObjectEvent.md:131:62       createand       U       registration. First we createand and enable a timer object"
   - "reference/5.1/Microsoft.PowerShell.Utility/Select-Xml.md:143:59         innerxml    U       Expression= {($_.node.innerxml).trim()}}, Path -AutoSize"
@@ -1080,7 +1082,7 @@ issues:
   - "reference/docs-conceptual/lang-spec/chapter-02.md:960:19        nsecond             U       \"column1`tcolumn2`nsecond line, `\"Hello`\", ``"
   - "reference/docs-conceptual/lang-spec/chapter-02.md:1316:36       concatentaion       U       chapter-07.md#772-string-concatentaion"
   - "reference/docs-conceptual/lang-spec/chapter-03.md:762:57        arity       U       need to specify the arity (the number of arguments"
-  - "reference/docs-conceptual/lang-spec/chapter-04.md:1207:35       cmdletbinding       U       chapter-12.md#1235-the-cmdletbinding-attribute"
+  - "reference/docs-conceptual/lang-spec/chapter-04.md:1210:35       cmdletbinding       U       chapter-12.md#1235-the-cmdletbinding-attribute"
   - "reference/docs-conceptual/lang-spec/chapter-06.md:315:6         Convertable     U       - **IConvertable**: `System.Convert.ChangeType"
   - "reference/docs-conceptual/lang-spec/chapter-07.md:298:15        Zabc                U       $b = \"abc#$%XYZabc\""
   - "reference/docs-conceptual/lang-spec/chapter-07.md:477:29        preincrement        U       ,5][1] # preincrement 60 in array 40,60,8"
@@ -1118,6 +1120,7 @@ issues:
   - "reference/docs-conceptual/lang-spec/chapter-08.md:1696:30       tryfinally          U       chapter-08.md#87-the-tryfinally-statement"
   - "reference/docs-conceptual/lang-spec/chapter-11.md:78:9          Modulepath      U       `$Env:PSModulepath = $Env:PSModulepath"
   - "reference/docs-conceptual/lang-spec/chapter-12.md:794:32        regularexpressionoption     U       chapter-04.md#4264-regularexpressionoption-type"
+  - "reference/docs-conceptual/learn/application-control.md:56:1         wevtutil    U       wevtutil.exe sl PowerShellCore"
   - "reference/docs-conceptual/learn/deep-dives/add-credentials-to-powershell-functions.md:12:55         duffney     U       check out his blog at [duffney.io][duffney.io]."
   - "reference/docs-conceptual/learn/deep-dives/add-credentials-to-powershell-functions.md:176:31        mgmt        U       Install-WindowsFeature web-mgmt-tools` if required."
   - "reference/docs-conceptual/learn/deep-dives/everything-about-arrays.md:288:5         Dailey      U       Lee Dailey also pointed out to"
@@ -1234,22 +1237,22 @@ issues:
   - "reference/docs-conceptual/toc.yml:116:57        shouldprocess               U       dives/everything-about-shouldprocess.md"
   - "reference/docs-conceptual/toc.yml:228:56        nonwindows                  U       wsman-unsupported-for-nonwindows.md"
   - "reference/docs-conceptual/toc.yml:230:34        winrmsecurity               U       href: learn/remoting/winrmsecurity.md"
-  - "reference/docs-conceptual/toc.yml:317:63        objectmodelroot             U       ise/object-model/the-objectmodelroot-object.md"
-  - "reference/docs-conceptual/toc.yml:319:63        iseaddontoolcollection      U       ise/object-model/the-iseaddontoolcollection-object.md"
-  - "reference/docs-conceptual/toc.yml:321:63        iseaddontool                U       ise/object-model/the-iseaddontool-object.md"
-  - "reference/docs-conceptual/toc.yml:323:63        iseeditor                   U       ise/object-model/the-iseeditor-object.md"
-  - "reference/docs-conceptual/toc.yml:325:63        isefilecollection           U       ise/object-model/the-isefilecollection-object.md"
-  - "reference/docs-conceptual/toc.yml:327:63        isefile                     U       ise/object-model/the-isefile-object.md"
-  - "reference/docs-conceptual/toc.yml:329:63        isemenuitemcollection       U       ise/object-model/the-isemenuitemcollection-object.md"
-  - "reference/docs-conceptual/toc.yml:331:63        isemenuitem                 U       ise/object-model/the-isemenuitem-object.md"
-  - "reference/docs-conceptual/toc.yml:333:63        iseoptions                  U       ise/object-model/the-iseoptions-object.md"
-  - "reference/docs-conceptual/toc.yml:335:63        isesnippetcollection        U       ise/object-model/the-isesnippetcollection-object.md"
-  - "reference/docs-conceptual/toc.yml:337:63        isesnippetobject            U       ise/object-model/the-isesnippetobject.md"
-  - "reference/docs-conceptual/toc.yml:339:63        powershelltabcollection     U       ise/object-model/the-powershelltabcollection-object.md"
-  - "reference/docs-conceptual/toc.yml:341:63        powershelltab               U       ise/object-model/the-powershelltab-object.md"
-  - "reference/docs-conceptual/toc.yml:376:56        informationstream           U       powershell/wmf/whats-new/informationstream-overview.md"
-  - "reference/docs-conceptual/toc.yml:456:41        cmdline                     U       dev-cross-plat/create-cmdline-predictor.md"
-  - "reference/docs-conceptual/toc.yml:518:38        hackathons                  U       community/contributing/hackathons.md"
+  - "reference/docs-conceptual/toc.yml:321:63        objectmodelroot             U       ise/object-model/the-objectmodelroot-object.md"
+  - "reference/docs-conceptual/toc.yml:323:63        iseaddontoolcollection      U       ise/object-model/the-iseaddontoolcollection-object.md"
+  - "reference/docs-conceptual/toc.yml:325:63        iseaddontool                U       ise/object-model/the-iseaddontool-object.md"
+  - "reference/docs-conceptual/toc.yml:327:63        iseeditor                   U       ise/object-model/the-iseeditor-object.md"
+  - "reference/docs-conceptual/toc.yml:329:63        isefilecollection           U       ise/object-model/the-isefilecollection-object.md"
+  - "reference/docs-conceptual/toc.yml:331:63        isefile                     U       ise/object-model/the-isefile-object.md"
+  - "reference/docs-conceptual/toc.yml:333:63        isemenuitemcollection       U       ise/object-model/the-isemenuitemcollection-object.md"
+  - "reference/docs-conceptual/toc.yml:335:63        isemenuitem                 U       ise/object-model/the-isemenuitem-object.md"
+  - "reference/docs-conceptual/toc.yml:337:63        iseoptions                  U       ise/object-model/the-iseoptions-object.md"
+  - "reference/docs-conceptual/toc.yml:339:63        isesnippetcollection        U       ise/object-model/the-isesnippetcollection-object.md"
+  - "reference/docs-conceptual/toc.yml:341:63        isesnippetobject            U       ise/object-model/the-isesnippetobject.md"
+  - "reference/docs-conceptual/toc.yml:343:63        powershelltabcollection     U       ise/object-model/the-powershelltabcollection-object.md"
+  - "reference/docs-conceptual/toc.yml:345:63        powershelltab               U       ise/object-model/the-powershelltab-object.md"
+  - "reference/docs-conceptual/toc.yml:380:56        informationstream           U       powershell/wmf/whats-new/informationstream-overview.md"
+  - "reference/docs-conceptual/toc.yml:460:41        cmdline                     U       dev-cross-plat/create-cmdline-predictor.md"
+  - "reference/docs-conceptual/toc.yml:522:38        hackathons                  U       community/contributing/hackathons.md"
   - "reference/docs-conceptual/whats-new/cmdlet-versions.md:221:107      Notsupportedonmac       U       | ![Included][01] | NotsupportedonmacOS |"
   - "reference/docs-conceptual/whats-new/differences-from-windows-powershell.md:278:26       inputformat     U       short hand to match `-inputformat`, which now needs to"
   - "reference/docs-conceptual/whats-new/differences-from-windows-powershell.md:307:25       Paren           U       Preserve `$?` for **ParenExpression**, **SubExpression"
@@ -1326,10 +1329,9 @@ issues:
   - "reference/media/index/powershell_128.svg:5:21           SVGID       U       <linearGradient id=\"SVGID_1_\" gradientUnits=\"userSpaceO"
   - "reference/media/shared/check-mark-button-2705.svg:3:12          svgg    U       <g id=\"svgg\">"
   - "reference/module/index.md:14:36         windowsserver       U       FilterColumn1: powershell-7.2,windowsserver2022-ps"
-  - "reference/module/index.md:15:21         azps                U       quickFilterColumn2: azps-9.7.1,win-mdop2-ps"
-  - "reference/module/index.md:15:36         mdop                U       FilterColumn2: azps-9.7.1,win-mdop2-ps"
-  - "reference/module/index.md:16:21         sqlserver           U       quickFilterColumn3: sqlserver-ps,systemcenter-ps-"
-  - "reference/module/index.md:16:34         systemcenter        U       ckFilterColumn3: sqlserver-ps,systemcenter-ps-2022"
+  - "reference/module/index.md:15:21         azps                U       quickFilterColumn2: azps-10.0.0,sqlserver-ps"
+  - "reference/module/index.md:15:33         sqlserver           U       ickFilterColumn2: azps-10.0.0,sqlserver-ps"
+  - "reference/module/index.md:16:42         systemcenter        U       graph-powershell-1.0,systemcenter-ps-2022"
   - "tests/Pester/Update-Help.Tests.ps1:24:34        pshome          U       HelpInstallationPath = \"$pshome\\en-US\""
   - "tests/Pester/Update-Help.Tests.ps1:30:109       helpcontent     U       -2565dba61a4f_en-US_helpcontent$extension\""
   - "tests/Pester/Update-Help.Tests.ps1:43:65        eefcb           U       PowerShell.Management_eefcb906-b326-4e99-9f54-8b"

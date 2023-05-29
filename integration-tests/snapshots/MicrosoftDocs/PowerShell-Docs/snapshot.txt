@@ -3,7 +3,7 @@ Repository: MicrosoftDocs/PowerShell-Docs
 Url: "https://github.com/MicrosoftDocs/PowerShell-Docs.git"
 Args: ["--config=../../../cspell-power-shell-docs.config.yaml","**"]
 Lines:
- CSpell: Files checked: 2678, Issues found: 5703 in 1234 files
+ CSpell: Files checked: 2679, Issues found: 5711 in 1239 files
  exit code: 1
 ./LICENSE:139:15    - Unknown word (sublicensable)   -- non-sublicensable, non-exclusive, irrevocable
 ./LICENSE:205:34    - Unknown word (waivable)        -- under any voluntary or waivable statutory or compulsory
@@ -347,6 +347,8 @@ Lines:
 ./reference/5.1/Microsoft.PowerShell.Utility/Out-File.md:150:26    - Unknown word (logfile)    -- $logFile = "$pwd\logfile.txt"
 ./reference/5.1/Microsoft.PowerShell.Utility/Out-GridView.md:114:5     - Unknown word (examle)     -- The examle uses `ogv`, which is
 ./reference/5.1/Microsoft.PowerShell.Utility/Out-GridView.md:372:4     - Unknown word (displayname) -- `displayname:net`
+./reference/5.1/Microsoft.PowerShell.Utility/Read-Host.md:66:17     - Unknown word (Osan)       -- "'New York; Osan; Koforidua'"
+./reference/5.1/Microsoft.PowerShell.Utility/Read-Host.md:66:23     - Unknown word (Koforidua)  -- "'New York; Osan; Koforidua'"
 ./reference/5.1/Microsoft.PowerShell.Utility/Register-EngineEvent.md:83:28     - Unknown word (messagedata) -- Event: {0}" -f $event.messagedata | Out-File c:\temp\MyEvents
 ./reference/5.1/Microsoft.PowerShell.Utility/Register-ObjectEvent.md:131:62    - Unknown word (createand)  -- registration. First we createand and enable a timer object
 ./reference/5.1/Microsoft.PowerShell.Utility/Select-Xml.md:143:59    - Unknown word (innerxml)   -- Expression= {($_.node.innerxml).trim()}}, Path -AutoSize
@@ -1075,7 +1077,7 @@ Lines:
 ./reference/docs-conceptual/lang-spec/chapter-02.md:960:10    - Unknown word (tcolumn)    -- "column1`tcolumn2`nsecond line, `"Hello
 ./reference/docs-conceptual/lang-spec/chapter-02.md:960:19    - Unknown word (nsecond)    -- "column1`tcolumn2`nsecond line, `"Hello`", ``
 ./reference/docs-conceptual/lang-spec/chapter-03.md:762:57    - Unknown word (arity)      -- need to specify the arity (the number of arguments
-./reference/docs-conceptual/lang-spec/chapter-04.md:1207:35   - Unknown word (cmdletbinding) -- chapter-12.md#1235-the-cmdletbinding-attribute
+./reference/docs-conceptual/lang-spec/chapter-04.md:1210:35   - Unknown word (cmdletbinding) -- chapter-12.md#1235-the-cmdletbinding-attribute
 ./reference/docs-conceptual/lang-spec/chapter-06.md:315:6     - Unknown word (Convertable) -- - **IConvertable**: `System.Convert.ChangeType
 ./reference/docs-conceptual/lang-spec/chapter-07.md:1124:75   - Unknown word (Formattable)  -- see the type `System.IFormattable` in Ecma
 ./reference/docs-conceptual/lang-spec/chapter-07.md:1310:24   - Unknown word (redblue)      -- red" + "blue"      # "redblue"
@@ -1113,6 +1115,7 @@ Lines:
 ./reference/docs-conceptual/lang-spec/chapter-08.md:889:25    - Unknown word (fmno)       -- "ABC def`nghi`tjkl`fmno @#$"
 ./reference/docs-conceptual/lang-spec/chapter-11.md:78:9      - Unknown word (Modulepath) -- `$Env:PSModulepath = $Env:PSModulepath
 ./reference/docs-conceptual/lang-spec/chapter-12.md:794:32    - Unknown word (regularexpressionoption) -- chapter-04.md#4264-regularexpressionoption-type
+./reference/docs-conceptual/learn/application-control.md:56:1      - Unknown word (wevtutil)   -- wevtutil.exe sl PowerShellCore
 ./reference/docs-conceptual/learn/deep-dives/add-credentials-to-powershell-functions.md:12:55     - Unknown word (duffney)    -- check out his blog at [duffney.io][duffney.io].
 ./reference/docs-conceptual/learn/deep-dives/add-credentials-to-powershell-functions.md:176:31    - Unknown word (mgmt)       -- Install-WindowsFeature web-mgmt-tools` if required.
 ./reference/docs-conceptual/learn/deep-dives/everything-about-arrays.md:1073:7    - Unknown word (Kraus)      -- [Mark Kraus](https://get-powershellblog
@@ -1228,22 +1231,22 @@ Lines:
 ./reference/docs-conceptual/toc.yml:116:57    - Unknown word (shouldprocess) -- dives/everything-about-shouldprocess.md
 ./reference/docs-conceptual/toc.yml:228:56    - Unknown word (nonwindows)    -- wsman-unsupported-for-nonwindows.md
 ./reference/docs-conceptual/toc.yml:230:34    - Unknown word (winrmsecurity) -- href: learn/remoting/winrmsecurity.md
-./reference/docs-conceptual/toc.yml:317:63    - Unknown word (objectmodelroot) -- ise/object-model/the-objectmodelroot-object.md
-./reference/docs-conceptual/toc.yml:319:63    - Unknown word (iseaddontoolcollection) -- ise/object-model/the-iseaddontoolcollection-object.md
-./reference/docs-conceptual/toc.yml:321:63    - Unknown word (iseaddontool)           -- ise/object-model/the-iseaddontool-object.md
-./reference/docs-conceptual/toc.yml:323:63    - Unknown word (iseeditor)              -- ise/object-model/the-iseeditor-object.md
-./reference/docs-conceptual/toc.yml:325:63    - Unknown word (isefilecollection)      -- ise/object-model/the-isefilecollection-object.md
-./reference/docs-conceptual/toc.yml:327:63    - Unknown word (isefile)                -- ise/object-model/the-isefile-object.md
-./reference/docs-conceptual/toc.yml:329:63    - Unknown word (isemenuitemcollection)  -- ise/object-model/the-isemenuitemcollection-object.md
-./reference/docs-conceptual/toc.yml:331:63    - Unknown word (isemenuitem)            -- ise/object-model/the-isemenuitem-object.md
-./reference/docs-conceptual/toc.yml:333:63    - Unknown word (iseoptions)             -- ise/object-model/the-iseoptions-object.md
-./reference/docs-conceptual/toc.yml:335:63    - Unknown word (isesnippetcollection)   -- ise/object-model/the-isesnippetcollection-object.md
-./reference/docs-conceptual/toc.yml:337:63    - Unknown word (isesnippetobject)       -- ise/object-model/the-isesnippetobject.md
-./reference/docs-conceptual/toc.yml:339:63    - Unknown word (powershelltabcollection) -- ise/object-model/the-powershelltabcollection-object.md
-./reference/docs-conceptual/toc.yml:341:63    - Unknown word (powershelltab)           -- ise/object-model/the-powershelltab-object.md
-./reference/docs-conceptual/toc.yml:376:56    - Unknown word (informationstream)       -- powershell/wmf/whats-new/informationstream-overview.md
-./reference/docs-conceptual/toc.yml:456:41    - Unknown word (cmdline)                 -- dev-cross-plat/create-cmdline-predictor.md
-./reference/docs-conceptual/toc.yml:518:38    - Unknown word (hackathons)              -- community/contributing/hackathons.md
+./reference/docs-conceptual/toc.yml:321:63    - Unknown word (objectmodelroot) -- ise/object-model/the-objectmodelroot-object.md
+./reference/docs-conceptual/toc.yml:323:63    - Unknown word (iseaddontoolcollection) -- ise/object-model/the-iseaddontoolcollection-object.md
+./reference/docs-conceptual/toc.yml:325:63    - Unknown word (iseaddontool)           -- ise/object-model/the-iseaddontool-object.md
+./reference/docs-conceptual/toc.yml:327:63    - Unknown word (iseeditor)              -- ise/object-model/the-iseeditor-object.md
+./reference/docs-conceptual/toc.yml:329:63    - Unknown word (isefilecollection)      -- ise/object-model/the-isefilecollection-object.md
+./reference/docs-conceptual/toc.yml:331:63    - Unknown word (isefile)                -- ise/object-model/the-isefile-object.md
+./reference/docs-conceptual/toc.yml:333:63    - Unknown word (isemenuitemcollection)  -- ise/object-model/the-isemenuitemcollection-object.md
+./reference/docs-conceptual/toc.yml:335:63    - Unknown word (isemenuitem)            -- ise/object-model/the-isemenuitem-object.md
+./reference/docs-conceptual/toc.yml:337:63    - Unknown word (iseoptions)             -- ise/object-model/the-iseoptions-object.md
+./reference/docs-conceptual/toc.yml:339:63    - Unknown word (isesnippetcollection)   -- ise/object-model/the-isesnippetcollection-object.md
+./reference/docs-conceptual/toc.yml:341:63    - Unknown word (isesnippetobject)       -- ise/object-model/the-isesnippetobject.md
+./reference/docs-conceptual/toc.yml:343:63    - Unknown word (powershelltabcollection) -- ise/object-model/the-powershelltabcollection-object.md
+./reference/docs-conceptual/toc.yml:345:63    - Unknown word (powershelltab)           -- ise/object-model/the-powershelltab-object.md
+./reference/docs-conceptual/toc.yml:380:56    - Unknown word (informationstream)       -- powershell/wmf/whats-new/informationstream-overview.md
+./reference/docs-conceptual/toc.yml:460:41    - Unknown word (cmdline)                 -- dev-cross-plat/create-cmdline-predictor.md
+./reference/docs-conceptual/toc.yml:522:38    - Unknown word (hackathons)              -- community/contributing/hackathons.md
 ./reference/docs-conceptual/toc.yml:90:37     - Unknown word (keyhandlers) -- href: learn/shell/using-keyhandlers.md
 ./reference/docs-conceptual/whats-new/What-s-New-in-PowerShell-72.md:129:11    - Unknown word (awakecoding) -- host by awakecoding · Pull Request #146
 ./reference/docs-conceptual/whats-new/What-s-New-in-PowerShell-73.md:100:12    - Unknown word (eugenesmlv) -- (Thanks @eugenesmlv!)
@@ -1321,10 +1324,9 @@ Lines:
 ./reference/media/index/powershell_128.svg:5:21      - Unknown word (SVGID)      -- <linearGradient id="SVGID_1_" gradientUnits="userSpaceO
 ./reference/media/shared/check-mark-button-2705.svg:3:12      - Unknown word (svgg)       -- <g id="svgg">
 ./reference/module/index.md:14:36     - Unknown word (windowsserver) -- FilterColumn1: powershell-7.2,windowsserver2022-ps
-./reference/module/index.md:15:21     - Unknown word (azps)          -- quickFilterColumn2: azps-9.7.1,win-mdop2-ps
-./reference/module/index.md:15:36     - Unknown word (mdop)          -- FilterColumn2: azps-9.7.1,win-mdop2-ps
-./reference/module/index.md:16:21     - Unknown word (sqlserver)     -- quickFilterColumn3: sqlserver-ps,systemcenter-ps-
-./reference/module/index.md:16:34     - Unknown word (systemcenter)  -- ckFilterColumn3: sqlserver-ps,systemcenter-ps-2022
+./reference/module/index.md:15:21     - Unknown word (azps)          -- quickFilterColumn2: azps-10.0.0,sqlserver-ps
+./reference/module/index.md:15:33     - Unknown word (sqlserver)     -- ickFilterColumn2: azps-10.0.0,sqlserver-ps
+./reference/module/index.md:16:42     - Unknown word (systemcenter)  -- graph-powershell-1.0,systemcenter-ps-2022
 ./tests/Pester/Update-Help.Tests.ps1:24:34     - Unknown word (pshome)     -- HelpInstallationPath = "$pshome\en-US"
 ./tests/Pester/Update-Help.Tests.ps1:30:109    - Unknown word (helpcontent) -- -2565dba61a4f_en-US_helpcontent$extension"
 ./tests/Pester/Update-Help.Tests.ps1:43:65     - Unknown word (eefcb)       -- PowerShell.Management_eefcb906-b326-4e99-9f54-8b

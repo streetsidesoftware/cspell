@@ -3,9 +3,9 @@ Repository: eslint/eslint
 Url: https://github.com/eslint/eslint
 Args: '["**","--exclude=bin/**","--exclude=CHANGELOG.md","--exclude=_data","--exclude=tests/bench/large.js","--exclude=docs/src/_includes","--exclude=docs/src/assets/{fonts,s?css,images}"]'
 Summary:
-  files: 1846
+  files: 1847
   filesWithIssues: 1245
-  issues: 5489
+  issues: 5487
   errors: 0
 Errors: []
 
@@ -294,7 +294,7 @@ issues:
   - "lib/linter/code-path-analysis/debug-helpers.js:95:44        Graphvis        U       can be visualized with Graphvis."
   - "lib/linter/code-path-analysis/debug-helpers.js:105:54       fillcolor       U       style=\\\"rounded,filled\\\",fillcolor=white];\\n\" +"
   - "lib/linter/code-path-analysis/debug-helpers.js:109:45       doublecircle    U       final[label=\\\"\\\",shape=doublecircle,style=filled,fillcolor"
-  - "lib/linter/code-path-analysis/debug-helpers.js:112:75       fixedsize       U       width=0.3,height=0.3,fixedsize];\\n\";"
+  - "lib/linter/code-path-analysis/debug-helpers.js:112:75       fixedsize       U       width=0.3,height=0.3,fixedsize=true];\\n\";"
   - "lib/linter/config-comment-parser.js:82:22       commaless       U       // Also, commaless notations have invalid"
   - "lib/linter/config-comment-parser.js:93:20       Levn            U       debug(\"Levn parsing failed; falling"
   - "lib/linter/config-comment-parser.js:99:12       Optionator      U       * Optionator cannot parse commaless"
@@ -399,10 +399,8 @@ issues:
   - "README.md:266:1         Strek               U       Strek"
   - "README.md:275:5         teamend             U       <!--teamend-->"
   - "README.md:282:5         sponsorsstart       U       <!--sponsorsstart-->"
-  - "README.md:287:151       Ilmaiset            U       1f1d/logo.png\" alt=\"Ilmaiset Pitkävetovihjeet\" height"
-  - "README.md:287:160       Pitkävetovihjeet    U       logo.png\" alt=\"Ilmaiset Pitkävetovihjeet\" height=\"32\"></a> <a"
-  - "README.md:287:587       Nrwl                U       logo.png\" alt=\"Nx (by Nrwl)\" height=\"32\"></a>"
-  - "README.md:287:1194      Transloadit         U       com/u/125754?v=4\" alt=\"Transloadit\" height=\"32\"></a> <a"
+  - "README.md:287:396       Nrwl                U       logo.png\" alt=\"Nx (by Nrwl)\" height=\"32\"></a>"
+  - "README.md:287:1003      Transloadit         U       com/u/125754?v=4\" alt=\"Transloadit\" height=\"32\"></a> <a"
   - "README.md:288:5         sponsorsend         U       <!--sponsorsend-->"
   - "templates/blogpost.md.ejs:8:5           eslintbot       U       - eslintbot"
   - "templates/blogpost.md.ejs:18:10         linkify         U       function linkify(line) {"
@@ -443,10 +441,10 @@ issues:
   - "tests/lib/config/flat-config-array.js:1767:30       doesnt (doesn't)    U       \"doesnt-exist/match\": \"error"
   - "tests/lib/eslint/flat-eslint.js:966:57      doesnotexist    U       lintFiles([\"subdir1\", \"doesnotexist/*.js\"]);"
   - "tests/lib/eslint/flat-eslint.js:1041:58     doesexist       U       await eslint.lintFiles([\"doesexist/*.js\"]);"
-  - "tests/lib/eslint/flat-eslint.js:1343:97     dotfile         U       an explicitly given dotfile is ignored\", async"
-  - "tests/lib/eslint/flat-eslint.js:1464:30     reignoring      U       it(\"should allow reignoring of previously ignored"
-  - "tests/lib/eslint/flat-eslint.js:4737:31     reignore        U       cwd: `${root}-reignore`,"
-  - "tests/lib/eslint/flat-eslint.js:4777:31     dignore         U       cwd: `${root}-dignore`,"
+  - "tests/lib/eslint/flat-eslint.js:1381:97     dotfile         U       an explicitly given dotfile is ignored\", async"
+  - "tests/lib/eslint/flat-eslint.js:1502:30     reignoring      U       it(\"should allow reignoring of previously ignored"
+  - "tests/lib/eslint/flat-eslint.js:4775:31     reignore        U       cwd: `${root}-reignore`,"
+  - "tests/lib/eslint/flat-eslint.js:4815:31     dignore         U       cwd: `${root}-dignore`,"
   - "tests/lib/linter/code-path-analysis/code-path-analyzer.js:30:16         ESQUERY     U       const STANDARD_ESQUERY_OPTION = { visitorKeys"
   - "tests/lib/linter/config-comment-parser.js:165:41        ELEVENTEEN      U       code = \"a: seventy, b:ELEVENTEEN\";"
   - "tests/lib/linter/linter.js:3361:1       consolexlog         U       consolexlog(\"test2\");"
