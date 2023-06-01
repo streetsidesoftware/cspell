@@ -25,18 +25,21 @@ export class PairingHeap<T> implements IterableIterator<T> {
 
     constructor(readonly compare: CompareFn<T>) {}
 
+    /** Add an item to the heap. */
     add(v: T): this {
         this._heap = insert(this.compare, this._heap, v);
         ++this._size;
         return this;
     }
 
+    /** take an item from the heap. */
     dequeue(): T | undefined {
         const n = this.next();
         if (n.done) return undefined;
         return n.value;
     }
 
+    /** Add items to the heap */
     concat(i: Iterable<T>): this {
         for (const v of i) {
             this.add(v);
@@ -44,6 +47,7 @@ export class PairingHeap<T> implements IterableIterator<T> {
         return this;
     }
 
+    /** get the next value */
     next(): IteratorResult<T> {
         if (!this._heap) {
             return { value: undefined, done: true };
@@ -54,6 +58,7 @@ export class PairingHeap<T> implements IterableIterator<T> {
         return { value };
     }
 
+    /** peek at the next value without removing it. */
     peek(): T | undefined {
         return this._heap?.v;
     }
@@ -62,7 +67,13 @@ export class PairingHeap<T> implements IterableIterator<T> {
         return this;
     }
 
+    /** alias of `size` */
     get length(): number {
+        return this._size;
+    }
+
+    /** number of entries in the heap. */
+    get size(): number {
         return this._size;
     }
 }

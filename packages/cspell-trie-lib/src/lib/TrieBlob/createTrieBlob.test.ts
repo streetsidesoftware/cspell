@@ -5,7 +5,6 @@ import { countNodes as countITrieNodes } from '../ITrieNode/trie-util.js';
 import { trieRootToITrieRoot } from '../TrieNode/trie.js';
 import { countNodes, createTrieFromList } from '../TrieNode/trie-util.js';
 import { createTrieBlobFromITrieNodeRoot, createTrieBlobFromTrieRoot } from './createTrieBlob.js';
-import { TrieBlob } from './TrieBlob.js';
 
 describe('FastTrieBlob', () => {
     const words = [
@@ -53,7 +52,7 @@ describe('FastTrieBlob', () => {
         const count = countNodes(trieRoot);
         const countBlob = trieBlob.countNodes();
         expect(countBlob).toBe(count);
-        const iTrieRoot = TrieBlob.toITrieNodeRoot(trieBlob);
+        const iTrieRoot = trieBlob.getRoot();
         const countITrie = countITrieNodes(iTrieRoot);
         expect(countBlob).toBe(count);
         // The node returned by walking an ITrie in not guaranteed to be unique.

@@ -1,6 +1,7 @@
 import { defaultTrieOptions } from '../constants.js';
 import type { ITrieNodeRoot } from '../ITrieNode/ITrieNode.js';
 import type { PartialTrieOptions, TrieOptions } from '../ITrieNode/TrieOptions.js';
+import type { TrieData } from '../TrieData.js';
 import { mergeOptionalWithDefaults } from '../utils/mergeOptionalWithDefaults.js';
 import { TrieBlobInternals, TrieBlobIRoot } from './TrieBlobIRoot.js';
 
@@ -34,10 +35,11 @@ const headerSig = 'TrieBlob';
 const version = '00.01.00';
 const endianSig = 0x04030201;
 
-export class TrieBlob {
+export class TrieBlob implements TrieData {
     protected charToIndexMap: Record<string, number>;
     readonly options: Readonly<TrieOptions>;
     private _countNodes: number | undefined;
+    private _forbidIdx: number | undefined;
 
     constructor(protected nodes: Uint32Array, protected charIndex: string[], options: PartialTrieOptions) {
         this.options = mergeOptionalWithDefaults(options);
@@ -47,16 +49,34 @@ export class TrieBlob {
             this.charToIndexMap[char.normalize('NFC')] = i;
             this.charToIndexMap[char.normalize('NFD')] = i;
         }
+        this._forbidIdx = this._lookupNode(0, this.options.forbiddenWordPrefix);
     }
 
     has(word: string): boolean {
+        return this._has(0, word);
+    }
+
+    isForbiddenWord(word: string): boolean {
+        return !!this._forbidIdx && this._has(this._forbidIdx, word);
+    }
+
+    getRoot(): ITrieNodeRoot {
+        const trieData = new TrieBlobInternals(this.nodes, this.charIndex, this.charToIndexMap, {
+            NodeMaskEOW: TrieBlob.NodeMaskEOW,
+            NodeMaskNumChildren: TrieBlob.NodeMaskNumChildren,
+            NodeMaskChildCharIndex: TrieBlob.NodeMaskChildCharIndex,
+            NodeChildRefShift: TrieBlob.NodeChildRefShift,
+        });
+        return new TrieBlobIRoot(trieData, 0, this.options);
+    }
+
+    private _has(nodeIdx: number, word: string): boolean {
         const NodeMaskNumChildren = TrieBlob.NodeMaskNumChildren;
         const NodeMaskChildCharIndex = TrieBlob.NodeMaskChildCharIndex;
         const NodeChildRefShift = TrieBlob.NodeChildRefShift;
         const nodes = this.nodes;
         const len = word.length;
         const charToIndexMap = this.charToIndexMap;
-        let nodeIdx = 0;
         let node = nodes[nodeIdx];
         for (let p = 0; p < len; ++p, node = nodes[nodeIdx]) {
             const letterIdx = charToIndexMap[word[p]];
@@ -72,6 +92,24 @@ export class TrieBlob {
         }
 
         return (node & TrieBlob.NodeMaskEOW) === TrieBlob.NodeMaskEOW;
+    }
+
+    private _lookupNode(nodeIdx: number, char: string): number | undefined {
+        const NodeMaskNumChildren = TrieBlob.NodeMaskNumChildren;
+        const NodeMaskChildCharIndex = TrieBlob.NodeMaskChildCharIndex;
+        const NodeChildRefShift = TrieBlob.NodeChildRefShift;
+        const nodes = this.nodes;
+        const charToIndexMap = this.charToIndexMap;
+        const node = nodes[nodeIdx];
+        const letterIdx = charToIndexMap[char];
+        const count = node & NodeMaskNumChildren;
+        let i = count;
+        for (; i > 0; --i) {
+            if ((nodes[i + nodeIdx] & NodeMaskChildCharIndex) === letterIdx) {
+                return nodes[i + nodeIdx] >>> NodeChildRefShift;
+            }
+        }
+        return undefined;
     }
 
     *words(): Iterable<string> {
@@ -180,16 +218,6 @@ export class TrieBlob {
             .split('\n');
         const nodes = new Uint32Array(blob.buffer).subarray(offsetNodes / 4, offsetNodes / 4 + lenNodes);
         return new TrieBlob(nodes, charIndex, defaultTrieOptions);
-    }
-
-    static toITrieNodeRoot(trie: TrieBlob): ITrieNodeRoot {
-        const trieData = new TrieBlobInternals(trie.nodes, trie.charIndex, trie.charToIndexMap, {
-            NodeMaskEOW: TrieBlob.NodeMaskEOW,
-            NodeMaskNumChildren: TrieBlob.NodeMaskNumChildren,
-            NodeMaskChildCharIndex: TrieBlob.NodeMaskChildCharIndex,
-            NodeChildRefShift: TrieBlob.NodeChildRefShift,
-        });
-        return new TrieBlobIRoot(trieData, 0, trie.options);
     }
 
     static NodeMaskEOW = 0x00000100;

@@ -71,6 +71,7 @@ describe('Validate Suggest', () => {
     test('Tests suggestions for `juornals` (reduced cost for swap)', () => {
         const trie = Trie.create(sampleWords);
         const results = Sug.suggest(trie.root, 'juornals', { changeLimit: changeLimit });
+        // console.warn('%o', results);
         const suggestions = results.map((s) => s.word);
         expect(suggestions).toEqual(['journals', 'journal', 'journalism', 'journalist']);
     });
@@ -209,8 +210,8 @@ describe('Validate Suggest', () => {
     // cspell:ignore walkingtree talkingtree
     test.each`
         word              | expected
-        ${'walkingstick'} | ${expect.arrayContaining([{ word: 'walkingstick', cost: 99 }])}
-        ${'walkingtree'}  | ${expect.arrayContaining([])}
+        ${'walkingstick'} | ${[{ word: 'walkingstick', cost: 99 }]}
+        ${'walkingtree'}  | ${[{ word: 'walkingtree', cost: 99 } /* still suggested even if it is forbidden */]}
     `('that forbidden words are not included (collector)', ({ word, expected }) => {
         const trie = parseDictionary(`
             walk
