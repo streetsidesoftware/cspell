@@ -12,12 +12,21 @@ type Cost = number;
 // type BranchIdx = number;
 type WordIndex = number;
 
+/** A Trie structure used to track accumulated costs */
+interface CostTrie {
+    /** cost by index */
+    c: number[];
+    t: Record<string, CostTrie | undefined>;
+}
+
 interface PNode {
     n: ITrieNode;
     c: Cost;
     i: WordIndex;
+    /** letter used */
     s: string;
-    p?: PNode | undefined;
+    p: PNode | undefined;
+    t: CostTrie;
     /** edit action taken */
     a?: string;
 }
@@ -54,7 +63,7 @@ export function* getSuggestionsAStar(
     const { compoundMethod } = options;
     const pathHeap = new PairingHeap(comparePath);
     const resultHeap = new PairingHeap(compareSuggestion);
-    const rootPNode: PNode = { n: root, i: 0, c: 0, s: '' };
+    const rootPNode: PNode = { n: root, i: 0, c: 0, s: '', p: undefined, t: createCostTrie() };
     const BC = opCosts.baseCost;
     const DL = opCosts.duplicateLetterCost;
     const wordSeparator = compoundMethod === CompoundWordsMethod.JOIN_WORDS ? JOIN_SEPARATOR : WORD_SEPARATOR;
@@ -139,7 +148,7 @@ export function* getSuggestionsAStar(
     }
 
     function* calcEdges(p: PNode): Iterable<PNode> {
-        const { n, i } = p;
+        const { n, i, t } = p;
         const keys = n.keys();
         const s = srcWord[i];
         const cost0 = p.c;
@@ -149,22 +158,29 @@ export function* getSuggestionsAStar(
             // Match
             const mIdx = keys.indexOf(s);
             if (mIdx >= 0) {
-                yield { n: n.child(mIdx), i: i + 1, c: cost0, s, p, a: '=' };
+                const nn = applyCost(t, n.child(mIdx), i + 1, cost0, s, p, '=', s);
+                nn && (yield nn);
             }
 
             // Double letter, delete 1
             const ns = srcWord[i + 1];
             if (s == ns && mIdx >= 0) {
-                yield { n: n.child(mIdx), i: i + 2, c: cost0 + DL, s, p, a: 'dd' };
+                const nn = applyCost(t, n.child(mIdx), i + 2, cost0 + DL, s, p, 'dd', s);
+                nn && (yield nn);
             }
             // Delete
-            yield { n, i: i + 1, c: cost, s: '', p, a: 'd' };
+            {
+                const nn = applyCost(t, n, i + 1, cost, '', p, 'd', '');
+                nn && (yield nn);
+            }
 
             // Replace
             if (cost <= limit) {
                 for (let j = 0; j < keys.length; ++j) {
-                    if (j === mIdx || keys[j] in sc) continue;
-                    yield { n: n.child(j), i: i + 1, c: cost, s: keys[j], p, a: 'r' };
+                    const ss = keys[j];
+                    if (j === mIdx || ss in sc) continue;
+                    const nn = applyCost(t, n.child(j), i + 1, cost, ss, p, 'r', ss);
+                    nn && (yield nn);
                 }
             }
 
@@ -175,7 +191,8 @@ export function* getSuggestionsAStar(
                 // }
                 // legacy word compound
                 if (compoundMethod) {
-                    yield { n: root, i, c: costCompound, s: wordSeparator, p, a: 'L' };
+                    const nn = applyCost(t, root, i, costCompound, wordSeparator, p, 'L', wordSeparator);
+                    nn && (yield nn);
                 }
             }
 
@@ -184,14 +201,17 @@ export function* getSuggestionsAStar(
                 const n1 = n.get(ns);
                 const n2 = n1?.get(s);
                 if (n2) {
-                    yield { n: n2, i: i + 2, c: cost0 + opCosts.swapCost, s: ns + s, p, a: 's' };
+                    const ss = ns + s;
+                    const nn = applyCost(t, n2, i + 2, cost0 + opCosts.swapCost, ss, p, 's', ss);
+                    nn && (yield nn);
                 }
             }
         }
 
         // Natural Compound
         if (compRoot && costCompound <= limit && keys.includes(comp)) {
-            yield { n: compRoot, i, c: costCompound, s: '', p, a: '+' };
+            const nn = applyCost(t, compRoot, i, costCompound, '', p, '+', '+');
+            nn && (yield nn);
         }
 
         // Insert
@@ -200,10 +220,40 @@ export function* getSuggestionsAStar(
             for (let j = 0; j < keys.length; ++j) {
                 const char = keys[j];
                 if (char in sc) continue;
-                yield { n: n.child(j), i, c: cost, s: keys[j], p, a: 'i' };
+                const nn = applyCost(t, n.child(j), i, cost, char, p, 'i', char);
+                nn && (yield nn);
             }
         }
     }
+}
+
+function createCostTrie(): CostTrie {
+    return { c: [], t: Object.create(null) };
+}
+
+/**
+ * Apply a cost to the current step.
+ * @param t - trie node
+ * @param s - letter to apply, empty string means to apply to the current node
+ * @param i - index
+ * @param c - cost
+ * @returns PNode if it was applied, otherwise undefined
+ */
+function applyCost(
+    t: CostTrie,
+    n: ITrieNode,
+    i: number,
+    c: number,
+    s: string,
+    p: PNode,
+    a: string,
+    ss: string
+): PNode | undefined {
+    const tt = ss ? (t.t[ss] ??= createCostTrie()) : t;
+    const curr = tt.c[i];
+    if (curr <= c) return undefined;
+    tt.c[i] = c;
+    return { n, i, c, s, p, t: tt, a };
 }
 
 function pNodeToWord(p: PNode): string {
