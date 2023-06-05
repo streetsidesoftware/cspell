@@ -1,8 +1,9 @@
 import { describe, expect, test } from 'vitest';
 
-import { createITrieFromList, createTrieFromList } from '../TrieNode/trie-util.js';
+import { createITrieFromList } from '../TrieNode/trie-util.js';
+import { TrieNodeTrie } from '../TrieNode/TrieNodeTrie.js';
 import { walkerWordsITrie } from '../walker/walker.js';
-import { createTrieBlob, createTrieBlobFromITrieNodeRoot, createTrieBlobFromTrieRoot } from './createTrieBlob.js';
+import { createTrieBlob, createTrieBlobFromITrieNodeRoot, createTrieBlobFromTrieData } from './createTrieBlob.js';
 import { TrieBlob } from './TrieBlob.js';
 
 describe('TrieBlob', () => {
@@ -39,9 +40,9 @@ describe('TrieBlob', () => {
         expect([...trieBlob.words()]).toEqual(sampleWords);
     });
 
-    test('createTrieBlobFromTrieRoot', () => {
-        const root = createTrieFromList(sampleWords);
-        const trieBlob = createTrieBlobFromTrieRoot(root);
+    test('createTrieBlobFromTrieData', () => {
+        const root = TrieNodeTrie.createFromWords(sampleWords);
+        const trieBlob = createTrieBlobFromTrieData(root);
         expect([...trieBlob.words()]).toEqual(sampleWords);
     });
 

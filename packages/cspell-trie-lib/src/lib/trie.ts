@@ -9,7 +9,7 @@ import type { FindFullResult, FindOptions, PartialFindOptions } from './TrieNode
 import { createFindOptions, findLegacyCompound, findWord, findWordNode, isForbiddenWord } from './TrieNode/find.js';
 import {
     countWords,
-    createTrieFromList,
+    createTrieRootFromList,
     insert,
     isWordTerminationNode,
     iteratorTrieWords,
@@ -239,7 +239,7 @@ export class Trie {
     }
 
     static create(words: Iterable<string> | IterableIterator<string>, options?: PartialTrieOptions): Trie {
-        const root = createTrieFromList(words, options);
+        const root = createTrieRootFromList(words, options);
         orderTrie(root);
         return new Trie(root, undefined);
     }

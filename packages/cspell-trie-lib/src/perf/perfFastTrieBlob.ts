@@ -1,12 +1,12 @@
 import assert from 'assert';
 import { readFileSync, writeFileSync } from 'fs';
 
-import type { TrieNode } from '../index.js';
-import { createTrieRoot, insert, Trie } from '../index.js';
 import { selectNearestWords } from '../lib/distance/levenshtein.js';
+import type { TrieNode } from '../lib/index.js';
+import { createTrieRoot, insert, Trie } from '../lib/index.js';
 import { suggest as suggestTrieNode } from '../lib/suggest.js';
 import { suggestAStar as suggestAStar2 } from '../lib/suggestions/suggestAStar2.js';
-import { createTrieBlobFromITrieNodeRoot, createTrieBlobFromTrieRoot } from '../lib/TrieBlob/createTrieBlob.js';
+import { createTrieBlobFromITrieNodeRoot } from '../lib/TrieBlob/createTrieBlob.js';
 import type { FastTrieBlob } from '../lib/TrieBlob/FastTrieBlob.js';
 import { FastTrieBlobBuilder } from '../lib/TrieBlob/FastTrieBlobBuilder.js';
 import { TrieBlob } from '../lib/TrieBlob/TrieBlob.js';
@@ -157,17 +157,14 @@ export async function measurePerf(which: string | undefined, method: string | un
             );
             timer.measureFn('blob.FastTrieBlob.toTrieBlob \t', () => ft.toTrieBlob());
         }
-        const trieBlob = timer.measureFn('blob.createTrieBlobFromTrieRoot\t', () =>
-            createTrieBlobFromTrieRoot(trie.root)
-        );
-        timer.measureFn('blob.createTrieBlobFromITrieNodeRoot\t', () =>
+        const trieBlob = timer.measureFn('blob.createTrieBlobFromITrieNodeRoot\t', () =>
             createTrieBlobFromITrieNodeRoot(trieRootToITrieRoot(trie.root))
         );
 
         switch (method) {
             case 'has':
-                timer.measureFn('blob.TrieBlob.has \t\t', () => hasWords(words, (word) => trieBlob.has(word)));
-                timer.measureFn('blob.TrieBlob.has \t\t', () => hasWords(words, (word) => trieBlob.has(word)));
+                timer.measureFn('blob.TrieBlob.has', () => trieHasWords(trieBlob, words));
+                timer.measureFn('blob.TrieBlob.has', () => trieHasWords(trieBlob, words));
                 break;
             case 'words':
                 timer.start('blob.words');
@@ -325,6 +322,17 @@ function getFastTrieBlob() {
 
 function getFastTrieBlobNL() {
     return readFastTrieBlobFromConfig('@cspell/dict-nl-nl/cspell-ext.json');
+}
+
+function trieHasWords(trie: TrieData, words: string[]): boolean {
+    const has = (word: string) => trie.has(word);
+    const len = words.length;
+    let success = true;
+    for (let i = 0; i < len; ++i) {
+        success = has(words[i]) && success;
+    }
+    assert(success);
+    return success;
 }
 
 function hasWords(words: string[], method: (word: string) => boolean): boolean {

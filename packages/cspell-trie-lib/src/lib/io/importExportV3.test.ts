@@ -97,7 +97,7 @@ describe('Import/Export', () => {
         ${{ base: 10, optimizeSimpleReferences: true }}
         ${{ base: 10, optimizeSimpleReferences: false }}
     `('serialize DAWG $options', ({ options }) => {
-        const trie = Trie.createTriFromList(sampleWords);
+        const trie = Trie.createTrieRootFromList(sampleWords);
         const trieDawg = consolidate(trie);
         const data = [...serializeTrie(trieDawg, options)];
         const root = importTrie(data);

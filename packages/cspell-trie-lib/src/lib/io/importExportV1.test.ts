@@ -9,7 +9,7 @@ import { importTrie, serializeTrie } from './importExportV1.js';
 
 describe('Import/Export', () => {
     test('tests serialize / deserialize', async () => {
-        const trie = consolidate(Trie.createTriFromList(sampleWords));
+        const trie = consolidate(Trie.createTrieRootFromList(sampleWords));
         const data = [...serializeTrie(trie, 10)];
         const sample = (await readFile(resolveSample('sampleV1.trie'), 'utf8')).replace(/\r/g, '');
         const rawData = data.join('');

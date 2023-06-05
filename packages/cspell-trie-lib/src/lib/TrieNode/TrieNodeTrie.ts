@@ -1,10 +1,11 @@
-import { mergeOptionalWithDefaults } from '../index.js';
+import { consolidate } from '../consolidate.js';
 import type { ITrieNodeRoot } from '../ITrieNode/ITrieNode.js';
-import type { TrieOptions } from '../trie.js';
+import type { PartialTrieOptions, TrieOptions } from '../trie.js';
 import type { TrieData } from '../TrieData.js';
+import { mergeOptionalWithDefaults } from '../utils/mergeOptionalWithDefaults.js';
 import { findWordExact } from './find.js';
 import { trieRootToITrieRoot } from './trie.js';
-import { iteratorTrieWords } from './trie-util.js';
+import { createTrieRootFromList, iteratorTrieWords } from './trie-util.js';
 import type { TrieRoot } from './TrieNode.js';
 
 export class TrieNodeTrie implements TrieData {
@@ -32,5 +33,15 @@ export class TrieNodeTrie implements TrieData {
 
     isForbiddenWord(word: string): boolean {
         return findWordExact(this.root.c[this.root.forbiddenWordPrefix], word);
+    }
+
+    static createFromWords(words: Iterable<string>, options?: PartialTrieOptions): TrieNodeTrie {
+        const root = createTrieRootFromList(words, options);
+        return new TrieNodeTrie(root);
+    }
+
+    static createFromWordsAndConsolidate(words: Iterable<string>, options?: PartialTrieOptions): TrieNodeTrie {
+        const root = createTrieRootFromList(words, options);
+        return new TrieNodeTrie(consolidate(root));
     }
 }

@@ -1,8 +1,8 @@
 import { type BuilderCursor, insertWordsAtCursor, type TrieBuilder } from '../Builder/index.js';
-import { mergeOptionalWithDefaults } from '../index.js';
 import type { PartialTrieOptions, TrieOptions } from '../trie.js';
 import { defaultTrieOptions } from '../trie.js';
 import { assert } from '../utils/assert.js';
+import { mergeOptionalWithDefaults } from '../utils/mergeOptionalWithDefaults.js';
 import type { ChildMap, TrieNode, TrieRoot } from './TrieNode.js';
 import { TrieNodeTrie } from './TrieNodeTrie.js';
 

@@ -4,7 +4,7 @@ import { mergeDefaults } from '../utils/mergeDefaults.js';
 import {
     countNodes,
     countWords,
-    createTrieFromList,
+    createTrieRootFromList,
     findNode,
     has,
     isCircular,
@@ -13,20 +13,20 @@ import {
 
 describe('Validate Util Functions', () => {
     test('createTriFromList', () => {
-        const trie = createTrieFromList(words);
+        const trie = createTrieRootFromList(words);
         expect(has(trie, 'sample')).toBe(true);
         expect(has(trie, 'not found')).toBe(false);
     });
 
     test('has', () => {
-        const trie = createTrieFromList(words);
+        const trie = createTrieRootFromList(words);
         // cspell:ignore sampl
         expect(has(trie, 'sample')).toBe(true);
         expect(has(trie, 'sampl')).toBe(false);
     });
 
     test('find', () => {
-        const trie = createTrieFromList(words);
+        const trie = createTrieRootFromList(words);
         expect(has(trie, 'sample')).toBe(true);
         // cspell:ignore sampl samp
         const n0 = findNode(trie, 'sample');
@@ -38,12 +38,12 @@ describe('Validate Util Functions', () => {
     });
 
     test('countNodes', () => {
-        const trie = createTrieFromList(words);
+        const trie = createTrieRootFromList(words);
         expect(countNodes(trie)).toBe(73);
     });
 
     test('isCircular', () => {
-        const trie = createTrieFromList(words);
+        const trie = createTrieRootFromList(words);
         expect(isCircular(trie)).toBe(false);
         const n = findNode(trie, 'samp');
         n && n.c && (n.c['x'] = trie);
@@ -51,7 +51,7 @@ describe('Validate Util Functions', () => {
     });
 
     test('countWords', () => {
-        const trie = createTrieFromList(words);
+        const trie = createTrieRootFromList(words);
         expect(countWords(trie)).toBe(19);
         const n = findNode(trie, 'samp');
         n && n.c && (n.c['x'] = trie);
@@ -60,7 +60,7 @@ describe('Validate Util Functions', () => {
     });
 
     test('iteratorTrieWords', () => {
-        const trie = createTrieFromList(words);
+        const trie = createTrieRootFromList(words);
         expect([...iteratorTrieWords(trie)].join(' ')).toBe(
             'These There are some someone sample space spaces. words worry. with for everyone extra to use, complete is no'
         );
