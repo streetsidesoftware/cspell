@@ -1,12 +1,12 @@
 import { describe, expect, test } from 'vitest';
 
 import { trieRootToITrieRoot } from '../TrieNode/trie.js';
-import { createTrieFromList } from '../TrieNode/trie-util.js';
+import { createTrieRootFromList } from '../TrieNode/trie-util.js';
 import { mergeDefaults } from '../utils/mergeDefaults.js';
 import { countNodes, countWords, findNode, has, iteratorTrieWords } from './trie-util.js';
 
 describe('Validate Util Functions', () => {
-    const trieNode = createTrieFromList(words);
+    const trieNode = createTrieRootFromList(words);
     const trie = trieRootToITrieRoot(trieNode);
 
     test('createTriFromList', () => {

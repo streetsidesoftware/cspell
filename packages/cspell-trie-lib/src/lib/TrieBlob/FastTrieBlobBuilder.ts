@@ -263,8 +263,8 @@ export class FastTrieBlobBuilder implements TrieBuilder<FastTrieBlob> {
         );
     }
 
-    static fromWordList(words: string[] | Iterable<string>): FastTrieBlob {
-        const ft = new FastTrieBlobBuilder();
+    static fromWordList(words: string[] | Iterable<string>, options?: PartialTrieOptions): FastTrieBlob {
+        const ft = new FastTrieBlobBuilder(options);
         return ft.insert(words).build();
     }
 

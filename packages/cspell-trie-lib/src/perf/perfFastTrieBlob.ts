@@ -1,14 +1,16 @@
 import assert from 'assert';
 import { readFileSync, writeFileSync } from 'fs';
 
-import type { TrieNode } from '../index.js';
-import { createTrieRoot, insert, Trie } from '../index.js';
 import { selectNearestWords } from '../lib/distance/levenshtein.js';
+import type { TrieNode } from '../lib/index.js';
+import { createTrieRoot, insert, Trie } from '../lib/index.js';
 import { suggest as suggestTrieNode } from '../lib/suggest.js';
 import { suggestAStar as suggestAStar2 } from '../lib/suggestions/suggestAStar2.js';
-import { createTrieBlobFromITrieNodeRoot, createTrieBlobFromTrieRoot } from '../lib/TrieBlob/createTrieBlob.js';
+import { createTrieBlobFromITrieNodeRoot } from '../lib/TrieBlob/createTrieBlob.js';
+import type { FastTrieBlob } from '../lib/TrieBlob/FastTrieBlob.js';
 import { FastTrieBlobBuilder } from '../lib/TrieBlob/FastTrieBlobBuilder.js';
 import { TrieBlob } from '../lib/TrieBlob/TrieBlob.js';
+import type { TrieData } from '../lib/TrieData.js';
 import { trieRootToITrieRoot } from '../lib/TrieNode/trie.js';
 import { buildTrieNodeTrieFromWords } from '../lib/TrieNode/TrieNodeBuilder.js';
 import { TrieNodeTrie } from '../lib/TrieNode/TrieNodeTrie.js';
@@ -47,46 +49,122 @@ const perf: PerfNames = {
     suggest: 'suggest',
 };
 
+class DI {
+    private _timer = lazy(() => getGlobalPerfTimer());
+
+    get timer() {
+        return this._timer();
+    }
+
+    private _trie = lazy(() => {
+        return this.timer.measureAsyncFn('getTrie', getTrie);
+    });
+
+    get trie() {
+        return this._trie();
+    }
+
+    private _trieTrie = lazy(async () => {
+        return new TrieNodeTrie((await this.trie).root);
+    });
+
+    get trieTrie() {
+        return this._trieTrie();
+    }
+
+    private _trieFast = lazy(() => {
+        return this.timer.measureAsyncFn('readFastTrieBlobFromConfig', getFastTrieBlob);
+    });
+
+    get trieFastNL() {
+        return this._trieFastNL();
+    }
+
+    private _trieFastNL = lazy(() => {
+        return this.timer.measureAsyncFn('readFastTrieBlobFromConfigNL', getFastTrieBlobNL);
+    });
+
+    get trieFast() {
+        return this._trieFast();
+    }
+
+    private _words = lazy(async () => {
+        const trie = await this.trie;
+        this.timer.start('words');
+        const words = [...trie.words()];
+        this.timer.stop('words');
+        return words;
+    });
+
+    get words() {
+        return this._words();
+    }
+}
+
+interface TestDependencies {
+    trie: Trie;
+    words: string[];
+    trieFast: FastTrieBlob;
+    trieFastNL: FastTrieBlob;
+}
+
 export async function measurePerf(which: string | undefined, method: string | undefined) {
-    const timer = getGlobalPerfTimer();
+    const di = new DI();
+    const timer = di.timer;
     timer.start('Measure Perf');
-    const trie = await timer.measureAsyncFn('getTrie', getTrie);
-    const trieTrie = new TrieNodeTrie(trie.root);
-    await timer.measureAsyncFn('readFastTrieBlobFromConfig', getFastTrieBlob);
-    timer.start('words');
-    const words = [...trie.words()];
-    timer.stop('words');
 
-    timer.mark('done with setup');
-
-    filterTest(which, perf.blob) && timer.measureFn('blob', perfBlob);
-    filterTest(which, perf.fast) && timer.measureFn('fast', perfFast);
-    filterTest(which, perf.trie) && timer.measureFn('trie', perfTrie);
-    filterTest(which, perf.suggest) && timer.measureFn('suggest', perfSuggest);
+    await runTest(which, perf.blob, async () => {
+        const stopTimer = timer.start('prepare');
+        const trie = await di.trie;
+        const words = await di.words;
+        stopTimer();
+        timer.stop('prepare');
+        timer.measureFn('blob', () => perfBlob({ trie, words }));
+    });
+    await runTest(which, perf.fast, async () => {
+        const stopTimer = timer.start('prepare');
+        const trie = await di.trie;
+        const words = await di.words;
+        stopTimer();
+        timer.measureFn('fast', () => perfFast({ trie, words }));
+    });
+    await runTest(which, perf.trie, async () => {
+        const stopTimer = timer.start('prepare');
+        const words = await di.words;
+        stopTimer();
+        timer.measureFn('trie', () => perfTrie({ words }));
+    });
+    await runTest(which, perf.suggest, async () => {
+        const stopTimer = timer.start('prepare');
+        const trie = await di.trie;
+        const words = await di.words;
+        const trieFast = await di.trieFast;
+        const trieFastNL = await di.trieFastNL;
+        stopTimer();
+        timer.measureFn('suggest', () => perfSuggest({ trie, words, trieFast, trieFastNL }));
+    });
 
     timer.stop('Measure Perf');
     timer.stop();
     timer.report();
     return;
 
-    function perfBlob() {
+    function perfBlob(deps: Pick<TestDependencies, 'trie' | 'words'>) {
+        const { trie, words } = deps;
         {
             const ft = timer.measureFn('blob.FastTrieBlobBuilder.fromTrieRoot \t', () =>
                 FastTrieBlobBuilder.fromTrieRoot(trie.root)
             );
             timer.measureFn('blob.FastTrieBlob.toTrieBlob \t', () => ft.toTrieBlob());
         }
-        const trieBlob = timer.measureFn('blob.createTrieBlobFromTrieRoot\t', () =>
-            createTrieBlobFromTrieRoot(trie.root)
-        );
-        timer.measureFn('blob.createTrieBlobFromITrieNodeRoot\t', () =>
+        const trieBlob = timer.measureFn('blob.createTrieBlobFromITrieNodeRoot\t', () =>
             createTrieBlobFromITrieNodeRoot(trieRootToITrieRoot(trie.root))
         );
 
         switch (method) {
             case 'has':
-                timer.measureFn('blob.TrieBlob.has \t\t', () => hasWords(words, (word) => trieBlob.has(word)));
-                timer.measureFn('blob.TrieBlob.has \t\t', () => hasWords(words, (word) => trieBlob.has(word)));
+                timer.measureFn('blob.TrieBlob.has', () => trieHasWords(trieBlob, words));
+                timer.measureFn('blob.TrieBlob.has', () => trieHasWords(trieBlob, words));
                 break;
             case 'words':
                 timer.start('blob.words');
@@ -118,7 +196,8 @@ export async function measurePerf(which: string | undefined, method: string | un
         }
     }
 
-    function perfFast() {
+    function perfFast(deps: Pick<TestDependencies, 'trie' | 'words'>) {
+        const { trie, words } = deps;
         const ftWordList = timer.measureFn('fast.FastTrieBlobBuilder.fromWordList', () =>
             FastTrieBlobBuilder.fromWordList(words)
         );
@@ -142,7 +221,8 @@ export async function measurePerf(which: string | undefined, method: string | un
         }
     }
 
-    function perfTrie() {
+    function perfTrie(deps: Pick<TestDependencies, 'words'>) {
+        const { words } = deps;
         const root = createTrieRoot({});
 
         timer.measureFn('trie.createTriFromList \t\t', () => insertWords(root, words));
@@ -163,13 +243,18 @@ export async function measurePerf(which: string | undefined, method: string | un
         }
     }
 
-    function perfSuggest() {
+    function perfSuggest(params: Pick<TestDependencies, 'trie' | 'trieFast' | 'words' | 'trieFastNL'>) {
+        const { words, trieFast, trie, trieFastNL } = params;
+        const trieTrie = new TrieNodeTrie(trie.root);
         const count = 8;
         const maxEdits = 3;
 
         timer.start('filter words');
         const fWords = words.filter((w) => !w.startsWith('~'));
         timer.stop('filter words');
+
+        const trieBlob = timer.measureFn('blob.FastTrieBlob.toTrieBlob', () => trieFast.toTrieBlob());
+        const trieBlobNL = timer.measureFn('blob.FastTrieBlob.toTrieBlob NL', () => trieFastNL.toTrieBlob());
 
         timer.measureFn('selectNearestWordsBruteForce', () =>
             selectNearestWordsBruteForce('nearest', fWords, count, maxEdits)
@@ -185,21 +270,24 @@ export async function measurePerf(which: string | undefined, method: string | un
         timer.measureFn('suggestTrieNode', () =>
             suggestTrieNode(trie.root, 'nearest', { ignoreCase: false, changeLimit: maxEdits })
         );
-        const r = timer.measureFn('suggestAStar2', () =>
-            suggestAStar2(trieTrie, 'nearest', { ignoreCase: false, changeLimit: maxEdits })
-        );
-        console.log('%o', r);
-        // timer.measureFn('suggestAStar', () =>
-        //     suggestAStar(trie.root, 'nearest', { ignoreCase: false, changeLimit: maxEdits })
-        // );
 
-        // timer.measureFn('suggestTrieNode w6gDF', () =>
-        //     suggestTrieNode(trie.root, 'w6gDFScm3qpITum86UhXp4UQ', { ignoreCase: false, changeLimit: maxEdits * 2 })
-        // );
-        timer.measureFn('suggestAStar2 w6gDF', () =>
-            suggestAStar2(trieTrie, 'w6gDFScm3qpITum86UhXp4UQ', { ignoreCase: false, changeLimit: maxEdits * 2 })
-        );
-        // console.warn('%o', sc);
+        timer.measureFn('sug TrieNode', () => sugAStar2(trieTrie, ['nearest', 'w6gDFScm3qpITum86UhXp4UQ']));
+        timer.measureFn('sug FastTrie', () => sugAStar2(trieFast, ['nearest', 'w6gDFScm3qpITum86UhXp4UQ']));
+        timer.measureFn('sug TrieBlob', () => sugAStar2(trieBlob, ['nearest', 'w6gDFScm3qpITum86UhXp4UQ']));
+
+        // cspell:ignore afgelopen
+        timer.measureFn('sug FastTrie NL', () => sugAStar2(trieBlobNL, ['afgelopen', 'w6gDFScm3qpITum86UhXp4UQ']));
+        timer.measureFn('sug TrieBlob NL', () => sugAStar2(trieBlobNL, ['afgelopen', 'w6gDFScm3qpITum86UhXp4UQ']));
+
+        return;
+
+        function sugAStar2(trie: TrieData, words: string[]) {
+            for (const word of words) {
+                timer.measureFn(`suggestAStar2 ${word}`, () =>
+                    suggestAStar2(trie, word, { ignoreCase: false, changeLimit: maxEdits })
+                );
+            }
+        }
     }
 }
 
@@ -208,6 +296,12 @@ function filterTest(value: string | undefined, expected: PerfKey): boolean {
     const cfg = PerfConfig[expected];
 
     return (cfg.auto !== false && !value) || value == 'all';
+}
+
+async function runTest(value: string | undefined, expected: PerfKey, fn: () => Promise<void>): Promise<void> {
+    if (filterTest(value, expected)) {
+        await fn();
+    }
 }
 
 function insertWords(root: TrieNode, words: string[]) {
@@ -226,6 +320,21 @@ function getFastTrieBlob() {
     return readFastTrieBlobFromConfig('@cspell/dict-en_us/cspell-ext.json');
 }
 
+function getFastTrieBlobNL() {
+    return readFastTrieBlobFromConfig('@cspell/dict-nl-nl/cspell-ext.json');
+}
+
+function trieHasWords(trie: TrieData, words: string[]): boolean {
+    const has = (word: string) => trie.has(word);
+    const len = words.length;
+    let success = true;
+    for (let i = 0; i < len; ++i) {
+        success = has(words[i]) && success;
+    }
+    assert(success);
+    return success;
+}
+
 function hasWords(words: string[], method: (word: string) => boolean): boolean {
     const len = words.length;
     let success = true;
@@ -234,4 +343,14 @@ function hasWords(words: string[], method: (word: string) => boolean): boolean {
     }
     assert(success);
     return success;
+}
+
+function lazy<T>(fn: () => T): () => T {
+    let r: { v: T } | undefined = undefined;
+    return () => {
+        if (r) return r.v;
+        const v = fn();
+        r = { v };
+        return v;
+    };
 }

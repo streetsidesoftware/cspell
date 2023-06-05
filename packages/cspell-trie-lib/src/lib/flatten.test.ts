@@ -2,12 +2,12 @@ import { genSequence } from 'gensequence';
 import { describe, expect, test } from 'vitest';
 
 import { flattenToTrieRefNodeArray, flattenToTrieRefNodeIterable } from './flatten.js';
-import { createTrieFromList } from './TrieNode/trie-util.js';
+import { createTrieRootFromList } from './TrieNode/trie-util.js';
 import type { TrieRefNode } from './trieRef.js';
 
 describe('Validate Flatten', () => {
     test('Simple flatten Array', () => {
-        const trie = createTrieFromList(sampleWords);
+        const trie = createTrieRootFromList(sampleWords);
         const nodes = flattenToTrieRefNodeArray(trie);
         expect(nodes).toHaveLength(112);
         const words = [...walk(nodes)];
@@ -15,7 +15,7 @@ describe('Validate Flatten', () => {
     });
 
     test('Simple flatten Iterable', () => {
-        const trie = createTrieFromList(sampleWords);
+        const trie = createTrieRootFromList(sampleWords);
         const nodes = [...flattenToTrieRefNodeIterable(trie)];
         expect(nodes).toHaveLength(112);
         const words = [...walk(nodes)];

@@ -61,7 +61,7 @@ export function createTrieRoot(options: PartialTrieOptions): TrieRoot {
     };
 }
 
-export function createTrieFromList(words: Iterable<string>, options?: PartialTrieOptions): TrieRoot {
+export function createTrieRootFromList(words: Iterable<string>, options?: PartialTrieOptions): TrieRoot {
     const root = createTrieRoot(options);
     for (const word of words) {
         if (word.length) {
@@ -72,7 +72,7 @@ export function createTrieFromList(words: Iterable<string>, options?: PartialTri
 }
 
 export function createITrieFromList(words: Iterable<string>, options?: PartialTrieOptions): ITrieNodeRoot {
-    return trieRootToITrieRoot(createTrieFromList(words, options));
+    return trieRootToITrieRoot(createTrieRootFromList(words, options));
 }
 
 export function has(node: TrieNode, word: string): boolean {

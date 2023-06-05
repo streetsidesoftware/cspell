@@ -2,7 +2,7 @@ import { describe, expect, test } from 'vitest';
 
 import { parseLinesToDictionary } from '../../SimpleDictionaryParser.js';
 import { trieRootToITrieRoot } from '../../TrieNode/trie.js';
-import { createTrieFromList, orderTrie } from '../../TrieNode/trie-util.js';
+import { createTrieRootFromList, orderTrie } from '../../TrieNode/trie-util.js';
 import type { HintedWalkerIterator } from './hintedWalker.js';
 import { hintedWalker } from './hintedWalker.js';
 import type { YieldResult } from './walkerTypes.js';
@@ -10,7 +10,7 @@ import { CompoundWordsMethod } from './walkerTypes.js';
 
 describe('Validate Util Functions', () => {
     test('Hinted Walker', () => {
-        const root = createTrieFromList(sampleWords);
+        const root = createTrieRootFromList(sampleWords);
         orderTrie(root);
         const iTrieRoot = trieRootToITrieRoot(root);
         // cspell:ignore joty
@@ -25,7 +25,7 @@ describe('Validate Util Functions', () => {
         ${'joty'}   | ${s('joy jowl talk lift walk')}
         ${'talked'} | ${s('talk lift jowl joy walk')}
     `('Hinted Walker with strange word list: "$word"', ({ word, expected }) => {
-        const root = createTrieFromList([...sampleWords, 'joy++', 'talk++']);
+        const root = createTrieRootFromList([...sampleWords, 'joy++', 'talk++']);
         orderTrie(root);
         const iTrieRoot = trieRootToITrieRoot(root);
         // cspell:ignore joty

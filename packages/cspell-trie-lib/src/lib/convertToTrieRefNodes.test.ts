@@ -3,12 +3,12 @@ import { describe, expect, test } from 'vitest';
 
 import { consolidate } from './consolidate.js';
 import { convertToTrieRefNodes } from './convertToTrieRefNodes.js';
-import { createTrieFromList } from './TrieNode/trie-util.js';
+import { createTrieRootFromList } from './TrieNode/trie-util.js';
 import type { TrieRefNode } from './trieRef.js';
 
 describe('Validate convertToTrieRefNodes', () => {
     test('Simple Convert', () => {
-        const trie = consolidate(createTrieFromList(sampleWords));
+        const trie = consolidate(createTrieRootFromList(sampleWords));
         const nodes = [...convertToTrieRefNodes(trie)];
         expect(nodes).toHaveLength(96);
         const words = [...walk(nodes)];

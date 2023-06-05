@@ -15,7 +15,7 @@ describe('Experiment with Tries', () => {
 
     test('Adds words to a Trie sorts the trie and takes them back out.', () => {
         const words = [...new Set(sampleWords)];
-        const trie = Trie.createTriFromList(words);
+        const trie = Trie.createTrieRootFromList(words);
         expect(trie.c).toBeDefined();
         Trie.orderTrie(trie);
         const extractedWords = [...Trie.iteratorTrieWords(trie)];
@@ -24,12 +24,12 @@ describe('Experiment with Tries', () => {
 
     test('buildReferenceTree', () => {
         const words = [...new Set(sampleWords)];
-        const trie = Trie.createTriFromList(words);
+        const trie = Trie.createTrieRootFromList(words);
         const asString = [...Trie.serializeTrie(trie, 10)].join('');
-        const trie2 = Trie.createTriFromList(words);
+        const trie2 = Trie.createTrieRootFromList(words);
         const asString2 = [...Trie.serializeTrie(trie2, { base: 10, addLineBreaksToImproveDiffs: false })].join('');
         expect(asString2).toBe(asString);
-        const trie3 = Trie.createTriFromList(words);
+        const trie3 = Trie.createTrieRootFromList(words);
         const asString3 = [
             ...Trie.serializeTrie(trie3, {
                 base: 10,
@@ -53,25 +53,25 @@ describe('Experiment with Tries', () => {
     });
 
     test('buildReferenceTree default base', () => {
-        const trie = Trie.createTriFromList(sampleWords);
+        const trie = Trie.createTrieRootFromList(sampleWords);
         const text = [...Trie.serializeTrie(trie)].join('');
         expect(text).toEqual(expect.stringContaining('base=16'));
     });
 
     test('buildReferenceTree too low base', () => {
-        const trie = Trie.createTriFromList(sampleWords);
+        const trie = Trie.createTrieRootFromList(sampleWords);
         const text = [...Trie.serializeTrie(trie, 5)].join('');
         expect(text).toEqual(expect.stringContaining('base=10'));
     });
 
     test('buildReferenceTree too high base', () => {
-        const trie = Trie.createTriFromList(sampleWords);
+        const trie = Trie.createTrieRootFromList(sampleWords);
         const text = [...Trie.serializeTrie(trie, 100)].join('');
         expect(text).toEqual(expect.stringContaining('base=36'));
     });
 
     test('buildReferenceTree undefined base', () => {
-        const trie = Trie.createTriFromList(sampleWords);
+        const trie = Trie.createTrieRootFromList(sampleWords);
         const text = [...Trie.serializeTrie(trie, {})].join('');
         expect(text).toEqual(expect.stringContaining('base=16'));
     });

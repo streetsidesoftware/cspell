@@ -116,7 +116,7 @@ export function* getSuggestionsAStar(
         best = pathHeap.dequeue();
         maxSize = Math.max(maxSize, pathHeap.size);
     }
-    console.log('%o', { maxSize, suggestionsGenerated, nodesProcessed });
+    // console.log('%o', { maxSize, suggestionsGenerated, nodesProcessed });
 
     return;
 

@@ -1,12 +1,12 @@
 import { describe, expect, test } from 'vitest';
 
 import { trieRootToITrieRoot } from '../../TrieNode/trie.js';
-import { createTrieFromList } from '../../TrieNode/trie-util.js';
+import { createTrieRootFromList } from '../../TrieNode/trie-util.js';
 import { walker } from './walker.js';
 import type { WalkerIterator, YieldResult } from './walkerTypes.js';
 
 describe('walker', () => {
-    const trieNode = createTrieFromList(sampleWords.sort());
+    const trieNode = createTrieRootFromList(sampleWords.sort());
     const root = trieRootToITrieRoot(trieNode);
 
     test('walker', () => {
