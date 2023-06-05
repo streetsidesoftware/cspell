@@ -4,8 +4,8 @@ Url: https://github.com/wireapp/wire-webapp.git
 Args: '["src/script/**/*.{js,ts,tsx,md}"]'
 Summary:
   files: 960
-  filesWithIssues: 123
-  issues: 412
+  filesWithIssues: 124
+  issues: 416
   errors: 0
 Errors: []
 
@@ -61,9 +61,9 @@ issues:
   - "src/script/calling/CallingRepository.ts:123:6       subconv             U       in_subconv: boolean;"
   - "src/script/calling/CallingRepository.ts:881:5       subconversation     U       subconversationData: SubconversationData"
   - "src/script/calling/CallingRepository.ts:887:7       convid              U       convid: serializedConversationId"
-  - "src/script/calling/CallingRepository.ts:1172:47     Recepients          U       rtParticipantsToCallingMessageRecepients = (participants: Participant"
-  - "src/script/calling/CallingRepository.ts:1428:108    vrecv               U       isSendingVideo(!!member.vrecv));"
-  - "src/script/calling/CallingRepository.ts:1435:37     aestab              U       isAudioEstablished(member.aestab === AUDIO_STATE.ESTABLISHED"
+  - "src/script/calling/CallingRepository.ts:1165:47     Recepients          U       rtParticipantsToCallingMessageRecepients = (participants: Participant"
+  - "src/script/calling/CallingRepository.ts:1421:108    vrecv               U       isSendingVideo(!!member.vrecv));"
+  - "src/script/calling/CallingRepository.ts:1428:37     aestab              U       isAudioEstablished(member.aestab === AUDIO_STATE.ESTABLISHED"
   - "src/script/client/ClientRepository.test.ts:159:38       Respy       U       as any).getEnv().allowRespy(true);"
   - "src/script/components/calling/CallParticipantsListItem/CallParticipantItemContent/CallParticipantItemContent.tsx:87:30          UNFOCUSABLE     U       tabIndex={TabIndex.UNFOCUSABLE}"
   - "src/script/components/calling/CallParticipantsListItem/CallParticipantsListItem.test.tsx:152:54         unestablishd    U       text if user is in unestablishd audio state', () =>"
@@ -94,13 +94,14 @@ issues:
   - "src/script/components/MessagesList/Message/ContentMessage/asset/TextMessageRenderer/TextMessageRenderer.test.tsx:39:66          correcly    U       event of mention message correcly', () => {"
   - "src/script/components/MessagesList/Message/ContentMessage/asset/TextMessageRenderer/TextMessageRenderer.test.tsx:41:54          buttton     U       message-mention\" role=\"buttton\" data-uie-name=\"label"
   - "src/script/components/MessagesList/Message/ContentMessage/asset/TextMessageRenderer/TextMessageRenderer.tsx:144:11      clickabled      U       //clickabled elements directly."
+  - "src/script/components/MessagesList/Message/ContentMessage/Warnings/PartialFailureToSend/PartialFailureToSend.tsx:55:28          Qulified    U       parsedUsers, currentQulifiedId) => {"
   - "src/script/components/MessagesList/Message/index.tsx:165:54         mesages     U       for non content type mesages"
   - "src/script/components/MessagesList/Message/ReadReceiptStatus.test.tsx:55:30         noone       U       shows \"delivered\" when noone read the message',"
   - "src/script/components/MessagesList/Message/SystemMessage.test.tsx:34:35         editicon        U       span data-uie-name=\"editicon\" className=\"editicon"
   - "src/script/components/MessagesList/Message/SystemMessage.test.tsx:37:35         readicon        U       span data-uie-name=\"readicon\" className=\"readicon"
   - "src/script/components/MessagesList/Message/SystemMessage.test.tsx:40:35         timericon       U       span data-uie-name=\"timericon\" className=\"timericon"
-  - "src/script/components/MessagesList/MessageList.tsx:53:18        convesation     U       invitePeople: (convesation: Conversation) => void"
-  - "src/script/components/MessagesList/MessageList.tsx:81:16        Dont            U       // Dont show duplicated group"
+  - "src/script/components/MessagesList/MessageList.tsx:56:18        convesation     U       invitePeople: (convesation: Conversation) => void"
+  - "src/script/components/MessagesList/MessageList.tsx:89:16        Dont            U       // Dont show duplicated group"
   - "src/script/components/Modals/InviteModal/InviteModal.test.tsx:32:21         janek       U       const userName = 'janek';"
   - "src/script/components/Modals/PrimaryModal/PrimaryModal.tsx:174:41       pswd    U       label htmlFor=\"modal_pswd\" className=\"visually"
   - "src/script/components/Modals/PrimaryModal/PrimaryModalState.ts:46:42        Moda    U       rentModalContent: (nextCurrentModaContent: ModalContent"
@@ -127,8 +128,8 @@ issues:
   - "src/script/conversation/linkPreviews/helpers.test.ts:41:42          whitespaces     U       leading and trailing whitespaces', () => {"
   - "src/script/conversation/linkPreviews/index.ts:41:3          permanant       U       permanantUrl: string;"
   - "src/script/conversation/MessageRepository.test.ts:53:28         selfid      U       selfUser = new User('selfid', '');"
-  - "src/script/conversation/MessageRepository.ts:338:24         explicitely     U       // We set the id explicitely in order to be able"
-  - "src/script/conversation/MessageRepository.ts:470:34         messsage        U       originalId Id of the messsage currently in db, necessary"
+  - "src/script/conversation/MessageRepository.ts:340:24         explicitely     U       // We set the id explicitely in order to be able"
+  - "src/script/conversation/MessageRepository.ts:472:34         messsage        U       originalId Id of the messsage currently in db, necessary"
   - "src/script/entity/Conversation.test.ts:155:40       exisiting       U       add message with an exisiting id', () => {"
   - "src/script/entity/Conversation.test.ts:496:29       Delson          U       third_user.name('Brad Delson');"
   - "src/script/entity/Conversation.test.ts:685:60       otherdomain     U       Conversation(createUuid(), 'otherdomain.test');"
@@ -190,6 +191,6 @@ issues:
   - "src/script/util/SanitizationUtil.test.ts:38:39          Unsanitzed      U       name(`<script>alert('Unsanitzed');</script>`);"
   - "src/script/util/util.test.ts:131:65         AQABAAAAA       U       image/gif;base64,R0lGODlhAQABAAAAACw=');"
   - "src/script/util/worker.ts:26:59         instanciate     U       creation function that will instanciate the worker (only called"
-  - "src/script/view_model/CallingViewModel.test.ts:166:50       emmited     U       after mls service has emmited \"newEpoch\" event', async"
+  - "src/script/view_model/CallingViewModel.test.ts:164:50       emmited     U       after mls service has emmited \"newEpoch\" event', async"
   - "src/script/view_model/CallingViewModel.ts:361:81        ourselfes           U       dropped), we remove ourselfes from subconversation"
   - "src/script/view_model/CallingViewModel.ts:364:73        subconversations    U       detect stale clients in subconversations"
