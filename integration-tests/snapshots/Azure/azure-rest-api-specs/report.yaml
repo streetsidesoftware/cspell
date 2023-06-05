@@ -3,9 +3,9 @@ Repository: Azure/azure-rest-api-specs
 Url: https://github.com/Azure/azure-rest-api-specs.git
 Args: '["--config=cSpell.json","**/*.{md,ts,js}"]'
 Summary:
-  files: 2056
-  filesWithIssues: 810
-  issues: 2600
+  files: 2063
+  filesWithIssues: 811
+  issues: 2608
   errors: 0
 Errors: []
 
@@ -108,6 +108,7 @@ issues:
   - "specification/advisor/resource-manager/readme.go.md:14:42       armadvisor      U       resourcemanager/advisor/armadvisor"
   - "specification/agrifood/data-plane/readme.md:1:3         agfood      U       # agfood"
   - "specification/alertsmanagement/resource-manager/readme.terraform.md:55:1        gosdk       U       gosdk-folder: services/preview"
+  - "specification/apicenter/resource-manager/readme.az.md:9:17          apicenter       U       extensions: apicenter"
   - "specification/apimanagement/control-plane/readme.md:135:57      somefile    U       Example/stable/2010-01-01/somefile.json"
   - "specification/apimanagement/resource-manager/readme.md:45:56        apimauthorizationproviders      U       preview/2022-09-01-preview/apimauthorizationproviders.json"
   - "specification/apimanagement/resource-manager/readme.md:50:56        apimconnectivitycheck           U       preview/2022-09-01-preview/apimconnectivitycheck.json"
@@ -180,7 +181,6 @@ issues:
   - "specification/confidentialledger/data-plane/readme.md:10:169        identityservice     U       preview/2023-01-18-preview/identityservice.json` for the most up"
   - "specification/connectedvmware/resource-manager/readme.azureresourceschema.md:9:17           connectedvmware     U       - tag: schema-connectedvmware-2020-10-01-preview"
   - "specification/consumption/resource-manager/readme.md:227:20         jianyexi    U       approved-by: \"@jianyexi\""
-  - "specification/containerregistry/resource-manager/readme.md:398:4        Pyhton      U       ## Pyhton"
   - "specification/containerservice/resource-manager/Microsoft.ContainerService/fleet/readme.csharp.md:11:40         containerservicefleet       U       csharp-sdks-folder)/containerservicefleet/Microsoft.Azure.Management"
   - "specification/containerstorage/resource-manager/readme.az.md:9:17           containerstorage    U       extensions: containerstorage"
   - "specification/cosmos-db/data-plane/readme.go.md:8:14        storagetables       U       namespace: storagetables"
@@ -190,7 +190,7 @@ issues:
   - "specification/cost-management/resource-manager/readme.md:45:63          generatecostdetailsreport       U       3-01/costmanagement.generatecostdetailsreport.json"
   - "specification/cost-management/resource-manager/readme.md:46:63          generatedetailedcostreport      U       3-01/costmanagement.generatedetailedcostreport.json"
   - "specification/cost-management/resource-manager/readme.md:207:57         costallocation                  U       preview/2020-03-01-preview/costallocation.json"
-  - "specification/cost-management/resource-manager/readme.md:296:52         Operatio                        U       Response schema of OperatioAPI does not match Arm"
+  - "specification/cost-management/resource-manager/readme.md:302:52         Operatio                        U       Response schema of OperatioAPI does not match Arm"
   - "specification/cpim/resource-manager/readme.go.md:17:14          azureadexternalidentities       U       namespace: azureadexternalidentities"
   - "specification/customerlockbox/resource-manager/readme.csharp.md:14:40       customerlockbox     U       csharp-sdks-folder)/customerlockbox/management/Microsoft"
   - "specification/customproviders/resource-manager/readme.terraform.md:18:19        resourceproviders       U       - IdPortion: \"resourceproviders\""
@@ -258,7 +258,7 @@ issues:
   - "specification/kubernetesconfiguration/resource-manager/readme.csharp.md:14:40       kubernetesconfiguration     U       csharp-sdks-folder)/kubernetesconfiguration/Microsoft.Azure.Management"
   - "specification/kubernetesconfiguration/resource-manager/readme.md:43:57          fluxconfiguration       U       nfiguration/stable/2023-05-01/fluxconfiguration.json"
   - "specification/liftrqumulo/resource-manager/readme.python.md:12:26       qumulo      U       package-name: azure-mgmt-qumulo"
-  - "specification/liftrqumulo/resource-manager/readme.typescript.md:9:29        liftrqumulo     U       package-name: \"@azure/arm-liftrqumulo\""
+  - "specification/liftrqumulo/resource-manager/readme.typescript.md:10:49       liftrqumulo     U       typescript-sdks-folder)/sdk/liftrqumulo/arm-qumulo\""
   - "specification/loadtestservice/resource-manager/readme.md:74:67          loadtesting     U       profiles['azure_mgmt_loadtesting']"
   - "specification/logic/resource-manager/readme.go.md:14:40         armlogic    U       resourcemanager/logic/armlogic"
   - "specification/logz/resource-manager/readme.go.md:14:39          armlogz     U       resourcemanager/logz/armlogz"
@@ -271,7 +271,7 @@ issues:
   - "specification/managednetworkfabric/resource-manager/readme.md:71:67         managednetworkfabric    U       profiles['azure_mgmt_managednetworkfabric']"
   - "specification/managementgroups/resource-manager/readme.az.md:7:15           managementgroup     U       extensions: managementgroup"
   - "specification/maps/data-plane/Creator/readme.md:45:32       dwgconversion       U       preview/2023-03-01-preview/dwgconversion.json"
-  - "specification/maps/data-plane/DataRegistry/readme.md:44:32          dataregistry    U       preview/2022-12-01-preview/dataregistry.json"
+  - "specification/maps/data-plane/DataRegistry/readme.md:43:23          dataregistry    U       - stable/2023-06-01/dataregistry.json"
   - "specification/maps/data-plane/Render/readme.md:30:96        Lintdiff    U       v0.26 of the Swagger Lintdiff."
   - "specification/maps/resource-manager/readme.go.md:14:39          armmaps     U       resourcemanager/maps/armmaps"
   - "specification/mariadb/resource-manager/readme.go.md:14:42       armmariadb      U       resourcemanager/mariadb/armmariadb"
@@ -280,7 +280,6 @@ issues:
   - "specification/migrate/resource-manager/readme.md:17:18          hubmigrate          U       - tag: package-hubmigrate-2020-05"
   - "specification/migrate/resource-manager/readme.md:18:18          migrateengine       U       - tag: package-migrateengine-2022-05"
   - "specification/migrateprojects/resource-manager/readme.nodejs.md:9:27        migrateprojects     U       package-name: azure-arm-migrateprojects"
-  - "specification/mixedreality/resource-manager/readme.md:190:30        pyhton      U       configuration in [readme.pyhton.md](./readme.python"
   - "specification/mobilenetwork/resource-manager/readme.csharp.md:14:40         mobilenetwork       U       csharp-sdks-folder)/mobilenetwork/management/Microsoft"
   - "specification/monitor/resource-manager/readme.az.md:6:7         AMCS    U       - AMCS: true"
   - "specification/monitor/resource-manager/readme.az.md:13:27       amcs    U       namespace: azure.mgmt.amcs"
@@ -378,7 +377,8 @@ issues:
   - "specification/portal/resource-manager/readme.go.md:14:41        armportal       U       resourcemanager/portal/armportal"
   - "specification/postgresql/resource-manager/readme.go.md:49:12        postgresqlflexibleservers       U       namespace: postgresqlflexibleservers"
   - "specification/postgresqlhsc/resource-manager/readme.az.md:7:17          postgresqlhsc       U       extensions: postgresqlhsc"
-  - "specification/postgresqlhsc/resource-manager/readme.csharp.md:12:36         SQLHSC      U       Microsoft.DBforPostgreSQLHSC"
+  - "specification/postgresqlhsc/resource-manager/readme.go.md:8:14          cosmosdbforpostgresql       U       namespace: cosmosdbforpostgresql"
+  - "specification/postgresqlhsc/resource-manager/readme.ruby.md:17:27       SQLHSC      U       namespace: \"Azure::PostgreSQLHSC::Mgmt::Vpackage-202"
   - "specification/postgresqlhsc/resource-manager/readme.ruby.md:17:41       Vpackage    U       PostgreSQLHSC::Mgmt::Vpackage-2022-11-08\""
   - "specification/powerbiprivatelinks/resource-manager/readme.az.md:9:17        powerbiprivatelinks     U       extensions: powerbiprivatelinks"
   - "specification/powerplatform/resource-manager/readme.csharp.md:14:40         powerplatform       U       csharp-sdks-folder)/powerplatform/management/Microsoft"
@@ -445,8 +445,7 @@ issues:
   - "specification/support/resource-manager/readme.go.md:14:42       armsupport      U       resourcemanager/support/armsupport"
   - "specification/synapse/data-plane/readme.go.md:59:12         accesscontrol               U       namespace: accesscontrol"
   - "specification/synapse/data-plane/readme.go.md:89:12         managedvirtualnetwork       U       namespace: managedvirtualnetwork"
-  - "specification/synapse/data-plane/readme.md:67:41        gitintegration      U       Synapse/stable/2020-12-01/gitintegration.json"
-  - "specification/synapse/data-plane/readme.md:512:97       proeprties          U       Rp can't change these proeprties."
+  - "specification/synapse/data-plane/readme.md:68:41        gitintegration      U       Synapse/stable/2020-12-01/gitintegration.json"
   - "specification/synapse/resource-manager/readme.go.md:14:42       armsynapse      U       resourcemanager/synapse/armsynapse"
   - "specification/syntex/resource-manager/readme.go.md:8:41         armsyntex       U       resourcemanager/syntex/armsyntex"
   - "specification/testbase/resource-manager/readme.csharp.md:14:40          testbase    U       csharp-sdks-folder)/testbase/management/Microsoft"

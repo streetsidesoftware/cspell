@@ -3,9 +3,9 @@ Repository: caddyserver/caddy
 Url: https://github.com/caddyserver/caddy.git
 Args: '["**/*.go"]'
 Summary:
-  files: 236
-  filesWithIssues: 216
-  issues: 3431
+  files: 237
+  filesWithIssues: 217
+  issues: 3440
   errors: 0
 Errors: []
 
@@ -116,7 +116,7 @@ issues:
   - "cmd/commandfuncs.go:261:44      USERPROFILE     U       == \"\" && os.Getenv(\"USERPROFILE\") == \"\" && !hasXDG"
   - "cmd/commands.go:33:47       godoc           U       the RegisterCommand() godoc."
   - "cmd/commands.go:79:40       initialised     U       returns a list of commands initialised by"
-  - "cmd/commands.go:432:24      compinit        U       $ echo \"autoload -U compinit; compinit\" >> ~/.zshrc"
+  - "cmd/commands.go:482:24      compinit        U       $ echo \"autoload -U compinit; compinit\" >> ~/.zshrc"
   - "cmd/main.go:36:20       pflag       U       \"github.com/spf13/pflag\""
   - "cmd/packagesfuncs.go:39:8           Pkgs        U       pluginPkgs, err := getPluginPackages"
   - "cmd/packagesfuncs.go:197:3          iface       U       iface := any(modInfo.New("
@@ -338,7 +338,7 @@ issues:
   - "modules/caddytls/acmeissuer.go:55:27        mothership      U       not sent to any Caddy mothership or used for any purpose"
   - "modules/caddytls/acmeissuer.go:142:45       libdns          U       implemented for the libdns APIs instead."
   - "modules/caddytls/acmeissuer.go:260:16       tlsalpn         U       // disable_tlsalpn_challenge"
-  - "modules/caddytls/automation.go:91:54        othewise    U       public certificates; othewise acme and"
+  - "modules/caddytls/automation.go:98:54        othewise    U       public certificates; othewise acme and"
   - "modules/caddytls/certmanagers.go:15:24          tscert      U       github.com/tailscale/tscert\""
   - "modules/caddytls/certselection.go:124:34        interops    U       a big.Int type that interops with JSON encodings"
   - "modules/caddytls/connpolicy.go:174:20       SSLKEYLOGFILE       U       // Also known as \"SSLKEYLOGFILE\", TLS secrets will be"
@@ -357,8 +357,8 @@ issues:
   - "modules/caddytls/matchers.go:111:37         addresss    U       Error(\"invalid client IP addresss\", zap.String(\"ip\", ipStr"
   - "modules/caddytls/standardstek/stek.go:15:9          standardstek    U       package standardstek"
   - "modules/caddytls/standardstek/stek.go:49:2          itvl            U       itvl := time.Duration(s.stekConfig"
-  - "modules/caddytls/tls.go:201:25      unmanaged       U       load manual/static (unmanaged) certificates - we do"
-  - "modules/caddytls/tls.go:219:22      Unmanaged       U       err := magic.CacheUnmanagedTLSCertificate(ctx, cert"
+  - "modules/caddytls/tls.go:208:25      unmanaged       U       load manual/static (unmanaged) certificates - we do"
+  - "modules/caddytls/tls.go:226:22      Unmanaged       U       err := magic.CacheUnmanagedTLSCertificate(ctx, cert"
   - "modules/caddytls/values.go:23:24        cpuid       U       github.com/klauspost/cpuid/v2\""
   - "modules/caddytls/values.go:52:28        AESNI       U       defaultCipherSuitesWithAESNI = []uint16{"
   - "modules/caddytls/values.go:88:3         secp        U       \"secp256r1\": tls.CurveP25"
