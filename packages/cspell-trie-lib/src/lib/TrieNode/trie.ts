@@ -1,5 +1,5 @@
 import type { ITrieNode, ITrieNodeId, ITrieNodeRoot } from '../ITrieNode/ITrieNode.js';
-import type { TrieOptions } from '../ITrieNode/TrieOptions.js';
+import type { TrieInfo } from '../ITrieNode/TrieInfo.js';
 import type { TrieNode, TrieRoot } from './TrieNode.js';
 
 export function trieRootToITrieRoot(root: TrieRoot): ITrieNodeRoot {
@@ -80,12 +80,12 @@ class ImplITrieNode implements ITrieNode {
 }
 
 class ImplITrieRoot extends ImplITrieNode implements ITrieNodeRoot {
-    readonly options: Readonly<TrieOptions>;
+    readonly info: Readonly<TrieInfo>;
 
     protected constructor(readonly root: TrieRoot) {
         super(root);
         const { stripCaseAndAccentsPrefix, compoundCharacter, forbiddenWordPrefix } = root;
-        this.options = { stripCaseAndAccentsPrefix, compoundCharacter, forbiddenWordPrefix };
+        this.info = { stripCaseAndAccentsPrefix, compoundCharacter, forbiddenWordPrefix };
     }
 
     get eow(): boolean {

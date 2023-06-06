@@ -3,7 +3,7 @@ import { describe, expect, test } from 'vitest';
 import type { BuilderCursor } from '../Builder/index.js';
 import { insertWordsAtCursor } from '../Builder/index.js';
 import { consolidate } from '../consolidate.js';
-import { defaultTrieOptions } from '../constants.js';
+import { defaultTrieInfo } from '../constants.js';
 import { createTrieRoot, insert } from '../TrieNode/trie-util.js';
 import type { TrieNode, TrieRoot } from '../TrieNode/TrieNode.js';
 import { FastTrieBlobBuilder } from './FastTrieBlobBuilder.js';
@@ -19,11 +19,11 @@ describe('FastTrieBlobBuilder', () => {
 
     test('setOptions', () => {
         const builder = new FastTrieBlobBuilder();
-        expect(builder.options).toEqual(defaultTrieOptions);
+        expect(builder.options).toEqual(defaultTrieInfo);
         builder.setOptions({});
-        expect(builder.options).toEqual(defaultTrieOptions);
+        expect(builder.options).toEqual(defaultTrieInfo);
         builder.setOptions({ compoundCharacter: '&' });
-        expect(builder.options).toEqual({ ...defaultTrieOptions, compoundCharacter: '&' });
+        expect(builder.options).toEqual({ ...defaultTrieInfo, compoundCharacter: '&' });
     });
 
     test('cursor', () => {

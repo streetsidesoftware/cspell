@@ -1,4 +1,4 @@
-import type { TrieOptions } from './TrieOptions.js';
+import type { TrieInfo } from './TrieInfo.js';
 
 export type ITrieNodeId = object | number | string;
 
@@ -35,7 +35,7 @@ export interface ITrieNode {
 }
 
 export interface ITrieNodeRoot extends ITrieNode {
-    options: Readonly<TrieOptions>;
+    info: Readonly<TrieInfo>;
     /**
      * converts an `id` into a node.
      * @param id an of a ITrieNode in this Trie

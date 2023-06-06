@@ -1,8 +1,8 @@
 import type { PartialWithUndefined } from '../types.js';
 
-export interface TrieOptions {
+export interface TrieInfo {
     compoundCharacter: string;
     stripCaseAndAccentsPrefix: string;
     forbiddenWordPrefix: string;
 }
-export type PartialTrieOptions = PartialWithUndefined<TrieOptions> | undefined;
+export type PartialTrieInfo = PartialWithUndefined<TrieInfo> | undefined;

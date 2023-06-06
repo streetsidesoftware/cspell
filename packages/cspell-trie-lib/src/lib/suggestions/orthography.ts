@@ -14,7 +14,7 @@ export const visualLetterGroups = [
     forms('ċČčcĉçCÇćĊСсς'),
     forms('ḎḋḏḑďđḍDd'),
     forms('ēëÈÊËềéèếệĕeEĒėęěêəɛёЁеʒ'),
-    forms('fḟF'),
+    forms('fḟFﬀ'),
     forms('ġĠĞǧĝģGgɣ'),
     forms('ħĦĥḥHhḤȟн'),
     forms('IįïİÎÍīiÌìíîıɪɨїΊΙ'),

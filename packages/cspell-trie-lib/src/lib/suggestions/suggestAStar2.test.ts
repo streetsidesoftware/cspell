@@ -1,13 +1,12 @@
 import { describe, expect, test } from 'vitest';
 
 import { parseDictionary } from '../SimpleDictionaryParser.js';
-import { createTrieRootFromList } from '../TrieNode/trie-util.js';
 import { TrieNodeTrie } from '../TrieNode/TrieNodeTrie.js';
 import { CompoundWordsMethod } from '../walker/index.js';
 import type { SuggestionOptions } from './genSuggestionsOptions.js';
 import * as Sug from './suggestAStar2.js';
 
-describe('Validate Suggest', () => {
+describe('Validate Suggest A Star', () => {
     const changeLimit = 3;
 
     const trie = createTrieFromWords(sampleWords);
@@ -17,11 +16,11 @@ describe('Validate Suggest', () => {
         const results = Sug.suggestAStar(trie, 'talks', { changeLimit: changeLimit });
         expect(results).toEqual([
             { cost: 0, word: 'talks' },
-            { cost: 100, word: 'talk' },
-            { cost: 125, word: 'walks' },
-            { cost: 200, word: 'talked' },
-            { cost: 200, word: 'talker' },
-            { cost: 225, word: 'walk' },
+            { cost: 96, word: 'talk' },
+            { cost: 105, word: 'walks' },
+            { cost: 191, word: 'talked' },
+            { cost: 191, word: 'talker' },
+            { cost: 201, word: 'walk' },
         ]);
     });
 
@@ -43,7 +42,7 @@ describe('Validate Suggest', () => {
         expect(suggestions).toEqual(expect.arrayContaining(['talk']));
         expect(suggestions[1]).toBe('talks');
         expect(suggestions[0]).toBe('talk');
-        expect(suggestions).toEqual(['talk', 'talks', 'walk', 'talked', 'talker', 'walks']);
+        expect(suggestions).toEqual(['talk', 'talks', 'walk']);
     });
 
     // cspell:ignore jernals
@@ -64,7 +63,7 @@ describe('Validate Suggest', () => {
     test('Tests suggestions for joyfull', () => {
         const results = Sug.suggestAStar(trie, 'joyfull', { changeLimit: changeLimit });
         const suggestions = results.map((s) => s.word);
-        expect(suggestions).toEqual(['joyful', 'joyfully', 'joyfuller', 'joyous', 'joyfullest']);
+        expect(suggestions).toEqual(['joyful', 'joyfully', 'joyfuller', 'joyfullest', 'joyous']);
     });
 
     test('Tests suggestions', () => {
@@ -91,10 +90,10 @@ describe('Validate Suggest', () => {
     // cspell:ignore walkingtree talkingtree talkingstick
     test.each`
         word              | expected
-        ${'walkingstick'} | ${[{ word: 'walkingstick', cost: 99 }]}
-        ${'talkingstick'} | ${[{ word: 'talkingstick', cost: 99 }]}
-        ${'talkingtree'}  | ${[{ word: 'talkingtree', cost: 99 }]}
-        ${'walkingtree'}  | ${[{ word: 'walkingtree', cost: 99 } /* still suggested even if it is forbidden */]}
+        ${'walkingstick'} | ${[{ word: 'walkingstick', cost: 1 }]}
+        ${'talkingstick'} | ${[{ word: 'talkingstick', cost: 1 }]}
+        ${'talkingtree'}  | ${[{ word: 'talkingtree', cost: 1 }]}
+        ${'walkingtree'}  | ${[{ word: 'walkingtree', cost: 1 } /* still suggested even if it is forbidden */]}
     `('that forbidden words are not included (collector)', ({ word, expected }) => {
         const trie = parseDict(`
             walk
@@ -180,7 +179,7 @@ const sampleWords = [
 ];
 
 function createTrieFromWords(words: string[]) {
-    return new TrieNodeTrie(createTrieRootFromList(words));
+    return TrieNodeTrie.createFromWords(words);
 }
 
 function parseDict(dict: string) {

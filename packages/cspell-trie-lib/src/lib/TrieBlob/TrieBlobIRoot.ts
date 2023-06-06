@@ -1,5 +1,5 @@
 import type { ITrieNode, ITrieNodeId, ITrieNodeRoot } from '../ITrieNode/ITrieNode.js';
-import type { TrieOptions } from '../ITrieNode/TrieOptions.js';
+import type { TrieInfo } from '../ITrieNode/TrieInfo.js';
 
 interface BitMaskInfo {
     readonly NodeMaskEOW: number;
@@ -118,7 +118,7 @@ class TrieBlobINode implements ITrieNode {
     }
 }
 export class TrieBlobIRoot extends TrieBlobINode implements ITrieNodeRoot {
-    constructor(trie: TrieBlobInternals, nodeIdx: number, readonly options: Readonly<TrieOptions>) {
+    constructor(trie: TrieBlobInternals, nodeIdx: number, readonly info: Readonly<TrieInfo>) {
         super(trie, nodeIdx);
     }
     resolveId(id: ITrieNodeId): ITrieNode {

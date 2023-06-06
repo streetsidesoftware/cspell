@@ -1,6 +1,6 @@
-import { defaultTrieOptions } from '../constants.js';
+import { defaultTrieInfo } from '../constants.js';
 import type { ITrieNodeRoot } from '../ITrieNode/ITrieNode.js';
-import type { PartialTrieOptions, TrieOptions } from '../ITrieNode/TrieOptions.js';
+import type { PartialTrieInfo, TrieInfo } from '../ITrieNode/TrieInfo.js';
 import type { TrieData } from '../TrieData.js';
 import { mergeOptionalWithDefaults } from '../utils/mergeOptionalWithDefaults.js';
 import { TrieBlobInternals, TrieBlobIRoot } from './TrieBlobIRoot.js';
@@ -37,19 +37,19 @@ const endianSig = 0x04030201;
 
 export class TrieBlob implements TrieData {
     protected charToIndexMap: Record<string, number>;
-    readonly options: Readonly<TrieOptions>;
+    readonly info: Readonly<TrieInfo>;
     private _countNodes: number | undefined;
     private _forbidIdx: number | undefined;
 
-    constructor(protected nodes: Uint32Array, protected charIndex: string[], options: PartialTrieOptions) {
-        this.options = mergeOptionalWithDefaults(options);
+    constructor(protected nodes: Uint32Array, protected charIndex: string[], options: PartialTrieInfo) {
+        this.info = mergeOptionalWithDefaults(options);
         this.charToIndexMap = Object.create(null);
         for (let i = 0; i < charIndex.length; ++i) {
             const char = charIndex[i];
             this.charToIndexMap[char.normalize('NFC')] = i;
             this.charToIndexMap[char.normalize('NFD')] = i;
         }
-        this._forbidIdx = this._lookupNode(0, this.options.forbiddenWordPrefix);
+        this._forbidIdx = this._lookupNode(0, this.info.forbiddenWordPrefix);
     }
 
     has(word: string): boolean {
@@ -60,6 +60,10 @@ export class TrieBlob implements TrieData {
         return !!this._forbidIdx && this._has(this._forbidIdx, word);
     }
 
+    hasForbiddenWords(): boolean {
+        return !!this._forbidIdx;
+    }
+
     getRoot(): ITrieNodeRoot {
         const trieData = new TrieBlobInternals(this.nodes, this.charIndex, this.charToIndexMap, {
             NodeMaskEOW: TrieBlob.NodeMaskEOW,
@@ -67,7 +71,7 @@ export class TrieBlob implements TrieData {
             NodeMaskChildCharIndex: TrieBlob.NodeMaskChildCharIndex,
             NodeChildRefShift: TrieBlob.NodeChildRefShift,
         });
-        return new TrieBlobIRoot(trieData, 0, this.options);
+        return new TrieBlobIRoot(trieData, 0, this.info);
     }
 
     private _has(nodeIdx: number, word: string): boolean {
@@ -169,7 +173,7 @@ export class TrieBlob implements TrieData {
     toJSON() {
         return {
             charIndex: this.charIndex,
-            options: this.options,
+            options: this.info,
             nodes: splitString(Buffer.from(this.nodes.buffer, 128).toString('base64')),
         };
     }
@@ -217,7 +221,7 @@ export class TrieBlob implements TrieData {
             .toString('utf8')
             .split('\n');
         const nodes = new Uint32Array(blob.buffer).subarray(offsetNodes / 4, offsetNodes / 4 + lenNodes);
-        return new TrieBlob(nodes, charIndex, defaultTrieOptions);
+        return new TrieBlob(nodes, charIndex, defaultTrieInfo);
     }
 
     static NodeMaskEOW = 0x00000100;

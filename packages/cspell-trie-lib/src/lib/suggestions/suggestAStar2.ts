@@ -3,8 +3,9 @@ import { CompoundWordsMethod, JOIN_SEPARATOR, WORD_SEPARATOR } from '../ITrieNod
 import type { TrieData } from '../TrieData.js';
 import { PairingHeap } from '../utils/PairingHeap.js';
 import { opCosts } from './constants.js';
-import type { GenSuggestionOptionsStrict, SuggestionOptions } from './genSuggestionsOptions.js';
+import type { SuggestionOptions } from './genSuggestionsOptions.js';
 import { createSuggestionOptions } from './genSuggestionsOptions.js';
+import { visualLetterMaskMap } from './orthography.js';
 import type { SuggestionGenerator, SuggestionResult } from './suggestCollector.js';
 import { suggestionCollector } from './suggestCollector.js';
 
@@ -20,12 +21,17 @@ interface CostTrie {
 }
 
 interface PNode {
+    /** current node */
     n: ITrieNode;
+    /** Accumulated cost */
     c: Cost;
+    /** Index into src word */
     i: WordIndex;
-    /** letter used */
+    /** letter used or '' */
     s: string;
+    /** parent node */
     p: PNode | undefined;
+    /** cost trie to reduce duplicate paths */
     t: CostTrie;
     /** edit action taken */
     a?: string;
@@ -41,7 +47,7 @@ function comparePath(a: PNode, b: PNode): number {
     return a.c / (a.i + 1) - b.c / (b.i + 1) + (b.i - a.i);
 }
 
-export function suggestAStar(trie: TrieData, word: string, options: SuggestionOptions): SuggestionResult[] {
+export function suggestAStar(trie: TrieData, word: string, options: SuggestionOptions = {}): SuggestionResult[] {
     const opts = createSuggestionOptions(options);
     const collector = suggestionCollector(word, {
         numSuggestions: opts.numSuggestions,
@@ -57,23 +63,32 @@ export function suggestAStar(trie: TrieData, word: string, options: SuggestionOp
 export function* getSuggestionsAStar(
     trie: TrieData,
     srcWord: string,
-    options: GenSuggestionOptionsStrict
+    options: SuggestionOptions = {}
 ): SuggestionGenerator {
+    const { compoundMethod, changeLimit, ignoreCase } = createSuggestionOptions(options);
+    const visMap = visualLetterMaskMap;
     const root = trie.getRoot();
-    const { compoundMethod } = options;
+    const rootIgnoreCase = (ignoreCase && root.get(root.info.stripCaseAndAccentsPrefix)) || undefined;
     const pathHeap = new PairingHeap(comparePath);
     const resultHeap = new PairingHeap(compareSuggestion);
     const rootPNode: PNode = { n: root, i: 0, c: 0, s: '', p: undefined, t: createCostTrie() };
     const BC = opCosts.baseCost;
+    const VC = opCosts.visuallySimilar;
     const DL = opCosts.duplicateLetterCost;
     const wordSeparator = compoundMethod === CompoundWordsMethod.JOIN_WORDS ? JOIN_SEPARATOR : WORD_SEPARATOR;
-    const sc = specialChars(trie.options);
-    const comp = trie.options.compoundCharacter;
+    const sc = specialChars(trie.info);
+    const comp = trie.info.compoundCharacter;
     const compRoot = root.get(comp);
+    const compRootIgnoreCase = rootIgnoreCase && rootIgnoreCase.get(comp);
+    const emitted: Record<string, number> = Object.create(null);
 
-    let limit = options.changeLimit * BC;
+    /** Initial limit is based upon the length of the word. */
+    let limit = BC * Math.min(srcWord.length * opCosts.wordLengthCostFactor, changeLimit);
 
     pathHeap.add(rootPNode);
+    if (rootIgnoreCase) {
+        pathHeap.add({ n: rootIgnoreCase, i: 0, c: 0, s: '', p: undefined, t: createCostTrie() });
+    }
 
     let best = pathHeap.dequeue();
     let maxSize = pathHeap.size;
@@ -103,10 +118,12 @@ export function* getSuggestionsAStar(
             ++suggestionsGenerated;
             if (sug.cost > limit) continue;
             // console.log('%o', sug);
+            if (sug.word in emitted && emitted[sug.word] <= sug.cost) continue;
             const action = yield sug;
+            emitted[sug.word] = sug.cost;
             if (typeof action === 'number') {
                 // console.log('%o', { limit, newLimit: action, sug });
-                limit = action;
+                limit = Math.min(action, limit);
             }
             if (typeof action === 'symbol') {
                 return;
@@ -136,11 +153,13 @@ export function* getSuggestionsAStar(
 
         for (const edge of calcEdges(p)) {
             const c = edge.c;
+            // if (srcWord.includes('WALK')) {
+            //     console.warn('%o', { word: pNodeToWord(edge), cost: edge.c });
+            // }
             if (c > limit) continue;
             if (edge.n.eow && edge.i === len) {
                 const word = pNodeToWord(edge);
                 const result = { word, cost: c };
-                // console.log('%o', { srcWord, result, edits: editHistory(edge) });
                 resultHeap.add(result);
             }
             pathHeap.add(edge);
@@ -151,9 +170,12 @@ export function* getSuggestionsAStar(
         const { n, i, t } = p;
         const keys = n.keys();
         const s = srcWord[i];
+        const sg = visMap[s] || 0;
         const cost0 = p.c;
-        const cost = cost0 + BC + (i ? 0 : opCosts.firstLetterBias);
-        const costCompound = cost0 + opCosts.wordBreak;
+        const cost = cost0 + BC - i + (i ? 0 : opCosts.firstLetterBias);
+        const costVis = cost0 + VC;
+        const costLegacyCompound = cost0 + opCosts.wordBreak;
+        const costCompound = cost0 + opCosts.compound;
         if (s) {
             // Match
             const mIdx = keys.indexOf(s);
@@ -175,23 +197,21 @@ export function* getSuggestionsAStar(
             }
 
             // Replace
-            if (cost <= limit) {
-                for (let j = 0; j < keys.length; ++j) {
-                    const ss = keys[j];
-                    if (j === mIdx || ss in sc) continue;
-                    const nn = applyCost(t, n.child(j), i + 1, cost, ss, p, 'r', ss);
-                    nn && (yield nn);
-                }
+            for (let j = 0; j < keys.length; ++j) {
+                const ss = keys[j];
+                if (j === mIdx || ss in sc) continue;
+                const g = visMap[ss] || 0;
+                // srcWord === 'WALK' && console.log(g.toString(2));
+                const c = sg & g ? costVis : cost;
+                const nn = applyCost(t, n.child(j), i + 1, c, ss, p, 'r', ss);
+                nn && (yield nn);
             }
 
             if (n.eow && i) {
-                // // delete suffix
-                // if (i < word.length - 1) {
-                //     yield { n, i: word.length, c: (word.length - i) * BC + cost0, s: '', p, a: 'del suffix' };
-                // }
                 // legacy word compound
                 if (compoundMethod) {
-                    const nn = applyCost(t, root, i, costCompound, wordSeparator, p, 'L', wordSeparator);
+                    const nn = applyCost(t, root, i, costLegacyCompound, wordSeparator, p, 'L', wordSeparator);
+                    // console.warn('%o', nn && editHistory(nn));
                     nn && (yield nn);
                 }
             }
@@ -210,8 +230,14 @@ export function* getSuggestionsAStar(
 
         // Natural Compound
         if (compRoot && costCompound <= limit && keys.includes(comp)) {
-            const nn = applyCost(t, compRoot, i, costCompound, '', p, '+', '+');
-            nn && (yield nn);
+            if (compRootIgnoreCase) {
+                const nn = applyCost(t, compRootIgnoreCase, i, costCompound, '', p, '~+', '~+');
+                nn && (yield nn);
+            }
+            {
+                const nn = applyCost(t, compRoot, i, costCompound, '', p, '+', '+');
+                nn && (yield nn);
+            }
         }
 
         // Insert

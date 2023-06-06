@@ -8,17 +8,20 @@ import * as Sug from './suggest.js';
 import type { SuggestionResultBase } from './suggestCollector.js';
 
 describe('Validate Suggest', () => {
-    test('Tests suggestions against Legacy Suggestion generator', () => {
-        const trie = Trie.create(sampleWords);
-
-        function testWord(word: string) {
-            const results = Sug.suggest(trie.root, word);
-            // results for ${word}
-            expect(results).toEqual(legacySuggest(trie.root, word));
-        }
-
-        // cspell:ignore tallk jernals juornals joyfull
-        ['talks', 'tallk', 'jernals', 'juornals', 'joyfull', ''].forEach(testWord);
+    const trie = Trie.create(sampleWords);
+    // cspell:ignore tallk jernals juornals joyfull
+    test.each`
+        word
+        ${'talks'}
+        ${'tallk'}
+        ${'jernals'}
+        ${'juornals'}
+        ${'joyfull'}
+        ${''}
+    `('Tests suggestions against Legacy Suggestion generator "$word"', ({ word }) => {
+        const results = Sug.suggest(trie.root, word);
+        // results for ${word}
+        expect(results).toEqual(legacySuggest(trie.root, word));
     });
 });
 

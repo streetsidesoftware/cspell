@@ -1,5 +1,5 @@
 import type { BuilderCursor, TrieBuilder } from '../Builder/index.js';
-import type { PartialTrieOptions, TrieOptions } from '../ITrieNode/TrieOptions.js';
+import type { PartialTrieInfo, TrieInfo } from '../ITrieNode/TrieInfo.js';
 import type { TrieNode, TrieRoot } from '../TrieNode/TrieNode.js';
 import { assert } from '../utils/assert.js';
 import { mergeOptionalWithDefaults } from '../utils/mergeOptionalWithDefaults.js';
@@ -19,22 +19,22 @@ export class FastTrieBlobBuilder implements TrieBuilder<FastTrieBlob> {
     private IdxEOW: number;
     private _cursor: BuilderCursor | undefined;
 
-    private _options: Readonly<TrieOptions>;
+    private _options: Readonly<TrieInfo>;
     readonly bitMasksInfo: FastTrieBlobBitMaskInfo;
 
-    constructor(options?: PartialTrieOptions, bitMasksInfo = FastTrieBlobBuilder.DefaultBitMaskInfo) {
+    constructor(options?: PartialTrieInfo, bitMasksInfo = FastTrieBlobBuilder.DefaultBitMaskInfo) {
         this._options = mergeOptionalWithDefaults(options);
         this.bitMasksInfo = bitMasksInfo;
         this.nodes = [[0], Object.freeze([FastTrieBlobBuilder.NodeMaskEOW]) as number[]];
         this.IdxEOW = 1;
     }
 
-    setOptions(options: PartialTrieOptions): Readonly<TrieOptions> {
+    setOptions(options: PartialTrieInfo): Readonly<TrieInfo> {
         this._options = mergeOptionalWithDefaults(this.options, options);
         return this.options;
     }
 
-    get options(): Readonly<TrieOptions> {
+    get options(): Readonly<TrieInfo> {
         return this._options;
     }
 
@@ -263,7 +263,7 @@ export class FastTrieBlobBuilder implements TrieBuilder<FastTrieBlob> {
         );
     }
 
-    static fromWordList(words: string[] | Iterable<string>, options?: PartialTrieOptions): FastTrieBlob {
+    static fromWordList(words: string[] | Iterable<string>, options?: PartialTrieInfo): FastTrieBlob {
         const ft = new FastTrieBlobBuilder(options);
         return ft.insert(words).build();
     }

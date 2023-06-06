@@ -16,11 +16,11 @@ import type {
 import { suggestionCollector } from './suggestCollector.js';
 
 const baseCost = opCosts.baseCost;
-const swapCost = 75;
+const swapCost = opCosts.swapCost;
 const postSwapCost = swapCost - baseCost;
 const insertSpaceCost = -1;
-const mapSubCost = 1;
-const maxCostScale = 0.5;
+const mapSubCost = opCosts.visuallySimilar;
+const maxCostScale = opCosts.wordLengthCostFactor;
 const discourageInsertCost = baseCost;
 
 const setOfSeparators = new Set([JOIN_SEPARATOR, WORD_SEPARATOR]);
