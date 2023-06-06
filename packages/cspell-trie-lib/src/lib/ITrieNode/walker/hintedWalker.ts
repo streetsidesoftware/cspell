@@ -34,14 +34,14 @@ function* hintedWalkerNext(
     emitWordSeparator = ''
 ): HintedWalkerIterator {
     const _compoundingMethod = compoundingMethod ?? CompoundWordsMethod.NONE;
-    const options = root.options;
+    const trieInfo = root.info;
 
-    const compoundCharacter = options.compoundCharacter;
-    const noCaseCharacter = options.stripCaseAndAccentsPrefix;
+    const compoundCharacter = trieInfo.compoundCharacter;
+    const noCaseCharacter = trieInfo.stripCaseAndAccentsPrefix;
 
     const rawRoots = [root, ignoreCase ? root.get(noCaseCharacter) : undefined].filter(isDefined);
 
-    const specialRootsPrefix = existMap([compoundCharacter, noCaseCharacter, options.forbiddenWordPrefix]);
+    const specialRootsPrefix = existMap([compoundCharacter, noCaseCharacter, trieInfo.forbiddenWordPrefix]);
     function filterRoot(root: ITrieNode): ITrieNode {
         return new ITrieNodeFiltered(root, ([v]) => !(v in specialRootsPrefix));
     }

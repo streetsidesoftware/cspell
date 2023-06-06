@@ -3,7 +3,7 @@ import { CompoundWordsMethod, JOIN_SEPARATOR, WORD_SEPARATOR } from '../ITrieNod
 import type { TrieData } from '../TrieData.js';
 import { PairingHeap } from '../utils/PairingHeap.js';
 import { opCosts } from './constants.js';
-import type { GenSuggestionOptionsStrict, SuggestionOptions } from './genSuggestionsOptions.js';
+import type { SuggestionOptions } from './genSuggestionsOptions.js';
 import { createSuggestionOptions } from './genSuggestionsOptions.js';
 import type { SuggestionGenerator, SuggestionResult } from './suggestCollector.js';
 import { suggestionCollector } from './suggestCollector.js';
@@ -41,7 +41,7 @@ function comparePath(a: PNode, b: PNode): number {
     return a.c / (a.i + 1) - b.c / (b.i + 1) + (b.i - a.i);
 }
 
-export function suggestAStar(trie: TrieData, word: string, options: SuggestionOptions): SuggestionResult[] {
+export function suggestAStar(trie: TrieData, word: string, options: SuggestionOptions = {}): SuggestionResult[] {
     const opts = createSuggestionOptions(options);
     const collector = suggestionCollector(word, {
         numSuggestions: opts.numSuggestions,
@@ -57,21 +57,21 @@ export function suggestAStar(trie: TrieData, word: string, options: SuggestionOp
 export function* getSuggestionsAStar(
     trie: TrieData,
     srcWord: string,
-    options: GenSuggestionOptionsStrict
+    options: SuggestionOptions = {}
 ): SuggestionGenerator {
     const root = trie.getRoot();
-    const { compoundMethod } = options;
+    const { compoundMethod, changeLimit } = createSuggestionOptions(options);
     const pathHeap = new PairingHeap(comparePath);
     const resultHeap = new PairingHeap(compareSuggestion);
     const rootPNode: PNode = { n: root, i: 0, c: 0, s: '', p: undefined, t: createCostTrie() };
     const BC = opCosts.baseCost;
     const DL = opCosts.duplicateLetterCost;
     const wordSeparator = compoundMethod === CompoundWordsMethod.JOIN_WORDS ? JOIN_SEPARATOR : WORD_SEPARATOR;
-    const sc = specialChars(trie.options);
-    const comp = trie.options.compoundCharacter;
+    const sc = specialChars(trie.info);
+    const comp = trie.info.compoundCharacter;
     const compRoot = root.get(comp);
 
-    let limit = options.changeLimit * BC;
+    let limit = changeLimit * BC;
 
     pathHeap.add(rootPNode);
 
@@ -136,6 +136,9 @@ export function* getSuggestionsAStar(
 
         for (const edge of calcEdges(p)) {
             const c = edge.c;
+            if (srcWord.includes('stalk')) {
+                console.warn('%o', { word: pNodeToWord(edge), cost: edge.c });
+            }
             if (c > limit) continue;
             if (edge.n.eow && edge.i === len) {
                 const word = pNodeToWord(edge);
@@ -192,6 +195,7 @@ export function* getSuggestionsAStar(
                 // legacy word compound
                 if (compoundMethod) {
                     const nn = applyCost(t, root, i, costCompound, wordSeparator, p, 'L', wordSeparator);
+                    // console.warn('%o', nn && editHistory(nn));
                     nn && (yield nn);
                 }
             }

@@ -10,9 +10,9 @@ import type { TrieRoot } from './TrieNode.js';
 
 export class TrieNodeTrie implements TrieData {
     private _iTrieRoot: ITrieNodeRoot | undefined;
-    readonly options: TrieOptions;
+    readonly info: TrieOptions;
     constructor(readonly root: TrieRoot) {
-        this.options = mergeOptionalWithDefaults(root);
+        this.info = mergeOptionalWithDefaults(root);
     }
 
     get iTrieRoot() {
@@ -33,6 +33,11 @@ export class TrieNodeTrie implements TrieData {
 
     isForbiddenWord(word: string): boolean {
         return findWordExact(this.root.c[this.root.forbiddenWordPrefix], word);
+    }
+
+    hasForbiddenWords(): boolean {
+        const root = this.root;
+        return !!root.c[root.forbiddenWordPrefix];
     }
 
     static createFromWords(words: Iterable<string>, options?: PartialTrieOptions): TrieNodeTrie {

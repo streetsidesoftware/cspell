@@ -1,10 +1,11 @@
 import type { ITrieNodeRoot } from './ITrieNode/ITrieNode.js';
-import type { TrieOptions } from './ITrieNode/TrieOptions.js';
+import type { TrieInfo } from './ITrieNode/TrieInfo.js';
 
 export interface TrieData {
-    options: Readonly<TrieOptions>;
+    info: Readonly<TrieInfo>;
     words(): Iterable<string>;
     getRoot(): ITrieNodeRoot;
     has(word: string): boolean;
     isForbiddenWord(word: string): boolean;
+    hasForbiddenWords(): boolean;
 }

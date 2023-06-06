@@ -1,4 +1,4 @@
-import type { TrieOptions } from './ITrieNode/TrieOptions.js';
+import type { TrieInfo } from './ITrieNode/TrieInfo.js';
 
 export const COMPOUND_FIX = '+';
 export const OPTIONAL_COMPOUND_FIX = '*';
@@ -7,7 +7,7 @@ export const FORBID_PREFIX = '!';
 export const LINE_COMMENT = '#';
 export const IDENTITY_PREFIX = '=';
 
-export const defaultTrieOptions: TrieOptions = Object.freeze({
+export const defaultTrieInfo: TrieInfo = Object.freeze({
     compoundCharacter: COMPOUND_FIX,
     forbiddenWordPrefix: FORBID_PREFIX,
     stripCaseAndAccentsPrefix: CASE_INSENSITIVE_PREFIX,

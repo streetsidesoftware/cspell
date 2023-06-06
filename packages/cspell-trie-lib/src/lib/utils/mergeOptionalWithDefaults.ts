@@ -1,14 +1,14 @@
-import { defaultTrieOptions } from '../constants.js';
-import type { PartialTrieOptions, TrieOptions } from '../ITrieNode/TrieOptions.js';
+import { defaultTrieInfo } from '../constants.js';
+import type { PartialTrieInfo, TrieInfo } from '../ITrieNode/TrieInfo.js';
 import { mergeDefaults } from './mergeDefaults.js';
 
-export type ROPartialTrieOptions = Readonly<PartialTrieOptions>;
+export type ROPartialTrieOptions = Readonly<PartialTrieInfo>;
 
-export function mergeOptionalWithDefaults(options: ROPartialTrieOptions): TrieOptions;
+export function mergeOptionalWithDefaults(options: ROPartialTrieOptions): TrieInfo;
 export function mergeOptionalWithDefaults(
     options: ROPartialTrieOptions,
     ...moreOptions: ROPartialTrieOptions[]
-): TrieOptions;
-export function mergeOptionalWithDefaults(...options: ROPartialTrieOptions[]): TrieOptions {
-    return options.reduce((acc: TrieOptions, opt) => mergeDefaults(opt, acc), defaultTrieOptions);
+): TrieInfo;
+export function mergeOptionalWithDefaults(...options: ROPartialTrieOptions[]): TrieInfo {
+    return options.reduce((acc: TrieInfo, opt) => mergeDefaults(opt, acc), defaultTrieInfo);
 }

@@ -1,5 +1,5 @@
 import type { ITrieNodeRoot } from '../ITrieNode/ITrieNode.js';
-import type { PartialTrieOptions } from '../ITrieNode/TrieOptions.js';
+import type { PartialTrieInfo } from '../ITrieNode/TrieInfo.js';
 import { mergeOptionalWithDefaults } from '../utils/mergeOptionalWithDefaults.js';
 import { walker, walkerWords } from '../walker/walker.js';
 import type { YieldResult } from '../walker/walkerTypes.js';
@@ -53,7 +53,7 @@ export function iteratorTrieWords(node: TrieNode): Iterable<string> {
     return walkerWords(node);
 }
 
-export function createTrieRoot(options: PartialTrieOptions): TrieRoot {
+export function createTrieRoot(options: PartialTrieInfo): TrieRoot {
     const fullOptions = mergeOptionalWithDefaults(options);
     return {
         ...fullOptions,
@@ -61,7 +61,7 @@ export function createTrieRoot(options: PartialTrieOptions): TrieRoot {
     };
 }
 
-export function createTrieRootFromList(words: Iterable<string>, options?: PartialTrieOptions): TrieRoot {
+export function createTrieRootFromList(words: Iterable<string>, options?: PartialTrieInfo): TrieRoot {
     const root = createTrieRoot(options);
     for (const word of words) {
         if (word.length) {
@@ -71,7 +71,7 @@ export function createTrieRootFromList(words: Iterable<string>, options?: Partia
     return root;
 }
 
-export function createITrieFromList(words: Iterable<string>, options?: PartialTrieOptions): ITrieNodeRoot {
+export function createITrieFromList(words: Iterable<string>, options?: PartialTrieInfo): ITrieNodeRoot {
     return trieRootToITrieRoot(createTrieRootFromList(words, options));
 }
 
@@ -170,7 +170,7 @@ export function isCircular(root: TrieNode): boolean {
     return walk(root).isCircular;
 }
 
-export function trieNodeToRoot(node: TrieNode, options: PartialTrieOptions): TrieRoot {
+export function trieNodeToRoot(node: TrieNode, options: PartialTrieInfo): TrieRoot {
     const newOptions = mergeOptionalWithDefaults(options);
     return {
         ...newOptions,

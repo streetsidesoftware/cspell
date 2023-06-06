@@ -1,11 +1,11 @@
 import type { ITrieNode, ITrieNodeId, ITrieNodeRoot } from '../ITrieNode/ITrieNode.js';
-import type { PartialTrieOptions } from '../ITrieNode/TrieOptions.js';
+import type { PartialTrieInfo } from '../ITrieNode/TrieInfo.js';
 import type { TrieData } from '../TrieData.js';
 import { FastTrieBlobBuilder } from './FastTrieBlobBuilder.js';
 import { resolveMap } from './resolveMap.js';
 import { TrieBlob } from './TrieBlob.js';
 
-export function createTrieBlob(words: string[], options?: PartialTrieOptions): TrieBlob {
+export function createTrieBlob(words: string[], options?: PartialTrieInfo): TrieBlob {
     const ft = FastTrieBlobBuilder.fromWordList(words, options);
     return ft.toTrieBlob();
 }
@@ -64,7 +64,7 @@ export function createTrieBlobFromITrieNodeRoot(root: ITrieNodeRoot): TrieBlob {
 
     walk(root);
 
-    return new TrieBlob(Uint32Array.from(nodes), charIndex, root.options);
+    return new TrieBlob(Uint32Array.from(nodes), charIndex, root.info);
 }
 
 export function createTrieBlobFromTrieData(trie: TrieData): TrieBlob {

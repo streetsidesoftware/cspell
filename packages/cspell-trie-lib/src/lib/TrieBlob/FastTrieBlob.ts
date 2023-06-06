@@ -1,5 +1,5 @@
 import type { ITrieNodeRoot } from '../ITrieNode/ITrieNode.js';
-import type { PartialTrieOptions, TrieOptions } from '../ITrieNode/TrieOptions.js';
+import type { PartialTrieInfo, TrieInfo } from '../ITrieNode/TrieInfo.js';
 import type { TrieData } from '../TrieData.js';
 import { mergeOptionalWithDefaults } from '../utils/mergeOptionalWithDefaults.js';
 import { extractInfo, type FastTrieBlobBitMaskInfo } from './FastTrieBlobBitMaskInfo.js';
@@ -16,17 +16,17 @@ export class FastTrieBlob implements TrieData {
     private _readonly = false;
     private _forbidIdx: number;
 
-    readonly options: Readonly<TrieOptions>;
+    readonly info: Readonly<TrieInfo>;
 
     private constructor(
         private nodes: FastTrieBlobNode[],
         private charIndex: string[],
         readonly bitMasksInfo: FastTrieBlobBitMaskInfo,
-        options?: PartialTrieOptions
+        options?: PartialTrieInfo
     ) {
-        this.options = mergeOptionalWithDefaults(options);
+        this.info = mergeOptionalWithDefaults(options);
         this.charToIndexMap = createCharToIndexMap(charIndex);
-        this._forbidIdx = this._lookupChar(0, this.options.forbiddenWordPrefix);
+        this._forbidIdx = this._lookupChar(0, this.info.forbiddenWordPrefix);
     }
 
     private lookUpCharIndex(char: string): number {
@@ -132,7 +132,7 @@ export class FastTrieBlob implements TrieData {
             }
         }
 
-        return new TrieBlob(binNodes, this.charIndex, this.options);
+        return new TrieBlob(binNodes, this.charIndex, this.info);
     }
 
     isReadonly(): boolean {
@@ -144,7 +144,7 @@ export class FastTrieBlob implements TrieData {
         return this;
     }
 
-    static create(data: FastTrieBlobInternals, options?: PartialTrieOptions) {
+    static create(data: FastTrieBlobInternals, options?: PartialTrieInfo) {
         return new FastTrieBlob(data.nodes, data.charIndex, extractInfo(data), options);
     }
 
@@ -152,7 +152,7 @@ export class FastTrieBlob implements TrieData {
         return new FastTrieBlobIRoot(
             new FastTrieBlobInternals(trie.nodes, trie.charIndex, trie.charToIndexMap, trie.bitMasksInfo),
             0,
-            trie.options
+            trie.info
         );
     }
 
@@ -176,6 +176,10 @@ export class FastTrieBlob implements TrieData {
 
     isForbiddenWord(word: string): boolean {
         return !!this._forbidIdx && this._has(this._forbidIdx, word);
+    }
+
+    hasForbiddenWords(): boolean {
+        return !!this._forbidIdx;
     }
 
     private _lookupChar(nodeIdx: number, char: string): number {

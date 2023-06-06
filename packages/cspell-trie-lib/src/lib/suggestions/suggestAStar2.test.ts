@@ -1,13 +1,12 @@
 import { describe, expect, test } from 'vitest';
 
 import { parseDictionary } from '../SimpleDictionaryParser.js';
-import { createTrieRootFromList } from '../TrieNode/trie-util.js';
 import { TrieNodeTrie } from '../TrieNode/TrieNodeTrie.js';
 import { CompoundWordsMethod } from '../walker/index.js';
 import type { SuggestionOptions } from './genSuggestionsOptions.js';
 import * as Sug from './suggestAStar2.js';
 
-describe('Validate Suggest', () => {
+describe('Validate Suggest A Star', () => {
     const changeLimit = 3;
 
     const trie = createTrieFromWords(sampleWords);
@@ -180,7 +179,7 @@ const sampleWords = [
 ];
 
 function createTrieFromWords(words: string[]) {
-    return new TrieNodeTrie(createTrieRootFromList(words));
+    return TrieNodeTrie.createFromWords(words);
 }
 
 function parseDict(dict: string) {

@@ -7,4 +7,5 @@ export const opCosts = {
     visuallySimilar: 1,
     firstLetterBias: 25,
     wordBreak: 99,
+    wordLengthCostFactor: 0.5,
 } as const;

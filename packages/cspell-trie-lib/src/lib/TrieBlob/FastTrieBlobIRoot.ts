@@ -1,5 +1,5 @@
 import type { ITrieNode, ITrieNodeId, ITrieNodeRoot } from '../ITrieNode/ITrieNode.js';
-import type { TrieOptions } from '../ITrieNode/TrieOptions.js';
+import type { TrieInfo } from '../ITrieNode/TrieInfo.js';
 import type { FastTrieBlobInternals } from './FastTrieBlobInternals.js';
 
 const EmptyKeys: readonly string[] = Object.freeze([]);
@@ -91,7 +91,7 @@ class FastTrieBlobINode implements ITrieNode {
     }
 }
 export class FastTrieBlobIRoot extends FastTrieBlobINode implements ITrieNodeRoot {
-    constructor(trie: FastTrieBlobInternals, nodeIdx: number, readonly options: Readonly<TrieOptions>) {
+    constructor(trie: FastTrieBlobInternals, nodeIdx: number, readonly info: Readonly<TrieInfo>) {
         super(trie, nodeIdx);
     }
     resolveId(id: ITrieNodeId): ITrieNode {
