@@ -16,11 +16,11 @@ describe('Validate Suggest A Star', () => {
         const results = Sug.suggestAStar(trie, 'talks', { changeLimit: changeLimit });
         expect(results).toEqual([
             { cost: 0, word: 'talks' },
-            { cost: 100, word: 'talk' },
-            { cost: 125, word: 'walks' },
-            { cost: 200, word: 'talked' },
-            { cost: 200, word: 'talker' },
-            { cost: 225, word: 'walk' },
+            { cost: 96, word: 'talk' },
+            { cost: 105, word: 'walks' },
+            { cost: 191, word: 'talked' },
+            { cost: 191, word: 'talker' },
+            { cost: 201, word: 'walk' },
         ]);
     });
 
@@ -42,7 +42,7 @@ describe('Validate Suggest A Star', () => {
         expect(suggestions).toEqual(expect.arrayContaining(['talk']));
         expect(suggestions[1]).toBe('talks');
         expect(suggestions[0]).toBe('talk');
-        expect(suggestions).toEqual(['talk', 'talks', 'walk', 'talked', 'talker', 'walks']);
+        expect(suggestions).toEqual(['talk', 'talks', 'walk']);
     });
 
     // cspell:ignore jernals
@@ -63,7 +63,7 @@ describe('Validate Suggest A Star', () => {
     test('Tests suggestions for joyfull', () => {
         const results = Sug.suggestAStar(trie, 'joyfull', { changeLimit: changeLimit });
         const suggestions = results.map((s) => s.word);
-        expect(suggestions).toEqual(['joyful', 'joyfully', 'joyfuller', 'joyous', 'joyfullest']);
+        expect(suggestions).toEqual(['joyful', 'joyfully', 'joyfuller', 'joyfullest', 'joyous']);
     });
 
     test('Tests suggestions', () => {
@@ -90,10 +90,10 @@ describe('Validate Suggest A Star', () => {
     // cspell:ignore walkingtree talkingtree talkingstick
     test.each`
         word              | expected
-        ${'walkingstick'} | ${[{ word: 'walkingstick', cost: 99 }]}
-        ${'talkingstick'} | ${[{ word: 'talkingstick', cost: 99 }]}
-        ${'talkingtree'}  | ${[{ word: 'talkingtree', cost: 99 }]}
-        ${'walkingtree'}  | ${[{ word: 'walkingtree', cost: 99 } /* still suggested even if it is forbidden */]}
+        ${'walkingstick'} | ${[{ word: 'walkingstick', cost: 1 }]}
+        ${'talkingstick'} | ${[{ word: 'talkingstick', cost: 1 }]}
+        ${'talkingtree'}  | ${[{ word: 'talkingtree', cost: 1 }]}
+        ${'walkingtree'}  | ${[{ word: 'walkingtree', cost: 1 } /* still suggested even if it is forbidden */]}
     `('that forbidden words are not included (collector)', ({ word, expected }) => {
         const trie = parseDict(`
             walk

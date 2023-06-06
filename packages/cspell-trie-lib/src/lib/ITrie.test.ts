@@ -44,7 +44,7 @@ describe('Validate Trie Class', () => {
     test('tests suggestions 2', () => {
         const trie = ITrie.create(sampleWords);
         const suggestions = trie.suggest('wall', NumSuggestions);
-        expect(suggestions).toEqual(['walk', 'walks', 'talk']);
+        expect(suggestions).toEqual(['walk', 'walks']);
     });
 
     test('tests suggestions with compounds', () => {

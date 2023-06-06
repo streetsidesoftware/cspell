@@ -28,6 +28,7 @@ describe('Validate Suggest', () => {
         const trie = Trie.create(sampleWords);
         // cspell:ignore tallk
         const results = suggest(trie.root, 'tallk');
+        // console.warn('%o', results);
         const suggestions = results.map((s) => s.word);
         expect(suggestions).toEqual(expect.arrayContaining(['talks']));
         expect(suggestions).toEqual(expect.arrayContaining(['talk']));
@@ -200,7 +201,7 @@ describe('Validate Suggest', () => {
         ${'Runningpod'}   | ${undefined} | ${5}           | ${1}         | ${[sr('Runningpod', 0), sr('runningpod', 1), sr('RunningPod', 1), sr('runningPod', 2)]}
         ${'runningpod'}   | ${undefined} | ${2}           | ${undefined} | ${[sr('runningpod', 0), sr('runningPod', 1)]}
         ${'walkingstick'} | ${undefined} | ${2}           | ${undefined} | ${[sr('walkingstick', 0), sr('talkingstick', 99)]}
-        ${'walkingtree'}  | ${undefined} | ${2}           | ${undefined} | ${[sr('talkingtree', 99), sr('walkingstick', 359)]}
+        ${'walkingtree'}  | ${undefined} | ${5}           | ${undefined} | ${[sr('talkingtree', 99), sr('walkingstick', 359), sr('walkingpod', 363), sr('walkingPod', 363), sr('walking', 372)]}
         ${'running'}      | ${undefined} | ${2}           | ${undefined} | ${[sr('running', 0), sr('Running', 1)]}
     `('suggestion results $word', ({ word, ignoreCase, numSuggestions, changeLimit, expected }) => {
         const trie = parseDictionary(`
