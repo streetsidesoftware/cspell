@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 7.0.1-alpha.0 (2023-06-09)
+
+**Note:** Version bump only for package test-cspell-trie-lib
+
 ## 7.0.0-alpha.2 (2023-05-07)
 
 **Note:** Version bump only for package test-cspell-trie-lib
