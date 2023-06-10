@@ -1,10 +1,10 @@
 import { describe, expect, test } from 'vitest';
 
-import { CompoundWordsMethod, suggestionCollector } from './index.js';
+import { CompoundWordsMethod, defaultTrieInfo, suggestionCollector } from './index.js';
 import { parseDictionary } from './SimpleDictionaryParser.js';
 import type { SuggestionOptions } from './suggestions/genSuggestionsOptions.js';
 import type { SuggestionCollectorOptions } from './suggestions/suggestCollector.js';
-import { defaultTrieOptions, Trie } from './trie.js';
+import { Trie } from './trie.js';
 import { isWordTerminationNode, orderTrie } from './TrieNode/trie-util.js';
 import { clean } from './utils/clean.js';
 import { normalizeWordToLowercase } from './utils/normalizeWord.js';
@@ -88,14 +88,14 @@ describe('Validate Trie Class', () => {
         const trie = Trie.create(sampleWords);
         expect(trie).toBeInstanceOf(Trie);
         const options = trie.options;
-        expect(options).toEqual(defaultTrieOptions);
+        expect(options).toEqual(defaultTrieInfo);
     });
 
     test('Tests Trie options', () => {
         const trie = Trie.create(sampleWords, { forbiddenWordPrefix: '#' });
         expect(trie).toBeInstanceOf(Trie);
         const options = trie.options;
-        expect(options).not.toEqual(defaultTrieOptions);
+        expect(options).not.toEqual(defaultTrieInfo);
         expect(options.forbiddenWordPrefix).toBe('#');
     });
 

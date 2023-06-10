@@ -28,7 +28,7 @@ describe('FastTrieBlob', () => {
         const trieData = createTrieData(words);
         const trieBlob = createTrieBlobFromTrieData(trieData);
         const count = countNodes(trieData);
-        const countBlob = trieBlob.countNodes();
+        const countBlob = trieBlob.size;
         expect(countBlob).toBe(count);
         expect([...trieBlob.words()]).toEqual([...words].sort());
         expect(words.findIndex((word) => !trieBlob.has(word))).toBe(-1);
@@ -43,7 +43,7 @@ describe('FastTrieBlob', () => {
         const trieData = createTrieData(words);
         const trieBlob = createTrieBlobFromTrieData(trieData);
         const count = countNodes(trieData);
-        const countBlob = trieBlob.countNodes();
+        const countBlob = trieBlob.size;
         expect(countBlob).toBe(count);
         const iTrieRoot = trieBlob.getRoot();
         const countITrie = countITrieNodes(iTrieRoot);

@@ -112,9 +112,9 @@ describe('Validate Trie Class', () => {
 
     test('size', () => {
         const trie = ITrie.create(sampleWords);
-        expect(trie.size()).toBe(80);
+        expect(trie.numWords()).toBe(80);
         // Request again to make sure it is the same value twice since the calculation is lazy.
-        expect(trie.size()).toBe(80);
+        expect(trie.numWords()).toBe(80);
     });
 
     test('isSizeKnown', () => {

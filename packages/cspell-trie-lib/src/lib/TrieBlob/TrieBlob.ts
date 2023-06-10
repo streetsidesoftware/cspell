@@ -38,8 +38,8 @@ const endianSig = 0x04030201;
 export class TrieBlob implements TrieData {
     protected charToIndexMap: Record<string, number>;
     readonly info: Readonly<TrieInfo>;
-    private _countNodes: number | undefined;
     private _forbidIdx: number | undefined;
+    private _size: number | undefined;
 
     constructor(protected nodes: Uint32Array, protected charIndex: string[], options: PartialTrieInfo) {
         this.info = mergeOptionalWithDefaults(options);
@@ -156,18 +156,17 @@ export class TrieBlob implements TrieData {
     }
 
     get size(): number {
-        return this.nodes.length;
-    }
-
-    countNodes(): number {
+        if (this._size) return this._size;
         const NodeMaskNumChildren = TrieBlob.NodeMaskNumChildren;
-        if (this._countNodes) return this._countNodes;
-        let n = 0;
-        for (let i = 0; i < this.nodes.length; i += (this.nodes[i] & NodeMaskNumChildren) + 1) {
-            n += 1;
+        const nodes = this.nodes;
+        let p = 0;
+        let count = 0;
+        while (p < nodes.length) {
+            ++count;
+            p += (nodes[p] & NodeMaskNumChildren) + 1;
         }
-        this._countNodes = n;
-        return n;
+        this._size = count;
+        return count;
     }
 
     toJSON() {
