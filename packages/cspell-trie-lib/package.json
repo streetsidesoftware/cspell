@@ -22,7 +22,9 @@
   ],
   "scripts": {
     "clean": "shx rm -rf dist temp coverage \"*.tsbuildInfo\"",
-    "build": "tsc -b .",
+    "build": "pnpm run build:lib && pnpm run build:api",
+    "build:lib": "tsc -b .",
+    "build:api": "rollup -c api/rollup.config.mjs",
     "clean-build": "pnpm run clean && pnpm run build",
     "coverage": "pnpm coverage:vitest && pnpm coverage:fix",
     "coverage:vitest": "vitest run --coverage",

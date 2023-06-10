@@ -182,6 +182,11 @@ export class FastTrieBlob implements TrieData {
         return !!this._forbidIdx;
     }
 
+    /** number of nodes */
+    get size() {
+        return this.nodes.reduce((acc, n) => acc + n.length, 0);
+    }
+
     private _lookupChar(nodeIdx: number, char: string): number {
         const NodeMaskChildCharIndex = this.bitMasksInfo.NodeMaskChildCharIndex;
         const NodeChildRefShift = this.bitMasksInfo.NodeChildRefShift;

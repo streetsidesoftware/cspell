@@ -1,6 +1,6 @@
 import { type BuilderCursor, insertWordsAtCursor, type TrieBuilder } from '../Builder/index.js';
+import { defaultTrieInfo } from '../constants.js';
 import type { PartialTrieOptions, TrieOptions } from '../trie.js';
-import { defaultTrieOptions } from '../trie.js';
 import { assert } from '../utils/assert.js';
 import { mergeOptionalWithDefaults } from '../utils/mergeOptionalWithDefaults.js';
 import type { ChildMap, TrieNode, TrieRoot } from './TrieNode.js';
@@ -19,7 +19,7 @@ interface TrieNodeBranch extends LockableTrieNode {
 
 export class TrieNodeBuilder implements TrieBuilder<TrieNodeTrie> {
     private _cursor: BuilderCursor | undefined;
-    root: TrieRoot = { ...defaultTrieOptions, c: Object.create(null) };
+    root: TrieRoot = { ...defaultTrieInfo, c: Object.create(null) };
 
     setOptions(options: Readonly<PartialTrieOptions>): Readonly<TrieOptions> {
         const opts = mergeOptionalWithDefaults(options, this.root);

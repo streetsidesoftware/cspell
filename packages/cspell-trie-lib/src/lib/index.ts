@@ -1,4 +1,13 @@
 export { consolidate } from './consolidate.js';
+export {
+    CASE_INSENSITIVE_PREFIX,
+    COMPOUND_FIX,
+    defaultTrieInfo,
+    /** @deprecated */
+    defaultTrieInfo as defaultTrieOptions,
+    FORBID_PREFIX,
+    OPTIONAL_COMPOUND_FIX,
+} from './constants.js';
 export type { WeightMap } from './distance/index.js';
 export { createWeightedMap, editDistance, editDistanceWeighted } from './distance/index.js';
 export { ExportOptions, importTrie, serializeTrie } from './io/importExport.js';
@@ -12,18 +21,7 @@ export {
 export type { MaxCost, SuggestionCollector, SuggestionResult } from './suggestCollector.js';
 export { impersonateCollector, suggestionCollector } from './suggestCollector.js';
 export type { FindWordOptions, PartialTrieOptions, TrieOptions } from './trie.js';
-export {
-    CASE_INSENSITIVE_PREFIX,
-    COMPOUND,
-    COMPOUND_FIX,
-    defaultTrieOptions,
-    FORBID,
-    FORBID_PREFIX,
-    NORMALIZED,
-    OPTIONAL_COMPOUND,
-    OPTIONAL_COMPOUND_FIX,
-    Trie,
-} from './trie.js';
+export { Trie } from './trie.js';
 export { buildTrie, buildTrieFast, TrieBuilder } from './TrieBuilder.js';
 export type { FindFullResult } from './TrieNode/find.js';
 export {

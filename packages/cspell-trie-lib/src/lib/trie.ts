@@ -1,6 +1,5 @@
 import { opAppend, opFilter, opMap, pipe } from '@cspell/cspell-pipe/sync';
 
-import { CASE_INSENSITIVE_PREFIX, COMPOUND_FIX, FORBID_PREFIX, OPTIONAL_COMPOUND_FIX } from './constants.js';
 import type { PartialTrieInfo, TrieInfo } from './ITrieNode/TrieInfo.js';
 import { genSuggestions, suggest } from './suggest.js';
 import type { SuggestionCollector, SuggestionResult } from './suggestCollector.js';
@@ -22,23 +21,7 @@ import { replaceAllFactory } from './utils/util.js';
 import type { CompoundWordsMethod, WalkerIterator } from './walker/index.js';
 import { walker } from './walker/index.js';
 
-export {
-    CASE_INSENSITIVE_PREFIX,
-    COMPOUND_FIX,
-    defaultTrieInfo as defaultTrieOptions,
-    FORBID_PREFIX,
-    OPTIONAL_COMPOUND_FIX,
-} from './constants.js';
 export { PartialTrieInfo as PartialTrieOptions, TrieInfo as TrieOptions } from './ITrieNode/TrieInfo.js';
-
-/** @deprecated */
-export const COMPOUND = COMPOUND_FIX;
-/** @deprecated */
-export const OPTIONAL_COMPOUND = OPTIONAL_COMPOUND_FIX;
-/** @deprecated */
-export const NORMALIZED = CASE_INSENSITIVE_PREFIX;
-/** @deprecated */
-export const FORBID = FORBID_PREFIX;
 
 const defaultLegacyMinCompoundLength = 3;
 

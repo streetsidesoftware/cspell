@@ -159,17 +159,6 @@ export class TrieBlob implements TrieData {
         return this.nodes.length;
     }
 
-    countNodes(): number {
-        const NodeMaskNumChildren = TrieBlob.NodeMaskNumChildren;
-        if (this._countNodes) return this._countNodes;
-        let n = 0;
-        for (let i = 0; i < this.nodes.length; i += (this.nodes[i] & NodeMaskNumChildren) + 1) {
-            n += 1;
-        }
-        this._countNodes = n;
-        return n;
-    }
-
     toJSON() {
         return {
             charIndex: this.charIndex,

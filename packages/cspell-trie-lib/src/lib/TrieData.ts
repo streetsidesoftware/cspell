@@ -8,4 +8,5 @@ export interface TrieData {
     has(word: string): boolean;
     isForbiddenWord(word: string): boolean;
     hasForbiddenWords(): boolean;
+    size: number;
 }

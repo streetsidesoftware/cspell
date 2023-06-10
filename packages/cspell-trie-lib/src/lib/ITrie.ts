@@ -5,7 +5,7 @@ import type { FindFullResult } from './ITrieNode/find.js';
 import { createFindOptions, findLegacyCompound, findWord, findWordNode, isForbiddenWord } from './ITrieNode/find.js';
 import type { FindOptions, PartialFindOptions } from './ITrieNode/FindOptions.js';
 import type { ITrieNode, ITrieNodeRoot } from './ITrieNode/index.js';
-import { countWords, iteratorTrieWords } from './ITrieNode/trie-util.js';
+import { countNodes, countWords, iteratorTrieWords } from './ITrieNode/trie-util.js';
 import type { PartialTrieInfo, TrieInfo } from './ITrieNode/TrieInfo.js';
 import { walker } from './ITrieNode/walker/walker.js';
 import type { CompoundWordsMethod, WalkerIterator } from './ITrieNode/walker/walkerTypes.js';
@@ -43,7 +43,8 @@ export class ITrie {
     private _findOptionsDefaults: PartialFindOptions;
     private hasForbidden: boolean;
     private root: ITrieNodeRoot;
-    constructor(readonly data: TrieData, private count?: number) {
+    private count?: number;
+    constructor(readonly data: TrieData, private numNodes?: number) {
         this.root = data.getRoot();
         this._info = mergeOptionalWithDefaults(data.info);
         this.hasForbidden = data.hasForbiddenWords();
@@ -55,15 +56,21 @@ export class ITrie {
     }
 
     /**
-     * Number of words in the Trie
+     * Number of words in the Trie, the first call to this method might be expensive.
+     * Use `size` to get the number of nodes.
      */
-    size(): number {
-        this.count = this.count ?? countWords(this.root);
+    numWords(): number {
+        this.count ??= countWords(this.root);
         return this.count;
     }
 
-    isSizeKnown(): boolean {
+    isNumWordsKnown(): boolean {
         return this.count !== undefined;
+    }
+
+    size(): number {
+        this.numNodes ??= countNodes(this.data.getRoot());
+        return this.numNodes;
     }
 
     get info(): Readonly<TrieInfo> {
