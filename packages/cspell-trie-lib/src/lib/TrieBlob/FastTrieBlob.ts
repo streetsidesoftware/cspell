@@ -184,7 +184,7 @@ export class FastTrieBlob implements TrieData {
 
     /** number of nodes */
     get size() {
-        return this.nodes.reduce((acc, n) => acc + n.length, 0);
+        return this.nodes.length;
     }
 
     private _lookupChar(nodeIdx: number, char: string): number {
