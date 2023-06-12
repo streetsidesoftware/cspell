@@ -5,7 +5,7 @@ Args: '["--config=${repoConfig}/cspell.json","**/*.*"]'
 Summary:
   files: 152
   filesWithIssues: 90
-  issues: 1121
+  issues: 1132
   errors: 0
 Errors: []
 
@@ -17,19 +17,22 @@ issues:
   - "docs/_asset/index.css:286:21        squircle                U       mask-image: paint(squircle);"
   - "docs/_asset/index.css:298:2         hljs                    U       .hljs,"
   - "docs/_asset/index.css:335:32        nums                    U       variant-numeric: lining-nums;"
-  - "docs/_asset/index.css:762:8         resizeable              U       .frame-resizeable {"
-  - "docs/_asset/index.css:881:15        thecomponent            U       #markdown-for-thecomponent-era {"
-  - "docs/_asset/index.css:971:5         scroller                U       .cm-scroller {"
+  - "docs/_asset/index.css:773:8         resizeable              U       .frame-resizeable {"
+  - "docs/_asset/index.css:892:15        thecomponent            U       #markdown-for-thecomponent-era {"
+  - "docs/_asset/index.css:982:5         scroller                U       .cm-scroller {"
   - "docs/_component/blog.server.js:3:28         hyperscript     U       {toH} from 'hast-to-hyperscript'"
   - "docs/_component/copy.client.js:25:19        currentcolor    U       fill=\"currentcolor\""
   - "docs/_component/editor.client.js:2:30           ahooks          U       useDebounceFn} from 'ahooks'"
   - "docs/_component/editor.client.js:4:22           vfile           U       import {VFile} from 'vfile'"
-  - "docs/_component/editor.client.js:12:25          rodemirror      U       import CodeMirror from 'rodemirror'"
-  - "docs/_component/editor.client.js:19:9           lowlight        U       import {lowlight} from 'lowlight/lib"
-  - "docs/_component/editor.client.js:44:35          mdast           U       remarkPlugins.push(capture('mdast'))"
-  - "docs/_component/editor.client.js:52:13          rehype          U       rehypePlugins: [capture('hast"
-  - "docs/_component/editor.client.js:53:13          recma           U       recmaPlugins: [capture('esast"
-  - "docs/_component/editor.client.js:53:37          esast           U       recmaPlugins: [capture('esast')]"
+  - "docs/_component/editor.client.js:10:8           rehype          U       import rehypeRaw from 'rehype-raw"
+  - "docs/_component/editor.client.js:14:23          Estree          U       import {visit as visitEstree} from 'estree-util-visit"
+  - "docs/_component/editor.client.js:14:37          estree          U       as visitEstree} from 'estree-util-visit'"
+  - "docs/_component/editor.client.js:16:25          rodemirror      U       import CodeMirror from 'rodemirror'"
+  - "docs/_component/editor.client.js:23:9           lowlight        U       import {lowlight} from 'lowlight/lib"
+  - "docs/_component/editor.client.js:48:35          mdast           U       remarkPlugins.push(capture('mdast'))"
+  - "docs/_component/editor.client.js:62:13          recma           U       recmaPlugins: [capture('esast"
+  - "docs/_component/editor.client.js:62:37          esast           U       recmaPlugins: [capture('esast')]"
+  - "docs/_component/editor.client.js:69:25          Esast           U       removePositionEsast(file.data.esast)"
   - "docs/_component/icon/open-collective.server.js:8:28         opencollective      U       className=\"icon icon-opencollective\""
   - "docs/_config.js:29:14       retext          U       '/advanced/retext-plugins/index.html'"
   - "docs/_config.js:31:51       evaluatefile    U       html': '/packages/mdx/#evaluatefile-options',"
@@ -45,7 +48,6 @@ issues:
   - "docs/blog/custom-pragma.server.mdx:4:39         christopherbiscardi     U       Biscardi', github: 'christopherbiscardi', twitter: 'chrisbiscardi"
   - "docs/blog/custom-pragma.server.mdx:4:71         chrisbiscardi           U       ristopherbiscardi', twitter: 'chrisbiscardi'}"
   - "docs/blog/custom-pragma.server.mdx:32:40        inbetween (between)     U       MDXTag` elements that are inbetween `pre` and `code`."
-  - "docs/blog/custom-pragma.server.mdx:109:33       estree                  U       used in the hast to estree conversion,"
   - "docs/blog/custom-pragma.server.mdx:111:7        renderable              U       Every renderable element is wrapped in"
   - "docs/blog/shortcodes.server.mdx:17:3        Shortcodes      U       # Shortcodes"
   - "docs/blog/shortcodes.server.mdx:19:45       shortcodes      U       in MDX v1 is global shortcodes."
@@ -278,7 +280,6 @@ issues:
   - "packages/mdx/lib/core.js:3:32           Pluggable       U       typedef {import('unified').PluggableList} PluggableList"
   - "packages/mdx/lib/core.js:5:64           Recma           U       js').Options} RehypeRecmaOptions"
   - "packages/mdx/lib/evaluate.js:23:10          compiletime     U       const {compiletime, runtime} = resolveEvaluateOp"
-  - "packages/mdx/lib/plugin/recma-document.js:52:21         Estree          U       import {positionFromEstree} from 'unist-util-position"
   - "packages/mdx/lib/plugin/recma-document.js:473:17        declarators     U       const declarators = node.specifiers"
   - "packages/mdx/lib/plugin/recma-stringify.js:15:66        astring     U       small wrapper around `astring` to add"
   - "packages/mdx/readme.md:156:58       strikethrough       U       Tables, footnotes, strikethrough, task lists, literal"
