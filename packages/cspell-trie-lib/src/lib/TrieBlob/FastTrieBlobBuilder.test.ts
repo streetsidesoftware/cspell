@@ -10,11 +10,11 @@ import { FastTrieBlobBuilder } from './FastTrieBlobBuilder.js';
 
 describe('FastTrieBlobBuilder', () => {
     test('insert', () => {
-        const words = ['one', 'two', 'three', 'four'];
+        const words = ['one', 'two', 'three', 'four', 'houses', 'house'];
         const builder = new FastTrieBlobBuilder();
         builder.insert(words);
         const ft = builder.build();
-        expect([...ft.words()]).toEqual(words);
+        expect([...ft.words()].sort()).toEqual([...words].sort());
     });
 
     test('setOptions', () => {

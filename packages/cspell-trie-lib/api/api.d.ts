@@ -14,30 +14,9 @@ interface TrieInfo {
     compoundCharacter: string;
     stripCaseAndAccentsPrefix: string;
     forbiddenWordPrefix: string;
+    isCaseAware: boolean;
 }
 type PartialTrieInfo = PartialWithUndefined<TrieInfo> | undefined;
-
-declare const FLAG_WORD = 1;
-type ChildMap = Record<string, TrieNode>;
-interface TrieNode {
-    f?: number | undefined;
-    c?: ChildMap | undefined;
-}
-interface TrieRoot extends TrieInfo {
-    c: ChildMap;
-}
-
-/**
- * Consolidate to DAWG
- * @param root the root of the Trie tree
- */
-declare function consolidate(root: TrieRoot): TrieRoot;
-
-declare const COMPOUND_FIX = "+";
-declare const OPTIONAL_COMPOUND_FIX = "*";
-declare const CASE_INSENSITIVE_PREFIX = "~";
-declare const FORBID_PREFIX = "!";
-declare const defaultTrieInfo: TrieInfo;
 
 type ITrieNodeId = object | number | string;
 type Entry = readonly [string, ITrieNode];
@@ -92,6 +71,16 @@ interface FindFullResult$1 extends FindResult$1 {
      * - `undefined` - unknown - was not checked.
      * */
     forbidden: boolean | undefined;
+}
+
+declare const FLAG_WORD = 1;
+type ChildMap = Record<string, TrieNode>;
+interface TrieNode {
+    f?: number | undefined;
+    c?: ChildMap | undefined;
+}
+interface TrieRoot extends TrieInfo {
+    c: ChildMap;
 }
 
 declare const JOIN_SEPARATOR = "+";
@@ -457,11 +446,26 @@ interface ITrie {
      * On the returned Iterator, calling .next(goDeeper: boolean), allows for controlling the depth.
      */
     iterate(): WalkerIterator;
+    get isCaseAware(): boolean;
 }
 interface FindWordOptions$1 {
     caseSensitive?: boolean;
     useLegacyWordCompounds?: boolean | number;
 }
+
+declare function buildITrieFromWords(words: Iterable<string>, info?: PartialTrieInfo): ITrie;
+
+/**
+ * Consolidate to DAWG
+ * @param root the root of the Trie tree
+ */
+declare function consolidate(root: TrieRoot): TrieRoot;
+
+declare const COMPOUND_FIX = "+";
+declare const OPTIONAL_COMPOUND_FIX = "*";
+declare const CASE_INSENSITIVE_PREFIX = "~";
+declare const FORBID_PREFIX = "!";
+declare const defaultTrieInfo: TrieInfo;
 
 declare function decodeTrie(raw: string | Buffer): ITrie;
 
@@ -638,7 +642,8 @@ declare function createDictionaryLineParserMapper(options?: Partial<ParseDiction
  * @returns words that have been normalized.
  */
 declare function parseDictionaryLines(lines: Iterable<string> | string, options?: Partial<ParseDictionaryOptions>): Iterable<string>;
-declare function parseDictionary(text: string, options?: Partial<ParseDictionaryOptions>): Trie;
+declare function parseDictionaryLegacy(text: string | string[], options?: Partial<ParseDictionaryOptions>): Trie;
+declare function parseDictionary(text: string | string[], options?: Partial<ParseDictionaryOptions>): ITrie;
 
 /**
  * Builds an optimized Trie from a Iterable<string>. It attempts to reduce the size of the trie
@@ -757,4 +762,4 @@ declare const normalizeWordForCaseInsensitive: (text: string) => string[];
  */
 declare function expandCharacterSet(line: string, rangeChar?: string): Set<string>;
 
-export { CASE_INSENSITIVE_PREFIX, COMPOUND_FIX, ChildMap, CompoundWordsMethod, ExportOptions, FLAG_WORD, FORBID_PREFIX, FindFullResult, FindWordOptions, HintedWalkerIterator, Hinting, JOIN_SEPARATOR, MaxCost, OPTIONAL_COMPOUND_FIX, PartialTrieInfo as PartialTrieOptions, SuggestionCollector, SuggestionResult, Trie, TrieBuilder, TrieNode, TrieInfo as TrieOptions, TrieRoot, WORD_SEPARATOR, WalkerIterator$1 as WalkerIterator, WeightMap, YieldResult$1 as YieldResult, buildTrie, buildTrieFast, consolidate, countNodes, countWords, createDictionaryLineParserMapper as createDictionaryLineParser, createTrieRoot, createTrieRootFromList, createWeightedMap, decodeTrie, defaultTrieInfo, defaultTrieInfo as defaultTrieOptions, editDistance, editDistanceWeighted, expandCharacterSet, findNode, has, hintedWalker, impersonateCollector, importTrie, insert, isCircular, isDefined, isWordTerminationNode, iterateTrie, iteratorTrieWords, mapDictionaryInformationToWeightMap, mergeDefaults, mergeOptionalWithDefaults, normalizeWord, normalizeWordForCaseInsensitive, normalizeWordToLowercase, orderTrie, parseDictionary, parseDictionaryLines, serializeTrie, suggestionCollector, trieNodeToRoot, walk, walker };
+export { CASE_INSENSITIVE_PREFIX, COMPOUND_FIX, ChildMap, CompoundWordsMethod, ExportOptions, FLAG_WORD, FORBID_PREFIX, FindFullResult, FindWordOptions, HintedWalkerIterator, Hinting, ITrie, JOIN_SEPARATOR, MaxCost, OPTIONAL_COMPOUND_FIX, PartialTrieInfo as PartialTrieOptions, SuggestionCollector, SuggestionResult, Trie, TrieBuilder, TrieNode, TrieInfo as TrieOptions, TrieRoot, WORD_SEPARATOR, WalkerIterator$1 as WalkerIterator, WeightMap, YieldResult$1 as YieldResult, buildITrieFromWords, buildTrie, buildTrieFast, consolidate, countNodes, countWords, createDictionaryLineParserMapper as createDictionaryLineParser, createTrieRoot, createTrieRootFromList, createWeightedMap, decodeTrie, defaultTrieInfo, defaultTrieInfo as defaultTrieOptions, editDistance, editDistanceWeighted, expandCharacterSet, findNode, has, hintedWalker, impersonateCollector, importTrie, insert, isCircular, isDefined, isWordTerminationNode, iterateTrie, iteratorTrieWords, mapDictionaryInformationToWeightMap, mergeDefaults, mergeOptionalWithDefaults, normalizeWord, normalizeWordForCaseInsensitive, normalizeWordToLowercase, orderTrie, parseDictionary, parseDictionaryLegacy, parseDictionaryLines, serializeTrie, suggestionCollector, trieNodeToRoot, walk, walker };
