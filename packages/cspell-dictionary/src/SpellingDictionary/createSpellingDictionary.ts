@@ -1,4 +1,4 @@
-import { buildTrieFast, parseDictionaryLines } from 'cspell-trie-lib';
+import { buildITrieFromWords, parseDictionaryLines } from 'cspell-trie-lib';
 import { deepEqual } from 'fast-equals';
 
 import type { IterableLike } from '../util/IterableLike.js';
@@ -58,7 +58,7 @@ function _createSpellingDictionary(params: CreateSpellingDictionaryParams): Spel
     // console.log(`createSpellingDictionary ${name} ${source}`);
     const parseOptions = { stripCaseAndAccents: options?.supportNonStrictSearches ?? true };
     const words = parseDictionaryLines(wordList, parseOptions);
-    const trie = buildTrieFast(words);
+    const trie = buildITrieFromWords(words);
     const opts = { ...(options || defaultOptions) };
     if (opts.weightMap === undefined && opts.dictionaryInformation) {
         opts.weightMap = createWeightMapFromDictionaryInformation(opts.dictionaryInformation);

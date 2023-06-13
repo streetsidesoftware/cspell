@@ -1,6 +1,6 @@
 import { describe, expect, test } from 'vitest';
 
-import { parseLinesToDictionary } from '../SimpleDictionaryParser.js';
+import { parseLinesToDictionaryLegacy } from '../SimpleDictionaryParser.js';
 import { createTrieRootFromList, orderTrie } from '../TrieNode/trie-util.js';
 import type { HintedWalkerIterator } from './hintedWalker.js';
 import { hintedWalker } from './hintedWalker.js';
@@ -40,7 +40,7 @@ describe('Validate Util Functions', () => {
         ${['A+', '+a*', '+b']}        | ${'•'} | ${3}  | ${['A•a', 'A•a•a', 'A•a•b', 'A•b']}
         ${['A+', '+b+', '+C']}        | ${'•'} | ${5}  | ${['A•C', 'A•b•C', 'A•b•b•C', 'A•b•b•b•C']}
     `('Hinted Walker compounds $dict', ({ dict, sep, depth, expected }) => {
-        const trie = parseLinesToDictionary(dict, { stripCaseAndAccents: true });
+        const trie = parseLinesToDictionaryLegacy(dict, { stripCaseAndAccents: true });
         const iter = hintedWalker(trie.root, false, 'a', undefined, sep);
         const result = walkerToArray(iter, depth);
         expect(result).toEqual(expected);
@@ -56,7 +56,7 @@ describe('Validate Util Functions', () => {
     `(
         'Hinted Walker dict: $dict ignoreCase: $ignoreCase depth: $depth sep: "$sep" method: $compoundMethod',
         ({ dict, ignoreCase, sep, depth, compoundMethod, expected }) => {
-            const trie = parseLinesToDictionary(dict, { stripCaseAndAccents: ignoreCase });
+            const trie = parseLinesToDictionaryLegacy(dict, { stripCaseAndAccents: ignoreCase });
             const i = hintedWalker(trie.root, ignoreCase, 'a', compoundMethod, sep);
             const result = walkerToArray(i, depth);
             expect(result).toEqual(expected);

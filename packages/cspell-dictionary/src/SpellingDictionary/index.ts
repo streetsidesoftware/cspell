@@ -14,11 +14,11 @@ export type {
     SearchOptions,
     SpellingDictionary,
     SpellingDictionaryOptions,
-    SuggestionCollector,
-    SuggestionResult,
-    SuggestOptions,
 } from './SpellingDictionary.js';
 export { createCollection, SpellingDictionaryCollection } from './SpellingDictionaryCollection.js';
 export { createSpellingDictionaryFromTrieFile } from './SpellingDictionaryFromTrie.js';
 export { createSuggestDictionary } from './SuggestDictionary.js';
+export type { SuggestOptions } from './SuggestOptions.js';
+export { createSuggestOptions } from './SuggestOptions.js';
 export { createTyposDictionary } from './TyposDictionary.js';
+export { CompoundWordsMethod, type SuggestionCollector, type SuggestionResult } from 'cspell-trie-lib';

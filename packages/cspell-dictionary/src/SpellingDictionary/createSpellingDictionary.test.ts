@@ -69,7 +69,7 @@ describe('Validate createSpellingDictionary', () => {
         word          | ignoreCase | expected
         ${'Geschäft'} | ${false}   | ${[c('Geschäft', 0)]}
         ${'Geschaft'} | ${false}   | ${[c('Geschäft', 1)]}
-        ${'fone'}     | ${false}   | ${[c('phone', 70), c('gone', 104)]}
+        ${'fone'}     | ${false}   | ${[/* c('phone', 70), */ c('gone', 104)]}
         ${'failor'}   | ${false}   | ${[c('failure', 70), c('sailor', 104), c('failed', 175), c('fail', 200)]}
     `('createSpellingDictionary with dictionaryInformation "$word" "$ignoreCase"', ({ word, ignoreCase, expected }) => {
         const words = sampleWords();

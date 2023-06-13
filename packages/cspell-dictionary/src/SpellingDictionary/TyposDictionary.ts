@@ -12,8 +12,8 @@ import type {
     SearchOptions,
     SpellingDictionary,
     SpellingDictionaryOptions,
-    SuggestOptions,
 } from './SpellingDictionary.js';
+import type { SuggestOptions } from './SuggestOptions.js';
 import { processEntriesToTyposDef, type TypoEntry, type TyposDef } from './Typos/index.js';
 import { extractAllSuggestions, extractIgnoreValues } from './Typos/util.js';
 

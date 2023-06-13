@@ -1,3 +1,4 @@
+export { buildITrieFromWords } from './buildITrie.js';
 export { consolidate } from './consolidate.js';
 export {
     CASE_INSENSITIVE_PREFIX,
@@ -8,14 +9,17 @@ export {
     FORBID_PREFIX,
     OPTIONAL_COMPOUND_FIX,
 } from './constants.js';
+export { decodeTrie } from './decodeTrie.js';
 export type { WeightMap } from './distance/index.js';
 export { createWeightedMap, editDistance, editDistanceWeighted } from './distance/index.js';
 export { ExportOptions, importTrie, serializeTrie } from './io/importExport.js';
+export type { ITrie } from './ITrie.js';
 export { mapDictionaryInformationToWeightMap } from './mappers/mapDictionaryInfoToWeightMap.js';
 export type { SuggestionCostMapDef } from './models/suggestionCostsDef.js';
 export {
     createDictionaryLineParserMapper as createDictionaryLineParser,
     parseDictionary,
+    parseDictionaryLegacy,
     parseDictionaryLines,
 } from './SimpleDictionaryParser.js';
 export type { MaxCost, SuggestionCollector, SuggestionResult } from './suggestCollector.js';

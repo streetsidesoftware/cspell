@@ -1,7 +1,7 @@
 import { describe, expect, test } from 'vitest';
 
-import { ITrie } from '../ITrie.js';
-import { parseDictionary } from '../SimpleDictionaryParser.js';
+import { ITrieImpl } from '../ITrie.js';
+import { parseDictionaryLegacy } from '../SimpleDictionaryParser.js';
 import { TrieNodeTrie } from '../TrieNode/TrieNodeTrie.js';
 import { cleanCopy } from '../utils/util.js';
 import { CompoundWordsMethod } from '../walker/index.js';
@@ -245,7 +245,7 @@ describe('Validate Suggest', () => {
         ${'free'}         | ${undefined} | ${2}           | ${2}        | ${[sr('tree', 99)]}
         ${'stock'}        | ${undefined} | ${2}           | ${2}        | ${[sr('stick', 97)]}
     `('suggestWithCost results $word', ({ word, ignoreCase, numSuggestions, changeLimit, expected }) => {
-        const trie = parseDictionary(`
+        const trie = parseDictionaryLegacy(`
             walk
             Running*
             walking*
@@ -276,7 +276,7 @@ describe('Validate Suggest', () => {
         ${'stock'}        | ${undefined} | ${2}           | ${2}        | ${[sr('stick', 97)]}
         ${'stretwise'}    | ${undefined} | ${2}           | ${2}        | ${[sr('streetwise', 95), sr('street•wise', 95)]}
     `('suggestWithCost and separator $word', ({ word, ignoreCase, numSuggestions, changeLimit, expected }) => {
-        const trie = parseDictionary(`
+        const trie = parseDictionaryLegacy(`
             walk
             Running*
             walking*
@@ -353,8 +353,8 @@ const sampleWords = [
 ];
 
 function parseDict(dict: string) {
-    const trie = parseDictionary(dict);
-    return new ITrie(new TrieNodeTrie(trie.root));
+    const trie = parseDictionaryLegacy(dict);
+    return new ITrieImpl(new TrieNodeTrie(trie.root));
 }
 
 function numSugs(numSuggestions: number): SuggestionOptions {

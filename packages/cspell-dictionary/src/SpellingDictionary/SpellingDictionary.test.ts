@@ -1,4 +1,4 @@
-import { Trie } from 'cspell-trie-lib';
+import { buildITrieFromWords } from 'cspell-trie-lib';
 import { describe, expect, test } from 'vitest';
 
 import { createSpellingDictionary } from './createSpellingDictionary.js';
@@ -96,7 +96,7 @@ describe('Verify building Dictionary', () => {
             'battles',
             'tattles',
         ];
-        const trie = Trie.create(words);
+        const trie = buildITrieFromWords(words);
         const dict = new SpellingDictionaryFromTrie(trie, 'trie', opts());
         // cspell:ignore cattles
         const results = dict.suggest('Cattles');

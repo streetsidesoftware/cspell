@@ -1,13 +1,14 @@
 import { describe, expect, test } from 'vitest';
 
-import { CompoundWordsMethod, suggestionCollector } from './index.js';
-import { defaultTrieInfo, ITrie } from './ITrie.js';
+import { defaultTrieInfo } from './constants.js';
+import { ITrieImpl as ITrie } from './ITrie.js';
 import type { ITrieNode } from './ITrieNode/ITrieNode.js';
-import { parseDictionary } from './SimpleDictionaryParser.js';
+import { parseDictionaryLegacy } from './SimpleDictionaryParser.js';
 import type { SuggestionOptions } from './suggestions/genSuggestionsOptions.js';
-import type { SuggestionCollectorOptions } from './suggestions/suggestCollector.js';
+import { suggestionCollector, type SuggestionCollectorOptions } from './suggestions/suggestCollector.js';
 import { clean } from './utils/clean.js';
 import { normalizeWordToLowercase } from './utils/normalizeWord.js';
+import { CompoundWordsMethod } from './walker/index.js';
 
 describe('Validate Trie Class', () => {
     const NumSuggestions: SuggestionOptions = { numSuggestions: 10 };
@@ -118,7 +119,7 @@ describe('Validate Trie Class', () => {
     });
 
     test('isSizeKnown', () => {
-        const trieModern = parseDictionary(`
+        const trieModern = parseDictionaryLegacy(`
         # Sample Word List
         begin*
         *end
@@ -153,7 +154,7 @@ describe('Validate Trie Class', () => {
         ${'playtime'}                       | ${false}      | ${false} | ${''}
         ${'playmiddletime'}                 | ${false}      | ${true}  | ${'cspell:disable-line'}
     `('hasWord $word $caseSensitive $found', ({ word, caseSensitive, found }: HasWordTestCase) => {
-        const trie = parseDictionary(`
+        const trie = parseDictionaryLegacy(`
         # Sample Word List
         Begin*
         *End
@@ -169,7 +170,7 @@ describe('Validate Trie Class', () => {
 
     // cspell:ignore begintime
     test('hasWord', () => {
-        const trie = parseDictionary(`
+        const trie = parseDictionaryLegacy(`
         # Sample Word List
         Begin*
         *End
@@ -202,7 +203,7 @@ describe('Validate Trie Class', () => {
     });
 
     test('find', () => {
-        const trie = parseDictionary(`
+        const trie = parseDictionaryLegacy(`
         # Sample Word List
         Begin*
         *End

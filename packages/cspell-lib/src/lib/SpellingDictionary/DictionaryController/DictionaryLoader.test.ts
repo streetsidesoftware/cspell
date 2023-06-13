@@ -167,6 +167,9 @@ describe('Validate DictionaryLoader', () => {
         ${dDef({ name: 'words', path: sample('words.txt.gz') })}        | ${'apple'}    | ${true}
         ${dDef({ name: 'words', path: dict('cities.trie.gz') })}        | ${'apple'}    | ${false}
         ${dDef({ name: 'words', path: dict('cities.trie.gz') })}        | ${'New York'} | ${true}
+        ${dDef({ name: 'words', path: dict('cities.trie.gz') })}        | ${'new york'} | ${true}
+        ${dDef({ name: 'words', path: dict('cities.trie') })}           | ${'New York'} | ${true}
+        ${dDef({ name: 'words', path: dict('cities.trie') })}           | ${'new york'} | ${true}
         ${dDef({ name: 'words', path: dict('cities.txt') })}            | ${'York'}     | ${false}
         ${dDef({ name: 'words', path: dict('cities.txt'), type: 'C' })} | ${'New York'} | ${false}
         ${dDef({ name: 'words', path: dict('cities.txt'), type: 'C' })} | ${'York'}     | ${true}
@@ -175,7 +178,7 @@ describe('Validate DictionaryLoader', () => {
         ${dDef({ name: 'words', path: dict('cities.txt'), type: 'W' })} | ${'New York'} | ${false}
         ${dDef({ name: 'words', path: dict('cities.txt'), type: 'W' })} | ${'York'}     | ${true}
         ${dDef({ name: 'words', path: dict('cities.txt'), type: 'W' })} | ${'York'}     | ${true}
-    `('sync load dict has word $def $word', ({ def, word, hasWord }) => {
+    `('sync load dict has word $def.path $word', ({ def, word, hasWord }) => {
         const d = dictionaryLoader.loadDictionarySync(def);
         expect(d.has(word)).toBe(hasWord);
     });

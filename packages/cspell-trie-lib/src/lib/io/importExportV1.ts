@@ -152,5 +152,5 @@ export function importTrie(linesX: Iterable<string> | IterableIterator<string>):
             },
             { lines: 0, nodes: [], root: {} }
         );
-    return trieNodeToRoot(n.root, {});
+    return trieNodeToRoot(n.root, { isCaseAware: false });
 }

@@ -27,15 +27,8 @@ import { trieNodeToRoot } from '../TrieNode/trie-util.js';
 import type { TrieNode, TrieRoot } from '../TrieNode/TrieNode.js';
 import { FLAG_WORD } from '../TrieNode/TrieNode.js';
 import { bufferLines } from '../utils/bufferLines.js';
+import { BACK, EOL, EOR, EOW, ESCAPE, LF, REF, REF_REL } from './constants.js';
 
-const EOW = '$'; // End of word
-const BACK = '<'; // Move up the tree
-const EOL = '\n'; // End of Line (ignored)
-const LF = '\r'; // Line Feed (ignored)
-const REF = '#'; // Start absolute of Reference
-const REF_REL = '@'; // Start indexed of Reference
-const EOR = ';'; // End of Reference
-const ESCAPE = '\\';
 const REF_INDEX_BEGIN = '[';
 const REF_INDEX_END = ']';
 const INLINE_DATA_COMMENT_LINE = '/';

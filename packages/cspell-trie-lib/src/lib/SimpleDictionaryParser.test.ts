@@ -1,7 +1,7 @@
 import { describe, expect, test } from 'vitest';
 
 import type { ParseDictionaryOptions } from './SimpleDictionaryParser.js';
-import { __testing__, parseDictionary, parseDictionaryLines } from './SimpleDictionaryParser.js';
+import { __testing__, parseDictionaryLegacy, parseDictionaryLines } from './SimpleDictionaryParser.js';
 
 const { splitLine } = __testing__;
 
@@ -30,7 +30,7 @@ describe('Validate SimpleDictionaryParser', () => {
     });
 
     test('basic test', () => {
-        const trie = parseDictionary(dictionary());
+        const trie = parseDictionaryLegacy(dictionary());
         const result = [...trie.words()];
         expect(result).toEqual([
             '!forbid',
@@ -68,14 +68,14 @@ describe('Validate SimpleDictionaryParser', () => {
             '~café',
             '~end',
         ];
-        const trie = parseDictionary(words.join('\n'));
+        const trie = parseDictionaryLegacy(words.join('\n'));
         const result = [...trie.words()];
         expect(result).toEqual(expected);
     });
 
     test('preserve cases', () => {
         const words = ['!forbid', '+End', '+Middle+', 'Begin', 'Begin+', 'Café', 'End'];
-        const trie = parseDictionary(words.join('\n'), { stripCaseAndAccents: false });
+        const trie = parseDictionaryLegacy(words.join('\n'), { stripCaseAndAccents: false });
         const result = [...trie.words()];
         expect(result).toEqual(words);
     });
@@ -136,7 +136,7 @@ describe('Validate SimpleDictionaryParser', () => {
         ${'gescháft'}      | ${true}    | ${false} | ${['geschaft', 'geschäft', 'Geschäft']}
         ${'resume'}        | ${false}   | ${false} | ${['resumé']}
     `('suggest "$word" ignore case $ignoreCase', ({ word, ignoreCase, has, expected }) => {
-        const trie = parseDictionary(dictionary2());
+        const trie = parseDictionaryLegacy(dictionary2());
         const r = trie.suggest(word, { numSuggestions: 10, ignoreCase });
         expect(r).toEqual(expected);
         expect(trie.hasWord(word, !ignoreCase)).toBe(has);

@@ -1,3 +1,4 @@
+/// <reference types="node" />
 import { SuggestionCostMapDef, DictionaryDefinitionAugmented } from '@cspell/cspell-types';
 export { SuggestionCostMapDef } from '@cspell/cspell-types';
 import { Operator } from '@cspell/cspell-pipe/sync';
@@ -37,6 +38,91 @@ declare const OPTIONAL_COMPOUND_FIX = "*";
 declare const CASE_INSENSITIVE_PREFIX = "~";
 declare const FORBID_PREFIX = "!";
 declare const defaultTrieInfo: TrieInfo;
+
+type ITrieNodeId = object | number | string;
+type Entry = readonly [string, ITrieNode];
+interface ITrieNode {
+    /**
+     * ITrieNode instances are not unique. It is possible for multiple ITrieNode instances to
+     * represent the same node.
+     * `id` is used to see if two instances refer to the same node.
+     * The type is obscured because it is up the the backing structure to provide the best value.
+     * Note, only nodes from the same root are guaranteed to be unique. It is possible for two
+     * different ITrieNode instances to have the same `id` value if they come from different roots.
+     */
+    readonly id: ITrieNodeId;
+    /** flag End of Word */
+    readonly eow: boolean;
+    /** number of children */
+    readonly size: number;
+    /** get keys to children */
+    keys(): readonly string[];
+    /** get keys to children */
+    values(): readonly ITrieNode[];
+    /** get the children as key value pairs */
+    entries(): readonly Entry[];
+    /** get child ITrieNode */
+    get(char: string): ITrieNode | undefined;
+    /** get a child by the key index */
+    child(idx: number): ITrieNode;
+    /** has child */
+    has(char: string): boolean;
+    /** `true` iff this node has children */
+    hasChildren(): boolean;
+}
+interface ITrieNodeRoot extends ITrieNode {
+    info: Readonly<TrieInfo>;
+    /**
+     * converts an `id` into a node.
+     * @param id an of a ITrieNode in this Trie
+     */
+    resolveId(id: ITrieNodeId): ITrieNode;
+}
+
+interface FindResult$1 {
+    found: string | false;
+    compoundUsed: boolean;
+    caseMatched: boolean;
+}
+interface FindFullResult$1 extends FindResult$1 {
+    /**
+     * Is the word explicitly forbidden.
+     * - `true` - word is in the forbidden list.
+     * - `false` - word is not in the forbidden list.
+     * - `undefined` - unknown - was not checked.
+     * */
+    forbidden: boolean | undefined;
+}
+
+declare const JOIN_SEPARATOR = "+";
+declare const WORD_SEPARATOR = " ";
+interface YieldResult$1 {
+    text: string;
+    node: TrieNode;
+    depth: number;
+}
+declare enum CompoundWordsMethod {
+    /**
+     * Do not compound words.
+     */
+    NONE = 0,
+    /**
+     * Create word compounds separated by spaces.
+     */
+    SEPARATE_WORDS = 1,
+    /**
+     * Create word compounds without separation.
+     */
+    JOIN_WORDS = 2
+}
+type WalkerIterator$1 = Generator<YieldResult$1, void, boolean | undefined>;
+
+interface YieldResult {
+    text: string;
+    node: ITrieNode;
+    depth: number;
+}
+type WalkerIterator = Generator<YieldResult, void, boolean | undefined>;
 
 /**
  * Costs are minimized while penalties are maximized.
@@ -115,60 +201,18 @@ declare function editDistanceWeighted(wordA: string, wordB: string, weights: Wei
  */
 declare function createWeightedMap(defs: SuggestionCostMapDef[]): WeightMap;
 
-interface ExportOptions {
-    base?: number;
-    comment?: string;
-    version?: number;
-    addLineBreaksToImproveDiffs?: boolean;
-}
-/**
- * Serialize a TrieNode.
- * Note: This is destructive.  The node will no longer be usable.
- * Even though it is possible to preserve the trie, dealing with very large tries can consume a lot of memory.
- * Considering this is the last step before exporting, it was decided to let this be destructive.
- */
-declare function serializeTrie(root: TrieRoot, options?: ExportOptions | number): Iterable<string>;
-declare function importTrie(input: Iterable<string> | IterableIterator<string> | string[] | string): TrieRoot;
-
-type DictionaryInformation = Exclude<DictionaryDefinitionAugmented['dictionaryInformation'], undefined>;
-
-declare function mapDictionaryInformationToWeightMap(dictInfo: DictionaryInformation): WeightMap;
-
-declare const JOIN_SEPARATOR = "+";
-declare const WORD_SEPARATOR = " ";
-interface YieldResult {
-    text: string;
-    node: TrieNode;
-    depth: number;
-}
-declare enum CompoundWordsMethod {
-    /**
-     * Do not compound words.
-     */
-    NONE = 0,
-    /**
-     * Create word compounds separated by spaces.
-     */
-    SEPARATE_WORDS = 1,
-    /**
-     * Create word compounds without separation.
-     */
-    JOIN_WORDS = 2
-}
-type WalkerIterator = Generator<YieldResult, void, boolean | undefined>;
-
 /**
  * Ask for the next result.
  * goDeeper of true tells the walker to go deeper in the Trie if possible. Default is true.
  * This can be used to limit the walker's depth.
  */
-type HintedWalkerIterator = Generator<YieldResult, void, Hinting | undefined>;
+type HintedWalkerIterator = Generator<YieldResult$1, void, Hinting | undefined>;
 declare function hintedWalker(root: TrieRoot, ignoreCase: boolean, hint: string, compoundingMethod: CompoundWordsMethod | undefined, emitWordSeparator?: string): HintedWalkerIterator;
 interface Hinting {
     goDeeper: boolean;
 }
 
-declare function walker(root: TrieNode, compoundingMethod?: CompoundWordsMethod): WalkerIterator;
+declare function walker(root: TrieNode, compoundingMethod?: CompoundWordsMethod): WalkerIterator$1;
 
 interface GenSuggestionOptionsStrict {
     /**
@@ -330,6 +374,116 @@ declare function suggestionCollector(wordToMatch: string, options: SuggestionCol
  */
 declare function impersonateCollector(collector: SuggestionCollector, word: string): SuggestionCollector;
 
+interface TrieData {
+    info: Readonly<TrieInfo>;
+    words(): Iterable<string>;
+    getRoot(): ITrieNodeRoot;
+    has(word: string): boolean;
+    isForbiddenWord(word: string): boolean;
+    hasForbiddenWords(): boolean;
+    size: number;
+}
+
+interface ITrie {
+    readonly data: TrieData;
+    /**
+     * Approximate number of words in the Trie, the first call to this method might be expensive.
+     * Use `size` to get the number of nodes.
+     *
+     * It does NOT count natural compound words. Natural compounds are words that are composed of appending
+     * multiple words to make a new word. This is common in languages like German and Dutch.
+     */
+    numWords(): number;
+    /**
+     * Used to check if the number of words has been calculated.
+     */
+    isNumWordsKnown(): boolean;
+    /**
+     * The number of nodes in the Trie. There is a rough corelation between the size and the number of words.
+     */
+    readonly size: number;
+    readonly info: Readonly<TrieInfo>;
+    /**
+     * @param text - text to find in the Trie
+     */
+    find(text: string): ITrieNode | undefined;
+    has(word: string): boolean;
+    has(word: string, minLegacyCompoundLength: boolean | number): boolean;
+    /**
+     * Determine if a word is in the dictionary.
+     * @param word - the exact word to search for - must be normalized.
+     * @param caseSensitive - false means also searching a dictionary where the words were normalized to lower case and accents removed.
+     * @returns true if the word was found and is not forbidden.
+     */
+    hasWord(word: string, caseSensitive: boolean): boolean;
+    findWord(word: string, options?: FindWordOptions$1): FindFullResult$1;
+    /**
+     * Determine if a word is in the forbidden word list.
+     * @param word the word to lookup.
+     */
+    isForbiddenWord(word: string): boolean;
+    /**
+     * Provides an ordered sequence of words with the prefix of text.
+     */
+    completeWord(text: string): Iterable<string>;
+    /**
+     * Suggest spellings for `text`.  The results are sorted by edit distance with changes near the beginning of a word having a greater impact.
+     * @param text - the text to search for
+     * @param options - Controls the generated suggestions:
+     * - ignoreCase - Ignore Case and Accents
+     * - numSuggestions - the maximum number of suggestions to return.
+     * - compoundMethod - Use to control splitting words.
+     * - changeLimit - the maximum number of changes allowed to text. This is an approximate value, since some changes cost less than others.
+     *                      the lower the value, the faster results are returned. Values less than 4 are best.
+     */
+    suggest(text: string, options: SuggestionOptions): string[];
+    /**
+     * Suggest spellings for `text`.  The results are sorted by edit distance with changes near the beginning of a word having a greater impact.
+     * The results include the word and adjusted edit cost.  This is useful for merging results from multiple tries.
+     */
+    suggestWithCost(text: string, options: SuggestionOptions): SuggestionResult[];
+    /**
+     * genSuggestions will generate suggestions and send them to `collector`. `collector` is responsible for returning the max acceptable cost.
+     * Costs are measured in weighted changes. A cost of 100 is the same as 1 edit. Some edits are considered cheaper.
+     * Returning a MaxCost < 0 will effectively cause the search for suggestions to stop.
+     */
+    genSuggestions(collector: SuggestionCollector, compoundMethod?: CompoundWordsMethod): void;
+    /**
+     * Returns an iterator that can be used to get all words in the trie. For some dictionaries, this can result in millions of words.
+     */
+    words(): Iterable<string>;
+    /**
+     * Allows iteration over the entire tree.
+     * On the returned Iterator, calling .next(goDeeper: boolean), allows for controlling the depth.
+     */
+    iterate(): WalkerIterator;
+}
+interface FindWordOptions$1 {
+    caseSensitive?: boolean;
+    useLegacyWordCompounds?: boolean | number;
+}
+
+declare function decodeTrie(raw: string | Buffer): ITrie;
+
+interface ExportOptions {
+    base?: number;
+    comment?: string;
+    version?: number;
+    addLineBreaksToImproveDiffs?: boolean;
+}
+/**
+ * Serialize a TrieNode.
+ * Note: This is destructive.  The node will no longer be usable.
+ * Even though it is possible to preserve the trie, dealing with very large tries can consume a lot of memory.
+ * Considering this is the last step before exporting, it was decided to let this be destructive.
+ */
+declare function serializeTrie(root: TrieRoot, options?: ExportOptions | number): Iterable<string>;
+declare function importTrie(input: Iterable<string> | IterableIterator<string> | string[] | string): TrieRoot;
+
+type DictionaryInformation = Exclude<DictionaryDefinitionAugmented['dictionaryInformation'], undefined>;
+
+declare function mapDictionaryInformationToWeightMap(dictInfo: DictionaryInformation): WeightMap;
+
 interface FindResult {
     found: string | false;
     compoundUsed: boolean;
@@ -411,7 +565,7 @@ declare class Trie {
      * Allows iteration over the entire tree.
      * On the returned Iterator, calling .next(goDeeper: boolean), allows for controlling the depth.
      */
-    iterate(): WalkerIterator;
+    iterate(): WalkerIterator$1;
     insert(word: string): this;
     private calcIsLegacy;
     static create(words: Iterable<string> | IterableIterator<string>, options?: PartialTrieInfo): Trie;
@@ -539,7 +693,7 @@ declare function orderTrie(node: TrieNode): void;
 /**
  * Generator an iterator that will walk the Trie parent then children in a depth first fashion that preserves sorted order.
  */
-declare function walk(node: TrieNode): Iterable<YieldResult>;
+declare function walk(node: TrieNode): Iterable<YieldResult$1>;
 declare const iterateTrie: typeof walk;
 /**
  * Generate a Iterator that can walk a Trie and yield the words.
@@ -603,4 +757,4 @@ declare const normalizeWordForCaseInsensitive: (text: string) => string[];
  */
 declare function expandCharacterSet(line: string, rangeChar?: string): Set<string>;
 
-export { CASE_INSENSITIVE_PREFIX, COMPOUND_FIX, ChildMap, CompoundWordsMethod, ExportOptions, FLAG_WORD, FORBID_PREFIX, FindFullResult, FindWordOptions, HintedWalkerIterator, Hinting, JOIN_SEPARATOR, MaxCost, OPTIONAL_COMPOUND_FIX, PartialTrieInfo as PartialTrieOptions, SuggestionCollector, SuggestionResult, Trie, TrieBuilder, TrieNode, TrieInfo as TrieOptions, TrieRoot, WORD_SEPARATOR, WalkerIterator, WeightMap, YieldResult, buildTrie, buildTrieFast, consolidate, countNodes, countWords, createDictionaryLineParserMapper as createDictionaryLineParser, createTrieRoot, createTrieRootFromList, createWeightedMap, defaultTrieInfo, defaultTrieInfo as defaultTrieOptions, editDistance, editDistanceWeighted, expandCharacterSet, findNode, has, hintedWalker, impersonateCollector, importTrie, insert, isCircular, isDefined, isWordTerminationNode, iterateTrie, iteratorTrieWords, mapDictionaryInformationToWeightMap, mergeDefaults, mergeOptionalWithDefaults, normalizeWord, normalizeWordForCaseInsensitive, normalizeWordToLowercase, orderTrie, parseDictionary, parseDictionaryLines, serializeTrie, suggestionCollector, trieNodeToRoot, walk, walker };
+export { CASE_INSENSITIVE_PREFIX, COMPOUND_FIX, ChildMap, CompoundWordsMethod, ExportOptions, FLAG_WORD, FORBID_PREFIX, FindFullResult, FindWordOptions, HintedWalkerIterator, Hinting, JOIN_SEPARATOR, MaxCost, OPTIONAL_COMPOUND_FIX, PartialTrieInfo as PartialTrieOptions, SuggestionCollector, SuggestionResult, Trie, TrieBuilder, TrieNode, TrieInfo as TrieOptions, TrieRoot, WORD_SEPARATOR, WalkerIterator$1 as WalkerIterator, WeightMap, YieldResult$1 as YieldResult, buildTrie, buildTrieFast, consolidate, countNodes, countWords, createDictionaryLineParserMapper as createDictionaryLineParser, createTrieRoot, createTrieRootFromList, createWeightedMap, decodeTrie, defaultTrieInfo, defaultTrieInfo as defaultTrieOptions, editDistance, editDistanceWeighted, expandCharacterSet, findNode, has, hintedWalker, impersonateCollector, importTrie, insert, isCircular, isDefined, isWordTerminationNode, iterateTrie, iteratorTrieWords, mapDictionaryInformationToWeightMap, mergeDefaults, mergeOptionalWithDefaults, normalizeWord, normalizeWordForCaseInsensitive, normalizeWordToLowercase, orderTrie, parseDictionary, parseDictionaryLines, serializeTrie, suggestionCollector, trieNodeToRoot, walk, walker };

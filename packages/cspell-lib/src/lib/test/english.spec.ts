@@ -1,3 +1,4 @@
+import { createSuggestOptions } from 'cspell-dictionary';
 import { describe, expect, test } from 'vitest';
 
 import * as getDictionary from '../getDictionary.js';
@@ -21,7 +22,10 @@ describe('Validate English', () => {
 
             const startTime = process.hrtime();
             // cspell:ignore installsallnecessary
-            const results = dict.suggest('installsallnecessary', 5, cspell.CompoundWordsMethod.SEPARATE_WORDS, 2);
+            const results = dict.suggest(
+                'installsallnecessary',
+                createSuggestOptions(5, cspell.CompoundWordsMethod.SEPARATE_WORDS, 3)
+            );
             const elapsed = elapsedTimeMsFrom(startTime);
             console.log(`Elapsed time ${elapsed.toFixed(2)}ms`);
             const sugs = results.map((a) => a.word);

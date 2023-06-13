@@ -1,6 +1,6 @@
 import { describe, expect, test } from 'vitest';
 
-import { parseDictionary } from '../SimpleDictionaryParser.js';
+import { parseDictionaryLegacy } from '../SimpleDictionaryParser.js';
 import type { Trie } from '../trie.js';
 import type { WalkItem, WalkNext } from './compoundWalker.js';
 import { compoundWalker, compoundWords } from './compoundWalker.js';
@@ -101,7 +101,7 @@ function* walkerToCompoundWords(stream: Generator<WalkItem, void, WalkNext>, max
 }
 
 function dictionary(): Trie {
-    return parseDictionary(`
+    return parseDictionaryLegacy(`
     # Sample dictionary
     *Error*
     *Errors

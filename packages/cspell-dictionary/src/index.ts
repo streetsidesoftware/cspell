@@ -22,4 +22,5 @@ export {
     createSpellingDictionary,
     createSpellingDictionaryFromTrieFile,
     createSuggestDictionary,
+    createSuggestOptions,
 } from './SpellingDictionary/index.js';
