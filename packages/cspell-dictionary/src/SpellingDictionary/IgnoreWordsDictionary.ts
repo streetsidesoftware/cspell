@@ -11,8 +11,8 @@ import type {
     SearchOptions,
     SpellingDictionary,
     SpellingDictionaryOptions,
-    SuggestOptions,
 } from './SpellingDictionary.js';
+import type { SuggestOptions } from './SuggestOptions.js';
 
 const NormalizeForm = 'NFC' as const;
 

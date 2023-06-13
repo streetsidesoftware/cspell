@@ -3,14 +3,7 @@ import type { TrieData } from '../TrieData.js';
 import { TrieNodeBuilder } from '../TrieNode/TrieNodeBuilder.js';
 import type { TrieNodeTrie } from '../TrieNode/TrieNodeTrie.js';
 import { getGlobalPerfTimer } from '../utils/timer.js';
-
-const EOW = '$'; // End of word
-const BACK = '<'; // Move up the tree
-const EOL = '\n'; // End of Line (ignored)
-const LF = '\r'; // Line Feed (ignored)
-const REF = '#'; // Start of Reference
-const EOR = ';'; // End of Reference
-const ESCAPE = '\\';
+import { BACK, EOL, EOR, EOW, ESCAPE, LF, REF } from './constants.js';
 
 const specialCharacterMap = new Map([
     ['\n', '\\n'],

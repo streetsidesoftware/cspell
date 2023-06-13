@@ -2,15 +2,8 @@ import { opAppend, pipe } from '@cspell/cspell-pipe/sync';
 
 import type { TrieNode, TrieRoot } from '../TrieNode/TrieNode.js';
 import { bufferLines } from '../utils/bufferLines.js';
+import { BACK, EOL, EOR, EOW, ESCAPE, LF, REF } from './constants.js';
 import { importTrieV3AsTrieRoot } from './importV3.js';
-
-const EOW = '$'; // End of word
-const BACK = '<'; // Move up the tree
-const EOL = '\n'; // End of Line (ignored)
-const LF = '\r'; // Line Feed (ignored)
-const REF = '#'; // Start of Reference
-const EOR = ';'; // End of Reference
-const ESCAPE = '\\';
 
 const specialCharacters = stringToCharSet(
     [EOW, BACK, EOL, REF, EOR, ESCAPE, LF, '0123456789', '`~!@#$%^&*()_-+=[]{};:\'"<>,./?\\|'].join('')

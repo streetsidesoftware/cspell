@@ -6,7 +6,7 @@ import { distanceAStarWeightedEx } from '../distance/distanceAStarWeighted.js';
 import { formatExResult } from '../distance/formatResultEx.js';
 import type { WeightMap } from '../distance/index.js';
 import { mapDictionaryInformationToWeightMap } from '../mappers/mapDictionaryInfoToWeightMap.js';
-import { parseLinesToDictionary } from '../SimpleDictionaryParser.js';
+import { parseLinesToDictionaryLegacy } from '../SimpleDictionaryParser.js';
 
 function getTrie() {
     return readTrieFromConfig('@cspell/dict-es-es/cspell-ext.json');
@@ -104,7 +104,7 @@ function c(word: string, cost: number) {
 const sampleWords = ['niño', 'niños', 'niña', 'niñeo', 'dino', 'nido'];
 
 function trieSimple() {
-    return parseLinesToDictionary(sampleWords);
+    return parseLinesToDictionaryLegacy(sampleWords);
 }
 
 const defaultDictInfo: DictionaryInformation = {

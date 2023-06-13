@@ -168,6 +168,7 @@ describe('docValidator', () => {
         ${fix('sample-with-many-errors.ts')}       | ${1}                 | ${['reciever', 'naame', 'Reciever', 'kount', 'colector', 'recievers']}                                                                                                                        | ${undefined}
         ${fix('parser/sample.ts')}                 | ${1}                 | ${['serrors']}                                                                                                                                                                                | ${['\\x73errors']}
         ${fix('sample-with-directives-errors.ts')} | ${1}                 | ${['disable-prev', 'ignored', 'world', 'enable-line']}                                                                                                                                        | ${undefined}
+        ${fix('sample-with-local-words.md')}       | ${undefined}         | ${[]}                                                                                                                                                                                         | ${undefined}
     `(
         'checkDocumentAsync $filename $maxDuplicateProblems',
         async ({ filename, maxDuplicateProblems, expectedIssues, expectedRawIssues }) => {

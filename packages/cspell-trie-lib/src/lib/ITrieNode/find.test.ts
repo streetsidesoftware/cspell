@@ -1,6 +1,6 @@
 import { describe, expect, test } from 'vitest';
 
-import { parseDictionary } from '../SimpleDictionaryParser.js';
+import { parseDictionaryLegacy } from '../SimpleDictionaryParser.js';
 import type { TrieData } from '../TrieData.js';
 import { TrieNodeTrie } from '../TrieNode/TrieNodeTrie.js';
 import type { FindFullResult } from './find.js';
@@ -190,7 +190,7 @@ function frCompoundFound(found: string | false, r: PartialFindFullResult = {}): 
 // cspell:ignore blueerror bluecode
 function dictionary(): TrieData {
     // camel case dictionary
-    const trie = parseDictionary(`
+    const trie = parseDictionaryLegacy(`
         café*
         +Code*
         +Codes

@@ -1,8 +1,9 @@
 import type { DictionaryInformation, ReplaceMap } from '@cspell/cspell-types';
-import type { CompoundWordsMethod, SuggestionCollector, SuggestionResult, WeightMap } from 'cspell-trie-lib';
+import type { SuggestionCollector, SuggestionResult, WeightMap } from 'cspell-trie-lib';
+
+import type { SuggestOptions } from './SuggestOptions.js';
 
 export type { DictionaryDefinitionInline } from '@cspell/cspell-types';
-export { CompoundWordsMethod, type SuggestionCollector, type SuggestionResult } from 'cspell-trie-lib';
 
 export interface SearchOptions {
     /**
@@ -15,42 +16,6 @@ export interface SearchOptions {
      * Ignore Case and Accents
      */
     ignoreCase?: boolean | undefined;
-}
-
-export interface SuggestOptions {
-    /**
-     * Compounding Mode.
-     * `NONE` is the best option.
-     */
-    compoundMethod?: CompoundWordsMethod | undefined;
-
-    /**
-     * The limit on the number of suggestions to generate. If `allowTies` is true, it is possible
-     * for more suggestions to be generated.
-     */
-    numSuggestions?: number | undefined;
-
-    /**
-     * Max number of changes / edits to the word to get to a suggestion matching suggestion.
-     */
-    numChanges?: number | undefined;
-
-    /**
-     * Allow for case-ingestive checking.
-     */
-    ignoreCase?: boolean | undefined;
-
-    /**
-     * If multiple suggestions have the same edit / change "cost", then included them even if
-     * it causes more than `numSuggestions` to be returned.
-     * @default false
-     */
-    includeTies?: boolean | undefined;
-
-    /**
-     * Maximum amount of time to allow for generating suggestions.
-     */
-    timeout?: number | undefined;
 }
 
 export type FindOptions = SearchOptions;
@@ -142,26 +107,11 @@ export interface SpellingDictionary extends DictionaryInfo {
      */
     isNoSuggestWord(word: string, options: HasOptions): boolean;
     /**
-     * Generate suggestions for a word.
-     * @param word - word
-     * @param numSuggestions - max number of suggestions to generate.
-     * @param compoundMethod - Default NONE.
-     * @param numChanges - Default 5
-     * @param ignoreCase - true
-     */
-    suggest(
-        word: string,
-        numSuggestions?: number,
-        compoundMethod?: CompoundWordsMethod,
-        numChanges?: number,
-        ignoreCase?: boolean
-    ): SuggestionResult[];
-    /**
      * Generate suggestions for a word
      * @param word - word
      * @param suggestOptions - options
      */
-    suggest(word: string, suggestOptions: SuggestOptions): SuggestionResult[];
+    suggest(word: string, suggestOptions?: SuggestOptions): SuggestionResult[];
 
     getPreferredSuggestions?: (word: string) => PreferredSuggestion[];
 
@@ -178,18 +128,6 @@ export interface SpellingDictionary extends DictionaryInfo {
     readonly isDictionaryCaseSensitive: boolean;
     getErrors?(): Error[];
 }
-
-export type SuggestArgs =
-    | Parameters<SpellingDictionary['suggest']>
-    | Parameters<
-          (
-              word: string,
-              numSuggestions?: number,
-              compoundMethod?: CompoundWordsMethod,
-              numChanges?: number,
-              ignoreCase?: boolean
-          ) => SuggestionResult[]
-      >;
 
 export const defaultOptions: SpellingDictionaryOptions = Object.freeze({
     weightMap: undefined,

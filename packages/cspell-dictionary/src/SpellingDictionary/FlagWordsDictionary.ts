@@ -1,6 +1,6 @@
 import { opMap, pipe } from '@cspell/cspell-pipe/sync';
-import type { CompoundWordsMethod, SuggestionResult, Trie } from 'cspell-trie-lib';
-import { buildTrieFast, parseDictionaryLines } from 'cspell-trie-lib';
+import type { CompoundWordsMethod, ITrie, SuggestionResult } from 'cspell-trie-lib';
+import { buildITrieFromWords, parseDictionaryLines } from 'cspell-trie-lib';
 
 import { createAutoResolveWeakCache } from '../util/AutoResolve.js';
 import * as Defaults from './defaults.js';
@@ -10,19 +10,17 @@ import type {
     IgnoreCaseOption,
     SpellingDictionary,
     SpellingDictionaryOptions,
-    SuggestArgs,
-    SuggestOptions,
 } from './SpellingDictionary.js';
 import { defaultOptions } from './SpellingDictionary.js';
 import { SpellingDictionaryFromTrie } from './SpellingDictionaryFromTrie.js';
-import { suggestArgsToSuggestOptions } from './SpellingDictionaryMethods.js';
+import type { SuggestOptions } from './SuggestOptions.js';
 import type { TyposDictionary } from './TyposDictionary.js';
 import { createTyposDictionary } from './TyposDictionary.js';
 
 class FlagWordsDictionaryTrie extends SpellingDictionaryFromTrie {
     readonly containsNoSuggestWords = false;
     readonly options: SpellingDictionaryOptions = {};
-    constructor(trie: Trie, readonly name: string, readonly source: string) {
+    constructor(trie: ITrie, readonly name: string, readonly source: string) {
         super(trie, name, defaultOptions, source);
     }
 
@@ -103,17 +101,7 @@ class FlagWordsDictionary implements SpellingDictionary {
         return this.dictTrie?.isNoSuggestWord(word, options) || this.dictTypos.isNoSuggestWord(word, options);
     }
 
-    suggest(
-        word: string,
-        numSuggestions?: number,
-        compoundMethod?: CompoundWordsMethod,
-        numChanges?: number,
-        ignoreCase?: boolean
-    ): SuggestionResult[];
-    suggest(word: string, suggestOptions: SuggestOptions): SuggestionResult[];
-    suggest(...args: SuggestArgs) {
-        const [word] = args;
-        const suggestOptions = suggestArgsToSuggestOptions(args);
+    suggest(word: string, suggestOptions: SuggestOptions = {}): SuggestionResult[] {
         return this.dictTypos.suggest(word, suggestOptions);
     }
     getPreferredSuggestions(word: string) {
@@ -169,7 +157,7 @@ export function createFlagWordsDictionary(
 const regExpCleanIgnore = /^(!!)+/;
 
 function buildTrieDict(words: Set<string>, name: string, source: string): FlagWordsDictionaryTrie {
-    const trie = buildTrieFast(
+    const trie = buildITrieFromWords(
         pipe(
             words,
             opMap((w) => '!' + w),

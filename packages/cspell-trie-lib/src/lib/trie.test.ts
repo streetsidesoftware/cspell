@@ -1,7 +1,7 @@
 import { describe, expect, test } from 'vitest';
 
 import { CompoundWordsMethod, defaultTrieInfo, suggestionCollector } from './index.js';
-import { parseDictionary } from './SimpleDictionaryParser.js';
+import { parseDictionaryLegacy } from './SimpleDictionaryParser.js';
 import type { SuggestionOptions } from './suggestions/genSuggestionsOptions.js';
 import type { SuggestionCollectorOptions } from './suggestions/suggestCollector.js';
 import { Trie } from './trie.js';
@@ -150,7 +150,7 @@ describe('Validate Trie Class', () => {
 
     test('isLegacy', () => {
         const trieLegacy = Trie.create(sampleWords);
-        const trieModern = parseDictionary(`
+        const trieModern = parseDictionaryLegacy(`
         # Sample Word List
         begin*
         *end
@@ -162,7 +162,7 @@ describe('Validate Trie Class', () => {
     });
 
     test('isSizeKnown', () => {
-        const trieModern = parseDictionary(`
+        const trieModern = parseDictionaryLegacy(`
         # Sample Word List
         begin*
         *end
@@ -197,7 +197,7 @@ describe('Validate Trie Class', () => {
         ${'playtime'}                       | ${false}      | ${false} | ${''}
         ${'playmiddletime'}                 | ${false}      | ${true}  | ${'cspell:disable-line'}
     `('hasWord $word $caseSensitive $found', ({ word, caseSensitive, found }: HasWordTestCase) => {
-        const trie = parseDictionary(`
+        const trie = parseDictionaryLegacy(`
         # Sample Word List
         Begin*
         *End
@@ -213,7 +213,7 @@ describe('Validate Trie Class', () => {
 
     // cspell:ignore begintime
     test('hasWord', () => {
-        const trie = parseDictionary(`
+        const trie = parseDictionaryLegacy(`
         # Sample Word List
         Begin*
         *End
@@ -246,7 +246,7 @@ describe('Validate Trie Class', () => {
     });
 
     test('find', () => {
-        const trie = parseDictionary(`
+        const trie = parseDictionaryLegacy(`
         # Sample Word List
         Begin*
         *End

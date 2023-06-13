@@ -62,12 +62,16 @@ interface CacheEntrySync extends CacheEntry {
     dictionary: SpellingDictionary;
 }
 
-type Reader = (filename: string) => Promise<Iterable<string>>;
-type ReaderSync = (filename: string) => Iterable<string>;
+interface Reader {
+    read(filename: string): Promise<string>;
+    readLines(filename: string): Promise<string[]>;
+    readSync(filename: string): string;
+    readLinesSync(filename: string): string[];
+}
 
 type LoaderType = keyof Loaders;
 type Loader = (reader: Reader, filename: string, options: LoadOptions) => Promise<SpellingDictionary>;
-type LoaderSync = (reader: ReaderSync, filename: string, options: LoadOptions) => SpellingDictionary;
+type LoaderSync = (reader: Reader, filename: string, options: LoadOptions) => SpellingDictionary;
 
 interface Loaders {
     S: Loader;
@@ -93,11 +97,9 @@ export class DictionaryLoader {
         { key: string; entry: CacheEntry }
     >();
     private reader: Reader;
-    private readerSync: ReaderSync;
 
     constructor(private cspellIO: CSpellIO) {
         this.reader = toReader(cspellIO);
-        this.readerSync = toReaderSync(cspellIO);
     }
 
     public loadDictionary(def: DictionaryDefinitionInternal): Promise<SpellingDictionary> {
@@ -212,7 +214,7 @@ export class DictionaryLoader {
         const stat = this.getStatSync(uri);
         const sig = now + Math.random();
         try {
-            const dictionary = loadSync(this.readerSync, uri, options);
+            const dictionary = loadSync(this.reader, uri, options);
             const pending = Promise.resolve([dictionary, stat] as const);
             return {
                 uri,
@@ -279,16 +281,11 @@ export class DictionaryLoader {
 }
 
 function toReader(cspellIO: CSpellIO): Reader {
-    return async function (filename: string) {
-        const res = await cspellIO.readFile(filename);
-        return res.content.split(/\n|\r\n|\r/);
-    };
-}
-
-function toReaderSync(cspellIO: CSpellIO): ReaderSync {
-    return function (filename: string) {
-        const res = cspellIO.readFileSync(filename);
-        return res.content.split(/\n|\r\n|\r/);
+    return {
+        read: async (filename) => (await cspellIO.readFile(filename)).content,
+        readLines: async (filename) => toLines((await cspellIO.readFile(filename)).content),
+        readSync: (filename) => cspellIO.readFileSync(filename).content,
+        readLinesSync: (filename) => toLines(cspellIO.readFileSync(filename).content),
     };
 }
 
@@ -324,19 +321,19 @@ function load(reader: Reader, uri: string, options: LoadOptions): Promise<Spelli
     return loader(reader, uri, options);
 }
 
-function loadSync(reader: ReaderSync, uri: string, options: LoadOptions): SpellingDictionary {
+function loadSync(reader: Reader, uri: string, options: LoadOptions): SpellingDictionary {
     const type = determineType(uri, options);
     const loader = loadersSync[type] || loaders.default;
     return loader(reader, uri, options);
 }
 
-async function legacyWordList(readLines: Reader, filename: string, options: LoadOptions) {
-    const lines = await readLines(filename);
+async function legacyWordList(reader: Reader, filename: string, options: LoadOptions) {
+    const lines = await reader.readLines(filename);
     return _legacyWordListSync(lines, filename, options);
 }
 
-function legacyWordListSync(readLinesSync: ReaderSync, filename: string, options: LoadOptions) {
-    const lines = readLinesSync(filename);
+function legacyWordListSync(reader: Reader, filename: string, options: LoadOptions) {
+    const lines = reader.readLinesSync(filename);
     return _legacyWordListSync(lines, filename, options);
 }
 
@@ -352,13 +349,13 @@ function _legacyWordListSync(lines: Iterable<string>, filename: string, options:
     return createSpellingDictionary(words, options.name, filename, options);
 }
 
-async function wordsPerLineWordList(readLines: Reader, filename: string, options: LoadOptions) {
-    const lines = await readLines(filename);
+async function wordsPerLineWordList(reader: Reader, filename: string, options: LoadOptions) {
+    const lines = await reader.readLines(filename);
     return _wordsPerLineWordList(lines, filename, options);
 }
 
-function wordsPerLineWordListSync(readLinesSync: ReaderSync, filename: string, options: LoadOptions) {
-    const lines = readLinesSync(filename);
+function wordsPerLineWordListSync(reader: Reader, filename: string, options: LoadOptions) {
+    const lines = reader.readLinesSync(filename);
     return _wordsPerLineWordList(lines, filename, options);
 }
 
@@ -375,21 +372,25 @@ function _wordsPerLineWordList(lines: Iterable<string>, filename: string, option
 }
 
 async function loadSimpleWordList(reader: Reader, filename: string, options: LoadOptions) {
-    const lines = await reader(filename);
+    const lines = await reader.readLines(filename);
     return createSpellingDictionary(lines, options.name, filename, options);
 }
 
-function loadSimpleWordListSync(readLinesSync: ReaderSync, filename: string, options: LoadOptions) {
-    const lines = readLinesSync(filename);
+function loadSimpleWordListSync(reader: Reader, filename: string, options: LoadOptions) {
+    const lines = reader.readLinesSync(filename);
     return createSpellingDictionary(lines, options.name, filename, options);
 }
 
-async function loadTrie(readLines: Reader, filename: string, options: LoadOptions) {
-    const lines = await readLines(filename);
-    return createSpellingDictionaryFromTrieFile(lines, options.name, filename, options);
+async function loadTrie(reader: Reader, filename: string, options: LoadOptions) {
+    const content = await reader.read(filename);
+    return createSpellingDictionaryFromTrieFile(content, options.name, filename, options);
 }
 
-function loadTrieSync(readLinesSync: ReaderSync, filename: string, options: LoadOptions) {
-    const lines = readLinesSync(filename);
-    return createSpellingDictionaryFromTrieFile(lines, options.name, filename, options);
+function loadTrieSync(reader: Reader, filename: string, options: LoadOptions) {
+    const content = reader.readSync(filename);
+    return createSpellingDictionaryFromTrieFile(content, options.name, filename, options);
+}
+
+function toLines(content: string): string[] {
+    return content.split(/\n|\r\n|\r/);
 }

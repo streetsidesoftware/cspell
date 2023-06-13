@@ -1,4 +1,5 @@
-import { CASE_INSENSITIVE_PREFIX } from 'cspell-trie-lib';
+import type { SuggestionCollector, SuggestionResult } from 'cspell-trie-lib';
+import { CASE_INSENSITIVE_PREFIX, CompoundWordsMethod } from 'cspell-trie-lib';
 import { genSequence } from 'gensequence';
 
 import { isDefined } from '../util/util.js';
@@ -9,18 +10,9 @@ import type {
     SearchOptions,
     SpellingDictionary,
     SpellingDictionaryOptions,
-    SuggestArgs,
-    SuggestionCollector,
-    SuggestionResult,
-    SuggestOptions,
 } from './SpellingDictionary.js';
-import { CompoundWordsMethod } from './SpellingDictionary.js';
-import {
-    defaultNumSuggestions,
-    hasOptionToSearchOption,
-    suggestArgsToSuggestOptions,
-    suggestionCollector,
-} from './SpellingDictionaryMethods.js';
+import { defaultNumSuggestions, hasOptionToSearchOption, suggestionCollector } from './SpellingDictionaryMethods.js';
+import type { SuggestOptions } from './SuggestOptions.js';
 
 function identityString(w: string): string {
     return w;
@@ -66,17 +58,7 @@ class SpellingDictionaryCollectionImpl implements SpellingDictionaryCollection {
         return !!this._isForbiddenInDict(word, ignoreCase) && !this.isNoSuggestWord(word, { ignoreCase });
     }
 
-    public suggest(
-        word: string,
-        numSuggestions?: number,
-        compoundMethod?: CompoundWordsMethod,
-        numChanges?: number,
-        ignoreCase?: boolean
-    ): SuggestionResult[];
-    public suggest(word: string, suggestOptions: SuggestOptions): SuggestionResult[];
-    public suggest(...args: SuggestArgs): SuggestionResult[] {
-        const [word] = args;
-        const suggestOptions = suggestArgsToSuggestOptions(args);
+    public suggest(word: string, suggestOptions: SuggestOptions = {}): SuggestionResult[] {
         return this._suggest(word, suggestOptions);
     }
 

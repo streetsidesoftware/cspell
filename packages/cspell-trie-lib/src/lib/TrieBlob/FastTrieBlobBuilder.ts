@@ -216,6 +216,11 @@ export class FastTrieBlobBuilder implements TrieBuilder<FastTrieBlob> {
             nodeIdx = p < len - 1 ? this.nodes.push([0]) - 1 : IdxEOW;
             node.push((nodeIdx << NodeChildRefShift) | letterIdx);
         }
+        if (nodeIdx > 1) {
+            // Make sure the EOW is set
+            const node = nodes[nodeIdx];
+            node[0] |= NodeMaskEOW;
+        }
 
         return this;
     }

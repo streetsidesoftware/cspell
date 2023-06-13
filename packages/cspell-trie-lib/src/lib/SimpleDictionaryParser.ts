@@ -1,5 +1,6 @@
 import { opCombine as opPipe, opConcatMap, type Operator, opFilter, opMap } from '@cspell/cspell-pipe/sync';
 
+import { buildITrieFromWords } from './buildITrie.js';
 import {
     CASE_INSENSITIVE_PREFIX,
     COMPOUND_FIX,
@@ -8,6 +9,7 @@ import {
     LINE_COMMENT,
     OPTIONAL_COMPOUND_FIX,
 } from './constants.js';
+import type { ITrie } from './ITrie.js';
 import type { Trie } from './trie.js';
 import { buildTrieFast } from './TrieBuilder.js';
 import { normalizeWord, normalizeWordForCaseInsensitive } from './utils/normalizeWord.js';
@@ -261,7 +263,7 @@ export function parseDictionaryLines(
     return createDictionaryLineParserMapper(options)(typeof lines === 'string' ? [lines] : lines);
 }
 
-export function parseLinesToDictionary(lines: Iterable<string>, options?: Partial<ParseDictionaryOptions>): Trie {
+export function parseLinesToDictionaryLegacy(lines: Iterable<string>, options?: Partial<ParseDictionaryOptions>): Trie {
     const _options = mergeOptions(_defaultOptions, options);
     const dictLines = parseDictionaryLines(lines, _options);
     return buildTrieFast([...new Set(dictLines)].sort(), {
@@ -271,8 +273,22 @@ export function parseLinesToDictionary(lines: Iterable<string>, options?: Partia
     });
 }
 
-export function parseDictionary(text: string, options?: Partial<ParseDictionaryOptions>): Trie {
-    return parseLinesToDictionary(text.split('\n'), options);
+export function parseDictionaryLegacy(text: string | string[], options?: Partial<ParseDictionaryOptions>): Trie {
+    return parseLinesToDictionaryLegacy(typeof text === 'string' ? text.split('\n') : text, options);
+}
+
+export function parseLinesToDictionary(lines: Iterable<string>, options?: Partial<ParseDictionaryOptions>): ITrie {
+    const _options = mergeOptions(_defaultOptions, options);
+    const dictLines = parseDictionaryLines(lines, _options);
+    return buildITrieFromWords([...new Set(dictLines)].sort(), {
+        compoundCharacter: _options.compoundCharacter,
+        forbiddenWordPrefix: _options.forbiddenPrefix,
+        stripCaseAndAccentsPrefix: _options.caseInsensitivePrefix,
+    });
+}
+
+export function parseDictionary(text: string | string[], options?: Partial<ParseDictionaryOptions>): ITrie {
+    return parseLinesToDictionary(typeof text === 'string' ? text.split('\n') : text, options);
 }
 
 // function escapeRegEx(s: string) {

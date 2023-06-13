@@ -2,33 +2,27 @@ import { opConcatMap, pipe } from '@cspell/cspell-pipe/sync';
 import type {
     FindFullResult,
     FindWordOptions,
+    ITrie,
     SuggestionCollector,
     SuggestionResult,
     WeightMap,
 } from 'cspell-trie-lib';
-import { CompoundWordsMethod, importTrie, suggestionCollector, Trie } from 'cspell-trie-lib';
+import { CompoundWordsMethod, decodeTrie, suggestionCollector } from 'cspell-trie-lib';
 
 import { autoCache, createCache01 } from '../util/AutoCache.js';
 import { clean } from '../util/clean.js';
 import { createMapper, createRepMapper } from '../util/repMap.js';
 import * as Defaults from './defaults.js';
-import type {
-    FindResult,
-    HasOptions,
-    SpellingDictionary,
-    SpellingDictionaryOptions,
-    SuggestArgs,
-    SuggestOptions,
-} from './SpellingDictionary.js';
+import type { FindResult, HasOptions, SpellingDictionary, SpellingDictionaryOptions } from './SpellingDictionary.js';
 import {
     createWeightMapFromDictionaryInformation,
     defaultNumSuggestions,
     hasOptionToSearchOption,
     impersonateCollector,
-    suggestArgsToSuggestOptions,
     wordSearchForms,
     wordSuggestFormsArray,
 } from './SpellingDictionaryMethods.js';
+import type { SuggestOptions } from './SuggestOptions.js';
 
 const findWordOptionsCaseSensitive: FindWordOptions = Object.freeze({ caseSensitive: true });
 const findWordOptionsNotCaseSensitive: FindWordOptions = Object.freeze({ caseSensitive: false });
@@ -47,7 +41,7 @@ export class SpellingDictionaryFromTrie implements SpellingDictionary {
     private weightMap: WeightMap | undefined;
 
     constructor(
-        readonly trie: Trie,
+        readonly trie: ITrie,
         readonly name: string,
         readonly options: SpellingDictionaryOptions,
         readonly source = 'from trie',
@@ -55,7 +49,7 @@ export class SpellingDictionaryFromTrie implements SpellingDictionary {
     ) {
         this.mapWord = createMapper(options.repMap, options.dictionaryInformation?.ignore);
         this.remapWord = createRepMapper(options.repMap, options.dictionaryInformation?.ignore);
-        this.isDictionaryCaseSensitive = options.caseSensitive ?? !trie.isLegacy;
+        this.isDictionaryCaseSensitive = options.caseSensitive ?? trie.isCaseAware;
         this.containsNoSuggestWords = options.noSuggest || false;
         this._size = size || 0;
         this.weightMap = options.weightMap || createWeightMapFromDictionaryInformation(options.dictionaryInformation);
@@ -161,17 +155,7 @@ export class SpellingDictionaryFromTrie implements SpellingDictionary {
         return this.trie.isForbiddenWord(word);
     });
 
-    public suggest(
-        word: string,
-        numSuggestions?: number,
-        compoundMethod?: CompoundWordsMethod,
-        numChanges?: number,
-        ignoreCase?: boolean
-    ): SuggestionResult[];
-    public suggest(word: string, suggestOptions: SuggestOptions): SuggestionResult[];
-    public suggest(...args: SuggestArgs): SuggestionResult[] {
-        const [word] = args;
-        const suggestOptions = suggestArgsToSuggestOptions(args);
+    public suggest(word: string, suggestOptions: SuggestOptions = {}): SuggestionResult[] {
         return this._suggest(word, suggestOptions);
     }
 
@@ -222,14 +206,12 @@ type FindAnyFormResult = FindFullResult;
  * @returns SpellingDictionary
  */
 export function createSpellingDictionaryFromTrieFile(
-    data: Iterable<string> | string,
+    data: string | Buffer,
     name: string,
     source: string,
     options: SpellingDictionaryOptions
 ): SpellingDictionary {
-    data = typeof data === 'string' ? data.split('\n') : data;
-    const trieNode = importTrie(data);
-    const trie = new Trie(trieNode);
+    const trie = decodeTrie(data);
     return new SpellingDictionaryFromTrie(trie, name, options, source);
 }
 

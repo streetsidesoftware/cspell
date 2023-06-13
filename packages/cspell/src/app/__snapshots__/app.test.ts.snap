@@ -405,8 +405,8 @@ exports[`Validate cli > app 'current_file' Expect Error: undefined 3`] = `
 exports[`Validate cli > app 'inline suggest' Expect Error: [Function CheckFailed] 1`] = `[]`;
 
 exports[`Validate cli > app 'inline suggest' Expect Error: [Function CheckFailed] 2`] = `
-"log	./fixtures/features/inline-suggest/README.md:7:3 - Unknown word (bluelist) Suggestions: [blueList*, bluefish, bluesiest, blueish, bluest]
-log	./fixtures/features/inline-suggest/README.md:8:3 - Unknown word (blulist) Suggestions: [blueList*, bullish, bluish, bluest, blueish]
+"log	./fixtures/features/inline-suggest/README.md:7:3 - Unknown word (bluelist) Suggestions: [blueList*, blueish, bluefish, bluesiest, bluest]
+log	./fixtures/features/inline-suggest/README.md:8:3 - Unknown word (blulist) Suggestions: [blueList*, bullish, bluish, blueish, bluest]
 error	CSpell: Files checked: 1, Issues found: 2 in 1 files"
 `;
 
@@ -940,12 +940,12 @@ exports[`Validate cli > app 'typos --no-show-suggestions' Expect Error: [Functio
 exports[`Validate cli > app 'typos --show-suggestions' Expect Error: [Function CheckFailed] 1`] = `[]`;
 
 exports[`Validate cli > app 'typos --show-suggestions' Expect Error: [Function CheckFailed] 2`] = `
-"log	./fixtures/features/typos/code.ts:1:26 - Unknown word (Orangges) Suggestions: [Oranges, Orangiest, Orangier, orange's, Orange's]
-log	./fixtures/features/typos/test.md:5:3 - Forbidden word (blacklist) Suggestions: [denylist*, backlist, backlists, blacklight, blackfish]
+"log	./fixtures/features/typos/code.ts:1:26 - Unknown word (Orangges) Suggestions: [Oranges, orange, Orange, Orangey, Orange's]
+log	./fixtures/features/typos/test.md:5:3 - Forbidden word (blacklist) Suggestions: [denylist*, backlist, blacklight, blackish, blackfish]
 log	./fixtures/features/typos/test.md:6:3 - Forbidden word (whitelist) Suggestions: [allowlist*, whitelists, whitelisted, whitefish, whitest]
-log	./fixtures/features/typos/test.md:7:3 - Forbidden word (rad) Suggestions: [cool*, rda, rads, raid, rand]
-log	./fixtures/features/typos/test.md:9:13 - Forbidden word (english) Suggestions: [English*, englished, english's, englisher, englishes]
-log	./fixtures/features/typos/test.md:9:38 - Forbidden word (Blacklisted) Suggestions: [Denylisted*, Blacklegged, Backlists, Backlist, Lackluster]
+log	./fixtures/features/typos/test.md:7:3 - Forbidden word (rad) Suggestions: [cool*, ard, rda, rads, raid]
+log	./fixtures/features/typos/test.md:9:13 - Forbidden word (english) Suggestions: [English*, english's, englished, englisher, englishes]
+log	./fixtures/features/typos/test.md:9:38 - Forbidden word (Blacklisted) Suggestions: [Denylisted*, Blacklegged, Backlist, Backlists, Backlashed]
 error	CSpell: Files checked: 3, Issues found: 6 in 2 files"
 `;
 
@@ -2087,10 +2087,12 @@ exports[`Validate cli > app suggest [ 'sug', 'mexico', '-d=en-gb' ] 2`] = `
  - mexico's
  - mexican
  - medicos
+ - medic
  - medich
  - medici
  - medics
- - melick"
+ - melick
+ - mesic"
 `;
 
 exports[`Validate cli > app suggest [ 'sug', 'mexico', '-d=en-gb' ] 3`] = `""`;

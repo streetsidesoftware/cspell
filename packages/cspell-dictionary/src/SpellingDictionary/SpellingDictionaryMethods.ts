@@ -3,7 +3,7 @@ import type { SuggestionResult, WeightMap } from 'cspell-trie-lib';
 import { mapDictionaryInformationToWeightMap } from 'cspell-trie-lib';
 
 import { isUpperCase, removeUnboundAccents, ucFirst } from '../util/text.js';
-import type { HasOptions, SearchOptions, SuggestArgs, SuggestOptions } from './SpellingDictionary.js';
+import type { HasOptions, SearchOptions } from './SpellingDictionary.js';
 
 export { impersonateCollector, suggestionCollector } from 'cspell-trie-lib';
 
@@ -91,19 +91,6 @@ export function canonicalSearchOptions(opt: SearchOptions): SearchOptions {
     return canOpts;
 }
 
-export function suggestArgsToSuggestOptions(args: SuggestArgs): SuggestOptions {
-    const [_word, options, compoundMethod, numChanges, ignoreCase] = args;
-    const suggestOptions: SuggestOptions =
-        typeof options === 'object'
-            ? options
-            : {
-                  numSuggestions: options,
-                  compoundMethod,
-                  numChanges,
-                  ignoreCase,
-              };
-    return suggestOptions;
-}
 export function createWeightMapFromDictionaryInformation(di: undefined): undefined;
 export function createWeightMapFromDictionaryInformation(di: DictionaryInformation): WeightMap;
 export function createWeightMapFromDictionaryInformation(di: DictionaryInformation | undefined): WeightMap | undefined;

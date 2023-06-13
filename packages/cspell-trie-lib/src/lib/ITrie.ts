@@ -1,44 +1,116 @@
 import { opAppend, opFilter, opMap, pipe } from '@cspell/cspell-pipe/sync';
 
-import { CASE_INSENSITIVE_PREFIX, COMPOUND_FIX, FORBID_PREFIX, OPTIONAL_COMPOUND_FIX } from './constants.js';
 import type { FindFullResult } from './ITrieNode/find.js';
 import { createFindOptions, findLegacyCompound, findWord, findWordNode, isForbiddenWord } from './ITrieNode/find.js';
 import type { FindOptions, PartialFindOptions } from './ITrieNode/FindOptions.js';
 import type { ITrieNode, ITrieNodeRoot } from './ITrieNode/index.js';
-import { countNodes, countWords, iteratorTrieWords } from './ITrieNode/trie-util.js';
+import { countWords, iteratorTrieWords } from './ITrieNode/trie-util.js';
 import type { PartialTrieInfo, TrieInfo } from './ITrieNode/TrieInfo.js';
 import { walker } from './ITrieNode/walker/walker.js';
 import type { CompoundWordsMethod, WalkerIterator } from './ITrieNode/walker/walkerTypes.js';
 import type { SuggestionCollector, SuggestionResult } from './suggestCollector.js';
 import { createSuggestionOptions, type SuggestionOptions } from './suggestions/genSuggestionsOptions.js';
 import { genSuggestions, suggest } from './suggestions/suggestTrieData.js';
+import { FastTrieBlobBuilder } from './TrieBlob/FastTrieBlobBuilder.js';
 import type { TrieData } from './TrieData.js';
-import { TrieNodeTrie } from './TrieNode/TrieNodeTrie.js';
 import { clean } from './utils/clean.js';
 import { mergeOptionalWithDefaults } from './utils/mergeOptionalWithDefaults.js';
 import { replaceAllFactory } from './utils/util.js';
 
-export {
-    CASE_INSENSITIVE_PREFIX,
-    COMPOUND_FIX,
-    defaultTrieInfo,
-    FORBID_PREFIX,
-    OPTIONAL_COMPOUND_FIX,
-} from './constants.js';
-export { PartialTrieInfo, TrieInfo } from './ITrieNode/TrieInfo.js';
-
-/** @deprecated */
-export const COMPOUND = COMPOUND_FIX;
-/** @deprecated */
-export const OPTIONAL_COMPOUND = OPTIONAL_COMPOUND_FIX;
-/** @deprecated */
-export const NORMALIZED = CASE_INSENSITIVE_PREFIX;
-/** @deprecated */
-export const FORBID = FORBID_PREFIX;
-
 const defaultLegacyMinCompoundLength = 3;
 
-export class ITrie {
+export interface ITrie {
+    readonly data: TrieData;
+
+    /**
+     * Approximate number of words in the Trie, the first call to this method might be expensive.
+     * Use `size` to get the number of nodes.
+     *
+     * It does NOT count natural compound words. Natural compounds are words that are composed of appending
+     * multiple words to make a new word. This is common in languages like German and Dutch.
+     */
+    numWords(): number;
+
+    /**
+     * Used to check if the number of words has been calculated.
+     */
+    isNumWordsKnown(): boolean;
+
+    /**
+     * The number of nodes in the Trie. There is a rough corelation between the size and the number of words.
+     */
+    readonly size: number;
+    readonly info: Readonly<TrieInfo>;
+
+    /**
+     * @param text - text to find in the Trie
+     */
+    find(text: string): ITrieNode | undefined;
+
+    has(word: string): boolean;
+    has(word: string, minLegacyCompoundLength: boolean | number): boolean;
+
+    /**
+     * Determine if a word is in the dictionary.
+     * @param word - the exact word to search for - must be normalized.
+     * @param caseSensitive - false means also searching a dictionary where the words were normalized to lower case and accents removed.
+     * @returns true if the word was found and is not forbidden.
+     */
+    hasWord(word: string, caseSensitive: boolean): boolean;
+
+    findWord(word: string, options?: FindWordOptions): FindFullResult;
+
+    /**
+     * Determine if a word is in the forbidden word list.
+     * @param word the word to lookup.
+     */
+    isForbiddenWord(word: string): boolean;
+
+    /**
+     * Provides an ordered sequence of words with the prefix of text.
+     */
+    completeWord(text: string): Iterable<string>;
+
+    /**
+     * Suggest spellings for `text`.  The results are sorted by edit distance with changes near the beginning of a word having a greater impact.
+     * @param text - the text to search for
+     * @param options - Controls the generated suggestions:
+     * - ignoreCase - Ignore Case and Accents
+     * - numSuggestions - the maximum number of suggestions to return.
+     * - compoundMethod - Use to control splitting words.
+     * - changeLimit - the maximum number of changes allowed to text. This is an approximate value, since some changes cost less than others.
+     *                      the lower the value, the faster results are returned. Values less than 4 are best.
+     */
+    suggest(text: string, options: SuggestionOptions): string[];
+
+    /**
+     * Suggest spellings for `text`.  The results are sorted by edit distance with changes near the beginning of a word having a greater impact.
+     * The results include the word and adjusted edit cost.  This is useful for merging results from multiple tries.
+     */
+    suggestWithCost(text: string, options: SuggestionOptions): SuggestionResult[];
+
+    /**
+     * genSuggestions will generate suggestions and send them to `collector`. `collector` is responsible for returning the max acceptable cost.
+     * Costs are measured in weighted changes. A cost of 100 is the same as 1 edit. Some edits are considered cheaper.
+     * Returning a MaxCost < 0 will effectively cause the search for suggestions to stop.
+     */
+    genSuggestions(collector: SuggestionCollector, compoundMethod?: CompoundWordsMethod): void;
+
+    /**
+     * Returns an iterator that can be used to get all words in the trie. For some dictionaries, this can result in millions of words.
+     */
+    words(): Iterable<string>;
+
+    /**
+     * Allows iteration over the entire tree.
+     * On the returned Iterator, calling .next(goDeeper: boolean), allows for controlling the depth.
+     */
+    iterate(): WalkerIterator;
+
+    get isCaseAware(): boolean;
+}
+
+export class ITrieImpl implements ITrie {
     private _info: TrieInfo;
     private _findOptionsDefaults: PartialFindOptions;
     private hasForbidden: boolean;
@@ -68,13 +140,16 @@ export class ITrie {
         return this.count !== undefined;
     }
 
-    size(): number {
-        this.numNodes ??= countNodes(this.data.getRoot());
-        return this.numNodes;
+    get size(): number {
+        return this.data.size;
     }
 
     get info(): Readonly<TrieInfo> {
         return this._info;
+    }
+
+    get isCaseAware(): boolean {
+        return this.info.isCaseAware ?? true;
     }
 
     /**
@@ -200,9 +275,11 @@ export class ITrie {
         return walker(this.root);
     }
 
-    static create(words: Iterable<string> | IterableIterator<string>, options?: PartialTrieInfo): ITrie {
-        const root = TrieNodeTrie.createFromWords(words, options);
-        return new ITrie(root, undefined);
+    static create(words: Iterable<string> | IterableIterator<string>, info?: PartialTrieInfo): ITrie {
+        const builder = new FastTrieBlobBuilder(info);
+        builder.insert(words);
+        const root = builder.build();
+        return new ITrieImpl(root, undefined);
     }
 
     private createFindOptions(options: PartialFindOptions = {}): FindOptions {

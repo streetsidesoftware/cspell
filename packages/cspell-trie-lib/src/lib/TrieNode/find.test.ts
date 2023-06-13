@@ -1,6 +1,6 @@
 import { describe, expect, test } from 'vitest';
 
-import { parseDictionary } from '../SimpleDictionaryParser.js';
+import { parseDictionaryLegacy } from '../SimpleDictionaryParser.js';
 import { Trie } from '../trie.js';
 import type { FindFullResult, PartialFindOptions } from './find.js';
 import { __testing__, createFindOptions, findLegacyCompound, findWord } from './find.js';
@@ -188,7 +188,7 @@ function frCompoundFound(found: string | false, r: PartialFindFullResult = {}): 
 // cspell:ignore blueerror bluecode
 function dictionary(): Trie {
     // camel case dictionary
-    return parseDictionary(`
+    return parseDictionaryLegacy(`
         café*
         +Code*
         +Codes

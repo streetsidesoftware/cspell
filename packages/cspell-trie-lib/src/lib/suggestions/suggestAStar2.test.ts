@@ -1,6 +1,6 @@
 import { describe, expect, test } from 'vitest';
 
-import { parseDictionary } from '../SimpleDictionaryParser.js';
+import { parseDictionaryLegacy } from '../SimpleDictionaryParser.js';
 import { TrieNodeTrie } from '../TrieNode/TrieNodeTrie.js';
 import { CompoundWordsMethod } from '../walker/index.js';
 import type { SuggestionOptions } from './genSuggestionsOptions.js';
@@ -183,6 +183,6 @@ function createTrieFromWords(words: string[]) {
 }
 
 function parseDict(dict: string) {
-    const trie = parseDictionary(dict);
+    const trie = parseDictionaryLegacy(dict);
     return new TrieNodeTrie(trie.root);
 }

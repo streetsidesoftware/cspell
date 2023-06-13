@@ -84,8 +84,8 @@ class ImplITrieRoot extends ImplITrieNode implements ITrieNodeRoot {
 
     protected constructor(readonly root: TrieRoot) {
         super(root);
-        const { stripCaseAndAccentsPrefix, compoundCharacter, forbiddenWordPrefix } = root;
-        this.info = { stripCaseAndAccentsPrefix, compoundCharacter, forbiddenWordPrefix };
+        const { stripCaseAndAccentsPrefix, compoundCharacter, forbiddenWordPrefix, isCaseAware } = root;
+        this.info = { stripCaseAndAccentsPrefix, compoundCharacter, forbiddenWordPrefix, isCaseAware };
     }
 
     get eow(): boolean {

@@ -11,4 +11,5 @@ export const defaultTrieInfo: TrieInfo = Object.freeze({
     compoundCharacter: COMPOUND_FIX,
     forbiddenWordPrefix: FORBID_PREFIX,
     stripCaseAndAccentsPrefix: CASE_INSENSITIVE_PREFIX,
+    isCaseAware: true,
 });

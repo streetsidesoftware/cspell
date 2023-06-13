@@ -1,6 +1,6 @@
 import { describe, expect, test } from 'vitest';
 
-import { parseDictionary } from '../SimpleDictionaryParser.js';
+import { parseDictionaryLegacy } from '../SimpleDictionaryParser.js';
 import { Trie } from '../trie.js';
 import { cleanCopy } from '../utils/util.js';
 import * as Walker from '../walker/index.js';
@@ -204,7 +204,7 @@ describe('Validate Suggest', () => {
         ${'walkingtree'}  | ${undefined} | ${5}           | ${undefined} | ${[sr('talkingtree', 99), sr('walkingstick', 359), sr('walkingpod', 363), sr('walkingPod', 363), sr('walking', 372)]}
         ${'running'}      | ${undefined} | ${2}           | ${undefined} | ${[sr('running', 0), sr('Running', 1)]}
     `('suggestion results $word', ({ word, ignoreCase, numSuggestions, changeLimit, expected }) => {
-        const trie = parseDictionary(`
+        const trie = parseDictionaryLegacy(`
             walk
             Running*
             walking*
@@ -234,7 +234,7 @@ describe('Validate Suggest', () => {
         ${'free'}         | ${undefined} | ${2}           | ${2}        | ${[sr('tree', 99)]}
         ${'stock'}        | ${undefined} | ${2}           | ${2}        | ${[sr('stick', 97)]}
     `('suggestWithCost results $word', ({ word, ignoreCase, numSuggestions, changeLimit, expected }) => {
-        const trie = parseDictionary(`
+        const trie = parseDictionaryLegacy(`
             walk
             Running*
             walking*
@@ -265,7 +265,7 @@ describe('Validate Suggest', () => {
         ${'stock'}        | ${undefined} | ${2}           | ${2}        | ${[sr('stick', 97)]}
         ${'stretwise'}    | ${undefined} | ${2}           | ${2}        | ${[sr('streetwise', 95), sr('street•wise', 95)]}
     `('suggestWithCost and separator $word', ({ word, ignoreCase, numSuggestions, changeLimit, expected }) => {
-        const trie = parseDictionary(`
+        const trie = parseDictionaryLegacy(`
             walk
             Running*
             walking*
