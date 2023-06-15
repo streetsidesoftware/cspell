@@ -1,5 +1,6 @@
 import { consolidate } from '../consolidate.js';
-import type { ITrieNodeRoot } from '../ITrieNode/ITrieNode.js';
+import type { ITrieNode, ITrieNodeRoot } from '../ITrieNode/ITrieNode.js';
+import { findNode } from '../ITrieNode/trie-util.js';
 import type { PartialTrieOptions, TrieOptions } from '../trie.js';
 import type { TrieData } from '../TrieData.js';
 import { mergeOptionalWithDefaults } from '../utils/mergeOptionalWithDefaults.js';
@@ -22,6 +23,10 @@ export class TrieNodeTrie implements TrieData {
 
     getRoot(): ITrieNodeRoot {
         return this.iTrieRoot;
+    }
+
+    getNode(prefix: string): ITrieNode | undefined {
+        return findNode(this.getRoot(), prefix);
     }
 
     words(): Iterable<string> {

@@ -4,6 +4,83 @@ export { SuggestionCostMapDef } from '@cspell/cspell-types';
 import { Operator } from '@cspell/cspell-pipe/sync';
 
 /**
+ * Costs are minimized while penalties are maximized.
+ */
+interface Cost$1 {
+    /**
+     * The cost of an operation
+     * `c'' = min(c, c')`
+     */
+    c?: number | undefined;
+    /**
+     * The penalties applied
+     * `p'' = max(p, p')`
+     */
+    p?: number | undefined;
+}
+interface TrieCost extends Cost$1 {
+    /** nested trie nodes */
+    n?: Record<string, TrieCost>;
+}
+interface TrieTrieCost {
+    /** nested trie nodes */
+    n?: Record<string, TrieTrieCost>;
+    /** root of cost trie */
+    t?: Record<string, TrieCost>;
+}
+interface CostPosition {
+    a: string;
+    ai: number;
+    b: string;
+    bi: number;
+    c: number;
+    p: number;
+}
+interface WeightMap {
+    readonly insDel: TrieCost;
+    readonly replace: TrieTrieCost;
+    readonly swap: TrieTrieCost;
+    readonly adjustments: Map<string, PenaltyAdjustment>;
+    calcInsDelCosts(pos: CostPosition): Iterable<CostPosition>;
+    calcSwapCosts(pos: CostPosition): Iterable<CostPosition>;
+    calcReplaceCosts(pos: CostPosition): Iterable<CostPosition>;
+    calcAdjustment(word: string): number;
+}
+interface PenaltyAdjustment {
+    /** Penalty Identifier */
+    id: string;
+    /** RegExp Pattern to match */
+    regexp: RegExp;
+    /** Penalty to apply */
+    penalty: number;
+}
+
+/**
+ * Calculate the edit distance between any two words.
+ * Use the Damerau–Levenshtein distance algorithm.
+ * @param wordA
+ * @param wordB
+ * @param editCost - the cost of each edit (defaults to 100)
+ * @returns the edit distance.
+ */
+declare function editDistance(wordA: string, wordB: string, editCost?: number): number;
+/**
+ * Calculate the weighted edit distance between any two words.
+ * @param wordA
+ * @param wordB
+ * @param weights - the weights to use
+ * @param editCost - the cost of each edit (defaults to 100)
+ * @returns the edit distance
+ */
+declare function editDistanceWeighted(wordA: string, wordB: string, weights: WeightMap, editCost?: number): number;
+/**
+ * Collect Map definitions into a single weighted map.
+ * @param defs - list of definitions
+ * @returns A Weighted Map to be used with distance calculations.
+ */
+declare function createWeightedMap(defs: SuggestionCostMapDef[]): WeightMap;
+
+/**
  * Make all properties in T optional and Possibly undefined
  */
 type PartialWithUndefined<T> = {
@@ -111,84 +188,12 @@ interface YieldResult {
     node: ITrieNode;
     depth: number;
 }
-type WalkerIterator = Generator<YieldResult, void, boolean | undefined>;
-
+type FalseToNotGoDeeper = boolean;
 /**
- * Costs are minimized while penalties are maximized.
+ * By default a Walker Iterator will go depth first. To prevent the
+ * walker from going deeper use `iterator.next(false)`.
  */
-interface Cost$1 {
-    /**
-     * The cost of an operation
-     * `c'' = min(c, c')`
-     */
-    c?: number | undefined;
-    /**
-     * The penalties applied
-     * `p'' = max(p, p')`
-     */
-    p?: number | undefined;
-}
-interface TrieCost extends Cost$1 {
-    /** nested trie nodes */
-    n?: Record<string, TrieCost>;
-}
-interface TrieTrieCost {
-    /** nested trie nodes */
-    n?: Record<string, TrieTrieCost>;
-    /** root of cost trie */
-    t?: Record<string, TrieCost>;
-}
-interface CostPosition {
-    a: string;
-    ai: number;
-    b: string;
-    bi: number;
-    c: number;
-    p: number;
-}
-interface WeightMap {
-    readonly insDel: TrieCost;
-    readonly replace: TrieTrieCost;
-    readonly swap: TrieTrieCost;
-    readonly adjustments: Map<string, PenaltyAdjustment>;
-    calcInsDelCosts(pos: CostPosition): Iterable<CostPosition>;
-    calcSwapCosts(pos: CostPosition): Iterable<CostPosition>;
-    calcReplaceCosts(pos: CostPosition): Iterable<CostPosition>;
-    calcAdjustment(word: string): number;
-}
-interface PenaltyAdjustment {
-    /** Penalty Identifier */
-    id: string;
-    /** RegExp Pattern to match */
-    regexp: RegExp;
-    /** Penalty to apply */
-    penalty: number;
-}
-
-/**
- * Calculate the edit distance between any two words.
- * Use the Damerau–Levenshtein distance algorithm.
- * @param wordA
- * @param wordB
- * @param editCost - the cost of each edit (defaults to 100)
- * @returns the edit distance.
- */
-declare function editDistance(wordA: string, wordB: string, editCost?: number): number;
-/**
- * Calculate the weighted edit distance between any two words.
- * @param wordA
- * @param wordB
- * @param weights - the weights to use
- * @param editCost - the cost of each edit (defaults to 100)
- * @returns the edit distance
- */
-declare function editDistanceWeighted(wordA: string, wordB: string, weights: WeightMap, editCost?: number): number;
-/**
- * Collect Map definitions into a single weighted map.
- * @param defs - list of definitions
- * @returns A Weighted Map to be used with distance calculations.
- */
-declare function createWeightedMap(defs: SuggestionCostMapDef[]): WeightMap;
+type WalkerIterator = Generator<YieldResult, void, FalseToNotGoDeeper | undefined>;
 
 /**
  * Ask for the next result.
@@ -247,7 +252,7 @@ interface SuggestionOptionsStrict extends GenSuggestionOptionsStrict {
     /**
      * Apply weights to improve the suggestions.
      */
-    weightMap?: WeightMap;
+    weightMap?: WeightMap | undefined;
 }
 type SuggestionOptions = Partial<SuggestionOptionsStrict>;
 
@@ -367,6 +372,7 @@ interface TrieData {
     info: Readonly<TrieInfo>;
     words(): Iterable<string>;
     getRoot(): ITrieNodeRoot;
+    getNode(prefix: string): ITrieNode | undefined;
     has(word: string): boolean;
     isForbiddenWord(word: string): boolean;
     hasForbiddenWords(): boolean;
@@ -446,6 +452,7 @@ interface ITrie {
      * On the returned Iterator, calling .next(goDeeper: boolean), allows for controlling the depth.
      */
     iterate(): WalkerIterator;
+    weightMap: WeightMap | undefined;
     get isCaseAware(): boolean;
 }
 interface FindWordOptions$1 {

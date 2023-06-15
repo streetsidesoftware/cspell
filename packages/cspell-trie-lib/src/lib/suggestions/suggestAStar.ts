@@ -1,3 +1,4 @@
+import type { TrieCost, WeightMap } from '../distance/weightedMaps.js';
 import type { ITrieNode, TrieOptions } from '../ITrieNode/index.js';
 import { CompoundWordsMethod, JOIN_SEPARATOR, WORD_SEPARATOR } from '../ITrieNode/walker/index.js';
 import type { TrieData } from '../TrieData.js';
@@ -49,13 +50,7 @@ function comparePath(a: PNode, b: PNode): number {
 
 export function suggestAStar(trie: TrieData, word: string, options: SuggestionOptions = {}): SuggestionResult[] {
     const opts = createSuggestionOptions(options);
-    const collector = suggestionCollector(word, {
-        numSuggestions: opts.numSuggestions,
-        changeLimit: opts.changeLimit,
-        includeTies: opts.includeTies,
-        ignoreCase: opts.ignoreCase,
-        timeout: opts.timeout,
-    });
+    const collector = suggestionCollector(word, opts);
     collector.collect(getSuggestionsAStar(trie, word, opts));
     return collector.suggestions;
 }
@@ -65,7 +60,7 @@ export function* getSuggestionsAStar(
     srcWord: string,
     options: SuggestionOptions = {}
 ): SuggestionGenerator {
-    const { compoundMethod, changeLimit, ignoreCase } = createSuggestionOptions(options);
+    const { compoundMethod, changeLimit, ignoreCase, weightMap } = createSuggestionOptions(options);
     const visMap = visualLetterMaskMap;
     const root = trie.getRoot();
     const rootIgnoreCase = (ignoreCase && root.get(root.info.stripCaseAndAccentsPrefix)) || undefined;
@@ -184,6 +179,10 @@ export function* getSuggestionsAStar(
                 nn && (yield nn);
             }
 
+            if (weightMap) {
+                // yield* processWeightMapEdges(p, weightMap);
+            }
+
             // Double letter, delete 1
             const ns = srcWord[i + 1];
             if (s == ns && mIdx >= 0) {
@@ -251,6 +250,15 @@ export function* getSuggestionsAStar(
             }
         }
     }
+
+    // function* processWeightMapEdges(p: PNode, weightMap: WeightMap): Iterable<PNode> {
+    //     const { n, i, t } = p;
+    //     const keys = n.keys();
+
+    //     function delLetters() {
+
+    //     }
+    // }
 }
 
 function createCostTrie(): CostTrie {
@@ -316,7 +324,86 @@ function editHistory(p: PNode) {
     return nodes.map((n) => ({ i: n.i, c: n.c, a: n.a, s: n.s }));
 }
 
+function weightedDeleteCosts(weightMap: WeightMap, word: string, i: number) {
+    return [...searchTrieCostNodesMatchingWord(weightMap.insDel, word, i)].map((a) => ({
+        i: a.i,
+        c: a.t.c,
+    }));
+}
+
+function weightedInsertCosts(weightMap: WeightMap, node: ITrieNode) {
+    return [...searchTrieCostNodesMatchingTrie(weightMap.insDel, node)].map(({ s, n, t }) => ({ s, n, c: t.c }));
+}
+
+interface WeightedReplaceCosts {
+    i: number;
+    c: number;
+    n: ITrieNode;
+    s: string;
+}
+
+function* weightedReplaceCosts(
+    weightMap: WeightMap,
+    word: string,
+    i: number,
+    node: ITrieNode
+): Iterable<WeightedReplaceCosts> {
+    const remove = searchTrieCostNodesMatchingWord(weightMap.replace, word, i);
+    for (const r of remove) {
+        const tInsert = r.t.t;
+        if (!tInsert) continue;
+        const i = r.i;
+        for (const ins of searchTrieCostNodesMatchingTrie<TrieCost>(tInsert, node)) {
+            const { n, s } = ins;
+            const c = ins.t.c;
+            if (c === undefined) continue;
+            yield { i, c, n, s };
+        }
+    }
+}
+
+function* searchTrieCostNodesMatchingWord<T extends { n?: Record<string, T> }>(trie: T, word: string, i: number) {
+    const len = word.length;
+
+    for (let n = trie.n; i < len && n; ) {
+        const t = n[word[i]];
+        if (!t) return;
+        ++i;
+        yield { i, t };
+        n = t.n;
+    }
+}
+
+interface SearchMatchingTrie<T> {
+    s: string;
+    t: T;
+    n: ITrieNode;
+}
+
+function* searchTrieCostNodesMatchingTrie<T extends { n?: Record<string, T> }>(
+    trie: T,
+    node: ITrieNode,
+    s = ''
+): Iterable<SearchMatchingTrie<T>> {
+    const n = trie.n;
+    if (!n) return;
+    const keys = node.keys();
+    for (let i = 0; i < keys.length; ++i) {
+        const key = keys[i];
+        const t = n[key];
+        if (!t) continue;
+        const c = node.child(i);
+        const pfx = s + key;
+        yield { s: pfx, t, n: c };
+        yield* searchTrieCostNodesMatchingTrie(t, c, pfx);
+    }
+}
+
 export const __testing__ = {
     comparePath,
     editHistory,
+    searchTrieCostNodesMatchingWord,
+    weightedDeleteCosts,
+    weightedInsertCosts,
+    weightedReplaceCosts,
 };

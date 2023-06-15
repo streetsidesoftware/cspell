@@ -1,5 +1,6 @@
 import { opAppend, opFilter, opMap, pipe } from '@cspell/cspell-pipe/sync';
 
+import type { WeightMap } from './distance/index.js';
 import type { FindFullResult } from './ITrieNode/find.js';
 import { createFindOptions, findLegacyCompound, findWord, findWordNode, isForbiddenWord } from './ITrieNode/find.js';
 import type { FindOptions, PartialFindOptions } from './ITrieNode/FindOptions.js';
@@ -107,6 +108,8 @@ export interface ITrie {
      */
     iterate(): WalkerIterator;
 
+    weightMap: WeightMap | undefined;
+
     get isCaseAware(): boolean;
 }
 
@@ -116,6 +119,7 @@ export class ITrieImpl implements ITrie {
     private hasForbidden: boolean;
     private root: ITrieNodeRoot;
     private count?: number;
+    weightMap: WeightMap | undefined;
     constructor(readonly data: TrieData, private numNodes?: number) {
         this.root = data.getRoot();
         this._info = mergeOptionalWithDefaults(data.info);
@@ -236,6 +240,7 @@ export class ITrieImpl implements ITrie {
      */
     suggestWithCost(text: string, options: SuggestionOptions): SuggestionResult[] {
         const sep = options.compoundSeparator;
+        const weightMap = options.weightMap || this.weightMap;
         const adjWord = sep ? replaceAllFactory(sep, '') : (a: string) => a;
         const optFilter = options.filter;
         const filter = optFilter
@@ -244,7 +249,7 @@ export class ITrieImpl implements ITrie {
                   return !this.isForbiddenWord(w) && optFilter(w, cost);
               }
             : (word: string) => !this.isForbiddenWord(adjWord(word));
-        const opts = { ...options, filter };
+        const opts = { ...options, filter, weightMap };
         return suggest(this.data, text, opts);
     }
 

@@ -5,7 +5,7 @@ import { selectNearestWords } from '../lib/distance/levenshtein.js';
 import type { TrieNode } from '../lib/index.js';
 import { createTrieRoot, insert, Trie } from '../lib/index.js';
 import { suggest as suggestTrieNode } from '../lib/suggest.js';
-import { suggestAStar as suggestAStar2 } from '../lib/suggestions/suggestAStar2.js';
+import { suggestAStar as suggestAStar2 } from '../lib/suggestions/suggestAStar.js';
 import { createTrieBlobFromITrieNodeRoot } from '../lib/TrieBlob/createTrieBlob.js';
 import type { FastTrieBlob } from '../lib/TrieBlob/FastTrieBlob.js';
 import { FastTrieBlobBuilder } from '../lib/TrieBlob/FastTrieBlobBuilder.js';

@@ -8,4 +8,10 @@ export interface YieldResult {
     depth: number;
 }
 
-export type WalkerIterator = Generator<YieldResult, void, boolean | undefined>;
+export type FalseToNotGoDeeper = boolean;
+
+/**
+ * By default a Walker Iterator will go depth first. To prevent the
+ * walker from going deeper use `iterator.next(false)`.
+ */
+export type WalkerIterator = Generator<YieldResult, void, FalseToNotGoDeeper | undefined>;

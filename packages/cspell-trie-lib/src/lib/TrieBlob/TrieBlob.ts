@@ -1,5 +1,6 @@
 import { defaultTrieInfo } from '../constants.js';
-import type { ITrieNodeRoot } from '../ITrieNode/ITrieNode.js';
+import type { ITrieNode, ITrieNodeRoot } from '../ITrieNode/ITrieNode.js';
+import { findNode } from '../ITrieNode/trie-util.js';
 import type { PartialTrieInfo, TrieInfo } from '../ITrieNode/TrieInfo.js';
 import type { TrieData } from '../TrieData.js';
 import { mergeOptionalWithDefaults } from '../utils/mergeOptionalWithDefaults.js';
@@ -72,6 +73,10 @@ export class TrieBlob implements TrieData {
             NodeChildRefShift: TrieBlob.NodeChildRefShift,
         });
         return new TrieBlobIRoot(trieData, 0, this.info);
+    }
+
+    getNode(prefix: string): ITrieNode | undefined {
+        return findNode(this.getRoot(), prefix);
     }
 
     private _has(nodeIdx: number, word: string): boolean {

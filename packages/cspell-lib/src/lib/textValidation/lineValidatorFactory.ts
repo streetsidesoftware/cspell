@@ -3,12 +3,12 @@ import type { ParsedText } from '@cspell/cspell-types';
 import type { CachingDictionary, SearchOptions, SpellingDictionary } from 'cspell-dictionary';
 import { createCachingDictionary } from 'cspell-dictionary';
 
+import type { ValidationIssue } from '../Models/ValidationIssue.js';
 import * as RxPat from '../Settings/RegExpPatterns.js';
 import * as Text from '../util/text.js';
 import { clean } from '../util/util.js';
 import { split } from '../util/wordSplitter.js';
 import { defaultMinWordLength } from './defaultConstants.js';
-import type { ValidationIssue } from './index.js';
 import { isWordValidWithEscapeRetry } from './isWordValid.js';
 import { mapRangeBackToOriginalPos } from './parsedText.js';
 import type {
