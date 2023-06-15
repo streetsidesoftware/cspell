@@ -271,14 +271,15 @@ export async function measurePerf(which: string | undefined, method: string | un
             suggestTrieNode(trie.root, 'nearest', { ignoreCase: false, changeLimit: maxEdits })
         );
 
-        const sugWords = ['afgelopen', 'nearest', 'w6gDFScm3qpITum86UhXp4UQ'];
-        timer.measureFn('sug TrieNode', () => sugAStar2(trieTrie, sugWords));
-        timer.measureFn('sug FastTrie', () => sugAStar2(trieFast, sugWords));
-        timer.measureFn('sug TrieBlob', () => sugAStar2(trieBlob, sugWords));
-
         // cspell:ignore afgelopen
-        timer.measureFn('sug FastTrie NL', () => sugAStar2(trieFastNL, sugWords));
-        timer.measureFn('sug TrieBlob NL', () => sugAStar2(trieBlobNL, sugWords));
+        const sugWords = ['afgelopen', 'nearest', 'w6gDFScm3qpITum86UhXp4UQ'];
+        for (let pass = 1; pass <= 2; ++pass) {
+            timer.measureFn(`sug TrieNode ${pass}`, () => sugAStar2(trieTrie, sugWords));
+            timer.measureFn(`sug FastTrie ${pass}`, () => sugAStar2(trieFast, sugWords));
+            timer.measureFn(`sug TrieBlob ${pass}`, () => sugAStar2(trieBlob, sugWords));
+            timer.measureFn(`sug FastTrie NL ${pass}`, () => sugAStar2(trieFastNL, sugWords));
+            timer.measureFn(`sug TrieBlob NL ${pass}`, () => sugAStar2(trieBlobNL, sugWords));
+        }
 
         return;
 

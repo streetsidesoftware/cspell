@@ -41,6 +41,7 @@ export class TrieBlob implements TrieData {
     readonly info: Readonly<TrieInfo>;
     private _forbidIdx: number | undefined;
     private _size: number | undefined;
+    private _iTrieRoot: ITrieNodeRoot | undefined;
 
     constructor(protected nodes: Uint32Array, protected charIndex: string[], info: PartialTrieInfo) {
         this.info = mergeOptionalWithDefaults(info);
@@ -66,6 +67,10 @@ export class TrieBlob implements TrieData {
     }
 
     getRoot(): ITrieNodeRoot {
+        return (this._iTrieRoot ??= this._getRoot());
+    }
+
+    private _getRoot(): ITrieNodeRoot {
         const trieData = new TrieBlobInternals(this.nodes, this.charIndex, this.charToIndexMap, {
             NodeMaskEOW: TrieBlob.NodeMaskEOW,
             NodeMaskNumChildren: TrieBlob.NodeMaskNumChildren,

@@ -16,6 +16,7 @@ export class FastTrieBlob implements TrieData {
     private charToIndexMap: CharIndexMap;
     private _readonly = false;
     private _forbidIdx: number;
+    private _iTrieRoot: ITrieNodeRoot | undefined;
 
     readonly info: Readonly<TrieInfo>;
 
@@ -168,7 +169,7 @@ export class FastTrieBlob implements TrieData {
     };
 
     get iTrieRoot(): ITrieNodeRoot {
-        return FastTrieBlob.toITrieNodeRoot(this);
+        return (this._iTrieRoot ??= FastTrieBlob.toITrieNodeRoot(this));
     }
 
     getRoot(): ITrieNodeRoot {
