@@ -2,15 +2,14 @@ import assert from 'assert';
 import { describe, expect, test } from 'vitest';
 
 import type { WeightMap } from '../distance/index.js';
-import { createWeightMap } from '../distance/weightedMaps.js';
-import type { SuggestionCostMapDef } from '../models/suggestionCostsDef.js';
+import { mapDictionaryInformationToWeightMap } from '../mappers/mapDictionaryInfoToWeightMap.js';
 import { parseDictionaryLegacy } from '../SimpleDictionaryParser.js';
 import { TrieNodeTrie } from '../TrieNode/TrieNodeTrie.js';
 import { CompoundWordsMethod } from '../walker/index.js';
 import type { SuggestionOptions } from './genSuggestionsOptions.js';
 import * as Sug from './suggestAStar.js';
 
-const oc = expect.objectContaining;
+// const oc = expect.objectContaining;
 const ac = expect.arrayContaining;
 
 describe('Validate Suggest A Star', () => {
@@ -130,6 +129,7 @@ describe('Validate Suggest A Star', () => {
 });
 
 describe('weights', () => {
+    const changeLimit = 3;
     const trie = createTrieFromWords(sampleWords);
     const searchTrieCostNodesMatchingWord = Sug.__testing__.searchTrieCostNodesMatchingWord;
     const weightedDeleteCosts = Sug.__testing__.weightedDeleteCosts;
@@ -139,7 +139,7 @@ describe('weights', () => {
 
     test.each`
         word       | index | expected
-        ${'apple'} | ${0}  | ${[{ i: 1, t: { c: 75 } }]}
+        ${'apple'} | ${0}  | ${[{ i: 1, t: { c: 90 } }]}
     `('searchTrieCostNodesMatchingWord $word $index', ({ word, index, expected }) => {
         const result = [...searchTrieCostNodesMatchingWord(weightMap.insDel, word, index)];
         // console.warn('%o', result);
@@ -148,7 +148,7 @@ describe('weights', () => {
 
     test.each`
         word       | index | expected
-        ${'apple'} | ${0}  | ${[{ i: 1, c: 75 }]}
+        ${'apple'} | ${0}  | ${[{ i: 1, c: 90 }]}
     `('weightedDeleteCosts $word $index', ({ word, index, expected }) => {
         const result = [...weightedDeleteCosts(weightMap, word, index)];
         // console.warn('%o', result);
@@ -157,31 +157,44 @@ describe('weights', () => {
 
     test.each`
         prefix | expected
-        ${'t'} | ${[{ c: 75, s: 'a', n: oc({}) }]}
-        ${'w'} | ${ac([{ c: 75, s: 'a', n: oc({}) }, { c: 70, s: 'h', n: oc({}) }, { c: 75, s: 'i', n: oc({}) }, { c: 75, s: 'o', n: oc({}) }])}
+        ${'t'} | ${[{ c: 90, s: 'a' }]}
+        ${'w'} | ${ac([{ c: 90, s: 'a' }, { c: 70, s: 'h' }, { c: 90, s: 'i' }, { c: 90, s: 'o' }, { c: 100, s: 'r' }])}
     `('weightedInsertCosts $prefix', ({ prefix, expected }) => {
         const node = trie.getNode(prefix);
         assert(node);
-        const result = [...weightedInsertCosts(weightMap, node)];
+        const result = [...weightedInsertCosts(weightMap, node)].map((v) => ({ ...v, n: undefined }));
         // console.warn('%o', result);
         expect(result).toEqual(expected);
     });
 
+    function rc(i: number, c: number, s: string) {
+        const values = s.split('|');
+        return values.map((s) => ({ i, c, s }));
+    }
+
     test.each`
         word          | index | expected
-        ${'apple'}    | ${0}  | ${[{ i: 1, c: 45, s: 'i', n: oc({}) }]}
-        ${'relasion'} | ${4}  | ${[{ i: 8, c: 40, s: 'tion', n: oc({}) }] /* cspell:disable-line */}
+        ${'apple'}    | ${0}  | ${[...rc(1, 100, 'w|t|l|j|m|g|s|r'), ...rc(1, 98, 'i')]}
+        ${'relasion'} | ${4}  | ${[{ i: 5, c: 100, s: 't' }, { i: 8, c: 75, s: 'tion' }] /* cspell:disable-line */}
     `(
         'weightedReplaceCosts $word $index',
         ({ word, index, expected }: { word: string; index: number; expected: unknown }) => {
             const prefix = word.slice(0, index);
             const node = trie.getNode(prefix);
             assert(node);
-            const result = [...weightedReplaceCosts(weightMap, word, index, node)];
+            const result = [...weightedReplaceCosts(weightMap, word, index, node)].map((v) => ({ ...v, n: undefined }));
             // console.warn('%o', result);
             expect(result).toEqual(expected);
         }
     );
+
+    test('Tests suggestions for joyfull', () => {
+        const results = Sug.suggestAStar(trie, 'joyfull', { changeLimit, weightMap });
+        const suggestions = results.map((s) => s.word);
+        // console.warn('W %o', results);
+        // console.warn('X %o', Sug.suggestAStar(trie, 'joyfull', { changeLimit }));
+        expect(suggestions).toEqual(['joyful', 'joyfully', 'joyfuller', 'joyfullest']);
+    });
 });
 
 function nCompare(v: number): 1 | 0 | -1 {
@@ -261,60 +274,58 @@ function parseDict(dict: string) {
     return new TrieNodeTrie(trie.root);
 }
 
-function calcWeightMap(...defs: SuggestionCostMapDef[]): WeightMap {
-    return createWeightMap(
-        ...defs,
-        {
-            description: 'Make it cheap to add / remove common endings',
-            map: '$(s$)(ed$)(es$)(ing$)',
-            insDel: 50,
-            replace: 50,
-        },
-        {
-            description: 'Common mistakes',
-            map: "(ie)(ei)|('n$)(n$)(ng$)(ing$)|(i'm)(I'm)(I am)|u(you)|w(wh)|(ear)(ere)|('d)( did)|('d)(ed)",
-            replace: 51,
-        },
-        {
-            map: 'aeiou',
-            replace: 45,
-            insDel: 75,
-            swap: 55,
-        },
-        {
-            description: 'silent letters',
-            map: 'h',
-            insDel: 70,
-        },
-        {
-            map: 'u(oo)|o(oh)(ooh)|e(ee)(ea)|f(ph)(gh)|(shun)(tion)(sion)(cion)', // cspell:disable-line
-            replace: 40,
-        },
-        {
-            map: '(air)(aero)',
-            replace: 60,
-        },
-        {
-            map: '(air)(aer)(err)|(oar)(or)(hor)|(or)(our)',
-            replace: 40,
-        },
-        {
-            description: 'Penalty for inserting numbers',
-            map: '0123456789',
-            insDel: 1, // Cheap to insert,
-            penalty: 200, // Costly later
-        },
-        {
-            description: 'Discourage leading and trailing `-`',
-            map: '(^-)(^)|($)(-$)',
-            replace: 1, // Cheap to insert,
-            penalty: 200, // Costly later
-        },
-        {
-            description: 'Discourage inserting special characters `-`',
-            map: '-._',
-            insDel: 2, // Cheap to insert,
-            penalty: 200, // Costly later
-        }
-    );
+function calcWeightMap(): WeightMap {
+    // cspell:ignore tion aeiou
+    return mapDictionaryInformationToWeightMap({
+        locale: 'en-US',
+        alphabet: 'a-zA-Z',
+        suggestionEditCosts: [
+            { description: "Words like 'break' and 'brake'", map: '(ate)(eat)|(ake)(eak)', replace: 75 },
+            {
+                description: 'Sounds alike',
+                map: 'f(ph)(gh)|(sion)(tion)(cion)|(ail)(ale)|(r)(ur)(er)(ure)(or)',
+                replace: 75,
+            },
+            {
+                description: 'Double letter score',
+                map: 'l(ll)|s(ss)|t(tt)|e(ee)|b(bb)|d(dd)',
+                replace: 75,
+            },
+            {
+                map: 'aeiou',
+                replace: 98,
+                swap: 75,
+                insDel: 90,
+            },
+            {
+                description: 'silent letters',
+                map: 'h',
+                insDel: 70,
+            },
+            {
+                description: 'Common vowel sounds.',
+                map: 'o(oh)(oo)|(oo)(ou)|(oa)(ou)|(ee)(ea)',
+                replace: 75,
+            },
+            {
+                map: 'o(oo)|a(aa)|e(ee)|u(uu)|(eu)(uu)|(ou)(ui)(ow)|(ie)(ei)|i(ie)|e(en)|e(ie)',
+                replace: 50,
+            },
+            {
+                description: "Do not rank `'s` high on the list.",
+                map: "($)('$)('s$)|(s$)(s'$)(s's$)",
+                replace: 10,
+                penalty: 180,
+            },
+            {
+                description: "Plurals ending in 'y'",
+                map: '(ys)(ies)',
+                replace: 75,
+            },
+            {
+                map: '(d$)(t$)(dt$)',
+                replace: 75,
+            },
+        ],
+    });
 }

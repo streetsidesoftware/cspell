@@ -52,7 +52,7 @@ describe('Validate Trie Class', () => {
         const trie = ITrie.create(sampleWords);
         // cspell:ignore joyostalkliftswak
         const suggestions = trie.suggest('joyostalkliftswak', { ...NumSuggestions, ...SEPARATE_WORDS });
-        console.warn('%o', { suggestions });
+        // console.warn('%o', { suggestions });
         expect(suggestions).toEqual(expect.arrayContaining(['joyous talk lifts walk']));
     });
 

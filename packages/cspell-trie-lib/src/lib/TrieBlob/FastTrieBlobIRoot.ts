@@ -10,6 +10,7 @@ class FastTrieBlobINode implements ITrieNode {
     readonly node: number[];
     readonly eow: boolean;
     charToIdx: Record<string, number> | undefined;
+    private _keys: readonly string[] | undefined;
 
     constructor(readonly trie: FastTrieBlobInternals, readonly nodeIdx: number) {
         const node = trie.nodes[nodeIdx];
@@ -20,8 +21,12 @@ class FastTrieBlobINode implements ITrieNode {
         this.id = nodeIdx;
     }
 
+    keys() {
+        return (this._keys ??= this.calcKeys());
+    }
+
     /** get keys to children */
-    keys(): readonly string[] {
+    private calcKeys(): readonly string[] {
         if (!this.size) return EmptyKeys;
         const NodeMaskChildCharIndex = this.trie.NodeMaskChildCharIndex;
         const charIndex = this.trie.charIndex;

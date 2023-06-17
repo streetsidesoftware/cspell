@@ -112,8 +112,8 @@ export function* getSuggestionsAStar(
         for (const sug of resultHeap) {
             ++suggestionsGenerated;
             if (sug.cost > limit) continue;
-            // console.log('%o', sug);
             if (sug.word in emitted && emitted[sug.word] <= sug.cost) continue;
+            // console.warn('%o', sug);
             const action = yield sug;
             emitted[sug.word] = sug.cost;
             if (typeof action === 'number') {
@@ -143,20 +143,38 @@ export function* getSuggestionsAStar(
         );
     }
 
+    function h(p: PNode, msg: string) {
+        return {
+            m: msg,
+            w: orderNodes(p)
+                .map((n) => n.s)
+                .join('.'),
+            c: p.c,
+            a: p.a,
+            i: p.i,
+            s: p.s,
+            e: p.n.eow ? 'T' : '',
+        };
+    }
+
     function processPath(p: PNode) {
         const len = srcWord.length;
+        // if (srcWord === 'joyfull' && weightMap) {
+        //     console.warn('%o', h(p, 'pp'));
+        //     console.warn(serializeCostTrie(p));
+        // }
+
+        if (p.n.eow && p.i === len) {
+            // if (srcWord === 'joyfull' && weightMap) {
+            //     console.warn('%o', h(p, 'result'));
+            // }
+            const word = pNodeToWord(p);
+            const result = { word, cost: p.c };
+            resultHeap.add(result);
+        }
 
         for (const edge of calcEdges(p)) {
-            const c = edge.c;
-            // if (srcWord.includes('WALK')) {
-            //     console.warn('%o', { word: pNodeToWord(edge), cost: edge.c });
-            // }
-            if (c > limit) continue;
-            if (edge.n.eow && edge.i === len) {
-                const word = pNodeToWord(edge);
-                const result = { word, cost: c };
-                resultHeap.add(result);
-            }
+            if (edge.c > limit) continue;
             pathHeap.add(edge);
         }
     }
@@ -180,7 +198,7 @@ export function* getSuggestionsAStar(
             }
 
             if (weightMap) {
-                // yield* processWeightMapEdges(p, weightMap);
+                yield* processWeightMapEdges(p, weightMap);
             }
 
             // Double letter, delete 1
@@ -251,14 +269,44 @@ export function* getSuggestionsAStar(
         }
     }
 
-    // function* processWeightMapEdges(p: PNode, weightMap: WeightMap): Iterable<PNode> {
-    //     const { n, i, t } = p;
-    //     const keys = n.keys();
+    function* processWeightMapEdges(p: PNode, weightMap: WeightMap): Iterable<PNode> {
+        const { n, i, t } = p;
+        const cost0 = p.c - i;
 
-    //     function delLetters() {
+        yield* delLetters();
+        yield* insLetters();
+        yield* repLetters();
+        return;
 
-    //     }
-    // }
+        function* delLetters(): Iterable<PNode> {
+            const deletes = weightedDeleteCosts(weightMap, srcWord, i);
+            for (const del of deletes) {
+                if (del.c === undefined) continue;
+                const nn = applyCost(t, n, del.i, cost0 + del.c, '', p, 'd', '');
+                nn && (yield nn);
+            }
+        }
+
+        function* insLetters(): Iterable<PNode> {
+            const inserts = weightedInsertCosts(weightMap, n);
+            for (const ins of inserts) {
+                if (ins.c === undefined) continue;
+                const nn = applyCost(t, ins.n, i, cost0 + ins.c, ins.s, p, 'i', ins.s);
+                nn && (yield nn);
+                // if (srcWord === 'joyfull' && ins.s === 'y') {
+                //     console.warn('%o', { ...ins, i, cost0, n: undefined, h: nn && editHistory(nn) });
+                // }
+            }
+        }
+
+        function* repLetters(): Iterable<PNode> {
+            const replacements = weightedReplaceCosts(weightMap, srcWord, i, n);
+            for (const rep of replacements) {
+                const nn = applyCost(t, rep.n, rep.i, cost0 + rep.c, rep.s, p, 'r', rep.s);
+                nn && (yield nn);
+            }
+        }
+    }
 }
 
 function createCostTrie(): CostTrie {
@@ -283,11 +331,25 @@ function applyCost(
     a: string,
     ss: string
 ): PNode | undefined {
-    const tt = ss ? (t.t[ss] ??= createCostTrie()) : t;
+    const tt = getCostTrie(t, ss);
     const curr = tt.c[i];
     if (curr <= c) return undefined;
     tt.c[i] = c;
     return { n, i, c, s, p, t: tt, a };
+}
+
+function getCostTrie(t: CostTrie, s: string) {
+    if (s.length == 1) {
+        return (t.t[s] ??= createCostTrie());
+    }
+    if (!s) {
+        return t;
+    }
+    let tt = t;
+    for (const c of [...s]) {
+        tt = tt.t[c] ??= createCostTrie();
+    }
+    return tt;
 }
 
 function pNodeToWord(p: PNode): string {
@@ -354,10 +416,12 @@ function* weightedReplaceCosts(
         if (!tInsert) continue;
         const i = r.i;
         for (const ins of searchTrieCostNodesMatchingTrie<TrieCost>(tInsert, node)) {
-            const { n, s } = ins;
-            const c = ins.t.c;
-            if (c === undefined) continue;
-            yield { i, c, n, s };
+            const { n, s, t } = ins;
+            const c = t.c;
+            if (c === undefined) {
+                continue;
+            }
+            yield { i, c: c + (t.p || 0), n, s };
         }
     }
 }
@@ -399,6 +463,31 @@ function* searchTrieCostNodesMatchingTrie<T extends { n?: Record<string, T> }>(
     }
 }
 
+function prefixLines(content: string, prefix: string): string {
+    return content
+        .split('\n')
+        .map((line) => prefix + line)
+        .join('\n');
+}
+
+function serializeCostTrie(p: PNode): string {
+    while (p.p) {
+        p = p.p;
+    }
+    return _serializeCostTrie(p.t);
+}
+
+function _serializeCostTrie(t: CostTrie): string {
+    const lines: string[] = [];
+    lines.push(`:: [${t.c.join()}]`);
+    for (const [letter, child] of Object.entries(t.t)) {
+        lines.push(letter + ':');
+        if (!child) continue;
+        lines.push(prefixLines(_serializeCostTrie(child), '| '));
+    }
+    return lines.join('\n');
+}
+
 export const __testing__ = {
     comparePath,
     editHistory,
@@ -406,4 +495,5 @@ export const __testing__ = {
     weightedDeleteCosts,
     weightedInsertCosts,
     weightedReplaceCosts,
+    serializeCostTrie,
 };
