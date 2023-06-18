@@ -1,4 +1,3 @@
-import assert from 'assert';
 import { describe, expect, test } from 'vitest';
 
 import type { WeightMap } from '../distance/index.js';
@@ -10,7 +9,7 @@ import type { SuggestionOptions } from './genSuggestionsOptions.js';
 import * as Sug from './suggestAStar.js';
 
 // const oc = expect.objectContaining;
-const ac = expect.arrayContaining;
+// const ac = expect.arrayContaining;
 
 describe('Validate Suggest A Star', () => {
     const changeLimit = 3;
