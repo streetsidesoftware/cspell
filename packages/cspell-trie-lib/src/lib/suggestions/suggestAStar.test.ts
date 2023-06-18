@@ -132,9 +132,6 @@ describe('weights', () => {
     const changeLimit = 3;
     const trie = createTrieFromWords(sampleWords);
     const searchTrieCostNodesMatchingWord = Sug.__testing__.searchTrieCostNodesMatchingWord;
-    const weightedDeleteCosts = Sug.__testing__.weightedDeleteCosts;
-    const weightedInsertCosts = Sug.__testing__.weightedInsertCosts;
-    const weightedReplaceCosts = Sug.__testing__.weightedReplaceCosts;
     const weightMap = calcWeightMap();
 
     test.each`
@@ -146,47 +143,10 @@ describe('weights', () => {
         expect(result).toEqual(expected);
     });
 
-    test.each`
-        word       | index | expected
-        ${'apple'} | ${0}  | ${[{ i: 1, c: 90 }]}
-    `('weightedDeleteCosts $word $index', ({ word, index, expected }) => {
-        const result = [...weightedDeleteCosts(weightMap, word, index)];
-        // console.warn('%o', result);
-        expect(result).toEqual(expected);
-    });
-
-    test.each`
-        prefix | expected
-        ${'t'} | ${[{ c: 90, s: 'a' }]}
-        ${'w'} | ${ac([{ c: 90, s: 'a' }, { c: 70, s: 'h' }, { c: 90, s: 'i' }, { c: 90, s: 'o' }, { c: 100, s: 'r' }])}
-    `('weightedInsertCosts $prefix', ({ prefix, expected }) => {
-        const node = trie.getNode(prefix);
-        assert(node);
-        const result = [...weightedInsertCosts(weightMap, node)].map((v) => ({ ...v, n: undefined }));
-        // console.warn('%o', result);
-        expect(result).toEqual(expected);
-    });
-
     function rc(i: number, c: number, s: string) {
         const values = s.split('|');
         return values.map((s) => ({ i, c, s }));
     }
-
-    test.each`
-        word          | index | expected
-        ${'apple'}    | ${0}  | ${[...rc(1, 100, 'w|t|l|j|m|g|s|r'), ...rc(1, 98, 'i')]}
-        ${'relasion'} | ${4}  | ${[{ i: 5, c: 100, s: 't' }, { i: 8, c: 75, s: 'tion' }] /* cspell:disable-line */}
-    `(
-        'weightedReplaceCosts $word $index',
-        ({ word, index, expected }: { word: string; index: number; expected: unknown }) => {
-            const prefix = word.slice(0, index);
-            const node = trie.getNode(prefix);
-            assert(node);
-            const result = [...weightedReplaceCosts(weightMap, word, index, node)].map((v) => ({ ...v, n: undefined }));
-            // console.warn('%o', result);
-            expect(result).toEqual(expected);
-        }
-    );
 
     test('Tests suggestions for joyfull', () => {
         const results = Sug.suggestAStar(trie, 'joyfull', { changeLimit, weightMap });
