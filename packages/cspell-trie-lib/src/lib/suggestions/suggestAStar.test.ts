@@ -131,22 +131,7 @@ describe('Validate Suggest A Star', () => {
 describe('weights', () => {
     const changeLimit = 3;
     const trie = createTrieFromWords(sampleWords);
-    const searchTrieCostNodesMatchingWord = Sug.__testing__.searchTrieCostNodesMatchingWord;
     const weightMap = calcWeightMap();
-
-    test.each`
-        word       | index | expected
-        ${'apple'} | ${0}  | ${[{ i: 1, t: { c: 90 } }]}
-    `('searchTrieCostNodesMatchingWord $word $index', ({ word, index, expected }) => {
-        const result = [...searchTrieCostNodesMatchingWord(weightMap.insDel, word, index)];
-        // console.warn('%o', result);
-        expect(result).toEqual(expected);
-    });
-
-    function rc(i: number, c: number, s: string) {
-        const values = s.split('|');
-        return values.map((s) => ({ i, c, s }));
-    }
 
     test('Tests suggestions for joyfull', () => {
         const results = Sug.suggestAStar(trie, 'joyfull', { changeLimit, weightMap });

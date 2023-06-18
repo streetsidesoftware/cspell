@@ -232,57 +232,10 @@ export function* getSuggestionsAStar(
     }
 
     function processWeightMapEdges(p: PNode, weightMap: WeightMap) {
-        const { n, i, t } = p;
-        const cost0 = p.c - i;
-
-        delLetters();
-        insLetters();
-        repLetters();
+        delLetters(p, weightMap, srcWord, storePath);
+        insLetters(p, weightMap, srcWord, storePath);
+        repLetters(p, weightMap, srcWord, storePath);
         return;
-
-        function delLetters() {
-            for (const del of searchTrieCostNodesMatchingWord(weightMap.insDel, srcWord, i)) {
-                if (del.t.c === undefined) continue;
-                storePath(t, n, del.i, cost0 + del.t.c, '', p, 'd', '');
-            }
-        }
-
-        function insLetters() {
-            const inserts = searchTrieCostNodesMatchingTrie(weightMap.insDel, n);
-            for (const ins of inserts) {
-                if (ins.t.c === undefined) continue;
-                storePath(t, ins.n, i, cost0 + ins.t.c, ins.s, p, 'i', ins.s);
-            }
-        }
-
-        function repLetters() {
-            function* weightedReplaceCosts(
-                weightMap: WeightMap,
-                word: string,
-                i: number,
-                node: ITrieNode
-            ): Iterable<WeightedReplaceCosts> {
-                const remove = searchTrieCostNodesMatchingWord(weightMap.replace, word, i);
-                for (const r of remove) {
-                    const tInsert = r.t.t;
-                    if (!tInsert) continue;
-                    const i = r.i;
-                    for (const ins of searchTrieCostNodesMatchingTrie<TrieCost>(tInsert, node)) {
-                        const { n, s, t } = ins;
-                        const c = t.c;
-                        if (c === undefined) {
-                            continue;
-                        }
-                        yield { i, c: c + (t.p || 0), n, s };
-                    }
-                }
-            }
-
-            const replacements = weightedReplaceCosts(weightMap, srcWord, i, n);
-            for (const rep of replacements) {
-                storePath(t, rep.n, rep.i, cost0 + rep.c, rep.s, p, 'r', rep.s);
-            }
-        }
     }
 
     /**
@@ -305,9 +258,71 @@ export function* getSuggestionsAStar(
     ): void {
         const tt = getCostTrie(t, ss);
         const curr = tt.c[i];
-        if (curr <= c || curr > limit) return undefined;
+        if (curr <= c || c > limit) return undefined;
         tt.c[i] = c;
         pathHeap.add({ n, i, c, s, p, t: tt, a });
+    }
+}
+
+function delLetters(pNode: PNode, weightMap: WeightMap, word: string, storePath: FnStorePath) {
+    const { t, n } = pNode;
+    const trie = weightMap.insDel;
+    let ii = pNode.i;
+    const cost0 = pNode.c - pNode.i;
+
+    const len = word.length;
+
+    for (let nn = trie.n; ii < len && nn; ) {
+        const tt = nn[word[ii]];
+        if (!tt) return;
+        ++ii;
+        if (tt.c !== undefined) {
+            storePath(t, n, ii, cost0 + tt.c, '', pNode, 'd', '');
+        }
+        nn = tt.n;
+    }
+}
+
+function insLetters(p: PNode, weightMap: WeightMap, _word: string, storePath: FnStorePath) {
+    const { t, i, c, n } = p;
+    const cost0 = c + i;
+
+    searchTrieCostNodesMatchingTrie2(weightMap.insDel, n, (s, tc, n) => {
+        if (tc.c !== undefined) {
+            storePath(t, n, i, cost0 + tc.c, s, p, 'i', s);
+        }
+    });
+}
+
+function repLetters(pNode: PNode, weightMap: WeightMap, word: string, storePath: FnStorePath) {
+    const node = pNode.n;
+    const t = pNode.t;
+    const cost0 = pNode.c - pNode.i;
+    const remove = searchTrieCostNodesMatchingWord(weightMap.replace, word, pNode.i);
+    for (const r of remove) {
+        const tInsert = r.t.t;
+        if (!tInsert) continue;
+        const i = r.i;
+        for (const ins of searchTrieCostNodesMatchingTrie<TrieCost>(tInsert, node)) {
+            const { n, s, t: tt } = ins;
+            const c = tt.c;
+            if (c === undefined) {
+                continue;
+            }
+            storePath(t, n, i, cost0 + c + (tt.p || 0), s, pNode, 'r', s);
+        }
+    }
+}
+
+function* searchTrieCostNodesMatchingWord<T extends { n?: Record<string, T> }>(trie: T, word: string, i: number) {
+    const len = word.length;
+
+    for (let n = trie.n; i < len && n; ) {
+        const t = n[word[i]];
+        if (!t) return;
+        ++i;
+        yield { i, t };
+        n = t.n;
     }
 }
 
@@ -363,25 +378,6 @@ function editHistory(p: PNode) {
     return nodes.map((n) => ({ i: n.i, c: n.c, a: n.a, s: n.s }));
 }
 
-interface WeightedReplaceCosts {
-    i: number;
-    c: number;
-    n: ITrieNode;
-    s: string;
-}
-
-function* searchTrieCostNodesMatchingWord<T extends { n?: Record<string, T> }>(trie: T, word: string, i: number) {
-    const len = word.length;
-
-    for (let n = trie.n; i < len && n; ) {
-        const t = n[word[i]];
-        if (!t) return;
-        ++i;
-        yield { i, t };
-        n = t.n;
-    }
-}
-
 interface SearchMatchingTrie<T> {
     s: string;
     t: T;
@@ -404,6 +400,26 @@ function* searchTrieCostNodesMatchingTrie<T extends { n?: Record<string, T> }>(
         const pfx = s + key;
         yield { s: pfx, t, n: c };
         yield* searchTrieCostNodesMatchingTrie(t, c, pfx);
+    }
+}
+
+function searchTrieCostNodesMatchingTrie2<T extends { n?: Record<string, T> }>(
+    trie: T,
+    node: ITrieNode,
+    emit: (s: string, t: T, n: ITrieNode) => void,
+    s = ''
+): void {
+    const n = trie.n;
+    if (!n) return;
+    const keys = node.keys();
+    for (let i = 0; i < keys.length; ++i) {
+        const key = keys[i];
+        const t = n[key];
+        if (!t) continue;
+        const c = node.child(i);
+        const pfx = s + key;
+        emit(pfx, t, c);
+        searchTrieCostNodesMatchingTrie2(t, c, emit, pfx);
     }
 }
 
@@ -432,9 +448,19 @@ function _serializeCostTrie(t: CostTrie): string {
     return lines.join('\n');
 }
 
+type FnStorePath = (
+    t: CostTrie,
+    n: ITrieNode,
+    i: number,
+    c: number,
+    s: string,
+    p: PNode,
+    a: string,
+    ss: string
+) => void;
+
 export const __testing__ = {
     comparePath,
     editHistory,
-    searchTrieCostNodesMatchingWord,
     serializeCostTrie,
 };
