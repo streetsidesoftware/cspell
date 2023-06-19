@@ -480,13 +480,29 @@ export interface BaseSetting extends InlineDictionary, ExperimentalBaseSettings 
     /**
      * List of regular expression patterns or pattern names to exclude from spell checking.
      *
-     * Example: ["href"] - to exclude html href.
+     * Example: `["href"]` - to exclude html href pattern.
+     *
+     * Regular expressions use JavaScript regular expression syntax.
+     *
+     * Example: to ignore ALL-CAPS words
+     *
+     * JSON
+     * ```json
+     * "ignoreRegExpList": ["/\\w[A-Z]+\\w/g"]
+     * ```
+     *
+     * YAML
+     * ```yaml
+     * ignoreRegExpList:
+     *   - >-
+     *    /\w[A-Z]+\w/g
+     * ```
      *
      * By default, several patterns are excluded. See
      * [Configuration](https://cspell.org/configuration/#cspelljson-sections) for more details.
      *
      * While you can create your own patterns, you can also leverage several patterns that are
-     * [built-in to CSpell](https://github.com/streetsidesoftware/cspell/blob/main/packages/cspell-lib/src/Settings/DefaultSettings.ts#L22).
+     * [built-in to CSpell](https://cspell.org/types/cspell-types/modules/#predefinedpatterns).
      */
     ignoreRegExpList?: RegExpPatternList;
 
@@ -496,7 +512,7 @@ export interface BaseSetting extends InlineDictionary, ExperimentalBaseSettings 
      * If this property is defined, only text matching the included patterns will be checked.
      *
      * While you can create your own patterns, you can also leverage several patterns that are
-     * [built-in to CSpell](https://github.com/streetsidesoftware/cspell/blob/main/packages/cspell-lib/src/Settings/DefaultSettings.ts#L22).
+     * [built-in to CSpell](https://cspell.org/types/cspell-types/modules/#predefinedpatterns).
      */
     includeRegExpList?: RegExpPatternList;
 
