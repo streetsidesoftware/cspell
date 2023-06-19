@@ -3,7 +3,7 @@ Repository: php/php-src
 Url: "https://github.com/php/php-src.git"
 Args: ["--config=../../../../config/repositories/php/php-src/cspell.json","**/*.{md,c,h,php}"]
 Lines:
- CSpell: Files checked: 1811, Issues found: 44645 in 1300 files
+ CSpell: Files checked: 1811, Issues found: 44626 in 1300 files
  exit code: 1
 ./CODING_STANDARDS.md:105:23    - Unknown word (intvl)        -- // Could be 'date_intvl_create_from_date_str
 ./CODING_STANDARDS.md:114:8     - Unknown word (setclientencoding) -- pg_setclientencoding
@@ -142,11 +142,11 @@ Lines:
 ./Zend/zend.c:257:5     - Unknown word (Substracted) -- /* Substracted from the max allowed
 ./Zend/zend.c:644:20    - Unknown word (OSVERSIONINFO) -- if(!GetVersionEx((OSVERSIONINFO *) osvi)) {
 ./Zend/zend.c:899:2     - Unknown word (fpsetmask)     -- fpsetmask(0);
-./Zend/zend_API.c:2893:14   - Unknown word (arginfos)   -- /* Rebuild arginfos if parameter/property
-./Zend/zend_API.c:3500:50   - Unknown word (callables)  -- "Use of \"self\" in callables is deprecated");
-./Zend/zend_API.c:3592:15   - Unknown word (lmname)     -- zend_string *lmname;
-./Zend/zend_API.c:3686:6    - Unknown word (Callables)  -- "Callables of the form [\"%s\"
-./Zend/zend_API.c:4004:15   - Unknown word (callability) -- /* Determine callability at the first parent
+./Zend/zend_API.c:2923:14   - Unknown word (arginfos)   -- /* Rebuild arginfos if parameter/property
+./Zend/zend_API.c:3530:50   - Unknown word (callables)  -- "Use of \"self\" in callables is deprecated");
+./Zend/zend_API.c:3622:15   - Unknown word (lmname)     -- zend_string *lmname;
+./Zend/zend_API.c:3716:6    - Unknown word (Callables)  -- "Callables of the form [\"%s\"
+./Zend/zend_API.c:4034:15   - Unknown word (callability) -- /* Determine callability at the first parent
 ./Zend/zend_API.c:533:45    - Unknown word (sideeffect) -- scalar_type_hint_no_sideeffect() */
 ./Zend/zend_API.c:635:6     - Unknown word (SSTH)       -- /* SSTH Exception: IS_LONG may
 ./Zend/zend_API.h:100:67    - Unknown word (evaluable)  -- function is compile-time evaluable, you are asserting that
@@ -217,9 +217,9 @@ Lines:
 ./Zend/zend_execute.c:61:18     - Unknown word (IBMC)       -- # elif defined(__IBMC__) && ZEND_GCC_VERSION
 ./Zend/zend_execute.c:670:36    - Unknown word (fsep)       -- fname, const char **fsep, const char **fclass
 ./Zend/zend_execute.c:670:55    - Unknown word (fclass)     -- *fsep, const char **fclass,
-./Zend/zend_execute_API.c:1030:24   - Unknown word (fcic)         -- zend_fcall_info_cache fcic;
-./Zend/zend_execute_API.c:1513:111  - Unknown word (EXECUTEONLYONCE)     -- seconds*1000, 0, WT_EXECUTEONLYONCE)) {
-./Zend/zend_execute_API.c:1513:47   - Unknown word (WAITORTIMERCALLBACK) -- rQueueTimer(&tq_timer, NULL, (WAITORTIMERCALLBACK)tq_timer_cb, (VOID*
+./Zend/zend_execute_API.c:1034:24   - Unknown word (fcic)         -- zend_fcall_info_cache fcic;
+./Zend/zend_execute_API.c:1517:111  - Unknown word (EXECUTEONLYONCE)     -- seconds*1000, 0, WT_EXECUTEONLYONCE)) {
+./Zend/zend_execute_API.c:1517:47   - Unknown word (WAITORTIMERCALLBACK) -- rQueueTimer(&tq_timer, NULL, (WAITORTIMERCALLBACK)tq_timer_cb, (VOID*
 ./Zend/zend_execute_API.c:699:72    - Unknown word (retriggering) -- which can happen when retriggering ast
 ./Zend/zend_fibers.c:157:33    - Unknown word (fcontext)   -- by boost.context in fcontext.hpp:
 ./Zend/zend_fibers.c:322:51    - Unknown word (chkstk)     -- probing function ___chkstk_darwin incorrectly
@@ -1324,18 +1324,18 @@ Lines:
 ./ext/dom/attr.c:39:13     - Unknown word (oldnode)    -- xmlNodePtr oldnode = NULL;
 ./ext/dom/attr.c:79:13     - Unknown word (attrp)      -- xmlAttrPtr attrp;
 ./ext/dom/characterdata.c:38:9      - Unknown word (characterdata) -- int dom_characterdata_data_read(dom_object
-./ext/dom/document.c:1026:9    - Unknown word (idname)             -- size_t idname_len;
-./ext/dom/document.c:1094:24   - Unknown word (olddoc)             -- xmlDoc *docp = NULL, *olddoc;
-./ext/dom/document.c:1138:11   - Unknown word (escsource)          -- xmlChar *escsource;
-./ext/dom/document.c:1308:24   - Unknown word (newdoc)             -- xmlDoc *docp = NULL, *newdoc;
-./ext/dom/document.c:1399:25   - Unknown word (loadxml)            -- }} end dom_document_loadxml */
-./ext/dom/document.c:1407:21   - Unknown word (saveempty)          -- int bytes, format, saveempty = 0;
-./ext/dom/document.c:1511:25   - Unknown word (savexml)            -- }} end dom_document_savexml */
-./ext/dom/document.c:1515:13   - Unknown word (xincnode)           -- xmlNodePtr xincnode;
-./ext/dom/document.c:1534:56   - Unknown word (xincludes)          -- nodes from recursive xincludes */
-./ext/dom/document.c:1554:8    - Unknown word (Substitutues)       -- /* {{{ Substitutues xincludes in a DomDocument
-./ext/dom/document.c:1579:67   - Unknown word (xincluded)          -- beginning and ending of xincluded document
-./ext/dom/document.c:2080:20   - Unknown word (basece)             -- zend_class_entry *basece = dom_node_class_entry
+./ext/dom/document.c:1030:9    - Unknown word (idname)             -- size_t idname_len;
+./ext/dom/document.c:1098:24   - Unknown word (olddoc)             -- xmlDoc *docp = NULL, *olddoc;
+./ext/dom/document.c:1142:11   - Unknown word (escsource)          -- xmlChar *escsource;
+./ext/dom/document.c:1312:24   - Unknown word (newdoc)             -- xmlDoc *docp = NULL, *newdoc;
+./ext/dom/document.c:1403:25   - Unknown word (loadxml)            -- }} end dom_document_loadxml */
+./ext/dom/document.c:1411:21   - Unknown word (saveempty)          -- int bytes, format, saveempty = 0;
+./ext/dom/document.c:1515:25   - Unknown word (savexml)            -- }} end dom_document_savexml */
+./ext/dom/document.c:1519:13   - Unknown word (xincnode)           -- xmlNodePtr xincnode;
+./ext/dom/document.c:1538:56   - Unknown word (xincludes)          -- nodes from recursive xincludes */
+./ext/dom/document.c:1558:8    - Unknown word (Substitutues)       -- /* {{{ Substitutues xincludes in a DomDocument
+./ext/dom/document.c:1583:67   - Unknown word (xincluded)          -- beginning and ending of xincluded document
+./ext/dom/document.c:2084:20   - Unknown word (basece)             -- zend_class_entry *basece = dom_node_class_entry
 ./ext/dom/document.c:376:31    - Unknown word (preservewhitespace) -- BOOL(retval, doc_prop->preservewhitespace);
 ./ext/dom/document.c:422:18    - Unknown word (substitue)          -- int dom_document_substitue_entities_read(dom_object
 ./ext/dom/document.c:55:12     - Unknown word (dtdptr)     -- xmlDtdPtr dtdptr;
@@ -1375,55 +1375,55 @@ Lines:
 ./ext/dom/domexception.c:55:8      - Unknown word (DOMSTRING)  -- case DOMSTRING_SIZE_ERR:
 ./ext/dom/domimplementation.c:128:14    - Unknown word (doctobj)    -- dom_object *doctobj;
 ./ext/dom/domimplementation.c:55:41     - Unknown word (systemid)   -- , publicid_len = 0, systemid_len = 0;
-./ext/dom/element.c:157:17    - Unknown word (nqname)     -- const xmlChar *nqname;
-./ext/dom/element.c:397:19    - Unknown word (existattrp) -- xmlAttr *attrp, *existattrp = NULL;
-./ext/dom/element.c:398:23    - Unknown word (attrobj)    -- dom_object *intern, *attrobj, *oldobj;
-./ext/dom/element.c:398:33    - Unknown word (oldobj)     -- *intern, *attrobj, *oldobj;
-./ext/dom/element.c:499:13    - Unknown word (elemp)      -- xmlNodePtr elemp;
-./ext/dom/element.c:528:11    - Unknown word (strattr)    -- xmlChar *strattr;
-./ext/dom/element.c:544:20    - Unknown word (nsdecl)     -- nsptr = dom_get_nsdecl(elemp, (xmlChar *)name
-./ext/dom/element.c:568:44    - Unknown word (Reconcilied) -- libxml2 (2.6.20) xmlNewReconciliedNs
-./ext/dom/element.c:652:15    - Unknown word (tmpnsptr)    -- xmlNsPtr tmpnsptr;
-./ext/dom/element.c:788:24    - Unknown word (Attrp)       -- xmlNodePtr elemp, fakeAttrp;
-./ext/dom/element.c:809:14    - Unknown word (curns)       -- xmlNsPtr curns;
-./ext/dom/namednodemap.c:81:9      - Unknown word (namedlen)   -- size_t namedlen=0;
-./ext/dom/namednodemap.c:83:13     - Unknown word (itemnode)   -- xmlNodePtr itemnode = NULL;
-./ext/dom/node.c:1016:37   - Unknown word (newnode)    -- error(NULL, "Cannot add newnode as the previous sibling
-./ext/dom/node.c:1016:72   - Unknown word (refnode)    -- previous sibling of refnode");
-./ext/dom/node.c:1027:23   - Unknown word (oldchild)   -- xmlNodePtr newchild, oldchild, nodep;
-./ext/dom/node.c:1028:23   - Unknown word (newchildobj) -- dom_object *intern, *newchildobj, *oldchildobj;
-./ext/dom/node.c:1028:37   - Unknown word (oldchildobj) -- intern, *newchildobj, *oldchildobj;
-./ext/dom/node.c:1030:7    - Unknown word (replacedoctype) -- bool replacedoctype = false;
-./ext/dom/node.c:1421:13   - Unknown word (nodeotherp)     -- xmlNodePtr nodeotherp, nodep;
-./ext/dom/node.c:1422:23   - Unknown word (nodeotherobj)   -- dom_object *intern, *nodeotherobj;
-./ext/dom/node.c:1573:21   - Unknown word (ctxp)           -- xmlXPathContextPtr ctxp=NULL;
-./ext/dom/node.c:1574:20   - Unknown word (xpathobjp)      -- xmlXPathObjectPtr xpathobjp=NULL;
-./ext/dom/node.c:1644:10   - Unknown word (tmpns)          -- zval *tmpns;
+./ext/dom/element.c:161:17    - Unknown word (nqname)     -- const xmlChar *nqname;
+./ext/dom/element.c:401:19    - Unknown word (existattrp) -- xmlAttr *attrp, *existattrp = NULL;
+./ext/dom/element.c:402:23    - Unknown word (attrobj)    -- dom_object *intern, *attrobj, *oldobj;
+./ext/dom/element.c:402:33    - Unknown word (oldobj)     -- *intern, *attrobj, *oldobj;
+./ext/dom/element.c:503:13    - Unknown word (elemp)      -- xmlNodePtr elemp;
+./ext/dom/element.c:532:11    - Unknown word (strattr)    -- xmlChar *strattr;
+./ext/dom/element.c:548:20    - Unknown word (nsdecl)     -- nsptr = dom_get_nsdecl(elemp, (xmlChar *)name
+./ext/dom/element.c:572:44    - Unknown word (Reconcilied) -- libxml2 (2.6.20) xmlNewReconciliedNs
+./ext/dom/element.c:656:15    - Unknown word (tmpnsptr)    -- xmlNsPtr tmpnsptr;
+./ext/dom/namednodemap.c:120:9     - Unknown word (namedlen)   -- size_t namedlen;
+./ext/dom/namednodemap.c:76:13     - Unknown word (itemnode)   -- xmlNodePtr itemnode = NULL;
+./ext/dom/node.c:1014:37   - Unknown word (newnode)    -- error(NULL, "Cannot add newnode as the previous sibling
+./ext/dom/node.c:1014:72   - Unknown word (refnode)    -- previous sibling of refnode");
+./ext/dom/node.c:1025:23   - Unknown word (oldchild)   -- xmlNodePtr newchild, oldchild, nodep;
+./ext/dom/node.c:1026:23   - Unknown word (newchildobj) -- dom_object *intern, *newchildobj, *oldchildobj;
+./ext/dom/node.c:1026:37   - Unknown word (oldchildobj) -- intern, *newchildobj, *oldchildobj;
+./ext/dom/node.c:1028:7    - Unknown word (replacedoctype) -- bool replacedoctype = false;
+./ext/dom/node.c:1419:13   - Unknown word (nodeotherp)     -- xmlNodePtr nodeotherp, nodep;
+./ext/dom/node.c:1420:23   - Unknown word (nodeotherobj)   -- dom_object *intern, *nodeotherobj;
+./ext/dom/node.c:1571:21   - Unknown word (ctxp)           -- xmlXPathContextPtr ctxp=NULL;
+./ext/dom/node.c:1572:20   - Unknown word (xpathobjp)      -- xmlXPathObjectPtr xpathobjp=NULL;
+./ext/dom/node.c:1642:10   - Unknown word (tmpns)          -- zval *tmpns;
 ./ext/dom/node.c:353:19    - Unknown word (prevsib)    -- xmlNode *nodep, *prevsib;
 ./ext/dom/node.c:381:19    - Unknown word (nextsib)    -- xmlNode *nodep, *nextsib;
-./ext/dom/node.c:608:19    - Unknown word (nsnode)     -- xmlNode *nodep, *nsnode = NULL;
-./ext/dom/node.c:711:11    - Unknown word (baseuri)    -- xmlChar *baseuri;
-./ext/dom/node.c:799:155   - Unknown word (childobj)   -- intern, dom_object *childobj) /* {{{ */
-./ext/dom/node.c:801:13    - Unknown word (newchild)   -- xmlNodePtr newchild, node;
-./ext/dom/node.c:850:31    - Unknown word (parentp)    -- xmlNodePtr child, new_child, parentp, refp;
-./ext/dom/node.c:850:40    - Unknown word (refp)       -- new_child, parentp, refp;
-./ext/dom/node.c:851:34    - Unknown word (refpobj)    -- intern, *childobj, *refpobj;
-./ext/dom/node.c:931:15    - Unknown word (lastattr)   -- xmlAttrPtr lastattr;
+./ext/dom/node.c:606:19    - Unknown word (nsnode)     -- xmlNode *nodep, *nsnode = NULL;
+./ext/dom/node.c:607:22    - Unknown word (curns)      -- xmlNsPtr ns = NULL, curns;
+./ext/dom/node.c:709:11    - Unknown word (baseuri)    -- xmlChar *baseuri;
+./ext/dom/node.c:797:155   - Unknown word (childobj)   -- intern, dom_object *childobj) /* {{{ */
+./ext/dom/node.c:799:13    - Unknown word (newchild)   -- xmlNodePtr newchild, node;
+./ext/dom/node.c:848:31    - Unknown word (parentp)    -- xmlNodePtr child, new_child, parentp, refp;
+./ext/dom/node.c:848:40    - Unknown word (refp)       -- new_child, parentp, refp;
+./ext/dom/node.c:849:34    - Unknown word (refpobj)    -- intern, *childobj, *refpobj;
+./ext/dom/node.c:929:15    - Unknown word (lastattr)   -- xmlAttrPtr lastattr;
 ./ext/dom/parentnode.c:127:61    - Unknown word (nodesc)     -- zval *nodes, uint32_t nodesc, const xmlNodePtr node
 ./ext/dom/parentnode.c:15:24     - Unknown word (Eberlei)    -- | Authors: Benjamin Eberlei <beberlei@php.net>
-./ext/dom/php_dom.c:1349:20   - Unknown word (nextp)         -- xmlNodePtr child, nextp, newnextp;
-./ext/dom/php_dom.c:1349:27   - Unknown word (newnextp)      -- xmlNodePtr child, nextp, newnextp;
-./ext/dom/php_dom.c:1429:18   - Unknown word (nsdftptr)      -- xmlNsPtr nsptr, nsdftptr, curns, prevns = NULL
-./ext/dom/php_dom.c:1429:35   - Unknown word (prevns)        -- nsptr, nsdftptr, curns, prevns = NULL;
+./ext/dom/php_dom.c:1382:20   - Unknown word (nextp)         -- xmlNodePtr child, nextp, newnextp;
+./ext/dom/php_dom.c:1382:27   - Unknown word (newnextp)      -- xmlNodePtr child, nextp, newnextp;
+./ext/dom/php_dom.c:1462:18   - Unknown word (nsdftptr)      -- xmlNsPtr nsptr, nsdftptr, curns, prevns = NULL
+./ext/dom/php_dom.c:1462:35   - Unknown word (prevns)        -- nsptr, nsdftptr, curns, prevns = NULL;
 ./ext/dom/php_dom.c:15:22     - Unknown word (Borger)     -- | Marcus Borger <helly@php.net>
 ./ext/dom/php_dom.c:38:38     - Unknown word (parentnode) -- zend_class_entry *dom_parentnode_class_entry;
 ./ext/dom/php_dom.c:39:38     - Unknown word (childnode)  -- zend_class_entry *dom_childnode_class_entry;
-./ext/dom/php_dom.c:530:22    - Unknown word (domxml)     -- ZEND_MOD_CONFLICTS("domxml")
-./ext/dom/php_dom.c:544:32    - Unknown word (versionnumber) -- VERSION, /* Extension versionnumber */
-./ext/dom/php_dom.c:916:25    - Unknown word (phpfunctions)  -- (intern->registered_phpfunctions) {
-./ext/dom/php_dom.c:934:6     - Unknown word (retcount)      -- int retcount __attribute__((unused
-./ext/dom/php_dom.c:953:51    - Unknown word (ntype)         -- object *basenode, int ntype, dom_object *intern
-./ext/dom/php_dom.c:955:23    - Unknown word (mapptr)        -- dom_nnodemap_object *mapptr = (dom_nnodemap_object
+./ext/dom/php_dom.c:557:22    - Unknown word (domxml)     -- ZEND_MOD_CONFLICTS("domxml")
+./ext/dom/php_dom.c:571:32    - Unknown word (versionnumber) -- VERSION, /* Extension versionnumber */
+./ext/dom/php_dom.c:584:18    - Unknown word (nodemap)       -- static zval *dom_nodemap_read_dimension(zend
+./ext/dom/php_dom.c:950:25    - Unknown word (phpfunctions)  -- (intern->registered_phpfunctions) {
+./ext/dom/php_dom.c:968:6     - Unknown word (retcount)      -- int retcount __attribute__((unused
+./ext/dom/php_dom.c:987:51    - Unknown word (ntype)         -- object *basenode, int ntype, dom_object *intern
+./ext/dom/php_dom.c:989:23    - Unknown word (mapptr)        -- dom_nnodemap_object *mapptr = (dom_nnodemap_object
 ./ext/dom/php_dom.h:79:11     - Unknown word (XPATHOBJ)   -- #define Z_XPATHOBJ_P(zv) php_xpath_obj
 ./ext/dom/php_dom.stub.php:120:26    - Unknown word (IDREF)      -- cvalue XML_ATTRIBUTE_IDREF
 ./ext/dom/php_dom.stub.php:125:26    - Unknown word (IDREFS)     -- cvalue XML_ATTRIBUTE_IDREFS
@@ -2737,200 +2737,187 @@ Lines:
 ./ext/iconv/iconv.c:419:38    - Unknown word (TRANSLIT)   -- & strcmp("//IGNORE//TRANSLIT", charset+clen-18)
 ./ext/iconv/iconv.c:747:14    - Unknown word (haystk)     -- const char *haystk, size_t haystk_nbytes
 ./ext/iconv/iconv.c:78:20     - Unknown word (memequal)   -- #define _php_iconv_memequal(a, b, c) \
-./ext/imap/php_imap.c:1123:11   - Unknown word (MAILTMPLEN)          -- char tmp[MAILTMPLEN];
-./ext/imap/php_imap.c:1135:3    - Unknown word (MESSAGECACHE)        -- MESSAGECACHE * cache = mail_elt
-./ext/imap/php_imap.c:1147:8    - Unknown word (fetchfrom)           -- mail_fetchfrom(tmp+23, imap_conn_struct
-./ext/imap/php_imap.c:1157:8    - Unknown word (fetchsubject)        -- mail_fetchsubject(t = tmp + strlen(tmp
-./ext/imap/php_imap.c:1358:23   - Unknown word (mboxob)              -- zval *imap_conn_obj, mboxob;
-./ext/imap/php_imap.c:1520:19   - Unknown word (fromlength)         -- zend_long msgno, fromlength = 0, subjectlength
-./ext/imap/php_imap.c:1520:35   - Unknown word (subjectlength)      -- msgno, fromlength = 0, subjectlength = 0;
-./ext/imap/php_imap.c:1524:20   - Unknown word (fulladdress)        -- char dummy[2000], fulladdress[MAILTMPLEN + 1];
-./ext/imap/php_imap.c:1550:12   - Unknown word (fetchenvelope)      -- en = mail_fetchenvelope(imap_conn_struct->imap
-./ext/imap/php_imap.c:1574:35   - Unknown word (udate)              -- long(return_value, "udate", mail_longdate(cache
-./ext/imap/php_imap.c:1574:48   - Unknown word (longdate)           -- value, "udate", mail_longdate(cache));
-./ext/imap/php_imap.c:1592:25   - Unknown word (defaulthost)        -- zend_string *headers, *defaulthost = NULL;
-./ext/imap/php_imap.c:1612:4    - Unknown word (KMLANG)             -- /* KMLANG */
+./ext/imap/php_imap.c:1094:11   - Unknown word (MAILTMPLEN)          -- char tmp[MAILTMPLEN];
+./ext/imap/php_imap.c:1106:3    - Unknown word (MESSAGECACHE)        -- MESSAGECACHE * cache = mail_elt
+./ext/imap/php_imap.c:1118:8    - Unknown word (fetchfrom)           -- mail_fetchfrom(tmp+23, imap_conn_struct
+./ext/imap/php_imap.c:1128:8    - Unknown word (fetchsubject)        -- mail_fetchsubject(t = tmp + strlen(tmp
+./ext/imap/php_imap.c:1379:8    - Unknown word (mboxob)              -- zval mboxob;
+./ext/imap/php_imap.c:1533:19   - Unknown word (fromlength)         -- zend_long msgno, fromlength = 0, subjectlength
+./ext/imap/php_imap.c:1533:35   - Unknown word (subjectlength)      -- msgno, fromlength = 0, subjectlength = 0;
+./ext/imap/php_imap.c:1537:20   - Unknown word (fulladdress)        -- char dummy[2000], fulladdress[MAILTMPLEN + 1];
+./ext/imap/php_imap.c:1563:12   - Unknown word (fetchenvelope)      -- en = mail_fetchenvelope(imap_conn_struct->imap
+./ext/imap/php_imap.c:1627:4    - Unknown word (udate)              -- "udate", strlen("udate"),
+./ext/imap/php_imap.c:1628:8    - Unknown word (longdate)           -- mail_longdate(cache)
+./ext/imap/php_imap.c:1655:25   - Unknown word (defaulthost)        -- zend_string *headers, *defaulthost = NULL;
+./ext/imap/php_imap.c:1675:4    - Unknown word (KMLANG)             -- /* KMLANG */
 ./ext/imap/php_imap.c:196:6     - Unknown word (IMAPG)        -- if (IMAPG(imap_user)) {
-./ext/imap/php_imap.c:2006:13   - Unknown word (unreadmsg)          -- zend_ulong unreadmsg = 0, deletedmsg = 0
-./ext/imap/php_imap.c:2006:28   - Unknown word (deletedmsg)         -- ulong unreadmsg = 0, deletedmsg = 0, msize = 0;
-./ext/imap/php_imap.c:2084:7    - Unknown word (tovals)             -- zval tovals;
-./ext/imap/php_imap.c:2087:11   - Unknown word (addresstmp)         -- ADDRESS *addresstmp;
-./ext/imap/php_imap.c:2094:13   - Unknown word (newenvelope)        -- env = mail_newenvelope();
+./ext/imap/php_imap.c:2059:13   - Unknown word (unreadmsg)          -- zend_ulong unreadmsg = 0, deletedmsg = 0
+./ext/imap/php_imap.c:2059:28   - Unknown word (deletedmsg)         -- ulong unreadmsg = 0, deletedmsg = 0, msize = 0;
 ./ext/imap/php_imap.c:215:56    - Unknown word (msgindex)     -- UID_PRE_FLAG_CHECKS(msgindex, arg_pos) \
+./ext/imap/php_imap.c:2197:13   - Unknown word (newenvelope)        -- env = mail_newenvelope();
 ./ext/imap/php_imap.c:22:20     - Unknown word (Taskinen)   -- | Jani Taskinen <jani.taskinen
-./ext/imap/php_imap.c:2532:17   - Unknown word (slst)               -- unsigned long *slst, *sl;
-./ext/imap/php_imap.c:2534:11   - Unknown word (mypgm)              -- SORTPGM *mypgm=NIL;
-./ext/imap/php_imap.c:2534:2    - Unknown word (SORTPGM)            -- SORTPGM *mypgm=NIL;
-./ext/imap/php_imap.c:2535:2    - Unknown word (SEARCHPGM)          -- SEARCHPGM *spg=NIL;
-./ext/imap/php_imap.c:2559:14   - Unknown word (newsearchpgm)       -- spg = mail_newsearchpgm();
-./ext/imap/php_imap.c:2565:15   - Unknown word (newsortpgm)         -- mypgm = mail_newsortpgm();
-./ext/imap/php_imap.c:2572:12   - Unknown word (sortpgm)            -- mail_free_sortpgm(&mypgm);
-./ext/imap/php_imap.c:2574:13   - Unknown word (searchpgm)          -- mail_free_searchpgm(&spg);
-./ext/imap/php_imap.c:2688:37   - Unknown word (uidnext)            -- long(return_value, "uidnext", IMAPG(status_uidnext
-./ext/imap/php_imap.c:2691:37   - Unknown word (uidvalidity)        -- long(return_value, "uidvalidity", IMAPG(status_uidvalidity
-./ext/imap/php_imap.c:2706:26   - Unknown word (dparametres)        -- zval parametres, param, dparametres, dparam;
-./ext/imap/php_imap.c:2706:39   - Unknown word (dparam)             -- param, dparametres, dparam;
-./ext/imap/php_imap.c:2706:7    - Unknown word (parametres)         -- zval parametres, param, dparametres
-./ext/imap/php_imap.c:2707:19   - Unknown word (dpar)               -- PARAMETER *par, *dpar;
-./ext/imap/php_imap.c:2724:20   - Unknown word (TYPEMAX)            -- if (body->type <= TYPEMAX) {
-./ext/imap/php_imap.c:2727:24   - Unknown word (ENCMAX)             -- if (body->encoding <= ENCMAX) {
-./ext/imap/php_imap.c:2732:36   - Unknown word (ifsubtype)          -- long(return_value, "ifsubtype", 1);
-./ext/imap/php_imap.c:2739:36   - Unknown word (ifdescription)      -- long(return_value, "ifdescription", 1);
-./ext/imap/php_imap.c:2759:36   - Unknown word (ifdisposition)      -- long(return_value, "ifdisposition", 1);
-./ext/imap/php_imap.c:2767:36   - Unknown word (ifdparameters)      -- long(return_value, "ifdparameters", 1);
-./ext/imap/php_imap.c:2775:43   - Unknown word (dparameters)        -- object(return_value, "dparameters", &dparametres);
-./ext/imap/php_imap.c:277:13    - Unknown word (newfolderobjectlist) -- /* {{{ mail_newfolderobjectlist
-./ext/imap/php_imap.c:2782:36   - Unknown word (ifparameters)       -- long(return_value, "ifparameters", 1);
-./ext/imap/php_imap.c:279:21    - Unknown word (FOBJECTLIST)         -- * Mail instantiate FOBJECTLIST
-./ext/imap/php_imap.c:2811:7    - Unknown word (myoverview)         -- zval myoverview;
-./ext/imap/php_imap.c:2893:7    - Unknown word (adrlists)           -- /* adrlists do not support folding
-./ext/imap/php_imap.c:289:18    - Unknown word (foblist)             -- /* {{{ mail_free_foblist
-./ext/imap/php_imap.c:2912:19   - Unknown word (topbod)             -- BODY *bod=NULL, *topbod=NULL;
-./ext/imap/php_imap.c:2913:8    - Unknown word (mypart)             -- PART *mypart=NULL, *part;
-./ext/imap/php_imap.c:2915:19   - Unknown word (mystring)           -- char *tmp=NULL, *mystring=NULL, *t=NULL, *tempstring
-./ext/imap/php_imap.c:2915:44   - Unknown word (tempstring)         -- mystring=NULL, *t=NULL, *tempstring=NULL, *str_copy = NULL
-./ext/imap/php_imap.c:2916:6    - Unknown word (toppart)            -- int toppart = 0;
-./ext/imap/php_imap.c:2934:26   - Unknown word (ADRLIST)            -- define PHP_RFC822_PARSE_ADRLIST(target, value) \
-./ext/imap/php_imap.c:3001:33   - Unknown word (newbody)            -- headers_param = mail_newbody_parameter();
-./ext/imap/php_imap.c:3113:28   - Unknown word (newmsg)             -- bod->nested.msg = mail_newmsg();
-./ext/imap/php_imap.c:313:13    - Unknown word (newerrorlist)        -- /* {{{ mail_newerrorlist
-./ext/imap/php_imap.c:315:21    - Unknown word (ERRORLIST)           -- * Mail instantiate ERRORLIST
-./ext/imap/php_imap.c:325:18    - Unknown word (errorlist)           -- /* {{{ mail_free_errorlist
-./ext/imap/php_imap.c:3422:48   - Unknown word (ERRHOST)            -- strcmp(addr->host, ERRHOST) == 0) {
-./ext/imap/php_imap.c:343:13    - Unknown word (newmessagelist)      -- /* {{{ mail_newmessagelist
-./ext/imap/php_imap.c:345:21    - Unknown word (MESSAGELIST)         -- * Mail instantiate MESSAGELIST
-./ext/imap/php_imap.c:355:18    - Unknown word (messagelist)         -- /* {{{ mail_free_messagelist
-./ext/imap/php_imap.c:361:42    - Unknown word (msglist)             -- messagelist(MESSAGELIST **msglist, MESSAGELIST **tail
-./ext/imap/php_imap.c:3713:17   - Unknown word (Parnefors)          -- /* Author: Ted Parnefors <ted@mtv.se> */
-./ext/imap/php_imap.c:3714:7    - Unknown word (myobject)           -- zval myobject;
-./ext/imap/php_imap.c:3785:52   - Unknown word (unextracted)        -- the start of the yet unextracted data.
-./ext/imap/php_imap.c:3807:20   - Unknown word (soutr)              -- /* {{{ _php_rfc822_soutr */
-./ext/imap/php_imap.c:3814:9    - Unknown word (LONGT)              -- return LONGT;
-./ext/imap/php_imap.c:383:46    - Unknown word (qroot)               -- MAILSTREAM *stream, char *qroot, QUOTALIST *qlist)
-./ext/imap/php_imap.c:383:53    - Unknown word (QUOTALIST)           -- stream, char *qroot, QUOTALIST *qlist)
-./ext/imap/php_imap.c:383:64    - Unknown word (qlist)               -- char *qroot, QUOTALIST *qlist)
-./ext/imap/php_imap.c:3886:14   - Unknown word (perpouse)           -- * for this perpouse we allocate additional
-./ext/imap/php_imap.c:3916:7    - Unknown word (tmpvals)            -- zval tmpvals;
-./ext/imap/php_imap.c:3958:32   - Unknown word (toaddress)          -- property_str(myzvalue, "toaddress", fulladdress);
-./ext/imap/php_imap.c:3967:32   - Unknown word (fromaddress)        -- property_str(myzvalue, "fromaddress", fulladdress);
-./ext/imap/php_imap.c:3976:32   - Unknown word (ccaddress)          -- property_str(myzvalue, "ccaddress", fulladdress);
-./ext/imap/php_imap.c:3985:32   - Unknown word (bccaddress)         -- property_str(myzvalue, "bccaddress", fulladdress);
-./ext/imap/php_imap.c:4003:32   - Unknown word (senderaddress)     -- property_str(myzvalue, "senderaddress", fulladdress);
-./ext/imap/php_imap.c:4012:39   - Unknown word (pathaddress)       -- str(myzvalue, "return_pathaddress", fulladdress);
-./ext/imap/php_imap.c:411:53    - Unknown word (ACLLIST)             -- stream, char *mailbox, ACLLIST *alist)
-./ext/imap/php_imap.c:4133:43   - Unknown word (cclient)           -- stealing this from header cclient -rjs3 */
-./ext/imap/php_imap.c:4135:38   - Unknown word (THREADNODE)        -- build_thread_tree_helper(THREADNODE *cur, zval *tree, long
-./ext/imap/php_imap.c:4209:13   - Unknown word (threadnode)        -- mail_free_threadnode(&top);
-./ext/imap/php_imap.c:431:21    - Unknown word (alertstack)          -- imap_globals->imap_alertstack = NIL;
-./ext/imap/php_imap.c:432:21    - Unknown word (errorstack)          -- imap_globals->imap_errorstack = NIL;
-./ext/imap/php_imap.c:4357:34   - Unknown word (newstringlist)     -- imap_alertstack) = mail_newstringlist();
-./ext/imap/php_imap.c:4358:28   - Unknown word (LSIZE)             -- IMAPG(imap_alertstack)->LSIZE = strlen((char*)(IMAPG
-./ext/imap/php_imap.c:436:21    - Unknown word (sfolders)            -- imap_globals->imap_sfolders = NIL;
-./ext/imap/php_imap.c:4373:50   - Unknown word (DTYPE)             -- MAILSTREAM *stream, DTYPE delimiter, char *mailbox
-./ext/imap/php_imap.c:442:21    - Unknown word (sfolder)             -- imap_globals->imap_sfolder_objects = NIL;
-./ext/imap/php_imap.c:445:16    - Unknown word (folderlist)          -- imap_globals->folderlist_style = FLIST_ARRAY
-./ext/imap/php_imap.c:445:35    - Unknown word (FLIST)               -- >folderlist_style = FLIST_ARRAY;
-./ext/imap/php_imap.c:4462:67   - Unknown word (MAILSTATUS)        -- stream, char *mailbox, MAILSTATUS *status)
-./ext/imap/php_imap.c:4515:31   - Unknown word (NETMBX)            -- EXPORT void mm_login(NETMBX *mb, char *user, char
-./ext/imap/php_imap.c:4530:25   - Unknown word (nocritical)        -- IMAP_EXPORT void mm_nocritical(MAILSTREAM *stream)
-./ext/imap/php_imap.c:4534:25   - Unknown word (diskerror)         -- IMAP_EXPORT long mm_diskerror(MAILSTREAM *stream,
-./ext/imap/php_imap.c:460:13    - Unknown word (unixdriver)          -- mail_link(&unixdriver); /* link in the unix
-./ext/imap/php_imap.c:461:13    - Unknown word (mhdriver)            -- mail_link(&mhdriver); /* link in the mh
-./ext/imap/php_imap.c:462:16    - Unknown word (mxdriver)            -- /* mail_link(&mxdriver); */	/* According to
-./ext/imap/php_imap.c:463:13    - Unknown word (mmdfdriver)          -- mail_link(&mmdfdriver); /* link in the mmdf
-./ext/imap/php_imap.c:463:42    - Unknown word (mmdf)                -- mmdfdriver); /* link in the mmdf driver */
-./ext/imap/php_imap.c:464:13    - Unknown word (newsdriver)          -- mail_link(&newsdriver); /* link in the news
-./ext/imap/php_imap.c:465:13    - Unknown word (philedriver)         -- mail_link(&philedriver); /* link in the phile
-./ext/imap/php_imap.c:465:42    - Unknown word (phile)               -- philedriver); /* link in the phile driver */
-./ext/imap/php_imap.c:467:13    - Unknown word (imapdriver)          -- mail_link(&imapdriver); /* link in the imap
-./ext/imap/php_imap.c:468:13    - Unknown word (nntpdriver)          -- mail_link(&nntpdriver); /* link in the nntp
-./ext/imap/php_imap.c:470:13    - Unknown word (mbxdriver)           -- mail_link(&mbxdriver); /* link in the mbx
-./ext/imap/php_imap.c:471:13    - Unknown word (tenexdriver)         -- mail_link(&tenexdriver); /* link in the tenex
-./ext/imap/php_imap.c:471:42    - Unknown word (tenex)               -- tenexdriver); /* link in the tenex driver */
-./ext/imap/php_imap.c:472:13    - Unknown word (mtxdriver)           -- mail_link(&mtxdriver); /* link in the mtx
-./ext/imap/php_imap.c:473:13    - Unknown word (dummydriver)         -- mail_link(&dummydriver); /* link in the dummy
-./ext/imap/php_imap.c:485:6     - Unknown word (onceonlyinit)        -- ssl_onceonlyinit ();
-./ext/imap/php_imap.c:510:29    - Unknown word (RSHTIMEOUT)          -- parameters (NIL, SET_RSHTIMEOUT, 0);
-./ext/imap/php_imap.c:511:29    - Unknown word (SSHTIMEOUT)          -- parameters (NIL, SET_SSHTIMEOUT, 0);
-./ext/imap/php_imap.c:530:13    - Unknown word (ecur)                -- ERRORLIST *ecur = NIL;
-./ext/imap/php_imap.c:538:44    - Unknown word (errflg)              -- NULL, E_NOTICE, "%s (errflg=%ld)", ecur->LTEXT,
-./ext/imap/php_imap.c:538:64    - Unknown word (LTEXT)               -- errflg=%ld)", ecur->LTEXT, ecur->errflg);
-./ext/imap/php_imap.c:550:14    - Unknown word (acur)                -- STRINGLIST *acur = NIL;
-./ext/imap/php_imap.c:577:9     - Unknown word (CCLIENTVERSION)      -- #ifndef CCLIENTVERSION
+./ext/imap/php_imap.c:248:13    - Unknown word (newfolderobjectlist) -- /* {{{ mail_newfolderobjectlist
+./ext/imap/php_imap.c:250:21    - Unknown word (FOBJECTLIST)         -- * Mail instantiate FOBJECTLIST
+./ext/imap/php_imap.c:260:18    - Unknown word (foblist)             -- /* {{{ mail_free_foblist
+./ext/imap/php_imap.c:2621:17   - Unknown word (slst)               -- unsigned long *slst, *sl;
+./ext/imap/php_imap.c:2623:11   - Unknown word (mypgm)              -- SORTPGM *mypgm=NIL;
+./ext/imap/php_imap.c:2623:2    - Unknown word (SORTPGM)            -- SORTPGM *mypgm=NIL;
+./ext/imap/php_imap.c:2624:2    - Unknown word (SEARCHPGM)          -- SEARCHPGM *spg=NIL;
+./ext/imap/php_imap.c:2648:14   - Unknown word (newsearchpgm)       -- spg = mail_newsearchpgm();
+./ext/imap/php_imap.c:2654:15   - Unknown word (newsortpgm)         -- mypgm = mail_newsortpgm();
+./ext/imap/php_imap.c:2661:12   - Unknown word (sortpgm)            -- mail_free_sortpgm(&mypgm);
+./ext/imap/php_imap.c:2663:13   - Unknown word (searchpgm)          -- mail_free_searchpgm(&spg);
+./ext/imap/php_imap.c:2795:6    - Unknown word (uidnext)            -- "uidnext", strlen("uidnext")
+./ext/imap/php_imap.c:2802:6    - Unknown word (uidvalidity)        -- "uidvalidity", strlen("uidvalidity
+./ext/imap/php_imap.c:2814:20   - Unknown word (TYPEMAX)            -- if (body->type <= TYPEMAX) {
+./ext/imap/php_imap.c:2822:24   - Unknown word (ENCMAX)             -- if (body->encoding <= ENCMAX) {
+./ext/imap/php_imap.c:2833:5    - Unknown word (ifsubtype)          -- "ifsubtype", strlen("ifsubtype
+./ext/imap/php_imap.c:284:13    - Unknown word (newerrorlist)        -- /* {{{ mail_newerrorlist
+./ext/imap/php_imap.c:2852:5    - Unknown word (ifdescription)      -- "ifdescription", strlen("ifdescription
+./ext/imap/php_imap.c:286:21    - Unknown word (ERRORLIST)           -- * Mail instantiate ERRORLIST
+./ext/imap/php_imap.c:2907:5    - Unknown word (ifdisposition)      -- "ifdisposition", strlen("ifdisposition
+./ext/imap/php_imap.c:2929:5    - Unknown word (ifdparameters)      -- "ifdparameters", strlen("ifdparameters
+./ext/imap/php_imap.c:2951:5    - Unknown word (dparameters)        -- "dparameters", strlen("dparameters
+./ext/imap/php_imap.c:296:18    - Unknown word (errorlist)           -- /* {{{ mail_free_errorlist
+./ext/imap/php_imap.c:2970:5    - Unknown word (ifparameters)       -- "ifparameters", strlen("ifparameters
+./ext/imap/php_imap.c:3097:8    - Unknown word (myoverview)         -- zval myoverview;
+./ext/imap/php_imap.c:314:13    - Unknown word (newmessagelist)      -- /* {{{ mail_newmessagelist
+./ext/imap/php_imap.c:316:21    - Unknown word (MESSAGELIST)         -- * Mail instantiate MESSAGELIST
+./ext/imap/php_imap.c:3199:7    - Unknown word (adrlists)           -- /* adrlists do not support folding
+./ext/imap/php_imap.c:3221:19   - Unknown word (topbod)             -- BODY *bod=NULL, *topbod=NULL;
+./ext/imap/php_imap.c:3222:8    - Unknown word (mypart)             -- PART *mypart=NULL, *part;
+./ext/imap/php_imap.c:3224:19   - Unknown word (mystring)           -- char *tmp=NULL, *mystring=NULL, *t=NULL, *tempstring
+./ext/imap/php_imap.c:3224:44   - Unknown word (tempstring)         -- mystring=NULL, *t=NULL, *tempstring=NULL, *str_copy = NULL
+./ext/imap/php_imap.c:3225:6    - Unknown word (toppart)            -- int toppart = 0;
+./ext/imap/php_imap.c:3243:26   - Unknown word (ADRLIST)            -- define PHP_RFC822_PARSE_ADRLIST(target, value) \
+./ext/imap/php_imap.c:326:18    - Unknown word (messagelist)         -- /* {{{ mail_free_messagelist
+./ext/imap/php_imap.c:3310:33   - Unknown word (newbody)            -- headers_param = mail_newbody_parameter();
+./ext/imap/php_imap.c:332:42    - Unknown word (msglist)             -- messagelist(MESSAGELIST **msglist, MESSAGELIST **tail
+./ext/imap/php_imap.c:3422:28   - Unknown word (newmsg)             -- bod->nested.msg = mail_newmsg();
+./ext/imap/php_imap.c:354:46    - Unknown word (qroot)               -- MAILSTREAM *stream, char *qroot, QUOTALIST *qlist)
+./ext/imap/php_imap.c:354:53    - Unknown word (QUOTALIST)           -- stream, char *qroot, QUOTALIST *qlist)
+./ext/imap/php_imap.c:354:64    - Unknown word (qlist)               -- char *qroot, QUOTALIST *qlist)
+./ext/imap/php_imap.c:3731:48   - Unknown word (ERRHOST)            -- strcmp(addr->host, ERRHOST) == 0) {
+./ext/imap/php_imap.c:382:53    - Unknown word (ACLLIST)             -- stream, char *mailbox, ACLLIST *alist)
+./ext/imap/php_imap.c:402:21    - Unknown word (alertstack)          -- imap_globals->imap_alertstack = NIL;
+./ext/imap/php_imap.c:4036:17   - Unknown word (Parnefors)          -- /* Author: Ted Parnefors <ted@mtv.se> */
+./ext/imap/php_imap.c:4037:7    - Unknown word (myobject)           -- zval myobject;
+./ext/imap/php_imap.c:403:21    - Unknown word (errorstack)          -- imap_globals->imap_errorstack = NIL;
+./ext/imap/php_imap.c:407:21    - Unknown word (sfolders)            -- imap_globals->imap_sfolders = NIL;
+./ext/imap/php_imap.c:4106:52   - Unknown word (unextracted)        -- the start of the yet unextracted data.
+./ext/imap/php_imap.c:4127:20   - Unknown word (soutr)              -- /* {{{ _php_rfc822_soutr */
+./ext/imap/php_imap.c:4134:9    - Unknown word (LONGT)              -- return LONGT;
+./ext/imap/php_imap.c:413:21    - Unknown word (sfolder)             -- imap_globals->imap_sfolder_objects = NIL;
+./ext/imap/php_imap.c:416:16    - Unknown word (folderlist)          -- imap_globals->folderlist_style = FLIST_ARRAY
+./ext/imap/php_imap.c:416:35    - Unknown word (FLIST)               -- >folderlist_style = FLIST_ARRAY;
+./ext/imap/php_imap.c:4227:11   - Unknown word (addresstmp)         -- ADDRESS *addresstmp;
+./ext/imap/php_imap.c:431:13    - Unknown word (unixdriver)          -- mail_link(&unixdriver); /* link in the unix
+./ext/imap/php_imap.c:432:13    - Unknown word (mhdriver)            -- mail_link(&mhdriver); /* link in the mh
+./ext/imap/php_imap.c:433:16    - Unknown word (mxdriver)            -- /* mail_link(&mxdriver); */	/* According to
+./ext/imap/php_imap.c:434:13    - Unknown word (mmdfdriver)          -- mail_link(&mmdfdriver); /* link in the mmdf
+./ext/imap/php_imap.c:434:42    - Unknown word (mmdf)                -- mmdfdriver); /* link in the mmdf driver */
+./ext/imap/php_imap.c:435:13    - Unknown word (newsdriver)          -- mail_link(&newsdriver); /* link in the news
+./ext/imap/php_imap.c:436:13    - Unknown word (philedriver)         -- mail_link(&philedriver); /* link in the phile
+./ext/imap/php_imap.c:436:42    - Unknown word (phile)               -- philedriver); /* link in the phile driver */
+./ext/imap/php_imap.c:438:13    - Unknown word (imapdriver)          -- mail_link(&imapdriver); /* link in the imap
+./ext/imap/php_imap.c:4399:43   - Unknown word (cclient)            -- stealing this from header cclient -rjs3 */
+./ext/imap/php_imap.c:439:13    - Unknown word (nntpdriver)          -- mail_link(&nntpdriver); /* link in the nntp
+./ext/imap/php_imap.c:4401:38   - Unknown word (THREADNODE)         -- build_thread_tree_helper(THREADNODE *cur, zval *tree, long
+./ext/imap/php_imap.c:441:13    - Unknown word (mbxdriver)           -- mail_link(&mbxdriver); /* link in the mbx
+./ext/imap/php_imap.c:442:13    - Unknown word (tenexdriver)         -- mail_link(&tenexdriver); /* link in the tenex
+./ext/imap/php_imap.c:442:42    - Unknown word (tenex)               -- tenexdriver); /* link in the tenex driver */
+./ext/imap/php_imap.c:443:13    - Unknown word (mtxdriver)           -- mail_link(&mtxdriver); /* link in the mtx
+./ext/imap/php_imap.c:444:13    - Unknown word (dummydriver)         -- mail_link(&dummydriver); /* link in the dummy
+./ext/imap/php_imap.c:4475:13   - Unknown word (threadnode)         -- mail_free_threadnode(&top);
+./ext/imap/php_imap.c:456:6     - Unknown word (onceonlyinit)        -- ssl_onceonlyinit ();
+./ext/imap/php_imap.c:4623:34   - Unknown word (newstringlist)      -- imap_alertstack) = mail_newstringlist();
+./ext/imap/php_imap.c:4624:28   - Unknown word (LSIZE)              -- IMAPG(imap_alertstack)->LSIZE = strlen((char*)(IMAPG
+./ext/imap/php_imap.c:4639:50   - Unknown word (DTYPE)              -- MAILSTREAM *stream, DTYPE delimiter, char *mailbox
+./ext/imap/php_imap.c:4728:67   - Unknown word (MAILSTATUS)         -- stream, char *mailbox, MAILSTATUS *status)
+./ext/imap/php_imap.c:4781:31   - Unknown word (NETMBX)             -- EXPORT void mm_login(NETMBX *mb, char *user, char
+./ext/imap/php_imap.c:4796:25   - Unknown word (nocritical)         -- IMAP_EXPORT void mm_nocritical(MAILSTREAM *stream)
+./ext/imap/php_imap.c:4800:25   - Unknown word (diskerror)          -- IMAP_EXPORT long mm_diskerror(MAILSTREAM *stream,
+./ext/imap/php_imap.c:481:29    - Unknown word (RSHTIMEOUT)          -- parameters (NIL, SET_RSHTIMEOUT, 0);
+./ext/imap/php_imap.c:482:29    - Unknown word (SSHTIMEOUT)          -- parameters (NIL, SET_SSHTIMEOUT, 0);
+./ext/imap/php_imap.c:501:13    - Unknown word (ecur)                -- ERRORLIST *ecur = NIL;
+./ext/imap/php_imap.c:509:44    - Unknown word (errflg)              -- NULL, E_NOTICE, "%s (errflg=%ld)", ecur->LTEXT,
+./ext/imap/php_imap.c:509:64    - Unknown word (LTEXT)               -- errflg=%ld)", ecur->LTEXT, ecur->errflg);
+./ext/imap/php_imap.c:521:14    - Unknown word (acur)                -- STRINGLIST *acur = NIL;
+./ext/imap/php_imap.c:548:9     - Unknown word (CCLIENTVERSION)      -- #ifndef CCLIENTVERSION
 ./ext/imap/php_imap.c:59:1      - Unknown word (MAILSTREAM) -- MAILSTREAM DEFAULTPROTO;
 ./ext/imap/php_imap.c:59:12     - Unknown word (DEFAULTPROTO) -- MAILSTREAM DEFAULTPROTO;
 ./ext/imap/php_imap.c:66:9      - Unknown word (SENDBUFLEN)   -- #ifndef SENDBUFLEN
-./ext/imap/php_imap.c:711:12    - Unknown word (MAXLOGINTRIALS)      -- #ifdef SET_MAXLOGINTRIALS
-./ext/imap/php_imap.c:803:12    - Unknown word (reimplementation)    -- /* Manual reimplementation of the GET_IMAP_STREAM
-./ext/imap/php_imap.c:830:63    - Unknown word (specifiedformat)     -- string matches the RFC specifiedformat */
-./ext/imap/php_imap.c:841:12    - Unknown word (Promoto)             -- // TODO Promoto to error?
+./ext/imap/php_imap.c:682:12    - Unknown word (MAXLOGINTRIALS)      -- #ifdef SET_MAXLOGINTRIALS
+./ext/imap/php_imap.c:774:12    - Unknown word (reimplementation)    -- /* Manual reimplementation of the GET_IMAP_STREAM
+./ext/imap/php_imap.c:801:63    - Unknown word (specifiedformat)     -- string matches the RFC specifiedformat */
+./ext/imap/php_imap.c:812:12    - Unknown word (Promoto)             -- // TODO Promoto to error?
 ./ext/imap/php_imap.c:85:43     - Unknown word (myzvalue)     -- header_object(zval *myzvalue, ENVELOPE *en);
 ./ext/imap/php_imap.c:87:54     - Unknown word (addresslist)  -- parse_address(ADDRESS *addresslist, zval *paddress);
 ./ext/imap/php_imap.c:87:73     - Unknown word (paddress)     -- *addresslist, zval *paddress);
 ./ext/imap/php_imap.c:91:28     - Unknown word (readfn)       -- char *php_mail_gets(readfn_t f, void *stream, unsigned
-./ext/imap/php_imap.c:952:34    - Unknown word (QUOTAROOT)           -- callback for the GET_QUOTAROOT function */
-./ext/imap/php_imap.c:954:12    - Unknown word (getquotaroot)        -- if (!imap_getquotaroot(imap_conn_struct->imap
+./ext/imap/php_imap.c:923:34    - Unknown word (QUOTAROOT)           -- callback for the GET_QUOTAROOT function */
+./ext/imap/php_imap.c:925:12    - Unknown word (getquotaroot)        -- if (!imap_getquotaroot(imap_conn_struct->imap
 ./ext/imap/php_imap.c:95:7      - Unknown word (cpystr)       -- char *cpystr(const char *str);
+./ext/imap/php_imap.c:963:46    - Unknown word (OSSS)                -- parameters(ZEND_NUM_ARGS(), "OSSS", &imap_conn_obj, php
 ./ext/imap/php_imap.c:96:14     - Unknown word (SIZEDTEXT)    -- char *cpytxt(SIZEDTEXT *dst, char *text, unsigned
 ./ext/imap/php_imap.c:96:7      - Unknown word (cpytxt)       -- char *cpytxt(SIZEDTEXT *dst, char
-./ext/imap/php_imap.c:992:46    - Unknown word (OSSS)                -- parameters(ZEND_NUM_ARGS(), "OSSS", &imap_conn_obj, php
 ./ext/imap/php_imap.h:50:38     - Unknown word (Wstrict)    -- DIAGNOSTIC_IGNORED_START("-Wstrict-prototypes")
 ./ext/imap/php_imap.h:73:9      - Unknown word (IMAPVER)    -- #define IMAPVER "Imap 4R1"
 ./ext/imap/php_imap.stub.php:171:18    - Unknown word (prefetchin) -- * no search prefetchin
-./ext/imap/php_imap.stub.php:452:65    - Unknown word (nums)       -- imap, string $message_nums, int $flags = 0): bool
+./ext/imap/php_imap.stub.php:452:65    - Unknown word (nums)       -- imap, string $message_nums, int $flags = 0): true
 ./ext/imap/php_imap.stub.php:544:22    - Unknown word (MUTF)       -- #ifdef HAVE_IMAP_MUTF7
 ./ext/imap/php_imap.stub.php:545:27    - Unknown word (mutf)       -- function imap_utf8_to_mutf7(string $string): string
-./ext/imap/php_imap_arginfo.h:122:54    - Unknown word (listscan)       -- MASK_EX(arginfo_imap_listscan, 0, 4, MAY_BE_ARRAY
-./ext/imap/php_imap_arginfo.h:131:22    - Unknown word (scanmailbox)    -- define arginfo_imap_scanmailbox arginfo_imap_listscan
-./ext/imap/php_imap_arginfo.h:147:54    - Unknown word (createmailbox)  -- INFO_EX(arginfo_imap_createmailbox, 0, 2, _IS_BOOL, 0)
-./ext/imap/php_imap_arginfo.h:154:54    - Unknown word (renamemailbox)  -- INFO_EX(arginfo_imap_renamemailbox, 0, 3, _IS_BOOL, 0)
-./ext/imap/php_imap_arginfo.h:162:22    - Unknown word (deletemailbox)  -- define arginfo_imap_deletemailbox arginfo_imap_createmailbox
-./ext/imap/php_imap_arginfo.h:198:53    - Unknown word (mailboxmsginfo) -- INFO_EX(arginfo_imap_mailboxmsginfo, 0, 1, stdClass, 0)
-./ext/imap/php_imap_arginfo.h:202:54    - Unknown word (setflag)        -- INFO_EX(arginfo_imap_setflag_full, 0, 3, _IS_BOOL
-./ext/imap/php_imap_arginfo.h:209:22    - Unknown word (clearflag)      -- define arginfo_imap_clearflag_full arginfo_imap_setflag
-./ext/imap/php_imap_arginfo.h:236:22    - Unknown word (listmailbox)    -- define arginfo_imap_listmailbox arginfo_imap_list
-./ext/imap/php_imap_arginfo.h:240:22    - Unknown word (listsubscribed) -- define arginfo_imap_listsubscribed arginfo_imap_list
-./ext/imap/php_imap_arginfo.h:242:22    - Unknown word (getsubscribed)  -- define arginfo_imap_getsubscribed arginfo_imap_list
-./ext/imap/php_imap_arginfo.h:244:22    - Unknown word (getmailboxes)   -- define arginfo_imap_getmailboxes arginfo_imap_list
-./ext/imap/php_imap_arginfo.h:305:58    - Unknown word (quotaroot)      -- EX(arginfo_imap_get_quotaroot, 0, 2, MAY_BE_ARRAY
-./ext/imap/php_imap_arginfo.h:329:22    - Unknown word (getacl)         -- define arginfo_imap_getacl arginfo_imap_get_quotaroot
+./ext/imap/php_imap_arginfo.h:124:54    - Unknown word (listscan)       -- MASK_EX(arginfo_imap_listscan, 0, 4, MAY_BE_ARRAY
+./ext/imap/php_imap_arginfo.h:133:22    - Unknown word (scanmailbox)    -- define arginfo_imap_scanmailbox arginfo_imap_listscan
+./ext/imap/php_imap_arginfo.h:149:54    - Unknown word (createmailbox)  -- INFO_EX(arginfo_imap_createmailbox, 0, 2, _IS_BOOL, 0)
+./ext/imap/php_imap_arginfo.h:156:54    - Unknown word (renamemailbox)  -- INFO_EX(arginfo_imap_renamemailbox, 0, 3, _IS_BOOL, 0)
+./ext/imap/php_imap_arginfo.h:164:22    - Unknown word (deletemailbox)  -- define arginfo_imap_deletemailbox arginfo_imap_createmailbox
+./ext/imap/php_imap_arginfo.h:200:53    - Unknown word (mailboxmsginfo) -- INFO_EX(arginfo_imap_mailboxmsginfo, 0, 1, stdClass, 0)
+./ext/imap/php_imap_arginfo.h:204:54    - Unknown word (setflag)        -- INFO_EX(arginfo_imap_setflag_full, 0, 3, IS_TRUE
+./ext/imap/php_imap_arginfo.h:211:22    - Unknown word (clearflag)      -- define arginfo_imap_clearflag_full arginfo_imap_setflag
+./ext/imap/php_imap_arginfo.h:238:22    - Unknown word (listmailbox)    -- define arginfo_imap_listmailbox arginfo_imap_list
+./ext/imap/php_imap_arginfo.h:242:22    - Unknown word (listsubscribed) -- define arginfo_imap_listsubscribed arginfo_imap_list
+./ext/imap/php_imap_arginfo.h:244:22    - Unknown word (getsubscribed)  -- define arginfo_imap_getsubscribed arginfo_imap_list
+./ext/imap/php_imap_arginfo.h:246:22    - Unknown word (getmailboxes)   -- define arginfo_imap_getmailboxes arginfo_imap_list
+./ext/imap/php_imap_arginfo.h:307:58    - Unknown word (quotaroot)      -- EX(arginfo_imap_get_quotaroot, 0, 2, MAY_BE_ARRAY
+./ext/imap/php_imap_arginfo.h:331:22    - Unknown word (getacl)         -- define arginfo_imap_getacl arginfo_imap_get_quotaroot
 ./ext/imap/php_imap_arginfo.h:41:58     - Unknown word (headerinfo) -- MASK_EX(arginfo_imap_headerinfo, 0, 2, stdClass, MAY
-./ext/imap/php_imap_arginfo.h:528:31    - Unknown word (OPENTIMEOUT)    -- LONG_CONSTANT("IMAP_OPENTIMEOUT", PHP_IMAP_OPENTIMEOUT
-./ext/imap/php_imap_arginfo.h:529:31    - Unknown word (READTIMEOUT)    -- LONG_CONSTANT("IMAP_READTIMEOUT", PHP_IMAP_READTIMEOUT
-./ext/imap/php_imap_arginfo.h:530:31    - Unknown word (WRITETIMEOUT)   -- LONG_CONSTANT("IMAP_WRITETIMEOUT", PHP_IMAP_WRITETIMEOUT
-./ext/imap/php_imap_arginfo.h:531:31    - Unknown word (CLOSETIMEOUT)   -- LONG_CONSTANT("IMAP_CLOSETIMEOUT", PHP_IMAP_CLOSETIMEOUT
-./ext/imap/php_imap_arginfo.h:535:29    - Unknown word (SHORTCACHE)     -- REGISTER_LONG_CONSTANT("OP_SHORTCACHE", OP_SHORTCACHE, CONST
-./ext/imap/php_imap_arginfo.h:538:29    - Unknown word (HALFOPEN)       -- REGISTER_LONG_CONSTANT("OP_HALFOPEN", OP_HALFOPEN, CONST
-./ext/imap/php_imap_arginfo.h:546:29    - Unknown word (PREFETCHTEXT)   -- REGISTER_LONG_CONSTANT("FT_PREFETCHTEXT", FT_PREFETCHTEXT, CONST
-./ext/imap/php_imap_arginfo.h:554:29    - Unknown word (NOPREFETCH)     -- REGISTER_LONG_CONSTANT("SE_NOPREFETCH", SE_NOPREFETCH, CONST
-./ext/imap/php_imap_arginfo.h:556:29    - Unknown word (NOSERVER)       -- REGISTER_LONG_CONSTANT("SO_NOSERVER", SO_FREE, CONST_PERSISTENT
-./ext/imap/php_imap_arginfo.h:560:29    - Unknown word (UIDNEXT)        -- REGISTER_LONG_CONSTANT("SA_UIDNEXT", SA_UIDNEXT, CONST
-./ext/imap/php_imap_arginfo.h:561:29    - Unknown word (UIDVALIDITY)    -- REGISTER_LONG_CONSTANT("SA_UIDVALIDITY", SA_UIDVALIDITY, CONST
-./ext/imap/php_imap_arginfo.h:563:26    - Unknown word (LATT)           -- REGISTER_LONG_CONSTANT("LATT_NOINFERIORS", LATT_NOINFERIOR
-./ext/imap/php_imap_arginfo.h:563:31    - Unknown word (NOINFERIORS)    -- LONG_CONSTANT("LATT_NOINFERIORS", LATT_NOINFERIORS,
-./ext/imap/php_imap_arginfo.h:564:31    - Unknown word (NOSELECT)       -- LONG_CONSTANT("LATT_NOSELECT", LATT_NOSELECT, CONST
-./ext/imap/php_imap_arginfo.h:570:18    - Unknown word (HASCHILDREN)    -- #if defined(LATT_HASCHILDREN)
-./ext/imap/php_imap_arginfo.h:573:18    - Unknown word (HASNOCHILDREN)  -- #if defined(LATT_HASNOCHILDREN)
-./ext/imap/php_imap_arginfo.h:576:26    - Unknown word (SORTDATE)       -- REGISTER_LONG_CONSTANT("SORTDATE", SORTDATE, CONST_PERSISTENT
-./ext/imap/php_imap_arginfo.h:577:26    - Unknown word (SORTARRIVAL)    -- REGISTER_LONG_CONSTANT("SORTARRIVAL", SORTARRIVAL, CONST
-./ext/imap/php_imap_arginfo.h:578:26    - Unknown word (SORTFROM)       -- REGISTER_LONG_CONSTANT("SORTFROM", SORTFROM, CONST_PERSISTENT
-./ext/imap/php_imap_arginfo.h:579:26    - Unknown word (SORTSUBJECT)    -- REGISTER_LONG_CONSTANT("SORTSUBJECT", SORTSUBJECT, CONST
-./ext/imap/php_imap_arginfo.h:580:26    - Unknown word (SORTTO)         -- REGISTER_LONG_CONSTANT("SORTTO", SORTTO, CONST_PERSISTENT
-./ext/imap/php_imap_arginfo.h:581:26    - Unknown word (SORTCC)         -- REGISTER_LONG_CONSTANT("SORTCC", SORTCC, CONST_PERSISTENT
-./ext/imap/php_imap_arginfo.h:582:26    - Unknown word (SORTSIZE)       -- REGISTER_LONG_CONSTANT("SORTSIZE", SORTSIZE, CONST_PERSISTENT
-./ext/imap/php_imap_arginfo.h:583:26    - Unknown word (TYPETEXT)       -- REGISTER_LONG_CONSTANT("TYPETEXT", TYPETEXT, CONST_PERSISTENT
-./ext/imap/php_imap_arginfo.h:584:26    - Unknown word (TYPEMULTIPART)  -- REGISTER_LONG_CONSTANT("TYPEMULTIPART", TYPEMULTIPART, CONST
-./ext/imap/php_imap_arginfo.h:585:26    - Unknown word (TYPEMESSAGE)    -- REGISTER_LONG_CONSTANT("TYPEMESSAGE", TYPEMESSAGE, CONST
-./ext/imap/php_imap_arginfo.h:586:26    - Unknown word (TYPEAPPLICATION) -- REGISTER_LONG_CONSTANT("TYPEAPPLICATION", TYPEAPPLICATION, CONST
-./ext/imap/php_imap_arginfo.h:587:26    - Unknown word (TYPEAUDIO)       -- REGISTER_LONG_CONSTANT("TYPEAUDIO", TYPEAUDIO, CONST_PERSISTENT
-./ext/imap/php_imap_arginfo.h:588:26    - Unknown word (TYPEIMAGE)       -- REGISTER_LONG_CONSTANT("TYPEIMAGE", TYPEIMAGE, CONST_PERSISTENT
-./ext/imap/php_imap_arginfo.h:589:26    - Unknown word (TYPEVIDEO)       -- REGISTER_LONG_CONSTANT("TYPEVIDEO", TYPEVIDEO, CONST_PERSISTENT
-./ext/imap/php_imap_arginfo.h:590:26    - Unknown word (TYPEMODEL)       -- REGISTER_LONG_CONSTANT("TYPEMODEL", TYPEMODEL, CONST_PERSISTENT
-./ext/imap/php_imap_arginfo.h:591:26    - Unknown word (TYPEOTHER)       -- REGISTER_LONG_CONSTANT("TYPEOTHER", TYPEOTHER, CONST_PERSISTENT
-./ext/imap/php_imap_arginfo.h:594:26    - Unknown word (ENCBINARY)       -- REGISTER_LONG_CONSTANT("ENCBINARY", ENCBINARY, CONST_PERSISTENT
-./ext/imap/php_imap_arginfo.h:595:26    - Unknown word (ENCBASE)         -- REGISTER_LONG_CONSTANT("ENCBASE64", ENCBASE64, CONST
-./ext/imap/php_imap_arginfo.h:596:26    - Unknown word (ENCQUOTEDPRINTABLE) -- REGISTER_LONG_CONSTANT("ENCQUOTEDPRINTABLE", ENCQUOTEDPRINTABLE
-./ext/imap/php_imap_arginfo.h:597:26    - Unknown word (ENCOTHER)           -- REGISTER_LONG_CONSTANT("ENCOTHER", ENCOTHER, CONST_PERSISTENT
+./ext/imap/php_imap_arginfo.h:530:31    - Unknown word (OPENTIMEOUT)    -- LONG_CONSTANT("IMAP_OPENTIMEOUT", PHP_IMAP_OPENTIMEOUT
+./ext/imap/php_imap_arginfo.h:531:31    - Unknown word (READTIMEOUT)    -- LONG_CONSTANT("IMAP_READTIMEOUT", PHP_IMAP_READTIMEOUT
+./ext/imap/php_imap_arginfo.h:532:31    - Unknown word (WRITETIMEOUT)   -- LONG_CONSTANT("IMAP_WRITETIMEOUT", PHP_IMAP_WRITETIMEOUT
+./ext/imap/php_imap_arginfo.h:533:31    - Unknown word (CLOSETIMEOUT)   -- LONG_CONSTANT("IMAP_CLOSETIMEOUT", PHP_IMAP_CLOSETIMEOUT
+./ext/imap/php_imap_arginfo.h:537:29    - Unknown word (SHORTCACHE)     -- REGISTER_LONG_CONSTANT("OP_SHORTCACHE", OP_SHORTCACHE, CONST
+./ext/imap/php_imap_arginfo.h:540:29    - Unknown word (HALFOPEN)       -- REGISTER_LONG_CONSTANT("OP_HALFOPEN", OP_HALFOPEN, CONST
+./ext/imap/php_imap_arginfo.h:548:29    - Unknown word (PREFETCHTEXT)   -- REGISTER_LONG_CONSTANT("FT_PREFETCHTEXT", FT_PREFETCHTEXT, CONST
+./ext/imap/php_imap_arginfo.h:556:29    - Unknown word (NOPREFETCH)     -- REGISTER_LONG_CONSTANT("SE_NOPREFETCH", SE_NOPREFETCH, CONST
+./ext/imap/php_imap_arginfo.h:558:29    - Unknown word (NOSERVER)       -- REGISTER_LONG_CONSTANT("SO_NOSERVER", SO_FREE, CONST_PERSISTENT
+./ext/imap/php_imap_arginfo.h:562:29    - Unknown word (UIDNEXT)        -- REGISTER_LONG_CONSTANT("SA_UIDNEXT", SA_UIDNEXT, CONST
+./ext/imap/php_imap_arginfo.h:563:29    - Unknown word (UIDVALIDITY)    -- REGISTER_LONG_CONSTANT("SA_UIDVALIDITY", SA_UIDVALIDITY, CONST
+./ext/imap/php_imap_arginfo.h:565:26    - Unknown word (LATT)           -- REGISTER_LONG_CONSTANT("LATT_NOINFERIORS", LATT_NOINFERIOR
+./ext/imap/php_imap_arginfo.h:565:31    - Unknown word (NOINFERIORS)    -- LONG_CONSTANT("LATT_NOINFERIORS", LATT_NOINFERIORS,
+./ext/imap/php_imap_arginfo.h:566:31    - Unknown word (NOSELECT)       -- LONG_CONSTANT("LATT_NOSELECT", LATT_NOSELECT, CONST
+./ext/imap/php_imap_arginfo.h:572:18    - Unknown word (HASCHILDREN)    -- #if defined(LATT_HASCHILDREN)
+./ext/imap/php_imap_arginfo.h:575:18    - Unknown word (HASNOCHILDREN)  -- #if defined(LATT_HASNOCHILDREN)
+./ext/imap/php_imap_arginfo.h:578:26    - Unknown word (SORTDATE)       -- REGISTER_LONG_CONSTANT("SORTDATE", SORTDATE, CONST_PERSISTENT
+./ext/imap/php_imap_arginfo.h:579:26    - Unknown word (SORTARRIVAL)    -- REGISTER_LONG_CONSTANT("SORTARRIVAL", SORTARRIVAL, CONST
+./ext/imap/php_imap_arginfo.h:580:26    - Unknown word (SORTFROM)       -- REGISTER_LONG_CONSTANT("SORTFROM", SORTFROM, CONST_PERSISTENT
+./ext/imap/php_imap_arginfo.h:581:26    - Unknown word (SORTSUBJECT)    -- REGISTER_LONG_CONSTANT("SORTSUBJECT", SORTSUBJECT, CONST
+./ext/imap/php_imap_arginfo.h:582:26    - Unknown word (SORTTO)         -- REGISTER_LONG_CONSTANT("SORTTO", SORTTO, CONST_PERSISTENT
+./ext/imap/php_imap_arginfo.h:583:26    - Unknown word (SORTCC)         -- REGISTER_LONG_CONSTANT("SORTCC", SORTCC, CONST_PERSISTENT
+./ext/imap/php_imap_arginfo.h:584:26    - Unknown word (SORTSIZE)       -- REGISTER_LONG_CONSTANT("SORTSIZE", SORTSIZE, CONST_PERSISTENT
+./ext/imap/php_imap_arginfo.h:585:26    - Unknown word (TYPETEXT)       -- REGISTER_LONG_CONSTANT("TYPETEXT", TYPETEXT, CONST_PERSISTENT
+./ext/imap/php_imap_arginfo.h:586:26    - Unknown word (TYPEMULTIPART)  -- REGISTER_LONG_CONSTANT("TYPEMULTIPART", TYPEMULTIPART, CONST
+./ext/imap/php_imap_arginfo.h:587:26    - Unknown word (TYPEMESSAGE)    -- REGISTER_LONG_CONSTANT("TYPEMESSAGE", TYPEMESSAGE, CONST
+./ext/imap/php_imap_arginfo.h:588:26    - Unknown word (TYPEAPPLICATION) -- REGISTER_LONG_CONSTANT("TYPEAPPLICATION", TYPEAPPLICATION, CONST
+./ext/imap/php_imap_arginfo.h:589:26    - Unknown word (TYPEAUDIO)       -- REGISTER_LONG_CONSTANT("TYPEAUDIO", TYPEAUDIO, CONST_PERSISTENT
+./ext/imap/php_imap_arginfo.h:590:26    - Unknown word (TYPEIMAGE)       -- REGISTER_LONG_CONSTANT("TYPEIMAGE", TYPEIMAGE, CONST_PERSISTENT
+./ext/imap/php_imap_arginfo.h:591:26    - Unknown word (TYPEVIDEO)       -- REGISTER_LONG_CONSTANT("TYPEVIDEO", TYPEVIDEO, CONST_PERSISTENT
+./ext/imap/php_imap_arginfo.h:592:26    - Unknown word (TYPEMODEL)       -- REGISTER_LONG_CONSTANT("TYPEMODEL", TYPEMODEL, CONST_PERSISTENT
+./ext/imap/php_imap_arginfo.h:593:26    - Unknown word (TYPEOTHER)       -- REGISTER_LONG_CONSTANT("TYPEOTHER", TYPEOTHER, CONST_PERSISTENT
+./ext/imap/php_imap_arginfo.h:596:26    - Unknown word (ENCBINARY)       -- REGISTER_LONG_CONSTANT("ENCBINARY", ENCBINARY, CONST_PERSISTENT
+./ext/imap/php_imap_arginfo.h:597:26    - Unknown word (ENCBASE)         -- REGISTER_LONG_CONSTANT("ENCBASE64", ENCBASE64, CONST
+./ext/imap/php_imap_arginfo.h:598:26    - Unknown word (ENCQUOTEDPRINTABLE) -- REGISTER_LONG_CONSTANT("ENCQUOTEDPRINTABLE", ENCQUOTEDPRINTABLE
+./ext/imap/php_imap_arginfo.h:599:26    - Unknown word (ENCOTHER)           -- REGISTER_LONG_CONSTANT("ENCOTHER", ENCOTHER, CONST_PERSISTENT
 ./ext/imap/php_imap_arginfo.h:59:67     - Unknown word (adrlist)    -- arginfo_imap_rfc822_parse_adrlist, 0, 2, IS_ARRAY, 0)
 ./ext/imap/php_imap_arginfo.h:70:22     - Unknown word (fetchtext)  -- define arginfo_imap_fetchtext arginfo_imap_body
 ./ext/imap/php_imap_arginfo.h:72:58     - Unknown word (bodystruct) -- MASK_EX(arginfo_imap_bodystruct, 0, 3, stdClass, MAY
@@ -6926,10 +6913,10 @@ Lines:
 ./ext/pdo_odbc/odbc_stmt.c:74:7      - Unknown word (convbuf)     -- S->convbuf = erealloc(S->convbuf
 ./ext/pdo_odbc/odbc_stmt.c:77:55     - Unknown word (LPWSTR)      -- UTF8, 0, buf, buflen, (LPWSTR)S->convbuf, S->convbufsize
 ./ext/pdo_pgsql/pdo_pgsql.c:65:51     - Unknown word (INERROR)    -- LONG("PGSQL_TRANSACTION_INERROR", (zend_long)PGSQL_TRANSACTIO
-./ext/pdo_pgsql/pgsql_driver.c:1003:8    - Unknown word (oidstr)       -- char *oidstr;
-./ext/pdo_pgsql/pgsql_driver.c:1004:9    - Unknown word (oidstrlen)    -- size_t oidstrlen;
-./ext/pdo_pgsql/pgsql_driver.c:1005:8    - Unknown word (modestr)      -- char *modestr = "rb";
-./ext/pdo_pgsql/pgsql_driver.c:1006:9    - Unknown word (modestrlen)   -- size_t modestrlen;
+./ext/pdo_pgsql/pgsql_driver.c:1023:8    - Unknown word (oidstr)       -- char *oidstr;
+./ext/pdo_pgsql/pgsql_driver.c:1024:9    - Unknown word (oidstrlen)    -- size_t oidstrlen;
+./ext/pdo_pgsql/pgsql_driver.c:1025:8    - Unknown word (modestr)      -- char *modestr = "rb";
+./ext/pdo_pgsql/pgsql_driver.c:1026:9    - Unknown word (modestrlen)   -- size_t modestrlen;
 ./ext/pdo_pgsql/pgsql_driver.c:14:19     - Unknown word (Alshanestsky) -- | Ilia Alshanestsky <ilia@prohost.org>
 ./ext/pdo_pgsql/pgsql_driver.c:267:37    - Unknown word (crsr)         -- cursor_name, 0, "pdo_crsr_%08x", ++H->stmt_counter
 ./ext/pdo_pgsql/pgsql_driver.c:325:24    - Unknown word (PGRES)        -- pdo_pgsql_error(dbh, PGRES_FATAL_ERROR, NULL);
@@ -6938,8 +6925,8 @@ Lines:
 ./ext/pdo_pgsql/pgsql_driver.c:391:35    - Unknown word (LASTVAL)      -- PQexec(H->server, "SELECT LASTVAL()");
 ./ext/pdo_pgsql/pgsql_driver.c:396:41    - Unknown word (CURRVAL)      -- execParams(H->server, "SELECT CURRVAL($1)", 1, NULL, q, NULL
 ./ext/pdo_pgsql/pgsql_driver.c:401:57    - Unknown word (Qgetlength)   -- PQgetvalue(res, 0, 0), PQgetlength(res, 0, 0), 0);
-./ext/pdo_pgsql/pgsql_driver.c:498:8     - Unknown word (spid)         -- int spid = PQbackendPID(H->server
-./ext/pdo_pgsql/pgsql_driver.c:536:42    - Unknown word (PQTRANS)      -- ransactionStatus(H->server) > PQTRANS_IDLE;
+./ext/pdo_pgsql/pgsql_driver.c:518:8     - Unknown word (spid)         -- int spid = PQbackendPID(H->server
+./ext/pdo_pgsql/pgsql_driver.c:556:42    - Unknown word (PQTRANS)      -- ransactionStatus(H->server) > PQTRANS_IDLE;
 ./ext/pdo_pgsql/pgsql_statement.c:196:44    - Unknown word (pgpool)         -- pooling software line pgpool which doesn't close
 ./ext/pdo_pgsql/pgsql_statement.c:245:30    - Unknown word (Qnfields)       -- column_count = (int) PQnfields(S->result);
 ./ext/pdo_pgsql/pgsql_statement.c:254:33    - Unknown word (Qntuples)       -- count = (zend_long)PQntuples(S->result);
@@ -6967,51 +6954,51 @@ Lines:
 ./ext/pdo_sqlite/php_pdo_sqlite_int.h:42:38     - Unknown word (afini)      -- sqlite_fci afunc, astep, afini;
 ./ext/pdo_sqlite/sqlite_driver.c:565:36    - Unknown word (rownumber)  -- mixed $context, int $rownumber, $value [, $value2
 ./ext/pdo_sqlite/sqlite_driver.c:757:29    - Unknown word (autharg)    -- int authorizer(void *autharg, int access_type, const
-./ext/pgsql/pgsql.c:1164:16   - Unknown word (stmtname)   -- char *query, *stmtname;
-./ext/pgsql/pgsql.c:1461:47   - Unknown word (typname)    -- PQexec(pgsql, "select oid,typname from pg_type");
-./ext/pgsql/pgsql.c:1470:20   - Unknown word (Qfnumber)   -- int oid_offset = PQfnumber(result,"oid");
-./ext/pgsql/pgsql.c:1502:12   - Unknown word (fnum)       -- zend_long fnum = -1;
+./ext/pgsql/pgsql.c:1165:16   - Unknown word (stmtname)   -- char *query, *stmtname;
+./ext/pgsql/pgsql.c:1462:47   - Unknown word (typname)    -- PQexec(pgsql, "select oid,typname from pg_type");
+./ext/pgsql/pgsql.c:1471:20   - Unknown word (Qfnumber)   -- int oid_offset = PQfnumber(result,"oid");
+./ext/pgsql/pgsql.c:1503:12   - Unknown word (fnum)       -- zend_long fnum = -1;
 ./ext/pgsql/pgsql.c:16:15     - Unknown word (Youichi)    -- | Youichi Iwakiri <yiwakiri@st
 ./ext/pgsql/pgsql.c:16:23     - Unknown word (Iwakiri)    -- | Youichi Iwakiri <yiwakiri@st.rim.or
-./ext/pgsql/pgsql.c:2193:3    - Unknown word (Quntrace)   -- PQuntrace(pgsql);
-./ext/pgsql/pgsql.c:2341:26   - Unknown word (lofd)       -- pgsql_mode=0, pgsql_lofd;
-./ext/pgsql/pgsql.c:245:17    - Unknown word (Lofp)       -- static inline pgLofp *pgsql_lob_from_obj
-./ext/pgsql/pgsql.c:267:10    - Unknown word (lofp)       -- pgLofp *lofp = pgsql_lob_from_obj
-./ext/pgsql/pgsql.c:2914:12   - Unknown word (Qendcopy)   -- result = PQendcopy(pgsql);
-./ext/pgsql/pgsql.c:2950:12   - Unknown word (Qputline)   -- result = PQputline(pgsql, query);
-./ext/pgsql/pgsql.c:3016:9    - Unknown word (copydone)   -- int copydone = 0;
-./ext/pgsql/pgsql.c:3135:20   - Unknown word (putcopyend) -- PHP_PQ_ERROR("putcopyend failed: %s", pgsql)
-./ext/pgsql/pgsql.c:3343:12   - Unknown word (fieldcode)  -- zend_long fieldcode;
-./ext/pgsql/pgsql.c:3559:21   - Unknown word (Qisnonblocking) -- is_non_blocking = PQisnonblocking(pgsql);
-./ext/pgsql/pgsql.c:3776:17   - Unknown word (prevriously)    -- /* {{{ Executes prevriously prepared stmtname asynchronou
-./ext/pgsql/pgsql.c:4179:100  - Unknown word (typtype)        -- atthasdef, a.attndims, t.typtype, "
-./ext/pgsql/pgsql.c:4179:30   - Unknown word (attnum)         -- SELECT a.attname, a.attnum, t.typname, a.attlen
-./ext/pgsql/pgsql.c:4179:51   - Unknown word (attlen)         -- attnum, t.typname, a.attlen, a.attnotNULL, a.atthasdef
-./ext/pgsql/pgsql.c:4179:61   - Unknown word (attnot)         -- typname, a.attlen, a.attnotNULL, a.atthasdef, a
-./ext/pgsql/pgsql.c:4179:75   - Unknown word (atthasdef)      -- attlen, a.attnotNULL, a.atthasdef, a.attndims, t.typtype
-./ext/pgsql/pgsql.c:4179:88   - Unknown word (attndims)       -- attnotNULL, a.atthasdef, a.attndims, t.typtype, "
-./ext/pgsql/pgsql.c:4182:37   - Unknown word (attrelid)       -- pg_attribute a ON (a.attrelid = c.oid) "
-./ext/pgsql/pgsql.c:4183:32   - Unknown word (atttypid)       -- JOIN pg_type t ON (a.atttypid = t.oid) "
-./ext/pgsql/pgsql.c:4184:37   - Unknown word (relnamespace)   -- pg_namespace n ON (c.relnamespace = n.oid) "
-./ext/pgsql/pgsql.c:4185:44   - Unknown word (objoid)         -- description d ON (d.objoid=a.attrelid AND d.objsubid
-./ext/pgsql/pgsql.c:4185:68   - Unknown word (objsubid)       -- objoid=a.attrelid AND d.objsubid=a.attnum AND c.oid=d
-./ext/pgsql/pgsql.c:4189:61   - Unknown word (attnotnull)     -- typname, a.attlen, a.attnotnull, a.atthasdef, a.attndims
-./ext/pgsql/pgsql.c:4203:40   - Unknown word (nspname)        -- &querystr, "' AND n.nspname = '");
-./ext/pgsql/pgsql.c:4233:19   - Unknown word (attnonull)      -- /* pg_attribute.attnonull */
-./ext/pgsql/pgsql.c:4323:45   - Unknown word (bpchar)         -- literal(type_name, "bpchar") || zend_string_equals
-./ext/pgsql/pgsql.c:4332:45   - Unknown word (tinterval)      -- literal(type_name, "tinterval"))
-./ext/pgsql/pgsql.c:4338:109  - Unknown word (timetz)         -- literal(type_name, "timetz"))
-./ext/pgsql/pgsql.c:4342:114  - Unknown word (timestamptz)    -- literal(type_name, "timestamptz"))
-./ext/pgsql/pgsql.c:4360:13   - Unknown word (VARBIT)         -- return PG_VARBIT;
-./ext/pgsql/pgsql.c:4364:45   - Unknown word (lseg)           -- literal(type_name, "lseg"))
-./ext/pgsql/pgsql.c:4365:13   - Unknown word (LSEG)           -- return PG_LSEG;
-./ext/pgsql/pgsql.c:4647:33   - Unknown word (inity)          -- REGEX1 "^[+-]{0,1}(inf)(inity){0,1}$"
-./ext/pgsql/pgsql.c:4686:37   - Unknown word (valitions)      -- feel free to add more valitions. Invalid query fails
-./ext/pgsql/pgsql.c:4748:22   - Unknown word (actallay)       -- /* these are the actallay a integer */
-./ext/pgsql/pgsql.c:5173:26   - Unknown word (tablename)      -- static inline void build_tablename(smart_str *querystr
-./ext/pgsql/pgsql.c:537:8     - Unknown word (connstring) -- char *connstring;
-./ext/pgsql/pgsql.c:822:31    - Unknown word (protorol)   -- or grater supports protorol version 3 */
-./ext/pgsql/pgsql.c:837:32    - Unknown word (datetimes)  -- COPY_PARAM("integer_datetimes");
+./ext/pgsql/pgsql.c:181:4     - Unknown word (Quntrace)   -- PQuntrace(link->conn);
+./ext/pgsql/pgsql.c:2342:26   - Unknown word (lofd)       -- pgsql_mode=0, pgsql_lofd;
+./ext/pgsql/pgsql.c:246:17    - Unknown word (Lofp)       -- static inline pgLofp *pgsql_lob_from_obj
+./ext/pgsql/pgsql.c:268:10    - Unknown word (lofp)       -- pgLofp *lofp = pgsql_lob_from_obj
+./ext/pgsql/pgsql.c:2938:12   - Unknown word (Qendcopy)   -- result = PQendcopy(pgsql);
+./ext/pgsql/pgsql.c:2974:12   - Unknown word (Qputline)   -- result = PQputline(pgsql, query);
+./ext/pgsql/pgsql.c:3040:9    - Unknown word (copydone)   -- int copydone = 0;
+./ext/pgsql/pgsql.c:3159:20   - Unknown word (putcopyend) -- PHP_PQ_ERROR("putcopyend failed: %s", pgsql)
+./ext/pgsql/pgsql.c:3367:12   - Unknown word (fieldcode)  -- zend_long fieldcode;
+./ext/pgsql/pgsql.c:3583:21   - Unknown word (Qisnonblocking) -- is_non_blocking = PQisnonblocking(pgsql);
+./ext/pgsql/pgsql.c:3800:17   - Unknown word (prevriously)    -- /* {{{ Executes prevriously prepared stmtname asynchronou
+./ext/pgsql/pgsql.c:4203:100  - Unknown word (typtype)        -- atthasdef, a.attndims, t.typtype, "
+./ext/pgsql/pgsql.c:4203:30   - Unknown word (attnum)         -- SELECT a.attname, a.attnum, t.typname, a.attlen
+./ext/pgsql/pgsql.c:4203:51   - Unknown word (attlen)         -- attnum, t.typname, a.attlen, a.attnotNULL, a.atthasdef
+./ext/pgsql/pgsql.c:4203:61   - Unknown word (attnot)         -- typname, a.attlen, a.attnotNULL, a.atthasdef, a
+./ext/pgsql/pgsql.c:4203:75   - Unknown word (atthasdef)      -- attlen, a.attnotNULL, a.atthasdef, a.attndims, t.typtype
+./ext/pgsql/pgsql.c:4203:88   - Unknown word (attndims)       -- attnotNULL, a.atthasdef, a.attndims, t.typtype, "
+./ext/pgsql/pgsql.c:4206:37   - Unknown word (attrelid)       -- pg_attribute a ON (a.attrelid = c.oid) "
+./ext/pgsql/pgsql.c:4207:32   - Unknown word (atttypid)       -- JOIN pg_type t ON (a.atttypid = t.oid) "
+./ext/pgsql/pgsql.c:4208:37   - Unknown word (relnamespace)   -- pg_namespace n ON (c.relnamespace = n.oid) "
+./ext/pgsql/pgsql.c:4209:44   - Unknown word (objoid)         -- description d ON (d.objoid=a.attrelid AND d.objsubid
+./ext/pgsql/pgsql.c:4209:68   - Unknown word (objsubid)       -- objoid=a.attrelid AND d.objsubid=a.attnum AND c.oid=d
+./ext/pgsql/pgsql.c:4213:61   - Unknown word (attnotnull)     -- typname, a.attlen, a.attnotnull, a.atthasdef, a.attndims
+./ext/pgsql/pgsql.c:4227:40   - Unknown word (nspname)        -- &querystr, "' AND n.nspname = '");
+./ext/pgsql/pgsql.c:4257:19   - Unknown word (attnonull)      -- /* pg_attribute.attnonull */
+./ext/pgsql/pgsql.c:4347:45   - Unknown word (bpchar)         -- literal(type_name, "bpchar") || zend_string_equals
+./ext/pgsql/pgsql.c:4356:45   - Unknown word (tinterval)      -- literal(type_name, "tinterval"))
+./ext/pgsql/pgsql.c:4362:109  - Unknown word (timetz)         -- literal(type_name, "timetz"))
+./ext/pgsql/pgsql.c:4366:114  - Unknown word (timestamptz)    -- literal(type_name, "timestamptz"))
+./ext/pgsql/pgsql.c:4384:13   - Unknown word (VARBIT)         -- return PG_VARBIT;
+./ext/pgsql/pgsql.c:4388:45   - Unknown word (lseg)           -- literal(type_name, "lseg"))
+./ext/pgsql/pgsql.c:4389:13   - Unknown word (LSEG)           -- return PG_LSEG;
+./ext/pgsql/pgsql.c:4671:33   - Unknown word (inity)          -- REGEX1 "^[+-]{0,1}(inf)(inity){0,1}$"
+./ext/pgsql/pgsql.c:4710:37   - Unknown word (valitions)      -- feel free to add more valitions. Invalid query fails
+./ext/pgsql/pgsql.c:4772:22   - Unknown word (actallay)       -- /* these are the actallay a integer */
+./ext/pgsql/pgsql.c:5197:26   - Unknown word (tablename)      -- static inline void build_tablename(smart_str *querystr
+./ext/pgsql/pgsql.c:538:8     - Unknown word (connstring) -- char *connstring;
+./ext/pgsql/pgsql.c:823:31    - Unknown word (protorol)   -- or grater supports protorol version 3 */
+./ext/pgsql/pgsql.c:838:32    - Unknown word (datetimes)  -- COPY_PARAM("integer_datetimes");
 ./ext/pgsql/pgsql.stub.php:12:17     - Unknown word (LIBPQ)      -- const PGSQL_LIBPQ_VERSION = UNKNOWN;
 ./ext/pgsql/pgsql.stub.php:6:8       - Unknown word (libpq)      -- /* libpq version */
 ./ext/pgsql/pgsql_arginfo.h:103:20    - Unknown word (fieldname)    -- #define arginfo_pg_fieldname arginfo_pg_field_name
@@ -7029,12 +7016,13 @@ Lines:
 ./ext/pgsql/pgsql_arginfo.h:263:20    - Unknown word (loimport)     -- #define arginfo_pg_loimport arginfo_pg_lo_import
 ./ext/pgsql/pgsql_arginfo.h:271:20    - Unknown word (loexport)     -- #define arginfo_pg_loexport arginfo_pg_lo_export
 ./ext/pgsql/pgsql_arginfo.h:300:20    - Unknown word (clientencoding) -- #define arginfo_pg_clientencoding arginfo_pg_dbname
-./ext/pgsql/pgsql_arginfo.h:756:47    - Unknown word (PQERRORS)       -- PGSQL_ERRORS_TERSE", PQERRORS_TERSE, CONST_PERSISTENT
-./ext/pgsql/pgsql_arginfo.h:759:5     - Unknown word (PGVERSION)      -- #if PGVERSION_NUM > 110000
-./ext/pgsql/pgsql_arginfo.h:809:30    - Unknown word (NONLOCALIZED)   -- defined(PG_DIAG_SEVERITY_NONLOCALIZED)
+./ext/pgsql/pgsql_arginfo.h:763:47    - Unknown word (PQERRORS)       -- PGSQL_ERRORS_TERSE", PQERRORS_TERSE, CONST_PERSISTENT
+./ext/pgsql/pgsql_arginfo.h:766:5     - Unknown word (PGVERSION)      -- #if PGVERSION_NUM > 110000
+./ext/pgsql/pgsql_arginfo.h:816:30    - Unknown word (NONLOCALIZED)   -- defined(PG_DIAG_SEVERITY_NONLOCALIZED)
 ./ext/pgsql/pgsql_arginfo.h:81:20     - Unknown word (numfields)    -- #define arginfo_pg_numfields arginfo_pg_num_rows
-./ext/pgsql/pgsql_arginfo.h:820:13    - Unknown word (PQTRACE)        -- #if defined(PQTRACE_SUPPPRESS_TIMESTAMPS
-./ext/pgsql/pgsql_arginfo.h:820:21    - Unknown word (SUPPPRESS)      -- #if defined(PQTRACE_SUPPPRESS_TIMESTAMPS)
+./ext/pgsql/pgsql_arginfo.h:827:13    - Unknown word (PQTRACE)        -- #if defined(PQTRACE_SUPPPRESS_TIMESTAMPS
+./ext/pgsql/pgsql_arginfo.h:827:21    - Unknown word (SUPPPRESS)      -- #if defined(PQTRACE_SUPPPRESS_TIMESTAMPS)
+./ext/pgsql/pgsql_arginfo.h:845:53    - Unknown word (PQSHOW)         -- SHOW_CONTEXT_NEVER", PQSHOW_CONTEXT_NEVER, CONST
 ./ext/pgsql/pgsql_arginfo.h:85:20     - Unknown word (cmdtuples)    -- #define arginfo_pg_cmdtuples arginfo_pg_num_rows
 ./ext/pgsql/php_pgsql.h:134:5     - Unknown word (geometoric) -- /* geometoric */
 ./ext/pgsql/tests/README.md:12:41     - Unknown word (createdb)   -- and database, type `createdb test` from command prompt
@@ -7869,8 +7857,8 @@ Lines:
 ./ext/sqlite3/sqlite3.c:1145:99   - Unknown word (newoffs)    -- whence, zend_off_t *newoffs)
 ./ext/sqlite3/sqlite3.c:1600:82   - Unknown word (binded)     -- If expanded is true, binded parameters and values
 ./ext/sqlite3/sqlite3.c:208:8     - Unknown word (errtext)    -- char *errtext = NULL;
-./ext/sqlite3/sqlite3.c:2124:6    - Unknown word (authreturn) -- int authreturn = SQLITE_DENY;
-./ext/sqlite3/sqlite3.c:2351:37   - Unknown word (threasafe)  -- load if this wasn't a threasafe library loaded */
+./ext/sqlite3/sqlite3.c:2126:6    - Unknown word (authreturn) -- int authreturn = SQLITE_DENY;
+./ext/sqlite3/sqlite3.c:2353:37   - Unknown word (threasafe)  -- load if this wasn't a threasafe library loaded */
 ./ext/standard/array.c:1463:15   - Unknown word (thash)      -- HashTable *thash;
 ./ext/standard/array.c:2773:57   - Unknown word (lstep)      -- ulong) start - end) / lstep; \
 ./ext/standard/array.c:2787:15   - Unknown word (zhigh)      -- zval *zlow, *zhigh, *zstep = NULL, tmp
@@ -8655,14 +8643,14 @@ Lines:
 ./ext/xsl/xsltprocessor.c:96:26     - Unknown word (tctxt)      -- xsltTransformContextPtr tctxt;
 ./ext/zend_test/fiber.c:13:20     - Unknown word (Piotrowski) -- | Authors: Aaron Piotrowski <aaron@trowski.com>
 ./ext/zend_test/php_test.h:53:19     - Unknown word (weakmap)    -- HashTable global_weakmap;
-./ext/zend_test/test.c:133:12    - Unknown word (leakbytes)  -- zend_long leakbytes = 3;
-./ext/zend_test/test.c:276:11    - Unknown word (weakrefs)   -- if (zend_weakrefs_hash_add(&ZT_G(global
-./ext/zend_test/test.c:630:30    - Unknown word (zendtestattribute) -- zend_attribute_validate_zendtestattribute(zend_attribute *attr
-./ext/zend_test/test.c:791:4     - Unknown word (donc)              -- /* donc refers to DoOperationNoCast
-./ext/zend_test/test.c:813:12    - Unknown word (DONC)              -- #define IS_DONC(zval) \
-./ext/zend_test/test_arginfo.h:188:116   - Unknown word (nlikely)    -- 0, ZendTestNS\\\125nlikelyCompileError, 1)
+./ext/zend_test/test.c:136:12    - Unknown word (leakbytes)  -- zend_long leakbytes = 3;
+./ext/zend_test/test.c:323:11    - Unknown word (weakrefs)   -- if (zend_weakrefs_hash_add(&ZT_G(global
+./ext/zend_test/test.c:677:30    - Unknown word (zendtestattribute) -- zend_attribute_validate_zendtestattribute(zend_attribute *attr
+./ext/zend_test/test.c:838:4     - Unknown word (donc)              -- /* donc refers to DoOperationNoCast
+./ext/zend_test/test.c:860:12    - Unknown word (DONC)              -- #define IS_DONC(zval) \
+./ext/zend_test/test_arginfo.h:104:42    - Unknown word (uquantity)  -- test_zend_ini_parse_uquantity arginfo_zend_test_zend
+./ext/zend_test/test_arginfo.h:199:116   - Unknown word (nlikely)    -- 0, ZendTestNS\\\125nlikelyCompileError, 1)
 ./ext/zend_test/test_arginfo.h:51:68     - Unknown word (stdclass)   -- arginfo_zend_string_or_stdclass, 0, 1, stdClass, MAY
-./ext/zend_test/test_arginfo.h:96:42     - Unknown word (uquantity)  -- test_zend_ini_parse_uquantity arginfo_zend_test_zend
 ./ext/zip/examples/addglob.php:4:19      - Unknown word (ZIPARCHIVE) -- $z->open('a.zip', ZIPARCHIVE::CREATE);
 ./ext/zip/examples/addglob.php:8:37      - Unknown word (myimages)   -- path' => '/home/francis/myimages',
 ./ext/zip/examples/create.php:17:22     - Unknown word (testfilephp) -- zip->addFromString("testfilephp.txt" . time(), "#1 This

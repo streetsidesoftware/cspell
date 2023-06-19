@@ -3,7 +3,7 @@ Repository: RustPython/RustPython
 Url: "https://github.com/RustPython/RustPython.git"
 Args: ["**"]
 Lines:
- CSpell: Files checked: 597, Issues found: 2686 in 304 files
+ CSpell: Files checked: 597, Issues found: 2693 in 304 files
  exit code: 1
 ./Cargo.toml:111:82    - Unknown word (termcolor)  -- features = ["atty", "termcolor"] }
 ./Cargo.toml:154:62    - Unknown word (redoxer)    -- to compile/check with redoxer
@@ -711,9 +711,9 @@ Lines:
 ./vm/src/stdlib/ast.rs:45:17     - Unknown word (numargs)    -- let numargs = args.args.len();
 ./vm/src/stdlib/atexit.rs:1:22      - Unknown word (exitfuncs)  -- pub use atexit::_run_exitfuncs;
 ./vm/src/stdlib/atexit.rs:50:9      - Unknown word (ncallbacks) -- fn _ncallbacks(vm: &VirtualMachine
-./vm/src/stdlib/builtins.rs:374:42    - Unknown word (breakpointhook) -- attr(vm.ctx.intern_str("breakpointhook"), vm)
-./vm/src/stdlib/builtins.rs:407:26    - Unknown word (normalish)      -- // everything is normalish, we can just rely on
-./vm/src/stdlib/builtins.rs:561:45    - Unknown word (iret)           -- iterator).next(vm).map(|iret| match iret {
+./vm/src/stdlib/builtins.rs:376:42    - Unknown word (breakpointhook) -- attr(vm.ctx.intern_str("breakpointhook"), vm)
+./vm/src/stdlib/builtins.rs:409:26    - Unknown word (normalish)      -- // everything is normalish, we can just rely on
+./vm/src/stdlib/builtins.rs:563:45    - Unknown word (iret)           -- iterator).next(vm).map(|iret| match iret {
 ./vm/src/stdlib/codecs.rs:351:17    - Unknown word (pycodecs)   -- fn delegate_pycodecs(
 ./vm/src/stdlib/codecs.rs:381:8     - Unknown word (readbuffer) -- fn readbuffer_encode(args: FuncArgs
 ./vm/src/stdlib/collections.rs:142:12    - Unknown word (extendleft) -- fn extendleft(&self, iter: PyObjectRef
@@ -781,8 +781,8 @@ Lines:
 ./vm/src/stdlib/io.rs:664:13    - Unknown word (bufobj)        -- bufobj: PyObjectRef,
 ./vm/src/stdlib/io.rs:919:21    - Unknown word (memobj)        -- let memobj = PyMemoryView::from
 ./vm/src/stdlib/io.rs:925:21    - Unknown word (writebuf)      -- let writebuf = VecBuffer::from(v
-./vm/src/stdlib/itertools.rs:1179:12   - Unknown word (teedata)    -- // teedata a python class
-./vm/src/stdlib/itertools.rs:1757:21   - Unknown word (numactive)  -- let mut numactive = zelf.iterators.len
+./vm/src/stdlib/itertools.rs:1226:12   - Unknown word (teedata)    -- // teedata a python class
+./vm/src/stdlib/itertools.rs:1804:21   - Unknown word (numactive)  -- let mut numactive = zelf.iterators.len
 ./vm/src/stdlib/itertools.rs:86:59     - Unknown word (leat)       -- from("function takes at leat 1 arguments (0 given
 ./vm/src/stdlib/marshal.rs:52:21     - Unknown word (pycomplex)  -- ref pycomplex @ PyComplex => {
 ./vm/src/stdlib/marshal.rs:65:21     - Unknown word (pyfrozen)   -- ref pyfrozen @ PyFrozenSet => {
@@ -813,20 +813,20 @@ Lines:
 ./vm/src/stdlib/nt.rs:339:30    - Unknown word (ntdef)             -- use winapi::shared::{ntdef::ULARGE_INTEGER, winerror
 ./vm/src/stdlib/operator.rs:392:17    - Unknown word (nattr)      -- let nattr = args.args.len();
 ./vm/src/stdlib/operator.rs:535:25    - Unknown word (pargs)      -- let mut pargs = vec![zelf.name.as
-./vm/src/stdlib/os.rs:1134:8    - Unknown word (getcwdb)        -- fn getcwdb(vm: &VirtualMachine
-./vm/src/stdlib/os.rs:1265:19   - Unknown word (modif)          -- let (acc, modif) = match (args.times
-./vm/src/stdlib/os.rs:1334:27   - Unknown word (utimensat)      -- libc::utimensat(
-./vm/src/stdlib/os.rs:1606:47   - Unknown word (consoleapi)     -- unsafe { winapi::um::consoleapi::GetConsoleCP() },
-./vm/src/stdlib/os.rs:360:8     - Unknown word (closerange) -- fn closerange(fd_low: i32, fd_high
-./vm/src/stdlib/os.rs:488:8     - Unknown word (mkdirs)     -- fn mkdirs(path: PyStrRef, vm:
-./vm/src/stdlib/os.rs:499:11    - Unknown word (LISTDIR)    -- const LISTDIR_FD: bool = cfg!(all
-./vm/src/stdlib/os.rs:502:8     - Unknown word (listdir)    -- fn listdir(path: OptionalArg<OsPathOrFd
-./vm/src/stdlib/os.rs:612:9     - Unknown word (pathval)    -- pathval: PathBuf,
-./vm/src/stdlib/os.rs:798:17    - Unknown word (entryref)   -- let entryref: &mut Option<fs::ReadDir
-./vm/src/stdlib/os.rs:878:26    - Unknown word (structsequence) -- // TODO: unnamed structsequence fields
-./vm/src/stdlib/os.rs:920:34    - Unknown word (ctim)           -- ctime = (stat.st_ctim.tv_sec, stat.st_ctim
-./vm/src/stdlib/os.rs:996:33    - Unknown word (fileutils)      -- // Based on CPython fileutils.c' attributes_to_mode
-./vm/src/stdlib/os.rs:999:48    - Unknown word (IFEXEC)         -- S_IFDIR | 0o111; /* IFEXEC for user,group,other
+./vm/src/stdlib/os.rs:1000:48   - Unknown word (IFEXEC)         -- S_IFDIR | 0o111; /* IFEXEC for user,group,other
+./vm/src/stdlib/os.rs:1135:8    - Unknown word (getcwdb)        -- fn getcwdb(vm: &VirtualMachine
+./vm/src/stdlib/os.rs:1266:19   - Unknown word (modif)          -- let (acc, modif) = match (args.times
+./vm/src/stdlib/os.rs:1335:27   - Unknown word (utimensat)      -- libc::utimensat(
+./vm/src/stdlib/os.rs:1607:47   - Unknown word (consoleapi)     -- unsafe { winapi::um::consoleapi::GetConsoleCP() },
+./vm/src/stdlib/os.rs:361:8     - Unknown word (closerange) -- fn closerange(fd_low: i32, fd_high
+./vm/src/stdlib/os.rs:489:8     - Unknown word (mkdirs)     -- fn mkdirs(path: PyStrRef, vm:
+./vm/src/stdlib/os.rs:500:11    - Unknown word (LISTDIR)    -- const LISTDIR_FD: bool = cfg!(all
+./vm/src/stdlib/os.rs:503:8     - Unknown word (listdir)    -- fn listdir(path: OptionalArg<OsPathOrFd
+./vm/src/stdlib/os.rs:613:9     - Unknown word (pathval)    -- pathval: PathBuf,
+./vm/src/stdlib/os.rs:799:17    - Unknown word (entryref)   -- let entryref: &mut Option<fs::ReadDir
+./vm/src/stdlib/os.rs:879:26    - Unknown word (structsequence) -- // TODO: unnamed structsequence fields
+./vm/src/stdlib/os.rs:921:34    - Unknown word (ctim)           -- ctime = (stat.st_ctim.tv_sec, stat.st_ctim
+./vm/src/stdlib/os.rs:997:33    - Unknown word (fileutils)      -- // Based on CPython fileutils.c' attributes_to_mode
 ./vm/src/stdlib/posix.rs:1465:21   - Unknown word (attrp)      -- let mut attrp = unsafe {
 ./vm/src/stdlib/posix.rs:1605:34   - Unknown word (winsz)      -- nix::ioctl_read_bad!(winsz, libc::TIOCGWINSZ, libc
 ./vm/src/stdlib/posix.rs:77:16     - Unknown word (GRND)       -- use libc::{GRND_NONBLOCK, GRND_RANDOM
@@ -878,12 +878,13 @@ Lines:
 ./vm/src/stdlib/sys.rs:495:17    - Unknown word (osvi)               -- let osvi = &mut version as LPOSVERSION
 ./vm/src/stdlib/sys.rs:496:59    - Unknown word (OSVERSIONINFOW)     -- accepts a pointer of OSVERSIONINFOW, but winapi crate's
 ./vm/src/stdlib/sys.rs:52:11     - Unknown word (MAXUNICODE) -- const MAXUNICODE: u32 = std::char::MAX
-./vm/src/stdlib/sys.rs:625:19    - Unknown word (profilefunc)        -- fn setprofile(profilefunc: PyObjectRef, vm: &VirtualMac
-./vm/src/stdlib/sys.rs:653:17    - Unknown word (tracefunc)          -- fn settrace(tracefunc: PyObjectRef, vm: &VirtualMac
-./vm/src/stdlib/sys.rs:714:18    - Unknown word (PYTHONSAFEPATH)     -- /// -P, `PYTHONSAFEPATH`
-./vm/src/stdlib/sys.rs:764:51    - Unknown word (PYTHREAD)           -- stdlib::thread::_thread::PYTHREAD_NAME,
-./vm/src/stdlib/sys.rs:862:9     - Unknown word (releaselevel)       -- releaselevel: &'static str,
-./vm/src/stdlib/sys.rs:872:36    - Unknown word (RELEASELEVEL)       -- releaselevel: version::RELEASELEVEL,
+./vm/src/stdlib/sys.rs:625:31    - Unknown word (maxdigits)          -- set_int_max_str_digits(maxdigits: usize, vm: &VirtualMachine
+./vm/src/stdlib/sys.rs:642:19    - Unknown word (profilefunc)        -- fn setprofile(profilefunc: PyObjectRef, vm: &VirtualMac
+./vm/src/stdlib/sys.rs:670:17    - Unknown word (tracefunc)          -- fn settrace(tracefunc: PyObjectRef, vm: &VirtualMac
+./vm/src/stdlib/sys.rs:731:18    - Unknown word (PYTHONSAFEPATH)     -- /// -P, `PYTHONSAFEPATH`
+./vm/src/stdlib/sys.rs:781:51    - Unknown word (PYTHREAD)           -- stdlib::thread::_thread::PYTHREAD_NAME,
+./vm/src/stdlib/sys.rs:879:9     - Unknown word (releaselevel)       -- releaselevel: &'static str,
+./vm/src/stdlib/sys.rs:889:36    - Unknown word (RELEASELEVEL)       -- releaselevel: version::RELEASELEVEL,
 ./vm/src/stdlib/sys.rs:93:33     - Unknown word (BASEPREFIX) -- option_env!("RUSTPYTHON_BASEPREFIX").unwrap_or_else(||
 ./vm/src/stdlib/sysconfigdata.rs:20:19     - Unknown word (GETRANDOM)  -- "HAVE_GETRANDOM" => 1,
 ./vm/src/stdlib/thread.rs:337:25    - Unknown word (sents)      -- SENTINELS.with(|sents| {
@@ -914,7 +915,7 @@ Lines:
 ./vm/src/types/slot.rs:137:28    - Unknown word (TPFLAGS)    -- CPython default: Py_TPFLAGS_HAVE_STACKLESS_EXTENSION
 ./vm/src/types/slot.rs:141:43    - Unknown word (Subclassable) -- types created in Python. Subclassable and are a
 ./vm/src/types/slot.rs:379:29    - Unknown word (subslot)      -- macro_rules! toggle_subslot {
-./vm/src/vm/mod.rs:558:29    - Unknown word (pyiter)     -- return self.map_pyiter(value, func);
+./vm/src/vm/mod.rs:560:29    - Unknown word (pyiter)     -- return self.map_pyiter(value, func);
 ./vm/src/vm/setting.rs:43:10     - Unknown word (Xfoo)       -- /// -Xfoo[=bar]
 ./vm/src/vm/setting.rs:55:10     - Unknown word (Wfoo)       -- /// -Wfoo
 ./vm/src/vm/thread.rs:38:24     - Unknown word (intp)       -- let vm_owns_obj = |intp: NonNull<VirtualMachine

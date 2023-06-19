@@ -3,7 +3,7 @@ Repository: eslint/eslint
 Url: "https://github.com/eslint/eslint"
 Args: ["**","--exclude=bin/**","--exclude=CHANGELOG.md","--exclude=_data","--exclude=tests/bench/large.js","--exclude=docs/src/_includes","--exclude=docs/src/assets/{fonts,s?css,images}"]
 Lines:
- CSpell: Files checked: 1850, Issues found: 5487 in 1245 files
+ CSpell: Files checked: 1864, Issues found: 5507 in 1252 files
  exit code: 1
 ./Makefile.js:145:88    - Unknown word (ined)               -- followed by the string "ined".
 ./Makefile.js:151:48    - Unknown word (blogpost)           -- render(cat("./templates/blogpost.md.ejs"), renderContext
@@ -37,6 +37,7 @@ Lines:
 ./docs/README.md:34:14     - Unknown word (docsjs)     -- npm run lint:docsjs
 ./docs/README.md:37:4      - Unknown word (autofix)    -- To autofix JS files, run this from
 ./docs/README.md:45:51     - Unknown word (openjsf)    -- ESLint contributors, [www.openjsf.org](https://www.openjsf
+./docs/_examples/custom-rule-tutorial-code/package.json:8:6       - Unknown word (eslintplugin) -- "eslintplugin",
 ./docs/package.json:21:23     - Unknown word (stylelint)  -- "lint:scss": "stylelint \"**/*.{scss,html}\
 ./docs/package.json:30:32     - Unknown word (syntaxhighlight) -- 1ty/eleventy-plugin-syntaxhighlight": "^3.1.2",
 ./docs/package.json:31:11     - Unknown word (munter)          -- "@munter/tap-render": "^0.2.
@@ -89,8 +90,8 @@ Lines:
 ./docs/src/contribute/package-json-conventions.md:16:87     - Unknown word (preprepare) -- ostinstall" / "prepublish" / "preprepare" / "prepare" / "postprepare
 ./docs/src/contribute/propose-new-rule.md:45:149    - Unknown word (roadmap)    -- focus on the overall roadmap. Once a rule is accepted
 ./docs/src/contribute/work-on-issue.md:16:588    - Unknown word (bikeshedding) -- evaluating`, and/or `needs bikeshedding`, and issues that cannot
-./docs/src/extend/code-path-analysis.md:385:5     - Unknown word (hoge)       -- hoge();
-./docs/src/extend/code-path-analysis.md:434:9     - Unknown word (fuga)       -- fuga();
+./docs/src/extend/code-path-analysis.md:384:5     - Unknown word (hoge)       -- hoge();
+./docs/src/extend/code-path-analysis.md:433:9     - Unknown word (fuga)       -- fuga();
 ./docs/src/extend/custom-formatters.md:201:14    - Unknown word (concat)     -- .concat(warnings)
 ./docs/src/extend/custom-formatters.md:251:61    - Unknown word (Guake)      -- www.iterm2.com/) or [Guake](http://guake-project
 ./docs/src/extend/custom-formatters.md:273:9     - Unknown word (eslintformatter) -- * `"eslintformatter"`
@@ -102,14 +103,14 @@ Lines:
 ./docs/src/extend/custom-processors.md:22:13     - Unknown word (preprocess) -- preprocess: function(text, filename
 ./docs/src/extend/custom-processors.md:33:13     - Unknown word (postprocess) -- postprocess: function(messages,
 ./docs/src/extend/custom-processors.md:42:21     - Unknown word (Autofix)     -- supportsAutofix: true // (optional,
-./docs/src/extend/custom-rules-deprecated.md:153:4     - Unknown word (endraw)     -- {% endraw %}
+./docs/src/extend/custom-rule-tutorial.md:171:4     - Unknown word (endraw)     -- {% endraw %}
+./docs/src/extend/custom-rule-tutorial.md:87:127    - Unknown word (fixability) -- documentation, and fixability. In this case, the rule
 ./docs/src/extend/custom-rules-deprecated.md:442:36    - Unknown word (doublequote) -- ["Strings must use doublequote."]
 ./docs/src/extend/custom-rules-deprecated.md:533:1     - Unknown word (camelcase)   -- camelcase |
 ./docs/src/extend/custom-rules-deprecated.md:580:81    - Unknown word (rulesdir)    -- interface) using the `--rulesdir` option to specify the
-./docs/src/extend/custom-rules.md:395:78    - Unknown word (multipass)  -- without triggering multipass fixes. Each suggestion
-./docs/src/extend/plugins.md:167:4     - Unknown word (eslintplugin) -- * `eslintplugin`
-./docs/src/extend/plugins.md:37:162    - Unknown word (myplugin)   -- named `eslint-plugin-myplugin`, then in your configuration
-./docs/src/extend/plugins.md:37:46     - Unknown word (unprefixed) -- ESLint, you would use the unprefixed plugin name, followed
+./docs/src/extend/custom-rules.md:398:78    - Unknown word (multipass)  -- without triggering multipass fixes. Each suggestion
+./docs/src/extend/plugins.md:65:162    - Unknown word (myplugin)   -- named `eslint-plugin-myplugin`, then in your configuration
+./docs/src/extend/plugins.md:65:46     - Unknown word (unprefixed) -- ESLint, you would use the unprefixed plugin name, followed
 ./docs/src/extend/scope-manager-interface.md:218:100   - Unknown word (redeclared) -- If this variable is redeclared, this array includes
 ./docs/src/extend/scope-manager-interface.md:6:125     - Unknown word (escope)     -- eslint-scope), a fork of [escope](https://github.com
 ./docs/src/extend/selectors.md:140:405   - Unknown word (Fpath)      -- so: `[value=/some\u002Fpath/]`.
@@ -248,7 +249,7 @@ Lines:
 ./docs/src/use/configure/configuration-files-new.md:150:136   - Unknown word (mylibrary)  -- unignores `node_modules/mylibrary`:
 ./docs/src/use/configure/configuration-files-new.md:150:14    - Unknown word (unignore)   -- You can also unignore files and directories
 ./docs/src/use/configure/configuration-files-new.md:237:564   - Unknown word (runtimes)   -- example, some older runtimes might only allow ECMAScript
-./docs/src/use/configure/configuration-files.md:41:25     - Unknown word (myfiletotest) -- eslint -c myconfig.json myfiletotest.js
+./docs/src/use/configure/configuration-files.md:45:25     - Unknown word (myfiletotest) -- eslint -c myconfig.json myfiletotest.js
 ./docs/src/use/configure/ignore.md:102:200   - Unknown word (jshintignore) -- example, you can use `.jshintignore` file because it has
 ./docs/src/use/configure/ignore.md:114:181   - Unknown word (globbing)     -- not used. Note that globbing rules in `.eslintignore
 ./docs/src/use/configure/ignore.md:122:14    - Unknown word (mypackage)    -- "name": "mypackage",
@@ -278,10 +279,9 @@ Lines:
 ./docs/src/use/integrations.md:22:8      - Unknown word (Syntastic)  -- * [Syntastic](https://github.com
 ./docs/src/use/integrations.md:23:11     - Unknown word (Flycheck)   -- * Emacs: [Flycheck](http://www.flycheck
 ./docs/src/use/integrations.md:27:15     - Unknown word (tmbundle)   -- * [eslint.tmbundle](https://github.com
-./docs/src/use/integrations.md:32:3      - Unknown word (Intelli)    -- * IntelliJ IDEA, WebStorm, PhpStorm
-./docs/src/use/integrations.md:43:16     - Unknown word (eslintify)  -- * Browserify: [eslintify](https://www.npmjs.com
-./docs/src/use/integrations.md:59:8      - Unknown word (Precommit)  -- * [Git Precommit Hook](https://coderwall
-./docs/src/use/integrations.md:61:4      - Unknown word (overcommit) -- * [overcommit Git hook manager](https
+./docs/src/use/integrations.md:29:3      - Unknown word (Intelli)    -- * IntelliJ IDEA, WebStorm, PhpStorm
+./docs/src/use/integrations.md:48:8      - Unknown word (Precommit)  -- * [Git Precommit Hook](https://coderwall
+./docs/src/use/integrations.md:50:4      - Unknown word (overcommit) -- * [overcommit Git hook manager](https
 ./docs/src/use/migrate-to-8.0.0.md:20:13     - Unknown word (codeframe)  -- * [Removed `codeframe` and `table` formatters
 ./docs/src/use/migrate-to-8.0.0.md:234:20    - Unknown word (cliengine)  -- ## <a name="remove-cliengine"></a> The `CLIEngine
 ./docs/src/use/migrating-from-jscs.md:12:111    - Unknown word (jscsrs)     -- .jscsrc.yaml`, or `.jscsrs.js`. In ESLint, the
@@ -353,9 +353,9 @@ Lines:
 ./lib/rules/no-extra-parens.js:255:52    - Unknown word (newed)          -- constructor function is newed-up with parens
 ./lib/rules/no-extra-parens.js:2:27      - Unknown word (parenthesising) -- fileoverview Disallow parenthesising higher precedence subexpressi
 ./lib/rules/no-extra-parens.js:2:60      - Unknown word (subexpressions) -- enthesising higher precedence subexpressions.
-./lib/rules/no-extra-parens.js:528:28    - Unknown word (logicals)       -- * Evaluate binary logicals
-./lib/rules/no-extra-parens.js:534:19    - Unknown word (prec)           -- const prec = precedence(node);
-./lib/rules/no-extra-parens.js:775:81    - Unknown word (unparenthesized) -- left-hand side is an *unparenthesized*
+./lib/rules/no-extra-parens.js:554:28    - Unknown word (logicals)       -- * Evaluate binary logicals
+./lib/rules/no-extra-parens.js:560:19    - Unknown word (prec)           -- const prec = precedence(node);
+./lib/rules/no-extra-parens.js:801:81    - Unknown word (unparenthesized) -- left-hand side is an *unparenthesized*
 ./lib/rules/no-implicit-coercion.js:14:39     - Unknown word (ndex)       -- PATTERN = /^(?:i|lastI)ndexOf$/u;
 ./lib/rules/no-inline-comments.js:61:17     - Unknown word (postamble)  -- postamble = endLine.slice(node
 ./lib/rules/no-inline-comments.js:63:19     - Unknown word (Postamble)  -- isPostambleEmpty = !postamble;
@@ -385,8 +385,8 @@ Lines:
 ./lib/rules/sort-vars.js:53:23     - Unknown word (unfixable)  -- const unfixable = idDeclarations.some
 ./lib/rules/space-unary-ops.js:130:28    - Unknown word (Doesnt)     -- function verifyWordDoesntHaveSpaces(node, firstToken
 ./lib/rules/space-unary-ops.js:243:32    - Unknown word (Dont)       -- function verifyNonWordsDontHaveSpaces(node, firstToken
-./lib/rules/utils/ast-utils.js:1991:80   - Unknown word (hashbangs)  -- ESLint itself handles hashbangs.
-./lib/rules/utils/ast-utils.js:1993:66   - Unknown word (tokenizes)  -- because of the way Espree tokenizes hashbangs.
+./lib/rules/utils/ast-utils.js:2009:80   - Unknown word (hashbangs)  -- ESLint itself handles hashbangs.
+./lib/rules/utils/ast-utils.js:2011:66   - Unknown word (tokenizes)  -- because of the way Espree tokenizes hashbangs.
 ./lib/rules/utils/ast-utils.js:395:40    - Unknown word (samely)     -- a.b` and `a?.b` are samely.
 ./lib/rules/utils/patterns/letters.js:12:24     - Unknown word (Dulin)      -- Copyright 2013-2016 Dulin Marat and other contributors
 ./lib/shared/config-validator.js:286:55    - Unknown word (ECMAFEATURES) -- source, "ESLINT_LEGACY_ECMAFEATURES");
@@ -434,12 +434,12 @@ Lines:
 ./tests/lib/config/flat-config-array.js:154:22    - Unknown word (noniterable) -- it("should allow noniterable baseConfig objects"
 ./tests/lib/config/flat-config-array.js:1745:29   - Unknown word (foox)        -- foox: [1, "bar"]
 ./tests/lib/config/flat-config-array.js:1767:30   - Unknown word (doesnt)      -- "doesnt-exist/match": "error
-./tests/lib/eslint/flat-eslint.js:1032:57   - Unknown word (doesnotexist) -- lintFiles(["subdir1", "doesnotexist/*.js"]);
-./tests/lib/eslint/flat-eslint.js:1107:58   - Unknown word (doesexist)    -- await eslint.lintFiles(["doesexist/*.js"]);
-./tests/lib/eslint/flat-eslint.js:1446:97   - Unknown word (dotfile)      -- an explicitly given dotfile is ignored", async
-./tests/lib/eslint/flat-eslint.js:1567:30   - Unknown word (reignoring)   -- it("should allow reignoring of previously ignored
-./tests/lib/eslint/flat-eslint.js:4935:31   - Unknown word (reignore)     -- cwd: `${root}-reignore`,
-./tests/lib/eslint/flat-eslint.js:4975:31   - Unknown word (dignore)      -- cwd: `${root}-dignore`,
+./tests/lib/eslint/flat-eslint.js:1056:57   - Unknown word (doesnotexist) -- lintFiles(["subdir1", "doesnotexist/*.js"]);
+./tests/lib/eslint/flat-eslint.js:1131:58   - Unknown word (doesexist)    -- await eslint.lintFiles(["doesexist/*.js"]);
+./tests/lib/eslint/flat-eslint.js:1470:97   - Unknown word (dotfile)      -- an explicitly given dotfile is ignored", async
+./tests/lib/eslint/flat-eslint.js:1591:30   - Unknown word (reignoring)   -- it("should allow reignoring of previously ignored
+./tests/lib/eslint/flat-eslint.js:4959:31   - Unknown word (reignore)     -- cwd: `${root}-reignore`,
+./tests/lib/eslint/flat-eslint.js:4999:31   - Unknown word (dignore)      -- cwd: `${root}-dignore`,
 ./tests/lib/linter/code-path-analysis/code-path-analyzer.js:30:16     - Unknown word (ESQUERY)    -- const STANDARD_ESQUERY_OPTION = { visitorKeys
 ./tests/lib/linter/config-comment-parser.js:165:41    - Unknown word (ELEVENTEEN) -- code = "a: seventy, b:ELEVENTEEN";
 ./tests/lib/linter/linter.js:3361:1    - Unknown word (consolexlog) -- consolexlog("test2");
