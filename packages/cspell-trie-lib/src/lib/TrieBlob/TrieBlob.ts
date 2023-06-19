@@ -1,5 +1,6 @@
 import { defaultTrieInfo } from '../constants.js';
-import type { ITrieNodeRoot } from '../ITrieNode/ITrieNode.js';
+import type { ITrieNode, ITrieNodeRoot } from '../ITrieNode/ITrieNode.js';
+import { findNode } from '../ITrieNode/trie-util.js';
 import type { PartialTrieInfo, TrieInfo } from '../ITrieNode/TrieInfo.js';
 import type { TrieData } from '../TrieData.js';
 import { mergeOptionalWithDefaults } from '../utils/mergeOptionalWithDefaults.js';
@@ -40,6 +41,7 @@ export class TrieBlob implements TrieData {
     readonly info: Readonly<TrieInfo>;
     private _forbidIdx: number | undefined;
     private _size: number | undefined;
+    private _iTrieRoot: ITrieNodeRoot | undefined;
 
     constructor(protected nodes: Uint32Array, protected charIndex: string[], info: PartialTrieInfo) {
         this.info = mergeOptionalWithDefaults(info);
@@ -65,6 +67,10 @@ export class TrieBlob implements TrieData {
     }
 
     getRoot(): ITrieNodeRoot {
+        return (this._iTrieRoot ??= this._getRoot());
+    }
+
+    private _getRoot(): ITrieNodeRoot {
         const trieData = new TrieBlobInternals(this.nodes, this.charIndex, this.charToIndexMap, {
             NodeMaskEOW: TrieBlob.NodeMaskEOW,
             NodeMaskNumChildren: TrieBlob.NodeMaskNumChildren,
@@ -72,6 +78,10 @@ export class TrieBlob implements TrieData {
             NodeChildRefShift: TrieBlob.NodeChildRefShift,
         });
         return new TrieBlobIRoot(trieData, 0, this.info);
+    }
+
+    getNode(prefix: string): ITrieNode | undefined {
+        return findNode(this.getRoot(), prefix);
     }
 
     private _has(nodeIdx: number, word: string): boolean {

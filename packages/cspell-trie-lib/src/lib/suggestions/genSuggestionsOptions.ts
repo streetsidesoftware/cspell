@@ -54,7 +54,7 @@ export interface SuggestionOptionsStrict extends GenSuggestionOptionsStrict {
     /**
      * Apply weights to improve the suggestions.
      */
-    weightMap?: WeightMap;
+    weightMap?: WeightMap | undefined;
 }
 
 export type SuggestionOptions = Partial<SuggestionOptionsStrict>;

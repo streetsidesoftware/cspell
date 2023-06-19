@@ -1,10 +1,15 @@
 import { describe, expect, test } from 'vitest';
 
+import type { WeightMap } from '../distance/index.js';
+import { mapDictionaryInformationToWeightMap } from '../mappers/mapDictionaryInfoToWeightMap.js';
 import { parseDictionaryLegacy } from '../SimpleDictionaryParser.js';
 import { TrieNodeTrie } from '../TrieNode/TrieNodeTrie.js';
 import { CompoundWordsMethod } from '../walker/index.js';
 import type { SuggestionOptions } from './genSuggestionsOptions.js';
-import * as Sug from './suggestAStar2.js';
+import * as Sug from './suggestAStar.js';
+
+// const oc = expect.objectContaining;
+// const ac = expect.arrayContaining;
 
 describe('Validate Suggest A Star', () => {
     const changeLimit = 3;
@@ -122,6 +127,20 @@ describe('Validate Suggest A Star', () => {
     });
 });
 
+describe('weights', () => {
+    const changeLimit = 3;
+    const trie = createTrieFromWords(sampleWords);
+    const weightMap = calcWeightMap();
+
+    test('Tests suggestions for joyfull', () => {
+        const results = Sug.suggestAStar(trie, 'joyfull', { changeLimit, weightMap });
+        const suggestions = results.map((s) => s.word);
+        // console.warn('W %o', results);
+        // console.warn('X %o', Sug.suggestAStar(trie, 'joyfull', { changeLimit }));
+        expect(suggestions).toEqual(['joyful', 'joyfully', 'joyfuller', 'joyfullest']);
+    });
+});
+
 function nCompare(v: number): 1 | 0 | -1 {
     if (v < 0) return -1;
     if (v > 0) return 1;
@@ -176,6 +195,18 @@ const sampleWords = [
     'joyriding',
     'joyrode',
     'joystick',
+    'work',
+    'will',
+    'write',
+    'what',
+    'meet',
+    'great',
+    'seat',
+    'met',
+    'relation',
+    'revelation',
+    'salvation',
+    'intrusion',
 ];
 
 function createTrieFromWords(words: string[]) {
@@ -185,4 +216,60 @@ function createTrieFromWords(words: string[]) {
 function parseDict(dict: string) {
     const trie = parseDictionaryLegacy(dict);
     return new TrieNodeTrie(trie.root);
+}
+
+function calcWeightMap(): WeightMap {
+    // cspell:ignore tion aeiou
+    return mapDictionaryInformationToWeightMap({
+        locale: 'en-US',
+        alphabet: 'a-zA-Z',
+        suggestionEditCosts: [
+            { description: "Words like 'break' and 'brake'", map: '(ate)(eat)|(ake)(eak)', replace: 75 },
+            {
+                description: 'Sounds alike',
+                map: 'f(ph)(gh)|(sion)(tion)(cion)|(ail)(ale)|(r)(ur)(er)(ure)(or)',
+                replace: 75,
+            },
+            {
+                description: 'Double letter score',
+                map: 'l(ll)|s(ss)|t(tt)|e(ee)|b(bb)|d(dd)',
+                replace: 75,
+            },
+            {
+                map: 'aeiou',
+                replace: 98,
+                swap: 75,
+                insDel: 90,
+            },
+            {
+                description: 'silent letters',
+                map: 'h',
+                insDel: 70,
+            },
+            {
+                description: 'Common vowel sounds.',
+                map: 'o(oh)(oo)|(oo)(ou)|(oa)(ou)|(ee)(ea)',
+                replace: 75,
+            },
+            {
+                map: 'o(oo)|a(aa)|e(ee)|u(uu)|(eu)(uu)|(ou)(ui)(ow)|(ie)(ei)|i(ie)|e(en)|e(ie)',
+                replace: 50,
+            },
+            {
+                description: "Do not rank `'s` high on the list.",
+                map: "($)('$)('s$)|(s$)(s'$)(s's$)",
+                replace: 10,
+                penalty: 180,
+            },
+            {
+                description: "Plurals ending in 'y'",
+                map: '(ys)(ies)',
+                replace: 75,
+            },
+            {
+                map: '(d$)(t$)(dt$)',
+                replace: 75,
+            },
+        ],
+    });
 }

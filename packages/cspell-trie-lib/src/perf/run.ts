@@ -1,4 +1,4 @@
-import { measurePerf, PerfConfig } from './perfFastTrieBlob.js';
+import { measurePerf, PerfConfig } from './perfSuite.js';
 
 const args = process.argv.slice(2);
 

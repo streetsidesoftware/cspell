@@ -1,4 +1,5 @@
-import type { ITrieNodeRoot } from '../ITrieNode/ITrieNode.js';
+import type { ITrieNode, ITrieNodeRoot } from '../ITrieNode/ITrieNode.js';
+import { findNode } from '../ITrieNode/trie-util.js';
 import type { PartialTrieInfo, TrieInfo } from '../ITrieNode/TrieInfo.js';
 import type { TrieData } from '../TrieData.js';
 import { mergeOptionalWithDefaults } from '../utils/mergeOptionalWithDefaults.js';
@@ -15,6 +16,7 @@ export class FastTrieBlob implements TrieData {
     private charToIndexMap: CharIndexMap;
     private _readonly = false;
     private _forbidIdx: number;
+    private _iTrieRoot: ITrieNodeRoot | undefined;
 
     readonly info: Readonly<TrieInfo>;
 
@@ -167,11 +169,15 @@ export class FastTrieBlob implements TrieData {
     };
 
     get iTrieRoot(): ITrieNodeRoot {
-        return FastTrieBlob.toITrieNodeRoot(this);
+        return (this._iTrieRoot ??= FastTrieBlob.toITrieNodeRoot(this));
     }
 
     getRoot(): ITrieNodeRoot {
         return this.iTrieRoot;
+    }
+
+    getNode(prefix: string): ITrieNode | undefined {
+        return findNode(this.getRoot(), prefix);
     }
 
     isForbiddenWord(word: string): boolean {

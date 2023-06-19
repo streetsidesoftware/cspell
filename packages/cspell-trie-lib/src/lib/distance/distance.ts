@@ -5,7 +5,6 @@ import type { WeightMap } from './weightedMaps.js';
 import { addDefToWeightMap, createWeightMap } from './weightedMaps.js';
 
 export type { SuggestionCostMapDef } from '../models/suggestionCostsDef.js';
-export type { WeightMap } from './weightedMaps.js';
 
 const defaultCost = 100;
 

@@ -2,10 +2,10 @@ import assert from 'assert';
 import { readFileSync, writeFileSync } from 'fs';
 
 import { selectNearestWords } from '../lib/distance/levenshtein.js';
-import type { TrieNode } from '../lib/index.js';
-import { createTrieRoot, insert, Trie } from '../lib/index.js';
+import type { TrieNode, WeightMap } from '../lib/index.js';
+import { createTrieRoot, insert, mapDictionaryInformationToWeightMap, Trie } from '../lib/index.js';
 import { suggest as suggestTrieNode } from '../lib/suggest.js';
-import { suggestAStar as suggestAStar2 } from '../lib/suggestions/suggestAStar2.js';
+import { suggestAStar as suggestAStar2 } from '../lib/suggestions/suggestAStar.js';
 import { createTrieBlobFromITrieNodeRoot } from '../lib/TrieBlob/createTrieBlob.js';
 import type { FastTrieBlob } from '../lib/TrieBlob/FastTrieBlob.js';
 import { FastTrieBlobBuilder } from '../lib/TrieBlob/FastTrieBlobBuilder.js';
@@ -31,6 +31,7 @@ export const PerfConfig = {
     fast: { desc: 'Run tests for FastTrieBlob' } as Options,
     trie: { desc: 'Run tests for original TrieNode' } as Options,
     suggest: { desc: 'Run tests for spelling suggests algorithms', auto: false } as Options,
+    'suggest.en': { desc: 'Measure English Suggestions', auto: false } as Options,
 } as const;
 
 type PerfConfig = typeof PerfConfig;
@@ -47,7 +48,10 @@ const perf: PerfNames = {
     fast: 'fast',
     trie: 'trie',
     suggest: 'suggest',
+    'suggest.en': 'suggest.en',
 };
+
+const weightMapEn = getEnglishWeightMap();
 
 class DI {
     private _timer = lazy(() => getGlobalPerfTimer());
@@ -108,40 +112,32 @@ interface TestDependencies {
     trieFastNL: FastTrieBlob;
 }
 
+type DependenciesKeys = keyof TestDependencies;
+
 export async function measurePerf(which: string | undefined, method: string | undefined) {
     const di = new DI();
     const timer = di.timer;
     timer.start('Measure Perf');
 
     await runTest(which, perf.blob, async () => {
-        const stopTimer = timer.start('prepare');
-        const trie = await di.trie;
-        const words = await di.words;
-        stopTimer();
-        timer.stop('prepare');
-        timer.measureFn('blob', () => perfBlob({ trie, words }));
+        const dep = await prepare(['trie', 'words']);
+        timer.measureFn('blob', () => perfBlob(dep));
     });
     await runTest(which, perf.fast, async () => {
-        const stopTimer = timer.start('prepare');
-        const trie = await di.trie;
-        const words = await di.words;
-        stopTimer();
-        timer.measureFn('fast', () => perfFast({ trie, words }));
+        const dep = await prepare(['trie', 'words']);
+        timer.measureFn('fast', () => perfFast(dep));
     });
     await runTest(which, perf.trie, async () => {
-        const stopTimer = timer.start('prepare');
-        const words = await di.words;
-        stopTimer();
-        timer.measureFn('trie', () => perfTrie({ words }));
+        const dep = await prepare(['words']);
+        timer.measureFn('trie', () => perfTrie(dep));
     });
     await runTest(which, perf.suggest, async () => {
-        const stopTimer = timer.start('prepare');
-        const trie = await di.trie;
-        const words = await di.words;
-        const trieFast = await di.trieFast;
-        const trieFastNL = await di.trieFastNL;
-        stopTimer();
-        timer.measureFn('suggest', () => perfSuggest({ trie, words, trieFast, trieFastNL }));
+        const dep = await prepare(['trie', 'words', 'trieFast', 'trieFastNL']);
+        timer.measureFn('suggest', () => perfSuggest(dep));
+    });
+    await runTest(which, perf['suggest.en'], async () => {
+        const dep = await prepare(['trieFast']);
+        timer.measureFn('suggest.en', () => perfSuggest2(dep));
     });
 
     timer.stop('Measure Perf');
@@ -271,24 +267,87 @@ export async function measurePerf(which: string | undefined, method: string | un
             suggestTrieNode(trie.root, 'nearest', { ignoreCase: false, changeLimit: maxEdits })
         );
 
-        const sugWords = ['afgelopen', 'nearest', 'w6gDFScm3qpITum86UhXp4UQ'];
-        timer.measureFn('sug TrieNode', () => sugAStar2(trieTrie, sugWords));
-        timer.measureFn('sug FastTrie', () => sugAStar2(trieFast, sugWords));
-        timer.measureFn('sug TrieBlob', () => sugAStar2(trieBlob, sugWords));
-
         // cspell:ignore afgelopen
-        timer.measureFn('sug FastTrie NL', () => sugAStar2(trieFastNL, sugWords));
-        timer.measureFn('sug TrieBlob NL', () => sugAStar2(trieBlobNL, sugWords));
+        const sugWords = ['afgelopen', 'nearest', 'w6gDFScm3qpITum86UhXp4UQ'];
+        measureSug(`sug TrieNode`, trieTrie, sugWords, undefined);
+        measureSug(`sug TrieNode WM`, trieTrie, sugWords, weightMapEn);
+        measureSug(`sug FastTrie`, trieFast, sugWords, undefined);
+        measureSug(`sug FastTrie WM`, trieFast, sugWords, weightMapEn);
+        measureSug(`sug TrieBlob`, trieBlob, sugWords, undefined);
+        measureSug(`sug TrieBlob WM`, trieBlob, sugWords, weightMapEn);
+        measureSug(`sug FastTrie NL`, trieFastNL, sugWords, undefined);
+        measureSug(`sug TrieBlob NL`, trieBlobNL, sugWords, undefined);
 
         return;
 
-        function sugAStar2(trie: TrieData, words: string[]) {
+        function measureSug(name: string, trie: TrieData, words: string[], weightMap: WeightMap | undefined) {
+            timer.measureFn(name, () => sugAStar2(trie, words, weightMap));
+        }
+
+        function sugAStar2(trie: TrieData, words: string[], weightMap: WeightMap | undefined) {
             for (const word of words) {
                 timer.measureFn(`suggestAStar2 ${word}`, () =>
-                    suggestAStar2(trie, word, { ignoreCase: false, changeLimit: maxEdits })
+                    suggestAStar2(trie, word, { ignoreCase: false, changeLimit: maxEdits, weightMap })
                 );
             }
         }
+    }
+
+    function perfSuggest2(params: Pick<TestDependencies, 'trieFast'>) {
+        const { trieFast } = params;
+        const maxEdits = 3;
+
+        // cspell:ignore afgelopen
+        // const sugWords = ['afgelopen', 'nearest', 'w6gDFScm3qpITum86UhXp4UQ'];
+        const sugWords = ['nearest'];
+        measureSug(`sug FastTrie`, trieFast, sugWords, undefined, 1);
+        measureSug(`sug FastTrie`, trieFast, sugWords, undefined, 1);
+        measureSug(`sug FastTrie`, trieFast, sugWords, undefined, 100);
+        measureSug(`sug FastTrie WM`, trieFast, sugWords, weightMapEn, 1);
+        measureSug(`sug FastTrie WM`, trieFast, sugWords, weightMapEn, 1);
+        measureSug(`sug FastTrie WM`, trieFast, sugWords, weightMapEn, 100);
+
+        return;
+
+        function measureSug(
+            name: string,
+            trie: TrieData,
+            words: string[],
+            weightMap: WeightMap | undefined,
+            count: number
+        ) {
+            for (const word of words) {
+                timer.measureFn(
+                    `${name} "${word}" x ${count}`,
+                    repeat(() => sugAStar2(trie, word, weightMap), count)
+                );
+            }
+        }
+
+        function repeat(fn: () => unknown, count: number) {
+            return () => {
+                for (let i = 0; i < count; ++i) {
+                    fn();
+                }
+            };
+        }
+
+        function sugAStar2(trie: TrieData, word: string, weightMap: WeightMap | undefined) {
+            suggestAStar2(trie, word, { ignoreCase: false, changeLimit: maxEdits, weightMap });
+        }
+    }
+
+    async function prepare<K extends DependenciesKeys>(keys: K[]): Promise<Pick<TestDependencies, K>> {
+        const stopTimer = timer.start('prepare');
+        const prep: Record<string, unknown> = {};
+
+        for (const key of keys) {
+            prep[key] = await di[key];
+        }
+
+        stopTimer();
+
+        return prep as Pick<TestDependencies, K>;
     }
 }
 
@@ -354,4 +413,56 @@ function lazy<T>(fn: () => T): () => T {
         r = { v };
         return v;
     };
+}
+
+// cspell:ignore tion aeiou
+
+function getEnglishWeightMap() {
+    return mapDictionaryInformationToWeightMap({
+        locale: 'en-US',
+        alphabet: 'a-zA-Z',
+        suggestionEditCosts: [
+            { description: "Words like 'break' and 'brake'", map: '(ate)(eat)|(ake)(eak)', replace: 75 },
+            {
+                description: 'Sounds alike',
+                map: 'f(ph)(gh)|(sion)(tion)(cion)|(ail)(ale)|(r)(ur)(er)(ure)(or)',
+                replace: 75,
+            },
+            {
+                description: 'Double letter score',
+                map: 'l(ll)|s(ss)|t(tt)|e(ee)|b(bb)|d(dd)',
+                replace: 75,
+            },
+            {
+                map: 'aeiou',
+                replace: 98,
+                swap: 75,
+                insDel: 90,
+            },
+            {
+                description: 'Common vowel sounds.',
+                map: 'o(oh)(oo)|(oo)(ou)|(oa)(ou)|(ee)(ea)',
+                replace: 75,
+            },
+            {
+                map: 'o(oo)|a(aa)|e(ee)|u(uu)|(eu)(uu)|(ou)(ui)(ow)|(ie)(ei)|i(ie)|e(en)|e(ie)',
+                replace: 50,
+            },
+            {
+                description: "Do not rank `'s` high on the list.",
+                map: "($)('$)('s$)|(s$)(s'$)(s's$)",
+                replace: 10,
+                penalty: 180,
+            },
+            {
+                description: "Plurals ending in 'y'",
+                map: '(ys)(ies)',
+                replace: 75,
+            },
+            {
+                map: '(d$)(t$)(dt$)',
+                replace: 75,
+            },
+        ],
+    });
 }

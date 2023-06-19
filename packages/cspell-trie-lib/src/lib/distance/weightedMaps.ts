@@ -30,7 +30,7 @@ interface Cost {
     p?: number | undefined;
 }
 
-interface TrieCost extends Cost {
+export interface TrieCost extends Cost {
     /** nested trie nodes */
     n?: Record<string, TrieCost>;
 }
