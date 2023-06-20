@@ -499,10 +499,10 @@ export interface BaseSetting extends InlineDictionary, ExperimentalBaseSettings 
      * ```
      *
      * By default, several patterns are excluded. See
-     * [Configuration](https://cspell.org/configuration/#cspelljson-sections) for more details.
+     * [Configuration](https://cspell.org/configuration/patterns) for more details.
      *
      * While you can create your own patterns, you can also leverage several patterns that are
-     * [built-in to CSpell](https://cspell.org/types/cspell-types/modules/#predefinedpatterns).
+     * [built-in to CSpell](https://cspell.org/types/cspell-types/types/PredefinedPatterns.html).
      */
     ignoreRegExpList?: RegExpPatternList;
 
@@ -512,7 +512,7 @@ export interface BaseSetting extends InlineDictionary, ExperimentalBaseSettings 
      * If this property is defined, only text matching the included patterns will be checked.
      *
      * While you can create your own patterns, you can also leverage several patterns that are
-     * [built-in to CSpell](https://cspell.org/types/cspell-types/modules/#predefinedpatterns).
+     * [built-in to CSpell](https://cspell.org/types/cspell-types/types/PredefinedPatterns.html).
      */
     includeRegExpList?: RegExpPatternList;
 

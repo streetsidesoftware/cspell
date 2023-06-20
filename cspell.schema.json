@@ -899,7 +899,7 @@
         },
         "ignoreRegExpList": {
           "$ref": "#/definitions/RegExpPatternList",
-          "description": "List of regular expression patterns or pattern names to exclude from spell checking.\n\nExample: `[\"href\"]` - to exclude html href pattern.\n\nRegular expressions use JavaScript regular expression syntax.\n\nExample: to ignore ALL-CAPS words\n\nJSON ```json \"ignoreRegExpList\": [\"/\\\\w[A-Z]+\\\\w/g\"] ```\n\nYAML ```yaml ignoreRegExpList:   - >-    /\\w[A-Z]+\\w/g ```\n\nBy default, several patterns are excluded. See [Configuration](https://cspell.org/configuration/#cspelljson-sections) for more details.\n\nWhile you can create your own patterns, you can also leverage several patterns that are [built-in to CSpell](https://cspell.org/types/cspell-types/modules/#predefinedpatterns)."
+          "description": "List of regular expression patterns or pattern names to exclude from spell checking.\n\nExample: `[\"href\"]` - to exclude html href pattern.\n\nRegular expressions use JavaScript regular expression syntax.\n\nExample: to ignore ALL-CAPS words\n\nJSON ```json \"ignoreRegExpList\": [\"/\\\\w[A-Z]+\\\\w/g\"] ```\n\nYAML ```yaml ignoreRegExpList:   - >-    /\\w[A-Z]+\\w/g ```\n\nBy default, several patterns are excluded. See [Configuration](https://cspell.org/configuration/patterns) for more details.\n\nWhile you can create your own patterns, you can also leverage several patterns that are [built-in to CSpell](https://cspell.org/types/cspell-types/types/PredefinedPatterns.html)."
         },
         "ignoreWords": {
           "description": "List of words to be ignored. An ignored word will not show up as an error, even if it is also in the `flagWords`.",
@@ -910,7 +910,7 @@
         },
         "includeRegExpList": {
           "$ref": "#/definitions/RegExpPatternList",
-          "description": "List of regular expression patterns or defined pattern names to match for spell checking.\n\nIf this property is defined, only text matching the included patterns will be checked.\n\nWhile you can create your own patterns, you can also leverage several patterns that are [built-in to CSpell](https://cspell.org/types/cspell-types/modules/#predefinedpatterns)."
+          "description": "List of regular expression patterns or defined pattern names to match for spell checking.\n\nIf this property is defined, only text matching the included patterns will be checked.\n\nWhile you can create your own patterns, you can also leverage several patterns that are [built-in to CSpell](https://cspell.org/types/cspell-types/types/PredefinedPatterns.html)."
         },
         "languageId": {
           "$ref": "#/definitions/MatchingFileType",
@@ -1081,7 +1081,7 @@
         },
         "ignoreRegExpList": {
           "$ref": "#/definitions/RegExpPatternList",
-          "description": "List of regular expression patterns or pattern names to exclude from spell checking.\n\nExample: `[\"href\"]` - to exclude html href pattern.\n\nRegular expressions use JavaScript regular expression syntax.\n\nExample: to ignore ALL-CAPS words\n\nJSON ```json \"ignoreRegExpList\": [\"/\\\\w[A-Z]+\\\\w/g\"] ```\n\nYAML ```yaml ignoreRegExpList:   - >-    /\\w[A-Z]+\\w/g ```\n\nBy default, several patterns are excluded. See [Configuration](https://cspell.org/configuration/#cspelljson-sections) for more details.\n\nWhile you can create your own patterns, you can also leverage several patterns that are [built-in to CSpell](https://cspell.org/types/cspell-types/modules/#predefinedpatterns)."
+          "description": "List of regular expression patterns or pattern names to exclude from spell checking.\n\nExample: `[\"href\"]` - to exclude html href pattern.\n\nRegular expressions use JavaScript regular expression syntax.\n\nExample: to ignore ALL-CAPS words\n\nJSON ```json \"ignoreRegExpList\": [\"/\\\\w[A-Z]+\\\\w/g\"] ```\n\nYAML ```yaml ignoreRegExpList:   - >-    /\\w[A-Z]+\\w/g ```\n\nBy default, several patterns are excluded. See [Configuration](https://cspell.org/configuration/patterns) for more details.\n\nWhile you can create your own patterns, you can also leverage several patterns that are [built-in to CSpell](https://cspell.org/types/cspell-types/types/PredefinedPatterns.html)."
         },
         "ignoreWords": {
           "description": "List of words to be ignored. An ignored word will not show up as an error, even if it is also in the `flagWords`.",
@@ -1092,7 +1092,7 @@
         },
         "includeRegExpList": {
           "$ref": "#/definitions/RegExpPatternList",
-          "description": "List of regular expression patterns or defined pattern names to match for spell checking.\n\nIf this property is defined, only text matching the included patterns will be checked.\n\nWhile you can create your own patterns, you can also leverage several patterns that are [built-in to CSpell](https://cspell.org/types/cspell-types/modules/#predefinedpatterns)."
+          "description": "List of regular expression patterns or defined pattern names to match for spell checking.\n\nIf this property is defined, only text matching the included patterns will be checked.\n\nWhile you can create your own patterns, you can also leverage several patterns that are [built-in to CSpell](https://cspell.org/types/cspell-types/types/PredefinedPatterns.html)."
         },
         "language": {
           "$ref": "#/definitions/LocaleId",
@@ -1553,7 +1553,7 @@
     },
     "ignoreRegExpList": {
       "$ref": "#/definitions/RegExpPatternList",
-      "description": "List of regular expression patterns or pattern names to exclude from spell checking.\n\nExample: `[\"href\"]` - to exclude html href pattern.\n\nRegular expressions use JavaScript regular expression syntax.\n\nExample: to ignore ALL-CAPS words\n\nJSON ```json \"ignoreRegExpList\": [\"/\\\\w[A-Z]+\\\\w/g\"] ```\n\nYAML ```yaml ignoreRegExpList:   - >-    /\\w[A-Z]+\\w/g ```\n\nBy default, several patterns are excluded. See [Configuration](https://cspell.org/configuration/#cspelljson-sections) for more details.\n\nWhile you can create your own patterns, you can also leverage several patterns that are [built-in to CSpell](https://cspell.org/types/cspell-types/modules/#predefinedpatterns)."
+      "description": "List of regular expression patterns or pattern names to exclude from spell checking.\n\nExample: `[\"href\"]` - to exclude html href pattern.\n\nRegular expressions use JavaScript regular expression syntax.\n\nExample: to ignore ALL-CAPS words\n\nJSON ```json \"ignoreRegExpList\": [\"/\\\\w[A-Z]+\\\\w/g\"] ```\n\nYAML ```yaml ignoreRegExpList:   - >-    /\\w[A-Z]+\\w/g ```\n\nBy default, several patterns are excluded. See [Configuration](https://cspell.org/configuration/patterns) for more details.\n\nWhile you can create your own patterns, you can also leverage several patterns that are [built-in to CSpell](https://cspell.org/types/cspell-types/types/PredefinedPatterns.html)."
     },
     "ignoreWords": {
       "description": "List of words to be ignored. An ignored word will not show up as an error, even if it is also in the `flagWords`.",
@@ -1578,7 +1578,7 @@
     },
     "includeRegExpList": {
       "$ref": "#/definitions/RegExpPatternList",
-      "description": "List of regular expression patterns or defined pattern names to match for spell checking.\n\nIf this property is defined, only text matching the included patterns will be checked.\n\nWhile you can create your own patterns, you can also leverage several patterns that are [built-in to CSpell](https://cspell.org/types/cspell-types/modules/#predefinedpatterns)."
+      "description": "List of regular expression patterns or defined pattern names to match for spell checking.\n\nIf this property is defined, only text matching the included patterns will be checked.\n\nWhile you can create your own patterns, you can also leverage several patterns that are [built-in to CSpell](https://cspell.org/types/cspell-types/types/PredefinedPatterns.html)."
     },
     "language": {
       "$ref": "#/definitions/LocaleId",
