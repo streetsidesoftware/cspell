@@ -179,7 +179,7 @@ jobs:
       - name: Setup
         uses: ./.github/actions/install-build
         with:
-          node-version: ${{ inputs.node-version }}
+          node-version: ${{ matrix.node-version }}
 
       - run: pnpm -r --filter ./packages/cspell run test
 

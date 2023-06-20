@@ -21,7 +21,5 @@ jobs:
 
       - name: Setup
         uses: ./.github/actions/setup
-        with:
-          node-version: ${{ matrix.node-version }}
 
       - run: pnpm run lint-docs-ci
