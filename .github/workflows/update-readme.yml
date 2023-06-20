@@ -21,8 +21,6 @@ jobs:
 
       - name: Setup and Build
         uses: ./.github/actions/install-build
-        with:
-          node-version: ${{ matrix.node-version }}
 
       - name: Build Readme
         run: |

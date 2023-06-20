@@ -10,12 +10,12 @@ inputs:
 outputs:
   value:
     description: The value
-    value: ${{ steps.read-file.outputs.value }}
+    value: ${{ steps.set-env.outputs.value }}
 runs:
   using: "composite"
   steps:
-    - name: Read File
-      id: read-file
+    - name: Set Env ${{ inputs.name }}
+      id: set-env
       shell: bash
       env:
         VALUE: ${{ inputs.value }}
