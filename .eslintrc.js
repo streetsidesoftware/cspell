@@ -30,6 +30,7 @@ const config = {
         '**/.docusaurus/**',
         'docs/_site/**',
         'docs/docsV2/**',
+        'docs/types/cspell-types/**',
         'integration-tests/repositories/**',
         'packages/*/fixtures/**',
         'packages/*/esm/**',
