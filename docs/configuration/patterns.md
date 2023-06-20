@@ -40,9 +40,36 @@ ignoreRegExpList:
 - `Email` is a predefined pattern.
 - `/ftp:[^\s]*/g` - will match anything that starts with `ftp:` until the first space.
 
-## Patterns
+# Patterns
 
-Patterns allow you to define reusable patterns for excluding or
+Patterns allow you to define reusable patterns for excluding or including text to be spell checked. To exclude text matching a pattern from being spell checked, include it the `ignoreRegExpList`.
+
+## Predefined Patterns
+
+- See: [Predefined Patterns](https://cspell.org/types/cspell-types/types/PredefinedPatterns.html)
+
+## Default `ignoreRegExpList` Patterns
+
+<!--- https://github.com/streetsidesoftware/cspell/blob/main/packages/cspell-lib/src/lib/Settings/DefaultSettings.ts#L68 --->
+
+The following patterns are used by default to ignore non-text content.
+
+```
+    Urls
+    Email
+    RsaCert
+    SshRsa
+    Base64MultiLine
+    Base64SingleLine
+    CommitHash
+    CommitHashLink
+    CStyleHexValue
+    CSSHexValue
+    SHA
+    HashStrings
+    UnicodeRef
+    UUID
+```
 
 # Verbose Regular Expressions
 
