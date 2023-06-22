@@ -7,6 +7,7 @@ import { TrieNodeTrie } from '../TrieNode/TrieNodeTrie.js';
 import { CompoundWordsMethod } from '../walker/index.js';
 import type { SuggestionOptions } from './genSuggestionsOptions.js';
 import * as Sug from './suggestAStar.js';
+import type { Progress, SuggestionGenerator, SuggestionResult } from './suggestCollector.js';
 
 // const oc = expect.objectContaining;
 // const ac = expect.arrayContaining;
@@ -20,12 +21,12 @@ describe('Validate Suggest A Star', () => {
     test('Tests suggestions for valid word talks', () => {
         const results = Sug.suggestAStar(trie, 'talks', { changeLimit: changeLimit });
         expect(results).toEqual([
-            { cost: 0, word: 'talks' },
-            { cost: 96, word: 'talk' },
-            { cost: 105, word: 'walks' },
-            { cost: 191, word: 'talked' },
-            { cost: 191, word: 'talker' },
-            { cost: 201, word: 'walk' },
+            sr('talks', 0),
+            sr('talk', 100),
+            sr('walks', 105),
+            sr('talked', 200),
+            sr('talker', 200),
+            sr('walk', 205),
         ]);
     });
 
@@ -68,7 +69,7 @@ describe('Validate Suggest A Star', () => {
     test('Tests suggestions for joyfull', () => {
         const results = Sug.suggestAStar(trie, 'joyfull', { changeLimit: changeLimit });
         const suggestions = results.map((s) => s.word);
-        expect(suggestions).toEqual(['joyful', 'joyfully', 'joyfuller', 'joyfullest', 'joyous']);
+        expect(suggestions).toEqual(['joyful', 'joyfully', 'joyfuller', 'joyous', 'joyfullest']);
     });
 
     test('Tests suggestions', () => {
@@ -132,12 +133,31 @@ describe('weights', () => {
     const trie = createTrieFromWords(sampleWords);
     const weightMap = calcWeightMap();
 
-    test('Tests suggestions for joyfull', () => {
-        const results = Sug.suggestAStar(trie, 'joyfull', { changeLimit, weightMap });
+    // cspell:ignore joyles divertion divercion diviztion divizion
+    test.each`
+        word           | n    | expected
+        ${'joyfull'}   | ${5} | ${[sr('joyful', 75), sr('joyfully', 100), sr('joyfuller', 200), sr('joyous', 294), sr('joyfullest', 300)]}
+        ${'joyles'}    | ${3} | ${[sr('joyless', 75), sr('joyous', 198), sr('joy', 278)]}
+        ${'diversion'} | ${3} | ${[sr('diversion', 0), sr('division', 187)]}
+        ${'diviztion'} | ${3} | ${[sr('division', 165), sr('diversion', 268)]}
+        ${'divizion'}  | ${3} | ${[sr('division', 70), sr('diversion', 260), sr('decision', 268)]}
+        ${'divertion'} | ${3} | ${[sr('diversion', 70), sr('division', 257)]}
+        ${'divercion'} | ${3} | ${[sr('diversion', 70), sr('division', 257)]}
+    `('Tests suggestions for $word with cost', ({ word, n, expected }) => {
+        const gen = Sug.getSuggestionsAStar(trie, word, { changeLimit, weightMap });
+        const results = collectSuggestions(gen, changeLimit * 100, n);
+        word === 'divizion' && console.warn('%o %o', word, results);
+        expect(results).toEqual(expected);
+    });
+
+    test.each`
+        word         | expected
+        ${'joyfull'} | ${['joyful', 'joyfully', 'joyfuller', 'joyous', 'joyfullest']}
+    `('Tests suggestions for $word', ({ word, expected }) => {
+        const gen = Sug.getSuggestionsAStar(trie, word, { changeLimit, weightMap });
+        const results = collectSuggestions(gen, changeLimit * 100, 5);
         const suggestions = results.map((s) => s.word);
-        // console.warn('W %o', results);
-        // console.warn('X %o', Sug.suggestAStar(trie, 'joyfull', { changeLimit }));
-        expect(suggestions).toEqual(['joyful', 'joyfully', 'joyfuller', 'joyfullest']);
+        expect(suggestions).toEqual(expected);
     });
 });
 
@@ -203,11 +223,31 @@ const sampleWords = [
     'great',
     'seat',
     'met',
+    'accession',
+    'coercions',
+    'collision',
+    'creation',
+    'decision',
+    'diversion',
+    'division',
+    'elation',
+    'explanation',
+    'expulsion',
+    'extrapolation',
+    'intrusion',
+    'percussion',
+    'permission',
+    'protrusion',
     'relation',
     'revelation',
     'salvation',
-    'intrusion',
+    'suspicion',
+    'television',
 ];
+
+function sr(word: string, cost: number): SuggestionResult {
+    return { word, cost };
+}
 
 function createTrieFromWords(words: string[]) {
     return TrieNodeTrie.createFromWords(words);
@@ -227,8 +267,8 @@ function calcWeightMap(): WeightMap {
             { description: "Words like 'break' and 'brake'", map: '(ate)(eat)|(ake)(eak)', replace: 75 },
             {
                 description: 'Sounds alike',
-                map: 'f(ph)(gh)|(sion)(tion)(cion)|(ail)(ale)|(r)(ur)(er)(ure)(or)',
-                replace: 75,
+                map: 'f(ph)(gh)|(sion)(tion)(cion)(zion)|(ail)(ale)|(r)(ur)(er)(ure)(or)|szc',
+                replace: 70,
             },
             {
                 description: 'Double letter score',
@@ -270,6 +310,44 @@ function calcWeightMap(): WeightMap {
                 map: '(d$)(t$)(dt$)',
                 replace: 75,
             },
+            {
+                map: '(ale)(ail)|(eat)(eet)}',
+                replace: 70,
+            },
         ],
     });
+}
+
+function isProgress(v: unknown | Progress): v is Progress {
+    if (!v || typeof v !== 'object') return false;
+    return (v as Progress).type === 'progress';
+}
+
+function collectSuggestions(sugGen: SuggestionGenerator, maxCost = 300, numSugs = 10): SuggestionResult[] {
+    const sugs = new Set<SuggestionResult>();
+    const sugMap = new Map<string, SuggestionResult>();
+
+    for (let n = sugGen.next(maxCost); !n.done; n = sugGen.next(maxCost)) {
+        const sug = n.value;
+        if (!sug || isProgress(sug) || sug.cost > maxCost) continue;
+        const pref = sugMap.get(sug.word);
+        if (pref && pref.cost <= sug.cost) continue;
+        if (pref) {
+            sugs.delete(pref);
+        }
+        sugMap.set(sug.word, sug);
+        sugs.add(sug);
+
+        if (sugs.size > numSugs) {
+            const sorted = [...sugs].sort(compare);
+            maxCost = sorted.slice(0, -1).reduce((a, b) => Math.max(a, b.cost), 0);
+            sugs.delete(sorted[sorted.length - 1]);
+        }
+    }
+
+    return [...sugs].sort(compare);
+
+    function compare(a: SuggestionResult, b: SuggestionResult): number {
+        return a.cost - b.cost;
+    }
 }

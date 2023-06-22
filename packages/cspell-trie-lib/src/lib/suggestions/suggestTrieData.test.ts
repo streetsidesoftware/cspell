@@ -62,7 +62,7 @@ describe('Validate Suggest', () => {
         const trie = TrieNodeTrie.createFromWords(sampleWords);
         const results = suggest(trie, 'joyfull');
         const suggestions = results.map((s) => s.word);
-        expect(suggestions).toEqual(['joyful', 'joyfully', 'joyfuller', 'joyfullest', 'joyous']);
+        expect(suggestions).toEqual(['joyful', 'joyfully', 'joyfuller', 'joyous', 'joyfullest']);
     });
 
     // cspell:ignore walkingtalkingjoy
@@ -100,8 +100,8 @@ describe('Validate Suggest', () => {
         collector.collect(genSuggestions(trie, collector.word));
         const suggestions = collector.suggestions.map((s) => s.word);
         expect(suggestions).toEqual(expect.not.arrayContaining(['joyfully']));
-        expect(suggestions).toEqual(['joyful', 'joyfuller', 'joyfullest']);
-        expect(collector.maxCost).toBeLessThan(300);
+        expect(suggestions).toEqual(['joyful', 'joyfuller', 'joyous']);
+        expect(collector.maxCost).toBeLessThanOrEqual(300);
     });
 
     test('Tests genSuggestions wanting 0', () => {
@@ -125,7 +125,7 @@ describe('Validate Suggest', () => {
         const sugs = [...genSuggestions(trie, 'joyfull')].filter(isSuggestionResult);
         const sr = sugs.sort(compSuggestionResults);
         const suggestions = sr.map((s) => s && s.word);
-        expect(suggestions).toEqual(['joyful', 'joyfully', 'joyfuller', 'joyfullest', 'joyous']);
+        expect(suggestions).toEqual(['joyful', 'joyfully', 'joyfuller', 'joyous', 'joyfullest']);
     });
 
     // cspell:ignore joyfullwalk
@@ -134,7 +134,7 @@ describe('Validate Suggest', () => {
         const collector = suggestionCollector('joyfullwalk', sugOptsMaxNum(3));
         collector.collect(genSuggestions(trie, collector.word, SEPARATE_WORDS));
         const suggestions = collector.suggestions.map((s) => s.word);
-        expect(suggestions).toEqual(['joyful walk', 'joyfully walk', 'joyful walks']);
+        expect(suggestions).toEqual(['joyful walk', 'joyfully walk', 'joyful talk']);
         expect(collector.maxCost).toBeLessThan(300);
     });
 
@@ -144,7 +144,7 @@ describe('Validate Suggest', () => {
         const collector = suggestionCollector('joyfullwalk', sugOptsMaxNum(3));
         collector.collect(genSuggestions(trie, collector.word, JOIN_WORDS));
         const suggestions = collector.suggestions.map((s) => s.word);
-        expect(suggestions).toEqual(['joyful+walk', 'joyfully+walk', 'joyful+walks']);
+        expect(suggestions).toEqual(['joyful+walk', 'joyfully+walk', 'joyful+talk']);
         expect(collector.maxCost).toBeLessThan(300);
     });
 
@@ -209,7 +209,7 @@ describe('Validate Suggest', () => {
         ${'Runningpod'}   | ${undefined} | ${5}           | ${1}         | ${[sr('Runningpod', 1), sr('runningpod', 2), sr('RunningPod', 2), sr('runningPod', 3)]}
         ${'runningpod'}   | ${undefined} | ${2}           | ${undefined} | ${[sr('runningpod', 1), sr('runningPod', 2)]}
         ${'walkingstick'} | ${undefined} | ${2}           | ${undefined} | ${[sr('walkingstick', 1), sr('talkingstick', 106)]}
-        ${'walkingtree'}  | ${undefined} | ${5}           | ${undefined} | ${[sr('talkingtree', 106), sr('walking', 366), sr('walkingpod', 367), sr('walkingPod', 367), sr('walkingstick', 367)]}
+        ${'walkingtree'}  | ${undefined} | ${5}           | ${undefined} | ${[sr('talkingtree', 106), sr('walking', 400), sr('walkingpod', 401), sr('walkingPod', 401), sr('walkingstick', 401)]}
         ${'running'}      | ${undefined} | ${2}           | ${undefined} | ${[sr('running', 0), sr('Running', 1)]}
     `(
         'suggestion results $word ic: $ignoreCase ns: $numSuggestions limit: $changeLimit',

@@ -178,6 +178,7 @@ export function suggestionCollector(wordToMatch: string, options: SuggestionColl
         weightMap,
         compoundSeparator = defaultSuggestionCollectorOptions.compoundSeparator,
     } = options;
+    // const weightMap: WeightMap | undefined = undefined;
 
     const numSuggestions = Math.max(options.numSuggestions, 0) || 0;
     const numSugToHold = weightMap ? numSuggestions * 2 : numSuggestions;
