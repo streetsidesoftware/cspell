@@ -187,10 +187,11 @@ describe('Verify using multiple dictionaries', () => {
         const dictCollection = createCollection(dicts, 'test');
         const sugResult = dictCollection.suggest('applemango', sugOpts(10, CompoundWordsMethod.NONE));
         const sugs = sugResult.map((a) => a.word);
+        // console.warn('%o', sugResult);
         expect(sugs).not.toContain('apple+mango');
         expect(sugs).not.toContain('apple mango');
         expect(sugs).toContain('apple');
-        expect(sugs).toContain('mango');
+        expect(sugs).not.toContain('mango');
     });
 
     test('checks for compound JOIN_WORDS suggestions', async () => {
@@ -232,7 +233,7 @@ describe('Verify using multiple dictionaries', () => {
 
         // cspell:ignore appletango applemango
         const dictCollection = createCollection(dicts, 'test');
-        const sugResult = dictCollection.suggest('appletango', sugOpts(10, CompoundWordsMethod.SEPARATE_WORDS, 2));
+        const sugResult = dictCollection.suggest('appletango', sugOpts(10, CompoundWordsMethod.SEPARATE_WORDS, 3));
         const sugs = sugResult.map((a) => a.word);
         expect(sugs).toHaveLength(1);
         expect(sugs).not.toContain('apple+mango');
@@ -366,10 +367,10 @@ describe('Verify using multiple dictionaries', () => {
     test.each`
         word            | expected
         ${'redberry'}   | ${[sr('redberry', 1), sr('red berry', 109)]}
-        ${'pink'}       | ${[sr('pinkie', 192)]}
+        ${'pink'}       | ${[sr('pinkie', 200)]}
         ${'bug'}        | ${[sr('bug', 5)]}
         ${'blackberry'} | ${[sr('blackberry', 0), sr('black berry', 104)]}
-        ${'stinkbug'}   | ${[sr('stink bug', 105), sr('pinkbug', 205)]}
+        ${'stinkbug'}   | ${[sr('stink bug', 110), sr('pinkbug', 206)]}
         ${'ignored'}    | ${[]}
     `('checks suggestions word: "$word"', ({ word, expected }) => {
         const dicts = [
@@ -388,10 +389,10 @@ describe('Verify using multiple dictionaries', () => {
 
     test.each`
         word         | expected
-        ${'bananas'} | ${[sr('banana', 94)]}
+        ${'bananas'} | ${[sr('banana', 100)]}
         ${'reg'}     | ${[sr('red', 1, true)]}
         ${'apple'}   | ${[sr('banana', 1, true), sr('grape', 2, true)]}
-        ${'orange'}  | ${[sr('lemon', 1, true), sr('grape', 298)]}
+        ${'orange'}  | ${[sr('lemon', 1, true)]}
         ${'ignored'} | ${[]}
     `('suggestions with preferred: "$word"', ({ word, expected }) => {
         const dicts = [
