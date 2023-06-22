@@ -28,23 +28,11 @@ interface TrieTrieCost {
     /** root of cost trie */
     t?: Record<string, TrieCost>;
 }
-interface CostPosition {
-    a: string;
-    ai: number;
-    b: string;
-    bi: number;
-    c: number;
-    p: number;
-}
 interface WeightMap {
     readonly insDel: TrieCost;
     readonly replace: TrieTrieCost;
     readonly swap: TrieTrieCost;
     readonly adjustments: Map<string, PenaltyAdjustment>;
-    calcInsDelCosts(pos: CostPosition): Iterable<CostPosition>;
-    calcSwapCosts(pos: CostPosition): Iterable<CostPosition>;
-    calcReplaceCosts(pos: CostPosition): Iterable<CostPosition>;
-    calcAdjustment(word: string): number;
 }
 interface PenaltyAdjustment {
     /** Penalty Identifier */
@@ -294,6 +282,7 @@ type GenerateSuggestionResult = SuggestionResultBase | Progress | undefined;
  * The SuggestionIterator is generally the
  */
 type SuggestionGenerator = Generator<GenerateSuggestionResult, void, GenerateNextParam>;
+
 type FilterWordFn = (word: string, cost: number) => boolean;
 interface SuggestionCollector {
     /**

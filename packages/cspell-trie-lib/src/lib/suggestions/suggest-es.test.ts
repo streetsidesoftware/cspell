@@ -5,6 +5,7 @@ import { readTrieFromConfig } from '../../test/dictionaries.test.helper.js';
 import { distanceAStarWeightedEx } from '../distance/distanceAStarWeighted.js';
 import { formatExResult } from '../distance/formatResultEx.js';
 import type { WeightMap } from '../distance/index.js';
+import { createWeightCostCalculator } from '../distance/weightedMaps.js';
 import { mapDictionaryInformationToWeightMap } from '../mappers/mapDictionaryInfoToWeightMap.js';
 import { parseLinesToDictionaryLegacy } from '../SimpleDictionaryParser.js';
 
@@ -87,7 +88,7 @@ describe('Validate Spanish Suggestions', () => {
         const nWordA = wordA.normalize('NFD');
         const nWordB = wordB.normalize('NFD');
 
-        const wm = weightMap();
+        const wm = createWeightCostCalculator(weightMap());
 
         const dex = distanceAStarWeightedEx(wordA, wordB, wm);
         expect(formatExResult(dex)).toMatchSnapshot();

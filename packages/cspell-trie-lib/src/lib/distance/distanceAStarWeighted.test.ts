@@ -6,7 +6,7 @@ import { distanceAStarWeighted, distanceAStarWeightedEx } from './distanceAStarW
 import { formatExResult } from './formatResultEx.js';
 import { levenshteinDistance } from './levenshtein.js';
 import type { WeightMap } from './weightedMaps.js';
-import { addDefToWeightMap, createWeightMap } from './weightedMaps.js';
+import { addDefToWeightMap, createWeightCostCalculator, createWeightMap } from './weightedMaps.js';
 
 describe('distanceAStar', () => {
     test.each`
@@ -32,8 +32,9 @@ describe('distanceAStar', () => {
         ${'apple'}   | ${'maple'}
         ${'grapple'} | ${'maples'}
     `('distanceAStarWeightedEx vs Levenshtein "$wordA" "$wordB"', ({ wordA, wordB }) => {
-        expect(formatExResult(distanceAStarWeightedEx(wordA, wordB, createWeightMap()))).toMatchSnapshot();
-        expect(formatExResult(distanceAStarWeightedEx(wordB, wordA, createWeightMap()))).toMatchSnapshot();
+        const calc = createWeightCostCalculator(createWeightMap());
+        expect(formatExResult(distanceAStarWeightedEx(wordA, wordB, calc))).toMatchSnapshot();
+        expect(formatExResult(distanceAStarWeightedEx(wordB, wordA, calc))).toMatchSnapshot();
     });
 
     // cspell:ignore aeiou aeroplane
@@ -135,8 +136,9 @@ describe('distanceAStar', () => {
             expected: number;
         }) => {
             weightMap = weightMap || createWeightMap();
-            const r1 = distanceAStarWeightedEx(wordA, wordB, weightMap);
-            const r2 = distanceAStarWeightedEx(wordB, wordA, weightMap);
+            const calc = createWeightCostCalculator(weightMap);
+            const r1 = distanceAStarWeightedEx(wordA, wordB, calc);
+            const r2 = distanceAStarWeightedEx(wordB, wordA, calc);
             expect(formatExResult(r1)).toMatchSnapshot();
             expect(formatExResult(r2)).toMatchSnapshot();
             expect(r1?.cost).toBe(expected);
@@ -166,8 +168,9 @@ describe('distanceAStar', () => {
             expectedAB: number;
             expectedBA: number;
         }) => {
-            const r1 = distanceAStarWeightedEx(wordA, wordB, weightMap);
-            const r2 = distanceAStarWeightedEx(wordB, wordA, weightMap);
+            const calc = createWeightCostCalculator(weightMap);
+            const r1 = distanceAStarWeightedEx(wordA, wordB, calc);
+            const r2 = distanceAStarWeightedEx(wordB, wordA, calc);
             expect(formatExResult(r1)).toMatchSnapshot();
             expect(formatExResult(r2)).toMatchSnapshot();
             expect(r1?.cost).toBe(expectedAB);

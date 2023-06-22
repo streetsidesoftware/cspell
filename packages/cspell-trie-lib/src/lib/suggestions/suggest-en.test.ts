@@ -10,8 +10,9 @@ import { startTimer } from '../utils/timer.js';
 import { CompoundWordsMethod } from '../walker/index.js';
 import type { SuggestionOptions } from './genSuggestionsOptions.js';
 import { genCompoundableSuggestions, suggest } from './suggest.js';
-import type { SuggestionCollectorOptions, SuggestionResult } from './suggestCollector.js';
+import type { SuggestionCollectorOptions } from './suggestCollector.js';
 import { suggestionCollector } from './suggestCollector.js';
+import type { SuggestionResult } from './SuggestionTypes.js';
 
 function getTrie() {
     return readTrieFromConfig('@cspell/dict-en_us/cspell-ext.json');

@@ -7,7 +7,7 @@ import { TrieNodeTrie } from '../TrieNode/TrieNodeTrie.js';
 import { CompoundWordsMethod } from '../walker/index.js';
 import type { SuggestionOptions } from './genSuggestionsOptions.js';
 import * as Sug from './suggestAStar.js';
-import type { Progress, SuggestionGenerator, SuggestionResult } from './suggestCollector.js';
+import type { Progress, SuggestionGenerator, SuggestionResult } from './SuggestionTypes.js';
 
 // const oc = expect.objectContaining;
 // const ac = expect.arrayContaining;
@@ -146,7 +146,7 @@ describe('weights', () => {
     `('Tests suggestions for $word with cost', ({ word, n, expected }) => {
         const gen = Sug.getSuggestionsAStar(trie, word, { changeLimit, weightMap });
         const results = collectSuggestions(gen, changeLimit * 100, n);
-        word === 'divizion' && console.warn('%o %o', word, results);
+        // word === 'divizion' && console.warn('%o %o', word, results);
         expect(results).toEqual(expected);
     });
 

@@ -7,8 +7,8 @@ import { opCosts } from './constants.js';
 import type { SuggestionOptions } from './genSuggestionsOptions.js';
 import { createSuggestionOptions } from './genSuggestionsOptions.js';
 import { visualLetterMaskMap } from './orthography.js';
-import type { SuggestionGenerator, SuggestionResult } from './suggestCollector.js';
 import { suggestionCollector } from './suggestCollector.js';
+import type { SuggestionGenerator, SuggestionResult } from './SuggestionTypes.js';
 
 type Cost = number;
 // type BranchIdx = number;

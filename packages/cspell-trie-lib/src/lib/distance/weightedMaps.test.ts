@@ -7,6 +7,7 @@ import {
     __testing__,
     addAdjustment,
     addDefToWeightMap,
+    createWeightCostCalculator,
     createWeightMap,
     lookupReplaceCost,
     prettyPrintWeightMap,
@@ -105,8 +106,8 @@ describe('Validate weightedMaps', () => {
             bi: number;
             expected: CostPosition[];
         }) => {
-            const map = createWeightMap(...defs);
-            const results = [...map.calcInsDelCosts({ a: wordA, b: wordB, ai, bi, c: 1000, p: 1000 })];
+            const calc = createWeightCostCalculator(createWeightMap(...defs));
+            const results = [...calc.calcInsDelCosts({ a: wordA, b: wordB, ai, bi, c: 1000, p: 1000 })];
             expected.forEach((p) => {
                 (p.a = p.a ?? wordA), (p.b = p.b ?? wordB);
             });
@@ -141,8 +142,8 @@ describe('Validate weightedMaps', () => {
             bi: number;
             expected: CostPosition[];
         }) => {
-            const map = createWeightMap(...defs);
-            const results = [...map.calcReplaceCosts({ a: wordA, b: wordB, ai, bi, c: 1000, p: 1000 })];
+            const calc = createWeightCostCalculator(createWeightMap(...defs));
+            const results = [...calc.calcReplaceCosts({ a: wordA, b: wordB, ai, bi, c: 1000, p: 1000 })];
             expected.forEach((p) => {
                 (p.a = p.a ?? wordA), (p.b = p.b ?? wordB);
             });
@@ -173,8 +174,8 @@ describe('Validate weightedMaps', () => {
             bi: number;
             expected: CostPosition[];
         }) => {
-            const map = createWeightMap(...defs);
-            const results = [...map.calcSwapCosts({ a: wordA, b: wordB, ai, bi, c: 1000, p: 1000 })];
+            const calc = createWeightCostCalculator(createWeightMap(...defs));
+            const results = [...calc.calcSwapCosts({ a: wordA, b: wordB, ai, bi, c: 1000, p: 1000 })];
             expected.forEach((p) => {
                 (p.a = p.a ?? wordA), (p.b = p.b ?? wordB);
             });
@@ -213,7 +214,8 @@ describe('Validate weightedMaps', () => {
     `('calcAdjustment $adjustments $word', ({ adjustments, word, expected }) => {
         const w = createWeightMap();
         addAdjustment(w, ...adjustments);
-        expect(w.calcAdjustment(word)).toEqual(expected);
+        const calc = createWeightCostCalculator(w);
+        expect(calc.calcAdjustment(word)).toEqual(expected);
     });
 });
 
