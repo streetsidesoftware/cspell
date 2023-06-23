@@ -1,8 +1,11 @@
-export interface FileResource {
+export interface FileReference {
     /**
      * The URL of the File
      */
     url: URL;
+}
+
+export interface FileResource extends FileReference {
     /**
      * The contents of the file
      */

@@ -5,11 +5,11 @@ import type { Stats } from '../models/index.js';
 import type {
     getStat as GetStatFn,
     getStatSync as GetStatSyncFn,
-    readTextFile as ReadTextFileFn,
-    readTextFileSync as ReadTextFileSyncFn,
+    readFileText as ReadFileTextFn,
+    readFileTextSync as ReadFileTextSyncFn,
 } from '../node/file/index.js';
 
-export const readTextFile: typeof ReadTextFileFn = function (
+export const readFileText: typeof ReadFileTextFn = function (
     filename: string | URL,
     encoding?: BufferEncoding
 ): Promise<string> {
@@ -18,7 +18,7 @@ export const readTextFile: typeof ReadTextFileFn = function (
         .then((fr) => fr.content);
 };
 
-export const readTextFileSync: typeof ReadTextFileSyncFn = function (
+export const readFileTextSync: typeof ReadFileTextSyncFn = function (
     filename: string | URL,
     encoding?: BufferEncoding
 ): string {

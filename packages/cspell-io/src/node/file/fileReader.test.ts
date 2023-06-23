@@ -18,7 +18,7 @@ describe('Validate the fileReader', () => {
         'tests reading a file',
         async () => {
             const expected = await fs.readFile(__filename, 'utf8');
-            const result = await fReader.readTextFile(__filename, 'utf8');
+            const result = await fReader.readFileText(__filename, 'utf8');
             expect(result).toBe(expected);
         },
         { timeout }
@@ -27,7 +27,7 @@ describe('Validate the fileReader', () => {
     test(
         'missing file',
         async () => {
-            const result = fReader.readTextFile(__filename + '.missing.file', 'utf8');
+            const result = fReader.readFileText(__filename + '.missing.file', 'utf8');
             await expect(result).rejects.toEqual(oc({ code: 'ENOENT' }));
         },
         { timeout }
@@ -41,7 +41,7 @@ describe('Validate the fileReader', () => {
         'reading sync files $file',
         ({ file, contains }) => {
             const filename = pathToRoot(file);
-            const content = fReader.readTextFileSync(filename);
+            const content = fReader.readFileTextSync(filename);
             expect(content).toContain(contains);
         },
         { timeout }
@@ -57,7 +57,7 @@ describe('Validate the fileReader', () => {
         'reading async files $file',
         async ({ file, contains }) => {
             const filename = pathToRoot(file);
-            const content = await fReader.readTextFile(filename);
+            const content = await fReader.readFileText(filename);
             expect(content).toContain(contains);
             expect(content).toMatchSnapshot();
         },
@@ -75,7 +75,7 @@ describe('Validate the fileReader', () => {
         async ({ file, contains }) => {
             const filename = isUrlLike(file) ? file : pathToRoot(file);
             const url = toURL(filename);
-            const content = await fReader.readTextFile(url);
+            const content = await fReader.readFileText(url);
             expect(content).toContain(contains);
         },
         { timeout }
@@ -90,7 +90,7 @@ describe('Validate the fileReader', () => {
         'error reading URLs $file',
         async ({ file, expected }) => {
             const url = toURL(file);
-            await expect(fReader.readTextFile(url)).rejects.toEqual(expected);
+            await expect(fReader.readFileText(url)).rejects.toEqual(expected);
         },
         { timeout }
     );

@@ -17,15 +17,15 @@ const defaultEncoding: BufferEncoding = 'utf8';
 
 const pipeline = promisify(Stream.pipeline);
 
-export async function readTextFile(filename: string | URL, encoding?: BufferEncoding): Promise<string> {
+export async function readFileText(filename: string | URL, encoding?: BufferEncoding): Promise<string> {
     const url = toURL(filename);
     if (!isSupportedURL(url)) {
         throw new Error('Unsupported network protocol');
     }
-    return isFileURL(url) ? _readTextFile(url, encoding) : _fetchTextFromURL(url, encoding);
+    return isFileURL(url) ? _readFileText(url, encoding) : _fetchTextFromURL(url, encoding);
 }
 
-function _readTextFile(url: URL, encoding?: BufferEncoding): Promise<string> {
+function _readFileText(url: URL, encoding?: BufferEncoding): Promise<string> {
     // Convert it to a string because Yarn2 cannot handle URLs.
     const filename = fileURLToPath(url);
     return _readText(() => fs.createReadStream(filename), isZipped(filename), encoding);
@@ -50,7 +50,7 @@ async function _readText(
     return isZipped ? pipeline(stream, zlib.createGunzip(), decoder, collector) : pipeline(stream, decoder, collector);
 }
 
-export function readTextFileSync(filename: string, encoding?: BufferEncoding): string {
+export function readFileTextSync(filename: string, encoding?: BufferEncoding): string {
     const rawData = fs.readFileSync(filename);
     const data = isZipped(filename) ? zlib.gunzipSync(rawData) : rawData;
 
