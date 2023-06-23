@@ -90,8 +90,8 @@ export {
 export * from '@cspell/cspell-types';
 export {
     asyncIterableToArray,
-    readFile,
-    readFileSync,
+    readTextFile as readFile,
+    readTextFileSync as readFileSync,
     writeToFile,
     writeToFileIterable,
     writeToFileIterableP,

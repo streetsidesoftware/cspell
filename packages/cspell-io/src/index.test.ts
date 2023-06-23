@@ -4,7 +4,7 @@ import * as index from './index.js';
 
 describe('index', () => {
     test('exports', () => {
-        expect(index.readFile).toBeDefined();
+        expect(index.readTextFile).toBeDefined();
     });
 
     test('api', () => {

@@ -2,7 +2,7 @@ import { loremIpsum } from 'lorem-ipsum';
 import { describe, expect, test } from 'vitest';
 
 import { makePathToFile, pathToTemp } from '../../test/test.helper.js';
-import { readFile } from './fileReader.js';
+import { readTextFile } from './fileReader.js';
 import * as fileWriter from './fileWriter.js';
 
 describe('Validate the writer', () => {
@@ -18,7 +18,7 @@ describe('Validate the writer', () => {
         await makePathToFile(filename);
 
         await fileWriter.writeToFile(filename, data);
-        const result = await readFile(filename, 'utf8');
+        const result = await readTextFile(filename, 'utf8');
         expect(result).toBe(text);
     });
 
@@ -33,7 +33,7 @@ describe('Validate the writer', () => {
         await makePathToFile(filename);
         await fileWriter.writeToFile(filename, text);
 
-        const result = await readFile(filename, 'utf8');
+        const result = await readTextFile(filename, 'utf8');
         expect(result).toBe(text);
     });
 });
