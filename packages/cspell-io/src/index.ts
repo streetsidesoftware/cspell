@@ -4,8 +4,8 @@ export { CSpellIONode, getDefaultCSpellIO } from './CSpellIONode.js';
 export {
     getStat,
     getStatSync,
-    readFile,
-    readFileSync,
+    readFileText,
+    readFileTextSync,
     writeToFile,
     writeToFileIterable,
     writeToFileIterableP,

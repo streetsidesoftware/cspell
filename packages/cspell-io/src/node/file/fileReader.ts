@@ -17,47 +17,47 @@ const defaultEncoding: BufferEncoding = 'utf8';
 
 const pipeline = promisify(Stream.pipeline);
 
-export async function readFile(filename: string | URL, encoding?: BufferEncoding): Promise<string> {
+export async function readFileText(filename: string | URL, encoding?: BufferEncoding): Promise<string> {
     const url = toURL(filename);
     if (!isSupportedURL(url)) {
         throw new Error('Unsupported network protocol');
     }
-    return isFileURL(url) ? _readFile(url, encoding) : _fetchURL(url, encoding);
+    return isFileURL(url) ? _readFileText(url, encoding) : _fetchTextFromURL(url, encoding);
 }
 
-function _readFile(url: URL, encoding?: BufferEncoding): Promise<string> {
+function _readFileText(url: URL, encoding?: BufferEncoding): Promise<string> {
     // Convert it to a string because Yarn2 cannot handle URLs.
     const filename = fileURLToPath(url);
-    return _read(() => fs.createReadStream(filename), isZipped(filename), encoding);
+    return _readText(() => fs.createReadStream(filename), isZipped(filename), encoding);
 }
 
-async function _fetchURL(url: URL, encoding?: BufferEncoding): Promise<string> {
+async function _fetchTextFromURL(url: URL, encoding?: BufferEncoding): Promise<string> {
     const response = await fetch(url);
     if (!response.ok) {
         throw FetchUrlError.create(url, response.status);
     }
-    return _read(() => response.body, isZipped(url), encoding);
+    return _readText(() => response.body, isZipped(url), encoding);
 }
 
-async function _read(
+async function _readText(
     getStream: () => NodeJS.ReadableStream,
     isZipped: boolean,
     encoding?: BufferEncoding
 ): Promise<string> {
     const stream = getStream();
     const decoder = createDecoderTransformer(encoding);
-    const collector = createCollector(encoding || defaultEncoding);
+    const collector = createTextCollector(encoding || defaultEncoding);
     return isZipped ? pipeline(stream, zlib.createGunzip(), decoder, collector) : pipeline(stream, decoder, collector);
 }
 
-export function readFileSync(filename: string, encoding?: BufferEncoding): string {
+export function readFileTextSync(filename: string, encoding?: BufferEncoding): string {
     const rawData = fs.readFileSync(filename);
     const data = isZipped(filename) ? zlib.gunzipSync(rawData) : rawData;
 
     return !encoding || encoding.startsWith('utf') ? decode(data) : data.toString(encoding);
 }
 
-function createCollector(encoding: BufferEncoding) {
+function createTextCollector(encoding: BufferEncoding) {
     async function collect(iterable: AsyncIterable<string | Buffer>): Promise<string> {
         const buf: string[] = [];
         for await (const sb of iterable) {

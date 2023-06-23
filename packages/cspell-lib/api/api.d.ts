@@ -5,7 +5,7 @@ import { WeightMap } from 'cspell-trie-lib';
 export { CompoundWordsMethod } from 'cspell-trie-lib';
 import { SuggestOptions, SuggestionResult, CachingDictionary, SpellingDictionaryCollection } from 'cspell-dictionary';
 export { SpellingDictionary, SpellingDictionaryCollection, SuggestOptions, SuggestionCollector, SuggestionResult, createSpellingDictionary, createCollection as createSpellingDictionaryCollection } from 'cspell-dictionary';
-export { asyncIterableToArray, readFile, readFileSync, writeToFile, writeToFileIterable, writeToFileIterableP } from 'cspell-io';
+export { asyncIterableToArray, readFileText as readFile, readFileTextSync as readFileSync, writeToFile, writeToFileIterable, writeToFileIterableP } from 'cspell-io';
 
 type ExclusionFunction = (fileUri: string) => boolean;
 type FileExclusionFunction = (file: string) => boolean;

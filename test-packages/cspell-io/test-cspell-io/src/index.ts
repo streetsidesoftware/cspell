@@ -1,9 +1,9 @@
-import { readFile } from 'cspell-io';
+import { readFileText } from 'cspell-io';
 
 export function run(file: string) {
     return read(file);
 }
 
 export function read(name: string): Promise<string> {
-    return readFile(name);
+    return readFileText(name);
 }

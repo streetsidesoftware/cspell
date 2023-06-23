@@ -1,4 +1,4 @@
-import { readFile as cioReadFile } from 'cspell-io';
+import { readFileText as cioReadFile } from 'cspell-io';
 import type { CSpellUserSettings, Document, Issue } from 'cspell-lib';
 import * as cspell from 'cspell-lib';
 import { fileToDocument, isBinaryFile as isUriBinaryFile } from 'cspell-lib';
