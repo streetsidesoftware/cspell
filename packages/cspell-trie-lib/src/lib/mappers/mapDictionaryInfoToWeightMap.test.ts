@@ -1,6 +1,7 @@
 import { describe, expect, test } from 'vitest';
 
 import type { CostPosition } from '../distance/weightedMaps.js';
+import { createWeightCostCalculator } from '../distance/weightedMaps.js';
 import type { DictionaryInformation } from '../models/DictionaryInformation.js';
 import { mapDictionaryInformationToWeightMap } from './mapDictionaryInfoToWeightMap.js';
 
@@ -13,7 +14,7 @@ describe('mapDictionaryInfoToWeightMap', () => {
         ${di({ hunspellInformation: { aff: 'TRY abc\n' } })}                      | ${{ a: 'apple', b: 'banana' }} | ${[cp({ a: 'apple', b: 'banana', ai: 1, bi: 1, c: 100 })]}
         ${di({ suggestionEditCosts: [{ map: 'abc', replace: 50, penalty: 2 }] })} | ${{ a: 'apple', b: 'banana' }} | ${[cp({ a: 'apple', b: 'banana', ai: 1, bi: 1, c: 50, p: 2 })]}
     `('dictionaryInformationToWeightMap $dictInfo $pos', ({ dictInfo, pos, expected }) => {
-        const wm = mapDictionaryInformationToWeightMap(dictInfo);
+        const wm = createWeightCostCalculator(mapDictionaryInformationToWeightMap(dictInfo));
         const costPos = cp(pos);
         const r = [...wm.calcReplaceCosts(costPos)];
         expect(r).toEqual(expected);

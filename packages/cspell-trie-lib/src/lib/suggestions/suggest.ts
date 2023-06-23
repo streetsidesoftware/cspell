@@ -6,14 +6,9 @@ import { opCosts } from './constants.js';
 import type { GenSuggestionOptions, SuggestionOptions } from './genSuggestionsOptions.js';
 import { createSuggestionOptions } from './genSuggestionsOptions.js';
 import { visualLetterMaskMap } from './orthography.js';
-import type {
-    MaxCost,
-    SuggestionCollectorOptions,
-    SuggestionGenerator,
-    SuggestionResult,
-    SuggestionResultBase,
-} from './suggestCollector.js';
+import type { SuggestionCollectorOptions } from './suggestCollector.js';
 import { suggestionCollector } from './suggestCollector.js';
+import type { MaxCost, SuggestionGenerator, SuggestionResult, SuggestionResultBase } from './SuggestionTypes.js';
 
 const baseCost = opCosts.baseCost;
 const swapCost = opCosts.swapCost;

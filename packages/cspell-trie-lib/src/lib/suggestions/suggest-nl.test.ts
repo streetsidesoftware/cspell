@@ -7,7 +7,7 @@ import { mapDictionaryInformationToWeightMap } from '../mappers/mapDictionaryInf
 import type { DictionaryInformation } from '../models/DictionaryInformation.js';
 import { clean } from '../utils/util.js';
 import { DEFAULT_COMPOUNDED_WORD_SEPARATOR } from './constants.js';
-import type { SuggestionResult } from './suggestCollector.js';
+import type { SuggestionResult } from './SuggestionTypes.js';
 
 function getTrie() {
     return readSampleTrie('nl_nl.trie.gz');

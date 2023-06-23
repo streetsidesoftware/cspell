@@ -7,8 +7,8 @@ import { opCosts } from './constants.js';
 import type { SuggestionOptions } from './genSuggestionsOptions.js';
 import { createSuggestionOptions } from './genSuggestionsOptions.js';
 import { visualLetterMaskMap } from './orthography.js';
-import type { SuggestionGenerator, SuggestionResult } from './suggestCollector.js';
 import { suggestionCollector } from './suggestCollector.js';
+import type { SuggestionGenerator, SuggestionResult } from './SuggestionTypes.js';
 
 type Cost = number;
 // type BranchIdx = number;
@@ -161,7 +161,7 @@ export function* getSuggestionsAStar(
         const s = srcWord[i];
         const sg = visMap[s] || 0;
         const cost0 = p.c;
-        const cost = cost0 + BC - i + (i ? 0 : opCosts.firstLetterBias);
+        const cost = cost0 + BC + (i ? 0 : opCosts.firstLetterBias);
         const costVis = cost0 + VC;
         const costLegacyCompound = cost0 + opCosts.wordBreak;
         const costCompound = cost0 + opCosts.compound;
@@ -285,7 +285,7 @@ function delLetters(pNode: PNode, weightMap: WeightMap, word: string, storePath:
 
 function insLetters(p: PNode, weightMap: WeightMap, _word: string, storePath: FnStorePath) {
     const { t, i, c, n } = p;
-    const cost0 = c + i;
+    const cost0 = c;
 
     searchTrieCostNodesMatchingTrie2(weightMap.insDel, n, (s, tc, n) => {
         if (tc.c !== undefined) {
@@ -296,32 +296,27 @@ function insLetters(p: PNode, weightMap: WeightMap, _word: string, storePath: Fn
 
 function repLetters(pNode: PNode, weightMap: WeightMap, word: string, storePath: FnStorePath) {
     const node = pNode.n;
-    const t = pNode.t;
-    const cost0 = pNode.c - pNode.i;
-    const remove = searchTrieCostNodesMatchingWord(weightMap.replace, word, pNode.i);
-    for (const r of remove) {
-        const tInsert = r.t.t;
-        if (!tInsert) continue;
-        const i = r.i;
-        for (const ins of searchTrieCostNodesMatchingTrie<TrieCost>(tInsert, node)) {
-            const { n, s, t: tt } = ins;
-            const c = tt.c;
-            if (c === undefined) {
-                continue;
-            }
-            storePath(t, n, i, cost0 + c + (tt.p || 0), s, pNode, 'r', s);
-        }
-    }
-}
-
-function* searchTrieCostNodesMatchingWord<T extends { n?: Record<string, T> }>(trie: T, word: string, i: number) {
+    const pt = pNode.t;
+    const cost0 = pNode.c;
     const len = word.length;
+    const trie = weightMap.replace;
+    let i = pNode.i;
 
     for (let n = trie.n; i < len && n; ) {
         const t = n[word[i]];
         if (!t) return;
         ++i;
-        yield { i, t };
+        // yield { i, t };
+        const tInsert = t.t;
+        if (tInsert) {
+            searchTrieCostNodesMatchingTrie2<TrieCost>(tInsert, node, (s, tt, n) => {
+                const c = tt.c;
+                if (c === undefined) {
+                    return;
+                }
+                storePath(pt, n, i, cost0 + c + (tt.p || 0), s, pNode, 'r', s);
+            });
+        }
         n = t.n;
     }
 }
@@ -378,31 +373,6 @@ function editHistory(p: PNode) {
     return nodes.map((n) => ({ i: n.i, c: n.c, a: n.a, s: n.s }));
 }
 
-interface SearchMatchingTrie<T> {
-    s: string;
-    t: T;
-    n: ITrieNode;
-}
-
-function* searchTrieCostNodesMatchingTrie<T extends { n?: Record<string, T> }>(
-    trie: T,
-    node: ITrieNode,
-    s = ''
-): Iterable<SearchMatchingTrie<T>> {
-    const n = trie.n;
-    if (!n) return;
-    const keys = node.keys();
-    for (let i = 0; i < keys.length; ++i) {
-        const key = keys[i];
-        const t = n[key];
-        if (!t) continue;
-        const c = node.child(i);
-        const pfx = s + key;
-        yield { s: pfx, t, n: c };
-        yield* searchTrieCostNodesMatchingTrie(t, c, pfx);
-    }
-}
-
 function searchTrieCostNodesMatchingTrie2<T extends { n?: Record<string, T> }>(
     trie: T,
     node: ITrieNode,
@@ -419,7 +389,9 @@ function searchTrieCostNodesMatchingTrie2<T extends { n?: Record<string, T> }>(
         const c = node.child(i);
         const pfx = s + key;
         emit(pfx, t, c);
-        searchTrieCostNodesMatchingTrie2(t, c, emit, pfx);
+        if (t.n) {
+            searchTrieCostNodesMatchingTrie2(t, c, emit, pfx);
+        }
     }
 }
 

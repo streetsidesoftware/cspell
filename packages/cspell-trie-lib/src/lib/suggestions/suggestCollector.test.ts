@@ -6,8 +6,9 @@ import { createWeightedMap, editDistance } from '../distance/index.js';
 import { mapDictionaryInformationToWeightMap } from '../mappers/mapDictionaryInfoToWeightMap.js';
 import { clean } from '../utils/util.js';
 import { DEFAULT_COMPOUNDED_WORD_SEPARATOR } from './constants.js';
-import type { SuggestionCollectorOptions, SuggestionGenerator, SuggestionResult } from './suggestCollector.js';
+import type { SuggestionCollectorOptions } from './suggestCollector.js';
 import { impersonateCollector, suggestionCollector } from './suggestCollector.js';
+import type { SuggestionGenerator, SuggestionResult } from './SuggestionTypes.js';
 
 const defaultOptions: SuggestionCollectorOptions = {
     numSuggestions: 10,

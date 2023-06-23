@@ -51,7 +51,7 @@ describe('Validate Trie Class', () => {
     test('tests suggestions with compounds', () => {
         const trie = ITrie.create(sampleWords);
         // cspell:ignore joyostalkliftswak
-        const suggestions = trie.suggest('joyostalkliftswak', { ...NumSuggestions, ...SEPARATE_WORDS });
+        const suggestions = trie.suggest('joyostalkliftswak', { ...NumSuggestions, ...SEPARATE_WORDS, changeLimit: 6 });
         // console.warn('%o', { suggestions });
         expect(suggestions).toEqual(expect.arrayContaining(['joyous talk lifts walk']));
     });

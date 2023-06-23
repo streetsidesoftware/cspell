@@ -5,7 +5,8 @@ import { selectNearestWords } from '../lib/distance/levenshtein.js';
 import type { TrieNode, WeightMap } from '../lib/index.js';
 import { createTrieRoot, insert, mapDictionaryInformationToWeightMap, Trie } from '../lib/index.js';
 import { suggest as suggestTrieNode } from '../lib/suggest.js';
-import { suggestAStar as suggestAStar2 } from '../lib/suggestions/suggestAStar.js';
+import { collectSuggestions } from '../lib/suggestions/collectSuggestions.js';
+import { getSuggestionsAStar, suggestAStar as suggestAStar2 } from '../lib/suggestions/suggestAStar.js';
 import { createTrieBlobFromITrieNodeRoot } from '../lib/TrieBlob/createTrieBlob.js';
 import type { FastTrieBlob } from '../lib/TrieBlob/FastTrieBlob.js';
 import { FastTrieBlobBuilder } from '../lib/TrieBlob/FastTrieBlobBuilder.js';
@@ -333,7 +334,8 @@ export async function measurePerf(which: string | undefined, method: string | un
         }
 
         function sugAStar2(trie: TrieData, word: string, weightMap: WeightMap | undefined) {
-            suggestAStar2(trie, word, { ignoreCase: false, changeLimit: maxEdits, weightMap });
+            const iter = getSuggestionsAStar(trie, word, { ignoreCase: false, changeLimit: maxEdits, weightMap });
+            collectSuggestions(iter, maxEdits * 100);
         }
     }
 

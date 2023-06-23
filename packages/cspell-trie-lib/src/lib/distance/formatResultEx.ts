@@ -1,6 +1,6 @@
 import type { ExResult } from './distanceAStarWeighted.js';
 import { distanceAStarWeightedEx } from './distanceAStarWeighted.js';
-import type { WeightMap } from './weightedMaps.js';
+import { createWeightCostCalculator, type WeightMap } from './weightedMaps.js';
 
 function pL(s: string, w: number) {
     const strWidth = vizWidth(s);
@@ -57,6 +57,7 @@ export function formatExResult(ex: ExResult | undefined): string {
 }
 
 export function formattedDistance(wordA: string, wordB: string, weightMap: WeightMap, cost?: number) {
-    const x = distanceAStarWeightedEx(wordA, wordB, weightMap, cost);
-    return formatExResult(x);
+    const calc = createWeightCostCalculator(weightMap);
+    const distResult = distanceAStarWeightedEx(wordA, wordB, calc, cost);
+    return formatExResult(distResult);
 }
