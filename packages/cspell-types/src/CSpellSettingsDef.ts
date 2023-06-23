@@ -488,14 +488,14 @@ export interface BaseSetting extends InlineDictionary, ExperimentalBaseSettings 
      *
      * JSON
      * ```json
-     * "ignoreRegExpList": ["/\\w[A-Z]+\\w/g"]
+     * "ignoreRegExpList": ["/\\b[A-Z]+\\b/g"]
      * ```
      *
      * YAML
      * ```yaml
      * ignoreRegExpList:
      *   - >-
-     *    /\w[A-Z]+\w/g
+     *    /\b[A-Z]+\b/g
      * ```
      *
      * By default, several patterns are excluded. See
