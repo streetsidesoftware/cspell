@@ -3,7 +3,7 @@ Repository: MicrosoftDocs/PowerShell-Docs
 Url: "https://github.com/MicrosoftDocs/PowerShell-Docs.git"
 Args: ["--config=../../../cspell-power-shell-docs.config.yaml","**"]
 Lines:
- CSpell: Files checked: 2679, Issues found: 5725 in 1241 files
+ CSpell: Files checked: 2678, Issues found: 5730 in 1241 files
  exit code: 1
 ./LICENSE:139:15    - Unknown word (sublicensable)   -- non-sublicensable, non-exclusive, irrevocable
 ./LICENSE:205:34    - Unknown word (waivable)        -- under any voluntary or waivable statutory or compulsory
@@ -59,10 +59,11 @@ Lines:
 ./reference/5.1/Microsoft.PowerShell.Core/About/about_Calculated_Properties.md:51:6      - Unknown word (formatstring) -- - `formatstring` - optional
 ./reference/5.1/Microsoft.PowerShell.Core/About/about_Character_Encoding.md:162:4     - Unknown word (bigendianutf) -- - `bigendianutf32`: Encodes in UTF-
 ./reference/5.1/Microsoft.PowerShell.Core/About/about_Classes.md:281:2     - Unknown word (ints)       -- $ints = [FunWithIntegers]
-./reference/5.1/Microsoft.PowerShell.Core/About/about_Classes.md:637:25    - Unknown word (devtype)    -- hidden [DeviceType]$devtype = [DeviceType]::Undefined
-./reference/5.1/Microsoft.PowerShell.Core/About/about_Classes.md:784:14    - Unknown word (baseclass)  -- base class ([baseclass]$this) on invocation
-./reference/5.1/Microsoft.PowerShell.Core/About/about_Classes.md:794:10    - Unknown word (basedays)   -- [int]basedays() {return ([BaseClass
-./reference/5.1/Microsoft.PowerShell.Core/About/about_Classes.md:814:25    - Unknown word (implemention) -- interface. Omitting the implemention interface members causes
+./reference/5.1/Microsoft.PowerShell.Core/About/about_Classes.md:614:43    - Unknown word (enumerateion) -- assets. The `DeviceType` enumerateion defines device types
+./reference/5.1/Microsoft.PowerShell.Core/About/about_Classes.md:640:25    - Unknown word (devtype)      -- hidden [DeviceType]$devtype = [DeviceType]::Undefined
+./reference/5.1/Microsoft.PowerShell.Core/About/about_Classes.md:787:10    - Unknown word (baseclass)    -- class (`[baseclass]$this`) on invocation
+./reference/5.1/Microsoft.PowerShell.Core/About/about_Classes.md:797:10    - Unknown word (basedays)     -- [int]basedays() {return ([BaseClass
+./reference/5.1/Microsoft.PowerShell.Core/About/about_Classes.md:817:25    - Unknown word (implemention) -- interface. Omitting the implemention interface members causes
 ./reference/5.1/Microsoft.PowerShell.Core/About/about_Comment_Based_Help.md:677:25    - Unknown word (inputpath)  -- .\Update-Month.ps1 -inputpath C:\Data\January.csv
 ./reference/5.1/Microsoft.PowerShell.Core/About/about_CommonParameters.md:730:72    - Unknown word (defau)      -- Suspend [?] Help (defau
 ./reference/5.1/Microsoft.PowerShell.Core/About/about_Comparison_Operators.md:413:11    - Unknown word (Chell)      -- "Rhell", "Chell", "Mel", "Smell", "Shell
@@ -273,7 +274,7 @@ Lines:
 ./reference/5.1/Microsoft.PowerShell.Management/Copy-Item.md:76:22     - Unknown word (Logfiles)   -- Copy-Item "C:\Wabash\Logfiles\mar1604.log.txt" -Destination
 ./reference/5.1/Microsoft.PowerShell.Management/Get-ChildItem.md:196:66    - Unknown word (hiddenfile) -- hidden files such as `hiddenfile.txt` that have a mode
 ./reference/5.1/Microsoft.PowerShell.Management/Get-Clipboard.md:44:61     - Unknown word (Explorerby) -- clipboard in Windows Explorerby selecting them and pressing
-./reference/5.1/Microsoft.PowerShell.Management/Get-Content.md:238:26    - Unknown word (bytearray)  -- Member -InputObject $bytearray
+./reference/5.1/Microsoft.PowerShell.Management/Get-Content.md:261:26    - Unknown word (bytearray)  -- Member -InputObject $bytearray
 ./reference/5.1/Microsoft.PowerShell.Management/Get-Process.md:260:78    - Unknown word (Windowtitle) -- Table Id, Name, mainWindowtitle -AutoSize
 ./reference/5.1/Microsoft.PowerShell.Management/Get-Service.md:122:53    - Unknown word (dependentservices) -- dentServices"; Expression={$_.dependentservices.count}
 ./reference/5.1/Microsoft.PowerShell.Management/Get-Service.md:73:1      - Unknown word (xmlprov)    -- xmlprov, the Network Provisioning
@@ -416,7 +417,7 @@ Lines:
 ./reference/7.2/Microsoft.PowerShell.Core/About/about_Operators.md:307:46    - Unknown word (subshell)   -- it asynchronously in subshell as a job.
 ./reference/7.2/Microsoft.PowerShell.Core/About/about_Parsing.md:348:4     - Unknown word (cscript)    -- - `cscript.exe`
 ./reference/7.2/Microsoft.PowerShell.Core/About/about_Parsing.md:349:4     - Unknown word (wscript)    -- - `wscript.exe`
-./reference/7.2/Microsoft.PowerShell.Core/About/about_Pipeline_Chain_Operators.md:175:25    - Unknown word (behaviour)  -- of PowerShell 7, the behaviour of these syntaxes has
+./reference/7.2/Microsoft.PowerShell.Core/About/about_Pipeline_Chain_Operators.md:172:25    - Unknown word (behaviour)  -- of PowerShell 7, the behaviour of these syntaxes has
 ./reference/7.2/Microsoft.PowerShell.Core/About/about_PowerShell_Config.md:406:10    - Unknown word (Transcripting) -- - `EnableTranscripting` - When this setting
 ./reference/7.2/Microsoft.PowerShell.Core/About/about_Pwsh.md:216:22    - Unknown word (mydebugpipe) -- pwsh -CustomPipeName mydebugpipe
 ./reference/7.2/Microsoft.PowerShell.Core/About/about_Pwsh.md:233:7     - Unknown word (encodedcommand) -- pwsh -encodedcommand $encodedCommand
@@ -436,7 +437,6 @@ Lines:
 ./reference/7.2/Microsoft.PowerShell.Core/Save-Help.md:383:6     - Unknown word (paramater)  -- This paramater does nothing in this
 ./reference/7.2/Microsoft.PowerShell.Management/Clear-RecycleBin.md:31:17     - Unknown word (readded)    -- This cmdlet was readded in PowerShell 7.
 ./reference/7.2/Microsoft.PowerShell.Management/Get-Clipboard.md:30:39     - Unknown word (xclip)      -- cmdlet requires the `xclip` utility to be in the
-./reference/7.2/Microsoft.PowerShell.Management/Get-Content.md:150:115   - Unknown word (singlequotes) -- primary stream. Note the singlequotes to prevent variable
 ./reference/7.2/Microsoft.PowerShell.Management/Get-Item.md:175:30    - Unknown word (ntoskrnl)   -- C:\Windows\System32\ntoskrnl.exe | Format-Table
 ./reference/7.2/Microsoft.PowerShell.Management/New-Service.md:84:16     - Unknown word (CCLCSWRPWPDTLOCRRC) -- $SDDL = "D:(A;;CCLCSWRPWPDTLOCRRC;;;SY)(A;;CCDCLCSWRPWPDTLOCRSD
 ./reference/7.2/Microsoft.PowerShell.Management/New-Service.md:84:44     - Unknown word (CCDCLCSWRPWPDTLOCRSDRCWDWO) -- CCLCSWRPWPDTLOCRRC;;;SY)(A;;CCDCLCSWRPWPDTLOCRSDRCWDWO;;;BA)(A;;CCLCSWLOCRRC
@@ -751,7 +751,8 @@ Lines:
 ./reference/docs-conceptual/dev-cross-plat/create-cmdline-predictor.md:44:59     - Unknown word (classlib)   -- to create a starter classlib project.
 ./reference/docs-conceptual/dev-cross-plat/create-standard-library-binary-Module.md:131:12    - Unknown word (globaljson) -- dotnet new globaljson --sdk-version 2.1.0
 ./reference/docs-conceptual/dev-cross-plat/create-standard-library-binary-Module.md:300:12    - Unknown word (psmodule)   -- dotnet new psmodule
-./reference/docs-conceptual/dev-cross-plat/performance/script-authoring-considerations.md:150:29    - Unknown word (Finalizers) -- [GC]::WaitForPendingFinalizers()
+./reference/docs-conceptual/dev-cross-plat/performance/script-authoring-considerations.md:36:22     - Unknown word (arraylist)  -- $null = $arraylist.Add($i)
+./reference/docs-conceptual/dev-cross-plat/performance/script-authoring-considerations.md:70:29     - Unknown word (Finalizers) -- [GC]::WaitForPendingFinalizers()
 ./reference/docs-conceptual/dev-cross-plat/resolving-dependency-conflicts.md:718:2     - Unknown word (netcore)    -- $netcore = "netcoreapp3.1"
 ./reference/docs-conceptual/dev-cross-plat/resolving-dependency-conflicts.md:791:93    - Unknown word (qualifed)   -- with the same fully qualifed
 ./reference/docs-conceptual/dev-cross-plat/resolving-dependency-conflicts.md:881:9     - Unknown word (Strahl)     -- - [Rick Strahl: When does a .NET assembly
@@ -1078,8 +1079,8 @@ Lines:
 ./reference/docs-conceptual/install/install-alpine.md:46:5      - Unknown word (lttng)      -- lttng-ust
 ./reference/docs-conceptual/install/install-debian.md:39:103    - Unknown word (keyrings)   -- --output /usr/share/keyrings/microsoft.gpg
 ./reference/docs-conceptual/install/install-debian.md:39:75     - Unknown word (dearmor)    -- asc | sudo gpg --yes --dearmor --output /usr/share
-./reference/docs-conceptual/install/install-raspbian.md:43:11     - Unknown word (libunwind)  -- # Install libunwind8 and libssl1.0 - Regex
-./reference/docs-conceptual/install/install-rhel.md:32:20     - Unknown word (assumeyes)  -- sudo yum install --assumeyes powershell
+./reference/docs-conceptual/install/install-raspbian.md:44:32     - Unknown word (libunwind)  -- get install libssl1.1 libunwind8 -y
+./reference/docs-conceptual/install/install-rhel.md:32:20     - Unknown word (assumeyes)  -- sudo dnf install --assumeyes powershell
 ./reference/docs-conceptual/install/microsoft-update-faq.yml:43:37     - Unknown word (lifecycles) -- information about support lifecycles, see
 ./reference/docs-conceptual/lang-spec/chapter-02.md:1316:36   - Unknown word (concatentaion) -- chapter-07.md#772-string-concatentaion
 ./reference/docs-conceptual/lang-spec/chapter-02.md:366:2     - Unknown word (végösszeg)  -- $végösszeg # Hungarian
@@ -1137,11 +1138,11 @@ Lines:
 ./reference/docs-conceptual/learn/deep-dives/everything-about-exceptions.md:225:33    - Unknown word (throwerror) -- : C:\blog\throwerror.ps1
 ./reference/docs-conceptual/learn/deep-dives/everything-about-exceptions.md:515:8     - Unknown word (Dhami)      -- Dexter Dhami pointed out that I can
 ./reference/docs-conceptual/learn/deep-dives/everything-about-hashtable.md:145:6     - Unknown word (Multiselection) -- #### Multiselection
-./reference/docs-conceptual/learn/deep-dives/everything-about-hashtable.md:467:142   - Unknown word (testlab)        -- Description 'Network for testlab A' -LeaseDuration (New
-./reference/docs-conceptual/learn/deep-dives/everything-about-hashtable.md:467:9     - Unknown word (Serverv)        -- Add-DhcpServerv4Scope -Name 'TestNetwork
-./reference/docs-conceptual/learn/deep-dives/everything-about-hashtable.md:557:77    - Unknown word (Robocopy)       -- param:value` syntax. `Robocopy.exe`, for
-./reference/docs-conceptual/learn/deep-dives/everything-about-hashtable.md:561:2     - Unknown word (robo)           -- $robo = @{R=1;W=1;MT=8}
-./reference/docs-conceptual/learn/deep-dives/everything-about-hashtable.md:929:10    - Unknown word (Sorens)         -- [Michael Sorens][Michael Sorens].
+./reference/docs-conceptual/learn/deep-dives/everything-about-hashtable.md:469:143   - Unknown word (testlab)        -- Description 'Network for testlab A' -LeaseDuration (New
+./reference/docs-conceptual/learn/deep-dives/everything-about-hashtable.md:543:9     - Unknown word (Serverv)        -- Add-DhcpServerv4Scope @DHCPScope @Common
+./reference/docs-conceptual/learn/deep-dives/everything-about-hashtable.md:559:77    - Unknown word (Robocopy)       -- param:value` syntax. `Robocopy.exe`, for
+./reference/docs-conceptual/learn/deep-dives/everything-about-hashtable.md:563:2     - Unknown word (robo)           -- $robo = @{R=1;W=1;MT=8}
+./reference/docs-conceptual/learn/deep-dives/everything-about-hashtable.md:931:10    - Unknown word (Sorens)         -- [Michael Sorens][Michael Sorens].
 ./reference/docs-conceptual/learn/deep-dives/everything-about-if.md:316:5     - Unknown word (inotin)     -- - `-inotin` case-insensitive not
 ./reference/docs-conceptual/learn/deep-dives/everything-about-if.md:317:5     - Unknown word (cnotin)     -- - `-cnotin` case-sensitive not
 ./reference/docs-conceptual/learn/deep-dives/everything-about-if.md:453:40    - Unknown word (Prasoon)    -- add this one until [Prasoon Karunan V][Prasoon Karunan
