@@ -1,19 +1,22 @@
+import { arrayBufferViewToBuffer, copyArrayBufferView, toUint8Array } from './arrayBuffers.js';
 import type { BufferEncodingExt } from './BufferEncoding.js';
 
 const BOM_BE = 0xfeff;
 const BOM_LE = 0xfffe;
 
-export function decodeUtf16LE(buf: Buffer): string {
+export function decodeUtf16LE(data: ArrayBufferView): string {
+    let buf = arrayBufferViewToBuffer(data);
     const bom = (buf[0] << 8) | buf[1];
     buf = bom === BOM_LE ? buf.subarray(2) : buf;
     return buf.toString('utf16le');
 }
 
-export function decodeUtf16BE(buf: Buffer): string {
+export function decodeUtf16BE(buf: ArrayBufferView): string {
     return decodeUtf16LE(swapBytes(buf));
 }
 
-export function decode(buf: Buffer, encoding?: BufferEncodingExt): string {
+export function decode(data: ArrayBufferView, encoding?: BufferEncodingExt): string {
+    const buf = arrayBufferViewToBuffer(data);
     switch (encoding) {
         case 'utf16be':
             return decodeUtf16BE(buf);
@@ -27,16 +30,18 @@ export function decode(buf: Buffer, encoding?: BufferEncodingExt): string {
     return buf.toString(encoding);
 }
 
-export function swapBytesInPlace(buf: Buffer): Buffer {
-    return buf.swap16();
+export function swapBytesInPlace(data: ArrayBufferView): ArrayBufferView {
+    const buf = arrayBufferViewToBuffer(data);
+    buf.swap16();
+    return buf;
 }
 
-export function swapBytes(buf: Buffer): Buffer {
-    const tBuf = Buffer.from(buf);
-    return swapBytesInPlace(tBuf);
+export function swapBytes(data: ArrayBufferView): ArrayBufferView {
+    const buf = copyArrayBufferView(data);
+    return swapBytesInPlace(buf);
 }
 
-export function encodeString(str: string, encoding?: BufferEncodingExt, bom?: boolean): Buffer {
+export function encodeString(str: string, encoding?: BufferEncodingExt, bom?: boolean): ArrayBufferView {
     switch (encoding) {
         case 'utf16be':
             return encodeUtf16BE(str, bom);
@@ -46,7 +51,7 @@ export function encodeString(str: string, encoding?: BufferEncodingExt, bom?: bo
     return Buffer.from(str, encoding);
 }
 
-export function encodeUtf16LE(str: string, bom = true) {
+export function encodeUtf16LE(str: string, bom = true): ArrayBufferView {
     const buf = Buffer.from(str, 'utf16le');
 
     if (bom) {
@@ -58,11 +63,12 @@ export function encodeUtf16LE(str: string, bom = true) {
     return buf;
 }
 
-export function encodeUtf16BE(str: string, bom = true) {
+export function encodeUtf16BE(str: string, bom = true): ArrayBufferView {
     return swapBytesInPlace(encodeUtf16LE(str, bom));
 }
 
-export function calcEncodingFromBom(buf: Buffer): 'utf16be' | 'utf16le' | undefined {
+export function calcEncodingFromBom(data: ArrayBufferView): 'utf16be' | 'utf16le' | undefined {
+    const buf = toUint8Array(data);
     if (buf.length < 2) return undefined;
     switch ((buf[0] << 8) | buf[1]) {
         case BOM_BE:

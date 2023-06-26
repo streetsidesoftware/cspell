@@ -33,7 +33,8 @@ export const PerfConfig = {
     trie: { desc: 'Run tests for original TrieNode' } as Options,
     suggest: { desc: 'Run tests for spelling suggests algorithms', auto: false } as Options,
     'suggest.en': { desc: 'Measure English Suggestions', auto: false } as Options,
-} as const;
+    buffer: { desc: 'Measure buffer performance', auto: false },
+} as const satisfies Record<string, Options>;
 
 type PerfConfig = typeof PerfConfig;
 type PerfKey = keyof PerfConfig;
@@ -50,6 +51,7 @@ const perf: PerfNames = {
     trie: 'trie',
     suggest: 'suggest',
     'suggest.en': 'suggest.en',
+    buffer: 'buffer',
 };
 
 const weightMapEn = getEnglishWeightMap();
@@ -139,6 +141,9 @@ export async function measurePerf(which: string | undefined, method: string | un
     await runTest(which, perf['suggest.en'], async () => {
         const dep = await prepare(['trieFast']);
         timer.measureFn('suggest.en', () => perfSuggest2(dep));
+    });
+    await runTest(which, perf.buffer, async () => {
+        timer.measureFn('buffer', () => perfBuffer());
     });
 
     timer.stop('Measure Perf');
@@ -337,6 +342,90 @@ export async function measurePerf(which: string | undefined, method: string | un
             const iter = getSuggestionsAStar(trie, word, { ignoreCase: false, changeLimit: maxEdits, weightMap });
             collectSuggestions(iter, maxEdits * 100);
         }
+    }
+
+    function perfBuffer() {
+        const size = 1 << 20;
+        const buffer = timer.measureFn('create buffer', () => Buffer.allocUnsafe(size));
+        const arrayBuffer = timer.measureFn('create array buffer', () => new ArrayBuffer(size));
+        const uint8Array = timer.measureFn('create Unit8Array', () => new Uint8Array(arrayBuffer));
+        timer.measureFn('Uint8Array new(buffer)', () => {
+            let x: Uint8Array | undefined;
+            for (let i = 0; i < 1000; ++i) {
+                x = new Uint8Array(buffer);
+            }
+            return x;
+        });
+        timer.measureFn('Uint8Array new(buffer.buffer)', () => {
+            let x: Uint8Array | undefined;
+            for (let i = 0; i < 1000; ++i) {
+                x = new Uint8Array(buffer.buffer);
+            }
+            return x;
+        });
+        timer.measureFn('Uint8Array new(arrayBuffer)', () => {
+            let x: Uint8Array | undefined;
+            for (let i = 0; i < 1000; ++i) {
+                x = new Uint8Array(arrayBuffer);
+            }
+            return x;
+        });
+        timer.measureFn('Uint8Array new(uint8Array)', () => {
+            let x: Uint8Array | undefined;
+            for (let i = 0; i < 1000; ++i) {
+                x = new Uint8Array(uint8Array);
+            }
+            return x;
+        });
+        timer.measureFn('Uint8Array.from(buffer)', () => {
+            let x: Uint8Array | undefined;
+            for (let i = 0; i < 1000; ++i) {
+                x = Uint8Array.from(buffer);
+            }
+            return x;
+        });
+        timer.measureFn('Uint8Array.from(uint8Array)', () => {
+            let x: Uint8Array | undefined;
+            for (let i = 0; i < 1000; ++i) {
+                x = Uint8Array.from(uint8Array);
+            }
+            return x;
+        });
+        timer.measureFn('Buffer.from(buffer)', () => {
+            let x: Buffer | undefined;
+            for (let i = 0; i < 1000; ++i) {
+                x = Buffer.from(buffer);
+            }
+            return x;
+        });
+        timer.measureFn('Buffer.from(buffer.buffer)', () => {
+            let x: Buffer | undefined;
+            for (let i = 0; i < 1000; ++i) {
+                x = Buffer.from(buffer.buffer);
+            }
+            return x;
+        });
+        timer.measureFn('Buffer.from(arrayBuffer)', () => {
+            let x: Buffer | undefined;
+            for (let i = 0; i < 1000; ++i) {
+                x = Buffer.from(arrayBuffer);
+            }
+            return x;
+        });
+        timer.measureFn('Buffer.from(uint8Array)', () => {
+            let x: Buffer | undefined;
+            for (let i = 0; i < 1000; ++i) {
+                x = Buffer.from(uint8Array);
+            }
+            return x;
+        });
+        timer.measureFn('Buffer.from(uint8Array.buffer)', () => {
+            let x: Buffer | undefined;
+            for (let i = 0; i < 1000; ++i) {
+                x = Buffer.from(uint8Array.buffer);
+            }
+            return x;
+        });
     }
 
     async function prepare<K extends DependenciesKeys>(keys: K[]): Promise<Pick<TestDependencies, K>> {

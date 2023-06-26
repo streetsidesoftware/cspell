@@ -11,8 +11,10 @@ import type { URL } from 'url';
 import { fileURLToPath } from 'url';
 import { gunzipSync, gzipSync } from 'zlib';
 
+import { arrayBufferViewToBuffer } from '../../common/arrayBuffers.js';
 import { decode } from '../../common/encode-decode.js';
 import { toError } from '../../errors/index.js';
+import type { BufferEncoding } from '../../models/BufferEncoding';
 import { decodeDataUrl } from '../../node/dataUrl.js';
 import { fetchURL } from '../../node/file/fetch.js';
 import { getStatHttp } from '../../node/file/stat.js';
@@ -68,11 +70,15 @@ const handleRequestFsReadFile = RequestFsReadFile.createRequestHandler(
             return createResponseFail(req, res.error);
         }
         return createResponse(
-            res.value.then((res) => ({
-                url,
-                content: bufferToText(res.content, encoding),
-                baseFilename: res.baseFilename,
-            }))
+            res.value.then((res) => {
+                const content = bufferToText(res.content, encoding);
+                return {
+                    url,
+                    baseFilename: res.baseFilename,
+                    encoding,
+                    ...content,
+                };
+            })
         );
     },
     undefined,
@@ -91,8 +97,9 @@ const handleRequestFsReadFileSync = RequestFsReadFileSync.createRequestHandler(
             return createResponseFail(req, res.error);
         }
         return createResponse({
+            encoding,
             ...res.value,
-            content: bufferToText(res.value.content, encoding),
+            ...bufferToText(res.value.content, encoding),
         });
     },
     undefined,
@@ -152,8 +159,11 @@ const handleRequestFsReadBinaryFileData = RequestFsReadBinaryFile.createRequestH
     'Node: Read data: urls.'
 );
 
-function bufferToText(buf: Buffer, encoding: BufferEncoding): string {
-    return buf[0] === 0x1f && buf[1] === 0x8b ? decode(gunzipSync(buf), encoding) : decode(buf, encoding);
+function bufferToText(data: ArrayBufferView, encoding: BufferEncoding): { content: string; gz: boolean } {
+    const buf = arrayBufferViewToBuffer(data);
+    const gz = buf[0] === 0x1f && buf[1] === 0x8b;
+    const content = gz ? decode(gunzipSync(buf), encoding) : decode(buf, encoding);
+    return { content, gz };
 }
 
 /**
