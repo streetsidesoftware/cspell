@@ -3,7 +3,7 @@ Repository: googleapis/google-cloud-cpp
 Url: "https://github.com/googleapis/google-cloud-cpp.git"
 Args: ["--config=../../../../config/repositories/googleapis/google-cloud-cpp/cspell.json","**/*","-e","{*.BUILD,BUILD,CHANGELOG.md,*.sh,*.cfg,*.ps1,Dockerfile.*,*.Dockerfile,*.{yaml,xml,json,cmake}}"]
 Lines:
- CSpell: Files checked: 15359, Issues found: 105546 in 11253 files
+ CSpell: Files checked: 15478, Issues found: 110313 in 11370 files
  exit code: 1
 ./ARCHITECTURE.md:100:20    - Unknown word (bigtable)   -- - Bigtable has a [`bigtable::Table`](/google/cloud
 ./ARCHITECTURE.md:100:3     - Unknown word (Bigtable)   -- - Bigtable has a [`bigtable::Table
@@ -392,8 +392,8 @@ Lines:
 ./docfx/testing/inputs.cc:27:156    - Unknown word (babc)       -- b96702bc1622f0e6c9f0babc4" prot="public" static
 ./docfx/testing/inputs.cc:63:120    - Unknown word (adbc)       -- erviceConnection_1a2518e5014c3adbc16e83281bd2a596a8" kindref
 ./examples/BUILD.bazel:84:14     - Unknown word (GENDIR)     -- "-I$(GENDIR)/examples",
-./examples/CMakeLists.txt:27:13     - Unknown word (Findg)      -- include(FindgRPC)
-./examples/CMakeLists.txt:31:9      - Unknown word (PROTO)      -- PROTO_PATH_DIRECTORIES ${CMAKE
+./examples/CMakeLists.txt:36:9      - Unknown word (Findg)      -- include(FindgRPC)
+./examples/CMakeLists.txt:42:9      - Unknown word (PROTO)      -- PROTO_PATH_DIRECTORIES ${CMAKE
 ./examples/README.md:36:52     - Unknown word (gserviceaccount) -- GOOGLE_CLOUD_PROJECT}.iam.gserviceaccount.com"
 ./examples/gcs2cbt.cc:253:13    - Unknown word (cbta)       -- namespace cbta = ::google::cloud::bigtable
 ./examples/gcs2cbt.cc:256:51    - Unknown word (BIGTABLE)   -- , "GOOGLE_CLOUD_CPP_BIGTABLE_TEST_INSTANCE_ID",
@@ -517,22 +517,22 @@ Lines:
 ./generator/internal/printer_test.cc:36:33     - Unknown word (Inigo)      -- VarsDictionary vars{{"name", "Inigo Montoya"}};
 ./generator/internal/resolve_comment_references_test.cc:261:38    - Unknown word (Oneof)      -- ResolveCommentsReferenceTest, Oneof) {
 ./generator/internal/routing.h:78:7      - Unknown word (actools)    -- * go/actools-dynamic-routing-proposal
-./generator/internal/scaffold_generator.cc:1006:39   - Unknown word (Downloadfile) -- System.Net.WebClient).Downloadfile( ^
-./generator/internal/scaffold_generator.cc:1145:8    - Unknown word (CXXLDFLAGS)   -- CLIENT_CXXLDFLAGS := $$(shell pkg-config
+./generator/internal/scaffold_generator.cc:1093:39   - Unknown word (Downloadfile) -- System.Net.WebClient).Downloadfile( ^
+./generator/internal/scaffold_generator.cc:1232:8    - Unknown word (CXXLDFLAGS)   -- CLIENT_CXXLDFLAGS := $$(shell pkg-config
 ./generator/internal/scaffold_generator.cc:247:25    - Unknown word (GAPIC)      -- {"library_type", "GAPIC_AUTO"},
-./generator/internal/scaffold_generator.cc:680:2     - Unknown word (mainpage)   -- @mainpage $title$ C++ Client Library
-./generator/internal/scaffold_generator.cc:906:7     - Unknown word (tsch)       -- | csh/tsch | `setenv
+./generator/internal/scaffold_generator.cc:681:2     - Unknown word (mainpage)   -- @mainpage $title$ C++ Client Library
+./generator/internal/scaffold_generator.cc:993:7     - Unknown word (tsch)       -- | csh/tsch | `setenv
 ./generator/internal/scaffold_generator.h:56:36     - Unknown word (refgroup)   -- name of the doxygen refgroup for options in a given
-./generator/internal/scaffold_generator_test.cc:375:38    - Unknown word (CXXLD)      -- actual, HasSubstr("\t$(CXXLD) "));
-./generator/internal/scaffold_generator_test.cc:409:37    - Unknown word (Bazelrc)    -- ScaffoldGenerator, QuickstartBazelrc) {
+./generator/internal/scaffold_generator_test.cc:387:38    - Unknown word (CXXLD)      -- actual, HasSubstr("\t$(CXXLD) "));
+./generator/internal/scaffold_generator_test.cc:421:37    - Unknown word (Bazelrc)    -- ScaffoldGenerator, QuickstartBazelrc) {
 ./generator/testing/descriptor_pool_fixture.cc:49:7      - Unknown word (multifile)  -- multifile_error_collector_(
 ./google/cloud/accessapproval/README.md:25:11     - Unknown word (iostream)   -- #include <iostream>
 ./google/cloud/accessapproval/README.md:29:10     - Unknown word (cerr)       -- std::cerr << "Usage: " << argv
 ./google/cloud/accessapproval/README.md:39:10     - Unknown word (cout)       -- std::cout << a->DebugString()
 ./google/cloud/accessapproval/access_approval_client.h:19:39     - Unknown word (ACCESSAPPROVAL) -- CLOUD_CPP_GOOGLE_CLOUD_ACCESSAPPROVAL_ACCESS_APPROVAL_CLIENT
 ./google/cloud/accessapproval/doc/main.dox:13:4      - Unknown word (Quickstart) -- ## Quickstart
-./google/cloud/accessapproval/doc/main.dox:32:11     - Unknown word (Backoff)    -- ## Retry, Backoff, and Idempotency Policies
 ./google/cloud/accessapproval/doc/options.dox:2:2       - Unknown word (defgroup)   -- @defgroup google-cloud-accessapproval
+./google/cloud/accessapproval/doc/override-retry-policies.dox:3:53      - Unknown word (Backoff)    -- retry Override Retry, Backoff, and Idempotency Policies
 ./google/cloud/accessapproval/quickstart/Makefile:18:12     - Unknown word (CXXFLAGS)   -- # The CXX, CXXFLAGS and CXXLD variables
 ./google/cloud/accessapproval/quickstart/Makefile:30:60     - Unknown word (cflags)     -- config $(CLIENT_MODULE) --cflags)
 ./google/cloud/accessapproval/quickstart/README.md:40:25     - Unknown word (setenv)     -- csh/tsch | `setenv GOOGLE_APPLICATION_CREDENTIAL
@@ -616,18 +616,25 @@ Lines:
 ./google/cloud/bigquery/v2/minimal/internal/dataset_test.cc:83:20     - Unknown word (dtype)         -- expected.type = "dtype";
 ./google/cloud/bigquery/v2/minimal/internal/dataset_test.cc:84:24     - Unknown word (dlocation)     -- expected.location = "dlocation";
 ./google/cloud/bigquery/v2/minimal/internal/dataset_test.cc:85:33     - Unknown word (ddefaultcollation) -- default_collation = "ddefaultcollation";
-./google/cloud/bigquery/v2/minimal/internal/job_client_test.cc:37:15     - Unknown word (jtag)       -- job.etag = "jtag";
-./google/cloud/bigquery/v2/minimal/internal/job_client_test.cc:38:15     - Unknown word (jkind)      -- job.kind = "jkind";
-./google/cloud/bigquery/v2/minimal/internal/job_client_test.cc:40:20     - Unknown word (jself)      -- job.self_link = "jselfLink";
-./google/cloud/bigquery/v2/minimal/internal/job_client_test.cc:41:21     - Unknown word (juser)      -- job.user_email = "juserEmail";
-./google/cloud/bigquery/v2/minimal/internal/job_configuration_query_test.cc:102:48    - Unknown word (SELE)       -- statement { value: "FIRST_SELE...<truncated>..." }
-./google/cloud/bigquery/v2/minimal/internal/job_configuration_query_test.cc:96:28     - Unknown word (inte)       -- R"( interval: "range-inte...<truncated>..." }
+./google/cloud/bigquery/v2/minimal/internal/job_configuration_query_test.cc:103:25    - Unknown word (SELE)       -- R"( value: "FIRST_SELE...<truncated>..." }
+./google/cloud/bigquery/v2/minimal/internal/job_configuration_query_test.cc:96:45     - Unknown word (inte)       -- end" interval: "range-inte...<truncated>..." }
+./google/cloud/bigquery/v2/minimal/internal/job_connection_test.cc:61:20     - Unknown word (jkind)      -- R"({"kind": "jkind",
+./google/cloud/bigquery/v2/minimal/internal/job_connection_test.cc:62:20     - Unknown word (jtag)       -- "etag": "jtag",
+./google/cloud/bigquery/v2/minimal/internal/job_connection_test.cc:64:25     - Unknown word (jself)      -- "self_link": "jselfLink",
+./google/cloud/bigquery/v2/minimal/internal/job_connection_test.cc:65:26     - Unknown word (juser)      -- "user_email": "juserEmail",
 ./google/cloud/bigquery/v2/minimal/internal/job_query_stats.cc:67:35     - Unknown word (UNINDEXED)  -- IndexedUnusedReasonCode{"UNINDEXED_SEARCH_FIELDS"};
 ./google/cloud/bigquery/v2/minimal/internal/job_query_stats_test.cc:209:28    - Unknown word (stateme)    -- R"( statement_type: "stateme...<truncated>...")"
 ./google/cloud/bigquery/v2/minimal/internal/job_query_stats_test.cc:228:34    - Unknown word (BIGQUER)    -- compute_mode { value: "BIGQUER...<truncated>..." }
 ./google/cloud/bigquery/v2/minimal/internal/job_query_stats_test.cc:264:35    - Unknown word (EXCEEDE)    -- unused_reason { value: "EXCEEDE...<truncated>..." }
 ./google/cloud/bigquery/v2/minimal/internal/job_query_stats_test.cc:77:12     - Unknown word (substeps)   -- R"(,"substeps":["sub-step-1"]}],"wait
-./google/cloud/bigquery/v2/minimal/internal/job_request_test.cc:50:25     - Unknown word (useast)     -- request.set_location("useast");
+./google/cloud/bigquery/v2/minimal/internal/job_request_test.cc:313:28    - Unknown word (Invalidjob) -- InsertJobRequestTest, Invalidjob) {
+./google/cloud/bigquery/v2/minimal/internal/job_request_test.cc:482:62    - Unknown word (defe)       -- quota_deferments: "quota-defe...<truncated>...")"
+./google/cloud/bigquery/v2/minimal/internal/job_request_test.cc:485:28    - Unknown word (transactio) -- R"( transaction_id: "transactio...<truncated>...")"
+./google/cloud/bigquery/v2/minimal/internal/job_request_test.cc:486:28    - Unknown word (reservatio) -- R"( reservation_id: "reservatio...<truncated>..." )
+./google/cloud/bigquery/v2/minimal/internal/job_request_test.cc:489:48    - Unknown word (fram)       -- proc-id" text: "stack-fram...<truncated>..." }
+./google/cloud/bigquery/v2/minimal/internal/job_request_test.cc:497:41    - Unknown word (operat)     -- operation_performed: "ddl_operat...<truncated>...")"
+./google/cloud/bigquery/v2/minimal/internal/job_request_test.cc:499:52    - Unknown word (expla)      -- query_plan { name: "test-expla...<truncated>...")"
+./google/cloud/bigquery/v2/minimal/internal/job_request_test.cc:53:25     - Unknown word (useast)     -- request.set_location("useast");
 ./google/cloud/bigquery/v2/minimal/internal/job_stats.h:58:8      - Unknown word (moew)       -- // For moew details on how frames
 ./google/cloud/bigquery/v2/minimal/internal/job_stats_test.cc:221:28    - Unknown word (transac)    -- R"( transaction_id: "transac...<truncated>...")"
 ./google/cloud/bigquery/v2/minimal/internal/job_stats_test.cc:222:28    - Unknown word (reserva)    -- R"( reservation_id: "reserva...<truncated>..." script
@@ -672,9 +679,10 @@ Lines:
 ./google/cloud/bigtable/column_family.h:154:43    - Unknown word (Differencer) -- protobuf::util::MessageDifferencer::Equivalent(a.gc_rule
 ./google/cloud/bigtable/data_client.h:45:22     - Unknown word (Bigtable's) -- * Connects to Cloud Bigtable's data manipulation APIs
 ./google/cloud/bigtable/data_client.h:64:28     - Unknown word (dataclient) -- @ref migrating-from-dataclient "Migrating from DataClient
-./google/cloud/bigtable/doc/bigtable-main.dox:56:2      - Unknown word (howto)      -- [howto-setup-dev-workstation
+./google/cloud/bigtable/doc/bigtable-main.dox:57:2      - Unknown word (howto)      -- [howto-setup-dev-workstation
 ./google/cloud/bigtable/doc/bigtable-samples-grpc-credentials.dox:41:33     - Unknown word (googleusercontent) -- client_id": "XXXXXX.apps.googleusercontent.com",
 ./google/cloud/bigtable/doc/bigtable-samples-grpc-credentials.dox:57:71     - Unknown word (endl)              -- < ex.what() << std::endl;
+./google/cloud/bigtable/doc/override-retry-policies.dox:89:41     - Unknown word (idempontent) -- assigned timestamps are idempontent by default.
 ./google/cloud/bigtable/examples/bigtable_hello_app_profile.cc:145:40    - Unknown word (abcdefghilklmnopqrstuvwxyz) -- generator, 8, "abcdefghilklmnopqrstuvwxyz0123456789");
 ./google/cloud/bigtable/examples/data_filter_snippets.cc:132:28    - Unknown word (Ofset)      -- FilterLimitCellsPerRowOfset(google::cloud::bigtable
 ./google/cloud/bigtable/examples/data_snippets.cc:643:21    - Unknown word (rowkey)     -- std::cerr << "rowkey[" << f.original_index
@@ -1067,9 +1075,10 @@ Lines:
 ./google/cloud/notebooks/README.md:39:28     - Unknown word (Runtimes)   -- auto r : client.ListRuntimes(parent)) {
 ./google/cloud/opentelemetry/CMakeLists.txt:23:41     - Unknown word (otel)       -- SYMBOLS "internal" "otel_internal")
 ./google/cloud/opentelemetry/configure_basic_tracing.h:56:20     - Unknown word (Gooogle)    -- * that works with Gooogle Cloud Trace.
+./google/cloud/opentelemetry/internal/monitored_resource_test.cc:178:15    - Unknown word (Faas)       -- {sc::kFaasName, "test-module"}
+./google/cloud/opentelemetry/internal/monitored_resource_test.cc:238:26    - Unknown word (faas)       -- {sc::kFaasName, "faas-name"},
 ./google/cloud/opentelemetry/internal/recordable_test.cc:170:9     - Unknown word (Truncatable) -- TEST(SetTruncatableString, LessThanLimit
 ./google/cloud/opentelemetry/internal/recordable_test.cc:584:27    - Unknown word (instrumentationscope) -- opentelemetry::sdk::instrumentationscope::InstrumentationScope
-./google/cloud/opentelemetry/internal/resource_detector_impl_test.cc:374:43    - Unknown word (Faas)       -- anAttribute<std::string>(sc::kFaasName, "test-service"
 ./google/cloud/opentelemetry/quickstart/README.md:125:1     - Unknown word (WORKDIR)    -- WORKDIR /var/tmp/build/
 ./google/cloud/opentelemetry/quickstart/README.md:133:10    - Unknown word (DWITH)      -- -DWITH_EXAMPLES=OFF \
 ./google/cloud/opentelemetry/quickstart/README.md:136:10    - Unknown word (DOPENTELEMETRY) -- -DOPENTELEMETRY_INSTALL=ON \
@@ -1083,6 +1092,7 @@ Lines:
 ./google/cloud/profiler/v2/profiler_client.h:107:19    - Unknown word (retryinfo)  -- /// "google.rpc.retryinfo-bin".
 ./google/cloud/pubsub/benchmarks/README.md:19:9      - Unknown word (acked)      -- is, not acked by Cloud Pub/Sub) goes
 ./google/cloud/pubsub/connection_options.cc:33:14     - Unknown word (ncores)     -- auto const ncores = std::thread::hardware
+./google/cloud/pubsub/doc/override-retry-policies.dox:85:50     - Unknown word (pubusb)     -- retry policies for `pubusb::Subscriber`:
 ./google/cloud/pubsub/internal/default_pull_ack_handler_test.cc:55:63     - Unknown word (aseq)       -- AsyncSequencer<bool>& aseq) {
 ./google/cloud/pubsub/internal/exactly_once_policies_test.cc:28:38     - Unknown word (ooops)      -- StatusCode::kInternal, "ooops"),
 ./google/cloud/pubsub/internal/extend_leases_with_retry.cc:89:5      - Unknown word (enccode)    -- * @enccode

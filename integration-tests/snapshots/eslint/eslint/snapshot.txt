@@ -3,7 +3,7 @@ Repository: eslint/eslint
 Url: "https://github.com/eslint/eslint"
 Args: ["**","--exclude=bin/**","--exclude=CHANGELOG.md","--exclude=_data","--exclude=tests/bench/large.js","--exclude=docs/src/_includes","--exclude=docs/src/assets/{fonts,s?css,images}"]
 Lines:
- CSpell: Files checked: 1864, Issues found: 5507 in 1252 files
+ CSpell: Files checked: 1872, Issues found: 5498 in 1255 files
  exit code: 1
 ./Makefile.js:145:88    - Unknown word (ined)               -- followed by the string "ined".
 ./Makefile.js:151:48    - Unknown word (blogpost)           -- render(cat("./templates/blogpost.md.ejs"), renderContext
@@ -245,10 +245,10 @@ Lines:
 ./docs/src/use/command-line-interface.md:427:5     - Unknown word (myfile)     -- cat myfile.js | npx eslint --stdin
 ./docs/src/use/command-line-interface.md:519:17    - Unknown word (customformat) -- npx eslint -f ./customformat.js file.js
 ./docs/src/use/command-line-interface.md:604:1     - Unknown word (Autofixed)    -- Autofixed files are not placed
-./docs/src/use/configure/configuration-files-new.md:150:112   - Unknown word (unignores)  -- example, this config unignores `node_modules/mylibrary
-./docs/src/use/configure/configuration-files-new.md:150:136   - Unknown word (mylibrary)  -- unignores `node_modules/mylibrary`:
-./docs/src/use/configure/configuration-files-new.md:150:14    - Unknown word (unignore)   -- You can also unignore files and directories
-./docs/src/use/configure/configuration-files-new.md:237:564   - Unknown word (runtimes)   -- example, some older runtimes might only allow ECMAScript
+./docs/src/use/configure/configuration-files-new.md:177:112   - Unknown word (unignores)  -- example, this config unignores `node_modules/mylibrary
+./docs/src/use/configure/configuration-files-new.md:177:136   - Unknown word (mylibrary)  -- unignores `node_modules/mylibrary`:
+./docs/src/use/configure/configuration-files-new.md:177:14    - Unknown word (unignore)   -- You can also unignore files and directories
+./docs/src/use/configure/configuration-files-new.md:264:564   - Unknown word (runtimes)   -- example, some older runtimes might only allow ECMAScript
 ./docs/src/use/configure/configuration-files.md:45:25     - Unknown word (myfiletotest) -- eslint -c myconfig.json myfiletotest.js
 ./docs/src/use/configure/ignore.md:102:200   - Unknown word (jshintignore) -- example, you can use `.jshintignore` file because it has
 ./docs/src/use/configure/ignore.md:114:181   - Unknown word (globbing)     -- not used. Note that globbing rules in `.eslintignore
@@ -323,8 +323,8 @@ Lines:
 ./lib/linter/linter.js:878:18    - Unknown word (SOURCECODE)    -- const DEPRECATED_SOURCECODE_PASSTHROUGHS = {
 ./lib/linter/linter.js:878:29    - Unknown word (PASSTHROUGHS)  -- DEPRECATED_SOURCECODE_PASSTHROUGHS = {
 ./lib/options.js:2:44      - Unknown word (optionator) -- Options configuration for optionator.
-./lib/rule-tester/flat-rule-tester.js:225:42    - Unknown word (errorize)   -- ast The root node to errorize `start`/`end` properties
-./lib/rule-tester/flat-rule-tester.js:719:27    - Unknown word (Didnt)      -- function assertASTDidntChange(beforeAST, afterAST
+./lib/rule-tester/flat-rule-tester.js:224:42    - Unknown word (errorize)   -- ast The root node to errorize `start`/`end` properties
+./lib/rule-tester/flat-rule-tester.js:718:27    - Unknown word (Didnt)      -- function assertASTDidntChange(beforeAST, afterAST
 ./lib/rule-tester/rule-tester.js:10:52     - Unknown word (unittests)  -- mocha to allow for DRY unittests for eslint
 ./lib/rules/array-bracket-newline.js:204:24    - Unknown word (Linebreaks) -- const needsLinebreaks = (
 ./lib/rules/array-bracket-newline.js:51:30     - Unknown word (Linebreak)  -- unexpectedOpeningLinebreak: "There should be no
@@ -337,11 +337,12 @@ Lines:
 ./lib/rules/indent-legacy.js:4:48      - Unknown word (nodeca)     -- ported and modified from nodeca.
 ./lib/rules/indent-legacy.js:573:43    - Unknown word (IIEF)       -- that the node is an IIEF
 ./lib/rules/indent-legacy.js:918:66    - Unknown word (blockless)  -- for indentation for blockless nodes
-./lib/rules/indent.js:895:21    - Unknown word (Blockless)  -- function addBlocklessNodeIndent(node) {
+./lib/rules/indent.js:899:21    - Unknown word (Blockless)  -- function addBlocklessNodeIndent(node) {
 ./lib/rules/jsx-quotes.js:21:23     - Unknown word (singlequote) -- description: "singlequote",
 ./lib/rules/keyword-spacing.js:148:18    - Unknown word (unexpect)   -- function unexpectSpaceBefore(token, pattern
 ./lib/rules/lines-around-comment.js:22:22     - Unknown word (Nums)       -- function getEmptyLineNums(lines) {
 ./lib/rules/logical-assignment-operators.js:115:4     - Unknown word (falsiness)  -- * falsiness checks:   !value, !Boolean
+./lib/rules/max-len.js:259:30    - Unknown word (accululated) -- * @returns {Object} accululated AST nodes
 ./lib/rules/no-caller.js:38:106    - Unknown word (calle)      -- propertyName.match(/^calle[er]$/u)) {
 ./lib/rules/no-constant-binary-expression.js:35:59     - Unknown word (nullishness) -- statically knowable constant nullishness. Meaning,
 ./lib/rules/no-constant-binary-expression.js:44:21     - Unknown word (Nullishness) -- function hasConstantNullishness(scope, node, nonNullish
@@ -395,8 +396,6 @@ Lines:
 ./package.json:122:6     - Unknown word (eslump)     -- "eslump": "^3.0.0",
 ./package.json:139:6     - Unknown word (memfs)      -- "memfs": "^3.0.1",
 ./package.json:140:6     - Unknown word (metascraper) -- "metascraper": "^5.25.7",
-./packages/eslint-config-eslint/default.yml:23:50     - Unknown word (namepath)   -- Point to a `@callback` namepath or `GenericCallback
-./packages/eslint-config-eslint/default.yml:5:15      - Unknown word (jsdoc)      -- - "plugin:jsdoc/recommended"
 ./templates/blogpost.md.ejs:18:10     - Unknown word (linkify)    -- function linkify(line) {
 ./templates/blogpost.md.ejs:8:5       - Unknown word (eslintbot)  -- - eslintbot
 ./templates/formatter-examples.md.ejs:72:2      - Unknown word (iframe)     -- <iframe src="html-formatter
@@ -434,12 +433,12 @@ Lines:
 ./tests/lib/config/flat-config-array.js:154:22    - Unknown word (noniterable) -- it("should allow noniterable baseConfig objects"
 ./tests/lib/config/flat-config-array.js:1745:29   - Unknown word (foox)        -- foox: [1, "bar"]
 ./tests/lib/config/flat-config-array.js:1767:30   - Unknown word (doesnt)      -- "doesnt-exist/match": "error
-./tests/lib/eslint/flat-eslint.js:1056:57   - Unknown word (doesnotexist) -- lintFiles(["subdir1", "doesnotexist/*.js"]);
-./tests/lib/eslint/flat-eslint.js:1131:58   - Unknown word (doesexist)    -- await eslint.lintFiles(["doesexist/*.js"]);
-./tests/lib/eslint/flat-eslint.js:1470:97   - Unknown word (dotfile)      -- an explicitly given dotfile is ignored", async
-./tests/lib/eslint/flat-eslint.js:1591:30   - Unknown word (reignoring)   -- it("should allow reignoring of previously ignored
-./tests/lib/eslint/flat-eslint.js:4959:31   - Unknown word (reignore)     -- cwd: `${root}-reignore`,
-./tests/lib/eslint/flat-eslint.js:4999:31   - Unknown word (dignore)      -- cwd: `${root}-dignore`,
+./tests/lib/eslint/flat-eslint.js:1081:57   - Unknown word (doesnotexist) -- lintFiles(["subdir1", "doesnotexist/*.js"]);
+./tests/lib/eslint/flat-eslint.js:1156:58   - Unknown word (doesexist)    -- await eslint.lintFiles(["doesexist/*.js"]);
+./tests/lib/eslint/flat-eslint.js:1495:97   - Unknown word (dotfile)      -- an explicitly given dotfile is ignored", async
+./tests/lib/eslint/flat-eslint.js:1616:30   - Unknown word (reignoring)   -- it("should allow reignoring of previously ignored
+./tests/lib/eslint/flat-eslint.js:4988:31   - Unknown word (reignore)     -- cwd: `${root}-reignore`,
+./tests/lib/eslint/flat-eslint.js:5028:31   - Unknown word (dignore)      -- cwd: `${root}-dignore`,
 ./tests/lib/linter/code-path-analysis/code-path-analyzer.js:30:16     - Unknown word (ESQUERY)    -- const STANDARD_ESQUERY_OPTION = { visitorKeys
 ./tests/lib/linter/config-comment-parser.js:165:41    - Unknown word (ELEVENTEEN) -- code = "a: seventy, b:ELEVENTEEN";
 ./tests/lib/linter/linter.js:3361:1    - Unknown word (consolexlog) -- consolexlog("test2");

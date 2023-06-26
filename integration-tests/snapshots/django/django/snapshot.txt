@@ -3,7 +3,7 @@ Repository: django/django
 Url: "https://github.com/django/django.git"
 Args: ["**/*.{md,py}"]
 Lines:
- CSpell: Files checked: 2754, Issues found: 8343 in 922 files
+ CSpell: Files checked: 2754, Issues found: 8348 in 923 files
  exit code: 1
 ./django/__init__.py:12:26     - Unknown word (urlresolvers) -- Set the thread-local urlresolvers script prefix if `set
 ./django/apps/config.py:217:40    - Unknown word (qualname)   -- app_config_class.__qualname__,
@@ -323,11 +323,11 @@ Lines:
 ./django/contrib/gis/geos/polygon.py:158:25    - Unknown word (nrings)     -- return capi.get_nrings(self.ptr)
 ./django/contrib/gis/geos/prototypes/io.py:42:38     - Unknown word (GEOSWKT)    -- create = GEOSFuncFactory("GEOSWKTReader_create", restype
 ./django/contrib/gis/geos/prototypes/io.py:77:38     - Unknown word (GEOSWKB)    -- create = GEOSFuncFactory("GEOSWKBReader_create", restype
-./django/contrib/gis/measure.py:254:16    - Unknown word (benoit)     -- "chain_benoit": 20.116782,
-./django/contrib/gis/measure.py:293:10    - Unknown word (kilometre)  -- "kilometre": "km",
-./django/contrib/gis/measure.py:297:10    - Unknown word (micrometre) -- "micrometre": "um",
-./django/contrib/gis/measure.py:299:10    - Unknown word (millimetre) -- "millimetre": "mm",
-./django/contrib/gis/measure.py:302:25    - Unknown word (Benoit)     -- "British chain (Benoit 1895 B)": "british_chain
+./django/contrib/gis/measure.py:252:16    - Unknown word (benoit)     -- "chain_benoit": 20.116782,
+./django/contrib/gis/measure.py:291:10    - Unknown word (kilometre)  -- "kilometre": "km",
+./django/contrib/gis/measure.py:295:10    - Unknown word (micrometre) -- "micrometre": "um",
+./django/contrib/gis/measure.py:297:10    - Unknown word (millimetre) -- "millimetre": "mm",
+./django/contrib/gis/measure.py:300:25    - Unknown word (Benoit)     -- "British chain (Benoit 1895 B)": "british_chain
 ./django/contrib/gis/measure.py:33:30     - Unknown word (Bronn)      -- Robert Coup, Justin Bronn, Riccardo Di Virgilio
 ./django/contrib/gis/measure.py:33:37     - Unknown word (Riccardo)   -- Coup, Justin Bronn, Riccardo Di Virgilio
 ./django/contrib/gis/measure.py:33:49     - Unknown word (Virgilio)   -- Justin Bronn, Riccardo Di Virgilio
@@ -1013,8 +1013,9 @@ Lines:
 ./django/utils/translation/trans_real.py:550:28    - Unknown word (sublanguage)  -- the user requests a sublanguage where we have a main
 ./django/utils/version.py:9:57      - Unknown word (PYXY)       -- the Python version. PYXY means "Python X.Y
 ./django/views/csrf.py:50:22     - Unknown word (noreferrer) -- '<a rel="noreferrer" …> for links to third
-./django/views/debug.py:403:16    - Unknown word (lastframe)  -- c["lastframe"] = frames[-1]
-./django/views/debug.py:555:66    - Unknown word (lasti)      -- co_positions(), tb.tb_lasti // 2, None
+./django/views/debug.py:254:69    - Unknown word (firstlineno) -- {tb_frame.f_code.co_firstlineno}"
+./django/views/debug.py:421:16    - Unknown word (lastframe)   -- c["lastframe"] = frames[-1]
+./django/views/debug.py:573:66    - Unknown word (lasti)       -- co_positions(), tb.tb_lasti // 2, None
 ./django/views/decorators/cache.py:41:27     - Unknown word (viewfunc)   -- def _cache_controller(viewfunc):
 ./django/views/decorators/gzip.py:5:47      - Unknown word (gzips)      -- Decorator for views that gzips pages if the client
 ./django/views/static.py:52:5      - Unknown word (statobj)    -- statobj = fullpath.stat()
@@ -2046,8 +2047,8 @@ Lines:
 ./tests/introspection/tests.py:172:14    - Unknown word (smallautofield) -- def test_smallautofield(self):
 ./tests/introspection/tests.py:198:49    - Unknown word (dbcommentmodel) -- name == "introspection_dbcommentmodel"
 ./tests/invalid_models_tests/test_models.py:1048:14   - Unknown word (multigeneration)                                                         -- def test_multigeneration_inheritance(self):
-./tests/invalid_models_tests/test_models.py:1637:13   - Unknown word (foos)                                                                    -- foos = models.ManyToManyField
-./tests/invalid_models_tests/test_models.py:1791:16   - Unknown word (aproxy)                                                                  -- mm_aproxy = models.ManyToManyField
+./tests/invalid_models_tests/test_models.py:1662:13   - Unknown word (foos)                                                                    -- foos = models.ManyToManyField
+./tests/invalid_models_tests/test_models.py:1816:16   - Unknown word (aproxy)                                                                  -- mm_aproxy = models.ManyToManyField
 ./tests/invalid_models_tests/test_models.py:369:39    - Unknown word (sindex)     -- "The index name '%sindex_name' cannot start with
 ./tests/invalid_models_tests/test_models.py:752:28    - Unknown word (Namezzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz) -- class VeryLongModelNamezzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz(
 ./tests/invalid_models_tests/test_models.py:766:28    - Unknown word (msimple)                                                    -- through="m2msimple",
@@ -2340,12 +2341,12 @@ Lines:
 ./tests/model_inheritance/test_abstract_inheritance.py:149:52    - Unknown word (concreteparent) -- model 'model_inheritance.concreteparent'.",
 ./tests/model_inheritance/test_abstract_inheritance.py:352:47    - Unknown word (concretebase)   -- model 'model_inheritance.concretebase'.",
 ./tests/model_inheritance/test_abstract_inheritance.py:444:19    - Unknown word (concretemodel)  -- ("concretemodel_ptr", models.OneToOneField
-./tests/model_inheritance/tests.py:141:14    - Unknown word (custompk)   -- def test_custompk_m2m(self):
-./tests/model_inheritance/tests.py:143:50    - Unknown word (foof)       -- objects.create(title="foof"))
-./tests/model_inheritance/tests.py:221:40    - Unknown word (multitable) -- doesn't transfer in multitable inheritance.
-./tests/model_inheritance/tests.py:335:19    - Unknown word (Ristorante) -- name="Ristorante Miron",
-./tests/model_inheritance/tests.py:335:30    - Unknown word (Miron)      -- name="Ristorante Miron",
-./tests/model_inheritance/tests.py:403:46    - Unknown word (nonrelated) -- child_one_to_one_link_on_nonrelated_objects(self):
+./tests/model_inheritance/tests.py:142:14    - Unknown word (custompk)   -- def test_custompk_m2m(self):
+./tests/model_inheritance/tests.py:144:50    - Unknown word (foof)       -- objects.create(title="foof"))
+./tests/model_inheritance/tests.py:165:23    - Unknown word (Ristorante) -- name="Ristorante Miron",
+./tests/model_inheritance/tests.py:165:34    - Unknown word (Miron)      -- name="Ristorante Miron",
+./tests/model_inheritance/tests.py:244:40    - Unknown word (multitable) -- doesn't transfer in multitable inheritance.
+./tests/model_inheritance/tests.py:426:46    - Unknown word (nonrelated) -- child_one_to_one_link_on_nonrelated_objects(self):
 ./tests/model_inheritance_regress/tests.py:304:11    - Unknown word (mchildren)  -- m2mchildren = list(M2MChild.objects
 ./tests/model_inheritance_regress/tests.py:338:9     - Unknown word (derivedm)   -- derivedm1 = DerivedM.objects
 ./tests/model_inheritance_regress/tests.py:346:9     - Unknown word (derivedms)  -- derivedms = list(DerivedM.objects
@@ -2877,20 +2878,20 @@ Lines:
 ./tests/view_tests/tests/test_csrf.py:36:35     - Unknown word (mislukt)     -- "CSRF-verificatie mislukt. Verzoek afgebroken
 ./tests/view_tests/tests/test_csrf.py:36:44     - Unknown word (Verzoek)     -- verificatie mislukt. Verzoek afgebroken.",
 ./tests/view_tests/tests/test_csrf.py:36:52     - Unknown word (afgebroken)  -- verificatie mislukt. Verzoek afgebroken.",
-./tests/view_tests/tests/test_debug.py:1035:13   - Unknown word (oomvalue)            -- oomvalue = OomOutput()  # NOQA
-./tests/view_tests/tests/test_debug.py:1053:13   - Unknown word (largevalue)          -- largevalue = LargeOutput()  # NOQA
-./tests/view_tests/tests/test_debug.py:1070:39   - Unknown word (mnὀp)                -- safe("abcdefghijkl<p>mnὀp</p>qrstuwxyz").encode
-./tests/view_tests/tests/test_debug.py:1070:47   - Unknown word (qrstuwxyz)           -- abcdefghijkl<p>mnὀp</p>qrstuwxyz").encode("ascii")
-./tests/view_tests/tests/test_debug.py:1143:24   - Unknown word (filecontent)         -- fp = StringIO("filecontent")
-./tests/view_tests/tests/test_debug.py:1282:9    - Unknown word (templ)               -- templ_path = Path(
-./tests/view_tests/tests/test_debug.py:1418:53   - Unknown word (fattie)              -- ADMINS=[("Admin", "admin@fattie-breakie.com")]):
-./tests/view_tests/tests/test_debug.py:1418:60   - Unknown word (breakie)             -- Admin", "admin@fattie-breakie.com")]):
-./tests/view_tests/tests/test_debug.py:1810:45   - Unknown word (djangosession)       -- SESSION_COOKIE_NAME="djangosession")
-./tests/view_tests/tests/test_debug.py:563:55    - Unknown word (pasteform)  -- /dpaste.com/" name="pasteform" '
-./tests/view_tests/tests/test_debug.py:757:34    - Unknown word (pastebin)   -- one as plain text (for pastebin)
-./tests/view_tests/tests/test_debug.py:773:28    - Unknown word (PYTHONNODEBUGRANGES) -- or os.environ.get("PYTHONNODEBUGRANGES", False),
-./tests/view_tests/tests/test_debug.py:809:11    - Unknown word (Pastebin)            -- # Pastebin.
-./tests/view_tests/tests/test_debug.py:86:68     - Unknown word (haha)       -- loadedFile("file_data.txt", b"haha"),
+./tests/view_tests/tests/test_debug.py:1041:13   - Unknown word (oomvalue)            -- oomvalue = OomOutput()  # NOQA
+./tests/view_tests/tests/test_debug.py:1059:13   - Unknown word (largevalue)          -- largevalue = LargeOutput()  # NOQA
+./tests/view_tests/tests/test_debug.py:1076:39   - Unknown word (mnὀp)                -- safe("abcdefghijkl<p>mnὀp</p>qrstuwxyz").encode
+./tests/view_tests/tests/test_debug.py:1076:47   - Unknown word (qrstuwxyz)           -- abcdefghijkl<p>mnὀp</p>qrstuwxyz").encode("ascii")
+./tests/view_tests/tests/test_debug.py:1149:24   - Unknown word (filecontent)         -- fp = StringIO("filecontent")
+./tests/view_tests/tests/test_debug.py:1288:9    - Unknown word (templ)               -- templ_path = Path(
+./tests/view_tests/tests/test_debug.py:1430:53   - Unknown word (fattie)              -- ADMINS=[("Admin", "admin@fattie-breakie.com")]):
+./tests/view_tests/tests/test_debug.py:1430:60   - Unknown word (breakie)             -- Admin", "admin@fattie-breakie.com")]):
+./tests/view_tests/tests/test_debug.py:1886:45   - Unknown word (djangosession)       -- SESSION_COOKIE_NAME="djangosession")
+./tests/view_tests/tests/test_debug.py:569:55    - Unknown word (pasteform)  -- /dpaste.com/" name="pasteform" '
+./tests/view_tests/tests/test_debug.py:763:34    - Unknown word (pastebin)   -- one as plain text (for pastebin)
+./tests/view_tests/tests/test_debug.py:779:28    - Unknown word (PYTHONNODEBUGRANGES) -- or os.environ.get("PYTHONNODEBUGRANGES", False),
+./tests/view_tests/tests/test_debug.py:815:11    - Unknown word (Pastebin)            -- # Pastebin.
+./tests/view_tests/tests/test_debug.py:92:68     - Unknown word (haha)       -- loadedFile("file_data.txt", b"haha"),
 ./tests/view_tests/tests/test_defaults.py:49:13     - Unknown word (urlarticle) -- cls.urlarticle = UrlArticle.objects
 ./tests/view_tests/tests/test_i18n.py:186:38    - Unknown word (mylanguage) -- LANGUAGE_COOKIE_NAME": "mylanguage",
 ./tests/view_tests/tests/test_i18n.py:292:14    - Unknown word (jsoni)      -- def test_jsoni18n(self):
