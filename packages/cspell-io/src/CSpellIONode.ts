@@ -4,6 +4,7 @@ import { compareStats } from './common/stat.js';
 import type { CSpellIO } from './CSpellIO.js';
 import { ErrorNotImplemented } from './errors/ErrorNotImplemented.js';
 import { registerHandlers } from './handlers/node/file.js';
+import type { BufferEncoding } from './models/BufferEncoding.js';
 import type { TextFileResource } from './models/FileResource.js';
 import type { Stats } from './models/Stats.js';
 import { toURL, urlBasename, urlDirname } from './node/file/util.js';

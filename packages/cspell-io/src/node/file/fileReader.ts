@@ -54,14 +54,24 @@ export function readFileTextSync(filename: string, encoding?: BufferEncoding): s
     const rawData = fs.readFileSync(filename);
     const data = isZipped(filename) ? zlib.gunzipSync(rawData) : rawData;
 
-    return !encoding || encoding.startsWith('utf') ? decode(data) : data.toString(encoding);
+    return !encoding || encoding.startsWith('utf')
+        ? decode(data)
+        : encoding === 'utf16be'
+        ? data.swap16().toString('utf16le')
+        : data.toString(encoding);
 }
 
 function createTextCollector(encoding: BufferEncoding) {
     async function collect(iterable: AsyncIterable<string | Buffer>): Promise<string> {
         const buf: string[] = [];
         for await (const sb of iterable) {
-            buf.push(typeof sb === 'string' ? sb : sb.toString(encoding));
+            buf.push(
+                typeof sb === 'string'
+                    ? sb
+                    : encoding === 'utf16be'
+                    ? sb.swap16().toString('utf16le')
+                    : sb.toString(encoding)
+            );
         }
         return buf.join('');
     }

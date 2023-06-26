@@ -1,5 +1,6 @@
 import { describe, expect, test } from 'vitest';
 
+import { arrayBufferViewToBuffer } from './arrayBuffers.js';
 import { decode, encodeString, swapBytes, swapBytesInPlace } from './encode-decode.js';
 
 const samples = ['This is a bit of text'];
@@ -7,9 +8,9 @@ const samples = ['This is a bit of text'];
 describe('encode-decode', () => {
     test.each`
         text          | encoding     | expected
-        ${'hello'}    | ${'utf8'}    | ${Buffer.from('hello')}
-        ${samples[0]} | ${'utf8'}    | ${Buffer.from(samples[0])}
-        ${samples[0]} | ${'utf16le'} | ${Buffer.from(samples[0], 'utf16le')}
+        ${'hello'}    | ${'utf8'}    | ${ab('hello')}
+        ${samples[0]} | ${'utf8'}    | ${ab(samples[0])}
+        ${samples[0]} | ${'utf16le'} | ${ab(samples[0], 'utf16le')}
     `('encodeString $encoding $text', ({ text, encoding, expected }) => {
         expect(encodeString(text, encoding, false)).toEqual(expected);
     });
@@ -18,8 +19,8 @@ describe('encode-decode', () => {
         encoding
         ${'utf16le'}
     `('swapBytesInPlace $encoding', ({ encoding }) => {
-        const src = Buffer.from('The sun is shining.', encoding);
-        const buf = Buffer.from(src);
+        const src = ab('The sun is shining.', encoding);
+        const buf = ab(src);
         expect(buf).toEqual(src);
         swapBytesInPlace(buf);
         expect(buf).not.toEqual(src);
@@ -33,8 +34,8 @@ describe('encode-decode', () => {
         ${'123'}
         ${'1234'}
     `('swapBytes $encoding', ({ text }) => {
-        const src = Buffer.from(text, 'utf16le');
-        const buf = Buffer.from(src);
+        const src = ab(text, 'utf16le');
+        const buf = ab(src);
         expect(buf).toEqual(src);
         const buf2 = swapBytes(buf);
         expect(buf).toEqual(src);
@@ -64,3 +65,11 @@ describe('encode-decode', () => {
         expect(decode(encoded)).toBe(text);
     });
 });
+
+function ab(data: string | Buffer | ArrayBufferView, encoding?: BufferEncoding): ArrayBufferView {
+    return typeof data === 'string'
+        ? Buffer.from(data, encoding)
+        : data instanceof Buffer
+        ? Buffer.from(data)
+        : Buffer.from(arrayBufferViewToBuffer(data));
+}

@@ -3,6 +3,7 @@ export type BufferEncoding =
     | 'utf8'
     | 'utf-8'
     | 'utf16le'
+    | 'utf16be'
     | 'ucs2'
     | 'ucs-2'
     | 'base64'
