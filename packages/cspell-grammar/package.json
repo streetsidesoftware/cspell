@@ -12,48 +12,46 @@
   "bin": {
     "cspell-grammar": "bin.mjs"
   },
-  "type": "commonjs",
-  "main": "dist/cjs/index.js",
-  "types": "dist/cjs/index.d.ts",
-  "module": "dist/esm/index.mjs",
+  "type": "module",
+  "types": "dist/index.d.ts",
+  "module": "dist/index.js",
   "exports": {
     ".": {
-      "import": "./dist/esm/index.mjs",
-      "require": "./dist/cjs/index.js"
+      "import": "./dist/index.js"
     },
     "./parsers/typescript": {
-      "import": "./dist/esm/parsers/typescript/index.mjs",
-      "require": "./dist/cjs/parsers/typescript/index.js"
+      "import": "./dist/parsers/typescript/index.js"
     }
   },
   "typesVersions": {
     "*": {
       "index.js": [
-        "dist/cjs/index.d.ts"
+        "dist/index.d.ts"
       ],
       "index.d.ts": [
-        "dist/cjs/index.d.ts"
+        "dist/index.d.ts"
       ],
-      "dist/cjs/*.d.ts": [
-        "dist/cjs/*.d.ts"
+      "dist/*.d.ts": [
+        "dist/*.d.ts"
+      ],
+      "parsers": [
+        "dist/parsers/index.d.ts"
       ],
       "parsers/typescript": [
-        "dist/cjs/parsers/typescript/index.d.ts"
+        "dist/parsers/typescript/index.d.ts"
       ],
       "parsers/typescript/*.d.ts": [
-        "dist/cjs/parsers/typescript/*.d.ts"
+        "dist/parsers/typescript/*.d.ts"
       ],
       "*": [
-        "dist/cjs/*.d.ts",
-        "dist/cjs/*/index.d.ts"
+        "dist/*.d.ts",
+        "dist/*/index.d.ts"
       ]
     }
   },
   "files": [
     "bin.mjs",
     "dist",
-    "!dist/esm/**/*.js",
-    "!dist/esm/**/*.ts",
     "!**/*.tsbuildInfo",
     "!**/__mocks__",
     "!**/test/**",
@@ -63,8 +61,7 @@
   ],
   "scripts": {
     "clean": "shx rm -rf dist temp coverage \"*.tsbuildInfo\"",
-    "build": "tsc -b . && ts2mjs dist/esm",
-    "build:esm": "tsc -p tsconfig.esm.json",
+    "build": "tsc -b .",
     "clean-build": "pnpm run clean && pnpm run build",
     "coverage": "pnpm coverage:vitest && pnpm coverage:fix",
     "coverage:vitest": "vitest run --coverage",
