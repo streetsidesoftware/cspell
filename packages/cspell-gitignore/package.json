@@ -13,21 +13,17 @@
   "bin": {
     "cspell-gitignore": "bin.mjs"
   },
-  "type": "commonjs",
-  "main": "dist/cjs/index.js",
-  "types": "dist/cjs/index.d.ts",
-  "module": "dist/esm/index.mjs",
+  "type": "module",
+  "types": "dist/index.d.ts",
+  "module": "dist/index.js",
   "exports": {
     ".": {
-      "import": "./dist/esm/index.mjs",
-      "require": "./dist/cjs/index.js"
+      "import": "./dist/index.js"
     }
   },
   "files": [
     "bin.mjs",
     "dist",
-    "!dist/esm/**/*.js",
-    "!dist/esm/**/*.ts",
     "!**/*.tsbuildInfo",
     "!**/__mocks__",
     "!**/test/**",
@@ -37,8 +33,7 @@
   ],
   "scripts": {
     "clean": "shx rm -rf dist temp coverage \"*.tsbuildInfo\"",
-    "build": "tsc -b . && ts2mjs dist/esm",
-    "build:esm": "tsc -p tsconfig.esm.json",
+    "build": "tsc -b .",
     "clean-build": "pnpm run clean && pnpm run build",
     "coverage": "pnpm coverage:vitest && pnpm coverage:fix",
     "coverage:vitest": "vitest run --coverage",
