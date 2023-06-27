@@ -16,79 +16,71 @@
   "author": "Jason Dent <jason@streetsidesoftware.nl>",
   "homepage": "https://github.com/streetsidesoftware/cspell/tree/main/packages/cspell-pipe#readme",
   "license": "MIT",
-  "type": "commonjs",
-  "main": "dist/cjs/index.js",
-  "module": "dist/esm/index.mjs",
+  "type": "module",
+  "module": "dist/index.js",
+  "typings": "dist/index.d.ts",
   "directories": {
     "dist": "dist"
   },
   "exports": {
     ".": {
-      "import": "./dist/esm/index.mjs",
-      "require": "./dist/cjs/index.js"
+      "import": "./dist/index.js"
     },
     "./index": {
-      "import": "./dist/esm/index.mjs",
-      "require": "./dist/cjs/index.js"
+      "import": "./dist/index.js"
     },
     "./index.js": {
-      "import": "./dist/esm/index.mjs",
-      "require": "./dist/cjs/index.js"
+      "import": "./dist/index.js"
     },
     "./operators": {
-      "import": "./dist/esm/operators/index.mjs",
-      "require": "./dist/cjs/operators/index.js"
+      "import": "./dist/operators/index.js"
     },
     "./operators/index.js": {
-      "import": "./dist/esm/operators/index.mjs",
-      "require": "./dist/cjs/operators/index.js"
+      "import": "./dist/operators/index.js"
     },
     "./sync": {
-      "import": "./dist/esm/sync/index.mjs",
-      "require": "./dist/cjs/sync/index.js"
+      "import": "./dist/sync/index.js"
     },
     "./sync/index": {
-      "import": "./dist/esm/sync/index.mjs",
-      "require": "./dist/cjs/sync/index.js"
+      "import": "./dist/sync/index.js"
     },
     "./sync/index.js": {
-      "import": "./dist/esm/sync/index.mjs",
-      "require": "./dist/cjs/sync/index.js"
+      "import": "./dist/sync/index.js"
     }
   },
-  "types": "dist/cjs/index.d.ts",
+  "types": "dist/index.d.ts",
   "typesVersions": {
     "*": {
       "index.js": [
-        "dist/cjs/index.d.ts"
+        "dist/index.d.ts"
       ],
       "index.d.ts": [
-        "dist/cjs/index.d.ts"
+        "dist/index.d.ts"
       ],
       "operators": [
-        "dist/cjs/operators/index.d.ts"
+        "dist/operators/index.d.ts"
       ],
       "operators/*.js": [
-        "dist/cjs/operators/*.d.ts"
+        "dist/operators/*.d.ts"
       ],
       "operators/index.d.ts": [
-        "dist/cjs/operators/index.d.ts"
+        "dist/operators/index.d.ts"
       ],
       "sync": [
-        "dist/cjs/sync/index.d.ts"
+        "dist/sync/index.d.ts"
       ],
       "sync/index.js": [
-        "dist/cjs/sync/index.d.ts"
+        "dist/sync/index.d.ts"
       ],
       "sync/index.d.ts": [
-        "dist/cjs/sync/index.d.ts"
+        "dist/sync/index.d.ts"
       ],
-      "dist/cjs/index.d.ts": [
-        "dist/cjs/index.d.ts"
+      "dist/index.d.ts": [
+        "dist/index.d.ts"
       ],
       "*": [
-        "dist/cjs/*.d.ts",
-        "dist/cjs/*/index.d.ts"
+        "dist/*.d.ts",
+        "dist/*/index.d.ts"
       ]
     }
   },
@@ -102,9 +94,7 @@
     "!**/*.map"
   ],
   "scripts": {
-    "build": "tsc -b . && ts2mjs dist/esm",
-    "build:cjs": "tsc -p tsconfig.cjs.json",
-    "build:esm": "tsc -p tsconfig.esm.json && ts2mjs dist/esm",
+    "build": "tsc -b .",
     "watch": "tsc -p . -w",
     "clean": "shx rm -rf dist temp coverage \"*.tsbuildInfo\"",
     "clean-build": "pnpm run clean && pnpm run build",
