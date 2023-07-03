@@ -5,7 +5,7 @@ Args: '["**"]'
 Summary:
   files: 261
   filesWithIssues: 257
-  issues: 3617
+  issues: 3618
   errors: 0
 Errors: []
 
@@ -428,8 +428,9 @@ issues:
   - "lua/lspconfig/server_configurations/lean3ls.lua:13:18       endpos      U       local _, endpos = fname:find '/lean"
   - "lua/lspconfig/server_configurations/ocamllsp.lua:6:3            ocamlinterface      U       ocamlinterface = 'ocaml.interface'"
   - "lua/lspconfig/server_configurations/ocamllsp.lua:12:37          ftype               U       language_id = function(_, ftype)"
-  - "lua/lspconfig/server_configurations/omnisharp.lua:47:70         getpid          U       hostPID', tostring(vim.fn.getpid()) })"
-  - "lua/lspconfig/server_configurations/omnisharp.lua:73:50         Prereleases     U       config.cmd, 'Sdk:IncludePrereleases=true')"
+  - "lua/lspconfig/server_configurations/omnisharp.lua:50:70         getpid          U       hostPID', tostring(vim.fn.getpid()) })"
+  - "lua/lspconfig/server_configurations/omnisharp.lua:77:50         Prereleases     U       config.cmd, 'Sdk:IncludePrereleases=true')"
+  - "lua/lspconfig/server_configurations/omnisharp.lua:85:37         deepcopy        U       config.capabilities = vim.deepcopy(new_config.capabilities"
   - "lua/lspconfig/server_configurations/openedge_ls.lua:19:43       Dorg    U       config.cmd + 1] = '-Dorg.slf4j.simpleLogger.defaultLog"
   - "lua/lspconfig/server_configurations/please.lua:7:36         plzconfig       U       util.root_pattern '.plzconfig',"
   - "lua/lspconfig/server_configurations/pyright.lua:55:7        nargs       U       nargs = 1,"
@@ -464,7 +465,6 @@ issues:
   - "lua/lspconfig/ui/lspinfo.lua:358:25         conceallevel        U       vim.wo[info.win_id].conceallevel = 2"
   - "lua/lspconfig/ui/windows.lua:1:57           vnim            U       modified from plenary.vnim by"
   - "lua/lspconfig/ui/windows.lua:2:7            Devries         U       -- TJ Devries. It is not a stable"
-  - "lua/lspconfig/ui/windows.lua:11:18          deepcopy        U       original = vim.deepcopy(original)"
   - "lua/lspconfig/ui/windows.lua:59:41          percentags      U       that takes up certain percentags of the current screen"
   - "lua/lspconfig/ui/windows.lua:109:36         winhl           U       set_option(win_id, 'winhl', 'FloatBorder:LspInfoBorder"
   - "lua/lspconfig/ui/windows.lua:119:36         cursorcolumn    U       set_option(win_id, 'cursorcolumn', false)"
