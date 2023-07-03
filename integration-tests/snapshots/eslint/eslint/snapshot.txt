@@ -3,7 +3,7 @@ Repository: eslint/eslint
 Url: "https://github.com/eslint/eslint"
 Args: ["**","--exclude=bin/**","--exclude=CHANGELOG.md","--exclude=_data","--exclude=tests/bench/large.js","--exclude=docs/src/_includes","--exclude=docs/src/assets/{fonts,s?css,images}"]
 Lines:
- CSpell: Files checked: 1872, Issues found: 5498 in 1255 files
+ CSpell: Files checked: 1883, Issues found: 5498 in 1255 files
  exit code: 1
 ./Makefile.js:145:88    - Unknown word (ined)               -- followed by the string "ined".
 ./Makefile.js:151:48    - Unknown word (blogpost)           -- render(cat("./templates/blogpost.md.ejs"), renderContext
@@ -255,16 +255,16 @@ Lines:
 ./docs/src/use/configure/ignore.md:122:14    - Unknown word (mypackage)    -- "name": "mypackage",
 ./docs/src/use/configure/ignore.md:174:211   - Unknown word (reinclude)    -- the implicit rule and reinclude this file for linting
 ./docs/src/use/configure/ignore.md:34:186    - Unknown word (subdir)     -- foo.js` but not `lib/subdir/foo.js`.
-./docs/src/use/configure/language-options.md:36:4      - Unknown word (qunit)      -- * `qunit` - QUnit global variables
-./docs/src/use/configure/language-options.md:38:4      - Unknown word (prototypejs) -- * `prototypejs` - Prototype.js global
-./docs/src/use/configure/language-options.md:42:4      - Unknown word (applescript) -- * `applescript` - AppleScript global
-./docs/src/use/configure/language-options.md:43:22     - Unknown word (Nashorn)     -- `nashorn` - Java 8 Nashorn global variables.
-./docs/src/use/configure/language-options.md:43:4      - Unknown word (nashorn)     -- * `nashorn` - Java 8 Nashorn global
-./docs/src/use/configure/language-options.md:44:4      - Unknown word (serviceworker) -- * `serviceworker` - Service Worker global
-./docs/src/use/configure/language-options.md:45:4      - Unknown word (atomtest)      -- * `atomtest` - Atom test helper
-./docs/src/use/configure/language-options.md:46:4      - Unknown word (embertest)     -- * `embertest` - Ember test helper
-./docs/src/use/configure/language-options.md:47:4      - Unknown word (webextensions) -- * `webextensions` - WebExtensions globals
-./docs/src/use/configure/language-options.md:48:4      - Unknown word (greasemonkey)  -- * `greasemonkey` - GreaseMonkey globals
+./docs/src/use/configure/language-options.md:38:4      - Unknown word (qunit)      -- * `qunit` - QUnit global variables
+./docs/src/use/configure/language-options.md:40:4      - Unknown word (prototypejs) -- * `prototypejs` - Prototype.js global
+./docs/src/use/configure/language-options.md:44:4      - Unknown word (applescript) -- * `applescript` - AppleScript global
+./docs/src/use/configure/language-options.md:45:22     - Unknown word (Nashorn)     -- `nashorn` - Java 8 Nashorn global variables.
+./docs/src/use/configure/language-options.md:45:4      - Unknown word (nashorn)     -- * `nashorn` - Java 8 Nashorn global
+./docs/src/use/configure/language-options.md:46:4      - Unknown word (serviceworker) -- * `serviceworker` - Service Worker global
+./docs/src/use/configure/language-options.md:47:4      - Unknown word (atomtest)      -- * `atomtest` - Atom test helper
+./docs/src/use/configure/language-options.md:48:4      - Unknown word (embertest)     -- * `embertest` - Ember test helper
+./docs/src/use/configure/language-options.md:49:4      - Unknown word (webextensions) -- * `webextensions` - WebExtensions globals
+./docs/src/use/configure/language-options.md:50:4      - Unknown word (greasemonkey)  -- * `greasemonkey` - GreaseMonkey globals
 ./docs/src/use/configure/plugins.md:44:152    - Unknown word (pluginname) -- require('eslint-plugin-pluginname')` in the config file
 ./docs/src/use/configure/rules.md:25:294    - Unknown word (buildtime)  -- other than a potential buildtime or runtime error (such
 ./docs/src/use/formatters/index.md:148:2     - Unknown word (testsuites) -- <testsuites>
@@ -330,7 +330,7 @@ Lines:
 ./lib/rules/array-bracket-newline.js:51:30     - Unknown word (Linebreak)  -- unexpectedOpeningLinebreak: "There should be no
 ./lib/rules/arrow-body-style.js:230:33    - Unknown word (parenthesised) -- let parenthesisedObjectLiteral = null
 ./lib/rules/arrow-body-style.js:97:32     - Unknown word (Parenthesised) -- while (!astUtils.isParenthesised(sourceCode, nodeToCheck
-./lib/rules/dot-notation.js:139:63    - Unknown word (quasis)     -- node, node.property.quasis[0].value.cooked);
+./lib/rules/dot-notation.js:138:63    - Unknown word (quasis)     -- node, node.property.quasis[0].value.cooked);
 ./lib/rules/for-direction.js:66:65     - Unknown word (nochange)   -- if sub return -1, if nochange, return 0
 ./lib/rules/func-name-matching.js:13:7      - Unknown word (esutils)    -- const esutils = require("esutils"
 ./lib/rules/id-match.js:240:45    - Unknown word (righthand)  -- // prevent checking righthand side of destructured
@@ -351,12 +351,12 @@ Lines:
 ./lib/rules/no-else-return.js:351:19    - Unknown word (consequents) -- const consequents = [];
 ./lib/rules/no-else-return.js:80:16     - Unknown word (Redeclaring) -- * Redeclaring any of these would cause
 ./lib/rules/no-extend-native.js:121:87    - Unknown word (Propert)    -- callee, "Object", /^definePropert(?:y|ies)$/u)
-./lib/rules/no-extra-parens.js:255:52    - Unknown word (newed)          -- constructor function is newed-up with parens
+./lib/rules/no-extra-parens.js:257:52    - Unknown word (newed)          -- constructor function is newed-up with parens
 ./lib/rules/no-extra-parens.js:2:27      - Unknown word (parenthesising) -- fileoverview Disallow parenthesising higher precedence subexpressi
 ./lib/rules/no-extra-parens.js:2:60      - Unknown word (subexpressions) -- enthesising higher precedence subexpressions.
-./lib/rules/no-extra-parens.js:554:28    - Unknown word (logicals)       -- * Evaluate binary logicals
-./lib/rules/no-extra-parens.js:560:19    - Unknown word (prec)           -- const prec = precedence(node);
-./lib/rules/no-extra-parens.js:801:81    - Unknown word (unparenthesized) -- left-hand side is an *unparenthesized*
+./lib/rules/no-extra-parens.js:556:28    - Unknown word (logicals)       -- * Evaluate binary logicals
+./lib/rules/no-extra-parens.js:562:19    - Unknown word (prec)           -- const prec = precedence(node);
+./lib/rules/no-extra-parens.js:803:81    - Unknown word (unparenthesized) -- left-hand side is an *unparenthesized*
 ./lib/rules/no-implicit-coercion.js:14:39     - Unknown word (ndex)       -- PATTERN = /^(?:i|lastI)ndexOf$/u;
 ./lib/rules/no-inline-comments.js:61:17     - Unknown word (postamble)  -- postamble = endLine.slice(node
 ./lib/rules/no-inline-comments.js:63:19     - Unknown word (Postamble)  -- isPostambleEmpty = !postamble;
@@ -381,14 +381,14 @@ Lines:
 ./lib/rules/prefer-object-spread.js:176:24    - Unknown word (autofixer)   -- @returns {Function} autofixer - replaces the Object
 ./lib/rules/prefer-object-spread.js:61:42     - Unknown word (sourcecode) -- sourceCode in context sourcecode object
 ./lib/rules/prefer-regex-literals.js:16:9      - Unknown word (REGEXPP)    -- const { REGEXPP_LATEST_ECMA_VERSION
-./lib/rules/prefer-regex-literals.js:255:21    - Unknown word (Regexpp)    -- function getRegexppEcmaVersion(ecmaVersion
+./lib/rules/prefer-regex-literals.js:246:21    - Unknown word (Regexpp)    -- function getRegexppEcmaVersion(ecmaVersion
 ./lib/rules/quotes.js:41:17     - Unknown word (unescaping) -- * escaping and unescaping as necessary.
 ./lib/rules/sort-vars.js:53:23     - Unknown word (unfixable)  -- const unfixable = idDeclarations.some
 ./lib/rules/space-unary-ops.js:130:28    - Unknown word (Doesnt)     -- function verifyWordDoesntHaveSpaces(node, firstToken
 ./lib/rules/space-unary-ops.js:243:32    - Unknown word (Dont)       -- function verifyNonWordsDontHaveSpaces(node, firstToken
-./lib/rules/utils/ast-utils.js:2009:80   - Unknown word (hashbangs)  -- ESLint itself handles hashbangs.
-./lib/rules/utils/ast-utils.js:2011:66   - Unknown word (tokenizes)  -- because of the way Espree tokenizes hashbangs.
-./lib/rules/utils/ast-utils.js:395:40    - Unknown word (samely)     -- a.b` and `a?.b` are samely.
+./lib/rules/utils/ast-utils.js:2019:80   - Unknown word (hashbangs)  -- ESLint itself handles hashbangs.
+./lib/rules/utils/ast-utils.js:2021:66   - Unknown word (tokenizes)  -- because of the way Espree tokenizes hashbangs.
+./lib/rules/utils/ast-utils.js:396:40    - Unknown word (samely)     -- a.b` and `a?.b` are samely.
 ./lib/rules/utils/patterns/letters.js:12:24     - Unknown word (Dulin)      -- Copyright 2013-2016 Dulin Marat and other contributors
 ./lib/shared/config-validator.js:286:55    - Unknown word (ECMAFEATURES) -- source, "ESLINT_LEGACY_ECMAFEATURES");
 ./lib/shared/string-utils.js:12:28     - Unknown word (graphemer)  -- Graphemer = require("graphemer").default;
@@ -441,11 +441,11 @@ Lines:
 ./tests/lib/eslint/flat-eslint.js:5028:31   - Unknown word (dignore)      -- cwd: `${root}-dignore`,
 ./tests/lib/linter/code-path-analysis/code-path-analyzer.js:30:16     - Unknown word (ESQUERY)    -- const STANDARD_ESQUERY_OPTION = { visitorKeys
 ./tests/lib/linter/config-comment-parser.js:165:41    - Unknown word (ELEVENTEEN) -- code = "a: seventy, b:ELEVENTEEN";
-./tests/lib/linter/linter.js:3361:1    - Unknown word (consolexlog) -- consolexlog("test2");
-./tests/lib/linter/linter.js:3488:73   - Unknown word (barfoo)      -- rules: { foobar: 2, barfoo: 1 } });
-./tests/lib/linter/linter.js:3507:84   - Unknown word (rulename)    -- this is 2, since the rulename is very likely to be
-./tests/lib/linter/linter.js:6892:19   - Unknown word (postprocessors) -- describe("postprocessors", () => {
-./tests/lib/linter/linter.js:6945:28   - Unknown word (postprocessed)  -- it("should use postprocessed problem ranges when
+./tests/lib/linter/linter.js:3363:1    - Unknown word (consolexlog) -- consolexlog("test2");
+./tests/lib/linter/linter.js:3490:73   - Unknown word (barfoo)      -- rules: { foobar: 2, barfoo: 1 } });
+./tests/lib/linter/linter.js:3509:84   - Unknown word (rulename)    -- this is 2, since the rulename is very likely to be
+./tests/lib/linter/linter.js:6894:19   - Unknown word (postprocessors) -- describe("postprocessors", () => {
+./tests/lib/linter/linter.js:6947:28   - Unknown word (postprocessed)  -- it("should use postprocessed problem ranges when
 ./tests/lib/linter/node-event-generator.js:25:7      - Unknown word (ESPREE)     -- const ESPREE_CONFIG = {
 ./tests/lib/linter/node-event-generator.js:298:68    - Unknown word (pseudoclasses) -- // 0 identifiers, 0 pseudoclasses
 ./tests/lib/linter/node-event-generator.js:304:66    - Unknown word (pseudoclass)   -- ].expression], // 1 pseudoclass, 0 identifiers
@@ -458,8 +458,8 @@ Lines:
 ./tests/lib/linter/source-code-fixer.js:84:19     - Unknown word (nofix)        -- message: "nofix"
 ./tests/lib/options.js:359:71    - Unknown word (morerules)  -- trcOptions.parse("--rulesdir /morerules");
 ./tests/lib/rule-tester/flat-rule-tester.js:1104:36   - Unknown word (somefile)   -- filename: "somefile.js"
-./tests/lib/rule-tester/flat-rule-tester.js:2229:33   - Unknown word (outpt)      -- outpt: "var baz;"
-./tests/lib/rule-tester/flat-rule-tester.js:2582:15   - Unknown word (Subclassing) -- describe("Subclassing", () => {
+./tests/lib/rule-tester/flat-rule-tester.js:2231:33   - Unknown word (outpt)      -- outpt: "var baz;"
+./tests/lib/rule-tester/flat-rule-tester.js:2584:15   - Unknown word (Subclassing) -- describe("Subclassing", () => {
 ./tests/lib/rule-tester/flat-rule-tester.js:989:22    - Unknown word (noeval)     -- "noeval('foo')"
 ./tests/lib/rules/array-bracket-newline.js:57:50     - Unknown word (ndosomething) -- [\nfunction foo() {\ndosomething();\n}\n];",
 ./tests/lib/rules/array-bracket-spacing.js:51:47     - Unknown word (n'qux)      -- [{\n'bar': 'baz', \n'qux': [{ 'bar': 'baz' }
@@ -507,7 +507,7 @@ Lines:
 ./tests/lib/rules/no-dupe-else-if.js:56:61     - Unknown word (subconditions) -- may contain redundant subconditions, but the branch can
 ./tests/lib/rules/no-duplicate-imports.js:94:32     - Unknown word (modns)      -- code: "import * as modns from \"lodash-es\";
 ./tests/lib/rules/no-eval.js:41:29     - Unknown word (noneval)    -- { code: "globalThis.noneval('foo')", env: { es2
-./tests/lib/rules/no-extra-parens.js:772:32    - Unknown word (ipaddr)     -- code: "const net = ipaddr.parseCIDR(/** @type
+./tests/lib/rules/no-extra-parens.js:781:32    - Unknown word (ipaddr)     -- code: "const net = ipaddr.parseCIDR(/** @type
 ./tests/lib/rules/no-implicit-globals.js:26:15     - Unknown word (Redeclaration) -- const readonlyRedeclarationMessage = "Unexpected
 ./tests/lib/rules/no-inline-comments.js:127:37    - Unknown word (otherthing) -- ignorePattern: "otherthing"
 ./tests/lib/rules/no-invalid-regexp.js:70:35     - Unknown word (Nandinagari) -- RegExp('\\\\p{Script=Nandinagari}', 'u');",
@@ -528,7 +528,7 @@ Lines:
 ./tests/lib/rules/no-undefined.js:38:10     - Unknown word (ndefined)   -- "ndefined",
 ./tests/lib/rules/no-unexpected-multiline.js:307:22    - Unknown word (gimuygimuygimuy) -- /bar/gimuygimuygimuy.test(baz)
 ./tests/lib/rules/no-unsafe-finally.js:42:123    - Unknown word (Hola)       -- static ehm() { return 'Hola!'; } } } };",
-./tests/lib/rules/no-unused-vars.js:943:32    - Unknown word (fooz)       -- code: "/* global a$fooz,$foo */\na$fooz;",
+./tests/lib/rules/no-unused-vars.js:957:32    - Unknown word (fooz)       -- code: "/* global a$fooz,$foo */\na$fooz;",
 ./tests/lib/rules/no-use-before-define.js:1129:17   - Unknown word (mdjermanovic) -- * TODO(mdjermanovic): Add the following
 ./tests/lib/rules/no-warning-comments.js:153:30    - Unknown word (litera)     -- code: "// regex [litera|$]",
 ./tests/lib/rules/no-warning-comments.js:37:92     - Unknown word (aeiou)      -- options: [{ terms: ["[aeiou]"], location: "anywhere

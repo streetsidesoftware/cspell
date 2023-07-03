@@ -5,7 +5,7 @@ Args: '["**/*.go"]'
 Summary:
   files: 237
   filesWithIssues: 217
-  issues: 3449
+  issues: 3448
   errors: 0
 Errors: []
 
@@ -93,7 +93,7 @@ issues:
   - "caddyconfig/httpcaddyfile/pkiapp.go:65:33       CAID    U       ID = caddypki.DefaultCAID"
   - "caddyconfig/httpcaddyfile/tlsapp.go:197:38      Tailscale       U       as desired (see the Tailscale listener plugin), so"
   - "caddyconfig/httpcaddyfile/tlsapp.go:364:9       ACMECA          U       globalACMECA := options[\"acme_ca"
-  - "caddyconfig/httploader.go:60:7          CAPEM       U       RootCAPEMFiles []string `json"
+  - "caddyconfig/httploader.go:71:7          CAPEM       U       RootCAPEMFiles []string `json"
   - "caddytest/caddytest.go:24:14        aryann              U       \"github.com/aryann/difflib\""
   - "caddytest/caddytest.go:24:21        difflib             U       \"github.com/aryann/difflib\""
   - "caddytest/caddytest.go:26:2         caddycmd            U       caddycmd \"github.com/caddyserver"
@@ -128,15 +128,16 @@ issues:
   - "listen.go:77:6          tconn           U       if tconn, ok := conn.(canSetKeepAlive"
   - "listen.go:101:6         expliclty       U       // expliclty assign it to nothing"
   - "listeners.go:154:8          Abtract         U       var isAbtractUnixSocket bool"
-  - "listeners.go:316:38         netw            U       returns true if the netw is a unix network."
-  - "listeners.go:342:48         rwxr            U       returns a string like `-rwxr-xr--` for `u=rwx,g=rx"
-  - "listeners.go:511:3          sqtc            U       sqtc := newSharedQUICTLSConfig"
-  - "listeners.go:511:20         QUICTLS         U       sqtc := newSharedQUICTLSConfig(tlsConf)"
-  - "listeners.go:573:5          Confs           U       tlsConfs map[*tls.Config"
-  - "listeners.go:600:5          cacc            U       if cacc, ok := sqtc.tlsConfs"
-  - "listeners.go:677:7          fcpc            U       func (fcpc *fakeClosePacketConn"
-  - "listeners.go:711:25         hotswappable    U       someone would need a hotswappable QUIC-only (not http"
-  - "listeners.go:715:7          fcql            U       func (fcql *fakeCloseQuicListener"
+  - "listeners.go:317:38         netw            U       returns true if the netw is a unix network."
+  - "listeners.go:343:48         rwxr            U       returns a string like `-rwxr-xr--` for `u=rwx,g=rx"
+  - "listeners.go:512:3          sqtc            U       sqtc := newSharedQUICTLSConfig"
+  - "listeners.go:512:20         QUICTLS         U       sqtc := newSharedQUICTLSConfig(tlsConf)"
+  - "listeners.go:574:5          Confs           U       tlsConfs map[*tls.Config"
+  - "listeners.go:601:5          cacc            U       if cacc, ok := sqtc.tlsConfs"
+  - "listeners.go:684:113        assertable      U       net.PacketConn type assertable to a net.Conn,"
+  - "listeners.go:689:7          fcpc            U       func (fcpc *fakeClosePacketConn"
+  - "listeners.go:705:25         hotswappable    U       someone would need a hotswappable QUIC-only (not http"
+  - "listeners.go:709:7          fcql            U       func (fcql *fakeCloseQuicListener"
   - "logging.go:258:7        wdest           U       func (wdest writerDestructor) Destruct"
   - "logging.go:353:21       shorcut         U       // at all, so just shorcut to a nop core instead"
   - "logging.go:425:10       superspace      U       // be a superspace or subspace of an item"

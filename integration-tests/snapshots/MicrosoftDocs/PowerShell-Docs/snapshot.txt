@@ -3,7 +3,7 @@ Repository: MicrosoftDocs/PowerShell-Docs
 Url: "https://github.com/MicrosoftDocs/PowerShell-Docs.git"
 Args: ["--config=../../../cspell-power-shell-docs.config.yaml","**"]
 Lines:
- CSpell: Files checked: 2678, Issues found: 5730 in 1241 files
+ CSpell: Files checked: 2678, Issues found: 5806 in 1255 files
  exit code: 1
 ./LICENSE:139:15    - Unknown word (sublicensable)   -- non-sublicensable, non-exclusive, irrevocable
 ./LICENSE:205:34    - Unknown word (waivable)        -- under any voluntary or waivable statutory or compulsory
@@ -69,11 +69,10 @@ Lines:
 ./reference/5.1/Microsoft.PowerShell.Core/About/about_Comparison_Operators.md:413:11    - Unknown word (Chell)      -- "Rhell", "Chell", "Mel", "Smell", "Shell
 ./reference/5.1/Microsoft.PowerShell.Core/About/about_Comparison_Operators.md:413:2     - Unknown word (Rhell)      -- "Rhell", "Chell", "Mel", "Smell
 ./reference/5.1/Microsoft.PowerShell.Core/About/about_Data_Sections.md:175:29    - Unknown word (stringdata) -- ConvertFrom-StringData -stringdata @'
-./reference/5.1/Microsoft.PowerShell.Core/About/about_Debuggers.md:165:2     - Unknown word (scriptname) -- $scriptname = $MyInvocation.PSCommandPath
-./reference/5.1/Microsoft.PowerShell.Core/About/about_Debuggers.md:427:7     - Unknown word (Pssession)  -- Enter-Pssession -Cn localhost
-./reference/5.1/Microsoft.PowerShell.Core/About/about_Debuggers.md:428:20    - Unknown word (psscripts)  -- [localhost]: PS C:\psscripts> Set-PSBreakpoint .
-./reference/5.1/Microsoft.PowerShell.Core/About/about_Debuggers.md:488:10    - Unknown word (psversion)  -- function psversion {
-./reference/5.1/Microsoft.PowerShell.Core/About/about_Debuggers.md:645:10    - Unknown word (delbr)      -- function delbr { gbp | rbp }
+./reference/5.1/Microsoft.PowerShell.Core/About/about_Debuggers.md:148:2     - Unknown word (scriptname) -- $scriptname = $MyInvocation.PSCommandPath
+./reference/5.1/Microsoft.PowerShell.Core/About/about_Debuggers.md:373:20    - Unknown word (psscripts)  -- [localhost]: PS C:\psscripts> Set-PSBreakpoint .
+./reference/5.1/Microsoft.PowerShell.Core/About/about_Debuggers.md:433:10    - Unknown word (psversion)  -- function psversion {
+./reference/5.1/Microsoft.PowerShell.Core/About/about_Debuggers.md:583:10    - Unknown word (delbr)      -- function delbr { gbp | rbp }
 ./reference/5.1/Microsoft.PowerShell.Core/About/about_FileSystem_Provider.md:278:27    - Unknown word (logfiles)    -- command creates the `logfiles` directory on the `C
 ./reference/5.1/Microsoft.PowerShell.Core/About/about_FileSystem_Provider.md:70:53     - Unknown word (filesystems) -- used. Linux and macOS filesystems support
 ./reference/5.1/Microsoft.PowerShell.Core/About/about_Foreach.md:101:22    - Unknown word (lastaccesstime) -- Write-Host $file.lastaccesstime
@@ -215,6 +214,7 @@ Lines:
 ./reference/5.1/Microsoft.PowerShell.Core/About/about_WQL.md:640:5     - Unknown word (Intall)      -- the IntallDate property. The commands
 ./reference/5.1/Microsoft.PowerShell.Core/About/about_WQL.md:89:18     - Unknown word (WMIOBJECT)  -- ## USING THE GET-WMIOBJECT CMDLET
 ./reference/5.1/Microsoft.PowerShell.Core/About/about_Wildcards.md:22:48     - Unknown word (Techdocs)   -- the files in the `C:\Techdocs` directory with a
+./reference/5.1/Microsoft.PowerShell.Core/Add-PSSnapin.md:164:4     - Unknown word (asnp)        -- - `asnp`
 ./reference/5.1/Microsoft.PowerShell.Core/Add-PSSnapin.md:68:37     - Unknown word (installutil) -- command creates an alias, installutil, for the path of the
 ./reference/5.1/Microsoft.PowerShell.Core/Disable-PSSessionConfiguration.md:106:46    - Unknown word (Manageme)   -- OpenError: (System.Manageme....RemoteRunspace:RemoteRunsp
 ./reference/5.1/Microsoft.PowerShell.Core/Disconnect-PSSession.md:207:51    - Unknown word (pwrshplugin) -- : %windir%\system32\pwrshplugin.dll
@@ -230,11 +230,13 @@ Lines:
 ./reference/5.1/Microsoft.PowerShell.Core/Get-Module.md:203:63    - Unknown word (Moduletype) -- Table -Property Name, Moduletype, Path -Groupby Name
 ./reference/5.1/Microsoft.PowerShell.Core/Get-Module.md:203:81    - Unknown word (Groupby)    -- Name, Moduletype, Path -Groupby Name
 ./reference/5.1/Microsoft.PowerShell.Core/Get-Module.md:331:36    - Unknown word (RSDGF)      -- CimSession -ComputerName RSDGF03
+./reference/5.1/Microsoft.PowerShell.Core/Get-PSSnapin.md:132:4     - Unknown word (gsnp)       -- - `gsnp`
 ./reference/5.1/Microsoft.PowerShell.Core/Import-Module.md:1247:61   - Unknown word (modulename) -- Get-Command -Module modulename` to see which members
 ./reference/5.1/Microsoft.PowerShell.Core/Invoke-Command.md:1261:23   - Unknown word (Autiomation) -- **System.Management.Autiomation.Remoting.PSSessionOption
 ./reference/5.1/Microsoft.PowerShell.Core/New-Module.md:228:11    - Unknown word (Manoj)      -- $m.hello("Manoj")
 ./reference/5.1/Microsoft.PowerShell.Core/New-ModuleManifest.md:211:8     - Unknown word (JKBC)       -- 'JKBC'
 ./reference/5.1/Microsoft.PowerShell.Core/New-PSSession.md:151:58    - Unknown word (Corpnet)    -- ComputerName Server1.Domain44.Corpnet.Fabrikam.com -Credential
+./reference/5.1/Microsoft.PowerShell.Core/New-PSSessionConfigurationFile.md:1073:4    - Unknown word (npssc)      -- - `npssc`
 ./reference/5.1/Microsoft.PowerShell.Core/New-PSSessionConfigurationFile.md:158:52    - Unknown word (slst)       -- AliasDefinitions = @(@{Name='slst';Value='Select-String
 ./reference/5.1/Microsoft.PowerShell.Core/New-PSSessionConfigurationFile.md:193:30    - Unknown word (TESTSHARE)  -- EnvironmentVariables = @{TESTSHARE='\\Test2\Test'}
 ./reference/5.1/Microsoft.PowerShell.Core/New-PSSessionOption.md:386:46    - Unknown word (Setspn)     -- SPNs, such as by using `Setspn.exe`, that are registered
@@ -254,6 +256,7 @@ Lines:
 ./reference/5.1/Microsoft.PowerShell.Core/Start-Job.md:583:4     - Unknown word (sajb)       -- - `sajb`
 ./reference/5.1/Microsoft.PowerShell.Core/Stop-Job.md:412:4     - Unknown word (spjb)       -- - `spjb`
 ./reference/5.1/Microsoft.PowerShell.Core/Suspend-Job.md:144:8     - Unknown word (Logflow)    -- 67 LogflowJob PSWorkflowJob
+./reference/5.1/Microsoft.PowerShell.Core/Suspend-Job.md:412:4     - Unknown word (sujb)       -- - `sujb`
 ./reference/5.1/Microsoft.PowerShell.Core/Test-ModuleManifest.md:47:42     - Unknown word (modulemanifest) -- TestModule.psd1" | test-modulemanifest
 ./reference/5.1/Microsoft.PowerShell.Core/Update-Help.md:261:20    - Unknown word (mdir)       -- if (Test-Path $mdir\*helpinfo.xml)
 ./reference/5.1/Microsoft.PowerShell.Core/Wait-Job.md:214:61    - Unknown word (lastwritetime) -- ChildItem *.ps1| where {$_.lastwritetime -gt ((Get-Date) - (New
@@ -266,7 +269,12 @@ Lines:
 ./reference/5.1/Microsoft.PowerShell.Diagnostics/Import-Counter.md:98:5      - Unknown word (Ctrs)       -- $intCtrs = $Data[0].Countersamples
 ./reference/5.1/Microsoft.PowerShell.Diagnostics/New-WinEvent.md:90:16     - Unknown word (Elasped)    -- to the **PolicyElaspedTimeInSeconds** field
 ./reference/5.1/Microsoft.PowerShell.Host/Start-Transcript.md:53:22     - Unknown word (mulitbyte)  -- improper encoding of mulitbyte characters in the transcript
-./reference/5.1/Microsoft.PowerShell.LocalAccounts/Remove-LocalGroup.md:180:7     - Unknown word (IUSRS)      -- - IIS_IUSRS
+./reference/5.1/Microsoft.PowerShell.LocalAccounts/Add-LocalGroupMember.md:195:4     - Unknown word (algm)       -- - `algm`
+./reference/5.1/Microsoft.PowerShell.LocalAccounts/Get-LocalGroupMember.md:153:4     - Unknown word (glgm)       -- - `glgm`
+./reference/5.1/Microsoft.PowerShell.LocalAccounts/Remove-LocalGroup.md:184:7     - Unknown word (IUSRS)      -- - IIS_IUSRS
+./reference/5.1/Microsoft.PowerShell.LocalAccounts/Remove-LocalGroupMember.md:191:4     - Unknown word (rlgm)       -- - `rlgm`
+./reference/5.1/Microsoft.PowerShell.LocalAccounts/Rename-LocalGroup.md:185:4     - Unknown word (rnlg)       -- - `rnlg`
+./reference/5.1/Microsoft.PowerShell.LocalAccounts/Rename-LocalUser.md:183:4     - Unknown word (rnlu)       -- - `rnlu`
 ./reference/5.1/Microsoft.PowerShell.Management/Convert-Path.md:146:30    - Unknown word (Normpath)   -- would use **Dirname**, **Normpath**, **Realpath**, **Join
 ./reference/5.1/Microsoft.PowerShell.Management/Convert-Path.md:146:44    - Unknown word (Realpath)   -- Dirname**, **Normpath**, **Realpath**, **Join**, or other
 ./reference/5.1/Microsoft.PowerShell.Management/Copy-Item.md:174:32    - Unknown word (scriptingexample) -- Item` cmdlet copies `scriptingexample.ps1` from the `D:\Folder
@@ -284,6 +292,7 @@ Lines:
 ./reference/5.1/Microsoft.PowerShell.Management/Get-WmiObject.md:311:69    - Unknown word (ntlmdomain)  -- authority setting to `ntlmdomain:<DomainName>`, where
 ./reference/5.1/Microsoft.PowerShell.Management/Get-WmiObject.md:624:4     - Unknown word (gwmi)        -- - `gwmi`
 ./reference/5.1/Microsoft.PowerShell.Management/Invoke-WmiMethod.md:115:3     - Unknown word (Wmiclass)   -- ([Wmiclass]'Win32_Process').GetMethodPar
+./reference/5.1/Microsoft.PowerShell.Management/Invoke-WmiMethod.md:566:4     - Unknown word (iwmi)       -- - `iwmi`
 ./reference/5.1/Microsoft.PowerShell.Management/Join-Path.md:101:87    - Unknown word (Subdir)     -- Join-Path -ChildPath "Subdir"
 ./reference/5.1/Microsoft.PowerShell.Management/Join-Path.md:32:44     - Unknown word (childpath)  -- Path "path" -ChildPath "childpath"
 ./reference/5.1/Microsoft.PowerShell.Management/Move-Item.md:89:38     - Unknown word (Textfiles)  -- are to be moved to `C:\Textfiles` have the same name
@@ -299,9 +308,11 @@ Lines:
 ./reference/5.1/Microsoft.PowerShell.Management/Remove-EventLog.md:122:21    - Unknown word (nteventlogfile) -- Get-WmiObject win32_nteventlogfile -Filter "logfilename
 ./reference/5.1/Microsoft.PowerShell.Management/Remove-EventLog.md:122:45    - Unknown word (logfilename)    -- nteventlogfile -Filter "logfilename='TestLog'" | foreach
 ./reference/5.1/Microsoft.PowerShell.Management/Remove-Item.md:419:11    - Unknown word (dyanamic)   -- This is a dyanamic parameter made available
+./reference/5.1/Microsoft.PowerShell.Management/Remove-WmiObject.md:445:4     - Unknown word (rwmi)       -- - `rwmi`
 ./reference/5.1/Microsoft.PowerShell.Management/Rename-ItemProperty.md:44:126    - Unknown word (oldconfig)  -- SmpApplication" key to "oldconfig".
 ./reference/5.1/Microsoft.PowerShell.Management/Resolve-Path.md:231:4     - Unknown word (rvpa)       -- - `rvpa`
 ./reference/5.1/Microsoft.PowerShell.Management/Restart-Computer.md:112:2     - Unknown word (Creds)      -- $Creds = Get-Credential
+./reference/5.1/Microsoft.PowerShell.Management/Set-WmiInstance.md:598:4     - Unknown word (swmi)       -- - `swmi`
 ./reference/5.1/Microsoft.PowerShell.Management/Start-Process.md:151:11    - Unknown word (noprofile)  -- $args = '-noprofile -command "Start-Process
 ./reference/5.1/Microsoft.PowerShell.Management/Start-Process.md:65:26     - Unknown word (myfile)     -- Start-Process -FilePath "myfile.txt" -WorkingDirectory
 ./reference/5.1/Microsoft.PowerShell.Management/Stop-Process.md:78:50     - Unknown word (namein)     -- includes the process namein addition to its ID,
@@ -348,7 +359,7 @@ Lines:
 ./reference/5.1/Microsoft.PowerShell.Utility/Out-File.md:141:32    - Unknown word (operartors) -- and the redirection operartors (`>` and `>>`) to 2
 ./reference/5.1/Microsoft.PowerShell.Utility/Out-File.md:150:26    - Unknown word (logfile)    -- $logFile = "$pwd\logfile.txt"
 ./reference/5.1/Microsoft.PowerShell.Utility/Out-GridView.md:114:5     - Unknown word (examle)     -- The examle uses `ogv`, which is
-./reference/5.1/Microsoft.PowerShell.Utility/Out-GridView.md:372:4     - Unknown word (displayname) -- `displayname:net`
+./reference/5.1/Microsoft.PowerShell.Utility/Out-GridView.md:376:4     - Unknown word (displayname) -- `displayname:net`
 ./reference/5.1/Microsoft.PowerShell.Utility/Read-Host.md:66:17     - Unknown word (Osan)       -- "'New York; Osan; Koforidua'"
 ./reference/5.1/Microsoft.PowerShell.Utility/Read-Host.md:66:23     - Unknown word (Koforidua)  -- "'New York; Osan; Koforidua'"
 ./reference/5.1/Microsoft.PowerShell.Utility/Register-EngineEvent.md:83:28     - Unknown word (messagedata) -- Event: {0}" -f $event.messagedata | Out-File c:\temp\MyEvents
@@ -395,7 +406,19 @@ Lines:
 ./reference/5.1/PSWorkflow/About/about_Checkpoint-Workflow.md:57:11     - Unknown word (CHECKPOINTING) -- ### OTHER CHECKPOINTING TECHNIQUES
 ./reference/5.1/PSWorkflow/About/about_Checkpoint-Workflow.md:60:1      - Unknown word (checkpointing) -- checkpointing techniques, including
 ./reference/5.1/PSWorkflow/New-PSWorkflowSession.md:32:52     - Unknown word (nwsn)       -- rkflowSession` or its alias, `nwsn`.
-./reference/7.2/Microsoft.PowerShell.Core/About/about_ANSI_Terminals.md:250:4     - Unknown word (xtermm)        -- - `xtermm` - sets `$PSStyle.OutputRende
+./reference/7.2/CimCmdlets/Get-CimAssociatedInstance.md:334:6     - Unknown word (gcai)       -- - `gcai`
+./reference/7.2/CimCmdlets/Get-CimClass.md:295:6     - Unknown word (gcls)       -- - `gcls`
+./reference/7.2/CimCmdlets/Get-CimInstance.md:520:6     - Unknown word (gcim)       -- - `gcim`
+./reference/7.2/CimCmdlets/Get-CimSession.md:250:6     - Unknown word (gcms)       -- - `gcms`
+./reference/7.2/CimCmdlets/Invoke-CimMethod.md:473:6     - Unknown word (icim)       -- - `icim`
+./reference/7.2/CimCmdlets/New-CimInstance.md:409:6     - Unknown word (ncim)       -- - `ncim`
+./reference/7.2/CimCmdlets/New-CimSession.md:370:6     - Unknown word (ncms)       -- - `ncms`
+./reference/7.2/CimCmdlets/New-CimSessionOption.md:485:6     - Unknown word (ncso)       -- - `ncso`
+./reference/7.2/CimCmdlets/Register-CimIndicationEvent.md:396:6     - Unknown word (rcie)       -- - `rcie`
+./reference/7.2/CimCmdlets/Remove-CimInstance.md:324:6     - Unknown word (rcim)       -- - `rcim`
+./reference/7.2/CimCmdlets/Remove-CimSession.md:236:6     - Unknown word (rcms)       -- - `rcms`
+./reference/7.2/CimCmdlets/Set-CimInstance.md:421:6     - Unknown word (scim)       -- - `scim`
+./reference/7.2/Microsoft.PowerShell.Core/About/about_ANSI_Terminals.md:251:4     - Unknown word (xtermm)        -- - `xtermm` - sets `$PSStyle.OutputRende
 ./reference/7.2/Microsoft.PowerShell.Core/About/about_ANSI_Terminals.md:53:5      - Unknown word (Strikethrough) -- - **Strikethrough** - Turns strike through
 ./reference/7.2/Microsoft.PowerShell.Core/About/about_Environment_Variables.md:320:16    - Unknown word (UPDATECHECK) -- - **POWERSHELL_UPDATECHECK**
 ./reference/7.2/Microsoft.PowerShell.Core/About/about_Experimental_Features.md:45:16     - Unknown word (experimentname) -- `<modulename>.<experimentname>`. The `ExperimentAction
@@ -735,6 +758,7 @@ Lines:
 ./reference/docs-conceptual/community/contributing/labelling-in-github.md:61:9      - Unknown word (scriptanalyzer)    -- | `area-scriptanalyzer` | The [PSScriptAnalyzer
 ./reference/docs-conceptual/community/contributing/managing-pull-requests.md:94:41     - Unknown word (modulepath) -- name for `<version>/<modulepath>/About/About.md`
 ./reference/docs-conceptual/community/contributing/powershell-style-guide.md:223:32    - Unknown word (DXGI)       -- GameDVR_DXGIHonorFSEWindowsCompatible
+./reference/docs-conceptual/community/digital-art.md:15:15     - Unknown word (Infographics) -- ## PowerShell Infographics
 ./reference/docs-conceptual/community/hall-of-fame.md:23:3      - Unknown word (kiazhi)     -- | kiazhi |      |
 ./reference/docs-conceptual/community/hall-of-fame.md:30:4      - Unknown word (Reilingh)   -- | NReilingh |      |    2
 ./reference/docs-conceptual/community/hall-of-fame.md:31:6      - Unknown word (praktyk)    -- | it-praktyk |      |
@@ -1065,7 +1089,7 @@ Lines:
 ./reference/docs-conceptual/install/Installing-PowerShell-on-Windows.md:127:26    - Unknown word (RUNPOWERSHELL)  -- ADD_FILE_CONTEXT_MENU_RUNPOWERSHELL` - This property controls
 ./reference/docs-conceptual/install/Installing-PowerShell-on-Windows.md:129:11    - Unknown word (PSREMOTING)     -- - `ENABLE_PSREMOTING` - This property controls
 ./reference/docs-conceptual/install/Installing-PowerShell-on-Windows.md:249:2     - Unknown word (deviceip)       -- $deviceip = '<device ip address
-./reference/docs-conceptual/install/Installing-PowerShell-on-Windows.md:250:2     - Unknown word (zipfile)        -- $zipfile = 'PowerShell-7.3.4
+./reference/docs-conceptual/install/Installing-PowerShell-on-Windows.md:250:2     - Unknown word (zipfile)        -- $zipfile = 'PowerShell-7.3.5
 ./reference/docs-conceptual/install/Installing-PowerShell-on-Windows.md:251:2     - Unknown word (downloadfolder) -- $downloadfolder = 'u:\users\administrator
 ./reference/docs-conceptual/install/Installing-PowerShell-on-Windows.md:288:28    - Unknown word (workarea)       -- include the package in the workarea and add _OPENSRC_POWERSHELL
 ./reference/docs-conceptual/install/Installing-PowerShell-on-Windows.md:288:46    - Unknown word (OPENSRC)        -- the workarea and add _OPENSRC_POWERSHELL_ feature
@@ -1080,7 +1104,7 @@ Lines:
 ./reference/docs-conceptual/install/install-debian.md:39:103    - Unknown word (keyrings)   -- --output /usr/share/keyrings/microsoft.gpg
 ./reference/docs-conceptual/install/install-debian.md:39:75     - Unknown word (dearmor)    -- asc | sudo gpg --yes --dearmor --output /usr/share
 ./reference/docs-conceptual/install/install-raspbian.md:44:32     - Unknown word (libunwind)  -- get install libssl1.1 libunwind8 -y
-./reference/docs-conceptual/install/install-rhel.md:32:20     - Unknown word (assumeyes)  -- sudo dnf install --assumeyes powershell
+./reference/docs-conceptual/install/install-rhel.md:37:20     - Unknown word (assumeyes)  -- sudo dnf install --assumeyes powershell
 ./reference/docs-conceptual/install/microsoft-update-faq.yml:43:37     - Unknown word (lifecycles) -- information about support lifecycles, see
 ./reference/docs-conceptual/lang-spec/chapter-02.md:1316:36   - Unknown word (concatentaion) -- chapter-07.md#772-string-concatentaion
 ./reference/docs-conceptual/lang-spec/chapter-02.md:366:2     - Unknown word (végösszeg)  -- $végösszeg # Hungarian
@@ -1268,15 +1292,19 @@ Lines:
 ./reference/docs-conceptual/whats-new/What-s-New-in-PowerShell-73.md:86:83     - Unknown word (farmerau)   -- 3][16193]) (Thanks @farmerau!)
 ./reference/docs-conceptual/whats-new/What-s-New-in-PowerShell-73.md:87:85     - Unknown word (Ritchie)    -- 16197]) (Thanks @KevRitchie!)
 ./reference/docs-conceptual/whats-new/What-s-New-in-PowerShell-73.md:90:30     - Unknown word (dwtaber)    -- 3][16113]) (Thanks @dwtaber!)
-./reference/docs-conceptual/whats-new/What-s-New-in-PowerShell-74.md:102:78    - Unknown word (wmentha)       -- 1][17191]) (Thanks @wmentha!)
-./reference/docs-conceptual/whats-new/What-s-New-in-PowerShell-74.md:57:26     - Unknown word (webcmdlets) -- Fix using xml -Body in webcmdlets without an encoding
-./reference/docs-conceptual/whats-new/What-s-New-in-PowerShell-74.md:62:3      - Unknown word (Webcmdlets) -- - Webcmdlets display an error on
-./reference/docs-conceptual/whats-new/What-s-New-in-PowerShell-74.md:74:81     - Unknown word (stevenebutler) -- 9][19249]) (Thanks @stevenebutler!)
-./reference/docs-conceptual/whats-new/What-s-New-in-PowerShell-74.md:89:30     - Unknown word (dkaszews)      -- 0][17780]) (Thanks @dkaszews!)
+./reference/docs-conceptual/whats-new/What-s-New-in-PowerShell-74.md:104:81    - Unknown word (stevenebutler) -- 9][19249]) (Thanks @stevenebutler!)
+./reference/docs-conceptual/whats-new/What-s-New-in-PowerShell-74.md:109:30    - Unknown word (mkht)          -- 2][19622]) (Thanks @mkht!)
+./reference/docs-conceptual/whats-new/What-s-New-in-PowerShell-74.md:130:30    - Unknown word (dkaszews)      -- 0][17780]) (Thanks @dkaszews!)
+./reference/docs-conceptual/whats-new/What-s-New-in-PowerShell-74.md:136:30    - Unknown word (josea)         -- 5][19765]) (Thanks @josea!)
+./reference/docs-conceptual/whats-new/What-s-New-in-PowerShell-74.md:157:78    - Unknown word (wmentha)       -- 1][17191]) (Thanks @wmentha!)
+./reference/docs-conceptual/whats-new/What-s-New-in-PowerShell-74.md:164:80    - Unknown word (nohwnd)        -- 3][14953]) (Thanks @nohwnd!)
+./reference/docs-conceptual/whats-new/What-s-New-in-PowerShell-74.md:22:88     - Unknown word (gregsdennis) -- 1][18141]) (Thanks @gregsdennis!)
+./reference/docs-conceptual/whats-new/What-s-New-in-PowerShell-74.md:78:3      - Unknown word (Webcmdlets)  -- - Webcmdlets add 308 to redirect
+./reference/docs-conceptual/whats-new/What-s-New-in-PowerShell-74.md:86:26     - Unknown word (webcmdlets)  -- Fix using xml -Body in webcmdlets without an encoding
 ./reference/docs-conceptual/whats-new/cmdlet-versions.md:221:107   - Unknown word (Notsupportedonmac) -- | ![Included][01] | NotsupportedonmacOS |
-./reference/docs-conceptual/whats-new/differences-from-windows-powershell.md:1145:23   - Unknown word (CONSOLEHOST) -- DELETE_ME_TO_DISABLE_CONSOLEHOST_TELEMETRY` to disable
-./reference/docs-conceptual/whats-new/differences-from-windows-powershell.md:278:26    - Unknown word (inputformat) -- short hand to match `-inputformat`, which now needs to
-./reference/docs-conceptual/whats-new/differences-from-windows-powershell.md:307:25    - Unknown word (Paren)       -- Preserve `$?` for **ParenExpression**, **SubExpression
+./reference/docs-conceptual/whats-new/differences-from-windows-powershell.md:1146:23   - Unknown word (CONSOLEHOST) -- DELETE_ME_TO_DISABLE_CONSOLEHOST_TELEMETRY` to disable
+./reference/docs-conceptual/whats-new/differences-from-windows-powershell.md:279:26    - Unknown word (inputformat) -- short hand to match `-inputformat`, which now needs to
+./reference/docs-conceptual/whats-new/differences-from-windows-powershell.md:308:25    - Unknown word (Paren)       -- Preserve `$?` for **ParenExpression**, **SubExpression
 ./reference/docs-conceptual/windows-powershell/ise/object-model/Other-Useful-Scripting-Objects.md:27:40     - Unknown word (Mycommand)  -- ortedConsoleApplications.Add('Mycommand')
 ./reference/docs-conceptual/windows-powershell/ise/object-model/The-ISEFile-Object.md:62:2      - Unknown word (fullpath)   -- $fullpath = "c:\temp\newname.txt
 ./reference/docs-conceptual/windows-powershell/ise/object-model/The-ISEFile-Object.md:62:22     - Unknown word (newname)    -- fullpath = "c:\temp\newname.txt"

@@ -3,7 +3,7 @@ Repository: ktaranov/sqlserver-kit
 Url: "https://github.com/ktaranov/sqlserver-kit.git"
 Args: ["**","--exclude=**/Backup/**"]
 Lines:
- CSpell: Files checked: 489, Issues found: 14971 in 465 files
+ CSpell: Files checked: 489, Issues found: 15026 in 465 files
  exit code: 1
 ./ADS/README.md:25:88     - Unknown word (vsix)       -- Release Date | Version  | .vsix download link
 ./ADS/README.md:30:15     - Unknown word (Dacpac)     -- | [SQL Server Dacpac]
@@ -2758,16 +2758,34 @@ Lines:
 ./Stored_Procedure/dbo.sp_PerfSQ.sql:336:84    - Unknown word (nojoin)     -- NoJoinPredicate[.="1"])]') nojoin(p))
 ./Stored_Procedure/dbo.sp_PerfSQ.sql:341:103   - Unknown word (Highms)     -- MaxRows,AvgCpuLowms,CpuHighms,AvgLogicalReadsMB,[PhyReads
 ./Stored_Procedure/dbo.sp_PerfSQ.sql:341:94    - Unknown word (Lowms)      -- MinRows,MaxRows,AvgCpuLowms,CpuHighms,AvgLogicalReadsMB
-./Stored_Procedure/dbo.sp_RestoreGene.sql:181:6     - Unknown word (backupmediasetid) -- ,backupmediasetid
-./Stored_Procedure/dbo.sp_RestoreGene.sql:183:6     - Unknown word (backupstartdate)  -- ,backupstartdate
-./Stored_Procedure/dbo.sp_RestoreGene.sql:31:71     - Unknown word (analysier)  -- when called from query analysier, set to No when called
-./Stored_Procedure/dbo.sp_RestoreGene.sql:35:77     - Unknown word (Manuj)      -- Database Name' parameter, Manuj Bahl suggestion
-./Stored_Procedure/dbo.sp_RestoreGene.sql:35:83     - Unknown word (Bahl)       -- Name' parameter, Manuj Bahl suggestion
-./Stored_Procedure/dbo.sp_RestoreGene.sql:43:33     - Unknown word (Paramater)  -- Paramater for WITH REPLACE
-./Stored_Procedure/dbo.sp_RestoreGene.sql:45:77     - Unknown word (Stresser)   -- tables, suggested by S.Stresser
-./Stored_Procedure/dbo.sp_RestoreGene.sql:46:31     - Unknown word (goestock)   -- 2014 - V3.5  - goestock suggestion - Include
-./Stored_Procedure/dbo.sp_RestoreGene.sql:48:36     - Unknown word (Sarro)      -- - V3.7  - Luke Sarro, modifications for case
-./Stored_Procedure/dbo.sp_RestoreGene.sql:52:37     - Unknown word (rbackup)    -- If no rbackup forks exist, the procedure
+./Stored_Procedure/dbo.sp_RestoreGene.sql:101:69    - Unknown word (jgkiran)    -- files in WITH MOVE, jgkiran
+./Stored_Procedure/dbo.sp_RestoreGene.sql:1051:11   - Unknown word (logfileid)        -- ) logfileid
+./Stored_Procedure/dbo.sp_RestoreGene.sql:120:72    - Unknown word (Peablles)   -- log files with move, J.Peablles
+./Stored_Procedure/dbo.sp_RestoreGene.sql:122:90    - Unknown word (Devries)    -- include if matches diff, R.Devries
+./Stored_Procedure/dbo.sp_RestoreGene.sql:128:130   - Unknown word (Hakan)      -- ROLLBACK IMMEDIATE, Hakan Ekman
+./Stored_Procedure/dbo.sp_RestoreGene.sql:128:136   - Unknown word (Ekman)      -- ROLLBACK IMMEDIATE, Hakan Ekman
+./Stored_Procedure/dbo.sp_RestoreGene.sql:129:144   - Unknown word (Mehedi)     -- environment refreshes), Mehedi Amin
+./Stored_Procedure/dbo.sp_RestoreGene.sql:129:94    - Unknown word (presumaby)  -- differential and log backups (presumaby for development environment
+./Stored_Procedure/dbo.sp_RestoreGene.sql:135:133   - Unknown word (Louwerse)   -- compatibility, Erwin Louwerse
+./Stored_Procedure/dbo.sp_RestoreGene.sql:136:114   - Unknown word (Bizzotto)   -- many databases, Simone Bizzotto
+./Stored_Procedure/dbo.sp_RestoreGene.sql:142:1     - Unknown word (Febuary)    -- Febuary 14th, 2018  - V6.73
+./Stored_Procedure/dbo.sp_RestoreGene.sql:1496:48   - Unknown word (Multipe)          -- CommentOut = 1 THEN '  -- Multipe backup fork points detected
+./Stored_Procedure/dbo.sp_RestoreGene.sql:152:33    - Unknown word (Optimisation) -- th, 2018  - V8.12   - Optimisation and environment setup
+./Stored_Procedure/dbo.sp_RestoreGene.sql:156:113   - Unknown word (Dannen)       -- supported to 20, Steven Dannen
+./Stored_Procedure/dbo.sp_RestoreGene.sql:157:33    - Unknown word (Masood)       -- 023 - V8.2    - Masood : Bug fix restoring
+./Stored_Procedure/dbo.sp_RestoreGene.sql:1686:248  - Unknown word (Withove)          -- nvarchar(max)'), 1,1,'') AS WithoveCmds
+./Stored_Procedure/dbo.sp_RestoreGene.sql:1686:255  - Unknown word (Cmds)             -- , 1,1,'') AS WithoveCmds
+./Stored_Procedure/dbo.sp_RestoreGene.sql:20:92     - Unknown word (seperated)  -- database or a list of comma seperated database names, NULL
+./Stored_Procedure/dbo.sp_RestoreGene.sql:491:10    - Unknown word (backupmediasetid) -- ,backupmediasetid
+./Stored_Procedure/dbo.sp_RestoreGene.sql:493:10    - Unknown word (backupfinishdate) -- ,backupfinishdate
+./Stored_Procedure/dbo.sp_RestoreGene.sql:573:68    - Unknown word (forkpoints)       -- Suppress if backup forkpoints exist
+./Stored_Procedure/dbo.sp_RestoreGene.sql:66:71     - Unknown word (analyser)   -- when called from query analyser, set to No when called
+./Stored_Procedure/dbo.sp_RestoreGene.sql:78:33     - Unknown word (Paramater)  -- Paramater for WITH REPLACE
+./Stored_Procedure/dbo.sp_RestoreGene.sql:80:77     - Unknown word (Stresser)   -- tables, suggested by S.Stresser
+./Stored_Procedure/dbo.sp_RestoreGene.sql:81:31     - Unknown word (goestock)   -- 2014 - V3.5  - goestock suggestion - Include
+./Stored_Procedure/dbo.sp_RestoreGene.sql:83:36     - Unknown word (Sarro)      -- - V3.7  - Luke Sarro, modifications for case
+./Stored_Procedure/dbo.sp_RestoreGene.sql:87:37     - Unknown word (rbackup)    -- If no rbackup forks exist, the procedure
+./Stored_Procedure/dbo.sp_RestoreGene.sql:94:81     - Unknown word (Laren)      -- compatibility - Bob McLaren - Declaring and assigning
 ./Stored_Procedure/dbo.sp_RestoreScript.sql:166:41    - Unknown word (timeframe)     -- backup for required timeframe
 ./Stored_Procedure/dbo.sp_RestoreScript.sql:171:127   - Unknown word (mediafamily)   -- ' FROM DISK = ''' + mediafamily.physical_device_name
 ./Stored_Procedure/dbo.sp_RestoreScript.sql:18:42     - Unknown word (useage)     -- See @PointInTime for useage of @RestoreToDate.
@@ -3099,7 +3117,6 @@ Lines:
 ./User_Defined_Function/FN_SPLIT.sql:124:75    - Unknown word (delimeters) -- that uses single char delimeters when possible
 ./User_Defined_Function/FN_SPLIT.sql:150:17    - Unknown word (curent)     -- -- Get the curent Item
 ./User_Defined_Function/FN_SPLIT.sql:154:33    - Unknown word (itteration) -- set values for next itteration of the loop, finding
-./User_Defined_Function/FN_SPLIT.sql:176:44    - Unknown word (seperated)  -- make splitting comma seperated lists of ints easier
 ./User_Defined_Function/FN_SPLIT.sql:244:37    - Unknown word (itterative) -- second, as opposed to an itterative concat that took 14
 ./User_Defined_Function/FN_SPLIT.sql:270:18    - Unknown word (Delim)      -- -- Basic 1-char Delim Tests
 ./User_Defined_Function/FN_SPLIT.sql:306:5     - Unknown word (Delims)     -- -- Delims with escape char % in
