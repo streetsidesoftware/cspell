@@ -9,6 +9,8 @@ import { processCompileAction } from './compile.js';
 import * as compiler from './compiler/index.js';
 import { logWithTimestamp } from './compiler/logWithTimestamp.js';
 import type { FeatureFlags } from './FeatureFlags/index.js';
+import { compressFile } from './gzip/index.js';
+import { toError } from './util/errors.js';
 
 const npmPackageRaw = readFileSync(new URL('../package.json', import.meta.url), 'utf8');
 const npmPackage = JSON.parse(npmPackageRaw);
@@ -44,6 +46,17 @@ function addCompileOptions(compileCommand: program.Command): program.Command {
 }
 
 export async function run(program: program.Command, argv: string[], flags?: FeatureFlags): Promise<void> {
+    async function gzip(files: string[]): Promise<void> {
+        for (const fileName of files) {
+            try {
+                await compressFile(fileName);
+            } catch (error) {
+                const err = toError(error);
+                program.error(err.message);
+            }
+        }
+    }
+
     program.exitOverride();
 
     program.version(npmPackage.version);
@@ -66,11 +79,13 @@ export async function run(program: program.Command, argv: string[], flags?: Feat
     });
 
     program
-        .command('build [targets]')
+        .command('build [targets...]')
         .description('Build the targets defined in the run configuration.')
         .option('-c, --config <path to run configuration>', 'Specify the run configuration file.')
         .option('-r, --root <directory>', 'Specify the run directory')
         .action(build);
+
+    program.command('gzip <files...>').description('GZip files while keeping the original.').action(gzip);
 
     await program.parseAsync(argv);
 }
