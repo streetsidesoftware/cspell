@@ -6,9 +6,9 @@ import { beforeAll, beforeEach, describe, expect, test, vi } from 'vitest';
 import * as app from './app.js';
 import { readTextFile } from './compiler/readers/readTextFile.js';
 import { getSystemFeatureFlags } from './FeatureFlags/index.js';
+import { compressFile } from './gzip/compressFiles.js';
 import { spyOnConsole } from './test/console.js';
 import { createTestHelper } from './test/TestHelper.js';
-import { compressFile } from './gzip/compressFiles.js';
 
 vi.mock('./gzip/compressFiles.js', () => ({
     compressFile: vi.fn().mockImplementation((name: string) => Promise.resolve(name + '.gz')),

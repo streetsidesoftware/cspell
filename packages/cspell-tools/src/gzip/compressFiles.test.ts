@@ -1,6 +1,7 @@
 import { readFile, writeFile } from 'node:fs/promises';
 import { gzipSync } from 'node:zlib';
-import { describe, test, expect, vi } from 'vitest';
+
+import { describe, expect, test, vi } from 'vitest';
 
 import { compressFile } from './compressFiles.js';
 

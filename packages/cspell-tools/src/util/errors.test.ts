@@ -1,6 +1,6 @@
-import { describe, test, expect } from 'vitest';
+import { describe, expect, test } from 'vitest';
 
-import { toError, isError } from './errors.js';
+import { isError, toError } from './errors.js';
 
 describe('errors', () => {
     test.each`
