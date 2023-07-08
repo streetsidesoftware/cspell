@@ -1,9 +1,7 @@
 import { describe, expect, test } from 'vitest';
 
 import { resolvePathToFixture } from '../test/TestHelper.js';
-import { checkShasumFile, reportChecksumForFiles, reportCheckChecksumFile } from './shasum.js';
-
-const oc = expect.objectContaining;
+import { checkShasumFile, reportCheckChecksumFile, reportChecksumForFiles } from './shasum.js';
 
 describe('shasum', () => {
     test('checkShasumFile pass', async () => {
