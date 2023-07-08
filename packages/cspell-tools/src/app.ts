@@ -1,6 +1,7 @@
 // For large dictionaries, it is necessary to increase the memory limit.
 
 import type * as program from 'commander';
+import { CommanderError } from 'commander';
 import { readFileSync } from 'fs';
 
 import type { CompileAppOptions, CompileTrieAppOptions } from './AppOptions.js';
@@ -10,6 +11,7 @@ import * as compiler from './compiler/index.js';
 import { logWithTimestamp } from './compiler/logWithTimestamp.js';
 import type { FeatureFlags } from './FeatureFlags/index.js';
 import { compressFile } from './gzip/index.js';
+import { reportCheckChecksumFile, reportChecksumForFiles } from './shasum/shasum.js';
 import { toError } from './util/errors.js';
 
 const npmPackageRaw = readFileSync(new URL('../package.json', import.meta.url), 'utf8');
@@ -45,6 +47,11 @@ function addCompileOptions(compileCommand: program.Command): program.Command {
         .option('--trie-base <number>', 'Advanced: Set the trie base number. A value between 10 and 36');
 }
 
+interface ShasumOptions {
+    check?: string | undefined;
+    root?: string | undefined;
+}
+
 export async function run(program: program.Command, argv: string[], flags?: FeatureFlags): Promise<void> {
     async function gzip(files: string[]): Promise<void> {
         for (const fileName of files) {
@@ -54,6 +61,17 @@ export async function run(program: program.Command, argv: string[], flags?: Feat
                 const err = toError(error);
                 program.error(err.message);
             }
+        }
+    }
+
+    async function shasum(files: string[], options: ShasumOptions): Promise<void> {
+        const report = options.check
+            ? await reportCheckChecksumFile(options.check, files, options.root)
+            : await reportChecksumForFiles(files, options.root);
+        console.log('%s', report.report);
+
+        if (!report.passed) {
+            throw new CommanderError(1, 'Failed Checksum', 'One or more files had issues.');
         }
     }
 
@@ -86,6 +104,19 @@ export async function run(program: program.Command, argv: string[], flags?: Feat
         .action(build);
 
     program.command('gzip <files...>').description('GZip files while keeping the original.').action(gzip);
+
+    program
+        .command('shasum [files...]')
+        .description('Calculate the checksum for files.')
+        .option(
+            '-c, --check <checksum.txt>',
+            'Verify the checksum of files against those stored in the checksum.txt file.'
+        )
+        .option(
+            '-r, --root <root>',
+            'Specify the root to use for relative paths. The current working directory is used by default.'
+        )
+        .action(shasum);
 
     await program.parseAsync(argv);
 }
