@@ -6,8 +6,15 @@ import { beforeAll, beforeEach, describe, expect, test, vi } from 'vitest';
 import * as app from './app.js';
 import { readTextFile } from './compiler/readers/readTextFile.js';
 import { getSystemFeatureFlags } from './FeatureFlags/index.js';
+import { compressFile } from './gzip/compressFiles.js';
 import { spyOnConsole } from './test/console.js';
 import { createTestHelper } from './test/TestHelper.js';
+
+vi.mock('./gzip/compressFiles.js', () => ({
+    compressFile: vi.fn().mockImplementation((name: string) => Promise.resolve(name + '.gz')),
+}));
+
+const mockedCompressFile = vi.mocked(compressFile);
 
 const testHelper = createTestHelper(import.meta.url);
 
@@ -210,5 +217,14 @@ describe('Validate the application', () => {
         await expect(app.run(commander, argv('-V'))).rejects.toThrow(Commander.CommanderError);
         expect(mock.mock.calls.length).toBe(1);
         expect(consoleSpy.consoleOutput()).toMatchSnapshot();
+    });
+
+    test('app gzip', async () => {
+        const commander = getCommander();
+        const args = argv('gzip', 'README.md', 'package.json');
+
+        await expect(app.run(commander, args)).resolves.toBeUndefined();
+        expect(mockedCompressFile).toHaveBeenCalledWith('README.md');
+        expect(mockedCompressFile).toHaveBeenCalledWith('package.json');
     });
 });
