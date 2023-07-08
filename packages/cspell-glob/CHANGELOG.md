@@ -3,12 +3,6 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-## 7.1.0-alpha.0 (2023-07-08)
-
-### Features
-
-* Add `gzip` and `shasum` command to cspell-tools ([#4614](https://github.com/streetsidesoftware/cspell/issues/4614)) ([cc28a8a](https://github.com/streetsidesoftware/cspell/commit/cc28a8adcde27921fb961ac44df3d45d1de6f462))
-
 ## 7.0.1-alpha.1 (2023-07-03)
 
 **Note:** Version bump only for package cspell-glob
