@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [7.0.1-alpha.2](https://github.com/streetsidesoftware/cspell/compare/v7.0.1-alpha.1...v7.0.1-alpha.2) (2023-07-09)
+
+### Features
+
+* Add `gzip` and `shasum` command to cspell-tools ([#4614](https://github.com/streetsidesoftware/cspell/issues/4614)) ([cc28a8a](https://github.com/streetsidesoftware/cspell/commit/cc28a8adcde27921fb961ac44df3d45d1de6f462))
+
+### Reverts
+
+* Revert "v7.1.0-alpha.0" ([4835da6](https://github.com/streetsidesoftware/cspell/commit/4835da606a5710b6a0630bd7d0e57bddb2ecc2ba))
+
 ## 7.0.1-alpha.1 (2023-07-03)
 
 **Note:** Version bump only for package @cspell/cspell-tools

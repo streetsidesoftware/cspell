@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [7.0.1-alpha.2](https://github.com/streetsidesoftware/cspell/compare/v7.0.1-alpha.1...v7.0.1-alpha.2) (2023-07-09)
+
+### Bug Fixes
+
+* Workflow Bot -- Update Dictionaries (main) ([#4603](https://github.com/streetsidesoftware/cspell/issues/4603)) ([51cca40](https://github.com/streetsidesoftware/cspell/commit/51cca405504edbefd5a3eaa6aa629a2cfb078660))
+* Workflow Bot -- Update Dictionaries (main) ([#4607](https://github.com/streetsidesoftware/cspell/issues/4607)) ([841ffdc](https://github.com/streetsidesoftware/cspell/commit/841ffdc98a9edf2914dd49a019a4540e2a6a0071))
+
+### Reverts
+
+* Revert "v7.1.0-alpha.0" ([4835da6](https://github.com/streetsidesoftware/cspell/commit/4835da606a5710b6a0630bd7d0e57bddb2ecc2ba))
+
 ## 7.0.1-alpha.1 (2023-07-03)
 
 **Note:** Version bump only for package cspell-integration-tests

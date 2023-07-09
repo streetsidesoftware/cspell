@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [7.0.1-alpha.2](https://github.com/streetsidesoftware/cspell/compare/v7.0.1-alpha.1...v7.0.1-alpha.2) (2023-07-09)
+
+### Features
+
+* Add `gzip` and `shasum` command to cspell-tools ([#4614](https://github.com/streetsidesoftware/cspell/issues/4614)) ([cc28a8a](https://github.com/streetsidesoftware/cspell/commit/cc28a8adcde27921fb961ac44df3d45d1de6f462))
+
+### Bug Fixes
+
+* Workflow Bot -- Update Dictionaries (main) ([#4603](https://github.com/streetsidesoftware/cspell/issues/4603)) ([51cca40](https://github.com/streetsidesoftware/cspell/commit/51cca405504edbefd5a3eaa6aa629a2cfb078660))
+* Workflow Bot -- Update Dictionaries (main) ([#4606](https://github.com/streetsidesoftware/cspell/issues/4606)) ([f5601ce](https://github.com/streetsidesoftware/cspell/commit/f5601cec5e6cd3c15e576f45d424a8f28ccb497c))
+* Workflow Bot -- Update Dictionaries (main) ([#4607](https://github.com/streetsidesoftware/cspell/issues/4607)) ([841ffdc](https://github.com/streetsidesoftware/cspell/commit/841ffdc98a9edf2914dd49a019a4540e2a6a0071))
+
+### Reverts
+
+* Revert "v7.1.0-alpha.0" ([4835da6](https://github.com/streetsidesoftware/cspell/commit/4835da606a5710b6a0630bd7d0e57bddb2ecc2ba))
+
 ## 7.0.1-alpha.1 (2023-07-03)
 
 **Note:** Version bump only for package cspell-monorepo
