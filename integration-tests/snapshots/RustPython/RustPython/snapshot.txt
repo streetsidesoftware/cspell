@@ -3,7 +3,7 @@ Repository: RustPython/RustPython
 Url: "https://github.com/RustPython/RustPython.git"
 Args: ["**"]
 Lines:
- CSpell: Files checked: 597, Issues found: 2689 in 305 files
+ CSpell: Files checked: 597, Issues found: 2694 in 305 files
  exit code: 1
 ./Cargo.toml:111:82    - Unknown word (termcolor)  -- features = ["atty", "termcolor"] }
 ./Cargo.toml:154:62    - Unknown word (redoxer)    -- to compile/check with redoxer
@@ -386,8 +386,10 @@ Lines:
 ./src/settings.rs:147:66    - Unknown word (PYTHONUNBUFFERED) -- effect on stdin; also PYTHONUNBUFFERED=x",
 ./src/settings.rs:216:49    - Unknown word (PYTHONNOUSERSITE) -- environment && env::var_os("PYTHONNOUSERSITE").is_some())
 ./src/settings.rs:226:49    - Unknown word (PYTHONDONTWRITEBYTECODE) -- environment && env::var_os("PYTHONDONTWRITEBYTECODE").is_some())
-./src/settings.rs:257:49    - Unknown word (PYTHONWARNDEFAULTENCODING) -- environment && env::var_os("PYTHONWARNDEFAULTENCODING").is_some())
-./src/settings.rs:314:37    - Unknown word (PYTHONHASHSEED)            -- seed = match env::var("PYTHONHASHSEED") {
+./src/settings.rs:230:44    - Unknown word (PYTHONINTMAXSTRDIGITS)   -- environment && env::var_os("PYTHONINTMAXSTRDIGITS").is_some() {
+./src/settings.rs:234:173   - Unknown word (preinitialized)          -- nPython runtime state: preinitialized");
+./src/settings.rs:276:49    - Unknown word (PYTHONWARNDEFAULTENCODING) -- environment && env::var_os("PYTHONWARNDEFAULTENCODING").is_some())
+./src/settings.rs:333:37    - Unknown word (PYTHONHASHSEED)            -- seed = match env::var("PYTHONHASHSEED") {
 ./src/shell/helper.rs:20:13     - Unknown word (startpos)   -- let mut startpos = 0;
 ./stdlib/Cargo.toml:101:1     - Unknown word (libsqlite)  -- libsqlite3-sys = { version =
 ./stdlib/Cargo.toml:111:16    - Unknown word (handleapi)  -- "winsock2", "handleapi", "ws2def", "std",
@@ -915,9 +917,9 @@ Lines:
 ./vm/src/types/slot.rs:137:28    - Unknown word (TPFLAGS)    -- CPython default: Py_TPFLAGS_HAVE_STACKLESS_EXTENSION
 ./vm/src/types/slot.rs:141:43    - Unknown word (Subclassable) -- types created in Python. Subclassable and are a
 ./vm/src/types/slot.rs:379:29    - Unknown word (subslot)      -- macro_rules! toggle_subslot {
-./vm/src/vm/mod.rs:560:29    - Unknown word (pyiter)     -- return self.map_pyiter(value, func);
+./vm/src/vm/mod.rs:564:29    - Unknown word (pyiter)     -- return self.map_pyiter(value, func);
 ./vm/src/vm/setting.rs:43:10     - Unknown word (Xfoo)       -- /// -Xfoo[=bar]
-./vm/src/vm/setting.rs:55:10     - Unknown word (Wfoo)       -- /// -Wfoo
+./vm/src/vm/setting.rs:58:10     - Unknown word (Wfoo)       -- /// -Wfoo
 ./vm/src/vm/thread.rs:38:24     - Unknown word (intp)       -- let vm_owns_obj = |intp: NonNull<VirtualMachine
 ./vm/src/vm/vm_new.rs:173:28    - Unknown word (ternop)     -- pub fn new_unsupported_ternop_error(
 ./wasm/README.md:1:16      - Unknown word (webassembly) -- # Compiling to webassembly

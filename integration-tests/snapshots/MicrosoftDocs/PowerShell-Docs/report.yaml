@@ -4,8 +4,8 @@ Url: https://github.com/MicrosoftDocs/PowerShell-Docs.git
 Args: '["--config=../../../cspell-power-shell-docs.config.yaml","**"]'
 Summary:
   files: 2678
-  filesWithIssues: 1255
-  issues: 5806
+  filesWithIssues: 1244
+  issues: 5760
   errors: 0
 Errors: []
 
@@ -64,7 +64,6 @@ issues:
   - "reference/5.1/Microsoft.PowerShell.Core/About/about_Calculated_Properties.md:254:21         Metacontent     U       '' {'Metacontent'}"
   - "reference/5.1/Microsoft.PowerShell.Core/About/about_Character_Encoding.md:162:4         bigendianutf    U       - `bigendianutf32`: Encodes in UTF-"
   - "reference/5.1/Microsoft.PowerShell.Core/About/about_Classes.md:281:2        ints            U       $ints = [FunWithIntegers]"
-  - "reference/5.1/Microsoft.PowerShell.Core/About/about_Classes.md:614:43       enumerateion    U       assets. The `DeviceType` enumerateion defines device types"
   - "reference/5.1/Microsoft.PowerShell.Core/About/about_Classes.md:640:25       devtype         U       hidden [DeviceType]$devtype = [DeviceType]::Undefined"
   - "reference/5.1/Microsoft.PowerShell.Core/About/about_Classes.md:787:10       baseclass       U       class (`[baseclass]$this`) on invocation"
   - "reference/5.1/Microsoft.PowerShell.Core/About/about_Classes.md:797:10       basedays        U       [int]basedays() {return ([BaseClass"
@@ -130,13 +129,7 @@ issues:
   - "reference/5.1/Microsoft.PowerShell.Core/About/about_Regular_Expressions.md:40:41        casesensitive       U       statement, use the `-casesensitive` option"
   - "reference/5.1/Microsoft.PowerShell.Core/About/about_Regular_Expressions.md:201:3        Singleline          U       **Singleline** and **Multiline**"
   - "reference/5.1/Microsoft.PowerShell.Core/About/about_Regular_Expressions.md:328:34       keyname             U       capturing group, use `?<keyname>` to store captured"
-  - "reference/5.1/Microsoft.PowerShell.Core/About/about_Remote_Output.md:79:19          MACHINENAME     U       ## DISPLAYING THE MACHINENAME PROPERTY"
-  - "reference/5.1/Microsoft.PowerShell.Core/About/about_Remote_Troubleshooting.md:271:43        startuptype         U       ComputerName $servers -startuptype Automatic"
-  - "reference/5.1/Microsoft.PowerShell.Core/About/about_Remote_Troubleshooting.md:486:33        trustedhosts        U       wsman:localhost\\client\\trustedhosts -Value *"
-  - "reference/5.1/Microsoft.PowerShell.Core/About/about_Remote_Troubleshooting.md:646:50        Defrag              U       directory, such as `Defrag.exe`, the tools cannot"
-  - "reference/5.1/Microsoft.PowerShell.Core/About/about_Remote_Troubleshooting.md:774:38        Timeoutms           U       settings, such as the **MaxTimeoutms** setting in the"
-  - "reference/5.1/Microsoft.PowerShell.Core/About/about_Remote_Troubleshooting.md:798:14        Sessionoption       U       $pso = New-PSSessionoption -OperationTimeout 2"
-  - "reference/5.1/Microsoft.PowerShell.Core/About/about_Remote.md:30:47         PSSESSION       U       INTERACTIVE SESSION (ENTER-PSSESSION)"
+  - "reference/5.1/Microsoft.PowerShell.Core/About/about_Remote_Troubleshooting.md:393:33        trustedhosts    U       wsman:localhost\\client\\trustedhosts -Value *"
   - "reference/5.1/Microsoft.PowerShell.Core/About/about_Requires.md:54:20       Netcore     U       Get-Module AzureRM.Netcore | Remove-Module"
   - "reference/5.1/Microsoft.PowerShell.Core/About/about_Scopes.md:619:59        ptest       U       private variable called `$ptest` in the local"
   - "reference/5.1/Microsoft.PowerShell.Core/About/about_Scopes.md:643:17        Ptest       U       \"The value of `$Ptest is $Ptest.\""
@@ -223,6 +216,7 @@ issues:
   - "reference/5.1/Microsoft.PowerShell.Core/Add-PSSnapin.md:164:4       asnp            U       - `asnp`"
   - "reference/5.1/Microsoft.PowerShell.Core/Disable-PSSessionConfiguration.md:106:46        Manageme    U       OpenError: (System.Manageme....RemoteRunspace:RemoteRunsp"
   - "reference/5.1/Microsoft.PowerShell.Core/Disconnect-PSSession.md:207:51      pwrshplugin     U       : %windir%\\system32\\pwrshplugin.dll"
+  - "reference/5.1/Microsoft.PowerShell.Core/Disconnect-PSSession.md:218:5       Timeoutms       U       IdleTimeoutms : 7"
   - "reference/5.1/Microsoft.PowerShell.Core/Disconnect-PSSession.md:222:81      GXGW            U       AU;FA;GA;;;WD)(AU;SA;GXGW;;;WD)"
   - "reference/5.1/Microsoft.PowerShell.Core/Disconnect-PSSession.md:542:4       dnsn            U       - `dnsn`"
   - "reference/5.1/Microsoft.PowerShell.Core/Enable-PSSessionConfiguration.md:80:25          GXGWGR      U       sddl = \"O:NSG:BAD:P(A;;GXGWGR;;;BA)(A;;GAGR;;;S-1"
@@ -434,6 +428,7 @@ issues:
   - "reference/7.2/Microsoft.PowerShell.Core/About/about_Logging_Non-Windows.md:94:2         journalctl      U       `journalctl` utility to query the"
   - "reference/7.2/Microsoft.PowerShell.Core/About/about_Logging_Non-Windows.md:109:18       rsyslog         U       server such as **rsyslog** if you want to use"
   - "reference/7.2/Microsoft.PowerShell.Core/About/about_Logging_Non-Windows.md:110:49       preinstall      U       distributions such as Ubuntu preinstall **rsyslog**."
+  - "reference/7.2/Microsoft.PowerShell.Core/About/about_Logging_Non-Windows.md:137:5        MACHINENAME     U       - **MACHINENAME** - The name of the"
   - "reference/7.2/Microsoft.PowerShell.Core/About/about_Logging_Non-Windows.md:139:5        COMMITID        U       - **COMMITID** - The **git commit"
   - "reference/7.2/Microsoft.PowerShell.Core/About/about_Logging_Non-Windows.md:144:5        EVENTID         U       - **EVENTID** - The event identifier"
   - "reference/7.2/Microsoft.PowerShell.Core/About/about_Logging_Non-Windows.md:174:5        syslogtag       U       :syslogtag, contains, \"powershell"
@@ -453,7 +448,6 @@ issues:
   - "reference/7.2/Microsoft.PowerShell.Core/About/about_Pwsh.md:233:7       encodedcommand      U       pwsh -encodedcommand $encodedCommand"
   - "reference/7.2/Microsoft.PowerShell.Core/About/about_Pwsh.md:274:12      chsh                U       - Use the [chsh][03] utility to set"
   - "reference/7.2/Microsoft.PowerShell.Core/About/about_Pwsh.md:332:33      myproject           U       pwsh -SettingsFile c:\\myproject\\powershell.config.json"
-  - "reference/7.2/Microsoft.PowerShell.Core/About/about_Remote_Requirements.md:249:2        hostinfo    U       $hostinfo = '@{Hostname=\"<DNS"
   - "reference/7.2/Microsoft.PowerShell.Core/About/about_Tab_Expansion.md:54:30          psdf    U       functions. For example, `i-psdf<tab>` returns `Import"
   - "reference/7.2/Microsoft.PowerShell.Core/About/about_Telemetry.md:41:4           Geolocation     U       > [Geolocation and IP address handling"
   - "reference/7.2/Microsoft.PowerShell.Core/About/about_Type_Accelerators.md:84:2           pspropertyexpression    U       |pspropertyexpression | Microsoft"
@@ -1096,8 +1090,8 @@ issues:
   - "reference/docs-conceptual/install/install-alpine.md:38:5        libstdc     U       libstdc++ \\"
   - "reference/docs-conceptual/install/install-alpine.md:39:5        tzdata      U       tzdata \\"
   - "reference/docs-conceptual/install/install-alpine.md:46:5        lttng       U       lttng-ust"
-  - "reference/docs-conceptual/install/install-debian.md:39:75       dearmor     U       asc | sudo gpg --yes --dearmor --output /usr/share"
-  - "reference/docs-conceptual/install/install-debian.md:39:103      keyrings    U       --output /usr/share/keyrings/microsoft.gpg"
+  - "reference/docs-conceptual/install/install-debian.md:36:75       dearmor     U       asc | sudo gpg --yes --dearmor --output /usr/share"
+  - "reference/docs-conceptual/install/install-debian.md:36:103      keyrings    U       --output /usr/share/keyrings/microsoft.gpg"
   - "reference/docs-conceptual/install/install-raspbian.md:44:32         libunwind       U       get install libssl1.1 libunwind8 -y"
   - "reference/docs-conceptual/install/install-rhel.md:37:20         assumeyes       U       sudo dnf install --assumeyes powershell"
   - "reference/docs-conceptual/install/Installing-PowerShell-on-Windows.md:125:30        OPENPOWERSHELL      U       EXPLORER_CONTEXT_MENU_OPENPOWERSHELL` - This property controls"
@@ -1230,6 +1224,7 @@ issues:
   - "reference/docs-conceptual/samples/Changing-Computer-State.md:21:1           rundll      U       rundll32.exe user32.dll,LockWorkStat"
   - "reference/docs-conceptual/samples/Changing-Computer-State.md:30:66          tsshutdn    U       Terminal Server, use the **tsshutdn.exe** command-line tool"
   - "reference/docs-conceptual/samples/Creating-.NET-and-COM-Objects--New-Object-.md:168:52      progids     U       by specifying these progids: **WScript.Shell**,"
+  - "reference/docs-conceptual/samples/Creating-Get-WinEvent-queries-with-FilterHashtable.md:22:21       Defrag      U       **Microsoft-Windows-Defrag** logs:"
   - "reference/docs-conceptual/samples/Creating-Get-WinEvent-queries-with-FilterHashtable.md:25:64       defrag      U       Object Source -Match defrag"
   - "reference/docs-conceptual/samples/Creating-Get-WinEvent-queries-with-FilterHashtable.md:80:78       Perflib     U       field. For example, the Perflib event 1008"
   - "reference/docs-conceptual/samples/Creating-Get-WinEvent-queries-with-FilterHashtable.md:86:44       bitsperf    U       C:\\Windows\\System32\\bitsperf.dll</Data>"
@@ -1368,8 +1363,8 @@ issues:
   - "reference/media/index/powershell_128.svg:5:21           SVGID       U       <linearGradient id=\"SVGID_1_\" gradientUnits=\"userSpaceO"
   - "reference/media/shared/check-mark-button-2705.svg:3:12          svgg    U       <g id=\"svgg\">"
   - "reference/module/index.md:14:36         windowsserver       U       FilterColumn1: powershell-7.2,windowsserver2022-ps"
-  - "reference/module/index.md:15:21         azps                U       quickFilterColumn2: azps-10.0.0,sqlserver-ps"
-  - "reference/module/index.md:15:33         sqlserver           U       ickFilterColumn2: azps-10.0.0,sqlserver-ps"
+  - "reference/module/index.md:15:21         azps                U       quickFilterColumn2: azps-10.1.0,sqlserver-ps"
+  - "reference/module/index.md:15:33         sqlserver           U       ickFilterColumn2: azps-10.1.0,sqlserver-ps"
   - "reference/module/index.md:16:42         systemcenter        U       graph-powershell-1.0,systemcenter-ps-2022"
   - "tests/Pester/Update-Help.Tests.ps1:24:34        pshome          U       HelpInstallationPath = \"$pshome\\en-US\""
   - "tests/Pester/Update-Help.Tests.ps1:30:109       helpcontent     U       -2565dba61a4f_en-US_helpcontent$extension\""
