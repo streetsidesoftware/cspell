@@ -5,7 +5,7 @@ Args: '["**"]'
 Summary:
   files: 597
   filesWithIssues: 305
-  issues: 2689
+  issues: 2694
   errors: 0
 Errors: []
 
@@ -391,8 +391,10 @@ issues:
   - "src/settings.rs:147:66      PYTHONUNBUFFERED                U       effect on stdin; also PYTHONUNBUFFERED=x\","
   - "src/settings.rs:216:49      PYTHONNOUSERSITE                U       environment && env::var_os(\"PYTHONNOUSERSITE\").is_some())"
   - "src/settings.rs:226:49      PYTHONDONTWRITEBYTECODE         U       environment && env::var_os(\"PYTHONDONTWRITEBYTECODE\").is_some())"
-  - "src/settings.rs:257:49      PYTHONWARNDEFAULTENCODING       U       environment && env::var_os(\"PYTHONWARNDEFAULTENCODING\").is_some())"
-  - "src/settings.rs:314:37      PYTHONHASHSEED                  U       seed = match env::var(\"PYTHONHASHSEED\") {"
+  - "src/settings.rs:230:44      PYTHONINTMAXSTRDIGITS           U       environment && env::var_os(\"PYTHONINTMAXSTRDIGITS\").is_some() {"
+  - "src/settings.rs:234:173     preinitialized                  U       nPython runtime state: preinitialized\");"
+  - "src/settings.rs:276:49      PYTHONWARNDEFAULTENCODING       U       environment && env::var_os(\"PYTHONWARNDEFAULTENCODING\").is_some())"
+  - "src/settings.rs:333:37      PYTHONHASHSEED                  U       seed = match env::var(\"PYTHONHASHSEED\") {"
   - "src/shell/helper.rs:20:13       startpos    U       let mut startpos = 0;"
   - "stdlib/build.rs:8:39        ossl        U       println!(\"cargo:rustc-cfg=ossl101\");"
   - "stdlib/build.rs:25:39       osslconf    U       println!(\"cargo:rustc-cfg=osslconf=\\\"{conf}\\\"\");"
@@ -920,9 +922,9 @@ issues:
   - "vm/src/types/slot.rs:137:28         TPFLAGS         U       CPython default: Py_TPFLAGS_HAVE_STACKLESS_EXTENSION"
   - "vm/src/types/slot.rs:141:43         Subclassable    U       types created in Python. Subclassable and are a"
   - "vm/src/types/slot.rs:379:29         subslot         U       macro_rules! toggle_subslot {"
-  - "vm/src/vm/mod.rs:560:29         pyiter      U       return self.map_pyiter(value, func);"
+  - "vm/src/vm/mod.rs:564:29         pyiter      U       return self.map_pyiter(value, func);"
   - "vm/src/vm/setting.rs:43:10          Xfoo    U       /// -Xfoo[=bar]"
-  - "vm/src/vm/setting.rs:55:10          Wfoo    U       /// -Wfoo"
+  - "vm/src/vm/setting.rs:58:10          Wfoo    U       /// -Wfoo"
   - "vm/src/vm/thread.rs:38:24       intp    U       let vm_owns_obj = |intp: NonNull<VirtualMachine"
   - "vm/src/vm/vm_new.rs:173:28      ternop      U       pub fn new_unsupported_ternop_error("
   - "wasm/demo/package.json:7:10         codemirror      U       \"codemirror\": \"^5.42.0\","

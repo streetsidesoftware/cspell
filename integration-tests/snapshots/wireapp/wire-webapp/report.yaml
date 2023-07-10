@@ -4,8 +4,8 @@ Url: https://github.com/wireapp/wire-webapp.git
 Args: '["src/script/**/*.{js,ts,tsx,md}"]'
 Summary:
   files: 961
-  filesWithIssues: 125
-  issues: 418
+  filesWithIssues: 126
+  issues: 423
   errors: 0
 Errors: []
 
@@ -17,6 +17,7 @@ issues:
   - "src/script/auth/component/ProgressBar.tsx:33:30         progess     U       data-uie-name=\"element-progess-bar\""
   - "src/script/auth/component/UnsupportedBrowser.test.tsx:35:19         TSFI    U       // @SF.Channel @TSFI.UserInterface @S1"
   - "src/script/auth/module/action/AuthAction.test.ts:39:22          Cqhah       U       'Ntc8CsuNMeGFaRCqhah1dSyDFmNq6m8zL1R2h5TEtLQy"
+  - "src/script/auth/page/ConversationJoin.tsx:94:12         Submiting       U       const [isSubmitingName, setIsSubmitingName"
   - "src/script/auth/page/EntropyContainer.test.tsx:28:9         mockon      U       const mockonSetEntropy = jest.fn"
   - "src/script/auth/page/EntropyContainer.tsx:93:34         subheadline     U       _(setEntropyStrings.subheadline)}"
   - "src/script/auth/page/HistoryInfo.tsx:117:5          Feching     U       isFeching: ClientSelector.isFetching"
@@ -62,7 +63,7 @@ issues:
   - "src/script/calling/CallingRepository.ts:881:5       subconversation     U       subconversationData: SubconversationData"
   - "src/script/calling/CallingRepository.ts:887:7       convid              U       convid: serializedConversationId"
   - "src/script/calling/CallingRepository.ts:1165:47     Recepients          U       rtParticipantsToCallingMessageRecepients = (participants: Participant"
-  - "src/script/calling/CallingRepository.ts:1421:108    vrecv               U       isSendingVideo(!!member.vrecv));"
+  - "src/script/calling/CallingRepository.ts:1421:102    vrecv               U       ?.videoState(member.vrecv));"
   - "src/script/calling/CallingRepository.ts:1428:37     aestab              U       isAudioEstablished(member.aestab === AUDIO_STATE.ESTABLISHED"
   - "src/script/client/ClientRepository.test.ts:159:38       Respy       U       as any).getEnv().allowRespy(true);"
   - "src/script/components/calling/CallParticipantsListItem/CallParticipantItemContent/CallParticipantItemContent.tsx:87:30          UNFOCUSABLE     U       tabIndex={TabIndex.UNFOCUSABLE}"
