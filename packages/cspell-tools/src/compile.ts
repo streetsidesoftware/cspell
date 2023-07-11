@@ -3,9 +3,9 @@ import { opConcatMap, pipe } from '@cspell/cspell-pipe/sync';
 import type { CompileCommonAppOptions } from './AppOptions.js';
 import { compile } from './compiler/compile.js';
 import { createCompileRequest } from './compiler/createCompileRequest.js';
-import { globP } from './compiler/globP.js';
 import type { FeatureFlags } from './FeatureFlags/index.js';
 import { getSystemFeatureFlags, parseFlags } from './FeatureFlags/index.js';
+import { globP } from './util/globP.js';
 
 getSystemFeatureFlags().register('compound', 'Enable compound dictionary sources.');
 

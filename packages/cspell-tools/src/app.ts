@@ -10,7 +10,7 @@ import { processCompileAction } from './compile.js';
 import * as compiler from './compiler/index.js';
 import { logWithTimestamp } from './compiler/logWithTimestamp.js';
 import type { FeatureFlags } from './FeatureFlags/index.js';
-import { compressFile } from './gzip/index.js';
+import { gzip } from './gzip/index.js';
 import { reportCheckChecksumFile, reportChecksumForFiles } from './shasum/shasum.js';
 import { toError } from './util/errors.js';
 
@@ -53,14 +53,12 @@ interface ShasumOptions {
 }
 
 export async function run(program: program.Command, argv: string[], flags?: FeatureFlags): Promise<void> {
-    async function gzip(files: string[]): Promise<void> {
-        for (const fileName of files) {
-            try {
-                await compressFile(fileName);
-            } catch (error) {
-                const err = toError(error);
-                program.error(err.message);
-            }
+    async function handleGzip(files: string[]): Promise<void> {
+        try {
+            await gzip(files);
+        } catch (error) {
+            const err = toError(error);
+            program.error(err.message);
         }
     }
 
@@ -103,7 +101,7 @@ export async function run(program: program.Command, argv: string[], flags?: Feat
         .option('-r, --root <directory>', 'Specify the run directory')
         .action(build);
 
-    program.command('gzip <files...>').description('GZip files while keeping the original.').action(gzip);
+    program.command('gzip <files...>').description('GZip files while keeping the original.').action(handleGzip);
 
     program
         .command('shasum [files...]')

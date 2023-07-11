@@ -221,10 +221,11 @@ describe('Validate the application', () => {
 
     test('app gzip', async () => {
         const commander = getCommander();
-        const args = argv('gzip', 'README.md', 'package.json');
+        const args = argv('gzip', '*.md', 'package.json');
 
         await expect(app.run(commander, args)).resolves.toBeUndefined();
         expect(mockedCompressFile).toHaveBeenCalledWith('README.md');
+        expect(mockedCompressFile).toHaveBeenCalledWith('CHANGELOG.md');
         expect(mockedCompressFile).toHaveBeenCalledWith('package.json');
     });
 });
