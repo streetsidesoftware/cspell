@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 7.0.1-alpha.3 (2023-07-11)
+
+### Bug Fixes
+
+* support globs with `gzip` command. ([#4625](https://github.com/streetsidesoftware/cspell-dicts/issues/4625)) ([17fbc11](https://github.com/streetsidesoftware/cspell-dicts/commit/17fbc119d199ceac309df0d22fb4b1f9734b7015))
+
 ## [7.0.1-alpha.2](https://github.com/streetsidesoftware/cspell-dicts/compare/v7.0.1-alpha.1...v7.0.1-alpha.2) (2023-07-09)
 
 ### Reverts
