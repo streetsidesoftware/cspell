@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 7.0.1-alpha.4 (2023-07-12)
+
+### Bug Fixes
+
+* Fix empty build target ([#4627](https://github.com/streetsidesoftware/cspell-dicts/issues/4627)) ([1fcbf98](https://github.com/streetsidesoftware/cspell-dicts/commit/1fcbf9897b70691eb9947e43b966a5069fe37feb))
+
 ## 7.0.1-alpha.3 (2023-07-11)
 
 ### Bug Fixes
