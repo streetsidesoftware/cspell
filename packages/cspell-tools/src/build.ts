@@ -28,7 +28,7 @@ export async function build(targets: string[] | undefined, options: BuildOptions
     const allowedTargets = new Set(targets || []);
 
     function filter(target: Target): boolean {
-        return !targets || allowedTargets.has(target.name);
+        return !allowedTargets.size || allowedTargets.has(target.name);
     }
 
     const searchDir = path.resolve(options.root || options.cwd || '.');
