@@ -10,6 +10,9 @@ describe('createCompileRequest', () => {
         ${['src/words.txt']}                   | ${comp()}
         ${['src/words.txt', 'src/cities.txt']} | ${comp({ output: 'out' })}
         ${['src/words.txt', 'src/cities.txt']} | ${comp({ output: 'out', merge: 'combo' })}
+        ${[]}                                  | ${comp({ listFile: ['python-sources.txt'] })}
+        ${[]}                                  | ${comp({ listFile: ['python-sources.txt'], output: 'python' })}
+        ${[]}                                  | ${comp({ listFile: ['python-sources.txt'], merge: 'python' })}
     `('createCompileRequest', ({ source, options }) => {
         const req = createCompileRequest(source, options);
         // Make sure the test passes on Windows.

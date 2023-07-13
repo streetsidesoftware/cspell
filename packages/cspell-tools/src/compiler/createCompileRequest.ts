@@ -1,10 +1,12 @@
 import * as path from 'path';
 
 import type { CompileCommonAppOptions } from '../AppOptions.js';
-import type { CompileRequest, DictionaryFormats, Target } from '../config/index.js';
+import type { CompileRequest, DictionaryFormats, DictionarySource, FileSource, Target } from '../config/index.js';
 
-export function createCompileRequest(sources: string[], options: CompileCommonAppOptions): CompileRequest {
+export function createCompileRequest(sourceFiles: string[], options: CompileCommonAppOptions): CompileRequest {
     const { max_depth, maxDepth, experimental = [], split, keepRawCase, useLegacySplitter } = options;
+
+    const sources: DictionarySource[] = [...sourceFiles, ...(options.listFile || []).map((listFile) => ({ listFile }))];
 
     const targets = calcTargets(sources, options);
     const generateNonStrict = experimental.includes('compound') || undefined;
@@ -23,7 +25,7 @@ export function createCompileRequest(sources: string[], options: CompileCommonAp
 
     return req;
 }
-function calcTargets(sources: string[], options: CompileCommonAppOptions): Target[] {
+function calcTargets(sources: DictionarySource[], options: CompileCommonAppOptions): Target[] {
     const { merge, output = '.' } = options;
 
     const format = calcFormat(options);
@@ -42,7 +44,7 @@ function calcTargets(sources: string[], options: CompileCommonAppOptions): Targe
     }
 
     const targets: Target[] = sources.map((source) => {
-        const name = toTargetName(path.basename(source));
+        const name = toTargetName(baseNameOfSource(source));
         const target: Target = {
             name,
             targetDirectory: output,
@@ -68,4 +70,12 @@ function toTargetName(sourceFile: string) {
 function parseNumber(s: string | undefined): number | undefined {
     const n = parseInt(s ?? '');
     return isNaN(n) ? undefined : n;
+}
+
+function baseNameOfSource(source: DictionarySource): string {
+    return typeof source === 'string' ? source : isFileSource(source) ? source.filename : source.listFile;
+}
+
+function isFileSource(source: DictionarySource): source is FileSource {
+    return typeof source !== 'string' && (<FileSource>source).filename !== undefined;
 }
