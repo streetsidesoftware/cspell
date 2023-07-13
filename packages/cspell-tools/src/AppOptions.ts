@@ -7,7 +7,7 @@ export interface CompileCommonAppOptions {
     max_depth?: string;
     maxDepth?: string;
     merge?: string;
-    experimental: string[];
+    experimental?: string[];
     split?: boolean;
     sort?: boolean;
     keepRawCase?: boolean;
@@ -15,7 +15,10 @@ export interface CompileCommonAppOptions {
     trie3?: boolean;
     trie4?: boolean;
     trieBase?: string;
+    listFile?: string[];
     useLegacySplitter?: boolean;
+    /** Indicate that a config file should be created instead of building. */
+    init?: boolean;
 }
 export interface CompileAppOptions extends CompileCommonAppOptions {
     sort: boolean;

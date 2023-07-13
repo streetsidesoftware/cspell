@@ -44,7 +44,15 @@ function addCompileOptions(compileCommand: program.Command): program.Command {
         )
         .option('--trie3', 'Use file format trie3', false)
         .option('--trie4', 'Use file format trie4', false)
-        .option('--trie-base <number>', 'Advanced: Set the trie base number. A value between 10 and 36');
+        .option('--trie-base <number>', 'Advanced: Set the trie base number. A value between 10 and 36')
+        .option(
+            '--list-file <filename...>',
+            'Path to a file that contains the list of files to compile. A list file contains one file per line.'
+        )
+        .option(
+            '--init',
+            'Create a build command `cspell-tools.config.yaml` file based upon the options given instead of building.'
+        );
 }
 
 interface ShasumOptions {
@@ -77,7 +85,7 @@ export async function run(program: program.Command, argv: string[], flags?: Feat
 
     program.version(npmPackage.version);
 
-    addCompileOptions(program.command('compile <src...>').description('Compile words into a cspell dictionary files.'))
+    addCompileOptions(program.command('compile [src...]').description('Compile words into a cspell dictionary files.'))
         .option('--trie', 'Compile into a trie file.', false)
         .option('--no-sort', 'Do not sort the result')
         .action((src: string[], options: CompileAppOptions) => {
@@ -86,7 +94,7 @@ export async function run(program: program.Command, argv: string[], flags?: Feat
 
     addCompileOptions(
         program
-            .command('compile-trie <src...>')
+            .command('compile-trie [src...]')
             .description(
                 'Compile words lists or Hunspell dictionary into trie files used by cspell.\nAlias of `compile --trie`'
             )
