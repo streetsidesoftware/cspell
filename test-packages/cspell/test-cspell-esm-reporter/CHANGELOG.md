@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 7.0.1-alpha.5 (2023-07-13)
+
+### Bug Fixes
+
+* support automatic creation of `cspell-tools.config.yaml` ([#4631](https://github.com/streetsidesoftware/cspell-cli/issues/4631)) ([f9fea67](https://github.com/streetsidesoftware/cspell-cli/commit/f9fea67fc5aa8b6e4dcdc8b1bd9af8db2e22e62b))
+
 ## 7.0.1-alpha.4 (2023-07-12)
 
 ### Bug Fixes
