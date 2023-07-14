@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 7.0.1-alpha.6 (2023-07-14)
+
+### Bug Fixes
+
+* cspell-tools: be able to update shasum checksum files. ([#4634](https://github.com/streetsidesoftware/cspell-cli/issues/4634)) ([a67ea47](https://github.com/streetsidesoftware/cspell-cli/commit/a67ea4715bee40b4105139ca4fbfdb1da4800dce))
+
 ## 7.0.1-alpha.5 (2023-07-13)
 
 ### Bug Fixes
