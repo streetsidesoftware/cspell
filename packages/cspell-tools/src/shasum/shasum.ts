@@ -1,6 +1,7 @@
-import { readFile } from 'node:fs/promises';
+import { readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 
+import { toError } from '../util/errors.js';
 import { isDefined } from '../util/index.js';
 import { calcFileChecksum, checkFile } from './checksum.js';
 
@@ -104,10 +105,17 @@ interface ReportResult {
     passed: boolean;
 }
 
-export async function reportChecksumForFiles(files: string[], root: string | undefined): Promise<ReportResult> {
+interface ReportOptions {
+    root?: string | undefined;
+    listFile?: string[];
+}
+
+export async function reportChecksumForFiles(files: string[], options: ReportOptions): Promise<ReportResult> {
+    const root = options.root;
+    const filesToCheck = await resolveFileList(files, options.listFile);
     let numFailed = 0;
     const result = await Promise.all(
-        files.map((file) =>
+        filesToCheck.map((file) =>
             shasumFile(file, root).catch((e) => {
                 ++numFailed;
                 if (typeof e !== 'string') throw e;
@@ -123,9 +131,11 @@ export async function reportChecksumForFiles(files: string[], root: string | und
 export async function reportCheckChecksumFile(
     filename: string,
     files: string[] | undefined,
-    root: string | undefined
+    options: ReportOptions
 ): Promise<ReportResult> {
-    const result = await checkShasumFile(filename, files, root);
+    const root = options.root;
+    const filesToCheck = await resolveFileList(files, options.listFile);
+    const result = await checkShasumFile(filename, filesToCheck, root);
     const lines = result.map(({ filename, passed, error }) =>
         `${filename}: ${passed ? 'OK' : 'FAILED'} ${error ? '- ' + error.message : ''}`.trim()
     );
@@ -137,4 +147,67 @@ export async function reportCheckChecksumFile(
         );
     }
     return { report: lines.join('\n'), passed };
+}
+
+async function resolveFileList(files: string[] | undefined, listFile: string[] | undefined): Promise<string[]> {
+    files = files || [];
+    listFile = listFile || [];
+
+    const setOfFiles = new Set(files);
+
+    const pending = listFile.map((filename) => readFile(filename, 'utf8'));
+
+    for await (const content of pending) {
+        content
+            .split('\n')
+            .map((a) => a.trim())
+            .filter((a) => a)
+            .forEach((file) => setOfFiles.add(file));
+    }
+    return [...setOfFiles];
+}
+
+export async function calcUpdateChecksumForFiles(
+    filename: string,
+    files: string[],
+    options: ReportOptions
+): Promise<string> {
+    const root = options.root || '.';
+    const filesToCheck = await resolveFileList(files, options.listFile);
+    const currentEntries = await readAndParseShasumFile(filename).catch((err) => {
+        const e = toError(err);
+        if (e.code !== 'ENOENT') throw e;
+        return [] as ChecksumEntry[];
+    });
+    const entriesToUpdate = new Set([...filesToCheck, ...currentEntries.map((e) => e.filename)]);
+    const mustExist = new Set(filesToCheck);
+
+    const checksumMap = new Map(currentEntries.map(({ filename, checksum }) => [filename, checksum]));
+
+    for (const file of entriesToUpdate) {
+        try {
+            const checksum = await calcFileChecksum(resolve(root, file));
+            checksumMap.set(file, checksum);
+        } catch (e) {
+            if (mustExist.has(file) || toError(e).code !== 'ENOENT') throw e;
+            checksumMap.delete(file);
+        }
+    }
+
+    const updatedEntries = [...checksumMap]
+        .map(([filename, checksum]) => ({ filename, checksum }))
+        .sort((a, b) => (a.filename < b.filename ? -1 : 1));
+    return updatedEntries.map((e) => `${e.checksum}  ${e.filename}`).join('\n') + '\n';
+}
+
+export async function updateChecksumForFiles(
+    filename: string,
+    files: string[],
+    options: ReportOptions
+): Promise<ReportResult> {
+    const content = await calcUpdateChecksumForFiles(filename, files, options);
+
+    await writeFile(filename, content);
+
+    return { passed: true, report: content };
 }

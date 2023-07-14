@@ -1,7 +1,7 @@
 // For large dictionaries, it is necessary to increase the memory limit.
 
 import type * as program from 'commander';
-import { CommanderError } from 'commander';
+import { CommanderError, Option } from 'commander';
 import { readFileSync } from 'fs';
 
 import type { CompileAppOptions, CompileTrieAppOptions } from './AppOptions.js';
@@ -11,7 +11,7 @@ import * as compiler from './compiler/index.js';
 import { logWithTimestamp } from './compiler/logWithTimestamp.js';
 import type { FeatureFlags } from './FeatureFlags/index.js';
 import { gzip } from './gzip/index.js';
-import { reportCheckChecksumFile, reportChecksumForFiles } from './shasum/shasum.js';
+import { reportCheckChecksumFile, reportChecksumForFiles, updateChecksumForFiles } from './shasum/shasum.js';
 import { toError } from './util/errors.js';
 
 const npmPackageRaw = readFileSync(new URL('../package.json', import.meta.url), 'utf8');
@@ -57,7 +57,9 @@ function addCompileOptions(compileCommand: program.Command): program.Command {
 
 interface ShasumOptions {
     check?: string | undefined;
+    update?: string | undefined;
     root?: string | undefined;
+    listFile?: string[] | undefined;
 }
 
 export async function run(program: program.Command, argv: string[], flags?: FeatureFlags): Promise<void> {
@@ -72,8 +74,10 @@ export async function run(program: program.Command, argv: string[], flags?: Feat
 
     async function shasum(files: string[], options: ShasumOptions): Promise<void> {
         const report = options.check
-            ? await reportCheckChecksumFile(options.check, files, options.root)
-            : await reportChecksumForFiles(files, options.root);
+            ? await reportCheckChecksumFile(options.check, files, options)
+            : options.update
+            ? await updateChecksumForFiles(options.update, files, options)
+            : await reportChecksumForFiles(files, options);
         console.log('%s', report.report);
 
         if (!report.passed) {
@@ -114,9 +118,13 @@ export async function run(program: program.Command, argv: string[], flags?: Feat
     program
         .command('shasum [files...]')
         .description('Calculate the checksum for files.')
+        .option('--list-file <list-file.txt...>', 'Specify one or more files that contain paths of files to check.')
         .option(
             '-c, --check <checksum.txt>',
             'Verify the checksum of files against those stored in the checksum.txt file.'
+        )
+        .addOption(
+            new Option('-u, --update <checksum.txt>', 'Update checksums found in the file.').conflicts('--check')
         )
         .option(
             '-r, --root <root>',

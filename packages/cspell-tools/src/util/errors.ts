@@ -1,4 +1,8 @@
-export function toError(err: unknown): Error {
+export interface NodeError extends Error {
+    code?: string;
+}
+
+export function toError(err: unknown): NodeError {
     if (isError(err)) return err;
     return new Error(`${err}`);
 }

@@ -1,5 +1,27 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
+exports[`shasum > calcUpdateChecksumForFiles '_checksum-failed.txt' 1`] = `
+"a8ab65e8305f4911577525c8e950fcea6667de59  cities.trie
+963a65138d4391c8de2f0dfb5a7ef890e512a95e  cities.trie.gz
+477e8bc9954033392e432fd66f0d4278884bde38  cities.txt
+55915445afc07bf877eea1e982aecb7c97b247da  colors.trie
+3a6b55a089d018878e8b904f8f19391f2e30b66c  colors.txt
+25a493fa62702d3e052717a26c6740a30614457e  sampleCodeDic.txt
+"
+`;
+
+exports[`shasum > calcUpdateChecksumForFiles '_checksum-missing-file' 1`] = `
+"477e8bc9954033392e432fd66f0d4278884bde38  cities.txt
+3a6b55a089d018878e8b904f8f19391f2e30b66c  colors.txt
+"
+`;
+
+exports[`shasum > calcUpdateChecksumForFiles 'new_checksum_file.txt' 1`] = `
+"477e8bc9954033392e432fd66f0d4278884bde38  cities.txt
+3a6b55a089d018878e8b904f8f19391f2e30b66c  colors.txt
+"
+`;
+
 exports[`shasum > checkShasumFile not pass 1`] = `
 [
   {
@@ -71,7 +93,17 @@ exports[`shasum > checkShasumFile pass with files 1`] = `
 ]
 `;
 
-exports[`shasum > reportCheckChecksumFile '_checksum.txt' [ 'colors.txt', 'my_cities.txt' ] 1`] = `
+exports[`shasum > reportCheckChecksumFile '_checksum.txt' [ 'colors.txt', 'my_cities.txt' ] 'source-files.txt' 1`] = `
+{
+  "passed": false,
+  "report": "colors.txt: OK
+my_cities.txt: FAILED - Missing Checksum.
+cities.txt: OK
+shasum: WARNING: 1 computed checksum did NOT match",
+}
+`;
+
+exports[`shasum > reportCheckChecksumFile '_checksum.txt' [ 'colors.txt', 'my_cities.txt' ] undefined 1`] = `
 {
   "passed": false,
   "report": "colors.txt: OK
@@ -80,7 +112,7 @@ shasum: WARNING: 1 computed checksum did NOT match",
 }
 `;
 
-exports[`shasum > reportCheckChecksumFile '_checksum.txt' undefined 1`] = `
+exports[`shasum > reportCheckChecksumFile '_checksum.txt' undefined undefined 1`] = `
 {
   "passed": true,
   "report": "cities.trie: OK
@@ -92,7 +124,7 @@ sampleCodeDic.txt: OK",
 }
 `;
 
-exports[`shasum > reportCheckChecksumFile '_checksum-failed.txt' undefined 1`] = `
+exports[`shasum > reportCheckChecksumFile '_checksum-failed.txt' undefined undefined 1`] = `
 {
   "passed": false,
   "report": "cities.trie: OK
@@ -105,15 +137,15 @@ shasum: WARNING: 1 computed checksum did NOT match",
 }
 `;
 
-exports[`shasum > reportCheckChecksumFile '_checksum-failed2.txt' [ 'colors.txt', 'cities.txt' ] 1`] = `
+exports[`shasum > reportCheckChecksumFile '_checksum-failed2.txt' [ 'cities.txt', 'colors.txt' ] undefined 1`] = `
 {
   "passed": true,
-  "report": "colors.txt: OK
-cities.txt: OK",
+  "report": "cities.txt: OK
+colors.txt: OK",
 }
 `;
 
-exports[`shasum > reportCheckChecksumFile '_checksum-failed2.txt' undefined 1`] = `
+exports[`shasum > reportCheckChecksumFile '_checksum-failed2.txt' undefined undefined 1`] = `
 {
   "passed": false,
   "report": "cities.trie: OK
@@ -127,7 +159,7 @@ shasum: WARNING: 2 computed checksums did NOT match",
 }
 `;
 
-exports[`shasum > reportCheckChecksumFile '_checksum-missing-file.txt' undefined 1`] = `
+exports[`shasum > reportCheckChecksumFile '_checksum-missing-file.txt' undefined undefined 1`] = `
 {
   "passed": false,
   "report": "missing-file.txt: FAILED - Failed to read file.
