@@ -1,9 +1,32 @@
-import { describe, expect, test } from 'vitest';
+import { writeFile } from 'node:fs/promises';
+
+import { afterEach, describe, expect, test, vi } from 'vitest';
 
 import { resolvePathToFixture } from '../test/TestHelper.js';
-import { checkShasumFile, reportCheckChecksumFile, reportChecksumForFiles } from './shasum.js';
+import {
+    calcUpdateChecksumForFiles,
+    checkShasumFile,
+    reportCheckChecksumFile,
+    reportChecksumForFiles,
+    updateChecksumForFiles,
+} from './shasum.js';
+
+vi.mock('node:fs/promises', async () => {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const fs: any = await vi.importActual('node:fs/promises');
+    return {
+        ...fs,
+        writeFile: vi.fn().mockImplementation(() => Promise.resolve(undefined)),
+    };
+});
+
+const mockedWriteFile = vi.mocked(writeFile);
 
 describe('shasum', () => {
+    afterEach(() => {
+        vi.resetAllMocks();
+    });
+
     test('checkShasumFile pass', async () => {
         const root = resolvePathToFixture('dicts');
         const filename = resolvePathToFixture('dicts/_checksum.txt');
@@ -61,21 +84,48 @@ describe('shasum', () => {
     test('reportChecksumForFiles', async () => {
         const root = resolvePathToFixture('dicts');
         const files = ['colors.txt', 'cities.txt'];
-        const report = await reportChecksumForFiles(files, root);
+        const report = await reportChecksumForFiles(files, { root });
         expect(report).toMatchSnapshot();
     });
 
     test.each`
-        filename                        | files
-        ${'_checksum.txt'}              | ${undefined}
-        ${'_checksum.txt'}              | ${['colors.txt', 'my_cities.txt']}
-        ${'_checksum-failed.txt'}       | ${undefined}
-        ${'_checksum-failed2.txt'}      | ${undefined}
-        ${'_checksum-failed2.txt'}      | ${['colors.txt', 'cities.txt']}
-        ${'_checksum-missing-file.txt'} | ${undefined}
-    `('reportCheckChecksumFile $filename $files', async ({ filename, files }) => {
+        filename                        | files                              | listFile
+        ${'_checksum.txt'}              | ${undefined}                       | ${undefined}
+        ${'_checksum.txt'}              | ${['colors.txt', 'my_cities.txt']} | ${undefined}
+        ${'_checksum-failed.txt'}       | ${undefined}                       | ${undefined}
+        ${'_checksum-failed2.txt'}      | ${undefined}                       | ${undefined}
+        ${'_checksum-failed2.txt'}      | ${['cities.txt', 'colors.txt']}    | ${undefined}
+        ${'_checksum-missing-file.txt'} | ${undefined}                       | ${undefined}
+        ${'_checksum.txt'}              | ${['colors.txt', 'my_cities.txt']} | ${'source-files.txt'}
+    `('reportCheckChecksumFile $filename $files $listFile', async ({ filename, files, listFile }) => {
         const root = resolvePathToFixture('dicts');
-        const report = await reportCheckChecksumFile(resolvePathToFixture('dicts', filename), files, root);
+        const report = await reportCheckChecksumFile(resolvePathToFixture('dicts', filename), files, {
+            root,
+            listFile: listFile ? [resolvePathToFixture('dicts', listFile)] : undefined,
+        });
         expect(report).toMatchSnapshot();
+    });
+
+    test.each`
+        filename
+        ${'_checksum-failed.txt'}
+        ${'_checksum-missing-file'}
+        ${'new_checksum_file.txt'}
+    `('calcUpdateChecksumForFiles $filename', async ({ filename }) => {
+        const root = resolvePathToFixture('dicts');
+        const checksumFile = resolvePathToFixture('dicts', filename);
+        const listFile = resolvePathToFixture('dicts', 'source-files.txt');
+
+        const result = await calcUpdateChecksumForFiles(checksumFile, [], { root, listFile: [listFile] });
+        expect(result).toMatchSnapshot();
+    });
+
+    test('updateChecksumForFiles', async () => {
+        const checksumFile = 'temp/my-checksum.txt';
+        const root = resolvePathToFixture('dicts');
+        const listFile = resolvePathToFixture('dicts', 'source-files.txt');
+
+        const result = await updateChecksumForFiles(checksumFile, [], { root, listFile: [listFile] });
+        expect(mockedWriteFile).toHaveBeenLastCalledWith(checksumFile, result.report);
     });
 });
