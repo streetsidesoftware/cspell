@@ -228,4 +228,47 @@ describe('Validate the application', () => {
         expect(mockedCompressFile).toHaveBeenCalledWith('CHANGELOG.md');
         expect(mockedCompressFile).toHaveBeenCalledWith('package.json');
     });
+
+    test('app shasum', async () => {
+        const commander = getCommander();
+        const args = argv('shasum', 'cities.txt', '--root=fixtures/dicts');
+
+        await expect(app.run(commander, args)).resolves.toBeUndefined();
+        expect(consoleSpy.consoleOutput()).toMatchSnapshot();
+    });
+
+    test('app shasum file not found', async () => {
+        const commander = getCommander();
+        const args = argv('shasum', 'cities.txt', 'unknown.txt', '--root=fixtures/dicts');
+
+        await expect(app.run(commander, args)).rejects.toEqual(
+            new Commander.CommanderError(1, 'Failed Checksum', 'One or more files had issues.')
+        );
+        expect(consoleSpy.consoleOutput()).toMatchSnapshot();
+    });
+
+    test('app shasum check failed', async () => {
+        const commander = getCommander();
+        const args = argv('shasum', '--check=fixtures/dicts/_checksum-failed.txt', '--root=fixtures/dicts');
+
+        await expect(app.run(commander, args)).rejects.toEqual(
+            new Commander.CommanderError(1, 'Failed Checksum', 'One or more files had issues.')
+        );
+        expect(consoleSpy.consoleOutput()).toMatchSnapshot();
+    });
+
+    test('app shasum update', async () => {
+        const commander = getCommander();
+        const checksumFile = pathTemp('checksum.txt');
+        const args = argv(
+            'shasum',
+            '--update',
+            checksumFile,
+            '--root=fixtures/dicts',
+            '--list-file=fixtures/dicts/source-files.txt'
+        );
+
+        await expect(app.run(commander, args)).resolves.toBeUndefined();
+        expect(consoleSpy.consoleOutput()).toMatchSnapshot();
+    });
 });

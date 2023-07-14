@@ -188,3 +188,40 @@ exports[`Validate the application > app no args 1`] = `
   "log": "",
 }
 `;
+
+exports[`Validate the application > app shasum 1`] = `
+{
+  "error": "",
+  "log": "%s,477e8bc9954033392e432fd66f0d4278884bde38  cities.txt",
+}
+`;
+
+exports[`Validate the application > app shasum check failed 1`] = `
+{
+  "error": "",
+  "log": "%s,cities.trie: OK
+cities.trie.gz: OK
+cities.txt: OK
+colors.trie: FAILED
+colors.txt: OK
+sampleCodeDic.txt: OK
+shasum: WARNING: 1 computed checksum did NOT match",
+}
+`;
+
+exports[`Validate the application > app shasum file not found 1`] = `
+{
+  "error": "",
+  "log": "%s,477e8bc9954033392e432fd66f0d4278884bde38  cities.txt
+shasum: unknown.txt: Unable to read file.",
+}
+`;
+
+exports[`Validate the application > app shasum update 1`] = `
+{
+  "error": "",
+  "log": "%s,477e8bc9954033392e432fd66f0d4278884bde38  cities.txt
+3a6b55a089d018878e8b904f8f19391f2e30b66c  colors.txt
+",
+}
+`;
