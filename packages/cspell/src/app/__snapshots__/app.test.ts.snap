@@ -368,7 +368,7 @@ info
 info	Checking: ./src/app/app.test.ts, File type: auto, Language: default
 info	Checked: ./src/app/app.test.ts, File type: typescript, Language: en ... Issues: 0 0.00S
 info	Config file Used: ./cspell.json
-info	Dictionaries Used: companies, filetypes, public-licenses, softwareTerms, workspace, aws, cryptocurrencies, en_us, en-common-misspellings, fullstack, node, npm, svelte, typescript
+info	Dictionaries Used: companies, filetypes, public-licenses, softwareTerms, computing-acronyms, workspace, aws, cryptocurrencies, en_us, en-common-misspellings, fullstack, node, npm, svelte, typescript
 error	 0.00ms
 error	CSpell: Files checked: 1, Issues found: 0 in 0 files"
 `;
@@ -435,7 +435,7 @@ info
 info	Checking: ./fixtures/issue-2998/fix-words.txt, File type: fix, Language: default
 info	Checked: ./fixtures/issue-2998/fix-words.txt, File type: fix, Language: en ... Issues: 0 0.00S
 info	Config file Used: ./fixtures/issue-2998/cspell.json
-info	Dictionaries Used: companies, filetypes, public-licenses, softwareTerms, aws, cryptocurrencies, en_us, en-common-misspellings, fixture
+info	Dictionaries Used: companies, filetypes, public-licenses, softwareTerms, computing-acronyms, aws, cryptocurrencies, en_us, en-common-misspellings, fixture
 error	 0.00ms
 error	CSpell: Files checked: 1, Issues found: 0 in 0 files"
 `;
@@ -787,6 +787,7 @@ café - [suggestWords]*        From Settings \`suggestWords\`
 café - [words]*               From Settings \`words\`
 café - aws*                   node_modules/@cspell/dict-aws/aws.txt.gz
 café - companies*             node_modules/@cspell/.../dict/companies.txt
+café - computing-acronyms*    node_modules/.../dict/computing-acronyms.txt
 café - cryptocurrencies*      node_modules/@cspell/.../cryptocurrencies.txt.gz
 café * en_us*                 node_modules/@cspell/dict-en_us/en_US.trie.gz
 café - en-common-misspelling* node_modules/@cspell/.../dict-en.yaml
@@ -807,6 +808,7 @@ hello - [suggestWords]*        From Settings \`suggestWords\`
 hello - [words]*               From Settings \`words\`
 hello - aws*                   node_modules/@cspell/dict-aws/aws.txt.gz
 hello - companies*             node_modules/@cspell/.../dict/companies.txt
+hello - computing-acronyms*    node_modules/.../dict/computing-acronyms.txt
 hello * cpp                    node_modules/@cspell/dict-cpp/dict/cpp.txt
 hello * cpp-legacy             node_modules/@cspell/dict-cpp/dict/cpp-legacy.txt
 hello - cryptocurrencies*      node_modules/@cspell/.../cryptocurrencies.txt.gz
@@ -831,6 +833,7 @@ hello - [suggestWords]*           From Settings \`suggestWords\`
 hello - [words]*                  From Settings \`words\`
 hello - aws*                      node_modules/@cspell/dict-aws/aws.txt.gz
 hello - companies*                node_modules/@cspell/.../dict/companies.txt
+hello - computing-acronyms*       node_modules/.../dict/computing-acronyms.txt
 hello * cpp                       node_modules/@cspell/dict-cpp/dict/cpp.txt
 hello * cpp-legacy                node_modules/@cspell/.../dict/cpp-legacy.txt
 hello - cryptocurrencies*         node_modules/.../cryptocurrencies.txt.gz
@@ -889,6 +892,7 @@ hello - [suggestWords]*        From Settings \`suggestWords\`
 hello - [words]*               From Settings \`words\`
 hello - aws*                   node_modules/@cspell/dict-aws/aws.txt.gz
 hello - companies*             node_modules/@cspell/.../dict/companies.txt
+hello - computing-acronyms*    node_modules/.../dict/computing-acronyms.txt
 hello * cpp                    node_modules/@cspell/dict-cpp/dict/cpp.txt
 hello * cpp-legacy             node_modules/@cspell/dict-cpp/dict/cpp-legacy.txt
 hello - cryptocurrencies*      node_modules/@cspell/.../cryptocurrencies.txt.gz
@@ -914,6 +918,7 @@ not-in-any-dictionary - [suggestWords]*        From Settings \`suggestWords\`
 not-in-any-dictionary - [words]*               From Settings \`words\`
 not-in-any-dictionary - aws*                   node_modules/.../aws.txt.gz
 not-in-any-dictionary - companies*             node_modules/.../companies.txt
+not-in-any-dictionary - computing-acronyms*    .../dict/computing-acronyms.txt
 not-in-any-dictionary - cryptocurrencies*      .../cryptocurrencies.txt.gz
 not-in-any-dictionary - en_us*                 node_modules/.../en_US.trie.gz
 not-in-any-dictionary - en-common-misspelling* node_modules/.../dict-en.yaml
@@ -1829,6 +1834,7 @@ café - [suggestWords]*        From Settings \`suggestWords\`
 café - [words]*               From Settings \`words\`
 café - aws*                   node_modules/@cspell/dict-aws/aws.txt.gz
 café - companies*             node_modules/@cspell/.../dict/companies.txt
+café - computing-acronyms*    node_modules/.../dict/computing-acronyms.txt
 café - cryptocurrencies*      node_modules/@cspell/.../cryptocurrencies.txt.gz
 café * en_us*                 node_modules/@cspell/dict-en_us/en_US.trie.gz
 café - en-common-misspelling* node_modules/@cspell/.../dict-en.yaml
@@ -1851,6 +1857,7 @@ hello - ada                       node_modules/@cspell/dict-ada/dict/ada.txt
 hello - aws*                      node_modules/@cspell/dict-aws/aws.txt.gz
 hello - bash                      node_modules/@cspell/.../dict/bash-words.txt
 hello - companies*                node_modules/@cspell/.../dict/companies.txt
+hello - computing-acronyms*       node_modules/.../dict/computing-acronyms.txt
 hello * cpp                       node_modules/@cspell/dict-cpp/dict/cpp.txt
 hello * cpp-legacy                node_modules/@cspell/.../dict/cpp-legacy.txt
 hello - cpp-refined               node_modules/@cspell/.../dict/cpp-refined.txt
@@ -1924,6 +1931,7 @@ hello - [suggestWords]*           From Settings \`suggestWords\`
 hello - [words]*                  From Settings \`words\`
 hello - aws*                      node_modules/@cspell/dict-aws/aws.txt.gz
 hello - companies*                node_modules/@cspell/.../dict/companies.txt
+hello - computing-acronyms*       node_modules/.../dict/computing-acronyms.txt
 hello * cpp                       node_modules/@cspell/dict-cpp/dict/cpp.txt
 hello * cpp-legacy                node_modules/@cspell/.../dict/cpp-legacy.txt
 hello - cryptocurrencies*         node_modules/.../cryptocurrencies.txt.gz
