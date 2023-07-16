@@ -108,7 +108,7 @@ export const _defaultSettingsBasis: Readonly<CSpellSettingsInternal> = Object.fr
         source: { name: 'defaultSettings' },
         reporters: [],
         plugins: [{ parsers }],
-    })
+    }),
 );
 
 export const _defaultSettings: Readonly<CSpellSettingsInternal> = Object.freeze(
@@ -142,7 +142,7 @@ export const _defaultSettings: Readonly<CSpellSettingsInternal> = Object.freeze(
         ],
         ignoreRegExpList: defaultRegExpExcludeList,
         languageSettings: LanguageSettings.getDefaultLanguageSettings(),
-    })
+    }),
 );
 
 const getSettings = (function () {

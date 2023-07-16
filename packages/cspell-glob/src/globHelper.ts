@@ -23,7 +23,7 @@ const isGlobalPatternRegExp = /^!*[*]{2}/;
 export function fileOrGlobToGlob(
     fileOrGlob: string | GlobPattern,
     root: string,
-    path: PathInterface = Path
+    path: PathInterface = Path,
 ): GlobPatternWithRoot {
     const pathToGlob = path.sep === '\\' ? (p: string) => p.replace(/\\/g, '/') : (p: string) => p;
 
@@ -189,7 +189,7 @@ export function normalizeGlobPattern(g: GlobPattern, options: NormalizeOptions):
 export function normalizeGlobToRoot<Glob extends GlobPatternWithRoot>(
     glob: Glob,
     root: string,
-    path: PathInterface
+    path: PathInterface,
 ): Glob {
     function relToGlob(relativePath: string): string {
         return path.sep === '\\' ? relativePath.replace(/\\/g, '/') : relativePath;

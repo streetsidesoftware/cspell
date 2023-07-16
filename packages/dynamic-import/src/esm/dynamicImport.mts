@@ -9,7 +9,7 @@ import { pathToFileURL } from 'url';
  */
 export async function dynamicImportFrom<Module>(
     moduleName: string | URL,
-    paths: string | URL | (string | URL)[] | undefined
+    paths: string | URL | (string | URL)[] | undefined,
 ): Promise<Module> {
     paths = Array.isArray(paths) ? paths : paths ? [paths] : undefined;
     if (!paths || !paths.length || typeof moduleName !== 'string') {

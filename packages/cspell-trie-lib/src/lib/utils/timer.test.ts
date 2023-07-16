@@ -29,7 +29,7 @@ describe('timer', () => {
         const r = measure(
             'test',
             () => fib(8),
-            (log: string) => (msg = log)
+            (log: string) => (msg = log),
         );
         expect(r).toBe(34);
         expect(msg).toContain('test ');
@@ -40,7 +40,7 @@ describe('timer', () => {
         const r = await measureAsync(
             'test',
             async () => fib(8),
-            (log: string) => (msg = log)
+            (log: string) => (msg = log),
         );
         expect(r).toBe(34);
         expect(msg).toContain('test ');

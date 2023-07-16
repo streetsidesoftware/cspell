@@ -96,7 +96,7 @@ const emptyCSpellSettings = Object.freeze({});
 export async function* suggestionsForWords(
     words: Iterable<string> | AsyncIterable<string>,
     options?: SuggestionOptions,
-    settings?: CSpellSettings
+    settings?: CSpellSettings,
 ): AsyncIterable<SuggestionsForWordResult> {
     for await (const word of words) {
         yield await suggestionsForWord(word, options, settings);
@@ -107,7 +107,7 @@ const memorizeSuggestions = memorizeLastCall(cacheSuggestionsForWord);
 
 function cacheSuggestionsForWord(
     options: SuggestOptions,
-    settings: CSpellSettings
+    settings: CSpellSettings,
 ): (word: string) => Promise<SuggestionsForWordResult> {
     const cache = createAutoResolveCache<string, Promise<SuggestionsForWordResult>>();
     return (word) => cache.get(word, (word) => _suggestionsForWord(word, options, settings));
@@ -116,7 +116,7 @@ function cacheSuggestionsForWord(
 export function suggestionsForWord(
     word: string,
     options: SuggestionOptions = emptySuggestionOptions,
-    settings: CSpellSettings = emptyCSpellSettings
+    settings: CSpellSettings = emptyCSpellSettings,
 ): Promise<SuggestionsForWordResult> {
     return memorizeSuggestions(options, settings)(word);
 }
@@ -124,7 +124,7 @@ export function suggestionsForWord(
 async function _suggestionsForWord(
     word: string,
     options: SuggestionOptions,
-    settings: CSpellSettings
+    settings: CSpellSettings,
 ): Promise<SuggestionsForWordResult> {
     const { languageId, locale: language, includeDefaultConfig = true, dictionaries } = options;
 
@@ -137,11 +137,11 @@ async function _suggestionsForWord(
             util.clean({
                 language: language || config.language,
                 // dictionaries: dictionaries?.length ? dictionaries : config.dictionaries,
-            })
+            }),
         );
         const withLanguageId = calcSettingsForLanguageId(
             withLocale,
-            languageId ?? withLocale.languageId ?? 'plaintext'
+            languageId ?? withLocale.languageId ?? 'plaintext',
         );
         const settings = finalizeSettings(withLanguageId);
         settings.dictionaries = dictionaries?.length ? dictionaries : settings.dictionaries || [];
@@ -170,7 +170,7 @@ function _suggestionsForWordSync(
     options: SuggestionOptions,
     settings: CSpellSettings,
     dictionaryCollection: SpellingDictionaryCollection,
-    allDictionaryCollection?: SpellingDictionaryCollection
+    allDictionaryCollection?: SpellingDictionaryCollection,
 ): SuggestionsForWordResult {
     const extendsDictionaryCollection = allDictionaryCollection || dictionaryCollection;
     const {
@@ -188,21 +188,21 @@ function _suggestionsForWordSync(
         : settings;
     const opts: SuggestOptions = { ignoreCase, numChanges, numSuggestions, includeTies };
     const suggestionsByDictionary = dictionaryCollection.dictionaries.flatMap((dict) =>
-        dict.suggest(word, opts).map((r) => ({ ...r, dictName: dict.name }))
+        dict.suggest(word, opts).map((r) => ({ ...r, dictName: dict.name })),
     );
     const locale = adjustLocale(language || config.language || undefined);
     const collator = Intl.Collator(locale);
     const combined = limitResults(
         combine(suggestionsByDictionary.sort((a, b) => a.cost - b.cost || collator.compare(a.word, b.word))),
         numSuggestions,
-        includeTies
+        includeTies,
     );
     const sugsAdjusted = calcSuggestionAdjustedToToMatchCase(
         word,
         combined,
         locale,
         ignoreCase,
-        extendsDictionaryCollection
+        extendsDictionaryCollection,
     );
     const allSugs = sugsAdjusted.map((sug) => {
         const found = extendsDictionaryCollection.find(sug.word);
@@ -251,7 +251,7 @@ export function calcSuggestionAdjustedToToMatchCase<T extends SuggestionResult>(
     sugs: T[],
     locale: string | string[] | undefined,
     ignoreCase: boolean,
-    dict: SpellingDictionaryCollection
+    dict: SpellingDictionaryCollection,
 ): (T & WordSuggestion)[] {
     locale = adjustLocale(locale);
     const knownSugs = new Set(sugs.map((sug) => sug.word));
@@ -353,7 +353,10 @@ function isAllCaps(word: string): boolean {
 }
 
 export class SuggestionError extends Error {
-    constructor(message: string, readonly code: string) {
+    constructor(
+        message: string,
+        readonly code: string,
+    ) {
         super(message);
     }
 }

@@ -20,7 +20,7 @@ describe('Validate Text Ranges using Regexp', () => {
                 RegPat.regExSpellingGuardNext,
                 RegPat.regExMatchCommonHexFormats,
             ],
-            text
+            text,
         );
         expect(rangesToText(text, ranges)).toEqual([
             "  7: 14 https://www.google.com?q=typescript';",
@@ -46,7 +46,7 @@ describe('Validate Text Ranges using Regexp', () => {
                 RegPat.regExSpellingGuardNext,
                 RegPat.regExMatchCommonHexFormats,
             ],
-            text
+            text,
         );
         expect(rangesToText(text, ranges)).toEqual([
             "  7: 14 https://www.google.com?q=typescript';",
@@ -67,7 +67,7 @@ describe('Validate Text Ranges using Regexp', () => {
         const text = sampleCode2LF;
         const includeRanges = TextRange.findMatchingRangesForPatterns(
             [RegPat.regExString, RegPat.regExPhpHereDoc, RegPat.regExCStyleComments],
-            text
+            text,
         );
         const excludeRanges = TextRange.findMatchingRangesForPatterns(
             [
@@ -77,7 +77,7 @@ describe('Validate Text Ranges using Regexp', () => {
                 RegPat.regExMatchUrls,
                 RegPat.regExMatchCommonHexFormats,
             ],
-            text
+            text,
         );
         const mergedRanges = TextRange.excludeRanges(includeRanges, excludeRanges);
         expect(rangesToText(text, mergedRanges)).toEqual([
@@ -113,7 +113,7 @@ describe('Validate Text Ranges using Regexp', () => {
         const text = sampleCode2CRLF;
         const includeRanges = TextRange.findMatchingRangesForPatterns(
             [RegPat.regExString, RegPat.regExPhpHereDoc, RegPat.regExCStyleComments],
-            text
+            text,
         );
         const excludeRanges = TextRange.findMatchingRangesForPatterns(
             [
@@ -123,7 +123,7 @@ describe('Validate Text Ranges using Regexp', () => {
                 RegPat.regExMatchUrls,
                 RegPat.regExMatchCommonHexFormats,
             ],
-            text
+            text,
         );
         const mergedRanges = TextRange.excludeRanges(includeRanges, excludeRanges);
         expect(rangesToText(text, mergedRanges)).toEqual([
@@ -166,7 +166,7 @@ describe('Validate Text Ranges using Regexp', () => {
 
         const disableChecker = TextRange.findMatchingRangesForPatterns(
             [RegPat.regExSpellingGuardBlock, RegPat.regExSpellingGuardLine, RegPat.regExSpellingGuardNext],
-            text
+            text,
         );
         expect(disableChecker.length).toBe(5);
 
@@ -204,7 +204,7 @@ describe('Validate Text Ranges using Regexp', () => {
 
         const disableChecker = TextRange.findMatchingRangesForPatterns(
             [RegPat.regExSpellingGuardBlock, RegPat.regExSpellingGuardLine, RegPat.regExSpellingGuardNext],
-            text
+            text,
         );
         expect(disableChecker.length).toBe(5);
 

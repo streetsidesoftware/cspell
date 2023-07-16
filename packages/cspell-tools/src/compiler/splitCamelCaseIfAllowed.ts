@@ -7,7 +7,7 @@ export const regExpIsNumber = /^\d+$/;
 export function splitCamelCaseIfAllowed(
     word: string,
     allowedWords: AllowedSplitWordsCollection,
-    keepCase: boolean
+    keepCase: boolean,
 ): string[] {
     const split = [...splitCamelCase(word)];
     if (split.length == 1) return adjustCases(split, allowedWords, keepCase);

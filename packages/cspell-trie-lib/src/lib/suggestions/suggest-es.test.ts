@@ -36,7 +36,7 @@ describe('Validate Spanish Suggestions', () => {
             const suggestions = trie.suggest(word, { numSuggestions: 4, ignoreCase });
             expect(suggestions).toEqual(expectedWords);
         },
-        { timeout: 5000 }
+        { timeout: 5000 },
     );
 
     test.each`
@@ -50,7 +50,7 @@ describe('Validate Spanish Suggestions', () => {
             const results = trie.suggestWithCost(word, { numSuggestions: 4, ignoreCase });
             expect(results).toEqual(expectedWords);
         },
-        { timeout: 5000 }
+        { timeout: 5000 },
     );
 
     test.each`
@@ -77,7 +77,7 @@ describe('Validate Spanish Suggestions', () => {
             const results = trie.suggestWithCost(word, { numSuggestions: 4, ignoreCase, weightMap: wm });
             expect(results).toEqual(expectedWords);
         },
-        { timeout: 5000 }
+        { timeout: 5000 },
     );
     test.each`
         wordA     | wordB

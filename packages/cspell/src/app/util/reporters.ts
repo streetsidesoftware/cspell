@@ -28,7 +28,7 @@ export type FinalizedReporter = Required<CSpellReporter>;
 
 function extractEmitter<K extends keyof StandardEmitters>(
     reporters: ReadonlyArray<StandardEmitters>,
-    emitterName: K
+    emitterName: K,
 ): FinalizedReporter[K][] {
     // The `bind` is used in case the reporter is a class.
     return reporters
@@ -62,7 +62,7 @@ export function mergeReporters(...reporters: ReadonlyArray<CSpellReporter>): Fin
 export async function loadReporters(
     reporters: FileSettings['reporters'],
     defaultReporter: CSpellReporter,
-    config: ReporterConfiguration
+    config: ReporterConfiguration,
 ): Promise<ReadonlyArray<CSpellReporter>> {
     async function loadReporter(reporterSettings: ReporterSettings): Promise<CSpellReporter | undefined> {
         if (reporterSettings === 'default') return defaultReporter;

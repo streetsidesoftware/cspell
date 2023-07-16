@@ -24,7 +24,7 @@ export function compareByRev<T>(extract1: CompareArg<T>, extract2: CompareArg<T>
 export function compareByRev<T>(
     extract1: CompareArg<T>,
     extract2: CompareArg<T>,
-    extract3: CompareArg<T>
+    extract3: CompareArg<T>,
 ): CompareFn<T>;
 export function compareByRev<T>(extract: CompareArg<T>, ...extractors: CompareArg<T>[]): CompareFn<T> {
     return reverse(compareBy(extract, ...extractors));

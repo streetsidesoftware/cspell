@@ -3,7 +3,7 @@ export class FetchUrlError extends Error implements NodeJS.ErrnoException {
         message: string,
         readonly code: string | undefined,
         readonly status: number | undefined,
-        readonly url: URL
+        readonly url: URL,
     ) {
         super(message);
         this.name = 'FetchUrlError';

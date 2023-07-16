@@ -58,7 +58,10 @@ export class SimpleWeakCache<K extends object, T> {
 }
 
 export class AutoWeakCache<K extends object, T> extends SimpleWeakCache<K, T> {
-    constructor(readonly factory: (key: K) => T, size: number) {
+    constructor(
+        readonly factory: (key: K) => T,
+        size: number,
+    ) {
         super(size);
     }
 
@@ -136,7 +139,10 @@ export class SimpleCache<K, T> {
 }
 
 export class AutoCache<K, T> extends SimpleCache<K, T> {
-    constructor(readonly factory: (key: K) => T, size: number) {
+    constructor(
+        readonly factory: (key: K) => T,
+        size: number,
+    ) {
         super(size);
     }
 

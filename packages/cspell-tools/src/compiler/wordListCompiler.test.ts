@@ -77,7 +77,7 @@ describe('Validate the wordListCompiler', () => {
                     .filter((a) => !!a)
                     .map((a) => '~' + a)
                     .join('\n') +
-                '\n'
+                '\n',
         );
         expect(consoleOutput()).toMatchSnapshot();
     });
@@ -139,7 +139,7 @@ describe('Validate the wordListCompiler', () => {
             worked
         `
                 .split('\n')
-                .map((line) => line.trim())
+                .map((line) => line.trim()),
         );
         expect(consoleOutput()).toMatchSnapshot();
     });
@@ -184,7 +184,7 @@ async function compileTrie(words: Iterable<string>, destFilename: string, option
 async function compileWordList(
     lines: Iterable<string>,
     destFilename: string,
-    options: CompileTrieOptions
+    options: CompileTrieOptions,
 ): Promise<void> {
     const normalizer = normalizeTargetWords(options);
     return _compileWordList(normalizer(lines), destFilename, options);
@@ -197,7 +197,7 @@ function normalizeWordsToTrie(words: Iterable<string>): Trie.TrieRoot {
 function legacyNormalizeWords(lines: Iterable<string>): Iterable<string> {
     return pipe(
         lines,
-        opConcatMap((line) => legacyLineToWords(line, true, allowedSplitWords))
+        opConcatMap((line) => legacyLineToWords(line, true, allowedSplitWords)),
     );
 }
 

@@ -255,7 +255,7 @@ function asPendingPromise<T>(promise: Promise<T>): PendingPromise<T> {
 async function* asyncBuffer<T, U>(
     values: Iterable<T> | AsyncIterable<T>,
     mapFn: (v: T, i: number) => Promise<U>,
-    limit: number
+    limit: number,
 ): AsyncIterable<U> {
     let pending: PendingPromise<U>[] = [];
     let index = 0;
@@ -311,7 +311,7 @@ Stop on fail:   ${tf(fail)}
     const buffered = asyncBuffer(
         matching,
         async (rep) => execCheckAndUpdate(rep, { update, updateSnapshots }),
-        parallelLimit
+        parallelLimit,
     );
 
     for await (const r of buffered) {
@@ -326,7 +326,7 @@ Stop on fail:   ${tf(fail)}
     const success = results.length === matching.length && !failed.length;
     console.log();
     console.log(
-        failed.length ? 'Some checks failed:' : !matching.length ? 'No Repositories Found' : 'All checks passed:'
+        failed.length ? 'Some checks failed:' : !matching.length ? 'No Repositories Found' : 'All checks passed:',
     );
     console.log(report(matching, results));
 

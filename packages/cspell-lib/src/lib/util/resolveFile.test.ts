@@ -56,7 +56,7 @@ describe('Validate resolveFile', () => {
                 expected: require.resolve(f, { paths: [defaultConfigLocation] }),
                 found: true,
             }))
-            .map(({ filename, relativeTo, expected, found }) => [filename, relativeTo, expected, found])
+            .map(({ filename, relativeTo, expected, found }) => [filename, relativeTo, expected, found]),
     )('resolveFile "%s" rel "%s"', (filename: string, relativeTo: string, expected: string, found: boolean) => {
         const r = resolveFile(filename, relativeTo);
         expect(r.filename).toBe(expected);

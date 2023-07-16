@@ -85,7 +85,7 @@ const MAX_NUM_CHANGES = 5;
 function legacySuggest(
     root: TrieNode,
     word: string,
-    maxNumSuggestions: number = defaultMaxNumberSuggestions
+    maxNumSuggestions: number = defaultMaxNumberSuggestions,
 ): SuggestionResultBase[] {
     const bc = baseCost;
     const psc = postSwapCost;
@@ -131,7 +131,7 @@ function legacySuggest(
             matrix[d][i] = Math.min(
                 matrix[d - 1][i - 1] + subCost, // substitute
                 matrix[d - 1][i] + c, // insert
-                matrix[d][i - 1] + c // delete
+                matrix[d][i - 1] + c, // delete
             );
             min = Math.min(min, matrix[d][i]);
             lastLetter = curLetter;

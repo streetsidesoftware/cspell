@@ -6,7 +6,10 @@ export interface ServiceRequest<T extends string = string, P = unknown, R = unkn
 
 class BaseServiceRequest<T extends string, P, R> implements ServiceRequest<T, P, R> {
     readonly __r?: ServiceResponseBase<R>;
-    constructor(readonly type: T, readonly params: P) {}
+    constructor(
+        readonly type: T,
+        readonly params: P,
+    ) {}
 }
 
 export class ServiceRequestCls<T extends string, P, R> extends BaseServiceRequest<T, P, R> {
@@ -36,7 +39,7 @@ export type IsARequest<T extends ServiceRequest> = (r: ServiceRequest) => r is T
 
 export function createResponse<R extends ServiceRequest, T = RequestResponseType<R>>(
     value: T,
-    _req?: R
+    _req?: R,
 ): ServiceResponseSuccess<T> {
     return { value };
 }
@@ -47,7 +50,7 @@ export type RequestResponseType<T> = T extends { __r?: infer R } ? R : never;
 
 export function createResponseFail<R extends ServiceRequest, E extends Error>(
     _request: R,
-    error: E
+    error: E,
 ): ServiceResponseFailure<VT<RequestResponseType<R>>> {
     return { error };
 }

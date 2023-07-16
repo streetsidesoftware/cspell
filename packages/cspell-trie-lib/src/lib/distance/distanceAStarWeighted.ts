@@ -134,7 +134,10 @@ class CandidatePool {
     readonly pool = new PairingHeap(compare);
     readonly grid: Node[] = [];
 
-    constructor(readonly aN: number, readonly bN: number) {}
+    constructor(
+        readonly aN: number,
+        readonly bN: number,
+    ) {}
 
     next(): Node | undefined {
         let n: Node | undefined;

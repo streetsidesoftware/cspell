@@ -7,7 +7,10 @@ export class ErrorUnhandledRequest extends Error {
 }
 
 export class ErrorServiceRequestDepthExceeded extends Error {
-    constructor(readonly request: ServiceRequest, readonly depth: number) {
+    constructor(
+        readonly request: ServiceRequest,
+        readonly depth: number,
+    ) {
         super(`Service Request Depth ${depth} Exceeded: ${request.type}`);
     }
 }
@@ -16,7 +19,7 @@ export class UnhandledHandlerError extends Error {
     constructor(
         readonly handlerName: string,
         readonly handlerDescription: string | undefined,
-        readonly cause: unknown
+        readonly cause: unknown,
     ) {
         super(`Unhandled Error in Handler: ${handlerName}`);
     }

@@ -124,7 +124,7 @@ function formatDictionaryLocation(
         cwd: string;
         dictionaryPathFormat: DictionaryPathFormat;
         iPath: PathInterface;
-    }
+    },
 ): string {
     let relPath = cwd ? iPath.relative(cwd, dictSource) : dictSource;
     const idxNodeModule = relPath.lastIndexOf('node_modules');

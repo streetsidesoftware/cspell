@@ -100,7 +100,7 @@ describe('distanceAStar', () => {
             weightMap = weightMap || createWeightMap();
             expect(distanceAStarWeighted(wordA, wordB, weightMap)).toBe(expected);
             expect(distanceAStarWeighted(wordB, wordA, weightMap)).toBe(expected);
-        }
+        },
     );
 
     test.each`
@@ -143,7 +143,7 @@ describe('distanceAStar', () => {
             expect(formatExResult(r2)).toMatchSnapshot();
             expect(r1?.cost).toBe(expected);
             expect(r2?.cost).toBe(expected);
-        }
+        },
     );
 
     test.each`
@@ -175,7 +175,7 @@ describe('distanceAStar', () => {
             expect(formatExResult(r2)).toMatchSnapshot();
             expect(r1?.cost).toBe(expectedAB);
             expect(r2?.cost).toBe(expectedBA);
-        }
+        },
     );
 });
 
@@ -247,6 +247,6 @@ function calcWeightMap(...defs: SuggestionCostMapDef[]): WeightMap {
             map: '-._',
             insDel: 2, // Cheap to insert,
             penalty: 200, // Costly later
-        }
+        },
     );
 }

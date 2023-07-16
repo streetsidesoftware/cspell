@@ -24,14 +24,14 @@ describe('Validate English', () => {
             // cspell:ignore installsallnecessary
             const results = dict.suggest(
                 'installsallnecessary',
-                createSuggestOptions(5, cspell.CompoundWordsMethod.SEPARATE_WORDS, 3)
+                createSuggestOptions(5, cspell.CompoundWordsMethod.SEPARATE_WORDS, 3),
             );
             const elapsed = elapsedTimeMsFrom(startTime);
             console.log(`Elapsed time ${elapsed.toFixed(2)}ms`);
             const sugs = results.map((a) => a.word);
             expect(sugs).toEqual(expect.arrayContaining(['installs all necessary']));
         },
-        { timeout }
+        { timeout },
     );
 
     test(
@@ -52,7 +52,7 @@ describe('Validate English', () => {
             const r = await validateText(text, finalSettings);
             expect(r).toEqual([]);
         },
-        { timeout }
+        { timeout },
     );
 
     // cspell:ignore latviešu
@@ -77,7 +77,7 @@ describe('Validate English', () => {
             const r = await validateText(text, finalSettings);
             expect(r.map((t) => t.text)).toEqual(['latviešu'.normalize('NFD')]);
         },
-        { timeout }
+        { timeout },
     );
 
     test(
@@ -112,7 +112,7 @@ describe('Validate English', () => {
             const r = await validateText(text, finalSettings);
             expect(r.map((a) => a.text)).toEqual(['setsid', 'setsid']);
         },
-        { timeout }
+        { timeout },
     );
 });
 

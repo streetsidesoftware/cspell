@@ -70,7 +70,7 @@ export class Aff {
                     rulesApplied: [acc.rulesApplied, rule.id].join(' '),
                     flags: { ...acc.flags, ...rule.flags },
                 }),
-                { rulesApplied: affWord.rulesApplied, flags: affWord.flags }
+                { rulesApplied: affWord.rulesApplied, flags: affWord.flags },
             );
         const rules = this.joinRules(allRules.filter((rule) => !rule.flags).map((rule) => rule.id));
         const affixRules = allRules.map((rule) => rule.sfx || rule.pfx).filter(isDefined);

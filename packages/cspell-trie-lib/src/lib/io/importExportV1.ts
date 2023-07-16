@@ -150,7 +150,7 @@ export function importTrie(linesX: Iterable<string> | IterableIterator<string>):
                 nodes[lines] = root;
                 return { lines: lines + 1, root, nodes };
             },
-            { lines: 0, nodes: [], root: {} }
+            { lines: 0, nodes: [], root: {} },
         );
     return trieNodeToRoot(n.root, { isCaseAware: false });
 }

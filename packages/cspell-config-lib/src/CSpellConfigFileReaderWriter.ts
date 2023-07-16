@@ -14,7 +14,10 @@ export interface CSpellConfigFileReaderWriter {
 }
 
 export class CSpellConfigFileReaderWriterImpl implements CSpellConfigFileReaderWriter {
-    constructor(readonly io: IO, readonly deserializers: Deserializer[]) {}
+    constructor(
+        readonly io: IO,
+        readonly deserializers: Deserializer[],
+    ) {}
 
     async readConfig(uri: string): Promise<CSpellConfigFile> {
         const content = await this.io.readFile(uri);

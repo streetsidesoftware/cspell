@@ -24,7 +24,7 @@ export class FastTrieBlob implements TrieData {
         private nodes: FastTrieBlobNode[],
         private charIndex: string[],
         readonly bitMasksInfo: FastTrieBlobBitMaskInfo,
-        options?: PartialTrieInfo
+        options?: PartialTrieInfo,
     ) {
         this.info = mergeOptionalWithDefaults(options);
         this.charToIndexMap = createCharToIndexMap(charIndex);
@@ -154,7 +154,7 @@ export class FastTrieBlob implements TrieData {
         return new FastTrieBlobIRoot(
             new FastTrieBlobInternals(trie.nodes, trie.charIndex, trie.charToIndexMap, trie.bitMasksInfo),
             0,
-            trie.info
+            trie.info,
         );
     }
 

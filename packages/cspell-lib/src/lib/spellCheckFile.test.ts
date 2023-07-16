@@ -51,7 +51,7 @@ describe('Validate Spell Checking Files', () => {
             const r = sanitizeSpellCheckFileResult(await spellCheckFile(rpS(filename), options, settings));
             expect(r).toEqual(oc(expected));
         },
-        10000
+        10000,
     );
 });
 
@@ -148,10 +148,10 @@ describe('Validate Spell Checking Documents', () => {
         async ({ uri, text, settings, options, expected }: TestSpellCheckFile) => {
             const r = sanitizeSpellCheckFileResult(
                 await spellCheckDocument(d(uri, text || undefined), options, settings),
-                ['checked', 'errors', 'issues', 'localConfigFilepath', 'settingsUsed', 'document']
+                ['checked', 'errors', 'issues', 'localConfigFilepath', 'settingsUsed', 'document'],
             );
             expect(r).toEqual(oc(expected));
-        }
+        },
     );
     test.each`
         uri                                                 | text  | settings | options | expected
@@ -160,10 +160,10 @@ describe('Validate Spell Checking Documents', () => {
         'spellCheckFile fixtures $uri $settings $options',
         async ({ uri, text, settings, options, expected }: TestSpellCheckFile) => {
             const r = sanitizeSpellCheckFileResult(
-                await spellCheckDocument(d(uri, text || undefined), options, settings)
+                await spellCheckDocument(d(uri, text || undefined), options, settings),
             );
             expect(r).toEqual(oc(expected));
-        }
+        },
     );
 });
 
@@ -280,7 +280,7 @@ function eFailed(file: string): Error {
 function sanitizeSpellCheckFileResult(
     spellCheckResult: SpellCheckFileResult,
     scKeys: (keyof SpellCheckFileResult)[] = ['checked', 'errors', 'issues', 'localConfigFilepath', 'document'],
-    cfgKeys?: (keyof CSpellUserSettings)[]
+    cfgKeys?: (keyof CSpellUserSettings)[],
 ): Partial<SpellCheckFileResult> {
     const result = filterKeys(spellCheckResult, scKeys);
     if (result.settingsUsed) {
@@ -295,7 +295,7 @@ function sanitizeSpellCheckFileResult(
 
 function sanitizeSettings(
     cs: CSpellSettingsInternal | CSpellSettingsWithSourceTrace,
-    keys: (keyof CSpellUserSettings)[] = ['languageId']
+    keys: (keyof CSpellUserSettings)[] = ['languageId'],
 ): CSpellUserSettings {
     return filterKeys(cs, keys);
 }

@@ -22,14 +22,18 @@ class IgnoreWordsDictionary implements SpellingDictionary {
     readonly containsNoSuggestWords = true;
     readonly options: SpellingDictionaryOptions = {};
     readonly type = 'ignore';
-    constructor(readonly name: string, readonly source: string, words: Iterable<string>) {
+    constructor(
+        readonly name: string,
+        readonly source: string,
+        words: Iterable<string>,
+    ) {
         this.dict = new Set(words);
         this.dictNonStrict = new Set(
             pipe(
                 this.dict,
                 opFilter((w) => w.startsWith('~')),
-                opMap((w) => w.slice(1))
-            )
+                opMap((w) => w.slice(1)),
+            ),
         );
     }
 
@@ -76,7 +80,7 @@ class IgnoreWordsDictionary implements SpellingDictionary {
         numSuggestions?: number,
         compoundMethod?: CompoundWordsMethod,
         numChanges?: number,
-        ignoreCase?: boolean
+        ignoreCase?: boolean,
     ): SuggestionResult[];
     suggest(word: string, suggestOptions: SuggestOptions): SuggestionResult[];
     suggest() {
@@ -110,13 +114,13 @@ const createCache = createAutoResolveWeakCache<readonly string[], SpellingDictio
 export function createIgnoreWordsDictionary(
     wordList: readonly string[],
     name: string,
-    source: string
+    source: string,
 ): SpellingDictionary {
     return createCache.get(wordList, () => {
         const testSpecialCharacters = /[*+]/;
 
         const words = [...parseDictionaryLines(wordList, { stripCaseAndAccents: true })].map((w) =>
-            w.normalize(NormalizeForm)
+            w.normalize(NormalizeForm),
         );
 
         const hasSpecial = words.findIndex((word) => testSpecialCharacters.test(word)) >= 0;

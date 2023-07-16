@@ -10,14 +10,14 @@ import type { EditCostsRequired } from './mapCosts.js';
 export function parseAlphabet(
     cs: CharacterSetCosts,
     locale: string[] | undefined,
-    editCost: EditCostsRequired
+    editCost: EditCostsRequired,
 ): SuggestionCostMapDef[] {
     const { cost, penalty } = cs;
     const characters = expandCharacterSet(cs.characters);
     const charForms = [
         ...pipe(
             characters,
-            opMap((c) => caseForms(c, locale).sort())
+            opMap((c) => caseForms(c, locale).sort()),
         ),
     ];
     const alphabet = joinLetters(
@@ -27,9 +27,9 @@ export function parseAlphabet(
                 opFlatten(),
                 opMap((letter) => accentForms(letter)),
                 opFlatten(),
-                opUnique()
+                opUnique(),
             ),
-        ].sort()
+        ].sort(),
     );
 
     const sugAlpha: SuggestionCostMapDef = clean({
@@ -50,13 +50,13 @@ export function parseAlphabet(
 export function parseAlphabetCaps(
     alphabet: string,
     locale: string[] | undefined,
-    editCost: EditCostsRequired
+    editCost: EditCostsRequired,
 ): SuggestionCostMapDef {
     const characters = expandCharacterSet(alphabet);
     const charForms = [
         ...pipe(
             characters,
-            opMap((c) => caseForms(c, locale).sort())
+            opMap((c) => caseForms(c, locale).sort()),
         ),
     ];
 
@@ -71,7 +71,7 @@ export function parseAlphabetCaps(
 
 export function calcFirstCharacterReplaceDefs(
     alphabets: CharacterSetCosts[],
-    editCost: EditCostsRequired
+    editCost: EditCostsRequired,
 ): SuggestionCostMapDef[] {
     return alphabets.map((cs) => calcFirstCharacterReplace(cs, editCost));
 }
@@ -82,7 +82,7 @@ export function calcFirstCharacterReplace(cs: CharacterSetCosts, editCost: EditC
             ...pipe(
                 expandCharacterSet(cs.characters),
                 opUnique(),
-                opMap((letter) => `(^${letter})`)
+                opMap((letter) => `(^${letter})`),
             ),
         ]
             .sort()
@@ -105,7 +105,7 @@ export function parseAccents(cs: CharacterSetCosts, _editCost: EditCostsRequired
     const accents = joinLetters([
         ...pipe(
             expandCharacterSet(cs.characters),
-            opMap((char) => stripNonAccents(char))
+            opMap((char) => stripNonAccents(char)),
         ),
     ]);
 
@@ -122,7 +122,7 @@ export function parseAccents(cs: CharacterSetCosts, _editCost: EditCostsRequired
 export function calcCostsForAccentedLetters(
     simpleMap: string,
     locale: string[] | undefined,
-    costs: EditCostsRequired
+    costs: EditCostsRequired,
 ): SuggestionCostMapDef[] {
     const charactersWithAccents = [
         ...pipe(
@@ -130,7 +130,7 @@ export function calcCostsForAccentedLetters(
             opMap((char) => caseForms(char, locale)),
             opFlatten(),
             opMap((char) => [...accentForms(char)]),
-            opFilter((forms) => forms.length > 1)
+            opFilter((forms) => forms.length > 1),
         ),
     ];
 
@@ -140,7 +140,7 @@ export function calcCostsForAccentedLetters(
         opMap((forms) => [...forms].sort()),
         opFilter((forms) => forms.length > 1),
         opMap(joinLetters),
-        opUnique()
+        opUnique(),
     );
 
     const replaceAccentMap = [...characters].join('|');

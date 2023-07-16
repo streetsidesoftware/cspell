@@ -92,7 +92,7 @@ export class IterableHunspellReader implements Iterable<string> {
      */
     seqTransformDictionaryEntries(
         tapPreApplyRules?: (dicEntry: string, index: number) => void,
-        maxDepth?: number
+        maxDepth?: number,
     ): Sequence<AffWord[]> {
         const seq = genSequence(this.src.dic);
         let count = 0;

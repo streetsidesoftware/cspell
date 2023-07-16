@@ -90,7 +90,7 @@ export function mapRangeToLocal(rangeOrig: SimpleRange, map: number[] | undefine
  * @param includeRanges Allowed ranges for words.
  */
 export function createMappedTextSegmenter(
-    includeRanges: TextRange.MatchRange[]
+    includeRanges: TextRange.MatchRange[],
 ): (text: MappedText) => Iterable<MappedText> {
     let rangePos = 0;
 

@@ -20,7 +20,7 @@ export const diagSource = 'cSpell Checker';
 export async function validateText(
     text: string,
     settings: CSpellUserSettings,
-    options: ValidateTextOptions = {}
+    options: ValidateTextOptions = {},
 ): Promise<ValidationIssue[]> {
     const finalSettings = Settings.finalizeSettings(settings);
     const dict = await getDictionaryInternal(finalSettings);

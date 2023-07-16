@@ -32,7 +32,7 @@ export function mapDictionaryInformation(dictInfo: DictionaryInformation): Sugge
 function processAlphabet(
     alphabet: DictionaryInformation['alphabet'],
     locale: string[] | undefined,
-    editCost: EditCostsRequired
+    editCost: EditCostsRequired,
 ): SuggestionCostMapDef[] {
     const csAlphabet = toCharSets(alphabet, 'a-zA-Z', editCost.baseCost);
 
@@ -40,7 +40,7 @@ function processAlphabet(
         ...pipeSync(
             csAlphabet,
             opMap((cs) => parseAlphabet(cs, locale, editCost)),
-            opFlatten()
+            opFlatten(),
         ),
         ...calcFirstCharacterReplaceDefs(csAlphabet, editCost),
     ];
@@ -50,7 +50,7 @@ function toCharSets(
     cs: string | CharacterSetCosts[] | undefined,
     defaultValue: string | undefined,
     cost: number,
-    penalty?: number
+    penalty?: number,
 ): CharacterSetCosts[] {
     cs = cs ?? defaultValue;
     if (!cs) return [];
@@ -73,7 +73,7 @@ function toCharSets(
 
 function processAccents(
     accents: DictionaryInformation['accents'],
-    editCost: EditCostsRequired
+    editCost: EditCostsRequired,
 ): SuggestionCostMapDef[] {
     const cs = toCharSets(accents, '\u0300-\u0341', editCost.accentCosts);
     return cs.map((cs) => parseAccents(cs, editCost)).filter(isDefined);

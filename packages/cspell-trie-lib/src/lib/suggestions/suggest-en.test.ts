@@ -70,7 +70,7 @@ describe('Validate English Suggestions', () => {
             expect(suggestions).toEqual(expect.arrayContaining(['joyful']));
             expect(suggestions[0]).toBe('joyful');
         },
-        timeout
+        timeout,
     );
 
     test(
@@ -87,7 +87,7 @@ describe('Validate English Suggestions', () => {
             expect(suggestions[1]).toBe('joyful');
             expect(suggestions).toHaveLength(collector.maxNumSuggestions);
         },
-        timeout
+        timeout,
     );
 
     test(
@@ -103,7 +103,7 @@ describe('Validate English Suggestions', () => {
             expect(suggestions[0]).toBe('one two three four');
             expect(suggestions).toHaveLength(collector.maxNumSuggestions);
         },
-        timeout
+        timeout,
     );
 
     test(
@@ -118,7 +118,7 @@ describe('Validate English Suggestions', () => {
             expect(suggestions).toEqual(expect.arrayContaining(['one+two+three+four']));
             expect(suggestions).toHaveLength(collector.maxNumSuggestions);
         },
-        timeout
+        timeout,
     );
 
     test(
@@ -133,7 +133,7 @@ describe('Validate English Suggestions', () => {
             expect(suggestions).toEqual(expect.arrayContaining(['one+two+three+four']));
             expect(suggestions).toHaveLength(collector.maxNumSuggestions);
         },
-        timeout
+        timeout,
     );
 
     // Takes a long time.
@@ -150,7 +150,7 @@ describe('Validate English Suggestions', () => {
             expect(suggestions).toEqual(['tests compute suggestions', 'test compute suggestions']);
             expect(suggestions[0]).toBe('tests compute suggestions');
         },
-        timeout
+        timeout,
     );
 
     // Takes a long time.
@@ -167,7 +167,7 @@ describe('Validate English Suggestions', () => {
             expect(suggestions).toEqual(expect.arrayContaining(['tests compound suggestions']));
             expect(suggestions[0]).toBe('tests compound suggestions');
         },
-        timeout
+        timeout,
     );
 
     test(
@@ -182,7 +182,7 @@ describe('Validate English Suggestions', () => {
             const elapsed = timer();
             expect(elapsed).toBeLessThan(suggestionTimeout * 4);
         },
-        timeout
+        timeout,
     );
 
     test.each`
@@ -208,7 +208,7 @@ function opts(
     filter?: SuggestionCollectorOptions['filter'],
     changeLimit?: number,
     includeTies?: boolean,
-    ignoreCase?: boolean
+    ignoreCase?: boolean,
 ): SuggestionCollectorOptions {
     return clean({
         numSuggestions,

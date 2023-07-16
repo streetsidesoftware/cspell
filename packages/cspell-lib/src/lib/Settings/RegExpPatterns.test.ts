@@ -34,7 +34,7 @@ describe('Validate InDocSettings', () => {
                 "spell-checker:disable\nconst unicodeHexValue = '\\uBABC';\nconst unicodeHexValue2 = '\\x{abcd}';\n\n// spell-checker:enable",
                 'spell-checker:disable */\n\n// nested disabled checker is not supported.\n\n// spell-checker:disable\n\n// nested spell-checker:enable',
                 'cSpell:disable\n\nNot checked.\n\n',
-            ].map((a) => a.replace(/\n/g, '\r\n'))
+            ].map((a) => a.replace(/\n/g, '\r\n')),
         );
         // cspell:enable
     });
@@ -53,8 +53,8 @@ describe('Validate InDocSettings', () => {
         // cspell:disable
         expect(m1).toEqual(
             ["const badspelling = 'disable'; // spell-checker:disable-line, yes all of it."].map((a) =>
-                a.replace(/\n/g, '\r\n')
-            )
+                a.replace(/\n/g, '\r\n'),
+            ),
         );
         // cspell:enable
     });
@@ -72,7 +72,7 @@ describe('Validate InDocSettings', () => {
         expect(m1).not.toBeFalsy();
         // cspell:disable
         expect(m1).toEqual(
-            ["cspell:disable-next\nconst verybadspelling = 'disable';"].map((a) => a.replace(/\n/g, '\r\n'))
+            ["cspell:disable-next\nconst verybadspelling = 'disable';"].map((a) => a.replace(/\n/g, '\r\n')),
         );
         // cspell:enable
     });
@@ -87,7 +87,7 @@ describe('Validate InDocSettings', () => {
                 RegPat.regExSpellingGuardNext,
                 RegPat.regExMatchCommonHexFormats,
             ],
-            text
+            text,
         );
         expect(rangesToText(text, ranges)).toEqual([
             "  7: 14 https://www.google.com?q=typescript';",
@@ -113,7 +113,7 @@ describe('Validate InDocSettings', () => {
                 RegPat.regExSpellingGuardNext,
                 RegPat.regExMatchCommonHexFormats,
             ],
-            text
+            text,
         );
         expect(rangesToText(text, ranges)).toEqual([
             "  7: 14 https://www.google.com?q=typescript';",
@@ -134,7 +134,7 @@ describe('Validate InDocSettings', () => {
         const text = sampleCode2LF;
         const includeRanges = TextRange.findMatchingRangesForPatterns(
             [RegPat.regExString, RegPat.regExPhpHereDoc, RegPat.regExCStyleComments],
-            text
+            text,
         );
         const excludeRanges = TextRange.findMatchingRangesForPatterns(
             [
@@ -144,7 +144,7 @@ describe('Validate InDocSettings', () => {
                 RegPat.regExMatchUrls,
                 RegPat.regExMatchCommonHexFormats,
             ],
-            text
+            text,
         );
         const mergedRanges = TextRange.excludeRanges(includeRanges, excludeRanges);
         expect(rangesToText(text, mergedRanges)).toEqual([
@@ -180,7 +180,7 @@ describe('Validate InDocSettings', () => {
         const text = sampleCode2CRLF;
         const includeRanges = TextRange.findMatchingRangesForPatterns(
             [RegPat.regExString, RegPat.regExPhpHereDoc, RegPat.regExCStyleComments],
-            text
+            text,
         );
         const excludeRanges = TextRange.findMatchingRangesForPatterns(
             [
@@ -190,7 +190,7 @@ describe('Validate InDocSettings', () => {
                 RegPat.regExMatchUrls,
                 RegPat.regExMatchCommonHexFormats,
             ],
-            text
+            text,
         );
         const mergedRanges = TextRange.excludeRanges(includeRanges, excludeRanges);
         expect(rangesToText(text, mergedRanges)).toEqual([
@@ -233,7 +233,7 @@ describe('Validate InDocSettings', () => {
 
         const disableChecker = TextRange.findMatchingRangesForPatterns(
             [RegPat.regExSpellingGuardBlock, RegPat.regExSpellingGuardLine, RegPat.regExSpellingGuardNext],
-            text
+            text,
         );
         expect(disableChecker.length).toBe(5);
 
@@ -360,7 +360,7 @@ describe('Validate InDocSettings', () => {
 
         const disableChecker = TextRange.findMatchingRangesForPatterns(
             [RegPat.regExSpellingGuardBlock, RegPat.regExSpellingGuardLine, RegPat.regExSpellingGuardNext],
-            text
+            text,
         );
         expect(disableChecker.length).toBe(5);
 
@@ -426,14 +426,14 @@ describe('Validate InDocSettings', () => {
         RegPat.regExHashStrings.lastIndex = 0;
         expect(
             RegPat.regExHashStrings.test(
-                'sha512-mm6iZYQ1xbVBNsWq2VSMFuneRuO0k0wUqIT4ZfrtbD1Eb90DXmqBOPA/URyUHq6wsftxr8aXDJHTTHyyBBY95w=='
-            )
+                'sha512-mm6iZYQ1xbVBNsWq2VSMFuneRuO0k0wUqIT4ZfrtbD1Eb90DXmqBOPA/URyUHq6wsftxr8aXDJHTTHyyBBY95w==',
+            ),
         ).toBe(true);
         RegPat.regExHashStrings.lastIndex = 0;
         expect(
             RegPat.regExHashStrings.test(
-                'sha512-vjiRZkhKEyZndtFOz/FtIp0CqPbgOOki8o9IcPOLTqlzcnvFLToYdERshLaI6TCz7pDWoKlmvgftqB4xlltn9g=='
-            )
+                'sha512-vjiRZkhKEyZndtFOz/FtIp0CqPbgOOki8o9IcPOLTqlzcnvFLToYdERshLaI6TCz7pDWoKlmvgftqB4xlltn9g==',
+            ),
         ).toBe(true);
         RegPat.regExHashStrings.lastIndex = 0;
         expect(RegPat.regExHashStrings.test('sha1-RBT/dKUIecII7l/cgm4ywwNUnto=')).toBe(true);

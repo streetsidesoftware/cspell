@@ -43,7 +43,7 @@ describe('Validate LanguageSettings', () => {
         expect(sPhp.allowCompoundWords).toBeUndefined();
         expect(sPhp.dictionaries).not.toHaveLength(0);
         expect(sPhp.dictionaries!).toEqual(
-            expect.arrayContaining(['en-gb', 'php', 'html', 'npm', 'fonts', 'css', 'typescript', 'fullstack'])
+            expect.arrayContaining(['en-gb', 'php', 'html', 'npm', 'fonts', 'css', 'typescript', 'fullstack']),
         );
     });
 
@@ -97,7 +97,7 @@ describe('Validate LanguageSettings', () => {
             const s = calcUserSettingsForLanguage(settings, languageId);
             expect(s.ignoreRegExpList).toEqual(expect.arrayContaining(ignoreContains));
             expect(s.ignoreRegExpList).not.toEqual(expect.arrayContaining(ignoreNotContains));
-        }
+        },
     );
 
     test('merged settings with global', () => {

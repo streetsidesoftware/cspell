@@ -110,7 +110,7 @@ export class GlobMatcher {
     constructor(
         patterns: GlobPattern | GlobPattern[],
         rootOrOptions?: string | GlobMatchOptions,
-        _nodePath?: PathInterface
+        _nodePath?: PathInterface,
     ) {
         _nodePath = _nodePath ?? Path;
 

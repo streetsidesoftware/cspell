@@ -58,7 +58,7 @@ describe('Validate English FastTrieBlob', async () => {
             // console.log('Calculations: %o', calc);
             expect(r.nodes).toBeGreaterThan(1000);
         },
-        timeout
+        timeout,
     );
 });
 

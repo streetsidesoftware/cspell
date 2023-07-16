@@ -38,9 +38,9 @@ describe('prefetch', () => {
         const iterable = prefetchIterable(
             pipe(
                 src,
-                opMap((fn) => fn())
+                opMap((fn) => fn()),
             ),
-            5
+            5,
         );
 
         const values: number[] = [];

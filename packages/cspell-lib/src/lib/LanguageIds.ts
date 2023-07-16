@@ -299,7 +299,7 @@ export function isGenerated(languageId: LanguageId | LanguageId[] | Iterable<Lan
 
 function doesSetContainAnyOf(
     setOfIds: Set<LanguageId>,
-    languageId: LanguageId | LanguageId[] | Iterable<LanguageId>
+    languageId: LanguageId | LanguageId[] | Iterable<LanguageId>,
 ): boolean {
     if (typeof languageId === 'string') {
         return setOfIds.has(languageId);

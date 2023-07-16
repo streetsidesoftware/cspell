@@ -95,7 +95,7 @@ describe('Validate Suggest', () => {
             sugOpts({
                 numSuggestions: 3,
                 filter: (word) => word !== 'joyfully',
-            })
+            }),
         );
         collector.collect(genSuggestions(trie, collector.word));
         const suggestions = collector.suggestions.map((s) => s.word);
@@ -151,7 +151,7 @@ describe('Validate Suggest', () => {
     test('Tests the collector with filter', () => {
         const collector = suggestionCollector(
             'joyfull',
-            sugOpts({ numSuggestions: 3, filter: (word) => word !== 'joyfully' })
+            sugOpts({ numSuggestions: 3, filter: (word) => word !== 'joyfully' }),
         );
         collector.add({ word: 'joyfully', cost: 100 }).add({ word: 'joyful', cost: 100 });
         expect(collector.suggestions).toHaveLength(1);
@@ -160,7 +160,7 @@ describe('Validate Suggest', () => {
     test('Tests the collector with duplicate words of different costs', () => {
         const collector = suggestionCollector(
             'joyfull',
-            sugOpts({ numSuggestions: 3, filter: (word) => word !== 'joyfully' })
+            sugOpts({ numSuggestions: 3, filter: (word) => word !== 'joyfully' }),
         );
         collector.add({ word: 'joyful', cost: 100 });
         expect(collector.suggestions.length).toBe(1);
@@ -228,7 +228,7 @@ describe('Validate Suggest', () => {
             trie.genSuggestions(collector);
             const r = collector.suggestions;
             expect(r).toEqual(expected);
-        }
+        },
     );
 
     test.each`

@@ -90,7 +90,7 @@ function* nodeWalker(root: ITrieNode): WalkerIterator {
 
 export function walker(
     root: ITrieNode,
-    compoundingMethod: CompoundWordsMethod = CompoundWordsMethod.NONE
+    compoundingMethod: CompoundWordsMethod = CompoundWordsMethod.NONE,
 ): WalkerIterator {
     return compoundingMethod === CompoundWordsMethod.NONE ? nodeWalker(root) : compoundWalker(root, compoundingMethod);
 }

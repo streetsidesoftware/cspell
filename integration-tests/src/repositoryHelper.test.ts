@@ -50,7 +50,7 @@ describe('Validate repository helper', () => {
             // console.log(logger.logs);
             // console.log(logger.errors);
         },
-        defaultTimeout
+        defaultTimeout,
     );
 
     test.each`
@@ -64,6 +64,6 @@ describe('Validate repository helper', () => {
             expect(await addRepository(logger, repo, undefined)).toEqual(expect.objectContaining({ path, url: repo }));
             expect(mockAddRepository).toHaveBeenCalledWith(path, repo, expect.any(String), undefined);
         },
-        defaultTimeout
+        defaultTimeout,
     );
 });

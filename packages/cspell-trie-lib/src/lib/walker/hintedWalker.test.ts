@@ -60,7 +60,7 @@ describe('Validate Util Functions', () => {
             const i = hintedWalker(trie.root, ignoreCase, 'a', compoundMethod, sep);
             const result = walkerToArray(i, depth);
             expect(result).toEqual(expected);
-        }
+        },
     );
 });
 

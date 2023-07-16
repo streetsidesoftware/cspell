@@ -21,7 +21,7 @@ const wordListHeaderLines = wordListHeader.split('\n').map((a) => a.trim());
 export async function compileWordList(
     lines: Iterable<string>,
     destFilename: string,
-    options: CompileOptions
+    options: CompileOptions,
 ): Promise<void> {
     const finalLines = normalize(lines, options);
 
@@ -46,8 +46,8 @@ function createWordListTarget(destFilename: string): (seq: Iterable<string>) => 
         target(
             pipe(
                 seq,
-                opMap((a) => a + '\n')
-            )
+                opMap((a) => a + '\n'),
+            ),
         );
 }
 
@@ -75,7 +75,7 @@ export interface CompileTrieOptions extends CompileOptions, TrieOptions {}
 export async function compileTrie(
     words: Iterable<string>,
     destFilename: string,
-    options: CompileTrieOptions
+    options: CompileTrieOptions,
 ): Promise<void> {
     await createTrieTarget(destFilename, options)(words);
 }
@@ -96,7 +96,7 @@ function createTrieTarget(destFilename: string, options: TrieOptions): (words: I
                 base,
                 comment: 'Built by cspell-tools.',
                 version,
-            })
+            }),
         );
         log(`Done writing to file ${path.basename(destFilename)}`);
     };

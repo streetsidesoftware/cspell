@@ -28,7 +28,7 @@ describe('Validate the iterateWordsFromFile', () => {
         const results = [...reader.words];
         expect(results.join('|')).toBe(
             'amsterdam|angeles|city|delhi|francisco|london|los|los angeles' +
-                '|mexico|mexico city|new|new amsterdam|new delhi|new york|paris|san|san francisco|york'
+                '|mexico|mexico city|new|new amsterdam|new delhi|new york|paris|san|san francisco|york',
         );
     });
 
@@ -49,7 +49,7 @@ describe('Validate the iterateWordsFromFile', () => {
         const results = [...reader.words];
         expect(results.join('|')).toBe(
             'amsterdam|angeles|city|delhi|francisco|london|los|los angeles' +
-                '|mexico|mexico city|new|new amsterdam|new delhi|new york|paris|san|san francisco|york'
+                '|mexico|mexico city|new|new amsterdam|new delhi|new york|paris|san|san francisco|york',
         );
     });
 
@@ -58,7 +58,7 @@ describe('Validate the iterateWordsFromFile', () => {
         const results = [...reader.words];
         // the results are sorted
         expect(results.join('|')).toBe(
-            'New York|New Amsterdam|Los Angeles|San Francisco|New Delhi|Mexico City|London|Paris'
+            'New York|New Amsterdam|Los Angeles|San Francisco|New Delhi|Mexico City|London|Paris',
         );
     });
 

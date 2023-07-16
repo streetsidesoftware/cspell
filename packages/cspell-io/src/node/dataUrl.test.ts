@@ -12,7 +12,7 @@ describe('dataUrl', () => {
         ${'Hello, World!'}              | ${'text/plain'}             | ${[['filename', 'hello.txt']]} | ${'data:text/plain;charset=utf8;filename=hello.txt,Hello%2C%20World!'}
         ${'Hello, World! %%%%$$$$,,,,'} | ${'text/plain'}             | ${undefined}                   | ${'data:text/plain;charset=utf8;base64,SGVsbG8sIFdvcmxkISAlJSUlJCQkJCwsLCw'}
         ${Buffer.from('Hello, World!')} | ${'text/plain'}             | ${[['filename', 'hello.txt']]} | ${'data:text/plain;filename=hello.txt;base64,SGVsbG8sIFdvcmxkIQ' /* cspell:disable-line */}
-        ${'☸☹☺☻☼☾☿'}                    | ${'text/plain'}             | ${undefined}                   | ${'data:text/plain;charset=utf8;base64,4pi44pi54pi64pi74pi84pi-4pi_'}
+        ${'☸☹☺☻☼☾☿'}                 | ${'text/plain'}             | ${undefined}                   | ${'data:text/plain;charset=utf8;base64,4pi44pi54pi64pi74pi84pi-4pi_'}
         ${'Hello, World!'}              | ${'application/vnd.cspell'} | ${undefined}                   | ${'data:application/vnd.cspell;charset=utf8,Hello%2C%20World!'}
     `('encodeDataUrl $data', ({ data, mediaType, attributes, expected }) => {
         const url = encodeDataUrl(data, mediaType, attributes);

@@ -43,7 +43,11 @@ export class TrieBlob implements TrieData {
     private _size: number | undefined;
     private _iTrieRoot: ITrieNodeRoot | undefined;
 
-    constructor(protected nodes: Uint32Array, protected charIndex: string[], info: PartialTrieInfo) {
+    constructor(
+        protected nodes: Uint32Array,
+        protected charIndex: string[],
+        info: PartialTrieInfo,
+    ) {
         this.info = mergeOptionalWithDefaults(info);
         this.charToIndexMap = Object.create(null);
         for (let i = 0; i < charIndex.length; ++i) {

@@ -5,7 +5,7 @@ import { isDefined } from '../util/util.js';
 
 export function resolvePatterns(
     regExpList: (string | RegExp)[] = [],
-    patternDefinitions: RegExpPatternDefinition[] = []
+    patternDefinitions: RegExpPatternDefinition[] = [],
 ): RegExp[] {
     const patternMap = new Map(patternDefinitions.map((def) => [def.name.toLowerCase(), def.pattern]));
 

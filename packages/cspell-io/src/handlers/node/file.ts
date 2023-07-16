@@ -46,7 +46,7 @@ const handleRequestFsReadBinaryFile = RequestFsReadBinaryFile.createRequestHandl
     ({ params }) =>
         createResponse(fs.readFile(fileURLToPath(params.url)).then((content) => ({ url: params.url, content }))),
     undefined,
-    'Node: Read Binary File.'
+    'Node: Read Binary File.',
 );
 
 /**
@@ -55,7 +55,7 @@ const handleRequestFsReadBinaryFile = RequestFsReadBinaryFile.createRequestHandl
 const handleRequestFsReadBinaryFileSync = RequestFsReadBinaryFileSync.createRequestHandler(
     ({ params }) => createResponse({ url: params.url, content: readFileSync(fileURLToPath(params.url)) }),
     undefined,
-    'Node: Sync Read Binary File.'
+    'Node: Sync Read Binary File.',
 );
 
 /**
@@ -78,11 +78,11 @@ const handleRequestFsReadFile = RequestFsReadFile.createRequestHandler(
                     encoding,
                     ...content,
                 };
-            })
+            }),
         );
     },
     undefined,
-    'Node: Read Text File.'
+    'Node: Read Text File.',
 );
 
 /**
@@ -103,7 +103,7 @@ const handleRequestFsReadFileSync = RequestFsReadFileSync.createRequestHandler(
         });
     },
     undefined,
-    'Node: Sync Read Text File.'
+    'Node: Sync Read Text File.',
 );
 
 /**
@@ -112,7 +112,7 @@ const handleRequestFsReadFileSync = RequestFsReadFileSync.createRequestHandler(
 const handleRequestZlibInflate = RequestZlibInflate.createRequestHandler(
     ({ params }) => createResponse(gunzipSync(params.data).toString('utf-8')),
     undefined,
-    'Node: gz deflate.'
+    'Node: gz deflate.',
 );
 
 const supportedFetchProtocols: Record<string, true | undefined> = { 'http:': true, 'https:': true };
@@ -127,7 +127,7 @@ const handleRequestFsReadBinaryFileHttp = RequestFsReadBinaryFile.createRequestH
         return createResponse(fetchURL(url).then((content) => ({ url, content })));
     },
     undefined,
-    'Node: Read Http(s) file.'
+    'Node: Read Http(s) file.',
 );
 
 /**
@@ -141,7 +141,7 @@ const handleRequestFsReadBinaryFileSyncData = RequestFsReadBinaryFileSync.create
         return createResponse({ url, content: data.data, baseFilename: data.attributes.get('filename') });
     },
     undefined,
-    'Node: Read data: urls.'
+    'Node: Read data: urls.',
 );
 
 /**
@@ -156,7 +156,7 @@ const handleRequestFsReadBinaryFileData = RequestFsReadBinaryFile.createRequestH
         return createResponse(Promise.resolve(res.value));
     },
     undefined,
-    'Node: Read data: urls.'
+    'Node: Read data: urls.',
 );
 
 function bufferToText(data: ArrayBufferView, encoding: BufferEncoding): { content: string; gz: boolean } {
@@ -172,7 +172,7 @@ function bufferToText(data: ArrayBufferView, encoding: BufferEncoding): { conten
 const handleRequestFsStat = RequestFsStat.createRequestHandler(
     ({ params }) => createResponse(fs.stat(fileURLToPath(params.url))),
     undefined,
-    'Node: fs.stat.'
+    'Node: fs.stat.',
 );
 
 /**
@@ -188,7 +188,7 @@ const handleRequestFsStatSync = RequestFsStatSync.createRequestHandler(
         }
     },
     undefined,
-    'Node: fs.stat.'
+    'Node: fs.stat.',
 );
 
 /**
@@ -201,7 +201,7 @@ const handleRequestFsStatHttp = RequestFsStat.createRequestHandler(
         return createResponse(getStatHttp(url));
     },
     undefined,
-    'Node: http get stat'
+    'Node: http get stat',
 );
 
 /**
@@ -210,7 +210,7 @@ const handleRequestFsStatHttp = RequestFsStat.createRequestHandler(
 const handleRequestFsWriteFile = RequestFsWriteFile.createRequestHandler(
     ({ params }) => createResponse(fs.writeFile(params.url, params.content)),
     undefined,
-    'Node: fs.writeFile'
+    'Node: fs.writeFile',
 );
 
 /**
@@ -223,7 +223,7 @@ const handleRequestFsWriteFileGz = RequestFsWriteFile.createRequestHandler(
         return createResponse(fs.writeFile(url, gzipSync(content)));
     },
     undefined,
-    'Node: http get stat'
+    'Node: http get stat',
 );
 
 export function registerHandlers(serviceBus: ServiceBus) {

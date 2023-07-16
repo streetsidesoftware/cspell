@@ -57,7 +57,7 @@ export type DictionaryDefinitionInternalWithSource = DictionaryDefinitionInterna
 };
 
 export function cleanCSpellSettingsInternal(
-    parts: OptionalOrUndefined<Partial<CSpellSettingsInternal>> = {}
+    parts: OptionalOrUndefined<Partial<CSpellSettingsInternal>> = {},
 ): CSpellSettingsInternal {
     const csi = clean(parts as CSpellSettingsInternal);
     Object.assign(csi, { [SymbolCSpellSettingsInternal]: true });
@@ -65,7 +65,7 @@ export function cleanCSpellSettingsInternal(
 }
 
 export function createCSpellSettingsInternal(
-    parts: OptionalOrUndefined<Partial<CSpellSettingsInternal>> = {}
+    parts: OptionalOrUndefined<Partial<CSpellSettingsInternal>> = {},
 ): CSpellSettingsInternal {
     return clean({
         ...parts,
@@ -77,13 +77,13 @@ export function isCSpellSettingsInternal(
     cs:
         | CSpellSettingsInternal
         | CSpellSettingsWithSourceTrace
-        | OptionalOrUndefined<CSpellSettingsInternal | CSpellSettingsWithSourceTrace>
+        | OptionalOrUndefined<CSpellSettingsInternal | CSpellSettingsWithSourceTrace>,
 ): cs is CSpellSettingsInternal {
     return !!(<CSpellSettingsInternal>cs)[SymbolCSpellSettingsInternal];
 }
 
 export function isDictionaryDefinitionInlineInternal(
-    def: DictionaryDefinitionInternal | DictionaryDefinitionInline | DictionaryDefinition
+    def: DictionaryDefinitionInternal | DictionaryDefinitionInline | DictionaryDefinition,
 ): def is DictionaryDefinitionInlineInternal {
     if (def.path) return false;
     const defInline = def as DictionaryDefinitionInline;

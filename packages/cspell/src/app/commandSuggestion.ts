@@ -39,18 +39,18 @@ export function commandSuggestion(prog: Command): Command {
         .description('Spelling Suggestions for words.')
         .option(
             '-c, --config <cspell.json>',
-            'Configuration file to use.  By default cspell looks for cspell.json in the current directory.'
+            'Configuration file to use.  By default cspell looks for cspell.json in the current directory.',
         )
         .option(
             '--locale <locale>',
-            'Set language locales. i.e. "en,fr" for English and French, or "en-GB" for British English.'
+            'Set language locales. i.e. "en,fr" for English and French, or "en-GB" for British English.',
         )
         .option('--language-id <language>', 'Use programming language. i.e. "php" or "scala".')
         .addOption(
             new CommanderOption(
                 '--languageId <language>',
-                'Use programming language. i.e. "php" or "scala".'
-            ).hideHelp()
+                'Use programming language. i.e. "php" or "scala".',
+            ).hideHelp(),
         )
         .option('-s, --no-strict', 'Ignore case and accents when searching for words.')
         .option('--ignore-case', 'Alias of --no-strict.')
@@ -58,7 +58,7 @@ export function commandSuggestion(prog: Command): Command {
         .option('--num-suggestions <number>', 'Number of suggestions', asNumber, 8)
         .option(
             '--no-include-ties',
-            'Force the number of suggested to be limited, by not including suggestions that have the same edit cost.'
+            'Force the number of suggested to be limited, by not including suggestions that have the same edit cost.',
         )
         .option('--stdin', 'Use stdin for input.')
         .addOption(new CommanderOption('--repl', 'REPL interface for looking up suggestions.'))
@@ -66,11 +66,11 @@ export function commandSuggestion(prog: Command): Command {
         .option(
             '-d, --dictionary <dictionary name>',
             'Use the dictionary specified. Only dictionaries specified will be used.',
-            collect
+            collect,
         )
         .option(
             '--dictionaries <dictionary names...>',
-            'Use the dictionaries specified. Only dictionaries specified will be used.'
+            'Use the dictionaries specified. Only dictionaries specified will be used.',
         )
         .option('--no-color', 'Turn off color.')
         .option('--color', 'Force color')

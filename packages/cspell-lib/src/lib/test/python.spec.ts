@@ -21,7 +21,7 @@ describe('Validate that Python files are correctly checked.', () => {
             const languageIds = cspell.getLanguagesForExt(ext);
             const settings = cspell.mergeSettings(
                 cspell.getDefaultBundledSettings(),
-                cspell.readSettings(sampleConfig)
+                cspell.readSettings(sampleConfig),
             );
             const fileSettings = cspell.combineTextAndLanguageSettings(settings, text, languageIds);
             return cspell.validateText(text, fileSettings).then((results) => {
@@ -31,6 +31,6 @@ describe('Validate that Python files are correctly checked.', () => {
                 return;
             });
         },
-        { timeout }
+        { timeout },
     );
 });

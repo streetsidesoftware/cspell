@@ -22,7 +22,7 @@ describe('Validate the Reader with Dutch', () => {
             ...pipe(
                 reader.lines,
                 opFilter((word) => regBoek.test(word)),
-                opTake(8)
+                opTake(8),
             ),
         ];
         expect(results.join(' ')).toBe('+boek +boeken +boeken+ +boeken- +boeken-+ +boeker +boeket +boekje');

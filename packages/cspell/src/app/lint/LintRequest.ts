@@ -27,7 +27,7 @@ export class LintRequest {
     constructor(
         readonly fileGlobs: string[],
         readonly options: LinterOptions & Deprecated,
-        readonly reporter: FinalizedReporter
+        readonly reporter: FinalizedReporter,
     ) {
         this.root = path.resolve(options.root || process.cwd());
         this.configFile = options.config;

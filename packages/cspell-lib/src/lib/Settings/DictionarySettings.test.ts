@@ -17,7 +17,7 @@ describe('Validate DictionarySettings', () => {
     test('expects default to not be empty', () => {
         const mapDefs = DictSettings.filterDictDefsToLoad(
             createRefCol(['php', 'wordsEn', 'unknown', 'en_us']),
-            defaultSettings.dictionaryDefinitions!
+            defaultSettings.dictionaryDefinitions!,
         );
         const files = mapDefs.map((def) => def.name!);
         expect(mapDefs).toHaveLength(2);
@@ -93,7 +93,7 @@ describe('Validate DictionarySettings', () => {
                 name: 'words',
                 path: absolutePath,
                 __source: pathToConfig,
-            })
+            }),
         );
 
         const legacyDef: DictionaryDefinitionLegacy = {

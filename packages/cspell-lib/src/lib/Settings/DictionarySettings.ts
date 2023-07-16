@@ -41,7 +41,7 @@ export type DefMapArrayItem = [string, DictionaryDefinitionInternal];
  */
 export function filterDictDefsToLoad(
     dictRefCol: DictionaryReferenceCollection,
-    defs: DictionaryDefinitionInternal[]
+    defs: DictionaryDefinitionInternal[],
 ): DictionaryDefinitionInternal[] {
     const allActiveDefs = defs.filter(({ name }) => dictRefCol.isEnabled(name)).map(fixPath);
     return [...new Map(allActiveDefs.map((d) => [d.name, d])).values()];
@@ -67,15 +67,15 @@ function fixDicPath(defPath: string | undefined, defFile: string | undefined): s
 export function mapDictDefsToInternal(defs: undefined, pathToSettingsFile: string): undefined;
 export function mapDictDefsToInternal(
     defs: DictionaryDefinition[],
-    pathToSettingsFile: string
+    pathToSettingsFile: string,
 ): DictionaryDefinitionInternalWithSource[];
 export function mapDictDefsToInternal(
     defs: DictionaryDefinition[] | undefined,
-    pathToSettingsFile: string
+    pathToSettingsFile: string,
 ): DictionaryDefinitionInternalWithSource[] | undefined;
 export function mapDictDefsToInternal(
     defs: DictionaryDefinition[] | undefined,
-    pathToSettingsFile: string
+    pathToSettingsFile: string,
 ): DictionaryDefinitionInternalWithSource[] | undefined {
     return defs?.map((def) => mapDictDefToInternal(def, pathToSettingsFile));
 }
@@ -84,14 +84,14 @@ const internalDefs = new AutoResolveWeakCache<DictionaryDefinition, DictionaryDe
 
 export function mapDictDefToInternal(
     def: DictionaryDefinition,
-    pathToSettingsFile: string
+    pathToSettingsFile: string,
 ): DictionaryDefinitionInternalWithSource {
     return internalDefs.get(def, (def) => _mapDictDefToInternal(def, pathToSettingsFile));
 }
 
 function _mapDictDefToInternal(
     def: DictionaryDefinition,
-    pathToSettingsFile: string
+    pathToSettingsFile: string,
 ): DictionaryDefinitionInternalWithSource {
     if (isDictionaryDefinitionWithSource(def)) {
         return def;
@@ -124,25 +124,25 @@ type DictDef = Partial<
 >;
 
 export function isDictionaryDefinitionWithSource(
-    d: DictionaryDefinition | DictionaryDefinitionInternalWithSource
+    d: DictionaryDefinition | DictionaryDefinitionInternalWithSource,
 ): d is DictionaryDefinitionInternalWithSource {
     return isDictionaryFileDefinitionInternalWithSource(d) || isDictionaryDefinitionInlineInternalWithSource(d);
 }
 
 export function isDictionaryDefinitionInternal(
-    def: DictionaryDefinition | DictionaryDefinitionInternal
+    def: DictionaryDefinition | DictionaryDefinitionInternal,
 ): def is DictionaryDefinitionInternal {
     return def instanceof _DictionaryDefinitionInternalWithSource;
 }
 
 export function isDictionaryFileDefinitionInternalWithSource(
-    def: DictionaryDefinition | DictionaryDefinitionInternal
+    def: DictionaryDefinition | DictionaryDefinitionInternal,
 ): def is DictionaryFileDefinitionInternalWithSource {
     return def instanceof _DictionaryDefinitionInternalWithSource;
 }
 
 export function isDictionaryDefinitionInlineInternalWithSource(
-    def: DictionaryDefinition | DictionaryDefinitionInternal
+    def: DictionaryDefinition | DictionaryDefinitionInternal,
 ): def is DictionaryDefinitionInternalWithSource {
     return isDictionaryDefinitionInlineInternal(def) && !!def.__source;
 }
@@ -163,7 +163,10 @@ class _DictionaryDefinitionInternalWithSource implements DictionaryFileDefinitio
     readonly noSuggest?: boolean;
     readonly scope?: CustomDictionaryScope | CustomDictionaryScope[];
     private ddi: DDI;
-    constructor(def: DictionaryDefinition, readonly __source: string) {
+    constructor(
+        def: DictionaryDefinition,
+        readonly __source: string,
+    ) {
         // this bit of assignment is to have the compiler help use if any new fields are added.
         const defAll: DictDef = def;
         const {

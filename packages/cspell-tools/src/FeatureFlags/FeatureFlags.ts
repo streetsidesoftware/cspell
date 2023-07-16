@@ -70,7 +70,7 @@ export class FeatureFlags {
 
     help(): string {
         const flags = [{ name: 'Name', description: 'Description' }, ...this.flags.values()].sort((a, b) =>
-            a.name < b.name ? -1 : 1
+            a.name < b.name ? -1 : 1,
         );
 
         const nameColWidth = flags.map((f) => f.name.length).reduce((a, b) => Math.max(a, b), 0) + 1;

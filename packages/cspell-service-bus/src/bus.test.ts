@@ -31,7 +31,7 @@ type FibRequestFactory = typeof FibRequestFactory;
 type FibRequest = ServiceRequestFactoryRequestType<FibRequestFactory>;
 
 const StringLengthRequestFactory = requestFactory<'calc-string-length', { readonly str: string }, number>(
-    'calc-string-length'
+    'calc-string-length',
 );
 
 class StringToUpperRequest extends ServiceRequestCls<'toUpper', { readonly str: string }, string> {
@@ -61,12 +61,12 @@ class RetryAgainRequest extends ServiceRequestCls<'Retry Again Request', undefin
 const handlerStringLengthRequest = createIsRequestHandler(
     StringLengthRequestFactory.is,
     (r) => response(r.params.str.length),
-    'handlerStringLengthRequest'
+    'handlerStringLengthRequest',
 );
 const handlerStringToUpperRequest = createIsRequestHandler(
     StringToUpperRequest.is,
     (r) => response(r.str.toLocaleUpperCase()),
-    'handlerStringToUpperRequest'
+    'handlerStringToUpperRequest',
 );
 const handlerRetryAgainRequest: Handler = {
     fn: (service: Dispatcher) => (next) => (request) =>

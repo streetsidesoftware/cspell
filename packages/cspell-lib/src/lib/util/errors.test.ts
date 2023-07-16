@@ -73,7 +73,7 @@ describe('errors', () => {
         await expect(
             catchPromiseError(Promise.reject('error'), (e) => {
                 throw e;
-            })
+            }),
         ).rejects.toBe('error');
     });
 

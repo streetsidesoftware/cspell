@@ -31,7 +31,10 @@ export class Trie {
     private _findOptionsExact: FindOptions;
     readonly isLegacy: boolean;
     private hasForbidden: boolean;
-    constructor(readonly root: TrieRoot, private count?: number) {
+    constructor(
+        readonly root: TrieRoot,
+        private count?: number,
+    ) {
         this._options = mergeOptionalWithDefaults(root);
         this.isLegacy = this.calcIsLegacy();
         this.hasForbidden = !!root.c[root.forbiddenWordPrefix];
@@ -129,7 +132,7 @@ export class Trie {
         const subNodes = pipe(
             iteratorTrieWords(n || {}),
             opFilter((w) => w[w.length - 1] !== compoundChar),
-            opMap((suffix) => text + suffix)
+            opMap((suffix) => text + suffix),
         );
         return pipe(n && isWordTerminationNode(n) ? [text] : [], opAppend(subNodes));
     }

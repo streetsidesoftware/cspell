@@ -42,7 +42,7 @@ async function _fetchTextFromURL(url: URL, encoding?: BufferEncoding): Promise<s
 async function _readText(
     getStream: () => NodeJS.ReadableStream,
     isZipped: boolean,
-    encoding?: BufferEncoding
+    encoding?: BufferEncoding,
 ): Promise<string> {
     const stream = getStream();
     const decoder = createDecoderTransformer(encoding);
@@ -70,7 +70,7 @@ function createTextCollector(encoding: BufferEncoding) {
                     ? sb
                     : encoding === 'utf16be'
                     ? sb.swap16().toString('utf16le')
-                    : sb.toString(encoding)
+                    : sb.toString(encoding),
             );
         }
         return buf.join('');

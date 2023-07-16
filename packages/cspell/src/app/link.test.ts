@@ -35,7 +35,7 @@ describe('Validate link.ts', () => {
                     languageSettings: undefined,
                     package: undefined,
                 },
-            ])
+            ]),
         ).toEqual({
             header: ['id', 'package', 'name', 'filename', 'dictionaries', 'errors'],
             rows: [
@@ -64,7 +64,7 @@ describe('Validate link.ts', () => {
                     },
                 ].map((v) => clean(v)),
                 error: undefined,
-            })
+            }),
         ).toEqual({
             header: ['filename', 'errors'],
             rows: [

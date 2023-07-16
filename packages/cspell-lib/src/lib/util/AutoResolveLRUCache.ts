@@ -20,7 +20,10 @@ export class AutoResolveLRUCache<T, V> {
     private _added = 0;
     private _removed = 0;
 
-    constructor(readonly maxSize: number, readonly isEqual: (a: T, b: T) => boolean) {
+    constructor(
+        readonly maxSize: number,
+        readonly isEqual: (a: T, b: T) => boolean,
+    ) {
         assert(maxSize > 0);
     }
 

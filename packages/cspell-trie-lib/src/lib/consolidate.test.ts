@@ -57,7 +57,7 @@ function walk(root: TrieNode): IterableIterator<string> {
         }
         if (node.c) {
             yield* genSequence(Object.entries(node.c)).concatMap((a) =>
-                genSequence(w(a[1], a[0])).map((suffix) => prefix + suffix)
+                genSequence(w(a[1], a[0])).map((suffix) => prefix + suffix),
             );
         }
     }

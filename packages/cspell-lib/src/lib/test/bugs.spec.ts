@@ -23,13 +23,13 @@ describe('Validate Against Bug Fixes', () => {
                 const languageIds = cspell.getLanguagesForExt(ext);
                 const settings = cspell.mergeSettings(
                     cspell.getDefaultBundledSettings(),
-                    cspell.readSettings(configFile)
+                    cspell.readSettings(configFile),
                 );
                 const fileSettings = cspell.combineTextAndLanguageSettings(settings, text, languageIds);
                 const result = await cspell.validateText(text, fileSettings);
                 expect(result).toMatchSnapshot();
             },
-            { timeout }
+            { timeout },
         );
     }
 

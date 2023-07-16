@@ -122,8 +122,8 @@ export function lineValidatorFactory(sDict: SpellingDictionary, options: Validat
                     opMap((wo) => ({
                         ...wo,
                         text: Text.extractText(lineSegment.segment, wo.offset, wo.offset + wo.text.length),
-                    }))
-                )
+                    })),
+                ),
             );
 
             if (!codeWordResults.length || isWordIgnored(vr.text) || checkWord(vr).isFound) {
@@ -151,8 +151,8 @@ export function lineValidatorFactory(sDict: SpellingDictionary, options: Validat
                     opMap((wo) => ({ ...wo, line: lineSegment.line })),
                     opMap(annotateIsFlagged),
                     opFilter(rememberFilter((wo) => wo.text.length >= minWordLength || !!wo.isFlagged)),
-                    opConcatMap(checkFullWord)
-                )
+                    opConcatMap(checkFullWord),
+                ),
             );
             if (mismatches.length) {
                 // Try the more expensive word splitter
@@ -169,7 +169,7 @@ export function lineValidatorFactory(sDict: SpellingDictionary, options: Validat
             Text.extractPossibleWordsFromTextOffset(lineSegment.segment),
             opFilter(filterAlreadyChecked),
             opConcatMap(checkPossibleWords),
-            opMap(annotateIssue)
+            opMap(annotateIssue),
         );
         return checkedPossibleWords;
     };

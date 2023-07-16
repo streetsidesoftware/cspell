@@ -21,7 +21,7 @@ type Data = Omit<CSpellJSONReporterOutput, 'result'>;
 
 export function getReporter(
     settings: unknown | CSpellJSONReporterSettings,
-    cliOptions?: ReporterConfiguration
+    cliOptions?: ReporterConfiguration,
 ): Required<CSpellReporter> {
     const useSettings = normalizeSettings(settings);
     const reportData: Data = { issues: [], info: [], debug: [], error: [], progress: [] };

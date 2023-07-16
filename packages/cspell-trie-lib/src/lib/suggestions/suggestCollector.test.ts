@@ -21,7 +21,7 @@ describe('Validate suggestCollector', () => {
     test('Tests the collector with filter', () => {
         const collector = suggestionCollector(
             'joyfully',
-            sugOpts({ numSuggestions: 3, filter: (word) => word !== 'joyfully' })
+            sugOpts({ numSuggestions: 3, filter: (word) => word !== 'joyfully' }),
         );
         collector.add({ word: 'joyfully', cost: 100 }).add({ word: 'joyful', cost: 100 });
         expect(collector.suggestions).toHaveLength(1);
@@ -30,7 +30,7 @@ describe('Validate suggestCollector', () => {
     test('Tests the collector with duplicate words of different costs', () => {
         const collector = suggestionCollector(
             'joyfully',
-            sugOpts({ numSuggestions: 3, filter: (word) => word !== 'joyfully' })
+            sugOpts({ numSuggestions: 3, filter: (word) => word !== 'joyfully' }),
         );
         collector.add({ word: 'joyful', cost: 100 });
         expect(collector.suggestions.length).toBe(1);
@@ -66,7 +66,7 @@ describe('Validate suggestCollector', () => {
 
         const collector = suggestionCollector(
             'joyfully',
-            sugOpts({ numSuggestions: 3, filter: (word) => word !== 'joyfully' })
+            sugOpts({ numSuggestions: 3, filter: (word) => word !== 'joyfully' }),
         );
         collector.collect(emit());
         expect(collector.suggestions.length).toBe(3);
@@ -109,7 +109,7 @@ describe('Validate suggestCollector', () => {
         const weightMap = sampleWeightMapNoDefaultWeights();
         const collector = suggestionCollector(
             word,
-            sugOpts({ numSuggestions: 3, changeLimit: 5, includeTies: true, weightMap })
+            sugOpts({ numSuggestions: 3, changeLimit: 5, includeTies: true, weightMap }),
         );
         const sugs = sampleSuggestions().map((sugWord) => ({ word: sugWord, cost: editDistance(word, sugWord) }));
         sugs.forEach((sug) => collector.add(sug));
@@ -118,7 +118,7 @@ describe('Validate suggestCollector', () => {
         expect(
             suggestions
                 .map((a) => a.word)
-                .map((wordB) => formattedDistance(word.normalize('NFD'), wordB.normalize('NFD'), weightMap, 110))
+                .map((wordB) => formattedDistance(word.normalize('NFD'), wordB.normalize('NFD'), weightMap, 110)),
         ).toMatchSnapshot();
 
         expect(suggestions).toEqual(expected);
@@ -138,7 +138,7 @@ describe('Validate suggestCollector', () => {
     `('collect weighted suggestions for "$word"', ({ word, expected }) => {
         const collector = suggestionCollector(
             word,
-            sugOpts({ numSuggestions: 3, changeLimit: 5, includeTies: true, weightMap: sampleWeightMapDi() })
+            sugOpts({ numSuggestions: 3, changeLimit: 5, includeTies: true, weightMap: sampleWeightMapDi() }),
         );
         const sugs = sampleSuggestions().map((sugWord) => ({ word: sugWord, cost: editDistance(word, sugWord) }));
         sugs.forEach((sug) => collector.add(sug));

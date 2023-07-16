@@ -28,7 +28,7 @@ export function splitCamelCaseWordWithOffset(wo: TextOffset): Array<TextOffset> 
         scanMap<string, TextOffset>((last, text) => ({ text, offset: last.offset + last.text.length }), {
             text: '',
             offset: wo.offset,
-        })
+        }),
     );
 }
 
@@ -60,7 +60,7 @@ export function matchToTextOffset(reg: RegExp, text: TextOffset): Iterable<TextO
     textOffset.text.matchAll(reg);
     return pipe(
         match(reg, textOffset.text),
-        opMap((m) => fnOffsetMap<TextOffset>({ text: m[0], offset: m.index || 0 }))
+        opMap((m) => fnOffsetMap<TextOffset>({ text: m[0], offset: m.index || 0 })),
     );
 }
 
@@ -186,19 +186,19 @@ interface OffsetMap {
     offset: number;
 }
 function offsetMap(offset: number) {
-    return <T extends OffsetMap>(xo: T) => ({ ...xo, offset: xo.offset + offset } as T);
+    return <T extends OffsetMap>(xo: T) => ({ ...xo, offset: xo.offset + offset }) as T;
 }
 
 export function calculateTextDocumentOffsets<T extends TextOffset>(
     uri: string | Uri | URL,
     doc: string,
-    wordOffsets: T[]
+    wordOffsets: T[],
 ): (TextDocumentOffset & T)[] {
     const lines = [
         -1,
         ...pipe(
             match(/\n/g, doc),
-            opMap((a) => a.index)
+            opMap((a) => a.index),
         ),
         doc.length,
     ];

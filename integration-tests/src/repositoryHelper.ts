@@ -21,7 +21,7 @@ const githubUrlRegexp = /^(git@github\.com:|https:\/\/github\.com\/).+$/i;
 export async function addRepository(
     logger: Logger,
     url: string,
-    branch: string | undefined
+    branch: string | undefined,
 ): Promise<Repository | undefined> {
     if (!url || !githubUrlRegexp.test(url)) {
         return undefined;
@@ -74,7 +74,7 @@ export async function checkoutRepositoryAsync(
     url: string,
     path: string,
     commit: string,
-    branch: string | undefined
+    branch: string | undefined,
 ): Promise<boolean> {
     const { log, error } = logger;
     path = Path.resolve(Path.join(repositoryDir, path));
@@ -108,7 +108,7 @@ async function cloneRepo(
     { log, error }: Logger,
     url: string,
     path: string,
-    useSingleBranch: boolean
+    useSingleBranch: boolean,
 ): Promise<boolean> {
     log(`Cloning ${url}`);
     await mkdirp(Path.dirname(path));

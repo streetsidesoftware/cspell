@@ -1,7 +1,7 @@
 export function injectSnippet(
     code,
     pos,
-    codeSnippet
+    codeSnippet,
 ): {
     code: string;
     map: { mappings: string };

@@ -228,7 +228,7 @@ export function createParseFileLineMapper(options?: Partial<ParseFileOptions>): 
         splitWords,
         opMap(trim),
         opFilter(filterEmptyLines),
-        unique
+        unique,
     );
 
     return processLines;

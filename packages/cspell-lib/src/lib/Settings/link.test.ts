@@ -70,7 +70,7 @@ describe('Validate Link.ts', () => {
                 globalSettings: expect.objectContaining({
                     source: { filename: configFileLocation, name: 'CSpell Configstore' },
                 }),
-            })
+            }),
         );
     });
 
@@ -92,7 +92,7 @@ describe('Validate Link.ts', () => {
                 globalSettings: expect.objectContaining({
                     source: { filename: configFileLocation, name: 'CSpell Configstore' },
                 }),
-            })
+            }),
         );
         expect(mock_getRawGlobalSettings).toHaveBeenCalledOnce();
         expect(mock_writeRawGlobalSettings).not.toHaveBeenCalled();

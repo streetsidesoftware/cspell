@@ -10,7 +10,11 @@ export interface CSpellConfigFile {
 }
 
 export class ImplCSpellConfigFile implements CSpellConfigFile {
-    constructor(readonly uri: string, readonly settings: CSpellSettings, readonly serializer: Serializer) {}
+    constructor(
+        readonly uri: string,
+        readonly settings: CSpellSettings,
+        readonly serializer: Serializer,
+    ) {}
 
     serialize(): string {
         return this.serializer(this.settings);

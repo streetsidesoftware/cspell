@@ -13,7 +13,7 @@ describe('Validate file reader', () => {
             (error) => {
                 expect(error.toString()).toEqual(expect.stringContaining('Error: ENOENT: no such file or directory'));
                 return true; // convert the error into a success.
-            }
+            },
         );
     });
 

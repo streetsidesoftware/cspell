@@ -47,7 +47,7 @@ export function split(
     line: TextOffset,
     offset: number,
     isValidWord: IsValidWordFn,
-    options: SplitOptions = {}
+    options: SplitOptions = {},
 ): SplitResult {
     const relWordToSplit = findNextWordText({ text: line.text, offset: offset - line.offset });
     const lineOffset = line.offset;
@@ -217,7 +217,7 @@ function genWordBreakCamel(line: LineSegment): SortedBreaks[] {
 function calcBreaksForRegEx(
     line: LineSegment,
     reg: RegExp,
-    calcBreak: (m: RegExpMatchArray) => PossibleWordBreak | undefined
+    calcBreak: (m: RegExpMatchArray) => PossibleWordBreak | undefined,
 ): SortedBreaks {
     const sb: SortedBreaks = [];
     const text = line.line.text.slice(0, line.relEnd);
@@ -313,7 +313,7 @@ interface Candidate {
 function splitIntoWords(
     lineSeg: LineSegment,
     breaks: SortedBreaks,
-    has: (word: TextOffset) => boolean
+    has: (word: TextOffset) => boolean,
 ): TextOffsetWithValid[] {
     const maxIndex = lineSeg.relEnd;
     const maxAttempts = 1000;

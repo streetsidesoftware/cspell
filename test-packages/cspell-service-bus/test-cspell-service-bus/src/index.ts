@@ -33,13 +33,13 @@ function calcFib(request: FibRequest): ServiceResponse<number> {
 
 const TypeRequestFib = 'Computations:calc-fib' as const;
 export const FibRequestFactory = requestFactory<typeof TypeRequestFib, { readonly fib: number }, number>(
-    TypeRequestFib
+    TypeRequestFib,
 );
 type FibRequestFactory = typeof FibRequestFactory;
 type FibRequest = ServiceRequestFactoryRequestType<FibRequestFactory>;
 
 export const StringLengthRequestFactory = requestFactory<'calc-string-length', { readonly str: string }, number>(
-    'calc-string-length'
+    'calc-string-length',
 );
 
 export class StringToUpperRequest extends ServiceRequestCls<'toUpper', { readonly str: string }, string> {
@@ -69,12 +69,12 @@ export class RetryAgainRequest extends ServiceRequestCls<'Retry Again Request', 
 const handlerStringLengthRequest = createIsRequestHandler(
     StringLengthRequestFactory.is,
     (r) => createResponse(r.params.str.length),
-    'handlerStringLengthRequest'
+    'handlerStringLengthRequest',
 );
 const handlerStringToUpperRequest = createIsRequestHandler(
     StringToUpperRequest.is,
     (r) => createResponse(r.str.toLocaleUpperCase()),
-    'handlerStringToUpperRequest'
+    'handlerStringToUpperRequest',
 );
 const handlerRetryAgainRequest: Handler = {
     fn: (service: Dispatcher) => (next) => (request) =>

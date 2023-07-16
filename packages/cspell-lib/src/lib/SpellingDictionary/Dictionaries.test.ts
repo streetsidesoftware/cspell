@@ -184,7 +184,7 @@ describe('Validate getDictionary', () => {
             expect(errors).toHaveLength(expectedErrors.length);
             errors.forEach((e) => expect(isSpellingDictionaryLoadError(e)).toBe(true));
             expect(errors).toEqual(expect.arrayContaining(expectedErrors.map((e) => expect.objectContaining(e))));
-        }
+        },
     );
 });
 

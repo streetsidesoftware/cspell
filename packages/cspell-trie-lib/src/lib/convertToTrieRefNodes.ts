@@ -64,7 +64,7 @@ export function convertToTrieRefNodes(root: TrieNode): IterableIterator<TrieRefN
         }
 
         const children = ((n.c && Object.values(n.c)) || []).sort(
-            (a, b) => (rollupTally.get(b) || 0) - (rollupTally.get(a) || 0)
+            (a, b) => (rollupTally.get(b) || 0) - (rollupTally.get(a) || 0),
         );
 
         for (const c of children) {
