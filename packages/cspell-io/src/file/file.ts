@@ -11,7 +11,7 @@ import type {
 
 export const readFileText: typeof ReadFileTextFn = function (
     filename: string | URL,
-    encoding?: BufferEncoding
+    encoding?: BufferEncoding,
 ): Promise<string> {
     return getDefaultCSpellIO()
         .readFile(filename, encoding)
@@ -20,7 +20,7 @@ export const readFileText: typeof ReadFileTextFn = function (
 
 export const readFileTextSync: typeof ReadFileTextSyncFn = function (
     filename: string | URL,
-    encoding?: BufferEncoding
+    encoding?: BufferEncoding,
 ): string {
     return getDefaultCSpellIO().readFileSync(filename, encoding).content;
 };

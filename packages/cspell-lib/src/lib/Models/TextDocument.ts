@@ -92,7 +92,7 @@ class TextDocumentImpl implements TextDocument {
         text: string,
         readonly languageId: string | string[],
         readonly locale: string | undefined,
-        version: number
+        version: number,
     ) {
         const primaryLanguageId = typeof languageId === 'string' ? languageId : languageId[0] || 'plaintext';
         this.vsTextDoc = VsTextDocument.create(uri.toString(), primaryLanguageId, version, text);
@@ -208,7 +208,7 @@ export function createTextDocument({
 export function updateTextDocument(
     doc: TextDocument,
     edits: TextDocumentContentChangeEvent[],
-    version?: number
+    version?: number,
 ): TextDocument {
     assert(isTextDocumentImpl(doc), 'Unknown TextDocument type');
     return doc.update(edits, version);

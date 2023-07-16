@@ -28,7 +28,7 @@ export function importTrieV3AsTrieRoot(srcLines: string[] | Iterable<string> | s
 
 export function importTrieV3WithBuilder<T extends TrieData>(
     builder: TrieBuilder<T>,
-    srcLines: string[] | Iterable<string> | string
+    srcLines: string[] | Iterable<string> | string,
 ): T {
     const timer = getGlobalPerfTimer();
     const timerStart = timer.start('importTrieV3');

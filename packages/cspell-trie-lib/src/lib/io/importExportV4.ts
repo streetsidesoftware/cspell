@@ -37,7 +37,7 @@ const specialCharacters = stringToCharSet(
     [EOW, BACK, EOL, REF, REF_REL, EOR, ESCAPE, LF, REF_INDEX_BEGIN, REF_INDEX_END, INLINE_DATA_COMMENT_LINE]
         .concat('0123456789'.split(''))
         .concat('`~!@#$%^&*()_-+=[]{};:\'"<>,./?\\|'.split(''))
-        .join('')
+        .join(''),
 );
 
 const SPECIAL_CHARACTERS_MAP = [
@@ -236,7 +236,7 @@ function buildReferenceMap(root: TrieRoot, base: number): ReferenceMap {
     const refCountAndNode = [
         ...pipe(
             refCount,
-            opFilter(([_, ref]) => ref.c >= 2)
+            opFilter(([_, ref]) => ref.c >= 2),
         ),
     ].sort((a, b) => b[1].c - a[1].c || a[1].n - b[1].n);
 
@@ -278,8 +278,8 @@ export function importTrie(linesX: Iterable<string> | string): TrieRoot {
     const iter = tapIterable(
         pipe(
             linesX,
-            opConcatMap((a) => a.split(/^/m))
-        )
+            opConcatMap((a) => a.split(/^/m)),
+        ),
     );
 
     function parseHeaderRows(headerRows: string[]) {
@@ -472,7 +472,7 @@ function parseStream(radix: number, iter: Iterable<string>): TrieRoot {
     reduce(
         pipe(
             iter,
-            opConcatMap((a) => a.split(''))
+            opConcatMap((a) => a.split('')),
         ),
         parserMain,
         {
@@ -480,7 +480,7 @@ function parseStream(radix: number, iter: Iterable<string>): TrieRoot {
             root,
             stack: [{ node: root, s: '' }],
             parser: parseReferenceIndex,
-        }
+        },
     );
 
     return root;

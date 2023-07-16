@@ -30,9 +30,9 @@ describe('Validate that French text is correctly checked.', () => {
                 results
                     .map((a) => a.text)
                     .filter(util.uniqueFn())
-                    .sort()
+                    .sort(),
             ).toEqual([]);
         },
-        { timeout }
+        { timeout },
     );
 });

@@ -264,7 +264,7 @@ export class FastTrieBlobBuilder implements TrieBuilder<FastTrieBlob> {
 
         return FastTrieBlob.create(
             new FastTrieBlobInternals(this.nodes, this.charIndex, this.charToIndexMap, this.bitMasksInfo),
-            this.options
+            this.options,
         );
     }
 

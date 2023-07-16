@@ -17,7 +17,7 @@ export function hintedWalker(
     ignoreCase: boolean,
     hint: string,
     compoundingMethod: CompoundWordsMethod | undefined,
-    emitWordSeparator?: string
+    emitWordSeparator?: string,
 ): HintedWalkerIterator {
     return hintedWalkerNext(root, ignoreCase, hint, compoundingMethod, emitWordSeparator);
 }
@@ -31,7 +31,7 @@ function* hintedWalkerNext(
     ignoreCase: boolean,
     hint: string,
     compoundingMethod: CompoundWordsMethod | undefined,
-    emitWordSeparator = ''
+    emitWordSeparator = '',
 ): HintedWalkerIterator {
     const _compoundingMethod = compoundingMethod ?? CompoundWordsMethod.NONE;
     const trieInfo = root.info;
@@ -80,7 +80,7 @@ function* hintedWalkerNext(
                             letter,
                             node,
                             hintOffset: hintOffset + 1,
-                        }
+                        },
                 )
                 .filter(isDefined);
             // We don't want to suggest the compound character.
@@ -157,7 +157,10 @@ class ITrieNodeFiltered implements ITrieNode {
     private filtered: (readonly [string, number])[];
     private keyMap: Map<string, number>;
 
-    constructor(private srcNode: ITrieNode, predicate: (key: string, idx: number, srcNode: ITrieNode) => boolean) {
+    constructor(
+        private srcNode: ITrieNode,
+        predicate: (key: string, idx: number, srcNode: ITrieNode) => boolean,
+    ) {
         this.id = srcNode.id;
         this.eow = srcNode.eow;
         const keys = srcNode.keys();

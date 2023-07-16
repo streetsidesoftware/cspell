@@ -21,7 +21,7 @@ export class StrongWeakMap<K, V extends object> implements Map<K, V> {
     forEach(
         callbackfn: (value: V, key: K, map: Map<K, V>) => void,
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        thisArg?: any
+        thisArg?: any,
     ): void {
         if (thisArg) {
             callbackfn = callbackfn.bind(thisArg);

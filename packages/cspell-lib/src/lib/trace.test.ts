@@ -25,10 +25,10 @@ describe('Verify trace', () => {
                     { dictName: '[ignoreWords]', found: true },
                     { dictName: '[words]', found: false },
                     { dictName: '[flagWords]', found: true },
-                ])
+                ]),
             );
         },
-        { timeout }
+        { timeout },
     );
 
     // cspell:ignore *error* *code* hte colour
@@ -55,10 +55,13 @@ describe('Verify trace', () => {
             const words = [word];
             const config = getSettings({ allowCompoundWords, flagWords: ['hte'], ignoreWords: ['colour'] });
             const results = await traceWords(words, config, { locale, languageId, ignoreCase });
-            const byName = results.reduce((a, b) => {
-                a[b.dictName] = b;
-                return a;
-            }, {} as Record<string, TraceResult>);
+            const byName = results.reduce(
+                (a, b) => {
+                    a[b.dictName] = b;
+                    return a;
+                },
+                {} as Record<string, TraceResult>,
+            );
 
             // console.log(JSON.stringify(byName));
 
@@ -71,10 +74,10 @@ describe('Verify trace', () => {
                     foundWord,
                     noSuggest,
                     word,
-                })
+                }),
             );
         },
-        { timeout }
+        { timeout },
     );
 
     test(
@@ -101,7 +104,7 @@ describe('Verify trace', () => {
                         dictName: 'en_us',
                         dictSource: expect.stringContaining('en_US.trie.gz'),
                     }),
-                ])
+                ]),
             );
 
             const resultsWithErrors = results.filter((r) => !!r.errors);
@@ -116,10 +119,10 @@ describe('Verify trace', () => {
                             message: expect.stringContaining('failed to load'),
                         }),
                     ]),
-                })
+                }),
             );
         },
-        { timeout }
+        { timeout },
     );
 });
 

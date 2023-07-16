@@ -80,7 +80,7 @@ export function excludeRanges(includeRanges: MatchRange[], excludeRanges: MatchR
 
 function* _excludeRanges(
     includeRanges: SortedMatchRangeArray,
-    excludeRanges: SortedMatchRangeArray
+    excludeRanges: SortedMatchRangeArray,
 ): Generator<MatchRange, undefined, undefined> {
     if (!includeRanges.length) return;
     if (!excludeRanges.length) {

@@ -44,7 +44,11 @@ class SuggestDictionaryImpl implements SuggestDictionary {
      */
     private suggestions: Set<string>;
     private suggestionsLower: Set<string>;
-    constructor(readonly name: string, readonly source: string, readonly typosDef: TyposDef) {
+    constructor(
+        readonly name: string,
+        readonly source: string,
+        readonly typosDef: TyposDef,
+    ) {
         this.size = Object.keys(typosDef).length;
         this.suggestions = extractAllSuggestions(typosDef);
         this.suggestionsLower = new Set(pipe(this.suggestions, mapperRemoveCaseAndAccents));
@@ -82,7 +86,7 @@ class SuggestDictionaryImpl implements SuggestDictionary {
      */
     isSuggestedWord(
         word: string,
-        ignoreCaseAndAccents: IgnoreCaseOption = defaults.isForbiddenIgnoreCaseAndAccents
+        ignoreCaseAndAccents: IgnoreCaseOption = defaults.isForbiddenIgnoreCaseAndAccents,
     ): boolean {
         if (this.suggestions.has(word)) return true;
         const lcWord = word.toLowerCase();
@@ -94,7 +98,7 @@ class SuggestDictionaryImpl implements SuggestDictionary {
         numSuggestions?: number,
         compoundMethod?: CompoundWordsMethod,
         numChanges?: number,
-        ignoreCase?: boolean
+        ignoreCase?: boolean,
     ): SuggestionResult[];
     suggest(word: string, suggestOptions: SuggestOptions): SuggestionResult[];
     public suggest(word: string): SuggestionResult[] {
@@ -148,7 +152,7 @@ const createCache = createAutoResolveWeakCache<string[] | TyposDef | Iterable<Ty
 export function createSuggestDictionary(
     entries: readonly string[] | TyposDef | Iterable<TypoEntry>,
     name: string,
-    source: string
+    source: string,
 ): SuggestDictionary {
     return createCache.get(entries, () => {
         const def = processEntriesToTyposDef(entries);

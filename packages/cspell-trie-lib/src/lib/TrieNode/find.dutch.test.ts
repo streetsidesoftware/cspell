@@ -23,7 +23,7 @@ describe('Validate findWord', () => {
             findWord(trie, 'aanvaardbaard', {
                 matchCase: true,
                 compoundMode: 'none',
-            })
+            }),
         ).toEqual({ ...frFound(false), forbidden: true });
 
         expect(findWord(trie, 'code', { matchCase: true, compoundMode: 'none' })).toEqual({
@@ -37,7 +37,7 @@ describe('Validate findWord', () => {
             findWord(trie, 'code', {
                 matchCase: true,
                 compoundMode: 'compound',
-            })
+            }),
         ).toEqual(frFound('code'));
     });
 
@@ -176,7 +176,7 @@ function processText(text: string): string[] {
                 .replace(/[.0-9,"“():]/g, ' ')
                 .split(/\s+/)
                 .sort()
-                .filter((a) => !!a)
+                .filter((a) => !!a),
         ),
     ];
 }

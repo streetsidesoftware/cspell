@@ -30,7 +30,7 @@ describe('Validate the iterateWordsFromFile', () => {
         const results = [...reader];
         expect(results.join('|')).toBe(
             'amsterdam|angeles|city|delhi|francisco|london|los|los angeles' +
-                '|mexico|mexico city|new|new amsterdam|new delhi|new york|paris|san|san francisco|york'
+                '|mexico|mexico city|new|new amsterdam|new delhi|new york|paris|san|san francisco|york',
         );
     });
 });

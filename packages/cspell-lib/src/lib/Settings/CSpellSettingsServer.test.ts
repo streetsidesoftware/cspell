@@ -29,7 +29,7 @@ describe('Validate CSpellSettingsServer', () => {
             csi({
                 enabledLanguageIds: [],
                 source: { name: 'merged', sources: [left, right] },
-            })
+            }),
         );
     });
 
@@ -41,7 +41,7 @@ describe('Validate CSpellSettingsServer', () => {
                 enabled: true,
                 enabledLanguageIds: [],
                 source: { name: 'merged', sources: [csi(left), csi(enabled)] },
-            })
+            }),
         );
     });
 
@@ -55,7 +55,7 @@ describe('Validate CSpellSettingsServer', () => {
                 enabled: right.enabled,
                 enabledLanguageIds: [],
                 source: { name: 'merged', sources: [left, right] },
-            })
+            }),
         );
     });
 
@@ -67,7 +67,7 @@ describe('Validate CSpellSettingsServer', () => {
                 enabled: false,
                 enabledLanguageIds: [],
                 source: { name: 'merged', sources: [csi(a), csi(b)] },
-            })
+            }),
         );
     });
 
@@ -99,7 +99,7 @@ describe('Validate CSpellSettingsServer', () => {
                 ignorePaths: left.ignorePaths?.concat(right.ignorePaths || []),
                 overrides: left.overrides?.concat(right.overrides || []),
                 source: { name: 'merged', sources: [left, right] },
-            })
+            }),
         );
     });
 
@@ -134,7 +134,7 @@ describe('Validate CSpellSettingsServer', () => {
                 ignorePaths: right.ignorePaths,
                 overrides: right.overrides,
                 source: { name: 'merged', sources: [left, right] },
-            })
+            }),
         );
     });
 
@@ -232,7 +232,7 @@ describe('Validate CSpellSettingsServer', () => {
         const errors = extractImportErrors(settings);
         expect(errors).toHaveLength(1);
         expect(errors.map((ref) => ref.error.toString())).toContainEqual(
-            expect.stringMatching('intentionally-missing-file.json')
+            expect.stringMatching('intentionally-missing-file.json'),
         );
         expect(errors.map((ref) => ref.error.toString())).toContainEqual(expect.stringMatching('Failed to read'));
     });
@@ -268,7 +268,7 @@ describe('Validate CSpellSettingsServer', () => {
                     root: path.dirname(configFile),
                     source: configFile,
                 },
-            ])
+            ]),
         );
         const errors = extractImportErrors(config);
         expect(errors).toEqual([]);
@@ -287,7 +287,7 @@ describe('Validate CSpellSettingsServer', () => {
                     root: path.dirname(configFile),
                     source: configFile,
                 },
-            ])
+            ]),
         );
         const errors = extractImportErrors(config);
         expect(errors).toEqual([]);

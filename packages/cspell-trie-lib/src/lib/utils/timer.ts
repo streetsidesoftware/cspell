@@ -121,11 +121,11 @@ export function createPerfTimer(): PerfTimer {
         }
         const lengths = lineElements.reduce(
             (a, b) => ({ name: m(a.name, b.name), at: m(a.at, b.at), elapsed: m(a.elapsed, b.elapsed) }),
-            { name: 0, at: 0, elapsed: 0 }
+            { name: 0, at: 0, elapsed: 0 },
         );
         const lines = lineElements.map(
             (e) =>
-                `${e.at.padStart(lengths.at)}  ${e.name.padEnd(lengths.name)}  ${e.elapsed.padStart(lengths.elapsed)}`
+                `${e.at.padStart(lengths.at)}  ${e.name.padEnd(lengths.name)}  ${e.elapsed.padStart(lengths.elapsed)}`,
         );
         return lines.join('\n');
     }

@@ -7,10 +7,10 @@ const { addUniqueWordsToListAndSort } = __testing__;
 describe('CSpellConfigFile', () => {
     const listWithComments = '["one", // comment after\n "two",\n // comment before three\n "three"\n]';
     const listWithCommentsSorted = toStr(
-        parse('["one", // comment after\n // comment before three\n "three",\n "two"]')
+        parse('["one", // comment after\n // comment before three\n "three",\n "two"]'),
     );
     const listWithCommentsAddTen = toStr(
-        parse('["one", // comment after\n "ten", \n // comment before three\n "three",\n "two"]')
+        parse('["one", // comment after\n "ten", \n // comment before three\n "three",\n "two"]'),
     );
     test.each`
         list                | toAdd      | expected

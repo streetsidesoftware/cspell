@@ -42,9 +42,9 @@ describe('Util Text', () => {
                 Text.extractWordsFromText(
                     `
             // could've, would've, couldn't've, wasn't, y'all, 'twas, shouldn’t
-        `
-                )
-            )
+        `,
+                ),
+            ),
         ).toEqual([
             { text: "could've", offset: 16 },
             { text: "would've", offset: 26 },
@@ -62,9 +62,9 @@ describe('Util Text', () => {
                 Text.extractWordsFromText(
                     `
             expect(splitCamelCaseWord('hello')).to.deep.equal(['hello']);
-        `
-                )
-            )
+        `,
+                ),
+            ),
         ).toEqual([
             { text: 'expect', offset: 13 },
             { text: 'splitCamelCaseWord', offset: 20 },
@@ -79,9 +79,9 @@ describe('Util Text', () => {
                 Text.extractWordsFromText(
                     `
             expect(splitCamelCaseWord('hello')).to.deep.equal(['hello']);
-        `
-                )
-            )
+        `,
+                ),
+            ),
         ).toEqual([
             { text: 'expect', offset: 13 },
             { text: 'splitCamelCaseWord', offset: 20 },
@@ -96,9 +96,9 @@ describe('Util Text', () => {
                 Text.extractWordsFromText(
                     `
             expect(splitCamelCaseWord('hello'));
-        `
-                )
-            )
+        `,
+                ),
+            ),
         ).toEqual([
             { text: 'expect', offset: 13 },
             { text: 'splitCamelCaseWord', offset: 20 },
@@ -112,9 +112,9 @@ describe('Util Text', () => {
                 Text.extractWordsFromCode(
                     `
             expect(splitCamelCaseWord('hello')).to.deep.equal(['hello']);
-        `
-                )
-            )
+        `,
+                ),
+            ),
         ).toEqual([
             { text: 'expect', offset: 13 },
             { text: 'split', offset: 20 },
@@ -132,9 +132,9 @@ describe('Util Text', () => {
                 Text.extractWordsFromCode(
                     `
             expect(regExp.match(first_line));
-        `
-                )
-            )
+        `,
+                ),
+            ),
         ).toEqual([
             { text: 'expect', offset: 13 },
             { text: 'reg', offset: 20 },
@@ -148,9 +148,9 @@ describe('Util Text', () => {
                 Text.extractWordsFromCode(
                     `
             expect(aHELLO);
-        `
-                )
-            )
+        `,
+                ),
+            ),
         ).toEqual([
             { text: 'expect', offset: 13 },
             { text: 'a', offset: 20 },
@@ -186,9 +186,9 @@ describe('Util Text', () => {
                 Text.extractWordsFromCode(
                     `
             <a href="http://www.ctrip.com" title="携程旅行网">携程旅行网</a>
-        `
-                )
-            ).map((wo) => wo.text)
+        `,
+                ),
+            ).map((wo) => wo.text),
         ).toEqual(['a', 'href', 'http', 'www', 'ctrip', 'com', 'title', 'a']);
     });
 
@@ -200,9 +200,9 @@ describe('Util Text', () => {
             Example text: gitのpackageのみ際インストール
             gitのpackageのみ際インストール
             title="携程旅行网"
-        `
-                )
-            ).map((wo) => wo.text)
+        `,
+                ),
+            ).map((wo) => wo.text),
         ).toEqual(['Example', 'text', 'git', 'package', 'git', 'package', 'title']);
     });
 
@@ -212,9 +212,9 @@ describe('Util Text', () => {
                 Text.extractWordsFromCode(
                     `
             Γ γ	gamma, γάμμα
-        `
-                )
-            ).map((wo) => wo.text)
+        `,
+                ),
+            ).map((wo) => wo.text),
         ).toEqual(['Γ', 'γ', 'gamma', 'γάμμα']);
     });
 
@@ -391,8 +391,8 @@ function match(regexp: RegExp, text: string): (string | number)[] {
     const x = toArray(
         pipe(
             Text.matchStringToTextOffset(regexp, text),
-            opConcatMap((t) => [t.text, t.offset])
-        )
+            opConcatMap((t) => [t.text, t.offset]),
+        ),
     );
     return x;
 }

@@ -18,7 +18,7 @@ describe('take', () => {
             ...pipeSync(
                 iter,
                 opTap(() => callCount++),
-                opTake(count)
+                opTake(count),
             ),
         ]).toEqual(expected);
         expect(callCount).toBe(Math.max(0, count));
@@ -38,9 +38,9 @@ describe('take', () => {
                 pipeAsync(
                     iter,
                     opTap(() => callCount++),
-                    opTake(count)
-                )
-            )
+                    opTake(count),
+                ),
+            ),
         ).toEqual(expected);
         expect(callCount).toBe(Math.max(0, count));
     });

@@ -81,7 +81,7 @@ export interface CheckTextOptions extends DocumentValidatorOptions {}
 export async function checkTextDocument(
     doc: TextDocument | Document,
     options: CheckTextOptions,
-    settings: CSpellUserSettings = {}
+    settings: CSpellUserSettings = {},
 ): Promise<CheckTextInfo> {
     doc = isTextDocument(doc) ? doc : await resolveDocumentToTextDocument(doc);
     return genCheckText(new DocumentValidator(doc, options, settings));

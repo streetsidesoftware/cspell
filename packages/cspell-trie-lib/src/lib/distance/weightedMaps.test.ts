@@ -113,7 +113,7 @@ describe('Validate weightedMaps', () => {
             });
             expect(results).toEqual(expect.arrayContaining(expected));
             expect(results).toHaveLength(expected.length);
-        }
+        },
     );
 
     test.each`
@@ -149,7 +149,7 @@ describe('Validate weightedMaps', () => {
             });
             expect(results).toEqual(expect.arrayContaining(expected));
             expect(results).toHaveLength(expected.length);
-        }
+        },
     );
 
     test.each`
@@ -181,7 +181,7 @@ describe('Validate weightedMaps', () => {
             });
             expect(results).toEqual(expect.arrayContaining(expected));
             expect(results).toHaveLength(expected.length);
-        }
+        },
     );
 
     test.each`

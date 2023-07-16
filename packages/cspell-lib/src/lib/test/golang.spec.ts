@@ -28,6 +28,6 @@ describe('Validate that Go files are correctly checked.', () => {
             expect(results).toHaveLength(3);
             expect(results.map((t) => t.text)).toEqual(expect.arrayContaining(['longname', 'garbbage']));
         },
-        { timeout }
+        { timeout },
     );
 });

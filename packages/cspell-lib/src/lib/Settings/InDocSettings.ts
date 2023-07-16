@@ -72,7 +72,7 @@ const allDirectives = new Set(preferredDirectives.concat(officialDirectives));
 const allDirectiveSuggestions: ExtendedSuggestion[] = [
     ...pipeSync(
         allDirectives,
-        opMap((word) => ({ word }))
+        opMap((word) => ({ word })),
     ),
 ];
 
@@ -106,7 +106,7 @@ export function getInDocumentSettings(text: string): CSpellUserSettings {
             (s, setting) => {
                 return mergeInDocSettings(s, setting);
             },
-            { id: 'in-doc-settings' } as CSpellUserSettings
+            { id: 'in-doc-settings' } as CSpellUserSettings,
         );
     const {
         words,

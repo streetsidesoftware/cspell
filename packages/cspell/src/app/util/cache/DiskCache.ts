@@ -79,7 +79,7 @@ export class DiskCache implements CSpellLintResultCache {
         cacheFileLocation: string,
         readonly useCheckSum: boolean,
         readonly cspellVersion: string,
-        readonly useUniversalCache: boolean
+        readonly useUniversalCache: boolean,
     ) {
         this.cacheFileLocation = resolvePath(cacheFileLocation);
         this.cacheDir = dirname(this.cacheFileLocation);
@@ -134,7 +134,7 @@ export class DiskCache implements CSpellLintResultCache {
 
     public setCachedLintResults(
         { fileInfo, elapsedTimeMs: _, cached: __, ...result }: FileResult,
-        dependsUponFiles: string[]
+        dependsUponFiles: string[],
     ): void {
         const fileDescriptor = this.fileEntryCache.getFileDescriptor(fileInfo.filename);
         const meta = fileDescriptor.meta as CSpellCacheMeta;

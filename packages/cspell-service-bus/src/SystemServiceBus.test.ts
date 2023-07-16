@@ -13,12 +13,12 @@ import {
 
 const TypeRequestFsReadFile = 'fs:readFile' as const;
 const RequestFsReadFile = requestFactory<typeof TypeRequestFsReadFile, { readonly uri: string }, string>(
-    TypeRequestFsReadFile
+    TypeRequestFsReadFile,
 );
 
 const TypeRequestZlibInflate = 'zlib:inflate' as const;
 const RequestZlibInflate = requestFactory<typeof TypeRequestZlibInflate, { readonly data: string }, string>(
-    TypeRequestZlibInflate
+    TypeRequestZlibInflate,
 );
 
 const knownRequestTypes = {
@@ -51,7 +51,7 @@ describe('SystemServiceBus Behavior', () => {
     serviceBus.createSubsystem('Path', 'path:');
     serviceBus.registerRequestHandler(RequestFsReadFile, (req) => createResponse(`read file: ${req.params.uri}`));
     serviceBus.registerRequestHandler(RequestFsReadFile, (req, next) =>
-        /https?:/.test(req.params.uri) ? createResponse(`fetch http: ${req.params.uri}`) : next(req)
+        /https?:/.test(req.params.uri) ? createResponse(`fetch http: ${req.params.uri}`) : next(req),
     );
     serviceBus.registerRequestHandler(
         RequestFsReadFile,
@@ -68,7 +68,7 @@ describe('SystemServiceBus Behavior', () => {
             assert(decompressRes.value);
             return createResponse(decompressRes.value);
         },
-        RequestFsReadFile.type + '/zip'
+        RequestFsReadFile.type + '/zip',
     );
     serviceBus.registerRequestHandler(RequestZlibInflate, (req) => createResponse(`Inflate: ${req.params.data}`));
 

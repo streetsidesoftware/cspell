@@ -55,7 +55,7 @@ describe('Validate textValidator functions', () => {
             csi({
                 words: ['=Sample', 'with', 'Issues'],
                 ignoreWords: ['PUBLISHed', 'FIXesToThePROBLEMs'], // cspell:ignore fixestotheproblems
-            })
+            }),
         );
         const text =
             'We have PUBLISHed published multiple FIXesToThePROBLEMs with Sample fixestotheproblems and issues.';
@@ -72,7 +72,7 @@ describe('Validate textValidator functions', () => {
             csi({
                 words: ['=Sample', 'with', 'Issues'],
                 ignoreWords: ['"PUBLISHed"', 'FIXesToThePROBLEMs'], // cspell:ignore fixestotheproblems
-            })
+            }),
         );
         const text =
             'We have PUBLISHed published multiple FIXesToThePROBLEMs with Sample fixestotheproblems and issues.';
@@ -87,7 +87,7 @@ describe('Validate textValidator functions', () => {
     test('tests case sensitive word list', async () => {
         const wordList = ['PUBLISHed', 'FIXesToThePROBLEMs', 'multiple', 'VeryBadProblem', 'with'].concat(
             ['define', '_ERROR_CODE_42', 'NETWORK', '_ERROR42'],
-            specialWords
+            specialWords,
         );
         const flagWords = ['VeryBadProblem'];
         const dict = createSpellingDictionary(
@@ -96,7 +96,7 @@ describe('Validate textValidator functions', () => {
             'test',
             opts({
                 caseSensitive: true,
-            })
+            }),
         );
         const text = `
             We have PUBLISHed published Multiple FIXesToThePROBLEMs.
@@ -141,7 +141,7 @@ describe('Validate textValidator functions', () => {
                 sToV({
                     maxNumberOfProblems: 1000,
                     maxDuplicateProblems: 1,
-                })
+                }),
             ),
         ];
         const freq = FreqCounter.create(result.map((t) => t.text));
@@ -179,7 +179,7 @@ describe('Validate textValidator functions', () => {
             ...pipeSync(
                 Text.matchStringToTextOffset(/\w+/g, text),
                 opMap((segment) => ({ line, segment })),
-                opConcatMap(mapper)
+                opConcatMap(mapper),
             ),
         ];
         const words = results.map((r) => r.segment.text);
@@ -207,13 +207,13 @@ describe('Validate textValidator functions', () => {
         const mapper = _testMethods.mapWordsAgainstRanges(inclusionRanges);
         // sort the texts by the word so it is out of order.
         const texts = [...Text.matchStringToTextOffset(/\w+/g, text)].sort((a, b) =>
-            a.text < b.text ? -1 : a.text > b.text ? 1 : 0
+            a.text < b.text ? -1 : a.text > b.text ? 1 : 0,
         );
         const results = [
             ...pipeSync(
                 texts,
                 opMap((segment) => ({ line, segment })),
-                opConcatMap(mapper)
+                opConcatMap(mapper),
             ),
         ].map((r) => r.segment);
         const words = results.sort((a, b) => a.offset - b.offset).map((r) => r.text);
@@ -343,7 +343,7 @@ function getSpellingDictionaryCollectionSync(options?: WithIgnoreWords) {
             opts({
                 caseSensitive: true,
                 noSuggest: true,
-            })
+            }),
         ),
     ];
 

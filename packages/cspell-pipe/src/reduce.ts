@@ -21,13 +21,13 @@ export function reduceAsync<T>(iter: AnyIterable<T>, reduceFn: (prev: T, curr: T
 export function reduceAsync<T>(
     iter: AnyIterable<T>,
     reduceFn: (prev: T, curr: T) => T,
-    initialValue?: T
+    initialValue?: T,
 ): Promise<T | undefined>;
 export function reduceAsync<T, U>(iter: AnyIterable<T>, reduceFn: (prev: U, curr: T) => U, initialValue: U): Promise<U>;
 export async function reduceAsync<T>(
     iter: AnyIterable<T>,
     reduceFn: (prev: T, curr: T) => T,
-    initialValue?: T
+    initialValue?: T,
 ): Promise<T | undefined> {
     const i =
         initialValue === undefined
@@ -46,7 +46,7 @@ export function reduce<T, U>(iter: AsyncIterable<T>, reduceFn: (prev: U, curr: T
 export function reduce<T>(
     iter: Iterable<T> | AsyncIterable<T>,
     reduceFn: (prev: T, curr: T) => T,
-    initialValue?: T
+    initialValue?: T,
 ): T | undefined | Promise<T | undefined> {
     return isAsyncIterable(iter) ? reduceAsync(iter, reduceFn, initialValue) : reduceSync(iter, reduceFn, initialValue);
 }

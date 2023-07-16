@@ -12,7 +12,7 @@ type CreateSpellingDictionaryParams = Parameters<typeof createSpellingDictionary
 
 const cachedDictionaries = new AutoWeakCache<CreateSpellingDictionaryParams, SpellingDictionary>(
     _createSpellingDictionary,
-    64
+    64,
 );
 
 const maxSetSize = 3;
@@ -30,7 +30,7 @@ export function createSpellingDictionary(
     wordList: readonly string[] | IterableLike<string>,
     name: string,
     source: string,
-    options?: SpellingDictionaryOptions | undefined
+    options?: SpellingDictionaryOptions | undefined,
 ): SpellingDictionary {
     const params: CreateSpellingDictionaryParams = [wordList, name, source, options];
 
@@ -81,7 +81,7 @@ export function createFailedToLoadDictionary(
     name: string,
     source: string,
     error: Error,
-    options?: SpellingDictionaryOptions | undefined
+    options?: SpellingDictionaryOptions | undefined,
 ): SpellingDictionary {
     options = options || {};
     return {

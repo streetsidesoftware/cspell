@@ -88,7 +88,7 @@ describe('Validate Glob Normalization to root', () => {
         pattern: GlobPattern,
         root = '.',
         source = 'cspell.json',
-        nodePath: PathInterface = path
+        nodePath: PathInterface = path,
     ): GlobPatternWithRoot {
         root = nodePath.resolve(root || '.');
         source = nodePath.join(root, source);
@@ -113,7 +113,7 @@ describe('Validate Glob Normalization to root', () => {
         patterns: GlobPattern | GlobPattern[],
         root?: string,
         source = 'cspell.json',
-        nodePath = path
+        nodePath = path,
     ): GlobPatternWithOptionalRoot[] {
         patterns = Array.isArray(patterns) ? patterns : typeof patterns === 'string' ? patterns.split('|') : [patterns];
 
@@ -243,7 +243,7 @@ describe('Validate Glob Normalization to root', () => {
             const result = normalizeGlobToRoot(glob, root, path);
             expect(result).toEqual(expected);
             expect(mm.isMatch(file, result.glob)).toBe(shouldMatch);
-        }
+        },
     );
 
     interface TestCase {
@@ -295,7 +295,7 @@ describe('Validate Glob Normalization to root', () => {
     `('tests normalization to root nested  "$comment" root: "$root"', ({ globs, root, expectedGlobs }: TestCase) => {
         root = path.resolve(root);
         const r = normalizeGlobPatterns(globs, { root, nested: true, nodePath: path }).map((p) =>
-            normalizeGlobToRoot(p, root, path)
+            normalizeGlobToRoot(p, root, path),
         );
         expect(r).toEqual(expectedGlobs);
     });
@@ -321,7 +321,7 @@ describe('Validate Glob Normalization to root', () => {
     `('tests normalization to root not nested "$comment" root: "$root"', ({ globs, root, expectedGlobs }: TestCase) => {
         root = path.resolve(root);
         const r = normalizeGlobPatterns(globs, { root, nested: false, nodePath: path }).map((p) =>
-            normalizeGlobToRoot(p, root, path)
+            normalizeGlobToRoot(p, root, path),
         );
         try {
             expect(r).toEqual(expectedGlobs);
@@ -330,7 +330,7 @@ describe('Validate Glob Normalization to root', () => {
             throw e;
         }
         const again = normalizeGlobPatterns(r, { root, nested: false, nodePath: path }).map((p) =>
-            normalizeGlobToRoot(p, root, path)
+            normalizeGlobToRoot(p, root, path),
         );
         expect(again).toEqual(r);
     });
@@ -408,7 +408,7 @@ describe('Validate minimatch assumptions', () => {
         ({ pattern, file, options, expected }: TestCase) => {
             const r = mm.isMatch(file, pattern, options);
             expect(r).toBe(expected);
-        }
+        },
     );
 });
 

@@ -126,7 +126,7 @@ describe('Validate Suggest Helpers', () => {
                     ['lo', 1],
                     ['o$', 1],
                 ] as Feature[]
-            ).sort(comp)
+            ).sort(comp),
         );
     });
 

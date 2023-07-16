@@ -6,7 +6,7 @@ import { BACK, EOL, EOR, EOW, ESCAPE, LF, REF } from './constants.js';
 import { importTrieV3AsTrieRoot } from './importV3.js';
 
 const specialCharacters = stringToCharSet(
-    [EOW, BACK, EOL, REF, EOR, ESCAPE, LF, '0123456789', '`~!@#$%^&*()_-+=[]{};:\'"<>,./?\\|'].join('')
+    [EOW, BACK, EOL, REF, EOR, ESCAPE, LF, '0123456789', '`~!@#$%^&*()_-+=[]{};:\'"<>,./?\\|'].join(''),
 );
 
 const specialCharacterMap = new Map([

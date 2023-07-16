@@ -57,7 +57,7 @@ export interface FileResult {
 export function fileInfoToDocument(
     fileInfo: FileInfo,
     languageId: string | undefined,
-    locale: string | undefined
+    locale: string | undefined,
 ): Document {
     const { filename, text } = fileInfo;
     languageId = languageId || undefined;
@@ -118,7 +118,7 @@ export function resolveFilename(filename: string, cwd?: string): string {
 export function readFileInfo(
     filename: string,
     encoding: BufferEncoding = UTF8,
-    handleNotFound = false
+    handleNotFound = false,
 ): Promise<ReadFileInfoResult> {
     filename = resolveFilename(filename);
     const pText = filename.startsWith(STDINProtocol) ? getStdin() : cioReadFile(filename, encoding);
@@ -131,7 +131,7 @@ export function readFileInfo(
                 : handleNotFound && error.code === 'ENOENT'
                 ? Promise.resolve({ text: '', filename, errorCode: error.code })
                 : Promise.reject(new IOError(`Error reading file: "${filename}"`, error));
-        }
+        },
     );
 }
 
@@ -148,7 +148,7 @@ export async function findFiles(globPatterns: string[], options: GlobOptions): P
     const globPats = globPatterns.filter((filename) =>
         filename !== STDIN && !filename.startsWith(STDINProtocol) && !filename.startsWith(FileProtocol)
             ? true
-            : (stdin.push(filename), false)
+            : (stdin.push(filename), false),
     );
     const globResults = globPats.length ? await globP(globPats, options) : [];
     const cwd = options.cwd || process.cwd();
@@ -159,7 +159,7 @@ export function calcFinalConfigInfo(
     configInfo: ConfigInfo,
     settingsFromCommandLine: CSpellUserSettings,
     filename: string,
-    text: string
+    text: string,
 ): FileConfigInfo {
     const basename = path.basename(filename);
     const fileSettings = cspell.calcOverrideSettings(configInfo.config, path.resolve(filename));
@@ -172,7 +172,7 @@ export function calcFinalConfigInfo(
         cspell.getDefaultSettings(loadDefault),
         cspell.getGlobalSettings(),
         fileSettings,
-        settingsFromCommandLine
+        settingsFromCommandLine,
     );
     const languageIds = settings.languageId
         ? Array.isArray(settings.languageId)
@@ -207,7 +207,7 @@ export function readFileListFiles(listFiles: string[]): AsyncIterable<string> {
         files,
         asyncMap((file) => readFileListFile(file)),
         asyncAwait(),
-        asyncFlatten()
+        asyncFlatten(),
     );
     // Move `stdin` to the end.
     const stdin = useStdin ? readStdin() : [];

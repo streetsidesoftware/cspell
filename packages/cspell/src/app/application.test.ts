@@ -49,7 +49,7 @@ describe('Validate the Application', () => {
                 return;
             });
         },
-        testOptions
+        testOptions,
     );
 
     test(
@@ -68,7 +68,7 @@ describe('Validate the Application', () => {
                 return;
             });
         },
-        testOptions
+        testOptions,
     );
 
     test(
@@ -87,7 +87,7 @@ describe('Validate the Application', () => {
                 return;
             });
         },
-        testOptions
+        testOptions,
     );
 
     test(
@@ -101,11 +101,11 @@ describe('Validate the Application', () => {
                 expect.objectContaining({
                     dictName: 'en_us',
                     dictSource: expect.stringContaining('en_US.trie.gz'),
-                })
+                }),
             );
             expect(foundIn.map((d) => d.dictName)).toEqual(expect.arrayContaining(['en-gb', 'en_us', 'companies']));
         },
-        testOptions
+        testOptions,
     );
 
     test(
@@ -117,7 +117,7 @@ describe('Validate the Application', () => {
                 expect.objectContaining({
                     dictName: 'missing-dictionary',
                     dictSource: expect.stringContaining('missing.txt'),
-                })
+                }),
             );
             const errors = result.filter((r) => r.errors).map((r) => r.errors);
             expect(errors).toContainEqual(
@@ -125,10 +125,10 @@ describe('Validate the Application', () => {
                     expect.objectContaining({
                         message: expect.stringContaining('failed to load'),
                     }),
-                ])
+                ]),
             );
         },
-        testOptions
+        testOptions,
     );
 
     test(
@@ -138,7 +138,7 @@ describe('Validate the Application', () => {
             expect(result.items.length).toBeGreaterThan(50);
             expect(result.items.map((i) => i.text).join('')).toBe(result.text);
         },
-        testOptions
+        testOptions,
     );
 
     test(
@@ -165,7 +165,7 @@ describe('Validate the Application', () => {
             expect(reporter.issues.map((i) => i.text)).toEqual(['texxt']);
             expect(reporter.runResult).toEqual(result);
         },
-        testOptions
+        testOptions,
     );
 });
 
@@ -208,7 +208,7 @@ describe('Application, Validate Samples', () => {
             expect(reporter.issues).toEqual(issues.map(iMap));
             expect(result.issues).toBe(issues.length);
             expect(reporter.runResult).toEqual(result);
-        })
+        }),
     );
 });
 

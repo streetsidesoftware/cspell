@@ -12,6 +12,6 @@ export type RequestFsStat = ServiceRequestFactoryRequestType<typeof RequestFsSta
 
 const RequestTypeStatSync = 'fs:statSync' as const;
 export const RequestFsStatSync = requestFactory<typeof RequestTypeStatSync, RequestStatParams, Stats>(
-    RequestTypeStatSync
+    RequestTypeStatSync,
 );
 export type RequestFsStatSync = ServiceRequestFactoryRequestType<typeof RequestFsStatSync>;

@@ -21,7 +21,7 @@ describe('Validate the fileReader', () => {
             const result = await fReader.readFileText(__filename, 'utf8');
             expect(result).toBe(expected);
         },
-        { timeout }
+        { timeout },
     );
 
     test(
@@ -30,7 +30,7 @@ describe('Validate the fileReader', () => {
             const result = fReader.readFileText(__filename + '.missing.file', 'utf8');
             await expect(result).rejects.toEqual(oc({ code: 'ENOENT' }));
         },
-        { timeout }
+        { timeout },
     );
 
     test.each`
@@ -44,7 +44,7 @@ describe('Validate the fileReader', () => {
             const content = fReader.readFileTextSync(filename);
             expect(content).toContain(contains);
         },
-        { timeout }
+        { timeout },
     );
 
     test.each`
@@ -61,7 +61,7 @@ describe('Validate the fileReader', () => {
             expect(content).toContain(contains);
             expect(content).toMatchSnapshot();
         },
-        { timeout }
+        { timeout },
     );
 
     test.each`
@@ -78,7 +78,7 @@ describe('Validate the fileReader', () => {
             const content = await fReader.readFileText(url);
             expect(content).toContain(contains);
         },
-        { timeout }
+        { timeout },
     );
 
     test.each`
@@ -92,6 +92,6 @@ describe('Validate the fileReader', () => {
             const url = toURL(file);
             await expect(fReader.readFileText(url)).rejects.toEqual(expected);
         },
-        { timeout }
+        { timeout },
     );
 });

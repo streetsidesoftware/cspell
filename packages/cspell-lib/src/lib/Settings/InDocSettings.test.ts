@@ -176,7 +176,7 @@ describe('Validate InDocSettings', () => {
         expect(InDoc.getInDocumentSettings(sampleTextWithBadRegexp)).toEqual(
             expect.objectContaining({
                 ignoreRegExpList: [`"(foobar|foo_baz)"');`],
-            })
+            }),
         );
     });
 

@@ -7,7 +7,7 @@ export function toGlobDef(g: Glob | Glob[], root: string | undefined, source: st
 export function toGlobDef(
     g: Glob | Glob[] | undefined,
     root: string | undefined,
-    source: string | undefined
+    source: string | undefined,
 ): GlobDef | GlobDef[] | undefined {
     if (g === undefined) return undefined;
     if (Array.isArray(g)) {

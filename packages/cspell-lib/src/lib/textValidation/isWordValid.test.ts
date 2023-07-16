@@ -121,7 +121,7 @@ function getSpellingDictionaryCollectionSync(options?: WithIgnoreWords) {
             opts({
                 caseSensitive: true,
                 noSuggest: true,
-            })
+            }),
         ),
     ];
 

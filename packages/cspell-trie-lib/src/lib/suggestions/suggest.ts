@@ -23,7 +23,7 @@ const setOfSeparators = new Set([JOIN_SEPARATOR, WORD_SEPARATOR]);
 export function suggest(
     root: TrieRoot | TrieRoot[],
     word: string,
-    options: SuggestionOptions = {}
+    options: SuggestionOptions = {},
 ): SuggestionResult[] {
     const opts = createSuggestionOptions(options);
     const collectorOpts: SuggestionCollectorOptions = clean(opts);
@@ -35,7 +35,7 @@ export function suggest(
 export function* genSuggestions(
     root: TrieRoot | TrieRoot[],
     word: string,
-    options: GenSuggestionOptions = {}
+    options: GenSuggestionOptions = {},
 ): SuggestionGenerator {
     const roots = Array.isArray(root) ? root : [root];
     for (const r of roots) {
@@ -52,7 +52,7 @@ interface Range {
 export function* genCompoundableSuggestions(
     root: TrieRoot,
     word: string,
-    options: GenSuggestionOptions = {}
+    options: GenSuggestionOptions = {},
 ): SuggestionGenerator {
     const { compoundMethod = CompoundWordsMethod.NONE, changeLimit, ignoreCase } = createSuggestionOptions(options);
     type History = SuggestionResultBase;
@@ -180,7 +180,7 @@ export function* genCompoundableSuggestions(
             const e = Math.min(
                 matrix[d - 1][i - 1] + subCost, // substitute
                 matrix[d - 1][i] + ci, // insert
-                matrix[d][i - 1] + c // delete
+                matrix[d][i - 1] + c, // delete
             );
             min = Math.min(min, e);
             matrix[d][i] = e;
@@ -209,7 +209,7 @@ export function* genCompoundableSuggestions(
             const j = Math.min(bb, i - 1);
             const e = Math.min(
                 matrix[d - 1][j] + subCost, // substitute
-                matrix[d][i - 1] + c // delete
+                matrix[d][i - 1] + c, // delete
             );
             min = Math.min(min, e);
             matrix[d][i] = e;

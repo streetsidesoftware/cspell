@@ -37,7 +37,7 @@ export async function run(program: commander.Command, argv: string[]): Promise<c
         .option('-l, --lower_case', 'output in lower case')
         .option(
             '-b, --base <number>',
-            'Use base n for reference ids.  Defaults to 32. Common values are 10, 16, 32. Max of 36'
+            'Use base n for reference ids.  Defaults to 32. Common values are 10, 16, 32. Max of 36',
         )
         .description('Generate a file for use with cspell')
         .action(async (filename, options) => {

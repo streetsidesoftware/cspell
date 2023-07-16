@@ -19,7 +19,7 @@ export function normalizeOutput(output: string, cwd = process.cwd()): string {
     const rxCwd = new RegExp(escapeRegEx(cwd) + '|' + escapeRegEx(normalizeDirectorySeparator(cwd)), 'gi');
 
     const normalizeDirs = normalizeDirectorySeparator(
-        output.replace(rxCwd, '{cwd}').replace(rxRootRepo, '{repo-root}')
+        output.replace(rxCwd, '{cwd}').replace(rxRootRepo, '{repo-root}'),
     );
 
     return normalizeDirs.replace(regexpDate, '2022-01-01T00:00:00.000Z');

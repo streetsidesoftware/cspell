@@ -25,7 +25,7 @@ export function readSettings(filename: string, relativeTo: string, defaultValues
 export function readSettings(
     filename: string,
     relativeToOrDefault?: CSpellSettingsWST | string,
-    defaultValue?: CSpellSettingsWST
+    defaultValue?: CSpellSettingsWST,
 ): CSpellSettingsI {
     const loader = getDefaultConfigLoader();
     if (typeof relativeToOrDefault !== 'string' || defaultValue === undefined)

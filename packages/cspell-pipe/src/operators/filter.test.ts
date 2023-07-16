@@ -40,7 +40,7 @@ describe('Validate filter', () => {
             const aValues = pipeAsync(values, opFilterAsync<Primitives | PromisePrim>(isTruthy));
             const result = await toArray(aValues);
             expect(result).toEqual(expected);
-        }
+        },
     );
 
     test('is a', async () => {
@@ -70,7 +70,7 @@ describe('Validate filter', () => {
                 Promise.resolve(Promise.resolve(Promise.resolve('deep'))),
             ],
             opFilterAsync(truthyAsync),
-            opFilter(isString)
+            opFilter(isString),
         );
 
         expect(await toArray(filtered)).toEqual(['string', 'hello', 'deep']);

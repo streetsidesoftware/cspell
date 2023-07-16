@@ -153,7 +153,7 @@ export class ConfigLoader {
     public readSettings(
         filename: string,
         relativeToOrDefault?: CSpellSettingsWST | string,
-        defaultValue?: CSpellSettingsWST
+        defaultValue?: CSpellSettingsWST,
     ): CSpellSettingsI {
         // console.log('Read Settings: %o', { filename, relativeToOrDefault });
         const relativeTo = (typeof relativeToOrDefault === 'string' ? relativeToOrDefault : '') || process.cwd();
@@ -165,7 +165,7 @@ export class ConfigLoader {
     public async readSettingsAsync(
         filename: string,
         relativeTo?: string,
-        pnpSettings?: PnPSettingsOptional
+        pnpSettings?: PnPSettingsOptional,
     ): Promise<CSpellSettingsI> {
         const ref = resolveFilename(filename, relativeTo || process.cwd());
         return this.importSettings(ref, undefined, pnpSettings || defaultPnPSettings);
@@ -179,7 +179,7 @@ export class ConfigLoader {
      */
     searchForConfig(
         searchFrom: string | undefined,
-        pnpSettings: PnPSettingsOptional = defaultPnPSettings
+        pnpSettings: PnPSettingsOptional = defaultPnPSettings,
     ): Promise<CSpellSettingsI | undefined> {
         pnpSettings = normalizePnPSettings(pnpSettings);
         return this.searchConfigLRU.get({ searchFrom, pnpSettings }, (p) => this._searchForConfig(p));
@@ -202,7 +202,7 @@ export class ConfigLoader {
             .normalizeSearchForConfigResultAsync(
                 params.searchFrom || process.cwd(),
                 this.cspellConfigExplorer.search(params.searchFrom),
-                params.pnpSettings
+                params.pnpSettings,
             )
             .then((r) => (r.filepath ? r.config : undefined));
     }
@@ -259,7 +259,7 @@ export class ConfigLoader {
     protected importSettings(
         fileRef: ImportFileRef,
         defaultValues: CSpellSettingsWST | undefined,
-        pnpSettings: PnPSettingsOptional
+        pnpSettings: PnPSettingsOptional,
     ): CSpellSettingsI {
         defaultValues = defaultValues ?? defaultSettings;
         const { filename } = fileRef;
@@ -292,7 +292,7 @@ export class ConfigLoader {
     protected normalizeSettings(
         rawSettings: CSpellSettingsWST,
         pathToSettingsFile: string,
-        pnpSettings: PnPSettingsOptional
+        pnpSettings: PnPSettingsOptional,
     ): CSpellSettingsI {
         const id =
             rawSettings.id ||
@@ -377,7 +377,7 @@ class ConfigLoaderInternal extends ConfigLoader {
     async normalizeSearchForConfigResultAsync(
         searchPath: string,
         searchResult: Promise<SearchForConfigResult | null>,
-        pnpSettings: PnPSettingsOptional
+        pnpSettings: PnPSettingsOptional,
     ): Promise<NormalizeSearchForConfigResult> {
         let result: SearchForConfigResult | ImportError | undefined;
         try {
@@ -392,7 +392,7 @@ class ConfigLoaderInternal extends ConfigLoader {
     normalizeSearchForConfigResult(
         searchPath: string,
         searchResult: SearchForConfigResult | ImportError | undefined,
-        pnpSettings: PnPSettingsOptional
+        pnpSettings: PnPSettingsOptional,
     ): NormalizeSearchForConfigResult {
         const error = searchResult instanceof ImportError ? searchResult : undefined;
         const result = searchResult instanceof ImportError ? undefined : searchResult;
@@ -461,7 +461,7 @@ interface NormalizeSearchForConfigResult {
  */
 export function searchForConfig(
     searchFrom: string | undefined,
-    pnpSettings: PnPSettingsOptional = defaultPnPSettings
+    pnpSettings: PnPSettingsOptional = defaultPnPSettings,
 ): Promise<CSpellSettingsI | undefined> {
     return gcl().searchForConfig(searchFrom, pnpSettings);
 }
@@ -476,7 +476,7 @@ export function searchForConfig(
  */
 export function searchForConfigSync(
     searchFrom: string | undefined,
-    pnpSettings: PnPSettingsOptional = defaultPnPSettings
+    pnpSettings: PnPSettingsOptional = defaultPnPSettings,
 ): CSpellSettingsI | undefined {
     pnpSettings = normalizePnPSettings(pnpSettings);
     let searchResult: SearchForConfigResult | ImportError | undefined;
@@ -496,7 +496,7 @@ export function searchForConfigSync(
  */
 export async function loadConfig(
     file: string,
-    pnpSettings: PnPSettingsOptional = defaultPnPSettings
+    pnpSettings: PnPSettingsOptional = defaultPnPSettings,
 ): Promise<CSpellSettingsI> {
     return gcl().readSettingsAsync(file, undefined, pnpSettings);
 }
@@ -510,7 +510,7 @@ export async function loadConfig(
  */
 export function loadConfigSync(
     filename: string,
-    pnpSettings: PnPSettingsOptional = defaultPnPSettings
+    pnpSettings: PnPSettingsOptional = defaultPnPSettings,
 ): CSpellSettingsI {
     const pnp = normalizePnPSettings(pnpSettings);
     return gcl().readSettings(filename, pnp);
@@ -616,7 +616,7 @@ function validateRawConfigVersion(config: CSpellUserSettings | { version: unknow
 function validateRawConfigExports(config: CSpellUserSettings, fileRef: ImportFileRef): void {
     if ((<{ default: unknown }>config).default) {
         throw new ImportError(
-            validationMessage('Module `export default` is not supported.\n  Use `module.exports =` instead.', fileRef)
+            validationMessage('Module `export default` is not supported.\n  Use `module.exports =` instead.', fileRef),
         );
     }
 }

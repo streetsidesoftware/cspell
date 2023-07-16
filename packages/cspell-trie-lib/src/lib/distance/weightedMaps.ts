@@ -200,7 +200,7 @@ function addToTrieTrieCost(
     left: string,
     right: string,
     cost: number,
-    penalties: number | undefined
+    penalties: number | undefined,
 ): void {
     let t = trie;
     for (const c of left) {
@@ -222,7 +222,7 @@ function addSetToTrieTrieCost(
     trie: TrieTrieCost,
     set: string[],
     cost: number | undefined,
-    penalties: number | undefined
+    penalties: number | undefined,
 ) {
     if (cost === undefined) return;
     for (const left of set) {
@@ -247,7 +247,7 @@ function* searchTrieNodes<T extends { n?: Record<string, T> }>(trie: T, str: str
 
 function* walkTrieNodes<T extends { n?: Record<string, T> }>(
     t: T | undefined,
-    s: string
+    s: string,
 ): Generator<{ s: string; t: T }> {
     if (!t) return;
 

@@ -73,7 +73,7 @@ describe('docValidator', () => {
             expect(dVal.checkText(range, text, [])).toEqual(expected);
             expect(dVal.prepTime).toBeGreaterThan(0);
         },
-        timeout
+        timeout,
     );
 
     test.each`
@@ -142,7 +142,7 @@ describe('docValidator', () => {
 
             expect(r.map((issue) => issue.text)).toEqual(expectedIssues);
             expect(extractRawText(doc.text, r)).toEqual(expectedRawIssues ?? expectedIssues);
-        }
+        },
     );
 
     function mkI(text: string, ...sug: string[]) {
@@ -178,7 +178,7 @@ describe('docValidator', () => {
 
             expect(r.map((issue) => issue.text)).toEqual(expectedIssues);
             expect(extractRawText(doc.text, r)).toEqual(expectedRawIssues ?? expectedIssues);
-        }
+        },
     );
 
     test('updateDocumentText', () => {
@@ -242,7 +242,7 @@ describe('shouldCheckDocument', () => {
                 expected = { errors: [], shouldCheck: expected };
             }
             expect(await shouldCheckDocument({ uri }, options, settings)).toEqual(expected);
-        }
+        },
     );
 });
 

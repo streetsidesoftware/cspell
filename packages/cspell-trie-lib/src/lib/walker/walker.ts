@@ -145,7 +145,7 @@ function* _walkerWords(root: TrieNode): Iterable<string> {
 
 export function walker(
     root: TrieNode,
-    compoundingMethod: CompoundWordsMethod = CompoundWordsMethod.NONE
+    compoundingMethod: CompoundWordsMethod = CompoundWordsMethod.NONE,
 ): WalkerIterator {
     return compoundingMethod === CompoundWordsMethod.NONE ? nodeWalker(root) : compoundWalker(root, compoundingMethod);
 }

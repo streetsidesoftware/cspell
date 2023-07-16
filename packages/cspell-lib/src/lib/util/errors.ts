@@ -59,11 +59,11 @@ export function catchPromiseError<T>(p: undefined, handler: ErrorHandlerP<T>): u
 export function catchPromiseError<T>(p: Promise<T>, handler: ErrorHandlerP<T>): Promise<T | undefined>;
 export function catchPromiseError<T>(
     p: Promise<T> | undefined,
-    handler: ErrorHandler<T>
+    handler: ErrorHandler<T>,
 ): Promise<T | undefined> | undefined;
 export function catchPromiseError<T>(
     p: Promise<T> | undefined,
-    handler: ErrorHandler<T>
+    handler: ErrorHandler<T>,
 ): Promise<T | undefined> | undefined {
     if (p === undefined) return undefined;
     return _catchPromiseError(p, handler);
@@ -73,11 +73,11 @@ export function wrapCall<U>(fn: (...p: []) => U, handler: ErrorHandler<U>): (...
 export function wrapCall<P0, U>(fn: (...p: [P0]) => U, handler: ErrorHandler<U>): (...p: [P0]) => U | undefined;
 export function wrapCall<P0, P1, U>(
     fn: (...p: [P0, P1]) => U,
-    handler: ErrorHandler<U>
+    handler: ErrorHandler<U>,
 ): (...p: [P0, P1]) => U | undefined;
 export function wrapCall<P extends unknown[], U>(
     fn: (...p: P) => U,
-    handler: ErrorHandler<U>
+    handler: ErrorHandler<U>,
 ): (...p: P[]) => U | undefined;
 export function wrapCall<P, U>(fn: (...p: P[]) => U, handler: ErrorHandler<U>): (...p: P[]) => U | undefined {
     return (...p: P[]) => {

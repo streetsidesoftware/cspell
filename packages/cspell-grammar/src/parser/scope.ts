@@ -1,7 +1,10 @@
 import assert from 'assert';
 
 export class Scope {
-    constructor(readonly value: string, readonly parent?: Scope) {}
+    constructor(
+        readonly value: string,
+        readonly parent?: Scope,
+    ) {}
     /**
      * Convert the scope hierarchy to a string
      * @param ltr - return ancestry from left-to-right

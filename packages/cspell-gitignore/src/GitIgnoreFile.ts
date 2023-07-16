@@ -17,7 +17,10 @@ export interface IsIgnoredExResult {
  * Represents an instance of a .gitignore file.
  */
 export class GitIgnoreFile {
-    constructor(readonly matcher: GlobMatcher, readonly gitignore: string) {}
+    constructor(
+        readonly matcher: GlobMatcher,
+        readonly gitignore: string,
+    ) {}
 
     get root(): string {
         return this.matcher.root;

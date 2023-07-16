@@ -38,7 +38,7 @@ export function getDictionaryInternalSync(settings: CSpellSettingsInternal): Spe
 
 function _getDictionaryInternal(
     settings: CSpellSettingsInternal,
-    spellDictionaries: SpellingDictionary[]
+    spellDictionaries: SpellingDictionary[],
 ): SpellingDictionaryCollection {
     const {
         words = emptyWords,
@@ -61,13 +61,13 @@ function _getDictionaryInternal(
     const ignoreWordsDictionary = createIgnoreWordsDictionary(
         ignoreWords,
         '[ignoreWords]',
-        'From Settings `ignoreWords`'
+        'From Settings `ignoreWords`',
     );
     const flagWordsDictionary = createForbiddenWordsDictionary(flagWords, '[flagWords]', 'From Settings `flagWords`');
     const suggestWordsDictionary = createSuggestDictionary(
         suggestWords,
         '[suggestWords]',
-        'From Settings `suggestWords`'
+        'From Settings `suggestWords`',
     );
     const dictionaries = [
         ...spellDictionaries,

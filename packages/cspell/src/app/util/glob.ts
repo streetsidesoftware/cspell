@@ -50,7 +50,7 @@ export async function globP(pattern: string | string[], options?: GlobOptions): 
 
 export function calcGlobs(commandLineExclude: string[] | undefined): { globs: string[]; source: string } {
     const globs = new Set(
-        (commandLineExclude || []).flatMap((glob) => glob.split(/(?<!\\)\s+/g)).map((g) => g.replace(/\\ /g, ' '))
+        (commandLineExclude || []).flatMap((glob) => glob.split(/(?<!\\)\s+/g)).map((g) => g.replace(/\\ /g, ' ')),
     );
     const commandLineExcludes = {
         globs: [...globs],

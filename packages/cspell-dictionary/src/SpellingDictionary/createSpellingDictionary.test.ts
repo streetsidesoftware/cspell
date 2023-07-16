@@ -41,7 +41,7 @@ describe('Validate createSpellingDictionary', () => {
             words.map((w) => w.replace(/\p{M}/gu, '')),
             'test create',
             __filename,
-            opts({ caseSensitive: false })
+            opts({ caseSensitive: false }),
         );
         expect(d.has(words[0])).toBe(true);
         words.forEach((w) => expect(d.has(w)).toBe(true));

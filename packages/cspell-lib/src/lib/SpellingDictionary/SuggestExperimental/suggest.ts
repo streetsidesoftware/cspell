@@ -18,7 +18,7 @@ export function* suggest(trie: Trie, word: string, minScore: number = defaultMin
 export function* suggestIteration(
     i: WalkerIterator,
     word: string,
-    minScore: number = defaultMinScore
+    minScore: number = defaultMinScore,
 ): SuggestionIterator {
     let goDeeper = true;
 

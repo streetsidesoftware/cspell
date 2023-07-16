@@ -32,7 +32,7 @@ describe('suggestions', () => {
             expect(resultsAsync[0].word).toEqual(word);
             expect(resultsAsync[0].suggestions).toEqual(expected);
         },
-        { timeout }
+        { timeout },
     );
 
     test.each`
@@ -43,7 +43,7 @@ describe('suggestions', () => {
         async ({ word, options, settings }) => {
             await expect(suggestionsForWord(word, options, settings)).rejects.toThrow(SuggestionError);
         },
-        { timeout }
+        { timeout },
     );
 
     function opt(opt: Partial<SuggestionOptions>): SuggestionOptions {

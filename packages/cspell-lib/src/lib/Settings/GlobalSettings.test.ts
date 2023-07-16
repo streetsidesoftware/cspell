@@ -164,7 +164,10 @@ describe('Validate GlobalSettings', () => {
 });
 
 class SystemLikeError extends Error {
-    constructor(msg: string, readonly code: string) {
+    constructor(
+        msg: string,
+        readonly code: string,
+    ) {
         super(msg);
     }
 }

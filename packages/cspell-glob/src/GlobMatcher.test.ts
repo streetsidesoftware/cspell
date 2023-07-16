@@ -82,7 +82,7 @@ describe('Validate Micromatch assumptions', () => {
         ({ glob, filename, expectedToMatch }) => {
             const reg1 = mm.makeRe(glob);
             expect(reg1.test(filename)).toEqual(expectedToMatch);
-        }
+        },
     );
 });
 
@@ -392,7 +392,7 @@ describe('Validate GlobMatcher', () => {
                 const matcher = new GlobMatcher(patterns, { mode, root, nodePath: pathInstance });
 
                 expect(matcher.match(filename)).toEqual(expected);
-            }
+            },
         );
     }
 
@@ -456,7 +456,7 @@ describe('Validate GlobMatcher excludeMode patternsNormalizedToRoot', () => {
             const matcher = new GlobMatcher(patterns, { mode, root, nodePath: pathInstance });
             expected = expected.map((e) => ocg(e, pathInstance));
             expect(matcher.patternsNormalizedToRoot).toEqual(expected);
-        }
+        },
     );
 });
 
@@ -465,7 +465,7 @@ type TestCase = [
     root: string | undefined,
     filename: string,
     expected: boolean,
-    description: string
+    description: string,
 ];
 
 function tests(): TestCase[] {

@@ -23,13 +23,13 @@ import { uriToFilePath } from '../util/Uri.js';
 
 export function determineTextDocumentSettings(
     doc: TextDocument | TextDocumentRef,
-    settings: CSpellUserSettings
+    settings: CSpellUserSettings,
 ): CSpellSettingsInternal {
     const filename = uriToFilePath(doc.uri);
     const settingsWithDefaults = mergeSettings(
         getDefaultSettings(settings.loadDefaultConfiguration ?? true),
         getGlobalSettings(),
-        settings
+        settings,
     );
     const fileSettings = calcOverrideSettings(settingsWithDefaults, filename);
     const languageIds = fileSettings?.languageId?.length

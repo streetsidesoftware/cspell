@@ -77,7 +77,7 @@ describe('shasum', () => {
         const root = resolvePathToFixture('dicts');
         const filename = resolvePathToFixture('dicts/_checksum-bad-format.txt');
         await expect(checkShasumFile(filename, [], root)).rejects.toEqual(
-            Error('Failed to parse line 3 of checksum file.')
+            Error('Failed to parse line 3 of checksum file.'),
         );
     });
 

@@ -47,7 +47,7 @@ export class ServiceBus implements Dispatcher {
         handlers: readonly Handler[],
         request: R,
         dispatcher: Dispatcher,
-        defaultHandler: HandleRequest
+        defaultHandler: HandleRequest,
     ) {
         const _handlers = handlers.map((m) => ({ ...m, fn: m.fn(dispatcher) }));
         const handler = _handlers.reduce((next, h) => {

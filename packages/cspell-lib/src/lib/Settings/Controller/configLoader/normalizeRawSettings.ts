@@ -26,7 +26,7 @@ export function normalizeDictionaryDefs(settings: NormalizeDictionaryDefsParams,
         util.clean({
             ...langSetting,
             dictionaryDefinitions: mapDictDefsToInternal(langSetting.dictionaryDefinitions, pathToSettingsFile),
-        })
+        }),
     );
 
     return util.clean({
@@ -80,7 +80,7 @@ export function normalizeReporters(settings: NormalizeReporters, pathToSettingsF
     };
 }
 export function normalizeLanguageSettings(
-    languageSettings: LanguageSetting[] | undefined
+    languageSettings: LanguageSetting[] | undefined,
 ): LanguageSetting[] | undefined {
     if (!languageSettings) return undefined;
 
@@ -94,7 +94,7 @@ export function normalizeLanguageSettings(
 type NormalizeGitignoreRoot = Pick<CSpellUserSettings, 'gitignoreRoot'>;
 export function normalizeGitignoreRoot(
     settings: NormalizeGitignoreRoot,
-    pathToSettingsFile: string
+    pathToSettingsFile: string,
 ): NormalizeGitignoreRoot {
     const { gitignoreRoot } = settings;
     if (!gitignoreRoot) return {};
@@ -115,7 +115,7 @@ interface NormalizeSettingsGlobsResult {
 }
 export function normalizeSettingsGlobs(
     settings: NormalizeSettingsGlobs,
-    pathToSettingsFile: string
+    pathToSettingsFile: string,
 ): NormalizeSettingsGlobsResult {
     const { globRoot } = settings;
     if (settings.ignorePaths === undefined) return {};
@@ -127,7 +127,7 @@ export function normalizeSettingsGlobs(
 }
 export function normalizeCacheSettings(
     settings: Pick<CSpellUserSettings, 'cache'>,
-    pathToSettingsDir: string
+    pathToSettingsDir: string,
 ): Pick<CSpellUserSettings, 'cache'> {
     const { cache } = settings;
     if (cache === undefined) return {};

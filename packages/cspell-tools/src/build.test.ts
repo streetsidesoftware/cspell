@@ -50,7 +50,7 @@ describe('build action', () => {
                 const found = await helper.fileExists(t(build));
                 expect(found && build).toBe(false);
             }
-        }
+        },
     );
 });
 

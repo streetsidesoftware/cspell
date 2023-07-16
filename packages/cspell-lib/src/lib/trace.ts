@@ -31,7 +31,7 @@ export interface TraceOptions {
 export async function traceWords(
     words: string[],
     settings: CSpellSettings,
-    options: TraceOptions | undefined
+    options: TraceOptions | undefined,
 ): Promise<TraceResult[]> {
     const results = await util.asyncIterableToArray(traceWordsAsync(words, settings, options));
 
@@ -45,7 +45,7 @@ export async function traceWords(
 export async function* traceWordsAsync(
     words: Iterable<string> | AsyncIterable<string>,
     settings: CSpellSettings,
-    options: TraceOptions | undefined
+    options: TraceOptions | undefined,
 ): AsyncIterableIterator<TraceResult[]> {
     const { languageId, locale: language, ignoreCase = true, allowCompoundWords } = options || {};
 
@@ -59,11 +59,11 @@ export async function* traceWordsAsync(
             util.clean({
                 language: language || config.language,
                 allowCompoundWords: allowCompoundWords ?? config.allowCompoundWords,
-            })
+            }),
         );
         const withLanguageId = calcSettingsForLanguageId(
             withLocale,
-            languageId ?? withLocale.languageId ?? 'plaintext'
+            languageId ?? withLocale.languageId ?? 'plaintext',
         );
         const settings = finalizeSettings(withLanguageId);
         const dictionaries = (settings.dictionaries || [])

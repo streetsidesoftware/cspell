@@ -11,7 +11,7 @@ const pipeline = promisify(Stream.pipeline);
 export function writeToFile(
     filename: string,
     data: string | Iterable<string> | AsyncIterable<string>,
-    encoding?: BufferEncoding
+    encoding?: BufferEncoding,
 ): Promise<void> {
     return writeToFileIterable(filename, typeof data === 'string' ? [data] : data, encoding);
 }
@@ -19,7 +19,7 @@ export function writeToFile(
 export function writeToFileIterable(
     filename: string,
     data: Iterable<string> | AsyncIterable<string>,
-    encoding?: BufferEncodingExt
+    encoding?: BufferEncodingExt,
 ): Promise<void> {
     const stream = Stream.Readable.from(encoderTransformer(data, encoding));
     const zip = filename.match(/\.gz$/) ? zlib.createGzip() : new Stream.PassThrough();

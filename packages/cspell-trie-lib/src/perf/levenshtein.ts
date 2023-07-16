@@ -9,7 +9,7 @@ export function selectNearestWordsBruteForce(
     word: string,
     words: Iterable<string>,
     count: number,
-    maxEdits: number
+    maxEdits: number,
 ): NearestWords[] {
     const result: NearestWords[] = [];
 

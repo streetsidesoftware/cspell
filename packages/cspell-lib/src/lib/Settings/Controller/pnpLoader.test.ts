@@ -43,10 +43,10 @@ describe('Validate PnPLoader', () => {
         const yarnPnp = await loader.load(uriYarn2TestMed);
         expect(yarnPnp?.toString().toLocaleLowerCase()).toBe(uriYarn2TestMedPnp.toString().toLowerCase());
         expect(loader.peekSync(uriYarn2TestMed)?.toString().toLocaleLowerCase()).toBe(
-            yarnPnp?.toString().toLocaleLowerCase()
+            yarnPnp?.toString().toLocaleLowerCase(),
         );
         expect(loader.loadSync(uriYarn2TestMed)?.toString().toLocaleLowerCase()).toBe(
-            yarnPnp?.toString().toLocaleLowerCase()
+            yarnPnp?.toString().toLocaleLowerCase(),
         );
 
         const sciPnp = loader.loadSync(uriYarn2TestSci);
@@ -84,7 +84,7 @@ describe('Validate PnPLoader', () => {
         // Make sure we can load the science dictionary.
         const dictLocationSci = resolveFrom(
             fsPath(uriYarn2TestSci),
-            '@cspell/dict-scientific-terms-us/cspell-ext.json'
+            '@cspell/dict-scientific-terms-us/cspell-ext.json',
         );
         expect(dictLocationSci).toEqual(expect.stringContaining(fsPath(uriYarn2TestSci)));
         expect(dictLocationSci).toEqual(expect.stringContaining('cspell-ext.json'));

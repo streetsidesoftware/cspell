@@ -85,7 +85,7 @@ describe('HunspellReader En', function () {
             const values = reader.dicWordsSeq().skip(10000).take(10).toArray();
             expect(values.length).toBe(10);
         },
-        timeout
+        timeout,
     );
 
     it(
@@ -95,7 +95,7 @@ describe('HunspellReader En', function () {
             const values = reader.seqWords().skip(10000).take(10).toArray();
             expect(values.length).toBe(10);
         },
-        timeout
+        timeout,
     );
 
     it(
@@ -105,7 +105,7 @@ describe('HunspellReader En', function () {
             const values = genSequence(reader).skip(10000).take(10).toArray();
             expect(values.length).toBe(10);
         },
-        timeout
+        timeout,
     );
 
     it(
@@ -124,7 +124,7 @@ describe('HunspellReader En', function () {
             expect(dicEntries).toHaveLength(111);
             expect(values[1][0].dic).toBe(dicEntries[101].word);
         },
-        timeout
+        timeout,
     );
 });
 
@@ -147,7 +147,7 @@ describe('HunspellReader read dictionaries', function () {
             expect(values.length).toBe(200);
             expect(values).toMatchSnapshot();
         },
-        timeout
+        timeout,
     );
 });
 

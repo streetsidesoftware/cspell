@@ -16,5 +16,5 @@ export default mergeConfig(
             },
             testTimeout: 10000,
         },
-    })
+    }),
 );

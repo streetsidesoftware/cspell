@@ -61,36 +61,36 @@ export function commandLint(prog: Command): Command {
         .description('Check spelling')
         .option(
             '-c, --config <cspell.json>',
-            'Configuration file to use.  By default cspell looks for cspell.json in the current directory.'
+            'Configuration file to use.  By default cspell looks for cspell.json in the current directory.',
         )
         .option('-v, --verbose', 'Display more information about the files being checked and the configuration.')
         .option(
             '--locale <locale>',
-            'Set language locales. i.e. "en,fr" for English and French, or "en-GB" for British English.'
+            'Set language locales. i.e. "en,fr" for English and French, or "en-GB" for British English.',
         )
         .option('--language-id <language>', 'Force programming language for unknown extensions. i.e. "php" or "scala"')
         .addOption(
             new CommanderOption(
                 '--languageId <language>',
-                'Force programming language for unknown extensions. i.e. "php" or "scala"'
-            ).hideHelp()
+                'Force programming language for unknown extensions. i.e. "php" or "scala"',
+            ).hideHelp(),
         )
         .option('--words-only', 'Only output the words not found in the dictionaries.')
         .addOption(
-            new CommanderOption('--wordsOnly', 'Only output the words not found in the dictionaries.').hideHelp()
+            new CommanderOption('--wordsOnly', 'Only output the words not found in the dictionaries.').hideHelp(),
         )
         .option('-u, --unique', 'Only output the first instance of a word not found in the dictionaries.')
         .option(
             '-e, --exclude <glob>',
             'Exclude files matching the glob pattern. This option can be used multiple times to add multiple globs. ',
-            collect
+            collect,
         )
         .option(
             '--file-list <path or stdin>',
             'Specify a list of files to be spell checked.' +
                 ' The list is filtered against the glob file patterns.' +
                 ' Note: the format is 1 file path per line.',
-            collect
+            collect,
         )
         .option('--no-issues', 'Do not show the spelling errors.')
         .option('--no-progress', 'Turn off progress messages')
@@ -104,8 +104,8 @@ export function commandLint(prog: Command): Command {
         .option('--show-suggestions', 'Show spelling suggestions.')
         .addOption(
             new CommanderOption('--no-show-suggestions', 'Do not show spelling suggestions or fixes.').default(
-                undefined
-            )
+                undefined,
+            ),
         )
         .addOption(new CommanderOption('--must-find-files', 'Error if no files are found.').default(true).hideHelp())
         .option('--no-must-find-files', 'Do not error if no files are found.')
@@ -121,11 +121,11 @@ export function commandLint(prog: Command): Command {
             new CommanderOption('--cache-strategy <strategy>', 'Strategy to use for detecting changed files.').choices([
                 'metadata',
                 'content',
-            ])
+            ]),
         )
         .option(
             '--cache-location <path>',
-            `Path to the cache file or directory. (default: "${DEFAULT_CACHE_LOCATION}")`
+            `Path to the cache file or directory. (default: "${DEFAULT_CACHE_LOCATION}")`,
         )
         .option('--dot', 'Include files and directories starting with `.` (period) when matching globs.')
         .option('--gitignore', 'Ignore files matching glob patterns found in .gitignore files.')
@@ -138,11 +138,14 @@ export function commandLint(prog: Command): Command {
         .addOption(
             new CommanderOption(
                 '--default-configuration',
-                'Load the default configuration and dictionaries.'
-            ).hideHelp()
+                'Load the default configuration and dictionaries.',
+            ).hideHelp(),
         )
         .addOption(
-            new CommanderOption('--no-default-configuration', 'Do not load the default configuration and dictionaries.')
+            new CommanderOption(
+                '--no-default-configuration',
+                'Do not load the default configuration and dictionaries.',
+            ),
         )
         .option('--debug', 'Output information useful for debugging cspell.json files.')
         .option('--reporter <module|path>', 'Specify one or more reporters to use.', collect)

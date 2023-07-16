@@ -20,7 +20,7 @@ describe('Validate index.ts', () => {
             expect.objectContaining({
                 errors: 0,
                 issues: 0,
-            })
+            }),
         );
     });
 });

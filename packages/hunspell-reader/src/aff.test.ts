@@ -71,7 +71,7 @@ describe('Test Aff', () => {
         expect(w).toEqual(expect.arrayContaining(['avoir']));
         expect(w).toEqual(expect.arrayContaining(['n’avoir'])); // cspell:ignore n’avoir
         expect(r.map((affW) => affW.word)).toEqual(
-            r.map((affW) => aff.oConv.convert(affW.prefix + affW.base + affW.suffix))
+            r.map((affW) => aff.oConv.convert(affW.prefix + affW.base + affW.suffix)),
         );
         logApplyRulesResults(r);
     });
@@ -110,31 +110,31 @@ describe('Test Aff', () => {
             aff
                 .getMatchingRules('ZbCcChC1')
                 .filter((a) => !!a)
-                .map(({ id }) => id)
+                .map(({ id }) => id),
         ).toEqual(['Zb', 'Cc', 'Ch']);
         expect(
             aff
                 .getMatchingRules('ZbCcChC199')
                 .filter((a) => !!a)
-                .map(({ id }) => id)
+                .map(({ id }) => id),
         ).toEqual(['Zb', 'Cc', 'Ch']);
         expect(
             aff
                 .getMatchingRules('AaAbAcAdAeAi')
                 .filter((a) => !!a)
-                .map(({ id }) => id)
+                .map(({ id }) => id),
         ).toEqual(['Aa', 'Ab', 'Ac', 'Ad', 'Ae', 'Ai']);
         expect(
             aff
                 .getMatchingRules('AaAbAcAdAeAi')
                 .filter((a) => !!a)
-                .map(({ type }) => type)
+                .map(({ type }) => type),
         ).toEqual(['sfx', 'sfx', 'sfx', 'sfx', 'sfx', 'sfx']);
         expect(
             aff
                 .getMatchingRules('PaPbPc')
                 .filter((a) => !!a)
-                .map(({ type }) => type)
+                .map(({ type }) => type),
         ).toEqual(['pfx', 'pfx', 'pfx']);
     });
 

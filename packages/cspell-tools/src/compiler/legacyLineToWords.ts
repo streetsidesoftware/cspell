@@ -9,7 +9,7 @@ const regExpRepeatChars = /(.)\1{5}/i;
 export function legacyLineToWords(
     line: string,
     keepCase: boolean,
-    allowedSplitWords: AllowedSplitWordsCollection
+    allowedSplitWords: AllowedSplitWordsCollection,
 ): Iterable<string> {
     // Remove punctuation and non-letters.
     const filteredLine = line.replace(regNonWord, '|');
@@ -21,7 +21,7 @@ export function legacyLineToWords(
         opConcatMap((a) => splitCamelCaseIfAllowed(a, allowedSplitWords, keepCase)),
         opMap((a) => a.trim()),
         opFilter((a) => !!a),
-        opFilter((s) => !regExpRepeatChars.test(s))
+        opFilter((s) => !regExpRepeatChars.test(s)),
     );
 
     return words;
@@ -30,7 +30,7 @@ export function legacyLineToWords(
 export function* legacyLinesToWords(
     lines: Iterable<string>,
     keepCase: boolean,
-    allowedSplitWords: AllowedSplitWordsCollection
+    allowedSplitWords: AllowedSplitWordsCollection,
 ): Iterable<string> {
     for (const line of lines) {
         yield* legacyLineToWords(line, keepCase, allowedSplitWords);

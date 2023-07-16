@@ -13,7 +13,7 @@ const defaultIO: IO = {
 
 export function createReaderWriter(
     deserializers: Deserializer[] = [],
-    io: IO = defaultIO
+    io: IO = defaultIO,
 ): CSpellConfigFileReaderWriter {
     return new CSpellConfigFileReaderWriterImpl(io, deserializers.concat(defaultDeserializers));
 }

@@ -120,7 +120,10 @@ export class ITrieImpl implements ITrie {
     private root: ITrieNodeRoot;
     private count?: number;
     weightMap: WeightMap | undefined;
-    constructor(readonly data: TrieData, private numNodes?: number) {
+    constructor(
+        readonly data: TrieData,
+        private numNodes?: number,
+    ) {
         this.root = data.getRoot();
         this._info = mergeOptionalWithDefaults(data.info);
         this.hasForbidden = data.hasForbiddenWords();
@@ -217,7 +220,7 @@ export class ITrieImpl implements ITrie {
         const subNodes = pipe(
             n ? iteratorTrieWords(n) : [],
             opFilter((w) => w[w.length - 1] !== compoundChar),
-            opMap((suffix) => text + suffix)
+            opMap((suffix) => text + suffix),
         );
         return pipe(n && n.eow ? [text] : [], opAppend(subNodes));
     }

@@ -75,7 +75,11 @@ export class DocumentValidator {
      * @param doc - Document to validate
      * @param config - configuration to use (not finalized).
      */
-    constructor(doc: TextDocument, options: DocumentValidatorOptions, readonly settings: CSpellUserSettings) {
+    constructor(
+        doc: TextDocument,
+        options: DocumentValidatorOptions,
+        readonly settings: CSpellUserSettings,
+    ) {
         this._document = doc;
         this.options = { ...options };
         const numSuggestions = this.options.numSuggestions ?? settings.numSuggestions;
@@ -361,7 +365,7 @@ export class DocumentValidator {
                 const { text, offset } = line;
                 const range = [offset, offset + text.length] as const;
                 return { text, range };
-            })
+            }),
         );
     }
 
@@ -420,7 +424,7 @@ export class DocumentValidator {
 
     private adjustSuggestions(
         text: string,
-        rawSuggestions: (ExtendedSuggestion | SuggestionResult)[]
+        rawSuggestions: (ExtendedSuggestion | SuggestionResult)[],
     ): ExtendedSuggestion[] {
         assert(this._preparations, ERROR_NOT_PREPARED);
         const settings = this._preparations.docSettings;
@@ -432,7 +436,7 @@ export class DocumentValidator {
             rawSuggestions.map(mapSug),
             locale,
             ignoreCase,
-            dict
+            dict,
         );
 
         return sugsWithAlt.map(sanitizeSuggestion);
@@ -491,7 +495,7 @@ interface Preparations {
 async function searchForDocumentConfig(
     document: TextDocumentRef,
     defaultConfig: CSpellSettingsWithSourceTrace,
-    pnpSettings: PnPSettings
+    pnpSettings: PnPSettings,
 ): Promise<CSpellSettingsWithSourceTrace> {
     const { uri } = document;
     if (uri.scheme !== 'file') return Promise.resolve(defaultConfig);
@@ -505,7 +509,7 @@ function mapSug(sug: ExtendedSuggestion | SuggestionResult): SuggestionResult {
 function searchForDocumentConfigSync(
     document: TextDocumentRef,
     defaultConfig: CSpellSettingsWithSourceTrace,
-    pnpSettings: PnPSettings
+    pnpSettings: PnPSettings,
 ): CSpellSettingsWithSourceTrace {
     const { uri } = document;
     if (uri.scheme !== 'file') defaultConfig;
@@ -520,7 +524,7 @@ interface ShouldCheckDocumentResult {
 export async function shouldCheckDocument(
     doc: TextDocumentRef,
     options: DocumentValidatorOptions,
-    settings: CSpellUserSettings
+    settings: CSpellUserSettings,
 ): Promise<ShouldCheckDocumentResult> {
     const errors: Error[] = [];
 

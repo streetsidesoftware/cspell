@@ -5,7 +5,7 @@ import type { ServiceRequestFactory, ServiceRequestFactoryRequestType } from './
 export type HandleRequestFn<R extends ServiceRequest> = (
     request: R,
     next: HandleRequest,
-    dispatch: Dispatcher
+    dispatch: Dispatcher,
 ) => RequestResponseType<R>;
 
 export interface HandleRequest {
@@ -19,7 +19,7 @@ export interface HandleRequestKnown<R extends ServiceRequest> {
 
 export type FactoryRequestHandler<
     T extends ServiceRequestFactory<ServiceRequest>,
-    R extends ServiceRequest = ServiceRequestFactoryRequestType<T>
+    R extends ServiceRequest = ServiceRequestFactoryRequestType<T>,
 > = HandleRequestKnown<R>;
 
 export interface HandlerNext {

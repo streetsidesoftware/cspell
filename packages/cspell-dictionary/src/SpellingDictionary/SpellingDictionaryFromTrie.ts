@@ -45,7 +45,7 @@ export class SpellingDictionaryFromTrie implements SpellingDictionary {
         readonly name: string,
         readonly options: SpellingDictionaryOptions,
         readonly source = 'from trie',
-        size?: number
+        size?: number,
     ) {
         this.mapWord = createMapper(options.repMap, options.dictionaryInformation?.ignore);
         this.remapWord = createRepMapper(options.repMap, options.dictionaryInformation?.ignore);
@@ -97,13 +97,13 @@ export class SpellingDictionaryFromTrie implements SpellingDictionary {
     }
 
     private _find = findCache((word: string, useCompounds: number | boolean | undefined, ignoreCase: boolean) =>
-        this.findAnyForm(word, useCompounds, ignoreCase)
+        this.findAnyForm(word, useCompounds, ignoreCase),
     );
 
     private findAnyForm(
         word: string,
         useCompounds: number | boolean | undefined,
-        ignoreCase: boolean
+        ignoreCase: boolean,
     ): FindAnyFormResult | undefined {
         const outerForms = outerWordForms(word, this.remapWord ? this.remapWord : (word) => [this.mapWord(word)]);
 
@@ -117,7 +117,7 @@ export class SpellingDictionaryFromTrie implements SpellingDictionary {
     private _findAnyForm(
         mWord: string,
         useCompounds: number | boolean | undefined,
-        ignoreCase: boolean
+        ignoreCase: boolean,
     ): FindAnyFormResult | undefined {
         const opts: FindWordOptions = ignoreCase ? findWordOptionsNotCaseSensitive : findWordOptionsCaseSensitive;
         const findResult = this.trie.findWord(mWord, opts);
@@ -174,7 +174,7 @@ export class SpellingDictionaryFromTrie implements SpellingDictionary {
                 ignoreCase,
                 timeout,
                 weightMap: this.weightMap,
-            })
+            }),
         );
         this.genSuggestions(collector, suggestOptions);
         return collector.suggestions.map((r) => ({ ...r, word: r.word }));
@@ -186,7 +186,7 @@ export class SpellingDictionaryFromTrie implements SpellingDictionary {
             suggestOptions.compoundMethod ??
             (this.options.useCompounds ? CompoundWordsMethod.JOIN_WORDS : CompoundWordsMethod.NONE);
         wordSuggestFormsArray(collector.word).forEach((w) =>
-            this.trie.genSuggestions(impersonateCollector(collector, w), _compoundMethod)
+            this.trie.genSuggestions(impersonateCollector(collector, w), _compoundMethod),
         );
     }
 
@@ -209,7 +209,7 @@ export function createSpellingDictionaryFromTrieFile(
     data: string | Buffer,
     name: string,
     source: string,
-    options: SpellingDictionaryOptions
+    options: SpellingDictionaryOptions,
 ): SpellingDictionary {
     const trie = decodeTrie(data);
     return new SpellingDictionaryFromTrie(trie, name, options, source);
@@ -218,7 +218,7 @@ export function createSpellingDictionaryFromTrieFile(
 type FindFunction = (
     word: string,
     useCompounds: number | boolean | undefined,
-    ignoreCase: boolean
+    ignoreCase: boolean,
 ) => FindAnyFormResult | undefined;
 
 interface CachedFind {
@@ -233,7 +233,7 @@ function findCache(fn: FindFunction, size = 2000): FindFunction {
     function find(
         word: string,
         useCompounds: number | boolean | undefined,
-        ignoreCase: boolean
+        ignoreCase: boolean,
     ): FindAnyFormResult | undefined {
         const r = cache.get(word);
         if (r !== undefined) {
@@ -253,7 +253,7 @@ function outerWordForms(word: string, mapWord: (word: string) => string[]): Set<
     const forms = pipe(
         [word],
         opConcatMap((word) => [word, word.normalize('NFC'), word.normalize('NFD')]),
-        opConcatMap((word) => [word, ...mapWord(word)])
+        opConcatMap((word) => [word, ...mapWord(word)]),
     );
 
     return new Set(forms);

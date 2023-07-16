@@ -10,7 +10,7 @@ import type { PartialWithUndefined } from '../types.js';
 
 export function mergeDefaults<T extends object>(
     value: Readonly<PartialWithUndefined<T>> | undefined,
-    defaultValue: T
+    defaultValue: T,
 ): T {
     const result = { ...defaultValue };
     if (value) {

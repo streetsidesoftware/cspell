@@ -93,7 +93,7 @@ describe('Validate the application', () => {
             '--merge=out/cities.compound',
             pathTemp('cities.txt'),
             '-o',
-            pathTemp()
+            pathTemp(),
         );
         const ff = getSystemFeatureFlags().fork();
         await expect(app.run(commander, args, ff)).resolves.toBeUndefined();
@@ -111,7 +111,7 @@ describe('Validate the application', () => {
             '--merge=out/cities.compound',
             pathTemp('cities.txt'),
             '-o',
-            pathTemp()
+            pathTemp(),
         );
         await expect(app.run(commander, args)).resolves.toBeUndefined();
         const words = await readTextFile(pathTemp('out/cities.compound.txt'));
@@ -143,7 +143,7 @@ describe('Validate the application', () => {
             cities,
             exampleHunspell,
             '-o',
-            targetDir
+            targetDir,
         );
         await expect(app.run(commander, args)).resolves.toBeUndefined();
         const words = await fs.readFile(path.join(targetDir, target), 'utf8');
@@ -242,7 +242,7 @@ describe('Validate the application', () => {
         const args = argv('shasum', 'cities.txt', 'unknown.txt', '--root=fixtures/dicts');
 
         await expect(app.run(commander, args)).rejects.toEqual(
-            new Commander.CommanderError(1, 'Failed Checksum', 'One or more files had issues.')
+            new Commander.CommanderError(1, 'Failed Checksum', 'One or more files had issues.'),
         );
         expect(consoleSpy.consoleOutput()).toMatchSnapshot();
     });
@@ -252,7 +252,7 @@ describe('Validate the application', () => {
         const args = argv('shasum', '--check=fixtures/dicts/_checksum-failed.txt', '--root=fixtures/dicts');
 
         await expect(app.run(commander, args)).rejects.toEqual(
-            new Commander.CommanderError(1, 'Failed Checksum', 'One or more files had issues.')
+            new Commander.CommanderError(1, 'Failed Checksum', 'One or more files had issues.'),
         );
         expect(consoleSpy.consoleOutput()).toMatchSnapshot();
     });
@@ -265,7 +265,7 @@ describe('Validate the application', () => {
             '--update',
             checksumFile,
             '--root=fixtures/dicts',
-            '--list-file=fixtures/dicts/source-files.txt'
+            '--list-file=fixtures/dicts/source-files.txt',
         );
 
         await expect(app.run(commander, args)).resolves.toBeUndefined();

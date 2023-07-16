@@ -18,7 +18,7 @@ class AllowedSplitWordsImpl implements AllowedSplitWordsCollection {
 }
 
 export async function createAllowedSplitWordsFromFiles(
-    files: FilePath | FilePath[] | undefined
+    files: FilePath | FilePath[] | undefined,
 ): Promise<AllowedSplitWordsCollection> {
     if (!files || !files.length) return defaultAllowedSplitWords;
 
@@ -78,7 +78,7 @@ class ExcludeWordsCollectionImpl implements ExcludeWordsCollection {
 }
 
 export async function createExcludeWordsCollectionFromFiles(
-    files: FilePath | FilePath[] | undefined
+    files: FilePath | FilePath[] | undefined,
 ): Promise<ExcludeWordsCollection> {
     if (!files || !files.length) return defaultExcludeWordsCollection;
 

@@ -52,7 +52,7 @@ export function formatExResult(ex: ExResult | undefined): string {
     const p = 'p: |' + parts.map(({ p, w }) => pL(p, w)).join('|') + '|';
     const penaltyMsg = penalty ? `[+${penalty}]` : '';
     return `<${ex.a.slice(1, -1)}> -> <${ex.b.slice(1, -1)}> (${cost - penalty}${penaltyMsg})\n${[a, b, c, p].join(
-        '\n'
+        '\n',
     )}\n`;
 }
 

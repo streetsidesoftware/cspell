@@ -32,7 +32,11 @@ class SpellingDictionaryCollectionImpl implements SpellingDictionaryCollection {
     readonly isDictionaryCaseSensitive: boolean;
     readonly containsNoSuggestWords: boolean;
 
-    constructor(readonly dictionaries: SpellingDictionary[], readonly name: string, source?: string) {
+    constructor(
+        readonly dictionaries: SpellingDictionary[],
+        readonly name: string,
+        source?: string,
+    ) {
         this.dictionaries = this.dictionaries.sort((a, b) => b.size - a.size);
         this.source = source || dictionaries.map((d) => d.name).join(', ');
         this.isDictionaryCaseSensitive = this.dictionaries.reduce((a, b) => a || b.isDictionaryCaseSensitive, false);
@@ -124,7 +128,7 @@ class SpellingDictionaryCollectionImpl implements SpellingDictionaryCollection {
 export function createCollection(
     dictionaries: SpellingDictionary[],
     name: string,
-    source?: string
+    source?: string,
 ): SpellingDictionaryCollection {
     return new SpellingDictionaryCollectionImpl(dictionaries, name, source);
 }
@@ -132,7 +136,7 @@ export function createCollection(
 function isWordInAnyDictionary(
     dicts: SpellingDictionary[],
     word: string,
-    options: SearchOptions
+    options: SearchOptions,
 ): SpellingDictionary | undefined {
     return genSequence(dicts).first((dict) => dict.has(word, options));
 }
@@ -140,7 +144,7 @@ function isWordInAnyDictionary(
 function findInAnyDictionary(
     dicts: SpellingDictionary[],
     word: string,
-    options: SearchOptions
+    options: SearchOptions,
 ): FindResult | undefined {
     const found = dicts.map((dict) => dict.find(word, options)).filter(isDefined);
     if (!found.length) return undefined;
@@ -154,7 +158,7 @@ function findInAnyDictionary(
 function isNoSuggestWordInAnyDictionary(
     dicts: SpellingDictionary[],
     word: string,
-    options: HasOptions
+    options: HasOptions,
 ): SpellingDictionary | undefined {
     return genSequence(dicts).first((dict) => dict.isNoSuggestWord(word, options));
 }
@@ -162,7 +166,7 @@ function isNoSuggestWordInAnyDictionary(
 function isWordForbiddenInAnyDictionary(
     dicts: SpellingDictionary[],
     word: string,
-    ignoreCase: boolean | undefined
+    ignoreCase: boolean | undefined,
 ): SpellingDictionary | undefined {
     return genSequence(dicts).first((dict) => dict.isForbidden(word, ignoreCase));
 }

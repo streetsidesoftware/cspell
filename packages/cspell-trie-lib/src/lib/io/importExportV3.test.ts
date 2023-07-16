@@ -19,7 +19,7 @@ describe('Import/Export', () => {
             data
                 .replace(/\[\d+\]/g, '')
                 .split('\n')
-                .map((a) => (a ? a + '\r\n' : a))
+                .map((a) => (a ? a + '\r\n' : a)),
         );
         const words = [...Trie.iteratorTrieWords(root)];
         expect(words).toEqual([...smallSample].sort());

@@ -44,12 +44,12 @@ export function createCache(options: CreateCacheSettings): CSpellLintResultCache
 export async function calcCacheSettings(
     config: CSpellSettings,
     cacheOptions: CacheOptions,
-    root: string
+    root: string,
 ): Promise<CreateCacheSettings> {
     const cs = config.cache ?? {};
     const useCache = cacheOptions.cache ?? cs.useCache ?? false;
     const cacheLocation = await resolveCacheLocation(
-        path.resolve(root, cacheOptions.cacheLocation ?? cs.cacheLocation ?? DEFAULT_CACHE_LOCATION)
+        path.resolve(root, cacheOptions.cacheLocation ?? cs.cacheLocation ?? DEFAULT_CACHE_LOCATION),
     );
 
     const cacheStrategy = cacheOptions.cacheStrategy ?? cs.cacheStrategy ?? 'metadata';

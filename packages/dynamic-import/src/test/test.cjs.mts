@@ -26,7 +26,7 @@ export function test() {
 
 export async function callDynamicImport<Module>(
     file: string | URL,
-    paths?: string | URL | (string | URL)[]
+    paths?: string | URL | (string | URL)[],
 ): Promise<Module> {
     return await dynamicImport<Module>(file, paths);
 }

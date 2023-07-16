@@ -58,7 +58,7 @@ describe('compile', () => {
             const ext = (format === 'plaintext' ? '.txt' : '.trie') + ((compress && '.gz') || '');
             const content = await readTextFile(`${targetDirectory}/myDictionary${ext}`);
             expect(content).toMatchSnapshot();
-        }
+        },
     );
 });
 

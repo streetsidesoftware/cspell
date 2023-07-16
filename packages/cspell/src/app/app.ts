@@ -23,7 +23,7 @@ export async function run(command?: Command, argv?: string[]): Promise<void> {
 
     if (!semverSatisfies(process.versions.node, npmPackage.engines.node)) {
         throw new ApplicationError(
-            `Unsupported NodeJS version (${process.versions.node}); ${npmPackage.engines.node} is required`
+            `Unsupported NodeJS version (${process.versions.node}); ${npmPackage.engines.node} is required`,
         );
     }
 
