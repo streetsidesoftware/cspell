@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [6.31.2](https://github.com/streetsidesoftware/cspell/compare/v6.31.1...v6.31.2) (2023-07-16)
+
+### Bug Fixes
+
+* Workflow Bot -- Update Dictionaries (main) ([#4362](https://github.com/streetsidesoftware/cspell/issues/4362)) ([d554d50](https://github.com/streetsidesoftware/cspell/commit/d554d50d1253cd88b1c5249c95c922ed561d000b))
+
 ## 6.31.1 (2023-03-24)
 
 **Note:** Version bump only for package @cspell/cspell-bundled-dicts

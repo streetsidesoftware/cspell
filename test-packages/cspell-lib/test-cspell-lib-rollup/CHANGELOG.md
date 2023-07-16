@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [6.31.2](https://github.com/streetsidesoftware/cspell/compare/v6.31.1...v6.31.2) (2023-07-16)
+
+**Note:** Version bump only for package test-cspell-lib-rollup
+
 ## 6.31.1 (2023-03-24)
 
 **Note:** Version bump only for package test-cspell-lib-rollup

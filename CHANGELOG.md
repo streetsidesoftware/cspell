@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [6.31.2](https://github.com/streetsidesoftware/cspell/compare/v6.31.1...v6.31.2) (2023-07-16)
+
+### Bug Fixes
+
+* fixes [#4639](https://github.com/streetsidesoftware/cspell/issues/4639) ([#4642](https://github.com/streetsidesoftware/cspell/issues/4642)) ([7c4d28e](https://github.com/streetsidesoftware/cspell/commit/7c4d28e263e4a3c77aa513be31fd44c16d8e7e98))
+* Workflow Bot -- Update Dictionaries (main) ([#4362](https://github.com/streetsidesoftware/cspell/issues/4362)) ([d554d50](https://github.com/streetsidesoftware/cspell/commit/d554d50d1253cd88b1c5249c95c922ed561d000b))
+
 ## 6.31.1 (2023-03-24)
 
 **Note:** Version bump only for package cspell-monorepo
