@@ -33,7 +33,10 @@ export interface CachingDictionary {
 class CachedDict implements CachingDictionary {
     readonly name: string;
     readonly id = ++dictionaryCounter;
-    constructor(private dict: SpellingDictionary, private options: SearchOptions) {
+    constructor(
+        private dict: SpellingDictionary,
+        private options: SearchOptions,
+    ) {
         this.name = dict.name;
         // console.log(`CachedDict for ${this.name}`);
     }
@@ -41,12 +44,12 @@ class CachedDict implements CachingDictionary {
     readonly has = autoCache((word: string) => this.dict.has(word, this.options), DefaultAutoCacheSize);
     readonly isNoSuggestWord = autoCache(
         (word: string) => this.dict.isNoSuggestWord(word, this.options),
-        DefaultAutoCacheSize
+        DefaultAutoCacheSize,
     );
     readonly isForbidden = autoCache((word: string) => this.dict.isForbidden(word), DefaultAutoCacheSize);
     readonly getPreferredSuggestions = autoCache(
         (word: string) => this.dict.getPreferredSuggestions?.(word),
-        DefaultAutoCacheSize
+        DefaultAutoCacheSize,
     );
 
     stats(): CallStats {
@@ -71,7 +74,7 @@ const knownDicts = new Map<SearchOptions, WeakMap<SpellingDictionary, CachingDic
  */
 export function createCachingDictionary(
     dict: SpellingDictionary | SpellingDictionaryCollection,
-    options: SearchOptions
+    options: SearchOptions,
 ): CachingDictionary {
     options = canonicalSearchOptions(options);
     let knownOptions = knownDicts.get(options);

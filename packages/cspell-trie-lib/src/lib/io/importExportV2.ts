@@ -215,7 +215,7 @@ export function importTrie(linesX: Iterable<string> | IterableIterator<string>):
                 nodes.push(root);
                 return { root, nodes };
             },
-            { nodes: [], root: { s: '', c: Object.create(null) } }
+            { nodes: [], root: { s: '', c: Object.create(null) } },
         );
 
     return trieNodeToRoot(n.root, { isCaseAware: false });

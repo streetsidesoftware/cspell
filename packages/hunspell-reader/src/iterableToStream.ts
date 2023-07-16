@@ -11,7 +11,7 @@ export type IterableLike<T> = Iterable<T> | IterableIterator<T>;
  */
 export function iterableToStream<T extends Streamable>(
     src: IterableLike<T>,
-    options: stream.ReadableOptions = { encoding: 'utf8' }
+    options: stream.ReadableOptions = { encoding: 'utf8' },
 ): stream.Readable {
     return new ReadableObservableStream(src, options);
 }
@@ -20,7 +20,10 @@ class ReadableObservableStream<T> extends stream.Readable {
     private iter: Iterator<T> | undefined;
     private done = false;
 
-    constructor(private _source: IterableLike<T>, options: stream.ReadableOptions) {
+    constructor(
+        private _source: IterableLike<T>,
+        options: stream.ReadableOptions,
+    ) {
         super(options);
     }
 

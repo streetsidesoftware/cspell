@@ -41,7 +41,7 @@ describe('Validate Util Functions', () => {
 
     test('iteratorTrieWords', () => {
         expect([...iteratorTrieWords(trie)].join(' ')).toBe(
-            'These There are some someone sample space spaces. words worry. with for everyone extra to use, complete is no'
+            'These There are some someone sample space spaces. words worry. with for everyone extra to use, complete is no',
         );
     });
 

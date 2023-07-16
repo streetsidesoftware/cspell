@@ -87,7 +87,7 @@ export function extractAllSuggestions(typosDef: TyposDef): Set<string> {
     const allSugs = pipe(
         Object.values(typosDef),
         opFilter(hasSuggestions),
-        opConcatMap((v) => (Array.isArray(v) ? v : [v]))
+        opConcatMap((v) => (Array.isArray(v) ? v : [v])),
     );
     return new Set(allSugs);
 }
@@ -103,7 +103,7 @@ export function extractIgnoreValues(typosDef: TyposDef, ignorePrefix: string): S
     return new Set(
         Object.keys(typosDef)
             .filter((k) => k.startsWith(ignorePrefix))
-            .map((k) => k.slice(pfxLen))
+            .map((k) => k.slice(pfxLen)),
     );
 }
 

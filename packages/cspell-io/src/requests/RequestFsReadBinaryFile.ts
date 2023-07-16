@@ -8,12 +8,12 @@ interface RequestParams {
     readonly url: URL;
 }
 export const RequestFsReadBinaryFile = requestFactory<typeof RequestType, RequestParams, Promise<BinaryFileResource>>(
-    RequestType
+    RequestType,
 );
 export type RequestFsReadBinaryFile = ServiceRequestFactoryRequestType<typeof RequestFsReadBinaryFile>;
 
 const RequestTypeSync = 'fs:readBinaryFileSync' as const;
 export const RequestFsReadBinaryFileSync = requestFactory<typeof RequestTypeSync, RequestParams, BinaryFileResource>(
-    RequestTypeSync
+    RequestTypeSync,
 );
 export type RequestFsReadBinaryFileSync = ServiceRequestFactoryRequestType<typeof RequestFsReadBinaryFileSync>;

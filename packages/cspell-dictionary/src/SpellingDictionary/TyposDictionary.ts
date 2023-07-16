@@ -56,7 +56,7 @@ class TyposDictionaryImpl implements TyposDictionary {
         readonly name: string,
         readonly source: string,
         readonly typosDef: TyposDef,
-        ignoreList?: Iterable<string>
+        ignoreList?: Iterable<string>,
     ) {
         this.size = Object.keys(typosDef).length;
         this.explicitIgnoreWords = extractIgnoreValues(typosDef, '!');
@@ -108,7 +108,7 @@ class TyposDictionaryImpl implements TyposDictionary {
 
     isForbidden(
         word: string,
-        ignoreCaseAndAccents: IgnoreCaseOption = defaults.isForbiddenIgnoreCaseAndAccents
+        ignoreCaseAndAccents: IgnoreCaseOption = defaults.isForbiddenIgnoreCaseAndAccents,
     ): boolean {
         const found = this._findForms(word, ignoreCaseAndAccents);
         return found !== false && !found.ignore;
@@ -127,7 +127,7 @@ class TyposDictionaryImpl implements TyposDictionary {
      */
     isSuggestedWord(
         word: string,
-        ignoreCaseAndAccents: IgnoreCaseOption = defaults.isForbiddenIgnoreCaseAndAccents
+        ignoreCaseAndAccents: IgnoreCaseOption = defaults.isForbiddenIgnoreCaseAndAccents,
     ): boolean {
         if (this.suggestions.has(word)) return true;
         const lcWord = word.toLowerCase();
@@ -139,7 +139,7 @@ class TyposDictionaryImpl implements TyposDictionary {
         numSuggestions?: number,
         compoundMethod?: CompoundWordsMethod,
         numChanges?: number,
-        ignoreCase?: boolean
+        ignoreCase?: boolean,
     ): SuggestionResult[];
     suggest(word: string, suggestOptions: SuggestOptions): SuggestionResult[];
     public suggest(word: string): SuggestionResult[] {
@@ -194,7 +194,7 @@ const createCache = createAutoResolveWeakCache<readonly string[] | TyposDef | It
 export function createTyposDictionary(
     entries: readonly string[] | TyposDef | Iterable<TypoEntry>,
     name: string,
-    source: string
+    source: string,
 ): TyposDictionary {
     return createCache.get(entries, () => {
         const def = processEntriesToTyposDef(entries);

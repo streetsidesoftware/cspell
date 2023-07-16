@@ -67,7 +67,7 @@ describe('Validate last', () => {
                 Promise.resolve(Promise.resolve(Promise.resolve('deep'))),
             ],
             opLastAsync(truthyAsync),
-            opLast(isString)
+            opLast(isString),
         );
 
         expect(await toArray(values)).toEqual(['deep']);

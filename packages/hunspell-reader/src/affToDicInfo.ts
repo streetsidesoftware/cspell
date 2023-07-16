@@ -41,7 +41,7 @@ function extractAlphabet(aff: AffInfo, locale: string): AlphabetInfo {
             .map((a) => a.normalize())
             .flatMap((a) => [...a, ...a.toLocaleLowerCase(locale), ...a.toLocaleUpperCase(locale)])
             .map((a) => a.trim())
-            .filter((a) => !!a)
+            .filter((a) => !!a),
     );
 
     const alphabet = [...setOfLetters].sort().join('').replace(/\P{L}/gu, '');
@@ -62,7 +62,7 @@ function extractSuggestionEditCosts(aff: AffInfo, alphaInfo: AlphabetInfo): Extr
     suggestionEditCosts.push(
         ...calcCapsAndAccentReplacements(alphaInfo),
         ...calcAffMapReplacements(aff),
-        ...calcAffRepReplacements(aff)
+        ...calcAffRepReplacements(aff),
     );
 
     return {
@@ -83,7 +83,7 @@ function calcAffRepReplacements(aff: AffInfo): SuggestionCostMapDef[] {
 
     return createCostMaps(
         aff.REP.map((rep) => [rep.match, rep.replaceWith]),
-        { map: '', replace: 75, description: 'Hunspell Replace Map' }
+        { map: '', replace: 75, description: 'Hunspell Replace Map' },
     );
 }
 
@@ -154,8 +154,8 @@ function calcCrossAccentCapsMap(accentForms: Set<string>[], locale: string): Set
         return new Set(
             pipe(
                 form,
-                opConcatMap((letter) => calcCapitalizationForms(letter, locale))
-            )
+                opConcatMap((letter) => calcCapitalizationForms(letter, locale)),
+            ),
         );
     }
 
@@ -180,12 +180,12 @@ function extractFxLetters(fxm: Map<string, Fx> | undefined): string[] | undefine
     const substations: Iterable<Substitution> = pipe(
         fxm.values(),
         opConcatMap((f) => f.substitutionSets.values()),
-        opConcatMap((s) => s.substitutions)
+        opConcatMap((s) => s.substitutions),
     );
 
     const partials = pipe(
         substations,
-        opConcatMap((sub) => [sub.remove, sub.attach])
+        opConcatMap((sub) => [sub.remove, sub.attach]),
     );
 
     return [...partials];

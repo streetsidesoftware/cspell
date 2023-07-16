@@ -125,7 +125,7 @@ export async function runLint(cfg: LintRequest): Promise<RunResult> {
         filename: string,
         configInfo: ConfigInfo,
         cache: CSpellLintResultCache,
-        prefetch: PrefetchResult | undefined
+        prefetch: PrefetchResult | undefined,
     ): Promise<FileResult> {
         if (prefetch?.fileResult) return prefetch.fileResult;
 
@@ -164,7 +164,7 @@ export async function runLint(cfg: LintRequest): Promise<RunResult> {
         let spellResult: Partial<cspell.SpellCheckFileResult> = {};
         reporter.info(
             `Checking: ${filename}, File type: ${doc.languageId ?? 'auto'}, Language: ${doc.locale ?? 'default'}`,
-            MessageTypes.Info
+            MessageTypes.Info,
         );
         try {
             const { showSuggestions: generateSuggestions, validateDirectives } = cfg.options;
@@ -188,7 +188,7 @@ export async function runLint(cfg: LintRequest): Promise<RunResult> {
         const dictionaries = config.dictionaries || [];
         reporter.info(
             `Checked: ${filename}, File type: ${config.languageId}, Language: ${config.language} ... Issues: ${result.issues.length} ${elapsed}S`,
-            MessageTypes.Info
+            MessageTypes.Info,
         );
         reporter.info(`Config file Used: ${spellResult.localConfigFilepath || configInfo.source}`, MessageTypes.Info);
         reporter.info(`Dictionaries Used: ${dictionaries.join(', ')}`, MessageTypes.Info);
@@ -220,7 +220,7 @@ export async function runLint(cfg: LintRequest): Promise<RunResult> {
     async function processFiles(
         files: string[] | AsyncIterable<string>,
         configInfo: ConfigInfo,
-        cacheSettings: CreateCacheSettings
+        cacheSettings: CreateCacheSettings,
     ): Promise<RunResult> {
         const fileCount = files instanceof Array ? files.length : undefined;
         const status: RunResult = runResult();
@@ -246,16 +246,16 @@ export async function runLint(cfg: LintRequest): Promise<RunResult> {
                     processed: result?.processed,
                     numErrors: result?.issues.length || result?.errors,
                     cached: result?.cached,
-                })
+                }),
             );
 
         function* prefetchFiles(files: string[]) {
             const iter = prefetchIterable(
                 pipe(
                     files,
-                    opMap((filename) => prefetch(filename, configInfo, cache))
+                    opMap((filename) => prefetch(filename, configInfo, cache)),
                 ),
-                BATCH_SIZE
+                BATCH_SIZE,
             );
             for (const v of iter) {
                 yield v;
@@ -437,7 +437,7 @@ Options:
     wordsOnly: ${yesNo(!!cfg.options.wordsOnly)}
     unique:    ${yesNo(!!cfg.options.unique)}
 `,
-            MessageTypes.Info
+            MessageTypes.Info,
         );
     }
 }
@@ -463,9 +463,9 @@ function checkGlobs(globs: string[], reporter: FinalizedReporter) {
             reporter.error(
                 'Linter',
                 new CheckFailed(
-                    `Glob starting or ending with ' (single quote) is not likely to match any files: ${glob}.`
-                )
-            )
+                    `Glob starting or ending with ' (single quote) is not likely to match any files: ${glob}.`,
+                ),
+            ),
         );
 }
 
@@ -491,7 +491,7 @@ async function determineFilesToCheck(
     configInfo: ConfigInfo,
     cfg: LintRequest,
     reporter: FinalizedReporter,
-    globInfo: AppGlobInfo
+    globInfo: AppGlobInfo,
 ): Promise<string[] | AsyncIterable<string>> {
     async function _determineFilesToCheck(): Promise<string[] | AsyncIterable<string>> {
         const { fileLists } = cfg;
@@ -538,7 +538,7 @@ async function determineFilesToCheck(
             const { glob, source } = extractGlobSource(r.pattern);
             reporter.info(
                 `Excluded File: ${path.relative(root, absFilename)}; Excluded by ${glob} from ${source}`,
-                MessageTypes.Info
+                MessageTypes.Info,
             );
         }
 
@@ -560,7 +560,7 @@ async function determineFilesToCheck(
 
 function extractContext(
     tdo: Pick<cspell.TextDocumentOffset, 'line' | 'offset' | 'text'>,
-    contextRange: number
+    contextRange: number,
 ): cspell.TextOffset {
     const { line, offset } = tdo;
     const textOffsetInLine = offset - line.offset;
@@ -649,7 +649,7 @@ async function useFileLists(
     fileListFiles: string[],
     includeGlobPatterns: Glob[],
     root: string,
-    dot: boolean | undefined
+    dot: boolean | undefined,
 ): Promise<string[] | AsyncIterable<string>> {
     includeGlobPatterns = includeGlobPatterns.length ? includeGlobPatterns : ['**'];
     const options: GlobMatchOptions = { root, mode: 'include' };

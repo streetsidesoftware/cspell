@@ -167,7 +167,7 @@ export function findCompoundNode(
     root: Root | undefined,
     word: string,
     compoundCharacter: string,
-    ignoreCasePrefix: string
+    ignoreCasePrefix: string,
 ): FindFullNodeResult {
     // Approach - do a depth first search for the matching word.
     const stack: FindCompoundChain[] = [
@@ -250,13 +250,13 @@ function findCompoundWord(
     root: Root | undefined,
     word: string,
     compoundCharacter: string,
-    ignoreCasePrefix: string
+    ignoreCasePrefix: string,
 ): FindFullNodeResult {
     const { found, compoundUsed, node, caseMatched } = findCompoundNode(
         root,
         word,
         compoundCharacter,
-        ignoreCasePrefix
+        ignoreCasePrefix,
     );
     // Was it a word?
     if (!node || !node.f) {
@@ -298,7 +298,7 @@ interface FindLegacyCompoundChain {
 function findLegacyCompoundNode(
     roots: (TrieNode | undefined)[],
     word: string,
-    minCompoundLength: number
+    minCompoundLength: number,
 ): FindFullNodeResult {
     const root = roots[0];
     const numRoots = roots.length;

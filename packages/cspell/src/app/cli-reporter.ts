@@ -169,7 +169,7 @@ export function getReporter(options: ReporterOptions): FinalizedReporter {
                 result.files,
                 result.cachedFiles,
                 result.issues,
-                result.filesWithIssues.size
+                result.filesWithIssues.size,
             );
             return;
         }
@@ -178,7 +178,7 @@ export function getReporter(options: ReporterOptions): FinalizedReporter {
             'CSpell\x3a Files checked: %d, Issues found: %d in %d files',
             result.files,
             result.issues,
-            result.filesWithIssues.size
+            result.filesWithIssues.size,
         );
     };
 
@@ -234,7 +234,7 @@ function formatSuggestions(issue: Issue): string {
             .map((sug) =>
                 sug.isPreferred
                     ? chalk.italic(chalk.bold(sug.wordAdjustedToMatchCase || sug.word)) + '*'
-                    : sug.wordAdjustedToMatchCase || sug.word
+                    : sug.wordAdjustedToMatchCase || sug.word,
             )
             .join(', ');
     }

@@ -15,11 +15,11 @@ describe('distribute', () => {
         const dIter = toDistributableIterable<number>(iter);
         const a = pipeSync(
             dIter,
-            opMap((a) => a * 3)
+            opMap((a) => a * 3),
         );
         const b = pipeSync(
             dIter,
-            opMap((a) => a * 2)
+            opMap((a) => a * 2),
         );
         const r = [...interleave(a, b)];
         expect(r).toEqual(expected);

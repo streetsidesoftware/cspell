@@ -12,7 +12,7 @@ export function perfFn<P extends any[], R>(
     fn: (...args: P) => R,
     message: string,
     callback: (m: string, elapsedMs: number) => void = (message, time) =>
-        console.error(`${message}: ${time.toFixed(2)}ms`)
+        console.error(`${message}: ${time.toFixed(2)}ms`),
 ): (...args: P) => R {
     return (...args: P) => {
         const timer = createTimer();

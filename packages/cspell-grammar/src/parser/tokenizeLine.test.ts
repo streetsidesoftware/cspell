@@ -137,7 +137,7 @@ function serializeTokenizedLine(
     _config: unknown,
     indentation: string,
     _depth: number,
-    _refs: unknown
+    _refs: unknown,
 ) {
     const { line, tokens: parsedText } = val;
     const textAndScope = parsedText.map((t) => [

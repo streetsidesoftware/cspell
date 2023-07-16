@@ -2,7 +2,12 @@ import type { LoadOptions } from './DictionaryLoader.js';
 
 export class SpellingDictionaryLoadError extends Error {
     readonly name: string;
-    constructor(readonly uri: string, readonly options: LoadOptions, readonly cause: Error, message: string) {
+    constructor(
+        readonly uri: string,
+        readonly options: LoadOptions,
+        readonly cause: Error,
+        message: string,
+    ) {
         super(message);
         this.name = options.name;
     }

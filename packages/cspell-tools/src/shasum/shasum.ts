@@ -31,7 +31,7 @@ export async function shasumFile(filename: string, root: string | undefined): Pr
 export async function checkShasumFile(
     filename: string,
     files: string[] | undefined,
-    root?: string
+    root?: string,
 ): Promise<CheckShasumFileResult[]> {
     files = !files ? files : files.length ? files : undefined;
     const shaFiles = await readAndParseShasumFile(filename);
@@ -42,7 +42,7 @@ export async function checkShasumFile(
     const results: CheckShasumFileResult[] = await Promise.all(
         filesToCheck.map((filename) => {
             return tryToCheckFile(filename, resolvedRoot, mapNameToChecksum.get(filename));
-        })
+        }),
     );
 
     return results;
@@ -51,7 +51,7 @@ export async function checkShasumFile(
 async function tryToCheckFile(
     filename: string,
     root: string,
-    checksum: string | undefined
+    checksum: string | undefined,
 ): Promise<CheckShasumFileResult> {
     if (!checksum) {
         return { filename, passed: false, error: Error('Missing Checksum.') };
@@ -120,8 +120,8 @@ export async function reportChecksumForFiles(files: string[], options: ReportOpt
                 ++numFailed;
                 if (typeof e !== 'string') throw e;
                 return e;
-            })
-        )
+            }),
+        ),
     );
     const report = result.join('\n');
     const passed = !numFailed;
@@ -131,19 +131,19 @@ export async function reportChecksumForFiles(files: string[], options: ReportOpt
 export async function reportCheckChecksumFile(
     filename: string,
     files: string[] | undefined,
-    options: ReportOptions
+    options: ReportOptions,
 ): Promise<ReportResult> {
     const root = options.root;
     const filesToCheck = await resolveFileList(files, options.listFile);
     const result = await checkShasumFile(filename, filesToCheck, root);
     const lines = result.map(({ filename, passed, error }) =>
-        `${filename}: ${passed ? 'OK' : 'FAILED'} ${error ? '- ' + error.message : ''}`.trim()
+        `${filename}: ${passed ? 'OK' : 'FAILED'} ${error ? '- ' + error.message : ''}`.trim(),
     );
     const withErrors = result.filter((a) => !a.passed);
     const passed = !withErrors.length;
     if (!passed) {
         lines.push(
-            `shasum: WARNING: ${withErrors.length} computed checksum${withErrors.length > 1 ? 's' : ''} did NOT match`
+            `shasum: WARNING: ${withErrors.length} computed checksum${withErrors.length > 1 ? 's' : ''} did NOT match`,
         );
     }
     return { report: lines.join('\n'), passed };
@@ -170,7 +170,7 @@ async function resolveFileList(files: string[] | undefined, listFile: string[] |
 export async function calcUpdateChecksumForFiles(
     filename: string,
     files: string[],
-    options: ReportOptions
+    options: ReportOptions,
 ): Promise<string> {
     const root = options.root || '.';
     const filesToCheck = await resolveFileList(files, options.listFile);
@@ -203,7 +203,7 @@ export async function calcUpdateChecksumForFiles(
 export async function updateChecksumForFiles(
     filename: string,
     files: string[],
-    options: ReportOptions
+    options: ReportOptions,
 ): Promise<ReportResult> {
     const content = await calcUpdateChecksumForFiles(filename, files, options);
 

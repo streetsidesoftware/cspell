@@ -25,7 +25,7 @@ describe('Import/Export', () => {
             data
                 .replace(/\[\d+\]/g, '')
                 .split('\n')
-                .map((a) => (a ? a + '\r\n' : a))
+                .map((a) => (a ? a + '\r\n' : a)),
         );
         const words = [...ft.words()];
         expect(words).toEqual([...smallSample].sort());
@@ -41,7 +41,7 @@ describe('Import/Export', () => {
             data
                 .replace(/\[\d+\]/g, '')
                 .split('\n')
-                .map((a) => (a ? a + '\r\n' : a))
+                .map((a) => (a ? a + '\r\n' : a)),
         );
         const words = [...ft.words()];
         expect(words).toEqual([...smallSample].sort());
@@ -68,7 +68,7 @@ describe('Import/Export', () => {
         ].join('');
         const ft = importTrieV3WithBuilder(
             new Builder(),
-            data.split('\n').map((a) => (a ? a + '\n' : a))
+            data.split('\n').map((a) => (a ? a + '\n' : a)),
         );
         const words = [...ft.words()];
         expect(words).toEqual([...sampleWords].sort());

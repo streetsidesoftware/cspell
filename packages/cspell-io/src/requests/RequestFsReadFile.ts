@@ -10,6 +10,6 @@ interface RequestParams {
     readonly encoding: BufferEncoding;
 }
 export const RequestFsReadFileText = requestFactory<typeof RequestType, RequestParams, Promise<TextFileResource>>(
-    RequestType
+    RequestType,
 );
 export type RequestFsReadFileText = ServiceRequestFactoryRequestType<typeof RequestFsReadFileText>;

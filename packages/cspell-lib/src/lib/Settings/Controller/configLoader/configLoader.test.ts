@@ -104,7 +104,7 @@ describe('Validate CSpellSettingsServer', () => {
         const errors = extractImportErrors(settings);
         expect(errors).toHaveLength(1);
         expect(errors.map((ref) => ref.error.toString())).toContainEqual(
-            expect.stringMatching('intentionally-missing-file.json')
+            expect.stringMatching('intentionally-missing-file.json'),
         );
         expect(errors.map((ref) => ref.error.toString())).toContainEqual(expect.stringMatching('Failed to read'));
     });
@@ -140,7 +140,7 @@ describe('Validate CSpellSettingsServer', () => {
                     root: path.dirname(configFile),
                     source: configFile,
                 },
-            ])
+            ]),
         );
         const errors = extractImportErrors(config);
         expect(errors).toEqual([]);
@@ -165,7 +165,7 @@ describe('Validate CSpellSettingsServer loadConfig', () => {
                     root: path.dirname(configFile),
                     source: configFile,
                 },
-            ])
+            ]),
         );
         const errors = extractImportErrors(config);
         expect(errors).toEqual([]);
@@ -184,7 +184,7 @@ describe('Validate CSpellSettingsServer loadConfig', () => {
                     root: path.dirname(configFile),
                     source: configFile,
                 },
-            ])
+            ]),
         );
         const errors = extractImportErrors(config);
         expect(errors).toEqual([]);
@@ -207,12 +207,12 @@ describe('Validate Glob resolution', () => {
         expect(sampleSettings.ignorePaths).toEqual(
             expect.arrayContaining([
                 { glob: 'node_modules', root: sampleSettings.globRoot, source: srcSampleSettingsFilename },
-            ])
+            ]),
         );
         expect(sampleSettingsV1.ignorePaths).toEqual(
             expect.arrayContaining([
                 { glob: 'node_modules', root: sampleSettingsV1.globRoot, source: srcSampleSettingsFilename },
-            ])
+            ]),
         );
     });
 
@@ -259,7 +259,7 @@ describe('Validate Glob resolution', () => {
                         source: configFilename,
                     },
                 ]),
-            })
+            }),
         );
     });
 
@@ -276,7 +276,7 @@ describe('Validate Glob resolution', () => {
                     root: rootCspellLib,
                     source: path.join(rootCspellLib, 'cspell.config.json'),
                 },
-            ])
+            ]),
         );
     });
 
@@ -290,7 +290,7 @@ describe('Validate Glob resolution', () => {
                     root: rootCspellLib,
                     source: configFile,
                 },
-            ])
+            ]),
         );
     });
 
@@ -333,7 +333,7 @@ describe('Validate search/load config files', () => {
 
     function cfg(
         filename: string | ImportFileRefWithError,
-        values: CSpellSettingsWithSourceTrace = {}
+        values: CSpellSettingsWithSourceTrace = {},
     ): CSpellSettingsWithSourceTrace {
         const __importRef = importFileRef(filename);
         return {
@@ -387,9 +387,9 @@ describe('Validate search/load config files', () => {
         expect(errors).toEqual(
             expect.arrayContaining(
                 expectedImportErrors.map((filename) =>
-                    expect.objectContaining({ filename: expect.stringContaining(filename) })
-                )
-            )
+                    expect.objectContaining({ filename: expect.stringContaining(filename) }),
+                ),
+            ),
         );
     });
 
@@ -407,9 +407,9 @@ describe('Validate search/load config files', () => {
         expect(errors).toEqual(
             expect.arrayContaining(
                 expectedImportErrors.map((filename) =>
-                    expect.objectContaining({ filename: expect.stringContaining(filename) })
-                )
-            )
+                    expect.objectContaining({ filename: expect.stringContaining(filename) }),
+                ),
+            ),
         );
     });
 
@@ -518,7 +518,7 @@ describe('Validate search/load config files', () => {
         const d = { default: {}, name: '' };
         const c: CSpellUserSettings = d;
         expect(() => validateRawConfigExports(c, { filename: 'filename' })).toThrow(
-            'Module `export default` is not supported.\n  Use `module.exports =` instead.\n  File: "filename"'
+            'Module `export default` is not supported.\n  Use `module.exports =` instead.\n  File: "filename"',
         );
     });
 });

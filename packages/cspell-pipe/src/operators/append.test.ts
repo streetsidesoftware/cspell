@@ -19,7 +19,7 @@ describe('append', () => {
 
     test('async with async', async () => {
         expect(
-            await toArray(pipeAsync(fibonacci(), opTake(5), opAppendAsync(toAsyncIterable([6, 6]), [7, 7])))
+            await toArray(pipeAsync(fibonacci(), opTake(5), opAppendAsync(toAsyncIterable([6, 6]), [7, 7]))),
         ).toEqual([0, 1, 1, 2, 3, 6, 6, 7, 7]);
     });
 });

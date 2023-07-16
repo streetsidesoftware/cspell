@@ -21,7 +21,7 @@ export function readTrieFromConfig(name: string): Promise<Trie> {
 export async function readAndProcessDictionaryFile<T>(
     processor: (data: Buffer) => T,
     pathOrPackage: string,
-    dictionaryName?: string
+    dictionaryName?: string,
 ) {
     const pkgLocation = fileURLToPath(importResolve(pathOrPackage, import.meta.url));
     const buf = await readRawDictionaryFileFromConfig(pkgLocation, dictionaryName);
@@ -30,12 +30,12 @@ export async function readAndProcessDictionaryFile<T>(
 
 export async function readFastTrieBlobFromConfig(
     pathOrPackage: string,
-    dictionaryName?: string
+    dictionaryName?: string,
 ): Promise<FastTrieBlob> {
     return readAndProcessDictionaryFile(
         (buf) => importTrieV3AsFastTrieBlob(buf.toString('utf8')),
         pathOrPackage,
-        dictionaryName
+        dictionaryName,
     );
 }
 

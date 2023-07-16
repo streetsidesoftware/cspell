@@ -75,7 +75,7 @@ describe('Validate minimatch assumptions', () => {
         ({ pattern, file, options, expected }: TestCase) => {
             const r = minimatch(file, pattern, options);
             expect(r).toBe(expected);
-        }
+        },
     );
 });
 
@@ -163,7 +163,7 @@ describe('Validate micromatch assumptions', () => {
             ignore && (options.ignore = ignore);
             const r = micromatch([file], pattern, options);
             expect(r).toEqual(expected ? [file] : []);
-        }
+        },
     );
 });
 
@@ -174,7 +174,7 @@ describe('Validate internal functions', () => {
         expect(r).toEqual(
             expect.objectContaining({
                 source: 'default',
-            })
+            }),
         );
     });
 
@@ -230,7 +230,7 @@ describe('Validate internal functions', () => {
 
             expect(globMatcher.match(file)).toBe(expectedToMatch);
             expect(micromatch.isMatch(relToRoot, expectedGlobs, { dot: true })).toBe(expectedToMatch);
-        }
+        },
     );
 
     test.each`
@@ -264,6 +264,6 @@ describe('Validate internal functions', () => {
 
             expect(globMatcher.match(file)).toBe(expectedToMatch);
             expect(micromatch.isMatch(relToRoot, expectedGlobs)).toBe(expectedToMatch);
-        }
+        },
     );
 });

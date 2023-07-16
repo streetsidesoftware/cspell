@@ -1,7 +1,7 @@
 import { toPipeFn } from '../helpers/util.js';
 
 export function opConcatMapAsync<T, U = T>(
-    mapFn: (v: T) => AsyncIterable<U> | Iterable<U>
+    mapFn: (v: T) => AsyncIterable<U> | Iterable<U>,
 ): (iter: AsyncIterable<T>) => AsyncIterable<U> {
     async function* fn(iter: Iterable<T> | AsyncIterable<T>) {
         for await (const v of iter) {

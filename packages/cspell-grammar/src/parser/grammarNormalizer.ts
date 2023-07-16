@@ -208,7 +208,7 @@ function factoryRuleBase(
     repository: NRepository,
     grammar: NGrammar,
     findNext: (this: Rule, line: LineOffsetAnchored) => MatchRuleResult | undefined,
-    end: (this: Rule, line: LineOffsetAnchored) => MatchResult | undefined
+    end: (this: Rule, line: LineOffsetAnchored) => MatchResult | undefined,
 ): GrammarRule;
 function factoryRuleBase(
     parent: Rule | undefined,
@@ -216,7 +216,7 @@ function factoryRuleBase(
     repository: NRepository,
     grammar: NGrammar,
     findNext?: (this: Rule, line: LineOffsetAnchored) => MatchRuleResult | undefined,
-    end?: (this: Rule, line: LineOffsetAnchored) => MatchResult | undefined
+    end?: (this: Rule, line: LineOffsetAnchored) => MatchResult | undefined,
 ): Rule;
 function factoryRuleBase(
     parent: Rule | undefined,
@@ -224,7 +224,7 @@ function factoryRuleBase(
     repository: NRepository,
     grammar: NGrammar,
     findNext?: (this: Rule, line: LineOffsetAnchored) => MatchRuleResult | undefined,
-    end?: (this: Rule, line: LineOffsetAnchored) => MatchResult | undefined
+    end?: (this: Rule, line: LineOffsetAnchored) => MatchResult | undefined,
 ): Rule {
     const depth = parent ? parent.depth + 1 : 0;
     return {
@@ -243,7 +243,7 @@ function factoryRule(
     parent: Rule,
     pattern: NPattern,
     findNext?: (this: Rule, line: LineOffsetAnchored) => MatchRuleResult | undefined,
-    end?: (this: Rule, line: LineOffsetAnchored) => MatchResult | undefined
+    end?: (this: Rule, line: LineOffsetAnchored) => MatchResult | undefined,
 ): Rule {
     return factoryRuleBase(parent, pattern, parent.repository, parent.grammar, findNext, end);
 }

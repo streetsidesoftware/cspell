@@ -155,12 +155,12 @@ export async function measurePerf(which: string | undefined, method: string | un
         const { trie, words } = deps;
         {
             const ft = timer.measureFn('blob.FastTrieBlobBuilder.fromTrieRoot \t', () =>
-                FastTrieBlobBuilder.fromTrieRoot(trie.root)
+                FastTrieBlobBuilder.fromTrieRoot(trie.root),
             );
             timer.measureFn('blob.FastTrieBlob.toTrieBlob \t', () => ft.toTrieBlob());
         }
         const trieBlob = timer.measureFn('blob.createTrieBlobFromITrieNodeRoot\t', () =>
-            createTrieBlobFromITrieNodeRoot(trieRootToITrieRoot(trie.root))
+            createTrieBlobFromITrieNodeRoot(trieRootToITrieRoot(trie.root)),
         );
 
         switch (method) {
@@ -201,10 +201,10 @@ export async function measurePerf(which: string | undefined, method: string | un
     function perfFast(deps: Pick<TestDependencies, 'trie' | 'words'>) {
         const { trie, words } = deps;
         const ftWordList = timer.measureFn('fast.FastTrieBlobBuilder.fromWordList', () =>
-            FastTrieBlobBuilder.fromWordList(words)
+            FastTrieBlobBuilder.fromWordList(words),
         );
         const ft = timer.measureFn('fast.FastTrieBlobBuilder.fromTrieRoot', () =>
-            FastTrieBlobBuilder.fromTrieRoot(trie.root)
+            FastTrieBlobBuilder.fromTrieRoot(trie.root),
         );
 
         switch (method) {
@@ -259,7 +259,7 @@ export async function measurePerf(which: string | undefined, method: string | un
         const trieBlobNL = timer.measureFn('blob.FastTrieBlob.toTrieBlob NL', () => trieFastNL.toTrieBlob());
 
         timer.measureFn('selectNearestWordsBruteForce', () =>
-            selectNearestWordsBruteForce('nearest', fWords, count, maxEdits)
+            selectNearestWordsBruteForce('nearest', fWords, count, maxEdits),
         );
 
         // const sr =
@@ -267,10 +267,10 @@ export async function measurePerf(which: string | undefined, method: string | un
         // console.warn('%o', sr);
         // const sc =
         timer.measureFn('trie.suggestWithCost', () =>
-            trie.suggestWithCost('nearest', { ignoreCase: false, changeLimit: maxEdits })
+            trie.suggestWithCost('nearest', { ignoreCase: false, changeLimit: maxEdits }),
         );
         timer.measureFn('suggestTrieNode', () =>
-            suggestTrieNode(trie.root, 'nearest', { ignoreCase: false, changeLimit: maxEdits })
+            suggestTrieNode(trie.root, 'nearest', { ignoreCase: false, changeLimit: maxEdits }),
         );
 
         // cspell:ignore afgelopen
@@ -293,7 +293,7 @@ export async function measurePerf(which: string | undefined, method: string | un
         function sugAStar2(trie: TrieData, words: string[], weightMap: WeightMap | undefined) {
             for (const word of words) {
                 timer.measureFn(`suggestAStar2 ${word}`, () =>
-                    suggestAStar2(trie, word, { ignoreCase: false, changeLimit: maxEdits, weightMap })
+                    suggestAStar2(trie, word, { ignoreCase: false, changeLimit: maxEdits, weightMap }),
                 );
             }
         }
@@ -320,12 +320,12 @@ export async function measurePerf(which: string | undefined, method: string | un
             trie: TrieData,
             words: string[],
             weightMap: WeightMap | undefined,
-            count: number
+            count: number,
         ) {
             for (const word of words) {
                 timer.measureFn(
                     `${name} "${word}" x ${count}`,
-                    repeat(() => sugAStar2(trie, word, weightMap), count)
+                    repeat(() => sugAStar2(trie, word, weightMap), count),
                 );
             }
         }

@@ -12,5 +12,5 @@ export default mergeConfig(
             root: __dirname,
             testTimeout: 10000,
         },
-    })
+    }),
 );

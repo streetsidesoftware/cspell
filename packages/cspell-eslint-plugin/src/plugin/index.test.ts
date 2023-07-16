@@ -56,12 +56,12 @@ ruleTester.run('cspell', Rule.rules.spellchecker, {
         readInvalid(
             'with-errors/sampleESM.mjs',
             ['Unknown word: "Guuide"', 'Unknown word: "Gallaxy"', 'Unknown word: "functionn"', 'Unknown word: "coool"'],
-            { checkIdentifiers: false }
+            { checkIdentifiers: false },
         ),
         readInvalid(
             'with-errors/sampleESM.mjs',
             ['Unknown word: "Guuide"', 'Unknown word: "Gallaxy"', 'Unknown word: "BADD"', 'Unknown word: "coool"'],
-            { checkComments: false }
+            { checkComments: false },
         ),
         // cspell:ignore Montj Todayy Yaar Aprill Februarry gooo weeek
         readInvalid('with-errors/sampleTemplateString.mjs', [
@@ -96,12 +96,12 @@ ruleTester.run('cspell', Rule.rules.spellchecker, {
                 'Unknown word: "muawhahaha"',
                 'Unknown word: "uuuug"',
             ],
-            { ignoreImports: false }
+            { ignoreImports: false },
         ),
         readInvalid(
             'with-errors/imports.ts',
             ['Unknown word: "grrrrr"', 'Unknown word: "muawhahaha"', 'Unknown word: "uuuug"'],
-            { ignoreImportProperties: false }
+            { ignoreImportProperties: false },
         ),
         // cspell:ignore uuug grrr
         readInvalid('with-errors/importAlias.ts', ['Unknown word: "uuug"']),
@@ -116,13 +116,13 @@ ruleTester.run('cspell', Rule.rules.spellchecker, {
                 'Unknown word: "uuug"',
                 'Unknown word: "grrr"',
             ],
-            { ignoreImports: false }
+            { ignoreImports: false },
         ),
         // cspell:ignore GRRRRRR UUUUUG
         readInvalid(
             'with-errors/creepyData.ts',
             ['Unknown word: "uuug"', 'Unknown word: "grrr"', 'Unknown word: "GRRRRRR"', 'Unknown word: "UUUUUG"'],
-            { ignoreImports: false, customWordListFile: resolveFix('with-errors/creepyData.dict.txt') }
+            { ignoreImports: false, customWordListFile: resolveFix('with-errors/creepyData.dict.txt') },
         ),
         readInvalid(
             'with-errors/auto-fix.ts',
@@ -134,7 +134,7 @@ ruleTester.run('cspell', Rule.rules.spellchecker, {
                 'Forbidden word: "bluelist"',
                 'Forbidden word: "bluelist"',
             ],
-            { ignoreImports: false, customWordListFile: resolveFix('with-errors/creepyData.dict.txt') }
+            { ignoreImports: false, customWordListFile: resolveFix('with-errors/creepyData.dict.txt') },
         ),
     ],
 });

@@ -27,7 +27,7 @@ function addCompileOptions(compileCommand: program.Command): program.Command {
     return compileCommand
         .option(
             '-o, --output <path>',
-            'Specify the output directory, otherwise files are written back to the same location.'
+            'Specify the output directory, otherwise files are written back to the same location.',
         )
         .option('-n, --no-compress', 'By default the files are Gzipped, this will turn off GZ compression.')
         .option('-m, --max_depth <limit>', 'Maximum depth to apply suffix rules.')
@@ -40,18 +40,18 @@ function addCompileOptions(compileCommand: program.Command): program.Command {
             '-x, --experimental <flag>',
             'Experimental flags, used for testing new concepts. Flags: compound',
             collect,
-            []
+            [],
         )
         .option('--trie3', 'Use file format trie3', false)
         .option('--trie4', 'Use file format trie4', false)
         .option('--trie-base <number>', 'Advanced: Set the trie base number. A value between 10 and 36')
         .option(
             '--list-file <filename...>',
-            'Path to a file that contains the list of files to compile. A list file contains one file per line.'
+            'Path to a file that contains the list of files to compile. A list file contains one file per line.',
         )
         .option(
             '--init',
-            'Create a build command `cspell-tools.config.yaml` file based upon the options given instead of building.'
+            'Create a build command `cspell-tools.config.yaml` file based upon the options given instead of building.',
         );
 }
 
@@ -100,8 +100,8 @@ export async function run(program: program.Command, argv: string[], flags?: Feat
         program
             .command('compile-trie [src...]')
             .description(
-                'Compile words lists or Hunspell dictionary into trie files used by cspell.\nAlias of `compile --trie`'
-            )
+                'Compile words lists or Hunspell dictionary into trie files used by cspell.\nAlias of `compile --trie`',
+            ),
     ).action((src: string[], options: CompileTrieAppOptions) => {
         return processCompileAction(src, { ...options, trie: true }, flags);
     });
@@ -121,14 +121,14 @@ export async function run(program: program.Command, argv: string[], flags?: Feat
         .option('--list-file <list-file.txt...>', 'Specify one or more files that contain paths of files to check.')
         .option(
             '-c, --check <checksum.txt>',
-            'Verify the checksum of files against those stored in the checksum.txt file.'
+            'Verify the checksum of files against those stored in the checksum.txt file.',
         )
         .addOption(
-            new Option('-u, --update <checksum.txt>', 'Update checksums found in the file.').conflicts('--check')
+            new Option('-u, --update <checksum.txt>', 'Update checksums found in the file.').conflicts('--check'),
         )
         .option(
             '-r, --root <root>',
-            'Specify the root to use for relative paths. The current working directory is used by default.'
+            'Specify the root to use for relative paths. The current working directory is used by default.',
         )
         .action(shasum);
 

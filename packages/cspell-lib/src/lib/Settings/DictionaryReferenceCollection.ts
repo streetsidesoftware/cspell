@@ -9,7 +9,7 @@ export interface DictionaryReferenceCollection {
 }
 
 export function createDictionaryReferenceCollection(
-    dictionaries: DictionaryReference[]
+    dictionaries: DictionaryReference[],
 ): DictionaryReferenceCollection {
     return new _DictionaryReferenceCollection(dictionaries);
 }

@@ -355,7 +355,7 @@ function opts(
     filter?: SuggestionCollectorOptions['filter'],
     changeLimit?: number,
     includeTies?: boolean,
-    ignoreCase?: boolean
+    ignoreCase?: boolean,
 ): SuggestionCollectorOptions {
     return clean({
         numSuggestions: maxNumSuggestions,

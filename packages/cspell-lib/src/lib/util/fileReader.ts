@@ -4,7 +4,7 @@ import { toIterableIterator } from './iterableIteratorLib.js';
 
 export async function readLines(
     filename: string,
-    encoding: BufferEncoding = 'utf8'
+    encoding: BufferEncoding = 'utf8',
 ): Promise<IterableIterator<string>> {
     try {
         const content = await readFileText(filename, encoding);

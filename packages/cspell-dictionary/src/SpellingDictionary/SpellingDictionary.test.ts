@@ -57,7 +57,7 @@ describe('Verify building Dictionary', () => {
             'test',
             opts({
                 caseSensitive: true,
-            })
+            }),
         );
         const ignoreCase = { ignoreCase: true };
         const useCase = { ignoreCase: false };

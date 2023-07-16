@@ -43,7 +43,7 @@ function adjustGlobPatternsForBackwardsCompatibility(globs: Glob[]): Glob[] {
 export function generateExclusionFunctionForUri(
     globs: Glob[],
     root: string,
-    allowedSchemes = defaultAllowedSchemes
+    allowedSchemes = defaultAllowedSchemes,
 ): ExclusionFunction {
     const adjustedGlobs = adjustGlobPatternsForBackwardsCompatibility(globs);
     const matchFn = generateExclusionFunctionForFiles(adjustedGlobs, root);

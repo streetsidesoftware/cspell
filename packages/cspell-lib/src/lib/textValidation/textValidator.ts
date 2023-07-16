@@ -15,7 +15,7 @@ import type { IncludeExcludeOptions, LineSegment, TextOffsetRO, ValidationOption
 export function validateText(
     text: string,
     dict: SpellingDictionary,
-    options: ValidationOptions
+    options: ValidationOptions,
 ): Iterable<ValidationResult> {
     const { maxNumberOfProblems = defaultMaxNumberOfProblems, maxDuplicateProblems = defaultMaxDuplicateProblems } =
         options;
@@ -38,7 +38,7 @@ export function validateText(
             // Filter out if there is too many
             return n <= maxDuplicateProblems;
         }),
-        opTake(maxNumberOfProblems)
+        opTake(maxNumberOfProblems),
     );
 
     return iter;
@@ -52,7 +52,7 @@ export function calcTextInclusionRanges(text: string, options: IncludeExcludeOpt
 
     const includeRanges = TextRange.excludeRanges(
         TextRange.findMatchingRangesForPatterns(finalIncludeList, text),
-        TextRange.findMatchingRangesForPatterns(ignoreRegExpList, text)
+        TextRange.findMatchingRangesForPatterns(ignoreRegExpList, text),
     );
     return includeRanges;
 }
@@ -72,7 +72,7 @@ function mapLineToLineSegments(includeRanges: TextRange.MatchRange[]): (line: Te
  * @param includeRanges Allowed ranges for words.
  */
 export function mapLineSegmentAgainstRangesFactory(
-    includeRanges: TextRange.MatchRange[]
+    includeRanges: TextRange.MatchRange[],
 ): (lineSeg: LineSegment) => LineSegment[] {
     let rangePos = 0;
 

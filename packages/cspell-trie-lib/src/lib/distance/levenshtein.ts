@@ -47,7 +47,7 @@ export function levenshteinDistance(a: string, b: string): number {
                 c, // substitute
                 ct, // transpose
                 pRow[i] + 1, // insert
-                row[i1] + 1 // delete
+                row[i1] + 1, // delete
             );
             ap = ac;
         }
@@ -67,7 +67,7 @@ export function selectNearestWords(
     word: string,
     words: Iterable<string>,
     count: number,
-    maxEdits: number
+    maxEdits: number,
 ): NearestWords[] {
     const resultsByCost: NearestWords[][] = [];
 
@@ -151,7 +151,7 @@ export function selectNearestWords(
                     c, // substitute
                     ct, // transpose
                     pRow[i] + 1, // insert
-                    row[i1] + 1 // delete
+                    row[i1] + 1, // delete
                 );
                 row[i] = v;
                 min = v < min ? v : min;

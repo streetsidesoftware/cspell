@@ -35,7 +35,7 @@ function run(program: commander.Command) {
             '-p, --parallelLimit <number>',
             'Max number of parallel checks.',
             validateParallelArg,
-            `${defaultParallel}`
+            `${defaultParallel}`,
         )
         .description('Run the integration tests, checking the spelling results against the various repositories')
         .action(
@@ -48,7 +48,7 @@ function run(program: commander.Command) {
                     exclude?: string[];
                     parallelLimit: string;
                     githubToken?: string | undefined;
-                }
+                },
             ) => {
                 const {
                     updateRepositories: update = false,
@@ -59,7 +59,7 @@ function run(program: commander.Command) {
                 const parallelLimit = processParallelArg(options.parallelLimit);
                 registerToken(options.githubToken);
                 return check(patterns || [], { update, updateSnapshots, fail, exclude, parallelLimit });
-            }
+            },
         );
 
     interface ListOptions extends Omit<ListRepositoryOptions, 'exclude' | 'patterns'> {
@@ -94,7 +94,7 @@ function run(program: commander.Command) {
         .description(
             'Add a repository to be checked.\n' +
                 '  Example: add "https://github.com/streetsidesoftware/cspell.git".\n' +
-                '  Note: to adjust the arguments, the configuration is found in `config/config.json`'
+                '  Note: to adjust the arguments, the configuration is found in `config/config.json`',
         )
         .action(async (url: string, options: { branch?: string; githubToken?: string | undefined }) => {
             registerToken(options.githubToken);

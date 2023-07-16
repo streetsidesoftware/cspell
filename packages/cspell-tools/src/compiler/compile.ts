@@ -58,7 +58,7 @@ export async function compileTarget(
     target: Target,
     options: CompileSourceOptions,
     rootDir: string,
-    cwd?: string
+    cwd?: string,
 ): Promise<void> {
     logWithTimestamp(`Start compile: ${target.name}`);
 
@@ -75,7 +75,7 @@ export async function compileTarget(
     const filesToProcessAsync = pipeAsync(
         readSourceList(sources, rootDir),
         opMapAsync((src) => readFileSource(src, options)),
-        opAwaitAsync()
+        opAwaitAsync(),
     );
     const filesToProcess: FileToProcess[] = await toArray(filesToProcessAsync);
     const normalizer = normalizeTargetWords({ sort: useTrie || sort, generateNonStrict });
@@ -117,7 +117,7 @@ async function processFiles(action: ActionFn, filesToProcess: FileToProcess[], m
         opConcatMap(function* (ftp) {
             yield* ftp.words;
             logWithTimestamp('Done processing %s', rel(ftp.src));
-        })
+        }),
         // opMap((a) => (console.warn(a), a))
     );
     await action(words, dst);
@@ -184,7 +184,7 @@ async function readFileSource(fileSource: FileSource, sourceOptions: CompileSour
     // console.warn('fileSource: %o,\n targetOptions %o, \n opt: %o', fileSource, targetOptions, opt);
 
     const allowedSplitWords = await createAllowedSplitWordsFromFiles(
-        fileSource.allowedSplitWords || sourceOptions.allowedSplitWords
+        fileSource.allowedSplitWords || sourceOptions.allowedSplitWords,
     );
 
     const readerOptions: SourceReaderOptions = {

@@ -6,22 +6,22 @@ export function createRequestHandler<T extends ServiceRequest>(
     requestDef: ServiceRequestFactory<T>,
     fn: HandleRequestFn<T>,
     name?: string,
-    description?: string
+    description?: string,
 ): Handler {
     return createIsRequestHandler(requestDef.is, fn, name ?? requestDef.type, description);
 }
 export function createIsRequestHandlerFn<T extends ServiceRequest>(
     isA: IsARequest<T>,
-    fn: HandleRequestFn<T>
+    fn: HandleRequestFn<T>,
 ): HandlerFn {
-    return (dispatcher) => (next) => (request) => isA(request) ? fn(request, next, dispatcher) : next(request);
+    return (dispatcher) => (next) => (request) => (isA(request) ? fn(request, next, dispatcher) : next(request));
 }
 
 export function createIsRequestHandler<T extends ServiceRequest>(
     isA: IsARequest<T>,
     fn: HandleRequestFn<T>,
     name: string,
-    description?: string
+    description?: string,
 ): Handler {
     return {
         fn: createIsRequestHandlerFn<T>(isA, fn),

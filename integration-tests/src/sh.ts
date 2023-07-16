@@ -25,7 +25,7 @@ export function execAsync(command: string, options: ExecOptions = {}): Promise<S
         Shell.exec(
             command /* lgtm[js/shell-command-injection-from-environment] */,
             { silent: !echo, fatal: bail },
-            (code, stdout, stderr) => resolve({ code, stdout, stderr })
+            (code, stdout, stderr) => resolve({ code, stdout, stderr }),
         );
     });
 }

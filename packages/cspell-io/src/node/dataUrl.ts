@@ -16,7 +16,7 @@ import { toURL } from './file/util.js';
 export function encodeDataUrl(
     data: string | Buffer,
     mediaType: string,
-    attributes?: Iterable<readonly [string, string]> | undefined
+    attributes?: Iterable<readonly [string, string]> | undefined,
 ): string {
     if (typeof data === 'string') return encodeString(data, mediaType, attributes);
     const attribs = encodeAttributes(attributes || []);
@@ -26,7 +26,7 @@ export function encodeDataUrl(
 export function toDataUrl(
     data: string | Buffer,
     mediaType: string,
-    attributes?: Iterable<[string, string]> | undefined
+    attributes?: Iterable<[string, string]> | undefined,
 ): URL {
     return new URL(encodeDataUrl(data, mediaType, attributes));
 }
@@ -34,7 +34,7 @@ export function toDataUrl(
 function encodeString(
     data: string,
     mediaType: string | undefined,
-    attributes: Iterable<readonly [string, string]> | undefined
+    attributes: Iterable<readonly [string, string]> | undefined,
 ): string {
     mediaType = mediaType || 'text/plain';
     attributes = attributes || [];
@@ -84,7 +84,7 @@ export function decodeDataUrl(url: string | URL): DecodedDataUrl {
 export async function encodeDataUrlFromFile(
     path: string | URL,
     mediaType?: string,
-    attributes?: Iterable<readonly [string, string]> | undefined
+    attributes?: Iterable<readonly [string, string]> | undefined,
 ): Promise<string> {
     const url = toURL(path);
     const filename = fsPath.basename(url.pathname);

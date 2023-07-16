@@ -20,7 +20,7 @@ interface Costs extends Required<HunspellCosts> {
 
 export function hunspellInformationToSuggestionCostDef(
     hunInfo: HunspellInformation,
-    locales: Locale[] | undefined
+    locales: Locale[] | undefined,
 ): SuggestionCostMapDef[] {
     const costs = calcCosts(hunInfo.costs, locales);
 
@@ -56,11 +56,11 @@ export function hunspellInformationToSuggestionCostDef(
                     operations,
                     opMap((fn) => fn(line, costs)),
                     opMap(asArrayOf),
-                    opFlatten()
-                )
+                    opFlatten(),
+                ),
             ),
             opFlatten(),
-            opFilter(isDefined)
+            opFilter(isDefined),
         );
 
         return [...defs];
@@ -113,7 +113,7 @@ function affTry(line: string, costs: Costs): SuggestionCostMapDef[] | undefined 
             cost,
         },
         costs.locale,
-        costs
+        costs,
     );
 }
 
@@ -130,7 +130,7 @@ function affTryFirstCharacterReplace(line: string, costs: Costs): SuggestionCost
             characters,
             cost,
         },
-        costs
+        costs,
     );
 }
 

@@ -28,6 +28,6 @@ describe('Validate English Trie', () => {
             const trie = await pTrie;
             expect(trie.has(word, useCompound)).toBe(expected);
         },
-        timeout
+        timeout,
     );
 });

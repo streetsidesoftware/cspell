@@ -17,7 +17,7 @@ export function hintedWalker(
     ignoreCase: boolean,
     hint: string,
     compoundingMethod: CompoundWordsMethod | undefined,
-    emitWordSeparator?: string
+    emitWordSeparator?: string,
 ): HintedWalkerIterator {
     return hintedWalkerNext(root, ignoreCase, hint, compoundingMethod, emitWordSeparator);
 }
@@ -31,7 +31,7 @@ function* hintedWalkerNext(
     ignoreCase: boolean,
     hint: string,
     compoundingMethod: CompoundWordsMethod | undefined,
-    emitWordSeparator = ''
+    emitWordSeparator = '',
 ): HintedWalkerIterator {
     const _compoundingMethod = compoundingMethod ?? CompoundWordsMethod.NONE;
 

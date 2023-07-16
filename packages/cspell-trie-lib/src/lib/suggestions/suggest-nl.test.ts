@@ -37,7 +37,7 @@ describe('Validate Dutch Suggestions', () => {
             expect(suggestions).toEqual(expect.arrayContaining(['buurtbewoners']));
             expect(suggestions[0]).toBe('buurtbewoners');
         },
-        timeout
+        timeout,
     );
 
     // cspell:ignore burtbewoners burgbewoners
@@ -61,7 +61,7 @@ describe('Validate Dutch Suggestions', () => {
             const results = trie.suggestWithCost(word, { numSuggestions, includeTies: true });
             expect(results).toEqual(expected);
         },
-        timeout
+        timeout,
     );
 
     // cspell:ignore mexico stad
@@ -74,7 +74,7 @@ describe('Validate Dutch Suggestions', () => {
             expect(suggestions).toEqual(expect.arrayContaining(['Mexico-Stad']));
             expect(suggestions).not.toEqual(expect.arrayContaining(['Mexico-stad']));
         },
-        timeout
+        timeout,
     );
 
     function sr(word: string, cost: number, compoundWord?: string): SuggestionResult {

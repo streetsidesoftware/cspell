@@ -53,7 +53,7 @@ export interface SpellCheckFileResult {
 export function spellCheckFile(
     file: string | Uri | URL,
     options: SpellCheckFileOptions,
-    settings: CSpellUserSettings
+    settings: CSpellUserSettings,
 ): Promise<SpellCheckFileResult> {
     const doc: Document = {
         uri: toUri(file).toString(),
@@ -70,7 +70,7 @@ export function spellCheckFile(
 export async function spellCheckDocument(
     document: Document | DocumentWithText,
     options: SpellCheckFileOptions,
-    settings: CSpellUserSettings
+    settings: CSpellUserSettings,
 ): Promise<SpellCheckFileResult> {
     if (isBinaryDoc(document)) {
         return {
@@ -102,7 +102,7 @@ export async function spellCheckDocument(
 async function spellCheckFullDocument(
     document: DocumentWithText,
     options: SpellCheckFileOptions,
-    settings: CSpellUserSettings
+    settings: CSpellUserSettings,
 ): Promise<SpellCheckFileResult> {
     const doc = documentToTextDocument(document);
     const docValOptions: DocumentValidatorOptions = options;
@@ -157,7 +157,7 @@ export interface DetermineFinalDocumentSettingsResult {
  */
 export function determineFinalDocumentSettings(
     document: DocumentWithText,
-    settings: CSpellUserSettings
+    settings: CSpellUserSettings,
 ): DetermineFinalDocumentSettingsResult {
     const doc = createTextDocument({
         uri: document.uri,

@@ -40,7 +40,7 @@ export function createSuggestOptions(
     numSuggestions?: number,
     compoundMethod?: CompoundWordsMethod,
     numChanges?: number,
-    ignoreCase?: boolean
+    ignoreCase?: boolean,
 ): SuggestOptions {
     return {
         numSuggestions,

@@ -18,7 +18,7 @@ const defaultConfigFile = 'cspell-tools.config.yaml';
 export async function processCompileAction(
     src: string[],
     options: CompileCommonAppOptions,
-    featureFlags: FeatureFlags | undefined
+    featureFlags: FeatureFlags | undefined,
 ): Promise<void> {
     const ff = featureFlags || getSystemFeatureFlags();
     parseFlags(ff, options.experimental || []);
@@ -30,7 +30,7 @@ async function useCompile(src: string[], options: CompileCommonAppOptions): Prom
         'Compile:\n output: %s\n compress: %s\n files:\n  %s ',
         options.output || 'default',
         options.compress ? 'true' : 'false',
-        src.join('\n  ')
+        src.join('\n  '),
     );
     if (options.listFile && options.listFile.length) {
         console.log(' list files:\n  %s', options.listFile.join('\n  '));
@@ -41,7 +41,7 @@ async function useCompile(src: string[], options: CompileCommonAppOptions): Prom
     const sources = [
         ...pipe(
             globResults,
-            opConcatMap((a) => a)
+            opConcatMap((a) => a),
         ),
     ];
 

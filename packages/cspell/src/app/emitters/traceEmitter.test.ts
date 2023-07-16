@@ -76,7 +76,7 @@ errorcode  ! forbid-words*        ../forbid-words.txt
 errorcode  I ignore-words*        ../../ignore-words.txt
 error+code * my-special-words*    which/should/.../space/my-special-words.txt
 errorcode  * project-words        project-words.txt
-errorcode  - softwareTerms*       node_modules/.../dict/softwareTerms.txt`)
+errorcode  - softwareTerms*       node_modules/.../dict/softwareTerms.txt`),
         );
     });
 
@@ -100,8 +100,8 @@ errorcode  ! forbid-words*        D:/this_is_a_very/long/forbid-words.txt
 errorcode  I ignore-words*        D:/this_is_a_very/ignore-words.txt
 error+code * my-special-words*    D:/this_is_a_very/long/path/which/should/not/fit/fully/into/the/space/my-special-words.txt
 errorcode  * project-words        D:/this_is_a_very/long/path/project-words.txt
-errorcode  - softwareTerms*       D:/this_is_a_very/long/path/node_modules/@cspell/dict-software-terms/dict/softwareTerms.txt`
-            )
+errorcode  - softwareTerms*       D:/this_is_a_very/long/path/node_modules/@cspell/dict-software-terms/dict/softwareTerms.txt`,
+            ),
         );
     });
 });

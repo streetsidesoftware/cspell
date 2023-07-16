@@ -124,7 +124,7 @@ const mergeCache = new AutoResolveWeakCache<
 
 function merge(
     left: CSpellSettingsWSTO | CSpellSettingsI,
-    right: CSpellSettingsWSTO | CSpellSettingsI
+    right: CSpellSettingsWSTO | CSpellSettingsI,
 ): CSpellSettingsI {
     const map = mergeCache.get(left, () => new WeakMap());
     return autoResolveWeak(map, right, () => _merge(left, right));
@@ -132,7 +132,7 @@ function merge(
 
 function _merge(
     left: CSpellSettingsWSTO | CSpellSettingsI,
-    right: CSpellSettingsWSTO | CSpellSettingsI
+    right: CSpellSettingsWSTO | CSpellSettingsI,
 ): CSpellSettingsI {
     const _left = toInternalSettings(left);
     const _right = toInternalSettings(right);
@@ -200,7 +200,7 @@ function _merge(
 function versionBasedMergeList<T>(
     left: T[] | undefined,
     right: T[] | undefined,
-    version: CSpellUserSettings['version']
+    version: CSpellUserSettings['version'],
 ): T[] | undefined {
     if (version === configSettingsFileVersion0_1) {
         return takeRightOtherwiseLeft(left, right);
@@ -313,7 +313,7 @@ function _toInternalSettings(settings: CSpellSettingsI | CSpellSettingsWSTO): CS
 
     const dictionaryDefinitions = mapDictDefsToInternal(
         defs,
-        filenameToDirectory(settings.source?.filename) || resolveCwd()
+        filenameToDirectory(settings.source?.filename) || resolveCwd(),
     );
     const setting = dictionaryDefinitions ? { ...rest, dictionaryDefinitions } : rest;
     return csi(setting);

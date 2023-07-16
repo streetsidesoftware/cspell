@@ -16,7 +16,7 @@ export function extendExpect(e: typeof expect): AsymmetricMatchers {
                 message: () =>
                     // `this` context will have correct typings
                     `expected ${this.utils.printReceived(actual)} to equal ${this.utils.printExpected(
-                        expected
+                        expected,
                     )} case insensitive`,
                 pass,
             };

@@ -67,7 +67,7 @@ describe('Validate first', () => {
                 Promise.resolve(Promise.resolve(Promise.resolve('deep'))),
             ],
             opFirstAsync(truthyAsync),
-            opFirst(isString)
+            opFirst(isString),
         );
 
         expect(await toArray(values)).toEqual(['string']);

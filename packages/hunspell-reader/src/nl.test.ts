@@ -24,7 +24,7 @@ describe('HunspellReader NL', function () {
             const words = [...reader];
             expect(words).toEqual(['baddoek', 'baddoeken', 'baddoeken-']);
         },
-        timeout
+        timeout,
     );
 
     // cspell:ignore ABCM
@@ -37,6 +37,6 @@ describe('HunspellReader NL', function () {
             const words = [...reader.seqAffWords()].map((w) => Aff.debug.signature(w));
             expect(words).toEqual(['baddoek|', 'baddoeken|BCM', 'baddoeken-|BCM']);
         },
-        timeout
+        timeout,
     );
 });

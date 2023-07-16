@@ -33,7 +33,7 @@ export function lint(fileGlobs: string[], options: LinterCliOptions, reporter?: 
     const cfg = new LintRequest(
         fileGlobs,
         options,
-        finalizeReporter(reporter) ?? getReporter({ ...options, fileGlobs })
+        finalizeReporter(reporter) ?? getReporter({ ...options, fileGlobs }),
     );
     return runLint(cfg);
 }
@@ -70,7 +70,7 @@ export async function checkText(filename: string, options: BaseOptions & LegacyO
 
 export async function* suggestions(
     words: string[],
-    options: SuggestionOptions
+    options: SuggestionOptions,
 ): AsyncIterable<TimedSuggestionsForWordResult> {
     options = fixLegacy(options);
     const configFile = await readConfig(options.config, undefined);
@@ -94,7 +94,7 @@ export async function* suggestions(
     try {
         const results = pipeAsync(
             suggestionsForWords(iWords, util.clean({ ...options }), configFile.config),
-            opMap(mapEnd)
+            opMap(mapEnd),
         );
         yield* results;
     } catch (e) {

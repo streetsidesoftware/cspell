@@ -30,5 +30,5 @@ runAsWorker(
         }
 
         return spellChecker.spellCheck(filename, text, root, options);
-    }
+    },
 );

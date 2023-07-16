@@ -46,5 +46,5 @@ export type IssueLine = [
     character: IssueEntry['character'],
     code: IssueEntry['code'],
     text: IssueEntry['text'],
-    len: IssueEntry['len']
+    len: IssueEntry['len'],
 ];

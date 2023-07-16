@@ -64,8 +64,8 @@ export function normalizeLocale(locale: LocaleId | LocaleId[]): Set<LocaleId> {
 export function normalizeLocaleIntl(locale: LocaleId | LocaleId[]): Set<LocaleId> {
     const values = [...normalizeLocale(locale)].map((locale) =>
         locale.replace(/^([a-z]{2})-?([a-z]{2})$/, (_, lang: string, locale?: string) =>
-            locale ? `${lang}-${locale.toUpperCase()}` : lang
-        )
+            locale ? `${lang}-${locale.toUpperCase()}` : lang,
+        ),
     );
     return new Set(values);
 }
@@ -100,7 +100,7 @@ const cacheCalcSettingsForLanguage = new WeakMap<LanguageSettings, Map<LanguageI
 export function calcSettingsForLanguage(
     languageSettings: LanguageSettings,
     languageId: LanguageId,
-    locale: LocaleId
+    locale: LocaleId,
 ): BaseSetting {
     const mapLang = autoResolveWeak(cacheCalcSettingsForLanguage, languageSettings, () => new Map());
     const mapLocale = autoResolve(mapLang, languageId, () => new Map());
@@ -110,7 +110,7 @@ export function calcSettingsForLanguage(
 function _calcSettingsForLanguage(
     languageSettings: LanguageSettings,
     languageId: LanguageId,
-    locale: LocaleId
+    locale: LocaleId,
 ): BaseSetting {
     languageId = languageId.toLowerCase();
     const allowedLocals = normalizeLocale(locale);
@@ -164,7 +164,7 @@ export function calcUserSettingsForLanguage(settings: CSpellUserSettings, langua
 
 export function calcSettingsForLanguageId(
     baseSettings: CSpellUserSettings,
-    languageId: LanguageId[] | LanguageId
+    languageId: LanguageId[] | LanguageId,
 ): CSpellUserSettings {
     const langIds: string[] = ['*', ...normalizeLanguageId(languageId)];
     const langSettings = langIds.reduce((settings, languageId) => {

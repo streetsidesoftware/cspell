@@ -8,7 +8,7 @@ import { calcSettingsForLanguageId } from './LanguageSettings.js';
 export function combineTextAndLanguageSettings(
     settings: CSpellUserSettings,
     text: string | undefined,
-    languageId: string | string[]
+    languageId: string | string[],
 ): CSpellSettingsInternal {
     if (!text) {
         return CSpellSettingsServer.toInternalSettings(calcSettingsForLanguageId(settings, languageId));

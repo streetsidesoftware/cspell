@@ -34,7 +34,7 @@ function getDict(): SpellingDictionary {
             createSuggestDictionary(suggestions, 'suggestions', 'test'),
         ],
         'collection',
-        'tests'
+        'tests',
     );
     dict = d;
     return d;

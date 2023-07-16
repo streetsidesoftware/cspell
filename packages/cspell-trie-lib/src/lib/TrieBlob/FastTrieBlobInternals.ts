@@ -9,7 +9,7 @@ export class FastTrieBlobInternals implements FastTrieBlobBitMaskInfo {
         readonly nodes: number[][],
         readonly charIndex: string[],
         readonly charToIndexMap: Readonly<Record<string, number>>,
-        maskInfo: FastTrieBlobBitMaskInfo
+        maskInfo: FastTrieBlobBitMaskInfo,
     ) {
         const { NodeMaskEOW, NodeMaskChildCharIndex, NodeChildRefShift } = maskInfo;
         this.NodeMaskEOW = NodeMaskEOW;

@@ -11,7 +11,7 @@ const cache = createAutoResolveWeakCache<DictionaryDefinitionInline, SpellingDic
 
 export function createInlineSpellingDictionary(
     inlineDict: DictionaryDefinitionInline,
-    source: string
+    source: string,
 ): SpellingDictionary {
     return cache.get(inlineDict, () => {
         const { words, flagWords, ignoreWords, suggestWords, name } = inlineDict;

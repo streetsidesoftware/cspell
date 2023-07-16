@@ -79,7 +79,7 @@ describe('GitIgnoreHierarchy', () => {
             mustBeHierarchical([
                 new GitIgnoreFile(new GlobMatcher('', __dirname), ''),
                 new GitIgnoreFile(new GlobMatcher('', path.join(__dirname, '..')), ''),
-            ])
+            ]),
         ).toThrow('Hierarchy violation - files are not nested');
     });
 
@@ -107,7 +107,7 @@ describe('GitIgnoreHierarchy', () => {
         gifs.push(sampleGitIgnoreFile());
         const gih = new GitIgnoreHierarchy(gifs);
         expect(gih.getGlobs(__dirname).sort()).toEqual(
-            expect.arrayContaining(['**/*.cpuprofile', '**/*.cpuprofile/**', '**/*.test.*', '**/*.test.*/**'])
+            expect.arrayContaining(['**/*.cpuprofile', '**/*.cpuprofile/**', '**/*.test.*', '**/*.test.*/**']),
         );
     });
 

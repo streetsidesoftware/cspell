@@ -20,7 +20,11 @@ import { createTyposDictionary } from './TyposDictionary.js';
 class FlagWordsDictionaryTrie extends SpellingDictionaryFromTrie {
     readonly containsNoSuggestWords = false;
     readonly options: SpellingDictionaryOptions = {};
-    constructor(trie: ITrie, readonly name: string, readonly source: string) {
+    constructor(
+        trie: ITrie,
+        readonly name: string,
+        readonly source: string,
+    ) {
         super(trie, name, defaultOptions, source);
     }
 
@@ -46,7 +50,7 @@ class FlagWordsDictionaryTrie extends SpellingDictionaryFromTrie {
         numSuggestions?: number,
         compoundMethod?: CompoundWordsMethod,
         numChanges?: number,
-        ignoreCase?: boolean
+        ignoreCase?: boolean,
     ): SuggestionResult[];
     suggest(word: string, suggestOptions: SuggestOptions): SuggestionResult[];
     suggest() {
@@ -66,7 +70,7 @@ class FlagWordsDictionary implements SpellingDictionary {
         readonly name: string,
         readonly source: string,
         private dictTypos: TyposDictionary,
-        private dictTrie: FlagWordsDictionaryTrie | undefined
+        private dictTrie: FlagWordsDictionaryTrie | undefined,
     ) {}
 
     /**
@@ -91,7 +95,7 @@ class FlagWordsDictionary implements SpellingDictionary {
 
     isForbidden(
         word: string,
-        ignoreCaseAndAccents: IgnoreCaseOption = Defaults.isForbiddenIgnoreCaseAndAccents
+        ignoreCaseAndAccents: IgnoreCaseOption = Defaults.isForbiddenIgnoreCaseAndAccents,
     ): boolean {
         const findResult = this.find(word, { ignoreCase: ignoreCaseAndAccents });
         return findResult?.forbidden || false;
@@ -135,14 +139,14 @@ const createCache = createAutoResolveWeakCache<readonly string[], SpellingDictio
 export function createFlagWordsDictionary(
     wordList: readonly string[],
     name: string,
-    source: string
+    source: string,
 ): SpellingDictionary {
     return createCache.get(wordList, () => {
         const testSpecialCharacters = /[~*+]/;
 
         const { t: specialWords, f: typoWords } = bisect(
             parseDictionaryLines(wordList, { stripCaseAndAccents: false }),
-            (line) => testSpecialCharacters.test(line)
+            (line) => testSpecialCharacters.test(line),
         );
 
         const trieDict = specialWords.size ? buildTrieDict(specialWords, name, source) : undefined;
@@ -161,8 +165,8 @@ function buildTrieDict(words: Set<string>, name: string, source: string): FlagWo
         pipe(
             words,
             opMap((w) => '!' + w),
-            opMap((w) => w.replace(regExpCleanIgnore, ''))
-        )
+            opMap((w) => w.replace(regExpCleanIgnore, '')),
+        ),
     );
     return new FlagWordsDictionaryTrie(trie, name, source);
 }

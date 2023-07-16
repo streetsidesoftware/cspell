@@ -1,18 +1,28 @@
 import { format } from 'util';
 export class CheckFailed extends Error {
-    constructor(message: string, readonly exitCode: number = 1) {
+    constructor(
+        message: string,
+        readonly exitCode: number = 1,
+    ) {
         super(message);
     }
 }
 
 export class ApplicationError extends Error {
-    constructor(message: string, readonly exitCode: number = 1, readonly cause?: Error) {
+    constructor(
+        message: string,
+        readonly exitCode: number = 1,
+        readonly cause?: Error,
+    ) {
         super(message);
     }
 }
 
 export class IOError extends ApplicationError {
-    constructor(message: string, readonly cause: NodeError) {
+    constructor(
+        message: string,
+        readonly cause: NodeError,
+    ) {
         super(message, undefined, cause);
     }
 

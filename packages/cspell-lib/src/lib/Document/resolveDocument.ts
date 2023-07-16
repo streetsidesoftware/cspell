@@ -14,13 +14,13 @@ export function fileToDocument(
     file: string,
     text?: string,
     languageId?: string,
-    locale?: string
+    locale?: string,
 ): Document | DocumentWithText;
 export function fileToDocument(
     file: string,
     text?: string,
     languageId?: string,
-    locale?: string
+    locale?: string,
 ): Document | DocumentWithText {
     return clean({
         uri: Uri.toUri(file).toString(),
@@ -53,7 +53,7 @@ async function readDocument(filename: string, encoding: BufferEncoding = default
 }
 export function resolveDocument(
     document: DocumentWithText | Document,
-    encoding?: BufferEncoding
+    encoding?: BufferEncoding,
 ): Promise<DocumentWithText> {
     if (isDocumentWithText(document)) return Promise.resolve(document);
     const uri = Uri.toUri(document.uri);

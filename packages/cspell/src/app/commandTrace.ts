@@ -17,18 +17,18 @@ export function commandTrace(prog: Command): Command {
         .description(`Trace words -- Search for words in the configuration and dictionaries.`)
         .option(
             '-c, --config <cspell.json>',
-            'Configuration file to use.  By default cspell looks for cspell.json in the current directory.'
+            'Configuration file to use.  By default cspell looks for cspell.json in the current directory.',
         )
         .option(
             '--locale <locale>',
-            'Set language locales. i.e. "en,fr" for English and French, or "en-GB" for British English.'
+            'Set language locales. i.e. "en,fr" for English and French, or "en-GB" for British English.',
         )
         .option('--language-id <language>', 'Use programming language. i.e. "php" or "scala".')
         .addOption(
             new CommanderOption(
                 '--languageId <language>',
-                'Use programming language. i.e. "php" or "scala".'
-            ).hideHelp()
+                'Use programming language. i.e. "php" or "scala".',
+            ).hideHelp(),
         )
         .option('--allow-compound-words', 'Turn on allowCompoundWords')
         .addOption(new CommanderOption('--allowCompoundWords', 'Turn on allowCompoundWords.').hideHelp())
@@ -38,7 +38,7 @@ export function commandTrace(prog: Command): Command {
         .addOption(
             new CommanderOption('--dictionary-path <format>', 'Configure how to display the dictionary path.')
                 .choices(['hide', 'short', 'long', 'full'])
-                .default('long', 'Display most of the path.')
+                .default('long', 'Display most of the path.'),
         )
         .option('--stdin', 'Read words from stdin.')
         .option('--all', 'Show all dictionaries.')
@@ -48,11 +48,14 @@ export function commandTrace(prog: Command): Command {
         .addOption(
             new CommanderOption(
                 '--default-configuration',
-                'Load the default configuration and dictionaries.'
-            ).hideHelp()
+                'Load the default configuration and dictionaries.',
+            ).hideHelp(),
         )
         .addOption(
-            new CommanderOption('--no-default-configuration', 'Do not load the default configuration and dictionaries.')
+            new CommanderOption(
+                '--no-default-configuration',
+                'Do not load the default configuration and dictionaries.',
+            ),
         )
         .arguments('[words...]')
         .action(async (words: string[], options: TraceCommandOptions) => {

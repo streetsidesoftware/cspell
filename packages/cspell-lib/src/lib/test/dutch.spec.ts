@@ -30,9 +30,9 @@ describe('Validate that Dutch text is correctly checked.', () => {
                 results
                     .map((a) => a.text)
                     .filter(util.uniqueFn())
-                    .sort()
+                    .sort(),
             ).toEqual(['RABO', 'RABONL', 'unported']);
         },
-        { timeout }
+        { timeout },
     );
 });

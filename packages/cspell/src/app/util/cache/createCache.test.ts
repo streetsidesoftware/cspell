@@ -86,7 +86,7 @@ function cco(
     useCache = false,
     cacheLocation = '.cspellcache',
     cacheStrategy: CreateCacheSettings['cacheStrategy'] = 'metadata',
-    cacheFormat: CreateCacheSettings['cacheFormat'] = 'legacy'
+    cacheFormat: CreateCacheSettings['cacheFormat'] = 'legacy',
 ): CreateCacheSettings {
     if (cacheLocation) {
         cacheLocation = path.resolve(process.cwd(), cacheLocation);
@@ -98,7 +98,7 @@ function cs(
     useCache?: boolean,
     cacheLocation?: string,
     cacheStrategy?: CacheOptions['cacheStrategy'],
-    cacheFormat?: CacheOptions['cacheFormat']
+    cacheFormat?: CacheOptions['cacheFormat'],
 ) {
     return { useCache, cacheLocation, cacheStrategy, version, cacheFormat };
 }
@@ -107,7 +107,7 @@ function co(
     cache?: boolean,
     cacheLocation?: string,
     cacheStrategy?: CacheOptions['cacheStrategy'],
-    cacheFormat?: CacheOptions['cacheFormat']
+    cacheFormat?: CacheOptions['cacheFormat'],
 ) {
     return { cache, cacheLocation, cacheStrategy, version, cacheFormat };
 }

@@ -15,7 +15,7 @@ export function commandCheck(prog: Command): Command {
         .description('Spell check file(s) and display the result. The full file is displayed in color.')
         .option(
             '-c, --config <cspell.json>',
-            'Configuration file to use.  By default cspell looks for cspell.json in the current directory.'
+            'Configuration file to use.  By default cspell looks for cspell.json in the current directory.',
         )
         .option('--validate-directives', 'Validate in-document CSpell directives.')
         .option('--no-validate-directives', 'Do not validate in-document CSpell directives.')
@@ -24,11 +24,14 @@ export function commandCheck(prog: Command): Command {
         .addOption(
             new CommanderOption(
                 '--default-configuration',
-                'Load the default configuration and dictionaries.'
-            ).hideHelp()
+                'Load the default configuration and dictionaries.',
+            ).hideHelp(),
         )
         .addOption(
-            new CommanderOption('--no-default-configuration', 'Do not load the default configuration and dictionaries.')
+            new CommanderOption(
+                '--no-default-configuration',
+                'Do not load the default configuration and dictionaries.',
+            ),
         )
         .action(async (files: string[], options: CheckCommandOptions) => {
             App.parseApplicationFeatureFlags(options.flag);

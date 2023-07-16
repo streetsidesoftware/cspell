@@ -12,7 +12,10 @@ class FastTrieBlobINode implements ITrieNode {
     charToIdx: Record<string, number> | undefined;
     private _keys: readonly string[] | undefined;
 
-    constructor(readonly trie: FastTrieBlobInternals, readonly nodeIdx: number) {
+    constructor(
+        readonly trie: FastTrieBlobInternals,
+        readonly nodeIdx: number,
+    ) {
         const node = trie.nodes[nodeIdx];
         this.node = node;
         const value = node[0];
@@ -96,7 +99,11 @@ class FastTrieBlobINode implements ITrieNode {
     }
 }
 export class FastTrieBlobIRoot extends FastTrieBlobINode implements ITrieNodeRoot {
-    constructor(trie: FastTrieBlobInternals, nodeIdx: number, readonly info: Readonly<TrieInfo>) {
+    constructor(
+        trie: FastTrieBlobInternals,
+        nodeIdx: number,
+        readonly info: Readonly<TrieInfo>,
+    ) {
         super(trie, nodeIdx);
     }
     resolveId(id: ITrieNodeId): ITrieNode {

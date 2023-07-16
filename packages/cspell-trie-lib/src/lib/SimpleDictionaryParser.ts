@@ -243,7 +243,7 @@ export function createDictionaryLineParserMapper(options?: Partial<ParseDictiona
         opConcatMap(mapOptionalPrefix),
         opConcatMap(mapOptionalSuffix),
         opConcatMap(mapNormalize),
-        opMap(removeDoublePrefix)
+        opMap(removeDoublePrefix),
     );
 
     return processLines;
@@ -258,7 +258,7 @@ export function createDictionaryLineParserMapper(options?: Partial<ParseDictiona
  */
 export function parseDictionaryLines(
     lines: Iterable<string> | string,
-    options?: Partial<ParseDictionaryOptions>
+    options?: Partial<ParseDictionaryOptions>,
 ): Iterable<string> {
     return createDictionaryLineParserMapper(options)(typeof lines === 'string' ? [lines] : lines);
 }

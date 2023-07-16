@@ -102,7 +102,7 @@ describe('Validate DictionaryLoader', () => {
             const d = await loadDictionary(def);
             expect(d.has(word)).toBe(hasWord);
             expect(!!d.getErrors?.().length).toBe(hasErrors);
-        }
+        },
     );
 
     test.each`
@@ -126,7 +126,7 @@ describe('Validate DictionaryLoader', () => {
             const file = sample('words.txt');
             const d = await loadDictionary(dDef({ name: 'words', path: file }));
             expect(d.has(word, clean({ ignoreCase }))).toBe(hasWord);
-        }
+        },
     );
 
     test.each`

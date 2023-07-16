@@ -183,8 +183,8 @@ export class DictionaryLoader {
                 options.name,
                 uri,
                 new SpellingDictionaryLoadError(uri, options, e, 'failed to load'),
-                options
-            )
+                options,
+            ),
         );
         const pStat = this.getStat(uri);
         const pending = Promise.all([pDictionary, pStat]);
@@ -232,7 +232,7 @@ export class DictionaryLoader {
                 options.name,
                 uri,
                 new SpellingDictionaryLoadError(uri, options, error, 'failed to load'),
-                options
+                options,
             );
             const pending = Promise.resolve([dictionary, stat] as const);
             return {
@@ -275,7 +275,7 @@ export class DictionaryLoader {
 
     private loadInlineDict(def: DictionaryDefinitionInlineInternal): SpellingDictionary {
         return this.inlineDictionaryCache.get(def, (def) =>
-            createInlineSpellingDictionary(def, def.__source || 'memory')
+            createInlineSpellingDictionary(def, def.__source || 'memory'),
         );
     }
 }
@@ -344,7 +344,7 @@ function _legacyWordListSync(lines: Iterable<string>, filename: string, options:
         opMap((line) => line.replace(/#.*/g, '')),
         // Split on everything else
         opConcatMap((line) => line.split(/[^\w\p{L}\p{M}'’]+/gu)),
-        opFilter((word) => !!word)
+        opFilter((word) => !!word),
     );
     return createSpellingDictionary(words, options.name, filename, options);
 }
@@ -366,7 +366,7 @@ function _wordsPerLineWordList(lines: Iterable<string>, filename: string, option
         opMap((line) => line.replace(/#.*/g, '')),
         // Split on everything else
         opConcatMap((line) => line.split(/\s+/gu)),
-        opFilter((word) => !!word)
+        opFilter((word) => !!word),
     );
     return createSpellingDictionary(words, options.name, filename, options);
 }

@@ -136,7 +136,7 @@ describe('DiskCache', () => {
                     configErrors: 0,
                     elapsedTimeMs: 100,
                 },
-                []
+                [],
             );
 
             expect(descriptor.meta.result).toBeUndefined();

@@ -58,7 +58,7 @@ export function suggestAStar(trie: TrieData, word: string, options: SuggestionOp
 export function* getSuggestionsAStar(
     trie: TrieData,
     srcWord: string,
-    options: SuggestionOptions = {}
+    options: SuggestionOptions = {},
 ): SuggestionGenerator {
     const { compoundMethod, changeLimit, ignoreCase, weightMap } = createSuggestionOptions(options);
     const visMap = visualLetterMaskMap;
@@ -254,7 +254,7 @@ export function* getSuggestionsAStar(
         s: string,
         p: PNode,
         a: string,
-        ss: string
+        ss: string,
     ): void {
         const tt = getCostTrie(t, ss);
         const curr = tt.c[i];
@@ -377,7 +377,7 @@ function searchTrieCostNodesMatchingTrie2<T extends { n?: Record<string, T> }>(
     trie: T,
     node: ITrieNode,
     emit: (s: string, t: T, n: ITrieNode) => void,
-    s = ''
+    s = '',
 ): void {
     const n = trie.n;
     if (!n) return;
@@ -428,7 +428,7 @@ type FnStorePath = (
     s: string,
     p: PNode,
     a: string,
-    ss: string
+    ss: string,
 ) => void;
 
 export const __testing__ = {

@@ -18,7 +18,7 @@ export class TrieBlobInternals implements BitMaskInfo {
         readonly nodes: Uint32Array,
         readonly charIndex: string[],
         readonly charToIndexMap: Readonly<Record<string, number>>,
-        maskInfo: BitMaskInfo
+        maskInfo: BitMaskInfo,
     ) {
         const { NodeMaskEOW, NodeMaskChildCharIndex, NodeMaskNumChildren, NodeChildRefShift } = maskInfo;
         this.NodeMaskEOW = NodeMaskEOW;
@@ -37,7 +37,10 @@ class TrieBlobINode implements ITrieNode {
     private _keys: string[] | undefined;
     charToIdx: Record<string, number> | undefined;
 
-    constructor(readonly trie: TrieBlobInternals, readonly nodeIdx: number) {
+    constructor(
+        readonly trie: TrieBlobInternals,
+        readonly nodeIdx: number,
+    ) {
         const node = trie.nodes[nodeIdx];
         this.node = node;
         this.eow = !!(node & trie.NodeMaskEOW);
@@ -118,7 +121,11 @@ class TrieBlobINode implements ITrieNode {
     }
 }
 export class TrieBlobIRoot extends TrieBlobINode implements ITrieNodeRoot {
-    constructor(trie: TrieBlobInternals, nodeIdx: number, readonly info: Readonly<TrieInfo>) {
+    constructor(
+        trie: TrieBlobInternals,
+        nodeIdx: number,
+        readonly info: Readonly<TrieInfo>,
+    ) {
         super(trie, nodeIdx);
     }
     resolveId(id: ITrieNodeId): ITrieNode {
