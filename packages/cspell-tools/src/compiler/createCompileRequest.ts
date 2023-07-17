@@ -4,17 +4,18 @@ import type { CompileCommonAppOptions } from '../AppOptions.js';
 import type { CompileRequest, DictionaryFormats, DictionarySource, FileSource, Target } from '../config/index.js';
 
 export function createCompileRequest(sourceFiles: string[], options: CompileCommonAppOptions): CompileRequest {
-    const { max_depth, maxDepth, experimental = [], split, keepRawCase, useLegacySplitter } = options;
+    options = { ...options };
+    options.maxDepth ??= options.max_depth;
+
+    const { maxDepth, split, keepRawCase, useLegacySplitter } = options;
 
     const sources: DictionarySource[] = [...sourceFiles, ...(options.listFile || []).map((listFile) => ({ listFile }))];
 
     const targets = calcTargets(sources, options);
-    const generateNonStrict = experimental.includes('compound') || undefined;
 
     const req: CompileRequest = {
         targets,
-        generateNonStrict,
-        maxDepth: parseNumber(maxDepth) ?? parseNumber(max_depth),
+        maxDepth: parseNumber(maxDepth),
         split: useLegacySplitter ? 'legacy' : split,
         /**
          * Do not generate lower case / accent free versions of words.
@@ -25,10 +26,16 @@ export function createCompileRequest(sourceFiles: string[], options: CompileComm
 
     return req;
 }
+
 function calcTargets(sources: DictionarySource[], options: CompileCommonAppOptions): Target[] {
-    const { merge, output = '.' } = options;
+    const { merge, output = '.', experimental = [] } = options;
+
+    const generateNonStrict = experimental.includes('compound') || undefined;
+
+    // console.log('%o', sources);
 
     const format = calcFormat(options);
+    const sort = (format === 'plaintext' && options.sort) || undefined;
 
     if (merge) {
         const target: Target = {
@@ -36,9 +43,10 @@ function calcTargets(sources: DictionarySource[], options: CompileCommonAppOptio
             targetDirectory: output,
             compress: options.compress,
             format,
-            sources,
-            sort: options.sort,
+            sources: sources.map(normalizeSource),
+            sort,
             trieBase: parseNumber(options.trieBase),
+            generateNonStrict,
         };
         return [target];
     }
@@ -50,9 +58,10 @@ function calcTargets(sources: DictionarySource[], options: CompileCommonAppOptio
             targetDirectory: output,
             compress: options.compress,
             format,
-            sources: [source],
+            sources: [normalizeSource(source)],
             sort: options.sort,
             trieBase: parseNumber(options.trieBase),
+            generateNonStrict,
         };
         return target;
     });
@@ -78,4 +87,18 @@ function baseNameOfSource(source: DictionarySource): string {
 
 function isFileSource(source: DictionarySource): source is FileSource {
     return typeof source !== 'string' && (<FileSource>source).filename !== undefined;
+}
+
+function normalizeSource(source: DictionarySource): DictionarySource {
+    if (typeof source === 'string') {
+        return normalizeSourcePath(source);
+    }
+    if (isFileSource(source)) return { ...source, filename: normalizeSourcePath(source.filename) };
+    return { ...source, listFile: normalizeSourcePath(source.listFile) };
+}
+
+function normalizeSourcePath(source: string): string {
+    const cwd = process.cwd();
+    const rel = path.relative(cwd, source);
+    return rel.split('\\').join('/');
 }
