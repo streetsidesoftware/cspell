@@ -5,7 +5,7 @@ Args: '["**/*.go"]'
 Summary:
   files: 237
   filesWithIssues: 217
-  issues: 3444
+  issues: 3447
   errors: 0
 Errors: []
 
@@ -150,10 +150,10 @@ issues:
   - "modules/caddyevents/app.go:374:41       datacontenttype     U       string `json:\"datacontenttype,omitempty\"`"
   - "modules/caddyevents/eventsconfig/caddyfile.go:15:12         eventsconfig    U       // Package eventsconfig is for configuring caddyevent"
   - "modules/caddyhttp/app.go:529:5          hrough      U       // hrough a reload; because if"
-  - "modules/caddyhttp/autohttps.go:272:16       tailscale           U       var internal, tailscale []string"
-  - "modules/caddyhttp/autohttps.go:498:12       reprovision         U       // must reprovision the automation policy"
-  - "modules/caddyhttp/autohttps.go:683:4        reprovisioned       U       // reprovisioned. acmeIssuer must not"
-  - "modules/caddyhttp/autohttps.go:700:28       TLSALPN             U       acmeIssuer.Challenges.TLSALPN == nil {"
+  - "modules/caddyhttp/autohttps.go:271:16       tailscale           U       var internal, tailscale []string"
+  - "modules/caddyhttp/autohttps.go:497:12       reprovision         U       // must reprovision the automation policy"
+  - "modules/caddyhttp/autohttps.go:682:4        reprovisioned       U       // reprovisioned. acmeIssuer must not"
+  - "modules/caddyhttp/autohttps.go:699:28       TLSALPN             U       acmeIssuer.Challenges.TLSALPN == nil {"
   - "modules/caddyhttp/caddyauth/basicauth.go:15:9           caddyauth       U       package caddyauth"
   - "modules/caddyhttp/caddyauth/basicauth.go:22:2           weakrand        U       weakrand \"math/rand\""
   - "modules/caddyhttp/caddyauth/caddyauth.go:73:6           authed      U       var authed bool"
@@ -200,7 +200,7 @@ issues:
   - "modules/caddyhttp/fileserver/caddyfile.go:80:5          fsys                U       fsys, ok := unm.(fs.FS)"
   - "modules/caddyhttp/fileserver/caddyfile.go:119:6         precompress         U       precompress, ok := inst.(encode"
   - "modules/caddyhttp/fileserver/caddyfile.go:121:46        precompressor       U       \"module %s is not a precompressor; is %T\", modID, inst"
-  - "modules/caddyhttp/fileserver/command.go:27:2        caddytpl    U       caddytpl \"github.com/caddyserver"
+  - "modules/caddyhttp/fileserver/command.go:29:2        caddytpl    U       caddytpl \"github.com/caddyserver"
   - "modules/caddyhttp/fileserver/matcher_test.go:72:20          foodir          U       path: \"/foodir\","
   - "modules/caddyhttp/fileserver/matcher_test.go:90:15          missingfile     U       path: \"/missingfile.php\","
   - "modules/caddyhttp/fileserver/matcher_test.go:192:20         notphp          U       path: \"/notphp.php.txt\","
@@ -360,8 +360,8 @@ issues:
   - "modules/caddytls/matchers.go:111:37         addresss    U       Error(\"invalid client IP addresss\", zap.String(\"ip\", ipStr"
   - "modules/caddytls/standardstek/stek.go:15:9          standardstek    U       package standardstek"
   - "modules/caddytls/standardstek/stek.go:49:2          itvl            U       itvl := time.Duration(s.stekConfig"
-  - "modules/caddytls/tls.go:208:25      unmanaged       U       load manual/static (unmanaged) certificates - we do"
-  - "modules/caddytls/tls.go:226:22      Unmanaged       U       err := magic.CacheUnmanagedTLSCertificate(ctx, cert"
+  - "modules/caddytls/tls.go:224:25      unmanaged       U       load manual/static (unmanaged) certificates - we do"
+  - "modules/caddytls/tls.go:244:28      Unmanaged       U       hash, err := magic.CacheUnmanagedTLSCertificate(ctx, cert"
   - "modules/caddytls/values.go:23:24        cpuid       U       github.com/klauspost/cpuid/v2\""
   - "modules/caddytls/values.go:52:28        AESNI       U       defaultCipherSuitesWithAESNI = []uint16{"
   - "modules/caddytls/values.go:88:3         secp        U       \"secp256r1\": tls.CurveP25"

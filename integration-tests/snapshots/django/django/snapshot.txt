@@ -3,7 +3,7 @@ Repository: django/django
 Url: "https://github.com/django/django.git"
 Args: ["**/*.{md,py}"]
 Lines:
- CSpell: Files checked: 2749, Issues found: 8143 in 926 files
+ CSpell: Files checked: 2753, Issues found: 8147 in 928 files
  exit code: 1
 ./django/__init__.py:12:26     - Unknown word (urlresolvers) -- Set the thread-local urlresolvers script prefix if `set
 ./django/apps/config.py:217:40    - Unknown word (qualname)   -- app_config_class.__qualname__,
@@ -621,9 +621,9 @@ Lines:
 ./django/db/migrations/operations/models.py:104:25    - Unknown word (smodel)     -- return "Create %smodel %s" % (
 ./django/db/migrations/operations/special.py:45:13     - Unknown word (dbop)       -- for dbop in self.database_operations
 ./django/db/migrations/questioner.py:18:36     - Unknown word (noninteractive) -- class has a built-in noninteractive mode, but the
-./django/db/migrations/serializer.py:177:51    - Unknown word (Qualname)        -- value.__qualname__: # Qualname can include <locals
-./django/db/migrations/serializer.py:250:24    - Unknown word (fspath)          -- return repr(os.fspath(self.value)), {}
-./django/db/migrations/serializer.py:81:7      - Unknown word (Deconstructable) -- class DeconstructableSerializer(BaseSerializer
+./django/db/migrations/serializer.py:182:51    - Unknown word (Qualname)        -- value.__qualname__: # Qualname can include <locals
+./django/db/migrations/serializer.py:255:24    - Unknown word (fspath)          -- return repr(os.fspath(self.value)), {}
+./django/db/migrations/serializer.py:86:7      - Unknown word (Deconstructable) -- class DeconstructableSerializer(BaseSerializer
 ./django/db/models/base.py:1038:19   - Unknown word (autopopulate)  -- # autopopulate the _order field
 ./django/db/models/base.py:114:9     - Unknown word (contributable) -- contributable_attrs = {}
 ./django/db/models/base.py:684:40    - Unknown word (attnames)      -- an iterable of field attnames. If fields is None,
@@ -689,8 +689,8 @@ Lines:
 ./django/dispatch/dispatcher.py:32:15     - Unknown word (receiverkey) -- { receiverkey (id) : weakref(receiver
 ./django/dispatch/dispatcher.py:459:54    - Unknown word (weakrefs)      -- receivers list has dead weakrefs. If so, we will
 ./django/dispatch/dispatcher.py:61:61     - Unknown word (referenceable) -- receiver must be weak referenceable.
-./django/forms/boundfield.py:290:28    - Unknown word (describedby) -- # If a custom aria-describedby attribute is given and
-./django/forms/boundfield.py:320:21    - Unknown word (myform)      -- {% for radio in myform.beatles %}
+./django/forms/boundfield.py:290:28    - Unknown word (describedby) -- # If a custom aria-describedby attribute is given
+./django/forms/boundfield.py:323:21    - Unknown word (myform)      -- {% for radio in myform.beatles %}
 ./django/forms/boundfield.py:4:32      - Unknown word (Renderable) -- django.forms.utils import RenderableFieldMixin, pretty_name
 ./django/forms/fields.py:788:19    - Unknown word (misformatted) -- # misformatted URLs.
 ./django/forms/models.py:820:13    - Unknown word (uclass)     -- for uclass, unique_check in all
@@ -750,12 +750,12 @@ Lines:
 ./django/templatetags/tz.py:56:32     - Unknown word (exceptionsm)    -- Filters must never raise exceptionsm, so catch everything
 ./django/test/client.py:750:15    - Unknown word (asession)   -- async def asession(self):
 ./django/test/client.py:784:15    - Unknown word (aforce)     -- async def aforce_login(self, user, backend
-./django/test/html.py:17:6      - Unknown word (autoplay)   -- "autoplay",
-./django/test/html.py:231:40    - Unknown word (getpos)         -- HTMLParseError(msg, self.getpos())
-./django/test/html.py:23:6      - Unknown word (formnovalidate) -- "formnovalidate",
-./django/test/html.py:26:6      - Unknown word (itemscope)      -- "itemscope",
-./django/test/html.py:33:6      - Unknown word (playsinline)    -- "playsinline",
-./django/test/html.py:39:6      - Unknown word (truespeed)      -- "truespeed",
+./django/test/html.py:18:6      - Unknown word (autoplay)   -- "autoplay",
+./django/test/html.py:211:40    - Unknown word (getpos)         -- HTMLParseError(msg, self.getpos())
+./django/test/html.py:24:6      - Unknown word (formnovalidate) -- "formnovalidate",
+./django/test/html.py:27:6      - Unknown word (itemscope)      -- "itemscope",
+./django/test/html.py:34:6      - Unknown word (playsinline)    -- "playsinline",
+./django/test/html.py:40:6      - Unknown word (truespeed)      -- "truespeed",
 ./django/test/runner.py:348:36    - Unknown word (unpythonic) -- implementation matches the unpythonic coding style of unittest
 ./django/test/runner.py:34:12     - Unknown word (ipdb)       -- import ipdb as pdb
 ./django/test/runner.py:39:12     - Unknown word (tblib)      -- import tblib.pickling_support
@@ -766,7 +766,7 @@ Lines:
 ./django/test/utils.py:100:27    - Unknown word (subcontexts) -- Flattened keys of subcontexts.
 ./django/urls/conf.py:1:27      - Unknown word (Lsconfs)    -- Functions for use in URLsconfs."""
 ./django/urls/resolvers.py:24:39     - Unknown word (SUBDELIMS)  -- http import RFC3986_SUBDELIMS, escape_leading_slashes
-./django/urls/resolvers.py:668:66    - Unknown word (submatch)   -- arguments in match with submatch
+./django/urls/resolvers.py:690:66    - Unknown word (submatch)   -- arguments in match with submatch
 ./django/urls/utils.py:34:20     - Unknown word (submod)     -- parentmod, submod = get_mod_func(mod_name
 ./django/urls/utils.py:34:9      - Unknown word (parentmod)  -- parentmod, submod = get_mod_func
 ./django/utils/archive.py:111:28    - Unknown word (unarchived) -- permissions to the unarchived file.
@@ -800,9 +800,9 @@ Lines:
 ./django/utils/functional.py:323:66    - Unknown word (unpickler)  -- _ method and custom unpickler. We
 ./django/utils/functional.py:324:40    - Unknown word (unpickler's) -- wrapped object as the unpickler's argument, so that pickle
 ./django/utils/functional.py:330:26    - Unknown word (lazyobject)  -- return (unpickle_lazyobject, (self._wrapped,))
+./django/utils/html.py:110:54    - Unknown word (markupsafe) -- party libraries like markupsafe.
 ./django/utils/html.py:13:39     - Unknown word (GENDELIMS)  -- http import RFC3986_GENDELIMS, RFC3986_SUBDELIMS
-./django/utils/html.py:152:34    - Unknown word (charrefs)   -- super().__init__(convert_charrefs=False)
-./django/utils/html.py:89:54     - Unknown word (markupsafe) -- party libraries like markupsafe.
+./django/utils/html.py:173:34    - Unknown word (charrefs)   -- super().__init__(convert_charrefs=False)
 ./django/utils/http.py:106:19    - Unknown word (parsedate)  -- # email.utils.parsedate() does the job for RFC
 ./django/utils/http.py:156:18    - Unknown word (overconsumption) -- # To prevent overconsumption of server resources
 ./django/utils/http.py:314:6     - Unknown word (parseparam)      -- def _parseparam(s):
@@ -974,8 +974,8 @@ Lines:
 ./django/utils/regex_helper.py:141:45    - Unknown word (backreference) -- # We are in a named backreference.
 ./django/utils/regex_helper.py:150:33    - Unknown word (backreferences) -- # Named backreferences have already consumed
 ./django/utils/regex_helper.py:5:60      - Unknown word (decompiler) -- a complete reg-exp decompiler. It
-./django/utils/text.py:324:40    - Unknown word (compresslevel) -- data = gzip_compress(s, compresslevel=6, mtime=0)
-./django/utils/text.py:352:10    - Unknown word (zfile)         -- ) as zfile:
+./django/utils/text.py:325:40    - Unknown word (compresslevel) -- data = gzip_compress(s, compresslevel=6, mtime=0)
+./django/utils/text.py:353:10    - Unknown word (zfile)         -- ) as zfile:
 ./django/utils/timezone.py:38:5      - Unknown word (hhmm)       -- hhmm = "%02d%02d" % divmod
 ./django/utils/translation/template.py:182:17    - Unknown word (bmatch)      -- bmatch = block_re.match(t.contents
 ./django/utils/translation/template.py:183:17    - Unknown word (cmatches)    -- cmatches = constant_re.findall
@@ -1078,7 +1078,7 @@ Lines:
 ./tests/admin_changelist/tests.py:1283:23   - Unknown word (orderedobject)   -- "/orderedobject/?p=%s" % page, superuser
 ./tests/admin_changelist/tests.py:1627:31   - Unknown word (jondoe)          -- user = User(username="jondoe", password="secret"
 ./tests/admin_changelist/tests.py:1661:70   - Unknown word (foruser)         -- log 10 as admin_log foruser user %}")
-./tests/admin_changelist/tests.py:1938:58   - Unknown word (proxyuser)       -- admin:admin_changelist_proxyuser_changelist")
+./tests/admin_changelist/tests.py:1973:58   - Unknown word (proxyuser)       -- admin:admin_changelist_proxyuser_changelist")
 ./tests/admin_changelist/tests.py:578:38    - Unknown word (chordsband) -- self.factory.get("/chordsband/", data={"members":
 ./tests/admin_changelist/tests.py:674:51    - Unknown word (Halvorson)  -- objects.create(name="Mary Halvorson")
 ./tests/admin_changelist/tests.py:675:59    - Unknown word (Finlayson)  -- create(name="Jonathan Finlayson")
@@ -1478,8 +1478,8 @@ Lines:
 ./tests/cache/tests.py:275:31    - Unknown word (cacheprefix) -- prefix": {"KEY_PREFIX": "cacheprefix{}".format(os.getpid
 ./tests/cache/tests.py:275:56    - Unknown word (getpid)      -- cacheprefix{}".format(os.getpid())},
 ./tests/cache/tests.py:330:20    - Unknown word (somekey)     -- cache.set("somekey", "value")
-./tests/check_framework/test_security.py:410:37    - Unknown word (abcdefghijklmnopqrstuvwx) -- settings(SECRET_KEY=("abcdefghijklmnopqrstuvwx" * 2) + "ab")
-./tests/check_framework/test_security.py:518:14    - Unknown word (badkey)                   -- "badkey",
+./tests/check_framework/test_security.py:411:37    - Unknown word (abcdefghijklmnopqrstuvwx) -- settings(SECRET_KEY=("abcdefghijklmnopqrstuvwx" * 2) + "ab")
+./tests/check_framework/test_security.py:519:14    - Unknown word (badkey)                   -- "badkey",
 ./tests/check_framework/test_translation.py:16:36     - Unknown word (extlang)    -- sgn-ase", # language+extlang
 ./tests/check_framework/test_translation.py:30:32     - Unknown word (subtag)     -- "en--us", # empty subtag.
 ./tests/check_framework/tests.py:223:51    - Unknown word (missingtag) -- system check with the "missingtag" tag.'
@@ -1671,12 +1671,13 @@ Lines:
 ./tests/forms_tests/tests/test_forms.py:2718:55   - Unknown word (Scrmbl)           -- Hans", "last_name": "Scrmbl", "birthday": "1974
 ./tests/forms_tests/tests/test_forms.py:2917:50   - Unknown word (Wählen)           -- PasswordInput, help_text="Wählen Sie mit Bedacht."
 ./tests/forms_tests/tests/test_forms.py:2917:65   - Unknown word (Bedacht)          -- text="Wählen Sie mit Bedacht."
-./tests/forms_tests/tests/test_forms.py:4338:14   - Unknown word (baseform)         -- def test_baseform_repr(self):
-./tests/forms_tests/tests/test_forms.py:4363:72   - Unknown word (fakedate)         -- Lennon", "birthday": "fakedate"}
-./tests/forms_tests/tests/test_forms.py:4399:55   - Unknown word (sirrobin)         -- cleaned_data["username"], "sirrobin")
-./tests/forms_tests/tests/test_forms.py:4719:26   - Unknown word (myradio)          -- '<div class="myradio">{{ radio }}</div>'
-./tests/forms_tests/tests/test_forms.py:4736:26   - Unknown word (mycheckbox)       -- '<div class="mycheckbox">{{ checkbox }}</div
-./tests/forms_tests/tests/test_forms.py:4927:48   - Unknown word (doesn)            -- picking a username that doesn&#x27;t already exist
+./tests/forms_tests/tests/test_forms.py:3089:40   - Unknown word (Rendang)          -- FoodForm({"intl_name": "Rendang"})
+./tests/forms_tests/tests/test_forms.py:4349:14   - Unknown word (baseform)         -- def test_baseform_repr(self):
+./tests/forms_tests/tests/test_forms.py:4374:72   - Unknown word (fakedate)         -- Lennon", "birthday": "fakedate"}
+./tests/forms_tests/tests/test_forms.py:4410:55   - Unknown word (sirrobin)         -- cleaned_data["username"], "sirrobin")
+./tests/forms_tests/tests/test_forms.py:4730:26   - Unknown word (myradio)          -- '<div class="myradio">{{ radio }}</div>'
+./tests/forms_tests/tests/test_forms.py:4747:26   - Unknown word (mycheckbox)       -- '<div class="mycheckbox">{{ checkbox }}</div
+./tests/forms_tests/tests/test_forms.py:4938:48   - Unknown word (doesn)            -- picking a username that doesn&#x27;t already exist
 ./tests/forms_tests/tests/test_forms.py:886:15    - Unknown word (Beatle)           -- class BeatleForm(Form):
 ./tests/forms_tests/tests/test_formsets.py:1036:66   - Unknown word (Fernet)       -- inkFormSet(initial=[{"name": "Fernet and Coke"}])
 ./tests/forms_tests/tests/test_formsets.py:1331:40   - Unknown word (mgmt)         -- someone fiddles with the mgmt form data...
@@ -2256,12 +2257,12 @@ Lines:
 ./tests/migrations/test_state.py:127:28    - Unknown word (foodnodefaultmanager) -- "migrations", "foodnodefaultmanager"
 ./tests/migrations/test_state.py:130:28    - Unknown word (foodorderedmanagers)  -- "migrations", "foodorderedmanagers"
 ./tests/migrations/test_state.py:1797:15   - Unknown word (searchablelocation)   -- ["searchablelocation_ptr", "name", "bus_routes
+./tests/migrations/test_writer.py:1011:14   - Unknown word (enumfield)  -- # an enumfield that takes the enum
 ./tests/migrations/test_writer.py:273:37    - Unknown word (föobár)     -- assertSerializedEqual("föobár")
 ./tests/migrations/test_writer.py:281:41    - Unknown word (nbár)       -- assertSerializedEqual("föo\nbár")
 ./tests/migrations/test_writer.py:289:38    - Unknown word (lalalala)   -- assertSerializedEqual({"lalalala": ["yeah", "no", "maybe
 ./tests/migrations/test_writer.py:768:24    - Unknown word (frozensets) -- def test_serialize_frozensets(self):
-./tests/migrations/test_writer.py:950:47    - Unknown word (keepends)   -- output.splitlines(keepends=True)[0], r"^[^#\s]
-./tests/migrations/test_writer.py:979:14    - Unknown word (enumfield)  -- # an enumfield that takes the enum
+./tests/migrations/test_writer.py:982:47    - Unknown word (keepends)   -- output.splitlines(keepends=True)[0], r"^[^#\s]
 ./tests/model_fields/models.py:145:5     - Unknown word (nbfield)    -- nbfield = models.BooleanField
 ./tests/model_fields/models.py:414:5     - Unknown word (floatf)     -- floatf = models.FloatField
 ./tests/model_fields/models.py:71:7      - Unknown word (Choiceful)  -- class Choiceful(models.Model):
@@ -2747,9 +2748,9 @@ Lines:
 ./tests/test_utils/test_testcase.py:144:30    - Unknown word (Käfer)      -- self.car.name = "VW sKäfer"
 ./tests/test_utils/test_testcase.py:149:37    - Unknown word (Coccinelle) -- car.name = "Volkswagen Coccinelle"
 ./tests/test_utils/test_testcase.py:77:13     - Unknown word (herbie)     -- cls.herbie = cls.jim_douglas.possessed
-./tests/test_utils/tests.py:1931:11   - Unknown word (visualisation) -- A visualisation of the callback tree
-./tests/test_utils/tests.py:2069:38   - Unknown word (defualt)       -- class__.databases = {"defualt"}
-./tests/test_utils/tests.py:775:26    - Unknown word (attibutes)  -- def test_non_boolean_attibutes(self):
+./tests/test_utils/tests.py:1913:11   - Unknown word (visualisation) -- A visualisation of the callback tree
+./tests/test_utils/tests.py:2051:38   - Unknown word (defualt)       -- class__.databases = {"defualt"}
+./tests/test_utils/tests.py:757:26    - Unknown word (attibutes)  -- def test_non_boolean_attibutes(self):
 ./tests/transactions/tests.py:42:56     - Unknown word (Tintin)     -- objects.create(first_name="Tintin")
 ./tests/update/tests.py:192:44    - Unknown word (datapoint)  -- value=Max(Col(update_datapoint, update.DataPoint.value
 ./tests/update/tests.py:202:62    - Unknown word (relatedpoint) -- related_count=Count("relatedpoint"))
@@ -2804,9 +2805,9 @@ Lines:
 ./tests/utils_tests/test_html.py:122:26    - Unknown word (ript)       -- ("<sc<!-- -->ript>test<<!-- -->/script
 ./tests/utils_tests/test_html.py:205:44    - Unknown word (Etest)      -- "\\u003Cscript\\u003Etest\\u0026ing\\u003C/script
 ./tests/utils_tests/test_html.py:43:33     - Unknown word (sfdsa)      -- patterns = ("%s", "asdf%sfdsa", "%s1", "1%sb")
-./tests/utils_tests/test_http.py:482:60    - Unknown word (Afun)       -- This%20is%20%2A%2A%2Afun%2A%2A%2A",
-./tests/utils_tests/test_http.py:528:22    - Unknown word (espécimen)  -- ((True, "espécimen"), "attachment; filename
-./tests/utils_tests/test_http.py:528:74    - Unknown word (cimen)      -- filename*=utf-8''esp%C3%A9cimen"),
+./tests/utils_tests/test_http.py:464:60    - Unknown word (Afun)       -- This%20is%20%2A%2A%2Afun%2A%2A%2A",
+./tests/utils_tests/test_http.py:510:22    - Unknown word (espécimen)  -- ((True, "espécimen"), "attachment; filename
+./tests/utils_tests/test_http.py:510:74    - Unknown word (cimen)      -- filename*=utf-8''esp%C3%A9cimen"),
 ./tests/utils_tests/test_jslex.py:161:17    - Unknown word (rexl)       -- rexl.re = {
 ./tests/utils_tests/test_jslex.py:55:13     - Unknown word (ƃuıxǝ)      -- (r'"ƃuıxǝ⅂ ʇdıɹɔsɐʌɐſ\""', [r
 ./tests/utils_tests/test_jslex.py:55:20     - Unknown word (ʇdıɹɔsɐʌɐſ) -- (r'"ƃuıxǝ⅂ ʇdıɹɔsɐʌɐſ\""', [r'string "ƃuıx
