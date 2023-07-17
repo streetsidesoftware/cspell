@@ -15,6 +15,9 @@ getSystemFeatureFlags().register('compound', 'Enable compound dictionary sources
 
 const defaultConfigFile = 'cspell-tools.config.yaml';
 
+export const configFileHeader =
+    '# yaml-language-server: $schema=https://raw.githubusercontent.com/streetsidesoftware/cspell/main/packages/cspell-tools/cspell-tools.config.schema.json\n\n';
+
 export async function processCompileAction(
     src: string[],
     options: CompileCommonAppOptions,
@@ -50,7 +53,7 @@ async function useCompile(src: string[], options: CompileCommonAppOptions): Prom
 }
 
 async function initConfig(request: CompileRequest): Promise<void> {
-    const content = YAML.stringify(request, null, 2);
+    const content = configFileHeader + YAML.stringify(request, null, 2);
     console.log('Writing config file: %s', defaultConfigFile);
     await writeFile(defaultConfigFile, content);
 

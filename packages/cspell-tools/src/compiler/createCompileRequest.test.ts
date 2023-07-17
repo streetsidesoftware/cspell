@@ -5,18 +5,21 @@ import { createCompileRequest } from './createCompileRequest.js';
 
 describe('createCompileRequest', () => {
     test.each`
-        source                                 | options
-        ${[]}                                  | ${comp()}
-        ${['src/words.txt']}                   | ${comp()}
-        ${['src/words.txt', 'src/cities.txt']} | ${comp({ output: 'out' })}
-        ${['src/words.txt', 'src/cities.txt']} | ${comp({ output: 'out', merge: 'combo' })}
-        ${[]}                                  | ${comp({ listFile: ['python-sources.txt'] })}
-        ${[]}                                  | ${comp({ listFile: ['python-sources.txt'], output: 'python' })}
-        ${[]}                                  | ${comp({ listFile: ['python-sources.txt'], merge: 'python' })}
+        source                                     | options
+        ${[]}                                      | ${comp()}
+        ${['src/words.txt']}                       | ${comp()}
+        ${['src/words.txt', 'src/cities.txt']}     | ${comp({ output: 'out' })}
+        ${['src/words.txt', 'src/cities.txt']}     | ${comp({ output: 'out', merge: 'combo' })}
+        ${[]}                                      | ${comp({ listFile: ['python-sources.txt'] })}
+        ${[]}                                      | ${comp({ listFile: ['python-sources.txt'], output: 'python' })}
+        ${[]}                                      | ${comp({ listFile: ['python-sources.txt'], merge: 'python' })}
+        ${['src\\c-words.txt']}                    | ${comp({ merge: 'company-words' })}
+        ${[{ listFile: 'src\\source-files.txt' }]} | ${comp({ merge: 'python' })}
+        ${[{ filename: 'src\\python.txt' }]}       | ${comp({ merge: 'python' })}
     `('createCompileRequest', ({ source, options }) => {
         const req = createCompileRequest(source, options);
         // Make sure the test passes on Windows.
-        const reqClean = JSON.parse(JSON.stringify(req, null, 2).replace(/\\\\/g, '/'));
+        const reqClean = JSON.parse(JSON.stringify(req, null, 2) /* .replace(/\\\\/g, '/') */);
         expect(reqClean).toMatchSnapshot();
     });
 });
