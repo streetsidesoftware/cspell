@@ -3,9 +3,9 @@ Repository: eslint/eslint
 Url: https://github.com/eslint/eslint
 Args: '["**","--exclude=bin/**","--exclude=CHANGELOG.md","--exclude=_data","--exclude=tests/bench/large.js","--exclude=docs/src/_includes","--exclude=docs/src/assets/{fonts,s?css,images}"]'
 Summary:
-  files: 1883
-  filesWithIssues: 1254
-  issues: 5495
+  files: 1887
+  filesWithIssues: 1255
+  issues: 5499
   errors: 0
 Errors: []
 
@@ -36,9 +36,9 @@ issues:
   - "docs/src/assets/js/focus-visible.js:26:5        datetime    U       datetime: true,"
   - "docs/src/assets/js/focus-visible.js:31:46       iframes     U       legacy browsers and iframes which sometimes focus"
   - "docs/src/assets/js/main.js:105:51       togglenav       U       addEventListener(\"click\", togglenav, false);"
-  - "docs/src/assets/js/main.js:254:13       setupindex      U       setupindexToggles(indexToggles"
-  - "docs/src/assets/js/main.js:283:27       labelledby      U       \"aria-labelledby\","
-  - "docs/src/assets/js/main.js:292:17       thepanel        U       var thepanel = toggleButton.nextElementSib"
+  - "docs/src/assets/js/main.js:236:13       setupindex      U       setupindexToggles(indexToggles"
+  - "docs/src/assets/js/main.js:265:27       labelledby      U       \"aria-labelledby\","
+  - "docs/src/assets/js/main.js:274:17       thepanel        U       var thepanel = toggleButton.nextElementSib"
   - "docs/src/assets/js/tabs.js:95:9         tablist             U       var tablist = el.querySelector("
   - "docs/src/assets/js/tabs.js:97:9         tabpanels           U       var tabpanels = Array.from(el.querySelector"
   - "docs/src/assets/js/tabs.js:97:59        tabpanel            U       querySelectorAll(\"[data-tabpanel]\"));"
@@ -53,7 +53,7 @@ issues:
   - "docs/src/assets/scss/docs.scss:119:44       Csvg        U       data:image/svg+xml,%3Csvg width='45' height='"
   - "docs/src/assets/scss/docs.scss:119:216      Cpath       U       fill='%23ECFDF3'/%3E%3Cpath d='M30.5 16L19.5 27L"
   - "docs/src/assets/scss/docs.scss:119:339      Crect       U       linejoin='round'/%3E%3Crect x='1.5' y='1' width"
-  - "docs/src/assets/scss/docs.scss:156:6        anchorjs    U       .anchorjs-link {"
+  - "docs/src/assets/scss/docs.scss:157:6        anchorjs    U       .anchorjs-link {"
   - "docs/src/assets/scss/syntax-highlighter.scss:83:8           atrule      U       .token.atrule,"
   - "docs/src/assets/scss/syntax-highlighter.scss:118:39         nums        U       variant-numeric: tabular-nums;"
   - "docs/src/assets/scss/tokens/typography.scss:63:10       Twemoji     U       \"Twemoji Country Flags\","
@@ -244,6 +244,7 @@ issues:
   - "docs/src/use/configure/language-options.md:48:4         embertest           U       * `embertest` - Ember test helper"
   - "docs/src/use/configure/language-options.md:49:4         webextensions       U       * `webextensions` - WebExtensions globals"
   - "docs/src/use/configure/language-options.md:50:4         greasemonkey        U       * `greasemonkey` - GreaseMonkey globals"
+  - "docs/src/use/configure/migration-guide.md:348:236       dotfile     U       *.js` won't match `.dotfile.js`). Flat config does"
   - "docs/src/use/configure/plugins.md:44:152        pluginname      U       require('eslint-plugin-pluginname')` in the config file"
   - "docs/src/use/configure/rules.md:25:294      buildtime       U       other than a potential buildtime or runtime error (such"
   - "docs/src/use/formatters/index.md:17:4           checkstyle      U       * [checkstyle](#checkstyle)"
@@ -366,8 +367,8 @@ issues:
   - "lib/rules/space-unary-ops.js:130:28         Doesnt (Doesn't)    U       function verifyWordDoesntHaveSpaces(node, firstToken"
   - "lib/rules/space-unary-ops.js:243:32         Dont                U       function verifyNonWordsDontHaveSpaces(node, firstToken"
   - "lib/rules/utils/ast-utils.js:396:40         samely          U       a.b` and `a?.b` are samely."
-  - "lib/rules/utils/ast-utils.js:2019:80        hashbangs       U       ESLint itself handles hashbangs."
-  - "lib/rules/utils/ast-utils.js:2021:66        tokenizes       U       because of the way Espree tokenizes hashbangs."
+  - "lib/rules/utils/ast-utils.js:2028:80        hashbangs       U       ESLint itself handles hashbangs."
+  - "lib/rules/utils/ast-utils.js:2030:66        tokenizes       U       because of the way Espree tokenizes hashbangs."
   - "lib/rules/utils/patterns/letters.js:12:24       Dulin       U       Copyright 2013-2016 Dulin Marat and other contributors"
   - "lib/shared/config-validator.js:286:55       ECMAFEATURES    U       source, \"ESLINT_LEGACY_ECMAFEATURES\");"
   - "lib/shared/string-utils.js:12:7         Graphemer       U       const Graphemer = require(\"graphemer"
@@ -397,8 +398,9 @@ issues:
   - "README.md:266:1         Strek               U       Strek"
   - "README.md:275:5         teamend             U       <!--teamend-->"
   - "README.md:282:5         sponsorsstart       U       <!--sponsorsstart-->"
-  - "README.md:287:243       Nrwl                U       logo.png\" alt=\"Nx (by Nrwl)\" height=\"32\"></a>"
-  - "README.md:287:850       Transloadit         U       com/u/125754?v=4\" alt=\"Transloadit\" height=\"32\"></a> <a"
+  - "README.md:287:124       Boysoft             U       e/avatar.png\" alt=\"iBoysoft\" height=\"32\"></a> <a"
+  - "README.md:287:389       Nrwl                U       logo.png\" alt=\"Nx (by Nrwl)\" height=\"32\"></a>"
+  - "README.md:287:1121      Transloadit         U       com/u/125754?v=4\" alt=\"Transloadit\" height=\"32\"></a> <a"
   - "README.md:288:5         sponsorsend         U       <!--sponsorsend-->"
   - "templates/blogpost.md.ejs:8:5           eslintbot       U       - eslintbot"
   - "templates/blogpost.md.ejs:18:10         linkify         U       function linkify(line) {"
@@ -439,7 +441,6 @@ issues:
   - "tests/lib/config/flat-config-array.js:1767:30       doesnt (doesn't)    U       \"doesnt-exist/match\": \"error"
   - "tests/lib/eslint/flat-eslint.js:1081:57     doesnotexist    U       lintFiles([\"subdir1\", \"doesnotexist/*.js\"]);"
   - "tests/lib/eslint/flat-eslint.js:1156:58     doesexist       U       await eslint.lintFiles([\"doesexist/*.js\"]);"
-  - "tests/lib/eslint/flat-eslint.js:1495:97     dotfile         U       an explicitly given dotfile is ignored\", async"
   - "tests/lib/eslint/flat-eslint.js:1616:30     reignoring      U       it(\"should allow reignoring of previously ignored"
   - "tests/lib/eslint/flat-eslint.js:4988:31     reignore        U       cwd: `${root}-reignore`,"
   - "tests/lib/eslint/flat-eslint.js:5028:31     dignore         U       cwd: `${root}-dignore`,"
