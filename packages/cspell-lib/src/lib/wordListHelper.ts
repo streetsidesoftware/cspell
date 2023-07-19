@@ -25,7 +25,7 @@ export function splitLine(line: string): string[] {
 }
 
 export function splitCodeWords(words: string[]): string[] {
-    return words.map(Text.splitCamelCaseWord).reduce((a, b) => a.concat(b), []);
+    return words.map(Text.splitCamelCaseWord).flatMap((a) => a);
 }
 
 export function splitLineIntoCodeWords(line: string): IterableIterator<string> {

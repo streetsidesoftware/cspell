@@ -171,7 +171,7 @@ describe('Validate the Application', () => {
 
 async function trace(words: string[], options: TraceOptions) {
     const results = await asyncIterableToArray(App.trace(words, options));
-    return results.reduce((a, r) => a.concat(r), []);
+    return results.flatMap((a) => a);
 }
 
 describe('Validate createInit', () => {
