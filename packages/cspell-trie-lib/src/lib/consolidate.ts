@@ -1,4 +1,4 @@
-import { trieNodeToRoot } from './TrieNode/trie-util.js';
+import { isCircular, trieNodeToRoot } from './TrieNode/trie-util.js';
 import type { TrieNode, TrieRoot } from './TrieNode/TrieNode.js';
 import { FLAG_WORD } from './TrieNode/TrieNode.js';
 
@@ -11,6 +11,10 @@ export function consolidate(root: TrieRoot): TrieRoot {
     const signatures = new Map<string, TrieNode>();
     const cached = new Map<TrieNode, number>();
     const knownMap = new Map<TrieNode, TrieNode>();
+
+    if (isCircular(root)) {
+        throw new Error('Trie is circular.');
+    }
 
     function signature(n: TrieNode): string {
         const isWord = n.f ? '*' : '';
@@ -75,7 +79,7 @@ export function consolidate(root: TrieRoot): TrieRoot {
         if (n.c) {
             const children = Object.entries(n.c)
                 .sort((a, b) => (a[0] < b[0] ? -1 : 1))
-                .map((c) => [c[0], process(c[1])] as [string, TrieNode]);
+                .map(([k, n]) => [k, process(n)] as [string, TrieNode]);
             n.c = Object.fromEntries(children);
         }
         const sig = signature(n);

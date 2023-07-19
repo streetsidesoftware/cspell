@@ -23,10 +23,12 @@ describe('Validate SecondChanceCache', () => {
         cache.set('f', ++cnt);
         expect(cache.size).toBe(6);
         expect(cache.get('b')).toBe(2);
-        expect(cache.size).toBe(4);
-        expect(cache.size0).toBe(1);
-        expect(cache.size1).toBe(3);
+        expect(cache.size).toBe(6);
+        expect(cache.size0).toBe(4);
+        expect(cache.size1).toBe(2);
         expect(cache.toArray()).toEqual([
+            ['a', 1],
+            ['c', 3],
             ['d', 4],
             ['e', 5],
             ['f', 6],
@@ -34,15 +36,17 @@ describe('Validate SecondChanceCache', () => {
         ]);
         cache.set('g', ++cnt);
         expect(cache.size).toBe(5);
-        expect(cache.size0).toBe(2);
+        expect(cache.size0).toBe(1);
+        expect(cache.size1).toBe(4);
         expect(cache.has('a')).toBe(false);
         expect(cache.get('a')).toBe(undefined);
         expect(cache.has('f')).toBe(true);
-        expect(cache.size0).toBe(3);
-        expect(cache.size1).toBe(2);
+        expect(cache.size).toBe(5);
+        expect(cache.size0).toBe(2);
+        expect(cache.size1).toBe(3);
         expect(cache.get('f')).toBe(6);
-        expect(cache.size0).toBe(3);
-        expect(cache.size1).toBe(2);
+        expect(cache.size0).toBe(2);
+        expect(cache.size1).toBe(3);
         expect(cache.clear()).toBe(cache);
         expect(cache.size).toBe(0);
     });

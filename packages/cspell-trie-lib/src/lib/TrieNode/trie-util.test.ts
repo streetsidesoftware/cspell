@@ -2,6 +2,7 @@ import { describe, expect, test } from 'vitest';
 
 import { mergeDefaults } from '../utils/mergeDefaults.js';
 import {
+    checkCircular,
     countNodes,
     countWords,
     createTrieRootFromList,
@@ -10,6 +11,8 @@ import {
     isCircular,
     iteratorTrieWords,
 } from './trie-util.js';
+
+const oc = expect.objectContaining;
 
 describe('Validate Util Functions', () => {
     test('createTriFromList', () => {
@@ -48,6 +51,17 @@ describe('Validate Util Functions', () => {
         const n = findNode(trie, 'samp');
         n && n.c && (n.c['x'] = trie);
         expect(isCircular(trie)).toBe(true);
+    });
+
+    test('checkCircular', () => {
+        const trie = createTrieRootFromList(words);
+        expect(isCircular(trie)).toBe(false);
+        const cir = findNode(trie, 'sp');
+        const n = findNode(trie, 'space');
+        n && n.c && (n.c['s'] = cir || trie);
+        const { ref } = checkCircular(trie);
+        if (ref) ref.stack = [];
+        expect(ref).toEqual(oc({ word: 'spaces', pos: 2 }));
     });
 
     test('countWords', () => {
