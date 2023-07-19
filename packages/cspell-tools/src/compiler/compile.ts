@@ -119,6 +119,8 @@ async function processFiles(action: ActionFn, filesToProcess: FileToProcess[], m
             logWithTimestamp('Done processing %s', rel(ftp.src));
         }),
         // opMap((a) => (console.warn(a), a))
+        logProgress(),
+        // opTake(27000000),
     );
     await action(words, dst);
     logWithTimestamp('Done "%s"', rel(dst));
@@ -207,4 +209,20 @@ async function readFileSource(fileSource: FileSource, sourceOptions: CompileSour
 
 function normalizeTargetName(name: string) {
     return name.replace(/((\.txt|\.dic|\.aff|\.trie)(\.gz)?)?$/, '').replace(/[^\p{L}\p{M}.\w\\/-]/gu, '_');
+}
+
+function logProgress<T>(freq = 100000): (iter: Iterable<T>) => Iterable<T> {
+    function* logProgress<T>(iter: Iterable<T>): Iterable<T> {
+        const _freq = freq;
+        let count = 0;
+        for (const v of iter) {
+            ++count;
+            if (!(count % _freq)) {
+                logWithTimestamp('Progress: Words Processed - %s', count.toLocaleString());
+            }
+            yield v;
+        }
+    }
+
+    return logProgress;
 }

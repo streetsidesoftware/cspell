@@ -53,7 +53,7 @@ export class SecondChanceCache<Key, Value> {
             // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
             const v = this.map1.get(key)!;
             this.map1.delete(key);
-            this.set(key, v);
+            this.map0.set(key, v);
             return v;
         }
         return undefined;
