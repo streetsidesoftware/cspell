@@ -664,8 +664,10 @@ declare class TrieBuilder {
     private lastPath;
     private tails;
     trieOptions: TrieInfo;
+    private numWords;
+    private _debug_lastWordsInserted;
+    private _debug_mode;
     constructor(words?: Iterable<string>, trieOptions?: PartialTrieInfo);
-    private set _root(value);
     private get _root();
     private signature;
     private _canBeCached;
@@ -683,6 +685,13 @@ declare class TrieBuilder {
      */
     reset(): void;
     build(consolidateSuffixes?: boolean): Trie;
+    private debugStack;
+    private debNodeInfo;
+    private logDebug;
+    private runDebug;
+    private copyIfFrozen;
+    private createNodeFrozen;
+    private createNode;
 }
 
 declare function insert(text: string, root?: TrieNode): TrieNode;
