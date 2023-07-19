@@ -91,10 +91,8 @@ export class Aff {
             .map(({ id }) => id);
         const combinableSfx = this.joinRules(combinableRules);
         const r = affixRules
-            .map((affix) => this.applyAffixToWord(affix, affWord, combinableSfx))
-            .reduce((a, b) => a.concat(b), [])
-            .map((affWord) => this.applyRulesToWord(affWord, remainingDepth - 1))
-            .reduce((a, b) => a.concat(b), []);
+            .flatMap((affix) => this.applyAffixToWord(affix, affWord, combinableSfx))
+            .flatMap((affWord) => this.applyRulesToWord(affWord, remainingDepth - 1));
         return r;
     }
 
@@ -105,8 +103,7 @@ export class Aff {
         const matchingSubstitutions = [...affix.substitutionSets.values()].filter((sub) => sub.match.test(word));
         const partialAffWord = { ...affWord, flags, rules: combineRules };
         return matchingSubstitutions
-            .map((sub) => sub.substitutions)
-            .reduce((a, b) => a.concat(b), [])
+            .flatMap((sub) => sub.substitutions)
             .filter((sub) => sub.remove === '0' || sub.replace.test(word))
             .map((sub) => this.substitute(affix, partialAffWord, sub))
             .map((affWord) => logAffWord(affWord, 'applyAffixToWord'));
