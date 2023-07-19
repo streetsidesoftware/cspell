@@ -138,22 +138,41 @@ export function countWords(root: TrieNode): number {
     return walk(root);
 }
 
-export function isCircular(root: TrieNode): boolean {
+interface CircularRef {
+    stack: TrieNode[];
+    word: string;
+    pos: number;
+}
+interface CircularCheckTrue {
+    isCircular: true;
+    allSeen: boolean;
+    ref: CircularRef;
+}
+
+interface CircularCheckFalse {
+    isCircular: false;
+    allSeen: boolean;
+    ref?: CircularRef;
+}
+
+type CircularCheck = CircularCheckTrue | CircularCheckFalse;
+
+export function checkCircular(root: TrieNode): CircularCheck {
     const seen = new Set<TrieNode>();
     const inStack = new Set<TrieNode>();
 
-    interface Reduce {
-        isCircular: boolean;
-        allSeen: boolean;
-    }
-
-    function walk(n: TrieNode): Reduce {
+    function walk(n: TrieNode): CircularCheck {
         if (seen.has(n)) return { isCircular: false, allSeen: true };
-        if (inStack.has(n)) return { isCircular: true, allSeen: false };
+        if (inStack.has(n)) {
+            const stack = [...inStack, n];
+            const word = trieStackToWord(stack);
+            const pos = stack.indexOf(n);
+            return { isCircular: true, allSeen: false, ref: { stack, word, pos } };
+        }
         inStack.add(n);
-        let r: Reduce = { isCircular: false, allSeen: true };
+        let r: CircularCheck = { isCircular: false, allSeen: true };
         if (n.c) {
-            r = Object.values(n.c).reduce((acc: Reduce, n: TrieNode) => {
+            r = Object.values(n.c).reduce((acc: CircularCheck, n: TrieNode) => {
                 if (acc.isCircular) return acc;
                 const r = walk(n);
                 r.allSeen = r.allSeen && acc.allSeen;
@@ -167,7 +186,31 @@ export function isCircular(root: TrieNode): boolean {
         return r;
     }
 
-    return walk(root).isCircular;
+    return walk(root);
+}
+
+function reverseMapTrieNode(node: TrieNode): undefined | Map<TrieNode, string> {
+    return node.c && new Map(Object.entries(node.c).map(([c, n]) => [n, c]));
+}
+
+function trieStackToWord(stack: TrieNode[]): string {
+    let word = '';
+
+    let lastMap = reverseMapTrieNode(stack[0]);
+    for (let i = 1; i < stack.length; ++i) {
+        const n = stack[i];
+        const char = lastMap?.get(n);
+        if (char) {
+            word += char;
+        }
+        lastMap = reverseMapTrieNode(n);
+    }
+
+    return word;
+}
+
+export function isCircular(root: TrieNode): boolean {
+    return checkCircular(root).isCircular;
 }
 
 export function trieNodeToRoot(node: TrieNode, options: PartialTrieInfo): TrieRoot {
