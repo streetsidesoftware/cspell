@@ -2,11 +2,11 @@ import * as path from 'path';
 import { beforeAll, beforeEach, describe, expect, test } from 'vitest';
 
 import type { CompileRequest, Target } from '../config/index.js';
+import { checkShasumFile } from '../shasum/shasum.js';
 import { spyOnConsole } from '../test/console.js';
 import { createTestHelper } from '../test/TestHelper.js';
 import { compile } from './compile.js';
 import { readTextFile } from './readers/readTextFile.js';
-import { checkShasumFile } from '../shasum/shasum.js';
 
 const testHelper = createTestHelper(import.meta.url);
 
