@@ -9,7 +9,7 @@ export default defineConfig({
             clean: true,
             all: true,
             reportsDirectory: 'coverage',
-            reporter: ['html', 'text', 'json'],
+            reporter: ['html', 'json', ['lcov', { projectRoot: __dirname }], 'text'],
             exclude: [
                 'ajv.config.*',
                 'bin.mjs',
