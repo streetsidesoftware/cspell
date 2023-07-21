@@ -1,11 +1,16 @@
 import { readFile, writeFile } from 'node:fs/promises';
-import { resolve } from 'node:path';
+import { resolve, sep as pathSep } from 'node:path';
 
 import { toError } from '../util/errors.js';
 import { isDefined } from '../util/index.js';
 import { calcFileChecksum, checkFile } from './checksum.js';
 
 export interface CheckShasumFileResult {
+    passed: boolean;
+    results: CheckFileResult[];
+}
+
+export interface CheckFileResult {
     filename: string;
     passed: boolean;
     error?: Error;
@@ -32,27 +37,25 @@ export async function checkShasumFile(
     filename: string,
     files: string[] | undefined,
     root?: string,
-): Promise<CheckShasumFileResult[]> {
+): Promise<CheckShasumFileResult> {
     files = !files ? files : files.length ? files : undefined;
     const shaFiles = await readAndParseShasumFile(filename);
     const filesToCheck = !files ? shaFiles.map(({ filename }) => filename) : files;
-    const mapNameToChecksum = new Map(shaFiles.map((r) => [r.filename, r.checksum] as const));
+    const mapNameToChecksum = new Map(shaFiles.map((r) => [normalizeFilename(r.filename), r.checksum] as const));
     const resolvedRoot = resolve(root || '.');
 
-    const results: CheckShasumFileResult[] = await Promise.all(
-        filesToCheck.map((filename) => {
+    const results: CheckFileResult[] = await Promise.all(
+        filesToCheck.map(normalizeFilename).map((filename) => {
             return tryToCheckFile(filename, resolvedRoot, mapNameToChecksum.get(filename));
         }),
     );
 
-    return results;
+    const passed = !results.find((v) => !v.passed);
+
+    return { passed, results };
 }
 
-async function tryToCheckFile(
-    filename: string,
-    root: string,
-    checksum: string | undefined,
-): Promise<CheckShasumFileResult> {
+async function tryToCheckFile(filename: string, root: string, checksum: string | undefined): Promise<CheckFileResult> {
     if (!checksum) {
         return { filename, passed: false, error: Error('Missing Checksum.') };
     }
@@ -135,11 +138,12 @@ export async function reportCheckChecksumFile(
 ): Promise<ReportResult> {
     const root = options.root;
     const filesToCheck = await resolveFileList(files, options.listFile);
-    const result = await checkShasumFile(filename, filesToCheck, root);
-    const lines = result.map(({ filename, passed, error }) =>
+    const checkResult = await checkShasumFile(filename, filesToCheck, root);
+    const results = checkResult.results;
+    const lines = results.map(({ filename, passed, error }) =>
         `${filename}: ${passed ? 'OK' : 'FAILED'} ${error ? '- ' + error.message : ''}`.trim(),
     );
-    const withErrors = result.filter((a) => !a.passed);
+    const withErrors = results.filter((a) => !a.passed);
     const passed = !withErrors.length;
     if (!passed) {
         lines.push(
@@ -164,7 +168,7 @@ async function resolveFileList(files: string[] | undefined, listFile: string[] |
             .filter((a) => a)
             .forEach((file) => setOfFiles.add(file));
     }
-    return [...setOfFiles];
+    return [...setOfFiles].map(normalizeFilename);
 }
 
 export async function calcUpdateChecksumForFiles(
@@ -174,11 +178,13 @@ export async function calcUpdateChecksumForFiles(
 ): Promise<string> {
     const root = options.root || '.';
     const filesToCheck = await resolveFileList(files, options.listFile);
-    const currentEntries = await readAndParseShasumFile(filename).catch((err) => {
-        const e = toError(err);
-        if (e.code !== 'ENOENT') throw e;
-        return [] as ChecksumEntry[];
-    });
+    const currentEntries = (
+        await readAndParseShasumFile(filename).catch((err) => {
+            const e = toError(err);
+            if (e.code !== 'ENOENT') throw e;
+            return [] as ChecksumEntry[];
+        })
+    ).map((entry) => ({ ...entry, filename: normalizeFilename(entry.filename) }));
     const entriesToUpdate = new Set([...filesToCheck, ...currentEntries.map((e) => e.filename)]);
     const mustExist = new Set(filesToCheck);
 
@@ -210,4 +216,8 @@ export async function updateChecksumForFiles(
     await writeFile(filename, content);
 
     return { passed: true, report: content };
+}
+
+function normalizeFilename(filename: string): string {
+    return filename.split(pathSep).join('/');
 }

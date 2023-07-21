@@ -209,6 +209,13 @@
       ],
       "description": "Words in the `allowedSplitWords` are considered correct and can be used as a basis for splitting compound words.\n\nIf entries can be split so that all the words in the entry are allowed, then only the individual words are added, otherwise the entire entry is added. This is to prevent misspellings in CamelCase words from being introduced into the dictionary."
     },
+    "checksumFile": {
+      "description": "Path to checksum file. `true` - defaults to `./checksum.txt`.",
+      "type": [
+        "string",
+        "boolean"
+      ]
+    },
     "generateNonStrict": {
       "default": true,
       "description": "Generate lower case / accent free versions of words.",

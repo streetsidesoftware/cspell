@@ -22,6 +22,11 @@ export interface CompileRequest extends CompileTargetOptions, CompileSourceOptio
      * Target Dictionaries to create.
      */
     targets: Target[];
+
+    /**
+     * Path to checksum file. `true` - defaults to `./checksum.txt`.
+     */
+    checksumFile?: string | boolean;
 }
 
 export interface Experimental {

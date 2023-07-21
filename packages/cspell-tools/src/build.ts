@@ -14,6 +14,9 @@ export interface BuildOptions {
 
     /** Current working directory */
     cwd?: string | undefined;
+
+    /** Conditional build based upon the targets matching the `checksum.txt` file. */
+    conditional?: boolean;
 }
 
 const moduleName = 'cspell-tools';
@@ -46,11 +49,15 @@ export async function build(targets: string[] | undefined, options: BuildOptions
         throw 'cspell-tools.config not found.';
     }
 
-    const buildInfo: CompileRequest = normalizeRequest(config.config, options.root || path.dirname(config.filepath));
-    await compile(buildInfo, { filter, cwd: options.cwd });
+    const configDir = path.dirname(config.filepath);
+    const buildInfo: CompileRequest = normalizeRequest(
+        config.config,
+        path.resolve(configDir, options.root || configDir),
+    );
+    await compile(buildInfo, { filter, cwd: options.cwd, conditionalBuild: options.conditional || false });
 }
 
 function normalizeRequest(buildInfo: CompileRequest, root: string): CompileRequest {
-    const { rootDir = root, targets = [] } = buildInfo;
-    return { rootDir, targets };
+    const { rootDir = root, targets = [], checksumFile } = buildInfo;
+    return { rootDir: path.resolve(rootDir), targets, checksumFile };
 }

@@ -31,8 +31,10 @@ describe('shasum', () => {
         const root = resolvePathToFixture('dicts');
         const filename = resolvePathToFixture('dicts/_checksum.txt');
         const result = await checkShasumFile(filename, [], root);
-        expect(result.filter((r) => !r.passed)).toHaveLength(0);
-        expect(result).toMatchSnapshot();
+        const results = result.results;
+        expect(result.passed).toBe(true);
+        expect(results.filter((r) => !r.passed)).toHaveLength(0);
+        expect(results).toMatchSnapshot();
     });
 
     test('checkShasumFile pass with files', async () => {
@@ -40,9 +42,11 @@ describe('shasum', () => {
         const filename = resolvePathToFixture('dicts/_checksum.txt');
         const files = ['colors.txt', 'cities.txt'];
         const result = await checkShasumFile(filename, files, root);
-        expect(result.filter((r) => !r.passed)).toHaveLength(0);
-        expect(result.map((r) => r.filename)).toEqual(files);
-        expect(result).toMatchSnapshot();
+        const results = result.results;
+        expect(result.passed).toBe(true);
+        expect(results.filter((r) => !r.passed)).toHaveLength(0);
+        expect(results.map((r) => r.filename)).toEqual(files);
+        expect(results).toMatchSnapshot();
     });
 
     test('checkShasumFile pass with files but file not in checksum.txt', async () => {
@@ -50,8 +54,10 @@ describe('shasum', () => {
         const filename = resolvePathToFixture('dicts/_checksum.txt');
         const files = ['colors.txt', 'my_cities.txt'];
         const result = await checkShasumFile(filename, files, root);
-        expect(result.filter((r) => !r.passed)).toHaveLength(1);
-        expect(result.map((r) => r.filename)).toEqual(files);
+        const results = result.results;
+        expect(result.passed).toBe(false);
+        expect(results.filter((r) => !r.passed)).toHaveLength(1);
+        expect(results.map((r) => r.filename)).toEqual(files);
         // console.error('%o', result);
     });
 
@@ -59,8 +65,10 @@ describe('shasum', () => {
         const root = resolvePathToFixture('dicts');
         const filename = resolvePathToFixture('dicts/_checksum-failed.txt');
         const result = await checkShasumFile(filename, [], root);
-        expect(result.filter((r) => !r.passed)).toHaveLength(1);
-        expect(result).toMatchSnapshot();
+        const results = result.results;
+        expect(result.passed).toBe(false);
+        expect(results.filter((r) => !r.passed)).toHaveLength(1);
+        expect(results).toMatchSnapshot();
     });
 
     test('checkShasumFile missing files', async () => {
@@ -68,8 +76,9 @@ describe('shasum', () => {
         const filename = resolvePathToFixture('dicts/_checksum-missing-file.txt');
         const result = await checkShasumFile(filename, [], root);
         // console.error('%o', result);
-        expect(result.filter((r) => !r.passed)).toHaveLength(1);
-        const missingResult = result[0];
+        expect(result.passed).toBe(false);
+        expect(result.results.filter((r) => !r.passed)).toHaveLength(1);
+        const missingResult = result.results[0];
         expect(missingResult.error).toEqual(Error('Failed to read file.'));
     });
 

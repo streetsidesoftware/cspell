@@ -5,14 +5,15 @@ import * as path from 'path';
 
 import type {
     CompileRequest,
-    CompileSourceOptions,
-    CompileTargetOptions,
+    CompileSourceOptions as CompileSourceConfig,
+    CompileTargetOptions as CompileTargetConfig,
     DictionarySource,
     FilePath,
     FileSource,
     Target,
 } from '../config/index.js';
 import { isFileListSource, isFilePath, isFileSource } from '../config/index.js';
+import { checkShasumFile, updateChecksumForFiles } from '../shasum/index.js';
 import { createAllowedSplitWordsFromFiles } from './createWordsCollection.js';
 import { logWithTimestamp } from './logWithTimestamp.js';
 import { readTextFile } from './readers/readTextFile.js';
@@ -31,6 +32,11 @@ interface CompileOptions {
      * The current working directory. Defaults to process.cwd()
      */
     cwd?: string;
+
+    /**
+     * `true` - only build if files do not match checksum.
+     */
+    conditionalBuild: boolean;
 }
 
 export async function compile(request: CompileRequest, options?: CompileOptions): Promise<void> {
@@ -40,28 +46,55 @@ export async function compile(request: CompileRequest, options?: CompileOptions)
 
     const rootDir = path.resolve(request.rootDir || '.');
     const cwd = options?.cwd;
-    const targetOptions: CompileTargetOptions = {
+    const targetOptions: CompileTargetConfig = {
         sort: request.sort,
         generateNonStrict: request.generateNonStrict,
     };
+    const conditional = options?.conditionalBuild || false;
+    const checksumFile = resolveChecksumFile(request.checksumFile || conditional, rootDir);
+
+    const dependencies = new Set<string>();
 
     for (const target of targets) {
         const keep = options?.filter?.(target) ?? true;
         if (!keep) continue;
         const adjustedTarget: Target = { ...targetOptions, ...target };
-        await compileTarget(adjustedTarget, request, rootDir, cwd);
+        const deps = await compileTarget(adjustedTarget, request, { rootDir, cwd, conditional, checksumFile });
+        deps.forEach((dep) => dependencies.add(dep));
     }
+
+    if (checksumFile && dependencies.size) {
+        logWithTimestamp('%s', `Update checksum: ${checksumFile}`);
+        await updateChecksumForFiles(checksumFile, [...dependencies], { root: path.dirname(checksumFile) });
+    }
+
     logWithTimestamp(`Complete.`);
+
+    return;
+}
+
+function resolveChecksumFile(checksumFile: string | boolean | undefined, root: string): string | undefined {
+    const cFilename =
+        (typeof checksumFile === 'string' && checksumFile) || (checksumFile && './checksum.txt') || undefined;
+    const file = cFilename && path.resolve(root, cFilename);
+    // console.warn('%o', { checksumFile, cFilename, file });
+    return file;
+}
+
+interface CompileTargetOptions {
+    rootDir: string;
+    cwd: string | undefined;
+    conditional: boolean;
+    checksumFile: string | undefined;
 }
 
 export async function compileTarget(
     target: Target,
-    options: CompileSourceOptions,
-    rootDir: string,
-    cwd?: string,
-): Promise<void> {
+    options: CompileSourceConfig,
+    compileOptions: CompileTargetOptions,
+): Promise<string[]> {
     logWithTimestamp(`Start compile: ${target.name}`);
-
+    const { rootDir, cwd, checksumFile, conditional } = compileOptions;
     const { format, sources, trieBase, sort = true, generateNonStrict = false } = target;
     const targetDirectory = path.resolve(rootDir, target.targetDirectory ?? cwd ?? process.cwd());
 
@@ -79,6 +112,17 @@ export async function compileTarget(
     );
     const filesToProcess: FileToProcess[] = await toArray(filesToProcessAsync);
     const normalizer = normalizeTargetWords({ sort: useTrie || sort, generateNonStrict });
+    const checksumRoot = (checksumFile && path.dirname(checksumFile)) || rootDir;
+
+    const deps = [...calculateDependencies(filename, filesToProcess, checksumRoot)];
+
+    if (conditional && checksumFile) {
+        const check = await checkShasumFile(checksumFile, deps, checksumRoot).catch(() => undefined);
+        if (check?.passed) {
+            logWithTimestamp(`Skip ${target.name}, nothing changed.`);
+            return [];
+        }
+    }
 
     const action = useTrie
         ? async (words: Iterable<string>, dst: string) => {
@@ -97,6 +141,24 @@ export async function compileTarget(
     await processFiles(action, filesToProcess, filename);
 
     logWithTimestamp(`Done compile: ${target.name}`);
+
+    return deps;
+}
+
+function calculateDependencies(targetFile: string, filesToProcess: FileToProcess[], rootDir: string): Set<string> {
+    const dependencies = new Set<string>();
+
+    addDependency(targetFile);
+    filesToProcess.forEach((f) => addDependency(f.src));
+
+    return dependencies;
+
+    function addDependency(filename: string) {
+        const rel = path.relative(rootDir, filename);
+        dependencies.add(rel);
+        dependencies.add(rel.replace(/\.aff$/, '.dic'));
+        dependencies.add(rel.replace(/\.dic$/, '.aff'));
+    }
 }
 
 function rel(filePath: string): string {
@@ -172,7 +234,7 @@ async function readFileList(fileList: FilePath): Promise<string[]> {
         .filter((a) => !!a);
 }
 
-async function readFileSource(fileSource: FileSource, sourceOptions: CompileSourceOptions): Promise<FileToProcess> {
+async function readFileSource(fileSource: FileSource, sourceOptions: CompileSourceConfig): Promise<FileToProcess> {
     const {
         filename,
         keepRawCase = sourceOptions.keepRawCase || false,
