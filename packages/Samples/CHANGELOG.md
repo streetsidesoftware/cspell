@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 7.0.1-alpha.8 (2023-07-21)
+
+### Bug Fixes
+
+* **cspell-tools:** support conditional builds. ([#4668](https://github.com/streetsidesoftware/cspell/issues/4668)) ([de4d897](https://github.com/streetsidesoftware/cspell/commit/de4d897139fe5c98a83af926be23727f42be98d6))
+
 ## 7.0.1-alpha.7 (2023-07-19)
 
 **Note:** Version bump only for package cspell-tools-samples
