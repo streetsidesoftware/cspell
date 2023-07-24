@@ -5,13 +5,14 @@ Args: '["**"]'
 Summary:
   files: 411
   filesWithIssues: 397
-  issues: 2174
+  issues: 2175
   errors: 0
 Errors: []
 
 issues:
   - "build.sbt:5:13          gitbucket           U       val Name = \"gitbucket\""
-  - "build.sbt:7:5           Scalatra            U       val ScalatraVersion = \"3.0.0-M4\""
+  - "build.sbt:7:5           Scalatra            U       val ScalatraVersion = \"3.0.0-M5-javax"
+  - "build.sbt:7:33          javax               U       ScalatraVersion = \"3.0.0-M5-javax\""
   - "build.sbt:9:5           Jgit                U       val JgitVersion = \"6.6.0.202"
   - "build.sbt:31:4          scalafmt            U       // scalafmtOnCompile := true"
   - "build.sbt:37:3          Classpaths          U       Classpaths.typesafeReleases,"
@@ -28,7 +29,6 @@ issues:
   - "build.sbt:65:40         xhub                U       oss.security.xhub\" % \"xhub4j-core\""
   - "build.sbt:68:40         thumbnailator       U       % \"thumbnailator\" % \""
   - "build.sbt:70:47         oidc                U       % \"oauth2-oidc-sdk\" %"
-  - "build.sbt:72:4          javax               U       \"javax.servlet\""
   - "build.sbt:74:50         scalatest           U       %% \"scalatra-scalatest\" % ScalatraVersion"
   - "build.sbt:76:41         testcontainers      U       %% \"testcontainers-scala\" % \"0."
   - "build.sbt:79:40         eddsa               U       % \"eddsa\""
