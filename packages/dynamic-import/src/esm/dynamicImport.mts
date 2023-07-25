@@ -40,7 +40,7 @@ export async function dynamicImportFrom<Module>(
             const location = await resolve(moduleName, url.toString());
             return await import(location);
         } catch (err) {
-            console.error('%o', { moduleName, paths, parentUrl: url, err });
+            console.warn('%o', { moduleName, paths, parentUrl: url, err });
             lastError = err;
         }
     }
