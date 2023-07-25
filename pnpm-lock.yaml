@@ -1,4 +1,4 @@
-lockfileVersion: '6.1'
+lockfileVersion: '6.0'
 
 settings:
   autoInstallPeers: true
@@ -204,6 +204,9 @@ importers:
 
   packages/cspell:
     dependencies:
+      '@cspell/cspell-json-reporter':
+        specifier: workspace:*
+        version: link:../cspell-json-reporter
       '@cspell/cspell-pipe':
         specifier: workspace:*
         version: link:../cspell-pipe
@@ -256,9 +259,6 @@ importers:
         specifier: ^3.0.7
         version: 3.0.7
     devDependencies:
-      '@cspell/cspell-json-reporter':
-        specifier: workspace:*
-        version: link:../cspell-json-reporter
       '@types/file-entry-cache':
         specifier: ^5.0.2
         version: 5.0.2
