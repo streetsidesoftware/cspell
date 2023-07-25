@@ -1,6 +1,8 @@
 import { sep as pathSep } from 'path';
 import { pathToFileURL } from 'url';
 
+const isWindowsPath = /^[a-z]:\\/i;
+
 /**
  * Dynamically import a module using `import`.
  * @param moduleName - name of module, or relative path.
@@ -36,8 +38,9 @@ export async function dynamicImportFrom<Module>(
                     ? new URL(parent)
                     : pathToFileURL(parent + pathSep)
                 : parent;
+        const resolved = resolve(moduleName, url.toString());
+        const location = isWindowsPath.test(resolved) ? pathToFileURL(resolved).toString() : resolved;
         try {
-            const location = await resolve(moduleName, url.toString());
             return await import(location);
         } catch (err) {
             console.warn('%o', { moduleName, paths, parentUrl: url, err });
