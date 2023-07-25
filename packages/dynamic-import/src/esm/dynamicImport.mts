@@ -30,16 +30,17 @@ export async function dynamicImportFrom<Module>(
     let lastError = undefined;
 
     for (const parent of paths) {
+        const url =
+            typeof parent === 'string'
+                ? parent.startsWith('file://')
+                    ? new URL(parent)
+                    : pathToFileURL(parent + pathSep)
+                : parent;
         try {
-            const url =
-                typeof parent === 'string'
-                    ? parent.startsWith('file://')
-                        ? new URL(parent)
-                        : pathToFileURL(parent + pathSep)
-                    : parent;
             const location = await resolve(moduleName, url.toString());
             return await import(location);
         } catch (err) {
+            console.error('%o', { moduleName, paths, parentUrl: url, err });
             lastError = err;
         }
     }
