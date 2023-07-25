@@ -38,12 +38,12 @@ export async function dynamicImportFrom<Module>(
                     ? new URL(parent)
                     : pathToFileURL(parent + pathSep)
                 : parent;
-        const resolved = resolve(moduleName, url.toString());
-        const location = isWindowsPath.test(resolved) ? pathToFileURL(resolved).toString() : resolved;
         try {
+            const resolved = resolve(moduleName, url.toString());
+            const location = isWindowsPath.test(resolved) ? pathToFileURL(resolved).toString() : resolved;
             return await import(location);
         } catch (err) {
-            console.warn('%o', { moduleName, paths, parentUrl: url, err });
+            // console.warn('%o', { moduleName, paths, parentUrl: url, err });
             lastError = err;
         }
     }
