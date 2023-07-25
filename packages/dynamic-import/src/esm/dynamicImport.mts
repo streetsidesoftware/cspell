@@ -15,8 +15,10 @@ export async function dynamicImportFrom<Module>(
 ): Promise<Module> {
     paths = Array.isArray(paths) ? paths : paths ? [paths] : undefined;
     if (!paths || !paths.length || typeof moduleName !== 'string') {
+        const modulesNameToImport =
+            typeof moduleName === 'string' && isWindowsPath.test(moduleName) ? pathToFileURL(moduleName) : moduleName;
         try {
-            return await import(moduleName.toString());
+            return await import(modulesNameToImport.toString());
         } catch (e) {
             // console.log('%o', e);
             const err = toError(e);
@@ -38,12 +40,14 @@ export async function dynamicImportFrom<Module>(
                     ? new URL(parent)
                     : pathToFileURL(parent + pathSep)
                 : parent;
+        let resolved = '';
+        let location = '';
         try {
-            const resolved = resolve(moduleName, url.toString());
-            const location = isWindowsPath.test(resolved) ? pathToFileURL(resolved).toString() : resolved;
+            resolved = resolve(moduleName, url.toString());
+            location = isWindowsPath.test(resolved) ? pathToFileURL(resolved).toString() : resolved;
             return await import(location);
         } catch (err) {
-            // console.warn('%o', { moduleName, paths, parentUrl: url, err });
+            console.warn('%o', { moduleName, paths, parentUrl: url, err, resolved, location });
             lastError = err;
         }
     }
