@@ -1,6 +1,8 @@
 import { sep as pathSep } from 'path';
 import { pathToFileURL } from 'url';
 
+const isWindowsPath = /^[a-z]:\\/i;
+
 /**
  * Dynamically import a module using `import`.
  * @param moduleName - name of module, or relative path.
@@ -12,9 +14,12 @@ export async function dynamicImportFrom<Module>(
     paths: string | URL | (string | URL)[] | undefined,
 ): Promise<Module> {
     paths = Array.isArray(paths) ? paths : paths ? [paths] : undefined;
+    const modulesNameToImport =
+        typeof moduleName === 'string' && isWindowsPath.test(moduleName) ? pathToFileURL(moduleName) : moduleName;
+
     if (!paths || !paths.length || typeof moduleName !== 'string') {
         try {
-            return await import(moduleName.toString());
+            return await import(modulesNameToImport.toString());
         } catch (e) {
             // console.log('%o', e);
             const err = toError(e);
@@ -30,16 +35,20 @@ export async function dynamicImportFrom<Module>(
     let lastError = undefined;
 
     for (const parent of paths) {
+        const url =
+            typeof parent === 'string'
+                ? parent.startsWith('file://')
+                    ? new URL(parent)
+                    : pathToFileURL(parent + pathSep)
+                : parent;
+        let resolved = '';
+        let location = '';
         try {
-            const url =
-                typeof parent === 'string'
-                    ? parent.startsWith('file://')
-                        ? new URL(parent)
-                        : pathToFileURL(parent + pathSep)
-                    : parent;
-            const location = await resolve(moduleName, url.toString());
+            resolved = resolve(modulesNameToImport.toString(), url.toString());
+            location = isWindowsPath.test(resolved) ? pathToFileURL(resolved).toString() : resolved;
             return await import(location);
         } catch (err) {
+            // console.warn('%o', { moduleName, modulesNameToImport, paths, parentUrl: url, err, resolved, location });
             lastError = err;
         }
     }
