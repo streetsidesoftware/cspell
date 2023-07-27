@@ -48,7 +48,7 @@ export async function dynamicImportFrom<Module>(
             location = isWindowsPath.test(resolved) ? pathToFileURL(resolved).toString() : resolved;
             return await import(location);
         } catch (err) {
-            console.warn('%o', { moduleName, modulesNameToImport, paths, parentUrl: url, err, resolved, location });
+            // console.warn('%o', { moduleName, modulesNameToImport, paths, parentUrl: url, err, resolved, location });
             lastError = err;
         }
     }
