@@ -72,6 +72,10 @@ export interface Check {
      */
     checkComments?: boolean;
     /**
+     * Spell check allow words
+     */
+    customWords?: string[];
+    /**
      * Specify a path to a custom word list file.
      *
      * example:

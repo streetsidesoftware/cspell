@@ -333,19 +333,31 @@ function getDocValidator(filename: string, text: string, options: WorkerOptions)
 }
 
 function calcInitialSettings(options: WorkerOptions): CSpellSettings {
-    const { customWordListFile, cwd } = options;
-    if (!customWordListFile) return defaultSettings;
+    const { customWordListFile, customWords, cwd } = options;
 
-    const filePath = isCustomWordListFile(customWordListFile) ? customWordListFile.path : customWordListFile;
-    const dictFile = path.resolve(cwd, filePath);
+    if (customWordListFile) {
+        const filePath = isCustomWordListFile(customWordListFile) ? customWordListFile.path : customWordListFile;
+        const dictFile = path.resolve(cwd, filePath);
 
-    const settings: CSpellSettings = {
-        ...defaultSettings,
-        dictionaryDefinitions: [{ name: 'eslint-plugin-custom-words', path: dictFile }],
-        dictionaries: ['eslint-plugin-custom-words'],
-    };
+        const settings: CSpellSettings = {
+            ...defaultSettings,
+            dictionaryDefinitions: [{ name: 'eslint-plugin-custom-words', path: dictFile }],
+            dictionaries: ['eslint-plugin-custom-words'],
+        };
 
-    return settings;
+        return settings;
+    }
+
+    if (customWords && customWords.length > 0) {
+        const settings: CSpellSettings = {
+            ...defaultSettings,
+            userWords: customWords,
+        };
+
+        return settings;
+    }
+
+    return defaultSettings;
 }
 
 function getTextDocument(filename: string, content: string): TextDocument {

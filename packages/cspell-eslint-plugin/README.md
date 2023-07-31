@@ -15,6 +15,7 @@ This plugin is still in active development as part of the CSpell suite of tools 
   ```
 
 - Add to it to `.eslintrc.json`
+
   ```json
   "extends": ["plugin:@cspell/recommended"]
   ```
@@ -82,6 +83,10 @@ interface Options {
    * @default true
    */
   checkComments?: boolean;
+  /**
+   * Spell check allow words
+   */
+  customWords?: string[]
   /**
    * Specify a path to a custom word list file.
    *
