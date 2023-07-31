@@ -3,9 +3,9 @@ Repository: django/django
 Url: https://github.com/django/django.git
 Args: '["**/*.{md,py}"]'
 Summary:
-  files: 2754
+  files: 2755
   filesWithIssues: 919
-  issues: 8055
+  issues: 8063
   errors: 0
 Errors: []
 
@@ -1699,10 +1699,11 @@ issues:
   - "tests/forms_tests/widget_tests/test_fileinput.py:88:25          myclass     U       ({\"class\": \"myclass\"}, True),"
   - "tests/forms_tests/widget_tests/test_nullbooleanselect.py:150:45         Unbekannt       U       option value=\"unknown\">Unbekannt</option>"
   - "tests/forms_tests/widget_tests/test_nullbooleanselect.py:152:43         Nein            U       option value=\"false\">Nein</option>"
-  - "tests/forms_tests/widget_tests/test_radioselect.py:16:14        beatle      U       \"beatle\","
-  - "tests/forms_tests/widget_tests/test_select.py:226:49        Đabc        U       choices=[(\"ŠĐĆŽćžšđ\", \"ŠĐabcĆŽćžšđ\"), (\"ćžšđ\", \"abc"
-  - "tests/forms_tests/widget_tests/test_select.py:226:65        ćžšđ        U       , \"ŠĐabcĆŽćžšđ\"), (\"ćžšđ\", \"abcćžšđ\")]),"
-  - "tests/forms_tests/widget_tests/test_select.py:226:73        abcćžšđ     U       abcĆŽćžšđ\"), (\"ćžšđ\", \"abcćžšđ\")]),"
+  - "tests/forms_tests/widget_tests/test_radioselect.py:7:12         choicewidget    U       from .test_choicewidget import ChoiceWidgetTest"
+  - "tests/forms_tests/widget_tests/test_radioselect.py:20:46        beatle          U       input type=\"radio\" name=\"beatle\" value=\"\">------</label"
+  - "tests/forms_tests/widget_tests/test_radioselect.py:287:49       Đabc            U       choices=[(\"ŠĐĆŽćžšđ\", \"ŠĐabcĆŽćžšđ\"), (\"ćžšđ\", \"abc"
+  - "tests/forms_tests/widget_tests/test_radioselect.py:287:65       ćžšđ            U       , \"ŠĐabcĆŽćžšđ\"), (\"ćžšđ\", \"abcćžšđ\")]),"
+  - "tests/forms_tests/widget_tests/test_radioselect.py:287:73       abcćžšđ         U       abcĆŽćžšđ\"), (\"ćžšđ\", \"abcćžšđ\")]),"
   - "tests/forms_tests/widget_tests/test_selectdatewidget.py:339:14      selectdate      U       def test_selectdate_required(self):"
   - "tests/forms_tests/widget_tests/test_selectdatewidget.py:494:35      februari        U       <option value=\"2\">februari</option>"
   - "tests/forms_tests/widget_tests/test_selectdatewidget.py:495:35      maart           U       <option value=\"3\">maart</option>"
@@ -2782,7 +2783,7 @@ issues:
   - "tests/user_commands/management/commands/required_option.py:7:73         needme      U       required=True, dest=\"needme2\")"
   - "tests/user_commands/tests.py:108:49         commandegg          U       settings(INSTALLED_APPS=[\"commandegg\"]):"
   - "tests/user_commands/tests.py:112:34         eggcommand          U       assertEqual(cmds, [\"eggcommand\"])"
-  - "tests/user_commands/tests.py:421:14         outputwrapper       U       def test_outputwrapper_flush(self):"
+  - "tests/user_commands/tests.py:422:14         outputwrapper       U       def test_outputwrapper_flush(self):"
   - "tests/utils_tests/test_archive.py:66:44         leadpath    U       entry.name.startswith(\"leadpath_\")"
   - "tests/utils_tests/test_autoreload.py:94:30          Ceci        U       filename.write_text(\"Ceci n'est pas du Python"
   - "tests/utils_tests/test_autoreload.py:125:75         zipf        U       zipfile.ZIP_DEFLATED) as zipf:"

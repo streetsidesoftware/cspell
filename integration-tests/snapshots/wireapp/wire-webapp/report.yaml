@@ -3,9 +3,9 @@ Repository: wireapp/wire-webapp
 Url: https://github.com/wireapp/wire-webapp.git
 Args: '["src/script/**/*.{js,ts,tsx,md}"]'
 Summary:
-  files: 964
-  filesWithIssues: 131
-  issues: 453
+  files: 970
+  filesWithIssues: 135
+  issues: 477
   errors: 0
 Errors: []
 
@@ -145,6 +145,7 @@ issues:
   - "src/script/hooks/useRelativeTimestamp.tsx:67:10         timeago     U       const [timeago, setTimeago] = useState"
   - "src/script/hooks/useRelativeTimestamp.tsx:67:22         Timeago     U       const [timeago, setTimeago] = useState<string>"
   - "src/script/hooks/useSingleInstance.test.ts:32:30        Intance     U       result: {current: firstIntance},"
+  - "src/script/main/app.ts:466:30       initialise      U       await selfRepository.initialisePeriodicSelfSupportedProtocols"
   - "src/script/media/MediaEmbeds.test.ts:45:92          nofollow    U       target=\"_blank\" rel=\"nofollow\">${link}</a>`;"
   - "src/script/media/MediaEmbeds.test.ts:162:31         nocookie    U       const link = 'youtube-nocookie.com';"
   - "src/script/media/MediaEmbeds.test.ts:544:60         Wroxrr      U       867741/playlist/2w63WroxrrIbNg4WIxdoBn';"
@@ -153,7 +154,9 @@ issues:
   - "src/script/media/MediaEmbeds.test.ts:605:42         Djbbz       U       partial_link = 'track/5yEPxDjbbzUzyauGtnmVEC';"
   - "src/script/media/MediaEmbeds.test.ts:605:47         Uzyau       U       link = 'track/5yEPxDjbbzUzyauGtnmVEC';"
   - "src/script/media/MediaEmbeds.test.ts:605:52         Gtnm        U       track/5yEPxDjbbzUzyauGtnmVEC';"
-  - "src/script/mls/MLSConversations.ts:61:9         initialise      U       * Will initialise the MLS callbacks for"
+  - "src/script/mls/MLSMigration/migrationStatus.ts:33:19        Finalise        U       const hasMigrationFinaliseRegardlessAfterDateArrived"
+  - "src/script/mls/MLSMigration/migrationStatus.ts:38:9         finalise        U       const finaliseDateISO = mlsMigrationFeature"
+  - "src/script/mls/MLSMigration/migrationStatus.ts:64:31        FINALISED       U       return MLSMigrationStatus.FINALISED;"
   - "src/script/page/LeftSidebar/panels/StartUI/PeopleTab.tsx:182:66         searchng    U       just ignore it when searchng for the user locally"
   - "src/script/page/MainContent/panels/Collection/Collection.tsx:105:39         converation     U       message from a different converation, nothing to do"
   - "src/script/page/RightSidebar/MessageDetails/MessageDetails.test.tsx:71:27       Kowalski    U       const userName = 'Jan Kowalski';"
@@ -162,6 +165,7 @@ issues:
   - "src/script/page/RootProvider.tsx:38:44          initialised     U       MainViewModel was not initialised');"
   - "src/script/search/SearchRepository.ts:110:28        Bardia      U       given user of name Bardia and username of bardia"
   - "src/script/search/SearchRepository.ts:110:51        bardia      U       Bardia and username of bardia_wire this mapping"
+  - "src/script/self/SelfRepository.ts:54:41         finalised       U       migration is enabled but not finalised"
   - "src/script/service/CoreSingleton.ts:60:13       Crypo       U       coreCrypoWasmFilePath: '/min/core"
   - "src/script/service/StoreEngineProvider.ts:38:3          EFFEMERAL       U       EFFEMERAL,"
   - "src/script/storage/record/EventRecord.ts:67:19          datestring      U       * - string: a datestring"
@@ -174,8 +178,7 @@ issues:
   - "src/script/util/ComponentUtil.ts:44:97          everytime       U       the onUpdate callback everytime one observable updates"
   - "src/script/util/ComponentUtil.ts:46:29          containinig     U       param object The object containinig some observable properties"
   - "src/script/util/DataDog.ts:52:12        datadoghq       U       site: 'datadoghq.eu',"
-  - "src/script/util/DebugUtil.ts:102:5          keyboardjs      U       keyboardjs.bind('command+shift"
-  - "src/script/util/DebugUtil.ts:203:7          finalise        U       finaliseRegardlessAfter: new"
+  - "src/script/util/DebugUtil.ts:105:5          keyboardjs      U       keyboardjs.bind('command+shift"
   - "src/script/util/Entropy.test.ts:22:7        seedrandom      U       const seedrandom = require('seedrandom"
   - "src/script/util/Entropy.test.ts:98:21       dimensonial     U       'Calculate %d-dimensonial entropy on: %s',"
   - "src/script/util/Entropy.test.ts:170:29      inputdata       U       makes sense with with inputdata being a simple linear"
