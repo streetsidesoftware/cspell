@@ -84,16 +84,16 @@ interface Options {
    */
   checkComments?: boolean;
   /**
-   * Spell check cspell setting
-   * current support words, ignoreWords, flagWords
+   * CSpell settings
+   *
    * @words - list of words to be always considered correct
-   * 
+   *
    * @ignoreWords - a list of words to be ignored (even if they are in the flagWords)
-   * 
-   * @flagWords - a list of words to be always considered incorrect
-   *  
+   *
+   * @flagWords - a list of words to be always considered incorrect, unless ignored.
+   *
    */
-  cSpell?: { words: string[], ignoreWords: string[], flagWords: string[] }
+  cSpell?: { words?: string[], ignoreWords?: string[], flagWords?: string[] }
   /**
    * Specify a path to a custom word list file.
    *
