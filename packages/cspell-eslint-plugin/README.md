@@ -93,7 +93,7 @@ interface Options {
    * @flagWords - a list of words to be always considered incorrect, unless ignored.
    *
    */
-  cSpell?: { words?: string[], ignoreWords?: string[], flagWords?: string[] }
+  cSpell?: { words?: string[]; ignoreWords?: string[]; flagWords?: string[] };
   /**
    * Specify a path to a custom word list file.
    *
