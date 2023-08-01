@@ -15,6 +15,7 @@ This plugin is still in active development as part of the CSpell suite of tools 
   ```
 
 - Add to it to `.eslintrc.json`
+
   ```json
   "extends": ["plugin:@cspell/recommended"]
   ```
@@ -82,6 +83,17 @@ interface Options {
    * @default true
    */
   checkComments?: boolean;
+  /**
+   * CSpell settings
+   *
+   * @words - list of words to be always considered correct
+   *
+   * @ignoreWords - a list of words to be ignored (even if they are in the flagWords)
+   *
+   * @flagWords - a list of words to be always considered incorrect, unless ignored.
+   *
+   */
+  cSpell?: { words?: string[], ignoreWords?: string[], flagWords?: string[] }
   /**
    * Specify a path to a custom word list file.
    *

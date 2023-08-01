@@ -318,14 +318,14 @@ const docValCache = new WeakMap<TextDocument, DocumentValidator>();
 
 function getDocValidator(filename: string, text: string, options: WorkerOptions): DocumentValidator {
     const doc = getTextDocument(filename, text);
+    const settings = calcInitialSettings(options);
     const cachedValidator = docValCache.get(doc);
-    if (cachedValidator) {
+    if (cachedValidator && deepEqual(cachedValidator.settings, settings)) {
         refreshDictionaryCache(0);
         cachedValidator.updateDocumentText(text);
         return cachedValidator;
     }
 
-    const settings = calcInitialSettings(options);
     isDebugMode = options.debugMode || false;
     const validator = new DocumentValidator(doc, options, settings);
     docValCache.set(doc, validator);
@@ -333,17 +333,27 @@ function getDocValidator(filename: string, text: string, options: WorkerOptions)
 }
 
 function calcInitialSettings(options: WorkerOptions): CSpellSettings {
-    const { customWordListFile, cwd } = options;
-    if (!customWordListFile) return defaultSettings;
-
-    const filePath = isCustomWordListFile(customWordListFile) ? customWordListFile.path : customWordListFile;
-    const dictFile = path.resolve(cwd, filePath);
+    const { customWordListFile, cspell, cwd } = options;
 
     const settings: CSpellSettings = {
         ...defaultSettings,
-        dictionaryDefinitions: [{ name: 'eslint-plugin-custom-words', path: dictFile }],
-        dictionaries: ['eslint-plugin-custom-words'],
+        words: cspell?.words || [],
+        ignoreWords: cspell?.ignoreWords || [],
+        flagWords: cspell?.flagWords || [],
     };
+
+    if (customWordListFile) {
+        const filePath = isCustomWordListFile(customWordListFile) ? customWordListFile.path : customWordListFile;
+        const dictFile = path.resolve(cwd, filePath);
+
+        const customWordListSettings = {
+            ...settings,
+            dictionaryDefinitions: [{ name: 'eslint-plugin-custom-words', path: dictFile }],
+            dictionaries: ['eslint-plugin-custom-words'],
+        };
+
+        return customWordListSettings;
+    }
 
     return settings;
 }
@@ -383,4 +393,17 @@ function normalizeSuggestions(suggestions: Suggestions, nodeType: NodeType): Sug
         }
         return s;
     });
+}
+
+/**
+ * Deep Equal check.
+ * Note: There are faster methods, but this is called once per file, so speed is not a concern.
+ */
+function deepEqual(a: unknown, b: unknown): boolean {
+    try {
+        assert.deepStrictEqual(a, b);
+        return true;
+    } catch (e) {
+        return false;
+    }
 }

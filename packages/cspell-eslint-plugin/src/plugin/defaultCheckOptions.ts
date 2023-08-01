@@ -6,6 +6,11 @@ export const defaultCheckOptions: Required<Check> = {
     checkJSXText: true,
     checkStrings: true,
     checkStringTemplates: true,
+    cspell: {
+        words: [],
+        flagWords: [],
+        ignoreWords: [],
+    },
     customWordListFile: undefined,
     ignoreImportProperties: true,
     ignoreImports: true,

@@ -42,6 +42,18 @@ ruleTester.run('cspell', Rule.rules.spellchecker, {
         readSample('sampleESM.mjs'),
         readFix('with-errors/strings.ts', { checkStrings: false, checkStringTemplates: false }),
         readFix('with-errors/imports.ts'),
+        readFix('with-errors/sampleESM.mjs', {
+            cspell: {
+                words: ['Guuide', 'Gallaxy', 'BADD', 'functionn', 'coool'],
+                ignoreWords: [],
+                flagWords: [],
+            },
+        }),
+        readFix('with-errors/sampleESM.mjs', {
+            cspell: {
+                ignoreWords: ['Guuide', 'Gallaxy', 'BADD', 'functionn', 'coool'],
+            },
+        }),
     ],
     invalid: [
         // cspell:ignore Guuide Gallaxy BADD functionn coool
