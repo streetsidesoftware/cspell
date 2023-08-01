@@ -49,6 +49,11 @@ ruleTester.run('cspell', Rule.rules.spellchecker, {
                 flagWords: [],
             },
         }),
+        readFix('with-errors/sampleESM.mjs', {
+            cspell: {
+                ignoreWords: ['Guuide', 'Gallaxy', 'BADD', 'functionn', 'coool'],
+            },
+        }),
     ],
     invalid: [
         // cspell:ignore Guuide Gallaxy BADD functionn coool
@@ -57,6 +62,7 @@ ruleTester.run('cspell', Rule.rules.spellchecker, {
             'Unknown word: "Gallaxy"',
             'Unknown word: "BADD"',
             'Unknown word: "functionn"',
+            'Unknown word: "coool"',
             'Unknown word: "coool"',
         ]),
         readInvalid(

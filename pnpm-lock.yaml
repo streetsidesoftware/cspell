@@ -1,4 +1,4 @@
-lockfileVersion: '6.1'
+lockfileVersion: '6.0'
 
 settings:
   autoInstallPeers: true
@@ -471,6 +471,9 @@ importers:
 
   packages/cspell-eslint-plugin:
     dependencies:
+      '@cspell/cspell-types':
+        specifier: workspace:*
+        version: link:../cspell-types
       cspell-lib:
         specifier: workspace:*
         version: link:../cspell-lib

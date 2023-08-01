@@ -74,7 +74,7 @@ export interface Check {
      */
     checkComments?: boolean;
     /**
-     * Spell check allow words
+     * CSpell options to pass to the spell checker.
      */
     cspell?: Pick<CSpellSettings, 'words' | 'ignoreWords' | 'flagWords'>;
     /**
