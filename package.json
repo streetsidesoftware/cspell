@@ -14,7 +14,7 @@
     "build-cspell-types-docs": "cd doc-generator && pnpm i && pnpm run build-cspell-types-docs",
     "build-integration-tests": "cd ./integration-tests && pnpm i",
     "build-schema": "pnpm -r run build-schema",
-    "build": "pnpm -r run build && pnpm -r run prepare-cspell-action",
+    "build": "pnpm -r --stream --workspace-concurrency=2 run build && pnpm -r run prepare-cspell-action",
     "build:readme": "pnpm build:readme:packages && pnpm build:readme:root",
     "build:readme:packages": "pnpm -r build:readme",
     "build:readme:root": "inject-markdown README.md \"packages/*/README.md\" && prettier -w README.md \"packages/*/README.md\"",
