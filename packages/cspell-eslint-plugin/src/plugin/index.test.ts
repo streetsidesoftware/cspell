@@ -43,7 +43,11 @@ ruleTester.run('cspell', Rule.rules.spellchecker, {
         readFix('with-errors/strings.ts', { checkStrings: false, checkStringTemplates: false }),
         readFix('with-errors/imports.ts'),
         readFix('with-errors/sampleESM.mjs', {
-            customWords: ['Guuide', 'Gallaxy', 'BADD', 'functionn', 'coool'],
+            cspell: {
+                words: ['Guuide', 'Gallaxy', 'BADD', 'functionn', 'coool'],
+                ignoreWords: [],
+                flagWords: [],
+            },
         }),
     ],
     invalid: [

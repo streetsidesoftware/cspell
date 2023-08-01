@@ -1,3 +1,5 @@
+import type { CSpellSettings } from '@cspell/cspell-types';
+
 export interface Options extends Check {
     /**
      * Number of spelling suggestions to make.
@@ -74,7 +76,7 @@ export interface Check {
     /**
      * Spell check allow words
      */
-    customWords?: string[];
+    cspell?: Pick<CSpellSettings, 'words' | 'ignoreWords' | 'flagWords'>;
     /**
      * Specify a path to a custom word list file.
      *
