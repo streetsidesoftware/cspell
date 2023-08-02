@@ -162,8 +162,8 @@ exports[`Validate cli > app 'check LICENSE' Expect Error: undefined 1`] = `
 
 exports[`Validate cli > app 'check LICENSE' Expect Error: undefined 2`] = `
 "log	Check file: ./LICENSE
-log	
-log	
+log
+log
 log	"
 `;
 
@@ -198,7 +198,7 @@ exports[`Validate cli > app 'check missing' Expect Error: [Function CheckFailed]
 
 exports[`Validate cli > app 'check missing' Expect Error: [Function CheckFailed] 2`] = `
 "log	Check file: ./missing-file.txt
-log	
+log
 error	File not found \\"./missing-file.txt\\""
 `;
 
@@ -305,8 +305,8 @@ exports[`Validate cli > app 'check with spelling errors' Expect Error: [Function
 
 exports[`Validate cli > app 'check with spelling errors' Expect Error: [Function CheckFailed] 2`] = `
 "log	Check file: ./samples/Dutch.txt
-log	
-log	
+log
+log
 log	"
 `;
 
@@ -336,7 +336,7 @@ exports[`Validate cli > app 'cspell-import-missing.json' Expect Error: [Function
 exports[`Validate cli > app 'current_file --verbose' Expect Error: undefined 1`] = `[]`;
 
 exports[`Validate cli > app 'current_file --verbose' Expect Error: undefined 2`] = `
-"info	
+"info
 info	cspell;
 info	Date: Sat, 03 Apr 2021 11:25:33 GMT
 info	Options:
@@ -346,11 +346,11 @@ info	    exclude:   node_modules/**
 info	    files:     src/app/app.test.ts
 info	    wordsOnly: No
 info	    unique:    No
-info	
+info
 info	Config Files Found:
 info	    ./cspell.json
-info	
-info	Exclusion Globs: 
+info
+info	Exclusion Globs:
 info	    Glob: *.snap from ./cspell.json
 info	    Glob: node_modules from ./cspell.json
 info	    Glob: package-lock.json from ./cspell.json
@@ -364,7 +364,7 @@ info	    Glob: .cspell.json from ./cspell.json
 info	    Glob: cspell.json from ./cspell.json
 info	    Glob: .vscode/** from ./cspell.json
 info	    Glob: node_modules/** from command line
-info	
+info
 info	Checking: ./src/app/app.test.ts, File type: auto, Language: default
 info	Checked: ./src/app/app.test.ts, File type: typescript, Language: en ... Issues: 0 0.00S
 info	Config file Used: ./cspell.json
@@ -415,7 +415,7 @@ exports[`Validate cli > app 'inline suggest' Expect Error: [Function CheckFailed
 exports[`Validate cli > app 'issue-2998 --language-id' Expect Error: undefined 1`] = `[]`;
 
 exports[`Validate cli > app 'issue-2998 --language-id' Expect Error: undefined 2`] = `
-"info	
+"info
 info	cspell;
 info	Date: Sat, 03 Apr 2021 11:25:33 GMT
 info	Options:
@@ -425,13 +425,13 @@ info	    exclude:   node_modules/**
 info	    files:     fix-words.txt
 info	    wordsOnly: No
 info	    unique:    No
-info	
+info
 info	Config Files Found:
 info	    ./fixtures/issue-2998/cspell.json
-info	
-info	Exclusion Globs: 
+info
+info	Exclusion Globs:
 info	    Glob: node_modules/** from command line
-info	
+info
 info	Checking: ./fixtures/issue-2998/fix-words.txt, File type: fix, Language: default
 info	Checked: ./fixtures/issue-2998/fix-words.txt, File type: fix, Language: en ... Issues: 0 0.00S
 info	Config file Used: ./fixtures/issue-2998/cspell.json
@@ -1898,6 +1898,7 @@ hello - en-gb-common-misspelling  node_modules/@cspell/.../dict-en-gb.yaml
 hello - en-us-common-misspelling  node_modules/@cspell/.../dict-en-us.yaml
 hello - filetypes*                node_modules/@cspell/.../filetypes.txt.gz
 hello - fonts                     node_modules/@cspell/dict-fonts/dict/fonts.txt
+hello - fsharp                    node_modules/@cspell/.../dict/fsharp.txt
 hello - fullstack                 node_modules/@cspell/.../dict/fullstack.txt
 hello - gaming-terms              node_modules/@cspell/.../dict/gaming-terms.txt
 hello * golang                    node_modules/@cspell/dict-golang/dict/go.txt
