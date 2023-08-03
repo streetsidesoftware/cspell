@@ -137,6 +137,7 @@ const settings: AdvancedCSpellSettings = {
         '@cspell/dict-en-gb/cspell-ext.json',
         '@cspell/dict-filetypes/cspell-ext.json',
         '@cspell/dict-fonts/cspell-ext.json',
+        '@cspell/dict-fsharp/cspell-ext.json',
         '@cspell/dict-fullstack/cspell-ext.json',
         '@cspell/dict-gaming-terms/cspell-ext.json',
         '@cspell/dict-git/cspell-ext.json',
