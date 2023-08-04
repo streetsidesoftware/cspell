@@ -27,6 +27,19 @@ export interface Options extends Check {
     debugMode?: boolean;
 }
 
+export type CSpellOptions = Pick<
+    CSpellSettings,
+    | 'allowCompoundWords'
+    | 'dictionaries'
+    | 'dictionaryDefinitions'
+    | 'enableFiletypes'
+    | 'flagWords'
+    | 'ignoreWords'
+    | 'languageSettings'
+    | 'overrides'
+    | 'words'
+>;
+
 export type RequiredOptions = Required<Options>;
 
 export interface Check {
@@ -76,7 +89,7 @@ export interface Check {
     /**
      * CSpell options to pass to the spell checker.
      */
-    cspell?: Pick<CSpellSettings, 'words' | 'ignoreWords' | 'flagWords'>;
+    cspell?: CSpellOptions;
     /**
      * Specify a path to a custom word list file.
      *
