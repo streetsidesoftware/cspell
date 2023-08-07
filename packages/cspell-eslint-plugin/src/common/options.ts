@@ -1,4 +1,4 @@
-import type { CSpellSettings } from '@cspell/cspell-types';
+import type { CSpellSettings, DictionaryDefinitionPreferred } from '@cspell/cspell-types';
 
 export interface Options extends Check {
     /**
@@ -27,18 +27,24 @@ export interface Options extends Check {
     debugMode?: boolean;
 }
 
+type DictionaryDefinition = DictionaryDefinitionPreferred;
+
 export type CSpellOptions = Pick<
     CSpellSettings,
+    // | 'languageSettings'
+    // | 'overrides'
     | 'allowCompoundWords'
     | 'dictionaries'
-    | 'dictionaryDefinitions'
-    | 'enableFiletypes'
+    | 'enabled'
     | 'flagWords'
     | 'ignoreWords'
-    | 'languageSettings'
-    | 'overrides'
+    | 'ignoreRegExpList'
+    | 'includeRegExpList'
+    | 'import'
     | 'words'
->;
+> & {
+    dictionaryDefinition?: DictionaryDefinition;
+};
 
 export type RequiredOptions = Required<Options>;
 
@@ -115,3 +121,9 @@ export interface CustomWordListFile {
 }
 
 export type WorkerOptions = RequiredOptions & { cwd: string };
+
+export const defaultOptions: Options = {
+    numSuggestions: 8,
+    generateSuggestions: true,
+    autoFix: false,
+};
