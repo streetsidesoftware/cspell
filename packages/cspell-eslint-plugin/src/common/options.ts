@@ -1,4 +1,4 @@
-import type { CSpellSettings } from '@cspell/cspell-types';
+import type { CSpellSettings, DictionaryDefinitionPreferred } from '@cspell/cspell-types';
 
 export interface Options extends Check {
     /**
@@ -26,6 +26,25 @@ export interface Options extends Check {
      */
     debugMode?: boolean;
 }
+
+type DictionaryDefinition = DictionaryDefinitionPreferred;
+
+export type CSpellOptions = Pick<
+    CSpellSettings,
+    // | 'languageSettings'
+    // | 'overrides'
+    | 'allowCompoundWords'
+    | 'dictionaries'
+    | 'enabled'
+    | 'flagWords'
+    | 'ignoreWords'
+    | 'ignoreRegExpList'
+    | 'includeRegExpList'
+    | 'import'
+    | 'words'
+> & {
+    dictionaryDefinition?: DictionaryDefinition;
+};
 
 export type RequiredOptions = Required<Options>;
 
@@ -76,7 +95,7 @@ export interface Check {
     /**
      * CSpell options to pass to the spell checker.
      */
-    cspell?: Pick<CSpellSettings, 'words' | 'ignoreWords' | 'flagWords'>;
+    cspell?: CSpellOptions;
     /**
      * Specify a path to a custom word list file.
      *
@@ -102,3 +121,9 @@ export interface CustomWordListFile {
 }
 
 export type WorkerOptions = RequiredOptions & { cwd: string };
+
+export const defaultOptions: Options = {
+    numSuggestions: 8,
+    generateSuggestions: true,
+    autoFix: false,
+};

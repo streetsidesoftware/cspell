@@ -37,6 +37,79 @@
       "additionalProperties": false,
       "description": "CSpell options to pass to the spell checker.",
       "properties": {
+        "allowCompoundWords": {
+          "default": false,
+          "description": "True to enable compound word checking. See [Case Sensitivity](https://cspell.org/docs/case-sensitive/) for more details.",
+          "type": "boolean"
+        },
+        "dictionaries": {
+          "description": "Optional list of dictionaries to use. Each entry should match the name of the dictionary.\n\nTo remove a dictionary from the list, add `!` before the name.\n\nFor example, `!typescript` will turn off the dictionary with the name `typescript`.\n\nSee the [Dictionaries](https://cspell.org/docs/dictionaries/) and [Custom Dictionaries](https://cspell.org/docs/dictionaries-custom/) for more details.",
+          "items": {
+            "description": "Reference to a dictionary by name. One of:\n-  {@link  DictionaryRef } \n-  {@link  DictionaryNegRef }",
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "dictionaryDefinition": {
+          "additionalProperties": false,
+          "properties": {
+            "description": {
+              "description": "Optional description.",
+              "type": "string"
+            },
+            "name": {
+              "description": "This is the name of a dictionary.\n\nName Format:\n- Must contain at least 1 number or letter.\n- Spaces are allowed.\n- Leading and trailing space will be removed.\n- Names ARE case-sensitive.\n- Must not contain `*`, `!`, `;`, `,`, `{`, `}`, `[`, `]`, `~`.",
+              "pattern": "^(?=[^!*,;{}[\\]~\\n]+$)(?=(.*\\w)).+$",
+              "type": "string"
+            },
+            "noSuggest": {
+              "description": "Indicate that suggestions should not come from this dictionary. Words in this dictionary are considered correct, but will not be used when making spell correction suggestions.\n\nNote: if a word is suggested by another dictionary, but found in this dictionary, it will be removed from the set of possible suggestions.",
+              "type": "boolean"
+            },
+            "path": {
+              "description": "Path to the file.",
+              "pattern": "^.*\\.(?:txt|trie)(?:\\.gz)?$",
+              "type": "string"
+            },
+            "repMap": {
+              "description": "Replacement pairs.",
+              "items": {
+                "items": {
+                  "type": "string"
+                },
+                "maxItems": 2,
+                "minItems": 2,
+                "type": "array"
+              },
+              "type": "array"
+            },
+            "type": {
+              "default": "S",
+              "description": "Type of file: S - single word per line, W - each line can contain one or more words separated by space, C - each line is treated like code (Camel Case is allowed). Default is S. C is the slowest to load due to the need to split each line based upon code splitting rules.",
+              "enum": [
+                "S",
+                "W",
+                "C",
+                "T"
+              ],
+              "type": "string"
+            },
+            "useCompounds": {
+              "description": "Use Compounds.",
+              "type": "boolean"
+            }
+          },
+          "required": [
+            "name",
+            "path"
+          ],
+          "type": "object"
+        },
+        "enabled": {
+          "default": true,
+          "description": "Is the spell checker enabled.",
+          "type": "boolean"
+        },
         "flagWords": {
           "description": "List of words to always be considered incorrect. Words found in `flagWords` override `words`.\n\nFormat of `flagWords`\n- single word entry - `word`\n- with suggestions - `word:suggestion` or `word->suggestion, suggestions`\n\nExample: ```ts \"flagWords\": [   \"color: colour\",   \"incase: in case, encase\",   \"canot->cannot\",   \"cancelled->canceled\" ] ```",
           "items": {
@@ -44,9 +117,41 @@
           },
           "type": "array"
         },
+        "ignoreRegExpList": {
+          "description": "List of regular expression patterns or pattern names to exclude from spell checking.\n\nExample: `[\"href\"]` - to exclude html href pattern.\n\nRegular expressions use JavaScript regular expression syntax.\n\nExample: to ignore ALL-CAPS words\n\nJSON ```json \"ignoreRegExpList\": [\"/\\\\b[A-Z]+\\\\b/g\"] ```\n\nYAML ```yaml ignoreRegExpList:   - >-    /\\b[A-Z]+\\b/g ```\n\nBy default, several patterns are excluded. See [Configuration](https://cspell.org/configuration/patterns) for more details.\n\nWhile you can create your own patterns, you can also leverage several patterns that are [built-in to CSpell](https://cspell.org/types/cspell-types/types/PredefinedPatterns.html).",
+          "items": {
+            "description": "A PatternRef is a Pattern or PatternId.",
+            "type": "string"
+          },
+          "type": "array"
+        },
         "ignoreWords": {
           "description": "List of words to be ignored. An ignored word will not show up as an error, even if it is also in the `flagWords`.",
           "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "import": {
+          "anyOf": [
+            {
+              "description": "A File System Path. Relative paths are relative to the configuration file.",
+              "type": "string"
+            },
+            {
+              "items": {
+                "description": "A File System Path. Relative paths are relative to the configuration file.",
+                "type": "string"
+              },
+              "type": "array"
+            }
+          ],
+          "description": "Allows this configuration to inherit configuration for one or more other files.\n\nSee [Importing / Extending Configuration](https://cspell.org/configuration/imports/) for more details."
+        },
+        "includeRegExpList": {
+          "description": "List of regular expression patterns or defined pattern names to match for spell checking.\n\nIf this property is defined, only text matching the included patterns will be checked.\n\nWhile you can create your own patterns, you can also leverage several patterns that are [built-in to CSpell](https://cspell.org/types/cspell-types/types/PredefinedPatterns.html).",
+          "items": {
+            "description": "A PatternRef is a Pattern or PatternId.",
             "type": "string"
           },
           "type": "array"
