@@ -3,9 +3,9 @@ Repository: Azure/azure-rest-api-specs
 Url: https://github.com/Azure/azure-rest-api-specs.git
 Args: '["--config=cSpell.json","**/*.{md,ts,js}"]'
 Summary:
-  files: 2073
-  filesWithIssues: 723
-  issues: 2366
+  files: 2088
+  filesWithIssues: 733
+  issues: 2403
   errors: 0
 Errors: []
 
@@ -39,6 +39,7 @@ issues:
   - "documentation/code-gen/configure-python-sdk.md:147:5        multiapiscript      U       - multiapiscript: true"
   - "documentation/creating-swagger.md:581:16        flim    U       \"bar\": \"flim\""
   - "documentation/FAQ.md:41:51          examplegen      U       from Swagger?<a name=\"examplegen\"></a>"
+  - "documentation/Getting-started-with-TypeSpec-specifications.md:9:5           TLDR    U       ### TLDR: Key checklist for TypeSpec"
   - "documentation/openapi-authoring-automated-guidelines.md:254:3       alllowercase        U       * alllowercase - If there are multiple"
   - "documentation/openapi-authoring-automated-guidelines.md:256:60      Ikey                U       incorrectly recognize \"Ikey\" as a word and not flag"
   - "documentation/openapi-authoring-automated-guidelines.md:314:283     Listby              U       the naming convention \"ListbyResourceGroup\", consider"
@@ -63,10 +64,11 @@ issues:
   - "documentation/typespec-end-to-end-scenarios.md:194:227      lanaguge            U       RPSaaSDev`, to different lanaguge SDK repos."
   - "documentation/typespec-end-to-end-scenarios.md:200:38       compliation         U       should verify TypeSpec compliation"
   - "documentation/typespec-end-to-end-scenarios.md:202:31       lanauge             U       Optionally CI generated key lanauge SDKs changes can be"
-  - "documentation/typespec-rest-api-dev-process.md:49:37        devcontainer                U       VSCode with local docker .devcontainer"
-  - "documentation/typespec-rest-api-dev-process.md:72:12        reporoot                    U       1. Under `[reporoot]\\specifications`, create"
-  - "documentation/typespec-rest-api-dev-process.md:85:104       follwoing (following)       U       resource-manager` folders follwoing the naming conventions"
-  - "documentation/typespec-rest-api-dev-process.md:112:38       widgetmanager               U       pecifications/contoso/contoso.widgetmanager"
+  - "documentation/typespec-rest-api-dev-process.md:50:37        devcontainer                U       VSCode with local docker .devcontainer"
+  - "documentation/typespec-rest-api-dev-process.md:73:12        reporoot                    U       1. Under `[reporoot]\\specifications`, create"
+  - "documentation/typespec-rest-api-dev-process.md:86:104       follwoing (following)       U       resource-manager` folders follwoing the naming conventions"
+  - "documentation/typespec-rest-api-dev-process.md:144:57       parters                     U       message to [TypeSpec parters - teams channel](https"
+  - "documentation/typespec-rest-api-dev-process.md:168:38       widgetmanager               U       pecifications/contoso/contoso.widgetmanager"
   - "documentation/typespec-structure-guidelines.md:46:7         confidentialledger      U       -> confidentialledger"
   - "documentation/x-ms-examples.md:105:29       testrg      U       resourceGroupName\": \"testrg123\","
   - "documentation/x-ms-examples.md:106:30       testacc     U       storageAccountName\": \"testacc6141\","
@@ -179,7 +181,7 @@ issues:
   - "specification/connectedvmware/resource-manager/readme.azureresourceschema.md:9:17           connectedvmware     U       - tag: schema-connectedvmware-2020-10-01-preview"
   - "specification/consumption/resource-manager/readme.md:238:20         jianyexi    U       approved-by: \"@jianyexi\""
   - "specification/containerservice/resource-manager/Microsoft.ContainerService/fleet/readme.csharp.md:11:40         containerservicefleet       U       csharp-sdks-folder)/containerservicefleet/Microsoft.Azure.Management"
-  - "specification/containerstorage/resource-manager/readme.az.md:9:17           containerstorage    U       extensions: containerstorage"
+  - "specification/containerstorage/ContainerStorage.Management/README.md:61:35          containerstorage    U       generate-examples <path to containerstorage.json>"
   - "specification/cosmos-db/data-plane/readme.go.md:8:14        storagetables       U       namespace: storagetables"
   - "specification/cosmos-db/data-plane/readme.md:49:46          outputm     U       only supports XML input/outputm which is not supported"
   - "specification/cosmos-db/resource-manager/readme.go.md:14:41         armcosmos       U       resourcemanager/cosmos/armcosmos"
@@ -235,6 +237,7 @@ issues:
   - "specification/graphservicesprod/resource-manager/readme.csharp.md:14:40         graphservicesprod       U       csharp-sdks-folder)/graphservicesprod/management/Microsoft"
   - "specification/graphservicesprod/resource-manager/readme.python.md:10:26         graphservices       U       package-name: azure-mgmt-graphservices"
   - "specification/guestconfiguration/resource-manager/readme.az.md:7:15         guestconfig     U       extensions: guestconfig"
+  - "specification/hdinsight/resource-manager/Microsoft.HDInsight/HDInsightOnAks/readme.md:109:43        hdinsightonaks      U       microsoft.azure.management.hdinsightonaks"
   - "specification/hdinsight/resource-manager/readme.md:43:53        vmsize      U       CapabilitiesResult.properties.vmsize_filters"
   - "specification/healthcareapis/resource-manager/readme.cli.md:13:18       authenticationconfiguration     U       \"/properties/authenticationconfiguration\": \"Authentication*/"
   - "specification/healthcareapis/resource-manager/readme.cli.md:14:18       corsconfiguration               U       \"/properties/corsconfiguration\": \"Cors*/\""
@@ -440,6 +443,8 @@ issues:
   - "specification/storage/resource-manager/readme.go.md:14:42       armstorage      U       resourcemanager/storage/armstorage"
   - "specification/storagecache/resource-manager/readme.go.md:22:46          amlfilesystem       U       signedIdentities']['$ref'] = \"amlfilesystem.json#/definitions/UserAssigne"
   - "specification/storagemover/resource-manager/readme.az.md:9:17           storagemover    U       extensions: storagemover"
+  - "specification/storagetasks/resource-manager/readme.az.md:9:17           storagetasks    U       extensions: storagetasks"
+  - "specification/storagetasks/resource-manager/readme.typescript.md:10:49          storagetaskss       U       typescript-sdks-folder)/sdk/storagetaskss/arm-storagetasks\""
   - "specification/support/resource-manager/readme.go.md:14:42       armsupport      U       resourcemanager/support/armsupport"
   - "specification/synapse/data-plane/readme.go.md:59:12         accesscontrol               U       namespace: accesscontrol"
   - "specification/synapse/data-plane/readme.go.md:89:12         managedvirtualnetwork       U       namespace: managedvirtualnetwork"
@@ -450,7 +455,7 @@ issues:
   - "specification/vi/resource-manager/readme.design.md:6:133        Mediause        U       for Medianalyzer for Mediause Video Indexer today"
   - "specification/vi/resource-manager/readme.python.md:9:26         videoindexer    U       package-name: azure-mgmt-videoindexer"
   - "specification/vmware/resource-manager/readme.go.md:14:38        armavs      U       resourcemanager/avs/armavs"
-  - "specification/vmware/resource-manager/readme.md:105:15      pathresourceprovidernamepascalcase      U       - suppress: pathresourceprovidernamepascalcase"
+  - "specification/vmware/resource-manager/readme.md:114:15      pathresourceprovidernamepascalcase      U       - suppress: pathresourceprovidernamepascalcase"
   - "specification/vmwarecloudsimple/resource-manager/readme.csharp.md:13:40         vmwarecloudsimple       U       csharp-sdks-folder)/vmwarecloudsimple/Microsoft.Azure.Management"
   - "specification/voiceservices/resource-manager/readme.az.md:9:17          voiceservices       U       extensions: voiceservices"
   - "specification/voiceservices/resource-manager/readme.csharp.md:14:40         voiceservice    U       csharp-sdks-folder)/voiceservice/management/Azure.ResourceMana"
