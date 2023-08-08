@@ -44,7 +44,7 @@ export async function dynamicImportFrom<Module>(
         let resolved = '';
         let location = '';
         try {
-            resolved = resolve(modulesNameToImport.toString(), url.toString());
+            resolved = await resolve(modulesNameToImport.toString(), url.toString());
             location = isWindowsPath.test(resolved) ? pathToFileURL(resolved).toString() : resolved;
             return await import(location);
         } catch (err) {
