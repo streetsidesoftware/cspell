@@ -3,6 +3,7 @@ import { writeFile } from 'node:fs/promises';
 import { describe, expect, test, vi } from 'vitest';
 
 import { configFileHeader, processCompileAction } from './compile.js';
+import { configFileSchemaURL } from './config/config.js';
 
 vi.mock('node:fs/promises', () => ({
     writeFile: vi.fn().mockImplementation(() => Promise.resolve(undefined)),
@@ -25,6 +26,7 @@ describe('compile', () => {
         const expected =
             configFileHeader +
             `\
+$schema: ${configFileSchemaURL}
 targets:
   - name: public-licenses
     targetDirectory: .
@@ -53,6 +55,7 @@ targets:
         const expected =
             configFileHeader +
             `\
+$schema: ${configFileSchemaURL}
 targets:
   - name: nl-nl
     targetDirectory: .
