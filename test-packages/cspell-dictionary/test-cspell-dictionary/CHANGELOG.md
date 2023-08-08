@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 6.31.3 (2023-08-08)
+
+### Bug Fixes
+
+* Fix dynamic loader on Windows ([#4707](https://github.com/streetsidesoftware/cspell/issues/4707)) ([702d9f4](https://github.com/streetsidesoftware/cspell/commit/702d9f4a6ec54006b4f7a0a5bc25be9700781336))
+
 ## 6.31.1 (2023-03-24)
 
 **Note:** Version bump only for package test-cspell-dictionary
