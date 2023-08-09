@@ -1,5 +1,11 @@
 export interface RunConfig extends Partial<CompileRequest> {
     /**
+     * Url to JSON Schema
+     * @default "https://raw.githubusercontent.com/streetsidesoftware/cspell/main/packages/cspell-tools/cspell-tools.config.schema.json"
+     */
+    $schema?: string;
+
+    /**
      * Optional Target Dictionaries to create.
      */
     targets?: Target[];
@@ -144,3 +150,6 @@ export interface CompileSourceOptions {
 
     allowedSplitWords?: FilePath | FilePath[] | undefined;
 }
+
+export const configFileSchemaURL =
+    'https://raw.githubusercontent.com/streetsidesoftware/cspell/main/packages/cspell-tools/cspell-tools.config.schema.json';

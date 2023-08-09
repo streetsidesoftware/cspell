@@ -6,7 +6,7 @@ import YAML from 'yaml';
 import type { CompileCommonAppOptions } from './AppOptions.js';
 import { compile } from './compiler/compile.js';
 import { createCompileRequest } from './compiler/createCompileRequest.js';
-import type { CompileRequest } from './config/config.js';
+import { configFileSchemaURL, type RunConfig } from './config/config.js';
 import type { FeatureFlags } from './FeatureFlags/index.js';
 import { getSystemFeatureFlags, parseFlags } from './FeatureFlags/index.js';
 import { globP } from './util/globP.js';
@@ -15,8 +15,7 @@ getSystemFeatureFlags().register('compound', 'Enable compound dictionary sources
 
 const defaultConfigFile = 'cspell-tools.config.yaml';
 
-export const configFileHeader =
-    '# yaml-language-server: $schema=https://raw.githubusercontent.com/streetsidesoftware/cspell/main/packages/cspell-tools/cspell-tools.config.schema.json\n\n';
+export const configFileHeader = `# yaml-language-server: $schema=${configFileSchemaURL}\n\n`;
 
 export async function processCompileAction(
     src: string[],
@@ -52,8 +51,10 @@ async function useCompile(src: string[], options: CompileCommonAppOptions): Prom
     return options.init ? initConfig(request) : compile(request);
 }
 
-async function initConfig(request: CompileRequest): Promise<void> {
-    const content = configFileHeader + YAML.stringify(request, null, 2);
+async function initConfig(runConfig: RunConfig): Promise<void> {
+    const { $schema = configFileSchemaURL, ...cfg } = runConfig;
+    const config = { $schema, ...cfg };
+    const content = configFileHeader + YAML.stringify(config, null, 2);
     console.log('Writing config file: %s', defaultConfigFile);
     await writeFile(defaultConfigFile, content);
 
