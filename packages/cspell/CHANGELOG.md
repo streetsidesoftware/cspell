@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 7.0.1-alpha.9 (2023-08-10)
+
+**Note:** Version bump only for package cspell
+
 ## 7.0.1-alpha.8 (2023-07-21)
 
 ### Bug Fixes
