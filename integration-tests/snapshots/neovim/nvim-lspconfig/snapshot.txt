@@ -3,7 +3,7 @@ Repository: neovim/nvim-lspconfig
 Url: "https://github.com/neovim/nvim-lspconfig.git"
 Args: ["**"]
 Lines:
- CSpell: Files checked: 268, Issues found: 3704 in 264 files
+ CSpell: Files checked: 268, Issues found: 3715 in 264 files
  exit code: 1
 ./CONTRIBUTING.md:10:341    - Unknown word (nvim)       -- dedicated plugin such as nvim-jdtls, nvim-metals,
 ./CONTRIBUTING.md:10:346    - Unknown word (jdtls)      -- plugin such as nvim-jdtls, nvim-metals, etc.
@@ -58,7 +58,6 @@ Lines:
 ./doc/server_configurations.md:10137:5   - Unknown word (mavenrepo)       -- mavenrepo = "$HOME/.m2/repository
 ./doc/server_configurations.md:10221:21  - Unknown word (Veryl)           -- Language server for Veryl
 ./doc/server_configurations.md:10342:59  - Unknown word (autoload)        -- runtime", "nvim", ".git", "autoload", "plugin" },
-./doc/server_configurations.md:10343:7   - Unknown word (runtimepath)     -- runtimepath = true
 ./doc/server_configurations.md:10346:5   - Unknown word (iskeyword)       -- iskeyword = "@,48-57,_,192-25
 ./doc/server_configurations.md:10349:11  - Unknown word (Runtimepath)     -- fromRuntimepath = true,
 ./doc/server_configurations.md:10350:11  - Unknown word (Vimruntime)      -- fromVimruntime = true
@@ -275,8 +274,10 @@ Lines:
 ./doc/server_configurations.md:4933:27   - Unknown word (sweave)        -- support org files or R sweave, users can define a
 ./doc/server_configurations.md:4954:64   - Unknown word (rnoweb)        -- "plaintex", "rst", "rnoweb", "tex", "pandoc" }
 ./doc/server_configurations.md:4954:81   - Unknown word (pandoc)        -- , "rnoweb", "tex", "pandoc" }
+./doc/server_configurations.md:4992:38   - Unknown word (luarc)         -- loop.fs_stat(path..'/.luarc.json') and not vim.loop
 ./doc/server_configurations.md:49:4      - Unknown word (diagnosticls) -- - [diagnosticls](#diagnosticls)
-./doc/server_configurations.md:5041:18   - Unknown word (luarc)         -- root_pattern(".luarc.json", ".luarc.jsonc
+./doc/server_configurations.md:5000:31   - Unknown word (VIMRUNTIME)    -- library = { vim.env.VIMRUNTIME }
+./doc/server_configurations.md:5001:33   - Unknown word (runtimepath)   -- or pull in all of 'runtimepath'. NOTE: this is a lot
 ./doc/server_configurations.md:5041:49   - Unknown word (luacheckrc)    -- , ".luarc.jsonc", ".luacheckrc", ".stylua.toml", "stylua
 ./doc/server_configurations.md:506:6     - Unknown word (apexcode)        -- { "apexcode" }
 ./doc/server_configurations.md:5099:7    - Unknown word (asmsyntax)     -- vim.g.asmsyntax = 'asm68k'
@@ -434,9 +435,9 @@ Lines:
 ./lua/lspconfig/server_configurations/lean3ls.lua:13:18     - Unknown word (endpos)     -- local _, endpos = fname:find '/lean
 ./lua/lspconfig/server_configurations/ocamllsp.lua:12:37     - Unknown word (ftype)          -- language_id = function(_, ftype)
 ./lua/lspconfig/server_configurations/ocamllsp.lua:6:3       - Unknown word (ocamlinterface) -- ocamlinterface = 'ocaml.interface'
-./lua/lspconfig/server_configurations/omnisharp.lua:51:70     - Unknown word (getpid)     -- hostPID', tostring(vim.fn.getpid()) })
-./lua/lspconfig/server_configurations/omnisharp.lua:78:50     - Unknown word (Prereleases) -- config.cmd, 'Sdk:IncludePrereleases=true')
-./lua/lspconfig/server_configurations/omnisharp.lua:86:37     - Unknown word (deepcopy)    -- config.capabilities = vim.deepcopy(new_config.capabilities
+./lua/lspconfig/server_configurations/omnisharp.lua:56:70     - Unknown word (getpid)     -- hostPID', tostring(vim.fn.getpid()) })
+./lua/lspconfig/server_configurations/omnisharp.lua:83:50     - Unknown word (Prereleases) -- config.cmd, 'Sdk:IncludePrereleases=true')
+./lua/lspconfig/server_configurations/omnisharp.lua:91:37     - Unknown word (deepcopy)    -- config.capabilities = vim.deepcopy(new_config.capabilities
 ./lua/lspconfig/server_configurations/openedge_ls.lua:19:43     - Unknown word (Dorg)       -- config.cmd + 1] = '-Dorg.slf4j.simpleLogger.defaultLog
 ./lua/lspconfig/server_configurations/please.lua:7:36      - Unknown word (plzconfig)  -- util.root_pattern '.plzconfig',
 ./lua/lspconfig/server_configurations/pyright.lua:58:7      - Unknown word (nargs)      -- nargs = 1,
@@ -499,4 +500,3 @@ Lines:
 ./test/minimal_init.lua:13:14     - Unknown word (packpath)   -- vim.cmd('set packpath=' .. join_paths(temp
 ./test/minimal_init.lua:18:11     - Unknown word (isdirectory) -- if vim.fn.isdirectory(lspconfig_path) ~=
 ./test/minimal_init.lua:33:34     - Unknown word (noremap)     -- = { buffer = bufnr, noremap = true, silent = true
-./test/minimal_init.lua:9:28      - Unknown word (VIMRUNTIME) -- cmd [[set runtimepath=$VIMRUNTIME]]

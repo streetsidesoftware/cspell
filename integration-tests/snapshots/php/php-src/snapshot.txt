@@ -3,7 +3,7 @@ Repository: php/php-src
 Url: "https://github.com/php/php-src.git"
 Args: ["--config=../../../../config/repositories/php/php-src/cspell.json","**/*.{md,c,h,php}"]
 Lines:
- CSpell: Files checked: 1816, Issues found: 44782 in 1305 files
+ CSpell: Files checked: 1816, Issues found: 44771 in 1305 files
  exit code: 1
 ./CODING_STANDARDS.md:105:23    - Unknown word (intvl)        -- // Could be 'date_intvl_create_from_date_str
 ./CODING_STANDARDS.md:114:8     - Unknown word (setclientencoding) -- pg_setclientencoding
@@ -511,36 +511,35 @@ Lines:
 ./ext/bcmath/libbcmath/README.md:21:7      - Unknown word (BCMATH)     -- * Why BCMATH?
 ./ext/bcmath/libbcmath/README.md:6:1       - Unknown word (Bcmath)     -- Bcmath is a library of arbitrary
 ./ext/bcmath/libbcmath/src/bcmath.h:126:9     - Unknown word (divmod)     -- bool bc_divmod(bc_num num1, bc_num
-./ext/bcmath/libbcmath/src/div.c:47:24     - Unknown word (rptr)       -- unsigned char *nptr, *rptr;
-./ext/bcmath/libbcmath/src/div.c:82:39     - Unknown word (qptr)       -- ptr1, *ptr2, *n2ptr, *qptr;
-./ext/bcmath/libbcmath/src/div.c:84:36     - Unknown word (qdigits)    -- len1, len2, scale2, qdigits, extra, count;
-./ext/bcmath/libbcmath/src/div.c:85:16     - Unknown word (qdig)       -- unsigned int  qdig, qguess, borrow, carry
-./ext/bcmath/libbcmath/src/div.c:85:22     - Unknown word (qguess)     -- unsigned int  qdig, qguess, borrow, carry;
-./ext/bcmath/libbcmath/src/div.c:86:17     - Unknown word (mval)       -- unsigned char *mval;
+./ext/bcmath/libbcmath/src/div.c:48:24     - Unknown word (rptr)       -- unsigned char *nptr, *rptr;
+./ext/bcmath/libbcmath/src/div.c:83:39     - Unknown word (qptr)       -- ptr1, *ptr2, *n2ptr, *qptr;
+./ext/bcmath/libbcmath/src/div.c:85:35     - Unknown word (qdigits)    -- len1, len2, scale2, qdigits, extra, count;
+./ext/bcmath/libbcmath/src/div.c:86:15     - Unknown word (qdig)       -- unsigned int qdig, qguess, borrow, carry
+./ext/bcmath/libbcmath/src/div.c:86:21     - Unknown word (qguess)     -- unsigned int qdig, qguess, borrow, carry;
+./ext/bcmath/libbcmath/src/div.c:87:17     - Unknown word (mval)       -- unsigned char *mval;
 ./ext/bcmath/libbcmath/src/divmod.c:48:9      - Unknown word (rscale)     -- size_t rscale;
-./ext/bcmath/libbcmath/src/doaddsub.c:137:24    - Unknown word (diffptr)    -- char *n1ptr, *n2ptr, *diffptr;
+./ext/bcmath/libbcmath/src/doaddsub.c:139:24    - Unknown word (diffptr)    -- char *n1ptr, *n2ptr, *diffptr;
 ./ext/bcmath/libbcmath/src/doaddsub.c:1:4       - Unknown word (doaddsub)   -- /* doaddsub.c: bcmath library file
 ./ext/bcmath/libbcmath/src/doaddsub.c:45:24     - Unknown word (sumptr)     -- char *n1ptr, *n2ptr, *sumptr;
 ./ext/bcmath/libbcmath/src/int2num.c:39:8      - Unknown word (bptr)       -- char *bptr, *vptr;
 ./ext/bcmath/libbcmath/src/nearzero.c:1:4       - Unknown word (nearzero)   -- /* nearzero.c: bcmath library file
 ./ext/bcmath/libbcmath/src/num2str.c:40:8      - Unknown word (sptr)       -- char *sptr;
-./ext/bcmath/libbcmath/src/num2str.c:42:14     - Unknown word (signch)     -- int index, signch;
-./ext/bcmath/libbcmath/src/output.c:78:14     - Unknown word (fdigit)     -- int index, fdigit;
+./ext/bcmath/libbcmath/src/num2str.c:42:7      - Unknown word (signch)     -- bool signch;
+./ext/bcmath/libbcmath/src/output.c:79:13     - Unknown word (fdigit)     -- int index, fdigit;
 ./ext/bcmath/libbcmath/src/raise.c:111:31    - Unknown word (convertable) -- Exponent must be properly convertable to long */
 ./ext/bcmath/libbcmath/src/raise.c:46:9      - Unknown word (pwrscale)   -- size_t pwrscale;
 ./ext/bcmath/libbcmath/src/raise.c:47:9      - Unknown word (calcscale)  -- size_t calcscale;
-./ext/bcmath/libbcmath/src/recmul.c:101:23    - Unknown word (addsub)     -- static void _bc_shift_addsub (bc_num accum, bc_num
-./ext/bcmath/libbcmath/src/recmul.c:103:15    - Unknown word (accp)       -- signed char *accp, *valp;
-./ext/bcmath/libbcmath/src/recmul.c:103:22    - Unknown word (valp)       -- signed char *accp, *valp;
+./ext/bcmath/libbcmath/src/recmul.c:100:15    - Unknown word (accp)       -- signed char *accp, *valp;
+./ext/bcmath/libbcmath/src/recmul.c:100:22    - Unknown word (valp)       -- signed char *accp, *valp;
 ./ext/bcmath/libbcmath/src/recmul.c:1:4       - Unknown word (recmul)     -- /* recmul.c: bcmath library file
-./ext/bcmath/libbcmath/src/recmul.c:267:9     - Unknown word (pval)       -- bc_num pval;
+./ext/bcmath/libbcmath/src/recmul.c:261:9     - Unknown word (pval)       -- bc_num pval;
 ./ext/bcmath/libbcmath/src/recmul.c:40:13     - Unknown word (MULDIGITS)  -- #if defined(MULDIGITS)
-./ext/bcmath/libbcmath/src/recmul.c:68:24     - Unknown word (pvptr)      -- char *n1ptr, *n2ptr, *pvptr;
-./ext/bcmath/libbcmath/src/recmul.c:70:17     - Unknown word (prodlen)    -- int indx, sum, prodlen;
+./ext/bcmath/libbcmath/src/recmul.c:66:24     - Unknown word (pvptr)      -- char *n1ptr, *n2ptr, *pvptr;
+./ext/bcmath/libbcmath/src/recmul.c:70:6      - Unknown word (prodlen)    -- int prodlen = n1len + n2len + 1
+./ext/bcmath/libbcmath/src/recmul.c:98:23     - Unknown word (addsub)     -- static void _bc_shift_addsub(bc_num accum, bc_num
 ./ext/bcmath/libbcmath/src/rmzero.c:1:4       - Unknown word (rmzero)     -- /* rmzero.c: bcmath library file
 ./ext/bcmath/libbcmath/src/sqrt.c:61:9      - Unknown word (cscale)     -- size_t cscale;
-./ext/bcmath/libbcmath/src/str2num.c:40:17     - Unknown word (strscale)   -- size_t digits, strscale;
-./ext/bcmath/libbcmath/src/str2num.c:82:6      - Unknown word (Trailining) -- /* Trailining zeros should not take
+./ext/bcmath/libbcmath/src/str2num.c:41:9      - Unknown word (strscale)   -- size_t strscale = 0;
 ./ext/bz2/bz2.c:163:45    - Unknown word (innerstream) -- char *mode, php_stream *innerstream STREAMS_DC)
 ./ext/bz2/bz2.c:185:14    - Unknown word (retstream)   -- php_stream *retstream = NULL, *stream = NULL
 ./ext/bz2/bz2.c:38:16     - Unknown word (ERRBOTH)    -- #define PHP_BZ_ERRBOTH 2
@@ -724,9 +723,9 @@ Lines:
 ./ext/com_dotnet/com_handlers.c:406:2     - Unknown word (STDAPI)         -- STDAPI VarCmp(LPVARIANT pvarLeft
 ./ext/com_dotnet/com_handlers.c:406:26    - Unknown word (pvar)           -- STDAPI VarCmp(LPVARIANT pvarLeft, LPVARIANT pvarRight
 ./ext/com_dotnet/com_handlers.c:41:65     - Unknown word (PROPERTYGET) -- DISPATCH_METHOD|DISPATCH_PROPERTYGET,
-./ext/com_dotnet/com_handlers.c:559:23    - Unknown word (Unadvise)       -- IConnectionPoint_Unadvise(point, obj->sink_cookie
-./ext/com_dotnet/com_handlers.c:599:25    - Unknown word (cloneobj)       -- php_com_dotnet_object *cloneobj, *origobject;
-./ext/com_dotnet/com_handlers.c:599:36    - Unknown word (origobject)     -- dotnet_object *cloneobj, *origobject;
+./ext/com_dotnet/com_handlers.c:555:23    - Unknown word (Unadvise)       -- IConnectionPoint_Unadvise(point, obj->sink_cookie
+./ext/com_dotnet/com_handlers.c:595:25    - Unknown word (cloneobj)       -- php_com_dotnet_object *cloneobj, *origobject;
+./ext/com_dotnet/com_handlers.c:595:36    - Unknown word (origobject)     -- dotnet_object *cloneobj, *origobject;
 ./ext/com_dotnet/com_handlers.c:71:35     - Unknown word (PROPERTYPUTREF) -- PROPERTYPUT|DISPATCH_PROPERTYPUTREF, &v, 1, value, 0))
 ./ext/com_dotnet/com_handlers.c:97:15     - Unknown word (ISARRAY)        -- } else if (V_ISARRAY(&obj->v)) {
 ./ext/com_dotnet/com_iterator.c:202:59    - Unknown word (NEWENUM)    -- DISPATCH(&obj->v), DISPID_NEWENUM,
@@ -1243,10 +1242,10 @@ Lines:
 ./ext/date/php_date.c:4847:101  - Unknown word (isostr)            -- entry* base_ce, char *isostr, size_t isostr_len,
 ./ext/date/php_date.c:4847:61   - Unknown word (dpobj)             -- string(php_period_obj *dpobj, zend_class_entry* base
 ./ext/date/php_date.c:4896:5    - Unknown word (recurrrences)      -- /* recurrrences */
-./ext/date/php_date.c:5234:18   - Unknown word (retformat)         -- zend_long time, retformat = SUNFUNCS_RET_STRING
-./ext/date/php_date.c:5238:18   - Unknown word (retstr)            -- zend_string *retstr;
-./ext/date/php_date.c:5341:18   - Unknown word (ddummy)            -- double ddummy;
-./ext/date/php_date.c:5620:20   - Unknown word (dateperiod)        -- * restore_custom_dateperiod_properties functions
+./ext/date/php_date.c:5240:18   - Unknown word (retformat)         -- zend_long time, retformat = SUNFUNCS_RET_STRING
+./ext/date/php_date.c:5244:18   - Unknown word (retstr)            -- zend_string *retstr;
+./ext/date/php_date.c:5347:18   - Unknown word (ddummy)            -- double ddummy;
+./ext/date/php_date.c:5646:20   - Unknown word (dateperiod)        -- * restore_custom_dateperiod_properties functions
 ./ext/date/php_date.c:682:32    - Unknown word (isoyear)    -- sll isoweek, isoyear;
 ./ext/date/php_date_arginfo.h:213:70    - Unknown word (SUNFUNCS)   -- returnFormat, IS_LONG, 0, "SUNFUNCS_RET_STRING")
 ./ext/dba/dba.c:1032:8    - Unknown word (zkey)        -- zval *zkey;
@@ -1342,17 +1341,17 @@ Lines:
 ./ext/dom/attr.c:79:13     - Unknown word (attrp)      -- xmlAttrPtr attrp;
 ./ext/dom/characterdata.c:38:9      - Unknown word (characterdata) -- int dom_characterdata_data_read(dom_object
 ./ext/dom/document.c:1108:24   - Unknown word (olddoc)             -- xmlDoc *docp = NULL, *olddoc;
-./ext/dom/document.c:1152:11   - Unknown word (escsource)          -- xmlChar *escsource;
-./ext/dom/document.c:1316:83   - Unknown word (newdoc)             -- return_value, xmlDocPtr newdoc)
-./ext/dom/document.c:1401:25   - Unknown word (loadxml)            -- }} end dom_document_loadxml */
-./ext/dom/document.c:1409:21   - Unknown word (saveempty)          -- int bytes, format, saveempty = 0;
-./ext/dom/document.c:1482:40   - Unknown word (vaule)              -- global, override its vaule, and restore after saving
-./ext/dom/document.c:1530:25   - Unknown word (savexml)            -- }} end dom_document_savexml */
-./ext/dom/document.c:1534:13   - Unknown word (xincnode)           -- xmlNodePtr xincnode;
-./ext/dom/document.c:1553:56   - Unknown word (xincludes)          -- nodes from recursive xincludes */
-./ext/dom/document.c:1573:8    - Unknown word (Substitutues)       -- /* {{{ Substitutues xincludes in a DomDocument
-./ext/dom/document.c:1600:67   - Unknown word (xincluded)          -- beginning and ending of xincluded document
-./ext/dom/document.c:2065:20   - Unknown word (basece)             -- zend_class_entry *basece = dom_node_class_entry
+./ext/dom/document.c:1150:11   - Unknown word (escsource)          -- xmlChar *escsource;
+./ext/dom/document.c:1314:83   - Unknown word (newdoc)             -- return_value, xmlDocPtr newdoc)
+./ext/dom/document.c:1399:25   - Unknown word (loadxml)            -- }} end dom_document_loadxml */
+./ext/dom/document.c:1407:21   - Unknown word (saveempty)          -- int bytes, format, saveempty = 0;
+./ext/dom/document.c:1480:40   - Unknown word (vaule)              -- global, override its vaule, and restore after saving
+./ext/dom/document.c:1528:25   - Unknown word (savexml)            -- }} end dom_document_savexml */
+./ext/dom/document.c:1532:13   - Unknown word (xincnode)           -- xmlNodePtr xincnode;
+./ext/dom/document.c:1551:56   - Unknown word (xincludes)          -- nodes from recursive xincludes */
+./ext/dom/document.c:1571:8    - Unknown word (Substitutues)       -- /* {{{ Substitutues xincludes in a DomDocument
+./ext/dom/document.c:1598:67   - Unknown word (xincluded)          -- beginning and ending of xincluded document
+./ext/dom/document.c:2063:20   - Unknown word (basece)             -- zend_class_entry *basece = dom_node_class_entry
 ./ext/dom/document.c:359:30    - Unknown word (preservewhitespace) -- BOOL(retval, doc_prop->preservewhitespace);
 ./ext/dom/document.c:398:18    - Unknown word (substitue)          -- int dom_document_substitue_entities_read(dom_object
 ./ext/dom/document.c:56:12     - Unknown word (dtdptr)     -- xmlDtdPtr dtdptr;
@@ -1437,8 +1436,8 @@ Lines:
 ./ext/dom/parentnode.c:15:24     - Unknown word (Eberlei)    -- | Authors: Benjamin Eberlei <beberlei@php.net>
 ./ext/dom/php_dom.c:1390:20   - Unknown word (nextp)         -- xmlNodePtr child, nextp, newnextp;
 ./ext/dom/php_dom.c:1390:27   - Unknown word (newnextp)      -- xmlNodePtr child, nextp, newnextp;
-./ext/dom/php_dom.c:1470:18   - Unknown word (nsdftptr)      -- xmlNsPtr nsptr, nsdftptr, curns, prevns = NULL
-./ext/dom/php_dom.c:1470:35   - Unknown word (prevns)        -- nsptr, nsdftptr, curns, prevns = NULL;
+./ext/dom/php_dom.c:1441:18   - Unknown word (nsdftptr)      -- xmlNsPtr nsptr, nsdftptr, curns, prevns = NULL
+./ext/dom/php_dom.c:1441:35   - Unknown word (prevns)        -- nsptr, nsdftptr, curns, prevns = NULL;
 ./ext/dom/php_dom.c:15:22     - Unknown word (Borger)     -- | Marcus Borger <helly@php.net>
 ./ext/dom/php_dom.c:37:25     - Unknown word (RECONNS)    -- define PHP_LIBXML2_DOM_RECONNS_REMOVEREDUND (1 <<
 ./ext/dom/php_dom.c:37:33     - Unknown word (REMOVEREDUND) -- LIBXML2_DOM_RECONNS_REMOVEREDUND (1 << 0)
@@ -1457,8 +1456,8 @@ Lines:
 ./ext/dom/php_dom.stub.php:135:26    - Unknown word (NMTOKEN)    -- cvalue XML_ATTRIBUTE_NMTOKEN
 ./ext/dom/php_dom.stub.php:140:26    - Unknown word (NMTOKENS)   -- cvalue XML_ATTRIBUTE_NMTOKENS
 ./ext/dom/php_dom_arginfo.h:501:38    - Unknown word (DOMX)       -- INFO_EX(arginfo_class_DOMXPath___construct, 0,
-./ext/dom/text.c:114:14    - Unknown word (nnode)      -- xmlNodePtr nnode;
-./ext/dom/text.c:72:11     - Unknown word (wholetext)  -- xmlChar *wholetext = NULL;
+./ext/dom/text.c:112:14    - Unknown word (nnode)      -- xmlNodePtr nnode;
+./ext/dom/text.c:70:11     - Unknown word (wholetext)  -- xmlChar *wholetext = NULL;
 ./ext/dom/xpath.c:104:20    - Unknown word (nsparent)   -- xmlNodePtr nsparent = node->_private;
 ./ext/dom/xpath.c:108:63    - Unknown word (transfered) -- destroy me, my lifetime is transfered to the fake namespace
 ./ext/dom/xpath.c:207:14    - Unknown word (docobj)     -- dom_object *docobj;
@@ -3390,17 +3389,17 @@ Lines:
 ./ext/ldap/tests/README.md:87:64     - Unknown word (keyout)         -- nodes -out server.pem -keyout server.pem -days 36
 ./ext/ldap/tests/README.md:91:10     - Unknown word (REQCERT)        -- `TLS_REQCERT never` in client configuratio
 ./ext/ldap/tests/README.md:96:60     - Unknown word (dpkg)           -- prefer the use of `dpkg-reconfigure`.
-./ext/libxml/libxml.c:1129:15   - Unknown word (outselves)   -- * with it outselves. It is important that
-./ext/libxml/libxml.c:1129:57   - Unknown word (refetched)   -- important that it is not refetched on every call,
-./ext/libxml/libxml.c:1232:102  - Unknown word (uninitialised) -- they will start in an uninitialised state */
-./ext/libxml/libxml.c:1367:36   - Unknown word (HINSTANCE)     -- BOOL WINAPI DllMain(HINSTANCE hinstDLL, DWORD fdwReason
-./ext/libxml/libxml.c:303:21    - Unknown word (ssbuf)       -- php_stream_statbuf ssbuf;
-./ext/libxml/libxml.c:309:6     - Unknown word (isescaped)   -- int isescaped=0;
-./ext/libxml/libxml.c:638:12    - Unknown word (ctxzv)       -- zval *ctxzv, retval;
-./ext/libxml/libxml.c:659:32    - Unknown word (memb)        -- ADD_NULL_OR_STRING_KEY(memb) \
+./ext/libxml/libxml.c:1193:15   - Unknown word (outselves)   -- * with it outselves. It is important that
+./ext/libxml/libxml.c:1193:57   - Unknown word (refetched)   -- important that it is not refetched on every call,
+./ext/libxml/libxml.c:1296:102  - Unknown word (uninitialised) -- they will start in an uninitialised state */
+./ext/libxml/libxml.c:1431:36   - Unknown word (HINSTANCE)     -- BOOL WINAPI DllMain(HINSTANCE hinstDLL, DWORD fdwReason
+./ext/libxml/libxml.c:367:21    - Unknown word (ssbuf)       -- php_stream_statbuf ssbuf;
+./ext/libxml/libxml.c:373:6     - Unknown word (isescaped)   -- int isescaped=0;
 ./ext/libxml/libxml.c:66:26     - Unknown word (libxmlerror) -- static zend_class_entry *libxmlerror_class_entry;
-./ext/libxml/libxml.c:827:68    - Unknown word (oldcontext)  -- zval *context, zval *oldcontext)
-./ext/libxml/libxml.c:846:39    - Unknown word (sapis)       -- char * const supported_sapis[] = {
+./ext/libxml/libxml.c:702:12    - Unknown word (ctxzv)       -- zval *ctxzv, retval;
+./ext/libxml/libxml.c:723:32    - Unknown word (memb)        -- ADD_NULL_OR_STRING_KEY(memb) \
+./ext/libxml/libxml.c:891:68    - Unknown word (oldcontext)  -- zval *context, zval *oldcontext)
+./ext/libxml/libxml.c:910:39    - Unknown word (sapis)       -- char * const supported_sapis[] = {
 ./ext/libxml/libxml.stub.php:105:24    - Unknown word (NOEMPTYTAG) -- @cvalue LIBXML_SAVE_NOEMPTYTAG
 ./ext/libxml/libxml.stub.php:120:23    - Unknown word (NOIMPLIED)  -- @cvalue HTML_PARSE_NOIMPLIED
 ./ext/libxml/libxml.stub.php:128:23    - Unknown word (NODEFDTD)   -- @cvalue HTML_PARSE_NODEFDTD
@@ -3416,7 +3415,7 @@ Lines:
 ./ext/libxml/libxml_arginfo.h:78:33     - Unknown word (NOXMLDECL)  -- LONG_CONSTANT("LIBXML_NOXMLDECL", XML_SAVE_NO_DECL,
 ./ext/libxml/libxml_arginfo.h:79:33     - Unknown word (PARSEHUGE)  -- LONG_CONSTANT("LIBXML_PARSEHUGE", XML_PARSE_HUGE, CONST
 ./ext/libxml/libxml_arginfo.h:81:33     - Unknown word (BIGLINES)   -- LONG_CONSTANT("LIBXML_BIGLINES", XML_PARSE_BIG_LINES
-./ext/libxml/php_libxml.h:160:14    - Unknown word (linenrs)    -- int xml_old_linenrs_##unique_name = xmlLineNumber
+./ext/libxml/php_libxml.h:161:14    - Unknown word (linenrs)    -- int xml_old_linenrs_##unique_name = xmlLineNumber
 ./ext/mbstring/gen_rare_cp_bitvec.php:5:34      - Unknown word (bitvec)     -- Usage: php gen_rare_cp_bitvec.php ./common_codepoints
 ./ext/mbstring/libmbfl/README.md:23:9      - Unknown word (JISX)       -- * Added JISX-0213:2004 based encoding
 ./ext/mbstring/libmbfl/README.md:3:20      - Unknown word (streamable) -- This is libmbfl, a streamable multibyte character
@@ -3611,7 +3610,7 @@ Lines:
 ./ext/mysqlnd/mysqlnd_ext_plugin.c:383:34    - Unknown word (xetters)    -- mysqlnd_plugin_methods_xetters mysqlnd_plugin_methods
 ./ext/mysqlnd/mysqlnd_ext_plugin.h:28:32     - Unknown word (aread)      -- get_result_buffered_aread)(const MYSQLND_RES_BUFFERED
 ./ext/mysqlnd/mysqlnd_loaddata.c:155:10    - Unknown word (prerequisities) -- bool prerequisities_ok = TRUE;
-./ext/mysqlnd/mysqlnd_protocol_frame_codec.c:273:32    - Unknown word (decomp)     -- FMT("compressed data: decomp_len=%lu compressed_size
+./ext/mysqlnd/mysqlnd_protocol_frame_codec.c:274:32    - Unknown word (decomp)     -- FMT("compressed data: decomp_len=%lu compressed_size
 ./ext/mysqlnd/mysqlnd_protocol_frame_codec.c:58:13     - Unknown word (complen)    -- size_t tmp_complen = to_be_sent;
 ./ext/mysqlnd/mysqlnd_ps.c:578:8     - Unknown word (precached)  -- precached on client and server
 ./ext/mysqlnd/mysqlnd_ps.c:592:38    - Unknown word (RESULTSET)  -- DONT_SKIP_OUT_PARAMS_RESULTSET
@@ -3829,17 +3828,17 @@ Lines:
 ./ext/odbc/php_odbc.c:2066:9    - Unknown word (dsnbuflen)      -- short dsnbuflen;
 ./ext/odbc/php_odbc.c:2068:110  - Unknown word (NOPROMPT)       -- dsnbuflen, SQL_DRIVER_NOPROMPT);
 ./ext/odbc/php_odbc.c:2467:14   - Unknown word (tmplen)         -- SQLSMALLINT tmplen;
-./ext/odbc/php_odbc.c:2599:17   - Unknown word (lasterror)      -- /* {{{ php_odbc_lasterror */
-./ext/odbc/php_odbc.c:2660:46   - Unknown word (rlll)           -- parameters(ZEND_NUM_ARGS(), "rlll", &pv_handle, &pv_which
-./ext/odbc/php_odbc.c:2915:22   - Unknown word (pschema)        -- char *pcat = NULL, *pschema, *ptable, *fcat, *fschema
-./ext/odbc/php_odbc.c:2915:32   - Unknown word (ptable)         -- pcat = NULL, *pschema, *ptable, *fcat, *fschema, *ftable
-./ext/odbc/php_odbc.c:2915:41   - Unknown word (fcat)           -- *pschema, *ptable, *fcat, *fschema, *ftable;
-./ext/odbc/php_odbc.c:2915:48   - Unknown word (fschema)        -- pschema, *ptable, *fcat, *fschema, *ftable;
-./ext/odbc/php_odbc.c:2915:8    - Unknown word (pcat)           -- char *pcat = NULL, *pschema, *ptable
-./ext/odbc/php_odbc.c:3240:19   - Unknown word (vscope)         -- zend_long vtype, vscope, vnullable;
-./ext/odbc/php_odbc.c:3240:27   - Unknown word (vnullable)      -- long vtype, vscope, vnullable;
-./ext/odbc/php_odbc.c:3310:12   - Unknown word (vunique)        -- zend_long vunique, vreserved;
-./ext/odbc/php_odbc.c:3310:21   - Unknown word (vreserved)      -- zend_long vunique, vreserved;
+./ext/odbc/php_odbc.c:2600:17   - Unknown word (lasterror)      -- /* {{{ php_odbc_lasterror */
+./ext/odbc/php_odbc.c:2661:46   - Unknown word (rlll)           -- parameters(ZEND_NUM_ARGS(), "rlll", &pv_handle, &pv_which
+./ext/odbc/php_odbc.c:2916:22   - Unknown word (pschema)        -- char *pcat = NULL, *pschema, *ptable, *fcat, *fschema
+./ext/odbc/php_odbc.c:2916:32   - Unknown word (ptable)         -- pcat = NULL, *pschema, *ptable, *fcat, *fschema, *ftable
+./ext/odbc/php_odbc.c:2916:41   - Unknown word (fcat)           -- *pschema, *ptable, *fcat, *fschema, *ftable;
+./ext/odbc/php_odbc.c:2916:48   - Unknown word (fschema)        -- pschema, *ptable, *fcat, *fschema, *ftable;
+./ext/odbc/php_odbc.c:2916:8    - Unknown word (pcat)           -- char *pcat = NULL, *pschema, *ptable
+./ext/odbc/php_odbc.c:3241:19   - Unknown word (vscope)         -- zend_long vtype, vscope, vnullable;
+./ext/odbc/php_odbc.c:3241:27   - Unknown word (vnullable)      -- long vtype, vscope, vnullable;
+./ext/odbc/php_odbc.c:3311:12   - Unknown word (vunique)        -- zend_long vunique, vreserved;
+./ext/odbc/php_odbc.c:3311:21   - Unknown word (vreserved)      -- zend_long vunique, vreserved;
 ./ext/odbc/php_odbc.c:386:8     - Unknown word (SQLANY)     -- #ifdef SQLANY_BUG
 ./ext/odbc/php_odbc.c:399:8     - Unknown word (NOEXITLIST) -- /* DB2NOEXITLIST env variable prevents
 ./ext/odbc/php_odbc.c:467:14    - Unknown word (errormsgsize) -- SQLSMALLINT errormsgsize; /* Not used */
@@ -7346,8 +7345,8 @@ Lines:
 ./ext/simplexml/simplexml.c:165:14    - Unknown word (orgtype)    -- int orgtype;
 ./ext/simplexml/simplexml.c:1661:41   - Unknown word (nsuri)      -- qname, *value = NULL, *nsuri = NULL;
 ./ext/simplexml/simplexml.c:166:14    - Unknown word (orgnode)    -- xmlNodePtr orgnode = node;
-./ext/simplexml/simplexml.c:2348:48   - Unknown word (lbsb)       -- ZEND_NUM_ARGS(), "s|lbsb", &data, &data_len,
-./ext/simplexml/simplexml.c:2639:46   - Unknown word (Nodetype)   -- E_WARNING, "Invalid Nodetype to import");
+./ext/simplexml/simplexml.c:2347:48   - Unknown word (lbsb)       -- ZEND_NUM_ARGS(), "s|lbsb", &data, &data_len,
+./ext/simplexml/simplexml.c:2638:46   - Unknown word (Nodetype)   -- E_WARNING, "Invalid Nodetype to import");
 ./ext/simplexml/simplexml.c:298:16    - Unknown word (mynode)     -- xmlNodePtr mynode = node;
 ./ext/simplexml/simplexml.c:371:122   - Unknown word (pnewnode)   -- attribs, xmlNodePtr *pnewnode)
 ./ext/simplexml/simplexml.c:377:14    - Unknown word (tempnode)   -- xmlNodePtr tempnode;

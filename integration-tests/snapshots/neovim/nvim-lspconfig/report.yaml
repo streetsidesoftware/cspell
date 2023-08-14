@@ -5,7 +5,7 @@ Args: '["**"]'
 Summary:
   files: 268
   filesWithIssues: 264
-  issues: 3704
+  issues: 3715
   errors: 0
 Errors: []
 
@@ -285,7 +285,9 @@ issues:
   - "doc/server_configurations.md:4933:27        sweave              U       support org files or R sweave, users can define a"
   - "doc/server_configurations.md:4954:64        rnoweb              U       \"plaintex\", \"rst\", \"rnoweb\", \"tex\", \"pandoc\" }"
   - "doc/server_configurations.md:4954:81        pandoc              U       , \"rnoweb\", \"tex\", \"pandoc\" }"
-  - "doc/server_configurations.md:5041:18        luarc               U       root_pattern(\".luarc.json\", \".luarc.jsonc"
+  - "doc/server_configurations.md:4992:38        luarc               U       loop.fs_stat(path..'/.luarc.json') and not vim.loop"
+  - "doc/server_configurations.md:5000:31        VIMRUNTIME          U       library = { vim.env.VIMRUNTIME }"
+  - "doc/server_configurations.md:5001:33        runtimepath         U       or pull in all of 'runtimepath'. NOTE: this is a lot"
   - "doc/server_configurations.md:5041:49        luacheckrc          U       , \".luarc.jsonc\", \".luacheckrc\", \".stylua.toml\", \"stylua"
   - "doc/server_configurations.md:5099:7         asmsyntax           U       vim.g.asmsyntax = 'asm68k'"
   - "doc/server_configurations.md:5228:39        coursier            U       make sure to have [coursier](https://get-coursier"
@@ -382,7 +384,6 @@ issues:
   - "doc/server_configurations.md:10137:5        mavenrepo           U       mavenrepo = \"$HOME/.m2/repository"
   - "doc/server_configurations.md:10221:21       Veryl               U       Language server for Veryl"
   - "doc/server_configurations.md:10342:59       autoload            U       runtime\", \"nvim\", \".git\", \"autoload\", \"plugin\" },"
-  - "doc/server_configurations.md:10343:7        runtimepath         U       runtimepath = true"
   - "doc/server_configurations.md:10346:5        iskeyword           U       iskeyword = \"@,48-57,_,192-25"
   - "doc/server_configurations.md:10349:11       Runtimepath         U       fromRuntimepath = true,"
   - "doc/server_configurations.md:10350:11       Vimruntime          U       fromVimruntime = true"
@@ -436,9 +437,9 @@ issues:
   - "lua/lspconfig/server_configurations/lean3ls.lua:13:18       endpos      U       local _, endpos = fname:find '/lean"
   - "lua/lspconfig/server_configurations/ocamllsp.lua:6:3            ocamlinterface      U       ocamlinterface = 'ocaml.interface'"
   - "lua/lspconfig/server_configurations/ocamllsp.lua:12:37          ftype               U       language_id = function(_, ftype)"
-  - "lua/lspconfig/server_configurations/omnisharp.lua:51:70         getpid          U       hostPID', tostring(vim.fn.getpid()) })"
-  - "lua/lspconfig/server_configurations/omnisharp.lua:78:50         Prereleases     U       config.cmd, 'Sdk:IncludePrereleases=true')"
-  - "lua/lspconfig/server_configurations/omnisharp.lua:86:37         deepcopy        U       config.capabilities = vim.deepcopy(new_config.capabilities"
+  - "lua/lspconfig/server_configurations/omnisharp.lua:56:70         getpid          U       hostPID', tostring(vim.fn.getpid()) })"
+  - "lua/lspconfig/server_configurations/omnisharp.lua:83:50         Prereleases     U       config.cmd, 'Sdk:IncludePrereleases=true')"
+  - "lua/lspconfig/server_configurations/omnisharp.lua:91:37         deepcopy        U       config.capabilities = vim.deepcopy(new_config.capabilities"
   - "lua/lspconfig/server_configurations/openedge_ls.lua:19:43       Dorg    U       config.cmd + 1] = '-Dorg.slf4j.simpleLogger.defaultLog"
   - "lua/lspconfig/server_configurations/please.lua:7:36         plzconfig       U       util.root_pattern '.plzconfig',"
   - "lua/lspconfig/server_configurations/pyright.lua:58:7        nargs       U       nargs = 1,"
@@ -501,7 +502,6 @@ issues:
   - "scripts/docgen.lua:275:9        copyfile        U       uv.fs_copyfile('doc/server_configurations"
   - "test/lspconfig_spec.lua:14:13       doesnt (doesn't)    U       it('doesnt escape if not needed"
   - "test/lspconfig_spec.lua:157:26      subpaths            U       it('strips zipfile subpaths', function()"
-  - "test/minimal_init.lua:9:28          VIMRUNTIME      U       cmd [[set runtimepath=$VIMRUNTIME]]"
   - "test/minimal_init.lua:13:14         packpath        U       vim.cmd('set packpath=' .. join_paths(temp"
   - "test/minimal_init.lua:18:11         isdirectory     U       if vim.fn.isdirectory(lspconfig_path) ~="
   - "test/minimal_init.lua:33:34         noremap         U       = { buffer = bufnr, noremap = true, silent = true"
