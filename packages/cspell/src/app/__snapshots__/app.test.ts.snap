@@ -1229,15 +1229,15 @@ exports[`Validate cli > app 'with spelling errors --debug Dutch.txt' Expect Erro
 ./samples/Dutch.txt:78:18 - Unknown word (ANBI)"
 `;
 
-exports[`Validate cli > app 'with spelling errors --silent Dutch.t…' Expect Error: [Function CheckFailed] 1`] = `[]`;
+exports[`Validate cli > app 'with spelling errors --silent Dutch.txt' Expect Error: [Function CheckFailed] 1`] = `[]`;
 
-exports[`Validate cli > app 'with spelling errors --silent Dutch.t…' Expect Error: [Function CheckFailed] 2`] = `""`;
+exports[`Validate cli > app 'with spelling errors --silent Dutch.txt' Expect Error: [Function CheckFailed] 2`] = `""`;
 
-exports[`Validate cli > app 'with spelling errors --silent Dutch.t…' Expect Error: [Function CheckFailed] 3`] = `""`;
+exports[`Validate cli > app 'with spelling errors --silent Dutch.txt' Expect Error: [Function CheckFailed] 3`] = `""`;
 
-exports[`Validate cli > app 'with spelling errors Dutch.txt --lega…' Expect Error: [Function CheckFailed] 1`] = `[]`;
+exports[`Validate cli > app 'with spelling errors Dutch.txt --legacy' Expect Error: [Function CheckFailed] 1`] = `[]`;
 
-exports[`Validate cli > app 'with spelling errors Dutch.txt --lega…' Expect Error: [Function CheckFailed] 2`] = `
+exports[`Validate cli > app 'with spelling errors Dutch.txt --legacy' Expect Error: [Function CheckFailed] 2`] = `
 "error	 0.00ms X
 log	./samples/Dutch.txt[1, 32]: Unknown word: NEDERLANDS
 log	./samples/Dutch.txt[2, 11]: Unknown word: wordt
@@ -1431,14 +1431,14 @@ log	./samples/Dutch.txt[78, 18]: Unknown word: ANBI
 error	CSpell: Files checked: 1, Issues found: 189 in 1 files"
 `;
 
-exports[`Validate cli > app 'with spelling errors Dutch.txt --lega…' Expect Error: [Function CheckFailed] 3`] = `
+exports[`Validate cli > app 'with spelling errors Dutch.txt --legacy' Expect Error: [Function CheckFailed] 3`] = `
 "
 1/1 [90m./samples/Dutch.txt[39m"
 `;
 
-exports[`Validate cli > app 'with spelling errors Dutch.txt words …' Expect Error: [Function CheckFailed] 1`] = `[]`;
+exports[`Validate cli > app 'with spelling errors Dutch.txt words only' Expect Error: [Function CheckFailed] 1`] = `[]`;
 
-exports[`Validate cli > app 'with spelling errors Dutch.txt words …' Expect Error: [Function CheckFailed] 2`] = `
+exports[`Validate cli > app 'with spelling errors Dutch.txt words only' Expect Error: [Function CheckFailed] 2`] = `
 "error	 0.00ms X
 log	NEDERLANDS
 log	wordt
@@ -1632,7 +1632,7 @@ log	ANBI
 error	CSpell: Files checked: 1, Issues found: 189 in 1 files"
 `;
 
-exports[`Validate cli > app 'with spelling errors Dutch.txt words …' Expect Error: [Function CheckFailed] 3`] = `
+exports[`Validate cli > app 'with spelling errors Dutch.txt words only' Expect Error: [Function CheckFailed] 3`] = `
 "
 1/1 [90m./samples/Dutch.txt[39m"
 `;
@@ -1838,9 +1838,9 @@ exports[`Validate cli > app 'with spelling errors Dutch.txt' Expect Error: [Func
 1/1 [90m./samples/Dutch.txt[39m"
 `;
 
-exports[`Validate cli > app success 'suggest' run with [ 'suggest', 'café', …(2) ] 1`] = `[]`;
+exports[`Validate cli > app success 'suggest' run with [ Array(4) ] 1`] = `[]`;
 
-exports[`Validate cli > app success 'suggest' run with [ 'suggest', 'café', …(2) ] 2`] = `
+exports[`Validate cli > app success 'suggest' run with [ Array(4) ] 2`] = `
 "café:
  - café"
 `;
@@ -2027,46 +2027,6 @@ exports[`Validate cli > app suggest [ 'sug', '--stdin', '-d=en_us', '-v' ] 2`] =
 
 exports[`Validate cli > app suggest [ 'sug', '--stdin', '-d=en_us', '-v' ] 3`] = `""`;
 
-exports[`Validate cli > app suggest [ 'sug', 'dutch', '-d=en_us', …(3) ] 1`] = `[]`;
-
-exports[`Validate cli > app suggest [ 'sug', 'dutch', '-d=en_us', …(3) ] 2`] = `
-"dutch:
- - dutch    -    0 en-gb, en_us
- - Dutch    -    1 en_us"
-`;
-
-exports[`Validate cli > app suggest [ 'sug', 'dutch', '-d=en_us', …(3) ] 3`] = `""`;
-
-exports[`Validate cli > app suggest [ 'sug', 'dutch', …(3) ] 1`] = `[]`;
-
-exports[`Validate cli > app suggest [ 'sug', 'dutch', …(3) ] 2`] = `
-"dutch:
- - dutch    -    0 en_us
- - Dutch    -    1 en_us"
-`;
-
-exports[`Validate cli > app suggest [ 'sug', 'dutch', …(3) ] 3`] = `""`;
-
-exports[`Validate cli > app suggest [ 'sug', 'dutch', …(3) ] 4`] = `[]`;
-
-exports[`Validate cli > app suggest [ 'sug', 'dutch', …(3) ] 5`] = `
-"dutch:
- - dutch    -    0 en_us
- - Dutch    -    1 en_us"
-`;
-
-exports[`Validate cli > app suggest [ 'sug', 'dutch', …(3) ] 6`] = `""`;
-
-exports[`Validate cli > app suggest [ 'sug', 'dutch', …(4) ] 1`] = `[]`;
-
-exports[`Validate cli > app suggest [ 'sug', 'dutch', …(4) ] 2`] = `
-"dutch:
- - dutch    -    0 en-gb, en_us
- - Dutch    -    1 en_us"
-`;
-
-exports[`Validate cli > app suggest [ 'sug', 'dutch', …(4) ] 3`] = `""`;
-
 exports[`Validate cli > app suggest [ 'sug', 'mexico', '-d=en_us' ] 1`] = `[]`;
 
 exports[`Validate cli > app suggest [ 'sug', 'mexico', '-d=en_us' ] 2`] = `
@@ -2099,15 +2059,6 @@ exports[`Validate cli > app suggest [ 'sug', 'mexico', '-d=en_us', '-v' ] 2`] = 
 
 exports[`Validate cli > app suggest [ 'sug', 'mexico', '-d=en_us', '-v' ] 3`] = `""`;
 
-exports[`Validate cli > app suggest [ 'sug', 'mexico', '-d=en_us', …(2) ] 1`] = `[]`;
-
-exports[`Validate cli > app suggest [ 'sug', 'mexico', '-d=en_us', …(2) ] 2`] = `
-"mexico:
- <no suggestions>"
-`;
-
-exports[`Validate cli > app suggest [ 'sug', 'mexico', '-d=en_us', …(2) ] 3`] = `""`;
-
 exports[`Validate cli > app suggest [ 'sug', 'mexico', '-d=en-gb' ] 1`] = `[]`;
 
 exports[`Validate cli > app suggest [ 'sug', 'mexico', '-d=en-gb' ] 2`] = `
@@ -2133,3 +2084,52 @@ exports[`Validate cli > app suggest [ 'sug', 'mexico', '-d=en-us' ] 1`] = `[]`;
 exports[`Validate cli > app suggest [ 'sug', 'mexico', '-d=en-us' ] 2`] = `""`;
 
 exports[`Validate cli > app suggest [ 'sug', 'mexico', '-d=en-us' ] 3`] = `"Unknown dictionary: \\"en-us\\""`;
+
+exports[`Validate cli > app suggest [ Array(5) ] 1`] = `[]`;
+
+exports[`Validate cli > app suggest [ Array(5) ] 2`] = `
+"mexico:
+ <no suggestions>"
+`;
+
+exports[`Validate cli > app suggest [ Array(5) ] 3`] = `""`;
+
+exports[`Validate cli > app suggest [ Array(5) ] 4`] = `[]`;
+
+exports[`Validate cli > app suggest [ Array(5) ] 5`] = `
+"dutch:
+ - dutch    -    0 en_us
+ - Dutch    -    1 en_us"
+`;
+
+exports[`Validate cli > app suggest [ Array(5) ] 6`] = `""`;
+
+exports[`Validate cli > app suggest [ Array(5) ] 7`] = `[]`;
+
+exports[`Validate cli > app suggest [ Array(5) ] 8`] = `
+"dutch:
+ - dutch    -    0 en_us
+ - Dutch    -    1 en_us"
+`;
+
+exports[`Validate cli > app suggest [ Array(5) ] 9`] = `""`;
+
+exports[`Validate cli > app suggest [ Array(6) ] 1`] = `[]`;
+
+exports[`Validate cli > app suggest [ Array(6) ] 2`] = `
+"dutch:
+ - dutch    -    0 en-gb, en_us
+ - Dutch    -    1 en_us"
+`;
+
+exports[`Validate cli > app suggest [ Array(6) ] 3`] = `""`;
+
+exports[`Validate cli > app suggest [ Array(6) ] 4`] = `[]`;
+
+exports[`Validate cli > app suggest [ Array(6) ] 5`] = `
+"dutch:
+ - dutch    -    0 en-gb, en_us
+ - Dutch    -    1 en_us"
+`;
+
+exports[`Validate cli > app suggest [ Array(6) ] 6`] = `""`;
