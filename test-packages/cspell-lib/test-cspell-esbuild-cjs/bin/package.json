@@ -1,0 +1,30 @@
+{
+  "name": "test-cspell-lib-esbuild-cjs-bin",
+  "version": "7.0.0",
+  "description": "Pure testing package for cspell-lib.",
+  "bin": {
+    "cjs": "bin.cjs",
+    "mjs": "bin.mjs"
+  },
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "clean": "shx rm -rf dist temp coverage \"*.tsbuildInfo\"",
+    "test": "node bin.cjs"
+  },
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "@cspell/cspell-bundled-dicts": "workspace:*"
+  },
+  "main": "dist/index.cjs",
+  "engines": {
+    "node": ">=16"
+  },
+  "cspell": {
+    "words": [
+      "tsbuild"
+    ]
+  },
+  "keywords": []
+}
