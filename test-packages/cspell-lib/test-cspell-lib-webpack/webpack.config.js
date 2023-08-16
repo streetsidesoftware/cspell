@@ -30,7 +30,7 @@ const config = {
     // experiments: {
     //     outputModule: true,
     // },
-    externals: [/^@cspell\/cspell-bundled-dicts/],
+    externals: [/^@cspell\/cspell-bundled-dicts/, 'import-fresh'],
     output: {
         path: path.resolve(__dirname, 'dist'),
         filename: '[name].js',
