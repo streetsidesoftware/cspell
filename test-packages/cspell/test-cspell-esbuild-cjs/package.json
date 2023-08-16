@@ -10,9 +10,6 @@
   "type": "module",
   "private": true,
   "scripts": {
-    "clean": "shx rm -rf dist temp coverage \"*.tsbuildInfo\"",
-    "build": "node build.mjs",
-    "clean-build": "pnpm run clean && pnpm run build",
     "test": "pnpm test:esm && pnpm test:cjs",
     "test:esm": "node bin.mjs README.md",
     "test:cjs": "node bin.cjs build.mjs"
