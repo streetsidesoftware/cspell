@@ -1033,6 +1033,24 @@ importers:
         specifier: workspace:*
         version: link:../../../packages/cspell
 
+  test-packages/cspell/test-cspell-esbuild-cjs: {}
+
+  test-packages/cspell/test-cspell-esbuild-cjs/bin:
+    dependencies:
+      '@cspell/cspell-bundled-dicts':
+        specifier: workspace:*
+        version: link:../../../../packages/cspell-bundled-dicts
+
+  test-packages/cspell/test-cspell-esbuild-cjs/source:
+    dependencies:
+      cspell:
+        specifier: workspace:*
+        version: link:../../../../packages/cspell
+    devDependencies:
+      esbuild:
+        specifier: 0.19.2
+        version: 0.19.2
+
   test-packages/cspell/test-cspell-esm-reporter:
     dependencies:
       '@cspell/cspell-types':
