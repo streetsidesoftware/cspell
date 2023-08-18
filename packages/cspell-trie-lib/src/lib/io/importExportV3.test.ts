@@ -1,4 +1,4 @@
-import { readFile, writeFile } from 'fs/promises';
+import { readFile } from 'fs/promises';
 import { genSequence } from 'gensequence';
 import { describe, expect, test } from 'vitest';
 
@@ -47,7 +47,7 @@ describe('Import/Export', () => {
         const root = importTrie(data.split('\n').map((a) => (a ? a + '\n' : a)));
         const words = [...Trie.iteratorTrieWords(root)];
         expect(words).toEqual([...sampleWords].sort());
-        await writeFile(sampleFile, data);
+        // await writeFile(sampleFile, data);
     });
 
     test('tests deserialize from file', async () => {
