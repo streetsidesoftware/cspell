@@ -74,10 +74,16 @@ const searchPlaces = Object.freeze([
     '.vscode/cSpell.json',
     '.vscode/.cspell.json',
     // Standard Locations
+    '.cspell.config.json',
+    '.cspell.config.jsonc',
+    '.cspell.config.yaml',
+    '.cspell.config.yml',
     'cspell.config.json',
     'cspell.config.jsonc',
     'cspell.config.yaml',
     'cspell.config.yml',
+    '.cspell.yaml',
+    '.cspell.yml',
     'cspell.yaml',
     'cspell.yml',
     // Dynamic config is looked for last
