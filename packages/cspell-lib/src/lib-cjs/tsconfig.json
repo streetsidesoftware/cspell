@@ -1,14 +1,3 @@
 {
-    "extends": "../../../../tsconfig.cjs.json",
-    "compilerOptions": {
-        "allowJs": false,
-        "composite": true,
-        "tsBuildInfoFile": "../../temp/compile.lib-cjs.tsbuildInfo",
-        "module": "CommonJS",
-        "moduleResolution": "node16",
-        "rootDir": ".",
-        "outDir": "../../dist/lib-cjs",
-        "types": ["node"]
-    },
-    "include": ["**/*.cts"]
+    "references": [{ "path": "./tsconfig.cjs.json" }, { "path": "./tsconfig.test.json" }]
 }

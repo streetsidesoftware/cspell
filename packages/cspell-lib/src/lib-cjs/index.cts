@@ -4,3 +4,4 @@
  */
 
 export { srcDirectory } from './pkg-info.cjs';
+export { requireResolve, resolveGlobal } from './requireResolve.cjs';

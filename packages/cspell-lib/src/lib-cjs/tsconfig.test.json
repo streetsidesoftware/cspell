@@ -1,0 +1,14 @@
+/*
+ Note: this configuration is needed to work around a bug in vite / vitest that cannot
+ convert .cts files to .cjs.
+ */
+{
+    "extends": "./tsconfig.cjs.json",
+    "compilerOptions": {
+        "declarationMap": false,
+        "sourceMap": false,
+        "tsBuildInfoFile": "../../temp/compile.lib-test.tsbuildInfo",
+        "outDir": ".",
+        "types": ["node"]
+    }
+}
