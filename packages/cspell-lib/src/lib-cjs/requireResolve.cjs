@@ -10,7 +10,8 @@ exports.resolveGlobal = resolveGlobal;
 function requireResolve(filename, paths) {
     try {
         return require.resolve(filename, paths ? { paths } : undefined);
-    } catch (e) {
+    }
+    catch (e) {
         return undefined;
     }
 }
