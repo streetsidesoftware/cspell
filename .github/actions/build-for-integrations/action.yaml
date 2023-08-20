@@ -94,6 +94,11 @@ runs:
         cat /home/runner/.pnpm/_logs/*.log
       shell: bash
 
+    - name: Clean
+      if: ${{ !steps.step-cache-build.outputs.cache-hit }}
+      run: pnpm run clean
+      shell: bash
+
     - name: Build
       if: ${{ !steps.step-cache-build.outputs.cache-hit }}
       run: pnpm run build

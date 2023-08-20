@@ -1,8 +1,8 @@
+import { resolveGlobal } from '@cspell/cspell-resolver';
 import * as fs from 'fs';
 import * as os from 'os';
 import * as path from 'path';
 import resolveFrom from 'resolve-from';
-import resolveGlobal from 'resolve-global';
 
 export interface ResolveFileResult {
     filename: string;
@@ -94,7 +94,7 @@ function tryNodeResolve(filename: string, relativeTo: string): ResolveFileResult
 }
 
 function tryResolveGlobal(filename: string): ResolveFileResult {
-    const r = resolveGlobal.silent(filename);
+    const r = resolveGlobal(filename);
     return { filename: r || filename, relativeTo: undefined, found: !!r };
 }
 

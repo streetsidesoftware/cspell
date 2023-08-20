@@ -21,6 +21,9 @@ const config = {
         '**/[Ss]amples/**', // cspell:disable-line
         '**/[Tt]emp/**',
         '**/*.d.ts',
+        '**/*.d.cts',
+        '**/*.d.mts',
+        '**/src/lib*/*.cjs',
         '**/*.map',
         '**/coverage/**',
         '**/cspell-default.config.js',
