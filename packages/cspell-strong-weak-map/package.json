@@ -43,7 +43,7 @@
     "watch": "tsc -b . -w",
     "clean": "shx rm -rf dist temp coverage \"*.tsbuildInfo\"",
     "clean-build": "pnpm run clean && pnpm run build",
-    "coverage": "vitest run --coverage",
+    "coverage": "pnpm run vitest run --coverage",
     "test-watch": "pnpm vitest",
     "test": "pnpm vitest run",
     "vitest": "node --expose-gc ../../node_modules/vitest/vitest.mjs"
