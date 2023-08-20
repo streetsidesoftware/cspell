@@ -583,6 +583,9 @@ importers:
       '@cspell/cspell-pipe':
         specifier: workspace:*
         version: link:../cspell-pipe
+      '@cspell/cspell-resolver':
+        specifier: workspace:*
+        version: link:../cspell-resolver
       '@cspell/cspell-types':
         specifier: workspace:*
         version: link:../cspell-types
@@ -625,9 +628,6 @@ importers:
       gensequence:
         specifier: ^5.0.2
         version: 5.0.2
-      global-dirs:
-        specifier: ^3.0.1
-        version: 3.0.1
       import-fresh:
         specifier: ^3.3.0
         version: 3.3.0
@@ -680,6 +680,12 @@ importers:
       globby:
         specifier: ^13.2.2
         version: 13.2.2
+
+  packages/cspell-resolver:
+    dependencies:
+      global-dirs:
+        specifier: ^3.0.1
+        version: 3.0.1
 
   packages/cspell-service-bus: {}
 
