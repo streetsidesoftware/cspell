@@ -43,9 +43,7 @@
     "watch": "tsc -b . -w",
     "clean": "shx rm -rf dist temp coverage \"*.tsbuildInfo\"",
     "clean-build": "pnpm run clean && pnpm run build",
-    "coverage": "pnpm coverage:vitest && pnpm coverage:fix",
-    "coverage:vitest": "pnpm vitest run --coverage",
-    "coverage:fix": "nyc report --temp-dir \"$(pwd)/coverage\" --reporter lcov --report-dir \"$(pwd)/coverage\" --cwd ../..",
+    "coverage": "pnpm run vitest run --coverage",
     "test-watch": "pnpm vitest",
     "test": "pnpm vitest run",
     "vitest": "node --expose-gc ../../node_modules/vitest/vitest.mjs"
