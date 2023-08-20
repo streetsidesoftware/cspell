@@ -23,7 +23,7 @@ const config = {
         '**/*.d.ts',
         '**/*.d.cts',
         '**/*.d.mts',
-        '**/src/*.cjs',
+        '**/src/lib*/*.cjs',
         '**/*.map',
         '**/coverage/**',
         '**/cspell-default.config.js',

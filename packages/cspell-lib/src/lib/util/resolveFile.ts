@@ -1,8 +1,8 @@
+import { resolveGlobal } from '@cspell/cspell-resolver';
 import * as fs from 'fs';
 import * as os from 'os';
 import * as path from 'path';
 import resolveFrom from 'resolve-from';
-import { resolveGlobal } from '@cspell/cspell-resolver';
 
 export interface ResolveFileResult {
     filename: string;
