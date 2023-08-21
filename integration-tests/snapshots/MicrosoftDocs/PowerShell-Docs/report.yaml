@@ -4,8 +4,8 @@ Url: https://github.com/MicrosoftDocs/PowerShell-Docs.git
 Args: '["--config=../../../cspell-power-shell-docs.config.yaml","**"]'
 Summary:
   files: 2678
-  filesWithIssues: 1262
-  issues: 5808
+  filesWithIssues: 1268
+  issues: 5801
   errors: 0
 Errors: []
 
@@ -83,7 +83,6 @@ issues:
   - "reference/5.1/Microsoft.PowerShell.Core/About/about_Format.ps1xml.md:434:45         mygciview       U       custom view is named **mygciview** and adds the"
   - "reference/5.1/Microsoft.PowerShell.Core/About/about_Function_Provider.md:129:39         Autosize    U       the next line. The `-Autosize` parameter resizes the"
   - "reference/5.1/Microsoft.PowerShell.Core/About/about_Functions.md:119:4          allpix      U       $allpix = Get-ChildItem -Path"
-  - "reference/5.1/Microsoft.PowerShell.Core/About/about_Group_Policy_Settings.md:143:47         transcripting (transcribing, transcription)     U       by default, although transcripting can still be"
   - "reference/5.1/Microsoft.PowerShell.Core/About/about_Hash_Tables.md:417:23       Servi               U       System.ServiceProcess.Servi... Running"
   - "reference/5.1/Microsoft.PowerShell.Core/About/about_Hash_Tables.md:425:59       Manag               U       Remote Management (WS-Manag..."
   - "reference/5.1/Microsoft.PowerShell.Core/About/about_Hash_Tables.md:490:4        getenumerator       U       $p.getenumerator() | Sort-Object -Property"
@@ -129,7 +128,7 @@ issues:
   - "reference/5.1/Microsoft.PowerShell.Core/About/about_Regular_Expressions.md:201:3        Singleline          U       **Singleline** and **Multiline**"
   - "reference/5.1/Microsoft.PowerShell.Core/About/about_Regular_Expressions.md:328:34       keyname             U       capturing group, use `?<keyname>` to store captured"
   - "reference/5.1/Microsoft.PowerShell.Core/About/about_Remote_Troubleshooting.md:393:33        trustedhosts    U       wsman:localhost\\client\\trustedhosts -Value *"
-  - "reference/5.1/Microsoft.PowerShell.Core/About/about_Requires.md:54:20       Netcore     U       Get-Module AzureRM.Netcore | Remove-Module"
+  - "reference/5.1/Microsoft.PowerShell.Core/About/about_Requires.md:55:20       Netcore     U       Get-Module AzureRM.Netcore | Remove-Module"
   - "reference/5.1/Microsoft.PowerShell.Core/About/about_Scopes.md:619:59        ptest       U       private variable called `$ptest` in the local"
   - "reference/5.1/Microsoft.PowerShell.Core/About/about_Scopes.md:643:17        Ptest       U       \"The value of `$Ptest is $Ptest.\""
   - "reference/5.1/Microsoft.PowerShell.Core/About/about_Script_Internationalization.md:68:22        msgtable            U       stores them in the `$msgtable` variable."
@@ -192,9 +191,9 @@ issues:
   - "reference/5.1/Microsoft.PowerShell.Core/About/about_Type_Operators.md:185:10        uiculture       U       PS> (get-uiculture) -is [System.Globalization"
   - "reference/5.1/Microsoft.PowerShell.Core/About/about_Types.ps1xml.md:218:8       Typedata    U       Update-Typedata -PrependPath $PSHOME"
   - "reference/5.1/Microsoft.PowerShell.Core/About/about_Types.ps1xml.md:463:42      Dmtf        U       `ToDateTime` and `ToDmtfDateTime` static methods"
-  - "reference/5.1/Microsoft.PowerShell.Core/About/about_Using.md:123:10         stringbytes         U       [byte[]]$stringbytes = [UnicodeEncoding]"
-  - "reference/5.1/Microsoft.PowerShell.Core/About/about_Using.md:125:10         memorystream        U       [Stream]$memorystream = [MemoryStream]::new"
-  - "reference/5.1/Microsoft.PowerShell.Core/About/about_Using.md:126:2          hashfromstream      U       $hashfromstream = Get-FileHash -InputStream"
+  - "reference/5.1/Microsoft.PowerShell.Core/About/about_Using.md:127:10         stringbytes         U       [byte[]]$stringbytes = [UnicodeEncoding]"
+  - "reference/5.1/Microsoft.PowerShell.Core/About/about_Using.md:129:10         memorystream        U       [Stream]$memorystream = [MemoryStream]::new"
+  - "reference/5.1/Microsoft.PowerShell.Core/About/about_Using.md:130:2          hashfromstream      U       $hashfromstream = Get-FileHash -InputStream"
   - "reference/5.1/Microsoft.PowerShell.Core/About/about_Variable_Provider.md:155:16         Literalpath     U       Get-ChildItem -Literalpath ?"
   - "reference/5.1/Microsoft.PowerShell.Core/About/about_Wildcards.md:22:48          Techdocs    U       the files in the `C:\\Techdocs` directory with a"
   - "reference/5.1/Microsoft.PowerShell.Core/About/about_WMI_Cmdlets.md:61:12        wmiobject       U       C:\\PS> get-wmiobject win32_bios | format"
@@ -229,7 +228,7 @@ issues:
   - "reference/5.1/Microsoft.PowerShell.Core/Get-Module.md:203:81        Groupby         U       Name, Moduletype, Path -Groupby Name"
   - "reference/5.1/Microsoft.PowerShell.Core/Get-Module.md:331:36        RSDGF           U       CimSession -ComputerName RSDGF03"
   - "reference/5.1/Microsoft.PowerShell.Core/Get-PSSnapin.md:132:4       gsnp    U       - `gsnp`"
-  - "reference/5.1/Microsoft.PowerShell.Core/Import-Module.md:1247:61        modulename      U       Get-Command -Module modulename` to see which members"
+  - "reference/5.1/Microsoft.PowerShell.Core/Import-Module.md:1251:61        modulename      U       Get-Command -Module modulename` to see which members"
   - "reference/5.1/Microsoft.PowerShell.Core/Invoke-Command.md:1261:23       Autiomation     U       **System.Management.Autiomation.Remoting.PSSessionOption"
   - "reference/5.1/Microsoft.PowerShell.Core/New-Module.md:228:11        Manoj       U       $m.hello(\"Manoj\")"
   - "reference/5.1/Microsoft.PowerShell.Core/New-ModuleManifest.md:211:8         JKBC    U       'JKBC'"
@@ -267,7 +266,8 @@ issues:
   - "reference/5.1/Microsoft.PowerShell.Diagnostics/Import-Counter.md:253:46         netlog              U       pdata.blg\", \"D:\\samples\\netlog.blg\" | Import-Counter"
   - "reference/5.1/Microsoft.PowerShell.Diagnostics/New-WinEvent.md:90:16        Elasped     U       to the **PolicyElaspedTimeInSeconds** field"
   - "reference/5.1/Microsoft.PowerShell.Host/Start-Transcript.md:53:22       mulitbyte       U       improper encoding of mulitbyte characters in the transcript"
-  - "reference/5.1/Microsoft.PowerShell.LocalAccounts/Add-LocalGroupMember.md:195:4          algm    U       - `algm`"
+  - "reference/5.1/Microsoft.PowerShell.LocalAccounts/Add-LocalGroupMember.md:58:49          Entra       U       account, an Microsoft Entra account, and a domain"
+  - "reference/5.1/Microsoft.PowerShell.LocalAccounts/Add-LocalGroupMember.md:195:4          algm        U       - `algm`"
   - "reference/5.1/Microsoft.PowerShell.LocalAccounts/Get-LocalGroupMember.md:153:4          glgm    U       - `glgm`"
   - "reference/5.1/Microsoft.PowerShell.LocalAccounts/Remove-LocalGroup.md:184:7         IUSRS       U       - IIS_IUSRS"
   - "reference/5.1/Microsoft.PowerShell.LocalAccounts/Remove-LocalGroupMember.md:191:4       rlgm    U       - `rlgm`"
@@ -423,7 +423,7 @@ issues:
   - "reference/7.2/Microsoft.PowerShell.Core/About/about_Experimental_Features.md:69:31          PSSSH               U       Experimental(\"MyRemoting.PSSSHRemoting\", \"Show\")]"
   - "reference/7.2/Microsoft.PowerShell.Core/About/about_Format.ps1xml.md:358:30         Mygciview       U       Export-FormatData -Path ./Mygciview.Format.ps1xml"
   - "reference/7.2/Microsoft.PowerShell.Core/About/about_Functions_Argument_Completion.md:265:37         pswh    U       toryCompleter(ContainingFile=\"pswh.exe\", Depth=2)]"
-  - "reference/7.2/Microsoft.PowerShell.Core/About/about_Group_Policy_Settings.md:58:10          gpedit      U       editor (`gpedit.msc`)."
+  - "reference/7.2/Microsoft.PowerShell.Core/About/about_Group_Policy_Settings.md:59:10          gpedit      U       editor (`gpedit.msc`)."
   - "reference/7.2/Microsoft.PowerShell.Core/About/about_Logging_Non-Windows.md:94:2         journalctl      U       `journalctl` utility to query the"
   - "reference/7.2/Microsoft.PowerShell.Core/About/about_Logging_Non-Windows.md:109:18       rsyslog         U       server such as **rsyslog** if you want to use"
   - "reference/7.2/Microsoft.PowerShell.Core/About/about_Logging_Non-Windows.md:110:49       preinstall      U       distributions such as Ubuntu preinstall **rsyslog**."
@@ -1172,9 +1172,9 @@ issues:
   - "reference/docs-conceptual/learn/deep-dives/everything-about-arrays.md:964:2         myarray     U       $myarray = [System.Collections"
   - "reference/docs-conceptual/learn/deep-dives/everything-about-arrays.md:990:2         mylist      U       $mylist = [System.Collections"
   - "reference/docs-conceptual/learn/deep-dives/everything-about-arrays.md:1072:7        Kraus       U       [Mark Kraus][07] put together."
-  - "reference/docs-conceptual/learn/deep-dives/everything-about-exceptions.md:191:43        filefound       U       ReadAllText( '\\\\test\\no\\filefound.log')"
-  - "reference/docs-conceptual/learn/deep-dives/everything-about-exceptions.md:225:33        throwerror      U       : C:\\blog\\throwerror.ps1"
-  - "reference/docs-conceptual/learn/deep-dives/everything-about-exceptions.md:515:8         Dhami           U       Dexter Dhami pointed out that I can"
+  - "reference/docs-conceptual/learn/deep-dives/everything-about-exceptions.md:194:43        filefound       U       ReadAllText( '\\\\test\\no\\filefound.log')"
+  - "reference/docs-conceptual/learn/deep-dives/everything-about-exceptions.md:228:33        throwerror      U       : C:\\blog\\throwerror.ps1"
+  - "reference/docs-conceptual/learn/deep-dives/everything-about-exceptions.md:518:8         Dhami           U       Dexter Dhami pointed out that I can"
   - "reference/docs-conceptual/learn/deep-dives/everything-about-hashtable.md:145:6          Multiselection      U       #### Multiselection"
   - "reference/docs-conceptual/learn/deep-dives/everything-about-hashtable.md:469:143        testlab             U       Description 'Network for testlab A' -LeaseDuration (New"
   - "reference/docs-conceptual/learn/deep-dives/everything-about-hashtable.md:543:9          Serverv             U       Add-DhcpServerv4Scope @DHCPScope @Common"
