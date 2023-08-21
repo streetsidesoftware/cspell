@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 7.0.1 (2023-08-21)
+
+### Bug Fixes
+
+* Workflow Bot -- Update Dictionaries (main) ([#4733](https://github.com/streetsidesoftware/cspell-dicts/issues/4733)) ([221b59b](https://github.com/streetsidesoftware/cspell-dicts/commit/221b59bfe726a3b1fe5f9dcbdef6632983ebebeb))
+
 ## [7.0.0](https://github.com/streetsidesoftware/cspell-dicts/compare/v7.0.1-alpha.9...v7.0.0) (2023-08-10)
 
 **Note:** Version bump only for package test-dict-companies

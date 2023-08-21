@@ -8,5 +8,3 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 ### Bug Fixes
 
 * Workflow Bot -- Update Dictionaries (main) ([#4733](https://github.com/streetsidesoftware/cspell/issues/4733)) ([221b59b](https://github.com/streetsidesoftware/cspell/commit/221b59bfe726a3b1fe5f9dcbdef6632983ebebeb))
-
-# Change Log
