@@ -3,7 +3,7 @@ Repository: caddyserver/caddy
 Url: "https://github.com/caddyserver/caddy.git"
 Args: ["**/*.go"]
 Lines:
- CSpell: Files checked: 240, Issues found: 3477 in 221 files
+ CSpell: Files checked: 240, Issues found: 3488 in 221 files
  exit code: 1
 ./admin.go:1345:21   - Unknown word (pidfile)     -- // PIDFile writes a pidfile to the file at filename
 ./admin.go:331:29    - Unknown word (infosec)     -- security checks, the infosec community assures me
@@ -24,9 +24,9 @@ Lines:
 ./admin_test.go:30:8      - Unknown word (myserver)   -- "myserver": {
 ./admin_test.go:34:8      - Unknown word (yourserver) -- "yourserver": {
 ./admin_test.go:44:10     - Unknown word (Unsynced)   -- func TestUnsyncedConfigAccess(t *testing
-./caddy.go:706:24    - Unknown word (byeee)      -- logger.Warn("exiting; byeee!! 👋")
-./caddy.go:849:47    - Unknown word (ldflags)    -- during `go build` with `-ldflags`:
-./caddy.go:865:28    - Unknown word (devel)      -- this function returns "(devel)" because Go uses that
+./caddy.go:707:24    - Unknown word (byeee)      -- logger.Warn("exiting; byeee!! 👋")
+./caddy.go:850:47    - Unknown word (ldflags)    -- during `go build` with `-ldflags`:
+./caddy.go:866:28    - Unknown word (devel)      -- this function returns "(devel)" because Go uses that
 ./caddyconfig/caddyfile/adapter.go:100:25    - Unknown word (unmarshaled) -- into JSON. Caddyfile-unmarshaled values
 ./caddyconfig/caddyfile/adapter.go:134:17    - Unknown word (Errf)        -- return nil, d.Errf("getting module named
 ./caddyconfig/caddyfile/adapter.go:15:9      - Unknown word (caddyfile)  -- package caddyfile
@@ -41,83 +41,84 @@ Lines:
 ./caddyconfig/caddyfile/formatter_test.go:315:18    - Unknown word (redir)      -- input: `redir / /some/#/path`,
 ./caddyconfig/caddyfile/formatter_test.go:330:18    - Unknown word (matthewpi)  -- description: "matthewpi/vscode-caddyfile-support
 ./caddyconfig/caddyfile/formatter_test.go:332:10    - Unknown word (ACMEEMAIL)  -- email {$ACMEEMAIL}
-./caddyconfig/caddyfile/lexer.go:332:29    - Unknown word (linebreak)  -- heredocs have an extra linebreak because the opening
-./caddyconfig/caddyfile/lexer.go:332:6     - Unknown word (heredocs)   -- // heredocs have an extra linebreak
-./caddyconfig/caddyfile/lexer_test.go:348:24    - Unknown word (Aheredoc)   -- input: []byte("\u000Aheredoc \u003C\u003C\u0073\u
-./caddyconfig/caddyfile/parse.go:655:36    - Unknown word (Curlies)    -- parser) blockTokens(retainCurlies bool) ([]Token, error
-./caddyconfig/caddyfile/parse.go:656:21    - Unknown word (curlies)    -- // block must have curlies.
+./caddyconfig/caddyfile/lexer.go:342:29    - Unknown word (linebreak)  -- heredocs have an extra linebreak because the opening
+./caddyconfig/caddyfile/lexer.go:342:6     - Unknown word (heredocs)   -- // heredocs have an extra linebreak
+./caddyconfig/caddyfile/lexer_test.go:392:24    - Unknown word (Aheredoc)   -- input: []byte("\u000Aheredoc \u003C\u003C\u0073\u
+./caddyconfig/caddyfile/parse.go:656:36    - Unknown word (Curlies)    -- parser) blockTokens(retainCurlies bool) ([]Token, error
+./caddyconfig/caddyfile/parse.go:657:21    - Unknown word (curlies)    -- // block must have curlies.
 ./caddyconfig/caddyfile/parse_test.go:659:13    - Unknown word (foofoobarbar) -- expect: "foofoobarbar",
 ./caddyconfig/caddyfile/parse_test.go:671:13    - Unknown word (foobarfoobar) -- expect: "foobarfoobar",
 ./caddyconfig/caddyfile/parse_test.go:683:13    - Unknown word (foobarbaz)    -- expect: "foobarbaz",
-./caddyconfig/httpcaddyfile/addresses.go:153:2     - Unknown word (sbaddrs)    -- sbaddrs := make([]sbAddrAssociation
-./caddyconfig/httpcaddyfile/addresses.go:154:12    - Unknown word (sblocks)    -- for addr, sblocks := range addrToServerBlocks
-./caddyconfig/httpcaddyfile/addresses.go:165:23    - Unknown word (Sblocks)    -- for otherAddr, otherSblocks := range addrToServerBlocks
-./caddyconfig/httpcaddyfile/addresses.go:202:5     - Unknown word (hport)      -- if hport, ok := options["http
-./caddyconfig/httpcaddyfile/addresses.go:205:5     - Unknown word (hsport)     -- if hsport, ok := options["https
-./caddyconfig/httpcaddyfile/addresses.go:29:43     - Unknown word (caddyhttp)  -- caddyserver/caddy/v2/modules/caddyhttp"
-./caddyconfig/httpcaddyfile/addresses.go:82:2      - Unknown word (sbmap)      -- sbmap := make(map[string]
-./caddyconfig/httpcaddyfile/addresses.go:84:9      - Unknown word (sblock)     -- for i, sblock := range originalServerBlocks
+./caddyconfig/httpcaddyfile/addresses.go:154:2     - Unknown word (sbaddrs)    -- sbaddrs := make([]sbAddrAssociation
+./caddyconfig/httpcaddyfile/addresses.go:155:12    - Unknown word (sblocks)    -- for addr, sblocks := range addrToServerBlocks
+./caddyconfig/httpcaddyfile/addresses.go:166:23    - Unknown word (Sblocks)    -- for otherAddr, otherSblocks := range addrToServerBlocks
+./caddyconfig/httpcaddyfile/addresses.go:214:5     - Unknown word (hport)      -- if hport, ok := options["http
+./caddyconfig/httpcaddyfile/addresses.go:217:5     - Unknown word (hsport)     -- if hsport, ok := options["https
+./caddyconfig/httpcaddyfile/addresses.go:31:43     - Unknown word (caddyhttp)  -- caddyserver/caddy/v2/modules/caddyhttp"
+./caddyconfig/httpcaddyfile/addresses.go:83:2      - Unknown word (sbmap)      -- sbmap := make(map[string]
+./caddyconfig/httpcaddyfile/addresses.go:85:9      - Unknown word (sblock)     -- for i, sblock := range originalServerBlocks
 ./caddyconfig/httpcaddyfile/addresses_fuzz.go:17:9      - Unknown word (httpcaddyfile) -- package httpcaddyfile
-./caddyconfig/httpcaddyfile/builtins.go:217:6     - Unknown word (subdir)     -- subdir := h.Val()
-./caddyconfig/httpcaddyfile/builtins.go:261:35    - Unknown word (subdirective) -- nil, h.Errf("unknown subdirective for client_auth: %s
-./caddyconfig/httpcaddyfile/builtins.go:270:8     - Unknown word (ALPN)         -- cp.ALPN = args
-./caddyconfig/httpcaddyfile/builtins.go:35:14     - Unknown word (mholt)      -- "github.com/mholt/acmez/acme"
-./caddyconfig/httpcaddyfile/builtins.go:35:20     - Unknown word (acmez)      -- "github.com/mholt/acmez/acme"
-./caddyconfig/httpcaddyfile/builtins.go:493:8     - Unknown word (Vals)         -- configVals := []ConfigValue{}
-./caddyconfig/httpcaddyfile/builtins.go:509:14    - Unknown word (subdirectives) -- // some tls subdirectives are shortcuts that implicitly
-./caddyconfig/httpcaddyfile/builtins.go:742:35    - Unknown word (Subroute)      -- caddyhttp.Route, caddyhttp.Subroute:
-./caddyconfig/httpcaddyfile/builtins.go:744:84    - Unknown word (subroute)      -- than an HTTP route or subroute: %#v (only handler directives
-./caddyconfig/httpcaddyfile/builtins.go:792:8     - Unknown word (hostnames)     -- // hostnames <hostnames...>
-./caddyconfig/httpcaddyfile/builtins.go:80:8      - Unknown word (alpn)       -- // alpn
-./caddyconfig/httpcaddyfile/builtins.go:857:9     - Unknown word (Hostnames)     -- customHostnames := []string{}
+./caddyconfig/httpcaddyfile/builtins.go:218:6     - Unknown word (subdir)     -- subdir := h.Val()
+./caddyconfig/httpcaddyfile/builtins.go:262:35    - Unknown word (subdirective) -- nil, h.Errf("unknown subdirective for client_auth: %s
+./caddyconfig/httpcaddyfile/builtins.go:271:8     - Unknown word (ALPN)         -- cp.ALPN = args
+./caddyconfig/httpcaddyfile/builtins.go:30:14     - Unknown word (mholt)      -- "github.com/mholt/acmez/acme"
+./caddyconfig/httpcaddyfile/builtins.go:30:20     - Unknown word (acmez)      -- "github.com/mholt/acmez/acme"
+./caddyconfig/httpcaddyfile/builtins.go:494:8     - Unknown word (Vals)         -- configVals := []ConfigValue{}
+./caddyconfig/httpcaddyfile/builtins.go:510:14    - Unknown word (subdirectives) -- // some tls subdirectives are shortcuts that implicitly
+./caddyconfig/httpcaddyfile/builtins.go:743:35    - Unknown word (Subroute)      -- caddyhttp.Route, caddyhttp.Subroute:
+./caddyconfig/httpcaddyfile/builtins.go:745:84    - Unknown word (subroute)      -- than an HTTP route or subroute: %#v (only handler directives
+./caddyconfig/httpcaddyfile/builtins.go:793:8     - Unknown word (hostnames)     -- // hostnames <hostnames...>
+./caddyconfig/httpcaddyfile/builtins.go:81:8      - Unknown word (alpn)       -- // alpn
+./caddyconfig/httpcaddyfile/builtins.go:858:9     - Unknown word (Hostnames)     -- customHostnames := []string{}
 ./caddyconfig/httpcaddyfile/builtins_test.go:176:31    - Unknown word (htlm)       -- /old.html /new.html htlm
 ./caddyconfig/httpcaddyfile/directives.go:246:58    - Unknown word (vals)       -- caddyhttp.Route type) in vals to the
 ./caddyconfig/httpcaddyfile/directives.go:80:7      - Unknown word (fastcgi)    -- "php_fastcgi",
-./caddyconfig/httpcaddyfile/httptype.go:1288:3    - Unknown word (hostm)      -- hostm caddyhttp.MatchHost
-./caddyconfig/httpcaddyfile/httptype.go:1289:3    - Unknown word (pathm)      -- pathm caddyhttp.MatchPath
-./caddyconfig/httpcaddyfile/httptype.go:1459:5    - Unknown word (hostport)   -- "{hostport}", "{http.request.hostport
-./caddyconfig/httpcaddyfile/httptype.go:1549:3    - Unknown word (laddrs)     -- laddrs, err := caddy.ParseNetworkAdd
-./caddyconfig/httpcaddyfile/httptype.go:185:12    - Unknown word (subroutes)  -- // some subroutes in this directive; we
-./caddyconfig/httpcaddyfile/httptype.go:279:5     - Unknown word (annnd)      -- // annnd the top-level config
-./caddyconfig/httpcaddyfile/httptype.go:301:12    - Unknown word (Cvtr)       -- if storageCvtr, ok := options["storage
-./caddyconfig/httpcaddyfile/httptype.go:30:43     - Unknown word (caddypki)   -- caddyserver/caddy/v2/modules/caddypki"
-./caddyconfig/httpcaddyfile/httptype.go:793:11    - Unknown word (cval)       -- for _, cval := range sblock.pile
+./caddyconfig/httpcaddyfile/httptype.go:1289:3    - Unknown word (hostm)      -- hostm caddyhttp.MatchHost
+./caddyconfig/httpcaddyfile/httptype.go:1290:3    - Unknown word (pathm)      -- pathm caddyhttp.MatchPath
+./caddyconfig/httpcaddyfile/httptype.go:1460:5    - Unknown word (hostport)   -- "{hostport}", "{http.request.hostport
+./caddyconfig/httpcaddyfile/httptype.go:1550:3    - Unknown word (laddrs)     -- laddrs, err := caddy.ParseNetworkAdd
+./caddyconfig/httpcaddyfile/httptype.go:186:12    - Unknown word (subroutes)  -- // some subroutes in this directive; we
+./caddyconfig/httpcaddyfile/httptype.go:280:5     - Unknown word (annnd)      -- // annnd the top-level config
+./caddyconfig/httpcaddyfile/httptype.go:302:12    - Unknown word (Cvtr)       -- if storageCvtr, ok := options["storage
+./caddyconfig/httpcaddyfile/httptype.go:33:43     - Unknown word (caddypki)   -- caddyserver/caddy/v2/modules/caddypki"
+./caddyconfig/httpcaddyfile/httptype.go:794:11    - Unknown word (cval)       -- for _, cval := range sblock.pile
 ./caddyconfig/httpcaddyfile/httptype_test.go:17:11     - Unknown word (showdebug)  -- query showdebug=1
 ./caddyconfig/httpcaddyfile/httptype_test.go:34:12     - Unknown word (somepath)   -- path /somepath*
-./caddyconfig/httpcaddyfile/options.go:44:43     - Unknown word (ACMEDNS)    -- "acme_dns", parseOptACMEDNS)
-./caddyconfig/httpcaddyfile/options.go:45:43     - Unknown word (ACMEEAB)    -- "acme_eab", parseOptACMEEAB)
+./caddyconfig/httpcaddyfile/options.go:45:43     - Unknown word (ACMEDNS)    -- "acme_dns", parseOptACMEDNS)
+./caddyconfig/httpcaddyfile/options.go:46:43     - Unknown word (ACMEEAB)    -- "acme_eab", parseOptACMEEAB)
 ./caddyconfig/httpcaddyfile/options_test.go:17:22     - Unknown word (caddytest)  -- // are present in: caddytest/integration/caddyfile
 ./caddyconfig/httpcaddyfile/pkiapp.go:65:33     - Unknown word (CAID)       -- ID = caddypki.DefaultCAID
-./caddyconfig/httpcaddyfile/tlsapp.go:196:38    - Unknown word (Tailscale)  -- as desired (see the Tailscale listener plugin), so
-./caddyconfig/httpcaddyfile/tlsapp.go:363:9     - Unknown word (ACMECA)     -- globalACMECA := options["acme_ca
+./caddyconfig/httpcaddyfile/tlsapp.go:197:38    - Unknown word (Tailscale)  -- as desired (see the Tailscale listener plugin), so
+./caddyconfig/httpcaddyfile/tlsapp.go:364:9     - Unknown word (ACMECA)     -- globalACMECA := options["acme_ca
 ./caddyconfig/httploader.go:71:7      - Unknown word (CAPEM)      -- RootCAPEMFiles []string `json
 ./caddytest/caddytest.go:24:14     - Unknown word (aryann)     -- "github.com/aryann/difflib"
 ./caddytest/caddytest.go:24:21     - Unknown word (difflib)    -- "github.com/aryann/difflib"
-./caddytest/caddytest.go:252:12    - Unknown word (inprocess)   -- // start inprocess caddy server
+./caddytest/caddytest.go:253:12    - Unknown word (inprocess)   -- // start inprocess caddy server
 ./caddytest/caddytest.go:26:2      - Unknown word (caddycmd)   -- caddycmd "github.com/caddyserver
-./caddytest/caddytest.go:291:36    - Unknown word (certificatename) -- convention to replace /[certificatename].[crt|key] with the
-./caddytest/caddytest.go:323:67    - Unknown word (nolint)          -- InsecureSkipVerify: true}, //nolint:gosec
-./caddytest/caddytest.go:323:74    - Unknown word (gosec)           -- reSkipVerify: true}, //nolint:gosec
-./caddytest/caddytest.go:37:2      - Unknown word (Certifcates) -- Certifcates []string
-./caddytest/caddytest.go:93:53     - Unknown word (configurion) -- configure the server with a configurion of a specific
+./caddytest/caddytest.go:292:36    - Unknown word (certificatename) -- convention to replace /[certificatename].[crt|key] with the
+./caddytest/caddytest.go:324:67    - Unknown word (nolint)          -- InsecureSkipVerify: true}, //nolint:gosec
+./caddytest/caddytest.go:324:74    - Unknown word (gosec)           -- reSkipVerify: true}, //nolint:gosec
+./caddytest/caddytest.go:38:2      - Unknown word (Certifcates) -- Certifcates []string
+./caddytest/caddytest.go:94:53     - Unknown word (configurion) -- configure the server with a configurion of a specific
 ./caddytest/integration/autohttps_test.go:20:11     - Unknown word (Yahaha)     -- respond "Yahaha! You found me!"
+./caddytest/integration/caddyfile_test.go:155:43    - Unknown word (someinvalidprefix) -- unsupported URL scheme someinvalidprefix://",
+./caddytest/integration/caddyfile_test.go:303:15    - Unknown word (upstreams)         -- "upstreams": [
 ./caddytest/integration/caddyfile_test.go:82:11     - Unknown word (clientname) -- Name: "clientname",
-./caddytest/integration/reverseproxy_test.go:43:20     - Unknown word (upstreams)  -- "dynamic_upstreams": {
 ./caddytest/integration/stream_test.go:155:3     - Unknown word (rstring)    -- rstring, err := httputil.DumpRequest
 ./caddytest/integration/stream_test.go:337:31    - Unknown word (automaticlly) -- underlying transport will automaticlly add gzip
 ./cmd/caddy/main.go:27:19     - Unknown word (xcaddy)     -- // Or you can use xcaddy which does it all for
-./cmd/commandfuncs.go:129:16    - Unknown word (Pingback)   -- err = handlePingbackConn(conn, expect)
-./cmd/commandfuncs.go:263:44    - Unknown word (USERPROFILE) -- == "" && os.Getenv("USERPROFILE") == "" && !hasXDG
-./cmd/commandfuncs.go:46:10     - Unknown word (Pidfile)    -- startCmdPidfileFlag := fl.String("pidfile
-./cmd/commandfuncs.go:59:30     - Unknown word (pingback)   -- craft the command with a pingback address and with a
-./cmd/commandfuncs.go:646:7     - Unknown word (srldkjfsd)   -- // "srldkjfsd"), if for some reason
-./cmd/commandfuncs.go:84:2      - Unknown word (stdinpipe)  -- stdinpipe, err := cmd.StdinPipe
-./cmd/commands.go:33:47     - Unknown word (godoc)      -- the RegisterCommand() godoc.
-./cmd/commands.go:482:24    - Unknown word (compinit)    -- $ echo "autoload -U compinit; compinit" >> ~/.zshrc
-./cmd/commands.go:79:40     - Unknown word (initialised) -- returns a list of commands initialised by
-./cmd/main.go:36:20     - Unknown word (pflag)      -- "github.com/spf13/pflag"
-./cmd/packagesfuncs.go:197:3     - Unknown word (iface)      -- iface := any(modInfo.New(
-./cmd/packagesfuncs.go:39:8      - Unknown word (Pkgs)       -- pluginPkgs, err := getPluginPackages
+./cmd/commandfuncs.go:130:16    - Unknown word (Pingback)   -- err = handlePingbackConn(conn, expect)
+./cmd/commandfuncs.go:264:44    - Unknown word (USERPROFILE) -- == "" && os.Getenv("USERPROFILE") == "" && !hasXDG
+./cmd/commandfuncs.go:47:10     - Unknown word (Pidfile)    -- startCmdPidfileFlag := fl.String("pidfile
+./cmd/commandfuncs.go:60:30     - Unknown word (pingback)   -- craft the command with a pingback address and with a
+./cmd/commandfuncs.go:647:7     - Unknown word (srldkjfsd)   -- // "srldkjfsd"), if for some reason
+./cmd/commandfuncs.go:85:2      - Unknown word (stdinpipe)  -- stdinpipe, err := cmd.StdinPipe
+./cmd/commands.go:34:47     - Unknown word (godoc)      -- the RegisterCommand() godoc.
+./cmd/commands.go:483:24    - Unknown word (compinit)    -- $ echo "autoload -U compinit; compinit" >> ~/.zshrc
+./cmd/commands.go:80:40     - Unknown word (initialised) -- returns a list of commands initialised by
+./cmd/main.go:34:20     - Unknown word (pflag)      -- "github.com/spf13/pflag"
+./cmd/packagesfuncs.go:198:3     - Unknown word (iface)      -- iface := any(modInfo.New(
+./cmd/packagesfuncs.go:40:8      - Unknown word (Pkgs)       -- pluginPkgs, err := getPluginPackages
 ./cmd/removebinary_windows.go:34:67     - Unknown word (windir)     -- filepath.Join(os.Getenv("windir"), "system32", "cmd
 ./context.go:230:48    - Unknown word (deallocate) -- raw bytes; allow GC to deallocate
 ./internal/metrics/metrics_test.go:19:28     - Unknown word (ohno)       -- method: strings.Repeat("ohno", 9999), expected:
@@ -126,48 +127,48 @@ Lines:
 ./listen.go:51:50     - Unknown word (swappable)  -- servers become hot-swappable
 ./listen.go:77:6      - Unknown word (tconn)      -- if tconn, ok := conn.(canSetKeepAlive
 ./listen_unix_setopt_freebsd.go:7:11      - Unknown word (SOREUSEPORT) -- const unixSOREUSEPORT = unix.SO_REUSEPORT
-./listeners.go:155:8     - Unknown word (Abtract)    -- var isAbtractUnixSocket bool
-./listeners.go:317:38    - Unknown word (netw)       -- returns true if the netw is a unix network.
-./listeners.go:478:20    - Unknown word (QUICTLS)    -- sqtc := newSharedQUICTLSConfig(tlsConf)
-./listeners.go:478:3     - Unknown word (sqtc)       -- sqtc := newSharedQUICTLSConfig
-./listeners.go:540:5     - Unknown word (Confs)      -- tlsConfs map[*tls.Config
-./listeners.go:567:5     - Unknown word (cacc)       -- if cacc, ok := sqtc.tlsConfs
-./listeners.go:650:113   - Unknown word (assertable) -- net.PacketConn type assertable to a net.Conn,
-./listeners.go:655:7     - Unknown word (fcpc)       -- func (fcpc *fakeClosePacketConn
-./listeners.go:671:25    - Unknown word (hotswappable) -- someone would need a hotswappable QUIC-only (not http
-./listeners.go:675:7     - Unknown word (fcql)         -- func (fcql *fakeCloseQuicListener
+./listeners.go:156:8     - Unknown word (Abtract)    -- var isAbtractUnixSocket bool
+./listeners.go:318:38    - Unknown word (netw)       -- returns true if the netw is a unix network.
+./listeners.go:479:20    - Unknown word (QUICTLS)    -- sqtc := newSharedQUICTLSConfig(tlsConf)
+./listeners.go:479:3     - Unknown word (sqtc)       -- sqtc := newSharedQUICTLSConfig
+./listeners.go:541:5     - Unknown word (Confs)      -- tlsConfs map[*tls.Config
+./listeners.go:568:5     - Unknown word (cacc)       -- if cacc, ok := sqtc.tlsConfs
+./listeners.go:651:113   - Unknown word (assertable) -- net.PacketConn type assertable to a net.Conn,
+./listeners.go:656:7     - Unknown word (fcpc)       -- func (fcpc *fakeClosePacketConn
+./listeners.go:672:25    - Unknown word (hotswappable) -- someone would need a hotswappable QUIC-only (not http
+./listeners.go:676:7     - Unknown word (fcql)         -- func (fcql *fakeCloseQuicListener
 ./logging.go:258:7     - Unknown word (wdest)      -- func (wdest writerDestructor) Destruct
 ./logging.go:353:21    - Unknown word (shorcut)    -- // at all, so just shorcut to a nop core instead
 ./logging.go:425:10    - Unknown word (superspace) -- // be a superspace or subspace of an item
-./metrics.go:38:15     - Unknown word (promhttp)   -- // Similar to promhttp.InstrumentHandlerCounter
-./metrics.go:9:50      - Unknown word (promauto)   -- client_golang/prometheus/promauto"
+./metrics.go:39:15     - Unknown word (promhttp)   -- // Similar to promhttp.InstrumentHandlerCounter
+./metrics.go:8:50      - Unknown word (promauto)   -- client_golang/prometheus/promauto"
 ./modules.go:312:56    - Unknown word (provisionings) -- cleaning up from partial provisionings.
-./modules/caddyevents/app.go:127:12    - Unknown word (Iface)       -- handlersIface, err := ctx.LoadModule
+./modules/caddyevents/app.go:128:12    - Unknown word (Iface)       -- handlersIface, err := ctx.LoadModule
 ./modules/caddyevents/app.go:15:9      - Unknown word (caddyevents) -- package caddyevents
-./modules/caddyevents/app.go:371:41    - Unknown word (specversion) -- string `json:"specversion"`
-./modules/caddyevents/app.go:374:41    - Unknown word (datacontenttype) -- string `json:"datacontenttype,omitempty"`
+./modules/caddyevents/app.go:372:41    - Unknown word (specversion) -- string `json:"specversion"`
+./modules/caddyevents/app.go:375:41    - Unknown word (datacontenttype) -- string `json:"datacontenttype,omitempty"`
 ./modules/caddyevents/eventsconfig/caddyfile.go:15:12     - Unknown word (eventsconfig) -- // Package eventsconfig is for configuring caddyevent
-./modules/caddyhttp/app.go:537:5     - Unknown word (hrough)     -- // hrough a reload; because if
-./modules/caddyhttp/autohttps.go:271:16    - Unknown word (tailscale)  -- var internal, tailscale []string
-./modules/caddyhttp/autohttps.go:497:12    - Unknown word (reprovision) -- // must reprovision the automation policy
-./modules/caddyhttp/autohttps.go:682:4     - Unknown word (reprovisioned) -- // reprovisioned. acmeIssuer must not
-./modules/caddyhttp/autohttps.go:699:28    - Unknown word (TLSALPN)       -- acmeIssuer.Challenges.TLSALPN == nil {
+./modules/caddyhttp/app.go:538:5     - Unknown word (hrough)     -- // hrough a reload; because if
+./modules/caddyhttp/autohttps.go:272:16    - Unknown word (tailscale)  -- var internal, tailscale []string
+./modules/caddyhttp/autohttps.go:498:12    - Unknown word (reprovision) -- // must reprovision the automation policy
+./modules/caddyhttp/autohttps.go:683:4     - Unknown word (reprovisioned) -- // reprovisioned. acmeIssuer must not
+./modules/caddyhttp/autohttps.go:700:28    - Unknown word (TLSALPN)       -- acmeIssuer.Challenges.TLSALPN == nil {
 ./modules/caddyhttp/caddyauth/basicauth.go:15:9      - Unknown word (caddyauth)  -- package caddyauth
 ./modules/caddyhttp/caddyauth/basicauth.go:22:2      - Unknown word (weakrand)   -- weakrand "math/rand"
-./modules/caddyhttp/caddyauth/caddyauth.go:73:6      - Unknown word (authed)     -- var authed bool
-./modules/caddyhttp/caddyauth/hashes.go:140:58    - Unknown word (fakesalt)   -- antitiming" --salt "fakesalt" --algorithm "scrypt
-./modules/caddyhttp/caddyauth/hashes.go:62:38     - Unknown word (antitiming) -- password --plaintext "antitiming" --algorithm "bcrypt
-./modules/caddyhttp/caddyauth/hashes.go:63:26     - Unknown word (ulqf)       -- return []byte("$2a$14$X3ulqf/iGxnf1k6oMZ.RZeJUoqI
-./modules/caddyhttp/caddyauth/hashes.go:63:32     - Unknown word (Gxnf)       -- byte("$2a$14$X3ulqf/iGxnf1k6oMZ.RZeJUoqI9PX2PM
-./modules/caddyhttp/caddyauth/hashes.go:63:69     - Unknown word (LGXG)       -- RZeJUoqI9PX2PM4rS5lkIKJXduLGXGPrt6")
+./modules/caddyhttp/caddyauth/caddyauth.go:74:6      - Unknown word (authed)     -- var authed bool
+./modules/caddyhttp/caddyauth/hashes.go:141:58    - Unknown word (fakesalt)   -- antitiming" --salt "fakesalt" --algorithm "scrypt
+./modules/caddyhttp/caddyauth/hashes.go:63:38     - Unknown word (antitiming) -- password --plaintext "antitiming" --algorithm "bcrypt
+./modules/caddyhttp/caddyauth/hashes.go:64:26     - Unknown word (ulqf)       -- return []byte("$2a$14$X3ulqf/iGxnf1k6oMZ.RZeJUoqI
+./modules/caddyhttp/caddyauth/hashes.go:64:32     - Unknown word (Gxnf)       -- byte("$2a$14$X3ulqf/iGxnf1k6oMZ.RZeJUoqI9PX2PM
+./modules/caddyhttp/caddyauth/hashes.go:64:69     - Unknown word (LGXG)       -- RZeJUoqI9PX2PM4rS5lkIKJXduLGXGPrt6")
 ./modules/caddyhttp/caddyhttp.go:123:26    - Unknown word (routse)     -- Provision sets up the routse in rh.
 ./modules/caddyhttp/caddyhttp.go:134:30    - Unknown word (unmarshals) -- WeakString is a type that unmarshals any JSON value
 ./modules/caddyhttp/caddyhttp_test.go:55:21     - Unknown word (fbar)       -- inputPath: "/..%2fbar",
-./modules/caddyhttp/celmatcher.go:369:16    - Unknown word (Libary)     -- type matcherCELLibary struct {
-./modules/caddyhttp/celmatcher.go:374:62    - Unknown word (setes)      -- matcherLibrary from option setes.
-./modules/caddyhttp/celmatcher.go:41:2      - Unknown word (exprpb)     -- exprpb "google.golang.org/genproto
-./modules/caddyhttp/celmatcher.go:41:28     - Unknown word (genproto)   -- exprpb "google.golang.org/genproto/googleapis/api/expr
-./modules/caddyhttp/celmatcher.go:41:37     - Unknown word (googleapis) -- golang.org/genproto/googleapis/api/expr/v1alpha1"
+./modules/caddyhttp/celmatcher.go:370:16    - Unknown word (Libary)     -- type matcherCELLibary struct {
+./modules/caddyhttp/celmatcher.go:375:62    - Unknown word (setes)      -- matcherLibrary from option setes.
+./modules/caddyhttp/celmatcher.go:39:2      - Unknown word (exprpb)     -- exprpb "google.golang.org/genproto
+./modules/caddyhttp/celmatcher.go:39:28     - Unknown word (genproto)   -- exprpb "google.golang.org/genproto/googleapis/api/expr
+./modules/caddyhttp/celmatcher.go:39:37     - Unknown word (googleapis) -- golang.org/genproto/googleapis/api/expr/v1alpha1"
 ./modules/caddyhttp/celmatcher_test.go:57:60     - Unknown word (localdomain) -- subject} == 'CN=client.localdomain'",
 ./modules/caddyhttp/duplex_go121.go:24:11     - Unknown word (bodyclose)  -- //nolint:bodyclose
 ./modules/caddyhttp/encode/brotli/brotli_precompressed.go:12:62     - Unknown word (precompressed) -- extension for files precompressed with brotli encoding
@@ -180,57 +181,58 @@ Lines:
 ./modules/caddyhttp/encode/encode.go:278:4     - Unknown word (deallocates) -- // deallocates any active resources
 ./modules/caddyhttp/encode/encode.go:337:2     - Unknown word (prefs)       -- prefs := []encodingPreference
 ./modules/caddyhttp/encode/encode.go:54:59     - Unknown word (Mmatcher)   -- against this ResponseMmatcher.
-./modules/caddyhttp/encode/gzip/gzip.go:24:14     - Unknown word (klauspost)  -- "github.com/klauspost/compress/gzip"
+./modules/caddyhttp/encode/gzip/gzip.go:21:14     - Unknown word (klauspost)  -- "github.com/klauspost/compress/gzip"
 ./modules/caddyhttp/encode/gzip/gzip_precompressed.go:1:9       - Unknown word (caddygzip)  -- package caddygzip
-./modules/caddyhttp/encode/zstd/zstd.go:28:20     - Unknown word (Zstandard)  -- // Zstd can create Zstandard encoders.
+./modules/caddyhttp/encode/zstd/zstd.go:29:20     - Unknown word (Zstandard)  -- // Zstd can create Zstandard encoders.
 ./modules/caddyhttp/encode/zstd/zstd_precompressed.go:12:79     - Unknown word (zstandard)  -- files precompressed with zstandard encoding.
 ./modules/caddyhttp/encode/zstd/zstd_precompressed.go:1:9       - Unknown word (caddyzstd)  -- package caddyzstd
 ./modules/caddyhttp/encode/zstd/zstd_precompressed.go:9:23      - Unknown word (Zstd)       -- caddy.RegisterModule(ZstdPrecompressed{})
 ./modules/caddyhttp/errors.go:94:18     - Unknown word (abcdefghijkmnopqrstuvwxyz) -- dict := []byte("abcdefghijkmnopqrstuvwxyzABCDEFGHJKLMNPQRTUVWXY
 ./modules/caddyhttp/errors.go:94:43     - Unknown word (ABCDEFGHJKLMNPQRTUVWXY)    -- abcdefghijkmnopqrstuvwxyzABCDEFGHJKLMNPQRTUVWXY23456789")
 ./modules/caddyhttp/errors.go:96:18     - Unknown word (abcdefghijkmnpqrstuvwxyz)  -- dict = []byte("abcdefghijkmnpqrstuvwxyz0123456789")
-./modules/caddyhttp/fileserver/browse.go:47:7      - Unknown word (fsrv)       -- func (fsrv *FileServer) serveBrowse
-./modules/caddyhttp/fileserver/browsetplcontext.go:113:37    - Unknown word (browseable) -- parent directory is browseable.
-./modules/caddyhttp/fileserver/browsetplcontext.go:149:2     - Unknown word (lpath)      -- lpath := l.Path
-./modules/caddyhttp/fileserver/browsetplcontext.go:160:67    - Unknown word (unescaping) -- the loop rather than unescaping the
-./modules/caddyhttp/fileserver/browsetplcontext.go:316:24    - Unknown word (namedirfirst) -- sortByNameDirFirst = "namedirfirst"
+./modules/caddyhttp/fileserver/browse.go:48:7      - Unknown word (fsrv)       -- func (fsrv *FileServer) serveBrowse
+./modules/caddyhttp/fileserver/browsetplcontext.go:114:37    - Unknown word (browseable) -- parent directory is browseable.
+./modules/caddyhttp/fileserver/browsetplcontext.go:150:2     - Unknown word (lpath)      -- lpath := l.Path
+./modules/caddyhttp/fileserver/browsetplcontext.go:161:67    - Unknown word (unescaping) -- the loop rather than unescaping the
+./modules/caddyhttp/fileserver/browsetplcontext.go:317:24    - Unknown word (namedirfirst) -- sortByNameDirFirst = "namedirfirst"
 ./modules/caddyhttp/fileserver/browsetplcontext_test.go:72:15     - Unknown word (corge)      -- {"/qux/quux/corge/", []crumb{
 ./modules/caddyhttp/fileserver/browsetplcontext_test.go:78:6      - Unknown word (مجلد)       -- {"/مجلد/", []crumb{
 ./modules/caddyhttp/fileserver/caddyfile.go:119:6     - Unknown word (precompress) -- precompress, ok := inst.(encode
 ./modules/caddyhttp/fileserver/caddyfile.go:121:46    - Unknown word (precompressor) -- "module %s is not a precompressor; is %T", modID, inst
 ./modules/caddyhttp/fileserver/caddyfile.go:80:5      - Unknown word (fsys)       -- fsys, ok := unm.(fs.FS)
-./modules/caddyhttp/fileserver/command.go:29:2      - Unknown word (caddytpl)   -- caddytpl "github.com/caddyserver
-./modules/caddyhttp/fileserver/matcher.go:323:3     - Unknown word (fullpath)   -- fullpath, relative, splitRemainder
-./modules/caddyhttp/fileserver/matcher.go:552:2     - Unknown word (nlen)       -- nlen := len(needle)
+./modules/caddyhttp/fileserver/command.go:34:2      - Unknown word (caddytpl)   -- caddytpl "github.com/caddyserver
+./modules/caddyhttp/fileserver/matcher.go:324:3     - Unknown word (fullpath)   -- fullpath, relative, splitRemainder
+./modules/caddyhttp/fileserver/matcher.go:553:2     - Unknown word (nlen)       -- nlen := len(needle)
 ./modules/caddyhttp/fileserver/matcher_test.go:192:20    - Unknown word (notphp)      -- path: "/notphp.php.txt",
 ./modules/caddyhttp/fileserver/matcher_test.go:72:20     - Unknown word (foodir)     -- path: "/foodir",
 ./modules/caddyhttp/fileserver/matcher_test.go:90:15     - Unknown word (missingfile) -- path: "/missingfile.php",
-./modules/caddyhttp/fileserver/staticfiles.go:115:51    - Unknown word (explictness)      -- maximum clarity and explictness, use complete,
-./modules/caddyhttp/fileserver/staticfiles.go:153:2     - Unknown word (precompressors)   -- precompressors map[string]encode
-./modules/caddyhttp/fileserver/staticfiles.go:327:12    - Unknown word (canonicalization) -- // if URL canonicalization is enabled, we need
-./modules/caddyhttp/fileserver/staticfiles.go:437:3     - Unknown word (mtyp)             -- mtyp := mime.TypeByExtension
-./modules/caddyhttp/fileserver/staticfiles.go:502:3     - Unknown word (backoff)          -- backoff := weakrand.Intn(maxBackoff
-./modules/caddyhttp/fileserver/staticfiles.go:502:31    - Unknown word (Backoff)          -- := weakrand.Intn(maxBackoff-minBackoff) + minBackoff
-./modules/caddyhttp/fileserver/staticfiles.go:513:74    - Unknown word (Caza)             -- written by Nathaniel Caza.
-./modules/caddyhttp/fileserver/staticfiles.go:64:34     - Unknown word (canonicalize) -- default, this handler will canonicalize URIs so that requests
-./modules/caddyhttp/fileserver/staticfiles.go:67:4      - Unknown word (Canonicalization) -- // Canonicalization redirects are not issued
+./modules/caddyhttp/fileserver/staticfiles.go:132:51    - Unknown word (explictness)      -- maximum clarity and explictness, use complete,
+./modules/caddyhttp/fileserver/staticfiles.go:170:2     - Unknown word (precompressors)   -- precompressors map[string]encode
+./modules/caddyhttp/fileserver/staticfiles.go:344:12    - Unknown word (canonicalization) -- // if URL canonicalization is enabled, we need
+./modules/caddyhttp/fileserver/staticfiles.go:454:3     - Unknown word (mtyp)             -- mtyp := mime.TypeByExtension
+./modules/caddyhttp/fileserver/staticfiles.go:519:3     - Unknown word (backoff)          -- backoff := weakrand.Intn(maxBackoff
+./modules/caddyhttp/fileserver/staticfiles.go:519:31    - Unknown word (Backoff)          -- := weakrand.Intn(maxBackoff-minBackoff) + minBackoff
+./modules/caddyhttp/fileserver/staticfiles.go:530:74    - Unknown word (Caza)             -- written by Nathaniel Caza.
+./modules/caddyhttp/fileserver/staticfiles.go:64:40     - Unknown word (dirctory)   -- a JSON array of the dirctory listing when the `Accept
+./modules/caddyhttp/fileserver/staticfiles.go:81:34     - Unknown word (canonicalize) -- default, this handler will canonicalize URIs so that requests
+./modules/caddyhttp/fileserver/staticfiles.go:84:4      - Unknown word (Canonicalization) -- // Canonicalization redirects are not issued
 ./modules/caddyhttp/headers/headers.go:187:27    - Unknown word (Superceded) -- they are written out. Superceded if Require is set.
 ./modules/caddyhttp/headers/headers_test.go:216:11    - Unknown word (hdrs)       -- for k, hdrs := range tc.respHeader
 ./modules/caddyhttp/headers/headers_test.go:93:32     - Unknown word (lalala)     -- Header-Suffix": []string{"lalala"},
 ./modules/caddyhttp/headers/headers_test.go:96:32     - Unknown word (foofoofoo)  -- Me": []string{"foofoofoo"},
 ./modules/caddyhttp/httpredirectlistener.go:147:44    - Unknown word (OPTIO)      -- "POST ", "PUT /", "OPTIO":
-./modules/caddyhttp/ip_matchers.go:302:15    - Unknown word (Adresses)   -- // Some IPv6-Adresses can contain zone identifiers
+./modules/caddyhttp/ip_matchers.go:303:15    - Unknown word (Adresses)   -- // Some IPv6-Adresses can contain zone identifiers
 ./modules/caddyhttp/map/caddyfile.go:15:9      - Unknown word (maphandler) -- package maphandler
 ./modules/caddyhttp/map/map_test.go:53:16     - Unknown word (Cxyz)       -- reqURI: "/ABCxyzDEF",
 ./modules/caddyhttp/map/map_test.go:93:24     - Unknown word (testvar)    -- Outputs: []any{"{testvar}"},
 ./modules/caddyhttp/marshalers.go:26:4      - Unknown word (Loggable)   -- // LoggableHTTPRequest makes an
 ./modules/caddyhttp/marshalers.go:84:49     - Unknown word (marshalable) -- makes a slice of strings marshalable for logging.
-./modules/caddyhttp/matchers.go:1246:22   - Unknown word (embedable)  -- / MatchRegexp is an embedable type for matching
-./modules/caddyhttp/matchers.go:136:53    - Unknown word (escapings)  -- including those with bad escapings or illegal characters
-./modules/caddyhttp/matchers.go:595:22    - Unknown word (rawpath)    -- // we can now treat rawpath globs (%*) as regular
-./modules/caddyhttp/matchers.go:800:22    - Unknown word (WHATWG)     -- // Despite the URL WHATWG spec mandating the use
-./modules/caddyhttp/matchers.go:801:56    - Unknown word (Filippo)    -- lementation is different, and Filippo Valsorda rightly wrote
-./modules/caddyhttp/matchers.go:801:64    - Unknown word (Valsorda)   -- different, and Filippo Valsorda rightly wrote:
+./modules/caddyhttp/matchers.go:1247:22   - Unknown word (embedable)  -- / MatchRegexp is an embedable type for matching
+./modules/caddyhttp/matchers.go:137:53    - Unknown word (escapings)  -- including those with bad escapings or illegal characters
+./modules/caddyhttp/matchers.go:596:22    - Unknown word (rawpath)    -- // we can now treat rawpath globs (%*) as regular
+./modules/caddyhttp/matchers.go:801:22    - Unknown word (WHATWG)     -- // Despite the URL WHATWG spec mandating the use
+./modules/caddyhttp/matchers.go:802:56    - Unknown word (Filippo)    -- lementation is different, and Filippo Valsorda rightly wrote
+./modules/caddyhttp/matchers.go:802:64    - Unknown word (Valsorda)   -- different, and Filippo Valsorda rightly wrote:
 ./modules/caddyhttp/matchers_test.go:254:14    - Unknown word (FOOOO)      -- input: "/FOOOO",
 ./modules/caddyhttp/matchers_test.go:289:20    - Unknown word (Fbar)       -- input: "/foo/%2Fbar",
 ./modules/caddyhttp/matchers_test.go:510:60    - Unknown word (myparam)    -- Pattern: "^/foo/(?P<myparam>.*)/baz$", Name: "name
@@ -240,12 +242,12 @@ Lines:
 ./modules/caddyhttp/matchers_test.go:733:17    - Unknown word (someparam)  -- input: "/?someparam",
 ./modules/caddyhttp/matchers_test.go:763:17    - Unknown word (somekey)    -- input: "/?somekey=1",
 ./modules/caddyhttp/matchers_test.go:810:43    - Unknown word (barfoo)     -- Header{"Field": []string{"barfoo", "foobar"}},
-./modules/caddyhttp/metrics.go:128:26    - Unknown word (behaviour)  -- Effectively the same behaviour as promhttp.InstrumentHandler
-./modules/caddyhttp/metrics.go:131:3     - Unknown word (ttfb)       -- ttfb := time.Since(start
-./modules/caddyhttp/metrics.go:135:2     - Unknown word (wrec)       -- wrec := NewResponseRecorder
+./modules/caddyhttp/metrics.go:129:26    - Unknown word (behaviour)  -- Effectively the same behaviour as promhttp.InstrumentHandler
+./modules/caddyhttp/metrics.go:132:3     - Unknown word (ttfb)       -- ttfb := time.Since(start
+./modules/caddyhttp/metrics.go:136:2     - Unknown word (wrec)       -- wrec := NewResponseRecorder
 ./modules/caddyhttp/metrics_test.go:10:50     - Unknown word (testutil)   -- client_golang/prometheus/testutil"
 ./modules/caddyhttp/proxyprotocol/listenerwrapper.go:15:9      - Unknown word (proxyprotocol) -- package proxyprotocol
-./modules/caddyhttp/proxyprotocol/listenerwrapper.go:23:14     - Unknown word (mastercactapus) -- "github.com/mastercactapus/proxyprotocol"
+./modules/caddyhttp/proxyprotocol/listenerwrapper.go:22:14     - Unknown word (mastercactapus) -- "github.com/mastercactapus/proxyprotocol"
 ./modules/caddyhttp/proxyprotocol/module.go:33:44     - Unknown word (Listenerwrapper) -- sets up the listener Listenerwrapper from Caddyfile tokens
 ./modules/caddyhttp/requestbody/caddyfile.go:15:9      - Unknown word (requestbody) -- package requestbody
 ./modules/caddyhttp/responsewriter_test.go:23:6      - Unknown word (barebones)  -- // a barebones http.ResponseWriter
@@ -261,21 +263,21 @@ Lines:
 ./modules/caddyhttp/reverseproxy/fastcgi/client_test.go:55:5      - Unknown word (globalt)    -- var globalt *testing.T
 ./modules/caddyhttp/reverseproxy/fastcgi/client_test.go:87:34     - Unknown word (filekey)    -- Fprintln(resp, "server:filekey ", kn )
 ./modules/caddyhttp/reverseproxy/forwardauth/caddyfile.go:15:9      - Unknown word (forwardauth) -- package forwardauth
-./modules/caddyhttp/reverseproxy/healthchecks.go:114:5     - Unknown word (Canonicalize) -- // Canonicalize the header keys ahead
-./modules/caddyhttp/reverseproxy/healthchecks.go:46:35     - Unknown word (proxied)    -- health checks monitor proxied requests for errors
-./modules/caddyhttp/reverseproxy/healthchecks.go:471:71    - Unknown word (forgetter)    -- health check failure forgetter panicked",
-./modules/caddyhttp/reverseproxy/httptransport.go:211:73    - Unknown word (generelly)  -- and this address is generelly of very
-./modules/caddyhttp/reverseproxy/httptransport.go:292:18    - Unknown word (Alives)     -- rt.DisableKeepAlives = !*h.KeepAlive.Enabled
-./modules/caddyhttp/reverseproxy/httptransport.go:303:37    - Unknown word (keepalives) -- Logger().Warn("disabling keepalives, they are incompatible
-./modules/caddyhttp/reverseproxy/httptransport.go:349:3     - Unknown word (newtransport) -- newtransport := &HTTPTransport{
-./modules/caddyhttp/reverseproxy/reverseproxy.go:1317:56   - Unknown word (libcurl)    -- standard but still sent by libcurl and rejected by e.g
-./modules/caddyhttp/reverseproxy/reverseproxy.go:1321:16   - Unknown word (canonicalized) -- "Te", // canonicalized version of "TE"
-./modules/caddyhttp/reverseproxy/reverseproxy.go:179:22    - Unknown word (roundtrips) -- // after successful roundtrips. The first handler that
-./modules/caddyhttp/reverseproxy/reverseproxy.go:538:5     - Unknown word (succ)       -- if succ, ok := proxyErr.(roundtripSuc
-./modules/caddyhttp/reverseproxy/reverseproxy.go:576:26    - Unknown word (gunicorn)   -- with "slow clients" (gunicorn, etc.) - this obviously
-./modules/caddyhttp/reverseproxy/reverseproxy.go:578:47    - Unknown word (slowloris)  -- more susceptible to slowloris
-./modules/caddyhttp/reverseproxy/reverseproxy.go:619:50    - Unknown word (websockets) -- upgrades, such as for websockets.
-./modules/caddyhttp/reverseproxy/reverseproxy.go:749:31    - Unknown word (backported) -- Forward 1xx status codes, backported from https://github
+./modules/caddyhttp/reverseproxy/healthchecks.go:115:5     - Unknown word (Canonicalize) -- // Canonicalize the header keys ahead
+./modules/caddyhttp/reverseproxy/healthchecks.go:472:71    - Unknown word (forgetter)    -- health check failure forgetter panicked",
+./modules/caddyhttp/reverseproxy/healthchecks.go:47:35     - Unknown word (proxied)    -- health checks monitor proxied requests for errors
+./modules/caddyhttp/reverseproxy/httptransport.go:212:73    - Unknown word (generelly)  -- and this address is generelly of very
+./modules/caddyhttp/reverseproxy/httptransport.go:293:18    - Unknown word (Alives)     -- rt.DisableKeepAlives = !*h.KeepAlive.Enabled
+./modules/caddyhttp/reverseproxy/httptransport.go:304:37    - Unknown word (keepalives) -- Logger().Warn("disabling keepalives, they are incompatible
+./modules/caddyhttp/reverseproxy/httptransport.go:350:3     - Unknown word (newtransport) -- newtransport := &HTTPTransport{
+./modules/caddyhttp/reverseproxy/reverseproxy.go:1318:56   - Unknown word (libcurl)    -- standard but still sent by libcurl and rejected by e.g
+./modules/caddyhttp/reverseproxy/reverseproxy.go:1322:16   - Unknown word (canonicalized) -- "Te", // canonicalized version of "TE"
+./modules/caddyhttp/reverseproxy/reverseproxy.go:180:22    - Unknown word (roundtrips) -- // after successful roundtrips. The first handler that
+./modules/caddyhttp/reverseproxy/reverseproxy.go:540:5     - Unknown word (succ)       -- if succ, ok := proxyErr.(roundtripSuc
+./modules/caddyhttp/reverseproxy/reverseproxy.go:578:26    - Unknown word (gunicorn)   -- with "slow clients" (gunicorn, etc.) - this obviously
+./modules/caddyhttp/reverseproxy/reverseproxy.go:580:47    - Unknown word (slowloris)  -- more susceptible to slowloris
+./modules/caddyhttp/reverseproxy/reverseproxy.go:621:50    - Unknown word (websockets) -- upgrades, such as for websockets.
+./modules/caddyhttp/reverseproxy/reverseproxy.go:751:31    - Unknown word (backported) -- Forward 1xx status codes, backported from https://github
 ./modules/caddyhttp/reverseproxy/selectionpolicies.go:798:65    - Unknown word (hashable)   -- from pool based on a hashable string s.
 ./modules/caddyhttp/reverseproxy/selectionpolicies_test.go:123:45    - Unknown word (availablity) -- select first host on availablity.")
 ./modules/caddyhttp/reverseproxy/streaming.go:127:6     - Unknown word (timeoutc)    -- var timeoutc <-chan time.Time
@@ -284,8 +286,8 @@ Lines:
 ./modules/caddyhttp/reverseproxy/streaming.go:232:8     - Unknown word (werr)        -- nw, werr := dst.Write(buf[:nr
 ./modules/caddyhttp/reverseproxy/streaming.go:329:37    - Unknown word (pascaldekloe) -- connection. Thanks to @pascaldekloe who provided inspiration
 ./modules/caddyhttp/reverseproxy/streaming.go:83:22     - Unknown word (cancelation) -- // Ensure that the cancelation of a request closes
-./modules/caddyhttp/reverseproxy/upstreams.go:112:2     - Unknown word (srvs)       -- srvsMu.RLock()
-./modules/caddyhttp/reverseproxy/upstreams.go:394:4     - Unknown word (failovers)  -- // failovers, especially in conjunction
+./modules/caddyhttp/reverseproxy/upstreams.go:113:2     - Unknown word (srvs)       -- srvsMu.RLock()
+./modules/caddyhttp/reverseproxy/upstreams.go:395:4     - Unknown word (failovers)  -- // failovers, especially in conjunction
 ./modules/caddyhttp/rewrite/caddyfile.go:126:50    - Unknown word (substr)     -- append(rewr.URISubstring, substrReplacer{
 ./modules/caddyhttp/rewrite/caddyfile.go:42:6      - Unknown word (rewr)       -- var rewr Rewrite
 ./modules/caddyhttp/rewrite/rewrite_test.go:311:40    - Unknown word (fsuffix)    -- StripPathSuffix: "%2fsuffix"},
@@ -295,11 +297,11 @@ Lines:
 ./modules/caddyhttp/routes.go:163:9     - Unknown word (midhandler) -- for _, midhandler := range r.Handlers
 ./modules/caddyhttp/routes.go:342:16    - Unknown word (mset)       -- // matchers in mset or if there are no matchers
 ./modules/caddyhttp/routes.go:375:19    - Unknown word (Ifaces)     -- for _, matcherSetIfaces := range matcherSets
-./modules/caddyhttp/server.go:113:21    - Unknown word (unrouted)   -- // By default, all unrouted requests receive a
-./modules/caddyhttp/server.go:72:15     - Unknown word (alives)     -- // when keep-alives are enabled. If zero
+./modules/caddyhttp/server.go:114:21    - Unknown word (unrouted)   -- // By default, all unrouted requests receive a
+./modules/caddyhttp/server.go:73:15     - Unknown word (alives)     -- // when keep-alives are enabled. If zero
 ./modules/caddyhttp/server_test.go:12:14     - Unknown word (stretchr)   -- "github.com/stretchr/testify/assert"
 ./modules/caddyhttp/server_test.go:19:9      - Unknown word (Syncer)     -- type nopSyncer writeFunc
-./modules/caddyhttp/staticresp.go:270:60    - Unknown word (unflagged)  -- fmt.Errorf("too many unflagged arguments")
+./modules/caddyhttp/staticresp.go:272:60    - Unknown word (unflagged)  -- fmt.Errorf("too many unflagged arguments")
 ./modules/caddyhttp/subroute.go:55:22     - Unknown word (subrouting) -- / Provision sets up subrouting.
 ./modules/caddyhttp/templates/templates.go:151:18    - Unknown word (mydir)      -- // {{listFiles "/mydir"}}
 ./modules/caddyhttp/templates/templates.go:157:5     - Unknown word (Goldmark)   -- // [Goldmark](https://github.com
@@ -307,74 +309,74 @@ Lines:
 ./modules/caddyhttp/templates/templates.go:312:4     - Unknown word (Customfunctions) -- // Customfunctions is the interface for
 ./modules/caddyhttp/templates/templates.go:394:14    - Unknown word (etags)           -- // and weak etags still cause browsers
 ./modules/caddyhttp/templates/templates.go:60:15     - Unknown word (cookiename) -- // {{.Cookie "cookiename"}}
-./modules/caddyhttp/templates/tplcontext.go:185:2     - Unknown word (virt)       -- virtReq, err := http.NewRequest
+./modules/caddyhttp/templates/tplcontext.go:186:2     - Unknown word (virt)       -- virtReq, err := http.NewRequest
 ./modules/caddyhttp/templates/tplcontext.go:33:2      - Unknown word (chromahtml) -- chromahtml "github.com/alecthomas
 ./modules/caddyhttp/templates/tplcontext.go:33:25     - Unknown word (alecthomas) -- chromahtml "github.com/alecthomas/chroma/v2/formatters
-./modules/caddyhttp/templates/tplcontext.go:37:14     - Unknown word (yuin)       -- "github.com/yuin/goldmark"
-./modules/caddyhttp/templates/tplcontext.go:37:19     - Unknown word (goldmark)   -- "github.com/yuin/goldmark"
-./modules/caddyhttp/templates/tplcontext.go:41:2      - Unknown word (gmhtml)     -- gmhtml "github.com/yuin/goldmark
-./modules/caddyhttp/templates/tplcontext.go:451:12    - Unknown word (dataerr)    -- dataint, dataerr := strconv.ParseUint
-./modules/caddyhttp/templates/tplcontext.go:451:3     - Unknown word (dataint)    -- dataint, dataerr := strconv
-./modules/caddyhttp/templates/tplcontext.go:458:3     - Unknown word (timelayout) -- timelayout := time.RFC1123Z
-./modules/caddyhttp/templates/tplcontext.go:473:24    - Unknown word (niladic)    -- WrappedHeader wraps niladic functions so that they
+./modules/caddyhttp/templates/tplcontext.go:35:14     - Unknown word (yuin)       -- "github.com/yuin/goldmark"
+./modules/caddyhttp/templates/tplcontext.go:35:19     - Unknown word (goldmark)   -- "github.com/yuin/goldmark"
+./modules/caddyhttp/templates/tplcontext.go:39:2      - Unknown word (gmhtml)     -- gmhtml "github.com/yuin/goldmark
+./modules/caddyhttp/templates/tplcontext.go:452:12    - Unknown word (dataerr)    -- dataint, dataerr := strconv.ParseUint
+./modules/caddyhttp/templates/tplcontext.go:452:3     - Unknown word (dataint)    -- dataint, dataerr := strconv
+./modules/caddyhttp/templates/tplcontext.go:459:3     - Unknown word (timelayout) -- timelayout := time.RFC1123Z
+./modules/caddyhttp/templates/tplcontext.go:474:24    - Unknown word (niladic)    -- WrappedHeader wraps niladic functions so that they
 ./modules/caddyhttp/templates/tplcontext_test.go:488:75    - Unknown word (ctxtest)    -- tplContext.Root), "caddy_ctxtest")
-./modules/caddyhttp/tracing/module.go:29:21     - Unknown word (opentelemetry) -- // otel implements opentelemetry related logic.
-./modules/caddyhttp/tracing/module.go:29:5      - Unknown word (otel)       -- // otel implements opentelemetry
+./modules/caddyhttp/tracing/module.go:30:21     - Unknown word (opentelemetry) -- // otel implements opentelemetry related logic.
+./modules/caddyhttp/tracing/module.go:30:5      - Unknown word (otel)       -- // otel implements opentelemetry
 ./modules/caddyhttp/tracing/module_test.go:105:3     - Unknown word (traceparent) -- traceparent := request.Header.Get
 ./modules/caddyhttp/tracing/module_test.go:105:38    - Unknown word (Traceparent) -- request.Header.Get("Traceparent")
-./modules/caddyhttp/tracing/tracer.go:10:56     - Unknown word (otelhttp)   -- instrumentation/net/http/otelhttp"
-./modules/caddyhttp/tracing/tracer.go:11:43     - Unknown word (autoprop)   -- contrib/propagators/autoprop"
-./modules/caddyhttp/tracing/tracer.go:12:38     - Unknown word (otlp)       -- entelemetry.io/otel/exporters/otlp/otlptrace/otlptracegrpc
-./modules/caddyhttp/tracing/tracer.go:12:43     - Unknown word (otlptrace)  -- otel/exporters/otlp/otlptrace/otlptracegrpc"
-./modules/caddyhttp/tracing/tracer.go:12:53     - Unknown word (otlptracegrpc) -- exporters/otlp/otlptrace/otlptracegrpc"
-./modules/caddyhttp/tracing/tracer.go:15:2      - Unknown word (sdktrace)      -- sdktrace "go.opentelemetry.io
-./modules/caddyhttp/tracing/tracer.go:16:2      - Unknown word (semconv)       -- semconv "go.opentelemetry.io
+./modules/caddyhttp/tracing/tracer.go:10:38     - Unknown word (otlp)       -- entelemetry.io/otel/exporters/otlp/otlptrace/otlptracegrpc
+./modules/caddyhttp/tracing/tracer.go:10:43     - Unknown word (otlptrace)  -- otel/exporters/otlp/otlptrace/otlptracegrpc"
+./modules/caddyhttp/tracing/tracer.go:10:53     - Unknown word (otlptracegrpc) -- exporters/otlp/otlptrace/otlptracegrpc"
+./modules/caddyhttp/tracing/tracer.go:13:2      - Unknown word (sdktrace)      -- sdktrace "go.opentelemetry.io
+./modules/caddyhttp/tracing/tracer.go:14:2      - Unknown word (semconv)       -- semconv "go.opentelemetry.io
+./modules/caddyhttp/tracing/tracer.go:8:56      - Unknown word (otelhttp)   -- instrumentation/net/http/otelhttp"
+./modules/caddyhttp/tracing/tracer.go:9:43      - Unknown word (autoprop)   -- contrib/propagators/autoprop"
 ./modules/caddypki/acmeserver/acmeserver.go:15:9      - Unknown word (acmeserver) -- package acmeserver
-./modules/caddypki/acmeserver/acmeserver.go:248:17    - Unknown word (bbolt)      -- Type: "bbolt",
-./modules/caddypki/acmeserver/acmeserver.go:33:14     - Unknown word (smallstep)  -- "github.com/smallstep/certificates/acme"
-./modules/caddypki/acmeserver/acmeserver.go:35:55     - Unknown word (nosql)      -- certificates/acme/db/nosql"
-./modules/caddypki/ca.go:192:31    - Unknown word (Smallstep)  -- NewAuthority returns a new Smallstep-powered signing authority
-./modules/caddypki/ca.go:32:24     - Unknown word (truststore) -- github.com/smallstep/truststore"
+./modules/caddypki/acmeserver/acmeserver.go:249:17    - Unknown word (bbolt)      -- Type: "bbolt",
+./modules/caddypki/acmeserver/acmeserver.go:30:14     - Unknown word (smallstep)  -- "github.com/smallstep/certificates/acme"
+./modules/caddypki/acmeserver/acmeserver.go:32:55     - Unknown word (nosql)      -- certificates/acme/db/nosql"
+./modules/caddypki/ca.go:193:31    - Unknown word (Smallstep)  -- NewAuthority returns a new Smallstep-powered signing authority
+./modules/caddypki/ca.go:31:24     - Unknown word (truststore) -- github.com/smallstep/truststore"
 ./modules/caddypki/certificates.go:22:21     - Unknown word (keyutil)    -- "go.step.sm/crypto/keyutil"
-./modules/caddypki/pki.go:94:69     - Unknown word (unconfigured) -- installation disabled; unconfigured clients may show warnings
-./modules/caddytls/acmeissuer.go:142:45    - Unknown word (libdns)     -- implemented for the libdns APIs instead.
-./modules/caddytls/acmeissuer.go:260:16    - Unknown word (tlsalpn)    -- // disable_tlsalpn_challenge
-./modules/caddytls/acmeissuer.go:55:27     - Unknown word (mothership) -- not sent to any Caddy mothership or used for any purpose
-./modules/caddytls/automation.go:98:54     - Unknown word (othewise)   -- public certificates; othewise acme and
-./modules/caddytls/certmanagers.go:15:24     - Unknown word (tscert)     -- github.com/tailscale/tscert"
+./modules/caddypki/pki.go:95:69     - Unknown word (unconfigured) -- installation disabled; unconfigured clients may show warnings
+./modules/caddytls/acmeissuer.go:143:45    - Unknown word (libdns)     -- implemented for the libdns APIs instead.
+./modules/caddytls/acmeissuer.go:261:16    - Unknown word (tlsalpn)    -- // disable_tlsalpn_challenge
+./modules/caddytls/acmeissuer.go:56:27     - Unknown word (mothership) -- not sent to any Caddy mothership or used for any purpose
+./modules/caddytls/automation.go:99:54     - Unknown word (othewise)   -- public certificates; othewise acme and
+./modules/caddytls/certmanagers.go:13:24     - Unknown word (tscert)     -- github.com/tailscale/tscert"
 ./modules/caddytls/certselection.go:124:34    - Unknown word (interops)   -- a big.Int type that interops with JSON encodings
-./modules/caddytls/connpolicy.go:174:20    - Unknown word (SSLKEYLOGFILE) -- // Also known as "SSLKEYLOGFILE", TLS secrets will be
-./modules/caddytls/connpolicy.go:176:5     - Unknown word (Wireshark)     -- // Wireshark and other tools. This
-./modules/caddytls/connpolicy.go:281:17    - Unknown word (ACMETLS)       -- if a == acmez.ACMETLS1Protocol {
-./modules/caddytls/connpolicy.go:320:11    - Unknown word (destructable)  -- return destructableWriter{w}, err
-./modules/caddytls/connpolicy.go:401:27    - Unknown word (clientauth)    -- Active returns true if clientauth has an actionable configurati
-./modules/caddytls/connpolicy.go:410:46    - Unknown word (clientauth's)  -- sets up cfg to enforce clientauth's configuration.
-./modules/caddytls/connpolicy.go:569:33    - Unknown word (unmarshalable) -- PublicKeyAlgorithm is a JSON-unmarshalable wrapper type.
+./modules/caddytls/connpolicy.go:175:20    - Unknown word (SSLKEYLOGFILE) -- // Also known as "SSLKEYLOGFILE", TLS secrets will be
+./modules/caddytls/connpolicy.go:177:5     - Unknown word (Wireshark)     -- // Wireshark and other tools. This
+./modules/caddytls/connpolicy.go:282:17    - Unknown word (ACMETLS)       -- if a == acmez.ACMETLS1Protocol {
+./modules/caddytls/connpolicy.go:321:11    - Unknown word (destructable)  -- return destructableWriter{w}, err
+./modules/caddytls/connpolicy.go:402:27    - Unknown word (clientauth)    -- Active returns true if clientauth has an actionable configurati
+./modules/caddytls/connpolicy.go:411:46    - Unknown word (clientauth's)  -- sets up cfg to enforce clientauth's configuration.
+./modules/caddytls/connpolicy.go:570:33    - Unknown word (unmarshalable) -- PublicKeyAlgorithm is a JSON-unmarshalable wrapper type.
+./modules/caddytls/distributedstek/distributedstek.go:100:2     - Unknown word (dstek)           -- dstek, err := s.getSTEK()
 ./modules/caddytls/distributedstek/distributedstek.go:15:12     - Unknown word (distributedstek) -- // Package distributedstek provides TLS session
-./modules/caddytls/distributedstek/distributedstek.go:229:18    - Unknown word (godocs)          -- // again, see godocs for why timer is stopped
-./modules/caddytls/distributedstek/distributedstek.go:45:38     - Unknown word (STEK)            -- implements a distributed STEK provider. This
-./modules/caddytls/distributedstek/distributedstek.go:56:2      - Unknown word (stek)            -- stekConfig *caddytls.SessionTicket
-./modules/caddytls/distributedstek/distributedstek.go:99:2      - Unknown word (dstek)           -- dstek, err := s.getSTEK()
-./modules/caddytls/internalissuer.go:96:4      - Unknown word (confgured)  -- // confgured CA endpoint.
-./modules/caddytls/matchers.go:111:37    - Unknown word (addresss)   -- Error("invalid client IP addresss", zap.String("ip", ipStr
+./modules/caddytls/distributedstek/distributedstek.go:230:18    - Unknown word (godocs)          -- // again, see godocs for why timer is stopped
+./modules/caddytls/distributedstek/distributedstek.go:46:38     - Unknown word (STEK)            -- implements a distributed STEK provider. This
+./modules/caddytls/distributedstek/distributedstek.go:57:2      - Unknown word (stek)            -- stekConfig *caddytls.SessionTicket
+./modules/caddytls/internalissuer.go:97:4      - Unknown word (confgured)  -- // confgured CA endpoint.
+./modules/caddytls/matchers.go:112:37    - Unknown word (addresss)   -- Error("invalid client IP addresss", zap.String("ip", ipStr
 ./modules/caddytls/standardstek/stek.go:15:9      - Unknown word (standardstek) -- package standardstek
 ./modules/caddytls/standardstek/stek.go:49:2      - Unknown word (itvl)         -- itvl := time.Duration(s.stekConfig
-./modules/caddytls/tls.go:224:25    - Unknown word (unmanaged)  -- load manual/static (unmanaged) certificates - we do
-./modules/caddytls/tls.go:244:28    - Unknown word (Unmanaged)  -- hash, err := magic.CacheUnmanagedTLSCertificate(ctx, cert
+./modules/caddytls/tls.go:225:25    - Unknown word (unmanaged)  -- load manual/static (unmanaged) certificates - we do
+./modules/caddytls/tls.go:245:28    - Unknown word (Unmanaged)  -- hash, err := magic.CacheUnmanagedTLSCertificate(ctx, cert
 ./modules/caddytls/values.go:23:24     - Unknown word (cpuid)      -- github.com/klauspost/cpuid/v2"
 ./modules/caddytls/values.go:52:28     - Unknown word (AESNI)      -- defaultCipherSuitesWithAESNI = []uint16{
 ./modules/caddytls/values.go:88:3      - Unknown word (secp)       -- "secp256r1": tls.CurveP25
-./modules/caddytls/zerosslissuer.go:109:82    - Unknown word (compat)     -- preserves backwards-compat, but which black-holes
-./modules/caddytls/zerosslissuer.go:141:3     - Unknown word (EABKID)     -- EABKID string `json:"eab
-./modules/caddytls/zerosslissuer.go:142:3     - Unknown word (EABHMAC)    -- EABHMACKey string `json:"eab
+./modules/caddytls/zerosslissuer.go:110:82    - Unknown word (compat)     -- preserves backwards-compat, but which black-holes
+./modules/caddytls/zerosslissuer.go:142:3     - Unknown word (EABKID)     -- EABKID string `json:"eab
+./modules/caddytls/zerosslissuer.go:143:3     - Unknown word (EABHMAC)    -- EABHMACKey string `json:"eab
 ./modules/filestorage/filestorage.go:15:9      - Unknown word (filestorage) -- package filestorage
-./modules/logging/encoders.go:52:25     - Unknown word (milli)      -- ce.TimeFormat = "wall_milli"
-./modules/logging/filewriter.go:28:12     - Unknown word (natefinch)  -- "gopkg.in/natefinch/lumberjack.v2"
+./modules/logging/encoders.go:53:25     - Unknown word (milli)      -- ce.TimeFormat = "wall_milli"
+./modules/logging/filewriter.go:26:12     - Unknown word (natefinch)  -- "gopkg.in/natefinch/lumberjack.v2"
 ./modules/logging/filters_test.go:131:2     - Unknown word (outval)     -- outval := out.Interface.(caddyhttp
 ./modules/logging/filters_test.go:89:20     - Unknown word (notexist)   -- {replaceAction, "notexist", "REDACTED"},
 ./modules/logging/netwriter.go:94:13     - Unknown word (redialer)   -- reconn := &redialerConn{
 ./modules/logging/netwriter.go:94:2      - Unknown word (reconn)     -- reconn := &redialerConn{
-./modules/metrics/metrics.go:119:14    - Unknown word (quantile)   -- // except quantile/le label values always
+./modules/metrics/metrics.go:118:14    - Unknown word (quantile)   -- // except quantile/le label values always
 ./modules/metrics/metrics_test.go:29:52     - Unknown word (openmetrics) -- tDispenser(`metrics { disable_openmetrics }`)
 ./replacer_test.go:250:14    - Unknown word (NOOO)       -- return "NOOO", false
 ./replacer_test.go:275:26    - Unknown word (äütest)     -- expected: "val1123öö_äütest-123space value1.2.3
