@@ -11,14 +11,12 @@
   "author": "Jason Dent <jason@streetsidesoftware.nl>",
   "homepage": "https://github.com/streetsidesoftware/cspell/tree/main/packages/cspell-service-bus#readme",
   "license": "MIT",
-  "type": "commonjs",
-  "main": "dist/cjs/index.js",
-  "module": "dist/esm/index.mjs",
-  "types": "dist/cjs/index.d.ts",
+  "type": "module",
+  "module": "dist/esm/index.js",
+  "types": "dist/esm/index.d.ts",
   "exports": {
     ".": {
-      "import": "./dist/esm/index.mjs",
-      "require": "./dist/cjs/index.js"
+      "import": "./dist/esm/index.js"
     }
   },
   "files": [
@@ -31,9 +29,9 @@
     "!**/*.map"
   ],
   "scripts": {
-    "build": "tsc -b . && ts2mjs dist/esm",
+    "build": "tsc -b .",
     "build:cjs": "tsc -p tsconfig.cjs.json",
-    "build:esm": "tsc -p tsconfig.esm.json && ts2mjs dist/esm",
+    "build:esm": "tsc -p tsconfig.esm.json",
     "build:clean": "pnpm run clean && pnpm run build",
     "watch": "tsc -b . -w",
     "clean": "shx rm -rf dist temp coverage \"*.tsbuildInfo\"",

@@ -1,7 +1,6 @@
 import rollupPluginNodeResolve from '@rollup/plugin-node-resolve';
 import rollupPluginTypescript from '@rollup/plugin-typescript';
 import rollupPluginJson from '@rollup/plugin-json';
-import rollupPluginCommonjs from '@rollup/plugin-commonjs';
 import { readFileSync } from 'fs';
 
 const pkg = JSON.parse(readFileSync('./package.json', 'utf-8'));
@@ -36,9 +35,6 @@ function getPlugins(tsconfig = 'tsconfig.json') {
             mainFields: ['module', 'exports', 'es', 'es6', 'esm', 'main'],
             extensions: ['.ts', '.js', '.mjs', '.mts', '.node', '.json'],
             preferBuiltins: true,
-        }),
-        rollupPluginCommonjs({
-            transformMixedEsModules: true,
         }),
         rollupPluginJson(),
         // rollupPluginTerser({

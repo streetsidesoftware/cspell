@@ -2,14 +2,11 @@
   "name": "cspell-io",
   "version": "7.0.1",
   "description": "A library of useful I/O functions used across various cspell tools.",
-  "type": "commonjs",
-  "module": "dist/esm/index.mjs",
-  "main": "dist/cjs/index.js",
-  "typings": "dist/cjs/index.d.ts",
+  "type": "module",
+  "module": "dist/esm/index.js",
   "exports": {
     ".": {
-      "import": "./dist/esm/index.mjs",
-      "require": "./dist/cjs/index.js"
+      "import": "./dist/esm/index.js"
     }
   },
   "files": [
@@ -21,7 +18,7 @@
     "!**/*.map"
   ],
   "scripts": {
-    "build": "tsc -b . && ts2mjs dist/esm",
+    "build": "tsc -b .",
     "build:esm": "tsc -p tsconfig.esm.json",
     "build:watch": "tsc -b . -w",
     "watch": "pnpm build:watch",
@@ -49,7 +46,8 @@
   },
   "devDependencies": {
     "@types/node-fetch": "^2.6.4",
-    "lorem-ipsum": "^2.0.8"
+    "lorem-ipsum": "^2.0.8",
+    "typescript": "^5.2.2"
   },
   "dependencies": {
     "@cspell/cspell-service-bus": "workspace:*",

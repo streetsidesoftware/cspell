@@ -4,8 +4,8 @@ import { readFileSync } from 'fs';
 import { join as pathJoin } from 'path';
 import { createSyncFn } from 'synckit';
 
-import type { Issue, SpellCheckSyncFn } from '../worker/types';
-import { normalizeOptions } from './defaultCheckOptions';
+import type { Issue, SpellCheckSyncFn } from '../worker/types.cjs';
+import { normalizeOptions } from './defaultCheckOptions.cjs';
 
 const optionsSchema = JSON.parse(readFileSync(pathJoin(__dirname, '../../assets/options.schema.json'), 'utf8'));
 

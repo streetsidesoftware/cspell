@@ -1,4 +1,4 @@
-import type { Check, Options, RequiredOptions, WorkerOptions } from '../common/options';
+import type { Check, Options, RequiredOptions, WorkerOptions } from '../common/options.cjs';
 
 export const defaultCheckOptions: Required<Check> = {
     checkComments: true,

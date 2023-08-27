@@ -14,7 +14,7 @@ import { gunzipSync, gzipSync } from 'zlib';
 import { arrayBufferViewToBuffer } from '../../common/arrayBuffers.js';
 import { decode } from '../../common/encode-decode.js';
 import { toError } from '../../errors/index.js';
-import type { BufferEncoding } from '../../models/BufferEncoding';
+import type { BufferEncoding } from '../../models/BufferEncoding.ts';
 import { decodeDataUrl } from '../../node/dataUrl.js';
 import { fetchURL } from '../../node/file/fetch.js';
 import { getStatHttp } from '../../node/file/stat.js';

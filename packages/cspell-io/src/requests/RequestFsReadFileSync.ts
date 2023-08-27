@@ -1,7 +1,7 @@
 import type { ServiceRequestFactoryRequestType } from '@cspell/cspell-service-bus';
 import { requestFactory } from '@cspell/cspell-service-bus';
 
-import type { BufferEncoding } from '../models/BufferEncoding';
+import type { BufferEncoding } from '../models/BufferEncoding.js';
 import type { TextFileResource } from '../models/FileResource.js';
 
 const RequestType = 'fs:readFileSync' as const;
