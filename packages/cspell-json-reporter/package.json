@@ -8,20 +8,16 @@
     "url": "https://github.com/streetsidesoftware/cspell/labels/cspell-json-reporter"
   },
   "homepage": "https://github.com/streetsidesoftware/cspell/tree/main/packages/cspell-json-reporter#readme",
-  "type": "commonjs",
-  "main": "dist/cjs/index.js",
-  "types": "dist/cjs/index.d.ts",
-  "module": "dist/esm/index.mjs",
+  "type": "module",
+  "types": "dist/esm/index.d.ts",
+  "module": "dist/esm/index.js",
   "exports": {
     ".": {
-      "import": "./dist/esm/index.mjs",
-      "require": "./dist/cjs/index.js"
+      "import": "./dist/esm/index.js"
     }
   },
   "files": [
     "dist",
-    "!dist/esm/**/*.js",
-    "!dist/esm/**/*.ts",
     "!**/*.tsbuildInfo",
     "!**/__mocks__",
     "!**/test/**",
@@ -38,7 +34,7 @@
   },
   "scripts": {
     "clean": "shx rm -rf dist temp coverage \"*.tsbuildInfo\"",
-    "build": "tsc -b . && ts2mjs dist/esm",
+    "build": "tsc -b .",
     "build:esm": "tsc -p tsconfig.esm.json",
     "clean-build": "pnpm run clean && pnpm run build",
     "coverage": "vitest run --coverage",
