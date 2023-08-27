@@ -2,7 +2,7 @@ import type { CSpellSettings } from '@cspell/cspell-types';
 import assert from 'assert';
 import { describe, test } from 'mocha';
 
-import { defaultOptions, type Options } from './options.js';
+import { defaultOptions, type Options } from './options.cjs';
 
 describe('options', () => {
     test('Options are compatible with cspell-types', () => {

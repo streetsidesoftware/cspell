@@ -7,9 +7,9 @@ import type { Comment, Identifier, ImportSpecifier, Literal, Node, TemplateEleme
 import * as path from 'path';
 import { format } from 'util';
 
-import type { CustomWordListFile, WorkerOptions } from '../common/options.js';
-import type { ASTNode, JSXText, NodeType } from './ASTNode.js';
-import type { Issue, Suggestions } from './types.js';
+import type { CustomWordListFile, WorkerOptions } from '../common/options.cjs';
+import type { ASTNode, JSXText, NodeType } from './ASTNode.cjs';
+import type { Issue, Suggestions } from './types.cjs';
 import { walkTree } from './walkTree.mjs';
 
 const defaultSettings: CSpellSettings = {

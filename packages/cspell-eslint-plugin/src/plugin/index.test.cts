@@ -2,7 +2,7 @@ import { RuleTester } from 'eslint';
 import * as fs from 'fs';
 import * as path from 'path';
 
-import * as Rule from './index';
+import * as Rule from './index.cjs';
 
 const root = path.resolve(__dirname, '../..');
 const fixturesDir = path.join(root, 'fixtures');

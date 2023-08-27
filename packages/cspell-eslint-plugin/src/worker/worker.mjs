@@ -5,8 +5,8 @@
 
 /**
  * @typedef {import('estree').Node} Node
- * @typedef {import('./types.js').Issue} Issue
- * @typedef {import('../common/options.js').WorkerOptions} WorkerOptions
+ * @typedef {import('./types.cjs').Issue} Issue
+ * @typedef {import('../common/options.cjs').WorkerOptions} WorkerOptions
  */
 
 import { runAsWorker } from 'synckit';

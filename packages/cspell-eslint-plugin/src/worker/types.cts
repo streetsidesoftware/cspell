@@ -1,7 +1,7 @@
 import type { Node } from 'estree';
 
-import type { WorkerOptions } from '../common/options.js';
-import type { NodeType } from './ASTNode.js';
+import type { WorkerOptions } from '../common/options.cjs';
+import type { NodeType } from './ASTNode.cjs';
 
 interface ExtendedSuggestion {
     /**
