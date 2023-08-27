@@ -96,6 +96,7 @@ export function commandLint(prog: Command): Command {
         .option('--no-progress', 'Turn off progress messages')
         .option('--no-summary', 'Turn off summary message in console.')
         .option('-s, --silent', 'Silent mode, suppress error messages.')
+        .addOption(new CommanderOption('--quiet', 'An alias of --silent').implies({ silent: true }))
         .option('--fail-fast', 'Exit after first file with an issue or error.')
         .addOption(new CommanderOption('--no-fail-fast', 'Process all files even if there is an error.').hideHelp())
         .option('-r, --root <root folder>', 'Root directory, defaults to current directory.')
