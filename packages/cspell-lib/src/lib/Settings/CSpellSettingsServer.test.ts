@@ -2,7 +2,7 @@ import type { CSpellUserSettings } from '@cspell/cspell-types';
 import * as path from 'path';
 import { describe, expect, test } from 'vitest';
 
-import { pathPackageRoot, pathPackageSamples } from '../../test-util/test.locations.js';
+import { pathPackageRoot, pathPackageSamples } from '../../test-util/test.locations.cjs';
 import { createCSpellSettingsInternal as csi } from '../Models/CSpellSettingsInternalDef.js';
 import {
     __testing__ as __configLoader_testing__,

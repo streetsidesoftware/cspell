@@ -12,8 +12,6 @@
   },
   "files": [
     "dist",
-    "!dist/esm/**/*.js",
-    "!dist/esm/**/*.ts",
     "!**/*.tsbuildInfo",
     "!**/__mocks__",
     "!**/test*/**",
@@ -25,10 +23,9 @@
   "scripts": {
     "clean": "shx rm -rf dist temp coverage \"*.tsbuildInfo\"",
     "clean-build": "pnpm clean && pnpm build",
-    "build": "tsc -b . && ts2mjs dist/esm && pnpm run build:api",
+    "build": "tsc -b . && pnpm run build:api",
     "build:api": "rollup -c api/rollup.config.mjs",
     "build:esm": "tsc -b tsconfig.esm.json",
-    "build:esm:ts2mjs": "tsc -b tsconfig.esm.json && ts2mjs dist/esm",
     "build:lib": "tsc -b src/lib/tsconfig.json",
     "coverage": "vitest run --coverage",
     "test-watch": "vitest",

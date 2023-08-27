@@ -3,8 +3,8 @@ import * as Path from 'path';
 import { posix } from 'path';
 import { describe, expect, test } from 'vitest';
 
-import { pathPackageSamples, pathRepoTestFixtures } from '../test-util/index.js';
-import { extendExpect } from '../test-util/test.matchers.js';
+import { pathPackageSamples, pathRepoTestFixtures } from '../test-util/index.mjs';
+import { extendExpect } from '../test-util/test.matchers.mjs';
 import type { Document } from './Document/index.js';
 import { fileToDocument, fileToTextDocument } from './Document/resolveDocument.js';
 import type { CSpellSettingsInternal } from './Models/CSpellSettingsInternalDef.js';

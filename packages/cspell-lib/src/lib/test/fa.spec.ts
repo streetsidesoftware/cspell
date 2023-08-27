@@ -2,7 +2,7 @@ import * as fs from 'fs';
 import * as path from 'path';
 import { describe, expect, test } from 'vitest';
 
-import { pathPackageSamples } from '../../test-util/test.locations.js';
+import { pathPackageSamples } from '../../test-util/test.locations.cjs';
 import * as cspell from '../index.js';
 import * as util from '../util/util.js';
 

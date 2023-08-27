@@ -1,5 +1,5 @@
 /// <reference types="node" />
-import { Glob, CSpellSettingsWithSourceTrace, TextOffset, TextDocumentOffset, PnPSettings, AdvancedCSpellSettingsWithSourceTrace, Parser, DictionaryDefinitionInline, DictionaryDefinitionPreferred, DictionaryDefinitionAugmented, DictionaryDefinitionCustom, ImportFileRef, CSpellUserSettings, Issue, LocaleId, CSpellSettings, MappedText, ParsedText } from '@cspell/cspell-types';
+import { Glob, CSpellSettingsWithSourceTrace, TextOffset, TextDocumentOffset, AdvancedCSpellSettingsWithSourceTrace, Parser, DictionaryDefinitionInline, DictionaryDefinitionPreferred, DictionaryDefinitionAugmented, DictionaryDefinitionCustom, PnPSettings, ImportFileRef, CSpellUserSettings, Issue, LocaleId, CSpellSettings, MappedText, ParsedText } from '@cspell/cspell-types';
 export * from '@cspell/cspell-types';
 import { WeightMap } from 'cspell-trie-lib';
 export { CompoundWordsMethod } from 'cspell-trie-lib';
@@ -90,7 +90,7 @@ interface ResolveSettingsResult {
     settings: CSpellSettingsWithSourceTrace;
 }
 
-//# sourceMappingURL=index.link.d.mts.map
+//# sourceMappingURL=index.link.d.ts.map
 
 type index_link_d_AddPathsToGlobalImportsResults = AddPathsToGlobalImportsResults;
 type index_link_d_ListGlobalImportsResult = ListGlobalImportsResult;
@@ -366,13 +366,6 @@ declare function getLanguagesForBasename(basename: string): string[];
 declare const currentSettingsFileVersion = "0.2";
 declare const ENV_CSPELL_GLOB_ROOT = "CSPELL_GLOB_ROOT";
 
-declare class ImportError extends Error {
-    readonly cause: Error | undefined;
-    constructor(msg: string, cause?: Error | unknown);
-}
-
-type LoaderResult = Uri | undefined;
-
 /**
  * The keys of an object where the values cannot be undefined.
  */
@@ -385,8 +378,6 @@ type OptionalKeys<T> = Exclude<{
 type OptionalOrUndefined<T> = {
     [P in keyof T]: P extends OptionalKeys<T> ? T[P] | undefined : T[P];
 };
-
-type PnPSettingsOptional = OptionalOrUndefined<PnPSettings>;
 
 declare const SymbolCSpellSettingsInternal: unique symbol;
 interface CSpellSettingsInternal extends Omit<AdvancedCSpellSettingsWithSourceTrace, 'dictionaryDefinitions'> {
@@ -413,6 +404,15 @@ interface DictionaryFileDefinitionInternal extends Readonly<DictionaryDefinition
     /** The path to the config file that contains this dictionary definition */
     readonly __source?: string | undefined;
 }
+
+declare class ImportError extends Error {
+    readonly cause: Error | undefined;
+    constructor(msg: string, cause?: Error | unknown);
+}
+
+type LoaderResult = Uri | undefined;
+
+type PnPSettingsOptional = OptionalOrUndefined<PnPSettings>;
 
 type CSpellSettingsWST$1 = CSpellSettingsWithSourceTrace;
 type CSpellSettingsI$1 = CSpellSettingsInternal;

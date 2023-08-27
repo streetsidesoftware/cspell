@@ -1,7 +1,7 @@
 import * as path from 'path';
 import { describe, expect, test, vi } from 'vitest';
 
-import { pathPackageRoot, pathPackageSamples } from '../../test-util/test.locations.js';
+import { pathPackageRoot, pathPackageSamples } from '../../test-util/test.locations.cjs';
 import type {
     DictionaryDefinitionInternal,
     DictionaryFileDefinitionInternal,
