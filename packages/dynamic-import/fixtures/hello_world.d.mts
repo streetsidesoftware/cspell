@@ -1,1 +1,1 @@
-export function sayHello(name: string): void;
+export { sayHello } from './hello_world.d.ts';

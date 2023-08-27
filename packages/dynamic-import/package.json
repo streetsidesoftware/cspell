@@ -15,13 +15,13 @@
   "author": "Jason Dent <jason@streetsidesoftware.nl>",
   "homepage": "https://github.com/streetsidesoftware/cspell/tree/main/packages/dynamic-import#readme",
   "license": "MIT",
-  "type": "commonjs",
-  "main": "./dist/cjs/index.js",
+  "type": "module",
+  "main": "./dist/cjs/index.cjs",
   "module": "./dist/esm/index.mjs",
-  "types": "./dist/cjs/index.d.ts",
+  "types": "./dist/cjs/index.d.cts",
   "exports": {
     ".": {
-      "require": "./dist/cjs/index.js",
+      "require": "./dist/cjs/index.cjs",
       "import": "./dist/esm/index.mjs"
     }
   },
