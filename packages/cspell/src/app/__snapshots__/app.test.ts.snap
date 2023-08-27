@@ -819,6 +819,29 @@ café - softwareTerms*         node_modules/@cspell/.../dict/softwareTerms.txt
 café - workspace*             ../../cspell-dict.txt"
 `;
 
+exports[`Validate cli > app 'trace flavour' Expect Error: undefined 1`] = `[]`;
+
+exports[`Validate cli > app 'trace flavour' Expect Error: undefined 2`] = `
+"Word    F Dictionary             Dictionary Location
+flavour - [flagWords]*           From Settings \`flagWords\`
+flavour - [ignoreWords]*         From Settings \`ignoreWords\`
+flavour - [suggestWords]*        From Settings \`suggestWords\`
+flavour - [words]*               From Settings \`words\`
+flavour - aws*                   node_modules/@cspell/dict-aws/dict/aws.txt
+flavour - companies*             node_modules/@cspell/.../dict/companies.txt
+flavour - computing-acronyms*    node_modules/.../dict/computing-acronyms.txt
+flavour * cpp                    node_modules/@cspell/dict-cpp/dict/cpp.txt
+flavour * cpp-legacy             node_modules/@cspell/.../dict/cpp-legacy.txt
+flavour - cryptocurrencies*      node_modules/.../cryptocurrencies.txt.gz
+flavour * en_us*                 node_modules/@cspell/dict-en_us/en_US.trie.gz
+flavour - en-common-misspelling* node_modules/@cspell/.../dict-en.yaml
+flavour * en-gb                  node_modules/@cspell/dict-en-gb/en_GB.trie.gz
+flavour - filetypes*             node_modules/@cspell/.../filetypes.txt.gz
+flavour ! forbidden-words*       samples/forbidden-words.txt
+flavour - public-licenses*       node_modules/@cspell/.../public-licenses.txt.gz
+flavour - softwareTerms*         node_modules/@cspell/.../dict/softwareTerms.txt"
+`;
+
 exports[`Validate cli > app 'trace hello' Expect Error: undefined 1`] = `[]`;
 
 exports[`Validate cli > app 'trace hello' Expect Error: undefined 2`] = `
@@ -1024,10 +1047,9 @@ exports[`Validate cli > app 'with forbidden words' Expect Error: [Function Check
 
 exports[`Validate cli > app 'with forbidden words' Expect Error: [Function CheckFailed] 2`] = `
 "error	 0.00ms X
-log	./samples/src/sample-with-forbidden-words.md:3:3 - Forbidden word (behaviour)
-log	./samples/src/sample-with-forbidden-words.md:4:3 - Forbidden word (flavour)
-log	./samples/src/sample-with-forbidden-words.md:5:3 - Forbidden word (colour)
-error	CSpell: Files checked: 1, Issues found: 3 in 1 files"
+log	./samples/src/sample-with-forbidden-words.md:3:3 - Unknown word (behaviour)
+log	./samples/src/sample-with-forbidden-words.md:5:3 - Unknown word (colour)
+error	CSpell: Files checked: 1, Issues found: 2 in 1 files"
 `;
 
 exports[`Validate cli > app 'with forbidden words' Expect Error: [Function CheckFailed] 3`] = `
