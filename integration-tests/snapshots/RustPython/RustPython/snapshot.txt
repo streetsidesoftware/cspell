@@ -3,7 +3,7 @@ Repository: RustPython/RustPython
 Url: "https://github.com/RustPython/RustPython.git"
 Args: ["**"]
 Lines:
- CSpell: Files checked: 596, Issues found: 2694 in 305 files
+ CSpell: Files checked: 596, Issues found: 2695 in 305 files
  exit code: 1
 ./Cargo.toml:111:82    - Unknown word (termcolor)  -- features = ["atty", "termcolor"] }
 ./Cargo.toml:154:62    - Unknown word (redoxer)    -- to compile/check with redoxer
@@ -378,10 +378,10 @@ Lines:
 ./scripts/install-openssl.ps1:3:1       - Unknown word (vcpkg)      -- vcpkg integrate install
 ./scripts/redox/recipe.sh:3:1       - Unknown word (CARGOFLAGS) -- CARGOFLAGS=--no-default-features
 ./scripts/redox/recipe.sh:4:8       - Unknown word (BUILDTIME)  -- export BUILDTIME_RUSTPYTHONPATH=/lib
-./src/lib.rs:114:13    - Unknown word (getpip)     -- let get_getpip = rustpython_vm::py
+./src/lib.rs:122:13    - Unknown word (getpip)     -- let get_getpip = rustpython_vm::py
 ./src/lib.rs:12:35     - Unknown word (mymod)      -- vm.add_native_module("mymod".to_owned(), Box::new
 ./src/lib.rs:13:81     - Unknown word (otherthing) -- pass", module_name = "otherthing"));
-./src/lib.rs:213:9     - Unknown word (Speedscope) -- Speedscope,
+./src/lib.rs:221:9     - Unknown word (Speedscope) -- Speedscope,
 ./src/settings.rs:130:46    - Unknown word (pycs)       -- name("check-hash-based-pycs")
 ./src/settings.rs:147:66    - Unknown word (PYTHONUNBUFFERED) -- effect on stdin; also PYTHONUNBUFFERED=x",
 ./src/settings.rs:216:49    - Unknown word (PYTHONNOUSERSITE) -- environment && env::var_os("PYTHONNOUSERSITE").is_some())
@@ -546,8 +546,8 @@ Lines:
 ./stdlib/src/socket.rs:940:88    - Unknown word (scopeid)          -- host, port[, flowinfo[, scopeid]])"
 ./stdlib/src/socket.rs:94:78     - Unknown word (ISOTP)            -- FLAG, CAN_ERR_MASK, CAN_ISOTP, CAN_J1939,
 ./stdlib/src/socket.rs:987:67    - Unknown word (errorfds)         -- SelectKind::Connect fills the errorfds fd_set, so if we wake
-./stdlib/src/ssl.rs:1345:63   - Unknown word (cacerts)    -- system/etc/security/cacerts";
-./stdlib/src/ssl.rs:1454:51   - Unknown word (PCCERT)     -- as_ptr() as wincrypt::PCCERT_CONTEXT;
+./stdlib/src/ssl.rs:1359:63   - Unknown word (cacerts)    -- system/etc/security/cacerts";
+./stdlib/src/ssl.rs:1468:51   - Unknown word (PCCERT)     -- as_ptr() as wincrypt::PCCERT_CONTEXT;
 ./stdlib/src/ssl.rs:222:22    - Unknown word (SSLEOF)     -- #[pyattr(name = "SSLEOFError", once)]
 ./stdlib/src/ssl.rs:461:43    - Unknown word (SSLV)       -- options |= SslOptions::NO_SSLV2;
 ./stdlib/src/ssl.rs:521:31    - Unknown word (cipherlist) -- fn set_ciphers(&self, cipherlist: PyStrRef, vm: &VirtualMachin
@@ -615,10 +615,10 @@ Lines:
 ./vm/src/builtins/descriptor.rs:231:33    - Unknown word (objclass)       -- "<descriptor>.__objclass__.__qualname__ is not
 ./vm/src/builtins/descriptor.rs:29:20     - Unknown word (vectorcallfunc) -- // vectorcall: vectorcallfunc,
 ./vm/src/builtins/descriptor.rs:29:8      - Unknown word (vectorcall) -- // vectorcall: vectorcallfunc,
-./vm/src/builtins/dict.rs:1018:10   - Unknown word (reverseitemiterator) -- dict_reverseitemiterator_type,
+./vm/src/builtins/dict.rs:1019:10   - Unknown word (reverseitemiterator) -- dict_reverseitemiterator_type,
 ./vm/src/builtins/dict.rs:14:5      - Unknown word (dictdatatype) -- dictdatatype::{self, DictKey},
 ./vm/src/builtins/dict.rs:335:13    - Unknown word (dicted)       -- let dicted: Result<PyDictRef,
-./vm/src/builtins/dict.rs:992:10    - Unknown word (reversekeyiterator) -- dict_reversekeyiterator_type,
+./vm/src/builtins/dict.rs:993:10    - Unknown word (reversekeyiterator) -- dict_reversekeyiterator_type,
 ./vm/src/builtins/frame.rs:57:10     - Unknown word (lasti)      -- fn f_lasti(&self) -> u32 {
 ./vm/src/builtins/function.rs:131:13    - Unknown word (argpos)     -- let argpos = |range: std::ops:
 ./vm/src/builtins/function.rs:141:17    - Unknown word (posonly)    -- let mut posonly_passed_as_kwarg = Vec
@@ -688,7 +688,7 @@ Lines:
 ./vm/src/function/method.rs:17:17     - Unknown word (NOARGS)     -- // METH_NOARGS and METH_O must not
 ./vm/src/function/method.rs:36:38     - Unknown word (Stackless)  -- bit is preserved for Stackless Python
 ./vm/src/function/method.rs:37:18     - Unknown word (STACKLESS)  -- // const STACKLESS = 0x0100;
-./vm/src/function/protocol.rs:77:5      - Unknown word (iterfn)     -- iterfn: Option<crate::types
+./vm/src/function/protocol.rs:79:5      - Unknown word (iterfn)     -- iterfn: Option<crate::types
 ./vm/src/import.rs:87:25     - Unknown word (codeobj)    -- let module = import_codeobj(vm, module_name, frozen
 ./vm/src/object/core.rs:1253:35   - Unknown word (dfghjkl)    -- obj = ctx.new_bytes(b"dfghjkl".to_vec());
 ./vm/src/object/core.rs:169:51    - Unknown word (weakrefs)   -- have never been any weakrefs in this list
@@ -784,7 +784,7 @@ Lines:
 ./vm/src/stdlib/io.rs:919:21    - Unknown word (memobj)        -- let memobj = PyMemoryView::from
 ./vm/src/stdlib/io.rs:925:21    - Unknown word (writebuf)      -- let writebuf = VecBuffer::from(v
 ./vm/src/stdlib/itertools.rs:1226:12   - Unknown word (teedata)    -- // teedata a python class
-./vm/src/stdlib/itertools.rs:1804:21   - Unknown word (numactive)  -- let mut numactive = zelf.iterators.len
+./vm/src/stdlib/itertools.rs:1812:21   - Unknown word (numactive)  -- let mut numactive = zelf.iterators.len
 ./vm/src/stdlib/itertools.rs:86:59     - Unknown word (leat)       -- from("function takes at leat 1 arguments (0 given
 ./vm/src/stdlib/marshal.rs:52:21     - Unknown word (pycomplex)  -- ref pycomplex @ PyComplex => {
 ./vm/src/stdlib/marshal.rs:65:21     - Unknown word (pyfrozen)   -- ref pyfrozen @ PyFrozenSet => {
@@ -917,7 +917,7 @@ Lines:
 ./vm/src/types/slot.rs:137:28    - Unknown word (TPFLAGS)    -- CPython default: Py_TPFLAGS_HAVE_STACKLESS_EXTENSION
 ./vm/src/types/slot.rs:141:43    - Unknown word (Subclassable) -- types created in Python. Subclassable and are a
 ./vm/src/types/slot.rs:379:29    - Unknown word (subslot)      -- macro_rules! toggle_subslot {
-./vm/src/vm/mod.rs:564:29    - Unknown word (pyiter)     -- return self.map_pyiter(value, func);
+./vm/src/vm/mod.rs:571:29    - Unknown word (pyiter)     -- return self.map_pyiter(value, func);
 ./vm/src/vm/setting.rs:43:10     - Unknown word (Xfoo)       -- /// -Xfoo[=bar]
 ./vm/src/vm/setting.rs:58:10     - Unknown word (Wfoo)       -- /// -Wfoo
 ./vm/src/vm/thread.rs:38:24     - Unknown word (intp)       -- let vm_owns_obj = |intp: NonNull<VirtualMachine
