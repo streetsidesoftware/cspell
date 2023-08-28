@@ -1,7 +1,7 @@
 import * as path from 'path';
 import { fileURLToPath, pathToFileURL } from 'url';
 
-import { dynamicImport } from '../cjs/index.cjs';
+import { dynamicImport } from '../cjs/index.js';
 
 const fixtures = pathToFileURL('./fixtures/');
 
