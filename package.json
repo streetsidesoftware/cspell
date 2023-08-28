@@ -19,7 +19,7 @@
     "build:readme:packages": "pnpm -r build:readme",
     "build:readme:root": "inject-markdown README.md \"packages/*/README.md\" && prettier -w README.md \"packages/*/README.md\"",
     "check-spelling": "npx cspell -c cspell.test.all.json",
-    "clean-build": "pnpm run clean && pnpm -r run build",
+    "clean-build": "pnpm run clean && pnpm -r --stream --workspace-concurrency=2 run build",
     "clean-dist": "shx rm -rf \"packages/*/dist\"",
     "clean": "shx rm -rf \"{*,*/*}/{*.tsbuildinfo,*.tsbuildInfo,temp,coverage}\" \"**/dist/**/*.tsbuildInfo\" lcov.info && pnpm -r run clean",
     "coverage-collect": "globcat packages/*/coverage/lcov.info > lcov.info",
@@ -121,7 +121,7 @@
     "ts-jest": "^29.1.1",
     "ts2mjs": "^1.1.2",
     "tslib": "^2.6.2",
-    "typescript": "~5.1.6",
+    "typescript": "^5.2.2",
     "vite": "^4.4.9",
     "vitest": "^0.34.3"
   }

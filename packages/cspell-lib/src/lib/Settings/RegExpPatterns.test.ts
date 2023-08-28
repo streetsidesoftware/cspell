@@ -3,7 +3,7 @@ import fs from 'fs';
 import Path from 'path';
 import { describe, expect, test } from 'vitest';
 
-import { pathPackageSamples } from '../../test-util/test.locations.js';
+import { pathPackageSamples } from '../../test-util/test.locations.cjs';
 import { calculateTextDocumentOffsets } from '../util/text.js';
 import * as TextRange from '../util/TextRange.js';
 import * as RegPat from './RegExpPatterns.js';

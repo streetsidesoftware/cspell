@@ -7,7 +7,7 @@ import {
     pathPackageSamples,
     pathRepoRoot,
     pathRepoTestFixtures,
-} from '../../../../test-util/test.locations.js';
+} from '../../../../test-util/test.locations.cjs';
 import { logError, logWarning } from '../../../util/logger.js';
 import * as URI from '../../../util/Uri.js';
 import { currentSettingsFileVersion, ENV_CSPELL_GLOB_ROOT } from '../../constants.js';

@@ -37,7 +37,8 @@
   ],
   "scripts": {
     "build": "tsc -b .",
-    "build:clean": "shx rm -rf dist coverage && pnpm build",
+    "build:clean": "pnpm clean && pnpm build",
+    "clean": "shx rm -rf dist coverage",
     "clean-build": "pnpm build:clean",
     "coverage": "vitest run --coverage",
     "test-watch": "vitest",

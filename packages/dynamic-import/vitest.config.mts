@@ -12,7 +12,7 @@ export default mergeConfig(
             root: __dirname,
             coverage: {
                 all: false,
-                exclude: ['fixtures', 'test', 'test.cjs.mts'],
+                exclude: ['fixtures', 'src/test/**'],
             },
             testTimeout: 10000,
         },

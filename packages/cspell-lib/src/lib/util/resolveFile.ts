@@ -1,8 +1,12 @@
 import { resolveGlobal } from '@cspell/cspell-resolver';
+import { importResolveModuleName } from '@cspell/dynamic-import';
 import * as fs from 'fs';
 import * as os from 'os';
 import * as path from 'path';
 import resolveFrom from 'resolve-from';
+import { fileURLToPath } from 'url';
+
+import { srcDirectory } from '../../lib-cjs/pkg-info.cjs';
 
 export interface ResolveFileResult {
     filename: string;
@@ -19,10 +23,12 @@ const testNodeModules = /^node_modules\//;
  * @param relativeTo absolute path
  */
 export function resolveFile(filename: string, relativeTo: string): ResolveFileResult {
+    filename.startsWith('@cspell/cspell-json') && console.warn('%o', { filename, relativeTo });
     filename = filename.replace(/^~/, os.homedir());
     const steps: { filename: string; fn: (f: string, r: string) => ResolveFileResult }[] = [
         { filename, fn: tryUrl },
         { filename, fn: tryNodeResolve },
+        { filename, fn: tryImportResolve },
         { filename: path.resolve(relativeTo, filename), fn: tryResolveExists },
         { filename: path.resolve(filename), fn: tryResolveExists },
         { filename, fn: tryNodeResolveDefaultPaths },
@@ -88,6 +94,16 @@ function tryNodeResolve(filename: string, relativeTo: string): ResolveFileResult
     try {
         const r = require.resolve(filename, { paths });
         return { filename: r, relativeTo, found: true };
+    } catch (_) {
+        return { filename, relativeTo, found: false };
+    }
+}
+
+function tryImportResolve(filename: string, relativeTo: string): ResolveFileResult {
+    try {
+        const paths = filename.startsWith('.') ? [relativeTo] : [relativeTo, srcDirectory];
+        const resolved = fileURLToPath(importResolveModuleName(filename, paths));
+        return { filename: resolved, relativeTo, found: true };
     } catch (_) {
         return { filename, relativeTo, found: false };
     }

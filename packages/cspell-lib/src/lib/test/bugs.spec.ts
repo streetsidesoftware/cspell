@@ -2,7 +2,7 @@ import * as fsp from 'fs/promises';
 import * as path from 'path';
 import { describe, expect, test } from 'vitest';
 
-import { pathPackageSamples } from '../../test-util/test.locations.js';
+import { pathPackageSamples } from '../../test-util/test.locations.cjs';
 import * as cspell from '../index.js';
 
 const samples = path.join(pathPackageSamples, 'bug-fixes');

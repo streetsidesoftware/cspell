@@ -1,13 +1,13 @@
 import * as path from 'node:path';
-import { fileURLToPath, pathToFileURL } from 'node:url';
+import { pathToFileURL } from 'node:url';
 
 import { describe, expect, test } from 'vitest';
 
-import type * as helloWorld from '../../fixtures/hello_world.mjs';
-import { callDynamicImport as dynamicImport, test as testHello } from './test.cjs.mjs';
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore
+import type * as helloWorld from '../../fixtures/hello_world.js';
+import { callDynamicImport as dynamicImport, test as testHello } from './helper.js';
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
 const __root = path.join(__dirname, '../..');
 const __fixtures = path.join(__root, 'fixtures');
 

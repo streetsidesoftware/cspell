@@ -5,7 +5,7 @@ import * as path from 'path';
 import { pathToFileURL } from 'url';
 import { describe, expect, test } from 'vitest';
 
-import { pathPackageFixtures, pathPackageRoot } from '../../test-util/test.locations.js';
+import { pathPackageFixtures, pathPackageRoot } from '../../test-util/test.locations.cjs';
 import type { TextDocument } from '../Models/TextDocument.js';
 import { createTextDocument } from '../Models/TextDocument.js';
 import type { ValidationIssue } from '../Models/ValidationIssue.js';

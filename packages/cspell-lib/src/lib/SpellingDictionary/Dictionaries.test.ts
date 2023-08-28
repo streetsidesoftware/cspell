@@ -3,7 +3,7 @@ import * as fs from 'fs/promises';
 import * as path from 'path';
 import { describe, expect, test } from 'vitest';
 
-import { pathPackageRoot } from '../../test-util/test.locations.js';
+import { pathPackageRoot } from '../../test-util/test.locations.cjs';
 import { createCSpellSettingsInternal as csi } from '../Models/CSpellSettingsInternalDef.js';
 import { createDictionaryReferenceCollection } from '../Settings/DictionaryReferenceCollection.js';
 import { filterDictDefsToLoad, mapDictDefToInternal } from '../Settings/DictionarySettings.js';

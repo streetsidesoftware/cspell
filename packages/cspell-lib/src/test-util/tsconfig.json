@@ -1,11 +1,9 @@
 {
-    "extends": "../../../../tsconfig.cjs.json",
+    "extends": "../../../../tsconfig.esm.json",
     "compilerOptions": {
         "allowJs": false,
         "composite": true,
         "tsBuildInfoFile": "../../temp/compile.test.tsbuildInfo",
-        "module": "CommonJS",
-        "moduleResolution": "node16",
         "rootDir": ".",
         "outDir": "../../dist/test",
         "types": ["node"]

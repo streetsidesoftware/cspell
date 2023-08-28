@@ -1,7 +1,7 @@
 import { describe, expect, test } from 'vitest';
 import { URI } from 'vscode-uri';
 
-import { extendExpect } from '../../test-util/test.matchers.js';
+import { extendExpect } from '../../test-util/test.matchers.mjs';
 import type { Uri } from './Uri.js';
 import {
     from,

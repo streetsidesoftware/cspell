@@ -2,7 +2,7 @@ import path from 'path';
 import resolveFrom from 'resolve-from';
 import { describe, expect, test } from 'vitest';
 
-import { pathPackageSamples, pathRepoRoot } from '../../../test-util/test.locations.js';
+import { pathPackageSamples, pathRepoRoot } from '../../../test-util/test.locations.cjs';
 import * as Uri from '../../util/Uri.js';
 import { UnsupportedPnpFile } from './ImportError.js';
 import { clearPnPGlobalCache, pnpLoader } from './pnpLoader.js';

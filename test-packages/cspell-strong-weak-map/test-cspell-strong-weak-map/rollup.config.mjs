@@ -27,7 +27,7 @@ const common = {
 /**
  * Get new instances of all the common plugins.
  */
-function getPlugins(tsconfig = 'tsconfig.esm.json') {
+function getPlugins(tsconfig = 'tsconfig.json') {
     return [
         rollupPluginTypescript({
             tsconfig,

@@ -6,16 +6,16 @@
   "version": "7.1.1",
   "description": "Types for cspell and cspell-lib",
   "type": "commonjs",
-  "main": "./dist/cjs/index.js",
-  "module": "./dist/esm/index.mjs",
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
   "exports": {
     ".": {
-      "import": "./dist/esm/index.mjs",
-      "require": "./dist/cjs/index.js"
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.js"
     },
     "./Parser": {
-      "import": "./dist/esm/Parser/index.mjs",
-      "require": "./dist/cjs/Parser/index.js"
+      "import": "./dist/Parser/index.mjs",
+      "require": "./dist/Parser/index.js"
     },
     "./cspell.schema.json": {
       "import": "./cspell.schema.json",
@@ -28,28 +28,31 @@
   "types": "index.d.ts",
   "typesVersions": {
     "*": {
+      "*.d.ts": [
+        "dist/*.d.ts"
+      ],
       "*.d.mts": [
-        "dist/esm/*.d.mts"
+        "dist/*.d.mts"
       ],
       "index.d.ts": [
-        "dist/cjs/index.d.ts"
+        "dist/index.d.ts"
       ],
-      "dist/esm/index.d.ts": [
-        "dist/esm/index.d.ts"
+      "dist/index.d.ts": [
+        "dist/index.d.ts"
       ],
       "Parser": [
-        "dist/cjs/Parser/index.d.ts"
+        "dist/Parser/index.d.ts"
       ],
       "*": [
-        "dist/cjs/*.d.ts",
-        "dist/cjs/*/index.d.ts"
+        "dist/*.d.ts",
+        "dist/*/index.d.ts"
       ]
     }
   },
   "scripts": {
     "clean": "shx rm -rf dist temp coverage \"*.tsbuildInfo\"",
     "build": "pnpm build:tsc && pnpm run build-schema",
-    "build:tsc": "tsc -b tsconfig.json && ts2mjs  dist/esm",
+    "build:tsc": "tsc -b tsconfig.json",
     "build-schema": "ts-json-schema-generator --no-top-ref --path src/CSpellSettingsDef.ts --type CSpellSettings --validation-keywords markdownDescription  --validation-keywords scope --validation-keywords deprecated --validation-keywords deprecationMessage -o  ./cspell.schema.json && shx cp ./cspell.schema.json ../..",
     "clean-build": "pnpm run clean && pnpm run build",
     "coverage": "vitest run --coverage",
