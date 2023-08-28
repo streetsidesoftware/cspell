@@ -1,3 +1,4 @@
+import { resolve } from 'import-meta-resolve';
 import { sep as pathSep } from 'path';
 import { pathToFileURL } from 'url';
 
@@ -14,45 +15,53 @@ export async function dynamicImportFrom<Module>(
     paths: string | URL | (string | URL)[] | undefined,
 ): Promise<Module> {
     paths = Array.isArray(paths) ? paths : paths ? [paths] : undefined;
-    const modulesNameToImport =
-        typeof moduleName === 'string' && isWindowsPath.test(moduleName) ? pathToFileURL(moduleName) : moduleName;
+    const modulesNameToImport = normalizeModuleName(moduleName);
 
     if (!paths || !paths.length || typeof moduleName !== 'string') {
         try {
             return await import(modulesNameToImport.toString());
         } catch (e) {
-            // console.log('%o', e);
+            // console.warn('Error %o', e);
             const err = toError(e);
             // err.code = err.code || 'ERR_MODULE_NOT_FOUND';
             throw err;
         }
     }
 
-    const importResolveModule = await import('import-meta-resolve');
+    const location = importResolveModuleName(moduleName, paths);
+    return await import(location.toString());
+}
 
-    const { resolve } = importResolveModule;
+/**
+ * Use Import.meta.resolve logic to try and determine possible locations for a module.
+ * @param moduleName - name of module, relative path, or absolute path.
+ * @param paths - Places to start resolving from.
+ * @returns location of module
+ */
+export function importResolveModuleName(moduleName: string | URL, paths: (string | URL)[]): URL {
+    const modulesNameToImport = normalizeModuleName(moduleName);
 
     let lastError = undefined;
 
     for (const parent of paths) {
-        const url =
-            typeof parent === 'string'
-                ? parent.startsWith('file://')
-                    ? new URL(parent)
-                    : pathToFileURL(parent + pathSep)
-                : parent;
-        let resolved = '';
-        let location = '';
         try {
-            resolved = resolve(modulesNameToImport.toString(), url.toString());
-            location = isWindowsPath.test(resolved) ? pathToFileURL(resolved).toString() : resolved;
-            return await import(location);
+            const url =
+                typeof parent === 'string'
+                    ? parent.startsWith('file://')
+                        ? new URL(parent)
+                        : pathToFileURL(parent + pathSep)
+                    : parent;
+            return new URL(resolve(modulesNameToImport.toString(), url.toString()));
         } catch (err) {
             // console.warn('%o', { moduleName, modulesNameToImport, paths, parentUrl: url, err, resolved, location });
             lastError = err;
         }
     }
     throw lastError;
+}
+
+function normalizeModuleName(moduleName: string | URL) {
+    return typeof moduleName === 'string' && isWindowsPath.test(moduleName) ? pathToFileURL(moduleName) : moduleName;
 }
 
 interface NodeError extends Error {

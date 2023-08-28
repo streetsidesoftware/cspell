@@ -1,1 +1,1 @@
-export { dynamicImportFrom as dynamicImport } from './dynamicImport.mjs';
+export { dynamicImportFrom as dynamicImport, importResolveModuleName } from './dynamicImport.mjs';
