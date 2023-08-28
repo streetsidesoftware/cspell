@@ -5,8 +5,8 @@ import { describe, expect, test } from 'vitest';
 
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
-import type * as helloWorld from '../../fixtures/hello_world.d.ts';
-import { callDynamicImport as dynamicImport, test as testHello } from './test.cjs.cjs';
+import type * as helloWorld from '../../fixtures/hello_world.js';
+import { callDynamicImport as dynamicImport, test as testHello } from './helper.cjs';
 
 const __root = path.join(__dirname, '../..');
 const __fixtures = path.join(__root, 'fixtures');
