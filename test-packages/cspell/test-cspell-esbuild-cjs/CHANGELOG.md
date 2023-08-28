@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [7.1.1](https://github.com/streetsidesoftware/cspell/compare/v7.1.0...v7.1.1) (2023-08-28)
+
+**Note:** Version bump only for package test-cspell-esbuild-cjs
+
 ## 7.0.2 (2023-08-28)
 
 **Note:** Version bump only for package test-cspell-esbuild-cjs
