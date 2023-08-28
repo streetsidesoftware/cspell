@@ -5,7 +5,7 @@ Args: '["**"]'
 Summary:
   files: 596
   filesWithIssues: 305
-  issues: 2694
+  issues: 2695
   errors: 0
 Errors: []
 
@@ -385,8 +385,8 @@ issues:
   - "scripts/redox/recipe.sh:4:8         BUILDTIME       U       export BUILDTIME_RUSTPYTHONPATH=/lib"
   - "src/lib.rs:12:35        mymod           U       vm.add_native_module(\"mymod\".to_owned(), Box::new"
   - "src/lib.rs:13:81        otherthing      U       pass\", module_name = \"otherthing\"));"
-  - "src/lib.rs:114:13       getpip          U       let get_getpip = rustpython_vm::py"
-  - "src/lib.rs:213:9        Speedscope      U       Speedscope,"
+  - "src/lib.rs:122:13       getpip          U       let get_getpip = rustpython_vm::py"
+  - "src/lib.rs:221:9        Speedscope      U       Speedscope,"
   - "src/settings.rs:130:46      pycs                            U       name(\"check-hash-based-pycs\")"
   - "src/settings.rs:147:66      PYTHONUNBUFFERED                U       effect on stdin; also PYTHONUNBUFFERED=x\","
   - "src/settings.rs:216:49      PYTHONNOUSERSITE                U       environment && env::var_os(\"PYTHONNOUSERSITE\").is_some())"
@@ -556,8 +556,8 @@ issues:
   - "stdlib/src/ssl.rs:461:43        SSLV            U       options |= SslOptions::NO_SSLV2;"
   - "stdlib/src/ssl.rs:521:31        cipherlist      U       fn set_ciphers(&self, cipherlist: PyStrRef, vm: &VirtualMachin"
   - "stdlib/src/ssl.rs:633:76        cadata          U       &args.capath, &args.cadata) {"
-  - "stdlib/src/ssl.rs:1345:63       cacerts         U       system/etc/security/cacerts\";"
-  - "stdlib/src/ssl.rs:1454:51       PCCERT          U       as_ptr() as wincrypt::PCCERT_CONTEXT;"
+  - "stdlib/src/ssl.rs:1359:63       cacerts         U       system/etc/security/cacerts\";"
+  - "stdlib/src/ssl.rs:1468:51       PCCERT          U       as_ptr() as wincrypt::PCCERT_CONTEXT;"
   - "stdlib/src/syslog.rs:132:19         maskpri     U       fn setlogmask(maskpri: i32) -> i32 {"
   - "stdlib/src/termios.rs:13:58         CIBAUD              U       0000, B4000000, and CIBAUD"
   - "stdlib/src/termios.rs:16:14         CDEL                U       // CDEL, CDSUSP, CEOF, CEOL"
@@ -622,8 +622,8 @@ issues:
   - "vm/src/builtins/descriptor.rs:231:33        objclass            U       \"<descriptor>.__objclass__.__qualname__ is not"
   - "vm/src/builtins/dict.rs:14:5        dictdatatype            U       dictdatatype::{self, DictKey},"
   - "vm/src/builtins/dict.rs:335:13      dicted                  U       let dicted: Result<PyDictRef,"
-  - "vm/src/builtins/dict.rs:992:10      reversekeyiterator      U       dict_reversekeyiterator_type,"
-  - "vm/src/builtins/dict.rs:1018:10     reverseitemiterator     U       dict_reverseitemiterator_type,"
+  - "vm/src/builtins/dict.rs:993:10      reversekeyiterator      U       dict_reversekeyiterator_type,"
+  - "vm/src/builtins/dict.rs:1019:10     reverseitemiterator     U       dict_reverseitemiterator_type,"
   - "vm/src/builtins/frame.rs:57:10          lasti       U       fn f_lasti(&self) -> u32 {"
   - "vm/src/builtins/function.rs:2:5         jitfunc         U       mod jitfunc;"
   - "vm/src/builtins/function.rs:80:13       nexpected       U       let nexpected_args = code.arg_count"
@@ -693,7 +693,7 @@ issues:
   - "vm/src/function/method.rs:17:17         NOARGS          U       // METH_NOARGS and METH_O must not"
   - "vm/src/function/method.rs:36:38         Stackless       U       bit is preserved for Stackless Python"
   - "vm/src/function/method.rs:37:18         STACKLESS       U       // const STACKLESS = 0x0100;"
-  - "vm/src/function/protocol.rs:77:5        iterfn      U       iterfn: Option<crate::types"
+  - "vm/src/function/protocol.rs:79:5        iterfn      U       iterfn: Option<crate::types"
   - "vm/src/import.rs:87:25          codeobj     U       let module = import_codeobj(vm, module_name, frozen"
   - "vm/src/object/core.rs:169:51        weakrefs    U       have never been any weakrefs in this list"
   - "vm/src/object/core.rs:207:54        Weaks       U       actually own the PyObjectWeaks inside `list`, and every"
@@ -790,7 +790,7 @@ issues:
   - "vm/src/stdlib/io.rs:3816:47     NOINHERIT           U       :O_BINARY | libc::O_NOINHERIT;"
   - "vm/src/stdlib/itertools.rs:86:59        leat            U       from(\"function takes at leat 1 arguments (0 given"
   - "vm/src/stdlib/itertools.rs:1226:12      teedata         U       // teedata a python class"
-  - "vm/src/stdlib/itertools.rs:1804:21      numactive       U       let mut numactive = zelf.iterators.len"
+  - "vm/src/stdlib/itertools.rs:1812:21      numactive       U       let mut numactive = zelf.iterators.len"
   - "vm/src/stdlib/marshal.rs:52:21          pycomplex       U       ref pycomplex @ PyComplex => {"
   - "vm/src/stdlib/marshal.rs:65:21          pyfrozen        U       ref pyfrozen @ PyFrozenSet => {"
   - "vm/src/stdlib/msvcrt.rs:13:17       minwindef                   U       shared::minwindef::UINT,"
@@ -922,7 +922,7 @@ issues:
   - "vm/src/types/slot.rs:137:28         TPFLAGS         U       CPython default: Py_TPFLAGS_HAVE_STACKLESS_EXTENSION"
   - "vm/src/types/slot.rs:141:43         Subclassable    U       types created in Python. Subclassable and are a"
   - "vm/src/types/slot.rs:379:29         subslot         U       macro_rules! toggle_subslot {"
-  - "vm/src/vm/mod.rs:564:29         pyiter      U       return self.map_pyiter(value, func);"
+  - "vm/src/vm/mod.rs:571:29         pyiter      U       return self.map_pyiter(value, func);"
   - "vm/src/vm/setting.rs:43:10          Xfoo    U       /// -Xfoo[=bar]"
   - "vm/src/vm/setting.rs:58:10          Wfoo    U       /// -Wfoo"
   - "vm/src/vm/thread.rs:38:24       intp    U       let vm_owns_obj = |intp: NonNull<VirtualMachine"
