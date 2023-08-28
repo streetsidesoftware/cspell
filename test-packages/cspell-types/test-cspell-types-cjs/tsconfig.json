@@ -1,9 +1,9 @@
 {
-    "extends": "../../../tsconfig.json",
+    "extends": "../../../tsconfig.esm.json",
     "compilerOptions": {
         "module": "CommonJS",
-        "moduleResolution": "node16",
-        "types": ["node", "jest"],
+        "moduleResolution": "Node",
+        "types": ["node"],
         "outDir": "dist"
     },
     "include": ["src"]
