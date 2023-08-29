@@ -4,9 +4,9 @@ exports[`Validate cli > app '--fail-fast no option' Expect Error: [Function Chec
 
 exports[`Validate cli > app '--fail-fast no option' Expect Error: [Function CheckFailed] 2`] = `
 "error	 0.00ms X
-log	./samples/fail-fast/first-fail.txt:1:1 - Unknown word (iamtypo)
+log	./first-fail.txt:1:1 - Unknown word (iamtypo)
 error	 0.00ms X
-log	./samples/fail-fast/second-fail.txt:1:1 - Unknown word (iamtypotoo)
+log	./second-fail.txt:1:1 - Unknown word (iamtypotoo)
 error	CSpell: Files checked: 2, Issues found: 2 in 2 files"
 `;
 
@@ -20,7 +20,7 @@ exports[`Validate cli > app '--fail-fast with config' Expect Error: [Function Ch
 
 exports[`Validate cli > app '--fail-fast with config' Expect Error: [Function CheckFailed] 2`] = `
 "error	 0.00ms X
-log	./samples/fail-fast/first-fail.txt:1:1 - Unknown word (iamtypo)
+log	./first-fail.txt:1:1 - Unknown word (iamtypo)
 error	CSpell: Files checked: 1, Issues found: 1 in 1 files"
 `;
 
@@ -33,7 +33,7 @@ exports[`Validate cli > app '--fail-fast with option' Expect Error: [Function Ch
 
 exports[`Validate cli > app '--fail-fast with option' Expect Error: [Function CheckFailed] 2`] = `
 "error	 0.00ms X
-log	./samples/fail-fast/first-fail.txt:1:1 - Unknown word (iamtypo)
+log	./first-fail.txt:1:1 - Unknown word (iamtypo)
 error	CSpell: Files checked: 1, Issues found: 1 in 1 files"
 `;
 
@@ -75,9 +75,9 @@ exports[`Validate cli > app '--no-fail-fast with config' Expect Error: [Function
 
 exports[`Validate cli > app '--no-fail-fast with config' Expect Error: [Function CheckFailed] 2`] = `
 "error	 0.00ms X
-log	./samples/fail-fast/first-fail.txt:1:1 - Unknown word (iamtypo)
+log	./first-fail.txt:1:1 - Unknown word (iamtypo)
 error	 0.00ms X
-log	./samples/fail-fast/second-fail.txt:1:1 - Unknown word (iamtypotoo)
+log	./second-fail.txt:1:1 - Unknown word (iamtypotoo)
 error	CSpell: Files checked: 2, Issues found: 2 in 2 files"
 `;
 
@@ -405,8 +405,8 @@ exports[`Validate cli > app 'current_file' Expect Error: undefined 3`] = `
 exports[`Validate cli > app 'inline suggest' Expect Error: [Function CheckFailed] 1`] = `[]`;
 
 exports[`Validate cli > app 'inline suggest' Expect Error: [Function CheckFailed] 2`] = `
-"log	./fixtures/features/inline-suggest/README.md:7:3 - Unknown word (bluelist) Suggestions: [blueList*, bluest, blueish, bluefish, bluesiest]
-log	./fixtures/features/inline-suggest/README.md:8:3 - Unknown word (blulist) Suggestions: [blueList*, bullish, bluest, bluish, blueish]
+"log	./README.md:7:3 - Unknown word (bluelist) Suggestions: [blueList*, bluest, blueish, bluefish, bluesiest]
+log	./README.md:8:3 - Unknown word (blulist) Suggestions: [blueList*, bullish, bluest, bluish, blueish]
 error	CSpell: Files checked: 1, Issues found: 2 in 1 files"
 `;
 
@@ -516,7 +516,8 @@ exports[`Validate cli > app 'no-args' Expect Error: 'outputHelp' 1`] = `
   "  --quiet                      Only show spelling issues or errors.",
   "  --fail-fast                  Exit after first file with an issue or error.",
   "  -r, --root <root folder>     Root directory, defaults to current directory.",
-  "  --relative                   Issues are displayed relative to root.",
+  "  --no-relative                Issues are displayed with absolute path instead",
+  "                               of relative to the root.",
   "  --show-context               Show the surrounding text around an issue.",
   "  --show-suggestions           Show spelling suggestions.",
   "  --no-show-suggestions        Do not show spelling suggestions or fixes.",
@@ -976,12 +977,12 @@ not-in-any-dictionary - workspace*             ../../cspell-dict.txt"
 exports[`Validate cli > app 'typos --no-show-suggestions' Expect Error: [Function CheckFailed] 1`] = `[]`;
 
 exports[`Validate cli > app 'typos --no-show-suggestions' Expect Error: [Function CheckFailed] 2`] = `
-"log	./fixtures/features/typos/code.ts:1:26 - Unknown word (Orangges)
-log	./fixtures/features/typos/test.md:5:3 - Forbidden word (blacklist)
-log	./fixtures/features/typos/test.md:6:3 - Forbidden word (whitelist)
-log	./fixtures/features/typos/test.md:7:3 - Forbidden word (rad)
-log	./fixtures/features/typos/test.md:9:13 - Forbidden word (english)
-log	./fixtures/features/typos/test.md:9:38 - Forbidden word (Blacklisted)
+"log	./code.ts:1:26 - Unknown word (Orangges)
+log	./test.md:5:3 - Forbidden word (blacklist)
+log	./test.md:6:3 - Forbidden word (whitelist)
+log	./test.md:7:3 - Forbidden word (rad)
+log	./test.md:9:13 - Forbidden word (english)
+log	./test.md:9:38 - Forbidden word (Blacklisted)
 error	CSpell: Files checked: 3, Issues found: 6 in 2 files"
 `;
 
@@ -990,12 +991,12 @@ exports[`Validate cli > app 'typos --no-show-suggestions' Expect Error: [Functio
 exports[`Validate cli > app 'typos --show-suggestions' Expect Error: [Function CheckFailed] 1`] = `[]`;
 
 exports[`Validate cli > app 'typos --show-suggestions' Expect Error: [Function CheckFailed] 2`] = `
-"log	./fixtures/features/typos/code.ts:1:26 - Unknown word (Orangges) Suggestions: [Oranges, orange, Orange, Orangs, Orangey]
-log	./fixtures/features/typos/test.md:5:3 - Forbidden word (blacklist) Suggestions: [denylist*, backlist, backlit, blackest, blackish]
-log	./fixtures/features/typos/test.md:6:3 - Forbidden word (whitelist) Suggestions: [allowlist*, whitelists, whitest, whitefish, whitelisted]
-log	./fixtures/features/typos/test.md:7:3 - Forbidden word (rad) Suggestions: [cool*, ard, rda, rads, raid]
-log	./fixtures/features/typos/test.md:9:13 - Forbidden word (english) Suggestions: [English*, enlist, english's, englished, englisher]
-log	./fixtures/features/typos/test.md:9:38 - Forbidden word (Blacklisted) Suggestions: [Denylisted*, Backlist, Backlists, Backlashed, Blacklegged]
+"log	./code.ts:1:26 - Unknown word (Orangges) Suggestions: [Oranges, orange, Orange, Orangs, Orangey]
+log	./test.md:5:3 - Forbidden word (blacklist) Suggestions: [denylist*, backlist, backlit, blackest, blackish]
+log	./test.md:6:3 - Forbidden word (whitelist) Suggestions: [allowlist*, whitelists, whitest, whitefish, whitelisted]
+log	./test.md:7:3 - Forbidden word (rad) Suggestions: [cool*, ard, rda, rads, raid]
+log	./test.md:9:13 - Forbidden word (english) Suggestions: [English*, enlist, english's, englished, englisher]
+log	./test.md:9:38 - Forbidden word (Blacklisted) Suggestions: [Denylisted*, Backlist, Backlists, Backlashed, Blacklegged]
 error	CSpell: Files checked: 3, Issues found: 6 in 2 files"
 `;
 
@@ -1004,12 +1005,12 @@ exports[`Validate cli > app 'typos --show-suggestions' Expect Error: [Function C
 exports[`Validate cli > app 'typos' Expect Error: [Function CheckFailed] 1`] = `[]`;
 
 exports[`Validate cli > app 'typos' Expect Error: [Function CheckFailed] 2`] = `
-"log	./fixtures/features/typos/code.ts:1:26 - Unknown word (Orangges)
-log	./fixtures/features/typos/test.md:5:3 - Forbidden word (blacklist) fix: (denylist)
-log	./fixtures/features/typos/test.md:6:3 - Forbidden word (whitelist) fix: (allowlist)
-log	./fixtures/features/typos/test.md:7:3 - Forbidden word (rad) fix: (cool)
-log	./fixtures/features/typos/test.md:9:13 - Forbidden word (english) fix: (English)
-log	./fixtures/features/typos/test.md:9:38 - Forbidden word (Blacklisted) fix: (Denylisted)
+"log	./code.ts:1:26 - Unknown word (Orangges)
+log	./test.md:5:3 - Forbidden word (blacklist) fix: (denylist)
+log	./test.md:6:3 - Forbidden word (whitelist) fix: (allowlist)
+log	./test.md:7:3 - Forbidden word (rad) fix: (cool)
+log	./test.md:9:13 - Forbidden word (english) fix: (English)
+log	./test.md:9:38 - Forbidden word (Blacklisted) fix: (Denylisted)
 error	CSpell: Files checked: 3, Issues found: 6 in 2 files"
 `;
 
