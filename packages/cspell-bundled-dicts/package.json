@@ -25,7 +25,7 @@
     "watch": "pnpm run build --watch",
     "test": "node ../../bin.mjs \"**/*.{txt,md,ts}\"",
     "update-fix-en-gb": "pnpm add @cspell/dict-en-gb@1.1.33",
-    "update-dictionaries": "pnpm update --latest \"@cspell/dict-*\" && pnpm run update-fix-en-gb"
+    "update-dictionaries": "pnpm update --latest \"@cspell/dict-*\" \"!@cspell/dict-en-gb\" --depth 1 --filter-prod . && pnpm update-fix-en-gb"
   },
   "repository": {
     "type": "git",
