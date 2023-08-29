@@ -92,6 +92,6 @@ Brought to you by <a href="https://streetsidesoftware.com" title="Street Side So
 
 <!--- @@inject-end: static/footer.md --->
 
-<!--- 
+<!---
 cspell:ignore Houssem Dellai
 --->
