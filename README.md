@@ -20,6 +20,10 @@ The CSpell mono-repo, a spell checker for code.
 
 [Documentation - CSpell](https://streetsidesoftware.github.io/cspell/)
 
+## Video presentation
+
+[Video presentation by Houssem Dellai](https://www.youtube.com/watch?v=w8gGi3aeVpc)
+
 ## Packages
 
 - [cspell](packages/cspell) [![Verified on Openbase](https://badges.openbase.com/js/verified/cspell.svg?token=N5IXZIAqMY+0I+KuQhPpfoZYw0QUz/LiSYlOerD8Pio=)](https://openbase.com/js/cspell?utm_source=embedded&utm_medium=badge&utm_campaign=verified-badge&utm_term=js/cspell) -- cspell command-line application
@@ -87,3 +91,7 @@ Brought to you by <a href="https://streetsidesoftware.com" title="Street Side So
 </p>
 
 <!--- @@inject-end: static/footer.md --->
+
+<!--- 
+cspell:ignore Houssem Dellai
+--->
