@@ -206,6 +206,7 @@ export const languageExtensionDefinitions: LanguageDefinitions = [
             '.bmp',
             '.exr',
             '.gif',
+            '.heic',
             '.ico',
             '.jpeg',
             '.jpg',
