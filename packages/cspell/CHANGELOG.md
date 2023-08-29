@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [7.3.0](https://github.com/streetsidesoftware/cspell/compare/v7.2.0...v7.3.0) (2023-08-29)
+
+
+### Features
+
+* By default, issues are shown relative. ([#4777](https://github.com/streetsidesoftware/cspell/issues/4777)) ([f7fb55a](https://github.com/streetsidesoftware/cspell/commit/f7fb55acf7325efb33d21827fb70799dc520ff58))
+
 ## 7.2.0 (2023-08-29)
 
 **Note:** Version bump only for package cspell
