@@ -60,6 +60,13 @@ jobs:
         run: |
           pnpm run update-dictionary-packages
 
+      # Try to avoid unnecessary updates by limiting it to `package.json` changes.
+      # To do this, revert to the previous package lock and re-install.
+      - name: Update Package Lock
+        run: |
+          git check pnpm-lock.
+          pnpm i
+
       - name: Build Patch
         run: |
           echo 'PATCH_DIFF<<__DIFF__' >> $GITHUB_ENV
