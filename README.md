@@ -91,3 +91,7 @@ Brought to you by <a href="https://streetsidesoftware.com" title="Street Side So
 </p>
 
 <!--- @@inject-end: static/footer.md --->
+
+<!--- 
+cspell:ignore Houssem Dellai
+--->
