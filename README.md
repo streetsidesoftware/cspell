@@ -20,9 +20,17 @@ The CSpell mono-repo, a spell checker for code.
 
 [Documentation - CSpell](https://streetsidesoftware.github.io/cspell/)
 
-## Video presentation
+## Third-Party Video Presentations
 
-[Video presentation by Houssem Dellai](https://www.youtube.com/watch?v=w8gGi3aeVpc)
+Some videos related to CSpell and the [Code Spell Checker](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker) for VS Code.
+
+- [Spell Checking Documentation in DevOps Pipelines](https://www.youtube.com/watch?v=w8gGi3aeVpc) by Houssem Dellai
+- [Don't Worry About Spelling...VS Code Can Do It For You!!](https://www.youtube.com/watch?v=MfxFMFMsBP4) by [James Q Quick](https://www.youtube.com/@JamesQQuick)
+- [Spell Checking In VSCode - VSCode Pro Tips](https://www.youtube.com/watch?v=_GwpPJgH1Gw)
+- [Spell Check in VS Code with Code Spell Checker | Extension Highlight](https://www.youtube.com/watch?v=ZxNnOjWetH4)
+- [Spell check your code from the command line with Cspell](https://www.youtube.com/watch?v=nwmJ9h_zPJc)
+- [How to Use VS Code Spell Checker](https://www.youtube.com/watch?v=Ix5bMd0kZeY) - Detailed walkthrough to setup and use multiple languages
+- [Code Spell Checker Extension for Visual Studio Code](https://www.youtube.com/watch?v=dUn1mrJYMrM)
 
 ## Packages
 
@@ -92,6 +100,6 @@ Brought to you by <a href="https://streetsidesoftware.com" title="Street Side So
 
 <!--- @@inject-end: static/footer.md --->
 
-<!--- 
+<!---
 cspell:ignore Houssem Dellai
 --->
