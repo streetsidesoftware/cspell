@@ -1,13 +1,196 @@
 {
-  "packages": {
-    ".": {
-      "releaseType": "node",
-      "draft": false,
-      "prerelease": false,
-      "bumpMinorPreMajor": false,
-      "bumpPatchForMinorPreMajor": false,
-      "changelogPath": "CHANGELOG.md",
-      "versioning": "default"
+    "bootstrap-sha": "b0059928337f86f66998364d2119baeb9900a7da",
+    "include-component-in-tag": false,
+    "plugins": [
+        {
+            "type": "linked-versions",
+            "groupName": "packages",
+            "components": [
+                "",
+                "cspell-tools-samples",
+                "cspell",
+                "@cspell/cspell-bundled-dicts",
+                "@cspell/cspell-code-snippets",
+                "cspell-config-lib",
+                "cspell-dictionary",
+                "@cspell/eslint-plugin",
+                "cspell-gitignore",
+                "cspell-glob",
+                "cspell-grammar",
+                "cspell-io",
+                "@cspell/cspell-json-reporter",
+                "cspell-lib",
+                "@cspell/cspell-pipe",
+                "@cspell/cspell-resolver",
+                "@cspell/cspell-service-bus",
+                "@cspell/strong-weak-map",
+                "@cspell/cspell-tools",
+                "cspell-trie",
+                "cspell-trie-lib",
+                "@cspell/cspell-types",
+                "@cspell/dynamic-import",
+                "hunspell-reader"
+            ]
+        }
+    ],
+    "changelog-sections": [
+        {
+            "type": "feat",
+            "section": "Features",
+            "hidden": false
+        },
+        {
+            "type": "feature",
+            "section": "Features"
+        },
+        {
+            "type": "fix",
+            "section": "Updates and Bug Fixes",
+            "hidden": false
+        },
+        {
+            "type": "perf",
+            "section": "Performance Improvements"
+        },
+        {
+            "type": "ci",
+            "section": "Continuous Integration",
+            "hidden": true
+        },
+        {
+            "type": "chore",
+            "section": "Miscellaneous",
+            "hidden": true
+        },
+        {
+            "type": "revert",
+            "section": "Reverts"
+        },
+        {
+            "type": "docs",
+            "section": "Documentation"
+        },
+        {
+            "type": "style",
+            "section": "Styles",
+            "hidden": false
+        },
+        {
+            "type": "refactor",
+            "section": "Code Refactoring",
+            "hidden": false
+        },
+        {
+            "type": "test",
+            "section": "Tests",
+            "hidden": false
+        },
+        {
+            "type": "build",
+            "section": "Build System",
+            "hidden": false
+        },
+        {
+            "type": "",
+            "section": "Changes",
+            "hidden": false
+        }
+    ],
+    "packages": {
+        ".": {
+            "releaseType": "node"
+        },
+        "packages/Samples": {
+            "component": "cspell-tools-samples",
+            "releaseType": "node"
+        },
+        "packages/cspell": {
+            "component": "cspell",
+            "releaseType": "node"
+        },
+        "packages/cspell-bundled-dicts": {
+            "component": "@cspell/cspell-bundled-dicts",
+            "releaseType": "node"
+        },
+        "packages/cspell-code-snippets": {
+            "component": "@cspell/cspell-code-snippets",
+            "releaseType": "node"
+        },
+        "packages/cspell-config-lib": {
+            "component": "cspell-config-lib",
+            "releaseType": "node"
+        },
+        "packages/cspell-dictionary": {
+            "component": "cspell-dictionary",
+            "releaseType": "node"
+        },
+        "packages/cspell-eslint-plugin": {
+            "component": "@cspell/eslint-plugin",
+            "releaseType": "node"
+        },
+        "packages/cspell-gitignore": {
+            "component": "cspell-gitignore",
+            "releaseType": "node"
+        },
+        "packages/cspell-glob": {
+            "component": "cspell-glob",
+            "releaseType": "node"
+        },
+        "packages/cspell-grammar": {
+            "component": "cspell-grammar",
+            "releaseType": "node"
+        },
+        "packages/cspell-io": {
+            "component": "cspell-io",
+            "releaseType": "node"
+        },
+        "packages/cspell-json-reporter": {
+            "component": "@cspell/cspell-json-reporter",
+            "releaseType": "node"
+        },
+        "packages/cspell-lib": {
+            "component": "cspell-lib",
+            "releaseType": "node"
+        },
+        "packages/cspell-pipe": {
+            "component": "@cspell/cspell-pipe",
+            "releaseType": "node"
+        },
+        "packages/cspell-resolver": {
+            "component": "@cspell/cspell-resolver",
+            "releaseType": "node"
+        },
+        "packages/cspell-service-bus": {
+            "component": "@cspell/cspell-service-bus",
+            "releaseType": "node"
+        },
+        "packages/cspell-strong-weak-map": {
+            "component": "@cspell/strong-weak-map",
+            "releaseType": "node"
+        },
+        "packages/cspell-tools": {
+            "component": "@cspell/cspell-tools",
+            "releaseType": "node"
+        },
+        "packages/cspell-trie": {
+            "component": "cspell-trie",
+            "releaseType": "node"
+        },
+        "packages/cspell-trie-lib": {
+            "component": "cspell-trie-lib",
+            "releaseType": "node"
+        },
+        "packages/cspell-types": {
+            "component": "@cspell/cspell-types",
+            "releaseType": "node"
+        },
+        "packages/dynamic-import": {
+            "component": "@cspell/dynamic-import",
+            "releaseType": "node"
+        },
+        "packages/hunspell-reader": {
+            "component": "hunspell-reader",
+            "releaseType": "node"
+        }
     }
-  }
 }
