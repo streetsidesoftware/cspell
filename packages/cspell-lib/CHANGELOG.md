@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [7.2.1](https://github.com/streetsidesoftware/cspell/compare/v7.2.0...v7.2.1) (2023-08-30)
+
+
+### Updates and Bug Fixes
+
+* Do not spell check `.heic` files. ([#4776](https://github.com/streetsidesoftware/cspell/issues/4776)) ([6e8802c](https://github.com/streetsidesoftware/cspell/commit/6e8802c160a220fc248a07cf34190f3dbc5d808a))
+
 ## 7.2.0 (2023-08-29)
 
 **Note:** Version bump only for package cspell-lib

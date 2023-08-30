@@ -3,6 +3,30 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [7.3.0](https://github.com/streetsidesoftware/cspell/compare/v7.2.0...v7.3.0) (2023-08-30)
+
+
+### Features
+
+* By default, issues are shown relative. ([#4777](https://github.com/streetsidesoftware/cspell/issues/4777)) ([f7fb55a](https://github.com/streetsidesoftware/cspell/commit/f7fb55acf7325efb33d21827fb70799dc520ff58))
+
+
+### Updates and Bug Fixes
+
+* Do not spell check `.heic` files. ([#4776](https://github.com/streetsidesoftware/cspell/issues/4776)) ([6e8802c](https://github.com/streetsidesoftware/cspell/commit/6e8802c160a220fc248a07cf34190f3dbc5d808a))
+
+
+### Documentation
+
+* Add some more video links ([#4775](https://github.com/streetsidesoftware/cspell/issues/4775)) ([8e701dd](https://github.com/streetsidesoftware/cspell/commit/8e701dd555f7f70f9db6cd2946b446708e5a6824))
+
+
+### Dependencies
+
+* The following workspace dependencies were updated
+  * devDependencies
+    * @cspell/eslint-plugin bumped to 7.2.1
+
 ## 7.2.0 (2023-08-29)
 
 **Note:** Version bump only for package cspell-monorepo

@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+### Dependencies
+
+* The following workspace dependencies were updated
+  * dependencies
+    * cspell-lib bumped to 7.2.1
+
 ## 7.2.0 (2023-08-29)
 
 **Note:** Version bump only for package @cspell/eslint-plugin
