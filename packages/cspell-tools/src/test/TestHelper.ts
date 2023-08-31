@@ -10,6 +10,7 @@ const _dirname = test_dirname(import.meta.url);
 const packageRoot = path.join(_dirname, '../..');
 const repoRoot = path.join(packageRoot, '../..');
 const tempDirBase = path.join(packageRoot, 'temp');
+const repoSamples = path.join(repoRoot, 'packages/Samples');
 
 export interface TestHelper {
     readonly packageRoot: string;
@@ -29,7 +30,17 @@ export interface TestHelper {
 
     createTempDir(...parts: string[]): void;
 
+    /**
+     * Resolves a fixture path to an absolute path
+     * @param parts - relative path to fixture
+     */
     resolveFixture(...parts: string[]): string;
+
+    /**
+     * Resolves a path to an absolute path in Samples
+     * @param parts - relative path to sample
+     */
+    resolveSample(...parts: string[]): string;
 
     /**
      * Make the temp directory
@@ -139,6 +150,10 @@ class TestHelperImpl implements TestHelper {
      */
     resolveFixture(...parts: string[]): string {
         return path.resolve(this.fixtureDir, ...parts);
+    }
+
+    resolveSample(...parts: string[]): string {
+        return path.resolve(repoSamples, ...parts);
     }
 
     /**
