@@ -48,7 +48,8 @@ Options:
   --quiet                      Only show spelling issues or errors.
   --fail-fast                  Exit after first file with an issue or error.
   -r, --root <root folder>     Root directory, defaults to current directory.
-  --relative                   Issues are displayed relative to root.
+  --no-relative                Issues are displayed with absolute path instead
+                               of relative to the root.
   --show-context               Show the surrounding text around an issue.
   --show-suggestions           Show spelling suggestions.
   --no-show-suggestions        Do not show spelling suggestions or fixes.
