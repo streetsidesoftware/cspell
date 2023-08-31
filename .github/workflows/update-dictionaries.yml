@@ -64,7 +64,7 @@ jobs:
       # To do this, revert to the previous package lock and re-install.
       - name: Update Package Lock
         run: |
-          git check pnpm-lock.
+          git checkout pnpm-lock.
           pnpm i
 
       - name: Build Patch
