@@ -1,0 +1,11 @@
+# yaml-language-server: $schema=./../../cspell-tools.config.schema.json
+
+targets:
+  - name: split-colors
+    targetDirectory: ../../temp/builds/build-split-source
+    sources:
+      - filename: src/words.txt
+        split: true
+      - filename: src/color-pairs.dic
+        split: true
+    format: plaintext

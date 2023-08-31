@@ -49,6 +49,8 @@ describe('Validate the wordListCompiler', () => {
         ${s('Apple|~apple|Apple')}                                                            | ${pf({ legacy: true })} | ${['apple']}
         ${'ArrayObject::getFlags\nArrayObject::getIterator\nArrayObject::getIteratorClass\n'} | ${pf({ legacy: true })} | ${s('array|object|get|flags|iterator|class')}
         ${sampleContent}                                                                      | ${pf()}                 | ${s('Tower of London|New|York')}
+        ${'apple\u200cbanana'}                                                                | ${pf({ split: true })}  | ${['apple', 'banana']}
+        ${'apple\u200cbanana'}                                                                | ${pf({})}               | ${['apple\u200cbanana']}
     `('createSortAndFilterOperation $content $options', ({ content, options, expectedResult }) => {
         const r = [...parseFileLines(content, options)];
         expect(r).toEqual(expectedResult);

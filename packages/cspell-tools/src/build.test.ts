@@ -26,6 +26,7 @@ describe('build action', () => {
         ${f('build-single-trie')}        | ${undefined}                                              | ${tBuilds('build-single-trie/cities.trie')}
         ${f('build-source-list')}        | ${undefined}                                              | ${tBuilds('build-source-list/source-list.txt')}
         ${'.'}                           | ${f('build-combo/cspell-tools.config.yaml')}              | ${'color-cities-code.txt'}
+        ${f('build-split-source')}       | ${undefined}                                              | ${tBuilds('build-split-source/split-colors.txt')}
     `('build %#', async ({ sourceRoot, config, target }) => {
         await expect(build(undefined, { config, root: t(sourceRoot), cwd: t() })).resolves.toBeUndefined();
         const content = await readTextFile(t(target));

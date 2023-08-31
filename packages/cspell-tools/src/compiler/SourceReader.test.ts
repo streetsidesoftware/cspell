@@ -1,14 +1,14 @@
 import * as path from 'path';
 import { describe, expect, test } from 'vitest';
 
-import { test_dirname } from '../test/TestHelper.js';
+import { createTestHelper } from '../test/TestHelper.js';
 import type { SourceReaderOptions } from './SourceReader.js';
 import { createSourceReader } from './SourceReader.js';
 import { defaultAllowedSplitWords } from './WordsCollection.js';
 
-const _dirname = test_dirname(import.meta.url);
+const helper = createTestHelper(import.meta.url);
 
-const samples = path.join(_dirname, '../../../Samples/dicts');
+const samples = helper.resolveSample('dicts');
 
 const readerOptions: SourceReaderOptions = {
     splitWords: false,
@@ -17,14 +17,27 @@ const readerOptions: SourceReaderOptions = {
 
 describe('Validate the iterateWordsFromFile', () => {
     test('streamWordsFromFile: hunspell', async () => {
-        const reader = await createSourceReader(path.join(samples, 'hunspell', 'example.aff'), readerOptions);
+        const reader = await createSourceReader(sample('hunspell/example.aff'), readerOptions);
         const results = [...reader.words];
         // this might break if the processing order of hunspell changes.
         expect(results).toEqual(s('hello rework reworked tried try work worked', ' '));
     });
 
+    test('streamWordsFromFile: hunspell split', async () => {
+        const reader = await createSourceReader(fixture('build-split-source/src/color-pairs.dic'), {
+            ...readerOptions,
+            splitWords: true,
+            legacy: true,
+        });
+        const results = [...reader.words];
+        // this might break if the processing order of hunspell changes.
+        expect(results).toEqual(
+            s('apple banana apple mango apple orange apple pear apple strawberry mango banana', ' '),
+        );
+    });
+
     test('stream words from trie', async () => {
-        const reader = await createSourceReader(path.join(samples, 'cities.trie.gz'), readerOptions);
+        const reader = await createSourceReader(sample('cities.trie.gz'), readerOptions);
         const results = [...reader.words];
         expect(results.join('|')).toBe(
             'amsterdam|angeles|city|delhi|francisco|london|los|los angeles' +
@@ -45,7 +58,7 @@ describe('Validate the iterateWordsFromFile', () => {
     });
 
     test('annotatedWords: trie', async () => {
-        const reader = await createSourceReader(path.join(samples, 'cities.trie.gz'), readerOptions);
+        const reader = await createSourceReader(sample('cities.trie.gz'), readerOptions);
         const results = [...reader.words];
         expect(results.join('|')).toBe(
             'amsterdam|angeles|city|delhi|francisco|london|los|los angeles' +
@@ -54,7 +67,7 @@ describe('Validate the iterateWordsFromFile', () => {
     });
 
     test('annotatedWords: text - cities.txt', async () => {
-        const reader = await createSourceReader(path.join(samples, 'cities.txt'), readerOptions);
+        const reader = await createSourceReader(sample('cities.txt'), readerOptions);
         const results = [...reader.words];
         // the results are sorted
         expect(results.join('|')).toBe(
@@ -63,7 +76,7 @@ describe('Validate the iterateWordsFromFile', () => {
     });
 
     test('annotatedWords: text - sampleCodeDic.txt', async () => {
-        const reader = await createSourceReader(path.join(samples, 'sampleCodeDic.txt'), readerOptions);
+        const reader = await createSourceReader(sample('sampleCodeDic.txt'), readerOptions);
         const results = [...reader.words];
         // cspell:ignore codecode errorerror codemsg
         // the results are sorted
@@ -74,3 +87,11 @@ describe('Validate the iterateWordsFromFile', () => {
         return a.split(on);
     }
 });
+
+function sample(...parts: string[]): string {
+    return helper.resolveSample('dicts', ...parts);
+}
+
+function fixture(...parts: string[]): string {
+    return helper.resolveFixture(...parts);
+}

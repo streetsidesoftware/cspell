@@ -36,7 +36,7 @@ export async function createSourceReader(filename: string, options: SourceReader
 
     if (reader.type !== 'TextFile') {
         return {
-            words: reader.lines,
+            words: splitLines(reader.lines, options),
             get size() {
                 return reader.size;
             },
@@ -44,6 +44,21 @@ export async function createSourceReader(filename: string, options: SourceReader
     }
 
     return textFileReader(reader, options);
+}
+
+function splitLines(lines: Iterable<string>, options: SourceReaderOptions): Iterable<string> {
+    if (!options.splitWords) return lines;
+
+    function* split() {
+        const regNonWordOrDigit = /[^\p{L}\p{M}'\w-]+/giu;
+
+        for (const line of lines) {
+            const words = line.split(regNonWordOrDigit);
+            yield* words;
+        }
+    }
+
+    return split();
 }
 
 async function textFileReader(reader: Reader, options: SourceReaderOptions): Promise<SourceReader> {
