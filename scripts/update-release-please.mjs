@@ -1,13 +1,10 @@
 #!/usr/bin/env node
 
-import { fileURLToPath } from 'url';
 import { readFile, readdir, writeFile } from 'fs/promises';
-import * as path from 'path';
 
 const packagesDir = 'packages/';
 
 const rootUrl = new URL('..', import.meta.url);
-const root = fileURLToPath(rootUrl);
 
 const releasePleaseManifestUrl = new URL('.release-please-manifest.json', rootUrl);
 const releasePleaseConfigUrl = new URL('release-please-config.json', rootUrl);
