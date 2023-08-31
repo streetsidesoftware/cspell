@@ -65,7 +65,7 @@ jobs:
       - name: Update Package Lock
         run: |
           git checkout pnpm-lock.yaml
-          pnpm i
+          pnpm i --no-frozen-lockfile
 
       - name: Build Patch
         run: |
