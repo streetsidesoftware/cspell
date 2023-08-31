@@ -1,12 +1,17 @@
 {
     "bootstrap-sha": "b0059928337f86f66998364d2119baeb9900a7da",
     "include-component-in-tag": false,
+    "always-link-local": true,
     "plugins": [
         {
+            "type": "node-workspace",
+            "merge": false
+        },
+        {
             "type": "linked-versions",
-            "groupName": "packages",
+            "groupName": "cspell",
             "components": [
-                "",
+                "root",
                 "cspell-tools-samples",
                 "cspell",
                 "@cspell/cspell-bundled-dicts",
@@ -98,6 +103,7 @@
     ],
     "packages": {
         ".": {
+            "component": "root",
             "releaseType": "node"
         },
         "packages/Samples": {

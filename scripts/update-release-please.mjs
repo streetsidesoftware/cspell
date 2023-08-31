@@ -44,17 +44,21 @@ async function updateConfig(packages) {
 
     config.packages = config.packages ?? {};
 
+    const basePkg = {
+        component: 'cspell',
+        releaseType: 'node',
+    };
+
+    config.packages['.'] = { ...basePkg, component: 'root' };
+
     // Update packages
     for (const pkg of packages) {
-        config.packages[pkg.path] = {
-            component: pkg.name,
-            releaseType: 'node',
-        };
+        config.packages[pkg.path] = { ...basePkg, component: pkg.name };
     }
 
     // Update linked packages
     const linkedVersions = config.plugins.find((plug) => plug.type === 'linked-versions');
-    linkedVersions.components = packages.map((pkg) => pkg.name);
+    linkedVersions.components = Object.values(config.packages).map((pkg) => pkg.component);
 
     await writeJson(releasePleaseConfigUrl, config);
 }
@@ -65,7 +69,7 @@ async function readJson(filename) {
 }
 
 async function writeJson(filename, data) {
-    const content = JSON.stringify(data, null, 4);
+    const content = JSON.stringify(data, null, 4) + '\n';
     await writeFile(filename, content, { encoding: 'utf8' });
 }
 
