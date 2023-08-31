@@ -4,8 +4,8 @@ Url: https://github.com/googleapis/google-cloud-cpp.git
 Args: '["--config=${repoConfig}/cspell.json","**/*","-e","{*.BUILD,BUILD,CHANGELOG.md,*.sh,*.cfg,*.ps1,Dockerfile.*,*.Dockerfile,*.{yaml,xml,json,cmake}}"]'
 Summary:
   files: 16307
-  filesWithIssues: 11899
-  issues: 109926
+  filesWithIssues: 11898
+  issues: 108713
   errors: 0
 Errors: []
 
@@ -202,7 +202,6 @@ issues:
   - "doc/adr/2019-01-04-error-reporting-with-statusor.md:13:43       badbit      U       report errors (e.g., [badbit][badbit-link] in the"
   - "doc/adr/2019-03-26-binary-distributions.md:10:75        dpkg            U       might want to use (e.g., dpkg,"
   - "doc/adr/2019-03-26-binary-distributions.md:16:60        packageable     U       make our code easily packageable by others"
-  - "doc/adr/2022-01-21-only-public-types-in-public-APIs.md:24:60        backoff     U       APIs using retry and backoff policies"
   - "doc/compile-time-configuration.md:18:43         ccmake      U       developers can use [ccmake], or run `cmake -L`"
   - "doc/compile-time-configuration.md:72:29         DBUILD      U       tests are enabled via `-DBUILD_TESTING=ON`. You can"
   - "doc/compile-time-configuration.md:89:10         cxxopt      U       - Add `--cxxopt=-std=c++14` and `--host"
@@ -547,7 +546,6 @@ issues:
   - "google/cloud/accessapproval/access_approval_client.h:19:39          ACCESSAPPROVAL      U       CLOUD_CPP_GOOGLE_CLOUD_ACCESSAPPROVAL_ACCESS_APPROVAL_CLIENT"
   - "google/cloud/accessapproval/doc/main.dox:13:4           Quickstart      U       ## Quickstart"
   - "google/cloud/accessapproval/doc/options.dox:2:2         defgroup    U       @defgroup google-cloud-accessapproval"
-  - "google/cloud/accessapproval/doc/override-retry-policies.dox:3:53        Backoff     U       retry Override Retry, Backoff, and Idempotency Policies"
   - "google/cloud/accessapproval/quickstart/Makefile:18:12       CXXFLAGS    U       # The CXX, CXXFLAGS and CXXLD variables"
   - "google/cloud/accessapproval/quickstart/Makefile:30:60       cflags      U       config $(CLIENT_MODULE) --cflags)"
   - "google/cloud/accessapproval/quickstart/README.md:40:25          setenv      U       csh/tsch | `setenv GOOGLE_APPLICATION_CREDENTIAL"

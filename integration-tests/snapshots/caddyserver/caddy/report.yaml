@@ -5,7 +5,7 @@ Args: '["**/*.go"]'
 Summary:
   files: 240
   filesWithIssues: 221
-  issues: 3490
+  issues: 3480
   errors: 0
 Errors: []
 
@@ -218,8 +218,6 @@ issues:
   - "modules/caddyhttp/fileserver/staticfiles.go:170:2       precompressors      U       precompressors map[string]encode"
   - "modules/caddyhttp/fileserver/staticfiles.go:344:12      canonicalization    U       // if URL canonicalization is enabled, we need"
   - "modules/caddyhttp/fileserver/staticfiles.go:454:3       mtyp                U       mtyp := mime.TypeByExtension"
-  - "modules/caddyhttp/fileserver/staticfiles.go:519:3       backoff             U       backoff := weakrand.Intn(maxBackoff"
-  - "modules/caddyhttp/fileserver/staticfiles.go:519:31      Backoff             U       := weakrand.Intn(maxBackoff-minBackoff) + minBackoff"
   - "modules/caddyhttp/fileserver/staticfiles.go:530:74      Caza                U       written by Nathaniel Caza."
   - "modules/caddyhttp/headers/headers_test.go:93:32         lalala          U       Header-Suffix\": []string{\"lalala\"},"
   - "modules/caddyhttp/headers/headers_test.go:96:32         foofoofoo       U       Me\": []string{\"foofoofoo\"},"
