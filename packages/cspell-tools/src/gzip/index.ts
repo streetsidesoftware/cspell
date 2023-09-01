@@ -1,2 +1,2 @@
-export { compressFile } from './compressFiles.js';
+export { compressFile, OSFlags } from './compressFiles.js';
 export { gzip } from './gzip.js';

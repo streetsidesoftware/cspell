@@ -12,7 +12,12 @@ import { createTestHelper } from './test/TestHelper.js';
 
 vi.mock('./gzip/compressFiles.js', () => ({
     compressFile: vi.fn().mockImplementation((name: string) => Promise.resolve(name + '.gz')),
+    OSFlags: { Unix: 3 },
 }));
+
+const OSFlags = {
+    Unix: 3,
+};
 
 const mockedCompressFile = vi.mocked(compressFile);
 
@@ -224,9 +229,9 @@ describe('Validate the application', () => {
         const args = argv('gzip', '*.md', 'package.json');
 
         await expect(app.run(commander, args)).resolves.toBeUndefined();
-        expect(mockedCompressFile).toHaveBeenCalledWith('README.md');
-        expect(mockedCompressFile).toHaveBeenCalledWith('CHANGELOG.md');
-        expect(mockedCompressFile).toHaveBeenCalledWith('package.json');
+        expect(mockedCompressFile).toHaveBeenCalledWith('README.md', OSFlags.Unix);
+        expect(mockedCompressFile).toHaveBeenCalledWith('CHANGELOG.md', OSFlags.Unix);
+        expect(mockedCompressFile).toHaveBeenCalledWith('package.json', OSFlags.Unix);
     });
 
     test('app shasum', async () => {
