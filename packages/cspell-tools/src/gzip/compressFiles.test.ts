@@ -1,9 +1,8 @@
 import { readFile, writeFile } from 'node:fs/promises';
-import { gzipSync } from 'node:zlib';
 
 import { describe, expect, test, vi } from 'vitest';
 
-import { compress, compressFile, decompress, OSFlags } from './compressFiles.js';
+import { compress, compressFile, compressSync, decompress, OSFlags } from './compressFiles.js';
 
 const content = `
 Have a nice day.
@@ -21,15 +20,17 @@ describe('compressFiles', () => {
     test('compressFile', async () => {
         await compressFile('README.md');
         expect(mockReadFile).toHaveBeenLastCalledWith('README.md');
-        expect(mockWriteFile).toHaveBeenLastCalledWith('README.md.gz', gzipSync(content));
+        expect(mockWriteFile).toHaveBeenLastCalledWith('README.md.gz', compressSync(content));
     });
 
     test('compress/decompress string', async () => {
-        const gzBufA = await compress(content);
+        const gzBufA = await compress(content, OSFlags.auto);
         const gzBufB = await compress(content, OSFlags.NTFS);
         const gzBufC = await compress(content, OSFlags.Unix);
+        const gzBufDef = await compress(content);
 
         expect(gzBufB).not.toEqual(gzBufC);
+        expect(gzBufDef).toEqual(gzBufC);
 
         const strA = await decompress(gzBufA, 'utf8');
         const strB = await decompress(gzBufB, 'utf8');
