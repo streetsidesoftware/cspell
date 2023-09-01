@@ -10,7 +10,7 @@ import { processCompileAction } from './compile.js';
 import * as compiler from './compiler/index.js';
 import { logWithTimestamp } from './compiler/logWithTimestamp.js';
 import type { FeatureFlags } from './FeatureFlags/index.js';
-import { gzip } from './gzip/index.js';
+import { gzip, OSFlags } from './gzip/index.js';
 import { reportCheckChecksumFile, reportChecksumForFiles, updateChecksumForFiles } from './shasum/shasum.js';
 import { toError } from './util/errors.js';
 
@@ -65,7 +65,7 @@ interface ShasumOptions {
 export async function run(program: program.Command, argv: string[], flags?: FeatureFlags): Promise<void> {
     async function handleGzip(files: string[]): Promise<void> {
         try {
-            await gzip(files);
+            await gzip(files, OSFlags.Unix);
         } catch (error) {
             const err = toError(error);
             program.error(err.message);
