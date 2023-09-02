@@ -12,9 +12,14 @@ The CSpell mono-repo, a spell checker for code.
 
 ## Support Future Development
 
-- Become a [<img src="https://github.githubassets.com/images/modules/site/icons/funding_platforms/patreon.svg" width="16" height="16" alt="Patreon">Patreon!](https://patreon.com/streetsidesoftware)
-- [Support through ![PayPal](https://raw.githubusercontent.com/streetsidesoftware/vscode-spell-checker/main/images/PayPal/paypal-logo-wide-18.png)](https://www.paypal.com/donate/?hosted_button_id=26LNBP2Q6MKCY)
-- [Open Collective](https://opencollective.com/cspell)
+<!--- @@inject: static/sponsor.md --->
+
+- [![GitHub Sponsors](https://img.shields.io/badge/-black?style=social&logo=githubsponsors&label=GitHub%20Sponsor%3A%20Street%20Side%20Software)](https://github.com/sponsors/streetsidesoftware)
+- [![Patreon](https://img.shields.io/badge/-black?style=social&logo=patreon&label=Patreon%3A%20Street%20Side%20Software)](https://patreon.com/streetsidesoftware)
+- [![PayPal](https://img.shields.io/badge/-black?style=social&logo=paypal&label=PayPal%20Donate%3A%20Street%20Side%20Software)](https://www.paypal.com/donate/?hosted_button_id=26LNBP2Q6MKCY)
+- [![Open Collective](https://img.shields.io/badge/-black?style=social&logo=opencollective&label=Open%20Collective%3A%20CSpell)](https://opencollective.com/cspell)
+
+<!--- @@inject-end: static/sponsor.md --->
 
 ## Documentation
 
@@ -79,8 +84,9 @@ Tidelift will coordinate the fix and disclosure.
 
 |        | version | Node    | Status                       | Maintenance | End of Free Support |
 | :----- | :------ | :------ | :--------------------------- | :---------- | :------------------ |
-| cspell | 7.x     | 16.x    | In Active Development        | TBD         | TBD                 |
-| cspell | 6.x     | 14.14.x | Transitioning to Maintenance | 2023-04-01  | 2023-05-01          |
+| cspell | 8.x     | 18.x    | In Active Development        | TBD         | TBD                 |
+| cspell | 7.x     | 16.x    | Transitioning to Maintenance | 2023-10-01  | 2023-11-01          |
+| cspell | 6.x     | 14.14.x | Paid support only[^1]        | 2023-04-01  | 2023-05-01          |
 | cspell | 5.x     | 12.x    | Paid support only[^1]        | -           | 2022-10-01          |
 | cspell | 4.x     | 10.x    | Paid support only[^1]        | -           | 2022-05-01          |
 
