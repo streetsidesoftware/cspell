@@ -5,7 +5,7 @@ Args: '["**/*.go"]'
 Summary:
   files: 240
   filesWithIssues: 221
-  issues: 3480
+  issues: 3482
   errors: 0
 Errors: []
 
@@ -195,7 +195,7 @@ issues:
   - "modules/caddyhttp/errors.go:94:18       abcdefghijkmnopqrstuvwxyz       U       dict := []byte(\"abcdefghijkmnopqrstuvwxyzABCDEFGHJKLMNPQRTUVWXY"
   - "modules/caddyhttp/errors.go:94:43       ABCDEFGHJKLMNPQRTUVWXY          U       abcdefghijkmnopqrstuvwxyzABCDEFGHJKLMNPQRTUVWXY23456789\")"
   - "modules/caddyhttp/errors.go:96:18       abcdefghijkmnpqrstuvwxyz        U       dict = []byte(\"abcdefghijkmnpqrstuvwxyz0123456789\")"
-  - "modules/caddyhttp/fileserver/browse.go:48:7         fsrv    U       func (fsrv *FileServer) serveBrowse"
+  - "modules/caddyhttp/fileserver/browse.go:54:7         fsrv    U       func (fsrv *FileServer) serveBrowse"
   - "modules/caddyhttp/fileserver/browsetplcontext_test.go:72:15         corge       U       {\"/qux/quux/corge/\", []crumb{"
   - "modules/caddyhttp/fileserver/browsetplcontext_test.go:78:6          مجلد        U       {\"/مجلد/\", []crumb{"
   - "modules/caddyhttp/fileserver/browsetplcontext.go:114:37         browseable      U       parent directory is browseable."
@@ -376,7 +376,7 @@ issues:
   - "modules/logging/encoders.go:53:25       milli       U       ce.TimeFormat = \"wall_milli\""
   - "modules/logging/filewriter.go:26:12         natefinch       U       \"gopkg.in/natefinch/lumberjack.v2\""
   - "modules/logging/filters_test.go:89:20       notexist    U       {replaceAction, \"notexist\", \"REDACTED\"},"
-  - "modules/logging/filters_test.go:131:2       outval      U       outval := out.Interface.(caddyhttp"
+  - "modules/logging/filters_test.go:165:2       outval      U       outval := out.Interface.(caddyhttp"
   - "modules/logging/netwriter.go:94:2           reconn      U       reconn := &redialerConn{"
   - "modules/logging/netwriter.go:94:13          redialer    U       reconn := &redialerConn{"
   - "modules/metrics/metrics_test.go:29:52       openmetrics     U       tDispenser(`metrics { disable_openmetrics }`)"

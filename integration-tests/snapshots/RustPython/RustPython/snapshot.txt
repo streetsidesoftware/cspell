@@ -3,7 +3,7 @@ Repository: RustPython/RustPython
 Url: "https://github.com/RustPython/RustPython.git"
 Args: ["**"]
 Lines:
- CSpell: Files checked: 596, Issues found: 2695 in 305 files
+ CSpell: Files checked: 596, Issues found: 2706 in 305 files
  exit code: 1
 ./Cargo.toml:111:82    - Unknown word (termcolor)  -- features = ["atty", "termcolor"] }
 ./Cargo.toml:154:62    - Unknown word (redoxer)    -- to compile/check with redoxer
@@ -315,11 +315,12 @@ Lines:
 ./extra_tests/snippets/stdlib_sqlite.py:9:4       - Unknown word (executemany)   -- cx.executemany("INSERT INTO foo(key
 ./extra_tests/snippets/stdlib_struct.py:45:15     - Unknown word (calcsize)   -- assert struct.calcsize("B") == 1
 ./extra_tests/snippets/stdlib_subprocess.py:18:36     - Unknown word (unixy)      -- make work in a non-unixy environment (something
-./extra_tests/snippets/stdlib_sys.py:20:12     - Unknown word (getfilesystemencoding) -- assert sys.getfilesystemencoding() == 'utf-8'
-./extra_tests/snippets/stdlib_sys.py:21:12     - Unknown word (getfilesystemencodeerrors) -- assert sys.getfilesystemencodeerrors().startswith('surrogate
-./extra_tests/snippets/stdlib_sys.py:29:12     - Unknown word (maxunicode)                -- assert sys.maxunicode == 1114111
-./extra_tests/snippets/stdlib_sys.py:67:5      - Unknown word (setrecursionlimit)         -- sys.setrecursionlimit(200)
-./extra_tests/snippets/stdlib_sys.py:74:18     - Unknown word (getwindowsversion)         -- winver = sys.getwindowsversion()
+./extra_tests/snippets/stdlib_sys.py:112:12    - Unknown word (PYTHONSAFEPATH)            -- # Test the PYTHONSAFEPATH environment variable
+./extra_tests/snippets/stdlib_sys.py:22:12     - Unknown word (getfilesystemencoding) -- assert sys.getfilesystemencoding() == 'utf-8'
+./extra_tests/snippets/stdlib_sys.py:23:12     - Unknown word (getfilesystemencodeerrors) -- assert sys.getfilesystemencodeerrors().startswith('surrogate
+./extra_tests/snippets/stdlib_sys.py:31:12     - Unknown word (maxunicode)                -- assert sys.maxunicode == 1114111
+./extra_tests/snippets/stdlib_sys.py:69:5      - Unknown word (setrecursionlimit)         -- sys.setrecursionlimit(200)
+./extra_tests/snippets/stdlib_sys.py:76:18     - Unknown word (getwindowsversion)         -- winver = sys.getwindowsversion()
 ./extra_tests/snippets/stdlib_sys_getframe.py:4:20      - Unknown word (getframe)   -- locals_dict = sys._getframe().f_locals
 ./extra_tests/snippets/stdlib_xdrlib.py:1:25      - Unknown word (superceeded) -- This probably will be superceeded by the python unittests
 ./extra_tests/snippets/stdlib_xdrlib.py:1:51      - Unknown word (unittests)   -- superceeded by the python unittests when that works.
@@ -381,15 +382,15 @@ Lines:
 ./src/lib.rs:122:13    - Unknown word (getpip)     -- let get_getpip = rustpython_vm::py
 ./src/lib.rs:12:35     - Unknown word (mymod)      -- vm.add_native_module("mymod".to_owned(), Box::new
 ./src/lib.rs:13:81     - Unknown word (otherthing) -- pass", module_name = "otherthing"));
-./src/lib.rs:221:9     - Unknown word (Speedscope) -- Speedscope,
-./src/settings.rs:130:46    - Unknown word (pycs)       -- name("check-hash-based-pycs")
-./src/settings.rs:147:66    - Unknown word (PYTHONUNBUFFERED) -- effect on stdin; also PYTHONUNBUFFERED=x",
-./src/settings.rs:216:49    - Unknown word (PYTHONNOUSERSITE) -- environment && env::var_os("PYTHONNOUSERSITE").is_some())
-./src/settings.rs:226:49    - Unknown word (PYTHONDONTWRITEBYTECODE) -- environment && env::var_os("PYTHONDONTWRITEBYTECODE").is_some())
-./src/settings.rs:230:44    - Unknown word (PYTHONINTMAXSTRDIGITS)   -- environment && env::var_os("PYTHONINTMAXSTRDIGITS").is_some() {
-./src/settings.rs:234:173   - Unknown word (preinitialized)          -- nPython runtime state: preinitialized");
-./src/settings.rs:276:49    - Unknown word (PYTHONWARNDEFAULTENCODING) -- environment && env::var_os("PYTHONWARNDEFAULTENCODING").is_some())
-./src/settings.rs:333:37    - Unknown word (PYTHONHASHSEED)            -- seed = match env::var("PYTHONHASHSEED") {
+./src/lib.rs:230:9     - Unknown word (Speedscope) -- Speedscope,
+./src/settings.rs:135:46    - Unknown word (pycs)       -- name("check-hash-based-pycs")
+./src/settings.rs:152:66    - Unknown word (PYTHONUNBUFFERED) -- effect on stdin; also PYTHONUNBUFFERED=x",
+./src/settings.rs:221:49    - Unknown word (PYTHONNOUSERSITE) -- environment && env::var_os("PYTHONNOUSERSITE").is_some())
+./src/settings.rs:231:49    - Unknown word (PYTHONDONTWRITEBYTECODE) -- environment && env::var_os("PYTHONDONTWRITEBYTECODE").is_some())
+./src/settings.rs:235:44    - Unknown word (PYTHONINTMAXSTRDIGITS)   -- environment && env::var_os("PYTHONINTMAXSTRDIGITS").is_some() {
+./src/settings.rs:239:173   - Unknown word (preinitialized)          -- nPython runtime state: preinitialized");
+./src/settings.rs:287:49    - Unknown word (PYTHONWARNDEFAULTENCODING) -- environment && env::var_os("PYTHONWARNDEFAULTENCODING").is_some())
+./src/settings.rs:344:37    - Unknown word (PYTHONHASHSEED)            -- seed = match env::var("PYTHONHASHSEED") {
 ./src/shell/helper.rs:20:13     - Unknown word (startpos)   -- let mut startpos = 0;
 ./stdlib/Cargo.toml:101:1     - Unknown word (libsqlite)  -- libsqlite3-sys = { version =
 ./stdlib/Cargo.toml:111:16    - Unknown word (handleapi)  -- "winsock2", "handleapi", "ws2def", "std",
@@ -771,7 +772,7 @@ Lines:
 ./vm/src/stdlib/errno.rs:570:31    - Unknown word (WSAN)               -- TODO: e!(cfg(windows), WSAN),
 ./vm/src/stdlib/errno.rs:636:9     - Unknown word (ERFKILL)            -- ERFKILL
 ./vm/src/stdlib/errno.rs:8:9       - Unknown word (errorcode)  -- let errorcode = vm.ctx.new_dict()
-./vm/src/stdlib/imp.rs:161:9     - Unknown word (withdata)     -- withdata: OptionalArg<bool>,
+./vm/src/stdlib/imp.rs:172:9     - Unknown word (withdata)     -- withdata: OptionalArg<bool>,
 ./vm/src/stdlib/imp.rs:53:48     - Unknown word (unimportable) -- present but marked as unimportable, stops search).
 ./vm/src/stdlib/io.rs:1350:17   - Unknown word (fileobj)       -- pub fn repr_fileobj_name(obj: &PyObject
 ./vm/src/stdlib/io.rs:2041:11   - Unknown word (cratio)        -- b2cratio: f64,
@@ -854,40 +855,41 @@ Lines:
 ./vm/src/stdlib/sre.rs:84:9      - Unknown word (groupindex)  -- groupindex: PyDictRef,
 ./vm/src/stdlib/sre.rs:85:9      - Unknown word (indexgroup)  -- indexgroup: PyObjectRef,
 ./vm/src/stdlib/sre.rs:91:12     - Unknown word (isbytes)     -- // isbytes will be hanging (-1
-./vm/src/stdlib/sys.rs:104:8     - Unknown word (platlibdir) -- fn platlibdir(_vm: &VirtualMachine
-./vm/src/stdlib/sys.rs:105:33    - Unknown word (PLATLIBDIR) -- option_env!("RUSTPYTHON_PLATLIBDIR").unwrap_or("lib")
-./vm/src/stdlib/sys.rs:151:38    - Unknown word (PYVENV)     -- Ok(var) = env::var("__PYVENV_LAUNCHER__") {
-./vm/src/stdlib/sys.rs:273:9     - Unknown word (xoptions)   -- fn _xoptions(vm: &VirtualMachine
-./vm/src/stdlib/sys.rs:287:8     - Unknown word (warnoptions) -- fn warnoptions(vm: &VirtualMachine
+./vm/src/stdlib/sys.rs:109:8     - Unknown word (platlibdir) -- fn platlibdir(_vm: &VirtualMachine
+./vm/src/stdlib/sys.rs:110:33    - Unknown word (PLATLIBDIR) -- option_env!("RUSTPYTHON_PLATLIBDIR").unwrap_or("lib")
+./vm/src/stdlib/sys.rs:156:38    - Unknown word (PYVENV)     -- Ok(var) = env::var("__PYVENV_LAUNCHER__") {
+./vm/src/stdlib/sys.rs:278:9     - Unknown word (xoptions)   -- fn _xoptions(vm: &VirtualMachine
+./vm/src/stdlib/sys.rs:292:8     - Unknown word (warnoptions) -- fn warnoptions(vm: &VirtualMachine
 ./vm/src/stdlib/sys.rs:30:81     - Unknown word (multiarch)  -- TODO: copy CPython's multiarch exactly,
-./vm/src/stdlib/sys.rs:339:38    - Unknown word (PYTHONBREAKPOINT) -- var = std::env::var("PYTHONBREAKPOINT")
+./vm/src/stdlib/sys.rs:344:38    - Unknown word (PYTHONBREAKPOINT) -- var = std::env::var("PYTHONBREAKPOINT")
 ./vm/src/stdlib/sys.rs:34:34     - Unknown word (debugbuild) -- name = "_rustpython_debugbuild")]
 ./vm/src/stdlib/sys.rs:35:22     - Unknown word (DEBUGBUILD) -- const RUSTPYTHON_DEBUGBUILD: bool = cfg!(debug_assertions
 ./vm/src/stdlib/sys.rs:37:22     - Unknown word (abiflags)   -- #[pyattr(name = "abiflags")]
 ./vm/src/stdlib/sys.rs:38:22     - Unknown word (ABIFLAGS)   -- pub(crate) const ABIFLAGS: &str = "";
 ./vm/src/stdlib/sys.rs:3:70      - Unknown word (MULTIARCH)  -- module_def, DOC, MAXSIZE, MULTIARCH};
-./vm/src/stdlib/sys.rs:408:8     - Unknown word (getdefaultencoding) -- fn getdefaultencoding() -> &'static str {
-./vm/src/stdlib/sys.rs:413:8     - Unknown word (getrefcount)        -- fn getrefcount(obj: PyObjectRef) -
-./vm/src/stdlib/sys.rs:418:8     - Unknown word (getrecursionlimit)  -- fn getrecursionlimit(vm: &VirtualMachine
-./vm/src/stdlib/sys.rs:423:12    - Unknown word (Getsizeof)          -- struct GetsizeofArgs {
-./vm/src/stdlib/sys.rs:430:8     - Unknown word (getsizeof)          -- fn getsizeof(args: GetsizeofArgs
+./vm/src/stdlib/sys.rs:413:8     - Unknown word (getdefaultencoding) -- fn getdefaultencoding() -> &'static str {
+./vm/src/stdlib/sys.rs:418:8     - Unknown word (getrefcount)        -- fn getrefcount(obj: PyObjectRef) -
+./vm/src/stdlib/sys.rs:423:8     - Unknown word (getrecursionlimit)  -- fn getrecursionlimit(vm: &VirtualMachine
+./vm/src/stdlib/sys.rs:428:12    - Unknown word (Getsizeof)          -- struct GetsizeofArgs {
+./vm/src/stdlib/sys.rs:435:8     - Unknown word (getsizeof)          -- fn getsizeof(args: GetsizeofArgs
 ./vm/src/stdlib/sys.rs:47:22     - Unknown word (hexversion) -- #[pyattr(name = "hexversion")]
-./vm/src/stdlib/sys.rs:486:13    - Unknown word (sysinfoapi)         -- sysinfoapi::GetVersionExW,
-./vm/src/stdlib/sys.rs:487:21    - Unknown word (LPOSVERSIONINFOEXW) -- winnt::{LPOSVERSIONINFOEXW, LPOSVERSIONINFOW, OSVERSIONI
-./vm/src/stdlib/sys.rs:487:41    - Unknown word (LPOSVERSIONINFOW)   -- LPOSVERSIONINFOEXW, LPOSVERSIONINFOW, OSVERSIONINFOEXW},
-./vm/src/stdlib/sys.rs:487:59    - Unknown word (OSVERSIONINFOEXW)   -- IONINFOEXW, LPOSVERSIONINFOW, OSVERSIONINFOEXW},
 ./vm/src/stdlib/sys.rs:48:11     - Unknown word (HEXVERSION) -- const HEXVERSION: usize = version::VERSION
-./vm/src/stdlib/sys.rs:495:17    - Unknown word (osvi)               -- let osvi = &mut version as LPOSVERSION
-./vm/src/stdlib/sys.rs:496:59    - Unknown word (OSVERSIONINFOW)     -- accepts a pointer of OSVERSIONINFOW, but winapi crate's
+./vm/src/stdlib/sys.rs:491:13    - Unknown word (sysinfoapi)         -- sysinfoapi::GetVersionExW,
+./vm/src/stdlib/sys.rs:492:21    - Unknown word (LPOSVERSIONINFOEXW) -- winnt::{LPOSVERSIONINFOEXW, LPOSVERSIONINFOW, OSVERSIONI
+./vm/src/stdlib/sys.rs:492:41    - Unknown word (LPOSVERSIONINFOW)   -- LPOSVERSIONINFOEXW, LPOSVERSIONINFOW, OSVERSIONINFOEXW},
+./vm/src/stdlib/sys.rs:492:59    - Unknown word (OSVERSIONINFOEXW)   -- IONINFOEXW, LPOSVERSIONINFOW, OSVERSIONINFOEXW},
+./vm/src/stdlib/sys.rs:500:17    - Unknown word (osvi)               -- let osvi = &mut version as LPOSVERSION
+./vm/src/stdlib/sys.rs:501:59    - Unknown word (OSVERSIONINFOW)     -- accepts a pointer of OSVERSIONINFOW, but winapi crate's
 ./vm/src/stdlib/sys.rs:52:11     - Unknown word (MAXUNICODE) -- const MAXUNICODE: u32 = std::char::MAX
-./vm/src/stdlib/sys.rs:625:31    - Unknown word (maxdigits)          -- set_int_max_str_digits(maxdigits: usize, vm: &VirtualMachine
-./vm/src/stdlib/sys.rs:642:19    - Unknown word (profilefunc)        -- fn setprofile(profilefunc: PyObjectRef, vm: &VirtualMac
-./vm/src/stdlib/sys.rs:670:17    - Unknown word (tracefunc)          -- fn settrace(tracefunc: PyObjectRef, vm: &VirtualMac
-./vm/src/stdlib/sys.rs:731:18    - Unknown word (PYTHONSAFEPATH)     -- /// -P, `PYTHONSAFEPATH`
-./vm/src/stdlib/sys.rs:781:51    - Unknown word (PYTHREAD)           -- stdlib::thread::_thread::PYTHREAD_NAME,
-./vm/src/stdlib/sys.rs:879:9     - Unknown word (releaselevel)       -- releaselevel: &'static str,
-./vm/src/stdlib/sys.rs:889:36    - Unknown word (RELEASELEVEL)       -- releaselevel: version::RELEASELEVEL,
-./vm/src/stdlib/sys.rs:93:33     - Unknown word (BASEPREFIX) -- option_env!("RUSTPYTHON_BASEPREFIX").unwrap_or_else(||
+./vm/src/stdlib/sys.rs:630:31    - Unknown word (maxdigits)          -- set_int_max_str_digits(maxdigits: usize, vm: &VirtualMachine
+./vm/src/stdlib/sys.rs:647:19    - Unknown word (profilefunc)        -- fn setprofile(profilefunc: PyObjectRef, vm: &VirtualMac
+./vm/src/stdlib/sys.rs:675:17    - Unknown word (tracefunc)          -- fn settrace(tracefunc: PyObjectRef, vm: &VirtualMac
+./vm/src/stdlib/sys.rs:786:51    - Unknown word (PYTHREAD)           -- stdlib::thread::_thread::PYTHREAD_NAME,
+./vm/src/stdlib/sys.rs:80:22     - Unknown word (dllhandle)  -- #[pyattr(name = "dllhandle")]
+./vm/src/stdlib/sys.rs:81:11     - Unknown word (DLLHANDLE)  -- const DLLHANDLE: usize = 0;
+./vm/src/stdlib/sys.rs:884:9     - Unknown word (releaselevel)       -- releaselevel: &'static str,
+./vm/src/stdlib/sys.rs:894:36    - Unknown word (RELEASELEVEL)       -- releaselevel: version::RELEASELEVEL,
+./vm/src/stdlib/sys.rs:98:33     - Unknown word (BASEPREFIX) -- option_env!("RUSTPYTHON_BASEPREFIX").unwrap_or_else(||
 ./vm/src/stdlib/sysconfigdata.rs:20:19     - Unknown word (GETRANDOM)  -- "HAVE_GETRANDOM" => 1,
 ./vm/src/stdlib/thread.rs:337:25    - Unknown word (sents)      -- SENTINELS.with(|sents| {
 ./vm/src/stdlib/time.rs:17:19     - Unknown word (Timelike)   -- Datelike, Timelike,
@@ -917,9 +919,10 @@ Lines:
 ./vm/src/types/slot.rs:137:28    - Unknown word (TPFLAGS)    -- CPython default: Py_TPFLAGS_HAVE_STACKLESS_EXTENSION
 ./vm/src/types/slot.rs:141:43    - Unknown word (Subclassable) -- types created in Python. Subclassable and are a
 ./vm/src/types/slot.rs:379:29    - Unknown word (subslot)      -- macro_rules! toggle_subslot {
-./vm/src/vm/mod.rs:571:29    - Unknown word (pyiter)     -- return self.map_pyiter(value, func);
-./vm/src/vm/setting.rs:43:10     - Unknown word (Xfoo)       -- /// -Xfoo[=bar]
-./vm/src/vm/setting.rs:58:10     - Unknown word (Wfoo)       -- /// -Wfoo
+./vm/src/vm/mod.rs:226:17    - Unknown word (rustpythonpath) -- let rustpythonpath_env = std::env::var
+./vm/src/vm/mod.rs:594:29    - Unknown word (pyiter)         -- return self.map_pyiter(value, func);
+./vm/src/vm/setting.rs:46:10     - Unknown word (Xfoo)       -- /// -Xfoo[=bar]
+./vm/src/vm/setting.rs:61:10     - Unknown word (Wfoo)       -- /// -Wfoo
 ./vm/src/vm/thread.rs:38:24     - Unknown word (intp)       -- let vm_owns_obj = |intp: NonNull<VirtualMachine
 ./vm/src/vm/vm_new.rs:173:28    - Unknown word (ternop)     -- pub fn new_unsupported_ternop_error(
 ./wasm/README.md:1:16      - Unknown word (webassembly) -- # Compiling to webassembly

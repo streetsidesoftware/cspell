@@ -3,7 +3,7 @@ Repository: eslint/eslint
 Url: "https://github.com/eslint/eslint"
 Args: ["**","--exclude=bin/**","--exclude=CHANGELOG.md","--exclude=_data","--exclude=tests/bench/large.js","--exclude=docs/src/_includes","--exclude=docs/src/assets/{fonts,s?css,images}"]
 Lines:
- CSpell: Files checked: 1889, Issues found: 5529 in 1256 files
+ CSpell: Files checked: 1889, Issues found: 5563 in 1257 files
  exit code: 1
 ./Makefile.js:145:88    - Unknown word (ined)               -- followed by the string "ined".
 ./Makefile.js:151:48    - Unknown word (blogpost)           -- render(cat("./templates/blogpost.md.ejs"), renderContext
@@ -13,9 +13,10 @@ Lines:
 ./Makefile.js:321:8     - Unknown word (Preminor)           -- * Preminor and prepatch release
 ./Makefile.js:329:56    - Unknown word (preminor)           -- a major release (not preminor/prepatch).
 ./Makefile.js:572:11    - Unknown word (fuzzer)             -- const fuzzerRunner = require("./tools
+./Makefile.js:631:8     - Unknown word (wdio)               -- target.wdio = () => {
 ./Makefile.js:77:88     - Unknown word (markdownlintignore) -- path.join(__dirname, ".markdownlintignore"), "utf-8")),
 ./Makefile.js:81:10     - Unknown word (MULTIFILES)         -- PERF_MULTIFILES_TARGET_DIR = path.join
-./Makefile.js:922:18    - Unknown word (Multifiles)         -- function downloadMultifilesTestTarget(cb) {
+./Makefile.js:920:18    - Unknown word (Multifiles)         -- function downloadMultifilesTestTarget(cb) {
 ./README.md:204:5     - Unknown word (teamstart)  -- <!--teamstart-->
 ./README.md:218:7     - Unknown word (Djermanovic) -- Milos Djermanovic
 ./README.md:234:1     - Unknown word (Nitin)       -- Nitin Kumar
@@ -29,7 +30,7 @@ Lines:
 ./README.md:280:5     - Unknown word (teamend)     -- <!--teamend-->
 ./README.md:287:5     - Unknown word (sponsorsstart) -- <!--sponsorsstart-->
 ./README.md:292:243   - Unknown word (Nrwl)          -- logo.png" alt="Nx (by Nrwl)" height="32"></a>
-./README.md:292:975   - Unknown word (Transloadit)   -- com/u/125754?v=4" alt="Transloadit" height="32"></a> <a
+./README.md:292:930   - Unknown word (Transloadit)   -- com/u/125754?v=4" alt="Transloadit" height="32"></a> <a
 ./README.md:293:5     - Unknown word (sponsorsend)   -- <!--sponsorsend-->
 ./conf/config-schema.js:14:5      - Unknown word (fileoverview) -- * @fileoverview Defines a schema for
 ./conf/config-schema.js:8:63      - Unknown word (nzakas)     -- file, please contact @nzakas first.
@@ -164,7 +165,7 @@ Lines:
 ./docs/src/rules/no-cond-assign.md:2:11      - Unknown word (cond)       -- title: no-cond-assign
 ./docs/src/rules/no-confusing-arrow.md:68:21     - Unknown word (Parens)     -- { "allowParens": true, "onlyOneSimpleParam
 ./docs/src/rules/no-dupe-else-if.md:63:5      - Unknown word (quuux)      -- quuux();
-./docs/src/rules/no-dupe-keys.md:55:5      - Unknown word (quxx)       -- quxx: "qux"
+./docs/src/rules/no-dupe-keys.md:56:5      - Unknown word (quxx)       -- quxx: "qux"
 ./docs/src/rules/no-duplicate-imports.md:55:8      - Unknown word (mergeable)  -- // not mergeable
 ./docs/src/rules/no-empty-character-class.md:40:13     - Unknown word (abcefg)     -- regex.test("abcefg"); // false, the nested
 ./docs/src/rules/no-eq-null.md:61:41     - Unknown word (eqnull)     -- rule corresponds to `eqnull` rule of JSHint.
@@ -183,7 +184,8 @@ Lines:
 ./docs/src/rules/no-plusplus.md:2:11      - Unknown word (plusplus)   -- title: no-plusplus
 ./docs/src/rules/no-proto.md:2:11      - Unknown word (proto)      -- title: no-proto
 ./docs/src/rules/no-prototype-builtins.md:10:216    - Unknown word (webserver)  -- would be unsafe for a webserver to parse JSON input
-./docs/src/rules/no-redeclare.md:70:41     - Unknown word (redeclaration) -- this rule also checks redeclaration of built-in globals
+./docs/src/rules/no-redeclare.md:5:68      - Unknown word (redeclares) -- TypeScript will catch `let` redeclares and `const` redeclares
+./docs/src/rules/no-redeclare.md:72:41     - Unknown word (redeclaration) -- this rule also checks redeclaration of built-in globals
 ./docs/src/rules/no-restricted-globals.md:28:54     - Unknown word (fdescribe)  -- ["error", "event", "fdescribe"]
 ./docs/src/rules/no-restricted-imports.md:125:154   - Unknown word (punycode)   -- ,"net","os","path","punycode","querystring","readline
 ./docs/src/rules/no-restricted-imports.md:125:165   - Unknown word (querystring) -- ,"path","punycode","querystring","readline","repl",
@@ -399,9 +401,10 @@ Lines:
 ./lib/shared/config-validator.js:286:55    - Unknown word (ECMAFEATURES) -- source, "ESLINT_LEGACY_ECMAFEATURES");
 ./lib/shared/string-utils.js:12:28     - Unknown word (graphemer)  -- Graphemer = require("graphemer").default;
 ./lib/shared/string-utils.js:12:7      - Unknown word (Graphemer)  -- const Graphemer = require("graphemer
-./package.json:120:6     - Unknown word (eslump)     -- "eslump": "^3.0.0",
+./package.json:125:6     - Unknown word (eslump)     -- "eslump": "^3.0.0",
 ./package.json:137:6     - Unknown word (memfs)      -- "memfs": "^3.0.1",
 ./package.json:138:6     - Unknown word (metascraper) -- "metascraper": "^5.25.7",
+./package.json:158:6     - Unknown word (webdriverio) -- "webdriverio": "^8.14.6",
 ./templates/blogpost.md.ejs:18:10     - Unknown word (linkify)    -- function linkify(line) {
 ./templates/blogpost.md.ejs:8:5       - Unknown word (eslintbot)  -- - eslintbot
 ./templates/formatter-examples.md.ejs:72:2      - Unknown word (iframe)     -- <iframe src="html-formatter
@@ -727,3 +730,12 @@ Lines:
 ./tools/fuzzer-runner.js:50:42     - Unknown word (elapseds)   -- rules [:bar] :percent, :elapseds elapsed, eta :etas,
 ./tools/update-readme.js:71:60     - Unknown word (valign)     -- `<td align="center" valign="top" width="11%">
 ./tools/update-rule-types.js:5:6       - Unknown word (jscodeshift) -- * jscodeshift -t tools/update-rule
+./wdio.conf.js:121:16    - Unknown word (browserstack) -- * - @wdio/browserstack-service, @wdio/devtools
+./wdio.conf.js:124:16    - Unknown word (sumologic)    -- * - @wdio/sumologic-reporter
+./wdio.conf.js:129:19    - Unknown word (appium)       -- * '@wdio/appium-service': 'info'
+./wdio.conf.js:150:5     - Unknown word (waitfor)      -- waitforTimeout: 10000,
+./wdio.conf.js:177:48    - Unknown word (specfile)     -- to retry the entire specfile when it fails as a whole
+./wdio.conf.js:183:31    - Unknown word (specfiles)    -- Whether or not retried specfiles should be retried immediately
+./wdio.conf.js:224:76    - Unknown word (initialise)   -- spawned and can be used to initialise specific service
+./wdio.conf.js:248:34    - Unknown word (initialising) -- executed just before initialising the webdriver session
+./wdio.conf.js:318:39    - Unknown word (informations) -- Object} result.retries informations to spec related retries
