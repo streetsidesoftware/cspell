@@ -54,7 +54,7 @@ jobs:
           echo "${{ toJson(github.event.inputs) }}"
           echo "Update Snapshots: $UPDATE_SNAPSHOTS"
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           ref: ${{ env.REF_BRANCH }}
 
