@@ -4,8 +4,8 @@ Url: https://github.com/eslint/eslint
 Args: '["**","--exclude=bin/**","--exclude=CHANGELOG.md","--exclude=_data","--exclude=tests/bench/large.js","--exclude=docs/src/_includes","--exclude=docs/src/assets/{fonts,s?css,images}"]'
 Summary:
   files: 1889
-  filesWithIssues: 1256
-  issues: 5529
+  filesWithIssues: 1257
+  issues: 5563
   errors: 0
 Errors: []
 
@@ -143,7 +143,7 @@ issues:
   - "docs/src/rules/no-cond-assign.md:2:11           cond    U       title: no-cond-assign"
   - "docs/src/rules/no-confusing-arrow.md:68:21          Parens      U       { \"allowParens\": true, \"onlyOneSimpleParam"
   - "docs/src/rules/no-dupe-else-if.md:63:5          quuux       U       quuux();"
-  - "docs/src/rules/no-dupe-keys.md:55:5         quxx    U       quxx: \"qux\""
+  - "docs/src/rules/no-dupe-keys.md:56:5         quxx    U       quxx: \"qux\""
   - "docs/src/rules/no-duplicate-imports.md:55:8         mergeable       U       // not mergeable"
   - "docs/src/rules/no-empty-character-class.md:40:13        abcefg      U       regex.test(\"abcefg\"); // false, the nested"
   - "docs/src/rules/no-eq-null.md:61:41          eqnull      U       rule corresponds to `eqnull` rule of JSHint."
@@ -162,7 +162,8 @@ issues:
   - "docs/src/rules/no-plusplus.md:2:11          plusplus    U       title: no-plusplus"
   - "docs/src/rules/no-proto.md:2:11         proto       U       title: no-proto"
   - "docs/src/rules/no-prototype-builtins.md:10:216      webserver       U       would be unsafe for a webserver to parse JSON input"
-  - "docs/src/rules/no-redeclare.md:70:41        redeclaration       U       this rule also checks redeclaration of built-in globals"
+  - "docs/src/rules/no-redeclare.md:5:68         redeclares          U       TypeScript will catch `let` redeclares and `const` redeclares"
+  - "docs/src/rules/no-redeclare.md:72:41        redeclaration       U       this rule also checks redeclaration of built-in globals"
   - "docs/src/rules/no-restricted-globals.md:28:54       fdescribe       U       [\"error\", \"event\", \"fdescribe\"]"
   - "docs/src/rules/no-restricted-imports.md:125:64      dgram           U       \"cluster\",\"crypto\",\"dgram\",\"dns\",\"domain\",\"events"
   - "docs/src/rules/no-restricted-imports.md:125:96      freelist        U       ,\"domain\",\"events\",\"freelist\",\"fs\",\"http\",\"https"
@@ -388,10 +389,12 @@ issues:
   - "Makefile.js:321:21      prepatch                U       * Preminor and prepatch release will not."
   - "Makefile.js:329:56      preminor                U       a major release (not preminor/prepatch)."
   - "Makefile.js:572:11      fuzzer                  U       const fuzzerRunner = require(\"./tools"
-  - "Makefile.js:922:18      Multifiles              U       function downloadMultifilesTestTarget(cb) {"
-  - "package.json:120:6          eslump          U       \"eslump\": \"^3.0.0\","
+  - "Makefile.js:631:8       wdio                    U       target.wdio = () => {"
+  - "Makefile.js:920:18      Multifiles              U       function downloadMultifilesTestTarget(cb) {"
+  - "package.json:125:6          eslump          U       \"eslump\": \"^3.0.0\","
   - "package.json:137:6          memfs           U       \"memfs\": \"^3.0.1\","
   - "package.json:138:6          metascraper     U       \"metascraper\": \"^5.25.7\","
+  - "package.json:158:6          webdriverio     U       \"webdriverio\": \"^8.14.6\","
   - "README.md:204:5         teamstart           U       <!--teamstart-->"
   - "README.md:218:7         Djermanovic         U       Milos Djermanovic"
   - "README.md:234:1         Nitin               U       Nitin Kumar"
@@ -405,7 +408,7 @@ issues:
   - "README.md:280:5         teamend             U       <!--teamend-->"
   - "README.md:287:5         sponsorsstart       U       <!--sponsorsstart-->"
   - "README.md:292:243       Nrwl                U       logo.png\" alt=\"Nx (by Nrwl)\" height=\"32\"></a>"
-  - "README.md:292:975       Transloadit         U       com/u/125754?v=4\" alt=\"Transloadit\" height=\"32\"></a> <a"
+  - "README.md:292:930       Transloadit         U       com/u/125754?v=4\" alt=\"Transloadit\" height=\"32\"></a> <a"
   - "README.md:293:5         sponsorsend         U       <!--sponsorsend-->"
   - "templates/blogpost.md.ejs:8:5           eslintbot       U       - eslintbot"
   - "templates/blogpost.md.ejs:18:10         linkify         U       function linkify(line) {"
@@ -732,3 +735,12 @@ issues:
   - "tools/fuzzer-runner.js:50:42        elapseds    U       rules [:bar] :percent, :elapseds elapsed, eta :etas,"
   - "tools/update-readme.js:71:60        valign      U       `<td align=\"center\" valign=\"top\" width=\"11%\">"
   - "tools/update-rule-types.js:5:6          jscodeshift     U       * jscodeshift -t tools/update-rule"
+  - "wdio.conf.js:121:16         browserstack    U       * - @wdio/browserstack-service, @wdio/devtools"
+  - "wdio.conf.js:124:16         sumologic       U       * - @wdio/sumologic-reporter"
+  - "wdio.conf.js:129:19         appium          U       * '@wdio/appium-service': 'info'"
+  - "wdio.conf.js:150:5          waitfor         U       waitforTimeout: 10000,"
+  - "wdio.conf.js:177:48         specfile        U       to retry the entire specfile when it fails as a whole"
+  - "wdio.conf.js:183:31         specfiles       U       Whether or not retried specfiles should be retried immediately"
+  - "wdio.conf.js:224:76         initialise      U       spawned and can be used to initialise specific service"
+  - "wdio.conf.js:248:34         initialising    U       executed just before initialising the webdriver session"
+  - "wdio.conf.js:318:39         informations    U       Object} result.retries informations to spec related retries"
