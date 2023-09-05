@@ -44,7 +44,7 @@ jobs:
       - run: pnpm run coverage
 
       - name: Upload coverage Coveralls
-        uses: coverallsapp/github-action@95b1a2355bd0e526ad2fd62da9fd386ad4c98474 # 2.2.1
+        uses: coverallsapp/github-action@3b7078ee895f74fc267b7b267c88211df59fa816 # 2.2.2
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           path-to-lcov: ./lcov.info
