@@ -156,6 +156,12 @@ export interface BaseOptions {
     validateDirectives?: boolean;
 
     /**
+     * Return zero exit code even when there are findings.
+     * @default false
+     */
+    allowFailure?: boolean;
+
+    /**
      * Execution flags.
      * Used primarily for releasing experimental features.
      * Flags are of the form key:value
