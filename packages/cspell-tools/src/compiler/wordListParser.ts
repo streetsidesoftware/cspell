@@ -166,7 +166,8 @@ export function createParseFileLineMapper(options?: Partial<ParseFileOptions>): 
     function splitLine(line: string): string[] {
         line = line.replace(/#.*/, ''); // remove comment
         line = line.trim();
-        line = line.replace(/\bU\+[0-9A-F]+\b/gi, '|'); // Remove Unicode Definitions
+        line = line.replace(/\bU\+[0-9A-F]{4}\b/gi, '|'); // Remove Unicode Definitions
+        line = line.replace(/\\U[0-9A-F]{4}/gi, '|'); // Remove Unicode Definitions
         line = line.replace(regNonWordOrDigit, '|');
         line = line.replace(/'(?=\|)/g, ''); // remove trailing '
         line = line.replace(/'$/, ''); // remove trailing '
@@ -181,8 +182,7 @@ export function createParseFileLineMapper(options?: Partial<ParseFileOptions>): 
             .map((a) => a.trim())
             .filter((a) => !!a)
             .filter((a) => !a.match(/^[0-9_-]+$/)) // pure numbers and symbols
-            .filter((a) => !a.match(/^[ux][0-9A-F]*$/i)) // hex digits
-            .filter((a) => !a.match(/^0[xo][0-9A-F]*$/i)); // c-style hex/octal digits
+            .filter((a) => !a.match(/^0[xo][0-9A-F]+$/i)); // c-style hex/octal digits
 
         return lines;
     }
