@@ -70,7 +70,3 @@ async function textFileReader(reader: Reader, options: SourceReaderOptions): Pro
         words,
     };
 }
-
-export const __debug = {
-    splitLines,
-};

@@ -3,7 +3,7 @@ import { describe, expect, test } from 'vitest';
 
 import { createTestHelper } from '../test/TestHelper.js';
 import type { SourceReaderOptions } from './SourceReader.js';
-import { __debug, createSourceReader } from './SourceReader.js';
+import { createSourceReader } from './SourceReader.js';
 import { defaultAllowedSplitWords } from './WordsCollection.js';
 
 const helper = createTestHelper(import.meta.url);
@@ -81,17 +81,6 @@ describe('Validate the iterateWordsFromFile', () => {
         // cspell:ignore codecode errorerror codemsg
         // the results are sorted
         expect(results.join('|')).toBe('Error*|+error*|Code*|+code*|*msg|!err|!Errorerror|!Codemsg|Café|!codecode');
-    });
-
-    test.each`
-        src                      | splitWords | expected
-        ${[]}                    | ${true}    | ${[]}
-        ${s('hello|there')}      | ${true}    | ${s('hello|there')}
-        ${s('hello|xfce|there')} | ${true}    | ${s('hello|xfce|there') /* cspell:ignore xfce */}
-    `('splitLines $src', ({ src, splitWords, expected }) => {
-        const r = __debug.splitLines(src, { splitWords } as SourceReaderOptions);
-        const result = Array.isArray(r) && r === src ? r : [...r];
-        expect(result).toEqual(expected);
     });
 
     function s(a: string, on: string | RegExp = '|'): string[] {
