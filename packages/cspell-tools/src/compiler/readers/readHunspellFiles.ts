@@ -3,8 +3,8 @@ import { COMPOUND_FIX, FORBID_PREFIX } from 'cspell-trie-lib';
 import type { AffWord } from 'hunspell-reader';
 import * as HR from 'hunspell-reader';
 
-import { regHunspellFile } from '../Reader.js';
 import type { AnnotatedWord, BaseReader, ReaderOptions } from './ReaderOptions.js';
+import { regHunspellFile } from './regHunspellFile.js';
 
 const DEDUPE_SIZE = 1000;
 

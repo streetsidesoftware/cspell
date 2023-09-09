@@ -1,7 +1,6 @@
 import assert from 'assert';
-import { promises as fs } from 'fs';
+import { mkdirSync, promises as fs, readFileSync, rmSync, statSync, writeFileSync } from 'fs';
 import * as path from 'path';
-import * as shell from 'shelljs';
 import { fileURLToPath } from 'url';
 import { expect } from 'vitest';
 
@@ -49,12 +48,11 @@ export interface TestHelper {
     mkdir(...parts: string[]): void;
 
     /**
-     * copy files
-     * same as shell.cp
+     * copy file
      * @param from
      * @param to
      */
-    cp(from: string, to: string): void;
+    cpFileSync(from: string, to: string): void;
 
     packageTemp(...parts: string[]): string;
 
@@ -111,7 +109,7 @@ class TestHelperImpl implements TestHelper {
      * delete the contents of the temp directory for the current test.
      */
     clearTempDir(): void {
-        shell.rm('-rf', this.resolveTemp());
+        rmSync(this.resolveTemp(), { force: true, recursive: true });
     }
 
     /**
@@ -131,7 +129,7 @@ class TestHelperImpl implements TestHelper {
      */
     mkdir(...parts: string[]): void {
         const pTemp = this.resolveTemp(...parts);
-        shell.mkdir('-p', pTemp);
+        mkdirSync(pTemp, { recursive: true });
     }
 
     /**
@@ -139,8 +137,10 @@ class TestHelperImpl implements TestHelper {
      * @param src - glob
      * @param dest - directory or file
      */
-    cp(src: string, dest: string): void {
-        shell.cp(this.resolveTemp(src), this.resolveTemp(dest));
+    cpFileSync(src: string, dest: string): void {
+        const srcT = this.resolveTemp(src);
+        const dstT = this.resolveTemp(dest);
+        cpFileSync(srcT, dstT);
     }
 
     /**
@@ -182,9 +182,18 @@ export function resolvePathToFixture(...segments: string[]): string {
 }
 
 export function test_dirname(importMetaUrl: string): string {
-    return path.dirname(test_filename(importMetaUrl));
+    return fileURLToPath(new URL('.', importMetaUrl));
 }
 
 export function test_filename(importMetaUrl: string): string {
     return fileURLToPath(importMetaUrl);
+}
+
+function cpFileSync(srcFile: string, dst: string) {
+    const statDst = statSync(dst, { throwIfNoEntry: false });
+    if (statDst && statDst.isDirectory()) {
+        dst = path.join(dst, path.basename(srcFile));
+    }
+    const buf = readFileSync(srcFile);
+    writeFileSync(dst, buf);
 }

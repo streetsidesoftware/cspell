@@ -56,7 +56,7 @@ describe('Validate the application', () => {
 
     beforeEach(() => {
         testHelper.createTempDir();
-        testHelper.cp(path.join(pathSamples, 'cities.txt'), '.');
+        testHelper.cpFileSync(path.join(pathSamples, 'cities.txt'), '.');
         consoleSpy.attach();
     });
     afterEach(() => {
