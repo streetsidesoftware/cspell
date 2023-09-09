@@ -1,9 +1,8 @@
 import type { BaseReader, Reader, ReaderOptions } from './readers/ReaderOptions.js';
 import { readHunspellFiles } from './readers/readHunspellFiles.js';
+import { regHunspellFile } from './readers/regHunspellFile.js';
 import { textFileReader } from './readers/textFileReader.js';
 import { trieFileReader } from './readers/trieFileReader.js';
-
-export const regHunspellFile = /\.(dic|aff)$/i;
 
 interface ReaderSelector {
     test: RegExp;

@@ -51,6 +51,8 @@ describe('Validate the wordListCompiler', () => {
         ${sampleContent}                                                                      | ${pf()}                 | ${s('Tower of London|New|York')}
         ${'apple\u200cbanana'}                                                                | ${pf({ split: true })}  | ${['apple', 'banana']}
         ${'apple\u200cbanana'}                                                                | ${pf({})}               | ${['apple\u200cbanana']}
+        ${'apple\\u200cbanana'}                                                               | ${pf({ split: true })}  | ${s('apple|banana')}
+        ${s('apple|xfc|banana|x|u|a')}                                                        | ${pf({ split: true })}  | ${s('apple|xfc|banana|x|u|a')}
     `('createSortAndFilterOperation $content $options', ({ content, options, expectedResult }) => {
         const r = [...parseFileLines(content, options)];
         expect(r).toEqual(expectedResult);
