@@ -50,21 +50,13 @@ export interface FileSettings extends ExtendableSettings, CommandLineSettings {
     userWords?: string[];
 
     /**
-     * @markdownDescription
      * Allows this configuration to inherit configuration for one or more other files.
      *
      * See [Importing / Extending Configuration](https://cspell.org/configuration/imports/) for more details.
-     *
-     * @description
-     * Allows this configuration to inherit configuration for one or more other files.
-     *
-     * See https://cspell.org/configuration/imports/ for more details.
-     *
      */
     import?: FsPath | FsPath[];
 
     /**
-     * @markdownDescription
      * The root to use for glob patterns found in this configuration.
      * Default: location of the configuration file.
      *   For compatibility reasons, config files with version 0.1, the glob root will
@@ -78,18 +70,10 @@ export interface FileSettings extends ExtendableSettings, CommandLineSettings {
      * - `${cwd}` - will be replaced with the current working directory.
      * - `.` - will be the location of the containing configuration file.
      *
-     * @description
-     * The root to use for glob patterns found in this configuration.
      */
     globRoot?: FSPathResolvable;
 
     /**
-     * @markdownDescription
-     * Glob patterns of files to be checked.
-     *
-     * Glob patterns are relative to the `globRoot` of the configuration file that defines them.
-     *
-     * @description
      * Glob patterns of files to be checked.
      *
      * Glob patterns are relative to the `globRoot` of the configuration file that defines them.
@@ -129,17 +113,6 @@ export interface FileSettings extends ExtendableSettings, CommandLineSettings {
     readonly?: boolean;
 
     /**
-     * @markdownDescription
-     * Define which reports to use.
-     * `default` - is a special name for the default cli reporter.
-     *
-     * Examples:
-     * - `["default"]` - to use the default reporter
-     * - `["@cspell/cspell-json-reporter"]` - use the cspell JSON reporter.
-     * - `[["@cspell/cspell-json-reporter", { "outFile": "out.json" }]]`
-     * - `[ "default", ["@cspell/cspell-json-reporter", { "outFile": "out.json" }]]` - Use both the default reporter and the cspell-json-reporter.
-     *
-     * @description
      * Define which reports to use.
      * `default` - is a special name for the default cli reporter.
      *
@@ -188,7 +161,6 @@ export interface FileSettings extends ExtendableSettings, CommandLineSettings {
  */
 export interface ExtendableSettings extends Settings {
     /**
-     * @markdownDescription
      * Overrides are used to apply settings for specific files in your project.
      *
      * For example:
@@ -207,8 +179,6 @@ export interface ExtendableSettings extends Settings {
      *   }
      * ]
      * ```
-     * @description
-     * Overrides are used to apply settings for specific files in your project.
      */
     overrides?: OverrideSettings[];
 }
@@ -231,10 +201,6 @@ export interface Settings extends ReportingConfiguration, BaseSetting, PnPSettin
     enabledLanguageIds?: LanguageIdSingle[];
 
     /**
-     * @title File Types to Check
-     * @scope resource
-     * @uniqueItems true
-     * @markdownDescription
      * Enable / Disable checking file types (languageIds).
      *
      * These are in additional to the file types specified by `cSpell.enabledLanguageIds`.
@@ -247,17 +213,17 @@ export interface Settings extends ReportingConfiguration, BaseSetting, PnPSettin
      * !json       // disable checking for json
      * kotlin      // enable checking for kotlin
      * ```
+     * @title File Types to Check
+     * @scope resource
+     * @uniqueItems true
      */
     enableFiletypes?: LanguageIdSingle[];
 
     /**
-     * @markdownDescription
      * Additional settings for individual languages.
      *
      * See [Language Settings](https://cspell.org/configuration/language-settings/) for more details.
      *
-     * @description
-     * Additional settings for individual languages.
      */
     languageSettings?: LanguageSetting[];
 
@@ -291,15 +257,11 @@ export interface SuggestionsConfiguration {
     suggestionsTimeout?: number;
 
     /**
-     * @markdownDescription
      * The maximum number of changes allowed on a word to be considered a suggestions.
      *
      * For example, appending an `s` onto `example` -> `examples` is considered 1 change.
      *
      * Range: between 1 and 5.
-     *
-     * @description
-     * The maximum number of changes allowed on a word to be considered a suggestions.
      *
      * @default 3
      */
@@ -463,13 +425,9 @@ export interface BaseSetting extends InlineDictionary, ExperimentalBaseSettings 
     enabled?: boolean;
 
     /**
-     * @markdownDescription
      * True to enable compound word checking. See [Case Sensitivity](https://cspell.org/docs/case-sensitive/) for more details.
      *
-     * @description
-     * True to enable compound word checking. See https://cspell.org/docs/case-sensitive/ for more details.
-
-    * @default false
+     * @default false
      */
     allowCompoundWords?: boolean;
 
@@ -499,7 +457,6 @@ export interface BaseSetting extends InlineDictionary, ExperimentalBaseSettings 
     dictionaryDefinitions?: DictionaryDefinition[];
 
     /**
-     * @markdownDescription
      * Optional list of dictionaries to use. Each entry should match the name of the dictionary.
      *
      * To remove a dictionary from the list, add `!` before the name.
@@ -508,9 +465,6 @@ export interface BaseSetting extends InlineDictionary, ExperimentalBaseSettings 
      *
      * See the [Dictionaries](https://cspell.org/docs/dictionaries/)
      * and [Custom Dictionaries](https://cspell.org/docs/dictionaries-custom/) for more details.
-     *
-     * @description
-     * Optional list of dictionaries to use. Each entry should match the name of the dictionary.
      */
     dictionaries?: DictionaryReference[];
 
@@ -526,7 +480,6 @@ export interface BaseSetting extends InlineDictionary, ExperimentalBaseSettings 
     noSuggestDictionaries?: DictionaryReference[];
 
     /**
-     * @markdownDescription
      * List of regular expression patterns or pattern names to exclude from spell checking.
      *
      * Example: `["href"]` - to exclude html href pattern.
@@ -552,26 +505,20 @@ export interface BaseSetting extends InlineDictionary, ExperimentalBaseSettings 
      *
      * While you can create your own patterns, you can also leverage several patterns that are
      * [built-in to CSpell](https://cspell.org/types/cspell-types/types/PredefinedPatterns.html).
-     * @description
-     * List of regular expression patterns or pattern names to exclude from spell checking.
      */
     ignoreRegExpList?: RegExpPatternList;
 
     /**
-     * @markdownDescription
      * List of regular expression patterns or defined pattern names to match for spell checking.
      *
      * If this property is defined, only text matching the included patterns will be checked.
      *
      * While you can create your own patterns, you can also leverage several patterns that are
      * [built-in to CSpell](https://cspell.org/types/cspell-types/types/PredefinedPatterns.html).
-     * @description
-     * List of regular expression patterns or defined pattern names to match for spell checking.
      */
     includeRegExpList?: RegExpPatternList;
 
     /**
-     * @markdownDescription
      * Defines a list of patterns that can be used with the `ignoreRegExpList` and
      * `includeRegExpList` options.
      *
@@ -595,7 +542,6 @@ export interface BaseSetting extends InlineDictionary, ExperimentalBaseSettings 
      *   }
      * ]
      * ```
-     * @description
      * Defines a list of patterns that can be used with the `ignoreRegExpList` and
      * `includeRegExpList` options.
      */

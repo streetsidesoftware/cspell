@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 
-import tsj from 'ts-json-schema-generator';
+// @todo: Use the official version when https://github.com/vega/ts-json-schema-generator/pull/1773 has landed.
+import tsj from './lib-bundled/ts-json-schema-generator.cjs';
 import { writeFile } from 'node:fs/promises';
 import safeStableStringify from 'safe-stable-stringify';
 import { fileURLToPath } from 'node:url';
@@ -16,6 +17,7 @@ const defaultConfig = {
     expose: 'export',
     topRef: true,
     jsDoc: 'extended',
+    markdownDescription: true,
     sortProps: true,
     strictTuples: false,
     skipTypeCheck: false,
