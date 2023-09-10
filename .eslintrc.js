@@ -42,6 +42,7 @@ const config = {
         'test-packages/*/test-cspell-eslint-plugin/**',
         'test-packages/yarn/**',
         'website',
+        '**/lib-bundled/**',
         'website/**', // checked with a different config
     ],
     parserOptions: {

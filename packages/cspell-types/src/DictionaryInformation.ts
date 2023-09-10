@@ -21,8 +21,6 @@ export interface DictionaryInformation {
 
     /**
      * The accent characters.
-     * @markdownDescription
-     * The accent characters.
      *
      * Default: `"\u0300-\u0341"`
      */
@@ -65,7 +63,6 @@ export interface DictionaryInformation {
 
 export interface HunspellInformation {
     /**
-     * @markdownDescription
      * Selected Hunspell AFF content.
      * The content must be UTF-8
      *
@@ -87,18 +84,6 @@ export interface HunspellInformation {
      * MAP oôöOÔÖ
      * MAP (IJ)(Ĳ)
      * ```
-     *
-     * @description
-     * Selected Hunspell AFF content.
-     * The content must be UTF-8
-     *
-     * Sections:
-     * - TRY
-     * - MAP
-     * - REP
-     * - KEY
-     * - ICONV
-     * - OCONV
      */
     aff: HunspellAffContent;
 
