@@ -41,10 +41,12 @@ export interface DictionaryDefinitionBase {
     noSuggest?: boolean;
     /**
      * Type of file:
-     * S - single word per line,
-     * W - each line can contain one or more words separated by space,
-     * C - each line is treated like code (Camel Case is allowed).
+     * - S - single word per line,
+     * - W - each line can contain one or more words separated by space,
+     * - C - each line is treated like code (Camel Case is allowed).
+     *
      * Default is S.
+     *
      * C is the slowest to load due to the need to split each line based upon code splitting rules.
      * @default "S"
      */
@@ -152,10 +154,12 @@ export interface DictionaryDefinitionLegacy extends DictionaryDefinitionBase {
     file: FsDictionaryPath;
     /**
      * Type of file:
-     * S - single word per line,
-     * W - each line can contain one or more words separated by space,
-     * C - each line is treated like code (Camel Case is allowed).
+     * - S - single word per line,
+     * - W - each line can contain one or more words separated by space,
+     * - C - each line is treated like code (Camel Case is allowed).
+     *
      * Default is S.
+     *
      * C is the slowest to load due to the need to split each line based upon code splitting rules.
      * @default "S"
      */
@@ -175,6 +179,7 @@ export type CustomDictionaryScope = 'user' | 'workspace' | 'folder';
  * `user`, `workspace`, or `folder`.
  * When `addWords` is true, indicates that the spell checker can add words
  * to the file.
+ *
  * Note: only plain text files with one word per line are supported at this moment.
  */
 export interface DictionaryDefinitionCustom extends DictionaryDefinitionPreferred {
@@ -183,6 +188,7 @@ export interface DictionaryDefinitionCustom extends DictionaryDefinitionPreferre
 
     /**
      * Defines the scope for when words will be added to the dictionary.
+     *
      * Scope values: `user`, `workspace`, `folder`.
      */
     scope?: CustomDictionaryScope | CustomDictionaryScope[];
