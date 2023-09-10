@@ -53,7 +53,7 @@
     "test:bin-trace": "node ./bin.mjs trace test",
     "test-build-docs": "cd doc-generator && pnpm i && pnpm run test-build-docs",
     "test-integrations": "cd ./integration-tests && pnpm run integration-tests",
-    "test-schema": "ajv -s ./cspell.schema.json -d cspell.json -c ./packages/cspell-types/ajv.config.js",
+    "test-schema": "node ./test-packages/cspell-types/validate-schema/validate-schema.mjs",
     "update-packages": "pnpm run update-packages-src && pnpm run update-packages-docs",
     "update-packages-docs": "cd website && pnpm run update-packages",
     "update-packages-src": "pnpm -r up",
