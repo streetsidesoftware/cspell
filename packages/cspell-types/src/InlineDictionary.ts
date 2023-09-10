@@ -7,6 +7,8 @@ export interface InlineDictionary {
     // cspell:ignore colour color canot
     /**
      * List of words to always be considered incorrect. Words found in `flagWords` override `words`.
+     * @markdownDescription
+     * List of words to always be considered incorrect. Words found in `flagWords` override `words`.
      *
      * Format of `flagWords`
      * - single word entry - `word`
@@ -31,6 +33,11 @@ export interface InlineDictionary {
     ignoreWords?: string[];
 
     /**
+     * A list of suggested replacements for words.
+     * Suggested words provide a way to make preferred suggestions on word replacements.
+     * To hint at a preferred change, but not to require it.
+     *
+     * @markdownDescription
      * A list of suggested replacements for words.
      * Suggested words provide a way to make preferred suggestions on word replacements.
      * To hint at a preferred change, but not to require it.
