@@ -201,9 +201,6 @@ export interface Settings extends ReportingConfiguration, BaseSetting, PnPSettin
     enabledLanguageIds?: LanguageIdSingle[];
 
     /**
-     * @title File Types to Check
-     * @scope resource
-     * @uniqueItems true
      * Enable / Disable checking file types (languageIds).
      *
      * These are in additional to the file types specified by `cSpell.enabledLanguageIds`.
@@ -216,6 +213,9 @@ export interface Settings extends ReportingConfiguration, BaseSetting, PnPSettin
      * !json       // disable checking for json
      * kotlin      // enable checking for kotlin
      * ```
+     * @title File Types to Check
+     * @scope resource
+     * @uniqueItems true
      */
     enableFiletypes?: LanguageIdSingle[];
 
