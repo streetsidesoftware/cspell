@@ -48,6 +48,7 @@ version-resolver:
   major:
     labels:
       - major
+      - breaking
   minor:
     labels:
       - minor
@@ -71,8 +72,9 @@ autolabeler:
       - "/^ci: Workflow Bot.*Dependencies/i"
   - label: "chore"
     title:
-      - "/chore/i"
+      - "/^chore/i"
       - "/^ci[:](?! Workflow Bot)/i"
+      - "/^ci[:(]?/i"
   - label: "documentation"
     files:
       - "/docs/**/*.md"
