@@ -52,11 +52,19 @@ export interface FileSettings extends ExtendableSettings, CommandLineSettings {
     /**
      * Allows this configuration to inherit configuration for one or more other files.
      *
+     * See https://cspell.org/configuration/imports/ for more details.
+     *
+     * @markdownDescription
+     * Allows this configuration to inherit configuration for one or more other files.
+     *
      * See [Importing / Extending Configuration](https://cspell.org/configuration/imports/) for more details.
+     *
      */
     import?: FsPath | FsPath[];
 
     /**
+     * The root to use for glob patterns found in this configuration.
+     * @markdownDescription
      * The root to use for glob patterns found in this configuration.
      * Default: location of the configuration file.
      *   For compatibility reasons, config files with version 0.1, the glob root will
@@ -74,6 +82,10 @@ export interface FileSettings extends ExtendableSettings, CommandLineSettings {
     globRoot?: FSPathResolvable;
 
     /**
+     * Glob patterns of files to be checked.
+     *
+     * Glob patterns are relative to the `globRoot` of the configuration file that defines them.
+     * @markdownDescription
      * Glob patterns of files to be checked.
      *
      * Glob patterns are relative to the `globRoot` of the configuration file that defines them.

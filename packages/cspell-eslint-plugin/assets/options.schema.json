@@ -111,7 +111,7 @@
           "type": "boolean"
         },
         "flagWords": {
-          "description": "List of words to always be considered incorrect. Words found in `flagWords` override `words`.\n\nFormat of `flagWords`\n- single word entry - `word`\n- with suggestions - `word:suggestion` or `word->suggestion, suggestions`\n\nExample: ```ts \"flagWords\": [   \"color: colour\",   \"incase: in case, encase\",   \"canot->cannot\",   \"cancelled->canceled\" ] ```",
+          "description": "List of words to always be considered incorrect. Words found in `flagWords` override `words`.",
           "items": {
             "type": "string"
           },
@@ -146,7 +146,7 @@
               "type": "array"
             }
           ],
-          "description": "Allows this configuration to inherit configuration for one or more other files.\n\nSee [Importing / Extending Configuration](https://cspell.org/configuration/imports/) for more details."
+          "description": "Allows this configuration to inherit configuration for one or more other files.\n\nSee https://cspell.org/configuration/imports/ for more details."
         },
         "includeRegExpList": {
           "description": "List of regular expression patterns or defined pattern names to match for spell checking.\n\nIf this property is defined, only text matching the included patterns will be checked.\n\nWhile you can create your own patterns, you can also leverage several patterns that are [built-in to CSpell](https://cspell.org/types/cspell-types/types/PredefinedPatterns.html).",
