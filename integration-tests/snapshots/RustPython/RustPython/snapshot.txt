@@ -3,10 +3,10 @@ Repository: RustPython/RustPython
 Url: "https://github.com/RustPython/RustPython.git"
 Args: ["**"]
 Lines:
- CSpell: Files checked: 596, Issues found: 2706 in 305 files
+ CSpell: Files checked: 596, Issues found: 2705 in 305 files
  exit code: 1
-./Cargo.toml:111:82    - Unknown word (termcolor)  -- features = ["atty", "termcolor"] }
-./Cargo.toml:154:62    - Unknown word (redoxer)    -- to compile/check with redoxer
+./Cargo.toml:110:82    - Unknown word (termcolor)  -- features = ["atty", "termcolor"] }
+./Cargo.toml:153:62    - Unknown word (redoxer)    -- to compile/check with redoxer
 ./Cargo.toml:16:44     - Unknown word (pylib)      -- derive", "jit", "vm", "pylib", "stdlib", "wasm/lib
 ./Cargo.toml:72:1      - Unknown word (rustyline)  -- rustyline = "11"
 ./Cargo.toml:77:1      - Unknown word (thiserror)  -- thiserror = "1.0"
@@ -51,8 +51,8 @@ Lines:
 ./benches/benchmarks/pystone.py:98:26     - Unknown word (DHRYSTONE)  -- PtrGlb.StringComp = "DHRYSTONE PROGRAM, SOME STRING
 ./benches/benchmarks/pystone.py:9:29      - Unknown word (Weicker)    -- Reinhold P. Weicker, CACM Vol 27, No 1
 ./benches/benchmarks/pystone.py:9:39      - Unknown word (CACM)       -- Reinhold P. Weicker,  CACM Vol 27, No 10, 10/8
-./benches/execution.rs:24:10     - Unknown word (rustpy)     -- fn bench_rustpy_code(b: &mut Bencher
-./benches/execution.rs:95:18     - Unknown word (pystone)    -- pub fn benchmark_pystone(group: &mut BenchmarkGroup
+./benches/execution.rs:25:10     - Unknown word (rustpy)     -- fn bench_rustpy_code(b: &mut Bencher
+./benches/execution.rs:96:18     - Unknown word (pystone)    -- pub fn benchmark_pystone(group: &mut BenchmarkGroup
 ./benches/microbenchmarks.rs:12:12     - Unknown word (microbenchmarks) -- // List of microbenchmarks to skip.
 ./benches/microbenchmarks.rs:20:12     - Unknown word (MICROBENCHMARKS) -- const SKIP_MICROBENCHMARKS: [&str; 8] = [
 ./benches/microbenchmarks.rs:54:35     - Unknown word (microbenchmark)  -- panic!("Error running microbenchmark")
@@ -392,21 +392,21 @@ Lines:
 ./src/settings.rs:287:49    - Unknown word (PYTHONWARNDEFAULTENCODING) -- environment && env::var_os("PYTHONWARNDEFAULTENCODING").is_some())
 ./src/settings.rs:344:37    - Unknown word (PYTHONHASHSEED)            -- seed = match env::var("PYTHONHASHSEED") {
 ./src/shell/helper.rs:20:13     - Unknown word (startpos)   -- let mut startpos = 0;
-./stdlib/Cargo.toml:101:1     - Unknown word (libsqlite)  -- libsqlite3-sys = { version =
-./stdlib/Cargo.toml:111:16    - Unknown word (handleapi)  -- "winsock2", "handleapi", "ws2def", "std",
-./stdlib/Cargo.toml:111:46    - Unknown word (winbase)    -- , "ws2def", "std", "winbase", "wincrypt", "fileapi
-./stdlib/Cargo.toml:111:57    - Unknown word (wincrypt)   -- "std", "winbase", "wincrypt", "fileapi", "processenv
-./stdlib/Cargo.toml:111:69    - Unknown word (fileapi)    -- winbase", "wincrypt", "fileapi", "processenv",
-./stdlib/Cargo.toml:111:80    - Unknown word (processenv) -- wincrypt", "fileapi", "processenv",
-./stdlib/Cargo.toml:112:29    - Unknown word (processthreadsapi) -- namedpipeapi", "winnt", "processthreadsapi", "errhandlingapi",
-./stdlib/Cargo.toml:112:4     - Unknown word (namedpipeapi) -- "namedpipeapi", "winnt", "processthreadsapi
-./stdlib/Cargo.toml:112:50    - Unknown word (errhandlingapi)    -- processthreadsapi", "errhandlingapi", "winuser", "synchapi
-./stdlib/Cargo.toml:112:68    - Unknown word (winuser)           -- "errhandlingapi", "winuser", "synchapi", "wincon
-./stdlib/Cargo.toml:112:79    - Unknown word (synchapi)          -- errhandlingapi", "winuser", "synchapi", "wincon",
-./stdlib/Cargo.toml:112:91    - Unknown word (wincon)            -- winuser", "synchapi", "wincon",
-./stdlib/Cargo.toml:113:20    - Unknown word (vcruntime)         -- "impl-default", "vcruntime", "ifdef", "netioapi
-./stdlib/Cargo.toml:113:42    - Unknown word (netioapi)          -- vcruntime", "ifdef", "netioapi"
-./stdlib/Cargo.toml:42:1      - Unknown word (puruspe)    -- puruspe = "0.1.5"
+./stdlib/Cargo.toml:105:1     - Unknown word (libsqlite)  -- libsqlite3-sys = { version =
+./stdlib/Cargo.toml:115:16    - Unknown word (handleapi)  -- "winsock2", "handleapi", "ws2def", "std",
+./stdlib/Cargo.toml:115:46    - Unknown word (winbase)    -- , "ws2def", "std", "winbase", "wincrypt", "fileapi
+./stdlib/Cargo.toml:115:57    - Unknown word (wincrypt)   -- "std", "winbase", "wincrypt", "fileapi", "processenv
+./stdlib/Cargo.toml:115:69    - Unknown word (fileapi)    -- winbase", "wincrypt", "fileapi", "processenv",
+./stdlib/Cargo.toml:115:80    - Unknown word (processenv) -- wincrypt", "fileapi", "processenv",
+./stdlib/Cargo.toml:116:29    - Unknown word (processthreadsapi) -- namedpipeapi", "winnt", "processthreadsapi", "errhandlingapi",
+./stdlib/Cargo.toml:116:4     - Unknown word (namedpipeapi) -- "namedpipeapi", "winnt", "processthreadsapi
+./stdlib/Cargo.toml:116:50    - Unknown word (errhandlingapi)    -- processthreadsapi", "errhandlingapi", "winuser", "synchapi
+./stdlib/Cargo.toml:116:68    - Unknown word (winuser)           -- "errhandlingapi", "winuser", "synchapi", "wincon
+./stdlib/Cargo.toml:116:79    - Unknown word (synchapi)          -- errhandlingapi", "winuser", "synchapi", "wincon",
+./stdlib/Cargo.toml:116:91    - Unknown word (wincon)            -- winuser", "synchapi", "wincon",
+./stdlib/Cargo.toml:117:20    - Unknown word (vcruntime)         -- "impl-default", "vcruntime", "ifdef", "netioapi
+./stdlib/Cargo.toml:117:42    - Unknown word (netioapi)          -- vcruntime", "ifdef", "netioapi"
+./stdlib/Cargo.toml:46:1      - Unknown word (puruspe)    -- puruspe = "0.1.5"
 ./stdlib/build.rs:25:39     - Unknown word (osslconf)   -- println!("cargo:rustc-cfg=osslconf=\"{conf}\"");
 ./stdlib/build.rs:8:39      - Unknown word (ossl)       -- println!("cargo:rustc-cfg=ossl101");
 ./stdlib/src/array.rs:1442:9    - Unknown word (mformat)    -- mformat_code: MachineFormatCode

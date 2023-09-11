@@ -3,9 +3,9 @@ Repository: caddyserver/caddy
 Url: https://github.com/caddyserver/caddy.git
 Args: '["**/*.go"]'
 Summary:
-  files: 240
-  filesWithIssues: 221
-  issues: 3482
+  files: 241
+  filesWithIssues: 222
+  issues: 3489
   errors: 0
 Errors: []
 
@@ -80,19 +80,19 @@ issues:
   - "caddyconfig/httpcaddyfile/directives.go:246:58      vals        U       caddyhttp.Route type) in vals to the"
   - "caddyconfig/httpcaddyfile/httptype_test.go:17:11        showdebug       U       query showdebug=1"
   - "caddyconfig/httpcaddyfile/httptype_test.go:34:12        somepath        U       path /somepath*"
-  - "caddyconfig/httpcaddyfile/httptype.go:33:43         caddypki        U       caddyserver/caddy/v2/modules/caddypki\""
-  - "caddyconfig/httpcaddyfile/httptype.go:186:12        subroutes       U       // some subroutes in this directive; we"
-  - "caddyconfig/httpcaddyfile/httptype.go:280:5         annnd           U       // annnd the top-level config"
-  - "caddyconfig/httpcaddyfile/httptype.go:302:12        Cvtr            U       if storageCvtr, ok := options[\"storage"
-  - "caddyconfig/httpcaddyfile/httptype.go:794:11        cval            U       for _, cval := range sblock.pile"
-  - "caddyconfig/httpcaddyfile/httptype.go:1289:3        hostm           U       hostm caddyhttp.MatchHost"
-  - "caddyconfig/httpcaddyfile/httptype.go:1290:3        pathm           U       pathm caddyhttp.MatchPath"
-  - "caddyconfig/httpcaddyfile/httptype.go:1460:5        hostport        U       \"{hostport}\", \"{http.request.hostport"
-  - "caddyconfig/httpcaddyfile/httptype.go:1550:3        laddrs          U       laddrs, err := caddy.ParseNetworkAdd"
+  - "caddyconfig/httpcaddyfile/httptype.go:32:43         caddypki        U       caddyserver/caddy/v2/modules/caddypki\""
+  - "caddyconfig/httpcaddyfile/httptype.go:157:12        subroutes       U       // some subroutes in this directive; we"
+  - "caddyconfig/httpcaddyfile/httptype.go:251:5         annnd           U       // annnd the top-level config"
+  - "caddyconfig/httpcaddyfile/httptype.go:273:12        Cvtr            U       if storageCvtr, ok := options[\"storage"
+  - "caddyconfig/httpcaddyfile/httptype.go:769:11        cval            U       for _, cval := range sblock.pile"
+  - "caddyconfig/httpcaddyfile/httptype.go:1264:3        hostm           U       hostm caddyhttp.MatchHost"
+  - "caddyconfig/httpcaddyfile/httptype.go:1265:3        pathm           U       pathm caddyhttp.MatchPath"
+  - "caddyconfig/httpcaddyfile/httptype.go:1494:3        laddrs          U       laddrs, err := caddy.ParseNetworkAdd"
   - "caddyconfig/httpcaddyfile/options_test.go:17:22         caddytest       U       // are present in: caddytest/integration/caddyfile"
   - "caddyconfig/httpcaddyfile/options.go:45:43          ACMEDNS     U       \"acme_dns\", parseOptACMEDNS)"
   - "caddyconfig/httpcaddyfile/options.go:46:43          ACMEEAB     U       \"acme_eab\", parseOptACMEEAB)"
   - "caddyconfig/httpcaddyfile/pkiapp.go:65:33       CAID    U       ID = caddypki.DefaultCAID"
+  - "caddyconfig/httpcaddyfile/shorthands.go:57:5        hostport    U       \"{hostport}\", \"{http.request.hostport"
   - "caddyconfig/httpcaddyfile/tlsapp.go:197:38      Tailscale       U       as desired (see the Tailscale listener plugin), so"
   - "caddyconfig/httpcaddyfile/tlsapp.go:364:9       ACMECA          U       globalACMECA := options[\"acme_ca"
   - "caddyconfig/httploader.go:71:7          CAPEM       U       RootCAPEMFiles []string `json"
@@ -113,11 +113,11 @@ issues:
   - "caddytest/integration/stream_test.go:337:31         automaticlly    U       underlying transport will automaticlly add gzip"
   - "cmd/caddy/main.go:27:19         xcaddy      U       // Or you can use xcaddy which does it all for"
   - "cmd/commandfuncs.go:47:10       Pidfile         U       startCmdPidfileFlag := fl.String(\"pidfile"
-  - "cmd/commandfuncs.go:60:30       pingback        U       craft the command with a pingback address and with a"
-  - "cmd/commandfuncs.go:85:2        stdinpipe       U       stdinpipe, err := cmd.StdinPipe"
-  - "cmd/commandfuncs.go:130:16      Pingback        U       err = handlePingbackConn(conn, expect)"
-  - "cmd/commandfuncs.go:264:44      USERPROFILE     U       == \"\" && os.Getenv(\"USERPROFILE\") == \"\" && !hasXDG"
-  - "cmd/commandfuncs.go:647:7       srldkjfsd       U       // \"srldkjfsd\"), if for some reason"
+  - "cmd/commandfuncs.go:67:30       pingback        U       craft the command with a pingback address and with a"
+  - "cmd/commandfuncs.go:93:2        stdinpipe       U       stdinpipe, err := cmd.StdinPipe"
+  - "cmd/commandfuncs.go:138:16      Pingback        U       err = handlePingbackConn(conn, expect)"
+  - "cmd/commandfuncs.go:278:44      USERPROFILE     U       == \"\" && os.Getenv(\"USERPROFILE\") == \"\" && !hasXDG"
+  - "cmd/commandfuncs.go:667:7       srldkjfsd       U       // \"srldkjfsd\"), if for some reason"
   - "cmd/commands.go:34:47       godoc           U       the RegisterCommand() godoc."
   - "cmd/commands.go:80:40       initialised     U       returns a list of commands initialised by"
   - "cmd/commands.go:483:24      compinit        U       $ echo \"autoload -U compinit; compinit\" >> ~/.zshrc"
