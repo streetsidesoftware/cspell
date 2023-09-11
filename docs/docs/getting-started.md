@@ -155,4 +155,4 @@ cspell lint --help
 
 ### Options
 
-{% include_relative help-lint.md %}
+{% include  generated-docs/help-lint.md %}
