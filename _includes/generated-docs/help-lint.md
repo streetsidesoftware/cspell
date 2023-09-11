@@ -1,4 +1,4 @@
-<!--- @@inject: ../../packages/cspell/static/help-lint.txt --->
+<!--- @@inject: ../../../packages/cspell/static/help-lint.txt --->
 
 ```
 Usage: cspell lint [options] [globs...] [file://<path> ...] [stdin[://<path>]]
@@ -97,4 +97,4 @@ References:
     https://github.com/streetsidesoftware/cspell
 ```
 
-<!--- @@inject-end: ../../packages/cspell/static/help-lint.txt --->
+<!--- @@inject-end: ../../../packages/cspell/static/help-lint.txt --->
