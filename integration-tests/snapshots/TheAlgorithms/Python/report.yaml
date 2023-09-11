@@ -3,9 +3,9 @@ Repository: TheAlgorithms/Python
 Url: https://github.com/TheAlgorithms/Python.git
 Args: '["**/*.{md,py}"]'
 Summary:
-  files: 1224
-  filesWithIssues: 467
-  issues: 3119
+  files: 1229
+  filesWithIssues: 471
+  issues: 3176
   errors: 0
 Errors: []
 
@@ -313,6 +313,15 @@ issues:
   - "computer_vision/flip_augmentation.py:35:13          imwrite     U       cv2.imwrite(f\"{file_root}.jpg\","
   - "computer_vision/flip_augmentation.py:35:53          IMWRITE     U       root}.jpg\", image, [cv2.IMWRITE_JPEG_QUALITY, 85])"
   - "computer_vision/flip_augmentation.py:86:32          narray      U       new_imgs_list <type: narray>: image after resize"
+  - "computer_vision/haralick_descriptors.py:5:8         imageio                     U       import imageio.v2 as imageio"
+  - "computer_vision/haralick_descriptors.py:87:5        binarize                    U       def binarize(image: np.ndarray, threshold"
+  - "computer_vision/haralick_descriptors.py:89:5        Binarizes                   U       Binarizes a grayscale image based"
+  - "computer_vision/haralick_descriptors.py:141:38      convolotion                 U       image when applying convolotion"
+  - "computer_vision/haralick_descriptors.py:253:5       haralick                    U       def haralick_descriptors(matrix:"
+  - "computer_vision/haralick_descriptors.py:254:25      Haralick                    U       \"\"\"Calculates all 8 Haralick descriptors based on"
+  - "computer_vision/haralick_descriptors.py:254:58      occurence (occurrence)      U       descriptors based on co-occurence input matrix."
+  - "computer_vision/haralick_descriptors.py:277:14      ogrid                       U       # but np.ogrid works just fine"
+  - "computer_vision/haralick_descriptors.py:408:46      Harralick                   U       masks and correspondent Harralick Descriptors."
   - "computer_vision/harris_corner.py:14:23          neighbourhoods      U       window_size : neighbourhoods considered"
   - "computer_vision/horn_schunck.py:2:14        Schunck     U       The Horn-Schunck method estimates the"
   - "computer_vision/horn_schunck.py:15:12       ndimage     U       from scipy.ndimage import convolve"
@@ -823,6 +832,8 @@ issues:
   - "maths/gaussian_error_linear_unit.py:6:29        GELU    U       Gaussian Error Linear Unit (GELU) is a high-performing"
   - "maths/gaussian_error_linear_unit.py:36:9        gelu    U       gelu_vec (np.ndarray): The"
   - "maths/gcd_of_n_numbers.py:100:5         mult    U       mult = 1"
+  - "maths/harshad_numbers.py:2:3            harshad     U       A harshad number (or more specifically"
+  - "maths/harshad_numbers.py:85:15          Harshad     U       Finds all Harshad numbers smaller than"
   - "maths/integration_by_simpson_approx.py:29:19        fxdx    U       1. integration of fxdx with limit a to b is"
   - "maths/jaccard_similarity.py:8:38        MMDS        U       of Massive Datasets [MMDS 2nd Edition, Chapter"
   - "maths/jaccard_similarity.py:17:5        jaccard     U       def jaccard_similarity("
@@ -838,6 +849,7 @@ issues:
   - "maths/mobius_function.py:12:5           mobius      U       def mobius(n: int) -> int:"
   - "maths/monte_carlo.py:2:10           Matteo      U       @author: MatteoRaso"
   - "maths/monte_carlo.py:2:16           Raso        U       @author: MatteoRaso"
+  - "maths/polygonal_numbers.py:3:33         gonal       U       the `num`th `sides`-gonal number. It is assumed"
   - "maths/primelib.py:83:14         erathostenes    U       sieve of erathostenes."
   - "maths/primelib.py:520:74        Divisiors       U       Error in function getDivisiors(...)\""
   - "maths/pronic_number.py:3:28         Proic       U       number n is said to be a Proic number if"
@@ -871,6 +883,7 @@ issues:
   - "networking_flow/ford_fulkerson.py:27:10         fulkerson       U       def ford_fulkerson(graph, source, sink"
   - "neural_network/2_hidden_layers_neural_network.py:101:9          Updation    U       Updation is done using derivative"
   - "neural_network/2_hidden_layers_neural_network.py:101:46         sogmoid     U       using derivative of sogmoid activation function"
+  - "neural_network/activation_functions/scaled_exponential_linear_unit.py:2:50          SELU    U       Exponential Linear Unit or SELU function."
   - "neural_network/back_propagation_neural_network.py:53:26         asmatrix    U       self.weight = np.asmatrix(np.random.normal(0,"
   - "neural_network/back_propagation_neural_network.py:67:35         xdata       U       forward_propagation(self, xdata):"
   - "neural_network/back_propagation_neural_network.py:97:7          BPNN        U       class BPNN:"
@@ -1149,10 +1162,9 @@ issues:
   - "strings/reverse_long_words.py:5:40          sroirraw    U       long_words(\"Hey wollef sroirraw\")"
   - "strings/wildcard_pattern_matching.py:37:24          dabc    U       >>> match_pattern(\"dabc\", \"*abc\")"
   - "strings/wildcard_pattern_matching.py:43:24          aaab    U       >>> match_pattern(\"aaab\", \"aa*\")"
-  - "strings/word_occurrence.py:1:14         sarathkaul                  U       # Created by sarathkaul on 17/11/19"
-  - "strings/word_occurrence.py:2:15         Arkadip                     U       # Modified by Arkadip Bhattacharya(@darkmatter"
-  - "strings/word_occurrence.py:2:23         Bhattacharya                U       Modified by Arkadip Bhattacharya(@darkmatter18) on 2"
-  - "strings/word_occurrence.py:10:9         occurence (occurrence)      U       >>> occurence_dict = word_occurrence"
+  - "strings/word_occurrence.py:1:14         sarathkaul      U       # Created by sarathkaul on 17/11/19"
+  - "strings/word_occurrence.py:2:15         Arkadip         U       # Modified by Arkadip Bhattacharya(@darkmatter"
+  - "strings/word_occurrence.py:2:23         Bhattacharya    U       Modified by Arkadip Bhattacharya(@darkmatter18) on 2"
   - "strings/z_function.py:27:21         zxxzxxz     U       >>> z_function(\"zxxzxxz\")"
   - "web_programming/covid_stats_via_xpath.py:2:51           worldometers    U       info fetching from worldometers site using lxml"
   - "web_programming/covid_stats_via_xpath.py:2:75           lxml            U       worldometers site using lxml"

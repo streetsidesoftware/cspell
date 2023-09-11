@@ -3,7 +3,7 @@ Repository: caddyserver/caddy
 Url: "https://github.com/caddyserver/caddy.git"
 Args: ["**/*.go"]
 Lines:
- CSpell: Files checked: 240, Issues found: 3482 in 221 files
+ CSpell: Files checked: 241, Issues found: 3489 in 222 files
  exit code: 1
 ./admin.go:1345:21   - Unknown word (pidfile)     -- // PIDFile writes a pidfile to the file at filename
 ./admin.go:331:29    - Unknown word (infosec)     -- security checks, the infosec community assures me
@@ -73,21 +73,21 @@ Lines:
 ./caddyconfig/httpcaddyfile/builtins_test.go:176:31    - Unknown word (htlm)       -- /old.html /new.html htlm
 ./caddyconfig/httpcaddyfile/directives.go:246:58    - Unknown word (vals)       -- caddyhttp.Route type) in vals to the
 ./caddyconfig/httpcaddyfile/directives.go:80:7      - Unknown word (fastcgi)    -- "php_fastcgi",
-./caddyconfig/httpcaddyfile/httptype.go:1289:3    - Unknown word (hostm)      -- hostm caddyhttp.MatchHost
-./caddyconfig/httpcaddyfile/httptype.go:1290:3    - Unknown word (pathm)      -- pathm caddyhttp.MatchPath
-./caddyconfig/httpcaddyfile/httptype.go:1460:5    - Unknown word (hostport)   -- "{hostport}", "{http.request.hostport
-./caddyconfig/httpcaddyfile/httptype.go:1550:3    - Unknown word (laddrs)     -- laddrs, err := caddy.ParseNetworkAdd
-./caddyconfig/httpcaddyfile/httptype.go:186:12    - Unknown word (subroutes)  -- // some subroutes in this directive; we
-./caddyconfig/httpcaddyfile/httptype.go:280:5     - Unknown word (annnd)      -- // annnd the top-level config
-./caddyconfig/httpcaddyfile/httptype.go:302:12    - Unknown word (Cvtr)       -- if storageCvtr, ok := options["storage
-./caddyconfig/httpcaddyfile/httptype.go:33:43     - Unknown word (caddypki)   -- caddyserver/caddy/v2/modules/caddypki"
-./caddyconfig/httpcaddyfile/httptype.go:794:11    - Unknown word (cval)       -- for _, cval := range sblock.pile
+./caddyconfig/httpcaddyfile/httptype.go:1264:3    - Unknown word (hostm)      -- hostm caddyhttp.MatchHost
+./caddyconfig/httpcaddyfile/httptype.go:1265:3    - Unknown word (pathm)      -- pathm caddyhttp.MatchPath
+./caddyconfig/httpcaddyfile/httptype.go:1494:3    - Unknown word (laddrs)     -- laddrs, err := caddy.ParseNetworkAdd
+./caddyconfig/httpcaddyfile/httptype.go:157:12    - Unknown word (subroutes)  -- // some subroutes in this directive; we
+./caddyconfig/httpcaddyfile/httptype.go:251:5     - Unknown word (annnd)      -- // annnd the top-level config
+./caddyconfig/httpcaddyfile/httptype.go:273:12    - Unknown word (Cvtr)       -- if storageCvtr, ok := options["storage
+./caddyconfig/httpcaddyfile/httptype.go:32:43     - Unknown word (caddypki)   -- caddyserver/caddy/v2/modules/caddypki"
+./caddyconfig/httpcaddyfile/httptype.go:769:11    - Unknown word (cval)       -- for _, cval := range sblock.pile
 ./caddyconfig/httpcaddyfile/httptype_test.go:17:11     - Unknown word (showdebug)  -- query showdebug=1
 ./caddyconfig/httpcaddyfile/httptype_test.go:34:12     - Unknown word (somepath)   -- path /somepath*
 ./caddyconfig/httpcaddyfile/options.go:45:43     - Unknown word (ACMEDNS)    -- "acme_dns", parseOptACMEDNS)
 ./caddyconfig/httpcaddyfile/options.go:46:43     - Unknown word (ACMEEAB)    -- "acme_eab", parseOptACMEEAB)
 ./caddyconfig/httpcaddyfile/options_test.go:17:22     - Unknown word (caddytest)  -- // are present in: caddytest/integration/caddyfile
 ./caddyconfig/httpcaddyfile/pkiapp.go:65:33     - Unknown word (CAID)       -- ID = caddypki.DefaultCAID
+./caddyconfig/httpcaddyfile/shorthands.go:57:5      - Unknown word (hostport)   -- "{hostport}", "{http.request.hostport
 ./caddyconfig/httpcaddyfile/tlsapp.go:197:38    - Unknown word (Tailscale)  -- as desired (see the Tailscale listener plugin), so
 ./caddyconfig/httpcaddyfile/tlsapp.go:364:9     - Unknown word (ACMECA)     -- globalACMECA := options["acme_ca
 ./caddyconfig/httploader.go:71:7      - Unknown word (CAPEM)      -- RootCAPEMFiles []string `json
@@ -107,12 +107,12 @@ Lines:
 ./caddytest/integration/stream_test.go:155:3     - Unknown word (rstring)    -- rstring, err := httputil.DumpRequest
 ./caddytest/integration/stream_test.go:337:31    - Unknown word (automaticlly) -- underlying transport will automaticlly add gzip
 ./cmd/caddy/main.go:27:19     - Unknown word (xcaddy)     -- // Or you can use xcaddy which does it all for
-./cmd/commandfuncs.go:130:16    - Unknown word (Pingback)   -- err = handlePingbackConn(conn, expect)
-./cmd/commandfuncs.go:264:44    - Unknown word (USERPROFILE) -- == "" && os.Getenv("USERPROFILE") == "" && !hasXDG
+./cmd/commandfuncs.go:138:16    - Unknown word (Pingback)   -- err = handlePingbackConn(conn, expect)
+./cmd/commandfuncs.go:278:44    - Unknown word (USERPROFILE) -- == "" && os.Getenv("USERPROFILE") == "" && !hasXDG
 ./cmd/commandfuncs.go:47:10     - Unknown word (Pidfile)    -- startCmdPidfileFlag := fl.String("pidfile
-./cmd/commandfuncs.go:60:30     - Unknown word (pingback)   -- craft the command with a pingback address and with a
-./cmd/commandfuncs.go:647:7     - Unknown word (srldkjfsd)   -- // "srldkjfsd"), if for some reason
-./cmd/commandfuncs.go:85:2      - Unknown word (stdinpipe)  -- stdinpipe, err := cmd.StdinPipe
+./cmd/commandfuncs.go:667:7     - Unknown word (srldkjfsd)   -- // "srldkjfsd"), if for some reason
+./cmd/commandfuncs.go:67:30     - Unknown word (pingback)   -- craft the command with a pingback address and with a
+./cmd/commandfuncs.go:93:2      - Unknown word (stdinpipe)  -- stdinpipe, err := cmd.StdinPipe
 ./cmd/commands.go:34:47     - Unknown word (godoc)      -- the RegisterCommand() godoc.
 ./cmd/commands.go:483:24    - Unknown word (compinit)    -- $ echo "autoload -U compinit; compinit" >> ~/.zshrc
 ./cmd/commands.go:80:40     - Unknown word (initialised) -- returns a list of commands initialised by

@@ -4,7 +4,7 @@ Url: "https://github.com/Azure/azure-rest-api-specs.git"
 Args: ["--config=cSpell.json","**/*.{md,ts,js}"]
 Lines:
   File: "./Azure/azure-rest-api-specs/cSpell.json"
- CSpell: Files checked: 2112, Issues found: 2442 in 742 files
+ CSpell: Files checked: 2126, Issues found: 2450 in 748 files
  exit code: 1
 ./CONTRIBUTING.md:24:6      - Unknown word (tocstop)    -- <!-- tocstop -->
 ./CONTRIBUTING.md:86:3      - Unknown word (Poli)       -- - PoliCheck -
@@ -32,10 +32,10 @@ Lines:
 ./documentation/api-scenario/how-to/ResolveDependencies.md:246:22    - Unknown word (ipconfigmy) -- "name": "ipconfigmyVM",
 ./documentation/api-scenario/references/ApiScenarioDefinition.md:278:29    - Unknown word (somedomain) -- value: $(serviceName).somedomain.com
 ./documentation/api-scenario/references/ErrorCodeReference.md:32:31     - Unknown word (blobnfs)    -- "namespacePath":"/blobnfs"
-./documentation/ci-fix.md:150:273   - Unknown word (geneates)             -- swagger automatically when geneates the swagger, you should
-./documentation/ci-fix.md:153:187   - Unknown word (tspconfig)            -- you need to check the tspconfig.yaml to see if it has
+./documentation/ci-fix.md:140:273   - Unknown word (geneates)             -- swagger automatically when geneates the swagger, you should
+./documentation/ci-fix.md:143:187   - Unknown word (tspconfig)            -- you need to check the tspconfig.yaml to see if it has
 ./documentation/ci-fix.md:28:18     - Unknown word (contosowidgetmanager) -- cd specification/contosowidgetmanager
-./documentation/ci-fix.md:88:215    - Unknown word (guildance)            -- github comment with guildance on how to fix.
+./documentation/ci-fix.md:78:215    - Unknown word (guildance)            -- github comment with guildance on how to fix.
 ./documentation/code-gen/configure-cli.md:103:91    - Unknown word (commmand)   -- passed by user in their commmand line which should points
 ./documentation/code-gen/configure-cli.md:115:62    - Unknown word (offazure)   -- packages like migrate and offazure.
 ./documentation/code-gen/configure-cli.md:243:47    - Unknown word (qiaozha)    -- autorest/az@latest /home/qiaozha/code/azure-rest-api
@@ -94,8 +94,6 @@ Lines:
 ./profiles/definitions/latest-2019-04-01.md:907:17    - Unknown word (signalrservice)          -- microsoft.signalrservice:
 ./profiles/definitions/latest-2019-04-24.md:732:17    - Unknown word (enterpriseknowledgegraph) -- microsoft.enterpriseknowledgegraph:
 ./profiles/definitions/latest-2019-04-30.md:49:13     - Unknown word (lockchain)  -- - lockchainMembers/regenerateApiKeys
-./scripts/prettier-swagger-plugin.ts:4:25      - Unknown word (hardline)   -- const { concat, indent, hardline, join } = doc.builders
-./scripts/prettier-swagger-plugin.ts:83:17     - Unknown word (estree)     -- astFormat: 'estree-swagger-customized'
 ./specification/EnterpriseKnowledgeGraph/resource-manager/readme.go.md:8:14      - Unknown word (enterpriseknowledgegraphservice) -- namespace: enterpriseknowledgegraphservice
 ./specification/addons/resource-manager/readme.go.md:14:41     - Unknown word (armaddons)  -- resourcemanager/addons/armaddons
 ./specification/advisor/resource-manager/Microsoft.Advisor/stable/2017-04-19/feedback.md:40:20     - Unknown word (Asssignment) -- "policyAsssignmentId":"/subscriptions/
@@ -279,8 +277,8 @@ Lines:
 ./specification/marketplacenotifications/resource-manager/readme.azureresourceschema.md:9:17      - Unknown word (marketplacenotifications) -- - tag: schema-marketplacenotifications-2021-03-03
 ./specification/migrate/resource-manager/readme.go.md:14:42     - Unknown word (armmigrate) -- resourcemanager/migrate/armmigrate
 ./specification/migrate/resource-manager/readme.md:18:18     - Unknown word (hubmigrate) -- - tag: package-hubmigrate-2020-05
-./specification/migrate/resource-manager/readme.md:196:21    - Unknown word (Mordernize)    -- - Microsoft.Migrate/MordernizeProjects/preview/202
 ./specification/migrate/resource-manager/readme.md:19:18     - Unknown word (migrateengine) -- - tag: package-migrateengine-2022-05
+./specification/migrate/resource-manager/readme.md:205:21    - Unknown word (Mordernize)    -- - Microsoft.Migrate/MordernizeProjects/preview/202
 ./specification/migrateprojects/resource-manager/readme.nodejs.md:9:27      - Unknown word (migrateprojects) -- package-name: azure-arm-migrateprojects
 ./specification/mobilenetwork/resource-manager/readme.csharp.md:14:40     - Unknown word (mobilenetwork) -- csharp-sdks-folder)/mobilenetwork/management/Microsoft
 ./specification/monitor/resource-manager/readme.az.md:13:27     - Unknown word (amcs)       -- namespace: azure.mgmt.amcs
@@ -398,6 +396,7 @@ Lines:
 ./specification/recommendationsservice/resource-manager/readme.az.md:9:17      - Unknown word (recommendationsservice) -- extensions: recommendationsservice
 ./specification/recoveryservicesbackup/resource-manager/readme.md:39:20     - Unknown word (passivestamp) -- ``` yaml $(package-passivestamp)
 ./specification/recoveryservicesbackup/resource-manager/readme.md:43:20     - Unknown word (activestamp)  -- ``` yaml $(package-activestamp)
+./specification/recoveryservicesdatareplication/resource-manager/readme.az.md:9:17      - Unknown word (recoveryservicesdatareplication) -- extensions: recoveryservicesdatareplication
 ./specification/redhatopenshift/resource-manager/readme.go.md:8:14      - Unknown word (redhatopenshift) -- namespace: redhatopenshift
 ./specification/redis/resource-manager/readme.go.md:14:40     - Unknown word (armredis)   -- resourcemanager/redis/armredis
 ./specification/redis/resource-manager/readme.java.md:10:13     - Unknown word (additonal)  -- reason: additonal properties should be
@@ -426,13 +425,14 @@ Lines:
 ./specification/saas/resource-manager/readme.go.md:13:45     - Unknown word (saasresources) -- providers/Microsoft.SaaS/saasresources/{resourceId}/listAccessToken
 ./specification/saas/resource-manager/readme.go.md:7:39      - Unknown word (armsaas)    -- resourcemanager/saas/armsaas
 ./specification/saas/resource-manager/readme.md:65:47     - Unknown word (exsisting)  -- tenant level and its an exsisting API
+./specification/scom/resource-manager/readme.go.md:13:39     - Unknown word (armscom)    -- resourcemanager/scom/armscom
 ./specification/scvmm/resource-manager/readme.go.md:8:40      - Unknown word (armscvmm)   -- resourcemanager/scvmm/armscvmm
 ./specification/search/data-plane/Azure.Search/readme.md:353:1     - Unknown word (vararg)     -- vararg-properties: >-
 ./specification/search/data-plane/Azure.Search/readme.md:417:33    - Unknown word (fasterxml)  -- replace(/(import com.fasterxml.jackson.annotation.JsonProper
 ./specification/search/resource-manager/readme.go.md:14:41     - Unknown word (armsearch)  -- resourcemanager/search/armsearch
 ./specification/security/resource-manager/readme.csharp.md:32:40     - Unknown word (securitycenter) -- csharp-sdks-folder)/securitycenter/Microsoft.Azure.Management
-./specification/securityinsights/resource-manager/readme.md:712:152   - Unknown word (reviewr)    -- supress this by Swagger reviewr.'
-./specification/securityinsights/resource-manager/readme.md:714:14    - Unknown word (Tenent)     -- reason: 'Tenent Id should be a Guid
+./specification/securityinsights/resource-manager/readme.md:752:152   - Unknown word (reviewr)    -- supress this by Swagger reviewr.'
+./specification/securityinsights/resource-manager/readme.md:754:14    - Unknown word (Tenent)     -- reason: 'Tenent Id should be a Guid
 ./specification/servicebus/resource-manager/readme.md:41:51     - Unknown word (migrationconfigs) -- preview/2021-01-01-preview/migrationconfigs.json
 ./specification/servicebus/resource-manager/readme.md:42:51     - Unknown word (networksets)      -- preview/2021-01-01-preview/networksets.json
 ./specification/servicefabric/resource-manager/readme.md:98:54     - Unknown word (managedcluster) -- preview/2020-01-01-preview/managedcluster.json
