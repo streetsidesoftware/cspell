@@ -37,17 +37,17 @@ Some videos related to CSpell and the [Code Spell Checker](https://marketplace.v
 
 ## Packages
 
-- [cspell](packages/cspell) [![Verified on Openbase](https://badges.openbase.com/js/verified/cspell.svg?token=N5IXZIAqMY+0I+KuQhPpfoZYw0QUz/LiSYlOerD8Pio=)](https://openbase.com/js/cspell?utm_source=embedded&utm_medium=badge&utm_campaign=verified-badge&utm_term=js/cspell) -- cspell command-line application
-- [@cspell/eslint-plugin](packages/cspell-eslint-plugin) [![Verified on Openbase](https://badges.openbase.com/js/verified/@cspell/eslint-plugin.svg?token=SVzjSaHtOWCFmjBOgw1W6CuYHDw29Vx77pNj7v5lPRE=)](https://openbase.com/js/@cspell/eslint-plugin?utm_source=embedded&utm_medium=badge&utm_campaign=rate-badge) -- CSpell ESLint Plugin
-- [cspell-bundled-dicts](packages/cspell-bundled-dicts) -- collection of dictionaries bundled with cspell.
-- [cspell-glob](packages/cspell-glob) -- glob library.
-- [cspell-io](packages/cspell-io) -- i/o library.
-- [cspell-lib](packages/cspell-lib) -- cspell library used for code driven spelling checking (used by the application).
-- [cspell-types](packages/cspell-types) -- cspell types and JSON schema for cspell configuration files.
-- [cspell-tools](packages/cspell-tools) -- tool used to compile dictionaries.
-- [cspell-trie-lib](packages/cspell-trie-lib) -- trie data structure used to store words.
-- [cspell-trie](packages/cspell-trie) -- trie data tool used to store words.
-- [hunspell-reader](packages/hunspell-reader) -- reads Hunspell files and outputs words.
+- [cspell](https://github.com/streetsidesoftware/cspell/tree/main/packages/cspell) [![Verified on Openbase](https://badges.openbase.com/js/verified/cspell.svg?token=N5IXZIAqMY+0I+KuQhPpfoZYw0QUz/LiSYlOerD8Pio=)](https://openbase.com/js/cspell?utm_source=embedded&utm_medium=badge&utm_campaign=verified-badge&utm_term=js/cspell) -- cspell command-line application
+- [@cspell/eslint-plugin](https://github.com/streetsidesoftware/cspell/tree/main/packages/cspell-eslint-plugin) [![Verified on Openbase](https://badges.openbase.com/js/verified/@cspell/eslint-plugin.svg?token=SVzjSaHtOWCFmjBOgw1W6CuYHDw29Vx77pNj7v5lPRE=)](https://openbase.com/js/@cspell/eslint-plugin?utm_source=embedded&utm_medium=badge&utm_campaign=rate-badge) -- CSpell ESLint Plugin
+- [cspell-bundled-dicts](https://github.com/streetsidesoftware/cspell/tree/main/packages/cspell-bundled-dicts) -- collection of dictionaries bundled with cspell.
+- [cspell-glob](https://github.com/streetsidesoftware/cspell/tree/main/packages/cspell-glob) -- glob library.
+- [cspell-io](https://github.com/streetsidesoftware/cspell/tree/main/packages/cspell-io) -- i/o library.
+- [cspell-lib](https://github.com/streetsidesoftware/cspell/tree/main/packages/cspell-lib) -- cspell library used for code driven spelling checking (used by the application).
+- [cspell-types](https://github.com/streetsidesoftware/cspell/tree/main/packages/cspell-types) -- cspell types and JSON schema for cspell configuration files.
+- [cspell-tools](https://github.com/streetsidesoftware/cspell/tree/main/packages/cspell-tools) -- tool used to compile dictionaries.
+- [cspell-trie-lib](https://github.com/streetsidesoftware/cspell/tree/main/packages/cspell-trie-lib) -- trie data structure used to store words.
+- [cspell-trie](https://github.com/streetsidesoftware/cspell/tree/main/packages/cspell-trie) -- trie data tool used to store words.
+- [hunspell-reader](https://github.com/streetsidesoftware/cspell/tree/main/packages/hunspell-reader) -- reads Hunspell files and outputs words.
 
 ## Related Packages
 
