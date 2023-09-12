@@ -14,10 +14,10 @@ The CSpell mono-repo, a spell checker for code.
 
 ## Support Future Development
 
-- [![GitHub Sponsors](https://img.shields.io/badge/-black?style=social&logo=githubsponsors&label=GitHub%20Sponsor%3A%20Street%20Side%20Software)](https://github.com/sponsors/streetsidesoftware)
-- [![Patreon](https://img.shields.io/badge/-black?style=social&logo=patreon&label=Patreon%3A%20Street%20Side%20Software)](https://patreon.com/streetsidesoftware)
-- [![PayPal](https://img.shields.io/badge/-black?style=social&logo=paypal&label=PayPal%20Donate%3A%20Street%20Side%20Software)](https://www.paypal.com/donate/?hosted_button_id=26LNBP2Q6MKCY)
-- [![Open Collective](https://img.shields.io/badge/-black?style=social&logo=opencollective&label=Open%20Collective%3A%20CSpell)](https://opencollective.com/cspell)
+-   [![GitHub Sponsors](https://img.shields.io/badge/-black?style=social\&logo=githubsponsors\&label=GitHub%20Sponsor%3A%20Street%20Side%20Software)](https://github.com/sponsors/streetsidesoftware)
+-   [![Patreon](https://img.shields.io/badge/-black?style=social\&logo=patreon\&label=Patreon%3A%20Street%20Side%20Software)](https://patreon.com/streetsidesoftware)
+-   [![PayPal](https://img.shields.io/badge/-black?style=social\&logo=paypal\&label=PayPal%20Donate%3A%20Street%20Side%20Software)](https://www.paypal.com/donate/?hosted_button_id=26LNBP2Q6MKCY)
+-   [![Open Collective](https://img.shields.io/badge/-black?style=social\&logo=opencollective\&label=Open%20Collective%3A%20CSpell)](https://opencollective.com/cspell)
 
 ## Documentation
 
@@ -27,35 +27,35 @@ The CSpell mono-repo, a spell checker for code.
 
 Some videos related to CSpell and the [Code Spell Checker](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker) for VS Code.
 
-- [Spell Checking Documentation in DevOps Pipelines](https://www.youtube.com/watch?v=w8gGi3aeVpc) by Houssem Dellai
-- [Don't Worry About Spelling...VS Code Can Do It For You!!](https://www.youtube.com/watch?v=MfxFMFMsBP4) by [James Q Quick](https://www.youtube.com/@JamesQQuick)
-- [Spell Checking In VSCode - VSCode Pro Tips](https://www.youtube.com/watch?v=_GwpPJgH1Gw)
-- [Spell Check in VS Code with Code Spell Checker | Extension Highlight](https://www.youtube.com/watch?v=ZxNnOjWetH4)
-- [Spell check your code from the command line with Cspell](https://www.youtube.com/watch?v=nwmJ9h_zPJc)
-- [How to Use VS Code Spell Checker](https://www.youtube.com/watch?v=Ix5bMd0kZeY) - Detailed walkthrough to setup and use multiple languages
-- [Code Spell Checker Extension for Visual Studio Code](https://www.youtube.com/watch?v=dUn1mrJYMrM)
+-   [Spell Checking Documentation in DevOps Pipelines](https://www.youtube.com/watch?v=w8gGi3aeVpc) by Houssem Dellai
+-   [Don't Worry About Spelling...VS Code Can Do It For You!!](https://www.youtube.com/watch?v=MfxFMFMsBP4) by [James Q Quick](https://www.youtube.com/@JamesQQuick)
+-   [Spell Checking In VSCode - VSCode Pro Tips](https://www.youtube.com/watch?v=_GwpPJgH1Gw)
+-   [Spell Check in VS Code with Code Spell Checker | Extension Highlight](https://www.youtube.com/watch?v=ZxNnOjWetH4)
+-   [Spell check your code from the command line with Cspell](https://www.youtube.com/watch?v=nwmJ9h_zPJc)
+-   [How to Use VS Code Spell Checker](https://www.youtube.com/watch?v=Ix5bMd0kZeY) - Detailed walkthrough to setup and use multiple languages
+-   [Code Spell Checker Extension for Visual Studio Code](https://www.youtube.com/watch?v=dUn1mrJYMrM)
 
 ## Packages
 
-- [cspell](packages/cspell) [![Verified on Openbase](https://badges.openbase.com/js/verified/cspell.svg?token=N5IXZIAqMY+0I+KuQhPpfoZYw0QUz/LiSYlOerD8Pio=)](https://openbase.com/js/cspell?utm_source=embedded&utm_medium=badge&utm_campaign=verified-badge&utm_term=js/cspell) -- cspell command-line application
-- [@cspell/eslint-plugin](packages/cspell-eslint-plugin) [![Verified on Openbase](https://badges.openbase.com/js/verified/@cspell/eslint-plugin.svg?token=SVzjSaHtOWCFmjBOgw1W6CuYHDw29Vx77pNj7v5lPRE=)](https://openbase.com/js/@cspell/eslint-plugin?utm_source=embedded&utm_medium=badge&utm_campaign=rate-badge) -- CSpell ESLint Plugin
-- [cspell-bundled-dicts](packages/cspell-bundled-dicts) -- collection of dictionaries bundled with cspell.
-- [cspell-glob](packages/cspell-glob) -- glob library.
-- [cspell-io](packages/cspell-io) -- i/o library.
-- [cspell-lib](packages/cspell-lib) -- cspell library used for code driven spelling checking (used by the application).
-- [cspell-types](packages/cspell-types) -- cspell types and JSON schema for cspell configuration files.
-- [cspell-tools](packages/cspell-tools) -- tool used to compile dictionaries.
-- [cspell-trie-lib](packages/cspell-trie-lib) -- trie data structure used to store words.
-- [cspell-trie](packages/cspell-trie) -- trie data tool used to store words.
-- [hunspell-reader](packages/hunspell-reader) -- reads Hunspell files and outputs words.
+-   [cspell](packages/cspell) [![Verified on Openbase](https://badges.openbase.com/js/verified/cspell.svg?token=N5IXZIAqMY+0I+KuQhPpfoZYw0QUz/LiSYlOerD8Pio=)](https://openbase.com/js/cspell?utm_source=embedded\&utm_medium=badge\&utm_campaign=verified-badge\&utm_term=js/cspell) -- cspell command-line application
+-   [@cspell/eslint-plugin](packages/cspell-eslint-plugin) [![Verified on Openbase](https://badges.openbase.com/js/verified/@cspell/eslint-plugin.svg?token=SVzjSaHtOWCFmjBOgw1W6CuYHDw29Vx77pNj7v5lPRE=)](https://openbase.com/js/@cspell/eslint-plugin?utm_source=embedded\&utm_medium=badge\&utm_campaign=rate-badge) -- CSpell ESLint Plugin
+-   [cspell-bundled-dicts](packages/cspell-bundled-dicts) -- collection of dictionaries bundled with cspell.
+-   [cspell-glob](packages/cspell-glob) -- glob library.
+-   [cspell-io](packages/cspell-io) -- i/o library.
+-   [cspell-lib](packages/cspell-lib) -- cspell library used for code driven spelling checking (used by the application).
+-   [cspell-types](packages/cspell-types) -- cspell types and JSON schema for cspell configuration files.
+-   [cspell-tools](packages/cspell-tools) -- tool used to compile dictionaries.
+-   [cspell-trie-lib](packages/cspell-trie-lib) -- trie data structure used to store words.
+-   [cspell-trie](packages/cspell-trie) -- trie data tool used to store words.
+-   [hunspell-reader](packages/hunspell-reader) -- reads Hunspell files and outputs words.
 
 ## Related Packages
 
-- [cspell-cli](https://github.com/streetsidesoftware/cspell-cli) -- `cspell-cli` is useful for including `cspell` directly from GitHub.
+-   [cspell-cli](https://github.com/streetsidesoftware/cspell-cli) -- `cspell-cli` is useful for including `cspell` directly from GitHub.
 
-  Example install: `npm install -g git+https://github.com/streetsidesoftware/cspell-cli`.
+    Example install: `npm install -g git+https://github.com/streetsidesoftware/cspell-cli`.
 
-  This will add the `cspell-cli` command, which is an alias of the `cspell` command.
+    This will add the `cspell-cli` command, which is an alias of the `cspell` command.
 
 ## RFCs
 
@@ -70,7 +70,7 @@ Some videos related to CSpell and the [Code Spell Checker](https://marketplace.v
 
 Available as part of the Tidelift Subscription.
 
-The maintainers of CSpell and thousands of other packages are working with Tidelift to deliver commercial support and maintenance for the open source packages you use to build your applications. Save time, reduce risk, and improve code health, while paying the maintainers of the exact packages you use. [Learn more.](https://tidelift.com/subscription/pkg/npm-cspell?utm_source=npm-cspell&utm_medium=referral&utm_campaign=enterprise&utm_term=repo)
+The maintainers of CSpell and thousands of other packages are working with Tidelift to deliver commercial support and maintenance for the open source packages you use to build your applications. Save time, reduce risk, and improve code health, while paying the maintainers of the exact packages you use. [Learn more.](https://tidelift.com/subscription/pkg/npm-cspell?utm_source=npm-cspell\&utm_medium=referral\&utm_campaign=enterprise\&utm_term=repo)
 
 ## Security contact information
 
@@ -92,7 +92,7 @@ Tidelift will coordinate the fix and disclosure.
 
 <br/>
 
----
+***
 
 <p align="center">
 Brought to you by <a href="https://streetsidesoftware.com" title="Street Side Software">
