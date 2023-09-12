@@ -96,7 +96,7 @@ export function commandLint(prog: Command): Command {
         .option('--no-progress', 'Turn off progress messages')
         .option('--no-summary', 'Turn off summary message in console.')
         .option('-s, --silent', 'Silent mode, suppress error messages.')
-        .option('--allow-failure', 'Return zero exit status even when findings are present.')
+        .option('--no-exit-code', 'Return zero exit code even when there are unignored issues.')
         .addOption(
             new CommanderOption('--quiet', 'Only show spelling issues or errors.').implies({
                 summary: false,
@@ -170,8 +170,11 @@ export function commandLint(prog: Command): Command {
                     spellCheckCommand.outputHelp();
                     throw new CheckFailed('outputHelp', 1);
                 }
-                if (result.issues || result.errors || (mustFindFiles && !result.files)) {
-                    const exitCode = options.allowFailure ? 0 : 1;
+                if (result.errors || (mustFindFiles && !result.files)) {
+                    throw new CheckFailed('check failed', 1);
+                }
+                if (result.issues) {
+                    const exitCode = options.noExitCode ? 0 : 1;
                     throw new CheckFailed('check failed', exitCode);
                 }
                 return;

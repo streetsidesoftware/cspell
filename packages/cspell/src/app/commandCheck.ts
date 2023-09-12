@@ -21,7 +21,7 @@ export function commandCheck(prog: Command): Command {
         .option('--no-validate-directives', 'Do not validate in-document CSpell directives.')
         .option('--no-color', 'Turn off color.')
         .option('--color', 'Force color')
-        .option('--allow-failure', 'Return zero exit status even when findings are present.')
+        .option('--no-exit-code', 'Return zero exit code even when there are unignored issues.')
         .addOption(
             new CommanderOption(
                 '--default-configuration',
@@ -61,7 +61,7 @@ export function commandCheck(prog: Command): Command {
                 console.log();
             }
             if (issueCount) {
-                const exitCode = options.allowFailure ? 0 : 1;
+                const exitCode = options.noExitCode ? 0 : 1;
                 throw new CheckFailed('Issues found', exitCode);
             }
         });
