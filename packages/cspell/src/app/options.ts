@@ -156,10 +156,10 @@ export interface BaseOptions {
     validateDirectives?: boolean;
 
     /**
-     * Return zero exit code even when there are unignored issues.
-     * @default false
+     * Return an exit code if there are issues found.
+     * @default true
      */
-    noExitCode?: boolean;
+    exitCode?: boolean;
 
     /**
      * Execution flags.

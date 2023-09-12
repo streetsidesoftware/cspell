@@ -21,7 +21,7 @@ export function commandCheck(prog: Command): Command {
         .option('--no-validate-directives', 'Do not validate in-document CSpell directives.')
         .option('--no-color', 'Turn off color.')
         .option('--color', 'Force color')
-        .option('--no-exit-code', 'Return zero exit code even when there are unignored issues.')
+        .option('--no-exit-code', 'Do not return an exit code if issues are found.')
         .addOption(
             new CommanderOption(
                 '--default-configuration',
@@ -35,6 +35,7 @@ export function commandCheck(prog: Command): Command {
             ),
         )
         .action(async (files: string[], options: CheckCommandOptions) => {
+            const useExitCode = options.exitCode ?? true;
             App.parseApplicationFeatureFlags(options.flag);
             let issueCount = 0;
             for (const filename of files) {
@@ -61,7 +62,7 @@ export function commandCheck(prog: Command): Command {
                 console.log();
             }
             if (issueCount) {
-                const exitCode = options.noExitCode ? 0 : 1;
+                const exitCode = useExitCode ?? true ? 1 : 0;
                 throw new CheckFailed('Issues found', exitCode);
             }
         });

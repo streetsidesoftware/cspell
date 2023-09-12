@@ -96,7 +96,7 @@ export function commandLint(prog: Command): Command {
         .option('--no-progress', 'Turn off progress messages')
         .option('--no-summary', 'Turn off summary message in console.')
         .option('-s, --silent', 'Silent mode, suppress error messages.')
-        .option('--no-exit-code', 'Return zero exit code even when there are unignored issues.')
+        .option('--no-exit-code', 'Do not return an exit code if issues are found.')
         .addOption(
             new CommanderOption('--quiet', 'Only show spelling issues or errors.').implies({
                 summary: false,
@@ -163,6 +163,7 @@ export function commandLint(prog: Command): Command {
         .addHelpText('after', advanced)
         .arguments('[globs...]')
         .action((fileGlobs: string[], options: LinterCliOptions) => {
+            const useExitCode = options.exitCode ?? true;
             App.parseApplicationFeatureFlags(options.flag);
             const { mustFindFiles, fileList } = options;
             return App.lint(fileGlobs, options).then((result) => {
@@ -174,7 +175,7 @@ export function commandLint(prog: Command): Command {
                     throw new CheckFailed('check failed', 1);
                 }
                 if (result.issues) {
-                    const exitCode = options.noExitCode ? 0 : 1;
+                    const exitCode = useExitCode ? 1 : 0;
                     throw new CheckFailed('check failed', exitCode);
                 }
                 return;
