@@ -45,6 +45,7 @@ Options:
   --no-progress                Turn off progress messages
   --no-summary                 Turn off summary message in console.
   -s, --silent                 Silent mode, suppress error messages.
+  --no-exit-code               Do not return an exit code if issues are found.
   --quiet                      Only show spelling issues or errors.
   --fail-fast                  Exit after first file with an issue or error.
   -r, --root <root folder>     Root directory, defaults to current directory.
