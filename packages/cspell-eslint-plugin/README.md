@@ -84,16 +84,46 @@ interface Options {
    */
   checkComments?: boolean;
   /**
-   * CSpell settings
-   *
-   * @words - list of words to be always considered correct
-   *
-   * @ignoreWords - a list of words to be ignored (even if they are in the flagWords)
-   *
-   * @flagWords - a list of words to be always considered incorrect, unless ignored.
-   *
+   * Some CSpell Settings
    */
-  cSpell?: { words?: string[]; ignoreWords?: string[]; flagWords?: string[] };
+  cSpell?: {
+    /** List of words to be considered correct. */
+    words?: string[];
+    /**
+     * List of words to be ignored.
+     * An ignored word will not show up as an error, even if it is also
+     * in the `flagWords`.
+     */
+    ignoreWords?: string[];
+    /**
+     * List of words to always be considered incorrect.
+     * Words found in `flagWords` override `words`.
+     * Format of `flagWords`
+     * - single word entry - `word`
+     * - with suggestions - `word:suggestion` or `word->suggestion, suggestions`
+     */
+    flagWords?: string[];
+    /**
+     * List of regular expression patterns or pattern names to exclude
+     * from spell checking.
+     */
+    ignoreRegExpList?: string[];
+    /**
+     * List of regular expression patterns or defined pattern names to
+     * match for spell checking.
+     * If this property is defined, only text matching the included
+     * patterns will be checked.
+     */
+    includeRegExpList?: string[];
+    /** Allows words to be glued together. */
+    allowCompoundWords?: boolean;
+    /** Import cspell config file. */
+    import?: string[];
+    /** List of dictionaries to enable */
+    dictionaries?: string[];
+    /** Define dictionaries. */
+    dictionaryDefinitions?: DictionaryDefinition[];
+  };
   /**
    * Specify a path to a custom word list file.
    *

@@ -43,7 +43,7 @@ export type CSpellOptions = Pick<
     | 'import'
     | 'words'
 > & {
-    dictionaryDefinition?: DictionaryDefinition;
+    dictionaryDefinitions?: DictionaryDefinition[];
 };
 
 export type RequiredOptions = Required<Options>;

@@ -50,60 +50,63 @@
           },
           "type": "array"
         },
-        "dictionaryDefinition": {
-          "additionalProperties": false,
-          "properties": {
-            "description": {
-              "description": "Optional description.",
-              "type": "string"
-            },
-            "name": {
-              "description": "This is the name of a dictionary.\n\nName Format:\n- Must contain at least 1 number or letter.\n- Spaces are allowed.\n- Leading and trailing space will be removed.\n- Names ARE case-sensitive.\n- Must not contain `*`, `!`, `;`, `,`, `{`, `}`, `[`, `]`, `~`.",
-              "pattern": "^(?=[^!*,;{}[\\]~\\n]+$)(?=(.*\\w)).+$",
-              "type": "string"
-            },
-            "noSuggest": {
-              "description": "Indicate that suggestions should not come from this dictionary. Words in this dictionary are considered correct, but will not be used when making spell correction suggestions.\n\nNote: if a word is suggested by another dictionary, but found in this dictionary, it will be removed from the set of possible suggestions.",
-              "type": "boolean"
-            },
-            "path": {
-              "description": "Path to the file.",
-              "pattern": "^.*\\.(?:txt|trie)(?:\\.gz)?$",
-              "type": "string"
-            },
-            "repMap": {
-              "description": "Replacement pairs.",
-              "items": {
+        "dictionaryDefinitions": {
+          "items": {
+            "additionalProperties": false,
+            "properties": {
+              "description": {
+                "description": "Optional description.",
+                "type": "string"
+              },
+              "name": {
+                "description": "This is the name of a dictionary.\n\nName Format:\n- Must contain at least 1 number or letter.\n- Spaces are allowed.\n- Leading and trailing space will be removed.\n- Names ARE case-sensitive.\n- Must not contain `*`, `!`, `;`, `,`, `{`, `}`, `[`, `]`, `~`.",
+                "pattern": "^(?=[^!*,;{}[\\]~\\n]+$)(?=(.*\\w)).+$",
+                "type": "string"
+              },
+              "noSuggest": {
+                "description": "Indicate that suggestions should not come from this dictionary. Words in this dictionary are considered correct, but will not be used when making spell correction suggestions.\n\nNote: if a word is suggested by another dictionary, but found in this dictionary, it will be removed from the set of possible suggestions.",
+                "type": "boolean"
+              },
+              "path": {
+                "description": "Path to the file.",
+                "pattern": "^.*\\.(?:txt|trie)(?:\\.gz)?$",
+                "type": "string"
+              },
+              "repMap": {
+                "description": "Replacement pairs.",
                 "items": {
-                  "type": "string"
+                  "items": {
+                    "type": "string"
+                  },
+                  "maxItems": 2,
+                  "minItems": 2,
+                  "type": "array"
                 },
-                "maxItems": 2,
-                "minItems": 2,
                 "type": "array"
               },
-              "type": "array"
+              "type": {
+                "default": "S",
+                "description": "Type of file:\n- S - single word per line,\n- W - each line can contain one or more words separated by space,\n- C - each line is treated like code (Camel Case is allowed).\n\nDefault is S.\n\nC is the slowest to load due to the need to split each line based upon code splitting rules.",
+                "enum": [
+                  "S",
+                  "W",
+                  "C",
+                  "T"
+                ],
+                "type": "string"
+              },
+              "useCompounds": {
+                "description": "Use Compounds.",
+                "type": "boolean"
+              }
             },
-            "type": {
-              "default": "S",
-              "description": "Type of file:\n- S - single word per line,\n- W - each line can contain one or more words separated by space,\n- C - each line is treated like code (Camel Case is allowed).\n\nDefault is S.\n\nC is the slowest to load due to the need to split each line based upon code splitting rules.",
-              "enum": [
-                "S",
-                "W",
-                "C",
-                "T"
-              ],
-              "type": "string"
-            },
-            "useCompounds": {
-              "description": "Use Compounds.",
-              "type": "boolean"
-            }
+            "required": [
+              "name",
+              "path"
+            ],
+            "type": "object"
           },
-          "required": [
-            "name",
-            "path"
-          ],
-          "type": "object"
+          "type": "array"
         },
         "enabled": {
           "default": true,
