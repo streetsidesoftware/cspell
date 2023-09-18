@@ -5,7 +5,7 @@ Args: '["-e","/app/assets/codemirror","-e","/app/system/languages","**"]'
 Summary:
   files: 741
   filesWithIssues: 221
-  issues: 689
+  issues: 687
   errors: 0
 Errors: []
 
@@ -21,7 +21,6 @@ issues:
   - "app/console/src/Commands/BuildCommand.php:34:24         nickic              U       '^app\\/vendor\\/nickic\\/php-parser\\/(grammar"
   - "app/console/src/Commands/BuildCommand.php:35:25         phpdocumentor       U       '^app\\/vendor\\/(phpdocumentor|phpspec|phpunit|sebastian"
   - "app/console/src/Commands/BuildCommand.php:35:39         phpspec             U       vendor\\/(phpdocumentor|phpspec|phpunit|sebastian|symfony"
-  - "app/console/src/Commands/BuildCommand.php:35:47         phpunit             U       phpdocumentor|phpspec|phpunit|sebastian|symfony\\/yaml"
   - "app/console/src/Commands/ClearCacheCommand.php:14:24        clearcache      U       protected $name = 'clearcache';"
   - "app/console/src/Commands/ExtensionTranslateCommand.php:106:17       translateable       U       * Extracts translateable strings from a given"
   - "app/console/src/Commands/ExtensionTranslateCommand.php:111:79       customdomain        U       Apple' => 'Apple'], 'customdomain' => ['One' => 'One'"
@@ -67,6 +66,7 @@ issues:
   - "app/modules/application/src/Event/Event.php:164:8       Unsets      U       * Unsets a parameter."
   - "app/modules/application/src/Tests/DbUtil.php:11:45          DBAL        U       name of the Doctrine DBAL database driver to use"
   - "app/modules/application/src/Tests/DbUtil.php:32:27          tmpdb       U       $GLOBALS['tmpdb_type'], $GLOBALS['tmpdb"
+  - "app/modules/auth/phpunit.xml.dist:3:2           phpunit         U       <phpunit backupGlobals=\"false"
   - "app/modules/auth/phpunit.xml.dist:14:6          testsuites      U       <testsuites>"
   - "app/modules/auth/phpunit.xml.dist:15:10         testsuite       U       <testsuite name=\"Pagekit Auth Component"
   - "app/modules/auth/src/Handler/DatabaseHandler.php:155:59         notnull     U       access', 'datetime', ['notnull' => false]);"
