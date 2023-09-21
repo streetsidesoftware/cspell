@@ -5,7 +5,7 @@ Args: '["**"]'
 Summary:
   files: 411
   filesWithIssues: 397
-  issues: 2175
+  issues: 2157
   errors: 0
 Errors: []
 
@@ -56,7 +56,6 @@ issues:
   - "build.sbt:280:11        nazoking            U       <id>nazoking</id>"
   - "build.sbt:286:13        Matthieu            U       <name>Matthieu Brouillard</name>"
   - "build.sbt:286:22        Brouillard          U       <name>Matthieu Brouillard</name>"
-  - "build.sbt:308:5         Xdebug              U       \"-Xdebug\","
   - "build.sbt:309:5         Xrunjdwp            U       \"-Xrunjdwp:transport=dt_socket"
   - "build.sbt:310:5         Dorg                U       \"-Dorg.eclipse.jetty.annotations"
   - "build.sbt:311:7         Ddev                U       //\"-Ddev-features=keep-session"
@@ -158,7 +157,6 @@ issues:
   - "src/main/scala/gitbucket/core/controller/AccountController.scala:88:58          maxlength       U       name\", text(required, maxlength(100), identifier, uniqueUserN"
   - "src/main/scala/gitbucket/core/controller/AccountController.scala:208:5          ctype           U       ctype: WebHookContentType"
   - "src/main/scala/gitbucket/core/controller/AccountController.scala:329:73         noimage         U       getResourceAsStream(\"noimage.png\")"
-  - "src/main/scala/gitbucket/core/controller/AccountController.scala:637:18         signin          U       redirect(\"/signin\")"
   - "src/main/scala/gitbucket/core/controller/AccountController.scala:721:21         editgroup       U       get(\"/:groupName/_editgroup\")(managersOnly {"
   - "src/main/scala/gitbucket/core/controller/AccountController.scala:728:21         deletegroup     U       get(\"/:groupName/_deletegroup\")(managersOnly {"
   - "src/main/scala/gitbucket/core/controller/api/ApiGitReferenceControllerBase.scala:40:9           revstr      U       val revstr = multiParams(\"splat"
@@ -167,7 +165,6 @@ issues:
   - "src/main/scala/gitbucket/core/controller/ControllerBase.scala:149:68        mobilephone     U       smartphone\" || category == \"mobilephone\""
   - "src/main/scala/gitbucket/core/controller/ControllerBase.scala:231:51        nosniff         U       Content-Type-Options\", \"nosniff\")"
   - "src/main/scala/gitbucket/core/controller/ControllerBase.scala:305:51        Charsets        U       toString(in, StandardCharsets.UTF_8)"
-  - "src/main/scala/gitbucket/core/controller/ControllerBase.scala:472:6         signout         U       \"signout\","
   - "src/main/scala/gitbucket/core/controller/IndexController.scala:63:14        Oidc        U       case class OidcAuthContext(state: State"
   - "src/main/scala/gitbucket/core/controller/IndexController.scala:131:41       OIDC        U       authenticationRequest = createOIDCAuthenticationRequest"
   - "src/main/scala/gitbucket/core/controller/IndexController.scala:268:29       Viewr       U       TODO Move to RepositoryViewrController?"
@@ -287,8 +284,6 @@ issues:
   - "src/main/twirl/gitbucket/core/repo/editor.scala.html:66:52          Monokai         U       selected value=\"monokai\">Monokai</option>"
   - "src/main/twirl/gitbucket/core/repo/editor.scala.html:67:34          nord            U       <option value=\"nord_dark\">Nord Dark</option"
   - "src/main/twirl/gitbucket/core/repo/editor.scala.html:67:45          Nord            U       option value=\"nord_dark\">Nord Dark</option>"
-  - "src/main/twirl/gitbucket/core/repo/editor.scala.html:71:34          sqlserver       U       <option value=\"sqlserver\">Sqlserver</option>"
-  - "src/main/twirl/gitbucket/core/repo/editor.scala.html:71:45          Sqlserver       U       option value=\"sqlserver\">Sqlserver</option>"
   - "src/main/twirl/gitbucket/core/repo/editor.scala.html:134:48         modelist        U       assets(\"/vendors/ace/ext-modelist.js\")\" type=\"text/javascript"
   - "src/main/twirl/gitbucket/core/settings/deploykey.scala.html:6:41        deploykeys      U       settings.html.menu(\"deploykeys\", repository){"
   - "src/main/twirl/gitbucket/core/settings/issues.scala.html:18:41          issuesfield     U       gitbucket.core.settings.html.issuesfield(customField)"
