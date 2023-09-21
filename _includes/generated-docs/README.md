@@ -90,6 +90,18 @@ Tidelift will coordinate the fix and disclosure.
 
 [^1]: [Support - Street Side Software](https://streetsidesoftware.com/support/#maintenance-agreements)
 
+## Contributing
+
+Contributions are welcome!
+
+See: [Contributing](CONTRIBUTING.md)
+
+Special thanks to all of our amazing contributors!
+
+<a href="https://github.com/streetsidesoftware/cspell/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=streetsidesoftware/cspell"  width="800px"/>
+</a>
+
 <br/>
 
 ---
