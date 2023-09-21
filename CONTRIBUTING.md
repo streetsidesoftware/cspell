@@ -12,13 +12,11 @@ These are some notes about contributing.
 
 - https://www.npmjs.com/package/cspell
 - https://www.npmjs.com/package/cspell-lib
-- https://www.npmjs.com/package/cspell-trie
-- https://www.npmjs.com/package/cspell-tools
-- https://www.npmjs.com/package/cspell-glob
+- https://www.npmjs.com/package/cspell-trie-lib
 
 ## Development
 
-Node JS version 14 or higher is required.
+Node JS version 18 or higher is required.
 
 ### Commands
 
