@@ -39,7 +39,9 @@ jobs:
 
       - name: Run Action
         id: dependabot
-        uses: streetsidesoftware/actions/public/update-dependabot-github-actions@v1.3
+        uses: streetsidesoftware/actions/public/update-dependabot-github-actions@v1
+        with:
+          prefix: chore
 
       - name: Echo Result
         env:
