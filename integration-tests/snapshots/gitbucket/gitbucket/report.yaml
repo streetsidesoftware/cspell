@@ -5,19 +5,19 @@ Args: '["**"]'
 Summary:
   files: 411
   filesWithIssues: 397
-  issues: 2156
+  issues: 2157
   errors: 0
 Errors: []
 
 issues:
   - "build.sbt:5:13          gitbucket           U       val Name = \"gitbucket\""
-  - "build.sbt:7:5           Scalatra            U       val ScalatraVersion = \"3.0.0-M5-javax"
-  - "build.sbt:7:33          javax               U       ScalatraVersion = \"3.0.0-M5-javax\""
+  - "build.sbt:7:5           Scalatra            U       val ScalatraVersion = \"3.0.0\""
   - "build.sbt:9:5           Jgit                U       val JgitVersion = \"6.7.0.202"
   - "build.sbt:31:4          scalafmt            U       // scalafmtOnCompile := true"
   - "build.sbt:37:3          Classpaths          U       Classpaths.typesafeReleases,"
   - "build.sbt:38:4          sonatype            U       \"sonatype-snapshot\" at \"https"
-  - "build.sbt:44:41         scalatra            U       %% \"scalatra\""
+  - "build.sbt:44:41         scalatra            U       %% \"scalatra-javax\""
+  - "build.sbt:44:50         javax               U       %% \"scalatra-javax\" % ScalatraVersi"
   - "build.sbt:49:40         solidbase           U       gitbucket\" % \"solidbase\""
   - "build.sbt:50:40         markedj             U       gitbucket\" % \"markedj\""
   - "build.sbt:54:40         httpclient          U       httpcomponents\" % \"httpclient\""
@@ -29,7 +29,7 @@ issues:
   - "build.sbt:65:40         xhub                U       oss.security.xhub\" % \"xhub4j-core\""
   - "build.sbt:68:40         thumbnailator       U       % \"thumbnailator\" % \""
   - "build.sbt:70:47         oidc                U       % \"oauth2-oidc-sdk\" %"
-  - "build.sbt:74:50         scalatest           U       %% \"scalatra-scalatest\" % ScalatraVersion"
+  - "build.sbt:74:50         scalatest           U       %% \"scalatra-scalatest-javax\" % ScalatraVersion"
   - "build.sbt:76:41         testcontainers      U       %% \"testcontainers-scala\" % \"0."
   - "build.sbt:79:40         eddsa               U       % \"eddsa\""
   - "build.sbt:80:40         woothee             U       woothee\" % \"woothee-java\""

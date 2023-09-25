@@ -3,9 +3,9 @@ Repository: Azure/azure-rest-api-specs
 Url: https://github.com/Azure/azure-rest-api-specs.git
 Args: '["--config=cSpell.json","**/*.{md,ts,js}"]'
 Summary:
-  files: 2133
-  filesWithIssues: 753
-  issues: 2470
+  files: 2134
+  filesWithIssues: 752
+  issues: 2468
   errors: 0
 Errors: []
 
@@ -141,7 +141,7 @@ issues:
   - "specification/billingbenefits/resource-manager/readme.az.md:9:17        billingbenefits     U       extensions: billingbenefits"
   - "specification/botservice/resource-manager/readme.md:43:36       systemdata      U       don not yet support systemdata"
   - "specification/cdn/resource-manager/readme.go.md:14:38       armcdn      U       resourcemanager/cdn/armcdn"
-  - "specification/cdn/resource-manager/readme.md:43:37          cdnwebapplicationfirewall       U       Cdn/stable/2023-05-01/cdnwebapplicationfirewall.json"
+  - "specification/cdn/resource-manager/readme.md:41:46          cdnwebapplicationfirewall       U       preview/2023-07-01-preview/cdnwebapplicationfirewall.json"
   - "specification/changeanalysis/resource-manager/readme.csharp.md:14:40        changeanalysis      U       csharp-sdks-folder)/changeanalysis/management/Microsoft"
   - "specification/chaos/resource-manager/readme.go.md:8:40          armchaos    U       resourcemanager/chaos/armchaos"
   - "specification/chaos/resource-manager/readme.md:177:22       toplevelresourcelistbysubscription      U       we defined the toplevelresourcelistbysubscription here:"
@@ -167,7 +167,7 @@ issues:
   - "specification/communication/data-plane/OperatorConnect/readme.md:43:4           Supression      U       ## Supression"
   - "specification/communication/data-plane/PhoneNumbers/readme.md:29:14         phonenumber     U       tag: package-phonenumber-2022-12-01"
   - "specification/communication/data-plane/PhoneNumbers/readme.md:38:23         phonenumbers    U       - stable/2022-12-01/phonenumbers.json"
-  - "specification/communication/data-plane/Rooms/readme.md:31:23        communicationservicesrooms      U       - stable/2023-06-14/communicationservicesrooms.json"
+  - "specification/communication/data-plane/Rooms/readme.md:31:32        communicationservicesrooms      U       preview/2023-10-30-preview/communicationservicesrooms.json"
   - "specification/communication/data-plane/SipRouting/readme.md:39:32       communicationservicessiprouting     U       preview/2023-04-01-preview/communicationservicessiprouting.json"
   - "specification/communication/data-plane/Sms/readme.md:38:33          communicationservicessms    U       2020-07-20-preview1/communicationservicessms.json"
   - "specification/communication/resource-manager/readme.md:1:3          vsonline    U       # vsonline"
@@ -185,7 +185,7 @@ issues:
   - "specification/cosmos-db/data-plane/readme.go.md:8:14        storagetables       U       namespace: storagetables"
   - "specification/cosmos-db/data-plane/readme.md:49:46          outputm     U       only supports XML input/outputm which is not supported"
   - "specification/cosmos-db/resource-manager/readme.go.md:14:41         armcosmos       U       resourcemanager/cosmos/armcosmos"
-  - "specification/cosmos-db/resource-manager/readme.md:43:53        mongorbac       U       preview/2023-03-15-preview/mongorbac.json"
+  - "specification/cosmos-db/resource-manager/readme.md:42:44        mongorbac       U       DocumentDB/stable/2023-09-15/mongorbac.json"
   - "specification/cost-management/resource-manager/readme.md:46:63          generatecostdetailsreport       U       8-01/costmanagement.generatecostdetailsreport.json"
   - "specification/cost-management/resource-manager/readme.md:47:63          generatedetailedcostreport      U       8-01/costmanagement.generatedetailedcostreport.json"
   - "specification/cost-management/resource-manager/readme.md:51:48          costallocation                  U       tManagement/stable/2023-08-01/costallocation.json"
@@ -259,7 +259,7 @@ issues:
   - "specification/keyvault/data-plane/readme.md:39:46       backuprestore       U       preview/7.5-preview.1/backuprestore.json"
   - "specification/keyvault/resource-manager/readme.md:255:91        syncronous      U       return a mix of 202 and syncronous return types (200,"
   - "specification/kubernetesconfiguration/resource-manager/readme.csharp.md:14:40       kubernetesconfiguration     U       csharp-sdks-folder)/kubernetesconfiguration/Microsoft.Azure.Management"
-  - "specification/kubernetesconfiguration/resource-manager/readme.md:43:57          fluxconfiguration       U       nfiguration/stable/2023-05-01/fluxconfiguration.json"
+  - "specification/kubernetesconfiguration/resource-manager/readme.java.md:8:11          fluxconfiguration       U       - from: fluxconfiguration.json"
   - "specification/liftrqumulo/resource-manager/readme.typescript.md:10:49       liftrqumulo     U       typescript-sdks-folder)/sdk/liftrqumulo/arm-qumulo\""
   - "specification/loadtestservice/resource-manager/readme.md:74:67          loadtesting     U       profiles['azure_mgmt_loadtesting']"
   - "specification/logic/resource-manager/readme.go.md:14:40         armlogic    U       resourcemanager/logic/armlogic"
@@ -303,7 +303,7 @@ issues:
   - "specification/mysql/resource-manager/readme.go.md:31:18         flexibleserver          U       - tag: package-flexibleserver-2021-12-01-preview"
   - "specification/mysql/resource-manager/readme.go.md:47:1          rpname                  U       rpname: mysql"
   - "specification/mysql/resource-manager/readme.go.md:48:12         mysqlflexibleservers    U       namespace: mysqlflexibleservers"
-  - "specification/mysql/resource-manager/readme.md:267:68       reponse (response)      U       included in get operation reponse body"
+  - "specification/mysql/resource-manager/readme.md:292:68       reponse (response)      U       included in get operation reponse body"
   - "specification/netapp/resource-manager/readme.go.md:14:41        armnetapp       U       resourcemanager/netapp/armnetapp"
   - "specification/network/resource-manager/readme.cli.md:55:14          loadbalancers                           U       - split: loadbalancers"
   - "specification/network/resource-manager/readme.cli.md:90:14          routetables                             U       - split: routetables"
@@ -410,10 +410,11 @@ issues:
   - "specification/redisenterprise/resource-manager/readme.typescript.md:9:29        redisenterprisecache    U       package-name: \"@azure/arm-redisenterprisecache\""
   - "specification/relay/resource-manager/readme.go.md:14:40         armrelay    U       resourcemanager/relay/armrelay"
   - "specification/resourceconnector/resource-manager/readme.go.md:32:12         resourceconnector       U       namespace: resourceconnector"
-  - "specification/resourcegraph/resource-manager/readme.md:52:56        resourceshistory        U       preview/2021-06-01-preview/resourceshistory.json"
-  - "specification/resourcegraph/resource-manager/readme.md:53:56        resourcechanges         U       preview/2020-09-01-preview/resourcechanges.json"
-  - "specification/resourcegraph/resource-manager/readme.md:123:56       graphquery              U       preview/2018-09-01-preview/graphquery.json"
-  - "specification/resourcegraph/resource-manager/readme.md:185:38       Listresourcechanges     U       it to ResourceChanges_Listresourcechanges seems to get rid of"
+  - "specification/resourcegraph/resource-manager/readme.md:51:56        resourcecopilot         U       preview/2023-09-01-preview/resourcecopilot.json"
+  - "specification/resourcegraph/resource-manager/readme.md:53:56        resourceshistory        U       preview/2021-06-01-preview/resourceshistory.json"
+  - "specification/resourcegraph/resource-manager/readme.md:54:56        resourcechanges         U       preview/2020-09-01-preview/resourcechanges.json"
+  - "specification/resourcegraph/resource-manager/readme.md:135:56       graphquery              U       preview/2018-09-01-preview/graphquery.json"
+  - "specification/resourcegraph/resource-manager/readme.md:197:38       Listresourcechanges     U       it to ResourceChanges_Listresourcechanges seems to get rid of"
   - "specification/resourcemover/resource-manager/readme.az.md:8:28          resourcemover       U       package-name: azure-mgmt-resourcemover"
   - "specification/resourcemover/resource-manager/readme.md:1:3          regionmove                  U       # regionmove"
   - "specification/resourcemover/resource-manager/readme.md:39:41        resourcemovercollection     U       Migrate/stable/2021-08-01/resourcemovercollection.json"
@@ -435,8 +436,8 @@ issues:
   - "specification/search/data-plane/Azure.Search/readme.md:456:33       fasterxml       U       replace(/(import com.fasterxml.jackson.annotation.JsonProper"
   - "specification/search/resource-manager/readme.go.md:14:41        armsearch       U       resourcemanager/search/armsearch"
   - "specification/security/resource-manager/readme.csharp.md:32:40          securitycenter      U       csharp-sdks-folder)/securitycenter/Microsoft.Azure.Management"
-  - "specification/securityinsights/resource-manager/readme.md:752:152       reviewr     U       supress this by Swagger reviewr.'"
-  - "specification/securityinsights/resource-manager/readme.md:754:14        Tenent      U       reason: 'Tenent Id should be a Guid"
+  - "specification/securityinsights/resource-manager/readme.md:792:152       reviewr     U       supress this by Swagger reviewr.'"
+  - "specification/securityinsights/resource-manager/readme.md:794:14        Tenent      U       reason: 'Tenent Id should be a Guid"
   - "specification/servicebus/resource-manager/readme.md:41:51       migrationconfigs    U       preview/2021-01-01-preview/migrationconfigs.json"
   - "specification/servicebus/resource-manager/readme.md:42:51       networksets         U       preview/2021-01-01-preview/networksets.json"
   - "specification/servicefabric/resource-manager/readme.md:98:54        managedcluster      U       preview/2020-01-01-preview/managedcluster.json"
@@ -451,10 +452,10 @@ issues:
   - "specification/sql/resource-manager/readme.md:2673:40        sqlmanagement       U       csharp-sdks-folder)/sqlmanagement/Microsoft.Azure.Management"
   - "specification/storage/data-plane/Azure.Storage.Files.DataLake/readme.md:91:34       predfined       U       These parameters are predfined by storage specifications"
   - "specification/storage/resource-manager/readme.go.md:14:42       armstorage      U       resourcemanager/storage/armstorage"
+  - "specification/storageactions/resource-manager/readme.az.md:9:17         storageactions      U       extensions: storageactions"
+  - "specification/storageactions/resource-manager/readme.md:1:3         storagetasks    U       # storagetasks"
   - "specification/storagecache/resource-manager/readme.go.md:22:46          amlfilesystem       U       signedIdentities']['$ref'] = \"amlfilesystem.json#/definitions/UserAssigne"
   - "specification/storagemover/resource-manager/readme.az.md:9:17           storagemover    U       extensions: storagemover"
-  - "specification/storagetasks/resource-manager/readme.az.md:9:17           storagetasks    U       extensions: storagetasks"
-  - "specification/storagetasks/resource-manager/readme.typescript.md:10:49          storagetaskss       U       typescript-sdks-folder)/sdk/storagetaskss/arm-storagetasks\""
   - "specification/support/resource-manager/readme.go.md:14:42       armsupport      U       resourcemanager/support/armsupport"
   - "specification/synapse/data-plane/readme.go.md:59:12         accesscontrol               U       namespace: accesscontrol"
   - "specification/synapse/data-plane/readme.go.md:89:12         managedvirtualnetwork       U       namespace: managedvirtualnetwork"

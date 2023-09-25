@@ -3,7 +3,7 @@ Repository: eslint/eslint
 Url: "https://github.com/eslint/eslint"
 Args: ["**","--exclude=bin/**","--exclude=CHANGELOG.md","--exclude=_data","--exclude=tests/bench/large.js","--exclude=docs/src/_includes","--exclude=docs/src/assets/{fonts,s?css,images}"]
 Lines:
- CSpell: Files checked: 1889, Issues found: 5534 in 1256 files
+ CSpell: Files checked: 1892, Issues found: 5543 in 1258 files
  exit code: 1
 ./Makefile.js:145:88    - Unknown word (ined)               -- followed by the string "ined".
 ./Makefile.js:151:48    - Unknown word (blogpost)           -- render(cat("./templates/blogpost.md.ejs"), renderContext
@@ -323,17 +323,17 @@ Lines:
 ./lib/linter/config-comment-parser.js:93:20     - Unknown word (Levn)       -- debug("Levn parsing failed; falling
 ./lib/linter/config-comment-parser.js:99:12     - Unknown word (Optionator) -- * Optionator cannot parse commaless
 ./lib/linter/linter.js:113:52    - Unknown word (postprocessor) -- postprocess} [postprocess] postprocessor for report
-./lib/linter/linter.js:47:11     - Unknown word (AUTOFIX)    -- const MAX_AUTOFIX_PASSES = 10;
-./lib/linter/linter.js:878:18    - Unknown word (SOURCECODE)    -- const DEPRECATED_SOURCECODE_PASSTHROUGHS = {
-./lib/linter/linter.js:878:29    - Unknown word (PASSTHROUGHS)  -- DEPRECATED_SOURCECODE_PASSTHROUGHS = {
+./lib/linter/linter.js:48:11     - Unknown word (AUTOFIX)    -- const MAX_AUTOFIX_PASSES = 10;
+./lib/linter/linter.js:918:18    - Unknown word (SOURCECODE)    -- const DEPRECATED_SOURCECODE_PASSTHROUGHS = {
+./lib/linter/linter.js:918:29    - Unknown word (PASSTHROUGHS)  -- DEPRECATED_SOURCECODE_PASSTHROUGHS = {
 ./lib/options.js:2:44      - Unknown word (optionator) -- Options configuration for optionator.
-./lib/rule-tester/flat-rule-tester.js:227:42    - Unknown word (errorize)   -- ast The root node to errorize `start`/`end` properties
-./lib/rule-tester/flat-rule-tester.js:746:27    - Unknown word (Didnt)      -- function assertASTDidntChange(beforeAST, afterAST
+./lib/rule-tester/flat-rule-tester.js:236:42    - Unknown word (errorize)   -- ast The root node to errorize `start`/`end` properties
+./lib/rule-tester/flat-rule-tester.js:791:27    - Unknown word (Didnt)      -- function assertASTDidntChange(beforeAST, afterAST
 ./lib/rule-tester/rule-tester.js:10:52     - Unknown word (unittests)  -- mocha to allow for DRY unittests for eslint
 ./lib/rules/array-bracket-newline.js:204:24    - Unknown word (Linebreaks) -- const needsLinebreaks = (
 ./lib/rules/array-bracket-newline.js:51:30     - Unknown word (Linebreak)  -- unexpectedOpeningLinebreak: "There should be no
+./lib/rules/array-callback-return.js:163:21    - Unknown word (Parenthesised) -- !astUtils.isParenthesised(sourceCode, node);
 ./lib/rules/arrow-body-style.js:230:33    - Unknown word (parenthesised) -- let parenthesisedObjectLiteral = null
-./lib/rules/arrow-body-style.js:97:32     - Unknown word (Parenthesised) -- while (!astUtils.isParenthesised(sourceCode, nodeToCheck
 ./lib/rules/dot-notation.js:138:63    - Unknown word (quasis)     -- node, node.property.quasis[0].value.cooked);
 ./lib/rules/for-direction.js:73:65     - Unknown word (nochange)   -- if sub return -1, if nochange, return 0
 ./lib/rules/func-name-matching.js:13:7      - Unknown word (esutils)    -- const esutils = require("esutils"
@@ -445,12 +445,13 @@ Lines:
 ./tests/lib/eslint/flat-eslint.js:5064:31   - Unknown word (dignore)      -- cwd: `${root}-dignore`,
 ./tests/lib/linter/code-path-analysis/code-path-analyzer.js:30:16     - Unknown word (ESQUERY)    -- const STANDARD_ESQUERY_OPTION = { visitorKeys
 ./tests/lib/linter/config-comment-parser.js:165:41    - Unknown word (ELEVENTEEN) -- code = "a: seventy, b:ELEVENTEEN";
-./tests/lib/linter/linter.js:15947:52  - Unknown word (intentionaly)   -- // intentionaly mutates objects and
-./tests/lib/linter/linter.js:3363:1    - Unknown word (consolexlog) -- consolexlog("test2");
-./tests/lib/linter/linter.js:3490:73   - Unknown word (barfoo)      -- rules: { foobar: 2, barfoo: 1 } });
-./tests/lib/linter/linter.js:3509:84   - Unknown word (rulename)    -- this is 2, since the rulename is very likely to be
-./tests/lib/linter/linter.js:6894:19   - Unknown word (postprocessors) -- describe("postprocessors", () => {
-./tests/lib/linter/linter.js:6947:28   - Unknown word (postprocessed)  -- it("should use postprocessed problem ranges when
+./tests/lib/linter/linter.js:16384:52  - Unknown word (intentionaly)   -- // intentionaly mutates objects and
+./tests/lib/linter/linter.js:3401:1    - Unknown word (consolexlog) -- consolexlog("test2");
+./tests/lib/linter/linter.js:3528:73   - Unknown word (barfoo)      -- rules: { foobar: 2, barfoo: 1 } });
+./tests/lib/linter/linter.js:3547:84   - Unknown word (rulename)    -- this is 2, since the rulename is very likely to be
+./tests/lib/linter/linter.js:4949:31   - Unknown word (suppresed)   -- it("should report one suppresed problem when noInlineConfig
+./tests/lib/linter/linter.js:7108:19   - Unknown word (postprocessors) -- describe("postprocessors", () => {
+./tests/lib/linter/linter.js:7161:28   - Unknown word (postprocessed)  -- it("should use postprocessed problem ranges when
 ./tests/lib/linter/node-event-generator.js:25:7      - Unknown word (ESPREE)     -- const ESPREE_CONFIG = {
 ./tests/lib/linter/node-event-generator.js:298:68    - Unknown word (pseudoclasses) -- // 0 identifiers, 0 pseudoclasses
 ./tests/lib/linter/node-event-generator.js:304:66    - Unknown word (pseudoclass)   -- ].expression], // 1 pseudoclass, 0 identifiers
@@ -463,8 +464,8 @@ Lines:
 ./tests/lib/linter/source-code-fixer.js:84:19     - Unknown word (nofix)        -- message: "nofix"
 ./tests/lib/options.js:359:71    - Unknown word (morerules)  -- trcOptions.parse("--rulesdir /morerules");
 ./tests/lib/rule-tester/flat-rule-tester.js:1104:36   - Unknown word (somefile)   -- filename: "somefile.js"
-./tests/lib/rule-tester/flat-rule-tester.js:2231:33   - Unknown word (outpt)      -- outpt: "var baz;"
-./tests/lib/rule-tester/flat-rule-tester.js:2623:15   - Unknown word (Subclassing) -- describe("Subclassing", () => {
+./tests/lib/rule-tester/flat-rule-tester.js:2309:33   - Unknown word (outpt)      -- outpt: "var baz;"
+./tests/lib/rule-tester/flat-rule-tester.js:2744:15   - Unknown word (Subclassing) -- describe("Subclassing", () => {
 ./tests/lib/rule-tester/flat-rule-tester.js:989:22    - Unknown word (noeval)     -- "noeval('foo')"
 ./tests/lib/rules/array-bracket-newline.js:57:50     - Unknown word (ndosomething) -- [\nfunction foo() {\ndosomething();\n}\n];",
 ./tests/lib/rules/array-bracket-spacing.js:51:47     - Unknown word (n'qux)      -- [{\n'bar': 'baz', \n'qux': [{ 'bar': 'baz' }
