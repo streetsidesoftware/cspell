@@ -3,9 +3,9 @@ Repository: eslint/eslint
 Url: https://github.com/eslint/eslint
 Args: '["**","--exclude=bin/**","--exclude=CHANGELOG.md","--exclude=_data","--exclude=tests/bench/large.js","--exclude=docs/src/_includes","--exclude=docs/src/assets/{fonts,s?css,images}"]'
 Summary:
-  files: 1889
-  filesWithIssues: 1256
-  issues: 5534
+  files: 1892
+  filesWithIssues: 1258
+  issues: 5543
   errors: 0
 Errors: []
 
@@ -300,17 +300,17 @@ issues:
   - "lib/linter/config-comment-parser.js:82:22       commaless       U       // Also, commaless notations have invalid"
   - "lib/linter/config-comment-parser.js:93:20       Levn            U       debug(\"Levn parsing failed; falling"
   - "lib/linter/config-comment-parser.js:99:12       Optionator      U       * Optionator cannot parse commaless"
-  - "lib/linter/linter.js:47:11          AUTOFIX             U       const MAX_AUTOFIX_PASSES = 10;"
+  - "lib/linter/linter.js:48:11          AUTOFIX             U       const MAX_AUTOFIX_PASSES = 10;"
   - "lib/linter/linter.js:113:52         postprocessor       U       postprocess} [postprocess] postprocessor for report"
-  - "lib/linter/linter.js:878:18         SOURCECODE          U       const DEPRECATED_SOURCECODE_PASSTHROUGHS = {"
-  - "lib/linter/linter.js:878:29         PASSTHROUGHS        U       DEPRECATED_SOURCECODE_PASSTHROUGHS = {"
+  - "lib/linter/linter.js:918:18         SOURCECODE          U       const DEPRECATED_SOURCECODE_PASSTHROUGHS = {"
+  - "lib/linter/linter.js:918:29         PASSTHROUGHS        U       DEPRECATED_SOURCECODE_PASSTHROUGHS = {"
   - "lib/options.js:2:44         optionator      U       Options configuration for optionator."
-  - "lib/rule-tester/flat-rule-tester.js:227:42      errorize            U       ast The root node to errorize `start`/`end` properties"
-  - "lib/rule-tester/flat-rule-tester.js:746:27      Didnt (Didn't)      U       function assertASTDidntChange(beforeAST, afterAST"
+  - "lib/rule-tester/flat-rule-tester.js:236:42      errorize            U       ast The root node to errorize `start`/`end` properties"
+  - "lib/rule-tester/flat-rule-tester.js:791:27      Didnt (Didn't)      U       function assertASTDidntChange(beforeAST, afterAST"
   - "lib/rule-tester/rule-tester.js:10:52        unittests       U       mocha to allow for DRY unittests for eslint"
   - "lib/rules/array-bracket-newline.js:51:30        Linebreak       U       unexpectedOpeningLinebreak: \"There should be no"
   - "lib/rules/array-bracket-newline.js:204:24       Linebreaks      U       const needsLinebreaks = ("
-  - "lib/rules/arrow-body-style.js:97:32         Parenthesised       U       while (!astUtils.isParenthesised(sourceCode, nodeToCheck"
+  - "lib/rules/array-callback-return.js:163:21       Parenthesised       U       !astUtils.isParenthesised(sourceCode, node);"
   - "lib/rules/arrow-body-style.js:230:33        parenthesised       U       let parenthesisedObjectLiteral = null"
   - "lib/rules/dot-notation.js:138:63        quasis      U       node, node.property.quasis[0].value.cooked);"
   - "lib/rules/for-direction.js:73:65        nochange    U       if sub return -1, if nochange, return 0"
@@ -450,12 +450,13 @@ issues:
   - "tests/lib/eslint/flat-eslint.js:5064:31     dignore         U       cwd: `${root}-dignore`,"
   - "tests/lib/linter/code-path-analysis/code-path-analyzer.js:30:16         ESQUERY     U       const STANDARD_ESQUERY_OPTION = { visitorKeys"
   - "tests/lib/linter/config-comment-parser.js:165:41        ELEVENTEEN      U       code = \"a: seventy, b:ELEVENTEEN\";"
-  - "tests/lib/linter/linter.js:3363:1       consolexlog         U       consolexlog(\"test2\");"
-  - "tests/lib/linter/linter.js:3490:73      barfoo              U       rules: { foobar: 2, barfoo: 1 } });"
-  - "tests/lib/linter/linter.js:3509:84      rulename            U       this is 2, since the rulename is very likely to be"
-  - "tests/lib/linter/linter.js:6894:19      postprocessors      U       describe(\"postprocessors\", () => {"
-  - "tests/lib/linter/linter.js:6947:28      postprocessed       U       it(\"should use postprocessed problem ranges when"
-  - "tests/lib/linter/linter.js:15947:52     intentionaly        U       // intentionaly mutates objects and"
+  - "tests/lib/linter/linter.js:3401:1       consolexlog         U       consolexlog(\"test2\");"
+  - "tests/lib/linter/linter.js:3528:73      barfoo              U       rules: { foobar: 2, barfoo: 1 } });"
+  - "tests/lib/linter/linter.js:3547:84      rulename            U       this is 2, since the rulename is very likely to be"
+  - "tests/lib/linter/linter.js:4949:31      suppresed           U       it(\"should report one suppresed problem when noInlineConfig"
+  - "tests/lib/linter/linter.js:7108:19      postprocessors      U       describe(\"postprocessors\", () => {"
+  - "tests/lib/linter/linter.js:7161:28      postprocessed       U       it(\"should use postprocessed problem ranges when"
+  - "tests/lib/linter/linter.js:16384:52     intentionaly        U       // intentionaly mutates objects and"
   - "tests/lib/linter/node-event-generator.js:25:7           ESPREE              U       const ESPREE_CONFIG = {"
   - "tests/lib/linter/node-event-generator.js:298:68         pseudoclasses       U       // 0 identifiers, 0 pseudoclasses"
   - "tests/lib/linter/node-event-generator.js:304:66         pseudoclass         U       ].expression], // 1 pseudoclass, 0 identifiers"
@@ -469,8 +470,8 @@ issues:
   - "tests/lib/options.js:359:71         morerules       U       trcOptions.parse(\"--rulesdir /morerules\");"
   - "tests/lib/rule-tester/flat-rule-tester.js:989:22        noeval          U       \"noeval('foo')\""
   - "tests/lib/rule-tester/flat-rule-tester.js:1104:36       somefile        U       filename: \"somefile.js\""
-  - "tests/lib/rule-tester/flat-rule-tester.js:2231:33       outpt           U       outpt: \"var baz;\""
-  - "tests/lib/rule-tester/flat-rule-tester.js:2623:15       Subclassing     U       describe(\"Subclassing\", () => {"
+  - "tests/lib/rule-tester/flat-rule-tester.js:2309:33       outpt           U       outpt: \"var baz;\""
+  - "tests/lib/rule-tester/flat-rule-tester.js:2744:15       Subclassing     U       describe(\"Subclassing\", () => {"
   - "tests/lib/rules/array-bracket-newline.js:57:50          ndosomething    U       [\\nfunction foo() {\\ndosomething();\\n}\\n];\","
   - "tests/lib/rules/array-bracket-spacing.js:51:47          n'qux       U       [{\\n'bar': 'baz', \\n'qux': [{ 'bar': 'baz' }"
   - "tests/lib/rules/array-bracket-spacing.js:51:76          n'quxx      U       { 'bar': 'baz' }], \\n'quxx': 1 \\n}]\", options:"
