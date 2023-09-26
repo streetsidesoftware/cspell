@@ -86,7 +86,7 @@ interface Options {
   /**
    * Some CSpell Settings
    */
-  cSpell?: {
+  cspell?: {
     /** List of words to be considered correct. */
     words?: string[];
     /**
