@@ -3,11 +3,11 @@ import type { TSESTree } from '@typescript-eslint/types';
 import assert from 'assert';
 import type { CSpellSettings, TextDocument, ValidationIssue } from 'cspell-lib';
 import {
-    DocumentValidator,
     createTextDocument,
-    refreshDictionaryCache,
+    DocumentValidator,
     extractImportErrors,
     getDictionary,
+    refreshDictionaryCache,
 } from 'cspell-lib';
 import type { Comment, Identifier, ImportSpecifier, Literal, Node, TemplateElement } from 'estree';
 import * as path from 'path';
@@ -454,12 +454,10 @@ async function reportConfigurationErrors(config: CSpellSettings, knownConfigErro
     const errors: Error[] = [];
 
     const importErrors = extractImportErrors(config);
-    let count = 0;
     importErrors.forEach((ref) => {
         const key = ref.error.toString();
         if (knownConfigErrors.has(key)) return;
         knownConfigErrors.add(key);
-        count += 1;
         errors.push(Error('Configuration Error: \n  ' + ref.error.message));
     });
 
@@ -471,7 +469,6 @@ async function reportConfigurationErrors(config: CSpellSettings, knownConfigErro
             const key = msg + error.toString();
             if (knownConfigErrors.has(key)) return;
             knownConfigErrors.add(key);
-            count += 1;
             const errMsg = `${msg}: ${error.message}\n  Source: ${dict.source}`;
             errors.push(Error(errMsg));
         });

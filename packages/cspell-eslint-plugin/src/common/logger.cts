@@ -1,6 +1,6 @@
-import { format } from 'util';
 import fs from 'fs';
 import path from 'path';
+import { format } from 'util';
 
 const debugMode = false;
 
