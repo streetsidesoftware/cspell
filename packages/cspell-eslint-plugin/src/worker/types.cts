@@ -29,6 +29,11 @@ export interface Issue {
     nodeType: NodeType;
 }
 
-type SpellCheckFn = (filename: string, text: string, root: Node, options: WorkerOptions) => Promise<Issue[]>;
+export interface SpellCheckResults {
+    issues: Issue[];
+    errors?: Error[];
+}
+
+type SpellCheckFn = (filename: string, text: string, root: Node, options: WorkerOptions) => Promise<SpellCheckResults>;
 
 export type SpellCheckSyncFn = (...p: Parameters<SpellCheckFn>) => Awaited<ReturnType<SpellCheckFn>>;

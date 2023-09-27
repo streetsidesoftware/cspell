@@ -2,14 +2,21 @@
 import type { TSESTree } from '@typescript-eslint/types';
 import assert from 'assert';
 import type { CSpellSettings, TextDocument, ValidationIssue } from 'cspell-lib';
-import { createTextDocument, DocumentValidator, refreshDictionaryCache } from 'cspell-lib';
+import {
+    DocumentValidator,
+    createTextDocument,
+    refreshDictionaryCache,
+    extractImportErrors,
+    getDictionary,
+} from 'cspell-lib';
 import type { Comment, Identifier, ImportSpecifier, Literal, Node, TemplateElement } from 'estree';
 import * as path from 'path';
 import { format } from 'util';
 
+import { getDefaultLogger } from '../common/logger.cjs';
 import type { CustomWordListFile, WorkerOptions } from '../common/options.cjs';
 import type { ASTNode, JSXText, NodeType } from './ASTNode.cjs';
-import type { Issue, Suggestions } from './types.cjs';
+import type { Issue, SpellCheckResults, Suggestions } from './types.cjs';
 import { walkTree } from './walkTree.mjs';
 
 const defaultSettings: CSpellSettings = {
@@ -23,19 +30,41 @@ const defaultSettings: CSpellSettings = {
     ],
 };
 
-let isDebugMode = false;
-function log(...args: Parameters<typeof console.log>) {
-    if (!isDebugMode) return;
-    console.log(...args);
-}
+const isDebugModeExtended = false;
 
-export async function spellCheck(filename: string, text: string, root: Node, options: WorkerOptions): Promise<Issue[]> {
+const knownConfigErrors = new Set<string>();
+
+export async function spellCheck(
+    filename: string,
+    text: string,
+    root: Node,
+    options: WorkerOptions,
+): Promise<SpellCheckResults> {
+    const logger = getDefaultLogger();
+    const debugMode = options.debugMode || false;
+    logger.enabled = options.debugMode ?? (logger.enabled || isDebugModeExtended);
+    const log = logger.log;
+
+    log('options: %o', options);
+
     const toIgnore = new Set<string>();
     const importedIdentifiers = new Set<string>();
-    isDebugMode = options.debugMode || false;
     const validator = getDocValidator(filename, text, options);
     await validator.prepare();
+
+    log('Settings: %o', validator.settings);
+
+    const errors = [...validator.errors];
     const issues: Issue[] = [];
+
+    errors.push(...(await checkSettings()));
+
+    async function checkSettings() {
+        const finalSettings = validator.getFinalizedDocSettings();
+        const found = await reportConfigurationErrors(finalSettings, knownConfigErrors);
+        found.forEach((err) => (debugMode ? log(err) : log('Error: %s', err.message)));
+        return found;
+    }
 
     function checkLiteral(node: Literal | ASTNode) {
         if (node.type !== 'Literal') return;
@@ -283,14 +312,14 @@ export async function spellCheck(filename: string, text: string, root: Node, opt
     }
 
     function debugNode(node: ASTNode, value: unknown) {
-        if (!isDebugMode) return;
+        if (!isDebugModeExtended) return;
         const val = format('%o', value);
         log(`${inheritanceSummary(node)}: ${val}`);
     }
 
     walkTree(root, checkNode);
 
-    return issues;
+    return { issues, errors };
 }
 
 function tagLiteral(node: ASTNode | TSESTree.Node): string {
@@ -326,7 +355,6 @@ function getDocValidator(filename: string, text: string, options: WorkerOptions)
         return cachedValidator;
     }
 
-    isDebugMode = options.debugMode || false;
     const validator = new DocumentValidator(doc, options, settings);
     docValCache.set(doc, validator);
     return validator;
@@ -337,6 +365,7 @@ function calcInitialSettings(options: WorkerOptions): CSpellSettings {
 
     const settings: CSpellSettings = {
         ...defaultSettings,
+        ...cspell,
         words: cspell?.words || [],
         ignoreWords: cspell?.ignoreWords || [],
         flagWords: cspell?.flagWords || [],
@@ -344,18 +373,31 @@ function calcInitialSettings(options: WorkerOptions): CSpellSettings {
 
     if (customWordListFile) {
         const filePath = isCustomWordListFile(customWordListFile) ? customWordListFile.path : customWordListFile;
-        const dictFile = path.resolve(cwd, filePath);
+        const { dictionaries = [], dictionaryDefinitions = [] } = settings;
 
-        const customWordListSettings = {
-            ...settings,
-            dictionaryDefinitions: [{ name: 'eslint-plugin-custom-words', path: dictFile }],
-            dictionaries: ['eslint-plugin-custom-words'],
-        };
+        dictionaries.push('eslint-plugin-custom-words');
+        dictionaryDefinitions.push({ name: 'eslint-plugin-custom-words', path: filePath });
 
-        return customWordListSettings;
+        settings.dictionaries = dictionaries;
+        settings.dictionaryDefinitions = dictionaryDefinitions;
     }
 
+    resolveDictionaryPaths(settings.dictionaryDefinitions, cwd);
+
     return settings;
+}
+
+const regexIsUrl = /^(https?|file|ftp):/i;
+
+/** Patches the path of dictionary definitions. */
+function resolveDictionaryPaths(defs: CSpellSettings['dictionaryDefinitions'], cwd: string) {
+    if (!defs) return;
+
+    for (const def of defs) {
+        if (!def.path) continue;
+        if (regexIsUrl.test(def.path)) continue;
+        def.path = path.resolve(cwd, def.path);
+    }
 }
 
 function getTextDocument(filename: string, content: string): TextDocument {
@@ -406,4 +448,34 @@ function deepEqual(a: unknown, b: unknown): boolean {
     } catch (e) {
         return false;
     }
+}
+
+async function reportConfigurationErrors(config: CSpellSettings, knownConfigErrors: Set<string>): Promise<Error[]> {
+    const errors: Error[] = [];
+
+    const importErrors = extractImportErrors(config);
+    let count = 0;
+    importErrors.forEach((ref) => {
+        const key = ref.error.toString();
+        if (knownConfigErrors.has(key)) return;
+        knownConfigErrors.add(key);
+        count += 1;
+        errors.push(Error('Configuration Error: \n  ' + ref.error.message));
+    });
+
+    const dictCollection = await getDictionary(config);
+    dictCollection.dictionaries.forEach((dict) => {
+        const dictErrors = dict.getErrors?.() || [];
+        const msg = `Dictionary Error with (${dict.name})`;
+        dictErrors.forEach((error) => {
+            const key = msg + error.toString();
+            if (knownConfigErrors.has(key)) return;
+            knownConfigErrors.add(key);
+            count += 1;
+            const errMsg = `${msg}: ${error.message}\n  Source: ${dict.source}`;
+            errors.push(Error(errMsg));
+        });
+    });
+
+    return errors;
 }
