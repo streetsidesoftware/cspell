@@ -69,7 +69,6 @@
               },
               "path": {
                 "description": "Path to the file.",
-                "pattern": "^.*\\.(?:txt|trie)(?:\\.gz)?$",
                 "type": "string"
               },
               "repMap": {
@@ -192,8 +191,7 @@
       "description": "Specify a path to a custom word list file.\n\nexample: ```js customWordListFile: \"./myWords.txt\" ```"
     },
     "debugMode": {
-      "default": false,
-      "description": "Output debug logs",
+      "description": "Output debug logs to `.cspell-eslint-plugin.log` default false",
       "type": "boolean"
     },
     "generateSuggestions": {

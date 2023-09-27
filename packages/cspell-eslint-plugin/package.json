@@ -17,10 +17,13 @@
   "homepage": "https://github.com/streetsidesoftware/cspell/tree/main/packages/cspell-eslint-plugin#readme",
   "license": "MIT",
   "exports": {
-    "types": "./dist/plugin/index.d.cts",
-    "require": "./dist/plugin/index.cjs",
-    "import": "./dist/plugin/index.cjs",
-    "default": "./dist/plugin/index.cjs"
+    "./package.json": "./package.json",
+    ".": {
+      "types": "./dist/plugin/index.d.cts",
+      "require": "./dist/plugin/index.cjs",
+      "import": "./dist/plugin/index.cjs",
+      "default": "./dist/plugin/index.cjs"
+    }
   },
   "type": "module",
   "main": "dist/plugin/index.cjs",
@@ -38,7 +41,7 @@
     "build": "pnpm build:schema && pnpm build:src",
     "build:src": "tsc -b ./tsconfig.json",
     "build:schema": "ts-json-schema-generator --no-top-ref --expose none --path src/common/options.cts --type Options  -o  ./assets/options.schema.json",
-    "watch": "tsc -p . --watch",
+    "watch": "tsc -b ./tsconfig.json --watch",
     "clean": "shx rm -rf dist temp coverage \"*.tsbuildInfo\"",
     "clean-build": "pnpm run clean && pnpm run build",
     "coverage": "echo coverage",

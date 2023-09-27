@@ -20,7 +20,6 @@ export const defaultOptions: RequiredOptions = {
     ...defaultCheckOptions,
     numSuggestions: 8,
     generateSuggestions: true,
-    debugMode: false,
     autoFix: false,
 };
 

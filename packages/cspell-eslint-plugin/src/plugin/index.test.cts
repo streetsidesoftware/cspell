@@ -11,7 +11,7 @@ const parsers: Record<string, string | undefined> = {
     '.ts': resolveFromMonoRepo('node_modules/@typescript-eslint/parser'),
 };
 
-type CachedSample = RuleTester.ValidTestCase;
+type ValidTestCase = RuleTester.ValidTestCase;
 type Options = Partial<Rule.Options>;
 
 const ruleTester = new RuleTester({
@@ -52,6 +52,17 @@ ruleTester.run('cspell', Rule.rules.spellchecker, {
         readFix('with-errors/sampleESM.mjs', {
             cspell: {
                 ignoreWords: ['Guuide', 'Gallaxy', 'BADD', 'functionn', 'coool'],
+            },
+        }),
+        readFix('issue-4870/sample.js', {
+            cspell: {
+                dictionaries: ['business-terms'],
+                dictionaryDefinitions: [
+                    {
+                        name: 'business-terms',
+                        path: fixtureRelativeToCwd('issue-4870/dictionaries/business-terminology.txt'),
+                    },
+                ],
             },
         }),
     ],
@@ -148,6 +159,11 @@ ruleTester.run('cspell', Rule.rules.spellchecker, {
             ],
             { ignoreImports: false, customWordListFile: resolveFix('with-errors/creepyData.dict.txt') },
         ),
+        // cspell:ignore bestbusiness friendz
+        readInvalid('issue-4870/sample.js', ['Unknown word: "bestbusiness"', 'Unknown word: "friendz"'], {}),
+        readInvalid('issue-4870/sample.js', ['Unknown word: "friendz"'], {
+            cspell: { allowCompoundWords: true },
+        }),
     ],
 });
 
@@ -195,19 +211,19 @@ function resolveFix(filename: string): string {
     return path.resolve(fixturesDir, filename);
 }
 
-function readFix(_filename: string, options?: Options): CachedSample {
-    const filename = resolveFix(_filename);
-    const code = fs.readFileSync(filename, 'utf-8');
+function readFix(filename: string, options?: Options): ValidTestCase {
+    const __filename = resolveFix(filename);
+    const code = fs.readFileSync(__filename, 'utf-8');
 
-    const sample: CachedSample = {
+    const sample: ValidTestCase = {
         code,
-        filename,
+        filename: __filename,
     };
     if (options) {
         sample.options = [options];
     }
 
-    const parser = parsers[path.extname(filename)];
+    const parser = parsers[path.extname(__filename)];
     if (parser) {
         sample.parser = parser;
     }
@@ -225,4 +241,9 @@ function readInvalid(filename: string, errors: RuleTester.InvalidTestCase['error
         ...sample,
         errors,
     };
+}
+
+function fixtureRelativeToCwd(filename: string) {
+    const fixFile = resolveFix(filename);
+    return path.relative(process.cwd(), fixFile);
 }

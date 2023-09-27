@@ -6,6 +6,7 @@
 /**
  * @typedef {import('estree').Node} Node
  * @typedef {import('./types.cjs').Issue} Issue
+ * @typedef {import('./types.cjs').SpellCheckResults} SpellCheckResults
  * @typedef {import('../common/options.cjs').WorkerOptions} WorkerOptions
  */
 
@@ -22,7 +23,7 @@ runAsWorker(
      * @param {string} text
      * @param {Node} root
      * @param {WorkerOptions} options
-     * @returns {Promise<Issue[]>} The issues found.
+     * @returns {Promise<SpellCheckResults>} The issues found.
      */
     async (filename, text, root, options) => {
         if (!spellChecker) {

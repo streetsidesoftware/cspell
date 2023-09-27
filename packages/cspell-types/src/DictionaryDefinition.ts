@@ -223,7 +223,7 @@ export type FsDictionaryPath = string;
 
 /**
  * A File System Path to a dictionary file.
- * @pattern ^.*\.(?:txt|trie)(?:\.gz)?$
+ * Pattern: `^.*\.(?:txt|trie|dic)(?:\.gz)?$`
  */
 export type DictionaryPath = string;
 

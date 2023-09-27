@@ -21,8 +21,8 @@ export interface Options extends Check {
     autoFix: boolean;
 
     /**
-     * Output debug logs
-     * @default false
+     * Output debug logs to `.cspell-eslint-plugin.log`
+     * default false
      */
     debugMode?: boolean;
 }
@@ -46,7 +46,7 @@ export type CSpellOptions = Pick<
     dictionaryDefinitions?: DictionaryDefinition[];
 };
 
-export type RequiredOptions = Required<Options>;
+export type RequiredOptions = Required<Pick<Options, Exclude<keyof Options, 'debugMode'>>> & Pick<Options, 'debugMode'>;
 
 export interface Check {
     /**
