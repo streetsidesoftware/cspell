@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## <small>7.3.7 (2023-09-28)</small>
+
+* test: Add sample package to test dictionaries in eslint (#4875) ([06c9e18](https://github.com/streetsidesoftware/cspell/commit/06c9e18)), closes [#4875](https://github.com/streetsidesoftware/cspell/issues/4875)
+
 ## 7.3.6 (2023-09-13)
 
 **Note:** Version bump only for package test-cspell-glob
