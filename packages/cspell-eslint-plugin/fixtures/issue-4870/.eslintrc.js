@@ -18,7 +18,7 @@ module.exports = {
         '@cspell/spellchecker': [
             'warn',
             {
-                debugMode: true,
+                debugMode: false,
                 autoFix: true,
                 cspell: {
                     dictionaries: ['business-terminology'],
