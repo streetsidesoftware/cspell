@@ -3,7 +3,7 @@ Repository: MicrosoftDocs/PowerShell-Docs
 Url: "https://github.com/MicrosoftDocs/PowerShell-Docs.git"
 Args: ["--config=../../../cspell-power-shell-docs.config.yaml","**"]
 Lines:
- CSpell: Files checked: 2678, Issues found: 5746 in 1265 files
+ CSpell: Files checked: 2678, Issues found: 5744 in 1260 files
  exit code: 1
 ./LICENSE:139:15    - Unknown word (sublicensable)   -- non-sublicensable, non-exclusive, irrevocable
 ./LICENSE:205:34    - Unknown word (waivable)        -- under any voluntary or waivable statutory or compulsory
@@ -101,8 +101,8 @@ Lines:
 ./reference/5.1/Microsoft.PowerShell.Core/About/about_Line_Editing.md:81:12     - Unknown word (Readline)   -- - [about_PSReadline](../../PSReadline/About
 ./reference/5.1/Microsoft.PowerShell.Core/About/about_Modules.md:445:61    - Unknown word (pssnapin)   -- -Property verb,noun,pssnapin,module
 ./reference/5.1/Microsoft.PowerShell.Core/About/about_Operator_Precedence.md:88:14     - Unknown word (coalese)    -- | `??` (null-coalese operator)
-./reference/5.1/Microsoft.PowerShell.Core/About/about_Operators.md:128:28    - Unknown word (Nosuch)     -- example, `(Get-Item /Nosuch); $?` unexpectedly yields
-./reference/5.1/Microsoft.PowerShell.Core/About/about_Operators.md:251:15    - Unknown word (executionpolicy) -- PS> $c = "get-executionpolicy"
+./reference/5.1/Microsoft.PowerShell.Core/About/about_Operators.md:130:28    - Unknown word (Nosuch)     -- example, `(Get-Item /Nosuch); $?` unexpectedly yields
+./reference/5.1/Microsoft.PowerShell.Core/About/about_Operators.md:273:15    - Unknown word (executionpolicy) -- PS> $c = "get-executionpolicy"
 ./reference/5.1/Microsoft.PowerShell.Core/About/about_PSItem.md:109:60    - Unknown word (uppercases) -- the **ForEach** method uppercases the
 ./reference/5.1/Microsoft.PowerShell.Core/About/about_PSSnapins.md:132:17    - Unknown word (psconsolefile) -- PowerShell.exe -psconsolefile NewConsole.psc1
 ./reference/5.1/Microsoft.PowerShell.Core/About/about_Parameter_Sets.md:49:18     - Unknown word (cmdletbindingattribute) -- [about_functions_cmdletbindingattribute](about_functions_cmdletbindin
@@ -118,7 +118,7 @@ Lines:
 ./reference/5.1/Microsoft.PowerShell.Core/About/about_Profiles.md:206:28    - Unknown word (cmdletname) -- function Get-CmdletAlias ($cmdletname) {
 ./reference/5.1/Microsoft.PowerShell.Core/About/about_Profiles.md:217:4     - Unknown word (hosttime)   -- $hosttime = (Get-ChildItem -Path
 ./reference/5.1/Microsoft.PowerShell.Core/About/about_Profiles.md:218:4     - Unknown word (hostversion) -- $hostversion="$($Host.Version.Major
-./reference/5.1/Microsoft.PowerShell.Core/About/about_Redirection.md:81:13     - Unknown word (fakepath)   -- dir 'C:\', 'fakepath' 2>&1 > .\dir.log
+./reference/5.1/Microsoft.PowerShell.Core/About/about_Redirection.md:80:10     - Unknown word (fakepath)   -- dir C:\, fakepath 2>&1 > .\dir.log
 ./reference/5.1/Microsoft.PowerShell.Core/About/about_Regular_Expressions.md:201:3     - Unknown word (Singleline)    -- **Singleline** and **Multiline**
 ./reference/5.1/Microsoft.PowerShell.Core/About/about_Regular_Expressions.md:328:34    - Unknown word (keyname)       -- capturing group, use `?<keyname>` to store captured
 ./reference/5.1/Microsoft.PowerShell.Core/About/about_Regular_Expressions.md:39:32     - Unknown word (csplit)     -- , `-creplace`, or `-csplit`
@@ -251,7 +251,6 @@ Lines:
 ./reference/5.1/Microsoft.PowerShell.Core/Suspend-Job.md:412:4     - Unknown word (sujb)       -- - `sujb`
 ./reference/5.1/Microsoft.PowerShell.Core/Test-ModuleManifest.md:47:42     - Unknown word (modulemanifest) -- TestModule.psd1" | test-modulemanifest
 ./reference/5.1/Microsoft.PowerShell.Core/Update-Help.md:261:20    - Unknown word (mdir)       -- if (Test-Path $mdir\*helpinfo.xml)
-./reference/5.1/Microsoft.PowerShell.Core/Wait-Job.md:214:61    - Unknown word (lastwritetime) -- ChildItem *.ps1| where {$_.lastwritetime -gt ((Get-Date) - (New
 ./reference/5.1/Microsoft.PowerShell.Diagnostics/Export-Counter.md:77:32     - Unknown word (Workingset) -- which saves it in the `Workingset.blg` file in the `Perf
 ./reference/5.1/Microsoft.PowerShell.Diagnostics/Get-Counter.md:424:2     - Unknown word (Procs)      -- $Procs = Get-Counter -Counter
 ./reference/5.1/Microsoft.PowerShell.Diagnostics/Get-WinEvent.md:559:21    - Unknown word (timediff)   -- TimeCreated[timediff(@SystemTime) &lt;=
@@ -430,7 +429,7 @@ Lines:
 ./reference/7.2/Microsoft.PowerShell.Core/About/about_Numeric_Literals.md:266:56    - Unknown word (gbus)       -- invalid syntax like `1gbus` will be
 ./reference/7.2/Microsoft.PowerShell.Core/About/about_Numeric_Literals.md:327:10    - Unknown word (hexidecimal) -- - For hexidecimal formats, parse into
 ./reference/7.2/Microsoft.PowerShell.Core/About/about_Numeric_Literals.md:327:71    - Unknown word (casies)      -- BigInteger]` using special casies to
-./reference/7.2/Microsoft.PowerShell.Core/About/about_Operators.md:307:46    - Unknown word (subshell)   -- it asynchronously in subshell as a job.
+./reference/7.2/Microsoft.PowerShell.Core/About/about_Operators.md:313:46    - Unknown word (subshell)   -- it asynchronously in subshell as a job.
 ./reference/7.2/Microsoft.PowerShell.Core/About/about_Parsing.md:348:4     - Unknown word (cscript)    -- - `cscript.exe`
 ./reference/7.2/Microsoft.PowerShell.Core/About/about_Parsing.md:349:4     - Unknown word (wscript)    -- - `wscript.exe`
 ./reference/7.2/Microsoft.PowerShell.Core/About/about_Pipeline_Chain_Operators.md:172:25    - Unknown word (behaviour)  -- of PowerShell 7, the behaviour of these syntaxes has
@@ -471,7 +470,7 @@ Lines:
 ./reference/7.2/Microsoft.PowerShell.Utility/Invoke-WebRequest.md:131:21    - Unknown word (jdoe)       -- User = 'jdoe'
 ./reference/7.2/Microsoft.PowerShell.Utility/Invoke-WebRequest.md:165:44    - Unknown word (docspage)   -- StreamWriter]::new('.\docspage.html', $false, $Response
 ./reference/7.3/Microsoft.PowerShell.Core/About/about_Calling_Generic_Methods.md:61:9      - Unknown word (Linq)       -- `System.Linq.Enumerable` class to
-./reference/7.3/Microsoft.PowerShell.Core/About/about_Preference_Variables.md:1054:29   - Unknown word (robocopy)   -- native commands, like [robocopy][02] use non-zero exit
+./reference/7.3/Microsoft.PowerShell.Core/About/about_Preference_Variables.md:1063:29   - Unknown word (robocopy)   -- native commands, like [robocopy][02] use non-zero exit
 ./reference/7.3/Microsoft.PowerShell.Core/Switch-Process.md:12:43     - Unknown word (execv)      -- the cmdlet calls the `execv()` function to provide
 ./reference/7.4/Microsoft.PowerShell.Core/About/about_CommonParameters.md:46:23     - Unknown word (proga)      -- **ProgressAction** (proga)
 ./reference/7.4/Microsoft.PowerShell.Core/About/about_Pipelines.md:425:24    - Unknown word (xzvf)       -- curl -s -L $uri | tar -xzvf - -C .
@@ -1089,15 +1088,15 @@ Lines:
 ./reference/docs-conceptual/developer/windows-powershell-reference.md:72:40     - Unknown word (Cmdletmetadataattribute) -- Automation.Internal.Cmdletmetadataattribute](/dotnet/api/System
 ./reference/docs-conceptual/dsc/overview.md:26:3      - Unknown word (Automanage) -- Automanage.
 ./reference/docs-conceptual/how-to-use-docs.md:26:67     - Unknown word (docuemntation) -- related to the current docuemntation set, which is
-./reference/docs-conceptual/install/Installing-PowerShell-on-Windows.md:125:30    - Unknown word (OPENPOWERSHELL) -- EXPLORER_CONTEXT_MENU_OPENPOWERSHELL` - This property controls
-./reference/docs-conceptual/install/Installing-PowerShell-on-Windows.md:127:26    - Unknown word (RUNPOWERSHELL)  -- ADD_FILE_CONTEXT_MENU_RUNPOWERSHELL` - This property controls
-./reference/docs-conceptual/install/Installing-PowerShell-on-Windows.md:129:11    - Unknown word (PSREMOTING)     -- - `ENABLE_PSREMOTING` - This property controls
-./reference/docs-conceptual/install/Installing-PowerShell-on-Windows.md:249:2     - Unknown word (deviceip)       -- $deviceip = '<device ip address
-./reference/docs-conceptual/install/Installing-PowerShell-on-Windows.md:250:2     - Unknown word (zipfile)        -- $zipfile = 'PowerShell-7.3.7
-./reference/docs-conceptual/install/Installing-PowerShell-on-Windows.md:251:2     - Unknown word (downloadfolder) -- $downloadfolder = 'u:\users\administrator
-./reference/docs-conceptual/install/Installing-PowerShell-on-Windows.md:288:28    - Unknown word (workarea)       -- include the package in the workarea and add _OPENSRC_POWERSHELL
-./reference/docs-conceptual/install/Installing-PowerShell-on-Windows.md:288:46    - Unknown word (OPENSRC)        -- the workarea and add _OPENSRC_POWERSHELL_ feature
-./reference/docs-conceptual/install/Installing-PowerShell-on-Windows.md:325:2     - Unknown word (ipaddr)         -- $ipaddr = '<Nano Server IP address
+./reference/docs-conceptual/install/Installing-PowerShell-on-Windows.md:126:30    - Unknown word (OPENPOWERSHELL) -- EXPLORER_CONTEXT_MENU_OPENPOWERSHELL` - This property controls
+./reference/docs-conceptual/install/Installing-PowerShell-on-Windows.md:128:26    - Unknown word (RUNPOWERSHELL)  -- ADD_FILE_CONTEXT_MENU_RUNPOWERSHELL` - This property controls
+./reference/docs-conceptual/install/Installing-PowerShell-on-Windows.md:130:11    - Unknown word (PSREMOTING)     -- - `ENABLE_PSREMOTING` - This property controls
+./reference/docs-conceptual/install/Installing-PowerShell-on-Windows.md:250:2     - Unknown word (deviceip)       -- $deviceip = '<device ip address
+./reference/docs-conceptual/install/Installing-PowerShell-on-Windows.md:251:2     - Unknown word (zipfile)        -- $zipfile = 'PowerShell-7.3.7
+./reference/docs-conceptual/install/Installing-PowerShell-on-Windows.md:252:2     - Unknown word (downloadfolder) -- $downloadfolder = 'u:\users\administrator
+./reference/docs-conceptual/install/Installing-PowerShell-on-Windows.md:289:28    - Unknown word (workarea)       -- include the package in the workarea and add _OPENSRC_POWERSHELL
+./reference/docs-conceptual/install/Installing-PowerShell-on-Windows.md:289:46    - Unknown word (OPENSRC)        -- the workarea and add _OPENSRC_POWERSHELL_ feature
+./reference/docs-conceptual/install/Installing-PowerShell-on-Windows.md:326:2     - Unknown word (ipaddr)         -- $ipaddr = '<Nano Server IP address
 ./reference/docs-conceptual/install/PowerShell-on-ARM.md:60:1      - Unknown word (Raspbery)   -- Raspbery Pi
 ./reference/docs-conceptual/install/community-support.md:105:8     - Unknown word (getconf)    -- bits=$(getconf LONG_BIT)
 ./reference/docs-conceptual/install/community-support.md:99:35     - Unknown word (libunwind)  -- install jq libssl1.1 libunwind8 -y
@@ -1107,9 +1106,7 @@ Lines:
 ./reference/docs-conceptual/install/install-alpine.md:38:5      - Unknown word (libstdc)    -- libstdc++ \
 ./reference/docs-conceptual/install/install-alpine.md:39:5      - Unknown word (tzdata)     -- tzdata \
 ./reference/docs-conceptual/install/install-alpine.md:46:5      - Unknown word (lttng)      -- lttng-ust
-./reference/docs-conceptual/install/install-debian.md:36:103    - Unknown word (keyrings)   -- --output /usr/share/keyrings/microsoft.gpg
-./reference/docs-conceptual/install/install-debian.md:36:75     - Unknown word (dearmor)    -- asc | sudo gpg --yes --dearmor --output /usr/share
-./reference/docs-conceptual/install/install-rhel.md:37:20     - Unknown word (assumeyes)  -- sudo dnf install --assumeyes powershell
+./reference/docs-conceptual/install/install-rhel.md:41:6      - Unknown word (majorver)   -- then majorver=7
 ./reference/docs-conceptual/install/microsoft-update-faq.yml:43:37     - Unknown word (lifecycles) -- information about support lifecycles, see
 ./reference/docs-conceptual/lang-spec/chapter-02.md:1316:36   - Unknown word (concatentaion) -- chapter-07.md#772-string-concatentaion
 ./reference/docs-conceptual/lang-spec/chapter-02.md:366:2     - Unknown word (végösszeg)  -- $végösszeg # Hungarian
@@ -1368,7 +1365,7 @@ Lines:
 ./reference/media/index/powershell_128.svg:5:21      - Unknown word (SVGID)      -- <linearGradient id="SVGID_1_" gradientUnits="userSpaceO
 ./reference/media/shared/check-mark-button-2705.svg:3:12      - Unknown word (svgg)       -- <g id="svgg">
 ./reference/module/index.md:14:36     - Unknown word (windowsserver) -- FilterColumn1: powershell-7.2,windowsserver2022-ps
-./reference/module/index.md:15:21     - Unknown word (azps)          -- quickFilterColumn2: azps-10.3.0,sqlserver-ps
+./reference/module/index.md:15:21     - Unknown word (azps)          -- quickFilterColumn2: azps-10.4.1,sqlserver-ps
 ./reference/module/index.md:16:42     - Unknown word (systemcenter)  -- graph-powershell-1.0,systemcenter-ps-2022
 ./tests/Pester/Update-Help.Tests.ps1:24:34     - Unknown word (pshome)     -- HelpInstallationPath = "$pshome\en-US"
 ./tests/Pester/Update-Help.Tests.ps1:30:109    - Unknown word (helpcontent) -- -2565dba61a4f_en-US_helpcontent$extension"

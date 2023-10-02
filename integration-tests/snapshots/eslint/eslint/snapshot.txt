@@ -3,7 +3,7 @@ Repository: eslint/eslint
 Url: "https://github.com/eslint/eslint"
 Args: ["**","--exclude=bin/**","--exclude=CHANGELOG.md","--exclude=_data","--exclude=tests/bench/large.js","--exclude=docs/src/_includes","--exclude=docs/src/assets/{fonts,s?css,images}"]
 Lines:
- CSpell: Files checked: 1892, Issues found: 5520 in 1258 files
+ CSpell: Files checked: 1892, Issues found: 5522 in 1258 files
  exit code: 1
 ./Makefile.js:145:88    - Unknown word (ined)               -- followed by the string "ined".
 ./Makefile.js:151:48    - Unknown word (blogpost)           -- render(cat("./templates/blogpost.md.ejs"), renderContext
@@ -241,10 +241,10 @@ Lines:
 ./docs/src/static/sitemap.njk:11:14     - Unknown word (lastmod)    -- <lastmod>{{ page.date.toISOString
 ./docs/src/static/sitemap.njk:12:14     - Unknown word (changefreq) -- <changefreq>{{ page.data.changeFreq
 ./docs/src/static/sitemap.njk:7:2       - Unknown word (urlset)     -- <urlset xmlns="http://www.sitemaps
-./docs/src/use/command-line-interface.md:276:68    - Unknown word (levn)       -- configuration specified with [levn](https://github.com
-./docs/src/use/command-line-interface.md:427:5     - Unknown word (myfile)     -- cat myfile.js | npx eslint --stdin
-./docs/src/use/command-line-interface.md:519:17    - Unknown word (customformat) -- npx eslint -f ./customformat.js file.js
-./docs/src/use/command-line-interface.md:604:1     - Unknown word (Autofixed)    -- Autofixed files are not placed
+./docs/src/use/command-line-interface.md:277:68    - Unknown word (levn)       -- configuration specified with [levn](https://github.com
+./docs/src/use/command-line-interface.md:428:5     - Unknown word (myfile)     -- cat myfile.js | npx eslint --stdin
+./docs/src/use/command-line-interface.md:520:17    - Unknown word (customformat) -- npx eslint -f ./customformat.js file.js
+./docs/src/use/command-line-interface.md:605:1     - Unknown word (Autofixed)    -- Autofixed files are not placed
 ./docs/src/use/configure/configuration-files-new.md:181:112   - Unknown word (unignores)  -- example, this config unignores `node_modules/mylibrary
 ./docs/src/use/configure/configuration-files-new.md:181:136   - Unknown word (mylibrary)  -- unignores `node_modules/mylibrary`:
 ./docs/src/use/configure/configuration-files-new.md:181:14    - Unknown word (unignore)   -- You can also unignore files and directories
@@ -310,9 +310,10 @@ Lines:
 ./lib/eslint/eslint-helpers.js:19:26     - Unknown word (nodelib)    -- const fswalk = require("@nodelib/fs.walk");
 ./lib/eslint/eslint-helpers.js:19:7      - Unknown word (fswalk)     -- const fswalk = require("@nodelib
 ./lib/eslint/eslint-helpers.js:397:40    - Unknown word (prepopulated) -- for the cwd, which is prepopulated in the searches map
-./lib/linter/code-path-analysis/code-path-state.js:159:31    - Unknown word (unflattened) -- {CodePathSegment[]} unflattenedFromSegments Segments
-./lib/linter/code-path-analysis/code-path-state.js:913:23    - Unknown word (Segs)        -- const prevSegsOfLeavingSegment = [headOfLeav
-./lib/linter/code-path-analysis/code-path.js:139:34    - Unknown word (Omittable)  -- param {Object} [options] Omittable.
+./lib/linter/code-path-analysis/code-path-state.js:124:51    - Unknown word (Forkcontext) -- expression (tracked by `qqForkcontext`).
+./lib/linter/code-path-analysis/code-path-state.js:1685:23   - Unknown word (Segs)        -- const prevSegsOfLeavingSegment = [headOfLeav
+./lib/linter/code-path-analysis/code-path-state.js:351:34    - Unknown word (expresion)   -- The end of the update expresion. This may change during
+./lib/linter/code-path-analysis/code-path-state.js:774:31    - Unknown word (unflattened) -- {CodePathSegment[]} unflattenedFromSegments Segments
 ./lib/linter/code-path-analysis/debug-helpers.js:105:54    - Unknown word (fillcolor)  -- style=\"rounded,filled\",fillcolor=white];\n" +
 ./lib/linter/code-path-analysis/debug-helpers.js:109:45    - Unknown word (doublecircle) -- final[label=\"\",shape=doublecircle,style=filled,fillcolor
 ./lib/linter/code-path-analysis/debug-helpers.js:112:75    - Unknown word (fixedsize)    -- width=0.3,height=0.3,fixedsize=true];\n";
@@ -436,11 +437,11 @@ Lines:
 ./tests/lib/config/flat-config-array.js:154:22    - Unknown word (noniterable) -- it("should allow noniterable baseConfig objects"
 ./tests/lib/config/flat-config-array.js:1745:29   - Unknown word (foox)        -- foox: [1, "bar"]
 ./tests/lib/config/flat-config-array.js:1767:30   - Unknown word (doesnt)      -- "doesnt-exist/match": "error
-./tests/lib/eslint/flat-eslint.js:1081:57   - Unknown word (doesnotexist) -- lintFiles(["subdir1", "doesnotexist/*.js"]);
-./tests/lib/eslint/flat-eslint.js:1156:58   - Unknown word (doesexist)    -- await eslint.lintFiles(["doesexist/*.js"]);
-./tests/lib/eslint/flat-eslint.js:1616:30   - Unknown word (reignoring)   -- it("should allow reignoring of previously ignored
-./tests/lib/eslint/flat-eslint.js:5024:31   - Unknown word (reignore)     -- cwd: `${root}-reignore`,
-./tests/lib/eslint/flat-eslint.js:5064:31   - Unknown word (dignore)      -- cwd: `${root}-dignore`,
+./tests/lib/eslint/flat-eslint.js:1120:57   - Unknown word (doesnotexist) -- lintFiles(["subdir1", "doesnotexist/*.js"]);
+./tests/lib/eslint/flat-eslint.js:1195:58   - Unknown word (doesexist)    -- await eslint.lintFiles(["doesexist/*.js"]);
+./tests/lib/eslint/flat-eslint.js:1677:30   - Unknown word (reignoring)   -- it("should allow reignoring of previously ignored
+./tests/lib/eslint/flat-eslint.js:5085:31   - Unknown word (reignore)     -- cwd: `${root}-reignore`,
+./tests/lib/eslint/flat-eslint.js:5125:31   - Unknown word (dignore)      -- cwd: `${root}-dignore`,
 ./tests/lib/linter/code-path-analysis/code-path-analyzer.js:30:16     - Unknown word (ESQUERY)    -- const STANDARD_ESQUERY_OPTION = { visitorKeys
 ./tests/lib/linter/config-comment-parser.js:165:41    - Unknown word (ELEVENTEEN) -- code = "a: seventy, b:ELEVENTEEN";
 ./tests/lib/linter/linter.js:16384:52  - Unknown word (intentionaly)   -- // intentionaly mutates objects and
