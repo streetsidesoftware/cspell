@@ -5,7 +5,7 @@ Args: '["**","--exclude=bin/**","--exclude=CHANGELOG.md","--exclude=_data","--ex
 Summary:
   files: 1892
   filesWithIssues: 1258
-  issues: 5520
+  issues: 5522
   errors: 0
 Errors: []
 
@@ -219,10 +219,10 @@ issues:
   - "docs/src/static/sitemap.njk:7:2         urlset          U       <urlset xmlns=\"http://www.sitemaps"
   - "docs/src/static/sitemap.njk:11:14       lastmod         U       <lastmod>{{ page.date.toISOString"
   - "docs/src/static/sitemap.njk:12:14       changefreq      U       <changefreq>{{ page.data.changeFreq"
-  - "docs/src/use/command-line-interface.md:276:68       levn            U       configuration specified with [levn](https://github.com"
-  - "docs/src/use/command-line-interface.md:427:5        myfile          U       cat myfile.js | npx eslint --stdin"
-  - "docs/src/use/command-line-interface.md:519:17       customformat    U       npx eslint -f ./customformat.js file.js"
-  - "docs/src/use/command-line-interface.md:604:1        Autofixed       U       Autofixed files are not placed"
+  - "docs/src/use/command-line-interface.md:277:68       levn            U       configuration specified with [levn](https://github.com"
+  - "docs/src/use/command-line-interface.md:428:5        myfile          U       cat myfile.js | npx eslint --stdin"
+  - "docs/src/use/command-line-interface.md:520:17       customformat    U       npx eslint -f ./customformat.js file.js"
+  - "docs/src/use/command-line-interface.md:605:1        Autofixed       U       Autofixed files are not placed"
   - "docs/src/use/configure/configuration-files-new.md:181:14        unignore        U       You can also unignore files and directories"
   - "docs/src/use/configure/configuration-files-new.md:181:112       unignores       U       example, this config unignores `node_modules/mylibrary"
   - "docs/src/use/configure/configuration-files-new.md:181:136       mylibrary       U       unignores `node_modules/mylibrary`:"
@@ -288,9 +288,10 @@ issues:
   - "lib/eslint/eslint-helpers.js:19:7           fswalk          U       const fswalk = require(\"@nodelib"
   - "lib/eslint/eslint-helpers.js:19:26          nodelib         U       const fswalk = require(\"@nodelib/fs.walk\");"
   - "lib/eslint/eslint-helpers.js:397:40         prepopulated    U       for the cwd, which is prepopulated in the searches map"
-  - "lib/linter/code-path-analysis/code-path-state.js:159:31         unflattened     U       {CodePathSegment[]} unflattenedFromSegments Segments"
-  - "lib/linter/code-path-analysis/code-path-state.js:913:23         Segs            U       const prevSegsOfLeavingSegment = [headOfLeav"
-  - "lib/linter/code-path-analysis/code-path.js:139:34       Omittable       U       param {Object} [options] Omittable."
+  - "lib/linter/code-path-analysis/code-path-state.js:124:51         Forkcontext     U       expression (tracked by `qqForkcontext`)."
+  - "lib/linter/code-path-analysis/code-path-state.js:351:34         expresion       U       The end of the update expresion. This may change during"
+  - "lib/linter/code-path-analysis/code-path-state.js:774:31         unflattened     U       {CodePathSegment[]} unflattenedFromSegments Segments"
+  - "lib/linter/code-path-analysis/code-path-state.js:1685:23        Segs            U       const prevSegsOfLeavingSegment = [headOfLeav"
   - "lib/linter/code-path-analysis/debug-helpers.js:95:44        Graphvis        U       can be visualized with Graphvis."
   - "lib/linter/code-path-analysis/debug-helpers.js:105:54       fillcolor       U       style=\\\"rounded,filled\\\",fillcolor=white];\\n\" +"
   - "lib/linter/code-path-analysis/debug-helpers.js:109:45       doublecircle    U       final[label=\\\"\\\",shape=doublecircle,style=filled,fillcolor"
@@ -441,11 +442,11 @@ issues:
   - "tests/lib/config/flat-config-array.js:1273:43       truex               U       foo: \"truex\""
   - "tests/lib/config/flat-config-array.js:1745:29       foox                U       foox: [1, \"bar\"]"
   - "tests/lib/config/flat-config-array.js:1767:30       doesnt (doesn't)    U       \"doesnt-exist/match\": \"error"
-  - "tests/lib/eslint/flat-eslint.js:1081:57     doesnotexist    U       lintFiles([\"subdir1\", \"doesnotexist/*.js\"]);"
-  - "tests/lib/eslint/flat-eslint.js:1156:58     doesexist       U       await eslint.lintFiles([\"doesexist/*.js\"]);"
-  - "tests/lib/eslint/flat-eslint.js:1616:30     reignoring      U       it(\"should allow reignoring of previously ignored"
-  - "tests/lib/eslint/flat-eslint.js:5024:31     reignore        U       cwd: `${root}-reignore`,"
-  - "tests/lib/eslint/flat-eslint.js:5064:31     dignore         U       cwd: `${root}-dignore`,"
+  - "tests/lib/eslint/flat-eslint.js:1120:57     doesnotexist    U       lintFiles([\"subdir1\", \"doesnotexist/*.js\"]);"
+  - "tests/lib/eslint/flat-eslint.js:1195:58     doesexist       U       await eslint.lintFiles([\"doesexist/*.js\"]);"
+  - "tests/lib/eslint/flat-eslint.js:1677:30     reignoring      U       it(\"should allow reignoring of previously ignored"
+  - "tests/lib/eslint/flat-eslint.js:5085:31     reignore        U       cwd: `${root}-reignore`,"
+  - "tests/lib/eslint/flat-eslint.js:5125:31     dignore         U       cwd: `${root}-dignore`,"
   - "tests/lib/linter/code-path-analysis/code-path-analyzer.js:30:16         ESQUERY     U       const STANDARD_ESQUERY_OPTION = { visitorKeys"
   - "tests/lib/linter/config-comment-parser.js:165:41        ELEVENTEEN      U       code = \"a: seventy, b:ELEVENTEEN\";"
   - "tests/lib/linter/linter.js:3401:1       consolexlog         U       consolexlog(\"test2\");"
