@@ -36,14 +36,7 @@ declare const exclusionHelper_d_extractGlobsFromExcludeFilesGlobMap: typeof extr
 declare const exclusionHelper_d_generateExclusionFunctionForFiles: typeof generateExclusionFunctionForFiles;
 declare const exclusionHelper_d_generateExclusionFunctionForUri: typeof generateExclusionFunctionForUri;
 declare namespace exclusionHelper_d {
-  export {
-    exclusionHelper_d_ExcludeFilesGlobMap as ExcludeFilesGlobMap,
-    exclusionHelper_d_ExclusionFunction as ExclusionFunction,
-    exclusionHelper_d_FileExclusionFunction as FileExclusionFunction,
-    exclusionHelper_d_extractGlobsFromExcludeFilesGlobMap as extractGlobsFromExcludeFilesGlobMap,
-    exclusionHelper_d_generateExclusionFunctionForFiles as generateExclusionFunctionForFiles,
-    exclusionHelper_d_generateExclusionFunctionForUri as generateExclusionFunctionForUri,
-  };
+  export { type exclusionHelper_d_ExcludeFilesGlobMap as ExcludeFilesGlobMap, type exclusionHelper_d_ExclusionFunction as ExclusionFunction, type exclusionHelper_d_FileExclusionFunction as FileExclusionFunction, exclusionHelper_d_extractGlobsFromExcludeFilesGlobMap as extractGlobsFromExcludeFilesGlobMap, exclusionHelper_d_generateExclusionFunctionForFiles as generateExclusionFunctionForFiles, exclusionHelper_d_generateExclusionFunctionForUri as generateExclusionFunctionForUri };
 }
 
 interface ListGlobalImportsResult {
@@ -101,16 +94,7 @@ declare const index_link_d_addPathsToGlobalImports: typeof addPathsToGlobalImpor
 declare const index_link_d_listGlobalImports: typeof listGlobalImports;
 declare const index_link_d_removePathsFromGlobalImports: typeof removePathsFromGlobalImports;
 declare namespace index_link_d {
-  export {
-    index_link_d_AddPathsToGlobalImportsResults as AddPathsToGlobalImportsResults,
-    index_link_d_ListGlobalImportsResult as ListGlobalImportsResult,
-    index_link_d_ListGlobalImportsResults as ListGlobalImportsResults,
-    index_link_d_RemovePathsFromGlobalImportsResult as RemovePathsFromGlobalImportsResult,
-    index_link_d_ResolveSettingsResult as ResolveSettingsResult,
-    index_link_d_addPathsToGlobalImports as addPathsToGlobalImports,
-    index_link_d_listGlobalImports as listGlobalImports,
-    index_link_d_removePathsFromGlobalImports as removePathsFromGlobalImports,
-  };
+  export { type index_link_d_AddPathsToGlobalImportsResults as AddPathsToGlobalImportsResults, type index_link_d_ListGlobalImportsResult as ListGlobalImportsResult, type index_link_d_ListGlobalImportsResults as ListGlobalImportsResults, type index_link_d_RemovePathsFromGlobalImportsResult as RemovePathsFromGlobalImportsResult, type index_link_d_ResolveSettingsResult as ResolveSettingsResult, index_link_d_addPathsToGlobalImports as addPathsToGlobalImports, index_link_d_listGlobalImports as listGlobalImports, index_link_d_removePathsFromGlobalImports as removePathsFromGlobalImports };
 }
 
 interface Uri {
@@ -198,36 +182,7 @@ declare const text_d_stringToRegExp: typeof stringToRegExp;
 declare const text_d_textOffset: typeof textOffset;
 declare const text_d_ucFirst: typeof ucFirst;
 declare namespace text_d {
-  export {
-    text_d___testing__ as __testing__,
-    text_d_calculateTextDocumentOffsets as calculateTextDocumentOffsets,
-    text_d_camelToSnake as camelToSnake,
-    text_d_cleanText as cleanText,
-    text_d_cleanTextOffset as cleanTextOffset,
-    text_d_extractLinesOfText as extractLinesOfText,
-    text_d_extractPossibleWordsFromTextOffset as extractPossibleWordsFromTextOffset,
-    text_d_extractText as extractText,
-    text_d_extractWordsFromCode as extractWordsFromCode,
-    text_d_extractWordsFromCodeTextOffset as extractWordsFromCodeTextOffset,
-    text_d_extractWordsFromText as extractWordsFromText,
-    text_d_extractWordsFromTextOffset as extractWordsFromTextOffset,
-    text_d_isFirstCharacterLower as isFirstCharacterLower,
-    text_d_isFirstCharacterUpper as isFirstCharacterUpper,
-    text_d_isLowerCase as isLowerCase,
-    text_d_isUpperCase as isUpperCase,
-    text_d_lcFirst as lcFirst,
-    text_d_match as match,
-    text_d_matchCase as matchCase,
-    text_d_matchStringToTextOffset as matchStringToTextOffset,
-    text_d_matchToTextOffset as matchToTextOffset,
-    text_d_removeAccents as removeAccents,
-    text_d_snakeToCamel as snakeToCamel,
-    text_d_splitCamelCaseWord as splitCamelCaseWord,
-    text_d_splitCamelCaseWordWithOffset as splitCamelCaseWordWithOffset,
-    text_d_stringToRegExp as stringToRegExp,
-    text_d_textOffset as textOffset,
-    text_d_ucFirst as ucFirst,
-  };
+  export { text_d___testing__ as __testing__, text_d_calculateTextDocumentOffsets as calculateTextDocumentOffsets, text_d_camelToSnake as camelToSnake, text_d_cleanText as cleanText, text_d_cleanTextOffset as cleanTextOffset, text_d_extractLinesOfText as extractLinesOfText, text_d_extractPossibleWordsFromTextOffset as extractPossibleWordsFromTextOffset, text_d_extractText as extractText, text_d_extractWordsFromCode as extractWordsFromCode, text_d_extractWordsFromCodeTextOffset as extractWordsFromCodeTextOffset, text_d_extractWordsFromText as extractWordsFromText, text_d_extractWordsFromTextOffset as extractWordsFromTextOffset, text_d_isFirstCharacterLower as isFirstCharacterLower, text_d_isFirstCharacterUpper as isFirstCharacterUpper, text_d_isLowerCase as isLowerCase, text_d_isUpperCase as isUpperCase, text_d_lcFirst as lcFirst, text_d_match as match, text_d_matchCase as matchCase, text_d_matchStringToTextOffset as matchStringToTextOffset, text_d_matchToTextOffset as matchToTextOffset, text_d_removeAccents as removeAccents, text_d_snakeToCamel as snakeToCamel, text_d_splitCamelCaseWord as splitCamelCaseWord, text_d_splitCamelCaseWordWithOffset as splitCamelCaseWordWithOffset, text_d_stringToRegExp as stringToRegExp, text_d_textOffset as textOffset, text_d_ucFirst as ucFirst };
 }
 
 interface Document {
@@ -953,4 +908,4 @@ declare function clearCachedFiles(): Promise<void>;
  */
 declare function getDictionary(settings: CSpellUserSettings): Promise<SpellingDictionaryCollection>;
 
-export { CheckTextInfo, ConfigurationDependencies, CreateTextDocumentParams, DetermineFinalDocumentSettingsResult, Document, DocumentValidator, DocumentValidatorOptions, ENV_CSPELL_GLOB_ROOT, ExcludeFilesGlobMap, ExclusionFunction, exclusionHelper_d as ExclusionHelper, FeatureFlag, FeatureFlags, ImportError, ImportFileRefWithError, IncludeExcludeFlag, IncludeExcludeOptions, index_link_d as Link, Logger, SpellCheckFileOptions, SpellCheckFileResult, SpellingDictionaryLoadError, SuggestedWord, SuggestionError, SuggestionOptions, SuggestionsForWordResult, text_d as Text, TextDocument, TextDocumentLine, TextDocumentRef, TextInfoItem, TraceOptions, TraceResult, UnknownFeatureFlagError, ValidationIssue, calcOverrideSettings, checkFilenameMatchesGlob, checkText, checkTextDocument, clearCachedFiles, clearCachedSettingsFiles, combineTextAndLanguageSettings, combineTextAndLanguageSettings as constructSettingsForText, createTextDocument, currentSettingsFileVersion, defaultConfigFilenames, defaultFileName, defaultFileName as defaultSettingsFilename, determineFinalDocumentSettings, extractDependencies, extractImportErrors, fileToDocument, fileToTextDocument, finalizeSettings, getCachedFileSize, getDefaultBundledSettings, getDefaultSettings, getDictionary, getGlobalSettings, getLanguagesForBasename as getLanguageIdsForBaseFilename, getLanguagesForExt, getLogger, getSources, getSystemFeatureFlags, isBinaryFile, isSpellingDictionaryLoadError, loadConfig, loadPnP, loadPnPSync, mergeInDocSettings, mergeSettings, readRawSettings, readSettings, readSettingsFiles, refreshDictionaryCache, resolveFile, searchForConfig, sectionCSpell, setLogger, shouldCheckDocument, spellCheckDocument, spellCheckFile, suggestionsForWord, suggestionsForWords, traceWords, traceWordsAsync, updateTextDocument, validateText };
+export { type CheckTextInfo, type ConfigurationDependencies, type CreateTextDocumentParams, type DetermineFinalDocumentSettingsResult, type Document, DocumentValidator, type DocumentValidatorOptions, ENV_CSPELL_GLOB_ROOT, type ExcludeFilesGlobMap, type ExclusionFunction, exclusionHelper_d as ExclusionHelper, type FeatureFlag, FeatureFlags, ImportError, type ImportFileRefWithError, IncludeExcludeFlag, type IncludeExcludeOptions, index_link_d as Link, type Logger, type SpellCheckFileOptions, type SpellCheckFileResult, SpellingDictionaryLoadError, type SuggestedWord, SuggestionError, type SuggestionOptions, type SuggestionsForWordResult, text_d as Text, type TextDocument, type TextDocumentLine, type TextDocumentRef, type TextInfoItem, type TraceOptions, type TraceResult, UnknownFeatureFlagError, type ValidationIssue, calcOverrideSettings, checkFilenameMatchesGlob, checkText, checkTextDocument, clearCachedFiles, clearCachedSettingsFiles, combineTextAndLanguageSettings, combineTextAndLanguageSettings as constructSettingsForText, createTextDocument, currentSettingsFileVersion, defaultConfigFilenames, defaultFileName, defaultFileName as defaultSettingsFilename, determineFinalDocumentSettings, extractDependencies, extractImportErrors, fileToDocument, fileToTextDocument, finalizeSettings, getCachedFileSize, getDefaultBundledSettings, getDefaultSettings, getDictionary, getGlobalSettings, getLanguagesForBasename as getLanguageIdsForBaseFilename, getLanguagesForExt, getLogger, getSources, getSystemFeatureFlags, isBinaryFile, isSpellingDictionaryLoadError, loadConfig, loadPnP, loadPnPSync, mergeInDocSettings, mergeSettings, readRawSettings, readSettings, readSettingsFiles, refreshDictionaryCache, resolveFile, searchForConfig, sectionCSpell, setLogger, shouldCheckDocument, spellCheckDocument, spellCheckFile, suggestionsForWord, suggestionsForWords, traceWords, traceWordsAsync, updateTextDocument, validateText };
