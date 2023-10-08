@@ -5,7 +5,7 @@ Args: '["--config=${repoConfig}/cspell.json","**/*.{md,c,h,php}"]'
 Summary:
   files: 1825
   filesWithIssues: 1306
-  issues: 45331
+  issues: 45324
   errors: 0
 Errors: []
 
@@ -2389,7 +2389,6 @@ issues:
   - "ext/hash/xxhash/xxhash.h:3588:44        codepath                U       finding a more optimal codepath is an interest."
   - "ext/hash/xxhash/xxhash.h:3640:26        STARTOFFSET             U       define XXH3_MIDSIZE_STARTOFFSET 3"
   - "ext/hash/xxhash/xxhash.h:3641:26        LASTOFFSET              U       define XXH3_MIDSIZE_LASTOFFSET 17"
-  - "ext/hash/xxhash/xxhash.h:3656:39        vectorize               U       for ARMv7-A tries to vectorize this loop, similar to"
   - "ext/hash/xxhash/xxhash.h:3663:46        vmulq                   U       to the nonexistent \"vmulq_u64\" intrinsic, which"
   - "ext/hash/xxhash/xxhash.h:3664:12        scalarized              U       * scalarized into an ugly mess of"
   - "ext/hash/xxhash/xxhash.h:3664:44        VMOV                    U       into an ugly mess of VMOV.32 instructions."
@@ -7098,7 +7097,6 @@ issues:
   - "ext/snmp/snmp.c:1998:13     snmpapp         U       init_snmp(\"snmpapp\");"
   - "ext/snmp/snmp.c:2007:53     variabled       U       status'es and related variabled to detect errors */"
   - "ext/snmp/snmp.stub.php:7:12         NETSNMP         U       * @cvalue NETSNMP_OID_OUTPUT_SUFFIX"
-  - "ext/snmp/snmp.stub.php:79:16        IPADDRESS       U       * @cvalue ASN_IPADDRESS"
   - "ext/snmp/snmp.stub.php:94:16        TIMETICKS       U       * @cvalue ASN_TIMETICKS"
   - "ext/snmp/snmp.stub.php:99:16        UINTEGER        U       * @cvalue ASN_UINTEGER"
   - "ext/snmp/snmp.stub.php:209:41       noerror         U       class.constants.errno-noerror"
@@ -7891,7 +7889,6 @@ issues:
   - "ext/standard/file.c:1539:33     deststream      U       *srcstream = NULL, *deststream = NULL;"
   - "ext/standard/file.c:1772:12     csvline         U       smart_str csvline = {0};"
   - "ext/standard/file.c:1966:9      tptr            U       char *tptr = temp;"
-  - "ext/standard/file.c:2244:4      Tokenizes       U       Tokenizes an HTML file for get"
   - "ext/standard/file.stub.php:271:24       RDWR        U       @cvalue STREAM_SHUT_RDWR"
   - "ext/standard/file.stub.php:412:19       XPORT       U       * @cvalue STREAM_XPORT_BIND"
   - "ext/standard/file.stub.php:474:12       CASEFOLD    U       #ifdef FNM_CASEFOLD"
@@ -8148,7 +8145,6 @@ issues:
   - "ext/standard/pack.c:712:23      inputpos        U       zend_long formatlen, inputpos, inputlen;"
   - "ext/standard/pack.c:922:47      padt            U       char pads = ' '; char padt = '\\t'; char padc ="
   - "ext/standard/pack.c:922:65      padc            U       char padt = '\\t'; char padc = '\\r'; char padl ="
-  - "ext/standard/pack.c:922:83      padl            U       char padc = '\\r'; char padl = '\\n';"
   - "ext/standard/pack.c:980:17      ipos            U       zend_long ipos, opos;"
   - "ext/standard/password.c:14:26       Portwood        U       Charles R. Portwood II <charlesportwoodii"
   - "ext/standard/password.c:180:8       zcost           U       zval *zcost;"
