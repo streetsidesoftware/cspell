@@ -5,7 +5,7 @@ Args: '["--config=${repoConfig}/cspell.json","**/*","-e","{*.BUILD,BUILD,CHANGEL
 Summary:
   files: 16505
   filesWithIssues: 11969
-  issues: 110129
+  issues: 110128
   errors: 0
 Errors: []
 
@@ -1168,9 +1168,8 @@ issues:
   - "google/cloud/pubsublite/internal/location_test.cc:73:35         notaletter      U       str = \"first-second-notaletter\";"
   - "google/cloud/pubsublite/internal/multipartition_publisher_test.cc:80:7          Multipartition      U       class MultipartitionPublisherNoneInitializedTest"
   - "google/cloud/pubsublite/internal/multipartition_publisher.h:15:59       MULTIPARTITION      U       PUBSUBLITE_INTERNAL_MULTIPARTITION_PUBLISHER_H"
-  - "google/cloud/pubsublite/internal/partition_publisher_test.cc:940:12         reinitializing      U       // after reinitializing the stream, all the"
-  - "google/cloud/pubsublite/internal/partition_publisher_test.cc:940:60         rebatched           U       all the messages are rebatched"
-  - "google/cloud/pubsublite/internal/partition_publisher_test.cc:984:64         unacked             U       messages that are left unacked"
+  - "google/cloud/pubsublite/internal/partition_publisher_test.cc:940:60         rebatched       U       all the messages are rebatched"
+  - "google/cloud/pubsublite/internal/partition_publisher_test.cc:984:64         unacked         U       messages that are left unacked"
   - "google/cloud/pubsublite/internal/partition_publisher.cc:73:22       unbatched       U       MessageWithPromise unbatched{std::move(m), promise"
   - "google/cloud/pubsublite/internal/partition_publisher.cc:201:21      Unbatch         U       PartitionPublisher::UnbatchAll(std::unique_lock"
   - "google/cloud/pubsublite/internal/publisher_connection_impl_test.cc:65:52        ohhh    U       StatusCode::kAborted, \"uh ohhh\"};"
