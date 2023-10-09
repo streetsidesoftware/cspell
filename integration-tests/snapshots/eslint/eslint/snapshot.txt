@@ -3,7 +3,7 @@ Repository: eslint/eslint
 Url: "https://github.com/eslint/eslint"
 Args: ["**","--exclude=bin/**","--exclude=CHANGELOG.md","--exclude=_data","--exclude=tests/bench/large.js","--exclude=docs/src/_includes","--exclude=docs/src/assets/{fonts,s?css,images}"]
 Lines:
- CSpell: Files checked: 1892, Issues found: 5517 in 1258 files
+ CSpell: Files checked: 1895, Issues found: 5529 in 1259 files
  exit code: 1
 ./Makefile.js:145:88    - Unknown word (ined)               -- followed by the string "ined".
 ./Makefile.js:151:48    - Unknown word (blogpost)           -- render(cat("./templates/blogpost.md.ejs"), renderContext
@@ -29,8 +29,7 @@ Lines:
 ./README.md:271:1     - Unknown word (Strek)       -- Strek
 ./README.md:280:5     - Unknown word (teamend)     -- <!--teamend-->
 ./README.md:287:5     - Unknown word (sponsorsstart) -- <!--sponsorsstart-->
-./README.md:292:243   - Unknown word (Nrwl)          -- logo.png" alt="Nx (by Nrwl)" height="32"></a>
-./README.md:292:805   - Unknown word (Transloadit)   -- com/u/125754?v=4" alt="Transloadit" height="32"></a> <a
+./README.md:292:679   - Unknown word (Transloadit)   -- com/u/125754?v=4" alt="Transloadit" height="32"></a> <a
 ./README.md:293:5     - Unknown word (sponsorsend)   -- <!--sponsorsend-->
 ./conf/config-schema.js:14:5      - Unknown word (fileoverview) -- * @fileoverview Defines a schema for
 ./conf/config-schema.js:8:63      - Unknown word (nzakas)     -- file, please contact @nzakas first.
@@ -146,10 +145,12 @@ Lines:
 ./docs/src/rules/consistent-return.md:76:16     - Unknown word (instanceof) -- if (!(this instanceof Foo)) {
 ./docs/src/rules/eqeqeq.md:2:8       - Unknown word (eqeqeq)     -- title: eqeqeq
 ./docs/src/rules/eqeqeq.md:39:150    - Unknown word (typeof)     -- of the operands is a `typeof` expression, or if both
+./docs/src/rules/function-paren-newline.md:338:5     - Unknown word (barbaz)     -- var barbaz = function(
 ./docs/src/rules/generator-star-spacing.md:85:40     - Unknown word (configurability) -- rule allows further configurability via overrides per function
 ./docs/src/rules/guard-for-in.md:21:5      - Unknown word (codebases)  -- For codebases that do not support
 ./docs/src/rules/guard-for-in.md:6:16      - Unknown word (builtins)   -- - no-prototype-builtins
 ./docs/src/rules/id-denylist.md:7:102     - Unknown word (Karlton)    -- naming things." — Phil Karlton
+./docs/src/rules/id-length.md:163:10    - Unknown word (foobaz)     -- function foobaz(value = 0) { }
 ./docs/src/rules/indent-legacy.md:28:16     - Unknown word (Crockford)  -- * Four spaces: Crockford
 ./docs/src/rules/indent-legacy.md:402:8     - Unknown word (boop)        -- qux, boop) {
 ./docs/src/rules/indent-legacy.md:91:76     - Unknown word (declarators) -- indentation level for `var` declarators; can also take an object
@@ -178,7 +179,7 @@ Lines:
 ./docs/src/rules/no-new-native-nonconstructor.md:2:22      - Unknown word (nonconstructor) -- title: no-new-native-nonconstructor
 ./docs/src/rules/no-new-native-nonconstructor.md:65:11     - Unknown word (corge)          -- const corge = new BigInt(900719
 ./docs/src/rules/no-nonoctal-decimal-escape.md:2:11      - Unknown word (nonoctal)   -- title: no-nonoctal-decimal-escape
-./docs/src/rules/no-param-reassign.md:164:14    - Unknown word (barrito)    -- function foo(barrito) {
+./docs/src/rules/no-param-reassign.md:164:20    - Unknown word (barrito)    -- var foo = function(barrito) {
 ./docs/src/rules/no-plusplus.md:2:11      - Unknown word (plusplus)   -- title: no-plusplus
 ./docs/src/rules/no-proto.md:2:11      - Unknown word (proto)      -- title: no-proto
 ./docs/src/rules/no-prototype-builtins.md:10:216    - Unknown word (webserver)  -- would be unsafe for a webserver to parse JSON input
@@ -306,13 +307,13 @@ Lines:
 ./lib/cli-engine/xml-escape.js:29:26     - Unknown word (apos)       -- return "&apos;";
 ./lib/cli.js:27:38     - Unknown word (humanwhocodes) -- ModuleImporter } = require("@humanwhocodes/module-importer");
 ./lib/config/default-config.js:56:61     - Unknown word (globbed)    -- ensure these files are globbed by default
-./lib/config/flat-config-schema.js:225:42    - Unknown word (incompat)   -- messageTemplate = "eslintrc-incompat";
+./lib/config/flat-config-schema.js:223:42    - Unknown word (incompat)   -- messageTemplate = "eslintrc-incompat";
 ./lib/eslint/eslint-helpers.js:19:26     - Unknown word (nodelib)    -- const fswalk = require("@nodelib/fs.walk");
 ./lib/eslint/eslint-helpers.js:19:7      - Unknown word (fswalk)     -- const fswalk = require("@nodelib
 ./lib/eslint/eslint-helpers.js:397:40    - Unknown word (prepopulated) -- for the cwd, which is prepopulated in the searches map
-./lib/linter/code-path-analysis/code-path-state.js:124:51    - Unknown word (Forkcontext) -- expression (tracked by `qqForkcontext`).
-./lib/linter/code-path-analysis/code-path-state.js:1685:23   - Unknown word (Segs)        -- const prevSegsOfLeavingSegment = [headOfLeav
-./lib/linter/code-path-analysis/code-path-state.js:351:34    - Unknown word (expresion)   -- The end of the update expresion. This may change during
+./lib/linter/code-path-analysis/code-path-state.js:1256:46   - Unknown word (circuting)   -- path due to the short-circuting, so we are just seeding
+./lib/linter/code-path-analysis/code-path-state.js:1730:23   - Unknown word (Segs)        -- const prevSegsOfLeavingSegment = [headOfLeav
+./lib/linter/code-path-analysis/code-path-state.js:351:34    - Unknown word (expresion)  -- The end of the update expresion. This may change during
 ./lib/linter/code-path-analysis/code-path-state.js:774:31    - Unknown word (unflattened) -- {CodePathSegment[]} unflattenedFromSegments Segments
 ./lib/linter/code-path-analysis/debug-helpers.js:105:54    - Unknown word (fillcolor)  -- style=\"rounded,filled\",fillcolor=white];\n" +
 ./lib/linter/code-path-analysis/debug-helpers.js:109:45    - Unknown word (doublecircle) -- final[label=\"\",shape=doublecircle,style=filled,fillcolor
@@ -425,7 +426,6 @@ Lines:
 ./tests/lib/cli-engine/cli-engine.js:4410:115  - Unknown word (Unignored)    -- , ".eslintignoreWithUnignoredDefaults") });
 ./tests/lib/cli-engine/cli-engine.js:4495:53   - Unknown word (sampleignorepattern) -- eslintignore` includes `sampleignorepattern`.
 ./tests/lib/cli-engine/cli-engine.js:4618:21   - Unknown word (globstar)            -- it("two globstar '**' ignore pattern
-./tests/lib/cli-engine/cli-engine.js:4667:89   - Unknown word (foobaz)              -- not-a-directory", ".foobaz");
 ./tests/lib/cli-engine/cli-engine.js:4842:51   - Unknown word (somenamespace)       -- engine.getFormatter("@somenamespace/foo");
 ./tests/lib/cli-engine/cli-engine.js:4858:63   - Unknown word (doesntexist)         -- getFixturePath("formatters", "doesntexist.js"),
 ./tests/lib/cli-engine/cli-engine.js:616:44    - Unknown word (foothis)    -- output: "var bar = foothis is a syntax error."
@@ -434,8 +434,8 @@ Lines:
 ./tests/lib/cli.js:333:56    - Unknown word (fakeformatter) -- await cli.execute(`-f fakeformatter ${filePath}`);
 ./tests/lib/config/flat-config-array.js:1273:43   - Unknown word (truex)       -- foo: "truex"
 ./tests/lib/config/flat-config-array.js:154:22    - Unknown word (noniterable) -- it("should allow noniterable baseConfig objects"
-./tests/lib/config/flat-config-array.js:1745:29   - Unknown word (foox)        -- foox: [1, "bar"]
-./tests/lib/config/flat-config-array.js:1767:30   - Unknown word (doesnt)      -- "doesnt-exist/match": "error
+./tests/lib/config/flat-config-array.js:1756:29   - Unknown word (foox)        -- foox: [1, "bar"]
+./tests/lib/config/flat-config-array.js:1778:30   - Unknown word (doesnt)      -- "doesnt-exist/match": "error
 ./tests/lib/eslint/flat-eslint.js:1120:57   - Unknown word (doesnotexist) -- lintFiles(["subdir1", "doesnotexist/*.js"]);
 ./tests/lib/eslint/flat-eslint.js:1195:58   - Unknown word (doesexist)    -- await eslint.lintFiles(["doesexist/*.js"]);
 ./tests/lib/eslint/flat-eslint.js:1677:30   - Unknown word (reignoring)   -- it("should allow reignoring of previously ignored
@@ -443,13 +443,13 @@ Lines:
 ./tests/lib/eslint/flat-eslint.js:5125:31   - Unknown word (dignore)      -- cwd: `${root}-dignore`,
 ./tests/lib/linter/code-path-analysis/code-path-analyzer.js:30:16     - Unknown word (ESQUERY)    -- const STANDARD_ESQUERY_OPTION = { visitorKeys
 ./tests/lib/linter/config-comment-parser.js:165:41    - Unknown word (ELEVENTEEN) -- code = "a: seventy, b:ELEVENTEEN";
-./tests/lib/linter/linter.js:16384:52  - Unknown word (intentionaly)   -- // intentionaly mutates objects and
-./tests/lib/linter/linter.js:3401:1    - Unknown word (consolexlog) -- consolexlog("test2");
-./tests/lib/linter/linter.js:3528:73   - Unknown word (barfoo)      -- rules: { foobar: 2, barfoo: 1 } });
-./tests/lib/linter/linter.js:3547:84   - Unknown word (rulename)    -- this is 2, since the rulename is very likely to be
-./tests/lib/linter/linter.js:4949:31   - Unknown word (suppresed)   -- it("should report one suppresed problem when noInlineConfig
-./tests/lib/linter/linter.js:7108:19   - Unknown word (postprocessors) -- describe("postprocessors", () => {
-./tests/lib/linter/linter.js:7161:28   - Unknown word (postprocessed)  -- it("should use postprocessed problem ranges when
+./tests/lib/linter/linter.js:16689:52  - Unknown word (intentionaly)   -- // intentionaly mutates objects and
+./tests/lib/linter/linter.js:3550:1    - Unknown word (consolexlog) -- consolexlog("test2");
+./tests/lib/linter/linter.js:3677:73   - Unknown word (barfoo)      -- rules: { foobar: 2, barfoo: 1 } });
+./tests/lib/linter/linter.js:3696:84   - Unknown word (rulename)    -- this is 2, since the rulename is very likely to be
+./tests/lib/linter/linter.js:5112:31   - Unknown word (suppresed)   -- it("should report one suppresed problem when noInlineConfig
+./tests/lib/linter/linter.js:7271:19   - Unknown word (postprocessors) -- describe("postprocessors", () => {
+./tests/lib/linter/linter.js:7324:28   - Unknown word (postprocessed)  -- it("should use postprocessed problem ranges when
 ./tests/lib/linter/node-event-generator.js:25:7      - Unknown word (ESPREE)     -- const ESPREE_CONFIG = {
 ./tests/lib/linter/node-event-generator.js:298:68    - Unknown word (pseudoclasses) -- // 0 identifiers, 0 pseudoclasses
 ./tests/lib/linter/node-event-generator.js:304:66    - Unknown word (pseudoclass)   -- ].expression], // 1 pseudoclass, 0 identifiers
@@ -489,7 +489,6 @@ Lines:
 ./tests/lib/rules/id-match.js:25:30     - Unknown word (Matthieu)   -- code: "__foo = \"Matthieu\"",
 ./tests/lib/rules/id-match.js:34:20     - Unknown word (firstname)  -- code: "firstname = \"Matthieu\"",
 ./tests/lib/rules/id-match.js:46:34     - Unknown word (Larcher)    -- code: "last_Name = \"Larcher\"",
-./tests/lib/rules/indent-legacy.js:1661:23   - Unknown word (barbaz)     -- " qux, barbaz,\n" +
 ./tests/lib/rules/indent-legacy.js:1662:18   - Unknown word (barqux)     -- " barqux, bazqux);",
 ./tests/lib/rules/indent-legacy.js:1662:26   - Unknown word (bazqux)     -- " barqux, bazqux);",
 ./tests/lib/rules/indent-legacy.js:324:16    - Unknown word (otherdata)  -- " otherdata.forEach(function(zero
