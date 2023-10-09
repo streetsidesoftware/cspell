@@ -3,15 +3,15 @@ Repository: RustPython/RustPython
 Url: "https://github.com/RustPython/RustPython.git"
 Args: ["**"]
 Lines:
- CSpell: Files checked: 596, Issues found: 2702 in 305 files
+ CSpell: Files checked: 597, Issues found: 2677 in 306 files
  exit code: 1
-./Cargo.toml:110:82    - Unknown word (termcolor)  -- features = ["atty", "termcolor"] }
-./Cargo.toml:153:62    - Unknown word (redoxer)    -- to compile/check with redoxer
+./Cargo.toml:111:82    - Unknown word (termcolor)  -- features = ["atty", "termcolor"] }
+./Cargo.toml:154:62    - Unknown word (redoxer)    -- to compile/check with redoxer
 ./Cargo.toml:16:44     - Unknown word (pylib)      -- derive", "jit", "vm", "pylib", "stdlib", "wasm/lib
-./Cargo.toml:72:1      - Unknown word (rustyline)  -- rustyline = "11"
-./Cargo.toml:77:1      - Unknown word (thiserror)  -- thiserror = "1.0"
-./Cargo.toml:80:1      - Unknown word (widestring) -- widestring = "0.5.1"
-./Cargo.toml:87:49     - Unknown word (flamescope) -- flame-it", "flame", "flamescope"]
+./Cargo.toml:73:1      - Unknown word (rustyline)  -- rustyline = "11"
+./Cargo.toml:78:1      - Unknown word (thiserror)  -- thiserror = "1.0"
+./Cargo.toml:81:1      - Unknown word (widestring) -- widestring = "0.5.1"
+./Cargo.toml:88:49     - Unknown word (flamescope) -- flame-it", "flame", "flamescope"]
 ./DEVELOPMENT.md:113:5     - Unknown word (speedscope) -- The speedscope json format (default
 ./DEVELOPMENT.md:131:26    - Unknown word (subcrates)  -- src`: using the other subcrates to bring rustpython
 ./DEVELOPMENT.md:24:20     - Unknown word (rustup)     -- - If you have `rustup` on your system, enter
@@ -355,18 +355,19 @@ Lines:
 ./jit/src/instructions.rs:126:39    - Unknown word (bint)       -- Ok(self.builder.ins().bint(types::I8, val))
 ./jit/src/instructions.rs:129:47    - Unknown word (iconst)     -- self.builder.ins().iconst(types::I64, 0);
 ./jit/src/instructions.rs:243:36    - Unknown word (brnz)       -- self.builder.ins().brnz(val, then_block, &[
-./jit/src/instructions.rs:386:68    - Unknown word (ifcout)     -- self.builder.ins().iadd_ifcout(a, b);
-./jit/src/instructions.rs:387:44    - Unknown word (trapif)     -- self.builder.ins().trapif(
-./jit/src/instructions.rs:410:55    - Unknown word (ushr)       -- self.builder.ins().ushr_imm(b, 63);
-./jit/src/instructions.rs:411:44    - Unknown word (trapnz)     -- self.builder.ins().trapnz(
-./jit/src/instructions.rs:417:48    - Unknown word (ishl)       -- self.builder.ins().ishl(a, b)
-./jit/src/instructions.rs:419:48    - Unknown word (sshr)       -- self.builder.ins().sshr(a, b)
-./jit/src/instructions.rs:435:60    - Unknown word (fadd)       -- Float(self.builder.ins().fadd(a, b))
-./jit/src/instructions.rs:438:60    - Unknown word (fsub)       -- Float(self.builder.ins().fsub(a, b))
-./jit/src/instructions.rs:441:60    - Unknown word (fmul)       -- Float(self.builder.ins().fmul(a, b))
-./jit/src/instructions.rs:444:60    - Unknown word (fdiv)       -- Float(self.builder.ins().fdiv(a, b))
-./jit/src/instructions.rs:461:79    - Unknown word (ifbout)     -- t special-case isub_ifbout
-./jit/src/instructions.rs:467:40    - Unknown word (ineg)       -- self.builder.ins().ineg(b);
+./jit/src/instructions.rs:327:65    - Unknown word (uextend)    -- self.builder.ins().uextend(types::I64, a),
+./jit/src/instructions.rs:406:68    - Unknown word (ifcout)     -- self.builder.ins().iadd_ifcout(a, b);
+./jit/src/instructions.rs:407:44    - Unknown word (trapif)     -- self.builder.ins().trapif(
+./jit/src/instructions.rs:430:55    - Unknown word (ushr)       -- self.builder.ins().ushr_imm(b, 63);
+./jit/src/instructions.rs:431:44    - Unknown word (trapnz)     -- self.builder.ins().trapnz(
+./jit/src/instructions.rs:437:48    - Unknown word (ishl)       -- self.builder.ins().ishl(a, b)
+./jit/src/instructions.rs:439:48    - Unknown word (sshr)       -- self.builder.ins().sshr(a, b)
+./jit/src/instructions.rs:455:60    - Unknown word (fadd)       -- Float(self.builder.ins().fadd(a, b))
+./jit/src/instructions.rs:458:60    - Unknown word (fsub)       -- Float(self.builder.ins().fsub(a, b))
+./jit/src/instructions.rs:461:60    - Unknown word (fmul)       -- Float(self.builder.ins().fmul(a, b))
+./jit/src/instructions.rs:464:60    - Unknown word (fdiv)       -- Float(self.builder.ins().fdiv(a, b))
+./jit/src/instructions.rs:511:79    - Unknown word (ifbout)     -- t special-case isub_ifbout
+./jit/src/instructions.rs:517:40    - Unknown word (ineg)       -- self.builder.ins().ineg(b);
 ./jit/src/lib.rs:13:32     - Unknown word (jitted)     -- error("function can't be jitted")]
 ./jit/src/lib.rs:18:5      - Unknown word (Cranelift)  -- CraneliftError(#[from] ModuleError
 ./jit/src/lib.rs:285:23    - Unknown word (wasmtime)   -- TODO: confirm with wasmtime ppl that it's not unsound
@@ -595,10 +596,11 @@ Lines:
 ./stdlib/src/termios.rs:65:62     - Unknown word (TIOCLINUX)       -- TIOCGSOFTCAR, TIOCINQ, TIOCLINUX, TIOCSSOFTCAR, XTABS
 ./stdlib/src/termios.rs:65:73     - Unknown word (TIOCSSOFTCAR)    -- TIOCINQ, TIOCLINUX, TIOCSSOFTCAR, XTABS,
 ./stdlib/src/termios.rs:65:9      - Unknown word (TCSETSW)         -- TCSETSW, TCXONC, TIOCGSERIAL
-./vm/Cargo.toml:126:54    - Unknown word (memoryapi)  -- ifdef", "netioapi", "memoryapi",
+./vm/Cargo.toml:144:54    - Unknown word (memoryapi)  -- ifdef", "netioapi", "memoryapi", "profileapi",
+./vm/Cargo.toml:144:67    - Unknown word (profileapi) -- netioapi", "memoryapi", "profileapi",
 ./vm/Cargo.toml:47:43     - Unknown word (wasmbind)   -- true, features = ["wasmbind"] }
-./vm/Cargo.toml:69:1      - Unknown word (caseless)   -- caseless = "0.2.1"
-./vm/Cargo.toml:70:1      - Unknown word (getrandom)  -- getrandom = { version = "0.2.
+./vm/Cargo.toml:70:1      - Unknown word (caseless)   -- caseless = "0.2.1"
+./vm/Cargo.toml:71:1      - Unknown word (getrandom)  -- getrandom = { version = "0.2.
 ./vm/Cargo.toml:75:1      - Unknown word (memoffset)  -- memoffset = "0.6.5"
 ./vm/Lib/python_builtins/__reducelib.py:50:17     - Unknown word (slotnames)  -- names = slotnames(cls) # not checking
 ./vm/Lib/python_builtins/__reducelib.py:65:5      - Unknown word (listitems)  -- listitems = iter(obj) if isinstance
@@ -689,7 +691,7 @@ Lines:
 ./vm/src/function/method.rs:36:38     - Unknown word (Stackless)  -- bit is preserved for Stackless Python
 ./vm/src/function/method.rs:37:18     - Unknown word (STACKLESS)  -- // const STACKLESS = 0x0100;
 ./vm/src/function/protocol.rs:79:5      - Unknown word (iterfn)     -- iterfn: Option<crate::types
-./vm/src/import.rs:87:25     - Unknown word (codeobj)    -- let module = import_codeobj(vm, module_name, frozen
+./vm/src/import.rs:84:25     - Unknown word (codeobj)    -- let module = import_codeobj(vm, module_name, frozen
 ./vm/src/object/core.rs:1253:35   - Unknown word (dfghjkl)    -- obj = ctx.new_bytes(b"dfghjkl".to_vec());
 ./vm/src/object/core.rs:169:51    - Unknown word (weakrefs)   -- have never been any weakrefs in this list
 ./vm/src/object/core.rs:207:54    - Unknown word (Weaks)      -- actually own the PyObjectWeaks inside `list`, and every
@@ -703,9 +705,9 @@ Lines:
 ./vm/src/protocol/buffer.rs:267:43    - Unknown word (conti)      -- segment<F>(&self, try_conti: bool, mut f: F)
 ./vm/src/protocol/buffer.rs:282:35    - Unknown word (CONTI)      -- each_segment<F, const CONTI: bool>(&self, mut index
 ./vm/src/protocol/iter.rs:128:13    - Unknown word (getiter)    -- let getiter = {
-./vm/src/protocol/object.rs:30:44     - Unknown word (opid)       -- compare(self, other: Self, opid: PyComparisonOp, vm
-./vm/src/protocol/object.rs:458:30    - Unknown word (icls)         -- } else if let Ok(icls) =
-./vm/src/protocol/object.rs:60:30     - Unknown word (defaultvalue) -- fn length_hint(self, defaultvalue: usize, vm: &VirtualMachine
+./vm/src/protocol/object.rs:31:44     - Unknown word (opid)       -- compare(self, other: Self, opid: PyComparisonOp, vm
+./vm/src/protocol/object.rs:476:30    - Unknown word (icls)         -- } else if let Ok(icls) =
+./vm/src/protocol/object.rs:61:30     - Unknown word (defaultvalue) -- fn length_hint(self, defaultvalue: usize, vm: &VirtualMachine
 ./vm/src/protocol/sequence.rs:126:30    - Unknown word (apear)      -- / if both arguments apear to be sequences, try
 ./vm/src/protocol/sequence.rs:238:59    - Unknown word (unsliceable) -- format!("'{}' object is unsliceable", self.obj.class())
 ./vm/src/py_io.rs:73:17     - Unknown word (sval)       -- let sval = s.as_str();
@@ -898,20 +900,17 @@ Lines:
 ./vm/src/stdlib/time.rs:251:13    - Unknown word (intpart)    -- let intpart = ticks / div;
 ./vm/src/stdlib/time.rs:399:21    - Unknown word (HIGHRES)    -- use libc::CLOCK_HIGHRES;
 ./vm/src/stdlib/time.rs:582:48    - Unknown word (gethrvtime) -- nanos(unsafe { libc::gethrvtime() }))
-./vm/src/stdlib/time.rs:635:21    - Unknown word (profileapi) -- use winapi::um::profileapi::{QueryPerformanceCounter
-./vm/src/stdlib/winapi.rs:186:31    - Unknown word (STARTUPINFOEXW) -- let mut si = winbase::STARTUPINFOEXW::default();
-./vm/src/stdlib/winapi.rs:213:22    - Unknown word (getenvironment) -- .map(|m| getenvironment(m, vm))
-./vm/src/stdlib/winapi.rs:218:13    - Unknown word (getattributelist) -- getattributelist(args.startup_info.get
-./vm/src/stdlib/winapi.rs:251:41    - Unknown word (STARTUPINFO)      -- | winbase::EXTENDED_STARTUPINFO_PRESENT
-./vm/src/stdlib/winapi.rs:307:9     - Unknown word (handlelist)       -- handlelist: Option<Vec<usize>>
-./vm/src/stdlib/winapi.rs:39:13     - Unknown word (minwinbase) -- minwinbase::STILL_ACTIVE,
-./vm/src/stdlib/winapi.rs:47:63     - Unknown word (READMODE)   -- ACCESS_INBOUND, PIPE_READMODE_MESSAGE, PIPE_TYPE_MESSAGE
-./vm/src/stdlib/winapi.rs:48:79     - Unknown word (STARTF)     -- REALTIME_PRIORITY_CLASS, STARTF_USESHOWWINDOW,
-./vm/src/stdlib/winapi.rs:48:86     - Unknown word (USESHOWWINDOW) -- PRIORITY_CLASS, STARTF_USESHOWWINDOW,
-./vm/src/stdlib/winapi.rs:49:24     - Unknown word (USESTDHANDLES) -- STARTF_USESTDHANDLES, STD_ERROR_HANDLE, STD
-./vm/src/stdlib/winapi.rs:56:87     - Unknown word (WRITECOPY)     -- READWRITE, PAGE_EXECUTE_WRITECOPY,
-./vm/src/stdlib/winapi.rs:58:22     - Unknown word (WRITECOMBINE)  -- PAGE_WRITECOMBINE, PAGE_WRITECOPY, PROCESS
-./vm/src/stdlib/winapi.rs:69:8      - Unknown word (husize)        -- fn husize(h: HANDLE) -> usize
+./vm/src/stdlib/winapi.rs:164:60    - Unknown word (STARTUPINFOEXW) -- :System::Threading::STARTUPINFOEXW =
+./vm/src/stdlib/winapi.rs:192:22    - Unknown word (getenvironment) -- .map(|m| getenvironment(m, vm))
+./vm/src/stdlib/winapi.rs:197:13    - Unknown word (getattributelist) -- getattributelist(args.startup_info.get
+./vm/src/stdlib/winapi.rs:230:71    - Unknown word (STARTUPINFO)      -- Threading::EXTENDED_STARTUPINFO_PRESENT
+./vm/src/stdlib/winapi.rs:284:9     - Unknown word (handlelist)       -- handlelist: Option<Vec<usize>>
+./vm/src/stdlib/winapi.rs:41:30     - Unknown word (WRITECOPY)  -- PAGE_EXECUTE_WRITECOPY, PAGE_GUARD, PAGE_NOACCESS
+./vm/src/stdlib/winapi.rs:42:38     - Unknown word (WRITECOMBINE) -- PAGE_READWRITE, PAGE_WRITECOMBINE, PAGE_WRITECOPY, SEC
+./vm/src/stdlib/winapi.rs:46:22     - Unknown word (READMODE)     -- PIPE_READMODE_MESSAGE, PIPE_TYPE_MESSAGE
+./vm/src/stdlib/winapi.rs:54:42     - Unknown word (STARTF)       -- REALTIME_PRIORITY_CLASS, STARTF_USESHOWWINDOW, STARTF
+./vm/src/stdlib/winapi.rs:54:49     - Unknown word (USESHOWWINDOW) -- PRIORITY_CLASS, STARTF_USESHOWWINDOW, STARTF_USESTDHANDLES
+./vm/src/stdlib/winapi.rs:54:71     - Unknown word (USESTDHANDLES) -- USESHOWWINDOW, STARTF_USESTDHANDLES,
 ./vm/src/stdlib/winreg.rs:191:13    - Unknown word (regval)     -- let regval = key
 ./vm/src/stdlib/winreg.rs:50:77     - Unknown word (QWORD)      -- MULTI_SZ, REG_NONE, REG_QWORD,
 ./vm/src/stdlib/winreg.rs:85:36     - Unknown word (predef)     -- let null_key = RegKey::predef(0 as ::winreg::HKEY

@@ -4,13 +4,14 @@ Url: https://github.com/wireapp/wire-desktop.git
 Args: '["*.md","electron/renderer/**/*.jsx","electron/src/**/*.ts","electron/html/*.html"]'
 Summary:
   files: 42
-  filesWithIssues: 2
-  issues: 5
+  filesWithIssues: 4
+  issues: 7
   errors: 0
 Errors: []
 
 issues:
-  - "electron/src/main.ts:148:15         mdns    U       // do not use mdns for local ip obfuscation"
-  - "electron/src/main.ts:149:73         Mdns    U       WebRtcHideLocalIpsWithMdns');"
+  - "electron/src/main.ts:147:15         mdns    U       // do not use mdns for local ip obfuscation"
+  - "electron/src/main.ts:148:73         Mdns    U       WebRtcHideLocalIpsWithMdns');"
+  - "electron/src/menu/developer.ts:71:27        Availeble       U       const environments = getAvailebleEnvironments();"
   - "electron/src/preload/preload-webview.ts:241:37      polyfilling     U       This can be improved by polyfilling getDisplayMedia function"
   - "electron/src/preload/preload-webview.ts:286:8       SQSERVICES      U       // see SQSERVICES-1882 and SQSERVICES"

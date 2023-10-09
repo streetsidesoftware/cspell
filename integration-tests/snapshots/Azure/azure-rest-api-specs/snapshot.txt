@@ -4,7 +4,7 @@ Url: "https://github.com/Azure/azure-rest-api-specs.git"
 Args: ["--config=cSpell.json","**/*.{md,ts,js}"]
 Lines:
   File: "./Azure/azure-rest-api-specs/cSpell.json"
- CSpell: Files checked: 2137, Issues found: 2482 in 756 files
+ CSpell: Files checked: 2139, Issues found: 2484 in 758 files
  exit code: 1
 ./CONTRIBUTING.md:24:6      - Unknown word (tocstop)    -- <!-- tocstop -->
 ./CONTRIBUTING.md:86:3      - Unknown word (Poli)       -- - PoliCheck -
@@ -19,6 +19,7 @@ Lines:
 ./arm-compute/quickstart-templates/README.md:3:107     - Unknown word (quickstart) -- specification/compute/quickstart-templates`. However
 ./dev/cognitiveservices/data-plane/Language/readme.md:35:1      - Unknown word (modelerfour) -- modelerfour:
 ./documentation/FAQ.md:41:51     - Unknown word (examplegen) -- from Swagger?<a name="examplegen"></a>
+./documentation/Getting-started-with-TypeSpec-specifications.md:12:34     - Unknown word (tspconfig)  -- check_mark: Do include `tspconfig.yaml`.
 ./documentation/Getting-started-with-TypeSpec-specifications.md:9:5       - Unknown word (TLDR)       -- ### TLDR: Key checklist for TypeSpec
 ./documentation/Semantic-and-Model-Violations-Reference.md:15:14     - Unknown word (OPERATIONID) -- | [DUPLICATE_OPERATIONID](#DUPLICATE_OPERATIONID
 ./documentation/Semantic-and-Model-Violations-Reference.md:644:39    - Unknown word (dicriminator) -- : The value of x-ms-dicriminator-value is not in the
@@ -31,8 +32,6 @@ Lines:
 ./documentation/api-scenario/how-to/ResolveDependencies.md:246:22    - Unknown word (ipconfigmy) -- "name": "ipconfigmyVM",
 ./documentation/api-scenario/references/ApiScenarioDefinition.md:278:29    - Unknown word (somedomain) -- value: $(serviceName).somedomain.com
 ./documentation/api-scenario/references/ErrorCodeReference.md:32:31     - Unknown word (blobnfs)    -- "namespacePath":"/blobnfs"
-./documentation/ci-fix.md:140:273   - Unknown word (geneates)             -- swagger automatically when geneates the swagger, you should
-./documentation/ci-fix.md:143:187   - Unknown word (tspconfig)            -- you need to check the tspconfig.yaml to see if it has
 ./documentation/ci-fix.md:28:18     - Unknown word (contosowidgetmanager) -- cd specification/contosowidgetmanager
 ./documentation/ci-fix.md:78:215    - Unknown word (guildance)            -- github comment with guildance on how to fix.
 ./documentation/code-gen/configure-cli.md:103:91    - Unknown word (commmand)   -- passed by user in their commmand line which should points
@@ -74,8 +73,8 @@ Lines:
 ./documentation/typespec-structure-guidelines.md:46:7      - Unknown word (confidentialledger) -- -> confidentialledger
 ./documentation/x-ms-examples.md:105:29    - Unknown word (testrg)     -- resourceGroupName": "testrg123",
 ./documentation/x-ms-examples.md:106:30    - Unknown word (testacc)    -- storageAccountName": "testacc6141",
-./eng/tools/TypeSpecValidation/src/index.ts:16:54     - Unknown word (Positionals) -- args, options, allowPositionals: true } as ParseArgsConfig
-./eng/tools/TypeSpecValidation/src/index.ts:17:29     - Unknown word (positionals) -- folder = parsedArgs.positionals[0];
+./eng/tools/TypeSpecValidation/src/index.ts:17:54     - Unknown word (Positionals) -- args, options, allowPositionals: true } as ParseArgsConfig
+./eng/tools/TypeSpecValidation/src/index.ts:18:29     - Unknown word (positionals) -- folder = parsedArgs.positionals[0];
 ./eng/tools/TypeSpecValidation/src/rules/npm-prefix.ts:17:54     - Unknown word (revparse)   -- normalize(await git.revparse("--show-toplevel"))
 ./profiles/ResourceSchemas.md:11:5      - Unknown word (azureresourceschema) -- azureresourceschema:
 ./profiles/ResourceSchemas.md:247:106   - Unknown word (servermanagement)    -- Management/2015-07-01-preview/servermanagement.json
@@ -180,6 +179,7 @@ Lines:
 ./specification/containerstorage/ContainerStorage.Management/README.md:61:35     - Unknown word (containerstorage) -- generate-examples <path to containerstorage.json>
 ./specification/cosmos-db/data-plane/readme.go.md:8:14      - Unknown word (storagetables) -- namespace: storagetables
 ./specification/cosmos-db/data-plane/readme.md:49:46     - Unknown word (outputm)    -- only supports XML input/outputm which is not supported
+./specification/cosmos-db/data-plane/readme.python.md:18:16     - Unknown word (msrest)     -- models-mode: msrest
 ./specification/cosmos-db/resource-manager/readme.go.md:14:41     - Unknown word (armcosmos)  -- resourcemanager/cosmos/armcosmos
 ./specification/cosmos-db/resource-manager/readme.md:42:44     - Unknown word (mongorbac)  -- DocumentDB/stable/2023-09-15/mongorbac.json
 ./specification/cost-management/resource-manager/readme.md:322:52    - Unknown word (Operatio)                   -- Response schema of OperatioAPI does not match Arm
@@ -387,7 +387,8 @@ Lines:
 ./specification/powerbiprivatelinks/resource-manager/readme.az.md:9:17      - Unknown word (powerbiprivatelinks) -- extensions: powerbiprivatelinks
 ./specification/powerplatform/resource-manager/readme.csharp.md:14:40     - Unknown word (powerplatform) -- csharp-sdks-folder)/powerplatform/management/Microsoft
 ./specification/professionalservice/resource-manager/readme.md:1:3       - Unknown word (professionalservice) -- # professionalservice
-./specification/purview/data-plane/readme.md:39:64     - Unknown word (purviewcatalog) -- preview/2023-02-01-preview/purviewcatalog.json
+./specification/purview/data-plane/readme.md:39:55     - Unknown word (purviewdatamap) -- DataMap/stable/2023-09-01/purviewdatamap.json
+./specification/purview/data-plane/readme.md:47:64     - Unknown word (purviewcatalog) -- preview/2023-02-01-preview/purviewcatalog.json
 ./specification/purview/data-plane/readme.python.md:23:22     - Unknown word (truefr)     -- clear-output-folder: truefr
 ./specification/purview/resource-manager/readme.go.md:14:42     - Unknown word (armpurview) -- resourcemanager/purview/armpurview
 ./specification/quantum/resource-manager/readme.go.md:14:42     - Unknown word (armquantum) -- resourcemanager/quantum/armquantum
@@ -421,6 +422,7 @@ Lines:
 ./specification/resources/resource-manager/readme.go.md:47:44     - Unknown word (armlinks)   -- resourcemanager/resources/armlinks
 ./specification/resources/resource-manager/readme.go.md:55:44     - Unknown word (armlocks)   -- resourcemanager/resources/armlocks
 ./specification/resources/resource-manager/readme.go.md:71:44     - Unknown word (armpolicy)  -- resourcemanager/resources/armpolicy
+./specification/resources/resource-manager/readme.md:1091:46   - Unknown word (explictly)  -- issue, default is int32, explictly mentioning the format
 ./specification/resources/resource-manager/readme.terraform.md:49:15     - Unknown word (newgen)     -- - Gen: "newgen"
 ./specification/resources/resource-manager/readme.typescript.md:32:29     - Unknown word (resourcesdeploymentstacks) -- package-name: "@azure/arm-resourcesdeploymentstacks"
 ./specification/riskiq/resource-manager/readme.python.md:10:26     - Unknown word (defendereasm) -- package-name: azure-mgmt-defendereasm
@@ -429,8 +431,8 @@ Lines:
 ./specification/saas/resource-manager/readme.md:65:47     - Unknown word (exsisting)  -- tenant level and its an exsisting API
 ./specification/scom/resource-manager/readme.go.md:13:39     - Unknown word (armscom)    -- resourcemanager/scom/armscom
 ./specification/scvmm/resource-manager/readme.go.md:8:40      - Unknown word (armscvmm)   -- resourcemanager/scvmm/armscvmm
-./specification/search/data-plane/Azure.Search/readme.md:392:1     - Unknown word (vararg)     -- vararg-properties: >-
-./specification/search/data-plane/Azure.Search/readme.md:456:33    - Unknown word (fasterxml)  -- replace(/(import com.fasterxml.jackson.annotation.JsonProper
+./specification/search/data-plane/Azure.Search/readme.md:410:1     - Unknown word (vararg)     -- vararg-properties: >-
+./specification/search/data-plane/Azure.Search/readme.md:474:33    - Unknown word (fasterxml)  -- replace(/(import com.fasterxml.jackson.annotation.JsonProper
 ./specification/search/resource-manager/readme.go.md:14:41     - Unknown word (armsearch)  -- resourcemanager/search/armsearch
 ./specification/security/resource-manager/readme.csharp.md:32:40     - Unknown word (securitycenter) -- csharp-sdks-folder)/securitycenter/Microsoft.Azure.Management
 ./specification/securityinsights/resource-manager/readme.md:792:152   - Unknown word (reviewr)    -- supress this by Swagger reviewr.'
