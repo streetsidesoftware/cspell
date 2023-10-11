@@ -5,7 +5,7 @@ Args: '["**","--exclude=**/Backup/**"]'
 Summary:
   files: 489
   filesWithIssues: 458
-  issues: 14772
+  issues: 14770
   errors: 0
 Errors: []
 
@@ -1030,8 +1030,7 @@ issues:
   - "PowerShell/Test-SQLScripts.ps1:139:89       fromclause          U       statement.Queryexpression.fromclause.tablereferences.FirstTableRef"
   - "PowerShell/Test-SQLScripts.ps1:139:100      tablereferences     U       Queryexpression.fromclause.tablereferences.FirstTableReference"
   - "PowerShell/Test-SQLScripts.ps1:153:60       descernible         U       Parsed statement has no descernible statement type. Maybe"
-  - "PowerShell/Truncate-AllTables.ps1:47:60         foreignkeys     U       script=''} -process {$_.foreignkeys.refresh(); $_.foreignkeys"
-  - "PowerShell/Truncate-AllTables.ps1:59:2          resetup         U       #resetup the FKs"
+  - "PowerShell/Truncate-AllTables.ps1:59:2          resetup     U       #resetup the FKs"
   - "PowerShell/When-SQL-Serve-was-Rebooted.ps1:21:72        distinguishedname       U       | where-object {$_.distinguishedname -like \"*OU=SUS Group"
   - "PowerShell/When-SQL-Serve-was-Rebooted.ps1:24:6         computerlist            U       $computerlist = Get-ADGroupMember"
   - "PowerShell/When-SQL-Serve-was-Rebooted.ps1:28:10        computerlistcount       U       $computerlistcount = $computerlist.Count"
