@@ -28,6 +28,8 @@ const config = {
     parserOptions: {
         ecmaVersion: 2020,
         sourceType: 'module',
+        project: true,
+        tsconfigRootDir: __dirname,
     },
     overrides: [
         {
