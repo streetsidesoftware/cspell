@@ -1,11 +1,12 @@
-/* eslint-disable @typescript-eslint/no-non-null-assertion */
 import type { DictionaryDefinition, DictionaryDefinitionLegacy } from '@cspell/cspell-types';
+import assert from 'assert';
 import * as fsp from 'fs/promises';
 import * as os from 'os';
 import * as path from 'path';
 import { describe, expect, test } from 'vitest';
 
 import { isDictionaryDefinitionInlineInternal } from '../Models/CSpellSettingsInternalDef.js';
+import { isDefined } from '../util/util.js';
 import { getDefaultBundledSettings } from './DefaultSettings.js';
 import { createDictionaryReferenceCollection as createRefCol } from './DictionaryReferenceCollection.js';
 import * as DictSettings from './DictionarySettings.js';
@@ -15,11 +16,12 @@ const oc = expect.objectContaining;
 
 describe('Validate DictionarySettings', () => {
     test('expects default to not be empty', () => {
+        assert(defaultSettings.dictionaryDefinitions);
         const mapDefs = DictSettings.filterDictDefsToLoad(
             createRefCol(['php', 'wordsEn', 'unknown', 'en_us']),
-            defaultSettings.dictionaryDefinitions!,
+            defaultSettings.dictionaryDefinitions,
         );
-        const files = mapDefs.map((def) => def.name!);
+        const files = mapDefs.map((def) => def.name);
         expect(mapDefs).toHaveLength(2);
         expect(files.filter((a) => a.includes('php'))).toHaveLength(1);
         expect(files.filter((a) => a.includes('wordsEn'))).toHaveLength(0);
@@ -38,8 +40,9 @@ describe('Validate DictionarySettings', () => {
             'en_us',
         ];
         const expected = ['php', 'en_us'].sort();
-        const mapDefs = DictSettings.filterDictDefsToLoad(createRefCol(ids), defaultSettings.dictionaryDefinitions!);
-        const dicts = mapDefs.map((def) => def.name!).sort();
+        assert(defaultSettings.dictionaryDefinitions);
+        const mapDefs = DictSettings.filterDictDefsToLoad(createRefCol(ids), defaultSettings.dictionaryDefinitions);
+        const dicts = mapDefs.map((def) => def.name).sort();
         expect(dicts).toEqual(expected);
     });
 
@@ -51,18 +54,21 @@ describe('Validate DictionarySettings', () => {
     `('validate dictionary exclusions $ids', ({ ids, expected }: { ids: string; expected: string }) => {
         const dictIds = createRefCol(ids.split(','));
         const expectedIds = expected.split(',').map((id) => id.trim());
-        const mapDefs = DictSettings.filterDictDefsToLoad(dictIds, defaultSettings.dictionaryDefinitions!);
-        const dicts = mapDefs.map((def) => def.name!).sort();
+        assert(defaultSettings.dictionaryDefinitions);
+        const mapDefs = DictSettings.filterDictDefsToLoad(dictIds, defaultSettings.dictionaryDefinitions);
+        const dicts = mapDefs.map((def) => def.name).sort();
         expect(dicts).toEqual(expectedIds);
     });
 
     test('tests that the files exist', () => {
-        const defaultDicts = defaultSettings.dictionaryDefinitions!;
+        assert(defaultSettings.dictionaryDefinitions);
+        const defaultDicts = defaultSettings.dictionaryDefinitions;
         const dictIds = createRefCol(defaultDicts.map((def) => def.name));
-        const mapDefs = DictSettings.filterDictDefsToLoad(dictIds, defaultSettings.dictionaryDefinitions!);
+        const mapDefs = DictSettings.filterDictDefsToLoad(dictIds, defaultSettings.dictionaryDefinitions);
         const access = mapDefs
             .filter((def) => !isDictionaryDefinitionInlineInternal(def))
-            .map((def) => def.path!)
+            .map((def) => def.path)
+            .filter(isDefined)
             .map((path) => fsp.access(path));
         expect(mapDefs.length).toBeGreaterThan(0);
         return Promise.all(access);

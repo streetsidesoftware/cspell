@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-non-null-assertion */
 import type { CSpellUserSettings } from '@cspell/cspell-types';
 import { describe, expect, test } from 'vitest';
 
@@ -37,12 +36,12 @@ describe('Validate LanguageSettings', () => {
         const sPython = calcSettingsForLanguage(languageSettings, 'python', 'en');
         expect(sPython.allowCompoundWords).toBeUndefined();
         expect(sPython.dictionaries).not.toHaveLength(0);
-        expect(sPython.dictionaries!).toEqual(expect.arrayContaining(['en_us', 'python', 'django']));
+        expect(sPython.dictionaries).toEqual(expect.arrayContaining(['en_us', 'python', 'django']));
 
         const sPhp = calcSettingsForLanguage(languageSettings, 'php', 'en-gb');
         expect(sPhp.allowCompoundWords).toBeUndefined();
         expect(sPhp.dictionaries).not.toHaveLength(0);
-        expect(sPhp.dictionaries!).toEqual(
+        expect(sPhp.dictionaries).toEqual(
             expect.arrayContaining(['en-gb', 'php', 'html', 'npm', 'fonts', 'css', 'typescript', 'fullstack']),
         );
     });

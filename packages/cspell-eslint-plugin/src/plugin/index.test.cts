@@ -8,7 +8,8 @@ const root = path.resolve(__dirname, '../..');
 const fixturesDir = path.join(root, 'fixtures');
 
 const parsers: Record<string, string | undefined> = {
-    '.ts': resolveFromMonoRepo('node_modules/@typescript-eslint/parser'),
+    // Note: it is possible for @typescript-eslint/parser to break the path
+    '.ts': resolveFromMonoRepo('@typescript-eslint/parser'),
 };
 
 type ValidTestCase = RuleTester.ValidTestCase;
@@ -204,7 +205,11 @@ ruleTesterReact.run('cspell with React', Rule.rules.spellchecker, {
 });
 
 function resolveFromMonoRepo(file: string): string {
-    return path.resolve(root, file);
+    const packagePath = require.resolve(file, {
+        paths: [root],
+    });
+    // console.error('resolveFromMonoRepo %o', packagePath);
+    return packagePath;
 }
 
 function resolveFix(filename: string): string {

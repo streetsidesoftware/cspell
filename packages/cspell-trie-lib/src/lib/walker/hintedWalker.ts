@@ -80,8 +80,7 @@ function* hintedWalkerNext(
                 .filter((a) => a in c)
                 .map((letter) => ({
                     letter,
-                    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-                    node: c[letter]!,
+                    node: c[letter],
                     hintOffset: hintOffset + 1,
                 }));
             // We don't want to suggest the compound character.
