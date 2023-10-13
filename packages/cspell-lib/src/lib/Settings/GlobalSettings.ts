@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-empty-interface */
 import type { CSpellSettings, CSpellSettingsWithSourceTrace } from '@cspell/cspell-types';
 import { format } from 'util';
 

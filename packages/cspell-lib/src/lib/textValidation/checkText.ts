@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-empty-interface */
 import type { CSpellUserSettings } from '@cspell/cspell-types';
 import assert from 'assert';
 

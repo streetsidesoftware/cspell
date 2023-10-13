@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-empty-interface */
 import type { TextOffset } from '@cspell/cspell-types';
 
 import { PairingHeap } from './PairingHeap.js';
