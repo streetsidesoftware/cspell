@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-non-null-assertion */
 import type { DictionaryDefinition, DictionaryDefinitionLegacy } from '@cspell/cspell-types';
 import * as fsp from 'fs/promises';
 import * as os from 'os';

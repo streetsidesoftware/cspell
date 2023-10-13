@@ -6,8 +6,8 @@ import { promises as fsp } from 'fs';
 import getStdin from 'get-stdin';
 import * as path from 'path';
 import { fileURLToPath, pathToFileURL } from 'url';
+import { URI } from 'vscode-uri';
 
-import { URI } from '../../lib/uri.cjs';
 import { asyncAwait, asyncFlatten, asyncMap, asyncPipe, mergeAsyncIterables } from './async.js';
 import { FileProtocol, STDIN, STDINProtocol, UTF8 } from './constants.js';
 import { IOError, toApplicationError, toError } from './errors.js';

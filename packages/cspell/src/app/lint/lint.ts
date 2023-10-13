@@ -16,9 +16,9 @@ import type { Logger, ValidationIssue } from 'cspell-lib';
 import * as cspell from 'cspell-lib';
 import * as path from 'path';
 import { format } from 'util';
+import { URI } from 'vscode-uri';
 
 import { npmPackage } from '../../lib/pkgInfo.cjs';
-import { URI } from '../../lib/uri.cjs';
 import { getFeatureFlags } from '../featureFlags/index.js';
 import type { CreateCacheSettings, CSpellLintResultCache } from '../util/cache/index.js';
 import { calcCacheSettings, createCache } from '../util/cache/index.js';

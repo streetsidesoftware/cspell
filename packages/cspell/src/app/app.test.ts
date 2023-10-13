@@ -5,8 +5,8 @@ import * as readline from 'readline';
 import stripAnsi from 'strip-ansi';
 import * as Util from 'util';
 import { afterEach, beforeEach, type Constructable, describe, expect, test, vi } from 'vitest';
+import { URI } from 'vscode-uri';
 
-import { URI } from '../lib/uri.cjs';
 import * as app from './app.js';
 import * as Link from './link.js';
 import { pathPackageRoot } from './test/test.helper.js';
