@@ -116,6 +116,7 @@ export function countWords(root: TrieNode): number {
 
     function walk(n: TrieNode) {
         if (visited.has(n)) {
+            // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
             return visited.get(n)!;
         }
 

@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-empty-interface */
 import type { CSpellSettings, CSpellSettingsWithSourceTrace } from '@cspell/cspell-types';
 import { format } from 'util';
 
@@ -12,6 +11,7 @@ export interface GlobalSettingsWithSource extends Partial<GlobalCSpellSettings> 
     source: CSpellSettingsWithSourceTrace['source'];
 }
 
+// eslint-disable-next-line @typescript-eslint/no-empty-interface
 export interface GlobalCSpellSettings extends Required<Pick<CSpellSettings, 'import'>> {}
 
 export function getRawGlobalSettings(): GlobalSettingsWithSource {

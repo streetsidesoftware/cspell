@@ -196,7 +196,7 @@ export function processRules(affInfo: AffInfo): Map<string, Rule> {
         .map((pfx) => ({ id: pfx.id, type: 'pfx', pfx }));
     const flagRules: Sequence<Rule> = GS.sequenceFromObject(affInfo as AffTransformFlags)
         .filter(([key, value]) => !!affFlag[key] && !!value)
-
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
         .map(([key, value]) => ({ id: value!, type: 'flag', flags: affFlag[key] }));
 
     const rules = sfxRules

@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-empty-interface */
 import type { TextOffset } from '@cspell/cspell-types';
 
 import { PairingHeap } from './PairingHeap.js';
@@ -41,6 +40,7 @@ export interface TextOffsetWithValid extends TextOffset {
     isFound: boolean;
 }
 
+// eslint-disable-next-line @typescript-eslint/no-empty-interface
 export interface SplitOptions extends WordBreakOptions {}
 
 export function split(

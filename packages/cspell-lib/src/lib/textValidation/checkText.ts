@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-empty-interface */
 import type { CSpellUserSettings } from '@cspell/cspell-types';
 import assert from 'assert';
 
@@ -69,6 +68,7 @@ export enum IncludeExcludeFlag {
     EXCLUDE = 'E',
 }
 
+// eslint-disable-next-line @typescript-eslint/no-empty-interface
 export interface CheckTextOptions extends DocumentValidatorOptions {}
 
 /**
