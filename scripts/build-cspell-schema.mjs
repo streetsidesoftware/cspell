@@ -1,7 +1,6 @@
 #!/usr/bin/env node
 
-// @todo: Use the official version when https://github.com/vega/ts-json-schema-generator/pull/1773 has landed.
-import tsj from './lib-bundled/ts-json-schema-generator.cjs';
+import tsj from 'ts-json-schema-generator';
 import { writeFile } from 'node:fs/promises';
 import safeStableStringify from 'safe-stable-stringify';
 import { fileURLToPath } from 'node:url';
