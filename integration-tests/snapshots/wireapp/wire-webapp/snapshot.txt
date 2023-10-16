@@ -3,8 +3,18 @@ Repository: wireapp/wire-webapp
 Url: "https://github.com/wireapp/wire-webapp.git"
 Args: ["src/script/**/*.{js,ts,tsx,md}"]
 Lines:
- CSpell: Files checked: 993, Issues found: 494 in 143 files
+ CSpell: Files checked: 1051, Issues found: 580 in 163 files
  exit code: 1
+./src/script/E2EIdentity/E2EIdentity.test.ts:32:14     - Unknown word (OIDC)       -- jest.mock('./OIDCService', () => ({
+./src/script/E2EIdentity/E2EIdentity.test.ts:81:58     - Unknown word (johndoe)    -- Doe', username: () => 'johndoe'};
+./src/script/E2EIdentity/E2EIdentity.ts:119:47    - Unknown word (oidc)       -- url in the persistent oidc service store, since
+./src/script/E2EIdentity/E2EIdentity.ts:149:37    - Unknown word (dont)       -- data is false or we dont get the ACMEChallenge
+./src/script/E2EIdentity/OIDCService/OIDCService.ts:36:11     - Unknown word (dexio)      -- const dexioConfig: UserManagerSettings
+./src/script/E2EIdentity/OIDCService/index.ts:31:29     - Unknown word (ktbh)       -- audience: '338888153072-ktbh66pv3mr0ua0dn64sphgimeo
+./src/script/E2EIdentity/OIDCService/index.ts:31:48     - Unknown word (sphgimeo)   -- -ktbh66pv3mr0ua0dn64sphgimeo0p7ss.apps.googleusercontent
+./src/script/E2EIdentity/OIDCService/index.ts:31:67     - Unknown word (googleusercontent) -- 4sphgimeo0p7ss.apps.googleusercontent.com',
+./src/script/E2EIdentity/OIDCService/index.ts:34:20     - Unknown word (GOCSPX)            -- clientSecret: 'GOCSPX-b6bATIbo06n6_RdfoHRrd
+./src/script/E2EIdentity/OIDCService/index.ts:34:40     - Unknown word (Rdfo)              -- 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',
 ./src/script/assets/AssetRepository.ts:180:59    - Unknown word (DECRPYT)    -- TransferState.DOWNLOAD_FAILED_DECRPYT);
 ./src/script/auth/component/AccountForm.tsx:254:9     - Unknown word (aligncenter) -- aligncenter
 ./src/script/auth/component/ClientList.tsx:74:15     - Unknown word (Acode)      -- const SFAcode = (await getLocalStorage
@@ -57,6 +67,7 @@ Lines:
 ./src/script/calling/CallingRepository.test.ts:607:28    - Unknown word (reqh)         -- requestConfig, // `cfg_reqh`,
 ./src/script/calling/CallingRepository.test.ts:608:28    - Unknown word (acbrh)        -- => {}) as any, // `acbrh`,
 ./src/script/calling/CallingRepository.test.ts:609:19    - Unknown word (vstateh)      -- () => {}, // `vstateh`,
+./src/script/calling/CallingRepository.test.ts:74:5      - Unknown word (screeninput) -- screeninput: ko.pureComputed(()
 ./src/script/calling/CallingRepository.ts:1170:47   - Unknown word (Recepients)      -- rtParticipantsToCallingMessageRecepients = (participants: Participant
 ./src/script/calling/CallingRepository.ts:120:18    - Unknown word (Subconversation) -- export interface SubconversationEpochInfoMember {
 ./src/script/calling/CallingRepository.ts:123:6     - Unknown word (subconv)         -- in_subconv: boolean;
@@ -65,7 +76,7 @@ Lines:
 ./src/script/calling/CallingRepository.ts:44:3      - Unknown word (VSTREAMS)   -- VSTREAMS,
 ./src/script/calling/CallingRepository.ts:886:5     - Unknown word (subconversation) -- subconversationData: SubconversationData
 ./src/script/calling/CallingRepository.ts:892:7     - Unknown word (convid)          -- convid: serializedConversationId
-./src/script/client/ClientRepository.test.ts:168:38    - Unknown word (Respy)      -- as any).getEnv().allowRespy(true);
+./src/script/client/ClientRepository.test.ts:169:38    - Unknown word (Respy)      -- as any).getEnv().allowRespy(true);
 ./src/script/components/AppContainer/hooks/useTheme.test.ts:31:75     - Unknown word (bodyclass)  -- body classes', (theme, bodyclass) => {
 ./src/script/components/DragableClickWrapper.tsx:24:11     - Unknown word (Dragable)   -- interface DragableClickWrapperProps {
 ./src/script/components/DropFileArea/DropFileArea.test.tsx:28:22     - Unknown word (chucknorris) -- const pngFileName = 'chucknorris.png';
@@ -75,15 +86,7 @@ Lines:
 ./src/script/components/Giphy/Giphy.test.tsx:28:27     - Unknown word (yammy)      -- inputValue = 'Yammy yammy';
 ./src/script/components/Giphy/Giphy.test.tsx:55:10     - Unknown word (giphys)     -- it('no giphys found', async () =>
 ./src/script/components/Giphy/Giphy.tsx:190:40    - Unknown word (giphs)      -- data-uie-name="do-open-giphs"
-./src/script/components/InputBar/InputBar.test.tsx:192:23    - Unknown word (rzemvs)     -- const userName = 'rzemvs';
-./src/script/components/InputBar/InputBar.tsx:551:58    - Unknown word (proccess)   -- text to after of the proccess
 ./src/script/components/InputBar/components/InputBarControls/ControlButtons.test.tsx:48:14     - Unknown word (Filesharing) -- [{disableFilesharing: true}, ['tooltipConversation
-./src/script/components/InputBar/components/MentionSuggestions/MentionSuggestions.test.tsx:29:29     - Unknown word (patryktest) -- first = generateUser('patryktest1', 'patryktest1');
-./src/script/components/InputBar/components/MentionSuggestions/MentionSuggestions.test.tsx:31:29     - Unknown word (patrykjozwik) -- third = generateUser('patrykjozwik', 'Patryk Jozwik');
-./src/script/components/InputBar/components/MentionSuggestions/MentionSuggestions.test.tsx:31:45     - Unknown word (Patryk)       -- generateUser('patrykjozwik', 'Patryk Jozwik');
-./src/script/components/InputBar/components/MentionSuggestions/MentionSuggestions.test.tsx:31:52     - Unknown word (Jozwik)       -- patrykjozwik', 'Patryk Jozwik');
-./src/script/components/InputBar/components/MentionSuggestions/MentionSuggestions.test.tsx:32:30     - Unknown word (patrykarjita) -- fourth = generateUser('patrykarjita', 'Patryk Arjita');
-./src/script/components/InputBar/components/MentionSuggestions/MentionSuggestions.test.tsx:32:53     - Unknown word (Arjita)       -- patrykarjita', 'Patryk Arjita');
 ./src/script/components/InputBar/components/TypingIndicator/TypingIndicator.styles.ts:71:18     - Unknown word (Frams)      -- const editIconKeyFrams = keyframes({
 ./src/script/components/MessagesList/Message/ContentMessage/MessageActions/MessageReactions/EmojiPicker.tsx:110:58    - Unknown word (naviage)    -- up/down arrow key to naviage between messages in
 ./src/script/components/MessagesList/Message/ContentMessage/MessageActions/MessageReactions/MessageReactions.tsx:64:69     - Unknown word (THUMBSUP)   -- == MessageActionsId.THUMBSUP;
@@ -94,41 +97,48 @@ Lines:
 ./src/script/components/MessagesList/Message/ContentMessage/asset/TextMessageRenderer/TextMessageRenderer.test.tsx:41:54     - Unknown word (buttton)    -- message-mention" role="buttton" data-uie-name="label
 ./src/script/components/MessagesList/Message/ContentMessage/asset/TextMessageRenderer/TextMessageRenderer.tsx:144:11    - Unknown word (clickabled) -- //clickabled elements directly.
 ./src/script/components/MessagesList/Message/FailedToAddUsersMessage.test.tsx:107:45    - Unknown word (Przemek)    -- createUser(qualifiedId3, 'Przemek');
+./src/script/components/MessagesList/Message/FailedToAddUsersMessage.test.tsx:147:45    - Unknown word (Arjita)     -- createUser(qualifiedId2, 'Arjita');
 ./src/script/components/MessagesList/Message/FailedToAddUsersMessage.test.tsx:81:45     - Unknown word (Virgile)    -- createUser(qualifiedId1, 'Virgile');
 ./src/script/components/MessagesList/Message/FailedToAddUsersMessage.test.tsx:82:45     - Unknown word (Bardia)     -- createUser(qualifiedId2, 'Bardia');
+./src/script/components/MessagesList/Message/FailedToAddUsersMessage.test.tsx:83:45     - Unknown word (Patryk)     -- createUser(qualifiedId3, 'Patryk');
 ./src/script/components/MessagesList/Message/ReadReceiptStatus.test.tsx:54:30     - Unknown word (noone)      -- shows "delivered" when noone read the message',
 ./src/script/components/MessagesList/Message/SystemMessage/SystemMessage.test.tsx:31:35     - Unknown word (editicon)   -- span data-uie-name="editicon" className="editicon
 ./src/script/components/MessagesList/Message/SystemMessage/SystemMessage.test.tsx:34:35     - Unknown word (readicon)   -- span data-uie-name="readicon" className="readicon
 ./src/script/components/MessagesList/Message/SystemMessage/SystemMessage.test.tsx:37:35     - Unknown word (timericon)  -- span data-uie-name="timericon" className="timericon
 ./src/script/components/MessagesList/Message/index.tsx:170:54    - Unknown word (mesages)    -- for non content type mesages
-./src/script/components/MessagesList/MessageList.tsx:56:18     - Unknown word (convesation) -- invitePeople: (convesation: Conversation) => void
-./src/script/components/MessagesList/MessageList.tsx:90:16     - Unknown word (Dont)        -- // Dont show duplicated group
+./src/script/components/MessagesList/MessageList.tsx:54:18     - Unknown word (convesation) -- invitePeople: (convesation: Conversation) => void
 ./src/script/components/Modals/InviteModal/InviteModal.test.tsx:32:21     - Unknown word (janek)      -- const userName = 'janek';
-./src/script/components/Modals/PrimaryModal/PrimaryModal.tsx:205:41    - Unknown word (pswd)       -- label htmlFor="modal_pswd" className="visually
+./src/script/components/Modals/PrimaryModal/PrimaryModal.tsx:206:41    - Unknown word (pswd)       -- label htmlFor="modal_pswd" className="visually
 ./src/script/components/Modals/PrimaryModal/PrimaryModalState.ts:46:42     - Unknown word (Moda)       -- rentModalContent: (nextCurrentModaContent: ModalContent
 ./src/script/components/ParticipantItemContent/ParticipantItemContent.tsx:86:26     - Unknown word (subline)    -- className="subline"
+./src/script/components/RichTextEditor/plugins/EmojiPickerPlugin/EmojiPickerPlugin.tsx:226:23    - Unknown word (typeahead)   -- <div className="typeahead-popover emoji-menu"
+./src/script/components/RichTextEditor/plugins/EmojiPickerPlugin/EmojiPickerPlugin.tsx:24:10     - Unknown word (Typeahead)  -- LexicalTypeaheadMenuPlugin,
+./src/script/components/RichTextEditor/plugins/EmojiPickerPlugin/EmojiPickerPlugin.tsx:30:145    - Unknown word (typechecked) -- import it but since it's typechecked, we will be warned if
+./src/script/components/RichTextEditor/plugins/EmojiPickerPlugin/EmojiPickerPlugin.tsx:99:7      - Unknown word (emojies)     -- const emojies: {n: string[]; u: string
+./src/script/components/RichTextEditor/plugins/InlineEmojiReplacementPlugin/inlineReplacements.ts:199:22    - Unknown word (haha)       -- tags: ['happy', 'haha'],
+./src/script/components/RichTextEditor/plugins/ReverseTypeaheadMenuPlugin.tsx:24:56     - Unknown word (instanciated) -- when the component is instanciated (the last one by default
+./src/script/components/RichTextEditor/plugins/ReverseTypeaheadMenuPlugin.tsx:319:28    - Unknown word (TYPEAHEAD)    -- createCommand('SCROLL_TYPEAHEAD_OPTION_INTO_VIEW_COMMAND
 ./src/script/components/TitleBar/TitleBar.tsx:381:11    - Unknown word (Identifer)  -- }): StringIdentifer {
 ./src/script/components/calling/CallParticipantsListItem/CallParticipantItemContent/CallParticipantItemContent.tsx:87:30     - Unknown word (UNFOCUSABLE) -- tabIndex={TabIndex.UNFOCUSABLE}
 ./src/script/components/calling/CallParticipantsListItem/CallParticipantsListItem.test.tsx:152:54    - Unknown word (unestablishd) -- text if user is in unestablishd audio state', () =>
 ./src/script/components/calling/FullscreenVideoCall.styles.ts:37:52     - Unknown word (inversed)   -- accent-color-highlight-inversed);
-./src/script/components/calling/FullscreenVideoCall.tsx:428:36    - Unknown word (screnn)     -- aria-labelledby="screnn-share-label"
+./src/script/components/calling/FullscreenVideoCall.tsx:432:36    - Unknown word (screnn)     -- aria-labelledby="screnn-share-label"
 ./src/script/components/calling/GroupVideoGrid.test.tsx:49:28     - Unknown word (Anot)       -- participant.user.name('Anot Heruser');
 ./src/script/components/calling/GroupVideoGrid.test.tsx:49:33     - Unknown word (Heruser)    -- participant.user.name('Anot Heruser');
 ./src/script/components/calling/GroupVideoGrid.tsx:143:76    - Unknown word (xsmall)     -- fontSize: 'var(--font-size-xsmall)', fontWeight: 500}
 ./src/script/components/panel/ConversationProtocolDetails/ConversationProtocolDetails.test.tsx:29:20     - Unknown word (Ciphersuite) -- cipherSuite: Ciphersuite.MLS_128_DHKEMP256_AES
 ./src/script/components/panel/ConversationProtocolDetails/ConversationProtocolDetails.test.tsx:29:40     - Unknown word (DHKEMP)      -- Ciphersuite.MLS_128_DHKEMP256_AES128GCM_SHA256
 ./src/script/conversation/ConversationAccessPermission.ts:138:53    - Unknown word (sigfigs)    -- feature with the correct sigfigs
-./src/script/conversation/ConversationFilter.test.ts:64:16     - Unknown word (Florian)    -- name: 'Florian@Staging11',
+./src/script/conversation/ConversationFilter.test.ts:65:16     - Unknown word (Florian)    -- name: 'Florian@Staging11',
 ./src/script/conversation/ConversationLabelRepository.ts:84:88     - Unknown word (favorited)  -- type: 'conversation-favorited'}> {
 ./src/script/conversation/ConversationMapper.test.ts:58:25     - Unknown word (Emtpy)      -- const functionCallEmtpyArray = () => ConversationMapp
-./src/script/conversation/ConversationRepository.test.ts:278:34    - Unknown word (Gregor)     -- b.name('René, Benny, Gregor, Lipis');
-./src/script/conversation/ConversationRepository.test.ts:278:42    - Unknown word (Lipis)      -- René, Benny, Gregor, Lipis');
-./src/script/conversation/ConversationRepository.test.ts:584:42    - Unknown word (msdownload) -- type: 'application/x-msdownload',
-./src/script/conversation/ConversationRepository.ts:194:46    - Unknown word (agains)     -- client mismatch handler agains the message repository
-./src/script/conversation/ConversationRepository.ts:613:75    - Unknown word (metat)      -- users & conversations metat data`, error);
+./src/script/conversation/ConversationRepository.test.ts:283:34    - Unknown word (Gregor)     -- b.name('René, Benny, Gregor, Lipis');
+./src/script/conversation/ConversationRepository.test.ts:283:42    - Unknown word (Lipis)      -- René, Benny, Gregor, Lipis');
+./src/script/conversation/ConversationRepository.test.ts:589:42    - Unknown word (msdownload) -- type: 'application/x-msdownload',
+./src/script/conversation/ConversationRepository.ts:191:46    - Unknown word (agains)     -- client mismatch handler agains the message repository
+./src/script/conversation/ConversationRepository.ts:527:75    - Unknown word (metat)      -- users & conversations metat data`, error);
 ./src/script/conversation/ConversationService.ts:414:32    - Unknown word (corecrypto) -- MLS conversation in corecrypto and deletes the conversation
 ./src/script/conversation/ConversationState.test.ts:37:29     - Unknown word (groupid)    -- conversation.groupId = `groupid-${randomUUID()}`;
-./src/script/conversation/MessageRepository.test.ts:276:27    - Unknown word (haha)       -- user1: 'like,love,haha',
 ./src/script/conversation/MessageRepository.test.ts:53:28     - Unknown word (selfid)     -- selfUser = new User('selfid', '');
 ./src/script/conversation/MessageRepository.ts:347:24    - Unknown word (explicitely) -- // We set the id explicitely in order to be able
 ./src/script/conversation/MessageRepository.ts:479:34    - Unknown word (messsage)    -- originalId Id of the messsage currently in db, necessary
@@ -137,13 +147,20 @@ Lines:
 ./src/script/entity/Conversation.test.ts:155:40    - Unknown word (exisiting)  -- add message with an exisiting id', () => {
 ./src/script/entity/Conversation.test.ts:496:29    - Unknown word (Delson)     -- third_user.name('Brad Delson');
 ./src/script/entity/Conversation.test.ts:685:60    - Unknown word (otherdomain) -- Conversation(createUuid(), 'otherdomain.test');
-./src/script/event/EventRepository.ts:141:26    - Unknown word (Connectivitity) -- private readonly updateConnectivitityStatus = (state: ConnectionSta
+./src/script/event/EventRepository.ts:147:26    - Unknown word (Connectivitity) -- private readonly updateConnectivitityStatus = (state: ConnectionSta
+./src/script/event/preprocessor/QuotedMessageMiddleware.test.ts:54:68     - Unknown word (salut)      -- dMessageAdd(conversation, 0, 'salut');
+./src/script/event/preprocessor/ReceiptsMiddleware.test.ts:63:13     - Unknown word (originale)  -- const originaleEvent = {from: createUuid
 ./src/script/extension/GiphyRepository.test.ts:43:14     - Unknown word (Ficoab)     -- id: 'GKLmFicoabZrW',
 ./src/script/externalRoute.ts:70:11     - Unknown word (helpcenter) -- const helpcenterUrl = `${URL.SUPPORT
 ./src/script/hooks/useRelativeTimestamp.tsx:67:10     - Unknown word (timeago)    -- const [timeago, setTimeago] = useState
 ./src/script/hooks/useRelativeTimestamp.tsx:67:22     - Unknown word (Timeago)    -- const [timeago, setTimeago] = useState<string>
 ./src/script/hooks/useSingleInstance.test.ts:32:30     - Unknown word (Intance)    -- result: {current: firstIntance},
-./src/script/main/app.ts:464:28    - Unknown word (initialise) -- await selfRepository.initialisePeriodicSelfSupportedProtocols
+./src/script/main/app.ts:465:28    - Unknown word (initialise) -- await selfRepository.initialisePeriodicSelfSupportedProtocols
+./src/script/media/MediaDevicesHandler.test.ts:219:41    - Unknown word (newcamera)       -- newCameras = [{deviceId: 'newcamera', kind: MediaDeviceType
+./src/script/media/MediaDevicesHandler.test.ts:267:53    - Unknown word (inexistant)      -- currentDeviceId.audiooutput('inexistant-id');
+./src/script/media/MediaDevicesHandler.test.ts:29:27     - Unknown word (Realtek)    -- Laptop microphone (Realtek High Definition Audio
+./src/script/media/MediaDevicesHandler.test.ts:63:17     - Unknown word (Microphonearray) -- label: 'Microphonearray (Realtek High Definition
+./src/script/media/MediaDevicesHandler.ts:89:9      - Unknown word (windowinput) -- windowinput: 'window',
 ./src/script/media/MediaEmbeds.test.ts:162:31    - Unknown word (nocookie)   -- const link = 'youtube-nocookie.com';
 ./src/script/media/MediaEmbeds.test.ts:45:92     - Unknown word (nofollow)   -- target="_blank" rel="nofollow">${link}</a>`;
 ./src/script/media/MediaEmbeds.test.ts:544:60    - Unknown word (Wroxrr)     -- 867741/playlist/2w63WroxrrIbNg4WIxdoBn';
@@ -155,12 +172,13 @@ Lines:
 ./src/script/mls/MLSMigration/migrationStatus.ts:33:19     - Unknown word (Finalise)   -- const hasMigrationFinaliseRegardlessAfterDateArrived
 ./src/script/mls/MLSMigration/migrationStatus.ts:38:9      - Unknown word (finalise)   -- const finaliseDateISO = mlsMigrationFeature
 ./src/script/mls/MLSMigration/migrationStatus.ts:64:31     - Unknown word (FINALISED)  -- return MLSMigrationStatus.FINALISED;
-./src/script/page/LeftSidebar/panels/StartUI/PeopleTab.tsx:182:66    - Unknown word (searchng)   -- just ignore it when searchng for the user locally
-./src/script/page/MainContent/panels/Collection/Collection.tsx:109:39    - Unknown word (converation) -- message from a different converation, nothing to do
+./src/script/page/LeftSidebar/panels/StartUI/PeopleTab.tsx:188:66    - Unknown word (searchng)   -- just ignore it when searchng for the user locally
+./src/script/page/MainContent/panels/Collection/Collection.tsx:108:39    - Unknown word (converation) -- message from a different converation, nothing to do
 ./src/script/page/RightSidebar/MessageDetails/MessageDetails.test.tsx:72:27     - Unknown word (Kowalski)   -- const userName = 'Jan Kowalski';
 ./src/script/page/RightSidebar/Notifications/Notifications.test.tsx:61:41     - Unknown word (ative)      -- correct new value on the ative conversation', () =
 ./src/script/page/RightSidebar/PanelHeader/PanelHeader.tsx:70:77     - Unknown word (libray)     -- transition group animation libray
 ./src/script/page/RootProvider.tsx:38:44     - Unknown word (initialised) -- MainViewModel was not initialised');
+./src/script/page/components/FeatureConfigChange/FeatureConfigChangeHandler/Features/E2EIdentity.ts:31:17     - Unknown word (MLSE)       -- if (!isFeatureMLSE2EI(e2eiConfig) && !isFeatureM
 ./src/script/search/SearchRepository.ts:110:51    - Unknown word (bardia)     -- Bardia and username of bardia_wire this mapping
 ./src/script/self/SelfSupportedProtocols/SelfSupportedProtocols.ts:37:39     - Unknown word (finalised)  -- migration is enabled but not finalised
 ./src/script/service/CoreSingleton.ts:60:13     - Unknown word (Crypo)      -- coreCrypoWasmFilePath: '/min/core
@@ -169,19 +187,19 @@ Lines:
 ./src/script/team/TeamService.ts:73:80     - Unknown word (webapps)    -- to ensure that modern webapps work with legacy backends
 ./src/script/ui/ContextMenu.tsx:115:90    - Unknown word (trigerer)   -- the menu and focus the trigerer
 ./src/script/ui/ContextMenu.tsx:97:54     - Unknown word (begings)    -- such as 10 seconds etc begings with digit which is
-./src/script/user/AvailabilityModal.ts:38:20     - Unknown word (dont)       -- action: (dontShowAgain?: boolean)
+./src/script/user/AvailabilityModal.ts:47:39     - Unknown word (Dont)       -- t('modalAvailabilityDontShowAgain'),
 ./src/script/util/ArrayUtil.ts:37:54     - Unknown word (referencial) -- matching function in case referencial equality is not enough
 ./src/script/util/BackupUtil.ts:24:9      - Unknown word (encrpted)   -- const encrptedFileFormat = new TextEncoder
 ./src/script/util/ComponentUtil.ts:44:97     - Unknown word (everytime)  -- the onUpdate callback everytime one observable updates
 ./src/script/util/ComponentUtil.ts:46:29     - Unknown word (containinig) -- param object The object containinig some observable properties
 ./src/script/util/DataDog.ts:52:12     - Unknown word (datadoghq)  -- site: 'datadoghq.eu',
 ./src/script/util/DebugUtil.ts:105:5     - Unknown word (keyboardjs) -- keyboardjs.bind('command+shift
-./src/script/util/EmojiUtil.ts:46:7      - Unknown word (emojies)    -- const emojiesFlatten = Object.values
 ./src/script/util/Entropy.test.ts:170:29    - Unknown word (inputdata)   -- makes sense with with inputdata being a simple linear
 ./src/script/util/Entropy.test.ts:22:7      - Unknown word (seedrandom) -- const seedrandom = require('seedrandom
 ./src/script/util/Entropy.test.ts:235:11    - Unknown word (randomdata)  -- const randomdata = new Uint8Array([.
 ./src/script/util/Entropy.test.ts:98:21     - Unknown word (dimensonial) -- 'Calculate %d-dimensonial entropy on: %s',
 ./src/script/util/Entropy.ts:44:83     - Unknown word (multipe)    -- differences on, containing a multipe of `n` elements
+./src/script/util/LocalizerUtil/ReactLocalizerUtil.ts:33:21     - Unknown word (occurences) -- * Will replace all occurences of `replacements` by
 ./src/script/util/SanitizationUtil.test.ts:38:39     - Unknown word (Unsanitzed) -- name(`<script>alert('Unsanitzed');</script>`);
 ./src/script/util/localStorage.ts:21:41     - Unknown word (localstorage) -- browser's instance of localstorage if present.
 ./src/script/util/messageRenderer.test.ts:118:58    - Unknown word (ohoh)       -- quot;javascript:alert('ohoh!')&quot;&gt;what?&lt
@@ -193,7 +211,6 @@ Lines:
 ./src/script/util/messageRenderer.test.ts:292:7     - Unknown word (conversts)   -- it('conversts unicode links to punycode
 ./src/script/util/messageRenderer.test.ts:302:15    - Unknown word (confusables) -- it('unicode confusables generate a code', (
 ./src/script/util/messageRenderer.test.ts:330:39    - Unknown word (bien)        -- bonjour @felix, tu vas bien @felix?',
-./src/script/util/messageRenderer.test.ts:334:12    - Unknown word (salut)       -- 'salut <span class="message
 ./src/script/util/messageRenderer.test.ts:516:29    - Unknown word (redcarpet)   -- '```ruby\nrequire \'redcarpet\'\nmarkdown = Redcarpet
 ./src/script/util/messageRenderer.test.ts:516:53    - Unknown word (Redcarpet)   -- redcarpet\'\nmarkdown = Redcarpet.new("Hello World!")
 ./src/script/util/messageRenderer.test.ts:572:102   - Unknown word (anotherlink) -- www.link.com and www.anotherlink.net.'),

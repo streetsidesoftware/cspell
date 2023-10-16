@@ -3,25 +3,27 @@ Repository: mdx-js/mdx
 Url: https://github.com/mdx-js/mdx
 Args: '["--config=${repoConfig}/cspell.json","**/*.*"]'
 Summary:
-  files: 146
-  filesWithIssues: 84
-  issues: 1114
+  files: 144
+  filesWithIssues: 86
+  issues: 1131
   errors: 0
 Errors: []
 
 issues:
   - "docs/_asset/editor.jsx:4:23         wooorm          U       @typedef {import('@wooorm/starry-night').Grammar"
   - "docs/_asset/editor.jsx:7:32         Pluggable       U       typedef {import('unified').PluggableList} PluggableList"
-  - "docs/_asset/editor.jsx:33:23        Estree          U       import {visit as visitEstree} from 'estree-util-visit"
-  - "docs/_asset/editor.jsx:33:37        estree          U       as visitEstree} from 'estree-util-visit'"
-  - "docs/_asset/editor.jsx:37:24        jsxs            U       import {Fragment, jsx, jsxs} from 'react/jsx-runtime"
-  - "docs/_asset/editor.jsx:40:8         rehype          U       import rehypeRaw from 'rehype-raw"
-  - "docs/_asset/editor.jsx:42:14        Frontmatter     U       import remarkFrontmatter from 'remark-frontmatter"
-  - "docs/_asset/editor.jsx:42:39        frontmatter     U       emarkFrontmatter from 'remark-frontmatter'"
-  - "docs/_asset/editor.jsx:47:22        vfile           U       import {VFile} from 'vfile'"
-  - "docs/_asset/editor.jsx:137:15       recma           U       const recmaPlugins = []"
-  - "docs/_asset/editor.jsx:154:25       mdast           U       if (output === 'mdast') remarkPlugins.push"
-  - "docs/_asset/editor.jsx:156:25       esast           U       if (output === 'esast') recmaPlugins.push"
+  - "docs/_asset/editor.jsx:8:22         estree          U       * @typedef {import('estree').Program} Program"
+  - "docs/_asset/editor.jsx:9:37         Estree          U       import('estree').Node} EstreeNode"
+  - "docs/_asset/editor.jsx:12:22        mdast           U       * @typedef {import('mdast').Root} MdastRoot"
+  - "docs/_asset/editor.jsx:12:36        Mdast           U       import('mdast').Root} MdastRoot"
+  - "docs/_asset/editor.jsx:46:24        jsxs            U       import {Fragment, jsx, jsxs} from 'react/jsx-runtime"
+  - "docs/_asset/editor.jsx:49:8         rehype          U       import rehypeRaw from 'rehype-raw"
+  - "docs/_asset/editor.jsx:51:14        Frontmatter     U       import remarkFrontmatter from 'remark-frontmatter"
+  - "docs/_asset/editor.jsx:51:39        frontmatter     U       emarkFrontmatter from 'remark-frontmatter'"
+  - "docs/_asset/editor.jsx:56:22        vfile           U       import {VFile} from 'vfile'"
+  - "docs/_asset/editor.jsx:150:15       recma           U       const recmaPlugins = []"
+  - "docs/_asset/editor.jsx:167:23       esast           U       if (show === 'esast') recmaPlugins.push"
+  - "docs/_asset/editor.jsx:167:57       Esast           U       recmaPlugins.push([captureEsast])"
   - "docs/_asset/index.css:2:37          blinkmacsystemfont      U       system-ui, -apple-system, blinkmacsystemfont, 'Segoe UI', helvetica"
   - "docs/_asset/index.css:5:26          Bitstream               U       DejaVu Sans Mono', 'Bitstream Vera Sans Mono', monospace"
   - "docs/_asset/index.css:288:21        squircle                U       mask-image: paint(squircle);"
@@ -31,7 +33,6 @@ issues:
   - "docs/_asset/index.css:853:15        thecomponent            U       #markdown-for-thecomponent-era {"
   - "docs/_asset/index.js:4:29           devlop          U       ok as assert} from 'devlop'"
   - "docs/_asset/index.js:26:11          currentcolor    U       fill=\"currentcolor\""
-  - "docs/_component/blog.jsx:3:28           hyperscript     U       {toH} from 'hast-to-hyperscript'"
   - "docs/_component/icon/open-collective.jsx:8:28           opencollective      U       className=\"icon icon-opencollective\""
   - "docs/_config.js:30:14       retext          U       '/advanced/retext-plugins/index.html'"
   - "docs/_config.js:32:51       evaluatefile    U       html': '/packages/mdx/#evaluatefile-options',"
@@ -264,8 +265,8 @@ issues:
   - "docs/migrating/v2.mdx:336:43        remarkplugins           U       remarkPlugins`][mdx-options-remarkplugins]"
   - "docs/migrating/v2.mdx:657:40        codemods                U       we’re able to create codemods from now on."
   - "docs/migrating/v2.mdx:692:44        optionsrecmaplugins     U       recmaplugins]: /packages/mdx/#optionsrecmaplugins"
-  - "packages/esbuild/lib/index.js:25:9          extnames        U       import {extnamesToRegex} from '@mdx-js"
-  - "packages/esbuild/lib/index.js:73:62         onloadremote    U       namespace: remoteNamespace}, onloadremote)"
+  - "packages/esbuild/lib/index.js:26:9          extnames        U       import {extnamesToRegex} from '@mdx-js"
+  - "packages/esbuild/lib/index.js:74:62         onloadremote    U       namespace: remoteNamespace}, onloadremote)"
   - "packages/esbuild/test/index.js:238:44       mdxjs       U       assert.equal(esm?.type, 'mdxjsEsm')"
   - "packages/loader/lib/index.js:87:13          fpath       U       const fpath = path.relative(this"
   - "packages/mdx/lib/core.js:2:53           Rehype      U       rehype').Options} RemarkRehypeOptions"
@@ -283,8 +284,8 @@ issues:
   - "packages/mdx/readme.md:1023:3       rehypejs            U       [`rehypejs/rehype-highlight`][rehype"
   - "packages/mdx/test/compile.js:1299:42        setext          U       should support headings (setext) (`=` -> `<h1>`)', async"
   - "packages/mdx/test/compile.js:1365:101       describedby     U       footnote-ref=\"true\" aria-describedby=\"footnote-label\">1<"
-  - "packages/mdx/test/compile.js:1881:21        rexporting      U       'should support rexporting something as a default"
-  - "packages/register/lib/index.cjs:4:7         deasync     U       const deasync = require('deasync'"
+  - "packages/mdx/test/compile.js:1884:21        rexporting      U       'should support rexporting something as a default"
+  - "packages/register/lib/index.cjs:17:7        deasync     U       const deasync = require('deasync'"
   - "packages/remark-mdx/index.js:3:59           Micromark       U       extension-mdxjs').Options} MicromarkOptions"
   - "packages/remark-mdx/readme.md:121:22        autolinks       U       — Turn off HTML, autolinks, and indented code"
   - "packages/remark-mdx/test/index.js:334:15        onvisit     U       visit(tree, onvisit)"
@@ -303,7 +304,7 @@ issues:
   - "packages/rollup/test/index.js:37:115        EAAAD       U       QAAA,EAAA,CAAA,SAAA,EAAAD,GAAA,CAAA,OAAA,EAAA"
   - "packages/rollup/test/index.js:37:131        OAAA        U       SAAA,EAAAD,GAAA,CAAA,OAAA,EAAA,EAAA,CAAA,CAAA"
   - "renovate.json5:7:67         Vercel      U       . Our website is on Vercel/AWS which don’t support"
-  - "website/generate.js:16:24       xast            U       import {sitemap} from 'xast-util-sitemap'"
-  - "website/generate.js:18:18       hastscript      U       import {h} from 'hastscript'"
-  - "website/mdx-config.js:16:14         Gemoji      U       import remarkGemoji from 'remark-gemoji"
-  - "website/mdx-config.js:16:34         gemoji      U       remarkGemoji from 'remark-gemoji'"
+  - "website/generate.js:35:24       xast            U       import {sitemap} from 'xast-util-sitemap'"
+  - "website/generate.js:37:18       hastscript      U       import {h} from 'hastscript'"
+  - "website/mdx-config.js:25:14         Gemoji      U       import remarkGemoji from 'remark-gemoji"
+  - "website/mdx-config.js:25:34         gemoji      U       remarkGemoji from 'remark-gemoji'"
