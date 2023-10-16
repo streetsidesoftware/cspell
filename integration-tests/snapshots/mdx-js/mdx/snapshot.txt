@@ -3,20 +3,22 @@ Repository: mdx-js/mdx
 Url: "https://github.com/mdx-js/mdx"
 Args: ["--config=../../../../config/repositories/mdx-js/mdx/cspell.json","**/*.*"]
 Lines:
- CSpell: Files checked: 146, Issues found: 1114 in 84 files
+ CSpell: Files checked: 144, Issues found: 1131 in 86 files
  exit code: 1
-./docs/_asset/editor.jsx:137:15    - Unknown word (recma)       -- const recmaPlugins = []
-./docs/_asset/editor.jsx:154:25    - Unknown word (mdast)       -- if (output === 'mdast') remarkPlugins.push
-./docs/_asset/editor.jsx:156:25    - Unknown word (esast)       -- if (output === 'esast') recmaPlugins.push
-./docs/_asset/editor.jsx:33:23     - Unknown word (Estree)     -- import {visit as visitEstree} from 'estree-util-visit
-./docs/_asset/editor.jsx:33:37     - Unknown word (estree)     -- as visitEstree} from 'estree-util-visit'
-./docs/_asset/editor.jsx:37:24     - Unknown word (jsxs)       -- import {Fragment, jsx, jsxs} from 'react/jsx-runtime
-./docs/_asset/editor.jsx:40:8      - Unknown word (rehype)     -- import rehypeRaw from 'rehype-raw
-./docs/_asset/editor.jsx:42:14     - Unknown word (Frontmatter) -- import remarkFrontmatter from 'remark-frontmatter
-./docs/_asset/editor.jsx:42:39     - Unknown word (frontmatter) -- emarkFrontmatter from 'remark-frontmatter'
-./docs/_asset/editor.jsx:47:22     - Unknown word (vfile)       -- import {VFile} from 'vfile'
+./docs/_asset/editor.jsx:12:22     - Unknown word (mdast)      -- * @typedef {import('mdast').Root} MdastRoot
+./docs/_asset/editor.jsx:12:36     - Unknown word (Mdast)      -- import('mdast').Root} MdastRoot
+./docs/_asset/editor.jsx:150:15    - Unknown word (recma)       -- const recmaPlugins = []
+./docs/_asset/editor.jsx:167:23    - Unknown word (esast)       -- if (show === 'esast') recmaPlugins.push
+./docs/_asset/editor.jsx:167:57    - Unknown word (Esast)       -- recmaPlugins.push([captureEsast])
+./docs/_asset/editor.jsx:46:24     - Unknown word (jsxs)       -- import {Fragment, jsx, jsxs} from 'react/jsx-runtime
+./docs/_asset/editor.jsx:49:8      - Unknown word (rehype)     -- import rehypeRaw from 'rehype-raw
 ./docs/_asset/editor.jsx:4:23      - Unknown word (wooorm)     -- @typedef {import('@wooorm/starry-night').Grammar
+./docs/_asset/editor.jsx:51:14     - Unknown word (Frontmatter) -- import remarkFrontmatter from 'remark-frontmatter
+./docs/_asset/editor.jsx:51:39     - Unknown word (frontmatter) -- emarkFrontmatter from 'remark-frontmatter'
+./docs/_asset/editor.jsx:56:22     - Unknown word (vfile)       -- import {VFile} from 'vfile'
 ./docs/_asset/editor.jsx:7:32      - Unknown word (Pluggable)  -- typedef {import('unified').PluggableList} PluggableList
+./docs/_asset/editor.jsx:8:22      - Unknown word (estree)     -- * @typedef {import('estree').Program} Program
+./docs/_asset/editor.jsx:9:37      - Unknown word (Estree)     -- import('estree').Node} EstreeNode
 ./docs/_asset/index.css:288:21    - Unknown word (squircle)           -- mask-image: paint(squircle);
 ./docs/_asset/index.css:2:37      - Unknown word (blinkmacsystemfont) -- system-ui, -apple-system, blinkmacsystemfont, 'Segoe UI', helvetica
 ./docs/_asset/index.css:300:2     - Unknown word (hljs)               -- .hljs,
@@ -26,7 +28,6 @@ Lines:
 ./docs/_asset/index.css:853:15    - Unknown word (thecomponent)       -- #markdown-for-thecomponent-era {
 ./docs/_asset/index.js:26:11     - Unknown word (currentcolor) -- fill="currentcolor"
 ./docs/_asset/index.js:4:29      - Unknown word (devlop)     -- ok as assert} from 'devlop'
-./docs/_component/blog.jsx:3:28      - Unknown word (hyperscript) -- {toH} from 'hast-to-hyperscript'
 ./docs/_component/icon/open-collective.jsx:8:28      - Unknown word (opencollective) -- className="icon icon-opencollective"
 ./docs/_config.js:30:14     - Unknown word (retext)     -- '/advanced/retext-plugins/index.html'
 ./docs/_config.js:32:51     - Unknown word (evaluatefile) -- html': '/packages/mdx/#evaluatefile-options',
@@ -259,8 +260,8 @@ Lines:
 ./docs/migrating/v2.mdx:336:43    - Unknown word (remarkplugins)        -- remarkPlugins`][mdx-options-remarkplugins]
 ./docs/migrating/v2.mdx:657:40    - Unknown word (codemods)             -- we’re able to create codemods from now on.
 ./docs/migrating/v2.mdx:692:44    - Unknown word (optionsrecmaplugins)  -- recmaplugins]: /packages/mdx/#optionsrecmaplugins
-./packages/esbuild/lib/index.js:25:9      - Unknown word (extnames)   -- import {extnamesToRegex} from '@mdx-js
-./packages/esbuild/lib/index.js:73:62     - Unknown word (onloadremote) -- namespace: remoteNamespace}, onloadremote)
+./packages/esbuild/lib/index.js:26:9      - Unknown word (extnames)   -- import {extnamesToRegex} from '@mdx-js
+./packages/esbuild/lib/index.js:74:62     - Unknown word (onloadremote) -- namespace: remoteNamespace}, onloadremote)
 ./packages/esbuild/test/index.js:238:44    - Unknown word (mdxjs)      -- assert.equal(esm?.type, 'mdxjsEsm')
 ./packages/loader/lib/index.js:87:13     - Unknown word (fpath)      -- const fpath = path.relative(this
 ./packages/mdx/lib/core.js:2:53      - Unknown word (Rehype)     -- rehype').Options} RemarkRehypeOptions
@@ -278,8 +279,8 @@ Lines:
 ./packages/mdx/readme.md:681:31    - Unknown word (compat)        -- pragmaImportSource: 'preact/compat'
 ./packages/mdx/test/compile.js:1299:42   - Unknown word (setext)     -- should support headings (setext) (`=` -> `<h1>`)', async
 ./packages/mdx/test/compile.js:1365:101  - Unknown word (describedby) -- footnote-ref="true" aria-describedby="footnote-label">1<
-./packages/mdx/test/compile.js:1881:21   - Unknown word (rexporting)  -- 'should support rexporting something as a default
-./packages/register/lib/index.cjs:4:7       - Unknown word (deasync)    -- const deasync = require('deasync'
+./packages/mdx/test/compile.js:1884:21   - Unknown word (rexporting)  -- 'should support rexporting something as a default
+./packages/register/lib/index.cjs:17:7      - Unknown word (deasync)    -- const deasync = require('deasync'
 ./packages/remark-mdx/index.js:3:59      - Unknown word (Micromark)  -- extension-mdxjs').Options} MicromarkOptions
 ./packages/remark-mdx/readme.md:121:22    - Unknown word (autolinks)  -- — Turn off HTML, autolinks, and indented code
 ./packages/remark-mdx/test/index.js:334:15    - Unknown word (onvisit)    -- visit(tree, onvisit)
@@ -298,7 +299,7 @@ Lines:
 ./packages/rollup/test/index.js:37:52     - Unknown word (AAAQ)       -- GAAA,CAAAC,QAAA,EAAA;AAAQ,EAAA,QAAA,EAAA,QAAA
 ./packages/rollup/test/index.js:37:90     - Unknown word (IAAA)       -- EAAA,QAAA;;;;;;;;AAE7B,IAAA,QAAA,EAAA,CAAA,SAAA
 ./renovate.json5:7:67      - Unknown word (Vercel)     -- . Our website is on Vercel/AWS which don’t support
-./website/generate.js:16:24     - Unknown word (xast)       -- import {sitemap} from 'xast-util-sitemap'
-./website/generate.js:18:18     - Unknown word (hastscript) -- import {h} from 'hastscript'
-./website/mdx-config.js:16:14     - Unknown word (Gemoji)     -- import remarkGemoji from 'remark-gemoji
-./website/mdx-config.js:16:34     - Unknown word (gemoji)     -- remarkGemoji from 'remark-gemoji'
+./website/generate.js:35:24     - Unknown word (xast)       -- import {sitemap} from 'xast-util-sitemap'
+./website/generate.js:37:18     - Unknown word (hastscript) -- import {h} from 'hastscript'
+./website/mdx-config.js:25:14     - Unknown word (Gemoji)     -- import remarkGemoji from 'remark-gemoji
+./website/mdx-config.js:25:34     - Unknown word (gemoji)     -- remarkGemoji from 'remark-gemoji'

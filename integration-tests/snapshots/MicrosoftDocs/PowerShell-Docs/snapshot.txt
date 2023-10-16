@@ -3,7 +3,7 @@ Repository: MicrosoftDocs/PowerShell-Docs
 Url: "https://github.com/MicrosoftDocs/PowerShell-Docs.git"
 Args: ["--config=../../../cspell-power-shell-docs.config.yaml","**"]
 Lines:
- CSpell: Files checked: 2677, Issues found: 5729 in 1259 files
+ CSpell: Files checked: 2678, Issues found: 5747 in 1258 files
  exit code: 1
 ./LICENSE:139:15    - Unknown word (sublicensable)   -- non-sublicensable, non-exclusive, irrevocable
 ./LICENSE:205:34    - Unknown word (waivable)        -- under any voluntary or waivable statutory or compulsory
@@ -195,14 +195,12 @@ Lines:
 ./reference/5.1/Microsoft.PowerShell.Core/About/about_WMI_Cmdlets.md:138:3     - Unknown word (RELPATH)     -- __RELPATH : Win32_Process
 ./reference/5.1/Microsoft.PowerShell.Core/About/about_WMI_Cmdlets.md:61:12     - Unknown word (wmiobject)  -- C:\PS> get-wmiobject win32_bios | format
 ./reference/5.1/Microsoft.PowerShell.Core/About/about_WMI_Cmdlets.md:98:2      - Unknown word (WMISEARCHER) -- [WMISEARCHER] - A shortcut for searching
-./reference/5.1/Microsoft.PowerShell.Core/About/about_WQL.md:162:18    - Unknown word (CIMINSTANCE) -- ## USING THE GET-CIMINSTANCE CMDLET
-./reference/5.1/Microsoft.PowerShell.Core/About/about_WQL.md:271:2     - Unknown word (biosname)    -- $biosname = [wmisearcher]"Select
-./reference/5.1/Microsoft.PowerShell.Core/About/about_WQL.md:455:42    - Unknown word (Hotpad)      -- return any process from Hotpad.exe through Notepad
-./reference/5.1/Microsoft.PowerShell.Core/About/about_WQL.md:459:61    - Unknown word (otepad)      -- where Name LIKE '[H-N]otepad.exe'"
-./reference/5.1/Microsoft.PowerShell.Core/About/about_WQL.md:494:58    - Unknown word (ASWPRCUN)    -- Process where name LIKE '[^ASWPRCUN]%'"
-./reference/5.1/Microsoft.PowerShell.Core/About/about_WQL.md:521:64    - Unknown word (czlc)        -- from calc.exe through czlc.exe, or
-./reference/5.1/Microsoft.PowerShell.Core/About/about_WQL.md:640:5     - Unknown word (Intall)      -- the IntallDate property. The commands
-./reference/5.1/Microsoft.PowerShell.Core/About/about_WQL.md:89:18     - Unknown word (WMIOBJECT)  -- ## USING THE GET-WMIOBJECT CMDLET
+./reference/5.1/Microsoft.PowerShell.Core/About/about_WQL.md:277:2     - Unknown word (biosname)   -- $biosname = [wmisearcher]"Select
+./reference/5.1/Microsoft.PowerShell.Core/About/about_WQL.md:442:43    - Unknown word (Hotepad)    -- return any process from `Hotepad.exe` through `Notepad
+./reference/5.1/Microsoft.PowerShell.Core/About/about_WQL.md:446:61    - Unknown word (otepad)     -- WHERE Name LIKE '[H-N]otepad.exe'"
+./reference/5.1/Microsoft.PowerShell.Core/About/about_WQL.md:481:58    - Unknown word (ASWPRCUN)   -- Process WHERE name LIKE '[^ASWPRCUN]%'"
+./reference/5.1/Microsoft.PowerShell.Core/About/about_WQL.md:508:67    - Unknown word (czlc)       -- `calc.exe` through `czlc.exe`, or
+./reference/5.1/Microsoft.PowerShell.Core/About/about_WQL.md:616:7     - Unknown word (Intall)     -- the **IntallDate** property. The
 ./reference/5.1/Microsoft.PowerShell.Core/About/about_Wildcards.md:22:48     - Unknown word (Techdocs)   -- the files in the `C:\Techdocs` directory with a
 ./reference/5.1/Microsoft.PowerShell.Core/Add-PSSnapin.md:164:4     - Unknown word (asnp)        -- - `asnp`
 ./reference/5.1/Microsoft.PowerShell.Core/Add-PSSnapin.md:68:37     - Unknown word (installutil) -- command creates an alias, installutil, for the path of the
@@ -379,11 +377,14 @@ Lines:
 ./reference/5.1/PSDiagnostics/Start-Trace.md:42:49     - Unknown word (wsmtraces)  -- env:windir\system32\wsmtraces.log"
 ./reference/5.1/PSDiagnostics/Start-Trace.md:43:28     - Unknown word (bincirc)    -- Format = 'bincirc'
 ./reference/5.1/PSDiagnostics/Start-Trace.md:48:49     - Unknown word (wsmtraceproviders) -- env:windir\system32\wsmtraceproviders.txt"
-./reference/5.1/PSReadLine/About/about_PSReadLine.md:123:3     - Unknown word (asplaintext) -- - asplaintext
-./reference/5.1/PSReadLine/About/about_PSReadLine.md:125:3     - Unknown word (apikey)      -- - apikey
-./reference/5.1/PSReadLine/About/about_PSReadLine.md:162:79    - Unknown word (ysdfayf)     -- AsPlainText) -Secret2 sdv87ysdfayf798hfasd8f7ha # '-Secret
-./reference/5.1/PSReadLine/About/about_PSReadLine.md:162:89    - Unknown word (hfasd)       -- Secret2 sdv87ysdfayf798hfasd8f7ha # '-Secret2' has
-./reference/5.1/PSReadLine/About/about_PSReadLine.md:236:4     - Unknown word (readline)    -- [readline](https://tiswww.case
+./reference/5.1/PSReadLine/About/about_PSReadLine.md:122:4     - Unknown word (asplaintext) -- - `asplaintext`
+./reference/5.1/PSReadLine/About/about_PSReadLine.md:124:4     - Unknown word (apikey)      -- - `apikey`
+./reference/5.1/PSReadLine/About/about_PSReadLine.md:161:79    - Unknown word (ysdfayf)     -- AsPlainText) -Secret2 sdv87ysdfayf798hfasd8f7ha # '-Secret
+./reference/5.1/PSReadLine/About/about_PSReadLine.md:161:89    - Unknown word (hfasd)       -- Secret2 sdv87ysdfayf798hfasd8f7ha # '-Secret2' has
+./reference/5.1/PSReadLine/About/about_PSReadLine.md:192:24    - Unknown word (gcloud)      -- token using the `az`, `gcloud`, and `kubectl` command
+./reference/5.1/PSReadLine/About/about_PSReadLine.md:202:6     - Unknown word (PGPASS)      -- $env:PGPASS = gcloud auth print
+./reference/5.1/PSReadLine/About/about_PSReadLine.md:226:5     - Unknown word (Autoadjusts) -- - Autoadjusts the size based on the
+./reference/5.1/PSReadLine/About/about_PSReadLine.md:296:4     - Unknown word (readline)    -- [readline](https://tiswww.case
 ./reference/5.1/PSReadLine/About/about_PSReadLine_Functions.md:338:13    - Unknown word (Rubout)     -- ### UnixWordRubout
 ./reference/5.1/PSReadLine/About/about_PSReadLine_Functions.md:431:15    - Unknown word (Begining)   -- ### ViInsertAtBegining
 ./reference/5.1/PSScheduledJob/Get-ScheduledJobOption.md:84:76     - Unknown word (Waketo)     -- RunElevated -and !$_.WaketoRun}
@@ -851,8 +852,8 @@ Lines:
 ./reference/docs-conceptual/developer/cmdlet/required-development-guidelines.md:126:38    - Unknown word (Pshostuserinterface) -- Management.Automation.Host.Pshostuserinterface.PromptForChoice](/dotnet
 ./reference/docs-conceptual/developer/cmdlet/required-development-guidelines.md:128:38    - Unknown word (Ihostuisupportsmultiplechoiceselection) -- Management.Automation.Host.Ihostuisupportsmultiplechoiceselection.PromptForChoice](/dotnet
 ./reference/docs-conceptual/developer/cmdlet/resource-parameters.md:29:154    - Unknown word (biztalk)    -- string value such as "biztalk" for other types of
-./reference/docs-conceptual/developer/cmdlet/security-parameters.md:14:265    - Unknown word (PKCS)       -- Cryptography Standards (PKCS) #12 file that contains
-./reference/docs-conceptual/developer/cmdlet/security-parameters.md:37:189    - Unknown word (fulltrust)  -- internet, intranet, and fulltrust.|
+./reference/docs-conceptual/developer/cmdlet/security-parameters.md:14:311    - Unknown word (PKCS)       -- Cryptography Standards (PKCS) #12 file that contains
+./reference/docs-conceptual/developer/cmdlet/security-parameters.md:36:232    - Unknown word (fulltrust)  -- internet, intranet, and fulltrust.
 ./reference/docs-conceptual/developer/cmdlet/stopprocesssample01-sample.md:252:49    - Unknown word (spoolsv)           -- system", "winlogon", "spoolsv" }
 ./reference/docs-conceptual/developer/cmdlet/stopprocesssample01-sample.md:38:20     - Unknown word (stopprossessample) -- `Import-Module stopprossessample01`
 ./reference/docs-conceptual/developer/cmdlet/stopprocesssample03-sample.md:225:15    - Unknown word (declutter)  -- /// to declutter the ProcessRecord method
@@ -1086,12 +1087,12 @@ Lines:
 ./reference/docs-conceptual/install/Installing-PowerShell-on-Windows.md:126:30    - Unknown word (OPENPOWERSHELL) -- EXPLORER_CONTEXT_MENU_OPENPOWERSHELL` - This property controls
 ./reference/docs-conceptual/install/Installing-PowerShell-on-Windows.md:128:26    - Unknown word (RUNPOWERSHELL)  -- ADD_FILE_CONTEXT_MENU_RUNPOWERSHELL` - This property controls
 ./reference/docs-conceptual/install/Installing-PowerShell-on-Windows.md:130:11    - Unknown word (PSREMOTING)     -- - `ENABLE_PSREMOTING` - This property controls
-./reference/docs-conceptual/install/Installing-PowerShell-on-Windows.md:250:2     - Unknown word (deviceip)       -- $deviceip = '<device ip address
-./reference/docs-conceptual/install/Installing-PowerShell-on-Windows.md:251:2     - Unknown word (zipfile)        -- $zipfile = 'PowerShell-7.3.7
-./reference/docs-conceptual/install/Installing-PowerShell-on-Windows.md:252:2     - Unknown word (downloadfolder) -- $downloadfolder = 'u:\users\administrator
-./reference/docs-conceptual/install/Installing-PowerShell-on-Windows.md:289:28    - Unknown word (workarea)       -- include the package in the workarea and add _OPENSRC_POWERSHELL
-./reference/docs-conceptual/install/Installing-PowerShell-on-Windows.md:289:46    - Unknown word (OPENSRC)        -- the workarea and add _OPENSRC_POWERSHELL_ feature
-./reference/docs-conceptual/install/Installing-PowerShell-on-Windows.md:326:2     - Unknown word (ipaddr)         -- $ipaddr = '<Nano Server IP address
+./reference/docs-conceptual/install/Installing-PowerShell-on-Windows.md:267:2     - Unknown word (deviceip)       -- $deviceip = '<device ip address
+./reference/docs-conceptual/install/Installing-PowerShell-on-Windows.md:268:2     - Unknown word (zipfile)        -- $zipfile = 'PowerShell-7.3.8
+./reference/docs-conceptual/install/Installing-PowerShell-on-Windows.md:269:2     - Unknown word (downloadfolder) -- $downloadfolder = 'u:\users\administrator
+./reference/docs-conceptual/install/Installing-PowerShell-on-Windows.md:306:28    - Unknown word (workarea)       -- include the package in the workarea and add _OPENSRC_POWERSHELL
+./reference/docs-conceptual/install/Installing-PowerShell-on-Windows.md:306:46    - Unknown word (OPENSRC)        -- the workarea and add _OPENSRC_POWERSHELL_ feature
+./reference/docs-conceptual/install/Installing-PowerShell-on-Windows.md:343:2     - Unknown word (ipaddr)         -- $ipaddr = '<Nano Server IP address
 ./reference/docs-conceptual/install/PowerShell-on-ARM.md:60:1      - Unknown word (Raspbery)   -- Raspbery Pi
 ./reference/docs-conceptual/install/community-support.md:105:8     - Unknown word (getconf)    -- bits=$(getconf LONG_BIT)
 ./reference/docs-conceptual/install/community-support.md:99:35     - Unknown word (libunwind)  -- install jq libssl1.1 libunwind8 -y
@@ -1205,7 +1206,8 @@ Lines:
 ./reference/docs-conceptual/learn/remoting/jea/role-capabilities.md:303:2     - Unknown word (tabexpansion)        -- `tabexpansion2` in the **VisibleFunctions
 ./reference/docs-conceptual/learn/remoting/jea/role-capabilities.md:416:8     - Unknown word (Aand)                -- $mergedAandB = @{
 ./reference/docs-conceptual/learn/remoting/jea/role-capabilities.md:66:6      - Unknown word (dsadd)      -- - `dsadd.exe`
-./reference/docs-conceptual/learn/remoting/jea/security-considerations.md:61:32     - Unknown word (ACCOUNTNUMBER) -- Virtual Users\WinRM_VA_<ACCOUNTNUMBER>_<DOMAIN>_<sAMAccountName
+./reference/docs-conceptual/learn/remoting/jea/security-considerations.md:216:53    - Unknown word (nonadministrators) -- JEA is that it allows nonadministrators to do some administrative
+./reference/docs-conceptual/learn/remoting/jea/security-considerations.md:62:32     - Unknown word (ACCOUNTNUMBER) -- Virtual Users\WinRM_VA_<ACCOUNTNUMBER>_<DOMAIN>_<sAMAccountName
 ./reference/docs-conceptual/learn/remoting/jea/session-configurations.md:103:33    - Unknown word (JEAGMSA)    -- sAMAccountName of 'MyJEAGMSA'
 ./reference/docs-conceptual/learn/remoting/jea/session-configurations.md:226:82    - Unknown word (smartcard)  -- management solution, smartcard
 ./reference/docs-conceptual/learn/remoting/jea/session-configurations.md:227:26    - Unknown word (multifactor) -- authentication, or other multifactor authentication solution
@@ -1227,7 +1229,6 @@ Lines:
 ./reference/docs-conceptual/samples/Creating-Get-WinEvent-queries-with-FilterHashtable.md:80:78     - Unknown word (Perflib)    -- field. For example, the Perflib event 1008
 ./reference/docs-conceptual/samples/Creating-Get-WinEvent-queries-with-FilterHashtable.md:86:44     - Unknown word (bitsperf)   -- C:\Windows\System32\bitsperf.dll</Data>
 ./reference/docs-conceptual/samples/Decode-PowerShell-Command-from-a-Running-Process.md:2:9       - Unknown word (randomnote) -- author: randomnote1
-./reference/docs-conceptual/samples/Getting-WMI-Objects--Get-CimInstance-.md:8:39      - Unknown word (plaforms)   -- only applies to Windows plaforms.
 ./reference/docs-conceptual/samples/Managing-Services.md:159:61    - Unknown word (dmserver)   -- Logical Disk Manager (dmserver)' because
 ./reference/docs-conceptual/samples/Managing-Services.md:26:10     - Unknown word (seclogon)   -- Running seclogon Secondary
 ./reference/docs-conceptual/samples/Managing-Services.md:44:10     - Unknown word (wscsvc)     -- Running wscsvc Security
@@ -1276,8 +1277,8 @@ Lines:
 ./reference/docs-conceptual/toc.yml:339:63    - Unknown word (powershelltabcollection) -- ise/object-model/the-powershelltabcollection-object.md
 ./reference/docs-conceptual/toc.yml:341:63    - Unknown word (powershelltab)           -- ise/object-model/the-powershelltab-object.md
 ./reference/docs-conceptual/toc.yml:376:56    - Unknown word (informationstream)       -- powershell/wmf/whats-new/informationstream-overview.md
-./reference/docs-conceptual/toc.yml:456:41    - Unknown word (cmdline)                 -- dev-cross-plat/create-cmdline-predictor.md
-./reference/docs-conceptual/toc.yml:520:38    - Unknown word (hackathons)              -- community/contributing/hackathons.md
+./reference/docs-conceptual/toc.yml:458:41    - Unknown word (cmdline)                 -- dev-cross-plat/create-cmdline-predictor.md
+./reference/docs-conceptual/toc.yml:522:38    - Unknown word (hackathons)              -- community/contributing/hackathons.md
 ./reference/docs-conceptual/toc.yml:88:37     - Unknown word (keyhandlers) -- href: learn/shell/using-keyhandlers.md
 ./reference/docs-conceptual/whats-new/What-s-New-in-PowerShell-72.md:129:11    - Unknown word (awakecoding) -- host by awakecoding · Pull Request #146
 ./reference/docs-conceptual/whats-new/What-s-New-in-PowerShell-73.md:100:12    - Unknown word (eugenesmlv) -- (Thanks @eugenesmlv!)
