@@ -8,7 +8,7 @@
     "build-cspell-schema": "./build-cspell-schema.mjs"
   },
   "scripts": {
-    "build:ts-json-schema-generator": "pnpm esbuild ../../../code/clones/ts-json-schema-generator/dist/index.js --bundle --outfile=lib/ts-json-schema-generator.cjs --platform=node --external:typescript",
+    "#build:ts-json-schema-generator": "pnpm esbuild ../../../code/clones/ts-json-schema-generator/dist/index.js --bundle --outfile=lib/ts-json-schema-generator.cjs --platform=node --external:typescript",
     "test": "echo Ok"
   },
   "keywords": [],
@@ -22,6 +22,6 @@
   },
   "dependencies": {
     "safe-stable-stringify": "^2.4.3",
-    "ts-json-schema-generator": "^1.3.0"
+    "ts-json-schema-generator": "^1.4.0"
   }
 }
