@@ -4,8 +4,8 @@ Url: https://github.com/eslint/eslint
 Args: '["**","--exclude=bin/**","--exclude=CHANGELOG.md","--exclude=_data","--exclude=tests/bench/large.js","--exclude=docs/src/_includes","--exclude=docs/src/assets/{fonts,s?css,images}"]'
 Summary:
   files: 1895
-  filesWithIssues: 1259
-  issues: 5537
+  filesWithIssues: 1257
+  issues: 5504
   errors: 0
 Errors: []
 
@@ -85,8 +85,7 @@ issues:
   - "docs/src/extend/custom-rules-deprecated.md:533:1        camelcase       U       camelcase |"
   - "docs/src/extend/custom-rules-deprecated.md:580:81       rulesdir        U       interface) using the `--rulesdir` option to specify the"
   - "docs/src/extend/custom-rules.md:398:78      multipass       U       without triggering multipass fixes. Each suggestion"
-  - "docs/src/extend/plugins.md:37:46        unprefixed      U       ESLint, you would use the unprefixed plugin name, followed"
-  - "docs/src/extend/plugins.md:37:162       myplugin        U       named `eslint-plugin-myplugin`, then in your configuration"
+  - "docs/src/extend/plugins.md:37:162       myplugin    U       named `eslint-plugin-myplugin`, then in your configuration"
   - "docs/src/extend/scope-manager-interface.md:6:125        escope          U       eslint-scope), a fork of [escope](https://github.com"
   - "docs/src/extend/scope-manager-interface.md:218:100      redeclared      U       If this variable is redeclared, this array includes"
   - "docs/src/extend/selectors.md:54:58          esquery     U       were adapted from the [esquery](https://github.com"
@@ -388,7 +387,6 @@ issues:
   - "Makefile.js:317:8       Preminor                U       * Preminor and prepatch release"
   - "Makefile.js:317:21      prepatch                U       * Preminor and prepatch release will not."
   - "Makefile.js:325:56      preminor                U       a major release (not preminor/prepatch)."
-  - "Makefile.js:568:11      fuzzer                  U       const fuzzerRunner = require(\"./tools"
   - "Makefile.js:627:8       wdio                    U       target.wdio = () => {"
   - "Makefile.js:918:18      Multifiles              U       function downloadMultifilesTestTarget(cb) {"
   - "package.json:125:6          eslump          U       \"eslump\": \"^3.0.0\","
@@ -422,10 +420,7 @@ issues:
   - "tests/fixtures/config-hierarchy/file-structure.json:22:14       subsubbroken    U       \"subsubbroken\": {"
   - "tests/fixtures/config-hierarchy/file-structure.json:36:6        fileexts        U       \"fileexts\": {"
   - "tests/fixtures/config-hierarchy/file-structure.json:57:6        packagejson     U       \"packagejson\": {"
-  - "tests/fixtures/config-rule/schemas.js:37:23         Bools       U       objectWithMultipleBools: [{"
   - "tests/fixtures/parsers/arrow-parens/identifier-type.js:323:17       binop       U       binop: null,"
-  - "tests/fixtures/parsers/enhanced-parser3.js:4:23         Referencer      U       const { ScopeManager, Referencer } = require(\"eslint"
-  - "tests/fixtures/parsers/enhanced-parser3.js:40:11        referencer      U       const referencer = new EnhancedReferencer"
   - "tests/fixtures/parsers/typescript-parsers/declare-class.js:4:14         astexplorer     U       * Parsed on astexplorer.net using @typescript"
   - "tests/fixtures/rules/indent-legacy/indent-invalid-fixture-1.js:440:40       youll       U       terribly long description youll ' +"
   - "tests/lib/cli-engine/cli-engine.js:405:37       layou                   U       fixTypes: [\"layou\"]"
@@ -571,7 +566,6 @@ issues:
   - "tests/lib/rules/utils/ast-utils.js:686:52       braceless       U       empty array if node is a braceless ArrowFunctionExpression"
   - "tests/lib/rules/utils/ast-utils.js:1065:17      ncde            U       \"ab\\ncde\\n\": [[1, 0], [1, 1]"
   - "tests/lib/rules/utils/ast-utils.js:1524:19      invalidtoken    U       [[\"123invalidtoken\", \"(\"], false],"
-  - "tests/lib/rules/utils/fix-tracker.js:67:50          abcdefghij      U       = createSourceCode(\"abcdefghij\");"
   - "tests/lib/rules/valid-jsdoc.js:103:60       mytest      U       n* @param {string} p mytest\\n*/\\nFoo.bar = function"
   - "tests/lib/rules/valid-jsdoc.js:323:21       Astnode     U       Astnode: \"ASTNode\""
   - "tests/lib/rules/valid-jsdoc.js:353:21       astnode     U       astnode: \"ASTNode\""

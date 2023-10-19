@@ -3,7 +3,7 @@ Repository: django/django
 Url: "https://github.com/django/django.git"
 Args: ["**/*.{md,py}"]
 Lines:
- CSpell: Files checked: 2772, Issues found: 8106 in 923 files
+ CSpell: Files checked: 2772, Issues found: 8091 in 923 files
  exit code: 1
 ./django/__init__.py:12:26     - Unknown word (urlresolvers) -- Set the thread-local urlresolvers script prefix if `set
 ./django/apps/registry.py:134:40    - Unknown word (unconfigured) -- not ready" is due to unconfigured settings, accessing
@@ -415,7 +415,6 @@ Lines:
 ./django/core/handlers/wsgi.py:19:38     - Unknown word (werkzeug)   -- implementation from werkzeug.wsgi.LimitedStream
 ./django/core/handlers/wsgi.py:8:35      - Unknown word (repercent)  -- utils.encoding import repercent_broken_unicode
 ./django/core/mail/__init__.py:91:5      - Unknown word (datatuple)  -- datatuple, fail_silently=False
-./django/core/management/__init__.py:259:39    - Unknown word (retrigger)  -- following line will retrigger an ImproperlyConfigured
 ./django/core/management/__init__.py:282:58    - Unknown word (COMPREPLY)  -- is passed to BASH's `COMPREPLY` variable
 ./django/core/management/__init__.py:392:49    - Unknown word (noreload)   -- "runserver" and "--noreload" not in self.argv:
 ./django/core/management/base.py:340:25    - Unknown word (djangoprojects) -- '"/home/djangoprojects/myproject".'
@@ -618,7 +617,6 @@ Lines:
 ./django/db/backends/utils.py:22:73     - Unknown word (nextset)    -- fetchmany", "fetchall", "nextset"])
 ./django/db/backends/utils.py:320:23    - Unknown word (getcontext) -- context = decimal.getcontext().copy()
 ./django/db/migrations/autodetector.py:697:30    - Unknown word (opns)       -- # Generate other opns
-./django/db/migrations/autodetector.py:870:44    - Unknown word (deduping)   -- make the operation, deduping any dependencies
 ./django/db/migrations/migration.py:131:26    - Unknown word (behaviour)  -- # Normal behaviour
 ./django/db/migrations/operations/base.py:32:5      - Unknown word (elidable)   -- elidable = False
 ./django/db/migrations/operations/models.py:104:25    - Unknown word (smodel)     -- return "Create %smodel %s" % (
@@ -662,7 +660,6 @@ Lines:
 ./django/db/models/sql/compiler.py:1497:23   - Unknown word (convs)      -- for pos, (convs, expression) in converters
 ./django/db/models/sql/compiler.py:1900:9    - Unknown word (innerq)     -- innerq = self.query.clone(
 ./django/db/models/sql/compiler.py:1905:9    - Unknown word (outerq)     -- outerq = Query(self.query.model
-./django/db/models/sql/compiler.py:2003:61   - Unknown word (munge)      -- results from other tables, munge the "where"
 ./django/db/models/sql/compiler.py:395:23    - Unknown word (combinated) -- # combinated queries might define
 ./django/db/models/sql/compiler.py:484:37    - Unknown word (orderbycol) -- col_alias = f"__orderbycol{order_by_idx}"
 ./django/db/models/sql/compiler.py:569:45    - Unknown word (resultset)  -- produces a non-empty resultset it might be impossible
@@ -1404,9 +1401,8 @@ Lines:
 ./tests/auth_tests/test_hashers.py:54:42     - Unknown word (lètmeinz)   -- assertFalse(check_password("lètmeinz", encoded))
 ./tests/auth_tests/test_hashers.py:555:55    - Unknown word (QOXS)       -- 1,p=1$c29tZXNhbHQ$gwQOXSNhxiOxPOA0+PY10P9QFO
 ./tests/auth_tests/test_hashers.py:555:59    - Unknown word (Nhxi)       -- 1$c29tZXNhbHQ$gwQOXSNhxiOxPOA0+PY10P9QFO"
-./tests/auth_tests/test_hashers.py:572:17    - Unknown word (abcdefghijk) -- salt = "abcdefghijk"
-./tests/auth_tests/test_hashers.py:590:60    - Unknown word (Nklj)        -- 400,t=2,p=8$Y041dExhNkljRUUy$TMa6A8fPJh"
-./tests/auth_tests/test_hashers.py:591:14    - Unknown word (CAUX)        -- "CAUXRhJXCXdw"
+./tests/auth_tests/test_hashers.py:590:60    - Unknown word (Nklj)       -- 400,t=2,p=8$Y041dExhNkljRUUy$TMa6A8fPJh"
+./tests/auth_tests/test_hashers.py:591:14    - Unknown word (CAUX)       -- "CAUXRhJXCXdw"
 ./tests/auth_tests/test_management.py:1268:14   - Unknown word (usermodel)                     -- def test_usermodel_without_password(self
 ./tests/auth_tests/test_management.py:141:53    - Unknown word (xfalia)     -- username = lambda: "J\xfalia"
 ./tests/auth_tests/test_management.py:332:18    - Unknown word (Uživatel)   -- "Uživatel (leave blank to use
@@ -1427,7 +1423,6 @@ Lines:
 ./tests/auth_tests/test_remote_user.py:279:20    - Unknown word (AUTHUSER)   -- header = "HTTP_AUTHUSER"
 ./tests/auth_tests/test_remote_user.py:59:34     - Unknown word (fakeuser)   -- headers = {self.header: "fakeuser"}
 ./tests/auth_tests/test_templates.py:29:45     - Unknown word (somepath)   -- request_factory.get("/somepath/")
-./tests/auth_tests/test_tokens.py:101:23    - Unknown word (abcdefghijkl)    -- new_secret = "abcdefghijkl"
 ./tests/auth_tests/test_tokens.py:24:42     - Unknown word (tokentestuser) -- objects.create_user("tokentestuser", "test2@example.com
 ./tests/auth_tests/test_tokens.py:34:42     - Unknown word (comebackkid)   -- objects.create_user("comebackkid", "test3@example.com
 ./tests/auth_tests/test_tokens.py:51:22     - Unknown word (changeemailuser) -- "changeemailuser",
@@ -1482,8 +1477,7 @@ Lines:
 ./tests/cache/tests.py:275:31    - Unknown word (cacheprefix) -- prefix": {"KEY_PREFIX": "cacheprefix{}".format(os.getpid
 ./tests/cache/tests.py:275:56    - Unknown word (getpid)      -- cacheprefix{}".format(os.getpid())},
 ./tests/cache/tests.py:330:20    - Unknown word (somekey)     -- cache.set("somekey", "value")
-./tests/check_framework/test_security.py:411:37    - Unknown word (abcdefghijklmnopqrstuvwx) -- settings(SECRET_KEY=("abcdefghijklmnopqrstuvwx" * 2) + "ab")
-./tests/check_framework/test_security.py:519:14    - Unknown word (badkey)                   -- "badkey",
+./tests/check_framework/test_security.py:519:14    - Unknown word (badkey)     -- "badkey",
 ./tests/check_framework/test_translation.py:16:36     - Unknown word (extlang)    -- sgn-ase", # language+extlang
 ./tests/check_framework/test_translation.py:30:32     - Unknown word (subtag)     -- "en--us", # empty subtag.
 ./tests/check_framework/tests.py:223:51    - Unknown word (missingtag) -- system check with the "missingtag" tag.'
@@ -2549,11 +2543,10 @@ Lines:
 ./tests/serializers/test_json.py:129:26    - Unknown word (invalidint) -- "rank": "invalidint",
 ./tests/serializers/test_natural.py:24:72     - Unknown word (Anghor)     -- , data="Natural Key Anghor"),
 ./tests/serializers/test_natural.py:7:5       - Unknown word (FKAs)       -- FKAsPKNoNaturalKey,
-./tests/serializers/tests.py:244:25    - Unknown word (יוניקוד)       -- unicode_name = "יוניקוד"
-./tests/serializers/tests.py:322:21    - Unknown word (Spartak)       -- team_str = "Spartak Moskva"
-./tests/serializers/tests.py:324:24    - Unknown word (Soslan)        -- player.name = "Soslan Djanaev"
-./tests/serializers/tests.py:324:31    - Unknown word (Djanaev)       -- player.name = "Soslan Djanaev"
-./tests/serializers/tests.py:56:9      - Unknown word (Unregistering) -- Unregistering a serializer doesn't
+./tests/serializers/tests.py:244:25    - Unknown word (יוניקוד)    -- unicode_name = "יוניקוד"
+./tests/serializers/tests.py:322:21    - Unknown word (Spartak)    -- team_str = "Spartak Moskva"
+./tests/serializers/tests.py:324:24    - Unknown word (Soslan)     -- player.name = "Soslan Djanaev"
+./tests/serializers/tests.py:324:31    - Unknown word (Djanaev)    -- player.name = "Soslan Djanaev"
 ./tests/servers/test_basehttp.py:19:7      - Unknown word (Unclosable) -- class UnclosableBytesIO(BytesIO):
 ./tests/servers/tests.py:218:49    - Unknown word (Iamastream) -- ssertEqual(response.read(), b"Iamastream")
 ./tests/servers/tests.py:312:66    - Unknown word (тест)       -- % urlencode({"q": "тест"})) as f:

@@ -4,8 +4,8 @@ Url: https://github.com/php/php-src.git
 Args: '["--config=${repoConfig}/cspell.json","**/*.{md,c,h,php}"]'
 Summary:
   files: 1826
-  filesWithIssues: 1307
-  issues: 45340
+  filesWithIssues: 1305
+  issues: 45229
   errors: 0
 Errors: []
 
@@ -20,7 +20,6 @@ issues:
   - "build/gen_stub.php:1513:30      constructorsynopsis     U       $synopsisType = \"constructorsynopsis\";"
   - "build/gen_stub.php:1515:30      destructorsynopsis      U       $synopsisType = \"destructorsynopsis\";"
   - "build/gen_stub.php:1517:30      methodsynopsis          U       $synopsisType = \"methodsynopsis\";"
-  - "build/gen_stub.php:1604:30      Consts                  U       public array $originatingConsts;"
   - "build/gen_stub.php:1811:56      Linkend                 U       getFieldSynopsisDefaultLinkend(): string;"
   - "build/gen_stub.php:1820:77      fieldsynopsis           U       DOMDocument $doc, DOMElement $fieldsynopsisElement): void"
   - "build/gen_stub.php:1911:44      linkend                 U       varnameElement->setAttribute(\"linkend\", $this->link);"
@@ -36,7 +35,6 @@ issues:
   - "build/gen_stub.php:3368:80      docblocks               U       callable(string):mixed in docblocks"
   - "build/gen_stub.php:3369:64      inparens                U       \\\\\\]+(?<parens>\\((?<inparens>(?:(?&parens)|[^(){"
   - "build/gen_stub.php:3469:27      undocumentable          U       case 'undocumentable':"
-  - "build/gen_stub.php:3693:24      consts                  U       @param ConstInfo[] $consts"
   - "build/gen_stub.php:3814:47      conds                   U       reprocessorConditions(array &$conds, Stmt $stmt): ?string"
   - "build/gen_stub.php:4557:46      varlistentry            U       getElementsByTagName(\"varlistentry\") as $entry) {"
   - "build/gen_stub.php:4779:41      exceptionref            U       '/<phpdoc:(classref|exceptionref)\\s+xmlns:phpdoc=\\\"("
@@ -2049,10 +2047,8 @@ issues:
   - "ext/gd/libgd/gd_webp.c:41:13        filedata    U       uint8_t *filedata = NULL;"
   - "ext/gd/libgd/gd_webp.c:163:8        freeargb    U       goto freeargb;"
   - "ext/gd/libgd/gd_xbm.c:35:7          iname       U       char iname[MAX_XBM_LINE_SIZE];"
-  - "ext/gd/libgd/gd.c:71:54         abcdefghi           U       xfd, 0xfe, 0xb1, /*.abcdefghi...... */"
   - "ext/gd/libgd/gd.c:73:54         jklmnopqr           U       xb8, 0xc6, 0xa4, /*.jklmnopqr...... */"
   - "ext/gd/libgd/gd.c:75:55         stuvwxyz            U       xdd, 0xde, 0xae, /*..stuvwxyz...... */"
-  - "ext/gd/libgd/gd.c:79:54         ABCDEFGHI           U       xf2, 0xf3, 0xf5, /*.ABCDEFGHI...... */"
   - "ext/gd/libgd/gd.c:81:54         JKLMNOPQR           U       xdb, 0xfa, 0xff, /*.JKLMNOPQR...... */"
   - "ext/gd/libgd/gd.c:83:55         STUVWXYZ            U       xd2, 0xd3, 0xd5, /*..STUVWXYZ...... */"
   - "ext/gd/libgd/gd.c:89:87         Buckman             U       improvement. Thanks to John Buckman. */"
@@ -4445,7 +4441,6 @@ issues:
   - "ext/opcache/ZendAccelerator.c:2724:12       reseted         U       ZCG(pcre_reseted) = false;"
   - "ext/opcache/ZendAccelerator.c:2806:4        fpmi            U       \"fpmi-fcgi\","
   - "ext/opcache/ZendAccelerator.c:2809:4        uwsgi           U       \"uwsgi\","
-  - "ext/opcache/ZendAccelerator.c:2810:4        fuzzer          U       \"fuzzer\","
   - "ext/opcache/ZendAccelerator.c:2811:4        frankenphp      U       \"frankenphp\","
   - "ext/opcache/ZendAccelerator.c:2948:43       HUGEPAGE        U       HUGETLB) || defined(MADV_HUGEPAGE)"
   - "ext/opcache/ZendAccelerator.c:3068:10       permflags       U       int permflags = entry->kve_protection"
@@ -4986,7 +4981,6 @@ issues:
   - "ext/pcre/pcre2lib/pcre2_compile.c:3173:37       numberical              U       brace delimiters it is a numberical back reference and does"
   - "ext/pcre/pcre2lib/pcre2_compile.c:3326:46       STARTWORD               U       )(ptr, STRING_WEIRD_STARTWORD, 6) == 0 ||"
   - "ext/pcre/pcre2lib/pcre2_compile.c:3327:46       ENDWORD                 U       )(ptr, STRING_WEIRD_ENDWORD, 6) == 0))"
-  - "ext/pcre/pcre2lib/pcre2_compile.c:3504:9        fuzzers                 U       fuzzers do that kind of thing"
   - "ext/pcre/pcre2lib/pcre2_compile.c:3797:18       lookaround              U       non-atomic lookaround ones are new. They are"
   - "ext/pcre/pcre2lib/pcre2_compile.c:3801:16       CHMAX                   U       else if (CHMAX_255(c) && (cb->ctypes"
   - "ext/pcre/pcre2lib/pcre2_compile.c:4002:67       unsetting               U       otherwise it's an option unsetting. */"
@@ -6700,10 +6694,9 @@ issues:
   - "ext/pdo/pdo_dbh.stub.php:199:36         ERRMODE         U       LONG_CONST(PDO_ATTR_ERRMODE)"
   - "ext/pdo/pdo_dbh.stub.php:380:38         FWDONLY         U       LONG_CONST(PDO_CURSOR_FWDONLY)"
   - "ext/pdo/pdo_sqlstate.c:296:14       Plpgsql     U       { \"P0000\", \"Plpgsql error\" },"
-  - "ext/pdo/pdo_stmt.c:256:31       pparam              U       pdo_bound_param_data *pparam = NULL;"
-  - "ext/pdo/pdo_stmt.c:420:21       unsignend           U       /* num_index is unsignend */"
-  - "ext/pdo/pdo_stmt.c:510:8        stringification     U       /* If stringification is requested, override"
-  - "ext/pdo/pdo_stmt.c:690:65       agrs                U       stmt, int free_ctor_agrs) /* {{{ */"
+  - "ext/pdo/pdo_stmt.c:256:31       pparam          U       pdo_bound_param_data *pparam = NULL;"
+  - "ext/pdo/pdo_stmt.c:420:21       unsignend       U       /* num_index is unsignend */"
+  - "ext/pdo/pdo_stmt.c:690:65       agrs            U       stmt, int free_ctor_agrs) /* {{{ */"
   - "ext/pdo/pdo.c:45:15         ppdo            U       static int le_ppdo;"
   - "ext/pdo/pdo.c:146:6         valstart        U       int valstart = -1;"
   - "ext/pdo/pdo.c:148:6         optstart        U       int optstart = 0;"
@@ -8851,11 +8844,9 @@ issues:
   - "sapi/fpm/fpm/fpm_unix.c:518:42      setpflags       U       process_dumpable && 0 > setpflags(__PROC_PROTECT, 0))"
   - "sapi/fpm/fpm/fpm_unix.c:531:10      getcon          U       if (aa_getcon(&con, NULL) == -1)"
   - "sapi/fpm/fpm/fpm_unix.c:649:10      readval         U       int readval;"
-  - "sapi/fuzzer/fuzzer-execute.c:19:9           Fuzzer          U       int LLVMFuzzerTestOneInput(const uint"
   - "sapi/fuzzer/fuzzer-execute.c:22:52          codepaths       U       necessary to reach new codepaths. */"
   - "sapi/fuzzer/fuzzer-sapi.c:38:36         libfuzzer       U       timeout be enforced by libfuzzer, not PHP. */"
   - "sapi/fuzzer/fuzzer-sapi.c:51:44         tempname        U       rename,rmdir,symlink,tempname,touch,unlink,fopen\""
-  - "sapi/fuzzer/fuzzer.h:18:9           FUZZER      U       #define FUZZER_VERSION PHP_VERSION"
   - "sapi/fuzzer/generate_all.php:4:30           unserializehash     U       _DIR__ . '/generate_unserializehash_corpus.php';"
   - "sapi/fuzzer/generate_unserializehash_corpus.php:8:6         algx    U       $algx = preg_replace('/[^"
   - "sapi/fuzzer/README.md:4:134         exif            U       you don't build the exif/json/mbstring extensions"
@@ -9376,7 +9367,6 @@ issues:
   - "Zend/zend_enum.c:186:74         unitenum        U       ZSTR_INIT_LITERAL(\"unitenum\", 0);"
   - "Zend/zend_enum.c:190:79         backedenum      U       ZSTR_INIT_LITERAL(\"backedenum\", 0);"
   - "Zend/zend_enum.c:455:58         TRYFROM         U       ZSTR_KNOWN(ZEND_STR_TRYFROM);"
-  - "Zend/zend_execute_API.c:702:72      retriggering            U       which can happen when retriggering ast"
   - "Zend/zend_execute_API.c:1035:24     fcic                    U       zend_fcall_info_cache fcic;"
   - "Zend/zend_execute_API.c:1518:47     WAITORTIMERCALLBACK     U       rQueueTimer(&tq_timer, NULL, (WAITORTIMERCALLBACK)tq_timer_cb, (VOID*"
   - "Zend/zend_execute_API.c:1518:111    EXECUTEONLYONCE         U       seconds*1000, 0, WT_EXECUTEONLYONCE)) {"

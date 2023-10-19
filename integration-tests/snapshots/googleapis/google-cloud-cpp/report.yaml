@@ -4,8 +4,8 @@ Url: https://github.com/googleapis/google-cloud-cpp.git
 Args: '["--config=${repoConfig}/cspell.json","**/*","-e","{*.BUILD,BUILD,CHANGELOG.md,*.sh,*.cfg,*.ps1,Dockerfile.*,*.Dockerfile,*.{yaml,xml,json,cmake}}"]'
 Summary:
   files: 16595
-  filesWithIssues: 12068
-  issues: 110809
+  filesWithIssues: 12065
+  issues: 110783
   errors: 0
 Errors: []
 
@@ -859,30 +859,13 @@ issues:
   - "google/cloud/ids/doc/main.dox:9:12          Palo    U       built with Palo Alto Networks technologies"
   - "google/cloud/internal/api_client_header_test.cc:62:39       gapic       U       actual, IsClientHeader(\"gapic/\"));"
   - "google/cloud/internal/async_connection_ready_test.cc:76:39          SUBCHANNEL      U       SetInt(GRPC_ARG_USE_LOCAL_SUBCHANNEL_POOL, 1);"
-  - "google/cloud/internal/base64_transforms_test.cc:38:9        abcdefghi                       U       {\"abcdefghi\", \"YWJjZGVmZ2hp\"},"
-  - "google/cloud/internal/base64_transforms_test.cc:39:9        abcdefghij                      U       {\"abcdefghij\", \"YWJjZGVmZ2hpag=="
-  - "google/cloud/internal/base64_transforms_test.cc:39:33       hpag                            U       abcdefghij\", \"YWJjZGVmZ2hpag==\"},"
-  - "google/cloud/internal/base64_transforms_test.cc:40:9        abcdefghijk                     U       {\"abcdefghijk\", \"YWJjZGVmZ2hpams="
-  - "google/cloud/internal/base64_transforms_test.cc:40:34       hpams                           U       abcdefghijk\", \"YWJjZGVmZ2hpams=\"},"
-  - "google/cloud/internal/base64_transforms_test.cc:41:9        abcdefghijkl                    U       {\"abcdefghijkl\", \"YWJjZGVmZ2hpamts"
-  - "google/cloud/internal/base64_transforms_test.cc:41:35       hpamts                          U       abcdefghijkl\", \"YWJjZGVmZ2hpamts\"},"
-  - "google/cloud/internal/base64_transforms_test.cc:42:9        abcdefghijklm                   U       {\"abcdefghijklm\", \"YWJjZGVmZ2hpamtsbQ"
-  - "google/cloud/internal/base64_transforms_test.cc:42:36       hpamtsb                         U       abcdefghijklm\", \"YWJjZGVmZ2hpamtsbQ==\"},"
-  - "google/cloud/internal/base64_transforms_test.cc:43:9        abcdefghijklmn                  U       {\"abcdefghijklmn\", \"YWJjZGVmZ2hpamtsbW"
-  - "google/cloud/internal/base64_transforms_test.cc:44:9        abcdefghijklmno                 U       {\"abcdefghijklmno\", \"YWJjZGVmZ2hpamtsbW"
-  - "google/cloud/internal/base64_transforms_test.cc:45:9        abcdefghijklmnop                U       {\"abcdefghijklmnop\", \"YWJjZGVmZ2hpamtsbW"
-  - "google/cloud/internal/base64_transforms_test.cc:46:9        abcdefghijklmnopq               U       {\"abcdefghijklmnopq\", \"YWJjZGVmZ2hpamtsbW"
-  - "google/cloud/internal/base64_transforms_test.cc:47:9        abcdefghijklmnopqr              U       {\"abcdefghijklmnopqr\", \"YWJjZGVmZ2hpamtsbW"
-  - "google/cloud/internal/base64_transforms_test.cc:48:9        abcdefghijklmnopqrs             U       {\"abcdefghijklmnopqrs\", \"YWJjZGVmZ2hpamtsbW"
-  - "google/cloud/internal/base64_transforms_test.cc:48:54       Fycw                            U       YWJjZGVmZ2hpamtsbW5vcHFycw==\"},"
-  - "google/cloud/internal/base64_transforms_test.cc:49:9        abcdefghijklmnopqrst            U       {\"abcdefghijklmnopqrst\", \"YWJjZGVmZ2hpamtsbW"
-  - "google/cloud/internal/base64_transforms_test.cc:50:9        abcdefghijklmnopqrstu           U       {\"abcdefghijklmnopqrstu\", \"YWJjZGVmZ2hpamtsbW"
-  - "google/cloud/internal/base64_transforms_test.cc:51:9        abcdefghijklmnopqrstuv          U       {\"abcdefghijklmnopqrstuv\", \"YWJjZGVmZ2hpamtsbW"
-  - "google/cloud/internal/base64_transforms_test.cc:52:9        abcdefghijklmnopqrstuvw         U       {\"abcdefghijklmnopqrstuvw\", \"YWJjZGVmZ2hpamtsbW"
-  - "google/cloud/internal/base64_transforms_test.cc:53:9        abcdefghijklmnopqrstuvwx        U       {\"abcdefghijklmnopqrstuvwx\", \"YWJjZGVmZ2hpamtsbW"
-  - "google/cloud/internal/base64_transforms_test.cc:54:9        abcdefghijklmnopqrstuvwxy       U       {\"abcdefghijklmnopqrstuvwxy\", \"YWJjZGVmZ2hpamtsbW"
-  - "google/cloud/internal/base64_transforms_test.cc:182:36      QUJD                            U       UrlsafeBase64Decode(\"QUJD\").value(), ElementsAre"
-  - "google/cloud/internal/base64_transforms_test.cc:183:36      QUJDRA                          U       UrlsafeBase64Decode(\"QUJDRA\").value(),"
+  - "google/cloud/internal/base64_transforms_test.cc:39:33       hpag        U       abcdefghij\", \"YWJjZGVmZ2hpag==\"},"
+  - "google/cloud/internal/base64_transforms_test.cc:40:34       hpams       U       abcdefghijk\", \"YWJjZGVmZ2hpams=\"},"
+  - "google/cloud/internal/base64_transforms_test.cc:41:35       hpamts      U       abcdefghijkl\", \"YWJjZGVmZ2hpamts\"},"
+  - "google/cloud/internal/base64_transforms_test.cc:42:36       hpamtsb     U       abcdefghijklm\", \"YWJjZGVmZ2hpamtsbQ==\"},"
+  - "google/cloud/internal/base64_transforms_test.cc:48:54       Fycw        U       YWJjZGVmZ2hpamtsbW5vcHFycw==\"},"
+  - "google/cloud/internal/base64_transforms_test.cc:182:36      QUJD        U       UrlsafeBase64Decode(\"QUJD\").value(), ElementsAre"
+  - "google/cloud/internal/base64_transforms_test.cc:183:36      QUJDRA      U       UrlsafeBase64Decode(\"QUJDRA\").value(),"
   - "google/cloud/internal/build_info.cc.in:18:11        cctype              U       #include <cctype>"
   - "google/cloud/internal/build_info.cc.in:25:4         NOLINTNEXTLINE      U       // NOLINTNEXTLINE(readability-identifier"
   - "google/cloud/internal/call_context.h:63:11          otel    U       , otel_scope_(std::move(call"
@@ -1066,7 +1049,6 @@ issues:
   - "google/cloud/spanner/internal/connection_impl_test.cc:2562:37       BADDECAF    U       { partition_token: \"BADDECAF\" }"
   - "google/cloud/spanner/internal/connection_impl_test.cc:2564:25       CAFEDEAD    U       transaction: { id: \"CAFEDEAD\" }"
   - "google/cloud/spanner/internal/logging_result_set_reader.cc:37:43        unresumable     U       __func__ << \"() << (unresumable)\";"
-  - "google/cloud/spanner/internal/merge_chunk_test.cc:175:29        Bools       U       MergeChunk, CannotMergeBools) {"
   - "google/cloud/spanner/internal/partial_result_set_resume_test.cc:528:39      Resumability    U       set<spanner::StreamingResumabilityBufferSizeOption>(0)"
   - "google/cloud/spanner/internal/partial_result_set_source_test.cc:527:31      chunksecond     U       not_chunked\", \"first_chunksecond_chunkthird_chunk\","
   - "google/cloud/spanner/internal/partial_result_set_source_test.cc:527:43      chunkthird      U       \"first_chunksecond_chunkthird_chunk\","
@@ -1230,7 +1212,6 @@ issues:
   - "google/cloud/storage/tests/signed_url_conformance_test.cc:299:17        ifstr                       U       std::ifstream ifstr(conformance_tests_file"
   - "google/cloud/storage/tests/signed_url_conformance_test.cc:320:25        nonconformant               U       std::set<std::string> nonconformant_url_tests{\"ListObjects"
   - "google/cloud/storage/tools/make_jwt_assertion_for_test_data.py:120:21       nondefaults     U       payload_str_for_nondefaults = payload_str(ALT_SCOPE"
-  - "google/cloud/storage/well_known_headers_test.cc:68:31       ABCDEFGHIJ      U       string key(\"0123456789-ABCDEFGHIJ-0123456789\");"
   - "google/cloud/storageinsights/v1/internal/storage_insights_auth_decorator.h:19:39        STORAGEINSIGHTS     U       CLOUD_CPP_GOOGLE_CLOUD_STORAGEINSIGHTS_V1_INTERNAL_STORAGE"
   - "google/cloud/storagetransfer/mocks/mock_storage_transfer_connection.h:19:39         STORAGETRANSFER     U       CLOUD_CPP_GOOGLE_CLOUD_STORAGETRANSFER_MOCKS_MOCK_STORAGE_TRANSFER"
   - "google/cloud/support/doc/environment-variables.dox:14:40        cloudsupport    U       (which defaults to \"cloudsupport.googleapis.com\")"
@@ -1394,7 +1375,6 @@ issues:
   - "protos/google/cloud/compute/v1/internal/common_063.proto:231:30         LACP                U       BUNDLE_AGGREGATION_TYPE_LACP: LACP is enabled."
   - "protos/google/cloud/compute/v1/internal/common_063.proto:321:50         lacp                U       nectDiagnosticsLinkLACPStatus lacp_status = 4"
   - "protos/google/cloud/compute/v1/internal/common_063.proto:469:18         cleartext           U       // fallback to cleartext traffic if the MKA session"
-  - "protos/google/cloud/compute/v1/internal/common_063.proto:547:38         unprefixed          U       deprecated in favor of the unprefixed values."
   - "protos/google/cloud/compute/v1/internal/common_063.proto:565:15         NSRC                U       // value of NSRC_GOOGLE has been deprecated"
   - "protos/google/cloud/compute/v1/internal/common_064.proto:40:28          Mbit            U       values: - BPS_50M: 50 Mbit/s - BPS_100M: 100 Mbit"
   - "protos/google/cloud/compute/v1/internal/common_064.proto:94:13          subinterface    U       // router subinterface for this interconnect"
