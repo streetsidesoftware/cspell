@@ -3,7 +3,7 @@ Repository: php/php-src
 Url: "https://github.com/php/php-src.git"
 Args: ["--config=../../../../config/repositories/php/php-src/cspell.json","**/*.{md,c,h,php}"]
 Lines:
- CSpell: Files checked: 1826, Issues found: 45340 in 1307 files
+ CSpell: Files checked: 1826, Issues found: 45229 in 1305 files
  exit code: 1
 ./CODING_STANDARDS.md:105:23    - Unknown word (intvl)        -- // Could be 'date_intvl_create_from_date_str
 ./CODING_STANDARDS.md:114:8     - Unknown word (setclientencoding) -- pg_setclientencoding
@@ -220,10 +220,9 @@ Lines:
 ./Zend/zend_execute.c:61:18     - Unknown word (IBMC)       -- # elif defined(__IBMC__) && ZEND_GCC_VERSION
 ./Zend/zend_execute.c:673:36    - Unknown word (fsep)       -- fname, const char **fsep, const char **fclass
 ./Zend/zend_execute.c:673:55    - Unknown word (fclass)     -- *fsep, const char **fclass,
-./Zend/zend_execute_API.c:1035:24   - Unknown word (fcic)         -- zend_fcall_info_cache fcic;
+./Zend/zend_execute_API.c:1035:24   - Unknown word (fcic)       -- zend_fcall_info_cache fcic;
 ./Zend/zend_execute_API.c:1518:111  - Unknown word (EXECUTEONLYONCE)     -- seconds*1000, 0, WT_EXECUTEONLYONCE)) {
 ./Zend/zend_execute_API.c:1518:47   - Unknown word (WAITORTIMERCALLBACK) -- rQueueTimer(&tq_timer, NULL, (WAITORTIMERCALLBACK)tq_timer_cb, (VOID*
-./Zend/zend_execute_API.c:702:72    - Unknown word (retriggering) -- which can happen when retriggering ast
 ./Zend/zend_fibers.c:157:33    - Unknown word (fcontext)   -- by boost.context in fcontext.hpp:
 ./Zend/zend_fibers.c:322:51    - Unknown word (chkstk)     -- probing function ___chkstk_darwin incorrectly
 ./Zend/zend_gc.c:1776:26   - Unknown word (tmpvars)    -- static void zend_gc_root_tmpvars(void);
@@ -391,7 +390,6 @@ Lines:
 ./build/gen_stub.php:1513:30   - Unknown word (constructorsynopsis) -- $synopsisType = "constructorsynopsis";
 ./build/gen_stub.php:1515:30   - Unknown word (destructorsynopsis)  -- $synopsisType = "destructorsynopsis";
 ./build/gen_stub.php:1517:30   - Unknown word (methodsynopsis)      -- $synopsisType = "methodsynopsis";
-./build/gen_stub.php:1604:30   - Unknown word (Consts)              -- public array $originatingConsts;
 ./build/gen_stub.php:1811:56   - Unknown word (Linkend)             -- getFieldSynopsisDefaultLinkend(): string;
 ./build/gen_stub.php:1820:77   - Unknown word (fieldsynopsis)       -- DOMDocument $doc, DOMElement $fieldsynopsisElement): void
 ./build/gen_stub.php:1911:44   - Unknown word (linkend)             -- varnameElement->setAttribute("linkend", $this->link);
@@ -407,7 +405,6 @@ Lines:
 ./build/gen_stub.php:3368:80   - Unknown word (docblocks)           -- callable(string):mixed in docblocks
 ./build/gen_stub.php:3369:64   - Unknown word (inparens)            -- \\\]+(?<parens>\((?<inparens>(?:(?&parens)|[^(){
 ./build/gen_stub.php:3469:27   - Unknown word (undocumentable)      -- case 'undocumentable':
-./build/gen_stub.php:3693:24   - Unknown word (consts)              -- @param ConstInfo[] $consts
 ./build/gen_stub.php:3814:47   - Unknown word (conds)               -- reprocessorConditions(array &$conds, Stmt $stmt): ?string
 ./build/gen_stub.php:4557:46   - Unknown word (varlistentry)        -- getElementsByTagName("varlistentry") as $entry) {
 ./build/gen_stub.php:4779:41   - Unknown word (exceptionref)        -- '/<phpdoc:(classref|exceptionref)\s+xmlns:phpdoc=\"(
@@ -2158,10 +2155,8 @@ Lines:
 ./ext/gd/libgd/gd.c:697:4     - Unknown word (Duvanenko)  -- * Duvanenko, Robbins and Gyurcsik
 ./ext/gd/libgd/gd.c:697:65    - Unknown word (Dobb's)     -- for short.  See Dr Dobb's
 ./ext/gd/libgd/gd.c:714:60    - Unknown word (maxdim)     -- int *x1, int *y1, int maxdim) {
-./ext/gd/libgd/gd.c:71:54     - Unknown word (abcdefghi)  -- xfd, 0xfe, 0xb1,	/*.abcdefghi...... */
 ./ext/gd/libgd/gd.c:73:54     - Unknown word (jklmnopqr)  -- xb8, 0xc6, 0xa4,	/*.jklmnopqr...... */
 ./ext/gd/libgd/gd.c:75:55     - Unknown word (stuvwxyz)   -- xdd, 0xde, 0xae,	/*..stuvwxyz...... */
-./ext/gd/libgd/gd.c:79:54     - Unknown word (ABCDEFGHI)  -- xf2, 0xf3, 0xf5,	/*.ABCDEFGHI...... */
 ./ext/gd/libgd/gd.c:81:54     - Unknown word (JKLMNOPQR)  -- xdb, 0xfa, 0xff,	/*.JKLMNOPQR...... */
 ./ext/gd/libgd/gd.c:83:55     - Unknown word (STUVWXYZ)   -- xd2, 0xd3, 0xd5,	/*..STUVWXYZ...... */
 ./ext/gd/libgd/gd.c:874:57    - Unknown word (Thorben)    -- truecolor (thanks to Thorben Kundinger for pointing
@@ -3884,7 +3879,6 @@ Lines:
 ./ext/opcache/ZendAccelerator.c:2724:12   - Unknown word (reseted)    -- ZCG(pcre_reseted) = false;
 ./ext/opcache/ZendAccelerator.c:2806:4    - Unknown word (fpmi)       -- "fpmi-fcgi",
 ./ext/opcache/ZendAccelerator.c:2809:4    - Unknown word (uwsgi)      -- "uwsgi",
-./ext/opcache/ZendAccelerator.c:2810:4    - Unknown word (fuzzer)     -- "fuzzer",
 ./ext/opcache/ZendAccelerator.c:2811:4    - Unknown word (frankenphp) -- "frankenphp",
 ./ext/opcache/ZendAccelerator.c:2948:43   - Unknown word (HUGEPAGE)   -- HUGETLB) || defined(MADV_HUGEPAGE)
 ./ext/opcache/ZendAccelerator.c:3068:10   - Unknown word (permflags)  -- int permflags = entry->kve_protection
@@ -5280,7 +5274,6 @@ Lines:
 ./ext/pcre/pcre2lib/pcre2_compile.c:3173:37   - Unknown word (numberical)       -- brace delimiters it is a numberical back reference and does
 ./ext/pcre/pcre2lib/pcre2_compile.c:3326:46   - Unknown word (STARTWORD)        -- )(ptr, STRING_WEIRD_STARTWORD, 6) == 0 ||
 ./ext/pcre/pcre2lib/pcre2_compile.c:3327:46   - Unknown word (ENDWORD)          -- )(ptr, STRING_WEIRD_ENDWORD, 6) == 0))
-./ext/pcre/pcre2lib/pcre2_compile.c:3504:9    - Unknown word (fuzzers)          -- fuzzers do that kind of thing
 ./ext/pcre/pcre2lib/pcre2_compile.c:375:8     - Unknown word (PSKIP)          -- enum { PSKIP_ALT, PSKIP_CLASS, PSKIP
 ./ext/pcre/pcre2lib/pcre2_compile.c:3797:18   - Unknown word (lookaround)       -- non-atomic lookaround ones are new. They are
 ./ext/pcre/pcre2lib/pcre2_compile.c:379:2     - Unknown word (Wconversion)    -- -Wconversion. This version gets a
@@ -5328,7 +5321,7 @@ Lines:
 ./ext/pcre/pcre2lib/pcre2_compile.c:5371:3    - Unknown word (codeptr)          -- codeptr points to
 ./ext/pcre/pcre2lib/pcre2_compile.c:5372:3    - Unknown word (pptrptr)          -- pptrptr points to
 ./ext/pcre/pcre2lib/pcre2_compile.c:5374:3    - Unknown word (firstcuptr)       -- firstcuptr place to put
-./ext/pcre/pcre2lib/pcre2_compile.c:5375:3    - Unknown word (firstcuflagsptr) -- firstcuflagsptr place to put the first
+./ext/pcre/pcre2lib/pcre2_compile.c:5375:3    - Unknown word (firstcuflagsptr)  -- firstcuflagsptr place to put the first
 ./ext/pcre/pcre2lib/pcre2_compile.c:5376:3    - Unknown word (reqcuptr)        -- reqcuptr place to put
 ./ext/pcre/pcre2lib/pcre2_compile.c:5377:3    - Unknown word (reqcuflagsptr)   -- reqcuflagsptr place to put the
 ./ext/pcre/pcre2lib/pcre2_compile.c:5378:3    - Unknown word (bcptr)           -- bcptr points to
@@ -6776,8 +6769,7 @@ Lines:
 ./ext/pdo/pdo_sqlstate.c:296:14    - Unknown word (Plpgsql)    -- { "P0000",	"Plpgsql error" },
 ./ext/pdo/pdo_stmt.c:256:31    - Unknown word (pparam)     -- pdo_bound_param_data *pparam = NULL;
 ./ext/pdo/pdo_stmt.c:420:21    - Unknown word (unsignend)  -- /* num_index is unsignend */
-./ext/pdo/pdo_stmt.c:510:8     - Unknown word (stringification) -- /* If stringification is requested, override
-./ext/pdo/pdo_stmt.c:690:65    - Unknown word (agrs)            -- stmt, int free_ctor_agrs) /* {{{ */
+./ext/pdo/pdo_stmt.c:690:65    - Unknown word (agrs)       -- stmt, int free_ctor_agrs) /* {{{ */
 ./ext/pdo_dblib/dblib_driver.c:112:15    - Unknown word (resret)      -- RETCODE ret, resret;
 ./ext/pdo_dblib/dblib_driver.c:114:2     - Unknown word (dbsetuserdata) -- dbsetuserdata(H->link, (BYTE*)&H-
 ./ext/pdo_dblib/dblib_driver.c:116:14    - Unknown word (dbcmd)         -- if (FAIL == dbcmd(H->link, ZSTR_VAL(sql
@@ -9181,11 +9173,9 @@ Lines:
 ./sapi/fuzzer/README.md:88:1      - Unknown word (autoreconf)  -- autoreconf -vfi
 ./sapi/fuzzer/README.md:91:1      - Unknown word (popd)        -- popd
 ./sapi/fuzzer/README.md:93:8      - Unknown word (ONIG)        -- export ONIG_CFLAGS="-I$PWD/oniguruma
-./sapi/fuzzer/fuzzer-execute.c:19:9      - Unknown word (Fuzzer)     -- int LLVMFuzzerTestOneInput(const uint
 ./sapi/fuzzer/fuzzer-execute.c:22:52     - Unknown word (codepaths)  -- necessary to reach new codepaths. */
 ./sapi/fuzzer/fuzzer-sapi.c:38:36     - Unknown word (libfuzzer)  -- timeout be enforced by libfuzzer, not PHP. */
 ./sapi/fuzzer/fuzzer-sapi.c:51:44     - Unknown word (tempname)   -- rename,rmdir,symlink,tempname,touch,unlink,fopen"
-./sapi/fuzzer/fuzzer.h:18:9      - Unknown word (FUZZER)     -- #define FUZZER_VERSION PHP_VERSION
 ./sapi/fuzzer/generate_all.php:4:30      - Unknown word (unserializehash) -- _DIR__ . '/generate_unserializehash_corpus.php';
 ./sapi/fuzzer/generate_unserializehash_corpus.php:8:6       - Unknown word (algx)       -- $algx = preg_replace('/[^
 ./sapi/litespeed/README.md:147:14    - Unknown word (REQS)       -- * `LSAPI_MAX_REQS` or `PHP_LSAPI_MAX_REQUESTS

@@ -5,7 +5,7 @@ Args: '["**/*.{md,py}"]'
 Summary:
   files: 2772
   filesWithIssues: 923
-  issues: 8106
+  issues: 8091
   errors: 0
 Errors: []
 
@@ -420,7 +420,6 @@ issues:
   - "django/core/handlers/wsgi.py:19:38          werkzeug        U       implementation from werkzeug.wsgi.LimitedStream"
   - "django/core/handlers/wsgi.py:167:53         lighttpd        U       not every web server (lighttpd!) passes this"
   - "django/core/mail/__init__.py:91:5           datatuple       U       datatuple, fail_silently=False"
-  - "django/core/management/__init__.py:259:39       retrigger       U       following line will retrigger an ImproperlyConfigured"
   - "django/core/management/__init__.py:282:58       COMPREPLY       U       is passed to BASH's `COMPREPLY` variable"
   - "django/core/management/__init__.py:392:49       noreload        U       \"runserver\" and \"--noreload\" not in self.argv:"
   - "django/core/management/base.py:340:25       djangoprojects      U       '\"/home/djangoprojects/myproject\".'"
@@ -622,8 +621,7 @@ issues:
   - "django/db/backends/sqlite3/schema.py:244:41         autom       U       model(model, handle_autom2m=False)"
   - "django/db/backends/utils.py:22:73       nextset         U       fetchmany\", \"fetchall\", \"nextset\"])"
   - "django/db/backends/utils.py:320:23      getcontext      U       context = decimal.getcontext().copy()"
-  - "django/db/migrations/autodetector.py:697:30         opns        U       # Generate other opns"
-  - "django/db/migrations/autodetector.py:870:44         deduping    U       make the operation, deduping any dependencies"
+  - "django/db/migrations/autodetector.py:697:30         opns    U       # Generate other opns"
   - "django/db/migrations/migration.py:131:26        behaviour       U       # Normal behaviour"
   - "django/db/migrations/operations/base.py:32:5        elidable    U       elidable = False"
   - "django/db/migrations/operations/models.py:104:25        smodel      U       return \"Create %smodel %s\" % ("
@@ -671,7 +669,6 @@ issues:
   - "django/db/models/sql/compiler.py:1497:23        convs           U       for pos, (convs, expression) in converters"
   - "django/db/models/sql/compiler.py:1900:9         innerq          U       innerq = self.query.clone("
   - "django/db/models/sql/compiler.py:1905:9         outerq          U       outerq = Query(self.query.model"
-  - "django/db/models/sql/compiler.py:2003:61        munge           U       results from other tables, munge the \"where\""
   - "django/db/models/sql/constants.py:9:3           Namedtuples     U       # Namedtuples for sql.* internal use"
   - "django/db/models/sql/constants.py:24:1          LOUTER          U       LOUTER = \"LEFT OUTER JOIN\""
   - "django/db/models/sql/datastructures.py:21:20        travelled       U       # The path travelled, this includes the path"
@@ -1409,7 +1406,6 @@ issues:
   - "tests/auth_tests/test_hashers.py:298:14         bcryptsha       U       def test_bcryptsha256_salt_check(self)"
   - "tests/auth_tests/test_hashers.py:555:55         QOXS            U       1,p=1$c29tZXNhbHQ$gwQOXSNhxiOxPOA0+PY10P9QFO"
   - "tests/auth_tests/test_hashers.py:555:59         Nhxi            U       1$c29tZXNhbHQ$gwQOXSNhxiOxPOA0+PY10P9QFO\""
-  - "tests/auth_tests/test_hashers.py:572:17         abcdefghijk     U       salt = \"abcdefghijk\""
   - "tests/auth_tests/test_hashers.py:590:60         Nklj            U       400,t=2,p=8$Y041dExhNkljRUUy$TMa6A8fPJh\""
   - "tests/auth_tests/test_hashers.py:591:14         CAUX            U       \"CAUXRhJXCXdw\""
   - "tests/auth_tests/test_management.py:141:53      xfalia                              U       username = lambda: \"J\\xfalia\""
@@ -1435,7 +1431,6 @@ issues:
   - "tests/auth_tests/test_tokens.py:24:42       tokentestuser       U       objects.create_user(\"tokentestuser\", \"test2@example.com"
   - "tests/auth_tests/test_tokens.py:34:42       comebackkid         U       objects.create_user(\"comebackkid\", \"test3@example.com"
   - "tests/auth_tests/test_tokens.py:51:22       changeemailuser     U       \"changeemailuser\","
-  - "tests/auth_tests/test_tokens.py:101:23      abcdefghijkl        U       new_secret = \"abcdefghijkl\""
   - "tests/auth_tests/test_validators.py:261:44      ᴮᴵᴳᴮᴵᴿᴰ             U       usernames = [\"joe\", \"René\", \"ᴮᴵᴳᴮᴵᴿᴰ\", \"أحمد\"]"
   - "tests/auth_tests/test_validators.py:261:55      أحمد                U       \"René\", \"ᴮᴵᴳᴮᴵᴿᴰ\", \"أحمد\"]"
   - "tests/auth_tests/test_validators.py:265:14      zerowidth           U       \"zerowidth\\u200Bspace\","
@@ -1487,8 +1482,7 @@ issues:
   - "tests/cache/tests.py:2388:63        somethingelse       U       path, {\"foo\": \"bar\", \"somethingelse\": \"true\"})"
   - "tests/cache/tests.py:2397:23        Hola                U       es_message = \"Hola mundo!\""
   - "tests/cache/tests.py:2397:28        mundo               U       es_message = \"Hola mundo!\""
-  - "tests/check_framework/test_security.py:411:37       abcdefghijklmnopqrstuvwx    U       settings(SECRET_KEY=(\"abcdefghijklmnopqrstuvwx\" * 2) + \"ab\")"
-  - "tests/check_framework/test_security.py:519:14       badkey                      U       \"badkey\","
+  - "tests/check_framework/test_security.py:519:14       badkey      U       \"badkey\","
   - "tests/check_framework/test_translation.py:16:36         extlang     U       sgn-ase\", # language+extlang"
   - "tests/check_framework/test_translation.py:30:32         subtag      U       \"en--us\", # empty subtag."
   - "tests/check_framework/tests.py:223:51       missingtag          U       system check with the \"missingtag\" tag.'"
@@ -2554,11 +2548,10 @@ issues:
   - "tests/serializers/test_json.py:129:26       invalidint      U       \"rank\": \"invalidint\","
   - "tests/serializers/test_natural.py:7:5           FKAs        U       FKAsPKNoNaturalKey,"
   - "tests/serializers/test_natural.py:24:72         Anghor      U       , data=\"Natural Key Anghor\"),"
-  - "tests/serializers/tests.py:56:9         Unregistering       U       Unregistering a serializer doesn't"
-  - "tests/serializers/tests.py:244:25       יוניקוד             U       unicode_name = \"יוניקוד\""
-  - "tests/serializers/tests.py:322:21       Spartak             U       team_str = \"Spartak Moskva\""
-  - "tests/serializers/tests.py:324:24       Soslan              U       player.name = \"Soslan Djanaev\""
-  - "tests/serializers/tests.py:324:31       Djanaev             U       player.name = \"Soslan Djanaev\""
+  - "tests/serializers/tests.py:244:25       יוניקוד     U       unicode_name = \"יוניקוד\""
+  - "tests/serializers/tests.py:322:21       Spartak     U       team_str = \"Spartak Moskva\""
+  - "tests/serializers/tests.py:324:24       Soslan      U       player.name = \"Soslan Djanaev\""
+  - "tests/serializers/tests.py:324:31       Djanaev     U       player.name = \"Soslan Djanaev\""
   - "tests/servers/test_basehttp.py:19:7         Unclosable      U       class UnclosableBytesIO(BytesIO):"
   - "tests/servers/tests.py:218:49       Iamastream      U       ssertEqual(response.read(), b\"Iamastream\")"
   - "tests/servers/tests.py:312:66       тест            U       % urlencode({\"q\": \"тест\"})) as f:"

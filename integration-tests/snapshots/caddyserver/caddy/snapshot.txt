@@ -3,7 +3,7 @@ Repository: caddyserver/caddy
 Url: "https://github.com/caddyserver/caddy.git"
 Args: ["**/*.go"]
 Lines:
- CSpell: Files checked: 242, Issues found: 3487 in 224 files
+ CSpell: Files checked: 242, Issues found: 3401 in 224 files
  exit code: 1
 ./admin.go:1357:21   - Unknown word (pidfile)     -- // PIDFile writes a pidfile to the file at filename
 ./admin.go:331:29    - Unknown word (infosec)     -- security checks, the infosec community assures me
@@ -102,7 +102,6 @@ Lines:
 ./caddytest/caddytest.go:94:53     - Unknown word (configurion) -- configure the server with a configurion of a specific
 ./caddytest/integration/autohttps_test.go:20:11     - Unknown word (Yahaha)     -- respond "Yahaha! You found me!"
 ./caddytest/integration/caddyfile_test.go:155:43    - Unknown word (someinvalidprefix) -- unsupported URL scheme someinvalidprefix://",
-./caddytest/integration/caddyfile_test.go:303:15    - Unknown word (upstreams)         -- "upstreams": [
 ./caddytest/integration/caddyfile_test.go:82:11     - Unknown word (clientname) -- Name: "clientname",
 ./caddytest/integration/stream_test.go:155:3     - Unknown word (rstring)    -- rstring, err := httputil.DumpRequest
 ./caddytest/integration/stream_test.go:337:31    - Unknown word (automaticlly) -- underlying transport will automaticlly add gzip
@@ -140,7 +139,6 @@ Lines:
 ./logging.go:425:10    - Unknown word (superspace) -- // be a superspace or subspace of an item
 ./metrics.go:39:15     - Unknown word (promhttp)   -- // Similar to promhttp.InstrumentHandlerCounter
 ./metrics.go:8:50      - Unknown word (promauto)   -- client_golang/prometheus/promauto"
-./modules.go:312:56    - Unknown word (provisionings) -- cleaning up from partial provisionings.
 ./modules/caddyevents/app.go:128:12    - Unknown word (Iface)       -- handlersIface, err := ctx.LoadModule
 ./modules/caddyevents/app.go:15:9      - Unknown word (caddyevents) -- package caddyevents
 ./modules/caddyevents/app.go:372:41    - Unknown word (specversion) -- string `json:"specversion"`
@@ -204,14 +202,11 @@ Lines:
 ./modules/caddyhttp/fileserver/matcher_test.go:192:20    - Unknown word (notphp)      -- path: "/notphp.php.txt",
 ./modules/caddyhttp/fileserver/matcher_test.go:72:20     - Unknown word (foodir)     -- path: "/foodir",
 ./modules/caddyhttp/fileserver/matcher_test.go:90:15     - Unknown word (missingfile) -- path: "/missingfile.php",
-./modules/caddyhttp/fileserver/staticfiles.go:132:51    - Unknown word (explictness)      -- maximum clarity and explictness, use complete,
-./modules/caddyhttp/fileserver/staticfiles.go:170:2     - Unknown word (precompressors)   -- precompressors map[string]encode
-./modules/caddyhttp/fileserver/staticfiles.go:344:12    - Unknown word (canonicalization) -- // if URL canonicalization is enabled, we need
-./modules/caddyhttp/fileserver/staticfiles.go:454:3     - Unknown word (mtyp)             -- mtyp := mime.TypeByExtension
-./modules/caddyhttp/fileserver/staticfiles.go:530:74    - Unknown word (Caza)             -- written by Nathaniel Caza.
+./modules/caddyhttp/fileserver/staticfiles.go:132:51    - Unknown word (explictness) -- maximum clarity and explictness, use complete,
+./modules/caddyhttp/fileserver/staticfiles.go:170:2     - Unknown word (precompressors) -- precompressors map[string]encode
+./modules/caddyhttp/fileserver/staticfiles.go:454:3     - Unknown word (mtyp)           -- mtyp := mime.TypeByExtension
+./modules/caddyhttp/fileserver/staticfiles.go:530:74    - Unknown word (Caza)           -- written by Nathaniel Caza.
 ./modules/caddyhttp/fileserver/staticfiles.go:64:40     - Unknown word (dirctory)   -- a JSON array of the dirctory listing when the `Accept
-./modules/caddyhttp/fileserver/staticfiles.go:81:34     - Unknown word (canonicalize) -- default, this handler will canonicalize URIs so that requests
-./modules/caddyhttp/fileserver/staticfiles.go:84:4      - Unknown word (Canonicalization) -- // Canonicalization redirects are not issued
 ./modules/caddyhttp/headers/headers.go:187:27    - Unknown word (Superceded) -- they are written out. Superceded if Require is set.
 ./modules/caddyhttp/headers/headers_test.go:216:11    - Unknown word (hdrs)       -- for k, hdrs := range tc.respHeader
 ./modules/caddyhttp/headers/headers_test.go:93:32     - Unknown word (lalala)     -- Header-Suffix": []string{"lalala"},
@@ -248,7 +243,6 @@ Lines:
 ./modules/caddyhttp/requestbody/caddyfile.go:15:9      - Unknown word (requestbody) -- package requestbody
 ./modules/caddyhttp/responsewriter_test.go:23:6      - Unknown word (barebones)  -- // a barebones http.ResponseWriter
 ./modules/caddyhttp/reverseproxy/addresses.go:104:20    - Unknown word (proxying)   -- // a backend and proxying to it, so we cannot
-./modules/caddyhttp/reverseproxy/admin.go:26:28     - Unknown word (Upstreams)  -- RegisterModule(adminUpstreams{})
 ./modules/caddyhttp/reverseproxy/caddyfile.go:560:5     - Unknown word (usize)      -- usize, err := humanize.ParseBytes
 ./modules/caddyhttp/reverseproxy/fastcgi/client.go:113:27    - Unknown word (MPXS)       -- MultiplexConns string = "MPXS_CONNS"
 ./modules/caddyhttp/reverseproxy/fastcgi/client.go:20:19     - Unknown word (Junqing)    -- // Copyright 2012 Junqing Tan <ivan@mysqlab.net
@@ -260,15 +254,13 @@ Lines:
 ./modules/caddyhttp/reverseproxy/fastcgi/client_test.go:55:5      - Unknown word (globalt)    -- var globalt *testing.T
 ./modules/caddyhttp/reverseproxy/fastcgi/client_test.go:87:34     - Unknown word (filekey)    -- Fprintln(resp, "server:filekey ", kn )
 ./modules/caddyhttp/reverseproxy/forwardauth/caddyfile.go:15:9      - Unknown word (forwardauth) -- package forwardauth
-./modules/caddyhttp/reverseproxy/healthchecks.go:115:5     - Unknown word (Canonicalize) -- // Canonicalize the header keys ahead
-./modules/caddyhttp/reverseproxy/healthchecks.go:478:71    - Unknown word (forgetter)    -- health check failure forgetter panicked",
+./modules/caddyhttp/reverseproxy/healthchecks.go:478:71    - Unknown word (forgetter)  -- health check failure forgetter panicked",
 ./modules/caddyhttp/reverseproxy/healthchecks.go:47:35     - Unknown word (proxied)    -- health checks monitor proxied requests for errors
 ./modules/caddyhttp/reverseproxy/httptransport.go:212:73    - Unknown word (generelly)  -- and this address is generelly of very
 ./modules/caddyhttp/reverseproxy/httptransport.go:293:18    - Unknown word (Alives)     -- rt.DisableKeepAlives = !*h.KeepAlive.Enabled
 ./modules/caddyhttp/reverseproxy/httptransport.go:304:37    - Unknown word (keepalives) -- Logger().Warn("disabling keepalives, they are incompatible
 ./modules/caddyhttp/reverseproxy/httptransport.go:350:3     - Unknown word (newtransport) -- newtransport := &HTTPTransport{
 ./modules/caddyhttp/reverseproxy/reverseproxy.go:1335:56   - Unknown word (libcurl)    -- standard but still sent by libcurl and rejected by e.g
-./modules/caddyhttp/reverseproxy/reverseproxy.go:1339:16   - Unknown word (canonicalized) -- "Te", // canonicalized version of "TE"
 ./modules/caddyhttp/reverseproxy/reverseproxy.go:180:22    - Unknown word (roundtrips) -- // after successful roundtrips. The first handler that
 ./modules/caddyhttp/reverseproxy/reverseproxy.go:547:5     - Unknown word (succ)       -- if succ, ok := proxyErr.(roundtripSuc
 ./modules/caddyhttp/reverseproxy/reverseproxy.go:585:26    - Unknown word (gunicorn)   -- with "slow clients" (gunicorn, etc.) - this obviously
@@ -374,7 +366,6 @@ Lines:
 ./modules/logging/filters_test.go:89:20     - Unknown word (notexist)   -- {replaceAction, "notexist", "REDACTED"},
 ./modules/logging/netwriter.go:94:13     - Unknown word (redialer)   -- reconn := &redialerConn{
 ./modules/logging/netwriter.go:94:2      - Unknown word (reconn)     -- reconn := &redialerConn{
-./modules/metrics/metrics.go:118:14    - Unknown word (quantile)   -- // except quantile/le label values always
 ./modules/metrics/metrics_test.go:29:52     - Unknown word (openmetrics) -- tDispenser(`metrics { disable_openmetrics }`)
 ./replacer_test.go:250:14    - Unknown word (NOOO)       -- return "NOOO", false
 ./replacer_test.go:275:26    - Unknown word (äütest)     -- expected: "val1123öö_äütest-123space value1.2.3
