@@ -451,9 +451,9 @@ By default the flags `gim` are added if no flags are given.
 
 The spell checker works in the following way:
 
-1.  Find all text matching `includeRegExp`
-1.  Remove any text matching `ignoreRegExp`
-1.  Check the remaining text.
+1. Find all text matching `includeRegExp`
+1. Remove any text matching `ignoreRegExp`
+1. Check the remaining text.
 
 #### Exclude Example
 
