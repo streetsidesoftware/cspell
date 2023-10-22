@@ -200,12 +200,12 @@ each line can only refer to previous lines.
 
 How to walk the data to see if "talks" is in it.
 
-1.  Start with the root at offset 8.
-1.  t found goto 7
-1.  a found goto 6
-1.  l found goto 5
-1.  k found goto 4
-1.  s found stop (goto 0 is stop).
+1. Start with the root at offset 8.
+1. t found goto 7
+1. a found goto 6
+1. l found goto 5
+1. k found goto 4
+1. s found stop (goto 0 is stop).
 
 <!---
     cspell:word DAFSA DAWG
