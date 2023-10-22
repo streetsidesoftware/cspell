@@ -2,6 +2,12 @@ name: " 📚 Update Dictionaries Main"
 
 on:
   workflow_dispatch:
+    inputs:
+      base:
+        description: The Base Ref to apply the diff
+        required: false
+        default: "main"
+
   schedule:
     - cron: "0 7 * * *"
 
@@ -9,8 +15,8 @@ permissions:
   contents: read
 
 env:
-  NEW_BRANCH: "update-dictionaries-main"
-  REF_BRANCH: main
+  NEW_BRANCH: "update-dictionaries-${{ inputs.base || 'main' }}"
+  REF_BRANCH: ${{ inputs.base || 'main' }}
 
 jobs:
   calc-ref:
@@ -289,14 +295,6 @@ jobs:
     env:
       REF_BRANCH: ${{ needs.calc-ref.outputs.ref }}
 
-    outputs:
-      base: ${{ env.REF_BRANCH }}
-      body: |
-        ## Update Dictionaries (${{ env.REF_BRANCH }})
-      commit-message: "fix: Workflow Bot -- Update Dictionaries"
-      branch: ${{ env.NEW_BRANCH }}
-      title: "fix: Workflow Bot -- Update Dictionaries (${{ env.REF_BRANCH }})"
-
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -328,28 +326,19 @@ jobs:
         run: |
           pnpm run update-integrations-list
 
-      - name: Build Patch
-        run: |
-          git --no-pager diff > temp/patch.diff
-
-      - name: store patch
-        uses: actions/upload-artifact@v3
+      - name: PR Body
+        id: body
+        uses: streetsidesoftware/actions/public/pr-body@v1
         with:
-          name: patch
-          path: temp/patch.diff
-          retention-days: 1
+          title: Update Dictionaries (${{ env.REF_BRANCH }})
 
-  pr:
-    uses: ./.github/workflows/reuseable-pr-from-artifact.yml
-    needs:
-      - pr-setup
-    with:
-      patch_artifact: patch
-      base: ${{ needs.pr-setup.outputs.base }}
-      body: ${{ needs.pr-setup.outputs.body }}
-      commit-message: ${{ needs.pr-setup.outputs.commit-message }}
-      branch: ${{ needs.pr-setup.outputs.branch }}
-      title: ${{ needs.pr-setup.outputs.title }}
-    secrets:
-      app_id: ${{ secrets.AUTOMATION_APP_ID }}
-      private_key: ${{ secrets.AUTOMATION_PRIVATE_KEY }}
+      - name: PR
+        uses: streetsidesoftware/actions/.github/actions/pr@v1
+        with:
+          commit-message: "fix: Workflow Bot -- Update Dictionaries (${{ env.REF_BRANCH }})"
+          branch: ${{ env.NEW_BRANCH }}
+          base: ${{ env.REF_BRANCH }}
+          title: "fix: Workflow Bot -- Update Dictionaries (${{ env.REF_BRANCH }})"
+          body: ${{ steps.body.outputs.body }}
+          app_id: ${{ secrets.AUTOMATION_APP_ID }}
+          app_private_key: ${{ secrets.AUTOMATION_PRIVATE_KEY }}
