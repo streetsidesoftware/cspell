@@ -3,9 +3,9 @@ Repository: eslint/eslint
 Url: https://github.com/eslint/eslint
 Args: '["**","--exclude=bin/**","--exclude=CHANGELOG.md","--exclude=_data","--exclude=tests/bench/large.js","--exclude=docs/src/_includes","--exclude=docs/src/assets/{fonts,s?css,images}"]'
 Summary:
-  files: 1895
-  filesWithIssues: 1257
-  issues: 5504
+  files: 1896
+  filesWithIssues: 1258
+  issues: 5521
   errors: 0
 Errors: []
 
@@ -85,6 +85,7 @@ issues:
   - "docs/src/extend/custom-rules-deprecated.md:533:1        camelcase       U       camelcase |"
   - "docs/src/extend/custom-rules-deprecated.md:580:81       rulesdir        U       interface) using the `--rulesdir` option to specify the"
   - "docs/src/extend/custom-rules.md:398:78      multipass       U       without triggering multipass fixes. Each suggestion"
+  - "docs/src/extend/plugin-migration-flat-config.md:217:17      xdescribe       U       xdescribe: true"
   - "docs/src/extend/plugins.md:37:162       myplugin    U       named `eslint-plugin-myplugin`, then in your configuration"
   - "docs/src/extend/scope-manager-interface.md:6:125        escope          U       eslint-scope), a fork of [escope](https://github.com"
   - "docs/src/extend/scope-manager-interface.md:218:100      redeclared      U       If this variable is redeclared, this array includes"
@@ -256,10 +257,10 @@ issues:
   - "docs/src/use/configure/rules.md:25:294      buildtime       U       other than a potential buildtime or runtime error (such"
   - "docs/src/use/formatters/index.md:17:4           checkstyle      U       * [checkstyle](#checkstyle)"
   - "docs/src/use/formatters/index.md:70:25          Checkstyle      U       Outputs results to the [Checkstyle](https://checkstyle"
-  - "docs/src/use/formatters/index.md:148:2          testsuites      U       <testsuites>"
-  - "docs/src/use/formatters/index.md:149:2          testsuite       U       <testsuite package=\"org.eslint"
-  - "docs/src/use/formatters/index.md:150:2          testcase        U       <testcase time=\"0\" name=\"org.eslint"
-  - "docs/src/use/formatters/index.md:150:53         classname       U       eslint.no-unused-vars\" classname=\"/var/lib/jenkins/workspace"
+  - "docs/src/use/formatters/index.md:887:2          testsuites      U       <testsuites>"
+  - "docs/src/use/formatters/index.md:888:2          testsuite       U       <testsuite package=\"org.eslint"
+  - "docs/src/use/formatters/index.md:889:2          testcase        U       <testcase time=\"0\" name=\"org.eslint"
+  - "docs/src/use/formatters/index.md:889:53         classname       U       eslint.no-unused-vars\" classname=\"/var/lib/jenkins/workspace"
   - "docs/src/use/getting-started.md:30:22       semistandard    U       use `eslint-config-semistandard` shared config"
   - "docs/src/use/getting-started.md:56:12       yourfile        U       npx eslint yourfile.js"
   - "docs/src/use/getting-started.md:94:217      npmjs           U       \"eslint-config\" on [npmjs.com](https://www.npmjs"
@@ -289,7 +290,8 @@ issues:
   - "lib/cli-engine/xml-escape.js:29:26          apos    U       return \"&apos;\";"
   - "lib/cli.js:27:38        humanwhocodes       U       ModuleImporter } = require(\"@humanwhocodes/module-importer\");"
   - "lib/config/default-config.js:56:61          globbed     U       ensure these files are globbed by default"
-  - "lib/config/flat-config-schema.js:223:42         incompat    U       messageTemplate = \"eslintrc-incompat\";"
+  - "lib/config/flat-config-schema.js:16:35          ungap       U       structuredClone = require(\"@ungap/structured-clone\").default"
+  - "lib/config/flat-config-schema.js:233:42         incompat    U       messageTemplate = \"eslintrc-incompat\";"
   - "lib/eslint/eslint-helpers.js:19:7           fswalk          U       const fswalk = require(\"@nodelib"
   - "lib/eslint/eslint-helpers.js:19:26          nodelib         U       const fswalk = require(\"@nodelib/fs.walk\");"
   - "lib/eslint/eslint-helpers.js:397:40         prepopulated    U       for the cwd, which is prepopulated in the searches map"
@@ -389,10 +391,10 @@ issues:
   - "Makefile.js:325:56      preminor                U       a major release (not preminor/prepatch)."
   - "Makefile.js:627:8       wdio                    U       target.wdio = () => {"
   - "Makefile.js:918:18      Multifiles              U       function downloadMultifilesTestTarget(cb) {"
-  - "package.json:125:6          eslump          U       \"eslump\": \"^3.0.0\","
-  - "package.json:137:6          memfs           U       \"memfs\": \"^3.0.1\","
-  - "package.json:138:6          metascraper     U       \"metascraper\": \"^5.25.7\","
-  - "package.json:158:6          webdriverio     U       \"webdriverio\": \"^8.14.6\","
+  - "package.json:126:6          eslump          U       \"eslump\": \"^3.0.0\","
+  - "package.json:138:6          memfs           U       \"memfs\": \"^3.0.1\","
+  - "package.json:139:6          metascraper     U       \"metascraper\": \"^5.25.7\","
+  - "package.json:159:6          webdriverio     U       \"webdriverio\": \"^8.14.6\","
   - "README.md:204:5         teamstart           U       <!--teamstart-->"
   - "README.md:218:7         Djermanovic         U       Milos Djermanovic"
   - "README.md:234:1         Nitin               U       Nitin Kumar"
@@ -442,19 +444,21 @@ issues:
   - "tests/lib/config/flat-config-array.js:1273:43       truex               U       foo: \"truex\""
   - "tests/lib/config/flat-config-array.js:1756:29       foox                U       foox: [1, \"bar\"]"
   - "tests/lib/config/flat-config-array.js:1778:30       doesnt (doesn't)    U       \"doesnt-exist/match\": \"error"
-  - "tests/lib/eslint/flat-eslint.js:1120:57     doesnotexist    U       lintFiles([\"subdir1\", \"doesnotexist/*.js\"]);"
-  - "tests/lib/eslint/flat-eslint.js:1195:58     doesexist       U       await eslint.lintFiles([\"doesexist/*.js\"]);"
-  - "tests/lib/eslint/flat-eslint.js:1677:30     reignoring      U       it(\"should allow reignoring of previously ignored"
-  - "tests/lib/eslint/flat-eslint.js:5085:31     reignore        U       cwd: `${root}-reignore`,"
-  - "tests/lib/eslint/flat-eslint.js:5125:31     dignore         U       cwd: `${root}-dignore`,"
+  - "tests/lib/eslint/flat-eslint.js:1120:57     doesnotexist        U       lintFiles([\"subdir1\", \"doesnotexist/*.js\"]);"
+  - "tests/lib/eslint/flat-eslint.js:1195:58     doesexist           U       await eslint.lintFiles([\"doesexist/*.js\"]);"
+  - "tests/lib/eslint/flat-eslint.js:1677:30     reignoring          U       it(\"should allow reignoring of previously ignored"
+  - "tests/lib/eslint/flat-eslint.js:2622:39     previos             U       make sure that the previos assertion checks the"
+  - "tests/lib/eslint/flat-eslint.js:2675:59     intenationally      U       cacheFilePath, \"[]\"); // intenationally invalid to additionally"
+  - "tests/lib/eslint/flat-eslint.js:5154:31     reignore            U       cwd: `${root}-reignore`,"
+  - "tests/lib/eslint/flat-eslint.js:5194:31     dignore             U       cwd: `${root}-dignore`,"
   - "tests/lib/linter/code-path-analysis/code-path-analyzer.js:30:16         ESQUERY     U       const STANDARD_ESQUERY_OPTION = { visitorKeys"
   - "tests/lib/linter/config-comment-parser.js:165:41        ELEVENTEEN      U       code = \"a: seventy, b:ELEVENTEEN\";"
   - "tests/lib/linter/linter.js:3550:1       consolexlog         U       consolexlog(\"test2\");"
   - "tests/lib/linter/linter.js:3696:84      rulename            U       this is 2, since the rulename is very likely to be"
-  - "tests/lib/linter/linter.js:5112:31      suppresed           U       it(\"should report one suppresed problem when noInlineConfig"
-  - "tests/lib/linter/linter.js:7271:19      postprocessors      U       describe(\"postprocessors\", () => {"
-  - "tests/lib/linter/linter.js:7324:28      postprocessed       U       it(\"should use postprocessed problem ranges when"
-  - "tests/lib/linter/linter.js:16689:52     intentionaly        U       // intentionaly mutates objects and"
+  - "tests/lib/linter/linter.js:5692:31      suppresed           U       it(\"should report one suppresed problem when noInlineConfig"
+  - "tests/lib/linter/linter.js:7851:19      postprocessors      U       describe(\"postprocessors\", () => {"
+  - "tests/lib/linter/linter.js:7904:28      postprocessed       U       it(\"should use postprocessed problem ranges when"
+  - "tests/lib/linter/linter.js:17801:52     intentionaly        U       // intentionaly mutates objects and"
   - "tests/lib/linter/node-event-generator.js:25:7           ESPREE              U       const ESPREE_CONFIG = {"
   - "tests/lib/linter/node-event-generator.js:298:68         pseudoclasses       U       // 0 identifiers, 0 pseudoclasses"
   - "tests/lib/linter/node-event-generator.js:304:66         pseudoclass         U       ].expression], // 1 pseudoclass, 0 identifiers"

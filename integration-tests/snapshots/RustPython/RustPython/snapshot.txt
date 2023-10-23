@@ -3,7 +3,7 @@ Repository: RustPython/RustPython
 Url: "https://github.com/RustPython/RustPython.git"
 Args: ["**"]
 Lines:
- CSpell: Files checked: 597, Issues found: 2674 in 306 files
+ CSpell: Files checked: 597, Issues found: 2675 in 306 files
  exit code: 1
 ./Cargo.toml:111:82    - Unknown word (termcolor)  -- features = ["atty", "termcolor"] }
 ./Cargo.toml:154:62    - Unknown word (redoxer)    -- to compile/check with redoxer
@@ -594,8 +594,9 @@ Lines:
 ./stdlib/src/termios.rs:65:62     - Unknown word (TIOCLINUX)       -- TIOCGSOFTCAR, TIOCINQ, TIOCLINUX, TIOCSSOFTCAR, XTABS
 ./stdlib/src/termios.rs:65:73     - Unknown word (TIOCSSOFTCAR)    -- TIOCINQ, TIOCLINUX, TIOCSSOFTCAR, XTABS,
 ./stdlib/src/termios.rs:65:9      - Unknown word (TCSETSW)         -- TCSETSW, TCXONC, TIOCGSERIAL
-./vm/Cargo.toml:144:54    - Unknown word (memoryapi)  -- ifdef", "netioapi", "memoryapi", "profileapi",
-./vm/Cargo.toml:144:67    - Unknown word (profileapi) -- netioapi", "memoryapi", "profileapi",
+./vm/Cargo.toml:144:54    - Unknown word (memoryapi)  -- ifdef", "netioapi", "memoryapi", "profileapi", "sysinfoapi
+./vm/Cargo.toml:144:67    - Unknown word (profileapi) -- netioapi", "memoryapi", "profileapi", "sysinfoapi"
+./vm/Cargo.toml:144:81    - Unknown word (sysinfoapi) -- memoryapi", "profileapi", "sysinfoapi"
 ./vm/Cargo.toml:47:43     - Unknown word (wasmbind)   -- true, features = ["wasmbind"] }
 ./vm/Cargo.toml:70:1      - Unknown word (caseless)   -- caseless = "0.2.1"
 ./vm/Cargo.toml:71:1      - Unknown word (getrandom)  -- getrandom = { version = "0.2.
@@ -620,15 +621,15 @@ Lines:
 ./vm/src/builtins/dict.rs:335:13    - Unknown word (dicted)       -- let dicted: Result<PyDictRef,
 ./vm/src/builtins/dict.rs:993:10    - Unknown word (reversekeyiterator) -- dict_reversekeyiterator_type,
 ./vm/src/builtins/frame.rs:57:10     - Unknown word (lasti)      -- fn f_lasti(&self) -> u32 {
-./vm/src/builtins/function.rs:131:13    - Unknown word (argpos)     -- let argpos = |range: std::ops:
-./vm/src/builtins/function.rs:141:17    - Unknown word (posonly)    -- let mut posonly_passed_as_kwarg = Vec
-./vm/src/builtins/function.rs:188:17    - Unknown word (ndefs)      -- let ndefs = defaults.map_or(0
-./vm/src/builtins/function.rs:190:17    - Unknown word (nrequired)  -- let nrequired = code.arg_count as
+./vm/src/builtins/function.rs:134:13    - Unknown word (argpos)     -- let argpos = |range: std::ops:
+./vm/src/builtins/function.rs:144:17    - Unknown word (posonly)    -- let mut posonly_passed_as_kwarg = Vec
+./vm/src/builtins/function.rs:191:17    - Unknown word (ndefs)      -- let ndefs = defaults.map_or(0
+./vm/src/builtins/function.rs:193:17    - Unknown word (nrequired)  -- let nrequired = code.arg_count as
 ./vm/src/builtins/function.rs:2:5       - Unknown word (jitfunc)    -- mod jitfunc;
-./vm/src/builtins/function.rs:572:13    - Unknown word (funcself)   -- let funcself = self.object.clone
-./vm/src/builtins/function.rs:80:13     - Unknown word (nexpected)  -- let nexpected_args = code.arg_count
-./vm/src/builtins/function.rs:86:16     - Unknown word (starargs)   -- // and starargs and kwargs.
-./vm/src/builtins/function.rs:90:17     - Unknown word (fastlocals) -- let mut fastlocals = frame.fastlocals.lock
+./vm/src/builtins/function.rs:599:13    - Unknown word (funcself)   -- let funcself = self.object.clone
+./vm/src/builtins/function.rs:83:13     - Unknown word (nexpected)  -- let nexpected_args = code.arg_count
+./vm/src/builtins/function.rs:89:16     - Unknown word (starargs)   -- // and starargs and kwargs.
+./vm/src/builtins/function.rs:93:17     - Unknown word (fastlocals) -- let mut fastlocals = frame.fastlocals.lock
 ./vm/src/builtins/function/jitfunc.rs:89:14     - Unknown word (Jitting)    -- "Jitting function requires arguments
 ./vm/src/builtins/genericalias.rs:254:9     - Unknown word (tvars)      -- fn subs_tvars(
 ./vm/src/builtins/genericalias.rs:257:5     - Unknown word (argitems)   -- argitems: &[PyObjectRef],
@@ -704,7 +705,7 @@ Lines:
 ./vm/src/protocol/buffer.rs:282:35    - Unknown word (CONTI)      -- each_segment<F, const CONTI: bool>(&self, mut index
 ./vm/src/protocol/iter.rs:128:13    - Unknown word (getiter)    -- let getiter = {
 ./vm/src/protocol/object.rs:31:44     - Unknown word (opid)       -- compare(self, other: Self, opid: PyComparisonOp, vm
-./vm/src/protocol/object.rs:476:30    - Unknown word (icls)         -- } else if let Ok(icls) =
+./vm/src/protocol/object.rs:483:30    - Unknown word (icls)         -- } else if let Ok(icls) =
 ./vm/src/protocol/object.rs:61:30     - Unknown word (defaultvalue) -- fn length_hint(self, defaultvalue: usize, vm: &VirtualMachine
 ./vm/src/protocol/sequence.rs:126:30    - Unknown word (apear)      -- / if both arguments apear to be sequences, try
 ./vm/src/protocol/sequence.rs:238:59    - Unknown word (unsliceable) -- format!("'{}' object is unsliceable", self.obj.class())
@@ -713,9 +714,9 @@ Lines:
 ./vm/src/stdlib/ast.rs:45:17     - Unknown word (numargs)    -- let numargs = args.args.len();
 ./vm/src/stdlib/atexit.rs:1:22      - Unknown word (exitfuncs)  -- pub use atexit::_run_exitfuncs;
 ./vm/src/stdlib/atexit.rs:50:9      - Unknown word (ncallbacks) -- fn _ncallbacks(vm: &VirtualMachine
-./vm/src/stdlib/builtins.rs:376:42    - Unknown word (breakpointhook) -- attr(vm.ctx.intern_str("breakpointhook"), vm)
-./vm/src/stdlib/builtins.rs:409:26    - Unknown word (normalish)      -- // everything is normalish, we can just rely on
-./vm/src/stdlib/builtins.rs:563:45    - Unknown word (iret)           -- iterator).next(vm).map(|iret| match iret {
+./vm/src/stdlib/builtins.rs:375:42    - Unknown word (breakpointhook) -- attr(vm.ctx.intern_str("breakpointhook"), vm)
+./vm/src/stdlib/builtins.rs:408:26    - Unknown word (normalish)      -- // everything is normalish, we can just rely on
+./vm/src/stdlib/builtins.rs:558:45    - Unknown word (iret)           -- iterator).next(vm).map(|iret| match iret {
 ./vm/src/stdlib/codecs.rs:351:17    - Unknown word (pycodecs)   -- fn delegate_pycodecs(
 ./vm/src/stdlib/codecs.rs:381:8     - Unknown word (readbuffer) -- fn readbuffer_encode(args: FuncArgs
 ./vm/src/stdlib/collections.rs:142:12    - Unknown word (extendleft) -- fn extendleft(&self, iter: PyObjectRef
@@ -873,7 +874,6 @@ Lines:
 ./vm/src/stdlib/sys.rs:435:8     - Unknown word (getsizeof)          -- fn getsizeof(args: GetsizeofArgs
 ./vm/src/stdlib/sys.rs:47:22     - Unknown word (hexversion) -- #[pyattr(name = "hexversion")]
 ./vm/src/stdlib/sys.rs:48:11     - Unknown word (HEXVERSION) -- const HEXVERSION: usize = version::VERSION
-./vm/src/stdlib/sys.rs:491:13    - Unknown word (sysinfoapi)         -- sysinfoapi::GetVersionExW,
 ./vm/src/stdlib/sys.rs:492:21    - Unknown word (LPOSVERSIONINFOEXW) -- winnt::{LPOSVERSIONINFOEXW, LPOSVERSIONINFOW, OSVERSIONI
 ./vm/src/stdlib/sys.rs:492:41    - Unknown word (LPOSVERSIONINFOW)   -- LPOSVERSIONINFOEXW, LPOSVERSIONINFOW, OSVERSIONINFOEXW},
 ./vm/src/stdlib/sys.rs:492:59    - Unknown word (OSVERSIONINFOEXW)   -- IONINFOEXW, LPOSVERSIONINFOW, OSVERSIONINFOEXW},

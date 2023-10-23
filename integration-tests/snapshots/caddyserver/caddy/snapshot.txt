@@ -73,14 +73,14 @@ Lines:
 ./caddyconfig/httpcaddyfile/builtins_test.go:176:31    - Unknown word (htlm)       -- /old.html /new.html htlm
 ./caddyconfig/httpcaddyfile/directives.go:246:58    - Unknown word (vals)       -- caddyhttp.Route type) in vals to the
 ./caddyconfig/httpcaddyfile/directives.go:80:7      - Unknown word (fastcgi)    -- "php_fastcgi",
-./caddyconfig/httpcaddyfile/httptype.go:1275:3    - Unknown word (hostm)      -- hostm caddyhttp.MatchHost
-./caddyconfig/httpcaddyfile/httptype.go:1276:3    - Unknown word (pathm)      -- pathm caddyhttp.MatchPath
-./caddyconfig/httpcaddyfile/httptype.go:1505:3    - Unknown word (laddrs)     -- laddrs, err := caddy.ParseNetworkAdd
-./caddyconfig/httpcaddyfile/httptype.go:157:12    - Unknown word (subroutes)  -- // some subroutes in this directive; we
-./caddyconfig/httpcaddyfile/httptype.go:251:5     - Unknown word (annnd)      -- // annnd the top-level config
-./caddyconfig/httpcaddyfile/httptype.go:273:12    - Unknown word (Cvtr)       -- if storageCvtr, ok := options["storage
-./caddyconfig/httpcaddyfile/httptype.go:32:43     - Unknown word (caddypki)   -- caddyserver/caddy/v2/modules/caddypki"
-./caddyconfig/httpcaddyfile/httptype.go:780:11    - Unknown word (cval)       -- for _, cval := range sblock.pile
+./caddyconfig/httpcaddyfile/httptype.go:1281:3    - Unknown word (hostm)      -- hostm caddyhttp.MatchHost
+./caddyconfig/httpcaddyfile/httptype.go:1282:3    - Unknown word (pathm)      -- pathm caddyhttp.MatchPath
+./caddyconfig/httpcaddyfile/httptype.go:1511:3    - Unknown word (laddrs)     -- laddrs, err := caddy.ParseNetworkAdd
+./caddyconfig/httpcaddyfile/httptype.go:158:12    - Unknown word (subroutes)  -- // some subroutes in this directive; we
+./caddyconfig/httpcaddyfile/httptype.go:252:5     - Unknown word (annnd)      -- // annnd the top-level config
+./caddyconfig/httpcaddyfile/httptype.go:274:12    - Unknown word (Cvtr)       -- if storageCvtr, ok := options["storage
+./caddyconfig/httpcaddyfile/httptype.go:33:43     - Unknown word (caddypki)   -- caddyserver/caddy/v2/modules/caddypki"
+./caddyconfig/httpcaddyfile/httptype.go:781:11    - Unknown word (cval)       -- for _, cval := range sblock.pile
 ./caddyconfig/httpcaddyfile/httptype_test.go:17:11     - Unknown word (showdebug)  -- query showdebug=1
 ./caddyconfig/httpcaddyfile/httptype_test.go:34:12     - Unknown word (somepath)   -- path /somepath*
 ./caddyconfig/httpcaddyfile/options.go:45:43     - Unknown word (ACMEDNS)    -- "acme_dns", parseOptACMEDNS)
@@ -120,18 +120,17 @@ Lines:
 ./context.go:230:48    - Unknown word (deallocate) -- raw bytes; allow GC to deallocate
 ./internal/metrics/metrics_test.go:19:28     - Unknown word (ohno)       -- method: strings.Repeat("ohno", 9999), expected:
 ./internal/sockets.go:45:48     - Unknown word (rwxr)       -- returns a string like `-rwxr-xr--` for `u=rwx,g=rx
-./listen.go:101:6     - Unknown word (expliclty)  -- // expliclty assign it to nothing
-./listen.go:51:50     - Unknown word (swappable)  -- servers become hot-swappable
-./listen.go:77:6      - Unknown word (tconn)      -- if tconn, ok := conn.(canSetKeepAlive
+./listen.go:199:7     - Unknown word (fcpc)       -- func (fcpc *fakeClosePacketConn
+./listen.go:203:11    - Unknown word (readfrom)   -- Op: "readfrom",
+./listen.go:67:50     - Unknown word (swappable)  -- servers become hot-swappable
+./listen.go:93:6      - Unknown word (tconn)      -- if tconn, ok := conn.(canSetKeepAlive
 ./listen_unix_setopt_freebsd.go:7:11      - Unknown word (SOREUSEPORT) -- const unixSOREUSEPORT = unix.SO_REUSEPORT
-./listeners.go:156:8     - Unknown word (Abtract)    -- var isAbtractUnixSocket bool
-./listeners.go:318:38    - Unknown word (netw)       -- returns true if the netw is a unix network.
-./listeners.go:479:20    - Unknown word (QUICTLS)    -- sqtc := newSharedQUICTLSConfig(tlsConf)
-./listeners.go:479:3     - Unknown word (sqtc)       -- sqtc := newSharedQUICTLSConfig
-./listeners.go:541:5     - Unknown word (Confs)      -- tlsConfs map[*tls.Config
-./listeners.go:568:5     - Unknown word (cacc)       -- if cacc, ok := sqtc.tlsConfs
-./listeners.go:651:113   - Unknown word (assertable) -- net.PacketConn type assertable to a net.Conn,
-./listeners.go:656:7     - Unknown word (fcpc)       -- func (fcpc *fakeClosePacketConn
+./listeners.go:156:5     - Unknown word (Abtract)    -- isAbtractUnixSocket bool
+./listeners.go:295:38    - Unknown word (netw)       -- returns true if the netw is a unix network.
+./listeners.go:464:7     - Unknown word (unwrapper)  -- if unwrapper, ok := h3ln.(interface
+./listeners.go:558:5     - Unknown word (Confs)      -- tlsConfs map[*tls
+./listeners.go:566:2     - Unknown word (sqtc)       -- sqtc := &sharedQUICState
+./listeners.go:597:5     - Unknown word (cacc)       -- if cacc, ok := sqs.tlsConfs
 ./listeners.go:672:25    - Unknown word (hotswappable) -- someone would need a hotswappable QUIC-only (not http
 ./listeners.go:676:7     - Unknown word (fcql)         -- func (fcql *fakeCloseQuicListener
 ./logging.go:258:7     - Unknown word (wdest)      -- func (wdest writerDestructor) Destruct
@@ -304,10 +303,10 @@ Lines:
 ./modules/caddyhttp/templates/tplcontext.go:35:14     - Unknown word (yuin)       -- "github.com/yuin/goldmark"
 ./modules/caddyhttp/templates/tplcontext.go:35:19     - Unknown word (goldmark)   -- "github.com/yuin/goldmark"
 ./modules/caddyhttp/templates/tplcontext.go:39:2      - Unknown word (gmhtml)     -- gmhtml "github.com/yuin/goldmark
-./modules/caddyhttp/templates/tplcontext.go:465:12    - Unknown word (dataerr)    -- dataint, dataerr := strconv.ParseUint
-./modules/caddyhttp/templates/tplcontext.go:465:3     - Unknown word (dataint)    -- dataint, dataerr := strconv
-./modules/caddyhttp/templates/tplcontext.go:472:3     - Unknown word (timelayout) -- timelayout := time.RFC1123Z
-./modules/caddyhttp/templates/tplcontext.go:487:24    - Unknown word (niladic)    -- WrappedHeader wraps niladic functions so that they
+./modules/caddyhttp/templates/tplcontext.go:473:12    - Unknown word (dataerr)    -- dataint, dataerr := strconv.ParseUint
+./modules/caddyhttp/templates/tplcontext.go:473:3     - Unknown word (dataint)    -- dataint, dataerr := strconv
+./modules/caddyhttp/templates/tplcontext.go:480:3     - Unknown word (timelayout) -- timelayout := time.RFC1123Z
+./modules/caddyhttp/templates/tplcontext.go:495:24    - Unknown word (niladic)    -- WrappedHeader wraps niladic functions so that they
 ./modules/caddyhttp/templates/tplcontext_test.go:488:75    - Unknown word (ctxtest)    -- tplContext.Root), "caddy_ctxtest")
 ./modules/caddyhttp/tracing/module.go:30:21     - Unknown word (opentelemetry) -- // otel implements opentelemetry related logic.
 ./modules/caddyhttp/tracing/module.go:30:5      - Unknown word (otel)       -- // otel implements opentelemetry
