@@ -3,7 +3,7 @@ Repository: MicrosoftDocs/PowerShell-Docs
 Url: "https://github.com/MicrosoftDocs/PowerShell-Docs.git"
 Args: ["--config=../../../cspell-power-shell-docs.config.yaml","**"]
 Lines:
- CSpell: Files checked: 2678, Issues found: 5747 in 1258 files
+ CSpell: Files checked: 2678, Issues found: 5737 in 1254 files
  exit code: 1
 ./LICENSE:139:15    - Unknown word (sublicensable)   -- non-sublicensable, non-exclusive, irrevocable
 ./LICENSE:205:34    - Unknown word (waivable)        -- under any voluntary or waivable statutory or compulsory
@@ -73,7 +73,6 @@ Lines:
 ./reference/5.1/Microsoft.PowerShell.Core/About/about_Debuggers.md:583:10    - Unknown word (delbr)      -- function delbr { gbp | rbp }
 ./reference/5.1/Microsoft.PowerShell.Core/About/about_FileSystem_Provider.md:278:27    - Unknown word (logfiles)    -- command creates the `logfiles` directory on the `C
 ./reference/5.1/Microsoft.PowerShell.Core/About/about_FileSystem_Provider.md:70:53     - Unknown word (filesystems) -- used. Linux and macOS filesystems support
-./reference/5.1/Microsoft.PowerShell.Core/About/about_Foreach.md:101:22    - Unknown word (lastaccesstime) -- Write-Host $file.lastaccesstime
 ./reference/5.1/Microsoft.PowerShell.Core/About/about_Format.ps1xml.md:130:2     - Unknown word (Parms)      -- $Parms = @{
 ./reference/5.1/Microsoft.PowerShell.Core/About/about_Format.ps1xml.md:434:45    - Unknown word (mygciview)  -- custom view is named **mygciview** and adds the
 ./reference/5.1/Microsoft.PowerShell.Core/About/about_Function_Provider.md:129:39    - Unknown word (Autosize)   -- the next line. The `-Autosize` parameter resizes the
@@ -258,7 +257,7 @@ Lines:
 ./reference/5.1/Microsoft.PowerShell.Host/Start-Transcript.md:53:22     - Unknown word (mulitbyte)  -- improper encoding of mulitbyte characters in the transcript
 ./reference/5.1/Microsoft.PowerShell.Host/Start-Transcript.md:83:2      - Unknown word (sharepath)  -- $sharepath = '\\Server01\Transcripts
 ./reference/5.1/Microsoft.PowerShell.LocalAccounts/Add-LocalGroupMember.md:195:4     - Unknown word (algm)       -- - `algm`
-./reference/5.1/Microsoft.PowerShell.LocalAccounts/Add-LocalGroupMember.md:58:49     - Unknown word (Entra)      -- account, an Microsoft Entra account, and a domain
+./reference/5.1/Microsoft.PowerShell.LocalAccounts/Add-LocalGroupMember.md:58:48     - Unknown word (Entra)      -- account, a Microsoft Entra account, and a domain
 ./reference/5.1/Microsoft.PowerShell.LocalAccounts/Get-LocalGroupMember.md:153:4     - Unknown word (glgm)       -- - `glgm`
 ./reference/5.1/Microsoft.PowerShell.LocalAccounts/Remove-LocalGroup.md:184:7     - Unknown word (IUSRS)      -- - IIS_IUSRS
 ./reference/5.1/Microsoft.PowerShell.LocalAccounts/Remove-LocalGroupMember.md:191:4     - Unknown word (rlgm)       -- - `rlgm`
@@ -362,6 +361,7 @@ Lines:
 ./reference/5.1/Microsoft.PowerShell.Utility/Trace-Command.md:47:30     - Unknown word (parameterbinding) -- Command -Name metadata,parameterbinding,cmdlet -Expression
 ./reference/5.1/Microsoft.PowerShell.Utility/Update-TypeData.md:383:3     - Unknown word (Noteproperty) -- - Noteproperty
 ./reference/5.1/Microsoft.PowerShell.Utility/Wait-Event.md:65:8      - Unknown word (Autoreset)  -- $Timer.Autoreset = $False
+./reference/5.1/Microsoft.PowerShell.Utility/Write-Information.md:141:2     - Unknown word (psproc)     -- $psproc = Get-Process -Id $PID
 ./reference/5.1/Microsoft.PowerShell.Utility/Write-Progress.md:138:49    - Unknown word (Substep)    -- ParentId 0 "Step $i - Substep $j"
 ./reference/5.1/Microsoft.WSMan.Management/About/about_WSMan_Provider.md:264:57    - Unknown word (testparametername) -- itialization parameter named "testparametername"
 ./reference/5.1/Microsoft.WSMan.Management/About/about_WSMan_Provider.md:271:22    - Unknown word (testparametervalue) -- -ParamValue testparametervalue
@@ -1218,7 +1218,6 @@ Lines:
 ./reference/docs-conceptual/learn/remoting/jea/using-jea.md:229:63    - Unknown word (Aformy)     -- UserName 'localhost\JEAformyHoster'
 ./reference/docs-conceptual/learn/remoting/jea/using-jea.md:229:69    - Unknown word (Hoster)     -- UserName 'localhost\JEAformyHoster'
 ./reference/docs-conceptual/learn/remoting/powershell-remoting-faq.yml:415:20    - Unknown word (Wsmprovhost) -- process (Wsmprovhost.exe) on the remote computer
-./reference/docs-conceptual/learn/shell/running-commands.md:31:23     - Unknown word (specifc)    -- **Shell environment-specifc commands** are commands
 ./reference/docs-conceptual/learn/shell/using-keyhandlers.md:185:49    - Unknown word (eastus)     -- eGroupName myRGName -Location eastus -Name myVM`
 ./reference/docs-conceptual/learn/shell/using-light-theme.md:148:43    - Unknown word (WCAG)       -- Accessibility Guidelines (WCAG) 2.1 recommends that
 ./reference/docs-conceptual/samples/Changing-Computer-State.md:21:1      - Unknown word (rundll)     -- rundll32.exe user32.dll,LockWorkStat
@@ -1250,12 +1249,7 @@ Lines:
 ./reference/docs-conceptual/samples/Working-With-Files-Folders-and-Registry-Keys.md:200:46    - Unknown word (zipfldr)    -- 8:00 AM     337920 zipfldr.dll
 ./reference/docs-conceptual/samples/Working-With-Files-Folders-and-Registry-Keys.md:61:48     - Unknown word (Genral)     -- :00 AM    1852416 AcGenral.dll
 ./reference/docs-conceptual/samples/Working-With-Files-Folders-and-Registry-Keys.md:71:1      - Unknown word (addins)     -- addins
-./reference/docs-conceptual/samples/Working-with-Files-and-Folders.md:155:24    - Unknown word (rdisk)      -- default=multi(0)disk(0)rdisk(0)partition(1)\WINDOWS
-./reference/docs-conceptual/samples/Working-with-Files-and-Folders.md:158:24    - Unknown word (fastdetect) -- noexecute=AlwaysOff /fastdetect
-./reference/docs-conceptual/samples/Working-with-Files-and-Folders.md:158:3     - Unknown word (noexecute)  -- /noexecute=AlwaysOff /fastdetect
-./reference/docs-conceptual/samples/Working-with-Files-and-Folders.md:160:44    - Unknown word (optin)      -- Prevention" /noexecute=optin /fastdetect
-./reference/docs-conceptual/samples/Working-with-Files-and-Folders.md:75:62     - Unknown word (XCOPY)      -- file system copies. XCOPY, ROBOCOPY, and COM objects
-./reference/docs-conceptual/samples/Working-with-Files-and-Folders.md:75:69     - Unknown word (ROBOCOPY)   -- system copies. XCOPY, ROBOCOPY, and COM objects, such
+./reference/docs-conceptual/samples/Working-with-Files-and-Folders.md:81:41     - Unknown word (xcopy)      -- native commands like `xcopy.exe` and `robocopy.exe
 ./reference/docs-conceptual/samples/Working-with-Printers.md:36:72     - Unknown word (Printserver) -- ddWindowsPrinterConnection("\\Printserver01\Xerox5")
 ./reference/docs-conceptual/samples/Working-with-Registry-Entries.md:167:2     - Unknown word (newpath)    -- $newpath = $value.Path += ";C
 ./reference/docs-conceptual/samples/Working-with-Registry-Keys.md:104:37    - Unknown word (regini)     -- including `reg.exe`, `regini.exe`, `regedit.exe`
@@ -1320,7 +1314,6 @@ Lines:
 ./reference/docs-conceptual/windows-powershell/whats-new/What-s-New-in-Windows-PowerShell-50.md:93:5      - Unknown word (Metaconfiguration) -- - Metaconfiguration credentials are encrypted
 ./reference/docs-conceptual/windows-powershell/wmf/known-issues/known-issues-50.md:101:6     - Unknown word (Takeown)    -- Takeown /f C:\Windows\System
 ./reference/docs-conceptual/windows-powershell/wmf/known-issues/known-issues-50.md:107:6     - Unknown word (Cacls)      -- Cacls C:\Windows\System32
-./reference/docs-conceptual/windows-powershell/wmf/known-issues/known-issues-50.md:117:6     - Unknown word (xcopy)      -- xcopy C:\Generalize.xml C
 ./reference/docs-conceptual/windows-powershell/wmf/known-issues/known-issues-50.md:81:65     - Unknown word (Sysyprep)   -- Windows Updates, and begin Sysyprep operation normally.
 ./reference/docs-conceptual/windows-powershell/wmf/known-issues/known-issues-50.md:85:11     - Unknown word (Generize)   -- 2. Copy Generize.xml from directory
 ./reference/docs-conceptual/windows-powershell/wmf/known-issues/known-issues-51.md:70:35     - Unknown word (newjea)     -- PSSessionConfiguration -Name $newjea.Name -SecurityDescriptorSddl

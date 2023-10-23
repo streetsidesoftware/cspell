@@ -5,7 +5,7 @@ Args: '["**"]'
 Summary:
   files: 597
   filesWithIssues: 306
-  issues: 2674
+  issues: 2675
   errors: 0
 Errors: []
 
@@ -604,8 +604,9 @@ issues:
   - "vm/Cargo.toml:70:1          caseless        U       caseless = \"0.2.1\""
   - "vm/Cargo.toml:71:1          getrandom       U       getrandom = { version = \"0.2."
   - "vm/Cargo.toml:75:1          memoffset       U       memoffset = \"0.6.5\""
-  - "vm/Cargo.toml:144:54        memoryapi       U       ifdef\", \"netioapi\", \"memoryapi\", \"profileapi\","
-  - "vm/Cargo.toml:144:67        profileapi      U       netioapi\", \"memoryapi\", \"profileapi\","
+  - "vm/Cargo.toml:144:54        memoryapi       U       ifdef\", \"netioapi\", \"memoryapi\", \"profileapi\", \"sysinfoapi"
+  - "vm/Cargo.toml:144:67        profileapi      U       netioapi\", \"memoryapi\", \"profileapi\", \"sysinfoapi\""
+  - "vm/Cargo.toml:144:81        sysinfoapi      U       memoryapi\", \"profileapi\", \"sysinfoapi\""
   - "vm/Lib/python_builtins/__reducelib.py:50:17         slotnames       U       names = slotnames(cls) # not checking"
   - "vm/Lib/python_builtins/__reducelib.py:65:5          listitems       U       listitems = iter(obj) if isinstance"
   - "vm/src/anystr.rs:189:9          splitw              U       splitw: SW,"
@@ -626,14 +627,14 @@ issues:
   - "vm/src/builtins/dict.rs:1019:10     reverseitemiterator     U       dict_reverseitemiterator_type,"
   - "vm/src/builtins/frame.rs:57:10          lasti       U       fn f_lasti(&self) -> u32 {"
   - "vm/src/builtins/function.rs:2:5         jitfunc         U       mod jitfunc;"
-  - "vm/src/builtins/function.rs:80:13       nexpected       U       let nexpected_args = code.arg_count"
-  - "vm/src/builtins/function.rs:86:16       starargs        U       // and starargs and kwargs."
-  - "vm/src/builtins/function.rs:90:17       fastlocals      U       let mut fastlocals = frame.fastlocals.lock"
-  - "vm/src/builtins/function.rs:131:13      argpos          U       let argpos = |range: std::ops:"
-  - "vm/src/builtins/function.rs:141:17      posonly         U       let mut posonly_passed_as_kwarg = Vec"
-  - "vm/src/builtins/function.rs:188:17      ndefs           U       let ndefs = defaults.map_or(0"
-  - "vm/src/builtins/function.rs:190:17      nrequired       U       let nrequired = code.arg_count as"
-  - "vm/src/builtins/function.rs:572:13      funcself        U       let funcself = self.object.clone"
+  - "vm/src/builtins/function.rs:83:13       nexpected       U       let nexpected_args = code.arg_count"
+  - "vm/src/builtins/function.rs:89:16       starargs        U       // and starargs and kwargs."
+  - "vm/src/builtins/function.rs:93:17       fastlocals      U       let mut fastlocals = frame.fastlocals.lock"
+  - "vm/src/builtins/function.rs:134:13      argpos          U       let argpos = |range: std::ops:"
+  - "vm/src/builtins/function.rs:144:17      posonly         U       let mut posonly_passed_as_kwarg = Vec"
+  - "vm/src/builtins/function.rs:191:17      ndefs           U       let ndefs = defaults.map_or(0"
+  - "vm/src/builtins/function.rs:193:17      nrequired       U       let nrequired = code.arg_count as"
+  - "vm/src/builtins/function.rs:599:13      funcself        U       let funcself = self.object.clone"
   - "vm/src/builtins/function/jitfunc.rs:89:14       Jitting     U       \"Jitting function requires arguments"
   - "vm/src/builtins/genericalias.rs:254:9       tvars       U       fn subs_tvars("
   - "vm/src/builtins/genericalias.rs:257:5       argitems    U       argitems: &[PyObjectRef],"
@@ -710,7 +711,7 @@ issues:
   - "vm/src/protocol/iter.rs:128:13      getiter     U       let getiter = {"
   - "vm/src/protocol/object.rs:31:44         opid            U       compare(self, other: Self, opid: PyComparisonOp, vm"
   - "vm/src/protocol/object.rs:61:30         defaultvalue    U       fn length_hint(self, defaultvalue: usize, vm: &VirtualMachine"
-  - "vm/src/protocol/object.rs:476:30        icls            U       } else if let Ok(icls) ="
+  - "vm/src/protocol/object.rs:483:30        icls            U       } else if let Ok(icls) ="
   - "vm/src/protocol/sequence.rs:126:30      apear           U       / if both arguments apear to be sequences, try"
   - "vm/src/protocol/sequence.rs:238:59      unsliceable     U       format!(\"'{}' object is unsliceable\", self.obj.class())"
   - "vm/src/py_io.rs:73:17       sval    U       let sval = s.as_str();"
@@ -718,9 +719,9 @@ issues:
   - "vm/src/stdlib/ast.rs:45:17          numargs     U       let numargs = args.args.len();"
   - "vm/src/stdlib/atexit.rs:1:22        exitfuncs       U       pub use atexit::_run_exitfuncs;"
   - "vm/src/stdlib/atexit.rs:50:9        ncallbacks      U       fn _ncallbacks(vm: &VirtualMachine"
-  - "vm/src/stdlib/builtins.rs:376:42        breakpointhook      U       attr(vm.ctx.intern_str(\"breakpointhook\"), vm)"
-  - "vm/src/stdlib/builtins.rs:409:26        normalish           U       // everything is normalish, we can just rely on"
-  - "vm/src/stdlib/builtins.rs:563:45        iret                U       iterator).next(vm).map(|iret| match iret {"
+  - "vm/src/stdlib/builtins.rs:375:42        breakpointhook      U       attr(vm.ctx.intern_str(\"breakpointhook\"), vm)"
+  - "vm/src/stdlib/builtins.rs:408:26        normalish           U       // everything is normalish, we can just rely on"
+  - "vm/src/stdlib/builtins.rs:558:45        iret                U       iterator).next(vm).map(|iret| match iret {"
   - "vm/src/stdlib/codecs.rs:351:17      pycodecs        U       fn delegate_pycodecs("
   - "vm/src/stdlib/codecs.rs:381:8       readbuffer      U       fn readbuffer_encode(args: FuncArgs"
   - "vm/src/stdlib/collections.rs:142:12         extendleft      U       fn extendleft(&self, iter: PyObjectRef"
@@ -882,7 +883,6 @@ issues:
   - "vm/src/stdlib/sys.rs:423:8          getrecursionlimit       U       fn getrecursionlimit(vm: &VirtualMachine"
   - "vm/src/stdlib/sys.rs:428:12         Getsizeof               U       struct GetsizeofArgs {"
   - "vm/src/stdlib/sys.rs:435:8          getsizeof               U       fn getsizeof(args: GetsizeofArgs"
-  - "vm/src/stdlib/sys.rs:491:13         sysinfoapi              U       sysinfoapi::GetVersionExW,"
   - "vm/src/stdlib/sys.rs:492:21         LPOSVERSIONINFOEXW      U       winnt::{LPOSVERSIONINFOEXW, LPOSVERSIONINFOW, OSVERSIONI"
   - "vm/src/stdlib/sys.rs:492:41         LPOSVERSIONINFOW        U       LPOSVERSIONINFOEXW, LPOSVERSIONINFOW, OSVERSIONINFOEXW},"
   - "vm/src/stdlib/sys.rs:492:59         OSVERSIONINFOEXW        U       IONINFOEXW, LPOSVERSIONINFOW, OSVERSIONINFOEXW},"

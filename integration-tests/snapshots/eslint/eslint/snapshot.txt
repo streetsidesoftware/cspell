@@ -3,7 +3,7 @@ Repository: eslint/eslint
 Url: "https://github.com/eslint/eslint"
 Args: ["**","--exclude=bin/**","--exclude=CHANGELOG.md","--exclude=_data","--exclude=tests/bench/large.js","--exclude=docs/src/_includes","--exclude=docs/src/assets/{fonts,s?css,images}"]
 Lines:
- CSpell: Files checked: 1895, Issues found: 5504 in 1257 files
+ CSpell: Files checked: 1896, Issues found: 5521 in 1258 files
  exit code: 1
 ./Makefile.js:145:88    - Unknown word (ined)               -- followed by the string "ined".
 ./Makefile.js:151:48    - Unknown word (blogpost)           -- render(cat("./templates/blogpost.md.ejs"), renderContext
@@ -107,6 +107,7 @@ Lines:
 ./docs/src/extend/custom-rules-deprecated.md:533:1     - Unknown word (camelcase)   -- camelcase |
 ./docs/src/extend/custom-rules-deprecated.md:580:81    - Unknown word (rulesdir)    -- interface) using the `--rulesdir` option to specify the
 ./docs/src/extend/custom-rules.md:398:78    - Unknown word (multipass)  -- without triggering multipass fixes. Each suggestion
+./docs/src/extend/plugin-migration-flat-config.md:217:17    - Unknown word (xdescribe)  -- xdescribe: true
 ./docs/src/extend/plugins.md:37:162    - Unknown word (myplugin)   -- named `eslint-plugin-myplugin`, then in your configuration
 ./docs/src/extend/scope-manager-interface.md:218:100   - Unknown word (redeclared) -- If this variable is redeclared, this array includes
 ./docs/src/extend/scope-manager-interface.md:6:125     - Unknown word (escope)     -- eslint-scope), a fork of [escope](https://github.com
@@ -276,12 +277,12 @@ Lines:
 ./docs/src/use/configure/migration-guide.md:550:42    - Unknown word (dotfile)    -- config, dotfiles (e.g. `.dotfile.js`) are no longer ignored
 ./docs/src/use/configure/plugins.md:44:152    - Unknown word (pluginname) -- require('eslint-plugin-pluginname')` in the config file
 ./docs/src/use/configure/rules.md:25:294    - Unknown word (buildtime)  -- other than a potential buildtime or runtime error (such
-./docs/src/use/formatters/index.md:148:2     - Unknown word (testsuites) -- <testsuites>
-./docs/src/use/formatters/index.md:149:2     - Unknown word (testsuite)  -- <testsuite package="org.eslint
-./docs/src/use/formatters/index.md:150:2     - Unknown word (testcase)   -- <testcase time="0" name="org.eslint
-./docs/src/use/formatters/index.md:150:53    - Unknown word (classname)  -- eslint.no-unused-vars" classname="/var/lib/jenkins/workspace
 ./docs/src/use/formatters/index.md:17:4      - Unknown word (checkstyle) -- * [checkstyle](#checkstyle)
 ./docs/src/use/formatters/index.md:70:25     - Unknown word (Checkstyle) -- Outputs results to the [Checkstyle](https://checkstyle
+./docs/src/use/formatters/index.md:887:2     - Unknown word (testsuites) -- <testsuites>
+./docs/src/use/formatters/index.md:888:2     - Unknown word (testsuite)  -- <testsuite package="org.eslint
+./docs/src/use/formatters/index.md:889:2     - Unknown word (testcase)   -- <testcase time="0" name="org.eslint
+./docs/src/use/formatters/index.md:889:53    - Unknown word (classname)  -- eslint.no-unused-vars" classname="/var/lib/jenkins/workspace
 ./docs/src/use/getting-started.md:30:22     - Unknown word (semistandard) -- use `eslint-config-semistandard` shared config
 ./docs/src/use/getting-started.md:56:12     - Unknown word (yourfile)     -- npx eslint yourfile.js
 ./docs/src/use/getting-started.md:94:217    - Unknown word (npmjs)        -- "eslint-config" on [npmjs.com](https://www.npmjs
@@ -311,7 +312,8 @@ Lines:
 ./lib/cli-engine/xml-escape.js:29:26     - Unknown word (apos)       -- return "&apos;";
 ./lib/cli.js:27:38     - Unknown word (humanwhocodes) -- ModuleImporter } = require("@humanwhocodes/module-importer");
 ./lib/config/default-config.js:56:61     - Unknown word (globbed)    -- ensure these files are globbed by default
-./lib/config/flat-config-schema.js:223:42    - Unknown word (incompat)   -- messageTemplate = "eslintrc-incompat";
+./lib/config/flat-config-schema.js:16:35     - Unknown word (ungap)      -- structuredClone = require("@ungap/structured-clone").default
+./lib/config/flat-config-schema.js:233:42    - Unknown word (incompat)   -- messageTemplate = "eslintrc-incompat";
 ./lib/eslint/eslint-helpers.js:19:26     - Unknown word (nodelib)    -- const fswalk = require("@nodelib/fs.walk");
 ./lib/eslint/eslint-helpers.js:19:7      - Unknown word (fswalk)     -- const fswalk = require("@nodelib
 ./lib/eslint/eslint-helpers.js:397:40    - Unknown word (prepopulated) -- for the cwd, which is prepopulated in the searches map
@@ -400,10 +402,10 @@ Lines:
 ./lib/shared/config-validator.js:286:55    - Unknown word (ECMAFEATURES) -- source, "ESLINT_LEGACY_ECMAFEATURES");
 ./lib/shared/string-utils.js:12:28     - Unknown word (graphemer)  -- Graphemer = require("graphemer").default;
 ./lib/shared/string-utils.js:12:7      - Unknown word (Graphemer)  -- const Graphemer = require("graphemer
-./package.json:125:6     - Unknown word (eslump)     -- "eslump": "^3.0.0",
-./package.json:137:6     - Unknown word (memfs)      -- "memfs": "^3.0.1",
-./package.json:138:6     - Unknown word (metascraper) -- "metascraper": "^5.25.7",
-./package.json:158:6     - Unknown word (webdriverio) -- "webdriverio": "^8.14.6",
+./package.json:126:6     - Unknown word (eslump)     -- "eslump": "^3.0.0",
+./package.json:138:6     - Unknown word (memfs)      -- "memfs": "^3.0.1",
+./package.json:139:6     - Unknown word (metascraper) -- "metascraper": "^5.25.7",
+./package.json:159:6     - Unknown word (webdriverio) -- "webdriverio": "^8.14.6",
 ./templates/blogpost.md.ejs:18:10     - Unknown word (linkify)    -- function linkify(line) {
 ./templates/blogpost.md.ejs:8:5       - Unknown word (eslintbot)  -- - eslintbot
 ./templates/formatter-examples.md.ejs:89:2      - Unknown word (iframe)     -- <iframe src="html-formatter
@@ -440,16 +442,18 @@ Lines:
 ./tests/lib/eslint/flat-eslint.js:1120:57   - Unknown word (doesnotexist) -- lintFiles(["subdir1", "doesnotexist/*.js"]);
 ./tests/lib/eslint/flat-eslint.js:1195:58   - Unknown word (doesexist)    -- await eslint.lintFiles(["doesexist/*.js"]);
 ./tests/lib/eslint/flat-eslint.js:1677:30   - Unknown word (reignoring)   -- it("should allow reignoring of previously ignored
-./tests/lib/eslint/flat-eslint.js:5085:31   - Unknown word (reignore)     -- cwd: `${root}-reignore`,
-./tests/lib/eslint/flat-eslint.js:5125:31   - Unknown word (dignore)      -- cwd: `${root}-dignore`,
+./tests/lib/eslint/flat-eslint.js:2622:39   - Unknown word (previos)      -- make sure that the previos assertion checks the
+./tests/lib/eslint/flat-eslint.js:2675:59   - Unknown word (intenationally) -- cacheFilePath, "[]"); // intenationally invalid to additionally
+./tests/lib/eslint/flat-eslint.js:5154:31   - Unknown word (reignore)       -- cwd: `${root}-reignore`,
+./tests/lib/eslint/flat-eslint.js:5194:31   - Unknown word (dignore)        -- cwd: `${root}-dignore`,
 ./tests/lib/linter/code-path-analysis/code-path-analyzer.js:30:16     - Unknown word (ESQUERY)    -- const STANDARD_ESQUERY_OPTION = { visitorKeys
 ./tests/lib/linter/config-comment-parser.js:165:41    - Unknown word (ELEVENTEEN) -- code = "a: seventy, b:ELEVENTEEN";
-./tests/lib/linter/linter.js:16689:52  - Unknown word (intentionaly)   -- // intentionaly mutates objects and
+./tests/lib/linter/linter.js:17801:52  - Unknown word (intentionaly)   -- // intentionaly mutates objects and
 ./tests/lib/linter/linter.js:3550:1    - Unknown word (consolexlog) -- consolexlog("test2");
 ./tests/lib/linter/linter.js:3696:84   - Unknown word (rulename)    -- this is 2, since the rulename is very likely to be
-./tests/lib/linter/linter.js:5112:31   - Unknown word (suppresed)   -- it("should report one suppresed problem when noInlineConfig
-./tests/lib/linter/linter.js:7271:19   - Unknown word (postprocessors) -- describe("postprocessors", () => {
-./tests/lib/linter/linter.js:7324:28   - Unknown word (postprocessed)  -- it("should use postprocessed problem ranges when
+./tests/lib/linter/linter.js:5692:31   - Unknown word (suppresed)   -- it("should report one suppresed problem when noInlineConfig
+./tests/lib/linter/linter.js:7851:19   - Unknown word (postprocessors) -- describe("postprocessors", () => {
+./tests/lib/linter/linter.js:7904:28   - Unknown word (postprocessed)  -- it("should use postprocessed problem ranges when
 ./tests/lib/linter/node-event-generator.js:25:7      - Unknown word (ESPREE)     -- const ESPREE_CONFIG = {
 ./tests/lib/linter/node-event-generator.js:298:68    - Unknown word (pseudoclasses) -- // 0 identifiers, 0 pseudoclasses
 ./tests/lib/linter/node-event-generator.js:304:66    - Unknown word (pseudoclass)   -- ].expression], // 1 pseudoclass, 0 identifiers

@@ -4,8 +4,8 @@ Url: https://github.com/MicrosoftDocs/PowerShell-Docs.git
 Args: '["--config=../../../cspell-power-shell-docs.config.yaml","**"]'
 Summary:
   files: 2678
-  filesWithIssues: 1258
-  issues: 5747
+  filesWithIssues: 1254
+  issues: 5737
   errors: 0
 Errors: []
 
@@ -78,7 +78,6 @@ issues:
   - "reference/5.1/Microsoft.PowerShell.Core/About/about_Debuggers.md:583:10         delbr           U       function delbr { gbp | rbp }"
   - "reference/5.1/Microsoft.PowerShell.Core/About/about_FileSystem_Provider.md:70:53        filesystems     U       used. Linux and macOS filesystems support"
   - "reference/5.1/Microsoft.PowerShell.Core/About/about_FileSystem_Provider.md:278:27       logfiles        U       command creates the `logfiles` directory on the `C"
-  - "reference/5.1/Microsoft.PowerShell.Core/About/about_Foreach.md:101:22       lastaccesstime      U       Write-Host $file.lastaccesstime"
   - "reference/5.1/Microsoft.PowerShell.Core/About/about_Format.ps1xml.md:130:2          Parms           U       $Parms = @{"
   - "reference/5.1/Microsoft.PowerShell.Core/About/about_Format.ps1xml.md:434:45         mygciview       U       custom view is named **mygciview** and adds the"
   - "reference/5.1/Microsoft.PowerShell.Core/About/about_Function_Provider.md:129:39         Autosize    U       the next line. The `-Autosize` parameter resizes the"
@@ -262,7 +261,7 @@ issues:
   - "reference/5.1/Microsoft.PowerShell.Diagnostics/New-WinEvent.md:90:16        Elasped     U       to the **PolicyElaspedTimeInSeconds** field"
   - "reference/5.1/Microsoft.PowerShell.Host/Start-Transcript.md:53:22       mulitbyte       U       improper encoding of mulitbyte characters in the transcript"
   - "reference/5.1/Microsoft.PowerShell.Host/Start-Transcript.md:83:2        sharepath       U       $sharepath = '\\\\Server01\\Transcripts"
-  - "reference/5.1/Microsoft.PowerShell.LocalAccounts/Add-LocalGroupMember.md:58:49          Entra       U       account, an Microsoft Entra account, and a domain"
+  - "reference/5.1/Microsoft.PowerShell.LocalAccounts/Add-LocalGroupMember.md:58:48          Entra       U       account, a Microsoft Entra account, and a domain"
   - "reference/5.1/Microsoft.PowerShell.LocalAccounts/Add-LocalGroupMember.md:195:4          algm        U       - `algm`"
   - "reference/5.1/Microsoft.PowerShell.LocalAccounts/Get-LocalGroupMember.md:153:4          glgm    U       - `glgm`"
   - "reference/5.1/Microsoft.PowerShell.LocalAccounts/Remove-LocalGroup.md:184:7         IUSRS       U       - IIS_IUSRS"
@@ -367,6 +366,7 @@ issues:
   - "reference/5.1/Microsoft.PowerShell.Utility/Trace-Command.md:352:4       trcm                U       - `trcm`"
   - "reference/5.1/Microsoft.PowerShell.Utility/Update-TypeData.md:383:3         Noteproperty    U       - Noteproperty"
   - "reference/5.1/Microsoft.PowerShell.Utility/Wait-Event.md:65:8           Autoreset       U       $Timer.Autoreset = $False"
+  - "reference/5.1/Microsoft.PowerShell.Utility/Write-Information.md:141:2       psproc      U       $psproc = Get-Process -Id $PID"
   - "reference/5.1/Microsoft.PowerShell.Utility/Write-Progress.md:138:49         Substep     U       ParentId 0 \"Step $i - Substep $j\""
   - "reference/5.1/Microsoft.WSMan.Management/About/about_WSMan_Provider.md:264:57       testparametername       U       itialization parameter named \"testparametername\""
   - "reference/5.1/Microsoft.WSMan.Management/About/about_WSMan_Provider.md:271:22       testparametervalue      U       -ParamValue testparametervalue"
@@ -1223,7 +1223,6 @@ issues:
   - "reference/docs-conceptual/learn/remoting/SSH-Remoting-in-PowerShell.md:97:79        Progra              U       Windows is usually `Progra~1`. However,"
   - "reference/docs-conceptual/learn/remoting/SSH-Remoting-in-PowerShell.md:114:4        Pubkey              U       PubkeyAuthentication yes"
   - "reference/docs-conceptual/learn/remoting/WinRMSecurity.md:115:60        etype       U       is determined by the `etype` in the TGS ticket."
-  - "reference/docs-conceptual/learn/shell/running-commands.md:31:23         specifc     U       **Shell environment-specifc commands** are commands"
   - "reference/docs-conceptual/learn/shell/using-keyhandlers.md:185:49       eastus      U       eGroupName myRGName -Location eastus -Name myVM`"
   - "reference/docs-conceptual/learn/shell/using-light-theme.md:148:43       WCAG    U       Accessibility Guidelines (WCAG) 2.1 recommends that"
   - "reference/docs-conceptual/samples/Changing-Computer-State.md:21:1           rundll      U       rundll32.exe user32.dll,LockWorkStat"
@@ -1244,12 +1243,7 @@ issues:
   - "reference/docs-conceptual/samples/Performing-Networking-Tasks.md:271:11         tempshare       U       net share tempshare=c:\\temp /users:25 /remark"
   - "reference/docs-conceptual/samples/Redirecting-Data-with-Out---Cmdlets.md:127:71         processlist     U       to the file `C:\\temp\\processlist.txt`:"
   - "reference/docs-conceptual/samples/Sample-Scripts-for-Administration.yml:51:55       filterhashtable     U       winEvent-queries-with-filterhashtable.md"
-  - "reference/docs-conceptual/samples/Working-with-Files-and-Folders.md:75:62       XCOPY           U       file system copies. XCOPY, ROBOCOPY, and COM objects"
-  - "reference/docs-conceptual/samples/Working-with-Files-and-Folders.md:75:69       ROBOCOPY        U       system copies. XCOPY, ROBOCOPY, and COM objects, such"
-  - "reference/docs-conceptual/samples/Working-with-Files-and-Folders.md:155:24      rdisk           U       default=multi(0)disk(0)rdisk(0)partition(1)\\WINDOWS"
-  - "reference/docs-conceptual/samples/Working-with-Files-and-Folders.md:158:3       noexecute       U       /noexecute=AlwaysOff /fastdetect"
-  - "reference/docs-conceptual/samples/Working-with-Files-and-Folders.md:158:24      fastdetect      U       noexecute=AlwaysOff /fastdetect"
-  - "reference/docs-conceptual/samples/Working-with-Files-and-Folders.md:160:44      optin           U       Prevention\" /noexecute=optin /fastdetect"
+  - "reference/docs-conceptual/samples/Working-with-Files-and-Folders.md:81:41       xcopy       U       native commands like `xcopy.exe` and `robocopy.exe"
   - "reference/docs-conceptual/samples/Working-With-Files-Folders-and-Registry-Keys.md:61:48         Genral      U       :00 AM 1852416 AcGenral.dll"
   - "reference/docs-conceptual/samples/Working-With-Files-Folders-and-Registry-Keys.md:71:1          addins      U       addins"
   - "reference/docs-conceptual/samples/Working-With-Files-Folders-and-Registry-Keys.md:117:46        ocgen       U       6:31 PM 204276 ocgen.log"
@@ -1327,7 +1321,6 @@ issues:
   - "reference/docs-conceptual/windows-powershell/wmf/known-issues/known-issues-50.md:85:11          Generize    U       2. Copy Generize.xml from directory"
   - "reference/docs-conceptual/windows-powershell/wmf/known-issues/known-issues-50.md:101:6          Takeown     U       Takeown /f C:\\Windows\\System"
   - "reference/docs-conceptual/windows-powershell/wmf/known-issues/known-issues-50.md:107:6          Cacls       U       Cacls C:\\Windows\\System32"
-  - "reference/docs-conceptual/windows-powershell/wmf/known-issues/known-issues-50.md:117:6          xcopy       U       xcopy C:\\Generalize.xml C"
   - "reference/docs-conceptual/windows-powershell/wmf/known-issues/known-issues-51.md:70:35          newjea      U       PSSessionConfiguration -Name $newjea.Name -SecurityDescriptorSddl"
   - "reference/docs-conceptual/windows-powershell/wmf/known-issues/known-issues-dsc.md:43:1          mofcomp         U       mofcomp $env:windir\\system3"
   - "reference/docs-conceptual/windows-powershell/wmf/known-issues/known-issues-dsc.md:106:81        Appdomain       U       with DscPsPluginWkr_Appdomain)"
