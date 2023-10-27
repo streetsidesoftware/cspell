@@ -54,6 +54,7 @@ async function run() {
     };
 
     const schema = tsj.createGenerator(config).createSchema(config.type);
+    schema.allowTrailingCommas = true;
     const stringify = config.sortProps ? safeStableStringify : JSON.stringify;
     const schemaString = stringify(schema, null, 2);
 
