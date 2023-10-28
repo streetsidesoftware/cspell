@@ -6,7 +6,7 @@ import { promises as fs } from 'node:fs';
 const fixturesUrl = new URL('fixtures/', import.meta.url);
 const fixtures = ['cspell.test.json'];
 
-const keywords = ['deprecationMessage', 'markdownDescription', 'scope'];
+const keywords = ['allowTrailingCommas', 'deprecationMessage', 'markdownDescription', 'scope'];
 
 let errors = 0;
 
