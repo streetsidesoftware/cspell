@@ -1,6 +1,7 @@
 import { createCommand } from 'commander';
 import * as commander from 'commander';
 import os from 'os';
+import path from 'path';
 
 import { check } from './check';
 import type { ListRepositoryOptions } from './repositoryHelper';
@@ -112,5 +113,7 @@ function registerToken(token: string | undefined) {
 const cmd = createCommand('tester').description(`Validate CSpell results against various GitHub repositories.
 Note: A GitHub Personal Access Token is needed.
   This can be supplied as a command line option or in the $GITHUB_TOKEN environment variable.
+  \`gh\` can be used to supply the token:
+  GITHUB_TOKEN=$(gh auth token) node ./${path.basename(process.argv[1])}
 `);
 run(cmd);
