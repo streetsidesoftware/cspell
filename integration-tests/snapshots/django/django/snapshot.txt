@@ -3,7 +3,7 @@ Repository: django/django
 Url: "https://github.com/django/django.git"
 Args: ["**/*.{md,py}"]
 Lines:
- CSpell: Files checked: 2772, Issues found: 8094 in 923 files
+ CSpell: Files checked: 2773, Issues found: 8097 in 924 files
  exit code: 1
 ./django/__init__.py:12:26     - Unknown word (urlresolvers) -- Set the thread-local urlresolvers script prefix if `set
 ./django/apps/registry.py:134:40    - Unknown word (unconfigured) -- not ready" is due to unconfigured settings, accessing
@@ -630,9 +630,9 @@ Lines:
 ./django/db/models/base.py:684:40    - Unknown word (attnames)      -- an iterable of field attnames. If fields is None,
 ./django/db/models/enums.py:32:17     - Unknown word (metacls)    -- def __new__(metacls, classname, bases, classdict
 ./django/db/models/expressions.py:277:47    - Unknown word (multijoins) -- of reusable joins for multijoins
-./django/db/models/fields/__init__.py:2851:11   - Unknown word (subclasscheck) -- def __subclasscheck__(self, subclass):
-./django/db/models/fields/__init__.py:518:76    - Unknown word (EXXX)       -- details.get("id", "fields.EXXX"),
-./django/db/models/fields/__init__.py:529:79    - Unknown word (WXXX)       -- details.get("id", "fields.WXXX"),
+./django/db/models/fields/__init__.py:2842:11   - Unknown word (subclasscheck) -- def __subclasscheck__(self, subclass):
+./django/db/models/fields/__init__.py:523:76    - Unknown word (EXXX)       -- details.get("id", "fields.EXXX"),
+./django/db/models/fields/__init__.py:534:79    - Unknown word (WXXX)       -- details.get("id", "fields.WXXX"),
 ./django/db/models/fields/json.py:314:7     - Unknown word (JSONI)      -- class JSONIContains(CaseInsensitiveMixin
 ./django/db/models/fields/json.py:390:65    - Unknown word (MDEV)       -- and ->> operators (see MDEV-13594).
 ./django/db/models/fields/related.py:823:63    - Unknown word (pushdown)   -- joining and subquery pushdown. The
@@ -733,14 +733,14 @@ Lines:
 ./django/template/defaultfilters.py:284:30    - Unknown word (titlecase)  -- Convert a string into titlecase."""
 ./django/template/defaultfilters.py:446:5     - Unknown word (escapeseq)  -- def escapeseq(value):
 ./django/template/defaultfilters.py:942:22    - Unknown word (cand)       -- * If value is 0, cand{{ value|pluralize:"y
-./django/template/defaulttags.py:1116:48   - Unknown word (amet)         -- Lorem ipsum dolor sit amet, consectetuer...").
-./django/template/defaulttags.py:1116:54   - Unknown word (consectetuer) -- ipsum dolor sit amet, consectetuer...").
-./django/template/defaulttags.py:1182:21   - Unknown word (Remler)       -- * Emily Remler
-./django/template/defaulttags.py:1184:15   - Unknown word (Lovie)        -- * Lovie Austin
-./django/template/defaulttags.py:1415:21   - Unknown word (myblock)      -- {% verbatim myblock %}
-./django/template/defaulttags.py:144:35    - Unknown word (asvar)      -- init__(self, variables, asvar=None):
-./django/template/defaulttags.py:608:53    - Unknown word (subtemplate) -- rowcolors }}">{% include "subtemplate.html " %}</tr>
-./django/template/defaulttags.py:706:51    - Unknown word (autoescaping) -- autoescape`` tag to manage autoescaping for blocks of
+./django/template/defaulttags.py:1117:48   - Unknown word (amet)         -- Lorem ipsum dolor sit amet, consectetuer...").
+./django/template/defaulttags.py:1117:54   - Unknown word (consectetuer) -- ipsum dolor sit amet, consectetuer...").
+./django/template/defaulttags.py:1223:21   - Unknown word (Remler)       -- * Emily Remler
+./django/template/defaulttags.py:1225:15   - Unknown word (Lovie)        -- * Lovie Austin
+./django/template/defaulttags.py:1456:21   - Unknown word (myblock)      -- {% verbatim myblock %}
+./django/template/defaulttags.py:145:35    - Unknown word (asvar)      -- init__(self, variables, asvar=None):
+./django/template/defaulttags.py:609:53    - Unknown word (subtemplate) -- rowcolors }}">{% include "subtemplate.html " %}</tr>
+./django/template/defaulttags.py:707:51    - Unknown word (autoescaping) -- autoescape`` tag to manage autoescaping for blocks of
 ./django/template/library.py:254:36    - Unknown word (reparsing)  -- render_context to avoid reparsing and loading when used
 ./django/template/library.py:37:34     - Unknown word (somename)   -- # @register.tag('somename') or @register.tag(name
 ./django/template/library.py:43:40     - Unknown word (somefunc)   -- register.tag('somename', somefunc)
@@ -782,6 +782,8 @@ Lines:
 ./django/utils/cache.py:315:9     - Unknown word (newheader)  -- newheader
 ./django/utils/cache.py:46:9      - Unknown word (dictitem)   -- def dictitem(s):
 ./django/utils/cache.py:53:9      - Unknown word (dictvalue)  -- def dictvalue(*t):
+./django/utils/choices.py:20:68     - Unknown word (fillvalue)  -- longest(self, other, fillvalue=object()))
+./django/utils/choices.py:25:15     - Unknown word (Suboptimally) -- # Suboptimally consume whole iterator
 ./django/utils/crypto.py:44:50     - Unknown word (digestmod)  -- force_bytes(value), digestmod=hasher)
 ./django/utils/datastructures.py:243:7     - Unknown word (delslice)   -- __delslice__ = complain
 ./django/utils/datastructures.py:247:7     - Unknown word (setslice)   -- __setslice__ = complain
@@ -791,8 +793,8 @@ Lines:
 ./django/utils/dateformat.py:34:4      - Unknown word (formatchars) -- re_formatchars = _lazy_re_compile(r
 ./django/utils/dateformat.py:39:22     - Unknown word (formatstr)   -- def format(self, formatstr):
 ./django/utils/decorators.py:8:7       - Unknown word (classonlymethod) -- class classonlymethod(classmethod):
-./django/utils/deprecation.py:123:53    - Unknown word (dunder)                -- to avoid swapping out dunder methods
-./django/utils/deprecation.py:129:27    - Unknown word (acall)                 -- return self.__acall__(request)
+./django/utils/deprecation.py:108:46    - Unknown word (dunder)                -- to avoid swapping out dunder methods.
+./django/utils/deprecation.py:125:27    - Unknown word (acall)                 -- return self.__acall__(request)
 ./django/utils/deprecation.py:4:47      - Unknown word (markcoroutinefunction) -- iscoroutinefunction, markcoroutinefunction, sync_to_async
 ./django/utils/encoding.py:151:66    - Unknown word (multibyte)  -- bytes ≥ 128 are part of multibyte
 ./django/utils/encoding.py:153:2     - Unknown word (hexdig)     -- _hexdig = "0123456789ABCDEFabcdef
@@ -1584,7 +1586,7 @@ Lines:
 ./tests/expressions/tests.py:307:36    - Unknown word (Funcs)      -- should be able to use Funcs when inserting new data
 ./tests/expressions/tests.py:447:9     - Unknown word (mustermanns) -- mustermanns_by_seniority = Employee
 ./tests/expressions_case/tests.py:473:44    - Unknown word (somecase)   -- aseTestModel.objects.annotate(somecase=SOME_CASE).order_by
-./tests/expressions_window/tests.py:1415:60   - Unknown word (Nowak)      -- department": "IT", "name": "Nowak", "salary": 32000})
+./tests/expressions_window/tests.py:1493:60   - Unknown word (Nowak)      -- department": "IT", "name": "Nowak", "salary": 32000})
 ./tests/expressions_window/tests.py:591:14    - Unknown word (cume)       -- def test_cume_dist(self):
 ./tests/expressions_window/tests.py:75:23     - Unknown word (Jenson)     -- ("Jenson", 45000, "Accounting
 ./tests/extra_regress/models.py:8:7       - Unknown word (Revisionable) -- class RevisionableModel(models.Model):
@@ -2280,16 +2282,16 @@ Lines:
 ./tests/model_forms/models.py:387:7     - Unknown word (Colourful)  -- class ColourfulItem(models.Model):
 ./tests/model_forms/models.py:389:5     - Unknown word (colours)    -- colours = models.ManyToManyField
 ./tests/model_forms/test_modelchoicefield.py:271:23    - Unknown word (multiplemodelchoicefield) -- def test_disabled_multiplemodelchoicefield(self):
-./tests/model_forms/tests.py:1060:36   - Unknown word (notblank)     -- notrequired_overrides_notblank(self):
-./tests/model_forms/tests.py:1237:14   - Unknown word (explicitpk)   -- def test_explicitpk_unspecified(self):
-./tests/model_forms/tests.py:1474:16   - Unknown word (royko)        -- self.w_royko = Writer.objects.create
-./tests/model_forms/tests.py:3069:9    - Unknown word (colour)       -- colour = Colour.objects.create
-./tests/model_forms/tests.py:3078:40   - Unknown word (Colours)      -- label for="id_colours">Colours:</label>
-./tests/model_forms/tests.py:3322:9    - Unknown word (stumpjokeform) -- stumpjokeform = StumpJokeForm()
-./tests/model_forms/tests.py:500:43    - Unknown word (Lockridge)  -- WriterForm({"name": "Richard Lockridge"})
-./tests/model_forms/tests.py:597:14    - Unknown word (mixmodel)   -- def test_mixmodel_form(self):
-./tests/model_forms/tests.py:683:14    - Unknown word (subclassmeta) -- def test_subclassmeta_form(self):
-./tests/model_forms/tests.py:709:14    - Unknown word (orderfields)  -- def test_orderfields_form(self):
+./tests/model_forms/tests.py:1061:36   - Unknown word (notblank)     -- notrequired_overrides_notblank(self):
+./tests/model_forms/tests.py:1238:14   - Unknown word (explicitpk)   -- def test_explicitpk_unspecified(self):
+./tests/model_forms/tests.py:1475:16   - Unknown word (royko)        -- self.w_royko = Writer.objects.create
+./tests/model_forms/tests.py:3102:9    - Unknown word (colour)       -- colour = Colour.objects.create
+./tests/model_forms/tests.py:3111:40   - Unknown word (Colours)      -- label for="id_colours">Colours:</label>
+./tests/model_forms/tests.py:3355:9    - Unknown word (stumpjokeform) -- stumpjokeform = StumpJokeForm()
+./tests/model_forms/tests.py:501:43    - Unknown word (Lockridge)  -- WriterForm({"name": "Richard Lockridge"})
+./tests/model_forms/tests.py:598:14    - Unknown word (mixmodel)   -- def test_mixmodel_form(self):
+./tests/model_forms/tests.py:684:14    - Unknown word (subclassmeta) -- def test_subclassmeta_form(self):
+./tests/model_forms/tests.py:710:14    - Unknown word (orderfields)  -- def test_orderfields_form(self):
 ./tests/model_formsets/test_uuid.py:107:18    - Unknown word (childrelatedviaak) -- "childrelatedviaak_set-TOTAL_FORMS": 3
 ./tests/model_formsets/test_uuid.py:37:18     - Unknown word (uuidpkchild) -- "uuidpkchild_set-TOTAL_FORMS": 3
 ./tests/model_formsets/tests.py:1055:49   - Unknown word (mondes)           -- title": "Revue des deux mondes",
@@ -2777,7 +2779,7 @@ Lines:
 ./tests/utils_tests/test_autoreload.py:218:32    - Unknown word (Werror)     -- [sys.executable, "-Werror", __file__, "runserver
 ./tests/utils_tests/test_autoreload.py:227:32    - Unknown word (Xutf)       -- [sys.executable, "-Xutf8", "-Xa=b", __file_
 ./tests/utils_tests/test_autoreload.py:94:30     - Unknown word (Ceci)       -- filename.write_text("Ceci n'est pas du Python
-./tests/utils_tests/test_choices.py:276:11    - Unknown word (randomised) -- # randomised order in form fields
+./tests/utils_tests/test_choices.py:368:11    - Unknown word (randomised) -- # randomised order in form fields
 ./tests/utils_tests/test_datastructures.py:107:27    - Unknown word (newkey)     -- d.setlistdefault("newkey", ["Doe"])
 ./tests/utils_tests/test_datastructures.py:243:24    - Unknown word (unpackable) -- # Iterables of unpackable objects with incorrect
 ./tests/utils_tests/test_datastructures.py:273:14    - Unknown word (dictwrapper) -- def test_dictwrapper(self):

@@ -3,9 +3,9 @@ Repository: eslint/eslint
 Url: https://github.com/eslint/eslint
 Args: '["**","--exclude=bin/**","--exclude=CHANGELOG.md","--exclude=_data","--exclude=tests/bench/large.js","--exclude=docs/src/_includes","--exclude=docs/src/assets/{fonts,s?css,images}"]'
 Summary:
-  files: 1896
+  files: 1898
   filesWithIssues: 1258
-  issues: 5521
+  issues: 5523
   errors: 0
 Errors: []
 
@@ -133,7 +133,7 @@ issues:
   - "docs/src/rules/indent-legacy.md:28:16       Crockford       U       * Four spaces: Crockford"
   - "docs/src/rules/indent-legacy.md:91:76       declarators     U       indentation level for `var` declarators; can also take an object"
   - "docs/src/rules/indent-legacy.md:92:76       IIFEs           U       level for file-level IIFEs."
-  - "docs/src/rules/indent-legacy.md:402:8       boop            U       qux, boop) {"
+  - "docs/src/rules/indent-legacy.md:405:8       boop            U       qux, boop) {"
   - "docs/src/rules/key-spacing.md:194:5         bcde    U       bcde: 42,"
   - "docs/src/rules/key-spacing.md:216:5         ijkl    U       ijkl: 'Non-consecutive lines"
   - "docs/src/rules/lines-around-comment.md:36:10        Hashbang    U       * `\"afterHashbangComment\": true` requires"
@@ -532,6 +532,7 @@ issues:
   - "tests/lib/rules/no-invalid-regexp.js:81:35          Vith            U       RegExp('\\\\\\\\p{Script=Vith}', 'u')\","
   - "tests/lib/rules/no-invalid-regexp.js:82:35          Vithkuqi        U       RegExp('\\\\\\\\p{Script=Vithkuqi}', 'u')\","
   - "tests/lib/rules/no-prototype-builtins.js:44:35          Enumerabl       U       code: \"foo?.['propertyIsEnumerabl']('bar')\", parserOptions"
+  - "tests/lib/rules/no-prototype-builtins.js:233:52         Expresion       U       OwnProperty is part of a ChainExpresion"
   - "tests/lib/rules/no-restricted-imports.js:50:31          Gitignores      U       code: \"import withGitignores from \\\"foo/bar\\\";\","
   - "tests/lib/rules/no-restricted-imports.js:359:84         subimports      U       message: \"some foo subimports are restricted\" }]"
   - "tests/lib/rules/no-script-url.js:25:21          xjavascript     U       \"var url = 'xjavascript:'\","

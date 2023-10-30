@@ -4,7 +4,7 @@ Url: "https://github.com/Azure/azure-rest-api-specs.git"
 Args: ["--config=cSpell.json","**/*.{md,ts,js}"]
 Lines:
   File: "./Azure/azure-rest-api-specs/cSpell.json"
- CSpell: Files checked: 2155, Issues found: 2500 in 763 files
+ CSpell: Files checked: 2186, Issues found: 2545 in 780 files
  exit code: 1
 ./CONTRIBUTING.md:24:6      - Unknown word (tocstop)    -- <!-- tocstop -->
 ./CONTRIBUTING.md:82:3      - Unknown word (Poli)       -- - PoliCheck -
@@ -74,9 +74,9 @@ Lines:
 ./documentation/typespec-structure-guidelines.md:46:7      - Unknown word (confidentialledger) -- -> confidentialledger
 ./documentation/x-ms-examples.md:105:29    - Unknown word (testrg)     -- resourceGroupName": "testrg123",
 ./documentation/x-ms-examples.md:106:30    - Unknown word (testacc)    -- storageAccountName": "testacc6141",
-./eng/tools/TypeSpecValidation/src/index.ts:17:54     - Unknown word (Positionals) -- args, options, allowPositionals: true } as ParseArgsConfig
-./eng/tools/TypeSpecValidation/src/index.ts:18:29     - Unknown word (positionals) -- folder = parsedArgs.positionals[0];
-./eng/tools/TypeSpecValidation/src/rules/npm-prefix.ts:17:54     - Unknown word (revparse)   -- normalize(await git.revparse("--show-toplevel"))
+./eng/tools/TypeSpecValidation/src/index.ts:20:54     - Unknown word (Positionals) -- args, options, allowPositionals: true } as ParseArgsConfig
+./eng/tools/TypeSpecValidation/src/index.ts:21:29     - Unknown word (positionals) -- folder = parsedArgs.positionals[0].split(path.sep).join
+./eng/tools/TypeSpecValidation/src/rules/npm-prefix.ts:16:54     - Unknown word (revparse)   -- normalize(await git.revparse("--show-toplevel"))
 ./profiles/ResourceSchemas.md:11:5      - Unknown word (azureresourceschema) -- azureresourceschema:
 ./profiles/ResourceSchemas.md:247:106   - Unknown word (servermanagement)    -- Management/2015-07-01-preview/servermanagement.json
 ./profiles/definitions/latest-2019-04-01.md:1555:17   - Unknown word (dbformariadb)            -- microsoft.dbformariadb:
@@ -128,6 +128,7 @@ Lines:
 ./specification/azureactivedirectory/resource-manager/readme.go.md:14:38     - Unknown word (armaad)     -- resourcemanager/aad/armaad
 ./specification/azurearcdata/resource-manager/readme.csharp.md:14:40     - Unknown word (azurearcdata) -- csharp-sdks-folder)/azurearcdata/Microsoft.Azure.Management
 ./specification/azuredata/resource-manager/readme.csharp.md:14:40     - Unknown word (azuredata)  -- csharp-sdks-folder)/azuredata/Microsoft.Azure.Management
+./specification/azureintegrationspaces/resource-manager/readme.az.md:9:17      - Unknown word (azureintegrationspaces) -- extensions: azureintegrationspaces
 ./specification/azurestackhci/resource-manager/readme.az.md:8:27      - Unknown word (azurestackhci) -- namespace: azure.mgmt.azurestackhci
 ./specification/azurestackhci/resource-manager/readme.md:379:14    - Unknown word (sdkauto)    -- - node sdkauto_afterscript.js azurestackhci
 ./specification/azurestackhci/resource-manager/readme.md:379:22    - Unknown word (afterscript) -- - node sdkauto_afterscript.js azurestackhci/resource
@@ -140,7 +141,7 @@ Lines:
 ./specification/cdn/resource-manager/readme.md:41:46     - Unknown word (cdnwebapplicationfirewall) -- preview/2023-07-01-preview/cdnwebapplicationfirewall.json
 ./specification/changeanalysis/resource-manager/readme.csharp.md:14:40     - Unknown word (changeanalysis) -- csharp-sdks-folder)/changeanalysis/management/Microsoft
 ./specification/chaos/resource-manager/readme.go.md:8:40      - Unknown word (armchaos)   -- resourcemanager/chaos/armchaos
-./specification/chaos/resource-manager/readme.md:229:22    - Unknown word (toplevelresourcelistbysubscription) -- we defined the toplevelresourcelistbysubscription here:
+./specification/chaos/resource-manager/readme.md:334:22    - Unknown word (toplevelresourcelistbysubscription) -- we defined the toplevelresourcelistbysubscription here:
 ./specification/cloudshell/resource-manager/readme.md:58:67     - Unknown word (cloudshell) -- profiles['azure_mgmt_cloudshell']
 ./specification/cognitiveservices/data-plane/AzureOpenAI/authoring/readme.md:21:40     - Unknown word (azureopenai) -- preview/2022-03-01-preview/azureopenai.json
 ./specification/cognitiveservices/data-plane/AzureOpenAI/inference/readme.md:39:58     - Unknown word (autogen)    -- tag=release_2022_12_01_autogen` is specified on the
@@ -218,6 +219,7 @@ Lines:
 ./specification/dns/resource-manager/readme.go.md:14:38     - Unknown word (armdns)     -- resourcemanager/dns/armdns
 ./specification/dnsresolver/resource-manager/readme.az.md:8:27      - Unknown word (dnsresolver) -- namespace: azure.mgmt.dnsresolver
 ./specification/domainservices/resource-manager/readme.md:39:35     - Unknown word (oucontainer) -- AAD/stable/2022-12-01/oucontainer.json
+./specification/edgemarketplace/resource-manager/readme.az.md:7:17      - Unknown word (edgemarketplace) -- extensions: edgemarketplace
 ./specification/edgeorder/resource-manager/readme.az.md:7:17      - Unknown word (edgeorder)  -- extensions: edgeorder
 ./specification/edgeorderpartner/resource-manager/readme.md:39:57     - Unknown word (edgeorderpartner) -- preview/2020-12-01-preview/edgeorderpartner.json
 ./specification/elastic/resource-manager/readme.go.md:14:42     - Unknown word (armelastic) -- resourcemanager/elastic/armelastic
@@ -258,6 +260,7 @@ Lines:
 ./specification/keyvault/resource-manager/readme.md:270:91    - Unknown word (syncronous) -- return a mix of 202 and syncronous return types (200,
 ./specification/kubernetesconfiguration/resource-manager/readme.csharp.md:14:40     - Unknown word (kubernetesconfiguration) -- csharp-sdks-folder)/kubernetesconfiguration/Microsoft.Azure.Management
 ./specification/kubernetesconfiguration/resource-manager/readme.java.md:8:11      - Unknown word (fluxconfiguration) -- - from: fluxconfiguration.json
+./specification/liftrastronomer/resource-manager/readme.md:1:14      - Unknown word (Astro)      -- # Astronomer.Astro RP
 ./specification/liftrqumulo/resource-manager/readme.typescript.md:10:49     - Unknown word (liftrqumulo) -- typescript-sdks-folder)/sdk/liftrqumulo/arm-qumulo"
 ./specification/loadtestservice/resource-manager/readme.md:74:67     - Unknown word (loadtesting) -- profiles['azure_mgmt_loadtesting']
 ./specification/logic/resource-manager/readme.go.md:14:40     - Unknown word (armlogic)   -- resourcemanager/logic/armlogic
@@ -360,7 +363,7 @@ Lines:
 ./specification/network/resource-manager/readme.cli.md:625:14    - Unknown word (expressroutecircuitconnections)      -- - split: expressroutecircuitconnections
 ./specification/network/resource-manager/readme.cli.md:90:14     - Unknown word (routetables)   -- - split: routetables
 ./specification/network/resource-manager/readme.go.md:14:42     - Unknown word (armnetwork) -- resourcemanager/network/armnetwork
-./specification/network/resource-manager/readme.md:3031:44   - Unknown word (groupmembership) -- no id is needed for groupmembership resources.
+./specification/network/resource-manager/readme.md:3050:44   - Unknown word (groupmembership) -- no id is needed for groupmembership resources.
 ./specification/networkanalytics/resource-manager/readme.csharp.md:14:40     - Unknown word (networkanalytics) -- csharp-sdks-folder)/networkanalytics/management/[[ResourceProvider
 ./specification/networkcloud/resource-manager/readme.csharp.md:14:40     - Unknown word (networkcloud) -- csharp-sdks-folder)/networkcloud/management/Microsoft
 ./specification/newrelic/resource-manager/readme.python.md:10:23     - Unknown word (newrelicobservability) -- namespace: azure.mgmt.newrelicobservability
@@ -401,6 +404,7 @@ Lines:
 ./specification/recoveryservicesbackup/resource-manager/readme.md:39:20     - Unknown word (passivestamp) -- ``` yaml $(package-passivestamp)
 ./specification/recoveryservicesbackup/resource-manager/readme.md:43:20     - Unknown word (activestamp)  -- ``` yaml $(package-activestamp)
 ./specification/recoveryservicesdatareplication/resource-manager/readme.az.md:9:17      - Unknown word (recoveryservicesdatareplication) -- extensions: recoveryservicesdatareplication
+./specification/recoveryservicesdatareplication/resource-manager/readme.java.md:11:270    - Unknown word (Extn)       -- HyperVToAzStackHciRepExtnCustomProps,VMwareToAzStackHci
 ./specification/redhatopenshift/resource-manager/readme.go.md:8:14      - Unknown word (redhatopenshift) -- namespace: redhatopenshift
 ./specification/redis/resource-manager/readme.go.md:14:40     - Unknown word (armredis)   -- resourcemanager/redis/armredis
 ./specification/redis/resource-manager/readme.java.md:10:13     - Unknown word (additonal)  -- reason: additonal properties should be
@@ -450,7 +454,7 @@ Lines:
 ./specification/sphere/resource-manager/readme.azureresourceschema.md:9:17      - Unknown word (azuresphere) -- - tag: schema-azuresphere-2022-09-01-preview
 ./specification/sphere/resource-manager/readme.go.md:7:41      - Unknown word (armsphere)  -- resourcemanager/sphere/armsphere
 ./specification/sql/resource-manager/readme.go.md:7:38      - Unknown word (armsql)     -- resourcemanager/sql/armsql
-./specification/sql/resource-manager/readme.md:2673:40   - Unknown word (sqlmanagement) -- csharp-sdks-folder)/sqlmanagement/Microsoft.Azure.Management
+./specification/sql/resource-manager/readme.md:2822:40   - Unknown word (sqlmanagement) -- csharp-sdks-folder)/sqlmanagement/Microsoft.Azure.Management
 ./specification/storage/data-plane/Azure.Storage.Files.DataLake/readme.md:91:34     - Unknown word (predfined)  -- These parameters are predfined by storage specifications
 ./specification/storage/resource-manager/readme.go.md:14:42     - Unknown word (armstorage) -- resourcemanager/storage/armstorage
 ./specification/storageactions/resource-manager/readme.az.md:9:17      - Unknown word (storageactions) -- extensions: storageactions
