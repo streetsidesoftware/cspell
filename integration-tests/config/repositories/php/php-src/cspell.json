@@ -26,8 +26,8 @@
             "path": "./mime-types.txt"
         }
     ],
-    "dictionaries": ["mnemonics", "Mime Types", "php"],
+    "dictionaries": ["mnemonics", "Mime Types"],
     "ignoreWords": ["itab", "pcre", "timezonedb", "lexbor", "sljit"],
-    "languageSettings": [],
+    "overrides": [{ "filename": "**/*.{c,cpp,cxx,h,md}", "dictionaries": ["php"] }],
     "import": ["../../../cspell.json"]
 }
