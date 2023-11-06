@@ -3,7 +3,7 @@ Repository: MicrosoftDocs/PowerShell-Docs
 Url: "https://github.com/MicrosoftDocs/PowerShell-Docs.git"
 Args: ["--config=../../../cspell-power-shell-docs.config.yaml","**"]
 Lines:
- CSpell: Files checked: 2678, Issues found: 5739 in 1256 files
+ CSpell: Files checked: 2654, Issues found: 5676 in 1245 files
  exit code: 1
 ./LICENSE:139:15    - Unknown word (sublicensable)   -- non-sublicensable, non-exclusive, irrevocable
 ./LICENSE:205:34    - Unknown word (waivable)        -- under any voluntary or waivable statutory or compulsory
@@ -62,10 +62,13 @@ Lines:
 ./reference/5.1/Microsoft.PowerShell.Core/About/about_Classes.md:787:10    - Unknown word (baseclass)  -- class (`[baseclass]$this`) on invocation
 ./reference/5.1/Microsoft.PowerShell.Core/About/about_Classes.md:797:10    - Unknown word (basedays)   -- [int]basedays() {return ([BaseClass
 ./reference/5.1/Microsoft.PowerShell.Core/About/about_Classes.md:817:25    - Unknown word (implemention) -- interface. Omitting the implemention interface members causes
+./reference/5.1/Microsoft.PowerShell.Core/About/about_Command_Syntax.md:161:36    - Unknown word (huas)       -- also known as chi-hua-huas -->
+./reference/5.1/Microsoft.PowerShell.Core/About/about_Command_Syntax.md:171:27    - Unknown word (binkies)    -- []` - also known as binkies -->
+./reference/5.1/Microsoft.PowerShell.Core/About/about_Command_Syntax.md:184:34    - Unknown word (mycommand)  -- Name MyAlias -Value mycommand.exe
 ./reference/5.1/Microsoft.PowerShell.Core/About/about_Comment_Based_Help.md:677:25    - Unknown word (inputpath)  -- .\Update-Month.ps1 -inputpath C:\Data\January.csv
 ./reference/5.1/Microsoft.PowerShell.Core/About/about_CommonParameters.md:730:72    - Unknown word (defau)      -- Suspend [?] Help (defau
-./reference/5.1/Microsoft.PowerShell.Core/About/about_Comparison_Operators.md:413:11    - Unknown word (Chell)      -- "Rhell", "Chell", "Mel", "Smell", "Shell
-./reference/5.1/Microsoft.PowerShell.Core/About/about_Comparison_Operators.md:413:2     - Unknown word (Rhell)      -- "Rhell", "Chell", "Mel", "Smell
+./reference/5.1/Microsoft.PowerShell.Core/About/about_Comparison_Operators.md:415:11    - Unknown word (Chell)      -- "Rhell", "Chell", "Mel", "Smell", "Shell
+./reference/5.1/Microsoft.PowerShell.Core/About/about_Comparison_Operators.md:415:2     - Unknown word (Rhell)      -- "Rhell", "Chell", "Mel", "Smell
 ./reference/5.1/Microsoft.PowerShell.Core/About/about_Data_Sections.md:175:29    - Unknown word (stringdata) -- ConvertFrom-StringData -stringdata @'
 ./reference/5.1/Microsoft.PowerShell.Core/About/about_Debuggers.md:148:2     - Unknown word (scriptname) -- $scriptname = $MyInvocation.PSCommandPath
 ./reference/5.1/Microsoft.PowerShell.Core/About/about_Debuggers.md:373:20    - Unknown word (psscripts)  -- [localhost]: PS C:\psscripts> Set-PSBreakpoint .
@@ -300,7 +303,6 @@ Lines:
 ./reference/5.1/Microsoft.PowerShell.Management/Resolve-Path.md:231:4     - Unknown word (rvpa)       -- - `rvpa`
 ./reference/5.1/Microsoft.PowerShell.Management/Restart-Computer.md:112:2     - Unknown word (Creds)      -- $Creds = Get-Credential
 ./reference/5.1/Microsoft.PowerShell.Management/Set-WmiInstance.md:598:4     - Unknown word (swmi)       -- - `swmi`
-./reference/5.1/Microsoft.PowerShell.Management/Start-Process.md:151:11    - Unknown word (noprofile)  -- $args = '-noprofile -command "Start-Process
 ./reference/5.1/Microsoft.PowerShell.Management/Start-Process.md:65:26     - Unknown word (myfile)     -- Start-Process -FilePath "myfile.txt" -WorkingDirectory
 ./reference/5.1/Microsoft.PowerShell.Management/Stop-Process.md:78:50     - Unknown word (namein)     -- includes the process namein addition to its ID,
 ./reference/5.1/Microsoft.PowerShell.Management/Suspend-Service.md:43:27     - Unknown word (usingthe)   -- resumed, such as by usingthe `Resume-Service` cmdlet
@@ -408,6 +410,7 @@ Lines:
 ./reference/7.2/CimCmdlets/Remove-CimInstance.md:324:6     - Unknown word (rcim)       -- - `rcim`
 ./reference/7.2/CimCmdlets/Remove-CimSession.md:236:6     - Unknown word (rcms)       -- - `rcms`
 ./reference/7.2/CimCmdlets/Set-CimInstance.md:421:6     - Unknown word (scim)       -- - `scim`
+./reference/7.2/Microsoft.PowerShell.Core/About/about_ANSI_Terminals.md:228:7     - Unknown word (noprofile)     -- pwsh -noprofile -command 'Get-Childitem
 ./reference/7.2/Microsoft.PowerShell.Core/About/about_ANSI_Terminals.md:251:4     - Unknown word (xtermm)        -- - `xtermm` - sets `$PSStyle.OutputRende
 ./reference/7.2/Microsoft.PowerShell.Core/About/about_ANSI_Terminals.md:53:5      - Unknown word (Strikethrough) -- - **Strikethrough** - Turns strike through
 ./reference/7.2/Microsoft.PowerShell.Core/About/about_Environment_Variables.md:19:16     - Unknown word (UPDATECHECK) -- - **POWERSHELL_UPDATECHECK**
@@ -455,8 +458,8 @@ Lines:
 ./reference/7.2/Microsoft.PowerShell.Management/New-Service.md:84:16     - Unknown word (CCLCSWRPWPDTLOCRRC) -- $SDDL = "D:(A;;CCLCSWRPWPDTLOCRRC;;;SY)(A;;CCDCLCSWRPWPDTLOCRSD
 ./reference/7.2/Microsoft.PowerShell.Management/New-Service.md:84:44     - Unknown word (CCDCLCSWRPWPDTLOCRSDRCWDWO) -- CCLCSWRPWPDTLOCRRC;;;SY)(A;;CCDCLCSWRPWPDTLOCRSDRCWDWO;;;BA)(A;;CCLCSWLOCRRC
 ./reference/7.2/Microsoft.PowerShell.Management/New-Service.md:84:80     - Unknown word (CCLCSWLOCRRC)               -- SWRPWPDTLOCRSDRCWDWO;;;BA)(A;;CCLCSWLOCRRC;;;SU)"
-./reference/7.2/Microsoft.PowerShell.Management/Start-Process.md:166:2     - Unknown word (nohup)      -- `nohup`. The following example
-./reference/7.2/Microsoft.PowerShell.Management/Start-Process.md:560:8     - Unknown word (Proces)     -- `Start-Proces gedit` to launch the
+./reference/7.2/Microsoft.PowerShell.Management/Start-Process.md:146:2     - Unknown word (nohup)      -- `nohup`. The following example
+./reference/7.2/Microsoft.PowerShell.Management/Start-Process.md:540:8     - Unknown word (Proces)     -- `Start-Proces gedit` to launch the
 ./reference/7.2/Microsoft.PowerShell.Management/Stop-Computer.md:274:77    - Unknown word (platorms)   -- and macOS. For these platorms, the cmdlet
 ./reference/7.2/Microsoft.PowerShell.Management/Test-Connection.md:23:4      - Unknown word (Dont)       -- [-DontFragment] [-TimeoutSeconds
 ./reference/7.2/Microsoft.PowerShell.Management/Test-Connection.md:44:43     - Unknown word (Traceroute) -- TargetName] <string[]> -Traceroute [-IPv4] [-IPv6] [-ResolveDest
@@ -687,69 +690,74 @@ Lines:
 ./reference/docs-conceptual/community/2022-updates.md:505:3     - Unknown word (peteraritchie)             -- | peteraritchie |     1      |
 ./reference/docs-conceptual/community/2022-updates.md:71:66     - Unknown word (chadmando)   -- 5 articles (Thanks @chadmando!)
 ./reference/docs-conceptual/community/2022-updates.md:96:35     - Unknown word (thon)        -- acktoberfest and other hack-a-thon events](/powershell
-./reference/docs-conceptual/community/2023-updates.md:127:3     - Unknown word (Milek)          -- | MilekJakub |     1
-./reference/docs-conceptual/community/2023-updates.md:127:8     - Unknown word (Jakub)          -- | MilekJakub |     1      |
-./reference/docs-conceptual/community/2023-updates.md:128:9     - Unknown word (Shastri)        -- | Atman-Shastri |     1      |
-./reference/docs-conceptual/community/2023-updates.md:129:8     - Unknown word (Jhawk)          -- | BraveJhawk |     1      |
-./reference/docs-conceptual/community/2023-updates.md:130:3     - Unknown word (coolhome)       -- | coolhome |     1      |
-./reference/docs-conceptual/community/2023-updates.md:131:3     - Unknown word (johndward)      -- | johndward01 |     1      |
-./reference/docs-conceptual/community/2023-updates.md:139:34    - Unknown word (VNET)           -- Azure Cloud Shell in a VNET with quickstart templates
-./reference/docs-conceptual/community/2023-updates.md:139:44    - Unknown word (quickstart)     -- Shell in a VNET with quickstart templates](/azure/cloud
-./reference/docs-conceptual/community/2023-updates.md:155:7     - Unknown word (Mandalorian)    -- - @XXLMandalorian013 contributed 3 PRs
-./reference/docs-conceptual/community/2023-updates.md:171:3     - Unknown word (thegraffix)     -- | thegraffix |     4      |
-./reference/docs-conceptual/community/2023-updates.md:173:3     - Unknown word (RAJU)           -- | RAJU2529 |     1
-./reference/docs-conceptual/community/2023-updates.md:174:3     - Unknown word (dstreefkerk)    -- | dstreefkerk |     1      |
-./reference/docs-conceptual/community/2023-updates.md:175:3     - Unknown word (vontompers)     -- | vontompers |     1      |
-./reference/docs-conceptual/community/2023-updates.md:176:3     - Unknown word (mubed)          -- | mubed |     1
-./reference/docs-conceptual/community/2023-updates.md:177:3     - Unknown word (Frederisk)      -- | Frederisk |     1      |
-./reference/docs-conceptual/community/2023-updates.md:178:3     - Unknown word (khaffner)       -- | khaffner |     1      |
-./reference/docs-conceptual/community/2023-updates.md:179:3     - Unknown word (noamper)        -- | noamper |     1      |
-./reference/docs-conceptual/community/2023-updates.md:180:3     - Unknown word (aksarben)       -- | aksarben |            |
-./reference/docs-conceptual/community/2023-updates.md:202:4     - Unknown word (robderickson)   -- - @robderickson contributed 1 PR to
-./reference/docs-conceptual/community/2023-updates.md:219:3     - Unknown word (pronichkin)     -- | pronichkin |     1      |
-./reference/docs-conceptual/community/2023-updates.md:220:3     - Unknown word (Ooggle)         -- | Ooggle |     1      |
-./reference/docs-conceptual/community/2023-updates.md:221:3     - Unknown word (mavaddat)       -- | mavaddat |     1      |
-./reference/docs-conceptual/community/2023-updates.md:224:3     - Unknown word (Brizio)         -- | Brizio |     1      |
-./reference/docs-conceptual/community/2023-updates.md:225:3     - Unknown word (dotnvo)         -- | dotnvo |     1      |
-./reference/docs-conceptual/community/2023-updates.md:254:28    - Unknown word (Bossman)        -- pbossman | Phil Bossman |            1
-./reference/docs-conceptual/community/2023-updates.md:254:3     - Unknown word (pbossman)       -- | pbossman | Phil Bossman
-./reference/docs-conceptual/community/2023-updates.md:255:9     - Unknown word (Nieto)          -- | ThomasNieto | Thomas Nieto
-./reference/docs-conceptual/community/2023-updates.md:256:8     - Unknown word (Cefalu)         -- | kevinCefalu | Kevin Cefalu
-./reference/docs-conceptual/community/2023-updates.md:257:27    - Unknown word (Derickson)      -- robderickson | Rob Derickson |            4 |
-./reference/docs-conceptual/community/2023-updates.md:258:3     - Unknown word (Snozzberries)   -- | Snozzberries | Michael Soule
-./reference/docs-conceptual/community/2023-updates.md:258:31    - Unknown word (Soule)          -- Snozzberries | Michael Soule |           13 |
-./reference/docs-conceptual/community/2023-updates.md:259:3     - Unknown word (Spoonsk)        -- | Spoonsk | Joseph Gast
-./reference/docs-conceptual/community/2023-updates.md:259:30    - Unknown word (Gast)           -- Spoonsk | Joseph Gast |            1
-./reference/docs-conceptual/community/2023-updates.md:260:3     - Unknown word (thedavecarroll) -- | thedavecarroll | Dave Carroll
-./reference/docs-conceptual/community/2023-updates.md:261:29    - Unknown word (Paladino)       -- raynbowbrite | Vanda Paladino |            2 |
-./reference/docs-conceptual/community/2023-updates.md:261:3     - Unknown word (raynbowbrite)   -- | raynbowbrite | Vanda Paladino
-./reference/docs-conceptual/community/2023-updates.md:262:3     - Unknown word (majst)          -- | majst32 | Melissa
-./reference/docs-conceptual/community/2023-updates.md:262:31    - Unknown word (Januszko)       -- | Melissa Januszko |            1 |
-./reference/docs-conceptual/community/2023-updates.md:265:3     - Unknown word (mdowst)         -- | mdowst | Matthew
-./reference/docs-conceptual/community/2023-updates.md:265:31    - Unknown word (Dowst)          -- | Matthew Dowst |            1 |
-./reference/docs-conceptual/community/2023-updates.md:266:3     - Unknown word (thepowerstring) -- | thepowerstring |
-./reference/docs-conceptual/community/2023-updates.md:269:3     - Unknown word (zockan)         -- | zockan | Michael
-./reference/docs-conceptual/community/2023-updates.md:269:31    - Unknown word (Svegmar)        -- | Michael Svegmar |            1 |
-./reference/docs-conceptual/community/2023-updates.md:270:3     - Unknown word (lanwench)       -- | lanwench | Paula Kingsley
-./reference/docs-conceptual/community/2023-updates.md:271:3     - Unknown word (stevenjudd)     -- | stevenjudd | Steven Judd
-./reference/docs-conceptual/community/2023-updates.md:320:3     - Unknown word (martincostello) -- | martincostello |     1      |
-./reference/docs-conceptual/community/2023-updates.md:322:3     - Unknown word (chrullrich)     -- | chrullrich |     1      |
-./reference/docs-conceptual/community/2023-updates.md:325:3     - Unknown word (vvavrychuk)     -- | vvavrychuk |     1      |
-./reference/docs-conceptual/community/2023-updates.md:327:3     - Unknown word (Benjamim)       -- | BenjamimCS |     1
-./reference/docs-conceptual/community/2023-updates.md:328:3     - Unknown word (kirillkrylov)   -- | kirillkrylov |     1      |
-./reference/docs-conceptual/community/2023-updates.md:330:3     - Unknown word (lizy)           -- | lizy14 |     1
-./reference/docs-conceptual/community/2023-updates.md:331:8     - Unknown word (Toso)           -- | CarloToso |            |
-./reference/docs-conceptual/community/2023-updates.md:340:17    - Unknown word (Higin)          -- (Thanks [@PaulHigin][PaulHigin])
-./reference/docs-conceptual/community/2023-updates.md:376:3     - Unknown word (Armaan)         -- | ArmaanMcleod |
-./reference/docs-conceptual/community/2023-updates.md:412:3     - Unknown word (anderjef)       -- | anderjef |     2      |
-./reference/docs-conceptual/community/2023-updates.md:413:3     - Unknown word (turbedi)        -- | turbedi |     1      |
-./reference/docs-conceptual/community/2023-updates.md:415:3     - Unknown word (cobrabr)        -- | cobrabr |     1      |
-./reference/docs-conceptual/community/2023-updates.md:417:3     - Unknown word (tompazourek)    -- | tompazourek |     1      |
-./reference/docs-conceptual/community/2023-updates.md:419:3     - Unknown word (cjvandyk)       -- | cjvandyk |     1      |
-./reference/docs-conceptual/community/2023-updates.md:420:5     - Unknown word (Brinkmann)      -- | JTBrinkmann |     1      |
-./reference/docs-conceptual/community/2023-updates.md:53:3      - Unknown word (bubbletroubles) -- | bubbletroubles |     1      |
-./reference/docs-conceptual/community/2023-updates.md:97:3      - Unknown word (crisman)        -- | crisman |     1
-./reference/docs-conceptual/community/2023-updates.md:98:3      - Unknown word (deadlydog)      -- | deadlydog |     1
+./reference/docs-conceptual/community/2023-updates.md:142:3     - Unknown word (crisman)        -- | crisman |     1
+./reference/docs-conceptual/community/2023-updates.md:143:3     - Unknown word (deadlydog)      -- | deadlydog |     1
+./reference/docs-conceptual/community/2023-updates.md:172:3     - Unknown word (Milek)          -- | MilekJakub |     1
+./reference/docs-conceptual/community/2023-updates.md:172:8     - Unknown word (Jakub)          -- | MilekJakub |     1      |
+./reference/docs-conceptual/community/2023-updates.md:173:9     - Unknown word (Shastri)        -- | Atman-Shastri |     1      |
+./reference/docs-conceptual/community/2023-updates.md:174:8     - Unknown word (Jhawk)          -- | BraveJhawk |     1      |
+./reference/docs-conceptual/community/2023-updates.md:175:3     - Unknown word (coolhome)       -- | coolhome |     1      |
+./reference/docs-conceptual/community/2023-updates.md:176:3     - Unknown word (johndward)      -- | johndward01 |     1      |
+./reference/docs-conceptual/community/2023-updates.md:184:34    - Unknown word (VNET)           -- Azure Cloud Shell in a VNET with quickstart templates
+./reference/docs-conceptual/community/2023-updates.md:184:44    - Unknown word (quickstart)     -- Shell in a VNET with quickstart templates](/azure/cloud
+./reference/docs-conceptual/community/2023-updates.md:200:7     - Unknown word (Mandalorian)    -- - @XXLMandalorian013 contributed 3 PRs
+./reference/docs-conceptual/community/2023-updates.md:216:3     - Unknown word (thegraffix)     -- | thegraffix |     4      |
+./reference/docs-conceptual/community/2023-updates.md:219:3     - Unknown word (dstreefkerk)    -- | dstreefkerk |     1      |
+./reference/docs-conceptual/community/2023-updates.md:220:3     - Unknown word (vontompers)     -- | vontompers |     1      |
+./reference/docs-conceptual/community/2023-updates.md:221:3     - Unknown word (mubed)          -- | mubed |     1
+./reference/docs-conceptual/community/2023-updates.md:222:3     - Unknown word (Frederisk)      -- | Frederisk |     1      |
+./reference/docs-conceptual/community/2023-updates.md:223:3     - Unknown word (khaffner)       -- | khaffner |     1      |
+./reference/docs-conceptual/community/2023-updates.md:224:3     - Unknown word (noamper)        -- | noamper |     1      |
+./reference/docs-conceptual/community/2023-updates.md:225:3     - Unknown word (aksarben)       -- | aksarben |            |
+./reference/docs-conceptual/community/2023-updates.md:247:4     - Unknown word (robderickson)   -- - @robderickson contributed 1 PR to
+./reference/docs-conceptual/community/2023-updates.md:264:3     - Unknown word (pronichkin)     -- | pronichkin |     1      |
+./reference/docs-conceptual/community/2023-updates.md:265:3     - Unknown word (Ooggle)         -- | Ooggle |     1      |
+./reference/docs-conceptual/community/2023-updates.md:266:3     - Unknown word (mavaddat)       -- | mavaddat |     1      |
+./reference/docs-conceptual/community/2023-updates.md:269:3     - Unknown word (Brizio)         -- | Brizio |     1      |
+./reference/docs-conceptual/community/2023-updates.md:270:3     - Unknown word (dotnvo)         -- | dotnvo |     1      |
+./reference/docs-conceptual/community/2023-updates.md:299:28    - Unknown word (Bossman)        -- pbossman | Phil Bossman |            1
+./reference/docs-conceptual/community/2023-updates.md:299:3     - Unknown word (pbossman)       -- | pbossman | Phil Bossman
+./reference/docs-conceptual/community/2023-updates.md:301:8     - Unknown word (Cefalu)         -- | kevinCefalu | Kevin Cefalu
+./reference/docs-conceptual/community/2023-updates.md:302:27    - Unknown word (Derickson)      -- robderickson | Rob Derickson |            4 |
+./reference/docs-conceptual/community/2023-updates.md:303:3     - Unknown word (Snozzberries)   -- | Snozzberries | Michael Soule
+./reference/docs-conceptual/community/2023-updates.md:303:31    - Unknown word (Soule)          -- Snozzberries | Michael Soule |           13 |
+./reference/docs-conceptual/community/2023-updates.md:304:3     - Unknown word (Spoonsk)        -- | Spoonsk | Joseph Gast
+./reference/docs-conceptual/community/2023-updates.md:304:30    - Unknown word (Gast)           -- Spoonsk | Joseph Gast |            1
+./reference/docs-conceptual/community/2023-updates.md:305:3     - Unknown word (thedavecarroll) -- | thedavecarroll | Dave Carroll
+./reference/docs-conceptual/community/2023-updates.md:306:29    - Unknown word (Paladino)       -- raynbowbrite | Vanda Paladino |            2 |
+./reference/docs-conceptual/community/2023-updates.md:306:3     - Unknown word (raynbowbrite)   -- | raynbowbrite | Vanda Paladino
+./reference/docs-conceptual/community/2023-updates.md:307:3     - Unknown word (majst)          -- | majst32 | Melissa
+./reference/docs-conceptual/community/2023-updates.md:307:31    - Unknown word (Januszko)       -- | Melissa Januszko |            1 |
+./reference/docs-conceptual/community/2023-updates.md:310:3     - Unknown word (mdowst)         -- | mdowst | Matthew
+./reference/docs-conceptual/community/2023-updates.md:310:31    - Unknown word (Dowst)          -- | Matthew Dowst |            1 |
+./reference/docs-conceptual/community/2023-updates.md:311:3     - Unknown word (thepowerstring) -- | thepowerstring |
+./reference/docs-conceptual/community/2023-updates.md:314:3     - Unknown word (zockan)         -- | zockan | Michael
+./reference/docs-conceptual/community/2023-updates.md:314:31    - Unknown word (Svegmar)        -- | Michael Svegmar |            1 |
+./reference/docs-conceptual/community/2023-updates.md:315:3     - Unknown word (lanwench)       -- | lanwench | Paula Kingsley
+./reference/docs-conceptual/community/2023-updates.md:316:3     - Unknown word (stevenjudd)     -- | stevenjudd | Steven Judd
+./reference/docs-conceptual/community/2023-updates.md:365:3     - Unknown word (martincostello) -- | martincostello |     1      |
+./reference/docs-conceptual/community/2023-updates.md:367:3     - Unknown word (chrullrich)     -- | chrullrich |     1      |
+./reference/docs-conceptual/community/2023-updates.md:370:3     - Unknown word (vvavrychuk)     -- | vvavrychuk |     1      |
+./reference/docs-conceptual/community/2023-updates.md:372:3     - Unknown word (Benjamim)       -- | BenjamimCS |     1
+./reference/docs-conceptual/community/2023-updates.md:373:3     - Unknown word (kirillkrylov)   -- | kirillkrylov |     1      |
+./reference/docs-conceptual/community/2023-updates.md:375:3     - Unknown word (lizy)           -- | lizy14 |     1
+./reference/docs-conceptual/community/2023-updates.md:376:8     - Unknown word (Toso)           -- | CarloToso |            |
+./reference/docs-conceptual/community/2023-updates.md:385:17    - Unknown word (Higin)          -- (Thanks [@PaulHigin][PaulHigin])
+./reference/docs-conceptual/community/2023-updates.md:421:3     - Unknown word (Armaan)         -- | ArmaanMcleod |
+./reference/docs-conceptual/community/2023-updates.md:457:3     - Unknown word (anderjef)       -- | anderjef |     2      |
+./reference/docs-conceptual/community/2023-updates.md:458:3     - Unknown word (turbedi)        -- | turbedi |     1      |
+./reference/docs-conceptual/community/2023-updates.md:45:3      - Unknown word (dipstar)    -- | dipstar |     1
+./reference/docs-conceptual/community/2023-updates.md:460:3     - Unknown word (cobrabr)        -- | cobrabr |     1      |
+./reference/docs-conceptual/community/2023-updates.md:462:3     - Unknown word (tompazourek)    -- | tompazourek |     1      |
+./reference/docs-conceptual/community/2023-updates.md:464:3     - Unknown word (cjvandyk)       -- | cjvandyk |     1      |
+./reference/docs-conceptual/community/2023-updates.md:465:5     - Unknown word (Brinkmann)      -- | JTBrinkmann |     1      |
+./reference/docs-conceptual/community/2023-updates.md:49:3      - Unknown word (jhribal)    -- | jhribal |     1
+./reference/docs-conceptual/community/2023-updates.md:50:3      - Unknown word (Joeselorm)  -- | Joeselorm |     1
+./reference/docs-conceptual/community/2023-updates.md:51:3      - Unknown word (matziq)     -- | matziq |
+./reference/docs-conceptual/community/2023-updates.md:52:3      - Unknown word (RAJU)       -- | RAJU2529 |
+./reference/docs-conceptual/community/2023-updates.md:53:9      - Unknown word (Nieto)      -- | ThomasNieto |     1
+./reference/docs-conceptual/community/2023-updates.md:57:3      - Unknown word (tabad)      -- | tabad |
+./reference/docs-conceptual/community/2023-updates.md:98:3      - Unknown word (bubbletroubles) -- | bubbletroubles |     1      |
 ./reference/docs-conceptual/community/community-update.yml:48:21     - Unknown word (Helmick's)  -- - text: Jason Helmick's - The Show
 ./reference/docs-conceptual/community/contributing/general-markdown.md:218:41    - Unknown word (friendlyname) -- use Markdown syntax `[friendlyname](url-or-path)`.
 ./reference/docs-conceptual/community/contributing/general-markdown.md:243:7     - Unknown word (redirectedfrom) -- - `?redirectedfrom=MSDN` - added to the
@@ -1087,12 +1095,13 @@ Lines:
 ./reference/docs-conceptual/install/Installing-PowerShell-on-Windows.md:126:30    - Unknown word (OPENPOWERSHELL) -- EXPLORER_CONTEXT_MENU_OPENPOWERSHELL` - This property controls
 ./reference/docs-conceptual/install/Installing-PowerShell-on-Windows.md:128:26    - Unknown word (RUNPOWERSHELL)  -- ADD_FILE_CONTEXT_MENU_RUNPOWERSHELL` - This property controls
 ./reference/docs-conceptual/install/Installing-PowerShell-on-Windows.md:130:11    - Unknown word (PSREMOTING)     -- - `ENABLE_PSREMOTING` - This property controls
-./reference/docs-conceptual/install/Installing-PowerShell-on-Windows.md:267:2     - Unknown word (deviceip)       -- $deviceip = '<device ip address
-./reference/docs-conceptual/install/Installing-PowerShell-on-Windows.md:268:2     - Unknown word (zipfile)        -- $zipfile = 'PowerShell-7.3.9
-./reference/docs-conceptual/install/Installing-PowerShell-on-Windows.md:269:2     - Unknown word (downloadfolder) -- $downloadfolder = 'u:\users\administrator
-./reference/docs-conceptual/install/Installing-PowerShell-on-Windows.md:306:28    - Unknown word (workarea)       -- include the package in the workarea and add _OPENSRC_POWERSHELL
-./reference/docs-conceptual/install/Installing-PowerShell-on-Windows.md:306:46    - Unknown word (OPENSRC)        -- the workarea and add _OPENSRC_POWERSHELL_ feature
-./reference/docs-conceptual/install/Installing-PowerShell-on-Windows.md:343:2     - Unknown word (ipaddr)         -- $ipaddr = '<Nano Server IP address
+./reference/docs-conceptual/install/Installing-PowerShell-on-Windows.md:138:4     - Unknown word (INSTALLFOLDER)  -- - `INSTALLFOLDER` - This property controls
+./reference/docs-conceptual/install/Installing-PowerShell-on-Windows.md:272:2     - Unknown word (deviceip)       -- $deviceip = '<device ip address
+./reference/docs-conceptual/install/Installing-PowerShell-on-Windows.md:273:2     - Unknown word (zipfile)        -- $zipfile = 'PowerShell-7.3.9
+./reference/docs-conceptual/install/Installing-PowerShell-on-Windows.md:274:2     - Unknown word (downloadfolder) -- $downloadfolder = 'u:\users\administrator
+./reference/docs-conceptual/install/Installing-PowerShell-on-Windows.md:311:28    - Unknown word (workarea)       -- include the package in the workarea and add _OPENSRC_POWERSHELL
+./reference/docs-conceptual/install/Installing-PowerShell-on-Windows.md:311:46    - Unknown word (OPENSRC)        -- the workarea and add _OPENSRC_POWERSHELL_ feature
+./reference/docs-conceptual/install/Installing-PowerShell-on-Windows.md:348:2     - Unknown word (ipaddr)         -- $ipaddr = '<Nano Server IP address
 ./reference/docs-conceptual/install/PowerShell-on-ARM.md:60:1      - Unknown word (Raspbery)   -- Raspbery Pi
 ./reference/docs-conceptual/install/community-support.md:105:8     - Unknown word (getconf)    -- bits=$(getconf LONG_BIT)
 ./reference/docs-conceptual/install/community-support.md:99:35     - Unknown word (libunwind)  -- install jq libssl1.1 libunwind8 -y
@@ -1102,7 +1111,7 @@ Lines:
 ./reference/docs-conceptual/install/install-alpine.md:38:5      - Unknown word (libstdc)    -- libstdc++ \
 ./reference/docs-conceptual/install/install-alpine.md:39:5      - Unknown word (tzdata)     -- tzdata \
 ./reference/docs-conceptual/install/install-alpine.md:46:5      - Unknown word (lttng)      -- lttng-ust
-./reference/docs-conceptual/install/install-rhel.md:41:6      - Unknown word (majorver)   -- then majorver=7
+./reference/docs-conceptual/install/install-rhel.md:39:6      - Unknown word (majorver)   -- then majorver=7
 ./reference/docs-conceptual/install/install-ubuntu.md:66:16     - Unknown word (preconfigured) -- > Ubuntu comes preconfigured with a package repository
 ./reference/docs-conceptual/install/microsoft-update-faq.yml:43:37     - Unknown word (lifecycles) -- information about support lifecycles, see
 ./reference/docs-conceptual/lang-spec/chapter-02.md:1316:36   - Unknown word (concatentaion) -- chapter-07.md#772-string-concatentaion
@@ -1258,22 +1267,21 @@ Lines:
 ./reference/docs-conceptual/samples/Working-with-Registry-Keys.md:51:3      - Unknown word (regedit)    -- (`regedit.exe`).
 ./reference/docs-conceptual/toc.yml:114:57    - Unknown word (shouldprocess) -- dives/everything-about-shouldprocess.md
 ./reference/docs-conceptual/toc.yml:226:34    - Unknown word (winrmsecurity) -- href: learn/remoting/winrmsecurity.md
-./reference/docs-conceptual/toc.yml:317:63    - Unknown word (objectmodelroot) -- ise/object-model/the-objectmodelroot-object.md
-./reference/docs-conceptual/toc.yml:319:63    - Unknown word (iseaddontoolcollection) -- ise/object-model/the-iseaddontoolcollection-object.md
-./reference/docs-conceptual/toc.yml:321:63    - Unknown word (iseaddontool)           -- ise/object-model/the-iseaddontool-object.md
-./reference/docs-conceptual/toc.yml:323:63    - Unknown word (iseeditor)              -- ise/object-model/the-iseeditor-object.md
-./reference/docs-conceptual/toc.yml:325:63    - Unknown word (isefilecollection)      -- ise/object-model/the-isefilecollection-object.md
-./reference/docs-conceptual/toc.yml:327:63    - Unknown word (isefile)                -- ise/object-model/the-isefile-object.md
-./reference/docs-conceptual/toc.yml:329:63    - Unknown word (isemenuitemcollection)  -- ise/object-model/the-isemenuitemcollection-object.md
-./reference/docs-conceptual/toc.yml:331:63    - Unknown word (isemenuitem)            -- ise/object-model/the-isemenuitem-object.md
-./reference/docs-conceptual/toc.yml:333:63    - Unknown word (iseoptions)             -- ise/object-model/the-iseoptions-object.md
-./reference/docs-conceptual/toc.yml:335:63    - Unknown word (isesnippetcollection)   -- ise/object-model/the-isesnippetcollection-object.md
-./reference/docs-conceptual/toc.yml:337:63    - Unknown word (isesnippetobject)       -- ise/object-model/the-isesnippetobject.md
-./reference/docs-conceptual/toc.yml:339:63    - Unknown word (powershelltabcollection) -- ise/object-model/the-powershelltabcollection-object.md
-./reference/docs-conceptual/toc.yml:341:63    - Unknown word (powershelltab)           -- ise/object-model/the-powershelltab-object.md
-./reference/docs-conceptual/toc.yml:376:56    - Unknown word (informationstream)       -- powershell/wmf/whats-new/informationstream-overview.md
-./reference/docs-conceptual/toc.yml:458:41    - Unknown word (cmdline)                 -- dev-cross-plat/create-cmdline-predictor.md
-./reference/docs-conceptual/toc.yml:522:38    - Unknown word (hackathons)              -- community/contributing/hackathons.md
+./reference/docs-conceptual/toc.yml:301:63    - Unknown word (objectmodelroot) -- ise/object-model/the-objectmodelroot-object.md
+./reference/docs-conceptual/toc.yml:303:63    - Unknown word (iseaddontoolcollection) -- ise/object-model/the-iseaddontoolcollection-object.md
+./reference/docs-conceptual/toc.yml:305:63    - Unknown word (iseaddontool)           -- ise/object-model/the-iseaddontool-object.md
+./reference/docs-conceptual/toc.yml:307:63    - Unknown word (iseeditor)              -- ise/object-model/the-iseeditor-object.md
+./reference/docs-conceptual/toc.yml:309:63    - Unknown word (isefilecollection)      -- ise/object-model/the-isefilecollection-object.md
+./reference/docs-conceptual/toc.yml:311:63    - Unknown word (isefile)                -- ise/object-model/the-isefile-object.md
+./reference/docs-conceptual/toc.yml:313:63    - Unknown word (isemenuitemcollection)  -- ise/object-model/the-isemenuitemcollection-object.md
+./reference/docs-conceptual/toc.yml:315:63    - Unknown word (isemenuitem)            -- ise/object-model/the-isemenuitem-object.md
+./reference/docs-conceptual/toc.yml:317:63    - Unknown word (iseoptions)             -- ise/object-model/the-iseoptions-object.md
+./reference/docs-conceptual/toc.yml:319:63    - Unknown word (isesnippetcollection)   -- ise/object-model/the-isesnippetcollection-object.md
+./reference/docs-conceptual/toc.yml:321:63    - Unknown word (isesnippetobject)       -- ise/object-model/the-isesnippetobject.md
+./reference/docs-conceptual/toc.yml:323:63    - Unknown word (powershelltabcollection) -- ise/object-model/the-powershelltabcollection-object.md
+./reference/docs-conceptual/toc.yml:325:63    - Unknown word (powershelltab)           -- ise/object-model/the-powershelltab-object.md
+./reference/docs-conceptual/toc.yml:395:41    - Unknown word (cmdline)                 -- dev-cross-plat/create-cmdline-predictor.md
+./reference/docs-conceptual/toc.yml:459:38    - Unknown word (hackathons)              -- community/contributing/hackathons.md
 ./reference/docs-conceptual/toc.yml:88:37     - Unknown word (keyhandlers) -- href: learn/shell/using-keyhandlers.md
 ./reference/docs-conceptual/whats-new/What-s-New-in-PowerShell-72.md:129:11    - Unknown word (awakecoding) -- host by awakecoding · Pull Request #146
 ./reference/docs-conceptual/whats-new/What-s-New-in-PowerShell-73.md:100:12    - Unknown word (eugenesmlv) -- (Thanks @eugenesmlv!)
@@ -1302,48 +1310,6 @@ Lines:
 ./reference/docs-conceptual/windows-powershell/ise/object-model/The-ISEFile-Object.md:62:22     - Unknown word (newname)    -- fullpath = "c:\temp\newname.txt"
 ./reference/docs-conceptual/windows-powershell/ise/object-model/The-ISEFileCollection-Object.md:49:2      - Unknown word (firstfile)  -- $firstfile = $psISE.CurrentPowerShellTab
 ./reference/docs-conceptual/windows-powershell/ise/object-model/The-PowerShellTab-Object.md:43:5      - Unknown word (milleseconds) -- > **millesecondsTimeout** value specifies
-./reference/docs-conceptual/windows-powershell/whats-new/What-s-New-in-Windows-PowerShell-50.md:356:50    - Unknown word (Odata)             -- Microsoft.PowerShell.OdataUtils][10] module.
-./reference/docs-conceptual/windows-powershell/whats-new/What-s-New-in-Windows-PowerShell-50.md:474:60    - Unknown word (PSWS)              -- PowerShell Web Services (PSWS, also called Management
-./reference/docs-conceptual/windows-powershell/whats-new/What-s-New-in-Windows-PowerShell-50.md:512:21    - Unknown word (Pswa)              -- Access. The **Add-PswaAuthorizationRule** and
-./reference/docs-conceptual/windows-powershell/whats-new/What-s-New-in-Windows-PowerShell-50.md:540:39    - Unknown word (VHDs)              -- mounting and unmounting VHDs using the **FileSystem
-./reference/docs-conceptual/windows-powershell/whats-new/What-s-New-in-Windows-PowerShell-50.md:587:28    - Unknown word (multicomputer)     -- Workflows are sequences of multicomputer management activities
-./reference/docs-conceptual/windows-powershell/whats-new/What-s-New-in-Windows-PowerShell-50.md:588:11    - Unknown word (parallelizable)    -- frequent, parallelizable, interruptible, suspendable
-./reference/docs-conceptual/windows-powershell/whats-new/What-s-New-in-Windows-PowerShell-50.md:588:27    - Unknown word (interruptible)     -- frequent, parallelizable, interruptible, suspendable, and restartable
-./reference/docs-conceptual/windows-powershell/whats-new/What-s-New-in-Windows-PowerShell-50.md:588:42    - Unknown word (suspendable)       -- arallelizable, interruptible, suspendable, and restartable. Workflows
-./reference/docs-conceptual/windows-powershell/whats-new/What-s-New-in-Windows-PowerShell-50.md:601:5     - Unknown word (Multicomputer)     -- - **Multicomputer management.** Simultaneously
-./reference/docs-conceptual/windows-powershell/whats-new/What-s-New-in-Windows-PowerShell-50.md:68:70     - Unknown word (metaconfiguration) -- more resilient when metaconfiguration settings have
-./reference/docs-conceptual/windows-powershell/whats-new/What-s-New-in-Windows-PowerShell-50.md:93:5      - Unknown word (Metaconfiguration) -- - Metaconfiguration credentials are encrypted
-./reference/docs-conceptual/windows-powershell/wmf/known-issues/known-issues-50.md:101:6     - Unknown word (Takeown)    -- Takeown /f C:\Windows\System
-./reference/docs-conceptual/windows-powershell/wmf/known-issues/known-issues-50.md:107:6     - Unknown word (Cacls)      -- Cacls C:\Windows\System32
-./reference/docs-conceptual/windows-powershell/wmf/known-issues/known-issues-50.md:81:65     - Unknown word (Sysyprep)   -- Windows Updates, and begin Sysyprep operation normally.
-./reference/docs-conceptual/windows-powershell/wmf/known-issues/known-issues-50.md:85:11     - Unknown word (Generize)   -- 2. Copy Generize.xml from directory
-./reference/docs-conceptual/windows-powershell/wmf/known-issues/known-issues-51.md:70:35     - Unknown word (newjea)     -- PSSessionConfiguration -Name $newjea.Name -SecurityDescriptorSddl
-./reference/docs-conceptual/windows-powershell/wmf/known-issues/known-issues-dsc.md:106:81    - Unknown word (Appdomain)  -- with DscPsPluginWkr_Appdomain)
-./reference/docs-conceptual/windows-powershell/wmf/known-issues/known-issues-dsc.md:109:26    - Unknown word (rusnspaces) -- Find all the available rusnspaces in that process
-./reference/docs-conceptual/windows-powershell/wmf/known-issues/known-issues-dsc.md:240:9     - Unknown word (getscript)  -- getscript = "@{}"
-./reference/docs-conceptual/windows-powershell/wmf/known-issues/known-issues-dsc.md:242:9     - Unknown word (setscript)  -- setscript = '$true'
-./reference/docs-conceptual/windows-powershell/wmf/known-issues/known-issues-dsc.md:43:1      - Unknown word (mofcomp)    -- mofcomp $env:windir\system3
-./reference/docs-conceptual/windows-powershell/wmf/setup/install-configure.md:106:50    - Unknown word (norestart)  -- 564-x64.msu /quiet /norestart`.
-./reference/docs-conceptual/windows-powershell/wmf/setup/uninstall.md:18:1      - Unknown word (wusa)       -- wusa /uninstall /kb:3134
-./reference/docs-conceptual/windows-powershell/wmf/whats-new/DSC-improvements.md:194:39    - Unknown word (SNMP)                 -- @("Telnet-Client","SNMP-Service")
-./reference/docs-conceptual/windows-powershell/wmf/whats-new/DSC-improvements.md:35:17     - Unknown word (ESENT)      -- while using the ESENT database would lead
-./reference/docs-conceptual/windows-powershell/wmf/whats-new/DSC-improvements.md:40:1      - Unknown word (OLEDB)      -- OLEDB database.
-./reference/docs-conceptual/windows-powershell/wmf/whats-new/DSC-improvements.md:44:4      - Unknown word (eariler)    -- In eariler version of DSC-PullServer
-./reference/docs-conceptual/windows-powershell/wmf/whats-new/DSC-improvements.md:45:5      - Unknown word (pullserver) -- the pullserver because the database
-./reference/docs-conceptual/windows-powershell/wmf/whats-new/DSC-improvements.md:51:15     - Unknown word (dbprovider) -- <add key="dbprovider" value="ESENT" />
-./reference/docs-conceptual/windows-powershell/wmf/whats-new/DSC-improvements.md:52:15     - Unknown word (dbconnectionstr) -- <add key="dbconnectionstr" value="C:\Program Files
-./reference/docs-conceptual/windows-powershell/wmf/whats-new/DSC-improvements.md:87:44     - Unknown word (partialconfigexample) -- DestinationPath = "$env:TEMP\partialconfigexample.txt"
-./reference/docs-conceptual/windows-powershell/wmf/whats-new/bugfixes.md:116:40    - Unknown word (tzres)      -- query ends up injecting tzres.mui.dll into every process
-./reference/docs-conceptual/windows-powershell/wmf/whats-new/bugfixes.md:118:12    - Unknown word (wmiprvse)   -- spike in **wmiprvse** (the WMI provider
-./reference/docs-conceptual/windows-powershell/wmf/whats-new/compatibility.md:16:13     - Unknown word (Lync)       -- - Microsoft Lync Server 2013
-./reference/docs-conceptual/windows-powershell/wmf/whats-new/console-improvements.md:25:24     - Unknown word (mhello)     -- "A yellow ${esc}[93mhello${esc}[0m"
-./reference/docs-conceptual/windows-powershell/wmf/whats-new/debug-overview.md:2:61      - Unknown word (Poower)     -- features to Windows PoowerShell.
-./reference/docs-conceptual/windows-powershell/wmf/whats-new/informationstream-overview.md:32:27     - Unknown word (spammy)     -- Write-Information 'Some spammy logging information
-./reference/docs-conceptual/windows-powershell/wmf/whats-new/jea-improvements.md:38:2      - Unknown word (jeasession) -- $jeasession = New-PSSession -ComputerName
-./reference/docs-conceptual/windows-powershell/wmf/whats-new/jea-improvements.md:66:36     - Unknown word (Afor)       -- ManagedServiceAccount = 'myGMSAforJEA'
-./reference/docs-conceptual/windows-powershell/wmf/whats-new/new-updated-cmdlets.md:140:32    - Unknown word (youneed)    -- many scenarios where youneed for unique identifier
-./reference/docs-conceptual/windows-powershell/wmf/whats-new/new-updated-cmdlets.md:330:18    - Unknown word (odata)      -- $additionalInfo['odata.count']
-./reference/docs-conceptual/windows-powershell/wmf/whats-new/package-management-improvements.md:43:8      - Unknown word (Anycpu)     -- (NuGet-Anycpu.exe) if exists from
 ./reference/includes/macos-support.md:28:23     - Unknown word (Sonoma)     -- ![Supported][1] 14 (Sonoma) |   ![In Test][2
 ./reference/index.yml:112:34    - Unknown word (powershellsdk)    -- url: /dotnet/api/?view=powershellsdk-7.3.0
 ./reference/index.yml:151:45    - Unknown word (stackoverflow)    -- hubs/powershell/logo_stackoverflow.svg
