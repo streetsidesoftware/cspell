@@ -1,5 +1,6 @@
 ---
 sidebar_position: 3
+# cspell:ignore Marcey Sébastien Lorber
 ---
 
 # Create a Blog Post
