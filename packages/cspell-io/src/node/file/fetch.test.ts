@@ -1,6 +1,6 @@
 import { describe, expect, test } from 'vitest';
 
-import { fetchURL, fetchHead } from './fetch.js';
+import { fetchHead, fetchURL } from './fetch.js';
 
 describe('fetch', () => {
     test('fetch url', async () => {

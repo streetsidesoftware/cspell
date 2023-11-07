@@ -1,5 +1,3 @@
-import { E } from 'vitest/dist/reporters-5f784f42.js';
-
 export class FetchUrlError extends Error implements NodeJS.ErrnoException {
     constructor(
         message: string,
