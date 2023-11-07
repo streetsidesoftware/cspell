@@ -5,42 +5,30 @@
   "scripts": {
     "docusaurus": "docusaurus",
     "start": "docusaurus start",
-    "build:site": "docusaurus build --out-dir ../docs/docsV2",
+    "build:site": "docusaurus build",
     "swizzle": "docusaurus swizzle",
     "deploy": "docusaurus deploy",
     "clear": "docusaurus clear",
-    "serve": "docusaurus serve --dir ../docs/docsV2",
+    "serve": "docusaurus serve",
     "write-translations": "docusaurus write-translations",
     "write-heading-ids": "docusaurus write-heading-ids",
-    "update-packages": "pnpm up",
-    "typecheck": "tsc",
-    "lint": "eslint . --fix --cache && prettier -w \"**/*.{md,yaml,yml,json}\"",
-    "lint-ci": "eslint . && prettier -c \"**/*.{md,yaml,yml,json}\""
+    "typecheck": "tsc"
   },
   "dependencies": {
-    "@docusaurus/core": "2.4.3",
-    "@docusaurus/preset-classic": "2.4.3",
-    "@mdx-js/react": "^1.6.22",
+    "@docusaurus/core": "3.0.0",
+    "@docusaurus/preset-classic": "3.0.0",
+    "@mdx-js/react": "^3.0.0",
     "clsx": "^1.2.1",
-    "prism-react-renderer": "^1.3.5",
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2"
+    "prism-react-renderer": "^2.1.0",
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0"
   },
   "devDependencies": {
-    "@docusaurus/module-type-aliases": "2.4.3",
-    "@docusaurus/types": "^2.4.3",
-    "@tsconfig/docusaurus": "^2.0.2",
-    "@typescript-eslint/eslint-plugin": "^6.10.0",
-    "@typescript-eslint/parser": "^6.10.0",
-    "eslint": "^8.53.0",
-    "eslint-config-prettier": "^9.0.0",
-    "eslint-plugin-import": "^2.29.0",
-    "eslint-plugin-jest": "^27.6.0",
-    "eslint-plugin-node": "^11.1.0",
-    "eslint-plugin-prettier": "^5.0.1",
-    "eslint-plugin-promise": "^6.1.1",
-    "prettier": "^3.0.3",
-    "typescript": "^5.2.2"
+    "@docusaurus/module-type-aliases": "3.0.0",
+    "@docusaurus/theme-classic": "^3.0.0",
+    "@docusaurus/tsconfig": "3.0.0",
+    "@docusaurus/types": "3.0.0",
+    "typescript": "~5.2.2"
   },
   "browserslist": {
     "production": [
@@ -49,9 +37,9 @@
       "not op_mini all"
     ],
     "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
+      "last 3 chrome version",
+      "last 3 firefox version",
+      "last 5 safari version"
     ]
   },
   "engines": {
