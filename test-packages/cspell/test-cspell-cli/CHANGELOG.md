@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## <small>7.3.9 (2023-11-07)</small>
+
+* refactor: remove debug code (#4951) ([4972a77](https://github.com/streetsidesoftware/cspell-cli/commit/4972a77)), closes [#4951](https://github.com/streetsidesoftware/cspell-cli/issues/4951)
+
 ## <small>7.3.8 (2023-10-13)</small>
 
 * ci: Workflow Bot -- Update ALL Dependencies (main) (#4894) ([2a4e1d8](https://github.com/streetsidesoftware/cspell-cli/commit/2a4e1d8)), closes [#4894](https://github.com/streetsidesoftware/cspell-cli/issues/4894)
