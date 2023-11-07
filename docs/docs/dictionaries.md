@@ -40,7 +40,7 @@ Use the `trace` command to see a list of dictionaries: See [Searching Dictionari
 ## Miscellaneous Dictionaries
 
 - **fonts** - long list of fonts - to assist with _css_
-- **filetypes** - list of file typescript
+- **filetypes** - list of file types
 - **npm** - list of top 500+ package names on npm.
 
 ## Dictionary Definition
