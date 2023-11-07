@@ -68,7 +68,6 @@ export enum IncludeExcludeFlag {
     EXCLUDE = 'E',
 }
 
-// eslint-disable-next-line @typescript-eslint/no-empty-interface
 export interface CheckTextOptions extends DocumentValidatorOptions {}
 
 /**
