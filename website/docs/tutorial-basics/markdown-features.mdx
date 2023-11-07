@@ -1,6 +1,5 @@
 ---
 sidebar_position: 4
-# cspell:ignore callouts
 ---
 
 # Markdown Features
@@ -52,7 +51,11 @@ You can use absolute paths to reference images in the static directory (`static/
 
 ![Docusaurus logo](/img/docusaurus.png)
 
-You can reference images relative to the current file as well, as shown in [the extra guides](../tutorial-extras/manage-docs-versions.md).
+You can reference images relative to the current file as well. This is particularly useful to colocate images close to the Markdown files using them:
+
+```md
+![Docusaurus logo](./img/docusaurus.png)
+```
 
 ## Code Blocks
 
@@ -68,7 +71,7 @@ Markdown code blocks are supported with Syntax highlighting.
 
 ```jsx title="src/components/HelloDocusaurus.js"
 function HelloDocusaurus() {
-    return <h1>Hello, Docusaurus!</h1>;
+  return <h1>Hello, Docusaurus!</h1>;
 }
 ```
 
@@ -126,21 +129,20 @@ This is <Highlight color="#25c2a0">Docusaurus green</Highlight> !
 This is <Highlight color="#1877F2">Facebook blue</Highlight> !
 ```
 
-export const Highlight = ({ children, color }) => (
-    <span
-        style={{
-            backgroundColor: color,
-            borderRadius: '20px',
-            color: '#fff',
-            padding: '10px',
-            cursor: 'pointer',
-        }}
-        onClick={() => {
-            alert(`You clicked the color ${color} with label ${children}`);
-        }}
-    >
-        {children}
-    </span>
+export const Highlight = ({children, color}) => (
+  <span
+    style={{
+      backgroundColor: color,
+      borderRadius: '20px',
+      color: '#fff',
+      padding: '10px',
+      cursor: 'pointer',
+    }}
+    onClick={() => {
+      alert(`You clicked the color ${color} with label ${children}`);
+    }}>
+    {children}
+  </span>
 );
 
 This is <Highlight color="#25c2a0">Docusaurus green</Highlight> !

@@ -22,6 +22,7 @@ const config = {
         '**/*.map',
         '**/coverage/**',
         '**/dist/**',
+        '**/build/**',
         '**/node_modules/**',
         '**/.docusaurus/**',
     ],
@@ -39,12 +40,6 @@ const config = {
             plugins: ['@typescript-eslint'],
             rules: {
                 '@typescript-eslint/no-unused-vars': ['error', { argsIgnorePattern: '^_', varsIgnorePattern: '^_' }],
-                'node/no-missing-import': [
-                    'error',
-                    {
-                        tryExtensions: ['.js', '.d.ts', '.ts', '.tsx'],
-                    },
-                ],
             },
         },
         {
