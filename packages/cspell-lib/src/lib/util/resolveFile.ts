@@ -23,7 +23,6 @@ const testNodeModules = /^node_modules\//;
  * @param relativeTo absolute path
  */
 export function resolveFile(filename: string, relativeTo: string): ResolveFileResult {
-    filename.startsWith('@cspell/cspell-json') && console.warn('%o', { filename, relativeTo });
     filename = filename.replace(/^~/, os.homedir());
     const steps: { filename: string; fn: (f: string, r: string) => ResolveFileResult }[] = [
         { filename, fn: tryUrl },
