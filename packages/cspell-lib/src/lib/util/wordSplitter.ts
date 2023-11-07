@@ -40,7 +40,6 @@ export interface TextOffsetWithValid extends TextOffset {
     isFound: boolean;
 }
 
-// eslint-disable-next-line @typescript-eslint/no-empty-interface
 export interface SplitOptions extends WordBreakOptions {}
 
 export function split(

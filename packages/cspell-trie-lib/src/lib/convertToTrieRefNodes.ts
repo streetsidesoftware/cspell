@@ -58,7 +58,6 @@ export function convertToTrieRefNodes(root: TrieNode): IterableIterator<TrieRefN
     function* walkByRollup(n: TrieNode): IterableIterator<TrieRefNode> {
         if (cached.has(n)) return;
         if (n.f && !n.c) {
-            // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
             cached.set(n, cached.get(eow)!);
             return;
         }

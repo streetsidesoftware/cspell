@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/no-empty-interface */
-
 /**
  * These are experimental features and are subject to change or removal without notice.
  */
