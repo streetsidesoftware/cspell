@@ -1,6 +1,6 @@
 import { describe, expect, test } from 'vitest';
 
-import { fetch, fetchHead } from './fetch.js';
+import { fetchURL, fetchHead } from './fetch.js';
 
 describe('fetch', () => {
     test('fetch url', async () => {
@@ -8,6 +8,12 @@ describe('fetch', () => {
         const response = await fetch(url);
         expect(response.ok).toBe(true);
         expect(await response.text()).toMatch('$schema');
+    });
+
+    test('fetchURL', async () => {
+        const url = new URL('https://raw.githubusercontent.com/streetsidesoftware/cspell/main/tsconfig.json');
+        const response = await fetchURL(url);
+        expect(response).toBeInstanceOf(Buffer);
     });
 
     test.each`

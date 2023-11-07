@@ -9,8 +9,7 @@ import * as zlib from 'zlib';
 import { decode } from '../../common/encode-decode.js';
 import { createDecoderTransformer } from '../../common/transformers.js';
 import type { BufferEncoding } from '../../models/BufferEncoding.js';
-import { fetch } from './fetch.js';
-import { FetchUrlError } from './FetchError.js';
+import { fetchURL } from './fetch.js';
 import { isFileURL, isSupportedURL, isZipped, toURL } from './util.js';
 
 const defaultEncoding: BufferEncoding = 'utf8';
@@ -32,11 +31,8 @@ function _readFileText(url: URL, encoding?: BufferEncoding): Promise<string> {
 }
 
 async function _fetchTextFromURL(url: URL, encoding?: BufferEncoding): Promise<string> {
-    const response = await fetch(url);
-    if (!response.ok) {
-        throw FetchUrlError.create(url, response.status);
-    }
-    return _readText(() => response.body, isZipped(url), encoding);
+    const buffer = await fetchURL(url);
+    return _readText(() => Stream.Readable.from(buffer), isZipped(url), encoding);
 }
 
 async function _readText(
