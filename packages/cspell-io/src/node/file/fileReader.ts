@@ -6,6 +6,7 @@ import { fileURLToPath } from 'url';
 import { promisify } from 'util';
 import * as zlib from 'zlib';
 
+import type { BufferEncodingExt } from '../../common/BufferEncoding.js';
 import { decode } from '../../common/encode-decode.js';
 import { createDecoderTransformer } from '../../common/transformers.js';
 import type { BufferEncoding } from '../../models/BufferEncoding.js';
@@ -50,26 +51,20 @@ export function readFileTextSync(filename: string, encoding?: BufferEncoding): s
     const rawData = fs.readFileSync(filename);
     const data = isZipped(filename) ? zlib.gunzipSync(rawData) : rawData;
 
-    return !encoding || encoding.startsWith('utf')
-        ? decode(data)
-        : encoding === 'utf16be'
-        ? data.swap16().toString('utf16le')
-        : data.toString(encoding);
+    return decode(data, encoding);
 }
 
 function createTextCollector(encoding: BufferEncoding) {
     async function collect(iterable: AsyncIterable<string | Buffer>): Promise<string> {
         const buf: string[] = [];
         for await (const sb of iterable) {
-            buf.push(
-                typeof sb === 'string'
-                    ? sb
-                    : encoding === 'utf16be'
-                    ? sb.swap16().toString('utf16le')
-                    : sb.toString(encoding),
-            );
+            buf.push(toString(sb, encoding));
         }
         return buf.join('');
     }
     return collect;
+}
+
+function toString(sb: string | Buffer, encoding: BufferEncodingExt): string {
+    return typeof sb === 'string' ? sb : decode(sb, encoding);
 }

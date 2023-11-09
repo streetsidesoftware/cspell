@@ -22,6 +22,10 @@ export interface FileResource extends FileReference {
      * - `undefined` if it is unknown
      */
     gz?: boolean;
+    /**
+     * The encoding used.
+     */
+    encoding?: BufferEncoding;
 }
 
 export interface TextFileResource extends FileResource {

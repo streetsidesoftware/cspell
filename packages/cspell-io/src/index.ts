@@ -10,5 +10,6 @@ export {
     writeToFileIterable,
     writeToFileIterableP,
 } from './file/index.js';
+export type { BufferEncoding, TextEncoding } from './models/BufferEncoding.js';
 export type { Stats } from './models/Stats.js';
 export { encodeDataUrl, toDataUrl } from './node/dataUrl.js';

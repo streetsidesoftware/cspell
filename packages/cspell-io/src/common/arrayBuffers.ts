@@ -1,3 +1,9 @@
+/**
+ * Create a Uint8Array from an ArrayBufferView.
+ * The Uint8Array will share the same underlying ArrayBuffer.
+ * @param data - source data
+ * @returns Uint8Array
+ */
 export function toUint8Array(data: ArrayBufferView): Uint8Array {
     return new Uint8Array(data.buffer, data.byteOffset, data.byteLength);
 }
@@ -38,3 +44,37 @@ export function sliceView(data: ArrayBufferView, byteOffset: number, byteLength?
         byteLength: end - start,
     };
 }
+
+/**
+ * Swap the bytes in a buffer.
+ * @param data - data to swap
+ * @returns data
+ */
+function swap16Poly(data: ArrayBufferView): ArrayBufferView {
+    const view = new DataView(data.buffer, data.byteOffset, data.byteLength);
+    for (let i = 0; i < view.byteLength; i += 2) {
+        view.setUint16(i, view.getUint16(i, false), true);
+    }
+    return data;
+}
+
+/**
+ * Swap the bytes in a buffer.
+ * @param data - data to swap
+ * @returns data
+ */
+export function swap16(data: ArrayBufferView): ArrayBufferView {
+    if (typeof Buffer !== 'undefined') {
+        return arrayBufferViewToBuffer(data).swap16();
+    }
+    return swap16Poly(data);
+}
+
+export function swapBytes(data: ArrayBufferView): ArrayBufferView {
+    const buf = copyArrayBufferView(data);
+    return swap16(buf);
+}
+
+export const __debug__ = {
+    swap16Poly,
+};

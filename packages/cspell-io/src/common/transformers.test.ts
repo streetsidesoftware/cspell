@@ -9,8 +9,6 @@ const eLE = encodeUtf16LE;
 const T = true;
 const F = false;
 
-const decoderUtf = createDecoderTransformer();
-
 describe('transformUtf16', () => {
     test.each`
         values                                                             | expected
@@ -24,7 +22,10 @@ describe('transformUtf16', () => {
         ${encoderTransformer('hello|there|again|?'.split('|'), 'utf16le')} | ${['hello', 'there', 'again', '?']}
         ${encoderTransformer('hello|there|again|?'.split('|'), 'utf16be')} | ${['hello', 'there', 'again', '?']}
     `('transformUtf16 $values', async ({ values, expected }) => {
-        expect(await toArray(decoderUtf(values))).toEqual(expected);
+        const decoderUtf = createDecoderTransformer();
+        const result = await toArray(decoderUtf(values));
+        console.log('result %o', result);
+        expect(result).toEqual(expected);
     });
 
     // cspell:ignore 5IAGEAcABwAHkAIABOAGUAdwAgAFkAZQBhAHIA

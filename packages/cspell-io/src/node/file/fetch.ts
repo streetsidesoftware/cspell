@@ -6,7 +6,7 @@ export async function fetchHead(request: string | URL): Promise<Headers> {
         const r = await fetch(url, { method: 'HEAD' });
         return r.headers;
     } catch (e) {
-        console.warn('fetchHead Error %o', e);
+        // console.warn('fetchHead Error %o', e);
         if (isError(e)) {
             throw FetchUrlError.fromError(url, e);
         }

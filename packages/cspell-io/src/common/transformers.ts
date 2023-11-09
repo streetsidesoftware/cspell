@@ -1,4 +1,3 @@
-import { sliceView } from './arrayBuffers.js';
 import type { BufferEncodingExt } from './BufferEncoding.js';
 import { calcEncodingFromBom, decode, decodeUtf16BE, decodeUtf16LE, encodeString } from './encode-decode.js';
 
@@ -40,14 +39,14 @@ export function createDecoderTransformer(
             }
             decoder = standardDecoder;
             const _encoding = calcEncodingFromBom(sb);
-            if (_encoding === 'utf16le') {
+            if (_encoding === 'utf16le' || encoding === 'utf16le' || encoding === 'utf-16le') {
                 decoder = decodeUtf16LE;
-                yield decoder(sliceView(sb, 2));
+                yield decoder(sb);
                 continue;
             }
-            if (_encoding === 'utf16be') {
+            if (_encoding === 'utf16be' || encoding === 'utf16be' || encoding === 'utf-16be') {
                 decoder = decodeUtf16BE;
-                yield decoder(sliceView(sb, 2));
+                yield decoder(sb);
                 continue;
             }
             yield decoder(sb);
