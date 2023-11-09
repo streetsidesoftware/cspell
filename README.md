@@ -61,12 +61,12 @@ Some videos related to CSpell and the [Code Spell Checker](https://marketplace.v
 
 ## RFCs
 
-| Link                                                           | Description                     | Status      |
-| -------------------------------------------------------------- | ------------------------------- | ----------- |
-| [rfc-0001](rfc/rfc-0001%20suggestions/)                        | Fixing common misspellings      | Not started |
-| [rfc-0002](rfc/rfc-0002%20improve%20dictionary%20suggestions/) | Improving Generated Suggestions | Done        |
-| [rfc-0003](rfc/rfc-0003%20parsing%20files/)                    | Plug-ins: Adding file parsers   | In Progress |
-| [rfc-0004](rfc/rfc-0004%20known%20issues/)                     | Support Marking Issues as Known | Not started |
+| Link                                                                                                                  | Description                     | Status      |
+| --------------------------------------------------------------------------------------------------------------------- | ------------------------------- | ----------- |
+| [rfc-0001](https://github.com/streetsidesoftware/cspell/tree/main/rfc/rfc-0001%20suggestions/)                        | Fixing common misspellings      | Done        |
+| [rfc-0002](https://github.com/streetsidesoftware/cspell/tree/main/rfc/rfc-0002%20improve%20dictionary%20suggestions/) | Improving Generated Suggestions | Done        |
+| [rfc-0003](https://github.com/streetsidesoftware/cspell/tree/main/rfc/rfc-0003%20parsing%20files/)                    | Plug-ins: Adding file parsers   | In Progress |
+| [rfc-0004](https://github.com/streetsidesoftware/cspell/tree/main/rfc/rfc-0004%20known%20issues/)                     | Support Marking Issues as Known | Not started |
 
 ## CSpell for enterprise
 
@@ -76,7 +76,7 @@ The maintainers of CSpell and thousands of other packages are working with Tidel
 
 ## Security contact information
 
-To report a security vulnerability, please use the
+To report a security vulnerability, please email security@streetsidesoftware.com or use the
 [Tidelift security contact](https://tidelift.com/security).
 Tidelift will coordinate the fix and disclosure.
 
