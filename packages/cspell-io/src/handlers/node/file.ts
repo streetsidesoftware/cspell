@@ -1,26 +1,19 @@
 import type { ServiceBus } from '@cspell/cspell-service-bus';
-import {
-    createResponse,
-    createResponseFail,
-    isServiceResponseFailure,
-    isServiceResponseSuccess,
-} from '@cspell/cspell-service-bus';
-import assert from 'assert';
+import { createResponse, createResponseFail, isServiceResponseSuccess } from '@cspell/cspell-service-bus';
 import { promises as fs, readFileSync, statSync } from 'fs';
 import type { URL } from 'url';
 import { fileURLToPath } from 'url';
 import { gunzipSync, gzipSync } from 'zlib';
 
 import { arrayBufferViewToBuffer } from '../../common/arrayBuffers.js';
-import { decode } from '../../common/encode-decode.js';
+import { encodeString } from '../../common/encode-decode.js';
 import { toError } from '../../errors/index.js';
-import type { BufferEncoding } from '../../models/BufferEncoding.ts';
+import { CFileResource } from '../../index.js';
+import type { FileResourceBase } from '../../models/FileResource.js';
 import { decodeDataUrl } from '../../node/dataUrl.js';
 import { fetchURL } from '../../node/file/fetch.js';
 import { getStatHttp } from '../../node/file/stat.js';
 import {
-    RequestFsReadBinaryFile,
-    RequestFsReadBinaryFileSync,
     RequestFsReadFile,
     RequestFsReadFileSync,
     RequestFsStat,
@@ -42,9 +35,11 @@ function isGzFile(url: URL): boolean {
 /**
  * Handle Binary File Reads
  */
-const handleRequestFsReadBinaryFile = RequestFsReadBinaryFile.createRequestHandler(
+const handleRequestFsReadFile = RequestFsReadFile.createRequestHandler(
     ({ params }) =>
-        createResponse(fs.readFile(fileURLToPath(params.url)).then((content) => ({ url: params.url, content }))),
+        createResponse(
+            fs.readFile(fileURLToPath(params.url)).then((content) => CFileResource.from(params.url, content)),
+        ),
     undefined,
     'Node: Read Binary File.',
 );
@@ -52,65 +47,17 @@ const handleRequestFsReadBinaryFile = RequestFsReadBinaryFile.createRequestHandl
 /**
  * Handle Binary File Sync Reads
  */
-const handleRequestFsReadBinaryFileSync = RequestFsReadBinaryFileSync.createRequestHandler(
-    ({ params }) => createResponse({ url: params.url, content: readFileSync(fileURLToPath(params.url)) }),
+const handleRequestFsReadFileSync = RequestFsReadFileSync.createRequestHandler(
+    ({ params }) => createResponse(CFileResource.from({ ...params, content: readFileSync(fileURLToPath(params.url)) })),
     undefined,
     'Node: Sync Read Binary File.',
-);
-
-/**
- * Handle UTF-8 Text File Reads
- */
-const handleRequestFsReadFile = RequestFsReadFile.createRequestHandler(
-    (req, _, dispatcher) => {
-        const { url, encoding } = req.params;
-        const res = dispatcher.dispatch(RequestFsReadBinaryFile.create({ url }));
-        if (!isServiceResponseSuccess(res)) {
-            assert(isServiceResponseFailure(res));
-            return createResponseFail(req, res.error);
-        }
-        return createResponse(
-            res.value.then((res) => {
-                const content = bufferToText(res.content, encoding);
-                return {
-                    url,
-                    baseFilename: res.baseFilename,
-                    encoding,
-                    ...content,
-                };
-            }),
-        );
-    },
-    undefined,
-    'Node: Read Text File.',
-);
-
-/**
- * Handle UTF-8 Text File Reads
- */
-const handleRequestFsReadFileSync = RequestFsReadFileSync.createRequestHandler(
-    (req, _, dispatcher) => {
-        const { url, encoding } = req.params;
-        const res = dispatcher.dispatch(RequestFsReadBinaryFileSync.create({ url }));
-        if (!isServiceResponseSuccess(res)) {
-            assert(isServiceResponseFailure(res));
-            return createResponseFail(req, res.error);
-        }
-        return createResponse({
-            encoding,
-            ...res.value,
-            ...bufferToText(res.value.content, encoding),
-        });
-    },
-    undefined,
-    'Node: Sync Read Text File.',
 );
 
 /**
  * Handle deflating gzip data
  */
 const handleRequestZlibInflate = RequestZlibInflate.createRequestHandler(
-    ({ params }) => createResponse(gunzipSync(params.data).toString('utf-8')),
+    ({ params }) => createResponse(gunzipSync(arrayBufferViewToBuffer(params.data))),
     undefined,
     'Node: gz deflate.',
 );
@@ -120,11 +67,11 @@ const supportedFetchProtocols: Record<string, true | undefined> = { 'http:': tru
 /**
  * Handle fetching a file from http
  */
-const handleRequestFsReadBinaryFileHttp = RequestFsReadBinaryFile.createRequestHandler(
-    (req: RequestFsReadBinaryFile, next) => {
+const handleRequestFsReadFileHttp = RequestFsReadFile.createRequestHandler(
+    (req: RequestFsReadFile, next) => {
         const { url } = req.params;
         if (!(url.protocol in supportedFetchProtocols)) return next(req);
-        return createResponse(fetchURL(url).then((content) => ({ url, content })));
+        return createResponse(fetchURL(url).then((content) => CFileResource.from({ ...req.params, content })));
     },
     undefined,
     'Node: Read Http(s) file.',
@@ -133,12 +80,14 @@ const handleRequestFsReadBinaryFileHttp = RequestFsReadBinaryFile.createRequestH
 /**
  * Handle decoding a data url
  */
-const handleRequestFsReadBinaryFileSyncData = RequestFsReadBinaryFileSync.createRequestHandler(
-    (req: RequestFsReadBinaryFileSync, next) => {
-        const { url } = req.params;
+const handleRequestFsReadFileSyncData = RequestFsReadFileSync.createRequestHandler(
+    (req: RequestFsReadFileSync, next) => {
+        const { url, encoding } = req.params;
         if (url.protocol !== 'data:') return next(req);
         const data = decodeDataUrl(url);
-        return createResponse({ url, content: data.data, baseFilename: data.attributes.get('filename') });
+        return createResponse(
+            CFileResource.from({ url, content: data.data, encoding, baseFilename: data.attributes.get('filename') }),
+        );
     },
     undefined,
     'Node: Read data: urls.',
@@ -147,24 +96,17 @@ const handleRequestFsReadBinaryFileSyncData = RequestFsReadBinaryFileSync.create
 /**
  * Handle decoding a data url
  */
-const handleRequestFsReadBinaryFileData = RequestFsReadBinaryFile.createRequestHandler(
-    (req: RequestFsReadBinaryFile, next, dispatcher) => {
+const handleRequestFsReadFileData = RequestFsReadFile.createRequestHandler(
+    (req: RequestFsReadFile, next, dispatcher) => {
         const { url } = req.params;
         if (url.protocol !== 'data:') return next(req);
-        const res = dispatcher.dispatch(RequestFsReadBinaryFileSync.create(req.params));
+        const res = dispatcher.dispatch(RequestFsReadFileSync.create(req.params));
         if (!isServiceResponseSuccess(res)) return res;
         return createResponse(Promise.resolve(res.value));
     },
     undefined,
     'Node: Read data: urls.',
 );
-
-function bufferToText(data: ArrayBufferView, encoding: BufferEncoding): { content: string; gz: boolean } {
-    const buf = arrayBufferViewToBuffer(data);
-    const gz = buf[0] === 0x1f && buf[1] === 0x8b;
-    const content = gz ? decode(gunzipSync(buf), encoding) : decode(buf, encoding);
-    return { content, gz };
-}
 
 /**
  * Handle fs:stat
@@ -208,7 +150,7 @@ const handleRequestFsStatHttp = RequestFsStat.createRequestHandler(
  * Handle fs:writeFile
  */
 const handleRequestFsWriteFile = RequestFsWriteFile.createRequestHandler(
-    ({ params }) => createResponse(fs.writeFile(params.url, params.content)),
+    ({ params }) => createResponse(fs.writeFile(params.url, extractData(params))),
     undefined,
     'Node: fs.writeFile',
 );
@@ -218,9 +160,9 @@ const handleRequestFsWriteFile = RequestFsWriteFile.createRequestHandler(
  */
 const handleRequestFsWriteFileGz = RequestFsWriteFile.createRequestHandler(
     (req, next) => {
-        const { url, content } = req.params;
+        const { url } = req.params;
         if (!isGzFile(url)) return next(req);
-        return createResponse(fs.writeFile(url, gzipSync(content)));
+        return createResponse(fs.writeFile(url, gzipSync(extractData(req.params))));
     },
     undefined,
     'Node: http get stat',
@@ -234,11 +176,9 @@ export function registerHandlers(serviceBus: ServiceBus) {
     const handlers = [
         handleRequestFsWriteFile,
         handleRequestFsWriteFileGz,
-        handleRequestFsReadBinaryFile,
-        handleRequestFsReadBinaryFileSync,
-        handleRequestFsReadBinaryFileHttp,
-        handleRequestFsReadBinaryFileData,
-        handleRequestFsReadBinaryFileSyncData,
+        handleRequestFsReadFileHttp,
+        handleRequestFsReadFileData,
+        handleRequestFsReadFileSyncData,
         handleRequestFsReadFile,
         handleRequestFsReadFileSync,
         handleRequestZlibInflate,
@@ -248,4 +188,12 @@ export function registerHandlers(serviceBus: ServiceBus) {
     ];
 
     handlers.forEach((handler) => serviceBus.addHandler(handler));
+}
+
+function extractData(resource: FileResourceBase): string | Buffer {
+    if (typeof resource.content === 'string') {
+        if (!resource.encoding || resource.encoding === 'utf-8') return resource.content;
+        return arrayBufferViewToBuffer(encodeString(resource.content, resource.encoding));
+    }
+    return arrayBufferViewToBuffer(resource.content);
 }

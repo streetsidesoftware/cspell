@@ -1,4 +1,3 @@
-export { RequestFsReadBinaryFile, RequestFsReadBinaryFileSync } from './RequestFsReadBinaryFile.js';
 export { RequestFsReadFileText as RequestFsReadFile } from './RequestFsReadFile.js';
 export { RequestFsReadFileTextSync as RequestFsReadFileSync } from './RequestFsReadFileSync.js';
 export { RequestFsStat, RequestFsStatSync } from './RequestFsStat.js';

@@ -1,14 +1,14 @@
 import { compareStats } from './common/stat.js';
 import type { CSpellIO } from './CSpellIO.js';
-import { ErrorNotImplemented } from './errors/ErrorNotImplemented.js';
-import type { TextFileResource } from './models/FileResource.js';
+import { ErrorNotImplemented } from './errors/errors.js';
+import type { FileResource } from './models/FileResource.js';
 import type { Stats } from './models/Stats.js';
 
 export class CSpellIOWeb implements CSpellIO {
-    readFile(_uriOrFilename: string | URL): Promise<TextFileResource> {
+    readFile(_uriOrFilename: string | URL): Promise<FileResource> {
         throw new ErrorNotImplemented('readFile');
     }
-    readFileSync(_uriOrFilename: string | URL): TextFileResource {
+    readFileSync(_uriOrFilename: string | URL): FileResource {
         throw new ErrorNotImplemented('readFileSync');
     }
     writeFile(_uriOrFilename: string | URL, _content: string): Promise<void> {

@@ -3,7 +3,7 @@ import { requestFactory } from '@cspell/cspell-service-bus';
 
 const RequestType = 'zlib:inflate' as const;
 interface RequestParams {
-    readonly data: Buffer;
+    readonly data: ArrayBufferView;
 }
-export const RequestZlibInflate = requestFactory<typeof RequestType, RequestParams, string>(RequestType);
+export const RequestZlibInflate = requestFactory<typeof RequestType, RequestParams, ArrayBufferView>(RequestType);
 export type RequestZlibInflate = ServiceRequestFactoryRequestType<typeof RequestZlibInflate>;

@@ -3,39 +3,36 @@ export interface FileReference {
     /**
      * The URL of the File
      */
-    url: URL;
-}
-
-export interface FileResource extends FileReference {
-    /**
-     * The contents of the file
-     */
-    content: string | ArrayBufferView;
+    readonly url: URL;
     /**
      * The filename of the file if known.
      * Useful for `data:` urls.
      */
-    baseFilename?: string | undefined;
+    readonly baseFilename?: string | undefined;
+
+    /**
+     * The encoding to use when reading the file.
+     */
+    readonly encoding?: BufferEncoding | undefined;
+}
+
+export interface FileResourceBase extends FileReference {
+    /**
+     * The contents of the file
+     */
+    readonly content: string | ArrayBufferView;
     /**
      * - `true` if the content had been gzip compressed.
      * - `false` if the content was NOT gzip compressed.
      * - `undefined` if it is unknown
      */
-    gz?: boolean;
-    /**
-     * The encoding used.
-     */
-    encoding?: BufferEncoding;
+    readonly gz?: boolean | undefined;
 }
 
-export interface TextFileResource extends FileResource {
-    content: string;
-    /**
-     * The encoding used to decode the file.
-     */
-    encoding: BufferEncoding;
+export interface FileResource extends FileResourceBase {
+    getText(): string;
 }
 
-export interface BinaryFileResource extends FileResource {
-    content: ArrayBufferView;
-}
+export type UrlOrFilename = string | URL;
+
+export type UrlOrReference = UrlOrFilename | FileReference;

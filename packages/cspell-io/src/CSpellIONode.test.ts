@@ -2,6 +2,7 @@ import { promises as fs } from 'fs';
 import { describe, expect, test } from 'vitest';
 
 import { CSpellIONode } from './CSpellIONode.js';
+import { CFileResource } from './index.js';
 import { toURL } from './node/file/util.js';
 import { makePathToFile, pathToSample as ps, pathToTemp } from './test/test.helper.js';
 
@@ -53,7 +54,7 @@ describe('CSpellIONode', () => {
     `('readFileSync $filename', ({ filename, content }) => {
         const cspellIo = new CSpellIONode();
         const expected = oc({ url: toURL(filename), content });
-        expect(cspellIo.readFileSync(filename)).toEqual(expected);
+        expect(cspellIo.readFileSync({ url: toURL(filename) })).toEqual(expected);
     });
 
     const stats = {
@@ -122,7 +123,7 @@ describe('CSpellIONode', () => {
         const content = await fs.readFile(ps('cities.txt'), 'utf-8');
         const cspellIo = new CSpellIONode();
         await makePathToFile(filename);
-        await cspellIo.writeFile(filename, content);
+        await cspellIo.writeFile(CFileResource.from(toURL(filename), content));
         expect(await cspellIo.readFile(filename)).toEqual(oc({ content }));
     });
 

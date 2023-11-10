@@ -1,10 +1,10 @@
 /**
- * Create a Uint8Array from an ArrayBufferView.
+ * Treat a ArrayBufferView as a Uint8Array.
  * The Uint8Array will share the same underlying ArrayBuffer.
  * @param data - source data
  * @returns Uint8Array
  */
-export function toUint8Array(data: ArrayBufferView): Uint8Array {
+export function asUint8Array(data: ArrayBufferView): Uint8Array {
     return new Uint8Array(data.buffer, data.byteOffset, data.byteLength);
 }
 

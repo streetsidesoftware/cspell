@@ -1,4 +1,6 @@
-import { arrayBufferViewToBuffer, swap16, swapBytes, toUint8Array } from './arrayBuffers.js';
+import { gunzipSync } from 'node:zlib';
+
+import { arrayBufferViewToBuffer, asUint8Array, swap16, swapBytes } from './arrayBuffers.js';
 import type { BufferEncodingExt, TextEncodingExt } from './BufferEncoding.js';
 
 const BOM_BE = 0xfeff;
@@ -12,19 +14,22 @@ const decoderUTF16BE = createTextDecoderUtf16BE();
 // const encoderUTF16LE = new TextEncoder('utf-16le');
 
 export function decodeUtf16LE(data: ArrayBufferView): string {
-    const buf = toUint8Array(data);
+    const buf = asUint8Array(data);
     const bom = (buf[0] << 8) | buf[1];
     return decoderUTF16LE.decode(bom === BOM_LE ? buf.subarray(2) : buf);
 }
 
 export function decodeUtf16BE(data: ArrayBufferView): string {
-    const buf = toUint8Array(data);
+    const buf = asUint8Array(data);
     const bom = (buf[0] << 8) | buf[1];
     return decoderUTF16BE.decode(bom === BOM_BE ? buf.subarray(2) : buf);
 }
 
 export function decodeToString(data: ArrayBufferView, encoding?: TextEncodingExt): string {
-    const buf = toUint8Array(data);
+    if (isGZipped(data)) {
+        return decodeToString(decompressBuffer(data), encoding);
+    }
+    const buf = asUint8Array(data);
     const bom = (buf[0] << 8) | buf[1];
     if (bom === BOM_BE || (buf[0] === 0 && buf[1] !== 0)) return decodeUtf16BE(buf);
     if (bom === BOM_LE || (buf[0] !== 0 && buf[1] === 0)) return decodeUtf16LE(buf);
@@ -88,7 +93,7 @@ export function encodeUtf16BE(str: string, bom = true): ArrayBufferView {
 }
 
 export function calcEncodingFromBom(data: ArrayBufferView): 'utf16be' | 'utf16le' | undefined {
-    const buf = toUint8Array(data);
+    const buf = asUint8Array(data);
     if (buf.length < 2) return undefined;
     switch ((buf[0] << 8) | buf[1]) {
         case BOM_BE:
@@ -117,4 +122,15 @@ export class UnsupportedEncodingError extends Error {
     constructor(encoding: string) {
         super(`Unsupported encoding: ${encoding}`);
     }
+}
+
+export function isGZipped(data: ArrayBufferView): boolean {
+    const buf = asUint8Array(data);
+    return buf[0] === 0x1f && buf[1] === 0x8b;
+}
+
+function decompressBuffer(data: ArrayBufferView): ArrayBufferView {
+    if (!isGZipped(data)) return data;
+    const buf = arrayBufferViewToBuffer(data);
+    return gunzipSync(buf);
 }

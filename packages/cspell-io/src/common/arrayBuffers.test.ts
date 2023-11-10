@@ -3,18 +3,18 @@ import { describe, expect, test } from 'vitest';
 import {
     __debug__,
     arrayBufferViewToBuffer,
+    asUint8Array,
     copyArrayBufferView,
     sliceView,
     swap16,
-    toUint8Array,
 } from './arrayBuffers.js';
 
 const sampleText = 'This is a bit of text to test things with.';
 
 describe('arrayBuffers', () => {
-    test('toUint8Array', () => {
+    test('asUint8Array', () => {
         const buf = Buffer.from(sampleText);
-        const u8 = toUint8Array(buf);
+        const u8 = asUint8Array(buf);
         expect(u8[0]).toBe(sampleText.charCodeAt(0));
         expect(buf[0]).toBe(sampleText.charCodeAt(0));
         u8[0] = 32;
@@ -47,14 +47,14 @@ describe('arrayBuffers', () => {
         const buf = Buffer.from(src);
         const view = sliceView(buf, 2, 4);
         expect(view.buffer).toBe(buf.buffer);
-        const u8 = toUint8Array(view);
+        const u8 = asUint8Array(view);
         expect(u8.buffer).toBe(buf.buffer);
         const u8From = Uint8Array.from(src);
         const cView = copyArrayBufferView(view);
         expect(cView.buffer).not.toBe(buf.buffer);
         expect(cView).toEqual(Uint8Array.from([3, 4, 5, 6]));
         expect(u8).toEqual(Uint8Array.from([3, 4, 5, 6]));
-        expect(toUint8Array(sliceView(u8From, 2, 4))).toEqual(Uint8Array.from([3, 4, 5, 6]));
+        expect(asUint8Array(sliceView(u8From, 2, 4))).toEqual(Uint8Array.from([3, 4, 5, 6]));
     });
 
     test('sliceView bounds', () => {
@@ -62,10 +62,10 @@ describe('arrayBuffers', () => {
         const buf = Uint8Array.from(src);
         const view = sliceView(buf, 2, 100);
         expect(view.buffer).toBe(buf.buffer);
-        expect(toUint8Array(view)).toEqual(Uint8Array.from([3, 4, 5, 6, 7, 8]));
+        expect(asUint8Array(view)).toEqual(Uint8Array.from([3, 4, 5, 6, 7, 8]));
         const view2 = sliceView(view, 2);
         expect(view2.buffer).toBe(buf.buffer);
-        expect(toUint8Array(view2)).toEqual(Uint8Array.from([5, 6, 7, 8]));
+        expect(asUint8Array(view2)).toEqual(Uint8Array.from([5, 6, 7, 8]));
     });
 
     test('arrayBufferViewToBuffer', () => {
