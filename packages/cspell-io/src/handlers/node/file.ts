@@ -174,13 +174,13 @@ export function registerHandlers(serviceBus: ServiceBus) {
      * Order is VERY important.
      */
     const handlers = [
+        handleRequestFsReadFile,
+        handleRequestFsReadFileSync,
         handleRequestFsWriteFile,
         handleRequestFsWriteFileGz,
         handleRequestFsReadFileHttp,
         handleRequestFsReadFileData,
         handleRequestFsReadFileSyncData,
-        handleRequestFsReadFile,
-        handleRequestFsReadFileSync,
         handleRequestZlibInflate,
         handleRequestFsStatSync,
         handleRequestFsStat,

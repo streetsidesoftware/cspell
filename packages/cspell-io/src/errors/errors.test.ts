@@ -6,7 +6,7 @@ describe('errors', () => {
     test.each`
         error                  | message   | expected
         ${ErrorNotImplemented} | ${'test'} | ${'Method test is not supported.'}
-        ${AssertionError}      | ${'test'} | ${'Method test is not supported.'}
+        ${AssertionError}      | ${'test'} | ${'test'}
     `('ErrorNotImplemented', ({ error, message, expected }) => {
         const err = new error(message);
         expect(err).toBeInstanceOf(Error);

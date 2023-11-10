@@ -27,10 +27,11 @@ describe('CSpellIONode', () => {
     `('readFile $filename', async ({ filename, content, baseFilename }) => {
         const cspellIo = new CSpellIONode();
         const url = toURL(filename);
-        const expected = oc({ url, content, baseFilename });
-        const result = cspellIo.readFile(filename);
-        result.catch((e) => console.log(e));
-        await expect(result).resolves.toEqual(expected);
+        const expected = { url, content, baseFilename };
+        const result = await cspellIo.readFile(filename);
+        expect(result.url).toEqual(expected.url);
+        expect(result.getText()).toEqual(expected.content);
+        expect(result.baseFilename).toEqual(expected.baseFilename);
     });
 
     test.each`
@@ -53,8 +54,9 @@ describe('CSpellIONode', () => {
         ${'data:text/plain;charset=utf8;base64,SGVsbG8sIFdvcmxkISAlJSUlJCQkJCwsLCw'} | ${sc('Hello, World!')}
     `('readFileSync $filename', ({ filename, content }) => {
         const cspellIo = new CSpellIONode();
-        const expected = oc({ url: toURL(filename), content });
-        expect(cspellIo.readFileSync({ url: toURL(filename) })).toEqual(expected);
+        const result = cspellIo.readFileSync({ url: toURL(filename) });
+        expect(result.url).toEqual(toURL(filename));
+        expect(result.getText()).toEqual(content);
     });
 
     const stats = {
@@ -124,7 +126,8 @@ describe('CSpellIONode', () => {
         const cspellIo = new CSpellIONode();
         await makePathToFile(filename);
         await cspellIo.writeFile(CFileResource.from(toURL(filename), content));
-        expect(await cspellIo.readFile(filename)).toEqual(oc({ content }));
+        const result = await cspellIo.readFile(filename);
+        expect(result.getText()).toEqual(content);
     });
 
     test.each`

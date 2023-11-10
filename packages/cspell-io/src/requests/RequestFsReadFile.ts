@@ -7,9 +7,7 @@ import type { FileResource } from '../models/FileResource.js';
 const RequestType = 'fs:readFile' as const;
 interface RequestParams {
     readonly url: URL;
-    readonly encoding?: BufferEncoding | undefined;
+    readonly encoding: BufferEncoding;
 }
-export const RequestFsReadFileText = requestFactory<typeof RequestType, RequestParams, Promise<FileResource>>(
-    RequestType,
-);
-export type RequestFsReadFileText = ServiceRequestFactoryRequestType<typeof RequestFsReadFileText>;
+export const RequestFsReadFile = requestFactory<typeof RequestType, RequestParams, Promise<FileResource>>(RequestType);
+export type RequestFsReadFile = ServiceRequestFactoryRequestType<typeof RequestFsReadFile>;
