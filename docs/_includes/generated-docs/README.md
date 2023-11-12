@@ -59,12 +59,12 @@ Some videos related to CSpell and the [Code Spell Checker](https://marketplace.v
 
 ## RFCs
 
-| Link                                                           | Description                     | Status      |
-| -------------------------------------------------------------- | ------------------------------- | ----------- |
-| [rfc-0001](rfc/rfc-0001%20suggestions/)                        | Fixing common misspellings      | Not started |
-| [rfc-0002](rfc/rfc-0002%20improve%20dictionary%20suggestions/) | Improving Generated Suggestions | Done        |
-| [rfc-0003](rfc/rfc-0003%20parsing%20files/)                    | Plug-ins: Adding file parsers   | In Progress |
-| [rfc-0004](rfc/rfc-0004%20known%20issues/)                     | Support Marking Issues as Known | Not started |
+| Link                                                                                                                  | Description                     | Status      |
+| --------------------------------------------------------------------------------------------------------------------- | ------------------------------- | ----------- |
+| [rfc-0001](https://github.com/streetsidesoftware/cspell/tree/main/rfc/rfc-0001%20suggestions/)                        | Fixing common misspellings      | Done        |
+| [rfc-0002](https://github.com/streetsidesoftware/cspell/tree/main/rfc/rfc-0002%20improve%20dictionary%20suggestions/) | Improving Generated Suggestions | Done        |
+| [rfc-0003](https://github.com/streetsidesoftware/cspell/tree/main/rfc/rfc-0003%20parsing%20files/)                    | Plug-ins: Adding file parsers   | In Progress |
+| [rfc-0004](https://github.com/streetsidesoftware/cspell/tree/main/rfc/rfc-0004%20known%20issues/)                     | Support Marking Issues as Known | Not started |
 
 ## CSpell for enterprise
 
@@ -74,19 +74,19 @@ The maintainers of CSpell and thousands of other packages are working with Tidel
 
 ## Security contact information
 
-To report a security vulnerability, please use the
+To report a security vulnerability, please email <security@streetsidesoftware.com> or use the
 [Tidelift security contact](https://tidelift.com/security).
 Tidelift will coordinate the fix and disclosure.
 
 ## Versions
 
-|        | version | Node    | Status                       | Maintenance | End of Free Support |
-| :----- | :------ | :------ | :--------------------------- | :---------- | :------------------ |
-| cspell | 8.x     | 18.x    | In Active Development        | TBD         | TBD                 |
-| cspell | 7.x     | 16.x    | Transitioning to Maintenance | 2023-10-01  | 2023-11-01          |
-| cspell | 6.x     | 14.14.x | Paid support only[^1]        | 2023-04-01  | 2023-05-01          |
-| cspell | 5.x     | 12.x    | Paid support only[^1]        | -           | 2022-10-01          |
-| cspell | 4.x     | 10.x    | Paid support only[^1]        | -           | 2022-05-01          |
+|        | version | Node    | Status                | Maintenance | End of Free Support |
+| :----- | :------ | :------ | :-------------------- | :---------- | :------------------ |
+| cspell | 8.x     | 18.x    | In Active Development | TBD         | TBD                 |
+| cspell | 7.x     | 16.x    | Maintenance           | 2023-10-01  | 2023-11-07          |
+| cspell | 6.x     | 14.14.x | Paid support only[^1] | 2023-04-01  | 2023-05-01          |
+| cspell | 5.x     | 12.x    | Paid support only[^1] | -           | 2022-10-01          |
+| cspell | 4.x     | 10.x    | Paid support only[^1] | -           | 2022-05-01          |
 
 [^1]: [Support - Street Side Software](https://streetsidesoftware.com/support/#maintenance-agreements)
 
