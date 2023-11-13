@@ -3,9 +3,9 @@ Repository: MicrosoftDocs/PowerShell-Docs
 Url: https://github.com/MicrosoftDocs/PowerShell-Docs.git
 Args: '["--config=../../../cspell-power-shell-docs.config.yaml","**"]'
 Summary:
-  files: 2654
-  filesWithIssues: 1245
-  issues: 5676
+  files: 2670
+  filesWithIssues: 1261
+  issues: 5696
   errors: 0
 Errors: []
 
@@ -62,11 +62,16 @@ issues:
   - "reference/5.1/Microsoft.PowerShell.Core/About/about_Calculated_Properties.md:214:15         Fullname        U       Format-List Fullname,"
   - "reference/5.1/Microsoft.PowerShell.Core/About/about_Calculated_Properties.md:254:21         Metacontent     U       '' {'Metacontent'}"
   - "reference/5.1/Microsoft.PowerShell.Core/About/about_Character_Encoding.md:162:4         bigendianutf    U       - `bigendianutf32`: Encodes in UTF-"
-  - "reference/5.1/Microsoft.PowerShell.Core/About/about_Classes.md:281:2        ints            U       $ints = [FunWithIntegers]"
-  - "reference/5.1/Microsoft.PowerShell.Core/About/about_Classes.md:640:25       devtype         U       hidden [DeviceType]$devtype = [DeviceType]::Undefined"
-  - "reference/5.1/Microsoft.PowerShell.Core/About/about_Classes.md:787:10       baseclass       U       class (`[baseclass]$this`) on invocation"
-  - "reference/5.1/Microsoft.PowerShell.Core/About/about_Classes.md:797:10       basedays        U       [int]basedays() {return ([BaseClass"
-  - "reference/5.1/Microsoft.PowerShell.Core/About/about_Classes.md:817:25       implemention    U       interface. Omitting the implemention interface members causes"
+  - "reference/5.1/Microsoft.PowerShell.Core/About/about_Classes_Constructors.md:434:13      nondefault      U       To invoke a nondefault base constructor, add"
+  - "reference/5.1/Microsoft.PowerShell.Core/About/about_Classes_Inheritance.md:108:25       Formattable     U       System.IFormattable,"
+  - "reference/5.1/Microsoft.PowerShell.Core/About/about_Classes_Inheritance.md:429:14       Pinkney         U       'Jerry Pinkney',"
+  - "reference/5.1/Microsoft.PowerShell.Core/About/about_Classes_Methods.md:32:1         Nonterminating      U       Nonterminating errors written to the"
+  - "reference/5.1/Microsoft.PowerShell.Core/About/about_Classes_Methods.md:205:54       nonstatic           U       GetVolume()` as an instance (nonstatic) method. This"
+  - "reference/5.1/Microsoft.PowerShell.Core/About/about_Classes_Properties.md:124:24        Mikey               U       DisplayName = 'Mikey Lombardi'"
+  - "reference/5.1/Microsoft.PowerShell.Core/About/about_Classes_Properties.md:125:24        michaeltlombardi    U       UserName = 'michaeltlombardi'"
+  - "reference/5.1/Microsoft.PowerShell.Core/About/about_Classes.md:76:33        hastable    U       properties. If any key in the hastable isn't a valid property"
+  - "reference/5.1/Microsoft.PowerShell.Core/About/about_Classes.md:165:35       Unwin       U       = 'George Allen & Unwin'"
+  - "reference/5.1/Microsoft.PowerShell.Core/About/about_Classes.md:176:32       nwhich      U       Time to read $Book,`nwhich was published $Age years"
   - "reference/5.1/Microsoft.PowerShell.Core/About/about_Command_Syntax.md:161:36        huas            U       also known as chi-hua-huas -->"
   - "reference/5.1/Microsoft.PowerShell.Core/About/about_Command_Syntax.md:171:27        binkies         U       []` - also known as binkies -->"
   - "reference/5.1/Microsoft.PowerShell.Core/About/about_Command_Syntax.md:184:34        mycommand       U       Name MyAlias -Value mycommand.exe"
@@ -482,6 +487,7 @@ issues:
   - "reference/7.4/Microsoft.PowerShell.Core/About/about_CommonParameters.md:46:23       proga       U       **ProgressAction** (proga)"
   - "reference/7.4/Microsoft.PowerShell.Core/About/about_Pipelines.md:425:24         xzvf    U       curl -s -L $uri | tar -xzvf - -C ."
   - "reference/7.4/Microsoft.PowerShell.Core/Get-Command.md:463:22       Damerau     U       calculated using the Damerau Levenshtein Distance"
+  - "reference/7.4/Microsoft.PowerShell.Utility/Invoke-RestMethod.md:1523:38     Brotli      U       added support for the Brotli compression algorithm"
   - "reference/docs-conceptual/community/2020-updates.md:38:3        doctordns           U       | doctordns | 3"
   - "reference/docs-conceptual/community/2020-updates.md:39:3        chadbaldwin         U       | chadbaldwin | 1"
   - "reference/docs-conceptual/community/2020-updates.md:40:3        dawedawe            U       | dawedawe | 1"
@@ -683,7 +689,6 @@ issues:
   - "reference/docs-conceptual/community/2022-updates.md:343:10      Roille                          U       | StephenRoille | 1 |"
   - "reference/docs-conceptual/community/2022-updates.md:344:3       krlinus                         U       | krlinus |"
   - "reference/docs-conceptual/community/2022-updates.md:379:3       kevinholtkamp                   U       | kevinholtkamp | 1 |"
-  - "reference/docs-conceptual/community/2022-updates.md:380:3       Mikey                           U       | MikeyBronowski | 1"
   - "reference/docs-conceptual/community/2022-updates.md:380:8       Bronowski                       U       | MikeyBronowski | 1 |"
   - "reference/docs-conceptual/community/2022-updates.md:412:31      PSAMSI                          U       experimental feature `PSAMSIMethodInvocationLogging"
   - "reference/docs-conceptual/community/2022-updates.md:438:3       codaamok                        U       | codaamok | 1"
@@ -1126,6 +1131,7 @@ issues:
   - "reference/docs-conceptual/lang-spec/chapter-02.md:960:19        nsecond             U       \"column1`tcolumn2`nsecond line, `\"Hello`\", ``"
   - "reference/docs-conceptual/lang-spec/chapter-02.md:1316:36       concatentaion       U       chapter-07.md#772-string-concatentaion"
   - "reference/docs-conceptual/lang-spec/chapter-03.md:762:57        arity       U       need to specify the arity (the number of arguments"
+  - "reference/docs-conceptual/lang-spec/chapter-05.md:174:47        ints    U       constrains $i to designating ints only"
   - "reference/docs-conceptual/lang-spec/chapter-06.md:315:6         Convertable     U       - **IConvertable**: `System.Convert.ChangeType"
   - "reference/docs-conceptual/lang-spec/chapter-07.md:298:15        Zabc                U       $b = \"abc#$%XYZabc\""
   - "reference/docs-conceptual/lang-spec/chapter-07.md:477:29        preincrement        U       ,5][1] # preincrement 60 in array 40,60,8"
@@ -1133,7 +1139,6 @@ issues:
   - "reference/docs-conceptual/lang-spec/chapter-07.md:551:63        bahavior            U       big to fit, imp-def bahavior"
   - "reference/docs-conceptual/lang-spec/chapter-07.md:985:15        tblue               U       -split \" red\\`tblue\\`ngreen \" # 3 strings"
   - "reference/docs-conceptual/lang-spec/chapter-07.md:985:22        ngreen              U       split \" red\\`tblue\\`ngreen \" # 3 strings: \"red"
-  - "reference/docs-conceptual/lang-spec/chapter-07.md:1124:75       Formattable         U       see the type `System.IFormattable` in Ecma"
   - "reference/docs-conceptual/lang-spec/chapter-07.md:1310:24       redblue             U       red\" + \"blue\" # \"redblue\""
   - "reference/docs-conceptual/lang-spec/chapter-07.md:1542:15       aeiou               U       \"He\" -like \"h[aeiou]?*\" # False"
   - "reference/docs-conceptual/lang-spec/chapter-07.md:1546:8        abbcde              U       \"abc\",\"abbcde\",\"abcgh\" -like \"abc"
@@ -1302,14 +1307,14 @@ issues:
   - "reference/docs-conceptual/whats-new/What-s-New-in-PowerShell-73.md:106:85       fflaten                 U       4][17804]) (Thanks @fflaten!)"
   - "reference/docs-conceptual/whats-new/What-s-New-in-PowerShell-73.md:108:9        noprofileloadtime       U       - Add `-noprofileloadtime` switch to pwsh ([#"
   - "reference/docs-conceptual/whats-new/What-s-New-in-PowerShell-74.md:22:88        gregsdennis         U       1][18141]) (Thanks @gregsdennis!)"
-  - "reference/docs-conceptual/whats-new/What-s-New-in-PowerShell-74.md:81:3         Webcmdlets          U       - Webcmdlets add 308 to redirect"
-  - "reference/docs-conceptual/whats-new/What-s-New-in-PowerShell-74.md:89:26        webcmdlets          U       Fix using xml -Body in webcmdlets without an encoding"
-  - "reference/docs-conceptual/whats-new/What-s-New-in-PowerShell-74.md:107:81       stevenebutler       U       9][19249]) (Thanks @stevenebutler!)"
-  - "reference/docs-conceptual/whats-new/What-s-New-in-PowerShell-74.md:112:30       mkht                U       2][19622]) (Thanks @mkht!)"
-  - "reference/docs-conceptual/whats-new/What-s-New-in-PowerShell-74.md:136:30       dkaszews            U       0][17780]) (Thanks @dkaszews!)"
-  - "reference/docs-conceptual/whats-new/What-s-New-in-PowerShell-74.md:142:30       josea               U       5][19765]) (Thanks @josea!)"
-  - "reference/docs-conceptual/whats-new/What-s-New-in-PowerShell-74.md:168:78       wmentha             U       1][17191]) (Thanks @wmentha!)"
-  - "reference/docs-conceptual/whats-new/What-s-New-in-PowerShell-74.md:175:80       nohwnd              U       3][14953]) (Thanks @nohwnd!)"
+  - "reference/docs-conceptual/whats-new/What-s-New-in-PowerShell-74.md:82:3         Webcmdlets          U       - Webcmdlets add 308 to redirect"
+  - "reference/docs-conceptual/whats-new/What-s-New-in-PowerShell-74.md:90:26        webcmdlets          U       Fix using xml -Body in webcmdlets without an encoding"
+  - "reference/docs-conceptual/whats-new/What-s-New-in-PowerShell-74.md:108:81       stevenebutler       U       9][19249]) (Thanks @stevenebutler!)"
+  - "reference/docs-conceptual/whats-new/What-s-New-in-PowerShell-74.md:113:30       mkht                U       2][19622]) (Thanks @mkht!)"
+  - "reference/docs-conceptual/whats-new/What-s-New-in-PowerShell-74.md:137:30       dkaszews            U       0][17780]) (Thanks @dkaszews!)"
+  - "reference/docs-conceptual/whats-new/What-s-New-in-PowerShell-74.md:143:30       josea               U       5][19765]) (Thanks @josea!)"
+  - "reference/docs-conceptual/whats-new/What-s-New-in-PowerShell-74.md:169:78       wmentha             U       1][17191]) (Thanks @wmentha!)"
+  - "reference/docs-conceptual/whats-new/What-s-New-in-PowerShell-74.md:176:80       nohwnd              U       3][14953]) (Thanks @nohwnd!)"
   - "reference/docs-conceptual/windows-powershell/ise/object-model/Other-Useful-Scripting-Objects.md:27:40       Mycommand       U       ortedConsoleApplications.Add('Mycommand')"
   - "reference/docs-conceptual/windows-powershell/ise/object-model/The-ISEFile-Object.md:62:2        fullpath    U       $fullpath = \"c:\\temp\\newname.txt"
   - "reference/docs-conceptual/windows-powershell/ise/object-model/The-ISEFile-Object.md:62:22       newname     U       fullpath = \"c:\\temp\\newname.txt\""
