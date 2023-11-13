@@ -690,8 +690,8 @@ importers:
   packages/cspell-resolver:
     dependencies:
       global-dirs:
-        specifier: ^3.0.1
-        version: 3.0.1
+        specifier: ^4.0.0
+        version: 4.0.0
 
   packages/cspell-service-bus: {}
 
@@ -9580,6 +9580,14 @@ packages:
     engines: {node: '>=10'}
     dependencies:
       ini: 2.0.0
+
+  /global-dirs@4.0.0:
+    resolution: {integrity: sha512-PJ0OjGf/kVuu9gh5IPgAyssfJne5PsU9+ICxfWiRYDUnYq8ob+Y2nSWAEUNEHRj+gowyzI+wg5/nWkvcjcyLwg==}
+    engines: {node: '>=10'}
+    deprecated: Renamed to global-directory
+    dependencies:
+      ini: 2.0.0
+    dev: false
 
   /global-modules@2.0.0:
     resolution: {integrity: sha512-NGbfmJBp9x8IxyJSd1P+otYK8vonoJactOogrVfFRIAEY1ukil8RSKDz2Yo7wh1oihl51l/r6W4epkeKJHqL8A==}
