@@ -3,9 +3,9 @@ Repository: aspnetboilerplate/aspnetboilerplate
 Url: https://github.com/aspnetboilerplate/aspnetboilerplate
 Args: '["**/*.{md,cs,cshtml}","--exclude=wwwroot","--exclude=**/*SampleApp.Tests/Web*"]'
 Summary:
-  files: 2529
-  filesWithIssues: 827
-  issues: 2940
+  files: 2606
+  filesWithIssues: 839
+  issues: 2976
   errors: 0
 Errors: []
 
@@ -182,6 +182,7 @@ issues:
   - "src/Abp.AutoMapper/AutoMapper/AutoMapperConfigurationExtensions.cs:55:23        Exemple (Example)       U       //Exemple if we have in source"
   - "src/Abp.AutoMapper/AutoMapper/AutoMapperConfigurationExtensions.cs:55:56        attribut                U       we have in source the attribut AutoMapKey on the Property"
   - "src/Abp.AutoMapper/AutoMapper/AutoMapperConfigurationExtensions.cs:55:138       agaisnt (against)       U       the target to compare agaisnt"
+  - "src/Abp.BlobStoring/BlobStoring/IBlobContainer.cs:87:57         Arrary      U       extension methods: GetAsArraryAsync, GetAsStringAsync"
   - "src/Abp.Dapper/Dapper/AbpDapperModule.cs:26:62          Orms    U       OrmContextKey == AbpConsts.Orms.EntityFramework)"
   - "src/Abp.Dapper/Dapper/Expressions/DapperExpressionVisitor.cs:173:27         startswith      U       case \"startswith\":"
   - "src/Abp.Dapper/Dapper/Expressions/DapperExpressionVisitor.cs:176:27         endswith        U       case \"endswith\":"
@@ -462,6 +463,7 @@ issues:
   - "src/Abp/Text/FormattedStringValueExtracter.cs:26:26         splitformat     U       /// <param name=\"splitformatCharacter\">format is"
   - "src/Abp/Text/Formatting/FormatStringTokenizer.cs:46:110         containt    U       ! Brackets does not containt any chars.\");"
   - "src/Abp/Threading/AsyncHelper.cs:4:7            Nito    U       using Nito.AsyncEx;"
+  - "src/Abp/Threading/CancellationTokenProviderExtensions.cs:7:120          preffered       U       provider, CancellationToken prefferedValue = default)"
   - "src/Abp/Threading/Extensions/LockExtensions.cs:59:43        paramnref       U       Return value of the <paramnref name=\"func\"/></returns"
   - "src/Abp/Threading/Timers/AbpAsyncTimer.cs:27:54         spesified       U       to perfom the task at spesified intervals."
   - "src/Abp/Threading/Timers/AbpTimer.cs:8:11           roboust     U       /// A roboust timer implementation"
@@ -480,6 +482,13 @@ issues:
   - "test/Abp.AspNetCore.Tests/Tests/Utils/ArrayMacther_Tests.cs:6:23        Macther     U       public class ArrayMacther_Tests"
   - "test/Abp.AutoMapper.Tests/AutoMapper_Inheritance_Tests.cs:34:57         fortytwo    U       MyDerivedClass { Value = \"fortytwo\" };"
   - "test/Abp.AutoMapper.Tests/AutoMapper_Inheritance_Tests.cs:56:64         Drived      U       To_EntityDto_And_To_DrivedEntityDto()"
+  - "test/Abp.BlobStoring.Azure.Tests/Abp/BlobStoring/Azure/DefaultAzureBlobNamingNormalizerProvider_Tests.cs:20:32          thisismycontainername                                                       U       filename.ShouldBe(\"thisismycontainername\");"
+  - "test/Abp.BlobStoring.Azure.Tests/Abp/BlobStoring/Azure/DefaultAzureBlobNamingNormalizerProvider_Tests.cs:51:29          abpabpabpabpabpabpabpabpabpabpabpabpabpabpabpabpabpabpabpabpabpabpabp       U       var filename = \"abpabpabpabpabpabpabpabpabpabpabpabpabpabpabpabpabpabpabpabpabpabpabp\";"
+  - "test/Abp.BlobStoring.Azure.Tests/Abp/BlobStoring/Azure/DefaultAzureBlobNamingNormalizerProvider_Tests.cs:59:56          abpabpabpabpabpabpabpabp                                                    U       is-my-container-name-abpabpabpabpabpabpabpabp-a-b-p-a--b-p-\";"
+  - "test/Abp.BlobStoring.FileSystem.Tests/Abp/BlobStoring/FileSystem/DefaultFileSystemBlobNamingNormalizerProvider_Tests.cs:35:29       thisismy                U       var filename = \"thisismy:*?\\\"<>|foldername\";"
+  - "test/Abp.BlobStoring.FileSystem.Tests/Abp/BlobStoring/FileSystem/DefaultFileSystemBlobNamingNormalizerProvider_Tests.cs:37:32       thisismyfoldername      U       filename.ShouldBe(\"thisismyfoldername\");"
+  - "test/Abp.BlobStoring.FileSystem.Tests/Abp/BlobStoring/FileSystem/DefaultFileSystemBlobNamingNormalizerProvider_Tests.cs:45:32       thisismyfilename        U       filename.ShouldBe(\"thisismyfilename\");"
+  - "test/Abp.BlobStoring.FileSystem.Tests/Abp/BlobStoring/FileSystem/DefaultFileSystemBlobNamingNormalizerProvider_Tests.cs:53:30       thisis                  U       var filename = $\"thisis{delimiter}my:*?\\\"<>"
   - "test/Abp.Dapper.NHibernate.Tests/DapperNhBasedRepository_Tests.cs:22:62         Oguzhan         U       session.Save(new Person(\"Oguzhan_Initial\")));"
   - "test/Abp.Dapper.NHibernate.Tests/DapperNhBasedRepository_Tests.cs:126:66        unitofwork      U       should_work_under_same_unitofwork()"
   - "test/Abp.EntityFramework.GraphDiff.Tests/Mapping/EntityMappingManager_Tests.cs:34:86        Exrepssion      U       object>> expectedMainExrepssion ="
