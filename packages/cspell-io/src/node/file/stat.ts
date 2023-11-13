@@ -3,7 +3,7 @@ import { format } from 'util';
 
 import type { Stats } from '../../models/Stats.js';
 import { fetchHead } from './fetch.js';
-import { isFileURL, isUrlLike, toURL } from './util.js';
+import { isFileURL, isUrlLike, toURL } from './url.js';
 
 export async function getStat(filenameOrUri: string): Promise<Stats | Error> {
     if (isUrlLike(filenameOrUri)) {

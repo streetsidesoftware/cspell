@@ -124,7 +124,8 @@ export class UnsupportedEncodingError extends Error {
     }
 }
 
-export function isGZipped(data: ArrayBufferView): boolean {
+export function isGZipped(data: ArrayBufferView | string): boolean {
+    if (typeof data === 'string') return false;
     const buf = asUint8Array(data);
     return buf[0] === 0x1f && buf[1] === 0x8b;
 }

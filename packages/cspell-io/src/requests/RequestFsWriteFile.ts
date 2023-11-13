@@ -1,13 +1,13 @@
 import type { ServiceRequestFactoryRequestType } from '@cspell/cspell-service-bus';
 import { requestFactory } from '@cspell/cspell-service-bus';
 
-import type { BufferEncoding } from '../models/BufferEncoding.js';
+import type { FileReference } from '../models/FileResource.js';
 
 const RequestType = 'fs:writeFile' as const;
-interface RequestParams {
-    readonly url: URL;
+interface RequestParams extends FileReference {
     readonly content: string | ArrayBufferView;
-    readonly encoding?: BufferEncoding | undefined;
 }
-export const RequestFsWriteFile = requestFactory<typeof RequestType, RequestParams, Promise<void>>(RequestType);
+export const RequestFsWriteFile = requestFactory<typeof RequestType, RequestParams, Promise<FileReference>>(
+    RequestType,
+);
 export type RequestFsWriteFile = ServiceRequestFactoryRequestType<typeof RequestFsWriteFile>;

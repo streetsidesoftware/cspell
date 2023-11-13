@@ -24,7 +24,7 @@ describe('transformUtf16', () => {
     `('transformUtf16 $values', async ({ values, expected }) => {
         const decoderUtf = createDecoderTransformer();
         const result = await toArray(decoderUtf(values));
-        console.log('result %o', result);
+        // console.log('result %o', result);
         expect(result).toEqual(expected);
     });
 

@@ -1,14 +1,15 @@
 import { isServiceResponseSuccess, ServiceBus } from '@cspell/cspell-service-bus';
 
 import { isFileReference, toFileReference } from './common/CFileReference.js';
+import { CFileResource } from './common/CFileResource.js';
 import { compareStats } from './common/stat.js';
 import type { CSpellIO } from './CSpellIO.js';
 import { ErrorNotImplemented } from './errors/errors.js';
 import { registerHandlers } from './handlers/node/file.js';
 import type { BufferEncoding } from './models/BufferEncoding.js';
-import type { FileResource, UrlOrReference } from './models/FileResource.js';
+import type { FileReference, FileResource, UrlOrReference } from './models/FileResource.js';
 import type { Stats } from './models/Stats.js';
-import { toURL, urlBasename, urlDirname } from './node/file/util.js';
+import { toURL, urlBasename, urlDirname } from './node/file/url.js';
 import {
     RequestFsReadFile,
     RequestFsReadFileSync,
@@ -40,7 +41,9 @@ export class CSpellIONode implements CSpellIO {
         }
         return res.value;
     }
-    writeFile(fileResource: FileResource): Promise<void> {
+    writeFile(uriOrFilename: UrlOrReference, content: string | ArrayBufferView): Promise<FileReference> {
+        const ref = toFileReference(uriOrFilename);
+        const fileResource = CFileResource.from(ref, content);
         const res = this.serviceBus.dispatch(RequestFsWriteFile.create(fileResource));
         if (!isServiceResponseSuccess(res)) {
             throw genError(res.error, 'writeFile');

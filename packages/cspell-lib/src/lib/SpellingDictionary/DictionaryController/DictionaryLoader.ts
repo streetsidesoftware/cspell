@@ -282,10 +282,10 @@ export class DictionaryLoader {
 
 function toReader(cspellIO: CSpellIO): Reader {
     return {
-        read: async (filename) => (await cspellIO.readFile(filename)).content,
-        readLines: async (filename) => toLines((await cspellIO.readFile(filename)).content),
-        readSync: (filename) => cspellIO.readFileSync(filename).content,
-        readLinesSync: (filename) => toLines(cspellIO.readFileSync(filename).content),
+        read: async (filename) => (await cspellIO.readFile(filename)).getText(),
+        readLines: async (filename) => toLines((await cspellIO.readFile(filename)).getText()),
+        readSync: (filename) => cspellIO.readFileSync(filename).getText(),
+        readLinesSync: (filename) => toLines(cspellIO.readFileSync(filename).getText()),
     };
 }
 

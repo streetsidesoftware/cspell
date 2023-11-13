@@ -1,5 +1,5 @@
 import type { BufferEncoding } from './models/BufferEncoding.js';
-import type { FileResource, UrlOrReference } from './models/FileResource.js';
+import type { FileReference, FileResource, UrlOrReference } from './models/FileResource.js';
 import type { Stats } from './models/index.js';
 
 export interface CSpellIO {
@@ -24,7 +24,7 @@ export interface CSpellIO {
      * @param uriOrFilename - uri
      * @param content - string to write.
      */
-    writeFile(uriOrFilename: UrlOrReference, content: string): Promise<void>;
+    writeFile(uriOrFilename: UrlOrReference, content: string | ArrayBufferView): Promise<FileReference>;
     /**
      * Get Stats on a uri.
      * @param uriOrFilename - uri to fetch stats on

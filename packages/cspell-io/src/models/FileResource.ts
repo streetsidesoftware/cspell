@@ -14,6 +14,13 @@ export interface FileReference {
      * The encoding to use when reading the file.
      */
     readonly encoding?: BufferEncoding | undefined;
+
+    /**
+     * - `true` if the content had been gzip compressed.
+     * - `false` if the content was NOT gzip compressed.
+     * - `undefined` if it is unknown
+     */
+    readonly gz?: boolean | undefined;
 }
 
 export interface FileResourceBase extends FileReference {
@@ -21,12 +28,6 @@ export interface FileResourceBase extends FileReference {
      * The contents of the file
      */
     readonly content: string | ArrayBufferView;
-    /**
-     * - `true` if the content had been gzip compressed.
-     * - `false` if the content was NOT gzip compressed.
-     * - `undefined` if it is unknown
-     */
-    readonly gz?: boolean | undefined;
 }
 
 export interface FileResource extends FileResourceBase {
