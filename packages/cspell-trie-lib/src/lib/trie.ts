@@ -70,8 +70,8 @@ export class Trie {
         const minLength: number | undefined = !minCompoundLength
             ? undefined
             : minCompoundLength === true
-            ? defaultLegacyMinCompoundLength
-            : minCompoundLength;
+              ? defaultLegacyMinCompoundLength
+              : minCompoundLength;
         const options = this.createFindOptions({
             compoundMode: minLength ? 'legacy' : 'compound',
             legacyMinCompoundLength: minLength,

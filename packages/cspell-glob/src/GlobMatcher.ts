@@ -134,8 +134,8 @@ export class GlobMatcher {
         patterns = Array.isArray(patterns)
             ? patterns
             : typeof patterns === 'string'
-            ? patterns.split(/\r?\n/g)
-            : [patterns];
+              ? patterns.split(/\r?\n/g)
+              : [patterns];
         const globPatterns = normalizeGlobPatterns(patterns, this.options);
         this.patternsNormalizedToRoot = globPatterns
             .map((g) => normalizeGlobToRoot(g, normalizedRoot, nodePath))

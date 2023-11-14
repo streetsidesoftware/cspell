@@ -119,6 +119,6 @@ function ab(data: string | Buffer | ArrayBufferView, encoding?: BufferEncoding):
     return typeof data === 'string'
         ? Buffer.from(data, encoding)
         : data instanceof Buffer
-        ? Buffer.from(data)
-        : Buffer.from(arrayBufferViewToBuffer(data));
+          ? Buffer.from(data)
+          : Buffer.from(arrayBufferViewToBuffer(data));
 }

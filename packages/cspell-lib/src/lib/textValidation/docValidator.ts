@@ -117,8 +117,8 @@ export class DocumentValidator {
         const localConfigFn = optionsConfigFile
             ? () => loadConfigSync(optionsConfigFile, settings)
             : useSearchForConfig
-            ? () => searchForDocumentConfigSync(this._document, settings, settings)
-            : undefined;
+              ? () => searchForDocumentConfigSync(this._document, settings, settings)
+              : undefined;
 
         const localConfig = localConfigFn && wrapCall(localConfigFn, (e) => this.addPossibleError(e))();
         this.addPossibleError(localConfig?.__importRef?.error);
@@ -175,8 +175,8 @@ export class DocumentValidator {
         const pLocalConfig = options.configFile
             ? loadConfig(options.configFile, settings)
             : useSearchForConfig
-            ? searchForDocumentConfig(this._document, settings, settings)
-            : undefined;
+              ? searchForDocumentConfig(this._document, settings, settings)
+              : undefined;
         const localConfig = (await catchPromiseError(pLocalConfig, (e) => this.addPossibleError(e))) || {};
 
         this.addPossibleError(localConfig?.__importRef?.error);
@@ -540,8 +540,8 @@ export async function shouldCheckDocument(
         const pLocalConfig = options.configFile
             ? loadConfig(options.configFile, settings)
             : useSearchForConfig
-            ? searchForDocumentConfig(doc, settings, settings)
-            : undefined;
+              ? searchForDocumentConfig(doc, settings, settings)
+              : undefined;
 
         const localConfig = (await catchPromiseError(pLocalConfig, addPossibleError)) || {};
 

@@ -22,9 +22,9 @@ export function isErrnoException(e: unknown): e is NodeJS.ErrnoException {
     if (!isError(e)) return false;
     const ex = <NodeJS.ErrnoException>e;
     return (
-        typeof ex.errno in allowNumberOrUndefined &&
-        typeof ex.code in allowStringOrUndefined &&
-        typeof ex.path in allowStringOrUndefined
+        (typeof ex.errno) in allowNumberOrUndefined &&
+        (typeof ex.code) in allowStringOrUndefined &&
+        (typeof ex.path) in allowStringOrUndefined
     );
 }
 
@@ -32,7 +32,7 @@ export function isError(e: unknown): e is Error {
     if (e instanceof Error) return true;
     if (!e || typeof e !== 'object') return false;
     const ex = <Error>e;
-    return typeof ex.name == 'string' && typeof ex.message == 'string' && typeof ex.stack in allowStringOrUndefined;
+    return typeof ex.name == 'string' && typeof ex.message == 'string' && (typeof ex.stack) in allowStringOrUndefined;
 }
 
 export function toError(e: unknown, errorFactory: UnknownErrorConstructor = UnknownError): Error {

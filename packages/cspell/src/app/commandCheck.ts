@@ -48,8 +48,8 @@ export function commandCheck(prog: Command): Command {
                             item.flagIE === App.IncludeExcludeFlag.EXCLUDE
                                 ? chalk.gray
                                 : item.isError
-                                ? chalk.red
-                                : chalk.whiteBright;
+                                  ? chalk.red
+                                  : chalk.whiteBright;
                         const t = fn(item.text);
                         process.stdout.write(t);
                         issueCount += item.isError ? 1 : 0;

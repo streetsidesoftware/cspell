@@ -134,10 +134,10 @@ function formatDictionaryLocation(
         const prefix = isNodeModule
             ? '[node_modules]/'
             : relPath.startsWith('..' + iPath.sep + '..')
-            ? '.../'
-            : relPath.startsWith('..' + iPath.sep)
-            ? '../'
-            : '';
+              ? '.../'
+              : relPath.startsWith('..' + iPath.sep)
+                ? '../'
+                : '';
         return prefix + iPath.basename(dictSource);
     }
     if (format === 'full') return dictSource;

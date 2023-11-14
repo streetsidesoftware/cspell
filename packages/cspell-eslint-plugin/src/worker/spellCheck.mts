@@ -331,8 +331,8 @@ function tagLiteral(node: ASTNode | TSESTree.Node): string {
                 ? 'string.double'
                 : 'string.single'
             : node.value === null
-            ? 'null'
-            : kind;
+              ? 'null'
+              : kind;
     return node.type + '.' + extra;
 }
 

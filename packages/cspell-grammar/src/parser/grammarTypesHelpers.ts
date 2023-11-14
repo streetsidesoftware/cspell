@@ -21,12 +21,12 @@ const TypeofEnd = { ...TypeofBegin, undefined: true };
 
 export function isPatternMatch(pattern: Pattern): pattern is PatternMatch {
     const p = <PatternMatch>pattern;
-    return !!p.match && typeof p.match in TypeofMatch;
+    return !!p.match && (typeof p.match) in TypeofMatch;
 }
 
 export function isPatternBeginEnd(pattern: Pattern): pattern is PatternBeginEnd {
     const p = <PatternBeginEnd>pattern;
-    return p.begin !== undefined && typeof p.begin in TypeofBegin && typeof p.end in TypeofEnd;
+    return p.begin !== undefined && (typeof p.begin) in TypeofBegin && (typeof p.end) in TypeofEnd;
 }
 
 export function isPatternPatterns(p: Pattern): p is PatternPatterns {
