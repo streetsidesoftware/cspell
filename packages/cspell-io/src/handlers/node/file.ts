@@ -8,9 +8,9 @@ import { gunzipSync, gzip } from 'zlib';
 
 import { arrayBufferViewToBuffer } from '../../common/arrayBuffers.js';
 import { encodeString, isGZipped } from '../../common/encode-decode.js';
+import { CFileResource } from '../../common/index.js';
 import { assert } from '../../errors/assert.js';
 import { toError } from '../../errors/index.js';
-import { CFileResource } from '../../index.js';
 import type { FileReference } from '../../models/FileResource.js';
 import { decodeDataUrl, guessMimeType, toDataUrl } from '../../node/dataUrl.js';
 import { fetchURL } from '../../node/file/fetch.js';
