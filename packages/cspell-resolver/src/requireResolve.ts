@@ -1,7 +1,7 @@
-import { npm, yarn } from 'global-dirs';
+import globalDirectory from 'global-directory';
 
 export function resolveGlobal(modulesName: string): string | undefined {
-    const paths = [npm.packages, yarn.packages];
+    const paths = [globalDirectory.npm.packages, globalDirectory.yarn.packages];
     return requireResolve(modulesName, paths);
 }
 

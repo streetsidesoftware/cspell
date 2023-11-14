@@ -12,9 +12,10 @@
   "author": "Jason Dent <jason@streetsidesoftware.nl>",
   "homepage": "https://github.com/streetsidesoftware/cspell/tree/main/packages/cspell-resolver#readme",
   "license": "MIT",
-  "type": "commonjs",
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
+  "type": "module",
+  "exports": {
+    ".": "./dist/index.js"
+  },
   "directories": {
     "dist": "dist"
   },
@@ -47,6 +48,6 @@
     "node": ">=18"
   },
   "dependencies": {
-    "global-dirs": "^3.0.1"
+    "global-directory": "^4.0.1"
   }
 }
