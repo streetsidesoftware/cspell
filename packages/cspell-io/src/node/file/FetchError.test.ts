@@ -1,7 +1,7 @@
 import { describe, expect, test } from 'vitest';
 
 import { FetchUrlError } from './FetchError.js';
-import { toURL } from './util.js';
+import { toURL } from './url.js';
 
 const oc = expect.objectContaining;
 

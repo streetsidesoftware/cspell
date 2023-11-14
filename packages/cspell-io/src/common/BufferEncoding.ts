@@ -1,4 +1,7 @@
-import type { BufferEncoding } from '../models/BufferEncoding.js';
-export type { BufferEncoding } from '../models/BufferEncoding.js';
+import type { BufferEncoding, TextEncoding } from '../models/BufferEncoding.js';
+export type { BufferEncoding, TextEncoding } from '../models/BufferEncoding.js';
 
-export type BufferEncodingExt = BufferEncoding | 'utf16be';
+type TextEncodingExtra = 'utf-16be' | 'utf-16le' | 'utf16be' | 'utf16le';
+
+export type BufferEncodingExt = BufferEncoding | TextEncodingExtra;
+export type TextEncodingExt = TextEncoding | TextEncodingExtra;

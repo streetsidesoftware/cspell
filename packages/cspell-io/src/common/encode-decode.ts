@@ -1,50 +1,75 @@
-import { arrayBufferViewToBuffer, copyArrayBufferView, toUint8Array } from './arrayBuffers.js';
-import type { BufferEncodingExt } from './BufferEncoding.js';
+import { gunzipSync } from 'node:zlib';
+
+import { arrayBufferViewToBuffer, asUint8Array, swap16, swapBytes } from './arrayBuffers.js';
+import type { BufferEncodingExt, TextEncodingExt } from './BufferEncoding.js';
 
 const BOM_BE = 0xfeff;
 const BOM_LE = 0xfffe;
 
+const decoderUTF8 = new TextDecoder('utf-8');
+const decoderUTF16LE = new TextDecoder('utf-16le');
+const decoderUTF16BE = createTextDecoderUtf16BE();
+
+// const encoderUTF8 = new TextEncoder();
+// const encoderUTF16LE = new TextEncoder('utf-16le');
+
 export function decodeUtf16LE(data: ArrayBufferView): string {
-    let buf = arrayBufferViewToBuffer(data);
+    const buf = asUint8Array(data);
     const bom = (buf[0] << 8) | buf[1];
-    buf = bom === BOM_LE ? buf.subarray(2) : buf;
-    return buf.toString('utf16le');
+    return decoderUTF16LE.decode(bom === BOM_LE ? buf.subarray(2) : buf);
 }
 
-export function decodeUtf16BE(buf: ArrayBufferView): string {
-    return decodeUtf16LE(swapBytes(buf));
+export function decodeUtf16BE(data: ArrayBufferView): string {
+    const buf = asUint8Array(data);
+    const bom = (buf[0] << 8) | buf[1];
+    return decoderUTF16BE.decode(bom === BOM_BE ? buf.subarray(2) : buf);
 }
 
-export function decode(data: ArrayBufferView, encoding?: BufferEncodingExt): string {
-    const buf = arrayBufferViewToBuffer(data);
-    switch (encoding) {
-        case 'utf16be':
-            return decodeUtf16BE(buf);
-        case 'utf16le':
-            return decodeUtf16LE(buf);
+export function decodeToString(data: ArrayBufferView, encoding?: TextEncodingExt): string {
+    if (isGZipped(data)) {
+        return decodeToString(decompressBuffer(data), encoding);
     }
-    if (buf.length < 2 || (encoding && !encoding.startsWith('utf'))) return buf.toString(encoding);
+    const buf = asUint8Array(data);
     const bom = (buf[0] << 8) | buf[1];
     if (bom === BOM_BE || (buf[0] === 0 && buf[1] !== 0)) return decodeUtf16BE(buf);
     if (bom === BOM_LE || (buf[0] !== 0 && buf[1] === 0)) return decodeUtf16LE(buf);
-    return buf.toString(encoding);
+
+    if (!encoding) return decoderUTF8.decode(buf);
+
+    switch (encoding) {
+        case 'utf-16be':
+        case 'utf16be':
+            return decodeUtf16BE(buf);
+        case 'utf-16le':
+        case 'utf16le':
+            return decodeUtf16LE(buf);
+        case 'utf-8':
+        case 'utf8':
+            return decoderUTF8.decode(buf);
+    }
+
+    throw new UnsupportedEncodingError(encoding);
 }
 
-export function swapBytesInPlace(data: ArrayBufferView): ArrayBufferView {
-    const buf = arrayBufferViewToBuffer(data);
-    buf.swap16();
-    return buf;
-}
+export function decode(data: ArrayBufferView, encoding?: BufferEncodingExt): string {
+    switch (encoding) {
+        case 'base64':
+        case 'base64url':
+        case 'hex':
+            return arrayBufferViewToBuffer(data).toString(encoding);
+    }
 
-export function swapBytes(data: ArrayBufferView): ArrayBufferView {
-    const buf = copyArrayBufferView(data);
-    return swapBytesInPlace(buf);
+    const result = decodeToString(data, encoding);
+    // console.log('decode %o', { data, encoding, result });
+    return result;
 }
 
 export function encodeString(str: string, encoding?: BufferEncodingExt, bom?: boolean): ArrayBufferView {
     switch (encoding) {
+        case 'utf-16be':
         case 'utf16be':
             return encodeUtf16BE(str, bom);
+        case 'utf-16le':
         case 'utf16le':
             return encodeUtf16LE(str, bom);
     }
@@ -64,11 +89,11 @@ export function encodeUtf16LE(str: string, bom = true): ArrayBufferView {
 }
 
 export function encodeUtf16BE(str: string, bom = true): ArrayBufferView {
-    return swapBytesInPlace(encodeUtf16LE(str, bom));
+    return swap16(encodeUtf16LE(str, bom));
 }
 
 export function calcEncodingFromBom(data: ArrayBufferView): 'utf16be' | 'utf16le' | undefined {
-    const buf = toUint8Array(data);
+    const buf = asUint8Array(data);
     if (buf.length < 2) return undefined;
     switch ((buf[0] << 8) | buf[1]) {
         case BOM_BE:
@@ -77,4 +102,36 @@ export function calcEncodingFromBom(data: ArrayBufferView): 'utf16be' | 'utf16le
             return 'utf16le';
     }
     return undefined;
+}
+
+function createTextDecoderUtf16BE() {
+    try {
+        const decoder = new TextDecoder('utf-16be');
+        return decoder;
+    } catch (e) {
+        return {
+            encoding: 'utf-16be',
+            fatal: false,
+            ignoreBOM: false,
+            decode: (input: ArrayBufferView) => decoderUTF16LE.decode(swapBytes(input)),
+        };
+    }
+}
+
+export class UnsupportedEncodingError extends Error {
+    constructor(encoding: string) {
+        super(`Unsupported encoding: ${encoding}`);
+    }
+}
+
+export function isGZipped(data: ArrayBufferView | string): boolean {
+    if (typeof data === 'string') return false;
+    const buf = asUint8Array(data);
+    return buf[0] === 0x1f && buf[1] === 0x8b;
+}
+
+function decompressBuffer(data: ArrayBufferView): ArrayBufferView {
+    if (!isGZipped(data)) return data;
+    const buf = arrayBufferViewToBuffer(data);
+    return gunzipSync(buf);
 }
