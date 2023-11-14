@@ -689,9 +689,9 @@ importers:
 
   packages/cspell-resolver:
     dependencies:
-      global-dirs:
-        specifier: ^3.0.1
-        version: 3.0.1
+      global-directory:
+        specifier: ^4.0.1
+        version: 4.0.1
 
   packages/cspell-service-bus: {}
 
@@ -9575,6 +9575,13 @@ packages:
       minimatch: 5.1.6
       once: 1.4.0
 
+  /global-directory@4.0.1:
+    resolution: {integrity: sha512-wHTUcDUoZ1H5/0iVqEudYW4/kAlN5cZ3j/bXn0Dpbizl9iaUVeWSHqiOjsgk6OW2bkLclbBjzewBz6weQ1zA2Q==}
+    engines: {node: '>=18'}
+    dependencies:
+      ini: 4.1.1
+    dev: false
+
   /global-dirs@3.0.1:
     resolution: {integrity: sha512-NBcGGFbBA9s1VzD41QXDG+3++t9Mn5t1FpLdhESY6oKY4gYTFpX4wO3sqGUa0Srjtbfj3szX0RnemmrVRUdULA==}
     engines: {node: '>=10'}
@@ -10174,6 +10181,11 @@ packages:
   /ini@2.0.0:
     resolution: {integrity: sha512-7PnF4oN3CvZF23ADhA5wRaYEQpJ8qygSkbtTXWBeXWXmEVRXK+1ITciHWwHhsjv1TmW0MgacIv6hEi5pX5NQdA==}
     engines: {node: '>=10'}
+
+  /ini@4.1.1:
+    resolution: {integrity: sha512-QQnnxNyfvmHFIsj7gkPcYymR8Jdw/o7mp5ZFihxn6h8Ci6fh3Dx4E1gPjpQEpIuPo9XVNY/ZUwh4BPMjGyL01g==}
+    engines: {node: ^14.17.0 || ^16.13.0 || >=18.0.0}
+    dev: false
 
   /inject-markdown@2.1.0:
     resolution: {integrity: sha512-rcPxAakESLYnuypcve4FgSm7NJzSQN7nyqroBL+S6cy0t/93ryvohJfUS2Dn+lVwC3D9J0E1ZQzcVK5ZFdVXGQ==}
