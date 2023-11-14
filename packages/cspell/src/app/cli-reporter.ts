@@ -124,16 +124,16 @@ export function getReporter(options: ReporterOptions): FinalizedReporter {
     const issueTemplate = options.wordsOnly
         ? templateIssueWordsOnly
         : options.legacy
-        ? templateIssueLegacy
-        : options.showContext
-        ? options.showSuggestions
-            ? templateIssueWithContextWithSuggestions
-            : templateIssueWithContext
-        : options.showSuggestions
-        ? templateIssueWithSuggestions
-        : options.showSuggestions === false
-        ? templateIssueNoFix
-        : templateIssue;
+          ? templateIssueLegacy
+          : options.showContext
+            ? options.showSuggestions
+                ? templateIssueWithContextWithSuggestions
+                : templateIssueWithContext
+            : options.showSuggestions
+              ? templateIssueWithSuggestions
+              : options.showSuggestions === false
+                ? templateIssueNoFix
+                : templateIssue;
     const { fileGlobs, silent, summary, issues, progress, verbose, debug } = options;
 
     const emitters: InfoEmitter = {

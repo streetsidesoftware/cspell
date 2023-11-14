@@ -130,8 +130,8 @@ export function readFileInfo(
             return handleNotFound && error.code === 'EISDIR'
                 ? Promise.resolve({ text: '', filename, errorCode: error.code })
                 : handleNotFound && error.code === 'ENOENT'
-                ? Promise.resolve({ text: '', filename, errorCode: error.code })
-                : Promise.reject(new IOError(`Error reading file: "${filename}"`, error));
+                  ? Promise.resolve({ text: '', filename, errorCode: error.code })
+                  : Promise.reject(new IOError(`Error reading file: "${filename}"`, error));
         },
     );
 }

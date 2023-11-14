@@ -56,10 +56,10 @@ export function emitSuggestionResult(result: TimedSuggestionsForWordResult, opti
                 sug.forbidden && sug.isPreferred
                     ? chalk.red('*')
                     : sug.forbidden
-                    ? chalk.red('X')
-                    : sug.isPreferred
-                    ? chalk.yellow('*')
-                    : ' ';
+                      ? chalk.red('X')
+                      : sug.isPreferred
+                        ? chalk.yellow('*')
+                        : ' ';
             const ignore = sug.noSuggest ? chalk.yellow('N') : ' ';
             const strCost = padLeft(cost.toString(10), 4);
             const dicts = dictionaries.map((n) => chalk.gray(n)).join(', ');
@@ -77,8 +77,8 @@ function formatWord(word: string, r: SuggestedWord): string {
     return r.forbidden || r.noSuggest
         ? chalk.gray(chalk.strikethrough(word))
         : word === r.wordAdjustedToMatchCase
-        ? diff(word, r.word)
-        : word;
+          ? diff(word, r.word)
+          : word;
 }
 
 function diff(wordA: string, wordB: string): string {

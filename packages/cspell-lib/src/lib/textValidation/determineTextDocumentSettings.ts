@@ -35,8 +35,8 @@ export function determineTextDocumentSettings(
     const languageIds = fileSettings?.languageId?.length
         ? fileSettings.languageId
         : doc.languageId
-        ? doc.languageId
-        : getLanguageForFilename(filename);
+          ? doc.languageId
+          : getLanguageForFilename(filename);
     if (doc.locale) {
         fileSettings.language = doc.locale;
     }

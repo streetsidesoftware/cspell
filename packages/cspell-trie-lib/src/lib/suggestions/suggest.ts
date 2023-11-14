@@ -171,12 +171,12 @@ export function* genCompoundableSuggestions(
                 w === curLetter
                     ? 0
                     : wG & cG
-                    ? mapSubCost
-                    : curLetter === lastSugLetter
-                    ? w === lastLetter
-                        ? psc
-                        : c
-                    : c;
+                      ? mapSubCost
+                      : curLetter === lastSugLetter
+                        ? w === lastLetter
+                            ? psc
+                            : c
+                        : c;
             const e = Math.min(
                 matrix[d - 1][i - 1] + subCost, // substitute
                 matrix[d - 1][i] + ci, // insert
@@ -198,12 +198,12 @@ export function* genCompoundableSuggestions(
                 w === curLetter
                     ? 0
                     : wG & cG
-                    ? mapSubCost
-                    : curLetter === lastSugLetter
-                    ? w === lastLetter
-                        ? psc
-                        : c
-                    : c;
+                      ? mapSubCost
+                      : curLetter === lastSugLetter
+                        ? w === lastLetter
+                            ? psc
+                            : c
+                        : c;
             // if (i - 1) is out of range, use the last value.
             // no need to be exact, the value will be past maxCost.
             const j = Math.min(bb, i - 1);

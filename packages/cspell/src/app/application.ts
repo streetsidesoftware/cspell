@@ -89,8 +89,8 @@ export async function* suggestions(
     const iWords = options.repl
         ? pipeAsync(toAsyncIterable(words, simpleRepl()), opTap(tapStart))
         : options.useStdin
-        ? pipeAsync(toAsyncIterable(words, readStdin()), opTap(tapStart))
-        : words.map(mapStart);
+          ? pipeAsync(toAsyncIterable(words, readStdin()), opTap(tapStart))
+          : words.map(mapStart);
     try {
         const results = pipeAsync(
             suggestionsForWords(iWords, util.clean({ ...options }), configFile.config),

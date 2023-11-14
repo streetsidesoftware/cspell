@@ -76,8 +76,8 @@ export async function run(program: program.Command, argv: string[], flags?: Feat
         const report = options.check
             ? await reportCheckChecksumFile(options.check, files, options)
             : options.update
-            ? await updateChecksumForFiles(options.update, files, options)
-            : await reportChecksumForFiles(files, options);
+              ? await updateChecksumForFiles(options.update, files, options)
+              : await reportChecksumForFiles(files, options);
         console.log('%s', report.report);
 
         if (!report.passed) {

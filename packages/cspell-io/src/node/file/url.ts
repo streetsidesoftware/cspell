@@ -22,8 +22,8 @@ export function toURL(filename: string | URL): URL {
     return filename instanceof URL || typeof filename !== 'string'
         ? filename
         : isUrlLike(filename)
-        ? new URL(filename)
-        : pathToFileURL(filename);
+          ? new URL(filename)
+          : pathToFileURL(filename);
 }
 
 const regMatchFilename = /filename=([^;,]*)/;
