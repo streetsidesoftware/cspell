@@ -18,12 +18,10 @@ export function createReaderWriter(
     return new CSpellConfigFileReaderWriterImpl(io, deserializers.concat(defaultDeserializers));
 }
 
-function readFile(uriFile: string): Promise<string> {
-    const uri = new URL(uriFile);
-    return fs.readFile(uri, 'utf-8');
+function readFile(url: URL): Promise<string> {
+    return fs.readFile(url, 'utf-8');
 }
 
-function writeFile(uriFile: string, content: string): Promise<void> {
-    const uri = new URL(uriFile);
-    return fs.writeFile(uri, content);
+function writeFile(url: URL, content: string): Promise<void> {
+    return fs.writeFile(url, content);
 }

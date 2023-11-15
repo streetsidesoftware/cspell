@@ -1,6 +1,6 @@
 import { describe, expect, test, vi } from 'vitest';
 
-import type { CSpellConfigFile } from './CSpellConfigFile.js';
+import type { ICSpellConfigFile } from './CSpellConfigFile.js';
 import { CSpellConfigFileReaderWriterImpl } from './CSpellConfigFileReaderWriter.js';
 import { defaultDeserializers } from './deserializers/index.js';
 import type { IO } from './IO.js';
@@ -10,8 +10,8 @@ const oc = expect.objectContaining;
 
 describe('CSpellConfigFileReaderWriter', () => {
     test.each`
-        uri                      | content                   | expected
-        ${'file://package.json'} | ${json({ name: 'name' })} | ${oc({ uri: 'file://package.json', settings: {} })}
+        uri                       | content                   | expected
+        ${'file:///package.json'} | ${json({ name: 'name' })} | ${oc({ url: new URL('file:///package.json'), settings: {} })}
     `('readConfig', async ({ uri, content, expected }) => {
         const io: IO = {
             readFile: vi.fn(() => content),
@@ -22,8 +22,8 @@ describe('CSpellConfigFileReaderWriter', () => {
     });
 
     test.each`
-        uri                   | content | expected
-        ${'file://cspell.js'} | ${''}   | ${new Error('Unable to parse config file: "file://cspell.js"')}
+        uri                    | content | expected
+        ${'file:///cspell.js'} | ${''}   | ${new Error('Unable to parse config file: "file:///cspell.js"')}
     `('fail readConfig', async ({ uri, content, expected }) => {
         const io: IO = {
             readFile: vi.fn(() => content),
@@ -34,8 +34,8 @@ describe('CSpellConfigFileReaderWriter', () => {
     });
 
     test.each`
-        uri                   | content
-        ${'file://cspell.js'} | ${'content'}
+        uri                    | content
+        ${'file:///cspell.js'} | ${'content'}
     `('writeConfig', async ({ uri, content }) => {
         const io: IO = {
             readFile: vi.fn(() => content),
@@ -43,8 +43,8 @@ describe('CSpellConfigFileReaderWriter', () => {
         };
 
         const rw = new CSpellConfigFileReaderWriterImpl(io, defaultDeserializers);
-        const cf: CSpellConfigFile = {
-            uri,
+        const cf: ICSpellConfigFile = {
+            url: uri,
             settings: {},
             serialize: vi.fn(() => content),
             addWords: vi.fn(),

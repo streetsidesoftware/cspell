@@ -2,19 +2,30 @@ import type { CSpellSettings } from '@cspell/cspell-types';
 
 import type { Serializer } from './Serializer.js';
 
-export interface CSpellConfigFile {
-    readonly uri: string;
+export interface ICSpellConfigFile {
+    readonly url: URL;
     readonly settings: CSpellSettings;
-    serialize(): string;
+    readonly readonly?: boolean;
+    serialize?: () => string;
     addWords(words: string[]): this;
 }
 
-export class ImplCSpellConfigFile implements CSpellConfigFile {
+export abstract class CSpellConfigFile implements ICSpellConfigFile {
+    constructor(readonly url: URL) {}
+
+    abstract readonly settings: CSpellSettings;
+    abstract serialize(): string;
+    abstract addWords(words: string[]): this;
+}
+
+export class ImplCSpellConfigFile extends CSpellConfigFile {
     constructor(
-        readonly uri: string,
+        readonly url: URL,
         readonly settings: CSpellSettings,
         readonly serializer: Serializer,
-    ) {}
+    ) {
+        super(url);
+    }
 
     serialize(): string {
         return this.serializer(this.settings);
@@ -30,6 +41,7 @@ export class ImplCSpellConfigFile implements CSpellConfigFile {
 
 /**
  * Adds words to a list, sorts the list and makes sure it is unique.
+ * Note: this method is used to try and preserve comments in the config file.
  * @param list - list to be modified
  * @param toAdd - words to add
  */

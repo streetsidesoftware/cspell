@@ -1,4 +1,6 @@
 export interface IO {
-    readFile(uri: string): Promise<string>;
-    writeFile(uri: string, content: string): Promise<void>;
+    readFile(url: URL): Promise<string>;
+    writeFile(url: URL, content: string): Promise<void>;
 }
+
+import.meta.resolve;

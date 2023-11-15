@@ -1,17 +1,17 @@
-import type { CSpellConfigFile } from './CSpellConfigFile.js';
+import type { ICSpellConfigFile } from './CSpellConfigFile.js';
 
 export interface DeserializerParams {
-    uri: string;
+    url: URL;
     content: string;
 }
 
 export interface DeserializerNext {
-    (content: DeserializerParams): CSpellConfigFile;
+    (content: DeserializerParams): ICSpellConfigFile;
 }
 
 export interface Deserializer {
     /**
      * If a Deserializer can handle a given request, it returns a CSpellConfigFile, otherwise it calls `next`.
      */
-    (params: DeserializerParams, next: DeserializerNext): CSpellConfigFile;
+    (params: DeserializerParams, next: DeserializerNext): ICSpellConfigFile;
 }

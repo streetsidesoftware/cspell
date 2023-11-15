@@ -1,24 +1,24 @@
 import type { CSpellSettings } from '@cspell/cspell-types';
 
-import type { CSpellConfigFile } from '../CSpellConfigFile.js';
+import type { ICSpellConfigFile } from '../CSpellConfigFile.js';
 import { ImplCSpellConfigFile } from '../CSpellConfigFile.js';
 import type { Deserializer, DeserializerNext, DeserializerParams } from '../Deserializer.js';
 import { detectIndent } from './util.js';
 
-const isSupportedFormat = /package\.json(?=$|[?#])/;
+const isSupportedFormat = /\bpackage\.json$/i;
 
-function _deserializerPackageJson(params: DeserializerParams, next: DeserializerNext): CSpellConfigFile {
-    const { uri, content } = params;
-    if (!isSupportedFormat.test(uri)) return next(params);
+function _deserializerPackageJson(params: DeserializerParams, next: DeserializerNext): ICSpellConfigFile {
+    const { url: url, content } = params;
+    if (!isSupportedFormat.test(url.pathname)) return next(params);
 
     const packageJson = JSON.parse(content);
     if (!packageJson || typeof packageJson !== 'object' || Array.isArray(packageJson)) {
-        throw new Error(`Unable to parse ${uri}`);
+        throw new Error(`Unable to parse ${url}`);
     }
     packageJson['cspell'] = packageJson['cspell'] || {};
     const cspell = packageJson['cspell'];
     if (typeof cspell !== 'object' || Array.isArray(cspell)) {
-        throw new Error(`Unable to parse ${uri}`);
+        throw new Error(`Unable to parse ${url}`);
     }
 
     const indent = detectIndent(content);
@@ -28,7 +28,7 @@ function _deserializerPackageJson(params: DeserializerParams, next: Deserializer
         return JSON.stringify(packageJson, null, indent) + '\n';
     }
 
-    return new ImplCSpellConfigFile(uri, cspell, serialize);
+    return new ImplCSpellConfigFile(url, cspell, serialize);
 }
 
 export const deserializerPackageJson: Deserializer = _deserializerPackageJson;

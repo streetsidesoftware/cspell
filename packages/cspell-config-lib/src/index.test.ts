@@ -1,6 +1,8 @@
-import { promises as fs } from 'fs';
+import { promises as fs } from 'node:fs';
+import { resolve } from 'node:path';
+import { pathToFileURL } from 'node:url';
+
 import { describe, expect, test } from 'vitest';
-import { URI } from 'vscode-uri';
 
 import * as index from './index.js';
 import { createReaderWriter } from './index.js';
@@ -31,7 +33,7 @@ describe('cspell-config', () => {
         const tempFile = tempPath(fixture);
         await copyFile(fixtureFile, tempFile);
         const rw = createReaderWriter();
-        const uri = URI.file(tempFile).toString();
+        const uri = pathToFileURL(resolve(tempFile));
         const cfg = await rw.readConfig(uri);
         cfg.addWords(addWords);
         await rw.writeConfig(cfg);

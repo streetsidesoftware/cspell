@@ -1,3 +1,5 @@
+import { pathToFileURL } from 'node:url';
+
 import { describe, expect, test } from 'vitest';
 
 import { defaultNextDeserializer } from '../CSpellConfigFileReaderWriter.js';
@@ -13,20 +15,20 @@ describe('packageJson', () => {
         ${'package.json'}     | ${'{}'}                      | ${oc({ settings: {} })}
         ${'package.json?x=5'} | ${'{"cspell":{"words":[]}}'} | ${oc({ settings: { words: [] } })}
     `('success $uri', ({ uri, content, expected }) => {
-        expect(deserializerPackageJson({ uri, content }, next)).toEqual(expected);
+        expect(deserializerPackageJson({ url: new URL(uri, import.meta.url), content }, next)).toEqual(expected);
     });
 
     test.each`
-        uri               | content             | expected
-        ${''}             | ${''}               | ${'Unable to parse config file: ""'}
-        ${'cspell.js'}    | ${''}               | ${'Unable to parse config file: "cspell.js"'}
-        ${'cspell.json'}  | ${''}               | ${'Unable to parse config file: "cspell.json"'}
-        ${'cspell.yaml'}  | ${''}               | ${'Unable to parse config file: "cspell.yaml"'}
-        ${'package.json'} | ${''}               | ${'Unexpected end of JSON input'}
-        ${'package.json'} | ${'[]'}             | ${'Unable to parse package.json'}
-        ${'package.json'} | ${'{"cspell": []}'} | ${'Unable to parse package.json'}
-    `('fail $uri', ({ uri, content, expected }) => {
-        expect(() => deserializerPackageJson({ uri, content }, next)).toThrow(expected);
+        url                       | content             | expected
+        ${'file:///'}             | ${''}               | ${'Unable to parse config file: "file:///"'}
+        ${'file:///cspell.js'}    | ${''}               | ${'Unable to parse config file: "file:///cspell.js"'}
+        ${'file:///cspell.json'}  | ${''}               | ${'Unable to parse config file: "file:///cspell.json"'}
+        ${'file:///cspell.yaml'}  | ${''}               | ${'Unable to parse config file: "file:///cspell.yaml"'}
+        ${'file:///package.json'} | ${''}               | ${'Unexpected end of JSON input'}
+        ${'file:///package.json'} | ${'[]'}             | ${'Unable to parse file:///package.json'}
+        ${'file:///package.json'} | ${'{"cspell": []}'} | ${'Unable to parse file:///package.json'}
+    `('fail $url', ({ url, content, expected }) => {
+        expect(() => deserializerPackageJson({ url: new URL(url), content }, next)).toThrow(expected);
     });
 
     test.each`
@@ -35,7 +37,7 @@ describe('packageJson', () => {
         ${'package.json?x=5'} | ${'{\n  "cspell":{"words":[]}}'} | ${json({ cspell: { words: [] } }, 2)}
         ${'package.json?x=5'} | ${'{\n  "cspell":{"words":[]}}'} | ${json({ cspell: { words: [] } }, 2)}
     `('serialize $uri', ({ uri, content, expected }) => {
-        const file = deserializerPackageJson({ uri, content }, next);
+        const file = deserializerPackageJson({ url: new URL(uri, import.meta.url), content }, next);
         expect(file?.serialize()).toEqual(expected);
     });
 });

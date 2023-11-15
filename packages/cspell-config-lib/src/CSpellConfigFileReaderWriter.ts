@@ -1,16 +1,17 @@
-import type { CSpellConfigFile } from './CSpellConfigFile.js';
+import type { ICSpellConfigFile } from './CSpellConfigFile.js';
 import type { Deserializer, DeserializerNext, DeserializerParams } from './Deserializer.js';
 import type { IO } from './IO.js';
+import { toURL } from './util/toURL.js';
 
 export const defaultNextDeserializer: DeserializerNext = (content: DeserializerParams) => {
-    throw new Error(`Unable to parse config file: "${content.uri}"`);
+    throw new Error(`Unable to parse config file: "${content.url}"`);
 };
 
 export interface CSpellConfigFileReaderWriter {
     readonly io: IO;
     readonly deserializers: Deserializer[];
-    readConfig(uri: string): Promise<CSpellConfigFile>;
-    writeConfig(configFile: CSpellConfigFile): Promise<void>;
+    readConfig(uri: URL | string): Promise<ICSpellConfigFile>;
+    writeConfig(configFile: ICSpellConfigFile): Promise<void>;
 }
 
 export class CSpellConfigFileReaderWriterImpl implements CSpellConfigFileReaderWriter {
@@ -19,12 +20,13 @@ export class CSpellConfigFileReaderWriterImpl implements CSpellConfigFileReaderW
         readonly deserializers: Deserializer[],
     ) {}
 
-    async readConfig(uri: string): Promise<CSpellConfigFile> {
-        const content = await this.io.readFile(uri);
+    async readConfig(uri: URL | string): Promise<ICSpellConfigFile> {
+        const url = toURL(uri);
+        const content = await this.io.readFile(url);
 
         let next: DeserializerNext = defaultNextDeserializer;
 
-        const desContent: DeserializerParams = { uri, content };
+        const desContent: DeserializerParams = { url, content };
 
         for (const des of [...this.deserializers].reverse()) {
             next = curry(des, next);
@@ -33,9 +35,9 @@ export class CSpellConfigFileReaderWriterImpl implements CSpellConfigFileReaderW
         return next(desContent);
     }
 
-    writeConfig(configFile: CSpellConfigFile): Promise<void> {
+    writeConfig(configFile: ICSpellConfigFile): Promise<void> {
         const content = configFile.serialize();
-        return this.io.writeFile(configFile.uri, content);
+        return this.io.writeFile(configFile.url, content);
     }
 }
 
