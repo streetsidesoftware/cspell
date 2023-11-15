@@ -1,10 +1,11 @@
 import { promises as fs } from 'fs';
+import { describe, expect, test } from 'vitest';
 import { URI } from 'vscode-uri';
 
-import * as index from './index';
-import { createReaderWriter } from './index';
-import { fixtures } from './test-helpers/fixtures';
-import { copyFile, tempPath } from './test-helpers/util';
+import * as index from './index.js';
+import { createReaderWriter } from './index.js';
+import { fixtures } from './test-helpers/fixtures.js';
+import { copyFile, tempPath } from './test-helpers/util.js';
 
 describe('index', () => {
     test('index', () => {

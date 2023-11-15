@@ -9,7 +9,10 @@
   "author": "Jason Dent <jason@streetsidesoftware.nl>",
   "homepage": "https://github.com/streetsidesoftware/cspell/tree/main/packages/cspell-config#readme",
   "license": "MIT",
-  "main": "dist/index.js",
+  "type": "module",
+  "exports": {
+    ".": "./dist/index.js"
+  },
   "directories": {
     "dist": "dist"
   },
@@ -27,9 +30,9 @@
     "watch": "tsc -p . -w",
     "clean": "shx rm -rf dist temp coverage \"*.tsbuildInfo\"",
     "clean-build": "pnpm run clean && pnpm run build",
-    "coverage": "jest --coverage",
-    "test-watch": "jest --watch",
-    "test": "jest"
+    "coverage": "vitest --coverage",
+    "test-watch": "vitest",
+    "test": "vitest run"
   },
   "repository": {
     "type": "git",

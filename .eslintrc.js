@@ -75,17 +75,6 @@ const config = {
             },
         },
         {
-            files: ['**/*.test.ts', '**/*.spec.ts'],
-            excludedFiles: ['**/cspell-gitignore/**'],
-            extends: 'plugin:jest/recommended',
-            env: {
-                jest: true,
-            },
-            rules: {
-                'jest/valid-title': 'warn',
-            },
-        },
-        {
             files: ['packages/cspell-pipe/**/*.ts'],
             extends: ['plugin:unicorn/recommended'],
             rules: {
@@ -113,6 +102,8 @@ const config = {
                 '**/test.*',
                 '**/rollup.*',
                 '**/*.spec.*',
+                '**/test-helpers/**',
+                '**/test-utils/**',
                 '**/src/test/**',
                 '**/src/perf/**',
             ],

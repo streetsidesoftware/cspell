@@ -1,7 +1,8 @@
+import { describe, expect, test } from 'vitest';
 import { stringify } from 'yaml';
 
-import { defaultNextDeserializer } from '../CSpellConfigFileReaderWriter';
-import { deserializerCSpellYaml } from './cspellYaml';
+import { defaultNextDeserializer } from '../CSpellConfigFileReaderWriter.js';
+import { deserializerCSpellYaml } from './cspellYaml.js';
 
 const oc = expect.objectContaining;
 const next = defaultNextDeserializer;

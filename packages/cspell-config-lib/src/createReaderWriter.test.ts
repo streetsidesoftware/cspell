@@ -1,7 +1,9 @@
-import { createReaderWriter } from './createReaderWriter';
-import { CSpellConfigFileReaderWriterImpl } from './CSpellConfigFileReaderWriter';
-import { defaultDeserializers } from './deserializers';
-import type { IO } from './IO';
+import { describe, expect, test, vi } from 'vitest';
+
+import { createReaderWriter } from './createReaderWriter.js';
+import { CSpellConfigFileReaderWriterImpl } from './CSpellConfigFileReaderWriter.js';
+import { defaultDeserializers } from './deserializers/index.js';
+import type { IO } from './IO.js';
 
 describe('createReaderWriter', () => {
     test('createReaderWriter default', () => {
@@ -10,8 +12,8 @@ describe('createReaderWriter', () => {
 
     test('createReaderWriter', () => {
         const io: IO = {
-            readFile: jest.fn(),
-            writeFile: jest.fn(),
+            readFile: vi.fn(),
+            writeFile: vi.fn(),
         };
         const rw = createReaderWriter([], io);
         expect(rw).toBeInstanceOf(CSpellConfigFileReaderWriterImpl);

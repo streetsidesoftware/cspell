@@ -1,8 +1,10 @@
-import type { CSpellConfigFile } from './CSpellConfigFile';
-import { CSpellConfigFileReaderWriterImpl } from './CSpellConfigFileReaderWriter';
-import { defaultDeserializers } from './deserializers';
-import type { IO } from './IO';
-import { json } from './test-helpers/util';
+import { describe, expect, test, vi } from 'vitest';
+
+import type { CSpellConfigFile } from './CSpellConfigFile.js';
+import { CSpellConfigFileReaderWriterImpl } from './CSpellConfigFileReaderWriter.js';
+import { defaultDeserializers } from './deserializers/index.js';
+import type { IO } from './IO.js';
+import { json } from './test-helpers/util.js';
 
 const oc = expect.objectContaining;
 
@@ -12,8 +14,8 @@ describe('CSpellConfigFileReaderWriter', () => {
         ${'file://package.json'} | ${json({ name: 'name' })} | ${oc({ uri: 'file://package.json', settings: {} })}
     `('readConfig', async ({ uri, content, expected }) => {
         const io: IO = {
-            readFile: jest.fn(() => content),
-            writeFile: jest.fn(),
+            readFile: vi.fn(() => content),
+            writeFile: vi.fn(),
         };
         const rw = new CSpellConfigFileReaderWriterImpl(io, defaultDeserializers);
         expect(await rw.readConfig(uri)).toEqual(expected);
@@ -24,8 +26,8 @@ describe('CSpellConfigFileReaderWriter', () => {
         ${'file://cspell.js'} | ${''}   | ${new Error('Unable to parse config file: "file://cspell.js"')}
     `('fail readConfig', async ({ uri, content, expected }) => {
         const io: IO = {
-            readFile: jest.fn(() => content),
-            writeFile: jest.fn(),
+            readFile: vi.fn(() => content),
+            writeFile: vi.fn(),
         };
         const rw = new CSpellConfigFileReaderWriterImpl(io, defaultDeserializers);
         await expect(rw.readConfig(uri)).rejects.toEqual(expected);
@@ -36,16 +38,16 @@ describe('CSpellConfigFileReaderWriter', () => {
         ${'file://cspell.js'} | ${'content'}
     `('writeConfig', async ({ uri, content }) => {
         const io: IO = {
-            readFile: jest.fn(() => content),
-            writeFile: jest.fn(() => Promise.resolve()),
+            readFile: vi.fn(() => content),
+            writeFile: vi.fn(() => Promise.resolve()),
         };
 
         const rw = new CSpellConfigFileReaderWriterImpl(io, defaultDeserializers);
         const cf: CSpellConfigFile = {
             uri,
             settings: {},
-            serialize: jest.fn(() => content),
-            addWords: jest.fn(),
+            serialize: vi.fn(() => content),
+            addWords: vi.fn(),
         };
         await expect(rw.writeConfig(cf)).resolves.toBeUndefined();
         expect(io.writeFile).toHaveBeenCalledWith(uri, content);

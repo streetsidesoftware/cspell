@@ -1,10 +1,10 @@
 import { promises as fs } from 'fs';
 
-import type { CSpellConfigFileReaderWriter } from './CSpellConfigFileReaderWriter';
-import { CSpellConfigFileReaderWriterImpl } from './CSpellConfigFileReaderWriter';
-import type { Deserializer } from './Deserializer';
-import { defaultDeserializers } from './deserializers';
-import type { IO } from './IO';
+import type { CSpellConfigFileReaderWriter } from './CSpellConfigFileReaderWriter.js';
+import { CSpellConfigFileReaderWriterImpl } from './CSpellConfigFileReaderWriter.js';
+import type { Deserializer } from './Deserializer.js';
+import { defaultDeserializers } from './deserializers/index.js';
+import type { IO } from './IO.js';
 
 const defaultIO: IO = {
     readFile,

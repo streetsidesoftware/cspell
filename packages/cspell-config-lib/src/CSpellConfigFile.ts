@@ -1,6 +1,6 @@
 import type { CSpellSettings } from '@cspell/cspell-types';
 
-import type { Serializer } from './Serializer';
+import type { Serializer } from './Serializer.js';
 
 export interface CSpellConfigFile {
     readonly uri: string;

@@ -1,10 +1,10 @@
 import type { CSpellSettings } from '@cspell/cspell-types';
 import { parse, stringify } from 'yaml';
 
-import type { CSpellConfigFile } from '../CSpellConfigFile';
-import { ImplCSpellConfigFile } from '../CSpellConfigFile';
-import type { Deserializer, DeserializerNext, DeserializerParams } from '../Deserializer';
-import { detectIndentAsNum } from './util';
+import type { CSpellConfigFile } from '../CSpellConfigFile.js';
+import { ImplCSpellConfigFile } from '../CSpellConfigFile.js';
+import type { Deserializer, DeserializerNext, DeserializerParams } from '../Deserializer.js';
+import { detectIndentAsNum } from './util.js';
 
 const isSupportedFormat = /\.ya?ml(?=$|[?#])/;
 
