@@ -20,6 +20,7 @@ const config = {
     ignorePatterns: [
         '**/[Ss]amples/**', // cspell:disable-line
         '**/[Tt]emp/**',
+        '**/.temp/**',
         '**/*.d.ts',
         '**/*.d.cts',
         '**/*.d.mts',

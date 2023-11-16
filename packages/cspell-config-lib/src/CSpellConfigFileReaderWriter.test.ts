@@ -1,11 +1,11 @@
+import type { CSpellSettings } from '@cspell/cspell-types';
 import { describe, expect, test, vi } from 'vitest';
 
+import { CSpellConfigFile } from './CSpellConfigFile.js';
 import { CSpellConfigFileReaderWriterImpl } from './CSpellConfigFileReaderWriter.js';
 import type { IO } from './IO.js';
 import { defaultDeserializers } from './serializers/index.js';
 import { json } from './test-helpers/util.js';
-import { CSpellSettings } from '@cspell/cspell-types';
-import { CSpellConfigFile } from './CSpellConfigFile.js';
 
 const oc = expect.objectContaining;
 

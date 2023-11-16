@@ -2,7 +2,9 @@ import { defineConfig } from 'vitest/config';
 
 export default defineConfig({
     test: {
+        // exclude: ['temp', 'node_modules', 'dist'],
         // reporters: 'verbose',
+        watchExclude: ['**/node_modules/**', '**/dist/**', '**/.temp/**', '**/temp/**', '**/coverage/**'],
         coverage: {
             // enabled: true,
             provider: 'istanbul',
