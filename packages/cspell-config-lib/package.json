@@ -30,7 +30,7 @@
     "watch": "tsc -p . -w",
     "clean": "shx rm -rf dist temp coverage \"*.tsbuildInfo\"",
     "clean-build": "pnpm run clean && pnpm run build",
-    "coverage": "vitest --coverage",
+    "coverage": "vitest run --coverage",
     "test-watch": "vitest",
     "test": "vitest run"
   },
