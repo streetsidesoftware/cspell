@@ -1,3 +1,4 @@
+import assert from 'node:assert';
 import { promises as fs } from 'node:fs';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
@@ -5,7 +6,7 @@ import { pathToFileURL } from 'node:url';
 import { describe, expect, test } from 'vitest';
 
 import * as index from './index.js';
-import { createReaderWriter } from './index.js';
+import { createReaderWriter, CSpellConfigFile } from './index.js';
 import { fixtures } from './test-helpers/fixtures.js';
 import { copyFile, tempPath } from './test-helpers/util.js';
 
@@ -35,6 +36,7 @@ describe('cspell-config', () => {
         const rw = createReaderWriter();
         const uri = pathToFileURL(resolve(tempFile));
         const cfg = await rw.readConfig(uri);
+        assert(cfg instanceof CSpellConfigFile);
         cfg.addWords(addWords);
         await rw.writeConfig(cfg);
         expect(await fs.readFile(tempFile, 'utf-8')).toMatchSnapshot();

@@ -2,9 +2,9 @@ import { promises as fs } from 'fs';
 
 import type { CSpellConfigFileReaderWriter } from './CSpellConfigFileReaderWriter.js';
 import { CSpellConfigFileReaderWriterImpl } from './CSpellConfigFileReaderWriter.js';
-import type { Deserializer } from './Deserializer.js';
-import { defaultDeserializers } from './deserializers/index.js';
 import type { IO } from './IO.js';
+import type { SerializerMiddleware } from './Serializer.js';
+import { defaultDeserializers } from './serializers/index.js';
 
 const defaultIO: IO = {
     readFile,
@@ -12,7 +12,7 @@ const defaultIO: IO = {
 };
 
 export function createReaderWriter(
-    deserializers: Deserializer[] = [],
+    deserializers: SerializerMiddleware[] = [],
     io: IO = defaultIO,
 ): CSpellConfigFileReaderWriter {
     return new CSpellConfigFileReaderWriterImpl(io, deserializers.concat(defaultDeserializers));

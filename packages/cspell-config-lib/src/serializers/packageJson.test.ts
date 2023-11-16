@@ -1,10 +1,11 @@
-import { pathToFileURL } from 'node:url';
+import assert from 'node:assert';
 
-import { describe, expect, test } from 'vitest';
+import { describe, expect, test, vi } from 'vitest';
 
-import { defaultNextDeserializer } from '../CSpellConfigFileReaderWriter.js';
+import { CSpellConfigFilePackageJson } from '../CSpellConfigFilePackageJson.js';
+import { defaultNextDeserializer, defaultNextSerializer } from '../defaultNext.js';
 import { json } from '../test-helpers/util.js';
-import { deserializerPackageJson } from './packageJson.js';
+import { serializerPackageJson } from './packageJson.js';
 
 const oc = expect.objectContaining;
 const next = defaultNextDeserializer;
@@ -15,7 +16,9 @@ describe('packageJson', () => {
         ${'package.json'}     | ${'{}'}                      | ${oc({ settings: {} })}
         ${'package.json?x=5'} | ${'{"cspell":{"words":[]}}'} | ${oc({ settings: { words: [] } })}
     `('success $uri', ({ uri, content, expected }) => {
-        expect(deserializerPackageJson({ url: new URL(uri, import.meta.url), content }, next)).toEqual(expected);
+        expect(serializerPackageJson.deserialize({ url: new URL(uri, import.meta.url), content }, next)).toEqual(
+            expected,
+        );
     });
 
     test.each`
@@ -28,7 +31,7 @@ describe('packageJson', () => {
         ${'file:///package.json'} | ${'[]'}             | ${'Unable to parse file:///package.json'}
         ${'file:///package.json'} | ${'{"cspell": []}'} | ${'Unable to parse file:///package.json'}
     `('fail $url', ({ url, content, expected }) => {
-        expect(() => deserializerPackageJson({ url: new URL(url), content }, next)).toThrow(expected);
+        expect(() => serializerPackageJson.deserialize({ url: new URL(url), content }, next)).toThrow(expected);
     });
 
     test.each`
@@ -37,7 +40,14 @@ describe('packageJson', () => {
         ${'package.json?x=5'} | ${'{\n  "cspell":{"words":[]}}'} | ${json({ cspell: { words: [] } }, 2)}
         ${'package.json?x=5'} | ${'{\n  "cspell":{"words":[]}}'} | ${json({ cspell: { words: [] } }, 2)}
     `('serialize $uri', ({ uri, content, expected }) => {
-        const file = deserializerPackageJson({ url: new URL(uri, import.meta.url), content }, next);
-        expect(file?.serialize()).toEqual(expected);
+        const file = serializerPackageJson.deserialize({ url: new URL(uri, import.meta.url), content }, next);
+        assert(file instanceof CSpellConfigFilePackageJson);
+        expect(serializerPackageJson.serialize(file, defaultNextSerializer)).toEqual(expected);
+    });
+
+    test('serialize reject', () => {
+        const next = vi.fn();
+        serializerPackageJson.serialize({ url: new URL('file:///file.txt'), settings: {} }, next);
+        expect(next).toHaveBeenCalledTimes(1);
     });
 });

@@ -1,15 +1,12 @@
 import type { ICSpellConfigFile } from './CSpellConfigFile.js';
-import type { Deserializer, DeserializerNext, DeserializerParams } from './Deserializer.js';
+import { defaultNextDeserializer, defaultNextSerializer } from './defaultNext.js';
 import type { IO } from './IO.js';
+import type { DeserializerNext, DeserializerParams, SerializerMiddleware, SerializerNext } from './Serializer.js';
 import { toURL } from './util/toURL.js';
-
-export const defaultNextDeserializer: DeserializerNext = (content: DeserializerParams) => {
-    throw new Error(`Unable to parse config file: "${content.url}"`);
-};
 
 export interface CSpellConfigFileReaderWriter {
     readonly io: IO;
-    readonly deserializers: Deserializer[];
+    readonly middleware: SerializerMiddleware[];
     readConfig(uri: URL | string): Promise<ICSpellConfigFile>;
     writeConfig(configFile: ICSpellConfigFile): Promise<void>;
 }
@@ -17,7 +14,7 @@ export interface CSpellConfigFileReaderWriter {
 export class CSpellConfigFileReaderWriterImpl implements CSpellConfigFileReaderWriter {
     constructor(
         readonly io: IO,
-        readonly deserializers: Deserializer[],
+        readonly middleware: SerializerMiddleware[],
     ) {}
 
     async readConfig(uri: URL | string): Promise<ICSpellConfigFile> {
@@ -28,19 +25,33 @@ export class CSpellConfigFileReaderWriterImpl implements CSpellConfigFileReaderW
 
         const desContent: DeserializerParams = { url, content };
 
-        for (const des of [...this.deserializers].reverse()) {
-            next = curry(des, next);
+        for (const des of [...this.middleware].reverse()) {
+            next = curryDeserialize(des, next);
         }
 
         return next(desContent);
     }
 
+    serialize(configFile: ICSpellConfigFile): string {
+        let next: SerializerNext = defaultNextSerializer;
+
+        for (const des of [...this.middleware].reverse()) {
+            next = currySerialize(des, next);
+        }
+
+        return next(configFile);
+    }
+
     writeConfig(configFile: ICSpellConfigFile): Promise<void> {
-        const content = configFile.serialize();
+        const content = this.serialize(configFile);
         return this.io.writeFile(configFile.url, content);
     }
 }
 
-function curry(des: Deserializer, next: DeserializerNext): DeserializerNext {
-    return (content) => des(content, next);
+function curryDeserialize(middle: SerializerMiddleware, next: DeserializerNext): DeserializerNext {
+    return (content) => middle.deserialize(content, next);
+}
+
+function currySerialize(middle: SerializerMiddleware, next: SerializerNext): SerializerNext {
+    return (cfg) => middle.serialize(cfg, next);
 }

@@ -1,9 +1,8 @@
 import { describe, expect, test, vi } from 'vitest';
 
-import type { ICSpellConfigFile } from './CSpellConfigFile.js';
 import { CSpellConfigFileReaderWriterImpl } from './CSpellConfigFileReaderWriter.js';
-import { defaultDeserializers } from './deserializers/index.js';
 import type { IO } from './IO.js';
+import { defaultDeserializers } from './serializers/index.js';
 import { json } from './test-helpers/util.js';
 
 const oc = expect.objectContaining;
@@ -34,8 +33,8 @@ describe('CSpellConfigFileReaderWriter', () => {
     });
 
     test.each`
-        uri                    | content
-        ${'file:///cspell.js'} | ${'content'}
+        uri                      | content
+        ${'file:///cspell.json'} | ${'{}\n'}
     `('writeConfig', async ({ uri, content }) => {
         const io: IO = {
             readFile: vi.fn(() => content),
@@ -43,14 +42,8 @@ describe('CSpellConfigFileReaderWriter', () => {
         };
 
         const rw = new CSpellConfigFileReaderWriterImpl(io, defaultDeserializers);
-        const cf: ICSpellConfigFile = {
-            url: uri,
-            settings: {},
-            serialize: vi.fn(() => content),
-            addWords: vi.fn(),
-        };
+        const cf = await rw.readConfig(uri);
         await expect(rw.writeConfig(cf)).resolves.toBeUndefined();
-        expect(io.writeFile).toHaveBeenCalledWith(uri, content);
-        expect(cf.serialize).toHaveBeenCalledTimes(1);
+        expect(io.writeFile).toHaveBeenCalledWith(new URL(uri), content);
     });
 });

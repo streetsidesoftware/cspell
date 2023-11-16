@@ -1,17 +1,21 @@
 import type { CSpellSettings } from '@cspell/cspell-types';
 
 import { ImplCSpellConfigFile } from './CSpellConfigFile.js';
-import { detectIndent } from './deserializers/util.js';
-import type { Serializer } from './Serializer.js';
+import type { SerializeSettingsFn } from './Serializer.js';
+import { detectIndent } from './serializers/util.js';
 import type { TextFile } from './TextFile.js';
 
 export class CSpellConfigFilePackageJson extends ImplCSpellConfigFile {
     constructor(
         readonly url: URL,
         readonly settings: CSpellSettings,
-        readonly serializer: Serializer,
+        readonly serializer: SerializeSettingsFn,
     ) {
         super(url, settings);
+    }
+
+    serialize() {
+        return this.serializer(this.settings);
     }
 }
 

@@ -1,8 +1,10 @@
-import { describe, expect, test } from 'vitest';
+import assert from 'assert';
+import { describe, expect, test, vi } from 'vitest';
 
-import { defaultNextDeserializer } from '../CSpellConfigFileReaderWriter.js';
+import { CSpellConfigFileJson } from '../CSpellConfigFileJson.js';
+import { defaultNextDeserializer, defaultNextSerializer } from '../defaultNext.js';
 import { json } from '../test-helpers/util.js';
-import { deserializerCSpellJson } from './cspellJson.js';
+import { serializerCSpellJson } from './cspellJson.js';
 
 const oc = expect.objectContaining;
 
@@ -24,7 +26,7 @@ describe('cspellJson', () => {
         ${'cspell-ext.json'} | ${'{}'}                                    | ${oc({ settings: {} })}
         ${'.cspell.json'}    | ${'{\n  // add words here\n  "words":[]}'} | ${oc({ settings: { words: [] } })}
     `('success $uri', ({ uri, content, expected }) => {
-        expect(deserializerCSpellJson({ url: new URL(uri, 'file:///'), content }, next)).toEqual(expected);
+        expect(serializerCSpellJson.deserialize({ url: new URL(uri, 'file:///'), content }, next)).toEqual(expected);
     });
 
     test.each`
@@ -35,7 +37,9 @@ describe('cspellJson', () => {
         ${'cspell.json'} | ${''}   | ${'Unexpected end of JSON input'}
         ${'cspell.json'} | ${'[]'} | ${'Unable to parse file:///cspell.json'}
     `('fail $uri', ({ uri, content, expected }) => {
-        expect(() => deserializerCSpellJson({ url: new URL(uri, 'file:///'), content }, next)).toThrow(expected);
+        expect(() => serializerCSpellJson.deserialize({ url: new URL(uri, 'file:///'), content }, next)).toThrow(
+            expected,
+        );
     });
 
     test.each`
@@ -44,7 +48,16 @@ describe('cspellJson', () => {
         ${'cspell.json?x=5'} | ${'{\n  "words":[]}'}     | ${json({ words: [] }, 2)}
         ${'cspell.jsonc'}    | ${sampleCSpellJson}       | ${sampleCSpellJson}
     `('serialize $uri', ({ uri, content, expected }) => {
-        const file = deserializerCSpellJson({ url: new URL(uri, 'file:///'), content }, next);
-        expect(file?.serialize()).toEqual(expected);
+        const next = vi.fn();
+        const file = serializerCSpellJson.deserialize({ url: new URL(uri, 'file:///'), content }, next);
+        assert(file instanceof CSpellConfigFileJson);
+        expect(serializerCSpellJson.serialize(file, defaultNextSerializer)).toEqual(expected);
+        expect(next).toHaveBeenCalledTimes(0);
+    });
+
+    test('serialize reject', () => {
+        const next = vi.fn();
+        serializerCSpellJson.serialize({ url: new URL('file:///file.txt'), settings: {} }, next);
+        expect(next).toHaveBeenCalledTimes(1);
     });
 });

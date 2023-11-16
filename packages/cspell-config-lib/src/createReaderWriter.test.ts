@@ -2,8 +2,8 @@ import { describe, expect, test, vi } from 'vitest';
 
 import { createReaderWriter } from './createReaderWriter.js';
 import { CSpellConfigFileReaderWriterImpl } from './CSpellConfigFileReaderWriter.js';
-import { defaultDeserializers } from './deserializers/index.js';
 import type { IO } from './IO.js';
+import { defaultDeserializers } from './serializers/index.js';
 
 describe('createReaderWriter', () => {
     test('createReaderWriter default', () => {
@@ -17,6 +17,6 @@ describe('createReaderWriter', () => {
         };
         const rw = createReaderWriter([], io);
         expect(rw).toBeInstanceOf(CSpellConfigFileReaderWriterImpl);
-        expect(rw.deserializers).toHaveLength(defaultDeserializers.length);
+        expect(rw.middleware).toHaveLength(defaultDeserializers.length);
     });
 });

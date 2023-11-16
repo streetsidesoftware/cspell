@@ -1,7 +1,5 @@
 import type { CSpellSettings } from '@cspell/cspell-types';
 
-import type { Serializer } from './Serializer.js';
-
 export interface CSpellConfigFileReference {
     readonly url: URL;
 }
@@ -10,30 +8,21 @@ export interface ICSpellConfigFile {
     readonly url: URL;
     readonly settings: CSpellSettings;
     readonly readonly?: boolean;
-    serialize: () => string;
-    addWords(words: string[]): this;
 }
 
 export abstract class CSpellConfigFile implements ICSpellConfigFile {
     constructor(readonly url: URL) {}
 
     abstract readonly settings: CSpellSettings;
-    abstract serialize(): string;
     abstract addWords(words: string[]): this;
 }
 
 export abstract class ImplCSpellConfigFile extends CSpellConfigFile {
-    abstract readonly serializer: Serializer;
-
     constructor(
         readonly url: URL,
         readonly settings: CSpellSettings,
     ) {
         super(url);
-    }
-
-    serialize(): string {
-        return this.serializer(this.settings);
     }
 
     addWords(words: string[]): this {
