@@ -2,11 +2,15 @@ import type { CSpellSettings } from '@cspell/cspell-types';
 
 import type { Serializer } from './Serializer.js';
 
+export interface CSpellConfigFileReference {
+    readonly url: URL;
+}
+
 export interface ICSpellConfigFile {
     readonly url: URL;
     readonly settings: CSpellSettings;
     readonly readonly?: boolean;
-    serialize?: () => string;
+    serialize: () => string;
     addWords(words: string[]): this;
 }
 
@@ -18,11 +22,12 @@ export abstract class CSpellConfigFile implements ICSpellConfigFile {
     abstract addWords(words: string[]): this;
 }
 
-export class ImplCSpellConfigFile extends CSpellConfigFile {
+export abstract class ImplCSpellConfigFile extends CSpellConfigFile {
+    abstract readonly serializer: Serializer;
+
     constructor(
         readonly url: URL,
         readonly settings: CSpellSettings,
-        readonly serializer: Serializer,
     ) {
         super(url);
     }

@@ -1,9 +1,7 @@
 import type { ICSpellConfigFile } from './CSpellConfigFile.js';
+import type { TextFile } from './TextFile.js';
 
-export interface DeserializerParams {
-    url: URL;
-    content: string;
-}
+export interface DeserializerParams extends TextFile {}
 
 export interface DeserializerNext {
     (content: DeserializerParams): ICSpellConfigFile;
