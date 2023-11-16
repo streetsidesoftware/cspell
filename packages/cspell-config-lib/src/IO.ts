@@ -1,4 +1,6 @@
+import type { TextFile, TextFileRef } from './TextFile.js';
+
 export interface IO {
-    readFile(uri: string): Promise<string>;
-    writeFile(uri: string, content: string): Promise<void>;
+    readFile(url: URL): Promise<TextFile>;
+    writeFile(file: TextFile): Promise<TextFileRef>;
 }

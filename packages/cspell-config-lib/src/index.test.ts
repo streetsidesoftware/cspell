@@ -1,10 +1,14 @@
-import { promises as fs } from 'fs';
-import { URI } from 'vscode-uri';
+import assert from 'node:assert';
+import { promises as fs } from 'node:fs';
+import { resolve } from 'node:path';
+import { pathToFileURL } from 'node:url';
 
-import * as index from './index';
-import { createReaderWriter } from './index';
-import { fixtures } from './test-helpers/fixtures';
-import { copyFile, tempPath } from './test-helpers/util';
+import { describe, expect, test } from 'vitest';
+
+import * as index from './index.js';
+import { createReaderWriter, CSpellConfigFile } from './index.js';
+import { fixtures } from './test-helpers/fixtures.js';
+import { copyFile, tempPath } from './test-helpers/util.js';
 
 describe('index', () => {
     test('index', () => {
@@ -30,8 +34,9 @@ describe('cspell-config', () => {
         const tempFile = tempPath(fixture);
         await copyFile(fixtureFile, tempFile);
         const rw = createReaderWriter();
-        const uri = URI.file(tempFile).toString();
+        const uri = pathToFileURL(resolve(tempFile));
         const cfg = await rw.readConfig(uri);
+        assert(cfg instanceof CSpellConfigFile);
         cfg.addWords(addWords);
         await rw.writeConfig(cfg);
         expect(await fs.readFile(tempFile, 'utf-8')).toMatchSnapshot();

@@ -1,5 +1,6 @@
 import { promises as fs } from 'fs';
 import * as path from 'path';
+import { expect } from 'vitest';
 
 export function json(obj: unknown, indent: string | number = 2): string {
     return JSON.stringify(obj, null, indent) + '\n';
@@ -7,7 +8,7 @@ export function json(obj: unknown, indent: string | number = 2): string {
 
 export function tempPath(file: string): string {
     const testState = expect.getState();
-    return path.join(__dirname, '../../temp', testState.currentTestName || 'test', file);
+    return path.join(__dirname, '../../.temp', testState.currentTestName?.replace(/[^a-z./-]/gi, '_') || 'test', file);
 }
 
 export async function createPathForFile(file: string): Promise<void> {

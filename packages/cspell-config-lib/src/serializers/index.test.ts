@@ -1,4 +1,6 @@
-import { defaultDeserializers } from './index';
+import { describe, expect, test } from 'vitest';
+
+import { defaultDeserializers } from './index.js';
 
 describe('index', () => {
     test('defaultDeserializers', () => {
