@@ -2,13 +2,14 @@ import type { ICSpellConfigFile } from './CSpellConfigFile.js';
 import { defaultNextDeserializer, defaultNextSerializer } from './defaultNext.js';
 import type { IO } from './IO.js';
 import type { DeserializerNext, DeserializerParams, SerializerMiddleware, SerializerNext } from './Serializer.js';
+import type { TextFileRef } from './TextFile.js';
 import { toURL } from './util/toURL.js';
 
 export interface CSpellConfigFileReaderWriter {
     readonly io: IO;
     readonly middleware: SerializerMiddleware[];
     readConfig(uri: URL | string): Promise<ICSpellConfigFile>;
-    writeConfig(configFile: ICSpellConfigFile): Promise<void>;
+    writeConfig(configFile: ICSpellConfigFile): Promise<TextFileRef>;
 }
 
 export class CSpellConfigFileReaderWriterImpl implements CSpellConfigFileReaderWriter {
@@ -19,11 +20,11 @@ export class CSpellConfigFileReaderWriterImpl implements CSpellConfigFileReaderW
 
     async readConfig(uri: URL | string): Promise<ICSpellConfigFile> {
         const url = toURL(uri);
-        const content = await this.io.readFile(url);
+        const file = await this.io.readFile(url);
 
         let next: DeserializerNext = defaultNextDeserializer;
 
-        const desContent: DeserializerParams = { url, content };
+        const desContent: DeserializerParams = file;
 
         for (const des of [...this.middleware].reverse()) {
             next = curryDeserialize(des, next);
@@ -42,9 +43,10 @@ export class CSpellConfigFileReaderWriterImpl implements CSpellConfigFileReaderW
         return next(configFile);
     }
 
-    writeConfig(configFile: ICSpellConfigFile): Promise<void> {
+    async writeConfig(configFile: ICSpellConfigFile): Promise<TextFileRef> {
         const content = this.serialize(configFile);
-        return this.io.writeFile(configFile.url, content);
+        await this.io.writeFile({ url: configFile.url, content });
+        return { url: configFile.url };
     }
 }
 

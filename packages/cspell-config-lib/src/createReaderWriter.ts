@@ -5,6 +5,7 @@ import { CSpellConfigFileReaderWriterImpl } from './CSpellConfigFileReaderWriter
 import type { IO } from './IO.js';
 import type { SerializerMiddleware } from './Serializer.js';
 import { defaultDeserializers } from './serializers/index.js';
+import type { TextFile, TextFileRef } from './TextFile.js';
 
 const defaultIO: IO = {
     readFile,
@@ -18,10 +19,12 @@ export function createReaderWriter(
     return new CSpellConfigFileReaderWriterImpl(io, deserializers.concat(defaultDeserializers));
 }
 
-function readFile(url: URL): Promise<string> {
-    return fs.readFile(url, 'utf-8');
+async function readFile(url: URL): Promise<TextFile> {
+    const content = await fs.readFile(url, 'utf-8');
+    return { url, content };
 }
 
-function writeFile(url: URL, content: string): Promise<void> {
-    return fs.writeFile(url, content);
+async function writeFile(file: TextFile): Promise<TextFileRef> {
+    await fs.writeFile(file.url, file.content);
+    return { url: file.url };
 }

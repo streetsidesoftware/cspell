@@ -15,7 +15,7 @@ describe('CSpellConfigFileReaderWriter', () => {
         ${'file:///package.json'} | ${json({ name: 'name' })} | ${oc({ url: new URL('file:///package.json'), settings: {} })}
     `('readConfig', async ({ uri, content, expected }) => {
         const io: IO = {
-            readFile: vi.fn(() => content),
+            readFile: vi.fn((url) => Promise.resolve({ url, content })),
             writeFile: vi.fn(),
         };
         const rw = new CSpellConfigFileReaderWriterImpl(io, defaultDeserializers);
@@ -27,7 +27,7 @@ describe('CSpellConfigFileReaderWriter', () => {
         ${'file:///cspell.js'} | ${''}   | ${new Error('Unable to parse config file: "file:///cspell.js"')}
     `('fail readConfig', async ({ uri, content, expected }) => {
         const io: IO = {
-            readFile: vi.fn(() => content),
+            readFile: vi.fn((url) => Promise.resolve({ url, content })),
             writeFile: vi.fn(),
         };
         const rw = new CSpellConfigFileReaderWriterImpl(io, defaultDeserializers);
@@ -39,25 +39,26 @@ describe('CSpellConfigFileReaderWriter', () => {
         ${'file:///cspell.json'} | ${'{}\n'}
     `('writeConfig', async ({ uri, content }) => {
         const io: IO = {
-            readFile: vi.fn(() => content),
-            writeFile: vi.fn(() => Promise.resolve()),
+            readFile: vi.fn((url) => Promise.resolve({ url, content })),
+            writeFile: vi.fn((ref) => Promise.resolve(ref)),
         };
 
         const rw = new CSpellConfigFileReaderWriterImpl(io, defaultDeserializers);
         const cf = await rw.readConfig(uri);
-        await expect(rw.writeConfig(cf)).resolves.toBeUndefined();
-        expect(io.writeFile).toHaveBeenCalledWith(new URL(uri), content);
+        const url = new URL(uri);
+        await expect(rw.writeConfig(cf)).resolves.toEqual({ url });
+        expect(io.writeFile).toHaveBeenCalledWith({ url, content });
     });
 
-    test('Fail to serialize', () => {
+    test('Fail to serialize', async () => {
         const io: IO = {
-            readFile: vi.fn(() => Promise.resolve('')),
-            writeFile: vi.fn(() => Promise.resolve()),
+            readFile: vi.fn((url) => Promise.resolve({ url, content: '' })),
+            writeFile: vi.fn((ref) => Promise.resolve(ref)),
         };
 
         const rw = new CSpellConfigFileReaderWriterImpl(io, defaultDeserializers);
         const cf = new Cfg(new URL('file:///cspell.js'), {});
-        expect(() => rw.writeConfig(cf)).toThrow('Unable to serialize config file: "file:///cspell.js"');
+        await expect(rw.writeConfig(cf)).rejects.toThrowError('Unable to serialize config file: "file:///cspell.js"');
     });
 });
 
