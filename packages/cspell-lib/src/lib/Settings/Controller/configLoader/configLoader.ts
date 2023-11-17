@@ -131,7 +131,7 @@ export class ConfigLoader {
      * @param cspellIO - CSpellIO interface for reading files.
      */
     protected constructor(readonly cspellIO: CSpellIO) {
-        this.cspellConfigFileReaderWriter = createReaderWriter(undefined, createIO(cspellIO));
+        this.cspellConfigFileReaderWriter = createReaderWriter(undefined, undefined, createIO(cspellIO));
     }
 
     protected cachedCookedConfigFileSettings = new Map<string, CSpellSettingsI>();

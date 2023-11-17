@@ -1,6 +1,6 @@
 import type { CSpellSettings } from '@cspell/cspell-types';
 
-import { ImplCSpellConfigFile } from './CSpellConfigFile.js';
+import { ImplCSpellConfigFile } from '../CSpellConfigFile.js';
 
 export class CSpellConfigFileJavaScript extends ImplCSpellConfigFile {
     constructor(

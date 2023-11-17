@@ -1,46 +1,47 @@
 import type { CSpellConfigFile, ICSpellConfigFile } from './CSpellConfigFile.js';
-import { defaultNextDeserializer, defaultNextSerializer } from './defaultNext.js';
+import type { FileLoaderMiddleware } from './FileLoader.js';
 import type { IO } from './IO.js';
-import type { DeserializerNext, DeserializerParams, SerializerMiddleware, SerializerNext } from './Serializer.js';
-import type { TextFileRef } from './TextFile.js';
+import { getDeserializer, getLoader, getSerializer } from './middlewareHelper.js';
+import type { DeserializerNext, SerializerMiddleware } from './Serializer.js';
+import type { TextFile, TextFileRef } from './TextFile.js';
 import { toURL } from './util/toURL.js';
 
 export interface CSpellConfigFileReaderWriter {
     readonly io: IO;
     readonly middleware: SerializerMiddleware[];
+    readonly loaders: FileLoaderMiddleware[];
     readConfig(uri: URL | string): Promise<CSpellConfigFile>;
     writeConfig(configFile: CSpellConfigFile): Promise<TextFileRef>;
 }
 
 export class CSpellConfigFileReaderWriterImpl implements CSpellConfigFileReaderWriter {
+    /**
+     * @param io - an optional injectable IO interface. The default it to use the file system.
+     * @param deserializers - Additional deserializers to use when reading a config file. The order of the deserializers is
+     *    important. The last one in the list will be the first one to be called.
+     */
     constructor(
         readonly io: IO,
         readonly middleware: SerializerMiddleware[],
+        readonly loaders: FileLoaderMiddleware[] = [],
     ) {}
 
-    async readConfig(uri: URL | string): Promise<CSpellConfigFile> {
-        const url = toURL(uri);
-        const file = await this.io.readFile(url);
+    readConfig(uri: URL | string): Promise<CSpellConfigFile> {
+        const loader = getLoader(this.loaders);
+        return loader({ url: toURL(uri), context: { deserialize: this.getDeserializer(), io: this.io } });
+    }
 
-        let next: DeserializerNext = defaultNextDeserializer;
+    getDeserializer(): DeserializerNext {
+        return getDeserializer(this.middleware);
+    }
 
-        const desContent: DeserializerParams = file;
-
-        for (const des of [...this.middleware].reverse()) {
-            next = curryDeserialize(des, next);
-        }
-
-        return next(desContent);
+    deserialize(file: TextFile): CSpellConfigFile {
+        return this.getDeserializer()(file);
     }
 
     serialize(configFile: ICSpellConfigFile): string {
-        let next: SerializerNext = defaultNextSerializer;
-
-        for (const des of [...this.middleware].reverse()) {
-            next = currySerialize(des, next);
-        }
-
-        return next(configFile);
+        const serializer = getSerializer(this.middleware);
+        return serializer(configFile);
     }
 
     async writeConfig(configFile: ICSpellConfigFile): Promise<TextFileRef> {
@@ -48,12 +49,4 @@ export class CSpellConfigFileReaderWriterImpl implements CSpellConfigFileReaderW
         await this.io.writeFile({ url: configFile.url, content });
         return { url: configFile.url };
     }
-}
-
-function curryDeserialize(middle: SerializerMiddleware, next: DeserializerNext): DeserializerNext {
-    return (content) => middle.deserialize(content, next);
-}
-
-function currySerialize(middle: SerializerMiddleware, next: SerializerNext): SerializerNext {
-    return (cfg) => middle.serialize(cfg, next);
 }

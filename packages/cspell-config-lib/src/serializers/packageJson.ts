@@ -1,5 +1,8 @@
 import type { CSpellConfigFile, ICSpellConfigFile } from '../CSpellConfigFile.js';
-import { CSpellConfigFilePackageJson, parseCSpellConfigFilePackageJson } from '../CSpellConfigFilePackageJson.js';
+import {
+    CSpellConfigFilePackageJson,
+    parseCSpellConfigFilePackageJson,
+} from '../CSpellConfigFile/CSpellConfigFilePackageJson.js';
 import type { DeserializerNext, DeserializerParams, SerializerMiddleware, SerializerNext } from '../Serializer.js';
 
 const isSupportedFormat = /\bpackage\.json$/i;

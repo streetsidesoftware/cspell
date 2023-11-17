@@ -4,7 +4,7 @@ import { pathToFileURL } from 'node:url';
 import { describe, expect, test, vi } from 'vitest';
 import { stringify } from 'yaml';
 
-import { CSpellConfigFileYaml } from '../CSpellConfigFileYaml.js';
+import { CSpellConfigFileYaml } from '../CSpellConfigFile/CSpellConfigFileYaml.js';
 import { defaultNextDeserializer } from '../defaultNext.js';
 import { serializerCSpellYaml } from './cspellYaml.js';
 

@@ -477,8 +477,7 @@ describe('Validate search/load config files', () => {
     /*
     test.each`
         file                                          | relativeTo   | expectedConfig
-        ${s('linked/cspell.config.js')}               | ${undefined} | ${cf(s('linked/cspell.config.js'), {})}
-        ${s('js-config/cspell.config.js')}            | ${undefined} | ${cf(s('js-config/cspell.config.js'), {})}
+        ${'streetsidesoftware/cspell/main/cspell.test.base.json'} | ${'https://raw.githubusercontent.com/'} | ${oc(cf('https://raw.githubusercontent.com/streetsidesoftware/cspell/main/cspell.test.base.json', oc({ name: 'Base Test Config' })))}
     */
 
     test.each`
@@ -488,6 +487,8 @@ describe('Validate search/load config files', () => {
         ${s('bug-fixes/not-found/cspell.json')}       | ${undefined} | ${readError(s('bug-fixes/not-found/cspell.json')).error}
         ${s('dot-config/.config/cspell.config.yaml')} | ${undefined} | ${oc(cf(s('dot-config/.config/cspell.config.yaml'), oc({ name: 'Nested in .config' })))}
         ${rp('cspell.config.json')}                   | ${undefined} | ${oc(cf(rp('cspell.config.json'), oc({ id: 'cspell-package-config' })))}
+        ${s('linked/cspell.config.js')}               | ${undefined} | ${cf(s('linked/cspell.config.js'), oc({ description: 'cspell.config.js file in samples/linked' }))}
+        ${s('js-config/cspell.config.js')}            | ${undefined} | ${cf(s('js-config/cspell.config.js'), oc({ description: 'cspell.config.js file in samples/js-config' }))}
     `('readConfigFile $file $relativeTo', async ({ file, relativeTo, expectedConfig }) => {
         const loader = getDefaultConfigLoader();
         const cfg = await loader.readConfigFile(file, relativeTo);

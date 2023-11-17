@@ -1,5 +1,5 @@
 import type { CSpellConfigFile, ICSpellConfigFile } from '../CSpellConfigFile.js';
-import { CSpellConfigFileJson, parseCSpellConfigFileJson } from '../CSpellConfigFileJson.js';
+import { CSpellConfigFileJson, parseCSpellConfigFileJson } from '../CSpellConfigFile/CSpellConfigFileJson.js';
 import type { DeserializerNext, DeserializerParams, SerializerMiddleware, SerializerNext } from '../Serializer.js';
 
 function deserializer(params: DeserializerParams, next: DeserializerNext): CSpellConfigFile {

@@ -15,7 +15,7 @@ describe('createReaderWriter', () => {
             readFile: vi.fn(),
             writeFile: vi.fn(),
         };
-        const rw = createReaderWriter([], io);
+        const rw = createReaderWriter(undefined, undefined, io);
         expect(rw).toBeInstanceOf(CSpellConfigFileReaderWriterImpl);
         expect(rw.middleware).toHaveLength(defaultDeserializers.length);
     });

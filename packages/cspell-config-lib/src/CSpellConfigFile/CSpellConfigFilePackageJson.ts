@@ -1,9 +1,9 @@
 import type { CSpellSettings } from '@cspell/cspell-types';
 
-import { ImplCSpellConfigFile } from './CSpellConfigFile.js';
-import type { SerializeSettingsFn } from './Serializer.js';
-import { detectIndent } from './serializers/util.js';
-import type { TextFile } from './TextFile.js';
+import { ImplCSpellConfigFile } from '../CSpellConfigFile.js';
+import type { SerializeSettingsFn } from '../Serializer.js';
+import { detectIndent } from '../serializers/util.js';
+import type { TextFile } from '../TextFile.js';
 
 export class CSpellConfigFilePackageJson extends ImplCSpellConfigFile {
     constructor(
