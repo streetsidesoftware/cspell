@@ -1,7 +1,10 @@
 import type { CSpellUserSettings, ImportFileRef, Source } from '@cspell/cspell-types';
+import { StrongWeakMap } from '@cspell/strong-weak-map';
 import * as json from 'comment-json';
 import type { Options as CosmicOptions, OptionsSync as CosmicOptionsSync } from 'cosmiconfig';
 import { cosmiconfig, cosmiconfigSync } from 'cosmiconfig';
+import type { CSpellConfigFile, CSpellConfigFileReaderWriter, IO, TextFile } from 'cspell-config-lib';
+import { createReaderWriter } from 'cspell-config-lib';
 import type { CSpellIO } from 'cspell-io';
 import { getDefaultCSpellIO } from 'cspell-io';
 import * as path from 'path';
@@ -127,12 +130,17 @@ export class ConfigLoader {
      * Use `createConfigLoader`
      * @param cspellIO - CSpellIO interface for reading files.
      */
-    protected constructor(readonly cspellIO: CSpellIO) {}
+    protected constructor(readonly cspellIO: CSpellIO) {
+        this.cspellConfigFileReaderWriter = createReaderWriter(undefined, undefined, createIO(cspellIO));
+    }
 
-    protected cachedFiles = new Map<string, CSpellSettingsI>();
+    protected cachedCookedConfigFileSettings = new Map<string, CSpellSettingsI>();
+    protected cachedConfigFiles = new Map<string, CSpellConfigFile>();
+    protected cachedPendingConfigFile = new StrongWeakMap<string, Promise<CSpellConfigFile>>();
     protected cspellConfigExplorer = cosmiconfig('cspell', cspellCosmiconfig);
     protected cspellConfigExplorerSync = cosmiconfigSync('cspell', cspellCosmiconfig);
     protected globalSettings: CSpellSettingsI | undefined;
+    protected cspellConfigFileReaderWriter: CSpellConfigFileReaderWriter;
 
     /**
      * Read / import a cspell configuration file.
@@ -175,6 +183,31 @@ export class ConfigLoader {
     ): Promise<CSpellSettingsI> {
         const ref = resolveFilename(filename, relativeTo || process.cwd());
         return this.importSettings(ref, undefined, pnpSettings || defaultPnPSettings);
+    }
+
+    public async readConfigFile(
+        filenameOrURL: string | URL,
+        relativeTo?: string | URL,
+    ): Promise<CSpellConfigFile | Error> {
+        const ref = resolveFilename(filenameOrURL.toString(), relativeTo || process.cwd());
+        const url = toURL(ref.filename);
+        const href = url.href;
+        try {
+            if (ref.error) throw ref.error;
+            const cached = this.cachedConfigFiles.get(href);
+            if (cached) return cached;
+            const pending = this.cachedPendingConfigFile.get(href);
+            if (pending) return pending;
+            const p = this.cspellConfigFileReaderWriter.readConfig(href);
+            this.cachedPendingConfigFile.set(href, p);
+            const file = await p;
+            this.cachedConfigFiles.set(href, file);
+            return file;
+        } catch (error) {
+            return new ImportError(`Failed to read config file: "${ref.filename}"`, error);
+        } finally {
+            this.cachedPendingConfigFile.delete(href);
+        }
     }
 
     /**
@@ -228,7 +261,8 @@ export class ConfigLoader {
     public clearCachedSettingsFiles(): void {
         this.searchConfigLRU.clear();
         this.globalSettings = undefined;
-        this.cachedFiles.clear();
+        this.cachedCookedConfigFileSettings.clear();
+        this.cachedConfigFiles.clear();
         this.cspellConfigExplorer.clearCaches();
         this.cspellConfigExplorerSync.clearCaches();
     }
@@ -270,7 +304,7 @@ export class ConfigLoader {
         defaultValues = defaultValues ?? defaultSettings;
         const { filename } = fileRef;
         const importRef: ImportFileRef = { ...fileRef };
-        const cached = this.cachedFiles.get(filename);
+        const cached = this.cachedCookedConfigFileSettings.get(filename);
         if (cached) {
             const cachedImportRef = cached.__importRef || importRef;
             cachedImportRef.referencedBy = mergeSourceList(cachedImportRef.referencedBy || [], importRef.referencedBy);
@@ -280,13 +314,13 @@ export class ConfigLoader {
         const id = [path.basename(path.dirname(filename)), path.basename(filename)].join('/');
         const name = '';
         const finalizeSettings: CSpellSettingsI = csi({ id, name, __importRef: importRef });
-        this.cachedFiles.set(filename, finalizeSettings); // add an empty entry to prevent circular references.
+        this.cachedCookedConfigFileSettings.set(filename, finalizeSettings); // add an empty entry to prevent circular references.
         const settings: CSpellSettingsWST = { ...defaultValues, id, name, ...this.readConfig(importRef) };
 
         Object.assign(finalizeSettings, this.normalizeSettings(settings, filename, pnpSettings));
         const finalizeSrc: Source = { name: path.basename(filename), ...finalizeSettings.source };
         finalizeSettings.source = { ...finalizeSrc, filename };
-        this.cachedFiles.set(filename, finalizeSettings);
+        this.cachedCookedConfigFileSettings.set(filename, finalizeSettings);
         return finalizeSettings;
     }
 
@@ -366,7 +400,7 @@ class ConfigLoaderInternal extends ConfigLoader {
     }
 
     get _cachedFiles() {
-        return this.cachedFiles;
+        return this.cachedCookedConfigFileSettings;
     }
 
     get _cspellConfigExplorer() {
@@ -544,7 +578,12 @@ export function readRawSettings(filename: string, relativeTo?: string): CSpellSe
     return gcl()._readConfig(ref);
 }
 
-function resolveFilename(filename: string, relativeTo: string): ImportFileRef {
+function toURL(filename: string | URL | Uri): URL {
+    if (filename instanceof URL) return filename;
+    return new URL(toUri(filename).toString());
+}
+
+function resolveFilename(filename: string, relativeTo: string | URL): ImportFileRef {
     const r = resolveFile(filename, relativeTo);
 
     return {
@@ -658,9 +697,19 @@ function cspellConfigExplorerSync() {
     return gcl()._cspellConfigExplorerSync;
 }
 
+function createIO(cspellIO: CSpellIO): IO {
+    const readFile = (url: URL) => cspellIO.readFile(url).then((file) => ({ url: file.url, content: file.getText() }));
+    const writeFile = (file: TextFile) => cspellIO.writeFile(file.url, file.content);
+    return {
+        readFile,
+        writeFile,
+    };
+}
+
 export const __testing__ = {
     getDefaultConfigLoaderInternal,
     normalizeCacheSettings,
     validateRawConfigExports,
     validateRawConfigVersion,
+    toURL,
 };

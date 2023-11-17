@@ -1,10 +1,10 @@
 import type { CSpellSettings } from '@cspell/cspell-types';
 import { parse, stringify } from 'yaml';
 
-import { ImplCSpellConfigFile } from './CSpellConfigFile.js';
-import type { SerializeSettingsFn } from './Serializer.js';
-import { detectIndentAsNum } from './serializers/util.js';
-import type { TextFile } from './TextFile.js';
+import { ImplCSpellConfigFile } from '../CSpellConfigFile.js';
+import type { SerializeSettingsFn } from '../Serializer.js';
+import { detectIndentAsNum } from '../serializers/util.js';
+import type { TextFile } from '../TextFile.js';
 
 export class CSpellConfigFileYaml extends ImplCSpellConfigFile {
     constructor(

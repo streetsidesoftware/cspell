@@ -2,7 +2,7 @@ import assert from 'node:assert';
 
 import { describe, expect, test, vi } from 'vitest';
 
-import { CSpellConfigFilePackageJson } from '../CSpellConfigFilePackageJson.js';
+import { CSpellConfigFilePackageJson } from '../CSpellConfigFile/CSpellConfigFilePackageJson.js';
 import { defaultNextDeserializer, defaultNextSerializer } from '../defaultNext.js';
 import { json } from '../test-helpers/util.js';
 import { serializerPackageJson } from './packageJson.js';

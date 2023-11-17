@@ -897,7 +897,7 @@ interface ResolveFileResult {
  * @param filename an absolute path, relative path, `~` path, or a node_module.
  * @param relativeTo absolute path
  */
-declare function resolveFile(filename: string, relativeTo: string): ResolveFileResult;
+declare function resolveFile(filename: string, relativeTo: string | URL): ResolveFileResult;
 
 declare function clearCachedFiles(): Promise<void>;
 

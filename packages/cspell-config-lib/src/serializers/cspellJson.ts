@@ -1,8 +1,8 @@
-import type { ICSpellConfigFile } from '../CSpellConfigFile.js';
-import { CSpellConfigFileJson, parseCSpellConfigFileJson } from '../CSpellConfigFileJson.js';
+import type { CSpellConfigFile, ICSpellConfigFile } from '../CSpellConfigFile.js';
+import { CSpellConfigFileJson, parseCSpellConfigFileJson } from '../CSpellConfigFile/CSpellConfigFileJson.js';
 import type { DeserializerNext, DeserializerParams, SerializerMiddleware, SerializerNext } from '../Serializer.js';
 
-function deserializer(params: DeserializerParams, next: DeserializerNext): ICSpellConfigFile {
+function deserializer(params: DeserializerParams, next: DeserializerNext): CSpellConfigFile {
     if (!isJsonFile(params.url.pathname)) return next(params);
 
     return parseCSpellConfigFileJson(params);

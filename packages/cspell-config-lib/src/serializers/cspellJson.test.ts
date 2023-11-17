@@ -1,7 +1,7 @@
 import assert from 'assert';
 import { describe, expect, test, vi } from 'vitest';
 
-import { CSpellConfigFileJson } from '../CSpellConfigFileJson.js';
+import { CSpellConfigFileJson } from '../CSpellConfigFile/CSpellConfigFileJson.js';
 import { defaultNextDeserializer, defaultNextSerializer } from '../defaultNext.js';
 import { json } from '../test-helpers/util.js';
 import { serializerCSpellJson } from './cspellJson.js';
