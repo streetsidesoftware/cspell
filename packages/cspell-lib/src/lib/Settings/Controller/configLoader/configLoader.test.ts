@@ -18,6 +18,7 @@ import {
     __testing__ as __configLoader_testing__,
     clearCachedSettingsFiles,
     getCachedFileSize,
+    getDefaultConfigLoader,
     getGlobalSettings,
     loadConfig,
     loadConfigSync,
@@ -30,8 +31,13 @@ import { extractImportErrors } from './extractImportErrors.js';
 import { readSettings } from './readSettings.js';
 import { readSettingsFiles } from './readSettingsFiles.js';
 
-const { normalizeCacheSettings, validateRawConfigExports, validateRawConfigVersion, getDefaultConfigLoaderInternal } =
-    __configLoader_testing__;
+const {
+    getDefaultConfigLoaderInternal,
+    normalizeCacheSettings,
+    toURL,
+    validateRawConfigExports,
+    validateRawConfigVersion,
+} = __configLoader_testing__;
 
 const loader = getDefaultConfigLoaderInternal();
 const normalizeSettings = loader._normalizeSettings.bind(loader);
@@ -342,6 +348,13 @@ describe('Validate search/load config files', () => {
         };
     }
 
+    function cf(filename: string | URL, settings: CSpellUserSettings): { url: URL; settings: CSpellUserSettings } {
+        return {
+            url: toURL(filename),
+            settings,
+        };
+    }
+
     /**
      * Create an ImportFileRef that has an `error` field.
      */
@@ -459,6 +472,50 @@ describe('Validate search/load config files', () => {
         expect(searchResult).toEqual(oc(expectedConfig));
         expect(mockedLogWarning).toHaveBeenCalledTimes(0);
         expect(mockedLogError).toHaveBeenCalledTimes(0);
+    });
+
+    /*
+    test.each`
+        file                                          | relativeTo   | expectedConfig
+        ${s('linked/cspell.config.js')}               | ${undefined} | ${cf(s('linked/cspell.config.js'), {})}
+        ${s('js-config/cspell.config.js')}            | ${undefined} | ${cf(s('js-config/cspell.config.js'), {})}
+    */
+
+    test.each`
+        file                                          | relativeTo   | expectedConfig
+        ${samplesSrc}                                 | ${undefined} | ${readError(samplesSrc).error}
+        ${s('bug-fixes')}                             | ${undefined} | ${readError(s('bug-fixes')).error}
+        ${s('bug-fixes/not-found/cspell.json')}       | ${undefined} | ${readError(s('bug-fixes/not-found/cspell.json')).error}
+        ${s('dot-config/.config/cspell.config.yaml')} | ${undefined} | ${oc(cf(s('dot-config/.config/cspell.config.yaml'), oc({ name: 'Nested in .config' })))}
+        ${rp('cspell.config.json')}                   | ${undefined} | ${oc(cf(rp('cspell.config.json'), oc({ id: 'cspell-package-config' })))}
+    `('readConfigFile $file $relativeTo', async ({ file, relativeTo, expectedConfig }) => {
+        const loader = getDefaultConfigLoader();
+        const cfg = await loader.readConfigFile(file, relativeTo);
+        expect(cfg).toEqual(expectedConfig);
+        expect(mockedLogWarning).toHaveBeenCalledTimes(0);
+        expect(mockedLogError).toHaveBeenCalledTimes(0);
+    });
+
+    test('readConfigFile cached', async () => {
+        const loader = getDefaultConfigLoader();
+        const filename = rp('cspell.config.json');
+        const cfg = await loader.readConfigFile(filename);
+        const cfg2 = await loader.readConfigFile(filename);
+        expect(cfg2).toBe(cfg);
+        loader.clearCachedSettingsFiles();
+        const cfg3 = await loader.readConfigFile(filename);
+        expect(cfg3).not.toBe(cfg);
+    });
+
+    test('readConfigFile pending', async () => {
+        const loader = getDefaultConfigLoader();
+        const filename = rp('cspell.config.json');
+        const pCfg = loader.readConfigFile(filename);
+        const pCfg2 = loader.readConfigFile(filename);
+        expect(pCfg2).not.toBe(pCfg);
+        const cfg = await pCfg;
+        const cfg2 = await pCfg2;
+        expect(cfg2).toBe(cfg);
     });
 
     test.each`

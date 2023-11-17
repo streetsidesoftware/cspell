@@ -1,4 +1,4 @@
-import type { ICSpellConfigFile } from './CSpellConfigFile.js';
+import type { CSpellConfigFile, ICSpellConfigFile } from './CSpellConfigFile.js';
 import { defaultNextDeserializer, defaultNextSerializer } from './defaultNext.js';
 import type { IO } from './IO.js';
 import type { DeserializerNext, DeserializerParams, SerializerMiddleware, SerializerNext } from './Serializer.js';
@@ -8,8 +8,8 @@ import { toURL } from './util/toURL.js';
 export interface CSpellConfigFileReaderWriter {
     readonly io: IO;
     readonly middleware: SerializerMiddleware[];
-    readConfig(uri: URL | string): Promise<ICSpellConfigFile>;
-    writeConfig(configFile: ICSpellConfigFile): Promise<TextFileRef>;
+    readConfig(uri: URL | string): Promise<CSpellConfigFile>;
+    writeConfig(configFile: CSpellConfigFile): Promise<TextFileRef>;
 }
 
 export class CSpellConfigFileReaderWriterImpl implements CSpellConfigFileReaderWriter {
@@ -18,7 +18,7 @@ export class CSpellConfigFileReaderWriterImpl implements CSpellConfigFileReaderW
         readonly middleware: SerializerMiddleware[],
     ) {}
 
-    async readConfig(uri: URL | string): Promise<ICSpellConfigFile> {
+    async readConfig(uri: URL | string): Promise<CSpellConfigFile> {
         const url = toURL(uri);
         const file = await this.io.readFile(url);
 

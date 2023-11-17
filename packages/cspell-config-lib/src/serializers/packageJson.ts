@@ -1,10 +1,10 @@
-import type { ICSpellConfigFile } from '../CSpellConfigFile.js';
+import type { CSpellConfigFile, ICSpellConfigFile } from '../CSpellConfigFile.js';
 import { CSpellConfigFilePackageJson, parseCSpellConfigFilePackageJson } from '../CSpellConfigFilePackageJson.js';
 import type { DeserializerNext, DeserializerParams, SerializerMiddleware, SerializerNext } from '../Serializer.js';
 
 const isSupportedFormat = /\bpackage\.json$/i;
 
-function deserializer(params: DeserializerParams, next: DeserializerNext): ICSpellConfigFile {
+function deserializer(params: DeserializerParams, next: DeserializerNext): CSpellConfigFile {
     if (!isSupportedFormat.test(params.url.pathname)) return next(params);
 
     return parseCSpellConfigFilePackageJson(params);
