@@ -3,6 +3,10 @@ import type { CSpellSettings } from '@cspell/cspell-types';
 import { ImplCSpellConfigFile } from '../CSpellConfigFile.js';
 
 export class CSpellConfigFileJavaScript extends ImplCSpellConfigFile {
+    get readonly(): boolean {
+        return true;
+    }
+
     constructor(
         readonly url: URL,
         readonly settings: CSpellSettings,

@@ -2,6 +2,7 @@ import type { CSpellSettings } from '@cspell/cspell-types';
 import { describe, expect, test, vi } from 'vitest';
 
 import { CSpellConfigFile } from './CSpellConfigFile.js';
+import { CSpellConfigFileJavaScript } from './CSpellConfigFile/index.js';
 import { CSpellConfigFileReaderWriterImpl } from './CSpellConfigFileReaderWriter.js';
 import type { IO } from './IO.js';
 import { defaultDeserializers } from './serializers/index.js';
@@ -37,7 +38,7 @@ describe('CSpellConfigFileReaderWriter', () => {
     test.each`
         uri                      | content
         ${'file:///cspell.json'} | ${'{}\n'}
-    `('writeConfig', async ({ uri, content }) => {
+    `('writeConfig $uri', async ({ uri, content }) => {
         const io: IO = {
             readFile: vi.fn((url) => Promise.resolve({ url, content })),
             writeFile: vi.fn((ref) => Promise.resolve(ref)),
@@ -48,6 +49,24 @@ describe('CSpellConfigFileReaderWriter', () => {
         const url = new URL(uri);
         await expect(rw.writeConfig(cf)).resolves.toEqual({ url });
         expect(io.writeFile).toHaveBeenCalledWith({ url, content });
+    });
+
+    test.each`
+        uri                             | settings
+        ${'file:///cspell.config.js'}   | ${{}}
+        ${'file:///cspell.config.json'} | ${{ readonly: true }}
+    `('writeConfig readonly $uri', async ({ uri, settings }) => {
+        const io: IO = {
+            readFile: vi.fn((url) => Promise.resolve({ url, content: '' })),
+            writeFile: vi.fn((ref) => Promise.resolve(ref)),
+        };
+
+        const rw = new CSpellConfigFileReaderWriterImpl(io, defaultDeserializers);
+        const url = new URL(uri);
+        const cf = url.pathname.endsWith('.js')
+            ? new CSpellConfigFileJavaScript(url, settings)
+            : new Cfg(url, settings);
+        await expect(rw.writeConfig(cf)).rejects.toEqual(new Error(`Config file is readonly: ${uri}`));
     });
 
     test('Fail to serialize', async () => {

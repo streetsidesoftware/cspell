@@ -15,6 +15,10 @@ export abstract class CSpellConfigFile implements ICSpellConfigFile {
 
     abstract readonly settings: CSpellSettings;
     abstract addWords(words: string[]): this;
+
+    get readonly(): boolean {
+        return this.settings.readonly || this.url.protocol !== 'file:';
+    }
 }
 
 export abstract class ImplCSpellConfigFile extends CSpellConfigFile {
@@ -26,6 +30,7 @@ export abstract class ImplCSpellConfigFile extends CSpellConfigFile {
     }
 
     addWords(words: string[]): this {
+        if (this.readonly) throw new Error(`Config file is readonly: ${this.url.href}`);
         const w = this.settings.words || [];
         this.settings.words = w;
         addUniqueWordsToListAndSort(w, words);
