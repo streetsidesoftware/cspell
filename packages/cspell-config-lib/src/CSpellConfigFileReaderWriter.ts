@@ -12,6 +12,7 @@ export interface CSpellConfigFileReaderWriter {
     readonly loaders: FileLoaderMiddleware[];
     readConfig(uri: URL | string): Promise<CSpellConfigFile>;
     writeConfig(configFile: CSpellConfigFile): Promise<TextFileRef>;
+    clearCachedFiles(): void;
 }
 
 export class CSpellConfigFileReaderWriterImpl implements CSpellConfigFileReaderWriter {
@@ -23,7 +24,7 @@ export class CSpellConfigFileReaderWriterImpl implements CSpellConfigFileReaderW
     constructor(
         readonly io: IO,
         readonly middleware: SerializerMiddleware[],
-        readonly loaders: FileLoaderMiddleware[] = [],
+        readonly loaders: FileLoaderMiddleware[],
     ) {}
 
     readConfig(uri: URL | string): Promise<CSpellConfigFile> {
@@ -45,5 +46,11 @@ export class CSpellConfigFileReaderWriterImpl implements CSpellConfigFileReaderW
         const content = this.serialize(configFile);
         await this.io.writeFile({ url: configFile.url, content });
         return { url: configFile.url };
+    }
+
+    clearCachedFiles(): void {
+        for (const loader of this.loaders) {
+            loader.reset?.();
+        }
     }
 }
