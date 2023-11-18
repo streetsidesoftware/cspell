@@ -29,4 +29,6 @@ export interface LoaderReducer {
 
 export interface FileLoaderMiddleware {
     load: LoaderReducer;
+    /** clear any cached values. */
+    reset?: () => void;
 }

@@ -1,7 +1,8 @@
+import type { CSpellSettings } from '@cspell/cspell-types';
 import { parse, stringify } from 'comment-json';
 import { describe, expect, test } from 'vitest';
 
-import { __testing__ } from './CSpellConfigFile.js';
+import { __testing__, ImplCSpellConfigFile } from './CSpellConfigFile.js';
 
 const { addUniqueWordsToListAndSort } = __testing__;
 
@@ -13,6 +14,7 @@ describe('CSpellConfigFile', () => {
     const listWithCommentsAddTen = toStr(
         parse('["one", // comment after\n "ten", \n // comment before three\n "three",\n "two"]'),
     );
+
     test.each`
         list                | toAdd      | expected
         ${[]}               | ${[]}      | ${[]}
@@ -25,8 +27,19 @@ describe('CSpellConfigFile', () => {
         addUniqueWordsToListAndSort(list, toAdd);
         expect(toStr(list)).toBe(expected);
     });
+
+    test('ImplCSpellConfigFile readonly', () => {
+        const cfg = new Cfg(new URL('file:///cspell.json'), { readonly: true });
+        expect(() => cfg.addWords(['one'])).toThrowError('Config file is readonly: file:///cspell.json');
+    });
 });
 
 function toStr(obj: unknown): string {
     return stringify(obj, null, 2);
+}
+
+class Cfg extends ImplCSpellConfigFile {
+    constructor(url: URL, settings: CSpellSettings = {}) {
+        super(url, settings);
+    }
 }

@@ -265,6 +265,7 @@ export class ConfigLoader {
         this.cachedConfigFiles.clear();
         this.cspellConfigExplorer.clearCaches();
         this.cspellConfigExplorerSync.clearCaches();
+        this.cspellConfigFileReaderWriter.clearCachedFiles();
     }
 
     /**
