@@ -9,7 +9,7 @@ import { registerHandlers } from './handlers/node/file.js';
 import type { BufferEncoding } from './models/BufferEncoding.js';
 import type { FileReference, FileResource, UrlOrReference } from './models/FileResource.js';
 import type { Stats } from './models/Stats.js';
-import { toURL, urlBasename, urlDirname } from './node/file/url.js';
+import { toFileURL, toURL, urlBasename, urlDirname } from './node/file/url.js';
 import {
     RequestFsReadFile,
     RequestFsReadFileSync,
@@ -25,24 +25,24 @@ export class CSpellIONode implements CSpellIO {
         registerHandlers(serviceBus);
     }
 
-    readFile(uriOrFilename: UrlOrReference, encoding?: BufferEncoding): Promise<FileResource> {
-        const ref = toFileReference(uriOrFilename, encoding);
+    readFile(urlOrFilename: UrlOrReference, encoding?: BufferEncoding): Promise<FileResource> {
+        const ref = toFileReference(urlOrFilename, encoding);
         const res = this.serviceBus.dispatch(RequestFsReadFile.create(ref));
         if (!isServiceResponseSuccess(res)) {
             throw genError(res.error, 'readFile');
         }
         return res.value;
     }
-    readFileSync(uriOrFilename: UrlOrReference, encoding?: BufferEncoding): FileResource {
-        const ref = toFileReference(uriOrFilename, encoding);
+    readFileSync(urlOrFilename: UrlOrReference, encoding?: BufferEncoding): FileResource {
+        const ref = toFileReference(urlOrFilename, encoding);
         const res = this.serviceBus.dispatch(RequestFsReadFileSync.create(ref));
         if (!isServiceResponseSuccess(res)) {
             throw genError(res.error, 'readFileSync');
         }
         return res.value;
     }
-    writeFile(uriOrFilename: UrlOrReference, content: string | ArrayBufferView): Promise<FileReference> {
-        const ref = toFileReference(uriOrFilename);
+    writeFile(urlOrFilename: UrlOrReference, content: string | ArrayBufferView): Promise<FileReference> {
+        const ref = toFileReference(urlOrFilename);
         const fileResource = CFileResource.from(ref, content);
         const res = this.serviceBus.dispatch(RequestFsWriteFile.create(fileResource));
         if (!isServiceResponseSuccess(res)) {
@@ -50,16 +50,16 @@ export class CSpellIONode implements CSpellIO {
         }
         return res.value;
     }
-    getStat(uriOrFilename: UrlOrReference): Promise<Stats> {
-        const ref = toFileReference(uriOrFilename);
+    getStat(urlOrFilename: UrlOrReference): Promise<Stats> {
+        const ref = toFileReference(urlOrFilename);
         const res = this.serviceBus.dispatch(RequestFsStat.create(ref));
         if (!isServiceResponseSuccess(res)) {
             throw genError(res.error, 'getStat');
         }
         return res.value;
     }
-    getStatSync(uriOrFilename: UrlOrReference): Stats {
-        const ref = toFileReference(uriOrFilename);
+    getStatSync(urlOrFilename: UrlOrReference): Stats {
+        const ref = toFileReference(urlOrFilename);
         const res = this.serviceBus.dispatch(RequestFsStatSync.create(ref));
         if (!isServiceResponseSuccess(res)) {
             throw genError(res.error, 'getStatSync');
@@ -69,15 +69,19 @@ export class CSpellIONode implements CSpellIO {
     compareStats(left: Stats, right: Stats): number {
         return compareStats(left, right);
     }
-    toURL(uriOrFilename: UrlOrReference): URL {
-        if (isFileReference(uriOrFilename)) return uriOrFilename.url;
-        return toURL(uriOrFilename);
+    toURL(urlOrFilename: UrlOrReference, relativeTo?: string | URL): URL {
+        if (isFileReference(urlOrFilename)) return urlOrFilename.url;
+        return toURL(urlOrFilename, relativeTo);
     }
-    uriBasename(uriOrFilename: UrlOrReference): string {
-        return urlBasename(this.toURL(uriOrFilename));
+    toFileURL(urlOrFilename: UrlOrReference, relativeTo?: string | URL): URL {
+        if (isFileReference(urlOrFilename)) return urlOrFilename.url;
+        return toFileURL(urlOrFilename, relativeTo);
     }
-    uriDirname(uriOrFilename: UrlOrReference): URL {
-        return urlDirname(this.toURL(uriOrFilename));
+    urlBasename(urlOrFilename: UrlOrReference): string {
+        return urlBasename(this.toURL(urlOrFilename));
+    }
+    urlDirname(urlOrFilename: UrlOrReference): URL {
+        return urlDirname(this.toURL(urlOrFilename));
     }
 }
 

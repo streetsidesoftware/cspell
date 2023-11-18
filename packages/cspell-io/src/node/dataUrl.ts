@@ -2,7 +2,7 @@ import { promises as fs } from 'fs';
 import * as fsPath from 'path';
 
 import { arrayBufferViewToBuffer } from '../common/arrayBuffers.js';
-import { toURL } from './file/url.js';
+import { toFileURL } from './file/url.js';
 
 /**
  * Generates a string of the following format:
@@ -88,7 +88,7 @@ export async function encodeDataUrlFromFile(
     mediaType?: string,
     attributes?: Iterable<readonly [string, string]> | undefined,
 ): Promise<string> {
-    const url = toURL(path);
+    const url = toFileURL(path);
     const filename = fsPath.basename(url.pathname);
     const guess = guessMimeType(filename);
     mediaType = mediaType || guess?.mimeType || 'text/plain';

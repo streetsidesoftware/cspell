@@ -1,7 +1,7 @@
 import * as path from 'path';
 import { describe, expect, test } from 'vitest';
 
-import { basename, isUrlLike, toURL, urlBasename, urlDirname } from './url.js';
+import { basename, isUrlLike, toFileURL, toURL, urlBasename, urlDirname } from './url.js';
 
 const root = path.join(__dirname, '../..');
 const oc = expect.objectContaining;
@@ -25,9 +25,8 @@ describe('util', () => {
         ${'samples/cities.txt.gz'}                                                                          | ${oc({ protocol: 'file:' })}
         ${'https://github.com/streetsidesoftware/cspell/raw/main/packages/cspell-io/samples/cities.txt'}    | ${oc({ protocol: 'https:' })}
         ${'https://github.com/streetsidesoftware/cspell/raw/main/packages/cspell-io/samples/cities.txt.gz'} | ${oc({ protocol: 'https:' })}
-    `('toURL $file', async ({ file, expected }) => {
-        const filename = isUrlLike(file) ? file : path.resolve(root, file);
-        const url = toURL(filename);
+    `('toFileURL $file', async ({ file, expected }) => {
+        const url = toFileURL(file, root);
         expect(url).toEqual(expected);
     });
 
@@ -35,6 +34,8 @@ describe('util', () => {
         file                                                                                                | expected
         ${'samples/cities.txt'}                                                                             | ${'cities.txt'}
         ${'samples/cities.txt.gz'}                                                                          | ${'cities.txt.gz'}
+        ${'https://example.com/dir/file.txt'}                                                               | ${'file.txt'}
+        ${'https://example.com/dir/'}                                                                       | ${'dir/'}
         ${'https://github.com/streetsidesoftware/cspell/raw/main/packages/cspell-io/samples/cities.txt'}    | ${'cities.txt'}
         ${'https://github.com/streetsidesoftware/cspell/raw/main/packages/cspell-io/samples/cities.txt.gz'} | ${'cities.txt.gz'}
         ${'data:text/plain;charset=utf8,Hello%2C%20World!'}                                                 | ${'text.plain'}
@@ -44,7 +45,7 @@ describe('util', () => {
         ${toURL('data:application/gzip;base64,H')}                                                          | ${'application.gzip'}
         ${'data:application/vnd.cspell.dictionary+trie,H'}                                                  | ${'application.vnd.cspell.dictionary.trie'}
     `('urlBasename $file', async ({ file, expected }) => {
-        const filename = isUrlLike(file) ? file : path.resolve(root, file);
+        const filename = isUrlLike(file) ? file : toFileURL(path.resolve(root, file));
         expect(urlBasename(filename)).toEqual(expected);
     });
 
@@ -60,10 +61,10 @@ describe('util', () => {
         ${'data:text/plain;charset=utf8,Hello%2C%20World!'}                                                 | ${'data:'}
         ${'data:text/plain;charset=utf8;filename=cities.txt,New%20York'}                                    | ${'data:'}
         ${'data:application/gzip;base64,H'}                                                                 | ${'data:'}
-        ${toURL('data:application/gzip;base64,H')}                                                          | ${'data:'}
+        ${toFileURL('data:application/gzip;base64,H')}                                                      | ${'data:'}
         ${'data:application/vnd.cspell.dictionary+trie,H'}                                                  | ${'data:'}
     `('urlDirname $file', async ({ file, expected }) => {
-        const filename = isUrlLike(file) ? file : path.resolve(root, file);
+        const filename = isUrlLike(file) ? file : toFileURL(path.resolve(root, file));
         expect(urlDirname(filename).toString()).toEqual(expected);
     });
 

@@ -1,3 +1,4 @@
+import path from 'path';
 import { pathToFileURL } from 'url';
 
 const isZippedRegExp = /\.gz($|[?#])/i;
@@ -18,16 +19,43 @@ export function isSupportedURL(url: URL): boolean {
 export function isFileURL(url: URL): boolean {
     return url.protocol === 'file:';
 }
-export function toURL(filename: string | URL): URL {
-    return filename instanceof URL || typeof filename !== 'string'
-        ? filename
-        : isUrlLike(filename)
-          ? new URL(filename)
-          : pathToFileURL(filename);
+
+/**
+ * Try to make a file URL.
+ * - if filenameOrUrl is already a URL, it is returned as is.
+ * -
+ * @param filenameOrUrl
+ * @param relativeTo - optional URL, if given, filenameOrUrl will be parsed as relative.
+ * @returns a URL
+ */
+export function toFileURL(filenameOrUrl: string | URL, relativeTo?: string | URL): URL {
+    if (typeof filenameOrUrl !== 'string') return filenameOrUrl;
+    return isUrlLike(filenameOrUrl)
+        ? new URL(filenameOrUrl)
+        : relativeTo && isUrlLike(relativeTo)
+          ? new URL(normalizePath(filenameOrUrl), relativeTo)
+          : relativeTo
+            ? pathToFileURL(path.resolve(relativeTo.toString(), filenameOrUrl))
+            : pathToFileURL(filenameOrUrl);
+}
+
+/**
+ * Try to make a URL.
+ * @param filenameOrUrl
+ * @param relativeTo - optional URL, if given, filenameOrUrl will be parsed as relative.
+ * @returns a URL
+ */
+export function toURL(filenameOrUrl: string | URL, relativeTo?: string | URL): URL {
+    return typeof filenameOrUrl !== 'string' ? filenameOrUrl : new URL(filenameOrUrl, relativeTo);
 }
 
 const regMatchFilename = /filename=([^;,]*)/;
 
+/**
+ * Try to determine the base name of a URL.
+ * @param url
+ * @returns the base name of a URL, including the trailing `/` if present.
+ */
 export function urlBasename(url: string | URL): string {
     function guessDataUrlName(header: string): string {
         const filenameMatch = header.match(regMatchFilename);
@@ -36,30 +64,40 @@ export function urlBasename(url: string | URL): string {
         return mime.replace(/\W/g, '.');
     }
 
-    if (typeof url === 'string' && url.startsWith('data:')) {
-        return guessDataUrlName(url.split(',', 1)[0].split(':', 2)[1]);
-    }
     url = toURL(url);
+
     if (url.protocol === 'data:') {
         return guessDataUrlName(url.pathname.split(',', 1)[0]);
     }
-    return basename(url.pathname);
+    const suffix = url.pathname.endsWith('/') ? '/' : '';
+    return basename(url.pathname) + suffix;
 }
 
+/**
+ * Try to determine the parent directory URL of the uri.
+ * @param url - url to extract the dirname from.
+ * @returns a URL
+ */
 export function urlDirname(url: string | URL): URL {
-    if (typeof url === 'string' && url.startsWith('data:')) {
-        return toURL('data:');
-    }
     url = toURL(url);
     if (url.protocol === 'data:') {
-        return toURL('data:');
+        return new URL('data:');
     }
 
     return new URL(url.pathname.endsWith('/') ? '..' : '.', url);
 }
 
+/**
+ * return the basename of a path, removing the trailing `/` if present.
+ * @param path
+ * @returns
+ */
 export function basename(path: string): string {
     path = path.endsWith('/') ? path.slice(0, path.length - 1) : path;
     const idx = path.lastIndexOf('/');
     return idx >= 0 ? path.slice(idx + 1) : path;
+}
+
+function normalizePath(filePath: string): string {
+    return filePath.split(path.sep).join('/');
 }

@@ -1,6 +1,6 @@
 import type { BufferEncoding } from '../models/BufferEncoding.js';
 import type { FileReference, UrlOrReference } from '../models/FileResource.js';
-import { toURL } from '../node/file/url.js';
+import { toFileURL } from '../node/file/url.js';
 
 export class CFileReference implements FileReference {
     /**
@@ -56,13 +56,21 @@ export class CFileReference implements FileReference {
     }
 }
 
+/**
+ *
+ * @param file - a URL, file path, or FileReference
+ * @param encoding - optional encoding used to decode the file.
+ * @param baseFilename - optional base filename used with data URLs.
+ * @param gz - optional flag to indicate if the file is gzipped.
+ * @returns a FileReference
+ */
 export function toFileReference(
     file: UrlOrReference,
     encoding?: BufferEncoding,
     baseFilename?: string,
     gz?: boolean | undefined,
 ): FileReference {
-    const fileReference = typeof file === 'string' ? toURL(file) : file;
+    const fileReference = typeof file === 'string' ? toFileURL(file) : file;
     if (fileReference instanceof URL) return new CFileReference(fileReference, encoding, baseFilename, gz);
     return CFileReference.from(fileReference);
 }

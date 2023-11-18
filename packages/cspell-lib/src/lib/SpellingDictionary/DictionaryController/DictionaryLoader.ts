@@ -270,7 +270,7 @@ export class DictionaryLoader {
 
     private normalizeOptions(uri: string, options: LoadFileOptions): LoadFileOptions {
         if (options.name) return options;
-        return { ...options, name: this.cspellIO.uriBasename(uri) };
+        return { ...options, name: this.cspellIO.urlBasename(uri) };
     }
 
     private loadInlineDict(def: DictionaryDefinitionInlineInternal): SpellingDictionary {
