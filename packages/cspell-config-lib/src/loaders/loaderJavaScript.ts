@@ -5,9 +5,9 @@ import { CSpellConfigFileJavaScript } from '../CSpellConfigFile/CSpellConfigFile
 import type { FileLoaderMiddleware, LoaderNext, LoadRequest } from '../FileLoader.js';
 
 async function importJavaScript(url: URL, hashSuffix: number | string): Promise<CSpellConfigFileJavaScript> {
-    url = new URL(url.href);
-    url.hash = `${url.hash};loaderSuffix=${hashSuffix}`;
-    const result = await import(url.href);
+    const _url = new URL(url.href);
+    _url.hash = `${_url.hash};loaderSuffix=${hashSuffix}`;
+    const result = await import(_url.href);
     const settings = result.default ?? result;
     return new CSpellConfigFileJavaScript(url, settings);
 }
