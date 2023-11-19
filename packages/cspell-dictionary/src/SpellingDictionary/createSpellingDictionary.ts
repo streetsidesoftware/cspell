@@ -1,3 +1,5 @@
+import { fileURLToPath } from 'node:url';
+
 import { buildITrieFromWords, parseDictionaryLines } from 'cspell-trie-lib';
 import { deepEqual } from 'fast-equals';
 
@@ -32,7 +34,7 @@ export function createSpellingDictionary(
     source: string,
     options?: SpellingDictionaryOptions | undefined,
 ): SpellingDictionary {
-    const params: CreateSpellingDictionaryParams = [wordList, name, source, options];
+    const params: CreateSpellingDictionaryParams = [wordList, name, source.toString(), options];
 
     if (!Array.isArray(wordList)) {
         return _createSpellingDictionary(params);
@@ -79,10 +81,12 @@ export interface SpellingDictionaryLoadError extends Error {
 
 export function createFailedToLoadDictionary(
     name: string,
-    source: string,
+    sourceUrl: URL | string,
     error: Error,
     options?: SpellingDictionaryOptions | undefined,
 ): SpellingDictionary {
+    const sourceHref = typeof sourceUrl === 'string' ? sourceUrl : sourceUrl.href;
+    const source = sourceHref.startsWith('file:') ? fileURLToPath(sourceUrl) : sourceHref;
     options = options || {};
     return {
         name,
