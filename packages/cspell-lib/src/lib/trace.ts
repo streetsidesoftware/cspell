@@ -1,3 +1,5 @@
+import { fileURLToPath } from 'node:url';
+
 import type { CSpellSettings, DictionaryId, LocaleId } from '@cspell/cspell-types';
 import { genSequence } from 'gensequence';
 
@@ -100,7 +102,7 @@ export async function* traceWordsAsync(
                 forbidden: findResult?.forbidden || false,
                 noSuggest: findResult?.noSuggest || false,
                 dictName: dict.name,
-                dictSource: dict.source,
+                dictSource: dictSourceToFilename(dict.source),
                 dictActive: setOfActiveDicts.has(dict.name),
                 configSource: config.name || '',
                 errors: normalizeErrors(dict.getErrors?.()),
@@ -110,4 +112,11 @@ export async function* traceWordsAsync(
     for await (const word of words) {
         yield processWord(word);
     }
+}
+
+function dictSourceToFilename(source: string): string {
+    if (source.startsWith('file:')) {
+        return fileURLToPath(source);
+    }
+    return source;
 }
