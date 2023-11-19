@@ -1,6 +1,6 @@
 import { describe, expect, test } from 'vitest';
 
-import { FetchUrlError } from './FetchError.js';
+import { FetchUrlError, toError, toFetchUrlError } from './FetchError.js';
 import { toURL } from './url.js';
 
 const oc = expect.objectContaining;
@@ -29,5 +29,21 @@ describe('FetchError', () => {
         const e = FetchUrlError.fromError(url, error);
         expect(e).toEqual(expected);
         expect(e.url).toBe(url);
+    });
+
+    test.each`
+        err                      | expected
+        ${new Error('Not good')} | ${Error('Not good')}
+        ${'hello'}               | ${Error('Unknown Error')}
+    `('toError', ({ err, expected }) => {
+        expect(toError(err)).toEqual(expected);
+    });
+
+    test.each`
+        err                      | expected
+        ${new Error('Not good')} | ${new FetchUrlError('Not good', undefined, undefined, new URL('https://example.com/'))}
+    `('toFetchUrlError', ({ err, expected }) => {
+        const url = new URL('https://example.com/');
+        expect(toFetchUrlError(err, url)).toEqual(expected);
     });
 });
