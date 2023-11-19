@@ -45,7 +45,7 @@ describe('fetch', () => {
     test.each`
         url                                           | expected
         ${'https://x.example.com/'}                   | ${'getaddrinfo ENOTFOUND x.example.com'}
-        ${'https://interglot.com/not_found/file.txt'} | ${'URL not found.'}
+        ${'https://interglot.com/not_found/file.txt'} | ${/URL not found|getaddrinfo EAI_AGAIN/}
     `('fetchURL with error', async ({ url, expected }) => {
         url = new URL(url);
         await expect(fetchURL(url)).rejects.toThrowError(expected);
