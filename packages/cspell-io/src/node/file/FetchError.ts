@@ -43,9 +43,17 @@ interface ErrorWithOptionalCause extends Error {
 }
 
 export function isErrorWithOptionalCause(e: unknown): e is ErrorWithOptionalCause {
-    return !!e && typeof e === 'object' && 'cause' in e && isNodeError(e.cause);
+    return isError(e) && (!('cause' in e) || isNodeError(e.cause) || isNodeError(e));
 }
 
 export function getCause(e: unknown): NodeJS.ErrnoException | undefined {
     return isErrorWithOptionalCause(e) ? e.cause : undefined;
+}
+
+export function toFetchUrlError(err: unknown, url: URL): FetchUrlError {
+    return err instanceof FetchUrlError ? err : FetchUrlError.fromError(url, toError(err));
+}
+
+export function toError(err: unknown): Error {
+    return err instanceof Error ? err : Error('Unknown Error', { cause: err });
 }

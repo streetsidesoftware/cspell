@@ -63,15 +63,15 @@ interface CacheEntrySync extends CacheEntry {
 }
 
 interface Reader {
-    read(filename: string): Promise<string>;
-    readLines(filename: string): Promise<string[]>;
-    readSync(filename: string): string;
-    readLinesSync(filename: string): string[];
+    read(filename: URL): Promise<string>;
+    readLines(filename: URL): Promise<string[]>;
+    readSync(filename: URL): string;
+    readLinesSync(filename: URL): string[];
 }
 
 type LoaderType = keyof Loaders;
-type Loader = (reader: Reader, filename: string, options: LoadOptions) => Promise<SpellingDictionary>;
-type LoaderSync = (reader: Reader, filename: string, options: LoadOptions) => SpellingDictionary;
+type Loader = (reader: Reader, filename: URL, options: LoadOptions) => Promise<SpellingDictionary>;
+type LoaderSync = (reader: Reader, filename: URL, options: LoadOptions) => SpellingDictionary;
 
 interface Loaders {
     S: Loader;
@@ -123,7 +123,7 @@ export class DictionaryLoader {
         if (entry?.dictionary && entry.loadingState === LoadingState.Loaded) {
             return entry.dictionary;
         }
-        const loadedEntry = this.loadEntrySync(def.path, def);
+        const loadedEntry = this.loadEntrySync(this.cspellIO.toFileURL(def.path), def);
         this.setCacheEntry(key, loadedEntry, def);
         return loadedEntry.dictionary;
     }
@@ -142,7 +142,7 @@ export class DictionaryLoader {
         if (defEntry) {
             return defEntry;
         }
-        const key = calcKey(def);
+        const key = this.calcKey(def);
         const entry = this.dictionaryCache.get(key);
         if (entry) {
             // replace old entry so it can be released.
@@ -168,7 +168,7 @@ export class DictionaryLoader {
             const sigMatches = entry.sig === sig;
             if (sigMatches && hasChanged) {
                 entry.loadingState = LoadingState.Loading;
-                const key = calcKey(entry.options);
+                const key = this.calcKey(entry.options);
                 const newEntry = this.loadEntry(entry.uri, entry.options);
                 this.dictionaryCache.set(key, newEntry);
                 this.dictionaryCacheByDef.set(entry.options, { key, entry: newEntry });
@@ -176,21 +176,22 @@ export class DictionaryLoader {
         }
     }
 
-    private loadEntry(uri: string, options: LoadFileOptions, now = Date.now()): CacheEntry {
-        options = this.normalizeOptions(uri, options);
-        const pDictionary = load(this.reader, uri, options).catch((e) =>
+    private loadEntry(fileOrUri: string | URL, options: LoadFileOptions, now = Date.now()): CacheEntry {
+        const url = this.cspellIO.toFileURL(fileOrUri);
+        options = this.normalizeOptions(url, options);
+        const pDictionary = load(this.reader, this.cspellIO.toFileURL(fileOrUri), options).catch((e) =>
             createFailedToLoadDictionary(
                 options.name,
-                uri,
-                new SpellingDictionaryLoadError(uri, options, e, 'failed to load'),
+                fileOrUri,
+                new SpellingDictionaryLoadError(url.href, options, e, 'failed to load'),
                 options,
             ),
         );
-        const pStat = this.getStat(uri);
+        const pStat = this.getStat(fileOrUri);
         const pending = Promise.all([pDictionary, pStat]);
         const sig = now + Math.random();
         const entry: CacheEntry = {
-            uri,
+            uri: url.href,
             options,
             ts: now,
             stat: undefined,
@@ -209,15 +210,16 @@ export class DictionaryLoader {
         return entry;
     }
 
-    private loadEntrySync(uri: string, options: LoadFileOptions, now = Date.now()): CacheEntrySync {
-        options = this.normalizeOptions(uri, options);
-        const stat = this.getStatSync(uri);
+    private loadEntrySync(fileOrUri: string | URL, options: LoadFileOptions, now = Date.now()): CacheEntrySync {
+        const url = this.cspellIO.toFileURL(fileOrUri);
+        options = this.normalizeOptions(url, options);
+        const stat = this.getStatSync(url);
         const sig = now + Math.random();
         try {
-            const dictionary = loadSync(this.reader, uri, options);
+            const dictionary = loadSync(this.reader, url, options);
             const pending = Promise.resolve([dictionary, stat] as const);
             return {
-                uri,
+                uri: url.href,
                 options,
                 ts: now,
                 stat,
@@ -230,13 +232,13 @@ export class DictionaryLoader {
             const error = toError(e);
             const dictionary = createFailedToLoadDictionary(
                 options.name,
-                uri,
-                new SpellingDictionaryLoadError(uri, options, error, 'failed to load'),
+                fileOrUri,
+                new SpellingDictionaryLoadError(url.href, options, error, 'failed to load'),
                 options,
             );
             const pending = Promise.resolve([dictionary, stat] as const);
             return {
-                uri,
+                uri: url.href,
                 options,
                 ts: now,
                 stat,
@@ -248,13 +250,13 @@ export class DictionaryLoader {
         }
     }
 
-    private getStat(uri: string): Promise<StatsOrError> {
-        return this.cspellIO.getStat(uri).catch(toError);
+    private getStat(uri: URL | string): Promise<StatsOrError> {
+        return this.cspellIO.getStat(this.cspellIO.toFileURL(uri)).catch(toError);
     }
 
-    private getStatSync(uri: string): StatsOrError {
+    private getStatSync(uri: URL | string): StatsOrError {
         try {
-            return this.cspellIO.getStatSync(uri);
+            return this.cspellIO.getStatSync(this.cspellIO.toFileURL(uri));
         } catch (e) {
             return toError(e);
         }
@@ -268,15 +270,24 @@ export class DictionaryLoader {
         return !isError(b) && !this.cspellIO.compareStats(a, b);
     }
 
-    private normalizeOptions(uri: string, options: LoadFileOptions): LoadFileOptions {
+    private normalizeOptions(uri: URL, options: LoadFileOptions): LoadFileOptions {
         if (options.name) return options;
-        return { ...options, name: this.cspellIO.uriBasename(uri) };
+        return { ...options, name: this.cspellIO.urlBasename(uri) };
     }
 
     private loadInlineDict(def: DictionaryDefinitionInlineInternal): SpellingDictionary {
         return this.inlineDictionaryCache.get(def, (def) =>
             createInlineSpellingDictionary(def, def.__source || 'memory'),
         );
+    }
+
+    private calcKey(def: DictionaryFileDefinitionInternal) {
+        const path = def.path;
+        const loaderType = determineType(this.cspellIO.toFileURL(path), def);
+        const optValues = importantOptionKeys.map((k) => def[k]?.toString() || '');
+        const parts = [path, loaderType].concat(optValues);
+
+        return parts.join('|');
     }
 }
 
@@ -291,15 +302,6 @@ function toReader(cspellIO: CSpellIO): Reader {
 
 const importantOptionKeys: (keyof DictionaryDefinitionInternal)[] = ['name', 'noSuggest', 'useCompounds', 'type'];
 
-function calcKey(def: DictionaryFileDefinitionInternal) {
-    const path = def.path;
-    const loaderType = determineType(path, def);
-    const optValues = importantOptionKeys.map((k) => def[k]?.toString() || '');
-    const parts = [path, loaderType].concat(optValues);
-
-    return parts.join('|');
-}
-
 type StatsOrError = Stats | Error;
 
 function isError(e: StatsOrError): e is Error {
@@ -307,37 +309,37 @@ function isError(e: StatsOrError): e is Error {
     return !!err.message;
 }
 
-function determineType(uri: string, opts: Pick<LoadOptions, 'type'>): LoaderType {
+function determineType(uri: URL, opts: Pick<LoadOptions, 'type'>): LoaderType {
     const t: DictionaryFileTypes = (opts.type && opts.type in loaders && opts.type) || 'S';
     const defLoaderType: LoaderType = t;
-    const defType = uri.endsWith('.trie.gz') ? 'T' : defLoaderType;
+    const defType = uri.pathname.endsWith('.trie.gz') ? 'T' : defLoaderType;
     const regTrieTest = /\.trie\b/i;
-    return regTrieTest.test(uri) ? 'T' : defType;
+    return regTrieTest.test(uri.pathname) ? 'T' : defType;
 }
 
-function load(reader: Reader, uri: string, options: LoadOptions): Promise<SpellingDictionary> {
+function load(reader: Reader, uri: URL, options: LoadOptions): Promise<SpellingDictionary> {
     const type = determineType(uri, options);
     const loader = loaders[type] || loaders.default;
     return loader(reader, uri, options);
 }
 
-function loadSync(reader: Reader, uri: string, options: LoadOptions): SpellingDictionary {
+function loadSync(reader: Reader, uri: URL, options: LoadOptions): SpellingDictionary {
     const type = determineType(uri, options);
     const loader = loadersSync[type] || loaders.default;
     return loader(reader, uri, options);
 }
 
-async function legacyWordList(reader: Reader, filename: string, options: LoadOptions) {
+async function legacyWordList(reader: Reader, filename: URL, options: LoadOptions) {
     const lines = await reader.readLines(filename);
     return _legacyWordListSync(lines, filename, options);
 }
 
-function legacyWordListSync(reader: Reader, filename: string, options: LoadOptions) {
+function legacyWordListSync(reader: Reader, filename: URL, options: LoadOptions) {
     const lines = reader.readLinesSync(filename);
     return _legacyWordListSync(lines, filename, options);
 }
 
-function _legacyWordListSync(lines: Iterable<string>, filename: string, options: LoadOptions) {
+function _legacyWordListSync(lines: Iterable<string>, filename: URL, options: LoadOptions) {
     const words = pipe(
         lines,
         // Remove comments
@@ -346,17 +348,17 @@ function _legacyWordListSync(lines: Iterable<string>, filename: string, options:
         opConcatMap((line) => line.split(/[^\w\p{L}\p{M}'’]+/gu)),
         opFilter((word) => !!word),
     );
-    return createSpellingDictionary(words, options.name, filename, options);
+    return createSpellingDictionary(words, options.name, filename.toString(), options);
 }
 
-async function wordsPerLineWordList(reader: Reader, filename: string, options: LoadOptions) {
+async function wordsPerLineWordList(reader: Reader, filename: URL, options: LoadOptions) {
     const lines = await reader.readLines(filename);
-    return _wordsPerLineWordList(lines, filename, options);
+    return _wordsPerLineWordList(lines, filename.toString(), options);
 }
 
-function wordsPerLineWordListSync(reader: Reader, filename: string, options: LoadOptions) {
+function wordsPerLineWordListSync(reader: Reader, filename: URL, options: LoadOptions) {
     const lines = reader.readLinesSync(filename);
-    return _wordsPerLineWordList(lines, filename, options);
+    return _wordsPerLineWordList(lines, filename.toString(), options);
 }
 
 function _wordsPerLineWordList(lines: Iterable<string>, filename: string, options: LoadOptions) {
@@ -371,24 +373,24 @@ function _wordsPerLineWordList(lines: Iterable<string>, filename: string, option
     return createSpellingDictionary(words, options.name, filename, options);
 }
 
-async function loadSimpleWordList(reader: Reader, filename: string, options: LoadOptions) {
+async function loadSimpleWordList(reader: Reader, filename: URL, options: LoadOptions) {
     const lines = await reader.readLines(filename);
-    return createSpellingDictionary(lines, options.name, filename, options);
+    return createSpellingDictionary(lines, options.name, filename.href, options);
 }
 
-function loadSimpleWordListSync(reader: Reader, filename: string, options: LoadOptions) {
+function loadSimpleWordListSync(reader: Reader, filename: URL, options: LoadOptions) {
     const lines = reader.readLinesSync(filename);
-    return createSpellingDictionary(lines, options.name, filename, options);
+    return createSpellingDictionary(lines, options.name, filename.href, options);
 }
 
-async function loadTrie(reader: Reader, filename: string, options: LoadOptions) {
+async function loadTrie(reader: Reader, filename: URL, options: LoadOptions) {
     const content = await reader.read(filename);
-    return createSpellingDictionaryFromTrieFile(content, options.name, filename, options);
+    return createSpellingDictionaryFromTrieFile(content, options.name, filename.href, options);
 }
 
-function loadTrieSync(reader: Reader, filename: string, options: LoadOptions) {
+function loadTrieSync(reader: Reader, filename: URL, options: LoadOptions) {
     const content = reader.readSync(filename);
-    return createSpellingDictionaryFromTrieFile(content, options.name, filename, options);
+    return createSpellingDictionaryFromTrieFile(content, options.name, filename.href, options);
 }
 
 function toLines(content: string): string[] {

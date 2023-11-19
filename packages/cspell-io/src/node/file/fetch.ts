@@ -1,4 +1,5 @@
-import { FetchUrlError, isError } from './FetchError.js';
+import { _fetch as fetch } from './_fetch.js';
+import { FetchUrlError, toFetchUrlError } from './FetchError.js';
 
 export async function fetchHead(request: string | URL): Promise<Headers> {
     const url = toURL(request);
@@ -6,11 +7,7 @@ export async function fetchHead(request: string | URL): Promise<Headers> {
         const r = await fetch(url, { method: 'HEAD' });
         return r.headers;
     } catch (e) {
-        // console.warn('fetchHead Error %o', e);
-        if (isError(e)) {
-            throw FetchUrlError.fromError(url, e);
-        }
-        throw e;
+        throw toFetchUrlError(e, url);
     }
 }
 
@@ -22,12 +19,7 @@ export async function fetchURL(url: URL): Promise<Buffer> {
         }
         return Buffer.from(await response.arrayBuffer());
     } catch (e) {
-        // console.warn('fetchURL Error %o', e);
-        if (e instanceof FetchUrlError) throw e;
-        if (isError(e)) {
-            throw FetchUrlError.fromError(url, e);
-        }
-        throw e;
+        throw toFetchUrlError(e, url);
     }
 }
 

@@ -1,7 +1,7 @@
 import { compareStats } from './common/stat.js';
 import type { CSpellIO } from './CSpellIO.js';
 import { ErrorNotImplemented } from './errors/errors.js';
-import type { FileReference, FileResource, UrlOrReference } from './models/FileResource.js';
+import type { FileReference, FileResource, UrlOrFilename, UrlOrReference } from './models/FileResource.js';
 import type { Stats } from './models/Stats.js';
 
 export class CSpellIOWeb implements CSpellIO {
@@ -23,13 +23,16 @@ export class CSpellIOWeb implements CSpellIO {
     compareStats(left: Stats, right: Stats): number {
         return compareStats(left, right);
     }
-    toURL(_uriOrFilename: string | URL): URL {
+    toURL(_uriOrFilename: UrlOrReference): URL {
         throw new ErrorNotImplemented('toURL');
     }
-    uriBasename(_uriOrFilename: string | URL): string {
+    toFileURL(_urlOrFilename: UrlOrFilename, _relativeTo?: string | URL | undefined): URL {
+        throw new ErrorNotImplemented('toFileURL');
+    }
+    urlBasename(_uriOrFilename: string | URL): string {
         throw new ErrorNotImplemented('uriBasename');
     }
-    uriDirname(_uriOrFilename: string | URL): URL {
+    urlDirname(_uriOrFilename: string | URL): URL {
         throw new ErrorNotImplemented('uriDirname');
     }
 }
