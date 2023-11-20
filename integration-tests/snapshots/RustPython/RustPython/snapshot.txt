@@ -3,7 +3,7 @@ Repository: RustPython/RustPython
 Url: "https://github.com/RustPython/RustPython.git"
 Args: ["**"]
 Lines:
- CSpell: Files checked: 597, Issues found: 2675 in 306 files
+ CSpell: Files checked: 597, Issues found: 2676 in 307 files
  exit code: 1
 ./Cargo.toml:111:82    - Unknown word (termcolor)  -- features = ["atty", "termcolor"] }
 ./Cargo.toml:154:62    - Unknown word (redoxer)    -- to compile/check with redoxer
@@ -684,6 +684,7 @@ Lines:
 ./vm/src/function/argument.rs:121:13    - Unknown word (posargc)    -- let posargc = total_argc - kwargc
 ./vm/src/function/argument.rs:123:13    - Unknown word (posargs)    -- let posargs = args.by_ref().take
 ./vm/src/function/argument.rs:274:53    - Unknown word (keyqord)    -- error(format!("Required keyqord only argument {name
+./vm/src/function/builtin.rs:62:26     - Unknown word (sizedness)  -- requirements of zero-sizedness apply, see that documentation
 ./vm/src/function/fspath.rs:97:15     - Unknown word (widecstring) -- pub fn to_widecstring(&self, vm: &VirtualMachine
 ./vm/src/function/getset.rs:138:13    - Unknown word (noresult)   -- fn into_noresult(self) -> PyResult<(
 ./vm/src/function/method.rs:17:17     - Unknown word (NOARGS)     -- // METH_NOARGS and METH_O must not
@@ -816,20 +817,20 @@ Lines:
 ./vm/src/stdlib/nt.rs:339:30    - Unknown word (ntdef)             -- use winapi::shared::{ntdef::ULARGE_INTEGER, winerror
 ./vm/src/stdlib/operator.rs:392:17    - Unknown word (nattr)      -- let nattr = args.args.len();
 ./vm/src/stdlib/operator.rs:535:25    - Unknown word (pargs)      -- let mut pargs = vec![zelf.name.as
-./vm/src/stdlib/os.rs:1000:48   - Unknown word (IFEXEC)         -- S_IFDIR | 0o111; /* IFEXEC for user,group,other
-./vm/src/stdlib/os.rs:1135:8    - Unknown word (getcwdb)        -- fn getcwdb(vm: &VirtualMachine
-./vm/src/stdlib/os.rs:1266:19   - Unknown word (modif)          -- let (acc, modif) = match (args.times
-./vm/src/stdlib/os.rs:1335:27   - Unknown word (utimensat)      -- libc::utimensat(
-./vm/src/stdlib/os.rs:1607:47   - Unknown word (consoleapi)     -- unsafe { winapi::um::consoleapi::GetConsoleCP() },
-./vm/src/stdlib/os.rs:361:8     - Unknown word (closerange) -- fn closerange(fd_low: i32, fd_high
-./vm/src/stdlib/os.rs:489:8     - Unknown word (mkdirs)     -- fn mkdirs(path: PyStrRef, vm:
-./vm/src/stdlib/os.rs:500:11    - Unknown word (LISTDIR)    -- const LISTDIR_FD: bool = cfg!(all
-./vm/src/stdlib/os.rs:503:8     - Unknown word (listdir)    -- fn listdir(path: OptionalArg<OsPathOrFd
-./vm/src/stdlib/os.rs:613:9     - Unknown word (pathval)    -- pathval: PathBuf,
-./vm/src/stdlib/os.rs:799:17    - Unknown word (entryref)   -- let entryref: &mut Option<fs::ReadDir
-./vm/src/stdlib/os.rs:879:26    - Unknown word (structsequence) -- // TODO: unnamed structsequence fields
-./vm/src/stdlib/os.rs:921:34    - Unknown word (ctim)           -- ctime = (stat.st_ctim.tv_sec, stat.st_ctim
-./vm/src/stdlib/os.rs:997:33    - Unknown word (fileutils)      -- // Based on CPython fileutils.c' attributes_to_mode
+./vm/src/stdlib/os.rs:1128:8    - Unknown word (getcwdb)        -- fn getcwdb(vm: &VirtualMachine
+./vm/src/stdlib/os.rs:1259:19   - Unknown word (modif)          -- let (acc, modif) = match (args.times
+./vm/src/stdlib/os.rs:1328:27   - Unknown word (utimensat)      -- libc::utimensat(
+./vm/src/stdlib/os.rs:1600:47   - Unknown word (consoleapi)     -- unsafe { winapi::um::consoleapi::GetConsoleCP() },
+./vm/src/stdlib/os.rs:354:8     - Unknown word (closerange) -- fn closerange(fd_low: i32, fd_high
+./vm/src/stdlib/os.rs:482:8     - Unknown word (mkdirs)     -- fn mkdirs(path: PyStrRef, vm:
+./vm/src/stdlib/os.rs:493:11    - Unknown word (LISTDIR)    -- const LISTDIR_FD: bool = cfg!(all
+./vm/src/stdlib/os.rs:496:8     - Unknown word (listdir)    -- fn listdir(path: OptionalArg<OsPathOrFd
+./vm/src/stdlib/os.rs:606:9     - Unknown word (pathval)    -- pathval: PathBuf,
+./vm/src/stdlib/os.rs:792:17    - Unknown word (entryref)   -- let entryref: &mut Option<fs::ReadDir
+./vm/src/stdlib/os.rs:872:26    - Unknown word (structsequence) -- // TODO: unnamed structsequence fields
+./vm/src/stdlib/os.rs:914:34    - Unknown word (ctim)           -- ctime = (stat.st_ctim.tv_sec, stat.st_ctim
+./vm/src/stdlib/os.rs:990:33    - Unknown word (fileutils)      -- // Based on CPython fileutils.c' attributes_to_mode
+./vm/src/stdlib/os.rs:993:48    - Unknown word (IFEXEC)         -- S_IFDIR | 0o111; /* IFEXEC for user,group,other
 ./vm/src/stdlib/posix.rs:1465:21   - Unknown word (attrp)      -- let mut attrp = unsafe {
 ./vm/src/stdlib/posix.rs:1605:34   - Unknown word (winsz)      -- nix::ioctl_read_bad!(winsz, libc::TIOCGWINSZ, libc
 ./vm/src/stdlib/posix.rs:77:16     - Unknown word (GRND)       -- use libc::{GRND_NONBLOCK, GRND_RANDOM
