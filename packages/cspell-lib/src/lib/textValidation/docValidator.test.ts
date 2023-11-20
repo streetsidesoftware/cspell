@@ -86,7 +86,7 @@ describe('docValidator', () => {
     `('checkText sync $filename "$text"', async ({ filename, text, expected, configFile }) => {
         const doc = await loadDoc(filename);
         const dVal = new DocumentValidator(doc, { configFile }, {});
-        dVal.prepareSync();
+        await dVal.prepare();
         const offset = doc.text.indexOf(text);
         assert(offset >= 0);
         const range = [offset, offset + text.length] as const;
@@ -100,7 +100,7 @@ describe('docValidator', () => {
     `('checkText suggestions $filename "$text"', async ({ filename, text, expected }) => {
         const doc = await loadDoc(filename);
         const dVal = new DocumentValidator(doc, { generateSuggestions: true }, { suggestionsTimeout: 10000 });
-        dVal.prepareSync();
+        await dVal.prepare();
         const offset = doc.text.indexOf(text);
         assert(offset >= 0);
         const range = [offset, offset + text.length] as const;
@@ -181,7 +181,7 @@ describe('docValidator', () => {
         },
     );
 
-    test('updateDocumentText', () => {
+    test('updateDocumentText', async () => {
         // cspell:ignore foor
         const expectedIssues = [
             oc({
@@ -193,10 +193,10 @@ describe('docValidator', () => {
         ];
         const doc = td('files://words.txt', 'one\ntwo\nthree\nfoor\n', 'plaintext');
         const dVal = new DocumentValidator(doc, { generateSuggestions: false }, {});
-        dVal.prepareSync();
+        await dVal.prepare();
         const r = dVal.checkDocument();
         expect(r).toEqual(expectedIssues);
-        dVal.updateDocumentText(doc.text + '# cspell:ignore foor\n');
+        await dVal.updateDocumentText(doc.text + '# cspell:ignore foor\n');
         expect(dVal.checkDocument()).toEqual([]);
     });
 

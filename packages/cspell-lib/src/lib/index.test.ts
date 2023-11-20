@@ -3,10 +3,10 @@ import { describe, expect, test } from 'vitest';
 import * as cspell from './index.js';
 
 describe('Validate the cspell API', () => {
-    test('Tests the default configuration', () => {
+    test('Tests the default configuration', async () => {
         const ext = '.json';
         const languageIds = cspell.getLanguagesForExt(ext);
-        const settings = cspell.getDefaultBundledSettings();
+        const settings = await cspell.getDefaultBundledSettingsAsync();
         // cspell:ignore jansons
         const text = '{ "name": "Jansons"}';
         const fileSettings = cspell.combineTextAndLanguageSettings(settings, text, languageIds);

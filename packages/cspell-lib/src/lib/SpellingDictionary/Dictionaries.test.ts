@@ -7,7 +7,7 @@ import { pathPackageRoot } from '../../test-util/test.locations.cjs';
 import { createCSpellSettingsInternal as csi } from '../Models/CSpellSettingsInternalDef.js';
 import { createDictionaryReferenceCollection } from '../Settings/DictionaryReferenceCollection.js';
 import { filterDictDefsToLoad, mapDictDefToInternal } from '../Settings/DictionarySettings.js';
-import { getDefaultBundledSettings, loadConfig } from '../Settings/index.js';
+import { getDefaultBundledSettingsAsync, loadConfig } from '../Settings/index.js';
 import * as Dictionaries from './Dictionaries.js';
 import { isSpellingDictionaryLoadError } from './SpellingDictionaryError.js';
 
@@ -51,7 +51,7 @@ describe('Validate getDictionary', () => {
         ${'snarf'} | ${ignoreCaseTrue}  | ${false}
     `('tests that userWords are included in the dictionary $word', async ({ word, opts, expected }) => {
         const settings = csi({
-            ...getDefaultBundledSettings(),
+            ...(await getDefaultBundledSettingsAsync()),
             dictionaries: [],
             words: ['one', 'two', 'three', 'café', '!snarf'],
             userWords: ['four', 'five', 'six', 'Rhône'],
@@ -94,7 +94,7 @@ describe('Validate getDictionary', () => {
         ${'colour'} | ${{ found: 'colour', forbidden: true, noSuggest: false }}
     `('find words $word', async ({ word, expected }) => {
         const settings = csi({
-            ...getDefaultBundledSettings(),
+            ...(await getDefaultBundledSettingsAsync()),
             noSuggestDictionaries: ['companies'],
             words: ['one', 'two', 'three', 'café', '!snarf'],
             userWords: ['four', 'five', 'six', 'Rhône'],
@@ -123,7 +123,7 @@ describe('Validate getDictionary', () => {
         ${'cafe'}  | ${ignoreCaseTrue}  | ${true}
     `('Case sensitive "$word" $opts', async ({ word, opts, expected }) => {
         const settings = {
-            ...getDefaultBundledSettings(),
+            ...(await getDefaultBundledSettingsAsync()),
             dictionaries: [],
             words: ['one', 'two', 'three', 'café'],
             userWords: ['four', 'five', 'six', 'Rhône'],
@@ -195,7 +195,7 @@ describe('Validate Refresh', () => {
         const tempDictPathNotFound = tempPath('not-found.txt');
         await mkdirp(path.dirname(tempDictPath));
         await fs.writeFile(tempDictPath, 'one\ntwo\nthree\n');
-        const settings = getDefaultBundledSettings();
+        const settings = await getDefaultBundledSettingsAsync();
         const defs = (settings.dictionaryDefinitions || []).concat([
             di({ name: 'temp', path: tempDictPath }, __filename),
             di({ name: 'not_found', path: tempDictPathNotFound }, __filename),
@@ -242,7 +242,7 @@ describe('Validate Refresh', () => {
         const tempDictPath = tempPath('words_sync.txt');
         await mkdirp(path.dirname(tempDictPath));
         await fs.writeFile(tempDictPath, 'one\ntwo\nthree\n');
-        const settings = getDefaultBundledSettings();
+        const settings = await getDefaultBundledSettingsAsync();
         const defs = (settings.dictionaryDefinitions || []).concat([
             di({ name: 'temp', path: tempDictPath }, __filename),
         ]);

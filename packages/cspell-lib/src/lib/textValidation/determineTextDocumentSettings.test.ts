@@ -17,7 +17,7 @@ describe('determineTextDocumentSettings', () => {
     `('determineTextDocumentSettings', async ({ file, configFile, expected }) => {
         const cfg = await loadConfig(configFile);
         const doc = await loadTextDocument(file);
-        const settings = determineTextDocumentSettings(doc, cfg);
+        const settings = await determineTextDocumentSettings(doc, cfg);
         expect(settings.dictionaries).toContain('Test Dictionary');
         expect(settings).toEqual(expected);
     });

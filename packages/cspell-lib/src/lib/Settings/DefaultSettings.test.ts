@@ -8,12 +8,14 @@ describe('Validate Default Settings', () => {
         expect(df.name).toBe('Static Defaults');
     });
 
-    test('tests the default setting file is loaded', () => {
-        const defaultSetting = DefaultSettings.getDefaultBundledSettings();
+    test('tests the default setting file is loaded', async () => {
+        const defaultSetting = await DefaultSettings.getDefaultBundledSettingsAsync();
         expect(defaultSetting.name).toBe('cspell default settings');
     });
 
-    test('default', () => {
-        expect(DefaultSettings.getDefaultBundledSettings()).toEqual(DefaultSettings.getDefaultSettings(undefined));
+    test('default', async () => {
+        expect(await DefaultSettings.getDefaultBundledSettingsAsync()).toEqual(
+            DefaultSettings.getDefaultSettings(undefined),
+        );
     });
 });

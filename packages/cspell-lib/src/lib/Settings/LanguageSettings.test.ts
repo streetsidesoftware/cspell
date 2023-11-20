@@ -3,7 +3,7 @@ import { describe, expect, test } from 'vitest';
 
 import { getGlobalSettings } from './Controller/configLoader/index.js';
 import { mergeSettings } from './CSpellSettingsServer.js';
-import { getDefaultBundledSettings } from './DefaultSettings.js';
+import { getDefaultBundledSettingsAsync } from './DefaultSettings.js';
 import * as LS from './LanguageSettings.js';
 import { calcSettingsForLanguage, calcUserSettingsForLanguage } from './LanguageSettings.js';
 
@@ -26,12 +26,12 @@ const extraSettings: CSpellUserSettings = {
     ],
 };
 
-const defaultSettings = getDefaultBundledSettings();
+const defaultSettings = await getDefaultBundledSettingsAsync();
 const defaultLanguageSettings = defaultSettings.languageSettings;
 
 describe('Validate LanguageSettings', () => {
-    test('tests merging language settings', () => {
-        const defaultSettings = getDefaultBundledSettings();
+    test('tests merging language settings', async () => {
+        const defaultSettings = await getDefaultBundledSettingsAsync();
         const languageSettings = defaultSettings.languageSettings || [];
         const sPython = calcSettingsForLanguage(languageSettings, 'python', 'en');
         expect(sPython.allowCompoundWords).toBeUndefined();
@@ -99,8 +99,8 @@ describe('Validate LanguageSettings', () => {
         },
     );
 
-    test('merged settings with global', () => {
-        const merged = mergeSettings(getDefaultBundledSettings(), getGlobalSettings());
+    test('merged settings with global', async () => {
+        const merged = mergeSettings(await getDefaultBundledSettingsAsync(), getGlobalSettings());
         const sPHP = calcSettingsForLanguage(merged.languageSettings || [], 'php', 'en');
         expect(Object.keys(sPHP)).not.toHaveLength(0);
     });

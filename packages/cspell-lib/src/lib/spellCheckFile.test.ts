@@ -73,13 +73,16 @@ describe('Validate Determine settings', () => {
         ${doc(u('README.md'), '# README\n \x63spell:locale fr', undefined, 'en')} | ${{}}                 | ${{ languageId: 'markdown', language: 'fr' }}  | ${'In doc locale wins'}
         ${doc(u('README.md'), '# README\n')}                                      | ${{ language: 'fr' }} | ${{ languageId: 'markdown', language: 'fr' }}  | ${'Language from settings'}
         ${doc(u('README.md'), '# README\n', undefined, 'en')}                     | ${{ language: 'fr' }} | ${{ languageId: 'markdown', language: 'en' }}  | ${'passed with doc'}
-    `('determineFinalDocumentSettings($document, $settings) $expected $comment', ({ document, settings, expected }) => {
-        const settingsResult = sanitizeSettings(determineFinalDocumentSettings(document, settings).settings, [
-            'languageId',
-            'language',
-        ]);
-        expect(settingsResult).toEqual(expect.objectContaining(expected));
-    });
+    `(
+        'determineFinalDocumentSettings($document, $settings) $expected $comment',
+        async ({ document, settings, expected }) => {
+            const settingsResult = sanitizeSettings(
+                (await determineFinalDocumentSettings(document, settings)).settings,
+                ['languageId', 'language'],
+            );
+            expect(settingsResult).toEqual(expect.objectContaining(expected));
+        },
+    );
 });
 
 describe('Validate Spell Checking Documents', () => {

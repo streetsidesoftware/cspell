@@ -13,7 +13,7 @@ describe('Validate English', () => {
         async () => {
             const ext = '.txt';
             const languageIds = cspell.getLanguagesForExt(ext);
-            const settings = cspell.getDefaultBundledSettings();
+            const settings = await cspell.getDefaultBundledSettingsAsync();
             // cspell:ignore jansons
             const text = '{ "name": "Jansons"}';
             const fileSettings = cspell.combineTextAndLanguageSettings(settings, text, languageIds);
@@ -39,13 +39,12 @@ describe('Validate English', () => {
         async () => {
             const ext = '.txt';
             const languageIds = cspell.getLanguagesForExt(ext);
-            const settings = { ...cspell.getDefaultBundledSettings(), words: ['é', 'î'] };
+            const settings = { ...(await cspell.getDefaultBundledSettingsAsync()), words: ['é', 'î'] };
             const text = `
         Here are some words.
         thing and cpp are words.
         é'thing and î'cpp are ok.
         `;
-
             const fileSettings = cspell.combineTextAndLanguageSettings(settings, text, languageIds);
             const finalSettings = cspell.finalizeSettings(fileSettings);
 
@@ -61,7 +60,7 @@ describe('Validate English', () => {
         async () => {
             const ext = '.json';
             const languageIds = cspell.getLanguagesForExt(ext);
-            const settings = { ...cspell.getDefaultBundledSettings() };
+            const settings = { ...(await cspell.getDefaultBundledSettingsAsync()) };
             const text = `
         {
             'bidi': False,
@@ -85,7 +84,7 @@ describe('Validate English', () => {
         async () => {
             const ext = '.py';
             const languageIds = cspell.getLanguagesForExt(ext);
-            const settings = { ...cspell.getDefaultBundledSettings() };
+            const settings = { ...(await cspell.getDefaultBundledSettingsAsync()) };
             // cspell:ignore setsid isinstance
             const text = `
         setsid = 'R'

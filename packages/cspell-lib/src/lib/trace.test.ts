@@ -12,7 +12,7 @@ describe('Verify trace', () => {
         'tests tracing a word',
         async () => {
             const words = ['apple'];
-            const config = getSettings({ ignoreWords: ['apple'], flagWords: ['apple'] });
+            const config = await getSettings({ ignoreWords: ['apple'], flagWords: ['apple'] });
             const results = await traceWords(words, config, {});
             expect(results.map(({ dictName, found }) => ({ dictName, found }))).toEqual(
                 expect.arrayContaining([
@@ -53,7 +53,7 @@ describe('Verify trace', () => {
             const { word, languageId, ignoreCase, locale, allowCompoundWords } = params;
             const { dictName, dictActive, found, forbidden, noSuggest, foundWord } = params;
             const words = [word];
-            const config = getSettings({ allowCompoundWords, flagWords: ['hte'], ignoreWords: ['colour'] });
+            const config = await getSettings({ allowCompoundWords, flagWords: ['hte'], ignoreWords: ['colour'] });
             const results = await traceWords(words, config, { locale, languageId, ignoreCase });
             const byName = results.reduce(
                 (a, b) => {
@@ -84,7 +84,7 @@ describe('Verify trace', () => {
         'tracing with missing dictionary.',
         async () => {
             const words = ['apple'];
-            const defaultConfig = getSettings();
+            const defaultConfig = await getSettings();
             const dictionaryDefinitions = (defaultConfig.dictionaryDefinitions || []).concat([
                 {
                     name: 'bad dict',

@@ -3,19 +3,31 @@ import { describe, expect, test } from 'vitest';
 import { fetchHead, fetchURL } from './fetch.js';
 // import {} from './_fetch.js';
 
-describe('fetch', () => {
-    test('fetch url', async () => {
-        const url = new URL('https://example.com/');
-        const response = await fetch(url);
-        expect(response.ok).toBe(true);
-        expect(await response.text()).toMatch('Example Domain');
-    });
+const timeout = 20000;
 
-    test('fetchURL', async () => {
-        const url = new URL('https://example.com/');
-        const response = await fetchURL(url);
-        expect(response).toBeInstanceOf(Buffer);
-    });
+const testOptions = { timeout };
+
+describe('fetch', () => {
+    test(
+        'fetch url',
+        async () => {
+            const url = new URL('https://example.com/');
+            const response = await fetch(url);
+            expect(response.ok).toBe(true);
+            expect(await response.text()).toMatch('Example Domain');
+        },
+        testOptions,
+    );
+
+    test(
+        'fetchURL',
+        async () => {
+            const url = new URL('https://example.com/');
+            const response = await fetchURL(url);
+            expect(response).toBeInstanceOf(Buffer);
+        },
+        testOptions,
+    );
 
     /*
     test.each`
@@ -29,27 +41,35 @@ describe('fetch', () => {
         // console.log('%o', toObj(response));
         expect(response.get('etag')).toEqual(expect.any(String));
         expect(Number.parseInt(response.get('content-length') || '', 10)).toBeGreaterThan(0);
-    });
+    }, testOptions);
     */
 
     test.each`
         url
         ${'https://example.com/'}
-    `('fetchHead $url', async ({ url }) => {
-        const response = await fetchHead(url);
-        // console.log('%o', toObj(response));
-        expect(response.get('etag')).toEqual(expect.any(String));
-        expect(Number.parseInt(response.get('content-length') || '', 10)).toBeGreaterThan(0);
-    });
+    `(
+        'fetchHead $url',
+        async ({ url }) => {
+            const response = await fetchHead(url);
+            // console.log('%o', toObj(response));
+            expect(response.get('etag')).toEqual(expect.any(String));
+            expect(Number.parseInt(response.get('content-length') || '', 10)).toBeGreaterThan(0);
+        },
+        testOptions,
+    );
 
     test.each`
         url                                           | expected
         ${'https://x.example.com/'}                   | ${'getaddrinfo ENOTFOUND x.example.com'}
         ${'https://interglot.com/not_found/file.txt'} | ${/URL not found|getaddrinfo EAI_AGAIN/}
-    `('fetchURL with error', async ({ url, expected }) => {
-        url = new URL(url);
-        await expect(fetchURL(url)).rejects.toThrowError(expected);
-    });
+    `(
+        'fetchURL with error',
+        async ({ url, expected }) => {
+            url = new URL(url);
+            await expect(fetchURL(url)).rejects.toThrowError(expected);
+        },
+        testOptions,
+    );
 });
 
 // function toObj(m: Iterable<[string, string]>): Record<string, string> {

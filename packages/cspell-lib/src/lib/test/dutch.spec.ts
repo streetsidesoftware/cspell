@@ -19,8 +19,8 @@ describe('Validate that Dutch text is correctly checked.', () => {
             expect(Object.keys(text)).not.toHaveLength(0);
             const ext = path.extname(sampleFilename);
             const languageIds = cspell.getLanguagesForExt(ext);
-            const dutchSettings = cspell.readSettings(dutchConfig);
-            const settings = cspell.mergeSettings(cspell.getDefaultBundledSettings(), dutchSettings, {
+            const dutchSettings = await cspell.readSettings(dutchConfig);
+            const settings = cspell.mergeSettings(await cspell.getDefaultBundledSettingsAsync(), dutchSettings, {
                 language: 'en,nl',
             });
             const fileSettings = cspell.combineTextAndLanguageSettings(settings, text, languageIds);

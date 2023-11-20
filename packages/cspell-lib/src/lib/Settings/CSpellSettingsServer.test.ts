@@ -15,7 +15,7 @@ import {
     readSettingsFiles,
 } from './Controller/configLoader/index.js';
 import { calcOverrideSettings, checkFilenameMatchesGlob, getSources, mergeSettings } from './CSpellSettingsServer.js';
-import { _defaultSettings, getDefaultBundledSettings } from './DefaultSettings.js';
+import { _defaultSettings, getDefaultBundledSettingsAsync } from './DefaultSettings.js';
 
 const samplesDir = pathPackageSamples;
 const pathSrc = path.join(pathPackageRoot, 'src');
@@ -186,37 +186,37 @@ describe('Validate CSpellSettingsServer', () => {
         ${rpr('./cspell.config.json')}                        | ${pathSrc}   | ${rpr('./cspell.config.json')}
         ${'@cspell/cspell-bundled-dicts/cspell-default.json'} | ${pathSrc}   | ${require.resolve('@cspell/cspell-bundled-dicts/cspell-default.json')}
         ${'@cspell/cspell-bundled-dicts/cspell-default.json'} | ${undefined} | ${require.resolve('@cspell/cspell-bundled-dicts/cspell-default.json')}
-    `('tests readSettings $filename $relativeTo', ({ filename, relativeTo, refFilename }) => {
-        const settings = readSettings(filename, relativeTo);
+    `('tests readSettings $filename $relativeTo', async ({ filename, relativeTo, refFilename }) => {
+        const settings = await readSettings(filename, relativeTo);
         expect(settings.__importRef?.filename).toBe(refFilename);
         expect(settings.__importRef?.error).toBeUndefined();
         expect(settings.import).toBeUndefined();
     });
 
-    test('tests loading project cspell.json file', () => {
+    test('tests loading project cspell.json file', async () => {
         const filename = path.join(pathPackageSamples, 'linked/cspell-missing.json');
-        const settings = readSettings(filename);
+        const settings = await readSettings(filename);
         expect(Object.keys(settings)).not.toHaveLength(0);
         expect(settings.words).toBeUndefined();
     });
 
-    test('tests loading a cSpell.json file', () => {
+    test('tests loading a cSpell.json file', async () => {
         const filename = path.join(pathPackageSamples, 'linked/cspell-import.json');
-        const settings = readSettings(filename);
+        const settings = await readSettings(filename);
         expect(Object.keys(settings)).not.toHaveLength(0);
         expect(settings.words).toEqual(expect.arrayContaining(['import']));
     });
 
-    test('readSettingsFiles cSpell.json', () => {
+    test('readSettingsFiles cSpell.json', async () => {
         const filename = path.join(pathPackageSamples, 'linked/cspell-import.json');
-        const settings = readSettingsFiles([filename]);
+        const settings = await readSettingsFiles([filename]);
         expect(Object.keys(settings)).not.toHaveLength(0);
         expect(settings.words).toEqual(expect.arrayContaining(['import']));
     });
 
-    test('tests loading a cSpell.json with multiple imports file', () => {
+    test('tests loading a cSpell.json with multiple imports file', async () => {
         const filename = path.join(pathPackageSamples, 'linked/cspell-imports.json');
-        const settings = readSettings(filename);
+        const settings = await readSettings(filename);
         expect(Object.keys(settings)).not.toHaveLength(0);
         expect(settings.words).toEqual(expect.arrayContaining(['import']));
         expect(settings.words).toEqual(expect.arrayContaining(['imports']));
@@ -224,9 +224,9 @@ describe('Validate CSpellSettingsServer', () => {
         expect(settings.words).toEqual(expect.arrayContaining(['leuk']));
     });
 
-    test('tests loading a cSpell.json with a missing import file', () => {
+    test('tests loading a cSpell.json with a missing import file', async () => {
         const filename = path.join(pathPackageSamples, 'linked/cspell-import-missing.json');
-        const settings = readSettings(filename);
+        const settings = await readSettings(filename);
         expect(settings.__importRef?.filename).toBe(path.resolve(filename));
         expect(settings.__imports?.size).toBe(2);
         const errors = extractImportErrors(settings);
@@ -237,22 +237,22 @@ describe('Validate CSpellSettingsServer', () => {
         expect(errors.map((ref) => ref.error.toString())).toContainEqual(expect.stringMatching('Failed to read'));
     });
 
-    test('makes sure global settings is an object', () => {
+    test('makes sure global settings is an object', async () => {
         const settings = getGlobalSettings();
         expect(Object.keys(settings)).not.toHaveLength(0);
-        const merged = mergeSettings(getDefaultBundledSettings(), getGlobalSettings());
+        const merged = mergeSettings(await getDefaultBundledSettingsAsync(), getGlobalSettings());
         expect(Object.keys(merged)).not.toHaveLength(0);
     });
 
-    test('verify clearing the file cache works', () => {
-        mergeSettings(getDefaultBundledSettings(), getGlobalSettings());
+    test('verify clearing the file cache works', async () => {
+        mergeSettings(await getDefaultBundledSettingsAsync(), getGlobalSettings());
         expect(getCachedFileSize()).toBeGreaterThan(0);
         clearCachedSettingsFiles();
         expect(getCachedFileSize()).toBe(0);
     });
 
-    test('the loaded defaults contain expected settings', () => {
-        const settings = getDefaultBundledSettings();
+    test('the loaded defaults contain expected settings', async () => {
+        const settings = await getDefaultBundledSettingsAsync();
         const sources = getSources(settings);
         const sourceNames = sources.map((s) => s.name || '?');
         expect(sourceNames).toEqual(expect.arrayContaining([_defaultSettings.name]));
@@ -260,7 +260,7 @@ describe('Validate CSpellSettingsServer', () => {
 
     test('loading circular imports (readSettings)', async () => {
         const configFile = path.join(samplesDir, 'linked/cspell.circularA.json');
-        const config = readSettings(configFile);
+        const config = await readSettings(configFile);
         expect(config?.ignorePaths).toEqual(
             expect.arrayContaining([
                 {

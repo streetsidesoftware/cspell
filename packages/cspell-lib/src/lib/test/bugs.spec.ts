@@ -22,8 +22,8 @@ describe('Validate Against Bug Fixes', () => {
                 const text = await fsp.readFile(fullFilename, 'utf-8');
                 const languageIds = cspell.getLanguagesForExt(ext);
                 const settings = cspell.mergeSettings(
-                    cspell.getDefaultBundledSettings(),
-                    cspell.readSettings(configFile),
+                    await cspell.getDefaultBundledSettingsAsync(),
+                    await cspell.readSettings(configFile),
                 );
                 const fileSettings = cspell.combineTextAndLanguageSettings(settings, text, languageIds);
                 const result = await cspell.validateText(text, fileSettings);

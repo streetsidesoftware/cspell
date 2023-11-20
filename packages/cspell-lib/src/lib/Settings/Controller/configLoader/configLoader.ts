@@ -177,8 +177,8 @@ export class ConfigLoader {
     }
 
     public async readSettingsAsync(
-        filename: string,
-        relativeTo?: string,
+        filename: string | URL,
+        relativeTo?: string | URL,
         pnpSettings?: PnPSettingsOptional,
     ): Promise<CSpellSettingsI> {
         const ref = resolveFilename(filename, relativeTo || process.cwd());
@@ -584,7 +584,8 @@ function toURL(filename: string | URL | Uri): URL {
     return new URL(toUri(filename).toString());
 }
 
-function resolveFilename(filename: string, relativeTo: string | URL): ImportFileRef {
+function resolveFilename(filename: string | URL, relativeTo: string | URL): ImportFileRef {
+    if (filename instanceof URL) return { filename: filename.href };
     const r = resolveFile(filename, relativeTo);
 
     return {

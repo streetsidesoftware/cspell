@@ -27,7 +27,7 @@ export {
     extractImportErrors,
     finalizeSettings,
     getCachedFileSize,
-    getDefaultBundledSettings,
+    getDefaultBundledSettingsAsync,
     getDefaultSettings,
     getGlobalSettings,
     getSources,

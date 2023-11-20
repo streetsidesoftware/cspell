@@ -409,8 +409,8 @@ interface ImportFileRefWithError$1 extends ImportFileRef {
  *   - relative path `./path/to/file` (relative to the current working directory)
  *   - package `@cspell/dict-typescript/cspell-ext.json`
  */
-declare function readSettings(filename: string): CSpellSettingsI$1;
-declare function readSettings(filename: string, defaultValues: CSpellSettingsWST$1): CSpellSettingsI$1;
+declare function readSettings(filename: string | URL): Promise<CSpellSettingsI$1>;
+declare function readSettings(filename: string | URL, pnpSettings: PnPSettingsOptional): Promise<CSpellSettingsI$1>;
 /**
  * Read / import a cspell configuration file.
  * @param filename - the path to the file.
@@ -420,8 +420,8 @@ declare function readSettings(filename: string, defaultValues: CSpellSettingsWST
  *   - package `@cspell/dict-typescript/cspell-ext.json` searches for node_modules relative to `relativeTo`
  * @param relativeTo - absolute path to start searching for relative files or node_modules.
  */
-declare function readSettings(filename: string, relativeTo: string): CSpellSettingsI$1;
-declare function readSettings(filename: string, relativeTo: string, defaultValues: CSpellSettingsWST$1): CSpellSettingsI$1;
+declare function readSettings(filename: string | URL, relativeTo: string | URL): Promise<CSpellSettingsI$1>;
+declare function readSettings(filename: string | URL, relativeTo: string | URL, pnpSettings: PnPSettingsOptional): Promise<CSpellSettingsI$1>;
 
 /**
  *
@@ -429,7 +429,7 @@ declare function readSettings(filename: string, relativeTo: string, defaultValue
  * @returns combined configuration
  * @deprecated true
  */
-declare function readSettingsFiles(filenames: string[]): CSpellSettingsI$1;
+declare function readSettingsFiles(filenames: string[]): Promise<CSpellSettingsI$1>;
 
 type CSpellSettingsWST = AdvancedCSpellSettingsWithSourceTrace;
 type CSpellSettingsWSTO = OptionalOrUndefined<AdvancedCSpellSettingsWithSourceTrace>;
@@ -466,7 +466,7 @@ interface ConfigurationDependencies {
 declare function extractDependencies(settings: CSpellSettingsWSTO | CSpellSettingsI): ConfigurationDependencies;
 
 declare function getDefaultSettings(useDefaultDictionaries?: boolean): CSpellSettingsInternal;
-declare function getDefaultBundledSettings(): CSpellSettingsInternal;
+declare function getDefaultBundledSettingsAsync(): Promise<CSpellSettingsInternal>;
 
 declare function combineTextAndLanguageSettings(settings: CSpellUserSettings, text: string | undefined, languageId: string | string[]): CSpellSettingsInternal;
 
@@ -668,14 +668,6 @@ declare class DocumentValidator {
      */
     constructor(doc: TextDocument, options: DocumentValidatorOptions, settings: CSpellUserSettings);
     get ready(): boolean;
-    /**
-     * Prepare to validate a document.
-     * This will load all the necessary configuration and dictionaries.
-     *
-     * @deprecated
-     * @deprecationMessage Use the async `prepare` method.
-     */
-    prepareSync(): void;
     prepare(): Promise<void>;
     private _prepareAsync;
     private _updatePrep;
@@ -845,7 +837,7 @@ interface DetermineFinalDocumentSettingsResult {
  *   `languageId` - if defined will be used to select appropriate file type dictionaries.
  * @param settings - The near final settings. Should already be the combination of all configuration files.
  */
-declare function determineFinalDocumentSettings(document: DocumentWithText, settings: CSpellUserSettings): DetermineFinalDocumentSettingsResult;
+declare function determineFinalDocumentSettings(document: DocumentWithText, settings: CSpellUserSettings): Promise<DetermineFinalDocumentSettingsResult>;
 
 interface TraceResult {
     word: string;
@@ -908,4 +900,4 @@ declare function clearCachedFiles(): Promise<void>;
  */
 declare function getDictionary(settings: CSpellUserSettings): Promise<SpellingDictionaryCollection>;
 
-export { type CheckTextInfo, type ConfigurationDependencies, type CreateTextDocumentParams, type DetermineFinalDocumentSettingsResult, type Document, DocumentValidator, type DocumentValidatorOptions, ENV_CSPELL_GLOB_ROOT, type ExcludeFilesGlobMap, type ExclusionFunction, exclusionHelper_d as ExclusionHelper, type FeatureFlag, FeatureFlags, ImportError, type ImportFileRefWithError, IncludeExcludeFlag, type IncludeExcludeOptions, index_link_d as Link, type Logger, type SpellCheckFileOptions, type SpellCheckFileResult, SpellingDictionaryLoadError, type SuggestedWord, SuggestionError, type SuggestionOptions, type SuggestionsForWordResult, text_d as Text, type TextDocument, type TextDocumentLine, type TextDocumentRef, type TextInfoItem, type TraceOptions, type TraceResult, UnknownFeatureFlagError, type ValidationIssue, calcOverrideSettings, checkFilenameMatchesGlob, checkText, checkTextDocument, clearCachedFiles, clearCachedSettingsFiles, combineTextAndLanguageSettings, combineTextAndLanguageSettings as constructSettingsForText, createTextDocument, currentSettingsFileVersion, defaultConfigFilenames, defaultFileName, defaultFileName as defaultSettingsFilename, determineFinalDocumentSettings, extractDependencies, extractImportErrors, fileToDocument, fileToTextDocument, finalizeSettings, getCachedFileSize, getDefaultBundledSettings, getDefaultSettings, getDictionary, getGlobalSettings, getLanguagesForBasename as getLanguageIdsForBaseFilename, getLanguagesForExt, getLogger, getSources, getSystemFeatureFlags, isBinaryFile, isSpellingDictionaryLoadError, loadConfig, loadPnP, loadPnPSync, mergeInDocSettings, mergeSettings, readRawSettings, readSettings, readSettingsFiles, refreshDictionaryCache, resolveFile, searchForConfig, sectionCSpell, setLogger, shouldCheckDocument, spellCheckDocument, spellCheckFile, suggestionsForWord, suggestionsForWords, traceWords, traceWordsAsync, updateTextDocument, validateText };
+export { type CheckTextInfo, type ConfigurationDependencies, type CreateTextDocumentParams, type DetermineFinalDocumentSettingsResult, type Document, DocumentValidator, type DocumentValidatorOptions, ENV_CSPELL_GLOB_ROOT, type ExcludeFilesGlobMap, type ExclusionFunction, exclusionHelper_d as ExclusionHelper, type FeatureFlag, FeatureFlags, ImportError, type ImportFileRefWithError, IncludeExcludeFlag, type IncludeExcludeOptions, index_link_d as Link, type Logger, type SpellCheckFileOptions, type SpellCheckFileResult, SpellingDictionaryLoadError, type SuggestedWord, SuggestionError, type SuggestionOptions, type SuggestionsForWordResult, text_d as Text, type TextDocument, type TextDocumentLine, type TextDocumentRef, type TextInfoItem, type TraceOptions, type TraceResult, UnknownFeatureFlagError, type ValidationIssue, calcOverrideSettings, checkFilenameMatchesGlob, checkText, checkTextDocument, clearCachedFiles, clearCachedSettingsFiles, combineTextAndLanguageSettings, combineTextAndLanguageSettings as constructSettingsForText, createTextDocument, currentSettingsFileVersion, defaultConfigFilenames, defaultFileName, defaultFileName as defaultSettingsFilename, determineFinalDocumentSettings, extractDependencies, extractImportErrors, fileToDocument, fileToTextDocument, finalizeSettings, getCachedFileSize, getDefaultBundledSettingsAsync, getDefaultSettings, getDictionary, getGlobalSettings, getLanguagesForBasename as getLanguageIdsForBaseFilename, getLanguagesForExt, getLogger, getSources, getSystemFeatureFlags, isBinaryFile, isSpellingDictionaryLoadError, loadConfig, loadPnP, loadPnPSync, mergeInDocSettings, mergeSettings, readRawSettings, readSettings, readSettingsFiles, refreshDictionaryCache, resolveFile, searchForConfig, sectionCSpell, setLogger, shouldCheckDocument, spellCheckDocument, spellCheckFile, suggestionsForWord, suggestionsForWords, traceWords, traceWordsAsync, updateTextDocument, validateText };

@@ -1,3 +1,5 @@
+import assert from 'node:assert';
+
 import type { PredefinedPatterns, RegExpPatternDefinition } from '@cspell/cspell-types';
 import { parsers } from 'cspell-grammar';
 
@@ -145,25 +147,6 @@ export const _defaultSettings: Readonly<CSpellSettingsInternal> = Object.freeze(
     }),
 );
 
-const getSettings = (function () {
-    let settings: CSpellSettingsInternal | undefined = undefined;
-    return function (useDefaultDictionaries: boolean) {
-        if (!useDefaultDictionaries) {
-            return _defaultSettingsBasis;
-        }
-        if (!settings) {
-            const jsonSettings = readSettings(defaultConfigFile);
-            settings = mergeSettings(_defaultSettings, jsonSettings);
-            if (jsonSettings.name !== undefined) {
-                settings.name = jsonSettings.name;
-            } else {
-                delete settings.name;
-            }
-        }
-        return settings;
-    };
-})();
-
 function resolveConfigModule(configModuleName: string) {
     return resolveFile(configModuleName, srcDirectory).filename;
 }
@@ -179,10 +162,61 @@ function normalizePattern(pat: RegExpPatternDefinition): RegExpPatternDefinition
     };
 }
 
-export function getDefaultSettings(useDefaultDictionaries = true): CSpellSettingsInternal {
-    return getSettings(useDefaultDictionaries);
+class DefaultSettingsLoader {
+    settings: CSpellSettingsInternal | undefined = undefined;
+    pending: Promise<CSpellSettingsInternal> | undefined = undefined;
+    private _ready = false;
+
+    constructor() {
+        // start loading.
+        this.getDefaultSettingsAsync().catch(() => undefined);
+    }
+
+    getDefaultSettings(useDefaultDictionaries = true): CSpellSettingsInternal {
+        if (!useDefaultDictionaries) {
+            return _defaultSettingsBasis;
+        }
+        assert(this.settings);
+        return this.settings;
+    }
+
+    getDefaultSettingsAsync(useDefaultDictionaries = true): Promise<CSpellSettingsInternal> {
+        if (!useDefaultDictionaries) {
+            return Promise.resolve(_defaultSettingsBasis);
+        }
+        if (this.settings) return Promise.resolve(this.settings);
+        if (this.pending) return this.pending;
+
+        this.pending = (async () => {
+            const jsonSettings = await readSettings(defaultConfigFile);
+            this.settings = mergeSettings(_defaultSettings, jsonSettings);
+            if (jsonSettings.name !== undefined) {
+                this.settings.name = jsonSettings.name;
+            } else {
+                delete this.settings.name;
+            }
+            return this.settings;
+        })();
+        return this.pending;
+    }
+
+    ready(): boolean {
+        return this._ready;
+    }
+
+    async onReady(): Promise<void> {
+        await this.getDefaultSettingsAsync();
+        this._ready = true;
+        return undefined;
+    }
 }
 
-export function getDefaultBundledSettings(): CSpellSettingsInternal {
-    return getDefaultSettings();
+export const defaultSettingsLoader = new DefaultSettingsLoader();
+
+export function getDefaultSettings(useDefaultDictionaries = true): CSpellSettingsInternal {
+    return defaultSettingsLoader.getDefaultSettings(useDefaultDictionaries);
+}
+
+export function getDefaultBundledSettingsAsync(): Promise<CSpellSettingsInternal> {
+    return defaultSettingsLoader.getDefaultSettingsAsync();
 }

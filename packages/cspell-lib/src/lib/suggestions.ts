@@ -2,7 +2,13 @@ import type { CSpellSettings, LocaleId } from '@cspell/cspell-types';
 import assert from 'assert';
 
 import type { LanguageId } from './LanguageIds.js';
-import { finalizeSettings, getDefaultSettings, getGlobalSettings, mergeSettings } from './Settings/index.js';
+import {
+    defaultSettingsLoader,
+    finalizeSettings,
+    getDefaultSettings,
+    getGlobalSettings,
+    mergeSettings,
+} from './Settings/index.js';
 import {
     calcSettingsForLanguageId,
     isValidLocaleIntlFormat,
@@ -155,6 +161,7 @@ async function _suggestionsForWord(
         };
     }
 
+    await defaultSettingsLoader.onReady();
     await refreshDictionaryCache();
 
     const config = includeDefaultConfig
@@ -162,16 +169,16 @@ async function _suggestionsForWord(
         : settings;
     const { dictionaryCollection, allDictionaryCollection } = await determineDictionaries(config);
 
-    return _suggestionsForWordSync(word, options, settings, dictionaryCollection, allDictionaryCollection);
+    return _suggestionsForWordAsync(word, options, settings, dictionaryCollection, allDictionaryCollection);
 }
 
-function _suggestionsForWordSync(
+async function _suggestionsForWordAsync(
     word: string,
     options: SuggestionOptions,
     settings: CSpellSettings,
     dictionaryCollection: SpellingDictionaryCollection,
     allDictionaryCollection?: SpellingDictionaryCollection,
-): SuggestionsForWordResult {
+): Promise<SuggestionsForWordResult> {
     const extendsDictionaryCollection = allDictionaryCollection || dictionaryCollection;
     const {
         locale: language,
