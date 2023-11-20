@@ -5,7 +5,7 @@ Args: '["--config=${repoConfig}/cspell.json","**/*.{md,c,h,php}"]'
 Summary:
   files: 2172
   filesWithIssues: 1627
-  issues: 44116
+  issues: 44107
   errors: 0
 Errors: []
 
@@ -2008,7 +2008,6 @@ issues:
   - "ext/fileinfo/libmagic/compress.c:139:9          lzip                    U       #define lzip_flags gzip_flags"
   - "ext/fileinfo/libmagic/compress.c:174:6          maglen                  U       int maglen;"
   - "ext/fileinfo/libmagic/compress.c:177:3          compr                   U       } compr[] = {"
-  - "ext/fileinfo/libmagic/compress.c:187:62         gzipped                 U       args, do_zlib },/* 2, gzipped */"
   - "ext/fileinfo/libmagic/compress.c:192:58         pkziped                 U       args, NULL }, /* 6, pkziped */"
   - "ext/fileinfo/libmagic/compress.c:195:19         LZIP                    U       { { .magic = \"LZIP\" }, 4, lzip_args, NULL"
   - "ext/fileinfo/libmagic/compress.c:197:19         LRZI                    U       { { .magic = \"LRZI\" }, 4, lrzip_args, NULL"
@@ -5560,7 +5559,6 @@ issues:
   - "ext/pcre/pcre2lib/pcre2_context.c:88:15         newmemctl       U       pcre2_memctl *newmemctl;"
   - "ext/pcre/pcre2lib/pcre2_context.c:118:24        gcontext        U       pcre2_general_context *gcontext;"
   - "ext/pcre/pcre2lib/pcre2_context.c:317:60        BADDATA         U       success or PCRE2_ERROR_BADDATA if invalid"
-  - "ext/pcre/pcre2lib/pcre2_context.c:450:4         LCOV            U       /* LCOV_EXCL_START */"
   - "ext/pcre/pcre2lib/pcre2_context.c:460:11        mymalloc        U       void *(*mymalloc)(size_t, void *), void"
   - "ext/pcre/pcre2lib/pcre2_convert.c:53:25         STARSTAR            U       PCRE2_CONVERT_GLOB_NO_STARSTAR| \\"
   - "ext/pcre/pcre2lib/pcre2_convert.c:75:9          PUTCHARS            U       #define PUTCHARS(string) \\"
