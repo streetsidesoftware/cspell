@@ -16,7 +16,6 @@ import type { ExtendedSuggestion } from '../Models/Suggestion.js';
 import type { TextDocument, TextDocumentLine, TextDocumentRef } from '../Models/TextDocument.js';
 import { updateTextDocument } from '../Models/TextDocument.js';
 import type { ValidationIssue } from '../Models/ValidationIssue.js';
-import { loadConfigSync, searchForConfigSync } from '../Settings/Controller/configLoader/index.js';
 import { finalizeSettings, loadConfig, mergeSettings, searchForConfig } from '../Settings/index.js';
 import type { DirectiveIssue } from '../Settings/InDocSettings.js';
 import { validateInDocumentSettings } from '../Settings/InDocSettings.js';
@@ -24,7 +23,7 @@ import type { SpellingDictionaryCollection, SuggestionResult } from '../Spelling
 import { getDictionaryInternal, getDictionaryInternalSync } from '../SpellingDictionary/index.js';
 import type { WordSuggestion } from '../suggestions.js';
 import { calcSuggestionAdjustedToToMatchCase } from '../suggestions.js';
-import { catchPromiseError, toError, wrapCall } from '../util/errors.js';
+import { catchPromiseError, toError } from '../util/errors.js';
 import { AutoCache } from '../util/simpleCache.js';
 import type { MatchRange } from '../util/TextRange.js';
 import { createTimer } from '../util/timer.js';
@@ -91,69 +90,6 @@ export class DocumentValidator {
 
     get ready() {
         return this._ready;
-    }
-
-    /**
-     * Prepare to validate a document.
-     * This will load all the necessary configuration and dictionaries.
-     *
-     * @deprecated
-     * @deprecationMessage Use the async `prepare` method.
-     */
-    prepareSync(): void {
-        // @todo
-        // Determine doc settings.
-        // Calc include ranges
-        // Load dictionaries
-        if (this._ready) return;
-
-        const timer = createTimer();
-
-        const { options, settings } = this;
-
-        const useSearchForConfig =
-            (!options.noConfigSearch && !settings.noConfigSearch) || options.noConfigSearch === false;
-        const optionsConfigFile = options.configFile;
-        const localConfigFn = optionsConfigFile
-            ? () => loadConfigSync(optionsConfigFile, settings)
-            : useSearchForConfig
-              ? () => searchForDocumentConfigSync(this._document, settings, settings)
-              : undefined;
-
-        const localConfig = localConfigFn && wrapCall(localConfigFn, (e) => this.addPossibleError(e))();
-        this.addPossibleError(localConfig?.__importRef?.error);
-
-        const config = mergeSettings(settings, localConfig);
-        const docSettings = determineTextDocumentSettings(this._document, config);
-        const dict = getDictionaryInternalSync(docSettings);
-
-        const matcher = new GlobMatcher(localConfig?.ignorePaths || [], { root: process.cwd(), dot: true });
-        const uri = this._document.uri;
-
-        const shouldCheck = !matcher.match(uriToFilePath(uri)) && (docSettings.enabled ?? true);
-        const finalSettings = finalizeSettings(docSettings);
-        const validateOptions = settingsToValidateOptions(finalSettings);
-        const includeRanges = calcTextInclusionRanges(this._document.text, validateOptions);
-        const segmenter = createMappedTextSegmenter(includeRanges);
-        const textValidator = textValidatorFactory(dict, validateOptions);
-
-        this._preparations = {
-            config,
-            dictionary: dict,
-            docSettings,
-            finalSettings,
-            shouldCheck,
-            validateOptions,
-            includeRanges,
-            segmenter,
-            textValidator,
-            localConfig,
-            localConfigFilepath: localConfig?.__importRef?.filename,
-        };
-
-        this._ready = true;
-        this._preparationTime = timer.elapsed();
-        // console.error(`prepareSync ${this._preparationTime.toFixed(2)}ms`);
     }
 
     async prepare(): Promise<void> {
@@ -504,16 +440,6 @@ async function searchForDocumentConfig(
 
 function mapSug(sug: ExtendedSuggestion | SuggestionResult): SuggestionResult {
     return { cost: 999, ...sug };
-}
-
-function searchForDocumentConfigSync(
-    document: TextDocumentRef,
-    defaultConfig: CSpellSettingsWithSourceTrace,
-    pnpSettings: PnPSettings,
-): CSpellSettingsWithSourceTrace {
-    const { uri } = document;
-    if (uri.scheme !== 'file') defaultConfig;
-    return searchForConfigSync(uriToFilePath(uri), pnpSettings) || defaultConfig;
 }
 
 interface ShouldCheckDocumentResult {

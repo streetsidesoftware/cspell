@@ -155,10 +155,10 @@ export interface DetermineFinalDocumentSettingsResult {
  *   `languageId` - if defined will be used to select appropriate file type dictionaries.
  * @param settings - The near final settings. Should already be the combination of all configuration files.
  */
-export function determineFinalDocumentSettings(
+export async function determineFinalDocumentSettings(
     document: DocumentWithText,
     settings: CSpellUserSettings,
-): DetermineFinalDocumentSettingsResult {
+): Promise<DetermineFinalDocumentSettingsResult> {
     const doc = createTextDocument({
         uri: document.uri,
         content: document.text,
@@ -167,6 +167,6 @@ export function determineFinalDocumentSettings(
     });
     return {
         document,
-        settings: determineTextDocumentSettings(doc, settings),
+        settings: await determineTextDocumentSettings(doc, settings),
     };
 }

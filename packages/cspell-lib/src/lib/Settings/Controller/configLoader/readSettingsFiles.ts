@@ -10,6 +10,7 @@ import type { CSpellSettingsI } from './types.js';
  * @deprecated true
  */
 
-export function readSettingsFiles(filenames: string[]): CSpellSettingsI {
-    return filenames.map((filename) => readSettings(filename)).reduce((a, b) => mergeSettings(a, b), defaultSettings);
+export async function readSettingsFiles(filenames: string[]): Promise<CSpellSettingsI> {
+    const settings = await Promise.all(filenames.map((filename) => readSettings(filename)));
+    return settings.reduce((a, b) => mergeSettings(a, b), defaultSettings);
 }

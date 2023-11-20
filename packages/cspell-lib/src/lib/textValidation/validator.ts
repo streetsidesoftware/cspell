@@ -22,6 +22,7 @@ export async function validateText(
     settings: CSpellUserSettings,
     options: ValidateTextOptions = {},
 ): Promise<ValidationIssue[]> {
+    await Settings.defaultSettingsLoader.onReady();
     const finalSettings = Settings.finalizeSettings(settings);
     const dict = await getDictionaryInternal(finalSettings);
     const spellingIssues = [...validateFullText(text, dict, settingsToValidateOptions(finalSettings))];

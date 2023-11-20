@@ -7,11 +7,11 @@ import { describe, expect, test } from 'vitest';
 
 import { isDictionaryDefinitionInlineInternal } from '../Models/CSpellSettingsInternalDef.js';
 import { isDefined } from '../util/util.js';
-import { getDefaultBundledSettings } from './DefaultSettings.js';
+import { getDefaultBundledSettingsAsync } from './DefaultSettings.js';
 import { createDictionaryReferenceCollection as createRefCol } from './DictionaryReferenceCollection.js';
 import * as DictSettings from './DictionarySettings.js';
 
-const defaultSettings = getDefaultBundledSettings();
+const defaultSettings = await getDefaultBundledSettingsAsync();
 const oc = expect.objectContaining;
 
 describe('Validate DictionarySettings', () => {

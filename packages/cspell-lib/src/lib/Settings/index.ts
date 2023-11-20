@@ -26,4 +26,4 @@ export {
     mergeInDocSettings,
     mergeSettings,
 } from './CSpellSettingsServer.js';
-export { getDefaultBundledSettings, getDefaultSettings } from './DefaultSettings.js';
+export { defaultSettingsLoader, getDefaultBundledSettingsAsync, getDefaultSettings } from './DefaultSettings.js';
