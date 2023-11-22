@@ -1,23 +1,23 @@
 import path from 'path';
 import resolveFrom from 'resolve-from';
+import { fileURLToPath, pathToFileURL } from 'url';
 import { describe, expect, test } from 'vitest';
 
-import { pathPackageSamples, pathRepoRoot } from '../../../test-util/test.locations.cjs';
-import * as Uri from '../../util/Uri.js';
+import { pathPackageSamplesURL, pathRepoRoot } from '../../../test-util/test.locations.cjs';
 import { UnsupportedPnpFile } from './ImportError.js';
 import { clearPnPGlobalCache, pnpLoader } from './pnpLoader.js';
 
 const root = pathRepoRoot;
-const uriTestPackages = Uri.fromFilePath(path.join(root, 'test-packages/yarn'));
-const uriSamples = Uri.fromFilePath(pathPackageSamples);
+const uriTestPackages = pathToFileURL(path.join(root, 'test-packages/yarn/'));
+const uriSamples = pathPackageSamplesURL;
 const uriDirectory = uriSamples;
-const uriYarn2TestMed = Uri.joinPath(uriTestPackages, 'yarn2/test-yarn3-med');
-const uriYarn2TestSci = Uri.joinPath(uriTestPackages, 'yarn2/test-yarn3-sci');
-const uriBadPnp = Uri.joinPath(uriSamples, './bad-pnp');
-const uriYarn2TestMedPnp = Uri.joinPath(uriYarn2TestMed, '.pnp.cjs');
-const uriYarn2TestSciPnp = Uri.joinPath(uriYarn2TestSci, '.pnp.cjs');
+const uriYarn2TestMed = new URL('yarn2/test-yarn3-med/', uriTestPackages);
+const uriYarn2TestSci = new URL('yarn2/test-yarn3-sci/', uriTestPackages);
+const uriBadPnp = new URL('./bad-pnp/', uriSamples);
+const uriYarn2TestMedPnp = new URL('.pnp.cjs', uriYarn2TestMed);
+const uriYarn2TestSciPnp = new URL('.pnp.cjs', uriYarn2TestSci);
 
-const fsPath = Uri.uriToFilePath;
+const fsPath = fileURLToPath;
 
 describe('Validate PnPLoader', () => {
     test('pnpLoader bad pnp', async () => {
@@ -149,7 +149,7 @@ describe('Validate PnPLoader', () => {
         const loader = pnpLoader();
 
         const yarnPnp = await loader.load(uriYarn2TestMed);
-        const yarnPnp2 = await loader.load(Uri.joinPath(uriYarn2TestMed, '.yarn'));
+        const yarnPnp2 = await loader.load(new URL('.yarn/', uriYarn2TestMed));
         expect(yarnPnp?.toString().toLocaleLowerCase()).toBe(uriYarn2TestMedPnp.toString().toLowerCase());
         expect(yarnPnp2).toEqual(yarnPnp);
     });
@@ -166,7 +166,7 @@ describe('Validate PnPLoader', () => {
 
     test('pnpLoader bad schema', async () => {
         const loader = pnpLoader();
-        const uri = Uri.from(uriYarn2TestMed, { scheme: 'ftp' });
+        const uri = new URL(uriYarn2TestMed.pathname, 'ftp://example.com/');
         const r = loader.load(uri);
         await expect(r).resolves.toEqual(undefined);
     });
