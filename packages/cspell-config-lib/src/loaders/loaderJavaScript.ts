@@ -4,12 +4,25 @@ import type { CSpellConfigFile } from '../CSpellConfigFile.js';
 import { CSpellConfigFileJavaScript } from '../CSpellConfigFile/CSpellConfigFileJavaScript.js';
 import type { FileLoaderMiddleware, LoaderNext, LoadRequest } from '../FileLoader.js';
 
+type Log = typeof console.log;
+
+const _debug = false;
+const _log: Log = _debug ? console.warn.bind(console) : () => undefined;
+
 async function importJavaScript(url: URL, hashSuffix: number | string): Promise<CSpellConfigFileJavaScript> {
-    const _url = new URL(url.href);
-    _url.hash = `${_url.hash};loaderSuffix=${hashSuffix}`;
-    const result = await import(_url.href);
-    const settings = result.default ?? result;
-    return new CSpellConfigFileJavaScript(url, settings);
+    try {
+        const _url = new URL(url.href);
+        _url.hash = `${_url.hash};loaderSuffix=${hashSuffix}`;
+        _log('importJavaScript: %o', { url: _url.href });
+        const result = await import(_url.href);
+        const settings = result.default ?? result;
+        return new CSpellConfigFileJavaScript(url, settings);
+    } catch (e) {
+        _log('importJavaScript Error: %o', { url: url.href, error: e, hashSuffix });
+        throw e;
+    } finally {
+        _log('importJavaScript Done: %o', { url: url.href, hashSuffix });
+    }
 }
 
 export class LoaderJavaScript implements FileLoaderMiddleware {
