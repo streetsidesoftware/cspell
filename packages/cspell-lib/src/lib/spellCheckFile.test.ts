@@ -276,7 +276,7 @@ function errNoEnt(file: string): Error {
 
 function eFailed(file: string): Error {
     return oc({
-        message: expectToEqualCaseInsensitive(`Failed to read config file: "${rpS(file)}"`),
+        message: expectToEqualCaseInsensitive(`Failed to resolve file: "${rpS(file)}"`),
     });
 }
 
