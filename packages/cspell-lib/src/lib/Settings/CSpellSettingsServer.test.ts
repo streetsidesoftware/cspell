@@ -7,6 +7,7 @@ import { describe, expect, test } from 'vitest';
 import { pathPackageRoot, pathPackageSamples } from '../../test-util/test.locations.cjs';
 import { createCSpellSettingsInternal as csi } from '../Models/CSpellSettingsInternalDef.js';
 import { toURL } from '../util/url.js';
+import { getDefaultConfigLoader } from './Controller/configLoader/configLoader.js';
 import {
     __testing__ as __configLoader_testing__,
     clearCachedSettingsFiles,
@@ -238,7 +239,7 @@ describe('Validate CSpellSettingsServer', () => {
         expect(errors.map((ref) => ref.error.toString())).toContainEqual(
             expect.stringMatching('intentionally-missing-file.json'),
         );
-        expect(errors.map((ref) => ref.error.toString())).toContainEqual(expect.stringMatching('Failed to read'));
+        expect(errors.map((ref) => ref.error.toString())).toContainEqual(expect.stringMatching('Failed to'));
     });
 
     test('makes sure global settings is an object', async () => {
@@ -278,7 +279,7 @@ describe('Validate CSpellSettingsServer', () => {
         expect(errors).toEqual([]);
 
         const sources = getSources(config);
-        expect(sources.length).toBe(2);
+        expect(sources.length).toBe(3);
     });
 
     test('loading circular imports (loadConfig)', async () => {
@@ -297,7 +298,7 @@ describe('Validate CSpellSettingsServer', () => {
         expect(errors).toEqual([]);
 
         const sources = getSources(config);
-        expect(sources.length).toBe(2);
+        expect(sources.length).toBe(3);
     });
 });
 
@@ -371,7 +372,9 @@ const rawSampleSettings: CSpellUserSettings = {
     ],
 };
 
-const sampleSettings = cf(rawSampleSettings);
+const sampleConfig = cf(rawSampleSettings);
+// const sampleRawSettings = configToRawSettings(sampleConfig);
+const sampleSettings = await getDefaultConfigLoader().mergeConfigFileWithImports(sampleConfig, {});
 
 function cf(settings: CSpellSettingsWST, url: URL | string = import.meta.url): CSpellConfigFile {
     return new CSpellConfigFileInMemory(toURL(url), settings);

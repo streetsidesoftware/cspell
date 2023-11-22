@@ -99,7 +99,7 @@ describe('Validate DictionarySettings', () => {
             oc({
                 name: 'words',
                 path: absolutePath,
-                __source: pathToConfig,
+                __source: pathToConfig.href,
             }),
         );
 
@@ -123,7 +123,7 @@ describe('Validate DictionarySettings', () => {
 
         const normalizedDef = DictSettings.mapDictDefToInternal(def, configFile);
         expect(DictSettings.isDictionaryDefinitionWithSource(normalizedDef)).toBe(true);
-        expect(normalizedDef).toEqual(expect.objectContaining({ __source: configFile }));
+        expect(normalizedDef).toEqual(expect.objectContaining({ __source: configFile.href }));
 
         const normalizedDef2 = DictSettings.mapDictDefToInternal(normalizedDef, configFile);
         expect(normalizedDef2).toBe(normalizedDef);
