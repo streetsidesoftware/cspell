@@ -57,3 +57,7 @@ export function toFileUrl(file: string | URL): URL {
     if (file instanceof URL) return file;
     return resolveFileWithURL(file, cwdURL());
 }
+
+export function toURL(href: string | URL): URL {
+    return href instanceof URL ? href : new URL(href);
+}
