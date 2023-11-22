@@ -16,7 +16,13 @@ import type { ExtendedSuggestion } from '../Models/Suggestion.js';
 import type { TextDocument, TextDocumentLine, TextDocumentRef } from '../Models/TextDocument.js';
 import { updateTextDocument } from '../Models/TextDocument.js';
 import type { ValidationIssue } from '../Models/ValidationIssue.js';
-import { finalizeSettings, loadConfig, mergeSettings, searchForConfig } from '../Settings/index.js';
+import {
+    defaultSettingsLoader,
+    finalizeSettings,
+    loadConfig,
+    mergeSettings,
+    searchForConfig,
+} from '../Settings/index.js';
 import type { DirectiveIssue } from '../Settings/InDocSettings.js';
 import { validateInDocumentSettings } from '../Settings/InDocSettings.js';
 import type { SpellingDictionaryCollection, SuggestionResult } from '../SpellingDictionary/index.js';
@@ -93,6 +99,7 @@ export class DocumentValidator {
     }
 
     async prepare(): Promise<void> {
+        await defaultSettingsLoader.onReady();
         if (this._ready) return;
         if (this._prepared) return this._prepared;
         this._prepared = this._prepareAsync();
@@ -452,6 +459,8 @@ export async function shouldCheckDocument(
     options: DocumentValidatorOptions,
     settings: CSpellUserSettings,
 ): Promise<ShouldCheckDocumentResult> {
+    await defaultSettingsLoader.onReady();
+
     const errors: Error[] = [];
 
     function addPossibleError(error: Error | undefined | unknown): undefined {
