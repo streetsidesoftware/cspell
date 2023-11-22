@@ -2,6 +2,7 @@ import type { CSpellSettingsWithSourceTrace } from '@cspell/cspell-types';
 import * as fs from 'fs';
 import * as Path from 'path';
 
+import { toError } from '../util/errors.js';
 import { clean } from '../util/util.js';
 import { readRawSettings } from './Controller/configLoader/index.js';
 import { getRawGlobalSettings, writeRawGlobalSettings } from './GlobalSettings.js';
@@ -26,9 +27,9 @@ interface NodePackage {
     filename: string;
 }
 
-export function listGlobalImports(): ListGlobalImportsResults {
-    const globalSettings = getRawGlobalSettings();
-    const list = resolveImports(globalSettings).map(({ filename, settings, error }) => ({
+export async function listGlobalImports(): Promise<ListGlobalImportsResults> {
+    const globalSettings = await getRawGlobalSettings();
+    const list = (await resolveImports(globalSettings)).map(({ filename, settings, error }) => ({
         filename,
         error,
         id: settings.id,
@@ -54,8 +55,8 @@ function isString(s: string | undefined): s is string {
     return s !== undefined;
 }
 
-export function addPathsToGlobalImports(paths: string[]): AddPathsToGlobalImportsResults {
-    const resolvedSettings = paths.map(resolveSettings);
+export async function addPathsToGlobalImports(paths: string[]): Promise<AddPathsToGlobalImportsResults> {
+    const resolvedSettings = await Promise.all(paths.map(resolveSettings));
     const hasError = resolvedSettings.filter((r) => !!r.error).length > 0;
     if (hasError) {
         return {
@@ -65,8 +66,8 @@ export function addPathsToGlobalImports(paths: string[]): AddPathsToGlobalImport
         };
     }
 
-    const rawGlobalSettings = getRawGlobalSettings();
-    const resolvedImports = resolveImports(rawGlobalSettings);
+    const rawGlobalSettings = await getRawGlobalSettings();
+    const resolvedImports = await resolveImports(rawGlobalSettings);
 
     const imports = new Set(resolvedImports.map((r) => r.resolvedToFilename || r.filename));
     resolvedSettings
@@ -78,7 +79,12 @@ export function addPathsToGlobalImports(paths: string[]): AddPathsToGlobalImport
         import: [...imports],
     };
 
-    const error = writeRawGlobalSettings(globalSettings);
+    let error: Error | undefined;
+    try {
+        await writeRawGlobalSettings(globalSettings);
+    } catch (e) {
+        error = toError(e);
+    }
     return {
         success: !error,
         error: error?.message,
@@ -99,8 +105,8 @@ export interface RemovePathsFromGlobalImportsResult {
  * Note: for Idempotent reasons, asking to remove a path that is not in the global settings is considered a success.
  *   It is possible to check for this by looking at the returned list of removed paths.
  */
-export function removePathsFromGlobalImports(paths: string[]): RemovePathsFromGlobalImportsResult {
-    const listResult = listGlobalImports();
+export async function removePathsFromGlobalImports(paths: string[]): Promise<RemovePathsFromGlobalImportsResult> {
+    const listResult = await listGlobalImports();
 
     const toRemove = new Set<string>();
 
@@ -159,8 +165,8 @@ export interface ResolveSettingsResult {
     settings: CSpellSettingsWithSourceTrace;
 }
 
-function resolveSettings(filename: string): ResolveSettingsResult {
-    const settings = readRawSettings(filename);
+async function resolveSettings(filename: string): Promise<ResolveSettingsResult> {
+    const settings = await readRawSettings(filename);
     const ref = settings.__importRef;
     const resolvedToFilename = ref?.filename;
     const error = ref?.error?.message || (!resolvedToFilename && 'File not Found') || undefined;
@@ -177,10 +183,10 @@ function normalizeImports(imports: CSpellSettingsWithSourceTrace['import']): str
     return typeof imports === 'string' ? [imports] : imports || [];
 }
 
-function resolveImports(s: CSpellSettingsWithSourceTrace): ResolveSettingsResult[] {
+function resolveImports(s: CSpellSettingsWithSourceTrace): Promise<ResolveSettingsResult[]> {
     const imported = normalizeImports(s.import);
 
-    return imported.map(resolveSettings);
+    return Promise.all(imported.map(resolveSettings));
 }
 
 function findPackageForCSpellConfig(pathToConfig: string): NodePackage | undefined {
