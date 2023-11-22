@@ -7,6 +7,7 @@ import resolveFrom from 'resolve-from';
 import { fileURLToPath } from 'url';
 
 import { srcDirectory } from '../../lib-cjs/pkg-info.cjs';
+import { toFilePathOrHref } from './url.js';
 
 export interface ResolveFileResult {
     filename: string;
@@ -28,8 +29,6 @@ export function resolveFile(filename: string, relativeTo: string | URL): Resolve
         { filename, fn: tryUrl },
         { filename, fn: tryNodeRequireResolve },
         { filename, fn: tryImportResolve },
-        { filename: path.resolve(relativeTo.toString(), filename), fn: tryResolveExists },
-        { filename: path.resolve(filename), fn: tryResolveExists },
         { filename, fn: tryResolveExists },
         { filename, fn: tryNodeResolveDefaultPaths },
         { filename, fn: tryResolveFrom },
@@ -41,11 +40,16 @@ export function resolveFile(filename: string, relativeTo: string | URL): Resolve
         const r = step.fn(step.filename, relativeTo);
         if (r?.found) return r;
     }
-    return {
-        filename: isRelative(filename) ? joinWith(filename, relativeTo) : filename.toString(),
-        relativeTo: relativeTo.toString(),
-        found: false,
-    };
+
+    const r = tryUrl(filename, relativeTo);
+
+    return (
+        r || {
+            filename: isRelative(filename) ? joinWith(filename, relativeTo) : filename.toString(),
+            relativeTo: relativeTo.toString(),
+            found: false,
+        }
+    );
 }
 
 const isUrlRegExp = /^(?:\w+:\/\/|data:)/i;
@@ -59,6 +63,13 @@ const isUrlRegExp = /^(?:\w+:\/\/|data:)/i;
  */
 function tryUrl(filename: string, relativeTo: string | URL): ResolveFileResult | undefined {
     if (isURLLike(filename)) {
+        if (isFileURL(filename)) {
+            return {
+                filename: fileURLToPath(filename),
+                relativeTo: undefined,
+                found: fs.existsSync(fileURLToPath(filename)),
+            };
+        }
         return { filename: filename.toString(), relativeTo: undefined, found: true };
     }
 
@@ -68,6 +79,16 @@ function tryUrl(filename: string, relativeTo: string | URL): ResolveFileResult |
             filename: url.href,
             relativeTo: relativeTo.toString(),
             found: true,
+        };
+    }
+
+    if (isURLLike(relativeTo) && !isDataURL(relativeTo)) {
+        const rel = filename.split(path.sep).join('/');
+        const url = new URL(rel, relativeTo);
+        return {
+            filename: toFilePathOrHref(url),
+            relativeTo: relativeTo.toString(),
+            found: fs.existsSync(url),
         };
     }
 
@@ -122,8 +143,20 @@ function tryResolveGlobal(filename: string): ResolveFileResult | undefined {
     return (r && { filename: r, relativeTo: undefined, found: true }) || undefined;
 }
 
-function tryResolveExists(filename: string | URL): ResolveFileResult {
-    return { filename: filename.toString(), relativeTo: undefined, found: fs.existsSync(filename) };
+function tryResolveExists(filename: string | URL, relativeTo: string | URL): ResolveFileResult | undefined {
+    if (filename instanceof URL || isURLLike(filename) || isURLLike(relativeTo)) return undefined;
+
+    const toTry = [{ filename }, { filename: path.resolve(relativeTo.toString(), filename), relativeTo }];
+    for (const { filename, relativeTo } of toTry) {
+        const found = path.isAbsolute(filename) && fs.existsSync(filename);
+        if (found) return { filename, relativeTo: relativeTo?.toString(), found };
+    }
+    filename = path.resolve(filename);
+    return {
+        filename,
+        relativeTo: path.resolve('.'),
+        found: fs.existsSync(filename),
+    };
 }
 
 function tryResolveFrom(filename: string, relativeTo: string | URL): ResolveFileResult | undefined {
@@ -168,7 +201,7 @@ function isRelative(filename: string | URL): boolean {
 
 function joinWith(filename: string, relativeTo: string | URL): string {
     return relativeTo instanceof URL || isURLLike(relativeTo)
-        ? new URL(filename, relativeTo).toString()
+        ? toFilePathOrHref(new URL(filename, relativeTo))
         : path.resolve(relativeTo, filename);
 }
 
