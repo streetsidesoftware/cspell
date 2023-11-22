@@ -1,0 +1,59 @@
+import path from 'path';
+import { fileURLToPath, pathToFileURL } from 'url';
+
+import { srcDirectory } from '../../lib-cjs/pkg-info.cjs';
+
+/**
+ * Convert a URL into a string. If it is a file URL, convert it to a path.
+ * @param url - URL
+ * @returns path or href
+ */
+export function toFilePathOrHref(url: URL | string): string {
+    url = url instanceof URL ? url : new URL(url);
+    if (url.protocol === 'file:') {
+        return fileURLToPath(url);
+    }
+    return url.href;
+}
+
+/**
+ * This is a URL that can be used for searching for modules.
+ * @returns URL for the source directory
+ */
+export function getSourceDirectoryUrl(): URL {
+    const base = pathToFileURL(srcDirectory);
+    const srcDirectoryURL = new URL(base.pathname + '/', base);
+    return srcDirectoryURL;
+}
+
+/**
+ * @param path - path to convert to a URL
+ * @param relativeTo - URL to resolve the path against or the current working directory.
+ * @returns a URL
+ */
+export function relativeTo(path: string, relativeTo?: URL): URL {
+    return new URL(path, relativeTo || cwdURL());
+}
+
+export function cwdURL(): URL {
+    return pathToFileURL(process.cwd() + '/');
+}
+
+export function resolveFileWithURL(file: string | URL, relativeTo: URL): URL {
+    if (file instanceof URL) return file;
+    if (file.startsWith('file://')) return new URL(file);
+    if (/^\w+:\/\//.test(file)) return new URL(file);
+    if (relativeTo?.protocol === 'file:' && path.isAbsolute(file)) {
+        return pathToFileURL(file);
+    }
+    return new URL(normalizePathSlashes(file), relativeTo);
+}
+
+function normalizePathSlashes(filePath: string): string {
+    return filePath.split(path.sep).join('/');
+}
+
+export function toFileUrl(file: string | URL): URL {
+    if (file instanceof URL) return file;
+    return resolveFileWithURL(file, cwdURL());
+}
