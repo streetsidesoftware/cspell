@@ -88,8 +88,12 @@ const searchPlaces = Object.freeze([
     'cspell.yaml',
     'cspell.yml',
     // Dynamic config is looked for last
+    'cspell.config.mjs',
     'cspell.config.js',
     'cspell.config.cjs',
+    '.cspell.config.mjs',
+    '.cspell.config.js',
+    '.cspell.config.cjs',
     // .config
     '.config/.cspell.json',
     '.config/cspell.json',
@@ -103,8 +107,12 @@ const searchPlaces = Object.freeze([
     '.config/cspell.config.yml',
     '.config/cspell.yaml',
     '.config/cspell.yml',
+    '.config/cspell.config.mjs',
     '.config/cspell.config.js',
     '.config/cspell.config.cjs',
+    '.config/.cspell.config.mjs',
+    '.config/.cspell.config.js',
+    '.config/.cspell.config.cjs',
 ]);
 
 interface ImportedConfigEntry {

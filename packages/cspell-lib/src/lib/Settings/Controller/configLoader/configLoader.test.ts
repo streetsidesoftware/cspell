@@ -514,6 +514,9 @@ describe('Validate search/load config files', () => {
         ${rp('cspell.config.json')}                   | ${undefined} | ${oc(cf(rp('cspell.config.json'), oc({ id: 'cspell-package-config' })))}
         ${s('linked/cspell.config.js')}               | ${undefined} | ${cf(s('linked/cspell.config.js'), oc({ description: 'cspell.config.js file in samples/linked' }))}
         ${s('js-config/cspell.config.js')}            | ${undefined} | ${cf(s('js-config/cspell.config.js'), oc({ description: 'cspell.config.js file in samples/js-config' }))}
+        ${s('esm-config/cspell.config.js')}           | ${undefined} | ${cf(s('esm-config/cspell.config.js'), oc({ description: 'cspell.config.js file in samples/esm-config' }))}
+        ${s('esm-config/cspell.config.cjs')}          | ${undefined} | ${cf(s('esm-config/cspell.config.cjs'), oc({ description: 'cspell.config.cjs file in samples/esm-config' }))}
+        ${s('esm-config/cspell.config.mjs')}          | ${undefined} | ${cf(s('esm-config/cspell.config.mjs'), oc({ description: 'cspell.config.mjs file in samples/esm-config' }))}
     `('readConfigFile $file $relativeTo', async ({ file, relativeTo, expectedConfig }) => {
         const loader = getDefaultConfigLoader();
         const cfg = await loader.readConfigFile(file, relativeTo);
