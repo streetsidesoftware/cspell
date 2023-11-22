@@ -20,6 +20,7 @@ import {
     ENV_CSPELL_GLOB_ROOT,
 } from '../../constants.js';
 import { mergeSettings } from '../../CSpellSettingsServer.js';
+import { defaultSettingsLoader } from '../../DefaultSettings.js';
 import { getGlobalConfig } from '../../GlobalSettings.js';
 import { ImportError } from '../ImportError.js';
 import type { LoaderResult } from '../pnpLoader.js';
@@ -164,6 +165,7 @@ export class ConfigLoader {
         relativeTo?: string | URL,
         pnpSettings?: PnPSettingsOptional,
     ): Promise<CSpellSettingsI> {
+        await defaultSettingsLoader.onReady();
         const ref = resolveFilename(filename, relativeTo || process.cwd());
         const entry = this.importSettings(ref, pnpSettings || defaultPnPSettings, []);
         return entry.onReady;
@@ -173,6 +175,7 @@ export class ConfigLoader {
         filenameOrURL: string | URL,
         relativeTo?: string | URL,
     ): Promise<CSpellConfigFile | Error> {
+        await defaultSettingsLoader.onReady();
         const ref = resolveFilename(filenameOrURL.toString(), relativeTo || process.cwd());
         const url = this.cspellIO.toFileURL(ref.filename);
         const href = url.href;
@@ -202,6 +205,7 @@ export class ConfigLoader {
     }
 
     async searchForConfigFile(searchFrom: URL | string | undefined): Promise<CSpellConfigFile | undefined> {
+        await defaultSettingsLoader.onReady();
         const location = await this.searchForConfigFileLocation(searchFrom);
         if (!location) return undefined;
         const file = await this.readConfigFile(location);
@@ -218,6 +222,7 @@ export class ConfigLoader {
         searchFrom: URL | string | undefined,
         pnpSettings: PnPSettingsOptional = defaultPnPSettings,
     ): Promise<CSpellSettingsI | undefined> {
+        await defaultSettingsLoader.onReady();
         const configFile = await this.searchForConfigFile(searchFrom);
         if (!configFile) return undefined;
 
@@ -230,6 +235,7 @@ export class ConfigLoader {
     }
 
     public async getGlobalSettingsAsync(): Promise<CSpellSettingsI> {
+        await defaultSettingsLoader.onReady();
         if (!this.globalSettings) {
             const globalConfFile = await getGlobalConfig();
             const normalized = await this.mergeConfigFileWithImports(globalConfFile, {});
