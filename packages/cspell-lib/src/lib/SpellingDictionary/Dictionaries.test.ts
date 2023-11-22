@@ -10,6 +10,7 @@ import { filterDictDefsToLoad, mapDictDefToInternal } from '../Settings/Dictiona
 import { getDefaultBundledSettingsAsync, loadConfig } from '../Settings/index.js';
 import * as Dictionaries from './Dictionaries.js';
 import { isSpellingDictionaryLoadError } from './SpellingDictionaryError.js';
+import { pathToFileURL } from 'url';
 
 // cspell:ignore café rhône
 const mkdirp = async (p: string) => {
@@ -26,6 +27,8 @@ function log(msg: string): void {
         console.log(msg);
     }
 }
+
+const __filenameURL = pathToFileURL(__filename);
 
 const di = mapDictDefToInternal;
 
@@ -144,7 +147,7 @@ describe('Validate getDictionary', () => {
 
     test('Dictionary NOT Found', async () => {
         const settings = csi({
-            dictionaryDefinitions: [di({ name: 'my-words', path: './not-found.txt' }, __filename)],
+            dictionaryDefinitions: [di({ name: 'my-words', path: './not-found.txt' }, __filenameURL)],
             dictionaries: ['my-words'],
         });
 
@@ -197,8 +200,8 @@ describe('Validate Refresh', () => {
         await fs.writeFile(tempDictPath, 'one\ntwo\nthree\n');
         const settings = await getDefaultBundledSettingsAsync();
         const defs = (settings.dictionaryDefinitions || []).concat([
-            di({ name: 'temp', path: tempDictPath }, __filename),
-            di({ name: 'not_found', path: tempDictPathNotFound }, __filename),
+            di({ name: 'temp', path: tempDictPath }, __filenameURL),
+            di({ name: 'not_found', path: tempDictPathNotFound }, __filenameURL),
         ]);
         const toLoad = ['node', 'html', 'css', 'not_found', 'temp'];
         const col = createDictionaryReferenceCollection(toLoad);
@@ -244,7 +247,7 @@ describe('Validate Refresh', () => {
         await fs.writeFile(tempDictPath, 'one\ntwo\nthree\n');
         const settings = await getDefaultBundledSettingsAsync();
         const defs = (settings.dictionaryDefinitions || []).concat([
-            di({ name: 'temp', path: tempDictPath }, __filename),
+            di({ name: 'temp', path: tempDictPath }, __filenameURL),
         ]);
         const toLoad = ['node', 'html', 'css', 'temp'];
         const col = createDictionaryReferenceCollection(toLoad);

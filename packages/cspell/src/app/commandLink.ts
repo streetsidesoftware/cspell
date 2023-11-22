@@ -19,8 +19,8 @@ export function commandLink(prog: Command): Command {
         .command('list', { isDefault: true })
         .alias('ls')
         .description('List currently linked configurations.')
-        .action(() => {
-            const imports = listGlobalImports();
+        .action(async () => {
+            const imports = await listGlobalImports();
             const table = listGlobalImportsResultToTable(imports.list);
             tableToLines(table).forEach((line) => console.log(line));
             return;
@@ -30,8 +30,8 @@ export function commandLink(prog: Command): Command {
         .command('add <dictionaries...>')
         .alias('a')
         .description('Add dictionaries any other settings to the cspell global config.')
-        .action((dictionaries: string[]) => {
-            const r = addPathsToGlobalImports(dictionaries);
+        .action(async (dictionaries: string[]) => {
+            const r = await addPathsToGlobalImports(dictionaries);
             const table = addPathsToGlobalImportsResultToTable(r);
             console.log('Adding:');
             tableToLines(table).forEach((line) => console.log(line));
@@ -45,8 +45,8 @@ export function commandLink(prog: Command): Command {
         .command('remove <paths...>')
         .alias('r')
         .description('Remove matching paths / packages from the global config.')
-        .action((dictionaries: string[]) => {
-            const r = removePathsFromGlobalImports(dictionaries);
+        .action(async (dictionaries: string[]) => {
+            const r = await removePathsFromGlobalImports(dictionaries);
             console.log('Removing:');
             if (r.error) {
                 throw new CheckFailed(r.error, 1);

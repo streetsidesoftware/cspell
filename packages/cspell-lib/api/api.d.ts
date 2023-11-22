@@ -56,13 +56,13 @@ interface NodePackage {
     name: string | undefined;
     filename: string;
 }
-declare function listGlobalImports(): ListGlobalImportsResults;
+declare function listGlobalImports(): Promise<ListGlobalImportsResults>;
 interface AddPathsToGlobalImportsResults {
     success: boolean;
     resolvedSettings: ResolveSettingsResult[];
     error: string | undefined;
 }
-declare function addPathsToGlobalImports(paths: string[]): AddPathsToGlobalImportsResults;
+declare function addPathsToGlobalImports(paths: string[]): Promise<AddPathsToGlobalImportsResults>;
 interface RemovePathsFromGlobalImportsResult {
     success: boolean;
     error: string | undefined;
@@ -75,7 +75,7 @@ interface RemovePathsFromGlobalImportsResult {
  * Note: for Idempotent reasons, asking to remove a path that is not in the global settings is considered a success.
  *   It is possible to check for this by looking at the returned list of removed paths.
  */
-declare function removePathsFromGlobalImports(paths: string[]): RemovePathsFromGlobalImportsResult;
+declare function removePathsFromGlobalImports(paths: string[]): Promise<RemovePathsFromGlobalImportsResult>;
 interface ResolveSettingsResult {
     filename: string;
     resolvedToFilename: string | undefined;
@@ -321,6 +321,8 @@ declare function getLanguagesForBasename(basename: string): string[];
 declare const currentSettingsFileVersion = "0.2";
 declare const ENV_CSPELL_GLOB_ROOT = "CSPELL_GLOB_ROOT";
 
+type LoaderResult = URL | undefined;
+
 /**
  * The keys of an object where the values cannot be undefined.
  */
@@ -360,13 +362,6 @@ interface DictionaryFileDefinitionInternal extends Readonly<DictionaryDefinition
     readonly __source?: string | undefined;
 }
 
-declare class ImportError extends Error {
-    readonly cause: Error | undefined;
-    constructor(msg: string, cause?: Error | unknown);
-}
-
-type LoaderResult = Uri | undefined;
-
 type PnPSettingsOptional = OptionalOrUndefined<PnPSettings>;
 
 type CSpellSettingsWST$1 = CSpellSettingsWithSourceTrace;
@@ -381,7 +376,7 @@ declare const defaultConfigFilenames: readonly string[];
  * @param pnpSettings - related to Using Yarn PNP.
  * @returns the resulting settings
  */
-declare function searchForConfig(searchFrom: string | undefined, pnpSettings?: PnPSettingsOptional): Promise<CSpellSettingsI$1 | undefined>;
+declare function searchForConfig(searchFrom: URL | string | undefined, pnpSettings?: PnPSettingsOptional): Promise<CSpellSettingsI$1 | undefined>;
 /**
  * Load a CSpell configuration files.
  * @param file - path or package reference to load.
@@ -389,9 +384,9 @@ declare function searchForConfig(searchFrom: string | undefined, pnpSettings?: P
  * @returns normalized CSpellSettings
  */
 declare function loadConfig(file: string, pnpSettings?: PnPSettingsOptional): Promise<CSpellSettingsI$1>;
-declare function loadPnP(pnpSettings: PnPSettingsOptional, searchFrom: Uri): Promise<LoaderResult>;
-declare function loadPnPSync(pnpSettings: PnPSettingsOptional, searchFrom: Uri): LoaderResult;
-declare function readRawSettings(filename: string, relativeTo?: string): CSpellSettingsWST$1;
+declare function loadPnP(pnpSettings: PnPSettingsOptional, searchFrom: URL): Promise<LoaderResult>;
+declare function loadPnPSync(pnpSettings: PnPSettingsOptional, searchFrom: URL): LoaderResult;
+declare function readRawSettings(filename: string | URL, relativeTo?: string | URL): Promise<CSpellSettingsWST$1>;
 declare function getGlobalSettings(): CSpellSettingsI$1;
 declare function getCachedFileSize(): number;
 declare function clearCachedSettingsFiles(): void;
@@ -430,6 +425,11 @@ declare function readSettings(filename: string | URL, relativeTo: string | URL, 
  * @deprecated true
  */
 declare function readSettingsFiles(filenames: string[]): Promise<CSpellSettingsI$1>;
+
+declare class ImportError extends Error {
+    readonly cause: Error | undefined;
+    constructor(msg: string, cause?: Error | unknown);
+}
 
 type CSpellSettingsWST = AdvancedCSpellSettingsWithSourceTrace;
 type CSpellSettingsWSTO = OptionalOrUndefined<AdvancedCSpellSettingsWithSourceTrace>;

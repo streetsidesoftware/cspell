@@ -15,6 +15,7 @@ export type CSpellUserSettings = CSpellSettings;
 export interface CSpellSettings extends FileSettings, LegacySettings {}
 
 export interface ImportFileRef {
+    /** filename or URL */
     filename: string;
     error?: Error | undefined;
     referencedBy?: Source[];

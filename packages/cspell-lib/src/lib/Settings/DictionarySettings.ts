@@ -64,18 +64,18 @@ function fixDicPath(defPath: string | undefined, defFile: string | undefined): s
     return parts.length > 1 ? path.join(...parts) : parts[0] || '';
 }
 
-export function mapDictDefsToInternal(defs: undefined, pathToSettingsFile: string): undefined;
+export function mapDictDefsToInternal(defs: undefined, pathToSettingsFile: URL): undefined;
 export function mapDictDefsToInternal(
     defs: DictionaryDefinition[],
-    pathToSettingsFile: string,
+    pathToSettingsFile: URL,
 ): DictionaryDefinitionInternalWithSource[];
 export function mapDictDefsToInternal(
     defs: DictionaryDefinition[] | undefined,
-    pathToSettingsFile: string,
+    pathToSettingsFile: URL,
 ): DictionaryDefinitionInternalWithSource[] | undefined;
 export function mapDictDefsToInternal(
     defs: DictionaryDefinition[] | undefined,
-    pathToSettingsFile: string,
+    pathToSettingsFile: URL,
 ): DictionaryDefinitionInternalWithSource[] | undefined {
     return defs?.map((def) => mapDictDefToInternal(def, pathToSettingsFile));
 }
@@ -84,20 +84,21 @@ const internalDefs = new AutoResolveWeakCache<DictionaryDefinition, DictionaryDe
 
 export function mapDictDefToInternal(
     def: DictionaryDefinition,
-    pathToSettingsFile: string,
+    pathToSettingsFile: URL,
 ): DictionaryDefinitionInternalWithSource {
     return internalDefs.get(def, (def) => _mapDictDefToInternal(def, pathToSettingsFile));
 }
 
 function _mapDictDefToInternal(
     def: DictionaryDefinition,
-    pathToSettingsFile: string,
+    pathToSettingsFile: URL,
 ): DictionaryDefinitionInternalWithSource {
     if (isDictionaryDefinitionWithSource(def)) {
         return def;
     }
+    const source = pathToSettingsFile.href;
     if (isDictionaryDefinitionInlineInternal(def)) {
-        return { ...def, __source: pathToSettingsFile };
+        return { ...def, __source: source };
     }
 
     return new _DictionaryDefinitionInternalWithSource(def, pathToSettingsFile);
@@ -162,11 +163,13 @@ class _DictionaryDefinitionInternalWithSource implements DictionaryFileDefinitio
     readonly useCompounds?: boolean;
     readonly noSuggest?: boolean;
     readonly scope?: CustomDictionaryScope | CustomDictionaryScope[];
+    readonly __source: string;
     private ddi: DDI;
     constructor(
         def: DictionaryDefinition,
-        readonly __source: string,
+        readonly sourceURL: URL,
     ) {
+        this.__source = sourceURL.href;
         // this bit of assignment is to have the compiler help use if any new fields are added.
         const defAll: DictDef = def;
         const {
@@ -181,7 +184,7 @@ class _DictionaryDefinitionInternalWithSource implements DictionaryFileDefinitio
             scope,
             useCompounds,
         } = defAll;
-        const defaultPath = path.dirname(__source);
+        const defaultPath = sourceURL;
         const filePath = fixDicPath(relPath, file);
         const name = determineName(filePath, def);
 

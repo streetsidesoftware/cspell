@@ -1,4 +1,5 @@
 import * as path from 'path';
+import { pathToFileURL } from 'url';
 import { describe, expect, test, vi } from 'vitest';
 
 import { pathPackageRoot } from '../../../test-util/test.locations.cjs';
@@ -231,6 +232,6 @@ interface DDefFile extends Partial<DictionaryFileDefinitionInternal> {
 type DDef = DDefFile | DictionaryDefinitionInlineInternal;
 
 function dDef(opts: DDef): DictionaryDefinitionInternal {
-    const def = di(opts, __filename);
+    const def = di(opts, pathToFileURL(__filename));
     return def;
 }

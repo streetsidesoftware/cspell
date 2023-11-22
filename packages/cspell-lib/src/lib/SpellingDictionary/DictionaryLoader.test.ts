@@ -1,4 +1,5 @@
 import * as path from 'path';
+import { pathToFileURL } from 'url';
 import { describe, expect, test, vi } from 'vitest';
 
 import { pathPackageRoot, pathPackageSamples } from '../../test-util/test.locations.cjs';
@@ -199,5 +200,5 @@ interface DDef extends Partial<DictionaryFileDefinitionInternal> {
 }
 
 function dDef(opts: DDef): DictionaryDefinitionInternal {
-    return di(opts, __filename);
+    return di(opts, pathToFileURL(__filename));
 }
