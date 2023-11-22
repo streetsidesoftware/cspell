@@ -1,31 +1,40 @@
+import { homedir } from 'node:os';
+
 import type { CSpellUserSettings, GlobDef, LanguageSetting, ReporterSettings } from '@cspell/cspell-types';
-import * as path from 'path';
+import { fileURLToPath } from 'url';
 
 import { resolveFile } from '../../../util/resolveFile.js';
 import type { OptionalOrUndefined } from '../../../util/types.js';
+import { resolveFileWithURL, toFilePathOrHref } from '../../../util/url.js';
 import * as util from '../../../util/util.js';
 import { mapDictDefsToInternal } from '../../DictionarySettings.js';
 import { toGlobDef } from './toGlobDef.js';
 
 interface NormalizableFields {
     version?: string | number;
+    import?: string | string[];
 }
 
 export function normalizeRawConfig(config: CSpellUserSettings | NormalizableFields) {
     if (typeof config.version === 'number') {
         config.version = config.version.toString();
     }
+
+    if (config.import) {
+        config.import = normalizeImport(config.import);
+    }
 }
 
 type NormalizeDictionaryDefsParams = OptionalOrUndefined<
     Pick<CSpellUserSettings, 'dictionaryDefinitions' | 'languageSettings'>
 >;
-export function normalizeDictionaryDefs(settings: NormalizeDictionaryDefsParams, pathToSettingsFile: string) {
-    const dictionaryDefinitions = mapDictDefsToInternal(settings.dictionaryDefinitions, pathToSettingsFile);
+
+export function normalizeDictionaryDefs(settings: NormalizeDictionaryDefsParams, settingsFileUrl: URL) {
+    const dictionaryDefinitions = mapDictDefsToInternal(settings.dictionaryDefinitions, settingsFileUrl);
     const languageSettings = settings.languageSettings?.map((langSetting) =>
         util.clean({
             ...langSetting,
-            dictionaryDefinitions: mapDictDefsToInternal(langSetting.dictionaryDefinitions, pathToSettingsFile),
+            dictionaryDefinitions: mapDictDefsToInternal(langSetting.dictionaryDefinitions, settingsFileUrl),
         }),
     );
 
@@ -36,10 +45,10 @@ export function normalizeDictionaryDefs(settings: NormalizeDictionaryDefsParams,
 }
 type NormalizeOverrides = Pick<CSpellUserSettings, 'globRoot' | 'overrides'>;
 type NormalizeOverridesResult = Pick<CSpellUserSettings, 'overrides'>;
-export function normalizeOverrides(settings: NormalizeOverrides, pathToSettingsFile: string): NormalizeOverridesResult {
-    const { globRoot = path.dirname(pathToSettingsFile) } = settings;
+export function normalizeOverrides(settings: NormalizeOverrides, pathToSettingsFile: URL): NormalizeOverridesResult {
+    const { globRoot = toFilePathOrHref(new URL('.', pathToSettingsFile)) } = settings;
     const overrides = settings.overrides?.map((override) => {
-        const filename = toGlobDef(override.filename, globRoot, pathToSettingsFile);
+        const filename = toGlobDef(override.filename, globRoot, toFilePathOrHref(pathToSettingsFile));
         const { dictionaryDefinitions, languageSettings } = normalizeDictionaryDefs(override, pathToSettingsFile);
         return util.clean({
             ...override,
@@ -52,14 +61,14 @@ export function normalizeOverrides(settings: NormalizeOverrides, pathToSettingsF
     return overrides ? { overrides } : {};
 }
 type NormalizeReporters = Pick<CSpellUserSettings, 'reporters'>;
-export function normalizeReporters(settings: NormalizeReporters, pathToSettingsFile: string): NormalizeReporters {
+export function normalizeReporters(settings: NormalizeReporters, pathToSettingsFile: URL): NormalizeReporters {
     if (settings.reporters === undefined) return {};
-    const folder = path.dirname(pathToSettingsFile);
 
     function resolve(s: string): string {
         if (s === 'default') return s;
-        const r = resolveFile(s, folder);
+        const r = resolveFile(s, pathToSettingsFile);
         if (!r.found) {
+            console.warn('Not found: %o', { filename: s, relativeTo: pathToSettingsFile.href });
             throw new Error(`Not found: "${s}"`);
         }
         return r.filename;
@@ -94,18 +103,18 @@ export function normalizeLanguageSettings(
 type NormalizeGitignoreRoot = Pick<CSpellUserSettings, 'gitignoreRoot'>;
 export function normalizeGitignoreRoot(
     settings: NormalizeGitignoreRoot,
-    pathToSettingsFile: string,
+    pathToSettingsFile: URL,
 ): NormalizeGitignoreRoot {
     const { gitignoreRoot } = settings;
     if (!gitignoreRoot) return {};
 
-    const dir = path.dirname(pathToSettingsFile);
     const roots = Array.isArray(gitignoreRoot) ? gitignoreRoot : [gitignoreRoot];
 
     return {
-        gitignoreRoot: roots.map((p) => path.resolve(dir, p)),
+        gitignoreRoot: roots.map((p) => resolveFilePathToPath(p, pathToSettingsFile)),
     };
 }
+
 interface NormalizeSettingsGlobs {
     globRoot?: CSpellUserSettings['globRoot'];
     ignorePaths?: CSpellUserSettings['ignorePaths'];
@@ -115,29 +124,43 @@ interface NormalizeSettingsGlobsResult {
 }
 export function normalizeSettingsGlobs(
     settings: NormalizeSettingsGlobs,
-    pathToSettingsFile: string,
+    pathToSettingsFile: URL,
 ): NormalizeSettingsGlobsResult {
     const { globRoot } = settings;
     if (settings.ignorePaths === undefined) return {};
 
-    const ignorePaths = toGlobDef(settings.ignorePaths, globRoot, pathToSettingsFile);
+    const ignorePaths = toGlobDef(settings.ignorePaths, globRoot, toFilePathOrHref(pathToSettingsFile));
     return {
         ignorePaths,
     };
 }
 export function normalizeCacheSettings(
     settings: Pick<CSpellUserSettings, 'cache'>,
-    pathToSettingsDir: string,
+    pathToSettingsFile: URL,
 ): Pick<CSpellUserSettings, 'cache'> {
     const { cache } = settings;
     if (cache === undefined) return {};
     const { cacheLocation } = cache;
     if (cacheLocation === undefined) return { cache };
-    return { cache: { ...cache, cacheLocation: resolveFilePath(cacheLocation, pathToSettingsDir) } };
+    return { cache: { ...cache, cacheLocation: toFilePathOrHref(resolveFilePath(cacheLocation, pathToSettingsFile)) } };
 }
 
-function resolveFilePath(filename: string, pathToSettingsFile: string): string {
+function resolveFilePath(filename: string, pathToSettingsFile: URL): URL {
     const cwd = process.cwd();
+    return resolveFileWithURL(filename.replace('${cwd}', cwd).replace(/^~/, homedir()), pathToSettingsFile);
+}
 
-    return path.resolve(pathToSettingsFile, filename.replace('${cwd}', cwd));
+function resolveFilePathToPath(filename: string, pathToSettingsFile: URL): string {
+    const url = resolveFilePath(filename, pathToSettingsFile);
+    return url.protocol === 'file:' ? fileURLToPath(url) : url.toString();
+}
+
+export function normalizeImport(imports: string | string[] | undefined): string[] {
+    if (typeof imports === 'string') {
+        return [imports];
+    }
+    if (Array.isArray(imports)) {
+        return imports;
+    }
+    return [];
 }

@@ -1,5 +1,3 @@
-import path from 'path';
-import { fileURLToPath } from 'url';
 import { describe, expect, test } from 'vitest';
 
 import { pathPackageSamplesURL } from '../../../../test-util/index.mjs';
@@ -34,6 +32,7 @@ describe('ConfigSearch', () => {
             dir                                              | expected
             ${sURL('src/')}                                  | ${sURL('.cspell.json')}
             ${sURL('linked/')}                               | ${sURL('linked/cspell.config.js')}
+            ${sURL('linked')}                                | ${sURL('linked/cspell.config.js')}
             ${'file:///path/to/search/from/'}                | ${undefined}
             ${'https:///path/to/search/from/'}               | ${undefined}
             ${new URL('https://example.com/path/to/files/')} | ${undefined}
@@ -45,7 +44,7 @@ describe('ConfigSearch', () => {
 
             const result = await configSearch.searchForConfig(searchFrom);
 
-            console.log('%o', { searchFrom, result, expected });
+            // console.log('%o', { searchFrom, result, expected });
 
             expect(result?.href).toEqual(expected?.href);
         });

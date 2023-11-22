@@ -6,7 +6,14 @@ export function extractImportErrors(settings: CSpellSettingsWST): ImportFileRefW
     const imports = mergeImportRefs(settings);
     return !imports ? [] : [...imports.values()].filter(isImportFileRefWithError);
 }
+
+export function extractImports(settings: CSpellSettingsWST): ImportFileRef[] {
+    const imports = mergeImportRefs(settings);
+    return !imports ? [] : [...imports.values()];
+}
+
 type Imports = CSpellSettingsWST['__imports'];
+
 function mergeImportRefs(left: CSpellSettingsWST, right: CSpellSettingsWST = {}): Imports {
     const imports = new Map(left.__imports || []);
     if (left.__importRef) {
@@ -25,6 +32,7 @@ function mergeImportRefs(left: CSpellSettingsWST, right: CSpellSettingsWST = {})
 export interface ImportFileRefWithError extends ImportFileRef {
     error: Error;
 }
+
 function isImportFileRefWithError(ref: ImportFileRef): ref is ImportFileRefWithError {
     return !!ref.error;
 }

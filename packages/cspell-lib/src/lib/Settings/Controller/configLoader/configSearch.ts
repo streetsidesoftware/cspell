@@ -1,8 +1,10 @@
-import { readFile } from 'node:fs/promises';
+import { readFile, stat } from 'node:fs/promises';
 import path from 'node:path';
 
 import { findUp, pathExists } from 'find-up';
-import { fileURLToPath, pathToFileURL } from 'url';
+import { pathToFileURL } from 'url';
+
+import { toURL } from '../../../util/url.js';
 
 export class ConfigSearch {
     private searchCache = new Map<string, Promise<URL | undefined>>();
@@ -22,15 +24,20 @@ export class ConfigSearch {
             }
         }
 
-        const dirUrl = new URL('.', searchFrom);
+        let dirUrl = new URL('.', searchFrom);
+        if (dirUrl.toString() !== searchFrom.toString()) {
+            // check to see if searchFrom is a directory
+            const isDir = await isDirectory(searchFrom);
+            dirUrl = isDir ? toURL(searchFrom) : dirUrl;
+        }
         const cached = this.searchCache.get(dirUrl.href);
         if (cached) {
             return cached;
         }
 
-        const fromPath = fileURLToPath(dirUrl);
+        // const fromPath = fileURLToPath(dirUrl);
 
-        const pending = findUpConfig(fromPath, this.searchPlaces);
+        const pending = findUpConfig(dirUrl, this.searchPlaces);
         this.searchCache.set(dirUrl.href, pending);
         return pending;
     }
@@ -40,7 +47,7 @@ export class ConfigSearch {
     }
 }
 
-async function findUpConfig(searchFromPath: string | URL, searchPlaces: readonly string[]): Promise<URL | undefined> {
+async function findUpConfig(searchFromPath: URL, searchPlaces: readonly string[]): Promise<URL | undefined> {
     const found = await findUp((dir) => hasConfig(dir, searchPlaces), { cwd: searchFromPath, type: 'file' });
     return found ? pathToFileURL(found) : undefined;
 }
@@ -57,4 +64,12 @@ async function hasConfig(dir: string, searchPlaces: readonly string[]): Promise<
         }
     }
     return undefined;
+}
+
+async function isDirectory(path: string | URL): Promise<boolean> {
+    try {
+        return (await stat(path)).isDirectory();
+    } catch (e) {
+        return false;
+    }
 }
