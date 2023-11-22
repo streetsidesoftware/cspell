@@ -1,9 +1,12 @@
 import type { CSpellUserSettings } from '@cspell/cspell-types';
+import type { CSpellConfigFile } from 'cspell-config-lib';
+import { CSpellConfigFileInMemory } from 'cspell-config-lib';
 import * as path from 'path';
 import { describe, expect, test } from 'vitest';
 
 import { pathPackageRoot, pathPackageSamples } from '../../test-util/test.locations.cjs';
 import { createCSpellSettingsInternal as csi } from '../Models/CSpellSettingsInternalDef.js';
+import { toURL } from '../util/url.js';
 import {
     __testing__ as __configLoader_testing__,
     clearCachedSettingsFiles,
@@ -14,6 +17,7 @@ import {
     readSettings,
     readSettingsFiles,
 } from './Controller/configLoader/index.js';
+import type { CSpellSettingsWST } from './Controller/configLoader/types.js';
 import { calcOverrideSettings, checkFilenameMatchesGlob, getSources, mergeSettings } from './CSpellSettingsServer.js';
 import { _defaultSettings, getDefaultBundledSettingsAsync } from './DefaultSettings.js';
 
@@ -240,12 +244,12 @@ describe('Validate CSpellSettingsServer', () => {
     test('makes sure global settings is an object', async () => {
         const settings = getGlobalSettings();
         expect(Object.keys(settings)).not.toHaveLength(0);
-        const merged = mergeSettings(await getDefaultBundledSettingsAsync(), getGlobalSettings());
+        const merged = mergeSettings(await getDefaultBundledSettingsAsync(), await getGlobalSettings());
         expect(Object.keys(merged)).not.toHaveLength(0);
     });
 
     test('verify clearing the file cache works', async () => {
-        mergeSettings(await getDefaultBundledSettingsAsync(), getGlobalSettings());
+        mergeSettings(await getDefaultBundledSettingsAsync(), await getGlobalSettings());
         expect(getCachedFileSize()).toBeGreaterThan(0);
         clearCachedSettingsFiles();
         expect(getCachedFileSize()).toBe(0);
@@ -367,8 +371,8 @@ const rawSampleSettings: CSpellUserSettings = {
     ],
 };
 
-const sampleSettingsFilename = __filename;
+const sampleSettings = cf(rawSampleSettings);
 
-const sampleSettings = __configLoader_testing__
-    .getDefaultConfigLoaderInternal()
-    ._normalizeSettings(rawSampleSettings, sampleSettingsFilename, {});
+function cf(settings: CSpellSettingsWST, url: URL | string = import.meta.url): CSpellConfigFile {
+    return new CSpellConfigFileInMemory(toURL(url), settings);
+}

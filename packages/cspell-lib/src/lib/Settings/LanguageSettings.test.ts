@@ -100,7 +100,7 @@ describe('Validate LanguageSettings', () => {
     );
 
     test('merged settings with global', async () => {
-        const merged = mergeSettings(await getDefaultBundledSettingsAsync(), getGlobalSettings());
+        const merged = mergeSettings(await getDefaultBundledSettingsAsync(), await getGlobalSettings());
         const sPHP = calcSettingsForLanguage(merged.languageSettings || [], 'php', 'en');
         expect(Object.keys(sPHP)).not.toHaveLength(0);
     });
