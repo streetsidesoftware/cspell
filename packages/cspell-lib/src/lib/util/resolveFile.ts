@@ -1,3 +1,5 @@
+import { createRequire } from 'node:module';
+
 import { resolveGlobal } from '@cspell/cspell-resolver';
 import { importResolveModuleName } from '@cspell/dynamic-import';
 import * as fs from 'fs';
@@ -27,6 +29,7 @@ export function resolveFile(filename: string, relativeTo: string | URL): Resolve
     filename = filename.replace(/^~/, os.homedir());
     const steps: { filename: string; fn: (f: string, r: string | URL) => ResolveFileResult | undefined }[] = [
         { filename, fn: tryUrl },
+        { filename, fn: tryCreateRequire },
         { filename, fn: tryNodeRequireResolve },
         { filename, fn: tryImportResolve },
         { filename, fn: tryResolveExists },
@@ -93,6 +96,17 @@ function tryUrl(filename: string, relativeTo: string | URL): ResolveFileResult |
     }
 
     return undefined;
+}
+
+function tryCreateRequire(filename: string | URL, relativeTo: string | URL): ResolveFileResult | undefined {
+    if (filename instanceof URL) return undefined;
+    const require = createRequire(relativeTo);
+    try {
+        const r = require.resolve(filename);
+        return { filename: r, relativeTo: relativeTo.toString(), found: true };
+    } catch (_) {
+        return undefined;
+    }
 }
 
 function tryNodeResolveDefaultPaths(filename: string): ResolveFileResult | undefined {
