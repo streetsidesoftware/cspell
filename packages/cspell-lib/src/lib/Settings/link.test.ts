@@ -1,16 +1,21 @@
+import { CSpellConfigFileInMemory } from 'cspell-config-lib';
 import * as Path from 'path';
+import { pathToFileURL } from 'url';
 import { afterEach, describe, expect, test, vi } from 'vitest';
 
 import type { CSpellSettingsWST } from './Controller/configLoader/types.js';
-import { getRawGlobalSettings, writeRawGlobalSettings } from './GlobalSettings.js';
+import { getGlobalConfig, getRawGlobalSettings, writeRawGlobalSettings } from './GlobalSettings.js';
 import { __testing__, addPathsToGlobalImports, listGlobalImports, removePathsFromGlobalImports } from './link.js';
 
 vi.mock('./GlobalSettings');
 
 const findPackageForCSpellConfig = __testing__.findPackageForCSpellConfig;
 
+const mock_getGlobalConfig = vi.mocked(getGlobalConfig);
 const mock_getRawGlobalSettings = vi.mocked(getRawGlobalSettings);
 const mock_writeRawGlobalSettings = vi.mocked(writeRawGlobalSettings);
+
+mock_getGlobalConfig_mockImplementation({});
 
 const configFileLocation = '/Users/home/.config/store';
 const pathPython = require.resolve('@cspell/dict-python/cspell-ext.json');
@@ -231,4 +236,19 @@ describe('Validate Link.ts', () => {
 
 function mock_getRawGlobalSettings_mockReturnValue(settings: CSpellSettingsWST) {
     mock_getRawGlobalSettings.mockReturnValue(Promise.resolve(settings));
+}
+
+function mock_getGlobalConfig_mockImplementation(useSettings: CSpellSettingsWST) {
+    mock_getGlobalConfig.mockImplementation(() => {
+        const url = new URL('global-config.json', pathToFileURL('/User/local/data/.config/configstore/'));
+        const settings: CSpellSettingsWST = {
+            import: [],
+            source: {
+                name: 'CSpell Configstore',
+                filename: Path.join(__dirname, 'global-config.json'),
+            },
+            ...useSettings,
+        };
+        return Promise.resolve(new CSpellConfigFileInMemory(url, settings));
+    });
 }
