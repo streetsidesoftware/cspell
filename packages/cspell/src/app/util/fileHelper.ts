@@ -156,39 +156,6 @@ export async function findFiles(globPatterns: string[], options: GlobOptions): P
     return [...stdin, ...globResults].map((filename) => resolveFilename(filename, cwd));
 }
 
-export function calcFinalConfigInfo(
-    configInfo: ConfigInfo,
-    settingsFromCommandLine: CSpellUserSettings,
-    filename: string,
-    text: string,
-): FileConfigInfo {
-    const basename = path.basename(filename);
-    const fileSettings = cspell.calcOverrideSettings(configInfo.config, path.resolve(filename));
-    const loadDefault =
-        settingsFromCommandLine.loadDefaultConfiguration ??
-        configInfo.config.loadDefaultConfiguration ??
-        fileSettings.loadDefaultConfiguration ??
-        true;
-    const settings = cspell.mergeSettings(
-        cspell.getDefaultSettings(loadDefault),
-        cspell.getGlobalSettings(),
-        fileSettings,
-        settingsFromCommandLine,
-    );
-    const languageIds = settings.languageId
-        ? Array.isArray(settings.languageId)
-            ? settings.languageId
-            : [settings.languageId]
-        : cspell.getLanguageIdsForBaseFilename(basename);
-    const config = cspell.constructSettingsForText(settings, text, languageIds);
-    return {
-        configInfo: { ...configInfo, config },
-        filename,
-        text,
-        languageIds,
-    };
-}
-
 const resolveFilenames = asyncMap(resolveFilename);
 
 /**

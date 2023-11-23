@@ -21,13 +21,13 @@ import { uriToFilePath } from '../util/Uri.js';
  * @param settings - The near final settings. Should already be the combination of all configuration files.
  */
 
-export function determineTextDocumentSettings(
+export async function determineTextDocumentSettings(
     doc: TextDocument | TextDocumentRef,
     settings: CSpellUserSettings,
-): CSpellSettingsInternal {
+): Promise<CSpellSettingsInternal> {
     const filename = uriToFilePath(doc.uri);
     const settingsWithDefaults = mergeSettings(
-        getDefaultSettings(settings.loadDefaultConfiguration ?? true),
+        await getDefaultSettings(settings.loadDefaultConfiguration ?? true),
         getGlobalSettings(),
         settings,
     );

@@ -370,6 +370,9 @@ type CSpellSettingsI$1 = CSpellSettingsInternal;
 declare const sectionCSpell = "cSpell";
 declare const defaultFileName = "cspell.json";
 declare const defaultConfigFilenames: readonly string[];
+declare function loadPnP(pnpSettings: PnPSettingsOptional, searchFrom: URL): Promise<LoaderResult>;
+declare function loadPnPSync(pnpSettings: PnPSettingsOptional, searchFrom: URL): LoaderResult;
+
 /**
  *
  * @param searchFrom the directory / file to start searching from.
@@ -384,12 +387,10 @@ declare function searchForConfig(searchFrom: URL | string | undefined, pnpSettin
  * @returns normalized CSpellSettings
  */
 declare function loadConfig(file: string, pnpSettings?: PnPSettingsOptional): Promise<CSpellSettingsI$1>;
-declare function loadPnP(pnpSettings: PnPSettingsOptional, searchFrom: URL): Promise<LoaderResult>;
-declare function loadPnPSync(pnpSettings: PnPSettingsOptional, searchFrom: URL): LoaderResult;
-declare function readRawSettings(filename: string | URL, relativeTo?: string | URL): Promise<CSpellSettingsWST$1>;
 declare function getGlobalSettings(): CSpellSettingsI$1;
 declare function getCachedFileSize(): number;
 declare function clearCachedSettingsFiles(): void;
+declare function readRawSettings(filename: string | URL, relativeTo?: string | URL): Promise<CSpellSettingsWST$1>;
 
 declare function extractImportErrors(settings: CSpellSettingsWST$1): ImportFileRefWithError$1[];
 interface ImportFileRefWithError$1 extends ImportFileRef {
@@ -465,7 +466,7 @@ interface ConfigurationDependencies {
 }
 declare function extractDependencies(settings: CSpellSettingsWSTO | CSpellSettingsI): ConfigurationDependencies;
 
-declare function getDefaultSettings(useDefaultDictionaries?: boolean): CSpellSettingsInternal;
+declare function getDefaultSettings(useDefaultDictionaries?: boolean): Promise<CSpellSettingsInternal>;
 declare function getDefaultBundledSettingsAsync(): Promise<CSpellSettingsInternal>;
 
 declare function combineTextAndLanguageSettings(settings: CSpellUserSettings, text: string | undefined, languageId: string | string[]): CSpellSettingsInternal;
@@ -694,7 +695,7 @@ declare class DocumentValidator {
     checkDocument(forceCheck?: boolean): ValidationIssue[];
     checkDocumentDirectives(forceCheck?: boolean): ValidationIssue[];
     get document(): TextDocument;
-    updateDocumentText(text: string): void;
+    updateDocumentText(text: string): Promise<void>;
     private defaultParser;
     private _checkParsedText;
     private addPossibleError;

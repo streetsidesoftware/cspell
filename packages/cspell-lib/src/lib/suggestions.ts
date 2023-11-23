@@ -166,7 +166,7 @@ async function _suggestionsForWord(
 
     const config = includeDefaultConfig
         ? mergeSettings(
-              getDefaultSettings(settings.loadDefaultConfiguration ?? true),
+              await getDefaultSettings(settings.loadDefaultConfiguration ?? true),
               await getGlobalSettings(),
               settings,
           )
@@ -196,7 +196,7 @@ async function _suggestionsForWordAsync(
 
     const config = includeDefaultConfig
         ? mergeSettings(
-              getDefaultSettings(settings.loadDefaultConfiguration ?? true),
+              await getDefaultSettings(settings.loadDefaultConfiguration ?? true),
               await getGlobalSettings(),
               settings,
           )

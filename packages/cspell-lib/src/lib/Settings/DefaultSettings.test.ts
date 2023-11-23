@@ -15,7 +15,7 @@ describe('Validate Default Settings', () => {
 
     test('default', async () => {
         expect(await DefaultSettings.getDefaultBundledSettingsAsync()).toEqual(
-            DefaultSettings.getDefaultSettings(undefined),
+            await DefaultSettings.getDefaultSettings(undefined),
         );
     });
 });

@@ -130,6 +130,6 @@ function oc<T>(t: T): T {
     return expect.objectContaining(t);
 }
 
-function getSettings(...settings: CSpellSettings[]): CSpellSettings {
-    return settings.reduce((a, b) => mergeSettings(a, b), getDefaultSettings(true));
+async function getSettings(...settings: CSpellSettings[]): Promise<CSpellSettings> {
+    return settings.reduce((a, b) => mergeSettings(a, b), await getDefaultSettings(true));
 }

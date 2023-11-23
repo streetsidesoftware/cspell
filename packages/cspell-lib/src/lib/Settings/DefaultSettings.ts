@@ -1,5 +1,3 @@
-import assert from 'node:assert';
-
 import type { PredefinedPatterns, RegExpPatternDefinition } from '@cspell/cspell-types';
 import { parsers } from 'cspell-grammar';
 
@@ -172,14 +170,6 @@ class DefaultSettingsLoader {
         this.getDefaultSettingsAsync().catch(() => undefined);
     }
 
-    getDefaultSettings(useDefaultDictionaries = true): CSpellSettingsInternal {
-        if (!useDefaultDictionaries) {
-            return _defaultSettingsBasis;
-        }
-        assert(this.settings);
-        return this.settings;
-    }
-
     getDefaultSettingsAsync(useDefaultDictionaries = true): Promise<CSpellSettingsInternal> {
         if (!useDefaultDictionaries) {
             return Promise.resolve(_defaultSettingsBasis);
@@ -213,8 +203,8 @@ class DefaultSettingsLoader {
 
 export const defaultSettingsLoader = new DefaultSettingsLoader();
 
-export function getDefaultSettings(useDefaultDictionaries = true): CSpellSettingsInternal {
-    return defaultSettingsLoader.getDefaultSettings(useDefaultDictionaries);
+export function getDefaultSettings(useDefaultDictionaries = true): Promise<CSpellSettingsInternal> {
+    return defaultSettingsLoader.getDefaultSettingsAsync(useDefaultDictionaries);
 }
 
 export function getDefaultBundledSettingsAsync(): Promise<CSpellSettingsInternal> {

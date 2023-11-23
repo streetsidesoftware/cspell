@@ -9,10 +9,9 @@ import * as path from 'path';
 import { fileURLToPath } from 'url';
 
 import { createCSpellSettingsInternal as csi } from '../../../Models/CSpellSettingsInternalDef.js';
-import { toError } from '../../../util/errors.js';
 import { logError, logWarning } from '../../../util/logger.js';
 import { resolveFile } from '../../../util/resolveFile.js';
-import { cwdURL, toFilePathOrHref, toFileUrl } from '../../../util/url.js';
+import { cwdURL, toFilePathOrHref } from '../../../util/url.js';
 import {
     configSettingsFileVersion0_1,
     configSettingsFileVersion0_2,
@@ -20,13 +19,12 @@ import {
     ENV_CSPELL_GLOB_ROOT,
 } from '../../constants.js';
 import { mergeSettings } from '../../CSpellSettingsServer.js';
-import { defaultSettingsLoader } from '../../DefaultSettings.js';
 import { getGlobalConfig } from '../../GlobalSettings.js';
 import { ImportError } from '../ImportError.js';
 import type { LoaderResult } from '../pnpLoader.js';
 import { pnpLoader } from '../pnpLoader.js';
 import { ConfigSearch } from './configSearch.js';
-import { configErrorToRawSettings, configToRawSettings } from './configToRawSettings.js';
+import { configToRawSettings } from './configToRawSettings.js';
 import { defaultSettings } from './defaultSettings.js';
 import {
     normalizeCacheSettings,
@@ -50,8 +48,6 @@ const setOfSupportedConfigVersions = Object.freeze(new Set<string>(supportedCSpe
 export const sectionCSpell = 'cSpell';
 
 export const defaultFileName = 'cspell.json';
-
-const gcl = getDefaultConfigLoaderInternal;
 
 /**
  * Logic of the locations:
@@ -165,7 +161,6 @@ export class ConfigLoader {
         relativeTo?: string | URL,
         pnpSettings?: PnPSettingsOptional,
     ): Promise<CSpellSettingsI> {
-        await defaultSettingsLoader.onReady();
         const ref = resolveFilename(filename, relativeTo || process.cwd());
         const entry = this.importSettings(ref, pnpSettings || defaultPnPSettings, []);
         return entry.onReady;
@@ -175,7 +170,6 @@ export class ConfigLoader {
         filenameOrURL: string | URL,
         relativeTo?: string | URL,
     ): Promise<CSpellConfigFile | Error> {
-        await defaultSettingsLoader.onReady();
         const ref = resolveFilename(filenameOrURL.toString(), relativeTo || process.cwd());
         const url = this.cspellIO.toFileURL(ref.filename);
         const href = url.href;
@@ -205,7 +199,6 @@ export class ConfigLoader {
     }
 
     async searchForConfigFile(searchFrom: URL | string | undefined): Promise<CSpellConfigFile | undefined> {
-        await defaultSettingsLoader.onReady();
         const location = await this.searchForConfigFileLocation(searchFrom);
         if (!location) return undefined;
         const file = await this.readConfigFile(location);
@@ -222,7 +215,6 @@ export class ConfigLoader {
         searchFrom: URL | string | undefined,
         pnpSettings: PnPSettingsOptional = defaultPnPSettings,
     ): Promise<CSpellSettingsI | undefined> {
-        await defaultSettingsLoader.onReady();
         const configFile = await this.searchForConfigFile(searchFrom);
         if (!configFile) return undefined;
 
@@ -235,7 +227,6 @@ export class ConfigLoader {
     }
 
     public async getGlobalSettingsAsync(): Promise<CSpellSettingsI> {
-        await defaultSettingsLoader.onReady();
         if (!this.globalSettings) {
             const globalConfFile = await getGlobalConfig();
             const normalized = await this.mergeConfigFileWithImports(globalConfFile, {});
@@ -448,29 +439,6 @@ class ConfigLoaderInternal extends ConfigLoader {
     }
 }
 
-/**
- *
- * @param searchFrom the directory / file to start searching from.
- * @param pnpSettings - related to Using Yarn PNP.
- * @returns the resulting settings
- */
-export function searchForConfig(
-    searchFrom: URL | string | undefined,
-    pnpSettings: PnPSettingsOptional = defaultPnPSettings,
-): Promise<CSpellSettingsI | undefined> {
-    return gcl().searchForConfig(searchFrom, pnpSettings);
-}
-
-/**
- * Load a CSpell configuration files.
- * @param file - path or package reference to load.
- * @param pnpSettings - PnP settings
- * @returns normalized CSpellSettings
- */
-export async function loadConfig(file: string, pnpSettings?: PnPSettingsOptional): Promise<CSpellSettingsI> {
-    return gcl().readSettingsAsync(file, undefined, pnpSettings);
-}
-
 export function loadPnP(pnpSettings: PnPSettingsOptional, searchFrom: URL): Promise<LoaderResult> {
     if (!pnpSettings.usePnP) {
         return Promise.resolve(undefined);
@@ -487,23 +455,6 @@ export function loadPnPSync(pnpSettings: PnPSettingsOptional, searchFrom: URL): 
     return loader.loadSync(searchFrom);
 }
 
-export async function readRawSettings(filename: string | URL, relativeTo?: string | URL): Promise<CSpellSettingsWST> {
-    try {
-        const cfg = await readConfigFile(filename, relativeTo);
-        return configToRawSettings(cfg);
-    } catch (e) {
-        return configErrorToRawSettings(toError(e), toFileUrl(filename));
-    }
-}
-
-export async function readConfigFile(filename: string | URL, relativeTo?: string | URL): Promise<CSpellConfigFile> {
-    const result = await gcl().readConfigFile(filename, relativeTo);
-    if (result instanceof Error) {
-        throw result;
-    }
-    return result;
-}
-
 function resolveFilename(filename: string | URL, relativeTo: string | URL): ImportFileRef {
     if (filename instanceof URL) return { filename: toFilePathOrHref(filename) };
     const r = resolveFile(filename, relativeTo);
@@ -512,18 +463,6 @@ function resolveFilename(filename: string | URL, relativeTo: string | URL): Impo
         filename: r.filename.startsWith('file:/') ? fileURLToPath(r.filename) : r.filename,
         error: r.found ? undefined : new Error(`Failed to resolve file: "${filename}"`),
     };
-}
-
-export function getGlobalSettings(): CSpellSettingsI {
-    return gcl().getGlobalSettings();
-}
-
-export function getCachedFileSize(): number {
-    return cachedFiles().size;
-}
-
-export function clearCachedSettingsFiles(): void {
-    return gcl().clearCachedSettingsFiles();
 }
 
 const nestedConfigDirectories: Record<string, true> = {
@@ -589,18 +528,10 @@ export function createConfigLoader(cspellIO?: CSpellIO): ConfigLoader {
     return createConfigLoaderInternal(cspellIO);
 }
 
-function getDefaultConfigLoaderInternal(): ConfigLoaderInternal {
+export function getDefaultConfigLoaderInternal(): ConfigLoaderInternal {
     if (defaultConfigLoader) return defaultConfigLoader;
 
     return (defaultConfigLoader = createConfigLoaderInternal());
-}
-
-export function getDefaultConfigLoader(): ConfigLoader {
-    return getDefaultConfigLoaderInternal();
-}
-
-function cachedFiles() {
-    return gcl()._cachedFiles;
 }
 
 function createIO(cspellIO: CSpellIO): IO {

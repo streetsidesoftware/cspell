@@ -17,19 +17,17 @@ import { currentSettingsFileVersion, ENV_CSPELL_GLOB_ROOT } from '../../constant
 import type { ImportFileRefWithError } from '../../CSpellSettingsServer.js';
 import { extractDependencies, getSources, mergeSettings } from '../../CSpellSettingsServer.js';
 import { _defaultSettings, getDefaultBundledSettingsAsync } from '../../DefaultSettings.js';
+import { __testing__ as __configLoader_testing__, loadPnP, loadPnPSync } from './configLoader.js';
+import { readRawSettings } from './defaultConfigLoader.js';
 import {
-    __testing__ as __configLoader_testing__,
     clearCachedSettingsFiles,
     getCachedFileSize,
     getDefaultConfigLoader,
     getGlobalSettings,
     loadConfig,
-    loadPnP,
-    loadPnPSync,
     readConfigFile,
-    readRawSettings,
     searchForConfig,
-} from './configLoader.js';
+} from './defaultConfigLoader.js';
 import { extractImportErrors } from './extractImportErrors.js';
 import { readSettings } from './readSettings.js';
 import { readSettingsFiles } from './readSettingsFiles.js';

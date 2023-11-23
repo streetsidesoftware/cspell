@@ -1,4 +1,4 @@
-import { getDefaultConfigLoader } from './configLoader.js';
+import { getDefaultConfigLoader } from './defaultConfigLoader.js';
 import type { PnPSettingsOptional } from './PnPSettings.js';
 import type { CSpellSettingsI } from './types.js';
 

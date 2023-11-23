@@ -7,7 +7,7 @@ import { describe, expect, test } from 'vitest';
 import { pathPackageRoot, pathPackageSamples } from '../../test-util/test.locations.cjs';
 import { createCSpellSettingsInternal as csi } from '../Models/CSpellSettingsInternalDef.js';
 import { toURL } from '../util/url.js';
-import { getDefaultConfigLoader } from './Controller/configLoader/configLoader.js';
+import { getDefaultConfigLoader } from './Controller/configLoader/defaultConfigLoader.js';
 import {
     __testing__ as __configLoader_testing__,
     clearCachedSettingsFiles,
