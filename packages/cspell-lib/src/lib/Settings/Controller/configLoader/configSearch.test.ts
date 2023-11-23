@@ -48,6 +48,22 @@ describe('ConfigSearch', () => {
 
             expect(result?.href).toEqual(expected?.href);
         });
+
+        test('that the same result is returned', async () => {
+            const configSearch = new ConfigSearch(searchPlaces);
+            const result = await configSearch.searchForConfig(sURL('src'));
+            const result2 = await configSearch.searchForConfig(sURL(''));
+            expect(result2).toBe(result);
+            configSearch.clearCache();
+            const result3 = await configSearch.searchForConfig(sURL(''));
+            const result4 = await configSearch.searchForConfig(sURL('src/nested/dir'));
+            const result5 = await configSearch.searchForConfig(sURL('src'));
+            expect(result3).toStrictEqual(result);
+            expect(result4).toStrictEqual(result);
+            expect(result3).not.toBe(result);
+            expect(result4).not.toBe(result3);
+            expect(result5).toStrictEqual(result4);
+        });
     });
 
     describe('clearCache', () => {

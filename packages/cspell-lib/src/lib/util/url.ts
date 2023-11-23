@@ -67,6 +67,17 @@ export function toFileUrl(file: string | URL): URL {
     return resolveFileWithURL(file, cwdURL());
 }
 
+export function toFileDirUrl(dir: string | URL): URL {
+    return addTrailingSlash(toFileUrl(dir));
+}
+
+export function addTrailingSlash(url: URL): URL {
+    if (url.pathname.endsWith('/')) return url;
+    const urlWithSlash = new URL(url.href);
+    urlWithSlash.pathname += '/';
+    return urlWithSlash;
+}
+
 export function toURL(href: string | URL, relativeTo?: string | URL): URL {
     return href instanceof URL ? href : new URL(href, relativeTo);
 }

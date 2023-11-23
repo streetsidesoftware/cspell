@@ -12,6 +12,7 @@ import {
     normalizePathSlashesForUrl,
     relativeTo,
     resolveFileWithURL,
+    toFileDirUrl,
     toFilePathOrHref,
     toFileUrl,
 } from './url.js';
@@ -178,6 +179,20 @@ describe('url', () => {
         ${'https://example.com/file.txt'} | ${false}
     `('isFileURL $url', ({ url, expected }) => {
         expect(isDataURL(url)).toBe(expected);
+    });
+
+    describe('toFileDirUrl', () => {
+        test('should convert a directory path to a file URL', () => {
+            const dir = u('/path/to/directory');
+            const result = toFileDirUrl(dir);
+            expect(result.href).toBe(u('/path/to/directory/').href);
+        });
+
+        test('should return the input if it is already a file URL', () => {
+            const dir = u('file:///path/to/directory/');
+            const result = toFileDirUrl(dir);
+            expect(result.href).toBe('file:///path/to/directory/');
+        });
     });
 });
 
