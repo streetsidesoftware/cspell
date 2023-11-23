@@ -3,9 +3,15 @@ import { fileURLToPath, pathToFileURL } from 'url';
 import { describe, expect, test } from 'vitest';
 
 import { srcDirectory } from '../../lib-cjs/pkg-info.cjs';
-import { cwdURL, getSourceDirectoryUrl, relativeTo, resolveFileWithURL, toFilePathOrHref, toFileUrl } from './url.js';
-
-const rootURL = new URL('/', import.meta.url);
+import {
+    cwdURL,
+    getSourceDirectoryUrl,
+    normalizePathSlashesForUrl,
+    relativeTo,
+    resolveFileWithURL,
+    toFilePathOrHref,
+    toFileUrl,
+} from './url.js';
 
 describe('url', () => {
     describe('toFilePathOrHref', () => {
@@ -58,6 +64,38 @@ describe('url', () => {
         });
     });
 
+    describe('normalizePathSlashes', () => {
+        test('should normalize path slashes', () => {
+            const filePath = '\\path\\to\\file.txt';
+            const result = normalizePathSlashesForUrl(filePath, '\\');
+            expect(result).toBe('/path/to/file.txt');
+        });
+
+        test('should not modify path with already normalized slashes', () => {
+            const filePath = '/path/to/file.txt';
+            const result = normalizePathSlashesForUrl(filePath);
+            expect(result).toBe('/path/to/file.txt');
+        });
+
+        test('should handle Windows drive letters', () => {
+            const filePath = 'c:\\path\\to\\file.txt';
+            const result = normalizePathSlashesForUrl(filePath, '\\');
+            expect(result).toBe('/c:/path/to/file.txt');
+        });
+
+        test('should handle Windows drive letters', () => {
+            const filePath = 'c:/path/to/file.txt';
+            const result = normalizePathSlashesForUrl(filePath);
+            expect(result).toBe('/c:/path/to/file.txt');
+        });
+
+        test('should handle empty path', () => {
+            const filePath = '';
+            const result = normalizePathSlashesForUrl(filePath);
+            expect(result).toBe('');
+        });
+    });
+
     describe('cwdURL', () => {
         test('should return the URL for the current working directory', () => {
             const result = cwdURL();
@@ -100,6 +138,8 @@ describe('url', () => {
         });
     });
 });
+
+const rootURL = new URL('/', import.meta.url);
 
 function u(url: string) {
     return new URL(url, rootURL);

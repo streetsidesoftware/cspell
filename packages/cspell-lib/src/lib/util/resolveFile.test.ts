@@ -86,12 +86,12 @@ describe('Validate resolveFile', () => {
     });
 
     test.each`
-        url                        | relativeTo                     | expected
-        ${'/User/home'}            | ${import.meta.url}             | ${oc({ filename: '/User/home', found: false })}
-        ${'file:///User/not-home'} | ${import.meta.url}             | ${oc({ filename: fileURLToPath('file:///User/not-home'), found: false })}
-        ${import.meta.url}         | ${import.meta.url}             | ${oc({ filename: toFilePathOrHref(new URL(import.meta.url)), found: true })}
-        ${'file.txt'}              | ${'https://google.com'}        | ${oc({ filename: 'https://google.com/file.txt', found: true })}
-        ${'@cspell/dict-de-de'}    | ${'data:,Hello%2C%20World%21'} | ${undefined}
+        url                     | relativeTo                     | expected
+        ${'/User/home'}         | ${import.meta.url}             | ${oc({ filename: '/User/home', found: false })}
+        ${uh('/User/not-home')} | ${import.meta.url}             | ${oc({ filename: fileURLToPath(u('/User/not-home')), found: false })}
+        ${import.meta.url}      | ${import.meta.url}             | ${oc({ filename: toFilePathOrHref(new URL(import.meta.url)), found: true })}
+        ${'file.txt'}           | ${'https://google.com'}        | ${oc({ filename: 'https://google.com/file.txt', found: true })}
+        ${'@cspell/dict-de-de'} | ${'data:,Hello%2C%20World%21'} | ${undefined}
     `('tryUrl $url $relativeTo', ({ url, relativeTo, expected }) => {
         expect(tryUrl(url, relativeTo)).toEqual(expected);
     });
@@ -101,4 +101,14 @@ function readConfig(filename: string): Config {
     const parsed = parse(fs.readFileSync(filename, 'utf-8'));
     if (!parsed || typeof parsed !== 'object') throw new Error(`Unable to parse "${filename}"`);
     return parsed as unknown as Config;
+}
+
+const rootURL = new URL('/', import.meta.url);
+
+function u(url: string) {
+    return new URL(url, rootURL);
+}
+
+function uh(url: string) {
+    return u(url).href;
 }

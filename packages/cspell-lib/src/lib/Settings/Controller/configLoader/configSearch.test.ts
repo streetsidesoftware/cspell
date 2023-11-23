@@ -1,3 +1,4 @@
+import { fileURLToPath } from 'url';
 import { describe, expect, test } from 'vitest';
 
 import { pathPackageSamplesURL } from '../../../../test-util/index.mjs';
@@ -21,7 +22,7 @@ describe('ConfigSearch', () => {
         test('should return undefined if config file is not found', async () => {
             const configSearch = new ConfigSearch(searchPlaces);
 
-            const searchFrom = 'file:///path/to/search/from/';
+            const searchFrom = u('/path/to/search/from/').href;
 
             const result = await configSearch.searchForConfig(searchFrom);
 
@@ -33,8 +34,8 @@ describe('ConfigSearch', () => {
             ${sURL('src/')}                                  | ${sURL('.cspell.json')}
             ${sURL('linked/')}                               | ${sURL('linked/cspell.config.js')}
             ${sURL('linked')}                                | ${sURL('linked/cspell.config.js')}
-            ${'file:///path/to/search/from/'}                | ${undefined}
-            ${'https:///path/to/search/from/'}               | ${undefined}
+            ${u('/path/to/search/from/').href}               | ${undefined}
+            ${'https://example.com/path/to/search/from/'}    | ${undefined}
             ${new URL('https://example.com/path/to/files/')} | ${undefined}
             ${sURL('package-json/nested/README.md')}         | ${sURL('package-json/package.json')}
         `('searchForConfig $dir', async ({ dir, expected }) => {
@@ -72,4 +73,10 @@ describe('ConfigSearch', () => {
 
 function sURL(filename: string): URL {
     return resolveFileWithURL(filename, pathPackageSamplesURL);
+}
+
+const rootURL = new URL('/', import.meta.url);
+
+function u(url: string) {
+    return new URL(url, rootURL);
 }

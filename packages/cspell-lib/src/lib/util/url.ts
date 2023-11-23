@@ -32,7 +32,7 @@ export function getSourceDirectoryUrl(): URL {
  * @returns a URL
  */
 export function relativeTo(path: string, relativeTo?: URL): URL {
-    return new URL(path, relativeTo || cwdURL());
+    return new URL(normalizePathSlashesForUrl(path), relativeTo || cwdURL());
 }
 
 export function cwdURL(): URL {
@@ -46,11 +46,14 @@ export function resolveFileWithURL(file: string | URL, relativeTo: URL): URL {
     if (relativeTo?.protocol === 'file:' && path.isAbsolute(file)) {
         return pathToFileURL(file);
     }
-    return new URL(normalizePathSlashes(file), relativeTo);
+    return new URL(normalizePathSlashesForUrl(file), relativeTo);
 }
 
-function normalizePathSlashes(filePath: string): string {
-    return filePath.split(path.sep).join('/');
+export function normalizePathSlashesForUrl(filePath: string, sep = path.sep): string {
+    return filePath
+        .replace(/^([a-z]:)/i, '/$1')
+        .split(sep)
+        .join('/');
 }
 
 export function toFileUrl(file: string | URL): URL {
