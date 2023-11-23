@@ -1,3 +1,4 @@
+import path from 'path';
 import type { Mock } from 'vitest';
 import { afterEach, describe, expect, test, vi } from 'vitest';
 
@@ -41,7 +42,7 @@ function createMockConfigStore() {
     });
 
     const store: MockConfigStore = vi.fn((id) => {
-        _path = `/User/local/data/.config/configstore/${id}.json`;
+        _path = path.resolve(`/User/local/data/.config/configstore/${id}.json`);
         return store;
     }) as unknown as MockConfigStore;
     store.set = mock_set;

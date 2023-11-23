@@ -1,4 +1,3 @@
-import { fileURLToPath } from 'url';
 import { describe, expect, test } from 'vitest';
 
 import { pathPackageSamplesURL } from '../../../../test-util/index.mjs';
