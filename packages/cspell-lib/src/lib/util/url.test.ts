@@ -1,16 +1,18 @@
 import path from 'path';
-import { pathToFileURL } from 'url';
+import { fileURLToPath, pathToFileURL } from 'url';
 import { describe, expect, test } from 'vitest';
 
 import { srcDirectory } from '../../lib-cjs/pkg-info.cjs';
 import { cwdURL, getSourceDirectoryUrl, relativeTo, resolveFileWithURL, toFilePathOrHref, toFileUrl } from './url.js';
 
+const rootURL = new URL('/', import.meta.url);
+
 describe('url', () => {
     describe('toFilePathOrHref', () => {
         test.each`
-            url                                    | expected
-            ${new URL('file:///path/to/file.txt')} | ${'/path/to/file.txt'}
-            ${'file:///path/to/file.txt'}          | ${'/path/to/file.txt'}
+            url                            | expected
+            ${u('/path/to/file.txt')}      | ${f(u('/path/to/file.txt'))}
+            ${u('/path/to/file.txt').href} | ${f(u('/path/to/file.txt'))}
         `('should convert a file URL to a path $url', ({ url, expected }) => {
             const result = toFilePathOrHref(url);
             expect(result).toBe(expected);
@@ -33,9 +35,9 @@ describe('url', () => {
     describe('relativeTo', () => {
         test('should resolve a path relative to a URL', () => {
             const path = 'file.txt';
-            const relativeToUrl = new URL('file:///path/to/');
+            const relativeToUrl = u('/path/to/');
             const result = relativeTo(path, relativeToUrl);
-            expect(result.href).toBe('file:///path/to/file.txt');
+            expect(result.href).toBe(u('/path/to/file.txt').href);
         });
 
         test('should resolve a path relative to the current working directory if no URL is provided', () => {
@@ -65,12 +67,12 @@ describe('url', () => {
 
     describe('resolveFileWithURL', () => {
         test.each`
-            file                                        | relativeToUrl                  | expected
-            ${new URL('file:///path/to/test/file.txt')} | ${new URL('file:///path/to/')} | ${'file:///path/to/test/file.txt'}
-            ${'file:///path/to/test/file.txt'}          | ${new URL('file:///path/to/')} | ${'file:///path/to/test/file.txt'}
-            ${'file.txt'}                               | ${new URL('file:///path/to/')} | ${'file:///path/to/file.txt'}
-            ${'../file.txt'}                            | ${new URL('file:///path/to/')} | ${'file:///path/file.txt'}
-            ${'https://example.com/data'}               | ${new URL('file:///path/to/')} | ${'https://example.com/data'}
+            file                                | relativeToUrl     | expected
+            ${u('/path/to/test/file.txt')}      | ${u('/path/to/')} | ${u('/path/to/test/file.txt').href}
+            ${u('/path/to/test/file.txt').href} | ${u('/path/to/')} | ${u('/path/to/test/file.txt').href}
+            ${'file.txt'}                       | ${u('/path/to/')} | ${u('/path/to/file.txt').href}
+            ${'../file.txt'}                    | ${u('/path/to/')} | ${u('/path/file.txt').href}
+            ${'https://example.com/data'}       | ${u('/path/to/')} | ${'https://example.com/data'}
         `('should resolve a file URL relative to a URL $file $relativeToUrl', ({ file, relativeToUrl, expected }) => {
             const result = resolveFileWithURL(file, relativeToUrl);
             expect(result.href).toBe(expected);
@@ -78,9 +80,9 @@ describe('url', () => {
 
         test('should resolve a file path relative to a URL', () => {
             const file = 'file.txt';
-            const relativeToUrl = new URL('file:///path/to/');
+            const relativeToUrl = u('/path/to/');
             const result = resolveFileWithURL(file, relativeToUrl);
-            expect(result.href).toBe('file:///path/to/file.txt');
+            expect(result.href).toBe(u('/path/to/file.txt').href);
         });
     });
 
@@ -88,13 +90,21 @@ describe('url', () => {
         test('should convert a file path to a file URL', () => {
             const file = '/path/to/file.txt';
             const result = toFileUrl(file);
-            expect(result.href).toBe('file:///path/to/file.txt');
+            expect(result.href).toBe(u('/path/to/file.txt').href);
         });
 
         test('should return the input if it is already a file URL', () => {
-            const file = new URL('file:///path/to/file.txt');
+            const file = u('/path/to/file.txt');
             const result = toFileUrl(file);
-            expect(result.href).toBe('file:///path/to/file.txt');
+            expect(result.href).toBe(u('/path/to/file.txt').href);
         });
     });
 });
+
+function u(url: string) {
+    return new URL(url, rootURL);
+}
+
+function f(url: URL) {
+    return fileURLToPath(url);
+}

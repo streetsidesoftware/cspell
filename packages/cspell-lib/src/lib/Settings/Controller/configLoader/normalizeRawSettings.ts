@@ -68,7 +68,7 @@ export function normalizeReporters(settings: NormalizeReporters, pathToSettingsF
         if (s === 'default') return s;
         const r = resolveFile(s, pathToSettingsFile);
         if (!r.found) {
-            console.warn('Not found: %o', { filename: s, relativeTo: pathToSettingsFile.href });
+            // console.warn('Not found: %o', { filename: s, relativeTo: pathToSettingsFile.href });
             throw new Error(`Not found: "${s}"`);
         }
         return r.filename;
