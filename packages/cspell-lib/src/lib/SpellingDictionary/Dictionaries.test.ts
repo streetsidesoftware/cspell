@@ -1,6 +1,7 @@
 import type { CSpellUserSettings } from '@cspell/cspell-types';
 import * as fs from 'fs/promises';
 import * as path from 'path';
+import { pathToFileURL } from 'url';
 import { describe, expect, test } from 'vitest';
 
 import { pathPackageRoot } from '../../test-util/test.locations.cjs';
@@ -10,7 +11,6 @@ import { filterDictDefsToLoad, mapDictDefToInternal } from '../Settings/Dictiona
 import { getDefaultBundledSettingsAsync, loadConfig } from '../Settings/index.js';
 import * as Dictionaries from './Dictionaries.js';
 import { isSpellingDictionaryLoadError } from './SpellingDictionaryError.js';
-import { pathToFileURL } from 'url';
 
 // cspell:ignore café rhône
 const mkdirp = async (p: string) => {

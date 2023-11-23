@@ -18,7 +18,6 @@ import type { ImportFileRefWithError } from '../../CSpellSettingsServer.js';
 import { extractDependencies, getSources, mergeSettings } from '../../CSpellSettingsServer.js';
 import { _defaultSettings, getDefaultBundledSettingsAsync } from '../../DefaultSettings.js';
 import { __testing__ as __configLoader_testing__, loadPnP, loadPnPSync } from './configLoader.js';
-import { readRawSettings } from './defaultConfigLoader.js';
 import {
     clearCachedSettingsFiles,
     getCachedFileSize,
@@ -26,6 +25,7 @@ import {
     getGlobalSettings,
     loadConfig,
     readConfigFile,
+    readRawSettings,
     searchForConfig,
 } from './defaultConfigLoader.js';
 import { extractImportErrors } from './extractImportErrors.js';

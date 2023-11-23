@@ -82,7 +82,6 @@ export async function checkTextDocument(
     options: CheckTextOptions,
     settings: CSpellUserSettings = {},
 ): Promise<CheckTextInfo> {
-    await Settings.defaultSettingsLoader.onReady();
     doc = isTextDocument(doc) ? doc : await resolveDocumentToTextDocument(doc);
     return genCheckText(new DocumentValidator(doc, options, settings));
 }

@@ -2,13 +2,7 @@ import type { CSpellSettings, LocaleId } from '@cspell/cspell-types';
 import assert from 'assert';
 
 import type { LanguageId } from './LanguageIds.js';
-import {
-    defaultSettingsLoader,
-    finalizeSettings,
-    getDefaultSettings,
-    getGlobalSettings,
-    mergeSettings,
-} from './Settings/index.js';
+import { finalizeSettings, getDefaultSettings, getGlobalSettings, mergeSettings } from './Settings/index.js';
 import {
     calcSettingsForLanguageId,
     isValidLocaleIntlFormat,
@@ -161,7 +155,6 @@ async function _suggestionsForWord(
         };
     }
 
-    await defaultSettingsLoader.onReady();
     await refreshDictionaryCache();
 
     const config = includeDefaultConfig
