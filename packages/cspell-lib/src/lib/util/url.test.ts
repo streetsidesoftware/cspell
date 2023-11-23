@@ -6,6 +6,9 @@ import { srcDirectory } from '../../lib-cjs/pkg-info.cjs';
 import {
     cwdURL,
     getSourceDirectoryUrl,
+    isDataURL,
+    isFileURL,
+    isURLLike,
     normalizePathSlashesForUrl,
     relativeTo,
     resolveFileWithURL,
@@ -105,12 +108,17 @@ describe('url', () => {
 
     describe('resolveFileWithURL', () => {
         test.each`
-            file                                | relativeToUrl     | expected
-            ${u('/path/to/test/file.txt')}      | ${u('/path/to/')} | ${u('/path/to/test/file.txt').href}
-            ${u('/path/to/test/file.txt').href} | ${u('/path/to/')} | ${u('/path/to/test/file.txt').href}
-            ${'file.txt'}                       | ${u('/path/to/')} | ${u('/path/to/file.txt').href}
-            ${'../file.txt'}                    | ${u('/path/to/')} | ${u('/path/file.txt').href}
-            ${'https://example.com/data'}       | ${u('/path/to/')} | ${'https://example.com/data'}
+            file                                | relativeToUrl                                    | expected
+            ${u('/path/to/test/file.txt')}      | ${u('/path/to/')}                                | ${u('/path/to/test/file.txt').href}
+            ${u('/path/to/test/file.txt').href} | ${u('/path/to/')}                                | ${u('/path/to/test/file.txt').href}
+            ${'file.txt'}                       | ${u('/path/to/README.md')}                       | ${u('/path/to/file.txt').href}
+            ${'.'}                              | ${u('/path/to/README.md')}                       | ${u('/path/to/').href}
+            ${'..'}                             | ${u('/path/to/README.md')}                       | ${u('/path/').href}
+            ${'../code/'}                       | ${u('/path/to/README.md')}                       | ${u('/path/code/').href}
+            ${'../file.txt'}                    | ${u('/path/to/')}                                | ${u('/path/file.txt').href}
+            ${'../file.txt'}                    | ${u('https://example.com/example/code/project')} | ${'https://example.com/example/file.txt'}
+            ${'../file.txt'}                    | ${u('https://example.com/example/code/')}        | ${'https://example.com/example/file.txt'}
+            ${'https://example.com/data'}       | ${u('/path/to/')}                                | ${'https://example.com/data'}
         `('should resolve a file URL relative to a URL $file $relativeToUrl', ({ file, relativeToUrl, expected }) => {
             const result = resolveFileWithURL(file, relativeToUrl);
             expect(result.href).toBe(expected);
@@ -136,6 +144,40 @@ describe('url', () => {
             const result = toFileUrl(file);
             expect(result.href).toBe(u('/path/to/file.txt').href);
         });
+    });
+
+    test.each`
+        url                               | expected
+        ${''}                             | ${false}
+        ${'data:'}                        | ${true}
+        ${'file:///User/home'}            | ${true}
+        ${import.meta.url}                | ${true}
+        ${new URL('.', import.meta.url)}  | ${true}
+        ${'https://example.com/file.txt'} | ${true}
+    `('isURLLike $url', ({ url, expected }) => {
+        expect(isURLLike(url)).toBe(expected);
+    });
+
+    test.each`
+        url                               | expected
+        ${''}                             | ${false}
+        ${'data:'}                        | ${false}
+        ${'file:///User/home'}            | ${true}
+        ${import.meta.url}                | ${true}
+        ${new URL('.', import.meta.url)}  | ${true}
+        ${'https://example.com/file.txt'} | ${false}
+    `('isFileURL $url', ({ url, expected }) => {
+        expect(isFileURL(url)).toBe(expected);
+    });
+
+    test.each`
+        url                               | expected
+        ${''}                             | ${false}
+        ${'data:'}                        | ${true}
+        ${'file:///User/home'}            | ${false}
+        ${'https://example.com/file.txt'} | ${false}
+    `('isFileURL $url', ({ url, expected }) => {
+        expect(isDataURL(url)).toBe(expected);
     });
 });
 

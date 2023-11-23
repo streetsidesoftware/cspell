@@ -9,7 +9,15 @@ import resolveFrom from 'resolve-from';
 import { fileURLToPath } from 'url';
 
 import { srcDirectory } from '../../lib-cjs/pkg-info.cjs';
-import { toFilePathOrHref } from './url.js';
+import {
+    fileURLOrPathToPath,
+    isDataURL,
+    isFileURL,
+    isURLLike,
+    resolveFileWithURL,
+    toFilePathOrHref,
+    toURL,
+} from './url.js';
 
 export interface ResolveFileResult {
     filename: string;
@@ -55,8 +63,6 @@ export function resolveFile(filename: string, relativeTo: string | URL): Resolve
     );
 }
 
-const isUrlRegExp = /^(?:\w+:\/\/|data:)/i;
-
 /**
  * Check to see if it is a URL.
  * Note: URLs are absolute!
@@ -64,34 +70,27 @@ const isUrlRegExp = /^(?:\w+:\/\/|data:)/i;
  * @param filename - url string
  * @returns ResolveFileResult
  */
-function tryUrl(filename: string, relativeTo: string | URL): ResolveFileResult | undefined {
+function tryUrl(filename: string, relativeToURL: string | URL): ResolveFileResult | undefined {
     if (isURLLike(filename)) {
         if (isFileURL(filename)) {
+            const file = fileURLToPath(filename);
             return {
-                filename: fileURLToPath(filename),
+                filename: file,
                 relativeTo: undefined,
-                found: fs.existsSync(fileURLToPath(filename)),
+                found: fs.existsSync(file),
             };
         }
         return { filename: filename.toString(), relativeTo: undefined, found: true };
     }
 
-    if (isURLLike(relativeTo) && !isFileURL(relativeTo) && !isDataURL(relativeTo)) {
-        const url = new URL(filename, relativeTo);
-        return {
-            filename: url.href,
-            relativeTo: relativeTo.toString(),
-            found: true,
-        };
-    }
-
-    if (isURLLike(relativeTo) && !isDataURL(relativeTo)) {
-        const rel = filename.split(path.sep).join('/');
-        const url = new URL(rel, relativeTo);
+    if (isURLLike(relativeToURL) && !isDataURL(relativeToURL)) {
+        const relToURL = toURL(relativeToURL);
+        const isRelToAFile = isFileURL(relToURL);
+        const url = resolveFileWithURL(filename, relToURL);
         return {
             filename: toFilePathOrHref(url),
-            relativeTo: relativeTo.toString(),
-            found: fs.existsSync(url),
+            relativeTo: toFilePathOrHref(relToURL),
+            found: !isRelToAFile || fs.existsSync(url),
         };
     }
 
@@ -181,27 +180,6 @@ function tryResolveFrom(filename: string, relativeTo: string | URL): ResolveFile
         // Failed to resolve a relative module request
         return undefined;
     }
-}
-
-function fileURLOrPathToPath(filenameOrURL: string | URL): string {
-    return isFileURL(filenameOrURL) ? fileURLToPath(filenameOrURL) : filenameOrURL.toString();
-}
-
-function isURLLike(url: string | URL): boolean {
-    return url instanceof URL || isUrlRegExp.test(url);
-}
-
-function isFileURL(url: string | URL): boolean {
-    return isUrlWithProtocol(url, 'file');
-}
-
-function isDataURL(url: string | URL): boolean {
-    return isUrlWithProtocol(url, 'data');
-}
-
-function isUrlWithProtocol(url: string | URL, protocol: string): boolean {
-    protocol = protocol.endsWith(':') ? protocol : protocol + ':';
-    return url instanceof URL ? url.protocol === protocol : url.startsWith(protocol);
 }
 
 function isRelative(filename: string | URL): boolean {
