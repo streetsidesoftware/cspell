@@ -87,7 +87,7 @@ describe('Validate resolveFile', () => {
 
     test.each`
         url                     | relativeTo                     | expected
-        ${'/User/home'}         | ${import.meta.url}             | ${oc({ filename: '/User/home', found: false })}
+        ${'/User/home'}         | ${import.meta.url}             | ${oc({ filename: r('/User/home'), found: false })}
         ${uh('/User/not-home')} | ${import.meta.url}             | ${oc({ filename: fileURLToPath(u('/User/not-home')), found: false })}
         ${import.meta.url}      | ${import.meta.url}             | ${oc({ filename: toFilePathOrHref(new URL(import.meta.url)), found: true })}
         ${'file.txt'}           | ${'https://google.com'}        | ${oc({ filename: 'https://google.com/file.txt', found: true })}
@@ -111,4 +111,8 @@ function u(url: string) {
 
 function uh(url: string) {
     return u(url).href;
+}
+
+function r(filename: string): string {
+    return path.resolve(fileURLToPath(import.meta.url), filename);
 }
