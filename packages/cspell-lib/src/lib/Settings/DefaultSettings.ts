@@ -163,7 +163,6 @@ function normalizePattern(pat: RegExpPatternDefinition): RegExpPatternDefinition
 class DefaultSettingsLoader {
     settings: CSpellSettingsInternal | undefined = undefined;
     pending: Promise<CSpellSettingsInternal> | undefined = undefined;
-    private _ready = false;
 
     constructor() {
         // start loading.
@@ -188,16 +187,6 @@ class DefaultSettingsLoader {
             return this.settings;
         })();
         return this.pending;
-    }
-
-    ready(): boolean {
-        return this._ready;
-    }
-
-    async onReady(): Promise<void> {
-        await this.getDefaultSettingsAsync();
-        this._ready = true;
-        return undefined;
     }
 }
 
