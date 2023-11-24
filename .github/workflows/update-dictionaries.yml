@@ -7,6 +7,14 @@ on:
         description: The Base Ref to apply the diff
         required: false
         default: "main"
+      update_snapshots:
+        description: "Rebuild snapshots"
+        type: choice
+        options:
+          - "yes"
+          - "no"
+        default: "no"
+        required: false
 
   schedule:
     - cron: "0 7 * * *"
@@ -119,7 +127,7 @@ jobs:
       patch: ${{ needs.check-dictionaries.outputs.patch }}
 
   integrations:
-    if: ${{ needs.check-dictionaries.outputs.patch }}
+    if: ${{ needs.check-dictionaries.outputs.patch || inputs.update_snapshots == 'yes' }}
     runs-on: ubuntu-latest
     needs:
       - load-integrations
@@ -227,7 +235,7 @@ jobs:
           retention-days: 1
 
   update-snapshots:
-    if: ${{ needs.check-dictionaries.outputs.patch }}
+    if: ${{ needs.check-dictionaries.outputs.patch || inputs.update_snapshots == 'yes' }}
     runs-on: ubuntu-latest
     needs:
       - calc-ref
