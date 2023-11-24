@@ -1,5 +1,4 @@
 import type { CSpellUserSettings, ImportFileRef, Source } from '@cspell/cspell-types';
-import { StrongWeakMap } from '@cspell/strong-weak-map';
 import assert from 'assert';
 import type { CSpellConfigFile, CSpellConfigFileReaderWriter, IO, TextFile } from 'cspell-config-lib';
 import { createReaderWriter, CSpellConfigFileInMemory } from 'cspell-config-lib';
@@ -9,6 +8,7 @@ import * as path from 'path';
 import { fileURLToPath } from 'url';
 
 import { createCSpellSettingsInternal as csi } from '../../../Models/CSpellSettingsInternalDef.js';
+import { AutoResolveCache } from '../../../util/AutoResolve.js';
 import { logError, logWarning } from '../../../util/logger.js';
 import { resolveFile } from '../../../util/resolveFile.js';
 import { cwdURL, toFilePathOrHref } from '../../../util/url.js';
@@ -23,6 +23,7 @@ import { getGlobalConfig } from '../../GlobalSettings.js';
 import { ImportError } from '../ImportError.js';
 import type { LoaderResult } from '../pnpLoader.js';
 import { pnpLoader } from '../pnpLoader.js';
+import { searchPlaces } from './configLocations.js';
 import { ConfigSearch } from './configSearch.js';
 import { configToRawSettings } from './configToRawSettings.js';
 import { defaultSettings } from './defaultSettings.js';
@@ -49,69 +50,6 @@ export const sectionCSpell = 'cSpell';
 
 export const defaultFileName = 'cspell.json';
 
-/**
- * Logic of the locations:
- * - Support backward compatibility with the VS Code Spell Checker
- *   the spell checker extension can only write to `.json` files because
- *   it would be too difficult to automatically modify a `.js` or `.cjs` file.
- * - To support `cspell.config.js` in a VS Code environment, have a `cspell.json` import
- *   the `cspell.config.js`.
- */
-const searchPlaces = Object.freeze([
-    'package.json',
-    // Original locations
-    '.cspell.json',
-    'cspell.json',
-    '.cSpell.json',
-    'cSpell.json',
-    // Original locations jsonc
-    '.cspell.jsonc',
-    'cspell.jsonc',
-    // Alternate locations
-    '.vscode/cspell.json',
-    '.vscode/cSpell.json',
-    '.vscode/.cspell.json',
-    // Standard Locations
-    '.cspell.config.json',
-    '.cspell.config.jsonc',
-    '.cspell.config.yaml',
-    '.cspell.config.yml',
-    'cspell.config.json',
-    'cspell.config.jsonc',
-    'cspell.config.yaml',
-    'cspell.config.yml',
-    '.cspell.yaml',
-    '.cspell.yml',
-    'cspell.yaml',
-    'cspell.yml',
-    // Dynamic config is looked for last
-    'cspell.config.mjs',
-    'cspell.config.js',
-    'cspell.config.cjs',
-    '.cspell.config.mjs',
-    '.cspell.config.js',
-    '.cspell.config.cjs',
-    // .config
-    '.config/.cspell.json',
-    '.config/cspell.json',
-    '.config/.cSpell.json',
-    '.config/cSpell.json',
-    '.config/.cspell.jsonc',
-    '.config/cspell.jsonc',
-    '.config/cspell.config.json',
-    '.config/cspell.config.jsonc',
-    '.config/cspell.config.yaml',
-    '.config/cspell.config.yml',
-    '.config/cspell.yaml',
-    '.config/cspell.yml',
-    '.config/cspell.config.mjs',
-    '.config/cspell.config.js',
-    '.config/cspell.config.cjs',
-    '.config/.cspell.config.mjs',
-    '.config/.cspell.config.js',
-    '.config/.cspell.config.cjs',
-]);
-
 interface ImportedConfigEntry {
     /** href of the configFile URL, this is the key to the cache. */
     href: string;
@@ -129,8 +67,6 @@ interface ImportedConfigEntry {
     /** Set of all references used to catch circular references */
     referencedSet: Set<string>;
 }
-
-export const defaultConfigFilenames = Object.freeze(searchPlaces.concat());
 
 let defaultConfigLoader: ConfigLoaderInternal | undefined = undefined;
 
@@ -151,7 +87,7 @@ export class ConfigLoader {
 
     protected cachedConfig = new Map<string, ImportedConfigEntry>();
     protected cachedConfigFiles = new Map<string, CSpellConfigFile>();
-    protected cachedPendingConfigFile = new StrongWeakMap<string, Promise<CSpellConfigFile>>();
+    protected cachedPendingConfigFile = new AutoResolveCache<string, Promise<CSpellConfigFile | Error>>();
     protected globalSettings: CSpellSettingsI | undefined;
     protected cspellConfigFileReaderWriter: CSpellConfigFileReaderWriter;
     protected configSearch = new ConfigSearch(searchPlaces);
@@ -173,24 +109,23 @@ export class ConfigLoader {
         const ref = resolveFilename(filenameOrURL.toString(), relativeTo || process.cwd());
         const url = this.cspellIO.toFileURL(ref.filename);
         const href = url.href;
-        try {
-            if (ref.error) throw ref.error;
-            const cached = this.cachedConfigFiles.get(href);
-            if (cached) return cached;
-            const pending = this.cachedPendingConfigFile.get(href);
-            if (pending) return pending;
-            const p = this.cspellConfigFileReaderWriter.readConfig(href);
-            this.cachedPendingConfigFile.set(href, p);
-            const file = await p;
-            this.cachedConfigFiles.set(href, file);
-            // validateRawConfigVersion(file);
-            return file;
-        } catch (error) {
-            // console.warn('Debug: %o', { href, error });
-            return new ImportError(`Failed to read config file: "${ref.filename}"`, error);
-        } finally {
-            this.cachedPendingConfigFile.delete(href);
-        }
+        if (ref.error) throw ref.error;
+        const cached = this.cachedConfigFiles.get(href);
+        if (cached) return cached;
+        return this.cachedPendingConfigFile.get(href, async () => {
+            try {
+                const file = await this.cspellConfigFileReaderWriter.readConfig(href);
+                this.cachedConfigFiles.set(href, file);
+                // validateRawConfigVersion(file);
+                console.warn('readConfigFile done: %o', href);
+                return file;
+            } catch (error) {
+                // console.warn('Debug: %o', { href, error });
+                return new ImportError(`Failed to read config file: "${ref.filename}"`, error);
+            } finally {
+                setTimeout(() => this.cachedPendingConfigFile.delete(href), 1);
+            }
+        });
     }
 
     searchForConfigFileLocation(searchFrom: URL | string | undefined): Promise<URL | undefined> {
@@ -241,6 +176,7 @@ export class ConfigLoader {
         this.cachedConfig.clear();
         this.cachedConfigFiles.clear();
         this.configSearch.clearCache();
+        this.cachedPendingConfigFile.clear();
         this.cspellConfigFileReaderWriter.clearCachedFiles();
     }
 

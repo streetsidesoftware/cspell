@@ -24,6 +24,14 @@ export class AutoResolveCache<K, V> {
         this.map.set(k, v);
         return this;
     }
+
+    delete(k: K): boolean {
+        return this.map.delete(k);
+    }
+
+    clear(): void {
+        this.map.clear();
+    }
 }
 
 export function createAutoResolveCache<K, V>(): AutoResolveCache<K, V> {

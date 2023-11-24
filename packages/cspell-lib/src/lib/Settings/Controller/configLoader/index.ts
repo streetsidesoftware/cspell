@@ -2,12 +2,12 @@ export {
     __testing__,
     ConfigLoader,
     createConfigLoader,
-    defaultConfigFilenames,
     defaultFileName,
     loadPnP,
     loadPnPSync,
     sectionCSpell,
 } from './configLoader.js';
+export { defaultConfigFilenames } from './configLocations.js';
 export {
     clearCachedSettingsFiles,
     getCachedFileSize,

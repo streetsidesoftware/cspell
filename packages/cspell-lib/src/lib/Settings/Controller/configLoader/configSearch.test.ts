@@ -2,7 +2,7 @@ import { describe, expect, test } from 'vitest';
 
 import { pathPackageSamplesURL } from '../../../../test-util/index.mjs';
 import { resolveFileWithURL } from '../../../util/url.js';
-import { defaultConfigFilenames as searchPlaces } from './configLoader.js';
+import { defaultConfigFilenames as searchPlaces } from './configLocations.js';
 import { ConfigSearch } from './configSearch.js';
 
 describe('ConfigSearch', () => {
