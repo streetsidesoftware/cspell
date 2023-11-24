@@ -117,7 +117,6 @@ export class ConfigLoader {
                 const file = await this.cspellConfigFileReaderWriter.readConfig(href);
                 this.cachedConfigFiles.set(href, file);
                 // validateRawConfigVersion(file);
-                console.warn('readConfigFile done: %o', href);
                 return file;
             } catch (error) {
                 // console.warn('Debug: %o', { href, error });
