@@ -553,8 +553,8 @@ describe('Validate search/load config files', () => {
         const searchResult = await readConfigFile(file);
         expect(searchResult.settings).toEqual(expectedConfig);
         expect(mockedLogWarning).toHaveBeenCalledTimes(0);
-        // version validation will log an error
-        expect(mockedLogError).toHaveBeenCalledTimes(1);
+        // version validation will log an error - this has been disabled for the moment. The detection will move to a "doctor" mode.
+        expect(mockedLogError).toHaveBeenCalledTimes(0);
     });
 
     test.each`
@@ -565,8 +565,8 @@ describe('Validate search/load config files', () => {
         const searchResult = await readRawSettings(file);
         expect(searchResult).toEqual(expectedConfig);
         expect(mockedLogWarning).toHaveBeenCalledTimes(0);
-        // version validation will log an error
-        expect(mockedLogError).toHaveBeenCalledTimes(1);
+        // version validation will log an error - this has been disabled for the moment.
+        expect(mockedLogError).toHaveBeenCalledTimes(0);
     });
 
     test('loadPnP', async () => {
