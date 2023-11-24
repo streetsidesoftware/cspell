@@ -109,7 +109,7 @@ export class ConfigLoader {
         const ref = resolveFilename(filenameOrURL.toString(), relativeTo || process.cwd());
         const url = this.cspellIO.toFileURL(ref.filename);
         const href = url.href;
-        if (ref.error) throw ref.error;
+        if (ref.error) return new ImportError(`Failed to read config file: "${ref.filename}"`, ref.error);
         const cached = this.cachedConfigFiles.get(href);
         if (cached) return cached;
         return this.cachedPendingConfigFile.get(href, async () => {
