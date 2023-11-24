@@ -86,7 +86,6 @@ export class ConfigSearch {
     }
 
     private async hasConfig(dir: string, visited: (dir: string) => void): Promise<string | undefined> {
-        console.warn('hasConfig %o', dir);
         dir = path.normalize(dir + '/');
         const cached = this.searchDirCache.get(dir);
         if (cached) return cached;
