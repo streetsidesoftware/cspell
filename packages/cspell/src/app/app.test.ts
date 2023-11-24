@@ -310,7 +310,7 @@ describe('Validate cli', () => {
 });
 
 function _listGlobalImports(): (typeof Link)['listGlobalImports'] {
-    return () => {
+    return async () => {
         return {
             list: [],
             globalSettings: {},
@@ -319,7 +319,7 @@ function _listGlobalImports(): (typeof Link)['listGlobalImports'] {
 }
 
 function _addPathsToGlobalImports(): (typeof Link)['addPathsToGlobalImports'] {
-    return (_paths: string[]) => {
+    return async (_paths: string[]) => {
         return {
             success: true,
             resolvedSettings: [],
@@ -329,7 +329,7 @@ function _addPathsToGlobalImports(): (typeof Link)['addPathsToGlobalImports'] {
 }
 
 function _removePathsFromGlobalImports(): (typeof Link)['removePathsFromGlobalImports'] {
-    return (paths: string[]) => {
+    return async (paths: string[]) => {
         return {
             success: true,
             error: undefined,

@@ -1,21 +1,21 @@
 export {
     __testing__,
-    clearCachedSettingsFiles,
     ConfigLoader,
     createConfigLoader,
     defaultConfigFilenames,
     defaultFileName,
+    loadPnP,
+    loadPnPSync,
+    sectionCSpell,
+} from './configLoader.js';
+export {
+    clearCachedSettingsFiles,
     getCachedFileSize,
     getGlobalSettings,
     loadConfig,
-    loadConfigSync,
-    loadPnP,
-    loadPnPSync,
     readRawSettings,
     searchForConfig,
-    searchForConfigSync,
-    sectionCSpell,
-} from './configLoader.js';
+} from './defaultConfigLoader.js';
 export { extractImportErrors, ImportFileRefWithError } from './extractImportErrors.js';
 export { readSettings } from './readSettings.js';
 export { readSettingsFiles } from './readSettingsFiles.js';

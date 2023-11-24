@@ -3,6 +3,7 @@ import assert from 'assert';
 import * as fsp from 'fs/promises';
 import * as os from 'os';
 import * as path from 'path';
+import { pathToFileURL } from 'url';
 import { describe, expect, test } from 'vitest';
 
 import { isDictionaryDefinitionInlineInternal } from '../Models/CSpellSettingsInternalDef.js';
@@ -85,7 +86,7 @@ describe('Validate DictionarySettings', () => {
     });
 
     test('tests normalizing home dir', () => {
-        const pathToConfig = './cspell.json';
+        const pathToConfig = pathToFileURL('./cspell.json');
         const basePath = path.join('some', 'dir', 'words.txt');
         const absolutePath = path.join(os.homedir(), basePath);
         const def: DictionaryDefinition = {
@@ -98,7 +99,7 @@ describe('Validate DictionarySettings', () => {
             oc({
                 name: 'words',
                 path: absolutePath,
-                __source: pathToConfig,
+                __source: pathToConfig.href,
             }),
         );
 
@@ -114,7 +115,7 @@ describe('Validate DictionarySettings', () => {
     });
 
     test('Double normalize', () => {
-        const configFile = './cspell.json';
+        const configFile = pathToFileURL('./cspell.json');
         const def: DictionaryDefinition = {
             name: 'Text Dict',
             path: './words.txt',
@@ -122,16 +123,16 @@ describe('Validate DictionarySettings', () => {
 
         const normalizedDef = DictSettings.mapDictDefToInternal(def, configFile);
         expect(DictSettings.isDictionaryDefinitionWithSource(normalizedDef)).toBe(true);
-        expect(normalizedDef).toEqual(expect.objectContaining({ __source: configFile }));
+        expect(normalizedDef).toEqual(expect.objectContaining({ __source: configFile.href }));
 
         const normalizedDef2 = DictSettings.mapDictDefToInternal(normalizedDef, configFile);
         expect(normalizedDef2).toBe(normalizedDef);
     });
 
     test.each`
-        def                                                                                   | expected
-        ${{}}                                                                                 | ${false}
-        ${DictSettings.mapDictDefToInternal({ name: 'def', path: './dict.txt' }, __filename)} | ${true}
+        def                                                                                                  | expected
+        ${{}}                                                                                                | ${false}
+        ${DictSettings.mapDictDefToInternal({ name: 'def', path: './dict.txt' }, pathToFileURL(__filename))} | ${true}
     `('isDictionaryDefinitionInternal', ({ def, expected }) => {
         expect(DictSettings.isDictionaryDefinitionInternal(def)).toBe(expected);
     });

@@ -45,7 +45,7 @@ export async function* trace(words: string[], options: TraceOptions): AsyncItera
     const configFile = await readConfig(options.config, undefined);
     const loadDefault = options.defaultConfiguration ?? configFile.config.loadDefaultConfiguration ?? true;
 
-    const config = mergeSettings(getDefaultSettings(loadDefault), getGlobalSettings(), configFile.config);
+    const config = mergeSettings(await getDefaultSettings(loadDefault), getGlobalSettings(), configFile.config);
     yield* traceWordsAsync(iWords, config, util.clean({ languageId, locale, ignoreCase, allowCompoundWords }));
 }
 

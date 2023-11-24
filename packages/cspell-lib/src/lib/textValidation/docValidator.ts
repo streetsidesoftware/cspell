@@ -118,7 +118,7 @@ export class DocumentValidator {
         this.addPossibleError(localConfig?.__importRef?.error);
 
         const config = mergeSettings(settings, localConfig);
-        const docSettings = determineTextDocumentSettings(this._document, config);
+        const docSettings = await determineTextDocumentSettings(this._document, config);
         const dict = await getDictionaryInternal(docSettings);
 
         const matcher = new GlobMatcher(localConfig?.ignorePaths || [], { root: process.cwd(), dot: true });
@@ -150,11 +150,11 @@ export class DocumentValidator {
         this._preparationTime = timer.elapsed();
     }
 
-    private _updatePrep() {
+    private async _updatePrep() {
         assert(this._preparations, ERROR_NOT_PREPARED);
         const timer = createTimer();
         const prep = this._preparations;
-        const docSettings = determineTextDocumentSettings(this._document, prep.config);
+        const docSettings = await determineTextDocumentSettings(this._document, prep.config);
         const dict = getDictionaryInternalSync(docSettings);
         const shouldCheck = docSettings.enabled ?? true;
         const finalSettings = finalizeSettings(docSettings);
@@ -289,9 +289,9 @@ export class DocumentValidator {
         return this._document;
     }
 
-    public updateDocumentText(text: string) {
+    public async updateDocumentText(text: string) {
         updateTextDocument(this._document, [{ text }]);
-        this._updatePrep();
+        await this._updatePrep();
     }
 
     private defaultParser(): Iterable<ParsedText> {
@@ -475,7 +475,7 @@ export async function shouldCheckDocument(
 
         const config = mergeSettings(settings, localConfig);
         const matcher = new GlobMatcher(localConfig?.ignorePaths || [], { root: process.cwd(), dot: true });
-        const docSettings = determineTextDocumentSettings(doc, config);
+        const docSettings = await determineTextDocumentSettings(doc, config);
         const uri = doc.uri;
         return !matcher.match(uriToFilePath(uri)) && (docSettings.enabled ?? true);
     }

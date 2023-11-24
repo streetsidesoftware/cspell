@@ -2,13 +2,7 @@ import type { CSpellSettings, LocaleId } from '@cspell/cspell-types';
 import assert from 'assert';
 
 import type { LanguageId } from './LanguageIds.js';
-import {
-    defaultSettingsLoader,
-    finalizeSettings,
-    getDefaultSettings,
-    getGlobalSettings,
-    mergeSettings,
-} from './Settings/index.js';
+import { finalizeSettings, getDefaultSettings, getGlobalSettings, mergeSettings } from './Settings/index.js';
 import {
     calcSettingsForLanguageId,
     isValidLocaleIntlFormat,
@@ -161,11 +155,14 @@ async function _suggestionsForWord(
         };
     }
 
-    await defaultSettingsLoader.onReady();
     await refreshDictionaryCache();
 
     const config = includeDefaultConfig
-        ? mergeSettings(getDefaultSettings(settings.loadDefaultConfiguration ?? true), getGlobalSettings(), settings)
+        ? mergeSettings(
+              await getDefaultSettings(settings.loadDefaultConfiguration ?? true),
+              await getGlobalSettings(),
+              settings,
+          )
         : settings;
     const { dictionaryCollection, allDictionaryCollection } = await determineDictionaries(config);
 
@@ -191,7 +188,11 @@ async function _suggestionsForWordAsync(
     const ignoreCase = !strict;
 
     const config = includeDefaultConfig
-        ? mergeSettings(getDefaultSettings(settings.loadDefaultConfiguration ?? true), getGlobalSettings(), settings)
+        ? mergeSettings(
+              await getDefaultSettings(settings.loadDefaultConfiguration ?? true),
+              await getGlobalSettings(),
+              settings,
+          )
         : settings;
     const opts: SuggestOptions = { ignoreCase, numChanges, numSuggestions, includeTies };
     const suggestionsByDictionary = dictionaryCollection.dictionaries.flatMap((dict) =>

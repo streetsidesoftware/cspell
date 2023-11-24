@@ -1,3 +1,4 @@
+import path from 'path';
 import type { Mock } from 'vitest';
 import { afterEach, describe, expect, test, vi } from 'vitest';
 
@@ -21,6 +22,8 @@ interface MockConfigStore extends ConfigStore {
     mock_getPath: Mock<[], string>;
 }
 
+const oc = expect.objectContaining;
+
 function createMockConfigStore() {
     let _all: Record<string, unknown> | undefined = undefined;
     let _path = 'path';
@@ -39,7 +42,7 @@ function createMockConfigStore() {
     });
 
     const store: MockConfigStore = vi.fn((id) => {
-        _path = `/User/local/data/.config/configstore/${id}.json`;
+        _path = path.resolve(`/User/local/data/.config/configstore/${id}.json`);
         return store;
     }) as unknown as MockConfigStore;
     store.set = mock_set;
@@ -78,57 +81,62 @@ describe('Validate GlobalSettings', () => {
         expect(getGlobalConfigPath()).toEqual(expect.stringMatching(/cspell\.json$/));
     });
 
-    test('getRawGlobalSettings', () => {
+    test('getRawGlobalSettings', async () => {
         const mockImpl = createMockConfigStore();
         mockConfigstore.mockImplementation(mockImpl);
         const path = getGlobalConfigPath();
         const s = getRawGlobalSettings();
-        expect(s).toEqual({
-            source: {
-                name: 'CSpell Configstore',
-                filename: undefined,
-            },
-        });
+        await expect(s).resolves.toEqual(
+            oc({
+                source: oc({
+                    name: 'CSpell Configstore',
+                }),
+            }),
+        );
         mockImpl.set('version', '0.2.0');
         const s2 = getRawGlobalSettings();
-        expect(s2).toEqual({
-            version: '0.2.0',
-            source: {
-                name: 'CSpell Configstore',
-                filename: path,
-            },
-        });
+        await expect(s2).resolves.toEqual(
+            oc({
+                version: '0.2.0',
+                source: oc({
+                    name: 'CSpell Configstore',
+                    filename: path,
+                }),
+            }),
+        );
         expect(mockLog).not.toHaveBeenCalled();
     });
 
-    test('getRawGlobalSettings with Error', () => {
+    test('getRawGlobalSettings with Error', async () => {
         const mockImpl = createMockConfigStore();
         mockConfigstore.mockImplementation(mockImpl);
         mockImpl.mock_getAll.mockImplementation(() => {
             throw new Error('fail');
         });
         const s = getRawGlobalSettings();
-        expect(s).toEqual({
-            source: {
-                name: 'CSpell Configstore',
-                filename: undefined,
-            },
-        });
+        await expect(s).resolves.toEqual(
+            oc({
+                import: [],
+                source: oc({
+                    name: 'CSpell Configstore',
+                }),
+            }),
+        );
         expect(mockError).toHaveBeenCalledWith(expect.any(Error));
     });
 
-    test('writeRawGlobalSettings', () => {
+    test('writeRawGlobalSettings', async () => {
         const mockImpl = createMockConfigStore();
         mockConfigstore.mockImplementation(mockImpl);
-        const s = getRawGlobalSettings();
+        const s = await getRawGlobalSettings();
         const updated = { ...s, import: ['hello'], extra: { name: 'extra', value: 'ok' } };
-        writeRawGlobalSettings(updated);
+        await writeRawGlobalSettings(updated);
         expect(mockImpl.mock_setAll).toHaveBeenCalledWith({
             import: ['hello'],
         });
     });
 
-    test('writeRawGlobalSettings with Error', () => {
+    test('writeRawGlobalSettings with Error', async () => {
         const mockImpl = createMockConfigStore();
         mockConfigstore.mockImplementation(mockImpl);
         const updated = { import: ['hello'] };
@@ -137,29 +145,26 @@ describe('Validate GlobalSettings', () => {
             throw new Error('fail');
         });
         const error1 = writeRawGlobalSettings(updated);
-        expect(error1).toBeInstanceOf(Error);
-        mockImpl.mock_setAll.mockImplementation(() => {
-            throw 'fail';
-        });
-        const error2 = writeRawGlobalSettings(updated);
-        expect(error2).toBeInstanceOf(Error);
+        await expect(error1).rejects.toBeInstanceOf(Error);
     });
 
-    test('No Access to global settings files', () => {
+    test('No Access to global settings files', async () => {
         const mockImpl = createMockConfigStore();
         mockConfigstore.mockImplementation(mockImpl);
         mockImpl.mock_getAll.mockImplementation(() => {
             throw new SystemLikeError('permission denied', 'EACCES');
         });
         const s = getRawGlobalSettings();
+        await expect(s).resolves.toEqual(
+            oc({
+                import: [],
+                source: oc({
+                    name: 'CSpell Configstore',
+                }),
+            }),
+        );
         expect(mockError).toHaveBeenCalledTimes(0);
         expect(mockLog).toHaveBeenCalledTimes(0);
-        expect(s).toEqual({
-            source: {
-                name: 'CSpell Configstore',
-                filename: undefined,
-            },
-        });
     });
 });
 

@@ -9,6 +9,6 @@ import { getDictionaryInternal } from './SpellingDictionary/index.js';
  * @param settings - that defines the dictionaries and the ones to load.
  * @returns a dictionary collection that represents all the enabled dictionaries.
  */
-export function getDictionary(settings: CSpellUserSettings): Promise<SpellingDictionaryCollection> {
+export async function getDictionary(settings: CSpellUserSettings): Promise<SpellingDictionaryCollection> {
     return getDictionaryInternal(toInternalSettings(settings));
 }

@@ -1,5 +1,3 @@
-import assert from 'node:assert';
-
 import type { PredefinedPatterns, RegExpPatternDefinition } from '@cspell/cspell-types';
 import { parsers } from 'cspell-grammar';
 
@@ -165,19 +163,10 @@ function normalizePattern(pat: RegExpPatternDefinition): RegExpPatternDefinition
 class DefaultSettingsLoader {
     settings: CSpellSettingsInternal | undefined = undefined;
     pending: Promise<CSpellSettingsInternal> | undefined = undefined;
-    private _ready = false;
 
     constructor() {
         // start loading.
         this.getDefaultSettingsAsync().catch(() => undefined);
-    }
-
-    getDefaultSettings(useDefaultDictionaries = true): CSpellSettingsInternal {
-        if (!useDefaultDictionaries) {
-            return _defaultSettingsBasis;
-        }
-        assert(this.settings);
-        return this.settings;
     }
 
     getDefaultSettingsAsync(useDefaultDictionaries = true): Promise<CSpellSettingsInternal> {
@@ -199,22 +188,12 @@ class DefaultSettingsLoader {
         })();
         return this.pending;
     }
-
-    ready(): boolean {
-        return this._ready;
-    }
-
-    async onReady(): Promise<void> {
-        await this.getDefaultSettingsAsync();
-        this._ready = true;
-        return undefined;
-    }
 }
 
 export const defaultSettingsLoader = new DefaultSettingsLoader();
 
-export function getDefaultSettings(useDefaultDictionaries = true): CSpellSettingsInternal {
-    return defaultSettingsLoader.getDefaultSettings(useDefaultDictionaries);
+export function getDefaultSettings(useDefaultDictionaries = true): Promise<CSpellSettingsInternal> {
+    return defaultSettingsLoader.getDefaultSettingsAsync(useDefaultDictionaries);
 }
 
 export function getDefaultBundledSettingsAsync(): Promise<CSpellSettingsInternal> {

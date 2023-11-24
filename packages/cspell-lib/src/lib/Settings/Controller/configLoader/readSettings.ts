@@ -1,4 +1,4 @@
-import { getDefaultConfigLoader } from './configLoader.js';
+import { getDefaultConfigLoader } from './defaultConfigLoader.js';
 import type { PnPSettingsOptional } from './PnPSettings.js';
 import type { CSpellSettingsI } from './types.js';
 
@@ -27,12 +27,13 @@ export function readSettings(
     relativeTo: string | URL,
     pnpSettings: PnPSettingsOptional,
 ): Promise<CSpellSettingsI>;
-export function readSettings(
+export async function readSettings(
     filename: string | URL,
     relativeToOrPnP?: PnPSettingsOptional | string | URL,
     pnpSettings?: PnPSettingsOptional,
 ): Promise<CSpellSettingsI> {
     const loader = getDefaultConfigLoader();
+    await loader.onReady;
     const relativeTo =
         typeof relativeToOrPnP === 'string' || relativeToOrPnP instanceof URL ? relativeToOrPnP : undefined;
     const pnp = pnpSettings

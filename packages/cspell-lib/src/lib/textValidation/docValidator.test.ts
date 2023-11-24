@@ -233,7 +233,7 @@ describe('shouldCheckDocument', () => {
         ${'node_modules/mod/index.js'}  | ${opts({ noConfigSearch: true })} | ${s({ loadDefaultConfiguration: false })} | ${true}
         ${'node_modules/mod/index.jpg'} | ${opts()}                         | ${s({ loadDefaultConfiguration: false })} | ${false}
         ${'node_modules/mod/index.jpg'} | ${opts()}                         | ${s({ loadDefaultConfiguration: true })}  | ${false}
-        ${'src/code.ts'}                | ${opts({ configFile: '_nf_' })}   | ${s()}                                    | ${{ errors: [oc({ message: sc('Failed to read') })], shouldCheck: true }}
+        ${'src/code.ts'}                | ${opts({ configFile: '_nf_' })}   | ${s()}                                    | ${{ errors: [oc({ message: sc('Failed to') })], shouldCheck: true }}
     `(
         'shouldCheckDocument file: $file options: $options settings: $settings',
         async ({ file, options, settings, expected }) => {

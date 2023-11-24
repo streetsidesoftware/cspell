@@ -10,12 +10,13 @@ import type {
 } from '@cspell/cspell-types';
 import assert from 'assert';
 import { GlobMatcher } from 'cspell-glob';
-import * as path from 'path';
+import { pathToFileURL } from 'url';
 
 import type { CSpellSettingsInternal, CSpellSettingsInternalFinalized } from '../Models/CSpellSettingsInternalDef.js';
 import { cleanCSpellSettingsInternal as csi, isCSpellSettingsInternal } from '../Models/CSpellSettingsInternalDef.js';
 import { autoResolveWeak, AutoResolveWeakCache } from '../util/AutoResolve.js';
 import type { OptionalOrUndefined } from '../util/types.js';
+import { toFileUrl } from '../util/url.js';
 import * as util from '../util/util.js';
 import { configSettingsFileVersion0_1, ENV_CSPELL_GLOB_ROOT } from './constants.js';
 import { calcDictionaryDefsToLoad, mapDictDefsToInternal } from './DictionarySettings.js';
@@ -313,14 +314,10 @@ function _toInternalSettings(settings: CSpellSettingsI | CSpellSettingsWSTO): CS
 
     const dictionaryDefinitions = mapDictDefsToInternal(
         defs,
-        filenameToDirectory(settings.source?.filename) || resolveCwd(),
+        (settings.source?.filename && toFileUrl(settings.source?.filename)) || resolveCwd(),
     );
     const setting = dictionaryDefinitions ? { ...rest, dictionaryDefinitions } : rest;
     return csi(setting);
-}
-
-function filenameToDirectory(filename: string | undefined): string | undefined {
-    return filename ? path.dirname(filename) : undefined;
 }
 
 /**
@@ -414,10 +411,10 @@ export function extractDependencies(settings: CSpellSettingsWSTO | CSpellSetting
     };
 }
 
-function resolveCwd(): string {
+function resolveCwd(): URL {
     const envGlobRoot = process.env[ENV_CSPELL_GLOB_ROOT];
     const cwd = envGlobRoot || process.cwd();
-    return cwd;
+    return pathToFileURL(cwd);
 }
 
 function resolveParser(settings: CSpellSettingsI): Parser | undefined {

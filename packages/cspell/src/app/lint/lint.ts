@@ -7,13 +7,24 @@ import type {
     ReporterConfiguration,
     RunResult,
     TextDocumentOffset,
+    TextOffset,
 } from '@cspell/cspell-types';
 import { MessageTypes } from '@cspell/cspell-types';
 import chalk from 'chalk';
 import { findRepoRoot, GitIgnore } from 'cspell-gitignore';
 import { GlobMatcher, type GlobMatchOptions, type GlobPatternNormalized, type GlobPatternWithRoot } from 'cspell-glob';
-import type { Logger, ValidationIssue } from 'cspell-lib';
-import * as cspell from 'cspell-lib';
+import type { Logger, SpellCheckFileResult, ValidationIssue } from 'cspell-lib';
+import {
+    ENV_CSPELL_GLOB_ROOT,
+    extractDependencies,
+    extractImportErrors,
+    getDictionary,
+    isBinaryFile as cspellIsBinaryFile,
+    setLogger,
+    shouldCheckDocument,
+    spellCheckDocument,
+    Text as cspellText,
+} from 'cspell-lib';
 import * as path from 'path';
 import { format } from 'util';
 import { URI } from 'vscode-uri';
@@ -57,7 +68,7 @@ const { opFilterAsync } = operators;
 
 export async function runLint(cfg: LintRequest): Promise<RunResult> {
     let { reporter } = cfg;
-    cspell.setLogger(getLoggerFromReporter(reporter));
+    setLogger(getLoggerFromReporter(reporter));
     const configErrors = new Set<string>();
 
     const timer = getTimeMeasurer();
@@ -111,7 +122,7 @@ export async function runLint(cfg: LintRequest): Promise<RunResult> {
                 return { fileResult };
             }
             const uri = filenameToUri(filename, cfg.root);
-            const checkResult = await cspell.shouldCheckDocument({ uri }, {}, configInfo.config);
+            const checkResult = await shouldCheckDocument({ uri }, {}, configInfo.config);
             if (!checkResult.shouldCheck) return { skip: true } as const;
             const fileInfo = await readFileInfo(filename, undefined, true);
             return { fileInfo };
@@ -161,7 +172,7 @@ export async function runLint(cfg: LintRequest): Promise<RunResult> {
         const { text } = fileInfo;
         result.fileInfo = fileInfo;
 
-        let spellResult: Partial<cspell.SpellCheckFileResult> = {};
+        let spellResult: Partial<SpellCheckFileResult> = {};
         reporter.info(
             `Checking: ${filename}, File type: ${doc.languageId ?? 'auto'}, Language: ${doc.locale ?? 'default'}`,
             MessageTypes.Info,
@@ -170,10 +181,10 @@ export async function runLint(cfg: LintRequest): Promise<RunResult> {
             const { showSuggestions: generateSuggestions, validateDirectives } = cfg.options;
             const numSuggestions = configInfo.config.numSuggestions ?? 5;
             const validateOptions = util.clean({ generateSuggestions, numSuggestions, validateDirectives });
-            const r = await cspell.spellCheckDocument(doc, validateOptions, configInfo.config);
+            const r = await spellCheckDocument(doc, validateOptions, configInfo.config);
             spellResult = r;
             result.processed = r.checked;
-            result.issues = cspell.Text.calculateTextDocumentOffsets(doc.uri, text, r.issues).map(mapIssue);
+            result.issues = cspellText.calculateTextDocumentOffsets(doc.uri, text, r.issues).map(mapIssue);
         } catch (e) {
             reporter.error(`Failed to process "${filename}"`, toError(e));
             result.errors += 1;
@@ -334,13 +345,13 @@ export async function runLint(cfg: LintRequest): Promise<RunResult> {
     }
 
     function calcDependencies(config: CSpellSettings): ConfigDependencies {
-        const { configFiles, dictionaryFiles } = cspell.extractDependencies(config);
+        const { configFiles, dictionaryFiles } = extractDependencies(config);
 
         return { files: configFiles.concat(dictionaryFiles) };
     }
 
     async function reportConfigurationErrors(config: CSpellSettings): Promise<number> {
-        const errors = cspell.extractImportErrors(config);
+        const errors = extractImportErrors(config);
         let count = 0;
         errors.forEach((ref) => {
             const key = ref.error.toString();
@@ -350,7 +361,7 @@ export async function runLint(cfg: LintRequest): Promise<RunResult> {
             reporter.error('Configuration', ref.error);
         });
 
-        const dictCollection = await cspell.getDictionary(config);
+        const dictCollection = await getDictionary(config);
         dictCollection.dictionaries.forEach((dict) => {
             const dictErrors = dict.getErrors?.() || [];
             const msg = `Dictionary Error with (${dict.name})`;
@@ -372,7 +383,7 @@ export async function runLint(cfg: LintRequest): Promise<RunResult> {
 
     async function run(): Promise<RunResult> {
         if (cfg.options.root) {
-            process.env[cspell.ENV_CSPELL_GLOB_ROOT] = cfg.root;
+            process.env[ENV_CSPELL_GLOB_ROOT] = cfg.root;
         }
 
         const configInfo: ConfigInfo = await readConfig(cfg.configFile, cfg.root);
@@ -389,7 +400,7 @@ export async function runLint(cfg: LintRequest): Promise<RunResult> {
         const reporters = cfg.options.reporter ?? configInfo.config.reporters;
 
         reporter = mergeReporters(...(await loadReporters(reporters, cfg.reporter, reporterConfig)));
-        cspell.setLogger(getLoggerFromReporter(reporter));
+        setLogger(getLoggerFromReporter(reporter));
 
         const globInfo = await determineGlobs(configInfo, cfg);
         const { fileGlobs, excludeGlobs } = globInfo;
@@ -527,7 +538,7 @@ async function determineFilesToCheck(
     }
 
     function isExcluded(filename: string, globMatcherExclude: GlobMatcher) {
-        if (cspell.isBinaryFile(URI.file(filename))) {
+        if (cspellIsBinaryFile(URI.file(filename))) {
             return true;
         }
         const { root } = cfg;
@@ -558,10 +569,7 @@ async function determineFilesToCheck(
     return _determineFilesToCheck();
 }
 
-function extractContext(
-    tdo: Pick<cspell.TextDocumentOffset, 'line' | 'offset' | 'text'>,
-    contextRange: number,
-): cspell.TextOffset {
+function extractContext(tdo: Pick<TextDocumentOffset, 'line' | 'offset' | 'text'>, contextRange: number): TextOffset {
     const { line, offset } = tdo;
     const textOffsetInLine = offset - line.offset;
     let left = Math.max(textOffsetInLine - contextRange, 0);
