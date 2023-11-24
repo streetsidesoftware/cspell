@@ -369,9 +369,10 @@ type CSpellSettingsI$1 = CSpellSettingsInternal;
 
 declare const sectionCSpell = "cSpell";
 declare const defaultFileName = "cspell.json";
-declare const defaultConfigFilenames: readonly string[];
 declare function loadPnP(pnpSettings: PnPSettingsOptional, searchFrom: URL): Promise<LoaderResult>;
 declare function loadPnPSync(pnpSettings: PnPSettingsOptional, searchFrom: URL): LoaderResult;
+
+declare const defaultConfigFilenames: readonly string[];
 
 /**
  *
