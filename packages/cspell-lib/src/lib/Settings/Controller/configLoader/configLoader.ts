@@ -183,7 +183,7 @@ export class ConfigLoader {
             this.cachedPendingConfigFile.set(href, p);
             const file = await p;
             this.cachedConfigFiles.set(href, file);
-            validateRawConfigVersion(file);
+            // validateRawConfigVersion(file);
             return file;
         } catch (error) {
             // console.warn('Debug: %o', { href, error });
