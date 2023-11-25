@@ -40,6 +40,7 @@ import {
 import type { PnPSettingsOptional } from './PnPSettings.js';
 import { defaultPnPSettings, normalizePnPSettings } from './PnPSettings.js';
 import type { CSpellSettingsI, CSpellSettingsWST } from './types.js';
+import { c } from 'vitest/dist/reporters-5f784f42.js';
 
 type CSpellSettingsVersion = Exclude<CSpellUserSettings['version'], undefined>;
 const supportedCSpellConfigVersions: CSpellSettingsVersion[] = [configSettingsFileVersion0_2];
@@ -70,6 +71,13 @@ interface ImportedConfigEntry {
 
 let defaultConfigLoader: ConfigLoaderInternal | undefined = undefined;
 
+interface CacheMergeConfigFileWithImports {
+    // cfgFile: CSpellConfigFile;
+    pnpSettings: PnPSettingsOptional | undefined;
+    referencedBy: string[] | undefined;
+    result: Promise<CSpellSettingsI>;
+}
+
 export class ConfigLoader {
     public onReady: Promise<void>;
 
@@ -88,6 +96,7 @@ export class ConfigLoader {
     protected cachedConfig = new Map<string, ImportedConfigEntry>();
     protected cachedConfigFiles = new Map<string, CSpellConfigFile>();
     protected cachedPendingConfigFile = new AutoResolveCache<string, Promise<CSpellConfigFile | Error>>();
+    protected cachedMergedConfig = new WeakMap<CSpellConfigFile, CacheMergeConfigFileWithImports>();
     protected globalSettings: CSpellSettingsI | undefined;
     protected cspellConfigFileReaderWriter: CSpellConfigFileReaderWriter;
     protected configSearch = new ConfigSearch(searchPlaces);
@@ -163,7 +172,7 @@ export class ConfigLoader {
     public async getGlobalSettingsAsync(): Promise<CSpellSettingsI> {
         if (!this.globalSettings) {
             const globalConfFile = await getGlobalConfig();
-            const normalized = await this.mergeConfigFileWithImports(globalConfFile, {});
+            const normalized = await this.mergeConfigFileWithImports(globalConfFile, undefined);
             normalized.id ??= 'global_config';
             this.globalSettings = normalized;
         }
@@ -177,11 +186,12 @@ export class ConfigLoader {
         this.configSearch.clearCache();
         this.cachedPendingConfigFile.clear();
         this.cspellConfigFileReaderWriter.clearCachedFiles();
+        this.cachedMergedConfig = new WeakMap<CSpellConfigFile, CacheMergeConfigFileWithImports>();
     }
 
     protected importSettings(
         fileRef: ImportFileRef,
-        pnpSettings: PnPSettingsOptional,
+        pnpSettings: PnPSettingsOptional | undefined,
         backReferences: string[],
     ): ImportedConfigEntry {
         const url = this.cspellIO.toFileURL(fileRef.filename);
@@ -264,7 +274,8 @@ export class ConfigLoader {
         }
     }
 
-    private async setupPnp(cfgFile: CSpellConfigFile, pnpSettings: PnPSettingsOptional) {
+    private async setupPnp(cfgFile: CSpellConfigFile, pnpSettings: PnPSettingsOptional | undefined) {
+        if (!pnpSettings?.usePnP || pnpSettings === defaultPnPSettings) return;
         if (cfgFile.url.protocol !== 'file:') return;
 
         // Try to load any .pnp files before reading dictionaries or other config files.
@@ -274,9 +285,25 @@ export class ConfigLoader {
         loadPnPSync(pnpSettingsToUse, pathToSettingsDir);
     }
 
-    public async mergeConfigFileWithImports(
+    public mergeConfigFileWithImports(
         cfgFile: CSpellConfigFile,
-        pnpSettings: PnPSettingsOptional,
+        pnpSettings: PnPSettingsOptional | undefined,
+        referencedBy?: string[] | undefined,
+    ): Promise<CSpellSettingsI> {
+        const cached = this.cachedMergedConfig.get(cfgFile);
+        if (cached && cached.pnpSettings === pnpSettings && cached.referencedBy === referencedBy) {
+            return cached.result;
+        }
+        // console.warn('missing cache %o', cfgFile.url.href);
+
+        const result = this._mergeConfigFileWithImports(cfgFile, pnpSettings, referencedBy);
+        this.cachedMergedConfig.set(cfgFile, { pnpSettings, referencedBy, result });
+        return result;
+    }
+
+    private async _mergeConfigFileWithImports(
+        cfgFile: CSpellConfigFile,
+        pnpSettings: PnPSettingsOptional | undefined,
         referencedBy: string[] = [],
     ): Promise<CSpellSettingsI> {
         await this.setupPnp(cfgFile, pnpSettings);

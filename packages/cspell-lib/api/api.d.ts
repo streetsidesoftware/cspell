@@ -636,6 +636,11 @@ interface ValidateTextOptions {
      * Verify that the in-document directives are correct.
      */
     validateDirectives?: boolean;
+    /**
+     * Skips spell checking the document. Useful for testing and dry runs.
+     * It will read the configuration and parse the document.
+     */
+    skipValidation?: boolean;
 }
 
 interface DocumentValidatorOptions extends ValidateTextOptions {
@@ -654,6 +659,7 @@ interface DocumentValidatorOptions extends ValidateTextOptions {
      */
     noConfigSearch?: boolean;
 }
+type PerfTimings = Record<string, number>;
 declare class DocumentValidator {
     readonly settings: CSpellUserSettings;
     private _document;
@@ -664,6 +670,8 @@ declare class DocumentValidator {
     private _preparationTime;
     private _suggestions;
     readonly options: DocumentValidatorOptions;
+    readonly perfTiming: PerfTimings;
+    skipValidation: boolean;
     /**
      * @param doc - Document to validate
      * @param config - configuration to use (not finalized).
@@ -717,6 +725,8 @@ declare class DocumentValidator {
      * Internal `cspell-lib` use.
      */
     _getPreparations(): Preparations | undefined;
+    private static getGlobMatcher;
+    private static _getGlobMatcher;
 }
 interface Preparations {
     /** loaded config */
@@ -800,6 +810,12 @@ interface SpellCheckFileOptions extends ValidateTextOptions {
      */
     noConfigSearch?: boolean;
 }
+interface SpellCheckFilePerf extends Record<string, number | undefined> {
+    loadTimeMs?: number;
+    prepareTimeMs?: number;
+    checkTimeMs?: number;
+    totalTimeMs?: number;
+}
 interface SpellCheckFileResult {
     document: Document | DocumentWithText;
     settingsUsed: CSpellSettingsWithSourceTrace;
@@ -808,6 +824,7 @@ interface SpellCheckFileResult {
     issues: ValidationIssue[];
     checked: boolean;
     errors: Error[] | undefined;
+    perf?: SpellCheckFilePerf;
 }
 /**
  * Spell Check a file
@@ -902,4 +919,14 @@ declare function clearCachedFiles(): Promise<void>;
  */
 declare function getDictionary(settings: CSpellUserSettings): Promise<SpellingDictionaryCollection>;
 
-export { type CheckTextInfo, type ConfigurationDependencies, type CreateTextDocumentParams, type DetermineFinalDocumentSettingsResult, type Document, DocumentValidator, type DocumentValidatorOptions, ENV_CSPELL_GLOB_ROOT, type ExcludeFilesGlobMap, type ExclusionFunction, exclusionHelper_d as ExclusionHelper, type FeatureFlag, FeatureFlags, ImportError, type ImportFileRefWithError, IncludeExcludeFlag, type IncludeExcludeOptions, index_link_d as Link, type Logger, type SpellCheckFileOptions, type SpellCheckFileResult, SpellingDictionaryLoadError, type SuggestedWord, SuggestionError, type SuggestionOptions, type SuggestionsForWordResult, text_d as Text, type TextDocument, type TextDocumentLine, type TextDocumentRef, type TextInfoItem, type TraceOptions, type TraceResult, UnknownFeatureFlagError, type ValidationIssue, calcOverrideSettings, checkFilenameMatchesGlob, checkText, checkTextDocument, clearCachedFiles, clearCachedSettingsFiles, combineTextAndLanguageSettings, combineTextAndLanguageSettings as constructSettingsForText, createTextDocument, currentSettingsFileVersion, defaultConfigFilenames, defaultFileName, defaultFileName as defaultSettingsFilename, determineFinalDocumentSettings, extractDependencies, extractImportErrors, fileToDocument, fileToTextDocument, finalizeSettings, getCachedFileSize, getDefaultBundledSettingsAsync, getDefaultSettings, getDictionary, getGlobalSettings, getLanguagesForBasename as getLanguageIdsForBaseFilename, getLanguagesForExt, getLogger, getSources, getSystemFeatureFlags, isBinaryFile, isSpellingDictionaryLoadError, loadConfig, loadPnP, loadPnPSync, mergeInDocSettings, mergeSettings, readRawSettings, readSettings, readSettingsFiles, refreshDictionaryCache, resolveFile, searchForConfig, sectionCSpell, setLogger, shouldCheckDocument, spellCheckDocument, spellCheckFile, suggestionsForWord, suggestionsForWords, traceWords, traceWordsAsync, updateTextDocument, validateText };
+interface PerfTimer {
+    readonly name: string;
+    readonly startTime: number;
+    readonly elapsed: number;
+    start(): void;
+    end(): void;
+}
+type TimeNowFn = () => number;
+declare function createPerfTimer(name: string, onEnd?: (elapsed: number, name: string) => void, timeNowFn?: TimeNowFn): PerfTimer;
+
+export { type CheckTextInfo, type ConfigurationDependencies, type CreateTextDocumentParams, type DetermineFinalDocumentSettingsResult, type Document, DocumentValidator, type DocumentValidatorOptions, ENV_CSPELL_GLOB_ROOT, type ExcludeFilesGlobMap, type ExclusionFunction, exclusionHelper_d as ExclusionHelper, type FeatureFlag, FeatureFlags, ImportError, type ImportFileRefWithError, IncludeExcludeFlag, type IncludeExcludeOptions, index_link_d as Link, type Logger, type PerfTimer, type SpellCheckFileOptions, type SpellCheckFileResult, SpellingDictionaryLoadError, type SuggestedWord, SuggestionError, type SuggestionOptions, type SuggestionsForWordResult, text_d as Text, type TextDocument, type TextDocumentLine, type TextDocumentRef, type TextInfoItem, type TraceOptions, type TraceResult, UnknownFeatureFlagError, type ValidationIssue, calcOverrideSettings, checkFilenameMatchesGlob, checkText, checkTextDocument, clearCachedFiles, clearCachedSettingsFiles, combineTextAndLanguageSettings, combineTextAndLanguageSettings as constructSettingsForText, createPerfTimer, createTextDocument, currentSettingsFileVersion, defaultConfigFilenames, defaultFileName, defaultFileName as defaultSettingsFilename, determineFinalDocumentSettings, extractDependencies, extractImportErrors, fileToDocument, fileToTextDocument, finalizeSettings, getCachedFileSize, getDefaultBundledSettingsAsync, getDefaultSettings, getDictionary, getGlobalSettings, getLanguagesForBasename as getLanguageIdsForBaseFilename, getLanguagesForExt, getLogger, getSources, getSystemFeatureFlags, isBinaryFile, isSpellingDictionaryLoadError, loadConfig, loadPnP, loadPnPSync, mergeInDocSettings, mergeSettings, readRawSettings, readSettings, readSettingsFiles, refreshDictionaryCache, resolveFile, searchForConfig, sectionCSpell, setLogger, shouldCheckDocument, spellCheckDocument, spellCheckFile, suggestionsForWord, suggestionsForWords, traceWords, traceWordsAsync, updateTextDocument, validateText };

@@ -45,6 +45,9 @@ export interface FileInfo {
     text?: string;
     errorCode?: string;
 }
+
+type Perf = Record<string, number | undefined>;
+
 export interface FileResult {
     fileInfo: FileInfo;
     processed: boolean;
@@ -52,6 +55,7 @@ export interface FileResult {
     errors: number;
     configErrors: number;
     elapsedTimeMs: number | undefined;
+    perf?: Perf | undefined;
     cached?: boolean;
 }
 

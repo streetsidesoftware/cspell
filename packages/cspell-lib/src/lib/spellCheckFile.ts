@@ -4,6 +4,7 @@ import type { Document, DocumentWithText } from './Document/index.js';
 import { isBinaryDoc } from './Document/isBinaryDoc.js';
 import { documentToTextDocument, resolveDocument } from './Document/resolveDocument.js';
 import { createTextDocument } from './Models/TextDocument.js';
+import { createPerfTimer } from './perf/index.js';
 import { determineTextDocumentSettings } from './textValidation/determineTextDocumentSettings.js';
 import type { DocumentValidatorOptions } from './textValidation/index.js';
 import { DocumentValidator } from './textValidation/index.js';
@@ -34,6 +35,13 @@ export interface SpellCheckFileOptions extends ValidateTextOptions {
     noConfigSearch?: boolean;
 }
 
+export interface SpellCheckFilePerf extends Record<string, number | undefined> {
+    loadTimeMs?: number;
+    prepareTimeMs?: number;
+    checkTimeMs?: number;
+    totalTimeMs?: number;
+}
+
 export interface SpellCheckFileResult {
     document: Document | DocumentWithText;
     settingsUsed: CSpellSettingsWithSourceTrace;
@@ -42,6 +50,7 @@ export interface SpellCheckFileResult {
     issues: ValidationIssue[];
     checked: boolean;
     errors: Error[] | undefined;
+    perf?: SpellCheckFilePerf;
 }
 
 /**
@@ -84,7 +93,13 @@ export async function spellCheckDocument(
         };
     }
     try {
-        return spellCheckFullDocument(await resolveDocument(document), options, settings);
+        const timer = createPerfTimer('loadFile');
+        const doc = await resolveDocument(document).finally(() => timer.end());
+        const result = await spellCheckFullDocument(doc, options, settings);
+        const perf = result.perf || {};
+        perf.loadTimeMs = timer.elapsed;
+        result.perf = perf;
+        return result;
     } catch (e) {
         const errors = isError(e) ? [e] : [];
         return {
@@ -104,10 +119,28 @@ async function spellCheckFullDocument(
     options: SpellCheckFileOptions,
     settings: CSpellUserSettings,
 ): Promise<SpellCheckFileResult> {
+    // if (options.skipValidation) {
+    //     return {
+    //         document,
+    //         options,
+    //         settingsUsed: settings,
+    //         localConfigFilepath: undefined,
+    //         issues: [],
+    //         checked: true,
+    //         errors: undefined,
+    //     };
+    // }
+
+    const perf: SpellCheckFilePerf = {};
+    const timer = createPerfTimer('spellCheckFullDocument', (elapsed) => (perf.totalTimeMs = elapsed));
+    const timerCheck = createPerfTimer('check', (elapsed) => (perf.checkTimeMs = elapsed));
+    const timerPrepare = createPerfTimer('prepare', (elapsed) => (perf.prepareTimeMs = elapsed));
+
     const doc = documentToTextDocument(document);
     const docValOptions: DocumentValidatorOptions = options;
     const docValidator = new DocumentValidator(doc, docValOptions, settings);
-    await docValidator.prepare();
+    await docValidator.prepare().finally(() => timerPrepare.end());
+    Object.assign(perf, Object.fromEntries(Object.entries(docValidator.perfTiming).map(([k, v]) => ['_' + k, v])));
 
     const prep = docValidator._getPreparations();
 
@@ -120,10 +153,13 @@ async function spellCheckFullDocument(
             issues: [],
             checked: false,
             errors: docValidator.errors,
+            perf,
         };
     }
 
+    timerCheck.start();
     const issues = docValidator.checkDocument();
+    timerCheck.end();
 
     const result: SpellCheckFileResult = {
         document,
@@ -133,8 +169,9 @@ async function spellCheckFullDocument(
         issues,
         checked: docValidator.shouldCheckDocument(),
         errors: undefined,
+        perf,
     };
-
+    timer.end();
     return result;
 }
 

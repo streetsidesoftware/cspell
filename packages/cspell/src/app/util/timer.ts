@@ -1,17 +1,11 @@
-export interface MeasurePromiseResult {
-    elapsedTimeMs: number;
-    success: boolean;
-}
+import type { PerfTimer } from 'cspell-lib';
+import { createPerfTimer } from 'cspell-lib';
 
 export function getTimeMeasurer(): () => number {
-    const start = process.hrtime();
-    return () => hrTimeToMs(process.hrtime(start));
+    const timer = createPerfTimer('timer');
+    return () => timer.elapsed;
 }
 
-export function elapsedTimeMsFrom(relativeTo: [number, number]): number {
-    return hrTimeToMs(process.hrtime(relativeTo));
-}
-
-export function hrTimeToMs(hrTime: [number, number]): number {
-    return hrTime[0] * 1.0e3 + hrTime[1] * 1.0e-6;
+export function getTimer(name: string, onEnd?: (elapsed: number, name: string) => void): PerfTimer {
+    return createPerfTimer(name, onEnd);
 }

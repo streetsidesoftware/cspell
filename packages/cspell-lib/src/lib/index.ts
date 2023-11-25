@@ -100,3 +100,5 @@ export { Link, Text };
 export { ExclusionHelper };
 export { clearCachedFiles } from './clearCachedFiles.js';
 export { getDictionary } from './getDictionary.js';
+export type { PerfTimer } from './perf/index.js';
+export { createPerfTimer } from './perf/index.js';

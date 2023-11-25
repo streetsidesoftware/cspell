@@ -351,7 +351,7 @@ function getDocValidator(filename: string, text: string, options: WorkerOptions)
     const cachedValidator = docValCache.get(doc);
     if (cachedValidator && deepEqual(cachedValidator.settings, settings)) {
         refreshDictionaryCache(0);
-        cachedValidator.updateDocumentText(text);
+        cachedValidator.updateDocumentText(text).catch(() => undefined);
         return cachedValidator;
     }
 

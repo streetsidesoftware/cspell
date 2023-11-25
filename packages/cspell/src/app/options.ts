@@ -73,6 +73,10 @@ export interface LinterOptions extends BaseOptions, Omit<CacheOptions, 'version'
      * configuration.
      */
     reporter?: string[];
+    /**
+     * Load and parse documents, but do not spell check.
+     */
+    skipValidation?: boolean;
 }
 
 export interface TraceOptions extends BaseOptions {
