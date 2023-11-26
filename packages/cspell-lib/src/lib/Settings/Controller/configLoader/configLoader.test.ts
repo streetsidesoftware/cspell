@@ -23,6 +23,7 @@ import {
     getCachedFileSize,
     getDefaultConfigLoader,
     getGlobalSettings,
+    getGlobalSettingsAsync,
     loadConfig,
     readConfigFile,
     readRawSettings,
@@ -109,13 +110,14 @@ describe('Validate CSpellSettingsServer', () => {
 
     test('makes sure global settings is an object', async () => {
         const settings = getGlobalSettings();
+        expect(await getGlobalSettingsAsync()).toBe(settings);
         expect(Object.keys(settings)).not.toHaveLength(0);
-        const merged = mergeSettings(await getDefaultBundledSettingsAsync(), await getGlobalSettings());
+        const merged = mergeSettings(await getDefaultBundledSettingsAsync(), await getGlobalSettingsAsync());
         expect(Object.keys(merged)).not.toHaveLength(0);
     });
 
     test('verify clearing the file cache works', async () => {
-        mergeSettings(await getDefaultBundledSettingsAsync(), await getGlobalSettings());
+        mergeSettings(await getDefaultBundledSettingsAsync(), await getGlobalSettingsAsync());
         expect(getCachedFileSize()).toBeGreaterThan(0);
         clearCachedSettingsFiles();
         expect(getCachedFileSize()).toBe(0);

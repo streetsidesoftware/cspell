@@ -4,6 +4,7 @@ import type {
     ProgressFileBegin,
     ProgressFileComplete,
     ProgressItem,
+    ReporterConfiguration,
     RunResult,
 } from '@cspell/cspell-types';
 import chalk from 'chalk';
@@ -15,6 +16,7 @@ import { URI } from 'vscode-uri';
 
 import type { LinterCliOptions } from './options.js';
 import type { FinalizedReporter } from './util/reporters.js';
+import { uniqueFilterFnGenerator } from './util/util.js';
 
 const templateIssue = `{green $filename}:{yellow $row:$col} - $message ({red $text}) $quickFix`;
 const templateIssueNoFix = `{green $filename}:{yellow $row:$col} - $message ({red $text})`;
@@ -29,12 +31,14 @@ interface ReporterIssue extends Issue {
     filename: string;
 }
 
-function genIssueEmitter(template: string) {
+function genIssueEmitter(template: string, uniqueIssues: boolean) {
+    const uniqueFilter = uniqueIssues ? uniqueFilterFnGenerator((issue: Issue) => issue.text) : () => true;
     const defaultWidth = 10;
     let maxWidth = defaultWidth;
     let uri: string | undefined;
 
     return function issueEmitter(issue: ReporterIssue) {
+        if (!uniqueFilter(issue)) return;
         if (uri !== issue.uri) {
             maxWidth = defaultWidth;
             uri = issue.uri;
@@ -120,7 +124,8 @@ export interface ReporterOptions
     fileGlobs: string[];
 }
 
-export function getReporter(options: ReporterOptions): FinalizedReporter {
+export function getReporter(options: ReporterOptions, config?: ReporterConfiguration): FinalizedReporter {
+    const uniqueIssues = config?.unique || false;
     const issueTemplate = options.wordsOnly
         ? templateIssueWordsOnly
         : options.legacy
@@ -183,7 +188,7 @@ export function getReporter(options: ReporterOptions): FinalizedReporter {
     };
 
     return {
-        issue: relativeIssue(silent || !issues ? nullEmitter : genIssueEmitter(issueTemplate)),
+        issue: relativeIssue(silent || !issues ? nullEmitter : genIssueEmitter(issueTemplate, uniqueIssues)),
         error: silent ? nullEmitter : errorEmitter,
         info: infoEmitter,
         debug: emitters.Debug,

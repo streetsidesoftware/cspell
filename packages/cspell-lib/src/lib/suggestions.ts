@@ -2,7 +2,7 @@ import type { CSpellSettings, LocaleId } from '@cspell/cspell-types';
 import assert from 'assert';
 
 import type { LanguageId } from './LanguageIds.js';
-import { finalizeSettings, getDefaultSettings, getGlobalSettings, mergeSettings } from './Settings/index.js';
+import { finalizeSettings, getDefaultSettings, getGlobalSettingsAsync, mergeSettings } from './Settings/index.js';
 import {
     calcSettingsForLanguageId,
     isValidLocaleIntlFormat,
@@ -160,7 +160,7 @@ async function _suggestionsForWord(
     const config = includeDefaultConfig
         ? mergeSettings(
               await getDefaultSettings(settings.loadDefaultConfiguration ?? true),
-              await getGlobalSettings(),
+              await getGlobalSettingsAsync(),
               settings,
           )
         : settings;
@@ -190,7 +190,7 @@ async function _suggestionsForWordAsync(
     const config = includeDefaultConfig
         ? mergeSettings(
               await getDefaultSettings(settings.loadDefaultConfiguration ?? true),
-              await getGlobalSettings(),
+              await getGlobalSettingsAsync(),
               settings,
           )
         : settings;

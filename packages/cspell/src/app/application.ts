@@ -4,7 +4,7 @@ import type { CheckTextInfo, FeatureFlags, SuggestionsForWordResult, TraceResult
 import {
     checkTextDocument,
     getDefaultSettings,
-    getGlobalSettings,
+    getGlobalSettingsAsync,
     mergeSettings,
     SuggestionError,
     suggestionsForWords,
@@ -33,7 +33,7 @@ export function lint(fileGlobs: string[], options: LinterCliOptions, reporter?: 
     const cfg = new LintRequest(
         fileGlobs,
         options,
-        finalizeReporter(reporter) ?? getReporter({ ...options, fileGlobs }),
+        finalizeReporter(reporter) ?? getReporter({ ...options, fileGlobs }, options),
     );
     return runLint(cfg);
 }
@@ -45,7 +45,11 @@ export async function* trace(words: string[], options: TraceOptions): AsyncItera
     const configFile = await readConfig(options.config, undefined);
     const loadDefault = options.defaultConfiguration ?? configFile.config.loadDefaultConfiguration ?? true;
 
-    const config = mergeSettings(await getDefaultSettings(loadDefault), getGlobalSettings(), configFile.config);
+    const config = mergeSettings(
+        await getDefaultSettings(loadDefault),
+        await getGlobalSettingsAsync(),
+        configFile.config,
+    );
     yield* traceWordsAsync(iWords, config, util.clean({ languageId, locale, ignoreCase, allowCompoundWords }));
 }
 

@@ -2,6 +2,7 @@ import { opConcatMap, opMap, pipeSync } from '@cspell/cspell-pipe/sync';
 import type {
     CSpellSettingsWithSourceTrace,
     CSpellUserSettings,
+    Glob,
     MappedText,
     ParsedText,
     PnPSettings,
@@ -9,13 +10,13 @@ import type {
 import { IssueType } from '@cspell/cspell-types';
 import assert from 'assert';
 import { GlobMatcher } from 'cspell-glob';
-import path from 'path';
 
 import type { CSpellSettingsInternal, CSpellSettingsInternalFinalized } from '../Models/CSpellSettingsInternalDef.js';
 import type { ExtendedSuggestion } from '../Models/Suggestion.js';
 import type { TextDocument, TextDocumentLine, TextDocumentRef } from '../Models/TextDocument.js';
 import { updateTextDocument } from '../Models/TextDocument.js';
 import type { ValidationIssue } from '../Models/ValidationIssue.js';
+import { createPerfTimer } from '../perf/index.js';
 import { finalizeSettings, loadConfig, mergeSettings, searchForConfig } from '../Settings/index.js';
 import type { DirectiveIssue } from '../Settings/InDocSettings.js';
 import { validateInDocumentSettings } from '../Settings/InDocSettings.js';
@@ -24,9 +25,9 @@ import { getDictionaryInternal, getDictionaryInternalSync } from '../SpellingDic
 import type { WordSuggestion } from '../suggestions.js';
 import { calcSuggestionAdjustedToToMatchCase } from '../suggestions.js';
 import { catchPromiseError, toError } from '../util/errors.js';
+import { memorizeLastCall } from '../util/memorizeLastCall.js';
 import { AutoCache } from '../util/simpleCache.js';
 import type { MatchRange } from '../util/TextRange.js';
-import { createTimer } from '../util/timer.js';
 import { uriToFilePath } from '../util/Uri.js';
 import { defaultMaxDuplicateProblems, defaultMaxNumberOfProblems } from './defaultConstants.js';
 import { determineTextDocumentSettings } from './determineTextDocumentSettings.js';
@@ -58,7 +59,7 @@ export interface DocumentValidatorOptions extends ValidateTextOptions {
 
 const ERROR_NOT_PREPARED = 'Validator Must be prepared before calling this function.';
 
-const skipValidation = false;
+type PerfTimings = Record<string, number>;
 
 export class DocumentValidator {
     private _document: TextDocument;
@@ -69,6 +70,8 @@ export class DocumentValidator {
     private _preparationTime = -1;
     private _suggestions = new AutoCache((text: string) => this.genSuggestions(text), 1000);
     readonly options: DocumentValidatorOptions;
+    readonly perfTiming: PerfTimings = {};
+    public skipValidation: boolean;
 
     /**
      * @param doc - Document to validate
@@ -85,6 +88,7 @@ export class DocumentValidator {
         if (numSuggestions !== undefined) {
             this.options.numSuggestions = numSuggestions;
         }
+        this.skipValidation = !!options.skipValidation;
         // console.error(`DocumentValidator: ${doc.uri}`);
     }
 
@@ -92,8 +96,8 @@ export class DocumentValidator {
         return this._ready;
     }
 
-    async prepare(): Promise<void> {
-        if (this._ready) return;
+    prepare(): Promise<void> {
+        if (this._ready) return Promise.resolve();
         if (this._prepared) return this._prepared;
         this._prepared = this._prepareAsync();
         return this._prepared;
@@ -102,7 +106,7 @@ export class DocumentValidator {
     private async _prepareAsync(): Promise<void> {
         assert(!this._ready);
 
-        const timer = createTimer();
+        const timer = createPerfTimer('_prepareAsync');
 
         const { options, settings } = this;
 
@@ -111,26 +115,44 @@ export class DocumentValidator {
         const pLocalConfig = options.configFile
             ? loadConfig(options.configFile, settings)
             : useSearchForConfig
-              ? searchForDocumentConfig(this._document, settings, settings)
+              ? timePromise(
+                    this.perfTiming,
+                    '__searchForDocumentConfig',
+                    searchForDocumentConfig(this._document, settings, settings),
+                )
               : undefined;
+        pLocalConfig && timePromise(this.perfTiming, '_loadConfig', pLocalConfig);
         const localConfig = (await catchPromiseError(pLocalConfig, (e) => this.addPossibleError(e))) || {};
 
         this.addPossibleError(localConfig?.__importRef?.error);
 
         const config = mergeSettings(settings, localConfig);
-        const docSettings = await determineTextDocumentSettings(this._document, config);
-        const dict = await getDictionaryInternal(docSettings);
+        const docSettings = await timePromise(
+            this.perfTiming,
+            '_determineTextDocumentSettings',
+            determineTextDocumentSettings(this._document, config),
+        );
+        const dict = await timePromise(this.perfTiming, '_getDictionaryInternal', getDictionaryInternal(docSettings));
 
-        const matcher = new GlobMatcher(localConfig?.ignorePaths || [], { root: process.cwd(), dot: true });
+        const recGlobMatcherTime = recordPerfTime(this.perfTiming, '_GlobMatcher');
+        const matcher = DocumentValidator.getGlobMatcher(localConfig?.ignorePaths);
         const uri = this._document.uri;
+        recGlobMatcherTime();
+        const recShouldCheckTime = recordPerfTime(this.perfTiming, '_shouldCheck');
 
         const shouldCheck = !matcher.match(uriToFilePath(uri)) && (docSettings.enabled ?? true);
+
+        recShouldCheckTime();
+
+        const recFinalizeTime = recordPerfTime(this.perfTiming, '_finalizeSettings');
 
         const finalSettings = finalizeSettings(docSettings);
         const validateOptions = settingsToValidateOptions(finalSettings);
         const includeRanges = calcTextInclusionRanges(this._document.text, validateOptions);
         const segmenter = createMappedTextSegmenter(includeRanges);
         const textValidator = textValidatorFactory(dict, validateOptions);
+
+        recFinalizeTime();
 
         this._preparations = {
             config,
@@ -147,12 +169,13 @@ export class DocumentValidator {
         };
 
         this._ready = true;
-        this._preparationTime = timer.elapsed();
+        this._preparationTime = timer.elapsed;
+        this.perfTiming.prepTime = this._preparationTime;
     }
 
     private async _updatePrep() {
         assert(this._preparations, ERROR_NOT_PREPARED);
-        const timer = createTimer();
+        const timer = createPerfTimer('_updatePrep');
         const prep = this._preparations;
         const docSettings = await determineTextDocumentSettings(this._document, prep.config);
         const dict = getDictionaryInternalSync(docSettings);
@@ -173,7 +196,7 @@ export class DocumentValidator {
             segmenter,
             textValidator,
         };
-        this._preparationTime = timer.elapsed();
+        this._preparationTime = timer.elapsed;
     }
 
     /**
@@ -251,16 +274,21 @@ export class DocumentValidator {
      * @returns the validation issues.
      */
     public checkDocument(forceCheck = false): ValidationIssue[] {
-        if (skipValidation) return [];
-        assert(this._ready);
-        assert(this._preparations, ERROR_NOT_PREPARED);
+        const timerDone = recordPerfTime(this.perfTiming, 'checkDocument');
+        try {
+            if (this.skipValidation) return [];
+            assert(this._ready);
+            assert(this._preparations, ERROR_NOT_PREPARED);
 
-        const spellingIssues =
-            forceCheck || this.shouldCheckDocument() ? [...this._checkParsedText(this._parse())] : [];
-        const directiveIssues = this.checkDocumentDirectives();
-        // console.log('Stats: %o', this._preparations.textValidator.lineValidator.dict.stats());
-        const allIssues = spellingIssues.concat(directiveIssues).sort((a, b) => a.offset - b.offset);
-        return allIssues;
+            const spellingIssues =
+                forceCheck || this.shouldCheckDocument() ? [...this._checkParsedText(this._parse())] : [];
+            const directiveIssues = this.checkDocumentDirectives();
+            // console.log('Stats: %o', this._preparations.textValidator.lineValidator.dict.stats());
+            const allIssues = spellingIssues.concat(directiveIssues).sort((a, b) => a.offset - b.offset);
+            return allIssues;
+        } finally {
+            timerDone();
+        }
     }
 
     public checkDocumentDirectives(forceCheck = false): ValidationIssue[] {
@@ -402,6 +430,12 @@ export class DocumentValidator {
     public _getPreparations(): Preparations | undefined {
         return this._preparations;
     }
+
+    private static getGlobMatcher = memorizeLastCall(DocumentValidator._getGlobMatcher);
+
+    private static _getGlobMatcher(ignorePaths: Glob[] | undefined): GlobMatcher {
+        return new GlobMatcher(ignorePaths || [], { root: process.cwd(), dot: true });
+    }
 }
 
 function sanitizeSuggestion(sug: WordSuggestion): ExtendedSuggestion {
@@ -435,7 +469,7 @@ async function searchForDocumentConfig(
 ): Promise<CSpellSettingsWithSourceTrace> {
     const { uri } = document;
     if (uri.scheme !== 'file') return Promise.resolve(defaultConfig);
-    return searchForConfig(path.dirname(uriToFilePath(uri)), pnpSettings).then((s) => s || defaultConfig);
+    return searchForConfig(uri.toString(), pnpSettings).then((s) => s || defaultConfig);
 }
 
 function mapSug(sug: ExtendedSuggestion | SuggestionResult): SuggestionResult {
@@ -486,3 +520,12 @@ export async function shouldCheckDocument(
 export const __testing__ = {
     sanitizeSuggestion,
 };
+
+function recordPerfTime(timings: PerfTimings, name: string): () => void {
+    const timer = createPerfTimer(name, (elapsed) => (timings[name] = elapsed));
+    return () => timer.end();
+}
+
+function timePromise<T>(timings: PerfTimings, name: string, p: Promise<T>): Promise<T> {
+    return p.finally(recordPerfTime(timings, name));
+}

@@ -8,6 +8,7 @@ export type Report = {
     errors: string[];
     summary: Summary;
     repository: Repository | undefined;
+    issuesSummary: IssueSummary[];
 };
 
 export interface Summary {
@@ -15,6 +16,13 @@ export interface Summary {
     filesWithIssues: number;
     issues: number;
     errors: number;
+}
+
+export interface IssueSummary {
+    text: string;
+    isFlagged?: boolean | undefined;
+    count: number;
+    files: number;
 }
 
 type SortedFileIssues = FileIssue[];
@@ -27,6 +35,7 @@ export interface ReportData {
     root: Uri;
     runResult: RunResult;
     repository: Repository | undefined;
+    issuesSummary?: IssueSummary[] | undefined;
 }
 
 const compare = new Intl.Collator().compare;
@@ -61,6 +70,7 @@ export function generateReport(data: ReportData): Report {
 
     const base: SortedFileIssues = [];
     const fileIssues: SortedFileIssues = base.concat(...issuesByFile);
+    const issuesSummary = [...(data.issuesSummary || [])].sort((a, b) => compare(a.text, b.text));
 
     return {
         fileIssues,
@@ -72,6 +82,7 @@ export function generateReport(data: ReportData): Report {
             errors: runResult.errors,
         },
         repository: data.repository,
+        issuesSummary,
     };
 }
 

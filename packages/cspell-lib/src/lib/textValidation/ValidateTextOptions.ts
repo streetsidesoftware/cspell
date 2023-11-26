@@ -13,4 +13,9 @@ export interface ValidateTextOptions {
      * Verify that the in-document directives are correct.
      */
     validateDirectives?: boolean;
+    /**
+     * Skips spell checking the document. Useful for testing and dry runs.
+     * It will read the configuration and parse the document.
+     */
+    skipValidation?: boolean;
 }

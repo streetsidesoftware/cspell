@@ -159,27 +159,35 @@ export function commandLint(prog: Command): Command {
         )
         .option('--debug', 'Output information useful for debugging cspell.json files.')
         .option('--reporter <module|path>', 'Specify one or more reporters to use.', collect)
+        .addOption(
+            new CommanderOption('--skip-validation', 'Collect and process documents, but do not spell check.')
+                .implies({ cache: false })
+                .hideHelp(),
+        )
+        .addOption(new CommanderOption('--issues-summary-report', 'Output a summary of issues found.').hideHelp())
         .usage(usage)
         .addHelpText('after', advanced)
         .arguments('[globs...]')
-        .action((fileGlobs: string[], options: LinterCliOptions) => {
+        .action(async (fileGlobs: string[], options: LinterCliOptions) => {
             const useExitCode = options.exitCode ?? true;
+            if (options.skipValidation) {
+                options.cache = false;
+            }
             App.parseApplicationFeatureFlags(options.flag);
             const { mustFindFiles, fileList } = options;
-            return App.lint(fileGlobs, options).then((result) => {
-                if (!fileGlobs.length && !result.files && !result.errors && !fileList) {
-                    spellCheckCommand.outputHelp();
-                    throw new CheckFailed('outputHelp', 1);
-                }
-                if (result.errors || (mustFindFiles && !result.files)) {
-                    throw new CheckFailed('check failed', 1);
-                }
-                if (result.issues) {
-                    const exitCode = useExitCode ? 1 : 0;
-                    throw new CheckFailed('check failed', exitCode);
-                }
-                return;
-            });
+            const result = await App.lint(fileGlobs, options);
+            if (!fileGlobs.length && !result.files && !result.errors && !fileList) {
+                spellCheckCommand.outputHelp();
+                throw new CheckFailed('outputHelp', 1);
+            }
+            if (result.errors || (mustFindFiles && !result.files)) {
+                throw new CheckFailed('check failed', 1);
+            }
+            if (result.issues) {
+                const exitCode = useExitCode ? 1 : 0;
+                throw new CheckFailed('check failed', exitCode);
+            }
+            return;
         });
 
     return spellCheckCommand;

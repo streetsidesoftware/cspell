@@ -178,12 +178,19 @@ export async function runLint(cfg: LintRequest): Promise<RunResult> {
             MessageTypes.Info,
         );
         try {
-            const { showSuggestions: generateSuggestions, validateDirectives } = cfg.options;
+            const { showSuggestions: generateSuggestions, validateDirectives, skipValidation } = cfg.options;
             const numSuggestions = configInfo.config.numSuggestions ?? 5;
-            const validateOptions = util.clean({ generateSuggestions, numSuggestions, validateDirectives });
+            const validateOptions = util.clean({
+                generateSuggestions,
+                numSuggestions,
+                validateDirectives,
+                skipValidation,
+            });
             const r = await spellCheckDocument(doc, validateOptions, configInfo.config);
+            // console.warn('filename: %o %o', path.relative(process.cwd(), filename), r.perf);
             spellResult = r;
             result.processed = r.checked;
+            result.perf = r.perf ? { ...r.perf } : undefined;
             result.issues = cspellText.calculateTextDocumentOffsets(doc.uri, text, r.issues).map(mapIssue);
         } catch (e) {
             reporter.error(`Failed to process "${filename}"`, toError(e));
@@ -195,10 +202,12 @@ export async function runLint(cfg: LintRequest): Promise<RunResult> {
 
         result.configErrors += await reportConfigurationErrors(config);
 
-        const elapsed = result.elapsedTimeMs / 1000.0;
+        const elapsed = result.elapsedTimeMs;
         const dictionaries = config.dictionaries || [];
         reporter.info(
-            `Checked: ${filename}, File type: ${config.languageId}, Language: ${config.language} ... Issues: ${result.issues.length} ${elapsed}S`,
+            `Checked: ${filename}, File type: ${config.languageId}, Language: ${config.language} ... Issues: ${
+                result.issues.length
+            } ${elapsed.toFixed(2)}ms`,
             MessageTypes.Info,
         );
         reporter.info(`Config file Used: ${spellResult.localConfigFilepath || configInfo.source}`, MessageTypes.Info);
@@ -313,8 +322,19 @@ export async function runLint(cfg: LintRequest): Promise<RunResult> {
             } else {
                 for (const pf of prefetchFiles(files)) {
                     await pf.result;
-                    yield await processPrefetchFileResult(pf, ++i);
+                    yield processPrefetchFileResult(pf, ++i);
                 }
+                // const iter = prefetchIterable(
+                //     pipe(
+                //         prefetchFiles(files),
+                //         opMap(async (pf) => {
+                //             return processPrefetchFileResult(pf, ++i);
+                //         }),
+                //     ),
+                //     BATCH_SIZE,
+                // );
+
+                // yield* iter;
             }
         }
 

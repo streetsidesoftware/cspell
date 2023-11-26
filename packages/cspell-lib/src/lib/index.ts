@@ -17,7 +17,6 @@ export { createTextDocument, updateTextDocument } from './Models/TextDocument.js
 export {
     calcOverrideSettings,
     checkFilenameMatchesGlob,
-    clearCachedSettingsFiles,
     type ConfigurationDependencies,
     currentSettingsFileVersion,
     defaultConfigFilenames,
@@ -30,6 +29,7 @@ export {
     getDefaultBundledSettingsAsync,
     getDefaultSettings,
     getGlobalSettings,
+    getGlobalSettingsAsync,
     getSources,
     ImportError,
     type ImportFileRefWithError,
@@ -98,5 +98,7 @@ export {
 } from 'cspell-io';
 export { Link, Text };
 export { ExclusionHelper };
-export { clearCachedFiles } from './clearCachedFiles.js';
+export { clearCachedFiles, clearCaches } from './clearCachedFiles.js';
 export { getDictionary } from './getDictionary.js';
+export type { PerfTimer } from './perf/index.js';
+export { createPerfTimer } from './perf/index.js';

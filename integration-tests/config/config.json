@@ -323,7 +323,9 @@
       "path": "eslint/eslint",
       "url": "https://github.com/eslint/eslint",
       "args": [
-        "**",
+        ".",
+        "--config=../../../config/eslint/cspell.config.yaml",
+        "--issues-summary-report",
         "--exclude=bin/**",
         "--exclude=CHANGELOG.md",
         "--exclude=_data",
