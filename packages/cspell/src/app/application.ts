@@ -4,7 +4,7 @@ import type { CheckTextInfo, FeatureFlags, SuggestionsForWordResult, TraceResult
 import {
     checkTextDocument,
     getDefaultSettings,
-    getGlobalSettings,
+    getGlobalSettingsAsync,
     mergeSettings,
     SuggestionError,
     suggestionsForWords,
