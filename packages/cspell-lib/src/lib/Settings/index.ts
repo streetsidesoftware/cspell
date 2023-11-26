@@ -6,6 +6,7 @@ export {
     extractImportErrors,
     getCachedFileSize,
     getGlobalSettings,
+    getGlobalSettingsAsync,
     loadConfig,
     loadPnP,
     loadPnPSync,

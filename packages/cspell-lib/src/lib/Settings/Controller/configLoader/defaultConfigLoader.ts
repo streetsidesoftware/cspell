@@ -42,8 +42,20 @@ export async function readConfigFile(filename: string | URL, relativeTo?: string
     return result;
 }
 
+/**
+ * Might throw if the settings have not yet been loaded.
+ * @deprecated use {@link getGlobalSettingsAsync} instead.
+ */
 export function getGlobalSettings(): CSpellSettingsI {
     return gcl().getGlobalSettings();
+}
+
+/**
+ * Loads and caches the global settings.
+ * @returns - global settings
+ */
+export function getGlobalSettingsAsync(): Promise<CSpellSettingsI> {
+    return gcl().getGlobalSettingsAsync();
 }
 
 export function getCachedFileSize(): number {

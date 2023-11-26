@@ -12,6 +12,7 @@ export {
     clearCachedSettingsFiles,
     getCachedFileSize,
     getGlobalSettings,
+    getGlobalSettingsAsync,
     loadConfig,
     readRawSettings,
     searchForConfig,

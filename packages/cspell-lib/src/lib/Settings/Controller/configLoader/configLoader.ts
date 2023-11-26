@@ -7,6 +7,7 @@ import { getDefaultCSpellIO } from 'cspell-io';
 import * as path from 'path';
 import { fileURLToPath } from 'url';
 
+import { onClearCache } from '../../../events/index.js';
 import { createCSpellSettingsInternal as csi } from '../../../Models/CSpellSettingsInternalDef.js';
 import { AutoResolveCache } from '../../../util/AutoResolve.js';
 import { logError, logWarning } from '../../../util/logger.js';
@@ -40,7 +41,6 @@ import {
 import type { PnPSettingsOptional } from './PnPSettings.js';
 import { defaultPnPSettings, normalizePnPSettings } from './PnPSettings.js';
 import type { CSpellSettingsI, CSpellSettingsWST } from './types.js';
-import { c } from 'vitest/dist/reporters-5f784f42.js';
 
 type CSpellSettingsVersion = Exclude<CSpellUserSettings['version'], undefined>;
 const supportedCSpellConfigVersions: CSpellSettingsVersion[] = [configSettingsFileVersion0_2];
@@ -91,6 +91,11 @@ export class ConfigLoader {
             () => undefined,
             (e) => logError(e),
         );
+        this.subscribeToEvents();
+    }
+
+    private subscribeToEvents() {
+        this.toDispose.push(onClearCache(() => this.clearCachedSettingsFiles()));
     }
 
     protected cachedConfig = new Map<string, ImportedConfigEntry>();
@@ -100,6 +105,8 @@ export class ConfigLoader {
     protected globalSettings: CSpellSettingsI | undefined;
     protected cspellConfigFileReaderWriter: CSpellConfigFileReaderWriter;
     protected configSearch = new ConfigSearch(searchPlaces);
+
+    protected toDispose: { dispose: () => void }[] = [];
 
     public async readSettingsAsync(
         filename: string | URL,
@@ -388,6 +395,16 @@ export class ConfigLoader {
 
     createCSpellConfigFile(filename: URL | string, settings: CSpellUserSettings): CSpellConfigFile {
         return new CSpellConfigFileInMemory(this.cspellIO.toFileURL(filename), settings);
+    }
+
+    dispose() {
+        while (this.toDispose.length) {
+            try {
+                this.toDispose.pop()?.dispose();
+            } catch (e) {
+                logError(e);
+            }
+        }
     }
 }
 
