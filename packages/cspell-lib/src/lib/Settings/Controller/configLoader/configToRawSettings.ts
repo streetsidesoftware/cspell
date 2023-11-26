@@ -2,7 +2,6 @@ import type { ImportFileRef, Source } from '@cspell/cspell-types';
 import type { CSpellConfigFile } from 'cspell-config-lib';
 
 import { toFilePathOrHref } from '../../../util/url.js';
-import { urlToSimpleId } from './configLoader.js';
 import { normalizeImport, normalizeRawConfig } from './normalizeRawSettings.js';
 import type { CSpellSettingsWST } from './types.js';
 
@@ -40,4 +39,8 @@ export function configToRawSettings(cfgFile: CSpellConfigFile | undefined): CSpe
     rawSettings.name = cfgFile.settings.name || name;
 
     return rawSettings;
+}
+
+function urlToSimpleId(url: URL): string {
+    return url.pathname.split('/').slice(-2).join('/');
 }

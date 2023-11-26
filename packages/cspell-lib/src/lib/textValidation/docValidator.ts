@@ -10,7 +10,6 @@ import type {
 import { IssueType } from '@cspell/cspell-types';
 import assert from 'assert';
 import { GlobMatcher } from 'cspell-glob';
-import path from 'path';
 
 import type { CSpellSettingsInternal, CSpellSettingsInternalFinalized } from '../Models/CSpellSettingsInternalDef.js';
 import type { ExtendedSuggestion } from '../Models/Suggestion.js';

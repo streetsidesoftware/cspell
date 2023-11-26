@@ -522,10 +522,6 @@ function createIO(cspellIO: CSpellIO): IO {
     };
 }
 
-export function urlToSimpleId(url: URL): string {
-    return url.pathname.split('/').slice(-2).join('/');
-}
-
 export const __testing__ = {
     getDefaultConfigLoaderInternal,
     normalizeCacheSettings,
