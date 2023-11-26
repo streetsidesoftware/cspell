@@ -34,7 +34,8 @@ export class LintRequest {
         this.excludes = calcExcludeGlobInfo(this.root, options.exclude);
         this.locale = options.locale || '';
         this.enableGlobDot = options.dot;
-        this.uniqueFilter = options.unique ? util.uniqueFilterFnGenerator((issue: Issue) => issue.text) : () => true;
+        // this.uniqueFilter = options.unique ? util.uniqueFilterFnGenerator((issue: Issue) => issue.text) : () => true;
+        this.uniqueFilter = () => true;
         this.showContext =
             options.showContext === true ? defaultContextRange : options.showContext ? options.showContext : 0;
         this.fileLists = (options.fileList ?? options.fileLists) || [];

@@ -29,5 +29,17 @@ export function stringify(report: Report): string {
         defaultKeyType: 'PLAIN',
         doubleQuotedAsJSON: true,
     });
-    return [header, issues].join('\n');
+
+    const issuesSummary = report.issuesSummary?.length
+        ? stringifyYaml(
+              {
+                  issuesSummary: report.issuesSummary.map((issue) =>
+                      stringifyYaml(issue).replace(/\n/g, ', ').replace(/\s+/g, ' ').trim(),
+                  ),
+              },
+              { lineWidth: 200 },
+          )
+        : '';
+
+    return [header, issues, issuesSummary].filter((a) => !!a).join('\n');
 }

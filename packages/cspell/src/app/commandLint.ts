@@ -164,6 +164,7 @@ export function commandLint(prog: Command): Command {
                 .implies({ cache: false })
                 .hideHelp(),
         )
+        .addOption(new CommanderOption('--issues-summary-report', 'Output a summary of issues found.').hideHelp())
         .usage(usage)
         .addHelpText('after', advanced)
         .arguments('[globs...]')

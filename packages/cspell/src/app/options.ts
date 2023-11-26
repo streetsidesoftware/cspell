@@ -203,6 +203,11 @@ export interface LinterCliOptions extends LinterOptions {
      * Files must be found or cli will exit with an error.
      */
     mustFindFiles?: boolean;
+
+    /**
+     * Generate a summary report of issues.
+     */
+    issuesSummaryReport?: boolean;
 }
 
 export function fixLegacy<T extends BaseOptions>(opts: T & LegacyOptions): Omit<T & LegacyOptions, 'local'> {

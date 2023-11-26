@@ -33,7 +33,7 @@ export function lint(fileGlobs: string[], options: LinterCliOptions, reporter?: 
     const cfg = new LintRequest(
         fileGlobs,
         options,
-        finalizeReporter(reporter) ?? getReporter({ ...options, fileGlobs }),
+        finalizeReporter(reporter) ?? getReporter({ ...options, fileGlobs }, options),
     );
     return runLint(cfg);
 }
