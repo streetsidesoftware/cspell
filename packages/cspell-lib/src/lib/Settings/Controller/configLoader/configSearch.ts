@@ -112,12 +112,20 @@ export class ConfigSearch {
             const found = await hasFile(file);
             if (found) {
                 if (path.basename(file) !== 'package.json') return file;
-                const content = await readFile(file, 'utf8');
-                const pkg = JSON.parse(content);
-                if (typeof pkg.cspell === 'object') return file;
+                if (await checkPackageJson(file)) return file;
             }
         }
         return undefined;
+    }
+}
+
+async function checkPackageJson(filename: string): Promise<boolean> {
+    try {
+        const content = await readFile(filename, 'utf8');
+        const pkg = JSON.parse(content);
+        return typeof pkg.cspell === 'object';
+    } catch (e) {
+        return false;
     }
 }
 
