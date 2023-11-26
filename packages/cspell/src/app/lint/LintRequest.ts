@@ -5,7 +5,6 @@ import type { LinterOptions } from '../options.js';
 import type { GlobSrcInfo } from '../util/glob.js';
 import { calcExcludeGlobInfo } from '../util/glob.js';
 import type { FinalizedReporter } from '../util/reporters.js';
-import * as util from '../util/util.js';
 
 const defaultContextRange = 20;
 
