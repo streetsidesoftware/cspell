@@ -2,15 +2,14 @@ import { opConcatMap, opMap, pipeSync } from '@cspell/cspell-pipe/sync';
 import type {
     CSpellSettingsWithSourceTrace,
     CSpellUserSettings,
-    Glob,
     MappedText,
     ParsedText,
     PnPSettings,
 } from '@cspell/cspell-types';
 import { IssueType } from '@cspell/cspell-types';
 import assert from 'assert';
-import { GlobMatcher } from 'cspell-glob';
 
+import { getGlobMatcherForExcluding } from '../globs/getGlobMatcher.js';
 import type { CSpellSettingsInternal, CSpellSettingsInternalFinalized } from '../Models/CSpellSettingsInternalDef.js';
 import type { ExtendedSuggestion } from '../Models/Suggestion.js';
 import type { TextDocument, TextDocumentLine, TextDocumentRef } from '../Models/TextDocument.js';
@@ -25,7 +24,6 @@ import { getDictionaryInternal, getDictionaryInternalSync } from '../SpellingDic
 import type { WordSuggestion } from '../suggestions.js';
 import { calcSuggestionAdjustedToToMatchCase } from '../suggestions.js';
 import { catchPromiseError, toError } from '../util/errors.js';
-import { memorizeLastCall } from '../util/memorizeLastCall.js';
 import { AutoCache } from '../util/simpleCache.js';
 import type { MatchRange } from '../util/TextRange.js';
 import { uriToFilePath } from '../util/Uri.js';
@@ -135,7 +133,7 @@ export class DocumentValidator {
         const dict = await timePromise(this.perfTiming, '_getDictionaryInternal', getDictionaryInternal(docSettings));
 
         const recGlobMatcherTime = recordPerfTime(this.perfTiming, '_GlobMatcher');
-        const matcher = DocumentValidator.getGlobMatcher(localConfig?.ignorePaths);
+        const matcher = getGlobMatcherForExcluding(localConfig?.ignorePaths);
         const uri = this._document.uri;
         recGlobMatcherTime();
         const recShouldCheckTime = recordPerfTime(this.perfTiming, '_shouldCheck');
@@ -430,12 +428,6 @@ export class DocumentValidator {
     public _getPreparations(): Preparations | undefined {
         return this._preparations;
     }
-
-    private static getGlobMatcher = memorizeLastCall(DocumentValidator._getGlobMatcher);
-
-    private static _getGlobMatcher(ignorePaths: Glob[] | undefined): GlobMatcher {
-        return new GlobMatcher(ignorePaths || [], { root: process.cwd(), dot: true });
-    }
 }
 
 function sanitizeSuggestion(sug: WordSuggestion): ExtendedSuggestion {
@@ -508,7 +500,7 @@ export async function shouldCheckDocument(
         addPossibleError(localConfig?.__importRef?.error);
 
         const config = mergeSettings(settings, localConfig);
-        const matcher = new GlobMatcher(localConfig?.ignorePaths || [], { root: process.cwd(), dot: true });
+        const matcher = getGlobMatcherForExcluding(localConfig?.ignorePaths);
         const docSettings = await determineTextDocumentSettings(doc, config);
         const uri = doc.uri;
         return !matcher.match(uriToFilePath(uri)) && (docSettings.enabled ?? true);

@@ -19,7 +19,9 @@ import {
     readSettingsFiles,
 } from './Controller/configLoader/index.js';
 import type { CSpellSettingsWST } from './Controller/configLoader/types.js';
-import { calcOverrideSettings, checkFilenameMatchesGlob, getSources, mergeSettings } from './CSpellSettingsServer.js';
+import { getSources, mergeSettings } from './CSpellSettingsServer.js';
+import { calcOverrideSettings } from './calcOverrideSettings.js';
+import { checkFilenameMatchesGlob } from './checkFilenameMatchesGlob.js';
 import { _defaultSettings, getDefaultBundledSettingsAsync } from './DefaultSettings.js';
 
 const samplesDir = pathPackageSamples;

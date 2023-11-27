@@ -207,13 +207,22 @@ function buildMatcherFn(patterns: GlobPatternWithRoot[], options: NormalizedGlob
             const isNeg = (matchNeg && matchNeg[0].length & 1 && true) || false;
             const reg = mm.makeRe(glob, makeReOptions);
             const fn = (filename: string) => {
-                const match = filename.match(reg);
-                return !!match;
+                reg.lastIndex = 0;
+                return reg.test(filename);
             };
             return { pattern, index, isNeg, fn, reg };
         });
     const negRules = rules.filter((r) => r.isNeg);
     const posRules = rules.filter((r) => !r.isNeg);
+
+    // const negRegEx = negRules.map((r) => r.reg).map((r) => r.toString());
+    // const posRegEx = posRules.map((r) => r.reg).map((r) => r.toString());
+
+    // console.error('buildMatcherFn %o', { negRegEx, posRegEx, stack: new Error().stack });
+
+    // const negReg = joinRegExp(negRegEx);
+    // const posReg = joinRegExp(posRegEx);
+
     const fn: GlobMatchFn = (filename: string) => {
         filename = path.resolve(path.normalize(filename));
 
@@ -244,3 +253,11 @@ function buildMatcherFn(patterns: GlobPatternWithRoot[], options: NormalizedGlob
     };
     return fn;
 }
+
+// function _joinRegExp(patterns: RegExp[]): RegExp | undefined {
+//     if (!patterns.length) {
+//         return undefined;
+//     }
+//     const joined = patterns.map((p) => `(?:${p.source})`).join('|');
+//     return new RegExp(joined);
+// }

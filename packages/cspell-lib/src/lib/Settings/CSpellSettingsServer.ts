@@ -2,14 +2,12 @@ import type {
     AdvancedCSpellSettingsWithSourceTrace,
     CSpellSettingsWithSourceTrace,
     CSpellUserSettings,
-    Glob,
     ImportFileRef,
     Parser,
     Plugin,
     Source,
 } from '@cspell/cspell-types';
 import assert from 'assert';
-import { GlobMatcher } from 'cspell-glob';
 import { pathToFileURL } from 'url';
 
 import type { CSpellSettingsInternal, CSpellSettingsInternalFinalized } from '../Models/CSpellSettingsInternalDef.js';
@@ -20,44 +18,12 @@ import { toFileUrl } from '../util/url.js';
 import * as util from '../util/util.js';
 import { configSettingsFileVersion0_1, ENV_CSPELL_GLOB_ROOT } from './constants.js';
 import { calcDictionaryDefsToLoad, mapDictDefsToInternal } from './DictionarySettings.js';
+import { mergeList, mergeListUnique } from './mergeList.js';
 import { resolvePatterns } from './patterns.js';
 
 type CSpellSettingsWST = AdvancedCSpellSettingsWithSourceTrace;
-type CSpellSettingsWSTO = OptionalOrUndefined<AdvancedCSpellSettingsWithSourceTrace>;
-type CSpellSettingsI = CSpellSettingsInternal;
-
-/**
- * Merges two lists and removes duplicates.  Order is NOT preserved.
- */
-function mergeListUnique(left: undefined, right: undefined): undefined;
-function mergeListUnique<T>(left: T[], right: T[]): T[];
-function mergeListUnique<T>(left: undefined, right: T[]): T[];
-function mergeListUnique<T>(left: T[], right: undefined): T[];
-function mergeListUnique<T>(left: T[] | undefined, right: T[] | undefined): T[] | undefined;
-function mergeListUnique<T>(left: T[] | undefined, right: T[] | undefined): T[] | undefined {
-    if (!Array.isArray(left)) return Array.isArray(right) ? right : undefined;
-    if (!Array.isArray(right)) return left;
-    if (!right.length) return left;
-    if (!left.length) return right;
-    return [...new Set([...left, ...right])];
-}
-
-/**
- * Merges two lists.
- * Order is preserved.
- */
-function mergeList(left: undefined, right: undefined): undefined;
-function mergeList<T>(left: T[], right: T[]): T[];
-function mergeList<T>(left: undefined, right: T[]): T[];
-function mergeList<T>(left: T[], right: undefined): T[];
-function mergeList<T>(left: T[] | undefined, right: T[] | undefined): T[] | undefined;
-function mergeList<T>(left: T[] | undefined, right: T[] | undefined): T[] | undefined {
-    if (!Array.isArray(left)) return Array.isArray(right) ? right : undefined;
-    if (!Array.isArray(right)) return left;
-    if (!left.length) return right;
-    if (!right.length) return left;
-    return left.concat(right);
-}
+export type CSpellSettingsWSTO = OptionalOrUndefined<AdvancedCSpellSettingsWithSourceTrace>;
+export type CSpellSettingsI = CSpellSettingsInternal;
 
 const emptyWords: string[] = [];
 Object.freeze(emptyWords);
@@ -262,16 +228,6 @@ function takeRightOtherwiseLeft<T>(left: T[] | undefined, right: T[] | undefined
     return left || right;
 }
 
-export function calcOverrideSettings(settings: CSpellSettingsWSTO, filename: string): CSpellSettingsI {
-    const _settings = toInternalSettings(settings);
-    const overrides = _settings.overrides || [];
-
-    const result = overrides
-        .filter((override) => checkFilenameMatchesGlob(filename, override.filename))
-        .reduce((settings, override) => mergeSettings(settings, override), _settings);
-    return result;
-}
-
 /**
  *
  * @param settings - settings to finalize
@@ -318,18 +274,6 @@ function _toInternalSettings(settings: CSpellSettingsI | CSpellSettingsWSTO): CS
     );
     const setting = dictionaryDefinitions ? { ...rest, dictionaryDefinitions } : rest;
     return csi(setting);
-}
-
-/**
- * @param filename - filename
- * @param globs - globs
- * @returns true if it matches
- * @deprecated true
- * @deprecationMessage No longer actively supported. Use package: `cspell-glob`.
- */
-export function checkFilenameMatchesGlob(filename: string, globs: Glob | Glob[]): boolean {
-    const m = new GlobMatcher(globs);
-    return m.match(filename);
 }
 
 function mergeSources(left: CSpellSettingsWSTO, right: CSpellSettingsWSTO): Source {

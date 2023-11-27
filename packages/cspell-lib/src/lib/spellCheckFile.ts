@@ -119,17 +119,17 @@ async function spellCheckFullDocument(
     options: SpellCheckFileOptions,
     settings: CSpellUserSettings,
 ): Promise<SpellCheckFileResult> {
-    // if (options.skipValidation) {
-    //     return {
-    //         document,
-    //         options,
-    //         settingsUsed: settings,
-    //         localConfigFilepath: undefined,
-    //         issues: [],
-    //         checked: true,
-    //         errors: undefined,
-    //     };
-    // }
+    if (options.skipValidation) {
+        return {
+            document,
+            options,
+            settingsUsed: settings,
+            localConfigFilepath: undefined,
+            issues: [],
+            checked: true,
+            errors: undefined,
+        };
+    }
 
     const perf: SpellCheckFilePerf = {};
     const timer = createPerfTimer('spellCheckFullDocument', (elapsed) => (perf.totalTimeMs = elapsed));
