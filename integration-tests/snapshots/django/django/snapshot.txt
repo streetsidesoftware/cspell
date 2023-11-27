@@ -3,7 +3,7 @@ Repository: django/django
 Url: "https://github.com/django/django.git"
 Args: ["**/*.{md,py}"]
 Lines:
- CSpell: Files checked: 2773, Issues found: 8117 in 924 files
+ CSpell: Files checked: 2774, Issues found: 8117 in 924 files
  exit code: 1
 ./django/__init__.py:12:26     - Unknown word (urlresolvers) -- Set the thread-local urlresolvers script prefix if `set
 ./django/apps/registry.py:134:40    - Unknown word (unconfigured) -- not ready" is due to unconfigured settings, accessing
@@ -161,7 +161,6 @@ Lines:
 ./django/contrib/auth/hashers.py:588:13    - Unknown word (dklen)      -- dklen=64,
 ./django/contrib/auth/middleware.py:17:11     - Unknown word (auser)      -- async def auser(request):
 ./django/contrib/auth/middleware.py:18:31     - Unknown word (acached)    -- not hasattr(request, "_acached_user"):
-./django/contrib/auth/models.py:11:19     - Unknown word (itercompat) -- from django.utils.itercompat import is_iterable
 ./django/contrib/auth/urls.py:27:17     - Unknown word (uidb)       -- "reset/<uidb64>/<token>/",
 ./django/contrib/auth/views.py:286:28    - Unknown word (Referer)    -- # HTTP Referer header.
 ./django/contrib/contenttypes/admin.py:25:9      - Unknown word (gfks)       -- gfks = [
@@ -614,10 +613,10 @@ Lines:
 ./django/db/backends/sqlite3/introspection.py:37:10     - Unknown word (smallinteger) -- "smallinteger": "SmallIntegerField
 ./django/db/backends/sqlite3/introspection.py:94:27     - Unknown word (xinfo)        -- "PRAGMA table_xinfo(%s)" % self.connection
 ./django/db/backends/sqlite3/operations.py:97:28     - Unknown word (tznames)    -- *self._convert_tznames_to_sql(tzname),
-./django/db/backends/sqlite3/schema.py:244:41    - Unknown word (autom)      -- model(model, handle_autom2m=False)
+./django/db/backends/sqlite3/schema.py:245:41    - Unknown word (autom)      -- model(model, handle_autom2m=False)
 ./django/db/backends/utils.py:22:73     - Unknown word (nextset)    -- fetchmany", "fetchall", "nextset"])
 ./django/db/backends/utils.py:320:23    - Unknown word (getcontext) -- context = decimal.getcontext().copy()
-./django/db/migrations/autodetector.py:697:30    - Unknown word (opns)       -- # Generate other opns
+./django/db/migrations/autodetector.py:770:30    - Unknown word (opns)       -- # Generate other opns
 ./django/db/migrations/migration.py:131:26    - Unknown word (behaviour)  -- # Normal behaviour
 ./django/db/migrations/operations/base.py:32:5      - Unknown word (elidable)   -- elidable = False
 ./django/db/migrations/operations/models.py:104:25    - Unknown word (smodel)     -- return "Create %smodel %s" % (
@@ -631,7 +630,7 @@ Lines:
 ./django/db/models/base.py:684:40    - Unknown word (attnames)      -- an iterable of field attnames. If fields is None,
 ./django/db/models/enums.py:32:17     - Unknown word (metacls)    -- def __new__(metacls, classname, bases, classdict
 ./django/db/models/expressions.py:278:47    - Unknown word (multijoins) -- of reusable joins for multijoins
-./django/db/models/fields/__init__.py:2844:11   - Unknown word (subclasscheck) -- def __subclasscheck__(self, subclass):
+./django/db/models/fields/__init__.py:2842:11   - Unknown word (subclasscheck) -- def __subclasscheck__(self, subclass):
 ./django/db/models/fields/__init__.py:525:76    - Unknown word (EXXX)       -- details.get("id", "fields.EXXX"),
 ./django/db/models/fields/__init__.py:536:79    - Unknown word (WXXX)       -- details.get("id", "fields.WXXX"),
 ./django/db/models/fields/json.py:314:7     - Unknown word (JSONI)      -- class JSONIContains(CaseInsensitiveMixin
@@ -703,12 +702,12 @@ Lines:
 ./django/forms/widgets.py:666:27    - Unknown word (sublabel)   -- for subvalue, sublabel in choices:
 ./django/forms/widgets.py:994:43    - Unknown word (splitdatetime) -- django/forms/widgets/splitdatetime.html"
 ./django/http/cookie.py:11:5      - Unknown word (cookiedict) -- cookiedict = {}
-./django/http/multipartparser.py:319:42    - Unknown word (unfixable)  -- # an unfixable error.
-./django/http/multipartparser.py:360:17    - Unknown word (shortcircuits) -- # any() shortcircuits if a handler's upload
-./django/http/multipartparser.py:511:64    - Unknown word (ungetting)     -- one chunk. If we keep ungetting the
-./django/http/multipartparser.py:704:33    - Unknown word (CRLFCRLF)      -- as throwing away the CRLFCRLF bytes from above.
-./django/http/multipartparser.py:708:5     - Unknown word (outdict)       -- outdict = {}
-./django/http/multipartparser.py:740:9     - Unknown word (boundarystream) -- boundarystream = InterBoundaryIter
+./django/http/multipartparser.py:320:42    - Unknown word (unfixable)  -- # an unfixable error.
+./django/http/multipartparser.py:361:17    - Unknown word (shortcircuits) -- # any() shortcircuits if a handler's upload
+./django/http/multipartparser.py:512:64    - Unknown word (ungetting)     -- one chunk. If we keep ungetting the
+./django/http/multipartparser.py:714:33    - Unknown word (CRLFCRLF)      -- as throwing away the CRLFCRLF bytes from above.
+./django/http/multipartparser.py:718:5     - Unknown word (outdict)       -- outdict = {}
+./django/http/multipartparser.py:750:9     - Unknown word (boundarystream) -- boundarystream = InterBoundaryIter
 ./django/http/request.py:212:44    - Unknown word (schemeless) -- an absolute url (but schemeless and domainless) for
 ./django/http/request.py:212:59    - Unknown word (domainless) -- (but schemeless and domainless) for the
 ./django/http/request.py:690:66    - Unknown word (codepoint)  -- with Unicode "unknown" codepoint
@@ -750,9 +749,9 @@ Lines:
 ./django/template/response.py:116:17    - Unknown word (newretval)  -- newretval = post_callback(retval
 ./django/templatetags/tz.py:14:7      - Unknown word (datetimeobject) -- class datetimeobject(datetime):
 ./django/templatetags/tz.py:56:32     - Unknown word (exceptionsm)    -- Filters must never raise exceptionsm, so catch everything
-./django/test/client.py:1353:36   - Unknown word (ahandle)    -- response = await self._ahandle_redirects(
-./django/test/client.py:757:15    - Unknown word (asession)   -- async def asession(self):
-./django/test/client.py:791:15    - Unknown word (aforce)     -- async def aforce_login(self, user, backend
+./django/test/client.py:1488:36   - Unknown word (ahandle)    -- response = await self._ahandle_redirects(
+./django/test/client.py:819:15    - Unknown word (asession)   -- async def asession(self):
+./django/test/client.py:853:15    - Unknown word (aforce)     -- async def aforce_login(self, user, backend
 ./django/test/html.py:18:6      - Unknown word (autoplay)   -- "autoplay",
 ./django/test/html.py:211:40    - Unknown word (getpos)         -- HTMLParseError(msg, self.getpos())
 ./django/test/html.py:24:6      - Unknown word (formnovalidate) -- "formnovalidate",
@@ -813,6 +812,7 @@ Lines:
 ./django/utils/http.py:314:6     - Unknown word (parseparam)      -- def _parseparam(s):
 ./django/utils/http.py:94:38     - Unknown word (usegmt)     -- formatdate(epoch_seconds, usegmt=True)
 ./django/utils/ipv6.py:16:31     - Unknown word (hextets)    -- zeroes, and make sure all hextets are lowercase.
+./django/utils/itercompat.py:11:23     - Unknown word (itercompat) -- "django.utils.itercompat.is_iterable() is deprecated
 ./django/utils/jslex.py:103:14    - Unknown word (linecomment) -- Tok("linecomment", r"//.*?$"),
 ./django/utils/jslex.py:111:62    - Unknown word (instanceof)  -- function if import in instanceof
 ./django/utils/jslex.py:129:14    - Unknown word (onum)        -- Tok("onum", r"0[0-7]+"),
@@ -1586,7 +1586,7 @@ Lines:
 ./tests/expressions/tests.py:307:36    - Unknown word (Funcs)      -- should be able to use Funcs when inserting new data
 ./tests/expressions/tests.py:447:9     - Unknown word (mustermanns) -- mustermanns_by_seniority = Employee
 ./tests/expressions_case/tests.py:473:44    - Unknown word (somecase)   -- aseTestModel.objects.annotate(somecase=SOME_CASE).order_by
-./tests/expressions_window/tests.py:1719:60   - Unknown word (Nowak)      -- department": "IT", "name": "Nowak", "salary": 32000})
+./tests/expressions_window/tests.py:1721:60   - Unknown word (Nowak)      -- department": "IT", "name": "Nowak", "salary": 32000})
 ./tests/expressions_window/tests.py:592:14    - Unknown word (cume)       -- def test_cume_dist(self):
 ./tests/expressions_window/tests.py:76:23     - Unknown word (Jenson)     -- ("Jenson", 45000, "Accounting
 ./tests/extra_regress/models.py:8:7       - Unknown word (Revisionable) -- class RevisionableModel(models.Model):
@@ -1598,9 +1598,9 @@ Lines:
 ./tests/file_storage/tests.py:685:60    - Unknown word (AUFS)       -- filename length (e.g. AUFS has 242).
 ./tests/file_storage/tests.py:691:23    - Unknown word (pathconf)   -- return os.pathconf(dir_to_test, "PC_NAME
 ./tests/file_storage/tests.py:807:31    - Unknown word (longext)    -- filename = "short.longext"
-./tests/file_uploads/tests.py:376:49    - Unknown word (monkeybusiness) -- uploader We have to do some monkeybusiness here to construct
-./tests/file_uploads/tests.py:606:14    - Unknown word (fileupload)     -- def test_fileupload_getlist(self):
-./tests/file_uploads/tests.py:634:14    - Unknown word (fileuploads)    -- def test_fileuploads_closed_at_request_end
+./tests/file_uploads/tests.py:377:49    - Unknown word (monkeybusiness) -- uploader We have to do some monkeybusiness here to construct
+./tests/file_uploads/tests.py:658:14    - Unknown word (fileupload)     -- def test_fileupload_getlist(self):
+./tests/file_uploads/tests.py:686:14    - Unknown word (fileuploads)    -- def test_fileuploads_closed_at_request_end
 ./tests/file_uploads/views.py:57:5      - Unknown word (largefile)  -- largefile = request.FILES["file
 ./tests/files/tests.py:172:25    - Unknown word (l'été)      -- content = "vive l'été\n"
 ./tests/files/tests.py:225:14    - Unknown word (noname)     -- def test_noname_file_default_name(self
@@ -2232,11 +2232,12 @@ Lines:
 ./tests/migrations/test_operations.py:5640:43   - Unknown word (iloveponiesonies)             -- assertNotIn((app_label, "iloveponiesonies"), new_state.models
 ./tests/migrations/test_operations.py:5677:20   - Unknown word (igfc)                         -- ("test_igfc_1", regular, generated
 ./tests/migrations/test_operations.py:5708:27   - Unknown word (igfpc)                        -- app_label = "test_igfpc"
-./tests/migrations/test_operations.py:5832:40   - Unknown word (crigsw)                       -- state_forwards("test_crigsw", new_state)
-./tests/migrations/test_operations.py:5853:63   - Unknown word (dligsw)                       -- make_test_state("test_dligsw", operation)
-./tests/migrations/test_operations.py:5877:63   - Unknown word (adfligsw)                     -- make_test_state("test_adfligsw", operation)
-./tests/migrations/test_operations.py:5900:63   - Unknown word (adinigsw)                     -- make_test_state("test_adinigsw", operation)
-./tests/migrations/test_operations.py:5913:63   - Unknown word (rminigsw)                     -- make_test_state("test_rminigsw", operation)
+./tests/migrations/test_operations.py:5806:27   - Unknown word (adfagf)                       -- app_label = "test_adfagf"
+./tests/migrations/test_operations.py:5868:40   - Unknown word (crigsw)                       -- state_forwards("test_crigsw", new_state)
+./tests/migrations/test_operations.py:5889:63   - Unknown word (dligsw)                       -- make_test_state("test_dligsw", operation)
+./tests/migrations/test_operations.py:5913:63   - Unknown word (adfligsw)                     -- make_test_state("test_adfligsw", operation)
+./tests/migrations/test_operations.py:5936:63   - Unknown word (adinigsw)                     -- make_test_state("test_adinigsw", operation)
+./tests/migrations/test_operations.py:5949:63   - Unknown word (rminigsw)                     -- make_test_state("test_rminigsw", operation)
 ./tests/migrations/test_operations.py:678:54    - Unknown word (cmoma)        -- up_test_model("test_cmoma")
 ./tests/migrations/test_operations.py:709:54    - Unknown word (dlmo)         -- up_test_model("test_dlmo")
 ./tests/migrations/test_operations.py:736:54    - Unknown word (dlprmo)       -- up_test_model("test_dlprmo", proxy_model=True)
@@ -2470,6 +2471,7 @@ Lines:
 ./tests/raw_query/tests.py:50:43     - Unknown word (Blakemore)  -- the adjoining Vale of Blakemore, or Blackmoor."
 ./tests/raw_query/tests.py:50:57     - Unknown word (Blackmoor)  -- Vale of Blakemore, or Blackmoor."
 ./tests/raw_query/tests.py:65:47     - Unknown word (dunkin)     -- objects.create(brand="dunkin doughnuts")
+./tests/requests_tests/tests.py:1016:17   - Unknown word (hostnames)         -- # Other hostnames raise a DisallowedHost
 ./tests/requests_tests/tests.py:217:41    - Unknown word (سلام)        -- PATH_INFO": wsgi_str("/سلام/"),
 ./tests/requests_tests/tests.py:262:59    - Unknown word (nefgh)       -- BytesIO(b"1234\n5678\nabcd\nefgh\nijkl"), 24)
 ./tests/requests_tests/tests.py:262:65    - Unknown word (nijkl)       -- 4\n5678\nabcd\nefgh\nijkl"), 24)
@@ -2479,16 +2481,15 @@ Lines:
 ./tests/requests_tests/tests.py:43:24     - Unknown word (Bsome)      -- expected = "/%3Bsome/%3Fawful/%3Dpath/foo
 ./tests/requests_tests/tests.py:43:32     - Unknown word (Fawful)     -- expected = "/%3Bsome/%3Fawful/%3Dpath/foo:bar/?;some
 ./tests/requests_tests/tests.py:43:41     - Unknown word (Dpath)      -- /%3Bsome/%3Fawful/%3Dpath/foo:bar/?;some=query
-./tests/requests_tests/tests.py:723:28    - Unknown word (Günter)      -- "Hello Günter",
-./tests/requests_tests/tests.py:741:61    - Unknown word (Œnter)       -- {"name": ["Hello GĂŒnter"]})
-./tests/requests_tests/tests.py:749:53    - Unknown word (Cnter)       -- "name=Hello%20G%C3%BCnter",
-./tests/requests_tests/tests.py:754:69    - Unknown word (nter)        -- "Hello G\u0102\u0152nter"]})
+./tests/requests_tests/tests.py:748:28    - Unknown word (Günter)      -- "Hello Günter",
 ./tests/requests_tests/tests.py:75:14     - Unknown word (wsgirequest) -- def test_wsgirequest(self):
-./tests/requests_tests/tests.py:796:25    - Unknown word (badpath)     -- "example.com:80/badpath",
-./tests/requests_tests/tests.py:797:23    - Unknown word (recovermypassword) -- "example.com: recovermypassword.com",
-./tests/requests_tests/tests.py:807:25    - Unknown word (feee)              -- "[2001:19f0:feee::dead:beef:cafe]",
-./tests/requests_tests/tests.py:809:15    - Unknown word (multitenant)       -- ".multitenant.com",
-./tests/requests_tests/tests.py:991:17    - Unknown word (hostnames)         -- # Other hostnames raise a DisallowedHost
+./tests/requests_tests/tests.py:766:61    - Unknown word (Œnter)       -- {"name": ["Hello GĂŒnter"]})
+./tests/requests_tests/tests.py:774:53    - Unknown word (Cnter)       -- "name=Hello%20G%C3%BCnter",
+./tests/requests_tests/tests.py:779:69    - Unknown word (nter)        -- "Hello G\u0102\u0152nter"]})
+./tests/requests_tests/tests.py:821:25    - Unknown word (badpath)     -- "example.com:80/badpath",
+./tests/requests_tests/tests.py:822:23    - Unknown word (recovermypassword) -- "example.com: recovermypassword.com",
+./tests/requests_tests/tests.py:832:25    - Unknown word (feee)              -- "[2001:19f0:feee::dead:beef:cafe]",
+./tests/requests_tests/tests.py:834:15    - Unknown word (multitenant)       -- ".multitenant.com",
 ./tests/responses/test_fileresponse.py:112:26    - Unknown word (nosuchfile) -- (__file__ + "nosuchfile", ["application/octet
 ./tests/responses/test_fileresponse.py:114:33    - Unknown word (pynosuchfile) -- ("test_fileresponse.pynosuchfile", ["application/octet
 ./tests/responses/test_fileresponse.py:237:16    - Unknown word (mkfifo)       -- os.mkfifo(pipe_file)
@@ -2498,10 +2499,10 @@ Lines:
 ./tests/responses/tests.py:164:19    - Unknown word (textiowrapper) -- def test_wrap_textiowrapper(self):
 ./tests/responses/tests.py:32:38     - Unknown word (qwer)       -- writelines(["asdf\n", "qwer\n"])
 ./tests/responses/tests.py:94:34     - Unknown word (J'attendrai) -- HttpResponse(status="J'attendrai")
-./tests/runtests.py:324:40    - Unknown word (finalizer)     -- multiprocessing.util finalizer that tries to remove
+./tests/runtests.py:325:40    - Unknown word (finalizer)     -- multiprocessing.util finalizer that tries to remove
 ./tests/runtests.py:51:8      - Unknown word (refcounting) -- # uses refcounting, garbage collection
 ./tests/runtests.py:53:58     - Unknown word (deallocations) -- of 700 allocations + deallocations without
-./tests/runtests.py:72:69     - Unknown word (coveragerc)    -- join(RUNTESTS_DIR, ".coveragerc")
+./tests/runtests.py:73:69     - Unknown word (coveragerc)    -- join(RUNTESTS_DIR, ".coveragerc")
 ./tests/schema/fields.py:104:17    - Unknown word (MEDIUMBLOB) -- return "MEDIUMBLOB"
 ./tests/schema/models.py:147:21    - Unknown word (INTEGERPK)  -- db_table = "INTEGERPK" # uppercase to ensure
 ./tests/schema/tests.py:1444:31   - Unknown word (charmodel)  -- self.assertIn("schema_charmodel_field_8b338dea_like
@@ -2732,13 +2733,13 @@ Lines:
 ./tests/template_tests/test_response.py:207:14    - Unknown word (repickling) -- def test_repickling(self):
 ./tests/template_tests/test_response.py:69:11     - Unknown word (rebaking)   -- # rebaking doesn't change the rendered
 ./tests/template_tests/urls.py:25:16     - Unknown word (Юникод)     -- re_path(r"^Юникод/(\w+)/$", views.client
-./tests/test_client/tests.py:1083:42   - Unknown word (faketoken)  -- authorization": "Bearer faketoken",
+./tests/test_client/tests.py:1113:42   - Unknown word (faketoken)  -- authorization": "Bearer faketoken",
 ./tests/test_client/tests.py:261:60    - Unknown word (Gladwell)   -- title><author>Malcolm Gladwell</author></book>
 ./tests/test_client/tests.py:659:45    - Unknown word (otheruser)  -- client.login(username="otheruser", password="nopassword
 ./tests/test_client/tests.py:659:67    - Unknown word (nopassword) -- otheruser", password="nopassword")
 ./tests/test_client/tests.py:876:49    - Unknown word (descript)   -- ValueError rather than a non-descript AssertionError.
-./tests/test_client_regress/tests.py:1226:22   - Unknown word (собака)         -- text = "dog: собака"
-./tests/test_client_regress/tests.py:1338:19   - Unknown word (numbytes)       -- def test_read_numbytes_from_empty_request(self
+./tests/test_client_regress/tests.py:1230:22   - Unknown word (собака)         -- text = "dog: собака"
+./tests/test_client_regress/tests.py:1342:19   - Unknown word (numbytes)       -- def test_read_numbytes_from_empty_request(self
 ./tests/test_client_regress/tests.py:200:15    - Unknown word (exceedes)   -- b"exceedes the max limit of truncation
 ./tests/test_client_regress/tests.py:492:10    - Unknown word (Redirections) -- "Redirections to self are caught and
 ./tests/test_client_regress/tests.py:727:63    - Unknown word (Slartibartfast) -- reverse("arg_view", args=["Slartibartfast"]))
@@ -2842,6 +2843,7 @@ Lines:
 ./tests/validation/test_picklable.py:7:7       - Unknown word (Pickable)   -- class PickableValidationErrorTestCase
 ./tests/validation/tests.py:104:57    - Unknown word (Kocherhans) -- create(name="Joseph Kocherhans")
 ./tests/validation/tests.py:145:9     - Unknown word (giptm)      -- giptm = GenericIPAddressTestModel
+./tests/validation/tests.py:212:70    - Unknown word (fsad)       -- 10.10", generic_ip="fsad"
 ./tests/validation/tests.py:79:32     - Unknown word (charfields) -- test_text_greater_that_charfields_max_length_raises_errors
 ./tests/validators/tests.py:200:6     - Unknown word (rdar)       -- "rdar://1234",
 ./tests/validators/tests.py:202:14    - Unknown word (shouldfail) -- "http:// shouldfail.com",
