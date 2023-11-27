@@ -225,6 +225,18 @@ function buildMatcherFn(patterns: GlobPatternWithRoot[], options: NormalizedGlob
 
     const fn: GlobMatchFn = (filename: string) => {
         filename = path.resolve(path.normalize(filename));
+        const fNameNormalize = path.sep === '\\' ? filename.replace(/\\/g, '/') : filename;
+        let lastRoot = '!!!!!!';
+        let lastRel = '';
+
+        function relativeToRoot(root: string) {
+            if (root !== lastRoot) {
+                lastRoot = root;
+                const relName = path.relative(root, filename);
+                lastRel = path.sep === '\\' ? relName.replace(/\\/g, '/') : relName;
+            }
+            return lastRel;
+        }
 
         function testRules(rules: GlobRule[], matched: boolean): GlobMatch | undefined {
             for (const rule of rules) {
@@ -234,8 +246,7 @@ function buildMatcherFn(patterns: GlobPatternWithRoot[], options: NormalizedGlob
                 if (isRelPat && !doesRootContainPath(root, filename, path)) {
                     continue;
                 }
-                const relName = isRelPat ? path.relative(root, filename) : filename;
-                const fname = path.sep === '\\' ? relName.replace(/\\/g, '/') : relName;
+                const fname = isRelPat ? relativeToRoot(root) : fNameNormalize;
                 if (rule.fn(fname)) {
                     return {
                         matched,

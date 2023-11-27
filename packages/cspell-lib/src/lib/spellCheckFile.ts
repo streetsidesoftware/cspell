@@ -119,17 +119,17 @@ async function spellCheckFullDocument(
     options: SpellCheckFileOptions,
     settings: CSpellUserSettings,
 ): Promise<SpellCheckFileResult> {
-    if (options.skipValidation) {
-        return {
-            document,
-            options,
-            settingsUsed: settings,
-            localConfigFilepath: undefined,
-            issues: [],
-            checked: true,
-            errors: undefined,
-        };
-    }
+    // if (options.skipValidation) {
+    //     return {
+    //         document,
+    //         options,
+    //         settingsUsed: settings,
+    //         localConfigFilepath: undefined,
+    //         issues: [],
+    //         checked: true,
+    //         errors: undefined,
+    //     };
+    // }
 
     const perf: SpellCheckFilePerf = {};
     const timer = createPerfTimer('spellCheckFullDocument', (elapsed) => (perf.totalTimeMs = elapsed));
@@ -160,6 +160,8 @@ async function spellCheckFullDocument(
     timerCheck.start();
     const issues = docValidator.checkDocument();
     timerCheck.end();
+
+    Object.assign(perf, Object.fromEntries(Object.entries(docValidator.perfTiming).map(([k, v]) => ['_' + k, v])));
 
     const result: SpellCheckFileResult = {
         document,

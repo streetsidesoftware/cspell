@@ -10,6 +10,7 @@ import type {
 import assert from 'assert';
 import { pathToFileURL } from 'url';
 
+import { onClearCache } from '../events/index.js';
 import type { CSpellSettingsInternal, CSpellSettingsInternalFinalized } from '../Models/CSpellSettingsInternalDef.js';
 import { cleanCSpellSettingsInternal as csi, isCSpellSettingsInternal } from '../Models/CSpellSettingsInternalDef.js';
 import { autoResolveWeak, AutoResolveWeakCache } from '../util/AutoResolve.js';
@@ -28,7 +29,25 @@ export type CSpellSettingsI = CSpellSettingsInternal;
 const emptyWords: string[] = [];
 Object.freeze(emptyWords);
 
-const cachedMerges = new WeakMap<string[], WeakMap<string[], string[]>>();
+const cachedMerges = new AutoResolveWeakCache<string[], WeakMap<string[], string[]>>();
+
+const mergeCache = new AutoResolveWeakCache<
+    CSpellSettingsWSTO | CSpellSettingsI,
+    WeakMap<CSpellSettingsWSTO | CSpellSettingsI, CSpellSettingsI>
+>();
+
+const cacheInternalSettings = new AutoResolveWeakCache<CSpellSettingsI | CSpellSettingsWSTO, CSpellSettingsI>();
+
+const parserCache = new AutoResolveWeakCache<Exclude<CSpellSettingsI['plugins'], undefined>, Map<string, Parser>>();
+const emptyParserMap = new Map<string, Parser>();
+
+onClearCache(() => {
+    parserCache.clear();
+    emptyParserMap.clear();
+    cachedMerges.clear();
+    mergeCache.clear();
+    cacheInternalSettings.clear();
+});
 
 function _mergeWordsCached(left: string[], right: string[]): string[] {
     const map = autoResolveWeak(cachedMerges, left, () => new WeakMap<string[], string[]>());
@@ -79,15 +98,9 @@ export function mergeSettings(
     return util.clean(rawSettings);
 }
 
-// eslint-disable-next-line @typescript-eslint/ban-types
-function isEmpty(obj: Object) {
-    return Object.keys(obj).length === 0 && obj.constructor === Object;
+function isEmpty(obj: object) {
+    return !obj || Object.keys(obj).length === 0;
 }
-
-const mergeCache = new AutoResolveWeakCache<
-    CSpellSettingsWSTO | CSpellSettingsI,
-    WeakMap<CSpellSettingsWSTO | CSpellSettingsI, CSpellSettingsI>
->();
 
 function merge(
     left: CSpellSettingsWSTO | CSpellSettingsI,
@@ -253,8 +266,6 @@ function _finalizeSettings(settings: CSpellSettingsI): CSpellSettingsInternalFin
     return finalized;
 }
 
-const cacheInternalSettings = new AutoResolveWeakCache<CSpellSettingsI | CSpellSettingsWSTO, CSpellSettingsI>();
-
 export function toInternalSettings(settings: undefined): undefined;
 export function toInternalSettings(settings: CSpellSettingsI | CSpellSettingsWSTO): CSpellSettingsI;
 export function toInternalSettings(settings?: CSpellSettingsI | CSpellSettingsWSTO): CSpellSettingsI | undefined;
@@ -373,9 +384,6 @@ function resolveParser(settings: CSpellSettingsI): Parser | undefined {
     assert(parser, `Parser "${parserName}" not found.`);
     return parser;
 }
-
-const parserCache = new AutoResolveWeakCache<Exclude<CSpellSettingsI['plugins'], undefined>, Map<string, Parser>>();
-const emptyParserMap = new Map<string, Parser>();
 
 function* parsers(plugins: Plugin[]) {
     for (const plugin of plugins) {
