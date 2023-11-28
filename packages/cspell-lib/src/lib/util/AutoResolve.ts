@@ -1,3 +1,7 @@
+interface IDisposable {
+    dispose(): void;
+}
+
 export function autoResolve<K, V>(map: Map<K, V>, key: K, resolve: (k: K) => V): V {
     const found = map.get(key);
     if (found !== undefined || map.has(key)) return found as V;
@@ -6,7 +10,7 @@ export function autoResolve<K, V>(map: Map<K, V>, key: K, resolve: (k: K) => V):
     return value;
 }
 
-export class AutoResolveCache<K, V> {
+export class AutoResolveCache<K, V> implements IDisposable {
     readonly map = new Map<K, V>();
 
     get(k: K): V | undefined;
@@ -32,13 +36,24 @@ export class AutoResolveCache<K, V> {
     clear(): void {
         this.map.clear();
     }
+
+    dispose(): void {
+        this.clear();
+    }
 }
 
 export function createAutoResolveCache<K, V>(): AutoResolveCache<K, V> {
     return new AutoResolveCache();
 }
 
-export function autoResolveWeak<K extends object, V>(map: WeakMap<K, V>, key: K, resolve: (k: K) => V): V {
+export interface IWeakMap<K extends object, V> {
+    get(k: K): V | undefined;
+    set(k: K, v: V): this;
+    has(k: K): boolean;
+    delete(key: K): boolean;
+}
+
+export function autoResolveWeak<K extends object, V>(map: IWeakMap<K, V>, key: K, resolve: (k: K) => V): V {
     const found = map.get(key);
     if (found !== undefined || map.has(key)) return found as V;
     const value = resolve(key);
@@ -46,23 +61,39 @@ export function autoResolveWeak<K extends object, V>(map: WeakMap<K, V>, key: K,
     return value;
 }
 
-export class AutoResolveWeakCache<K extends object, V> {
-    readonly map = new WeakMap<K, V>();
+export class AutoResolveWeakCache<K extends object, V> implements IWeakMap<K, V> {
+    private _map = new WeakMap<K, V>();
 
     get(k: K): V | undefined;
     get(k: K, resolve: (k: K) => V): V;
     get(k: K, resolve?: (k: K) => V): V | undefined;
     get(k: K, resolve?: (k: K) => V): V | undefined {
-        return resolve ? autoResolveWeak(this.map, k, resolve) : this.map.get(k);
+        return resolve ? autoResolveWeak(this._map, k, resolve) : this._map.get(k);
+    }
+
+    get map() {
+        return this._map;
     }
 
     has(k: K): boolean {
-        return this.map.has(k);
+        return this._map.has(k);
     }
 
     set(k: K, v: V): this {
-        this.map.set(k, v);
+        this._map.set(k, v);
         return this;
+    }
+
+    clear(): void {
+        this._map = new WeakMap();
+    }
+
+    delete(k: K): boolean {
+        return this._map.delete(k);
+    }
+
+    dispose(): void {
+        this.clear();
     }
 }
 

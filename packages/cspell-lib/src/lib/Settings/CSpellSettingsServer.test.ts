@@ -7,6 +7,8 @@ import { describe, expect, test } from 'vitest';
 import { pathPackageRoot, pathPackageSamples } from '../../test-util/test.locations.cjs';
 import { createCSpellSettingsInternal as csi } from '../Models/CSpellSettingsInternalDef.js';
 import { toURL } from '../util/url.js';
+import { calcOverrideSettings } from './calcOverrideSettings.js';
+import { checkFilenameMatchesGlob } from './checkFilenameMatchesGlob.js';
 import { getDefaultConfigLoader } from './Controller/configLoader/defaultConfigLoader.js';
 import {
     __testing__ as __configLoader_testing__,
@@ -19,7 +21,7 @@ import {
     readSettingsFiles,
 } from './Controller/configLoader/index.js';
 import type { CSpellSettingsWST } from './Controller/configLoader/types.js';
-import { calcOverrideSettings, checkFilenameMatchesGlob, getSources, mergeSettings } from './CSpellSettingsServer.js';
+import { getSources, mergeSettings } from './CSpellSettingsServer.js';
 import { _defaultSettings, getDefaultBundledSettingsAsync } from './DefaultSettings.js';
 
 const samplesDir = pathPackageSamples;

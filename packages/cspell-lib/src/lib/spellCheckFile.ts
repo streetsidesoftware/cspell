@@ -161,6 +161,8 @@ async function spellCheckFullDocument(
     const issues = docValidator.checkDocument();
     timerCheck.end();
 
+    Object.assign(perf, Object.fromEntries(Object.entries(docValidator.perfTiming).map(([k, v]) => ['_' + k, v])));
+
     const result: SpellCheckFileResult = {
         document,
         options,

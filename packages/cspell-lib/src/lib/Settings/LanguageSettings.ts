@@ -7,7 +7,7 @@ import type {
     Settings,
 } from '@cspell/cspell-types';
 
-import { autoResolve, autoResolveWeak, createAutoResolveCache } from '../util/AutoResolve.js';
+import { AutoResolveCache, createAutoResolveCache, createAutoResolveWeakCache } from '../util/AutoResolve.js';
 import { doSetsIntersect } from '../util/util.js';
 import * as SpellSettings from './CSpellSettingsServer.js';
 
@@ -95,16 +95,20 @@ export function isValidLocaleIntlFormat(locale: LocaleId | LocaleId[], strict = 
     return locale.length > 0;
 }
 
-const cacheCalcSettingsForLanguage = new WeakMap<LanguageSettings, Map<LanguageId, Map<LocaleId, BaseSetting>>>();
+const cacheCalcSettingsForLanguage = createAutoResolveWeakCache<
+    LanguageSettings,
+    AutoResolveCache<LanguageId, AutoResolveCache<LocaleId, BaseSetting>>
+>();
 
 export function calcSettingsForLanguage(
     languageSettings: LanguageSettings,
     languageId: LanguageId,
     locale: LocaleId,
 ): BaseSetting {
-    const mapLang = autoResolveWeak(cacheCalcSettingsForLanguage, languageSettings, () => new Map());
-    const mapLocale = autoResolve(mapLang, languageId, () => new Map());
-    return autoResolve(mapLocale, locale, () => _calcSettingsForLanguage(languageSettings, languageId, locale));
+    return cacheCalcSettingsForLanguage
+        .get(languageSettings, () => new AutoResolveCache())
+        .get(languageId, () => new AutoResolveCache())
+        .get(locale, () => _calcSettingsForLanguage(languageSettings, languageId, locale));
 }
 
 function _calcSettingsForLanguage(
@@ -127,18 +131,15 @@ function _calcSettingsForLanguage(
     return ls;
 }
 
-const cacheDoesLanguageSettingMatchLanguageId: WeakMap<LanguageSetting, Map<LanguageId, boolean>> = new WeakMap();
+const cacheDoesLanguageSettingMatchLanguageId = createAutoResolveWeakCache<
+    LanguageSetting,
+    AutoResolveCache<LanguageId, boolean>
+>();
 
 function doesLanguageSettingMatchLanguageId(s: LanguageSetting, languageId: LanguageId): boolean {
-    const r = cacheDoesLanguageSettingMatchLanguageId.get(s) ?? new Map<LanguageId, boolean>();
-    const f = r.get(languageId);
-    if (f !== undefined) {
-        return f;
-    }
-    const v = _doesLanguageSettingMatchLanguageId(s, languageId);
-    r.set(languageId, v);
-    cacheDoesLanguageSettingMatchLanguageId.set(s, r);
-    return v;
+    return cacheDoesLanguageSettingMatchLanguageId
+        .get(s, () => new AutoResolveCache())
+        .get(languageId, () => _doesLanguageSettingMatchLanguageId(s, languageId));
 }
 
 function _doesLanguageSettingMatchLanguageId(s: LanguageSetting, languageId: LanguageId): boolean {
