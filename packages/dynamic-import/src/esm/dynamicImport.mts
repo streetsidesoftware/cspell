@@ -1,5 +1,6 @@
-import { resolve } from 'import-meta-resolve';
 import { statSync } from 'node:fs';
+
+import { resolve } from 'import-meta-resolve';
 import { sep as pathSep } from 'path';
 import { pathToFileURL } from 'url';
 
