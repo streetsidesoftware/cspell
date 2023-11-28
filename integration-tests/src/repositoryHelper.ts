@@ -174,7 +174,7 @@ export async function listRepositories(options: ListRepositoryOptions): Promise<
 
     paths.forEach((path) => {
         if (showDirty && dirty.has(path)) {
-            console.log(Chalk.red`${path} *`);
+            console.log(Chalk.red(`${path} *`));
         } else {
             console.log(path);
         }

@@ -1,4 +1,4 @@
-import * as Shell from 'shelljs';
+import Shell from 'shelljs';
 
 export interface ExecOptions {
     /** log output to console */

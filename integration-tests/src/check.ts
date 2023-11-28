@@ -1,7 +1,7 @@
 import type { ChalkInstance } from 'chalk';
 import Chalk from 'chalk';
 import * as Path from 'path';
-import * as Shell from 'shelljs';
+import Shell from 'shelljs';
 import { fileURLToPath } from 'url';
 
 import { readConfig, resolveArgs, resolveRepArgs } from './config.js';
@@ -25,7 +25,14 @@ const cspellCommand = `node ${jsCspell}`;
 
 let checkCount = 0;
 
-const colors = [Chalk.green, Chalk.blue, Chalk.yellow, Chalk.cyan, Chalk.magenta, Chalk.rgb(255, 192, 64)];
+const colors = [
+    tfn(Chalk.green),
+    tfn(Chalk.blue),
+    tfn(Chalk.yellow),
+    tfn(Chalk.cyan),
+    tfn(Chalk.magenta),
+    tfn(Chalk.rgb(255, 192, 64)),
+];
 
 interface Result {
     stdout: string;
@@ -35,7 +42,7 @@ interface Result {
 }
 
 interface CheckContext {
-    color: ChalkInstance;
+    color: (strings: string | TemplateStringsArray, ...rest: unknown[]) => string;
     logger: Logger;
     rep: Repository;
 }
@@ -346,4 +353,21 @@ function mustBeDefined<T>(t: T | undefined): T {
         throw new Error('Must not be undefined.');
     }
     return t;
+}
+
+function tfn(colorFn: ChalkInstance): (strings: string | TemplateStringsArray, ...rest: unknown[]) => string {
+    return (strings, ...rest) => {
+        if (typeof strings === 'string') return colorFn(strings);
+
+        const parts: string[] = [];
+        let i = 0;
+        for (; i < strings.length - 1; ++i) {
+            parts.push(strings[i]);
+            parts.push(rest[i] as string);
+        }
+        if (i < strings.length) {
+            parts.push(strings[i]);
+        }
+        return colorFn(parts.join(''));
+    };
 }

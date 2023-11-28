@@ -1,7 +1,7 @@
 import * as fs from 'fs';
 import * as Diff from 'jest-diff';
 import * as Path from 'path';
-import * as Shell from 'shelljs';
+import Shell from 'shelljs';
 import { fileURLToPath } from 'url';
 
 import type { Repository } from './configDef.js';
