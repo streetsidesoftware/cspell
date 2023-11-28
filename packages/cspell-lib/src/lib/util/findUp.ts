@@ -1,5 +1,6 @@
-import path from 'path';
 import { stat } from 'node:fs/promises';
+
+import path from 'path';
 import { fileURLToPath } from 'url';
 
 interface FindUpOptions {

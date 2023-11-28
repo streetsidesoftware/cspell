@@ -1,7 +1,9 @@
-import { describe, expect, test, vi } from 'vitest';
 import path from 'node:path';
-import { findUp } from './findUp.js';
 import { fileURLToPath } from 'node:url';
+
+import { describe, expect, test, vi } from 'vitest';
+
+import { findUp } from './findUp.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
