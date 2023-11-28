@@ -5,8 +5,8 @@ import path from 'node:path';
 import { pathToFileURL } from 'url';
 
 import { createAutoResolveCache } from '../../../util/AutoResolve.js';
-import { addTrailingSlash, fileURLOrPathToPath, toFileDirUrl, toURL } from '../../../util/url.js';
 import { findUp } from '../../../util/findUp.js';
+import { addTrailingSlash, fileURLOrPathToPath, toFileDirUrl, toURL } from '../../../util/url.js';
 
 export class ConfigSearch {
     private searchCache = new Map<string, Promise<URL | undefined>>();
