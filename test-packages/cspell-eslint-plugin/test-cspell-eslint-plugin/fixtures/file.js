@@ -1,4 +1,3 @@
-// eslint-disable-next-line node/no-extraneous-require
-const glob = require('globcat');
+const glob = require('path');
 
 console.log(glob !== undefined ? 'glob' : 'no-glob');
