@@ -4,7 +4,6 @@ export {
     createConfigLoader,
     defaultFileName,
     loadPnP,
-    loadPnPSync,
     sectionCSpell,
 } from './configLoader.js';
 export { defaultConfigFilenames } from './configLocations.js';

@@ -38,21 +38,6 @@ describe('Validate PnPLoader', () => {
         expect(yarnPnp?.toString().toLocaleLowerCase()).toBe(uriYarn2TestMedPnp.toString().toLowerCase());
     });
 
-    test('pnpLoader sync and async', async () => {
-        const loader = pnpLoader();
-        const yarnPnp = await loader.load(uriYarn2TestMed);
-        expect(yarnPnp?.toString().toLocaleLowerCase()).toBe(uriYarn2TestMedPnp.toString().toLowerCase());
-        expect(loader.peekSync(uriYarn2TestMed)?.toString().toLocaleLowerCase()).toBe(
-            yarnPnp?.toString().toLocaleLowerCase(),
-        );
-        expect(loader.loadSync(uriYarn2TestMed)?.toString().toLocaleLowerCase()).toBe(
-            yarnPnp?.toString().toLocaleLowerCase(),
-        );
-
-        const sciPnp = loader.loadSync(uriYarn2TestSci);
-        await expect(loader.peek(uriYarn2TestSci)).resolves.toBe(sciPnp);
-    });
-
     test('pnpLoader shared cache', async () => {
         const loader = pnpLoader();
         const yarnPnp = await loader.load(uriYarn2TestMed);

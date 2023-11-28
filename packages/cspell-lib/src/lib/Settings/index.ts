@@ -11,7 +11,6 @@ export {
     getGlobalSettingsAsync,
     loadConfig,
     loadPnP,
-    loadPnPSync,
     readRawSettings,
     readSettings,
     readSettingsFiles,

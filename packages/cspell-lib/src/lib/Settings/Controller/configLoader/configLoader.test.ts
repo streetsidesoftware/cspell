@@ -17,7 +17,7 @@ import { currentSettingsFileVersion, ENV_CSPELL_GLOB_ROOT } from '../../constant
 import type { ImportFileRefWithError } from '../../CSpellSettingsServer.js';
 import { extractDependencies, getSources, mergeSettings } from '../../CSpellSettingsServer.js';
 import { _defaultSettings, getDefaultBundledSettingsAsync } from '../../DefaultSettings.js';
-import { __testing__ as __configLoader_testing__, loadPnP, loadPnPSync } from './configLoader.js';
+import { __testing__ as __configLoader_testing__, loadPnP } from './configLoader.js';
 import {
     clearCachedSettingsFiles,
     getCachedFileSize,
@@ -575,12 +575,6 @@ describe('Validate search/load config files', () => {
         await expect(loadPnP({}, urlSrcDir)).resolves.toBeUndefined();
         // Look for a pnp file from the current location, but it won't be found.
         await expect(loadPnP({ usePnP: true }, urlSrcDir)).resolves.toBeUndefined();
-    });
-
-    test('loadPnPSync', () => {
-        expect(loadPnPSync({}, urlSrcDir)).toBeUndefined();
-        // Look for a pnp file from the current location, but it won't be found.
-        expect(loadPnPSync({ usePnP: true }, urlSrcDir)).toBeUndefined();
     });
 
     test('config needing PnP', async () => {

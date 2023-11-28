@@ -289,7 +289,7 @@ export class ConfigLoader {
         const { usePnP = pnpSettings.usePnP, pnpFiles = pnpSettings.pnpFiles } = cfgFile.settings;
         const pnpSettingsToUse: PnPSettingsOptional = normalizePnPSettings({ usePnP, pnpFiles });
         const pathToSettingsDir = new URL('.', cfgFile.url);
-        loadPnPSync(pnpSettingsToUse, pathToSettingsDir);
+        await loadPnP(pnpSettingsToUse, pathToSettingsDir);
     }
 
     public mergeConfigFileWithImports(
@@ -424,14 +424,6 @@ export function loadPnP(pnpSettings: PnPSettingsOptional, searchFrom: URL): Prom
     }
     const loader = pnpLoader(pnpSettings.pnpFiles);
     return loader.load(searchFrom);
-}
-
-export function loadPnPSync(pnpSettings: PnPSettingsOptional, searchFrom: URL): LoaderResult {
-    if (!pnpSettings.usePnP) {
-        return undefined;
-    }
-    const loader = pnpLoader(pnpSettings.pnpFiles);
-    return loader.loadSync(searchFrom);
 }
 
 function resolveFilename(filename: string | URL, relativeTo: string | URL): ImportFileRef {
