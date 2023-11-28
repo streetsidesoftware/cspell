@@ -2,12 +2,12 @@
  * Handles loading of `.pnp.js` and `.pnp.js` files.
  */
 import clearModule from 'clear-module';
-import { findUp, findUpSync } from 'find-up';
 import importFresh from 'import-fresh';
 import { fileURLToPath } from 'url';
 
 import { toFileUrl } from '../../util/url.js';
 import { UnsupportedPnpFile } from './ImportError.js';
+import { findUp } from '../../util/findUp.js';
 
 const defaultPnpFiles = ['.pnp.cjs', '.pnp.js'];
 
@@ -53,29 +53,6 @@ export class PnpLoader {
     }
 
     /**
-     * Request that the nearest .pnp file gets loaded
-     * @param urlDirectory starting directory
-     * @returns promise - rejects on error - success if loaded or not found.
-     */
-    public loadSync(urlDirectory: URL): LoaderResult {
-        if (!isSupported(urlDirectory)) return undefined;
-        const cacheKey = this.calcKey(urlDirectory);
-        const cached = cachedRequestsSync.get(cacheKey);
-        if (cached) return cached;
-
-        const r = findPnpAndLoadSync(urlDirectory, this.pnpFiles);
-        cachedRequestsSync.set(cacheKey, r);
-        cachedRequests.set(cacheKey, Promise.resolve(r));
-        return r;
-    }
-
-    public peekSync(urlDirectory: URL): LoaderResult {
-        if (!isSupported(urlDirectory)) return undefined;
-        const cacheKey = this.calcKey(urlDirectory);
-        return cachedRequestsSync.get(cacheKey);
-    }
-
-    /**
      * Clears the cached so .pnp files will get reloaded on request.
      */
     public clearCache(): Promise<void> {
@@ -96,14 +73,6 @@ export function pnpLoader(pnpFiles?: string[]): PnpLoader {
  */
 async function findPnpAndLoad(urlDirectory: URL, pnpFiles: string[]): Promise<LoaderResult> {
     const found = await findUp(pnpFiles, { cwd: fileURLToPath(urlDirectory) });
-    return loadPnpIfNeeded(found);
-}
-
-/**
- * @param urlDirectory - directory to start at.
- */
-function findPnpAndLoadSync(urlDirectory: URL, pnpFiles: string[]): LoaderResult {
-    const found = findUpSync(pnpFiles, { cwd: fileURLToPath(urlDirectory) });
     return loadPnpIfNeeded(found);
 }
 

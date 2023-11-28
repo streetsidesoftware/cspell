@@ -35,7 +35,6 @@ export {
     type ImportFileRefWithError,
     loadConfig,
     loadPnP,
-    loadPnPSync,
     mergeInDocSettings,
     mergeSettings,
     readRawSettings,
