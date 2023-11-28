@@ -3,7 +3,7 @@ Repository: php/php-src
 Url: "https://github.com/php/php-src.git"
 Args: ["--config=../../../../config/repositories/php/php-src/cspell.json","**/*.{md,c,h,php}"]
 Lines:
- CSpell: Files checked: 2168, Issues found: 44099 in 1625 files
+ CSpell: Files checked: 2168, Issues found: 44072 in 1625 files
  exit code: 1
 ./CODING_STANDARDS.md:105:23    - Unknown word (intvl)        -- // Could be 'date_intvl_create_from_date_str
 ./CODING_STANDARDS.md:114:8     - Unknown word (setclientencoding) -- pg_setclientencoding
@@ -2315,11 +2315,9 @@ Lines:
 ./ext/fileinfo/libmagic/compress.c:108:1     - Unknown word (zlibcmp)      -- zlibcmp(const unsigned char
 ./ext/fileinfo/libmagic/compress.c:128:1     - Unknown word (lzmacmp)      -- lzmacmp(const unsigned char
 ./ext/fileinfo/libmagic/compress.c:138:9     - Unknown word (lrzip)        -- #define lrzip_flags "-do"
-./ext/fileinfo/libmagic/compress.c:139:9     - Unknown word (lzip)         -- #define lzip_flags gzip_flags
 ./ext/fileinfo/libmagic/compress.c:174:6     - Unknown word (maglen)       -- int maglen;
 ./ext/fileinfo/libmagic/compress.c:177:3     - Unknown word (compr)        -- } compr[] = {
 ./ext/fileinfo/libmagic/compress.c:192:58    - Unknown word (pkziped)      -- args, NULL },	/* 6, pkziped */
-./ext/fileinfo/libmagic/compress.c:195:19    - Unknown word (LZIP)         -- { { .magic = "LZIP" },	4, lzip_args, NULL
 ./ext/fileinfo/libmagic/compress.c:197:19    - Unknown word (LRZI)         -- { { .magic = "LRZI" },	4, lrzip_args, NULL
 ./ext/fileinfo/libmagic/compress.c:197:58    - Unknown word (LRZIP)        -- args, NULL },	/* 10, LRZIP */
 ./ext/fileinfo/libmagic/compress.c:206:9     - Unknown word (OKDATA)       -- #define OKDATA 0
@@ -5467,7 +5465,6 @@ Lines:
 ./ext/pcre/pcre2lib/config.h:87:5      - Unknown word (ANYCRLF)    -- (ANYCRLF), and 6 (NUL). */
 ./ext/pcre/pcre2lib/pcre2.h:230:25    - Unknown word (SUBPATTERN) -- define PCRE2_ERROR_BAD_SUBPATTERN_REFERENCE 115
 ./ext/pcre/pcre2lib/pcre2.h:264:36    - Unknown word (SUBPATTERNS) -- ERROR_TOO_MANY_NAMED_SUBPATTERNS 149
-./ext/pcre/pcre2lib/pcre2.h:286:39    - Unknown word (LOOKBEHINDS) -- ERROR_INTERNAL_BAD_CODE_LOOKBEHINDS 170
 ./ext/pcre/pcre2lib/pcre2.h:300:27    - Unknown word (BARJX)       -- define PCRE2_ERROR_QUERY_BARJX_NEST_TOO_DEEP
 ./ext/pcre/pcre2lib/pcre2.h:380:25    - Unknown word (STACKLIMIT)  -- define PCRE2_ERROR_JIT_STACKLIMIT (-46)
 ./ext/pcre/pcre2lib/pcre2.h:388:21    - Unknown word (RECURSIONLIMIT) -- #define PCRE2_ERROR_RECURSIONLIMIT (-53)  /* Obsolete
@@ -5634,7 +5631,6 @@ Lines:
 ./ext/pcre/pcre2lib/pcre2_compile.c:1366:45   - Unknown word (subpattern)     -- 5; /* Non-existent subpattern */
 ./ext/pcre/pcre2lib/pcre2_compile.c:1394:3    - Unknown word (minp)           -- minp if not NULL
 ./ext/pcre/pcre2lib/pcre2_compile.c:1395:3    - Unknown word (maxp)           -- maxp if not NULL
-./ext/pcre/pcre2lib/pcre2_compile.c:139:9     - Unknown word (lookbehinds)    -- check_lookbehinds(uint32_t *, uint32_t
 ./ext/pcre/pcre2lib/pcre2_compile.c:1478:14   - Unknown word (chptr)          -- is placed in chptr. A backreference to
 ./ext/pcre/pcre2lib/pcre2_compile.c:1485:31   - Unknown word (isclass)        -- are recognised. The isclass argument is not relevant
 ./ext/pcre/pcre2lib/pcre2_compile.c:1549:35   - Unknown word (HASBKPORX)      -- external_flags |= PCRE2_HASBKPORX; /* Note \P, \p, or
@@ -5687,7 +5683,6 @@ Lines:
 ./ext/pcre/pcre2lib/pcre2_compile.c:3326:46   - Unknown word (STARTWORD)        -- )(ptr, STRING_WEIRD_STARTWORD, 6) == 0 ||
 ./ext/pcre/pcre2lib/pcre2_compile.c:3327:46   - Unknown word (ENDWORD)          -- )(ptr, STRING_WEIRD_ENDWORD, 6) == 0))
 ./ext/pcre/pcre2lib/pcre2_compile.c:375:8     - Unknown word (PSKIP)          -- enum { PSKIP_ALT, PSKIP_CLASS, PSKIP
-./ext/pcre/pcre2lib/pcre2_compile.c:3797:18   - Unknown word (lookaround)       -- non-atomic lookaround ones are new. They are
 ./ext/pcre/pcre2lib/pcre2_compile.c:379:2     - Unknown word (Wconversion)    -- -Wconversion. This version gets a
 ./ext/pcre/pcre2lib/pcre2_compile.c:3801:16   - Unknown word (CHMAX)            -- else if (CHMAX_255(c) && (cb->ctypes
 ./ext/pcre/pcre2lib/pcre2_compile.c:388:38    - Unknown word (xxcuflags)      -- flags for the unsigned xxcuflags variables that accompany
@@ -5734,7 +5729,7 @@ Lines:
 ./ext/pcre/pcre2lib/pcre2_compile.c:5372:3    - Unknown word (pptrptr)          -- pptrptr points to
 ./ext/pcre/pcre2lib/pcre2_compile.c:5374:3    - Unknown word (firstcuptr)       -- firstcuptr place to put
 ./ext/pcre/pcre2lib/pcre2_compile.c:5375:3    - Unknown word (firstcuflagsptr)  -- firstcuflagsptr place to put the first
-./ext/pcre/pcre2lib/pcre2_compile.c:5376:3    - Unknown word (reqcuptr)        -- reqcuptr place to put
+./ext/pcre/pcre2lib/pcre2_compile.c:5376:3    - Unknown word (reqcuptr)         -- reqcuptr place to put
 ./ext/pcre/pcre2lib/pcre2_compile.c:5377:3    - Unknown word (reqcuflagsptr)   -- reqcuflagsptr place to put the
 ./ext/pcre/pcre2lib/pcre2_compile.c:5378:3    - Unknown word (bcptr)           -- bcptr points to
 ./ext/pcre/pcre2lib/pcre2_compile.c:5394:5    - Unknown word (bravalue)        -- int bravalue = 0;
@@ -5818,7 +5813,6 @@ Lines:
 ./ext/pcre/pcre2lib/pcre2_compile.c:775:37    - Unknown word (ENDONLY)        -- VERBNAMES|PCRE2_DOLLAR_ENDONLY|PCRE2_DOTALL|PCRE2_DUPNAMES
 ./ext/pcre/pcre2lib/pcre2_compile.c:779:13    - Unknown word (DOTSTAR)        -- PCRE2_NO_DOTSTAR_ANCHOR|PCRE2_UCP|PCRE
 ./ext/pcre/pcre2lib/pcre2_compile.c:7838:9    - Unknown word (lastcapture)      -- cb->lastcapture = meta_arg;
-./ext/pcre/pcre2lib/pcre2_compile.c:788:23    - Unknown word (LOOKAROUND)     -- PCRE2_EXTRA_ALLOW_LOOKAROUND_BSK)
 ./ext/pcre/pcre2lib/pcre2_compile.c:7900:27   - Unknown word (lookarounds)      -- \K is forbidden in lookarounds since 10.38 because
 ./ext/pcre/pcre2lib/pcre2_compile.c:7916:56   - Unknown word (HASBKC)           -- external_flags |= PCRE2_HASBKC; /* Record */
 ./ext/pcre/pcre2lib/pcre2_compile.c:791:66    - Unknown word (eint)           -- added, the tables called eint1 and

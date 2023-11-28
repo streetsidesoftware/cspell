@@ -5,7 +5,7 @@ Args: '["--config=${repoConfig}/cspell.json","**/*.{md,c,h,php}"]'
 Summary:
   files: 2168
   filesWithIssues: 1625
-  issues: 44099
+  issues: 44072
   errors: 0
 Errors: []
 
@@ -2006,11 +2006,9 @@ issues:
   - "ext/fileinfo/libmagic/compress.c:108:1          zlibcmp                 U       zlibcmp(const unsigned char"
   - "ext/fileinfo/libmagic/compress.c:128:1          lzmacmp                 U       lzmacmp(const unsigned char"
   - "ext/fileinfo/libmagic/compress.c:138:9          lrzip                   U       #define lrzip_flags \"-do\""
-  - "ext/fileinfo/libmagic/compress.c:139:9          lzip                    U       #define lzip_flags gzip_flags"
   - "ext/fileinfo/libmagic/compress.c:174:6          maglen                  U       int maglen;"
   - "ext/fileinfo/libmagic/compress.c:177:3          compr                   U       } compr[] = {"
   - "ext/fileinfo/libmagic/compress.c:192:58         pkziped                 U       args, NULL }, /* 6, pkziped */"
-  - "ext/fileinfo/libmagic/compress.c:195:19         LZIP                    U       { { .magic = \"LZIP\" }, 4, lzip_args, NULL"
   - "ext/fileinfo/libmagic/compress.c:197:19         LRZI                    U       { { .magic = \"LRZI\" }, 4, lrzip_args, NULL"
   - "ext/fileinfo/libmagic/compress.c:197:58         LRZIP                   U       args, NULL }, /* 10, LRZIP */"
   - "ext/fileinfo/libmagic/compress.c:206:9          OKDATA                  U       #define OKDATA 0"
@@ -5297,7 +5295,6 @@ issues:
   - "ext/pcre/pcre2lib/pcre2_compile.c:96:9          SKIPOFFSET              U       #define SKIPOFFSET(p) p++"
   - "ext/pcre/pcre2lib/pcre2_compile.c:97:9          SIZEOFFSET              U       #define SIZEOFFSET 1"
   - "ext/pcre/pcre2lib/pcre2_compile.c:131:7         branchlength            U       get_branchlength(uint32_t **, int *,"
-  - "ext/pcre/pcre2lib/pcre2_compile.c:139:9         lookbehinds             U       check_lookbehinds(uint32_t *, uint32_t"
   - "ext/pcre/pcre2lib/pcre2_compile.c:175:9         GROUPINFO               U       #define GROUPINFO_DEFAULT_SIZE 256"
   - "ext/pcre/pcre2lib/pcre2_compile.c:217:14        BIGVALUE                U       #define META_BIGVALUE 0x80050000u"
   - "ext/pcre/pcre2lib/pcre2_compile.c:221:49        metacharacter           U       0x80090000u /* ^ metacharacter */"
@@ -5333,7 +5330,6 @@ issues:
   - "ext/pcre/pcre2lib/pcre2_compile.c:775:14        VERBNAMES               U       PCRE2_ALT_VERBNAMES|PCRE2_DOLLAR_ENDONLY"
   - "ext/pcre/pcre2lib/pcre2_compile.c:775:37        ENDONLY                 U       VERBNAMES|PCRE2_DOLLAR_ENDONLY|PCRE2_DOTALL|PCRE2_DUPNAMES"
   - "ext/pcre/pcre2lib/pcre2_compile.c:779:13        DOTSTAR                 U       PCRE2_NO_DOTSTAR_ANCHOR|PCRE2_UCP|PCRE"
-  - "ext/pcre/pcre2lib/pcre2_compile.c:788:23        LOOKAROUND              U       PCRE2_EXTRA_ALLOW_LOOKAROUND_BSK)"
   - "ext/pcre/pcre2lib/pcre2_compile.c:791:66        eint                    U       added, the tables called eint1 and"
   - "ext/pcre/pcre2lib/pcre2_compile.c:818:12        LIMH                    U       PSO_LIMH, /* Read integer"
   - "ext/pcre/pcre2lib/pcre2_compile.c:819:12        LIMM                    U       PSO_LIMM, /* Read integer"
@@ -5400,7 +5396,6 @@ issues:
   - "ext/pcre/pcre2lib/pcre2_compile.c:3173:37       numberical              U       brace delimiters it is a numberical back reference and does"
   - "ext/pcre/pcre2lib/pcre2_compile.c:3326:46       STARTWORD               U       )(ptr, STRING_WEIRD_STARTWORD, 6) == 0 ||"
   - "ext/pcre/pcre2lib/pcre2_compile.c:3327:46       ENDWORD                 U       )(ptr, STRING_WEIRD_ENDWORD, 6) == 0))"
-  - "ext/pcre/pcre2lib/pcre2_compile.c:3797:18       lookaround              U       non-atomic lookaround ones are new. They are"
   - "ext/pcre/pcre2lib/pcre2_compile.c:3801:16       CHMAX                   U       else if (CHMAX_255(c) && (cb->ctypes"
   - "ext/pcre/pcre2lib/pcre2_compile.c:4002:67       unsetting               U       otherwise it's an option unsetting. */"
   - "ext/pcre/pcre2lib/pcre2_compile.c:4010:24       BYNUMBER                U       goto RECURSION_BYNUMBER; /* The + case is handled"
@@ -6272,7 +6267,6 @@ issues:
   - "ext/pcre/pcre2lib/pcre2_ucptables.c:540:16      zyyy                            U       #define STRING_zyyy0 STR_z STR_y STR_y STR"
   - "ext/pcre/pcre2lib/pcre2.h:230:25        SUBPATTERN          U       define PCRE2_ERROR_BAD_SUBPATTERN_REFERENCE 115"
   - "ext/pcre/pcre2lib/pcre2.h:264:36        SUBPATTERNS         U       ERROR_TOO_MANY_NAMED_SUBPATTERNS 149"
-  - "ext/pcre/pcre2lib/pcre2.h:286:39        LOOKBEHINDS         U       ERROR_INTERNAL_BAD_CODE_LOOKBEHINDS 170"
   - "ext/pcre/pcre2lib/pcre2.h:300:27        BARJX               U       define PCRE2_ERROR_QUERY_BARJX_NEST_TOO_DEEP"
   - "ext/pcre/pcre2lib/pcre2.h:380:25        STACKLIMIT          U       define PCRE2_ERROR_JIT_STACKLIMIT (-46)"
   - "ext/pcre/pcre2lib/pcre2.h:388:21        RECURSIONLIMIT      U       #define PCRE2_ERROR_RECURSIONLIMIT (-53) /* Obsolete"
