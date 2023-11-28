@@ -3,7 +3,7 @@ import * as Diff from 'jest-diff';
 import * as Path from 'path';
 import * as Shell from 'shelljs';
 
-import type { Repository } from './configDef';
+import type { Repository } from './configDef.js';
 
 export const snapshotDir = Path.resolve(Path.join(__dirname, '..', 'snapshots'));
 const snapshotFileName = 'snapshot.txt';

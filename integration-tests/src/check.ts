@@ -1,16 +1,17 @@
+import type { ChalkInstance } from 'chalk';
 import Chalk from 'chalk';
 import * as Path from 'path';
 import * as Shell from 'shelljs';
 
-import { readConfig, resolveArgs, resolveRepArgs } from './config';
-import type { Repository } from './configDef';
-import { formatExecOutput } from './outputHelper';
-import { PrefixLogger } from './PrefixLogger';
-import { addRepository, checkoutRepositoryAsync, repositoryDir } from './repositoryHelper';
-import { execAsync } from './sh';
-import { shouldCheckRepo } from './shouldCheckRepo';
-import { checkAgainstSnapshot } from './snapshots';
-import type { Logger } from './types';
+import { readConfig, resolveArgs, resolveRepArgs } from './config.js';
+import type { Repository } from './configDef.js';
+import { formatExecOutput } from './outputHelper.js';
+import { PrefixLogger } from './PrefixLogger.js';
+import { addRepository, checkoutRepositoryAsync, repositoryDir } from './repositoryHelper.js';
+import { execAsync } from './sh.js';
+import { shouldCheckRepo } from './shouldCheckRepo.js';
+import { checkAgainstSnapshot } from './snapshots.js';
+import type { Logger } from './types.js';
 
 const config = readConfig();
 const cspellArgs =
@@ -31,7 +32,7 @@ interface Result {
 }
 
 interface CheckContext {
-    color: Chalk.Chalk;
+    color: ChalkInstance;
     logger: Logger;
     rep: Repository;
 }

@@ -2,7 +2,7 @@ import assert from 'assert';
 import * as fs from 'fs';
 import * as Path from 'path';
 
-import type { Config, Repository } from './configDef';
+import type { Config, Repository } from './configDef.js';
 
 const configLocation = Path.resolve(Path.join(__dirname, '..', 'config'));
 const configFile = Path.join(configLocation, 'config.json');

@@ -1,6 +1,6 @@
 import { stringify as stringifyYaml } from 'yaml';
 
-import type { Report } from './reportGenerator';
+import type { Report } from './reportGenerator.js';
 
 export function stringify(report: Report): string {
     const { summary: s, errors, repository } = report;

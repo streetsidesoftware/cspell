@@ -1,17 +1,19 @@
 import { promises as fs } from 'fs';
 import { join } from 'path';
+import type { Mock } from 'vitest';
+import { beforeEach, describe, expect, test, vi } from 'vitest';
 
-import { CaptureLogger } from './CaptureLogger';
-import { addRepository as configAddRepository } from './config';
-import { addRepository, checkoutRepositoryAsync, repositoryDir } from './repositoryHelper';
+import { CaptureLogger } from './CaptureLogger.js';
+import { addRepository as configAddRepository } from './config.js';
+import { addRepository, checkoutRepositoryAsync, repositoryDir } from './repositoryHelper.js';
 
 const defaultTimeout = 60000;
 
-jest.mock('./config');
+vi.mock('./config.js');
 
-const mockAddRepository = configAddRepository as jest.Mock<
-    ReturnType<typeof configAddRepository>,
-    Parameters<typeof configAddRepository>
+const mockAddRepository = configAddRepository as Mock<
+    Parameters<typeof configAddRepository>,
+    ReturnType<typeof configAddRepository>
 >;
 
 describe('Validate repository helper', () => {
@@ -24,7 +26,7 @@ describe('Validate repository helper', () => {
     }
 
     beforeEach(() => {
-        jest.resetAllMocks();
+        vi.resetAllMocks();
         mockAddRepository.mockImplementation((path, url) => ({
             path,
             url,

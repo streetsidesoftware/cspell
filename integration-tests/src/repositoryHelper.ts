@@ -4,11 +4,11 @@ import * as fs from 'fs';
 import * as Path from 'path';
 import { simpleGit } from 'simple-git';
 
-import * as Config from './config';
-import type { Repository } from './configDef';
-import type { ShouldCheckOptions } from './shouldCheckRepo';
-import { shouldCheckRepo } from './shouldCheckRepo';
-import type { Logger } from './types';
+import * as Config from './config.js';
+import type { Repository } from './configDef.js';
+import type { ShouldCheckOptions } from './shouldCheckRepo.js';
+import { shouldCheckRepo } from './shouldCheckRepo.js';
+import type { Logger } from './types.js';
 
 export const repositoryDir = Path.resolve(Path.join(__dirname, '../repositories/temp'));
 

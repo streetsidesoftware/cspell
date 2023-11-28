@@ -1,12 +1,12 @@
 import type { CSpellReporter, Issue, ReporterConfiguration, RunResult } from '@cspell/cspell-types';
 import * as vscodeUri from 'vscode-uri';
 
-import { readConfig } from '../config';
-import type { Repository } from '../configDef';
-import { writeSnapshotRaw } from '../snapshots';
-import type { IssueSummary } from './reportGenerator';
-import { generateReport } from './reportGenerator';
-import { stringify } from './stringify';
+import { readConfig } from '../config.js';
+import type { Repository } from '../configDef.js';
+import { writeSnapshotRaw } from '../snapshots.js';
+import type { IssueSummary } from './reportGenerator.js';
+import { generateReport } from './reportGenerator.js';
+import { stringify } from './stringify.js';
 
 const { URI, Utils: UriUtils } = vscodeUri;
 
