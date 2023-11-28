@@ -1,7 +1,7 @@
 import type { Issue, RunResult } from '@cspell/cspell-types';
 import type { URI as Uri } from 'vscode-uri';
 
-import type { Repository } from '../configDef';
+import type { Repository } from '../configDef.js';
 
 export type Report = {
     fileIssues: SortedFileIssues;

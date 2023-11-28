@@ -1,8 +1,10 @@
 {
     "extends": "../tsconfig.json",
     "compilerOptions": {
+        "module": "NodeNext",
+        "moduleResolution": "NodeNext",
         "skipLibCheck": true,
-        "types": ["node", "jest"],
+        "types": ["node"],
         "outDir": "dist"
     },
     "include": ["src"]

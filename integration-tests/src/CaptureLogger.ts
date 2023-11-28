@@ -2,7 +2,7 @@
 
 import { format } from 'util';
 
-import type { Logger } from './types';
+import type { Logger } from './types.js';
 
 export class CaptureLogger implements Logger {
     readonly logs: string[] = [];

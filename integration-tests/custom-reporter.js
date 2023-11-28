@@ -1,1 +1,1 @@
-module.exports = require('./dist/reporter/index.js');
+export { getReporter } from './dist/reporter/index.js';

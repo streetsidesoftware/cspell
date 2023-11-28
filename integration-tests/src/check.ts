@@ -1,16 +1,20 @@
+import type { ChalkInstance } from 'chalk';
 import Chalk from 'chalk';
 import * as Path from 'path';
-import * as Shell from 'shelljs';
+import Shell from 'shelljs';
+import { fileURLToPath } from 'url';
 
-import { readConfig, resolveArgs, resolveRepArgs } from './config';
-import type { Repository } from './configDef';
-import { formatExecOutput } from './outputHelper';
-import { PrefixLogger } from './PrefixLogger';
-import { addRepository, checkoutRepositoryAsync, repositoryDir } from './repositoryHelper';
-import { execAsync } from './sh';
-import { shouldCheckRepo } from './shouldCheckRepo';
-import { checkAgainstSnapshot } from './snapshots';
-import type { Logger } from './types';
+import { readConfig, resolveArgs, resolveRepArgs } from './config.js';
+import type { Repository } from './configDef.js';
+import { formatExecOutput } from './outputHelper.js';
+import { PrefixLogger } from './PrefixLogger.js';
+import { addRepository, checkoutRepositoryAsync, repositoryDir } from './repositoryHelper.js';
+import { execAsync } from './sh.js';
+import { shouldCheckRepo } from './shouldCheckRepo.js';
+import { checkAgainstSnapshot } from './snapshots.js';
+import type { Logger } from './types.js';
+
+const __dirname = fileURLToPath(new URL('.', import.meta.url));
 
 const config = readConfig();
 const cspellArgs =
@@ -21,7 +25,14 @@ const cspellCommand = `node ${jsCspell}`;
 
 let checkCount = 0;
 
-const colors = [Chalk.green, Chalk.blue, Chalk.yellow, Chalk.cyan, Chalk.magenta, Chalk.rgb(255, 192, 64)];
+const colors = [
+    tfn(Chalk.green),
+    tfn(Chalk.blue),
+    tfn(Chalk.yellow),
+    tfn(Chalk.cyan),
+    tfn(Chalk.magenta),
+    tfn(Chalk.rgb(255, 192, 64)),
+];
 
 interface Result {
     stdout: string;
@@ -31,7 +42,7 @@ interface Result {
 }
 
 interface CheckContext {
-    color: Chalk.Chalk;
+    color: (strings: string | TemplateStringsArray, ...rest: unknown[]) => string;
     logger: Logger;
     rep: Repository;
 }
@@ -342,4 +353,21 @@ function mustBeDefined<T>(t: T | undefined): T {
         throw new Error('Must not be undefined.');
     }
     return t;
+}
+
+function tfn(colorFn: ChalkInstance): (strings: string | TemplateStringsArray, ...rest: unknown[]) => string {
+    return (strings, ...rest) => {
+        if (typeof strings === 'string') return colorFn(strings);
+
+        const parts: string[] = [];
+        let i = 0;
+        for (; i < strings.length - 1; ++i) {
+            parts.push(strings[i]);
+            parts.push(rest[i] as string);
+        }
+        if (i < strings.length) {
+            parts.push(strings[i]);
+        }
+        return colorFn(parts.join(''));
+    };
 }

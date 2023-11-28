@@ -3,12 +3,15 @@ import Chalk from 'chalk';
 import * as fs from 'fs';
 import * as Path from 'path';
 import { simpleGit } from 'simple-git';
+import { fileURLToPath } from 'url';
 
-import * as Config from './config';
-import type { Repository } from './configDef';
-import type { ShouldCheckOptions } from './shouldCheckRepo';
-import { shouldCheckRepo } from './shouldCheckRepo';
-import type { Logger } from './types';
+import * as Config from './config.js';
+import type { Repository } from './configDef.js';
+import type { ShouldCheckOptions } from './shouldCheckRepo.js';
+import { shouldCheckRepo } from './shouldCheckRepo.js';
+import type { Logger } from './types.js';
+
+const __dirname = fileURLToPath(new URL('.', import.meta.url));
 
 export const repositoryDir = Path.resolve(Path.join(__dirname, '../repositories/temp'));
 
@@ -171,7 +174,7 @@ export async function listRepositories(options: ListRepositoryOptions): Promise<
 
     paths.forEach((path) => {
         if (showDirty && dirty.has(path)) {
-            console.log(Chalk.red`${path} *`);
+            console.log(Chalk.red(`${path} *`));
         } else {
             console.log(path);
         }

@@ -7,6 +7,7 @@
     "cspell-integration-tests": "tester.js",
     "normalize-output": "scripts/normalize-output.mjs"
   },
+  "type": "module",
   "engines": {
     "node": ">=18"
   },
@@ -17,7 +18,7 @@
     "clean-repos": "shx rm -rf repositories/temp temp",
     "clean-build": "pnpm run clean && pnpm run build",
     "integration-tests": "node tester.js check -f",
-    "test-jest": "jest",
+    "test-vitest": "vitest run",
     "update-snapshots-only": "node tester.js check --update-snapshots",
     "update-repositories": "node tester.js check --update-repositories"
   },
@@ -26,7 +27,7 @@
   "dependencies": {
     "@cspell/cspell-types": "workspace:*",
     "@octokit/rest": "^19.0.13",
-    "chalk": "^4.1.2",
+    "chalk": "^5.3.0",
     "commander": "^11.1.0",
     "jest-diff": "^29.7.0",
     "shelljs": "^0.8.5",

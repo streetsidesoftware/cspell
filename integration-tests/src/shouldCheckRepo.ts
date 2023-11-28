@@ -1,4 +1,4 @@
-import type { Repository } from './configDef';
+import type { Repository } from './configDef.js';
 
 export interface ShouldCheckOptions {
     exclude: string[];

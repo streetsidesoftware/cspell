@@ -3,9 +3,9 @@ import * as commander from 'commander';
 import os from 'os';
 import path from 'path';
 
-import { check } from './check';
-import type { ListRepositoryOptions } from './repositoryHelper';
-import { addRepository, listRepositories } from './repositoryHelper';
+import { check } from './check.js';
+import type { ListRepositoryOptions } from './repositoryHelper.js';
+import { addRepository, listRepositories } from './repositoryHelper.js';
 
 const defaultParallel = Math.max(os.cpus().length / 2, 1);
 

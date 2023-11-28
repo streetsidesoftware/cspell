@@ -1,4 +1,5 @@
 import { resolve } from 'import-meta-resolve';
+import { statSync } from 'node:fs';
 import { sep as pathSep } from 'path';
 import { pathToFileURL } from 'url';
 
@@ -29,7 +30,11 @@ export async function dynamicImportFrom<Module>(
     }
 
     const location = importResolveModuleName(moduleName, paths);
-    return await import(location.toString());
+    return await import(location.href);
+}
+
+interface ErrorWithCode extends Error {
+    code?: string;
 }
 
 /**
@@ -51,7 +56,17 @@ export function importResolveModuleName(moduleName: string | URL, paths: (string
                         ? new URL(parent)
                         : pathToFileURL(parent + pathSep)
                     : parent;
-            return new URL(resolve(modulesNameToImport.toString(), url.toString()));
+            const resolvedURL = new URL(resolve(modulesNameToImport.toString(), url.toString()));
+            try {
+                const s = statSync(resolvedURL);
+                if (s.isFile()) {
+                    return resolvedURL;
+                }
+            } catch (err) {
+                const error: ErrorWithCode = new Error(`Cannot find module ${moduleName}`);
+                error.code = 'ERR_MODULE_NOT_FOUND';
+                lastError = error;
+            }
         } catch (err) {
             // console.warn('%o', { moduleName, modulesNameToImport, paths, parentUrl: url, err, resolved, location });
             lastError = err;

@@ -1,4 +1,4 @@
-import { cyan, green, red } from 'chalk';
+import Chalk from 'chalk';
 import { format } from 'util';
 
 export interface ExecOutput {
@@ -8,16 +8,18 @@ export interface ExecOutput {
     elapsedTime?: number;
 }
 
+const { red, green, cyan } = Chalk;
+
 export function formatExecOutput(output: ExecOutput): string {
     const { code, stdout, stderr, elapsedTime } = output;
 
-    const pfxStderr = red`stderr: `;
-    const pfxStdout = cyan`stdout: `;
+    const pfxStderr = red(`stderr: `);
+    const pfxStdout = cyan(`stdout: `);
 
     const pStdout = splitAndPrefix(pfxStdout, stdout.trim());
     const pStderr = splitAndPrefix(pfxStderr, stderr.trim());
     const color = code ? red : green;
-    const pCode = split(color`exit code: ${code}`);
+    const pCode = split(color(`exit code: ${code}`));
     const pTime = elapsedTime ? [`time: ${(elapsedTime / 1000).toFixed(3)}s`] : [];
 
     return pStdout.concat(pStderr).concat(pCode).concat(pTime).join('\n');

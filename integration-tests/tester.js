@@ -1,5 +1,3 @@
 #!/usr/bin/env node
 
-'use strict';
-
-require('./dist/run.js');
+import './dist/run.js';
