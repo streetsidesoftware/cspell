@@ -2,6 +2,7 @@ import type { ChalkInstance } from 'chalk';
 import Chalk from 'chalk';
 import * as Path from 'path';
 import * as Shell from 'shelljs';
+import { fileURLToPath } from 'url';
 
 import { readConfig, resolveArgs, resolveRepArgs } from './config.js';
 import type { Repository } from './configDef.js';
@@ -12,6 +13,8 @@ import { execAsync } from './sh.js';
 import { shouldCheckRepo } from './shouldCheckRepo.js';
 import { checkAgainstSnapshot } from './snapshots.js';
 import type { Logger } from './types.js';
+
+const __dirname = fileURLToPath(new URL('.', import.meta.url));
 
 const config = readConfig();
 const cspellArgs =
