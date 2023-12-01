@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 8.1.0 (2023-12-01)
+
+**Note:** Version bump only for package test-dict-software-terms
+
 ## 8.0.0 (2023-11-07)
 
 * ci: Workflow Bot -- Update ALL Dependencies (main) (#4959) ([096066d](https://github.com/streetsidesoftware/cspell-dicts/commit/096066d)), closes [#4959](https://github.com/streetsidesoftware/cspell-dicts/issues/4959)
