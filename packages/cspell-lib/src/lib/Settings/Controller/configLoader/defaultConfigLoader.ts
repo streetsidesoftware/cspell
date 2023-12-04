@@ -2,7 +2,7 @@ import type { CSpellConfigFile } from 'cspell-config-lib';
 
 import { toError } from '../../../util/errors.js';
 import { toFileUrl } from '../../../util/url.js';
-import type { ConfigLoader } from './configLoader.js';
+import type { IConfigLoader } from './configLoader.js';
 import { getDefaultConfigLoaderInternal } from './configLoader.js';
 import { configErrorToRawSettings, configToRawSettings } from './configToRawSettings.js';
 import type { PnPSettingsOptional } from './PnPSettings.js';
@@ -66,7 +66,7 @@ export function clearCachedSettingsFiles(): void {
     return gcl().clearCachedSettingsFiles();
 }
 
-export function getDefaultConfigLoader(): ConfigLoader {
+export function getDefaultConfigLoader(): IConfigLoader {
     return getDefaultConfigLoaderInternal();
 }
 function cachedFiles() {

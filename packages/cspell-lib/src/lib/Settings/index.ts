@@ -3,10 +3,12 @@ export { checkFilenameMatchesGlob } from './checkFilenameMatchesGlob.js';
 export { currentSettingsFileVersion, ENV_CSPELL_GLOB_ROOT } from './constants.js';
 export {
     clearCachedSettingsFiles,
+    createConfigLoader,
     defaultConfigFilenames,
     defaultFileName,
     extractImportErrors,
     getCachedFileSize,
+    getDefaultConfigLoader,
     getGlobalSettings,
     getGlobalSettingsAsync,
     loadConfig,

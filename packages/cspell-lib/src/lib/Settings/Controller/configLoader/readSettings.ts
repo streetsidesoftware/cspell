@@ -33,7 +33,6 @@ export async function readSettings(
     pnpSettings?: PnPSettingsOptional,
 ): Promise<CSpellSettingsI> {
     const loader = getDefaultConfigLoader();
-    await loader.onReady;
     const relativeTo =
         typeof relativeToOrPnP === 'string' || relativeToOrPnP instanceof URL ? relativeToOrPnP : undefined;
     const pnp = pnpSettings

@@ -10,6 +10,7 @@ export { defaultConfigFilenames } from './configLocations.js';
 export {
     clearCachedSettingsFiles,
     getCachedFileSize,
+    getDefaultConfigLoader,
     getGlobalSettings,
     getGlobalSettingsAsync,
     loadConfig,
