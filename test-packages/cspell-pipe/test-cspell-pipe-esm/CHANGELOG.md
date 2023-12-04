@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 8.1.2 (2023-12-04)
+
+### Bug Fixes
+
+* expose ConfigLoader API ([#5032](https://github.com/streetsidesoftware/cspell/issues/5032)) ([e839990](https://github.com/streetsidesoftware/cspell/commit/e839990e94f639000bc926ae87187840fb17dee9))
+
 ## 8.1.1 (2023-12-04)
 
 **Note:** Version bump only for package test-cspell-pipe-esm
