@@ -82,11 +82,11 @@ describe('Validate resolveFile', () => {
     const urlIssue5034 = new URL('issue-5034/', issuesFolderURL);
 
     test.each`
-        filename                                                      | relativeTo                                   | expected                               | found
-        ${'./nested/cspell.config.yaml'}                              | ${urlIssue5034.href}                         | ${sm(/nested\/cspell\.config\.yaml$/)} | ${true}
-        ${'./nested/cspell.config.yaml'}                              | ${new URL('cspell.json', urlIssue5034).href} | ${sm(/nested\/cspell\.config\.yaml$/)} | ${true}
-        ${'./nested/cspell.config.yaml'}                              | ${fileURLToPath(urlIssue5034)}               | ${sm(/nested\/cspell\.config\.yaml$/)} | ${true}
-        ${'./nested/node_modules/@cspell/dict-fr-fr/cspell-ext.json'} | ${urlIssue5034.href}                         | ${sm(/cspell-ext\.json$/)}             | ${true}
+        filename                                                      | relativeTo                                   | expected                                  | found
+        ${'./nested/cspell.config.yaml'}                              | ${urlIssue5034.href}                         | ${sm(/nested[/\\]cspell\.config\.yaml$/)} | ${true}
+        ${'./nested/cspell.config.yaml'}                              | ${new URL('cspell.json', urlIssue5034).href} | ${sm(/nested[/\\]cspell\.config\.yaml$/)} | ${true}
+        ${'./nested/cspell.config.yaml'}                              | ${fileURLToPath(urlIssue5034)}               | ${sm(/nested[/\\]cspell\.config\.yaml$/)} | ${true}
+        ${'./nested/node_modules/@cspell/dict-fr-fr/cspell-ext.json'} | ${urlIssue5034.href}                         | ${sm(/cspell-ext\.json$/)}                | ${true}
     `('resolveFile $filename rel $relativeTo', async ({ filename, relativeTo, expected, found }) => {
         const r = resolveFile(filename, relativeTo);
         // console.error('r %o', r);
