@@ -5,12 +5,15 @@ import * as path from 'path';
 import { fileURLToPath, pathToFileURL } from 'url';
 import { describe, expect, test } from 'vitest';
 
+import { pathRepoTestFixturesURL } from '../../test-util/index.mjs';
 import { __testing__, resolveFile } from './resolveFile.js';
 import { toFilePathOrHref } from './url.js';
 
 interface Config {
     import: string[];
 }
+
+const issuesFolderURL = new URL('./issues/', pathRepoTestFixturesURL);
 
 const defaultConfigFile = require.resolve('@cspell/cspell-bundled-dicts/cspell-default.json');
 const defaultConfigLocation = path.dirname(defaultConfigFile);
@@ -26,6 +29,7 @@ const rr = {
 };
 
 const oc = expect.objectContaining;
+const sm = expect.stringMatching;
 
 const { isFileURL, tryUrl } = __testing__;
 
@@ -72,6 +76,21 @@ describe('Validate resolveFile', () => {
     )('resolveFile "%s" rel "%s"', (filename: string, relativeTo: string, expected: string, found: boolean) => {
         const r = resolveFile(filename, relativeTo);
         expect(r.filename).toBe(expected);
+        expect(r.found).toBe(found);
+    });
+
+    const urlIssue5034 = new URL('issue-5034/', issuesFolderURL);
+
+    test.each`
+        filename                                                      | relativeTo                                   | expected                               | found
+        ${'./nested/cspell.config.yaml'}                              | ${urlIssue5034.href}                         | ${sm(/nested\/cspell\.config\.yaml$/)} | ${true}
+        ${'./nested/cspell.config.yaml'}                              | ${new URL('cspell.json', urlIssue5034).href} | ${sm(/nested\/cspell\.config\.yaml$/)} | ${true}
+        ${'./nested/cspell.config.yaml'}                              | ${fileURLToPath(urlIssue5034)}               | ${sm(/nested\/cspell\.config\.yaml$/)} | ${true}
+        ${'./nested/node_modules/@cspell/dict-fr-fr/cspell-ext.json'} | ${urlIssue5034.href}                         | ${sm(/cspell-ext\.json$/)}             | ${true}
+    `('resolveFile $filename rel $relativeTo', async ({ filename, relativeTo, expected, found }) => {
+        const r = resolveFile(filename, relativeTo);
+        // console.error('r %o', r);
+        expect(r.filename).toEqual(expected);
         expect(r.found).toBe(found);
     });
 
