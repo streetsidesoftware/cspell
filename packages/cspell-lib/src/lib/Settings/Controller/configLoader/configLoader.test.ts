@@ -415,8 +415,8 @@ describe('Validate search/load config files', () => {
     });
 
     test.each`
-        dir                                                  | expectedImports
-        ${new URL('issue-5034/cspell.json', urlIssues).href} | ${[oc({ filename: sm(/cspell.config.yaml/) }), oc({ filename: sm(/cspell-ext.json/) }), oc({ filename: sm(/cspell.json/) })]}
+        dir                                                   | expectedImports
+        ${new URL('issue-5034/.cspell.json', urlIssues).href} | ${[oc({ filename: sm(/cspell-ext.json/) }), oc({ filename: sm(/.cspell.json/) })]}
     `('Search and merge from $dir', async ({ dir, expectedImports }) => {
         const loader = getDefaultConfigLoader();
         const url = toFileUrl(dir);

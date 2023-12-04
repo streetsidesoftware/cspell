@@ -800,6 +800,17 @@ importers:
         specifier: ^0.19.8
         version: 0.19.8
 
+  test-fixtures/issues/issue-5034: {}
+
+  test-fixtures/issues/issue-5034/frontend:
+    devDependencies:
+      '@cspell/dict-fr-fr':
+        specifier: 2.2.2
+        version: 2.2.2
+      cspell:
+        specifier: workspace:*
+        version: link:../../../../packages/cspell
+
   test-packages/cspell-dictionary/test-cspell-dictionary:
     dependencies:
       cspell-dictionary:
