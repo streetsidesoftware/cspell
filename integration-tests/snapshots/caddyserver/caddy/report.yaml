@@ -5,7 +5,7 @@ Args: '["**/*.go"]'
 Summary:
   files: 244
   filesWithIssues: 226
-  issues: 3395
+  issues: 3412
   errors: 0
 Errors: []
 
@@ -294,23 +294,24 @@ issues:
   - "modules/caddyhttp/server.go:114:21      unrouted    U       // By default, all unrouted requests receive a"
   - "modules/caddyhttp/staticresp.go:272:60      unflagged       U       fmt.Errorf(\"too many unflagged arguments\")"
   - "modules/caddyhttp/subroute.go:55:22         subrouting      U       / Provision sets up subrouting."
-  - "modules/caddyhttp/templates/templates.go:61:15          cookiename          U       // {{.Cookie \"cookiename\"}}"
-  - "modules/caddyhttp/templates/templates.go:154:18         mydir               U       // {{listFiles \"/mydir\"}}"
-  - "modules/caddyhttp/templates/templates.go:160:5          Goldmark            U       // [Goldmark](https://github.com"
-  - "modules/caddyhttp/templates/templates.go:248:4          sitename            U       // sitename = \"A Caddy site\""
-  - "modules/caddyhttp/templates/templates.go:325:4          Customfunctions     U       // Customfunctions is the interface for"
-  - "modules/caddyhttp/templates/templates.go:407:14         etags               U       // and weak etags still cause browsers"
+  - "modules/caddyhttp/templates/templates.go:63:15          cookiename          U       // {{.Cookie \"cookiename\"}}"
+  - "modules/caddyhttp/templates/templates.go:156:18         mydir               U       // {{listFiles \"/mydir\"}}"
+  - "modules/caddyhttp/templates/templates.go:162:5          Goldmark            U       // [Goldmark](https://github.com"
+  - "modules/caddyhttp/templates/templates.go:250:4          sitename            U       // sitename = \"A Caddy site\""
+  - "modules/caddyhttp/templates/templates.go:332:4          Customfunctions     U       // Customfunctions is the interface for"
+  - "modules/caddyhttp/templates/templates.go:411:14         etags               U       // and weak etags still cause browsers"
   - "modules/caddyhttp/templates/tplcontext_test.go:488:75       ctxtest     U       tplContext.Root), \"caddy_ctxtest\")"
-  - "modules/caddyhttp/templates/tplcontext.go:33:2          chromahtml      U       chromahtml \"github.com/alecthomas"
-  - "modules/caddyhttp/templates/tplcontext.go:33:25         alecthomas      U       chromahtml \"github.com/alecthomas/chroma/v2/formatters"
-  - "modules/caddyhttp/templates/tplcontext.go:35:14         yuin            U       \"github.com/yuin/goldmark\""
-  - "modules/caddyhttp/templates/tplcontext.go:35:19         goldmark        U       \"github.com/yuin/goldmark\""
-  - "modules/caddyhttp/templates/tplcontext.go:39:2          gmhtml          U       gmhtml \"github.com/yuin/goldmark"
-  - "modules/caddyhttp/templates/tplcontext.go:186:2         virt            U       virtReq, err := http.NewRequest"
-  - "modules/caddyhttp/templates/tplcontext.go:473:3         dataint         U       dataint, dataerr := strconv"
-  - "modules/caddyhttp/templates/tplcontext.go:473:12        dataerr         U       dataint, dataerr := strconv.ParseUint"
-  - "modules/caddyhttp/templates/tplcontext.go:480:3         timelayout      U       timelayout := time.RFC1123Z"
-  - "modules/caddyhttp/templates/tplcontext.go:495:24        niladic         U       WrappedHeader wraps niladic functions so that they"
+  - "modules/caddyhttp/templates/tplcontext.go:34:2          chromahtml      U       chromahtml \"github.com/alecthomas"
+  - "modules/caddyhttp/templates/tplcontext.go:34:25         alecthomas      U       chromahtml \"github.com/alecthomas/chroma/v2/formatters"
+  - "modules/caddyhttp/templates/tplcontext.go:36:14         yuin            U       \"github.com/yuin/goldmark\""
+  - "modules/caddyhttp/templates/tplcontext.go:36:19         goldmark        U       \"github.com/yuin/goldmark\""
+  - "modules/caddyhttp/templates/tplcontext.go:40:2          gmhtml          U       gmhtml \"github.com/yuin/goldmark"
+  - "modules/caddyhttp/templates/tplcontext.go:62:40         missingkey      U       New(tplName).Option(\"missingkey=zero\")"
+  - "modules/caddyhttp/templates/tplcontext.go:189:2         virt            U       virtReq, err := http.NewRequest"
+  - "modules/caddyhttp/templates/tplcontext.go:476:3         dataint         U       dataint, dataerr := strconv"
+  - "modules/caddyhttp/templates/tplcontext.go:476:12        dataerr         U       dataint, dataerr := strconv.ParseUint"
+  - "modules/caddyhttp/templates/tplcontext.go:483:3         timelayout      U       timelayout := time.RFC1123Z"
+  - "modules/caddyhttp/templates/tplcontext.go:543:24        niladic         U       WrappedHeader wraps niladic functions so that they"
   - "modules/caddyhttp/tracing/module_test.go:105:3          traceparent     U       traceparent := request.Header.Get"
   - "modules/caddyhttp/tracing/module_test.go:105:38         Traceparent     U       request.Header.Get(\"Traceparent\")"
   - "modules/caddyhttp/tracing/module.go:30:5        otel                U       // otel implements opentelemetry"
