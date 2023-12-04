@@ -5,7 +5,7 @@ import { createReaderWriter, CSpellConfigFileInMemory } from 'cspell-config-lib'
 import type { CSpellIO } from 'cspell-io';
 import { getDefaultCSpellIO } from 'cspell-io';
 import * as path from 'path';
-import { fileURLToPath } from 'url';
+import { fileURLToPath, pathToFileURL } from 'url';
 
 import { onClearCache } from '../../../events/index.js';
 import { createCSpellSettingsInternal as csi } from '../../../Models/CSpellSettingsInternalDef.js';
@@ -78,7 +78,66 @@ interface CacheMergeConfigFileWithImports {
     result: Promise<CSpellSettingsI>;
 }
 
-export class ConfigLoader {
+export interface IConfigLoader {
+    readSettingsAsync(
+        filename: string | URL,
+        relativeTo?: string | URL,
+        pnpSettings?: PnPSettingsOptional,
+    ): Promise<CSpellSettingsI>;
+
+    /**
+     * Read a cspell configuration file.
+     * @param filenameOrURL - URL, relative path, absolute path, or package name.
+     * @param relativeTo - optional URL, defaults to `pathToFileURL('./')`
+     */
+    readConfigFile(filenameOrURL: string | URL, relativeTo?: string | URL): Promise<CSpellConfigFile | Error>;
+
+    searchForConfigFileLocation(searchFrom: URL | string | undefined): Promise<URL | undefined>;
+
+    searchForConfigFile(searchFrom: URL | string | undefined): Promise<CSpellConfigFile | undefined>;
+
+    /**
+     * This is an alias for `searchForConfigFile` and `mergeConfigFileWithImports`.
+     * @param searchFrom the directory / file URL to start searching from.
+     * @param pnpSettings - related to Using Yarn PNP.
+     * @returns the resulting settings
+     */
+    searchForConfig(
+        searchFrom: URL | string | undefined,
+        pnpSettings?: PnPSettingsOptional,
+    ): Promise<CSpellSettingsI | undefined>;
+
+    getGlobalSettingsAsync(): Promise<CSpellSettingsI>;
+
+    /**
+     * The loader caches configuration files for performance. This method clears the cache.
+     */
+    clearCachedSettingsFiles(): void;
+
+    /**
+     * Resolve imports and merge.
+     * @param cfgFile - configuration file.
+     * @param pnpSettings - optional settings related to Using Yarn PNP.
+     */
+    mergeConfigFileWithImports(
+        cfgFile: CSpellConfigFile,
+        pnpSettings?: PnPSettingsOptional | undefined,
+    ): Promise<CSpellSettingsI>;
+
+    /**
+     * Create an in memory CSpellConfigFile.
+     * @param filename - URL to the file. Used to resolve imports.
+     * @param settings - settings to use.
+     */
+    createCSpellConfigFile(filename: URL | string, settings: CSpellUserSettings): CSpellConfigFile;
+
+    /**
+     * Unsubscribe from any events and dispose of any resources including caches.
+     */
+    dispose(): void;
+}
+
+export class ConfigLoader implements IConfigLoader {
     public onReady: Promise<void>;
 
     /**
@@ -87,10 +146,7 @@ export class ConfigLoader {
      */
     protected constructor(readonly cspellIO: CSpellIO) {
         this.cspellConfigFileReaderWriter = createReaderWriter(undefined, undefined, createIO(cspellIO));
-        this.onReady = this.getGlobalSettingsAsync().then(
-            () => undefined,
-            (e) => logError(e),
-        );
+        this.onReady = this.prefetchGlobalSettingsAsync();
         this.subscribeToEvents();
     }
 
@@ -113,7 +169,8 @@ export class ConfigLoader {
         relativeTo?: string | URL,
         pnpSettings?: PnPSettingsOptional,
     ): Promise<CSpellSettingsI> {
-        const ref = resolveFilename(filename, relativeTo || process.cwd());
+        await this.onReady;
+        const ref = resolveFilename(filename, relativeTo || pathToFileURL('./'));
         const entry = this.importSettings(ref, pnpSettings || defaultPnPSettings, []);
         return entry.onReady;
     }
@@ -122,7 +179,7 @@ export class ConfigLoader {
         filenameOrURL: string | URL,
         relativeTo?: string | URL,
     ): Promise<CSpellConfigFile | Error> {
-        const ref = resolveFilename(filenameOrURL.toString(), relativeTo || process.cwd());
+        const ref = resolveFilename(filenameOrURL.toString(), relativeTo || pathToFileURL('./'));
         const url = this.cspellIO.toFileURL(ref.filename);
         const href = url.href;
         if (ref.error) return new ImportError(`Failed to read config file: "${ref.filename}"`, ref.error);
@@ -172,7 +229,7 @@ export class ConfigLoader {
     }
 
     public getGlobalSettings(): CSpellSettingsI {
-        assert(this.globalSettings);
+        assert(this.globalSettings, 'Global settings not loaded');
         return this.globalSettings;
     }
 
@@ -194,6 +251,15 @@ export class ConfigLoader {
         this.cachedPendingConfigFile.clear();
         this.cspellConfigFileReaderWriter.clearCachedFiles();
         this.cachedMergedConfig = new WeakMap<CSpellConfigFile, CacheMergeConfigFileWithImports>();
+        this.prefetchGlobalSettingsAsync();
+    }
+
+    protected prefetchGlobalSettingsAsync(): Promise<void> {
+        this.onReady = this.getGlobalSettingsAsync().then(
+            () => undefined,
+            (e) => logError(e),
+        );
+        return this.onReady;
     }
 
     protected importSettings(
@@ -495,7 +561,7 @@ function createConfigLoaderInternal(cspellIO?: CSpellIO) {
     return new ConfigLoaderInternal(cspellIO ?? getDefaultCSpellIO());
 }
 
-export function createConfigLoader(cspellIO?: CSpellIO): ConfigLoader {
+export function createConfigLoader(cspellIO?: CSpellIO): IConfigLoader {
     return createConfigLoaderInternal(cspellIO);
 }
 

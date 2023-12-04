@@ -103,7 +103,7 @@ describe('url', () => {
     describe('cwdURL', () => {
         test('should return the URL for the current working directory', () => {
             const result = cwdURL();
-            expect(result.href).toBe(pathToFileURL(process.cwd() + '/').href);
+            expect(result.href).toBe(pathToFileURL('./').href);
         });
     });
 

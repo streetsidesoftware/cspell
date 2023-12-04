@@ -3,9 +3,11 @@ import { Glob, CSpellSettingsWithSourceTrace, TextOffset, TextDocumentOffset, Ad
 export * from '@cspell/cspell-types';
 import { WeightMap } from 'cspell-trie-lib';
 export { CompoundWordsMethod } from 'cspell-trie-lib';
+import { CSpellConfigFile } from 'cspell-config-lib';
+import { CSpellIO } from 'cspell-io';
+export { asyncIterableToArray, readFileText as readFile, readFileTextSync as readFileSync, writeToFile, writeToFileIterable, writeToFileIterableP } from 'cspell-io';
 import { SuggestOptions, SuggestionResult, CachingDictionary, SpellingDictionaryCollection } from 'cspell-dictionary';
 export { SpellingDictionary, SpellingDictionaryCollection, SuggestOptions, SuggestionCollector, SuggestionResult, createSpellingDictionary, createCollection as createSpellingDictionaryCollection } from 'cspell-dictionary';
-export { asyncIterableToArray, readFileText as readFile, readFileTextSync as readFileSync, writeToFile, writeToFileIterable, writeToFileIterableP } from 'cspell-io';
 
 type ExclusionFunction = (fileUri: string) => boolean;
 type FileExclusionFunction = (file: string) => boolean;
@@ -412,7 +414,47 @@ type CSpellSettingsI = CSpellSettingsInternal;
 
 declare const sectionCSpell = "cSpell";
 declare const defaultFileName = "cspell.json";
+interface IConfigLoader {
+    readSettingsAsync(filename: string | URL, relativeTo?: string | URL, pnpSettings?: PnPSettingsOptional): Promise<CSpellSettingsI>;
+    /**
+     * Read a cspell configuration file.
+     * @param filenameOrURL - URL, relative path, absolute path, or package name.
+     * @param relativeTo - optional URL, defaults to `pathToFileURL('./')`
+     */
+    readConfigFile(filenameOrURL: string | URL, relativeTo?: string | URL): Promise<CSpellConfigFile | Error>;
+    searchForConfigFileLocation(searchFrom: URL | string | undefined): Promise<URL | undefined>;
+    searchForConfigFile(searchFrom: URL | string | undefined): Promise<CSpellConfigFile | undefined>;
+    /**
+     * This is an alias for `searchForConfigFile` and `mergeConfigFileWithImports`.
+     * @param searchFrom the directory / file URL to start searching from.
+     * @param pnpSettings - related to Using Yarn PNP.
+     * @returns the resulting settings
+     */
+    searchForConfig(searchFrom: URL | string | undefined, pnpSettings?: PnPSettingsOptional): Promise<CSpellSettingsI | undefined>;
+    getGlobalSettingsAsync(): Promise<CSpellSettingsI>;
+    /**
+     * The loader caches configuration files for performance. This method clears the cache.
+     */
+    clearCachedSettingsFiles(): void;
+    /**
+     * Resolve imports and merge.
+     * @param cfgFile - configuration file.
+     * @param pnpSettings - optional settings related to Using Yarn PNP.
+     */
+    mergeConfigFileWithImports(cfgFile: CSpellConfigFile, pnpSettings?: PnPSettingsOptional | undefined): Promise<CSpellSettingsI>;
+    /**
+     * Create an in memory CSpellConfigFile.
+     * @param filename - URL to the file. Used to resolve imports.
+     * @param settings - settings to use.
+     */
+    createCSpellConfigFile(filename: URL | string, settings: CSpellUserSettings): CSpellConfigFile;
+    /**
+     * Unsubscribe from any events and dispose of any resources including caches.
+     */
+    dispose(): void;
+}
 declare function loadPnP(pnpSettings: PnPSettingsOptional, searchFrom: URL): Promise<LoaderResult>;
+declare function createConfigLoader(cspellIO?: CSpellIO): IConfigLoader;
 
 declare const defaultConfigFilenames: readonly string[];
 
@@ -441,6 +483,7 @@ declare function getGlobalSettings(): CSpellSettingsI;
  */
 declare function getGlobalSettingsAsync(): Promise<CSpellSettingsI>;
 declare function getCachedFileSize(): number;
+declare function getDefaultConfigLoader(): IConfigLoader;
 declare function readRawSettings(filename: string | URL, relativeTo?: string | URL): Promise<CSpellSettingsWST>;
 
 declare function extractImportErrors(settings: CSpellSettingsWST): ImportFileRefWithError[];
@@ -957,4 +1000,4 @@ interface PerfTimer {
 type TimeNowFn = () => number;
 declare function createPerfTimer(name: string, onEnd?: (elapsed: number, name: string) => void, timeNowFn?: TimeNowFn): PerfTimer;
 
-export { type CheckTextInfo, type ConfigurationDependencies, type CreateTextDocumentParams, type DetermineFinalDocumentSettingsResult, type Document, DocumentValidator, type DocumentValidatorOptions, ENV_CSPELL_GLOB_ROOT, type ExcludeFilesGlobMap, type ExclusionFunction, exclusionHelper_d as ExclusionHelper, type FeatureFlag, FeatureFlags, ImportError, type ImportFileRefWithError$1 as ImportFileRefWithError, IncludeExcludeFlag, type IncludeExcludeOptions, index_link_d as Link, type Logger, type PerfTimer, type SpellCheckFileOptions, type SpellCheckFileResult, SpellingDictionaryLoadError, type SuggestedWord, SuggestionError, type SuggestionOptions, type SuggestionsForWordResult, text_d as Text, type TextDocument, type TextDocumentLine, type TextDocumentRef, type TextInfoItem, type TraceOptions, type TraceResult, UnknownFeatureFlagError, type ValidationIssue, calcOverrideSettings, checkFilenameMatchesGlob, checkText, checkTextDocument, clearCachedFiles, clearCaches, combineTextAndLanguageSettings, combineTextAndLanguageSettings as constructSettingsForText, createPerfTimer, createTextDocument, currentSettingsFileVersion, defaultConfigFilenames, defaultFileName, defaultFileName as defaultSettingsFilename, determineFinalDocumentSettings, extractDependencies, extractImportErrors, fileToDocument, fileToTextDocument, finalizeSettings, getCachedFileSize, getDefaultBundledSettingsAsync, getDefaultSettings, getDictionary, getGlobalSettings, getGlobalSettingsAsync, getLanguagesForBasename as getLanguageIdsForBaseFilename, getLanguagesForExt, getLogger, getSources, getSystemFeatureFlags, isBinaryFile, isSpellingDictionaryLoadError, loadConfig, loadPnP, mergeInDocSettings, mergeSettings, readRawSettings, readSettings, readSettingsFiles, refreshDictionaryCache, resolveFile, searchForConfig, sectionCSpell, setLogger, shouldCheckDocument, spellCheckDocument, spellCheckFile, suggestionsForWord, suggestionsForWords, traceWords, traceWordsAsync, updateTextDocument, validateText };
+export { type CheckTextInfo, type ConfigurationDependencies, type CreateTextDocumentParams, type DetermineFinalDocumentSettingsResult, type Document, DocumentValidator, type DocumentValidatorOptions, ENV_CSPELL_GLOB_ROOT, type ExcludeFilesGlobMap, type ExclusionFunction, exclusionHelper_d as ExclusionHelper, type FeatureFlag, FeatureFlags, ImportError, type ImportFileRefWithError$1 as ImportFileRefWithError, IncludeExcludeFlag, type IncludeExcludeOptions, index_link_d as Link, type Logger, type PerfTimer, type SpellCheckFileOptions, type SpellCheckFileResult, SpellingDictionaryLoadError, type SuggestedWord, SuggestionError, type SuggestionOptions, type SuggestionsForWordResult, text_d as Text, type TextDocument, type TextDocumentLine, type TextDocumentRef, type TextInfoItem, type TraceOptions, type TraceResult, UnknownFeatureFlagError, type ValidationIssue, calcOverrideSettings, checkFilenameMatchesGlob, checkText, checkTextDocument, clearCachedFiles, clearCaches, combineTextAndLanguageSettings, combineTextAndLanguageSettings as constructSettingsForText, createConfigLoader, createPerfTimer, createTextDocument, currentSettingsFileVersion, defaultConfigFilenames, defaultFileName, defaultFileName as defaultSettingsFilename, determineFinalDocumentSettings, extractDependencies, extractImportErrors, fileToDocument, fileToTextDocument, finalizeSettings, getCachedFileSize, getDefaultBundledSettingsAsync, getDefaultConfigLoader, getDefaultSettings, getDictionary, getGlobalSettings, getGlobalSettingsAsync, getLanguagesForBasename as getLanguageIdsForBaseFilename, getLanguagesForExt, getLogger, getSources, getSystemFeatureFlags, isBinaryFile, isSpellingDictionaryLoadError, loadConfig, loadPnP, mergeInDocSettings, mergeSettings, readRawSettings, readSettings, readSettingsFiles, refreshDictionaryCache, resolveFile, searchForConfig, sectionCSpell, setLogger, shouldCheckDocument, spellCheckDocument, spellCheckFile, suggestionsForWord, suggestionsForWords, traceWords, traceWordsAsync, updateTextDocument, validateText };

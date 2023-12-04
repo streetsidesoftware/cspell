@@ -35,7 +35,7 @@ import { readSettingsFiles } from './readSettingsFiles.js';
 
 const { validateRawConfigVersion } = __configLoader_testing__;
 
-const rootCspellLib = pathPackageRoot;
+const rootCspellLib = path.join(pathPackageRoot, '.');
 const root = pathRepoRoot;
 const samplesDir = pathPackageSamples;
 const samplesSrc = path.join(samplesDir, 'src');

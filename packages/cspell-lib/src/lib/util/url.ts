@@ -19,8 +19,7 @@ export function toFilePathOrHref(url: URL | string): string {
  * @returns URL for the source directory
  */
 export function getSourceDirectoryUrl(): URL {
-    const base = pathToFileURL(srcDirectory);
-    const srcDirectoryURL = new URL(base.pathname + '/', base);
+    const srcDirectoryURL = pathToFileURL(path.join(srcDirectory, '/'));
     return srcDirectoryURL;
 }
 
@@ -34,7 +33,7 @@ export function relativeTo(path: string, relativeTo?: URL | string): URL {
 }
 
 export function cwdURL(): URL {
-    return pathToFileURL(process.cwd() + '/');
+    return pathToFileURL('./');
 }
 
 export function resolveFileWithURL(file: string | URL, relativeToURL: URL): URL {
