@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 8.1.3 (2023-12-06)
+
+### Bug Fixes
+
+* Resolve relative imports without a leading `./` or `../`.  ([#5035](https://github.com/streetsidesoftware/cspell/issues/5035)) ([a28393b](https://github.com/streetsidesoftware/cspell/commit/a28393b30733b68e8b726c352e277ac4b5a0659d))
+
 ## 8.1.2 (2023-12-04)
 
 ### Bug Fixes
