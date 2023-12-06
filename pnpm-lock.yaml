@@ -800,6 +800,24 @@ importers:
         specifier: ^0.19.8
         version: 0.19.8
 
+  test-fixtures/issues/issue-5034:
+    devDependencies:
+      cspell:
+        specifier: workspace:*
+        version: link:../../../packages/cspell
+
+  test-fixtures/issues/issue-5034/frontend:
+    devDependencies:
+      '@cspell/dict-fr-fr':
+        specifier: 2.2.2
+        version: 2.2.2
+      '@cspell/dict-mnemonics':
+        specifier: ^3.0.1
+        version: 3.0.1
+      cspell:
+        specifier: workspace:*
+        version: link:../../../../packages/cspell
+
   test-packages/cspell-dictionary/test-cspell-dictionary:
     dependencies:
       cspell-dictionary:
@@ -2641,6 +2659,10 @@ packages:
 
   /@cspell/dict-markdown@2.0.1:
     resolution: {integrity: sha512-9j3t1UXsy3M1B8+LN8wPO73KzX7v94GBfefWKSMJDpBvDUnOjwxabnj9ICBOVErBPwURS+LkjJbgVXkvr1OiPQ==}
+    dev: true
+
+  /@cspell/dict-mnemonics@3.0.1:
+    resolution: {integrity: sha512-3rMCSe/ncd8Sucwo0rlRnCjDmmCOF9OVelkVsz6nYTbDRkqw/s34tHy3jEFukKFeYFy19Zzgn9pEd/pBE6b+OA==}
     dev: true
 
   /@cspell/dict-nl-nl@1.0.35:

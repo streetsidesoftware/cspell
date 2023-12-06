@@ -496,6 +496,10 @@ function resolveFilename(filename: string | URL, relativeTo: string | URL): Impo
     if (filename instanceof URL) return { filename: toFilePathOrHref(filename) };
     const r = resolveFile(filename, relativeTo);
 
+    if (r.warning) {
+        logWarning(r.warning);
+    }
+
     return {
         filename: r.filename.startsWith('file:/') ? fileURLToPath(r.filename) : r.filename,
         error: r.found ? undefined : new Error(`Failed to resolve file: "${filename}"`),

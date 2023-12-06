@@ -955,9 +955,20 @@ declare function setLogger(logger: Logger): Logger;
 declare function getLogger(): Logger;
 
 interface ResolveFileResult {
+    /**
+     * Absolute path or URL to the file.
+     */
     filename: string;
     relativeTo: string | undefined;
     found: boolean;
+    /**
+     * A warning message if the file was found, but there was a problem.
+     */
+    warning?: string;
+    /**
+     * The method used to resolve the file.
+     */
+    method: string;
 }
 /**
  * Resolve filename to absolute paths.

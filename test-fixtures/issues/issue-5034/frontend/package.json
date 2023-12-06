@@ -1,0 +1,14 @@
+{
+  "name": "issue-5034-frontend",
+  "version": "2.34.4",
+  "private": true,
+  "scripts": {
+    "spellcheck": "cspell -c \"../.cspell.json\" -r \"..\"  --dot --gitignore \"**/*.{js,jsx,ts,tsx,json,yml,md}\"",
+    "test": "pnpm run spellcheck"
+  },
+  "devDependencies": {
+    "@cspell/dict-fr-fr": "2.2.2",
+    "@cspell/dict-mnemonics": "^3.0.1",
+    "cspell": "workspace:*"
+  }
+}

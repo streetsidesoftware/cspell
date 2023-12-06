@@ -1,8 +1,8 @@
 import type { CSpellSettingsWithSourceTrace, CSpellUserSettings, ImportFileRef } from '@cspell/cspell-types';
 import type { CSpellConfigFile } from 'cspell-config-lib';
 import * as path from 'path';
-import { pathToFileURL } from 'url';
-import { beforeEach, describe, expect, test, vi } from 'vitest';
+import { fileURLToPath, pathToFileURL } from 'url';
+import { assert, beforeEach, describe, expect, test, vi } from 'vitest';
 
 import {
     pathPackageRoot,
@@ -10,6 +10,7 @@ import {
     pathPackageSamplesURL,
     pathRepoRoot,
     pathRepoTestFixtures,
+    pathRepoTestFixturesURL,
 } from '../../../../test-util/test.locations.cjs';
 import { logError, logWarning } from '../../../util/logger.js';
 import { resolveFileWithURL, toFilePathOrHref, toFileUrl } from '../../../util/url.js';
@@ -29,7 +30,7 @@ import {
     readRawSettings,
     searchForConfig,
 } from './defaultConfigLoader.js';
-import { extractImportErrors } from './extractImportErrors.js';
+import { extractImportErrors, extractImports } from './extractImportErrors.js';
 import { readSettings } from './readSettings.js';
 import { readSettingsFiles } from './readSettingsFiles.js';
 
@@ -41,7 +42,10 @@ const samplesDir = pathPackageSamples;
 const samplesSrc = path.join(samplesDir, 'src');
 const testFixtures = pathRepoTestFixtures;
 
+const urlIssues = new URL('./issues/', pathRepoTestFixturesURL);
+
 const oc = expect.objectContaining;
+const sm = expect.stringMatching;
 
 vi.mock('../../../util/logger');
 
@@ -408,6 +412,20 @@ describe('Validate search/load config files', () => {
         const loader = getDefaultConfigLoader();
         const searchResult = await loader.searchForConfigFile(toFileUrl(dir));
         expect(searchResult?.url.href).toEqual(expectedConfig.href);
+    });
+
+    test.each`
+        dir                                                   | expectedImports
+        ${new URL('issue-5034/.cspell.json', urlIssues).href} | ${[oc({ filename: sm(/cspell-ext.json/) }), oc({ filename: sm(/.cspell.json/) })]}
+    `('Search and merge from $dir', async ({ dir, expectedImports }) => {
+        const loader = getDefaultConfigLoader();
+        const url = toFileUrl(dir);
+        const searchResult = await loader.searchForConfigFile(url);
+        assert(searchResult);
+        expect(searchResult.url.href).toEqual(url.href);
+        const settings = await loader.mergeConfigFileWithImports(searchResult);
+        expect(settings?.__importRef?.filename).toEqual(fileURLToPath(url));
+        expect(extractImports(settings)).toEqual(expectedImports);
     });
 
     test.each`

@@ -20,12 +20,23 @@ import {
 } from './url.js';
 
 export interface ResolveFileResult {
+    /**
+     * Absolute path or URL to the file.
+     */
     filename: string;
     relativeTo: string | undefined;
     found: boolean;
+    /**
+     * A warning message if the file was found, but there was a problem.
+     */
+    warning?: string;
+    /**
+     * The method used to resolve the file.
+     */
+    method: string;
 }
 
-const testNodeModules = /^node_modules\//;
+const regExpStartsWidthNodeModules = /^node_modules[/\\]/;
 
 /**
  * Resolve filename to absolute paths.
@@ -34,6 +45,19 @@ const testNodeModules = /^node_modules\//;
  * @param relativeTo absolute path
  */
 export function resolveFile(filename: string, relativeTo: string | URL): ResolveFileResult {
+    const result = _resolveFile(filename, relativeTo);
+    const match = filename.match(regExpStartsWidthNodeModules);
+
+    if (match) {
+        result.warning ??= `Import of '${filename}' should not start with '${match[0]}' in '${toFilePathOrHref(
+            relativeTo,
+        )}'. Use '${filename.replace(regExpStartsWidthNodeModules, '')}' or a relative path instead.`;
+    }
+
+    return result;
+}
+
+export function _resolveFile(filename: string, relativeTo: string | URL): ResolveFileResult {
     filename = filename.replace(/^~/, os.homedir());
     const steps: { filename: string; fn: (f: string, r: string | URL) => ResolveFileResult | undefined }[] = [
         { filename, fn: tryUrl },
@@ -43,8 +67,8 @@ export function resolveFile(filename: string, relativeTo: string | URL): Resolve
         { filename, fn: tryResolveExists },
         { filename, fn: tryNodeResolveDefaultPaths },
         { filename, fn: tryResolveFrom },
-        { filename: filename.replace(testNodeModules, ''), fn: tryResolveFrom },
         { filename, fn: tryResolveGlobal },
+        { filename, fn: tryLegacyResolve },
     ];
 
     for (const step of steps) {
@@ -52,15 +76,14 @@ export function resolveFile(filename: string, relativeTo: string | URL): Resolve
         if (r?.found) return r;
     }
 
-    const r = tryUrl(filename, relativeTo);
+    const result = tryUrl(filename, relativeTo) || {
+        filename: isRelative(filename) ? joinWith(filename, relativeTo) : filename.toString(),
+        relativeTo: relativeTo.toString(),
+        found: false,
+        method: 'not found',
+    };
 
-    return (
-        r || {
-            filename: isRelative(filename) ? joinWith(filename, relativeTo) : filename.toString(),
-            relativeTo: relativeTo.toString(),
-            found: false,
-        }
-    );
+    return result;
 }
 
 /**
@@ -78,9 +101,10 @@ function tryUrl(filename: string, relativeToURL: string | URL): ResolveFileResul
                 filename: file,
                 relativeTo: undefined,
                 found: fs.existsSync(file),
+                method: 'tryUrl',
             };
         }
-        return { filename: filename.toString(), relativeTo: undefined, found: true };
+        return { filename: filename.toString(), relativeTo: undefined, found: true, method: 'tryUrl' };
     }
 
     if (isURLLike(relativeToURL) && !isDataURL(relativeToURL)) {
@@ -91,6 +115,7 @@ function tryUrl(filename: string, relativeToURL: string | URL): ResolveFileResul
             filename: toFilePathOrHref(url),
             relativeTo: toFilePathOrHref(relToURL),
             found: !isRelToAFile || fs.existsSync(url),
+            method: 'tryUrl',
         };
     }
 
@@ -102,7 +127,7 @@ function tryCreateRequire(filename: string | URL, relativeTo: string | URL): Res
     const require = createRequire(relativeTo);
     try {
         const r = require.resolve(filename);
-        return { filename: r, relativeTo: relativeTo.toString(), found: true };
+        return { filename: r, relativeTo: relativeTo.toString(), found: true, method: 'tryCreateRequire' };
     } catch (_) {
         return undefined;
     }
@@ -111,7 +136,7 @@ function tryCreateRequire(filename: string | URL, relativeTo: string | URL): Res
 function tryNodeResolveDefaultPaths(filename: string): ResolveFileResult | undefined {
     try {
         const r = require.resolve(filename);
-        return { filename: r, relativeTo: undefined, found: true };
+        return { filename: r, relativeTo: undefined, found: true, method: 'tryNodeResolveDefaultPaths' };
     } catch (_) {
         return undefined;
     }
@@ -119,7 +144,7 @@ function tryNodeResolveDefaultPaths(filename: string): ResolveFileResult | undef
 
 function tryNodeRequireResolve(filenameOrURL: string, relativeTo: string | URL): ResolveFileResult | undefined {
     const filename = fileURLOrPathToPath(filenameOrURL);
-    const relativeToPath = fileURLOrPathToPath(relativeTo);
+    const relativeToPath = pathFromRelativeTo(relativeTo);
     const home = os.homedir();
     function calcPaths(p: string) {
         const paths = [p];
@@ -135,7 +160,7 @@ function tryNodeRequireResolve(filenameOrURL: string, relativeTo: string | URL):
     const paths = calcPaths(path.resolve(relativeToPath));
     try {
         const r = require.resolve(filename, { paths });
-        return { filename: r, relativeTo: relativeToPath, found: true };
+        return { filename: r, relativeTo: relativeToPath, found: true, method: 'tryNodeRequireResolve' };
     } catch (_) {
         return undefined;
     }
@@ -145,7 +170,7 @@ function tryImportResolve(filename: string, relativeTo: string | URL): ResolveFi
     try {
         const paths = isRelative(filename) ? [relativeTo] : [relativeTo, srcDirectory];
         const resolved = fileURLToPath(importResolveModuleName(filename, paths));
-        return { filename: resolved, relativeTo: relativeTo.toString(), found: true };
+        return { filename: resolved, relativeTo: relativeTo.toString(), found: true, method: 'tryImportResolve' };
     } catch (_) {
         return undefined;
     }
@@ -153,33 +178,64 @@ function tryImportResolve(filename: string, relativeTo: string | URL): ResolveFi
 
 function tryResolveGlobal(filename: string): ResolveFileResult | undefined {
     const r = resolveGlobal(filename);
-    return (r && { filename: r, relativeTo: undefined, found: true }) || undefined;
+    return (r && { filename: r, relativeTo: undefined, found: true, method: 'tryResolveGlobal' }) || undefined;
 }
 
 function tryResolveExists(filename: string | URL, relativeTo: string | URL): ResolveFileResult | undefined {
-    if (filename instanceof URL || isURLLike(filename) || isURLLike(relativeTo)) return undefined;
+    if (filename instanceof URL || isURLLike(filename) || (isURLLike(relativeTo) && !isFileURL(relativeTo))) {
+        return undefined;
+    }
 
-    const toTry = [{ filename }, { filename: path.resolve(relativeTo.toString(), filename), relativeTo }];
+    relativeTo = pathFromRelativeTo(relativeTo);
+
+    const toTry = [{ filename }, { filename: path.resolve(relativeTo, filename), relativeTo }];
     for (const { filename, relativeTo } of toTry) {
         const found = path.isAbsolute(filename) && fs.existsSync(filename);
-        if (found) return { filename, relativeTo: relativeTo?.toString(), found };
+        if (found) return { filename, relativeTo: relativeTo?.toString(), found, method: 'tryResolveExists' };
     }
     filename = path.resolve(filename);
     return {
         filename,
         relativeTo: path.resolve('.'),
         found: fs.existsSync(filename),
+        method: 'tryResolveExists',
     };
 }
 
 function tryResolveFrom(filename: string, relativeTo: string | URL): ResolveFileResult | undefined {
     if (relativeTo instanceof URL) return undefined;
     try {
-        return { filename: resolveFrom(relativeTo, filename), relativeTo, found: true };
+        return {
+            filename: resolveFrom(pathFromRelativeTo(relativeTo), filename),
+            relativeTo,
+            found: true,
+            method: 'tryResolveFrom',
+        };
     } catch (error) {
         // Failed to resolve a relative module request
         return undefined;
     }
+}
+
+function tryLegacyResolve(filename: string | URL, relativeTo: string | URL): ResolveFileResult | undefined {
+    if (filename instanceof URL || isURLLike(filename) || (isURLLike(relativeTo) && !isFileURL(relativeTo))) {
+        return undefined;
+    }
+
+    const relativeToPath = isURLLike(relativeTo) ? fileURLToPath(new URL('./', relativeTo)) : relativeTo.toString();
+
+    const match = filename.match(regExpStartsWidthNodeModules);
+
+    if (match) {
+        const fixedFilename = filename.replace(regExpStartsWidthNodeModules, '');
+        const found = tryImportResolve(fixedFilename, relativeToPath) || tryResolveFrom(fixedFilename, relativeToPath);
+        if (found?.found) {
+            found.method = 'tryLegacyResolve';
+            return found;
+        }
+    }
+
+    return undefined;
 }
 
 function isRelative(filename: string | URL): boolean {
@@ -195,6 +251,10 @@ function joinWith(filename: string, relativeTo: string | URL): string {
     return relativeTo instanceof URL || isURLLike(relativeTo)
         ? toFilePathOrHref(new URL(filename, relativeTo))
         : path.resolve(relativeTo, filename);
+}
+
+function pathFromRelativeTo(relativeTo: string | URL): string {
+    return relativeTo instanceof URL || isURLLike(relativeTo) ? fileURLToPath(new URL('./', relativeTo)) : relativeTo;
 }
 
 export const __testing__ = {
