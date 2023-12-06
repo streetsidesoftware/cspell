@@ -61,7 +61,7 @@ function nullEmitter() {
     /* empty */
 }
 
-function relativeFilename(filename: string, cwd = process.cwd()): string {
+function relativeFilename(filename: string, cwd: string): string {
     const rel = path.relative(cwd, filename);
     if (rel.startsWith('..')) return filename;
     return '.' + path.sep + rel;
@@ -74,20 +74,20 @@ function relativeUriFilename(uri: string, fsPathRoot: string): string {
     return '.' + path.sep + rel;
 }
 
-function reportProgress(p: ProgressItem) {
+function reportProgress(p: ProgressItem, cwd: string) {
     if (p.type === 'ProgressFileComplete') {
         return reportProgressFileComplete(p);
     }
     if (p.type === 'ProgressFileBegin') {
-        return reportProgressFileBegin(p);
+        return reportProgressFileBegin(p, cwd);
     }
 }
 
-function reportProgressFileBegin(p: ProgressFileBegin) {
+function reportProgressFileBegin(p: ProgressFileBegin, cwd: string) {
     const fc = '' + p.fileCount;
     const fn = (' '.repeat(fc.length) + p.fileNum).slice(-fc.length);
     const idx = fn + '/' + fc;
-    const filename = chalk.gray(relativeFilename(p.filename));
+    const filename = chalk.gray(relativeFilename(p.filename, cwd));
     process.stderr.write(`\r${idx} ${filename}`);
 }
 
@@ -151,7 +151,7 @@ export function getReporter(options: ReporterOptions, config?: ReporterConfigura
         emitters[msgType]?.(message);
     }
 
-    const root = URI.file(options.root || process.cwd());
+    const root = URI.file(path.resolve(options.root || process.cwd()));
     const fsPathRoot = root.fsPath;
     function relativeIssue(fn: (i: ReporterIssue) => void): (i: Issue) => void {
         const fnFilename = options.relative
@@ -192,7 +192,7 @@ export function getReporter(options: ReporterOptions, config?: ReporterConfigura
         error: silent ? nullEmitter : errorEmitter,
         info: infoEmitter,
         debug: emitters.Debug,
-        progress: !silent && progress ? reportProgress : nullEmitter,
+        progress: !silent && progress ? (p) => reportProgress(p, fsPathRoot) : nullEmitter,
         result: !silent && summary ? resultEmitter : nullEmitter,
     };
 }
