@@ -965,6 +965,10 @@ interface ResolveFileResult {
      * A warning message if the file was found, but there was a problem.
      */
     warning?: string;
+    /**
+     * The method used to resolve the file.
+     */
+    method: string;
 }
 /**
  * Resolve filename to absolute paths.

@@ -79,20 +79,38 @@ describe('Validate resolveFile', () => {
         expect(r.found).toBe(found);
     });
 
-    const urlIssue5034 = new URL('issue-5034/', issuesFolderURL);
+    const urlIssue5034 = new URL('issue-5034/.cspell.json', issuesFolderURL);
 
     test.each`
-        filename                                                        | relativeTo                                   | expected                               | found
-        ${'./frontend/cfg/cspell.config.yaml'}                          | ${urlIssue5034.href}                         | ${sm(/cfg[/\\]cspell\.config\.yaml$/)} | ${true}
-        ${'./frontend/cfg/cspell.config.yaml'}                          | ${new URL('cspell.json', urlIssue5034).href} | ${sm(/cfg[/\\]cspell\.config\.yaml$/)} | ${true}
-        ${'./frontend/cfg/cspell.config.yaml'}                          | ${fileURLToPath(urlIssue5034)}               | ${sm(/cfg[/\\]cspell\.config\.yaml$/)} | ${true}
-        ${'./frontend/node_modules/@cspell/dict-fr-fr/cspell-ext.json'} | ${urlIssue5034.href}                         | ${sm(/cspell-ext\.json$/)}             | ${true}
+        filename                                                        | relativeTo                                                | expected                               | found
+        ${'./frontend/src/cspell.config.yaml'}                          | ${urlIssue5034.href}                                      | ${sm(/src[/\\]cspell\.config\.yaml$/)} | ${true}
+        ${'./frontend/src/cspell.config.yaml'}                          | ${new URL('cspell.json', urlIssue5034).href}              | ${sm(/src[/\\]cspell\.config\.yaml$/)} | ${true}
+        ${'./frontend/node_modules/@cspell/dict-fr-fr/cspell-ext.json'} | ${urlIssue5034.href}                                      | ${sm(/cspell-ext\.json$/)}             | ${true}
+        ${'@cspell/dict-fr-fr'}                                         | ${new URL('frontend/src/cspell.json', urlIssue5034).href} | ${sm(/cspell-ext\.json$/)}             | ${true}
+        ${'@cspell/dict-mnemonics'}                                     | ${new URL('frontend/src/cspell.json', urlIssue5034).href} | ${sm(/cspell-ext\.json$/)}             | ${true}
     `('resolveFile $filename rel $relativeTo', async ({ filename, relativeTo, expected, found }) => {
         const r = resolveFile(filename, relativeTo);
-        // console.error('r %o', r);
         expect(r.filename).toEqual(expected);
         expect(r.found).toBe(found);
+        expect(r.warning).toBeUndefined();
     });
+
+    test.each`
+        filename                                                 | relativeTo                                                | expected                   | found   | warning                                    | method
+        ${'node_modules/@cspell/dict-mnemonics/cspell-ext.json'} | ${new URL('frontend/src/cspell.json', urlIssue5034).href} | ${sm(/cspell-ext\.json$/)} | ${true} | ${expect.stringContaining('node_modules')} | ${'tryLegacyResolve'}
+        ${'@cspell/dict-mnemonics'}                              | ${new URL('frontend/src/cspell.json', urlIssue5034).href} | ${sm(/cspell-ext\.json$/)} | ${true} | ${undefined}                               | ${'tryCreateRequire'}
+        ${'node_modules/@cspell/dict-mnemonics'}                 | ${new URL('frontend/src/cspell.json', urlIssue5034).href} | ${sm(/cspell-ext\.json$/)} | ${true} | ${expect.stringContaining('node_modules')} | ${'tryLegacyResolve'}
+    `(
+        'resolveFile $filename rel $relativeTo with warning',
+        async ({ filename, relativeTo, expected, found, warning, method }) => {
+            const r = resolveFile(filename, relativeTo);
+            // console.error('r %o', r);
+            expect(r.filename).toEqual(expected);
+            expect(r.found).toBe(found);
+            expect(r.warning).toEqual(warning);
+            expect(r.method).toEqual(method);
+        },
+    );
 
     test.each`
         url                              | expected
