@@ -4,7 +4,9 @@
   "private": true,
   "dependencies": {},
   "scripts": {
-    "test": "yarn --cwd frontend spellcheck"
+    "test": "pnpm run -r spellcheck"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "cspell": "workspace:*"
+  }
 }

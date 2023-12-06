@@ -20,9 +20,16 @@ import {
 } from './url.js';
 
 export interface ResolveFileResult {
+    /**
+     * Absolute path or URL to the file.
+     */
     filename: string;
     relativeTo: string | undefined;
     found: boolean;
+    /**
+     * A warning message if the file was found, but there was a problem.
+     */
+    warning?: string;
 }
 
 const testNodeModules = /^node_modules\//;
@@ -45,6 +52,7 @@ export function resolveFile(filename: string, relativeTo: string | URL): Resolve
         { filename, fn: tryResolveFrom },
         { filename: filename.replace(testNodeModules, ''), fn: tryResolveFrom },
         { filename, fn: tryResolveGlobal },
+        { filename, fn: tryLegacyResolve },
     ];
 
     for (const step of steps) {
@@ -119,7 +127,7 @@ function tryNodeResolveDefaultPaths(filename: string): ResolveFileResult | undef
 
 function tryNodeRequireResolve(filenameOrURL: string, relativeTo: string | URL): ResolveFileResult | undefined {
     const filename = fileURLOrPathToPath(filenameOrURL);
-    const relativeToPath = fileURLOrPathToPath(relativeTo);
+    const relativeToPath = pathFromRelativeTo(relativeTo);
     const home = os.homedir();
     function calcPaths(p: string) {
         const paths = [p];
@@ -157,9 +165,13 @@ function tryResolveGlobal(filename: string): ResolveFileResult | undefined {
 }
 
 function tryResolveExists(filename: string | URL, relativeTo: string | URL): ResolveFileResult | undefined {
-    if (filename instanceof URL || isURLLike(filename) || isURLLike(relativeTo)) return undefined;
+    if (filename instanceof URL || isURLLike(filename) || (isURLLike(relativeTo) && !isFileURL(relativeTo))) {
+        return undefined;
+    }
 
-    const toTry = [{ filename }, { filename: path.resolve(relativeTo.toString(), filename), relativeTo }];
+    relativeTo = pathFromRelativeTo(relativeTo);
+
+    const toTry = [{ filename }, { filename: path.resolve(relativeTo, filename), relativeTo }];
     for (const { filename, relativeTo } of toTry) {
         const found = path.isAbsolute(filename) && fs.existsSync(filename);
         if (found) return { filename, relativeTo: relativeTo?.toString(), found };
@@ -175,11 +187,35 @@ function tryResolveExists(filename: string | URL, relativeTo: string | URL): Res
 function tryResolveFrom(filename: string, relativeTo: string | URL): ResolveFileResult | undefined {
     if (relativeTo instanceof URL) return undefined;
     try {
-        return { filename: resolveFrom(relativeTo, filename), relativeTo, found: true };
+        return { filename: resolveFrom(pathFromRelativeTo(relativeTo), filename), relativeTo, found: true };
     } catch (error) {
         // Failed to resolve a relative module request
         return undefined;
     }
+}
+
+const regExpStartsWidthNodeModules = /^node_modules[/\\]/;
+
+function tryLegacyResolve(filename: string | URL, relativeTo: string | URL): ResolveFileResult | undefined {
+    if (filename instanceof URL || isURLLike(filename) || (isURLLike(relativeTo) && !isFileURL(relativeTo))) {
+        return undefined;
+    }
+
+    const relativeToPath = isURLLike(relativeTo) ? fileURLToPath(new URL('./', relativeTo)) : relativeTo.toString();
+
+    const match = filename.match(regExpStartsWidthNodeModules);
+
+    if (match) {
+        const found = tryImportResolve(filename.replace(regExpStartsWidthNodeModules, ''), relativeToPath);
+        if (found?.found) {
+            found.warning = `Import of '${filename}' should not start with '${match[0]}' in '${toFilePathOrHref(
+                relativeTo,
+            )}'`;
+            return found;
+        }
+    }
+
+    return undefined;
 }
 
 function isRelative(filename: string | URL): boolean {
@@ -195,6 +231,10 @@ function joinWith(filename: string, relativeTo: string | URL): string {
     return relativeTo instanceof URL || isURLLike(relativeTo)
         ? toFilePathOrHref(new URL(filename, relativeTo))
         : path.resolve(relativeTo, filename);
+}
+
+function pathFromRelativeTo(relativeTo: string | URL): string {
+    return relativeTo instanceof URL || isURLLike(relativeTo) ? fileURLToPath(new URL('./', relativeTo)) : relativeTo;
 }
 
 export const __testing__ = {

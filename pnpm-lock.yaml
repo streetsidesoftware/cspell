@@ -800,7 +800,11 @@ importers:
         specifier: ^0.19.8
         version: 0.19.8
 
-  test-fixtures/issues/issue-5034: {}
+  test-fixtures/issues/issue-5034:
+    devDependencies:
+      cspell:
+        specifier: workspace:*
+        version: link:../../../packages/cspell
 
   test-fixtures/issues/issue-5034/frontend:
     devDependencies:
