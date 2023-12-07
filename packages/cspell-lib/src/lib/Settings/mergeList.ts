@@ -46,3 +46,10 @@ export function mergeList<T>(left: T[] | undefined, right: T[] | undefined): T[]
     Object.freeze(result);
     return result;
 }
+
+export function stats() {
+    return {
+        cacheMergeListUnique: cacheMergeListUnique.stats(),
+        cacheMergeLists: cacheMergeLists.stats(),
+    };
+}

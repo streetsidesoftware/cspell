@@ -1,5 +1,5 @@
 import type { CSpellSettingsWithSourceTrace, CSpellUserSettings, ImportFileRef } from '@cspell/cspell-types';
-import type { CSpellConfigFile } from 'cspell-config-lib';
+import { CSpellConfigFile, CSpellConfigFileInMemory } from 'cspell-config-lib';
 import * as path from 'path';
 import { fileURLToPath, pathToFileURL } from 'url';
 import { assert, beforeEach, describe, expect, test, vi } from 'vitest';
@@ -623,6 +623,16 @@ describe('Validate search/load config files', () => {
     `('validateRawConfigVersion $config', ({ config, mocked, expected }) => {
         validateRawConfigVersion(cf('filename', config));
         expect(mocked).toHaveBeenCalledWith(expected);
+    });
+
+    test('create', () => {
+        const loader = getDefaultConfigLoader();
+        const cfgFile = loader.createCSpellConfigFile(import.meta.url, {});
+
+        expect(cfgFile.url.href).toBe(import.meta.url);
+        expect(cfgFile).toBeInstanceOf(CSpellConfigFile);
+        expect(cfgFile).toBeInstanceOf(CSpellConfigFileInMemory);
+        expect(cfgFile.virtual).toBe(true);
     });
 });
 

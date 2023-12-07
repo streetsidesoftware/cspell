@@ -34,7 +34,7 @@ describe('cspellJson', () => {
         ${''}            | ${''}   | ${'Unable to parse config file: "file:///"'}
         ${'cspell.js'}   | ${''}   | ${'Unable to parse config file: "file:///cspell.js"'}
         ${'cspell.yaml'} | ${''}   | ${'Unable to parse config file: "file:///cspell.yaml"'}
-        ${'cspell.json'} | ${''}   | ${'Unexpected end of JSON input'}
+        ${'cspell.json'} | ${''}   | ${'Unable to parse file:///cspell.json'}
         ${'cspell.json'} | ${'[]'} | ${'Unable to parse file:///cspell.json'}
     `('fail $uri', ({ uri, content, expected }) => {
         expect(() => serializerCSpellJson.deserialize({ url: new URL(uri, 'file:///'), content }, next)).toThrow(

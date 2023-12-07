@@ -23,14 +23,17 @@ export function configToRawSettings(cfgFile: CSpellConfigFile | undefined): CSpe
 
     const source: Source = {
         name: cfgFile.settings.name || filename,
-        filename,
+        filename: cfgFile.virtual ? undefined : filename,
     };
 
     const rawSettings: CSpellSettingsWST = { ...cfgFile.settings };
     rawSettings.import = normalizeImport(rawSettings.import);
     normalizeRawConfig(rawSettings);
     rawSettings.source = source;
-    rawSettings.__importRef = fileRef;
+    // in virtual config files are ignored for the purposes of import history.
+    if (!cfgFile.virtual) {
+        rawSettings.__importRef = fileRef;
+    }
 
     const id = rawSettings.id || urlToSimpleId(url);
     const name = rawSettings.name || id;

@@ -18,6 +18,7 @@ import {
     ENV_CSPELL_GLOB_ROOT,
     extractDependencies,
     extractImportErrors,
+    getDefaultConfigLoader,
     getDictionary,
     isBinaryFile as cspellIsBinaryFile,
     setLogger,
@@ -63,6 +64,8 @@ import type { LintRequest } from './LintRequest.js';
 const version = npmPackage.version;
 
 const BATCH_SIZE = 8;
+
+const debugStats = false;
 
 const { opFilterAsync } = operators;
 
@@ -445,7 +448,9 @@ export async function runLint(cfg: LintRequest): Promise<RunResult> {
             const cacheSettings = await calcCacheSettings(configInfo.config, { ...cfg.options, version }, root);
             const files = await determineFilesToCheck(configInfo, cfg, reporter, globInfo);
 
-            return await processFiles(files, configInfo, cacheSettings);
+            const result = await processFiles(files, configInfo, cacheSettings);
+            debugStats && console.error('stats: %o', getDefaultConfigLoader().getStats());
+            return result;
         } catch (e) {
             const err = toApplicationError(e);
             reporter.error('Linter', err);

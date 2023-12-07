@@ -1,10 +1,16 @@
+import { CSpellConfigFileInMemory, CSpellConfigFileJson } from 'cspell-config-lib';
 import path from 'path';
 import type { Mock } from 'vitest';
 import { afterEach, describe, expect, test, vi } from 'vitest';
 
 import { getLogger } from '../util/logger.js';
 import { ConfigStore } from './cfgStore.js';
-import { getGlobalConfigPath, getRawGlobalSettings, writeRawGlobalSettings } from './GlobalSettings.js';
+import {
+    getGlobalConfig,
+    getGlobalConfigPath,
+    getRawGlobalSettings,
+    writeRawGlobalSettings,
+} from './GlobalSettings.js';
 
 interface MockConfigStore extends ConfigStore {
     (name: string): MockConfigStore;
@@ -134,6 +140,21 @@ describe('Validate GlobalSettings', () => {
         expect(mockImpl.mock_setAll).toHaveBeenCalledWith({
             import: ['hello'],
         });
+    });
+
+    test('writeRawGlobalSettings then read', async () => {
+        const mockImpl = createMockConfigStore();
+        mockConfigstore.mockImplementation(mockImpl);
+
+        const cfBefore = await getGlobalConfig();
+
+        expect(cfBefore).toBeInstanceOf(CSpellConfigFileInMemory);
+
+        const updated = { import: ['hello'], extra: { name: 'extra', value: 'ok' } };
+        await writeRawGlobalSettings(updated);
+
+        const cfAfter = await getGlobalConfig();
+        expect(cfAfter).toBeInstanceOf(CSpellConfigFileJson);
     });
 
     test('writeRawGlobalSettings with Error', async () => {

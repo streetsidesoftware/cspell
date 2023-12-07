@@ -78,5 +78,5 @@ describe('loaderJavaScript', () => {
 });
 
 function deserialize(params: { url: URL; content: string }): CSpellConfigFileJson {
-    return new CSpellConfigFileJson(params.url, JSON.parse(params.content), vi.fn());
+    return new CSpellConfigFileJson(params.url, JSON.parse(params.content));
 }
