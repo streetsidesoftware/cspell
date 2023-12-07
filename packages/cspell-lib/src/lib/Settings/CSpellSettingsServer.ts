@@ -26,6 +26,8 @@ type CSpellSettingsWST = AdvancedCSpellSettingsWithSourceTrace;
 export type CSpellSettingsWSTO = OptionalOrUndefined<AdvancedCSpellSettingsWithSourceTrace>;
 export type CSpellSettingsI = CSpellSettingsInternal;
 
+export { stats as getMergeStats } from './mergeList.js';
+
 const emptyWords: string[] = [];
 Object.freeze(emptyWords);
 

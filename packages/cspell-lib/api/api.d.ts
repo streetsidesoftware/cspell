@@ -362,6 +362,7 @@ interface DictionaryFileDefinitionInternal extends Readonly<DictionaryDefinition
 type CSpellSettingsWST$1 = AdvancedCSpellSettingsWithSourceTrace;
 type CSpellSettingsWSTO = OptionalOrUndefined<AdvancedCSpellSettingsWithSourceTrace>;
 type CSpellSettingsI$1 = CSpellSettingsInternal;
+
 declare function mergeSettings(left: CSpellSettingsWSTO | CSpellSettingsI$1, ...settings: (CSpellSettingsWSTO | CSpellSettingsI$1 | undefined)[]): CSpellSettingsI$1;
 declare function mergeInDocSettings(left: CSpellSettingsWSTO, right: CSpellSettingsWSTO): CSpellSettingsWST$1;
 /**
@@ -452,6 +453,7 @@ interface IConfigLoader {
      * Unsubscribe from any events and dispose of any resources including caches.
      */
     dispose(): void;
+    getStats(): Readonly<Record<string, Readonly<Record<string, number>>>>;
 }
 declare function loadPnP(pnpSettings: PnPSettingsOptional, searchFrom: URL): Promise<LoaderResult>;
 declare function createConfigLoader(cspellIO?: CSpellIO): IConfigLoader;

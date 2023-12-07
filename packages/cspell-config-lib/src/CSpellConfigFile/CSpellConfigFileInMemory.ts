@@ -11,7 +11,7 @@ export class CSpellConfigFileInMemory extends ImplCSpellConfigFile {
         super(url, settings);
     }
 
-    get readonly(): boolean {
+    get virtual(): boolean {
         return true;
     }
 }

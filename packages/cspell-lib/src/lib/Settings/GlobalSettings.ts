@@ -1,6 +1,6 @@
 import type { CSpellSettings, CSpellSettingsWithSourceTrace } from '@cspell/cspell-types';
 import type { CSpellConfigFile } from 'cspell-config-lib';
-import { CSpellConfigFileInMemory } from 'cspell-config-lib';
+import { CSpellConfigFileInMemory, CSpellConfigFileJson } from 'cspell-config-lib';
 import { pathToFileURL } from 'url';
 
 import { isErrnoException } from '../util/errors.js';
@@ -34,12 +34,13 @@ export function getGlobalConfig(): Promise<CSpellConfigFile> {
 
     const globalConf: GlobalSettingsWithSource = { source };
 
+    let hasGlobalConfig = false;
+
     try {
-        // console.warn('%o', ConfigStore);
         const cfgStore = new ConfigStore(packageName);
-        // console.warn('%o', cfgStore);
 
         const cfg = cfgStore.all;
+
         // Only populate globalConf is there are values.
         if (cfg && Object.keys(cfg).length) {
             Object.assign(globalConf, cfg);
@@ -47,6 +48,7 @@ export function getGlobalConfig(): Promise<CSpellConfigFile> {
                 name,
                 filename: cfgStore.path,
             };
+            hasGlobalConfig = Object.keys(cfg).length > 0;
         }
     } catch (error) {
         if (
@@ -60,7 +62,9 @@ export function getGlobalConfig(): Promise<CSpellConfigFile> {
 
     const settings: CSpellSettingsWST = { ...globalConf, name, source };
 
-    return Promise.resolve(new CSpellConfigFileInMemory(urlGlobal, settings));
+    const ConfigFile = hasGlobalConfig ? CSpellConfigFileJson : CSpellConfigFileInMemory;
+
+    return Promise.resolve(new ConfigFile(urlGlobal, settings));
 }
 
 export async function writeRawGlobalSettings(settings: GlobalCSpellSettings): Promise<void> {

@@ -19,7 +19,7 @@ import {
     currentSettingsFileVersion,
     ENV_CSPELL_GLOB_ROOT,
 } from '../../constants.js';
-import { mergeSettings } from '../../CSpellSettingsServer.js';
+import { getMergeStats, mergeSettings } from '../../CSpellSettingsServer.js';
 import { getGlobalConfig } from '../../GlobalSettings.js';
 import { ImportError } from '../ImportError.js';
 import type { LoaderResult } from '../pnpLoader.js';
@@ -135,6 +135,8 @@ export interface IConfigLoader {
      * Unsubscribe from any events and dispose of any resources including caches.
      */
     dispose(): void;
+
+    getStats(): Readonly<Record<string, Readonly<Record<string, number>>>>;
 }
 
 export class ConfigLoader implements IConfigLoader {
@@ -419,7 +421,6 @@ export class ConfigLoader implements IConfigLoader {
         const fileRef = rawSettings.__importRef;
         const source = rawSettings.source;
 
-        assert(fileRef);
         assert(source);
 
         // Fix up dictionaryDefinitions
@@ -455,7 +456,9 @@ export class ConfigLoader implements IConfigLoader {
         const finalizeSettings = mergeSettings(mergedImportedSettings, fileSettings);
         finalizeSettings.name = settings.name || finalizeSettings.name || '';
         finalizeSettings.id = settings.id || finalizeSettings.id || '';
-        finalizeSettings.__importRef = fileRef;
+        if (fileRef) {
+            finalizeSettings.__importRef = fileRef;
+        }
         return finalizeSettings;
     }
 
@@ -471,6 +474,10 @@ export class ConfigLoader implements IConfigLoader {
                 logError(e);
             }
         }
+    }
+
+    getStats() {
+        return { ...getMergeStats() };
     }
 }
 

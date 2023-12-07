@@ -21,7 +21,7 @@ import {
     readSettingsFiles,
 } from './Controller/configLoader/index.js';
 import type { CSpellSettingsWST } from './Controller/configLoader/types.js';
-import { getSources, mergeSettings } from './CSpellSettingsServer.js';
+import { getMergeStats, getSources, mergeSettings } from './CSpellSettingsServer.js';
 import { _defaultSettings, getDefaultBundledSettingsAsync } from './DefaultSettings.js';
 
 const samplesDir = pathPackageSamples;
@@ -301,6 +301,11 @@ describe('Validate CSpellSettingsServer', () => {
 
         const sources = getSources(config);
         expect(sources.length).toBe(3);
+    });
+
+    test('getMergeStats', () => {
+        const stats = getMergeStats();
+        expect(stats).toHaveProperty('cacheMergeListUnique');
     });
 });
 

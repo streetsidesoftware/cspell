@@ -5,9 +5,26 @@ export interface CSpellConfigFileReference {
 }
 
 export interface ICSpellConfigFile {
+    /**
+     * The url of the config file, used to resolve imports.
+     */
     readonly url: URL;
+    /**
+     * The settings from the config file.
+     */
     readonly settings: CSpellSettings;
-    readonly readonly?: boolean;
+    /**
+     * Indicate that the config file is readonly.
+     */
+    readonly?: boolean;
+    /**
+     * Indicate that the config file is virtual and not associated with a file on disk.
+     */
+    virtual?: boolean;
+    /**
+     * Indicate that the config file is remote and not associated with a file on disk.
+     */
+    remote?: boolean;
 }
 
 export abstract class CSpellConfigFile implements ICSpellConfigFile {
@@ -18,6 +35,14 @@ export abstract class CSpellConfigFile implements ICSpellConfigFile {
 
     get readonly(): boolean {
         return this.settings.readonly || this.url.protocol !== 'file:';
+    }
+
+    get virtual(): boolean {
+        return false;
+    }
+
+    get remote(): boolean {
+        return this.url.protocol !== 'file:';
     }
 }
 

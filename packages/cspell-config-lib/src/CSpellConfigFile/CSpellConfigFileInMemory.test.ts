@@ -26,4 +26,14 @@ describe('CSpellConfigFileInMemory', () => {
         const configFile = new CSpellConfigFileInMemory(url, settings);
         expect(configFile.readonly).toBe(true);
     });
+
+    test('should be remote', () => {
+        const configFile = new CSpellConfigFileInMemory(url, settings);
+        expect(configFile.remote).toBe(true);
+    });
+
+    test('should be virtual', () => {
+        const configFile = new CSpellConfigFileInMemory(url, settings);
+        expect(configFile.virtual).toBe(true);
+    });
 });

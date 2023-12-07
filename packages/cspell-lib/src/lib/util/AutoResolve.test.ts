@@ -41,5 +41,69 @@ describe('AutoResolve', () => {
         expect(cache.get(tagHello2)).toBe(undefined);
         expect(cache.get(tagHello2, resolver)).toBe('HELLO');
         expect(resolver).toHaveBeenCalledTimes(3);
+        expect(cache.stats()).toEqual({
+            hits: 2,
+            misses: 5,
+            deletes: 0,
+            resolved: 3,
+            sets: 1,
+            disposals: 0,
+            clears: 0,
+        });
+        expect(cache.get(tagHello2, resolver)).toBe('HELLO');
+        expect(cache.stats()).toEqual({
+            hits: 3,
+            misses: 5,
+            deletes: 0,
+            resolved: 3,
+            sets: 1,
+            disposals: 0,
+            clears: 0,
+        });
+        cache.delete(tagHello);
+        expect(cache.stats()).toEqual({
+            hits: 3,
+            misses: 5,
+            deletes: 1,
+            resolved: 3,
+            sets: 1,
+            disposals: 0,
+            clears: 0,
+        });
+        expect(cache.get(tagHello, resolver)).toBe('HELLO');
+        expect(cache.stats()).toEqual({
+            hits: 3,
+            misses: 6,
+            deletes: 1,
+            resolved: 4,
+            sets: 1,
+            disposals: 0,
+            clears: 0,
+        });
+        const weakMap = cache.map;
+        cache.clear();
+        const weakMap2 = cache.map;
+        expect(weakMap2).toBe(cache.map);
+        expect(weakMap2).not.toBe(weakMap);
+        expect(cache.stats()).toEqual({
+            hits: 0,
+            misses: 0,
+            deletes: 0,
+            resolved: 0,
+            sets: 0,
+            disposals: 0,
+            clears: 1,
+        });
+        cache.dispose();
+        expect(cache.map).not.toBe(weakMap2);
+        expect(cache.stats()).toEqual({
+            hits: 0,
+            misses: 0,
+            deletes: 0,
+            resolved: 0,
+            sets: 0,
+            disposals: 1,
+            clears: 2,
+        });
     });
 });

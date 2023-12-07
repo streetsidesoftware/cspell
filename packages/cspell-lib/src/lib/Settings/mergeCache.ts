@@ -8,7 +8,7 @@ interface IDisposable {
 export class CalcLeftRightResultWeakCache<TL extends object, TR extends object, R> implements IDisposable {
     private map = new AutoResolveWeakCache<TL, AutoResolveWeakCache<TR, R>>();
 
-    private _toDispose: IDisposable;
+    private _toDispose: IDisposable | undefined;
 
     constructor() {
         this._toDispose = onClearCache(() => {
@@ -26,6 +26,12 @@ export class CalcLeftRightResultWeakCache<TL extends object, TR extends object, 
     }
 
     dispose() {
-        this._toDispose.dispose();
+        this.map.dispose();
+        this._toDispose?.dispose();
+        this._toDispose = undefined;
+    }
+
+    stats() {
+        return this.map.stats();
     }
 }
