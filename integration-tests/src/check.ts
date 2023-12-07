@@ -1,5 +1,5 @@
 import type { ChalkInstance } from 'chalk';
-import Chalk from 'chalk';
+import chalk from 'chalk';
 import * as Path from 'path';
 import Shell from 'shelljs';
 import { fileURLToPath } from 'url';
@@ -26,12 +26,12 @@ const cspellCommand = `node ${jsCspell}`;
 let checkCount = 0;
 
 const colors = [
-    tfn(Chalk.green),
-    tfn(Chalk.blue),
-    tfn(Chalk.yellow),
-    tfn(Chalk.cyan),
-    tfn(Chalk.magenta),
-    tfn(Chalk.rgb(255, 192, 64)),
+    tfn(chalk.green),
+    tfn(chalk.blue),
+    tfn(chalk.yellow),
+    tfn(chalk.cyan),
+    tfn(chalk.magenta),
+    tfn(chalk.rgb(255, 192, 64)),
 ];
 
 interface Result {
@@ -218,7 +218,7 @@ function report(reposChecked: Repository[], results: CheckResult[]) {
     const r = sorted.map((r) => {
         const { success = undefined, elapsedTime = 0 } = resultsByRep.get(r) || {};
         const mark = success === undefined ? '🛑' : success === false ? '❌' : '✅';
-        const time = Chalk.gray(rightJustify(elapsedTime ? `${(elapsedTime / 1000).toFixed(3)}s` : '', 9));
+        const time = chalk.gray(rightJustify(elapsedTime ? `${(elapsedTime / 1000).toFixed(3)}s` : '', 9));
         const padding = ' '.repeat(w - r.path.length);
         return `\t ${mark}  ${r.path} ${padding} ${time}`;
     });

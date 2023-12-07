@@ -1,4 +1,4 @@
-import Chalk from 'chalk';
+import chalk from 'chalk';
 import { format } from 'util';
 
 export interface ExecOutput {
@@ -8,7 +8,7 @@ export interface ExecOutput {
     elapsedTime?: number;
 }
 
-const { red, green, cyan } = Chalk;
+const { red, green, cyan } = chalk;
 
 export function formatExecOutput(output: ExecOutput): string {
     const { code, stdout, stderr, elapsedTime } = output;
