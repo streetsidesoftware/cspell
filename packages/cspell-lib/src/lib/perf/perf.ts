@@ -1,5 +1,3 @@
-import assert from 'assert';
-
 interface PerfEntry {
     readonly entryType: string;
     readonly name: string;
