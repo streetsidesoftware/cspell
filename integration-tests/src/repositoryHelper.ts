@@ -1,5 +1,5 @@
 import { Octokit } from '@octokit/rest';
-import Chalk from 'chalk';
+import chalk from 'chalk';
 import * as fs from 'fs';
 import * as Path from 'path';
 import { simpleGit } from 'simple-git';
@@ -174,7 +174,7 @@ export async function listRepositories(options: ListRepositoryOptions): Promise<
 
     paths.forEach((path) => {
         if (showDirty && dirty.has(path)) {
-            console.log(Chalk.red(`${path} *`));
+            console.log(chalk.red(`${path} *`));
         } else {
             console.log(path);
         }
