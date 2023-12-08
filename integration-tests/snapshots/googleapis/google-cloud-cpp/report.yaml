@@ -4,18 +4,17 @@ Url: https://github.com/googleapis/google-cloud-cpp.git
 Args: '["--config=${repoConfig}/cspell.json","**/*","-e","{*.BUILD,BUILD,CHANGELOG.md,*.sh,*.cfg,*.ps1,Dockerfile.*,*.Dockerfile,*.{yaml,xml,json,cmake}}"]'
 Summary:
   files: 16989
-  filesWithIssues: 12442
-  issues: 113164
+  filesWithIssues: 11426
+  issues: 96928
   errors: 0
 Errors: []
 
 issues:
-  - "ARCHITECTURE.md:23:61       retryable           U       RPCs that fail with a retryable error,"
-  - "ARCHITECTURE.md:60:4        quickstart          U       - `quickstart/` contains a small program"
-  - "ARCHITECTURE.md:91:60       proto               U       a `service` in the `.proto` definitions"
-  - "ARCHITECTURE.md:100:3       Bigtable            U       - Bigtable has a [`bigtable::Table"
-  - "ARCHITECTURE.md:100:20      bigtable            U       - Bigtable has a [`bigtable::Table`](/google/cloud"
-  - "ARCHITECTURE.md:188:1       discoverability     U       discoverability of available option"
+  - "ARCHITECTURE.md:23:61       retryable       U       RPCs that fail with a retryable error,"
+  - "ARCHITECTURE.md:60:4        quickstart      U       - `quickstart/` contains a small program"
+  - "ARCHITECTURE.md:91:60       proto           U       a `service` in the `.proto` definitions"
+  - "ARCHITECTURE.md:100:3       Bigtable        U       - Bigtable has a [`bigtable::Table"
+  - "ARCHITECTURE.md:100:20      bigtable        U       - Bigtable has a [`bigtable::Table`](/google/cloud"
   - "bazel/BUILD.bazel:17:37         subpackages     U       visibility = [\"//:__subpackages__\"])"
   - "bazel/deps-cache.py:111:13      chksum      U       chksum = hashlib.sha256(f.read"
   - "bazel/deps-cache.py:135:26      gsutil      U       subprocess.run([\"gsutil\", \"-q\", \"cp\", source"
@@ -324,10 +323,8 @@ issues:
   - "docfx/doxygen2children_test.cc:66:88        dbdb                U       RuntimeStatusError_1ac30dbdb272a62aee4eb8f9bf459"
   - "docfx/doxygen2children_test.cc:112:78       namespacegoogle     U       XMLSchema-instance\" id=\"namespacegoogle_1_1cloud\" kind=\"namespace"
   - "docfx/doxygen2children_test.cc:114:28       structgoogle        U       <innerclass refid=\"structgoogle_1_1cloud_1_1AccessTokenLifeti"
-  - "docfx/doxygen2children_test.cc:141:15       Idempotency         U       <name>Idempotency</name>"
   - "docfx/doxygen2children_test.cc:151:106      bdaab               U       5d33e94f2dc4028d4d67bdaab75190\" prot=\"public\""
   - "docfx/doxygen2children_test.cc:160:29       ulink               U       Whether a request is <ulink url=\"https://en.wikipedia"
-  - "docfx/doxygen2children_test.cc:164:45       idempotency         U       override the default idempotency policy, though we anticipate"
   - "docfx/doxygen2children.h:30:17          uids    U       // list all the uids for the (public) class"
   - "docfx/doxygen2markdown_test.cc:246:20       xrefsect            U       <para><xrefsect id=\"deprecated_1_deprecated"
   - "docfx/doxygen2markdown_test.cc:246:65       xreftitle           U       _deprecated000001\"><xreftitle>Deprecated</xreftitle"
@@ -490,7 +487,6 @@ issues:
   - "generator/generator.h:27:8          microgenerator      U       * C++ microgenerator plugin entry point."
   - "generator/integration_tests/backup.proto:27:40          genproto        U       \"google.golang.org/genproto/googleapis/test/admin"
   - "generator/integration_tests/backup.proto:29:19          classname       U       option java_outer_classname = \"BackupProto\";"
-  - "generator/integration_tests/golden/golden_kitchen_sink_connection_idempotency_policy.h:19:92        IDEMPOTENCY     U       KITCHEN_SINK_CONNECTION_IDEMPOTENCY_POLICY_H"
   - "generator/integration_tests/golden/v1/golden_kitchen_sink_client.h:285:43       cloudresourcemanager    U       organizations/1234567890/logs/cloudresourcemanager.googleapis.com%2Factivity"
   - "generator/integration_tests/golden/v1/golden_kitchen_sink_client.h:643:62       bidir                   U       read-write RPCs (aka bidir streaming)"
   - "generator/integration_tests/golden/v1/internal/golden_kitchen_sink_option_defaults.cc:39:8          goldenkitchensink       U       \"goldenkitchensink.googleapis.com\");"
@@ -949,7 +945,6 @@ issues:
   - "google/cloud/networksecurity/v1/internal/network_security_auth_decorator.h:19:39        NETWORKSECURITY     U       CLOUD_CPP_GOOGLE_CLOUD_NETWORKSECURITY_V1_INTERNAL_NETWORK"
   - "google/cloud/networksecurity/v1/network_security_client.h:604:70        mtls    U       number. E.g. \"server_mtls_policy\"."
   - "google/cloud/networkservices/v1/internal/network_services_auth_decorator.h:19:39        NETWORKSERVICES     U       CLOUD_CPP_GOOGLE_CLOUD_NETWORKSERVICES_V1_INTERNAL_NETWORK"
-  - "google/cloud/notebooks/v2/internal/notebook_auth_decorator.cc:165:53        Upgradability       U       notebooks::v2::CheckInstanceUpgradabilityResponse>"
   - "google/cloud/opentelemetry/configure_basic_tracing.h:55:20          Gooogle     U       * that works with Gooogle Cloud Trace."
   - "google/cloud/opentelemetry/internal/monitored_resource_test.cc:178:15       Faas    U       {sc::kFaasName, \"test-module\"}"
   - "google/cloud/opentelemetry/internal/monitored_resource_test.cc:238:26       faas    U       {sc::kFaasName, \"faas-name\"},"
@@ -1293,7 +1288,6 @@ issues:
   - "protos/google/cloud/compute/v1/internal/common_000.proto:490:12         Subsetting      U       optional Subsetting subsetting = 38 [json"
   - "protos/google/cloud/compute/v1/internal/common_000.proto:490:23         subsetting      U       optional Subsetting subsetting = 38 [json_name = \"subsetting"
   - "protos/google/cloud/compute/v1/internal/common_000.proto:528:6          uncacheable     U       // uncacheable, as well as dynamic"
-  - "protos/google/cloud/compute/v1/internal/common_000.proto:547:71         cacheable       U       public\" directive. For cacheable"
   - "protos/google/cloud/compute/v1/internal/common_000.proto:567:58         maxage          U       to set a max-age or s-maxage higher than"
   - "protos/google/cloud/compute/v1/internal/common_000.proto:659:25         SCTP            U       protocols (TCP and SCTP) and only if the Tracking"
   - "protos/google/cloud/compute/v1/internal/common_000.proto:710:19         failback        U       // On failover or failback, this field indicates"
