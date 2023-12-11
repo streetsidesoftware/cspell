@@ -4,15 +4,16 @@ import type { CSpellConfigFile, CSpellConfigFileReaderWriter, IO, TextFile } fro
 import { createReaderWriter, CSpellConfigFileInMemory } from 'cspell-config-lib';
 import type { CSpellIO } from 'cspell-io';
 import { getDefaultCSpellIO } from 'cspell-io';
-import * as path from 'path';
+import path from 'path';
 import { fileURLToPath, pathToFileURL } from 'url';
+import { URI, Utils as UriUtils } from 'vscode-uri';
 
 import { onClearCache } from '../../../events/index.js';
 import { createCSpellSettingsInternal as csi } from '../../../Models/CSpellSettingsInternalDef.js';
 import { AutoResolveCache } from '../../../util/AutoResolve.js';
 import { logError, logWarning } from '../../../util/logger.js';
 import { resolveFile } from '../../../util/resolveFile.js';
-import { cwdURL, toFilePathOrHref } from '../../../util/url.js';
+import { addTrailingSlash, cwdURL, resolveFileWithURL, toFilePathOrHref } from '../../../util/url.js';
 import {
     configSettingsFileVersion0_1,
     configSettingsFileVersion0_2,
@@ -515,16 +516,18 @@ function resolveFilename(filename: string | URL, relativeTo: string | URL): Impo
 
 const nestedConfigDirectories: Record<string, true> = {
     '.vscode': true,
-    '.config': true,
+    '.config': true, // this should be removed in the future, but it is a breaking change.
 };
 
 function resolveGlobRoot(settings: CSpellSettingsWST, urlSettingsFile: URL): string {
-    const pathToSettingsFile = fileURLToPath(urlSettingsFile);
-    const settingsFileDirRaw = path.dirname(pathToSettingsFile);
-    const settingsFileDirName = path.basename(settingsFileDirRaw);
+    const urlSettingsFileDir = new URL('.', urlSettingsFile);
+    const uriSettingsFileDir = URI.parse(urlSettingsFileDir.href);
+
+    const settingsFileDirName = UriUtils.basename(uriSettingsFileDir);
+
     const isNestedConfig = settingsFileDirName in nestedConfigDirectories;
     const isVSCode = settingsFileDirName === '.vscode';
-    const settingsFileDir = isNestedConfig ? path.dirname(settingsFileDirRaw) : settingsFileDirRaw;
+    const settingsFileDir = (isNestedConfig ? UriUtils.dirname(uriSettingsFileDir) : uriSettingsFileDir).toString();
     const envGlobRoot = process.env[ENV_CSPELL_GLOB_ROOT];
     const defaultGlobRoot = envGlobRoot ?? '${cwd}';
     const rawRoot =
@@ -535,8 +538,13 @@ function resolveGlobRoot(settings: CSpellSettingsWST, urlSettingsFile: URL): str
             ? defaultGlobRoot
             : settingsFileDir);
 
-    const globRoot = rawRoot.startsWith('${cwd}') ? rawRoot : path.resolve(settingsFileDir, rawRoot);
-    return globRoot;
+    const globRoot = rawRoot.startsWith('${cwd}') ? rawRoot : resolveFileWithURL(rawRoot, new URL(settingsFileDir));
+
+    return typeof globRoot === 'string'
+        ? globRoot
+        : globRoot.protocol === 'file:'
+          ? path.resolve(fileURLToPath(globRoot))
+          : addTrailingSlash(globRoot).href;
 }
 
 function validationMessage(msg: string, url: URL) {
@@ -595,4 +603,5 @@ export const __testing__ = {
     getDefaultConfigLoaderInternal,
     normalizeCacheSettings,
     validateRawConfigVersion,
+    resolveGlobRoot,
 };

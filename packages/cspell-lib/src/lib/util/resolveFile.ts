@@ -240,6 +240,7 @@ function tryLegacyResolve(filename: string | URL, relativeTo: string | URL): Res
 
 function isRelative(filename: string | URL): boolean {
     if (filename instanceof URL) return false;
+    if (isURLLike(filename)) return false;
     if (filename.startsWith('./')) return true;
     if (filename.startsWith('../')) return true;
     if (filename.startsWith('.' + path.sep)) return true;

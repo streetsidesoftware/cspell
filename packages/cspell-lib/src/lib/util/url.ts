@@ -3,7 +3,7 @@ import { fileURLToPath, pathToFileURL } from 'url';
 
 import { srcDirectory } from '../../lib-cjs/pkg-info.cjs';
 
-const isUrlRegExp = /^(?:\w+:\/\/|data:)/i;
+const isUrlRegExp = /^(?:[\w][\w-]+:\/|data:|untitled:)/i;
 
 /**
  * Convert a URL into a string. If it is a file URL, convert it to a path.
@@ -54,7 +54,7 @@ export function resolveFileWithURL(file: string | URL, relativeToURL: URL): URL 
     return relativeTo(file, relativeToURL);
 }
 
-export function normalizePathSlashesForUrl(filePath: string, sep = path.sep): string {
+export function normalizePathSlashesForUrl(filePath: string, sep: string | RegExp = /[/\\]/g): string {
     return filePath
         .replace(/^([a-z]:)/i, '/$1')
         .split(sep)
