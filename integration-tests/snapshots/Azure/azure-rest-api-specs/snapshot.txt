@@ -3,7 +3,7 @@ Repository: Azure/azure-rest-api-specs
 Url: "https://github.com/Azure/azure-rest-api-specs.git"
 Args: ["--config=cSpell.json","**/*.{md,ts,js}"]
 Lines:
- CSpell: Files checked: 2236, Issues found: 2649 in 808 files
+ CSpell: Files checked: 2236, Issues found: 2659 in 808 files
  exit code: 1
 ./CONTRIBUTING.md:24:6      - Unknown word (tocstop)    -- <!-- tocstop -->
 ./CONTRIBUTING.md:79:3      - Unknown word (Poli)       -- - PoliCheck -
@@ -76,8 +76,9 @@ Lines:
 ./documentation/x-ms-examples.md:105:29    - Unknown word (testrg)     -- resourceGroupName": "testrg123",
 ./documentation/x-ms-examples.md:106:30    - Unknown word (testacc)    -- storageAccountName": "testacc6141",
 ./eng/tools/typespec-validation/src/index.ts:20:54     - Unknown word (Positionals) -- args, options, allowPositionals: true } as ParseArgsConfig
-./eng/tools/typespec-validation/src/index.ts:21:29     - Unknown word (positionals) -- folder = parsedArgs.positionals[0].split(path.sep).join
-./eng/tools/typespec-validation/src/rules/npm-prefix.ts:16:54     - Unknown word (revparse)   -- normalize(await git.revparse("--show-toplevel"))
+./eng/tools/typespec-validation/src/index.ts:21:29     - Unknown word (positionals) -- folder = parsedArgs.positionals[0];
+./eng/tools/typespec-validation/src/rules/folder-structure.ts:13:70     - Unknown word (revparse)   -- gitOperation(folder).revparse("--show-toplevel"))
+./eng/tools/typespec-validation/test/folder-structure.test.ts:23:16     - Unknown word (gitroot)    -- return "/gitroot";
 ./profiles/ResourceSchemas.md:11:5      - Unknown word (azureresourceschema) -- azureresourceschema:
 ./profiles/ResourceSchemas.md:247:106   - Unknown word (servermanagement)    -- Management/2015-07-01-preview/servermanagement.json
 ./profiles/definitions/latest-2019-04-01.md:1555:17   - Unknown word (dbformariadb)            -- microsoft.dbformariadb:
@@ -133,8 +134,8 @@ Lines:
 ./specification/azureintegrationspaces/resource-manager/readme.typescript.md:9:29      - Unknown word (integrationspaces) -- package-name: "@azure/arm-integrationspaces"
 ./specification/azurelargeinstance/resource-manager/readme.az.md:9:17      - Unknown word (azurelargeinstance) -- extensions: azurelargeinstance
 ./specification/azurestackhci/resource-manager/readme.az.md:8:27      - Unknown word (azurestackhci) -- namespace: azure.mgmt.azurestackhci
-./specification/azurestackhci/resource-manager/readme.md:405:14    - Unknown word (sdkauto)    -- - node sdkauto_afterscript.js azurestackhci
-./specification/azurestackhci/resource-manager/readme.md:405:22    - Unknown word (afterscript) -- - node sdkauto_afterscript.js azurestackhci/resource
+./specification/azurestackhci/resource-manager/readme.md:430:14    - Unknown word (sdkauto)    -- - node sdkauto_afterscript.js azurestackhci
+./specification/azurestackhci/resource-manager/readme.md:430:22    - Unknown word (afterscript) -- - node sdkauto_afterscript.js azurestackhci/resource
 ./specification/batch/resource-manager/readme.go.md:15:40     - Unknown word (armbatch)   -- resourcemanager/batch/armbatch
 ./specification/billing/resource-manager/readme.az.md:88:27     - Unknown word (connot)     -- # the three get API connot auto group for not
 ./specification/billing/resource-manager/readme.go.md:15:42     - Unknown word (armbilling) -- resourcemanager/billing/armbilling
@@ -146,7 +147,6 @@ Lines:
 ./specification/chaos/resource-manager/readme.go.md:8:40      - Unknown word (armchaos)   -- resourcemanager/chaos/armchaos
 ./specification/chaos/resource-manager/readme.md:334:22    - Unknown word (toplevelresourcelistbysubscription) -- we defined the toplevelresourcelistbysubscription here:
 ./specification/cloudshell/resource-manager/readme.md:58:67     - Unknown word (cloudshell) -- profiles['azure_mgmt_cloudshell']
-./specification/codesigning/data-plane/readme.md:38:56     - Unknown word (codesigning) -- 06-15-preview/azure.codesigning.json
 ./specification/cognitiveservices/data-plane/AzureOpenAI/authoring/readme.md:21:40     - Unknown word (azureopenai) -- preview/2022-03-01-preview/azureopenai.json
 ./specification/cognitiveservices/data-plane/AzureOpenAI/inference/readme.md:39:58     - Unknown word (autogen)    -- tag=release_2022_12_01_autogen` is specified on the
 ./specification/cognitiveservices/data-plane/Face/readme.python.md:27:62     - Unknown word (cognitives) -- cognitiveservices/azure-cognitives
@@ -175,7 +175,7 @@ Lines:
 ./specification/communitytraining/resource-manager/readme.az.md:9:17      - Unknown word (communitytraining) -- extensions: communitytraining
 ./specification/compute/resource-manager/readme.az.md:5:21      - Unknown word (cloudservice) -- ``` yaml $(az) && $(cloudservice)
 ./specification/compute/resource-manager/readme.az.md:83:14     - Unknown word (sshkey)       -- group: sshkey
-./specification/compute/resource-manager/readme.md:284:23    - Unknown word (Cloudservice) -- - Microsoft.Compute/CloudserviceRP/stable/2022-09-04
+./specification/compute/resource-manager/readme.md:292:23    - Unknown word (Cloudservice) -- - Microsoft.Compute/CloudserviceRP/stable/2022-09-04
 ./specification/confidentialledger/data-plane/readme.md:10:169    - Unknown word (identityservice) -- preview/2023-01-18-preview/identityservice.json` for the most up
 ./specification/confidentialledger/data-plane/readme.md:94:53     - Unknown word (mccfgov)         -- preview/2023-06-01-preview/mccfgov.json
 ./specification/connectedvmware/resource-manager/readme.azureresourceschema.md:9:17      - Unknown word (connectedvmware) -- - tag: schema-connectedvmware-2020-10-01-preview
@@ -188,13 +188,13 @@ Lines:
 ./specification/cosmos-db/data-plane/readme.md:49:46     - Unknown word (outputm)    -- only supports XML input/outputm which is not supported
 ./specification/cosmos-db/data-plane/readme.python.md:18:16     - Unknown word (msrest)     -- models-mode: msrest
 ./specification/cosmos-db/resource-manager/readme.go.md:14:41     - Unknown word (armcosmos)  -- resourcemanager/cosmos/armcosmos
-./specification/cosmos-db/resource-manager/readme.md:42:44     - Unknown word (mongorbac)  -- DocumentDB/stable/2023-09-15/mongorbac.json
-./specification/cost-management/resource-manager/readme.md:322:52    - Unknown word (Operatio)                   -- Response schema of OperatioAPI does not match Arm
-./specification/cost-management/resource-manager/readme.md:413:74    - Unknown word (desgin)                     -- in cost allocation by desgin'
-./specification/cost-management/resource-manager/readme.md:419:14    - Unknown word (Subscripiton)               -- reason: 'Subscripiton and ResourceGroup scope
-./specification/cost-management/resource-manager/readme.md:46:63     - Unknown word (generatecostdetailsreport) -- 8-01/costmanagement.generatecostdetailsreport.json
-./specification/cost-management/resource-manager/readme.md:47:63     - Unknown word (generatedetailedcostreport) -- 8-01/costmanagement.generatedetailedcostreport.json
-./specification/cost-management/resource-manager/readme.md:51:48     - Unknown word (costallocation)             -- tManagement/stable/2023-08-01/costallocation.json
+./specification/cosmos-db/resource-manager/readme.md:42:44     - Unknown word (mongorbac)  -- DocumentDB/stable/2023-11-15/mongorbac.json
+./specification/cost-management/resource-manager/readme.md:341:52    - Unknown word (Operatio)                   -- Response schema of OperatioAPI does not match Arm
+./specification/cost-management/resource-manager/readme.md:432:74    - Unknown word (desgin)                     -- in cost allocation by desgin'
+./specification/cost-management/resource-manager/readme.md:438:14    - Unknown word (Subscripiton)               -- reason: 'Subscripiton and ResourceGroup scope
+./specification/cost-management/resource-manager/readme.md:43:48     - Unknown word (costallocation) -- tManagement/stable/2023-11-01/costallocation.json
+./specification/cost-management/resource-manager/readme.md:47:63     - Unknown word (generatecostdetailsreport) -- 1-01/costmanagement.generatecostdetailsreport.json
+./specification/cost-management/resource-manager/readme.md:48:63     - Unknown word (generatedetailedcostreport) -- 1-01/costmanagement.generatedetailedcostreport.json
 ./specification/cpim/resource-manager/readme.go.md:19:14     - Unknown word (azureadexternalidentities) -- namespace: azureadexternalidentities
 ./specification/customerlockbox/resource-manager/readme.csharp.md:14:40     - Unknown word (customerlockbox) -- csharp-sdks-folder)/customerlockbox/management/Microsoft
 ./specification/customproviders/resource-manager/readme.terraform.md:18:19     - Unknown word (resourceproviders) -- - IdPortion: "resourceproviders"
@@ -275,7 +275,7 @@ Lines:
 ./specification/logz/resource-manager/readme.go.md:14:39     - Unknown word (armlogz)    -- resourcemanager/logz/armlogz
 ./specification/m365securityandcompliance/resource-manager/readme.go.md:9:18      - Unknown word (securityandcompliance) -- namespace: m365securityandcompliance
 ./specification/maintenance/resource-manager/readme.az.md:17:26     - Unknown word (applyupdate) -- group: maintenance applyupdate
-./specification/maintenance/resource-manager/readme.md:174:19    - Unknown word (postive)    -- reason: False postive. ConfigurationAssignments
+./specification/maintenance/resource-manager/readme.md:183:19    - Unknown word (postive)    -- reason: False postive. ConfigurationAssignments
 ./specification/managednetwork/resource-manager/readme.cli.md:11:37     - Unknown word (scopeassignments) -- microsoft.managednetwork/scopeassignments([/][^/]*)?$": "managed
 ./specification/managednetwork/resource-manager/readme.cli.md:12:12     - Unknown word (managednetworkgroups) -- "^.*[/]managednetworkgroups([/][^/]*)?$": "managed
 ./specification/managednetwork/resource-manager/readme.cli.md:13:12     - Unknown word (managednetworkpeeringpolicies) -- "^.*[/]managednetworkpeeringpolicies([/][^/]*)?$": "managed
@@ -440,7 +440,7 @@ Lines:
 ./specification/resources/resource-manager/readme.go.md:47:44     - Unknown word (armlinks)   -- resourcemanager/resources/armlinks
 ./specification/resources/resource-manager/readme.go.md:55:44     - Unknown word (armlocks)   -- resourcemanager/resources/armlocks
 ./specification/resources/resource-manager/readme.go.md:71:44     - Unknown word (armpolicy)  -- resourcemanager/resources/armpolicy
-./specification/resources/resource-manager/readme.md:1091:46   - Unknown word (explictly)  -- issue, default is int32, explictly mentioning the format
+./specification/resources/resource-manager/readme.md:1103:46   - Unknown word (explictly)  -- issue, default is int32, explictly mentioning the format
 ./specification/resources/resource-manager/readme.terraform.md:49:15     - Unknown word (newgen)     -- - Gen: "newgen"
 ./specification/resources/resource-manager/readme.typescript.md:32:29     - Unknown word (resourcesdeploymentstacks) -- package-name: "@azure/arm-resourcesdeploymentstacks"
 ./specification/riskiq/resource-manager/readme.python.md:10:26     - Unknown word (defendereasm) -- package-name: azure-mgmt-defendereasm
