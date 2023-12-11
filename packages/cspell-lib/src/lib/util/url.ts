@@ -3,7 +3,7 @@ import { fileURLToPath, pathToFileURL } from 'url';
 
 import { srcDirectory } from '../../lib-cjs/pkg-info.cjs';
 
-const isUrlRegExp = /^(?:\w+:\/\/|data:)/i;
+const isUrlRegExp = /^(?:[\w][\w-]+:\/|data:|untitled:)/i;
 
 /**
  * Convert a URL into a string. If it is a file URL, convert it to a path.
@@ -54,7 +54,7 @@ export function resolveFileWithURL(file: string | URL, relativeToURL: URL): URL 
     return relativeTo(file, relativeToURL);
 }
 
-export function normalizePathSlashesForUrl(filePath: string, sep = path.sep): string {
+export function normalizePathSlashesForUrl(filePath: string, sep: string | RegExp = /[/\\]/g): string {
     return filePath
         .replace(/^([a-z]:)/i, '/$1')
         .split(sep)
@@ -82,7 +82,11 @@ export function toURL(href: string | URL, relativeTo?: string | URL): URL {
 }
 
 export function fileURLOrPathToPath(filenameOrURL: string | URL): string {
-    return isFileURL(filenameOrURL) ? fileURLToPath(filenameOrURL) : filenameOrURL.toString();
+    return isFileURL(filenameOrURL) ? toFilePath(filenameOrURL) : filenameOrURL.toString();
+}
+
+function toFilePath(url: string | URL): string {
+    return windowsDriveLetterToUpper(fileURLToPath(url));
 }
 
 export function isURLLike(url: string | URL): boolean {
@@ -100,4 +104,8 @@ export function isDataURL(url: string | URL): boolean {
 function isUrlWithProtocol(url: string | URL, protocol: string): boolean {
     protocol = protocol.endsWith(':') ? protocol : protocol + ':';
     return url instanceof URL ? url.protocol === protocol : url.startsWith(protocol);
+}
+
+export function windowsDriveLetterToUpper(absoluteFilePath: string): string {
+    return absoluteFilePath.replace(/^([a-z]):\\/, (s) => s.toUpperCase());
 }

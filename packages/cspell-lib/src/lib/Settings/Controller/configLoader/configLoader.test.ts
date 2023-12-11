@@ -3,6 +3,7 @@ import { CSpellConfigFile, CSpellConfigFileInMemory } from 'cspell-config-lib';
 import * as path from 'path';
 import { fileURLToPath, pathToFileURL } from 'url';
 import { assert, beforeEach, describe, expect, test, vi } from 'vitest';
+import { URI } from 'vscode-uri';
 
 import {
     pathPackageRoot,
@@ -34,7 +35,7 @@ import { extractImportErrors, extractImports } from './extractImportErrors.js';
 import { readSettings } from './readSettings.js';
 import { readSettingsFiles } from './readSettingsFiles.js';
 
-const { validateRawConfigVersion } = __configLoader_testing__;
+const { validateRawConfigVersion, resolveGlobRoot } = __configLoader_testing__;
 
 const rootCspellLib = path.join(pathPackageRoot, '.');
 const root = pathRepoRoot;
@@ -636,6 +637,32 @@ describe('Validate search/load config files', () => {
     });
 });
 
+function u(url: string | URL, ref?: string | URL): URL {
+    return new URL(url, ref);
+}
+
+function uh(url: string | URL, ref?: string | URL): string {
+    return u(url, ref).href;
+}
+
+describe('Validate resolveGlobRoot', () => {
+    test.each`
+        globRoot          | cfgUrl                                                                 | expected
+        ${undefined}      | ${import.meta.url}                                                     | ${rp(fileURLToPath(u('.', import.meta.url)))}
+        ${undefined}      | ${uh('../not/found/cfg.json', import.meta.url)}                        | ${fileURLToPath(u('../not/found', import.meta.url))}
+        ${undefined}      | ${uh('./.vscode/cspell.json', import.meta.url)}                        | ${'${cwd}'}
+        ${undefined}      | ${uh('./.config/.cspell.json', import.meta.url)}                       | ${rp(fileURLToPath(u('.', import.meta.url)))}
+        ${undefined}      | ${cUrl(import.meta.url, { scheme: 'vscode-vfs' }).href}                | ${uh('.', cUrl(import.meta.url, { scheme: 'vscode-vfs' }))}
+        ${undefined}      | ${uh('vscode-vfs://github/streetsidesoftware/cspell-dicts/README.md')} | ${'vscode-vfs://github/streetsidesoftware/cspell-dicts/'}
+        ${'..'}           | ${uh('vscode-vfs://github/streetsidesoftware/cspell-dicts/README.md')} | ${'vscode-vfs://github/streetsidesoftware/'}
+        ${'..\\frontend'} | ${uh('vscode-vfs://github/streetsidesoftware/cspell-dicts/README.md')} | ${'vscode-vfs://github/streetsidesoftware/frontend/'}
+    `('resolveGlobRoot $globRoot, $cfgUrl', ({ globRoot, cfgUrl, expected }) => {
+        const url = toFileUrl(cfgUrl);
+        const r = resolveGlobRoot({ globRoot }, url);
+        expect(r).toEqual(expected);
+    });
+});
+
 describe('Validate Dependencies', () => {
     test.each`
         filename                    | relativeTo   | expected
@@ -724,4 +751,18 @@ function createConfig(filename: string, settings: CSpellUserSettings): Promise<C
 
 function cc(settings: CSpellUserSettings, filename: string) {
     return createConfig(filename, settings);
+}
+
+interface UriComponents {
+    scheme: string;
+    authority: string;
+    path: string;
+    query: string;
+    fragment: string;
+}
+
+function cUrl(url: string | URL, replaceWith: Partial<UriComponents>): URL {
+    const uri = URI.parse(toFileUrl(url).href).with(replaceWith);
+
+    return new URL(uri.toString());
 }
