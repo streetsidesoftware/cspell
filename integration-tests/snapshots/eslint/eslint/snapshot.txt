@@ -3,7 +3,7 @@ Repository: eslint/eslint
 Url: "https://github.com/eslint/eslint"
 Args: [".","--config=../../../config/eslint/cspell.config.yaml","--issues-summary-report","--exclude=bin/**","--exclude=CHANGELOG.md","--exclude=_data","--exclude=tests/bench/large.js","--exclude=docs/src/_includes","--exclude=docs/src/assets/{fonts,s?css,images}"]
 Lines:
- CSpell: Files checked: 1894, Issues found: 2191 in 399 files
+ CSpell: Files checked: 1894, Issues found: 2193 in 399 files
  exit code: 1
 ./Makefile.js:144:88    - Unknown word (ined)               -- followed by the string "ined".
 ./Makefile.js:150:48    - Unknown word (blogpost)           -- render(cat("./templates/blogpost.md.ejs"), renderContext
@@ -16,6 +16,7 @@ Lines:
 ./Makefile.js:76:88     - Unknown word (markdownlintignore) -- path.join(__dirname, ".markdownlintignore"), "utf-8")),
 ./Makefile.js:80:10     - Unknown word (MULTIFILES)         -- PERF_MULTIFILES_TARGET_DIR = path.join
 ./Makefile.js:931:18    - Unknown word (Multifiles)         -- function downloadMultifilesTestTarget(cb) {
+./README.md:106:30    - Unknown word (diffent)    -- ESLint and Prettier have diffent jobs: ESLint is a linter
 ./README.md:204:5     - Unknown word (teamstart)  -- <!--teamstart-->
 ./README.md:218:7     - Unknown word (Djermanovic) -- Milos Djermanovic
 ./README.md:234:1     - Unknown word (Nitin)       -- Nitin Kumar
@@ -30,6 +31,7 @@ Lines:
 ./README.md:276:1     - Unknown word (Strek)       -- Strek
 ./README.md:285:5     - Unknown word (teamend)     -- <!--teamend-->
 ./README.md:292:5     - Unknown word (sponsorsstart) -- <!--sponsorsstart-->
+./README.md:296:422   - Unknown word (Workleap)      -- f99fe2465f&v=4" alt="Workleap" height="64"></a></p
 ./README.md:297:679   - Unknown word (Transloadit)   -- com/u/125754?v=4" alt="Transloadit" height="32"></a> <a
 ./README.md:298:5     - Unknown word (sponsorsend)   -- <!--sponsorsend-->
 ./conf/config-schema.js:8:63      - Unknown word (nzakas)     -- file, please contact @nzakas first.
@@ -111,7 +113,7 @@ Lines:
 ./docs/src/rules/brace-style.md:36:26     - Unknown word (Allman)     -- Another style is called [Allman](https://en.wikipedia
 ./docs/src/rules/brace-style.md:60:5      - Unknown word (stroustrup) -- * `"stroustrup"` enforces Stroustrup
 ./docs/src/rules/brace-style.md:61:5      - Unknown word (allman)     -- * `"allman"` enforces Allman style
-./docs/src/rules/capitalized-comments.md:275:84    - Unknown word (blockignore) -- { "ignorePattern": "blockignore" } }] */
+./docs/src/rules/capitalized-comments.md:276:84    - Unknown word (blockignore) -- { "ignorePattern": "blockignore" } }] */
 ./docs/src/rules/comma-dangle.md:13:11     - Unknown word (quux)       -- qux: "quux",
 ./docs/src/rules/complexity.md:21:1      - Unknown word (Cyclomatic) -- Cyclomatic complexity measures
 ./docs/src/rules/complexity.md:21:133    - Unknown word (cyclomatic) -- rule allows setting a cyclomatic complexity threshold
@@ -221,9 +223,9 @@ Lines:
 ./docs/src/use/configure/language-options.md:49:4      - Unknown word (webextensions) -- * `webextensions` - WebExtensions globals
 ./docs/src/use/configure/language-options.md:50:4      - Unknown word (greasemonkey)  -- * `greasemonkey` - GreaseMonkey globals
 ./docs/src/use/configure/migration-guide.md:126:31    - Unknown word (someplugin) -- modules/eslint-plugin-someplugin/index.js
-./docs/src/use/configure/migration-guide.md:482:145   - Unknown word (Compat)     -- you can use the `FlatCompat` utility to translate
-./docs/src/use/configure/migration-guide.md:499:7     - Unknown word (compat)     -- const compat = new FlatCompat({
-./docs/src/use/configure/migration-guide.md:550:42    - Unknown word (dotfile)    -- config, dotfiles (e.g. `.dotfile.js`) are no longer ignored
+./docs/src/use/configure/migration-guide.md:480:145   - Unknown word (Compat)     -- you can use the `FlatCompat` utility to translate
+./docs/src/use/configure/migration-guide.md:497:7     - Unknown word (compat)     -- const compat = new FlatCompat({
+./docs/src/use/configure/migration-guide.md:548:42    - Unknown word (dotfile)    -- config, dotfiles (e.g. `.dotfile.js`) are no longer ignored
 ./docs/src/use/configure/plugins.md:44:152    - Unknown word (pluginname) -- require('eslint-plugin-pluginname')` in the config file
 ./docs/src/use/configure/rules.md:25:294    - Unknown word (buildtime)  -- other than a potential buildtime or runtime error (such
 ./docs/src/use/getting-started.md:30:22     - Unknown word (semistandard) -- use `eslint-config-semistandard` shared config
@@ -262,12 +264,12 @@ Lines:
 ./lib/linter/code-path-analysis/code-path-state.js:351:34    - Unknown word (expresion)  -- The end of the update expresion. This may change during
 ./lib/linter/code-path-analysis/code-path-state.js:774:31    - Unknown word (unflattened) -- {CodePathSegment[]} unflattenedFromSegments Segments
 ./lib/linter/code-path-analysis/debug-helpers.js:95:44     - Unknown word (Graphvis)   -- can be visualized with Graphvis.
-./lib/linter/config-comment-parser.js:82:22     - Unknown word (commaless)  -- // Also, commaless notations have invalid
-./lib/linter/config-comment-parser.js:93:20     - Unknown word (Levn)       -- debug("Levn parsing failed; falling
-./lib/linter/config-comment-parser.js:99:12     - Unknown word (Optionator) -- * Optionator cannot parse commaless
+./lib/linter/config-comment-parser.js:102:12    - Unknown word (Optionator) -- * Optionator cannot parse commaless
+./lib/linter/config-comment-parser.js:85:22     - Unknown word (commaless)  -- // Also, commaless notations have invalid
+./lib/linter/config-comment-parser.js:96:20     - Unknown word (Levn)       -- debug("Levn parsing failed; falling
 ./lib/linter/linter.js:113:52    - Unknown word (postprocessor) -- postprocess} [postprocess] postprocessor for report
-./lib/linter/linter.js:918:18    - Unknown word (SOURCECODE)    -- const DEPRECATED_SOURCECODE_PASSTHROUGHS = {
-./lib/linter/linter.js:918:29    - Unknown word (PASSTHROUGHS)  -- DEPRECATED_SOURCECODE_PASSTHROUGHS = {
+./lib/linter/linter.js:900:18    - Unknown word (SOURCECODE)    -- const DEPRECATED_SOURCECODE_PASSTHROUGHS = {
+./lib/linter/linter.js:900:29    - Unknown word (PASSTHROUGHS)  -- DEPRECATED_SOURCECODE_PASSTHROUGHS = {
 ./lib/options.js:2:44      - Unknown word (optionator) -- Options configuration for optionator.
 ./lib/rule-tester/flat-rule-tester.js:236:42    - Unknown word (errorize)   -- ast The root node to errorize `start`/`end` properties
 ./lib/rule-tester/flat-rule-tester.js:791:27    - Unknown word (Didnt)      -- function assertASTDidntChange(beforeAST, afterAST
@@ -631,7 +633,7 @@ Lines:
 ./tests/tools/check-rule-examples.js:59:31     - Unknown word (mtests)     -- "\x1B[0m\x1B[4mtests/fixtures/bad-examples
 ./tests/tools/check-rule-examples.js:60:55     - Unknown word (merror)     -- 1:4\x1B[22m \x1B[31merror\x1B[39m Missing language
 ./tests/tools/eslint-fuzzer.js:124:50    - Unknown word (foos)       -- message: "no foos allowed",
-./tools/check-rule-examples.js:138:87    - Unknown word (nonull)     -- globAsync(pattern, { nonull: true })))).flat();
+./tools/check-rule-examples.js:172:87    - Unknown word (nonull)     -- globAsync(pattern, { nonull: true })))).flat();
 ./tools/fuzzer-runner.js:50:42     - Unknown word (elapseds)   -- rules [:bar] :percent, :elapseds elapsed, eta :etas,
 ./tools/update-readme.js:71:60     - Unknown word (valign)     -- `<td align="center" valign="top" width="11%">
 ./tools/update-rule-types.js:5:6       - Unknown word (jscodeshift) -- * jscodeshift -t tools/update-rule

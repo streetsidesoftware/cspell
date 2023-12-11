@@ -3,7 +3,7 @@ Repository: googleapis/google-cloud-cpp
 Url: "https://github.com/googleapis/google-cloud-cpp.git"
 Args: ["--config=../../../../config/repositories/googleapis/google-cloud-cpp/cspell.json","**/*","-e","{*.BUILD,BUILD,CHANGELOG.md,*.sh,*.cfg,*.ps1,Dockerfile.*,*.Dockerfile,*.{yaml,xml,json,cmake}}"]
 Lines:
- CSpell: Files checked: 16989, Issues found: 96928 in 11426 files
+ CSpell: Files checked: 16993, Issues found: 97063 in 11429 files
  exit code: 1
 ./ARCHITECTURE.md:100:20    - Unknown word (bigtable)   -- - Bigtable has a [`bigtable::Table`](/google/cloud
 ./ARCHITECTURE.md:100:3     - Unknown word (Bigtable)   -- - Bigtable has a [`bigtable::Table
@@ -480,11 +480,11 @@ Lines:
 ./generator/generator_config.textproto:2353:12   - Unknown word (Metastore)  -- # Dataproc Metastore
 ./generator/generator_config.textproto:235:47    - Unknown word (APIGEE)     -- var: "GOOGLE_CLOUD_CPP_APIGEE_CONNECTION_SERVICE_ENDPOINT
 ./generator/generator_config.textproto:300:47    - Unknown word (AUTOML)     -- var: "GOOGLE_CLOUD_CPP_AUTOML_PREDICTION_SERVICE_ENDPOINT
-./generator/generator_config.textproto:3284:3    - Unknown word (Timeseries) -- # Timeseries Insights
+./generator/generator_config.textproto:3285:3    - Unknown word (Timeseries) -- # Timeseries Insights
 ./generator/integration_tests/backup.proto:27:40     - Unknown word (genproto)   -- "google.golang.org/genproto/googleapis/test/admin
 ./generator/integration_tests/backup.proto:29:19     - Unknown word (classname)  -- option java_outer_classname = "BackupProto";
 ./generator/integration_tests/golden/v1/golden_kitchen_sink_client.h:285:43    - Unknown word (cloudresourcemanager) -- organizations/1234567890/logs/cloudresourcemanager.googleapis.com%2Factivity
-./generator/integration_tests/golden/v1/golden_kitchen_sink_client.h:643:62    - Unknown word (bidir)                -- read-write RPCs (aka bidir streaming)
+./generator/integration_tests/golden/v1/golden_kitchen_sink_client.h:644:62    - Unknown word (bidir)                -- read-write RPCs (aka bidir streaming)
 ./generator/integration_tests/golden/v1/internal/golden_kitchen_sink_option_defaults.cc:39:8      - Unknown word (goldenkitchensink) -- "goldenkitchensink.googleapis.com");
 ./generator/integration_tests/golden/v1/internal/golden_kitchen_sink_rest_stub_factory.cc:47:32     - Unknown word (Longrunning) -- opts.has<rest_internal::LongrunningEndpointOption>()) {
 ./generator/integration_tests/golden/v1/internal/golden_kitchen_sink_tracing_connection.cc:29:30     - Unknown word (OPENTELEMETRY) -- GOOGLE_CLOUD_CPP_HAVE_OPENTELEMETRY
@@ -523,7 +523,7 @@ Lines:
 ./generator/internal/discovery_to_proto_test.cc:660:40    - Unknown word (Foos)       -- UnorderedElementsAre(Key("Foos.CreateRequest"), Key
 ./generator/internal/discovery_type_vertex.cc:110:28    - Unknown word (notarray)   -- field.value("type", "notarray") == "array") return
 ./generator/internal/discovery_type_vertex.cc:112:28    - Unknown word (notobject)  -- field.value("type", "notobject") == "object" &&
-./generator/internal/format_method_comments.cc:120:24    - Unknown word (GRPCLRO)    -- auto constexpr kTrailerGRPCLRO =
+./generator/internal/format_method_comments.cc:121:24    - Unknown word (GRPCLRO)    -- auto constexpr kTrailerGRPCLRO =
 ./generator/internal/http_annotation_parser.cc:102:8     - Unknown word (abcdefghiljkmnopqrstuvwxyz) -- "abcdefghiljkmnopqrstuvwxyz"
 ./generator/internal/http_annotation_parser.h:45:12     - Unknown word (Naur)       -- * [Backus-Naur Form].  In this notation
 ./generator/internal/http_annotation_parser.h:66:18     - Unknown word (pchar)      -- * LITERAL     = pchar { pchar }
@@ -537,14 +537,15 @@ Lines:
 ./generator/internal/printer_test.cc:36:33     - Unknown word (Inigo)      -- VarsDictionary vars{{"name", "Inigo Montoya"}};
 ./generator/internal/resolve_comment_references_test.cc:261:38    - Unknown word (Oneof)      -- ResolveCommentsReferenceTest, Oneof) {
 ./generator/internal/routing.h:78:7      - Unknown word (actools)    -- * go/actools-dynamic-routing-proposal
-./generator/internal/scaffold_generator.cc:1056:8    - Unknown word (CXXLDFLAGS)   -- CLIENT_CXXLDFLAGS := $$(shell pkg-config
+./generator/internal/scaffold_generator.cc:1055:8    - Unknown word (CXXLDFLAGS)   -- CLIENT_CXXLDFLAGS := $$(shell pkg-config
 ./generator/internal/scaffold_generator.cc:253:25    - Unknown word (GAPIC)      -- {"library_type", "GAPIC_AUTO"},
-./generator/internal/scaffold_generator.cc:504:2     - Unknown word (mainpage)   -- @mainpage $title$ C++ Client Library
-./generator/internal/scaffold_generator.cc:816:7     - Unknown word (tsch)       -- | csh/tsch | `setenv
-./generator/internal/scaffold_generator.cc:916:39    - Unknown word (Downloadfile) -- System.Net.WebClient).Downloadfile( ^
+./generator/internal/scaffold_generator.cc:503:2     - Unknown word (mainpage)   -- @mainpage $title$ C++ Client Library
+./generator/internal/scaffold_generator.cc:815:7     - Unknown word (tsch)       -- | csh/tsch | `setenv
+./generator/internal/scaffold_generator.cc:915:39    - Unknown word (Downloadfile) -- System.Net.WebClient).Downloadfile( ^
 ./generator/internal/scaffold_generator.h:56:36     - Unknown word (refgroup)   -- name of the doxygen refgroup for options in a given
-./generator/internal/scaffold_generator_test.cc:364:38    - Unknown word (CXXLD)      -- actual, HasSubstr("\t$(CXXLD) "));
-./generator/internal/scaffold_generator_test.cc:398:37    - Unknown word (Bazelrc)    -- ScaffoldGenerator, QuickstartBazelrc) {
+./generator/internal/scaffold_generator_test.cc:232:22    - Unknown word (gapic)      -- google_cloud_cpp_add_gapic_library(test "Test Only
+./generator/internal/scaffold_generator_test.cc:363:38    - Unknown word (CXXLD)      -- actual, HasSubstr("\t$(CXXLD) "));
+./generator/internal/scaffold_generator_test.cc:397:37    - Unknown word (Bazelrc)    -- ScaffoldGenerator, QuickstartBazelrc) {
 ./generator/testing/descriptor_pool_fixture.cc:49:7      - Unknown word (multifile)  -- multifile_error_collector_(
 ./google/cloud/accessapproval/README.md:25:11     - Unknown word (iostream)   -- #include <iostream>
 ./google/cloud/accessapproval/README.md:29:10     - Unknown word (cerr)       -- std::cerr << "Usage: " << argv
@@ -559,11 +560,11 @@ Lines:
 ./google/cloud/aiplatform/doc/environment-variables.dox:23:16     - Unknown word (Featurestore) -- used by `MakeFeaturestoreOnlineServingServiceConnection
 ./google/cloud/aiplatform/doc/environment-variables.dox:89:21     - Unknown word (TENSORBOARD)  -- - `GOOGLE_CLOUD_CPP_TENSORBOARD_SERVICE_ENDPOINT=..
 ./google/cloud/aiplatform/doc/environment-variables.dox:91:16     - Unknown word (Tensorboard)  -- used by `MakeTensorboardServiceConnection()`
-./google/cloud/aiplatform/v1/dataset_client.h:1269:38   - Unknown word (dataitem)   -- Annotations belongs to a dataitem
+./google/cloud/aiplatform/v1/dataset_client.h:1270:38   - Unknown word (dataitem)   -- Annotations belongs to a dataitem
 ./google/cloud/aiplatform/v1/dataset_client.h:19:39     - Unknown word (AIPLATFORM) -- CLOUD_CPP_GOOGLE_CLOUD_AIPLATFORM_V1_DATASET_CLIENT_H
-./google/cloud/aiplatform/v1/endpoint_client.h:574:7     - Unknown word (Undeploys)  -- /// Undeploys a Model from an Endpoint
-./google/cloud/aiplatform/v1/endpoint_client.h:583:60    - Unknown word (undeployed) -- DeployedModel is being undeployed from the
-./google/cloud/aiplatform/v1/endpoint_client.h:587:19    - Unknown word (unassigns)  -- /// this field unassigns any traffic to it.
+./google/cloud/aiplatform/v1/endpoint_client.h:577:7     - Unknown word (Undeploys)  -- /// Undeploys a Model from an Endpoint
+./google/cloud/aiplatform/v1/endpoint_client.h:586:60    - Unknown word (undeployed) -- DeployedModel is being undeployed from the
+./google/cloud/aiplatform/v1/endpoint_client.h:590:19    - Unknown word (unassigns)  -- /// this field unassigns any traffic to it.
 ./google/cloud/aiplatform/v1/featurestore_client.cc:85:32     - Unknown word (Featurestores) -- eaturestoreServiceClient::ListFeaturestores(std::string const& parent
 ./google/cloud/aiplatform/v1/featurestore_client.h:138:25    - Unknown word (Featurestore's) -- / component of the Featurestore's resource name.
 ./google/cloud/aiplatform/v1/featurestore_online_serving_client.h:234:49    - Unknown word (featurestores) -- locations/{location}/featurestores/
@@ -575,7 +576,7 @@ Lines:
 ./google/cloud/aiplatform/v1/match_client.h:121:17    - Unknown word (datapoints) -- /// Reads the datapoints/vectors of the given
 ./google/cloud/aiplatform/v1/migration_client.h:38:5      - Unknown word (datalabeling) -- /// datalabeling.googleapis.com and ml
 ./google/cloud/aiplatform/v1/schedule_client.h:38:25     - Unknown word (shceudled)  -- periodically launch shceudled runs to make API calls
-./google/cloud/aiplatform/v1/schedule_client.h:524:55    - Unknown word (unstarted)  -- updated Schedule. All unstarted runs before the
+./google/cloud/aiplatform/v1/schedule_client.h:525:55    - Unknown word (unstarted)  -- updated Schedule. All unstarted runs before the
 ./google/cloud/aiplatform/v1/vizier_client.h:40:44     - Unknown word (blackbox)   -- is a service to solve blackbox optimization problems
 ./google/cloud/aiplatform/v1/vizier_client.h:41:37     - Unknown word (hyperparameters) -- tuning machine learning hyperparameters and searching over deep
 ./google/cloud/alloydb/v1/alloy_db_admin_client.h:19:39     - Unknown word (ALLOYDB)    -- CLOUD_CPP_GOOGLE_CLOUD_ALLOYDB_V1_ALLOY_DB_ADMIN_CLIENT
@@ -590,7 +591,7 @@ Lines:
 ./google/cloud/artifactregistry/v1/artifact_registry_client.cc:579:50    - Unknown word (VPCSC)      -- artifactregistry::v1::VPCSCConfig>
 ./google/cloud/asset/doc/environment-variables.dox:14:40     - Unknown word (cloudasset) -- (which defaults to "cloudasset.googleapis.com")
 ./google/cloud/asset/doc/main.dox:7:18      - Unknown word (Anthos)     -- all your GCP and Anthos assets across projects
-./google/cloud/asset/v1/asset_client.h:1515:8    - Unknown word (ifself)     -- /// ifself, if applicable.
+./google/cloud/asset/v1/asset_client.h:1516:8    - Unknown word (ifself)     -- /// ifself, if applicable.
 ./google/cloud/assuredworkloads/assured_workloads_client.h:19:39     - Unknown word (ASSUREDWORKLOADS) -- CLOUD_CPP_GOOGLE_CLOUD_ASSUREDWORKLOADS_ASSURED_WORKLOADS_CLIENT
 ./google/cloud/automl/v1/auto_ml_client.h:1026:63   - Unknown word (parametrs)  -- Deploying with different parametrs
 ./google/cloud/baremetalsolution/bare_metal_solution_client.h:19:39     - Unknown word (BAREMETALSOLUTION) -- CLOUD_CPP_GOOGLE_CLOUD_BAREMETALSOLUTION_BARE_METAL_SOLUTION
@@ -758,9 +759,9 @@ Lines:
 ./google/cloud/bigtable/version.h:80:58     - Unknown word (gitrev)     -- MAJOR.MINOR.PATCH[-PRE][+gitrev] format.
 ./google/cloud/billing/budgets/v1/internal/budget_option_defaults.cc:39:8      - Unknown word (billingbudgets) -- "billingbudgets.googleapis.com");
 ./google/cloud/billing/doc/environment-variables.dox:18:40     - Unknown word (cloudbilling) -- (which defaults to "cloudbilling.googleapis.com")
-./google/cloud/billing/v1/cloud_billing_client.h:300:7     - Unknown word (subaccounts) -- /// subaccounts](https://cloud.google
-./google/cloud/billing/v1/cloud_billing_client.h:308:23    - Unknown word (subaccount)  -- /// When creating a subaccount, the current authenticated
-./google/cloud/billing/v1/cloud_billing_client.h:558:21    - Unknown word (unbilled)    -- /// expected. Any unbilled charges to date will
+./google/cloud/billing/v1/cloud_billing_client.h:341:7     - Unknown word (subaccounts) -- /// subaccounts](https://cloud.google
+./google/cloud/billing/v1/cloud_billing_client.h:349:23    - Unknown word (subaccount)  -- /// When creating a subaccount, the current authenticated
+./google/cloud/billing/v1/cloud_billing_client.h:649:21    - Unknown word (unbilled)    -- /// expected. Any unbilled charges to date will
 ./google/cloud/billing/v1/cloud_catalog_client.cc:48:70     - Unknown word (Skus)       -- CloudCatalogClient::ListSkus(
 ./google/cloud/billing/v1/internal/cloud_catalog_connection_impl.cc:118:63    - Unknown word (skus)       -- billing::v1::Sku> result(r.skus().size());
 ./google/cloud/binaryauthorization/binauthz_management_service_v1_client.h:19:39     - Unknown word (BINARYAUTHORIZATION) -- CLOUD_CPP_GOOGLE_CLOUD_BINARYAUTHORIZATION_BINAUTHZ_MANAGEMENT
@@ -821,11 +822,11 @@ Lines:
 ./google/cloud/datastore/quickstart/quickstart.cc:35:18     - Unknown word (sampletask) -- path.set_name("sampletask1");
 ./google/cloud/datastream/datastream_client.h:19:39     - Unknown word (DATASTREAM) -- CLOUD_CPP_GOOGLE_CLOUD_DATASTREAM_DATASTREAM_CLIENT_H
 ./google/cloud/deploy/doc/environment-variables.dox:14:40     - Unknown word (clouddeploy) -- (which defaults to "clouddeploy.googleapis.com")
-./google/cloud/deploy/v1/cloud_deploy_client.cc:342:72    - Unknown word (Rollouts)   -- CloudDeployClient::ListRollouts(
-./google/cloud/deploy/v1/cloud_deploy_client.cc:560:24    - Unknown word (Automations) -- CloudDeployClient::ListAutomations(std::string const& parent
+./google/cloud/deploy/v1/cloud_deploy_client.cc:432:72    - Unknown word (Rollouts)   -- CloudDeployClient::ListRollouts(
+./google/cloud/deploy/v1/cloud_deploy_client.cc:650:24    - Unknown word (Automations) -- CloudDeployClient::ListAutomations(std::string const& parent
+./google/cloud/deploy/v1/cloud_deploy_client.h:2520:8    - Unknown word (automations) -- /// automations. Format must be
 ./google/cloud/deploy/v1/cloud_deploy_client.h:39:34     - Unknown word (Skaffold)   -- Google Cloud Platform via Skaffold (https://skaffold.dev
-./google/cloud/deploy/v1/internal/cloud_deploy_connection_impl.cc:552:15    - Unknown word (rollouts)   -- r.rollouts().size());
-./google/cloud/deploy/v1/internal/cloud_deploy_connection_impl.cc:856:15    - Unknown word (automations) -- r.automations().size());
+./google/cloud/deploy/v1/internal/cloud_deploy_connection_impl.cc:710:15    - Unknown word (rollouts)   -- r.rollouts().size());
 ./google/cloud/dialogflow_cx/doc/main.dox:6:50      - Unknown word (chatbots)   -- interfaces (for example, chatbots, and voice-powered apps
 ./google/cloud/dialogflow_es/sessions_client.h:97:16     - Unknown word (CCAI)       -- /// or other CCAI products now or in the
 ./google/cloud/discoveryengine/v1/completion_client.h:19:39     - Unknown word (DISCOVERYENGINE) -- CLOUD_CPP_GOOGLE_CLOUD_DISCOVERYENGINE_V1_COMPLETION_CLIENT
@@ -836,7 +837,7 @@ Lines:
 ./google/cloud/doc/error-handling.dox:15:60     - Unknown word (ostream)    -- cloud::operator<<(std::ostream&,google::cloud::Status
 ./google/cloud/doc/error-handling.dox:57:65     - Unknown word (istream)    -- classes derived from `std::istream` or
 ./google/cloud/doc/logging.dox:20:35     - Unknown word (ifdef)      -- as-if there were `#%ifdef`/`#%endif` directives
-./google/cloud/documentai/CMakeLists.txt:33:30     - Unknown word (DOCUMENTAI) -- GOOGLE_CLOUD_CPP_DOCUMENTAI_TEST_LOCATION_ID
+./google/cloud/documentai/CMakeLists.txt:32:30     - Unknown word (DOCUMENTAI) -- GOOGLE_CLOUD_CPP_DOCUMENTAI_TEST_LOCATION_ID
 ./google/cloud/documentai/README.md:26:11     - Unknown word (fstream)    -- #include <fstream>
 ./google/cloud/documentai/README.md:54:8      - Unknown word (ifstream)   -- std::ifstream is(argv[4]);
 ./google/cloud/documentai/README.md:55:36     - Unknown word (istreambuf) -- content(std::string{std::istreambuf_iterator<char>(is),
@@ -851,7 +852,7 @@ Lines:
 ./google/cloud/future_generic_then_test.cc:675:16    - Unknown word (sref)       -- std::string& sref = value;
 ./google/cloud/gkebackup/v1/backup_for_gke_client.h:19:39     - Unknown word (GKEBACKUP)  -- CLOUD_CPP_GOOGLE_CLOUD_GKEBACKUP_V1_BACKUP_FOR_GKE_CLIENT
 ./google/cloud/gkehub/gke_hub_client.h:19:39     - Unknown word (GKEHUB)     -- CLOUD_CPP_GOOGLE_CLOUD_GKEHUB_GKE_HUB_CLIENT_H
-./google/cloud/gkemulticloud/CMakeLists.txt:33:30     - Unknown word (GKEMULTICLOUD) -- GOOGLE_CLOUD_CPP_GKEMULTICLOUD_TEST_REGION)
+./google/cloud/gkemulticloud/CMakeLists.txt:32:30     - Unknown word (GKEMULTICLOUD) -- GOOGLE_CLOUD_CPP_GKEMULTICLOUD_TEST_REGION)
 ./google/cloud/google_cloud_cpp_common.bzl:50:23     - Unknown word (msvc)       -- "internal/disable_msvc_crt_secure_warnings
 ./google/cloud/google_cloud_cpp_common.bzl:60:15     - Unknown word (getenv)     -- "internal/getenv.h",
 ./google/cloud/google_cloud_cpp_common_unit_tests.bzl:47:15     - Unknown word (noexcept)   -- "internal/noexcept_action_test.cc",
@@ -860,7 +861,6 @@ Lines:
 ./google/cloud/google_cloud_cpp_rest_internal_unit_tests.bzl:26:37     - Unknown word (sigpipe)    -- curl_wrappers_disable_sigpipe_handler_test.cc",
 ./google/cloud/google_cloud_cpp_rest_internal_unit_tests.bzl:32:20     - Unknown word (writev)     -- "internal/curl_writev_test.cc",
 ./google/cloud/ids/doc/main.dox:9:12      - Unknown word (Palo)       -- built with Palo Alto Networks technologies
-./google/cloud/internal/api_client_header_test.cc:62:39     - Unknown word (gapic)      -- actual, IsClientHeader("gapic/"));
 ./google/cloud/internal/async_connection_ready_test.cc:76:39     - Unknown word (SUBCHANNEL) -- SetInt(GRPC_ARG_USE_LOCAL_SUBCHANNEL_POOL, 1);
 ./google/cloud/internal/base64_transforms_test.cc:182:36    - Unknown word (QUJD)       -- UrlsafeBase64Decode("QUJD").value(), ElementsAre
 ./google/cloud/internal/base64_transforms_test.cc:183:36    - Unknown word (QUJDRA)     -- UrlsafeBase64Decode("QUJDRA").value(),
@@ -921,13 +921,13 @@ Lines:
 ./google/cloud/kms_key_name_test.cc:47:13     - Unknown word (plojects)   -- "plojects/p1/locations/l1/keyRings
 ./google/cloud/log.cc:58:15     - Unknown word (econv)      -- std::size_t econv = -1;
 ./google/cloud/log_test.cc:171:39    - Unknown word (anyvalue)   -- Environment env(kEnableClog, "anyvalue");
-./google/cloud/logging/v2/logging_service_v2_client.h:176:36    - Unknown word (cloudaudit) -- organizations/123/logs/cloudaudit.googleapis.com%2Factivity
+./google/cloud/logging/v2/logging_service_v2_client.h:177:36    - Unknown word (cloudaudit) -- organizations/123/logs/cloudaudit.googleapis.com%2Factivity
 ./google/cloud/managedidentities/managed_identities_client.h:19:39     - Unknown word (MANAGEDIDENTITIES) -- CLOUD_CPP_GOOGLE_CLOUD_MANAGEDIDENTITIES_MANAGED_IDENTITIES_CLIENT
 ./google/cloud/managedidentities/v1/managed_identities_client.h:41:13     - Unknown word (Identites)  -- /// Managed Identites API for identity services
 ./google/cloud/managedidentities/v1/managed_identities_client.h:60:18     - Unknown word (mydomain)   -- /// project e.g. mydomain.myorganization.com,
 ./google/cloud/managedidentities/v1/managed_identities_client.h:60:27     - Unknown word (myorganization) -- project e.g. mydomain.myorganization.com, with the following
 ./google/cloud/managedidentities/v1/managed_identities_client.h:67:14     - Unknown word (segement)       -- /// * First segement length (mydomain form
-./google/cloud/memcache/CMakeLists.txt:22:45     - Unknown word (Memorystore) -- "Cloud Memorystore for Memcached API")
+./google/cloud/memcache/CMakeLists.txt:20:21     - Unknown word (Memorystore) -- memcache "Cloud Memorystore for Memcached API" SERVICE
 ./google/cloud/metastore/v1/dataproc_metastore_client.h:1194:13   - Unknown word (DPMS)        -- /// Query DPMS metadata.
 ./google/cloud/metastore/v1/dataproc_metastore_client.h:39:61     - Unknown word (autoscaled) -- managed, highly available, autoscaled,
 ./google/cloud/metastore/v1/dataproc_metastore_client.h:40:5      - Unknown word (autohealing) -- /// autohealing, OSS-native deployments
@@ -935,8 +935,8 @@ Lines:
 ./google/cloud/metastore/v1/dataproc_metastore_federation_client.h:41:5      - Unknown word (Metastores) -- /// Metastores. The Federation Service
 ./google/cloud/migrationcenter/v1/internal/migration_center_auth_decorator.h:19:39     - Unknown word (MIGRATIONCENTER) -- CLOUD_CPP_GOOGLE_CLOUD_MIGRATIONCENTER_V1_INTERNAL_MIGRATION
 ./google/cloud/monitoring/metricsscope/v1/internal/metrics_scopes_auth_decorator.h:19:50     - Unknown word (METRICSSCOPE) -- GOOGLE_CLOUD_MONITORING_METRICSSCOPE_V1_INTERNAL_METRICS
-./google/cloud/monitoring/v3/notification_channel_client.h:698:66    - Unknown word (websafe)    -- return a much longer, websafe base
-./google/cloud/monitoring/v3/notification_channel_client.h:791:23    - Unknown word (TKNZG)      -- /// "G-123456" or "TKNZGhhd2EyN3I1MnRnMjRv"
+./google/cloud/monitoring/v3/notification_channel_client.h:700:66    - Unknown word (websafe)    -- return a much longer, websafe base
+./google/cloud/monitoring/v3/notification_channel_client.h:793:23    - Unknown word (TKNZG)      -- /// "G-123456" or "TKNZGhhd2EyN3I1MnRnMjRv"
 ./google/cloud/networkmanagement/mocks/mock_reachability_connection.h:19:39     - Unknown word (NETWORKMANAGEMENT) -- CLOUD_CPP_GOOGLE_CLOUD_NETWORKMANAGEMENT_MOCKS_MOCK_REACHABILITY
 ./google/cloud/networksecurity/v1/internal/network_security_auth_decorator.h:19:39     - Unknown word (NETWORKSECURITY) -- CLOUD_CPP_GOOGLE_CLOUD_NETWORKSECURITY_V1_INTERNAL_NETWORK
 ./google/cloud/networksecurity/v1/network_security_client.h:604:70    - Unknown word (mtls)       -- number. E.g. "server_mtls_policy".
@@ -952,7 +952,7 @@ Lines:
 ./google/cloud/osconfig/agentendpoint/v1/agent_endpoint_client.h:19:48     - Unknown word (AGENTENDPOINT) -- GOOGLE_CLOUD_OSCONFIG_AGENTENDPOINT_V1_AGENT_ENDPOINT_CLIENT
 ./google/cloud/osconfig/v1/os_config_zonal_client.h:610:25    - Unknown word (asssignment) -- / Get the OS policy asssignment report for the specified
 ./google/cloud/oslogin/mocks/mock_os_login_connection.h:19:39     - Unknown word (OSLOGIN)    -- CLOUD_CPP_GOOGLE_CLOUD_OSLOGIN_MOCKS_MOCK_OS_LOGIN
-./google/cloud/policysimulator/CMakeLists.txt:33:30     - Unknown word (POLICYSIMULATOR) -- GOOGLE_CLOUD_CPP_POLICYSIMULATOR_RESOURCE)
+./google/cloud/policysimulator/CMakeLists.txt:32:30     - Unknown word (POLICYSIMULATOR) -- GOOGLE_CLOUD_CPP_POLICYSIMULATOR_RESOURCE)
 ./google/cloud/policytroubleshooter/CMakeLists.txt:34:30     - Unknown word (POLICYTROUBLESHOOTER) -- GOOGLE_CLOUD_CPP_POLICYTROUBLESHOOTER_PRINCIPAL
 ./google/cloud/privateca/certificate_authority_client.h:19:39     - Unknown word (PRIVATECA)  -- CLOUD_CPP_GOOGLE_CLOUD_PRIVATECA_CERTIFICATE_AUTHORITY
 ./google/cloud/profiler/v2/profiler_client.h:107:19    - Unknown word (retryinfo)  -- /// "google.rpc.retryinfo-bin".
@@ -967,7 +967,7 @@ Lines:
 ./google/cloud/pubsub/internal/extend_leases_with_retry.cc:89:5      - Unknown word (enccode)    -- * @enccode
 ./google/cloud/pubsub/internal/message_carrier_test.cc:38:30     - Unknown word (googclient) -- Contains(Pair("googclient_key", "test-value")
 ./google/cloud/pubsub/internal/subscription_session_test.cc:171:37    - Unknown word (acking)     -- Increment the counter before acking, as the ack() may trigger
-./google/cloud/pubsub/internal/tracing_batch_sink_test.cc:216:8     - Unknown word (unsampled)  -- auto unsampled_span = MakeSpan("test
+./google/cloud/pubsub/internal/tracing_batch_sink_test.cc:218:8     - Unknown word (unsampled)  -- auto unsampled_span = MakeSpan("test
 ./google/cloud/pubsub/samples/CMakeLists.txt:88:37     - Unknown word (TESTDATA)   -- GOOGLE_CLOUD_CPP_PUBSUB_TESTDATA=${CMAKE_CURRENT_SOURCE
 ./google/cloud/pubsub/samples/samples.cc:1085:19   - Unknown word (Rolledback) -- std::cout << "Rolledback schema. Created a new
 ./google/cloud/pubsub/samples/samples.cc:2155:67   - Unknown word (avsc)       -- directory + "schema.avsc";
@@ -1007,13 +1007,13 @@ Lines:
 ./google/cloud/recaptchaenterprise/doc/environment-variables.dox:15:16     - Unknown word (Recaptcha)  -- used by `MakeRecaptchaEnterpriseServiceConnection
 ./google/cloud/recaptchaenterprise/doc/override-authentication.dox:12:10     - Unknown word (recaptcha)  -- @snippet recaptcha_enterprise_client_samples
 ./google/cloud/recaptchaenterprise/v1/internal/recaptcha_enterprise_auth_decorator.h:19:39     - Unknown word (RECAPTCHAENTERPRISE) -- CLOUD_CPP_GOOGLE_CLOUD_RECAPTCHAENTERPRISE_V1_INTERNAL_RECAPTCHA
-./google/cloud/resourcemanager/CMakeLists.txt:34:30     - Unknown word (RESOURCEMANAGER) -- GOOGLE_CLOUD_CPP_RESOURCEMANAGER_TEST_FOLDER)
+./google/cloud/resourcemanager/CMakeLists.txt:32:30     - Unknown word (RESOURCEMANAGER) -- GOOGLE_CLOUD_CPP_RESOURCEMANAGER_TEST_FOLDER)
 ./google/cloud/resourcemanager/v3/folders_client.h:345:37    - Unknown word (fanout)     -- folder naming, height, or fanout constraints.
 ./google/cloud/resourcemanager/v3/projects_client.h:640:27    - Unknown word (idempotently) -- This method behaves idempotently, such that deleting
 ./google/cloud/resourcemanager/v3/projects_client.h:918:11    - Unknown word (myownpersonaldomain) -- /// the myownpersonaldomain.com organization, but
 ./google/cloud/resourcemanager/v3/projects_client.h:918:61    - Unknown word (examplepetstore)     -- organization, but not the examplepetstore.com
 ./google/cloud/resourcesettings/mocks/mock_resource_settings_connection.h:19:39     - Unknown word (RESOURCESETTINGS) -- CLOUD_CPP_GOOGLE_CLOUD_RESOURCESETTINGS_MOCKS_MOCK_RESOURCE
-./google/cloud/retail/v2/catalog_client.h:614:62    - Unknown word (facetable)  -- searchable and dynamic facetable options.
+./google/cloud/retail/v2/catalog_client.h:618:62    - Unknown word (facetable)  -- searchable and dynamic facetable options.
 ./google/cloud/secretmanager/mocks/mock_secret_manager_connection.h:19:39     - Unknown word (SECRETMANAGER) -- CLOUD_CPP_GOOGLE_CLOUD_SECRETMANAGER_MOCKS_MOCK_SECRET_MANAGER
 ./google/cloud/securesourcemanager/v1/internal/secure_source_manager_auth_decorator.h:19:39     - Unknown word (SECURESOURCEMANAGER) -- CLOUD_CPP_GOOGLE_CLOUD_SECURESOURCEMANAGER_V1_INTERNAL_SECURE_SOURCE
 ./google/cloud/securitycenter/mocks/mock_security_center_connection.h:19:39     - Unknown word (SECURITYCENTER) -- CLOUD_CPP_GOOGLE_CLOUD_SECURITYCENTER_MOCKS_MOCK_SECURITY
@@ -1036,7 +1036,7 @@ Lines:
 ./google/cloud/spanner/benchmarks/README.md:140:29    - Unknown word (srtp)       -- experiment=read | tee srtp-read.csv
 ./google/cloud/spanner/benchmarks/README.md:78:49     - Unknown word (mrcb)       -- experiment=read-string | tee mrcb-read-string.csv
 ./google/cloud/spanner/benchmarks/single_row_throughput_plots.py:23:8      - Unknown word (plotnine)   -- import plotnine as p9
-./google/cloud/spanner/client.h:727:7     - Unknown word (copybrief)  -- * @copybrief Read(std::string,KeySet
+./google/cloud/spanner/client.h:732:7     - Unknown word (copybrief)  -- * @copybrief Read(std::string,KeySet
 ./google/cloud/spanner/client_test.cc:338:68    - Unknown word (epdp)       -- tePartitionedDmlParams const& epdp) {
 ./google/cloud/spanner/client_test.cc:575:12    - Unknown word (STREQ)      -- EXPECT_STREQ(e, "Read() error");
 ./google/cloud/spanner/database_admin_client_test.cc:32:11     - Unknown word (gsad)       -- namespace gsad = ::google::spanner
@@ -1055,8 +1055,8 @@ Lines:
 ./google/cloud/spanner/integration_tests/client_integration_test.cc:469:14    - Unknown word (upserts)    -- // Use upserts as mutation groups are
 ./google/cloud/spanner/integration_tests/data_types_integration_test.cc:489:47    - Unknown word (datatypesbyjsonvalue) -- AllOf(HasSubstr("Index datatypesbyjsonvalue"),
 ./google/cloud/spanner/integration_tests/data_types_integration_test.cc:72:30     - Unknown word (Tmpl)       -- DataTypeIntegrationTestTmpl : public T {
-./google/cloud/spanner/internal/connection_impl_test.cc:2865:37   - Unknown word (BADDECAF)   -- { partition_token: "BADDECAF" }
-./google/cloud/spanner/internal/connection_impl_test.cc:2867:25   - Unknown word (CAFEDEAD)   -- transaction: { id: "CAFEDEAD" }
+./google/cloud/spanner/internal/connection_impl_test.cc:2864:37   - Unknown word (BADDECAF)   -- { partition_token: "BADDECAF" }
+./google/cloud/spanner/internal/connection_impl_test.cc:2866:25   - Unknown word (CAFEDEAD)   -- transaction: { id: "CAFEDEAD" }
 ./google/cloud/spanner/internal/connection_impl_test.cc:64:34     - Unknown word (Wmissing)   -- diagnostic ignored "-Wmissing-field-initializers"
 ./google/cloud/spanner/internal/logging_result_set_reader.cc:37:43     - Unknown word (unresumable) -- __func__ << "() << (unresumable)";
 ./google/cloud/spanner/internal/partial_result_set_resume_test.cc:528:39    - Unknown word (Resumability) -- set<spanner::StreamingResumabilityBufferSizeOption>(0)
@@ -1084,8 +1084,8 @@ Lines:
 ./google/cloud/spanner/value.h:353:6     - Unknown word (Metafunction) -- // Metafunction that returns true if
 ./google/cloud/spanner/value_test.cc:1167:14   - Unknown word (alphahex)   -- auto const alphahex = [](std::ostream& os
 ./google/cloud/spanner/value_test.cc:1176:49   - Unknown word (manip)      -- ostream&(std::ostream&)> manip;
-./google/cloud/sql/v1/internal/sql_instances_rest_connection_impl.cc:130:40    - Unknown word (Reencrypt)  -- cesServiceRestConnectionImpl::Reencrypt(
-./google/cloud/sql/v1/internal/sql_instances_rest_stub.cc:123:46    - Unknown word (reencrypt)  -- request.instance(), "/", "reencrypt"));
+./google/cloud/sql/v1/internal/sql_instances_rest_connection_impl.cc:144:40    - Unknown word (Reencrypt)  -- cesServiceRestConnectionImpl::Reencrypt(
+./google/cloud/sql/v1/internal/sql_instances_rest_stub.cc:135:46    - Unknown word (reencrypt)  -- request.instance(), "/", "reencrypt"));
 ./google/cloud/status.cc:187:50    - Unknown word (keyspaces)  -- separate from other keyspaces (e.g.,
 ./google/cloud/status.cc:187:8     - Unknown word (keyspace)   -- // The keyspace used here is separate
 ./google/cloud/storage/benchmarks/README.md:108:53    - Unknown word (venv)       -- and assume that the `venv` module is installed
@@ -1093,8 +1093,9 @@ Lines:
 ./google/cloud/storage/benchmarks/README.md:116:14    - Unknown word (vebm)       -- We will use `vebm` (for Virtual Environment
 ./google/cloud/storage/benchmarks/README.md:35:17     - Unknown word (ttfb)       -- tee tp-vs-cpu.ttfb.txt
 ./google/cloud/storage/benchmarks/aggregate_download_throughput_benchmark.cc:422:18    - Unknown word (Gbit)       -- << " Gbit/s=" << bandwidth <<
-./google/cloud/storage/benchmarks/async_throughput_benchmark.cc:206:16    - Unknown word (mebibyte)                    -- auto const mebibyte_per_second =
-./google/cloud/storage/benchmarks/async_throughput_benchmark.cc:86:33     - Unknown word (Zabcdefghiljkmnopqrstuvwxyz) -- ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghiljkmnopqrstuvwxyz0123456789");
+./google/cloud/storage/benchmarks/async_throughput_benchmark.cc:379:28    - Unknown word (guploader)  -- l = headers.find("x-guploader-uploadid");
+./google/cloud/storage/benchmarks/async_throughput_benchmark.cc:379:38    - Unknown word (uploadid)   -- headers.find("x-guploader-uploadid");
+./google/cloud/storage/benchmarks/async_throughput_benchmark.cc:82:11     - Unknown word (saturage)   -- 1) Try to saturage the egress path on the
 ./google/cloud/storage/benchmarks/storage_throughput_vs_cpu_benchmark.cc:326:8     - Unknown word (uploaders)  -- auto uploaders = gcs_bm::CreateUploadExperim
 ./google/cloud/storage/benchmarks/storage_throughput_vs_cpu_benchmark.cc:333:8     - Unknown word (downloaders) -- auto downloaders =
 ./google/cloud/storage/benchmarks/storage_throughput_vs_cpu_plots.py:19:61     - Unknown word (Spyder)     -- load this script in Spyder
@@ -1190,7 +1191,6 @@ Lines:
 ./google/cloud/storage/internal/object_requests_test.cc:273:61    - Unknown word (QUJDRD)     -- source-encryption-key: QUJDRDEyMzQ="));
 ./google/cloud/storage/internal/object_requests_test.cc:547:27    - Unknown word (sdlkj)      -- "&upload_id=xa298sd_sdlkj2";
 ./google/cloud/storage/internal/object_write_streambuf_test.cc:364:39    - Unknown word (Putn)       -- ectWriteStreambufTest, MixPutcPutn) {
-./google/cloud/storage/internal/rest/object_read_source_test.cc:120:16    - Unknown word (guploader)  -- {{"x-guploader-response-body-transformations
 ./google/cloud/storage/internal/signed_url_requests_test.cc:111:62    - Unknown word (Bbar)       -- -object?marker=foo%2Bbar)""";
 ./google/cloud/storage/internal/signed_url_requests_test.cc:225:58    - Unknown word (Fhtml)      -- response-content-type=text%2Fhtml)""";
 ./google/cloud/storage/internal/signed_url_requests_test.cc:304:62    - Unknown word (Bhost)      -- SignedHeaders=content-type%3Bhost"
@@ -1207,7 +1207,6 @@ Lines:
 ./google/cloud/storage/policy_document_test.cc:199:14    - Unknown word (rsaposttest)  -- "rsaposttest, access_id=foo@foo.com
 ./google/cloud/storage/quickstart/README.md:126:31    - Unknown word (Tbits)      -- large workloads (several Tbits/s of upload and/or download
 ./google/cloud/storage/testing/mock_generic_stub.h:27:17     - Unknown word (Googlemock) -- * Implements a Googlemock for the (generated)
-./google/cloud/storage/tests/object_read_headers_integration_test.cc:136:44    - Unknown word (uploadid)   -- IsSupersetOf({"x-guploader-uploadid", "x-goog-hash",
 ./google/cloud/storage/tests/object_read_large_integration_test.cc:39:39     - Unknown word (statm)      -- ifstream("/proc/self/statm");
 ./google/cloud/storage/tests/signed_url_conformance_test.cc:139:41    - Unknown word (bucketboundhostname)      -- cketBoundHostname(test_params.bucketboundhostname());
 ./google/cloud/storage/tests/signed_url_conformance_test.cc:187:35    - Unknown word (policyinput)              -- input = test_params.policyinput();
@@ -1225,7 +1224,7 @@ Lines:
 ./google/cloud/storagetransfer/mocks/mock_storage_transfer_connection.h:19:39     - Unknown word (STORAGETRANSFER) -- CLOUD_CPP_GOOGLE_CLOUD_STORAGETRANSFER_MOCKS_MOCK_STORAGE_TRANSFER
 ./google/cloud/support/doc/environment-variables.dox:14:40     - Unknown word (cloudsupport) -- (which defaults to "cloudsupport.googleapis.com")
 ./google/cloud/support/v2/case_client.h:466:11    - Unknown word (classications) -- /// The classications are hierarchical, with
-./google/cloud/telcoautomation/CMakeLists.txt:21:55     - Unknown word (Telco)      -- library(telcoautomation "Telco Automation API")
+./google/cloud/telcoautomation/CMakeLists.txt:19:53     - Unknown word (Telco)      -- library(telcoautomation "Telco Automation API"
 ./google/cloud/telcoautomation/doc/environment-variables.dox:13:21     - Unknown word (TELCO)      -- - `GOOGLE_CLOUD_CPP_TELCO_AUTOMATION_ENDPOINT
 ./google/cloud/telcoautomation/doc/override-authentication.dox:12:10     - Unknown word (telco)      -- @snippet telco_automation_client_samples
 ./google/cloud/telcoautomation/v1/internal/telco_automation_auth_decorator.cc:93:54     - Unknown word (Slms)       -- telcoautomation::v1::ListEdgeSlmsResponse>
@@ -1428,10 +1427,9 @@ Lines:
 ./protos/google/cloud/compute/v1/internal/common_119.proto:82:30     - Unknown word (proxyless)  -- optional bool validate_for_proxyless = 10
 ./protos/google/cloud/compute/v1/internal/common_130.proto:92:24     - Unknown word (vpntunnels) -- / using the compute.vpntunnels.insert method and associated
 ./protos/google/cloud/compute/v1/internal/common_134.proto:133:42    - Unknown word (deallocated) -- Resources are being deallocated for the VPN tunnel.
-./release/README.md:208:29    - Unknown word (vckpkg)     -- Get to your clone of vckpkg
-./release/README.md:258:28    - Unknown word (portfile)   -- ports/google-cloud-cpp/portfile.cmake`, use the generated
-./release/README.md:296:4     - Unknown word (shelll)     -- ```shelll
-./release/README.md:345:33    - Unknown word (UTAG)       -- use `TAG=2.15.1` and `UTAG=2_15_1` in these examples
-./release/README.md:382:32    - Unknown word (conandata)  -- google-cloud-cpp/2.x/conandata.yml
-./release/README.md:383:32    - Unknown word (conanfile)  -- google-cloud-cpp/2.x/conanfile.py
-./release/README.md:395:44    - Unknown word (agan)       -- io. Run the command agan if needed.
+./release/README.md:210:29    - Unknown word (vckpkg)     -- Get to your clone of vckpkg
+./release/README.md:261:28    - Unknown word (portfile)   -- ports/google-cloud-cpp/portfile.cmake`, use the generated
+./release/howto-update-conan-package.md:119:30    - Unknown word (conandata)  -- google-cloud-cpp/2.x/conandata.yml
+./release/howto-update-conan-package.md:120:30    - Unknown word (conanfile)  -- google-cloud-cpp/2.x/conanfile.py
+./release/howto-update-conan-package.md:38:31     - Unknown word (UTAG)       -- use `TAG=2.15.1` and `UTAG=2_15_1` and `LATEST
+./release/howto-update-conan-package.md:73:51     - Unknown word (agan)       -- io. Run the command agan if needed.
