@@ -1,9 +1,9 @@
 import { assert } from '../errors/assert.js';
 import type { BufferEncoding } from '../models/BufferEncoding.js';
-import type { FileReference, FileResource, FileResourceBase } from '../models/FileResource.js';
+import type { FileReference, FileResource, TextFileResource } from '../models/FileResource.js';
 import { decode, isGZipped } from './encode-decode.js';
 
-export class CFileResource implements FileResource {
+export class CFileResource implements TextFileResource {
     private _text?: string;
     readonly baseFilename?: string | undefined;
     private _gz?: boolean | undefined;
@@ -47,8 +47,9 @@ export class CFileResource implements FileResource {
         return obj instanceof CFileResource;
     }
 
-    static from(fileResource: FileResourceBase): CFileResource;
+    static from(fileResource: FileResource): CFileResource;
     static from(fileReference: FileReference, content: string | ArrayBufferView): CFileResource;
+    static from(fileReference: FileReference | URL, content: string | ArrayBufferView): CFileResource;
     static from(
         url: URL,
         content: string | ArrayBufferView,
@@ -57,7 +58,7 @@ export class CFileResource implements FileResource {
         gz?: boolean,
     ): CFileResource;
     static from(
-        urlOrFileResource: FileResourceBase | FileReference | URL,
+        urlOrFileResource: FileResource | FileReference | URL,
         content?: string | ArrayBufferView,
         encoding?: BufferEncoding,
         baseFilename?: string | undefined,

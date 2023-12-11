@@ -1,8 +1,8 @@
 import type { Dispatcher, ServiceBus } from '@cspell/cspell-service-bus';
 import { createResponse, createResponseFail, isServiceResponseSuccess } from '@cspell/cspell-service-bus';
+import type { Dirent, Stats as FsStats } from 'fs';
 import { promises as fs, readFileSync, statSync } from 'fs';
-import type { URL } from 'url';
-import { fileURLToPath } from 'url';
+import { fileURLToPath, pathToFileURL } from 'url';
 import { promisify } from 'util';
 import { gunzipSync, gzip } from 'zlib';
 
@@ -11,7 +11,8 @@ import { encodeString, isGZipped } from '../../common/encode-decode.js';
 import { CFileResource } from '../../common/index.js';
 import { assert } from '../../errors/assert.js';
 import { toError } from '../../errors/index.js';
-import type { FileReference } from '../../models/FileResource.js';
+import type { DirEntry, FileReference, Stats } from '../../models/index.js';
+import { FileType } from '../../models/index.js';
 import { decodeDataUrl, guessMimeType, toDataUrl } from '../../node/dataUrl.js';
 import { fetchURL } from '../../node/file/fetch.js';
 import { getStatHttp } from '../../node/file/stat.js';
@@ -24,6 +25,7 @@ import {
     RequestFsWriteFile,
     RequestZlibInflate,
 } from '../../requests/index.js';
+import { RequestFsReadDirectory } from '../../requests/RequestFsReadDirectory.js';
 
 const isGzFileRegExp = /\.gz($|[?#])/;
 
@@ -60,6 +62,17 @@ const handleRequestFsReadFileSync = RequestFsReadFileSync.createRequestHandler(
     ({ params }) => createResponse(CFileResource.from({ ...params, content: readFileSync(fileURLToPath(params.url)) })),
     undefined,
     'Node: Sync Read Binary File.',
+);
+
+/**
+ * Handle Binary File Reads
+ */
+const handleRequestFsReadDirectory = RequestFsReadDirectory.createRequestHandler(
+    ({ params }) => {
+        return createResponse(fs.readdir(fileURLToPath(params.url), { withFileTypes: true }).then(direntToDirEntries));
+    },
+    undefined,
+    'Node: Read Directory.',
 );
 
 /**
@@ -122,10 +135,22 @@ const handleRequestFsReadFileData = RequestFsReadFile.createRequestHandler(
  * Handle fs:stat
  */
 const handleRequestFsStat = RequestFsStat.createRequestHandler(
-    ({ params }) => createResponse(fs.stat(fileURLToPath(params.url))),
+    ({ params }) => createResponse(toPromiseStats(fs.stat(fileURLToPath(params.url)))),
     undefined,
     'Node: fs.stat.',
 );
+
+function toStats(stat: FsStats): Stats {
+    return {
+        size: stat.size,
+        mtimeMs: stat.mtimeMs,
+        fileType: toFileType(stat),
+    };
+}
+
+function toPromiseStats(pStat: Promise<FsStats>): Promise<Stats> {
+    return pStat.then(toStats);
+}
 
 /**
  * Handle fs:statSync
@@ -241,6 +266,7 @@ export function registerHandlers(serviceBus: ServiceBus) {
         handleRequestFsReadFileHttp,
         handleRequestFsReadFileData,
         handleRequestFsReadFileSyncData,
+        handleRequestFsReadDirectory,
         handleRequestZlibInflate,
         handleRequestFsStatSync,
         handleRequestFsStat,
@@ -256,4 +282,21 @@ function encodeContent(ref: FileReference, content: string | ArrayBufferView): s
         return arrayBufferViewToBuffer(encodeString(content, ref.encoding));
     }
     return arrayBufferViewToBuffer(content);
+}
+
+function direntToDirEntries(dirent: Dirent[]): DirEntry[] {
+    return dirent.map(direntToDirEntry);
+}
+
+function direntToDirEntry(dirent: Dirent): DirEntry {
+    const dirUrl = pathToFileURL(dirent.path);
+    const url = new URL(dirent.name, dirUrl);
+    return {
+        url,
+        fileType: toFileType(dirent),
+    };
+}
+
+function toFileType(statLike: { isFile(): boolean; isDirectory(): boolean }): FileType {
+    return statLike.isFile() ? FileType.File : statLike.isDirectory() ? FileType.Directory : FileType.Unknown;
 }

@@ -1,42 +1,47 @@
 import type { BufferEncoding } from './models/BufferEncoding.js';
-import type { FileReference, FileResource, UrlOrFilename, UrlOrReference } from './models/FileResource.js';
-import type { Stats } from './models/index.js';
+import type { FileReference, TextFileResource, UrlOrFilename, UrlOrReference } from './models/FileResource.js';
+import type { DirEntry, Stats } from './models/index.js';
 
 export interface CSpellIO {
     /**
      * Read a file
-     * @param uriOrFilename - uri of the file to read
+     * @param urlOrFilename - uri of the file to read
      * @param encoding - optional encoding.
      * @returns A TextFileResource.
      */
-    readFile(uriOrFilename: UrlOrReference, encoding?: BufferEncoding): Promise<FileResource>;
+    readFile(urlOrFilename: UrlOrReference, encoding?: BufferEncoding): Promise<TextFileResource>;
     /**
      * Read a file in Sync mode.
      * Note: `http` requests will fail.
-     * @param uriOrFilename - uri of the file to read
+     * @param urlOrFilename - uri of the file to read
      * @param encoding - optional encoding.
      * @returns A TextFileResource.
      */
-    readFileSync(uriOrFilename: UrlOrReference, encoding?: BufferEncoding): FileResource;
+    readFileSync(urlOrFilename: UrlOrReference, encoding?: BufferEncoding): TextFileResource;
     /**
      * Write content to a file using utf-8 encoding.
      * It will fail to write to non-file uris.
-     * @param uriOrFilename - uri
+     * @param urlOrFilename - uri
      * @param content - string to write.
      */
-    writeFile(uriOrFilename: UrlOrReference, content: string | ArrayBufferView): Promise<FileReference>;
+    writeFile(urlOrFilename: UrlOrReference, content: string | ArrayBufferView): Promise<FileReference>;
+    /**
+     * Read a directory.
+     * @param urlOrFilename - uri
+     */
+    readDirectory(urlOrFilename: string | URL): Promise<DirEntry[]>;
     /**
      * Get Stats on a uri.
-     * @param uriOrFilename - uri to fetch stats on
+     * @param urlOrFilename - uri to fetch stats on
      * @returns Stats if successful.
      */
-    getStat(uriOrFilename: UrlOrReference): Promise<Stats>;
+    getStat(urlOrFilename: UrlOrReference): Promise<Stats>;
     /**
      * Get Stats on a uri.
-     * @param uriOrFilename - uri to fetch stats on
+     * @param urlOrFilename - uri to fetch stats on
      * @returns Stats if successful, otherwise it throws an error.
      */
-    getStatSync(uriOrFilename: UrlOrReference): Stats;
+    getStatSync(urlOrFilename: UrlOrReference): Stats;
     /**
      * Compare two Stats.
      * @param left - left stat
@@ -87,8 +92,8 @@ export interface CSpellIO {
 
     // /**
     //  *
-    //  * @param uriOrFilename
+    //  * @param urlOrFilename
     //  * @param relativeTo -
     //  */
-    // resolveUrl(uriOrFilename: UrlOrFilename, relativeTo: UrlOrFilename): URL;
+    // resolveUrl(urlOrFilename: UrlOrFilename, relativeTo: UrlOrFilename): URL;
 }

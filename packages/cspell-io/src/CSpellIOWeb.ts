@@ -1,15 +1,18 @@
 import { compareStats } from './common/stat.js';
 import type { CSpellIO } from './CSpellIO.js';
 import { ErrorNotImplemented } from './errors/errors.js';
-import type { FileReference, FileResource, UrlOrFilename, UrlOrReference } from './models/FileResource.js';
-import type { Stats } from './models/Stats.js';
+import type { FileReference, TextFileResource, UrlOrFilename, UrlOrReference } from './models/FileResource.js';
+import type { DirEntry, Stats } from './models/index.js';
 
 export class CSpellIOWeb implements CSpellIO {
-    readFile(_uriOrFilename: string | URL): Promise<FileResource> {
+    readFile(_uriOrFilename: string | URL): Promise<TextFileResource> {
         throw new ErrorNotImplemented('readFile');
     }
-    readFileSync(_uriOrFilename: string | URL): FileResource {
+    readFileSync(_uriOrFilename: string | URL): TextFileResource {
         throw new ErrorNotImplemented('readFileSync');
+    }
+    readDirectory(_urlOrFilename: string | URL): Promise<DirEntry[]> {
+        throw new ErrorNotImplemented('readDirectory');
     }
     writeFile(_uriOrFilename: UrlOrReference, _content: string | ArrayBufferView): Promise<FileReference> {
         throw new ErrorNotImplemented('writeFile');

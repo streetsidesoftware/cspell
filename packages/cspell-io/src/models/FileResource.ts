@@ -23,14 +23,14 @@ export interface FileReference {
     readonly gz?: boolean | undefined;
 }
 
-export interface FileResourceBase extends FileReference {
+export interface FileResource extends FileReference {
     /**
      * The contents of the file
      */
     readonly content: string | ArrayBufferView;
 }
 
-export interface FileResource extends FileResourceBase {
+export interface TextFileResource extends FileResource {
     getText(): string;
 }
 
