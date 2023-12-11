@@ -15,6 +15,7 @@ import {
     toFileDirUrl,
     toFilePathOrHref,
     toFileUrl,
+    windowsDriveLetterToUpper,
 } from './url.js';
 
 describe('url', () => {
@@ -193,6 +194,16 @@ describe('url', () => {
             const result = toFileDirUrl(dir);
             expect(result.href).toBe('file:///path/to/directory/');
         });
+    });
+
+    test.each`
+        file          | expected
+        ${'d:/'}      | ${'d:/'}
+        ${'d:\\'}     | ${'D:\\'}
+        ${'c:/hello'} | ${'c:/hello'}
+        ${'c:hello'}  | ${'c:hello'}
+    `('windowsDriveLetterToUpper', ({ file, expected }) => {
+        expect(windowsDriveLetterToUpper(file)).toEqual(expected);
     });
 });
 

@@ -86,7 +86,7 @@ export function fileURLOrPathToPath(filenameOrURL: string | URL): string {
 }
 
 function toFilePath(url: string | URL): string {
-    return fileURLToPath(url).replace(/^[a-z]:/, (s) => s.toUpperCase());
+    return windowsDriveLetterToUpper(fileURLToPath(url));
 }
 
 export function isURLLike(url: string | URL): boolean {
@@ -104,4 +104,8 @@ export function isDataURL(url: string | URL): boolean {
 function isUrlWithProtocol(url: string | URL, protocol: string): boolean {
     protocol = protocol.endsWith(':') ? protocol : protocol + ':';
     return url instanceof URL ? url.protocol === protocol : url.startsWith(protocol);
+}
+
+export function windowsDriveLetterToUpper(absoluteFilePath: string): string {
+    return absoluteFilePath.replace(/^([a-z]):\\/, (s) => s.toUpperCase());
 }

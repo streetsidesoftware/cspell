@@ -13,7 +13,13 @@ import { createCSpellSettingsInternal as csi } from '../../../Models/CSpellSetti
 import { AutoResolveCache } from '../../../util/AutoResolve.js';
 import { logError, logWarning } from '../../../util/logger.js';
 import { resolveFile } from '../../../util/resolveFile.js';
-import { addTrailingSlash, cwdURL, resolveFileWithURL, toFilePathOrHref } from '../../../util/url.js';
+import {
+    addTrailingSlash,
+    cwdURL,
+    resolveFileWithURL,
+    toFilePathOrHref,
+    windowsDriveLetterToUpper,
+} from '../../../util/url.js';
 import {
     configSettingsFileVersion0_1,
     configSettingsFileVersion0_2,
@@ -543,7 +549,7 @@ function resolveGlobRoot(settings: CSpellSettingsWST, urlSettingsFile: URL): str
     return typeof globRoot === 'string'
         ? globRoot
         : globRoot.protocol === 'file:'
-          ? path.resolve(fileURLToPath(globRoot))
+          ? windowsDriveLetterToUpper(path.resolve(fileURLToPath(globRoot)))
           : addTrailingSlash(globRoot).href;
 }
 
