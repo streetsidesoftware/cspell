@@ -82,7 +82,11 @@ export function toURL(href: string | URL, relativeTo?: string | URL): URL {
 }
 
 export function fileURLOrPathToPath(filenameOrURL: string | URL): string {
-    return isFileURL(filenameOrURL) ? fileURLToPath(filenameOrURL) : filenameOrURL.toString();
+    return isFileURL(filenameOrURL) ? toFilePath(filenameOrURL) : filenameOrURL.toString();
+}
+
+function toFilePath(url: string | URL): string {
+    return fileURLToPath(url).replace(/^[a-z]:/, (s) => s.toUpperCase());
 }
 
 export function isURLLike(url: string | URL): boolean {
