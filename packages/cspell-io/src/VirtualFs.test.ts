@@ -5,8 +5,8 @@ import { afterEach, beforeEach, describe, expect, test, vi } from 'vitest';
 import { CFileResource } from './common/index.js';
 import { toFileURL } from './node/file/url.js';
 import { pathToSample as ps } from './test/test.helper.js';
-import type { FileSystem, FileSystemProvider, VirtualFS } from './VirtualFS.js';
-import { createVirtualFS, getDefaultVirtualFs, VFSErrorUnhandledRequest } from './VirtualFS.js';
+import type { FileSystemProvider, ProviderFileSystem, VirtualFS } from './VirtualFS.js';
+import { createVirtualFS, FSCapabilityFlags, getDefaultVirtualFs, VFSErrorUnsupportedRequest } from './VirtualFS.js';
 
 const sc = expect.stringContaining;
 const oc = expect.objectContaining;
@@ -30,15 +30,15 @@ describe('VirtualFs', () => {
         mockGetFileSystem.mockImplementation((url) => (url.protocol === 'file:' ? mfs : undefined));
         const d = virtualFs.registerFileSystemProvider(provider);
         const fs = virtualFs.getFS(new URL('file:///'));
-        expect(fs).toBeDefined();
-        expect(fs).toBe(mfs);
+        expect(fs.hasProvider).toBe(true);
+        expect(fs.providerInfo.name).toBe('mockFileSystemProvider');
 
         expect(mockGetFileSystem).toHaveBeenCalledTimes(1);
 
         // ask again
         const fs2 = virtualFs.getFS(new URL('file:///'));
-        expect(fs2).toBeDefined();
-        expect(fs2).toBe(mfs);
+        expect(fs2.hasProvider).toBe(true);
+        expect(fs2.providerInfo).toBe(mfs.providerInfo);
 
         expect(mockGetFileSystem).toHaveBeenCalledTimes(1);
 
@@ -47,8 +47,8 @@ describe('VirtualFs', () => {
         // ask again
         const fs3 = virtualFs.getFS(new URL('file:///'));
         expect(fs3).toBeDefined();
-        expect(fs3).not.toBe(mfs);
-        expect(fs3).toBe(defaultFs);
+        expect(fs3.hasProvider).toBe(true);
+        expect(fs3.providerInfo).toBe(defaultFs.providerInfo);
     });
 
     test('should dispose of everything', () => {
@@ -59,8 +59,8 @@ describe('VirtualFs', () => {
         mockGetFileSystem.mockImplementation((url) => (url.protocol === 'file:' ? mfs : undefined));
         virtualFs.registerFileSystemProvider(provider);
         const fs = virtualFs.getFS(new URL('file:///'));
-        expect(fs).toBeDefined();
-        expect(fs).toBe(mfs);
+        expect(fs.hasProvider).toBe(true);
+        expect(fs.providerInfo.name).toBe('mockFileSystemProvider');
 
         expect(mockGetFileSystem).toHaveBeenCalledTimes(1);
 
@@ -75,17 +75,20 @@ describe('VirtualFs', () => {
         vi.mocked(provider.getFileSystem).mockImplementation((url) => (url.protocol === 'untitled:' ? mfs : undefined));
         const d = virtualFs.registerFileSystemProvider(provider);
         const fs = virtualFs.getFS(new URL('file:///'));
-        expect(fs).toBeDefined();
+        expect(fs.hasProvider).toBe(true);
         expect(fs).not.toBe(mfs);
         d.dispose();
     });
 
-    test('should not find a FS', () => {
+    test('should not find a FS', async () => {
         const provider = mockFileSystemProvider();
         vi.mocked(provider.getFileSystem).mockImplementation((url, next) => next(url));
         virtualFs.registerFileSystemProvider(provider);
-        const fs = virtualFs.getFS(new URL('ftp://example.com/data.json'));
-        expect(fs).toBeUndefined();
+        const url = new URL('ftp://example.com/data.json');
+        const fs = virtualFs.getFS(url);
+        expect(fs.hasProvider).toBe(false);
+
+        await expect(fs.readFile(url)).rejects.toThrowError('Unsupported request: readFile');
     });
 
     test('should have a file: default when calling next', () => {
@@ -94,7 +97,7 @@ describe('VirtualFs', () => {
         vi.mocked(provider.getFileSystem).mockImplementation((url, next) => next(url));
         virtualFs.registerFileSystemProvider(provider);
         const fs = virtualFs.getFS(new URL('file:///'));
-        expect(fs).toBeDefined();
+        expect(fs.hasProvider).toBe(true);
         expect(fs).not.toBe(mfs);
     });
 
@@ -129,22 +132,22 @@ describe('VirtualFs', () => {
     test('try unsupported readFile', async () => {
         const fs = virtualFs.fs;
         const result = fs.readFile(new URL('ftp://example.com/data.json'));
-        await expect(result).rejects.toEqual(Error('Unhandled request: readFile'));
-        await expect(result).rejects.toBeInstanceOf(VFSErrorUnhandledRequest);
+        await expect(result).rejects.toEqual(Error('Unsupported request: readFile'));
+        await expect(result).rejects.toBeInstanceOf(VFSErrorUnsupportedRequest);
     });
 
     test('try unsupported stat', async () => {
         const fs = virtualFs.fs;
         const result = fs.stat(new URL('ftp://example.com/data.json'));
-        await expect(result).rejects.toEqual(Error('Unhandled request: stat'));
-        await expect(result).rejects.toBeInstanceOf(VFSErrorUnhandledRequest);
+        await expect(result).rejects.toEqual(Error('Unsupported request: stat'));
+        await expect(result).rejects.toBeInstanceOf(VFSErrorUnsupportedRequest);
     });
 
     test('try unsupported readDirectory', async () => {
         const fs = virtualFs.fs;
         const result = fs.readDirectory(new URL('ftp://example.com/data.json'));
-        await expect(result).rejects.toEqual(Error('Unhandled request: readDirectory'));
-        await expect(result).rejects.toBeInstanceOf(VFSErrorUnhandledRequest);
+        await expect(result).rejects.toEqual(Error('Unsupported request: readDirectory'));
+        await expect(result).rejects.toBeInstanceOf(VFSErrorUnsupportedRequest);
     });
 
     test.each`
@@ -195,20 +198,53 @@ describe('VirtualFs', () => {
         const r = fs.stat(url);
         await expect(r).rejects.toEqual(expected);
     });
+
+    test('writeFile', async () => {
+        const provider = mockFileSystemProvider();
+        const mfs = mockFileSystem();
+        vi.mocked(provider.getFileSystem).mockImplementation((_url) => mfs);
+        const d = virtualFs.registerFileSystemProvider(provider);
+        const mockedWriteFile = vi.mocked(mfs.writeFile);
+        mockedWriteFile.mockImplementation((file) => Promise.resolve({ url: file.url }));
+        const fs = virtualFs.fs;
+        const file = { url: new URL('file:///hello.txt'), content: 'Hello World' };
+        const result = await fs.writeFile(file);
+        expect(mockedWriteFile).toHaveBeenCalledTimes(1);
+        expect(mockedWriteFile).toHaveBeenLastCalledWith(file);
+        expect(result).not.toBe(file);
+        expect(result).toStrictEqual(oc({ url: file.url }));
+        d.dispose();
+    });
+
+    test('fsCapabilities', () => {
+        const fs = virtualFs.fs;
+        const capabilities = fs.getCapabilities(new URL('file:///hello.txt'));
+        expect(capabilities).toBeDefined();
+        expect(capabilities.readFile).toBe(true);
+        expect(capabilities.writeFile).toBe(true);
+        expect(capabilities.stat).toBe(true);
+        expect(capabilities.readDirectory).toBe(true);
+        expect(capabilities.writeDirectory).toBe(false);
+    });
 });
 
-function mockFileSystem(): FileSystem {
-    const p: FileSystem = {
+function mockFileSystem(): ProviderFileSystem {
+    const p: ProviderFileSystem = {
+        providerInfo: { name: 'mockFileSystemProvider' },
+        capabilities: FSCapabilityFlags.Stat | FSCapabilityFlags.ReadWrite | FSCapabilityFlags.ReadDir,
         stat: vi.fn(),
         readFile: vi.fn(),
         readDirectory: vi.fn(),
+        writeFile: vi.fn(),
         dispose: vi.fn(),
+        getCapabilities: vi.fn(),
     };
     return p;
 }
 
 function mockFileSystemProvider(): FileSystemProvider {
     const p: FileSystemProvider = {
+        name: 'mockFileSystemProvider',
         getFileSystem: vi.fn(),
         dispose: vi.fn(),
     };

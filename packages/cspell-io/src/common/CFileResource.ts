@@ -64,7 +64,13 @@ export class CFileResource implements TextFileResource {
         baseFilename?: string | undefined,
         gz?: boolean,
     ): CFileResource {
-        if (CFileResource.isCFileResource(urlOrFileResource)) return urlOrFileResource;
+        if (CFileResource.isCFileResource(urlOrFileResource)) {
+            if (content) {
+                const { url, encoding, baseFilename, gz } = urlOrFileResource;
+                return new CFileResource(url, content, encoding, baseFilename, gz);
+            }
+            return urlOrFileResource;
+        }
         if (urlOrFileResource instanceof URL) {
             assert(content !== undefined);
             return new CFileResource(urlOrFileResource, content, encoding, baseFilename, gz);
@@ -83,4 +89,8 @@ export class CFileResource implements TextFileResource {
             fileResource.gz,
         );
     }
+}
+
+export function fromFileResource(fileResource: FileResource): TextFileResource {
+    return CFileResource.from(fileResource);
 }
