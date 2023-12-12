@@ -3,7 +3,7 @@ Repository: ktaranov/sqlserver-kit
 Url: "https://github.com/ktaranov/sqlserver-kit.git"
 Args: ["**","--exclude=**/Backup/**"]
 Lines:
- CSpell: Files checked: 489, Issues found: 14764 in 458 files
+ CSpell: Files checked: 489, Issues found: 14752 in 458 files
  exit code: 1
 ./ADS/README.md:25:88     - Unknown word (vsix)       -- Release Date | Version  | .vsix download link
 ./ADS/README.md:30:15     - Unknown word (Dacpac)     -- | [SQL Server Dacpac]
@@ -647,14 +647,12 @@ Lines:
 ./PowerShell/Create-Deploy-SQL-Script.ps1:16:16     - Unknown word (sqlps)      -- import-module 'sqlps' -DisableNameChecking
 ./PowerShell/Create-Deploy-SQL-Script.ps1:180:32    - Unknown word (fullpath)      -- ScrOptions.Filename = "$($fullpath)\$($filename)"; #tell
 ./PowerShell/Create-Deploy-SQL-Script.ps1:205:11    - Unknown word (Pathswritten)  -- where {$Pathswritten -notcontains $_.fullname
-./PowerShell/Create-Deploy-SQL-Script.ps1:205:25    - Unknown word (notcontains)   -- where {$Pathswritten -notcontains $_.fullname} | Remove
 ./PowerShell/Create-Deploy-SQL-Script.ps1:205:40    - Unknown word (fullname)      -- Pathswritten -notcontains $_.fullname} | Remove-Item |foreach
 ./PowerShell/Create-Deploy-SQL-Script.ps1:68:6      - Unknown word (Tableurn)   -- $PostTableurnCollection = new-object
 ./PowerShell/Create-Deploy-SQL-Script.ps1:69:106    - Unknown word (doesnt)     -- in SMO where the SMO doesnt check the version of
 ./PowerShell/Create-Deploy-SQL-Script.ps1:6:14      - Unknown word (NIIGAZ)     -- $Database = 'NIIGAZ' #the database
 ./PowerShell/Create-Deploy-SQL-Script.ps1:70:9      - Unknown word (Dont)       -- $TypesWeDontWant = '(?im)Roles|Federations
 ./PowerShell/Create-Deploy-SQL-Script.ps1:81:58     - Unknown word (Childitem)  -- ObjectType.PSPath)") { Get-Childitem "$($_.ObjectType.PSPath
-./PowerShell/Create-Deploy-SQL-Script.ps1:84:32     - Unknown word (notlike)    -- GetType().BaseType -notlike '*smo*') { Get-Childitem
 ./PowerShell/Create-Deploy-SQL-Script.ps1:87:32     - Unknown word (scriptable) -- check if the object is scriptable,
 ./PowerShell/Create-Deploy-SQL-Script.ps1:97:21     - Unknown word (scripter)   -- #now we set up the scripter object just to do the
 ./PowerShell/Create-Deploy-SQL-Script.ps1:98:25     - Unknown word (Scripter)   -- scr = New-Object "$SMO.Scripter"
@@ -731,7 +729,6 @@ Lines:
 ./PowerShell/CsvSqlimport.ps1:652:27    - Unknown word (tablelock)       -- turbo -eq $true) { $tablelock = $true }
 ./PowerShell/CsvSqlimport.ps1:663:39    - Unknown word (Streamreader)    -- support -First in both Streamreader, and OleDb imports,
 ./PowerShell/CsvSqlimport.ps1:666:20    - Unknown word (occured)         -- # If shell switch occured, and encrypted SQL credential
-./PowerShell/CsvSqlimport.ps1:672:17    - Unknown word (isnot)           -- if ($database -isnot [string]) { $database
 ./PowerShell/CsvSqlimport.ps1:685:16    - Unknown word (showdialog)      -- $null = $fd.showdialog()
 ./PowerShell/CsvSqlimport.ps1:696:3     - Unknown word (resolvedcsv)     -- $resolvedcsv = @()
 ./PowerShell/CsvSqlimport.ps1:702:4     - Unknown word (sqlcheckconn)    -- $sqlcheckconn = New-Object System
@@ -963,7 +960,6 @@ Lines:
 ./PowerShell/SQL_Server_linked_server_connection_check.ps1:43:52     - Unknown word (currentoy)  -- services to skip those not currentoy running. #>
 ./PowerShell/SQL_Server_linked_server_connection_check.ps1:95:16     - Unknown word (testconnection) -- $LSname.testconnection()
 ./PowerShell/SQL_Server_table_to_csv.ps1:16:22     - Unknown word (localhsot)  -- ConnectionString = "localhsot"
-./PowerShell/Scripting_Out_SQL_Server_Data_As_Insert_Statements.ps1:109:13    - Unknown word (Notlike)          -- where { $_ -Notlike '*[*?]*' } |
 ./PowerShell/Scripting_Out_SQL_Server_Data_As_Insert_Statements.ps1:137:64    - Unknown word (userid)           -- we need to provide a userid and password #>
 ./PowerShell/Scripting_Out_SQL_Server_Data_As_Insert_Statements.ps1:33:55     - Unknown word (statments)  -- and generate INSERT statments if false. Default false
 ./PowerShell/Scripting_Out_SQL_Server_Data_As_Insert_Statements.ps1:46:17     - Unknown word (maste)      -- $Databases = @('maste*', 'model'); <# the

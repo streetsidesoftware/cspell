@@ -5,7 +5,7 @@ Args: '["**","--exclude=**/Backup/**"]'
 Summary:
   files: 489
   filesWithIssues: 458
-  issues: 14764
+  issues: 14752
   errors: 0
 Errors: []
 
@@ -651,7 +651,6 @@ issues:
   - "PowerShell/Create-Deploy-SQL-Script.ps1:69:106      doesnt (doesn't)    U       in SMO where the SMO doesnt check the version of"
   - "PowerShell/Create-Deploy-SQL-Script.ps1:70:9        Dont                U       $TypesWeDontWant = '(?im)Roles|Federations"
   - "PowerShell/Create-Deploy-SQL-Script.ps1:81:58       Childitem           U       ObjectType.PSPath)\") { Get-Childitem \"$($_.ObjectType.PSPath"
-  - "PowerShell/Create-Deploy-SQL-Script.ps1:84:32       notlike             U       GetType().BaseType -notlike '*smo*') { Get-Childitem"
   - "PowerShell/Create-Deploy-SQL-Script.ps1:87:32       scriptable          U       check if the object is scriptable,"
   - "PowerShell/Create-Deploy-SQL-Script.ps1:97:21       scripter            U       #now we set up the scripter object just to do the"
   - "PowerShell/Create-Deploy-SQL-Script.ps1:98:25       Scripter            U       scr = New-Object \"$SMO.Scripter\""
@@ -661,7 +660,6 @@ issues:
   - "PowerShell/Create-Deploy-SQL-Script.ps1:141:69      dirctory            U       DatabaseScriptPath' dirctory\""
   - "PowerShell/Create-Deploy-SQL-Script.ps1:180:32      fullpath            U       ScrOptions.Filename = \"$($fullpath)\\$($filename)\"; #tell"
   - "PowerShell/Create-Deploy-SQL-Script.ps1:205:11      Pathswritten        U       where {$Pathswritten -notcontains $_.fullname"
-  - "PowerShell/Create-Deploy-SQL-Script.ps1:205:25      notcontains         U       where {$Pathswritten -notcontains $_.fullname} | Remove"
   - "PowerShell/Create-Deploy-SQL-Script.ps1:205:40      fullname            U       Pathswritten -notcontains $_.fullname} | Remove-Item |foreach"
   - "PowerShell/CsvSqlimport.ps1:39:91       autopopulated           U       into. This parameter is autopopulated using the"
   - "PowerShell/CsvSqlimport.ps1:74:111      specifeid               U       FirstRowColumns was specifeid."
@@ -715,7 +713,6 @@ issues:
   - "PowerShell/CsvSqlimport.ps1:652:27      tablelock               U       turbo -eq $true) { $tablelock = $true }"
   - "PowerShell/CsvSqlimport.ps1:663:39      Streamreader            U       support -First in both Streamreader, and OleDb imports,"
   - "PowerShell/CsvSqlimport.ps1:666:20      occured (occurred)      U       # If shell switch occured, and encrypted SQL credential"
-  - "PowerShell/CsvSqlimport.ps1:672:17      isnot                   U       if ($database -isnot [string]) { $database"
   - "PowerShell/CsvSqlimport.ps1:685:16      showdialog              U       $null = $fd.showdialog()"
   - "PowerShell/CsvSqlimport.ps1:696:3       resolvedcsv             U       $resolvedcsv = @()"
   - "PowerShell/CsvSqlimport.ps1:702:4       sqlcheckconn            U       $sqlcheckconn = New-Object System"
@@ -950,7 +947,6 @@ issues:
   - "PowerShell/Scripting_Out_SQL_Server_Data_As_Insert_Statements.ps1:57:23         Silentlycontinue    U       VerbosePreference = \"Silentlycontinue\""
   - "PowerShell/Scripting_Out_SQL_Server_Data_As_Insert_Statements.ps1:70:6          Sqlencrypted        U       $Sqlencrypted = Get-Content $SqlEncryptedPa"
   - "PowerShell/Scripting_Out_SQL_Server_Data_As_Insert_Statements.ps1:93:61         Datasource          U       t find the instance $Datasource\" }"
-  - "PowerShell/Scripting_Out_SQL_Server_Data_As_Insert_Statements.ps1:109:13        Notlike             U       where { $_ -Notlike '*[*?]*' } |"
   - "PowerShell/Scripting_Out_SQL_Server_Data_As_Insert_Statements.ps1:137:64        userid              U       we need to provide a userid and password #>"
   - "PowerShell/Send-SqlDataToExcel.ps1:20:22        odbc                    U       * A full odbc or SQL Connection string"
   - "PowerShell/Send-SqlDataToExcel.ps1:51:71        specificies             U       command line parameters, specificies the name of the new"
