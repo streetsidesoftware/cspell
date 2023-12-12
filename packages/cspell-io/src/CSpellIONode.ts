@@ -6,9 +6,14 @@ import { compareStats } from './common/stat.js';
 import type { CSpellIO } from './CSpellIO.js';
 import { ErrorNotImplemented } from './errors/errors.js';
 import { registerHandlers } from './handlers/node/file.js';
-import type { BufferEncoding } from './models/BufferEncoding.js';
-import type { FileReference, FileResource, UrlOrReference } from './models/FileResource.js';
-import type { Stats } from './models/Stats.js';
+import type {
+    BufferEncoding,
+    DirEntry,
+    FileReference,
+    Stats,
+    TextFileResource,
+    UrlOrReference,
+} from './models/index.js';
 import { toFileURL, toURL, urlBasename, urlDirname } from './node/file/url.js';
 import {
     RequestFsReadFile,
@@ -17,6 +22,7 @@ import {
     RequestFsStatSync,
     RequestFsWriteFile,
 } from './requests/index.js';
+import { RequestFsReadDirectory } from './requests/RequestFsReadDirectory.js';
 
 let defaultCSpellIONode: CSpellIO | undefined = undefined;
 
@@ -25,7 +31,7 @@ export class CSpellIONode implements CSpellIO {
         registerHandlers(serviceBus);
     }
 
-    readFile(urlOrFilename: UrlOrReference, encoding?: BufferEncoding): Promise<FileResource> {
+    readFile(urlOrFilename: UrlOrReference, encoding?: BufferEncoding): Promise<TextFileResource> {
         const ref = toFileReference(urlOrFilename, encoding);
         const res = this.serviceBus.dispatch(RequestFsReadFile.create(ref));
         if (!isServiceResponseSuccess(res)) {
@@ -33,7 +39,15 @@ export class CSpellIONode implements CSpellIO {
         }
         return res.value;
     }
-    readFileSync(urlOrFilename: UrlOrReference, encoding?: BufferEncoding): FileResource {
+    readDirectory(urlOrFilename: string | URL): Promise<DirEntry[]> {
+        const ref = toFileReference(urlOrFilename);
+        const res = this.serviceBus.dispatch(RequestFsReadDirectory.create(ref));
+        if (!isServiceResponseSuccess(res)) {
+            throw genError(res.error, 'readDirectory');
+        }
+        return res.value;
+    }
+    readFileSync(urlOrFilename: UrlOrReference, encoding?: BufferEncoding): TextFileResource {
         const ref = toFileReference(urlOrFilename, encoding);
         const res = this.serviceBus.dispatch(RequestFsReadFileSync.create(ref));
         if (!isServiceResponseSuccess(res)) {
