@@ -134,7 +134,7 @@ export interface FileSettings extends ExtendableSettings, CommandLineSettings {
     useGitignore?: boolean;
 
     /**
-     * Tells the spell checker to searching for `.gitignore` files when it reaches a matching root.
+     * Tells the spell checker to stop searching for `.gitignore` files when it reaches a matching root.
      */
     gitignoreRoot?: FsPath | FsPath[];
 
