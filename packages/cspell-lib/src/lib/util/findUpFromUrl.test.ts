@@ -1,4 +1,3 @@
-import path from 'node:path';
 import { pathToFileURL } from 'node:url';
 
 import { describe, expect, test, vi } from 'vitest';
