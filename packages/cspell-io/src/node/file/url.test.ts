@@ -1,7 +1,7 @@
 import * as path from 'path';
 import { describe, expect, test } from 'vitest';
 
-import { basename, isUrlLike, toFileURL, toURL, urlBasename, urlDirname } from './url.js';
+import { basename, isUrlLike, normalizePathForUrl, toFileURL, toURL, urlBasename, urlDirname } from './url.js';
 
 const root = path.join(__dirname, '../..');
 const oc = expect.objectContaining;
@@ -81,5 +81,23 @@ describe('util', () => {
     `('basename $file', async ({ file, expected }) => {
         expect(basename(file)).toEqual(expected);
         expect(basename(file)).toEqual(path.basename(file));
+    });
+
+    test.each`
+        path                     | expected
+        ${'path/to/file'}        | ${'path/to/file'}
+        ${'path\\to\\file.txt'}  | ${'path/to/file.txt'}
+        ${'C:/path/to/file'}     | ${'/C:/path/to/file'}
+        ${'http://example.com/'} | ${'http%3A//example.com/'}
+        ${'path/to/file/'}       | ${'path/to/file/'}
+        ${'path/to/file\\'}      | ${'path/to/file/'}
+        ${'path\\to\\file/'}     | ${'path/to/file/'}
+        ${'path\\to/file/'}      | ${'path/to/file/'}
+        ${'path/to/file,/#'}     | ${'path/to/file%2C/%23'}
+        ${'path/to/file\\'}      | ${'path/to/file/'}
+        ${'path\\to/file/'}      | ${'path/to/file/'}
+        ${'/some/path%.c'}       | ${'/some/path%25.c'}
+    `('normalizePathForUrl $path', ({ path, expected }) => {
+        expect(normalizePathForUrl(path)).toEqual(expected);
     });
 });

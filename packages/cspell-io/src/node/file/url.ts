@@ -4,6 +4,7 @@ import { pathToFileURL } from 'url';
 const isZippedRegExp = /\.gz($|[?#])/i;
 
 const isURLRegExp = /^(\w{2,64}:\/\/|data:)/i;
+const isWindowsPath = /^[a-z]:[\\/]/i;
 const supportedProtocols: Record<string, true | undefined> = { 'file:': true, 'http:': true, 'https:': true };
 
 export function isZipped(filename: string | URL): boolean {
@@ -33,7 +34,7 @@ export function toFileURL(filenameOrUrl: string | URL, relativeTo?: string | URL
     return isUrlLike(filenameOrUrl)
         ? new URL(filenameOrUrl)
         : relativeTo && isUrlLike(relativeTo)
-          ? new URL(normalizePath(filenameOrUrl), relativeTo)
+          ? new URL(normalizePathForUrl(filenameOrUrl), relativeTo)
           : relativeTo
             ? pathToFileURL(path.resolve(relativeTo.toString(), filenameOrUrl))
             : pathToFileURL(filenameOrUrl);
@@ -103,6 +104,12 @@ export function basename(path: string): string {
     return idx >= 0 ? path.slice(idx + 1) : path;
 }
 
-function normalizePath(filePath: string): string {
-    return filePath.split(path.sep).join('/');
+export function normalizePathForUrl(filePath: string): string {
+    const pathname = filePath.replace(/\\/g, '/');
+    const raw = pathname.replace(isWindowsPath, '/$&');
+    return raw
+        .split('/')
+        .map(encodeURIComponent)
+        .join('/')
+        .replace(/^\/([a-z])%3A/i, '/$1:');
 }

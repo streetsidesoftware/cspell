@@ -2,7 +2,7 @@ import type { CSpellUserSettings, ImportFileRef, Source } from '@cspell/cspell-t
 import assert from 'assert';
 import type { CSpellConfigFile, CSpellConfigFileReaderWriter, IO, TextFile } from 'cspell-config-lib';
 import { createReaderWriter, CSpellConfigFileInMemory } from 'cspell-config-lib';
-import { isUrlLike } from 'cspell-io';
+import { isUrlLike, toFileURL } from 'cspell-io';
 import path from 'path';
 import { fileURLToPath, pathToFileURL } from 'url';
 import { URI, Utils as UriUtils } from 'vscode-uri';
@@ -212,7 +212,7 @@ export class ConfigLoader implements IConfigLoader {
     }
 
     async searchForConfigFileLocation(searchFrom: URL | string | undefined): Promise<URL | undefined> {
-        const url = this.cspellIO.toFileURL(searchFrom || cwdURL(), cwdURL());
+        const url = toFileURL(searchFrom || cwdURL(), cwdURL());
         if (typeof searchFrom === 'string' && !isUrlLike(searchFrom) && url.protocol === 'file:') {
             // check to see if it is a directory
             if (await isDirectory(this.fs, url)) {
