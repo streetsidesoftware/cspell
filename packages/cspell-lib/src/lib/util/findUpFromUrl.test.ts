@@ -4,6 +4,7 @@ import { pathToFileURL } from 'node:url';
 import { describe, expect, test, vi } from 'vitest';
 
 import { findUpFromUrl } from './findUpFromUrl.js';
+import { cwdURL } from './url.js';
 
 const __fileURL = new URL(import.meta.url);
 const __dirURL = new URL('.', __fileURL);
@@ -50,10 +51,10 @@ describe('findUpFromUrl', () => {
     test.each`
         name                            | cwd          | expected
         ${'README.md'}                  | ${undefined} | ${resolve(packageRoot, 'README.md')}
-        ${'README.md'}                  | ${'..'}      | ${resolve(reposRoot, 'README.md')}
+        ${'README.md'}                  | ${'../'}     | ${resolve(reposRoot, 'README.md')}
         ${['fixtures', 'package.json']} | ${__dirURL}  | ${resolve(packageRoot, 'package.json')}
     `('findUp $name $cwd', async ({ name, cwd, expected }) => {
-        const url = cwd instanceof URL ? cwd : pathToFileURL(path.resolve(cwd || process.cwd()));
+        const url = cwd instanceof URL ? cwd : cwd ? pathToFileURL(cwd) : cwdURL();
         const result = await findUpFromUrl(name, url);
         expect(result).toEqual(expected);
     });
