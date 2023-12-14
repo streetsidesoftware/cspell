@@ -33,7 +33,7 @@ jobs:
           cd website
           pnpm i
           pnpm run build:site
-      - uses: actions/upload-artifact@v3
+      - uses: actions/upload-artifact@v4
         with:
           name: website
           path: docs

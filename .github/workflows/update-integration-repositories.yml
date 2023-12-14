@@ -130,7 +130,7 @@ jobs:
           echo "${{ matrix.repo }} =>" $REPO
           git diff > temp/$REPO.diff
       - name: store diff
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: diffs
           path: temp/*.diff
@@ -190,7 +190,7 @@ jobs:
           git --no-pager diff > temp/patch.diff
 
       - name: Store Patch
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: patch
           path: temp/patch.diff
