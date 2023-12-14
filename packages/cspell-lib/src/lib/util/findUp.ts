@@ -3,7 +3,7 @@ import { stat } from 'node:fs/promises';
 import path from 'path';
 import { fileURLToPath } from 'url';
 
-interface FindUpOptions {
+export interface FindUpOptions {
     cwd?: string;
     type?: 'file' | 'directory';
     stopAt?: string;

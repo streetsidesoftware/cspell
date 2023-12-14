@@ -1,39 +1,28 @@
-import type { Dirent } from 'node:fs';
-import { readdir, readFile, stat } from 'node:fs/promises';
-import path from 'node:path';
+import { urlBasename } from 'cspell-io';
 
-import { pathToFileURL } from 'url';
-
+import { createTextFileResource, type FileSystem, getVirtualFS, type VfsDirEntry } from '../../../fileSystem.js';
 import { createAutoResolveCache } from '../../../util/AutoResolve.js';
-import { findUp } from '../../../util/findUp.js';
-import { addTrailingSlash, fileURLOrPathToPath, toFileDirUrl, toURL } from '../../../util/url.js';
+import { findUpFromUrl } from '../../../util/findUpFromUrl.js';
+
+type Href = string;
 
 export class ConfigSearch {
-    private searchCache = new Map<string, Promise<URL | undefined>>();
-    private searchDirCache = new Map<string, Promise<string | undefined>>();
+    private searchCache = new Map<Href, Promise<URL | undefined>>();
+    private searchDirCache = new Map<Href, Promise<URL | undefined>>();
 
-    constructor(readonly searchPlaces: readonly string[]) {
+    constructor(
+        readonly searchPlaces: readonly string[],
+        private fs: FileSystem = getVirtualFS().fs,
+    ) {
         this.searchPlaces = searchPlaces;
     }
 
-    async searchForConfig(searchFrom: URL | string): Promise<URL | undefined> {
-        if (typeof searchFrom === 'string') {
-            if (!searchFrom.startsWith('file:')) {
-                return undefined;
-            }
-        } else {
-            if (searchFrom.protocol !== 'file:') {
-                return undefined;
-            }
+    searchForConfig(searchFromURL: URL): Promise<URL | undefined> {
+        if (searchFromURL.protocol !== 'file:') {
+            return Promise.resolve(undefined);
         }
 
-        const searchFromURL = toURL(searchFrom);
-        let dirUrl = new URL('.', searchFrom);
-        if (dirUrl.toString() !== searchFrom.toString()) {
-            // check to see if searchFrom is a directory
-            const isDir = await isDirectory(searchFrom);
-            dirUrl = isDir ? addTrailingSlash(searchFromURL) : dirUrl;
-        }
+        const dirUrl = new URL('.', searchFromURL);
         const searchHref = dirUrl.href;
         const searchCache = this.searchCache;
         const cached = searchCache.get(searchHref);
@@ -41,98 +30,93 @@ export class ConfigSearch {
             return cached;
         }
 
-        const toPatchCache: string[] = [];
-
-        const foundPath = await this.findUpConfigPath(fileURLOrPathToPath(dirUrl), storeVisit);
-        const foundUrl = foundPath ? pathToFileURL(foundPath) : undefined;
-
-        const pFoundPath = Promise.resolve(foundPath);
-        const pFoundUrl = Promise.resolve(foundUrl);
-
+        const toPatchCache: URL[] = [];
+        const pFoundUrl = this.findUpConfigPath(dirUrl, storeVisit);
+        this.searchCache.set(searchHref, pFoundUrl);
         const searchDirCache = this.searchDirCache;
-        for (const dir of toPatchCache) {
-            searchDirCache.set(dir, searchDirCache.get(dir) || pFoundPath);
-            const dirHref = toFileDirUrl(dir).href;
-            searchCache.set(dirHref, searchCache.get(dirHref) || pFoundUrl);
-        }
 
-        const result = searchCache.get(searchHref) || pFoundUrl;
+        const patch = async () => {
+            try {
+                await pFoundUrl;
+                for (const dir of toPatchCache) {
+                    searchDirCache.set(dir.href, searchDirCache.get(dir.href) || pFoundUrl);
+                    searchCache.set(dir.href, searchCache.get(dir.href) || pFoundUrl);
+                }
 
-        searchCache.set(searchHref, result);
+                const result = searchCache.get(searchHref) || pFoundUrl;
+                searchCache.set(searchHref, result);
+            } catch (e) {
+                // ignore
+            }
+        };
 
-        return result;
+        patch();
+        return pFoundUrl;
 
-        function storeVisit(dir: string) {
+        function storeVisit(dir: URL) {
             toPatchCache.push(dir);
         }
     }
 
     clearCache() {
         this.searchCache.clear();
+        this.searchDirCache.clear();
     }
 
-    private async findUpConfig(searchFromPath: URL, visit: (dir: string) => void): Promise<URL | undefined> {
-        const cwd = fileURLOrPathToPath(searchFromPath);
-        const found = await this.findUpConfigPath(cwd, visit);
-        return found ? pathToFileURL(found) : undefined;
-    }
-
-    private findUpConfigPath(cwd: string, visit: (dir: string) => void): Promise<string | undefined> {
+    private findUpConfigPath(cwd: URL, visit: (dir: URL) => void): Promise<URL | undefined> {
         const searchDirCache = this.searchDirCache;
-        const cached = searchDirCache.get(cwd);
+        const cached = searchDirCache.get(cwd.href);
         if (cached) return cached;
 
-        return findUp((dir) => this.hasConfig(dir, visit), { cwd, type: 'file' });
+        return findUpFromUrl((dir) => this.hasConfig(dir, visit), cwd, { type: 'file' });
     }
 
-    private async hasConfig(dir: string, visited: (dir: string) => void): Promise<string | undefined> {
-        dir = path.normalize(dir + '/');
-        const cached = this.searchDirCache.get(dir);
+    private async hasConfig(dir: URL, visited: (dir: URL) => void): Promise<URL | undefined> {
+        const cached = this.searchDirCache.get(dir.href);
         if (cached) return cached;
         visited(dir);
 
-        const dirInfoCache = createAutoResolveCache<string, Promise<Map<string, Dirent>>>();
+        const dirInfoCache = createAutoResolveCache<Href, Promise<Map<string, VfsDirEntry>>>();
 
-        async function hasFile(filename: string): Promise<boolean> {
+        const hasFile = async (filename: URL): Promise<boolean> => {
+            const dir = new URL('.', filename);
+            const dirUrlHref = dir.href;
             const dirInfo = await dirInfoCache.get(
-                path.dirname(filename),
-                async (dir) =>
-                    new Map(
-                        (await readdir(dir, { withFileTypes: true }).catch(() => [])).map((ent) => [ent.name, ent]),
-                    ),
+                dirUrlHref,
+                async () => new Map((await this.fs.readDirectory(dir).catch(() => [])).map((ent) => [ent.name, ent])),
             );
 
-            const name = path.basename(filename);
+            const name = urlBasename(filename);
             const found = dirInfo.get(name);
             return !!found?.isFile();
-        }
+        };
 
         for (const searchPlace of this.searchPlaces) {
-            const file = path.join(dir, searchPlace);
+            const file = new URL(searchPlace, dir);
             const found = await hasFile(file);
             if (found) {
-                if (path.basename(file) !== 'package.json') return file;
-                if (await checkPackageJson(file)) return file;
+                if (urlBasename(file) !== 'package.json') return file;
+                if (await checkPackageJson(this.fs, file)) return file;
             }
         }
         return undefined;
     }
 }
 
-async function checkPackageJson(filename: string): Promise<boolean> {
+async function checkPackageJson(fs: FileSystem, filename: URL): Promise<boolean> {
     try {
-        const content = await readFile(filename, 'utf8');
-        const pkg = JSON.parse(content);
+        const file = createTextFileResource(await fs.readFile(filename));
+        const pkg = JSON.parse(file.getText());
         return typeof pkg.cspell === 'object';
     } catch (e) {
         return false;
     }
 }
 
-async function isDirectory(path: string | URL): Promise<boolean> {
-    try {
-        return (await stat(path)).isDirectory();
-    } catch (e) {
-        return false;
-    }
-}
+// async function isDirectory(virtualFs: VirtualFS, path: URL): Promise<boolean> {
+//     try {
+//         return (await virtualFs.fs.stat(path)).isDirectory();
+//     } catch (e) {
+//         return false;
+//     }
+// }

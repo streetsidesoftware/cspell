@@ -9,7 +9,7 @@ import type {
     DictionaryFileDefinitionInternal,
 } from '../../Models/CSpellSettingsInternalDef.js';
 import { mapDictDefToInternal } from '../../Settings/DictionarySettings.js';
-import { getCSpellIO } from '../../static.js';
+import { getCSpellIO } from '../../fileSystem.js';
 import { clean } from '../../util/util.js';
 import type { LoadOptions } from './DictionaryLoader.js';
 import { DictionaryLoader } from './DictionaryLoader.js';

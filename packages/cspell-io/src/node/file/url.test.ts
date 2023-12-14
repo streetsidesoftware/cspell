@@ -58,11 +58,11 @@ describe('util', () => {
         ${'https://github.com/streetsidesoftware/cspell/raw/main/packages/cspell-io/samples/cities.txt'}    | ${sm(/https:.*\/samples\/$/)}
         ${'https://github.com/streetsidesoftware/cspell/raw/main/packages/cspell-io/samples/cities.txt.gz'} | ${sm(/https:.*\/samples\/$/)}
         ${'https://github.com/streetsidesoftware/cspell/raw/main/packages/cspell-io/samples/code/'}         | ${sm(/https:.*\/samples\/$/)}
-        ${'data:text/plain;charset=utf8,Hello%2C%20World!'}                                                 | ${'data:'}
-        ${'data:text/plain;charset=utf8;filename=cities.txt,New%20York'}                                    | ${'data:'}
-        ${'data:application/gzip;base64,H'}                                                                 | ${'data:'}
-        ${toFileURL('data:application/gzip;base64,H')}                                                      | ${'data:'}
-        ${'data:application/vnd.cspell.dictionary+trie,H'}                                                  | ${'data:'}
+        ${'data:text/plain;charset=utf8,Hello%2C%20World!'}                                                 | ${'data:text/plain;charset=utf8,Hello%2C%20World!'}
+        ${'data:text/plain;charset=utf8;filename=cities.txt,New%20York'}                                    | ${'data:text/plain;charset=utf8;filename=cities.txt,New%20York'}
+        ${'data:application/gzip;base64,H'}                                                                 | ${'data:application/gzip;base64,H'}
+        ${toFileURL('data:application/gzip;base64,H')}                                                      | ${'data:application/gzip;base64,H'}
+        ${'data:application/vnd.cspell.dictionary+trie,H'}                                                  | ${'data:application/vnd.cspell.dictionary+trie,H'}
     `('urlDirname $file', async ({ file, expected }) => {
         const filename = isUrlLike(file) ? file : toFileURL(path.resolve(root, file));
         expect(urlDirname(filename).toString()).toEqual(expected);

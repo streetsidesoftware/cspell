@@ -3,7 +3,7 @@ import { basename } from 'path';
 import { afterEach, beforeEach, describe, expect, test, vi } from 'vitest';
 
 import { CFileResource } from './common/index.js';
-import { toFileURL } from './node/file/url.js';
+import { toFileURL, urlBasename } from './node/file/url.js';
 import { pathToSample as ps } from './test/test.helper.js';
 import type { FileSystemProvider, ProviderFileSystem, VirtualFS } from './VirtualFS.js';
 import { createVirtualFS, FSCapabilityFlags, getDefaultVirtualFs, VFSErrorUnsupportedRequest } from './VirtualFS.js';
@@ -119,7 +119,16 @@ describe('VirtualFs', () => {
     test('try readDirectory.', async () => {
         const fs = virtualFs.fs;
         const result = fs.readDirectory(new URL('.', import.meta.url));
-        await expect(result).resolves.toEqual(expect.arrayContaining([{ fileType: 1, url: new URL(import.meta.url) }]));
+        await expect(result).resolves.toEqual(
+            expect.arrayContaining([
+                oc({
+                    fileType: 1,
+                    url: new URL(import.meta.url),
+                    name: urlBasename(import.meta.url),
+                    dir: new URL('.', import.meta.url),
+                }),
+            ]),
+        );
     });
 
     test('try readDirectory failure', async () => {
@@ -180,12 +189,16 @@ describe('VirtualFs', () => {
 
     test.each`
         url           | expected
-        ${__filename} | ${oc({ mtimeMs: expect.any(Number) })}
+        ${__filename} | ${oc({ mtimeMs: expect.any(Number), size: expect.any(Number), fileType: 1 })}
     `('getStat $url', async ({ url, expected }) => {
         url = toFileURL(url);
         const fs = getDefaultVirtualFs().fs;
-        const r = await fs.stat(url);
-        expect(r).toEqual(expected);
+        const s = await fs.stat(url);
+        expect(s).toEqual(expected);
+        expect(s.isFile()).toBe(true);
+        expect(s.isDirectory()).toBe(false);
+        expect(s.isUnknown()).toBe(false);
+        expect(s.eTag).toBeUndefined();
     });
 
     test.each`

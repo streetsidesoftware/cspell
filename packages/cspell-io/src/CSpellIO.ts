@@ -16,6 +16,7 @@ export interface CSpellIO {
      * @param urlOrFilename - uri of the file to read
      * @param encoding - optional encoding.
      * @returns A TextFileResource.
+     * @deprecated Use `readFile` instead.
      */
     readFileSync(urlOrFilename: UrlOrReference, encoding?: BufferEncoding): TextFileResource;
     /**
@@ -40,6 +41,7 @@ export interface CSpellIO {
      * Get Stats on a uri.
      * @param urlOrFilename - uri to fetch stats on
      * @returns Stats if successful, otherwise it throws an error.
+     * @deprecated Use `getStat` instead.
      */
     getStatSync(urlOrFilename: UrlOrReference): Stats;
     /**

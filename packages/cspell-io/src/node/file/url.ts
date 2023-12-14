@@ -46,7 +46,7 @@ export function toFileURL(filenameOrUrl: string | URL, relativeTo?: string | URL
  * @returns a URL
  */
 export function toURL(filenameOrUrl: string | URL, relativeTo?: string | URL): URL {
-    return typeof filenameOrUrl !== 'string' ? filenameOrUrl : new URL(filenameOrUrl, relativeTo);
+    return filenameOrUrl instanceof URL ? filenameOrUrl : new URL(filenameOrUrl, relativeTo);
 }
 
 const regMatchFilename = /filename=([^;,]*)/;
@@ -75,16 +75,21 @@ export function urlBasename(url: string | URL): string {
 
 /**
  * Try to determine the parent directory URL of the uri.
+ * If it is not a hierarchical URL, then it will return the URL.
  * @param url - url to extract the dirname from.
  * @returns a URL
  */
 export function urlDirname(url: string | URL): URL {
     url = toURL(url);
     if (url.protocol === 'data:') {
-        return new URL('data:');
+        return url;
     }
 
-    return new URL(url.pathname.endsWith('/') ? '..' : '.', url);
+    try {
+        return new URL(url.pathname.endsWith('/') ? '..' : '.', url);
+    } catch (e) {
+        return url;
+    }
 }
 
 /**
