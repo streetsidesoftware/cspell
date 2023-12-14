@@ -1,6 +1,13 @@
 import type { CSpellIO } from './CSpellIO.js';
 import { getDefaultCSpellIO } from './CSpellIONode.js';
-import type { DirEntry, Disposable, FileReference, FileResource, Stats } from './models/index.js';
+import {
+    type DirEntry,
+    type Disposable,
+    type FileReference,
+    type FileResource,
+    FileType,
+    type Stats,
+} from './models/index.js';
 
 type UrlOrReference = URL | FileReference;
 
@@ -41,9 +48,8 @@ interface FileSystemProviderInfo {
 }
 
 interface FileSystemBase {
-    stat(url: UrlOrReference): Stats | Promise<Stats>;
     readFile(url: UrlOrReference): Promise<FileResource>;
-    readDirectory(url: URL): Promise<DirEntry[]>;
+    readDirectory(url: URL): Promise<VfsDirEntry[]>;
     writeFile(file: FileResource): Promise<FileReference>;
     /**
      * Information about the provider.
@@ -53,11 +59,13 @@ interface FileSystemBase {
 }
 
 export interface FileSystem extends FileSystemBase {
+    stat(url: UrlOrReference): Promise<VfsStat>;
     getCapabilities(url: URL): FSCapabilities;
     hasProvider: boolean;
 }
 
 export interface ProviderFileSystem extends FileSystemBase, Disposable {
+    stat(url: UrlOrReference): Stats | Promise<Stats>;
     /**
      * These are the general capabilities for the provider's file system.
      * It is possible for a provider to support more capabilities for a given url by providing a getCapabilities function.
@@ -199,7 +207,10 @@ function fsPassThrough(fs: (url: URL) => WrappedProviderFs): Required<FileSystem
         stat: async (url) => gfs(url, 'stat').stat(url),
         readFile: async (url) => gfs(url, 'readFile').readFile(url),
         writeFile: async (file) => gfs(file, 'writeFile').writeFile(file),
-        readDirectory: async (url) => gfs(url, 'readDirectory').readDirectory(url),
+        readDirectory: async (url) =>
+            gfs(url, 'readDirectory')
+                .readDirectory(url)
+                .then((entries) => entries.map((e) => new CVfsDirEntry(e))),
         getCapabilities: (url) => gfs(url, 'getCapabilities').getCapabilities(url),
     };
 }
@@ -222,7 +233,7 @@ function cspellIOToFsProvider(cspellIO: CSpellIO): FileSystemProvider {
         providerInfo: { name },
         stat: (url) => cspellIO.getStat(url),
         readFile: (url) => cspellIO.readFile(url),
-        readDirectory: (url) => cspellIO.readDirectory(url),
+        readDirectory: (url) => cspellIO.readDirectory(url).then((entries) => entries.map((e) => new CVfsDirEntry(e))),
         writeFile: (file) => cspellIO.writeFile(file.url, file.content),
         dispose: () => undefined,
         capabilities: FSCapabilityFlags.Stat | FSCapabilityFlags.ReadWrite | FSCapabilityFlags.ReadDir,
@@ -325,7 +336,7 @@ class WrappedProviderFs implements FileSystem {
         return this._capabilities;
     }
 
-    async stat(url: UrlOrReference): Promise<Stats> {
+    async stat(url: UrlOrReference): Promise<VfsStat> {
         try {
             checkCapabilityOrThrow(
                 this.fs,
@@ -334,7 +345,7 @@ class WrappedProviderFs implements FileSystem {
                 'stat',
                 urlOrReferenceToUrl(url),
             );
-            return await this.fs.stat(url);
+            return new CVfsStat(await this.fs.stat(url));
         } catch (e) {
             throw wrapError(e);
         }
@@ -355,7 +366,7 @@ class WrappedProviderFs implements FileSystem {
         }
     }
 
-    async readDirectory(url: URL): Promise<DirEntry[]> {
+    async readDirectory(url: URL): Promise<VfsDirEntry[]> {
         try {
             checkCapabilityOrThrow(this.fs, this.capabilities, FSCapabilityFlags.ReadDir, 'readDirectory', url);
             return await this.fs.readDirectory(url);
@@ -387,5 +398,72 @@ function checkCapabilityOrThrow(
 ): asserts fs is ProviderFileSystem {
     if (!(capabilities & flag)) {
         throw new VFSErrorUnsupportedRequest(name, url);
+    }
+}
+
+export interface VfsStat extends Stats {
+    isDirectory(): boolean;
+    isFile(): boolean;
+    isUnknown(): boolean;
+}
+
+export interface VfsDirEntry extends DirEntry {
+    isDirectory(): boolean;
+    isFile(): boolean;
+    isUnknown(): boolean;
+}
+
+class CFileType {
+    constructor(readonly fileType: FileType) {}
+
+    isFile(): boolean {
+        return this.fileType === FileType.File;
+    }
+
+    isDirectory(): boolean {
+        return this.fileType === FileType.Directory;
+    }
+
+    isUnknown(): boolean {
+        return !this.fileType;
+    }
+}
+
+class CVfsStat extends CFileType implements VfsStat {
+    constructor(private stat: Stats) {
+        super(stat.fileType || FileType.Unknown);
+    }
+
+    get size(): number {
+        return this.stat.size;
+    }
+
+    get mtimeMs(): number {
+        return this.stat.mtimeMs;
+    }
+
+    get eTag(): string | undefined {
+        return this.stat.eTag;
+    }
+}
+
+class CVfsDirEntry extends CFileType implements VfsDirEntry {
+    private _url: URL | undefined;
+    constructor(private entry: DirEntry) {
+        super(entry.fileType);
+    }
+
+    get name(): string {
+        return this.entry.name;
+    }
+
+    get dir(): URL {
+        return this.entry.dir;
+    }
+
+    get url(): URL {
+        if (this._url) return this._url;
+        this._url = new URL(this.entry.name, this.entry.dir);
+        return this._url;
     }
 }

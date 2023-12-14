@@ -2,7 +2,7 @@ import type { Dispatcher, ServiceBus } from '@cspell/cspell-service-bus';
 import { createResponse, createResponseFail, isServiceResponseSuccess } from '@cspell/cspell-service-bus';
 import type { Dirent, Stats as FsStats } from 'fs';
 import { promises as fs, readFileSync, statSync } from 'fs';
-import { fileURLToPath, pathToFileURL } from 'url';
+import { fileURLToPath } from 'url';
 import { promisify } from 'util';
 import { gunzipSync, gzip } from 'zlib';
 
@@ -69,7 +69,11 @@ const handleRequestFsReadFileSync = RequestFsReadFileSync.createRequestHandler(
  */
 const handleRequestFsReadDirectory = RequestFsReadDirectory.createRequestHandler(
     ({ params }) => {
-        return createResponse(fs.readdir(fileURLToPath(params.url), { withFileTypes: true }).then(direntToDirEntries));
+        return createResponse(
+            fs
+                .readdir(fileURLToPath(params.url), { withFileTypes: true })
+                .then((entries) => direntToDirEntries(params.url, entries)),
+        );
     },
     undefined,
     'Node: Read Directory.',
@@ -284,15 +288,18 @@ function encodeContent(ref: FileReference, content: string | ArrayBufferView): s
     return arrayBufferViewToBuffer(content);
 }
 
-function direntToDirEntries(dirent: Dirent[]): DirEntry[] {
-    return dirent.map(direntToDirEntry);
+function mapperDirentToDirEntry(dir: URL): (dirent: Dirent) => DirEntry {
+    return (dirent) => direntToDirEntry(dir, dirent);
 }
 
-function direntToDirEntry(dirent: Dirent): DirEntry {
-    const dirUrl = pathToFileURL(dirent.path);
-    const url = new URL(dirent.name, dirUrl);
+function direntToDirEntries(dir: URL, dirent: Dirent[]): DirEntry[] {
+    return dirent.map(mapperDirentToDirEntry(dir));
+}
+
+function direntToDirEntry(dir: URL, dirent: Dirent): DirEntry {
     return {
-        url,
+        name: dirent.name,
+        dir,
         fileType: toFileType(dirent),
     };
 }

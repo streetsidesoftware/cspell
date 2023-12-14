@@ -1,7 +1,7 @@
 import * as path from 'path';
 import { describe, expect, test } from 'vitest';
 
-import { basename, isUrlLike, toFileURL, toURL, urlBasename, urlDirname } from './url.js';
+import { basename, isUrlLike, normalizePathForUrl, toFileURL, toURL, urlBasename, urlDirname } from './url.js';
 
 const root = path.join(__dirname, '../..');
 const oc = expect.objectContaining;
@@ -58,11 +58,11 @@ describe('util', () => {
         ${'https://github.com/streetsidesoftware/cspell/raw/main/packages/cspell-io/samples/cities.txt'}    | ${sm(/https:.*\/samples\/$/)}
         ${'https://github.com/streetsidesoftware/cspell/raw/main/packages/cspell-io/samples/cities.txt.gz'} | ${sm(/https:.*\/samples\/$/)}
         ${'https://github.com/streetsidesoftware/cspell/raw/main/packages/cspell-io/samples/code/'}         | ${sm(/https:.*\/samples\/$/)}
-        ${'data:text/plain;charset=utf8,Hello%2C%20World!'}                                                 | ${'data:'}
-        ${'data:text/plain;charset=utf8;filename=cities.txt,New%20York'}                                    | ${'data:'}
-        ${'data:application/gzip;base64,H'}                                                                 | ${'data:'}
-        ${toFileURL('data:application/gzip;base64,H')}                                                      | ${'data:'}
-        ${'data:application/vnd.cspell.dictionary+trie,H'}                                                  | ${'data:'}
+        ${'data:text/plain;charset=utf8,Hello%2C%20World!'}                                                 | ${'data:text/plain;charset=utf8,Hello%2C%20World!'}
+        ${'data:text/plain;charset=utf8;filename=cities.txt,New%20York'}                                    | ${'data:text/plain;charset=utf8;filename=cities.txt,New%20York'}
+        ${'data:application/gzip;base64,H'}                                                                 | ${'data:application/gzip;base64,H'}
+        ${toFileURL('data:application/gzip;base64,H')}                                                      | ${'data:application/gzip;base64,H'}
+        ${'data:application/vnd.cspell.dictionary+trie,H'}                                                  | ${'data:application/vnd.cspell.dictionary+trie,H'}
     `('urlDirname $file', async ({ file, expected }) => {
         const filename = isUrlLike(file) ? file : toFileURL(path.resolve(root, file));
         expect(urlDirname(filename).toString()).toEqual(expected);
@@ -81,5 +81,23 @@ describe('util', () => {
     `('basename $file', async ({ file, expected }) => {
         expect(basename(file)).toEqual(expected);
         expect(basename(file)).toEqual(path.basename(file));
+    });
+
+    test.each`
+        path                     | expected
+        ${'path/to/file'}        | ${'path/to/file'}
+        ${'path\\to\\file.txt'}  | ${'path/to/file.txt'}
+        ${'C:/path/to/file'}     | ${'/C:/path/to/file'}
+        ${'http://example.com/'} | ${'http%3A//example.com/'}
+        ${'path/to/file/'}       | ${'path/to/file/'}
+        ${'path/to/file\\'}      | ${'path/to/file/'}
+        ${'path\\to\\file/'}     | ${'path/to/file/'}
+        ${'path\\to/file/'}      | ${'path/to/file/'}
+        ${'path/to/file,/#'}     | ${'path/to/file%2C/%23'}
+        ${'path/to/file\\'}      | ${'path/to/file/'}
+        ${'path\\to/file/'}      | ${'path/to/file/'}
+        ${'/some/path%.c'}       | ${'/some/path%25.c'}
+    `('normalizePathForUrl $path', ({ path, expected }) => {
+        expect(normalizePathForUrl(path)).toEqual(expected);
     });
 });

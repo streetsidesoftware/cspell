@@ -100,6 +100,8 @@ export {
 export { Link, Text };
 export { ExclusionHelper };
 export { clearCachedFiles, clearCaches } from './clearCachedFiles.js';
+export type { FileSystemProvider, VirtualFS } from './fileSystem.js';
+export { FSCapabilityFlags, getVirtualFS } from './fileSystem.js';
 export { getDictionary } from './getDictionary.js';
 export type { PerfTimer } from './perf/index.js';
 export { createPerfTimer } from './perf/index.js';

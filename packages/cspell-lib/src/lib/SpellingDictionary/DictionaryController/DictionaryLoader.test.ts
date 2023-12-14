@@ -3,13 +3,13 @@ import { pathToFileURL } from 'url';
 import { describe, expect, test, vi } from 'vitest';
 
 import { pathPackageRoot } from '../../../test-util/test.locations.cjs';
+import { getCSpellIO } from '../../fileSystem.js';
 import type {
     DictionaryDefinitionInlineInternal,
     DictionaryDefinitionInternal,
     DictionaryFileDefinitionInternal,
 } from '../../Models/CSpellSettingsInternalDef.js';
 import { mapDictDefToInternal } from '../../Settings/DictionarySettings.js';
-import { getCSpellIO } from '../../static.js';
 import { clean } from '../../util/util.js';
 import type { LoadOptions } from './DictionaryLoader.js';
 import { DictionaryLoader } from './DictionaryLoader.js';

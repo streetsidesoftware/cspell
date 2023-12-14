@@ -4,8 +4,9 @@ export * from '@cspell/cspell-types';
 import { WeightMap } from 'cspell-trie-lib';
 export { CompoundWordsMethod } from 'cspell-trie-lib';
 import { CSpellConfigFile } from 'cspell-config-lib';
-import { CSpellIO } from 'cspell-io';
-export { asyncIterableToArray, readFileText as readFile, readFileTextSync as readFileSync, writeToFile, writeToFileIterable, writeToFileIterableP } from 'cspell-io';
+import * as cspell_io from 'cspell-io';
+import { FileSystem } from 'cspell-io';
+export { FSCapabilityFlags, FileSystemProvider, VirtualFS, asyncIterableToArray, readFileText as readFile, readFileTextSync as readFileSync, writeToFile, writeToFileIterable, writeToFileIterableP } from 'cspell-io';
 import { SuggestOptions, SuggestionResult, CachingDictionary, SpellingDictionaryCollection } from 'cspell-dictionary';
 export { SpellingDictionary, SpellingDictionaryCollection, SuggestOptions, SuggestionCollector, SuggestionResult, createSpellingDictionary, createCollection as createSpellingDictionaryCollection } from 'cspell-dictionary';
 
@@ -406,6 +407,8 @@ declare const checkFilenameMatchesGlob: typeof checkFilenameMatchesExcludeGlob;
 declare const currentSettingsFileVersion = "0.2";
 declare const ENV_CSPELL_GLOB_ROOT = "CSPELL_GLOB_ROOT";
 
+declare function getVirtualFS(): cspell_io.VirtualFS;
+
 type LoaderResult = URL | undefined;
 
 type PnPSettingsOptional = OptionalOrUndefined<PnPSettings>;
@@ -456,7 +459,7 @@ interface IConfigLoader {
     getStats(): Readonly<Record<string, Readonly<Record<string, number>>>>;
 }
 declare function loadPnP(pnpSettings: PnPSettingsOptional, searchFrom: URL): Promise<LoaderResult>;
-declare function createConfigLoader(cspellIO?: CSpellIO): IConfigLoader;
+declare function createConfigLoader(vfs?: FileSystem): IConfigLoader;
 
 declare const defaultConfigFilenames: readonly string[];
 
@@ -1013,4 +1016,4 @@ interface PerfTimer {
 type TimeNowFn = () => number;
 declare function createPerfTimer(name: string, onEnd?: (elapsed: number, name: string) => void, timeNowFn?: TimeNowFn): PerfTimer;
 
-export { type CheckTextInfo, type ConfigurationDependencies, type CreateTextDocumentParams, type DetermineFinalDocumentSettingsResult, type Document, DocumentValidator, type DocumentValidatorOptions, ENV_CSPELL_GLOB_ROOT, type ExcludeFilesGlobMap, type ExclusionFunction, exclusionHelper_d as ExclusionHelper, type FeatureFlag, FeatureFlags, ImportError, type ImportFileRefWithError$1 as ImportFileRefWithError, IncludeExcludeFlag, type IncludeExcludeOptions, index_link_d as Link, type Logger, type PerfTimer, type SpellCheckFileOptions, type SpellCheckFileResult, SpellingDictionaryLoadError, type SuggestedWord, SuggestionError, type SuggestionOptions, type SuggestionsForWordResult, text_d as Text, type TextDocument, type TextDocumentLine, type TextDocumentRef, type TextInfoItem, type TraceOptions, type TraceResult, UnknownFeatureFlagError, type ValidationIssue, calcOverrideSettings, checkFilenameMatchesGlob, checkText, checkTextDocument, clearCachedFiles, clearCaches, combineTextAndLanguageSettings, combineTextAndLanguageSettings as constructSettingsForText, createConfigLoader, createPerfTimer, createTextDocument, currentSettingsFileVersion, defaultConfigFilenames, defaultFileName, defaultFileName as defaultSettingsFilename, determineFinalDocumentSettings, extractDependencies, extractImportErrors, fileToDocument, fileToTextDocument, finalizeSettings, getCachedFileSize, getDefaultBundledSettingsAsync, getDefaultConfigLoader, getDefaultSettings, getDictionary, getGlobalSettings, getGlobalSettingsAsync, getLanguagesForBasename as getLanguageIdsForBaseFilename, getLanguagesForExt, getLogger, getSources, getSystemFeatureFlags, isBinaryFile, isSpellingDictionaryLoadError, loadConfig, loadPnP, mergeInDocSettings, mergeSettings, readRawSettings, readSettings, readSettingsFiles, refreshDictionaryCache, resolveFile, searchForConfig, sectionCSpell, setLogger, shouldCheckDocument, spellCheckDocument, spellCheckFile, suggestionsForWord, suggestionsForWords, traceWords, traceWordsAsync, updateTextDocument, validateText };
+export { type CheckTextInfo, type ConfigurationDependencies, type CreateTextDocumentParams, type DetermineFinalDocumentSettingsResult, type Document, DocumentValidator, type DocumentValidatorOptions, ENV_CSPELL_GLOB_ROOT, type ExcludeFilesGlobMap, type ExclusionFunction, exclusionHelper_d as ExclusionHelper, type FeatureFlag, FeatureFlags, ImportError, type ImportFileRefWithError$1 as ImportFileRefWithError, IncludeExcludeFlag, type IncludeExcludeOptions, index_link_d as Link, type Logger, type PerfTimer, type SpellCheckFileOptions, type SpellCheckFileResult, SpellingDictionaryLoadError, type SuggestedWord, SuggestionError, type SuggestionOptions, type SuggestionsForWordResult, text_d as Text, type TextDocument, type TextDocumentLine, type TextDocumentRef, type TextInfoItem, type TraceOptions, type TraceResult, UnknownFeatureFlagError, type ValidationIssue, calcOverrideSettings, checkFilenameMatchesGlob, checkText, checkTextDocument, clearCachedFiles, clearCaches, combineTextAndLanguageSettings, combineTextAndLanguageSettings as constructSettingsForText, createConfigLoader, createPerfTimer, createTextDocument, currentSettingsFileVersion, defaultConfigFilenames, defaultFileName, defaultFileName as defaultSettingsFilename, determineFinalDocumentSettings, extractDependencies, extractImportErrors, fileToDocument, fileToTextDocument, finalizeSettings, getCachedFileSize, getDefaultBundledSettingsAsync, getDefaultConfigLoader, getDefaultSettings, getDictionary, getGlobalSettings, getGlobalSettingsAsync, getLanguagesForBasename as getLanguageIdsForBaseFilename, getLanguagesForExt, getLogger, getSources, getSystemFeatureFlags, getVirtualFS, isBinaryFile, isSpellingDictionaryLoadError, loadConfig, loadPnP, mergeInDocSettings, mergeSettings, readRawSettings, readSettings, readSettingsFiles, refreshDictionaryCache, resolveFile, searchForConfig, sectionCSpell, setLogger, shouldCheckDocument, spellCheckDocument, spellCheckFile, suggestionsForWord, suggestionsForWords, traceWords, traceWordsAsync, updateTextDocument, validateText };

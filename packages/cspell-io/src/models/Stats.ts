@@ -37,6 +37,7 @@ export enum FileType {
 }
 
 export interface DirEntry {
-    url: URL;
+    name: string;
+    dir: URL;
     fileType: FileType;
 }

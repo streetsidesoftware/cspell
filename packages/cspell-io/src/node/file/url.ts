@@ -4,6 +4,7 @@ import { pathToFileURL } from 'url';
 const isZippedRegExp = /\.gz($|[?#])/i;
 
 const isURLRegExp = /^(\w{2,64}:\/\/|data:)/i;
+const isWindowsPath = /^[a-z]:[\\/]/i;
 const supportedProtocols: Record<string, true | undefined> = { 'file:': true, 'http:': true, 'https:': true };
 
 export function isZipped(filename: string | URL): boolean {
@@ -33,7 +34,7 @@ export function toFileURL(filenameOrUrl: string | URL, relativeTo?: string | URL
     return isUrlLike(filenameOrUrl)
         ? new URL(filenameOrUrl)
         : relativeTo && isUrlLike(relativeTo)
-          ? new URL(normalizePath(filenameOrUrl), relativeTo)
+          ? new URL(normalizePathForUrl(filenameOrUrl), relativeTo)
           : relativeTo
             ? pathToFileURL(path.resolve(relativeTo.toString(), filenameOrUrl))
             : pathToFileURL(filenameOrUrl);
@@ -46,7 +47,7 @@ export function toFileURL(filenameOrUrl: string | URL, relativeTo?: string | URL
  * @returns a URL
  */
 export function toURL(filenameOrUrl: string | URL, relativeTo?: string | URL): URL {
-    return typeof filenameOrUrl !== 'string' ? filenameOrUrl : new URL(filenameOrUrl, relativeTo);
+    return filenameOrUrl instanceof URL ? filenameOrUrl : new URL(filenameOrUrl, relativeTo);
 }
 
 const regMatchFilename = /filename=([^;,]*)/;
@@ -75,16 +76,21 @@ export function urlBasename(url: string | URL): string {
 
 /**
  * Try to determine the parent directory URL of the uri.
+ * If it is not a hierarchical URL, then it will return the URL.
  * @param url - url to extract the dirname from.
  * @returns a URL
  */
 export function urlDirname(url: string | URL): URL {
     url = toURL(url);
     if (url.protocol === 'data:') {
-        return new URL('data:');
+        return url;
     }
 
-    return new URL(url.pathname.endsWith('/') ? '..' : '.', url);
+    try {
+        return new URL(url.pathname.endsWith('/') ? '..' : '.', url);
+    } catch (e) {
+        return url;
+    }
 }
 
 /**
@@ -98,6 +104,12 @@ export function basename(path: string): string {
     return idx >= 0 ? path.slice(idx + 1) : path;
 }
 
-function normalizePath(filePath: string): string {
-    return filePath.split(path.sep).join('/');
+export function normalizePathForUrl(filePath: string): string {
+    const pathname = filePath.replace(/\\/g, '/');
+    const raw = pathname.replace(isWindowsPath, '/$&');
+    return raw
+        .split('/')
+        .map(encodeURIComponent)
+        .join('/')
+        .replace(/^\/([a-z])%3A/i, '/$1:');
 }

@@ -240,8 +240,8 @@ describe('CSpellIONode', () => {
         filename                                                                                                       | expected
         ${ps('samples/cities.txt')}                                                                                    | ${sc('samples/')}
         ${'https://raw.githubusercontent.com/streetsidesoftware/cspell/main/packages/cspell-io/samples/cities.txt.gz'} | ${'https://raw.githubusercontent.com/streetsidesoftware/cspell/main/packages/cspell-io/samples/'}
-        ${'data:text/plain;charset=utf8;filename=hello.txt,Hello%2C%20World!'}                                         | ${'data:'}
-        ${'data:text/plain;charset=utf8;base64,SGVsbG8sIFdvcmxkISAlJSUlJCQkJCwsLCw'}                                   | ${'data:'}
+        ${'data:text/plain;charset=utf8;filename=hello.txt,Hello%2C%20World!'}                                         | ${'data:text/plain;charset=utf8;filename=hello.txt,Hello%2C%20World!'}
+        ${'data:text/plain;charset=utf8;base64,SGVsbG8sIFdvcmxkISAlJSUlJCQkJCwsLCw'}                                   | ${'data:text/plain;charset=utf8;base64,SGVsbG8sIFdvcmxkISAlJSUlJCQkJCwsLCw'}
     `('uriDirname $filename', ({ filename, expected }) => {
         const cspellIo = new CSpellIONode();
         expect(cspellIo.urlDirname(toFileURL(filename)).toString()).toEqual(expected);

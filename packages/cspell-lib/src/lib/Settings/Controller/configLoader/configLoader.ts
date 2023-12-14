@@ -2,13 +2,14 @@ import type { CSpellUserSettings, ImportFileRef, Source } from '@cspell/cspell-t
 import assert from 'assert';
 import type { CSpellConfigFile, CSpellConfigFileReaderWriter, IO, TextFile } from 'cspell-config-lib';
 import { createReaderWriter, CSpellConfigFileInMemory } from 'cspell-config-lib';
-import type { CSpellIO } from 'cspell-io';
-import { getDefaultCSpellIO } from 'cspell-io';
+import { isUrlLike, toFileURL } from 'cspell-io';
 import path from 'path';
 import { fileURLToPath, pathToFileURL } from 'url';
 import { URI, Utils as UriUtils } from 'vscode-uri';
 
 import { onClearCache } from '../../../events/index.js';
+import type { FileSystem } from '../../../fileSystem.js';
+import { createTextFileResource, getCSpellIO, getVirtualFS } from '../../../fileSystem.js';
 import { createCSpellSettingsInternal as csi } from '../../../Models/CSpellSettingsInternalDef.js';
 import { AutoResolveCache } from '../../../util/AutoResolve.js';
 import { logError, logWarning } from '../../../util/logger.js';
@@ -148,13 +149,14 @@ export interface IConfigLoader {
 
 export class ConfigLoader implements IConfigLoader {
     public onReady: Promise<void>;
+    private cspellIO = getCSpellIO();
 
     /**
      * Use `createConfigLoader`
-     * @param cspellIO - CSpellIO interface for reading files.
+     * @param virtualFs - virtual file system to use.
      */
-    protected constructor(readonly cspellIO: CSpellIO) {
-        this.cspellConfigFileReaderWriter = createReaderWriter(undefined, undefined, createIO(cspellIO));
+    protected constructor(readonly fs: FileSystem) {
+        this.cspellConfigFileReaderWriter = createReaderWriter(undefined, undefined, createIO(fs));
         this.onReady = this.prefetchGlobalSettingsAsync();
         this.subscribeToEvents();
     }
@@ -209,8 +211,14 @@ export class ConfigLoader implements IConfigLoader {
         });
     }
 
-    searchForConfigFileLocation(searchFrom: URL | string | undefined): Promise<URL | undefined> {
-        const url = this.cspellIO.toFileURL(searchFrom || cwdURL());
+    async searchForConfigFileLocation(searchFrom: URL | string | undefined): Promise<URL | undefined> {
+        const url = toFileURL(searchFrom || cwdURL(), cwdURL());
+        if (typeof searchFrom === 'string' && !isUrlLike(searchFrom) && url.protocol === 'file:') {
+            // check to see if it is a directory
+            if (await isDirectory(this.fs, url)) {
+                return this.configSearch.searchForConfig(addTrailingSlash(url));
+            }
+        }
         return this.configSearch.searchForConfig(url);
     }
 
@@ -489,8 +497,8 @@ export class ConfigLoader implements IConfigLoader {
 }
 
 class ConfigLoaderInternal extends ConfigLoader {
-    constructor(cspellIO: CSpellIO) {
-        super(cspellIO);
+    constructor(vfs: FileSystem) {
+        super(vfs);
     }
 
     get _cachedFiles() {
@@ -582,12 +590,12 @@ function validateRawConfigVersion(config: CSpellConfigFile): void {
     logWarning(validationMessage(msg, config.url));
 }
 
-function createConfigLoaderInternal(cspellIO?: CSpellIO) {
-    return new ConfigLoaderInternal(cspellIO ?? getDefaultCSpellIO());
+function createConfigLoaderInternal(vfs?: FileSystem) {
+    return new ConfigLoaderInternal(vfs ?? getVirtualFS().fs);
 }
 
-export function createConfigLoader(cspellIO?: CSpellIO): IConfigLoader {
-    return createConfigLoaderInternal(cspellIO);
+export function createConfigLoader(vfs?: FileSystem): IConfigLoader {
+    return createConfigLoaderInternal(vfs);
 }
 
 export function getDefaultConfigLoaderInternal(): ConfigLoaderInternal {
@@ -596,13 +604,22 @@ export function getDefaultConfigLoaderInternal(): ConfigLoaderInternal {
     return (defaultConfigLoader = createConfigLoaderInternal());
 }
 
-function createIO(cspellIO: CSpellIO): IO {
-    const readFile = (url: URL) => cspellIO.readFile(url).then((file) => ({ url: file.url, content: file.getText() }));
-    const writeFile = (file: TextFile) => cspellIO.writeFile(file.url, file.content);
+function createIO(fs: FileSystem): IO {
+    const readFile = (url: URL) =>
+        fs.readFile(url).then((file) => ({ url: file.url, content: createTextFileResource(file).getText() }));
+    const writeFile = (file: TextFile) => fs.writeFile(file);
     return {
         readFile,
         writeFile,
     };
+}
+
+async function isDirectory(fs: FileSystem, path: URL): Promise<boolean> {
+    try {
+        return (await fs.stat(path)).isDirectory();
+    } catch (e) {
+        return false;
+    }
 }
 
 export const __testing__ = {
