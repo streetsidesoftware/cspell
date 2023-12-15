@@ -1,3 +1,4 @@
+import { urlOrReferenceToUrl } from './common/index.js';
 import type { CSpellIO } from './CSpellIO.js';
 import { getDefaultCSpellIO } from './CSpellIONode.js';
 import {
@@ -49,7 +50,6 @@ interface FileSystemProviderInfo {
 
 interface FileSystemBase {
     readFile(url: UrlOrReference): Promise<FileResource>;
-    readDirectory(url: URL): Promise<VfsDirEntry[]>;
     writeFile(file: FileResource): Promise<FileReference>;
     /**
      * Information about the provider.
@@ -60,12 +60,14 @@ interface FileSystemBase {
 
 export interface FileSystem extends FileSystemBase {
     stat(url: UrlOrReference): Promise<VfsStat>;
+    readDirectory(url: URL): Promise<VfsDirEntry[]>;
     getCapabilities(url: URL): FSCapabilities;
     hasProvider: boolean;
 }
 
 export interface ProviderFileSystem extends FileSystemBase, Disposable {
     stat(url: UrlOrReference): Stats | Promise<Stats>;
+    readDirectory(url: URL): Promise<DirEntry[]>;
     /**
      * These are the general capabilities for the provider's file system.
      * It is possible for a provider to support more capabilities for a given url by providing a getCapabilities function.
@@ -215,10 +217,6 @@ function fsPassThrough(fs: (url: URL) => WrappedProviderFs): Required<FileSystem
     };
 }
 
-function urlOrReferenceToUrl(urlOrReference: UrlOrReference): URL {
-    return urlOrReference instanceof URL ? urlOrReference : urlOrReference.url;
-}
-
 export function createVirtualFS(cspellIO?: CSpellIO): VirtualFS {
     const cspell = cspellIO || getDefaultCSpellIO();
     const vfs = new CVirtualFS();
@@ -233,7 +231,7 @@ function cspellIOToFsProvider(cspellIO: CSpellIO): FileSystemProvider {
         providerInfo: { name },
         stat: (url) => cspellIO.getStat(url),
         readFile: (url) => cspellIO.readFile(url),
-        readDirectory: (url) => cspellIO.readDirectory(url).then((entries) => entries.map((e) => new CVfsDirEntry(e))),
+        readDirectory: (url) => cspellIO.readDirectory(url),
         writeFile: (file) => cspellIO.writeFile(file.url, file.content),
         dispose: () => undefined,
         capabilities: FSCapabilityFlags.Stat | FSCapabilityFlags.ReadWrite | FSCapabilityFlags.ReadDir,
@@ -369,7 +367,7 @@ class WrappedProviderFs implements FileSystem {
     async readDirectory(url: URL): Promise<VfsDirEntry[]> {
         try {
             checkCapabilityOrThrow(this.fs, this.capabilities, FSCapabilityFlags.ReadDir, 'readDirectory', url);
-            return await this.fs.readDirectory(url);
+            return (await this.fs.readDirectory(url)).map((e) => new CVfsDirEntry(e));
         } catch (e) {
             throw wrapError(e);
         }

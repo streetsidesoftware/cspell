@@ -5,6 +5,9 @@ export async function fetchHead(request: string | URL): Promise<Headers> {
     const url = toURL(request);
     try {
         const r = await fetch(url, { method: 'HEAD' });
+        if (!r.ok) {
+            throw FetchUrlError.create(url, r.status);
+        }
         return r.headers;
     } catch (e) {
         throw toFetchUrlError(e, url);
