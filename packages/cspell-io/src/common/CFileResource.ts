@@ -53,7 +53,7 @@ export class CFileResource implements TextFileResource {
     static from(
         url: URL,
         content: string | ArrayBufferView,
-        encoding?: BufferEncoding,
+        encoding?: BufferEncoding | undefined,
         baseFilename?: string | undefined,
         gz?: boolean,
     ): CFileResource;
@@ -93,4 +93,14 @@ export class CFileResource implements TextFileResource {
 
 export function fromFileResource(fileResource: FileResource): TextFileResource {
     return CFileResource.from(fileResource);
+}
+
+export function renameFileResource(fileResource: FileResource, url: URL): FileResource {
+    return CFileResource.from(
+        url,
+        fileResource.content,
+        fileResource.encoding,
+        fileResource.baseFilename,
+        fileResource.gz,
+    );
 }

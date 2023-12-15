@@ -78,3 +78,7 @@ export function toFileReference(
 export function isFileReference(ref: UrlOrReference): ref is FileReference {
     return CFileReference.isCFileReference(ref) || (!(ref instanceof URL) && typeof ref !== 'string');
 }
+
+export function renameFileReference(ref: FileReference, newUrl: URL): FileReference {
+    return new CFileReference(newUrl, ref.encoding, ref.baseFilename, ref.gz);
+}
