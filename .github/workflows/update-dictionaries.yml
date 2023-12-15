@@ -90,7 +90,7 @@ jobs:
           echo "$PATCH_DIFF" > temp/patch.diff
 
       - name: store diff
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: diffs
           path: temp/*.diff
@@ -220,7 +220,7 @@ jobs:
           echo "${{ matrix.repo }} =>" $REPO
           git diff integration-tests/config integration-tests/repositories integration-tests/snapshots  > temp/$REPO.diff
       - name: store diff
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: diffs
           path: temp/*.diff
@@ -278,7 +278,7 @@ jobs:
           mkdir temp || echo temp already exists
           git diff packages/cspell packages/cspell-lib  > temp/update_snapshot.diff
       - name: store diff
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: diffs
           path: temp/*.diff

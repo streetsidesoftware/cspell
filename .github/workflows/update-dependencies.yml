@@ -102,7 +102,7 @@ jobs:
           git diff HEAD > temp/${{ env.patch_path }}
 
       - name: Store Patch
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: ${{ env.patch_artifact }}
           path: temp/${{ env.patch_path }}
