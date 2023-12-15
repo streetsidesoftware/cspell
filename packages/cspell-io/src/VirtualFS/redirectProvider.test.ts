@@ -41,20 +41,21 @@ describe('Validate RedirectProvider', () => {
     });
 
     test.each`
-        filename               | baseFilename                    | content
-        ${import.meta.url}     | ${urlBasename(import.meta.url)} | ${sc('This bit of text')}
-        ${sh('cities.txt')}    | ${'cities.txt'}                 | ${sc('San Francisco\n')}
-        ${sh('cities.txt.gz')} | ${'cities.txt.gz'}              | ${sc('San Francisco\n')}
-    `('RedirectProvider.readFile $filename', async ({ filename, content, baseFilename }) => {
+        filename                                                  | content
+        ${import.meta.url}                                        | ${sc('This bit of text')}
+        ${new URL('cities.txt', 'virtual-fs://samples/').href}    | ${sc('San Francisco\n')}
+        ${new URL('cities.txt.gz', 'virtual-fs://samples/').href} | ${sc('San Francisco\n')}
+    `('RedirectProvider.readFile $filename', async ({ filename, content }) => {
         const url = toURL(filename);
         const publicURL = new URL('virtual-fs://samples/');
         const vfs = createVFS(publicURL, samplesURL);
         const fs = vfs.fs;
-        const expected = { url: new URL(baseFilename, publicURL), content, baseFilename };
+        const baseFilename = urlBasename(url);
+        const expected = { url, content, baseFilename };
         const result = await fs.readFile(url);
         const gz = filename.endsWith('.gz') || undefined;
         assert(result instanceof CFileResource);
-        expect(result.url).toEqual(expected.url);
+        expect(result.url.href).toBe(expected.url.href);
         expect(result.getText()).toEqual(expected.content);
         expect(result.baseFilename).toEqual(expected.baseFilename);
         expect(!!result.gz).toEqual(!!gz);
