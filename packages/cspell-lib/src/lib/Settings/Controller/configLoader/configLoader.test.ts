@@ -336,6 +336,13 @@ describe('Validate search/load config files', () => {
         clearCachedSettingsFiles();
     });
 
+    function resolveError(filename: string): ImportFileRefWithError {
+        return {
+            filename,
+            error: new Error(`Failed to resolve file: "${filename}"`),
+        };
+    }
+
     function readError(filename: string): ImportFileRefWithError {
         return {
             filename,
@@ -434,8 +441,8 @@ describe('Validate search/load config files', () => {
 
     test.each`
         file                                          | expectedConfig
-        ${samplesSrc}                                 | ${cfg(readError(samplesSrc))}
-        ${s('bug-fixes')}                             | ${cfg(readError(s('bug-fixes')))}
+        ${samplesSrc}                                 | ${cfg(resolveError(samplesSrc))}
+        ${s('bug-fixes')}                             | ${cfg(resolveError(s('bug-fixes')))}
         ${s('linked/cspell.config.js')}               | ${cfg(s('linked/cspell.config.js'))}
         ${s('dot-config/.config/cspell.config.yaml')} | ${cfg(s('dot-config/.config/cspell.config.yaml'), { name: 'Nested in .config', globRoot: s('dot-config') })}
         ${s('js-config/cspell.config.js')}            | ${cfg(s('js-config/cspell.config.js'))}
@@ -614,7 +621,7 @@ describe('Validate search/load config files', () => {
     });
 });
 
-describe.only('ConfigLoader with VirtualFS', () => {
+describe('ConfigLoader with VirtualFS', () => {
     const publicURL = new URL('vscode-fs://github/streetsidesoftware/public-samples/');
 
     function pURL(path: string): URL {
