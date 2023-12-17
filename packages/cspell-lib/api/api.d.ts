@@ -5,8 +5,8 @@ import { WeightMap } from 'cspell-trie-lib';
 export { CompoundWordsMethod } from 'cspell-trie-lib';
 import { CSpellConfigFile } from 'cspell-config-lib';
 import * as cspell_io from 'cspell-io';
-import { FileSystem } from 'cspell-io';
-export { FSCapabilityFlags, FileSystemProvider, VirtualFS, asyncIterableToArray, readFileText as readFile, readFileTextSync as readFileSync, writeToFile, writeToFileIterable, writeToFileIterableP } from 'cspell-io';
+import { VFileSystem } from 'cspell-io';
+export { FSCapabilityFlags, VFileSystemProvider, VirtualFS, asyncIterableToArray, readFileText as readFile, readFileTextSync as readFileSync, writeToFile, writeToFileIterable, writeToFileIterableP } from 'cspell-io';
 import { SuggestOptions, SuggestionResult, CachingDictionary, SpellingDictionaryCollection } from 'cspell-dictionary';
 export { SpellingDictionary, SpellingDictionaryCollection, SuggestOptions, SuggestionCollector, SuggestionResult, createSpellingDictionary, createCollection as createSpellingDictionaryCollection } from 'cspell-dictionary';
 
@@ -409,6 +409,24 @@ declare const ENV_CSPELL_GLOB_ROOT = "CSPELL_GLOB_ROOT";
 
 declare function getVirtualFS(): cspell_io.VirtualFS;
 
+interface ResolveFileResult {
+    /**
+     * Absolute path or URL to the file.
+     */
+    filename: string;
+    relativeTo: string | undefined;
+    found: boolean;
+    /**
+     * A warning message if the file was found, but there was a problem.
+     */
+    warning?: string;
+    /**
+     * The method used to resolve the file.
+     */
+    method: string;
+}
+declare function resolveFile(filename: string | URL, relativeTo: string | URL, fs?: VFileSystem): Promise<ResolveFileResult>;
+
 type LoaderResult = URL | undefined;
 
 type PnPSettingsOptional = OptionalOrUndefined<PnPSettings>;
@@ -459,7 +477,7 @@ interface IConfigLoader {
     getStats(): Readonly<Record<string, Readonly<Record<string, number>>>>;
 }
 declare function loadPnP(pnpSettings: PnPSettingsOptional, searchFrom: URL): Promise<LoaderResult>;
-declare function createConfigLoader(vfs?: FileSystem): IConfigLoader;
+declare function createConfigLoader(fs?: VFileSystem): IConfigLoader;
 
 declare const defaultConfigFilenames: readonly string[];
 
@@ -958,30 +976,6 @@ declare function setLogger(logger: Logger): Logger;
  * @returns the current logger.
  */
 declare function getLogger(): Logger;
-
-interface ResolveFileResult {
-    /**
-     * Absolute path or URL to the file.
-     */
-    filename: string;
-    relativeTo: string | undefined;
-    found: boolean;
-    /**
-     * A warning message if the file was found, but there was a problem.
-     */
-    warning?: string;
-    /**
-     * The method used to resolve the file.
-     */
-    method: string;
-}
-/**
- * Resolve filename to absolute paths.
- * It tries to look for local files as well as node_modules
- * @param filename an absolute path, relative path, `~` path, or a node_module.
- * @param relativeTo absolute path
- */
-declare function resolveFile(filename: string, relativeTo: string | URL): ResolveFileResult;
 
 /**
  * Clear the cached files and other cached data.

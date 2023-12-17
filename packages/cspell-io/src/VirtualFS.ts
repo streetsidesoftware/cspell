@@ -12,20 +12,19 @@ import {
 
 type UrlOrReference = URL | FileReference;
 
-type NextProvider = (url: URL) => ProviderFileSystem | undefined;
+type NextProvider = (url: URL) => VProviderFileSystem | undefined;
 
 export interface VirtualFS extends Disposable {
-    registerFileSystemProvider(provider: FileSystemProvider): Disposable;
-
+    registerFileSystemProvider(provider: VFileSystemProvider, ...providers: VFileSystemProvider[]): Disposable;
     /**
      * Get the fs for a given url.
      */
-    getFS(url: URL): FileSystem;
+    getFS(url: URL): VFileSystem;
 
     /**
      * The file system. All requests will first use getFileSystem to get the file system before making the request.
      */
-    readonly fs: Required<FileSystem>;
+    readonly fs: Required<VFileSystem>;
 
     /**
      * Clear the cache of file systems.
@@ -58,14 +57,14 @@ interface FileSystemBase {
     providerInfo: FileSystemProviderInfo;
 }
 
-export interface FileSystem extends FileSystemBase {
+export interface VFileSystem extends FileSystemBase {
     stat(url: UrlOrReference): Promise<VfsStat>;
     readDirectory(url: URL): Promise<VfsDirEntry[]>;
     getCapabilities(url: URL): FSCapabilities;
     hasProvider: boolean;
 }
 
-export interface ProviderFileSystem extends FileSystemBase, Disposable {
+export interface VProviderFileSystem extends FileSystemBase, Disposable {
     stat(url: UrlOrReference): Stats | Promise<Stats>;
     readDirectory(url: URL): Promise<DirEntry[]>;
     /**
@@ -83,7 +82,7 @@ export interface ProviderFileSystem extends FileSystemBase, Disposable {
     getCapabilities?: (url: URL) => FSCapabilities;
 }
 
-export interface FileSystemProvider extends Partial<Disposable> {
+export interface VFileSystemProvider extends Partial<Disposable> {
     /** Name of the Provider */
     name: string;
     /**
@@ -91,33 +90,36 @@ export interface FileSystemProvider extends Partial<Disposable> {
      * @param url - the url to get the file system for.
      * @param next - call this function to get the next provider to try. This is useful for chaining providers that operate on the same protocol.
      */
-    getFileSystem(url: URL, next: NextProvider): ProviderFileSystem | undefined;
+    getFileSystem(url: URL, next: NextProvider): VProviderFileSystem | undefined;
 }
 
 class CVirtualFS implements VirtualFS {
-    private readonly providers = new Set<FileSystemProvider>();
+    private readonly providers = new Set<VFileSystemProvider>();
     private cachedFs = new Map<string, WrappedProviderFs>();
-    private revCacheFs = new Map<FileSystemProvider, Set<string>>();
-    readonly fs: Required<FileSystem>;
+    private revCacheFs = new Map<VFileSystemProvider, Set<string>>();
+    readonly fs: Required<VFileSystem>;
 
     constructor() {
         this.fs = fsPassThrough((url) => this._getFS(url));
     }
 
-    registerFileSystemProvider(provider: FileSystemProvider): Disposable {
-        this.providers.add(provider);
+    registerFileSystemProvider(...providers: VFileSystemProvider[]): Disposable {
+        providers.forEach((provider) => this.providers.add(provider));
         this.reset();
         return {
             dispose: () => {
-                for (const key of this.revCacheFs.get(provider) || []) {
-                    this.cachedFs.delete(key);
+                for (const provider of providers) {
+                    for (const key of this.revCacheFs.get(provider) || []) {
+                        this.cachedFs.delete(key);
+                    }
+                    this.providers.delete(provider) && undefined;
                 }
-                this.providers.delete(provider) && undefined;
+                this.reset();
             },
         };
     }
 
-    getFS(url: URL): FileSystem {
+    getFS(url: URL): VFileSystem {
         return this._getFS(url);
     }
 
@@ -129,7 +131,7 @@ class CVirtualFS implements VirtualFS {
             return cached;
         }
 
-        const fnNext = (provider: FileSystemProvider, next: NextProvider) => {
+        const fnNext = (provider: VFileSystemProvider, next: NextProvider) => {
             return (url: URL) => {
                 let calledNext = false;
                 const fs = provider.getFileSystem(url, (_url) => {
@@ -191,8 +193,8 @@ class CVirtualFS implements VirtualFS {
     }
 }
 
-function fsPassThrough(fs: (url: URL) => WrappedProviderFs): Required<FileSystem> {
-    function gfs(ur: UrlOrReference, name: string): FileSystem {
+function fsPassThrough(fs: (url: URL) => WrappedProviderFs): Required<VFileSystem> {
+    function gfs(ur: UrlOrReference, name: string): VFileSystem {
         const url = urlOrReferenceToUrl(ur);
         const f = fs(url);
         if (!f.hasProvider)
@@ -224,17 +226,27 @@ export function createVirtualFS(cspellIO?: CSpellIO): VirtualFS {
     return vfs;
 }
 
-function cspellIOToFsProvider(cspellIO: CSpellIO): FileSystemProvider {
+function cspellIOToFsProvider(cspellIO: CSpellIO): VFileSystemProvider {
+    const capabilities = FSCapabilityFlags.Stat | FSCapabilityFlags.ReadWrite | FSCapabilityFlags.ReadDir;
+    const capabilitiesHttp = capabilities & ~FSCapabilityFlags.Write & ~FSCapabilityFlags.ReadDir;
+    const capMap: Record<string, FSCapabilityFlags> = {
+        'file:': capabilities,
+        'http:': capabilitiesHttp,
+        'https:': capabilitiesHttp,
+    };
     const name = 'CSpellIO';
     const supportedProtocols = new Set(['file:', 'http:', 'https:']);
-    const fs: ProviderFileSystem = {
+    const fs: VProviderFileSystem = {
         providerInfo: { name },
         stat: (url) => cspellIO.getStat(url),
         readFile: (url) => cspellIO.readFile(url),
         readDirectory: (url) => cspellIO.readDirectory(url),
         writeFile: (file) => cspellIO.writeFile(file.url, file.content),
         dispose: () => undefined,
-        capabilities: FSCapabilityFlags.Stat | FSCapabilityFlags.ReadWrite | FSCapabilityFlags.ReadDir,
+        capabilities,
+        getCapabilities(url) {
+            return fsCapabilities(capMap[url.protocol] || FSCapabilityFlags.None);
+        },
     };
 
     return {
@@ -316,12 +328,12 @@ export function fsCapabilities(flags: FSCapabilityFlags): FSCapabilities {
     return new CFsCapabilities(flags);
 }
 
-class WrappedProviderFs implements FileSystem {
+class WrappedProviderFs implements VFileSystem {
     readonly hasProvider: boolean;
     readonly capabilities: FSCapabilityFlags;
     readonly providerInfo: FileSystemProviderInfo;
     private _capabilities: FSCapabilities;
-    constructor(private readonly fs: ProviderFileSystem | undefined) {
+    constructor(private readonly fs: VProviderFileSystem | undefined) {
         this.hasProvider = !!fs;
         this.capabilities = fs?.capabilities || FSCapabilityFlags.None;
         this._capabilities = fsCapabilities(this.capabilities);
@@ -382,18 +394,18 @@ class WrappedProviderFs implements FileSystem {
         }
     }
 
-    static disposeOf(fs: FileSystem): void {
+    static disposeOf(fs: VFileSystem): void {
         fs instanceof WrappedProviderFs && fs.fs?.dispose();
     }
 }
 
 function checkCapabilityOrThrow(
-    fs: ProviderFileSystem | undefined,
+    fs: VProviderFileSystem | undefined,
     capabilities: FSCapabilityFlags,
     flag: FSCapabilityFlags,
     name: string,
     url: URL,
-): asserts fs is ProviderFileSystem {
+): asserts fs is VProviderFileSystem {
     if (!(capabilities & flag)) {
         throw new VFSErrorUnsupportedRequest(name, url);
     }

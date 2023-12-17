@@ -16,6 +16,6 @@ export type { BufferEncoding, TextEncoding } from './models/BufferEncoding.js';
 export type { Stats } from './models/Stats.js';
 export { encodeDataUrl, toDataUrl } from './node/dataUrl.js';
 export { isFileURL, isUrlLike, toFileURL, toURL, urlBasename, urlDirname } from './node/file/url.js';
-export type { FileSystem, FileSystemProvider, VfsDirEntry, VfsStat, VirtualFS } from './VirtualFS.js';
+export type { VFileSystem as VFileSystem, VFileSystemProvider, VfsDirEntry, VfsStat, VirtualFS } from './VirtualFS.js';
 export { createVirtualFS, FSCapabilityFlags, getDefaultVirtualFs } from './VirtualFS.js';
 export { createRedirectProvider } from './VirtualFS/redirectProvider.js';

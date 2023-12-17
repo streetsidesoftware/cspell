@@ -14,7 +14,7 @@ import * as RegPat from './RegExpPatterns.js';
 const defaultConfigFileModuleRef = '@cspell/cspell-bundled-dicts/cspell-default.json';
 
 // Do not use require.resolve because webpack will mess it up.
-const defaultConfigFile = resolveConfigModule(defaultConfigFileModuleRef);
+const defaultConfigFile = () => resolveConfigModule(defaultConfigFileModuleRef);
 
 const regExpSpellCheckerDisable = [
     new PatternRegExp(RegPat.regExSpellingGuardBlock),
@@ -145,8 +145,8 @@ export const _defaultSettings: Readonly<CSpellSettingsInternal> = Object.freeze(
     }),
 );
 
-function resolveConfigModule(configModuleName: string) {
-    return resolveFile(configModuleName, srcDirectory).filename;
+async function resolveConfigModule(configModuleName: string) {
+    return (await resolveFile(configModuleName, srcDirectory)).filename;
 }
 
 function normalizePattern(pat: RegExpPatternDefinition): RegExpPatternDefinition {
@@ -177,7 +177,8 @@ class DefaultSettingsLoader {
         if (this.pending) return this.pending;
 
         this.pending = (async () => {
-            const jsonSettings = await readSettings(defaultConfigFile);
+            const defaultConfigLocation = await defaultConfigFile();
+            const jsonSettings = await readSettings(defaultConfigLocation);
             this.settings = mergeSettings(_defaultSettings, jsonSettings);
             if (jsonSettings.name !== undefined) {
                 this.settings.name = jsonSettings.name;

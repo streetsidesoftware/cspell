@@ -4,8 +4,8 @@ import { describe, expect, test, vi } from 'vitest';
 import { CFileResource, renameFileResource } from '../common/index.js';
 import { toURL, urlBasename } from '../node/file/url.js';
 import { makePathToURL, pathToSampleURL, pathToTempURL } from '../test/test.helper.js';
-import type { ProviderFileSystem } from '../VirtualFS.js';
-import { createVirtualFS, VFSErrorUnsupportedRequest } from '../VirtualFS.js';
+import type { VProviderFileSystem } from '../VirtualFS.js';
+import { createVirtualFS, FSCapabilityFlags, VFSErrorUnsupportedRequest } from '../VirtualFS.js';
 import { createRedirectProvider } from './redirectProvider.js';
 
 const samplesURL = pathToSampleURL();
@@ -76,9 +76,25 @@ describe('Validate RedirectProvider', () => {
         const vfs = createVFS(publicURL, samplesURL);
         const fs = vfs.fs;
 
-        const stat = fs.getCapabilities(sURL('cities.txt'));
-        const stat2 = fs.getCapabilities(new URL('cities.txt', publicURL));
-        expect(stat2).toEqual(stat);
+        const cap = fs.getCapabilities(sURL('cities.txt'));
+        const cap2 = fs.getCapabilities(new URL('cities.txt', publicURL));
+        expect(cap2).toEqual(cap);
+    });
+
+    test('RedirectProvider.getCapabilities', () => {
+        const publicURL = new URL('virtual-fs://samples/');
+        const privateURL = sURL('./');
+        const vfs = getVFS();
+        const provider = createRedirectProvider('test', publicURL, privateURL, {
+            capabilitiesMask: ~FSCapabilityFlags.ReadWriteDir,
+        });
+        vfs.registerFileSystemProvider(provider);
+        const fs = vfs.fs;
+
+        const cap = fs.getCapabilities(sURL('cities.txt'));
+        const cap2 = fs.getCapabilities(new URL('cities.txt', publicURL));
+        expect(cap2.readFile).toEqual(cap.readFile);
+        expect(cap2.readDirectory).not.toEqual(cap.readDirectory);
     });
 
     test('RedirectProvider.stat non-matching public URL', async () => {
@@ -170,7 +186,7 @@ function createVFS(publicURL: URL, pathnameOrURL: string | URL) {
     return vfs;
 }
 
-function createMockFS(): ProviderFileSystem {
+function createMockFS(): VProviderFileSystem {
     return {
         capabilities: 0,
         providerInfo: { name: 'mock' },

@@ -1,5 +1,6 @@
 import type { CSpellSettingsWithSourceTrace, CSpellUserSettings, ImportFileRef } from '@cspell/cspell-types';
 import { CSpellConfigFile, CSpellConfigFileInMemory } from 'cspell-config-lib';
+import { createRedirectProvider, createVirtualFS } from 'cspell-io';
 import * as path from 'path';
 import { fileURLToPath, pathToFileURL } from 'url';
 import { assert, beforeEach, describe, expect, test, vi } from 'vitest';
@@ -19,7 +20,8 @@ import { currentSettingsFileVersion, ENV_CSPELL_GLOB_ROOT } from '../../constant
 import type { ImportFileRefWithError } from '../../CSpellSettingsServer.js';
 import { extractDependencies, getSources, mergeSettings } from '../../CSpellSettingsServer.js';
 import { _defaultSettings, getDefaultBundledSettingsAsync } from '../../DefaultSettings.js';
-import { __testing__ as __configLoader_testing__, loadPnP } from './configLoader.js';
+import { __testing__ as __configLoader_testing__, createConfigLoader, loadPnP } from './configLoader.js';
+import { configToRawSettings } from './configToRawSettings.js';
 import {
     clearCachedSettingsFiles,
     getCachedFileSize,
@@ -334,37 +336,18 @@ describe('Validate search/load config files', () => {
         clearCachedSettingsFiles();
     });
 
+    function resolveError(filename: string): ImportFileRefWithError {
+        return {
+            filename,
+            error: new Error(`Failed to resolve file: "${filename}"`),
+        };
+    }
+
     function readError(filename: string): ImportFileRefWithError {
         return {
             filename,
             error: new Error(`Failed to read config file: "${filename}"`),
         };
-    }
-
-    function cfg(
-        filename: string | ImportFileRefWithError,
-        values: CSpellSettingsWithSourceTrace = {},
-    ): CSpellSettingsWithSourceTrace {
-        const __importRef = importFileRef(filename);
-        return {
-            __importRef,
-            ...values,
-        };
-    }
-
-    /**
-     * Create an ImportFileRef that has an `error` field.
-     */
-    function importFileRef(filenameOrRef: string | ImportFileRef | ImportFileRefWithError): ImportFileRef {
-        const { filename, error } = iRef(filenameOrRef);
-        return { filename, error };
-    }
-
-    /**
-     * Create an ImportFileRef with an optional `error` field.
-     */
-    function iRef(filenameOrRef: string | ImportFileRef | ImportFileRefWithError): ImportFileRef {
-        return typeof filenameOrRef === 'string' ? { filename: filenameOrRef } : filenameOrRef;
     }
 
     function s(filename: string): string {
@@ -458,8 +441,8 @@ describe('Validate search/load config files', () => {
 
     test.each`
         file                                          | expectedConfig
-        ${samplesSrc}                                 | ${cfg(readError(samplesSrc))}
-        ${s('bug-fixes')}                             | ${cfg(readError(s('bug-fixes')))}
+        ${samplesSrc}                                 | ${cfg(resolveError(samplesSrc))}
+        ${s('bug-fixes')}                             | ${cfg(resolveError(s('bug-fixes')))}
         ${s('linked/cspell.config.js')}               | ${cfg(s('linked/cspell.config.js'))}
         ${s('dot-config/.config/cspell.config.yaml')} | ${cfg(s('dot-config/.config/cspell.config.yaml'), { name: 'Nested in .config', globRoot: s('dot-config') })}
         ${s('js-config/cspell.config.js')}            | ${cfg(s('js-config/cspell.config.js'))}
@@ -638,6 +621,72 @@ describe('Validate search/load config files', () => {
     });
 });
 
+describe('ConfigLoader with VirtualFS', () => {
+    const publicURL = new URL('vscode-fs://github/streetsidesoftware/public-samples/');
+
+    function pURL(path: string): URL {
+        return new URL(path, publicURL);
+    }
+
+    test.each`
+        file                                       | expectedConfig
+        ${'dot-config/.config/cspell.config.yaml'} | ${cf(pURL('dot-config/.config/cspell.config.yaml'), { name: 'Nested in .config' })}
+        ${'yaml-config/cspell.yaml'}               | ${cf(pURL('yaml-config/cspell.yaml'), { id: 'Yaml Example Config' })}
+    `('ReadRawSettings from $file', async ({ file, expectedConfig }) => {
+        const vfs = createVirtualFS();
+        const redirectProvider = createRedirectProvider('test', publicURL, sURL('./'));
+        vfs.registerFileSystemProvider(redirectProvider);
+
+        const fileURL = pURL(file);
+
+        // Make sure we can read the file without using the loader.
+        const rawFilePrivate = await vfs.fs.readFile(sURL(file));
+        expect(rawFilePrivate.url.href).toBe(sURL(file).href);
+
+        const rawFile = await vfs.fs.readFile(fileURL);
+        expect(rawFile.url.href).toBe(fileURL.href);
+
+        // Use the loader
+        const loader = createConfigLoader(vfs.fs);
+        const cfg = await loader.readConfigFile(fileURL, publicURL);
+        expect(cfg).not.instanceOf(Error);
+        assert(!(cfg instanceof Error));
+        const searchResult = configToRawSettings(cfg);
+        expect(searchResult.__importRef?.filename).toEqual(toFilePathOrHref(expectedConfig.url));
+        expect(searchResult).toEqual(oc(expectedConfig.settings));
+    });
+
+    test.each`
+        file                       | expectedConfig                                                         | expectedImportErrors
+        ${'README.md'}             | ${cfg(pURL('.cspell.json'), {})}                                       | ${[]}
+        ${'bug-fixes/bug345.ts'}   | ${cfg(pURL('bug-fixes/cspell.json'), {})}                              | ${[]}
+        ${'linked/file.txt'}       | ${cfg(pURL('linked/cspell.config.js'), { __importRef: undefined })}    | ${[]}
+        ${'yaml-config/README.md'} | ${cfg(pURL('yaml-config/cspell.yaml'), { id: 'Yaml Example Config' })} | ${['cspell-imports.json']}
+    `('Search check from $file', async ({ file, expectedConfig, expectedImportErrors }) => {
+        const vfs = createVirtualFS();
+        const redirectProvider = createRedirectProvider('test', publicURL, sURL('./'));
+        vfs.registerFileSystemProvider(redirectProvider);
+
+        const fileURL = pURL(file);
+        const loader = createConfigLoader(vfs.fs);
+
+        const searchResult = await loader.searchForConfig(fileURL);
+        expect(searchResult?.__importRef).toEqual(
+            expectedConfig.__importRef ? expect.objectContaining(expectedConfig.__importRef) : undefined,
+        );
+        // expect(searchResult).toEqual(expect.objectContaining(expectedConfig));
+        const errors = extractImportErrors(searchResult || {});
+        expect(errors).toHaveLength(expectedImportErrors.length);
+        expect(errors).toEqual(
+            expect.arrayContaining(
+                (expectedImportErrors as string[]).map((filename) =>
+                    expect.objectContaining({ filename: expect.stringContaining(filename) }),
+                ),
+            ),
+        );
+    });
+});
+
 function u(url: string | URL, ref?: string | URL): URL {
     return new URL(url, ref);
 }
@@ -766,4 +815,31 @@ function cUrl(url: string | URL, replaceWith: Partial<UriComponents>): URL {
     const uri = URI.parse(toFileUrl(url).href).with(replaceWith);
 
     return new URL(uri.toString());
+}
+
+function cfg(
+    filename: string | ImportFileRefWithError | URL,
+    values: CSpellSettingsWithSourceTrace | { __importRef?: undefined } = {},
+): CSpellSettingsWithSourceTrace {
+    const __importRef = importFileRef(filename);
+    return {
+        __importRef,
+        ...values,
+    } as CSpellSettingsWithSourceTrace;
+}
+
+/**
+ * Create an ImportFileRef that has an `error` field.
+ */
+function importFileRef(filenameOrRef: string | ImportFileRef | ImportFileRefWithError | URL): ImportFileRef {
+    const { filename, error } = iRef(filenameOrRef);
+    return { filename, error };
+}
+
+/**
+ * Create an ImportFileRef with an optional `error` field.
+ */
+function iRef(filenameOrRef: string | ImportFileRef | ImportFileRefWithError | URL): ImportFileRef {
+    filenameOrRef = filenameOrRef instanceof URL ? toFilePathOrHref(filenameOrRef) : filenameOrRef;
+    return typeof filenameOrRef === 'string' ? { filename: filenameOrRef } : filenameOrRef;
 }

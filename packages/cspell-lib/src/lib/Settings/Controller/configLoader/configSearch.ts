@@ -1,6 +1,6 @@
 import { urlBasename } from 'cspell-io';
 
-import { createTextFileResource, type FileSystem, getVirtualFS, type VfsDirEntry } from '../../../fileSystem.js';
+import { createTextFileResource, type VFileSystem, type VfsDirEntry } from '../../../fileSystem.js';
 import { createAutoResolveCache } from '../../../util/AutoResolve.js';
 import { findUpFromUrl } from '../../../util/findUpFromUrl.js';
 
@@ -12,16 +12,12 @@ export class ConfigSearch {
 
     constructor(
         readonly searchPlaces: readonly string[],
-        private fs: FileSystem = getVirtualFS().fs,
+        private fs: VFileSystem,
     ) {
         this.searchPlaces = searchPlaces;
     }
 
     searchForConfig(searchFromURL: URL): Promise<URL | undefined> {
-        if (searchFromURL.protocol !== 'file:') {
-            return Promise.resolve(undefined);
-        }
-
         const dirUrl = new URL('.', searchFromURL);
         const searchHref = dirUrl.href;
         const searchCache = this.searchCache;
@@ -71,11 +67,17 @@ export class ConfigSearch {
         return findUpFromUrl((dir) => this.hasConfig(dir, visit), cwd, { type: 'file' });
     }
 
-    private async hasConfig(dir: URL, visited: (dir: URL) => void): Promise<URL | undefined> {
+    private hasConfig(dir: URL, visited: (dir: URL) => void): Promise<URL | undefined> {
         const cached = this.searchDirCache.get(dir.href);
         if (cached) return cached;
         visited(dir);
 
+        const result = this.hasConfigDir(dir);
+        this.searchDirCache.set(dir.href, result);
+        return result;
+    }
+
+    private createHasFileDirSearch(): (file: URL) => Promise<boolean> {
         const dirInfoCache = createAutoResolveCache<Href, Promise<Map<string, VfsDirEntry>>>();
 
         const hasFile = async (filename: URL): Promise<boolean> => {
@@ -91,6 +93,23 @@ export class ConfigSearch {
             return !!found?.isFile();
         };
 
+        return hasFile;
+    }
+
+    private createHasFileStatCheck(): (file: URL) => Promise<boolean> {
+        const hasFile = async (filename: URL): Promise<boolean> => {
+            const stat = await this.fs.stat(filename).catch(() => undefined);
+            return !!stat?.isFile();
+        };
+
+        return hasFile;
+    }
+
+    private async hasConfigDir(dir: URL): Promise<URL | undefined> {
+        const hasFile = this.fs.getCapabilities(dir).readDirectory
+            ? this.createHasFileDirSearch()
+            : this.createHasFileStatCheck();
+
         for (const searchPlace of this.searchPlaces) {
             const file = new URL(searchPlace, dir);
             const found = await hasFile(file);
@@ -103,7 +122,7 @@ export class ConfigSearch {
     }
 }
 
-async function checkPackageJson(fs: FileSystem, filename: URL): Promise<boolean> {
+async function checkPackageJson(fs: VFileSystem, filename: URL): Promise<boolean> {
     try {
         const file = createTextFileResource(await fs.readFile(filename));
         const pkg = JSON.parse(file.getText());

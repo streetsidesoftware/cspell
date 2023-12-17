@@ -1,22 +1,19 @@
 import { parse } from 'comment-json';
-import type { VFileSystemProvider } from 'cspell-io';
-import { createRedirectProvider, createVirtualFS } from 'cspell-io';
 import * as fs from 'fs';
 import * as os from 'os';
 import * as path from 'path';
 import { fileURLToPath, pathToFileURL } from 'url';
-import { afterEach, describe, expect, test } from 'vitest';
+import { describe, expect, test } from 'vitest';
 
 import { pathRepoTestFixturesURL } from '../../test-util/index.mjs';
-import { FileResolver } from './resolveFile.js';
-import { isFileURL, toFilePathOrHref, toURL } from './url.js';
+import { __testing__, resolveFile } from './resolveFileLegacy.js';
+import { toFilePathOrHref } from './url.js';
 
 interface Config {
     import: string[];
 }
 
 const issuesFolderURL = new URL('./issues/', pathRepoTestFixturesURL);
-const notFoundURL = new URL('./not-found/', pathRepoTestFixturesURL);
 
 const defaultConfigFile = require.resolve('@cspell/cspell-bundled-dicts/cspell-default.json');
 const defaultConfigLocation = path.dirname(defaultConfigFile);
@@ -34,19 +31,9 @@ const rr = {
 const oc = expect.objectContaining;
 const sm = expect.stringMatching;
 
+const { isFileURL, tryUrl } = __testing__;
+
 describe('Validate resolveFile', () => {
-    const redirects: [VFileSystemProvider, ...VFileSystemProvider[]] = [
-        createRedirectProvider('google', new URL('https://google.com/'), notFoundURL),
-    ];
-    let vfs = createVirtualFS();
-    vfs.registerFileSystemProvider(...redirects);
-    let resolver = new FileResolver(vfs.fs);
-
-    afterEach(() => {
-        vfs = createVirtualFS();
-        resolver = new FileResolver(vfs.fs);
-    });
-
     interface ResolveFileTest {
         filename: string;
         relativeTo: string | URL;
@@ -68,11 +55,11 @@ describe('Validate resolveFile', () => {
         ${'cspell-ext.json'}                          | ${__dirname}                      | ${'cspell-ext.json'}                               | ${false}
         ${'vitest'}                                   | ${__dirname}                      | ${rr['vitest']}                                    | ${true}
         ${userNotFound}                               | ${__dirname}                      | ${path.resolve(path.join(os.homedir(), notFound))} | ${false}
-        ${'https://google.com/file.txt'}              | ${__dirname}                      | ${'https://google.com/file.txt'}                   | ${false}
-        ${'file.txt'}                                 | ${'https://google.com'}           | ${'https://google.com/file.txt'}                   | ${false}
-        ${'file.txt'}                                 | ${'https://google.com/search'}    | ${'https://google.com/file.txt'}                   | ${false}
-    `('resolveFile $filename rel $relativeTo', async ({ filename, relativeTo, expected, found }: ResolveFileTest) => {
-        const r = await resolver.resolveFile(filename, relativeTo);
+        ${'https://google.com/file.txt'}              | ${__dirname}                      | ${'https://google.com/file.txt'}                   | ${true}
+        ${'file.txt'}                                 | ${'https://google.com'}           | ${'https://google.com/file.txt'}                   | ${true}
+        ${'file.txt'}                                 | ${'https://google.com/search'}    | ${'https://google.com/file.txt'}                   | ${true}
+    `('resolveFile $filename rel $relativeTo', ({ filename, relativeTo, expected, found }: ResolveFileTest) => {
+        const r = resolveFile(filename, relativeTo);
         expect(r.filename).toBe(expected);
         expect(r.found).toBe(found);
     });
@@ -86,8 +73,8 @@ describe('Validate resolveFile', () => {
                 found: true,
             }))
             .map(({ filename, relativeTo, expected, found }) => [filename, relativeTo, expected, found]),
-    )('resolveFile "%s" rel "%s"', async (filename: string, relativeTo: string, expected: string, found: boolean) => {
-        const r = await resolver.resolveFile(filename, relativeTo);
+    )('resolveFile "%s" rel "%s"', (filename: string, relativeTo: string, expected: string, found: boolean) => {
+        const r = resolveFile(filename, relativeTo);
         expect(r.filename).toBe(expected);
         expect(r.found).toBe(found);
     });
@@ -102,7 +89,7 @@ describe('Validate resolveFile', () => {
         ${'@cspell/dict-fr-fr'}                                         | ${new URL('frontend/src/cspell.json', urlIssue5034).href} | ${sm(/cspell-ext\.json$/)}             | ${true}
         ${'@cspell/dict-mnemonics'}                                     | ${new URL('frontend/src/cspell.json', urlIssue5034).href} | ${sm(/cspell-ext\.json$/)}             | ${true}
     `('resolveFile $filename rel $relativeTo', async ({ filename, relativeTo, expected, found }) => {
-        const r = await resolver.resolveFile(filename, toURL(relativeTo));
+        const r = resolveFile(filename, relativeTo);
         expect(r.filename).toEqual(expected);
         expect(r.found).toBe(found);
         expect(r.warning).toBeUndefined();
@@ -116,7 +103,7 @@ describe('Validate resolveFile', () => {
     `(
         'resolveFile $filename rel $relativeTo with warning',
         async ({ filename, relativeTo, expected, found, warning, method }) => {
-            const r = await resolver.resolveFile(filename, relativeTo);
+            const r = resolveFile(filename, relativeTo);
             // console.error('r %o', r);
             expect(r.filename).toEqual(expected);
             expect(r.found).toBe(found);
@@ -140,10 +127,10 @@ describe('Validate resolveFile', () => {
         ${'/User/home'}         | ${import.meta.url}             | ${oc({ filename: r('/User/home'), found: false })}
         ${uh('/User/not-home')} | ${import.meta.url}             | ${oc({ filename: fileURLToPath(u('/User/not-home')), found: false })}
         ${import.meta.url}      | ${import.meta.url}             | ${oc({ filename: toFilePathOrHref(new URL(import.meta.url)), found: true })}
-        ${'file.txt'}           | ${'https://google.com'}        | ${oc({ filename: 'https://google.com/file.txt', found: false })}
+        ${'file.txt'}           | ${'https://google.com'}        | ${oc({ filename: 'https://google.com/file.txt', found: true })}
         ${'@cspell/dict-de-de'} | ${'data:,Hello%2C%20World%21'} | ${undefined}
-    `('tryUrl $url $relativeTo', async ({ url, relativeTo, expected }) => {
-        expect(await resolver.tryUrl(url, relativeTo)).toEqual(expected);
+    `('tryUrl $url $relativeTo', ({ url, relativeTo, expected }) => {
+        expect(tryUrl(url, relativeTo)).toEqual(expected);
     });
 });
 
