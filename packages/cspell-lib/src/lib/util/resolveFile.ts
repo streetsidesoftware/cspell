@@ -10,6 +10,7 @@ import resolveFrom from 'resolve-from';
 import { fileURLToPath } from 'url';
 
 import { srcDirectory } from '../../lib-cjs/pkg-info.cjs';
+import { getFileSystem } from '../fileSystem.js';
 import {
     fileURLOrPathToPath,
     isDataURL,
@@ -20,7 +21,6 @@ import {
     toFileUrl,
     toURL,
 } from './url.js';
-import { getFileSystem } from '../fileSystem.js';
 
 export interface ResolveFileResult {
     /**

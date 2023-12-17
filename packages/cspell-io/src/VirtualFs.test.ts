@@ -5,7 +5,7 @@ import { afterEach, beforeEach, describe, expect, test, vi } from 'vitest';
 import { CFileResource } from './common/index.js';
 import { toFileURL, urlBasename } from './node/file/url.js';
 import { pathToSample as ps } from './test/test.helper.js';
-import type { VFileSystemProvider, VProviderFileSystem, VirtualFS } from './VirtualFS.js';
+import type { VFileSystemProvider, VirtualFS, VProviderFileSystem } from './VirtualFS.js';
 import { createVirtualFS, FSCapabilityFlags, getDefaultVirtualFs, VFSErrorUnsupportedRequest } from './VirtualFS.js';
 
 const sc = expect.stringContaining;

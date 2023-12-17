@@ -1,7 +1,6 @@
 import type { CSpellConfigFile } from 'cspell-config-lib';
 
 import { toError } from '../../../util/errors.js';
-import type { ResolveFileResult } from '../../../util/resolveFile.js';
 import { toFileUrl } from '../../../util/url.js';
 import type { IConfigLoader } from './configLoader.js';
 import { getDefaultConfigLoaderInternal } from './configLoader.js';
