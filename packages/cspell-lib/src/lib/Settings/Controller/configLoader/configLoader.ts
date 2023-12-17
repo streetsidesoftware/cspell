@@ -8,12 +8,12 @@ import { fileURLToPath, pathToFileURL } from 'url';
 import { URI, Utils as UriUtils } from 'vscode-uri';
 
 import { onClearCache } from '../../../events/index.js';
-import type { FileSystem } from '../../../fileSystem.js';
-import { createTextFileResource, getCSpellIO, getVirtualFS } from '../../../fileSystem.js';
+import type { VFileSystem } from '../../../fileSystem.js';
+import { createTextFileResource, getVirtualFS } from '../../../fileSystem.js';
 import { createCSpellSettingsInternal as csi } from '../../../Models/CSpellSettingsInternalDef.js';
 import { AutoResolveCache } from '../../../util/AutoResolve.js';
 import { logError, logWarning } from '../../../util/logger.js';
-import { resolveFile } from '../../../util/resolveFile.js';
+import { FileResolver } from '../../../util/resolveFile.js';
 import {
     addTrailingSlash,
     cwdURL,
@@ -149,14 +149,16 @@ export interface IConfigLoader {
 
 export class ConfigLoader implements IConfigLoader {
     public onReady: Promise<void>;
-    private cspellIO = getCSpellIO();
+    readonly fileResolver: FileResolver;
 
     /**
      * Use `createConfigLoader`
      * @param virtualFs - virtual file system to use.
      */
-    protected constructor(readonly fs: FileSystem) {
+    protected constructor(readonly fs: VFileSystem) {
+        this.configSearch = new ConfigSearch(searchPlaces, fs);
         this.cspellConfigFileReaderWriter = createReaderWriter(undefined, undefined, createIO(fs));
+        this.fileResolver = new FileResolver(fs);
         this.onReady = this.prefetchGlobalSettingsAsync();
         this.subscribeToEvents();
     }
@@ -171,7 +173,7 @@ export class ConfigLoader implements IConfigLoader {
     protected cachedMergedConfig = new WeakMap<CSpellConfigFile, CacheMergeConfigFileWithImports>();
     protected globalSettings: CSpellSettingsI | undefined;
     protected cspellConfigFileReaderWriter: CSpellConfigFileReaderWriter;
-    protected configSearch = new ConfigSearch(searchPlaces);
+    protected configSearch: ConfigSearch;
 
     protected toDispose: { dispose: () => void }[] = [];
 
@@ -181,7 +183,7 @@ export class ConfigLoader implements IConfigLoader {
         pnpSettings?: PnPSettingsOptional,
     ): Promise<CSpellSettingsI> {
         await this.onReady;
-        const ref = resolveFilename(filename, relativeTo || pathToFileURL('./'));
+        const ref = await this.resolveFilename(filename, relativeTo || pathToFileURL('./'));
         const entry = this.importSettings(ref, pnpSettings || defaultPnPSettings, []);
         return entry.onReady;
     }
@@ -190,8 +192,8 @@ export class ConfigLoader implements IConfigLoader {
         filenameOrURL: string | URL,
         relativeTo?: string | URL,
     ): Promise<CSpellConfigFile | Error> {
-        const ref = resolveFilename(filenameOrURL.toString(), relativeTo || pathToFileURL('./'));
-        const url = this.cspellIO.toFileURL(ref.filename);
+        const ref = await this.resolveFilename(filenameOrURL.toString(), relativeTo || pathToFileURL('./'));
+        const url = toFileURL(ref.filename);
         const href = url.href;
         if (ref.error) return new ImportError(`Failed to read config file: "${ref.filename}"`, ref.error);
         const cached = this.cachedConfigFiles.get(href);
@@ -284,7 +286,7 @@ export class ConfigLoader implements IConfigLoader {
         pnpSettings: PnPSettingsOptional | undefined,
         backReferences: string[],
     ): ImportedConfigEntry {
-        const url = this.cspellIO.toFileURL(fileRef.filename);
+        const url = toFileURL(fileRef.filename);
         const cacheKey = url.href;
         const cachedImport = this.cachedConfig.get(cacheKey);
         if (cachedImport) {
@@ -403,7 +405,7 @@ export class ConfigLoader implements IConfigLoader {
         const referencedSet = new Set(referencedBy);
         const imports = normalizeImport(cfgFile.settings.import);
 
-        const __imports = imports.map((name) => resolveFilename(name, cfgFile.url));
+        const __imports = await Promise.all(imports.map((name) => this.resolveFilename(name, cfgFile.url)));
 
         const toImport = __imports.map((ref) => this.importSettings(ref, pnpSettings, [...referencedBy, href]));
 
@@ -420,7 +422,7 @@ export class ConfigLoader implements IConfigLoader {
         });
 
         const importSettings = await Promise.all(pendingImports);
-        const cfg = this.mergeImports(cfgFile, importSettings);
+        const cfg = await this.mergeImports(cfgFile, importSettings);
         return cfg;
     }
 
@@ -429,7 +431,10 @@ export class ConfigLoader implements IConfigLoader {
      * @param rawSettings - raw configuration settings
      * @param pathToSettingsFile - path to the source file of the configuration settings.
      */
-    protected mergeImports(cfgFile: CSpellConfigFile, importedSettings: CSpellUserSettings[]): CSpellSettingsI {
+    protected async mergeImports(
+        cfgFile: CSpellConfigFile,
+        importedSettings: CSpellUserSettings[],
+    ): Promise<CSpellSettingsI> {
         const rawSettings = configToRawSettings(cfgFile);
 
         const url = cfgFile.url;
@@ -449,7 +454,7 @@ export class ConfigLoader implements IConfigLoader {
         const normalizedDictionaryDefs = normalizeDictionaryDefs(settings, url);
         const normalizedSettingsGlobs = normalizeSettingsGlobs(settings, url);
         const normalizedOverrides = normalizeOverrides(settings, url);
-        const normalizedReporters = normalizeReporters(settings, url);
+        const normalizedReporters = await normalizeReporters(settings, url);
         const normalizedGitignoreRoot = normalizeGitignoreRoot(settings, url);
         const normalizedCacheSettings = normalizeCacheSettings(settings, url);
 
@@ -478,7 +483,7 @@ export class ConfigLoader implements IConfigLoader {
     }
 
     createCSpellConfigFile(filename: URL | string, settings: CSpellUserSettings): CSpellConfigFile {
-        return new CSpellConfigFileInMemory(this.cspellIO.toFileURL(filename), settings);
+        return new CSpellConfigFileInMemory(toFileURL(filename), settings);
     }
 
     dispose() {
@@ -494,10 +499,24 @@ export class ConfigLoader implements IConfigLoader {
     getStats() {
         return { ...getMergeStats() };
     }
+
+    private async resolveFilename(filename: string | URL, relativeTo: string | URL): Promise<ImportFileRef> {
+        if (filename instanceof URL) return { filename: toFilePathOrHref(filename) };
+        const r = await this.fileResolver.resolveFile(filename, relativeTo);
+
+        if (r.warning) {
+            logWarning(r.warning);
+        }
+
+        return {
+            filename: r.filename.startsWith('file:/') ? fileURLToPath(r.filename) : r.filename,
+            error: r.found ? undefined : new Error(`Failed to resolve file: "${filename}"`),
+        };
+    }
 }
 
 class ConfigLoaderInternal extends ConfigLoader {
-    constructor(vfs: FileSystem) {
+    constructor(vfs: VFileSystem) {
         super(vfs);
     }
 
@@ -512,20 +531,6 @@ export function loadPnP(pnpSettings: PnPSettingsOptional, searchFrom: URL): Prom
     }
     const loader = pnpLoader(pnpSettings.pnpFiles);
     return loader.load(searchFrom);
-}
-
-function resolveFilename(filename: string | URL, relativeTo: string | URL): ImportFileRef {
-    if (filename instanceof URL) return { filename: toFilePathOrHref(filename) };
-    const r = resolveFile(filename, relativeTo);
-
-    if (r.warning) {
-        logWarning(r.warning);
-    }
-
-    return {
-        filename: r.filename.startsWith('file:/') ? fileURLToPath(r.filename) : r.filename,
-        error: r.found ? undefined : new Error(`Failed to resolve file: "${filename}"`),
-    };
 }
 
 const nestedConfigDirectories: Record<string, true> = {
@@ -590,12 +595,12 @@ function validateRawConfigVersion(config: CSpellConfigFile): void {
     logWarning(validationMessage(msg, config.url));
 }
 
-function createConfigLoaderInternal(vfs?: FileSystem) {
-    return new ConfigLoaderInternal(vfs ?? getVirtualFS().fs);
+function createConfigLoaderInternal(fs?: VFileSystem) {
+    return new ConfigLoaderInternal(fs ?? getVirtualFS().fs);
 }
 
-export function createConfigLoader(vfs?: FileSystem): IConfigLoader {
-    return createConfigLoaderInternal(vfs);
+export function createConfigLoader(fs?: VFileSystem): IConfigLoader {
+    return createConfigLoaderInternal(fs);
 }
 
 export function getDefaultConfigLoaderInternal(): ConfigLoaderInternal {
@@ -604,7 +609,7 @@ export function getDefaultConfigLoaderInternal(): ConfigLoaderInternal {
     return (defaultConfigLoader = createConfigLoaderInternal());
 }
 
-function createIO(fs: FileSystem): IO {
+function createIO(fs: VFileSystem): IO {
     const readFile = (url: URL) =>
         fs.readFile(url).then((file) => ({ url: file.url, content: createTextFileResource(file).getText() }));
     const writeFile = (file: TextFile) => fs.writeFile(file);
@@ -614,7 +619,7 @@ function createIO(fs: FileSystem): IO {
     };
 }
 
-async function isDirectory(fs: FileSystem, path: URL): Promise<boolean> {
+async function isDirectory(fs: VFileSystem, path: URL): Promise<boolean> {
     try {
         return (await fs.stat(path)).isDirectory();
     } catch (e) {

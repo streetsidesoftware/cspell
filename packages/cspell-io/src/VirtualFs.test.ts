@@ -5,7 +5,7 @@ import { afterEach, beforeEach, describe, expect, test, vi } from 'vitest';
 import { CFileResource } from './common/index.js';
 import { toFileURL, urlBasename } from './node/file/url.js';
 import { pathToSample as ps } from './test/test.helper.js';
-import type { FileSystemProvider, ProviderFileSystem, VirtualFS } from './VirtualFS.js';
+import type { VFileSystemProvider, VProviderFileSystem, VirtualFS } from './VirtualFS.js';
 import { createVirtualFS, FSCapabilityFlags, getDefaultVirtualFs, VFSErrorUnsupportedRequest } from './VirtualFS.js';
 
 const sc = expect.stringContaining;
@@ -241,8 +241,8 @@ describe('VirtualFs', () => {
     });
 });
 
-function mockFileSystem(): ProviderFileSystem {
-    const p: ProviderFileSystem = {
+function mockFileSystem(): VProviderFileSystem {
+    const p: VProviderFileSystem = {
         providerInfo: { name: 'mockFileSystemProvider' },
         capabilities: FSCapabilityFlags.Stat | FSCapabilityFlags.ReadWrite | FSCapabilityFlags.ReadDir,
         stat: vi.fn(),
@@ -255,8 +255,8 @@ function mockFileSystem(): ProviderFileSystem {
     return p;
 }
 
-function mockFileSystemProvider(): FileSystemProvider {
-    const p: FileSystemProvider = {
+function mockFileSystemProvider(): VFileSystemProvider {
+    const p: VFileSystemProvider = {
         name: 'mockFileSystemProvider',
         getFileSystem: vi.fn(),
         dispose: vi.fn(),

@@ -61,12 +61,15 @@ export function normalizeOverrides(settings: NormalizeOverrides, pathToSettingsF
     return overrides ? { overrides } : {};
 }
 type NormalizeReporters = Pick<CSpellUserSettings, 'reporters'>;
-export function normalizeReporters(settings: NormalizeReporters, pathToSettingsFile: URL): NormalizeReporters {
+export async function normalizeReporters(
+    settings: NormalizeReporters,
+    pathToSettingsFile: URL,
+): Promise<NormalizeReporters> {
     if (settings.reporters === undefined) return {};
 
-    function resolve(s: string): string {
+    async function resolve(s: string): Promise<string> {
         if (s === 'default') return s;
-        const r = resolveFile(s, pathToSettingsFile);
+        const r = await resolveFile(s, pathToSettingsFile);
         if (!r.found) {
             // console.warn('Not found: %o', { filename: s, relativeTo: pathToSettingsFile.href });
             throw new Error(`Not found: "${s}"`);
@@ -74,18 +77,18 @@ export function normalizeReporters(settings: NormalizeReporters, pathToSettingsF
         return r.filename;
     }
 
-    function resolveReporter(s: ReporterSettings): ReporterSettings {
+    async function resolveReporter(s: ReporterSettings): Promise<ReporterSettings> {
         if (typeof s === 'string') {
             return resolve(s);
         }
         if (!Array.isArray(s) || typeof s[0] !== 'string') throw new Error('Invalid Reporter');
         // Preserve the shape of Reporter Setting while resolving the reporter file.
         const [r, ...rest] = s;
-        return [resolve(r), ...rest];
+        return [await resolve(r), ...rest];
     }
 
     return {
-        reporters: settings.reporters.map(resolveReporter),
+        reporters: await Promise.all(settings.reporters.map(resolveReporter)),
     };
 }
 export function normalizeLanguageSettings(

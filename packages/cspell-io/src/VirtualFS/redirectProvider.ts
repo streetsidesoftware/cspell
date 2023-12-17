@@ -2,19 +2,29 @@ import assert from 'assert';
 
 import { renameFileReference, renameFileResource, urlOrReferenceToUrl } from '../common/index.js';
 import type { DirEntry, FileReference, FileResource } from '../models/index.js';
-import type { FileSystemProvider, ProviderFileSystem } from '../VirtualFS.js';
+import type { VFileSystemProvider, FSCapabilityFlags, VProviderFileSystem } from '../VirtualFS.js';
 import { fsCapabilities, VFSErrorUnsupportedRequest } from '../VirtualFS.js';
 
 type UrlOrReference = URL | FileReference;
 
-class RedirectProvider implements FileSystemProvider {
+export interface RedirectOptions {
+    /**
+     * Option ts to mask the capabilities of the provider.
+     * @default: -1
+     */
+    capabilitiesMask?: number;
+    capabilities?: FSCapabilityFlags;
+}
+
+class RedirectProvider implements VFileSystemProvider {
     constructor(
         readonly name: string,
         readonly publicRoot: URL,
         readonly privateRoot: URL,
+        readonly options: RedirectOptions = { capabilitiesMask: -1 },
     ) {}
 
-    getFileSystem(url: URL, next: (url: URL) => ProviderFileSystem | undefined): ProviderFileSystem | undefined {
+    getFileSystem(url: URL, next: (url: URL) => VProviderFileSystem | undefined): VProviderFileSystem | undefined {
         if (url.protocol !== this.publicRoot.protocol || url.host !== this.publicRoot.host) {
             return undefined;
         }
@@ -26,7 +36,7 @@ class RedirectProvider implements FileSystemProvider {
 
         const shadowFS = next(url);
 
-        return remapFS(this.name, privateFs, shadowFS, this.publicRoot, this.privateRoot);
+        return remapFS(this.name, privateFs, shadowFS, this.publicRoot, this.privateRoot, this.options);
     }
 }
 
@@ -46,12 +56,18 @@ class RedirectProvider implements FileSystemProvider {
  * @param name - name of the provider
  * @param publicRoot - the root of the public file system.
  * @param privateRoot - the root of the private file system.
+ * @param options - options for the provider.
  * @returns FileSystemProvider
  */
-export function createRedirectProvider(name: string, publicRoot: URL, privateRoot: URL): FileSystemProvider {
+export function createRedirectProvider(
+    name: string,
+    publicRoot: URL,
+    privateRoot: URL,
+    options?: RedirectOptions,
+): VFileSystemProvider {
     assert(publicRoot.pathname.endsWith('/'), 'publicRoot must end with a slash');
     assert(privateRoot.pathname.endsWith('/'), 'privateRoot must end with a slash');
-    return new RedirectProvider(name, publicRoot, privateRoot);
+    return new RedirectProvider(name, publicRoot, privateRoot, options);
 }
 
 /**
@@ -66,11 +82,13 @@ export function createRedirectProvider(name: string, publicRoot: URL, privateRoo
  */
 function remapFS(
     name: string,
-    fs: ProviderFileSystem,
-    shadowFs: ProviderFileSystem | undefined,
+    fs: VProviderFileSystem,
+    shadowFs: VProviderFileSystem | undefined,
     publicRoot: URL,
     privateRoot: URL,
-): ProviderFileSystem {
+    options: RedirectOptions,
+): VProviderFileSystem {
+    const { capabilitiesMask = -1, capabilities } = options;
     function mapToPrivate(url: URL): URL {
         const relativePath = url.pathname.slice(publicRoot.pathname.length);
         return new URL(relativePath, privateRoot);
@@ -106,7 +124,7 @@ function remapFS(
         return { ...de, dir };
     };
 
-    const fs2: ProviderFileSystem = {
+    const fs2: VProviderFileSystem = {
         stat: async (url) => {
             const url2 = mapUrlOrReferenceToPrivate(url);
             const stat = await fs.stat(url2);
@@ -130,7 +148,7 @@ function remapFS(
             return mapFileReferenceToPublic(fileRef3);
         },
         providerInfo: { ...fs.providerInfo, name },
-        capabilities: fs.capabilities,
+        capabilities: capabilities ?? fs.capabilities & capabilitiesMask,
         dispose: () => fs.dispose(),
     };
 
@@ -138,11 +156,11 @@ function remapFS(
 }
 
 function fsPassThrough(
-    fs: ProviderFileSystem,
-    shadowFs: ProviderFileSystem | undefined,
+    fs: VProviderFileSystem,
+    shadowFs: VProviderFileSystem | undefined,
     root: URL,
-): ProviderFileSystem {
-    function gfs(ur: UrlOrReference, name: string): ProviderFileSystem {
+): VProviderFileSystem {
+    function gfs(ur: UrlOrReference, name: string): VProviderFileSystem {
         const url = urlOrReferenceToUrl(ur);
         const f = url.href.startsWith(root.href) ? fs : shadowFs;
         if (!f)
@@ -153,7 +171,7 @@ function fsPassThrough(
             );
         return f;
     }
-    const passThroughFs: ProviderFileSystem = {
+    const passThroughFs: VProviderFileSystem = {
         get providerInfo() {
             return fs.providerInfo;
         },

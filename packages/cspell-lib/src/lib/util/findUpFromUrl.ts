@@ -1,9 +1,9 @@
-import type { FileSystem } from '../fileSystem.js';
+import type { VFileSystem } from '../fileSystem.js';
 import { getVirtualFS } from '../fileSystem.js';
 
 type EntryType = 'file' | 'directory' | '!file' | '!directory';
 
-export type FindUpFileSystem = Pick<FileSystem, 'stat'>;
+export type FindUpFileSystem = Pick<VFileSystem, 'stat'>;
 
 export interface FindUpURLOptions {
     type?: EntryType;

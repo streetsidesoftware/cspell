@@ -19,7 +19,7 @@ import type {
 } from '../Models/CSpellSettingsInternalDef.js';
 import { isDictionaryDefinitionInlineInternal } from '../Models/CSpellSettingsInternalDef.js';
 import { AutoResolveWeakCache } from '../util/AutoResolve.js';
-import { resolveFile } from '../util/resolveFile.js';
+import { resolveFile } from '../util/resolveFileLegacy.js';
 import type { RequireOptional, UnionFields } from '../util/types.js';
 import { clean } from '../util/util.js';
 import type { DictionaryReferenceCollection } from './DictionaryReferenceCollection.js';
