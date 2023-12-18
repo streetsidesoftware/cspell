@@ -8,7 +8,8 @@ import { fileURLToPath, pathToFileURL } from 'url';
 import { afterEach, describe, expect, test } from 'vitest';
 
 import { pathRepoTestFixturesURL } from '../../test-util/index.mjs';
-import { FileResolver } from './resolveFile.js';
+import { FileResolver, resolveRelativeTo } from './resolveFile.js';
+import { envToTemplateVars } from './templates.js';
 import { isFileURL, toFilePathOrHref, toURL } from './url.js';
 
 interface Config {
@@ -40,11 +41,11 @@ describe('Validate resolveFile', () => {
     ];
     let vfs = createVirtualFS();
     vfs.registerFileSystemProvider(...redirects);
-    let resolver = new FileResolver(vfs.fs);
+    let resolver = new FileResolver(vfs.fs, envToTemplateVars(process.env));
 
     afterEach(() => {
         vfs = createVirtualFS();
-        resolver = new FileResolver(vfs.fs);
+        resolver = new FileResolver(vfs.fs, envToTemplateVars(process.env));
     });
 
     interface ResolveFileTest {
@@ -144,6 +145,67 @@ describe('Validate resolveFile', () => {
         ${'@cspell/dict-de-de'} | ${'data:,Hello%2C%20World%21'} | ${undefined}
     `('tryUrl $url $relativeTo', async ({ url, relativeTo, expected }) => {
         expect(await resolver.tryUrl(url, relativeTo)).toEqual(expected);
+    });
+});
+
+describe('resolveRelativeTo', () => {
+    test('should resolve a filename to a URL', () => {
+        const filename = '/path/to/file.txt';
+        const relativeTo = 'https://example.com';
+        const result = resolveRelativeTo(filename, relativeTo);
+        expect(result.toString()).toBe('https://example.com/path/to/file.txt');
+    });
+
+    test('should resolve a relative path to a URL', () => {
+        const filename = '../file.txt';
+        const relativeTo = 'https://example.com/path/to/';
+        const result = resolveRelativeTo(filename, relativeTo);
+        expect(result.toString()).toBe('https://example.com/path/file.txt');
+    });
+
+    test('should resolve a URL to a URL', () => {
+        const filename = 'https://example.com/file.txt';
+        const relativeTo = 'https://example.com/path/to/';
+        const result = resolveRelativeTo(filename, relativeTo);
+        expect(result.toString()).toBe('https://example.com/file.txt');
+    });
+
+    test('should resolve a filename with environment variables', () => {
+        const filename = '${env:HOME}/${env:PROJECTS}/cspell/file.txt';
+        const relativeTo = 'https://example.com';
+        const result = resolveRelativeTo(
+            filename,
+            relativeTo,
+            envToTemplateVars({ HOME: '/user', PROJECTS: 'projects' }),
+        );
+        expect(result.toString()).toBe('https://example.com/user/projects/cspell/file.txt');
+    });
+
+    test('resolve a filename with a nested environment variable', () => {
+        const filename = '/${env:OUTSIDE}/cspell/file.txt';
+        const relativeTo = 'https://example.com';
+        const result = resolveRelativeTo(
+            filename,
+            relativeTo,
+            envToTemplateVars({ OUTSIDE: '${env: INSIDE}', INSIDE: '${env:HOME}' }),
+        );
+        expect(result.toString()).toBe('https://example.com/$%7Benv:%20INSIDE%7D/cspell/file.txt');
+    });
+
+    test('should resolve a filename with tilde (~)', () => {
+        const filename = '~/file.txt';
+        const relativeTo = pathToFileURL(import.meta.url);
+        const result = resolveRelativeTo(filename, relativeTo);
+        const absFilename = fileURLToPath(result);
+        expect(absFilename).toBe(path.resolve(os.homedir(), 'file.txt'));
+    });
+
+    test('should resolve a filename `${cwd}`', () => {
+        const filename = '${cwd}/file.txt';
+        const relativeTo = pathToFileURL(import.meta.url);
+        const result = resolveRelativeTo(filename, relativeTo);
+        const absFilename = fileURLToPath(result);
+        expect(absFilename).toBe(path.resolve(process.cwd(), 'file.txt'));
     });
 });
 

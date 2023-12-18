@@ -19,8 +19,9 @@ import type {
 } from '../Models/CSpellSettingsInternalDef.js';
 import { isDictionaryDefinitionInlineInternal } from '../Models/CSpellSettingsInternalDef.js';
 import { AutoResolveWeakCache } from '../util/AutoResolve.js';
-import { resolveFile } from '../util/resolveFileLegacy.js';
+import { resolveRelativeTo } from '../util/resolveFile.js';
 import type { RequireOptional, UnionFields } from '../util/types.js';
+import { toFilePathOrHref } from '../util/url.js';
 import { clean } from '../util/util.js';
 import type { DictionaryReferenceCollection } from './DictionaryReferenceCollection.js';
 import { createDictionaryReferenceCollection } from './DictionaryReferenceCollection.js';
@@ -188,12 +189,12 @@ class _DictionaryDefinitionInternalWithSource implements DictionaryFileDefinitio
         const filePath = fixDicPath(relPath, file);
         const name = determineName(filePath, def);
 
-        const r = resolveFile(filePath, defaultPath);
+        const resolvedPath = toFilePathOrHref(resolveRelativeTo(filePath, defaultPath));
 
         const ddi: DDI = {
             name,
             file: undefined,
-            path: r.filename,
+            path: resolvedPath,
             addWords,
             description,
             dictionaryInformation,

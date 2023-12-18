@@ -14,6 +14,7 @@ import { createCSpellSettingsInternal as csi } from '../../../Models/CSpellSetti
 import { AutoResolveCache } from '../../../util/AutoResolve.js';
 import { logError, logWarning } from '../../../util/logger.js';
 import { FileResolver } from '../../../util/resolveFile.js';
+import { envToTemplateVars } from '../../../util/templates.js';
 import {
     addTrailingSlash,
     cwdURL,
@@ -155,10 +156,13 @@ export class ConfigLoader implements IConfigLoader {
      * Use `createConfigLoader`
      * @param virtualFs - virtual file system to use.
      */
-    protected constructor(readonly fs: VFileSystem) {
+    protected constructor(
+        readonly fs: VFileSystem,
+        readonly templateVariables: Record<string, string> = envToTemplateVars(process.env),
+    ) {
         this.configSearch = new ConfigSearch(searchPlaces, fs);
         this.cspellConfigFileReaderWriter = createReaderWriter(undefined, undefined, createIO(fs));
-        this.fileResolver = new FileResolver(fs);
+        this.fileResolver = new FileResolver(fs, this.templateVariables);
         this.onReady = this.prefetchGlobalSettingsAsync();
         this.subscribeToEvents();
     }

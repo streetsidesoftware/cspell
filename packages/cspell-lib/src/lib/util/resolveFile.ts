@@ -11,6 +11,7 @@ import { fileURLToPath } from 'url';
 
 import { srcDirectory } from '../../lib-cjs/pkg-info.cjs';
 import { getFileSystem } from '../fileSystem.js';
+import { envToTemplateVars, replaceTemplate } from './templates.js';
 import {
     fileURLOrPathToPath,
     isDataURL,
@@ -42,12 +43,17 @@ export interface ResolveFileResult {
 const regExpStartsWidthNodeModules = /^node_modules[/\\]/;
 
 export class FileResolver {
-    constructor(private fs: VFileSystem) {}
+    constructor(
+        private fs: VFileSystem,
+        readonly templateReplacements: Record<string, string>,
+    ) {}
 
     /**
      * Resolve filename to absolute paths.
+     * - Replaces `${env:NAME}` with the value of the environment variable `NAME`.
+     * - Replaces `~` with the user's home directory.
      * It tries to look for local files as well as node_modules
-     * @param filename an absolute path, relative path, `~` path, or a node_module.
+     * @param filename an absolute path, relative path, `~` path, a node_module, or URL.
      * @param relativeTo absolute path
      */
     async resolveFile(filename: string | URL, relativeTo: string | URL): Promise<ResolveFileResult> {
@@ -72,7 +78,7 @@ export class FileResolver {
     }
 
     async _resolveFile(filename: string, relativeTo: string | URL): Promise<ResolveFileResult> {
-        filename = filename.replace(/^~/, os.homedir());
+        filename = patchFilename(filename, this.templateReplacements);
         const steps: {
             filename: string;
             fn: (f: string, r: string | URL) => Promise<ResolveFileResult | undefined> | ResolveFileResult | undefined;
@@ -269,6 +275,39 @@ export class FileResolver {
     };
 }
 
+export function patchFilename(filename: string, templateReplacements: Record<string, string>): string {
+    const defaultReplacements = {
+        cwd: process.cwd(),
+        pathSeparator: path.sep,
+        userHome: os.homedir(),
+    };
+
+    filename = filename.replace(/^~(?=[/\\])/, defaultReplacements.userHome);
+    filename = replaceTemplate(filename, { ...defaultReplacements, ...templateReplacements });
+    return filename;
+}
+
+/**
+ * Resolve filename to a URL
+ * - Replaces `${env:NAME}` with the value of the environment variable `NAME`.
+ * - Replaces `~` with the user's home directory.
+ * It will not resolve Node modules.
+ * @param filename - a filename, path, relative path, or URL.
+ * @param relativeTo - a path, or URL.
+ * @param env - environment variables used to patch the filename.
+ * @returns a URL
+ */
+export function resolveRelativeTo(
+    filename: string | URL,
+    relativeTo: string | URL,
+    templateReplacements = envToTemplateVars(process.env),
+): URL {
+    if (filename instanceof URL) return filename;
+    filename = patchFilename(filename, templateReplacements);
+    const relativeToUrl = toFileUrl(relativeTo);
+    return resolveFileWithURL(filename, relativeToUrl);
+}
+
 function isRelative(filename: string | URL): boolean {
     if (filename instanceof URL) return false;
     if (isURLLike(filename)) return false;
@@ -291,10 +330,10 @@ function pathFromRelativeTo(relativeTo: string | URL): string {
 
 const loaderCache = new WeakMap<VFileSystem, FileResolver>();
 
-export function createFileResolver(fs: VFileSystem): FileResolver {
+export function createFileResolver(fs: VFileSystem, templateVariables = envToTemplateVars(process.env)): FileResolver {
     let loader = loaderCache.get(fs);
     if (!loader) {
-        loader = new FileResolver(fs);
+        loader = new FileResolver(fs, templateVariables);
         loaderCache.set(fs, loader);
     }
     return loader;
