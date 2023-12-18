@@ -276,7 +276,7 @@ export class FileResolver {
 
 export function patchFilename(filename: string, env: Record<string, string | undefined>): string {
     filename = filename.replace(/^~(?=[/\\])/, os.homedir());
-    filename = filename.replace(/\$\{env:([^}]+)\}/g, (match, name) => env[name] || (name in env ? '' : match));
+    filename = filename.replace(/\$\{env:(.*?)\}/g, (match, name) => env[name] || (name in env ? '' : match));
     return filename;
 }
 
