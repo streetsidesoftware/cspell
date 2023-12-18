@@ -11,6 +11,7 @@ import { fileURLToPath } from 'url';
 
 import { srcDirectory } from '../../lib-cjs/pkg-info.cjs';
 import { getFileSystem } from '../fileSystem.js';
+import { envToTemplateVars, replaceTemplate } from './templates.js';
 import {
     fileURLOrPathToPath,
     isDataURL,
@@ -44,7 +45,7 @@ const regExpStartsWidthNodeModules = /^node_modules[/\\]/;
 export class FileResolver {
     constructor(
         private fs: VFileSystem,
-        readonly env: typeof process.env,
+        readonly templateReplacements: Record<string, string>,
     ) {}
 
     /**
@@ -77,7 +78,7 @@ export class FileResolver {
     }
 
     async _resolveFile(filename: string, relativeTo: string | URL): Promise<ResolveFileResult> {
-        filename = patchFilename(filename, this.env);
+        filename = patchFilename(filename, this.templateReplacements);
         const steps: {
             filename: string;
             fn: (f: string, r: string | URL) => Promise<ResolveFileResult | undefined> | ResolveFileResult | undefined;
@@ -274,9 +275,15 @@ export class FileResolver {
     };
 }
 
-export function patchFilename(filename: string, env: Record<string, string | undefined>): string {
-    filename = filename.replace(/^~(?=[/\\])/, os.homedir());
-    filename = filename.replace(/\$\{env:(.*?)\}/g, (match, name) => env[name] || (name in env ? '' : match));
+export function patchFilename(filename: string, templateReplacements: Record<string, string>): string {
+    const defaultReplacements = {
+        cwd: process.cwd(),
+        pathSeparator: path.sep,
+        userHome: os.homedir(),
+    };
+
+    filename = filename.replace(/^~(?=[/\\])/, defaultReplacements.userHome);
+    filename = replaceTemplate(filename, { ...defaultReplacements, ...templateReplacements });
     return filename;
 }
 
@@ -290,9 +297,13 @@ export function patchFilename(filename: string, env: Record<string, string | und
  * @param env - environment variables used to patch the filename.
  * @returns a URL
  */
-export function resolveRelativeTo(filename: string | URL, relativeTo: string | URL, env = process.env): URL {
+export function resolveRelativeTo(
+    filename: string | URL,
+    relativeTo: string | URL,
+    templateReplacements = envToTemplateVars(process.env),
+): URL {
     if (filename instanceof URL) return filename;
-    filename = patchFilename(filename, env);
+    filename = patchFilename(filename, templateReplacements);
     const relativeToUrl = toFileUrl(relativeTo);
     return resolveFileWithURL(filename, relativeToUrl);
 }
@@ -319,10 +330,10 @@ function pathFromRelativeTo(relativeTo: string | URL): string {
 
 const loaderCache = new WeakMap<VFileSystem, FileResolver>();
 
-export function createFileResolver(fs: VFileSystem, env = process.env): FileResolver {
+export function createFileResolver(fs: VFileSystem, templateVariables = envToTemplateVars(process.env)): FileResolver {
     let loader = loaderCache.get(fs);
     if (!loader) {
-        loader = new FileResolver(fs, env);
+        loader = new FileResolver(fs, templateVariables);
         loaderCache.set(fs, loader);
     }
     return loader;
