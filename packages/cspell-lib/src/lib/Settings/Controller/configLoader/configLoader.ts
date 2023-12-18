@@ -158,7 +158,7 @@ export class ConfigLoader implements IConfigLoader {
     protected constructor(readonly fs: VFileSystem) {
         this.configSearch = new ConfigSearch(searchPlaces, fs);
         this.cspellConfigFileReaderWriter = createReaderWriter(undefined, undefined, createIO(fs));
-        this.fileResolver = new FileResolver(fs);
+        this.fileResolver = new FileResolver(fs, process.env);
         this.onReady = this.prefetchGlobalSettingsAsync();
         this.subscribeToEvents();
     }
