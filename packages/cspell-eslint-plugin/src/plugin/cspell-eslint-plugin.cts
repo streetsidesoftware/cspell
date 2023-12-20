@@ -63,7 +63,7 @@ function nullFix(): null {
 function create(context: Rule.RuleContext): Rule.RuleListener {
     const logger = getDefaultLogger();
     const log = logger.log;
-    const options = normalizeOptions(context.options[0], context.cwd);
+    const options = normalizeOptions(context.options[0], context.cwd || context.getCwd());
     const autoFix = options.autoFix;
     isDebugMode = options.debugMode ?? isDebugMode;
     logger.enabled = options.debugMode ?? (logger.enabled || isDebugMode);
@@ -75,7 +75,7 @@ function create(context: Rule.RuleContext): Rule.RuleListener {
         const data = {
             word,
         };
-        const code = context.sourceCode;
+        const code = context.sourceCode || context.getSourceCode();
         const startPos = code.getLocFromIndex(start);
         const endPos = code.getLocFromIndex(end);
         const loc = { start: startPos, end: endPos };
@@ -120,8 +120,9 @@ function create(context: Rule.RuleContext): Rule.RuleListener {
     }
 
     function checkProgram() {
-        const sc = context.sourceCode;
-        const { issues, errors } = spellCheck(context.filename, sc.text, sc.ast, options);
+        const sc = context.sourceCode || context.getSourceCode();
+        if (!sc) return;
+        const { issues, errors } = spellCheck(context.filename || context.getFilename(), sc.text, sc.ast, options);
         if (errors && errors.length) {
             log(
                 'errors: %o',
