@@ -18,6 +18,7 @@ const mockCreateInterface = vi.mocked(readline.createInterface);
 const hideOutput = true;
 
 const projectRoot = pathPackageRoot;
+const repoRoot = Path.join(projectRoot, '../..');
 const projectRootUri = URI.file(projectRoot);
 
 function argv(...args: string[]): string[] {
@@ -38,6 +39,14 @@ function pathSamples(...parts: string[]): string {
 
 function pathFix(...parts: string[]): string {
     return pathRoot('fixtures', ...parts);
+}
+
+function pTestFix(...parts: string[]): string {
+    return Path.join(repoRoot, 'test-fixtures', ...parts);
+}
+
+function pIssues(...parts: string[]): string {
+    return pTestFix('issues', ...parts);
 }
 
 // [message, args, resolve, error, log, info]
@@ -177,6 +186,32 @@ describe('Validate cli', () => {
         ${'typos --show-suggestions'}                  | ${['-r', pathFix('features/typos'), '--no-progress', '--show-suggestions', '**']}              | ${app.CheckFailed} | ${true}  | ${true}  | ${false}
         ${'inline suggest'}                            | ${['-r', pathFix('features/inline-suggest'), '--no-progress', '--show-suggestions', '.']}      | ${app.CheckFailed} | ${true}  | ${true}  | ${false}
         ${'reporter'}                                  | ${['-r', pathFix('features/reporter'), '-c', pathFix('features/reporter/cspell.config.yaml')]} | ${undefined}       | ${false} | ${true}  | ${false}
+        ${'issue-4811'}                                | ${['-r', pIssues('issue-4811'), '--no-progress', '.']}                                         | ${undefined}       | ${true}  | ${false} | ${false}
+    `('app $msg Expect Error: $errorCheck', async ({ testArgs, errorCheck, eError, eLog, eInfo }: TestCase) => {
+        chalk.level = 1;
+        const commander = getCommander();
+        const args = argv(...testArgs);
+        const result = app.run(commander, args);
+        if (!errorCheck) {
+            await expect(result).resolves.toBeUndefined();
+        } else {
+            await expect(result).rejects.toThrow(errorCheck);
+        }
+
+        eError ? expect(error).toHaveBeenCalled() : expect(error).not.toHaveBeenCalled();
+
+        eLog ? expect(log).toHaveBeenCalled() : expect(log).not.toHaveBeenCalled();
+
+        eInfo ? expect(info).toHaveBeenCalled() : expect(info).not.toHaveBeenCalled();
+        expect(captureStdout.text).toMatchSnapshot();
+        expect(logger.normalizedHistory()).toMatchSnapshot();
+        expect(normalizeOutput(captureStderr.text)).toMatchSnapshot();
+    });
+
+    test.each`
+        msg                         | testArgs                                                              | errorCheck   | eError  | eLog     | eInfo
+        ${'issue-4811/#local'}      | ${['-r', pIssues('issue-4811/#local'), '--no-progress', 'README.md']} | ${undefined} | ${true} | ${false} | ${false}
+        ${'issue-4811/*/README.md'} | ${['-r', pIssues('issue-4811'), '--no-progress', '*/README.md']}      | ${undefined} | ${true} | ${false} | ${false}
     `('app $msg Expect Error: $errorCheck', async ({ testArgs, errorCheck, eError, eLog, eInfo }: TestCase) => {
         chalk.level = 1;
         const commander = getCommander();

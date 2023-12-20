@@ -1,0 +1,24 @@
+// `cspell` configuration/settings
+// ref: <https://cspell.org/configuration>
+// v2022.11.25 [rivy]
+{
+	"version": "0.2", // configuration/settings file version
+	"language": "en", // language - current active spelling language
+	"dictionaries": ["typescript", "#local", "jargon"],
+	"dictionaryDefinitions": [
+		{ "name": "#local", "path": "./cspell.dictionaries/#local-project-only.wordlist.txt" },
+		{ "name": "jargon", "path": "./cspell.dictionaries/jargon.wordlist.txt" }
+	],
+	// ignorePaths -  a list of globs to specify which files are to be ignored
+	"ignorePaths": [
+		"{,.,_,#,@}build/**",
+		"{,.,_,#,@}coverage/**",
+		"{,.,_,#,@}target/**",
+		"tests/**/fixtures/**",
+		"vendor/**"
+	],
+	// ignoreWords
+	"ignoreWords": [],
+	// words - list of words to be always considered correct
+	"words": []
+}
