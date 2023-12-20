@@ -102,7 +102,7 @@ exports[`Validate cli > app 'Explicit file://' Expect Error: undefined 3`] = `
 exports[`Validate cli > app 'Explicit not found file://' Expect Error: [Function CheckFailed] 1`] = `[]`;
 
 exports[`Validate cli > app 'Explicit not found file://' Expect Error: [Function CheckFailed] 2`] = `
-"error	Linter: File not found: \\"./fixtures/misc/not-fond.md\\"
+"error	Linter: File not found: "./fixtures/misc/not-fond.md"
 error	 0.00ms skipped X
 error	CSpell: Files checked: 1, Issues found: 0 in 1 files"
 `;
@@ -127,7 +127,7 @@ exports[`Validate cli > app 'LICENSE' Expect Error: undefined 3`] = `
 exports[`Validate cli > app 'bad config' Expect Error: [Function CheckFailed] 1`] = `[]`;
 
 exports[`Validate cli > app 'bad config' Expect Error: [Function CheckFailed] 2`] = `
-"error	Configuration Error: Failed to read config file: \\"./src/app/app.test.ts\\"
+"error	Configuration Error: Failed to read config file: "./src/app/app.test.ts"
 error	CSpell: Files checked: 0, Issues found: 0 in 0 files"
 `;
 
@@ -140,7 +140,7 @@ exports[`Validate cli > app 'check LICENSE' Expect Error: undefined 1`] = `
   "[97mCopyright (c) 2017 Jason Dent[39m",
   "[97m[39m",
   "[97mPermission is hereby granted, free of charge, to any person obtaining a copy[39m",
-  "[97mof this software and associated documentation files (the \\"Software\\"), to deal[39m",
+  "[97mof this software and associated documentation files (the "Software"), to deal[39m",
   "[97min the Software without restriction, including without limitation the rights[39m",
   "[97mto use, copy, modify, merge, publish, distribute, sublicense, and/or sell[39m",
   "[97mcopies of the Software, and to permit persons to whom the Software is[39m",
@@ -149,7 +149,7 @@ exports[`Validate cli > app 'check LICENSE' Expect Error: undefined 1`] = `
   "[97mThe above copyright notice and this permission notice shall be included in all[39m",
   "[97mcopies or substantial portions of the Software.[39m",
   "[97m[39m",
-  "[97mTHE SOFTWARE IS PROVIDED \\"AS IS\\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR[39m",
+  "[97mTHE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR[39m",
   "[97mIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,[39m",
   "[97mFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE[39m",
   "[97mAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER[39m",
@@ -200,7 +200,7 @@ exports[`Validate cli > app 'check missing' Expect Error: [Function CheckFailed]
 exports[`Validate cli > app 'check missing' Expect Error: [Function CheckFailed] 2`] = `
 "log	Check file: ./missing-file.txt
 log	
-error	File not found \\"./missing-file.txt\\""
+error	File not found "./missing-file.txt""
 `;
 
 exports[`Validate cli > app 'check missing' Expect Error: [Function CheckFailed] 3`] = `""`;
@@ -208,7 +208,7 @@ exports[`Validate cli > app 'check missing' Expect Error: [Function CheckFailed]
 exports[`Validate cli > app 'check with spelling errors' Expect Error: [Function CheckFailed] 1`] = `
 [
   "[97m                              [[39m[31mNEDERLANDS[39m[97m][39m",
-  "[97m        U [39m[31mwordt[39m[97m [39m[31mvriendelijk[39m[97m [39m[31mverzocht[39m[97m om dit [39m[31mbestand[39m[97m (\\"README_nl_NL.txt\\")[39m",
+  "[97m        U [39m[31mwordt[39m[97m [39m[31mvriendelijk[39m[97m [39m[31mverzocht[39m[97m om dit [39m[31mbestand[39m[97m ("README_nl_NL.txt")[39m",
   "[97m      te [39m[31mlezen[39m[97m en mee te [39m[31mleveren[39m[97m bij [39m[31miedere[39m[97m [39m[31mkopie[39m[97m van dit [39m[31mtaalhulpbestand[39m[97m.[39m",
   "[97m[39m",
   "[97m1. [39m[31mNaam[39m[97m: [39m[31mNederlandstalige[39m[97m [39m[31mwoordenlijst[39m[97m [39m[31mvoor[39m[97m [39m[31mspellingcontrole[39m[97m - OpenTaal[39m",
@@ -236,7 +236,7 @@ exports[`Validate cli > app 'check with spelling errors' Expect Error: [Function
   "[97m   en het project [39m[31mprofessionaliseren[39m[97m. Uw [39m[31mdonatie[39m[97m is van harte [39m[31mwelkom[39m[97m op[39m",
   "[97m   [39m[31mrekeningnummer[39m[97m 15.62.32.782 t.n.v. [39m[31mStichting[39m[97m OpenTaal. Uw [39m[31mgiften[39m[97m [39m[31mzijn[39m[97m[39m",
   "[97m   [39m[31maftrekbaar[39m[97m van de [39m[31mbelasting[39m[97m. [39m[31mStichting[39m[97m OpenTaal is [39m[31mnamelijk[39m[97m door de[39m",
-  "[97m   [39m[31mBelastingdienst[39m[97m [39m[31merkend[39m[97m als [39m[31mANBI[39m[97m, [39m[31moftewel[39m[97m \\"[39m[31mAlgemeen[39m[97m Nut [39m[31mBeogende[39m[97m [39m[31mInstelling[39m[97m\\".[39m",
+  "[97m   [39m[31mBelastingdienst[39m[97m [39m[31merkend[39m[97m als [39m[31mANBI[39m[97m, [39m[31moftewel[39m[97m "[39m[31mAlgemeen[39m[97m Nut [39m[31mBeogende[39m[97m [39m[31mInstelling[39m[97m".[39m",
   "[97m   Zie: [39m[90mhttp://belastingdienst.nl/anbi/[39m[97m[39m",
   "[97m8. [39m[31mMeedoen[39m[97m: [39m[31mIedereen[39m[97m is [39m[31mwelkom[39m[97m om mee te [39m[31mdoen[39m[97m. Meld [39m[31mfouten[39m[97m, [39m[31mdiscussieer[39m[97m mee op[39m",
   "[97m   de [39m[31mmailinglijst[39m[97m of [39m[31mdraai[39m[97m Harvester. Door bij te [39m[31mdragen[39m[97m aan het project [39m[31mstemt[39m[97m[39m",
@@ -255,7 +255,7 @@ exports[`Validate cli > app 'check with spelling errors' Expect Error: [Function
   "[97m10.Contact: [39m[31mStichting[39m[97m OpenTaal, [39m[90mhttp://www.opentaal.org,[39m[97m [39m[90mbestuur@opentaal.org[39m[97m[39m",
   "[97m_________________________________________________________________________________[39m",
   "[97m                                [ENGLISH][39m",
-  "[97m        You are kindly requested to read this file \\"README_nl_NL.txt\\"[39m",
+  "[97m        You are kindly requested to read this file "README_nl_NL.txt"[39m",
   "[97m     and to keep a copy of it with every copy you make of this language file.[39m",
   "[97m[39m",
   "[97m1. Name: Dutch word list for spell checking - OpenTaal[39m",
@@ -328,7 +328,7 @@ exports[`Validate cli > app 'cspell-bad.json' Expect Error: undefined 3`] = `
 exports[`Validate cli > app 'cspell-import-missing.json' Expect Error: [Function CheckFailed] 1`] = `[]`;
 
 exports[`Validate cli > app 'cspell-import-missing.json' Expect Error: [Function CheckFailed] 2`] = `
-"error	Configuration Error: Failed to resolve file: \\"../intentionally-missing-file.json\\"
+"error	Configuration Error: Failed to resolve file: "../intentionally-missing-file.json"
 error	CSpell: Files checked: 0, Issues found: 0 in 0 files"
 `;
 
@@ -492,20 +492,20 @@ exports[`Validate cli > app 'no-args' Expect Error: 'outputHelp' 1`] = `
   "",
   "Patterns:",
   " - [globs...]            Glob Patterns",
-  " - [stdin]               Read from \\"stdin\\" assume text file.",
-  " - [stdin://<path>]      Read from \\"stdin\\", use <path> for file type and config.",
+  " - [stdin]               Read from "stdin" assume text file.",
+  " - [stdin://<path>]      Read from "stdin", use <path> for file type and config.",
   " - [file://<path>]       Check the file at <path>",
   "",
   "Examples:",
   "    cspell .                        Recursively check all files.",
-  "    cspell lint .                   The same as \\"cspell .\\"",
-  "    cspell \\"*.js\\"                   Check all .js files in the current directory",
-  "    cspell \\"**/*.js\\"                Check all .js files recursively",
-  "    cspell \\"src/**/*.js\\"            Only check .js under src",
-  "    cspell \\"**/*.txt\\" \\"**/*.js\\"     Check both .js and .txt files.",
-  "    cspell \\"**/*.{txt,js,md}\\"       Check .txt, .js, and .md files.",
+  "    cspell lint .                   The same as "cspell ."",
+  "    cspell "*.js"                   Check all .js files in the current directory",
+  "    cspell "**/*.js"                Check all .js files recursively",
+  "    cspell "src/**/*.js"            Only check .js under src",
+  "    cspell "**/*.txt" "**/*.js"     Check both .js and .txt files.",
+  "    cspell "**/*.{txt,js,md}"       Check .txt, .js, and .md files.",
   "    cat LICENSE | cspell stdin      Check stdin",
-  "    cspell stdin://docs/doc.md      Check stdin as if it was \\"./docs/doc.md\\"",
+  "    cspell stdin://docs/doc.md      Check stdin as if it was "./docs/doc.md"",
   "",
   "Check spelling",
   "",
@@ -514,10 +514,10 @@ exports[`Validate cli > app 'no-args' Expect Error: 'outputHelp' 1`] = `
   "                               looks for cspell.json in the current directory.",
   "  -v, --verbose                Display more information about the files being",
   "                               checked and the configuration.",
-  "  --locale <locale>            Set language locales. i.e. \\"en,fr\\" for English",
-  "                               and French, or \\"en-GB\\" for British English.",
+  "  --locale <locale>            Set language locales. i.e. "en,fr" for English",
+  "                               and French, or "en-GB" for British English.",
   "  --language-id <language>     Force programming language for unknown",
-  "                               extensions. i.e. \\"php\\" or \\"scala\\"",
+  "                               extensions. i.e. "php" or "scala"",
   "  --words-only                 Only output the words not found in the",
   "                               dictionaries.",
   "  -u, --unique                 Only output the first instance of a word not",
@@ -546,9 +546,9 @@ exports[`Validate cli > app 'no-args' Expect Error: 'outputHelp' 1`] = `
   "  --no-cache                   Do not use cache.",
   "  --cache-reset                Reset the cache file.",
   "  --cache-strategy <strategy>  Strategy to use for detecting changed files.",
-  "                               (choices: \\"metadata\\", \\"content\\")",
+  "                               (choices: "metadata", "content")",
   "  --cache-location <path>      Path to the cache file or directory. (default:",
-  "                               \\".cspellcache\\")",
+  "                               ".cspellcache")",
   "  --dot                        Include files and directories starting with \`.\`",
   "                               (period) when matching globs.",
   "  --gitignore                  Ignore files matching glob patterns found in",
@@ -569,9 +569,9 @@ exports[`Validate cli > app 'no-args' Expect Error: 'outputHelp' 1`] = `
   "",
   "More Examples:",
   "",
-  "    cspell \\"**/*.js\\" --reporter @cspell/cspell-json-reporter",
-  "        This will spell check all \\".js\\" files recursively and use",
-  "        \\"@cspell/cspell-json-reporter\\".",
+  "    cspell "**/*.js" --reporter @cspell/cspell-json-reporter",
+  "        This will spell check all ".js" files recursively and use",
+  "        "@cspell/cspell-json-reporter".",
   "",
   "    cspell . --reporter default",
   "        This will force the default reporter to be used overriding",
@@ -602,17 +602,17 @@ exports[`Validate cli > app 'reporter' Expect Error: undefined 1`] = `[]`;
 
 exports[`Validate cli > app 'reporter' Expect Error: undefined 2`] = `
 "log	{
-log	    \\"issues\\": [],
-log	    \\"info\\": [],
-log	    \\"debug\\": [],
-log	    \\"error\\": [],
-log	    \\"progress\\": [],
-log	    \\"result\\": {
-log	        \\"files\\": 2,
-log	        \\"filesWithIssues\\": [],
-log	        \\"issues\\": 0,
-log	        \\"errors\\": 0,
-log	        \\"cachedFiles\\": 0
+log	    "issues": [],
+log	    "info": [],
+log	    "debug": [],
+log	    "error": [],
+log	    "progress": [],
+log	    "result": {
+log	        "files": 2,
+log	        "filesWithIssues": [],
+log	        "issues": 0,
+log	        "errors": 0,
+log	        "cachedFiles": 0
 log	    }
 log	}"
 `;
@@ -927,16 +927,16 @@ exports[`Validate cli > app 'trace help' Expect Error: 'outputHelp' 1`] = `
   "Options:",
   "  -c, --config <cspell.json>  Configuration file to use.  By default cspell",
   "                              looks for cspell.json in the current directory.",
-  "  --locale <locale>           Set language locales. i.e. \\"en,fr\\" for English",
-  "                              and French, or \\"en-GB\\" for British English.",
-  "  --language-id <language>    Use programming language. i.e. \\"php\\" or \\"scala\\".",
+  "  --locale <locale>           Set language locales. i.e. "en,fr" for English",
+  "                              and French, or "en-GB" for British English.",
+  "  --language-id <language>    Use programming language. i.e. "php" or "scala".",
   "  --allow-compound-words      Turn on allowCompoundWords",
   "  --no-allow-compound-words   Turn off allowCompoundWords",
   "  --ignore-case               Ignore case and accents when searching for words.",
   "  --no-ignore-case            Do not ignore case and accents when searching for",
   "                              words.",
   "  --dictionary-path <format>  Configure how to display the dictionary path.",
-  "                              (choices: \\"hide\\", \\"short\\", \\"long\\", \\"full\\",",
+  "                              (choices: "hide", "short", "long", "full",",
   "                              default: Display most of the path.)",
   "  --stdin                     Read words from stdin.",
   "  --all                       Show all dictionaries.",
@@ -2031,11 +2031,11 @@ exports[`Validate cli > app suggest [ 'sug' ] 1`] = `
   "  -c, --config <cspell.json>            Configuration file to use.  By default",
   "                                        cspell looks for cspell.json in the",
   "                                        current directory.",
-  "  --locale <locale>                     Set language locales. i.e. \\"en,fr\\" for",
-  "                                        English and French, or \\"en-GB\\" for",
+  "  --locale <locale>                     Set language locales. i.e. "en,fr" for",
+  "                                        English and French, or "en-GB" for",
   "                                        British English.",
-  "  --language-id <language>              Use programming language. i.e. \\"php\\" or",
-  "                                        \\"scala\\".",
+  "  --language-id <language>              Use programming language. i.e. "php" or",
+  "                                        "scala".",
   "  -s, --no-strict                       Ignore case and accents when searching",
   "                                        for words.",
   "  --ignore-case                         Alias of --no-strict.",
@@ -2136,7 +2136,7 @@ exports[`Validate cli > app suggest [ 'sug', 'mexico', '-d=en-us' ] 1`] = `[]`;
 
 exports[`Validate cli > app suggest [ 'sug', 'mexico', '-d=en-us' ] 2`] = `""`;
 
-exports[`Validate cli > app suggest [ 'sug', 'mexico', '-d=en-us' ] 3`] = `"Unknown dictionary: \\"en-us\\""`;
+exports[`Validate cli > app suggest [ 'sug', 'mexico', '-d=en-us' ] 3`] = `"Unknown dictionary: "en-us""`;
 
 exports[`Validate cli > app suggest [ Array(5) ] 1`] = `[]`;
 
