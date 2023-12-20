@@ -121,6 +121,7 @@ function create(context: Rule.RuleContext): Rule.RuleListener {
 
     function checkProgram() {
         const sc = context.sourceCode;
+        if (!sc) return;
         const { issues, errors } = spellCheck(context.filename, sc.text, sc.ast, options);
         if (errors && errors.length) {
             log(
