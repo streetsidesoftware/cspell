@@ -100,32 +100,23 @@ export function from(uri: Uri, ...parts: Partial<Uri>[]): UriInstance {
 
 const keys: readonly (keyof Uri)[] = ['scheme', 'authority', 'path', 'query', 'fragment'] as const;
 
-class UriImpl implements UriInstance {
-    readonly scheme: string;
-    readonly authority?: string;
-    readonly path: string;
-    readonly query?: string;
-    readonly fragment?: string;
-
-    constructor(uri: PartialWithUndefined<Uri>) {
-        this.scheme = uri.scheme || '';
-        uri.authority && (this.authority = uri.authority);
-        this.path = uri.path || '';
-        uri.query && (this.query = uri.query);
-        uri.fragment && (this.fragment = uri.fragment);
+class UriImpl extends URI implements UriInstance {
+    constructor(uri: Uri) {
+        super(uri.scheme, uri.authority, uri.path, uri.query, uri.fragment);
     }
 
     toString(): string {
-        const path = this.path;
+        // if (this.scheme !== 'stdin') return super.toString(true);
+        const path = (this.path || '').split('/').map(encodeURIComponent).join('/').replace(/%3A/g, ':');
         const base = `${this.scheme}://${this.authority || ''}${path}`;
         const query = (this.query && `?${this.query}`) || '';
         const fragment = (this.fragment && `#${this.fragment}`) || '';
         const url = base + query + fragment;
 
-        return encodeURI(url);
+        return url;
     }
 
-    toJson(): PartialWithUndefined<Uri> {
+    toJson() {
         const { scheme, authority, path, query, fragment } = this;
         return { scheme, authority, path, query, fragment };
     }
@@ -201,10 +192,6 @@ function parseStdinUri(uri: string): Uri {
         fragment: decodeURI(hash),
     };
 }
-
-type PartialWithUndefined<T> = {
-    [P in keyof T]?: T[P] | undefined;
-};
 
 export const __testing__ = {
     UriImpl,

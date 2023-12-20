@@ -5,7 +5,7 @@ import * as path from 'path';
 import { pathToFileURL } from 'url';
 import { describe, expect, test } from 'vitest';
 
-import { pathPackageFixtures, pathPackageRoot } from '../../test-util/test.locations.cjs';
+import { pathPackageFixtures, pathPackageRoot, pathRepoTestFixtures } from '../../test-util/test.locations.cjs';
 import type { TextDocument } from '../Models/TextDocument.js';
 import { createTextDocument } from '../Models/TextDocument.js';
 import type { ValidationIssue } from '../Models/ValidationIssue.js';
@@ -145,6 +145,22 @@ describe('docValidator', () => {
         },
     );
 
+    test.each`
+        filename                                      | maxDuplicateProblems | expectedIssues | expectedRawIssues
+        ${tFix('issues/issue-4811/#local/README.md')} | ${undefined}         | ${[]}          | ${undefined}
+    `(
+        'checkDocument $filename $maxDuplicateProblems',
+        async ({ filename, maxDuplicateProblems, expectedIssues, expectedRawIssues }) => {
+            const doc = await loadDoc(filename);
+            const dVal = new DocumentValidator(doc, { generateSuggestions: false }, { maxDuplicateProblems });
+            await dVal.prepare();
+            const r = dVal.checkDocument();
+
+            expect(r.map((issue) => issue.text)).toEqual(expectedIssues);
+            expect(extractRawText(doc.text, r)).toEqual(expectedRawIssues ?? expectedIssues);
+        },
+    );
+
     function mkI(text: string, ...sug: string[]) {
         return { text, suggestionsEx: sug.map((word) => ({ word, isPreferred: true })) };
     }
@@ -270,6 +286,10 @@ function loadDoc(filename: string) {
 
 function fix(...fixtureFile: string[]): string {
     return path.resolve(path.join(fixturesDir, 'docValidator'), ...fixtureFile);
+}
+
+function tFix(...fixtureFile: string[]): string {
+    return path.resolve(pathRepoTestFixtures, ...fixtureFile);
 }
 
 function fixDict(...fixtureFile: string[]): string {
