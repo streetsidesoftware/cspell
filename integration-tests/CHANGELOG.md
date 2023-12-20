@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 8.2.0 (2023-12-20)
+
+**Note:** Version bump only for package cspell-integration-tests
+
 ## 8.1.3 (2023-12-06)
 
 ### Bug Fixes
