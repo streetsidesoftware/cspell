@@ -77,7 +77,7 @@ describe('Uri', () => {
         ${toUri('file:///d:/a/src files/sample.c').toString()}                                     | ${new URL('file:///d:/a/src files/sample.c').toString()}
         ${toUri('https://g.com/maps?lat=43.23&lon=-0.5#first').toString()}                         | ${new URL('https://g.com/maps?lat=43.23&lon=-0.5#first').toString()}
         ${uriToFilePath(fromFilePath(__filename))}                                                 | ${eqCI(__filename)}
-        ${uriToFilePath(fromFilePath(pTestFixtures('issues/issue-4811/#local/README.md')))}        | ${normalizePath(pTestFixtures('issues/issue-4811/#local/README.md'))}
+        ${uriToFilePath(fromFilePath(pTestFixtures('issues/issue-4811/#local/README.md')))}        | ${normalizeDriveLetter(pTestFixtures('issues/issue-4811/#local/README.md'))}
         ${urlFile(pTestFixtures('issues/issue-4811/#local/README.md')).href}                       | ${sc('/%23local/README.md')}
         ${URI.parse(urlFile(pTestFixtures('issues/issue-4811/#local/README.md')).href).toString()} | ${sc('/%23local/README.md')}
         ${URI.file(pTestFixtures('issues/issue-4811/#local/README.md')).toString()}                | ${sc('/%23local/README.md')}
