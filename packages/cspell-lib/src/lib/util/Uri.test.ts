@@ -80,6 +80,7 @@ describe('Uri', () => {
         ${uriToFilePath(fromFilePath(__filename))}                                                 | ${eqCI(__filename)}
         ${uriToFilePath(fromFilePath(pTestFixtures('issues/issue-4811/@local?/README.md')))}       | ${normalizeDriveLetter(pTestFixtures('issues/issue-4811/@local?/README.md'))}
         ${uriToFilePath(fromFilePath(pTestFixtures('issues/issue-4811/#local/README.md')))}        | ${normalizeDriveLetter(pTestFixtures('issues/issue-4811/#local/README.md'))}
+        ${uriToFilePath(fromFilePath(pTestFixtures('issues/issue-4811/#+,=&@;?v/README.md')))}     | ${normalizeDriveLetter(pTestFixtures('issues/issue-4811/#+,=&@;?v/README.md'))}
         ${urlFile(pTestFixtures('issues/issue-4811/#local/README.md')).href}                       | ${sc('/%23local/README.md')}
         ${URI.parse(urlFile(pTestFixtures('issues/issue-4811/#local/README.md')).href).toString()} | ${sc('/%23local/README.md')}
         ${URI.file(pTestFixtures('issues/issue-4811/#local/README.md')).toString()}                | ${sc('/%23local/README.md')}
