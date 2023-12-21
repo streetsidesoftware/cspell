@@ -47,9 +47,9 @@ export function generateReport(data: ReportData): Report {
     function relative(uri: string) {
         if (uri.startsWith(rootUri)) {
             const r = uri.slice(rootUri.length);
-            return decodeURI(r.startsWith('/') ? r.slice(1) : r);
+            return decodeURIComponent(r.startsWith('/') ? r.slice(1) : r);
         }
-        return decodeURI(uri);
+        return decodeURIComponent(uri);
     }
     issues.forEach((issue) => {
         const uri = issue.uri || '';

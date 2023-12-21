@@ -146,8 +146,9 @@ describe('docValidator', () => {
     );
 
     test.each`
-        filename                                      | maxDuplicateProblems | expectedIssues | expectedRawIssues
-        ${tFix('issues/issue-4811/#local/README.md')} | ${undefined}         | ${[]}          | ${undefined}
+        filename                                         | maxDuplicateProblems | expectedIssues   | expectedRawIssues
+        ${tFix('issues/issue-4811/#local/README.md')}    | ${undefined}         | ${[]}            | ${undefined}
+        ${tFix('issues/issue-4811/#local/version@2.md')} | ${undefined}         | ${['marrkdown']} | ${undefined /* cspell:disable-line */}
     `(
         'checkDocument $filename $maxDuplicateProblems',
         async ({ filename, maxDuplicateProblems, expectedIssues, expectedRawIssues }) => {
