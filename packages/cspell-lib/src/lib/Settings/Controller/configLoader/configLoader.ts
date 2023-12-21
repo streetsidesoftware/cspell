@@ -506,6 +506,8 @@ export class ConfigLoader implements IConfigLoader {
 
     private async resolveFilename(filename: string | URL, relativeTo: string | URL): Promise<ImportFileRef> {
         if (filename instanceof URL) return { filename: toFilePathOrHref(filename) };
+        if (isUrlLike(filename)) return { filename: toFilePathOrHref(filename) };
+
         const r = await this.fileResolver.resolveFile(filename, relativeTo);
 
         if (r.warning) {

@@ -83,7 +83,7 @@ export class FileResolver {
             filename: string;
             fn: (f: string, r: string | URL) => Promise<ResolveFileResult | undefined> | ResolveFileResult | undefined;
         }[] = [
-            { filename, fn: this.tryUrl },
+            { filename, fn: this.tryUrlRel },
             { filename, fn: this.tryCreateRequire },
             { filename, fn: this.tryNodeRequireResolve },
             { filename, fn: this.tryImportResolve },
@@ -125,7 +125,7 @@ export class FileResolver {
      * @param filename - url string
      * @returns ResolveFileResult
      */
-    tryUrl = async (filename: string, relativeToURL: string | URL): Promise<ResolveFileResult | undefined> => {
+    tryUrlRel = async (filename: string, relativeToURL: string | URL): Promise<ResolveFileResult | undefined> => {
         if (isURLLike(filename)) {
             const fileURL = toURL(filename);
             return {
@@ -136,6 +136,28 @@ export class FileResolver {
             };
         }
 
+        if (isRelative(filename) && isURLLike(relativeToURL) && !isDataURL(relativeToURL)) {
+            const relToURL = toURL(relativeToURL);
+            const url = resolveFileWithURL(filename, relToURL);
+            return {
+                filename: toFilePathOrHref(url),
+                relativeTo: toFilePathOrHref(relToURL),
+                found: await this.doesExist(url),
+                method: 'tryUrl',
+            };
+        }
+
+        return undefined;
+    };
+
+    /**
+     * Check to see if it is a URL.
+     * Note: URLs are absolute!
+     * If relativeTo is a non-file URL, then it will try to resolve the filename relative to it.
+     * @param filename - url string
+     * @returns ResolveFileResult
+     */
+    tryUrl = async (filename: string, relativeToURL: string | URL): Promise<ResolveFileResult | undefined> => {
         if (isURLLike(relativeToURL) && !isDataURL(relativeToURL)) {
             const relToURL = toURL(relativeToURL);
             const url = resolveFileWithURL(filename, relToURL);

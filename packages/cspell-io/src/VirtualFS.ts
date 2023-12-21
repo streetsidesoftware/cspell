@@ -16,6 +16,8 @@ type UrlOrReference = URL | FileReference;
 
 type NextProvider = (url: URL) => VProviderFileSystem | undefined;
 
+const debug = false;
+
 export interface VirtualFS extends Disposable {
     registerFileSystemProvider(provider: VFileSystemProvider, ...providers: VFileSystemProvider[]): Disposable;
     /**
@@ -32,6 +34,13 @@ export interface VirtualFS extends Disposable {
      * Clear the cache of file systems.
      */
     reset(): void;
+
+    /**
+     * Indicates that logging has been enabled.
+     */
+    loggingEnabled: boolean;
+
+    enableLogging(value?: boolean): void;
 }
 
 export enum FSCapabilityFlags {
@@ -131,10 +140,26 @@ class CVirtualFS implements VirtualFS {
     private cachedFs = new Map<string, WrappedProviderFs>();
     private revCacheFs = new Map<VFileSystemProvider, Set<string>>();
     readonly fs: Required<VFileSystem>;
+    loggingEnabled = debug;
 
     constructor() {
         this.fs = fsPassThrough((url) => this._getFS(url));
     }
+
+    enableLogging(value?: boolean | undefined): void {
+        this.loggingEnabled = value ?? true;
+    }
+
+    log = console.log;
+    logEvent = (event: LogEvent) => {
+        if (this.loggingEnabled) {
+            const id = event.traceID.toFixed(13).replace(/\d{4}(?=\d)/g, '$&.');
+            const msg = event.message ? `\n\t\t${event.message}` : '';
+            this.log(
+                `${event.method}-${event.event}\t ID:${id} ts:${event.ts.toFixed(13)} ${chopUrl(event.url)}${msg}`,
+            );
+        }
+    };
 
     registerFileSystemProvider(...providers: VFileSystemProvider[]): Disposable {
         providers.forEach((provider) => this.providers.add(provider));
@@ -190,7 +215,7 @@ class CVirtualFS implements VirtualFS {
             next = fnNext(provider, next);
         }
 
-        const fs = new WrappedProviderFs(next(url));
+        const fs = new WrappedProviderFs(next(url), this.logEvent);
         this.cachedFs.set(key, fs);
         return fs;
     }
@@ -361,16 +386,48 @@ export function fsCapabilities(flags: FSCapabilityFlags): FSCapabilities {
     return new CFsCapabilities(flags);
 }
 
+type EventMethods = 'stat' | 'readFile' | 'writeFile' | 'readDir';
+type LogEvents = 'start' | 'end' | 'error' | 'other';
+
+interface LogEvent {
+    /**
+     * The request method
+     */
+    method: EventMethods;
+    event: LogEvents;
+    message?: string | undefined;
+    /**
+     * The trace id can be used to link request and response events.
+     * The trace id is unique for a given request.
+     */
+    traceID: number;
+    /**
+     * The request url
+     */
+    url?: URL | undefined;
+    /**
+     * The time in milliseconds, see `performance.now()`
+     */
+    ts: number;
+}
+
 class WrappedProviderFs implements VFileSystem {
     readonly hasProvider: boolean;
     readonly capabilities: FSCapabilityFlags;
     readonly providerInfo: FileSystemProviderInfo;
     private _capabilities: FSCapabilities;
-    constructor(private readonly fs: VProviderFileSystem | undefined) {
+    constructor(
+        private readonly fs: VProviderFileSystem | undefined,
+        readonly eventLogger: (event: LogEvent) => void,
+    ) {
         this.hasProvider = !!fs;
         this.capabilities = fs?.capabilities || FSCapabilityFlags.None;
         this._capabilities = fsCapabilities(this.capabilities);
         this.providerInfo = fs?.providerInfo || { name: 'unknown' };
+    }
+
+    private logEvent(method: EventMethods, event: LogEvents, traceID: number, url: URL, message?: string): void {
+        this.eventLogger({ method, event, url, traceID, ts: performance.now(), message });
     }
 
     getCapabilities(url: URL): FSCapabilities {
@@ -379,51 +436,62 @@ class WrappedProviderFs implements VFileSystem {
         return this._capabilities;
     }
 
-    async stat(url: UrlOrReference): Promise<VfsStat> {
+    async stat(urlRef: UrlOrReference): Promise<VfsStat> {
+        const traceID = performance.now();
+        const url = urlOrReferenceToUrl(urlRef);
+        this.logEvent('stat', 'start', traceID, url);
         try {
-            checkCapabilityOrThrow(
-                this.fs,
-                this.capabilities,
-                FSCapabilityFlags.Stat,
-                'stat',
-                urlOrReferenceToUrl(url),
-            );
-            return new CVfsStat(await this.fs.stat(url));
+            checkCapabilityOrThrow(this.fs, this.capabilities, FSCapabilityFlags.Stat, 'stat', url);
+            return new CVfsStat(await this.fs.stat(urlRef));
         } catch (e) {
+            this.logEvent('stat', 'error', traceID, url, e instanceof Error ? e.message : '');
             throw wrapError(e);
+        } finally {
+            this.logEvent('stat', 'end', traceID, url);
         }
     }
 
-    async readFile(url: UrlOrReference, encoding?: BufferEncoding): Promise<TextFileResource> {
+    async readFile(urlRef: UrlOrReference, encoding?: BufferEncoding): Promise<TextFileResource> {
+        const traceID = performance.now();
+        const url = urlOrReferenceToUrl(urlRef);
+        this.logEvent('readFile', 'start', traceID, url);
         try {
-            checkCapabilityOrThrow(
-                this.fs,
-                this.capabilities,
-                FSCapabilityFlags.Read,
-                'readFile',
-                urlOrReferenceToUrl(url),
-            );
-            return createTextFileResource(await this.fs.readFile(url), encoding);
+            checkCapabilityOrThrow(this.fs, this.capabilities, FSCapabilityFlags.Read, 'readFile', url);
+            return createTextFileResource(await this.fs.readFile(urlRef), encoding);
         } catch (e) {
+            this.logEvent('readFile', 'error', traceID, url, e instanceof Error ? e.message : '');
             throw wrapError(e);
+        } finally {
+            this.logEvent('readFile', 'end', traceID, url);
         }
     }
 
     async readDirectory(url: URL): Promise<VfsDirEntry[]> {
+        const traceID = performance.now();
+        this.logEvent('readDir', 'start', traceID, url);
         try {
             checkCapabilityOrThrow(this.fs, this.capabilities, FSCapabilityFlags.ReadDir, 'readDirectory', url);
             return (await this.fs.readDirectory(url)).map((e) => new CVfsDirEntry(e));
         } catch (e) {
+            this.logEvent('readDir', 'error', traceID, url, e instanceof Error ? e.message : '');
             throw wrapError(e);
+        } finally {
+            this.logEvent('readDir', 'end', traceID, url);
         }
     }
 
     async writeFile(file: FileResource): Promise<FileReference> {
+        const traceID = performance.now();
+        const url = file.url;
+        this.logEvent('writeFile', 'start', traceID, url);
         try {
             checkCapabilityOrThrow(this.fs, this.capabilities, FSCapabilityFlags.Write, 'writeFile', file.url);
             return await this.fs.writeFile(file);
         } catch (e) {
+            this.logEvent('writeFile', 'error', traceID, url, e instanceof Error ? e.message : '');
             throw wrapError(e);
+        } finally {
+            this.logEvent('writeFile', 'end', traceID, url);
         }
     }
 
@@ -509,4 +577,16 @@ class CVfsDirEntry extends CFileType implements VfsDirEntry {
         this._url = new URL(this.entry.name, this.entry.dir);
         return this._url;
     }
+}
+
+function chopUrl(url: URL | undefined): string {
+    if (!url) return '';
+    const href = url.href;
+    const parts = href.split('/');
+    const n = parts.indexOf('node_modules');
+    if (n > 0) {
+        const tail = parts.slice(Math.max(parts.length - 3, n + 1));
+        return parts.slice(0, n + 1).join('/') + '/.../' + tail.join('/');
+    }
+    return href;
 }

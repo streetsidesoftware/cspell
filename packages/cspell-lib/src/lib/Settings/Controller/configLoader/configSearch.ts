@@ -82,6 +82,15 @@ export class ConfigSearch {
 
         const hasFile = async (filename: URL): Promise<boolean> => {
             const dir = new URL('.', filename);
+            const parent = new URL('..', dir);
+            const parentHref = parent.href;
+            const parentInfoP = dirInfoCache.get(parentHref);
+            if (parentInfoP) {
+                const parentInfo = await parentInfoP;
+                const name = urlBasename(dir).slice(0, -1);
+                const found = parentInfo.get(name);
+                if (!found?.isDirectory()) return false;
+            }
             const dirUrlHref = dir.href;
             const dirInfo = await dirInfoCache.get(
                 dirUrlHref,
@@ -131,11 +140,3 @@ async function checkPackageJson(fs: VFileSystem, filename: URL): Promise<boolean
         return false;
     }
 }
-
-// async function isDirectory(virtualFs: VirtualFS, path: URL): Promise<boolean> {
-//     try {
-//         return (await virtualFs.fs.stat(path)).isDirectory();
-//     } catch (e) {
-//         return false;
-//     }
-// }
