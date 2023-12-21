@@ -3,6 +3,7 @@ import { readLines } from './util/fileReader.js';
 import { concatIterables, toIterableIterator } from './util/iterableIteratorLib.js';
 import { logError } from './util/logger.js';
 import * as Text from './util/text.js';
+import { toFileUrl } from './util/url.js';
 
 const regExpWordsWithSpaces = /^\s*\p{L}+(?:\s+\p{L}+){0,3}$/u;
 
@@ -17,7 +18,8 @@ export type WordSet = Set<string>;
  * @param filename the file to read
  */
 export function loadWordsNoError(filename: string): Promise<IterableIterator<string>> {
-    return readLines(filename).catch((e) => (logError(e), toIterableIterator<string>([])));
+    const url = toFileUrl(filename);
+    return readLines(url).catch((e) => (logError(e), toIterableIterator<string>([])));
 }
 
 export function splitLine(line: string): string[] {

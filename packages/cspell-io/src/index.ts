@@ -1,6 +1,6 @@
 export { toArray as asyncIterableToArray } from './async/asyncIterable.js';
 export * from './common/index.js';
-export { createTextFileResource } from './common/index.js';
+export { compareStats, createTextFileResource } from './common/index.js';
 export type { CSpellIO } from './CSpellIO.js';
 export { CSpellIONode, getDefaultCSpellIO } from './CSpellIONode.js';
 export {

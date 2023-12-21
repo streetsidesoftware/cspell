@@ -31,7 +31,13 @@ export interface FileResource extends FileReference {
 }
 
 export interface TextFileResource extends FileResource {
-    getText(): string;
+    /**
+     * Extract the text of the file.
+     * @param encoding - optional encoding to use when decoding the content.
+     *   by default it uses the encoding of the file if one was specified, otherwise it uses `utf8`.
+     *   If the content is a string, then the encoding is ignored.
+     */
+    getText(encoding?: BufferEncoding): string;
 }
 
 export type UrlOrFilename = string | URL;

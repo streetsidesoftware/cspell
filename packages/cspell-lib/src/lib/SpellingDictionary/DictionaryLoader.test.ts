@@ -10,7 +10,7 @@ import type {
 import { mapDictDefToInternal } from '../Settings/DictionarySettings.js';
 import { clean } from '../util/util.js';
 import type { LoadOptions } from './DictionaryLoader.js';
-import { loadDictionary, loadDictionarySync, refreshCacheEntries } from './DictionaryLoader.js';
+import { loadDictionary, refreshCacheEntries } from './DictionaryLoader.js';
 
 vi.mock('../util/logger');
 
@@ -148,38 +148,6 @@ describe('Validate DictionaryLoader', () => {
     `('async load dict has word $def $word', async ({ def, word, hasWord }) => {
         const d = await loadDictionary(def);
         expect(d.has(word)).toBe(hasWord);
-    });
-
-    test.each`
-        def                                                             | word          | hasWord
-        ${dDef({ name: 'words', path: sample('words.txt.gz') })}        | ${'apple'}    | ${true}
-        ${dDef({ name: 'words', path: dict('cities.trie.gz') })}        | ${'apple'}    | ${false}
-        ${dDef({ name: 'words', path: dict('cities.trie.gz') })}        | ${'New York'} | ${true}
-        ${dDef({ name: 'words', path: dict('cities.txt') })}            | ${'York'}     | ${false}
-        ${dDef({ name: 'words', path: dict('cities.txt'), type: 'C' })} | ${'New York'} | ${false}
-        ${dDef({ name: 'words', path: dict('cities.txt'), type: 'C' })} | ${'York'}     | ${true}
-        ${dDef({ name: 'words', path: dict('cities.txt'), type: 'S' })} | ${'New York'} | ${true}
-        ${dDef({ name: 'words', path: dict('cities.txt'), type: 'S' })} | ${'York'}     | ${false}
-        ${dDef({ name: 'words', path: dict('cities.txt'), type: 'W' })} | ${'New York'} | ${false}
-        ${dDef({ name: 'words', path: dict('cities.txt'), type: 'W' })} | ${'York'}     | ${true}
-        ${{ name: 'cities', words: ['Paris', 'New York'] }}             | ${'New York'} | ${true}
-        ${dDef({ name: 'words', path: dict('cities.utf16le.txt') })}    | ${'New York'} | ${true}
-        ${dDef({ name: 'words', path: dict('cities.utf16be.txt') })}    | ${'New York'} | ${true}
-    `('sync load dict has word $def $word', ({ def, word, hasWord }) => {
-        const d = loadDictionarySync(def);
-        expect(d.has(word)).toBe(hasWord);
-    });
-
-    test.each`
-        def                                                                     | expected
-        ${dDef({ name: 'words', path: dict('cities.trie.gz'), type: 'S' })}     | ${[]}
-        ${dDef({ name: 'words', path: dict('cities.txt'), type: 'T' })}         | ${[expect.any(Error)]}
-        ${dDef({ name: 'words', path: dict('cities.missing.txt'), type: 'C' })} | ${[expect.any(Error)]}
-        ${dDef({ name: 'words', path: dict('cities.missing.txt'), type: 'S' })} | ${[expect.any(Error)]}
-        ${dDef({ name: 'words', path: dict('cities.missing.txt'), type: 'W' })} | ${[expect.any(Error)]}
-    `('sync load dict with error $def', ({ def, expected }) => {
-        const d = loadDictionarySync(def);
-        expect(d.getErrors?.()).toEqual(expected);
     });
 
     // cspell:ignore Geschäft geschaft

@@ -1,6 +1,6 @@
 import { urlBasename } from 'cspell-io';
 
-import { createTextFileResource, type VFileSystem, type VfsDirEntry } from '../../../fileSystem.js';
+import type { VFileSystem, VfsDirEntry } from '../../../fileSystem.js';
 import { createAutoResolveCache } from '../../../util/AutoResolve.js';
 import { findUpFromUrl } from '../../../util/findUpFromUrl.js';
 
@@ -124,7 +124,7 @@ export class ConfigSearch {
 
 async function checkPackageJson(fs: VFileSystem, filename: URL): Promise<boolean> {
     try {
-        const file = createTextFileResource(await fs.readFile(filename));
+        const file = await fs.readFile(filename);
         const pkg = JSON.parse(file.getText());
         return typeof pkg.cspell === 'object';
     } catch (e) {

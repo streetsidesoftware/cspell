@@ -1,7 +1,7 @@
 import assert from 'assert';
-import { promises as fs } from 'fs';
 import { TextDocument as VsTextDocument } from 'vscode-languageserver-textdocument';
 
+import { getFileSystem } from '../fileSystem.js';
 import { getLanguagesForBasename } from '../LanguageIds.js';
 import * as Uri from '../util/Uri.js';
 
@@ -220,9 +220,9 @@ function isTextDocumentImpl(doc: TextDocument | unknown): doc is TextDocumentImp
 
 export async function loadTextDocument(filename: string | DocumentUri, languageId?: string): Promise<TextDocument> {
     const uri = Uri.toUri(filename);
-    const content = await fs.readFile(Uri.uriToFilePath(uri), 'utf8');
-
-    return createTextDocument({ uri, languageId, content });
+    const url = new URL(uri.toString());
+    const file = await getFileSystem().readFile(url);
+    return createTextDocument({ uri, languageId, content: file.getText() });
 }
 
 export const isTextDocument: (doc: TextDocument | unknown) => doc is TextDocument = isTextDocumentImpl;

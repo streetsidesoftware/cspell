@@ -1,14 +1,16 @@
-import { urlOrReferenceToUrl } from './common/index.js';
+import { createTextFileResource, urlOrReferenceToUrl } from './common/index.js';
 import type { CSpellIO } from './CSpellIO.js';
 import { getDefaultCSpellIO } from './CSpellIONode.js';
-import {
-    type DirEntry,
-    type Disposable,
-    type FileReference,
-    type FileResource,
-    FileType,
-    type Stats,
+import type {
+    BufferEncoding,
+    DirEntry,
+    Disposable,
+    FileReference,
+    FileResource,
+    Stats,
+    TextFileResource,
 } from './models/index.js';
+import { FileType } from './models/index.js';
 
 type UrlOrReference = URL | FileReference;
 
@@ -47,7 +49,48 @@ interface FileSystemProviderInfo {
     name: string;
 }
 
-interface FileSystemBase {
+export interface VFileSystem {
+    /**
+     * Read a file.
+     * @param url - URL to read
+     * @param encoding - optional encoding
+     * @returns A FileResource, the content will not be decoded. Use `.getText()` to get the decoded text.
+     */
+    readFile(url: UrlOrReference, encoding?: BufferEncoding): Promise<TextFileResource>;
+    /**
+     * Write a file
+     * @param file - the file to write
+     */
+    writeFile(file: FileResource): Promise<FileReference>;
+    /**
+     * Get the stats for a url.
+     * @param url - Url to fetch stats for.
+     */
+    stat(url: UrlOrReference): Promise<VfsStat>;
+    /**
+     * Read the directory entries for a url.
+     * The url should end with `/` to indicate a directory.
+     * @param url - the url to read the directory entries for.
+     */
+    readDirectory(url: URL): Promise<VfsDirEntry[]>;
+    /**
+     * Get the capabilities for a URL.
+     * The capabilities can be more restrictive than the general capabilities of the provider.
+     * @param url - the url to try
+     */
+    getCapabilities(url: URL): FSCapabilities;
+    /**
+     * Information about the provider.
+     * It is up to the provider to define what information is available.
+     */
+    providerInfo: FileSystemProviderInfo;
+    /**
+     * Indicates that a provider was found for the url.
+     */
+    hasProvider: boolean;
+}
+
+export interface VProviderFileSystem extends Disposable {
     readFile(url: UrlOrReference): Promise<FileResource>;
     writeFile(file: FileResource): Promise<FileReference>;
     /**
@@ -55,16 +98,6 @@ interface FileSystemBase {
      * It is up to the provider to define what information is available.
      */
     providerInfo: FileSystemProviderInfo;
-}
-
-export interface VFileSystem extends FileSystemBase {
-    stat(url: UrlOrReference): Promise<VfsStat>;
-    readDirectory(url: URL): Promise<VfsDirEntry[]>;
-    getCapabilities(url: URL): FSCapabilities;
-    hasProvider: boolean;
-}
-
-export interface VProviderFileSystem extends FileSystemBase, Disposable {
     stat(url: UrlOrReference): Stats | Promise<Stats>;
     readDirectory(url: URL): Promise<DirEntry[]>;
     /**
@@ -361,7 +394,7 @@ class WrappedProviderFs implements VFileSystem {
         }
     }
 
-    async readFile(url: UrlOrReference): Promise<FileResource> {
+    async readFile(url: UrlOrReference, encoding?: BufferEncoding): Promise<TextFileResource> {
         try {
             checkCapabilityOrThrow(
                 this.fs,
@@ -370,7 +403,7 @@ class WrappedProviderFs implements VFileSystem {
                 'readFile',
                 urlOrReferenceToUrl(url),
             );
-            return await this.fs.readFile(url);
+            return createTextFileResource(await this.fs.readFile(url), encoding);
         } catch (e) {
             throw wrapError(e);
         }

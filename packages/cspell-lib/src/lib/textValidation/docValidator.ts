@@ -20,7 +20,7 @@ import { finalizeSettings, loadConfig, mergeSettings, searchForConfig } from '..
 import type { DirectiveIssue } from '../Settings/InDocSettings.js';
 import { validateInDocumentSettings } from '../Settings/InDocSettings.js';
 import type { SpellingDictionaryCollection, SuggestionResult } from '../SpellingDictionary/index.js';
-import { getDictionaryInternal, getDictionaryInternalSync } from '../SpellingDictionary/index.js';
+import { getDictionaryInternal } from '../SpellingDictionary/index.js';
 import type { WordSuggestion } from '../suggestions.js';
 import { calcSuggestionAdjustedToToMatchCase } from '../suggestions.js';
 import { catchPromiseError, toError } from '../util/errors.js';
@@ -176,7 +176,7 @@ export class DocumentValidator {
         const timer = createPerfTimer('_updatePrep');
         const prep = this._preparations;
         const docSettings = await determineTextDocumentSettings(this._document, prep.config);
-        const dict = getDictionaryInternalSync(docSettings);
+        const dict = await getDictionaryInternal(docSettings);
         const shouldCheck = docSettings.enabled ?? true;
         const finalSettings = finalizeSettings(docSettings);
         const validateOptions = settingsToValidateOptions(finalSettings);

@@ -10,14 +10,10 @@ import {
 import type { CSpellSettingsInternal, DictionaryDefinitionInternal } from '../Models/CSpellSettingsInternalDef.js';
 import { calcDictionaryDefsToLoad } from '../Settings/DictionarySettings.js';
 import { isDefined } from '../util/util.js';
-import { loadDictionary, loadDictionarySync, refreshCacheEntries } from './DictionaryLoader.js';
+import { loadDictionary, refreshCacheEntries } from './DictionaryLoader.js';
 
 export function loadDictionaryDefs(defsToLoad: DictionaryDefinitionInternal[]): Promise<SpellingDictionary>[] {
     return defsToLoad.map(loadDictionary);
-}
-
-export function loadDictionaryDefsSync(defsToLoad: DictionaryDefinitionInternal[]): SpellingDictionary[] {
-    return defsToLoad.map(loadDictionarySync);
 }
 
 export function refreshDictionaryCache(maxAge?: number): Promise<void> {
@@ -28,11 +24,6 @@ const emptyWords: readonly string[] = Object.freeze([]);
 
 export async function getDictionaryInternal(settings: CSpellSettingsInternal): Promise<SpellingDictionaryCollection> {
     const spellDictionaries = await Promise.all(loadDictionaryDefs(calcDictionaryDefsToLoad(settings)));
-    return _getDictionaryInternal(settings, spellDictionaries);
-}
-
-export function getDictionaryInternalSync(settings: CSpellSettingsInternal): SpellingDictionaryCollection {
-    const spellDictionaries = loadDictionaryDefsSync(calcDictionaryDefsToLoad(settings));
     return _getDictionaryInternal(settings, spellDictionaries);
 }
 

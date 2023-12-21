@@ -1,1 +1,1 @@
-export { SettingsController } from './SettingsController.js';
+export { defaultConfigFilenames } from './configLoader/index.js';

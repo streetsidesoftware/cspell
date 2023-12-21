@@ -26,9 +26,9 @@ export class CFileResource implements TextFileResource {
         return isGZipped(this.content);
     }
 
-    getText(): string {
+    getText(encoding?: BufferEncoding): string {
         if (this._text !== undefined) return this._text;
-        const text = typeof this.content === 'string' ? this.content : decode(this.content, this.encoding);
+        const text = typeof this.content === 'string' ? this.content : decode(this.content, encoding ?? this.encoding);
         this._text = text;
         return text;
     }
@@ -91,16 +91,10 @@ export class CFileResource implements TextFileResource {
     }
 }
 
-export function fromFileResource(fileResource: FileResource): TextFileResource {
-    return CFileResource.from(fileResource);
+export function fromFileResource(fileResource: FileResource, encoding?: BufferEncoding): TextFileResource {
+    return CFileResource.from(encoding ? { ...fileResource, encoding } : fileResource);
 }
 
 export function renameFileResource(fileResource: FileResource, url: URL): FileResource {
-    return CFileResource.from(
-        url,
-        fileResource.content,
-        fileResource.encoding,
-        fileResource.baseFilename,
-        fileResource.gz,
-    );
+    return CFileResource.from({ ...fileResource, url });
 }
