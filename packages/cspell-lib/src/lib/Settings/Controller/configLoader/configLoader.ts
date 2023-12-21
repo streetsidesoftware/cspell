@@ -9,7 +9,7 @@ import { URI, Utils as UriUtils } from 'vscode-uri';
 
 import { onClearCache } from '../../../events/index.js';
 import type { VFileSystem } from '../../../fileSystem.js';
-import { createTextFileResource, getVirtualFS } from '../../../fileSystem.js';
+import { getVirtualFS } from '../../../fileSystem.js';
 import { createCSpellSettingsInternal as csi } from '../../../Models/CSpellSettingsInternalDef.js';
 import { AutoResolveCache } from '../../../util/AutoResolve.js';
 import { logError, logWarning } from '../../../util/logger.js';
@@ -614,8 +614,7 @@ export function getDefaultConfigLoaderInternal(): ConfigLoaderInternal {
 }
 
 function createIO(fs: VFileSystem): IO {
-    const readFile = (url: URL) =>
-        fs.readFile(url).then((file) => ({ url: file.url, content: createTextFileResource(file).getText() }));
+    const readFile = (url: URL) => fs.readFile(url).then((file) => ({ url: file.url, content: file.getText() }));
     const writeFile = (file: TextFile) => fs.writeFile(file);
     return {
         readFile,

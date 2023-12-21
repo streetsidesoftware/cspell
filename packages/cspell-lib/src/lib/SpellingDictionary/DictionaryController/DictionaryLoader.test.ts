@@ -3,7 +3,7 @@ import { pathToFileURL } from 'url';
 import { describe, expect, test, vi } from 'vitest';
 
 import { pathPackageRoot } from '../../../test-util/test.locations.cjs';
-import { getCSpellIO } from '../../fileSystem.js';
+import { getFileSystem } from '../../fileSystem.js';
 import type {
     DictionaryDefinitionInlineInternal,
     DictionaryDefinitionInternal,
@@ -18,8 +18,6 @@ vi.mock('../../util/logger');
 const root = pathPackageRoot;
 const samples = path.join(root, 'samples');
 
-const cspellIO = getCSpellIO();
-
 type ErrorResults = Record<string, unknown> | Error;
 
 const di = mapDictDefToInternal;
@@ -30,7 +28,7 @@ describe('Validate DictionaryLoader', () => {
     const errorENOENT = { code: 'ENOENT' };
     const unknownFormatError = new Error('Unknown file format');
 
-    const dictionaryLoader = new DictionaryLoader(cspellIO);
+    const dictionaryLoader = new DictionaryLoader(getFileSystem());
 
     interface TestLoadEntryNotFound {
         filename: string;
@@ -164,35 +162,6 @@ describe('Validate DictionaryLoader', () => {
     );
 
     test.each`
-        def                                                             | word          | hasWord
-        ${dDef({ name: 'words', path: sample('words.txt.gz') })}        | ${'apple'}    | ${true}
-        ${dDef({ name: 'words', path: dict('cities.trie.gz') })}        | ${'apple'}    | ${false}
-        ${dDef({ name: 'words', path: dict('cities.trie.gz') })}        | ${'New York'} | ${true}
-        ${dDef({ name: 'words', path: dict('cities.trie.gz') })}        | ${'new york'} | ${true}
-        ${dDef({ name: 'words', path: dict('cities.trie') })}           | ${'New York'} | ${true}
-        ${dDef({ name: 'words', path: dict('cities.trie') })}           | ${'new york'} | ${true}
-        ${dDef({ name: 'words', path: dict('cities.txt') })}            | ${'York'}     | ${false}
-        ${dDef({ name: 'words', path: dict('cities.txt'), type: 'C' })} | ${'New York'} | ${false}
-        ${dDef({ name: 'words', path: dict('cities.txt'), type: 'C' })} | ${'York'}     | ${true}
-        ${dDef({ name: 'words', path: dict('cities.txt'), type: 'S' })} | ${'New York'} | ${true}
-        ${dDef({ name: 'words', path: dict('cities.txt'), type: 'S' })} | ${'York'}     | ${false}
-        ${dDef({ name: 'words', path: dict('cities.txt'), type: 'W' })} | ${'New York'} | ${false}
-        ${dDef({ name: 'words', path: dict('cities.txt'), type: 'W' })} | ${'York'}     | ${true}
-        ${dDef({ name: 'words', path: dict('cities.txt'), type: 'W' })} | ${'York'}     | ${true}
-    `('sync load dict has word $def.path $word', ({ def, word, hasWord }) => {
-        const d = dictionaryLoader.loadDictionarySync(def);
-        expect(d.has(word)).toBe(hasWord);
-    });
-
-    test.each`
-        def                                                | word      | hasWord
-        ${dDef({ name: 'words', words: ['New', 'York'] })} | ${'York'} | ${true}
-    `('sync load inline dict has word $def $word', ({ def, word, hasWord }) => {
-        const d = dictionaryLoader.loadDictionarySync(def);
-        expect(d.has(word)).toBe(hasWord);
-    });
-
-    test.each`
         def                                                | word      | hasWord
         ${dDef({ name: 'words', words: ['New', 'York'] })} | ${'York'} | ${true}
     `('sync load inline dict has word $def $word', async ({ def, word, hasWord }) => {
@@ -200,28 +169,11 @@ describe('Validate DictionaryLoader', () => {
         expect(d.has(word)).toBe(hasWord);
     });
 
-    test.each`
-        def                                                                     | expected
-        ${dDef({ name: 'words', path: dict('cities.trie.gz'), type: 'S' })}     | ${[]}
-        ${dDef({ name: 'words', path: dict('cities.txt'), type: 'T' })}         | ${[expect.any(Error)]}
-        ${dDef({ name: 'words', path: dict('cities.missing.txt'), type: 'C' })} | ${[expect.any(Error)]}
-        ${dDef({ name: 'words', path: dict('cities.missing.txt'), type: 'S' })} | ${[expect.any(Error)]}
-        ${dDef({ name: 'words', path: dict('cities.missing.txt'), type: 'W' })} | ${[expect.any(Error)]}
-    `('sync load dict with error $def', ({ def, expected }) => {
-        const d = dictionaryLoader.loadDictionarySync(def);
-        expect(d.getErrors?.()).toEqual(expected);
-    });
-
     // cspell:ignore Geschäft geschaft
 });
 
 function sample(file: string): string {
     return path.join(samples, file);
-}
-
-function dict(file: string): string {
-    const dictDir = path.join(root, '../Samples/dicts');
-    return path.resolve(dictDir, file);
 }
 
 interface DDefFile extends Partial<DictionaryFileDefinitionInternal> {

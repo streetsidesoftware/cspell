@@ -239,67 +239,12 @@ describe('Validate Refresh', () => {
         expect(dicts4[3].has('four')).toBe(true);
         log(`End: ${expect.getState().currentTestName} at ${Date.now()}`);
     });
-
-    test('Refresh Dictionary Cache Sync', async () => {
-        log(`Start: ${expect.getState().currentTestName}; ts: ${Date.now()}`);
-        const tempDictPath = tempPath('words_sync.txt');
-        await mkdirp(path.dirname(tempDictPath));
-        await fs.writeFile(tempDictPath, 'one\ntwo\nthree\n');
-        const settings = await getDefaultBundledSettingsAsync();
-        const defs = (settings.dictionaryDefinitions || []).concat([
-            di({ name: 'temp', path: tempDictPath }, __filenameURL),
-        ]);
-        const toLoad = ['node', 'html', 'css', 'temp'];
-        const col = createDictionaryReferenceCollection(toLoad);
-        const defsToLoad = filterDictDefsToLoad(col, defs);
-        expect(defsToLoad.map((d) => d.name)).toEqual(['css', 'html', 'node', 'temp']);
-        const dicts = Dictionaries.loadDictionaryDefsSync(defsToLoad);
-
-        expect(dicts[3].has('one')).toBe(true);
-        expect(dicts[3].has('four')).toBe(false);
-        expect(dicts.map((d) => d.name)).toEqual(['css', 'html', 'node', 'temp']);
-
-        await Dictionaries.refreshDictionaryCache(0);
-        const dicts2 = Dictionaries.loadDictionaryDefsSync(defsToLoad);
-
-        // Since noting changed, expect them to be the same.
-        expect(dicts.length).toEqual(toLoad.length);
-        expect(dicts2.length).toEqual(dicts.length);
-        dicts.forEach((d, i) => expect(dicts2[i]).toEqual(d));
-
-        // Update one of the dictionaries to see if it loads.
-        await sleep(50);
-        await fs.writeFile(tempDictPath, 'one\ntwo\nthree\nfour\n');
-        await sleep(50); // Give the system a chance to breath (needed for linux systems mixing sync and async isn't ideal)
-
-        const dicts3 = Dictionaries.loadDictionaryDefsSync(defsToLoad);
-        // Should be using cache and will not contain the new words.
-        expect(dicts3[3].has('one')).toBe(true);
-        expect(dicts3[3].has('four')).toBe(false);
-        expect(dicts3.map((d) => d.name)).toEqual(['css', 'html', 'node', 'temp']);
-
-        await Dictionaries.refreshDictionaryCache(0);
-
-        const dicts4 = Dictionaries.loadDictionaryDefsSync(defsToLoad);
-
-        expect(dicts4.map((d) => d.name)).toEqual(['css', 'html', 'node', 'temp']);
-        // Should be using the latest copy of the words.
-        expect(dicts4[3].has('one')).toBe(true);
-        expect(dicts4[3].has('four')).toBe(true);
-        log(`End: ${expect.getState().currentTestName} at ${Date.now()}`);
-    });
 });
 
 function tempPath(file: string) {
     const testState = expect.getState();
     const testName = (testState.currentTestName || 'test').replace(/[^-a-z0-9]/gi, '_');
     return path.join(pathPackageRoot, 'temp', testName, file);
-}
-
-function sleep(ms: number): Promise<void> {
-    return new Promise((resolve) => {
-        setTimeout(resolve, ms);
-    });
 }
 
 function sample(file: string): string {

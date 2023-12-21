@@ -1,24 +1,20 @@
 import type { SpellingDictionary } from 'cspell-dictionary';
-import type { CSpellIO } from 'cspell-io';
 
-import { getCSpellIO } from '../fileSystem.js';
+import type { VFileSystem } from '../fileSystem.js';
+import { getFileSystem } from '../fileSystem.js';
 import type { DictionaryDefinitionInternal } from '../Models/CSpellSettingsInternalDef.js';
 import { DictionaryLoader } from './DictionaryController/index.js';
 export type { LoadOptions } from './DictionaryController/index.js';
 
 let loader: DictionaryLoader | undefined;
 
-export function getDictionaryLoader(cspellIO?: CSpellIO): DictionaryLoader {
+export function getDictionaryLoader(vfs?: VFileSystem): DictionaryLoader {
     if (loader) return loader;
-    return (loader = new DictionaryLoader(cspellIO || getCSpellIO()));
+    return (loader = new DictionaryLoader(vfs || getFileSystem()));
 }
 
 export function loadDictionary(def: DictionaryDefinitionInternal): Promise<SpellingDictionary> {
     return getDictionaryLoader().loadDictionary(def);
-}
-
-export function loadDictionarySync(def: DictionaryDefinitionInternal): SpellingDictionary {
-    return getDictionaryLoader().loadDictionarySync(def);
 }
 
 /**
