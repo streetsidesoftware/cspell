@@ -107,7 +107,7 @@ class UriImpl extends URI implements UriInstance {
 
     toString(): string {
         // if (this.scheme !== 'stdin') return super.toString(true);
-        const path = (this.path || '').split('/').map(encodeURIComponent).join('/').replace(/%3A/g, ':');
+        const path = encodeURI(this.path || '').replace(/[#?]/g, (c) => `%${c.charCodeAt(0).toString(16)}`);
         const base = `${this.scheme}://${this.authority || ''}${path}`;
         const query = (this.query && `?${this.query}`) || '';
         const fragment = (this.fragment && `#${this.fragment}`) || '';
