@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 8.2.3 (2023-12-21)
+
+### Bug Fixes
+
+* Improve performance by reducing FS reqeusts ([#5103](https://github.com/streetsidesoftware/cspell/issues/5103)) ([3f31569](https://github.com/streetsidesoftware/cspell/commit/3f31569a43b9ae0f21e90d84db57f87a2cb4f6dd))
+
 ## 8.2.2 (2023-12-21)
 
 **Note:** Version bump only for package test-cspell
