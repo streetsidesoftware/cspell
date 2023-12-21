@@ -446,11 +446,20 @@ exports[`Validate cli > app 'issue-2998 --language-id' Expect Error: undefined 3
 1/1 [90m./fix-words.txt[39m"
 `;
 
-exports[`Validate cli > app 'issue-4811' Expect Error: undefined 1`] = `[]`;
+exports[`Validate cli > app 'issue-4811 **/README.md' Expect Error: undefined 1`] = `[]`;
 
-exports[`Validate cli > app 'issue-4811' Expect Error: undefined 2`] = `"error	CSpell: Files checked: 8, Issues found: 0 in 0 files"`;
+exports[`Validate cli > app 'issue-4811 **/README.md' Expect Error: undefined 2`] = `"error	CSpell: Files checked: 2, Issues found: 0 in 0 files"`;
 
-exports[`Validate cli > app 'issue-4811' Expect Error: undefined 3`] = `""`;
+exports[`Validate cli > app 'issue-4811 **/README.md' Expect Error: undefined 3`] = `""`;
+
+exports[`Validate cli > app 'issue-4811' Expect Error: [Function CheckFailed] 1`] = `[]`;
+
+exports[`Validate cli > app 'issue-4811' Expect Error: [Function CheckFailed] 2`] = `
+"log	./#local/version@2.md:3:9 - Unknown word (marrkdown)
+error	CSpell: Files checked: 9, Issues found: 1 in 1 files"
+`;
+
+exports[`Validate cli > app 'issue-4811' Expect Error: [Function CheckFailed] 3`] = `""`;
 
 exports[`Validate cli > app 'issue-4811/#local' Expect Error: undefined 1`] = `[]`;
 
