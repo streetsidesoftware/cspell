@@ -224,7 +224,7 @@ jobs:
 
       - name: Store Repo Diff
         env:
-          REPO: ${{ env.REPO_NAME }}
+          REPO: ${{ steps.step-normalize-repo-name.outputs.REPO_NAME }}
         run: |
           mkdir temp || echo temp already exists
           echo "${{ matrix.repo }} =>" $REPO
@@ -233,7 +233,7 @@ jobs:
       - name: store diff
         uses: actions/upload-artifact@v4
         with:
-          name: diffs-integrations-${{ env.REPO_NAME }}
+          name: diffs-integrations-${{ steps.step-normalize-repo-name.outputs.REPO_NAME }}
           path: temp/*.diff
           retention-days: 1
 
