@@ -220,7 +220,7 @@ jobs:
           REPLACE: "/"
           REPLACE_WITH: "__"
         run: |
-          echo "REPO_NAME=${REPO//${REPLACE}/${REPLACE_WITH}} >> $GITHUB_OUTPUT
+          echo "REPO_NAME=${REPO//${REPLACE}/${REPLACE_WITH}}" >> $GITHUB_OUTPUT
 
       - name: Store Repo Diff
         env:
