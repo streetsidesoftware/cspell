@@ -213,16 +213,27 @@ jobs:
           && pnpm i
           && pnpm run update-snapshots-only -- ${{ matrix.repo }}
 
+      - name: Normalize Repo Name
+        id: step-normalize-repo-name
+        env:
+          REPO: ${{ matrix.repo }}
+          REPLACE: "/"
+          REPLACE_WITH: "__"
+        run: |
+          echo "REPO_NAME=${REPO//${REPLACE}/${REPLACE_WITH}} >> $GITHUB_OUTPUT
+
       - name: Store Repo Diff
+        env:
+          REPO: ${{ env.REPO_NAME }}
         run: |
           mkdir temp || echo temp already exists
-          REPO=$(echo "${{ matrix.repo }}" | sed "s/[/]/__/g")
           echo "${{ matrix.repo }} =>" $REPO
           git diff integration-tests/config integration-tests/repositories integration-tests/snapshots  > temp/$REPO.diff
+
       - name: store diff
         uses: actions/upload-artifact@v4
         with:
-          name: diffs-integrations-${{ matrix.repo }}
+          name: diffs-integrations-${{ env.REPO_NAME }}
           path: temp/*.diff
           retention-days: 1
 
