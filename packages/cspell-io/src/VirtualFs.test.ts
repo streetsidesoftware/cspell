@@ -11,15 +11,19 @@ import { createVirtualFS, FSCapabilityFlags, getDefaultVirtualFs, VFSErrorUnsupp
 const sc = expect.stringContaining;
 const oc = expect.objectContaining;
 
+let mockConsoleLog = vi.spyOn(console, 'log');
+
 describe('VirtualFs', () => {
     let virtualFs: VirtualFS;
 
     beforeEach(() => {
         virtualFs = createVirtualFS();
+        mockConsoleLog = vi.spyOn(console, 'log');
     });
 
     afterEach(() => {
         virtualFs.dispose();
+        vi.resetAllMocks();
     });
 
     test('should create a file system', () => {
@@ -194,11 +198,30 @@ describe('VirtualFs', () => {
         url = toFileURL(url);
         const fs = getDefaultVirtualFs().fs;
         const s = await fs.stat(url);
+        expect(mockConsoleLog).not.toHaveBeenCalled();
         expect(s).toEqual(expected);
         expect(s.isFile()).toBe(true);
         expect(s.isDirectory()).toBe(false);
         expect(s.isUnknown()).toBe(false);
         expect(s.eTag).toBeUndefined();
+    });
+
+    test.each`
+        url           | expected
+        ${__filename} | ${oc({ mtimeMs: expect.any(Number), size: expect.any(Number), fileType: 1 })}
+    `('getStat with logging $url', async ({ url, expected }) => {
+        url = toFileURL(url);
+        const virtualFs = createVirtualFS();
+        virtualFs.enableLogging();
+        const fs = virtualFs.fs;
+        const s = await fs.stat(url);
+        expect(mockConsoleLog).toHaveBeenCalledTimes(2);
+        expect(s).toEqual(expected);
+        expect(s.isFile()).toBe(true);
+        expect(s.isDirectory()).toBe(false);
+        expect(s.isUnknown()).toBe(false);
+        expect(s.eTag).toBeUndefined();
+        virtualFs.dispose();
     });
 
     test.each`
