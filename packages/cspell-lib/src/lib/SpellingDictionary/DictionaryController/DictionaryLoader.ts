@@ -19,8 +19,8 @@ import type {
 import { isDictionaryDefinitionInlineInternal } from '../../Models/CSpellSettingsInternalDef.js';
 import { AutoResolveWeakCache, AutoResolveWeakWeakCache } from '../../util/AutoResolve.js';
 import { toError } from '../../util/errors.js';
-import { SpellingDictionaryLoadError } from '../SpellingDictionaryError.js';
 import { SimpleCache } from '../../util/simpleCache.js';
+import { SpellingDictionaryLoadError } from '../SpellingDictionaryError.js';
 
 const MAX_AGE = 10000;
 

@@ -18,7 +18,7 @@ import type {
     DictionaryFileDefinitionInternalWithSource,
 } from '../Models/CSpellSettingsInternalDef.js';
 import { isDictionaryDefinitionInlineInternal } from '../Models/CSpellSettingsInternalDef.js';
-import { AutoResolveWeakCache, createAutoResolveWeakWeakCache } from '../util/AutoResolve.js';
+import { createAutoResolveWeakWeakCache } from '../util/AutoResolve.js';
 import { resolveRelativeTo } from '../util/resolveFile.js';
 import type { RequireOptional, UnionFields } from '../util/types.js';
 import { toFilePathOrHref } from '../util/url.js';
