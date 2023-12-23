@@ -155,9 +155,8 @@ class CVirtualFS implements VirtualFS {
         if (this.loggingEnabled) {
             const id = event.traceID.toFixed(13).replace(/\d{4}(?=\d)/g, '$&.');
             const msg = event.message ? `\n\t\t${event.message}` : '';
-            this.log(
-                `${event.method}-${event.event}\t ID:${id} ts:${event.ts.toFixed(13)} ${chopUrl(event.url)}${msg}`,
-            );
+            const method = rPad(`${event.method}-${event.event}`, 16);
+            this.log(`${method} ID:${id} ts:${event.ts.toFixed(13)} ${chopUrl(event.url)}${msg}`);
         }
     };
 
@@ -586,7 +585,11 @@ function chopUrl(url: URL | undefined): string {
     const n = parts.indexOf('node_modules');
     if (n > 0) {
         const tail = parts.slice(Math.max(parts.length - 3, n + 1));
-        return parts.slice(0, n + 1).join('/') + '/.../' + tail.join('/');
+        return parts.slice(0, n + 1).join('/') + '/…/' + tail.join('/');
     }
     return href;
+}
+
+function rPad(str: string, len: number, ch = ' '): string {
+    return str + ch.repeat(Math.max(0, len - str.length));
 }

@@ -17,9 +17,10 @@ import type {
     DictionaryFileDefinitionInternal,
 } from '../../Models/CSpellSettingsInternalDef.js';
 import { isDictionaryDefinitionInlineInternal } from '../../Models/CSpellSettingsInternalDef.js';
-import { AutoResolveWeakCache } from '../../util/AutoResolve.js';
+import { AutoResolveWeakCache, AutoResolveWeakWeakCache } from '../../util/AutoResolve.js';
 import { toError } from '../../util/errors.js';
 import { SpellingDictionaryLoadError } from '../SpellingDictionaryError.js';
+import { SimpleCache } from '../../util/simpleCache.js';
 
 const MAX_AGE = 10000;
 
@@ -67,14 +68,15 @@ interface Loaders {
     default: Loader;
 }
 
+type KvPair = { key: string; entry: CacheEntry };
+
 export class DictionaryLoader {
     private dictionaryCache = new StrongWeakMap<string, CacheEntry>();
     private inlineDictionaryCache = new AutoResolveWeakCache<DictionaryDefinitionInlineInternal, SpellingDictionary>();
-    private dictionaryCacheByDef = new StrongWeakMap<
-        DictionaryDefinitionInternal,
-        { key: string; entry: CacheEntry }
-    >();
+    private dictionaryCacheByDef = new AutoResolveWeakWeakCache<DictionaryDefinitionInternal, KvPair>();
     private reader: Reader;
+    /** The keepAliveCache is to hold onto the most recently loaded dictionaries. */
+    private keepAliveCache = new SimpleCache<DictionaryDefinitionInternal, CacheEntry>(10);
 
     constructor(private fs: VFileSystem) {
         this.reader = toReader(fs);
@@ -90,6 +92,7 @@ export class DictionaryLoader {
         }
         const loadedEntry = this.loadEntry(def.path, def);
         this.setCacheEntry(key, loadedEntry, def);
+        this.keepAliveCache.set(def, loadedEntry);
         return loadedEntry.pending.then(([dictionary]) => dictionary);
     }
 
@@ -105,6 +108,7 @@ export class DictionaryLoader {
     private getCacheEntry(def: DictionaryFileDefinitionInternal): { key: string; entry: CacheEntry | undefined } {
         const defEntry = this.dictionaryCacheByDef.get(def);
         if (defEntry) {
+            this.keepAliveCache.get(def);
             return defEntry;
         }
         const key = this.calcKey(def);
@@ -112,6 +116,7 @@ export class DictionaryLoader {
         if (entry) {
             // replace old entry so it can be released.
             entry.options = def;
+            this.keepAliveCache.set(def, entry);
         }
         return { key, entry };
     }

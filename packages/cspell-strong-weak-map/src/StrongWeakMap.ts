@@ -120,7 +120,15 @@ export class StrongWeakMap<K, V extends object> implements Map<K, V> {
      * Removes any keys that reference released objects.
      */
     cleanKeys(): this {
-        [...this];
+        const keysToDel: K[] = [];
+        for (const [key, ref] of this.map.entries()) {
+            if (!ref.deref()) {
+                keysToDel.push(key);
+            }
+        }
+        for (const key of keysToDel) {
+            this.map.delete(key);
+        }
         return this;
     }
 

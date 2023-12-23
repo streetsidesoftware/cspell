@@ -72,6 +72,13 @@ describe('SimpleCache', () => {
         cache.set(b, b);
         // stack: b:b, c:c, hello:there
         expect(cache.get(b)).toBe(b);
+
+        expect(cache.delete(c)).toBe(true);
+
+        expect(cache.delete(b)).toBe(true);
+        expect(cache.delete(b)).toBe(false);
+
+        expect(cache.get(hello)).toBe(there);
     });
 });
 
