@@ -76,10 +76,14 @@ export class DictionaryLoader {
     private dictionaryCacheByDef = new AutoResolveWeakWeakCache<DictionaryDefinitionInternal, KvPair>();
     private reader: Reader;
     /** The keepAliveCache is to hold onto the most recently loaded dictionaries. */
-    private keepAliveCache = new SimpleCache<DictionaryDefinitionInternal, CacheEntry>(10);
+    private keepAliveCache: SimpleCache<DictionaryDefinitionInternal, CacheEntry>;
 
-    constructor(private fs: VFileSystem) {
+    constructor(
+        private fs: VFileSystem,
+        keepAliveSize = 10,
+    ) {
         this.reader = toReader(fs);
+        this.keepAliveCache = new SimpleCache<DictionaryDefinitionInternal, CacheEntry>(keepAliveSize);
     }
 
     public loadDictionary(def: DictionaryDefinitionInternal): Promise<SpellingDictionary> {
