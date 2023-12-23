@@ -18,7 +18,7 @@ import type {
     DictionaryFileDefinitionInternalWithSource,
 } from '../Models/CSpellSettingsInternalDef.js';
 import { isDictionaryDefinitionInlineInternal } from '../Models/CSpellSettingsInternalDef.js';
-import { AutoResolveWeakCache } from '../util/AutoResolve.js';
+import { createAutoResolveWeakWeakCache } from '../util/AutoResolve.js';
 import { resolveRelativeTo } from '../util/resolveFile.js';
 import type { RequireOptional, UnionFields } from '../util/types.js';
 import { toFilePathOrHref } from '../util/url.js';
@@ -81,7 +81,7 @@ export function mapDictDefsToInternal(
     return defs?.map((def) => mapDictDefToInternal(def, pathToSettingsFile));
 }
 
-const internalDefs = new AutoResolveWeakCache<DictionaryDefinition, DictionaryDefinitionInternalWithSource>();
+const internalDefs = createAutoResolveWeakWeakCache<DictionaryDefinition, DictionaryDefinitionInternalWithSource>();
 
 export function mapDictDefToInternal(
     def: DictionaryDefinition,

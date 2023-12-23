@@ -166,3 +166,70 @@ export class AutoResolveWeakCache<K extends object, V> implements IWeakMap<K, V>
 export function createAutoResolveWeakCache<K extends object, V>(): AutoResolveWeakCache<K, V> {
     return new AutoResolveWeakCache();
 }
+
+export class AutoResolveWeakWeakCache<K extends object, V extends object> implements IWeakMap<K, V> {
+    private _map = new WeakMap<K, WeakRef<V>>();
+
+    private _stats = new CacheStatsTracker();
+
+    get(k: K): V | undefined;
+    get(k: K, resolve: (k: K) => V): V;
+    get(k: K, resolve?: (k: K) => V): V | undefined;
+    get(k: K, resolve?: (k: K) => V): V | undefined {
+        const map = this._map;
+        const found = map.get(k);
+        const foundValue = found?.deref();
+        if (found !== undefined && foundValue) {
+            ++this._stats.hits;
+            return foundValue;
+        }
+        ++this._stats.misses;
+        if (!resolve) {
+            if (found) {
+                map.delete(k);
+            }
+            return undefined;
+        }
+        ++this._stats.resolved;
+        const value = resolve(k);
+        map.set(k, new WeakRef(value));
+        return value;
+    }
+
+    get map() {
+        return this._map;
+    }
+
+    has(k: K): boolean {
+        return !!this._map.get(k)?.deref();
+    }
+
+    set(k: K, v: V): this {
+        ++this._stats.sets;
+        this._map.set(k, new WeakRef(v));
+        return this;
+    }
+
+    clear(): void {
+        this._stats.clear();
+        this._map = new WeakMap();
+    }
+
+    delete(k: K): boolean {
+        ++this._stats.deletes;
+        return this._map.delete(k);
+    }
+
+    dispose(): void {
+        ++this._stats.disposals;
+        this.clear();
+    }
+
+    stats(): AutoResolveCacheStats {
+        return this._stats.stats();
+    }
+}
+
+export function createAutoResolveWeakWeakCache<K extends object, V extends object>(): AutoResolveWeakWeakCache<K, V> {
+    return new AutoResolveWeakWeakCache();
+}

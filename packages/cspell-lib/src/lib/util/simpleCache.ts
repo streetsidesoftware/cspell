@@ -114,6 +114,14 @@ export class SimpleCache<K, T> {
         this._set(key, { v: value });
     }
 
+    delete(key: K): boolean {
+        let deleted = false;
+        for (const c of this.caches()) {
+            deleted = c.delete(key) || deleted;
+        }
+        return deleted;
+    }
+
     private _set(key: K, entry: Box<T>) {
         if (this.L0.has(key)) {
             this.L0.set(key, entry);
@@ -132,9 +140,11 @@ export class SimpleCache<K, T> {
     }
 
     private rotate() {
+        const L2 = this.L2;
         this.L2 = this.L1;
         this.L1 = this.L0;
-        this.L0 = new Map<K, Box<T>>();
+        this.L0 = L2;
+        this.L0.clear();
     }
 }
 
