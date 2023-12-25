@@ -3,9 +3,9 @@ Repository: sveltejs/svelte
 Url: https://github.com/sveltejs/svelte.git
 Args: '["**"]'
 Summary:
-  files: 5833
-  filesWithIssues: 591
-  issues: 5705
+  files: 5864
+  filesWithIssues: 592
+  issues: 5710
   errors: 0
 Errors: []
 
@@ -2457,16 +2457,16 @@ issues:
   - "packages/svelte/src/compiler/phases/2-analyze/css/Stylesheet.js:388:4       atrule      U       atrule: undefined"
   - "packages/svelte/src/compiler/phases/2-analyze/index.js:85:12        hoistable       U       const non_hoistable = { type: 'non-hoistable"
   - "packages/svelte/src/compiler/phases/2-analyze/index.js:126:37       delegatable     U       determine_element_spread_and_delegatable(element).metadata.can"
-  - "packages/svelte/src/compiler/phases/2-analyze/index.js:221:64       tweaker         U       runes_js, runes_scope_js_tweaker)"
-  - "packages/svelte/src/compiler/phases/2-analyze/index.js:412:17       nonstate        U       // warn on any nonstate declarations that are"
-  - "packages/svelte/src/compiler/phases/2-analyze/index.js:1029:73      qirk            U       stripped because of a qirk:"
+  - "packages/svelte/src/compiler/phases/2-analyze/index.js:232:64       tweaker         U       runes_js, runes_scope_js_tweaker)"
+  - "packages/svelte/src/compiler/phases/2-analyze/index.js:423:17       nonstate        U       // warn on any nonstate declarations that are"
+  - "packages/svelte/src/compiler/phases/2-analyze/index.js:1040:73      qirk            U       stripped because of a qirk:"
   - "packages/svelte/src/compiler/phases/2-analyze/validation.js:261:14      bgsound     U       tag === 'bgsound' ||"
-  - "packages/svelte/src/compiler/phases/3-transform/client/utils.js:442:30      declarators     U       function create_state_declarators(declarator, scope, value"
+  - "packages/svelte/src/compiler/phases/3-transform/client/utils.js:473:30      declarators     U       function create_state_declarators(declarator, scope, value"
   - "packages/svelte/src/compiler/phases/3-transform/client/visitors/global.js:88:23         IIFEE       U       // turn it into an IIFEE assignment expression"
-  - "packages/svelte/src/compiler/phases/3-transform/client/visitors/template.js:118:65      toogle          U       something like `$.class_toogle(element, class_name"
-  - "packages/svelte/src/compiler/phases/3-transform/client/visitors/template.js:1609:8      quasis          U       const quasis = [];"
-  - "packages/svelte/src/compiler/phases/3-transform/client/visitors/template.js:2075:47     computeds       U       ...lets); // create computeds in the outer context"
-  - "packages/svelte/src/compiler/phases/3-transform/client/visitors/template.js:2207:57     IIFEs           U       other patterns into IIFEs and separates the assignments"
+  - "packages/svelte/src/compiler/phases/3-transform/client/visitors/template.js:134:65      toogle          U       something like `$.class_toogle(element, class_name"
+  - "packages/svelte/src/compiler/phases/3-transform/client/visitors/template.js:1627:8      quasis          U       const quasis = [];"
+  - "packages/svelte/src/compiler/phases/3-transform/client/visitors/template.js:2093:47     computeds       U       ...lets); // create computeds in the outer context"
+  - "packages/svelte/src/compiler/phases/3-transform/client/visitors/template.js:2225:57     IIFEs           U       other patterns into IIFEs and separates the assignments"
   - "packages/svelte/src/compiler/phases/3-transform/utils.js:76:44          inbetween (between)     U       trailing whitespace of inbetween text nodes,"
   - "packages/svelte/src/compiler/phases/constants.js:153:3          hatchpath       U       'hatchpath',"
   - "packages/svelte/src/compiler/phases/constants.js:154:3          hkern           U       'hkern',"
@@ -2483,13 +2483,13 @@ issues:
   - "packages/svelte/src/internal/client/each.js:246:9       proxied                             U       var is_proxied_array = STATE_SYMBOL"
   - "packages/svelte/src/internal/client/each.js:325:16      Ivi's                               U       // is based on Ivi's reconcilation logic"
   - "packages/svelte/src/internal/client/each.js:325:22      reconcilation (reconciliation)      U       / is based on Ivi's reconcilation logic:"
-  - "packages/svelte/src/internal/client/proxy/proxy.js:107:17       unstate     U       export function unstate(value) {"
+  - "packages/svelte/src/internal/client/proxy/proxy.js:108:17       unstate     U       export function unstate(value) {"
   - "packages/svelte/src/internal/client/render.js:63:11         registerd       U       const all_registerd_events = new Set();"
-  - "packages/svelte/src/internal/client/runtime.js:68:20        untracking                  U       export let current_untracking = false;"
-  - "packages/svelte/src/internal/client/runtime.js:478:79       accomodate (accommodate)    U       effects more than once to accomodate for \"$: only runs once"
-  - "packages/svelte/src/internal/client/runtime.js:717:83       comptued                    U       when we split up source/comptued signals"
-  - "packages/svelte/src/internal/client/runtime.js:894:26       doesnt (doesn't)            U       mutate(signal, null /* doesnt matter */);"
-  - "packages/svelte/src/internal/client/runtime.js:1493:36      synchronisation             U       current_value); // force a synchronisation immediately"
+  - "packages/svelte/src/internal/client/runtime.js:70:20        untracking                  U       export let current_untracking = false;"
+  - "packages/svelte/src/internal/client/runtime.js:503:79       accomodate (accommodate)    U       effects more than once to accomodate for \"$: only runs once"
+  - "packages/svelte/src/internal/client/runtime.js:742:83       comptued                    U       when we split up source/comptued signals"
+  - "packages/svelte/src/internal/client/runtime.js:919:26       doesnt (doesn't)            U       mutate(signal, null /* doesnt matter */);"
+  - "packages/svelte/src/internal/client/runtime.js:1522:36      synchronisation             U       current_value); // force a synchronisation immediately"
   - "packages/svelte/src/internal/client/types.d.ts:35:19        JITs        U       // when the JS VM JITs the code."
   - "packages/svelte/src/internal/client/types.d.ts:42:6         effectgs    U       /** effectgs */"
   - "packages/svelte/src/internal/client/types.d.ts:275:6        effewct     U       /** effewct */"
@@ -2931,8 +2931,8 @@ issues:
   - "sites/svelte.dev/src/routes/(authed)/apps/+page.svelte:112:32       delection       U       aria-label=\"Select for delection\""
   - "sites/svelte.dev/src/routes/+page.svelte:6:9            Whos                U       import WhosUsingSvelte from './"
   - "sites/svelte.dev/src/routes/+page.svelte:81:13          opencollective      U       title: 'opencollective',"
-  - "sites/svelte.dev/src/routes/blog/+page.svelte:23:31         pubdate     U       article class=\"post\" data-pubdate={post.date}>"
   - "sites/svelte.dev/src/routes/blog/[slug]/+page.svelte:64:3           standfirst      U       .standfirst {"
+  - "sites/svelte.dev/src/routes/blog/+page.svelte:23:31         pubdate     U       article class=\"post\" data-pubdate={post.date}>"
   - "sites/svelte.dev/src/routes/blog/rss.xml/+server.js:8:16        Pubdate     U       function formatPubdate(str) {"
   - "sites/svelte.dev/src/routes/tutorial/api/album/+server.js:6:12          accusamus           U       title: 'accusamus beatae ad facilis cum"
   - "sites/svelte.dev/src/routes/tutorial/api/album/+server.js:6:22          beatae              U       title: 'accusamus beatae ad facilis cum similique"
