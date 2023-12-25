@@ -122,17 +122,27 @@ jobs:
           && pnpm i
           && pnpm run update-repositories -- ${{ matrix.repo }}
 
+      - name: Normalize Repo Name
+        id: step-normalize-repo-name
+        env:
+          REPO: ${{ matrix.repo }}
+          REPLACE: "/"
+          REPLACE_WITH: "__"
+        run: |
+          echo "REPO_NAME=${REPO//${REPLACE}/${REPLACE_WITH}}" >> $GITHUB_OUTPUT
+
       - name: Store Repo Diff
         id: step-repo-info
+        env:
+          REPO: ${{ steps.step-normalize-repo-name.outputs.REPO_NAME }}
         run: |
           mkdir temp
-          REPO=$(echo "${{ matrix.repo }}" | sed "s/[/]/__/g")
           echo "${{ matrix.repo }} =>" $REPO
           git diff > temp/$REPO.diff
       - name: store diff
         uses: actions/upload-artifact@v4
         with:
-          name: diffs
+          name: diffs-repo-${{ steps.step-normalize-repo-name.outputs.REPO_NAME }}
           path: temp/*.diff
           retention-days: 1
 
@@ -171,7 +181,8 @@ jobs:
       - name: restore repos
         uses: actions/download-artifact@v4
         with:
-          name: diffs
+          pattern: diffs-*
+          merge-multiple: true
           path: temp
       - name: show downloaded
         run: ls -alF temp
