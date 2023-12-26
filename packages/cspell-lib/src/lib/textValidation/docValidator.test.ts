@@ -31,8 +31,14 @@ describe('docValidator', () => {
         const doc = td(__filename, '/** This is some code */');
         const dVal = new DocumentValidator(doc, {}, {});
         expect(dVal.document).toBe(doc);
-        // dVal.prepareSync();
-        // expect(dVal.checkText([0, 0], '', [])).toEqual([]);
+    });
+
+    test('getCheckedTextRanges', async () => {
+        const text = '/** This is some code */';
+        const doc = td(__filename, text);
+        const dVal = new DocumentValidator(doc, {}, {});
+        await dVal.prepare();
+        expect(dVal.getCheckedTextRanges()).toEqual([{ startPos: 0, endPos: text.length }]);
     });
 
     test.each`
@@ -261,6 +267,16 @@ describe('shouldCheckDocument', () => {
             expect(await shouldCheckDocument({ uri }, options, settings)).toEqual(expected);
         },
     );
+});
+
+describe('docValidator trace', () => {
+    test('trace word', async () => {
+        const text = '/** This is some code */';
+        const doc = td(__filename, text);
+        const dVal = new DocumentValidator(doc, {}, {});
+        await dVal.prepare();
+        expect(dVal.traceWord('Code')).toEqual(ac([oc({ dictName: 'en_us', foundWord: 'code' })]));
+    });
 });
 
 function extractRawText(text: string, issues: ValidationIssue[]): string[] {

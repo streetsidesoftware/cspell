@@ -1,5 +1,9 @@
 import * as GS from 'gensequence';
 
+/**
+ * A range of text in a document.
+ * The range is inclusive of the startPos and exclusive of the endPos.
+ */
 export interface MatchRange {
     startPos: number;
     endPos: number;

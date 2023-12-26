@@ -662,6 +662,10 @@ declare class SuggestionError extends Error {
     constructor(message: string, code: string);
 }
 
+/**
+ * A range of text in a document.
+ * The range is inclusive of the startPos and exclusive of the endPos.
+ */
 interface MatchRange {
     startPos: number;
     endPos: number;
@@ -787,6 +791,21 @@ declare class DocumentValidator {
     checkDocumentDirectives(forceCheck?: boolean): ValidationIssue[];
     get document(): TextDocument;
     updateDocumentText(text: string): Promise<void>;
+    /**
+     * Get the calculated ranges of text that should be included in the spell checking.
+     * @returns MatchRanges of text to include.
+     */
+    getCheckedTextRanges(): MatchRange[];
+    traceWord(word: string): {
+        word: string;
+        found: boolean;
+        foundWord: string | undefined;
+        forbidden: boolean;
+        noSuggest: boolean;
+        dictName: string;
+        dictSource: string;
+        errors: Error[] | undefined;
+    }[];
     private defaultParser;
     private _checkParsedText;
     private addPossibleError;

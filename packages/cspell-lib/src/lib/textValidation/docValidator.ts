@@ -27,6 +27,7 @@ import { catchPromiseError, toError } from '../util/errors.js';
 import { AutoCache } from '../util/simpleCache.js';
 import type { MatchRange } from '../util/TextRange.js';
 import { uriToFilePath } from '../util/Uri.js';
+import { toFilePathOrHref } from '../util/url.js';
 import { defaultMaxDuplicateProblems, defaultMaxNumberOfProblems } from './defaultConstants.js';
 import { determineTextDocumentSettings } from './determineTextDocumentSettings.js';
 import type { TextValidator } from './lineValidatorFactory.js';
@@ -320,6 +321,40 @@ export class DocumentValidator {
         await this._updatePrep();
     }
 
+    /**
+     * Get the calculated ranges of text that should be included in the spell checking.
+     * @returns MatchRanges of text to include.
+     */
+    public getCheckedTextRanges(): MatchRange[] {
+        assert(this._preparations, ERROR_NOT_PREPARED);
+        return this._preparations.includeRanges;
+    }
+
+    public traceWord(word: string) {
+        assert(this._preparations, ERROR_NOT_PREPARED);
+        const dictCollection = this._preparations.dictionary;
+        const config = this._preparations.config;
+
+        const opts = {
+            ignoreCase: true,
+            allowCompoundWords: config.allowCompoundWords || false,
+        };
+
+        const trace = dictCollection.dictionaries
+            .map((dict) => ({ dict, findResult: dict.find(word, opts) }))
+            .map(({ dict, findResult }) => ({
+                word,
+                found: !!findResult?.found,
+                foundWord: findResult?.found || undefined,
+                forbidden: findResult?.forbidden || false,
+                noSuggest: findResult?.noSuggest || false,
+                dictName: dict.name,
+                dictSource: toFilePathOrHref(dict.source),
+                errors: normalizeErrors(dict.getErrors?.()),
+            }));
+        return trace;
+    }
+
     private defaultParser(): Iterable<ParsedText> {
         return pipeSync(
             this.document.getLines(),
@@ -520,4 +555,8 @@ function recordPerfTime(timings: PerfTimings, name: string): () => void {
 
 function timePromise<T>(timings: PerfTimings, name: string, p: Promise<T>): Promise<T> {
     return p.finally(recordPerfTime(timings, name));
+}
+
+function normalizeErrors(errors: Error[] | undefined): Error[] | undefined {
+    return errors?.length ? errors : undefined;
 }
