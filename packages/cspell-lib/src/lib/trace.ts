@@ -3,8 +3,8 @@ import { genSequence } from 'gensequence';
 
 import type { LanguageId } from './LanguageIds.js';
 import { toInternalSettings } from './Settings/CSpellSettingsServer.js';
-import { calcSettingsForLanguageId } from './Settings/LanguageSettings.js';
 import { finalizeSettings, mergeSettings } from './Settings/index.js';
+import { calcSettingsForLanguageId } from './Settings/LanguageSettings.js';
 import type { HasOptions, SpellingDictionaryCollection } from './SpellingDictionary/index.js';
 import { getDictionaryInternal, refreshDictionaryCache } from './SpellingDictionary/index.js';
 import { toFilePathOrHref } from './util/url.js';
