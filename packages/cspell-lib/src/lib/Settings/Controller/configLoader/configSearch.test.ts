@@ -1,6 +1,7 @@
+import { promises as nfs } from 'node:fs';
+
 import { createRedirectProvider, createVirtualFS, FSCapabilityFlags } from 'cspell-io';
 import { describe, expect, test } from 'vitest';
-import { promises as nfs } from 'node:fs';
 
 import { pathPackageSamplesURL, pathRepoTestFixturesURL } from '../../../../test-util/index.mjs';
 import { getVirtualFS } from '../../../fileSystem.js';
