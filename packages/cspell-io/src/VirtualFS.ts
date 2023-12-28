@@ -515,12 +515,14 @@ export interface VfsStat extends Stats {
     isDirectory(): boolean;
     isFile(): boolean;
     isUnknown(): boolean;
+    isSymbolicLink(): boolean;
 }
 
 export interface VfsDirEntry extends DirEntry {
     isDirectory(): boolean;
     isFile(): boolean;
     isUnknown(): boolean;
+    isSymbolicLink(): boolean;
 }
 
 class CFileType {
@@ -536,6 +538,10 @@ class CFileType {
 
     isUnknown(): boolean {
         return !this.fileType;
+    }
+
+    isSymbolicLink(): boolean {
+        return !!(this.fileType & FileType.SymbolicLink);
     }
 }
 
@@ -575,6 +581,14 @@ class CVfsDirEntry extends CFileType implements VfsDirEntry {
         if (this._url) return this._url;
         this._url = new URL(this.entry.name, this.entry.dir);
         return this._url;
+    }
+
+    toJSON(): DirEntry {
+        return {
+            name: this.name,
+            dir: this.dir,
+            fileType: this.fileType,
+        };
     }
 }
 
