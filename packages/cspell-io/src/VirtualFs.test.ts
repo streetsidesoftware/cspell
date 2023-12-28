@@ -3,11 +3,11 @@ import { basename } from 'path';
 import { afterEach, beforeEach, describe, expect, test, vi } from 'vitest';
 
 import { CFileResource } from './common/index.js';
+import { FileType } from './models/Stats.js';
 import { toFileURL, urlBasename } from './node/file/url.js';
 import { pathToSample as ps } from './test/test.helper.js';
 import type { VFileSystemProvider, VirtualFS, VProviderFileSystem } from './VirtualFS.js';
 import { createVirtualFS, FSCapabilityFlags, getDefaultVirtualFs, VFSErrorUnsupportedRequest } from './VirtualFS.js';
-import { FileType } from './models/Stats.js';
 
 const sc = expect.stringContaining;
 const oc = expect.objectContaining;
