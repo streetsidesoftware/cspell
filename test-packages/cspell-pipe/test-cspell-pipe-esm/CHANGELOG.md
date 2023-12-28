@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 8.2.4 (2023-12-28)
+
+**Note:** Version bump only for package test-cspell-pipe-esm
+
 ## 8.2.3 (2023-12-21)
 
 ### Bug Fixes
