@@ -304,6 +304,7 @@ function direntToDirEntry(dir: URL, dirent: Dirent): DirEntry {
     };
 }
 
-function toFileType(statLike: { isFile(): boolean; isDirectory(): boolean }): FileType {
-    return statLike.isFile() ? FileType.File : statLike.isDirectory() ? FileType.Directory : FileType.Unknown;
+function toFileType(statLike: { isFile(): boolean; isDirectory(): boolean; isSymbolicLink(): boolean }): FileType {
+    const t = statLike.isFile() ? FileType.File : statLike.isDirectory() ? FileType.Directory : FileType.Unknown;
+    return statLike.isSymbolicLink() ? t | FileType.SymbolicLink : t;
 }

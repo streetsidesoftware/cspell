@@ -34,6 +34,10 @@ export enum FileType {
      * A directory.
      */
     Directory = 2,
+    /**
+     * A symbolic link.
+     */
+    SymbolicLink = 64,
 }
 
 export interface DirEntry {

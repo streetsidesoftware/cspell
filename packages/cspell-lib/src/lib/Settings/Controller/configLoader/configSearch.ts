@@ -89,20 +89,26 @@ export class ConfigSearch {
                 const parentInfo = await parentInfoP;
                 const name = urlBasename(dir).slice(0, -1);
                 const found = parentInfo.get(name);
-                if (!found?.isDirectory()) return false;
+                if (!found?.isDirectory() && !found?.isSymbolicLink()) return false;
             }
             const dirUrlHref = dir.href;
-            const dirInfo = await dirInfoCache.get(
-                dirUrlHref,
-                async () => new Map((await this.fs.readDirectory(dir).catch(() => [])).map((ent) => [ent.name, ent])),
-            );
+            const dirInfo = await dirInfoCache.get(dirUrlHref, async () => await this.readDir(dir));
 
             const name = urlBasename(filename);
             const found = dirInfo.get(name);
-            return !!found?.isFile();
+            return found?.isFile() || found?.isSymbolicLink() || false;
         };
 
         return hasFile;
+    }
+
+    private async readDir(dir: URL): Promise<Map<string, VfsDirEntry>> {
+        try {
+            const dirInfo = await this.fs.readDirectory(dir);
+            return new Map(dirInfo.map((ent) => [ent.name, ent]));
+        } catch (e) {
+            return new Map();
+        }
     }
 
     private createHasFileStatCheck(): (file: URL) => Promise<boolean> {

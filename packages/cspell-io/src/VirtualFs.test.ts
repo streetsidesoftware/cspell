@@ -7,6 +7,7 @@ import { toFileURL, urlBasename } from './node/file/url.js';
 import { pathToSample as ps } from './test/test.helper.js';
 import type { VFileSystemProvider, VirtualFS, VProviderFileSystem } from './VirtualFS.js';
 import { createVirtualFS, FSCapabilityFlags, getDefaultVirtualFs, VFSErrorUnsupportedRequest } from './VirtualFS.js';
+import { FileType } from './models/Stats.js';
 
 const sc = expect.stringContaining;
 const oc = expect.objectContaining;
@@ -167,6 +168,7 @@ describe('VirtualFs', () => {
         filename               | baseFilename            | content
         ${__filename}          | ${basename(__filename)} | ${sc('This bit of text')}
         ${ps('cities.txt')}    | ${'cities.txt'}         | ${sc('San Francisco\n')}
+        ${ps('link.txt')}      | ${'link.txt'}           | ${sc('San Francisco\n')}
         ${ps('cities.txt.gz')} | ${'cities.txt.gz'}      | ${sc('San Francisco\n')}
     `('readFile $filename', async ({ filename, content, baseFilename }) => {
         const url = toFileURL(filename);
@@ -192,8 +194,9 @@ describe('VirtualFs', () => {
     });
 
     test.each`
-        url           | expected
-        ${__filename} | ${oc({ mtimeMs: expect.any(Number), size: expect.any(Number), fileType: 1 })}
+        url               | expected
+        ${__filename}     | ${oc({ mtimeMs: expect.any(Number), size: expect.any(Number), fileType: 1 })}
+        ${ps('link.txt')} | ${oc({ mtimeMs: expect.any(Number), size: expect.any(Number), fileType: 1 }) /* links are resolved */}
     `('getStat $url', async ({ url, expected }) => {
         url = toFileURL(url);
         const fs = getDefaultVirtualFs().fs;
@@ -261,6 +264,29 @@ describe('VirtualFs', () => {
         expect(capabilities.stat).toBe(true);
         expect(capabilities.readDirectory).toBe(true);
         expect(capabilities.writeDirectory).toBe(false);
+    });
+
+    test('symbolic links', async () => {
+        const linkPath = ps('link.txt');
+        const linkURL = toFileURL(linkPath);
+        const fs = virtualFs.fs;
+
+        const stat = await fs.stat(linkURL);
+        expect(stat.isFile()).toBe(true);
+        expect(stat.isDirectory()).toBe(false);
+        expect(stat.isSymbolicLink()).toBe(false);
+
+        const result = fs.readDirectory(new URL('.', linkURL));
+        await expect(result).resolves.toEqual(
+            expect.arrayContaining([
+                oc({
+                    fileType: FileType.SymbolicLink,
+                    url: linkURL,
+                    name: urlBasename(linkURL),
+                    dir: new URL('.', linkURL),
+                }),
+            ]),
+        );
     });
 });
 

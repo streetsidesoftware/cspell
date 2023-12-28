@@ -1,7 +1,8 @@
 import { createRedirectProvider, createVirtualFS, FSCapabilityFlags } from 'cspell-io';
 import { describe, expect, test } from 'vitest';
+import { promises as nfs } from 'node:fs';
 
-import { pathPackageSamplesURL } from '../../../../test-util/index.mjs';
+import { pathPackageSamplesURL, pathRepoTestFixturesURL } from '../../../../test-util/index.mjs';
 import { getVirtualFS } from '../../../fileSystem.js';
 import { resolveFileWithURL, toURL } from '../../../util/url.js';
 import { defaultConfigFilenames as searchPlaces } from './configLocations.js';
@@ -9,6 +10,7 @@ import { ConfigSearch } from './configSearch.js';
 
 const virtualURL = new URL('virtual-fs://github/cspell-io/');
 const htmlURL = new URL('https://example.com/');
+const issuesURL = new URL('issues/', pathRepoTestFixturesURL);
 
 describe('ConfigSearch', () => {
     describe('searchForConfig', () => {
@@ -48,6 +50,7 @@ describe('ConfigSearch', () => {
             ${'https://example.com/path/to/search/from/'} | ${u('.cspell.json', htmlURL)}
             ${'https://example.com/path/to/files/'}       | ${u('.cspell.json', htmlURL)}
             ${sURLh('package-json/nested/README.md')}     | ${sURL('package-json/package.json')}
+            ${uh('issue-5120/', issuesURL)}               | ${u('issue-5120/.config/cspell.config.yaml', issuesURL)}
         `('searchForConfig vfs $dir', async ({ dir, expected }) => {
             const vfs = createVirtualFS();
             const redirectProviderVirtual = createRedirectProvider('virtual', virtualURL, sURL('./'));
@@ -81,6 +84,13 @@ describe('ConfigSearch', () => {
             expect(result3).not.toBe(result);
             expect(result4).toBe(result3);
             expect(result5).toStrictEqual(result4);
+        });
+
+        test('symbolic links', async () => {
+            const dir = new URL('issues/issue-5120/', pathRepoTestFixturesURL);
+            const info = await nfs.readdir(dir, { withFileTypes: true });
+            const symEntries = info.filter((e) => e.isSymbolicLink());
+            expect(symEntries.map((e) => e.name)).toEqual(['.config']);
         });
     });
 
