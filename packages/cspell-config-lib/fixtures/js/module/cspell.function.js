@@ -48,7 +48,6 @@ function expandWords(wordList) {
 }
 
 /**
- *
  * @returns {Promise<import('@cspell/cspell-types').CSpellUserSettings>}
  */
 export default async function getConfig() {

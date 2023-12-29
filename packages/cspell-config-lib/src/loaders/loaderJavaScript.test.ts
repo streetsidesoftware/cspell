@@ -49,6 +49,7 @@ describe('loaderJavaScript', () => {
     test.each`
         file                              | expected
         ${'js/module/cspell.function.js'} | ${{ settings: oc({ id: 'config-function', words: ac(['recheck', 'tested']) }) }}
+        ${'js/module/cspell.python.mjs'}  | ${{ settings: oc({ id: 'python-imports', words: ac(['blinker', 'click']) }) }}
     `('loaderJavaScript $file default function', async ({ file, expected }) => {
         const url = pathToFileURL(fixtures(file));
         expected.url ??= url;
