@@ -15,7 +15,8 @@ async function importJavaScript(url: URL, hashSuffix: number | string): Promise<
         _url.hash = `${_url.hash};loaderSuffix=${hashSuffix}`;
         _log('importJavaScript: %o', { url: _url.href });
         const result = await import(_url.href);
-        const settings = result.default ?? result;
+        const settingsOrFunction = await (result.default ?? result);
+        const settings = typeof settingsOrFunction === 'function' ? await settingsOrFunction() : settingsOrFunction;
         return new CSpellConfigFileJavaScript(url, settings);
     } catch (e) {
         _log('importJavaScript Error: %o', { url: url.href, error: e, hashSuffix });
