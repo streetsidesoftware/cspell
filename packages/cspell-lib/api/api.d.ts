@@ -453,6 +453,7 @@ interface IConfigLoader {
      * @returns the resulting settings
      */
     searchForConfig(searchFrom: URL | string | undefined, pnpSettings?: PnPSettingsOptional): Promise<CSpellSettingsI | undefined>;
+    resolveConfigFileLocation(filenameOrURL: string | URL, relativeTo?: string | URL): Promise<URL | undefined>;
     getGlobalSettingsAsync(): Promise<CSpellSettingsI>;
     /**
      * The loader caches configuration files for performance. This method clears the cache.
@@ -475,6 +476,8 @@ interface IConfigLoader {
      */
     dispose(): void;
     getStats(): Readonly<Record<string, Readonly<Record<string, number>>>>;
+    readonly isTrusted: boolean;
+    setIsTrusted(isTrusted: boolean): void;
 }
 declare function loadPnP(pnpSettings: PnPSettingsOptional, searchFrom: URL): Promise<LoaderResult>;
 declare function createConfigLoader(fs?: VFileSystem): IConfigLoader;

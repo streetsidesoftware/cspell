@@ -1,3 +1,5 @@
+import { extname } from 'node:path/posix';
+
 import { urlBasename } from 'cspell-io';
 
 import type { VFileSystem, VfsDirEntry } from '../../../fileSystem.js';
@@ -9,12 +11,20 @@ type Href = string;
 export class ConfigSearch {
     private searchCache = new Map<Href, Promise<URL | undefined>>();
     private searchDirCache = new Map<Href, Promise<URL | undefined>>();
+    private searchPlacesByProtocol: Map<string, string[]>;
 
+    /**
+     * @param searchPlaces - The list of file names to search for.
+     * @param allowedExtensionsByProtocol - Map of allowed extensions by protocol, '*' is used to match all protocols.
+     * @param fs - The file system to use.
+     */
     constructor(
         readonly searchPlaces: readonly string[],
+        readonly allowedExtensionsByProtocol: Map<string, readonly string[]>,
         private fs: VFileSystem,
     ) {
-        this.searchPlaces = searchPlaces;
+        this.searchPlacesByProtocol = setupSearchPlacesByProtocol(searchPlaces, allowedExtensionsByProtocol);
+        this.searchPlaces = this.searchPlacesByProtocol.get('*') || searchPlaces;
     }
 
     searchForConfig(searchFromURL: URL): Promise<URL | undefined> {
@@ -125,7 +135,9 @@ export class ConfigSearch {
             ? this.createHasFileDirSearch()
             : this.createHasFileStatCheck();
 
-        for (const searchPlace of this.searchPlaces) {
+        const searchPlaces = this.searchPlacesByProtocol.get(dir.protocol) || this.searchPlaces;
+
+        for (const searchPlace of searchPlaces) {
             const file = new URL(searchPlace, dir);
             const found = await hasFile(file);
             if (found) {
@@ -135,6 +147,18 @@ export class ConfigSearch {
         }
         return undefined;
     }
+}
+
+function setupSearchPlacesByProtocol(
+    searchPlaces: readonly string[],
+    allowedExtensionsByProtocol: Map<string, readonly string[]>,
+): Map<string, string[]> {
+    const map = new Map(
+        [...allowedExtensionsByProtocol.entries()]
+            .map(([k, v]) => [k, new Set(v)] as const)
+            .map(([protocol, exts]) => [protocol, searchPlaces.filter((url) => exts.has(extname(url)))] as const),
+    );
+    return map;
 }
 
 async function checkPackageJson(fs: VFileSystem, filename: URL): Promise<boolean> {

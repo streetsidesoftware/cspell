@@ -6,12 +6,11 @@ import type { CSpellSettingsInternal } from '../Models/CSpellSettingsInternalDef
 import { createCSpellSettingsInternal } from '../Models/CSpellSettingsInternalDef.js';
 import { PatternRegExp } from '../Models/PatternRegExp.js';
 import { resolveFile } from '../util/resolveFile.js';
+import { defaultConfigFileModuleRef } from './constants.js';
 import { readSettings } from './Controller/configLoader/index.js';
 import { mergeSettings } from './CSpellSettingsServer.js';
 import * as LanguageSettings from './LanguageSettings.js';
 import * as RegPat from './RegExpPatterns.js';
-
-const defaultConfigFileModuleRef = '@cspell/cspell-bundled-dicts/cspell-default.json';
 
 // Do not use require.resolve because webpack will mess it up.
 const defaultConfigFile = () => resolveConfigModule(defaultConfigFileModuleRef);

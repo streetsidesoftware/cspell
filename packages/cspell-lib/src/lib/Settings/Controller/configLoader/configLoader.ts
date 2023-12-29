@@ -7,6 +7,7 @@ import path from 'path';
 import { fileURLToPath, pathToFileURL } from 'url';
 import { URI, Utils as UriUtils } from 'vscode-uri';
 
+import { srcDirectory } from '../../../../lib-cjs/index.cjs';
 import { onClearCache } from '../../../events/index.js';
 import type { VFileSystem } from '../../../fileSystem.js';
 import { getVirtualFS } from '../../../fileSystem.js';
@@ -26,6 +27,7 @@ import {
     configSettingsFileVersion0_1,
     configSettingsFileVersion0_2,
     currentSettingsFileVersion,
+    defaultConfigFileModuleRef,
     ENV_CSPELL_GLOB_ROOT,
 } from '../../constants.js';
 import { getMergeStats, mergeSettings } from '../../CSpellSettingsServer.js';
@@ -116,6 +118,8 @@ export interface IConfigLoader {
         pnpSettings?: PnPSettingsOptional,
     ): Promise<CSpellSettingsI | undefined>;
 
+    resolveConfigFileLocation(filenameOrURL: string | URL, relativeTo?: string | URL): Promise<URL | undefined>;
+
     getGlobalSettingsAsync(): Promise<CSpellSettingsI>;
 
     /**
@@ -146,11 +150,26 @@ export interface IConfigLoader {
     dispose(): void;
 
     getStats(): Readonly<Record<string, Readonly<Record<string, number>>>>;
+
+    readonly isTrusted: boolean;
+
+    setIsTrusted(isTrusted: boolean): void;
 }
+
+const defaultExtensions = ['.json', '.yaml', '.yml', '.jsonc'];
+const defaultJsExtensions = ['.js', '.cjs', '.mjs'];
+
+const trustedSearch: Map<string, readonly string[]> = new Map([
+    ['*', defaultExtensions],
+    ['file:', [...defaultExtensions, ...defaultJsExtensions]],
+]);
+
+const unTrustedSearch: Map<string, readonly string[]> = new Map([['*', defaultExtensions]]);
 
 export class ConfigLoader implements IConfigLoader {
     public onReady: Promise<void>;
     readonly fileResolver: FileResolver;
+    private _isTrusted = true;
 
     /**
      * Use `createConfigLoader`
@@ -160,10 +179,10 @@ export class ConfigLoader implements IConfigLoader {
         readonly fs: VFileSystem,
         readonly templateVariables: Record<string, string> = envToTemplateVars(process.env),
     ) {
-        this.configSearch = new ConfigSearch(searchPlaces, fs);
+        this.configSearch = new ConfigSearch(searchPlaces, trustedSearch, fs);
         this.cspellConfigFileReaderWriter = createReaderWriter(undefined, undefined, createIO(fs));
         this.fileResolver = new FileResolver(fs, this.templateVariables);
-        this.onReady = this.prefetchGlobalSettingsAsync();
+        this.onReady = this.init();
         this.subscribeToEvents();
     }
 
@@ -277,12 +296,22 @@ export class ConfigLoader implements IConfigLoader {
         this.prefetchGlobalSettingsAsync();
     }
 
-    protected prefetchGlobalSettingsAsync(): Promise<void> {
-        this.onReady = this.getGlobalSettingsAsync().then(
+    protected init(): Promise<void> {
+        this.onReady = Promise.all([this.prefetchGlobalSettingsAsync(), this.resolveDefaultConfig()]).then(
             () => undefined,
-            (e) => logError(e),
         );
         return this.onReady;
+    }
+
+    protected async prefetchGlobalSettingsAsync(): Promise<void> {
+        await this.getGlobalSettingsAsync().catch((e) => logError(e));
+    }
+
+    protected async resolveDefaultConfig() {
+        const r = await this.fileResolver.resolveFile(defaultConfigFileModuleRef, srcDirectory);
+        const url = toFileURL(r.filename);
+        this.cspellConfigFileReaderWriter.setTrustedUrls([new URL('../..', url)]);
+        return url;
     }
 
     protected importSettings(
@@ -504,6 +533,11 @@ export class ConfigLoader implements IConfigLoader {
         return { ...getMergeStats() };
     }
 
+    async resolveConfigFileLocation(filenameOrURL: string | URL, relativeTo: string | URL): Promise<URL | undefined> {
+        const r = await this.fileResolver.resolveFile(filenameOrURL, relativeTo);
+        return r.found ? toFileURL(r.filename) : undefined;
+    }
+
     private async resolveFilename(filename: string | URL, relativeTo: string | URL): Promise<ImportFileRef> {
         if (filename instanceof URL) return { filename: toFilePathOrHref(filename) };
         if (isUrlLike(filename)) return { filename: toFilePathOrHref(filename) };
@@ -518,6 +552,17 @@ export class ConfigLoader implements IConfigLoader {
             filename: r.filename.startsWith('file:/') ? fileURLToPath(r.filename) : r.filename,
             error: r.found ? undefined : new Error(`Failed to resolve file: "${filename}"`),
         };
+    }
+
+    get isTrusted() {
+        return this._isTrusted;
+    }
+
+    setIsTrusted(isTrusted: boolean) {
+        this._isTrusted = isTrusted;
+        this.clearCachedSettingsFiles();
+        this.configSearch = new ConfigSearch(searchPlaces, isTrusted ? trustedSearch : unTrustedSearch, this.fs);
+        this.cspellConfigFileReaderWriter.setUntrustedExtensions(isTrusted ? [] : defaultJsExtensions);
     }
 }
 
