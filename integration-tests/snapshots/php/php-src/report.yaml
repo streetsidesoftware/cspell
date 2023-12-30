@@ -5,7 +5,7 @@ Args: '["--config=${repoConfig}/cspell.json","**/*.{md,c,h,php}"]'
 Summary:
   files: 2166
   filesWithIssues: 1624
-  issues: 44079
+  issues: 44074
   errors: 0
 Errors: []
 
@@ -1959,7 +1959,6 @@ issues:
   - "ext/fileinfo/libmagic/apptype.c:152:12      WINDOWCOMPAT        U       FAPPTYP_WINDOWCOMPAT |"
   - "ext/fileinfo/libmagic/ascmagic.c:38:24          ascmagic        U       FILE_RCSID(\"@(#)$File: ascmagic.c,v 1.110 2021/12/0"
   - "ext/fileinfo/libmagic/ascmagic.c:50:9           ISSPC           U       #define ISSPC(x) ((x) == ' ' || (x"
-  - "ext/fileinfo/libmagic/ascmagic.c:55:21          nuls            U       private size_t trim_nuls(const unsigned char"
   - "ext/fileinfo/libmagic/ascmagic.c:144:28         realloced       U       improved, or at least realloced after conversion. *"
   - "ext/fileinfo/libmagic/ascmagic.c:156:18         softmagic       U       if ((rv = file_softmagic(ms, &bb, NULL, NULL"
   - "ext/fileinfo/libmagic/ascmagic.c:217:13         printedlen      U       len = file_printedlen(ms);"
@@ -2857,7 +2856,6 @@ issues:
   - "ext/hash/xxhash/xxhash.h:2993:4         VZIP                    U       * VZIP takes two registers"
   - "ext/hash/xxhash/xxhash.h:3003:6         vzip                    U       * vzip.32 d10, d11"
   - "ext/hash/xxhash/xxhash.h:3020:22        vget                    U       * The formerly free vget_high intrinsics now"
-  - "ext/hash/xxhash/xxhash.h:3020:57        vext                    U       intrinsics now require a vext (with a few"
   - "ext/hash/xxhash/xxhash.h:3024:7         PUNPCKL                 U       * of PUNPCKL* and PUNPCKH* in SSE"
   - "ext/hash/xxhash/xxhash.h:3024:20        PUNPCKH                 U       * of PUNPCKL* and PUNPCKH* in SSE, respectively"
   - "ext/hash/xxhash/xxhash.h:3034:40        vmovn                   U       a literal downcast, vmovn_u64 (XTN), and vshrn"
