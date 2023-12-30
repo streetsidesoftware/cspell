@@ -624,7 +624,7 @@ describe('Validate search/load config files', () => {
 
 describe('ConfigLoader with VirtualFS', () => {
     const publicURL = new URL('vscode-fs://github/streetsidesoftware/public-samples/');
-    const publicFileURL = new URL('file:///public-samples/');
+    const publicFileURL = new URL('public-sample/', pathToFileURL(path.resolve('/')));
 
     function pURL(path: string, rel = publicURL): URL {
         return new URL(path, rel);
