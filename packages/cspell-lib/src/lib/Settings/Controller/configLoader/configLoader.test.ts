@@ -11,12 +11,13 @@ import {
     pathPackageSamples,
     pathPackageSamplesURL,
     pathRepoRoot,
+    pathRepoRootURL,
     pathRepoTestFixtures,
     pathRepoTestFixturesURL,
 } from '../../../../test-util/test.locations.cjs';
 import { logError, logWarning } from '../../../util/logger.js';
 import { resolveFileWithURL, toFilePathOrHref, toFileUrl } from '../../../util/url.js';
-import { currentSettingsFileVersion, ENV_CSPELL_GLOB_ROOT } from '../../constants.js';
+import { currentSettingsFileVersion, defaultConfigFileModuleRef, ENV_CSPELL_GLOB_ROOT } from '../../constants.js';
 import type { ImportFileRefWithError } from '../../CSpellSettingsServer.js';
 import { extractDependencies, getSources, mergeSettings } from '../../CSpellSettingsServer.js';
 import { _defaultSettings, getDefaultBundledSettingsAsync } from '../../DefaultSettings.js';
@@ -623,9 +624,10 @@ describe('Validate search/load config files', () => {
 
 describe('ConfigLoader with VirtualFS', () => {
     const publicURL = new URL('vscode-fs://github/streetsidesoftware/public-samples/');
+    const publicFileURL = new URL('public-sample/', pathToFileURL(path.resolve('/')));
 
-    function pURL(path: string): URL {
-        return new URL(path, publicURL);
+    function pURL(path: string, rel = publicURL): URL {
+        return new URL(path, rel);
     }
 
     test.each`
@@ -657,11 +659,12 @@ describe('ConfigLoader with VirtualFS', () => {
     });
 
     test.each`
-        file                       | expectedConfig                                                         | expectedImportErrors
-        ${'README.md'}             | ${cfg(pURL('.cspell.json'), {})}                                       | ${[]}
-        ${'bug-fixes/bug345.ts'}   | ${cfg(pURL('bug-fixes/cspell.json'), {})}                              | ${[]}
-        ${'linked/file.txt'}       | ${cfg(pURL('linked/cspell.config.js'), { __importRef: undefined })}    | ${[]}
-        ${'yaml-config/README.md'} | ${cfg(pURL('yaml-config/cspell.yaml'), { id: 'Yaml Example Config' })} | ${['cspell-imports.json']}
+        file                                    | expectedConfig                                                                   | expectedImportErrors
+        ${'README.md'}                          | ${cfg(pURL('.cspell.json'), {})}                                                 | ${[]}
+        ${'bug-fixes/bug345.ts'}                | ${cfg(pURL('bug-fixes/cspell.json'), {})}                                        | ${[]}
+        ${uh('linked/file.txt', publicFileURL)} | ${cfg(uh('linked/cspell.config.js', publicFileURL), { __importRef: undefined })} | ${[]}
+        ${'linked/file.txt'}                    | ${cfg(pURL('.cspell.json') /* .js not loaded */, {})}                            | ${[]}
+        ${'yaml-config/README.md'}              | ${cfg(pURL('yaml-config/cspell.yaml'), { id: 'Yaml Example Config' })}           | ${['cspell-imports.json']}
     `('Search check from $file', async ({ file, expectedConfig, expectedImportErrors }) => {
         const vfs = createVirtualFS();
         const redirectProvider = createRedirectProvider('test', publicURL, sURL('./'));
@@ -684,6 +687,82 @@ describe('ConfigLoader with VirtualFS', () => {
                 ),
             ),
         );
+    });
+
+    test.each`
+        file                       | expectedConfig                                                                     | expectedImportErrors
+        ${'README.md'}             | ${cfg(u('.cspell.json', publicFileURL), {})}                                       | ${[]}
+        ${'bug-fixes/bug345.ts'}   | ${cfg(u('bug-fixes/cspell.json', publicFileURL), {})}                              | ${[]}
+        ${'linked/file.txt'}       | ${cfg(u('.cspell.json', publicFileURL) /* not trusted == .js not loaded */, {})}   | ${[]}
+        ${'yaml-config/README.md'} | ${cfg(u('yaml-config/cspell.yaml', publicFileURL), { id: 'Yaml Example Config' })} | ${['cspell-imports.json']}
+    `('Search untrusted $file', async ({ file, expectedConfig, expectedImportErrors }) => {
+        const vfs = createVirtualFS();
+        const redirectProvider = createRedirectProvider('test', publicFileURL, sURL('./'));
+        vfs.registerFileSystemProvider(redirectProvider);
+
+        const fileURL = u(file, publicFileURL);
+        const loader = createConfigLoader(vfs.fs);
+        loader.setIsTrusted(false);
+
+        const searchResult = await loader.searchForConfig(fileURL);
+        expect(searchResult?.__importRef).toEqual(
+            expectedConfig.__importRef ? expect.objectContaining(expectedConfig.__importRef) : undefined,
+        );
+        // expect(searchResult).toEqual(expect.objectContaining(expectedConfig));
+        const errors = extractImportErrors(searchResult || {});
+        expect(errors).toHaveLength(expectedImportErrors.length);
+        expect(errors).toEqual(
+            expect.arrayContaining(
+                (expectedImportErrors as string[]).map((filename) =>
+                    expect.objectContaining({ filename: expect.stringContaining(filename) }),
+                ),
+            ),
+        );
+    });
+
+    test.each`
+        file                          | expectedConfig
+        ${'./.cspell.json'}           | ${cf(u('.cspell.json', publicFileURL), {})}
+        ${'./bug-fixes/cspell.json'}  | ${cf(u('bug-fixes/cspell.json', publicFileURL), {})}
+        ${defaultConfigFileModuleRef} | ${cf(u('packages/cspell-bundled-dicts/cspell-default.json', pathRepoRootURL), {})}
+    `('Search resolve untrusted $file', async ({ file, expectedConfig }) => {
+        const vfs = createVirtualFS();
+        const redirectProvider = createRedirectProvider('test', publicFileURL, sURL('./'));
+        vfs.registerFileSystemProvider(redirectProvider);
+        const loader = createConfigLoader(vfs.fs);
+        loader.setIsTrusted(false);
+
+        const location = await loader.resolveConfigFileLocation(file, publicFileURL);
+
+        const configFile = await loader.readConfigFile(file, publicFileURL);
+
+        expect(configFile).not.toBeInstanceOf(Error);
+        assert(!(configFile instanceof Error));
+        expect(configFile.url.href).toBe(location?.href);
+        expect(configFile.url.href).toBe(expectedConfig.url.href);
+
+        const config = await loader.mergeConfigFileWithImports(configFile);
+        expect(config).toBeDefined();
+        const errors = extractImportErrors(config);
+        expect(errors).toHaveLength(0);
+    });
+
+    test.each`
+        file
+        ${'./linked/cspell.config.js'}
+    `('Error reading untrusted $file', async ({ file }) => {
+        const vfs = createVirtualFS();
+        const redirectProvider = createRedirectProvider('test', publicFileURL, sURL('./'));
+        vfs.registerFileSystemProvider(redirectProvider);
+        const loader = createConfigLoader(vfs.fs);
+        loader.setIsTrusted(false);
+
+        const location = await loader.resolveConfigFileLocation(file, publicFileURL);
+        const configFile = await loader.readConfigFile(file, publicFileURL);
+
+        expect(configFile).toBeInstanceOf(Error);
+        assert(configFile instanceof Error);
+        expect(configFile.cause).toEqual(Error(`Untrusted URL: "${location?.href}"`));
     });
 });
 

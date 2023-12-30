@@ -13,10 +13,19 @@ const virtualURL = new URL('virtual-fs://github/cspell-io/');
 const htmlURL = new URL('https://example.com/');
 const issuesURL = new URL('issues/', pathRepoTestFixturesURL);
 
+const defaultExtensions = ['.json', '.yaml', '.yml', '.jsonc'];
+const allExtensions = [...defaultExtensions, '.js', '.cjs', '.mjs'];
+
+const allowedExtensionsByProtocol = new Map<string, readonly string[]>([
+    ['file:', allExtensions],
+    ['virtual-fs:', allExtensions],
+    ['*', defaultExtensions],
+]);
+
 describe('ConfigSearch', () => {
     describe('searchForConfig', () => {
         test('should return the URL of the config file if found', async () => {
-            const configSearch = new ConfigSearch(searchPlaces, getVirtualFS().fs);
+            const configSearch = new ConfigSearch(searchPlaces, allowedExtensionsByProtocol, getVirtualFS().fs);
 
             const searchFrom = new URL('js-config/', pathPackageSamplesURL);
             const expectedConfigUrl = new URL('cspell.config.js', searchFrom);
@@ -27,7 +36,7 @@ describe('ConfigSearch', () => {
         });
 
         test('should return undefined if config file is not found', async () => {
-            const configSearch = new ConfigSearch(searchPlaces, getVirtualFS().fs);
+            const configSearch = new ConfigSearch(searchPlaces, allowedExtensionsByProtocol, getVirtualFS().fs);
 
             const searchFrom = u('/path/to/search/from/');
 
@@ -45,7 +54,7 @@ describe('ConfigSearch', () => {
             ${vURLh('linked/')}                           | ${vURL('linked/cspell.config.js')}
             ${vURLh('linked')}                            | ${vURL('.cspell.json')}
             ${uh('src/', htmlURL)}                        | ${u('.cspell.json', htmlURL)}
-            ${uh('linked/', htmlURL)}                     | ${u('linked/cspell.config.js', htmlURL)}
+            ${uh('linked/', htmlURL)}                     | ${u('.cspell.json', htmlURL)}
             ${uh('linked', htmlURL)}                      | ${u('.cspell.json', htmlURL)}
             ${uh('/path/to/search/from/')}                | ${undefined}
             ${'https://example.com/path/to/search/from/'} | ${u('.cspell.json', htmlURL)}
@@ -60,7 +69,7 @@ describe('ConfigSearch', () => {
                 capabilities: ~FSCapabilityFlags.ReadWriteDir,
             });
             vfs.registerFileSystemProvider(redirectProviderVirtual, redirectProviderHtml);
-            const configSearch = new ConfigSearch(searchPlaces, vfs.fs);
+            const configSearch = new ConfigSearch(searchPlaces, allowedExtensionsByProtocol, vfs.fs);
 
             const searchFrom = toURL(dir);
 
@@ -72,7 +81,7 @@ describe('ConfigSearch', () => {
         });
 
         test('that the same result is returned', async () => {
-            const configSearch = new ConfigSearch(searchPlaces, getVirtualFS().fs);
+            const configSearch = new ConfigSearch(searchPlaces, allowedExtensionsByProtocol, getVirtualFS().fs);
             const result = await configSearch.searchForConfig(sURL('src/'));
             const result2 = await configSearch.searchForConfig(sURL('.'));
             expect(result2).toBe(result);
@@ -97,7 +106,7 @@ describe('ConfigSearch', () => {
 
     describe('clearCache', () => {
         test('should clear the search cache', async () => {
-            const configSearch = new ConfigSearch(searchPlaces, getVirtualFS().fs);
+            const configSearch = new ConfigSearch(searchPlaces, allowedExtensionsByProtocol, getVirtualFS().fs);
 
             const searchFrom = new URL('js-config/', pathPackageSamplesURL);
             const expectedConfigUrl = new URL('cspell.config.js', searchFrom);

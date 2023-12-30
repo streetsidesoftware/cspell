@@ -99,6 +99,42 @@ describe('CSpellConfigFileReaderWriter', () => {
         expect(cfg2.settings).not.toBe(cfg0.settings);
         expect(cfg2.settings).toEqual(cfg0.settings);
     });
+
+    test.each`
+        uri                                   | content                   | expected
+        ${'file:///package.json'}             | ${json({ name: 'name' })} | ${'Untrusted URL: "file:///package.json"'}
+        ${'safe-fs:///path/cspell.config.js'} | ${json({ name: 'name' })} | ${'Untrusted URL: "safe-fs:///path/cspell.config.js"'}
+    `('readConfig untrusted', async ({ uri, content, expected }) => {
+        const io: IO = {
+            readFile: vi.fn((url) => Promise.resolve({ url, content })),
+            writeFile: vi.fn(),
+        };
+        const rw = new CSpellConfigFileReaderWriterImpl(io, defaultDeserializers, defaultLoaders);
+        rw.setUntrustedExtensions(['.json', '.js']);
+
+        expect(rw.trustedUrls).toEqual([]);
+        expect(rw.untrustedExtensions).toEqual(['.json', '.js']);
+
+        await expect(rw.readConfig(uri)).rejects.toThrowError(expected);
+    });
+
+    test.each`
+        uri                              | content                   | expected
+        ${'file:///package.json'}        | ${json({ name: 'name' })} | ${oc({ url: new URL('file:///package.json') })}
+        ${'safe-fs:///code/sample.json'} | ${json({ name: 'name' })} | ${oc({ url: new URL('safe-fs:///code/sample.json'), settings: { name: 'name' } })}
+    `('readConfig trusted', async ({ uri, content, expected }) => {
+        const io: IO = {
+            readFile: vi.fn((url) => Promise.resolve({ url, content })),
+            writeFile: vi.fn(),
+        };
+        const rw = new CSpellConfigFileReaderWriterImpl(io, defaultDeserializers, defaultLoaders);
+        rw.setUntrustedExtensions(['.json', '.js']).setTrustedUrls(['file:///package.json', 'safe-fs:///']);
+
+        expect(rw.trustedUrls.toString()).toEqual('file:///package.json,safe-fs:///');
+        expect(rw.untrustedExtensions).toEqual(['.json', '.js']);
+
+        await expect(rw.readConfig(uri)).resolves.toEqual(expected);
+    });
 });
 
 class Cfg extends CSpellConfigFile {
