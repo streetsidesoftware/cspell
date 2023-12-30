@@ -78,23 +78,23 @@ describe('Validate getDictionary', () => {
 
     // cspell:ignore zeromq hte colour
     test.each`
-        word        | expected
-        ${'zero'}   | ${undefined}
-        ${'zeromq'} | ${{ found: 'zeromq', forbidden: false, noSuggest: false }}
-        ${'zeros'}  | ${{ found: 'zeros', forbidden: false, noSuggest: true }}
-        ${'google'} | ${{ found: 'google', forbidden: false, noSuggest: true }}
-        ${'Café'}   | ${{ found: 'café', forbidden: false, noSuggest: false }}
-        ${'CAFÉ'}   | ${{ found: 'café', forbidden: false, noSuggest: false }}
-        ${'café'}   | ${{ found: 'café', forbidden: false, noSuggest: false }}
-        ${'cafe'}   | ${{ found: 'cafe', forbidden: false, noSuggest: false }}
-        ${'CAFE'}   | ${{ found: 'cafe', forbidden: false, noSuggest: false }}
-        ${'Rhône'}  | ${{ found: 'Rhône', forbidden: false, noSuggest: false }}
-        ${'RHÔNE'}  | ${{ found: 'rhône', forbidden: false, noSuggest: false }}
-        ${'rhône'}  | ${{ found: 'rhône', forbidden: false, noSuggest: false }}
-        ${'rhone'}  | ${{ found: 'rhone', forbidden: false, noSuggest: false }}
-        ${'snarf'}  | ${{ found: 'snarf', forbidden: true, noSuggest: false }}
-        ${'hte'}    | ${{ found: 'hte', forbidden: true, noSuggest: false }}
-        ${'colour'} | ${{ found: 'colour', forbidden: true, noSuggest: false }}
+        word            | expected
+        ${'grapefruit'} | ${undefined /* should not be found since no locale was used. */}
+        ${'zeromq'}     | ${{ found: 'zeromq', forbidden: false, noSuggest: false }}
+        ${'zeros'}      | ${{ found: 'zeros', forbidden: false, noSuggest: true }}
+        ${'google'}     | ${{ found: 'google', forbidden: false, noSuggest: true }}
+        ${'Café'}       | ${{ found: 'café', forbidden: false, noSuggest: false }}
+        ${'CAFÉ'}       | ${{ found: 'café', forbidden: false, noSuggest: false }}
+        ${'café'}       | ${{ found: 'café', forbidden: false, noSuggest: false }}
+        ${'cafe'}       | ${{ found: 'cafe', forbidden: false, noSuggest: false }}
+        ${'CAFE'}       | ${{ found: 'cafe', forbidden: false, noSuggest: false }}
+        ${'Rhône'}      | ${{ found: 'Rhône', forbidden: false, noSuggest: false }}
+        ${'RHÔNE'}      | ${{ found: 'rhône', forbidden: false, noSuggest: false }}
+        ${'rhône'}      | ${{ found: 'rhône', forbidden: false, noSuggest: false }}
+        ${'rhone'}      | ${{ found: 'rhone', forbidden: false, noSuggest: false }}
+        ${'snarf'}      | ${{ found: 'snarf', forbidden: true, noSuggest: false }}
+        ${'hte'}        | ${{ found: 'hte', forbidden: true, noSuggest: false }}
+        ${'colour'}     | ${{ found: 'colour', forbidden: true, noSuggest: false }}
     `('find words $word', async ({ word, expected }) => {
         const settings = csi({
             ...(await getDefaultBundledSettingsAsync()),
