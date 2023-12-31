@@ -27,7 +27,6 @@ import { catchPromiseError, toError } from '../util/errors.js';
 import { AutoCache } from '../util/simpleCache.js';
 import type { MatchRange } from '../util/TextRange.js';
 import { uriToFilePath } from '../util/Uri.js';
-import { toFilePathOrHref } from '../util/url.js';
 import { defaultMaxDuplicateProblems, defaultMaxNumberOfProblems } from './defaultConstants.js';
 import { determineTextDocumentSettings } from './determineTextDocumentSettings.js';
 import type { TextValidator } from './lineValidatorFactory.js';
@@ -36,6 +35,7 @@ import type { SimpleRange } from './parsedText.js';
 import { createMappedTextSegmenter } from './parsedText.js';
 import { settingsToValidateOptions } from './settingsToValidateOptions.js';
 import { calcTextInclusionRanges } from './textValidator.js';
+import { traceWord } from './traceWord.js';
 import type { ValidateTextOptions } from './ValidateTextOptions.js';
 import type { MappedTextValidationResult, ValidationOptions } from './ValidationTypes.js';
 
@@ -332,27 +332,7 @@ export class DocumentValidator {
 
     public traceWord(word: string) {
         assert(this._preparations, ERROR_NOT_PREPARED);
-        const dictCollection = this._preparations.dictionary;
-        const config = this._preparations.config;
-
-        const opts = {
-            ignoreCase: true,
-            allowCompoundWords: config.allowCompoundWords || false,
-        };
-
-        const trace = dictCollection.dictionaries
-            .map((dict) => ({ dict, findResult: dict.find(word, opts) }))
-            .map(({ dict, findResult }) => ({
-                word,
-                found: !!findResult?.found,
-                foundWord: findResult?.found || undefined,
-                forbidden: findResult?.forbidden || false,
-                noSuggest: findResult?.noSuggest || false,
-                dictName: dict.name,
-                dictSource: toFilePathOrHref(dict.source),
-                errors: normalizeErrors(dict.getErrors?.()),
-            }));
-        return trace;
+        return traceWord(word, this._preparations.dictionary, this._preparations.config);
     }
 
     private defaultParser(): Iterable<ParsedText> {
@@ -555,8 +535,4 @@ function recordPerfTime(timings: PerfTimings, name: string): () => void {
 
 function timePromise<T>(timings: PerfTimings, name: string, p: Promise<T>): Promise<T> {
     return p.finally(recordPerfTime(timings, name));
-}
-
-function normalizeErrors(errors: Error[] | undefined): Error[] | undefined {
-    return errors?.length ? errors : undefined;
 }

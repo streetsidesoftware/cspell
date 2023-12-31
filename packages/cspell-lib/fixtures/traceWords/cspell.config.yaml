@@ -1,0 +1,14 @@
+dictionaryDefinitions:
+  - name: myDictionary
+    words: ["café", "bar", "restaurant"]
+    ignoreWords: ["foo", "bar", "baz"]
+    suggestWords:
+      - cafe->café
+    flagWords:
+      - baz
+dictionaries:
+  - myDictionary
+
+words: ["foo", "bar", "baz", "cafe"]
+flagWords:
+  - teh # cspell:ignore teh

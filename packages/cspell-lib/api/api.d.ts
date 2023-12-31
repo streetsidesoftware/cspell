@@ -596,6 +596,26 @@ declare class SpellingDictionaryLoadError extends Error {
 }
 declare function isSpellingDictionaryLoadError(e: Error): e is SpellingDictionaryLoadError;
 
+type Href = string;
+interface DictionaryTraceResult {
+    word: string;
+    found: boolean;
+    foundWord: string | undefined;
+    forbidden: boolean;
+    noSuggest: boolean;
+    dictName: string;
+    dictSource: string;
+    configSource: Href | undefined;
+    errors: Error[] | undefined;
+}
+interface WordSplits {
+    word: string;
+    found: boolean;
+}
+interface TraceResult$1 extends Array<DictionaryTraceResult> {
+    splits?: readonly WordSplits[];
+}
+
 interface WordSuggestion extends SuggestionResult {
     /**
      * The suggested word adjusted to match the original case.
@@ -799,16 +819,7 @@ declare class DocumentValidator {
      * @returns MatchRanges of text to include.
      */
     getCheckedTextRanges(): MatchRange[];
-    traceWord(word: string): {
-        word: string;
-        found: boolean;
-        foundWord: string | undefined;
-        forbidden: boolean;
-        noSuggest: boolean;
-        dictName: string;
-        dictSource: string;
-        errors: Error[] | undefined;
-    }[];
+    traceWord(word: string): TraceResult$1;
     private defaultParser;
     private _checkParsedText;
     private addPossibleError;

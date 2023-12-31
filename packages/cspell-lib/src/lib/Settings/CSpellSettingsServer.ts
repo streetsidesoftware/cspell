@@ -331,7 +331,7 @@ export function getSources(settings: CSpellSettingsWSTO): CSpellSettingsWSTO[] {
 
 type Imports = CSpellSettingsWSTO['__imports'];
 
-function mergeImportRefs(left: CSpellSettingsWSTO, right: CSpellSettingsWSTO = {}): Imports {
+function mergeImportRefs(left: CSpellSettingsWSTO, right: CSpellSettingsWSTO = {}): Imports | undefined {
     const imports = new Map(left.__imports || []);
     if (left.__importRef) {
         imports.set(left.__importRef.filename, left.__importRef);

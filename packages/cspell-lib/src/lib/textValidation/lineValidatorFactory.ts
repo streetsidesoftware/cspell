@@ -16,6 +16,7 @@ import type {
     LineValidatorFn,
     MappedTextValidationResult,
     TextOffsetRO,
+    TextOffsetRW,
     TextValidatorFn,
     ValidationIssueRO,
     ValidationOptions,
@@ -24,6 +25,10 @@ import type {
 interface LineValidator {
     fn: LineValidatorFn;
     dict: CachingDictionary;
+}
+
+interface TextOffsetWithLine extends TextOffsetRW {
+    line?: TextOffsetRO;
 }
 
 export function lineValidatorFactory(sDict: SpellingDictionary, options: ValidationOptions): LineValidator {
@@ -147,8 +152,8 @@ export function lineValidatorFactory(sDict: SpellingDictionary, options: Validat
             const mismatches: ValidationIssue[] = toArray(
                 pipe(
                     Text.extractWordsFromTextOffset(possibleWord),
-                    opFilter(filterAlreadyChecked),
-                    opMap((wo) => ({ ...wo, line: lineSegment.line })),
+                    opFilter((wo: TextOffsetWithLine) => filterAlreadyChecked(wo)),
+                    opMap((wo: TextOffsetWithLine) => ((wo.line = lineSegment.line), wo as ValidationIssue)),
                     opMap(annotateIsFlagged),
                     opFilter(rememberFilter((wo) => wo.text.length >= minWordLength || !!wo.isFlagged)),
                     opConcatMap(checkFullWord),
