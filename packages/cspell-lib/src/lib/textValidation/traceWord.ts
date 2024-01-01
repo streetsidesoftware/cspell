@@ -1,13 +1,16 @@
 import type { CSpellSettingsWithSourceTrace } from '@cspell/cspell-types';
 
 import { getSources } from '../Settings/index.js';
+import type {
+    FindResult,
+    HasOptions,
+    SpellingDictionary,
+    SpellingDictionaryCollection,
+} from '../SpellingDictionary/index.js';
 import {
     createCollection,
-    type FindResult,
     getInlineConfigDictionaries,
     mapSpecialDictionaryNamesToSettings,
-    type SpellingDictionary,
-    type SpellingDictionaryCollection,
 } from '../SpellingDictionary/index.js';
 import { toFileUrl } from '../util/url.js';
 import { uniqueFn } from '../util/util.js';
@@ -37,7 +40,7 @@ export interface TraceResult extends Array<DictionaryTraceResult> {
     splits?: readonly WordSplits[];
 }
 
-export interface TraceOptions extends Pick<CSpellSettingsWithSourceTrace, 'source' | 'allowCompoundWords' | 'source'> {
+export interface TraceOptions extends Pick<CSpellSettingsWithSourceTrace, 'source' | 'allowCompoundWords'> {
     ignoreCase?: boolean;
 }
 
@@ -46,9 +49,9 @@ export function traceWord(
     dictCollection: SpellingDictionaryCollection,
     config: TraceOptions,
 ): TraceResult {
-    const opts = {
+    const opts: HasOptions = {
         ignoreCase: true,
-        allowCompoundWords: config.allowCompoundWords || false,
+        useCompounds: config.allowCompoundWords || false,
     };
 
     const splits = split({ text: word, offset: 0 }, 0, checkWord);
@@ -66,7 +69,7 @@ export function traceWord(
         .map(({ dict, word }) => ({ dict, findResult: dict.find(word, opts), word }))
         .flatMap((r) => unpackDictionaryFindResult(r, config));
 
-    const r = new CTractResult(...traces);
+    const r = new CTraceResult(...traces);
     r.splits = wordSplits;
     return r;
 
@@ -109,9 +112,9 @@ function unpackDictionaryFindResult(found: FindInDictResult, config: TraceOption
         return [baseResult];
     }
 
-    const opts = {
+    const opts: HasOptions = {
         ignoreCase: true,
-        allowCompoundWords: config.allowCompoundWords || false,
+        useCompounds: config.allowCompoundWords || false,
     };
 
     const sources = getSources(config);
@@ -136,6 +139,8 @@ function unpackDictionaryFindResult(found: FindInDictResult, config: TraceOption
         const cfgDict = createCollection(getInlineConfigDictionaries(cfg), dict.name, configSource);
 
         const findResult = cfgDict.find(word, opts);
+
+        if (!findResult?.found) continue;
 
         const result: DictionaryTraceResult = {
             word,
@@ -169,7 +174,7 @@ function normalizeErrors(errors: Error[] | undefined): Error[] | undefined {
     return errors?.length ? errors : undefined;
 }
 
-class CTractResult extends Array<DictionaryTraceResult> implements TraceResult {
+class CTraceResult extends Array<DictionaryTraceResult> implements TraceResult {
     splits: readonly WordSplits[] = [];
     constructor(...items: DictionaryTraceResult[]) {
         super(...items);

@@ -11,7 +11,7 @@ describe('traceEmitter', () => {
     test('empty', () => {
         const lines: string[] = [];
         vi.spyOn(console, 'log').mockImplementation((a) => lines.push(strip(a)));
-        emitTraceResults([], { cwd: '/', lineWidth: 80, dictionaryPathFormat: 'long', iPath: posix });
+        emitTraceResults('empty', false, [], { cwd: '/', lineWidth: 80, dictionaryPathFormat: 'long', iPath: posix });
         expect(lines).toEqual(['Word F Dictionary           Dictionary Location']);
     });
 
@@ -19,7 +19,7 @@ describe('traceEmitter', () => {
         const lines: string[] = [];
         vi.spyOn(console, 'log').mockImplementation((a) => lines.push(strip(a)));
         const lineWidth = 80;
-        emitTraceResults(sampleResults(), {
+        emitTraceResults('errorcode', true, sampleResults(), {
             cwd: '/this_is_a_very/long/path',
             lineWidth,
             dictionaryPathFormat: 'long',
@@ -40,7 +40,7 @@ errorcode  - softwareTerms*       node_modules/.../dict/softwareTerms.txt`);
         const lines: string[] = [];
         vi.spyOn(console, 'log').mockImplementation((a) => lines.push(strip(a)));
         const lineWidth = 80;
-        emitTraceResults(sampleResults(), {
+        emitTraceResults('errorcode', true, sampleResults(), {
             cwd: '/this_is_a_very/long/path',
             lineWidth,
             dictionaryPathFormat: 'short',
@@ -61,7 +61,7 @@ errorcode  - softwareTerms*       node_modules/.../dict/softwareTerms.txt`);
         const lines: string[] = [];
         vi.spyOn(console, 'log').mockImplementation((a) => lines.push(strip(a)));
         const lineWidth = 80;
-        emitTraceResults(sampleResultsWin32(), {
+        emitTraceResults('errorcode', true, sampleResultsWin32(), {
             cwd: 'D:/this_is_a_very/long/path',
             lineWidth,
             dictionaryPathFormat: 'long',
@@ -84,17 +84,19 @@ errorcode  - softwareTerms*       node_modules/.../dict/softwareTerms.txt`),
         const lines: string[] = [];
         vi.spyOn(console, 'log').mockImplementation((a) => lines.push(strip(a)));
         const lineWidth = 80;
-        emitTraceResults(sampleResultsWin32(), {
+        emitTraceResults('errorcode', true, sampleResultsWin32(), {
             cwd: 'D:/this_is_a_very/long/path',
             lineWidth,
             dictionaryPathFormat: 'full',
             iPath: win32,
+            showWordFound: true,
         });
         expect(lines.reduce((a, b) => Math.max(a, b.length), 0)).toBeGreaterThan(lineWidth);
         const output = lines.join('\n');
         expect(output).toEqual(
             bs(
                 `\
+errorcode: Found
 Word       F Dictionary           Dictionary Location
 errorcode  ! forbid-words*        D:/this_is_a_very/long/forbid-words.txt
 errorcode  I ignore-words*        D:/this_is_a_very/ignore-words.txt

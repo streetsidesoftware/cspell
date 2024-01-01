@@ -369,7 +369,7 @@ info
 info	Checking: ./src/app/app.test.ts, File type: auto, Language: default
 info	Checked: ./src/app/app.test.ts, File type: typescript, Language: en ... Issues: 0 0.00ms
 info	Config file Used: ./cspell.json
-info	Dictionaries Used: companies, cryptocurrencies, filetypes, public-licenses, softwareTerms, computing-acronyms, web-services, workspace, aws, en_us, en-common-misspellings, fullstack, node, npm, svelte, typescript
+info	Dictionaries Used: companies, cryptocurrencies, filetypes, public-licenses, softwareTerms, computing-acronyms, web-services, workspace, [in-document-dict], aws, en_us, en-common-misspellings, fullstack, node, npm, svelte, typescript
 error	 0.00ms
 error	CSpell: Files checked: 1, Issues found: 0 in 0 files"
 `;
@@ -991,22 +991,22 @@ hello - workspace*             ../../cspell-dict.txt"
 exports[`Validate cli > app 'trace not-in-any-dictionary' Expect Error: [Function CheckFailed] 1`] = `[]`;
 
 exports[`Validate cli > app 'trace not-in-any-dictionary' Expect Error: [Function CheckFailed] 2`] = `
-"Word                  F Dictionary             Dictionary Location
-not-in-any-dictionary - [flagWords]*           From Settings \`flagWords\`
-not-in-any-dictionary - [ignoreWords]*         From Settings \`ignoreWords\`
-not-in-any-dictionary - [suggestWords]*        From Settings \`suggestWords\`
-not-in-any-dictionary - [words]*               From Settings \`words\`
-not-in-any-dictionary - aws*                   node_modules/.../dict/aws.txt
-not-in-any-dictionary - companies*             node_modules/.../companies.txt
-not-in-any-dictionary - computing-acronyms*    .../dict/computing-acronyms.txt
-not-in-any-dictionary - cryptocurrencies*      .../dict/cryptocurrencies.txt
-not-in-any-dictionary - en_us*                 node_modules/.../en_US.trie.gz
-not-in-any-dictionary - en-common-misspelling* node_modules/.../dict-en.yaml
-not-in-any-dictionary - filetypes*             node_modules/.../filetypes.txt.gz
-not-in-any-dictionary - public-licenses*       .../public-licenses.txt.gz
-not-in-any-dictionary - softwareTerms*         .../dict/softwareTerms.txt
-not-in-any-dictionary - web-services*          node_modules/.../webServices.txt
-not-in-any-dictionary - workspace*             ../../cspell-dict.txt"
+"Word               F Dictionary             Dictionary Location
+notinanydictionary - [flagWords]*           From Settings \`flagWords\`
+notinanydictionary - [ignoreWords]*         From Settings \`ignoreWords\`
+notinanydictionary - [suggestWords]*        From Settings \`suggestWords\`
+notinanydictionary - [words]*               From Settings \`words\`
+notinanydictionary - aws*                   node_modules/.../dict/aws.txt
+notinanydictionary - companies*             node_modules/.../dict/companies.txt
+notinanydictionary - computing-acronyms*    .../dict/computing-acronyms.txt
+notinanydictionary - cryptocurrencies*      .../dict/cryptocurrencies.txt
+notinanydictionary - en_us*                 node_modules/.../en_US.trie.gz
+notinanydictionary - en-common-misspelling* node_modules/.../dict-en.yaml
+notinanydictionary - filetypes*             node_modules/.../filetypes.txt.gz
+notinanydictionary - public-licenses*       .../public-licenses.txt.gz
+notinanydictionary - softwareTerms*         node_modules/.../softwareTerms.txt
+notinanydictionary - web-services*          node_modules/.../webServices.txt
+notinanydictionary - workspace*             ../../cspell-dict.txt"
 `;
 
 exports[`Validate cli > app 'typos --no-show-suggestions' Expect Error: [Function CheckFailed] 1`] = `[]`;
