@@ -3,7 +3,7 @@ Repository: RustPython/RustPython
 Url: "https://github.com/RustPython/RustPython.git"
 Args: ["**"]
 Lines:
- CSpell: Files checked: 597, Issues found: 2675 in 307 files
+ CSpell: Files checked: 597, Issues found: 2653 in 307 files
  exit code: 1
 ./Cargo.toml:111:82    - Unknown word (termcolor)  -- features = ["atty", "termcolor"] }
 ./Cargo.toml:154:62    - Unknown word (redoxer)    -- to compile/check with redoxer
@@ -62,7 +62,7 @@ Lines:
 ./common/src/boxvec.rs:703:7     - Unknown word (CAPERROR)       -- const CAPERROR: &str = "insufficient
 ./common/src/float_ops.rs:5:8       - Unknown word (ufrexp)     -- pub fn ufrexp(value: f64) -> (f64
 ./common/src/hash.rs:21:25     - Unknown word (siphash)    -- const ALGO: &str = "siphash24";
-./common/src/hash.rs:67:58     - Unknown word (hashf)      -- E>(&self, iter: I, hashf: F) -> Result<PyHash
+./common/src/hash.rs:65:58     - Unknown word (hashf)      -- E>(&self, iter: I, hashf: F) -> Result<PyHash
 ./common/src/lib.rs:9:9       - Unknown word (boxvec)     -- pub mod boxvec;
 ./common/src/linked_list.rs:97:45     - Unknown word (noalias)    -- compiler to put the `noalias` attribute on mutable
 ./common/src/lock.rs:18:28     - Unknown word (unsync)     -- pub use once_cell::unsync::{Lazy, OnceCell};
@@ -389,19 +389,8 @@ Lines:
 ./src/settings.rs:287:49    - Unknown word (PYTHONWARNDEFAULTENCODING) -- environment && env::var_os("PYTHONWARNDEFAULTENCODING").is_some())
 ./src/settings.rs:344:37    - Unknown word (PYTHONHASHSEED)            -- seed = match env::var("PYTHONHASHSEED") {
 ./src/shell/helper.rs:20:13     - Unknown word (startpos)   -- let mut startpos = 0;
-./stdlib/Cargo.toml:115:16    - Unknown word (handleapi)  -- "winsock2", "handleapi", "ws2def", "std",
-./stdlib/Cargo.toml:115:46    - Unknown word (winbase)    -- , "ws2def", "std", "winbase", "wincrypt", "fileapi
-./stdlib/Cargo.toml:115:57    - Unknown word (wincrypt)   -- "std", "winbase", "wincrypt", "fileapi", "processenv
-./stdlib/Cargo.toml:115:69    - Unknown word (fileapi)    -- winbase", "wincrypt", "fileapi", "processenv",
-./stdlib/Cargo.toml:115:80    - Unknown word (processenv) -- wincrypt", "fileapi", "processenv",
-./stdlib/Cargo.toml:116:29    - Unknown word (processthreadsapi) -- namedpipeapi", "winnt", "processthreadsapi", "errhandlingapi",
-./stdlib/Cargo.toml:116:4     - Unknown word (namedpipeapi) -- "namedpipeapi", "winnt", "processthreadsapi
-./stdlib/Cargo.toml:116:50    - Unknown word (errhandlingapi)    -- processthreadsapi", "errhandlingapi", "winuser", "synchapi
-./stdlib/Cargo.toml:116:68    - Unknown word (winuser)           -- "errhandlingapi", "winuser", "synchapi", "wincon
-./stdlib/Cargo.toml:116:79    - Unknown word (synchapi)          -- errhandlingapi", "winuser", "synchapi", "wincon",
-./stdlib/Cargo.toml:116:91    - Unknown word (wincon)            -- winuser", "synchapi", "wincon",
-./stdlib/Cargo.toml:117:20    - Unknown word (vcruntime)         -- "impl-default", "vcruntime", "ifdef", "netioapi
-./stdlib/Cargo.toml:117:42    - Unknown word (netioapi)          -- vcruntime", "ifdef", "netioapi"
+./stdlib/Cargo.toml:115:25    - Unknown word (netioapi)   -- winsock2", "ifdef", "netioapi",
+./stdlib/Cargo.toml:123:28    - Unknown word (Ndis)       -- 2_NetworkManagement_Ndis",
 ./stdlib/Cargo.toml:46:1      - Unknown word (puruspe)    -- puruspe = "0.2.0"
 ./stdlib/build.rs:25:39     - Unknown word (osslconf)   -- println!("cargo:rustc-cfg=osslconf=\"{conf}\"");
 ./stdlib/build.rs:8:39      - Unknown word (ossl)       -- println!("cargo:rustc-cfg=ossl101");
@@ -498,53 +487,51 @@ Lines:
 ./stdlib/src/select.rs:128:5     - Unknown word (errfds)     -- errfds: &mut FdSet,
 ./stdlib/src/select.rs:177:9     - Unknown word (wlist)      -- wlist: PyObjectRef,
 ./stdlib/src/select.rs:178:9     - Unknown word (xlist)      -- xlist: PyObjectRef,
-./stdlib/src/select.rs:59:37     - Unknown word (WSAFDIs)    -- winapi::um::winsock2::__WSAFDIsSet;
-./stdlib/src/socket.rs:100:61    - Unknown word (ERRQUEUE)         -- DEST_NAME, SCM_J1939_ERRQUEUE, SCM_J1939_PRIO, SOL
-./stdlib/src/socket.rs:110:20    - Unknown word (VRRP)             -- use c::IPPROTO_VRRP;
-./stdlib/src/socket.rs:119:40    - Unknown word (RCVALL)           -- RESERVED, IPPROTO_IPV4, RCVALL_IPLEVEL, RCVALL_OFF
-./stdlib/src/socket.rs:119:47    - Unknown word (IPLEVEL)          -- IPPROTO_IPV4, RCVALL_IPLEVEL, RCVALL_OFF, RCVALL
-./stdlib/src/socket.rs:120:16    - Unknown word (SOCKETLEVELONLY)  -- RCVALL_SOCKETLEVELONLY, SIO_KEEPALIVE_VALS
-./stdlib/src/socket.rs:1260:25   - Unknown word (subbuf)           -- let subbuf = &buf[buf_offset..
-./stdlib/src/socket.rs:1350:12   - Unknown word (getblocking)      -- fn getblocking(&self) -> bool {
-./stdlib/src/socket.rs:1376:25   - Unknown word (flagsize)         -- let mut flagsize = std::mem::size_of
-./stdlib/src/socket.rs:141:54    - Unknown word (ASSOCLEN)         -- ENCRYPT, ALG_SET_AEAD_ASSOCLEN, ALG_SET_AEAD_AUTHSIZE
-./stdlib/src/socket.rs:1421:13   - Unknown word (optlen)           -- optlen: OptionalArg<u32>,
-./stdlib/src/socket.rs:144:85    - Unknown word (DNRTMSG)          -- NETLINK_CRYPTO, NETLINK_DNRTMSG,
-./stdlib/src/socket.rs:145:81    - Unknown word (USERSOCK)         -- NETLINK_ROUTE, NETLINK_USERSOCK,
-./stdlib/src/socket.rs:146:17    - Unknown word (XFRM)             -- NETLINK_XFRM, SOL_ALG, SO_PASSSEC
-./stdlib/src/socket.rs:146:35    - Unknown word (PASSSEC)          -- NETLINK_XFRM, SOL_ALG, SO_PASSSEC, SO_PEERSEC,
-./stdlib/src/socket.rs:146:47    - Unknown word (PEERSEC)          -- ALG, SO_PASSSEC, SO_PEERSEC,
-./stdlib/src/socket.rs:1561:25   - Unknown word (abstractpath)     -- if let Some(abstractpath) = unix_addr.as_abstract
-./stdlib/src/socket.rs:184:28    - Unknown word (ATMPVC)           -- AF_ALG, AF_ASH, AF_ATMPVC, AF_ATMSVC, AF_AX25
-./stdlib/src/socket.rs:188:21    - Unknown word (BINDTODEVICE)     -- SOL_UDP, SO_BINDTODEVICE, SO_MARK, TCP_CORK,
-./stdlib/src/socket.rs:188:89    - Unknown word (QUICKACK)         -- ACCEPT, TCP_LINGER2, TCP_QUICKACK,
-./stdlib/src/socket.rs:189:13    - Unknown word (SYNCNT)           -- TCP_SYNCNT, TCP_WINDOW_CLAMP,
-./stdlib/src/socket.rs:1936:17   - Unknown word (ainfo)            -- let mut ainfo = res.next().unwrap
-./stdlib/src/socket.rs:2043:46   - Unknown word (Luid)             -- name(&entry.InterfaceLuid).map_err(|err| err.into
-./stdlib/src/socket.rs:2051:17   - Unknown word (luid)             -- luid: &winapi::shared::ifdef
-./stdlib/src/socket.rs:2051:51   - Unknown word (LUID)             -- :shared::ifdef::NET_LUID,
-./stdlib/src/socket.rs:2058:54   - Unknown word (ustr)             -- widestring::WideCString::from_ustr_truncate(
-./stdlib/src/socket.rs:2231:13   - Unknown word (strerr)           -- let strerr = {
-./stdlib/src/socket.rs:2298:8    - Unknown word (getdefaulttimeout) -- fn getdefaulttimeout() -> Option<f64> {
-./stdlib/src/socket.rs:2308:8    - Unknown word (setdefaulttimeout) -- fn setdefaulttimeout(timeout: Option<Duration
-./stdlib/src/socket.rs:266:21    - Unknown word (UDPLITE)          -- use c::{IPPROTO_UDPLITE, TCP_CONGESTION};
-./stdlib/src/socket.rs:275:24    - Unknown word (CSCOV)            -- const UDPLITE_SEND_CSCOV: i32 = 10;
-./stdlib/src/socket.rs:312:32    - Unknown word (loongarch)        -- target_arch = "loongarch64",
-./stdlib/src/socket.rs:317:32    - Unknown word (riscv)            -- target_arch = "riscv64gc",
-./stdlib/src/socket.rs:38:33     - Unknown word (mstcpip)    -- use winapi::shared::mstcpip::*;
-./stdlib/src/socket.rs:396:16    - Unknown word (PASSCRED)         -- use c::{SO_PASSCRED, SO_PEERCRED};
-./stdlib/src/socket.rs:416:15    - Unknown word (RECVTOS)          -- use c::IP_RECVTOS;
-./stdlib/src/socket.rs:41:36     - Unknown word (ipdef)      -- use winapi::shared::ws2ipdef::*;
-./stdlib/src/socket.rs:45:26     - Unknown word (EXCLUSIVEADDRUSE) -- SO_ERROR, SO_EXCLUSIVEADDRUSE, SO_LINGER, SO_OOBINLINE
-./stdlib/src/socket.rs:647:11    - Unknown word (BDADDR)           -- const BDADDR_ANY: &str = "00:00:
-./stdlib/src/socket.rs:662:30    - Unknown word (ICLFXBM)          -- IPPROTO_CBT, IPPROTO_ICLFXBM, IPPROTO_IGP, IPPROTO
-./stdlib/src/socket.rs:85:47     - Unknown word (NETROM)           -- SOL_AX25, SOL_IPX, SOL_NETROM, SOL_ROSE};
-./stdlib/src/socket.rs:89:15     - Unknown word (SETFIB)           -- use c::SO_SETFIB;
-./stdlib/src/socket.rs:940:88    - Unknown word (scopeid)          -- host, port[, flowinfo[, scopeid]])"
-./stdlib/src/socket.rs:94:78     - Unknown word (ISOTP)            -- FLAG, CAN_ERR_MASK, CAN_ISOTP, CAN_J1939,
-./stdlib/src/socket.rs:987:67    - Unknown word (errorfds)         -- SelectKind::Connect fills the errorfds fd_set, so if we wake
-./stdlib/src/ssl.rs:1359:63   - Unknown word (cacerts)    -- system/etc/security/cacerts";
-./stdlib/src/ssl.rs:1468:51   - Unknown word (PCCERT)     -- as_ptr() as wincrypt::PCCERT_CONTEXT;
+./stdlib/src/select.rs:59:24     - Unknown word (WSAFDIs)    -- use WinSock::__WSAFDIsSet;
+./stdlib/src/socket.rs:1015:67   - Unknown word (errorfds)         -- SelectKind::Connect fills the errorfds fd_set, so if we wake
+./stdlib/src/socket.rs:113:47    - Unknown word (NETROM)           -- SOL_AX25, SOL_IPX, SOL_NETROM, SOL_ROSE};
+./stdlib/src/socket.rs:117:15    - Unknown word (SETFIB)           -- use c::SO_SETFIB;
+./stdlib/src/socket.rs:122:78    - Unknown word (ISOTP)            -- FLAG, CAN_ERR_MASK, CAN_ISOTP, CAN_J1939,
+./stdlib/src/socket.rs:1288:25   - Unknown word (subbuf)           -- let subbuf = &buf[buf_offset..
+./stdlib/src/socket.rs:128:61    - Unknown word (ERRQUEUE)         -- DEST_NAME, SCM_J1939_ERRQUEUE, SCM_J1939_PRIO, SOL
+./stdlib/src/socket.rs:1378:12   - Unknown word (getblocking)      -- fn getblocking(&self) -> bool {
+./stdlib/src/socket.rs:138:20    - Unknown word (VRRP)             -- use c::IPPROTO_VRRP;
+./stdlib/src/socket.rs:1404:25   - Unknown word (flagsize)         -- let mut flagsize = std::mem::size_of
+./stdlib/src/socket.rs:1449:13   - Unknown word (optlen)           -- optlen: OptionalArg<u32>,
+./stdlib/src/socket.rs:1589:25   - Unknown word (abstractpath)     -- if let Some(abstractpath) = unix_addr.as_abstract
+./stdlib/src/socket.rs:169:54    - Unknown word (ASSOCLEN)         -- ENCRYPT, ALG_SET_AEAD_ASSOCLEN, ALG_SET_AEAD_AUTHSIZE
+./stdlib/src/socket.rs:172:85    - Unknown word (DNRTMSG)          -- NETLINK_CRYPTO, NETLINK_DNRTMSG,
+./stdlib/src/socket.rs:173:81    - Unknown word (USERSOCK)         -- NETLINK_ROUTE, NETLINK_USERSOCK,
+./stdlib/src/socket.rs:174:17    - Unknown word (XFRM)             -- NETLINK_XFRM, SOL_ALG, SO_PASSSEC
+./stdlib/src/socket.rs:174:35    - Unknown word (PASSSEC)          -- NETLINK_XFRM, SOL_ALG, SO_PASSSEC, SO_PEERSEC,
+./stdlib/src/socket.rs:174:47    - Unknown word (PEERSEC)          -- ALG, SO_PASSSEC, SO_PEERSEC,
+./stdlib/src/socket.rs:1964:17   - Unknown word (ainfo)            -- let mut ainfo = res.next().unwrap
+./stdlib/src/socket.rs:2071:46   - Unknown word (Luid)             -- name(&entry.InterfaceLuid).map_err(|err| err.into
+./stdlib/src/socket.rs:2079:17   - Unknown word (luid)             -- luid: &winapi::shared::ifdef
+./stdlib/src/socket.rs:2079:51   - Unknown word (LUID)             -- :shared::ifdef::NET_LUID,
+./stdlib/src/socket.rs:2086:54   - Unknown word (ustr)             -- widestring::WideCString::from_ustr_truncate(
+./stdlib/src/socket.rs:212:28    - Unknown word (ATMPVC)           -- AF_ALG, AF_ASH, AF_ATMPVC, AF_ATMSVC, AF_AX25
+./stdlib/src/socket.rs:216:21    - Unknown word (BINDTODEVICE)     -- SOL_UDP, SO_BINDTODEVICE, SO_MARK, TCP_CORK,
+./stdlib/src/socket.rs:216:89    - Unknown word (QUICKACK)         -- ACCEPT, TCP_LINGER2, TCP_QUICKACK,
+./stdlib/src/socket.rs:217:13    - Unknown word (SYNCNT)           -- TCP_SYNCNT, TCP_WINDOW_CLAMP,
+./stdlib/src/socket.rs:2259:13   - Unknown word (strerr)           -- let strerr = {
+./stdlib/src/socket.rs:2326:8    - Unknown word (getdefaulttimeout) -- fn getdefaulttimeout() -> Option<f64> {
+./stdlib/src/socket.rs:2336:8    - Unknown word (setdefaulttimeout) -- fn setdefaulttimeout(timeout: Option<Duration
+./stdlib/src/socket.rs:294:21    - Unknown word (UDPLITE)          -- use c::{IPPROTO_UDPLITE, TCP_CONGESTION};
+./stdlib/src/socket.rs:303:24    - Unknown word (CSCOV)            -- const UDPLITE_SEND_CSCOV: i32 = 10;
+./stdlib/src/socket.rs:340:32    - Unknown word (loongarch)        -- target_arch = "loongarch64",
+./stdlib/src/socket.rs:345:32    - Unknown word (riscv)            -- target_arch = "riscv64gc",
+./stdlib/src/socket.rs:424:16    - Unknown word (PASSCRED)         -- use c::{SO_PASSCRED, SO_PEERCRED};
+./stdlib/src/socket.rs:43:16     - Unknown word (EXCLUSIVEADDRUSE) -- SO_EXCLUSIVEADDRUSE,
+./stdlib/src/socket.rs:444:15    - Unknown word (RECVTOS)          -- use c::IP_RECVTOS;
+./stdlib/src/socket.rs:62:69     - Unknown word (RCVALL)           -- NUMERICHOST, NI_NUMERICSERV, RCVALL_IPLEVEL, RCVALL_OFF
+./stdlib/src/socket.rs:62:76     - Unknown word (IPLEVEL)          -- NUMERICSERV, RCVALL_IPLEVEL, RCVALL_OFF,
+./stdlib/src/socket.rs:63:31     - Unknown word (SOCKETLEVELONLY)  -- RCVALL_ON, RCVALL_SOCKETLEVELONLY, SD_BOTH as SHUT_RDWR
+./stdlib/src/socket.rs:675:11    - Unknown word (BDADDR)           -- const BDADDR_ANY: &str = "00:00:
+./stdlib/src/socket.rs:67:13     - Unknown word (WSAEBADF)         -- WSAEBADF, WSAECONNRESET, WSAENOTSOCK
+./stdlib/src/socket.rs:690:30    - Unknown word (ICLFXBM)          -- IPPROTO_CBT, IPPROTO_ICLFXBM, IPPROTO_IGP, IPPROTO
+./stdlib/src/socket.rs:968:88    - Unknown word (scopeid)          -- host, port[, flowinfo[, scopeid]])"
+./stdlib/src/ssl.rs:1358:63   - Unknown word (cacerts)    -- system/etc/security/cacerts";
 ./stdlib/src/ssl.rs:222:22    - Unknown word (SSLEOF)     -- #[pyattr(name = "SSLEOFError", once)]
 ./stdlib/src/ssl.rs:461:43    - Unknown word (SSLV)       -- options |= SslOptions::NO_SSLV2;
 ./stdlib/src/ssl.rs:521:31    - Unknown word (cipherlist) -- fn set_ciphers(&self, cipherlist: PyStrRef, vm: &VirtualMachin
@@ -592,9 +579,6 @@ Lines:
 ./stdlib/src/termios.rs:65:62     - Unknown word (TIOCLINUX)       -- TIOCGSOFTCAR, TIOCINQ, TIOCLINUX, TIOCSSOFTCAR, XTABS
 ./stdlib/src/termios.rs:65:73     - Unknown word (TIOCSSOFTCAR)    -- TIOCINQ, TIOCLINUX, TIOCSSOFTCAR, XTABS,
 ./stdlib/src/termios.rs:65:9      - Unknown word (TCSETSW)         -- TCSETSW, TCXONC, TIOCGSERIAL
-./vm/Cargo.toml:144:54    - Unknown word (memoryapi)  -- ifdef", "netioapi", "memoryapi", "profileapi", "sysinfoapi
-./vm/Cargo.toml:144:67    - Unknown word (profileapi) -- netioapi", "memoryapi", "profileapi", "sysinfoapi"
-./vm/Cargo.toml:144:81    - Unknown word (sysinfoapi) -- memoryapi", "profileapi", "sysinfoapi"
 ./vm/Cargo.toml:47:43     - Unknown word (wasmbind)   -- true, features = ["wasmbind"] }
 ./vm/Cargo.toml:70:1      - Unknown word (caseless)   -- caseless = "0.2.1"
 ./vm/Cargo.toml:71:1      - Unknown word (getrandom)  -- getrandom = { version = "0.2.
@@ -720,56 +704,78 @@ Lines:
 ./vm/src/stdlib/codecs.rs:381:8     - Unknown word (readbuffer) -- fn readbuffer_encode(args: FuncArgs
 ./vm/src/stdlib/collections.rs:142:12    - Unknown word (extendleft) -- fn extendleft(&self, iter: PyObjectRef
 ./vm/src/stdlib/collections.rs:224:12    - Unknown word (popleft)    -- fn popleft(&self, vm: &VirtualMachine
-./vm/src/stdlib/errno.rs:30:13     - Unknown word (errname)    -- ($($errname:ident),*$(,)?) => {
-./vm/src/stdlib/errno.rs:43:44     - Unknown word (winerrs)    -- should be here once winerrs are translated to errnos
-./vm/src/stdlib/errno.rs:43:70     - Unknown word (errnos)     -- winerrs are translated to errnos but it messes up some
-./vm/src/stdlib/errno.rs:46:15     - Unknown word (WSAHOS)     -- pub const WSAHOS: i32 = WSAHOST_NOT_FOUND
-./vm/src/stdlib/errno.rs:46:29     - Unknown word (WSAHOST)    -- const WSAHOS: i32 = WSAHOST_NOT_FOUND as i32;
-./vm/src/stdlib/errno.rs:512:31    - Unknown word (WSASY)      -- TODO: e!(cfg(windows), WSASY),
-./vm/src/stdlib/errno.rs:513:22    - Unknown word (WSAEHOSTDOWN) -- e!(cfg(windows), WSAEHOSTDOWN),
-./vm/src/stdlib/errno.rs:517:22    - Unknown word (WSAELOOP)     -- e!(cfg(windows), WSAELOOP),
-./vm/src/stdlib/errno.rs:518:22    - Unknown word (WSAEMFILE)    -- e!(cfg(windows), WSAEMFILE),
-./vm/src/stdlib/errno.rs:519:22    - Unknown word (WSAESTALE)    -- e!(cfg(windows), WSAESTALE),
-./vm/src/stdlib/errno.rs:520:22    - Unknown word (WSAVERNOTSUPPORTED) -- e!(cfg(windows), WSAVERNOTSUPPORTED),
-./vm/src/stdlib/errno.rs:522:22    - Unknown word (WSAEPROCLIM)        -- e!(cfg(windows), WSAEPROCLIM),
-./vm/src/stdlib/errno.rs:523:22    - Unknown word (WSAEFAULT)          -- e!(cfg(windows), WSAEFAULT),
-./vm/src/stdlib/errno.rs:524:22    - Unknown word (WSANOTINITIALISED)  -- e!(cfg(windows), WSANOTINITIALISED),
-./vm/src/stdlib/errno.rs:525:22    - Unknown word (WSAEUSERS)          -- e!(cfg(windows), WSAEUSERS),
-./vm/src/stdlib/errno.rs:526:31    - Unknown word (WSAMAKEASYNCREPL)   -- TODO: e!(cfg(windows), WSAMAKEASYNCREPL),
-./vm/src/stdlib/errno.rs:527:22    - Unknown word (WSAENOPROTOOPT)     -- e!(cfg(windows), WSAENOPROTOOPT),
-./vm/src/stdlib/errno.rs:530:22    - Unknown word (WSAENOTEMPTY)       -- e!(cfg(windows), WSAENOTEMPTY),
-./vm/src/stdlib/errno.rs:531:22    - Unknown word (WSAESHUTDOWN)       -- e!(cfg(windows), WSAESHUTDOWN),
-./vm/src/stdlib/errno.rs:533:22    - Unknown word (WSAETOOMANYREFS)    -- e!(cfg(windows), WSAETOOMANYREFS),
-./vm/src/stdlib/errno.rs:534:22    - Unknown word (WSAEACCES)          -- e!(cfg(windows), WSAEACCES),
-./vm/src/stdlib/errno.rs:535:31    - Unknown word (WSATR)              -- TODO: e!(cfg(windows), WSATR),
-./vm/src/stdlib/errno.rs:536:22    - Unknown word (WSABASEERR)         -- e!(cfg(windows), WSABASEERR),
-./vm/src/stdlib/errno.rs:537:31    - Unknown word (WSADESCRIPTIO)      -- TODO: e!(cfg(windows), WSADESCRIPTIO),
-./vm/src/stdlib/errno.rs:538:22    - Unknown word (WSAEMSGSIZE)        -- e!(cfg(windows), WSAEMSGSIZE),
-./vm/src/stdlib/errno.rs:539:22    - Unknown word (WSAEBADF)           -- e!(cfg(windows), WSAEBADF),
-./vm/src/stdlib/errno.rs:541:31    - Unknown word (WSAGETSELECTERRO)   -- TODO: e!(cfg(windows), WSAGETSELECTERRO),
-./vm/src/stdlib/errno.rs:543:22    - Unknown word (WSAENOBUFS)         -- e!(cfg(windows), WSAENOBUFS),
-./vm/src/stdlib/errno.rs:544:22    - Unknown word (WSAEDISCON)         -- e!(cfg(windows), WSAEDISCON),
-./vm/src/stdlib/errno.rs:546:22    - Unknown word (WSAEPROTOTYPE)      -- e!(cfg(windows), WSAEPROTOTYPE),
-./vm/src/stdlib/errno.rs:549:22    - Unknown word (WSAEADDRNOTAVAIL)   -- e!(cfg(windows), WSAEADDRNOTAVAIL),
-./vm/src/stdlib/errno.rs:550:22    - Unknown word (WSAEALREADY)        -- e!(cfg(windows), WSAEALREADY),
-./vm/src/stdlib/errno.rs:551:22    - Unknown word (WSAEPROTONOSUPPORT) -- e!(cfg(windows), WSAEPROTONOSUPPORT),
-./vm/src/stdlib/errno.rs:552:22    - Unknown word (WSASYSNOTREADY)     -- e!(cfg(windows), WSASYSNOTREADY),
-./vm/src/stdlib/errno.rs:554:22    - Unknown word (WSAEPFNOSUPPORT)    -- e!(cfg(windows), WSAEPFNOSUPPORT),
-./vm/src/stdlib/errno.rs:555:22    - Unknown word (WSAEOPNOTSUPP)      -- e!(cfg(windows), WSAEOPNOTSUPP),
-./vm/src/stdlib/errno.rs:556:22    - Unknown word (WSAEISCONN)         -- e!(cfg(windows), WSAEISCONN),
-./vm/src/stdlib/errno.rs:557:22    - Unknown word (WSAEDQUOT)          -- e!(cfg(windows), WSAEDQUOT),
-./vm/src/stdlib/errno.rs:558:22    - Unknown word (WSAENOTCONN)        -- e!(cfg(windows), WSAENOTCONN),
-./vm/src/stdlib/errno.rs:559:22    - Unknown word (WSAEREMOTE)         -- e!(cfg(windows), WSAEREMOTE),
-./vm/src/stdlib/errno.rs:560:22    - Unknown word (WSAEINVAL)          -- e!(cfg(windows), WSAEINVAL),
-./vm/src/stdlib/errno.rs:562:31    - Unknown word (WSAGETSELECTEVEN)   -- TODO: e!(cfg(windows), WSAGETSELECTEVEN),
-./vm/src/stdlib/errno.rs:563:22    - Unknown word (WSAESOCKTNOSUPPORT) -- e!(cfg(windows), WSAESOCKTNOSUPPORT),
-./vm/src/stdlib/errno.rs:564:31    - Unknown word (WSAGETASYNCERRO)    -- TODO: e!(cfg(windows), WSAGETASYNCERRO),
-./vm/src/stdlib/errno.rs:565:31    - Unknown word (WSAMAKESELECTREPL)  -- TODO: e!(cfg(windows), WSAMAKESELECTREPL),
-./vm/src/stdlib/errno.rs:566:31    - Unknown word (WSAGETASYNCBUFLE)   -- TODO: e!(cfg(windows), WSAGETASYNCBUFLE),
-./vm/src/stdlib/errno.rs:567:22    - Unknown word (WSAEDESTADDRREQ)    -- e!(cfg(windows), WSAEDESTADDRREQ),
-./vm/src/stdlib/errno.rs:569:22    - Unknown word (WSAENETRESET)       -- e!(cfg(windows), WSAENETRESET),
-./vm/src/stdlib/errno.rs:570:31    - Unknown word (WSAN)               -- TODO: e!(cfg(windows), WSAN),
-./vm/src/stdlib/errno.rs:636:9     - Unknown word (ERFKILL)            -- ERFKILL
+./vm/src/stdlib/errno.rs:30:13     - Unknown word (WSABASEERR) -- WSABASEERR, WSADESCRIPTION_LEN
+./vm/src/stdlib/errno.rs:30:25     - Unknown word (WSADESCRIPTION) -- WSABASEERR, WSADESCRIPTION_LEN, WSAEACCES, WSAEADDRINUSE
+./vm/src/stdlib/errno.rs:30:45     - Unknown word (WSAEACCES)      -- WSADESCRIPTION_LEN, WSAEACCES, WSAEADDRINUSE, WSAEADDRNOTAV
+./vm/src/stdlib/errno.rs:30:71     - Unknown word (WSAEADDRNOTAVAIL) -- WSAEACCES, WSAEADDRINUSE, WSAEADDRNOTAVAIL,
+./vm/src/stdlib/errno.rs:31:30     - Unknown word (WSAEALREADY)      -- WSAEAFNOSUPPORT, WSAEALREADY, WSAEBADF, WSAECANCELLED
+./vm/src/stdlib/errno.rs:31:53     - Unknown word (WSAECANCELLED)    -- WSAEALREADY, WSAEBADF, WSAECANCELLED, WSAECONNABORTED,
+./vm/src/stdlib/errno.rs:32:45     - Unknown word (WSAEDESTADDRREQ)  -- AECONNREFUSED, WSAECONNRESET, WSAEDESTADDRREQ, WSAEDISCON, WSAEDQUOT
+./vm/src/stdlib/errno.rs:32:62     - Unknown word (WSAEDISCON)       -- AECONNRESET, WSAEDESTADDRREQ, WSAEDISCON, WSAEDQUOT, WSAEFAULT
+./vm/src/stdlib/errno.rs:32:74     - Unknown word (WSAEDQUOT)        -- WSAEDESTADDRREQ, WSAEDISCON, WSAEDQUOT, WSAEFAULT,
+./vm/src/stdlib/errno.rs:32:85     - Unknown word (WSAEFAULT)        -- WSAEDISCON, WSAEDQUOT, WSAEFAULT,
+./vm/src/stdlib/errno.rs:33:13     - Unknown word (WSAEHOSTDOWN)     -- WSAEHOSTDOWN, WSAEHOSTUNREACH, WSAEINPROGR
+./vm/src/stdlib/errno.rs:33:70     - Unknown word (WSAEINVAL)        -- WSAEINPROGRESS, WSAEINTR, WSAEINVAL,
+./vm/src/stdlib/errno.rs:34:13     - Unknown word (WSAEINVALIDPROCTABLE) -- WSAEINVALIDPROCTABLE, WSAEINVALIDPROVIDER
+./vm/src/stdlib/errno.rs:34:35     - Unknown word (WSAEINVALIDPROVIDER)  -- WSAEINVALIDPROCTABLE, WSAEINVALIDPROVIDER, WSAEISCONN, WSAELOOP
+./vm/src/stdlib/errno.rs:34:56     - Unknown word (WSAEISCONN)           -- WSAEINVALIDPROVIDER, WSAEISCONN, WSAELOOP, WSAEMFILE
+./vm/src/stdlib/errno.rs:34:68     - Unknown word (WSAELOOP)             -- EINVALIDPROVIDER, WSAEISCONN, WSAELOOP, WSAEMFILE,
+./vm/src/stdlib/errno.rs:34:78     - Unknown word (WSAEMFILE)            -- WSAEISCONN, WSAELOOP, WSAEMFILE,
+./vm/src/stdlib/errno.rs:35:13     - Unknown word (WSAEMSGSIZE)          -- WSAEMSGSIZE, WSAENAMETOOLONG, WSAENETDOWN
+./vm/src/stdlib/errno.rs:35:56     - Unknown word (WSAENETRESET)         -- WSAENAMETOOLONG, WSAENETDOWN, WSAENETRESET, WSAENETUNREACH, WSAENOBUFS
+./vm/src/stdlib/errno.rs:35:86     - Unknown word (WSAENOBUFS)           -- WSAENETRESET, WSAENETUNREACH, WSAENOBUFS,
+./vm/src/stdlib/errno.rs:36:13     - Unknown word (WSAENOMORE)           -- WSAENOMORE, WSAENOPROTOOPT, WSAENOTCONN
+./vm/src/stdlib/errno.rs:36:25     - Unknown word (WSAENOPROTOOPT)       -- WSAENOMORE, WSAENOPROTOOPT, WSAENOTCONN, WSAENOTEMPTY
+./vm/src/stdlib/errno.rs:36:41     - Unknown word (WSAENOTCONN)          -- WSAENOMORE, WSAENOPROTOOPT, WSAENOTCONN, WSAENOTEMPTY, WSAENOTSOCK
+./vm/src/stdlib/errno.rs:36:54     - Unknown word (WSAENOTEMPTY)         -- WSAENOPROTOOPT, WSAENOTCONN, WSAENOTEMPTY, WSAENOTSOCK, WSAEOPNOTSUPP
+./vm/src/stdlib/errno.rs:36:81     - Unknown word (WSAEOPNOTSUPP)        -- WSAENOTEMPTY, WSAENOTSOCK, WSAEOPNOTSUPP,
+./vm/src/stdlib/errno.rs:37:13     - Unknown word (WSAEPFNOSUPPORT)      -- WSAEPFNOSUPPORT, WSAEPROCLIM, WSAEPROTONOSUPP
+./vm/src/stdlib/errno.rs:37:30     - Unknown word (WSAEPROCLIM)          -- WSAEPFNOSUPPORT, WSAEPROCLIM, WSAEPROTONOSUPPORT
+./vm/src/stdlib/errno.rs:37:43     - Unknown word (WSAEPROTONOSUPPORT)   -- WSAEPFNOSUPPORT, WSAEPROCLIM, WSAEPROTONOSUPPORT, WSAEPROTOTYPE,
+./vm/src/stdlib/errno.rs:37:63     - Unknown word (WSAEPROTOTYPE)        -- WSAEPROTONOSUPPORT, WSAEPROTOTYPE,
+./vm/src/stdlib/errno.rs:38:13     - Unknown word (WSAEPROVIDERFAILEDINIT) -- WSAEPROVIDERFAILEDINIT, WSAEREFUSED, WSAEREMOTE
+./vm/src/stdlib/errno.rs:38:37     - Unknown word (WSAEREFUSED)            -- WSAEPROVIDERFAILEDINIT, WSAEREFUSED, WSAEREMOTE, WSAESHUTDOWN
+./vm/src/stdlib/errno.rs:38:50     - Unknown word (WSAEREMOTE)             -- VIDERFAILEDINIT, WSAEREFUSED, WSAEREMOTE, WSAESHUTDOWN, WSAESOCKTNOSUP
+./vm/src/stdlib/errno.rs:38:62     - Unknown word (WSAESHUTDOWN)           -- WSAEREFUSED, WSAEREMOTE, WSAESHUTDOWN, WSAESOCKTNOSUPPORT
+./vm/src/stdlib/errno.rs:38:76     - Unknown word (WSAESOCKTNOSUPPORT)     -- WSAEREMOTE, WSAESHUTDOWN, WSAESOCKTNOSUPPORT,
+./vm/src/stdlib/errno.rs:39:13     - Unknown word (WSAESTALE)              -- WSAESTALE, WSAETIMEDOUT, WSAETOOMANYREF
+./vm/src/stdlib/errno.rs:39:38     - Unknown word (WSAETOOMANYREFS)        -- WSAESTALE, WSAETIMEDOUT, WSAETOOMANYREFS, WSAEUSERS, WSAEWOULDBLOCK
+./vm/src/stdlib/errno.rs:39:55     - Unknown word (WSAEUSERS)              -- SAETIMEDOUT, WSAETOOMANYREFS, WSAEUSERS, WSAEWOULDBLOCK, WSAHOST
+./vm/src/stdlib/errno.rs:39:82     - Unknown word (WSAHOST)                -- WSAEUSERS, WSAEWOULDBLOCK, WSAHOST_NOT_FOUND,
+./vm/src/stdlib/errno.rs:40:13     - Unknown word (WSAID)                  -- WSAID_ACCEPTEX, WSAID_CONNECTEX
+./vm/src/stdlib/errno.rs:40:19     - Unknown word (ACCEPTEX)               -- WSAID_ACCEPTEX, WSAID_CONNECTEX, WSAID
+./vm/src/stdlib/errno.rs:40:35     - Unknown word (CONNECTEX)              -- WSAID_ACCEPTEX, WSAID_CONNECTEX, WSAID_DISCONNECTEX
+./vm/src/stdlib/errno.rs:40:52     - Unknown word (DISCONNECTEX)           -- WSAID_CONNECTEX, WSAID_DISCONNECTEX, WSAID_GETACCEPTEXSOCKADDRS
+./vm/src/stdlib/errno.rs:40:72     - Unknown word (GETACCEPTEXSOCKADDRS)   -- DISCONNECTEX, WSAID_GETACCEPTEXSOCKADDRS,
+./vm/src/stdlib/errno.rs:41:19     - Unknown word (TRANSMITFILE)           -- WSAID_TRANSMITFILE, WSAID_TRANSMITPACKETS
+./vm/src/stdlib/errno.rs:41:39     - Unknown word (TRANSMITPACKETS)        -- TRANSMITFILE, WSAID_TRANSMITPACKETS, WSAID_WSAPOLL, WSAID
+./vm/src/stdlib/errno.rs:41:62     - Unknown word (WSAPOLL)                -- TRANSMITPACKETS, WSAID_WSAPOLL, WSAID_WSARECVMSG,
+./vm/src/stdlib/errno.rs:41:77     - Unknown word (WSARECVMSG)             -- WSAID_WSAPOLL, WSAID_WSARECVMSG,
+./vm/src/stdlib/errno.rs:42:13     - Unknown word (WSANOTINITIALISED)      -- WSANOTINITIALISED, WSANO_DATA, WSANO_RECOVERY
+./vm/src/stdlib/errno.rs:42:32     - Unknown word (WSANO)                  -- WSANOTINITIALISED, WSANO_DATA, WSANO_RECOVERY
+./vm/src/stdlib/errno.rs:42:60     - Unknown word (WSAPROTOCOL)            -- DATA, WSANO_RECOVERY, WSAPROTOCOL_LEN, WSASERVICE_NOT
+./vm/src/stdlib/errno.rs:42:77     - Unknown word (WSASERVICE)             -- RECOVERY, WSAPROTOCOL_LEN, WSASERVICE_NOT_FOUND,
+./vm/src/stdlib/errno.rs:43:13     - Unknown word (WSASYSCALLFAILURE)      -- WSASYSCALLFAILURE, WSASYSNOTREADY, WSASYS
+./vm/src/stdlib/errno.rs:43:32     - Unknown word (WSASYSNOTREADY)         -- WSASYSCALLFAILURE, WSASYSNOTREADY, WSASYS_STATUS_LEN,
+./vm/src/stdlib/errno.rs:43:48     - Unknown word (WSASYS)                 -- SCALLFAILURE, WSASYSNOTREADY, WSASYS_STATUS_LEN, WSATRY_AGAIN
+./vm/src/stdlib/errno.rs:43:67     - Unknown word (WSATRY)                 -- WSASYS_STATUS_LEN, WSATRY_AGAIN, WSATYPE_NOT_FOUND
+./vm/src/stdlib/errno.rs:43:81     - Unknown word (WSATYPE)                -- STATUS_LEN, WSATRY_AGAIN, WSATYPE_NOT_FOUND,
+./vm/src/stdlib/errno.rs:44:13     - Unknown word (WSAVERNOTSUPPORTED)     -- WSAVERNOTSUPPORTED,
+./vm/src/stdlib/errno.rs:49:13     - Unknown word (errname)                -- ($($errname:ident),*$(,)?) => {
+./vm/src/stdlib/errno.rs:531:31    - Unknown word (WSASY)                  -- TODO: e!(cfg(windows), WSASY),
+./vm/src/stdlib/errno.rs:545:31    - Unknown word (WSAMAKEASYNCREPL)       -- TODO: e!(cfg(windows), WSAMAKEASYNCREPL),
+./vm/src/stdlib/errno.rs:554:31    - Unknown word (WSATR)                  -- TODO: e!(cfg(windows), WSATR),
+./vm/src/stdlib/errno.rs:556:31    - Unknown word (WSADESCRIPTIO)          -- TODO: e!(cfg(windows), WSADESCRIPTIO),
+./vm/src/stdlib/errno.rs:560:31    - Unknown word (WSAGETSELECTERRO)       -- TODO: e!(cfg(windows), WSAGETSELECTERRO),
+./vm/src/stdlib/errno.rs:581:31    - Unknown word (WSAGETSELECTEVEN)       -- TODO: e!(cfg(windows), WSAGETSELECTEVEN),
+./vm/src/stdlib/errno.rs:583:31    - Unknown word (WSAGETASYNCERRO)        -- TODO: e!(cfg(windows), WSAGETASYNCERRO),
+./vm/src/stdlib/errno.rs:584:31    - Unknown word (WSAMAKESELECTREPL)      -- TODO: e!(cfg(windows), WSAMAKESELECTREPL),
+./vm/src/stdlib/errno.rs:585:31    - Unknown word (WSAGETASYNCBUFLE)       -- TODO: e!(cfg(windows), WSAGETASYNCBUFLE),
+./vm/src/stdlib/errno.rs:589:31    - Unknown word (WSAN)                   -- TODO: e!(cfg(windows), WSAN),
+./vm/src/stdlib/errno.rs:62:44     - Unknown word (winerrs)                -- should be here once winerrs are translated to errnos
+./vm/src/stdlib/errno.rs:62:70     - Unknown word (errnos)                 -- winerrs are translated to errnos but it messes up some
+./vm/src/stdlib/errno.rs:655:9     - Unknown word (ERFKILL)                -- ERFKILL
+./vm/src/stdlib/errno.rs:65:15     - Unknown word (WSAHOS)                 -- pub const WSAHOS: i32 = WSAHOST_NOT_FOUND
 ./vm/src/stdlib/errno.rs:8:9       - Unknown word (errorcode)  -- let errorcode = vm.ctx.new_dict()
 ./vm/src/stdlib/imp.rs:172:9     - Unknown word (withdata)     -- withdata: OptionalArg<bool>,
 ./vm/src/stdlib/imp.rs:53:48     - Unknown word (unimportable) -- present but marked as unimportable, stops search).
@@ -788,7 +794,6 @@ Lines:
 ./vm/src/stdlib/itertools.rs:87:59     - Unknown word (leat)       -- from("function takes at leat 1 arguments (0 given
 ./vm/src/stdlib/marshal.rs:52:21     - Unknown word (pycomplex)  -- ref pycomplex @ PyComplex => {
 ./vm/src/stdlib/marshal.rs:65:21     - Unknown word (pyfrozen)   -- ref pyfrozen @ PyFrozenSet => {
-./vm/src/stdlib/msvcrt.rs:13:17     - Unknown word (minwindef)  -- shared::minwindef::UINT,
 ./vm/src/stdlib/msvcrt.rs:19:13     - Unknown word (FAILCRITICALERRORS) -- SEM_FAILCRITICALERRORS, SEM_NOALIGNMENTFAULTEXCEPT
 ./vm/src/stdlib/msvcrt.rs:19:37     - Unknown word (NOALIGNMENTFAULTEXCEPT) -- FAILCRITICALERRORS, SEM_NOALIGNMENTFAULTEXCEPT, SEM_NOGPFAULTERRORBOX
 ./vm/src/stdlib/msvcrt.rs:19:65     - Unknown word (NOGPFAULTERRORBOX)      -- NOALIGNMENTFAULTEXCEPT, SEM_NOGPFAULTERRORBOX,
@@ -798,10 +803,10 @@ Lines:
 ./vm/src/stdlib/msvcrt.rs:31:13     - Unknown word (getwche)                -- fn _getwche() -> u32;
 ./vm/src/stdlib/msvcrt.rs:32:13     - Unknown word (putch)                  -- fn _putch(c: u32) -> i32;
 ./vm/src/stdlib/msvcrt.rs:33:13     - Unknown word (putwch)                 -- fn _putwch(c: u16) -> u32;
-./vm/src/stdlib/nt.rs:112:8     - Unknown word (cwait)      -- // cwait is available on MSVC
-./vm/src/stdlib/nt.rs:115:19    - Unknown word (termstat)   -- fn _cwait(termstat: *mut i32, procHandle
-./vm/src/stdlib/nt.rs:167:17    - Unknown word (stdhandle)  -- let stdhandle = match fd {
-./vm/src/stdlib/nt.rs:180:21    - Unknown word (csbi)       -- let mut csbi = wincon::CONSOLE_SCREEN
+./vm/src/stdlib/nt.rs:115:8     - Unknown word (cwait)      -- // cwait is available on MSVC
+./vm/src/stdlib/nt.rs:118:19    - Unknown word (termstat)   -- fn _cwait(termstat: *mut i32, procHandle
+./vm/src/stdlib/nt.rs:166:17    - Unknown word (stdhandle)  -- let stdhandle = match fd {
+./vm/src/stdlib/nt.rs:179:21    - Unknown word (csbi)       -- let mut csbi = MaybeUninit::uninit
 ./vm/src/stdlib/nt.rs:196:13    - Unknown word (wexecv)     -- fn _wexecv(cmdname: *const u16
 ./vm/src/stdlib/nt.rs:196:20    - Unknown word (cmdname)    -- fn _wexecv(cmdname: *const u16, argv:
 ./vm/src/stdlib/nt.rs:242:9     - Unknown word (getfinalpathname) -- fn _getfinalpathname(path: OsPath, vm: &VirtualMac
@@ -812,13 +817,11 @@ Lines:
 ./vm/src/stdlib/nt.rs:304:13    - Unknown word (backslashed)       -- let backslashed: Vec<_> = orig
 ./vm/src/stdlib/nt.rs:315:35    - Unknown word (PCWSTR)            -- wbuf = windows::core::PCWSTR::from_raw(backslashed
 ./vm/src/stdlib/nt.rs:337:9     - Unknown word (getdiskusage)      -- fn _getdiskusage(path: OsPath, vm: &VirtualMac
-./vm/src/stdlib/nt.rs:339:30    - Unknown word (ntdef)             -- use winapi::shared::{ntdef::ULARGE_INTEGER, winerror
 ./vm/src/stdlib/operator.rs:392:17    - Unknown word (nattr)      -- let nattr = args.args.len();
 ./vm/src/stdlib/operator.rs:535:25    - Unknown word (pargs)      -- let mut pargs = vec![zelf.name.as
 ./vm/src/stdlib/os.rs:1128:8    - Unknown word (getcwdb)        -- fn getcwdb(vm: &VirtualMachine
-./vm/src/stdlib/os.rs:1259:19   - Unknown word (modif)          -- let (acc, modif) = match (args.times
-./vm/src/stdlib/os.rs:1328:27   - Unknown word (utimensat)      -- libc::utimensat(
-./vm/src/stdlib/os.rs:1600:47   - Unknown word (consoleapi)     -- unsafe { winapi::um::consoleapi::GetConsoleCP() },
+./vm/src/stdlib/os.rs:1258:19   - Unknown word (modif)          -- let (acc, modif) = match (args.times
+./vm/src/stdlib/os.rs:1327:27   - Unknown word (utimensat)      -- libc::utimensat(
 ./vm/src/stdlib/os.rs:354:8     - Unknown word (closerange) -- fn closerange(fd_low: i32, fd_high
 ./vm/src/stdlib/os.rs:482:8     - Unknown word (mkdirs)     -- fn mkdirs(path: PyStrRef, vm:
 ./vm/src/stdlib/os.rs:493:11    - Unknown word (LISTDIR)    -- const LISTDIR_FD: bool = cfg!(all
@@ -835,10 +838,10 @@ Lines:
 ./vm/src/stdlib/pwd.rs:37:17     - Unknown word (pathbuf)    -- let pathbuf_lossy = |p: std::path
 ./vm/src/stdlib/pwd.rs:94:67     - Unknown word (fgetpwent)  -- thread safe. Could use fgetpwent_r, but this is easier
 ./vm/src/stdlib/pwd.rs:95:16     - Unknown word (GETPWALL)   -- static GETPWALL: parking_lot::Mutex
-./vm/src/stdlib/signal.rs:113:9     - Unknown word (signalnum)  -- signalnum: i32,
-./vm/src/stdlib/signal.rs:263:17    - Unknown word (sigbyte)    -- let sigbyte = signum as u8;
-./vm/src/stdlib/signal.rs:82:16     - Unknown word (SIGPWR)     -- use libc::{SIGPWR, SIGSTKFLT};
-./vm/src/stdlib/signal.rs:82:24     - Unknown word (SIGSTKFLT)  -- use libc::{SIGPWR, SIGSTKFLT};
+./vm/src/stdlib/signal.rs:112:9     - Unknown word (signalnum)  -- signalnum: i32,
+./vm/src/stdlib/signal.rs:264:17    - Unknown word (sigbyte)    -- let sigbyte = signum as u8;
+./vm/src/stdlib/signal.rs:81:16     - Unknown word (SIGPWR)     -- use libc::{SIGPWR, SIGSTKFLT};
+./vm/src/stdlib/signal.rs:81:24     - Unknown word (SIGSTKFLT)  -- use libc::{SIGPWR, SIGSTKFLT};
 ./vm/src/stdlib/sre.rs:174:12    - Unknown word (pymatch)     -- fn pymatch(
 ./vm/src/stdlib/sre.rs:236:25    - Unknown word (matchlist)   -- let mut matchlist: Vec<PyObjectRef> =
 ./vm/src/stdlib/sre.rs:295:19    - Unknown word (subx)        -- Self::subx(zelf, sub_args, false
@@ -873,20 +876,18 @@ Lines:
 ./vm/src/stdlib/sys.rs:435:8     - Unknown word (getsizeof)          -- fn getsizeof(args: GetsizeofArgs
 ./vm/src/stdlib/sys.rs:47:22     - Unknown word (hexversion) -- #[pyattr(name = "hexversion")]
 ./vm/src/stdlib/sys.rs:48:11     - Unknown word (HEXVERSION) -- const HEXVERSION: usize = version::VERSION
-./vm/src/stdlib/sys.rs:492:21    - Unknown word (LPOSVERSIONINFOEXW) -- winnt::{LPOSVERSIONINFOEXW, LPOSVERSIONINFOW, OSVERSIONI
-./vm/src/stdlib/sys.rs:492:41    - Unknown word (LPOSVERSIONINFOW)   -- LPOSVERSIONINFOEXW, LPOSVERSIONINFOW, OSVERSIONINFOEXW},
-./vm/src/stdlib/sys.rs:492:59    - Unknown word (OSVERSIONINFOEXW)   -- IONINFOEXW, LPOSVERSIONINFOW, OSVERSIONINFOEXW},
-./vm/src/stdlib/sys.rs:500:17    - Unknown word (osvi)               -- let osvi = &mut version as LPOSVERSION
-./vm/src/stdlib/sys.rs:501:59    - Unknown word (OSVERSIONINFOW)     -- accepts a pointer of OSVERSIONINFOW, but winapi crate's
+./vm/src/stdlib/sys.rs:491:28    - Unknown word (OSVERSIONINFOEXW)   -- GetVersionExW, OSVERSIONINFOEXW, OSVERSIONINFOW,
+./vm/src/stdlib/sys.rs:491:46    - Unknown word (OSVERSIONINFOW)     -- VersionExW, OSVERSIONINFOEXW, OSVERSIONINFOW,
+./vm/src/stdlib/sys.rs:497:17    - Unknown word (osvi)               -- let osvi = &mut version as *mut
 ./vm/src/stdlib/sys.rs:52:11     - Unknown word (MAXUNICODE) -- const MAXUNICODE: u32 = std::char::MAX
-./vm/src/stdlib/sys.rs:630:31    - Unknown word (maxdigits)          -- set_int_max_str_digits(maxdigits: usize, vm: &VirtualMachine
-./vm/src/stdlib/sys.rs:647:19    - Unknown word (profilefunc)        -- fn setprofile(profilefunc: PyObjectRef, vm: &VirtualMac
-./vm/src/stdlib/sys.rs:675:17    - Unknown word (tracefunc)          -- fn settrace(tracefunc: PyObjectRef, vm: &VirtualMac
-./vm/src/stdlib/sys.rs:786:51    - Unknown word (PYTHREAD)           -- stdlib::thread::_thread::PYTHREAD_NAME,
+./vm/src/stdlib/sys.rs:627:31    - Unknown word (maxdigits)          -- set_int_max_str_digits(maxdigits: usize, vm: &VirtualMachine
+./vm/src/stdlib/sys.rs:644:19    - Unknown word (profilefunc)        -- fn setprofile(profilefunc: PyObjectRef, vm: &VirtualMac
+./vm/src/stdlib/sys.rs:672:17    - Unknown word (tracefunc)          -- fn settrace(tracefunc: PyObjectRef, vm: &VirtualMac
+./vm/src/stdlib/sys.rs:783:51    - Unknown word (PYTHREAD)           -- stdlib::thread::_thread::PYTHREAD_NAME,
 ./vm/src/stdlib/sys.rs:80:22     - Unknown word (dllhandle)  -- #[pyattr(name = "dllhandle")]
 ./vm/src/stdlib/sys.rs:81:11     - Unknown word (DLLHANDLE)  -- const DLLHANDLE: usize = 0;
-./vm/src/stdlib/sys.rs:884:9     - Unknown word (releaselevel)       -- releaselevel: &'static str,
-./vm/src/stdlib/sys.rs:894:36    - Unknown word (RELEASELEVEL)       -- releaselevel: version::RELEASELEVEL,
+./vm/src/stdlib/sys.rs:881:9     - Unknown word (releaselevel)       -- releaselevel: &'static str,
+./vm/src/stdlib/sys.rs:891:36    - Unknown word (RELEASELEVEL)       -- releaselevel: version::RELEASELEVEL,
 ./vm/src/stdlib/sys.rs:98:33     - Unknown word (BASEPREFIX) -- option_env!("RUSTPYTHON_BASEPREFIX").unwrap_or_else(||
 ./vm/src/stdlib/sysconfigdata.rs:20:19     - Unknown word (GETRANDOM)  -- "HAVE_GETRANDOM" => 1,
 ./vm/src/stdlib/thread.rs:337:25    - Unknown word (sents)      -- SENTINELS.with(|sents| {

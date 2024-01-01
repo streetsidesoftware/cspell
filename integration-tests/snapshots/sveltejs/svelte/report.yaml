@@ -3,9 +3,9 @@ Repository: sveltejs/svelte
 Url: https://github.com/sveltejs/svelte.git
 Args: '["**"]'
 Summary:
-  files: 5864
-  filesWithIssues: 592
-  issues: 5707
+  files: 5895
+  filesWithIssues: 594
+  issues: 5714
   errors: 0
 Errors: []
 
@@ -2456,25 +2456,25 @@ issues:
   - "packages/svelte/src/compiler/phases/2-analyze/index.js:126:37       delegatable     U       determine_element_spread_and_delegatable(element).metadata.can"
   - "packages/svelte/src/compiler/phases/2-analyze/index.js:232:64       tweaker         U       runes_js, runes_scope_js_tweaker)"
   - "packages/svelte/src/compiler/phases/2-analyze/index.js:423:17       nonstate        U       // warn on any nonstate declarations that are"
-  - "packages/svelte/src/compiler/phases/2-analyze/index.js:1040:73      qirk            U       stripped because of a qirk:"
+  - "packages/svelte/src/compiler/phases/2-analyze/index.js:1047:73      qirk            U       stripped because of a qirk:"
   - "packages/svelte/src/compiler/phases/2-analyze/validation.js:261:14      bgsound     U       tag === 'bgsound' ||"
-  - "packages/svelte/src/compiler/phases/3-transform/client/utils.js:473:30      declarators     U       function create_state_declarators(declarator, scope, value"
-  - "packages/svelte/src/compiler/phases/3-transform/client/visitors/global.js:88:23         IIFEE       U       // turn it into an IIFEE assignment expression"
-  - "packages/svelte/src/compiler/phases/3-transform/client/visitors/template.js:134:65      toogle          U       something like `$.class_toogle(element, class_name"
-  - "packages/svelte/src/compiler/phases/3-transform/client/visitors/template.js:1627:8      quasis          U       const quasis = [];"
-  - "packages/svelte/src/compiler/phases/3-transform/client/visitors/template.js:2093:47     computeds       U       ...lets); // create computeds in the outer context"
-  - "packages/svelte/src/compiler/phases/3-transform/client/visitors/template.js:2225:57     IIFEs           U       other patterns into IIFEs and separates the assignments"
+  - "packages/svelte/src/compiler/phases/3-transform/client/utils.js:500:30      declarators     U       function create_state_declarators(declarator, scope, value"
+  - "packages/svelte/src/compiler/phases/3-transform/client/visitors/global.js:89:23         IIFEE       U       // turn it into an IIFEE assignment expression"
+  - "packages/svelte/src/compiler/phases/3-transform/client/visitors/template.js:135:65      toogle          U       something like `$.class_toogle(element, class_name"
+  - "packages/svelte/src/compiler/phases/3-transform/client/visitors/template.js:1628:8      quasis          U       const quasis = [];"
+  - "packages/svelte/src/compiler/phases/3-transform/client/visitors/template.js:2098:47     computeds       U       ...lets); // create computeds in the outer context"
+  - "packages/svelte/src/compiler/phases/3-transform/client/visitors/template.js:2230:57     IIFEs           U       other patterns into IIFEs and separates the assignments"
   - "packages/svelte/src/compiler/phases/3-transform/utils.js:76:44          inbetween (between)     U       trailing whitespace of inbetween text nodes,"
-  - "packages/svelte/src/compiler/phases/constants.js:153:3          hatchpath       U       'hatchpath',"
-  - "packages/svelte/src/compiler/phases/constants.js:154:3          hkern           U       'hkern',"
-  - "packages/svelte/src/compiler/phases/constants.js:161:3          meshgradient    U       'meshgradient',"
-  - "packages/svelte/src/compiler/phases/constants.js:162:3          meshpatch       U       'meshpatch',"
-  - "packages/svelte/src/compiler/phases/constants.js:163:3          meshrow         U       'meshrow',"
-  - "packages/svelte/src/compiler/phases/constants.js:174:3          solidcolor      U       'solidcolor',"
-  - "packages/svelte/src/compiler/phases/constants.js:186:3          vkern           U       'vkern'"
+  - "packages/svelte/src/compiler/phases/constants.js:154:3          hatchpath       U       'hatchpath',"
+  - "packages/svelte/src/compiler/phases/constants.js:155:3          hkern           U       'hkern',"
+  - "packages/svelte/src/compiler/phases/constants.js:162:3          meshgradient    U       'meshgradient',"
+  - "packages/svelte/src/compiler/phases/constants.js:163:3          meshpatch       U       'meshpatch',"
+  - "packages/svelte/src/compiler/phases/constants.js:164:3          meshrow         U       'meshrow',"
+  - "packages/svelte/src/compiler/phases/constants.js:175:3          solidcolor      U       'solidcolor',"
+  - "packages/svelte/src/compiler/phases/constants.js:187:3          vkern           U       'vkern'"
   - "packages/svelte/src/compiler/phases/patterns.js:21:43       aeiou       U       starts_with_vowel = /^[aeiou]/;"
   - "packages/svelte/src/compiler/phases/scope.js:381:84         hella       U       component, because slots are hella weird"
-  - "packages/svelte/src/compiler/types/index.d.ts:279:45        klass       U       class` in `{ export klass as class}` */"
+  - "packages/svelte/src/compiler/types/index.d.ts:280:45        klass       U       class` in `{ export klass as class}` */"
   - "packages/svelte/src/compiler/warnings.js:167:10         Screenreaders       U       'A11y: Screenreaders already announce <img"
   - "packages/svelte/src/internal/client/custom-element.js:65:11         unsub       U       const unsub = this.$$c.$on(type"
   - "packages/svelte/src/internal/client/each.js:246:9       proxied                             U       var is_proxied_array = STATE_SYMBOL"
@@ -2487,6 +2487,7 @@ issues:
   - "packages/svelte/src/internal/client/runtime.js:742:83       comptued                    U       when we split up source/comptued signals"
   - "packages/svelte/src/internal/client/runtime.js:919:26       doesnt (doesn't)            U       mutate(signal, null /* doesnt matter */);"
   - "packages/svelte/src/internal/client/runtime.js:1522:36      synchronisation             U       current_value); // force a synchronisation immediately"
+  - "packages/svelte/src/internal/client/runtime.js:1911:31      proxified                   U       the object is already proxified, then unstate the value"
   - "packages/svelte/src/internal/client/types.d.ts:35:19        JITs        U       // when the JS VM JITs the code."
   - "packages/svelte/src/internal/client/types.d.ts:42:6         effectgs    U       /** effectgs */"
   - "packages/svelte/src/internal/client/types.d.ts:275:6        effewct     U       /** effewct */"
@@ -2612,6 +2613,7 @@ issues:
   - "packages/svelte/tests/runtime-legacy/samples/html-entities/_config.js:28:9          Ÿotherstring            U       <span>Ÿotherstring</span>"
   - "packages/svelte/tests/runtime-legacy/samples/html-entities/main.svelte:24:11        fotherstring    U       <span>&#x9fotherstring</span>"
   - "packages/svelte/tests/runtime-legacy/samples/names-deconflicted/_config.js:7:33         bish    U       widgets = [{ name: 'bish' }, { name: 'bosh'"
+  - "packages/svelte/tests/runtime-legacy/samples/nested-destructure-assignment-2/_config.js:12:7        Bag'ol      U       <h1>Bag'ol stores</h1>"
   - "packages/svelte/tests/runtime-legacy/samples/props-reactive-slot/main.svelte:6:7            someprop    U       <Comp someprop={p} let:props>"
   - "packages/svelte/tests/runtime-legacy/samples/raw-anchor-first-child/_config.js:14:77        commment    U       startsWith('ssr:')); // ssr commment node"
   - "packages/svelte/tests/runtime-legacy/samples/raw-mustaches/_config.js:14:39         beforeafter     U       htmlEqual(target.innerHTML, 'beforeafter');"
