@@ -3,9 +3,9 @@ Repository: googleapis/google-cloud-cpp
 Url: https://github.com/googleapis/google-cloud-cpp.git
 Args: '["--config=${repoConfig}/cspell.json","**/*","-e","{*.BUILD,BUILD,CHANGELOG.md,*.sh,*.cfg,*.ps1,Dockerfile.*,*.Dockerfile,*.{yaml,xml,json,cmake}}"]'
 Summary:
-  files: 17061
-  filesWithIssues: 11437
-  issues: 96977
+  files: 17081
+  filesWithIssues: 11345
+  issues: 96837
   errors: 0
 Errors: []
 
@@ -473,26 +473,26 @@ issues:
   - "generator/generator_config.textproto:239:3          Apigee          U       # Apigee Connect"
   - "generator/generator_config.textproto:245:47         APIGEE          U       var: \"GOOGLE_CLOUD_CPP_APIGEE_CONNECTION_SERVICE_ENDPOINT"
   - "generator/generator_config.textproto:310:47         AUTOML          U       var: \"GOOGLE_CLOUD_CPP_AUTOML_PREDICTION_SERVICE_ENDPOINT"
-  - "generator/generator_config.textproto:1507:15        Abac            U       \"SetLegacyAbac(std::string const&,"
-  - "generator/generator_config.textproto:1609:3         Dataplex        U       # Dataplex"
-  - "generator/generator_config.textproto:1634:3         Dataproc        U       # Dataproc"
-  - "generator/generator_config.textproto:1714:3         Datastream      U       # Datastream"
-  - "generator/generator_config.textproto:1732:3         Dialogflow      U       # Dialogflow CX"
-  - "generator/generator_config.textproto:1738:47        DIALOGFLOW      U       var: \"GOOGLE_CLOUD_CPP_DIALOGFLOW_ENVIRONMENT_ENDPOINT"
-  - "generator/generator_config.textproto:2095:3         Eventarc        U       # Eventarc"
-  - "generator/generator_config.textproto:2112:3         Filestore       U       # Filestore"
-  - "generator/generator_config.textproto:2155:7         Multicloud      U       # GKE Multicloud"
-  - "generator/generator_config.textproto:2363:12        Metastore       U       # Dataproc Metastore"
-  - "generator/generator_config.textproto:3307:3         Timeseries      U       # Timeseries Insights"
+  - "generator/generator_config.textproto:1508:15        Abac            U       \"SetLegacyAbac(std::string const&,"
+  - "generator/generator_config.textproto:1610:3         Dataplex        U       # Dataplex"
+  - "generator/generator_config.textproto:1635:3         Dataproc        U       # Dataproc"
+  - "generator/generator_config.textproto:1715:3         Datastream      U       # Datastream"
+  - "generator/generator_config.textproto:1733:3         Dialogflow      U       # Dialogflow CX"
+  - "generator/generator_config.textproto:1739:47        DIALOGFLOW      U       var: \"GOOGLE_CLOUD_CPP_DIALOGFLOW_ENVIRONMENT_ENDPOINT"
+  - "generator/generator_config.textproto:2096:3         Eventarc        U       # Eventarc"
+  - "generator/generator_config.textproto:2113:3         Filestore       U       # Filestore"
+  - "generator/generator_config.textproto:2156:7         Multicloud      U       # GKE Multicloud"
+  - "generator/generator_config.textproto:2364:12        Metastore       U       # Dataproc Metastore"
+  - "generator/generator_config.textproto:3308:3         Timeseries      U       # Timeseries Insights"
   - "generator/generator.h:27:8          microgenerator      U       * C++ microgenerator plugin entry point."
   - "generator/integration_tests/backup.proto:27:40          genproto        U       \"google.golang.org/genproto/googleapis/test/admin"
   - "generator/integration_tests/backup.proto:29:19          classname       U       option java_outer_classname = \"BackupProto\";"
   - "generator/integration_tests/golden/v1/golden_kitchen_sink_client.h:285:43       cloudresourcemanager    U       organizations/1234567890/logs/cloudresourcemanager.googleapis.com%2Factivity"
   - "generator/integration_tests/golden/v1/golden_kitchen_sink_client.h:644:62       bidir                   U       read-write RPCs (aka bidir streaming)"
   - "generator/integration_tests/golden/v1/internal/golden_kitchen_sink_option_defaults.cc:39:8          goldenkitchensink       U       \"goldenkitchensink.googleapis.com\");"
-  - "generator/integration_tests/golden/v1/internal/golden_kitchen_sink_rest_stub_factory.cc:47:32       Longrunning     U       opts.has<rest_internal::LongrunningEndpointOption>()) {"
   - "generator/integration_tests/golden/v1/internal/golden_kitchen_sink_tracing_connection.cc:29:30          OPENTELEMETRY       U       GOOGLE_CLOUD_CPP_HAVE_OPENTELEMETRY"
   - "generator/integration_tests/golden/v1/internal/golden_rest_only_option_defaults.cc:39:8         goldenrestonly      U       \"goldenrestonly.googleapis.com\");"
+  - "generator/integration_tests/golden/v1/internal/golden_thing_admin_rest_stub.cc:37:38        Longrunning     U       options.get<rest_internal::LongrunningEndpointOption>(), options"
   - "generator/integration_tests/test.proto:357:3        oneof           U       oneof source_info {"
   - "generator/integration_tests/test.proto:971:52       UNIQUEID        U       iceAccounts/{ACCOUNT_EMAIL_OR_UNIQUEID}`. The `-` wildcard"
   - "generator/integration_tests/test.proto:1204:21      Struct          U       google.protobuf.Struct json_payload = 6;"
@@ -971,6 +971,7 @@ issues:
   - "google/cloud/pubsub/internal/message_carrier_test.cc:38:30          googclient      U       Contains(Pair(\"googclient_key\", \"test-value\")"
   - "google/cloud/pubsub/internal/subscriber_tracing_connection_test.cc:237:8        unsampled       U       auto unsampled_span = internal::MakeSpan"
   - "google/cloud/pubsub/internal/subscription_session_test.cc:171:37        acking      U       Increment the counter before acking, as the ack() may trigger"
+  - "google/cloud/pubsub/internal/tracing_pull_ack_handler.cc:41:71          telemetery      U       if compiled with open telemetery"
   - "google/cloud/pubsub/samples/CMakeLists.txt:88:37        TESTDATA    U       GOOGLE_CLOUD_CPP_PUBSUB_TESTDATA=${CMAKE_CURRENT_SOURCE"
   - "google/cloud/pubsub/samples/samples.cc:1085:19      Rolledback      U       std::cout << \"Rolledback schema. Created a new"
   - "google/cloud/pubsub/samples/samples.cc:2155:67      avsc            U       directory + \"schema.avsc\";"
@@ -1273,7 +1274,7 @@ issues:
   - "protos/google/cloud/compute/accelerator_types/v1/accelerator_types.proto:90:6           Skylake         U       // Skylake\") ``` By default, each"
   - "protos/google/cloud/compute/accelerator_types/v1/accelerator_types.proto:92:63          Broadwell       U       cpuPlatform = \"Intel Broadwell\") AND"
   - "protos/google/cloud/compute/accelerator_types/v1/accelerator_types.proto:96:53          fieldname       U       expressions. Examples: `fieldname eq unquoted"
-  - "protos/google/cloud/compute/CMakeLists.txt:34:55        bigobj      U       library}\" PRIVATE \"/bigobj\")"
+  - "protos/google/cloud/compute/CMakeLists.txt:40:55        bigobj      U       library}\" PRIVATE \"/bigobj\")"
   - "protos/google/cloud/compute/routers/v1/routers.proto:282:10         nats    U       // all nats for this router will"
   - "protos/google/cloud/compute/v1/internal/common_000.proto:31:9           AWSV            U       message AWSV4Signature {"
   - "protos/google/cloud/compute/v1/internal/common_000.proto:47:33          ashburn         U       east-1\" for AWS or \"us-ashburn-1\" for OCI."

@@ -3,7 +3,7 @@ Repository: php/php-src
 Url: "https://github.com/php/php-src.git"
 Args: ["--config=../../../../config/repositories/php/php-src/cspell.json","**/*.{md,c,h,php}"]
 Lines:
- CSpell: Files checked: 2166, Issues found: 44074 in 1624 files
+ CSpell: Files checked: 2167, Issues found: 44094 in 1625 files
  exit code: 1
 ./CODING_STANDARDS.md:105:23    - Unknown word (intvl)        -- // Could be 'date_intvl_create_from_date_str
 ./CODING_STANDARDS.md:114:8     - Unknown word (setclientencoding) -- pg_setclientencoding
@@ -1935,11 +1935,11 @@ Lines:
 ./ext/dom/node.c:1062:7    - Unknown word (replacedoctype) -- bool replacedoctype = false;
 ./ext/dom/node.c:1433:13   - Unknown word (nodeotherp)     -- xmlNodePtr nodeotherp, nodep;
 ./ext/dom/node.c:1434:23   - Unknown word (nodeotherobj)   -- dom_object *intern, *nodeotherobj;
-./ext/dom/node.c:1760:21   - Unknown word (ctxp)           -- xmlXPathContextPtr ctxp=NULL;
-./ext/dom/node.c:1761:20   - Unknown word (xpathobjp)      -- xmlXPathObjectPtr xpathobjp=NULL;
-./ext/dom/node.c:1818:10   - Unknown word (tmpns)          -- zval *tmpns;
-./ext/dom/node.c:2196:43   - Unknown word (unserialization) -- the serialization and unserialization of DOM classes.
-./ext/dom/node.c:2212:36   - Unknown word (Unserialization) -- exception_ex(NULL, 0, "Unserialization of '%s' is not allowed
+./ext/dom/node.c:1785:21   - Unknown word (ctxp)           -- xmlXPathContextPtr ctxp=NULL;
+./ext/dom/node.c:1786:20   - Unknown word (xpathobjp)      -- xmlXPathObjectPtr xpathobjp=NULL;
+./ext/dom/node.c:1843:10   - Unknown word (tmpns)          -- zval *tmpns;
+./ext/dom/node.c:2221:43   - Unknown word (unserialization) -- the serialization and unserialization of DOM classes.
+./ext/dom/node.c:2237:36   - Unknown word (Unserialization) -- exception_ex(NULL, 0, "Unserialization of '%s' is not allowed
 ./ext/dom/node.c:375:19    - Unknown word (prevsib)    -- xmlNode *nodep, *prevsib;
 ./ext/dom/node.c:403:19    - Unknown word (nextsib)    -- xmlNode *nodep, *nextsib;
 ./ext/dom/node.c:649:19    - Unknown word (nsnode)     -- xmlNode *nodep, *nsnode = NULL;
@@ -3908,7 +3908,7 @@ Lines:
 ./ext/mbstring/libmbfl/filters/html_entities.c:71:5      - Unknown word (Aacute)     -- {"Aacute", 193},
 ./ext/mbstring/libmbfl/filters/mbfilter_base64.c:161:95    - Unknown word (HTAB)       -- CR or LF or SPACE or HTAB or '=' */
 ./ext/mbstring/libmbfl/filters/mbfilter_cjk.c:10697:46  - Unknown word (qbcs)       -- c < 0xff) { /* dbcs/qbcs lead byte */
-./ext/mbstring/libmbfl/filters/mbfilter_cjk.c:12209:76  - Unknown word (BIGFIVE)    -- BIG5", "BIG-FIVE", "BIGFIVE", NULL};
+./ext/mbstring/libmbfl/filters/mbfilter_cjk.c:12537:76  - Unknown word (BIGFIVE)    -- BIG5", "BIG-FIVE", "BIGFIVE", NULL};
 ./ext/mbstring/libmbfl/filters/mbfilter_cjk.c:1723:32   - Unknown word (ofst)       -- 0; k < jisx0213_p2_ofst_len; k++) {
 ./ext/mbstring/libmbfl/filters/mbfilter_cjk.c:2553:28   - Unknown word (hankana)    -- const unsigned char hankana2zenkana_table[64] =
 ./ext/mbstring/libmbfl/filters/mbfilter_cjk.c:2553:36   - Unknown word (zenkana)    -- unsigned char hankana2zenkana_table[64] = {
@@ -3952,13 +3952,16 @@ Lines:
 ./ext/mbstring/libmbfl/filters/mbfilter_uuencode.c:64:20     - Unknown word (uuenc)      -- static const char *uuenc_begin_text = "begin
 ./ext/mbstring/libmbfl/filters/mbfilter_uuencode.c:67:14     - Unknown word (inbegin)    -- uudec_state_inbegin,
 ./ext/mbstring/libmbfl/filters/unicode_prop.h:25:44     - Unknown word (qencode)    -- char mime_char_needs_qencode[] = {
+./ext/mbstring/libmbfl/mbfl/generate_name_perfect_hash_table.php:5:51      - Unknown word (mbfl)       -- contents(__DIR__ . '/mbfl_encoding.c');
+./ext/mbstring/libmbfl/mbfl/generate_name_perfect_hash_table.php:66:20     - Unknown word (armscii)    -- 'mbfl_encoding_armscii8' => 'ArmSCII-8',
+./ext/mbstring/libmbfl/mbfl/generate_name_perfect_hash_table.php:66:37     - Unknown word (SCII)       -- encoding_armscii8' => 'ArmSCII-8',
+./ext/mbstring/libmbfl/mbfl/generate_name_perfect_hash_table.php:84:44     - Unknown word (gperf)      -- name list, and invoke gperf for computing the perfect
+./ext/mbstring/libmbfl/mbfl/generate_name_perfect_hash_table.php:91:9      - Unknown word (asso)       -- // Find asso_values array in $output
 ./ext/mbstring/libmbfl/mbfl/mbfilter.c:148:25    - Unknown word (mbtab)      -- const unsigned char *mbtab = encoding->mblen_table
 ./ext/mbstring/libmbfl/mbfl/mbfilter.h:119:40    - Unknown word (BADUTF)     -- OUTPUTFILTER_ILLEGAL_MODE_BADUTF8 4 /* For internal use
 ./ext/mbstring/libmbfl/mbfl/mbfl_convert.c:55:18     - Unknown word (hexchar)    -- static char mbfl_hexchar_table[] = {
-./ext/mbstring/libmbfl/mbfl/mbfl_encoding.c:146:57    - Unknown word (gperf)      -- table was amended from gperf, and hashing code was
-./ext/mbstring/libmbfl/mbfl/mbfl_encoding.c:262:29    - Unknown word (asso)       -- const unsigned char asso_values[] =
-./ext/mbstring/libmbfl/mbfl/mbfl_encoding.h:154:68    - Unknown word (initsize)   -- convert_buf *buf, size_t initsize, uint32_t repl_char
-./ext/mbstring/libmbfl/mbfl/mbfl_encoding.h:222:45    - Unknown word (appendn)    -- char* mb_convert_buf_appendn(unsigned char *out,
+./ext/mbstring/libmbfl/mbfl/mbfl_encoding.h:155:68    - Unknown word (initsize)   -- convert_buf *buf, size_t initsize, uint32_t repl_char
+./ext/mbstring/libmbfl/mbfl/mbfl_encoding.h:223:45    - Unknown word (appendn)    -- char* mb_convert_buf_appendn(unsigned char *out,
 ./ext/mbstring/libmbfl/nls/nls_de.c:3:55      - Unknown word (Deutsch)    -- german_aliases[] = {"Deutsch", NULL};
 ./ext/mbstring/mbstring.c:1517:8    - Unknown word (encstr)     -- char *encstr;
 ./ext/mbstring/mbstring.c:1758:10   - Unknown word (vsum)       -- __m128i vsum = _mm_sad_epu8(v, _mm
@@ -4024,7 +4027,6 @@ Lines:
 ./ext/mbstring/ucgendat/ucgendat.php:586:29    - Unknown word (Dietzfelbinger) -- Belazzougui, Botelho and Dietzfelbinger.
 ./ext/mbstring/ucgendat/ucgendat.php:586:4     - Unknown word (Belazzougui) -- * Belazzougui, Botelho and Dietzfelbinger
 ./ext/mbstring/ucgendat/ucgendat.php:724:20    - Unknown word (TABLESTART)     -- $result .= <<<'TABLESTART'
-./ext/mbstring/ucgendat/ucgendat.php:76:35     - Unknown word (mbfl)       -- DIR__ . "/../libmbfl/mbfl/eaw_table.h";
 ./ext/mysqli/mysqli.c:683:15    - Unknown word (resmode)    -- zend_long resmode = MYSQLI_STORE_RESULT
 ./ext/mysqli/mysqli.stub.php:107:23    - Unknown word (DONT)       -- @cvalue CLIENT_SSL_DONT_VERIFY_SERVER_CERT
 ./ext/mysqli/mysqli.stub.php:232:12    - Unknown word (ZEROFILL)   -- * @cvalue ZEROFILL_FLAG
@@ -4219,39 +4221,39 @@ Lines:
 ./ext/odbc/odbc_arginfo.h:450:30    - Unknown word (WVARCHAR)      -- REGISTER_LONG_CONSTANT("SQL_WVARCHAR", SQL_WVARCHAR, CONST
 ./ext/odbc/odbc_arginfo.h:453:30    - Unknown word (WLONGVARCHAR)  -- REGISTER_LONG_CONSTANT("SQL_WLONGVARCHAR", SQL_WLONGVARCHAR,
 ./ext/odbc/odbc_utils.c:36:28     - Unknown word (connstr)    -- is_quoted = php_odbc_connstr_is_quoted(ZSTR_VAL(str
-./ext/odbc/php_odbc.c:1077:8    - Unknown word (cursorname)     -- char *cursorname;
-./ext/odbc/php_odbc.c:1169:6    - Unknown word (ummm)           -- /* ummm.... he did it */
-./ext/odbc/php_odbc.c:2037:21   - Unknown word (datasource)     -- /* {{{ Connect to a datasource */
-./ext/odbc/php_odbc.c:2051:13   - Unknown word (sqlconnect)     -- /* {{{ odbc_sqlconnect */
-./ext/odbc/php_odbc.c:2064:14   - Unknown word (XLATOPT)        -- SQL_SOLID_XLATOPT_NOCNV);
-./ext/odbc/php_odbc.c:2064:22   - Unknown word (NOCNV)          -- SQL_SOLID_XLATOPT_NOCNV);
-./ext/odbc/php_odbc.c:2068:8    - Unknown word (dsnbuf)         -- char dsnbuf[1024];
-./ext/odbc/php_odbc.c:2069:9    - Unknown word (dsnbuflen)      -- short dsnbuflen;
-./ext/odbc/php_odbc.c:2071:110  - Unknown word (NOPROMPT)       -- dsnbuflen, SQL_DRIVER_NOPROMPT);
-./ext/odbc/php_odbc.c:2495:14   - Unknown word (tmplen)         -- SQLSMALLINT tmplen;
-./ext/odbc/php_odbc.c:2628:17   - Unknown word (lasterror)      -- /* {{{ php_odbc_lasterror */
-./ext/odbc/php_odbc.c:2689:46   - Unknown word (rlll)           -- parameters(ZEND_NUM_ARGS(), "rlll", &pv_handle, &pv_which
-./ext/odbc/php_odbc.c:2944:22   - Unknown word (pschema)        -- char *pcat = NULL, *pschema, *ptable, *fcat, *fschema
-./ext/odbc/php_odbc.c:2944:32   - Unknown word (ptable)         -- pcat = NULL, *pschema, *ptable, *fcat, *fschema, *ftable
-./ext/odbc/php_odbc.c:2944:41   - Unknown word (fcat)           -- *pschema, *ptable, *fcat, *fschema, *ftable;
-./ext/odbc/php_odbc.c:2944:48   - Unknown word (fschema)        -- pschema, *ptable, *fcat, *fschema, *ftable;
-./ext/odbc/php_odbc.c:2944:8    - Unknown word (pcat)           -- char *pcat = NULL, *pschema, *ptable
-./ext/odbc/php_odbc.c:3269:19   - Unknown word (vscope)         -- zend_long vtype, vscope, vnullable;
-./ext/odbc/php_odbc.c:3269:27   - Unknown word (vnullable)      -- long vtype, vscope, vnullable;
-./ext/odbc/php_odbc.c:3339:12   - Unknown word (vunique)        -- zend_long vunique, vreserved;
-./ext/odbc/php_odbc.c:3339:21   - Unknown word (vreserved)      -- zend_long vunique, vreserved;
-./ext/odbc/php_odbc.c:386:8     - Unknown word (SQLANY)     -- #ifdef SQLANY_BUG
-./ext/odbc/php_odbc.c:399:8     - Unknown word (NOEXITLIST) -- /* DB2NOEXITLIST env variable prevents
-./ext/odbc/php_odbc.c:467:14    - Unknown word (errormsgsize) -- SQLSMALLINT errormsgsize; /* Not used */
-./ext/odbc/php_odbc.c:536:15    - Unknown word (colnamelen)   -- SQLSMALLINT colnamelen; /* Not used */
-./ext/odbc/php_odbc.c:537:15    - Unknown word (displaysize)  -- SQLLEN displaysize;
-./ext/odbc/php_odbc.c:538:15    - Unknown word (colfieldid)   -- SQLUSMALLINT colfieldid;
-./ext/odbc/php_odbc.c:539:7     - Unknown word (charextraalloc) -- int charextraalloc;
-./ext/odbc/php_odbc.c:598:14    - Unknown word (errtxt)         -- SQLCHAR errtxt[128];
-./ext/odbc/php_odbc.c:619:43    - Unknown word (NVARCHAR)       -- drivers that report NVARCHAR(MAX) columns as SQL
-./ext/odbc/php_odbc.c:698:71    - Unknown word (SDWORD)         -- being the same type as a SDWORD.
-./ext/odbc/php_odbc.c:796:19    - Unknown word (scrollopts)     -- SQLUINTEGER scrollopts;
-./ext/odbc/php_odbc.c:796:2     - Unknown word (SQLUINTEGER)    -- SQLUINTEGER scrollopts;
+./ext/odbc/php_odbc.c:1083:8    - Unknown word (cursorname)     -- char *cursorname;
+./ext/odbc/php_odbc.c:1175:6    - Unknown word (ummm)           -- /* ummm.... he did it */
+./ext/odbc/php_odbc.c:2043:21   - Unknown word (datasource)     -- /* {{{ Connect to a datasource */
+./ext/odbc/php_odbc.c:2057:13   - Unknown word (sqlconnect)     -- /* {{{ odbc_sqlconnect */
+./ext/odbc/php_odbc.c:2070:14   - Unknown word (XLATOPT)        -- SQL_SOLID_XLATOPT_NOCNV);
+./ext/odbc/php_odbc.c:2070:22   - Unknown word (NOCNV)          -- SQL_SOLID_XLATOPT_NOCNV);
+./ext/odbc/php_odbc.c:2074:8    - Unknown word (dsnbuf)         -- char dsnbuf[1024];
+./ext/odbc/php_odbc.c:2075:9    - Unknown word (dsnbuflen)      -- short dsnbuflen;
+./ext/odbc/php_odbc.c:2077:110  - Unknown word (NOPROMPT)       -- dsnbuflen, SQL_DRIVER_NOPROMPT);
+./ext/odbc/php_odbc.c:2501:14   - Unknown word (tmplen)         -- SQLSMALLINT tmplen;
+./ext/odbc/php_odbc.c:2634:17   - Unknown word (lasterror)      -- /* {{{ php_odbc_lasterror */
+./ext/odbc/php_odbc.c:2695:46   - Unknown word (rlll)           -- parameters(ZEND_NUM_ARGS(), "rlll", &pv_handle, &pv_which
+./ext/odbc/php_odbc.c:2950:22   - Unknown word (pschema)        -- char *pcat = NULL, *pschema, *ptable, *fcat, *fschema
+./ext/odbc/php_odbc.c:2950:32   - Unknown word (ptable)         -- pcat = NULL, *pschema, *ptable, *fcat, *fschema, *ftable
+./ext/odbc/php_odbc.c:2950:41   - Unknown word (fcat)           -- *pschema, *ptable, *fcat, *fschema, *ftable;
+./ext/odbc/php_odbc.c:2950:48   - Unknown word (fschema)        -- pschema, *ptable, *fcat, *fschema, *ftable;
+./ext/odbc/php_odbc.c:2950:8    - Unknown word (pcat)           -- char *pcat = NULL, *pschema, *ptable
+./ext/odbc/php_odbc.c:3275:19   - Unknown word (vscope)         -- zend_long vtype, vscope, vnullable;
+./ext/odbc/php_odbc.c:3275:27   - Unknown word (vnullable)      -- long vtype, vscope, vnullable;
+./ext/odbc/php_odbc.c:3345:12   - Unknown word (vunique)        -- zend_long vunique, vreserved;
+./ext/odbc/php_odbc.c:3345:21   - Unknown word (vreserved)      -- zend_long vunique, vreserved;
+./ext/odbc/php_odbc.c:392:8     - Unknown word (SQLANY)     -- #ifdef SQLANY_BUG
+./ext/odbc/php_odbc.c:405:8     - Unknown word (NOEXITLIST) -- /* DB2NOEXITLIST env variable prevents
+./ext/odbc/php_odbc.c:473:14    - Unknown word (errormsgsize) -- SQLSMALLINT errormsgsize; /* Not used */
+./ext/odbc/php_odbc.c:542:15    - Unknown word (colnamelen)   -- SQLSMALLINT colnamelen; /* Not used */
+./ext/odbc/php_odbc.c:543:15    - Unknown word (displaysize)  -- SQLLEN displaysize;
+./ext/odbc/php_odbc.c:544:15    - Unknown word (colfieldid)   -- SQLUSMALLINT colfieldid;
+./ext/odbc/php_odbc.c:545:7     - Unknown word (charextraalloc) -- int charextraalloc;
+./ext/odbc/php_odbc.c:604:14    - Unknown word (errtxt)         -- SQLCHAR errtxt[128];
+./ext/odbc/php_odbc.c:625:43    - Unknown word (NVARCHAR)       -- drivers that report NVARCHAR(MAX) columns as SQL
+./ext/odbc/php_odbc.c:704:71    - Unknown word (SDWORD)         -- being the same type as a SDWORD.
+./ext/odbc/php_odbc.c:802:19    - Unknown word (scrollopts)     -- SQLUINTEGER scrollopts;
+./ext/odbc/php_odbc.c:802:2     - Unknown word (SQLUINTEGER)    -- SQLUINTEGER scrollopts;
 ./ext/odbc/php_odbc_includes.h:110:30    - Unknown word (Easysoft)     -- defined(HAVE_ESOOB) /* Easysoft ODBC-ODBC Bridge library
 ./ext/odbc/php_odbc_includes.h:117:20    - Unknown word (OPENLINK)     -- #elif defined(HAVE_OPENLINK) /* OpenLink ODBC drivers
 ./ext/odbc/php_odbc_includes.h:119:20    - Unknown word (Openlink)     -- #define ODBC_TYPE "Openlink"
@@ -4310,27 +4312,27 @@ Lines:
 ./ext/opcache/jit/README.md:75:8      - Unknown word (LDFLAGS)    -- export LDFLAGS=-L/usr/lib/i386-linux
 ./ext/opcache/jit/README.md:76:8      - Unknown word (CFLAGS)     -- export CFLAGS='-m32'
 ./ext/opcache/jit/README.md:77:8      - Unknown word (CXXFLAGS)   -- export CXXFLAGS='-m32'
-./ext/opcache/jit/ir/dynasm/dasm_arm.h:123:11    - Unknown word (setupglobal) -- void dasm_setupglobal(Dst_DECL, void **gl
-./ext/opcache/jit/ir/dynasm/dasm_arm.h:123:57    - Unknown word (maxgl)       -- void **gl, unsigned int maxgl)
+./ext/opcache/jit/ir/dynasm/dasm_arm.h:117:11    - Unknown word (setupglobal) -- void dasm_setupglobal(Dst_DECL, void **gl
+./ext/opcache/jit/ir/dynasm/dasm_arm.h:117:57    - Unknown word (maxgl)       -- void **gl, unsigned int maxgl)
+./ext/opcache/jit/ir/dynasm/dasm_arm.h:125:11    - Unknown word (growpc)      -- void dasm_growpc(Dst_DECL, unsigned int
+./ext/opcache/jit/ir/dynasm/dasm_arm.h:125:41    - Unknown word (maxpc)       -- Dst_DECL, unsigned int maxpc)
 ./ext/opcache/jit/ir/dynasm/dasm_arm.h:12:9      - Unknown word (DASM)       -- #define DASM_ARCH "arm"
-./ext/opcache/jit/ir/dynasm/dasm_arm.h:131:11    - Unknown word (growpc)      -- void dasm_growpc(Dst_DECL, unsigned int
-./ext/opcache/jit/ir/dynasm/dasm_arm.h:131:41    - Unknown word (maxpc)       -- Dst_DECL, unsigned int maxpc)
-./ext/opcache/jit/ir/dynasm/dasm_arm.h:160:9     - Unknown word (CKPL)        -- #define CKPL(kind, st) \
-./ext/opcache/jit/ir/dynasm/dasm_arm.h:214:5     - Unknown word (Bkwd)        -- /* Bkwd rel or global. */
-./ext/opcache/jit/ir/dynasm/dasm_arm.h:215:63    - Unknown word (putrel)      -- CKPL(lg, LG); goto putrel; }
-./ext/opcache/jit/ir/dynasm/dasm_arm.h:218:7     - Unknown word (linkrel)     -- goto linkrel;
-./ext/opcache/jit/ir/dynasm/dasm_arm.h:233:59    - Unknown word (putlabel)    -- CKPL(lg, LG); goto putlabel;
+./ext/opcache/jit/ir/dynasm/dasm_arm.h:155:9     - Unknown word (CKPL)        -- #define CKPL(kind, st) \
+./ext/opcache/jit/ir/dynasm/dasm_arm.h:209:5     - Unknown word (Bkwd)        -- /* Bkwd rel or global. */
+./ext/opcache/jit/ir/dynasm/dasm_arm.h:210:63    - Unknown word (putrel)      -- CKPL(lg, LG); goto putrel; }
+./ext/opcache/jit/ir/dynasm/dasm_arm.h:213:7     - Unknown word (linkrel)     -- goto linkrel;
+./ext/opcache/jit/ir/dynasm/dasm_arm.h:228:59    - Unknown word (putlabel)    -- CKPL(lg, LG); goto putlabel;
 ./ext/opcache/jit/ir/dynasm/dasm_arm.h:25:42     - Unknown word (IMML)       -- 2, DASM_IMM16, DASM_IMML8, DASM_IMML12, DASM
 ./ext/opcache/jit/ir/dynasm/dasm_arm.h:25:67     - Unknown word (IMMV)       -- , DASM_IMML12, DASM_IMMV8,
 ./ext/opcache/jit/ir/dynasm/dasm_arm.h:29:60     - Unknown word (dasm)       -- positions for a single dasm_put() call. */
-./ext/opcache/jit/ir/dynasm/dasm_arm.h:309:9     - Unknown word (lastpos)     -- int lastpos = sec->pos;
+./ext/opcache/jit/ir/dynasm/dasm_arm.h:304:9     - Unknown word (lastpos)     -- int lastpos = sec->pos;
 ./ext/opcache/jit/ir/dynasm/dasm_arm.h:30:14     - Unknown word (MAXSECPOS)  -- #define DASM_MAXSECPOS 25
-./ext/opcache/jit/ir/dynasm/dasm_arm.h:356:10    - Unknown word (endb)        -- int *endb = sec->rbuf + sec->pos
-./ext/opcache/jit/ir/dynasm/dasm_arm.h:369:9     - Unknown word (patchrel)    -- goto patchrel;
-./ext/opcache/jit/ir/dynasm/dasm_arm.h:388:11    - Unknown word (patchimml)   -- goto patchimml8;
-./ext/opcache/jit/ir/dynasm/dasm_arm.h:432:10    - Unknown word (getpclabel)  -- int dasm_getpclabel(Dst_DECL, unsigned int
-./ext/opcache/jit/ir/dynasm/dasm_arm.h:445:10    - Unknown word (checkstep)   -- int dasm_checkstep(Dst_DECL, int secmatch
-./ext/opcache/jit/ir/dynasm/dasm_arm.h:445:34    - Unknown word (secmatch)    -- checkstep(Dst_DECL, int secmatch)
+./ext/opcache/jit/ir/dynasm/dasm_arm.h:351:10    - Unknown word (endb)        -- int *endb = sec->rbuf + sec->pos
+./ext/opcache/jit/ir/dynasm/dasm_arm.h:364:9     - Unknown word (patchrel)    -- goto patchrel;
+./ext/opcache/jit/ir/dynasm/dasm_arm.h:383:11    - Unknown word (patchimml)   -- goto patchimml8;
+./ext/opcache/jit/ir/dynasm/dasm_arm.h:427:10    - Unknown word (getpclabel)  -- int dasm_getpclabel(Dst_DECL, unsigned int
+./ext/opcache/jit/ir/dynasm/dasm_arm.h:440:10    - Unknown word (checkstep)   -- int dasm_checkstep(Dst_DECL, int secmatch
+./ext/opcache/jit/ir/dynasm/dasm_arm.h:440:34    - Unknown word (secmatch)    -- checkstep(Dst_DECL, int secmatch)
 ./ext/opcache/jit/ir/dynasm/dasm_arm.h:4:40      - Unknown word (dynasm)     -- the MIT license. See dynasm.lua for full copyright
 ./ext/opcache/jit/ir/dynasm/dasm_arm.h:68:16     - Unknown word (actionlist) -- dasm_ActList actionlist; /* Current actionlist
 ./ext/opcache/jit/ir/dynasm/dasm_arm.h:69:8      - Unknown word (lglabels)   -- int *lglabels; /* Local/global chain
@@ -4340,20 +4342,20 @@ Lines:
 ./ext/opcache/jit/ir/dynasm/dasm_arm.h:75:10     - Unknown word (codesize)   -- size_t codesize; /* Total size of all
 ./ext/opcache/jit/ir/dynasm/dasm_arm.h:76:28     - Unknown word (sectionidx) -- maxsection; /* 0 <= sectionidx < maxsection. */
 ./ext/opcache/jit/ir/dynasm/dasm_arm.h:76:7      - Unknown word (maxsection) -- int maxsection; /* 0 <= sectionidx
-./ext/opcache/jit/ir/dynasm/dasm_arm64.h:467:49    - Unknown word (CBNZ)       -- { /* B.cond, CBZ, CBNZ, LDR* literal */
-./ext/opcache/jit/ir/dynasm/dasm_arm64.h:473:47    - Unknown word (ADRP)       -- 0) == 0x3000) {  /* ADRP */
-./ext/opcache/jit/ir/dynasm/dasm_arm64.h:475:42    - Unknown word (TBNZ)       -- 0x1000)) {  /* TBZ, TBNZ */
+./ext/opcache/jit/ir/dynasm/dasm_arm64.h:464:49    - Unknown word (CBNZ)       -- { /* B.cond, CBZ, CBNZ, LDR* literal */
+./ext/opcache/jit/ir/dynasm/dasm_arm64.h:470:47    - Unknown word (ADRP)       -- 0) == 0x3000) {  /* ADRP */
+./ext/opcache/jit/ir/dynasm/dasm_arm64.h:472:42    - Unknown word (TBNZ)       -- 0x1000)) {  /* TBZ, TBNZ */
 ./ext/opcache/jit/ir/dynasm/dasm_mips.h:24:46     - Unknown word (IMMS)       -- LABEL_PC, DASM_IMM, DASM_IMMS,
 ./ext/opcache/jit/ir/dynasm/dasm_ppc.h:24:46     - Unknown word (IMMSH)      -- LABEL_PC, DASM_IMM, DASM_IMMSH,
 ./ext/opcache/jit/ir/dynasm/dasm_proto.h:24:14     - Unknown word (FDEF)       -- #ifndef DASM_FDEF
 ./ext/opcache/jit/ir/dynasm/dasm_x86.h:22:31     - Unknown word (SETLABEL)   -- VREG, DASM_SPACE, DASM_SETLABEL, DASM_REL_A, DASM_REL
-./ext/opcache/jit/ir/dynasm/dasm_x86.h:329:16    - Unknown word (lpos)       -- int lofs, lpos = b[pos];
-./ext/opcache/jit/ir/dynasm/dasm_x86.h:330:25    - Unknown word (noshrink)   -- if (lpos < 0) goto noshrink; /* Ext global? */
-./ext/opcache/jit/ir/dynasm/dasm_x86.h:372:9     - Unknown word (dasmb)      -- #define dasmb(x) *cp++ = (unsigned
-./ext/opcache/jit/ir/dynasm/dasm_x86.h:377:9     - Unknown word (dasmw)      -- #define dasmw(x) \
-./ext/opcache/jit/ir/dynasm/dasm_x86.h:379:9     - Unknown word (dasmd)      -- #define dasmd(x) \
-./ext/opcache/jit/ir/dynasm/dasm_x86.h:381:9     - Unknown word (dasmq)      -- #define dasmq(x) \
-./ext/opcache/jit/ir/dynasm/dasm_x86.h:388:23    - Unknown word (dasma)      -- static unsigned char *dasma_(unsigned char *cp,
+./ext/opcache/jit/ir/dynasm/dasm_x86.h:324:16    - Unknown word (lpos)       -- int lofs, lpos = b[pos];
+./ext/opcache/jit/ir/dynasm/dasm_x86.h:325:25    - Unknown word (noshrink)   -- if (lpos < 0) goto noshrink; /* Ext global? */
+./ext/opcache/jit/ir/dynasm/dasm_x86.h:368:9     - Unknown word (dasmb)      -- #define dasmb(x) *cp++ = (unsigned
+./ext/opcache/jit/ir/dynasm/dasm_x86.h:373:9     - Unknown word (dasmw)      -- #define dasmw(x) \
+./ext/opcache/jit/ir/dynasm/dasm_x86.h:375:9     - Unknown word (dasmd)      -- #define dasmd(x) \
+./ext/opcache/jit/ir/dynasm/dasm_x86.h:377:9     - Unknown word (dasmq)      -- #define dasmq(x) \
+./ext/opcache/jit/ir/dynasm/dasm_x86.h:384:23    - Unknown word (dasma)      -- static unsigned char *dasma_(unsigned char *cp,
 ./ext/opcache/jit/ir/dynasm/minilua.c:1014:13   - Unknown word (resetstack)       -- static void resetstack(lua_State*L,int status
 ./ext/opcache/jit/ir/dynasm/minilua.c:1039:17   - Unknown word (rawrunprotected)  -- static int luaD_rawrunprotected(lua_State*L,Pfunc f
 ./ext/opcache/jit/ir/dynasm/minilua.c:1050:13   - Unknown word (correctstack)     -- static void correctstack(lua_State*L,TValue*oldstack
@@ -4434,17 +4436,17 @@ Lines:
 ./ext/opcache/jit/ir/dynasm/minilua.c:1608:26   - Unknown word (getnum)          -- static const TValue*luaH_getnum(Table*t,int key){
 ./ext/opcache/jit/ir/dynasm/minilua.c:160:9     - Unknown word (LUAI)       -- #define LUAI_THROW(L,c)longjmp((c
 ./ext/opcache/jit/ir/dynasm/minilua.c:163:13    - Unknown word (upvalueindex) -- #define lua_upvalueindex(i)((-10002)-(i))
-./ext/opcache/jit/ir/dynasm/minilua.c:1675:20   - Unknown word (setstr)          -- static TValue*luaH_setstr(lua_State*L,Table*t
+./ext/opcache/jit/ir/dynasm/minilua.c:1676:20   - Unknown word (setstr)          -- static TValue*luaH_setstr(lua_State*L,Table*t
 ./ext/opcache/jit/ir/dynasm/minilua.c:170:17    - Unknown word (settop)       -- static void lua_settop(lua_State*L,int idx
-./ext/opcache/jit/ir/dynasm/minilua.c:1719:9    - Unknown word (makewhite)       -- #define makewhite(g,x)((x)->gch.marked
-./ext/opcache/jit/ir/dynasm/minilua.c:1722:9    - Unknown word (stringmark)      -- #define stringmark(s)reset2bits((s)->tsv
-./ext/opcache/jit/ir/dynasm/minilua.c:1723:9    - Unknown word (isfinalized)     -- #define isfinalized(u)testbit((u)->marked
-./ext/opcache/jit/ir/dynasm/minilua.c:1724:9    - Unknown word (markfinalized)   -- #define markfinalized(u)l_setbit((u)->marked
-./ext/opcache/jit/ir/dynasm/minilua.c:1725:85   - Unknown word (reallymarkobject) -- iswhite(gcvalue(o)))reallymarkobject(g,gcvalue(o));}
-./ext/opcache/jit/ir/dynasm/minilua.c:1725:9    - Unknown word (markvalue)       -- #define markvalue(g,o){checkconsistency
-./ext/opcache/jit/ir/dynasm/minilua.c:1726:9    - Unknown word (markobject)       -- #define markobject(g,t){if(iswhite(obj
-./ext/opcache/jit/ir/dynasm/minilua.c:1727:9    - Unknown word (setthreshold)     -- #define setthreshold(g)(g->GCthreshold=(g
-./ext/opcache/jit/ir/dynasm/minilua.c:1728:13   - Unknown word (removeentry)      -- static void removeentry(Node*n){
+./ext/opcache/jit/ir/dynasm/minilua.c:1720:9    - Unknown word (makewhite)       -- #define makewhite(g,x)((x)->gch.marked
+./ext/opcache/jit/ir/dynasm/minilua.c:1723:9    - Unknown word (stringmark)      -- #define stringmark(s)reset2bits((s)->tsv
+./ext/opcache/jit/ir/dynasm/minilua.c:1724:9    - Unknown word (isfinalized)     -- #define isfinalized(u)testbit((u)->marked
+./ext/opcache/jit/ir/dynasm/minilua.c:1725:9    - Unknown word (markfinalized)   -- #define markfinalized(u)l_setbit((u)->marked
+./ext/opcache/jit/ir/dynasm/minilua.c:1726:85   - Unknown word (reallymarkobject) -- iswhite(gcvalue(o)))reallymarkobject(g,gcvalue(o));}
+./ext/opcache/jit/ir/dynasm/minilua.c:1726:9    - Unknown word (markvalue)       -- #define markvalue(g,o){checkconsistency
+./ext/opcache/jit/ir/dynasm/minilua.c:1727:9    - Unknown word (markobject)       -- #define markobject(g,t){if(iswhite(obj
+./ext/opcache/jit/ir/dynasm/minilua.c:1728:9    - Unknown word (setthreshold)     -- #define setthreshold(g)(g->GCthreshold=(g
+./ext/opcache/jit/ir/dynasm/minilua.c:1729:13   - Unknown word (removeentry)      -- static void removeentry(Node*n){
 ./ext/opcache/jit/ir/dynasm/minilua.c:172:24    - Unknown word (tolstring)    -- static const char* lua_tolstring(lua_State*L,int idx
 ./ext/opcache/jit/ir/dynasm/minilua.c:173:19    - Unknown word (objlen)       -- static size_t lua_objlen(lua_State*L,int idx
 ./ext/opcache/jit/ir/dynasm/minilua.c:174:17    - Unknown word (pushlstring)  -- static void lua_pushlstring(lua_State*L,const char
@@ -4452,102 +4454,102 @@ Lines:
 ./ext/opcache/jit/ir/dynasm/minilua.c:176:17    - Unknown word (createtable)  -- static void lua_createtable(lua_State*L,int narr
 ./ext/opcache/jit/ir/dynasm/minilua.c:176:45    - Unknown word (narr)         -- createtable(lua_State*L,int narr,int nrec);
 ./ext/opcache/jit/ir/dynasm/minilua.c:176:54    - Unknown word (nrec)         -- State*L,int narr,int nrec);
-./ext/opcache/jit/ir/dynasm/minilua.c:1775:13   - Unknown word (marktmu)          -- static void marktmu(global_State*g){
+./ext/opcache/jit/ir/dynasm/minilua.c:1776:13   - Unknown word (marktmu)          -- static void marktmu(global_State*g){
 ./ext/opcache/jit/ir/dynasm/minilua.c:177:17    - Unknown word (setfield)     -- static void lua_setfield(lua_State*L,int idx
-./ext/opcache/jit/ir/dynasm/minilua.c:1785:20   - Unknown word (separateudata)    -- static size_t luaC_separateudata(lua_State*L,int all
-./ext/opcache/jit/ir/dynasm/minilua.c:1787:8    - Unknown word (deadmem)          -- size_t deadmem=0;
+./ext/opcache/jit/ir/dynasm/minilua.c:1786:20   - Unknown word (separateudata)    -- static size_t luaC_separateudata(lua_State*L,int all
+./ext/opcache/jit/ir/dynasm/minilua.c:1788:8    - Unknown word (deadmem)          -- size_t deadmem=0;
 ./ext/opcache/jit/ir/dynasm/minilua.c:179:13    - Unknown word (newtable)     -- #define lua_newtable(L)lua_createtable(L
 ./ext/opcache/jit/ir/dynasm/minilua.c:180:13    - Unknown word (pushcfunction) -- #define lua_pushcfunction(L,f)lua_pushcclosure
-./ext/opcache/jit/ir/dynasm/minilua.c:1812:12   - Unknown word (traversetable)    -- static int traversetable(global_State*g,Table
-./ext/opcache/jit/ir/dynasm/minilua.c:1814:5    - Unknown word (weakkey)          -- int weakkey=0;
-./ext/opcache/jit/ir/dynasm/minilua.c:1815:5    - Unknown word (weakvalue)        -- int weakvalue=0;
+./ext/opcache/jit/ir/dynasm/minilua.c:1813:12   - Unknown word (traversetable)    -- static int traversetable(global_State*g,Table
+./ext/opcache/jit/ir/dynasm/minilua.c:1815:5    - Unknown word (weakkey)          -- int weakkey=0;
+./ext/opcache/jit/ir/dynasm/minilua.c:1816:5    - Unknown word (weakvalue)        -- int weakvalue=0;
 ./ext/opcache/jit/ir/dynasm/minilua.c:182:13    - Unknown word (isfunction)    -- #define lua_isfunction(L,n)(lua_type(L,(n)
 ./ext/opcache/jit/ir/dynasm/minilua.c:183:13    - Unknown word (istable)       -- #define lua_istable(L,n)(lua_type(L,(n)
-./ext/opcache/jit/ir/dynasm/minilua.c:1849:13   - Unknown word (traverseproto)    -- static void traverseproto(global_State*g,Proto
 ./ext/opcache/jit/ir/dynasm/minilua.c:184:13    - Unknown word (isnil)         -- #define lua_isnil(L,n)(lua_type(L,(n)
+./ext/opcache/jit/ir/dynasm/minilua.c:1850:13   - Unknown word (traverseproto)    -- static void traverseproto(global_State*g,Proto
 ./ext/opcache/jit/ir/dynasm/minilua.c:185:13    - Unknown word (isboolean)     -- #define lua_isboolean(L,n)(lua_type(L,(n)
-./ext/opcache/jit/ir/dynasm/minilua.c:1867:13   - Unknown word (traverseclosure)  -- static void traverseclosure(global_State*g,Closure
+./ext/opcache/jit/ir/dynasm/minilua.c:1868:13   - Unknown word (traverseclosure)  -- static void traverseclosure(global_State*g,Closure
 ./ext/opcache/jit/ir/dynasm/minilua.c:186:13    - Unknown word (isnone)        -- #define lua_isnone(L,n)(lua_type(L,(n)
 ./ext/opcache/jit/ir/dynasm/minilua.c:187:13    - Unknown word (isnoneornil)   -- #define lua_isnoneornil(L,n)(lua_type(L,(n)
-./ext/opcache/jit/ir/dynasm/minilua.c:1881:13   - Unknown word (checkstacksizes)  -- static void checkstacksizes(lua_State*L,StkId max
+./ext/opcache/jit/ir/dynasm/minilua.c:1882:13   - Unknown word (checkstacksizes)  -- static void checkstacksizes(lua_State*L,StkId max
 ./ext/opcache/jit/ir/dynasm/minilua.c:188:13    - Unknown word (pushliteral)   -- #define lua_pushliteral(L,s)lua_pushlstring
-./ext/opcache/jit/ir/dynasm/minilua.c:1894:13   - Unknown word (traversestack)    -- static void traversestack(global_State*g,lua_State
-./ext/opcache/jit/ir/dynasm/minilua.c:1908:14   - Unknown word (propagatemark)    -- static l_mem propagatemark(global_State*g){
-./ext/opcache/jit/ir/dynasm/minilua.c:1951:15   - Unknown word (propagateall)     -- static size_t propagateall(global_State*g){
-./ext/opcache/jit/ir/dynasm/minilua.c:1956:12   - Unknown word (iscleared)        -- static int iscleared(const TValue*o,int iskey
-./ext/opcache/jit/ir/dynasm/minilua.c:1956:41   - Unknown word (iskey)            -- iscleared(const TValue*o,int iskey){
-./ext/opcache/jit/ir/dynasm/minilua.c:1965:13   - Unknown word (cleartable)       -- static void cleartable(GCObject*l){
+./ext/opcache/jit/ir/dynasm/minilua.c:1895:13   - Unknown word (traversestack)    -- static void traversestack(global_State*g,lua_State
+./ext/opcache/jit/ir/dynasm/minilua.c:1909:14   - Unknown word (propagatemark)    -- static l_mem propagatemark(global_State*g){
+./ext/opcache/jit/ir/dynasm/minilua.c:1952:15   - Unknown word (propagateall)     -- static size_t propagateall(global_State*g){
+./ext/opcache/jit/ir/dynasm/minilua.c:1957:12   - Unknown word (iscleared)        -- static int iscleared(const TValue*o,int iskey
+./ext/opcache/jit/ir/dynasm/minilua.c:1957:41   - Unknown word (iskey)            -- iscleared(const TValue*o,int iskey){
+./ext/opcache/jit/ir/dynasm/minilua.c:1966:13   - Unknown word (cleartable)       -- static void cleartable(GCObject*l){
 ./ext/opcache/jit/ir/dynasm/minilua.c:196:12    - Unknown word (namewhat)      -- const char*namewhat;
-./ext/opcache/jit/ir/dynasm/minilua.c:1988:13   - Unknown word (freeobj)          -- static void freeobj(lua_State*L,GCObject
+./ext/opcache/jit/ir/dynasm/minilua.c:1989:13   - Unknown word (freeobj)          -- static void freeobj(lua_State*L,GCObject
 ./ext/opcache/jit/ir/dynasm/minilua.c:199:5     - Unknown word (currentline)   -- int currentline;
 ./ext/opcache/jit/ir/dynasm/minilua.c:200:5     - Unknown word (nups)          -- int nups;
-./ext/opcache/jit/ir/dynasm/minilua.c:2010:28   - Unknown word (sweeplist)        -- define sweepwholelist(L,p)sweeplist(L,p,((lu_mem)(~(lu_mem
-./ext/opcache/jit/ir/dynasm/minilua.c:2010:9    - Unknown word (sweepwholelist)   -- #define sweepwholelist(L,p)sweeplist(L,p,(
-./ext/opcache/jit/ir/dynasm/minilua.c:2014:5    - Unknown word (deadmask)         -- int deadmask=otherwhite(g);
+./ext/opcache/jit/ir/dynasm/minilua.c:2011:28   - Unknown word (sweeplist)        -- define sweepwholelist(L,p)sweeplist(L,p,((lu_mem)(~(lu_mem
+./ext/opcache/jit/ir/dynasm/minilua.c:2011:9    - Unknown word (sweepwholelist)   -- #define sweepwholelist(L,p)sweeplist(L,p,(
+./ext/opcache/jit/ir/dynasm/minilua.c:2015:5    - Unknown word (deadmask)         -- int deadmask=otherwhite(g);
 ./ext/opcache/jit/ir/dynasm/minilua.c:201:5     - Unknown word (linedefined)   -- int linedefined;
 ./ext/opcache/jit/ir/dynasm/minilua.c:202:5     - Unknown word (lastlinedefined) -- int lastlinedefined;
-./ext/opcache/jit/ir/dynasm/minilua.c:2041:13   - Unknown word (GCTM)             -- static void GCTM(lua_State*L){
-./ext/opcache/jit/ir/dynasm/minilua.c:2055:9    - Unknown word (oldah)            -- lu_byte oldah=L->allowhook;
-./ext/opcache/jit/ir/dynasm/minilua.c:2056:8    - Unknown word (oldt)             -- lu_mem oldt=g->GCthreshold;
-./ext/opcache/jit/ir/dynasm/minilua.c:2071:18   - Unknown word (freeall)          -- static void luaC_freeall(lua_State*L){
-./ext/opcache/jit/ir/dynasm/minilua.c:2079:13   - Unknown word (markmt)           -- static void markmt(global_State*g){
-./ext/opcache/jit/ir/dynasm/minilua.c:2095:13   - Unknown word (remarkupvals)     -- static void remarkupvals(global_State*g){
-./ext/opcache/jit/ir/dynasm/minilua.c:2104:8    - Unknown word (udsize)           -- size_t udsize;
+./ext/opcache/jit/ir/dynasm/minilua.c:2042:13   - Unknown word (GCTM)             -- static void GCTM(lua_State*L){
+./ext/opcache/jit/ir/dynasm/minilua.c:2056:9    - Unknown word (oldah)            -- lu_byte oldah=L->allowhook;
+./ext/opcache/jit/ir/dynasm/minilua.c:2057:8    - Unknown word (oldt)             -- lu_mem oldt=g->GCthreshold;
+./ext/opcache/jit/ir/dynasm/minilua.c:2072:18   - Unknown word (freeall)          -- static void luaC_freeall(lua_State*L){
+./ext/opcache/jit/ir/dynasm/minilua.c:2080:13   - Unknown word (markmt)           -- static void markmt(global_State*g){
+./ext/opcache/jit/ir/dynasm/minilua.c:2096:13   - Unknown word (remarkupvals)     -- static void remarkupvals(global_State*g){
+./ext/opcache/jit/ir/dynasm/minilua.c:2105:8    - Unknown word (udsize)           -- size_t udsize;
 ./ext/opcache/jit/ir/dynasm/minilua.c:211:41    - Unknown word (Umaxalign)       -- double u;void*s;long l;}L_Umaxalign;
-./ext/opcache/jit/ir/dynasm/minilua.c:2125:14   - Unknown word (singlestep)       -- static l_mem singlestep(lua_State*L){
+./ext/opcache/jit/ir/dynasm/minilua.c:2126:14   - Unknown word (singlestep)       -- static l_mem singlestep(lua_State*L){
 ./ext/opcache/jit/ir/dynasm/minilua.c:220:9     - Unknown word (condhardstacktests) -- #define condhardstacktests(x)((void)0)
-./ext/opcache/jit/ir/dynasm/minilua.c:2239:9    - Unknown word (seminfo)          -- SemInfo seminfo;
-./ext/opcache/jit/ir/dynasm/minilua.c:2252:6    - Unknown word (decpoint)         -- char decpoint;
-./ext/opcache/jit/ir/dynasm/minilua.c:2255:18   - Unknown word (lexerror)         -- static void luaX_lexerror(LexState*ls,const char
-./ext/opcache/jit/ir/dynasm/minilua.c:2257:9    - Unknown word (fromstate)        -- #define fromstate(l)(cast(lu_byte*,(l
-./ext/opcache/jit/ir/dynasm/minilua.c:2258:9    - Unknown word (tostate)          -- #define tostate(l)(cast(lua_State*,cast
-./ext/opcache/jit/ir/dynasm/minilua.c:2277:13   - Unknown word (freestack)        -- static void freestack(lua_State*L,lua_State
-./ext/opcache/jit/ir/dynasm/minilua.c:2281:15   - Unknown word (luaopen)          -- static void f_luaopen(lua_State*L,void*ud
-./ext/opcache/jit/ir/dynasm/minilua.c:2293:13   - Unknown word (preinit)          -- static void preinit_state(lua_State*L,global
-./ext/opcache/jit/ir/dynasm/minilua.c:2326:22   - Unknown word (newstate)         -- static lua_State*lua_newstate(lua_Alloc f,void*ud
+./ext/opcache/jit/ir/dynasm/minilua.c:2240:9    - Unknown word (seminfo)          -- SemInfo seminfo;
+./ext/opcache/jit/ir/dynasm/minilua.c:2253:6    - Unknown word (decpoint)         -- char decpoint;
+./ext/opcache/jit/ir/dynasm/minilua.c:2256:18   - Unknown word (lexerror)         -- static void luaX_lexerror(LexState*ls,const char
+./ext/opcache/jit/ir/dynasm/minilua.c:2258:9    - Unknown word (fromstate)        -- #define fromstate(l)(cast(lu_byte*,(l
+./ext/opcache/jit/ir/dynasm/minilua.c:2259:9    - Unknown word (tostate)          -- #define tostate(l)(cast(lua_State*,cast
+./ext/opcache/jit/ir/dynasm/minilua.c:2278:13   - Unknown word (freestack)        -- static void freestack(lua_State*L,lua_State
+./ext/opcache/jit/ir/dynasm/minilua.c:2282:15   - Unknown word (luaopen)          -- static void f_luaopen(lua_State*L,void*ud
+./ext/opcache/jit/ir/dynasm/minilua.c:2294:13   - Unknown word (preinit)          -- static void preinit_state(lua_State*L,global
+./ext/opcache/jit/ir/dynasm/minilua.c:2327:22   - Unknown word (newstate)         -- static lua_State*lua_newstate(lua_Alloc f,void*ud
 ./ext/opcache/jit/ir/dynasm/minilua.c:234:9     - Unknown word (ttisnil)            -- #define ttisnil(o)(ttype(o)==0)
 ./ext/opcache/jit/ir/dynasm/minilua.c:235:9     - Unknown word (ttisnumber)         -- #define ttisnumber(o)(ttype(o)==3)
 ./ext/opcache/jit/ir/dynasm/minilua.c:236:9     - Unknown word (ttisstring)         -- #define ttisstring(o)(ttype(o)==4)
-./ext/opcache/jit/ir/dynasm/minilua.c:2373:13   - Unknown word (callallgc)        -- static void callallgcTM(lua_State*L,void*ud
+./ext/opcache/jit/ir/dynasm/minilua.c:2374:13   - Unknown word (callallgc)        -- static void callallgcTM(lua_State*L,void*ud
 ./ext/opcache/jit/ir/dynasm/minilua.c:237:9     - Unknown word (ttistable)          -- #define ttistable(o)(ttype(o)==5)
-./ext/opcache/jit/ir/dynasm/minilua.c:2389:9    - Unknown word (getcode)          -- #define getcode(fs,e)((fs)->f->code
 ./ext/opcache/jit/ir/dynasm/minilua.c:238:9     - Unknown word (ttisfunction)       -- #define ttisfunction(o)(ttype(o)==6)
-./ext/opcache/jit/ir/dynasm/minilua.c:2391:14   - Unknown word (setmultret)       -- #define luaK_setmultret(fs,e)luaK_setreturns
-./ext/opcache/jit/ir/dynasm/minilua.c:2391:35   - Unknown word (setreturns)       -- setmultret(fs,e)luaK_setreturns(fs,e,(-1))
-./ext/opcache/jit/ir/dynasm/minilua.c:2395:18   - Unknown word (patchtohere)      -- static void luaK_patchtohere(FuncState*fs,int list
-./ext/opcache/jit/ir/dynasm/minilua.c:2397:12   - Unknown word (currentpc)        -- static int currentpc(lua_State*L,CallInfo
+./ext/opcache/jit/ir/dynasm/minilua.c:2390:9    - Unknown word (getcode)          -- #define getcode(fs,e)((fs)->f->code
+./ext/opcache/jit/ir/dynasm/minilua.c:2392:14   - Unknown word (setmultret)       -- #define luaK_setmultret(fs,e)luaK_setreturns
+./ext/opcache/jit/ir/dynasm/minilua.c:2392:35   - Unknown word (setreturns)       -- setmultret(fs,e)luaK_setreturns(fs,e,(-1))
+./ext/opcache/jit/ir/dynasm/minilua.c:2396:18   - Unknown word (patchtohere)      -- static void luaK_patchtohere(FuncState*fs,int list
+./ext/opcache/jit/ir/dynasm/minilua.c:2398:12   - Unknown word (currentpc)        -- static int currentpc(lua_State*L,CallInfo
 ./ext/opcache/jit/ir/dynasm/minilua.c:239:9     - Unknown word (ttisboolean)        -- #define ttisboolean(o)(ttype(o)==1)
 ./ext/opcache/jit/ir/dynasm/minilua.c:240:9     - Unknown word (ttisuserdata)       -- #define ttisuserdata(o)(ttype(o)==7)
 ./ext/opcache/jit/ir/dynasm/minilua.c:241:9     - Unknown word (ttisthread)         -- #define ttisthread(o)(ttype(o)==8)
-./ext/opcache/jit/ir/dynasm/minilua.c:2429:14   - Unknown word (getluaproto)      -- static Proto*getluaproto(CallInfo*ci){
 ./ext/opcache/jit/ir/dynasm/minilua.c:242:9     - Unknown word (ttislightuserdata)  -- #define ttislightuserdata(o)(ttype(o)==2)
-./ext/opcache/jit/ir/dynasm/minilua.c:2432:13   - Unknown word (funcinfo)         -- static void funcinfo(lua_Debug*ar,Closure
-./ext/opcache/jit/ir/dynasm/minilua.c:2447:18   - Unknown word (tailcall)         -- static void info_tailcall(lua_Debug*ar){
+./ext/opcache/jit/ir/dynasm/minilua.c:2430:14   - Unknown word (getluaproto)      -- static Proto*getluaproto(CallInfo*ci){
+./ext/opcache/jit/ir/dynasm/minilua.c:2433:13   - Unknown word (funcinfo)         -- static void funcinfo(lua_Debug*ar,Closure
+./ext/opcache/jit/ir/dynasm/minilua.c:2448:18   - Unknown word (tailcall)         -- static void info_tailcall(lua_Debug*ar){
 ./ext/opcache/jit/ir/dynasm/minilua.c:244:29    - Unknown word (iscollectable)      -- gcvalue(o)check_exp(iscollectable(o),(o)->value.gc)
 ./ext/opcache/jit/ir/dynasm/minilua.c:244:9     - Unknown word (gcvalue)            -- #define gcvalue(o)check_exp(iscollectable
-./ext/opcache/jit/ir/dynasm/minilua.c:2455:13   - Unknown word (collectvalidlines) -- static void collectvalidlines(lua_State*L,Closure
-./ext/opcache/jit/ir/dynasm/minilua.c:2469:12   - Unknown word (auxgetinfo)        -- static int auxgetinfo(lua_State*L,const char
+./ext/opcache/jit/ir/dynasm/minilua.c:2456:13   - Unknown word (collectvalidlines) -- static void collectvalidlines(lua_State*L,Closure
 ./ext/opcache/jit/ir/dynasm/minilua.c:246:9     - Unknown word (nvalue)             -- #define nvalue(o)check_exp(ttisnumber
+./ext/opcache/jit/ir/dynasm/minilua.c:2470:12   - Unknown word (auxgetinfo)        -- static int auxgetinfo(lua_State*L,const char
 ./ext/opcache/jit/ir/dynasm/minilua.c:247:9     - Unknown word (rawtsvalue)         -- #define rawtsvalue(o)check_exp(ttisstring
 ./ext/opcache/jit/ir/dynasm/minilua.c:248:9     - Unknown word (tsvalue)            -- #define tsvalue(o)(&rawtsvalue(o)->tsv
 ./ext/opcache/jit/ir/dynasm/minilua.c:249:9     - Unknown word (rawuvalue)          -- #define rawuvalue(o)check_exp(ttisuserdata
 ./ext/opcache/jit/ir/dynasm/minilua.c:250:9     - Unknown word (uvalue)             -- #define uvalue(o)(&rawuvalue(o)->uv
 ./ext/opcache/jit/ir/dynasm/minilua.c:251:9     - Unknown word (clvalue)            -- #define clvalue(o)check_exp(ttisfunction
 ./ext/opcache/jit/ir/dynasm/minilua.c:252:9     - Unknown word (hvalue)             -- #define hvalue(o)check_exp(ttistable
-./ext/opcache/jit/ir/dynasm/minilua.c:2531:12   - Unknown word (isinstack)         -- static int isinstack(CallInfo*ci,const TValue
-./ext/opcache/jit/ir/dynasm/minilua.c:2549:18   - Unknown word (concaterror)       -- static void luaG_concaterror(lua_State*L,StkId p
+./ext/opcache/jit/ir/dynasm/minilua.c:2532:12   - Unknown word (isinstack)         -- static int isinstack(CallInfo*ci,const TValue
 ./ext/opcache/jit/ir/dynasm/minilua.c:254:9     - Unknown word (thvalue)            -- #define thvalue(o)check_exp(ttisthread
-./ext/opcache/jit/ir/dynasm/minilua.c:2553:18   - Unknown word (aritherror)        -- static void luaG_aritherror(lua_State*L,const TValue
-./ext/opcache/jit/ir/dynasm/minilua.c:2559:17   - Unknown word (ordererror)        -- static int luaG_ordererror(lua_State*L,const TValue
+./ext/opcache/jit/ir/dynasm/minilua.c:2550:18   - Unknown word (concaterror)       -- static void luaG_concaterror(lua_State*L,StkId p
+./ext/opcache/jit/ir/dynasm/minilua.c:2554:18   - Unknown word (aritherror)        -- static void luaG_aritherror(lua_State*L,const TValue
 ./ext/opcache/jit/ir/dynasm/minilua.c:255:11    - Unknown word (isfalse)            -- #define l_isfalse(o)(ttisnil(o)||(ttisboolean
+./ext/opcache/jit/ir/dynasm/minilua.c:2560:17   - Unknown word (ordererror)        -- static int luaG_ordererror(lua_State*L,const TValue
 ./ext/opcache/jit/ir/dynasm/minilua.c:256:9     - Unknown word (checkconsistency)   -- #define checkconsistency(obj)
 ./ext/opcache/jit/ir/dynasm/minilua.c:257:9     - Unknown word (checkliveness)      -- #define checkliveness(g,obj)
 ./ext/opcache/jit/ir/dynasm/minilua.c:258:9     - Unknown word (setnilvalue)        -- #define setnilvalue(obj)((obj)->tt=0)
 ./ext/opcache/jit/ir/dynasm/minilua.c:259:9     - Unknown word (setnvalue)          -- #define setnvalue(obj,x){TValue*i_o=(obj
 ./ext/opcache/jit/ir/dynasm/minilua.c:260:9     - Unknown word (setbvalue)          -- #define setbvalue(obj,x){TValue*i_o=(obj
-./ext/opcache/jit/ir/dynasm/minilua.c:2612:18   - Unknown word (openspace)         -- static char*luaZ_openspace(lua_State*L,Mbuffer
-./ext/opcache/jit/ir/dynasm/minilua.c:2619:9    - Unknown word (opmode)            -- #define opmode(t,a,b,c,m)(((t)<<7)
+./ext/opcache/jit/ir/dynasm/minilua.c:2613:18   - Unknown word (openspace)         -- static char*luaZ_openspace(lua_State*L,Mbuffer
 ./ext/opcache/jit/ir/dynasm/minilua.c:261:9     - Unknown word (setsvalue)          -- #define setsvalue(L,obj,x){TValue*i_o
+./ext/opcache/jit/ir/dynasm/minilua.c:2620:9    - Unknown word (opmode)            -- #define opmode(t,a,b,c,m)(((t)<<7)
 ./ext/opcache/jit/ir/dynasm/minilua.c:262:9     - Unknown word (setuvalue)          -- #define setuvalue(L,obj,x){TValue*i_o
 ./ext/opcache/jit/ir/dynasm/minilua.c:263:9     - Unknown word (setthvalue)         -- #define setthvalue(L,obj,x){TValue*i_o
 ./ext/opcache/jit/ir/dynasm/minilua.c:264:9     - Unknown word (setclvalue)         -- #define setclvalue(L,obj,x){TValue*i_o
@@ -4555,188 +4557,188 @@ Lines:
 ./ext/opcache/jit/ir/dynasm/minilua.c:266:9     - Unknown word (setptvalue)         -- #define setptvalue(L,obj,x){TValue*i_o
 ./ext/opcache/jit/ir/dynasm/minilua.c:267:9     - Unknown word (setobj)             -- #define setobj(L,obj1,obj2){const TValue
 ./ext/opcache/jit/ir/dynasm/minilua.c:268:9     - Unknown word (setttype)           -- #define setttype(obj,tt)(ttype(obj)=
-./ext/opcache/jit/ir/dynasm/minilua.c:2718:18   - Unknown word (syntaxerror)       -- static void luaX_syntaxerror(LexState*ls,const char
-./ext/opcache/jit/ir/dynasm/minilua.c:2721:21   - Unknown word (newstring)         -- static TString*luaX_newstring(LexState*ls,const char
-./ext/opcache/jit/ir/dynasm/minilua.c:2731:13   - Unknown word (inclinenumber)     -- static void inclinenumber(LexState*ls){
-./ext/opcache/jit/ir/dynasm/minilua.c:2739:18   - Unknown word (setinput)          -- static void luaX_setinput(lua_State*L,LexState
-./ext/opcache/jit/ir/dynasm/minilua.c:2757:13   - Unknown word (buffreplace)       -- static void buffreplace(LexState*ls,char from
-./ext/opcache/jit/ir/dynasm/minilua.c:2801:6    - Unknown word (endloop)           -- goto endloop;
+./ext/opcache/jit/ir/dynasm/minilua.c:2719:18   - Unknown word (syntaxerror)       -- static void luaX_syntaxerror(LexState*ls,const char
+./ext/opcache/jit/ir/dynasm/minilua.c:2722:21   - Unknown word (newstring)         -- static TString*luaX_newstring(LexState*ls,const char
+./ext/opcache/jit/ir/dynasm/minilua.c:2732:13   - Unknown word (inclinenumber)     -- static void inclinenumber(LexState*ls){
+./ext/opcache/jit/ir/dynasm/minilua.c:2740:18   - Unknown word (setinput)          -- static void luaX_setinput(lua_State*L,LexState
+./ext/opcache/jit/ir/dynasm/minilua.c:2758:13   - Unknown word (buffreplace)       -- static void buffreplace(LexState*ls,char from
+./ext/opcache/jit/ir/dynasm/minilua.c:2802:6    - Unknown word (endloop)           -- goto endloop;
 ./ext/opcache/jit/ir/dynasm/minilua.c:286:14    - Unknown word (metatable)          -- struct Table*metatable;
-./ext/opcache/jit/ir/dynasm/minilua.c:2876:12   - Unknown word (llex)              -- static int llex(LexState*ls,SemInfo
+./ext/opcache/jit/ir/dynasm/minilua.c:2877:12   - Unknown word (llex)              -- static int llex(LexState*ls,SemInfo
 ./ext/opcache/jit/ir/dynasm/minilua.c:297:15    - Unknown word (locvars)            -- struct LocVar*locvars;
 ./ext/opcache/jit/ir/dynasm/minilua.c:298:10    - Unknown word (upvalues)           -- TString**upvalues;
-./ext/opcache/jit/ir/dynasm/minilua.c:2996:9    - Unknown word (hasjumps)          -- #define hasjumps(e)((e)->t!=(e)->f)
-./ext/opcache/jit/ir/dynasm/minilua.c:2997:12   - Unknown word (isnumeral)         -- static int isnumeral(expdesc*e){
+./ext/opcache/jit/ir/dynasm/minilua.c:2997:9    - Unknown word (hasjumps)          -- #define hasjumps(e)((e)->t!=(e)->f)
+./ext/opcache/jit/ir/dynasm/minilua.c:2998:12   - Unknown word (isnumeral)         -- static int isnumeral(expdesc*e){
 ./ext/opcache/jit/ir/dynasm/minilua.c:300:5     - Unknown word (sizeupvalues)       -- int sizeupvalues;
-./ext/opcache/jit/ir/dynasm/minilua.c:3010:5    - Unknown word (pfrom)             -- int pfrom=GETARG_A(*previous)
+./ext/opcache/jit/ir/dynasm/minilua.c:3011:5    - Unknown word (pfrom)             -- int pfrom=GETARG_A(*previous)
 ./ext/opcache/jit/ir/dynasm/minilua.c:301:5     - Unknown word (sizek)              -- int sizek;
 ./ext/opcache/jit/ir/dynasm/minilua.c:302:5     - Unknown word (sizecode)           -- int sizecode;
-./ext/opcache/jit/ir/dynasm/minilua.c:3030:49   - Unknown word (nret)              -- FuncState*fs,int first,int nret){
-./ext/opcache/jit/ir/dynasm/minilua.c:3033:12   - Unknown word (condjump)          -- static int condjump(FuncState*fs,OpCode
-./ext/opcache/jit/ir/dynasm/minilua.c:3037:13   - Unknown word (fixjump)           -- static void fixjump(FuncState*fs,int pc
+./ext/opcache/jit/ir/dynasm/minilua.c:3031:49   - Unknown word (nret)              -- FuncState*fs,int first,int nret){
+./ext/opcache/jit/ir/dynasm/minilua.c:3034:12   - Unknown word (condjump)          -- static int condjump(FuncState*fs,OpCode
+./ext/opcache/jit/ir/dynasm/minilua.c:3038:13   - Unknown word (fixjump)           -- static void fixjump(FuncState*fs,int pc
 ./ext/opcache/jit/ir/dynasm/minilua.c:303:5     - Unknown word (sizelineinfo)       -- int sizelineinfo;
-./ext/opcache/jit/ir/dynasm/minilua.c:3044:17   - Unknown word (getlabel)          -- static int luaK_getlabel(FuncState*fs){
-./ext/opcache/jit/ir/dynasm/minilua.c:3048:12   - Unknown word (getjump)           -- static int getjump(FuncState*fs,int pc
-./ext/opcache/jit/ir/dynasm/minilua.c:3055:20   - Unknown word (getjumpcontrol)    -- static Instruction*getjumpcontrol(FuncState*fs,int pc
+./ext/opcache/jit/ir/dynasm/minilua.c:3045:17   - Unknown word (getlabel)          -- static int luaK_getlabel(FuncState*fs){
+./ext/opcache/jit/ir/dynasm/minilua.c:3049:12   - Unknown word (getjump)           -- static int getjump(FuncState*fs,int pc
+./ext/opcache/jit/ir/dynasm/minilua.c:3056:20   - Unknown word (getjumpcontrol)    -- static Instruction*getjumpcontrol(FuncState*fs,int pc
 ./ext/opcache/jit/ir/dynasm/minilua.c:305:5     - Unknown word (sizelocvars)        -- int sizelocvars;
-./ext/opcache/jit/ir/dynasm/minilua.c:3069:12   - Unknown word (patchtestreg)      -- static int patchtestreg(FuncState*fs,int node
-./ext/opcache/jit/ir/dynasm/minilua.c:3079:13   - Unknown word (removevalues)      -- static void removevalues(FuncState*fs,int list
-./ext/opcache/jit/ir/dynasm/minilua.c:3083:13   - Unknown word (patchlistaux)      -- static void patchlistaux(FuncState*fs,int list
-./ext/opcache/jit/ir/dynasm/minilua.c:3083:52   - Unknown word (vtarget)           -- FuncState*fs,int list,int vtarget,int reg,
+./ext/opcache/jit/ir/dynasm/minilua.c:3070:12   - Unknown word (patchtestreg)      -- static int patchtestreg(FuncState*fs,int node
+./ext/opcache/jit/ir/dynasm/minilua.c:3080:13   - Unknown word (removevalues)      -- static void removevalues(FuncState*fs,int list
+./ext/opcache/jit/ir/dynasm/minilua.c:3084:13   - Unknown word (patchlistaux)      -- static void patchlistaux(FuncState*fs,int list
+./ext/opcache/jit/ir/dynasm/minilua.c:3084:52   - Unknown word (vtarget)           -- FuncState*fs,int list,int vtarget,int reg,
 ./ext/opcache/jit/ir/dynasm/minilua.c:308:10    - Unknown word (gclist)             -- GCObject*gclist;
-./ext/opcache/jit/ir/dynasm/minilua.c:3094:13   - Unknown word (dischargejpc)      -- static void dischargejpc(FuncState*fs){
-./ext/opcache/jit/ir/dynasm/minilua.c:3098:18   - Unknown word (patchlist)         -- static void luaK_patchlist(FuncState*fs,int list
-./ext/opcache/jit/ir/dynasm/minilua.c:3122:5    - Unknown word (newstack)          -- int newstack=fs->freereg+n;
-./ext/opcache/jit/ir/dynasm/minilua.c:3129:18   - Unknown word (reserveregs)       -- static void luaK_reserveregs(FuncState*fs,int n)
+./ext/opcache/jit/ir/dynasm/minilua.c:3095:13   - Unknown word (dischargejpc)      -- static void dischargejpc(FuncState*fs){
+./ext/opcache/jit/ir/dynasm/minilua.c:3099:18   - Unknown word (patchlist)         -- static void luaK_patchlist(FuncState*fs,int list
+./ext/opcache/jit/ir/dynasm/minilua.c:3123:5    - Unknown word (newstack)          -- int newstack=fs->freereg+n;
 ./ext/opcache/jit/ir/dynasm/minilua.c:312:9     - Unknown word (maxstacksize)       -- lu_byte maxstacksize;
-./ext/opcache/jit/ir/dynasm/minilua.c:3138:13   - Unknown word (freeexp)           -- static void freeexp(FuncState*fs,expdesc
-./ext/opcache/jit/ir/dynasm/minilua.c:3142:12   - Unknown word (addk)              -- static int addk(FuncState*fs,TValue
+./ext/opcache/jit/ir/dynasm/minilua.c:3130:18   - Unknown word (reserveregs)       -- static void luaK_reserveregs(FuncState*fs,int n)
+./ext/opcache/jit/ir/dynasm/minilua.c:3139:13   - Unknown word (freeexp)           -- static void freeexp(FuncState*fs,expdesc
+./ext/opcache/jit/ir/dynasm/minilua.c:3143:12   - Unknown word (addk)              -- static int addk(FuncState*fs,TValue
 ./ext/opcache/jit/ir/dynasm/minilua.c:316:5     - Unknown word (startpc)            -- int startpc;
 ./ext/opcache/jit/ir/dynasm/minilua.c:317:5     - Unknown word (endpc)              -- int endpc;
-./ext/opcache/jit/ir/dynasm/minilua.c:3191:18   - Unknown word (setoneret)         -- static void luaK_setoneret(FuncState*fs,expdesc
-./ext/opcache/jit/ir/dynasm/minilua.c:3201:18   - Unknown word (dischargevars)     -- static void luaK_dischargevars(FuncState*fs,expdesc
-./ext/opcache/jit/ir/dynasm/minilua.c:3272:23   - Unknown word (anyreg)            -- static void discharge2anyreg(FuncState*fs,expdesc
-./ext/opcache/jit/ir/dynasm/minilua.c:3300:22   - Unknown word (nextreg)           -- static void luaK_exp2nextreg(FuncState*fs,expdesc
+./ext/opcache/jit/ir/dynasm/minilua.c:3192:18   - Unknown word (setoneret)         -- static void luaK_setoneret(FuncState*fs,expdesc
+./ext/opcache/jit/ir/dynasm/minilua.c:3202:18   - Unknown word (dischargevars)     -- static void luaK_dischargevars(FuncState*fs,expdesc
+./ext/opcache/jit/ir/dynasm/minilua.c:3273:23   - Unknown word (anyreg)            -- static void discharge2anyreg(FuncState*fs,expdesc
+./ext/opcache/jit/ir/dynasm/minilua.c:3301:22   - Unknown word (nextreg)           -- static void luaK_exp2nextreg(FuncState*fs,expdesc
 ./ext/opcache/jit/ir/dynasm/minilua.c:331:61    - Unknown word (nupvalues)          -- lu_byte isC;lu_byte nupvalues;GCObject*gclist;struct
 ./ext/opcache/jit/ir/dynasm/minilua.c:333:8     - Unknown word (upvalue)            -- TValue upvalue[1];
-./ext/opcache/jit/ir/dynasm/minilua.c:3349:18   - Unknown word (storevar)          -- static void luaK_storevar(FuncState*fs,expdesc
-./ext/opcache/jit/ir/dynasm/minilua.c:3388:13   - Unknown word (invertjump)        -- static void invertjump(FuncState*fs,expdesc
+./ext/opcache/jit/ir/dynasm/minilua.c:3350:18   - Unknown word (storevar)          -- static void luaK_storevar(FuncState*fs,expdesc
+./ext/opcache/jit/ir/dynasm/minilua.c:3389:13   - Unknown word (invertjump)        -- static void invertjump(FuncState*fs,expdesc
 ./ext/opcache/jit/ir/dynasm/minilua.c:338:7     - Unknown word (upvals)             -- UpVal*upvals[1];
-./ext/opcache/jit/ir/dynasm/minilua.c:3392:12   - Unknown word (jumponcond)        -- static int jumponcond(FuncState*fs,expdesc
-./ext/opcache/jit/ir/dynasm/minilua.c:3404:18   - Unknown word (goiftrue)          -- static void luaK_goiftrue(FuncState*fs,expdesc
-./ext/opcache/jit/ir/dynasm/minilua.c:3426:18   - Unknown word (goiffalse)         -- static void luaK_goiffalse(FuncState*fs,expdesc
-./ext/opcache/jit/ir/dynasm/minilua.c:3447:13   - Unknown word (codenot)           -- static void codenot(FuncState*fs,expdesc
+./ext/opcache/jit/ir/dynasm/minilua.c:3393:12   - Unknown word (jumponcond)        -- static int jumponcond(FuncState*fs,expdesc
+./ext/opcache/jit/ir/dynasm/minilua.c:3405:18   - Unknown word (goiftrue)          -- static void luaK_goiftrue(FuncState*fs,expdesc
+./ext/opcache/jit/ir/dynasm/minilua.c:3427:18   - Unknown word (goiffalse)         -- static void luaK_goiffalse(FuncState*fs,expdesc
+./ext/opcache/jit/ir/dynasm/minilua.c:3448:13   - Unknown word (codenot)           -- static void codenot(FuncState*fs,expdesc
 ./ext/opcache/jit/ir/dynasm/minilua.c:344:9     - Unknown word (iscfunction)        -- #define iscfunction(o)(ttype(o)==6&&clvalue
-./ext/opcache/jit/ir/dynasm/minilua.c:3482:12   - Unknown word (constfolding)      -- static int constfolding(OpCode op,expdesc*e
-./ext/opcache/jit/ir/dynasm/minilua.c:3506:13   - Unknown word (codearith)         -- static void codearith(FuncState*fs,OpCode
-./ext/opcache/jit/ir/dynasm/minilua.c:3524:13   - Unknown word (codecomp)          -- static void codecomp(FuncState*fs,OpCode
-./ext/opcache/jit/ir/dynasm/minilua.c:3582:18   - Unknown word (posfix)            -- static void luaK_posfix(FuncState*fs,BinOpr
+./ext/opcache/jit/ir/dynasm/minilua.c:3483:12   - Unknown word (constfolding)      -- static int constfolding(OpCode op,expdesc*e
+./ext/opcache/jit/ir/dynasm/minilua.c:3507:13   - Unknown word (codearith)         -- static void codearith(FuncState*fs,OpCode
+./ext/opcache/jit/ir/dynasm/minilua.c:3525:13   - Unknown word (codecomp)          -- static void codecomp(FuncState*fs,OpCode
+./ext/opcache/jit/ir/dynasm/minilua.c:3583:18   - Unknown word (posfix)            -- static void luaK_posfix(FuncState*fs,BinOpr
 ./ext/opcache/jit/ir/dynasm/minilua.c:359:9     - Unknown word (lsizenode)          -- lu_byte lsizenode;
-./ext/opcache/jit/ir/dynasm/minilua.c:3624:18   - Unknown word (fixline)           -- static void luaK_fixline(FuncState*fs,int line
+./ext/opcache/jit/ir/dynasm/minilua.c:3625:18   - Unknown word (fixline)           -- static void luaK_fixline(FuncState*fs,int line
 ./ext/opcache/jit/ir/dynasm/minilua.c:363:6     - Unknown word (lastfree)           -- Node*lastfree;
-./ext/opcache/jit/ir/dynasm/minilua.c:3644:18   - Unknown word (setlist)           -- static void luaK_setlist(FuncState*fs,int base
-./ext/opcache/jit/ir/dynasm/minilua.c:3644:63   - Unknown word (tostore)           -- base,int nelems,int tostore){
-./ext/opcache/jit/ir/dynasm/minilua.c:3655:9    - Unknown word (hasmultret)        -- #define hasmultret(k)((k)==VCALL||(k)=
-./ext/opcache/jit/ir/dynasm/minilua.c:3656:9    - Unknown word (getlocvar)         -- #define getlocvar(fs,i)((fs)->f->locvars
-./ext/opcache/jit/ir/dynasm/minilua.c:3657:14   - Unknown word (checklimit)        -- #define luaY_checklimit(fs,v,l,m)if((v)>(l)
-./ext/opcache/jit/ir/dynasm/minilua.c:3657:45   - Unknown word (errorlimit)        -- fs,v,l,m)if((v)>(l))errorlimit(fs,l,m)
+./ext/opcache/jit/ir/dynasm/minilua.c:3645:18   - Unknown word (setlist)           -- static void luaK_setlist(FuncState*fs,int base
+./ext/opcache/jit/ir/dynasm/minilua.c:3645:63   - Unknown word (tostore)           -- base,int nelems,int tostore){
+./ext/opcache/jit/ir/dynasm/minilua.c:3656:9    - Unknown word (hasmultret)        -- #define hasmultret(k)((k)==VCALL||(k)=
+./ext/opcache/jit/ir/dynasm/minilua.c:3657:9    - Unknown word (getlocvar)         -- #define getlocvar(fs,i)((fs)->f->locvars
+./ext/opcache/jit/ir/dynasm/minilua.c:3658:14   - Unknown word (checklimit)        -- #define luaY_checklimit(fs,v,l,m)if((v)>(l)
+./ext/opcache/jit/ir/dynasm/minilua.c:3658:45   - Unknown word (errorlimit)        -- fs,v,l,m)if((v)>(l))errorlimit(fs,l,m)
 ./ext/opcache/jit/ir/dynasm/minilua.c:365:5     - Unknown word (sizearray)          -- int sizearray;
-./ext/opcache/jit/ir/dynasm/minilua.c:3660:5    - Unknown word (breaklist)         -- int breaklist;
-./ext/opcache/jit/ir/dynasm/minilua.c:3663:9    - Unknown word (isbreakable)       -- lu_byte isbreakable;
+./ext/opcache/jit/ir/dynasm/minilua.c:3661:5    - Unknown word (breaklist)         -- int breaklist;
+./ext/opcache/jit/ir/dynasm/minilua.c:3664:9    - Unknown word (isbreakable)       -- lu_byte isbreakable;
 ./ext/opcache/jit/ir/dynasm/minilua.c:367:9     - Unknown word (lmod)               -- #define lmod(s,size)(check_exp((size
-./ext/opcache/jit/ir/dynasm/minilua.c:3684:12   - Unknown word (testnext)          -- static int testnext(LexState*ls,int c){
+./ext/opcache/jit/ir/dynasm/minilua.c:3685:12   - Unknown word (testnext)          -- static int testnext(LexState*ls,int c){
 ./ext/opcache/jit/ir/dynasm/minilua.c:368:9     - Unknown word (twoto)              -- #define twoto(x)((size_t)1<<(x))
-./ext/opcache/jit/ir/dynasm/minilua.c:3695:13   - Unknown word (checknext)         -- static void checknext(LexState*ls,int c){
+./ext/opcache/jit/ir/dynasm/minilua.c:3696:13   - Unknown word (checknext)         -- static void checknext(LexState*ls,int c){
 ./ext/opcache/jit/ir/dynasm/minilua.c:369:9     - Unknown word (sizenode)           -- #define sizenode(t)(twoto((t)->lsizenode
 ./ext/opcache/jit/ir/dynasm/minilua.c:370:26    - Unknown word (nilobject)          -- static const TValue luaO_nilobject_;
-./ext/opcache/jit/ir/dynasm/minilua.c:3711:20   - Unknown word (checkname)         -- static TString*str_checkname(LexState*ls){
+./ext/opcache/jit/ir/dynasm/minilua.c:3712:20   - Unknown word (checkname)         -- static TString*str_checkname(LexState*ls){
 ./ext/opcache/jit/ir/dynasm/minilua.c:371:9     - Unknown word (ceillog)            -- #define ceillog2(x)(luaO_log2((x)-1
-./ext/opcache/jit/ir/dynasm/minilua.c:3723:13   - Unknown word (codestring)        -- static void codestring(LexState*ls,expdesc
-./ext/opcache/jit/ir/dynasm/minilua.c:3729:12   - Unknown word (registerlocalvar) -- static int registerlocalvar(LexState*ls,TString
+./ext/opcache/jit/ir/dynasm/minilua.c:3724:13   - Unknown word (codestring)        -- static void codestring(LexState*ls,expdesc
+./ext/opcache/jit/ir/dynasm/minilua.c:3730:12   - Unknown word (registerlocalvar) -- static int registerlocalvar(LexState*ls,TString
 ./ext/opcache/jit/ir/dynasm/minilua.c:373:75    - Unknown word (gettm)             -- 1u<<(e)))?NULL:luaT_gettm(et,e,(g)->tmname[e]
 ./ext/opcache/jit/ir/dynasm/minilua.c:373:9     - Unknown word (gfasttm)           -- #define gfasttm(g,et,e)((et)==NULL?NULL
 ./ext/opcache/jit/ir/dynasm/minilua.c:373:91    - Unknown word (tmname)            -- luaT_gettm(et,e,(g)->tmname[e]))
-./ext/opcache/jit/ir/dynasm/minilua.c:3740:13   - Unknown word (localvarliteral)  -- #define new_localvarliteral(ls,v,n)new_localvar
-./ext/opcache/jit/ir/dynasm/minilua.c:3740:40   - Unknown word (localvar)         -- localvarliteral(ls,v,n)new_localvar(ls,luaX_newstring(ls
-./ext/opcache/jit/ir/dynasm/minilua.c:3746:13   - Unknown word (adjustlocalvars)  -- static void adjustlocalvars(LexState*ls,int nvars
-./ext/opcache/jit/ir/dynasm/minilua.c:3746:45   - Unknown word (nvars)            -- justlocalvars(LexState*ls,int nvars){
+./ext/opcache/jit/ir/dynasm/minilua.c:3741:13   - Unknown word (localvarliteral)  -- #define new_localvarliteral(ls,v,n)new_localvar
+./ext/opcache/jit/ir/dynasm/minilua.c:3741:40   - Unknown word (localvar)         -- localvarliteral(ls,v,n)new_localvar(ls,luaX_newstring(ls
+./ext/opcache/jit/ir/dynasm/minilua.c:3747:13   - Unknown word (adjustlocalvars)  -- static void adjustlocalvars(LexState*ls,int nvars
+./ext/opcache/jit/ir/dynasm/minilua.c:3747:45   - Unknown word (nvars)            -- justlocalvars(LexState*ls,int nvars){
 ./ext/opcache/jit/ir/dynasm/minilua.c:374:9     - Unknown word (fasttm)            -- #define fasttm(l,et,e)gfasttm(G(l)
-./ext/opcache/jit/ir/dynasm/minilua.c:3753:13   - Unknown word (removevars)       -- static void removevars(LexState*ls,int tolevel
-./ext/opcache/jit/ir/dynasm/minilua.c:3753:40   - Unknown word (tolevel)          -- removevars(LexState*ls,int tolevel){
-./ext/opcache/jit/ir/dynasm/minilua.c:3758:12   - Unknown word (indexupvalue)     -- static int indexupvalue(FuncState*fs,TString
+./ext/opcache/jit/ir/dynasm/minilua.c:3754:13   - Unknown word (removevars)       -- static void removevars(LexState*ls,int tolevel
+./ext/opcache/jit/ir/dynasm/minilua.c:3754:40   - Unknown word (tolevel)          -- removevars(LexState*ls,int tolevel){
+./ext/opcache/jit/ir/dynasm/minilua.c:3759:12   - Unknown word (indexupvalue)     -- static int indexupvalue(FuncState*fs,TString
 ./ext/opcache/jit/ir/dynasm/minilua.c:375:63    - Unknown word (ename)             -- events,TMS event,TString*ename);
 ./ext/opcache/jit/ir/dynasm/minilua.c:376:14    - Unknown word (reallocv)          -- #define luaM_reallocv(L,b,on,n,e)((cast(size
-./ext/opcache/jit/ir/dynasm/minilua.c:3777:12   - Unknown word (searchvar)        -- static int searchvar(FuncState*fs,TString
+./ext/opcache/jit/ir/dynasm/minilua.c:3778:12   - Unknown word (searchvar)        -- static int searchvar(FuncState*fs,TString
 ./ext/opcache/jit/ir/dynasm/minilua.c:377:14    - Unknown word (freemem)           -- #define luaM_freemem(L,b,s)luaM_realloc_
-./ext/opcache/jit/ir/dynasm/minilua.c:3785:13   - Unknown word (markupval)        -- static void markupval(FuncState*fs,int level
-./ext/opcache/jit/ir/dynasm/minilua.c:3790:12   - Unknown word (singlevaraux)     -- static int singlevaraux(FuncState*fs,TString
+./ext/opcache/jit/ir/dynasm/minilua.c:3786:13   - Unknown word (markupval)        -- static void markupval(FuncState*fs,int level
+./ext/opcache/jit/ir/dynasm/minilua.c:3791:12   - Unknown word (singlevaraux)     -- static int singlevaraux(FuncState*fs,TString
 ./ext/opcache/jit/ir/dynasm/minilua.c:379:14    - Unknown word (freearray)         -- #define luaM_freearray(L,b,n,t)luaM_reallocv
-./ext/opcache/jit/ir/dynasm/minilua.c:3812:13   - Unknown word (singlevar)        -- static void singlevar(LexState*ls,expdesc
-./ext/opcache/jit/ir/dynasm/minilua.c:3818:53   - Unknown word (nexps)            -- LexState*ls,int nvars,int nexps,expdesc*e){
+./ext/opcache/jit/ir/dynasm/minilua.c:3813:13   - Unknown word (singlevar)        -- static void singlevar(LexState*ls,expdesc
+./ext/opcache/jit/ir/dynasm/minilua.c:3819:53   - Unknown word (nexps)            -- LexState*ls,int nvars,int nexps,expdesc*e){
 ./ext/opcache/jit/ir/dynasm/minilua.c:382:14    - Unknown word (newvector)         -- #define luaM_newvector(L,n,t)cast(t*,luaM_reallocv
-./ext/opcache/jit/ir/dynasm/minilua.c:3836:13   - Unknown word (enterlevel)       -- static void enterlevel(LexState*ls){
+./ext/opcache/jit/ir/dynasm/minilua.c:3837:13   - Unknown word (enterlevel)       -- static void enterlevel(LexState*ls){
 ./ext/opcache/jit/ir/dynasm/minilua.c:383:14    - Unknown word (growvector)        -- #define luaM_growvector(L,v,nelems,size,t,limit
 ./ext/opcache/jit/ir/dynasm/minilua.c:383:90    - Unknown word (growaux)           -- size))((v)=cast(t*,luaM_growaux_(L,v,&(size),sizeof
-./ext/opcache/jit/ir/dynasm/minilua.c:3840:9    - Unknown word (leavelevel)       -- #define leavelevel(ls)((ls)->L->nCcalls
-./ext/opcache/jit/ir/dynasm/minilua.c:3841:13   - Unknown word (enterblock)       -- static void enterblock(FuncState*fs,BlockCnt
-./ext/opcache/jit/ir/dynasm/minilua.c:3849:13   - Unknown word (leaveblock)       -- static void leaveblock(FuncState*fs){
+./ext/opcache/jit/ir/dynasm/minilua.c:3841:9    - Unknown word (leavelevel)       -- #define leavelevel(ls)((ls)->L->nCcalls
+./ext/opcache/jit/ir/dynasm/minilua.c:3842:13   - Unknown word (enterblock)       -- static void enterblock(FuncState*fs,BlockCnt
 ./ext/opcache/jit/ir/dynasm/minilua.c:384:14    - Unknown word (reallocvector)     -- #define luaM_reallocvector(L,v,oldn,n,t)((v)=cast
 ./ext/opcache/jit/ir/dynasm/minilua.c:384:32    - Unknown word (oldn)              -- luaM_reallocvector(L,v,oldn,n,t)((v)=cast(t*,luaM
-./ext/opcache/jit/ir/dynasm/minilua.c:3858:13   - Unknown word (pushclosure)      -- static void pushclosure(LexState*ls,FuncState
-./ext/opcache/jit/ir/dynasm/minilua.c:3922:17   - Unknown word (lexstate)         -- struct LexState lexstate;
-./ext/opcache/jit/ir/dynasm/minilua.c:3923:18   - Unknown word (funcstate)        -- struct FuncState funcstate;
+./ext/opcache/jit/ir/dynasm/minilua.c:3850:13   - Unknown word (leaveblock)       -- static void leaveblock(FuncState*fs){
+./ext/opcache/jit/ir/dynasm/minilua.c:3859:13   - Unknown word (pushclosure)      -- static void pushclosure(LexState*ls,FuncState
+./ext/opcache/jit/ir/dynasm/minilua.c:3923:17   - Unknown word (lexstate)         -- struct LexState lexstate;
+./ext/opcache/jit/ir/dynasm/minilua.c:3924:18   - Unknown word (funcstate)        -- struct FuncState funcstate;
 ./ext/opcache/jit/ir/dynasm/minilua.c:393:9     - Unknown word (zgetc)             -- #define zgetc(z)(((z)->n--)>0?char
-./ext/opcache/jit/ir/dynasm/minilua.c:3942:13   - Unknown word (yindex)           -- static void yindex(LexState*ls,expdesc
+./ext/opcache/jit/ir/dynasm/minilua.c:3943:13   - Unknown word (yindex)           -- static void yindex(LexState*ls,expdesc
 ./ext/opcache/jit/ir/dynasm/minilua.c:394:16    - Unknown word (Mbuffer)           -- typedef struct Mbuffer{
-./ext/opcache/jit/ir/dynasm/minilua.c:3955:13   - Unknown word (recfield)         -- static void recfield(LexState*ls,struct ConsContro
-./ext/opcache/jit/ir/dynasm/minilua.c:3959:5    - Unknown word (rkkey)            -- int rkkey;
-./ext/opcache/jit/ir/dynasm/minilua.c:3973:13   - Unknown word (closelistfield)   -- static void closelistfield(FuncState*fs,struct
+./ext/opcache/jit/ir/dynasm/minilua.c:3956:13   - Unknown word (recfield)         -- static void recfield(LexState*ls,struct ConsContro
+./ext/opcache/jit/ir/dynasm/minilua.c:3960:5    - Unknown word (rkkey)            -- int rkkey;
+./ext/opcache/jit/ir/dynasm/minilua.c:3974:13   - Unknown word (closelistfield)   -- static void closelistfield(FuncState*fs,struct
 ./ext/opcache/jit/ir/dynasm/minilua.c:397:8     - Unknown word (buffsize)          -- size_t buffsize;
-./ext/opcache/jit/ir/dynasm/minilua.c:3982:13   - Unknown word (lastlistfield)    -- static void lastlistfield(FuncState*fs,struct
-./ext/opcache/jit/ir/dynasm/minilua.c:3995:13   - Unknown word (listfield)        -- static void listfield(LexState*ls,struct ConsContro
+./ext/opcache/jit/ir/dynasm/minilua.c:3983:13   - Unknown word (lastlistfield)    -- static void lastlistfield(FuncState*fs,struct
+./ext/opcache/jit/ir/dynasm/minilua.c:3996:13   - Unknown word (listfield)        -- static void listfield(LexState*ls,struct ConsContro
 ./ext/opcache/jit/ir/dynasm/minilua.c:399:14    - Unknown word (initbuffer)        -- #define luaZ_initbuffer(L,buff)((buff)->buffer
 ./ext/opcache/jit/ir/dynasm/minilua.c:401:14    - Unknown word (sizebuffer)        -- #define luaZ_sizebuffer(buff)((buff)->buffsize
 ./ext/opcache/jit/ir/dynasm/minilua.c:402:14    - Unknown word (bufflen)           -- #define luaZ_bufflen(buff)((buff)->n)
-./ext/opcache/jit/ir/dynasm/minilua.c:4039:13   - Unknown word (parlist)          -- static void parlist(LexState*ls){
 ./ext/opcache/jit/ir/dynasm/minilua.c:403:14    - Unknown word (resetbuffer)       -- #define luaZ_resetbuffer(buff)((buff)->n=0)
+./ext/opcache/jit/ir/dynasm/minilua.c:4040:13   - Unknown word (parlist)          -- static void parlist(LexState*ls){
 ./ext/opcache/jit/ir/dynasm/minilua.c:404:14    - Unknown word (resizebuffer)      -- #define luaZ_resizebuffer(L,buff,size)(luaM_reallocvect
 ./ext/opcache/jit/ir/dynasm/minilua.c:405:14    - Unknown word (freebuffer)        -- #define luaZ_freebuffer(L,buff)luaZ_resizebuffer
-./ext/opcache/jit/ir/dynasm/minilua.c:4064:44   - Unknown word (needself)         -- LexState*ls,expdesc*e,int needself,int line){
-./ext/opcache/jit/ir/dynasm/minilua.c:4081:12   - Unknown word (explist)          -- static int explist1(LexState*ls,expdesc
-./ext/opcache/jit/ir/dynasm/minilua.c:4091:13   - Unknown word (funcargs)         -- static void funcargs(LexState*ls,expdesc
-./ext/opcache/jit/ir/dynasm/minilua.c:4136:13   - Unknown word (prefixexp)        -- static void prefixexp(LexState*ls,expdesc
-./ext/opcache/jit/ir/dynasm/minilua.c:4156:13   - Unknown word (primaryexp)       -- static void primaryexp(LexState*ls,expdesc
-./ext/opcache/jit/ir/dynasm/minilua.c:4189:13   - Unknown word (simpleexp)        -- static void simpleexp(LexState*ls,expdesc
+./ext/opcache/jit/ir/dynasm/minilua.c:4065:44   - Unknown word (needself)         -- LexState*ls,expdesc*e,int needself,int line){
+./ext/opcache/jit/ir/dynasm/minilua.c:4082:12   - Unknown word (explist)          -- static int explist1(LexState*ls,expdesc
+./ext/opcache/jit/ir/dynasm/minilua.c:4092:13   - Unknown word (funcargs)         -- static void funcargs(LexState*ls,expdesc
+./ext/opcache/jit/ir/dynasm/minilua.c:4137:13   - Unknown word (prefixexp)        -- static void prefixexp(LexState*ls,expdesc
+./ext/opcache/jit/ir/dynasm/minilua.c:4157:13   - Unknown word (primaryexp)       -- static void primaryexp(LexState*ls,expdesc
+./ext/opcache/jit/ir/dynasm/minilua.c:4190:13   - Unknown word (simpleexp)        -- static void simpleexp(LexState*ls,expdesc
 ./ext/opcache/jit/ir/dynasm/minilua.c:419:10    - Unknown word (nuse)              -- lu_int32 nuse;
-./ext/opcache/jit/ir/dynasm/minilua.c:4236:14   - Unknown word (getunopr)         -- static UnOpr getunopr(int op){
-./ext/opcache/jit/ir/dynasm/minilua.c:4244:15   - Unknown word (getbinopr)        -- static BinOpr getbinopr(int op){
+./ext/opcache/jit/ir/dynasm/minilua.c:4237:14   - Unknown word (getunopr)         -- static UnOpr getunopr(int op){
+./ext/opcache/jit/ir/dynasm/minilua.c:4245:15   - Unknown word (getbinopr)        -- static BinOpr getbinopr(int op){
 ./ext/opcache/jit/ir/dynasm/minilua.c:426:19    - Unknown word (savedpc)           -- const Instruction*savedpc;
-./ext/opcache/jit/ir/dynasm/minilua.c:4274:15   - Unknown word (subexpr)          -- static BinOpr subexpr(LexState*ls,expdesc
+./ext/opcache/jit/ir/dynasm/minilua.c:4275:15   - Unknown word (subexpr)          -- static BinOpr subexpr(LexState*ls,expdesc
 ./ext/opcache/jit/ir/dynasm/minilua.c:427:5     - Unknown word (nresults)          -- int nresults;
-./ext/opcache/jit/ir/dynasm/minilua.c:4288:8    - Unknown word (nextop)           -- BinOpr nextop;
+./ext/opcache/jit/ir/dynasm/minilua.c:4289:8    - Unknown word (nextop)           -- BinOpr nextop;
 ./ext/opcache/jit/ir/dynasm/minilua.c:428:5     - Unknown word (tailcalls)         -- int tailcalls;
-./ext/opcache/jit/ir/dynasm/minilua.c:4380:13   - Unknown word (breakstat)        -- static void breakstat(LexState*ls){
+./ext/opcache/jit/ir/dynasm/minilua.c:4381:13   - Unknown word (breakstat)        -- static void breakstat(LexState*ls){
 ./ext/opcache/jit/ir/dynasm/minilua.c:438:9     - Unknown word (currentwhite)      -- lu_byte currentwhite;
-./ext/opcache/jit/ir/dynasm/minilua.c:4394:13   - Unknown word (whilestat)        -- static void whilestat(LexState*ls,int line
-./ext/opcache/jit/ir/dynasm/minilua.c:4396:5    - Unknown word (whileinit)        -- int whileinit;
-./ext/opcache/jit/ir/dynasm/minilua.c:4397:5    - Unknown word (condexit)         -- int condexit;
+./ext/opcache/jit/ir/dynasm/minilua.c:4395:13   - Unknown word (whilestat)        -- static void whilestat(LexState*ls,int line
+./ext/opcache/jit/ir/dynasm/minilua.c:4397:5    - Unknown word (whileinit)        -- int whileinit;
+./ext/opcache/jit/ir/dynasm/minilua.c:4398:5    - Unknown word (condexit)         -- int condexit;
 ./ext/opcache/jit/ir/dynasm/minilua.c:439:9     - Unknown word (gcstate)           -- lu_byte gcstate;
 ./ext/opcache/jit/ir/dynasm/minilua.c:440:5     - Unknown word (sweepstrgc)        -- int sweepstrgc;
-./ext/opcache/jit/ir/dynasm/minilua.c:4410:13   - Unknown word (repeatstat)       -- static void repeatstat(LexState*ls,int line
+./ext/opcache/jit/ir/dynasm/minilua.c:4411:13   - Unknown word (repeatstat)       -- static void repeatstat(LexState*ls,int line
 ./ext/opcache/jit/ir/dynasm/minilua.c:441:10    - Unknown word (rootgc)            -- GCObject*rootgc;
 ./ext/opcache/jit/ir/dynasm/minilua.c:442:11    - Unknown word (sweepgc)           -- GCObject**sweepgc;
-./ext/opcache/jit/ir/dynasm/minilua.c:4441:13   - Unknown word (forbody)          -- static void forbody(LexState*ls,int base
-./ext/opcache/jit/ir/dynasm/minilua.c:4441:65   - Unknown word (isnum)            -- int line,int nvars,int isnum){
+./ext/opcache/jit/ir/dynasm/minilua.c:4442:13   - Unknown word (forbody)          -- static void forbody(LexState*ls,int base
+./ext/opcache/jit/ir/dynasm/minilua.c:4442:65   - Unknown word (isnum)            -- int line,int nvars,int isnum){
 ./ext/opcache/jit/ir/dynasm/minilua.c:444:10    - Unknown word (grayagain)         -- GCObject*grayagain;
-./ext/opcache/jit/ir/dynasm/minilua.c:4459:13   - Unknown word (fornum)           -- static void fornum(LexState*ls,TString
+./ext/opcache/jit/ir/dynasm/minilua.c:4460:13   - Unknown word (fornum)           -- static void fornum(LexState*ls,TString
 ./ext/opcache/jit/ir/dynasm/minilua.c:446:10    - Unknown word (tmudata)           -- GCObject*tmudata;
-./ext/opcache/jit/ir/dynasm/minilua.c:4478:13   - Unknown word (forlist)          -- static void forlist(LexState*ls,TString
-./ext/opcache/jit/ir/dynasm/minilua.c:4478:41   - Unknown word (indexname)        -- LexState*ls,TString*indexname){
-./ext/opcache/jit/ir/dynasm/minilua.c:4496:13   - Unknown word (forstat)          -- static void forstat(LexState*ls,int line
+./ext/opcache/jit/ir/dynasm/minilua.c:4479:13   - Unknown word (forlist)          -- static void forlist(LexState*ls,TString
+./ext/opcache/jit/ir/dynasm/minilua.c:4479:41   - Unknown word (indexname)        -- LexState*ls,TString*indexname){
+./ext/opcache/jit/ir/dynasm/minilua.c:4497:13   - Unknown word (forstat)          -- static void forstat(LexState*ls,int line
 ./ext/opcache/jit/ir/dynasm/minilua.c:449:8     - Unknown word (totalbytes)        -- lu_mem totalbytes;
 ./ext/opcache/jit/ir/dynasm/minilua.c:451:8     - Unknown word (gcdept)            -- lu_mem gcdept;
-./ext/opcache/jit/ir/dynasm/minilua.c:4521:5    - Unknown word (flist)            -- int flist;
-./ext/opcache/jit/ir/dynasm/minilua.c:4522:5    - Unknown word (escapelist)       -- int escapelist=(-1);
+./ext/opcache/jit/ir/dynasm/minilua.c:4522:5    - Unknown word (flist)            -- int flist;
+./ext/opcache/jit/ir/dynasm/minilua.c:4523:5    - Unknown word (escapelist)       -- int escapelist=(-1);
 ./ext/opcache/jit/ir/dynasm/minilua.c:452:5     - Unknown word (gcpause)           -- int gcpause;
 ./ext/opcache/jit/ir/dynasm/minilua.c:453:5     - Unknown word (gcstepmul)         -- int gcstepmul;
-./ext/opcache/jit/ir/dynasm/minilua.c:4540:13   - Unknown word (localfunc)        -- static void localfunc(LexState*ls){
-./ext/opcache/jit/ir/dynasm/minilua.c:4551:13   - Unknown word (localstat)        -- static void localstat(LexState*ls){
+./ext/opcache/jit/ir/dynasm/minilua.c:4541:13   - Unknown word (localfunc)        -- static void localfunc(LexState*ls){
+./ext/opcache/jit/ir/dynasm/minilua.c:4552:13   - Unknown word (localstat)        -- static void localstat(LexState*ls){
 ./ext/opcache/jit/ir/dynasm/minilua.c:456:18    - Unknown word (mainthread)        -- struct lua_State*mainthread;
-./ext/opcache/jit/ir/dynasm/minilua.c:4578:13   - Unknown word (funcstat)         -- static void funcstat(LexState*ls,int line
+./ext/opcache/jit/ir/dynasm/minilua.c:4579:13   - Unknown word (funcstat)         -- static void funcstat(LexState*ls,int line
 ./ext/opcache/jit/ir/dynasm/minilua.c:457:7     - Unknown word (uvhead)            -- UpVal uvhead;
-./ext/opcache/jit/ir/dynasm/minilua.c:4587:13   - Unknown word (exprstat)         -- static void exprstat(LexState*ls){
-./ext/opcache/jit/ir/dynasm/minilua.c:4598:13   - Unknown word (retstat)          -- static void retstat(LexState*ls){
-./ext/opcache/jit/ir/dynasm/minilua.c:4679:5    - Unknown word (islast)           -- int islast=0;
+./ext/opcache/jit/ir/dynasm/minilua.c:4588:13   - Unknown word (exprstat)         -- static void exprstat(LexState*ls){
+./ext/opcache/jit/ir/dynasm/minilua.c:4599:13   - Unknown word (retstat)          -- static void retstat(LexState*ls){
+./ext/opcache/jit/ir/dynasm/minilua.c:4680:5    - Unknown word (islast)           -- int islast=0;
 ./ext/opcache/jit/ir/dynasm/minilua.c:477:9     - Unknown word (hookmask)          -- lu_byte hookmask;
 ./ext/opcache/jit/ir/dynasm/minilua.c:478:9     - Unknown word (allowhook)         -- lu_byte allowhook;
 ./ext/opcache/jit/ir/dynasm/minilua.c:479:5     - Unknown word (basehookcount)     -- int basehookcount;
 ./ext/opcache/jit/ir/dynasm/minilua.c:480:5     - Unknown word (hookcount)         -- int hookcount;
-./ext/opcache/jit/ir/dynasm/minilua.c:4833:17   - Unknown word (lessthan)         -- static int luaV_lessthan(lua_State*L,const TValue
-./ext/opcache/jit/ir/dynasm/minilua.c:4845:12   - Unknown word (lessequal)        -- static int lessequal(lua_State*L,const TValue
+./ext/opcache/jit/ir/dynasm/minilua.c:4834:17   - Unknown word (lessthan)         -- static int luaV_lessthan(lua_State*L,const TValue
+./ext/opcache/jit/ir/dynasm/minilua.c:4846:12   - Unknown word (lessequal)        -- static int lessequal(lua_State*L,const TValue
 ./ext/opcache/jit/ir/dynasm/minilua.c:484:10    - Unknown word (openupval)         -- GCObject*openupval;
-./ext/opcache/jit/ir/dynasm/minilua.c:4916:14   - Unknown word (tempc)            -- TValue tempb,tempc;
-./ext/opcache/jit/ir/dynasm/minilua.c:4916:8    - Unknown word (tempb)            -- TValue tempb,tempc;
-./ext/opcache/jit/ir/dynasm/minilua.c:4941:9    - Unknown word (dojump)           -- #define dojump(L,pc,i){(pc)+=(i);}
+./ext/opcache/jit/ir/dynasm/minilua.c:4917:14   - Unknown word (tempc)            -- TValue tempb,tempc;
+./ext/opcache/jit/ir/dynasm/minilua.c:4917:8    - Unknown word (tempb)            -- TValue tempb,tempc;
+./ext/opcache/jit/ir/dynasm/minilua.c:4942:9    - Unknown word (dojump)           -- #define dojump(L,pc,i){(pc)+=(i);}
 ./ext/opcache/jit/ir/dynasm/minilua.c:500:9     - Unknown word (rawgco)            -- #define rawgco2ts(o)check_exp((o)-
 ./ext/opcache/jit/ir/dynasm/minilua.c:508:9     - Unknown word (ngcotouv)          -- #define ngcotouv(o)check_exp((o)==NULL
 ./ext/opcache/jit/ir/dynasm/minilua.c:511:18    - Unknown word (freethread)        -- static void luaE_freethread(lua_State*L,lua_State
@@ -4748,176 +4750,176 @@ Lines:
 ./ext/opcache/jit/ir/dynasm/minilua.c:518:141   - Unknown word (reallocstack)      -- condhardstacktests(luaD_reallocstack(L,L->stacksize-5-1)
 ./ext/opcache/jit/ir/dynasm/minilua.c:518:97    - Unknown word (growstack)         -- sizeof(TValue))luaD_growstack(L,n);else condhardstacktests
 ./ext/opcache/jit/ir/dynasm/minilua.c:520:9     - Unknown word (savestack)         -- #define savestack(L,p)((char*)(p)-(char
-./ext/opcache/jit/ir/dynasm/minilua.c:5213:14   - Unknown word (pstep)            -- const TValue*pstep=ra+2;
+./ext/opcache/jit/ir/dynasm/minilua.c:5214:14   - Unknown word (pstep)            -- const TValue*pstep=ra+2;
 ./ext/opcache/jit/ir/dynasm/minilua.c:521:9     - Unknown word (restorestack)      -- #define restorestack(L,n)((TValue*)((char
 ./ext/opcache/jit/ir/dynasm/minilua.c:522:9     - Unknown word (saveci)            -- #define saveci(L,p)((char*)(p)-(char
 ./ext/opcache/jit/ir/dynasm/minilua.c:523:9     - Unknown word (restoreci)         -- #define restoreci(L,n)((CallInfo*)((char
 ./ext/opcache/jit/ir/dynasm/minilua.c:525:17    - Unknown word (poscall)           -- static int luaD_poscall(lua_State*L,StkId firstResult
-./ext/opcache/jit/ir/dynasm/minilua.c:5310:13   - Unknown word (checknelems)      -- #define api_checknelems(L,n)luai_apicheck(L
-./ext/opcache/jit/ir/dynasm/minilua.c:5311:13   - Unknown word (checkvalidindex)  -- #define api_checkvalidindex(L,i)luai_apicheck(L
+./ext/opcache/jit/ir/dynasm/minilua.c:5311:13   - Unknown word (checknelems)      -- #define api_checknelems(L,n)luai_apicheck(L
+./ext/opcache/jit/ir/dynasm/minilua.c:5312:13   - Unknown word (checkvalidindex)  -- #define api_checkvalidindex(L,i)luai_apicheck(L
 ./ext/opcache/jit/ir/dynasm/minilua.c:532:6     - Unknown word (newblock)          -- void*newblock;
-./ext/opcache/jit/ir/dynasm/minilua.c:5341:14   - Unknown word (getcurrenv)       -- static Table*getcurrenv(lua_State*L){
-./ext/opcache/jit/ir/dynasm/minilua.c:5360:26   - Unknown word (atpanic)         -- static lua_CFunction lua_atpanic(lua_State*L,lua_CFunction
-./ext/opcache/jit/ir/dynasm/minilua.c:5360:60   - Unknown word (panicf)          -- State*L,lua_CFunction panicf){
-./ext/opcache/jit/ir/dynasm/minilua.c:5366:16   - Unknown word (gettop)          -- static int lua_gettop(lua_State*L){
-./ext/opcache/jit/ir/dynasm/minilua.c:5416:17   - Unknown word (pushvalue)       -- static void lua_pushvalue(lua_State*L,int idx
-./ext/opcache/jit/ir/dynasm/minilua.c:5437:16   - Unknown word (isstring)        -- static int lua_isstring(lua_State*L,int idx
-./ext/opcache/jit/ir/dynasm/minilua.c:5464:24   - Unknown word (tointeger)       -- static lua_Integer lua_tointeger(lua_State*L,int idx
-./ext/opcache/jit/ir/dynasm/minilua.c:5476:16   - Unknown word (toboolean)       -- static int lua_toboolean(lua_State*L,int idx
-./ext/opcache/jit/ir/dynasm/minilua.c:5507:26   - Unknown word (tocfunction)     -- static lua_CFunction lua_tocfunction(lua_State*L,int idx
-./ext/opcache/jit/ir/dynasm/minilua.c:5511:17   - Unknown word (touserdata)      -- static void*lua_touserdata(lua_State*L,int idx
-./ext/opcache/jit/ir/dynasm/minilua.c:5519:17   - Unknown word (pushnil)         -- static void lua_pushnil(lua_State*L){
-./ext/opcache/jit/ir/dynasm/minilua.c:5523:17   - Unknown word (pushnumber)      -- static void lua_pushnumber(lua_State*L,lua_Number
-./ext/opcache/jit/ir/dynasm/minilua.c:5527:17   - Unknown word (pushinteger)     -- static void lua_pushinteger(lua_State*L,lua_Integer
-./ext/opcache/jit/ir/dynasm/minilua.c:5536:17   - Unknown word (pushstring)      -- static void lua_pushstring(lua_State*L,const char
-./ext/opcache/jit/ir/dynasm/minilua.c:5570:17   - Unknown word (pushboolean)     -- static void lua_pushboolean(lua_State*L,int b){
-./ext/opcache/jit/ir/dynasm/minilua.c:5574:16   - Unknown word (pushthread)      -- static int lua_pushthread(lua_State*L){
-./ext/opcache/jit/ir/dynasm/minilua.c:5585:17   - Unknown word (getfield)        -- static void lua_getfield(lua_State*L,int idx
-./ext/opcache/jit/ir/dynasm/minilua.c:5594:17   - Unknown word (rawget)          -- static void lua_rawget(lua_State*L,int idx
-./ext/opcache/jit/ir/dynasm/minilua.c:5600:17   - Unknown word (rawgeti)         -- static void lua_rawgeti(lua_State*L,int idx
+./ext/opcache/jit/ir/dynasm/minilua.c:5342:14   - Unknown word (getcurrenv)       -- static Table*getcurrenv(lua_State*L){
+./ext/opcache/jit/ir/dynasm/minilua.c:5361:26   - Unknown word (atpanic)         -- static lua_CFunction lua_atpanic(lua_State*L,lua_CFunction
+./ext/opcache/jit/ir/dynasm/minilua.c:5361:60   - Unknown word (panicf)          -- State*L,lua_CFunction panicf){
+./ext/opcache/jit/ir/dynasm/minilua.c:5367:16   - Unknown word (gettop)          -- static int lua_gettop(lua_State*L){
+./ext/opcache/jit/ir/dynasm/minilua.c:5417:17   - Unknown word (pushvalue)       -- static void lua_pushvalue(lua_State*L,int idx
+./ext/opcache/jit/ir/dynasm/minilua.c:5438:16   - Unknown word (isstring)        -- static int lua_isstring(lua_State*L,int idx
+./ext/opcache/jit/ir/dynasm/minilua.c:5465:24   - Unknown word (tointeger)       -- static lua_Integer lua_tointeger(lua_State*L,int idx
+./ext/opcache/jit/ir/dynasm/minilua.c:5477:16   - Unknown word (toboolean)       -- static int lua_toboolean(lua_State*L,int idx
+./ext/opcache/jit/ir/dynasm/minilua.c:5508:26   - Unknown word (tocfunction)     -- static lua_CFunction lua_tocfunction(lua_State*L,int idx
+./ext/opcache/jit/ir/dynasm/minilua.c:5512:17   - Unknown word (touserdata)      -- static void*lua_touserdata(lua_State*L,int idx
+./ext/opcache/jit/ir/dynasm/minilua.c:5520:17   - Unknown word (pushnil)         -- static void lua_pushnil(lua_State*L){
+./ext/opcache/jit/ir/dynasm/minilua.c:5524:17   - Unknown word (pushnumber)      -- static void lua_pushnumber(lua_State*L,lua_Number
+./ext/opcache/jit/ir/dynasm/minilua.c:5528:17   - Unknown word (pushinteger)     -- static void lua_pushinteger(lua_State*L,lua_Integer
+./ext/opcache/jit/ir/dynasm/minilua.c:5537:17   - Unknown word (pushstring)      -- static void lua_pushstring(lua_State*L,const char
+./ext/opcache/jit/ir/dynasm/minilua.c:5571:17   - Unknown word (pushboolean)     -- static void lua_pushboolean(lua_State*L,int b){
+./ext/opcache/jit/ir/dynasm/minilua.c:5575:16   - Unknown word (pushthread)      -- static int lua_pushthread(lua_State*L){
+./ext/opcache/jit/ir/dynasm/minilua.c:5586:17   - Unknown word (getfield)        -- static void lua_getfield(lua_State*L,int idx
+./ext/opcache/jit/ir/dynasm/minilua.c:5595:17   - Unknown word (rawget)          -- static void lua_rawget(lua_State*L,int idx
+./ext/opcache/jit/ir/dynasm/minilua.c:5601:17   - Unknown word (rawgeti)         -- static void lua_rawgeti(lua_State*L,int idx
 ./ext/opcache/jit/ir/dynasm/minilua.c:560:9     - Unknown word (resetbits)        -- #define resetbits(x,m)((x)&=cast(lu_byte
-./ext/opcache/jit/ir/dynasm/minilua.c:5612:16   - Unknown word (getmetatable)    -- static int lua_getmetatable(lua_State*L,int objindex
-./ext/opcache/jit/ir/dynasm/minilua.c:5612:45   - Unknown word (objindex)        -- getmetatable(lua_State*L,int objindex){
+./ext/opcache/jit/ir/dynasm/minilua.c:5613:16   - Unknown word (getmetatable)    -- static int lua_getmetatable(lua_State*L,int objindex
+./ext/opcache/jit/ir/dynasm/minilua.c:5613:45   - Unknown word (objindex)        -- getmetatable(lua_State*L,int objindex){
 ./ext/opcache/jit/ir/dynasm/minilua.c:562:9     - Unknown word (testbits)         -- #define testbits(x,m)((x)&(m))
-./ext/opcache/jit/ir/dynasm/minilua.c:5637:17   - Unknown word (getfenv)         -- static void lua_getfenv(lua_State*L,int idx
-./ext/opcache/jit/ir/dynasm/minilua.c:5675:17   - Unknown word (rawset)          -- static void lua_rawset(lua_State*L,int idx
+./ext/opcache/jit/ir/dynasm/minilua.c:5638:17   - Unknown word (getfenv)         -- static void lua_getfenv(lua_State*L,int idx
+./ext/opcache/jit/ir/dynasm/minilua.c:5676:17   - Unknown word (rawset)          -- static void lua_rawset(lua_State*L,int idx
 ./ext/opcache/jit/ir/dynasm/minilua.c:567:9     - Unknown word (testbit)          -- #define testbit(x,b)testbits(x,bitmask
-./ext/opcache/jit/ir/dynasm/minilua.c:5684:17   - Unknown word (rawseti)         -- static void lua_rawseti(lua_State*L,int idx
-./ext/opcache/jit/ir/dynasm/minilua.c:5693:16   - Unknown word (setmetatable)    -- static int lua_setmetatable(lua_State*L,int objindex
+./ext/opcache/jit/ir/dynasm/minilua.c:5685:17   - Unknown word (rawseti)         -- static void lua_rawseti(lua_State*L,int idx
+./ext/opcache/jit/ir/dynasm/minilua.c:5694:16   - Unknown word (setmetatable)    -- static int lua_setmetatable(lua_State*L,int objindex
 ./ext/opcache/jit/ir/dynasm/minilua.c:571:9     - Unknown word (iswhite)          -- #define iswhite(x)test2bits((x)->gch
-./ext/opcache/jit/ir/dynasm/minilua.c:5726:16   - Unknown word (setfenv)         -- static int lua_setfenv(lua_State*L,int idx
+./ext/opcache/jit/ir/dynasm/minilua.c:5727:16   - Unknown word (setfenv)         -- static int lua_setfenv(lua_State*L,int idx
 ./ext/opcache/jit/ir/dynasm/minilua.c:572:9     - Unknown word (isblack)          -- #define isblack(x)testbit((x)->gch.marked
 ./ext/opcache/jit/ir/dynasm/minilua.c:573:9     - Unknown word (isgray)           -- #define isgray(x)(!isblack(x)&&!iswhite
 ./ext/opcache/jit/ir/dynasm/minilua.c:574:9     - Unknown word (otherwhite)       -- #define otherwhite(g)(g->currentwhite^bit
-./ext/opcache/jit/ir/dynasm/minilua.c:5751:25   - Unknown word (nres)            -- define adjustresults(L,nres){if(nres==(-1)&&L->top
-./ext/opcache/jit/ir/dynasm/minilua.c:5751:9    - Unknown word (adjustresults)   -- #define adjustresults(L,nres){if(nres==(-
-./ext/opcache/jit/ir/dynasm/minilua.c:5752:9    - Unknown word (checkresults)    -- #define checkresults(L,na,nr)luai_apicheck
+./ext/opcache/jit/ir/dynasm/minilua.c:5752:25   - Unknown word (nres)            -- define adjustresults(L,nres){if(nres==(-1)&&L->top
+./ext/opcache/jit/ir/dynasm/minilua.c:5752:9    - Unknown word (adjustresults)   -- #define adjustresults(L,nres){if(nres==(-
+./ext/opcache/jit/ir/dynasm/minilua.c:5753:9    - Unknown word (checkresults)    -- #define checkresults(L,na,nr)luai_apicheck
 ./ext/opcache/jit/ir/dynasm/minilua.c:575:9     - Unknown word (isdead)           -- #define isdead(g,v)((v)->gch.marked
 ./ext/opcache/jit/ir/dynasm/minilua.c:576:9     - Unknown word (changewhite)      -- #define changewhite(x)((x)->gch.marked^
-./ext/opcache/jit/ir/dynasm/minilua.c:5789:12   - Unknown word (chunkname)       -- const char*chunkname){
 ./ext/opcache/jit/ir/dynasm/minilua.c:578:9     - Unknown word (valiswhite)       -- #define valiswhite(x)(iscollectable(x)
+./ext/opcache/jit/ir/dynasm/minilua.c:5790:12   - Unknown word (chunkname)       -- const char*chunkname){
 ./ext/opcache/jit/ir/dynasm/minilua.c:581:72    - Unknown word (barrierf)         -- isblack(obj2gco(p)))luaC_barrierf(L,obj2gco(p),gcvalue
-./ext/opcache/jit/ir/dynasm/minilua.c:5827:17   - Unknown word (newuserdata)     -- static void*lua_newuserdata(lua_State*L,size_t size
+./ext/opcache/jit/ir/dynasm/minilua.c:5828:17   - Unknown word (newuserdata)     -- static void*lua_newuserdata(lua_State*L,size_t size
 ./ext/opcache/jit/ir/dynasm/minilua.c:582:14    - Unknown word (barriert)         -- #define luaC_barriert(L,t,v){if(valiswhite
 ./ext/opcache/jit/ir/dynasm/minilua.c:582:73    - Unknown word (barrierback)      -- isblack(obj2gco(t)))luaC_barrierback(L,t);}
 ./ext/opcache/jit/ir/dynasm/minilua.c:583:14    - Unknown word (objbarrier)       -- #define luaC_objbarrier(L,p,o){if(iswhite(obj
-./ext/opcache/jit/ir/dynasm/minilua.c:5841:18   - Unknown word (openlib)         -- static void luaI_openlib(lua_State*L,const char
-./ext/opcache/jit/ir/dynasm/minilua.c:5843:17   - Unknown word (argerror)        -- static int luaL_argerror(lua_State*L,int numarg
-./ext/opcache/jit/ir/dynasm/minilua.c:5843:42   - Unknown word (numarg)          -- argerror(lua_State*L,int numarg,const char*extramsg
-./ext/opcache/jit/ir/dynasm/minilua.c:5843:60   - Unknown word (extramsg)        -- int numarg,const char*extramsg);
-./ext/opcache/jit/ir/dynasm/minilua.c:5844:25   - Unknown word (checklstring)    -- static const char* luaL_checklstring(lua_State*L,int numArg
-./ext/opcache/jit/ir/dynasm/minilua.c:5846:25   - Unknown word (optlstring)      -- static const char* luaL_optlstring(lua_State*L,int numArg
-./ext/opcache/jit/ir/dynasm/minilua.c:5848:25   - Unknown word (checkinteger)    -- static lua_Integer luaL_checkinteger(lua_State*L,int numArg
-./ext/opcache/jit/ir/dynasm/minilua.c:5849:25   - Unknown word (optinteger)      -- static lua_Integer luaL_optinteger(lua_State*L,int nArg
+./ext/opcache/jit/ir/dynasm/minilua.c:5842:18   - Unknown word (openlib)         -- static void luaI_openlib(lua_State*L,const char
+./ext/opcache/jit/ir/dynasm/minilua.c:5844:17   - Unknown word (argerror)        -- static int luaL_argerror(lua_State*L,int numarg
+./ext/opcache/jit/ir/dynasm/minilua.c:5844:42   - Unknown word (numarg)          -- argerror(lua_State*L,int numarg,const char*extramsg
+./ext/opcache/jit/ir/dynasm/minilua.c:5844:60   - Unknown word (extramsg)        -- int numarg,const char*extramsg);
+./ext/opcache/jit/ir/dynasm/minilua.c:5845:25   - Unknown word (checklstring)    -- static const char* luaL_checklstring(lua_State*L,int numArg
+./ext/opcache/jit/ir/dynasm/minilua.c:5847:25   - Unknown word (optlstring)      -- static const char* luaL_optlstring(lua_State*L,int numArg
+./ext/opcache/jit/ir/dynasm/minilua.c:5849:25   - Unknown word (checkinteger)    -- static lua_Integer luaL_checkinteger(lua_State*L,int numArg
 ./ext/opcache/jit/ir/dynasm/minilua.c:584:14    - Unknown word (objbarriert)      -- #define luaC_objbarriert(L,t,o){if(iswhite(obj
-./ext/opcache/jit/ir/dynasm/minilua.c:5852:25   - Unknown word (findtable)       -- static const char* luaL_findtable(lua_State*L,int idx
-./ext/opcache/jit/ir/dynasm/minilua.c:5853:22   - Unknown word (szhint)          -- const char*fname,int szhint);
-./ext/opcache/jit/ir/dynasm/minilua.c:5854:14   - Unknown word (argcheck)        -- #define luaL_argcheck(L,cond,numarg,extramsg
-./ext/opcache/jit/ir/dynasm/minilua.c:5855:14   - Unknown word (checkstring)     -- #define luaL_checkstring(L,n)(luaL_checklstring
-./ext/opcache/jit/ir/dynasm/minilua.c:5858:14   - Unknown word (optint)          -- #define luaL_optint(L,n,d)((int)luaL_optinteger
-./ext/opcache/jit/ir/dynasm/minilua.c:5868:14   - Unknown word (addchar)         -- #define luaL_addchar(B,c)((void)((B)->p<
-./ext/opcache/jit/ir/dynasm/minilua.c:5868:68   - Unknown word (prepbuffer)      -- buffer+BUFSIZ)||luaL_prepbuffer(B)),(*(B)->p++=(char
-./ext/opcache/jit/ir/dynasm/minilua.c:5869:14   - Unknown word (addsize)         -- #define luaL_addsize(B,n)((B)->p+=(n))
+./ext/opcache/jit/ir/dynasm/minilua.c:5850:25   - Unknown word (optinteger)      -- static lua_Integer luaL_optinteger(lua_State*L,int nArg
+./ext/opcache/jit/ir/dynasm/minilua.c:5853:25   - Unknown word (findtable)       -- static const char* luaL_findtable(lua_State*L,int idx
+./ext/opcache/jit/ir/dynasm/minilua.c:5854:22   - Unknown word (szhint)          -- const char*fname,int szhint);
+./ext/opcache/jit/ir/dynasm/minilua.c:5855:14   - Unknown word (argcheck)        -- #define luaL_argcheck(L,cond,numarg,extramsg
+./ext/opcache/jit/ir/dynasm/minilua.c:5856:14   - Unknown word (checkstring)     -- #define luaL_checkstring(L,n)(luaL_checklstring
+./ext/opcache/jit/ir/dynasm/minilua.c:5859:14   - Unknown word (optint)          -- #define luaL_optint(L,n,d)((int)luaL_optinteger
+./ext/opcache/jit/ir/dynasm/minilua.c:5869:14   - Unknown word (addchar)         -- #define luaL_addchar(B,c)((void)((B)->p<
+./ext/opcache/jit/ir/dynasm/minilua.c:5869:68   - Unknown word (prepbuffer)      -- buffer+BUFSIZ)||luaL_prepbuffer(B)),(*(B)->p++=(char
+./ext/opcache/jit/ir/dynasm/minilua.c:5870:14   - Unknown word (addsize)         -- #define luaL_addsize(B,n)((B)->p+=(n))
 ./ext/opcache/jit/ir/dynasm/minilua.c:587:18    - Unknown word (linkupval)        -- static void luaC_linkupval(lua_State*L,UpVal*uv
-./ext/opcache/jit/ir/dynasm/minilua.c:5887:17   - Unknown word (typerror)        -- static int luaL_typerror(lua_State*L,int narg
-./ext/opcache/jit/ir/dynasm/minilua.c:5887:58   - Unknown word (tname)           -- int narg,const char*tname){
+./ext/opcache/jit/ir/dynasm/minilua.c:5888:17   - Unknown word (typerror)        -- static int luaL_typerror(lua_State*L,int narg
+./ext/opcache/jit/ir/dynasm/minilua.c:5888:58   - Unknown word (tname)           -- int narg,const char*tname){
 ./ext/opcache/jit/ir/dynasm/minilua.c:590:9     - Unknown word (sizestring)       -- #define sizestring(s)(sizeof(union TString
-./ext/opcache/jit/ir/dynasm/minilua.c:5915:17   - Unknown word (newmetatable)    -- static int luaL_newmetatable(lua_State*L,const char
+./ext/opcache/jit/ir/dynasm/minilua.c:5916:17   - Unknown word (newmetatable)    -- static int luaL_newmetatable(lua_State*L,const char
 ./ext/opcache/jit/ir/dynasm/minilua.c:591:9     - Unknown word (sizeudata)        -- #define sizeudata(u)(sizeof(union Udata
-./ext/opcache/jit/ir/dynasm/minilua.c:5925:18   - Unknown word (checkudata)      -- static void*luaL_checkudata(lua_State*L,int ud,const
+./ext/opcache/jit/ir/dynasm/minilua.c:5926:18   - Unknown word (checkudata)      -- static void*luaL_checkudata(lua_State*L,int ud,const
 ./ext/opcache/jit/ir/dynasm/minilua.c:592:28    - Unknown word (newlstr)          -- define luaS_new(L,s)(luaS_newlstr(L,s,strlen(s)))
 ./ext/opcache/jit/ir/dynasm/minilua.c:593:14    - Unknown word (newliteral)       -- #define luaS_newliteral(L,s)(luaS_newlstr(L
-./ext/opcache/jit/ir/dynasm/minilua.c:5943:18   - Unknown word (checktype)       -- static void luaL_checktype(lua_State*L,int narg
-./ext/opcache/jit/ir/dynasm/minilua.c:5947:18   - Unknown word (checkany)        -- static void luaL_checkany(lua_State*L,int narg
-./ext/opcache/jit/ir/dynasm/minilua.c:5965:24   - Unknown word (checknumber)     -- static lua_Number luaL_checknumber(lua_State*L,int narg
+./ext/opcache/jit/ir/dynasm/minilua.c:5944:18   - Unknown word (checktype)       -- static void luaL_checktype(lua_State*L,int narg
+./ext/opcache/jit/ir/dynasm/minilua.c:5948:18   - Unknown word (checkany)        -- static void luaL_checkany(lua_State*L,int narg
+./ext/opcache/jit/ir/dynasm/minilua.c:5966:24   - Unknown word (checknumber)     -- static lua_Number luaL_checknumber(lua_State*L,int narg
 ./ext/opcache/jit/ir/dynasm/minilua.c:597:9     - Unknown word (tonumber)         -- #define tonumber(o,n)(ttype(o)==3||(
-./ext/opcache/jit/ir/dynasm/minilua.c:5981:17   - Unknown word (getmetafield)    -- static int luaL_getmetafield(lua_State*L,int obj
+./ext/opcache/jit/ir/dynasm/minilua.c:5982:17   - Unknown word (getmetafield)    -- static int luaL_getmetafield(lua_State*L,int obj
 ./ext/opcache/jit/ir/dynasm/minilua.c:598:54    - Unknown word (equalval)         -- o1)==ttype(o2)&&luaV_equalval(L,o1,o2))
 ./ext/opcache/jit/ir/dynasm/minilua.c:598:9     - Unknown word (equalobj)         -- #define equalobj(L,o1,o2)(ttype(o1)=
-./ext/opcache/jit/ir/dynasm/minilua.c:5999:12   - Unknown word (libsize)         -- static int libsize(const luaL_Reg*l){
+./ext/opcache/jit/ir/dynasm/minilua.c:6000:12   - Unknown word (libsize)         -- static int libsize(const luaL_Reg*l){
 ./ext/opcache/jit/ir/dynasm/minilua.c:602:42    - Unknown word (nexeccalls)       -- execute(lua_State*L,int nexeccalls);
-./ext/opcache/jit/ir/dynasm/minilua.c:6055:9    - Unknown word (bufffree)        -- #define bufffree(B)((size_t)(BUFSIZ-bufflen
-./ext/opcache/jit/ir/dynasm/minilua.c:6056:12   - Unknown word (emptybuffer)     -- static int emptybuffer(luaL_Buffer*B){
-./ext/opcache/jit/ir/dynasm/minilua.c:6066:13   - Unknown word (adjuststack)     -- static void adjuststack(luaL_Buffer*B){
-./ext/opcache/jit/ir/dynasm/minilua.c:6069:5    - Unknown word (toget)           -- int toget=1;
-./ext/opcache/jit/ir/dynasm/minilua.c:6070:8    - Unknown word (toplen)          -- size_t toplen=lua_strlen(L,-1);
-./ext/opcache/jit/ir/dynasm/minilua.c:6088:18   - Unknown word (addlstring)      -- static void luaL_addlstring(luaL_Buffer*B,const
-./ext/opcache/jit/ir/dynasm/minilua.c:6092:18   - Unknown word (pushresult)      -- static void luaL_pushresult(luaL_Buffer*B){
-./ext/opcache/jit/ir/dynasm/minilua.c:6097:18   - Unknown word (addvalue)        -- static void luaL_addvalue(luaL_Buffer*B){
-./ext/opcache/jit/ir/dynasm/minilua.c:6113:18   - Unknown word (buffinit)        -- static void luaL_buffinit(lua_State*L,luaL_Buffer
-./ext/opcache/jit/ir/dynasm/minilua.c:6119:5    - Unknown word (extraline)       -- int extraline;
-./ext/opcache/jit/ir/dynasm/minilua.c:6135:12   - Unknown word (errfile)         -- static int errfile(lua_State*L,const char
-./ext/opcache/jit/ir/dynasm/minilua.c:6135:52   - Unknown word (fnameindex)      -- const char*what,int fnameindex){
-./ext/opcache/jit/ir/dynasm/minilua.c:6144:12   - Unknown word (readstatus)      -- int status,readstatus;
-./ext/opcache/jit/ir/dynasm/minilua.c:6192:17   - Unknown word (loadbuffer)      -- static int luaL_loadbuffer(lua_State*L,const char
-./ext/opcache/jit/ir/dynasm/minilua.c:6267:13   - Unknown word (getfunc)        -- static void getfunc(lua_State*L,int opt
-./ext/opcache/jit/ir/dynasm/minilua.c:6325:12   - Unknown word (ipairsaux)      -- static int ipairsaux(lua_State*L){
-./ext/opcache/jit/ir/dynasm/minilua.c:6333:17   - Unknown word (ipairs)         -- static int luaB_ipairs(lua_State*L){
-./ext/opcache/jit/ir/dynasm/minilua.c:6349:17   - Unknown word (loadstring)     -- static int luaB_loadstring(lua_State*L){
+./ext/opcache/jit/ir/dynasm/minilua.c:6056:9    - Unknown word (bufffree)        -- #define bufffree(B)((size_t)(BUFSIZ-bufflen
+./ext/opcache/jit/ir/dynasm/minilua.c:6057:12   - Unknown word (emptybuffer)     -- static int emptybuffer(luaL_Buffer*B){
+./ext/opcache/jit/ir/dynasm/minilua.c:6067:13   - Unknown word (adjuststack)     -- static void adjuststack(luaL_Buffer*B){
+./ext/opcache/jit/ir/dynasm/minilua.c:6070:5    - Unknown word (toget)           -- int toget=1;
+./ext/opcache/jit/ir/dynasm/minilua.c:6071:8    - Unknown word (toplen)          -- size_t toplen=lua_strlen(L,-1);
+./ext/opcache/jit/ir/dynasm/minilua.c:6089:18   - Unknown word (addlstring)      -- static void luaL_addlstring(luaL_Buffer*B,const
+./ext/opcache/jit/ir/dynasm/minilua.c:6093:18   - Unknown word (pushresult)      -- static void luaL_pushresult(luaL_Buffer*B){
+./ext/opcache/jit/ir/dynasm/minilua.c:6098:18   - Unknown word (addvalue)        -- static void luaL_addvalue(luaL_Buffer*B){
+./ext/opcache/jit/ir/dynasm/minilua.c:6114:18   - Unknown word (buffinit)        -- static void luaL_buffinit(lua_State*L,luaL_Buffer
+./ext/opcache/jit/ir/dynasm/minilua.c:6120:5    - Unknown word (extraline)       -- int extraline;
+./ext/opcache/jit/ir/dynasm/minilua.c:6136:12   - Unknown word (errfile)         -- static int errfile(lua_State*L,const char
+./ext/opcache/jit/ir/dynasm/minilua.c:6136:52   - Unknown word (fnameindex)      -- const char*what,int fnameindex){
+./ext/opcache/jit/ir/dynasm/minilua.c:6145:12   - Unknown word (readstatus)      -- int status,readstatus;
+./ext/opcache/jit/ir/dynasm/minilua.c:6193:17   - Unknown word (loadbuffer)      -- static int luaL_loadbuffer(lua_State*L,const char
+./ext/opcache/jit/ir/dynasm/minilua.c:6268:13   - Unknown word (getfunc)        -- static void getfunc(lua_State*L,int opt
+./ext/opcache/jit/ir/dynasm/minilua.c:6326:12   - Unknown word (ipairsaux)      -- static int ipairsaux(lua_State*L){
+./ext/opcache/jit/ir/dynasm/minilua.c:6334:17   - Unknown word (ipairs)         -- static int luaB_ipairs(lua_State*L){
 ./ext/opcache/jit/ir/dynasm/minilua.c:634:17    - Unknown word (rawequal)         -- static int luaO_rawequalObj(const TValue*t1,const
-./ext/opcache/jit/ir/dynasm/minilua.c:6387:17   - Unknown word (newproxy)       -- static int luaB_newproxy(lua_State*L){
-./ext/opcache/jit/ir/dynasm/minilua.c:6399:5    - Unknown word (validproxy)     -- int validproxy=0;
-./ext/opcache/jit/ir/dynasm/minilua.c:6426:13   - Unknown word (auxopen)        -- static void auxopen(lua_State*L,const char
-./ext/opcache/jit/ir/dynasm/minilua.c:6453:12   - Unknown word (tinsert)        -- static int tinsert(lua_State*L){
-./ext/opcache/jit/ir/dynasm/minilua.c:6479:12   - Unknown word (tremove)        -- static int tremove(lua_State*L){
-./ext/opcache/jit/ir/dynasm/minilua.c:6494:13   - Unknown word (addfield)       -- static void addfield(lua_State*L,luaL_Buffer
-./ext/opcache/jit/ir/dynasm/minilua.c:6501:12   - Unknown word (tconcat)        -- static int tconcat(lua_State*L){
-./ext/opcache/jit/ir/dynasm/minilua.c:6537:13   - Unknown word (auxsort)        -- static void auxsort(lua_State*L,int l,int
+./ext/opcache/jit/ir/dynasm/minilua.c:6350:17   - Unknown word (loadstring)     -- static int luaB_loadstring(lua_State*L){
+./ext/opcache/jit/ir/dynasm/minilua.c:6388:17   - Unknown word (newproxy)       -- static int luaB_newproxy(lua_State*L){
+./ext/opcache/jit/ir/dynasm/minilua.c:6400:5    - Unknown word (validproxy)     -- int validproxy=0;
+./ext/opcache/jit/ir/dynasm/minilua.c:6427:13   - Unknown word (auxopen)        -- static void auxopen(lua_State*L,const char
+./ext/opcache/jit/ir/dynasm/minilua.c:6454:12   - Unknown word (tinsert)        -- static int tinsert(lua_State*L){
+./ext/opcache/jit/ir/dynasm/minilua.c:6480:12   - Unknown word (tremove)        -- static int tremove(lua_State*L){
+./ext/opcache/jit/ir/dynasm/minilua.c:6495:13   - Unknown word (addfield)       -- static void addfield(lua_State*L,luaL_Buffer
+./ext/opcache/jit/ir/dynasm/minilua.c:6502:12   - Unknown word (tconcat)        -- static int tconcat(lua_State*L){
+./ext/opcache/jit/ir/dynasm/minilua.c:6538:13   - Unknown word (auxsort)        -- static void auxsort(lua_State*L,int l,int
 ./ext/opcache/jit/ir/dynasm/minilua.c:65:4      - Unknown word (LOADK)      -- OP_LOADK,
 ./ext/opcache/jit/ir/dynasm/minilua.c:660:13    - Unknown word (pushstr)          -- static void pushstr(lua_State*L,const char
-./ext/opcache/jit/ir/dynasm/minilua.c:6613:25   - Unknown word (fnames)         -- static const char*const fnames[]={"input","output"
-./ext/opcache/jit/ir/dynasm/minilua.c:6630:13   - Unknown word (fileerror)      -- static void fileerror(lua_State*L,int arg
-./ext/opcache/jit/ir/dynasm/minilua.c:6634:9    - Unknown word (tofilep)        -- #define tofilep(L)((FILE**)luaL_checkudata
+./ext/opcache/jit/ir/dynasm/minilua.c:6614:25   - Unknown word (fnames)         -- static const char*const fnames[]={"input","output"
+./ext/opcache/jit/ir/dynasm/minilua.c:6631:13   - Unknown word (fileerror)      -- static void fileerror(lua_State*L,int arg
+./ext/opcache/jit/ir/dynasm/minilua.c:6635:9    - Unknown word (tofilep)        -- #define tofilep(L)((FILE**)luaL_checkudata
 ./ext/opcache/jit/ir/dynasm/minilua.c:664:24    - Unknown word (pushvfstring)     -- static const char*luaO_pushvfstring(lua_State*L,const char
-./ext/opcache/jit/ir/dynasm/minilua.c:6654:14   - Unknown word (newfile)        -- static FILE**newfile(lua_State*L){
-./ext/opcache/jit/ir/dynasm/minilua.c:6661:15   - Unknown word (noclose)        -- static int io_noclose(lua_State*L){
+./ext/opcache/jit/ir/dynasm/minilua.c:6655:14   - Unknown word (newfile)        -- static FILE**newfile(lua_State*L){
+./ext/opcache/jit/ir/dynasm/minilua.c:6662:15   - Unknown word (noclose)        -- static int io_noclose(lua_State*L){
 ./ext/opcache/jit/ir/dynasm/minilua.c:66:4      - Unknown word (LOADBOOL)   -- OP_LOADBOOL,
-./ext/opcache/jit/ir/dynasm/minilua.c:6702:13   - Unknown word (getiofile)      -- static FILE*getiofile(lua_State*L,int findex
-./ext/opcache/jit/ir/dynasm/minilua.c:6702:39   - Unknown word (findex)         -- getiofile(lua_State*L,int findex){
-./ext/opcache/jit/ir/dynasm/minilua.c:6710:14   - Unknown word (iofile)         -- static int g_iofile(lua_State*L,int f,const
-./ext/opcache/jit/ir/dynasm/minilua.c:6735:47   - Unknown word (toclose)        -- State*L,int idx,int toclose){
+./ext/opcache/jit/ir/dynasm/minilua.c:6703:13   - Unknown word (getiofile)      -- static FILE*getiofile(lua_State*L,int findex
+./ext/opcache/jit/ir/dynasm/minilua.c:6703:39   - Unknown word (findex)         -- getiofile(lua_State*L,int findex){
+./ext/opcache/jit/ir/dynasm/minilua.c:6711:14   - Unknown word (iofile)         -- static int g_iofile(lua_State*L,int f,const
+./ext/opcache/jit/ir/dynasm/minilua.c:6736:47   - Unknown word (toclose)        -- State*L,int idx,int toclose){
 ./ext/opcache/jit/ir/dynasm/minilua.c:67:4      - Unknown word (LOADNIL)    -- OP_LOADNIL,
 ./ext/opcache/jit/ir/dynasm/minilua.c:68:4      - Unknown word (GETUPVAL)   -- OP_GETUPVAL,
-./ext/opcache/jit/ir/dynasm/minilua.c:6910:23   - Unknown word (iolib)          -- static const luaL_Reg iolib[]={
-./ext/opcache/jit/ir/dynasm/minilua.c:6931:13   - Unknown word (createmeta)     -- static void createmeta(lua_State*L){
-./ext/opcache/jit/ir/dynasm/minilua.c:6937:13   - Unknown word (createstdfile)  -- static void createstdfile(lua_State*L,FILE*f,int
-./ext/opcache/jit/ir/dynasm/minilua.c:6947:13   - Unknown word (newfenv)        -- static void newfenv(lua_State*L,lua_CFunction
-./ext/opcache/jit/ir/dynasm/minilua.c:6988:23   - Unknown word (syslib)         -- static const luaL_Reg syslib[]={
-./ext/opcache/jit/ir/dynasm/minilua.c:6998:18   - Unknown word (posrelat)       -- static ptrdiff_t posrelat(ptrdiff_t pos,size_t
+./ext/opcache/jit/ir/dynasm/minilua.c:6911:23   - Unknown word (iolib)          -- static const luaL_Reg iolib[]={
+./ext/opcache/jit/ir/dynasm/minilua.c:6932:13   - Unknown word (createmeta)     -- static void createmeta(lua_State*L){
+./ext/opcache/jit/ir/dynasm/minilua.c:6938:13   - Unknown word (createstdfile)  -- static void createstdfile(lua_State*L,FILE*f,int
+./ext/opcache/jit/ir/dynasm/minilua.c:6948:13   - Unknown word (newfenv)        -- static void newfenv(lua_State*L,lua_CFunction
+./ext/opcache/jit/ir/dynasm/minilua.c:6993:23   - Unknown word (syslib)         -- static const luaL_Reg syslib[]={
 ./ext/opcache/jit/ir/dynasm/minilua.c:69:4      - Unknown word (GETGLOBAL)  -- OP_GETGLOBAL,
-./ext/opcache/jit/ir/dynasm/minilua.c:7050:11   - Unknown word (posi)           -- ptrdiff_t posi=posrelat(luaL_optinteger
-./ext/opcache/jit/ir/dynasm/minilua.c:7099:19   - Unknown word (classend)       -- static const char*classend(MatchState*ms,const
-./ext/opcache/jit/ir/dynasm/minilua.c:7138:12   - Unknown word (matchbracketclass) -- static int matchbracketclass(int c,const char*p,const
-./ext/opcache/jit/ir/dynasm/minilua.c:7159:12   - Unknown word (singlematch)       -- static int singlematch(int c,const char*p,const
-./ext/opcache/jit/ir/dynasm/minilua.c:7168:19   - Unknown word (matchbalance)      -- static const char*matchbalance(MatchState*ms,const
+./ext/opcache/jit/ir/dynasm/minilua.c:7004:18   - Unknown word (posrelat)       -- static ptrdiff_t posrelat(ptrdiff_t pos,size_t
+./ext/opcache/jit/ir/dynasm/minilua.c:7056:11   - Unknown word (posi)           -- ptrdiff_t posi=posrelat(luaL_optinteger
+./ext/opcache/jit/ir/dynasm/minilua.c:7105:19   - Unknown word (classend)       -- static const char*classend(MatchState*ms,const
+./ext/opcache/jit/ir/dynasm/minilua.c:7144:12   - Unknown word (matchbracketclass) -- static int matchbracketclass(int c,const char*p,const
+./ext/opcache/jit/ir/dynasm/minilua.c:7165:12   - Unknown word (singlematch)       -- static int singlematch(int c,const char*p,const
+./ext/opcache/jit/ir/dynasm/minilua.c:7174:19   - Unknown word (matchbalance)      -- static const char*matchbalance(MatchState*ms,const
 ./ext/opcache/jit/ir/dynasm/minilua.c:723:24    - Unknown word (pushfstring)      -- static const char*luaO_pushfstring(lua_State*L,const char
 ./ext/opcache/jit/ir/dynasm/minilua.c:72:4      - Unknown word (SETUPVAL)   -- OP_SETUPVAL,
-./ext/opcache/jit/ir/dynasm/minilua.c:7315:19   - Unknown word (lmemfind)          -- static const char*lmemfind(const char*s1,size_t
 ./ext/opcache/jit/ir/dynasm/minilua.c:731:18    - Unknown word (chunkid)          -- static void luaO_chunkid(char*out,const char
-./ext/opcache/jit/ir/dynasm/minilua.c:7335:18   - Unknown word (onecapture)        -- static void push_onecapture(MatchState*ms,int i
-./ext/opcache/jit/ir/dynasm/minilua.c:7354:5    - Unknown word (nlevels)           -- int nlevels=(ms->level==0&&s)?1
-./ext/opcache/jit/ir/dynasm/minilua.c:7406:12   - Unknown word (gmatch)            -- static int gmatch_aux(lua_State*L){
-./ext/opcache/jit/ir/dynasm/minilua.c:7421:13   - Unknown word (newstart)          -- lua_Integer newstart=e-s;
-./ext/opcache/jit/ir/dynasm/minilua.c:7488:16   - Unknown word (gsub)              -- static int str_gsub(lua_State*L){
-./ext/opcache/jit/ir/dynasm/minilua.c:7489:8    - Unknown word (srcl)              -- size_t srcl;
+./ext/opcache/jit/ir/dynasm/minilua.c:7321:19   - Unknown word (lmemfind)          -- static const char*lmemfind(const char*s1,size_t
+./ext/opcache/jit/ir/dynasm/minilua.c:7341:18   - Unknown word (onecapture)        -- static void push_onecapture(MatchState*ms,int i
+./ext/opcache/jit/ir/dynasm/minilua.c:7360:5    - Unknown word (nlevels)           -- int nlevels=(ms->level==0&&s)?1
+./ext/opcache/jit/ir/dynasm/minilua.c:7412:12   - Unknown word (gmatch)            -- static int gmatch_aux(lua_State*L){
+./ext/opcache/jit/ir/dynasm/minilua.c:7427:13   - Unknown word (newstart)          -- lua_Integer newstart=e-s;
+./ext/opcache/jit/ir/dynasm/minilua.c:7494:16   - Unknown word (gsub)              -- static int str_gsub(lua_State*L){
+./ext/opcache/jit/ir/dynasm/minilua.c:7495:8    - Unknown word (srcl)              -- size_t srcl;
 ./ext/opcache/jit/ir/dynasm/minilua.c:74:4      - Unknown word (NEWTABLE)   -- OP_NEWTABLE,
-./ext/opcache/jit/ir/dynasm/minilua.c:7525:13   - Unknown word (addquoted)         -- static void addquoted(lua_State*L,luaL_Buffer
-./ext/opcache/jit/ir/dynasm/minilua.c:7553:19   - Unknown word (scanformat)        -- static const char*scanformat(lua_State*L,const char
-./ext/opcache/jit/ir/dynasm/minilua.c:7553:53   - Unknown word (strfrmt)           -- lua_State*L,const char*strfrmt,char*form){
-./ext/opcache/jit/ir/dynasm/minilua.c:7573:13   - Unknown word (addintlen)         -- static void addintlen(char*form){
-./ext/opcache/jit/ir/dynasm/minilua.c:7647:23   - Unknown word (strlib)            -- static const luaL_Reg strlib[]={
+./ext/opcache/jit/ir/dynasm/minilua.c:7531:13   - Unknown word (addquoted)         -- static void addquoted(lua_State*L,luaL_Buffer
+./ext/opcache/jit/ir/dynasm/minilua.c:7559:19   - Unknown word (scanformat)        -- static const char*scanformat(lua_State*L,const char
+./ext/opcache/jit/ir/dynasm/minilua.c:7559:53   - Unknown word (strfrmt)           -- lua_State*L,const char*strfrmt,char*form){
+./ext/opcache/jit/ir/dynasm/minilua.c:7579:13   - Unknown word (addintlen)         -- static void addintlen(char*form){
 ./ext/opcache/jit/ir/dynasm/minilua.c:764:9     - Unknown word (gnode)            -- #define gnode(t,i)(&(t)->node[i])
-./ext/opcache/jit/ir/dynasm/minilua.c:7661:13   - Unknown word (createmetatable)   -- static void createmetatable(lua_State*L){
-./ext/opcache/jit/ir/dynasm/minilua.c:7676:23   - Unknown word (lualibs)           -- static const luaL_Reg lualibs[]={
-./ext/opcache/jit/ir/dynasm/minilua.c:7684:18   - Unknown word (openlibs)          -- static void luaL_openlibs(lua_State*L){
+./ext/opcache/jit/ir/dynasm/minilua.c:7653:23   - Unknown word (strlib)            -- static const luaL_Reg strlib[]={
+./ext/opcache/jit/ir/dynasm/minilua.c:7667:13   - Unknown word (createmetatable)   -- static void createmetatable(lua_State*L){
+./ext/opcache/jit/ir/dynasm/minilua.c:7682:23   - Unknown word (lualibs)           -- static const luaL_Reg lualibs[]={
 ./ext/opcache/jit/ir/dynasm/minilua.c:768:13    - Unknown word (tval)             -- #define key2tval(n)(&(n)->i_key.tvk)
-./ext/opcache/jit/ir/dynasm/minilua.c:7693:11   - Unknown word (barg)              -- static UB barg(lua_State*L,int idx
+./ext/opcache/jit/ir/dynasm/minilua.c:7690:18   - Unknown word (openlibs)          -- static void luaL_openlibs(lua_State*L){
+./ext/opcache/jit/ir/dynasm/minilua.c:7699:11   - Unknown word (barg)              -- static UB barg(lua_State*L,int idx
 ./ext/opcache/jit/ir/dynasm/minilua.c:769:20    - Unknown word (setnum)           -- static TValue*luaH_setnum(lua_State*L,Table*t
-./ext/opcache/jit/ir/dynasm/minilua.c:7708:12   - Unknown word (bxor)              -- static int bxor(lua_State*L){
-./ext/opcache/jit/ir/dynasm/minilua.c:7714:12   - Unknown word (arshift)           -- static int arshift(lua_State*L){
-./ext/opcache/jit/ir/dynasm/minilua.c:7722:12   - Unknown word (tohex)             -- static int tohex(lua_State*L){
-./ext/opcache/jit/ir/dynasm/minilua.c:7725:12   - Unknown word (hexdigits)         -- const char*hexdigits="0123456789abcdef";
-./ext/opcache/jit/ir/dynasm/minilua.c:7734:30   - Unknown word (bitlib)            -- const struct luaL_Reg bitlib[]={
+./ext/opcache/jit/ir/dynasm/minilua.c:7714:12   - Unknown word (bxor)              -- static int bxor(lua_State*L){
+./ext/opcache/jit/ir/dynasm/minilua.c:7720:12   - Unknown word (arshift)           -- static int arshift(lua_State*L){
+./ext/opcache/jit/ir/dynasm/minilua.c:7728:12   - Unknown word (tohex)             -- static int tohex(lua_State*L){
+./ext/opcache/jit/ir/dynasm/minilua.c:7731:12   - Unknown word (hexdigits)         -- const char*hexdigits="0123456789abcdef";
+./ext/opcache/jit/ir/dynasm/minilua.c:7740:30   - Unknown word (bitlib)            -- const struct luaL_Reg bitlib[]={
 ./ext/opcache/jit/ir/dynasm/minilua.c:775:10    - Unknown word (upval)            -- "proto","upval"
 ./ext/opcache/jit/ir/dynasm/minilua.c:778:30    - Unknown word (eventname)        -- const char*const luaT_eventname[]={
 ./ext/opcache/jit/ir/dynasm/minilua.c:799:26    - Unknown word (gettmbyobj)       -- static const TValue*luaT_gettmbyobj(lua_State*L,const TValue
@@ -4949,23 +4951,23 @@ Lines:
 ./ext/opcache/jit/ir/dynasm/minilua.c:989:18    - Unknown word (seterrorobj)      -- static void luaD_seterrorobj(lua_State*L,int errcode
 ./ext/opcache/jit/ir/dynasm/minilua.c:989:60    - Unknown word (oldtop)           -- L,int errcode,StkId oldtop){
 ./ext/opcache/jit/ir/dynasm/minilua.c:98:4      - Unknown word (SETLIST)    -- OP_SETLIST,
-./ext/opcache/jit/ir/ir.c:1135:47   - Unknown word (binsort)    -- list of "uses" (like in binsort) */
-./ext/opcache/jit/ir/ir.c:1499:12   - Unknown word (unprotect)  -- int ir_mem_unprotect(void *ptr, size_t size
-./ext/opcache/jit/ir/ir.c:1628:19   - Unknown word (partail)    -- /* check for partail intersection */
-./ext/opcache/jit/ir/ir.c:1707:21   - Unknown word (insterted)  -- // TODO: VAR may be insterted after some "memory"
-./ext/opcache/jit/ir/ir.c:34:13     - Unknown word (VALGRIND)   -- #ifdef HAVE_VALGRIND
-./ext/opcache/jit/ir/ir.c:575:43    - Unknown word (OPTX)       -- ctx, val, IR_ADDR, IR_OPTX(IR_FUNC_ADDR, IR_ADDR
-./ext/opcache/jit/ir/ir.c:866:11    - Unknown word (parrerns)   -- /* All parrerns are checked. Pass on
+./ext/opcache/jit/ir/ir.c:1183:47   - Unknown word (binsort)    -- list of "uses" (like in binsort) */
+./ext/opcache/jit/ir/ir.c:1547:12   - Unknown word (unprotect)  -- int ir_mem_unprotect(void *ptr, size_t size
+./ext/opcache/jit/ir/ir.c:1676:19   - Unknown word (partail)    -- /* check for partail intersection */
+./ext/opcache/jit/ir/ir.c:1755:21   - Unknown word (insterted)  -- // TODO: VAR may be insterted after some "memory"
+./ext/opcache/jit/ir/ir.c:38:13     - Unknown word (VALGRIND)   -- #ifdef HAVE_VALGRIND
+./ext/opcache/jit/ir/ir.c:623:43    - Unknown word (OPTX)       -- ctx, val, IR_ADDR, IR_OPTX(IR_FUNC_ADDR, IR_ADDR
 ./ext/opcache/jit/ir/ir.c:8:22      - Unknown word (Paleczny)   -- * See: C. Click, M. Paleczny. "A Simple Graph-Based
+./ext/opcache/jit/ir/ir.c:914:11    - Unknown word (parrerns)   -- /* All parrerns are checked. Pass on
 ./ext/opcache/jit/ir/ir.c:9:27      - Unknown word (SIGPLAN)    -- Representation" In ACM SIGPLAN Workshop on Intermediate
 ./ext/opcache/jit/ir/ir.h:501:16    - Unknown word (ENDBR)      -- #define IR_GEN_ENDBR (1<<14)
 ./ext/opcache/jit/ir/ir.h:66:22     - Unknown word (LOHI)       -- define IR_STRUCT_LOHI(lo, hi) struct {lo;
-./ext/opcache/jit/ir/ir.h:820:18    - Unknown word (bitcode)    -- int ir_load_llvm_bitcode(ir_loader *loader, const
-./ext/opcache/jit/ir/ir.h:857:17    - Unknown word (SSSE)       -- # define IR_X86_SSSE3 (1<<2)
-./ext/opcache/jit/ir/ir.h:863:17    - Unknown word (CLDEMOTE)   -- # define IR_X86_CLDEMOTE (1<<8)
-./ext/opcache/jit/ir/ir.h:868:4     - Unknown word (Deoptimization) -- /* Deoptimization helpers */
-./ext/opcache/jit/ir/ir.h:869:21    - Unknown word (exitgroup)      -- const void *ir_emit_exitgroup(uint32_t first_exit
-./ext/opcache/jit/ir/ir.h:932:7     - Unknown word (Memmory)        -- /* IR Memmory Allocation */
+./ext/opcache/jit/ir/ir.h:821:18    - Unknown word (bitcode)    -- int ir_load_llvm_bitcode(ir_loader *loader, const
+./ext/opcache/jit/ir/ir.h:858:17    - Unknown word (SSSE)       -- # define IR_X86_SSSE3 (1<<2)
+./ext/opcache/jit/ir/ir.h:864:17    - Unknown word (CLDEMOTE)   -- # define IR_X86_CLDEMOTE (1<<8)
+./ext/opcache/jit/ir/ir.h:869:4     - Unknown word (Deoptimization) -- /* Deoptimization helpers */
+./ext/opcache/jit/ir/ir.h:870:21    - Unknown word (exitgroup)      -- const void *ir_emit_exitgroup(uint32_t first_exit
+./ext/opcache/jit/ir/ir.h:933:7     - Unknown word (Memmory)        -- /* IR Memmory Allocation */
 ./ext/opcache/jit/ir/ir_aarch64.h:183:14    - Unknown word (tmps)       -- uint8_t tmps_count;
 ./ext/opcache/jit/ir/ir_builder.h:177:12    - Unknown word (ZEXT)       -- #define ir_ZEXT(_type, _op1)
 ./ext/opcache/jit/ir/ir_builder.h:201:12    - Unknown word (BITCAST)    -- #define ir_BITCAST(_type, _op1)
@@ -4989,24 +4991,24 @@ Lines:
 ./ext/opcache/jit/ir/ir_cfg.c:893:64    - Unknown word (capasity)    -- bitset_len(ir_worklist_capasity(&work)));
 ./ext/opcache/jit/ir/ir_cfg.c:971:9     - Unknown word (Pettis)      -- * Karl Pettis and Robert C. Hansen
 ./ext/opcache/jit/ir/ir_cfg.c:977:5     - Unknown word (bitqueue)    -- ir_bitqueue blocks;
-./ext/opcache/jit/ir/ir_disasm.c:268:28    - Unknown word (LDRB)        -- insn->id == ARM64_INS_LDRB
-./ext/opcache/jit/ir/ir_disasm.c:270:28    - Unknown word (LDRH)        -- insn->id == ARM64_INS_LDRH
-./ext/opcache/jit/ir/ir_disasm.c:271:28    - Unknown word (LDRSB)       -- insn->id == ARM64_INS_LDRSB
-./ext/opcache/jit/ir/ir_disasm.c:272:28    - Unknown word (LDRSH)       -- insn->id == ARM64_INS_LDRSH
-./ext/opcache/jit/ir/ir_disasm.c:273:28    - Unknown word (LDRSW)       -- insn->id == ARM64_INS_LDRSW
-./ext/opcache/jit/ir/ir_disasm.c:274:28    - Unknown word (STRB)        -- insn->id == ARM64_INS_STRB
-./ext/opcache/jit/ir/ir_disasm.c:276:28    - Unknown word (STRH)        -- insn->id == ARM64_INS_STRH) {
-./ext/opcache/jit/ir/ir_disasm.c:328:5     - Unknown word (hashtab)     -- ir_hashtab labels;
-./ext/opcache/jit/ir/ir_disasm.c:364:7     - Unknown word (DISASM)      -- # if DISASM_INTEL_SYNTAX
+./ext/opcache/jit/ir/ir_disasm.c:272:28    - Unknown word (LDRB)        -- insn->id == ARM64_INS_LDRB
+./ext/opcache/jit/ir/ir_disasm.c:274:28    - Unknown word (LDRH)        -- insn->id == ARM64_INS_LDRH
+./ext/opcache/jit/ir/ir_disasm.c:275:28    - Unknown word (LDRSB)       -- insn->id == ARM64_INS_LDRSB
+./ext/opcache/jit/ir/ir_disasm.c:276:28    - Unknown word (LDRSH)       -- insn->id == ARM64_INS_LDRSH
+./ext/opcache/jit/ir/ir_disasm.c:277:28    - Unknown word (LDRSW)       -- insn->id == ARM64_INS_LDRSW
+./ext/opcache/jit/ir/ir_disasm.c:278:28    - Unknown word (STRB)        -- insn->id == ARM64_INS_STRB
+./ext/opcache/jit/ir/ir_disasm.c:280:28    - Unknown word (STRH)        -- insn->id == ARM64_INS_STRH) {
+./ext/opcache/jit/ir/ir_disasm.c:332:5     - Unknown word (hashtab)     -- ir_hashtab labels;
+./ext/opcache/jit/ir/ir_disasm.c:368:7     - Unknown word (DISASM)      -- # if DISASM_INTEL_SYNTAX
 ./ext/opcache/jit/ir/ir_disasm.c:3:27      - Unknown word (libcapstone) -- Disassembler based on libcapstone)
-./ext/opcache/jit/ir/ir_disasm.c:58:21     - Unknown word (rotateright) -- static void ir_syms_rotateright(ir_sym_node *p)
-./ext/opcache/jit/ir/ir_disasm.c:676:23    - Unknown word (qword)       -- fprintf(f, "\t.qword .ENTRY_%d\n", entry
-./ext/opcache/jit/ir/ir_disasm.c:727:46    - Unknown word (sectheader)  -- sect(int fd, ir_elf_sectheader *sect)
-./ext/opcache/jit/ir/ir_disasm.c:778:11    - Unknown word (emagic)      -- && hdr.emagic[0] == '\177'
-./ext/opcache/jit/ir/ir_disasm.c:77:9      - Unknown word (disasm)      -- void ir_disasm_add_symbol(const char
-./ext/opcache/jit/ir/ir_disasm.c:782:21    - Unknown word (shofs)       -- && lseek(fd, hdr.shofs, SEEK_SET) >= 0) {
-./ext/opcache/jit/ir/ir_disasm.c:785:22    - Unknown word (ELFSECT)     -- && sect.type == ELFSECT_TYPE_SYMTAB) {
-./ext/opcache/jit/ir/ir_disasm.c:796:14    - Unknown word (ELFSYM)      -- && (ELFSYM_TYPE(syms[n].info)
+./ext/opcache/jit/ir/ir_disasm.c:62:21     - Unknown word (rotateright) -- static void ir_syms_rotateright(ir_sym_node *p)
+./ext/opcache/jit/ir/ir_disasm.c:680:23    - Unknown word (qword)       -- fprintf(f, "\t.qword .ENTRY_%d\n", entry
+./ext/opcache/jit/ir/ir_disasm.c:731:46    - Unknown word (sectheader)  -- sect(int fd, ir_elf_sectheader *sect)
+./ext/opcache/jit/ir/ir_disasm.c:782:11    - Unknown word (emagic)      -- && hdr.emagic[0] == '\177'
+./ext/opcache/jit/ir/ir_disasm.c:786:21    - Unknown word (shofs)       -- && lseek(fd, hdr.shofs, SEEK_SET) >= 0) {
+./ext/opcache/jit/ir/ir_disasm.c:789:22    - Unknown word (ELFSECT)     -- && sect.type == ELFSECT_TYPE_SYMTAB) {
+./ext/opcache/jit/ir/ir_disasm.c:800:14    - Unknown word (ELFSYM)      -- && (ELFSYM_TYPE(syms[n].info)
+./ext/opcache/jit/ir/ir_disasm.c:81:9      - Unknown word (disasm)      -- void ir_disasm_add_symbol(const char
 ./ext/opcache/jit/ir/ir_dump.c:165:20    - Unknown word (dessa)      -- static int ir_dump_dessa_move(ir_ctx *ctx, uint
 ./ext/opcache/jit/ir/ir_dump.c:173:32    - Unknown word (vregs)      -- f, "\tmov R%d", ctx->vregs[from]);
 ./ext/opcache/jit/ir/ir_dump.c:285:26    - Unknown word (DESSA)      -- if (bb->flags & IR_BB_DESSA_MOVES) {
@@ -5028,8 +5030,8 @@ Lines:
 ./ext/opcache/jit/ir/ir_elf.h:73:12     - Unknown word (sectidx)     -- uint16_t sectidx;
 ./ext/opcache/jit/ir/ir_emit.c:176:44    - Unknown word (couter)     -- convention use common couter for int and fp registers
 ./ext/opcache/jit/ir/ir_emit.c:24:12     - Unknown word (psapi)      -- # include <psapi.h>
-./ext/opcache/jit/ir/ir_emit.c:356:35    - Unknown word (Warray)     -- diagnostic ignored "-Warray-bounds"
-./ext/opcache/jit/ir/ir_emit.c:475:24    - Unknown word (alocated)   -- ir_reg src = ir_get_alocated_reg(ctx, ref, k);
+./ext/opcache/jit/ir/ir_emit.c:374:35    - Unknown word (Warray)     -- diagnostic ignored "-Warray-bounds"
+./ext/opcache/jit/ir/ir_emit.c:493:24    - Unknown word (alocated)   -- ir_reg src = ir_get_alocated_reg(ctx, ref, k);
 ./ext/opcache/jit/ir/ir_emit.c:86:54     - Unknown word (FCARGS)     -- reg_params[IR_REG_INT_FCARGS];
 ./ext/opcache/jit/ir/ir_gcm.c:417:16    - Unknown word (xlat)       -- static void ir_xlat_binding(ir_ctx *ctx
 ./ext/opcache/jit/ir/ir_gcm.c:708:10    - Unknown word (deoptimization) -- new_ctx.deoptimization_exits = ctx->deoptimization
@@ -5062,12 +5064,13 @@ Lines:
 ./ext/opcache/jit/ir/ir_gdb.c:485:12    - Unknown word (NOACTION)    -- IR_GDBJIT_NOACTION,
 ./ext/opcache/jit/ir/ir_patch.c:14:26     - Unknown word (inslen)     -- static uint32_t _asm_x86_inslen(const uint8_t* p)
 ./ext/opcache/jit/ir/ir_perf.c:13:45     - Unknown word (jitted)     -- perf.data -o perf.data.jitted
-./ext/opcache/jit/ir/ir_perf.c:222:15    - Unknown word (getthrid)   -- thread_id = getthrid();
-./ext/opcache/jit/ir/ir_perf.c:39:53     - Unknown word (vtunes)     -- as it conflicts with vtunes types.
-./ext/opcache/jit/ir/ir_perf.c:48:17     - Unknown word (JITDUMP)    -- #define IR_PERF_JITDUMP_HEADER_MAGIC 0x4A
-./ext/opcache/jit/ir/ir_perf.c:55:35     - Unknown word (UNFO)       -- PERF_JITDUMP_UNWINDING_UNFO 4
-./ext/opcache/jit/ir/ir_perf.c:60:24     - Unknown word (jitdump)    -- typedef struct ir_perf_jitdump_header {
+./ext/opcache/jit/ir/ir_perf.c:223:15    - Unknown word (getthrid)   -- thread_id = getthrid();
+./ext/opcache/jit/ir/ir_perf.c:40:53     - Unknown word (vtunes)     -- as it conflicts with vtunes types.
+./ext/opcache/jit/ir/ir_perf.c:49:17     - Unknown word (JITDUMP)    -- #define IR_PERF_JITDUMP_HEADER_MAGIC 0x4A
+./ext/opcache/jit/ir/ir_perf.c:56:35     - Unknown word (UNFO)       -- PERF_JITDUMP_UNWINDING_UNFO 4
+./ext/opcache/jit/ir/ir_perf.c:61:24     - Unknown word (jitdump)    -- typedef struct ir_perf_jitdump_header {
 ./ext/opcache/jit/ir/ir_private.h:1080:62   - Unknown word (cahce)       -- the last live range (cahce of ival.range.{next
+./ext/opcache/jit/ir/ir_private.h:1213:43   - Unknown word (assignemnt)  -- 1U<<28) /* Register assignemnt may be stored in ctx
 ./ext/opcache/jit/ir/ir_private.h:194:25    - Unknown word (nlzl)       -- ALWAYS_INLINE int ir_nlzl(uint64_t num)
 ./ext/opcache/jit/ir/ir_private.h:669:4     - Unknown word (Worklist)   -- /* Worklist (unique list) */
 ./ext/opcache/jit/ir/ir_private.h:67:23     - Unknown word (ntzl)       -- define IR_LOG2(x) ir_ntzl(x)
@@ -5078,7 +5081,7 @@ Lines:
 ./ext/opcache/jit/ir/ir_ra.c:2108:17   - Unknown word (LSRA)         -- # define IR_LOG_LSRA(action, ival, comment
 ./ext/opcache/jit/ir/ir_ra.c:2681:29   - Unknown word (avialivle)    -- TODO: if no registers avialivle, we may use of one this
 ./ext/opcache/jit/ir/ir_ra.c:2773:58   - Unknown word (splited)      -- previously allocated for splited interval */
-./ext/opcache/jit/ir/ir_ra.c:3776:32   - Unknown word (BINOP)        -- /* Support for R2 = BINOP(R1, R1) */
+./ext/opcache/jit/ir/ir_ra.c:3793:32   - Unknown word (BINOP)        -- /* Support for R2 = BINOP(R1, R1) */
 ./ext/opcache/jit/ir/ir_ra.c:438:22    - Unknown word (livness)    -- * DFS + Loop-Forest livness for SSA using bitset
 ./ext/opcache/jit/ir/ir_ra.c:613:27    - Unknown word (SRATCH)     -- vregs + tmp + fixed + SRATCH + ALL */
 ./ext/opcache/jit/ir/ir_ra.c:7:66      - Unknown word (Wimmer)     -- SSA Form", Christian Wimmer and
@@ -6863,48 +6866,48 @@ Lines:
 ./ext/pdo_sqlite/php_pdo_sqlite_int.h:42:38     - Unknown word (afini)      -- sqlite_fci afunc, astep, afini;
 ./ext/pdo_sqlite/sqlite_driver.c:565:36    - Unknown word (rownumber)  -- mixed $context, int $rownumber, $value [, $value2
 ./ext/pdo_sqlite/sqlite_driver.c:757:29    - Unknown word (autharg)    -- int authorizer(void *autharg, int access_type, const
-./ext/pgsql/pgsql.c:1163:16   - Unknown word (stmtname)   -- char *query, *stmtname;
-./ext/pgsql/pgsql.c:1460:47   - Unknown word (typname)    -- PQexec(pgsql, "select oid,typname from pg_type");
-./ext/pgsql/pgsql.c:1469:20   - Unknown word (Qfnumber)   -- int oid_offset = PQfnumber(result,"oid");
-./ext/pgsql/pgsql.c:1501:12   - Unknown word (fnum)       -- zend_long fnum = -1;
+./ext/pgsql/pgsql.c:1169:16   - Unknown word (stmtname)   -- char *query, *stmtname;
+./ext/pgsql/pgsql.c:1466:47   - Unknown word (typname)    -- PQexec(pgsql, "select oid,typname from pg_type");
+./ext/pgsql/pgsql.c:1475:20   - Unknown word (Qfnumber)   -- int oid_offset = PQfnumber(result,"oid");
+./ext/pgsql/pgsql.c:1507:12   - Unknown word (fnum)       -- zend_long fnum = -1;
 ./ext/pgsql/pgsql.c:16:15     - Unknown word (Youichi)    -- | Youichi Iwakiri <yiwakiri@st
 ./ext/pgsql/pgsql.c:16:23     - Unknown word (Iwakiri)    -- | Youichi Iwakiri <yiwakiri@st.rim.or
-./ext/pgsql/pgsql.c:2381:26   - Unknown word (lofd)       -- pgsql_mode=0, pgsql_lofd;
+./ext/pgsql/pgsql.c:2387:26   - Unknown word (lofd)       -- pgsql_mode=0, pgsql_lofd;
 ./ext/pgsql/pgsql.c:246:17    - Unknown word (Lofp)       -- static inline pgLofp *pgsql_lob_from_obj
 ./ext/pgsql/pgsql.c:268:10    - Unknown word (lofp)       -- pgLofp *lofp = pgsql_lob_from_obj
-./ext/pgsql/pgsql.c:2979:12   - Unknown word (Qendcopy)   -- result = PQendcopy(pgsql);
-./ext/pgsql/pgsql.c:3015:12   - Unknown word (Qputline)   -- result = PQputline(pgsql, query);
-./ext/pgsql/pgsql.c:3081:9    - Unknown word (copydone)   -- int copydone = 0;
-./ext/pgsql/pgsql.c:3200:20   - Unknown word (putcopyend) -- PHP_PQ_ERROR("putcopyend failed: %s", pgsql)
-./ext/pgsql/pgsql.c:3408:12   - Unknown word (fieldcode)  -- zend_long fieldcode;
-./ext/pgsql/pgsql.c:3624:21   - Unknown word (Qisnonblocking) -- is_non_blocking = PQisnonblocking(pgsql);
-./ext/pgsql/pgsql.c:3841:17   - Unknown word (prevriously)    -- /* {{{ Executes prevriously prepared stmtname asynchronou
-./ext/pgsql/pgsql.c:4244:100  - Unknown word (typtype)        -- atthasdef, a.attndims, t.typtype, "
-./ext/pgsql/pgsql.c:4244:30   - Unknown word (attnum)         -- SELECT a.attname, a.attnum, t.typname, a.attlen
-./ext/pgsql/pgsql.c:4244:51   - Unknown word (attlen)         -- attnum, t.typname, a.attlen, a.attnotNULL, a.atthasdef
-./ext/pgsql/pgsql.c:4244:61   - Unknown word (attnot)         -- typname, a.attlen, a.attnotNULL, a.atthasdef, a
-./ext/pgsql/pgsql.c:4244:75   - Unknown word (atthasdef)      -- attlen, a.attnotNULL, a.atthasdef, a.attndims, t.typtype
-./ext/pgsql/pgsql.c:4244:88   - Unknown word (attndims)       -- attnotNULL, a.atthasdef, a.attndims, t.typtype, "
-./ext/pgsql/pgsql.c:4247:37   - Unknown word (attrelid)       -- pg_attribute a ON (a.attrelid = c.oid) "
-./ext/pgsql/pgsql.c:4248:32   - Unknown word (atttypid)       -- JOIN pg_type t ON (a.atttypid = t.oid) "
-./ext/pgsql/pgsql.c:4249:37   - Unknown word (relnamespace)   -- pg_namespace n ON (c.relnamespace = n.oid) "
-./ext/pgsql/pgsql.c:4250:44   - Unknown word (objoid)         -- description d ON (d.objoid=a.attrelid AND d.objsubid
-./ext/pgsql/pgsql.c:4250:68   - Unknown word (objsubid)       -- objoid=a.attrelid AND d.objsubid=a.attnum AND c.oid=d
-./ext/pgsql/pgsql.c:4254:61   - Unknown word (attnotnull)     -- typname, a.attlen, a.attnotnull, a.atthasdef, a.attndims
-./ext/pgsql/pgsql.c:4268:40   - Unknown word (nspname)        -- &querystr, "' AND n.nspname = '");
-./ext/pgsql/pgsql.c:4298:19   - Unknown word (attnonull)      -- /* pg_attribute.attnonull */
-./ext/pgsql/pgsql.c:4388:45   - Unknown word (bpchar)         -- literal(type_name, "bpchar") || zend_string_equals
-./ext/pgsql/pgsql.c:4397:45   - Unknown word (tinterval)      -- literal(type_name, "tinterval"))
-./ext/pgsql/pgsql.c:4403:109  - Unknown word (timetz)         -- literal(type_name, "timetz"))
-./ext/pgsql/pgsql.c:4407:114  - Unknown word (timestamptz)    -- literal(type_name, "timestamptz"))
-./ext/pgsql/pgsql.c:4425:13   - Unknown word (VARBIT)         -- return PG_VARBIT;
-./ext/pgsql/pgsql.c:4429:45   - Unknown word (lseg)           -- literal(type_name, "lseg"))
-./ext/pgsql/pgsql.c:4430:13   - Unknown word (LSEG)           -- return PG_LSEG;
-./ext/pgsql/pgsql.c:4712:33   - Unknown word (inity)          -- REGEX1 "^[+-]{0,1}(inf)(inity){0,1}$"
-./ext/pgsql/pgsql.c:4751:37   - Unknown word (valitions)      -- feel free to add more valitions. Invalid query fails
-./ext/pgsql/pgsql.c:4813:22   - Unknown word (actallay)       -- /* these are the actallay a integer */
-./ext/pgsql/pgsql.c:538:8     - Unknown word (connstring) -- char *connstring;
-./ext/pgsql/pgsql.c:836:31    - Unknown word (datetimes)  -- COPY_PARAM("integer_datetimes");
+./ext/pgsql/pgsql.c:2985:12   - Unknown word (Qendcopy)   -- result = PQendcopy(pgsql);
+./ext/pgsql/pgsql.c:3021:12   - Unknown word (Qputline)   -- result = PQputline(pgsql, query);
+./ext/pgsql/pgsql.c:3087:9    - Unknown word (copydone)   -- int copydone = 0;
+./ext/pgsql/pgsql.c:3206:20   - Unknown word (putcopyend) -- PHP_PQ_ERROR("putcopyend failed: %s", pgsql)
+./ext/pgsql/pgsql.c:3414:12   - Unknown word (fieldcode)  -- zend_long fieldcode;
+./ext/pgsql/pgsql.c:3630:21   - Unknown word (Qisnonblocking) -- is_non_blocking = PQisnonblocking(pgsql);
+./ext/pgsql/pgsql.c:3847:17   - Unknown word (prevriously)    -- /* {{{ Executes prevriously prepared stmtname asynchronou
+./ext/pgsql/pgsql.c:4250:100  - Unknown word (typtype)        -- atthasdef, a.attndims, t.typtype, "
+./ext/pgsql/pgsql.c:4250:30   - Unknown word (attnum)         -- SELECT a.attname, a.attnum, t.typname, a.attlen
+./ext/pgsql/pgsql.c:4250:51   - Unknown word (attlen)         -- attnum, t.typname, a.attlen, a.attnotNULL, a.atthasdef
+./ext/pgsql/pgsql.c:4250:61   - Unknown word (attnot)         -- typname, a.attlen, a.attnotNULL, a.atthasdef, a
+./ext/pgsql/pgsql.c:4250:75   - Unknown word (atthasdef)      -- attlen, a.attnotNULL, a.atthasdef, a.attndims, t.typtype
+./ext/pgsql/pgsql.c:4250:88   - Unknown word (attndims)       -- attnotNULL, a.atthasdef, a.attndims, t.typtype, "
+./ext/pgsql/pgsql.c:4253:37   - Unknown word (attrelid)       -- pg_attribute a ON (a.attrelid = c.oid) "
+./ext/pgsql/pgsql.c:4254:32   - Unknown word (atttypid)       -- JOIN pg_type t ON (a.atttypid = t.oid) "
+./ext/pgsql/pgsql.c:4255:37   - Unknown word (relnamespace)   -- pg_namespace n ON (c.relnamespace = n.oid) "
+./ext/pgsql/pgsql.c:4256:44   - Unknown word (objoid)         -- description d ON (d.objoid=a.attrelid AND d.objsubid
+./ext/pgsql/pgsql.c:4256:68   - Unknown word (objsubid)       -- objoid=a.attrelid AND d.objsubid=a.attnum AND c.oid=d
+./ext/pgsql/pgsql.c:4260:61   - Unknown word (attnotnull)     -- typname, a.attlen, a.attnotnull, a.atthasdef, a.attndims
+./ext/pgsql/pgsql.c:4274:40   - Unknown word (nspname)        -- &querystr, "' AND n.nspname = '");
+./ext/pgsql/pgsql.c:4304:19   - Unknown word (attnonull)      -- /* pg_attribute.attnonull */
+./ext/pgsql/pgsql.c:4394:45   - Unknown word (bpchar)         -- literal(type_name, "bpchar") || zend_string_equals
+./ext/pgsql/pgsql.c:4403:45   - Unknown word (tinterval)      -- literal(type_name, "tinterval"))
+./ext/pgsql/pgsql.c:4409:109  - Unknown word (timetz)         -- literal(type_name, "timetz"))
+./ext/pgsql/pgsql.c:4413:114  - Unknown word (timestamptz)    -- literal(type_name, "timestamptz"))
+./ext/pgsql/pgsql.c:4431:13   - Unknown word (VARBIT)         -- return PG_VARBIT;
+./ext/pgsql/pgsql.c:4435:45   - Unknown word (lseg)           -- literal(type_name, "lseg"))
+./ext/pgsql/pgsql.c:4436:13   - Unknown word (LSEG)           -- return PG_LSEG;
+./ext/pgsql/pgsql.c:4718:33   - Unknown word (inity)          -- REGEX1 "^[+-]{0,1}(inf)(inity){0,1}$"
+./ext/pgsql/pgsql.c:4757:37   - Unknown word (valitions)      -- feel free to add more valitions. Invalid query fails
+./ext/pgsql/pgsql.c:4819:22   - Unknown word (actallay)       -- /* these are the actallay a integer */
+./ext/pgsql/pgsql.c:544:8     - Unknown word (connstring) -- char *connstring;
+./ext/pgsql/pgsql.c:842:31    - Unknown word (datetimes)  -- COPY_PARAM("integer_datetimes");
 ./ext/pgsql/pgsql.stub.php:12:17     - Unknown word (LIBPQ)      -- const PGSQL_LIBPQ_VERSION = UNKNOWN;
 ./ext/pgsql/pgsql.stub.php:6:8       - Unknown word (libpq)      -- /* libpq version */
 ./ext/pgsql/pgsql_arginfo.h:181:20    - Unknown word (fieldprtlen)  -- #define arginfo_pg_fieldprtlen arginfo_pg_field_prtlen
@@ -7514,10 +7517,10 @@ Lines:
 ./ext/sockets/sockets.stub.php:1674:17   - Unknown word (TCLASS)          -- * @cvalue IPV6_TCLASS
 ./ext/sockets/sockets.stub.php:1696:16   - Unknown word (CREDS)           -- * @cvalue SCM_CREDS
 ./ext/sockets/sockets.stub.php:169:11    - Unknown word (REUSEPORT)  -- #ifdef SO_REUSEPORT
-./ext/sockets/sockets.stub.php:1765:16   - Unknown word (DONTFRAG)        -- #if defined(IP_DONTFRAG)
-./ext/sockets/sockets.stub.php:1934:13   - Unknown word (SOCKATMARK)      -- #ifdef HAVE_SOCKATMARK
-./ext/sockets/sockets.stub.php:1935:17   - Unknown word (atmark)          -- function socket_atmark(Socket $socket): bool
-./ext/sockets/sockets.stub.php:1958:17   - Unknown word (addrinfo)        -- function socket_addrinfo_lookup(string $host
+./ext/sockets/sockets.stub.php:1772:16   - Unknown word (DONTFRAG)        -- #if defined(IP_DONTFRAG)
+./ext/sockets/sockets.stub.php:1941:13   - Unknown word (SOCKATMARK)      -- #ifdef HAVE_SOCKATMARK
+./ext/sockets/sockets.stub.php:1942:17   - Unknown word (atmark)          -- function socket_atmark(Socket $socket): bool
+./ext/sockets/sockets.stub.php:1965:17   - Unknown word (addrinfo)        -- function socket_addrinfo_lookup(string $host
 ./ext/sockets/sockets.stub.php:205:15    - Unknown word (OOBINLINE)  -- * @cvalue SO_OOBINLINE
 ./ext/sockets/sockets.stub.php:210:15    - Unknown word (SNDBUF)     -- * @cvalue SO_SNDBUF
 ./ext/sockets/sockets.stub.php:215:15    - Unknown word (RCVBUF)     -- * @cvalue SO_RCVBUF
@@ -7567,9 +7570,10 @@ Lines:
 ./ext/sockets/sockets.stub.php:990:8     - Unknown word (ELNRNG)       -- #ifdef ELNRNG
 ./ext/sockets/sockets.stub.php:998:8     - Unknown word (EUNATCH)      -- #ifdef EUNATCH
 ./ext/sockets/sockets_arginfo.h:1003:33   - Unknown word (CBPF)               -- SO_ATTACH_REUSEPORT_CBPF)
-./ext/sockets/sockets_arginfo.h:1012:17   - Unknown word (QUICKACK)           -- #if defined(TCP_QUICKACK)
-./ext/sockets/sockets_arginfo.h:1024:16   - Unknown word (PMTUDISC)           -- #if defined(IP_PMTUDISC_DO)
-./ext/sockets/sockets_arginfo.h:1042:26   - Unknown word (CSCOV)              -- defined(UDPLITE_SEND_CSCOV)
+./ext/sockets/sockets_arginfo.h:1012:16   - Unknown word (EXCLUSIVEADDRUSE)   -- #if defined(SO_EXCLUSIVEADDRUSE)
+./ext/sockets/sockets_arginfo.h:1015:17   - Unknown word (QUICKACK)           -- #if defined(TCP_QUICKACK)
+./ext/sockets/sockets_arginfo.h:1027:16   - Unknown word (PMTUDISC)           -- #if defined(IP_PMTUDISC_DO)
+./ext/sockets/sockets_arginfo.h:1045:26   - Unknown word (CSCOV)              -- defined(UDPLITE_SEND_CSCOV)
 ./ext/sockets/sockets_arginfo.h:200:56    - Unknown word (wsaprotocol) -- MASK_EX(arginfo_socket_wsaprotocol_info_export, 0, 2, MAY
 ./ext/sockets/sockets_arginfo.h:369:17    - Unknown word (ERRQUEUE)    -- #if defined(MSG_ERRQUEUE)
 ./ext/sockets/sockets_arginfo.h:381:17    - Unknown word (WAITFORONE)  -- #if defined(MSG_WAITFORONE)
@@ -8734,65 +8738,65 @@ Lines:
 ./main/streams/xp_socket.c:61:18     - Unknown word (ptimeout)   -- struct timeval *ptimeout;
 ./main/strlcat.c:21:55     - Unknown word (dtucker)    -- 2016/10/16 17:37:39 dtucker Exp $    */
 ./pear/fetch.php:5:49      - Unknown word (localfile)  -- /example.com/file> <localfile>\n", $argv[0]);
-./run-tests.php:1109:57   - Unknown word (MSVC)         -- recognizable to Emacs or MSVC.
-./run-tests.php:1112:31   - Unknown word (testname)     -- error_report(string $testname, string $logname, string
-./run-tests.php:1112:49   - Unknown word (logname)      -- string $testname, string $logname, string $tested): void
-./run-tests.php:1224:21   - Unknown word (Termsig)      -- $data .= "\nTermsig=" . $stat['stopsig'
-./run-tests.php:1224:40   - Unknown word (stopsig)      -- nTermsig=" . $stat['stopsig'] . "\n";
-./run-tests.php:1226:16   - Unknown word (exitcode)     -- if ($stat["exitcode"] > 128 && $stat["exitcode
-./run-tests.php:1326:12   - Unknown word (Procs)        -- $workerProcs = [];
+./run-tests.php:1111:57   - Unknown word (MSVC)         -- recognizable to Emacs or MSVC.
+./run-tests.php:1114:31   - Unknown word (testname)     -- error_report(string $testname, string $logname, string
+./run-tests.php:1114:49   - Unknown word (logname)      -- string $testname, string $logname, string $tested): void
+./run-tests.php:1226:21   - Unknown word (Termsig)      -- $data .= "\nTermsig=" . $stat['stopsig'
+./run-tests.php:1226:40   - Unknown word (stopsig)      -- nTermsig=" . $stat['stopsig'] . "\n";
+./run-tests.php:1228:16   - Unknown word (exitcode)     -- if ($stat["exitcode"] > 128 && $stat["exitcode
+./run-tests.php:1328:12   - Unknown word (Procs)        -- $workerProcs = [];
 ./run-tests.php:137:43    - Unknown word (überfunction) -- point and exit point überfunction. It contains all the
-./run-tests.php:1478:76   - Unknown word (stdouts)      -- stdout in array of worker stdouts, THIS SHOULD NOT HAPPEN
+./run-tests.php:1480:76   - Unknown word (stdouts)      -- stdout in array of worker stdouts, THIS SHOULD NOT HAPPEN
 ./run-tests.php:154:52    - Unknown word (testfile)     -- idx, $test_results, $testfile,
 ./run-tests.php:15:20     - Unknown word (Alshanetsky) -- | Authors: Ilia Alshanetsky <iliaa@php.net>
-./run-tests.php:1613:157  - Unknown word (errline)      -- errfile] on line $message[errline]");
-./run-tests.php:1617:36   - Unknown word (Unrecognised) -- error("Unrecognised message type '$message
-./run-tests.php:1645:8    - Unknown word (fwrites)      -- // fwrites on tcp sockets can return
+./run-tests.php:1615:157  - Unknown word (errline)      -- errfile] on line $message[errline]");
+./run-tests.php:1619:36   - Unknown word (Unrecognised) -- error("Unrecognised message type '$message
+./run-tests.php:1647:8    - Unknown word (fwrites)      -- // fwrites on tcp sockets can return
 ./run-tests.php:177:26    - Unknown word (SRCDIR)       -- if (getenv('TEST_PHP_SRCDIR')) {
-./run-tests.php:1846:14   - Unknown word (Borkage)      -- } catch (BorkageException $ex) {
+./run-tests.php:1848:14   - Unknown word (Borkage)      -- } catch (BorkageException $ex) {
 ./run-tests.php:18:22     - Unknown word (Rethans)     -- | Derick Rethans <derick@php.net>
-./run-tests.php:1904:63   - Unknown word (SKIPIF)       -- example, EXTENSIONS, SKIPIF, CLEAN.
+./run-tests.php:1906:63   - Unknown word (SKIPIF)       -- example, EXTENSIONS, SKIPIF, CLEAN.
 ./run-tests.php:19:22     - Unknown word (Roobol)      -- | Sander Roobol <sander@php.net>
 ./run-tests.php:206:74    - Unknown word (GPCS)         -- set variables_order="GPCS"
-./run-tests.php:2162:33   - Unknown word (xfail)        -- elseif (!strncasecmp('xfail', $output, 5)) {
-./run-tests.php:2165:33   - Unknown word (xleak)        -- elseif (!strncasecmp('xleak', $output, 5)) {
-./run-tests.php:2190:28   - Unknown word (REDIRECTTEST) -- ($test->hasSection('REDIRECTTEST')) {
+./run-tests.php:2164:33   - Unknown word (xfail)        -- elseif (!strncasecmp('xfail', $output, 5)) {
+./run-tests.php:2167:33   - Unknown word (xleak)        -- elseif (!strncasecmp('xleak', $output, 5)) {
+./run-tests.php:2192:28   - Unknown word (REDIRECTTEST) -- ($test->hasSection('REDIRECTTEST')) {
 ./run-tests.php:21:28     - Unknown word (Stig)        -- based on version by: Stig Bakken <ssb@php.net
 ./run-tests.php:21:33     - Unknown word (Bakken)      -- on version by: Stig Bakken <ssb@php.net>)
-./run-tests.php:2216:14   - Unknown word (redirenv)     -- $redirenv = array_merge($environment
+./run-tests.php:2218:14   - Unknown word (redirenv)     -- $redirenv = array_merge($environment
 ./run-tests.php:22:44     - Unknown word (Rasmus)      -- 3 test framework by Rasmus Lerdorf)
 ./run-tests.php:22:51     - Unknown word (Lerdorf)     -- framework by Rasmus Lerdorf) |
-./run-tests.php:2427:66   - Unknown word (investegating) -- ASAN, as it's not worth investegating. */
+./run-tests.php:2429:66   - Unknown word (investegating) -- ASAN, as it's not worth investegating. */
 ./run-tests.php:242:24    - Unknown word (LEODS)        -- $log_format = 'LEODS';
-./run-tests.php:2535:28   - Unknown word (EXPECTHEADERS) -- ($test->hasSection('EXPECTHEADERS')) {
-./run-tests.php:2570:32   - Unknown word (EXPECTF)       -- test->hasAnySections('EXPECTF', 'EXPECTREGEX')) {
-./run-tests.php:2570:43   - Unknown word (EXPECTREGEX)   -- hasAnySections('EXPECTF', 'EXPECTREGEX')) {
-./run-tests.php:2581:26   - Unknown word (expectf)       -- $wanted_re = expectf_to_regex($wanted_re
-./run-tests.php:2737:2    - Unknown word (lldb)          -- "lldb")
-./run-tests.php:2749:1    - Unknown word (esac)          -- esac
+./run-tests.php:2537:28   - Unknown word (EXPECTHEADERS) -- ($test->hasSection('EXPECTHEADERS')) {
+./run-tests.php:2572:32   - Unknown word (EXPECTF)       -- test->hasAnySections('EXPECTF', 'EXPECTREGEX')) {
+./run-tests.php:2572:43   - Unknown word (EXPECTREGEX)   -- hasAnySections('EXPECTF', 'EXPECTREGEX')) {
+./run-tests.php:2583:26   - Unknown word (expectf)       -- $wanted_re = expectf_to_regex($wanted_re
+./run-tests.php:2739:2    - Unknown word (lldb)          -- "lldb")
+./run-tests.php:2751:1    - Unknown word (esac)          -- esac
 ./run-tests.php:278:17    - Unknown word (memleaks)     -- 'report_memleaks=1',
 ./run-tests.php:280:10    - Unknown word (docref)       -- 'docref_root=',
-./run-tests.php:2901:6    - Unknown word (retval)        -- $retval = shell_exec("{$diff
-./run-tests.php:3016:12   - Unknown word (xfailed)       -- $x_xfailed = (100.0 * $sum_results
-./run-tests.php:3017:12   - Unknown word (xleaked)       -- $x_xleaked = (100.0 * $sum_results
+./run-tests.php:2903:6    - Unknown word (retval)        -- $retval = shell_exec("{$diff
+./run-tests.php:3018:12   - Unknown word (xfailed)       -- $x_xfailed = (100.0 * $sum_results
+./run-tests.php:3019:12   - Unknown word (xleaked)       -- $x_xleaked = (100.0 * $sum_results
 ./run-tests.php:314:6     - Unknown word (redir)        -- $redir_tests = [];
-./run-tests.php:3163:45   - Unknown word (PHPTEST)       -- summary && !getenv('NO_PHPTEST_SUMMARY')) {
+./run-tests.php:3165:45   - Unknown word (PHPTEST)       -- summary && !getenv('NO_PHPTEST_SUMMARY')) {
 ./run-tests.php:317:10    - Unknown word (BORKED)       -- 'BORKED' => [],
 ./run-tests.php:321:10    - Unknown word (XFAILED)      -- 'XFAILED' => [],
 ./run-tests.php:322:10    - Unknown word (XLEAKED)      -- 'XLEAKED' => [],
-./run-tests.php:3327:15   - Unknown word (testsuites)    -- '<testsuites name="%s" tests="%s
-./run-tests.php:3346:19   - Unknown word (testsuite)     -- '<testsuite name="%s" tests="%s
-./run-tests.php:3393:58   - Unknown word (testcase)      -- file_name]['xml'] = "<testcase name='$escaped_test
+./run-tests.php:3329:15   - Unknown word (testsuites)    -- '<testsuites name="%s" tests="%s
+./run-tests.php:3348:19   - Unknown word (testsuite)     -- '<testsuite name="%s" tests="%s
+./run-tests.php:3395:58   - Unknown word (testcase)      -- file_name]['xml'] = "<testcase name='$escaped_test
 ./run-tests.php:359:6     - Unknown word (cfgtypes)     -- $cfgtypes = ['show', 'keep'];
 ./run-tests.php:360:6     - Unknown word (cfgfiles)     -- $cfgfiles = ['skip', 'php', 'clean
-./run-tests.php:3662:10   - Unknown word (vcmd)          -- $vcmd = "valgrind -q --tool
-./run-tests.php:3667:18   - Unknown word (iropt)         -- /* --vex-iropt-register-updates=allregs
-./run-tests.php:3667:41   - Unknown word (allregs)       -- iropt-register-updates=allregs-at-mem-access is necessary
-./run-tests.php:3667:87   - Unknown word (watchpoint)    -- necessary for phpdbg watchpoint tests */
-./run-tests.php:3671:50   - Unknown word (exns)          -- iropt-precise-memory-exns=yes --log-file=$memcheck
-./run-tests.php:3783:10   - Unknown word (secfile)       -- $secfile = false;
-./run-tests.php:3784:10   - Unknown word (secdone)       -- $secdone = false;
-./run-tests.php:3920:39   - Unknown word (Bergmann)      -- 002-2023, Sebastian Bergmann
+./run-tests.php:3664:10   - Unknown word (vcmd)          -- $vcmd = "valgrind -q --tool
+./run-tests.php:3669:18   - Unknown word (iropt)         -- /* --vex-iropt-register-updates=allregs
+./run-tests.php:3669:41   - Unknown word (allregs)       -- iropt-register-updates=allregs-at-mem-access is necessary
+./run-tests.php:3669:87   - Unknown word (watchpoint)    -- necessary for phpdbg watchpoint tests */
+./run-tests.php:3673:50   - Unknown word (exns)          -- iropt-precise-memory-exns=yes --log-file=$memcheck
+./run-tests.php:3785:10   - Unknown word (secfile)       -- $secfile = false;
+./run-tests.php:3786:10   - Unknown word (secdone)       -- $secdone = false;
+./run-tests.php:3922:39   - Unknown word (Bergmann)      -- 002-2023, Sebastian Bergmann
 ./run-tests.php:43:26     - Unknown word (testfiles)   -- l <file>   Read the testfiles to be executed from
 ./run-tests.php:466:37    - Unknown word (Runtests)     -- $valgrind = new RuntestsValgrind($environment
 ./run-tests.php:569:44    - Unknown word (MSAN)         -- $environment['SKIP_MSAN'] = 1;
@@ -8805,8 +8809,8 @@ Lines:
 ./run-tests.php:88:20     - Unknown word (sdir)        -- --temp-source <sdir> --temp-target <tdir
 ./run-tests.php:88:42     - Unknown word (tdir)        -- sdir> --temp-target <tdir> [--temp-urlbase <url
 ./run-tests.php:88:56     - Unknown word (urlbase)     -- target <tdir> [--temp-urlbase <url>]
-./run-tests.php:957:61    - Unknown word (glibtool)     -- libtool - Mac OSX uses 'glibtool' */
-./run-tests.php:990:48    - Unknown word (ddisplay)     -- shell_exec($php . ' -ddisplay_errors=stderr -dhtml
+./run-tests.php:959:61    - Unknown word (glibtool)     -- libtool - Mac OSX uses 'glibtool' */
+./run-tests.php:992:48    - Unknown word (ddisplay)     -- shell_exec($php . ' -ddisplay_errors=stderr -dhtml
 ./sapi/apache2handler/apache_config.c:113:31    - Unknown word (phpini)     -- const char *php_apache_phpini_set(cmd_parms *cmd,
 ./sapi/apache2handler/apache_config.c:116:22    - Unknown word (PHPINI)     -- return "Only first PHPINIDir directive honored
 ./sapi/apache2handler/apache_config.c:43:9      - Unknown word (phpapdebug) -- #define phpapdebug(a) fprintf a

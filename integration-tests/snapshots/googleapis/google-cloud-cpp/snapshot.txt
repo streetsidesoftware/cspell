@@ -3,7 +3,7 @@ Repository: googleapis/google-cloud-cpp
 Url: "https://github.com/googleapis/google-cloud-cpp.git"
 Args: ["--config=../../../../config/repositories/googleapis/google-cloud-cpp/cspell.json","**/*","-e","{*.BUILD,BUILD,CHANGELOG.md,*.sh,*.cfg,*.ps1,Dockerfile.*,*.Dockerfile,*.{yaml,xml,json,cmake}}"]
 Lines:
- CSpell: Files checked: 17061, Issues found: 96977 in 11437 files
+ CSpell: Files checked: 17081, Issues found: 96837 in 11345 files
  exit code: 1
 ./ARCHITECTURE.md:100:20    - Unknown word (bigtable)   -- - Bigtable has a [`bigtable::Table`](/google/cloud
 ./ARCHITECTURE.md:100:3     - Unknown word (Bigtable)   -- - Bigtable has a [`bigtable::Table
@@ -467,28 +467,28 @@ Lines:
 ./generator/generator_config.proto:41:35     - Unknown word (gcpxx)      -- to true generate the `gcpxxV1` alias for our inline
 ./generator/generator_config.proto:48:42     - Unknown word (struct)     -- ServiceNameRetryTraits struct using the provided codes
 ./generator/generator_config.proto:96:24     - Unknown word (COMPAT)     -- LOCATION_DEPENDENT_COMPAT = 2;
-./generator/generator_config.textproto:1507:15   - Unknown word (Abac)       -- "SetLegacyAbac(std::string const&,
-./generator/generator_config.textproto:1609:3    - Unknown word (Dataplex)   -- # Dataplex
-./generator/generator_config.textproto:1634:3    - Unknown word (Dataproc)   -- # Dataproc
-./generator/generator_config.textproto:1714:3    - Unknown word (Datastream) -- # Datastream
-./generator/generator_config.textproto:1732:3    - Unknown word (Dialogflow) -- # Dialogflow CX
-./generator/generator_config.textproto:1738:47   - Unknown word (DIALOGFLOW) -- var: "GOOGLE_CLOUD_CPP_DIALOGFLOW_ENVIRONMENT_ENDPOINT
-./generator/generator_config.textproto:2095:3    - Unknown word (Eventarc)   -- # Eventarc
-./generator/generator_config.textproto:2112:3    - Unknown word (Filestore)  -- # Filestore
-./generator/generator_config.textproto:2155:7    - Unknown word (Multicloud) -- # GKE Multicloud
-./generator/generator_config.textproto:2363:12   - Unknown word (Metastore)  -- # Dataproc Metastore
+./generator/generator_config.textproto:1508:15   - Unknown word (Abac)       -- "SetLegacyAbac(std::string const&,
+./generator/generator_config.textproto:1610:3    - Unknown word (Dataplex)   -- # Dataplex
+./generator/generator_config.textproto:1635:3    - Unknown word (Dataproc)   -- # Dataproc
+./generator/generator_config.textproto:1715:3    - Unknown word (Datastream) -- # Datastream
+./generator/generator_config.textproto:1733:3    - Unknown word (Dialogflow) -- # Dialogflow CX
+./generator/generator_config.textproto:1739:47   - Unknown word (DIALOGFLOW) -- var: "GOOGLE_CLOUD_CPP_DIALOGFLOW_ENVIRONMENT_ENDPOINT
+./generator/generator_config.textproto:2096:3    - Unknown word (Eventarc)   -- # Eventarc
+./generator/generator_config.textproto:2113:3    - Unknown word (Filestore)  -- # Filestore
+./generator/generator_config.textproto:2156:7    - Unknown word (Multicloud) -- # GKE Multicloud
+./generator/generator_config.textproto:2364:12   - Unknown word (Metastore)  -- # Dataproc Metastore
 ./generator/generator_config.textproto:239:3     - Unknown word (Apigee)     -- # Apigee Connect
 ./generator/generator_config.textproto:245:47    - Unknown word (APIGEE)     -- var: "GOOGLE_CLOUD_CPP_APIGEE_CONNECTION_SERVICE_ENDPOINT
 ./generator/generator_config.textproto:310:47    - Unknown word (AUTOML)     -- var: "GOOGLE_CLOUD_CPP_AUTOML_PREDICTION_SERVICE_ENDPOINT
-./generator/generator_config.textproto:3307:3    - Unknown word (Timeseries) -- # Timeseries Insights
+./generator/generator_config.textproto:3308:3    - Unknown word (Timeseries) -- # Timeseries Insights
 ./generator/integration_tests/backup.proto:27:40     - Unknown word (genproto)   -- "google.golang.org/genproto/googleapis/test/admin
 ./generator/integration_tests/backup.proto:29:19     - Unknown word (classname)  -- option java_outer_classname = "BackupProto";
 ./generator/integration_tests/golden/v1/golden_kitchen_sink_client.h:285:43    - Unknown word (cloudresourcemanager) -- organizations/1234567890/logs/cloudresourcemanager.googleapis.com%2Factivity
 ./generator/integration_tests/golden/v1/golden_kitchen_sink_client.h:644:62    - Unknown word (bidir)                -- read-write RPCs (aka bidir streaming)
 ./generator/integration_tests/golden/v1/internal/golden_kitchen_sink_option_defaults.cc:39:8      - Unknown word (goldenkitchensink) -- "goldenkitchensink.googleapis.com");
-./generator/integration_tests/golden/v1/internal/golden_kitchen_sink_rest_stub_factory.cc:47:32     - Unknown word (Longrunning) -- opts.has<rest_internal::LongrunningEndpointOption>()) {
 ./generator/integration_tests/golden/v1/internal/golden_kitchen_sink_tracing_connection.cc:29:30     - Unknown word (OPENTELEMETRY) -- GOOGLE_CLOUD_CPP_HAVE_OPENTELEMETRY
 ./generator/integration_tests/golden/v1/internal/golden_rest_only_option_defaults.cc:39:8      - Unknown word (goldenrestonly) -- "goldenrestonly.googleapis.com");
+./generator/integration_tests/golden/v1/internal/golden_thing_admin_rest_stub.cc:37:38     - Unknown word (Longrunning) -- options.get<rest_internal::LongrunningEndpointOption>(), options
 ./generator/integration_tests/test.proto:1204:21   - Unknown word (Struct)     -- google.protobuf.Struct json_payload = 6;
 ./generator/integration_tests/test.proto:1259:19   - Unknown word (projectid)  -- // `projects/my-projectid/traces/06796866738c
 ./generator/integration_tests/test.proto:357:3     - Unknown word (oneof)      -- oneof source_info {
@@ -967,6 +967,7 @@ Lines:
 ./google/cloud/pubsub/internal/message_carrier_test.cc:38:30     - Unknown word (googclient) -- Contains(Pair("googclient_key", "test-value")
 ./google/cloud/pubsub/internal/subscriber_tracing_connection_test.cc:237:8     - Unknown word (unsampled)  -- auto unsampled_span = internal::MakeSpan
 ./google/cloud/pubsub/internal/subscription_session_test.cc:171:37    - Unknown word (acking)     -- Increment the counter before acking, as the ack() may trigger
+./google/cloud/pubsub/internal/tracing_pull_ack_handler.cc:41:71     - Unknown word (telemetery) -- if compiled with open telemetery
 ./google/cloud/pubsub/samples/CMakeLists.txt:88:37     - Unknown word (TESTDATA)   -- GOOGLE_CLOUD_CPP_PUBSUB_TESTDATA=${CMAKE_CURRENT_SOURCE
 ./google/cloud/pubsub/samples/samples.cc:1085:19   - Unknown word (Rolledback) -- std::cout << "Rolledback schema. Created a new
 ./google/cloud/pubsub/samples/samples.cc:2155:67   - Unknown word (avsc)       -- directory + "schema.avsc";
@@ -1266,7 +1267,7 @@ Lines:
 ./google/cloud/webrisk/mocks/mock_web_risk_connection.h:19:39     - Unknown word (WEBRISK)    -- CLOUD_CPP_GOOGLE_CLOUD_WEBRISK_MOCKS_MOCK_WEB_RISK
 ./google/cloud/websecurityscanner/mocks/mock_web_security_scanner_connection.h:19:39     - Unknown word (WEBSECURITYSCANNER) -- CLOUD_CPP_GOOGLE_CLOUD_WEBSECURITYSCANNER_MOCKS_MOCK_WEB_SECURITY
 ./google/cloud/workflows/doc/environment-variables.dox:14:40     - Unknown word (workflowexecutions) -- (which defaults to "workflowexecutions.googleapis.com")
-./protos/google/cloud/compute/CMakeLists.txt:34:55     - Unknown word (bigobj)     -- library}" PRIVATE "/bigobj")
+./protos/google/cloud/compute/CMakeLists.txt:40:55     - Unknown word (bigobj)     -- library}" PRIVATE "/bigobj")
 ./protos/google/cloud/compute/accelerator_types/v1/accelerator_types.proto:90:6      - Unknown word (Skylake)    -- // Skylake") ``` By default, each
 ./protos/google/cloud/compute/accelerator_types/v1/accelerator_types.proto:92:63     - Unknown word (Broadwell)  -- cpuPlatform = "Intel Broadwell") AND
 ./protos/google/cloud/compute/accelerator_types/v1/accelerator_types.proto:96:53     - Unknown word (fieldname)  -- expressions. Examples: `fieldname eq unquoted
