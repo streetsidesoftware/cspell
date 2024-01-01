@@ -596,6 +596,26 @@ declare class SpellingDictionaryLoadError extends Error {
 }
 declare function isSpellingDictionaryLoadError(e: Error): e is SpellingDictionaryLoadError;
 
+type Href = string;
+interface DictionaryTraceResult {
+    word: string;
+    found: boolean;
+    foundWord: string | undefined;
+    forbidden: boolean;
+    noSuggest: boolean;
+    dictName: string;
+    dictSource: string;
+    configSource: Href | undefined;
+    errors: Error[] | undefined;
+}
+interface WordSplits {
+    word: string;
+    found: boolean;
+}
+interface TraceResult$1 extends Array<DictionaryTraceResult> {
+    splits?: readonly WordSplits[];
+}
+
 interface WordSuggestion extends SuggestionResult {
     /**
      * The suggested word adjusted to match the original case.
@@ -799,16 +819,7 @@ declare class DocumentValidator {
      * @returns MatchRanges of text to include.
      */
     getCheckedTextRanges(): MatchRange[];
-    traceWord(word: string): {
-        word: string;
-        found: boolean;
-        foundWord: string | undefined;
-        forbidden: boolean;
-        noSuggest: boolean;
-        dictName: string;
-        dictSource: string;
-        errors: Error[] | undefined;
-    }[];
+    traceWord(word: string): TraceResult$1;
     private defaultParser;
     private _checkParsedText;
     private addPossibleError;
@@ -978,8 +989,11 @@ interface TraceOptions {
     ignoreCase?: boolean;
     allowCompoundWords?: boolean;
 }
+interface TraceWordResult extends Array<TraceResult> {
+    splits: readonly WordSplits[];
+}
 declare function traceWords(words: string[], settings: CSpellSettings, options: TraceOptions | undefined): Promise<TraceResult[]>;
-declare function traceWordsAsync(words: Iterable<string> | AsyncIterable<string>, settings: CSpellSettings, options: TraceOptions | undefined): AsyncIterableIterator<TraceResult[]>;
+declare function traceWordsAsync(words: Iterable<string> | AsyncIterable<string>, settings: CSpellSettings, options: TraceOptions | undefined): AsyncIterableIterator<TraceWordResult>;
 
 type Console = typeof console;
 interface Logger {
@@ -1032,4 +1046,4 @@ interface PerfTimer {
 type TimeNowFn = () => number;
 declare function createPerfTimer(name: string, onEnd?: (elapsed: number, name: string) => void, timeNowFn?: TimeNowFn): PerfTimer;
 
-export { type CheckTextInfo, type ConfigurationDependencies, type CreateTextDocumentParams, type DetermineFinalDocumentSettingsResult, type Document, DocumentValidator, type DocumentValidatorOptions, ENV_CSPELL_GLOB_ROOT, type ExcludeFilesGlobMap, type ExclusionFunction, exclusionHelper_d as ExclusionHelper, type FeatureFlag, FeatureFlags, ImportError, type ImportFileRefWithError$1 as ImportFileRefWithError, IncludeExcludeFlag, type IncludeExcludeOptions, index_link_d as Link, type Logger, type PerfTimer, type SpellCheckFileOptions, type SpellCheckFileResult, SpellingDictionaryLoadError, type SuggestedWord, SuggestionError, type SuggestionOptions, type SuggestionsForWordResult, text_d as Text, type TextDocument, type TextDocumentLine, type TextDocumentRef, type TextInfoItem, type TraceOptions, type TraceResult, UnknownFeatureFlagError, type ValidationIssue, calcOverrideSettings, checkFilenameMatchesGlob, checkText, checkTextDocument, clearCachedFiles, clearCaches, combineTextAndLanguageSettings, combineTextAndLanguageSettings as constructSettingsForText, createConfigLoader, createPerfTimer, createTextDocument, currentSettingsFileVersion, defaultConfigFilenames, defaultFileName, defaultFileName as defaultSettingsFilename, determineFinalDocumentSettings, extractDependencies, extractImportErrors, fileToDocument, fileToTextDocument, finalizeSettings, getCachedFileSize, getDefaultBundledSettingsAsync, getDefaultConfigLoader, getDefaultSettings, getDictionary, getGlobalSettings, getGlobalSettingsAsync, getLanguagesForBasename as getLanguageIdsForBaseFilename, getLanguagesForExt, getLogger, getSources, getSystemFeatureFlags, getVirtualFS, isBinaryFile, isSpellingDictionaryLoadError, loadConfig, loadPnP, mergeInDocSettings, mergeSettings, readRawSettings, readSettings, readSettingsFiles, refreshDictionaryCache, resolveFile, searchForConfig, sectionCSpell, setLogger, shouldCheckDocument, spellCheckDocument, spellCheckFile, suggestionsForWord, suggestionsForWords, traceWords, traceWordsAsync, updateTextDocument, validateText };
+export { type CheckTextInfo, type ConfigurationDependencies, type CreateTextDocumentParams, type DetermineFinalDocumentSettingsResult, type Document, DocumentValidator, type DocumentValidatorOptions, ENV_CSPELL_GLOB_ROOT, type ExcludeFilesGlobMap, type ExclusionFunction, exclusionHelper_d as ExclusionHelper, type FeatureFlag, FeatureFlags, ImportError, type ImportFileRefWithError$1 as ImportFileRefWithError, IncludeExcludeFlag, type IncludeExcludeOptions, index_link_d as Link, type Logger, type PerfTimer, type SpellCheckFileOptions, type SpellCheckFileResult, SpellingDictionaryLoadError, type SuggestedWord, SuggestionError, type SuggestionOptions, type SuggestionsForWordResult, text_d as Text, type TextDocument, type TextDocumentLine, type TextDocumentRef, type TextInfoItem, type TraceOptions, type TraceResult, type TraceWordResult, UnknownFeatureFlagError, type ValidationIssue, calcOverrideSettings, checkFilenameMatchesGlob, checkText, checkTextDocument, clearCachedFiles, clearCaches, combineTextAndLanguageSettings, combineTextAndLanguageSettings as constructSettingsForText, createConfigLoader, createPerfTimer, createTextDocument, currentSettingsFileVersion, defaultConfigFilenames, defaultFileName, defaultFileName as defaultSettingsFilename, determineFinalDocumentSettings, extractDependencies, extractImportErrors, fileToDocument, fileToTextDocument, finalizeSettings, getCachedFileSize, getDefaultBundledSettingsAsync, getDefaultConfigLoader, getDefaultSettings, getDictionary, getGlobalSettings, getGlobalSettingsAsync, getLanguagesForBasename as getLanguageIdsForBaseFilename, getLanguagesForExt, getLogger, getSources, getSystemFeatureFlags, getVirtualFS, isBinaryFile, isSpellingDictionaryLoadError, loadConfig, loadPnP, mergeInDocSettings, mergeSettings, readRawSettings, readSettings, readSettingsFiles, refreshDictionaryCache, resolveFile, searchForConfig, sectionCSpell, setLogger, shouldCheckDocument, spellCheckDocument, spellCheckFile, suggestionsForWord, suggestionsForWords, traceWords, traceWordsAsync, updateTextDocument, validateText };

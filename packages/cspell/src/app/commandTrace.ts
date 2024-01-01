@@ -64,14 +64,26 @@ export function commandTrace(prog: Command): Command {
             const dictionaryPathFormat = isDictionaryPathFormat(options.dictionaryPath)
                 ? options.dictionaryPath
                 : 'long';
+
+            let prefix = '';
             for await (const results of App.trace(words, options)) {
-                const filtered = filterTraceResults(results, options);
-                emitTraceResults(filtered, { cwd: process.cwd(), dictionaryPathFormat });
-                numFound += results.reduce((n, r) => n + (r.found ? 1 : 0), 0);
-                const numErrors = results.map((r) => r.errors?.length || 0).reduce((n, r) => n + r, 0);
-                if (numErrors) {
-                    console.error('Dictionary Errors.');
-                    throw new CheckFailed('dictionary errors', 1);
+                const byWord = groupBy(results, (r) => r.word);
+                for (const split of results.splits) {
+                    const splitResults = byWord.get(split.word) || [];
+                    const filtered = filterTraceResults(splitResults, options);
+                    emitTraceResults(split.word, split.found, filtered, {
+                        cwd: process.cwd(),
+                        dictionaryPathFormat,
+                        prefix,
+                        showWordFound: results.splits.length > 1,
+                    });
+                    prefix = '\n';
+                    numFound += results.reduce((n, r) => n + (r.found ? 1 : 0), 0);
+                    const numErrors = results.map((r) => r.errors?.length || 0).reduce((n, r) => n + r, 0);
+                    if (numErrors) {
+                        console.error('Dictionary Errors.');
+                        throw new CheckFailed('dictionary errors', 1);
+                    }
                 }
             }
             if (!numFound) {
@@ -88,4 +100,15 @@ function filterTraceResults(results: App.TraceResult[], options: TraceCommandOpt
 
 function filterTraceResult(result: App.TraceResult, onlyFound?: boolean): boolean {
     return result.found || result.forbidden || result.noSuggest || (!onlyFound && result.dictActive);
+}
+
+function groupBy<T>(items: Iterable<T>, key: (item: T) => string): Map<string, T[]> {
+    const map = new Map<string, T[]>();
+    for (const item of items) {
+        const k = key(item);
+        const a = map.get(k) || [];
+        a.push(item);
+        map.set(k, a);
+    }
+    return map;
 }

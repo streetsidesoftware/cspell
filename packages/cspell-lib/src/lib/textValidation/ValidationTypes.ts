@@ -3,6 +3,7 @@ import type { MappedText, TextOffset as TextOffsetRW } from '@cspell/cspell-type
 import type { ExtendedSuggestion } from '../Models/Suggestion.js';
 import type { ValidationIssue } from '../Models/ValidationIssue.js';
 
+export type { TextOffset as TextOffsetRW } from '@cspell/cspell-types';
 export type TextOffsetRO = Readonly<TextOffsetRW>;
 
 export interface ValidationOptions extends IncludeExcludeOptions {

@@ -2,11 +2,14 @@ import type { CSpellSettings, DictionaryId, LocaleId } from '@cspell/cspell-type
 import { genSequence } from 'gensequence';
 
 import type { LanguageId } from './LanguageIds.js';
+import type { CSpellSettingsInternal } from './Models/CSpellSettingsInternalDef.js';
 import { toInternalSettings } from './Settings/CSpellSettingsServer.js';
 import { finalizeSettings, mergeSettings } from './Settings/index.js';
 import { calcSettingsForLanguageId } from './Settings/LanguageSettings.js';
-import type { HasOptions, SpellingDictionaryCollection } from './SpellingDictionary/index.js';
+import type { SpellingDictionaryCollection } from './SpellingDictionary/index.js';
 import { getDictionaryInternal, refreshDictionaryCache } from './SpellingDictionary/index.js';
+import type { WordSplits } from './textValidation/traceWord.js';
+import { traceWord } from './textValidation/traceWord.js';
 import { toFilePathOrHref } from './util/url.js';
 import * as util from './util/util.js';
 
@@ -29,6 +32,10 @@ export interface TraceOptions {
     allowCompoundWords?: boolean;
 }
 
+export interface TraceWordResult extends Array<TraceResult> {
+    splits: readonly WordSplits[];
+}
+
 export async function traceWords(
     words: string[],
     settings: CSpellSettings,
@@ -47,12 +54,12 @@ export async function* traceWordsAsync(
     words: Iterable<string> | AsyncIterable<string>,
     settings: CSpellSettings,
     options: TraceOptions | undefined,
-): AsyncIterableIterator<TraceResult[]> {
+): AsyncIterableIterator<TraceWordResult> {
     const { languageId, locale: language, ignoreCase = true, allowCompoundWords } = options || {};
 
     async function finalize(config: CSpellSettings): Promise<{
         activeDictionaries: DictionaryId[];
-        config: CSpellSettings;
+        config: CSpellSettingsInternal;
         dicts: SpellingDictionaryCollection;
     }> {
         const withLocale = mergeSettings(
@@ -84,28 +91,22 @@ export async function* traceWordsAsync(
     await refreshDictionaryCache();
     const { config, dicts, activeDictionaries } = await finalize(settings);
     const setOfActiveDicts = new Set(activeDictionaries);
-    const opts: HasOptions = util.clean({ ignoreCase, useCompounds: config.allowCompoundWords });
 
-    function normalizeErrors(errors: Error[] | undefined): Error[] | undefined {
-        if (!errors?.length) return undefined;
-        return errors;
-    }
+    function processWord(word: string): TraceWordResult {
+        const results = traceWord(word, dicts, { ...config, ignoreCase });
 
-    function processWord(word: string) {
-        return dicts.dictionaries
-            .map((dict) => ({ dict, findResult: dict.find(word, opts) }))
-            .map(({ dict, findResult }) => ({
-                word,
-                found: !!findResult?.found,
-                foundWord: findResult?.found || undefined,
-                forbidden: findResult?.forbidden || false,
-                noSuggest: findResult?.noSuggest || false,
-                dictName: dict.name,
-                dictSource: dictSourceToFilename(dict.source),
-                dictActive: setOfActiveDicts.has(dict.name),
-                configSource: config.name || '',
-                errors: normalizeErrors(dict.getErrors?.()),
-            }));
+        const r = results.map((r) => ({
+            ...r,
+            dictActive: setOfActiveDicts.has(r.dictName),
+            dictSource: toFilePathOrHref(r.dictSource),
+            configSource: r.configSource || config.name || '',
+            splits: results.splits,
+        }));
+
+        const tr = new CTraceResult(...r);
+        results.splits && tr.splits.push(...results.splits);
+
+        return tr;
     }
 
     for await (const word of words) {
@@ -113,6 +114,9 @@ export async function* traceWordsAsync(
     }
 }
 
-function dictSourceToFilename(source: string): string {
-    return toFilePathOrHref(source);
+class CTraceResult extends Array<TraceResult> implements TraceWordResult {
+    splits: WordSplits[] = [];
+    constructor(...items: TraceResult[]) {
+        super(...items);
+    }
 }

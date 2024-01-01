@@ -234,13 +234,14 @@ describe('Validate cli', () => {
         expect(normalizeOutput(captureStderr.text)).toMatchSnapshot();
     });
 
+    /* cspell:ignore notinanydictionary */
     test.each`
         msg                                         | testArgs                                                        | errorCheck         | eError   | eLog     | eInfo
         ${'trace hello'}                            | ${['trace', 'hello']}                                           | ${undefined}       | ${false} | ${true}  | ${false}
         ${'trace café'}                             | ${['trace', 'café'.normalize('NFD')]}                           | ${undefined}       | ${false} | ${true}  | ${false}
         ${'trace hello'}                            | ${['trace', '--locale=en-gb', 'hello']}                         | ${undefined}       | ${false} | ${true}  | ${false}
         ${'trace help'}                             | ${['trace', '-h']}                                              | ${'outputHelp'}    | ${false} | ${false} | ${false}
-        ${'trace not-in-any-dictionary'}            | ${['trace', 'not-in-any-dictionary']}                           | ${app.CheckFailed} | ${true}  | ${true}  | ${false}
+        ${'trace not-in-any-dictionary'}            | ${['trace', 'notinanydictionary']}                              | ${app.CheckFailed} | ${true}  | ${true}  | ${false}
         ${'trace missing dictionary'}               | ${['trace', 'hello', '-c', 'samples/cspell-missing-dict.json']} | ${app.CheckFailed} | ${true}  | ${true}  | ${false}
         ${'with spelling errors --debug Dutch.txt'} | ${['--relative', '--debug', pathSamples('Dutch.txt')]}          | ${app.CheckFailed} | ${true}  | ${true}  | ${true}
         ${'trace flavour'}                          | ${['trace', 'flavour', '-c', pathSamples('.cspell.json')]}      | ${undefined}       | ${false} | ${true}  | ${false}

@@ -1,6 +1,6 @@
 import { opMap, opTap, pipeAsync, toAsyncIterable } from '@cspell/cspell-pipe';
 import type { CSpellReporter, RunResult } from '@cspell/cspell-types';
-import type { CheckTextInfo, FeatureFlags, SuggestionsForWordResult, TraceResult } from 'cspell-lib';
+import type { CheckTextInfo, FeatureFlags, SuggestionsForWordResult, TraceWordResult } from 'cspell-lib';
 import {
     checkTextDocument,
     getDefaultSettings,
@@ -38,7 +38,7 @@ export function lint(fileGlobs: string[], options: LinterCliOptions, reporter?: 
     return runLint(cfg);
 }
 
-export async function* trace(words: string[], options: TraceOptions): AsyncIterableIterator<TraceResult[]> {
+export async function* trace(words: string[], options: TraceOptions): AsyncIterableIterator<TraceWordResult> {
     options = fixLegacy(options);
     const iWords = options.stdin ? toAsyncIterable(words, readStdin()) : words;
     const { languageId, locale, allowCompoundWords, ignoreCase } = options;

@@ -18,11 +18,18 @@ export interface EmitTraceOptions {
     lineWidth?: number;
     dictionaryPathFormat: DictionaryPathFormat;
     iPath?: PathInterface;
+    prefix?: string;
+    showWordFound?: boolean;
 }
 
 const colWidthDictionaryName = 20;
 
-export function emitTraceResults(results: TraceResult[], options: EmitTraceOptions): void {
+export function emitTraceResults(
+    word: string,
+    found: boolean,
+    results: TraceResult[],
+    options: EmitTraceOptions,
+): void {
     const maxWordLength = results
         .map((r) => r.foundWord || r.word)
         .reduce((a, b) => Math.max(a, width(b)), 'Word'.length);
@@ -41,6 +48,7 @@ export function emitTraceResults(results: TraceResult[], options: EmitTraceOptio
     const col = new Intl.Collator();
     results.sort((a, b) => col.compare(a.dictName, b.dictName));
 
+    options.showWordFound && console.log(`${options.prefix || ''}${word}: ${found ? 'Found' : 'Not Found'}`);
     emitHeader(cols);
     results.forEach((r) => emitTraceResult(r, cols, options));
 }

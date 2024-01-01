@@ -2,10 +2,11 @@ import type { CSpellSettings } from '@cspell/cspell-types';
 import { describe, expect, test } from 'vitest';
 
 import { getDefaultSettings, mergeSettings } from './Settings/index.js';
-import type { TraceResult } from './trace.js';
 import { traceWords } from './trace.js';
 
 const timeout = 20000;
+
+const ac = expect.arrayContaining;
 
 describe('Verify trace', () => {
     test(
@@ -55,26 +56,21 @@ describe('Verify trace', () => {
             const words = [word];
             const config = await getSettings({ allowCompoundWords, flagWords: ['hte'], ignoreWords: ['colour'] });
             const results = await traceWords(words, config, { locale, languageId, ignoreCase });
-            const byName = results.reduce(
-                (a, b) => {
-                    a[b.dictName] = b;
-                    return a;
-                },
-                {} as Record<string, TraceResult>,
-            );
 
             // console.log(JSON.stringify(byName));
 
-            expect(byName[dictName]).toEqual(
-                oc({
-                    dictActive,
-                    dictName,
-                    forbidden,
-                    found,
-                    foundWord,
-                    noSuggest,
-                    word,
-                }),
+            expect(results.filter((a) => a.dictName === dictName)).toEqual(
+                ac([
+                    oc({
+                        dictActive,
+                        dictName,
+                        forbidden,
+                        found,
+                        foundWord,
+                        noSuggest,
+                        word,
+                    }),
+                ]),
             );
         },
         { timeout },

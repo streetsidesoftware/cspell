@@ -74,7 +74,7 @@ export {
 export type { SuggestedWord, SuggestionOptions, SuggestionsForWordResult } from './suggestions.js';
 export { SuggestionError, suggestionsForWord, suggestionsForWords } from './suggestions.js';
 export { DocumentValidator, DocumentValidatorOptions, shouldCheckDocument } from './textValidation/index.js';
-export type { TraceOptions, TraceResult } from './trace.js';
+export type { TraceOptions, TraceResult, TraceWordResult } from './trace.js';
 export { traceWords, traceWordsAsync } from './trace.js';
 export { getLogger, Logger, setLogger } from './util/logger.js';
 export { resolveFile } from './util/resolveFile.js';
