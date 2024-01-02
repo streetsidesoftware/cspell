@@ -9,4 +9,11 @@ export interface CompileOptions {
      * Generate lower case / accent free versions of words.
      */
     generateNonStrict: boolean;
+
+    /**
+     * Optional filter function to filter out words.
+     * @param word the word to test
+     * @returns `true` to keep the word, `false` to exclude it.
+     */
+    filter?: (word: string) => boolean;
 }

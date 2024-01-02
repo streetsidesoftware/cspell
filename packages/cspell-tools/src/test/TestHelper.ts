@@ -12,7 +12,9 @@ const tempDirBase = path.join(packageRoot, 'temp');
 const repoSamples = path.join(repoRoot, 'packages/Samples');
 
 export interface TestHelper {
+    /** path to `.../cspell/package/cspell-tools/` */
     readonly packageRoot: string;
+    /** path to `...cspell/` */
     readonly repoRoot: string;
     readonly tempDir: string;
 

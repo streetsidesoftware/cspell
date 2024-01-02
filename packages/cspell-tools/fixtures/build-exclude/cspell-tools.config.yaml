@@ -1,0 +1,10 @@
+# yaml-language-server: $schema=./../../cspell-tools.config.schema.json
+
+targets:
+  - name: colors
+    targetDirectory: ../../temp/builds/build-exclude
+    sources:
+      - filename: src/words.txt
+        split: true
+      - ../dicts/colors.txt
+    format: plaintext

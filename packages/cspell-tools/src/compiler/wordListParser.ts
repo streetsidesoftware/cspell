@@ -17,6 +17,7 @@ export function normalizeTargetWords(options: CompileOptions): Operator<string> 
         lineParser,
         options.sort ? createInlineBufferedSort(10000) : undefined,
         opFilter<string>(uniqueFilter(10000)),
+        options.filter ? opFilter<string>(options.filter) : undefined,
     ].filter(isDefined);
     return opCombine(...operations);
 }
