@@ -14,7 +14,7 @@ import type {
 } from '../config/index.js';
 import { isFileListSource, isFilePath, isFileSource } from '../config/index.js';
 import { checkShasumFile, updateChecksumForFiles } from '../shasum/index.js';
-import { createAllowedSplitWordsFromFiles } from './createWordsCollection.js';
+import { createAllowedSplitWordsFromFiles, createWordsCollectionFromFiles } from './createWordsCollection.js';
 import { logWithTimestamp } from './logWithTimestamp.js';
 import { readTextFile } from './readers/readTextFile.js';
 import type { SourceReaderOptions } from './SourceReader.js';
@@ -95,8 +95,10 @@ export async function compileTarget(
 ): Promise<string[]> {
     logWithTimestamp(`Start compile: ${target.name}`);
     const { rootDir, cwd, checksumFile, conditional } = compileOptions;
-    const { format, sources, trieBase, sort = true, generateNonStrict = false } = target;
+    const { format, sources, trieBase, sort = true, generateNonStrict = false, excludeWordsFrom } = target;
     const targetDirectory = path.resolve(rootDir, target.targetDirectory ?? cwd ?? process.cwd());
+
+    const excludeFilter = await createExcludeFilter(excludeWordsFrom);
 
     const generateNonStrictTrie = target.generateNonStrict ?? true;
 
@@ -111,10 +113,10 @@ export async function compileTarget(
         opAwaitAsync(),
     );
     const filesToProcess: FileToProcess[] = await toArray(filesToProcessAsync);
-    const normalizer = normalizeTargetWords({ sort: useTrie || sort, generateNonStrict });
+    const normalizer = normalizeTargetWords({ sort: useTrie || sort, generateNonStrict, filter: excludeFilter });
     const checksumRoot = (checksumFile && path.dirname(checksumFile)) || rootDir;
 
-    const deps = [...calculateDependencies(filename, filesToProcess, checksumRoot)];
+    const deps = [...calculateDependencies(filename, filesToProcess, excludeWordsFrom, checksumRoot)];
 
     if (conditional && checksumFile) {
         const check = await checkShasumFile(checksumFile, deps, checksumRoot).catch(() => undefined);
@@ -145,10 +147,16 @@ export async function compileTarget(
     return deps;
 }
 
-function calculateDependencies(targetFile: string, filesToProcess: FileToProcess[], rootDir: string): Set<string> {
+function calculateDependencies(
+    targetFile: string,
+    filesToProcess: FileToProcess[],
+    excludeFiles: string[] | undefined,
+    rootDir: string,
+): Set<string> {
     const dependencies = new Set<string>();
 
     addDependency(targetFile);
+    excludeFiles?.forEach((f) => addDependency(f));
     filesToProcess.forEach((f) => addDependency(f.src));
 
     return dependencies;
@@ -287,4 +295,10 @@ function logProgress<T>(freq = 100000): (iter: Iterable<T>) => Iterable<T> {
     }
 
     return logProgress;
+}
+
+async function createExcludeFilter(excludeWordsFrom: FilePath[] | undefined): Promise<(word: string) => boolean> {
+    if (!excludeWordsFrom || !excludeWordsFrom.length) return () => true;
+    const excludeWords = await createWordsCollectionFromFiles(excludeWordsFrom);
+    return (word: string) => !excludeWords.has(word);
 }

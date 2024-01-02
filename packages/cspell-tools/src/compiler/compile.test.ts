@@ -16,6 +16,10 @@ function sample(...parts: string[]): string {
     return path.resolve(pathSamples, ...parts);
 }
 
+function fix(...parts: string[]): string {
+    return testHelper.resolveFixture(...parts);
+}
+
 const consoleSpy = spyOnConsole();
 
 describe('compile', () => {
@@ -104,6 +108,41 @@ describe('compile', () => {
             expect(check2.passed).toBe(true);
         },
     );
+
+    test.each`
+        file                  | excludeWordsFrom
+        ${'dicts/colors.txt'} | ${['build-exclude/src/exclude.txt']}
+        ${'dicts/cities.txt'} | ${['build-exclude/src/exclude.txt']}
+    `('compile filtered $file, excludeWordsFrom: $excludeWordsFrom', async ({ file, excludeWordsFrom }) => {
+        const targetDirectory = t(`.`);
+        const target: Target = {
+            name: 'myDictionary',
+            targetDirectory,
+            format: 'plaintext',
+            sources: [fix(file)],
+            compress: false,
+            trieBase: 10,
+            sort: true,
+            excludeWordsFrom: excludeWordsFrom.map((f: string) => fix(f)),
+        };
+        const req: CompileRequest = {
+            targets: [target],
+            rootDir: targetDirectory,
+            checksumFile: true,
+        };
+
+        await compile(req, { conditionalBuild: true });
+
+        const ext = '.txt';
+        const content = await readTextFile(`${targetDirectory}/myDictionary${ext}`);
+        expect(content).toMatchSnapshot();
+        const check = await checkShasumFile(path.join(targetDirectory, 'checksum.txt'), [], targetDirectory);
+        expect(check.passed).toBe(true);
+
+        await compile(req, { conditionalBuild: true });
+        const check2 = await checkShasumFile(path.join(targetDirectory, 'checksum.txt'), [], targetDirectory);
+        expect(check2.passed).toBe(true);
+    });
 });
 
 function t(...parts: string[]): string {

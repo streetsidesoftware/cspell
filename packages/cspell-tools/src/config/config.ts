@@ -100,7 +100,7 @@ export interface Target extends CompileTargetOptions {
      * Words from the sources that are found in `excludeWordsFrom` files
      * will not be added to the dictionary.
      *
-     * @version TBD
+     * @version 8.3.2
      */
     excludeWordsFrom?: FilePath[] | undefined;
 
