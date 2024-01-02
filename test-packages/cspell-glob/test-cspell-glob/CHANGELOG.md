@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 8.3.2 (2024-01-02)
+
+### Bug Fixes
+
+* cspell-tools - support excluding words ([#5140](https://github.com/streetsidesoftware/cspell/issues/5140)) ([3fcdd89](https://github.com/streetsidesoftware/cspell/commit/3fcdd89fb319b659d218067c5366e02d036be59f))
+
 ## 8.3.1 (2024-01-01)
 
 **Note:** Version bump only for package test-cspell-glob
