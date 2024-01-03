@@ -3,7 +3,7 @@ Repository: RustPython/RustPython
 Url: "https://github.com/RustPython/RustPython.git"
 Args: ["**"]
 Lines:
- CSpell: Files checked: 597, Issues found: 2653 in 307 files
+ CSpell: Files checked: 597, Issues found: 2814 in 309 files
  exit code: 1
 ./Cargo.toml:111:82    - Unknown word (termcolor)  -- features = ["atty", "termcolor"] }
 ./Cargo.toml:154:62    - Unknown word (redoxer)    -- to compile/check with redoxer
@@ -60,6 +60,7 @@ Lines:
 ./common/src/boxvec.rs:264:23    - Unknown word (nonoverlapping) -- ptr::copy_nonoverlapping(other.as_ptr(), dst
 ./common/src/boxvec.rs:582:5     - Unknown word (Rawptr)         -- /// Rawptr add but uses arithmetic
 ./common/src/boxvec.rs:703:7     - Unknown word (CAPERROR)       -- const CAPERROR: &str = "insufficient
+./common/src/crt_fd.rs:48:12     - Unknown word (wopen)      -- pub fn wopen(path: &widestring::WideCStr
 ./common/src/float_ops.rs:5:8       - Unknown word (ufrexp)     -- pub fn ufrexp(value: f64) -> (f64
 ./common/src/hash.rs:21:25     - Unknown word (siphash)    -- const ALGO: &str = "siphash24";
 ./common/src/hash.rs:65:58     - Unknown word (hashf)      -- E>(&self, iter: I, hashf: F) -> Result<PyHash
@@ -140,11 +141,13 @@ Lines:
 ./extra_tests/snippets/builtin_exceptions.py:95:9      - Unknown word (excepthook) -- sys.excepthook(type(exc), exc, exc
 ./extra_tests/snippets/builtin_float.py:267:6     - Unknown word (infi)       -- "infi", # misspelt infinities
 ./extra_tests/snippets/builtin_float.py:268:7     - Unknown word (Infinit)    -- "-Infinit",
+./extra_tests/snippets/builtin_float.py:273:6     - Unknown word (snan)       -- "snan",
 ./extra_tests/snippets/builtin_float.py:278:6     - Unknown word (nfinity)    -- "nfinity",
 ./extra_tests/snippets/builtin_float.py:279:6     - Unknown word (inity)      -- "inity",
 ./extra_tests/snippets/builtin_float.py:280:6     - Unknown word (iinity)     -- "iinity",
 ./extra_tests/snippets/builtin_float.py:281:7     - Unknown word (xnan)       -- "0xnan",
 ./extra_tests/snippets/builtin_float.py:393:21    - Unknown word (xbep)       -- identical(fromHex("0xbep0"), 190.0)
+./extra_tests/snippets/builtin_float.py:7:1       - Unknown word (NINF)       -- NINF = float("-inf")
 ./extra_tests/snippets/builtin_int.py:365:1     - Unknown word (subint)     -- subint = int.__new__(SubInt
 ./extra_tests/snippets/builtin_list.py:253:13    - Unknown word (refrences)  -- # make sure refrences are assigned correctly
 ./extra_tests/snippets/builtin_list.py:639:26    - Unknown word (daedlock)   -- Test for list entering daedlock or not (https://github
@@ -194,6 +197,7 @@ Lines:
 ./extra_tests/snippets/example_interactive.py:23:64     - Unknown word (NOFREE)      -- OPTIMIZED, NEWLOCALS, NOFREE'
 ./extra_tests/snippets/example_interactive.py:25:14     - Unknown word (kwonlyargcount) -- assert c2.co_kwonlyargcount == 1, (c2.co_kwonlyargcount
 ./extra_tests/snippets/example_interactive.py:26:16     - Unknown word (lnotab)         -- # assert c2.co_lnotab == 0, c2.co_lnotab
+./extra_tests/snippets/example_interactive.py:29:16     - Unknown word (nlocals)        -- # assert c2.co_nlocals == 4, c2.co_nlocals
 ./extra_tests/snippets/forbidden_instantiation.py:18:1      - Unknown word (reviter)    -- reviter_types = [list, dict
 ./extra_tests/snippets/intro/3.1.2.5.py:1:9       - Unknown word (unununium)  -- assert 'unununium' == 3 * 'un' + 'ium
 ./extra_tests/snippets/intro/3.1.2.6.py:1:26      - Unknown word (thon)       -- assert 'Python' == 'Py' 'thon'
@@ -210,6 +214,7 @@ Lines:
 ./extra_tests/snippets/stdlib_datetime.py:1158:20   - Unknown word (excercise)  -- #at least, excercise them to make sure that
 ./extra_tests/snippets/stdlib_datetime.py:1212:9    - Unknown word (justasbig)  -- justasbig = timedelta(0, 0, n
 ./extra_tests/snippets/stdlib_datetime.py:134:3     - Unknown word (unsupport)  -- # unsupport format in strptime returns
+./extra_tests/snippets/stdlib_datetime.py:1365:19   - Unknown word (newval)     -- for name, newval in (("year", 2),
 ./extra_tests/snippets/stdlib_datetime.py:1368:13   - Unknown word (newargs)    -- newargs = args[:]
 ./extra_tests/snippets/stdlib_datetime.py:1391:17   - Unknown word (newmeth)    -- def newmeth(self, start):
 ./extra_tests/snippets/stdlib_datetime.py:152:14    - Unknown word (ACDT)       -- self.ACDT = timezone(timedelta
@@ -218,6 +223,7 @@ Lines:
 ./extra_tests/snippets/stdlib_datetime.py:229:13    - Unknown word (utctime)    -- utctime = self.DT.replace(tzinfo
 ./extra_tests/snippets/stdlib_datetime.py:2356:23   - Unknown word (atribute)   -- theclass as a class atribute, and theclass(1, 1,
 ./extra_tests/snippets/stdlib_datetime.py:2413:17   - Unknown word (aofs)       -- aofs = abs(offset)
+./extra_tests/snippets/stdlib_datetime.py:2438:43   - Unknown word (aname)      -- tzname(self, dt): return "aname"
 ./extra_tests/snippets/stdlib_datetime.py:2473:55   - Unknown word (comparands) -- gets ignored if the comparands have
 ./extra_tests/snippets/stdlib_datetime.py:2495:50   - Unknown word (uctoffset)  -- re different members, uctoffset is not ignored.
 ./extra_tests/snippets/stdlib_datetime.py:2496:59   - Unknown word (depedent)   -- actually have an operand-depedent offset,
@@ -236,6 +242,7 @@ Lines:
 ./extra_tests/snippets/stdlib_datetime.py:3098:32   - Unknown word (dstvalue)       -- def __init__(self, dstvalue):
 ./extra_tests/snippets/stdlib_datetime.py:3144:15   - Unknown word (UOFS)           -- class UOFS(DST):
 ./extra_tests/snippets/stdlib_datetime.py:3145:32   - Unknown word (uofs)           -- def __init__(self, uofs, dofs=None):
+./extra_tests/snippets/stdlib_datetime.py:3145:38   - Unknown word (dofs)           -- _init__(self, uofs, dofs=None):
 ./extra_tests/snippets/stdlib_datetime.py:3173:15   - Unknown word (NOFS)           -- class NOFS(DST):
 ./extra_tests/snippets/stdlib_datetime.py:3181:15   - Unknown word (BOFS)           -- class BOFS(DST):
 ./extra_tests/snippets/stdlib_datetime.py:3221:17   - Unknown word (timestr)        -- timestr = '04:05:59' + (us and
@@ -263,6 +270,7 @@ Lines:
 ./extra_tests/snippets/stdlib_datetime.py:3647:21   - Unknown word (tzhour)         -- for tzhour in (0, 1, 1, 2):
 ./extra_tests/snippets/stdlib_datetime.py:3648:21   - Unknown word (expectedbase)   -- expectedbase = self.dstoff.replace
 ./extra_tests/snippets/stdlib_datetime.py:3652:25   - Unknown word (astz)           -- astz = asutc.astimezone(tz
+./extra_tests/snippets/stdlib_datetime.py:3667:15   - Unknown word (notok)          -- class notok(ok):
 ./extra_tests/snippets/stdlib_datetime.py:3698:62   - Unknown word (FEDT)           -- FEastern", "FEST", "FEDT")
 ./extra_tests/snippets/stdlib_datetime.py:3706:9    - Unknown word (fstart)         -- fstart = start.replace(tzinfo
 ./extra_tests/snippets/stdlib_datetime.py:3768:3    - Unknown word (Neverthelss)    -- # Neverthelss, comparison should work
@@ -287,9 +295,12 @@ Lines:
 ./extra_tests/snippets/stdlib_json.py:65:33     - Unknown word (jsons)      -- reject non-str keys in jsons
 ./extra_tests/snippets/stdlib_logging.py:10:16     - Unknown word (WOOT)       -- logging.error('WOOT')
 ./extra_tests/snippets/stdlib_math.py:11:9      - Unknown word (Conversible) -- # class Conversible():
+./extra_tests/snippets/stdlib_math.py:149:12    - Unknown word (ninf)        -- # test_inf_ninf_nan(self): these should
 ./extra_tests/snippets/stdlib_math.py:18:3      - Unknown word (roundings)   -- # roundings
 ./extra_tests/snippets/stdlib_os.py:121:14    - Unknown word (BOYA)       -- CONTENT3 = b"BOYA"
 ./extra_tests/snippets/stdlib_os.py:290:48    - Unknown word (getpwall)   -- pw_uid for u in pwd.getpwall()]
+./extra_tests/snippets/stdlib_os.py:388:51    - Unknown word (setresuid)  -- PermissionError, lambda: os.setresuid(42, 42, 42))
+./extra_tests/snippets/stdlib_os.py:519:63    - Unknown word (VDISABLE)   -- "PC_MAX_INPUT", "PC_VDISABLE"]:
 ./extra_tests/snippets/stdlib_re.py:18:17     - Unknown word (abcabca)    -- s = p.sub('x', 'abcabca')
 ./extra_tests/snippets/stdlib_re.py:20:14     - Unknown word (xcxca)      -- assert s == 'xcxca'
 ./extra_tests/snippets/stdlib_re.py:34:11     - Unknown word (bigcharset) -- # test op bigcharset
@@ -306,6 +317,7 @@ Lines:
 ./extra_tests/snippets/stdlib_socket.py:164:13    - Unknown word (gaierror)   -- (socket.gaierror, "gaierror"),
 ./extra_tests/snippets/stdlib_sqlite.py:21:7      - Unknown word (Aggr)          -- class AggrSum:
 ./extra_tests/snippets/stdlib_sqlite.py:31:22     - Unknown word (mysum)         -- cx.create_aggregate("mysum", 1, AggrSum)
+./extra_tests/snippets/stdlib_sqlite.py:35:3      - Unknown word (toobig)        -- # toobig = 2**64
 ./extra_tests/snippets/stdlib_sqlite.py:47:22     - Unknown word (aggtxt)        -- cx.create_aggregate("aggtxt", 1, AggrText)
 ./extra_tests/snippets/stdlib_sqlite.py:7:4       - Unknown word (executescript) -- cx.executescript(";")
 ./extra_tests/snippets/stdlib_sqlite.py:9:4       - Unknown word (executemany)   -- cx.executemany("INSERT INTO foo(key
@@ -317,6 +329,7 @@ Lines:
 ./extra_tests/snippets/stdlib_sys.py:31:12     - Unknown word (maxunicode)                -- assert sys.maxunicode == 1114111
 ./extra_tests/snippets/stdlib_sys.py:69:5      - Unknown word (setrecursionlimit)         -- sys.setrecursionlimit(200)
 ./extra_tests/snippets/stdlib_sys.py:76:18     - Unknown word (getwindowsversion)         -- winver = sys.getwindowsversion()
+./extra_tests/snippets/stdlib_sys.py:76:5      - Unknown word (winver)                    -- winver = sys.getwindowsversion
 ./extra_tests/snippets/stdlib_sys_getframe.py:4:20      - Unknown word (getframe)   -- locals_dict = sys._getframe().f_locals
 ./extra_tests/snippets/stdlib_xdrlib.py:1:25      - Unknown word (superceeded) -- This probably will be superceeded by the python unittests
 ./extra_tests/snippets/stdlib_xdrlib.py:1:51      - Unknown word (unittests)   -- superceeded by the python unittests when that works.
@@ -408,6 +421,7 @@ Lines:
 ./stdlib/src/binascii.rs:570:8     - Unknown word (rlecode)    -- fn rlecode_hqx(s: ArgAsciiBuffer
 ./stdlib/src/binascii.rs:571:15    - Unknown word (RUNCHAR)    -- const RUNCHAR: u8 = 0x90; // b'\x
 ./stdlib/src/binascii.rs:605:8     - Unknown word (rledecode)  -- fn rledecode_hqx(s: ArgAsciiBuffer
+./stdlib/src/csv.rs:198:27    - Unknown word (nread)      -- let (res, nread, nwritten, nends) =
 ./stdlib/src/csv.rs:198:34    - Unknown word (nwritten)   -- let (res, nread, nwritten, nends) = reader.read
 ./stdlib/src/csv.rs:198:44    - Unknown word (nends)      -- res, nread, nwritten, nends) = reader.read_record
 ./stdlib/src/fcntl.rs:12:45     - Unknown word (fnctl)      -- these from <asm-generic/fnctl.h> (please file an issue
@@ -419,6 +433,7 @@ Lines:
 ./stdlib/src/fcntl.rs:17:48     - Unknown word (FLUSHBAND)  -- I_LOOK, I_FLUSH, I_FLUSHBAND, I_SETSIG, I_GETSIG
 ./stdlib/src/fcntl.rs:18:16     - Unknown word (SRDOPT)     -- // I_SRDOPT, I_GRDOPT, I_NREAD,
 ./stdlib/src/fcntl.rs:18:26     - Unknown word (GRDOPT)     -- / I_SRDOPT, I_GRDOPT, I_NREAD, I_FDINSERT
+./stdlib/src/fcntl.rs:18:36     - Unknown word (NREAD)      -- SRDOPT, I_GRDOPT, I_NREAD, I_FDINSERT, I_STR,
 ./stdlib/src/fcntl.rs:18:45     - Unknown word (FDINSERT)   -- I_GRDOPT, I_NREAD, I_FDINSERT, I_STR, I_SWROPT, I
 ./stdlib/src/fcntl.rs:18:64     - Unknown word (SWROPT)     -- I_FDINSERT, I_STR, I_SWROPT, I_GWROPT, I_SENDFD
 ./stdlib/src/fcntl.rs:18:74     - Unknown word (GWROPT)     -- I_STR, I_SWROPT, I_GWROPT, I_SENDFD,
@@ -434,6 +449,7 @@ Lines:
 ./stdlib/src/fcntl.rs:48:36     - Unknown word (GETPIPE)    -- SEALS, F_GETLEASE, F_GETPIPE_SZ, F_GET_SEALS, F_NOTIFY
 ./stdlib/src/fcntl.rs:49:40     - Unknown word (SETLEASE)   -- SHRINK, F_SEAL_WRITE, F_SETLEASE, F_SETPIPE_SZ,
 ./stdlib/src/fcntl.rs:49:52     - Unknown word (SETPIPE)    -- WRITE, F_SETLEASE, F_SETPIPE_SZ,
+./stdlib/src/gc.rs:13:8      - Unknown word (isenabled)  -- fn isenabled(_args: FuncArgs, _vm
 ./stdlib/src/gc.rs:43:12     - Unknown word (refererts)  -- fn get_refererts(_args: FuncArgs, vm
 ./stdlib/src/grp.rs:84:8      - Unknown word (getgrall)   -- fn getgrall(vm: &VirtualMachine
 ./stdlib/src/grp.rs:85:67     - Unknown word (fgetgrent)  -- thread safe. Could use fgetgrent_r, but this is easier
@@ -454,6 +470,7 @@ Lines:
 ./stdlib/src/math.rs:862:17    - Unknown word (absy)       -- let absy = y.abs();
 ./stdlib/src/mmap.rs:139:20    - Unknown word (DENYWRITE)   -- use libc::{MAP_DENYWRITE, MAP_EXECUTABLE, MAP
 ./stdlib/src/mmap.rs:157:22    - Unknown word (ALLOCATIONGRANULARITY) -- #[pyattr(name = "ALLOCATIONGRANULARITY", once)]
+./stdlib/src/mmap.rs:43:19     - Unknown word (MADV)       -- libc::MADV_DONTFORK => Advice:
 ./stdlib/src/mmap.rs:43:24     - Unknown word (DONTFORK)   -- libc::MADV_DONTFORK => Advice::DontFork
 ./stdlib/src/mmap.rs:45:24     - Unknown word (DOFORK)     -- libc::MADV_DOFORK => Advice::DoFork,
 ./stdlib/src/mmap.rs:49:24     - Unknown word (UNMERGEABLE) -- libc::MADV_UNMERGEABLE => Advice::Unmergeable
@@ -465,6 +482,7 @@ Lines:
 ./stdlib/src/mmap.rs:59:24     - Unknown word (DODUMP)      -- libc::MADV_DODUMP => Advice::DoDump,
 ./stdlib/src/mmap.rs:61:24     - Unknown word (HWPOISON)    -- libc::MADV_HWPOISON => Advice::HwPoison
 ./stdlib/src/mmap.rs:646:46    - Unknown word (rposition)             -- buf.windows(sub.len()).rposition(|window| window == sub
+./stdlib/src/posixsubprocess.rs:109:66    - Unknown word (noexec)     -- preexec, if not then have "noexec" after
 ./stdlib/src/posixsubprocess.rs:168:43    - Unknown word (SIGXFZ)     -- restore signals SIGPIPE, SIGXFZ, SIGXFSZ to SIG_DFL
 ./stdlib/src/posixsubprocess.rs:28:17     - Unknown word (preexec)    -- if args.preexec_fn.is_some() {
 ./stdlib/src/posixsubprocess.rs:31:13     - Unknown word (cstrs)      -- let cstrs_to_ptrs = |cstrs: &
@@ -479,6 +497,7 @@ Lines:
 ./stdlib/src/resource.rs:24:21     - Unknown word (OFILE)      -- // TODO: RLIMIT_OFILE,
 ./stdlib/src/resource.rs:31:72     - Unknown word (emscripten) -- android", target_os = "emscripten"))]
 ./stdlib/src/resource.rs:33:23     - Unknown word (MSGQUEUE)   -- use libc::{RLIMIT_MSGQUEUE, RLIMIT_NICE, RLIMIT
+./stdlib/src/resource.rs:33:53     - Unknown word (RTPRIO)     -- RLIMIT_NICE, RLIMIT_RTPRIO, RLIMIT_SIGPENDING}
 ./stdlib/src/resource.rs:37:22     - Unknown word (RTTIME)     -- use libc::RLIMIT_RTTIME;
 ./stdlib/src/resource.rs:43:22     - Unknown word (illumos)    -- target_os = "illumos"
 ./stdlib/src/resource.rs:46:22     - Unknown word (SBSIZE)     -- use libc::RLIMIT_SBSIZE;
@@ -489,22 +508,29 @@ Lines:
 ./stdlib/src/select.rs:178:9     - Unknown word (xlist)      -- xlist: PyObjectRef,
 ./stdlib/src/select.rs:59:24     - Unknown word (WSAFDIs)    -- use WinSock::__WSAFDIsSet;
 ./stdlib/src/socket.rs:1015:67   - Unknown word (errorfds)         -- SelectKind::Connect fills the errorfds fd_set, so if we wake
+./stdlib/src/socket.rs:113:17    - Unknown word (ATALK)            -- use c::{SOL_ATALK, SOL_AX25, SOL_IPX,
 ./stdlib/src/socket.rs:113:47    - Unknown word (NETROM)           -- SOL_AX25, SOL_IPX, SOL_NETROM, SOL_ROSE};
 ./stdlib/src/socket.rs:117:15    - Unknown word (SETFIB)           -- use c::SO_SETFIB;
 ./stdlib/src/socket.rs:122:78    - Unknown word (ISOTP)            -- FLAG, CAN_ERR_MASK, CAN_ISOTP, CAN_J1939,
 ./stdlib/src/socket.rs:1288:25   - Unknown word (subbuf)           -- let subbuf = &buf[buf_offset..
 ./stdlib/src/socket.rs:128:61    - Unknown word (ERRQUEUE)         -- DEST_NAME, SCM_J1939_ERRQUEUE, SCM_J1939_PRIO, SOL
+./stdlib/src/socket.rs:129:67    - Unknown word (PROMISC)          -- 39_FILTER, SO_J1939_PROMISC, SO_J1939_SEND_PRIO
 ./stdlib/src/socket.rs:1378:12   - Unknown word (getblocking)      -- fn getblocking(&self) -> bool {
 ./stdlib/src/socket.rs:138:20    - Unknown word (VRRP)             -- use c::IPPROTO_VRRP;
 ./stdlib/src/socket.rs:1404:25   - Unknown word (flagsize)         -- let mut flagsize = std::mem::size_of
 ./stdlib/src/socket.rs:1449:13   - Unknown word (optlen)           -- optlen: OptionalArg<u32>,
 ./stdlib/src/socket.rs:1589:25   - Unknown word (abstractpath)     -- if let Some(abstractpath) = unix_addr.as_abstract
+./stdlib/src/socket.rs:1642:9    - Unknown word (protocolname)     -- protocolname: OptionalArg<PyStrRef
+./stdlib/src/socket.rs:1651:13   - Unknown word (serv)             -- let serv = unsafe { c::getservbyname
 ./stdlib/src/socket.rs:169:54    - Unknown word (ASSOCLEN)         -- ENCRYPT, ALG_SET_AEAD_ASSOCLEN, ALG_SET_AEAD_AUTHSIZE
+./stdlib/src/socket.rs:169:77    - Unknown word (AUTHSIZE)         -- ASSOCLEN, ALG_SET_AEAD_AUTHSIZE, ALG_SET_IV,
 ./stdlib/src/socket.rs:172:85    - Unknown word (DNRTMSG)          -- NETLINK_CRYPTO, NETLINK_DNRTMSG,
+./stdlib/src/socket.rs:173:51    - Unknown word (NFLOG)            -- NETLINK_IP6_FW, NETLINK_NFLOG, NETLINK_ROUTE, NETLINK
 ./stdlib/src/socket.rs:173:81    - Unknown word (USERSOCK)         -- NETLINK_ROUTE, NETLINK_USERSOCK,
 ./stdlib/src/socket.rs:174:17    - Unknown word (XFRM)             -- NETLINK_XFRM, SOL_ALG, SO_PASSSEC
 ./stdlib/src/socket.rs:174:35    - Unknown word (PASSSEC)          -- NETLINK_XFRM, SOL_ALG, SO_PASSSEC, SO_PEERSEC,
 ./stdlib/src/socket.rs:174:47    - Unknown word (PEERSEC)          -- ALG, SO_PASSSEC, SO_PEERSEC,
+./stdlib/src/socket.rs:1835:28   - Unknown word (canonname)        -- ai.canonname,
 ./stdlib/src/socket.rs:1964:17   - Unknown word (ainfo)            -- let mut ainfo = res.next().unwrap
 ./stdlib/src/socket.rs:2071:46   - Unknown word (Luid)             -- name(&entry.InterfaceLuid).map_err(|err| err.into
 ./stdlib/src/socket.rs:2079:17   - Unknown word (luid)             -- luid: &winapi::shared::ifdef
@@ -524,6 +550,7 @@ Lines:
 ./stdlib/src/socket.rs:424:16    - Unknown word (PASSCRED)         -- use c::{SO_PASSCRED, SO_PEERCRED};
 ./stdlib/src/socket.rs:43:16     - Unknown word (EXCLUSIVEADDRUSE) -- SO_EXCLUSIVEADDRUSE,
 ./stdlib/src/socket.rs:444:15    - Unknown word (RECVTOS)          -- use c::IP_RECVTOS;
+./stdlib/src/socket.rs:542:22    - Unknown word (CLOEXEC)          -- use c::{MSG_CMSG_CLOEXEC, MSG_NOSIGNAL};
 ./stdlib/src/socket.rs:62:69     - Unknown word (RCVALL)           -- NUMERICHOST, NI_NUMERICSERV, RCVALL_IPLEVEL, RCVALL_OFF
 ./stdlib/src/socket.rs:62:76     - Unknown word (IPLEVEL)          -- NUMERICSERV, RCVALL_IPLEVEL, RCVALL_OFF,
 ./stdlib/src/socket.rs:63:31     - Unknown word (SOCKETLEVELONLY)  -- RCVALL_ON, RCVALL_SOCKETLEVELONLY, SD_BOTH as SHUT_RDWR
@@ -531,11 +558,14 @@ Lines:
 ./stdlib/src/socket.rs:67:13     - Unknown word (WSAEBADF)         -- WSAEBADF, WSAECONNRESET, WSAENOTSOCK
 ./stdlib/src/socket.rs:690:30    - Unknown word (ICLFXBM)          -- IPPROTO_CBT, IPPROTO_ICLFXBM, IPPROTO_IGP, IPPROTO
 ./stdlib/src/socket.rs:968:88    - Unknown word (scopeid)          -- host, port[, flowinfo[, scopeid]])"
+./stdlib/src/ssl.rs:1293:44   - Unknown word (dnsname)    -- } else if let Some(dnsname) = gen_name.dnsname
 ./stdlib/src/ssl.rs:1358:63   - Unknown word (cacerts)    -- system/etc/security/cacerts";
 ./stdlib/src/ssl.rs:222:22    - Unknown word (SSLEOF)     -- #[pyattr(name = "SSLEOFError", once)]
 ./stdlib/src/ssl.rs:461:43    - Unknown word (SSLV)       -- options |= SslOptions::NO_SSLV2;
 ./stdlib/src/ssl.rs:521:31    - Unknown word (cipherlist) -- fn set_ciphers(&self, cipherlist: PyStrRef, vm: &VirtualMachin
+./stdlib/src/ssl.rs:615:83    - Unknown word (NOACK)      -- ok_or(ssl::AlpnError::NOACK)
 ./stdlib/src/ssl.rs:633:76    - Unknown word (cadata)     -- &args.capath, &args.cadata) {
+./stdlib/src/ssl.rs:716:17    - Unknown word (certfile)   -- certfile,
 ./stdlib/src/ssl.rs:72:33     - Unknown word (ECDH)       -- ifdef SSL_OP_SINGLE_ECDH_USE
 ./stdlib/src/syslog.rs:132:19    - Unknown word (maskpri)    -- fn setlogmask(maskpri: i32) -> i32 {
 ./stdlib/src/termios.rs:106:18    - Unknown word (CBAUDEX)         -- B576000, CBAUDEX,
@@ -579,6 +609,7 @@ Lines:
 ./stdlib/src/termios.rs:65:62     - Unknown word (TIOCLINUX)       -- TIOCGSOFTCAR, TIOCINQ, TIOCLINUX, TIOCSSOFTCAR, XTABS
 ./stdlib/src/termios.rs:65:73     - Unknown word (TIOCSSOFTCAR)    -- TIOCINQ, TIOCLINUX, TIOCSSOFTCAR, XTABS,
 ./stdlib/src/termios.rs:65:9      - Unknown word (TCSETSW)         -- TCSETSW, TCXONC, TIOCGSERIAL
+./vm/Cargo.toml:108:5     - Unknown word (cpus)       -- num_cpus = "1.13.1"
 ./vm/Cargo.toml:47:43     - Unknown word (wasmbind)   -- true, features = ["wasmbind"] }
 ./vm/Cargo.toml:70:1      - Unknown word (caseless)   -- caseless = "0.2.1"
 ./vm/Cargo.toml:71:1      - Unknown word (getrandom)  -- getrandom = { version = "0.2.
@@ -625,18 +656,21 @@ Lines:
 ./vm/src/builtins/memory.rs:724:8     - Unknown word (toreadonly)  -- fn toreadonly(&self, vm: &VirtualMachine
 ./vm/src/builtins/module.rs:125:73    - Unknown word (dictoffsets)  -- dict method above once dictoffsets land
 ./vm/src/builtins/module.rs:20:18     - Unknown word (traverseproc) -- // traverse: traverseproc
+./vm/src/builtins/module.rs:22:14     - Unknown word (freefunc)     -- // free: freefunc
 ./vm/src/builtins/module.rs:51:8      - Unknown word (weaklist)     -- // weaklist
 ./vm/src/builtins/range.rs:525:35    - Unknown word (longrange)  -- module = false, name = "longrange_iterator")]
 ./vm/src/builtins/slice.rs:204:15    - Unknown word (XXPRIME)    -- const XXPRIME_1: PyUHash = if cfg
-./vm/src/builtins/str.rs:1616:21   - Unknown word (Ωppercases) -- ("Greek Ωppercases ...", "greek ωppercases
-./vm/src/builtins/str.rs:1616:45   - Unknown word (ωppercases) -- ppercases ...", "greek ωppercases ..."),
-./vm/src/builtins/str.rs:1617:21   - Unknown word (ῼitlecases) -- ("Greek ῼitlecases ...", "greek ῳitlecases
-./vm/src/builtins/str.rs:1617:45   - Unknown word (ῳitlecases) -- itlecases ...", "greek ῳitlecases ..."),
-./vm/src/builtins/str.rs:1628:16   - Unknown word (Titlecased) -- "A Titlecased Line",
-./vm/src/builtins/str.rs:1644:21   - Unknown word (Titlecase)  -- "Not\ta Titlecase String",
-./vm/src/builtins/str.rs:1777:33   - Unknown word (rmatch)     -- (offset, _) in self.rmatch_indices(|c: char| c
+./vm/src/builtins/str.rs:1616:21   - Unknown word (Ωppercases)   -- ("Greek Ωppercases ...", "greek ωppercases
+./vm/src/builtins/str.rs:1616:45   - Unknown word (ωppercases)   -- ppercases ...", "greek ωppercases ..."),
+./vm/src/builtins/str.rs:1617:21   - Unknown word (ῼitlecases)   -- ("Greek ῼitlecases ...", "greek ῳitlecases
+./vm/src/builtins/str.rs:1617:45   - Unknown word (ῳitlecases)   -- itlecases ...", "greek ῳitlecases ..."),
+./vm/src/builtins/str.rs:1628:16   - Unknown word (Titlecased)   -- "A Titlecased Line",
+./vm/src/builtins/str.rs:1644:21   - Unknown word (Titlecase)    -- "Not\ta Titlecase String",
+./vm/src/builtins/str.rs:1777:33   - Unknown word (rmatch)       -- (offset, _) in self.rmatch_indices(|c: char| c
+./vm/src/builtins/str.rs:459:48    - Unknown word (cmpxchg)    -- len, we don't need a cmpxchg loop, since it'll always
 ./vm/src/builtins/str.rs:780:18    - Unknown word (titlecased) -- /// Return a titlecased version of the string
 ./vm/src/builtins/str.rs:789:39    - Unknown word (titlecase)  -- title.extend(c.to_titlecase());
+./vm/src/builtins/str.rs:849:27    - Unknown word (Nonprintable) -- / false otherwise.  Nonprintable characters are those
 ./vm/src/builtins/super.rs:272:26    - Unknown word (cmeth)      -- def cmeth(cls, arg):\n
 ./vm/src/builtins/super.rs:32:28     - Unknown word (supercheck) -- let obj_type = supercheck(typ.clone(), obj.clone
 ./vm/src/builtins/tuple.rs:307:39    - Unknown word (tuplesubclass) -- just return tup, or tuplesubclass(tup), which'll copy
@@ -666,7 +700,9 @@ Lines:
 ./vm/src/function/argument.rs:120:13    - Unknown word (kwargc)     -- let kwargc = kwarg_names.len()
 ./vm/src/function/argument.rs:121:13    - Unknown word (posargc)    -- let posargc = total_argc - kwargc
 ./vm/src/function/argument.rs:123:13    - Unknown word (posargs)    -- let posargs = args.by_ref().take
+./vm/src/function/argument.rs:207:46    - Unknown word (arity)      -- e.into_exception(T::arity(), given_args, vm))
 ./vm/src/function/argument.rs:274:53    - Unknown word (keyqord)    -- error(format!("Required keyqord only argument {name
+./vm/src/function/builtin.rs:212:28    - Unknown word (noalloc)    -- test_into_native_fn_noalloc() {
 ./vm/src/function/builtin.rs:62:26     - Unknown word (sizedness)  -- requirements of zero-sizedness apply, see that documentation
 ./vm/src/function/fspath.rs:97:15     - Unknown word (widecstring) -- pub fn to_widecstring(&self, vm: &VirtualMachine
 ./vm/src/function/getset.rs:138:13    - Unknown word (noresult)   -- fn into_noresult(self) -> PyResult<(
@@ -783,9 +819,11 @@ Lines:
 ./vm/src/stdlib/io.rs:2041:11   - Unknown word (cratio)        -- b2cratio: f64,
 ./vm/src/stdlib/io.rs:2229:21   - Unknown word (encodefunc)    -- let encodefunc = encoding_name.and
 ./vm/src/stdlib/io.rs:2506:21   - Unknown word (ndecoded)      -- let ndecoded = decoder_decode(input
+./vm/src/stdlib/io.rs:3338:12   - Unknown word (getbuffer)     -- fn getbuffer(self, vm: &VirtualMachine
 ./vm/src/stdlib/io.rs:3437:12   - Unknown word (rawmode)       -- fn rawmode(&self) -> &'static str
 ./vm/src/stdlib/io.rs:3816:47   - Unknown word (NOINHERIT)     -- :O_BINARY | libc::O_NOINHERIT;
 ./vm/src/stdlib/io.rs:57:35     - Unknown word (unsupportedop) -- or_init(|| _io::make_unsupportedop(ctx))
+./vm/src/stdlib/io.rs:613:44    - Unknown word (readall)       -- call_method(&instance, "readall", ())
 ./vm/src/stdlib/io.rs:664:13    - Unknown word (bufobj)        -- bufobj: PyObjectRef,
 ./vm/src/stdlib/io.rs:919:21    - Unknown word (memobj)        -- let memobj = PyMemoryView::from
 ./vm/src/stdlib/io.rs:925:21    - Unknown word (writebuf)      -- let writebuf = VecBuffer::from(v
@@ -803,6 +841,7 @@ Lines:
 ./vm/src/stdlib/msvcrt.rs:31:13     - Unknown word (getwche)                -- fn _getwche() -> u32;
 ./vm/src/stdlib/msvcrt.rs:32:13     - Unknown word (putch)                  -- fn _putch(c: u32) -> i32;
 ./vm/src/stdlib/msvcrt.rs:33:13     - Unknown word (putwch)                 -- fn _putwch(c: u16) -> u32;
+./vm/src/stdlib/msvcrt.rs:88:18     - Unknown word (osfhandle)              -- fn _open_osfhandle(osfhandle: isize, flags
 ./vm/src/stdlib/nt.rs:115:8     - Unknown word (cwait)      -- // cwait is available on MSVC
 ./vm/src/stdlib/nt.rs:118:19    - Unknown word (termstat)   -- fn _cwait(termstat: *mut i32, procHandle
 ./vm/src/stdlib/nt.rs:166:17    - Unknown word (stdhandle)  -- let stdhandle = match fd {
@@ -819,9 +858,11 @@ Lines:
 ./vm/src/stdlib/nt.rs:337:9     - Unknown word (getdiskusage)      -- fn _getdiskusage(path: OsPath, vm: &VirtualMac
 ./vm/src/stdlib/operator.rs:392:17    - Unknown word (nattr)      -- let nattr = args.args.len();
 ./vm/src/stdlib/operator.rs:535:25    - Unknown word (pargs)      -- let mut pargs = vec![zelf.name.as
+./vm/src/stdlib/os.rs:1036:44   - Unknown word (xstat)          -- replicate CPython's win32_xstat
 ./vm/src/stdlib/os.rs:1128:8    - Unknown word (getcwdb)        -- fn getcwdb(vm: &VirtualMachine
 ./vm/src/stdlib/os.rs:1258:19   - Unknown word (modif)          -- let (acc, modif) = match (args.times
 ./vm/src/stdlib/os.rs:1327:27   - Unknown word (utimensat)      -- libc::utimensat(
+./vm/src/stdlib/os.rs:189:13    - Unknown word (excp)       -- let excp = self.error.into_pyexception
 ./vm/src/stdlib/os.rs:354:8     - Unknown word (closerange) -- fn closerange(fd_low: i32, fd_high
 ./vm/src/stdlib/os.rs:482:8     - Unknown word (mkdirs)     -- fn mkdirs(path: PyStrRef, vm:
 ./vm/src/stdlib/os.rs:493:11    - Unknown word (LISTDIR)    -- const LISTDIR_FD: bool = cfg!(all
@@ -829,12 +870,36 @@ Lines:
 ./vm/src/stdlib/os.rs:606:9     - Unknown word (pathval)    -- pathval: PathBuf,
 ./vm/src/stdlib/os.rs:792:17    - Unknown word (entryref)   -- let entryref: &mut Option<fs::ReadDir
 ./vm/src/stdlib/os.rs:872:26    - Unknown word (structsequence) -- // TODO: unnamed structsequence fields
+./vm/src/stdlib/os.rs:912:34    - Unknown word (atim)           -- atime = (stat.st_atim.tv_sec, stat.st_atim
+./vm/src/stdlib/os.rs:913:34    - Unknown word (mtim)           -- mtime = (stat.st_mtim.tv_sec, stat.st_mtim
 ./vm/src/stdlib/os.rs:914:34    - Unknown word (ctim)           -- ctime = (stat.st_ctim.tv_sec, stat.st_ctim
 ./vm/src/stdlib/os.rs:990:33    - Unknown word (fileutils)      -- // Based on CPython fileutils.c' attributes_to_mode
 ./vm/src/stdlib/os.rs:993:48    - Unknown word (IFEXEC)         -- S_IFDIR | 0o111; /* IFEXEC for user,group,other
-./vm/src/stdlib/posix.rs:1465:21   - Unknown word (attrp)      -- let mut attrp = unsafe {
-./vm/src/stdlib/posix.rs:1605:34   - Unknown word (winsz)      -- nix::ioctl_read_bad!(winsz, libc::TIOCGWINSZ, libc
+./vm/src/stdlib/posix.rs:102:36    - Unknown word (IOERR)      -- IOERR: i8 = exitcode::IOERR as i8;
+./vm/src/stdlib/posix.rs:104:39    - Unknown word (TEMPFAIL)   -- TEMPFAIL: i8 = exitcode::TEMPFAIL as i8;
+./vm/src/stdlib/posix.rs:108:37    - Unknown word (NOPERM)     -- NOPERM: i8 = exitcode::NOPERM as i8;
+./vm/src/stdlib/posix.rs:1242:8    - Unknown word (getresuid)    -- fn getresuid(vm: &VirtualMachine
+./vm/src/stdlib/posix.rs:1254:8    - Unknown word (getresgid)    -- fn getresgid(vm: &VirtualMachine
+./vm/src/stdlib/posix.rs:1271:8    - Unknown word (setresgid)    -- fn setresgid(
+./vm/src/stdlib/posix.rs:1274:9    - Unknown word (sgid)         -- sgid: Option<Gid>,
+./vm/src/stdlib/posix.rs:1320:13   - Unknown word (gids)         -- let gids = group_ids
+./vm/src/stdlib/posix.rs:1385:9    - Unknown word (setsigdef)    -- setsigdef: Option<crate::function
+./vm/src/stdlib/posix.rs:1399:24   - Unknown word (spawnp)       -- fn spawn(self, spawnp: bool, vm: &VirtualMachine
+./vm/src/stdlib/posix.rs:1465:21   - Unknown word (attrp)        -- let mut attrp = unsafe {
+./vm/src/stdlib/posix.rs:1605:34   - Unknown word (winsz)        -- nix::ioctl_read_bad!(winsz, libc::TIOCGWINSZ, libc
+./vm/src/stdlib/posix.rs:1619:13   - Unknown word (libstd)       -- // from libstd:
+./vm/src/stdlib/posix.rs:1811:12   - Unknown word (FILESIZEBITS) -- PC_FILESIZEBITS = libc::_PC_FILESIZEBITS
+./vm/src/stdlib/posix.rs:570:27    - Unknown word (mknodat)    -- libc::mknodat(
+./vm/src/stdlib/posix.rs:717:14    - Unknown word (getscheduler) -- fn sched_getscheduler(pid: libc::pid_t, vm
+./vm/src/stdlib/posix.rs:733:17    - Unknown word (Setscheduler) -- struct SchedSetschedulerArgs {
+./vm/src/stdlib/posix.rs:750:14    - Unknown word (setscheduler) -- fn sched_setscheduler(args: SchedSetschedulerArgs
+./vm/src/stdlib/posix.rs:766:14    - Unknown word (getparam)     -- fn sched_getparam(pid: libc::pid_t, vm
 ./vm/src/stdlib/posix.rs:77:16     - Unknown word (GRND)       -- use libc::{GRND_NONBLOCK, GRND_RANDOM
+./vm/src/stdlib/posix.rs:801:14    - Unknown word (setparam)     -- fn sched_setparam(args: SchedSetParamArgs
+./vm/src/stdlib/posix.rs:84:38     - Unknown word (DATAERR)    -- DATAERR: i8 = exitcode::DATAERR as i8;
+./vm/src/stdlib/posix.rs:96:36     - Unknown word (OSERR)      -- OSERR: i8 = exitcode::OSERR as i8;
+./vm/src/stdlib/posix.rs:98:37     - Unknown word (OSFILE)     -- OSFILE: i8 = exitcode::OSFILE as i8;
+./vm/src/stdlib/posix_compat.rs:21:12     - Unknown word (unimpl)     -- os_unimpl("os.access", vm)
 ./vm/src/stdlib/pwd.rs:37:17     - Unknown word (pathbuf)    -- let pathbuf_lossy = |p: std::path
 ./vm/src/stdlib/pwd.rs:94:67     - Unknown word (fgetpwent)  -- thread safe. Could use fgetpwent_r, but this is easier
 ./vm/src/stdlib/pwd.rs:95:16     - Unknown word (GETPWALL)   -- static GETPWALL: parking_lot::Mutex
@@ -890,7 +955,9 @@ Lines:
 ./vm/src/stdlib/sys.rs:891:36    - Unknown word (RELEASELEVEL)       -- releaselevel: version::RELEASELEVEL,
 ./vm/src/stdlib/sys.rs:98:33     - Unknown word (BASEPREFIX) -- option_env!("RUSTPYTHON_BASEPREFIX").unwrap_or_else(||
 ./vm/src/stdlib/sysconfigdata.rs:20:19     - Unknown word (GETRANDOM)  -- "HAVE_GETRANDOM" => 1,
+./vm/src/stdlib/thread.rs:142:21    - Unknown word (reinit)     -- fn _at_fork_reinit(&self, _vm: &VirtualMachine
 ./vm/src/stdlib/thread.rs:337:25    - Unknown word (sents)      -- SENTINELS.with(|sents| {
+./vm/src/stdlib/time.rs:120:21    - Unknown word (nsecs)      -- let nsecs = (float.fract() *
 ./vm/src/stdlib/time.rs:17:19     - Unknown word (Timelike)   -- Datelike, Timelike,
 ./vm/src/stdlib/time.rs:17:9      - Unknown word (Datelike)   -- Datelike, Timelike,
 ./vm/src/stdlib/time.rs:181:11    - Unknown word (CFMT)       -- const CFMT: &str = "%a %b %e %H
@@ -901,6 +968,7 @@ Lines:
 ./vm/src/stdlib/winapi.rs:164:60    - Unknown word (STARTUPINFOEXW) -- :System::Threading::STARTUPINFOEXW =
 ./vm/src/stdlib/winapi.rs:192:22    - Unknown word (getenvironment) -- .map(|m| getenvironment(m, vm))
 ./vm/src/stdlib/winapi.rs:197:13    - Unknown word (getattributelist) -- getattributelist(args.startup_info.get
+./vm/src/stdlib/winapi.rs:221:13    - Unknown word (procinfo)         -- let procinfo = unsafe {
 ./vm/src/stdlib/winapi.rs:230:71    - Unknown word (STARTUPINFO)      -- Threading::EXTENDED_STARTUPINFO_PRESENT
 ./vm/src/stdlib/winapi.rs:284:9     - Unknown word (handlelist)       -- handlelist: Option<Vec<usize>>
 ./vm/src/stdlib/winapi.rs:41:30     - Unknown word (WRITECOPY)  -- PAGE_EXECUTE_WRITECOPY, PAGE_GUARD, PAGE_NOACCESS
@@ -918,6 +986,7 @@ Lines:
 ./vm/src/vm/mod.rs:226:17    - Unknown word (rustpythonpath) -- let rustpythonpath_env = std::env::var
 ./vm/src/vm/mod.rs:594:29    - Unknown word (pyiter)         -- return self.map_pyiter(value, func);
 ./vm/src/vm/setting.rs:46:10     - Unknown word (Xfoo)       -- /// -Xfoo[=bar]
+./vm/src/vm/setting.rs:55:10     - Unknown word (Xdev)       -- /// -Xdev
 ./vm/src/vm/setting.rs:61:10     - Unknown word (Wfoo)       -- /// -Wfoo
 ./vm/src/vm/thread.rs:38:24     - Unknown word (intp)       -- let vm_owns_obj = |intp: NonNull<VirtualMachine
 ./vm/src/vm/vm_new.rs:173:28    - Unknown word (ternop)     -- pub fn new_unsupported_ternop_error(
