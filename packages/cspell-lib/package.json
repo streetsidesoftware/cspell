@@ -32,7 +32,7 @@
     "coverage": "vitest run --coverage",
     "test-watch": "vitest",
     "prepublishOnly": "pnpm run clean-build",
-    "test": "vitest run",
+    "test": "vitest run --reporter=hanging-process --reporter=default",
     "test:update-snapshot": "vitest run -u"
   },
   "repository": {
