@@ -32,6 +32,7 @@
     "coverage": "vitest run --coverage",
     "test-watch": "vitest",
     "prepublishOnly": "pnpm run clean-build",
+    "#test": "vitest run --reporter=hanging-process --reporter=default",
     "test": "vitest run",
     "test:update-snapshot": "vitest run -u"
   },
@@ -93,6 +94,7 @@
     "@cspell/dict-python": "^4.1.11",
     "@types/configstore": "^6.0.2",
     "cspell-dict-nl-nl": "^1.1.2",
+    "leaked-handles": "^5.2.0",
     "lorem-ipsum": "^2.0.8"
   }
 }
