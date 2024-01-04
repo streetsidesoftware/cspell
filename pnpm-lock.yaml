@@ -661,6 +661,9 @@ importers:
       cspell-dict-nl-nl:
         specifier: ^1.1.2
         version: 1.1.2
+      leaked-handles:
+        specifier: ^5.2.0
+        version: 5.2.0
       lorem-ipsum:
         specifier: ^2.0.8
         version: 2.0.8
@@ -10843,6 +10846,14 @@ packages:
       picocolors: 1.0.0
       shell-quote: 1.8.1
 
+  /leaked-handles@5.2.0:
+    resolution: {integrity: sha512-H96tZP5iXGw/t34Hhb8+ttcPXb/w1y5d3T4DTb81021UNI6LbtxylQBtiOuUwCiPbnKggykEmHc38hX+E41eag==}
+    dependencies:
+      process: 0.10.1
+      weakmap-shim: 1.1.1
+      xtend: 4.0.2
+    dev: true
+
   /leven@3.1.0:
     resolution: {integrity: sha512-qsda+H8jTaUaN/x5vzW2rzc+8Rw4TAQ/4KjB46IwK5VH+IlVeeeje/EoZRpiXvIqjFgK84QffqPztGI3VBLG1A==}
     engines: {node: '>=6'}
@@ -13455,6 +13466,11 @@ packages:
       fromentries: 1.3.2
     dev: true
 
+  /process@0.10.1:
+    resolution: {integrity: sha512-dyIett8dgGIZ/TXKUzeYExt7WA6ldDzys9vTDU/cCA9L17Ypme+KzS+NjQCjpn9xsvi/shbMC+yP/BcFMBz0NA==}
+    engines: {node: '>= 0.6.0'}
+    dev: true
+
   /process@0.11.10:
     resolution: {integrity: sha512-cdGef/drWFoydD1JsMzuFf8100nZl+GT+yacc2bEced5f9Rjk4z+WtFUTBu9PhOi9j/jfmBPu0mMEY4wIdAF8A==}
     engines: {node: '>= 0.6.0'}
@@ -15886,6 +15902,10 @@ packages:
       defaults: 1.0.4
     dev: true
 
+  /weakmap-shim@1.1.1:
+    resolution: {integrity: sha512-/wNyG+1FpiHhnfQo+TuA/XAUpvOOkKVl0A4qpT+oGcj5SlZCLmM+M1Py/3Sj8sy+YrEauCVITOxCsZKo6sPbQg==}
+    dev: true
+
   /web-namespaces@2.0.1:
     resolution: {integrity: sha512-bKr1DkiNa2krS7qxNtdrtHAmzuYGFQLiQ13TsorsdT6ULTkPLKuu5+GsFpDlg6JFjUTwX2DyhMPG2be8uPrqsQ==}
 
@@ -16302,6 +16322,11 @@ packages:
     hasBin: true
     dependencies:
       sax: 1.3.0
+
+  /xtend@4.0.2:
+    resolution: {integrity: sha512-LKYU1iAXJXUgAXn9URjiu+MWhyUXHsvfp7mcuYm9dSUKK0/CjtrUwFAxD82/mCWbtLsGjFIad0wIsod4zrTAEQ==}
+    engines: {node: '>=0.4'}
+    dev: true
 
   /y18n@4.0.3:
     resolution: {integrity: sha512-JKhqTOwSrqNA1NY5lSztJ1GrBiUodLMmIZuLiDaMRJ+itFd+ABVE8XBjOvIWL+rSqNDC74LCSFmlb/U4UZ4hJQ==}

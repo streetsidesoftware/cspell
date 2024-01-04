@@ -2,6 +2,7 @@ import { parse } from 'comment-json';
 import type { VFileSystemProvider } from 'cspell-io';
 import { createRedirectProvider, createVirtualFS } from 'cspell-io';
 import * as fs from 'fs';
+import leakedHandles from 'leaked-handles';
 import * as os from 'os';
 import * as path from 'path';
 import { fileURLToPath, pathToFileURL } from 'url';
@@ -34,6 +35,8 @@ const rr = {
 
 const oc = expect.objectContaining;
 const sm = expect.stringMatching;
+
+leakedHandles.set({ fullStack: true });
 
 describe('Validate resolveFile', () => {
     const redirects: [VFileSystemProvider, ...VFileSystemProvider[]] = [
