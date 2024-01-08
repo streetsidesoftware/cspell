@@ -3,7 +3,7 @@ Repository: django/django
 Url: "https://github.com/django/django.git"
 Args: ["**/*.{md,py}"]
 Lines:
- CSpell: Files checked: 2772, Issues found: 8111 in 922 files
+ CSpell: Files checked: 2772, Issues found: 8113 in 923 files
  exit code: 1
 ./django/__init__.py:12:26     - Unknown word (urlresolvers) -- Set the thread-local urlresolvers script prefix if `set
 ./django/apps/registry.py:134:40    - Unknown word (unconfigured) -- not ready" is due to unconfigured settings, accessing
@@ -212,10 +212,10 @@ Lines:
 ./django/contrib/gis/db/backends/spatialite/base.py:27:45     - Unknown word (SPATIALITE)    -- the settings via the `SPATIALITE_LIBRARY_PATH` setting
 ./django/contrib/gis/db/backends/spatialite/features.py:22:32     - Unknown word (geogapp)    -- "gis_tests.geogapp.tests.GeographyTest
 ./django/contrib/gis/db/backends/spatialite/introspection.py:49:35     - Unknown word (SFSQL)      -- # SpatiaLite uses SFSQL 1.2 offsets 1000 (Z
-./django/contrib/gis/db/backends/spatialite/operations.py:167:9     - Unknown word (lwgeom)     -- def lwgeom_version(self):
-./django/contrib/gis/db/backends/spatialite/operations.py:168:34    - Unknown word (LWGEOM)     -- Return the version of LWGEOM library used by SpatiaLite
-./django/contrib/gis/db/backends/spatialite/operations.py:171:9     - Unknown word (rttopo)     -- def rttopo_version(self):
-./django/contrib/gis/db/backends/spatialite/operations.py:172:34    - Unknown word (RTTOPO)     -- Return the version of RTTOPO library used by SpatiaLite
+./django/contrib/gis/db/backends/spatialite/operations.py:170:9     - Unknown word (lwgeom)     -- def lwgeom_version(self):
+./django/contrib/gis/db/backends/spatialite/operations.py:171:34    - Unknown word (LWGEOM)     -- Return the version of LWGEOM library used by SpatiaLite
+./django/contrib/gis/db/backends/spatialite/operations.py:174:9     - Unknown word (rttopo)     -- def rttopo_version(self):
+./django/contrib/gis/db/backends/spatialite/operations.py:175:34    - Unknown word (RTTOPO)     -- Return the version of RTTOPO library used by SpatiaLite
 ./django/contrib/gis/db/models/aggregates.py:42:27     - Unknown word (SDOAGGRTYPE) -- function="SDOAGGRTYPE",
 ./django/contrib/gis/db/models/aggregates.py:59:22     - Unknown word (Geospatial)  -- "Geospatial aggregates only allowed
 ./django/contrib/gis/db/models/functions.py:226:31    - Unknown word (GMLGEOMETRY) -- else "SDO_UTIL.TO_GMLGEOMETRY"
@@ -281,7 +281,7 @@ Lines:
 ./django/contrib/gis/gdal/srs.py:14:7      - Unknown word (PRIMEM)     -- PRIMEM["Greenwich",0,
 ./django/contrib/gis/gdal/srs.py:8:3       - Unknown word (GEOGCS)     -- GEOGCS["WGS 84",
 ./django/contrib/gis/geoip2.py:11:23     - Unknown word (mmdb)       -- Grab GeoLite2-Country.mmdb.gz and GeoLite2-City
-./django/contrib/gis/geoip2.py:231:28    - Unknown word (djangoproject) -- '24.124.1.80' and 'djangoproject.com' are valid parameters
+./django/contrib/gis/geoip2.py:232:28    - Unknown word (djangoproject) -- '24.124.1.80' and 'djangoproject.com' are valid parameters
 ./django/contrib/gis/geometry.py:13:55     - Unknown word (CIRCULARSTRING) -- LTIPOLYGON|GEOMETRYCOLLECTION|CIRCULARSTRING|COMPOUNDCURVE|"
 ./django/contrib/gis/geometry.py:13:70     - Unknown word (COMPOUNDCURVE)  -- ETRYCOLLECTION|CIRCULARSTRING|COMPOUNDCURVE|"
 ./django/contrib/gis/geometry.py:14:20     - Unknown word (MULTICURVE)     -- r"CURVEPOLYGON|MULTICURVE|MULTISURFACE|CURVE|SURFACE
@@ -519,8 +519,8 @@ Lines:
 ./django/db/backends/oracle/base.py:74:61     - Unknown word (DJANGOTEST) -- integrity constraint (TEST_DJANGOTEST.SYS
 ./django/db/backends/oracle/client.py:8:21      - Unknown word (rlwrap)     -- wrapper_name = "rlwrap"
 ./django/db/backends/oracle/creation.py:307:37    - Unknown word (DATAFILES)  -- INCLUDING CONTENTS AND DATAFILES CASCADE CONSTRAINTS
-./django/db/backends/oracle/features.py:119:72    - Unknown word (textlink)    -- GenericRelationTests.test_textlink_filter",
-./django/db/backends/oracle/features.py:43:15     - Unknown word (uppercasing) -- # does by uppercasing all identifiers.
+./django/db/backends/oracle/features.py:121:72    - Unknown word (textlink)    -- GenericRelationTests.test_textlink_filter",
+./django/db/backends/oracle/features.py:45:15     - Unknown word (uppercasing) -- # does by uppercasing all identifiers.
 ./django/db/backends/oracle/functions.py:20:17     - Unknown word (NUMTODSINTERVAL) -- function = "NUMTODSINTERVAL"
 ./django/db/backends/oracle/introspection.py:180:37    - Unknown word (ROWNUM)     -- SELECT * FROM {} WHERE ROWNUM < 2 AND {} > 0".format
 ./django/db/backends/oracle/introspection.py:309:17    - Unknown word (LISTAGG)    -- LISTAGG(LOWER(cols.column_name
@@ -631,9 +631,9 @@ Lines:
 ./django/db/migrations/serializer.py:191:51    - Unknown word (Qualname)        -- value.__qualname__: # Qualname can include <locals
 ./django/db/migrations/serializer.py:264:24    - Unknown word (fspath)          -- return repr(os.fspath(self.value)), {}
 ./django/db/migrations/serializer.py:95:7      - Unknown word (Deconstructable) -- class DeconstructableSerializer(BaseSerializer
-./django/db/models/base.py:1046:19   - Unknown word (autopopulate)  -- # autopopulate the _order field
-./django/db/models/base.py:114:9     - Unknown word (contributable) -- contributable_attrs = {}
-./django/db/models/base.py:684:40    - Unknown word (attnames)      -- an iterable of field attnames. If fields is None,
+./django/db/models/base.py:1105:19   - Unknown word (autopopulate)  -- # autopopulate the _order field
+./django/db/models/base.py:115:9     - Unknown word (contributable) -- contributable_attrs = {}
+./django/db/models/base.py:685:40    - Unknown word (attnames)      -- an iterable of field attnames. If fields is None,
 ./django/db/models/enums.py:32:17     - Unknown word (metacls)    -- def __new__(metacls, classname, bases, classdict
 ./django/db/models/expressions.py:278:47    - Unknown word (multijoins) -- of reusable joins for multijoins
 ./django/db/models/fields/__init__.py:2857:11   - Unknown word (subclasscheck) -- def __subclasscheck__(self, subclass):
@@ -649,7 +649,7 @@ Lines:
 ./django/db/models/functions/datetime.py:241:45    - Unknown word (LOCALTIMESTAMP) -- connection, template="LOCALTIMESTAMP", **extra_context
 ./django/db/models/functions/text.py:24:24     - Unknown word (RAWTOHEX)   -- "LOWER(RAWTOHEX(STANDARD_HASH(UTL_I
 ./django/db/models/functions/text.py:31:7      - Unknown word (Postgre)    -- class PostgreSQLSHAMixin:
-./django/db/models/functions/text.py:338:63    - Unknown word (STRPOS)     -- connection, function="STRPOS", **extra_context)
+./django/db/models/functions/text.py:339:63    - Unknown word (STRPOS)     -- connection, function="STRPOS", **extra_context)
 ./django/db/models/functions/window.py:20:17     - Unknown word (CUME)       -- function = "CUME_DIST"
 ./django/db/models/lookups.py:366:18    - Unknown word (boolfield)  -- # turns "boolfield__exact=True" into "WHERE
 ./django/db/models/lookups.py:560:30    - Unknown word (thevalue)   -- col LIKE %s, ['thevalue%']
@@ -1367,11 +1367,11 @@ Lines:
 ./tests/async/test_async_queryset.py:257:44    - Unknown word (simplemodel)  -- id, field FROM async_simplemodel WHERE created=%s"
 ./tests/async/test_async_queryset.py:56:23     - Unknown word (relatedmodel) -- Prefetch("relatedmodel_set", to_attr="prefetched
 ./tests/auth_tests/models/proxy.py:12:34     - Unknown word (proxys)     -- permissions = (("display_proxys", "May display proxys
-./tests/auth_tests/test_auth_backends.py:176:12    - Unknown word (Regressiontest) -- """Regressiontest for #12462"""
-./tests/auth_tests/test_auth_backends.py:735:36    - Unknown word (mypassword)     -- sensitive_password = "mypassword"
-./tests/auth_tests/test_auth_backends.py:750:36    - Unknown word (testusername)   -- authenticate(username="testusername", password=self.sensitive
-./tests/auth_tests/test_auth_backends.py:840:41    - Unknown word (thismodel)      -- settings(AUTH_USER_MODEL="thismodel.doesntexist")
-./tests/auth_tests/test_auth_backends.py:840:51    - Unknown word (doesntexist)    -- USER_MODEL="thismodel.doesntexist")
+./tests/auth_tests/test_auth_backends.py:178:12    - Unknown word (Regressiontest) -- """Regressiontest for #12462"""
+./tests/auth_tests/test_auth_backends.py:737:36    - Unknown word (mypassword)     -- sensitive_password = "mypassword"
+./tests/auth_tests/test_auth_backends.py:752:36    - Unknown word (testusername)   -- authenticate(username="testusername", password=self.sensitive
+./tests/auth_tests/test_auth_backends.py:842:41    - Unknown word (thismodel)      -- settings(AUTH_USER_MODEL="thismodel.doesntexist")
+./tests/auth_tests/test_auth_backends.py:842:51    - Unknown word (doesntexist)    -- USER_MODEL="thismodel.doesntexist")
 ./tests/auth_tests/test_basic.py:100:41    - Unknown word (badsetting) -- settings(AUTH_USER_MODEL="badsetting")
 ./tests/auth_tests/test_basic.py:123:56    - Unknown word (usuario)    -- meta.verbose_name, "usuario")
 ./tests/auth_tests/test_basic.py:124:63    - Unknown word (usuarios)   -- verbose_name_plural, "usuarios")
@@ -1426,10 +1426,10 @@ Lines:
 ./tests/auth_tests/test_models.py:596:51    - Unknown word (customemailfield) -- objects.get(codename="view_customemailfield")
 ./tests/auth_tests/test_models.py:63:24     - Unknown word (examplemodela) -- model="examplemodela",
 ./tests/auth_tests/test_models.py:67:24     - Unknown word (examplemodelb) -- model="examplemodelb",
-./tests/auth_tests/test_remote_user.py:141:22    - Unknown word (remoteuser) -- # verify the remoteuser middleware will not
-./tests/auth_tests/test_remote_user.py:159:70    - Unknown word (newnewuser) -- ", **{self.header: "newnewuser"})
-./tests/auth_tests/test_remote_user.py:277:20    - Unknown word (AUTHUSER)   -- header = "HTTP_AUTHUSER"
-./tests/auth_tests/test_remote_user.py:57:34     - Unknown word (fakeuser)   -- headers = {self.header: "fakeuser"}
+./tests/auth_tests/test_remote_user.py:143:22    - Unknown word (remoteuser) -- # verify the remoteuser middleware will not
+./tests/auth_tests/test_remote_user.py:161:70    - Unknown word (newnewuser) -- ", **{self.header: "newnewuser"})
+./tests/auth_tests/test_remote_user.py:279:20    - Unknown word (AUTHUSER)   -- header = "HTTP_AUTHUSER"
+./tests/auth_tests/test_remote_user.py:59:34     - Unknown word (fakeuser)   -- headers = {self.header: "fakeuser"}
 ./tests/auth_tests/test_templates.py:29:45     - Unknown word (somepath)   -- request_factory.get("/somepath/")
 ./tests/auth_tests/test_tokens.py:24:42     - Unknown word (tokentestuser) -- objects.create_user("tokentestuser", "test2@example.com
 ./tests/auth_tests/test_tokens.py:34:42     - Unknown word (comebackkid)   -- objects.create_user("comebackkid", "test3@example.com
@@ -1452,9 +1452,9 @@ Lines:
 ./tests/backends/oracle/test_operations.py:16:21     - Unknown word (authorwithevenlongee) -- "schema_authorwithevenlongee869"
 ./tests/backends/oracle/test_operations.py:18:44     - Unknown word (AUTHORWITHEVENLOB)    -- assertEqual(seq_name, "SCHEMA_AUTHORWITHEVENLOB0B8_SQ")
 ./tests/backends/oracle/test_operations.py:67:36     - Unknown word (VERYLONGMODELNAME)    -- ALTER TABLE "BACKENDS_VERYLONGMODELNAME540F" DISABLE CONSTRAINT
-./tests/backends/oracle/tests.py:109:51    - Unknown word (ssword)                                                      -- dict["PASSWORD"] = "p@ssword"
+./tests/backends/oracle/tests.py:110:51    - Unknown word (ssword)                                                      -- dict["PASSWORD"] = "p@ssword"
 ./tests/backends/oracle/tests.py:25:27     - Unknown word (verylongmodelnamezzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz) -- "backends_verylongmodelnamezzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz",
-./tests/backends/oracle/tests.py:47:68     - Unknown word (sysdate)                                                     -- 1936-12-29 00:00' < sysdate"
+./tests/backends/oracle/tests.py:48:67     - Unknown word (SYSDATE)                                                     -- 1936-12-29 00:00' < SYSDATE"
 ./tests/backends/postgresql/test_introspection.py:24:77     - Unknown word (pers)       -- person_id_seq RENAME TO pers_seq")
 ./tests/backends/postgresql/tests.py:344:15    - Unknown word (awef)       -- a = ["awef"]
 ./tests/backends/sqlite/test_operations.py:36:40     - Unknown word (verylongmodelnamezzzzzzzzzzzzzzzzzzzzzz) -- DELETE FROM "backends_verylongmodelnamezzzzzzzzzzzzzzzzzzzzzz'
@@ -1465,12 +1465,12 @@ Lines:
 ./tests/backends/tests.py:596:34    - Unknown word (MYISAM)     -- MySQL+InnoDB and MySQL+MYISAM (something we currently
 ./tests/backends/tests.py:939:9     - Unknown word (SQLPK)      -- class MySQLPKZeroTests(TestCase):
 ./tests/backends/tests.py:947:22    - Unknown word (autoval)    -- def test_zero_as_autoval(self):
-./tests/basic/tests.py:128:18    - Unknown word (datetimefields) -- def test_for_datetimefields_saves_as_much_precision
-./tests/basic/tests.py:349:43    - Unknown word (undashedvalue)  -- dashed-value": "1", "undashedvalue": "2"}
-./tests/basic/tests.py:377:14    - Unknown word (emptyqs)        -- def test_emptyqs(self):
-./tests/basic/tests.py:392:22    - Unknown word (customqs)       -- def test_emptyqs_customqs(self):
-./tests/basic/tests.py:65:14     - Unknown word (autofields) -- def test_autofields_generate_different_values
-./tests/basic/tests.py:762:9     - Unknown word (asos)           -- asos = ArticleSelectOnSave
+./tests/basic/tests.py:130:18    - Unknown word (datetimefields) -- def test_for_datetimefields_saves_as_much_precision
+./tests/basic/tests.py:395:43    - Unknown word (undashedvalue)  -- dashed-value": "1", "undashedvalue": "2"}
+./tests/basic/tests.py:423:14    - Unknown word (emptyqs)        -- def test_emptyqs(self):
+./tests/basic/tests.py:438:22    - Unknown word (customqs)       -- def test_emptyqs_customqs(self):
+./tests/basic/tests.py:67:14     - Unknown word (autofields) -- def test_autofields_generate_different_values
+./tests/basic/tests.py:808:9     - Unknown word (asos)           -- asos = ArticleSelectOnSave
 ./tests/bulk_create/tests.py:106:45    - Unknown word (Fillory)    -- ProxyMultiCountry(name="Fillory", iso_two_letter="FL
 ./tests/bulk_create/tests.py:119:36    - Unknown word (Qwghlm)     -- ProxyCountry(name="Qwghlm", iso_two_letter="QW
 ./tests/bulk_create/tests.py:120:31    - Unknown word (Tortall)    -- Country(name="Tortall", iso_two_letter="TA
@@ -1813,13 +1813,13 @@ Lines:
 ./tests/gis_tests/geoapp/test_feeds.py:25:14     - Unknown word (geofeed)    -- def test_geofeed_rss(self):
 ./tests/gis_tests/geoapp/test_feeds.py:76:28     - Unknown word (georsss)    -- # Ensuring the georsss namespace was added
 ./tests/gis_tests/geoapp/test_functions.py:148:9     - Unknown word (ptown)      -- ptown = City.objects.annotate
-./tests/gis_tests/geoapp/test_functions.py:352:43    - Unknown word (tobytes)    -- FromWKB(Value(g.wkb.tobytes())),
-./tests/gis_tests/geoapp/test_functions.py:613:15    - Unknown word (yfac)       -- xfac, yfac = 2, 3
-./tests/gis_tests/geoapp/test_functions.py:613:9     - Unknown word (xfac)       -- xfac, yfac = 2, 3
-./tests/gis_tests/geoapp/test_functions.py:638:28    - Unknown word (Marino)     -- # Boundary for San Marino, courtesy of Bjorn Sandvik
-./tests/gis_tests/geoapp/test_functions.py:638:48    - Unknown word (Bjorn)      -- Marino, courtesy of Bjorn Sandvik of thematicmapping
-./tests/gis_tests/geoapp/test_functions.py:638:54    - Unknown word (Sandvik)    -- Marino, courtesy of Bjorn Sandvik of thematicmapping.org
-./tests/gis_tests/geoapp/test_functions.py:638:65    - Unknown word (thematicmapping) -- of Bjorn Sandvik of thematicmapping.org
+./tests/gis_tests/geoapp/test_functions.py:357:43    - Unknown word (tobytes)    -- FromWKB(Value(g.wkb.tobytes())),
+./tests/gis_tests/geoapp/test_functions.py:618:15    - Unknown word (yfac)       -- xfac, yfac = 2, 3
+./tests/gis_tests/geoapp/test_functions.py:618:9     - Unknown word (xfac)       -- xfac, yfac = 2, 3
+./tests/gis_tests/geoapp/test_functions.py:643:28    - Unknown word (Marino)     -- # Boundary for San Marino, courtesy of Bjorn Sandvik
+./tests/gis_tests/geoapp/test_functions.py:643:48    - Unknown word (Bjorn)      -- Marino, courtesy of Bjorn Sandvik of thematicmapping
+./tests/gis_tests/geoapp/test_functions.py:643:54    - Unknown word (Sandvik)    -- Marino, courtesy of Bjorn Sandvik of thematicmapping.org
+./tests/gis_tests/geoapp/test_functions.py:643:65    - Unknown word (thematicmapping) -- of Bjorn Sandvik of thematicmapping.org
 ./tests/gis_tests/geoapp/test_regress.py:32:17     - Unknown word (Åland)      -- name = "Åland Islands"
 ./tests/gis_tests/geoapp/test_regress.py:58:21     - Unknown word (Tioga)      -- county="Tioga",
 ./tests/gis_tests/geoapp/test_sitemaps.py:27:14     - Unknown word (geositemap) -- def test_geositemap_kml(self):
@@ -1887,7 +1887,7 @@ Lines:
 ./tests/gis_tests/relatedapp/tests.py:44:9      - Unknown word (txpa)       -- txpa_extent = (-97.51611
 ./tests/gis_tests/test_data.py:14:5      - Unknown word (tuplize)    -- def tuplize(seq):
 ./tests/gis_tests/test_data.py:21:5      - Unknown word (strconvert) -- def strconvert(d):
-./tests/gis_tests/test_geoip2.py:116:34    - Unknown word (Boxford)    -- "city": "Boxford",
+./tests/gis_tests/test_geoip2.py:125:34    - Unknown word (Boxford)    -- "city": "Boxford",
 ./tests/gis_tests/test_ptr.py:42:20     - Unknown word (ptrs)       -- # (in `bad_ptrs`) aren't allowed.
 ./tests/gis_tests/test_spatialrefsys.py:24:10     - Unknown word (eprec)      -- "eprec": (1, 1, 9),
 ./tests/handlers/tests.py:188:14    - Unknown word (suspiciousop) -- def test_suspiciousop_in_view_returns_400
@@ -2759,9 +2759,9 @@ Lines:
 ./tests/test_utils/test_testcase.py:144:30    - Unknown word (Käfer)      -- self.car.name = "VW sKäfer"
 ./tests/test_utils/test_testcase.py:149:37    - Unknown word (Coccinelle) -- car.name = "Volkswagen Coccinelle"
 ./tests/test_utils/test_testcase.py:77:13     - Unknown word (herbie)     -- cls.herbie = cls.jim_douglas.possessed
-./tests/test_utils/tests.py:1983:11   - Unknown word (visualisation) -- A visualisation of the callback tree
-./tests/test_utils/tests.py:2121:38   - Unknown word (defualt)       -- class__.databases = {"defualt"}
-./tests/test_utils/tests.py:758:26    - Unknown word (attibutes)  -- def test_non_boolean_attibutes(self):
+./tests/test_utils/tests.py:1984:11   - Unknown word (visualisation) -- A visualisation of the callback tree
+./tests/test_utils/tests.py:2153:38   - Unknown word (defualt)       -- class__.databases = {"defualt"}
+./tests/test_utils/tests.py:759:26    - Unknown word (attibutes)  -- def test_non_boolean_attibutes(self):
 ./tests/transactions/tests.py:42:56     - Unknown word (Tintin)     -- objects.create(first_name="Tintin")
 ./tests/update/tests.py:192:44    - Unknown word (datapoint)  -- value=Max(Col(update_datapoint, update.DataPoint.value
 ./tests/update/tests.py:202:62    - Unknown word (relatedpoint) -- related_count=Count("relatedpoint"))
