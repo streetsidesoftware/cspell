@@ -43,7 +43,7 @@ setTimeout(
     () => {
         console.error('Failed to quit in 5 minutes.');
         // eslint-disable-next-line no-process-exit
-        process.exit(0);
+        process.exit(1);
     },
     1000 * 60 * 5,
 );
