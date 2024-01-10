@@ -36,7 +36,16 @@ const rr = {
 const oc = expect.objectContaining;
 const sm = expect.stringMatching;
 
-leakedHandles.set({ fullStack: true });
+leakedHandles.set({ fullStack: true, timeout: 1000 });
+
+// Force quit after 5 minutes.
+setTimeout(
+    () => {
+        console.error('Failed to quit in 5 minutes.');
+        process.exit(0);
+    },
+    1000 * 60 * 5,
+);
 
 describe('Validate resolveFile', () => {
     const redirects: [VFileSystemProvider, ...VFileSystemProvider[]] = [
