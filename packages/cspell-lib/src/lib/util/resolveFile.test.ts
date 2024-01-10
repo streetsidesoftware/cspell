@@ -1,8 +1,10 @@
+import fs from 'node:fs';
+import { getActiveResourcesInfo } from 'node:process';
+import util from 'node:util';
+
 import { parse } from 'comment-json';
 import type { VFileSystemProvider } from 'cspell-io';
 import { createRedirectProvider, createVirtualFS } from 'cspell-io';
-import * as fs from 'fs';
-import leakedHandles from 'leaked-handles';
 import * as os from 'os';
 import * as path from 'path';
 import { fileURLToPath, pathToFileURL } from 'url';
@@ -12,6 +14,11 @@ import { pathRepoTestFixturesURL } from '../../test-util/index.mjs';
 import { FileResolver, resolveRelativeTo } from './resolveFile.js';
 import { envToTemplateVars } from './templates.js';
 import { isFileURL, toFilePathOrHref, toURL } from './url.js';
+
+function debugOut(...args: Parameters<typeof util.format>) {
+    // Use a function like this one when debugging inside an AsyncHook callback
+    fs.writeFileSync(2, `${util.format(...args)}\n`);
+}
 
 interface Config {
     import: string[];
@@ -36,12 +43,12 @@ const rr = {
 const oc = expect.objectContaining;
 const sm = expect.stringMatching;
 
-leakedHandles.set({ fullStack: true, timeout: 1000 });
+// leakedHandles.set({ fullStack: true, timeout: 1000 });
 
 // Force quit after 5 minutes.
 setTimeout(
     () => {
-        console.error('Failed to quit in 5 minutes.');
+        debugOut('Failed to quit in 5 minutes: %o', getActiveResourcesInfo());
         // eslint-disable-next-line no-process-exit
         process.exit(1);
     },
