@@ -140,7 +140,30 @@ rk\\'#8e;<i#7c;<s$$4
 "
 `;
 
-exports[`Import/Export > serialize DAWG { Object (base, addLineBreaksToImproveDiffs) } 1`] = `
+exports[`Import/Export > serialize DAWG { Object (base, optimizeSimpleReferences, ...) } 1`] = `
+"#!/usr/bin/env cspell-trie reader
+TrieXv3
+base=10
+# Data:
+__DATA__
+Big Apple$8races\\: \\{\\}\\[\\]\\(\\)$9<5
+New York$7umbers \\0\\1\\2\\3\\4\\5\\6\\7\\8\\9$9<9
+\\\\\\\\\\\\\\\\\\$3
+ap#6;<rrow \\<$7
+big a#5;<4urned$r$2ing$3s$$4
+chalk#58;<3u#56;<3
+eol \\\\n$3w \\$$4scape \\\\\\$8
+fun journey$7walk$8
+journalism$tic$2$3s$$2eyer$2man$2en$3$4ster$2i#60;<$3viality$3$4wly$$2yfuller$st$4ness$4$3
+lessn#126;<$4ou#131;<2ridden$3er$$i#60;<3ode$4stick$5$3
+lift#58;<3ong w#88;<6
+ref \\#$5
+t#63;<
+wa#64;<2
+"
+`;
+
+exports[`Import/Export > serialize DAWG { base: 10, addLineBreaksToImproveDiffs: false } 1`] = `
 "#!/usr/bin/env cspell-trie reader
 TrieXv3
 base=10
@@ -163,63 +186,7 @@ wa#64;<2
 "
 `;
 
-exports[`Import/Export > serialize DAWG { Object (base, optimizeSimpleReferences) } 1`] = `
-"#!/usr/bin/env cspell-trie reader
-TrieXv3
-base=10
-# Data:
-__DATA__
-B
-i
-g Apple$8
-r
-aces\\: \\{\\}\\[\\]\\(\\)$9<5
-N
-e
-w York$7
-u
-mbers \\0\\1\\2\\3\\4\\5\\6\\7\\8\\9$9<9
-\\\\\\
-\\\\\\
-\\\\\\$3
-a
-p#6;<r
-row \\<$7
-b
-i
-g a#5;<4
-u
-rned$r$2ing$3s$$4
-c
-h
-alk#58;<3u#56;<3
-e
-o
-l \\\\n$3w \\$$4
-s
-cape \\\\\\$8
-f
-u
-n journey$7walk$8
-j
-o
-urnalism$tic$2$3s$$2eyer$2man$2en$3$4ster$2i#60;<$3viality$3$4wly$$2yfuller$st$4ness$4$3
-lessn#126;<$4ou#131;<2ridden$3er$$i#60;<3ode$4stick$5$3
-l
-i
-ft#58;<3
-o
-ng w#88;<6
-r
-e
-f \\#$5
-t#63;<
-w
-a#64;<2
-"
-`;
-
-exports[`Import/Export > serialize DAWG { Object (base, optimizeSimpleReferences) } 2`] = `
+exports[`Import/Export > serialize DAWG { base: 10, optimizeSimpleReferences: false } 1`] = `
 "#!/usr/bin/env cspell-trie reader
 TrieXv3
 base=10
@@ -275,30 +242,7 @@ a#64;<2
 "
 `;
 
-exports[`Import/Export > serialize DAWG { Object (base, optimizeSimpleReferences, ...) } 1`] = `
-"#!/usr/bin/env cspell-trie reader
-TrieXv3
-base=10
-# Data:
-__DATA__
-Big Apple$8races\\: \\{\\}\\[\\]\\(\\)$9<5
-New York$7umbers \\0\\1\\2\\3\\4\\5\\6\\7\\8\\9$9<9
-\\\\\\\\\\\\\\\\\\$3
-ap#6;<rrow \\<$7
-big a#5;<4urned$r$2ing$3s$$4
-chalk#58;<3u#56;<3
-eol \\\\n$3w \\$$4scape \\\\\\$8
-fun journey$7walk$8
-journalism$tic$2$3s$$2eyer$2man$2en$3$4ster$2i#60;<$3viality$3$4wly$$2yfuller$st$4ness$4$3
-lessn#126;<$4ou#131;<2ridden$3er$$i#60;<3ode$4stick$5$3
-lift#58;<3ong w#88;<6
-ref \\#$5
-t#63;<
-wa#64;<2
-"
-`;
-
-exports[`Import/Export > serialize DAWG { Object (base, optimizeSimpleReferences, ...) } 2`] = `
+exports[`Import/Export > serialize DAWG { base: 10, optimizeSimpleReferences: false, …(1) } 1`] = `
 "#!/usr/bin/env cspell-trie reader
 TrieXv3
 base=10
@@ -318,6 +262,62 @@ lift#58;<3ong w#87;<6
 ref \\#$5
 t#63;<
 wa#64;<2
+"
+`;
+
+exports[`Import/Export > serialize DAWG { base: 10, optimizeSimpleReferences: true } 1`] = `
+"#!/usr/bin/env cspell-trie reader
+TrieXv3
+base=10
+# Data:
+__DATA__
+B
+i
+g Apple$8
+r
+aces\\: \\{\\}\\[\\]\\(\\)$9<5
+N
+e
+w York$7
+u
+mbers \\0\\1\\2\\3\\4\\5\\6\\7\\8\\9$9<9
+\\\\\\
+\\\\\\
+\\\\\\$3
+a
+p#6;<r
+row \\<$7
+b
+i
+g a#5;<4
+u
+rned$r$2ing$3s$$4
+c
+h
+alk#58;<3u#56;<3
+e
+o
+l \\\\n$3w \\$$4
+s
+cape \\\\\\$8
+f
+u
+n journey$7walk$8
+j
+o
+urnalism$tic$2$3s$$2eyer$2man$2en$3$4ster$2i#60;<$3viality$3$4wly$$2yfuller$st$4ness$4$3
+lessn#126;<$4ou#131;<2ridden$3er$$i#60;<3ode$4stick$5$3
+l
+i
+ft#58;<3
+o
+ng w#88;<6
+r
+e
+f \\#$5
+t#63;<
+w
+a#64;<2
 "
 `;
 

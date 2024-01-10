@@ -1,31 +1,31 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`suggestionsEmitter > emitSuggestionResult 'walk' { Object (word, cost, ...) } { Object (word, cost, ...) } { verbose: 1 } 1`] = `
+exports[`suggestionsEmitter > emitSuggestionResult 'walk' { word: 'walk', cost: +0, dictionaries: [ 'dict-a' ], noSuggest: false, …(2) } { word: 'walked', cost: 2, dictionaries: [ 'dict-a' ], noSuggest: false, …(2) } { verbose: 1 } 1`] = `
 "walk:
  - walk      -    0 dict-a
  - walked    -    2 dict-a"
 `;
 
-exports[`suggestionsEmitter > emitSuggestionResult 'walk' { Object (word, cost, ...) } { Object (word, cost, ...) } { verbose: 1 } 2`] = `
-"walk:
- - walk      -    0 dict-a
- - walked  N -    2 dict-a"
-`;
-
-exports[`suggestionsEmitter > emitSuggestionResult 'walk' { Object (word, cost, ...) } { Object (word, cost, ...) } { verbose: 1 } 3`] = `
+exports[`suggestionsEmitter > emitSuggestionResult 'walk' { word: 'walk', cost: +0, dictionaries: [ 'dict-a' ], noSuggest: false, …(2) } { word: 'walked', cost: 2, dictionaries: [ 'dict-a' ], noSuggest: false, …(2) } { verbose: 1 } 2`] = `
 "walk:
  - walk      -    0 dict-a
  - walked X  -    2 dict-a"
 `;
 
-exports[`suggestionsEmitter > emitSuggestionResult 'walk' { Object (word, cost, ...) } { Object (word, cost, ...) } { verbose: 1 } 4`] = `
-"walk:
- - walk      -    0 dict-a
- - walked XN -    2 dict-a"
-`;
-
-exports[`suggestionsEmitter > emitSuggestionResult 'walk' { Object (word, cost, ...) } { Object (word, cost, ...) } {} 1`] = `
+exports[`suggestionsEmitter > emitSuggestionResult 'walk' { word: 'walk', cost: +0, dictionaries: [ 'dict-a' ], noSuggest: false, …(2) } { word: 'walked', cost: 2, dictionaries: [ 'dict-a' ], noSuggest: false, …(2) } {} 1`] = `
 "walk:
  - walk
  - walked"
+`;
+
+exports[`suggestionsEmitter > emitSuggestionResult 'walk' { word: 'walk', cost: +0, dictionaries: [ 'dict-a' ], noSuggest: false, …(2) } { word: 'walked', cost: 2, dictionaries: [ 'dict-a' ], noSuggest: true, …(2) } { verbose: 1 } 1`] = `
+"walk:
+ - walk      -    0 dict-a
+ - walked  N -    2 dict-a"
+`;
+
+exports[`suggestionsEmitter > emitSuggestionResult 'walk' { word: 'walk', cost: +0, dictionaries: [ 'dict-a' ], noSuggest: false, …(2) } { word: 'walked', cost: 2, dictionaries: [ 'dict-a' ], noSuggest: true, …(2) } { verbose: 1 } 2`] = `
+"walk:
+ - walk      -    0 dict-a
+ - walked XN -    2 dict-a"
 `;
