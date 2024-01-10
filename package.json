@@ -2,6 +2,7 @@
   "name": "cspell-monorepo",
   "version": "1.0.0",
   "description": "cspell monorepo.",
+  "type": "commonjs",
   "bin": {
     "cspell-monorepo": "bin.mjs",
     "cspell-monorepo-esm": "bin.mjs",
@@ -85,6 +86,9 @@
     "url": "https://github.com/streetsidesoftware/cspell/issues"
   },
   "homepage": "https://streetsidesoftware.github.io/cspell/",
+  "engines": {
+    "node": ">=18.0.0"
+  },
   "devDependencies": {
     "@cspell/dict-markdown": "^2.0.1",
     "@cspell/eslint-plugin": "workspace:*",

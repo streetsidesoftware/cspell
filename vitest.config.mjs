@@ -1,6 +1,10 @@
+// eslint-disable-next-line import/no-unresolved, node/no-missing-import
 import { defineConfig } from 'vitest/config';
+import { fileURLToPath } from 'url';
 
-export default defineConfig({
+const __dirname = fileURLToPath(new URL('.', import.meta.url));
+
+const defaultConfig = {
     test: {
         chaiConfig: {
             truncateThreshold: 80,
@@ -45,4 +49,6 @@ export default defineConfig({
             ],
         },
     },
-});
+};
+
+export default defineConfig(defaultConfig);
