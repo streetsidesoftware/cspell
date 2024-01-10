@@ -2,6 +2,9 @@ import { defineConfig } from 'vitest/config';
 
 export default defineConfig({
     test: {
+        chaiConfig: {
+            truncateThreshold: 80,
+        },
         // cspell:ignore tsup
         exclude: [
             '**/temp/**',
