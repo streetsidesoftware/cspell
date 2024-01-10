@@ -31,9 +31,9 @@
     "watch": "tsc -p . -w",
     "clean": "shx rm -rf dist temp coverage \"*.tsbuildInfo\"",
     "clean-build": "pnpm run clean && pnpm run build",
-    "coverage": "vitest run --coverage",
+    "coverage": "vitest run --coverage --pool=forks",
     "test-watch": "vitest",
-    "test": "vitest run"
+    "test": "vitest run --pool=forks"
   },
   "repository": {
     "type": "git",

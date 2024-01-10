@@ -29,7 +29,7 @@
     "build:esm": "tsc -b tsconfig.esm.json",
     "build:lib": "tsc -b src/lib/tsconfig.json",
     "watch": "tsc -b . --watch",
-    "coverage": "vitest run --coverage",
+    "coverage": "vitest run --coverage --pool=forks",
     "test-watch": "vitest",
     "prepublishOnly": "pnpm run clean-build",
     "#test": "vitest run --reporter=hanging-process --reporter=default",
