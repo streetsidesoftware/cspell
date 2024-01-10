@@ -4,7 +4,7 @@ import { fileURLToPath } from 'url';
 
 const __dirname = fileURLToPath(new URL('.', import.meta.url));
 
-export const defaultConfig = {
+const defaultConfig = {
     test: {
         chaiConfig: {
             truncateThreshold: 80,
@@ -51,4 +51,4 @@ export const defaultConfig = {
     },
 };
 
-export default defineConfig(defineConfig);
+export default defineConfig(defaultConfig);
