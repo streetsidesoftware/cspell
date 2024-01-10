@@ -48,11 +48,11 @@ const sm = expect.stringMatching;
 // Force quit after 5 minutes.
 setTimeout(
     () => {
-        debugOut('Failed to quit in 5 minutes: %o', getActiveResourcesInfo());
+        debugOut('Failed to quit in 1 minute: %o', getActiveResourcesInfo());
         // eslint-disable-next-line no-process-exit
         process.exit(1);
     },
-    1000 * 60 * 5,
+    1000 * 60 * 1,
 );
 
 describe('Validate resolveFile', () => {
