@@ -34,6 +34,11 @@ export interface SpellCheckResults {
     errors?: Error[];
 }
 
-type SpellCheckFn = (filename: string, text: string, root: Node, options: WorkerOptions) => Promise<SpellCheckResults>;
+export type SpellCheckFn = (
+    filename: string,
+    text: string,
+    root: Node,
+    options: WorkerOptions,
+) => Promise<SpellCheckResults>;
 
 export type SpellCheckSyncFn = (...p: Parameters<SpellCheckFn>) => Awaited<ReturnType<SpellCheckFn>>;

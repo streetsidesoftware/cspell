@@ -5,14 +5,14 @@ import { join as pathJoin } from 'path';
 import { createSyncFn } from 'synckit';
 
 import { getDefaultLogger } from '../common/logger.cjs';
-import type { Issue, SpellCheckSyncFn } from '../worker/types.cjs';
+import type { Issue, SpellCheckFn } from '../worker/types.cjs';
 import { normalizeOptions } from './defaultCheckOptions.cjs';
 
 const optionsSchema = JSON.parse(readFileSync(pathJoin(__dirname, '../../assets/options.schema.json'), 'utf8'));
 
 const schema = optionsSchema as unknown as Rule.RuleMetaData['schema'];
 
-const spellCheck: SpellCheckSyncFn = createSyncFn(require.resolve('../worker/worker.mjs'), undefined, 30000);
+const spellCheck = createSyncFn<SpellCheckFn>(require.resolve('../worker/worker.mjs'), 30000);
 
 interface ExtendedSuggestion {
     /**
