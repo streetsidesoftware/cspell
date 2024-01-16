@@ -3,12 +3,13 @@ Repository: RustPython/RustPython
 Url: "https://github.com/RustPython/RustPython.git"
 Args: ["**"]
 Lines:
- CSpell: Files checked: 597, Issues found: 2710 in 308 files
+ CSpell: Files checked: 597, Issues found: 2711 in 308 files
  exit code: 1
 ./Cargo.toml:111:82    - Unknown word (termcolor)  -- features = ["atty", "termcolor"] }
 ./Cargo.toml:154:62    - Unknown word (redoxer)    -- to compile/check with redoxer
 ./Cargo.toml:16:44     - Unknown word (pylib)      -- derive", "jit", "vm", "pylib", "stdlib", "wasm/lib
-./Cargo.toml:73:1      - Unknown word (rustyline)  -- rustyline = "11"
+./Cargo.toml:61:119    - Unknown word (zerocopy)   -- "socket", "sched", "zerocopy", "dir", "hostname"
+./Cargo.toml:73:1      - Unknown word (rustyline)  -- rustyline = "13"
 ./Cargo.toml:78:1      - Unknown word (thiserror)  -- thiserror = "1.0"
 ./Cargo.toml:81:1      - Unknown word (widestring) -- widestring = "0.5.1"
 ./Cargo.toml:88:49     - Unknown word (flamescope) -- flame-it", "flame", "flamescope"]
@@ -399,7 +400,7 @@ Lines:
 ./src/settings.rs:287:49    - Unknown word (PYTHONWARNDEFAULTENCODING) -- environment && env::var_os("PYTHONWARNDEFAULTENCODING").is_some())
 ./src/settings.rs:344:37    - Unknown word (PYTHONHASHSEED)            -- seed = match env::var("PYTHONHASHSEED") {
 ./src/shell/helper.rs:20:13     - Unknown word (startpos)   -- let mut startpos = 0;
-./stdlib/Cargo.toml:115:25    - Unknown word (netioapi)   -- winsock2", "ifdef", "netioapi",
+./stdlib/Cargo.toml:115:25    - Unknown word (netioapi)   -- winsock2", "ifdef", "netioapi", "ws2tcpip",
 ./stdlib/Cargo.toml:123:28    - Unknown word (Ndis)       -- 2_NetworkManagement_Ndis",
 ./stdlib/Cargo.toml:46:1      - Unknown word (puruspe)    -- puruspe = "0.2.0"
 ./stdlib/build.rs:25:39     - Unknown word (osslconf)   -- println!("cargo:rustc-cfg=osslconf=\"{conf}\"");
@@ -507,15 +508,15 @@ Lines:
 ./stdlib/src/socket.rs:113:47    - Unknown word (NETROM)           -- SOL_AX25, SOL_IPX, SOL_NETROM, SOL_ROSE};
 ./stdlib/src/socket.rs:117:15    - Unknown word (SETFIB)           -- use c::SO_SETFIB;
 ./stdlib/src/socket.rs:122:78    - Unknown word (ISOTP)            -- FLAG, CAN_ERR_MASK, CAN_ISOTP, CAN_J1939,
-./stdlib/src/socket.rs:1288:25   - Unknown word (subbuf)           -- let subbuf = &buf[buf_offset..
+./stdlib/src/socket.rs:1284:25   - Unknown word (subbuf)           -- let subbuf = &buf[buf_offset..
 ./stdlib/src/socket.rs:128:61    - Unknown word (ERRQUEUE)         -- DEST_NAME, SCM_J1939_ERRQUEUE, SCM_J1939_PRIO, SOL
 ./stdlib/src/socket.rs:129:67    - Unknown word (PROMISC)          -- 39_FILTER, SO_J1939_PROMISC, SO_J1939_SEND_PRIO
-./stdlib/src/socket.rs:1378:12   - Unknown word (getblocking)      -- fn getblocking(&self) -> bool {
+./stdlib/src/socket.rs:1374:12   - Unknown word (getblocking)      -- fn getblocking(&self) -> bool {
 ./stdlib/src/socket.rs:138:20    - Unknown word (VRRP)             -- use c::IPPROTO_VRRP;
-./stdlib/src/socket.rs:1404:25   - Unknown word (flagsize)         -- let mut flagsize = std::mem::size_of
-./stdlib/src/socket.rs:1449:13   - Unknown word (optlen)           -- optlen: OptionalArg<u32>,
-./stdlib/src/socket.rs:1589:25   - Unknown word (abstractpath)     -- if let Some(abstractpath) = unix_addr.as_abstract
-./stdlib/src/socket.rs:1651:13   - Unknown word (serv)             -- let serv = unsafe { c::getservbyname
+./stdlib/src/socket.rs:1400:25   - Unknown word (flagsize)         -- let mut flagsize = std::mem::size_of
+./stdlib/src/socket.rs:1445:13   - Unknown word (optlen)           -- optlen: OptionalArg<u32>,
+./stdlib/src/socket.rs:1582:25   - Unknown word (abstractpath)     -- if let Some(abstractpath) = addr.as_abstract
+./stdlib/src/socket.rs:1644:13   - Unknown word (serv)             -- let serv = unsafe { c::getservbyname
 ./stdlib/src/socket.rs:169:54    - Unknown word (ASSOCLEN)         -- ENCRYPT, ALG_SET_AEAD_ASSOCLEN, ALG_SET_AEAD_AUTHSIZE
 ./stdlib/src/socket.rs:172:85    - Unknown word (DNRTMSG)          -- NETLINK_CRYPTO, NETLINK_DNRTMSG,
 ./stdlib/src/socket.rs:173:51    - Unknown word (NFLOG)            -- NETLINK_IP6_FW, NETLINK_NFLOG, NETLINK_ROUTE, NETLINK
@@ -523,19 +524,19 @@ Lines:
 ./stdlib/src/socket.rs:174:17    - Unknown word (XFRM)             -- NETLINK_XFRM, SOL_ALG, SO_PASSSEC
 ./stdlib/src/socket.rs:174:35    - Unknown word (PASSSEC)          -- NETLINK_XFRM, SOL_ALG, SO_PASSSEC, SO_PEERSEC,
 ./stdlib/src/socket.rs:174:47    - Unknown word (PEERSEC)          -- ALG, SO_PASSSEC, SO_PEERSEC,
-./stdlib/src/socket.rs:1835:28   - Unknown word (canonname)        -- ai.canonname,
-./stdlib/src/socket.rs:1964:17   - Unknown word (ainfo)            -- let mut ainfo = res.next().unwrap
-./stdlib/src/socket.rs:2071:46   - Unknown word (Luid)             -- name(&entry.InterfaceLuid).map_err(|err| err.into
-./stdlib/src/socket.rs:2079:17   - Unknown word (luid)             -- luid: &winapi::shared::ifdef
-./stdlib/src/socket.rs:2079:51   - Unknown word (LUID)             -- :shared::ifdef::NET_LUID,
-./stdlib/src/socket.rs:2086:54   - Unknown word (ustr)             -- widestring::WideCString::from_ustr_truncate(
+./stdlib/src/socket.rs:1829:28   - Unknown word (canonname)        -- ai.canonname,
+./stdlib/src/socket.rs:1958:17   - Unknown word (ainfo)            -- let mut ainfo = res.next().unwrap
+./stdlib/src/socket.rs:2065:46   - Unknown word (Luid)             -- name(&entry.InterfaceLuid).map_err(|err| err.into
+./stdlib/src/socket.rs:2073:17   - Unknown word (luid)             -- luid: &winapi::shared::ifdef
+./stdlib/src/socket.rs:2073:51   - Unknown word (LUID)             -- :shared::ifdef::NET_LUID,
+./stdlib/src/socket.rs:2080:54   - Unknown word (ustr)             -- widestring::WideCString::from_ustr_truncate(
 ./stdlib/src/socket.rs:212:28    - Unknown word (ATMPVC)           -- AF_ALG, AF_ASH, AF_ATMPVC, AF_ATMSVC, AF_AX25
 ./stdlib/src/socket.rs:216:21    - Unknown word (BINDTODEVICE)     -- SOL_UDP, SO_BINDTODEVICE, SO_MARK, TCP_CORK,
 ./stdlib/src/socket.rs:216:89    - Unknown word (QUICKACK)         -- ACCEPT, TCP_LINGER2, TCP_QUICKACK,
 ./stdlib/src/socket.rs:217:13    - Unknown word (SYNCNT)           -- TCP_SYNCNT, TCP_WINDOW_CLAMP,
-./stdlib/src/socket.rs:2259:13   - Unknown word (strerr)           -- let strerr = {
-./stdlib/src/socket.rs:2326:8    - Unknown word (getdefaulttimeout) -- fn getdefaulttimeout() -> Option<f64> {
-./stdlib/src/socket.rs:2336:8    - Unknown word (setdefaulttimeout) -- fn setdefaulttimeout(timeout: Option<Duration
+./stdlib/src/socket.rs:2253:13   - Unknown word (strerr)           -- let strerr = {
+./stdlib/src/socket.rs:2320:8    - Unknown word (getdefaulttimeout) -- fn getdefaulttimeout() -> Option<f64> {
+./stdlib/src/socket.rs:2330:8    - Unknown word (setdefaulttimeout) -- fn setdefaulttimeout(timeout: Option<Duration
 ./stdlib/src/socket.rs:294:21    - Unknown word (UDPLITE)          -- use c::{IPPROTO_UDPLITE, TCP_CONGESTION};
 ./stdlib/src/socket.rs:303:24    - Unknown word (CSCOV)            -- const UDPLITE_SEND_CSCOV: i32 = 10;
 ./stdlib/src/socket.rs:340:32    - Unknown word (loongarch)        -- target_arch = "loongarch64",
