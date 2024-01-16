@@ -54,7 +54,7 @@ Sometimes it is necessary to allow a word even if it is forbidden.
 
 ```jsonc
 {
-  "ignoreWords": ["forbiddenWord"]
+  "ignoreWords": ["forbiddenWord"],
 }
 ```
 
