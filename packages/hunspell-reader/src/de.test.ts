@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 
-import * as Aff from './aff.js';
+import * as Aff from './affLegacy.js';
 import * as AffReader from './affReader.js';
 import { IterableHunspellReader } from './IterableHunspellReader.js';
 

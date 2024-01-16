@@ -1,11 +1,21 @@
-import type { Sequence } from 'gensequence';
 import * as GS from 'gensequence';
-import { genSequence as gs } from 'gensequence';
 import * as util from 'util';
 
-import type { AffInfo, AffTransformFlags, AffWord, AffWordFlags, Fx, Rule, Substitution } from './affDef.js';
+import { affFlag, flagToLongStringMap, flagToStringMap } from './affConstants.js';
+import type {
+    AffInfo,
+    AffTransformFlags,
+    AffWord,
+    AffWordFlags,
+    FlagRule,
+    Fx,
+    PfxRule,
+    Rule,
+    SfxRule,
+    Substitution,
+    SubstitutionsForRegExp,
+} from './affDef.js';
 import { Converter } from './converter.js';
-import type { Mapping } from './types.js';
 import { filterOrderedList, isDefined } from './util.js';
 
 const log = false;
@@ -18,11 +28,14 @@ export type ConvertedAffWord = AffWord;
 
 const DefaultMaxDepth = 5;
 
+const regExpIsNumber = /^\d+$/;
+
 export class Aff {
     protected rules: Map<string, Rule>;
     protected _oConv: Converter;
     protected _iConv: Converter;
     private _maxSuffixDepth = DefaultMaxDepth;
+    private _mapRules: Map<string, string[]> = new Map();
 
     constructor(public affInfo: AffInfo) {
         this.rules = processRules(affInfo);
@@ -47,10 +60,10 @@ export class Aff {
         const maxSuffixDepth = maxDepth ?? this.maxSuffixDepth;
         const [lineLeft] = line.split(/\s+/, 1);
         const [word, rules = ''] = lineLeft.split('/', 2);
-        const results = this.applyRulesToWord(asAffWord(word, rules), maxSuffixDepth).map((affWord) => ({
-            ...affWord,
-            word: this._oConv.convert(affWord.word),
-        }));
+        const convert = this._oConv.convert.bind(this._oConv);
+        const results = this.applyRulesToWord(asAffWord(word, rules), maxSuffixDepth).map(
+            (affWord) => ((affWord.word = convert(affWord.word)), affWord),
+        );
         results.sort(compareAff);
         const filtered = results.filter(filterAff());
         return filtered;
@@ -63,15 +76,7 @@ export class Aff {
         const compoundMin = this.affInfo.COMPOUNDMIN ?? 3;
         const { word, base, suffix, prefix, dic } = affWord;
         const allRules = this.getMatchingRules(affWord.rules);
-        const { rulesApplied, flags } = allRules
-            .filter((rule) => !!rule.flags)
-            .reduce(
-                (acc, rule) => ({
-                    rulesApplied: [acc.rulesApplied, rule.id].join(' '),
-                    flags: { ...acc.flags, ...rule.flags },
-                }),
-                { rulesApplied: affWord.rulesApplied, flags: affWord.flags },
-            );
+        const { rulesApplied, flags } = reduceAffixRules(affWord, allRules);
         const rules = this.joinRules(allRules.filter((rule) => !rule.flags).map((rule) => rule.id));
         const affixRules = allRules.map((rule) => rule.sfx || rule.pfx).filter(isDefined);
         const wordWithFlags = { word, flags, rulesApplied, rules: '', base, suffix, prefix, dic };
@@ -100,26 +105,25 @@ export class Aff {
         const { word } = affWord;
         const combineRules = affix.type === 'PFX' && affix.combinable && !!combinableSfx ? combinableSfx : '';
         const flags = affWord.flags.isNeedAffix ? removeNeedAffix(affWord.flags) : affWord.flags;
-        const matchingSubstitutions = [...affix.substitutionSets.values()].filter((sub) => sub.match.test(word));
+        const matchingSubstitutions = affix.substitutionsForRegExps.filter((sub) => sub.match.test(word));
         const partialAffWord = { ...affWord, flags, rules: combineRules };
         return matchingSubstitutions
-            .flatMap((sub) => sub.substitutions)
-            .filter((sub) => sub.remove === '0' || sub.replace.test(word))
-            .map((sub) => this.substitute(affix, partialAffWord, sub))
+            .flatMap((sub) => this.#applySubstitution(affix, partialAffWord, sub))
             .map((affWord) => logAffWord(affWord, 'applyAffixToWord'));
     }
 
-    substitute(affix: Fx, affWord: AffWord, sub: Substitution): AffWord {
+    #substituteAttach(affix: Fx, affWord: AffWord, sub: Substitution, stripped: string): AffWord {
         const { word: origWord, rulesApplied, flags, dic } = affWord;
         const rules = affWord.rules + (sub.attachRules || '');
-        const word = origWord.replace(sub.replace, sub.attach);
-        const stripped = origWord.replace(sub.replace, '');
+        let word: string;
         let p = affWord.prefix.length;
         let s = origWord.length - affWord.suffix.length;
-        if (affix.type === 'SFX') {
+        if (sub.type === 'S') {
+            word = stripped + sub.attach;
             s = Math.min(stripped.length, s);
             p = Math.min(p, s);
         } else {
+            word = sub.attach + stripped;
             const d = word.length - origWord.length;
             p = Math.max(p, word.length - stripped.length);
             s = Math.max(s + d, p);
@@ -139,9 +143,21 @@ export class Aff {
         };
     }
 
+    #applySubstitution(affix: Fx, affWord: AffWord, subs: SubstitutionsForRegExp): AffWord[] {
+        const results: AffWord[] = [];
+        for (const [replace, substitutions] of subs.substitutionsGroupedByRemove) {
+            if (!replace.test(affWord.word)) continue;
+            const stripped = affWord.word.replace(replace, '');
+            for (const sub of substitutions) {
+                results.push(this.#substituteAttach(affix, affWord, sub, stripped));
+            }
+        }
+        return results;
+    }
+
     getMatchingRules(rules: string): Rule[] {
         const { AF = [] } = this.affInfo;
-        const idx = parseInt(rules, 10);
+        const idx = regExpIsNumber.test(rules) ? parseInt(rules, 10) : -1;
         const rulesToSplit = AF[idx] || rules;
         return this.separateRules(rulesToSplit)
             .map((key) => this.rules.get(key))
@@ -159,6 +175,14 @@ export class Aff {
     }
 
     separateRules(rules: string): string[] {
+        const found = this._mapRules.get(rules);
+        if (found) return found;
+        const split = this.#separateRules(rules);
+        this._mapRules.set(rules, split);
+        return split;
+    }
+
+    #separateRules(rules: string): string[] {
         switch (this.affInfo.FLAG) {
             case 'long':
                 return [...new Set(rules.replace(/(..)/g, '$1//').split('//').slice(0, -1))];
@@ -188,75 +212,25 @@ function signature(aff: AffWord) {
 }
 
 export function processRules(affInfo: AffInfo): Map<string, Rule> {
-    const sfxRules: Sequence<Rule> = gs(affInfo.SFX || [])
+    const sfxRules: SfxRule[] = [...(affInfo.SFX || [])]
         .map(([, sfx]) => sfx)
         .map((sfx) => ({ id: sfx.id, type: 'sfx', sfx }));
-    const pfxRules: Sequence<Rule> = gs(affInfo.PFX || [])
+    const pfxRules: PfxRule[] = [...(affInfo.PFX || [])]
         .map(([, pfx]) => pfx)
         .map((pfx) => ({ id: pfx.id, type: 'pfx', pfx }));
-    const flagRules: Sequence<Rule> = GS.sequenceFromObject(affInfo as AffTransformFlags)
-        .filter(([key, value]) => !!affFlag[key] && !!value)
+    const flagRules: FlagRule[] = [
+        ...GS.sequenceFromObject(affInfo as AffTransformFlags)
+            .filter(([key, value]) => !!affFlag[key] && !!value)
+            .map(([key, value]) => ({ id: value!, type: 'flag', flags: affFlag[key] })),
+    ];
 
-        .map(([key, value]) => ({ id: value!, type: 'flag', flags: affFlag[key] }));
+    const rules = [...sfxRules, ...pfxRules, ...flagRules].reduce((acc, rule) => {
+        acc.set(rule.id, rule);
+        return acc;
+    }, new Map<string, Rule>());
 
-    const rules = sfxRules
-        .concat(pfxRules)
-        .concat(flagRules)
-        .reduce<Map<string, Rule>>((acc, rule) => {
-            acc.set(rule.id, rule);
-            return acc;
-        }, new Map<string, Rule>());
     return rules;
 }
-
-const affFlag: Mapping<AffTransformFlags, AffWordFlags> = {
-    KEEPCASE: { isKeepCase: true },
-    WARN: { isWarning: true },
-    FORCEUCASE: { isForceUCase: true },
-    FORBIDDENWORD: { isForbiddenWord: true },
-    NOSUGGEST: { isNoSuggest: true },
-    NEEDAFFIX: { isNeedAffix: true },
-    COMPOUNDBEGIN: { canBeCompoundBegin: true },
-    COMPOUNDMIDDLE: { canBeCompoundMiddle: true },
-    COMPOUNDEND: { canBeCompoundEnd: true },
-    COMPOUNDFLAG: { isCompoundPermitted: true },
-    COMPOUNDPERMITFLAG: { isCompoundPermitted: true },
-    COMPOUNDFORBIDFLAG: { isCompoundForbidden: true },
-    ONLYINCOMPOUND: { isOnlyAllowedInCompound: true },
-};
-
-const _FlagToStringMap: Record<keyof AffWordFlags, string> = {
-    isCompoundPermitted: 'C',
-    canBeCompoundBegin: 'B',
-    canBeCompoundMiddle: 'M',
-    canBeCompoundEnd: 'E',
-    isOnlyAllowedInCompound: 'O',
-    isWarning: 'W',
-    isKeepCase: 'K',
-    isForceUCase: 'U',
-    isForbiddenWord: 'F',
-    isNoSuggest: 'N',
-    isNeedAffix: 'A',
-    isCompoundForbidden: '-',
-};
-
-const _FlagToLongStringMap: Record<keyof AffWordFlags, string> = {
-    isCompoundPermitted: 'CompoundPermitted',
-    canBeCompoundBegin: 'CompoundBegin',
-    canBeCompoundMiddle: 'CompoundMiddle',
-    canBeCompoundEnd: 'CompoundEnd',
-    isOnlyAllowedInCompound: 'OnlyInCompound',
-    isWarning: 'Warning',
-    isKeepCase: 'KeepCase',
-    isForceUCase: 'ForceUpperCase',
-    isForbiddenWord: 'Forbidden',
-    isNoSuggest: 'NoSuggest',
-    isNeedAffix: 'NeedAffix',
-    isCompoundForbidden: 'CompoundForbidden',
-};
-
-const flagToStringMap: Record<string, string | undefined> = _FlagToStringMap;
-const flagToLongStringMap: Record<string, string | undefined> = _FlagToLongStringMap;
 
 export function logAffWord(affWord: AffWord, message: string) {
     /* istanbul ignore if */
@@ -303,6 +277,21 @@ export function compareAff(a: AffWord, b: AffWord) {
     const sigA = signature(a);
     const sigB = signature(b);
     return sigA < sigB ? -1 : sigA > sigB ? 1 : 0;
+}
+
+function reduceAffixRules(
+    affWord: Pick<AffWord, 'flags' | 'rulesApplied'>,
+    allRules: Rule[],
+): { rulesApplied: string; flags: AffWordFlags } {
+    return allRules
+        .filter((rule) => !!rule.flags)
+        .reduce(
+            (acc, rule) => ({
+                rulesApplied: [acc.rulesApplied, rule.id].join(' '),
+                flags: { ...acc.flags, ...rule.flags },
+            }),
+            { rulesApplied: affWord.rulesApplied, flags: affWord.flags },
+        );
 }
 
 /**

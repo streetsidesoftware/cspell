@@ -3,7 +3,7 @@ import type { Sequence } from 'gensequence';
 import { genSequence } from 'gensequence';
 import pkgIconvLite from 'iconv-lite';
 
-import type { Aff } from './aff.js';
+import type { Aff } from './affLegacy.js';
 import type { AffWord } from './affDef.js';
 import { parseAffFileToAff } from './affReader.js';
 import type { WordInfo } from './types.js';

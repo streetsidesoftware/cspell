@@ -3,8 +3,8 @@ import { readdirSync } from 'fs';
 import * as path from 'path';
 import { describe, expect, it } from 'vitest';
 
-import { Aff, affWordToColoredString, asAffWord, compareAff, filterAff, flagsToString } from './aff.js';
 import type { AffWord } from './affDef.js';
+import { Aff, affWordToColoredString, asAffWord, compareAff, filterAff, flagsToString } from './affLegacy.js';
 import * as AffReader from './affReader.js';
 import { parseAffFileToAff } from './affReader.js';
 
@@ -15,7 +15,9 @@ const enAff = path.join(DICTIONARY_LOCATIONS, 'en_US.aff');
 // const enGbAff = path.join(DICTIONARY_LOCATIONS, 'en_GB.aff');
 const esAff = path.join(DICTIONARY_LOCATIONS, 'es_ANY.aff');
 const frAff = path.join(DICTIONARY_LOCATIONS, 'fr-moderne.aff');
-const huAff = path.join(DICTIONARY_LOCATIONS, 'hu', 'hu.aff');
+const huAff = path.join(DICTIONARY_LOCATIONS, 'hu/hu.aff');
+const huHuAff = path.join(DICTIONARY_LOCATIONS, 'hu_hu/hu_HU.aff');
+const basqueAff = path.join(DICTIONARY_LOCATIONS, 'eu/eu.aff');
 
 describe('Basic Aff Validation', () => {
     const pAff = AffReader.parseAff(getSimpleAff());
@@ -236,6 +238,30 @@ describe('Validate loading Hungarian', () => {
         const w = r.map((affWord) => affWord.word);
         expect(w).toEqual(expect.arrayContaining(['kemping']));
         expect(w.length).toBeGreaterThan(1);
+    });
+});
+
+describe('Hungarian Performance', async () => {
+    const aff = await parseAffFileToAff(huHuAff);
+
+    it('applyRulesToDicEntry', async () => {
+        /* cspell:disable-next-line */
+        const r = aff.applyRulesToDicEntry('öntőműhely/VËŻj×LÓnňéyČŔŕTtYcź', 1);
+        const w = r.map((affWord) => affWord.word);
+        console.log('applyRulesToDicEntry %o', w);
+        expect(w).toBeDefined();
+    });
+});
+
+describe.only('Basque Performance', async () => {
+    const aff = await parseAffFileToAff(basqueAff);
+
+    it('applyRulesToDicEntry', async () => {
+        /* cspell:disable-next-line */
+        const r = aff.applyRulesToDicEntry('farsiera/11,1', 3);
+        const w = r.map((affWord) => affWord.word);
+        console.log('applyRulesToDicEntry %o', w);
+        expect(w).toBeDefined();
     });
 });
 

@@ -4,7 +4,7 @@ import { createWriteStream, openSync, writeSync } from 'fs';
 import type { Sequence } from 'gensequence';
 import { genSequence } from 'gensequence';
 
-import { asAffWord } from './aff.js';
+import { asAffWord } from './affLegacy.js';
 import type { AffWord } from './affDef.js';
 import { IterableHunspellReader } from './IterableHunspellReader.js';
 import { iterableToStream } from './iterableToStream.js';
