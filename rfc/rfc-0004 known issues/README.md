@@ -104,7 +104,7 @@ tests/aggregation_regress/tests.py:915:102 (grep)
   "django/conf/locale/fr/*.py:*:* (octobre)",
   "tests/aggregation_regress/tests.py:728:11 (realiased)",
   "tests/aggregation_regress/tests.py:812:8 (referer)",
-  "tests/aggregation_regress/tests.py:915:102 (grep)"
+  "tests/aggregation_regress/tests.py:915:102 (grep)",
 ]
 ```
 
