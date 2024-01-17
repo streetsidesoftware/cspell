@@ -171,7 +171,7 @@ jobs:
 
       - name: Cache Build
         id: step-cache-build
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         with:
           key: ${{ needs.build.outputs.key }}
           path: ${{ needs.build.outputs.path }}
@@ -199,7 +199,7 @@ jobs:
           echo "repo-info=$(jq -c '.repositories[] | select(.path == "${{ matrix.repo }}")' integration-tests/config/config.json)" >> $GITHUB_OUTPUT
 
       - name: Cache Integration Test Repository Files
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         with:
           key: int-repo-temp-files-${{ matrix.repo }}-${{ fromJSON(steps.step-repo-info.outputs.repo-info).commit }}
           path: |
