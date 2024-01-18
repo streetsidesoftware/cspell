@@ -32,7 +32,7 @@ jobs:
       - run: pnpm --filter @cspell/cspell-types --filter @cspell/cspell-bundled-dicts run build
 
       - name: Restore CSpell cache
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         with:
           key: cspell-cache-v2-${{ runner.os }}-${{ hashFiles('**/*.ts', '**/*.md') }}
           path: |
