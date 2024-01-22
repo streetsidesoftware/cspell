@@ -3,9 +3,9 @@ Repository: googleapis/google-cloud-cpp
 Url: https://github.com/googleapis/google-cloud-cpp.git
 Args: '["--config=${repoConfig}/cspell.json","**/*","-e","{*.BUILD,BUILD,CHANGELOG.md,*.sh,*.cfg,*.ps1,Dockerfile.*,*.Dockerfile,*.{yaml,xml,json,cmake}}"]'
 Summary:
-  files: 17190
-  filesWithIssues: 11446
-  issues: 97357
+  files: 17210
+  filesWithIssues: 11455
+  issues: 97406
   errors: 0
 Errors: []
 
@@ -699,9 +699,9 @@ issues:
   - "google/cloud/bigtable/benchmarks/embedded_server.cc:25:11       btadmin     U       namespace btadmin = ::google::bigtable"
   - "google/cloud/bigtable/benchmarks/random_mutation.cc:31:8        ABCDEFGHIJLKMNOPQRSTUVWXY       U       \"ABCDEFGHIJLKMNOPQRSTUVWXYZabcdefghijlkmnopqrstuvwxyz"
   - "google/cloud/bigtable/benchmarks/random_mutation.cc:31:33       Zabcdefghijlkmnopqrstuvwxyz     U       ABCDEFGHIJLKMNOPQRSTUVWXYZabcdefghijlkmnopqrstuvwxyz0123456789-/_\");"
-  - "google/cloud/bigtable/bigtable_client_unit_tests.bzl:85:12          readmodifywriterow      U       \"table_readmodifywriterow_test.cc\","
-  - "google/cloud/bigtable/bigtable_client_unit_tests.bzl:86:12          readrow                 U       \"table_readrow_test.cc\","
-  - "google/cloud/bigtable/bigtable_client_unit_tests.bzl:87:12          readrows                U       \"table_readrows_test.cc\","
+  - "google/cloud/bigtable/bigtable_client_unit_tests.bzl:86:12          readmodifywriterow      U       \"table_readmodifywriterow_test.cc\","
+  - "google/cloud/bigtable/bigtable_client_unit_tests.bzl:87:12          readrow                 U       \"table_readrow_test.cc\","
+  - "google/cloud/bigtable/bigtable_client_unit_tests.bzl:88:12          readrows                U       \"table_readrows_test.cc\","
   - "google/cloud/bigtable/BUILD.bazel:106:22        readrowsparser      U       name = \"internal_readrowsparser_test\","
   - "google/cloud/bigtable/client_options_test.cc:86:38          testadmin               U       AdminEndpointOption>(\"testadmin.googleapis.com\")"
   - "google/cloud/bigtable/client_options_test.cc:87:46          testinstanceadmin       U       InstanceAdminEndpointOption>(\"testinstanceadmin.googleapis.com\")"
@@ -723,15 +723,15 @@ issues:
   - "google/cloud/bigtable/examples/howto_mock_data_api.cc:32:11         cbtm    U       namespace cbtm = ::google::cloud::bigtable"
   - "google/cloud/bigtable/filters.h:622:6       subfilters      U       * subfilters S1, S2, and S3, the"
   - "google/cloud/bigtable/instance_admin_test.cc:49:11          iamproto    U       namespace iamproto = ::google::iam::v1"
-  - "google/cloud/bigtable/internal/async_row_reader_test.cc:335:35      Doesnt (Doesn't)    U       AsyncRowReaderTest, ParserEofDoesntFailOnUnfinishedRowIfRowLimit"
-  - "google/cloud/bigtable/internal/async_row_reader.cc:72:31        cntr    U       explicit CountFrames(int& cntr) : cntr(++cntr) {}"
+  - "google/cloud/bigtable/internal/async_row_reader_test.cc:342:37      Doesnt (Doesn't)    U       AsyncRowReaderTest, ParserEofDoesntFailOnUnfinishedRowIfRowLimit"
+  - "google/cloud/bigtable/internal/async_row_reader.cc:73:31        cntr    U       explicit CountFrames(int& cntr) : cntr(++cntr) {}"
   - "google/cloud/bigtable/internal/bigtable_channel_refresh_test.cc:43:50       deregistering       U       once per channel when deregistering them."
   - "google/cloud/bigtable/internal/bigtable_stub_factory.cc:56:22       Urlsafe     U       return internal::UrlsafeBase64Encode(proto.SerializeAs"
-  - "google/cloud/bigtable/internal/bulk_mutator_test.cc:409:35      Retryable       U       BulkMutatorTest, ReportEitherRetryableMutationFailOrStreamFail"
-  - "google/cloud/bigtable/internal/data_connection_impl.cc:418:24       satisying       U       // sure of that, satisying the `promise<>` is deferred"
+  - "google/cloud/bigtable/internal/bulk_mutator_test.cc:430:37      Retryable       U       BulkMutatorTest, ReportEitherRetryableMutationFailOrStreamFail"
+  - "google/cloud/bigtable/internal/data_connection_impl.cc:445:24       satisying       U       // sure of that, satisying the `promise<>` is deferred"
   - "google/cloud/bigtable/internal/defaults_test.cc:154:38      tableadmin          U       AdminEndpointOption>(\"tableadmin.googleapis.com\")"
   - "google/cloud/bigtable/internal/defaults_test.cc:155:46      instanceadmin       U       InstanceAdminEndpointOption>(\"instanceadmin.googleapis.com\");"
-  - "google/cloud/bigtable/internal/defaults_test.cc:361:28      directpath          U       EXPECT_EQ(\"google-c2p:///directpath-bigtable.googleapis"
+  - "google/cloud/bigtable/internal/defaults_test.cc:366:28      directpath          U       EXPECT_EQ(\"google-c2p:///directpath-bigtable.googleapis"
   - "google/cloud/bigtable/internal/legacy_async_row_reader_test.cc:142:22       corresponse     U       * Future at idx i corresponse to i-th expected row"
   - "google/cloud/bigtable/internal/legacy_async_row_reader_test.cc:550:66       noooo           U       PERMISSION_DENIED, \"noooo\");"
   - "google/cloud/bigtable/internal/legacy_row_reader_test.cc:89:14          preconfigured       U       // Returns a preconfigured set of parsers, so expectatio"
@@ -911,8 +911,8 @@ issues:
   - "google/cloud/internal/oauth2_service_account_credentials_test.cc:608:17         Tkuo        U       \"4GwC2MnI8TkuoHe4Bj2MvA8mM8TVwIvpBs"
   - "google/cloud/internal/oauth2_service_account_credentials_test.cc:608:43         Etsj        U       TkuoHe4Bj2MvA8mM8TVwIvpBs6Etsj6Jdaz4rg==\";"
   - "google/cloud/internal/oauth2_service_account_credentials_test.cc:608:48         Jdaz        U       MvA8mM8TVwIvpBs6Etsj6Jdaz4rg==\";"
-  - "google/cloud/internal/oauth2_service_account_credentials.cc:274:32      notasecret      U       2_parse(p12.get(), \"notasecret\", &pkey_raw, &cert_raw"
-  - "google/cloud/internal/oauth2_service_account_credentials.cc:299:51      oneline         U       decltype(openssl_free)> oneline("
+  - "google/cloud/internal/oauth2_service_account_credentials.cc:280:32      notasecret      U       2_parse(p12.get(), \"notasecret\", &pkey_raw, &cert_raw"
+  - "google/cloud/internal/oauth2_service_account_credentials.cc:305:51      oneline         U       decltype(openssl_free)> oneline("
   - "google/cloud/internal/opentelemetry_context.h:37:8          GAPICs      U       * For GAPICs, the size never exceeds"
   - "google/cloud/internal/populate_common_options_test.cc:99:11         optionses       U       Options optionses[] = {"
   - "google/cloud/internal/port_platform.h:75:16         CPPUNWIND       U       # if defined(_CPPUNWIND)"
@@ -1123,9 +1123,9 @@ issues:
   - "google/cloud/storage/bucket_metadata_test.cc:1246:37        Coldline            U       LifecycleRule::SetStorageClassColdline());"
   - "google/cloud/storage/bucket_metadata_test.cc:1260:65        COLDLINE            U       orageClass\", \"storageClass\": \"COLDLINE\"},"
   - "google/cloud/storage/bucket_metadata.cc:225:14      subpatch    U       if (labels_subpatch_dirty_) {"
-  - "google/cloud/storage/client_options_test.cc:46:38       TESTBENCH       U       endpoint_(\"CLOUD_STORAGE_TESTBENCH_ENDPOINT\", {}),"
-  - "google/cloud/storage/client_options_test.cc:435:27      Projec          U       F(ClientOptionsTest, ProjecIdtWithEnv) {"
-  - "google/cloud/storage/client_options.cc:119:26       iamapi      U       (emulator) return \"/iamapi\";"
+  - "google/cloud/storage/client_options_test.cc:47:38       TESTBENCH       U       endpoint_(\"CLOUD_STORAGE_TESTBENCH_ENDPOINT\", {}),"
+  - "google/cloud/storage/client_options_test.cc:460:27      Projec          U       F(ClientOptionsTest, ProjecIdtWithEnv) {"
+  - "google/cloud/storage/client_options.cc:120:26       iamapi      U       (emulator) return \"/iamapi\";"
   - "google/cloud/storage/client_options.h:308:33        prefx       U       ClientOptions& add_user_agent_prefx(std::string const& v"
   - "google/cloud/storage/client_sign_policy_document_test.cc:127:55         Ymxv    U       blob = \"dGVzdC1zaWduZWQtYmxvYg==\";"
   - "google/cloud/storage/client_sign_url_test.cc:83:41          Bobject     U       actual, HasSubstr(\"test%2Bobject\"));"
@@ -1198,7 +1198,7 @@ issues:
   - "google/cloud/storage/internal/grpc/bucket_request_parser.cc:79:6        subobject       U       // subobject."
   - "google/cloud/storage/internal/grpc/object_request_parser_test.cc:63:33          Cuakt       U       md5) : StEvo2V/qoDCuaktZSw3IQ=="
   - "google/cloud/storage/internal/grpc/stub.cc:226:14       testbench       U       auto const testbench ="
-  - "google/cloud/storage/internal/grpc/stub.cc:428:10       wopts           U       auto wopts = grpc::WriteOptions"
+  - "google/cloud/storage/internal/grpc/stub.cc:430:10       wopts           U       auto wopts = grpc::WriteOptions"
   - "google/cloud/storage/internal/object_requests_test.cc:253:61        NEFCQ       U       encryption-key: MTIzNEFCQ0Q=\"));"
   - "google/cloud/storage/internal/object_requests_test.cc:273:61        QUJDRD      U       source-encryption-key: QUJDRDEyMzQ=\"));"
   - "google/cloud/storage/internal/object_requests_test.cc:547:27        sdlkj       U       \"&upload_id=xa298sd_sdlkj2\";"
