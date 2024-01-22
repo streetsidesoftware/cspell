@@ -3,7 +3,7 @@ Repository: MicrosoftDocs/PowerShell-Docs
 Url: "https://github.com/MicrosoftDocs/PowerShell-Docs.git"
 Args: ["--config=../../../cspell-power-shell-docs.config.yaml","**"]
 Lines:
- CSpell: Files checked: 2670, Issues found: 5711 in 1264 files
+ CSpell: Files checked: 3133, Issues found: 6542 in 1478 files
  exit code: 1
 ./LICENSE:139:15    - Unknown word (sublicensable)   -- non-sublicensable, non-exclusive, irrevocable
 ./LICENSE:205:34    - Unknown word (waivable)        -- under any voluntary or waivable statutory or compulsory
@@ -103,7 +103,6 @@ Lines:
 ./reference/5.1/Microsoft.PowerShell.Core/About/about_Language_Modes.md:313:5     - Unknown word (wmiclass)              -- - `[wmiclass]`
 ./reference/5.1/Microsoft.PowerShell.Core/About/about_Language_Modes.md:314:5     - Unknown word (wmisearcher)           -- - `[wmisearcher]`
 ./reference/5.1/Microsoft.PowerShell.Core/About/about_Line_Editing.md:81:12     - Unknown word (Readline)   -- - [about_PSReadline](../../PSReadline/About
-./reference/5.1/Microsoft.PowerShell.Core/About/about_Modules.md:37:57     - Unknown word (registerd)  -- is available from a registerd repository,
 ./reference/5.1/Microsoft.PowerShell.Core/About/about_Modules.md:95:11     - Unknown word (autoloading) -- ## Module autoloading
 ./reference/5.1/Microsoft.PowerShell.Core/About/about_Operator_Precedence.md:88:14     - Unknown word (coalese)    -- | `??` (null-coalese operator)
 ./reference/5.1/Microsoft.PowerShell.Core/About/about_Operators.md:130:28    - Unknown word (Nosuch)     -- example, `(Get-Item /Nosuch); $?` unexpectedly yields
@@ -231,7 +230,7 @@ Lines:
 ./reference/5.1/Microsoft.PowerShell.Core/New-Module.md:228:11    - Unknown word (Manoj)      -- $m.hello("Manoj")
 ./reference/5.1/Microsoft.PowerShell.Core/New-ModuleManifest.md:211:8     - Unknown word (JKBC)       -- 'JKBC'
 ./reference/5.1/Microsoft.PowerShell.Core/New-PSSession.md:151:58    - Unknown word (Corpnet)    -- ComputerName Server1.Domain44.Corpnet.Fabrikam.com -Credential
-./reference/5.1/Microsoft.PowerShell.Core/New-PSSessionConfigurationFile.md:1073:4    - Unknown word (npssc)      -- - `npssc`
+./reference/5.1/Microsoft.PowerShell.Core/New-PSSessionConfigurationFile.md:1071:4    - Unknown word (npssc)      -- - `npssc`
 ./reference/5.1/Microsoft.PowerShell.Core/New-PSSessionConfigurationFile.md:158:52    - Unknown word (slst)       -- AliasDefinitions = @(@{Name='slst';Value='Select-String
 ./reference/5.1/Microsoft.PowerShell.Core/New-PSSessionConfigurationFile.md:193:30    - Unknown word (TESTSHARE)  -- EnvironmentVariables = @{TESTSHARE='\\Test2\Test'}
 ./reference/5.1/Microsoft.PowerShell.Core/New-PSSessionOption.md:386:46    - Unknown word (Setspn)     -- SPNs, such as by using `Setspn.exe`, that are registered
@@ -483,7 +482,8 @@ Lines:
 ./reference/7.4/Microsoft.PowerShell.Core/About/about_CommonParameters.md:46:23     - Unknown word (proga)      -- **ProgressAction** (proga)
 ./reference/7.4/Microsoft.PowerShell.Core/About/about_Pipelines.md:432:24    - Unknown word (xzvf)       -- curl -s -L $uri | tar -xzvf - -C .
 ./reference/7.4/Microsoft.PowerShell.Core/Get-Command.md:463:22    - Unknown word (Damerau)    -- calculated using the Damerau Levenshtein Distance
-./reference/7.4/Microsoft.PowerShell.Utility/Invoke-RestMethod.md:1523:38   - Unknown word (Brotli)     -- added support for the Brotli compression algorithm
+./reference/7.4/Microsoft.PowerShell.Utility/Invoke-RestMethod.md:1527:38   - Unknown word (Brotli)     -- added support for the Brotli compression algorithm
+./reference/7.5/Microsoft.PowerShell.Core/About/about_Modules.md:37:57     - Unknown word (registerd)  -- is available from a registerd repository,
 ./reference/docs-conceptual/community/2020-updates.md:103:156   - Unknown word (fsackur)        -- compiled-cmdlets) (thanks @fsackur)
 ./reference/docs-conceptual/community/2020-updates.md:104:143   - Unknown word (joshduffney)    -- functions) (thanks @joshduffney)
 ./reference/docs-conceptual/community/2020-updates.md:124:3     - Unknown word (nickdevore)     -- | nickdevore |     1      |
@@ -1164,6 +1164,7 @@ Lines:
 ./reference/docs-conceptual/lang-spec/chapter-08.md:889:25    - Unknown word (fmno)       -- "ABC def`nghi`tjkl`fmno @#$"
 ./reference/docs-conceptual/lang-spec/chapter-11.md:78:9      - Unknown word (Modulepath) -- `$Env:PSModulepath = $Env:PSModulepath
 ./reference/docs-conceptual/lang-spec/chapter-12.md:794:32    - Unknown word (regularexpressionoption) -- chapter-04.md#4264-regularexpressionoption-type
+./reference/docs-conceptual/learn/Glossary.md:175:26    - Unknown word (boolens)    -- primitive types, such as boolens and numbers, and other
 ./reference/docs-conceptual/learn/application-control.md:55:1      - Unknown word (wevtutil)   -- wevtutil.exe sl PowerShellCore
 ./reference/docs-conceptual/learn/deep-dives/add-credentials-to-powershell-functions.md:12:55     - Unknown word (duffney)    -- check out his blog at [duffney.io][duffney.io].
 ./reference/docs-conceptual/learn/deep-dives/add-credentials-to-powershell-functions.md:176:31    - Unknown word (mgmt)       -- Install-WindowsFeature web-mgmt-tools` if required.
@@ -1273,21 +1274,21 @@ Lines:
 ./reference/docs-conceptual/samples/Working-with-Registry-Keys.md:51:3      - Unknown word (regedit)    -- (`regedit.exe`).
 ./reference/docs-conceptual/toc.yml:114:57    - Unknown word (shouldprocess) -- dives/everything-about-shouldprocess.md
 ./reference/docs-conceptual/toc.yml:226:34    - Unknown word (winrmsecurity) -- href: learn/remoting/winrmsecurity.md
-./reference/docs-conceptual/toc.yml:299:63    - Unknown word (objectmodelroot) -- ise/object-model/the-objectmodelroot-object.md
-./reference/docs-conceptual/toc.yml:301:63    - Unknown word (iseaddontoolcollection) -- ise/object-model/the-iseaddontoolcollection-object.md
-./reference/docs-conceptual/toc.yml:303:63    - Unknown word (iseaddontool)           -- ise/object-model/the-iseaddontool-object.md
-./reference/docs-conceptual/toc.yml:305:63    - Unknown word (iseeditor)              -- ise/object-model/the-iseeditor-object.md
-./reference/docs-conceptual/toc.yml:307:63    - Unknown word (isefilecollection)      -- ise/object-model/the-isefilecollection-object.md
-./reference/docs-conceptual/toc.yml:309:63    - Unknown word (isefile)                -- ise/object-model/the-isefile-object.md
-./reference/docs-conceptual/toc.yml:311:63    - Unknown word (isemenuitemcollection)  -- ise/object-model/the-isemenuitemcollection-object.md
-./reference/docs-conceptual/toc.yml:313:63    - Unknown word (isemenuitem)            -- ise/object-model/the-isemenuitem-object.md
-./reference/docs-conceptual/toc.yml:315:63    - Unknown word (iseoptions)             -- ise/object-model/the-iseoptions-object.md
-./reference/docs-conceptual/toc.yml:317:63    - Unknown word (isesnippetcollection)   -- ise/object-model/the-isesnippetcollection-object.md
-./reference/docs-conceptual/toc.yml:319:63    - Unknown word (isesnippetobject)       -- ise/object-model/the-isesnippetobject.md
-./reference/docs-conceptual/toc.yml:321:63    - Unknown word (powershelltabcollection) -- ise/object-model/the-powershelltabcollection-object.md
-./reference/docs-conceptual/toc.yml:323:63    - Unknown word (powershelltab)           -- ise/object-model/the-powershelltab-object.md
-./reference/docs-conceptual/toc.yml:393:41    - Unknown word (cmdline)                 -- dev-cross-plat/create-cmdline-predictor.md
-./reference/docs-conceptual/toc.yml:457:38    - Unknown word (hackathons)              -- community/contributing/hackathons.md
+./reference/docs-conceptual/toc.yml:301:63    - Unknown word (objectmodelroot) -- ise/object-model/the-objectmodelroot-object.md
+./reference/docs-conceptual/toc.yml:303:63    - Unknown word (iseaddontoolcollection) -- ise/object-model/the-iseaddontoolcollection-object.md
+./reference/docs-conceptual/toc.yml:305:63    - Unknown word (iseaddontool)           -- ise/object-model/the-iseaddontool-object.md
+./reference/docs-conceptual/toc.yml:307:63    - Unknown word (iseeditor)              -- ise/object-model/the-iseeditor-object.md
+./reference/docs-conceptual/toc.yml:309:63    - Unknown word (isefilecollection)      -- ise/object-model/the-isefilecollection-object.md
+./reference/docs-conceptual/toc.yml:311:63    - Unknown word (isefile)                -- ise/object-model/the-isefile-object.md
+./reference/docs-conceptual/toc.yml:313:63    - Unknown word (isemenuitemcollection)  -- ise/object-model/the-isemenuitemcollection-object.md
+./reference/docs-conceptual/toc.yml:315:63    - Unknown word (isemenuitem)            -- ise/object-model/the-isemenuitem-object.md
+./reference/docs-conceptual/toc.yml:317:63    - Unknown word (iseoptions)             -- ise/object-model/the-iseoptions-object.md
+./reference/docs-conceptual/toc.yml:319:63    - Unknown word (isesnippetcollection)   -- ise/object-model/the-isesnippetcollection-object.md
+./reference/docs-conceptual/toc.yml:321:63    - Unknown word (isesnippetobject)       -- ise/object-model/the-isesnippetobject.md
+./reference/docs-conceptual/toc.yml:323:63    - Unknown word (powershelltabcollection) -- ise/object-model/the-powershelltabcollection-object.md
+./reference/docs-conceptual/toc.yml:325:63    - Unknown word (powershelltab)           -- ise/object-model/the-powershelltab-object.md
+./reference/docs-conceptual/toc.yml:395:41    - Unknown word (cmdline)                 -- dev-cross-plat/create-cmdline-predictor.md
+./reference/docs-conceptual/toc.yml:459:38    - Unknown word (hackathons)              -- community/contributing/hackathons.md
 ./reference/docs-conceptual/toc.yml:88:37     - Unknown word (keyhandlers) -- href: learn/shell/using-keyhandlers.md
 ./reference/docs-conceptual/whats-new/What-s-New-in-PowerShell-72.md:129:11    - Unknown word (awakecoding) -- host by awakecoding · Pull Request #146
 ./reference/docs-conceptual/whats-new/What-s-New-in-PowerShell-73.md:100:12    - Unknown word (eugenesmlv) -- (Thanks @eugenesmlv!)
@@ -1307,7 +1308,13 @@ Lines:
 ./reference/docs-conceptual/whats-new/What-s-New-in-PowerShell-74.md:22:88     - Unknown word (gregsdennis) -- 1][18141]) (Thanks @gregsdennis!)
 ./reference/docs-conceptual/whats-new/What-s-New-in-PowerShell-74.md:90:3      - Unknown word (Webcmdlets)  -- - Webcmdlets add 308 to redirect
 ./reference/docs-conceptual/whats-new/What-s-New-in-PowerShell-74.md:98:26     - Unknown word (webcmdlets)  -- Fix using xml -Body in webcmdlets without an encoding
-./reference/docs-conceptual/whats-new/cmdlet-versions.md:221:107   - Unknown word (Notsupportedonmac) -- | ![Included][01] | NotsupportedonmacOS |
+./reference/docs-conceptual/whats-new/What-s-New-in-PowerShell-75.md:41:12     - Unknown word (LNKLEO)     -- (Thanks @LNKLEO!)
+./reference/docs-conceptual/whats-new/What-s-New-in-PowerShell-75.md:53:4      - Unknown word (chrisdent)  -- @chrisdent-de!)
+./reference/docs-conceptual/whats-new/What-s-New-in-PowerShell-75.md:63:83     - Unknown word (mawosoft)   -- 5][20745]) (Thanks @mawosoft!)
+./reference/docs-conceptual/whats-new/What-s-New-in-PowerShell-75.md:75:4      - Unknown word (jborean)    -- @jborean93!)
+./reference/docs-conceptual/whats-new/What-s-New-in-PowerShell-75.md:81:29     - Unknown word (setuid)     -- unixmode` to handle `setuid` and `sticky` when file
+./reference/docs-conceptual/whats-new/What-s-New-in-PowerShell-75.md:81:8      - Unknown word (unixmode)   -- - Fix `unixmode` to handle `setuid`
+./reference/docs-conceptual/whats-new/cmdlet-versions.md:222:125   - Unknown word (Notsupportedonmac) -- | ![Included][01] | NotsupportedonmacOS |
 ./reference/docs-conceptual/whats-new/differences-from-windows-powershell.md:1147:23   - Unknown word (CONSOLEHOST) -- DELETE_ME_TO_DISABLE_CONSOLEHOST_TELEMETRY` to disable
 ./reference/docs-conceptual/whats-new/differences-from-windows-powershell.md:280:26    - Unknown word (inputformat) -- short hand to match `-inputformat`, which now needs to
 ./reference/docs-conceptual/whats-new/differences-from-windows-powershell.md:309:25    - Unknown word (Paren)       -- Preserve `$?` for **ParenExpression**, **SubExpression
@@ -1326,7 +1333,7 @@ Lines:
 ./reference/media/index/av_colors_128.svg:6:19      - Unknown word (evenodd)    -- <path fill-rule="evenodd" clip-rule="evenodd
 ./reference/media/index/powershell_128.svg:5:21      - Unknown word (SVGID)      -- <linearGradient id="SVGID_1_" gradientUnits="userSpaceO
 ./reference/media/shared/check-mark-button-2705.svg:3:12      - Unknown word (svgg)       -- <g id="svgg">
-./reference/module/index.md:14:36     - Unknown word (windowsserver) -- FilterColumn1: powershell-7.2,windowsserver2022-ps
+./reference/module/index.md:14:36     - Unknown word (windowsserver) -- FilterColumn1: powershell-7.4,windowsserver2022-ps
 ./reference/module/index.md:15:21     - Unknown word (azps)          -- quickFilterColumn2: azps-11.2.0,sqlserver-ps
 ./reference/module/index.md:16:42     - Unknown word (systemcenter)  -- graph-powershell-1.0,systemcenter-ps-2022
 ./tests/Pester/Update-Help.Tests.ps1:24:34     - Unknown word (pshome)     -- HelpInstallationPath = "$pshome\en-US"
