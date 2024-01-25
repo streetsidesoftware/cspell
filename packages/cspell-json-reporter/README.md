@@ -49,7 +49,7 @@ import type {
   MessageType,
   ProgressFileComplete,
   ProgressItem,
-  RunResult,
+  RunResult
 } from '@cspell/cspell-types';
 
 export type CSpellJSONReporterOutput = {

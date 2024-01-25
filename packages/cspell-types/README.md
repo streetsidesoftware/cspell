@@ -37,19 +37,19 @@ const cspell = {
       patterns: [
         {
           name: 'pound-includes',
-          pattern: /^\s*#include.*/g,
-        },
+          pattern: /^\s*#include.*/g
+        }
       ],
-      ignoreRegExpList: ['pound-includes'],
-    },
+      ignoreRegExpList: ['pound-includes']
+    }
   ],
   dictionaryDefinitions: [
     {
       name: 'custom-words',
-      path: './custom-words.txt',
-    },
+      path: './custom-words.txt'
+    }
   ],
-  dictionaries: ['custom-words'],
+  dictionaries: ['custom-words']
 };
 
 module.exports = cspell;
