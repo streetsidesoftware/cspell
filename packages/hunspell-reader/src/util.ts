@@ -72,8 +72,8 @@ export function cleanObject<T>(obj: T): T {
     return obj;
 }
 
-export function groupByField<T>(i: Iterable<T>, field: keyof T): Map<T[typeof field], T[]> {
-    const r = new Map<T[typeof field], T[]>();
+export function groupByField<T, K extends keyof T>(i: Iterable<T>, field: K): Map<T[K], T[]> {
+    const r = new Map<T[K], T[]>();
     for (const t of i) {
         const k = t[field];
         let a = r.get(k);

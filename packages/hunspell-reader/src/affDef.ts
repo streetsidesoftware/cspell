@@ -4,7 +4,7 @@
 // cspell:words MAXDIFF COMPOUNDMIN COMPOUNDRULE COMPOUNDFLAG COMPOUNDLAST FORBIDWARN
 
 export interface Fx {
-    type: string;
+    type: 'PFX' | 'SFX';
     id: string;
     combinable: boolean;
     substitutionSets: Substitutions;

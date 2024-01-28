@@ -3,12 +3,11 @@ import { readdirSync } from 'fs';
 import * as path from 'path';
 import { describe, expect, it } from 'vitest';
 
-import type { AffWord } from './affDef.js';
-import { Aff, affWordToColoredString, asAffWord, compareAff, filterAff, flagsToString } from './affLegacy.js';
-import * as AffReader from './affReader.js';
-import { parseAffFileToAff } from './affReader.js';
+import type { AffixWord } from './aff.js';
+import { Aff, AffixFlags } from './aff.js';
+import { flagToLongStringMap } from './affConstants.js';
+import { parseAff, parseAffFile } from './affReader.js';
 
-const isLoggerOn = false;
 const DICTIONARY_LOCATIONS = path.join(__dirname, '..', 'dictionaries');
 const nlAff = path.join(DICTIONARY_LOCATIONS, 'nl.aff');
 const enAff = path.join(DICTIONARY_LOCATIONS, 'en_US.aff');
@@ -20,23 +19,23 @@ const huHuAff = path.join(DICTIONARY_LOCATIONS, 'hu_hu/hu_HU.aff');
 const basqueAff = path.join(DICTIONARY_LOCATIONS, 'eu/eu.aff');
 
 describe('Basic Aff Validation', () => {
-    const pAff = AffReader.parseAff(getSimpleAff());
-    it('Reads Simple Aff', async () => {
-        const aff = await pAff;
+    const pAff = parseAff(getSimpleAff());
+    it('Reads Simple Aff', () => {
+        const aff = pAff;
         expect(aff.SET).toBe('UTF-8');
         expect(aff.PFX).toBeInstanceOf(Map);
         expect(aff.SFX).toBeInstanceOf(Map);
     });
-    it('Checks the PFX values', async () => {
-        const aff = await pAff;
+    it('Checks the PFX values', () => {
+        const aff = pAff;
         assert(aff.PFX);
         expect(aff.PFX).toBeInstanceOf(Map);
         expect(aff.PFX.has('X')).toBe(true);
         const fx = aff.PFX.get('X');
         expect(fx).toBeDefined();
     });
-    it('Checks the SFX values', async () => {
-        const aff = await pAff;
+    it('Checks the SFX values', () => {
+        const aff = pAff;
         assert(aff.SFX);
         expect(aff.SFX).toBeInstanceOf(Map);
         expect(aff.SFX.has('J')).toBe(true);
@@ -45,7 +44,7 @@ describe('Basic Aff Validation', () => {
     });
 
     it('Checks ICONV OCONV', () => {
-        const aff = new Aff(AffReader.parseAff(getSampleAffIconvOconv()));
+        const aff = new Aff(parseAff(getSampleAffIconvOconv()), 'sampleAff');
         expect(aff.iConv.convert('abc')).toBe('abc');
         expect(aff.iConv.convert('ABC')).toBe('abc');
         expect(aff.iConv.convert('á Á')).toBe('á á');
@@ -63,7 +62,6 @@ describe('Test Aff', () => {
         const w = r.map((affWord) => affWord.word);
         expect(w).toEqual(expect.arrayContaining(['badger']));
         expect(w).toEqual(expect.arrayContaining(['badgeant']));
-        logApplyRulesResults(r);
     });
 
     it('tests applying rules for fr `avoir/180`', async () => {
@@ -72,10 +70,6 @@ describe('Test Aff', () => {
         const w = r.map((affWord) => affWord.word);
         expect(w).toEqual(expect.arrayContaining(['avoir']));
         expect(w).toEqual(expect.arrayContaining(['n’avoir'])); // cspell:ignore n’avoir
-        expect(r.map((affW) => affW.word)).toEqual(
-            r.map((affW) => aff.oConv.convert(affW.prefix + affW.base + affW.suffix)),
-        );
-        logApplyRulesResults(r);
     });
 
     it('tests applying rules for fr with maxDepth', async () => {
@@ -91,18 +85,6 @@ describe('Test Aff', () => {
         expect(r1).not.toEqual(r0);
         const r2 = aff.applyRulesToDicEntry('avoir/180', 1).map((affWord) => affWord.word);
         expect(r2).toEqual(r0);
-    });
-
-    it('test breaking up rules for nl', async () => {
-        const aff = await parseAffFileToAff(nlAff);
-        expect(aff.separateRules('ZbCcChC1')).toEqual(['Zb', 'Cc', 'Ch', 'C1']);
-        expect(aff.separateRules('ZbCcChC199')).toEqual(['Zb', 'Cc', 'Ch', 'C1', '99']);
-    });
-
-    it('test breaking up rules for en', async () => {
-        const aff = await parseAffFileToAff(enAff);
-        expect(aff.separateRules('ZbCcChC1')).not.toEqual(['Zb', 'Cc', 'Ch', 'C1']);
-        expect(aff.separateRules('ZbCcChC1')).toEqual('ZbCch1'.split(''));
     });
 
     it('test getting rules for nl', async () => {
@@ -131,13 +113,13 @@ describe('Test Aff', () => {
                 .getMatchingRules('AaAbAcAdAeAi')
                 .filter((a) => !!a)
                 .map(({ type }) => type),
-        ).toEqual(['sfx', 'sfx', 'sfx', 'sfx', 'sfx', 'sfx']);
+        ).toEqual(['S', 'S', 'S', 'S', 'S', 'S']);
         expect(
             aff
                 .getMatchingRules('PaPbPc')
                 .filter((a) => !!a)
                 .map(({ type }) => type),
-        ).toEqual(['pfx', 'pfx', 'pfx']);
+        ).toEqual(['P', 'P', 'P']);
     });
 
     it('tests applying rules for nl', async () => {
@@ -169,32 +151,6 @@ describe('Test Aff', () => {
             'motivating',
         ]);
     });
-
-    it('tests compareAff', () => {
-        expect(compareAff(asAffWord('word'), asAffWord('word'))).toBe(0);
-        expect(compareAff(asAffWord('a word'), asAffWord('b word'))).toBe(-1);
-        expect(compareAff(asAffWord('b word'), asAffWord('a word'))).toBe(1);
-        const affA = asAffWord('word');
-        const affB = asAffWord('word');
-        affA.flags.isCompoundPermitted = true;
-        expect(compareAff(affA, affB)).toBe(1);
-        affB.flags.isCompoundPermitted = true;
-        expect(compareAff(affA, affB)).toBe(0);
-        affB.flags.canBeCompoundBegin = true;
-        expect(compareAff(affA, affB)).toBe(1);
-    });
-
-    it('test filterAff', () => {
-        const fn = filterAff();
-        expect(fn(asAffWord('Hello'))).toBe(true);
-        expect(fn(asAffWord('Hello'))).toBe(false);
-        expect(fn(asAffWord('Hello', '', { canBeCompoundBegin: true }))).toBe(true);
-        expect(fn(asAffWord('Hello', '', { canBeCompoundBegin: true }))).toBe(false);
-        expect(fn(asAffWord('Hello'))).toBe(true);
-        expect(fn(asAffWord('Hello'))).toBe(false);
-        expect(fn(asAffWord('There'))).toBe(true);
-        expect(fn(asAffWord('There'))).toBe(false);
-    });
 });
 
 describe('Validated loading all dictionaries in the `dictionaries` directory.', () => {
@@ -212,9 +168,11 @@ describe('Validated loading all dictionaries in the `dictionaries` directory.', 
         // const dicDic = dicAff.replace(/\.aff$/, '.dic');
         // const dicContent = fs.readFile(dicDic)
         it(`Ensure we can load ${path.basename(dicAff)}`, async () => {
-            const aff = await AffReader.parseAffFile(dicAff);
-            expect(aff.PFX).toBeInstanceOf(Map);
-            expect(aff.SFX).toBeInstanceOf(Map);
+            const affInfo = await parseAffFile(dicAff);
+            expect(affInfo.PFX).toBeInstanceOf(Map);
+            expect(affInfo.SFX).toBeInstanceOf(Map);
+            const aff = new Aff(affInfo, dicAff);
+            expect(aff).toBeDefined();
         });
     });
 });
@@ -265,18 +223,32 @@ describe('Basque Performance', async () => {
     });
 });
 
-function formatAffWordForSnapshot(affWord: AffWord): string {
-    const { dic, base, rulesApplied, word, suffix, prefix, flags } = affWord;
+function formatAffWordForSnapshot(affWord: AffixWord): string {
+    const { word, flags } = affWord;
     const f = flagsToString(flags);
-    return `${dic} -> ${base} (${rulesApplied.trim()}) [${prefix}|${suffix}] --> '${word}${f ? '/' + f : ''}'`;
+    return `'${word}${f ? '/' + f : ''}'`;
 }
 
-function logApplyRulesResults(affWords: AffWord[]) {
-    affWords.forEach(logApplyRulesResult);
+function flagsToString(flags: AffixFlags): string {
+    const parts: string[] = [];
+    if (flags & AffixFlags.canBeCompoundBegin) parts.push(AffixFlags[AffixFlags.canBeCompoundBegin]);
+    if (flags & AffixFlags.canBeCompoundEnd) parts.push(AffixFlags[AffixFlags.canBeCompoundEnd]);
+    if (flags & AffixFlags.canBeCompoundMiddle) parts.push(AffixFlags[AffixFlags.canBeCompoundMiddle]);
+    if (flags & AffixFlags.isCompoundForbidden) parts.push(AffixFlags[AffixFlags.isCompoundForbidden]);
+    if (flags & AffixFlags.isCompoundPermitted) parts.push(AffixFlags[AffixFlags.isCompoundPermitted]);
+    if (flags & AffixFlags.isForbiddenWord) parts.push(AffixFlags[AffixFlags.isForbiddenWord]);
+    if (flags & AffixFlags.isForceUCase) parts.push(AffixFlags[AffixFlags.isForceUCase]);
+    if (flags & AffixFlags.isKeepCase) parts.push(AffixFlags[AffixFlags.isKeepCase]);
+    if (flags & AffixFlags.isNeedAffix) parts.push(AffixFlags[AffixFlags.isNeedAffix]);
+    if (flags & AffixFlags.isNoSuggest) parts.push(AffixFlags[AffixFlags.isNoSuggest]);
+    if (flags & AffixFlags.isOnlyAllowedInCompound) parts.push(AffixFlags[AffixFlags.isOnlyAllowedInCompound]);
+    if (flags & AffixFlags.isWarning) parts.push(AffixFlags[AffixFlags.isWarning]);
+    return parts.map((f) => flagToLongStringMap[f] || f).join(':');
 }
 
-function logApplyRulesResult(affWord: AffWord) {
-    if (isLoggerOn) console.log(affWordToColoredString(affWord));
+async function parseAffFileToAff(affFile: string) {
+    const affInfo = await parseAffFile(affFile);
+    return new Aff(affInfo, affFile);
 }
 
 function getSimpleAff() {

@@ -3,8 +3,8 @@ import { readFile } from 'fs/promises';
 import { decode as decodeHtmlEntities } from 'html-entities';
 import pkgIconvLite from 'iconv-lite';
 
-import { Aff } from './affLegacy.js';
 import type { AffInfo, Fx, Rep, Substitution, SubstitutionsForRegExp } from './affDef.js';
+import { Aff } from './affLegacy.js';
 import { cleanObject, insertItemIntoGroupByField, isDefined } from './util.js';
 
 const { decode } = pkgIconvLite;
@@ -162,7 +162,7 @@ function parseAffixCreation(line: AffLine): Fx {
     const [flag, combinable, count, ...extra] = (line.value || '').split(spaceRegex);
     const fx: Fx = {
         id: flag,
-        type: line.option,
+        type: line.option === 'SFX' ? 'SFX' : 'PFX',
         combinable: !!combinable.match(yesRegex),
         count,
         extra,
@@ -443,7 +443,9 @@ export function parseAff(affFileContent: string, encoding: string = UTF8): AffIn
 }
 
 export function parseAffFileToAff(filename: string, encoding?: string): Promise<Aff> {
-    return parseAffFile(filename, encoding).then((affInfo) => new Aff(affInfo));
+    return parseAffFile(filename, encoding).then((affInfo) => {
+        return new Aff(affInfo, filename);
+    });
 }
 
 function parseLine(line: string): AffLine {

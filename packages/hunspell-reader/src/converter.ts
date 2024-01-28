@@ -21,9 +21,9 @@ export class Converter {
         }, this._map);
     }
 
-    convert(input: string) {
+    convert = (input: string) => {
         return input.replace(this._match, (m) => {
             return this._map[m] || '';
         });
-    }
+    };
 }

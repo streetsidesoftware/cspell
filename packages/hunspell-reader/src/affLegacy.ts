@@ -37,7 +37,10 @@ export class Aff {
     private _maxSuffixDepth = DefaultMaxDepth;
     private _mapRules: Map<string, string[]> = new Map();
 
-    constructor(public affInfo: AffInfo) {
+    constructor(
+        public affInfo: AffInfo,
+        readonly filename?: string,
+    ) {
         this.rules = processRules(affInfo);
         this._iConv = new Converter(affInfo.ICONV || []);
         this._oConv = new Converter(affInfo.OCONV || []);
@@ -60,7 +63,7 @@ export class Aff {
         const maxSuffixDepth = maxDepth ?? this.maxSuffixDepth;
         const [lineLeft] = line.split(/\s+/, 1);
         const [word, rules = ''] = lineLeft.split('/', 2);
-        const convert = this._oConv.convert.bind(this._oConv);
+        const convert = this._oConv.convert;
         const results = this.applyRulesToWord(asAffWord(word, rules), maxSuffixDepth).map(
             (affWord) => ((affWord.word = convert(affWord.word)), affWord),
         );

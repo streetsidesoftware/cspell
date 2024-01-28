@@ -57,7 +57,7 @@ export class AffCompiler {
         const maxSuffixDepth = maxDepth ?? this.maxSuffixDepth;
         const [lineLeft] = line.split(/\s+/, 1);
         const [word, rules = ''] = lineLeft.split('/', 2);
-        const convert = this._oConv.convert.bind(this._oConv);
+        const convert = this._oConv.convert;
         const results = this.applyRulesToWord(asAffWord(word, rules), maxSuffixDepth).map(
             (affWord) => ((affWord.word = convert(affWord.word)), affWord),
         );

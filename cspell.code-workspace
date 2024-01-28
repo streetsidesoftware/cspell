@@ -40,7 +40,7 @@
                 "autoAttachChildProcesses": true,
                 "skipFiles": ["<node_internals>/**", "**/node_modules/**"],
                 "program": "${workspaceRoot:cspell-monorepo}/node_modules/vitest/vitest.mjs",
-                "args": ["run", "--threads=false", "--test-timeout=600000", "${relativeFile}"],
+                "args": ["run", "--test-timeout=600000", "${relativeFile}"],
                 "cwd": "${fileWorkspaceFolder}",
                 "smartStep": true,
                 "console": "integratedTerminal"
