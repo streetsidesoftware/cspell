@@ -4,9 +4,9 @@ import { createWriteStream, openSync, writeSync } from 'fs';
 import type { Sequence } from 'gensequence';
 import { genSequence } from 'gensequence';
 
-import { asAffWord } from './aff.js';
 import type { AffWord } from './affDef.js';
-import { IterableHunspellReader } from './IterableHunspellReader.js';
+import { asAffWord } from './affLegacy.js';
+import { IterableHunspellReaderLegacy } from './IterableHunspellReaderLegacy.js';
 import { iterableToStream } from './iterableToStream.js';
 import { batch, uniqueFilter } from './util.js';
 
@@ -162,7 +162,7 @@ async function actionPrime(hunspellDicFilename: string, options: Options) {
     log(`Dic file: ${dicFile}`);
     log(`Aff file: ${affFile}`);
     log(`Generating Words...`);
-    const reader = await IterableHunspellReader.createFromFiles(affFile, dicFile);
+    const reader = await IterableHunspellReaderLegacy.createFromFiles(affFile, dicFile);
     if (max_depth && Number.parseInt(max_depth) >= 0) {
         reader.maxDepth = Number.parseInt(max_depth);
     }

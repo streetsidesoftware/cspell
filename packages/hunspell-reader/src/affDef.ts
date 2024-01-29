@@ -4,17 +4,19 @@
 // cspell:words MAXDIFF COMPOUNDMIN COMPOUNDRULE COMPOUNDFLAG COMPOUNDLAST FORBIDWARN
 
 export interface Fx {
-    type: string;
+    type: 'PFX' | 'SFX';
     id: string;
     combinable: boolean;
     substitutionSets: Substitutions;
+    substitutionsForRegExps: SubstitutionsForRegExp[];
     count?: string; // number of line items for this rule.
     extra?: string[]; // extra items on the line.
 }
 
-export type Substitutions = Map<string, SubstitutionSet>;
+export type Substitutions = Map<string, SubstitutionsForRegExp>;
 
 export interface Substitution {
+    type: 'P' | 'S';
     remove: string;
     attach: string;
     attachRules?: string;
@@ -22,9 +24,10 @@ export interface Substitution {
     extra?: string;
 }
 
-export interface SubstitutionSet {
+export interface SubstitutionsForRegExp {
     match: RegExp;
     substitutions: Substitution[];
+    substitutionsGroupedByRemove: Map<RegExp, Substitution[]>;
 }
 
 export interface Rep {
@@ -79,12 +82,26 @@ export interface AffInfo extends AffTransformFlags {
     SFX?: Map<string, Fx>;
 }
 
-export interface Rule {
+export type Rule = FlagRule | PfxRule | SfxRule;
+
+interface RuleBase {
     id: string;
     type: string;
     flags?: AffWordFlags;
     pfx?: Fx;
     sfx?: Fx;
+}
+
+export interface FlagRule extends RuleBase {
+    flags: AffWordFlags;
+}
+
+export interface PfxRule extends RuleBase {
+    pfx: Fx;
+}
+
+export interface SfxRule extends RuleBase {
+    sfx: Fx;
 }
 
 // cspell:ignore straat

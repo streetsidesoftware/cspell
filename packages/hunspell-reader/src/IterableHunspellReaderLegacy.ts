@@ -3,9 +3,9 @@ import type { Sequence } from 'gensequence';
 import { genSequence } from 'gensequence';
 import pkgIconvLite from 'iconv-lite';
 
-import type { Aff } from './aff.js';
 import type { AffWord } from './affDef.js';
-import { parseAffFileToAff } from './affReader.js';
+import type { Aff } from './affLegacy.js';
+import { parseAffFileToAffLegacy } from './affReader.js';
 import type { WordInfo } from './types.js';
 import { filterOrderedList } from './util.js';
 
@@ -21,7 +21,7 @@ export interface HunspellSrcData {
     dic: string[];
 }
 
-export class IterableHunspellReader implements Iterable<string> {
+export class IterableHunspellReaderLegacy implements Iterable<string> {
     readonly aff: Aff;
 
     constructor(readonly src: HunspellSrcData) {
@@ -139,7 +139,7 @@ export class IterableHunspellReader implements Iterable<string> {
      * @returns IterableHunspellReader
      */
     static async createFromFiles(affFile: string, dicFile: string) {
-        const aff = await parseAffFileToAff(affFile, defaultEncoding);
+        const aff = await parseAffFileToAffLegacy(affFile, defaultEncoding);
         const buffer = await fs.readFile(dicFile);
         const dicFileContent = decode(buffer, aff.affInfo.SET);
         const dic = dicFileContent
@@ -147,7 +147,7 @@ export class IterableHunspellReader implements Iterable<string> {
             .slice(1) // The first entry is the count of entries.
             .map((a) => a.trim())
             .filter((line) => !!line);
-        return new IterableHunspellReader({ aff, dic });
+        return new IterableHunspellReaderLegacy({ aff, dic });
     }
 }
 
