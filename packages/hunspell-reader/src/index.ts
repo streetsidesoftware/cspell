@@ -3,8 +3,8 @@ export { parseAff, parseAffFile as readAffFile } from './affReader.js';
 export {
     createMatchingWordsFilter,
     type HunspellSrcData,
-    IterableHunspellReaderLegacy,
     IterableHunspellReaderLegacy as IterableHunspellReader,
+    IterableHunspellReaderLegacy,
     type WordInfo,
 } from './IterableHunspellReaderLegacy.js';
 export { IterableHunspellReaderLegacy as HunspellReader } from './IterableHunspellReaderLegacy.js';
