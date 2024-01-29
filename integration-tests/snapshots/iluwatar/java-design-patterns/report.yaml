@@ -5,7 +5,7 @@ Args: '["**/*.md","**/*.java"]'
 Summary:
   files: 1775
   filesWithIssues: 1727
-  issues: 10221
+  issues: 10237
   errors: 0
 Errors: []
 
@@ -142,7 +142,7 @@ issues:
   - "dao/README.md:109:31        cust            U       customerStream.forEach((cust) -> log.info(cust.toString"
   - "dao/README.md:121:44        Adamson         U       firstName='Adam', lastName='Adamson'}"
   - "dao/README.md:122:43        Bobson          U       firstName='Bob', lastName='Bobson'}"
-  - "dao/src/main/java/com/iluwatar/dao/App.java:47:41       jdbc    U       final String DB_URL = \"jdbc:h2:~/dao\";"
+  - "dao/src/main/java/com/iluwatar/dao/App.java:47:41       jdbc    U       final String DB_URL = \"jdbc:h2:mem:dao;DB_CLOSE"
   - "dao/src/main/java/com/iluwatar/dao/App.java:82:26       Jdbc    U       var dataSource = new JdbcDataSource();"
   - "dao/src/main/java/com/iluwatar/dao/DbCustomerDao.java:61:82         NOSONAR     U       FROM CUSTOMERS\"); // NOSONAR"
   - "dao/src/test/java/com/iluwatar/dao/CustomerTest.java:40:31          FIRSTNAME       U       static final String FIRSTNAME = \"Winston\";"
@@ -176,7 +176,8 @@ issues:
   - "dirty-flag/src/main/java/com/iluwatar/dirtyflag/App.java:25:22          dirtyflag       U       package com.iluwatar.dirtyflag;"
   - "dirty-flag/src/main/java/com/iluwatar/dirtyflag/DataFetcher.java:38:12          swaisuan    U       * @author swaisuan"
   - "domain-model/README.md:283:39       domainmodel     U       main] INFO com.iluwatar.domainmodel.Customer - Tom balance"
-  - "domain-model/src/main/java/com/iluwatar/domainmodel/App.java:27:19          joda    U       import static org.joda.money.CurrencyUnit.USD"
+  - "domain-model/src/main/java/com/iluwatar/domainmodel/App.java:27:19          joda        U       import static org.joda.money.CurrencyUnit.USD"
+  - "domain-model/src/main/java/com/iluwatar/domainmodel/App.java:52:55          testdb      U       DB_URL = \"jdbc:h2:mem:testdb;DB_CLOSE_DELAY=-1\";"
   - "double-checked-locking/src/main/java/com/iluwatar/doublechecked/locking/App.java:25:22          doublechecked       U       package com.iluwatar.doublechecked.locking;"
   - "double-dispatch/src/main/java/com/iluwatar/doubledispatch/App.java:25:22        doubledispatch      U       package com.iluwatar.doubledispatch;"
   - "embedded-value/README.md:54:20          pincode     U       private String pincode;"
@@ -259,7 +260,7 @@ issues:
   - "half-sync-half-async/README.md:29:14        CORBA       U       * [Real Time CORBA](http://www.omg.org"
   - "half-sync-half-async/README.md:34:38        Cranor      U       Schmidt and Charles D. Cranor - Half Sync/Half Async"
   - "half-sync-half-async/src/main/java/com/iluwatar/halfsynchalfasync/App.java:25:22        halfsynchalfasync       U       package com.iluwatar.halfsynchalfasync;"
-  - "health-check/README.md:55:224       iluwatar's      U       patterns/issues/2695) on iluwatar's Java design patterns"
+  - "health-check/README.md:446:225      iluwatar's      U       patterns/issues/2695) on iluwatar's Java design patterns"
   - "health-check/src/main/java/com/iluwatar/health/check/App.java:16:12         ydoksanbir      U       * @author ydoksanbir"
   - "health-check/src/main/java/com/iluwatar/health/check/GarbageCollectionHealthIndicator.java:97:33        Poolmxbean      U       MemoryPoolMXBean memoryPoolmxbean : memoryPoolMxBeans"
   - "health-check/src/test/java/AsynchronousHealthCheckerTest.java:51:51         logback     U       with the root logger of logback"
@@ -783,6 +784,9 @@ issues:
   - "README.md:476:189       Geon                    U       width=\"100px;\" alt=\"Hong Geon-ui\"/><br /><sub><b>Hong"
   - "README.md:477:179       Doksanbir               U       width=\"100px;\" alt=\"Doksanbir\"/><br /><sub><b>Doksanbir"
   - "README.md:479:191       Kwon                    U       0px;\" alt=\"YongHwan Kwon\"/><br /><sub><b>YongHwan"
+  - "README.md:480:182       Jakub                   U       width=\"100px;\" alt=\"Jakub Klimek\"/><br /><sub"
+  - "README.md:480:188       Klimek                  U       \"100px;\" alt=\"Jakub Klimek\"/><br /><sub><b>Jakub"
+  - "README.md:481:254       bachbil                 U       a href=\"#translation-bachbil\" title=\"Translation"
   - "repository/README.md:121:9          nasta           U       var nasta = new Person(\"Nasta"
   - "repository/README.md:121:29         Nasta           U       nasta = new Person(\"Nasta\", \"Kuzminova\", 25);"
   - "repository/README.md:121:38         Kuzminova       U       new Person(\"Nasta\", \"Kuzminova\", 25);"

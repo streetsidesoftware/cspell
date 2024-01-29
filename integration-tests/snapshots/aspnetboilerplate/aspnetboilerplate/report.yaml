@@ -3,9 +3,9 @@ Repository: aspnetboilerplate/aspnetboilerplate
 Url: https://github.com/aspnetboilerplate/aspnetboilerplate
 Args: '["**/*.{md,cs,cshtml}","--exclude=wwwroot","--exclude=**/*SampleApp.Tests/Web*"]'
 Summary:
-  files: 2606
-  filesWithIssues: 834
-  issues: 2941
+  files: 2625
+  filesWithIssues: 846
+  issues: 2970
   errors: 0
 Errors: []
 
@@ -166,14 +166,14 @@ issues:
   - "src/Abp.AspNetCore/Application/Services/Dto/ComboboxItemDtoExtensions.cs:7:76           combobox    U       this ComboboxItemDto comboboxItem)"
   - "src/Abp.AspNetCore/AspNetCore/Configuration/AbpControllerAssemblySettingBuilder.cs:21:101       configurer      U       Action<ControllerModel> configurer)"
   - "src/Abp.AspNetCore/AspNetCore/EntityHistory/HttpRequestEntityChangeSetReasonProvider.cs:17:42       Overrided       U       override string Reason => OverridedValue != null"
-  - "src/Abp.AspNetCore/AspNetCore/ExceptionHandling/AbpAuthorizationExceptionHandlingMiddleware.cs:63:61        Localizaion     U       GetString(AbpWebConsts.LocalizaionSourceName, \"DefaultError"
+  - "src/Abp.AspNetCore/AspNetCore/ExceptionHandling/AbpAuthorizationExceptionHandlingMiddleware.cs:61:61        Localizaion     U       GetString(AbpWebConsts.LocalizaionSourceName, \"DefaultError"
   - "src/Abp.AspNetCore/AspNetCore/MultiTenancy/DomainTenantResolveContributor.cs:9:43           Extracter       U       FormattedStringValueExtracter;"
   - "src/Abp.AspNetCore/AspNetCore/Mvc/Controllers/AbpScriptsController.cs:12:15         Minifier    U       using Abp.Web.Minifier;"
   - "src/Abp.AspNetCore/AspNetCore/Mvc/Proxying/AbpServiceProxiesController.cs:8:30          Proxying    U       namespace Abp.AspNetCore.Mvc.Proxying"
   - "src/Abp.AspNetCore/AspNetCore/Security/AbpSecurityHeadersMiddleware.cs:18:74        nosniff         U       Content-Type-Options\", \"nosniff\");"
   - "src/Abp.AspNetCore/AspNetCore/Security/AbpSecurityHeadersMiddleware.cs:23:155       iframe          U       page in a <frame>, <iframe> or <object>. SAMEORIGIN"
   - "src/Abp.AspNetCore/AspNetCore/Security/AbpSecurityHeadersMiddleware.cs:23:176       SAMEORIGIN      U       iframe> or <object>. SAMEORIGIN makes it being displayed"
-  - "src/Abp.AspNetCore/Json/AbpMvcContractResolver.cs:21:25         datetime    U       private string _datetimeFormat { get; set; }"
+  - "src/Abp.AspNetCore/Json/SystemTextJson/DateOnlyJsonConverter.cs:23:38       fffffffzzz      U       yyyy-MM-ddTHH:mm:ss.fffffffzzz\""
   - "src/Abp.AutoMapper/AutoMapper/AbpAutoMapperConfiguration.cs:11:20       Automapper      U       [Obsolete(\"Automapper will remove static API"
   - "src/Abp.AutoMapper/AutoMapper/AutoMapperConfigurationExtensions.cs:42:63        exemple (example)       U       represent the source exemple : (source) => ..."
   - "src/Abp.AutoMapper/AutoMapper/AutoMapperConfigurationExtensions.cs:51:58        specfic (specific)      U       expression represent a specfic property of a parameter"
@@ -193,6 +193,7 @@ issues:
   - "src/Abp.EntityFramework/EntityFramework/Extensions/QueryableExtensions.cs:74:24         nolock          U       using (var nolockInterceptor = repository"
   - "src/Abp.EntityFramework/EntityFramework/Interceptors/WithNolockInterceptor.cs:12:93         Nolock      U       ityFramework.Interceptors.WithNolockInterceptor\";"
   - "src/Abp.EntityFramework/EntityFramework/Interceptors/WithNolockInterceptor.cs:13:110        NOLOCK      U       Extent\\d+\\](?! WITH \\(NOLOCK\\)))\", RegexOptions.Multiline"
+  - "src/Abp.EntityFramework/EntityFramework/Utils/DateTimePropertyInfoHelper.cs:89:17       datetime    U       var datetimeProperties = entityType"
   - "src/Abp.EntityFrameworkCore/EntityFrameworkCore/Extensions/QueryableExtensions.cs:51:34         Includable      U       Func<IQueryable<T>, IIncludableQueryable<T, object>"
   - "src/Abp.HangFire/Hangfire/Configuration/IAbpHangfireConfiguration.cs:13:30          Hanfgire's      U       // Gets or sets the Hanfgire's <see cref=\"BackgroundJobServe"
   - "src/Abp.HtmlSanitizer/HtmlSanitizer/AbpHtmlSanitizerModule.cs:5:7           Ganss       U       using Ganss.Xss;"
@@ -259,6 +260,7 @@ issues:
   - "src/Abp/Events/Bus/IEventBus.cs:83:13       Unregisters     U       /// Unregisters from an event."
   - "src/Abp/Extensions/StringExtensions.cs:151:31       occurence (occurrence)      U       / Gets index of nth occurence of a char in a string"
   - "src/Abp/IShouldInitialize.cs:7:72           Initializable       U       injection, <see cref=\"IInitializable.Initialize\"/>"
+  - "src/Abp/Json/AbpDateTimeConverter.cs:18:85          FFFFFFFK    U       -'dd'T'HH':'mm':'ss.FFFFFFFK\";"
   - "src/Abp/Linq/Expressions/PredicateBuilder.cs:167:38         implicitely     U       Allows this object to be implicitely converted to an Expression"
   - "src/Abp/Linq/Expressions/PredicateBuilder.cs:194:39         Delagate        U       Implement Expression<TDelagate> methods and properties"
   - "src/Abp/Linq/Expressions/PredicateBuilder.cs:201:31         NETSTANDARD     U       5 || WINDOWS_APP || NETSTANDARD || PORTABLE || PORTABLE"
@@ -492,7 +494,7 @@ issues:
   - "test/Abp.EntityFrameworkCore.Dapper.Tests/Tests/Repository_Tests.cs:215:51      sqls    U       execute_method_for_void_sqls_should_work(CommandType"
   - "test/Abp.EntityFrameworkCore.Dapper.Tests/Tests/Transaction_Tests.cs:70:59          oguzhansoykan       U       Oguzhan_Same_Uow\", \"www.oguzhansoykan.com\")"
   - "test/Abp.MailKit.Tests/MailKitEmailSender_Tests.cs:50:38        stmp    U       mailConfig.Host.Returns(\"stmp_server_name\");"
-  - "test/Abp.NHibernate.Tests/AbpNHibernateInterceptor_Tests.cs:70:33       Parfume     U       ItemName = \"Parfume\","
+  - "test/Abp.NHibernate.Tests/AbpNHibernateInterceptor_Tests.cs:71:33       Parfume     U       ItemName = \"Parfume\","
   - "test/Abp.NHibernate.Tests/Basic_Repository_Tests.cs:25:73       emre        U       new Person() { Name = \"emre\" }));"
   - "test/Abp.NHibernate.Tests/Basic_Repository_Tests.cs:43:61       halil       U       new Person() { Name = \"halil\" });"
   - "test/Abp.NHibernate.Tests/Basic_Repository_Tests.cs:92:92       yunus       U       user => user.Name = \"yunus\");"
@@ -518,6 +520,7 @@ issues:
   - "test/Abp.Tests/Extensions/StringExtensions_Tests.cs:74:23       Isparta     U       \"HelloIsparta\".ToSentenceCase().ShouldBe"
   - "test/Abp.Tests/Extensions/StringExtensions_Tests.cs:74:65       isparta     U       entenceCase().ShouldBe(\"Hello isparta\");"
   - "test/Abp.Tests/Extensions/StringExtensions_Tests.cs:77:85       ısparta     U       TR\")).ShouldBe(\"Hello ısparta\");"
+  - "test/Abp.Tests/Json/SystemTextJson/AbpSystemTextJsonExtensions_Tests.cs:78:48       Datetime    U       Serialize_Deserialize_With_Datetime()"
   - "test/Abp.Tests/Localization/DefaultLanguageProvider_Test.cs:15:17       bootstrapper    U       var bootstrapper = AbpBootstrapper.Create"
   - "test/Abp.Tests/Localization/HumanizerOfUndefinedLocalizationSource_Tests.cs:29:51       amet    U       Lorem ipsum dolor sit amet\", new CultureInfo(\"en"
   - "test/Abp.Tests/Localization/HumanizerOfUndefinedLocalizationSource_Tests.cs:34:47       Amet    U       GetString(\"LoremIpsumDolorSitAmet\", new CultureInfo(\"en"
@@ -531,7 +534,6 @@ issues:
   - "test/Abp.Tests/Localization/Test_DictionaryBasedLocalizationSource.cs:100:28        Dünya               U       {\"world\", \"Dünya\"}"
   - "test/Abp.Tests/Localization/Test_XmlLocalizationDictionaryBuilder.cs:34:34          Merhabalar      U       name=\"\"hello\"\" value=\"\"Merhabalar\"\"></text>"
   - "test/Abp.Tests/Localization/TestResourceFiles/MyTestResource.Designer.cs:37:46          Browsable       U       ComponentModel.EditorBrowsableAttribute(global::System"
-  - "test/Abp.Tests/ObjectComparators/DateTimeObjectComparator_Tests.cs:50:36        Datetime    U       void Should_Compare_Datetime(string date1, string"
   - "test/Abp.Tests/ObjectComparators/ObjectComparatorManager_Tests.cs:15:46         Equalto     U       string ReverseOfSecondIsEqualtoFirstCompareType = \"ReverseOfS"
   - "test/Abp.Tests/Runtime/Security/SimpleStringCipher_Tests.cs:24:50       BCHF        U       initVectorString = \"1234BCHF9876skd*\";"
   - "test/Abp.Tests/Runtime/Security/SimpleStringCipher_Tests.cs:25:37       ncpa        U       const string myKey = \"84ncpaKMC_!TuAna\";"

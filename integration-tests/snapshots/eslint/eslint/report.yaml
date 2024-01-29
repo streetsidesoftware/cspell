@@ -3,9 +3,9 @@ Repository: eslint/eslint
 Url: https://github.com/eslint/eslint
 Args: '[".","--config=../../../config/eslint/cspell.config.yaml","--issues-summary-report","--exclude=bin/**","--exclude=CHANGELOG.md","--exclude=_data","--exclude=tests/bench/large.js","--exclude=docs/src/_includes","--exclude=docs/src/assets/{fonts,s?css,images}"]'
 Summary:
-  files: 1909
+  files: 1913
   filesWithIssues: 393
-  issues: 2146
+  issues: 2155
   errors: 0
 Errors: []
 
@@ -210,10 +210,10 @@ issues:
   - "docs/src/use/integrations.md:48:8           Precommit       U       * [Git Precommit Hook](https://coderwall"
   - "docs/src/use/integrations.md:50:4           overcommit      U       * [overcommit Git hook manager](https"
   - "docs/src/use/migrate-to-8.0.0.md:228:20         cliengine       U       ## <a name=\"remove-cliengine\"></a> The `CLIEngine"
-  - "docs/src/use/migrate-to-9.0.0.md:370:21         sourcecode          U       ## <a name=\"removed-sourcecode-getcomments\"></a> Removed"
-  - "docs/src/use/migrate-to-9.0.0.md:370:32         getcomments         U       \"removed-sourcecode-getcomments\"></a> Removed `sourceCode"
-  - "docs/src/use/migrate-to-9.0.0.md:378:21         codepath            U       ## <a name=\"removed-codepath-currentsegments\"></a"
-  - "docs/src/use/migrate-to-9.0.0.md:378:30         currentsegments     U       name=\"removed-codepath-currentsegments\"></a> Removed `CodePath"
+  - "docs/src/use/migrate-to-9.0.0.md:406:21         sourcecode          U       ## <a name=\"removed-sourcecode-getcomments\"></a> Removed"
+  - "docs/src/use/migrate-to-9.0.0.md:406:32         getcomments         U       \"removed-sourcecode-getcomments\"></a> Removed `sourceCode"
+  - "docs/src/use/migrate-to-9.0.0.md:414:21         codepath            U       ## <a name=\"removed-codepath-currentsegments\"></a"
+  - "docs/src/use/migrate-to-9.0.0.md:414:30         currentsegments     U       name=\"removed-codepath-currentsegments\"></a> Removed `CodePath"
   - "docs/src/use/migrating-from-jscs.md:12:111      jscsrs          U       .jscsrc.yaml`, or `.jscsrs.js`. In ESLint, the"
   - "docs/src/use/migrating-from-jscs.md:15:38       Polyjuice       U       Configuration Files Using Polyjuice"
   - "docs/src/use/migrating-from-jscs.md:22:16       polyjuice       U       npm install -g polyjuice"
@@ -332,6 +332,7 @@ issues:
   - "README.md:297:5         sponsorsstart       U       <!--sponsorsstart-->"
   - "README.md:301:564       Workleap            U       f99fe2465f&v=4\" alt=\"Workleap\" height=\"64\"></a></p"
   - "README.md:302:679       Transloadit         U       com/u/125754?v=4\" alt=\"Transloadit\" height=\"32\"></a> <a"
+  - "README.md:302:1192      Nextbase            U       145838380?v=4\" alt=\"Nextbase Starter Kit\" height"
   - "README.md:303:5         sponsorsend         U       <!--sponsorsend-->"
   - "templates/blogpost.md.ejs:8:5           eslintbot       U       - eslintbot"
   - "templates/blogpost.md.ejs:18:10         linkify         U       function linkify(line) {"
@@ -366,11 +367,13 @@ issues:
   - "tests/lib/eslint/eslint.js:1281:57      doesnotexist            U       lintFiles([\"subdir1\", \"doesnotexist/*.js\"]);"
   - "tests/lib/eslint/eslint.js:1356:58      doesexist               U       await eslint.lintFiles([\"doesexist/*.js\"]);"
   - "tests/lib/eslint/eslint.js:1850:30      reignoring              U       it(\"should allow reignoring of previously ignored"
-  - "tests/lib/eslint/eslint.js:2866:39      previos                 U       make sure that the previos assertion checks the"
-  - "tests/lib/eslint/eslint.js:2919:59      intenationally          U       cacheFilePath, \"[]\"); // intenationally invalid to additionally"
-  - "tests/lib/eslint/eslint.js:3089:59      occured (occurred)      U       the previous run that occured after the cache was"
-  - "tests/lib/eslint/eslint.js:5724:31      reignore                U       cwd: `${root}-reignore`,"
-  - "tests/lib/eslint/eslint.js:5764:31      dignore                 U       cwd: `${root}-dignore`,"
+  - "tests/lib/eslint/eslint.js:1891:71      unignoring              U       unignored without also unignoring all files in them\","
+  - "tests/lib/eslint/eslint.js:1905:47      jsfmt                   U       \"!tests/format/**/jsfmt.spec.js\""
+  - "tests/lib/eslint/eslint.js:2980:39      previos                 U       make sure that the previos assertion checks the"
+  - "tests/lib/eslint/eslint.js:3033:59      intenationally          U       cacheFilePath, \"[]\"); // intenationally invalid to additionally"
+  - "tests/lib/eslint/eslint.js:3203:59      occured (occurred)      U       the previous run that occured after the cache was"
+  - "tests/lib/eslint/eslint.js:5838:31      reignore                U       cwd: `${root}-reignore`,"
+  - "tests/lib/eslint/eslint.js:5878:31      dignore                 U       cwd: `${root}-dignore`,"
   - "tests/lib/eslint/legacy-eslint.js:2507:24       succesfully (successfully)      U       it(\"should succesfully execute with a rule"
   - "tests/lib/linter/config-comment-parser.js:165:41        ELEVENTEEN      U       code = \"a: seventy, b:ELEVENTEEN\";"
   - "tests/lib/linter/linter.js:3074:1       consolexlog         U       consolexlog(\"test2\");"
@@ -689,7 +692,7 @@ issuesSummary:
   - "text: autodetected, count: 1, files: 1,"
   - "text: autodetects, count: 1, files: 1,"
   - "text: avalue, count: 1, files: 1,"
-  - "text: barbaz, count: 5, files: 4,"
+  - "text: barbaz, count: 7, files: 5,"
   - "text: barfoo, count: 5, files: 3,"
   - "text: barqux, count: 2, files: 2,"
   - "text: barrito, count: 2, files: 1,"
@@ -910,6 +913,7 @@ issuesSummary:
   - "text: jscodeshift, count: 2, files: 1,"
   - "text: jscript, count: 2, files: 1,"
   - "text: jscsrs, count: 1, files: 1,"
+  - "text: jsfmt, count: 5, files: 1,"
   - "text: jshintignore, count: 2, files: 1,"
   - "text: jsonify, count: 4, files: 4,"
   - "text: Kanti, count: 1, files: 1,"
@@ -1005,6 +1009,7 @@ issuesSummary:
   - "text: newcap, count: 5, files: 1,"
   - "text: Newcap, count: 3, files: 1,"
   - "text: newed, count: 1, files: 1,"
+  - "text: Nextbase, count: 1, files: 1,"
   - "text: nextop, count: 5, files: 1,"
   - "text: Nitin, count: 2, files: 1,"
   - "text: noarg, count: 2, files: 1,"
@@ -1240,6 +1245,7 @@ issuesSummary:
   - "text: unfixable, count: 2, files: 1,"
   - "text: unflattened, count: 5, files: 1,"
   - "text: Unie, count: 1, files: 1,"
+  - "text: unignoring, count: 1, files: 1,"
   - "text: Unignoring, count: 2, files: 2,"
   - "text: unindented, count: 5, files: 1,"
   - "text: unuseds, count: 5, files: 1,"

@@ -3,7 +3,7 @@ Repository: aspnetboilerplate/aspnetboilerplate
 Url: "https://github.com/aspnetboilerplate/aspnetboilerplate"
 Args: ["**/*.{md,cs,cshtml}","--exclude=wwwroot","--exclude=**/*SampleApp.Tests/Web*"]
 Lines:
- CSpell: Files checked: 2606, Issues found: 2941 in 834 files
+ CSpell: Files checked: 2625, Issues found: 2970 in 846 files
  exit code: 1
 ./CONTRIBUTING.md:28:30     - Unknown word (aspnetboilerplate) -- Documents are located in [/aspnetboilerplate/doc](https://github
 ./LICENSE.md:3:25      - Unknown word (Volosoft)   -- Copyright (c) 2013-2021 Volosoft (https://volosoft.com
@@ -161,14 +161,14 @@ Lines:
 ./src/Abp.AspNetCore/Application/Services/Dto/ComboboxItemDtoExtensions.cs:7:76      - Unknown word (combobox)   -- this ComboboxItemDto comboboxItem)
 ./src/Abp.AspNetCore/AspNetCore/Configuration/AbpControllerAssemblySettingBuilder.cs:21:101    - Unknown word (configurer) -- Action<ControllerModel> configurer)
 ./src/Abp.AspNetCore/AspNetCore/EntityHistory/HttpRequestEntityChangeSetReasonProvider.cs:17:42     - Unknown word (Overrided)  -- override string Reason => OverridedValue != null
-./src/Abp.AspNetCore/AspNetCore/ExceptionHandling/AbpAuthorizationExceptionHandlingMiddleware.cs:63:61     - Unknown word (Localizaion) -- GetString(AbpWebConsts.LocalizaionSourceName, "DefaultError
+./src/Abp.AspNetCore/AspNetCore/ExceptionHandling/AbpAuthorizationExceptionHandlingMiddleware.cs:61:61     - Unknown word (Localizaion) -- GetString(AbpWebConsts.LocalizaionSourceName, "DefaultError
 ./src/Abp.AspNetCore/AspNetCore/MultiTenancy/DomainTenantResolveContributor.cs:9:43      - Unknown word (Extracter)  -- FormattedStringValueExtracter;
 ./src/Abp.AspNetCore/AspNetCore/Mvc/Controllers/AbpScriptsController.cs:12:15     - Unknown word (Minifier)   -- using Abp.Web.Minifier;
 ./src/Abp.AspNetCore/AspNetCore/Mvc/Proxying/AbpServiceProxiesController.cs:8:30      - Unknown word (Proxying)   -- namespace Abp.AspNetCore.Mvc.Proxying
 ./src/Abp.AspNetCore/AspNetCore/Security/AbpSecurityHeadersMiddleware.cs:18:74     - Unknown word (nosniff)    -- Content-Type-Options", "nosniff");
 ./src/Abp.AspNetCore/AspNetCore/Security/AbpSecurityHeadersMiddleware.cs:23:155    - Unknown word (iframe)     -- page in a <frame>, <iframe> or <object>. SAMEORIGIN
 ./src/Abp.AspNetCore/AspNetCore/Security/AbpSecurityHeadersMiddleware.cs:23:176    - Unknown word (SAMEORIGIN) -- iframe> or <object>. SAMEORIGIN makes it being displayed
-./src/Abp.AspNetCore/Json/AbpMvcContractResolver.cs:21:25     - Unknown word (datetime)   -- private string _datetimeFormat { get; set; }
+./src/Abp.AspNetCore/Json/SystemTextJson/DateOnlyJsonConverter.cs:23:38     - Unknown word (fffffffzzz) -- yyyy-MM-ddTHH:mm:ss.fffffffzzz"
 ./src/Abp.AutoMapper/AutoMapper/AbpAutoMapperConfiguration.cs:11:20     - Unknown word (Automapper) -- [Obsolete("Automapper will remove static API
 ./src/Abp.AutoMapper/AutoMapper/AutoMapperConfigurationExtensions.cs:42:63     - Unknown word (exemple)    -- represent the source exemple : (source) => ...
 ./src/Abp.AutoMapper/AutoMapper/AutoMapperConfigurationExtensions.cs:51:58     - Unknown word (specfic)    -- expression represent a specfic property of a parameter
@@ -188,6 +188,7 @@ Lines:
 ./src/Abp.EntityFramework/EntityFramework/Extensions/QueryableExtensions.cs:74:24     - Unknown word (nolock)     -- using (var nolockInterceptor = repository
 ./src/Abp.EntityFramework/EntityFramework/Interceptors/WithNolockInterceptor.cs:12:93     - Unknown word (Nolock)     -- ityFramework.Interceptors.WithNolockInterceptor";
 ./src/Abp.EntityFramework/EntityFramework/Interceptors/WithNolockInterceptor.cs:13:110    - Unknown word (NOLOCK)     -- Extent\d+\](?! WITH \(NOLOCK\)))", RegexOptions.Multiline
+./src/Abp.EntityFramework/EntityFramework/Utils/DateTimePropertyInfoHelper.cs:89:17     - Unknown word (datetime)   -- var datetimeProperties = entityType
 ./src/Abp.EntityFrameworkCore/EntityFrameworkCore/Extensions/QueryableExtensions.cs:51:34     - Unknown word (Includable) -- Func<IQueryable<T>, IIncludableQueryable<T, object>
 ./src/Abp.HangFire/Hangfire/Configuration/IAbpHangfireConfiguration.cs:13:30     - Unknown word (Hanfgire's) -- // Gets or sets the Hanfgire's <see cref="BackgroundJobServe
 ./src/Abp.HtmlSanitizer/HtmlSanitizer/AbpHtmlSanitizerModule.cs:5:7       - Unknown word (Ganss)      -- using Ganss.Xss;
@@ -254,6 +255,7 @@ Lines:
 ./src/Abp/Events/Bus/IEventBus.cs:83:13     - Unknown word (Unregisters) -- /// Unregisters from an event.
 ./src/Abp/Extensions/StringExtensions.cs:151:31    - Unknown word (occurence)  -- / Gets index of nth occurence of a char in a string
 ./src/Abp/IShouldInitialize.cs:7:72      - Unknown word (Initializable) -- injection, <see cref="IInitializable.Initialize"/>
+./src/Abp/Json/AbpDateTimeConverter.cs:18:85     - Unknown word (FFFFFFFK)   -- -'dd'T'HH':'mm':'ss.FFFFFFFK";
 ./src/Abp/Linq/Expressions/PredicateBuilder.cs:167:38    - Unknown word (implicitely) -- Allows this object to be implicitely converted to an Expression
 ./src/Abp/Linq/Expressions/PredicateBuilder.cs:194:39    - Unknown word (Delagate)    -- Implement Expression<TDelagate> methods and properties
 ./src/Abp/Linq/Expressions/PredicateBuilder.cs:201:31    - Unknown word (NETSTANDARD) -- 5 || WINDOWS_APP || NETSTANDARD || PORTABLE || PORTABLE
@@ -487,7 +489,7 @@ Lines:
 ./test/Abp.EntityFrameworkCore.Dapper.Tests/Tests/Repository_Tests.cs:215:51    - Unknown word (sqls)       -- execute_method_for_void_sqls_should_work(CommandType
 ./test/Abp.EntityFrameworkCore.Dapper.Tests/Tests/Transaction_Tests.cs:70:59     - Unknown word (oguzhansoykan) -- Oguzhan_Same_Uow", "www.oguzhansoykan.com")
 ./test/Abp.MailKit.Tests/MailKitEmailSender_Tests.cs:50:38     - Unknown word (stmp)       -- mailConfig.Host.Returns("stmp_server_name");
-./test/Abp.NHibernate.Tests/AbpNHibernateInterceptor_Tests.cs:70:33     - Unknown word (Parfume)    -- ItemName = "Parfume",
+./test/Abp.NHibernate.Tests/AbpNHibernateInterceptor_Tests.cs:71:33     - Unknown word (Parfume)    -- ItemName = "Parfume",
 ./test/Abp.NHibernate.Tests/Basic_Repository_Tests.cs:25:73     - Unknown word (emre)       -- new Person() { Name = "emre" }));
 ./test/Abp.NHibernate.Tests/Basic_Repository_Tests.cs:43:61     - Unknown word (halil)      -- new Person() { Name = "halil" });
 ./test/Abp.NHibernate.Tests/Basic_Repository_Tests.cs:92:92     - Unknown word (yunus)      -- user => user.Name = "yunus");
@@ -513,6 +515,7 @@ Lines:
 ./test/Abp.Tests/Extensions/StringExtensions_Tests.cs:74:23     - Unknown word (Isparta)    -- "HelloIsparta".ToSentenceCase().ShouldBe
 ./test/Abp.Tests/Extensions/StringExtensions_Tests.cs:74:65     - Unknown word (isparta)    -- entenceCase().ShouldBe("Hello isparta");
 ./test/Abp.Tests/Extensions/StringExtensions_Tests.cs:77:85     - Unknown word (ısparta)    -- TR")).ShouldBe("Hello ısparta");
+./test/Abp.Tests/Json/SystemTextJson/AbpSystemTextJsonExtensions_Tests.cs:78:48     - Unknown word (Datetime)   -- Serialize_Deserialize_With_Datetime()
 ./test/Abp.Tests/Localization/DefaultLanguageProvider_Test.cs:15:17     - Unknown word (bootstrapper) -- var bootstrapper = AbpBootstrapper.Create
 ./test/Abp.Tests/Localization/HumanizerOfUndefinedLocalizationSource_Tests.cs:29:51     - Unknown word (amet)       -- Lorem ipsum dolor sit amet", new CultureInfo("en
 ./test/Abp.Tests/Localization/HumanizerOfUndefinedLocalizationSource_Tests.cs:34:47     - Unknown word (Amet)       -- GetString("LoremIpsumDolorSitAmet", new CultureInfo("en
@@ -526,7 +529,6 @@ Lines:
 ./test/Abp.Tests/Localization/Test_DictionaryBasedLocalizationSource.cs:61:32     - Unknown word (Selam)      -- {"hello", "Selam"},
 ./test/Abp.Tests/Localization/Test_DictionaryBasedLocalizationSource.cs:77:100    - Unknown word (localed)    -- ShouldBe("World"); //not localed into french
 ./test/Abp.Tests/Localization/Test_XmlLocalizationDictionaryBuilder.cs:34:34     - Unknown word (Merhabalar) -- name=""hello"" value=""Merhabalar""></text>
-./test/Abp.Tests/ObjectComparators/DateTimeObjectComparator_Tests.cs:50:36     - Unknown word (Datetime)   -- void Should_Compare_Datetime(string date1, string
 ./test/Abp.Tests/ObjectComparators/ObjectComparatorManager_Tests.cs:15:46     - Unknown word (Equalto)    -- string ReverseOfSecondIsEqualtoFirstCompareType = "ReverseOfS
 ./test/Abp.Tests/Runtime/Security/SimpleStringCipher_Tests.cs:24:50     - Unknown word (BCHF)       -- initVectorString = "1234BCHF9876skd*";
 ./test/Abp.Tests/Runtime/Security/SimpleStringCipher_Tests.cs:25:37     - Unknown word (ncpa)       -- const string myKey = "84ncpaKMC_!TuAna";
