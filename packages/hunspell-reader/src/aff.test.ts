@@ -122,17 +122,29 @@ describe('Test Aff', () => {
         ).toEqual(['P', 'P', 'P']);
     });
 
+    it('tests applying rules for nl huis', async () => {
+        const aff = await parseAffFileToAff(nlAff, true);
+        const line = 'huis/CACcYbCQZhC0';
+        const appliedRules = aff.applyRulesToDicEntry(line).map((affWord) => formatAffWordForSnapshot(aff, affWord));
+        expect(appliedRules).toMatchSnapshot();
+    });
+
     it('tests applying rules for nl', async () => {
-        const aff = await parseAffFileToAff(nlAff);
+        const aff = await parseAffFileToAff(nlAff, true);
+        aff.setTraceMode(true);
         const lines = ['dc/ClCwKc', 'aak/Zf', 'huis/CACcYbCQZhC0', 'pannenkoek/ZbCACcC0'];
-        const appliedRules = lines.map((line) => aff.applyRulesToDicEntry(line).map(formatAffWordForSnapshot));
+        const appliedRules = lines.map((line) =>
+            aff.applyRulesToDicEntry(line).map((affWord) => formatAffWordForSnapshot(aff, affWord)),
+        );
         expect(appliedRules).toMatchSnapshot();
     });
 
     it('tests applying rules for es', async () => {
-        const aff = await parseAffFileToAff(esAff);
+        const aff = await parseAffFileToAff(esAff, true);
         const lines = ['ababillar/RED'];
-        const appliedRules = lines.map((line) => aff.applyRulesToDicEntry(line).map(formatAffWordForSnapshot));
+        const appliedRules = lines.map((line) =>
+            aff.applyRulesToDicEntry(line).map((affWord) => formatAffWordForSnapshot(aff, affWord)),
+        );
         expect(appliedRules).toMatchSnapshot();
     });
 
@@ -223,10 +235,12 @@ describe('Basque Performance', async () => {
     });
 });
 
-function formatAffWordForSnapshot(affWord: AffixWord): string {
+function formatAffWordForSnapshot(aff: Aff, affWord: AffixWord): string {
     const { word, flags } = affWord;
     const f = flagsToString(flags);
-    return `'${word}${f ? '/' + f : ''}'`;
+    const appliedRules = aff.getFlagsValuesForAffixWord(affWord);
+    const extra = appliedRules?.length ? ` Rules: ${appliedRules} line: ${affWord.dict.line}` : '';
+    return `'${word}${f ? '/' + f : ''}'${extra}`;
 }
 
 function flagsToString(flags: AffixFlags): string {
@@ -246,9 +260,11 @@ function flagsToString(flags: AffixFlags): string {
     return parts.map((f) => flagToLongStringMap[f] || f).join(':');
 }
 
-async function parseAffFileToAff(affFile: string) {
+async function parseAffFileToAff(affFile: string, trace = false) {
     const affInfo = await parseAffFile(affFile);
-    return new Aff(affInfo, affFile);
+    const aff = new Aff(affInfo, affFile);
+    aff.setTraceMode(trace);
+    return aff;
 }
 
 function getSimpleAff() {

@@ -14,6 +14,12 @@ export interface ConvertedAffixWord extends AffixWord {
     originalWord: string;
 }
 
+const debug = false;
+
+function logError(msg: string, ...args: unknown[]) {
+    debug && console.error(msg, ...args);
+}
+
 const DefaultMaxDepth = 5;
 
 export class Aff {
@@ -63,8 +69,8 @@ export class Aff {
      */
     applyRulesToWord(affWord: AffixWord, remainingDepth: number): AffixWord[] {
         const compoundMin = this.affInfo.COMPOUNDMIN ?? 3;
-        const { word, flags } = affWord;
-        const wordWithFlags: AffixWord = { word, rules: undefined, flags };
+        const { word, flags, dict, appliedRules } = affWord;
+        const wordWithFlags: AffixWord = { word, rules: undefined, flags, dict, appliedRules };
         return [wordWithFlags, ...this.applyAffixesToWord(affWord, remainingDepth)]
             .filter(({ flags }) => !(flags & AffixFlags.isNeedAffix))
             .map((affWord) => adjustCompounding(affWord, compoundMin));
@@ -87,11 +93,15 @@ export class Aff {
         const combineRules = rule.type === 'P' && rule.fx.combinable ? combinableSfx : [];
         const flags = affWord.flags & ~AffixFlags.isNeedAffix;
         const matchingSubstitutions = rule.fx.substitutionsForRegExps.filter((sub) => sub.match.test(word));
-        const partialAffWord = { word, flags, rules: combineRules };
-        return matchingSubstitutions.flatMap((sub) => this.#applySubstitution(rule, partialAffWord, sub));
+        const source = {
+            dict: affWord.dict,
+            appliedRules: affWord.appliedRules ? [...affWord.appliedRules, rule.idx] : undefined,
+        };
+        const partialAffWord = this.affData.toAffixWord(source, word, flags, combineRules);
+        return matchingSubstitutions.flatMap((sub) => this.#applySubstitution(partialAffWord, sub));
     }
 
-    #substituteAttach(affix: FxRule, affWord: AffixWord, sub: AffSubstitution, stripped: string): AffixWord {
+    #substituteAttach(affWord: AffixWord, sub: AffSubstitution, stripped: string): AffixWord {
         const { flags } = affWord;
         const subRules = this.affData.getRulesForAffSubstitution(sub);
         const rules = joinRules(affWord.rules, subRules);
@@ -101,16 +111,16 @@ export class Aff {
         } else {
             word = sub.attach + stripped;
         }
-        return this.affData.toAffixWord(word, flags, rules);
+        return this.affData.toAffixWord(affWord, word, flags, rules);
     }
 
-    #applySubstitution(affix: FxRule, affWord: AffixWord, subs: AffSubstitutionsForRegExp): AffixWord[] {
+    #applySubstitution(affWord: AffixWord, subs: AffSubstitutionsForRegExp): AffixWord[] {
         const results: AffixWord[] = [];
         for (const [replace, substitutions] of subs.substitutionsGroupedByRemove) {
             if (!replace.test(affWord.word)) continue;
             const stripped = affWord.word.replace(replace, '');
             for (const sub of substitutions) {
-                results.push(this.#substituteAttach(affix, affWord, sub, stripped));
+                results.push(this.#substituteAttach(affWord, sub, stripped));
             }
         }
         return results;
@@ -121,12 +131,26 @@ export class Aff {
         return rules;
     }
 
+    /**
+     * Convert the applied rule indexes to AFF Letters.
+     * Requires that the affixWord was generated with trace mode turned on.
+     * @param affixWord - the generated AffixWord.
+     */
+    getFlagsValuesForAffixWord(affixWord: AffixWord): string[] | undefined {
+        const rules = this.affData.getRulesForIndexes(affixWord.appliedRules);
+        return rules?.map((r) => r.id);
+    }
+
     get iConv() {
         return this._iConv;
     }
 
     get oConv() {
         return this._oConv;
+    }
+
+    setTraceMode(value: boolean) {
+        this.affData.trace = value;
     }
 }
 
@@ -263,9 +287,18 @@ interface DictionaryEntry {
     word: string;
     /** flags are the part after the `/`, `word/FLAGS` */
     flags: string;
+    /** The original dictionary line. */
+    line: string;
 }
 
-export interface AffixWord {
+export interface AffixWordSource {
+    /** Original dictionary entry */
+    dict: DictionaryEntry;
+    /** Optional applied rules, trace mode must be turned on. */
+    appliedRules?: number[] | undefined;
+}
+
+export interface AffixWord extends AffixWordSource {
     /** The word */
     word: string;
     /** Rules to apply */
@@ -282,6 +315,7 @@ class AffData {
     affFlagType: 'long' | 'num' | 'char';
     missingFlags: Set<string> = new Set();
     private _mapRuleIdxToRules = new WeakMap<RuleIdx[], AffRule[]>();
+    public trace = false;
 
     constructor(
         private affInfo: AffInfo,
@@ -294,18 +328,39 @@ class AffData {
     dictLineToEntry(line: DictionaryLine): DictionaryEntry {
         const [lineLeft] = line.split(/\s+/, 1);
         const [word, rules = ''] = lineLeft.split('/', 2);
-        return { word, flags: rules };
+        return { word, flags: rules, line };
     }
 
     dictLineToAffixWord(line: DictionaryLine): AffixWord {
         const entry = this.dictLineToEntry(line);
-        return this.toAffixWord(entry.word, AffixFlags.none, this.getRules(entry.flags));
+        return this.toAffixWord(
+            { dict: entry, appliedRules: this.trace ? [] : undefined },
+            entry.word,
+            AffixFlags.none,
+            this.getRules(entry.flags),
+        );
     }
 
-    toAffixWord(word: string, flags: AffixFlags, rules: AffRule[] | undefined): AffixWord {
-        if (!rules) return { word, rules: undefined, flags };
+    toAffixWord(
+        source: AffixWordSource | AffixWord,
+        word: string,
+        flags: AffixFlags,
+        rules: AffRule[] | undefined,
+    ): AffixWord {
+        const dict = source.dict;
+        let appliedRules = source.appliedRules;
+        if (!rules) return { word, rules: undefined, flags, dict, appliedRules };
         const fxRules = rules.filter((rule): rule is FxRule => rule.type !== 'F');
-        return { word, rules: fxRules.length ? fxRules : undefined, flags: flags | this.rulesToFlags(rules) };
+        if (appliedRules) {
+            appliedRules = [...appliedRules, ...rules.filter((r) => r.type === 'F').map((r) => r.idx)];
+        }
+        return {
+            word,
+            rules: fxRules.length ? fxRules : undefined,
+            flags: flags | this.rulesToFlags(rules),
+            appliedRules,
+            dict,
+        };
     }
 
     getRules(rules: WordFlags): AffRule[] {
@@ -353,7 +408,7 @@ class AffData {
                 if (found === undefined && !this.missingFlags.has(flag)) {
                     this.missingFlags.add(flag);
                     const filename = this.filename;
-                    console.error('Unable to resolve flag: %o, for file: %o', flag, filename);
+                    logError('Unable to resolve flag: %o, for file: %o', flag, filename);
                     // throw new Error('Unable to resolve flag');
                 }
                 return found;
@@ -385,7 +440,7 @@ class AffData {
             const found = this.mapToRuleIdx.get(rule.id);
             if (found) {
                 const filename = this.filename;
-                console.error('Duplicate affix rule: %o, filename: %o', rule.id, filename);
+                logError('Duplicate affix rule: %o, filename: %o', rule.id, filename);
                 const toAdd = Array.isArray(found) ? found : [found];
                 toAdd.push(idx);
                 this.mapToRuleIdx.set(rule.id, toAdd);
@@ -406,7 +461,7 @@ class AffData {
         const idx = this.mapToRuleIdx.get(id);
         // if (index !== idx) {
         //     const filename = this.affInfo.filename;
-        //     console.error('Unexpected index: %o !== %o, rule %o, filename: %o', index, idx, rule, filename);
+        //     logError('Unexpected index: %o !== %o, rule %o, filename: %o', index, idx, rule, filename);
         // }
         assert(idx !== undefined && (idx === index || (Array.isArray(idx) && idx.includes(index))));
         const fx = sfx || pfx;
