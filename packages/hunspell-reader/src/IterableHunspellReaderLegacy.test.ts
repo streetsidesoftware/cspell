@@ -5,7 +5,7 @@ import { describe, expect, it, test } from 'vitest';
 
 import * as Aff from './affLegacy.js';
 import * as AffReader from './affReader.js';
-import { IterableHunspellReader } from './IterableHunspellReader.js';
+import { IterableHunspellReaderLegacy } from './IterableHunspellReaderLegacy.js';
 
 const DICTIONARY_LOCATIONS = path.join(__dirname, '..', 'dictionaries');
 
@@ -15,14 +15,14 @@ describe('Basic Validation of the Reader', () => {
     it('Validate the dictionary', async () => {
         const aff = await pSimpleAff;
         const src = { aff, dic: textToArray(simpleWords) };
-        const reader = new IterableHunspellReader(src);
+        const reader = new IterableHunspellReaderLegacy(src);
         expect(reader.dic).toEqual(textToArray(simpleWords));
     });
 
     it('Validate Simple Words List', async () => {
         const aff = await pSimpleAff;
         const src = { aff, dic: textToArray(simpleWords) };
-        const reader = new IterableHunspellReader(src);
+        const reader = new IterableHunspellReaderLegacy(src);
         expect([...reader.iterateRootWords()]).toEqual(['happy', 'ring']);
         const tapped: string[] = [];
         const words = [...reader.seqAffWords((w) => tapped.push(w)).map((a) => a.word)];
@@ -34,7 +34,7 @@ describe('Basic Validation of the Reader', () => {
     it('Validate Expanding `place/AJ`', async () => {
         const aff = await pSimpleAff;
         const src = { aff, dic: ['place/AJ'] };
-        const reader = new IterableHunspellReader(src);
+        const reader = new IterableHunspellReaderLegacy(src);
         // cspell:ignore replacings
         expect([...reader]).toEqual(['place', 'placing', 'placings', 'replace', 'replacing', 'replacings']);
         expect(reader.size).toBe(1);
@@ -43,7 +43,7 @@ describe('Basic Validation of the Reader', () => {
     it('Validates prefix/suffix/base', async () => {
         const aff = await pSimpleAff;
         const src = { aff, dic: textToArray(simpleWords) };
-        const reader = new IterableHunspellReader(src);
+        const reader = new IterableHunspellReaderLegacy(src);
         const results = [...reader.seqAffWords().map((a) => a.prefix + '<' + a.base + '>' + a.suffix)];
         const someExpectedWords = ['<happy>', 'un<happy>', '<happ>ily', 'un<happ>ily']; // cspell:ignore happ
         expect(results).toEqual(expect.arrayContaining(someExpectedWords));
@@ -52,7 +52,7 @@ describe('Basic Validation of the Reader', () => {
     it('sets the max depth', async () => {
         const aff = await pSimpleAff;
         const src = { aff, dic: textToArray(simpleWords) };
-        const reader = new IterableHunspellReader(src);
+        const reader = new IterableHunspellReaderLegacy(src);
         const depth = reader.maxDepth;
         reader.maxDepth = 0;
         const results = [...reader.seqAffWords().map((a) => a.prefix + '<' + a.base + '>' + a.suffix)].sort();
@@ -64,7 +64,7 @@ describe('Basic Validation of the Reader', () => {
     it('Iterates a few words', async () => {
         const aff = await pSimpleAff;
         const src = { aff, dic: textToArray(simpleWords) };
-        const reader = new IterableHunspellReader(src);
+        const reader = new IterableHunspellReaderLegacy(src);
         const words = [...reader.iterateWords()];
         expect(words).toEqual(expect.arrayContaining(['happy', 'unhappy', 'happily', 'unhappily', 'ring']));
     });
@@ -76,7 +76,7 @@ describe('HunspellReader En', function () {
     // We are reading big files, so we need to give it some time.
     const aff = __dirname + '/../dictionaries/en_US.aff';
     const dic = __dirname + '/../dictionaries/en_US.dic';
-    const pReader = IterableHunspellReader.createFromFiles(aff, dic);
+    const pReader = IterableHunspellReaderLegacy.createFromFiles(aff, dic);
 
     it(
         'reads dict entries',
@@ -142,7 +142,7 @@ describe('HunspellReader read dictionaries', function () {
         async ({ hunDic }) => {
             const aff = __dirname + `/../dictionaries/${hunDic}.aff`;
             const dic = __dirname + `/../dictionaries/${hunDic}.dic`;
-            const reader = await IterableHunspellReader.createFromFiles(aff, dic);
+            const reader = await IterableHunspellReaderLegacy.createFromFiles(aff, dic);
             const values = reader.seqWords().skip(200).take(200).toArray();
             expect(values.length).toBe(200);
             expect(values).toMatchSnapshot();
@@ -168,7 +168,7 @@ describe('Validated loading all dictionaries in the `dictionaries` directory.', 
         });
 
         it(`Ensure we can load the dictionary ${path.basename(dicDic)}`, async () => {
-            const reader = await IterableHunspellReader.createFromFiles(dicAff, dicDic);
+            const reader = await IterableHunspellReaderLegacy.createFromFiles(dicAff, dicDic);
             const sample = reader.seqWords().take(100).toArray();
             expect(sample).toHaveLength(100);
         });

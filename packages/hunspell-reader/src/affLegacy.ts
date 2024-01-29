@@ -38,7 +38,7 @@ export class Aff {
     private _mapRules: Map<string, string[]> = new Map();
 
     constructor(
-        public affInfo: AffInfo,
+        readonly affInfo: AffInfo,
         readonly filename?: string,
     ) {
         this.rules = processRules(affInfo);

@@ -21,7 +21,7 @@ export interface HunspellSrcData {
     dic: string[];
 }
 
-export class IterableHunspellReader implements Iterable<string> {
+export class IterableHunspellReaderLegacy implements Iterable<string> {
     readonly aff: Aff;
 
     constructor(readonly src: HunspellSrcData) {
@@ -147,7 +147,7 @@ export class IterableHunspellReader implements Iterable<string> {
             .slice(1) // The first entry is the count of entries.
             .map((a) => a.trim())
             .filter((line) => !!line);
-        return new IterableHunspellReader({ aff, dic });
+        return new IterableHunspellReaderLegacy({ aff, dic });
     }
 }
 

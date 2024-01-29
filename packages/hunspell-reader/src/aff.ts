@@ -23,7 +23,7 @@ export class Aff {
     private _maxSuffixDepth = DefaultMaxDepth;
 
     constructor(
-        public affInfo: AffInfo,
+        readonly affInfo: AffInfo,
         filename: string,
     ) {
         this.affData = new AffData(affInfo, filename);
