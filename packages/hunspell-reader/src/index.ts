@@ -4,6 +4,7 @@ export {
     createMatchingWordsFilter,
     type HunspellSrcData,
     IterableHunspellReaderLegacy,
+    IterableHunspellReaderLegacy as IterableHunspellReader,
     type WordInfo,
 } from './IterableHunspellReaderLegacy.js';
 export { IterableHunspellReaderLegacy as HunspellReader } from './IterableHunspellReaderLegacy.js';
