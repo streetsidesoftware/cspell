@@ -94,8 +94,7 @@ Tidelift will coordinate the fix and disclosure.
 
 ## Contributing
 
-Contributions are welcome! [See our contribution guidelines.](CONTRIBUTING.md)<br/>
-**Note:** To add or remove words in a dictionary, visit [cspell-dicts](https://github.com/streetsidesoftware/cspell-dicts/issues).
+Contributions are welcome! See our [contribution notes](CONTRIBUTING.md). **Note:** To add or remove words in a dictionary, visit [cspell-dicts](https://github.com/streetsidesoftware/cspell-dicts/issues).
 
 🙏 _**Special thanks to all of our amazing contributors!**_ 🥰
 
