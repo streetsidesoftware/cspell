@@ -12,7 +12,7 @@ describe('HunspellReader NL', function () {
 
     const affFile = path.join(__dirname, ...'/../dictionaries/nl.aff'.split('/'));
     // const dicFile = path.join(__dirname, ...'/../dictionaries/nl.dic'.split('/'));
-    const pAff = AffReader.parseAffFileToAff(affFile);
+    const pAff = AffReader.parseAffFileToAffLegacy(affFile);
 
     // cspell:ignore baddoek baddoeken
 

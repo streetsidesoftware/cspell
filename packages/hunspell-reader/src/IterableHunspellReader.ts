@@ -3,9 +3,9 @@ import type { Sequence } from 'gensequence';
 import { genSequence } from 'gensequence';
 import pkgIconvLite from 'iconv-lite';
 
-import type { Aff } from './affLegacy.js';
 import type { AffWord } from './affDef.js';
-import { parseAffFileToAff } from './affReader.js';
+import type { Aff } from './affLegacy.js';
+import { parseAffFileToAffLegacy } from './affReader.js';
 import type { WordInfo } from './types.js';
 import { filterOrderedList } from './util.js';
 
@@ -139,7 +139,7 @@ export class IterableHunspellReader implements Iterable<string> {
      * @returns IterableHunspellReader
      */
     static async createFromFiles(affFile: string, dicFile: string) {
-        const aff = await parseAffFileToAff(affFile, defaultEncoding);
+        const aff = await parseAffFileToAffLegacy(affFile, defaultEncoding);
         const buffer = await fs.readFile(dicFile);
         const dicFileContent = decode(buffer, aff.affInfo.SET);
         const dic = dicFileContent

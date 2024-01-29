@@ -3,8 +3,9 @@ import { readFile } from 'fs/promises';
 import { decode as decodeHtmlEntities } from 'html-entities';
 import pkgIconvLite from 'iconv-lite';
 
+import { Aff } from './aff.js';
 import type { AffInfo, Fx, Rep, Substitution, SubstitutionsForRegExp } from './affDef.js';
-import { Aff } from './affLegacy.js';
+import { Aff as AffLegacy } from './affLegacy.js';
 import { cleanObject, insertItemIntoGroupByField, isDefined } from './util.js';
 
 const { decode } = pkgIconvLite;
@@ -445,6 +446,12 @@ export function parseAff(affFileContent: string, encoding: string = UTF8): AffIn
 export function parseAffFileToAff(filename: string, encoding?: string): Promise<Aff> {
     return parseAffFile(filename, encoding).then((affInfo) => {
         return new Aff(affInfo, filename);
+    });
+}
+
+export function parseAffFileToAffLegacy(filename: string, encoding?: string): Promise<AffLegacy> {
+    return parseAffFile(filename, encoding).then((affInfo) => {
+        return new AffLegacy(affInfo, filename);
     });
 }
 

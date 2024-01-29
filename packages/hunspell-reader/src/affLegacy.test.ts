@@ -6,7 +6,7 @@ import { describe, expect, it } from 'vitest';
 import type { AffWord } from './affDef.js';
 import { Aff, affWordToColoredString, asAffWord, compareAff, filterAff, flagsToString } from './affLegacy.js';
 import * as AffReader from './affReader.js';
-import { parseAffFileToAff } from './affReader.js';
+import { parseAffFileToAffLegacy } from './affReader.js';
 
 const isLoggerOn = false;
 const DICTIONARY_LOCATIONS = path.join(__dirname, '..', 'dictionaries');
@@ -58,7 +58,7 @@ describe('Basic Aff Validation', () => {
 
 describe('Test Aff', () => {
     it('tests applying rules for fr `badger/10`', async () => {
-        const aff = await parseAffFileToAff(frAff);
+        const aff = await parseAffFileToAffLegacy(frAff);
         const r = aff.applyRulesToDicEntry('badger/10');
         const w = r.map((affWord) => affWord.word);
         expect(w).toEqual(expect.arrayContaining(['badger']));
@@ -67,7 +67,7 @@ describe('Test Aff', () => {
     });
 
     it('tests applying rules for fr `avoir/180`', async () => {
-        const aff = await parseAffFileToAff(frAff);
+        const aff = await parseAffFileToAffLegacy(frAff);
         const r = aff.applyRulesToDicEntry('avoir/180');
         const w = r.map((affWord) => affWord.word);
         expect(w).toEqual(expect.arrayContaining(['avoir']));
@@ -79,7 +79,7 @@ describe('Test Aff', () => {
     });
 
     it('tests applying rules for fr with maxDepth', async () => {
-        const aff = await parseAffFileToAff(frAff);
+        const aff = await parseAffFileToAffLegacy(frAff);
         aff.maxSuffixDepth = 1;
         const r0 = aff.applyRulesToDicEntry('avoir/180').map((affWord) => affWord.word);
         expect(r0).toEqual(expect.arrayContaining(['avoir']));
@@ -94,19 +94,19 @@ describe('Test Aff', () => {
     });
 
     it('test breaking up rules for nl', async () => {
-        const aff = await parseAffFileToAff(nlAff);
+        const aff = await parseAffFileToAffLegacy(nlAff);
         expect(aff.separateRules('ZbCcChC1')).toEqual(['Zb', 'Cc', 'Ch', 'C1']);
         expect(aff.separateRules('ZbCcChC199')).toEqual(['Zb', 'Cc', 'Ch', 'C1', '99']);
     });
 
     it('test breaking up rules for en', async () => {
-        const aff = await parseAffFileToAff(enAff);
+        const aff = await parseAffFileToAffLegacy(enAff);
         expect(aff.separateRules('ZbCcChC1')).not.toEqual(['Zb', 'Cc', 'Ch', 'C1']);
         expect(aff.separateRules('ZbCcChC1')).toEqual('ZbCch1'.split(''));
     });
 
     it('test getting rules for nl', async () => {
-        const aff = await parseAffFileToAff(nlAff);
+        const aff = await parseAffFileToAffLegacy(nlAff);
         // console.log(aff.getMatchingRules('ZbCcChC1'));
         expect(
             aff
@@ -141,21 +141,21 @@ describe('Test Aff', () => {
     });
 
     it('tests applying rules for nl', async () => {
-        const aff = await parseAffFileToAff(nlAff);
+        const aff = await parseAffFileToAffLegacy(nlAff);
         const lines = ['dc/ClCwKc', 'aak/Zf', 'huis/CACcYbCQZhC0', 'pannenkoek/ZbCACcC0'];
         const appliedRules = lines.map((line) => aff.applyRulesToDicEntry(line).map(formatAffWordForSnapshot));
         expect(appliedRules).toMatchSnapshot();
     });
 
     it('tests applying rules for es', async () => {
-        const aff = await parseAffFileToAff(esAff);
+        const aff = await parseAffFileToAffLegacy(esAff);
         const lines = ['ababillar/RED'];
         const appliedRules = lines.map((line) => aff.applyRulesToDicEntry(line).map(formatAffWordForSnapshot));
         expect(appliedRules).toMatchSnapshot();
     });
 
     it('tests applying rules for en', async () => {
-        const aff = await parseAffFileToAff(enAff);
+        const aff = await parseAffFileToAffLegacy(enAff);
         const r = aff.applyRulesToDicEntry('motivate/CDSG');
         const w = r.map((affWord) => affWord.word);
         expect(w.sort()).toEqual([
@@ -220,7 +220,7 @@ describe('Validated loading all dictionaries in the `dictionaries` directory.', 
 });
 
 describe('Validate loading Hungarian', () => {
-    const affP = parseAffFileToAff(huAff);
+    const affP = parseAffFileToAffLegacy(huAff);
 
     it('tests applying rules for hu Depth 0', async () => {
         const aff = await affP;
@@ -242,7 +242,7 @@ describe('Validate loading Hungarian', () => {
 });
 
 describe('Hungarian Performance', async () => {
-    const aff = await parseAffFileToAff(huHuAff);
+    const aff = await parseAffFileToAffLegacy(huHuAff);
 
     it('applyRulesToDicEntry', async () => {
         /* cspell:disable-next-line */
@@ -254,7 +254,7 @@ describe('Hungarian Performance', async () => {
 });
 
 describe('Basque Performance', async () => {
-    const aff = await parseAffFileToAff(basqueAff);
+    const aff = await parseAffFileToAffLegacy(basqueAff);
 
     it('applyRulesToDicEntry', async () => {
         /* cspell:disable-next-line */
