@@ -1,6 +1,8 @@
 # Contributing
 
-These are some notes about contributing.
+These are some notes about contributing to the project.
+
+**Note:** To add or remove words in a dictionary, visit [cspell-dicts](https://github.com/streetsidesoftware/cspell-dicts/issues).
 
 ## Continuous Integration
 

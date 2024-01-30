@@ -1,12 +1,14 @@
-name: Bug Report Form
-description: Create a report to help us improve
+name: Bug Report
+description: Create a report to help us improve.
 title: "[Bug]: "
 labels: ["Needs Investigating", "bug", "new issue"]
 body:
   - type: markdown
     attributes:
       value: |
-        Thank you for taking the time to fill out this bug report!
+        🛑✋ This is a bug report for cspell software. To add or remove words in a dictionary, visit [cspell-dicts](https://github.com/streetsidesoftware/cspell-dicts/issues).
+
+        Thank you for taking the time to fill out this bug report! Please describe the issue in as much detail as possible.
 
         # Information
 
@@ -14,13 +16,13 @@ body:
     id: kind_of_issue
     attributes:
       label: Kind of Issue
-      description: What type of issues are you having
+      description: What type of issues are you having?
       multiple: true
       options:
         - Runtime - command-line tools
         - Building / Compiling
         - Security
-        - Change in behavior or regression.
+        - Change in behavior / Regression
         - Crash / Error
 
   - type: dropdown
@@ -35,7 +37,7 @@ body:
         - cspell-tools # - used for building dictionary files.
         - cspell-lib # - library that does the actual spell checking.
         - cspell-trie # - tool for working with trie files.
-        - other
+        - Other
 
   - type: input
     id: cspell-version
@@ -53,11 +55,12 @@ body:
       description: Issue with supporting library?
       multiple: true
       options:
-        - "Not sure"
+        - "Not sure / None"
         - "cspell-glob" # - library for matching glob patterns."
         - "cspell-io" # - thin file i/o library."
         - "cspell-trie-lib" # - trie lib."
-        - "Other" # - one fo the other libraries."
+        - "cspell-trie2-lib" # - trie lib alternate format."
+        - "Other" # - one of the other libraries."
 
   - type: dropdown
     id: os-type
@@ -66,12 +69,11 @@ body:
       description: Which OS has the issue?
       multiple: true
       options:
-        - "ALL"
-        - "Macos"
+        - "All of them"
+        - "macOS"
         - "Linux"
         - "Windows"
         - "Other"
-        - "N/A"
 
   - type: input
     id: on-version
@@ -92,7 +94,7 @@ body:
       label: Description
       description: |
         A clear and concise description of what is happening. Please include screenshots and code samples as necessary.
-      placeholder: Please tell us about the issue.
+      placeholder: Please tell us about the issue. Paste screenshots from your clipboard to upload them.
     validations:
       required: true
 
@@ -130,7 +132,7 @@ body:
     attributes:
       label: "cspell.json"
       description: Please provide a copy of your `cspell.json` file.
-      render: js
+      render: jsonc
 
   - type: textarea
     id: cspell-yaml
@@ -152,7 +154,7 @@ body:
       label: Code of Conduct
       description: >
         By submitting this issue, you agree to follow our
-        [Code of Conduct](https://github.com/streetsidesoftware/cspell/blob/main/CODE_OF_CONDUCT.md)
+        [Code of Conduct](https://github.com/streetsidesoftware/cspell/blob/main/CODE_OF_CONDUCT.md).
       options:
         - label: I agree to follow this project's Code of Conduct
           required: true
