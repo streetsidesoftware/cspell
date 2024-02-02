@@ -212,3 +212,15 @@ export interface AffWord {
     prefix: string; // prefixes applied
     dic: string; // dictionary entry
 }
+
+export type RuleIdx = number;
+export type SingleFlag = string;
+export type WordFlags = string;
+export type DictionaryLine = string;
+export interface DictionaryEntry {
+    word: string;
+    /** flags are the part after the `/`, `word/FLAGS` */
+    flags: string;
+    /** The original dictionary line. */
+    line: string;
+}

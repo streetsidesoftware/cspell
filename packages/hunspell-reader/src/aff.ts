@@ -1,13 +1,22 @@
 import assert from 'assert';
 
 import { affFlag } from './affConstants.js';
-import type { AffInfo, AffTransformFlags, AffWordFlags, Fx, Substitution, SubstitutionsForRegExp } from './affDef.js';
+import type {
+    AffInfo,
+    AffTransformFlags,
+    DictionaryEntry,
+    DictionaryLine,
+    Fx,
+    RuleIdx,
+    SingleFlag,
+    Substitution,
+    SubstitutionsForRegExp,
+    WordFlags,
+} from './affDef.js';
+import { AffixFlags, toAffixFlags } from './AffixFlags.js';
 import { Converter } from './converter.js';
+import { LRUCache } from './LRUCache.js';
 import { filterOrderedList, groupByField, isDefined } from './util.js';
-
-// cspell:ignore COMPOUNDBEGIN COMPOUNDEND COMPOUNDFORBIDFLAG COMPOUNDMIDDLE COMPOUNDMIN COMPOUNDLAST FORBIDWARN
-// cspell:ignore FORBIDDENWORD KEEPCASE NEEDAFFIX
-// cspell:ignore uppercased straat
 
 /** The `word` field in a Converted AffWord has been converted using the OCONV mapping */
 export interface ConvertedAffixWord extends AffixWord {
@@ -27,6 +36,7 @@ export class Aff {
     protected _oConv: Converter;
     protected _iConv: Converter;
     private _maxSuffixDepth = DefaultMaxDepth;
+    protected _cacheCombinableRules = new WeakMap<FxRule[], FxRule[]>();
 
     constructor(
         readonly affInfo: AffInfo,
@@ -64,6 +74,8 @@ export class Aff {
         return filtered;
     }
 
+    // cspell:ignore COMPOUNDMIN
+
     /**
      * @internal
      */
@@ -81,7 +93,7 @@ export class Aff {
             return [];
         }
         const rules = affWord.rules;
-        const combinableSfx = rules.filter((r) => r.type === 'S' && r.fx.combinable);
+        const combinableSfx = this.#calcCombinableSfxRules(rules);
         const r = affWord.rules
             .flatMap((affix) => this.applyAffixToWord(affix, affWord, combinableSfx))
             .flatMap((affWord) => this.applyRulesToWord(affWord, remainingDepth - 1));
@@ -152,6 +164,93 @@ export class Aff {
     setTraceMode(value: boolean) {
         this.affData.trace = value;
     }
+
+    /**
+     * Takes a line from a hunspell.dic file and applies the rules found in the aff file.
+     * For performance reasons, only the `word` field is mapped with OCONV.
+     * @param {string} line - the line from the .dic file.
+     */
+    dictEntryToSuffixTree(line: string, root?: SuffixRoot, maxDepth?: number): SuffixRoot {
+        const entry = this.affData.dictLineToEntry(line);
+        const results = this.affixWordToSuffixTreeRoot(entry, root || createRoot(), maxDepth);
+        return results;
+    }
+
+    affixWordToSuffixTreeRoot(entry: DictionaryEntry, root: SuffixRoot, maxDepth?: number): SuffixRoot {
+        const affix = this.affData.dictEntryToApplyAffix(entry);
+        const trace = addSuffixToTraceNode(createTrace(root), affix);
+
+        this.#suffixTreeApplyAffixRules(trace, maxDepth ?? this.maxSuffixDepth);
+        return root;
+    }
+
+    #calcCombinableSfxRules(rules: FxRule[]): FxRule[] {
+        const found = this._cacheCombinableRules.get(rules);
+        if (found) return found;
+        const combinable = rules.filter((r) => r.fx.combinable && r.type === 'S');
+        this._cacheCombinableRules.set(rules, combinable);
+        return combinable;
+    }
+
+    /**
+     * @param trace - the sum of the traces.fix should be equal to affix.word.
+     * @param affix - the affix with rules to apply
+     * @param remainingDepth - the remaining depth to apply the rules.
+     * @returns the current node
+     */
+    #suffixTreeApplyAffixRules(trace: SuffixTreeTraceNode, remainingDepth: number) {
+        if (remainingDepth <= 0 || !trace.rules?.length) {
+            // Nothing to do.
+            return;
+        }
+        for (const rule of trace.rules) {
+            this.#suffixTreeApplyAffixRule(trace, rule, remainingDepth);
+        }
+    }
+
+    #suffixTreeApplyAffixRule(trace: SuffixTreeTraceNode, rule: FxRule, remainingDepth: number) {
+        if (remainingDepth <= 0) {
+            // Nothing to do.
+            return;
+        }
+
+        const { word } = trace;
+        const flags = trace.node.flags & ~AffixFlags.isNeedAffix;
+        const combinableSfx = rule.type === 'P' && trace.rules ? this.#calcCombinableSfxRules(trace.rules) : undefined;
+
+        const subPrefix = (sub: AffSubstitution, toRemove: number) => {
+            const toApply = this.affData.getRulesToApplyForAffSubstitution(sub);
+            return addPrefixToTraceNode(trace, {
+                fix: sub.attach,
+                flags: flags | toApply.flags,
+                remove: toRemove,
+                rules: joinRules(combinableSfx, toApply.rules),
+            });
+        };
+        const subSuffix = (sub: AffSubstitution, toRemove: number) => {
+            const toApply = this.affData.getRulesToApplyForAffSubstitution(sub);
+            return addSuffixToTraceNode(trace, {
+                fix: sub.attach,
+                flags: flags | toApply.flags,
+                remove: toRemove,
+                rules: toApply.rules,
+            });
+        };
+        const subFn = rule.type === 'P' ? subPrefix : subSuffix;
+
+        const matchingSubstitutions = rule.fx.substitutionsForRegExps.filter((sub) => sub.match.test(word));
+        for (const subs of matchingSubstitutions) {
+            for (const [replace, substitutions] of subs.substitutionsGroupedByRemove) {
+                if (!replace.test(word)) continue;
+                const stripped = word.replace(replace, '');
+                const removedCount = word.length - stripped.length;
+                for (const sub of substitutions) {
+                    const subTrace = subFn(sub, removedCount);
+                    this.#suffixTreeApplyAffixRules(subTrace, remainingDepth - 1);
+                }
+            }
+        }
+    }
 }
 
 export function compareAff(a: AffixWord, b: AffixWord): number {
@@ -174,123 +273,6 @@ function adjustCompounding(affWord: AffixWord, minLength: number): AffixWord {
     return affWord;
 }
 
-export enum AffixFlags {
-    none = 0,
-    /**
-     * COMPOUNDFLAG flag
-     *
-     * Words signed with COMPOUNDFLAG may be in compound words (except when word shorter than COMPOUNDMIN).
-     * Affixes with COMPOUNDFLAG also permits compounding of affixed words.
-     *
-     */
-    isCompoundPermitted = 1 << 0,
-    /**
-     * COMPOUNDBEGIN flag
-     *
-     * Words signed with COMPOUNDBEGIN (or with a signed affix) may be first elements in compound words.
-     *
-     */
-    canBeCompoundBegin = 1 << 1, // default false
-    /**
-     * COMPOUNDMIDDLE flag
-     *
-     * Words signed with COMPOUNDMIDDLE (or with a signed affix) may be middle elements in compound words.
-     *
-     */
-    canBeCompoundMiddle = 1 << 2, // default false
-    /**
-     * COMPOUNDLAST flag
-     *
-     * Words signed with COMPOUNDLAST (or with a signed affix) may be last elements in compound words.
-     *
-     */
-    canBeCompoundEnd = 1 << 3, // default false
-    /**
-     * COMPOUNDPERMITFLAG flag
-     *
-     * Prefixes are allowed at the beginning of compounds, suffixes are allowed at the end of compounds by default.
-     * Affixes with COMPOUNDPERMITFLAG may be inside of compounds.
-     *
-     */
-    isOnlyAllowedInCompound = 1 << 4,
-    /**
-     * COMPOUNDFORBIDFLAG flag
-     *
-     * Suffixes with this flag forbid compounding of the affixed word.
-     *
-     */
-    isCompoundForbidden = 1 << 5,
-    /**
-     * WARN flag
-     *
-     * This flag is for rare words, which are also often spelling mistakes, see option -r of command line Hunspell and FORBIDWARN.
-     */
-    isWarning = 1 << 6,
-    /**
-     * KEEPCASE flag
-     *
-     * Forbid uppercased and capitalized forms of words signed with KEEPCASE flags. Useful for special orthographies (measurements and
-     * currency often keep their case in uppercased texts) and writing systems (e.g. keeping lower case of IPA characters). Also valuable
-     * for words erroneously written in the wrong case.
-     */
-    isKeepCase = 1 << 7,
-    /**
-     * FORCEUCASE flag
-     *
-     * Last word part of a compound with flag FORCEUCASE forces capitalization of the whole compound word.
-     * Eg. Dutch word "straat" (street) with FORCEUCASE flags will allowed only in capitalized compound forms,
-     * according to the Dutch spelling rules for proper names.
-     */
-    isForceUCase = 1 << 8,
-    /**
-     * FORBIDDENWORD flag
-     *
-     * This flag signs forbidden word form. Because affixed forms are also forbidden, we can subtract a subset from set of the
-     * accepted affixed and compound words. Note: useful to forbid erroneous words, generated by the compounding mechanism.
-     */
-    isForbiddenWord = 1 << 9,
-    /**
-     * NOSUGGEST flag
-     *
-     * Words signed with NOSUGGEST flag are not suggested (but still accepted when typed correctly). Proposed flag for vulgar
-     * and obscene words (see also SUBSTANDARD).
-     */
-    isNoSuggest = 1 << 10,
-    // cspell:ignore pseudoroot
-    /**
-     * NEEDAFFIX flag
-     *
-     * This flag signs virtual stems in the dictionary, words only valid when affixed. Except, if the dictionary word has a homonym
-     * or a zero affix. NEEDAFFIX works also with prefixes and prefix + suffix combinations (see tests/pseudoroot5.*).
-     */
-    isNeedAffix = 1 << 11,
-}
-
-function toAffixFlags(flags: AffWordFlags): AffixFlags {
-    let result = 0;
-    for (const [key, value] of Object.entries(flags) as [keyof AffWordFlags, boolean | undefined][]) {
-        if (value) {
-            const flag = AffixFlags[key];
-            result |= flag;
-        }
-    }
-    return result;
-}
-
-type RuleIdx = number;
-type SingleFlag = string;
-type WordFlags = string;
-
-type DictionaryLine = string;
-
-interface DictionaryEntry {
-    word: string;
-    /** flags are the part after the `/`, `word/FLAGS` */
-    flags: string;
-    /** The original dictionary line. */
-    line: string;
-}
-
 export interface AffixWordSource {
     /** Original dictionary entry */
     dict: DictionaryEntry;
@@ -298,7 +280,7 @@ export interface AffixWordSource {
     appliedRules?: number[] | undefined;
 }
 
-export interface AffixWord extends AffixWordSource {
+interface Affix {
     /** The word */
     word: string;
     /** Rules to apply */
@@ -307,12 +289,15 @@ export interface AffixWord extends AffixWordSource {
     flags: AffixFlags;
 }
 
+export interface AffixWord extends AffixWordSource, Affix {}
+
 class AffData {
     rules: AffRule[] = [];
     mapToRuleIdx: Map<SingleFlag, RuleIdx | RuleIdx[]> = new Map();
     mapWordRulesToRuleIndexes: Map<WordFlags, RuleIdx[]> = new Map();
     mapWordRulesToRules: Map<WordFlags, AffRule[]> = new Map();
-    affFlagType: 'long' | 'num' | 'char';
+    mapWordRulesToApply: Map<WordFlags, RulesToApply> = new Map();
+    affFlagType: AffFlagType;
     missingFlags: Set<string> = new Set();
     private _mapRuleIdxToRules = new WeakMap<RuleIdx[], AffRule[]>();
     public trace = false;
@@ -372,6 +357,25 @@ class AffData {
         return affRules;
     }
 
+    getRulesToApply(wordFlags: WordFlags): RulesToApply {
+        const found = this.mapWordRulesToApply.get(wordFlags);
+        if (found) return found;
+        const rules = this.getRules(wordFlags);
+        const flags = this.rulesToFlags(rules);
+        const applied = rules.filter((r) => r.type === 'F').map((r) => r.idx);
+        return {
+            flags,
+            applied,
+            rules: rules.filter((rule): rule is FxRule => rule.type !== 'F'),
+        };
+    }
+
+    dictEntryToApplyAffix(entry: DictionaryEntry): ApplyAffix {
+        const wordFlags = entry.flags;
+        const { flags, rules } = this.getRulesToApply(wordFlags);
+        return { fix: entry.word, flags, remove: 0, rules };
+    }
+
     getRuleIndexes(rules: WordFlags): RuleIdx[] {
         const found = this.mapWordRulesToRuleIndexes.get(rules);
         if (found) return found;
@@ -400,6 +404,10 @@ class AffData {
         return this.getRulesForIndexes(sub.attachRules);
     }
 
+    getRulesToApplyForAffSubstitution(sub: AffSubstitution): RulesToApply {
+        return this.getRulesToApply(sub.wordFlags);
+    }
+
     #getRuleIndexes(rules: string): RuleIdx[] {
         const flags = this.#splitRules(rules);
         const indexes = flags
@@ -419,9 +427,9 @@ class AffData {
 
     #splitRules(rules: string): string[] {
         switch (this.affFlagType) {
-            case 'long':
+            case AffFlagType.long:
                 return [...new Set(rules.replace(/(..)/g, '$1//').split('//').slice(0, -1))];
-            case 'num':
+            case AffFlagType.num:
                 return [...new Set(rules.split(','))];
         }
         return [...new Set(rules.split(''))];
@@ -496,14 +504,28 @@ class AffData {
     #mapSubstitution(sub: Substitution): AffSubstitution {
         const { type, remove, attach, attachRules, replace } = sub;
         const rules = attachRules ? this.getRuleIndexes(attachRules) : undefined;
-        return { type, remove, attach, attachRules: rules, replace };
+        return { type, remove, attach, attachRules: rules, wordFlags: attachRules || '', replace };
     }
 }
 
-function joinRules(a: AffRule[] | undefined, b: AffRule[] | undefined): AffRule[] | undefined {
+type WeakArrayCache<T> = WeakMap<Array<T>, WeakMap<Array<T>, Array<T>>>;
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const cacheJoin: WeakArrayCache<any> = new WeakMap();
+
+function joinRules<T>(a: T[] | undefined, b: T[] | undefined): T[] | undefined {
     if (!a) return b;
     if (!b) return a;
-    return [...a, ...b];
+    let cache = cacheJoin.get(a);
+    if (!cache) {
+        cache = new WeakMap();
+        cacheJoin.set(a, cache);
+    }
+    let result = cache.get(b);
+    if (result) return result;
+    result = [...new Set([...a, ...b])];
+    cache.set(b, result);
+    return result;
 }
 
 interface PartialRule {
@@ -526,6 +548,7 @@ interface AffSubstitution {
     type: AffType;
     remove: string;
     attach: string;
+    wordFlags: string;
     attachRules?: RuleIdx[];
     replace: RegExp;
 }
@@ -562,6 +585,15 @@ interface SfxRule extends RuleBase {
     fx: AffFx;
 }
 
+interface RulesToApply {
+    /** Calculated Flags */
+    flags: AffixFlags;
+    /** Rules applied to generate the flags */
+    applied: RuleIdx[];
+    /** FX Rules to be applied. */
+    rules: FxRule[];
+}
+
 type KeyValuePair<T> = [keyof T, T[keyof T]];
 
 function objectToKvP<T extends object>(t: T): KeyValuePair<T>[] {
@@ -575,7 +607,14 @@ function isValidFlagMember<T extends AffTransformFlags>(t: KeyValuePair<T>): t i
     return key in affFlag && !!value;
 }
 
-type AffFlagType = 'long' | 'num' | 'char';
+enum AffFlagType {
+    /** Flags are encoded as individual unicode characters */
+    char = 0,
+    /** Flags are encoded as two unicode characters */
+    long = 1,
+    /** Flags are encoded as comma separated numbers. */
+    num = 2,
+}
 
 /**
  *
@@ -583,12 +622,168 @@ type AffFlagType = 'long' | 'num' | 'char';
  * @returns the AffFlagType or throws
  */
 export function toAffFlagType(FLAG: string | undefined): AffFlagType {
-    if (!FLAG) return 'char';
+    if (!FLAG) return AffFlagType.char;
     switch (FLAG) {
         case 'long':
+            return AffFlagType.long;
         case 'num':
-            return FLAG;
+            return AffFlagType.num;
         default:
             throw new Error(`Unexpected FLAG value: ${FLAG}`);
     }
+}
+
+interface Suffix {
+    fix: string;
+    flags: AffixFlags;
+}
+
+interface ApplyAffix extends Suffix {
+    /** rules to be applied later */
+    rules?: FxRule[] | undefined;
+    remove: number;
+}
+
+export interface SuffixTree extends Suffix {
+    c?: SuffixCollection;
+}
+
+export interface SuffixRoot extends SuffixTree {
+    fix: '';
+    c: SuffixCollection;
+}
+
+interface SuffixCollection {
+    [key: string]: SuffixTree;
+}
+
+interface SuffixTreeTraceNode {
+    /** the current word at this point in the trace */
+    word: string;
+    /** the rules to be applied. */
+    rules: FxRule[] | undefined;
+    /** the suffix added to the parent to get to this point. */
+    fix: string;
+    /** related tree node. */
+    node: SuffixTree;
+    /** parent node */
+    p: SuffixTreeTraceNode | undefined;
+}
+
+export function createRoot(): SuffixRoot {
+    const root: SuffixRoot = { fix: '', flags: AffixFlags.isNeedAffix, c: Object.create(null) };
+    return root;
+}
+
+function createTrace(root: SuffixRoot): SuffixTreeTraceNode {
+    return { word: '', fix: '', node: root, p: undefined, rules: undefined };
+}
+
+/**
+ *
+ * @param tree - the tree to add the suffix to
+ * @param sfx - the suffix to add
+ * @returns the nested tree for the suffix
+ */
+function addSuffixToNode(tree: SuffixTree, sfx: Suffix): SuffixTree {
+    const c: SuffixCollection = tree.c || Object.create(null);
+    tree.c = c;
+    const found = sfx.fix ? c[sfx.fix] : tree;
+    if (!found) {
+        const node: SuffixTree = { fix: sfx.fix, flags: sfx.flags };
+        c[sfx.fix] = node;
+        return node;
+    }
+    // Flags can be ORed together except for the isNeedAffix flag.
+    found.flags = (found.flags | sfx.flags) & (~AffixFlags.isNeedAffix | (found.flags & sfx.flags));
+    return found;
+}
+
+function addSuffixToTraceNode(trace: SuffixTreeTraceNode, sfx: ApplyAffix): SuffixTreeTraceNode {
+    let toRemove = sfx.remove;
+    while (toRemove > trace.fix.length) {
+        toRemove -= trace.fix.length;
+        assert(trace.p);
+        trace = trace.p;
+    }
+    if (toRemove > 0) {
+        assert(trace.p);
+        trace = addSuffixToTraceNode(trace.p, {
+            fix: trace.fix.slice(0, -toRemove),
+            flags: AffixFlags.isNeedAffix,
+            remove: 0,
+        });
+    }
+
+    const node = addSuffixToNode(trace.node, sfx);
+    return { word: trace.word + sfx.fix, fix: sfx.fix, node, p: trace, rules: sfx.rules };
+}
+
+/**
+ * Note: there is room to add an optimization the adds a suffix chain instead of a single suffix.
+ * This would allow for common prefixes to be shared.
+ * @param trace - current trace node
+ * @param pfx - the prefix
+ * @returns the trace node
+ */
+function addPrefixToTraceNode(trace: SuffixTreeTraceNode, pfx: ApplyAffix): SuffixTreeTraceNode {
+    const root = getTraceRoot(trace);
+    const pfxTrace = addSuffixToTraceNode(root, { fix: pfx.fix, flags: AffixFlags.isNeedAffix, remove: 0 });
+    return addSuffixToTraceNode(pfxTrace, {
+        fix: trace.word.slice(pfx.remove),
+        flags: pfx.flags,
+        remove: 0,
+        rules: pfx.rules,
+    });
+}
+
+function getTraceRoot(trace: SuffixTreeTraceNode): SuffixTreeTraceNode {
+    let p = trace;
+    while (p.p) {
+        p = p.p;
+    }
+    return p;
+}
+
+interface SerializedSuffixTreeNode {
+    x: string;
+    f: AffixFlags;
+    c?: number[];
+}
+
+interface SerializedSuffixTree {
+    nodes: SerializedSuffixTreeNode[];
+    rootNodes: number[];
+}
+
+export function serializedSuffixTree(tree: SuffixRoot): SerializedSuffixTree {
+    const entries: SerializedSuffixTreeNode[] = [];
+    const cacheKeys = new LRUCache<string, number>(10000);
+    const cacheNodes = new LRUCache<SuffixTree, number>(1000);
+    const rootNodes = Object.values(tree.c).map(serializeNode);
+    return { rootNodes, nodes: entries };
+
+    function calcKey(node: SerializedSuffixTreeNode): string {
+        return `${node.x}/${node.f}/${node.c?.sort().join(',') || ''}`;
+    }
+
+    function lookupNode(node: SerializedSuffixTreeNode): number {
+        const key = calcKey(node);
+        return cacheKeys.get(key, () => entries.push(node) - 1);
+    }
+
+    function serializeNode(node: SuffixTree): number {
+        if (!node.c) {
+            // Leaf Node
+            // Check cache, otherwise add to cache.
+
+            return cacheNodes.get(node, () => lookupNode({ x: node.fix, f: node.flags }));
+        }
+        const c = Object.values(node.c).map(serializeNode);
+        return cacheNodes.get(node, () => lookupNode({ x: node.fix, f: node.flags, c }));
+    }
+}
+
+export function serializeSuffixTree(tree: SuffixRoot, indent?: number | string): string {
+    return JSON.stringify(serializedSuffixTree(tree), null, indent);
 }

@@ -3,9 +3,11 @@ import { readdirSync } from 'fs';
 import * as path from 'path';
 import { describe, expect, it } from 'vitest';
 
-import type { AffixWord } from './aff.js';
-import { Aff, AffixFlags } from './aff.js';
+import type { AffixWord, SuffixRoot } from './aff.js';
+import { Aff, createRoot, serializedSuffixTree } from './aff.js';
 import { flagToLongStringMap } from './affConstants.js';
+import type { AffInfo } from './affDef.js';
+import { AffixFlags } from './AffixFlags.js';
 import { parseAff, parseAffFile } from './affReader.js';
 
 const DICTIONARY_LOCATIONS = path.join(__dirname, '..', 'dictionaries');
@@ -211,6 +213,64 @@ describe('Validate loading Hungarian', () => {
     });
 });
 
+describe.only('Creating Suffix Trees', () => {
+    it('tests applying rules for nl huis', async () => {
+        const aff = await parseAffFileToAff(nlAff, true);
+        const line = 'huis/CACcYbCQZhC0';
+        const tree = aff.dictEntryToSuffixTree(line);
+        expect(tree).toMatchSnapshot();
+
+        const next = aff.dictEntryToSuffixTree(line, tree);
+        expect(next).toBe(tree);
+
+        // cspell:ignore huishouden huishoud huur CACBC0
+        aff.dictEntryToSuffixTree('huishouden/Vi', tree);
+        aff.dictEntryToSuffixTree('huishoud/V3', tree);
+        aff.dictEntryToSuffixTree('huishoud/CACBC0', tree);
+        aff.dictEntryToSuffixTree('huur/PjV3VpVp', tree);
+
+        console.log('Suffix Tree: %o', serializedSuffixTree(tree));
+    });
+
+    it('applyRulesToDicEntry Basque', async () => {
+        const aff = await parseAffFileToAff(basqueAff);
+        // cspell:disable
+        const lines = [
+            'farsaliarr/34,1',
+            'farsaliar/35,1',
+            'farsaliarr/13,1',
+            'farsaliar/14,1',
+            'farsiera/11,1',
+            'farsier/12,1',
+            'fartet/68,1',
+            'farte/69,1',
+            'fartleg/18,1',
+            'fartlek/92,1',
+            'fartle/93,1',
+            'fartsa/11,1',
+            'farts/12,1',
+            'fascia/11,1',
+            'fasciola/11,1',
+            'fasciol/12,1',
+            'fasci/15,1',
+        ];
+        // cspell:enable
+        const tree = lines.reduce<SuffixRoot>((tree, line) => aff.dictEntryToSuffixTree(line, tree), createRoot());
+        // console.log('Suffix Tree: %o', serializedSuffixTree(tree));
+        expect(tree).toBeDefined();
+    });
+
+    it('applyRulesToDicEntry Hungarian', async () => {
+        const aff = await parseAffFileToAff(huHuAff);
+        // cspell:disable
+        const lines = ['öntőműhely/VËŻj×LÓnňéyČŔŕTtYcź'];
+        // cspell:enable
+        const tree = lines.reduce<SuffixRoot>((tree, line) => aff.dictEntryToSuffixTree(line, tree, 3), createRoot());
+        console.log('Suffix Tree: %o', serializedSuffixTree(tree));
+        expect(tree).toBeDefined();
+    });
+});
+
 describe('Hungarian Performance', async () => {
     const aff = await parseAffFileToAff(huHuAff);
 
@@ -260,8 +320,20 @@ function flagsToString(flags: AffixFlags): string {
     return parts.map((f) => flagToLongStringMap[f] || f).join(':');
 }
 
+const affInfoCache = new Map<string, Promise<AffInfo>>();
+
+function readAffInfo(affFile: string) {
+    const found = affInfoCache.get(affFile);
+    if (found) {
+        return found;
+    }
+    const affInfo = parseAffFile(affFile);
+    affInfoCache.set(affFile, affInfo);
+    return affInfo;
+}
+
 async function parseAffFileToAff(affFile: string, trace = false) {
-    const affInfo = await parseAffFile(affFile);
+    const affInfo = await readAffInfo(affFile);
     const aff = new Aff(affInfo, affFile);
     aff.setTraceMode(trace);
     return aff;
