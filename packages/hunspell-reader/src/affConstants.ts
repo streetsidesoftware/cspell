@@ -51,3 +51,4 @@ const _FlagToLongStringMap: Record<keyof AffWordFlags, string> = {
 };
 export const flagToStringMap: Record<string, string | undefined> = _FlagToStringMap;
 export const flagToLongStringMap: Record<string, string | undefined> = _FlagToLongStringMap;
+export const DefaultMaxDepth = 5;

@@ -95,3 +95,9 @@ export function insertItemIntoGroupByField<T, K extends keyof T>(map: Map<T[K], 
     }
     a.push(item);
 }
+
+export type KeyValuePair<T> = [keyof T, T[keyof T]];
+
+export function objectToKvP<T extends object>(t: T): KeyValuePair<T>[] {
+    return Object.entries(t) as KeyValuePair<T>[];
+}
