@@ -53,7 +53,7 @@ export class AffSuffixTreeCompiler {
 
     affixWordToSuffixTreeRoot(entry: DictionaryEntry, root: SuffixRoot, maxDepth?: number): SuffixRoot {
         const affix = this.affData.dictEntryToApplyAffix(entry);
-        const trace = addSuffixToTraceNode(createTrace(root), affix);
+        const trace = this.addSuffixToTraceNode(createTrace(root), affix);
 
         this.#suffixTreeApplyAffixRules(trace, maxDepth ?? this.maxSuffixDepth);
         return root;
@@ -95,7 +95,7 @@ export class AffSuffixTreeCompiler {
 
         const subPrefix = (sub: AffSubstitution, toRemove: number) => {
             const toApply = this.affData.getRulesToApplyForAffSubstitution(sub);
-            return addPrefixToTraceNode(trace, {
+            return this.addPrefixToTraceNode(trace, {
                 fix: sub.attach,
                 flags: flags | toApply.flags,
                 remove: toRemove,
@@ -104,7 +104,7 @@ export class AffSuffixTreeCompiler {
         };
         const subSuffix = (sub: AffSubstitution, toRemove: number) => {
             const toApply = this.affData.getRulesToApplyForAffSubstitution(sub);
-            return addSuffixToTraceNode(trace, {
+            return this.addSuffixToTraceNode(trace, {
                 fix: sub.attach,
                 flags: flags | toApply.flags,
                 remove: toRemove,
@@ -125,6 +125,64 @@ export class AffSuffixTreeCompiler {
                 }
             }
         }
+    }
+
+    /**
+     * Note: there is room to add an optimization the adds a suffix chain instead of a single suffix.
+     * This would allow for common prefixes to be shared.
+     * @param trace - current trace node
+     * @param pfx - the prefix
+     * @returns the trace node
+     */
+    addPrefixToTraceNode(trace: SuffixTreeTraceNode, pfx: ApplyAffix): SuffixTreeTraceNode {
+        const root = getTraceRoot(trace);
+        const pfxTrace = this.addSuffixToTraceNode(root, { fix: pfx.fix, flags: AffixFlags.isNeedAffix, remove: 0 });
+        return this.addSuffixToTraceNode(pfxTrace, {
+            fix: trace.word.slice(pfx.remove),
+            flags: pfx.flags,
+            remove: 0,
+            rules: pfx.rules,
+        });
+    }
+
+    addSuffixToTraceNode(trace: SuffixTreeTraceNode, sfx: ApplyAffix): SuffixTreeTraceNode {
+        let toRemove = sfx.remove;
+        while (toRemove > trace.fix.length) {
+            toRemove -= trace.fix.length;
+            assert(trace.p);
+            trace = trace.p;
+        }
+        if (toRemove > 0) {
+            assert(trace.p);
+            trace = this.addSuffixToTraceNode(trace.p, {
+                fix: trace.fix.slice(0, -toRemove),
+                flags: AffixFlags.isNeedAffix,
+                remove: 0,
+            });
+        }
+
+        const node = this.addSuffixToNode(trace.node, sfx);
+        return { word: trace.word + sfx.fix, fix: sfx.fix, node, p: trace, rules: sfx.rules };
+    }
+
+    /**
+     *
+     * @param tree - the tree to add the suffix to
+     * @param sfx - the suffix to add
+     * @returns the nested tree for the suffix
+     */
+    addSuffixToNode(tree: SuffixTree, sfx: Suffix): SuffixTree {
+        const c: SuffixCollection = tree.c || Object.create(null);
+        tree.c = c;
+        const found = sfx.fix ? c[sfx.fix] : tree;
+        if (!found) {
+            const node: SuffixTree = { fix: sfx.fix, flags: sfx.flags };
+            c[sfx.fix] = node;
+            return node;
+        }
+        // Flags can be ORed together except for the isNeedAffix flag.
+        found.flags = (found.flags | sfx.flags) & (~AffixFlags.isNeedAffix | (found.flags & sfx.flags));
+        return found;
     }
 }
 
@@ -163,63 +221,6 @@ export function createTrace(root: SuffixRoot): SuffixTreeTraceNode {
     return { word: '', fix: '', node: root, p: undefined, rules: undefined };
 }
 
-/**
- *
- * @param tree - the tree to add the suffix to
- * @param sfx - the suffix to add
- * @returns the nested tree for the suffix
- */
-function addSuffixToNode(tree: SuffixTree, sfx: Suffix): SuffixTree {
-    const c: SuffixCollection = tree.c || Object.create(null);
-    tree.c = c;
-    const found = sfx.fix ? c[sfx.fix] : tree;
-    if (!found) {
-        const node: SuffixTree = { fix: sfx.fix, flags: sfx.flags };
-        c[sfx.fix] = node;
-        return node;
-    }
-    // Flags can be ORed together except for the isNeedAffix flag.
-    found.flags = (found.flags | sfx.flags) & (~AffixFlags.isNeedAffix | (found.flags & sfx.flags));
-    return found;
-}
-
-export function addSuffixToTraceNode(trace: SuffixTreeTraceNode, sfx: ApplyAffix): SuffixTreeTraceNode {
-    let toRemove = sfx.remove;
-    while (toRemove > trace.fix.length) {
-        toRemove -= trace.fix.length;
-        assert(trace.p);
-        trace = trace.p;
-    }
-    if (toRemove > 0) {
-        assert(trace.p);
-        trace = addSuffixToTraceNode(trace.p, {
-            fix: trace.fix.slice(0, -toRemove),
-            flags: AffixFlags.isNeedAffix,
-            remove: 0,
-        });
-    }
-
-    const node = addSuffixToNode(trace.node, sfx);
-    return { word: trace.word + sfx.fix, fix: sfx.fix, node, p: trace, rules: sfx.rules };
-}
-/**
- * Note: there is room to add an optimization the adds a suffix chain instead of a single suffix.
- * This would allow for common prefixes to be shared.
- * @param trace - current trace node
- * @param pfx - the prefix
- * @returns the trace node
- */
-
-export function addPrefixToTraceNode(trace: SuffixTreeTraceNode, pfx: ApplyAffix): SuffixTreeTraceNode {
-    const root = getTraceRoot(trace);
-    const pfxTrace = addSuffixToTraceNode(root, { fix: pfx.fix, flags: AffixFlags.isNeedAffix, remove: 0 });
-    return addSuffixToTraceNode(pfxTrace, {
-        fix: trace.word.slice(pfx.remove),
-        flags: pfx.flags,
-        remove: 0,
-        rules: pfx.rules,
-    });
-}
 function getTraceRoot(trace: SuffixTreeTraceNode): SuffixTreeTraceNode {
     let p = trace;
     while (p.p) {

@@ -68,7 +68,7 @@ describe('AffSuffixTreeCompiler', () => {
         // cspell:disable
         const lines = ['öntőműhely/VËŻj×LÓnňéyČŔŕTtYcź'];
         // cspell:enable
-        const tree = lines.reduce<SuffixRoot>((tree, line) => aff.dictEntryToSuffixTree(line, tree, 3), createRoot());
+        const tree = lines.reduce<SuffixRoot>((tree, line) => aff.dictEntryToSuffixTree(line, tree, 2), createRoot());
         console.log('Suffix Tree: %o', serializedSuffixTree(tree));
         expect(tree).toBeDefined();
     });
