@@ -3,15 +3,16 @@ Repository: wireapp/wire-webapp
 Url: "https://github.com/wireapp/wire-webapp.git"
 Args: ["src/script/**/*.{js,ts,tsx,md}"]
 Lines:
- CSpell: Files checked: 1139, Issues found: 2697 in 619 files
+ CSpell: Files checked: 1144, Issues found: 2722 in 625 files
  exit code: 1
 ./src/script/Config.ts:81:31     - Unknown word (acces)      -- DataDog client api keys acces */
 ./src/script/E2EIdentity/E2EIdentityEnrollment.test.ts:164:43    - Unknown word (enroled)    -- loading message when enroled', async () => {
 ./src/script/E2EIdentity/E2EIdentityEnrollment.test.ts:34:14     - Unknown word (OIDC)       -- jest.mock('./OIDCService', () => {
 ./src/script/E2EIdentity/E2EIdentityEnrollment.test.ts:88:58     - Unknown word (johndoe)    -- Doe', username: () => 'johndoe', teamId: 'team'};
+./src/script/E2EIdentity/E2EIdentityEnrollment.ts:138:37    - Unknown word (curernt)    -- this doesn't work on curernt core-crypto version
 ./src/script/E2EIdentity/E2EIdentityEnrollment.ts:22:21     - Unknown word (oidc)       -- import {User} from 'oidc-client-ts';
-./src/script/E2EIdentity/E2EIdentityEnrollment.ts:240:32    - Unknown word (Oidc)       -- async cleanUp(includeOidcServiceUserData: boolean
-./src/script/E2EIdentity/E2EIdentityEnrollment.ts:287:37    - Unknown word (dont)       -- data is false or we dont get the ACMEChallenge
+./src/script/E2EIdentity/E2EIdentityEnrollment.ts:249:32    - Unknown word (Oidc)       -- async cleanUp(includeOidcServiceUserData: boolean
+./src/script/E2EIdentity/E2EIdentityEnrollment.ts:296:37    - Unknown word (dont)       -- data is false or we dont get the ACMEChallenge
 ./src/script/E2EIdentity/E2EIdentityEnrollment.ts:40:54     - Unknown word (Snoozable)  -- shouldEnableSoftLock} from './SnoozableTimer/delay';
 ./src/script/E2EIdentity/E2EIdentityVerification.ts:46:67     - Unknown word (eidentity)  -- EIdentity data in an non-e2eidentity environment');
 ./src/script/E2EIdentity/OIDCService/OIDCService.ts:56:11     - Unknown word (dexio)      -- const dexioConfig: UserManagerSettings
@@ -72,7 +73,7 @@ Lines:
 ./src/script/backup/BackUpHeader.ts:69:62     - Unknown word (SALTBYTES)  -- sodium.crypto_pwhash_SALTBYTES);
 ./src/script/backup/BackupHeader.test.tsx:48:26     - Unknown word (opslimit)   -- expect(decodedHeader.opslimit).toBe(4);
 ./src/script/backup/BackupHeader.test.tsx:49:26     - Unknown word (memlimit)   -- expect(decodedHeader.memlimit).toBe(33554432);
-./src/script/backup/BackupRepository.test.ts:243:20    - Unknown word (encrytion)  -- describe('Backup encrytion', () => {
+./src/script/backup/BackupRepository.test.ts:244:20    - Unknown word (encrytion)  -- describe('Backup encrytion', () => {
 ./src/script/backup/BackupRepository.test.ts:47:3      - Unknown word (overwites)  -- overwites: {
 ./src/script/backup/BackupRepository.ts:20:13     - Unknown word (Dexie)      -- import type Dexie from 'dexie';
 ./src/script/backup/BackupRepository.ts:20:25     - Unknown word (dexie)      -- import type Dexie from 'dexie';
@@ -223,7 +224,7 @@ Lines:
 ./src/script/components/MessagesList/MessageList.tsx:54:18     - Unknown word (convesation) -- invitePeople: (convesation: Conversation) => void
 ./src/script/components/Modals/InviteModal/InviteModal.test.tsx:32:21     - Unknown word (janek)      -- const userName = 'janek';
 ./src/script/components/Modals/LegalHoldModal/LegalHoldModal.tsx:204:25    - Unknown word (prekey)     -- response.last_prekey,
-./src/script/components/Modals/PrimaryModal/PrimaryModal.tsx:268:31    - Unknown word (pswd)       -- id="modal_pswd"
+./src/script/components/Modals/PrimaryModal/PrimaryModal.tsx:304:31    - Unknown word (pswd)       -- id="modal_pswd"
 ./src/script/components/Modals/PrimaryModal/PrimaryModalState.tsx:46:42     - Unknown word (Moda)       -- rentModalContent: (nextCurrentModaContent: ModalContent
 ./src/script/components/ParticipantItemContent/ParticipantItemContent.tsx:100:26    - Unknown word (subline)    -- className="subline"
 ./src/script/components/PasswordGeneratorButton.test.tsx:41:68     - Unknown word (charachters) -- random password with 15 charachters when clicked', () =
@@ -254,7 +255,7 @@ Lines:
 ./src/script/conversation/ConversationLabelRepository.ts:84:88     - Unknown word (favorited)  -- type: 'conversation-favorited'}> {
 ./src/script/conversation/ConversationMapper.test.ts:59:25     - Unknown word (Emtpy)      -- const functionCallEmtpyArray = () => ConversationMapp
 ./src/script/conversation/ConversationRepository.test.ts:1275:42   - Unknown word (msdownload)  -- type: 'application/x-msdownload',
-./src/script/conversation/ConversationRepository.test.ts:2332:99   - Unknown word (atively)     -- to mls if we're not atively participating in a call
+./src/script/conversation/ConversationRepository.test.ts:2326:99   - Unknown word (atively)     -- to mls if we're not atively participating in a call
 ./src/script/conversation/ConversationRepository.test.ts:273:16    - Unknown word (Initialised) -- describe('getInitialised1To1Conversation', (
 ./src/script/conversation/ConversationRepository.test.ts:642:80    - Unknown word (testt)       -- dk03f38414', domain: 'testt-domain'};
 ./src/script/conversation/ConversationRepository.test.ts:648:59    - Unknown word (kfbe)        -- ca-a495asd47a8-ac70-9kfbe924b2d0', domain: 'testt
@@ -268,15 +269,17 @@ Lines:
 ./src/script/conversation/ConversationRepository.ts:1603:23   - Unknown word (Initialising)   -- this.logger.info(`Initialising MLS 1:1 conversation
 ./src/script/conversation/ConversationRepository.ts:1645:58   - Unknown word (conversaiton)   -- was previously active conversaiton, we want to make mls
 ./src/script/conversation/ConversationRepository.ts:1748:85   - Unknown word (initialising)   -- from backend before initialising the conversation
-./src/script/conversation/ConversationRepository.ts:1963:17   - Unknown word (Converstions)   -- const sortedConverstions = [...team1To1Conversations
+./src/script/conversation/ConversationRepository.ts:1955:17   - Unknown word (Converstions)   -- const sortedConverstions = [...team1To1Conversations
 ./src/script/conversation/ConversationRepository.ts:207:46    - Unknown word (agains)     -- client mismatch handler agains the message repository
-./src/script/conversation/ConversationRepository.ts:2282:32   - Unknown word (corecrypto)     -- MLS conversation in corecrypto and deletes the conversation
-./src/script/conversation/ConversationRepository.ts:2414:117  - Unknown word (ciphersuite)    -- new fields (groupId, ciphersuite, epoch and new protocol
-./src/script/conversation/ConversationRepository.ts:3518:14   - Unknown word (Unarchived)     -- const wasUnarchived = previouslyArchived
+./src/script/conversation/ConversationRepository.ts:2274:32   - Unknown word (corecrypto)     -- MLS conversation in corecrypto and deletes the conversation
+./src/script/conversation/ConversationRepository.ts:2406:117  - Unknown word (ciphersuite)    -- new fields (groupId, ciphersuite, epoch and new protocol
+./src/script/conversation/ConversationRepository.ts:3521:14   - Unknown word (Unarchived)     -- const wasUnarchived = previouslyArchived
 ./src/script/conversation/ConversationRepository.ts:407:9     - Unknown word (teamid)     -- teamid: this.teamState.team
 ./src/script/conversation/ConversationRepository.ts:516:75    - Unknown word (metat)      -- users & conversations metat data`, error);
 ./src/script/conversation/ConversationRepository.ts:54:18     - Unknown word (Protobuf)   -- import {Asset as ProtobufAsset, Confirmation,
 ./src/script/conversation/ConversationState.test.ts:37:29     - Unknown word (groupid)    -- conversation.groupId = `groupid-${randomUUID()}`;
+./src/script/conversation/EventMapper.test.ts:115:27    - Unknown word (ugpawm)     -- token: 'aV0TGxF3ugpawm3wAYPmew==',
+./src/script/conversation/EventMapper.test.ts:115:37    - Unknown word (Pmew)       -- 'aV0TGxF3ugpawm3wAYPmew==',
 ./src/script/conversation/MessageRepository.test.ts:283:9     - Unknown word (unverifies) -- it('unverifies device if fingerprint
 ./src/script/conversation/MessageRepository.test.ts:57:28     - Unknown word (selfid)     -- selfUser = new User('selfid', '');
 ./src/script/conversation/MessageRepository.ts:1406:41   - Unknown word (countly)     -- message to backend to sync countly id across other clients
@@ -304,6 +307,7 @@ Lines:
 ./src/script/event/EventRepository.ts:130:26    - Unknown word (Connectivitity) -- private readonly updateConnectivitityStatus = (state: ConnectionSta
 ./src/script/event/EventRepository.ts:393:17    - Unknown word (Outated)        -- 208, // Outated event decyption error
 ./src/script/event/EventRepository.ts:393:31    - Unknown word (decyption)      -- 8, // Outated event decyption error (see https://github
+./src/script/event/preprocessor/EventStorageMiddleware/EventStorageMiddleware.ts:102:21    - Unknown word (Partof)     -- const usersNotPartofConversation = qualifiedUserId
 ./src/script/event/preprocessor/ReceiptsMiddleware.test.ts:63:13     - Unknown word (originale)  -- const originaleEvent = {from: createUuid
 ./src/script/extension/GiphyRepository.test.ts:175:12    - Unknown word (datetime)    -- import_datetime: '2015-05-02 00:11:
 ./src/script/extension/GiphyRepository.test.ts:29:18     - Unknown word (downsampled) -- fixed_height_downsampled_height: '200',
@@ -315,7 +319,7 @@ Lines:
 ./src/script/hooks/useRelativeTimestamp.tsx:67:22     - Unknown word (Timeago)    -- const [timeago, setTimeago] = useState<string>
 ./src/script/hooks/useSingleInstance.test.ts:32:30     - Unknown word (Intance)    -- result: {current: firstIntance},
 ./src/script/integration/ServiceTag.ts:34:3      - Unknown word (LIFETSTYLE) -- LIFETSTYLE = 'lifestyle',
-./src/script/main/app.ts:89:89     - Unknown word (Finaliser)  -- MLSMigration/migrationFinaliser';
+./src/script/main/app.ts:91:89     - Unknown word (Finaliser)  -- MLSMigration/migrationFinaliser';
 ./src/script/media/MediaDevicesHandler.test.ts:219:41    - Unknown word (newcamera)       -- newCameras = [{deviceId: 'newcamera', kind: MediaDeviceType
 ./src/script/media/MediaDevicesHandler.test.ts:24:54     - Unknown word (nolegacy)   -- MediaDevicesHandler --nolegacy */
 ./src/script/media/MediaDevicesHandler.test.ts:267:53    - Unknown word (inexistant)      -- currentDeviceId.audiooutput('inexistant-id');
@@ -360,31 +364,32 @@ Lines:
 ./src/script/page/RightSidebar/MessageDetails/MessageDetails.test.tsx:72:27     - Unknown word (Kowalski)   -- const userName = 'Jan Kowalski';
 ./src/script/page/RightSidebar/Notifications/Notifications.test.tsx:61:41     - Unknown word (ative)      -- correct new value on the ative conversation', () =
 ./src/script/page/RightSidebar/PanelHeader/PanelHeader.tsx:70:77     - Unknown word (libray)     -- transition group animation libray
+./src/script/page/components/FeatureConfigChange/FeatureConfigChangeNotifier/FeatureConfigChangeNotifier.test.tsx:101:101   - Unknown word (dlpath)     -- enforcedDownloadLocation: 'dlpath'}}),
 ./src/script/search/FullTextSearch.ts:24:18     - Unknown word (gumi)       -- const flags = 'gumi';
-./src/script/search/SearchRepository.test.ts:130:13    - Unknown word (smily)          -- const smilyFelix = createUser('smily
-./src/script/search/SearchRepository.test.ts:149:13    - Unknown word (notmatching)    -- const notmatching1 = createUser('notix
-./src/script/search/SearchRepository.test.ts:149:40    - Unknown word (notix)          -- notmatching1 = createUser('notix', 'Felix');
-./src/script/search/SearchRepository.test.ts:206:69    - Unknown word (notfelix)       -- felix'), createUser('notfelix', 'notfelix')];
-./src/script/search/SearchRepository.test.ts:41:32     - Unknown word (jesuissabine) -- sabine = createUser('jesuissabine', 'Sabine Duchemin'
-./src/script/search/SearchRepository.test.ts:41:55     - Unknown word (Duchemin)     -- jesuissabine', 'Sabine Duchemin');
-./src/script/search/SearchRepository.test.ts:42:32     - Unknown word (yosoyjanina)  -- janina = createUser('yosoyjanina', 'Janina Felix');
-./src/script/search/SearchRepository.test.ts:43:11     - Unknown word (felixa)       -- const felixa = createUser('iamfelix
-./src/script/search/SearchRepository.test.ts:43:32     - Unknown word (iamfelix)     -- felixa = createUser('iamfelix', 'Felix Abo');
-./src/script/search/SearchRepository.test.ts:44:49     - Unknown word (Oulala)       -- createUser('iamfelix', 'Felix Oulala');
-./src/script/search/SearchRepository.test.ts:45:11     - Unknown word (felicien)     -- const felicien = createUser('ichbinfelicien
-./src/script/search/SearchRepository.test.ts:45:34     - Unknown word (ichbinfelicien) -- felicien = createUser('ichbinfelicien', 'Felicien Delatour
-./src/script/search/SearchRepository.test.ts:45:52     - Unknown word (Felicien)       -- createUser('ichbinfelicien', 'Felicien Delatour');
-./src/script/search/SearchRepository.test.ts:45:61     - Unknown word (Delatour)       -- ichbinfelicien', 'Felicien Delatour');
-./src/script/search/SearchRepository.test.ts:46:11     - Unknown word (lastguy)        -- const lastguy = createUser('lastfelicien
-./src/script/search/SearchRepository.test.ts:46:33     - Unknown word (lastfelicien)   -- lastguy = createUser('lastfelicien', 'lastsabine lastjanina
-./src/script/search/SearchRepository.test.ts:46:49     - Unknown word (lastsabine)     -- createUser('lastfelicien', 'lastsabine lastjanina');
-./src/script/search/SearchRepository.test.ts:46:60     - Unknown word (lastjanina)     -- lastfelicien', 'lastsabine lastjanina');
-./src/script/search/SearchRepository.test.ts:47:11     - Unknown word (jeanpierre)     -- const jeanpierre = createUser('jean-pierre
-./src/script/search/SearchRepository.test.ts:47:63     - Unknown word (Sansbijou)      -- pierre', 'Jean-Pierre Sansbijou');
-./src/script/search/SearchRepository.test.ts:48:50     - Unknown word (Monsouci)       -- createUser('pierrot', 'Pierre Monsouci');
-./src/script/search/SearchRepository.test.ts:69:29     - Unknown word (firstname)      -- testCase: 'sorts by firstname and lastname',
-./src/script/search/SearchRepository.test.ts:69:43     - Unknown word (lastname)       -- sorts by firstname and lastname',
-./src/script/search/SearchRepository.test.ts:73:16     - Unknown word (felici)         -- term: 'felici',
+./src/script/search/SearchRepository.test.ts:131:13    - Unknown word (smily)          -- const smilyFelix = createUser('smily
+./src/script/search/SearchRepository.test.ts:150:13    - Unknown word (notmatching)    -- const notmatching1 = createUser('notix
+./src/script/search/SearchRepository.test.ts:150:40    - Unknown word (notix)          -- notmatching1 = createUser('notix', 'Felix');
+./src/script/search/SearchRepository.test.ts:207:69    - Unknown word (notfelix)       -- felix'), createUser('notfelix', 'notfelix')];
+./src/script/search/SearchRepository.test.ts:42:32     - Unknown word (jesuissabine) -- sabine = createUser('jesuissabine', 'Sabine Duchemin'
+./src/script/search/SearchRepository.test.ts:42:55     - Unknown word (Duchemin)     -- jesuissabine', 'Sabine Duchemin');
+./src/script/search/SearchRepository.test.ts:43:32     - Unknown word (yosoyjanina)  -- janina = createUser('yosoyjanina', 'Janina Felix');
+./src/script/search/SearchRepository.test.ts:44:11     - Unknown word (felixa)       -- const felixa = createUser('iamfelix
+./src/script/search/SearchRepository.test.ts:44:32     - Unknown word (iamfelix)     -- felixa = createUser('iamfelix', 'Felix Abo');
+./src/script/search/SearchRepository.test.ts:45:49     - Unknown word (Oulala)       -- createUser('iamfelix', 'Felix Oulala');
+./src/script/search/SearchRepository.test.ts:46:11     - Unknown word (felicien)     -- const felicien = createUser('ichbinfelicien
+./src/script/search/SearchRepository.test.ts:46:34     - Unknown word (ichbinfelicien) -- felicien = createUser('ichbinfelicien', 'Felicien Delatour
+./src/script/search/SearchRepository.test.ts:46:52     - Unknown word (Felicien)       -- createUser('ichbinfelicien', 'Felicien Delatour');
+./src/script/search/SearchRepository.test.ts:46:61     - Unknown word (Delatour)       -- ichbinfelicien', 'Felicien Delatour');
+./src/script/search/SearchRepository.test.ts:47:11     - Unknown word (lastguy)        -- const lastguy = createUser('lastfelicien
+./src/script/search/SearchRepository.test.ts:47:33     - Unknown word (lastfelicien)   -- lastguy = createUser('lastfelicien', 'lastsabine lastjanina
+./src/script/search/SearchRepository.test.ts:47:49     - Unknown word (lastsabine)     -- createUser('lastfelicien', 'lastsabine lastjanina');
+./src/script/search/SearchRepository.test.ts:47:60     - Unknown word (lastjanina)     -- lastfelicien', 'lastsabine lastjanina');
+./src/script/search/SearchRepository.test.ts:48:11     - Unknown word (jeanpierre)     -- const jeanpierre = createUser('jean-pierre
+./src/script/search/SearchRepository.test.ts:48:63     - Unknown word (Sansbijou)      -- pierre', 'Jean-Pierre Sansbijou');
+./src/script/search/SearchRepository.test.ts:49:50     - Unknown word (Monsouci)       -- createUser('pierrot', 'Pierre Monsouci');
+./src/script/search/SearchRepository.test.ts:70:29     - Unknown word (firstname)      -- testCase: 'sorts by firstname and lastname',
+./src/script/search/SearchRepository.test.ts:70:43     - Unknown word (lastname)       -- sorts by firstname and lastname',
+./src/script/search/SearchRepository.test.ts:74:16     - Unknown word (felici)         -- term: 'felici',
 ./src/script/search/SearchRepository.ts:88:51     - Unknown word (bardia)     -- Bardia and username of bardia_wire this mapping
 ./src/script/service/APIClientSingleton.ts:22:31     - Unknown word (Unconfigured) -- APIClient as APIClientUnconfigured} from '@wireapp/api
 ./src/script/service/CoreSingleton.ts:64:78     - Unknown word (CIPHERSUITE) -- FEATURE.MLS_CONFIG_DEFAULT_CIPHERSUITE,
@@ -432,6 +437,8 @@ Lines:
 ./src/script/util/Entropy.test.ts:98:21     - Unknown word (dimensonial) -- 'Calculate %d-dimensonial entropy on: %s',
 ./src/script/util/Entropy.ts:44:83     - Unknown word (multipe)    -- differences on, containing a multipe of `n` elements
 ./src/script/util/LocalizerUtil/ReactLocalizerUtil.ts:33:21     - Unknown word (occurences) -- * Will replace all occurences of `replacements` by
+./src/script/util/MessagesGroupingUtil.test.ts:25:81     - Unknown word (appart)     -- same minute, 58 seconds appart', () => {
+./src/script/util/MessagesGroupingUtil.ts:25:29     - Unknown word (timeframe)  -- if it's sent within a timeframe (30 seconds) of the
 ./src/script/util/SanitizationUtil.test.ts:38:39     - Unknown word (Unsanitzed) -- name(`<script>alert('Unsanitzed');</script>`);
 ./src/script/util/TimeUtil.ts:96:26     - Unknown word (momentjs)   -- This is equivalent to momentjs' `LT` formatting
 ./src/script/util/localStorage.ts:21:41     - Unknown word (localstorage) -- browser's instance of localstorage if present.
