@@ -3,9 +3,9 @@ Repository: MicrosoftDocs/PowerShell-Docs
 Url: https://github.com/MicrosoftDocs/PowerShell-Docs.git
 Args: '["--config=../../../cspell-power-shell-docs.config.yaml","**"]'
 Summary:
-  files: 3133
-  filesWithIssues: 1473
-  issues: 6492
+  files: 3134
+  filesWithIssues: 1475
+  issues: 6481
   errors: 0
 Errors: []
 
@@ -326,7 +326,7 @@ issues:
   - "reference/5.1/Microsoft.PowerShell.Utility/ConvertTo-Html.md:75:72          pslog       U       ConvertTo-Html | Out-File pslog.htm"
   - "reference/5.1/Microsoft.PowerShell.Utility/Export-Alias.md:354:4        epal    U       - `epal`"
   - "reference/5.1/Microsoft.PowerShell.Utility/Export-Clixml.md:66:2        fileacl         U       $fileacl = Import-Clixml -Path"
-  - "reference/5.1/Microsoft.PowerShell.Utility/Export-Clixml.md:86:2        Credxmlpath     U       $Credxmlpath = Join-Path (Split-Path"
+  - "reference/5.1/Microsoft.PowerShell.Utility/Export-Clixml.md:87:2        Credxmlpath     U       $Credxmlpath = Join-Path (Split-Path"
   - "reference/5.1/Microsoft.PowerShell.Utility/Export-Csv.md:595:4          epcsv       U       - `epcsv`"
   - "reference/5.1/Microsoft.PowerShell.Utility/Export-FormatData.md:49:57       allformat           U       Export-FormatData -Path \"allformat.ps1xml\" -IncludeScriptBlock"
   - "reference/5.1/Microsoft.PowerShell.Utility/Export-FormatData.md:66:32       helpinfoshort       U       FormatData -TypeName \"helpinfoshort\""
@@ -483,6 +483,7 @@ issues:
   - "reference/7.3/Microsoft.PowerShell.Core/About/about_Preference_Variables.md:1058:29     robocopy    U       native commands, like [robocopy][02] use non-zero exit"
   - "reference/7.3/Microsoft.PowerShell.Core/Switch-Process.md:12:43         execv       U       the cmdlet calls the `execv()` function to provide"
   - "reference/7.4/Microsoft.PowerShell.Core/About/about_CommonParameters.md:46:23       proga       U       **ProgressAction** (proga)"
+  - "reference/7.4/Microsoft.PowerShell.Core/About/about_Functions_Advanced_Parameters.md:743:50         dynamicparameters       U       tab completion. Like **dynamicparameters**, the"
   - "reference/7.4/Microsoft.PowerShell.Core/About/about_Pipelines.md:432:24         xzvf    U       curl -s -L $uri | tar -xzvf - -C ."
   - "reference/7.4/Microsoft.PowerShell.Core/Get-Command.md:463:22       Damerau     U       calculated using the Damerau Levenshtein Distance"
   - "reference/7.4/Microsoft.PowerShell.Utility/Invoke-RestMethod.md:1527:38     Brotli      U       added support for the Brotli compression algorithm"
@@ -773,7 +774,14 @@ issues:
   - "reference/docs-conceptual/community/2023-updates.md:531:3       tompazourek         U       | tompazourek | 1 |"
   - "reference/docs-conceptual/community/2023-updates.md:533:3       cjvandyk            U       | cjvandyk | 1 |"
   - "reference/docs-conceptual/community/2023-updates.md:534:5       Brinkmann           U       | JTBrinkmann | 1 |"
-  - "reference/docs-conceptual/community/community-update.yml:48:21          Helmick's       U       - text: Jason Helmick's - The Show"
+  - "reference/docs-conceptual/community/2024-updates.md:35:3        flcdrg          U       | flcdrg | 1"
+  - "reference/docs-conceptual/community/2024-updates.md:36:3        holtkampjs      U       | holtkampjs | 1"
+  - "reference/docs-conceptual/community/2024-updates.md:38:3        Muzaffar        U       | MuzaffarNurillaew | 1"
+  - "reference/docs-conceptual/community/2024-updates.md:38:11       Nurillaew       U       | MuzaffarNurillaew | 1 |"
+  - "reference/docs-conceptual/community/2024-updates.md:39:3        ybeltrikov      U       | ybeltrikov | 1"
+  - "reference/docs-conceptual/community/2024-updates.md:42:3        deraeler        U       | deraeler |"
+  - "reference/docs-conceptual/community/2024-updates.md:45:3        wwilliams       U       | wwilliams69 |"
+  - "reference/docs-conceptual/community/community-update.yml:50:21          Helmick's       U       - text: Jason Helmick's - The Show"
   - "reference/docs-conceptual/community/contributing/general-markdown.md:218:41         friendlyname        U       use Markdown syntax `[friendlyname](url-or-path)`."
   - "reference/docs-conceptual/community/contributing/general-markdown.md:243:7          redirectedfrom      U       - `?redirectedfrom=MSDN` - added to the"
   - "reference/docs-conceptual/community/contributing/labelling-in-github.md:33:9        editorsvcs              U       | `area-editorsvcs` | The PowerShell"
@@ -794,7 +802,7 @@ issues:
   - "reference/docs-conceptual/community/hall-of-fame.md:31:4        Reilingh        U       | NReilingh | | 2"
   - "reference/docs-conceptual/community/hall-of-fame.md:32:6        praktyk         U       | it-praktyk | |"
   - "reference/docs-conceptual/community/hall-of-fame.md:33:3        vors            U       | vors | |"
-  - "reference/docs-conceptual/community/hall-of-fame.md:34:3        markekraus      U       | markekraus | |"
+  - "reference/docs-conceptual/community/hall-of-fame.md:35:3        markekraus      U       | markekraus | |"
   - "reference/docs-conceptual/community/hall-of-fame.md:36:3        purdo           U       | purdo17 | |"
   - "reference/docs-conceptual/community/hall-of-fame.md:52:3        jszabo          U       | jszabo98 | |"
   - "reference/docs-conceptual/community/hall-of-fame.md:55:3        vexx            U       | vexx32 | |"
@@ -857,8 +865,7 @@ issues:
   - "reference/docs-conceptual/developer/cmdlet/extending-properties-for-objects.md:135:49       Serviceprocess          U       member set of the [System.Serviceprocess.Servicecontroller]("
   - "reference/docs-conceptual/developer/cmdlet/extending-properties-for-objects.md:135:64       Servicecontroller       U       System.Serviceprocess.Servicecontroller](/dotnet/api/System"
   - "reference/docs-conceptual/developer/cmdlet/getprocesssample02-sample.md:37:20       getprossessample    U       `Import-Module getprossessample02`"
-  - "reference/docs-conceptual/developer/cmdlet/how-to-declare-dynamic-parameters.md:13:75       Idynamicparameters                      U       Management.Automation.Idynamicparameters](/dotnet/api/System"
-  - "reference/docs-conceptual/developer/cmdlet/how-to-declare-dynamic-parameters.md:129:31      Runtimedefinedparameterdictionary       U       Management.Automation.Runtimedefinedparameterdictionary](/dotnet/api/System"
+  - "reference/docs-conceptual/developer/cmdlet/how-to-declare-dynamic-parameters.md:16:75       Idynamicparameters      U       Management.Automation.Idynamicparameters][03]"
   - "reference/docs-conceptual/developer/cmdlet/how-to-support-jobs.md:24:20         asjob       U       get { return asjob; }"
   - "reference/docs-conceptual/developer/cmdlet/how-to-validate-an-argument-count.md:12:103      Validatecountattribute      U       Management.Automation.Validatecountattribute](/dotnet/api/System"
   - "reference/docs-conceptual/developer/cmdlet/how-to-validate-an-argument-pattern.md:12:103        Validatepatternattribute    U       Management.Automation.Validatepatternattribute](/dotnet/api/System"
@@ -937,13 +944,14 @@ issues:
   - "reference/docs-conceptual/developer/module/writing-a-custom-windows-powershell-snap-in.md:155:57        customsnapintest            U       mdletConfigurationEntry(\"test-customsnapintest\", typeof(TestCustomSnapinTest"
   - "reference/docs-conceptual/developer/module/writing-a-custom-windows-powershell-snap-in.md:156:57        helloworld                  U       mdletConfigurationEntry(\"test-helloworld\", typeof(TestHelloWorld"
   - "reference/docs-conceptual/developer/module/writing-a-windows-powershell-module.md:18:1          redistributable     U       redistributable components, with the"
-  - "reference/docs-conceptual/developer/prog-guide/creating-a-basic-windows-powershell-provider.md:16:1         uninitialize                U       uninitialize the provider."
-  - "reference/docs-conceptual/developer/prog-guide/creating-a-basic-windows-powershell-provider.md:43:40        Cmdletproviderattribute     U       Automation.Provider.Cmdletproviderattribute](/dotnet/api/System"
-  - "reference/docs-conceptual/developer/prog-guide/creating-a-basic-windows-powershell-provider.md:53:40        Providercapabilities        U       Automation.Provider.Providercapabilities](/dotnet/api/System"
-  - "reference/docs-conceptual/developer/prog-guide/creating-a-basic-windows-powershell-provider.md:67:31        Providerinfo                U       Management.Automation.Providerinfo](/dotnet/api/System"
-  - "reference/docs-conceptual/developer/prog-guide/creating-a-basic-windows-powershell-provider.md:97:53        samplesaccessdbprov         U       reference [!CODE [Msh_samplesaccessdbprov01#accessdbprov01ProviderStart"
-  - "reference/docs-conceptual/developer/prog-guide/creating-a-basic-windows-powershell-provider.md:97:75        accessdbprov                U       samplesaccessdbprov01#accessdbprov01ProviderStart](Msh"
-  - "reference/docs-conceptual/developer/prog-guide/creating-a-basic-windows-powershell-provider.md:120:4        Uninitializing              U       ## Uninitializing the Provider"
+  - "reference/docs-conceptual/developer/prog-guide/creating-a-basic-windows-powershell-provider.md:16:1         uninitialize                            U       uninitialize the provider."
+  - "reference/docs-conceptual/developer/prog-guide/creating-a-basic-windows-powershell-provider.md:43:40        Cmdletproviderattribute                 U       Automation.Provider.Cmdletproviderattribute](/dotnet/api/System"
+  - "reference/docs-conceptual/developer/prog-guide/creating-a-basic-windows-powershell-provider.md:53:40        Providercapabilities                    U       Automation.Provider.Providercapabilities](/dotnet/api/System"
+  - "reference/docs-conceptual/developer/prog-guide/creating-a-basic-windows-powershell-provider.md:67:31        Providerinfo                            U       Management.Automation.Providerinfo](/dotnet/api/System"
+  - "reference/docs-conceptual/developer/prog-guide/creating-a-basic-windows-powershell-provider.md:97:53        samplesaccessdbprov                     U       reference [!CODE [Msh_samplesaccessdbprov01#accessdbprov01ProviderStart"
+  - "reference/docs-conceptual/developer/prog-guide/creating-a-basic-windows-powershell-provider.md:97:75        accessdbprov                            U       samplesaccessdbprov01#accessdbprov01ProviderStart](Msh"
+  - "reference/docs-conceptual/developer/prog-guide/creating-a-basic-windows-powershell-provider.md:113:31       Runtimedefinedparameterdictionary       U       Management.Automation.Runtimedefinedparameterdictionary](/dotnet/api/System"
+  - "reference/docs-conceptual/developer/prog-guide/creating-a-basic-windows-powershell-provider.md:120:4        Uninitializing                          U       ## Uninitializing the Provider"
   - "reference/docs-conceptual/developer/prog-guide/creating-a-windows-powershell-container-provider.md:40:40        Containercmdletprovider                         U       Automation.Provider.Containercmdletprovider](/dotnet/api/System"
   - "reference/docs-conceptual/developer/prog-guide/creating-a-windows-powershell-container-provider.md:69:40        Drivecmdletprovider                             U       Automation.Provider.Drivecmdletprovider](/dotnet/api/System"
   - "reference/docs-conceptual/developer/prog-guide/creating-a-windows-powershell-container-provider.md:75:40        Itemcmdletprovider                              U       Automation.Provider.Itemcmdletprovider](/dotnet/api/System"
@@ -1019,11 +1027,11 @@ issues:
   - "reference/docs-conceptual/developer/prog-guide/windows-powershell-sample-code.md:16:14          Mgmt    U       > Samples\\SysMgmt\\PowerShell\"** to locate"
   - "reference/docs-conceptual/developer/provider/accessdbprovidersample06.md:50:34          Filesystemprovider      U       PowerShell.Commands.Filesystemprovider.Getcontentwriter*]("
   - "reference/docs-conceptual/developer/provider/provider-cmdlet-parameters.md:49:207       Registryprovider    U       PowerShell.Commands.Registryprovider.Newproperty*](/dotnet"
-  - "reference/docs-conceptual/developer/provider/provider-cmdlets.md:26:4           Newdrive        U       - [Newdrive](/dotnet/api/System"
-  - "reference/docs-conceptual/developer/provider/provider-cmdlets.md:32:98          Removedrive     U       DriveCmdletProvider.Removedrive](/dotnet/api/System"
-  - "reference/docs-conceptual/developer/provider/provider-cmdlets.md:41:4           Clearitem       U       - [Clearitem](/dotnet/api/System"
-  - "reference/docs-conceptual/developer/provider/provider-cmdlets.md:49:4           Copyitem        U       - [Copyitem](/dotnet/api/System"
-  - "reference/docs-conceptual/developer/provider/provider-cmdlets.md:57:4           Getitem         U       - [Getitem](/dotnet/api/System"
+  - "reference/docs-conceptual/developer/provider/provider-cmdlets.md:28:4           Newdrive        U       - [Newdrive][13]"
+  - "reference/docs-conceptual/developer/provider/provider-cmdlets.md:34:82          Removedrive     U       DriveCmdletProvider.Removedrive][15]"
+  - "reference/docs-conceptual/developer/provider/provider-cmdlets.md:45:4           Clearitem       U       - [Clearitem][44]"
+  - "reference/docs-conceptual/developer/provider/provider-cmdlets.md:54:4           Copyitem        U       - [Copyitem][02]"
+  - "reference/docs-conceptual/developer/provider/provider-cmdlets.md:62:4           Getitem         U       - [Getitem][46]"
   - "reference/docs-conceptual/developer/provider/windows-powershell-provider-overview.md:121:40         Icmdletprovidersupportshelp     U       Automation.Provider.Icmdletprovidersupportshelp](/dotnet/api/System"
   - "reference/docs-conceptual/developer/provider/windows-powershell-provider-overview.md:132:48         PSMAML                          U       file is written using PSMAML XML. This is the same"
   - "reference/docs-conceptual/developer/provider/windows-powershell-provider-quickstart.md:29:92        noexit      U       line arguments** box: `-noexit -command \"[reflection"
