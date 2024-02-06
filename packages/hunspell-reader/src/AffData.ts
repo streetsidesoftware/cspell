@@ -309,15 +309,16 @@ interface Affix {
 }
 
 export interface AffixWord extends AffixWordSource, Affix {}
+
 export interface Suffix {
-    fix: string;
-    flags: AffixFlags;
+    readonly fix: string;
+    readonly flags: AffixFlags;
 }
 
 export interface ApplyAffix extends Suffix {
     /** rules to be applied later */
-    rules?: FxRule[] | undefined;
-    remove: number;
+    readonly rules?: FxRule[] | undefined;
+    readonly remove: number;
 }
 export interface PartialRule {
     id: string;
@@ -365,10 +366,10 @@ export function joinRules<T>(a: T[] | undefined, b: T[] | undefined): T[] | unde
         cache = new WeakMap();
         cacheJoin.set(a, cache);
     }
-    let result = cache.get(b);
+    let result = cache.get(b)?.deref();
     if (result) return result;
     result = [...new Set([...a, ...b])];
-    cache.set(b, result);
+    cache.set(b, new WeakRef(result));
     return result;
 }
-export type WeakArrayCache<T> = WeakMap<Array<T>, WeakMap<Array<T>, Array<T>>>;
+export type WeakArrayCache<T> = WeakMap<Array<T>, WeakMap<Array<T>, WeakRef<Array<T>>>>;

@@ -1,12 +1,20 @@
+import { promises as fs } from 'fs';
+import iconv from 'iconv-lite';
 import * as path from 'path';
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it, test } from 'vitest';
 
 import type { AffInfo } from './affDef.js';
 import { parseAffFile } from './affReader.js';
-import type { SuffixRoot } from './AffSuffixTreeCompiler.js';
-import { AffSuffixTreeCompiler, createRoot, serializedSuffixTree } from './AffSuffixTreeCompiler.js';
+import type { SuffixTree } from './AffSuffixTreeCompiler.js';
+import {
+    AffSuffixTreeCompiler,
+    createRoot,
+    serializedSuffixTree,
+    serializedSuffixTreeWords,
+} from './AffSuffixTreeCompiler.js';
 
-const DICTIONARY_LOCATIONS = path.join(__dirname, '..', 'dictionaries');
+const DICTIONARY_LOCATIONS = path.join(__dirname, '../dictionaries');
+const TEST_FIXTURES_DIR = path.join(__dirname, '../fixtures/tests');
 const nlAff = path.join(DICTIONARY_LOCATIONS, 'nl.aff');
 // const enAff = path.join(DICTIONARY_LOCATIONS, 'en_US.aff');
 // const enGbAff = path.join(DICTIONARY_LOCATIONS, 'en_GB.aff');
@@ -21,7 +29,7 @@ describe('AffSuffixTreeCompiler', () => {
         const aff = await parseAffToSuffixTreeCompiler(nlAff);
         const line = 'huis/CACcYbCQZhC0';
         const tree = aff.dictEntryToSuffixTree(line);
-        expect(tree).toMatchSnapshot();
+        expect(tree.getRoot()).toMatchSnapshot();
 
         const next = aff.dictEntryToSuffixTree(line, tree);
         expect(next).toBe(tree);
@@ -32,34 +40,38 @@ describe('AffSuffixTreeCompiler', () => {
         aff.dictEntryToSuffixTree('huishoud/CACBC0', tree);
         aff.dictEntryToSuffixTree('huur/PjV3VpVp', tree);
 
-        console.log('Suffix Tree: %o', serializedSuffixTree(tree));
+        const serialized = serializedSuffixTree(tree);
+        console.log('Suffix Tree: %o', serialized);
+        console.log('Suffix Tree Words: %o', [...serializedSuffixTreeWords(serialized, '|')]);
     });
 
-    it('applyRulesToDicEntry Basque', async () => {
+    it.only('applyRulesToDicEntry Basque', async () => {
         const aff = await parseAffToSuffixTreeCompiler(basqueAff);
         // cspell:disable
         const lines = [
             'farsaliarr/34,1',
             'farsaliar/35,1',
-            'farsaliarr/13,1',
-            'farsaliar/14,1',
-            'farsiera/11,1',
-            'farsier/12,1',
-            'fartet/68,1',
-            'farte/69,1',
-            'fartleg/18,1',
-            'fartlek/92,1',
-            'fartle/93,1',
-            'fartsa/11,1',
-            'farts/12,1',
-            'fascia/11,1',
-            'fasciola/11,1',
-            'fasciol/12,1',
-            'fasci/15,1',
+            // 'farsaliarr/13,1',
+            // 'farsaliar/14,1',
+            // 'farsiera/11,1',
+            // 'farsier/12,1',
+            // 'fartet/68,1',
+            // 'farte/69,1',
+            // 'fartleg/18,1',
+            // 'fartlek/92,1',
+            // 'fartle/93,1',
+            // 'fartsa/11,1',
+            // 'farts/12,1',
+            // 'fascia/11,1',
+            // 'fasciola/11,1',
+            // 'fasciol/12,1',
+            // 'fasci/15,1',
         ];
         // cspell:enable
-        const tree = lines.reduce<SuffixRoot>((tree, line) => aff.dictEntryToSuffixTree(line, tree), createRoot());
-        // console.log('Suffix Tree: %o', serializedSuffixTree(tree));
+        const tree = lines.reduce<SuffixTree>((tree, line) => aff.dictEntryToSuffixTree(line, tree), createRoot());
+        const serialized = serializedSuffixTree(tree);
+        console.log('Suffix Tree: %o', serialized);
+        console.log('Suffix Tree Words: %o', [...serializedSuffixTreeWords(serialized, '|')]);
         expect(tree).toBeDefined();
     });
 
@@ -68,8 +80,21 @@ describe('AffSuffixTreeCompiler', () => {
         // cspell:disable
         const lines = ['öntőműhely/VËŻj×LÓnňéyČŔŕTtYcź'];
         // cspell:enable
-        const tree = lines.reduce<SuffixRoot>((tree, line) => aff.dictEntryToSuffixTree(line, tree, 2), createRoot());
+        const tree = lines.reduce<SuffixTree>((tree, line) => aff.dictEntryToSuffixTree(line, tree, 2), createRoot());
         console.log('Suffix Tree: %o', serializedSuffixTree(tree));
+        expect(tree).toBeDefined();
+    });
+
+    test('base', async () => {
+        const debug = true;
+        const fixture = 'base';
+        const info = fixtureInfo(fixture);
+        const aff = await parseAffToSuffixTreeCompiler(info.aff);
+        const lines = debug ? ['create/XKVNGADS'] : await readDictLines(info.dic, aff.affInfo.SET);
+        const tree = lines.reduce<SuffixTree>((tree, line) => aff.dictEntryToSuffixTree(line, tree, 2), createRoot());
+        const serialized = serializedSuffixTree(tree);
+        console.log('Suffix Tree: %o', serialized);
+        console.log('Suffix Tree Words: %o', [...serializedSuffixTreeWords(serialized, '|')]);
         expect(tree).toBeDefined();
     });
 });
@@ -92,5 +117,25 @@ async function parseAffToSuffixTreeCompiler(affFile: string) {
     return aff;
 }
 
+const regExpIsNumber = /^\d+$/;
+
+async function readDictLines(dictFile: string, encoding: string | undefined) {
+    const dict = iconv.decode(await fs.readFile(dictFile), encoding || 'utf-8');
+    const lines = dict.split('\n');
+    return lines
+        .map((line) => line.trim())
+        .filter((line) => !!line)
+        .filter((line) => !regExpIsNumber.test(line));
+}
+
 // cspell:ignore moderne avoir huis pannenkoek ababillar CDSG ings
 // cspell:enableCompoundWords
+
+function fixtureInfo(fixtureName: string) {
+    return {
+        aff: path.join(TEST_FIXTURES_DIR, fixtureName + '.aff'),
+        dic: path.join(TEST_FIXTURES_DIR, fixtureName + '.dic'),
+        good: path.join(TEST_FIXTURES_DIR, fixtureName + '.good.txt'),
+        wrong: path.join(TEST_FIXTURES_DIR, fixtureName + '.wrong.txt'),
+    };
+}
