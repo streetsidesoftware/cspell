@@ -3,6 +3,7 @@ import type { PartialTrieInfo, TrieInfo } from '../ITrieNode/TrieInfo.js';
 import type { TrieNode, TrieRoot } from '../TrieNode/TrieNode.js';
 import { assert } from '../utils/assert.js';
 import { mergeOptionalWithDefaults } from '../utils/mergeOptionalWithDefaults.js';
+import { assertValidUtf16Character } from '../utils/text.js';
 import { FastTrieBlob } from './FastTrieBlob.js';
 import type { FastTrieBlobBitMaskInfo } from './FastTrieBlobBitMaskInfo.js';
 import { FastTrieBlobInternals } from './FastTrieBlobInternals.js';
@@ -20,6 +21,7 @@ export class FastTrieBlobBuilder implements TrieBuilder<FastTrieBlob> {
     private _cursor: BuilderCursor | undefined;
 
     private _options: Readonly<TrieInfo>;
+    wordToCharacters = (word: string) => [...word];
     readonly bitMasksInfo: FastTrieBlobBitMaskInfo;
 
     constructor(options?: PartialTrieInfo, bitMasksInfo = FastTrieBlobBuilder.DefaultBitMaskInfo) {
@@ -51,6 +53,14 @@ export class FastTrieBlobBuilder implements TrieBuilder<FastTrieBlob> {
         this.charToIndexMap[charNFD] = idx;
 
         return idx;
+    }
+
+    private wordToNodeCharIndexSequence(word: string): number[] {
+        return TrieBlob.charactersToCharIndexSequence(this.wordToCharacters(word), (c) => this.getCharIndex(c));
+    }
+
+    private letterToNodeCharIndexSequence(letter: string): number[] {
+        return TrieBlob.toCharIndexSequence(this.getCharIndex(letter));
     }
 
     insert(word: string | Iterable<string> | string[]): this {
@@ -87,6 +97,14 @@ export class FastTrieBlobBuilder implements TrieBuilder<FastTrieBlob> {
         interface StackItem {
             nodeIdx: number;
             pos: number;
+            /**
+             * Pending High Surrogate
+             * If the previous character was a high surrogate, then the next character
+             * should be a low surrogate.
+             */
+            ps: string;
+            /** the change in depth */
+            dCount: number;
         }
 
         function childPos(node: number[], letterIdx: number): number {
@@ -103,12 +121,45 @@ export class FastTrieBlobBuilder implements TrieBuilder<FastTrieBlob> {
         const eowShifted = eow << NodeChildRefShift;
         const nodes = this.nodes;
 
-        const stack: StackItem[] = [{ nodeIdx: 0, pos: 0 }];
+        const stack: StackItem[] = [{ nodeIdx: 0, pos: 0, dCount: 1, ps: '' }];
 
         let nodeIdx = 0;
         let depth = 0;
 
         const insertChar = (char: string) => {
+            const cc = char.charCodeAt(0) & 0xdc00;
+            // Work with partial surrogate pairs.
+            if (cc === 0xd800 && char.length == 1) {
+                // We have a high surrogate
+                const s = stack[depth];
+                const ns = stack[++depth];
+                if (ns) {
+                    ns.nodeIdx = s.nodeIdx;
+                    ns.pos = s.pos;
+                    ns.dCount = 1;
+                    ns.ps = char;
+                } else {
+                    stack[depth] = { nodeIdx: s.nodeIdx, pos: s.pos, dCount: 1, ps: char };
+                }
+                return;
+            }
+            if (stack[depth].ps) {
+                char = stack[depth].ps + char;
+                assertValidUtf16Character(char);
+            }
+            const indexSeq = this.letterToNodeCharIndexSequence(char);
+            for (let i = 0; i < indexSeq.length; ++i) {
+                insertCharIndexes(indexSeq[i], i + 1);
+            }
+        };
+
+        /**
+         * A single character can result in multiple nodes being created
+         * because it takes multiple bytes to represent a character.
+         * @param charIndex - partial character index.
+         * @param char - the source character
+         */
+        const insertCharIndexes = (charIndex: number, dCount: number) => {
             // console.warn('i %o at %o', char, nodeIdx);
             if (nodes[nodeIdx] && Object.isFrozen(nodes[nodeIdx])) {
                 nodeIdx = nodes.push([...nodes[nodeIdx]]) - 1;
@@ -120,7 +171,7 @@ export class FastTrieBlobBuilder implements TrieBuilder<FastTrieBlob> {
             }
             const node = nodes[nodeIdx] ?? [0];
             nodes[nodeIdx] = node;
-            const letterIdx = this.getCharIndex(char);
+            const letterIdx = charIndex;
             const hasIdx = childPos(node, letterIdx);
             const childIdx = hasIdx ? node[hasIdx] >>> NodeChildRefShift : nodes.length;
             const pos = hasIdx || node.push((childIdx << NodeChildRefShift) | letterIdx) - 1;
@@ -129,8 +180,10 @@ export class FastTrieBlobBuilder implements TrieBuilder<FastTrieBlob> {
             if (s) {
                 s.nodeIdx = nodeIdx;
                 s.pos = pos;
+                s.dCount = dCount;
+                s.ps = '';
             } else {
-                stack[depth] = { nodeIdx, pos };
+                stack[depth] = { nodeIdx, pos, dCount, ps: '' };
             }
             nodeIdx = childIdx;
         };
@@ -169,7 +222,9 @@ export class FastTrieBlobBuilder implements TrieBuilder<FastTrieBlob> {
             if (!num) return;
             // console.warn('<< %o', num);
             assert(num <= depth && num > 0);
-            depth -= num;
+            for (; num > 0; --num) {
+                depth -= stack[depth].dCount;
+            }
             nodeIdx = stack[depth + 1].nodeIdx;
         };
 
@@ -191,10 +246,11 @@ export class FastTrieBlobBuilder implements TrieBuilder<FastTrieBlob> {
         const NodeMaskEOW = this.bitMasksInfo.NodeMaskEOW;
         const IdxEOW = this.IdxEOW;
         const nodes = this.nodes;
-        const len = word.length;
+        const charIndexes = this.wordToNodeCharIndexSequence(word);
+        const len = charIndexes.length;
         let nodeIdx = 0;
         for (let p = 0; p < len; ++p) {
-            const letterIdx = this.getCharIndex(word[p]);
+            const letterIdx = charIndexes[p];
             const node = nodes[nodeIdx];
             const count = node.length;
             let i = count - 1;
@@ -230,11 +286,12 @@ export class FastTrieBlobBuilder implements TrieBuilder<FastTrieBlob> {
         const NodeChildRefShift = this.bitMasksInfo.NodeChildRefShift;
         const NodeMaskEOW = this.bitMasksInfo.NodeMaskEOW;
         const nodes = this.nodes;
-        const len = word.length;
+        const charIndexes = this.wordToNodeCharIndexSequence(word);
+        const len = charIndexes.length;
         let nodeIdx = 0;
         let node = nodes[nodeIdx];
         for (let p = 0; p < len; ++p, node = nodes[nodeIdx]) {
-            const letterIdx = this.charToIndexMap[word[p]];
+            const letterIdx = charIndexes[p];
             const count = node.length;
             let i = count - 1;
             for (; i > 0; --i) {

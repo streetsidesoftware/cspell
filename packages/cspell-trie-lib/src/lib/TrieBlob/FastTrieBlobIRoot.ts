@@ -98,6 +98,7 @@ class FastTrieBlobINode implements ITrieNode {
         return map;
     }
 }
+
 export class FastTrieBlobIRoot extends FastTrieBlobINode implements ITrieNodeRoot {
     constructor(
         trie: FastTrieBlobInternals,
