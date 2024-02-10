@@ -96,12 +96,16 @@ describe('test-fixtures', () => {
     test('issue-5222', async () => {
         const url = new URL('issue-5222/words.txt', urlTestFixturesIssues);
         const words = (await readFixtureFile(url))
+            .normalize('NFC')
             .split('\n')
             .map((a) => a.trim())
             .filter((a) => !!a);
         const dict = createSpellingDictionary(words, 'issue-5222', url.toString(), {});
         const trie = (dict as SpellingDictionaryFromTrie).trie;
         const setOfWords = new Set(words);
+        for (const word of setOfWords) {
+            expect(trie.has(word), `trie to have "${word}"`).toBe(true);
+        }
         for (const word of trie.words()) {
             expect(word.startsWith('~') || setOfWords.has(word), `to have "${word}"`).toBe(true);
         }

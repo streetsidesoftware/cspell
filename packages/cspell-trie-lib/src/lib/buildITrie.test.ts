@@ -18,6 +18,11 @@ describe('buildITrie', () => {
         const setOfWords = new Set(words);
 
         const trie = buildITrieFromWords(words, {});
+
+        for (const word of setOfWords) {
+            expect(trie.has(word), `Expect to find "${word}" in trie`).toBe(true);
+        }
+
         for (const word of trie.words()) {
             expect(setOfWords.has(word), `Expect to find "${word}"`).toBe(true);
         }
@@ -49,7 +54,10 @@ function normalizeWords(words: string[]): string[] {
         setOfWords.add(removeAccents(lc));
         setOfWords.add(removeAccents(word));
     }
-    return [...setOfWords].sort();
+    return [...setOfWords]
+        .map((w) => w.trim())
+        .filter((a) => !a)
+        .sort();
 }
 
 function removeAccents(word: string): string {

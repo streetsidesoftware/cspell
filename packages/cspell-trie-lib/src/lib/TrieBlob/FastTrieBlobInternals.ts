@@ -7,7 +7,7 @@ export class FastTrieBlobInternals implements FastTrieBlobBitMaskInfo {
 
     constructor(
         readonly nodes: number[][],
-        readonly charIndex: string[],
+        readonly charIndex: readonly string[],
         readonly charToIndexMap: Readonly<Record<string, number>>,
         maskInfo: FastTrieBlobBitMaskInfo,
     ) {

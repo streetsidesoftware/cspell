@@ -4,7 +4,7 @@ import type { TrieInfo } from './ITrieNode/TrieInfo.js';
 export interface TrieData {
     info: Readonly<TrieInfo>;
     /** Method used to split words into individual characters. */
-    wordToCharacters(word: string): string[];
+    wordToCharacters(word: string): readonly string[];
     words(): Iterable<string>;
     getRoot(): ITrieNodeRoot;
     getNode(prefix: string): ITrieNode | undefined;

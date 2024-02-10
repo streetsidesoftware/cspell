@@ -7,7 +7,7 @@ const EmptyNodes: readonly ITrieNode[] = Object.freeze([]);
 class FastTrieBlobINode implements ITrieNode {
     readonly id: number;
     readonly size: number;
-    readonly node: number[];
+    readonly node: readonly number[];
     readonly eow: boolean;
     charToIdx: Record<string, number> | undefined;
     private _keys: readonly string[] | undefined;

@@ -3,8 +3,11 @@ import type { ITrieNode, ITrieNodeRoot } from '../ITrieNode/ITrieNode.js';
 import { findNode } from '../ITrieNode/trie-util.js';
 import type { PartialTrieInfo, TrieInfo } from '../ITrieNode/TrieInfo.js';
 import type { TrieData } from '../TrieData.js';
-import { assert } from '../utils/assert.js';
 import { mergeOptionalWithDefaults } from '../utils/mergeOptionalWithDefaults.js';
+import {
+    NumberSequenceByteDecoderAccumulator,
+    NumberSequenceByteEncoderDecoder,
+} from './NumberSequenceByteDecoderAccumulator.js';
 import { TrieBlobInternals, TrieBlobIRoot } from './TrieBlobIRoot.js';
 
 const NodeHeaderNumChildrenBits = 8;
@@ -47,12 +50,13 @@ export class TrieBlob implements TrieData {
 
     constructor(
         protected nodes: Uint32Array,
-        protected charIndex: string[],
+        readonly charIndex: readonly string[],
         info: PartialTrieInfo,
     ) {
         this.info = mergeOptionalWithDefaults(info);
         this.wordToCharacters = (word: string) => [...word];
         this.charToIndexMap = Object.create(null);
+        Object.freeze(this.charIndex);
         for (let i = 0; i < charIndex.length; ++i) {
             const char = charIndex[i];
             this.charToIndexMap[char.normalize('NFC')] = i;
@@ -200,14 +204,15 @@ export class TrieBlob implements TrieData {
             }
             const nextPos = ++stack[depth].pos;
             const entry = nodes[nodeIdx + nextPos];
-            const charIdx = acc.decode(entry & NodeMaskChildCharIndex);
+            const nAcc = acc.clone();
+            const charIdx = nAcc.decode(entry & NodeMaskChildCharIndex);
             const letter = (charIdx && this.charIndex[charIdx]) || '';
             ++depth;
             stack[depth] = {
                 nodeIdx: entry >>> NodeChildRefShift,
                 pos: 0,
                 word: word + letter,
-                acc: acc.clone(),
+                acc: nAcc,
             };
         }
     }
@@ -228,9 +233,9 @@ export class TrieBlob implements TrieData {
 
     toJSON() {
         return {
-            charIndex: this.charIndex,
             options: this.info,
             nodes: nodesToJson(this.nodes),
+            charIndex: this.charIndex,
         };
     }
 
@@ -311,22 +316,15 @@ export class TrieBlob implements TrieData {
      * @returns encoded index values.
      */
     static toCharIndexSequence(charIndex: number): number[] {
-        if (charIndex < this.SpecialCharIndexMask) return [charIndex];
-        if (charIndex < this.SpecialCharIndexMask * 2) {
-            return [this.SpecialCharIndex8bit, charIndex - this.SpecialCharIndexMask];
-        }
-        if (charIndex < 1 << 16) return [this.SpecialCharIndex16bit, charIndex >>> 8, charIndex & 0xff];
-        assert(charIndex < 1 << 24);
-        return [this.SpecialCharIndex24bit, (charIndex >>> 16) & 0xff, (charIndex >>> 8) & 0xff, charIndex & 0xff];
+        return NumberSequenceByteEncoderDecoder.encode(charIndex);
     }
 
-    static *fromCharIndexSequence(charIndexes: Iterable<number>): Iterable<number> {
-        const accumulator = NumberSequenceByteDecoderAccumulator.create();
-        yield* accumulator.decodeSequence(charIndexes);
+    static fromCharIndexSequence(charIndexes: Iterable<number>): Iterable<number> {
+        return NumberSequenceByteEncoderDecoder.decodeSequence(charIndexes);
     }
 
     static charactersToCharIndexSequence(
-        chars: string[],
+        chars: readonly string[],
         charToIndexMap: Readonly<Record<string, number>> | ((char: string) => number),
     ): number[] {
         const fn = typeof charToIndexMap === 'function' ? charToIndexMap : (c: string) => charToIndexMap[c];
@@ -336,12 +334,13 @@ export class TrieBlob implements TrieData {
     static charIndexSequenceToCharacters(
         charIndexSequence: number[],
         charIndex: readonly string[] | Readonly<Record<number, string>>,
-    ): string[] {
-        const chars: string[] = [];
-        for (const charIdx of this.fromCharIndexSequence(charIndexSequence)) {
-            chars.push(charIndex[charIdx]);
-        }
+    ): readonly string[] {
+        const chars: readonly string[] = [...this.fromCharIndexSequence(charIndexSequence)].map((c) => charIndex[c]);
         return chars;
+    }
+
+    static nodesView(trie: TrieBlob): Readonly<Uint32Array> {
+        return new Uint32Array(trie.nodes);
     }
 }
 
@@ -368,17 +367,10 @@ class ErrorDecodeTrieBlob extends Error {
     }
 }
 
-// function splitString(s: string, len = 64): string[] {
-//     const splits: string[] = [];
-//     for (let i = 0; i < s.length; i += len) {
-//         splits.push(s.slice(i, i + len));
-//     }
-//     return splits;
-// }
 interface NodeElement {
-    o: number;
+    id: number;
     eow: boolean;
-    c: { c: number; o: number }[];
+    c: { c: number | string; o: number }[];
     n: number;
 }
 
@@ -387,14 +379,14 @@ function nodesToJson(nodes: Uint32Array) {
         const node = nodes[offset];
         const numChildren = node & TrieBlob.NodeMaskNumChildren;
         const eow = !!(node & TrieBlob.NodeMaskEOW);
-        const children: { c: number; o: number }[] = [];
+        const children: { c: number | string; o: number }[] = [];
         for (let i = 1; i <= numChildren; ++i) {
             children.push({
-                c: nodes[offset + i] & TrieBlob.NodeMaskChildCharIndex,
+                c: ('00' + (nodes[offset + i] & TrieBlob.NodeMaskChildCharIndex).toString(16)).slice(-2),
                 o: nodes[offset + i] >>> TrieBlob.NodeChildRefShift,
             });
         }
-        return { o: offset, eow, c: children, n: offset + numChildren + 1 };
+        return { id: offset, eow, n: offset + numChildren + 1, c: children };
     }
 
     const elements: NodeElement[] = [];
@@ -405,78 +397,4 @@ function nodesToJson(nodes: Uint32Array) {
         offset = e.n;
     }
     return elements;
-}
-
-export class NumberSequenceByteEncoderDecoder {
-    static SpecialCharIndexMask = 0xf8;
-    static MaxCharIndex = this.SpecialCharIndexMask - 1;
-    /**
-     * SpecialCharIndex8bit is used to indicate a node chain. Where the final character index is 248 + the index found in the next node.
-     */
-    static SpecialCharIndex8bit = this.SpecialCharIndexMask | 0x01;
-    static SpecialCharIndex16bit = this.SpecialCharIndexMask | 0x02;
-    static SpecialCharIndex24bit = this.SpecialCharIndexMask | 0x03;
-}
-
-export class NumberSequenceByteDecoderAccumulator {
-    protected constructor(
-        private byteMode = 0,
-        private accumulation = 0,
-    ) {}
-
-    *decodeSequence(sequence: Iterable<number>): Iterable<number> {
-        const accumulator = this.clone();
-        for (const idx of sequence) {
-            const r = accumulator.decode(idx);
-            if (r !== undefined) {
-                yield r;
-            }
-        }
-    }
-
-    decode(idx: number): number | undefined {
-        if (!this.byteMode) {
-            if (idx < NumberSequenceByteEncoderDecoder.SpecialCharIndexMask) {
-                const v = idx + this.accumulation;
-                this.accumulation = 0;
-                return v;
-            }
-            switch (idx) {
-                case NumberSequenceByteEncoderDecoder.SpecialCharIndex8bit:
-                    this.accumulation += NumberSequenceByteEncoderDecoder.SpecialCharIndexMask;
-                    break;
-                case NumberSequenceByteEncoderDecoder.SpecialCharIndex16bit:
-                    this.byteMode = 2;
-                    break;
-                case NumberSequenceByteEncoderDecoder.SpecialCharIndex24bit:
-                    this.byteMode = 3;
-                    break;
-                default:
-                    throw new Error('Invalid SpecialCharIndex');
-            }
-            return undefined;
-        }
-        this.accumulation = (this.accumulation << 8) + idx;
-        --this.byteMode;
-        if (!this.byteMode) {
-            const r = this.accumulation;
-            this.accumulation = 0;
-            return r;
-        }
-        return undefined;
-    }
-
-    reset() {
-        this.byteMode = 0;
-        this.accumulation = 0;
-    }
-
-    clone(): NumberSequenceByteDecoderAccumulator {
-        const n = new NumberSequenceByteDecoderAccumulator(this.byteMode, this.accumulation);
-        return n;
-    }
-
-    static create(): NumberSequenceByteDecoderAccumulator {
-        return new NumberSequenceByteDecoderAccumulator();
-    }
 }

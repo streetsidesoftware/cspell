@@ -325,7 +325,7 @@ export class FastTrieBlobBuilder implements TrieBuilder<FastTrieBlob> {
         );
     }
 
-    static fromWordList(words: string[] | Iterable<string>, options?: PartialTrieInfo): FastTrieBlob {
+    static fromWordList(words: readonly string[] | Iterable<string>, options?: PartialTrieInfo): FastTrieBlob {
         const ft = new FastTrieBlobBuilder(options);
         return ft.insert(words).build();
     }
@@ -333,6 +333,7 @@ export class FastTrieBlobBuilder implements TrieBuilder<FastTrieBlob> {
     static fromTrieRoot(root: TrieRoot): FastTrieBlob {
         const bitMasksInfo = FastTrieBlobBuilder.DefaultBitMaskInfo;
         const NodeChildRefShift = bitMasksInfo.NodeChildRefShift;
+        const NodeCharIndexMask = bitMasksInfo.NodeMaskChildCharIndex;
         const NodeMaskEOW = bitMasksInfo.NodeMaskEOW;
         const tf = new FastTrieBlobBuilder(undefined, bitMasksInfo);
         const IdxEOW = tf.IdxEOW;
@@ -352,14 +353,37 @@ export class FastTrieBlobBuilder implements TrieBuilder<FastTrieBlob> {
             const node = tf.nodes[nodeIdx];
             if (!n.c) return nodeIdx;
             const children = Object.entries(n.c);
-            node.length = children.length + 1;
             for (let p = 0; p < children.length; ++p) {
                 const [char, childNode] = children[p];
-                const letterIdx = tf.getCharIndex(char);
-                const childIdx = walk(childNode);
-                node[p + 1] = (childIdx << NodeChildRefShift) | letterIdx;
+                addCharToNode(node, char, childNode);
             }
             return nodeIdx;
+        }
+
+        function resolveChild(node: FastTrieBlobNode, charIndex: number): number {
+            let i = 1;
+            for (i = 1; i < node.length && (node[i] & NodeCharIndexMask) !== charIndex; ++i) {
+                // empty
+            }
+            return i;
+        }
+
+        function addCharToNode(node: FastTrieBlobNode, char: string, n: TrieNode): void {
+            const indexSeq = tf.letterToNodeCharIndexSequence(char);
+            for (const idx of indexSeq.slice(0, -1)) {
+                const pos = resolveChild(node, idx);
+                if (pos < node.length) {
+                    node = tf.nodes[node[pos] >>> NodeChildRefShift];
+                } else {
+                    const next: FastTrieBlobNode = [0];
+                    const nodeIdx = tf.nodes.push(next) - 1;
+                    node[pos] = (nodeIdx << NodeChildRefShift) | idx;
+                    node = next;
+                }
+            }
+            const letterIdx = indexSeq[indexSeq.length - 1];
+            const i = node.push(letterIdx) - 1;
+            node[i] = (walk(n) << NodeChildRefShift) | letterIdx;
         }
 
         walk(root);

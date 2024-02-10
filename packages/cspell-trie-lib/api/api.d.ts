@@ -360,7 +360,7 @@ declare function impersonateCollector(collector: SuggestionCollector, word: stri
 interface TrieData {
     info: Readonly<TrieInfo>;
     /** Method used to split words into individual characters. */
-    wordToCharacters(word: string): string[];
+    wordToCharacters(word: string): readonly string[];
     words(): Iterable<string>;
     getRoot(): ITrieNodeRoot;
     getNode(prefix: string): ITrieNode | undefined;
