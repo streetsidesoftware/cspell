@@ -1,5 +1,5 @@
-import { createCommand } from 'commander';
-import * as commander from 'commander';
+import type { Command } from 'commander';
+import { createCommand, InvalidArgumentError } from 'commander';
 import os from 'os';
 import path from 'path';
 
@@ -18,12 +18,12 @@ function validateParallelArg(value: string) {
     // parseInt takes a string and a radix
     const parsedValue = parseInt(value, 10);
     if (isNaN(parsedValue) || parsedValue < 1) {
-        throw new commander.InvalidArgumentError('Must be a number >= 1');
+        throw new InvalidArgumentError('Must be a number >= 1');
     }
     return value;
 }
 
-function run(program: commander.Command) {
+function run(program: Command) {
     program
         .command('check')
         .argument('[patterns...]', 'Only check repositories whose name contain the pattern.')
