@@ -5,7 +5,7 @@ Args: '["**/*.{md,py}"]'
 Summary:
   files: 1315
   filesWithIssues: 489
-  issues: 3407
+  issues: 3408
   errors: 0
 Errors: []
 
@@ -753,7 +753,7 @@ issues:
   - "hashes/chaos_machine.py:45:32       Marsaglia       U       (Xorshift by George Marsaglia)"
   - "hashes/hamming_code.py:1:44         Kunz        U       A. Amorim & Gabriel Kunz"
   - "hashes/hamming_code.py:24:67        Pari        U       many parity bits (sizePari)"
-  - "hashes/hamming_code.py:274:5        Receiv      U       dataReceiv, ack = receptorConverter"
+  - "hashes/hamming_code.py:268:5        Receiv      U       dataReceiv, ack = receptorConverter"
   - "hashes/luhn.py:5:8          luhn    U       def is_luhn(string: str) -> bool"
   - "hashes/md5.py:30:38         abcdfghijklmnopqrstuvw      U       little_endian(b'1234567890abcdfghijklmnopqrstuvw')"
   - "hashes/md5.py:31:7          pqrstuvwhijklmno            U       b'pqrstuvwhijklmno90abcdfg12345678'"
@@ -858,6 +858,7 @@ issues:
   - "machine_learning/sequential_minimum_optimization.py:533:21      hstack          U       train_data = np.hstack((train_y.reshape(50"
   - "machine_learning/sequential_minimum_optimization.py:571:78      desity          U       distributed points with high desity and"
   - "machine_learning/sequential_minimum_optimization.py:580:5       yrange          U       yrange = np.linspace(train"
+  - "machine_learning/sequential_minimum_optimization.py:592:12      asmatrix        U       np.asmatrix(grid).T,"
   - "machine_learning/support_vector_machines.py:74:15       sklear      U       # sklear: def_gamma = 1/(n_features"
   - "machine_learning/xgboost_classifier.py:7:6          xgboost     U       from xgboost import XGBClassifier"
   - "machine_learning/xgboost_classifier.py:27:44        gbtree      U       score=0.5, booster='gbtree', callbacks=None,"
@@ -958,7 +959,6 @@ issues:
   - "neural_network/activation_functions/scaled_exponential_linear_unit.py:2:50          SELU    U       Exponential Linear Unit or SELU function."
   - "neural_network/activation_functions/soboleva_modified_hyperbolic_tangent.py:15:5        soboleva    U       def soboleva_modified_hyperbolic"
   - "neural_network/activation_functions/soboleva_modified_hyperbolic_tangent.py:29:54       SMHT        U       array after applying SMHT function"
-  - "neural_network/back_propagation_neural_network.py:53:26         asmatrix    U       self.weight = np.asmatrix(np.random.normal(0,"
   - "neural_network/back_propagation_neural_network.py:67:35         xdata       U       forward_propagation(self, xdata):"
   - "neural_network/back_propagation_neural_network.py:97:7          BPNN        U       class BPNN:"
   - "neural_network/back_propagation_neural_network.py:124:28        ydata       U       def train(self, xdata, ydata, train_round, accuracy"
