@@ -3,7 +3,7 @@ Repository: MicrosoftDocs/PowerShell-Docs
 Url: "https://github.com/MicrosoftDocs/PowerShell-Docs.git"
 Args: ["--config=../../../cspell-power-shell-docs.config.yaml","**"]
 Lines:
- CSpell: Files checked: 3134, Issues found: 6481 in 1475 files
+ CSpell: Files checked: 3134, Issues found: 6450 in 1470 files
  exit code: 1
 ./LICENSE:139:15    - Unknown word (sublicensable)   -- non-sublicensable, non-exclusive, irrevocable
 ./LICENSE:205:34    - Unknown word (waivable)        -- under any voluntary or waivable statutory or compulsory
@@ -189,9 +189,6 @@ Lines:
 ./reference/5.1/Microsoft.PowerShell.Core/About/about_Type_Operators.md:185:10    - Unknown word (uiculture)  -- PS> (get-uiculture) -is [System.Globalization
 ./reference/5.1/Microsoft.PowerShell.Core/About/about_Types.ps1xml.md:218:8     - Unknown word (Typedata)   -- Update-Typedata -PrependPath $PSHOME
 ./reference/5.1/Microsoft.PowerShell.Core/About/about_Types.ps1xml.md:463:42    - Unknown word (Dmtf)       -- `ToDateTime` and `ToDmtfDateTime` static methods
-./reference/5.1/Microsoft.PowerShell.Core/About/about_Using.md:127:10    - Unknown word (stringbytes) -- [byte[]]$stringbytes = [UnicodeEncoding]
-./reference/5.1/Microsoft.PowerShell.Core/About/about_Using.md:129:10    - Unknown word (memorystream) -- [Stream]$memorystream = [MemoryStream]::new
-./reference/5.1/Microsoft.PowerShell.Core/About/about_Using.md:130:2     - Unknown word (hashfromstream) -- $hashfromstream = Get-FileHash -InputStream
 ./reference/5.1/Microsoft.PowerShell.Core/About/about_Variable_Provider.md:155:16    - Unknown word (Literalpath) -- Get-ChildItem -Literalpath ?
 ./reference/5.1/Microsoft.PowerShell.Core/About/about_WMI_Cmdlets.md:100:2     - Unknown word (WMICLASS)    -- [WMICLASS] - A shortcut for accessing
 ./reference/5.1/Microsoft.PowerShell.Core/About/about_WMI_Cmdlets.md:111:58    - Unknown word (Handlecount) -- Win32_Process where Handlecount > 1000'
@@ -284,8 +281,8 @@ Lines:
 ./reference/5.1/Microsoft.PowerShell.Management/Get-WmiObject.md:234:56    - Unknown word (localizable) -- amended information is localizable information, such as
 ./reference/5.1/Microsoft.PowerShell.Management/Get-WmiObject.md:311:69    - Unknown word (ntlmdomain)  -- authority setting to `ntlmdomain:<DomainName>`, where
 ./reference/5.1/Microsoft.PowerShell.Management/Get-WmiObject.md:624:4     - Unknown word (gwmi)        -- - `gwmi`
-./reference/5.1/Microsoft.PowerShell.Management/Invoke-WmiMethod.md:115:3     - Unknown word (Wmiclass)   -- ([Wmiclass]'Win32_Process').GetMethodPar
-./reference/5.1/Microsoft.PowerShell.Management/Invoke-WmiMethod.md:566:4     - Unknown word (iwmi)       -- - `iwmi`
+./reference/5.1/Microsoft.PowerShell.Management/Invoke-WmiMethod.md:105:3     - Unknown word (Wmiclass)   -- ([Wmiclass]'Win32_Process').Create
+./reference/5.1/Microsoft.PowerShell.Management/Invoke-WmiMethod.md:554:4     - Unknown word (iwmi)       -- - `iwmi`
 ./reference/5.1/Microsoft.PowerShell.Management/Join-Path.md:101:87    - Unknown word (Subdir)     -- Join-Path -ChildPath "Subdir"
 ./reference/5.1/Microsoft.PowerShell.Management/Join-Path.md:32:44     - Unknown word (childpath)  -- Path "path" -ChildPath "childpath"
 ./reference/5.1/Microsoft.PowerShell.Management/Move-Item.md:89:38     - Unknown word (Textfiles)  -- are to be moved to `C:\Textfiles` have the same name
@@ -1115,7 +1112,7 @@ Lines:
 ./reference/docs-conceptual/install/Installing-PowerShell-on-Windows.md:310:28    - Unknown word (workarea)       -- include the package in the workarea and add _OPENSRC_POWERSHELL
 ./reference/docs-conceptual/install/Installing-PowerShell-on-Windows.md:310:46    - Unknown word (OPENSRC)        -- the workarea and add _OPENSRC_POWERSHELL_ feature
 ./reference/docs-conceptual/install/Installing-PowerShell-on-Windows.md:347:2     - Unknown word (ipaddr)         -- $ipaddr = '<Nano Server IP address
-./reference/docs-conceptual/install/PowerShell-on-ARM.md:60:1      - Unknown word (Raspbery)   -- Raspbery Pi
+./reference/docs-conceptual/install/PowerShell-on-ARM.md:76:1      - Unknown word (Raspbery)   -- Raspbery Pi
 ./reference/docs-conceptual/install/community-support.md:105:8     - Unknown word (getconf)    -- bits=$(getconf LONG_BIT)
 ./reference/docs-conceptual/install/community-support.md:99:35     - Unknown word (libunwind)  -- install jq libssl1.1 libunwind8 -y
 ./reference/docs-conceptual/install/install-alpine.md:34:13     - Unknown word (terminfo)   -- ncurses-terminfo-base \
@@ -1305,15 +1302,15 @@ Lines:
 ./reference/docs-conceptual/whats-new/What-s-New-in-PowerShell-73.md:86:83     - Unknown word (farmerau)   -- 3][16193]) (Thanks @farmerau!)
 ./reference/docs-conceptual/whats-new/What-s-New-in-PowerShell-73.md:87:85     - Unknown word (Ritchie)    -- 16197]) (Thanks @KevRitchie!)
 ./reference/docs-conceptual/whats-new/What-s-New-in-PowerShell-73.md:90:30     - Unknown word (dwtaber)    -- 3][16113]) (Thanks @dwtaber!)
-./reference/docs-conceptual/whats-new/What-s-New-in-PowerShell-74.md:116:81    - Unknown word (stevenebutler) -- 9][19249]) (Thanks @stevenebutler!)
-./reference/docs-conceptual/whats-new/What-s-New-in-PowerShell-74.md:121:30    - Unknown word (mkht)          -- 2][19622]) (Thanks @mkht!)
-./reference/docs-conceptual/whats-new/What-s-New-in-PowerShell-74.md:145:30    - Unknown word (dkaszews)      -- 0][17780]) (Thanks @dkaszews!)
-./reference/docs-conceptual/whats-new/What-s-New-in-PowerShell-74.md:151:30    - Unknown word (josea)         -- 5][19765]) (Thanks @josea!)
-./reference/docs-conceptual/whats-new/What-s-New-in-PowerShell-74.md:177:78    - Unknown word (wmentha)       -- 1][17191]) (Thanks @wmentha!)
-./reference/docs-conceptual/whats-new/What-s-New-in-PowerShell-74.md:184:80    - Unknown word (nohwnd)        -- 3][14953]) (Thanks @nohwnd!)
+./reference/docs-conceptual/whats-new/What-s-New-in-PowerShell-74.md:117:81    - Unknown word (stevenebutler) -- 9][19249]) (Thanks @stevenebutler!)
+./reference/docs-conceptual/whats-new/What-s-New-in-PowerShell-74.md:122:30    - Unknown word (mkht)          -- 2][19622]) (Thanks @mkht!)
+./reference/docs-conceptual/whats-new/What-s-New-in-PowerShell-74.md:146:30    - Unknown word (dkaszews)      -- 0][17780]) (Thanks @dkaszews!)
+./reference/docs-conceptual/whats-new/What-s-New-in-PowerShell-74.md:152:30    - Unknown word (josea)         -- 5][19765]) (Thanks @josea!)
+./reference/docs-conceptual/whats-new/What-s-New-in-PowerShell-74.md:178:78    - Unknown word (wmentha)       -- 1][17191]) (Thanks @wmentha!)
+./reference/docs-conceptual/whats-new/What-s-New-in-PowerShell-74.md:185:80    - Unknown word (nohwnd)        -- 3][14953]) (Thanks @nohwnd!)
 ./reference/docs-conceptual/whats-new/What-s-New-in-PowerShell-74.md:22:88     - Unknown word (gregsdennis) -- 1][18141]) (Thanks @gregsdennis!)
-./reference/docs-conceptual/whats-new/What-s-New-in-PowerShell-74.md:90:3      - Unknown word (Webcmdlets)  -- - Webcmdlets add 308 to redirect
-./reference/docs-conceptual/whats-new/What-s-New-in-PowerShell-74.md:98:26     - Unknown word (webcmdlets)  -- Fix using xml -Body in webcmdlets without an encoding
+./reference/docs-conceptual/whats-new/What-s-New-in-PowerShell-74.md:91:3      - Unknown word (Webcmdlets)  -- - Webcmdlets add 308 to redirect
+./reference/docs-conceptual/whats-new/What-s-New-in-PowerShell-74.md:99:26     - Unknown word (webcmdlets)  -- Fix using xml -Body in webcmdlets without an encoding
 ./reference/docs-conceptual/whats-new/What-s-New-in-PowerShell-75.md:41:12     - Unknown word (LNKLEO)     -- (Thanks @LNKLEO!)
 ./reference/docs-conceptual/whats-new/What-s-New-in-PowerShell-75.md:53:4      - Unknown word (chrisdent)  -- @chrisdent-de!)
 ./reference/docs-conceptual/whats-new/What-s-New-in-PowerShell-75.md:63:83     - Unknown word (mawosoft)   -- 5][20745]) (Thanks @mawosoft!)
@@ -1340,7 +1337,7 @@ Lines:
 ./reference/media/index/powershell_128.svg:5:21      - Unknown word (SVGID)      -- <linearGradient id="SVGID_1_" gradientUnits="userSpaceO
 ./reference/media/shared/check-mark-button-2705.svg:3:12      - Unknown word (svgg)       -- <g id="svgg">
 ./reference/module/index.md:14:36     - Unknown word (windowsserver) -- FilterColumn1: powershell-7.4,windowsserver2022-ps
-./reference/module/index.md:15:21     - Unknown word (azps)          -- quickFilterColumn2: azps-11.2.0,sqlserver-ps
+./reference/module/index.md:15:21     - Unknown word (azps)          -- quickFilterColumn2: azps-11.3.0,sqlserver-ps
 ./reference/module/index.md:16:42     - Unknown word (systemcenter)  -- graph-powershell-1.0,systemcenter-ps-2022
 ./tests/Pester/Update-Help.Tests.ps1:24:34     - Unknown word (pshome)     -- HelpInstallationPath = "$pshome\en-US"
 ./tests/Pester/Update-Help.Tests.ps1:30:109    - Unknown word (helpcontent) -- -2565dba61a4f_en-US_helpcontent$extension"

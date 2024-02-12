@@ -3,16 +3,16 @@ Repository: RustPython/RustPython
 Url: "https://github.com/RustPython/RustPython.git"
 Args: ["**"]
 Lines:
- CSpell: Files checked: 597, Issues found: 2712 in 308 files
+ CSpell: Files checked: 598, Issues found: 2714 in 308 files
  exit code: 1
-./Cargo.toml:111:82    - Unknown word (termcolor)  -- features = ["atty", "termcolor"] }
-./Cargo.toml:154:62    - Unknown word (redoxer)    -- to compile/check with redoxer
+./Cargo.toml:110:82    - Unknown word (termcolor)  -- features = ["atty", "termcolor"] }
+./Cargo.toml:152:62    - Unknown word (redoxer)    -- to compile/check with redoxer
 ./Cargo.toml:16:44     - Unknown word (pylib)      -- derive", "jit", "vm", "pylib", "stdlib", "wasm/lib
-./Cargo.toml:61:119    - Unknown word (zerocopy)   -- "socket", "sched", "zerocopy", "dir", "hostname"
-./Cargo.toml:73:1      - Unknown word (rustyline)  -- rustyline = "13"
-./Cargo.toml:78:1      - Unknown word (thiserror)  -- thiserror = "1.0"
-./Cargo.toml:81:1      - Unknown word (widestring) -- widestring = "0.5.1"
-./Cargo.toml:88:49     - Unknown word (flamescope) -- flame-it", "flame", "flamescope"]
+./Cargo.toml:60:119    - Unknown word (zerocopy)   -- "socket", "sched", "zerocopy", "dir", "hostname"
+./Cargo.toml:72:1      - Unknown word (rustyline)  -- rustyline = "13"
+./Cargo.toml:77:1      - Unknown word (thiserror)  -- thiserror = "1.0"
+./Cargo.toml:80:1      - Unknown word (widestring) -- widestring = "0.5.1"
+./Cargo.toml:87:49     - Unknown word (flamescope) -- flame-it", "flame", "flamescope"]
 ./DEVELOPMENT.md:113:5     - Unknown word (speedscope) -- The speedscope json format (default
 ./DEVELOPMENT.md:131:26    - Unknown word (subcrates)  -- src`: using the other subcrates to bring rustpython
 ./DEVELOPMENT.md:24:20     - Unknown word (rustup)     -- - If you have `rustup` on your system, enter
@@ -50,11 +50,11 @@ Lines:
 ./benches/benchmarks/pystone.py:98:26     - Unknown word (DHRYSTONE)  -- PtrGlb.StringComp = "DHRYSTONE PROGRAM, SOME STRING
 ./benches/benchmarks/pystone.py:9:29      - Unknown word (Weicker)    -- Reinhold P. Weicker, CACM Vol 27, No 1
 ./benches/benchmarks/pystone.py:9:39      - Unknown word (CACM)       -- Reinhold P. Weicker,  CACM Vol 27, No 10, 10/8
-./benches/execution.rs:25:10     - Unknown word (rustpy)     -- fn bench_rustpy_code(b: &mut Bencher
-./benches/execution.rs:96:18     - Unknown word (pystone)    -- pub fn benchmark_pystone(group: &mut BenchmarkGroup
+./benches/execution.rs:23:10     - Unknown word (rustpy)     -- fn bench_rustpy_code(b: &mut Bencher
+./benches/execution.rs:70:18     - Unknown word (pystone)    -- pub fn benchmark_pystone(group: &mut BenchmarkGroup
 ./benches/microbenchmarks.rs:12:12     - Unknown word (microbenchmarks) -- // List of microbenchmarks to skip.
 ./benches/microbenchmarks.rs:20:12     - Unknown word (MICROBENCHMARKS) -- const SKIP_MICROBENCHMARKS: [&str; 8] = [
-./benches/microbenchmarks.rs:54:35     - Unknown word (microbenchmark)  -- panic!("Error running microbenchmark")
+./benches/microbenchmarks.rs:54:39     - Unknown word (microbenchmark)  -- panic!("Error running microbenchmark")
 ./benches/test_benchmarks.py:19:18     - Unknown word (nbody)      -- ['benchmarks/nbody.py'],
 ./common/Cargo.toml:33:1      - Unknown word (siphasher)  -- siphasher = "0.3"
 ./common/src/boxvec.rs:1:8       - Unknown word (unresizable) -- //! An unresizable vector backed by a
@@ -620,10 +620,10 @@ Lines:
 ./vm/src/builtins/descriptor.rs:231:33    - Unknown word (objclass)       -- "<descriptor>.__objclass__.__qualname__ is not
 ./vm/src/builtins/descriptor.rs:29:20     - Unknown word (vectorcallfunc) -- // vectorcall: vectorcallfunc,
 ./vm/src/builtins/descriptor.rs:29:8      - Unknown word (vectorcall) -- // vectorcall: vectorcallfunc,
-./vm/src/builtins/dict.rs:1019:10   - Unknown word (reverseitemiterator) -- dict_reverseitemiterator_type,
+./vm/src/builtins/dict.rs:1014:10   - Unknown word (reverseitemiterator) -- dict_reverseitemiterator_type,
 ./vm/src/builtins/dict.rs:14:5      - Unknown word (dictdatatype) -- dictdatatype::{self, DictKey},
-./vm/src/builtins/dict.rs:335:13    - Unknown word (dicted)       -- let dicted: Result<PyDictRef,
-./vm/src/builtins/dict.rs:993:10    - Unknown word (reversekeyiterator) -- dict_reversekeyiterator_type,
+./vm/src/builtins/dict.rs:330:13    - Unknown word (dicted)       -- let dicted: Result<PyDictRef,
+./vm/src/builtins/dict.rs:988:10    - Unknown word (reversekeyiterator) -- dict_reversekeyiterator_type,
 ./vm/src/builtins/frame.rs:57:10     - Unknown word (lasti)      -- fn f_lasti(&self) -> u32 {
 ./vm/src/builtins/function.rs:134:13    - Unknown word (argpos)     -- let argpos = |range: std::ops:
 ./vm/src/builtins/function.rs:144:17    - Unknown word (posonly)    -- let mut posonly_passed_as_kwarg = Vec
@@ -637,8 +637,9 @@ Lines:
 ./vm/src/builtins/function/jitfunc.rs:89:14     - Unknown word (Jitting)    -- "Jitting function requires arguments
 ./vm/src/builtins/genericalias.rs:254:9     - Unknown word (tvars)      -- fn subs_tvars(
 ./vm/src/builtins/genericalias.rs:257:5     - Unknown word (argitems)   -- argitems: &[PyObjectRef],
-./vm/src/builtins/list.rs:323:26    - Unknown word (keyfunc)    -- // this prevents keyfunc from messing with the
-./vm/src/builtins/list.rs:579:40    - Unknown word (reverseiterator) -- false, name = "list_reverseiterator", traverse)]
+./vm/src/builtins/int.rs:529:25    - Unknown word (halfpow)    -- let halfpow10 = &pow10 / BigInt
+./vm/src/builtins/list.rs:318:26    - Unknown word (keyfunc)    -- // this prevents keyfunc from messing with the
+./vm/src/builtins/list.rs:574:40    - Unknown word (reverseiterator) -- false, name = "list_reverseiterator", traverse)]
 ./vm/src/builtins/memory.rs:150:29    - Unknown word (suboffset)   -- let (shape, stride, suboffset) = self.desc.dim_desc
 ./vm/src/builtins/memory.rs:47:37     - Unknown word (memeoryview) -- the possible another memeoryview is viewing from it
 ./vm/src/builtins/memory.rs:615:8     - Unknown word (suboffsets)  -- fn suboffsets(&self, vm: &VirtualMachine
@@ -650,18 +651,19 @@ Lines:
 ./vm/src/builtins/module.rs:22:14     - Unknown word (freefunc)     -- // free: freefunc
 ./vm/src/builtins/module.rs:51:8      - Unknown word (weaklist)     -- // weaklist
 ./vm/src/builtins/range.rs:525:35    - Unknown word (longrange)  -- module = false, name = "longrange_iterator")]
+./vm/src/builtins/set.rs:451:48    - Unknown word (frozensets) -- patterns arising in nested frozensets
 ./vm/src/builtins/slice.rs:204:15    - Unknown word (XXPRIME)    -- const XXPRIME_1: PyUHash = if cfg
-./vm/src/builtins/str.rs:1616:21   - Unknown word (Ωppercases)   -- ("Greek Ωppercases ...", "greek ωppercases
-./vm/src/builtins/str.rs:1616:45   - Unknown word (ωppercases)   -- ppercases ...", "greek ωppercases ..."),
-./vm/src/builtins/str.rs:1617:21   - Unknown word (ῼitlecases)   -- ("Greek ῼitlecases ...", "greek ῳitlecases
-./vm/src/builtins/str.rs:1617:45   - Unknown word (ῳitlecases)   -- itlecases ...", "greek ῳitlecases ..."),
-./vm/src/builtins/str.rs:1628:16   - Unknown word (Titlecased)   -- "A Titlecased Line",
-./vm/src/builtins/str.rs:1644:21   - Unknown word (Titlecase)    -- "Not\ta Titlecase String",
-./vm/src/builtins/str.rs:1777:33   - Unknown word (rmatch)       -- (offset, _) in self.rmatch_indices(|c: char| c
-./vm/src/builtins/str.rs:459:48    - Unknown word (cmpxchg)    -- len, we don't need a cmpxchg loop, since it'll always
-./vm/src/builtins/str.rs:780:18    - Unknown word (titlecased) -- /// Return a titlecased version of the string
-./vm/src/builtins/str.rs:789:39    - Unknown word (titlecase)  -- title.extend(c.to_titlecase());
-./vm/src/builtins/str.rs:849:27    - Unknown word (Nonprintable) -- / false otherwise.  Nonprintable characters are those
+./vm/src/builtins/str.rs:1611:21   - Unknown word (Ωppercases)   -- ("Greek Ωppercases ...", "greek ωppercases
+./vm/src/builtins/str.rs:1611:45   - Unknown word (ωppercases)   -- ppercases ...", "greek ωppercases ..."),
+./vm/src/builtins/str.rs:1612:21   - Unknown word (ῼitlecases)   -- ("Greek ῼitlecases ...", "greek ῳitlecases
+./vm/src/builtins/str.rs:1612:45   - Unknown word (ῳitlecases)   -- itlecases ...", "greek ῳitlecases ..."),
+./vm/src/builtins/str.rs:1623:16   - Unknown word (Titlecased)   -- "A Titlecased Line",
+./vm/src/builtins/str.rs:1639:21   - Unknown word (Titlecase)    -- "Not\ta Titlecase String",
+./vm/src/builtins/str.rs:1772:33   - Unknown word (rmatch)       -- (offset, _) in self.rmatch_indices(|c: char| c
+./vm/src/builtins/str.rs:454:48    - Unknown word (cmpxchg)    -- len, we don't need a cmpxchg loop, since it'll always
+./vm/src/builtins/str.rs:775:18    - Unknown word (titlecased) -- /// Return a titlecased version of the string
+./vm/src/builtins/str.rs:784:39    - Unknown word (titlecase)  -- title.extend(c.to_titlecase());
+./vm/src/builtins/str.rs:844:27    - Unknown word (Nonprintable) -- / false otherwise.  Nonprintable characters are those
 ./vm/src/builtins/super.rs:272:26    - Unknown word (cmeth)      -- def cmeth(cls, arg):\n
 ./vm/src/builtins/super.rs:32:28     - Unknown word (supercheck) -- let obj_type = supercheck(typ.clone(), obj.clone
 ./vm/src/builtins/tuple.rs:307:39    - Unknown word (tuplesubclass) -- just return tup, or tuplesubclass(tup), which'll copy
@@ -680,7 +682,7 @@ Lines:
 ./vm/src/coroutine.rs:33:9      - Unknown word (weakreflist) -- // _weakreflist
 ./vm/src/dictdatatype.rs:172:25    - Unknown word (idxs)       -- let mut idxs = GenIndexes::new(entry
 ./vm/src/dictdatatype.rs:22:62     - Unknown word (pyhash)     -- compatible with actual pyhash value
-./vm/src/dictdatatype.rs:685:29    - Unknown word (usecases)   -- dictionary. Typical usecases are:
+./vm/src/dictdatatype.rs:681:29    - Unknown word (usecases)   -- dictionary. Typical usecases are:
 ./vm/src/frame.rs:350:13    - Unknown word (instrs)     -- let instrs = &self.code.instructions
 ./vm/src/frame.rs:786:75    - Unknown word (binop)      -- op } => self.execute_binop(vm, op.get(arg)),
 ./vm/src/frame.rs:793:74    - Unknown word (unop)       -- op } => self.execute_unop(vm, op.get(arg)),
@@ -939,9 +941,9 @@ Lines:
 ./vm/src/stdlib/winreg.rs:191:13    - Unknown word (regval)     -- let regval = key
 ./vm/src/stdlib/winreg.rs:50:77     - Unknown word (QWORD)      -- MULTI_SZ, REG_NONE, REG_QWORD,
 ./vm/src/stdlib/winreg.rs:85:36     - Unknown word (predef)     -- let null_key = RegKey::predef(0 as ::winreg::HKEY
-./vm/src/types/slot.rs:137:28    - Unknown word (TPFLAGS)    -- CPython default: Py_TPFLAGS_HAVE_STACKLESS_EXTENSION
-./vm/src/types/slot.rs:141:43    - Unknown word (Subclassable) -- types created in Python. Subclassable and are a
-./vm/src/types/slot.rs:379:29    - Unknown word (subslot)      -- macro_rules! toggle_subslot {
+./vm/src/types/slot.rs:138:28    - Unknown word (TPFLAGS)    -- CPython default: Py_TPFLAGS_HAVE_STACKLESS_EXTENSION
+./vm/src/types/slot.rs:142:43    - Unknown word (Subclassable) -- types created in Python. Subclassable and are a
+./vm/src/types/slot.rs:384:29    - Unknown word (subslot)      -- macro_rules! toggle_subslot {
 ./vm/src/vm/mod.rs:226:17    - Unknown word (rustpythonpath) -- let rustpythonpath_env = std::env::var
 ./vm/src/vm/mod.rs:594:29    - Unknown word (pyiter)         -- return self.map_pyiter(value, func);
 ./vm/src/vm/setting.rs:46:10     - Unknown word (Xfoo)       -- /// -Xfoo[=bar]

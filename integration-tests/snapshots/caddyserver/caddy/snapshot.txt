@@ -3,7 +3,7 @@ Repository: caddyserver/caddy
 Url: "https://github.com/caddyserver/caddy.git"
 Args: ["**/*.go"]
 Lines:
- CSpell: Files checked: 251, Issues found: 3769 in 232 files
+ CSpell: Files checked: 253, Issues found: 3818 in 234 files
  exit code: 1
 ./admin.go:1357:21   - Unknown word (pidfile)     -- // PIDFile writes a pidfile to the file at filename
 ./admin.go:331:29    - Unknown word (infosec)     -- security checks, the infosec community assures me
@@ -35,13 +35,15 @@ Lines:
 ./caddyconfig/caddyfile/dispenser.go:207:40    - Unknown word (unmarshaling) -- not relevant to any unmarshaling logic at this time.
 ./caddyconfig/caddyfile/dispenser.go:343:2     - Unknown word (tkns)         -- tkns := Segment{d.Token(
 ./caddyconfig/caddyfile/dispenser_test.go:300:37    - Unknown word (Testfile)   -- Contains(err.Error(), "Testfile:3") {
-./caddyconfig/caddyfile/formatter.go:292:8     - Unknown word (Caddyfiles) -- // ...Caddyfiles should, however, end
+./caddyconfig/caddyfile/formatter.go:297:8     - Unknown word (Caddyfiles) -- // ...Caddyfiles should, however, end
 ./caddyconfig/caddyfile/formatter_fuzz.go:15:12     - Unknown word (gofuzz)     -- //go:build gofuzz
-./caddyconfig/caddyfile/formatter_test.go:315:18    - Unknown word (redir)      -- input: `redir / /some/#/path`,
-./caddyconfig/caddyfile/formatter_test.go:330:18    - Unknown word (matthewpi)  -- description: "matthewpi/vscode-caddyfile-support
-./caddyconfig/caddyfile/formatter_test.go:332:10    - Unknown word (ACMEEMAIL)  -- email {$ACMEEMAIL}
-./caddyconfig/caddyfile/lexer.go:351:29    - Unknown word (linebreak)  -- heredocs have an extra linebreak because the opening
-./caddyconfig/caddyfile/lexer.go:351:6     - Unknown word (heredocs)   -- // heredocs have an extra linebreak
+./caddyconfig/caddyfile/formatter_test.go:318:18    - Unknown word (redir)      -- input: `redir / /some/#/path`,
+./caddyconfig/caddyfile/formatter_test.go:333:18    - Unknown word (matthewpi)  -- description: "matthewpi/vscode-caddyfile-support
+./caddyconfig/caddyfile/formatter_test.go:335:10    - Unknown word (ACMEEMAIL)  -- email {$ACMEEMAIL}
+./caddyconfig/caddyfile/formatter_test.go:443:36    - Unknown word (clusterfuzz) -- os.ReadFile("testdata/clusterfuzz-testcase-minimized-fuzz
+./caddyconfig/caddyfile/formatter_test.go:443:48    - Unknown word (testcase)    -- testdata/clusterfuzz-testcase-minimized-fuzz-format
+./caddyconfig/caddyfile/lexer.go:355:29    - Unknown word (linebreak)  -- heredocs have an extra linebreak because the opening
+./caddyconfig/caddyfile/lexer.go:355:6     - Unknown word (heredocs)   -- // heredocs have an extra linebreak
 ./caddyconfig/caddyfile/lexer_test.go:404:24    - Unknown word (Aheredoc)   -- input: []byte("\u000Aheredoc \u003C\u003C\u0073\u
 ./caddyconfig/caddyfile/parse.go:656:36    - Unknown word (Curlies)    -- parser) blockTokens(retainCurlies bool) ([]Token, error
 ./caddyconfig/caddyfile/parse.go:657:21    - Unknown word (curlies)    -- // block must have curlies.
@@ -98,6 +100,9 @@ Lines:
 ./caddytest/caddytest.go:324:74    - Unknown word (gosec)           -- reSkipVerify: true}, //nolint:gosec
 ./caddytest/caddytest.go:39:2      - Unknown word (Certifcates) -- Certifcates []string
 ./caddytest/caddytest.go:95:53     - Unknown word (configurion) -- configure the server with a configurion of a specific
+./caddytest/integration/acme_test.go:22:2      - Unknown word (smallstepacme) -- smallstepacme "github.com/smallstep
+./caddytest/integration/acme_test.go:22:28     - Unknown word (smallstep)     -- smallstepacme "github.com/smallstep/certificates/acme"
+./caddytest/integration/acme_test.go:51:2      - Unknown word (datadir)       -- datadir := caddy.AppDataDir
 ./caddytest/integration/autohttps_test.go:20:11     - Unknown word (Yahaha)     -- respond "Yahaha! You found me!"
 ./caddytest/integration/caddyfile_test.go:150:43    - Unknown word (someinvalidprefix) -- unsupported URL scheme someinvalidprefix://",
 ./caddytest/integration/caddyfile_test.go:549:10    - Unknown word (internalerr)       -- error /internalerr* "Internal Server Error
@@ -179,10 +184,14 @@ Lines:
 ./modules/caddyhttp/encode/brotli/brotli_precompressed.go:9:23      - Unknown word (Brotli)      -- caddy.RegisterModule(BrotliPrecompressed{})
 ./modules/caddyhttp/encode/brotli/brotli_precompressed.go:9:29      - Unknown word (Precompressed) -- RegisterModule(BrotliPrecompressed{})
 ./modules/caddyhttp/encode/caddyfile.go:44:8      - Unknown word (zstd)       -- // zstd
+./modules/caddyhttp/encode/encode.go:100:19    - Unknown word (opentype)   -- "application/opentype*",
+./modules/caddyhttp/encode/encode.go:103:19    - Unknown word (truetype)   -- "application/truetype*",
+./modules/caddyhttp/encode/encode.go:106:26    - Unknown word (fontobject) -- "application/vnd.ms-fontobject*",
+./modules/caddyhttp/encode/encode.go:113:21    - Unknown word (protobuf)   -- "application/x-protobuf*",
 ./modules/caddyhttp/encode/encode.go:19:65     - Unknown word (Httpgzip)   -- Copyright (c) 2015 The Httpgzip Authors.
-./modules/caddyhttp/encode/encode.go:215:11    - Unknown word (bodyclose)  -- //nolint:bodyclose
-./modules/caddyhttp/encode/encode.go:279:4     - Unknown word (deallocates) -- // deallocates any active resources
-./modules/caddyhttp/encode/encode.go:337:2     - Unknown word (prefs)       -- prefs := []encodingPreference
+./modules/caddyhttp/encode/encode.go:241:11    - Unknown word (bodyclose)  -- //nolint:bodyclose
+./modules/caddyhttp/encode/encode.go:305:4     - Unknown word (deallocates) -- // deallocates any active resources
+./modules/caddyhttp/encode/encode.go:363:2     - Unknown word (prefs)       -- prefs := []encodingPreference
 ./modules/caddyhttp/encode/encode.go:54:59     - Unknown word (Mmatcher)   -- against this ResponseMmatcher.
 ./modules/caddyhttp/encode/gzip/gzip.go:21:14     - Unknown word (klauspost)  -- "github.com/klauspost/compress/gzip"
 ./modules/caddyhttp/encode/gzip/gzip_precompressed.go:1:9       - Unknown word (caddygzip)  -- package caddygzip
@@ -193,17 +202,17 @@ Lines:
 ./modules/caddyhttp/errors.go:94:18     - Unknown word (abcdefghijkmnopqrstuvwxyz) -- dict := []byte("abcdefghijkmnopqrstuvwxyzABCDEFGHJKLMNPQRTUVWXY
 ./modules/caddyhttp/errors.go:94:43     - Unknown word (ABCDEFGHJKLMNPQRTUVWXY)    -- abcdefghijkmnopqrstuvwxyzABCDEFGHJKLMNPQRTUVWXY23456789")
 ./modules/caddyhttp/errors.go:96:18     - Unknown word (abcdefghijkmnpqrstuvwxyz)  -- dict = []byte("abcdefghijkmnpqrstuvwxyz0123456789")
-./modules/caddyhttp/fileserver/browse.go:55:7      - Unknown word (fsrv)       -- func (fsrv *FileServer) serveBrowse
-./modules/caddyhttp/fileserver/browsetplcontext.go:118:37    - Unknown word (browseable) -- parent directory is browseable.
-./modules/caddyhttp/fileserver/browsetplcontext.go:157:2     - Unknown word (lpath)      -- lpath := l.Path
-./modules/caddyhttp/fileserver/browsetplcontext.go:168:67    - Unknown word (unescaping) -- the loop rather than unescaping the
-./modules/caddyhttp/fileserver/browsetplcontext.go:331:24    - Unknown word (namedirfirst) -- sortByNameDirFirst = "namedirfirst"
+./modules/caddyhttp/fileserver/browse.go:57:7      - Unknown word (fsrv)       -- func (fsrv *FileServer) serveBrowse
+./modules/caddyhttp/fileserver/browsetplcontext.go:129:37    - Unknown word (browseable) -- parent directory is browseable.
+./modules/caddyhttp/fileserver/browsetplcontext.go:168:2     - Unknown word (lpath)      -- lpath := l.Path
+./modules/caddyhttp/fileserver/browsetplcontext.go:179:67    - Unknown word (unescaping) -- the loop rather than unescaping the
+./modules/caddyhttp/fileserver/browsetplcontext.go:343:24    - Unknown word (namedirfirst) -- sortByNameDirFirst = "namedirfirst"
 ./modules/caddyhttp/fileserver/browsetplcontext_test.go:72:15     - Unknown word (corge)      -- {"/qux/quux/corge/", []crumb{
 ./modules/caddyhttp/fileserver/browsetplcontext_test.go:78:6      - Unknown word (مجلد)       -- {"/مجلد/", []crumb{
-./modules/caddyhttp/fileserver/caddyfile.go:125:5     - Unknown word (precompress) -- precompress, ok := inst.(encode
-./modules/caddyhttp/fileserver/caddyfile.go:127:40    - Unknown word (precompressor) -- "module %s is not a precompressor; is %T", modID, inst
+./modules/caddyhttp/fileserver/caddyfile.go:134:5     - Unknown word (precompress) -- precompress, ok := inst.(encode
+./modules/caddyhttp/fileserver/caddyfile.go:136:40    - Unknown word (precompressor) -- "module %s is not a precompressor; is %T", modID, inst
 ./modules/caddyhttp/fileserver/command.go:36:2      - Unknown word (caddytpl)   -- caddytpl "github.com/caddyserver
-./modules/caddyhttp/fileserver/command.go:69:72     - Unknown word (precompression) -- ]string{}, "Specify precompression file extensions. Compression
+./modules/caddyhttp/fileserver/command.go:70:72     - Unknown word (precompression) -- ]string{}, "Specify precompression file extensions. Compression
 ./modules/caddyhttp/fileserver/matcher.go:332:3     - Unknown word (fullpath)   -- fullpath, relative, splitRemainder
 ./modules/caddyhttp/fileserver/matcher.go:561:2     - Unknown word (nlen)       -- nlen := len(needle)
 ./modules/caddyhttp/fileserver/matcher_test.go:120:4     - Unknown word (fsmap)       -- fsmap: &filesystems.FilesystemMa
@@ -220,7 +229,7 @@ Lines:
 ./modules/caddyhttp/headers/headers_test.go:93:32     - Unknown word (lalala)     -- Header-Suffix": []string{"lalala"},
 ./modules/caddyhttp/headers/headers_test.go:96:32     - Unknown word (foofoofoo)  -- Me": []string{"foofoofoo"},
 ./modules/caddyhttp/httpredirectlistener.go:165:44    - Unknown word (OPTIO)      -- "POST ", "PUT /", "OPTIO":
-./modules/caddyhttp/ip_matchers.go:301:15    - Unknown word (Adresses)   -- // Some IPv6-Adresses can contain zone identifiers
+./modules/caddyhttp/ip_matchers.go:277:15    - Unknown word (Adresses)   -- // Some IPv6-Adresses can contain zone identifiers
 ./modules/caddyhttp/map/caddyfile.go:15:9      - Unknown word (maphandler) -- package maphandler
 ./modules/caddyhttp/map/map_test.go:53:16     - Unknown word (Cxyz)       -- reqURI: "/ABCxyzDEF",
 ./modules/caddyhttp/map/map_test.go:93:24     - Unknown word (testvar)    -- Outputs: []any{"{testvar}"},
@@ -335,10 +344,10 @@ Lines:
 ./modules/caddyhttp/tracing/tracer.go:8:56      - Unknown word (otelhttp)   -- instrumentation/net/http/otelhttp"
 ./modules/caddyhttp/tracing/tracer.go:9:43      - Unknown word (autoprop)   -- contrib/propagators/autoprop"
 ./modules/caddypki/acmeserver/acmeserver.go:15:9      - Unknown word (acmeserver) -- package acmeserver
-./modules/caddypki/acmeserver/acmeserver.go:249:17    - Unknown word (bbolt)      -- Type: "bbolt",
-./modules/caddypki/acmeserver/acmeserver.go:30:14     - Unknown word (smallstep)  -- "github.com/smallstep/certificates/acme"
+./modules/caddypki/acmeserver/acmeserver.go:167:35    - Unknown word (Smallstep)  -- Challenges: ash.Challenges.toSmallstepType(),
+./modules/caddypki/acmeserver/acmeserver.go:260:17    - Unknown word (bbolt)      -- Type: "bbolt",
 ./modules/caddypki/acmeserver/acmeserver.go:32:55     - Unknown word (nosql)      -- certificates/acme/db/nosql"
-./modules/caddypki/ca.go:193:31    - Unknown word (Smallstep)  -- NewAuthority returns a new Smallstep-powered signing authority
+./modules/caddypki/acmeserver/challenges.go:31:51     - Unknown word (normaliztion) -- and lowercase it for normaliztion. The
 ./modules/caddypki/ca.go:31:24     - Unknown word (truststore) -- github.com/smallstep/truststore"
 ./modules/caddypki/certificates.go:22:21     - Unknown word (keyutil)    -- "go.step.sm/crypto/keyutil"
 ./modules/caddypki/pki.go:95:69     - Unknown word (unconfigured) -- installation disabled; unconfigured clients may show warnings
