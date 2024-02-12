@@ -5,6 +5,8 @@ import { readFile } from '../test/reader.test.helper.js';
 import { globalTestFixturesDir } from '../test/samples.js';
 import { buildITrieFromWords } from './buildITrie.js';
 import type { ITrie } from './ITrie.js';
+import { parseDictionaryLines } from './SimpleDictionaryParser.js';
+import { FastTrieBlobBuilder } from './TrieBlob/FastTrieBlobBuilder.js';
 
 describe('buildITrie', () => {
     test('buildITrieFromWords', () => {
@@ -14,12 +16,19 @@ describe('buildITrie', () => {
     });
 
     test('issue-5222', async () => {
-        const words = normalizeWords(await readWordsFile('issues/issue-5222/words.txt'));
+        const words = [...parseDictionaryLines(await readWordsFile('issues/issue-5222/words.txt'))];
         const setOfWords = new Set(words);
 
-        const trie = buildITrieFromWords(words, {});
+        // console.log('Unique characters:', new Set(words.join('')).size);
+
+        const trie = buildITrieFromWords(words);
+
+        const builder = new FastTrieBlobBuilder();
+        builder.insert(words);
+        const ft = builder.build();
 
         for (const word of setOfWords) {
+            expect(ft.has(word), `Expect to find "${word}" in ft trie`).toBe(true);
             expect(trie.has(word), `Expect to find "${word}" in trie`).toBe(true);
         }
 
@@ -46,23 +55,23 @@ function size(trie: ITrie): number {
     return size;
 }
 
-function normalizeWords(words: string[]): string[] {
-    const setOfWords = new Set(words);
-    for (const word of words) {
-        const lc = word.toLowerCase();
-        setOfWords.add(lc);
-        setOfWords.add(removeAccents(lc));
-        setOfWords.add(removeAccents(word));
-    }
-    return [...setOfWords]
-        .map((w) => w.trim())
-        .filter((a) => !a)
-        .sort();
-}
+// function normalizeWords(words: string[]): string[] {
+//     const setOfWords = new Set(words.map((w) => w.normalize('NFC').trim()));
+//     for (const word of words) {
+//         const lc = word.toLowerCase();
+//         setOfWords.add(lc);
+//         setOfWords.add(removeAccents(lc));
+//         setOfWords.add(removeAccents(word));
+//     }
+//     return [...setOfWords]
+//         .map((w) => w.trim())
+//         .filter((a) => !a)
+//         .sort();
+// }
 
-function removeAccents(word: string): string {
-    return word.normalize('NFD').replace(/\p{M}/gu, '');
-}
+// function removeAccents(word: string): string {
+//     return word.normalize('NFD').replace(/\p{M}/gu, '');
+// }
 
 function readFixtureFile(samplePath: string): Promise<string> {
     return readFile(resolve(globalTestFixturesDir, samplePath), 'utf8');

@@ -66,6 +66,7 @@ describe('FastTrieBlob', () => {
  * @returns "words" to add to the dictionary.
  */
 function getSampleWords() {
+    // cspell:disable
     const text = `
     one, two, three, four, walk, walking, walks, wall, walls, walled
 
@@ -219,8 +220,10 @@ function getSampleWords() {
     U+097x	॰	ॱ	ॲ	ॳ	ॴ	ॵ	ॶ	ॷ	ॸ	ॹ	ॺ	ॻ	ॼ	ॽ	ॾ	ॿ
 
     `.normalize('NFC');
+    // cspell:enable
     const textWords = text.split(/[\s\p{P}+~]/gu);
-    const otherWords = ['ＷＩＮＴＲＡＰ'];
+    // cspell:disable-next-line
+    const otherWords = ['ＷＩＮＴＲＡＰ', 'ᓀᐦᐃᔭᐍᐏᐣ'];
     const rawWords = [...textWords, ...otherWords]
         .map((word) => word.normalize('NFC'))
         .flatMap((word) => [word, word.toLowerCase(), word.toUpperCase()])
@@ -229,7 +232,7 @@ function getSampleWords() {
         .filter((a) => !!a);
     const setOfWords = new Set(rawWords);
     const words = [...setOfWords].sort();
-    console.log('Unique letter count: %o', new Set([...words.join('')]).size);
+    // console.log('Unique letter count: %o', new Set([...words.join('')]).size);
     return words;
 }
 

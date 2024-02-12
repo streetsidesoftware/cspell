@@ -1,67 +1,65 @@
 import type { ITrieNode, ITrieNodeId, ITrieNodeRoot } from '../ITrieNode/ITrieNode.js';
 import type { TrieInfo } from '../ITrieNode/TrieInfo.js';
 import type { FastTrieBlobInternals } from './FastTrieBlobInternals.js';
+import {
+    NumberSequenceByteDecoderAccumulator,
+    NumberSequenceByteEncoderDecoder,
+} from './NumberSequenceByteDecoderAccumulator.js';
+
+const SpecialCharIndexMask = NumberSequenceByteEncoderDecoder.SpecialCharIndexMask;
 
 const EmptyKeys: readonly string[] = Object.freeze([]);
 const EmptyNodes: readonly ITrieNode[] = Object.freeze([]);
+const EmptyEntries: readonly (readonly [string, ITrieNode])[] = Object.freeze([]);
+
+type Node = readonly number[];
+type NodeIndex = number;
+
 class FastTrieBlobINode implements ITrieNode {
     readonly id: number;
-    readonly size: number;
-    readonly node: readonly number[];
+    readonly node: Node;
     readonly eow: boolean;
-    charToIdx: Record<string, number> | undefined;
     private _keys: readonly string[] | undefined;
+    private _count: number;
+    private _size: number | undefined;
+    private _chained: boolean | undefined;
+    private _nodesEntries: readonly [string, NodeIndex][] | undefined;
+    private _entries: readonly [string, ITrieNode][] | undefined;
+    private _values: readonly ITrieNode[] | undefined;
+    protected charToIdx: Readonly<Record<string, NodeIndex>> | undefined;
 
     constructor(
         readonly trie: FastTrieBlobInternals,
-        readonly nodeIdx: number,
+        readonly nodeIdx: NodeIndex,
     ) {
         const node = trie.nodes[nodeIdx];
         this.node = node;
-        const value = node[0];
-        this.eow = !!(value & trie.NodeMaskEOW);
-        this.size = node.length - 1;
+        this.eow = !!(node[0] & trie.NodeMaskEOW);
+        this._count = node.length - 1;
         this.id = nodeIdx;
     }
 
-    keys() {
-        return (this._keys ??= this.calcKeys());
-    }
-
     /** get keys to children */
-    private calcKeys(): readonly string[] {
-        if (!this.size) return EmptyKeys;
-        const NodeMaskChildCharIndex = this.trie.NodeMaskChildCharIndex;
-        const charIndex = this.trie.charIndex;
-        const keys = Array<string>(this.size);
-        const len = this.size;
-        const node = this.trie.nodes[this.nodeIdx];
-        for (let i = 0; i < len; ++i) {
-            const entry = node[i + 1];
-            const charIdx = entry & NodeMaskChildCharIndex;
-            keys[i] = charIndex[charIdx];
-        }
-        return Object.freeze(keys);
+    keys(): readonly string[] {
+        if (this._keys) return this._keys;
+        if (!this._count) return EmptyKeys;
+        this._keys = this.getNodesEntries().map(([key]) => key);
+        return this._keys;
     }
 
     values(): readonly ITrieNode[] {
-        if (!this.size) return EmptyNodes;
-        const nodes = Array(this.size);
-        for (let i = 0; i < this.size; ++i) {
-            nodes[i] = this.child(i);
-        }
-        return nodes;
+        if (!this._count) return EmptyNodes;
+        if (this._values) return this._values;
+        this._values = this.entries().map(([, value]) => value);
+        return this._values;
     }
 
     entries(): readonly (readonly [string, ITrieNode])[] {
-        const keys = this.keys();
-        const values = this.values();
-        const len = keys.length;
-        const entries: (readonly [string, ITrieNode])[] = Array(len);
-        for (let i = 0; i < len; ++i) {
-            entries[i] = [keys[i], values[i]] as const;
-        }
-        return entries;
+        if (this._entries) return this._entries;
+        if (!this._count) return EmptyEntries;
+        const entries = this.getNodesEntries();
+        this._entries = entries.map(([key, value]) => [key, new FastTrieBlobINode(this.trie, value)]);
+        return this._entries;
     }
 
     /** get child ITrieNode */
@@ -77,13 +75,16 @@ class FastTrieBlobINode implements ITrieNode {
     }
 
     hasChildren(): boolean {
-        return this.size > 0;
+        return this._count > 0;
     }
 
     child(keyIdx: number): ITrieNode {
-        const node = this.trie.nodes[this.nodeIdx];
-        const nodeIdx = node[keyIdx + 1] >>> this.trie.NodeChildRefShift;
-        return new FastTrieBlobINode(this.trie, nodeIdx);
+        if (!this._values && !this.containsChainedIndexes()) {
+            const n = this.node[keyIdx + 1];
+            const nodeIdx = n >>> this.trie.NodeChildRefShift;
+            return new FastTrieBlobINode(this.trie, nodeIdx);
+        }
+        return this.values()[keyIdx];
     }
 
     getCharToIdxMap(): Record<string, number> {
@@ -96,6 +97,111 @@ class FastTrieBlobINode implements ITrieNode {
         }
         this.charToIdx = map;
         return map;
+    }
+
+    private containsChainedIndexes(): boolean {
+        if (this._chained !== undefined) return this._chained;
+        if (!this._count || !this.trie.isIndexDecoderNeeded) {
+            this._chained = false;
+            return false;
+        }
+        // scan the node to see if there are encoded entries.
+        let found = false;
+        const NodeMaskChildCharIndex = this.trie.NodeMaskChildCharIndex;
+        const len = this._count;
+        const node = this.node;
+        for (let i = 1; i <= len && !found; ++i) {
+            const entry = node[i];
+            const charIdx = entry & NodeMaskChildCharIndex;
+            found = (charIdx & SpecialCharIndexMask) === SpecialCharIndexMask;
+        }
+
+        this._chained = !!found;
+        return this._chained;
+    }
+
+    private getNodesEntries(): readonly [string, NodeIndex][] {
+        if (this._nodesEntries) return this._nodesEntries;
+        if (!this.containsChainedIndexes()) {
+            const entries = Array<[string, NodeIndex]>(this._count);
+            const nodes = this.node;
+            const charIndex = this.trie.charIndex;
+            const NodeMaskChildCharIndex = this.trie.NodeMaskChildCharIndex;
+            const RefShift = this.trie.NodeChildRefShift;
+            for (let i = 0; i < this._count; ++i) {
+                const entry = nodes[i + 1];
+                const charIdx = entry & NodeMaskChildCharIndex;
+                entries[i] = [charIndex[charIdx], entry >>> RefShift];
+            }
+            this._nodesEntries = entries;
+            return entries;
+        }
+
+        this._nodesEntries = this.walkChainedIndexes();
+        return this._nodesEntries;
+    }
+
+    private walkChainedIndexes(): readonly [string, NodeIndex][] {
+        interface StackItem {
+            /** the current node */
+            n: Node;
+            /** the offset of the child within the current node */
+            c: number;
+            /** the decoder */
+            acc: NumberSequenceByteDecoderAccumulator;
+        }
+        const NodeMaskChildCharIndex = this.trie.NodeMaskChildCharIndex;
+        const NodeChildRefShift = this.trie.NodeChildRefShift;
+        const nodes = this.trie.nodes;
+        const acc = NumberSequenceByteDecoderAccumulator.create();
+        const stack: StackItem[] = [{ n: this.node, c: 1, acc }];
+        let depth = 0;
+        /** there is at least this._count number of entries, more if there are nested indexes. */
+        const entries = Array<[string, NodeIndex]>(this._count);
+        let eIdx = 0;
+        const charIndex = this.trie.charIndex;
+
+        while (depth >= 0) {
+            const s = stack[depth];
+            const { n: node, c: off } = s;
+            if (off >= node.length) {
+                --depth;
+                continue;
+            }
+            ++s.c;
+            const entry = node[off];
+            const charIdx = entry & NodeMaskChildCharIndex;
+            const acc = s.acc.clone();
+            const letterIdx = acc.decode(charIdx);
+            if (letterIdx !== undefined) {
+                const char = charIndex[letterIdx];
+                const nodeIdx = entry >>> NodeChildRefShift;
+                entries[eIdx++] = [char, nodeIdx];
+                continue;
+            }
+            const idx = entry >>> NodeChildRefShift;
+            const ss = stack[++depth];
+            if (ss) {
+                ss.n = nodes[idx];
+                ss.c = 1;
+                ss.acc = acc;
+            } else {
+                stack[depth] = { n: nodes[idx], c: 1, acc };
+            }
+        }
+
+        return entries;
+    }
+
+    get size(): number {
+        if (this._size === undefined) {
+            if (!this.containsChainedIndexes()) {
+                this._size = this._count;
+                return this._size;
+            }
+            this._size = this.getNodesEntries().length;
+        }
+        return this._size;
     }
 }
 

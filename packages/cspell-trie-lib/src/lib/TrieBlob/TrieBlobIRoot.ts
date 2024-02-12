@@ -14,6 +14,9 @@ interface BitMaskInfo {
 
 const SpecialCharIndexMask = NumberSequenceByteEncoderDecoder.SpecialCharIndexMask;
 
+type Node = number;
+type NodeIndex = number;
+
 export class TrieBlobInternals implements BitMaskInfo {
     readonly NodeMaskEOW: number;
     readonly NodeMaskNumChildren: number;
@@ -42,7 +45,7 @@ const EmptyEntries: readonly (readonly [string, ITrieNode])[] = Object.freeze([]
 
 class TrieBlobINode implements ITrieNode {
     readonly id: number;
-    readonly node: number;
+    readonly node: Node;
     readonly eow: boolean;
     private _keys: readonly string[] | undefined;
     private _count: number;
@@ -51,11 +54,11 @@ class TrieBlobINode implements ITrieNode {
     private _nodesEntries: readonly [string, number][] | undefined;
     private _entries: readonly [string, ITrieNode][] | undefined;
     private _values: readonly ITrieNode[] | undefined;
-    charToIdx: Record<string, number> | undefined;
+    protected charToIdx: Readonly<Record<string, number>> | undefined;
 
     constructor(
         readonly trie: TrieBlobInternals,
-        readonly nodeIdx: number,
+        readonly nodeIdx: NodeIndex,
     ) {
         const node = trie.nodes[nodeIdx];
         this.node = node;
@@ -182,6 +185,7 @@ class TrieBlobINode implements ITrieNode {
         const stack: StackItem[] = [{ nodeIdx: this.nodeIdx + 1, lastIdx: this.nodeIdx + this._count, acc }];
         let depth = 0;
         const entries = Array<[string, number]>(this._count);
+        let eIdx = 0;
         const charIndex = this.trie.charIndex;
 
         while (depth >= 0) {
@@ -199,7 +203,7 @@ class TrieBlobINode implements ITrieNode {
             if (letterIdx !== undefined) {
                 const char = charIndex[letterIdx];
                 const nodeIdx = entry >>> NodeChildRefShift;
-                entries.push([char, nodeIdx]);
+                entries[eIdx++] = [char, nodeIdx];
                 continue;
             }
             const idx = entry >>> NodeChildRefShift;
@@ -228,6 +232,7 @@ class TrieBlobINode implements ITrieNode {
         return this._size;
     }
 }
+
 export class TrieBlobIRoot extends TrieBlobINode implements ITrieNodeRoot {
     constructor(
         trie: TrieBlobInternals,

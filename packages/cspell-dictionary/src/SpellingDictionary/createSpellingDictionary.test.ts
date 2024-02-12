@@ -1,7 +1,7 @@
 import { promises as fs } from 'node:fs';
 
 import type { DictionaryInformation } from '@cspell/cspell-types';
-import type { ITrie } from 'cspell-trie-lib';
+import { buildITrieFromWords, type ITrie, parseDictionaryLines } from 'cspell-trie-lib';
 import { describe, expect, test } from 'vitest';
 
 import { createFailedToLoadDictionary, createSpellingDictionary } from './createSpellingDictionary.js';
@@ -101,7 +101,14 @@ describe('test-fixtures', () => {
             .map((a) => a.trim())
             .filter((a) => !!a);
         const dict = createSpellingDictionary(words, 'issue-5222', url.toString(), {});
+        const lines = [...parseDictionaryLines(words)];
+        const bt = buildITrieFromWords(lines);
         const trie = (dict as SpellingDictionaryFromTrie).trie;
+        for (const line of lines) {
+            expect(line.normalize('NFC')).toBe(line);
+            expect(bt.has(line), `bt to have "${line}"`).toBe(true);
+            expect(trie.has(line), `trie to have "${line}"`).toBe(true);
+        }
         const setOfWords = new Set(words);
         for (const word of setOfWords) {
             expect(trie.has(word), `trie to have "${word}"`).toBe(true);
