@@ -1,6 +1,6 @@
 // For large dictionaries, it is necessary to increase the memory limit.
 
-import type * as program from 'commander';
+import type { Command } from 'commander';
 import { CommanderError, Option } from 'commander';
 import { readFileSync } from 'fs';
 
@@ -23,7 +23,7 @@ function collect(value: string, previous: string[]) {
     return previous.concat([value]);
 }
 
-function addCompileOptions(compileCommand: program.Command): program.Command {
+function addCompileOptions(compileCommand: Command): Command {
     return compileCommand
         .option(
             '-o, --output <path>',
@@ -62,7 +62,7 @@ interface ShasumOptions {
     listFile?: string[] | undefined;
 }
 
-export async function run(program: program.Command, argv: string[], flags?: FeatureFlags): Promise<void> {
+export async function run(program: Command, argv: string[], flags?: FeatureFlags): Promise<void> {
     async function handleGzip(files: string[]): Promise<void> {
         try {
             await gzip(files, OSFlags.Unix);

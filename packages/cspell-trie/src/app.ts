@@ -1,4 +1,4 @@
-import type * as commander from 'commander';
+import type { Command } from 'commander';
 import * as Trie from 'cspell-trie-lib';
 import { createWriteStream as fsCreateWriteStream } from 'fs';
 import * as fsp from 'fs/promises';
@@ -27,7 +27,7 @@ async function getPackageVersion() {
     return (await getPackageInfo()).version;
 }
 
-export async function run(program: commander.Command, argv: string[]): Promise<commander.Command> {
+export async function run(program: Command, argv: string[]): Promise<Command> {
     const version = await getPackageVersion();
     program.version(version);
 
