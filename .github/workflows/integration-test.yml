@@ -279,7 +279,7 @@ jobs:
             - ref: "${{ needs.prepare.outputs.ref }}"
             - runs_on: "${{ needs.prepare.outputs.runs_on }}"
             - node_version: ${{ needs.prepare.outputs.node_version }}
-            - repos: ${{ fromJSON(needs.integration-tests.outputs.repos) }}
+            - repos: ${{ needs.integration-tests.outputs.repos }}
             - branch: ${{ github.ref_name }}
           path: |
             integration-tests/perf/*.csv
