@@ -247,12 +247,6 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Summary
-        uses: streetsidesoftware/actions/public/summary@v1
-        with:
-          text: |
-            # Integration Tests Summary
-
       - name: restore repos perf
         uses: actions/download-artifact@v4
         with:
@@ -279,8 +273,6 @@ jobs:
             - node_version: ${{ needs.prepare.outputs.node_version }}
             - repos: ${{ needs.integration-tests.outputs.repos }}
             - branch: ${{ github.ref_name }}
-          path: |
-            integration-tests/perf/*.csv
 
       - name: Show PR in Summary
         uses: streetsidesoftware/actions/public/summary@v1
