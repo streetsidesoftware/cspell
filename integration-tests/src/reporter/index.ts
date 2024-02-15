@@ -1,8 +1,8 @@
 import { promises as fs } from 'node:fs';
 
 import type { CSpellReporter, Issue, ReporterConfiguration, RunResult } from '@cspell/cspell-types';
-import { stringify as stringifyCsv } from 'csv-stringify/sync';
 import { parse as parseCsv } from 'csv-parse/sync';
+import { stringify as stringifyCsv } from 'csv-stringify/sync';
 import * as vscodeUri from 'vscode-uri';
 
 import { readConfig } from '../config.js';
