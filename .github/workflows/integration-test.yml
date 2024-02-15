@@ -159,7 +159,7 @@ jobs:
         id: step-cache-run
         uses: actions/cache@v4
         with:
-          key: integration-run-result-${{ steps.repo-hash.outputs.value }}-${{ fromJSON(steps.step-repo-info.outputs.repo-info).commit }}-3
+          key: integration-run-result-${{ steps.repo-hash.outputs.value }}-${{ fromJSON(steps.step-repo-info.outputs.repo-info).commit }}-4
           # We just need a path, its contents isn't important. We really just care if the key was cached.
           path: |
             integration-tests/tsconfig.json
@@ -205,7 +205,7 @@ jobs:
       - name: Cache Patch Files
         uses: actions/cache@v4
         with:
-          key: int-repo-patch-files-${{ matrix.repo }}-${{ fromJSON(steps.step-repo-info.outputs.repo-info).commit }}
+          key: int-repo-patch-files-${{ steps.repo-hash.outputs.value }}-${{ fromJSON(steps.step-repo-info.outputs.repo-info).commit }}
           path: |
             temp/perf/*.diff
 
