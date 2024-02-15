@@ -223,10 +223,12 @@ jobs:
         id: perf-diff
         env:
           REPO: ${{ steps.step-normalize-repo-name.outputs.REPO_NAME }}
+          REPO_NAME: ${{ matrix.repo }}
         run: |
           mkdir -p temp/perf
-          echo "${{ matrix.repo }} =>" $REPO
-          git diff -U1 "integration-tests/perf" > temp/perf/$REPO.diff
+          echo "$REPO_NAME =>" $REPO
+          git add integration-tests/perf
+          git diff --cached > temp/perf/$REPO.diff
 
       - name: store diff
         uses: actions/upload-artifact@v4
