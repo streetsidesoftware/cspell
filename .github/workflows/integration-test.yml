@@ -245,12 +245,6 @@ jobs:
           text: |
             # Integration Tests Summary
 
-            - ref: "${{ needs.prepare.outputs.ref }}"
-            - runs_on: "${{ needs.prepare.outputs.runs_on }}"
-            - node_version: ${{ needs.prepare.outputs.node_version }}
-            - repos: ${{ needs.integration-tests.outputs.repos }}
-            - branch: ${{ github.ref_name }}
-
       - name: restore repos perf
         uses: actions/download-artifact@v4
         with:
