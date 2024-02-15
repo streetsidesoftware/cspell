@@ -96,12 +96,6 @@ jobs:
           node-version: ${{ env.NODE_VERSION }}
           use-setup: true
 
-      - name: Done
-        uses: ./.github/actions/summary
-        with:
-          text: |
-            ## Done
-
   integration-tests:
     needs:
       - prepare
@@ -286,7 +280,7 @@ jobs:
           path: |
             integration-tests/perf/*.csv
 
-      - name: Done
+      - name: Show PR in Summary
         uses: streetsidesoftware/actions/public/summary@v1
         with:
           text: |
