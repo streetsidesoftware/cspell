@@ -128,6 +128,15 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Normalize Repo Name
+        id: step-normalize-repo-name
+        env:
+          REPO: ${{ matrix.repo }}
+          REPLACE: "/"
+          REPLACE_WITH: "__"
+        run: |
+          echo "REPO_NAME=${REPO//${REPLACE}/${REPLACE_WITH}}" >> $GITHUB_OUTPUT
+
       - id: repo-hash
         uses: ./.github/actions/echo
         with:
@@ -137,6 +146,7 @@ jobs:
               'integration-tests/config/repositories/${{matrix.repo}}/**',
               'integration-tests/snapshots/${{ matrix.repo }}/*',
               'integration-tests/repositories/*',
+              'integration-tests/perf/perf-${{ steps.step-normalize-repo-name.outputs.REPO_NAME }}.csv',
               'integration-tests/src/**/*.ts', 'integration-tests/tsconfig.json',
               'packages/*/src/**/*.ts', 'packages/*/tsconfig.json',
               'packages/*/*.ts',
@@ -159,10 +169,10 @@ jobs:
         id: step-cache-run
         uses: actions/cache@v4
         with:
-          key: integration-run-result-${{ steps.repo-hash.outputs.value }}-${{ fromJSON(steps.step-repo-info.outputs.repo-info).commit }}-4
-          # We just need a path, its contents isn't important. We really just care if the key was cached.
+          key: integration-run-result-${{ steps.repo-hash.outputs.value }}-${{ fromJSON(steps.step-repo-info.outputs.repo-info).commit }}-1
+          # Store the patch files to update the integration perf data
           path: |
-            integration-tests/tsconfig.json
+            temp/perf/*.diff
 
       - uses: ./.github/actions/echo
         with:
@@ -185,15 +195,6 @@ jobs:
           value: |
             Run Cache: ${{ steps.step-cache-run.outputs.cache-hit && 'Hit' || 'Miss' }}
 
-      - name: Normalize Repo Name
-        id: step-normalize-repo-name
-        env:
-          REPO: ${{ matrix.repo }}
-          REPLACE: "/"
-          REPLACE_WITH: "__"
-        run: |
-          echo "REPO_NAME=${REPO//${REPLACE}/${REPLACE_WITH}}" >> $GITHUB_OUTPUT
-
       - name: Cache Integration Test Repository Files
         if: ${{ !steps.step-cache-run.outputs.cache-hit }}
         uses: actions/cache@v4
@@ -201,13 +202,6 @@ jobs:
           key: int-repo-temp-files-${{ matrix.repo }}-${{ fromJSON(steps.step-repo-info.outputs.repo-info).commit }}
           path: |
             integration-tests/repositories/temp/${{ matrix.repo }}
-
-      - name: Cache Patch Files
-        uses: actions/cache@v4
-        with:
-          key: int-repo-patch-files-${{ steps.repo-hash.outputs.value }}-${{ fromJSON(steps.step-repo-info.outputs.repo-info).commit }}
-          path: |
-            temp/perf/*.diff
 
       - name: Run Integration Tests ${{ matrix.repo }}
         if: ${{ !steps.step-cache-run.outputs.cache-hit }}
