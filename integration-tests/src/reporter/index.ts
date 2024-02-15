@@ -1,10 +1,14 @@
+import { promises as fs } from 'node:fs';
+
 import type { CSpellReporter, Issue, ReporterConfiguration, RunResult } from '@cspell/cspell-types';
+import { stringify as stringifyCsv } from 'csv-stringify/sync';
+import { parse as parseCsv } from 'csv-parse/sync';
 import * as vscodeUri from 'vscode-uri';
 
 import { readConfig } from '../config.js';
 import type { Repository } from '../configDef.js';
 import { writeSnapshotRaw } from '../snapshots.js';
-import type { IssueSummary } from './reportGenerator.js';
+import type { IssueSummary, ReportData } from './reportGenerator.js';
 import { generateReport } from './reportGenerator.js';
 import { stringify } from './stringify.js';
 
@@ -14,6 +18,31 @@ const noopReporter = () => {
     return;
 };
 
+interface CsvRecord {
+    timestamp: string;
+    elapsedMs: number;
+    repo: string;
+    files: number;
+    filesWithIssues: number;
+    issues: number;
+    errors: number;
+    platform: string;
+    usageUser: number;
+    usageSystem: number;
+}
+const csvHeaders = [
+    'timestamp',
+    'elapsedMs',
+    'repo',
+    'files',
+    'filesWithIssues',
+    'issues',
+    'errors',
+    'platform',
+    'usageUser',
+    'usageSystem',
+] as const;
+
 interface Config extends ReporterConfiguration {
     issuesSummaryReport?: boolean;
 }
@@ -22,24 +51,42 @@ export function getReporter(_settings: unknown, config?: Config): CSpellReporter
     const issueFilter = config?.unique ? uniqueFilter((i: Issue) => i.text) : () => true;
     const issues: Issue[] = [];
     const errors: string[] = [];
-    const files: string[] = [];
+    const files = new Set<string>();
     const issuesSummaryReport = !!config?.issuesSummaryReport;
     const issuesSummary = new Map<string, IssueSummary>();
     const summaryAccumulator = createIssuesSummaryAccumulator(issuesSummary);
+    const createTs = performance.now();
+    const startUsage = process.cpuUsage();
 
     async function processResult(result: RunResult): Promise<void> {
         const root = URI.file(process.cwd());
-        const report = generateReport({
+        const elapsedMs = performance.now() - createTs;
+        const usage = process.cpuUsage(startUsage);
+        const reportData: ReportData = {
             issues,
-            files,
+            files: [...files],
             errors,
             runResult: result,
             root,
             repository: fetchRepositoryInfo(root),
             issuesSummary: issuesSummaryReport && issuesSummary.size ? [...issuesSummary.values()] : undefined,
-        });
+        };
+        const report = generateReport(reportData);
         const repPath = extractRepositoryPath(root);
         writeSnapshotRaw(repPath, 'report.yaml', stringify(report));
+        const csvRecord: CsvRecord = {
+            timestamp: Date.now().toFixed(0),
+            elapsedMs,
+            repo: repPath,
+            files: result.files,
+            filesWithIssues: result.filesWithIssues.size,
+            issues: result.issues,
+            errors: result.errors,
+            platform: process.platform,
+            usageUser: usage.user / 1000,
+            usageSystem: usage.system / 1000,
+        };
+        await writePerfCsvRecord(csvRecord, root);
     }
 
     const reporter: CSpellReporter = {
@@ -54,7 +101,7 @@ export function getReporter(_settings: unknown, config?: Config): CSpellReporter
         error: (message, _error) => {
             errors.push(message);
         },
-        progress: (p) => files.push(p.filename),
+        progress: (p) => files.add(p.filename),
         result: processResult,
     };
 
@@ -102,4 +149,41 @@ function createIssuesSummaryAccumulator(issuesSummary: Map<string, IssueSummary>
         }
         issuesSummary.set(text, summary);
     };
+}
+
+function getPerfCsvFileUrl(root: vscodeUri.URI): URL {
+    const repPath = extractRepositoryPath(root).replace(/\//g, '__');
+    return new URL(`../../perf/perf-${repPath}.csv`, import.meta.url);
+}
+
+/**
+ * Create the CSV file if necessary and ensure that the column headers are present.
+ * It will reformat the file if the headers to not match.
+ */
+async function createCsvFile(csvUrl: URL): Promise<void> {
+    const csvFile = await fs.readFile(csvUrl, 'utf-8').catch(() => undefined);
+    if (!csvFile) {
+        return fs.writeFile(csvUrl, stringifyCsv([csvHeaders]));
+    }
+    const records: Partial<CsvRecord>[] = parseCsv(csvFile, { columns: true, skip_empty_lines: true });
+    if (!records.length) {
+        return fs.writeFile(csvUrl, stringifyCsv([csvHeaders]));
+    }
+    const firstRecord = records[0];
+    const headers = Object.keys(firstRecord);
+    if (headers.join('}{') === csvHeaders.join('}{')) {
+        // The headers match, nothing to do.
+        return;
+    }
+    // Need to reformat the file.
+    return fs.writeFile(csvUrl, stringifyCsv(records, { header: true, columns: [...csvHeaders] }));
+}
+
+async function writePerfCsvRecord(csvRecord: CsvRecord, root: vscodeUri.URI): Promise<void> {
+    const url = getPerfCsvFileUrl(root);
+
+    await createCsvFile(url);
+
+    const record = csvHeaders.map((key) => csvRecord[key]);
+    await fs.appendFile(url, stringifyCsv([record]));
 }
