@@ -114,7 +114,6 @@ jobs:
         run: exit 1
 
       - name: Run Integration Tests ${{ matrix.repo }}
-        if: ${{ !steps.step-cache-run.outputs.cache-hit }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: >
@@ -186,8 +185,6 @@ jobs:
           path: temp
       - name: show downloaded
         run: ls -alF temp
-      - name: show diff
-        run: cat temp/*.diff
 
       - name: apply diff
         run: git apply --allow-empty temp/*.diff

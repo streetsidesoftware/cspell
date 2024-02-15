@@ -107,6 +107,8 @@ jobs:
       - prepare
       - pre-build
     runs-on: ${{ matrix.os }}
+    outputs:
+      repos: ${{ matrix.repo }}
 
     env:
       REF_BRANCH: ${{ needs.prepare.outputs.ref }}
@@ -206,6 +208,99 @@ jobs:
           && pnpm i
           && pnpm run integration-tests -- ${{ matrix.repo }}
 
+      - name: Normalize Repo Name
+        id: step-normalize-repo-name
+        env:
+          REPO: ${{ matrix.repo }}
+          REPLACE: "/"
+          REPLACE_WITH: "__"
+        run: |
+          echo "REPO_NAME=${REPO//${REPLACE}/${REPLACE_WITH}}" >> $GITHUB_OUTPUT
+
+      - name: Create Perf Diff
+        id: perf-diff
+        env:
+          REPO: ${{ steps.step-normalize-repo-name.outputs.REPO_NAME }}
+        run: |
+          mkdir temp
+          echo "${{ matrix.repo }} =>" $REPO
+          git diff "integration-tests/perf" > temp/$REPO.diff
+
+      - name: store diff
+        uses: actions/upload-artifact@v4
+        with:
+          name: diffs-repo-${{ steps.step-normalize-repo-name.outputs.REPO_NAME }}
+          path: temp/*.diff
+          retention-days: 1
+
+  integration-tests-summary:
+    needs:
+      - integration-tests
+      - prepare
+      - pre-build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Summary
+        uses: streetsidesoftware/actions/public/summary@v1
+        with:
+          text: |
+            # Integration Tests Summary
+
+            - ref: "${{ needs.prepare.outputs.ref }}"
+            - runs_on: "${{ needs.prepare.outputs.runs_on }}"
+            - node_version: ${{ needs.prepare.outputs.node_version }}
+            - repos: ${{ fromJSON(needs.integration-tests.outputs.repos) }}
+            - branch: ${{ github.ref_name }}
+
+      - name: restore repos perf
+        uses: actions/download-artifact@v4
+        with:
+          pattern: diffs-*
+          merge-multiple: true
+          path: temp
+
+      - name: show downloaded
+        run: ls -alF temp
+
+      - name: apply diff
+        run: git apply --allow-empty temp/*.diff
+
+      - name: PR Body
+        id: pr-body
+        uses: streetsidesoftware/actions/public/pr-body@v1
+        with:
+          title: "Update Integration Test Performance Data"
+          message: |
+            ## Integration Tests Summary
+
+            - ref: "${{ needs.prepare.outputs.ref }}"
+            - runs_on: "${{ needs.prepare.outputs.runs_on }}"
+            - node_version: ${{ needs.prepare.outputs.node_version }}
+            - repos: ${{ fromJSON(needs.integration-tests.outputs.repos) }}
+            - branch: ${{ github.ref_name }}
+          path: |
+            integration-tests/perf/*.csv
+
+      - name: Done
+        uses: streetsidesoftware/actions/public/summary@v1
+        with:
+          text: |
+            ${{ steps.pr-body.outputs.body }}
+
+      - name: Create PR
+        if: github.ref_name == 'main'
+        uses: streetsidesoftware/actions/.github/actions/pr@v1
+        with:
+          commit-message: "chore: ${{ steps.pr-body.outputs.title }}"
+          branch: update-perf-main
+          base: main
+          title: "chore: ${{ steps.pr-body.outputs.title }}"
+          body: ${{ steps.pr-body.outputs.body }}
+          app_id: ${{ secrets.AUTOMATION_APP_ID }}
+          app_private_key: ${{ secrets.AUTOMATION_PRIVATE_KEY }}
 # cspell:ignore apollographql
 # cspell:ignore aspnetboilerplate
 # cspell:ignore caddyserver
