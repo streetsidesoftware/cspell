@@ -11,4 +11,11 @@ describe('options', () => {
         const settings: CSpellSettings = options.cspell;
         assert(settings, 'it is expected to compile.');
     });
+
+    test('Make sure `language` is allowed.', () => {
+        const options: Options = { ...defaultOptions, cspell: { language: 'en-gb' } };
+        assert(options.cspell);
+        const settings: CSpellSettings = options.cspell;
+        assert(settings, 'it is expected to compile.');
+    });
 });
