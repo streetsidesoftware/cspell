@@ -204,10 +204,10 @@ jobs:
         if: ${{ !steps.step-cache-run.outputs.cache-hit }}
         uses: actions/cache@v4
         with:
-          key: int-repo-temp-files-${{ matrix.repo }}-${{ fromJSON(steps.step-repo-info.outputs.repo-info).commit }}
+          key: int-repo-temp-files-${{ matrix.repo }}-${{ fromJSON(steps.step-repo-info.outputs.repo-info).commit }}-1
           path: |
             integration-tests/repositories/temp/${{ matrix.repo }}
-            temp/*.diff
+            temp/perf/*.diff
 
       - name: Run Integration Tests ${{ matrix.repo }}
         if: ${{ !steps.step-cache-run.outputs.cache-hit }}
@@ -224,15 +224,15 @@ jobs:
         env:
           REPO: ${{ steps.step-normalize-repo-name.outputs.REPO_NAME }}
         run: |
-          mkdir temp
+          mkdir -p temp/perf
           echo "${{ matrix.repo }} =>" $REPO
-          git diff "integration-tests/perf" > temp/$REPO.diff
+          git diff "integration-tests/perf" > temp/perf/$REPO.diff
 
       - name: store diff
         uses: actions/upload-artifact@v4
         with:
           name: diffs-repo-${{ steps.step-normalize-repo-name.outputs.REPO_NAME }}
-          path: temp/*.diff
+          path: temp/perf/*.diff
           retention-days: 1
 
   integration-tests-summary:
@@ -262,13 +262,13 @@ jobs:
         with:
           pattern: diffs-*
           merge-multiple: true
-          path: temp
+          path: temp/perf
 
       - name: show downloaded
-        run: ls -alF temp
+        run: ls -alF temp/perf
 
       - name: apply diff
-        run: git apply --allow-empty temp/*.diff
+        run: git apply --allow-empty temp/perf/*.diff
 
       - name: PR Body
         id: pr-body
