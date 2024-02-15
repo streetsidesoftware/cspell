@@ -10,18 +10,18 @@ on:
       - "*-lock.yaml"
       - ".github/workflows/integration-test.yml"
       - "!docs/**"
-  # push:
-  #   branches:
-  #     - main
-  #   paths:
-  #     - "packages/**/package.json"
-  #     - "packages/**/*-lock.yaml"
-  #     - "packages/**/*.ts"
-  #     - "integration-tests/**"
-  #     - "package.json"
-  #     - "*-lock.yaml"
-  #     - ".github/workflows/integration-test.yml"
-  #     - "!docs/**"
+  push:
+    branches:
+      - main
+    paths:
+      - "packages/**/package.json"
+      - "packages/**/*-lock.yaml"
+      - "packages/**/*.ts"
+      - "integration-tests/**"
+      - "package.json"
+      - "*-lock.yaml"
+      - ".github/workflows/integration-test.yml"
+      - "!docs/**"
   # Run on demand
   workflow_dispatch:
     inputs:
@@ -96,17 +96,13 @@ jobs:
           node-version: ${{ env.NODE_VERSION }}
           use-setup: true
 
-      - name: Done
-        uses: ./.github/actions/summary
-        with:
-          text: |
-            ## Done
-
   integration-tests:
     needs:
       - prepare
       - pre-build
     runs-on: ${{ matrix.os }}
+    outputs:
+      repos: ${{ matrix.repo }}
 
     env:
       REF_BRANCH: ${{ needs.prepare.outputs.ref }}
@@ -163,7 +159,7 @@ jobs:
         id: step-cache-run
         uses: actions/cache@v4
         with:
-          key: integration-run-result-${{ steps.repo-hash.outputs.value }}-${{ fromJSON(steps.step-repo-info.outputs.repo-info).commit }}
+          key: integration-run-result-${{ steps.repo-hash.outputs.value }}-${{ fromJSON(steps.step-repo-info.outputs.repo-info).commit }}-2
           # We just need a path, its contents isn't important. We really just care if the key was cached.
           path: |
             integration-tests/tsconfig.json
@@ -189,6 +185,15 @@ jobs:
           value: |
             Run Cache: ${{ steps.step-cache-run.outputs.cache-hit && 'Hit' || 'Miss' }}
 
+      - name: Normalize Repo Name
+        id: step-normalize-repo-name
+        env:
+          REPO: ${{ matrix.repo }}
+          REPLACE: "/"
+          REPLACE_WITH: "__"
+        run: |
+          echo "REPO_NAME=${REPO//${REPLACE}/${REPLACE_WITH}}" >> $GITHUB_OUTPUT
+
       - name: Cache Integration Test Repository Files
         if: ${{ !steps.step-cache-run.outputs.cache-hit }}
         uses: actions/cache@v4
@@ -196,6 +201,13 @@ jobs:
           key: int-repo-temp-files-${{ matrix.repo }}-${{ fromJSON(steps.step-repo-info.outputs.repo-info).commit }}
           path: |
             integration-tests/repositories/temp/${{ matrix.repo }}
+
+      - name: Cache Patch Files
+        uses: actions/cache@v4
+        with:
+          key: int-repo-patch-files-${{ matrix.repo }}-${{ fromJSON(steps.step-repo-info.outputs.repo-info).commit }}
+          path: |
+            temp/perf/*.diff
 
       - name: Run Integration Tests ${{ matrix.repo }}
         if: ${{ !steps.step-cache-run.outputs.cache-hit }}
@@ -206,9 +218,82 @@ jobs:
           && pnpm i
           && pnpm run integration-tests -- ${{ matrix.repo }}
 
-# cspell:ignore apollographql
-# cspell:ignore aspnetboilerplate
-# cspell:ignore caddyserver
-# cspell:ignore logiciel twbs
-# cspell:ignore MartinThoma googleapis
-# cspell:ignore plasticrake tplink smarthome
+      - name: Create Perf Diff
+        if: ${{ !steps.step-cache-run.outputs.cache-hit }}
+        id: perf-diff
+        env:
+          REPO: ${{ steps.step-normalize-repo-name.outputs.REPO_NAME }}
+        run: |
+          mkdir -p temp/perf
+          echo "${{ matrix.repo }} =>" $REPO
+          git diff -U1 "integration-tests/perf" > temp/perf/$REPO.diff
+
+      - name: store diff
+        uses: actions/upload-artifact@v4
+        with:
+          name: diffs-repo-${{ steps.step-normalize-repo-name.outputs.REPO_NAME }}
+          path: temp/perf/*.diff
+          retention-days: 1
+
+  integration-tests-summary:
+    needs:
+      - integration-tests
+      - prepare
+      - pre-build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Summary
+        uses: streetsidesoftware/actions/public/summary@v1
+        with:
+          text: |
+            # Integration Tests Summary
+
+      - name: restore repos perf
+        uses: actions/download-artifact@v4
+        with:
+          pattern: diffs-*
+          merge-multiple: true
+          path: temp/perf
+
+      - name: show downloaded
+        run: ls -alF temp/perf
+
+      - name: apply diff
+        run: git apply --allow-empty temp/perf/*.diff
+
+      - name: PR Body
+        id: pr-body
+        uses: streetsidesoftware/actions/public/pr-body@v1
+        with:
+          title: "Update Integration Test Performance Data"
+          message: |
+            ## Integration Tests Summary
+
+            - ref: "${{ needs.prepare.outputs.ref }}"
+            - runs_on: "${{ needs.prepare.outputs.runs_on }}"
+            - node_version: ${{ needs.prepare.outputs.node_version }}
+            - repos: ${{ needs.integration-tests.outputs.repos }}
+            - branch: ${{ github.ref_name }}
+          path: |
+            integration-tests/perf/*.csv
+
+      - name: Show PR in Summary
+        uses: streetsidesoftware/actions/public/summary@v1
+        with:
+          text: |
+            ${{ steps.pr-body.outputs.body }}
+
+      - name: Create PR
+        if: github.ref_name == 'main'
+        uses: streetsidesoftware/actions/.github/actions/pr@v1
+        with:
+          commit-message: "chore: ${{ steps.pr-body.outputs.title }}"
+          branch: update-perf-main
+          base: main
+          title: "chore: ${{ steps.pr-body.outputs.title }}"
+          body: ${{ steps.pr-body.outputs.body }}
+          app_id: ${{ secrets.AUTOMATION_APP_ID }}
+          app_private_key: ${{ secrets.AUTOMATION_PRIVATE_KEY }}
