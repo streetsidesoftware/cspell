@@ -41,6 +41,7 @@ export type CSpellOptions = Pick<
     | 'ignoreRegExpList'
     | 'includeRegExpList'
     | 'import'
+    | 'language'
     | 'words'
 > & {
     dictionaryDefinitions?: DictionaryDefinition[];

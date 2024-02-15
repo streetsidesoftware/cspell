@@ -158,6 +158,11 @@
           },
           "type": "array"
         },
+        "language": {
+          "default": "en",
+          "description": "Current active spelling language. This specifies the language locale to use in choosing the general dictionary.\n\nFor example:\n\n- \"en-GB\" for British English.\n- \"en,nl\" to enable both English and Dutch.",
+          "type": "string"
+        },
         "words": {
           "description": "List of words to be considered correct.",
           "items": {
