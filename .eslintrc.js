@@ -30,6 +30,7 @@ const config = {
         '**/cspell-default.config.js',
         '**/dist/**',
         '**/dist.*/**',
+        'tools/*/lib/**',
         '**/node_modules/**',
         '**/.docusaurus/**',
         'docs/_site/**',
