@@ -221,6 +221,8 @@ jobs:
           retention-days: 1
 
   integration-tests-summary:
+    permissions:
+      pull-requests: write
     needs:
       - integration-tests
       - prepare
