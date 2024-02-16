@@ -1128,6 +1128,18 @@ importers:
 
   test-packages/yarn/yarn2: {}
 
+  tools/perf-chart:
+    dependencies:
+      commander:
+        specifier: ^12.0.0
+        version: 12.0.0
+      csv-parse:
+        specifier: ^5.5.3
+        version: 5.5.3
+      thistogram:
+        specifier: ^1.0.1
+        version: 1.0.1
+
   website:
     dependencies:
       '@docusaurus/core':
@@ -15208,6 +15220,11 @@ packages:
 
   /text-table@0.2.0:
     resolution: {integrity: sha512-N+8UisAXDGk8PFXP4HAzVR9nbfmVJ3zYLAWiTIoqC5v5isinhr+r5uaO8+7r3BMfuNIufIsA7RdpVgacC2cSpw==}
+
+  /thistogram@1.0.1:
+    resolution: {integrity: sha512-uyIm/PtaSEGrsVq3BJqIGsRsFCur4rnYWkU394hlb7CcLngaSY0QYAhwS/kLBE25oQAgi/qV+kIjO07nR2HkPw==}
+    engines: {node: '>=18.0.0'}
+    dev: false
 
   /through@2.3.8:
     resolution: {integrity: sha512-w89qg7PI8wAdvX60bMDP+bFoD5Dvhm9oLheFp5O4a2QF0cSBGsBX4qZmadPMvVqlLJBBci+WqGGOAPvcDeNSVg==}
