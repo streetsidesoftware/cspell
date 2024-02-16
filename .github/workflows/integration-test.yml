@@ -142,11 +142,11 @@ jobs:
         with:
           value: >-
             ${{ hashFiles(
+              '.github/workflows/integration-test.yml',
               'integration-tests/tsconfig.json',
               'integration-tests/config/repositories/${{matrix.repo}}/**',
               'integration-tests/snapshots/${{ matrix.repo }}/*',
               'integration-tests/repositories/*',
-              'integration-tests/perf/perf-${{ steps.step-normalize-repo-name.outputs.REPO_NAME }}.csv',
               'integration-tests/src/**/*.ts', 'integration-tests/tsconfig.json',
               'packages/*/src/**/*.ts', 'packages/*/tsconfig.json',
               'packages/*/*.ts',
@@ -225,6 +225,7 @@ jobs:
           git diff --cached > temp/perf/$REPO.diff
 
       - name: store diff
+        if: ${{ !steps.step-cache-run.outputs.cache-hit }}
         uses: actions/upload-artifact@v4
         with:
           name: diffs-repo-${{ steps.step-normalize-repo-name.outputs.REPO_NAME }}
