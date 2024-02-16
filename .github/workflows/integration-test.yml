@@ -138,7 +138,7 @@ jobs:
           echo "REPO_NAME=${REPO//${REPLACE}/${REPLACE_WITH}}" >> $GITHUB_OUTPUT
 
       - id: repo-hash
-        uses: ./.github/actions/echo
+        uses: streetsidesoftware/actions/public/output@v1
         with:
           value: >-
             ${{ hashFiles(
@@ -249,6 +249,13 @@ jobs:
           touch temp/perf/perf-run-empty.csv
           cat temp/perf/perf-run-*.csv | sort >> integration-tests/perf/perf.csv
 
+      - name: Gen Report
+        id: report
+        run: |
+          echo 'report<<@@REPORT@@' >> $GITHUB_OUTPUT
+          ./tools/perf-chart/bin.js ./integration-tests/perf/perf.csv >> $GITHUB_OUTPUT
+          echo '@@REPORT@@' >> $GITHUB_OUTPUT
+
       - name: PR Body
         id: pr-body
         uses: streetsidesoftware/actions/public/pr-body@v1
@@ -261,6 +268,8 @@ jobs:
             - runs_on: "${{ needs.prepare.outputs.runs_on }}"
             - node_version: ${{ needs.prepare.outputs.node_version }}
             - branch: ${{ github.ref_name }}
+
+            ${{ steps.report.outputs.report }}
           path: |
             integration-tests/perf/perf.csv
 

@@ -11,7 +11,9 @@
     "node": ">=18"
   },
   "scripts": {
-    "build": "tsc -p .",
+    "build": "pnpm run build:tsc && pnpm run build:esbuild",
+    "build:esbuild": "esbuild --bundle --platform=node --target=node18 --outfile=lib/app.cjs src/app.ts",
+    "build:tsc": "tsc -p .",
     "clean": "shx rm -rf dist coverage \"*.tsbuildInfo\"",
     "clean-build": "pnpm run clean && pnpm run build",
     "test-vitest": "vitest run"
@@ -25,7 +27,10 @@
   },
   "keywords": [],
   "files": [
-    "dist",
+    "lib",
     "bin.js"
-  ]
+  ],
+  "devDependencies": {
+    "esbuild": "^0.20.0"
+  }
 }
