@@ -32,8 +32,8 @@ interface CsvRecord {
 }
 const csvHeaders = [
     'timestamp',
-    'elapsedMs',
     'repo',
+    'elapsedMs',
     'files',
     'filesWithIssues',
     'issues',
@@ -42,6 +42,8 @@ const csvHeaders = [
     'usageUser',
     'usageSystem',
 ] as const;
+
+const reformatCsv = false;
 
 interface Config extends ReporterConfiguration {
     issuesSummaryReport?: boolean;
@@ -153,7 +155,7 @@ function createIssuesSummaryAccumulator(issuesSummary: Map<string, IssueSummary>
 
 function getPerfCsvFileUrl(root: vscodeUri.URI): URL {
     const repPath = extractRepositoryPath(root).replace(/\//g, '__');
-    return new URL(`../../perf/perf-${repPath}.csv`, import.meta.url);
+    return new URL(`../../perf/perf-run-${repPath}.csv`, import.meta.url);
 }
 
 /**
@@ -161,6 +163,7 @@ function getPerfCsvFileUrl(root: vscodeUri.URI): URL {
  * It will reformat the file if the headers to not match.
  */
 async function createCsvFile(csvUrl: URL): Promise<void> {
+    if (!reformatCsv) return;
     const csvFile = await fs.readFile(csvUrl, 'utf-8').catch(() => undefined);
     if (!csvFile) {
         return fs.writeFile(csvUrl, stringifyCsv([csvHeaders]));

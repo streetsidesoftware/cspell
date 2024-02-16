@@ -169,10 +169,10 @@ jobs:
         id: step-cache-run
         uses: actions/cache@v4
         with:
-          key: integration-run-result-${{ steps.repo-hash.outputs.value }}-${{ fromJSON(steps.step-repo-info.outputs.repo-info).commit }}-1
+          key: integration-run--${{ env.REF_BRANCH }}-${{ steps.repo-hash.outputs.value }}-${{ fromJSON(steps.step-repo-info.outputs.repo-info).commit }}-1
           # Store the patch files to update the integration perf data
           path: |
-            temp/perf/*.diff
+            integration-tests/perf/perf-run-*.csv
 
       - uses: ./.github/actions/echo
         with:
@@ -212,24 +212,12 @@ jobs:
           && pnpm i
           && pnpm run integration-tests -- ${{ matrix.repo }}
 
-      - name: Create Perf Diff
-        if: ${{ !steps.step-cache-run.outputs.cache-hit }}
-        id: perf-diff
-        env:
-          REPO: ${{ steps.step-normalize-repo-name.outputs.REPO_NAME }}
-          REPO_NAME: ${{ matrix.repo }}
-        run: |
-          mkdir -p temp/perf
-          echo "$REPO_NAME =>" $REPO
-          git add integration-tests/perf
-          git diff --cached > temp/perf/$REPO.diff
-
-      - name: store diff
+      - name: store perf run
         if: ${{ !steps.step-cache-run.outputs.cache-hit }}
         uses: actions/upload-artifact@v4
         with:
-          name: diffs-repo-${{ steps.step-normalize-repo-name.outputs.REPO_NAME }}
-          path: temp/perf/*.diff
+          name: perf-repo-${{ steps.step-normalize-repo-name.outputs.REPO_NAME }}
+          path: integration-tests/perf/perf-run-*.csv
           retention-days: 1
 
   integration-tests-summary:
@@ -242,18 +230,24 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Create the temp directory
+        run: |
+          mkdir -p temp/perf
+
       - name: restore repos perf
         uses: actions/download-artifact@v4
         with:
-          pattern: diffs-*
+          pattern: perf-*
           merge-multiple: true
           path: temp/perf
 
       - name: show downloaded
         run: ls -alF temp/perf
 
-      - name: apply diff
-        run: git apply --allow-empty temp/perf/*.diff
+      - name: append the runs
+        run: |
+          touch temp/perf/perf-run-empty.csv
+          cat temp/perf/perf-run-*.csv | sort >> integration-tests/perf/perf.csv
 
       - name: PR Body
         id: pr-body
@@ -268,6 +262,8 @@ jobs:
             - node_version: ${{ needs.prepare.outputs.node_version }}
             - repos: ${{ needs.integration-tests.outputs.repos }}
             - branch: ${{ github.ref_name }}
+          path: |
+            integration-tests/perf/perf.csv
 
       - name: Show PR in Summary
         uses: streetsidesoftware/actions/public/summary@v1
