@@ -130,16 +130,16 @@ function changeDate(date: Date, deltaDays: number): Date {
 }
 
 function createPerfTable(data: [string, CsvRecord[]][]): string {
-    const s = (v: number) => (v / 1000).toFixed(3);
+    const s = (v: number, fixed = 3) => (v / 1000).toFixed(fixed);
 
     const rows = data.map(([repo, records]) => {
         const { point, min, max, median, sum, count } = calcStats(records);
         const avg = sum / (count || 1);
-        return `| ${repo} | ${s(point)} | ${s(min)} | ${s(max)} | ${s(median)} | ${s(avg)} | ${count} |`;
+        return `| ${repo} | ${s(point)} | ${s((100 * point) / (median || 1), 2)}% | ${s(min)} | ${s(max)} | ${s(median)} | ${s(avg)} | ${count} |`;
     });
     return `
-| Rep | Elapsed | Min | Max | Median | Avg | Count |
-| --- | --- | --- | --- | --- | --- | --- |
+| Rep | Elapsed | Delta | Min | Max | Median | Avg | Count |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
 ${rows.join('\n')}
 
 Note: the stats do not include the last value.

@@ -21,10 +21,7 @@
             "noSuggest": true
         }
     ],
-    "dictionaries": [
-        "workspace",
-        "ignore words"
-    ],
+    "dictionaries": ["workspace", "ignore words"],
     "ignorePaths": [
         ".eslintignore",
         ".git",
@@ -49,6 +46,7 @@
         "**/jest.config.js",
         "**/node_modules/**",
         "**/tsconfig.json",
+        "/tools/*/lib/**",
         "/cspell-dict.txt",
         "/cspell-ignore-words.txt",
         "/docs/docsV2/**",
@@ -76,21 +74,15 @@
     ],
     "useGitignore": true,
     "flagWords": [],
-    "ignoreWords": [
-        "commitcomment"
-    ],
-    "words": [
-        "thistogram"
-    ],
+    "ignoreWords": ["commitcomment"],
+    "words": ["thistogram"],
     "features": {
         "weighted-suggestions": true
     },
     "overrides": [
         {
             "filename": "**/CHANGELOG.md",
-            "words": [
-                "webm"
-            ]
+            "words": ["webm"]
         }
     ]
 }
