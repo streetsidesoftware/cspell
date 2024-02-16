@@ -4425,7 +4425,7 @@ function createPerfTable(data) {
   const rows = data.map(([repo, records]) => {
     const { point: point2, min, max, median, sum, count } = calcStats(records);
     const avg = sum / (count || 1);
-    return `| ${repo} | ${s(point2)} | ${s(100 * point2 / (median || 1), 2)}% | ${s(min)} | ${s(max)} | ${s(median)} | ${s(avg)} | ${count} |`;
+    return `| ${repo} | ${s(point2)} | ${(-100 * (point2 - median) / (median || 1)).toFixed(2)}% | ${s(min)} | ${s(max)} | ${s(median)} | ${s(avg)} | ${count} |`;
   });
   return `
 | Rep | Elapsed | Delta | Min | Max | Median | Avg | Count |

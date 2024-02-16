@@ -135,7 +135,7 @@ function createPerfTable(data: [string, CsvRecord[]][]): string {
     const rows = data.map(([repo, records]) => {
         const { point, min, max, median, sum, count } = calcStats(records);
         const avg = sum / (count || 1);
-        return `| ${repo} | ${s(point)} | ${s((100 * point) / (median || 1), 2)}% | ${s(min)} | ${s(max)} | ${s(median)} | ${s(avg)} | ${count} |`;
+        return `| ${repo} | ${s(point)} | ${((-100 * (point - median)) / (median || 1)).toFixed(2)}% | ${s(min)} | ${s(max)} | ${s(median)} | ${s(avg)} | ${count} |`;
     });
     return `
 | Rep | Elapsed | Delta | Min | Max | Median | Avg | Count |
