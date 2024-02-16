@@ -279,6 +279,11 @@ jobs:
           text: |
             ${{ steps.pr-body.outputs.body }}
 
+      - name: Add comment to PR
+        uses: mshick/add-pr-comment@v2
+        with:
+          message: ${{ steps.report.outputs.report }}
+
       - name: Create PR
         if: github.ref_name == 'main'
         uses: streetsidesoftware/actions/.github/actions/pr@v1
