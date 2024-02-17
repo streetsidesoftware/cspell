@@ -83,8 +83,6 @@ export function createFromFile(pathToCache: string, useCheckSum: boolean, useRel
 }
 
 export function normalizePath(filePath: string): string {
-    return filePath;
-
-    // if (path.sep !== '\\') return filePath;
-    // return filePath.replace(/\\/g, '/');
+    if (path.sep === '/') return filePath;
+    return filePath.split(path.sep).join('/');
 }

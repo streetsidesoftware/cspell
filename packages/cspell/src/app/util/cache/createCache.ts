@@ -53,7 +53,7 @@ export async function calcCacheSettings(
     );
 
     const cacheStrategy = cacheOptions.cacheStrategy ?? cs.cacheStrategy ?? 'metadata';
-    const cacheFormat = cacheOptions.cacheFormat ?? cs.cacheFormat ?? 'legacy';
+    const cacheFormat = cacheOptions.cacheFormat ?? cs.cacheFormat ?? 'universal';
     const optionals: Partial<CreateCacheSettings> = {};
     if (cacheOptions.cacheReset) {
         optionals.reset = true;
