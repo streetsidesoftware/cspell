@@ -237,10 +237,16 @@ describe('Linter File Caching', () => {
     }
 
     const NoCache: LinterOptions = { cache: false };
-    const Config: LinterOptions = {};
-    const WithCache: LinterOptions = { cache: true, cacheStrategy: 'metadata' };
-    const WithCacheReset: LinterOptions = { cache: true, cacheStrategy: 'metadata', cacheReset: true };
-    const CacheContent: LinterOptions = { cache: true, cacheStrategy: 'content' };
+    const Config: LinterOptions = { cacheFormat: 'legacy' };
+    const WithCache: LinterOptions = { cache: true, cacheStrategy: 'metadata', cacheFormat: 'legacy' };
+    // const WithCacheUniversal: LinterOptions = { cache: true, cacheStrategy: 'metadata' };
+    const WithCacheReset: LinterOptions = {
+        cache: true,
+        cacheStrategy: 'metadata',
+        cacheReset: true,
+        cacheFormat: 'legacy',
+    };
+    const CacheContent: LinterOptions = { cache: true, cacheStrategy: 'content', cacheFormat: 'legacy' };
 
     test.each`
         runs                                                                                                                           | root            | comment
@@ -257,13 +263,16 @@ describe('Linter File Caching', () => {
         const cacheLocation = tempLocation('.cspellcache');
         await fs.rm(cacheLocation, { recursive: true }).catch(() => undefined);
 
+        let r = 0;
+
         for (const run of runs) {
+            ++r;
             const { fileGlobs, options, expected } = run;
             const useOptions = { ...options, cacheLocation };
             useOptions.root = root;
             const result = await App.lint(fileGlobs, useOptions, reporter);
             expect(reporter.errors).toEqual([]);
-            expect(result).toEqual(oc(expected));
+            expect(result, `run #${r}`).toEqual(oc(expected));
         }
     });
 });
