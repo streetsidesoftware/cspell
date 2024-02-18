@@ -40,7 +40,7 @@ const config = {
         'packages/*/fixtures/**',
         'packages/*/esm/**',
         'test-fixtures/**',
-        'test-packages/*/test-cspell-eslint-plugin*/**',
+        'test-packages/cspell-eslint-plugin/**',
         'test-packages/yarn/**',
         'website',
         '**/lib-bundled/**',
