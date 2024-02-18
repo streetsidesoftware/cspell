@@ -14,11 +14,46 @@ This plugin is still in active development as part of the CSpell suite of tools 
   npm install --save-dev @cspell/eslint-plugin
   ```
 
-- Add to it to `.eslintrc.json`
+### ESLint flat config `recommended`
 
-  ```json
-  "extends": ["plugin:@cspell/recommended"]
-  ```
+**`eslint.config.js`**
+
+```js
+import cspellPlugin from '@cspell/cspell-eslint-plugin';
+
+export default [
+  // ...
+  cspellPlugin.configs.recommended
+  // other configs
+];
+```
+
+### ESLint flat config plugins
+
+**`eslint.config.js`**
+
+```js
+import cspellPlugin from '@cspell/cspell-eslint-plugin';
+
+export default [
+  // ...
+  {
+    plugins: { '@cspell': cspellPlugin },
+    rules: {
+      '@cspell/spellchecker': ['warn', {}]
+    }
+  }
+  // other configs
+];
+```
+
+### `.eslintrc`
+
+Add to it to `.eslintrc.json`
+
+```json
+"extends": ["plugin:@cspell/recommended-legacy"]
+```
 
 ## Options
 
@@ -87,6 +122,11 @@ interface Options {
    * Some CSpell Settings
    */
   cspell?: {
+    /**
+     * The language locale to use, i.e. `en-US,en-GB` to enable both American
+     * and British English
+     */
+    language?: string;
     /** List of words to be considered correct. */
     words?: string[];
     /**
@@ -142,6 +182,23 @@ interface Options {
 ````
 
 Example:
+
+**`eslint.config.js`**
+
+```js
+import cspellPlugin from '@cspell/cspell-eslint-plugin';
+
+export default [
+  {
+    plugins: { '@cspell': cspellPlugin },
+    rules: {
+      '@cspell/spellchecker': ['warn', { checkComments: false, autoFix: true }]
+    }
+  }
+];
+```
+
+**`.eslintrc.json`**
 
 ```json
 {

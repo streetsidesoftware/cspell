@@ -2,7 +2,8 @@ import { RuleTester } from 'eslint';
 import * as fs from 'fs';
 import * as path from 'path';
 
-import * as Rule from './index.cjs';
+import type { Options as RuleOptions } from './index.cjs';
+import Rule from './index.cjs';
 
 const root = path.resolve(__dirname, '../..');
 const fixturesDir = path.join(root, 'fixtures');
@@ -13,7 +14,7 @@ const parsers: Record<string, string | undefined> = {
 };
 
 type ValidTestCase = RuleTester.ValidTestCase;
-type Options = Partial<Rule.Options>;
+type Options = Partial<RuleOptions>;
 
 const ruleTester = new RuleTester({
     env: {
@@ -21,7 +22,7 @@ const ruleTester = new RuleTester({
     },
 
     parserOptions: {
-        ecmaVersion: 2020,
+        ecmaVersion: 2022,
         sourceType: 'module',
         ecmaFeatures: {
             modules: true,

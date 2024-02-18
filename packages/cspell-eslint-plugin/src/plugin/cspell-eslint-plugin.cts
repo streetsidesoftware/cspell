@@ -1,5 +1,5 @@
 // cspell:ignore TSESTree
-import type { Rule } from 'eslint';
+import type { ESLint, Rule } from 'eslint';
 import { readFileSync } from 'fs';
 import { join as pathJoin } from 'path';
 import { createSyncFn } from 'synckit';
@@ -7,6 +7,8 @@ import { createSyncFn } from 'synckit';
 import { getDefaultLogger } from '../common/logger.cjs';
 import type { Issue, SpellCheckFn } from '../worker/types.cjs';
 import { normalizeOptions } from './defaultCheckOptions.cjs';
+
+type ESlintPlugin = ESLint.Plugin;
 
 const optionsSchema = JSON.parse(readFileSync(pathJoin(__dirname, '../../assets/options.schema.json'), 'utf8'));
 
@@ -29,10 +31,6 @@ interface ExtendedSuggestion {
     wordAdjustedToMatchCase?: string;
 }
 
-interface PluginRules {
-    ['spellchecker']: Rule.RuleModule;
-}
-
 const messages = {
     wordUnknown: 'Unknown word: "{{word}}"',
     wordForbidden: 'Forbidden word: "{{word}}"',
@@ -42,7 +40,7 @@ const messages = {
 type Messages = typeof messages;
 type MessageIds = keyof Messages;
 
-const meta: Rule.RuleMetaData = {
+const ruleMeta: Rule.RuleMetaData = {
     docs: {
         description: 'CSpell spellchecker',
         category: 'Possible Errors',
@@ -136,12 +134,14 @@ function create(context: Rule.RuleContext): Rule.RuleListener {
     return { Program: checkProgram };
 }
 
-export const rules: PluginRules = {
-    spellchecker: {
-        meta,
-        create,
-    },
+const spellchecker: Rule.RuleModule = {
+    meta: ruleMeta,
+    create,
 };
+
+export const rules: { spellchecker: Rule.RuleModule } = {
+    spellchecker,
+} satisfies ESlintPlugin['rules'];
 
 function logContext(log: typeof console.log, context: Rule.RuleContext) {
     log('context: %o', {
@@ -154,7 +154,9 @@ function logContext(log: typeof console.log, context: Rule.RuleContext) {
     });
 }
 
-export const configs = {
+export const meta = { name: '@cspell' } as const;
+
+export const configs: ESlintPlugin['configs'] = {
     recommended: {
         plugins: ['@cspell'],
         rules: {
@@ -167,4 +169,30 @@ export const configs = {
             '@cspell/spellchecker': ['warn', { debugMode: true }],
         },
     },
+    'recommended-legacy': {
+        plugins: ['@cspell'],
+        rules: {
+            '@cspell/spellchecker': ['warn', {}],
+        },
+    },
+    'debug-legacy': {
+        plugins: ['@cspell'],
+        rules: {
+            '@cspell/spellchecker': ['warn', { debugMode: true }],
+        },
+    },
 };
+
+export const plugin = { rules, configs, meta } satisfies ESlintPlugin;
+
+Object.assign(configs.recommended, {
+    plugins: {
+        '@cspell': plugin,
+    },
+});
+
+Object.assign(configs.debug, {
+    plugins: {
+        '@cspell': plugin,
+    },
+});
