@@ -1,12 +1,12 @@
-const bluelist = ['one', 'two', 'three'];
+const greenList = ['one', 'two', 'three'];
 
 /**
  * This is a file with errors that can be autoFixed.
  *
- * Time to go to the café.
+ * Time to go to the cafe.
  */
-export function calcBluelist(names: string[]) {
-    const bluelistSet = new Set(bluelist);
+export function calcGreenList(names: string[]) {
+    const greenListSet = new Set(greenList);
 
-    return names.filter((name) => bluelistSet.has(name));
+    return names.filter((name) => greenListSet.has(name));
 }

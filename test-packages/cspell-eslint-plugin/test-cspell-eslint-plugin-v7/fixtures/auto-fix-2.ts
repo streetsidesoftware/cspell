@@ -1,14 +1,14 @@
-const aboutthe = ['one', 'two', 'three'];
+const about_the = ['one', 'two', 'three'];
 
 /**
- * This is aboutthe file with errors that can be autoFixed.
- * What do you think aboutit?
- * Time to go to the café.
+ * This is about the file with errors that can be autoFixed.
+ * What do you think about it?
+ * Time to go to the cafe.
  */
-export function calcBluelist(names: string[]) {
-    const bluelistSet = new Set(aboutthe);
+export function calcGreenList(names: string[]) {
+    const greenListSet = new Set(about_the);
 
-    return names.filter((name) => bluelistSet.has(name));
+    return names.filter((name) => greenListSet.has(name));
 }
 
-export const aswell = 5;
+export const as_well = 5;
