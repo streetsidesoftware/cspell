@@ -123,8 +123,8 @@ interface Options {
    */
   cspell?: {
     /**
-     * The language locale to use, i.e. `en-US,en-GB` to enable both American
-     * and British English
+     * The language locale to use, i.e. `en-US,en-GB` to enable both
+     * American and British English.
      */
     language?: string;
     /** List of words to be considered correct. */
