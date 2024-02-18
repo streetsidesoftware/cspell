@@ -86,7 +86,7 @@ function cco(
     useCache = false,
     cacheLocation = '.cspellcache',
     cacheStrategy: CreateCacheSettings['cacheStrategy'] = 'metadata',
-    cacheFormat: CreateCacheSettings['cacheFormat'] = 'legacy',
+    cacheFormat: CreateCacheSettings['cacheFormat'] = 'universal',
 ): CreateCacheSettings {
     if (cacheLocation) {
         cacheLocation = path.resolve(process.cwd(), cacheLocation);

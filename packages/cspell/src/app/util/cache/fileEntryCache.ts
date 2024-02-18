@@ -60,7 +60,7 @@ export function createFromFile(pathToCache: string, useCheckSum: boolean, useRel
     return cacheWrapper;
 
     function resolveFile(cwd: string, file: string): string {
-        if (!useRelative) return file;
+        if (!useRelative) return normalizePath(file);
         const r = path.relative(relDir, path.resolve(cwd, file));
         return normalizePath(r);
     }
@@ -83,8 +83,6 @@ export function createFromFile(pathToCache: string, useCheckSum: boolean, useRel
 }
 
 export function normalizePath(filePath: string): string {
-    return filePath;
-
-    // if (path.sep !== '\\') return filePath;
-    // return filePath.replace(/\\/g, '/');
+    if (path.sep === '/') return filePath;
+    return filePath.split(path.sep).join('/');
 }
