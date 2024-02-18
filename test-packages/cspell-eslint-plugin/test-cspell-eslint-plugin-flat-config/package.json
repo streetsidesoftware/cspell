@@ -5,7 +5,8 @@
   "private": true,
   "scripts": {
     "test:eslint": "eslint .",
-    "test": "pnpm test:eslint"
+    "test:eslint2": "eslint -c .eslint.config.js .",
+    "test": "pnpm test:eslint && pnpm test:eslint2"
   },
   "type": "module",
   "engines": {

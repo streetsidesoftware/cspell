@@ -14,29 +14,47 @@ This plugin is still in active development as part of the CSpell suite of tools 
   npm install --save-dev @cspell/eslint-plugin
   ```
 
-### ESLint flat config `recommended`
+- Add the plugin to the ESLint configuration (see below:)
+  - [Configuration (new: `eslint.config.js`)](#configuration-new-eslintconfigjs)
+  - [Configuration (Legacy: `.eslintrc`)](#configuration-legacy-eslintrc)
 
-**`eslint.config.js`**
+### Configuration (new: `eslint.config.js`)
+
+**`eslint.config.js` using recommended.**
 
 ```js
-import cspellPlugin from '@cspell/cspell-eslint-plugin';
+import cspellESLintPluginRecommended from '@cspell/eslint-plugin/recommended';
 
 export default [
-  // ...
-  cspellPlugin.configs.recommended
+  // other config imports
+  cspellESLintPluginRecommended
   // other configs
 ];
 ```
 
-### ESLint flat config plugins
+**Or**
 
-**`eslint.config.js`**
+**`eslint.config.js` using configs.**
 
 ```js
-import cspellPlugin from '@cspell/cspell-eslint-plugin';
+import cspellConfigs from '@cspell/eslint-plugin/configs';
 
 export default [
-  // ...
+  // other config imports
+  cspellConfigs.recommended
+  // other configs
+];
+```
+
+**Or**
+
+**`eslint.config.js` using `plugins`**
+
+```js
+import cspellPlugin from '@cspell/eslint-plugin';
+
+export default [
+  // other config imports
   {
     plugins: { '@cspell': cspellPlugin },
     rules: {
@@ -47,12 +65,16 @@ export default [
 ];
 ```
 
-### `.eslintrc`
+### Configuration (Legacy: `.eslintrc`)
 
-Add to it to `.eslintrc.json`
+Add `"plugin:@cspell/recommended"` to the `extends` section of the configuration.
+
+**`.eslintrc`**
 
 ```json
-"extends": ["plugin:@cspell/recommended-legacy"]
+{
+  "extends": ["plugin:@cspell/recommended"]
+}
 ```
 
 ## Options
@@ -181,16 +203,31 @@ interface Options {
 }
 ````
 
-Example:
+Examples:
 
 **`eslint.config.js`**
 
 ```js
-import cspellPlugin from '@cspell/cspell-eslint-plugin';
+import cspellPlugin from '@cspell/eslint-plugin';
 
 export default [
   {
     plugins: { '@cspell': cspellPlugin },
+    rules: {
+      '@cspell/spellchecker': ['warn', { checkComments: false, autoFix: true }]
+    }
+  }
+];
+```
+
+**`eslint.config.js`**
+
+```js
+import cspellConfigs from '@cspell/eslint-plugin/configs';
+
+export default [
+  cspellConfigs.recommended,
+  {
     rules: {
       '@cspell/spellchecker': ['warn', { checkComments: false, autoFix: true }]
     }

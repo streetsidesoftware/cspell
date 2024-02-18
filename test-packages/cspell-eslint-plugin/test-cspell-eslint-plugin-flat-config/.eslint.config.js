@@ -3,8 +3,7 @@ import js from '@eslint/js';
 import { FlatCompat } from '@eslint/eslintrc';
 import { fileURLToPath } from 'url';
 import eslintConfigPrettier from 'eslint-config-prettier';
-import cspellRecommended from '@cspell/eslint-plugin/recommended';
-import cspellConfigs from '@cspell/eslint-plugin/configs';
+import cspellPlugin from '@cspell/eslint-plugin';
 
 const __dirname = fileURLToPath(new URL('.', import.meta.url));
 
@@ -17,10 +16,12 @@ const compat = new FlatCompat({
  */
 const config = [
     js.configs.recommended,
-    // cspellRecommended,
-    cspellConfigs.recommended,
-    // pluginImport.configs.errors,
-    // pluginImport.configs.warnings,
+    {
+        plugins: { '@cspell': cspellPlugin },
+        rules: {
+            '@cspell/spellchecker': ['warn', { checkIdentifiers: true }],
+        },
+    },
     ...compat.extends('plugin:prettier/recommended', 'plugin:@typescript-eslint/recommended'),
     eslintConfigPrettier,
     {
@@ -38,7 +39,6 @@ const config = [
     },
     {
         files: ['**/*.js'],
-        plugins: cspellRecommended.plugins,
         rules: {
             'no-unused-vars': ['warn', { argsIgnorePattern: '^_', varsIgnorePattern: '^_' }],
             'no-undef': 'warn',

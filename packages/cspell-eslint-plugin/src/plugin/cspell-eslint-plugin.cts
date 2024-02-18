@@ -156,43 +156,25 @@ function logContext(log: typeof console.log, context: Rule.RuleContext) {
 
 export const meta = { name: '@cspell' } as const;
 
-export const configs: ESlintPlugin['configs'] = {
-    recommended: {
-        plugins: ['@cspell'],
-        rules: {
-            '@cspell/spellchecker': ['warn', {}],
-        },
-    },
-    debug: {
-        plugins: ['@cspell'],
-        rules: {
-            '@cspell/spellchecker': ['warn', { debugMode: true }],
-        },
-    },
-    'recommended-legacy': {
-        plugins: ['@cspell'],
-        rules: {
-            '@cspell/spellchecker': ['warn', {}],
-        },
-    },
-    'debug-legacy': {
-        plugins: ['@cspell'],
-        rules: {
-            '@cspell/spellchecker': ['warn', { debugMode: true }],
-        },
+const recommended: ESLint.ConfigData = {
+    plugins: ['@cspell'],
+    rules: {
+        '@cspell/spellchecker': ['warn', {}],
     },
 };
 
+const debugConfig: ESLint.ConfigData = {
+    plugins: ['@cspell'],
+    rules: {
+        '@cspell/spellchecker': ['warn', { debugMode: true }],
+    },
+};
+
+export const configs: ESlintPlugin['configs'] = {
+    debug: debugConfig,
+    'debug-legacy': debugConfig,
+    recommended,
+    'recommended-legacy': recommended,
+};
+
 export const plugin = { rules, configs, meta } satisfies ESlintPlugin;
-
-Object.assign(configs.recommended, {
-    plugins: {
-        '@cspell': plugin,
-    },
-});
-
-Object.assign(configs.debug, {
-    plugins: {
-        '@cspell': plugin,
-    },
-});
