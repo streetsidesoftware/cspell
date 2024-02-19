@@ -3,7 +3,7 @@ Repository: eslint/eslint
 Url: "https://github.com/eslint/eslint"
 Args: [".","--config=../../../config/eslint/cspell.config.yaml","--issues-summary-report","--exclude=bin/**","--exclude=CHANGELOG.md","--exclude=_data","--exclude=tests/bench/large.js","--exclude=docs/src/_includes","--exclude=docs/src/assets/{fonts,s?css,images}"]
 Lines:
- CSpell: Files checked: 1913, Issues found: 2172 in 394 files
+ CSpell: Files checked: 1911, Issues found: 2161 in 392 files
  exit code: 1
 ./Makefile.js:145:88    - Unknown word (ined)               -- followed by the string "ined".
 ./Makefile.js:151:48    - Unknown word (blogpost)           -- render(cat("./templates/blogpost.md.ejs"), renderContext
@@ -11,7 +11,7 @@ Lines:
 ./Makefile.js:594:8     - Unknown word (wdio)               -- target.wdio = () => {
 ./Makefile.js:77:88     - Unknown word (markdownlintignore) -- path.join(__dirname, ".markdownlintignore"), "utf-8")),
 ./Makefile.js:81:10     - Unknown word (MULTIFILES)         -- PERF_MULTIFILES_TARGET_DIR = path.join
-./Makefile.js:896:18    - Unknown word (Multifiles)         -- function downloadMultifilesTestTarget(cb) {
+./Makefile.js:881:18    - Unknown word (Multifiles)         -- function downloadMultifilesTestTarget(cb) {
 ./README.md:106:30    - Unknown word (diffent)    -- ESLint and Prettier have diffent jobs: ESLint is a linter
 ./README.md:112:109   - Unknown word (myplugin)   -- npm view eslint-plugin-myplugin peerDependencies` to
 ./README.md:204:5     - Unknown word (teamstart)  -- <!--teamstart-->
@@ -35,8 +35,8 @@ Lines:
 ./README.md:285:5     - Unknown word (teamend)       -- <!--teamend-->
 ./README.md:292:5     - Unknown word (sponsorsstart) -- <!--sponsorsstart-->
 ./README.md:296:564   - Unknown word (Workleap)      -- f99fe2465f&v=4" alt="Workleap" height="64"></a></p
-./README.md:297:1192  - Unknown word (Nextbase)      -- 145838380?v=4" alt="Nextbase Starter Kit" height
-./README.md:297:679   - Unknown word (Transloadit)   -- com/u/125754?v=4" alt="Transloadit" height="32"></a> <a
+./README.md:297:1323  - Unknown word (Nextbase)      -- 145838380?v=4" alt="Nextbase Starter Kit" height
+./README.md:297:810   - Unknown word (Transloadit)   -- com/u/125754?v=4" alt="Transloadit" height="32"></a> <a
 ./README.md:298:5     - Unknown word (sponsorsend)   -- <!--sponsorsend-->
 ./conf/replacements.json:12:36     - Unknown word (parens)     -- wrap-func": ["no-extra-parens"],
 ./conf/replacements.json:13:62     - Unknown word (paren)      -- space-before-function-paren"],
@@ -290,11 +290,11 @@ Lines:
 ./lib/rules/logical-assignment-operators.js:115:4     - Unknown word (falsiness)  -- * falsiness checks:   !value, !Boolean
 ./lib/rules/max-len.js:262:30    - Unknown word (accululated) -- * @returns {Object} accululated AST nodes
 ./lib/rules/no-caller.js:38:106    - Unknown word (calle)      -- propertyName.match(/^calle[er]$/u)) {
-./lib/rules/no-constant-binary-expression.js:35:59     - Unknown word (nullishness) -- statically knowable constant nullishness. Meaning,
-./lib/rules/no-constant-binary-expression.js:44:21     - Unknown word (Nullishness) -- function hasConstantNullishness(scope, node, nonNullish
+./lib/rules/no-constant-binary-expression.js:34:59     - Unknown word (nullishness) -- statically knowable constant nullishness. Meaning,
+./lib/rules/no-constant-binary-expression.js:43:21     - Unknown word (Nullishness) -- function hasConstantNullishness(scope, node, nonNullish
 ./lib/rules/no-else-return.js:351:19    - Unknown word (consequents) -- const consequents = [];
 ./lib/rules/no-else-return.js:80:16     - Unknown word (Redeclaring) -- * Redeclaring any of these would cause
-./lib/rules/no-extend-native.js:121:87    - Unknown word (Propert)    -- callee, "Object", /^definePropert(?:y|ies)$/u)
+./lib/rules/no-extend-native.js:120:87    - Unknown word (Propert)    -- callee, "Object", /^definePropert(?:y|ies)$/u)
 ./lib/rules/no-extra-parens.js:260:52    - Unknown word (newed)          -- constructor function is newed-up with parens
 ./lib/rules/no-extra-parens.js:2:27      - Unknown word (parenthesising) -- fileoverview Disallow parenthesising higher precedence subexpressi
 ./lib/rules/no-extra-parens.js:2:60      - Unknown word (subexpressions) -- enthesising higher precedence subexpressions.
@@ -321,15 +321,16 @@ Lines:
 ./lib/rules/sort-vars.js:53:23     - Unknown word (unfixable)  -- const unfixable = idDeclarations.some
 ./lib/rules/space-unary-ops.js:133:28    - Unknown word (Doesnt)     -- function verifyWordDoesntHaveSpaces(node, firstToken
 ./lib/rules/space-unary-ops.js:246:32    - Unknown word (Dont)       -- function verifyNonWordsDontHaveSpaces(node, firstToken
-./lib/rules/use-isnan.js:130:25    - Unknown word (Castable)   -- const isCastable = castableOperators
-./lib/rules/use-isnan.js:88:15     - Unknown word (castable)   -- const castableOperators = new Set(
-./lib/rules/utils/ast-utils.js:1041:89   - Unknown word (braket)     -- opening parenthesis or braket.
-./lib/rules/utils/ast-utils.js:396:40    - Unknown word (samely)     -- a.b` and `a?.b` are samely.
+./lib/rules/use-isnan.js:130:25    - Unknown word (Suggestable) -- const isSuggestable = fixableOperators.has
+./lib/rules/use-isnan.js:131:25    - Unknown word (Castable)    -- const isCastable = castableOperators
+./lib/rules/use-isnan.js:89:15     - Unknown word (castable)   -- const castableOperators = new Set(
+./lib/rules/utils/ast-utils.js:1049:89   - Unknown word (braket)     -- opening parenthesis or braket.
+./lib/rules/utils/ast-utils.js:404:40    - Unknown word (samely)     -- a.b` and `a?.b` are samely.
 ./lib/rules/utils/patterns/letters.js:12:24     - Unknown word (Dulin)      -- Copyright 2013-2016 Dulin Marat and other contributors
 ./lib/shared/deprecation-warnings.js:19:19     - Unknown word (ECMAFEATURES) -- ESLINT_LEGACY_ECMAFEATURES:
 ./lib/shared/string-utils.js:12:28     - Unknown word (graphemer)  -- Graphemer = require("graphemer").default;
 ./lib/shared/string-utils.js:12:7      - Unknown word (Graphemer)  -- const Graphemer = require("graphemer
-./package.json:126:6     - Unknown word (eslump)     -- "eslump": "^3.0.0",
+./package.json:125:6     - Unknown word (eslump)     -- "eslump": "^3.0.0",
 ./package.json:141:6     - Unknown word (memfs)      -- "memfs": "^3.0.1",
 ./package.json:142:6     - Unknown word (metascraper) -- "metascraper": "^5.25.7",
 ./package.json:161:6     - Unknown word (webdriverio) -- "webdriverio": "^8.14.6",
@@ -482,9 +483,9 @@ Lines:
 ./tests/lib/rules/spaced-comment.js:115:54    - Unknown word (xmldoc)     -- comment\n//----\n/// xmldoc style comment\n//!<
 ./tests/lib/rules/spaced-comment.js:318:23    - Unknown word (endregion)  -- code: "//#endregion",
 ./tests/lib/rules/spaced-comment.js:649:23    - Unknown word (endregionfoo) -- code: "//#endregionfoo",
-./tests/lib/rules/utils/ast-utils.js:1065:17   - Unknown word (ncde)       -- "ab\ncde\n": [[1, 0], [1, 1]
-./tests/lib/rules/utils/ast-utils.js:1524:19   - Unknown word (invalidtoken) -- [["123invalidtoken", "("], false],
-./tests/lib/rules/utils/ast-utils.js:686:52    - Unknown word (braceless)  -- empty array if node is a braceless ArrowFunctionExpression
+./tests/lib/rules/utils/ast-utils.js:1091:17   - Unknown word (ncde)       -- "ab\ncde\n": [[1, 0], [1, 1]
+./tests/lib/rules/utils/ast-utils.js:1550:19   - Unknown word (invalidtoken) -- [["123invalidtoken", "("], false],
+./tests/lib/rules/utils/ast-utils.js:712:52    - Unknown word (braceless)  -- empty array if node is a braceless ArrowFunctionExpression
 ./tests/lib/rules/valid-typeof.js:91:40     - Unknown word (umdefined)  -- if (typeof bar === 'umdefined') {}",
 ./tests/lib/shared/runtime-info.js:28:25     - Unknown word (Vals)       -- param {Array} returnVals Values to be returned
 ./tests/lib/shared/string-utils.js:37:9      - Unknown word (uppercases) -- it("uppercases the first letter of
@@ -638,7 +639,6 @@ Lines:
 ./tests/tools/eslint-fuzzer.js:124:50    - Unknown word (foos)       -- message: "no foos allowed",
 ./tools/fuzzer-runner.js:50:42     - Unknown word (elapseds)   -- rules [:bar] :percent, :elapseds elapsed, eta :etas,
 ./tools/update-readme.js:71:60     - Unknown word (valign)     -- `<td align="center" valign="top" width="11%">
-./tools/update-rule-types.js:5:6       - Unknown word (jscodeshift) -- * jscodeshift -t tools/update-rule
 ./wdio.conf.js:121:16    - Unknown word (browserstack) -- * - @wdio/browserstack-service, @wdio/devtools
 ./wdio.conf.js:124:16    - Unknown word (sumologic)    -- * - @wdio/sumologic-reporter
 ./wdio.conf.js:129:19    - Unknown word (appium)       -- * '@wdio/appium-service': 'info'
