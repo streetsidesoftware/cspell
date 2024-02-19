@@ -5,7 +5,7 @@ Args: '["**"]'
 Summary:
   files: 598
   filesWithIssues: 308
-  issues: 2714
+  issues: 2718
   errors: 0
 Errors: []
 
@@ -43,6 +43,7 @@ issues:
   - "Cargo.toml:87:49        flamescope      U       flame-it\", \"flame\", \"flamescope\"]"
   - "Cargo.toml:110:82       termcolor       U       features = [\"atty\", \"termcolor\"] }"
   - "Cargo.toml:152:62       redoxer         U       to compile/check with redoxer"
+  - "Cargo.toml:155:37       vcpkg           U       Windows to build the vcpkg dependencies"
   - "common/Cargo.toml:33:1          siphasher       U       siphasher = \"0.3\""
   - "common/src/boxvec.rs:1:8            unresizable         U       //! An unresizable vector backed by a"
   - "common/src/boxvec.rs:264:23         nonoverlapping      U       ptr::copy_nonoverlapping(other.as_ptr(), dst"
@@ -390,7 +391,6 @@ issues:
   - "README.md:244:16        rspython            U       [windelbouwman/rspython](https://github.com"
   - "README.md:245:2         shinglyu            U       [shinglyu/RustPython](https:/"
   - "scripts/install-openssl.ps1:1:12        Actix       U       # From the Actix Web windows workflow"
-  - "scripts/install-openssl.ps1:3:1         vcpkg       U       vcpkg integrate install"
   - "scripts/redox/recipe.sh:3:1         CARGOFLAGS      U       CARGOFLAGS=--no-default-features"
   - "scripts/redox/recipe.sh:4:8         BUILDTIME       U       export BUILDTIME_RUSTPYTHONPATH=/lib"
   - "src/lib.rs:12:35        mymod           U       vm.add_native_module(\"mymod\".to_owned(), Box::new"
