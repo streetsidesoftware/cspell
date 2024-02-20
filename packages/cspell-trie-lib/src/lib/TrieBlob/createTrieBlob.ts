@@ -5,7 +5,7 @@ import { FastTrieBlobBuilder } from './FastTrieBlobBuilder.js';
 import { resolveMap } from './resolveMap.js';
 import { TrieBlob } from './TrieBlob.js';
 
-export function createTrieBlob(words: readonly string[], options?: PartialTrieInfo): TrieBlob {
+export function createTrieBlob(words: string[], options?: PartialTrieInfo): TrieBlob {
     const ft = FastTrieBlobBuilder.fromWordList(words, options);
     return ft.toTrieBlob();
 }

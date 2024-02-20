@@ -250,10 +250,10 @@ export function isEndOfWordNode(n: ITrieNode | undefined): boolean {
 }
 
 function walk(root: Root | ITrieNode | undefined, word: string): ITrieNode | undefined {
-    const w = [...word];
+    const w = word;
     let n: ITrieNode | undefined = root;
     let i = 0;
-    while (n && i < w.length) {
+    while (n && i < word.length) {
         const h = w[i++];
         n = n.get(h);
     }

@@ -132,14 +132,12 @@ describe('docValidator', () => {
 
     // cspell:ignore kount naame colector Reciever reciever recievers serrors dockblock
     test.each`
-        filename                                         | maxDuplicateProblems | expectedIssues                                                                                                                                                                                | expectedRawIssues
-        ${fix('sample-with-errors.ts')}                  | ${undefined}         | ${['dockblock', 'Helllo']}                                                                                                                                                                    | ${undefined}
-        ${fix('sample-with-many-errors.ts')}             | ${undefined}         | ${['reciever', 'naame', 'naame', 'naame', 'reciever', 'Reciever', 'naame', 'Reciever', 'naame', 'kount', 'Reciever', 'kount', 'colector', 'recievers', 'Reciever', 'recievers', 'recievers']} | ${undefined}
-        ${fix('sample-with-many-errors.ts')}             | ${1}                 | ${['reciever', 'naame', 'Reciever', 'kount', 'colector', 'recievers']}                                                                                                                        | ${undefined}
-        ${fix('parser/sample.ts')}                       | ${1}                 | ${['serrors']}                                                                                                                                                                                | ${['\\x73errors']}
-        ${fix('sample-with-directives-errors.ts')}       | ${1}                 | ${['disable-prev', 'ignored', 'world', 'enable-line']}                                                                                                                                        | ${undefined}
-        ${tFix('issues/issue-4811/#local/README.md')}    | ${undefined}         | ${[]}                                                                                                                                                                                         | ${undefined}
-        ${tFix('issues/issue-4811/#local/version@2.md')} | ${undefined}         | ${['marrkdown']}                                                                                                                                                                              | ${undefined /* cspell:disable-line */}
+        filename                                   | maxDuplicateProblems | expectedIssues                                                                                                                                                                                | expectedRawIssues
+        ${fix('sample-with-errors.ts')}            | ${undefined}         | ${['dockblock', 'Helllo']}                                                                                                                                                                    | ${undefined}
+        ${fix('sample-with-many-errors.ts')}       | ${undefined}         | ${['reciever', 'naame', 'naame', 'naame', 'reciever', 'Reciever', 'naame', 'Reciever', 'naame', 'kount', 'Reciever', 'kount', 'colector', 'recievers', 'Reciever', 'recievers', 'recievers']} | ${undefined}
+        ${fix('sample-with-many-errors.ts')}       | ${1}                 | ${['reciever', 'naame', 'Reciever', 'kount', 'colector', 'recievers']}                                                                                                                        | ${undefined}
+        ${fix('parser/sample.ts')}                 | ${1}                 | ${['serrors']}                                                                                                                                                                                | ${['\\x73errors']}
+        ${fix('sample-with-directives-errors.ts')} | ${1}                 | ${['disable-prev', 'ignored', 'world', 'enable-line']}                                                                                                                                        | ${undefined}
     `(
         'checkDocument $filename $maxDuplicateProblems',
         async ({ filename, maxDuplicateProblems, expectedIssues, expectedRawIssues }) => {
@@ -154,8 +152,9 @@ describe('docValidator', () => {
     );
 
     test.each`
-        filename                               | maxDuplicateProblems | expectedIssues | expectedRawIssues
-        ${tFix('issues/issue-5222/README.md')} | ${undefined}         | ${[]}          | ${undefined}
+        filename                                         | maxDuplicateProblems | expectedIssues   | expectedRawIssues
+        ${tFix('issues/issue-4811/#local/README.md')}    | ${undefined}         | ${[]}            | ${undefined}
+        ${tFix('issues/issue-4811/#local/version@2.md')} | ${undefined}         | ${['marrkdown']} | ${undefined /* cspell:disable-line */}
     `(
         'checkDocument $filename $maxDuplicateProblems',
         async ({ filename, maxDuplicateProblems, expectedIssues, expectedRawIssues }) => {

@@ -112,31 +112,3 @@ export function stripAccents(characters: string): string {
 export function stripNonAccents(characters: string): string {
     return characters.normalize('NFD').replace(/[^\p{M}]/gu, '');
 }
-
-export function isValidUtf16Character(char: string): boolean {
-    const len = char.length;
-    const code = char.charCodeAt(0) & 0xfc00;
-    const valid =
-        (len === 1 && (code & 0xf800) !== 0xd800) ||
-        (len === 2 && (code & 0xfc00) === 0xd800 && (char.charCodeAt(1) & 0xfc00) === 0xdc00);
-    return valid;
-}
-
-export function assertValidUtf16Character(char: string): void {
-    if (!isValidUtf16Character(char)) {
-        const len = char.length;
-        const codes = char
-            .slice(0, 2)
-            .split('')
-            .map((c) => '0x' + ('0000' + c.charCodeAt(0).toString(16)).slice(-4));
-        let message: string;
-        if (len == 1) {
-            message = `Invalid utf16 character, lone surrogate: ${codes[0]}`;
-        } else if (len == 2) {
-            message = `Invalid utf16 character, not a valid surrogate pair: [${codes.join(', ')}]`;
-        } else {
-            message = `Invalid utf16 character, must be a single character, found: ${len}`;
-        }
-        throw new Error(message);
-    }
-}

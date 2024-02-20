@@ -7,19 +7,7 @@ import { createTrieBlob, createTrieBlobFromITrieNodeRoot, createTrieBlobFromTrie
 import { TrieBlob } from './TrieBlob.js';
 
 describe('TrieBlob', () => {
-    const sampleWords = [
-        'one',
-        'two',
-        'three',
-        'four',
-        'walk',
-        'walking',
-        'walks',
-        'wall',
-        'walls',
-        'walled',
-        '😀😎',
-    ].sort();
+    const sampleWords = ['one', 'two', 'three', 'four', 'walk', 'walking', 'walks', 'wall', 'walls', 'walled'].sort();
 
     test('Constructor', () => {
         const tb = createTrieBlob(['one', 'two']);
@@ -42,7 +30,7 @@ describe('TrieBlob', () => {
         const tb = createTrieBlob(sampleWords);
         const bin = tb.encodeBin();
         const r = TrieBlob.decodeBin(bin);
-        expect(r.toJSON()).toEqual(tb.toJSON());
+        expect(r).toEqual(tb);
         expect([...r.words()]).toEqual(sampleWords);
     });
 
@@ -63,31 +51,5 @@ describe('TrieBlob', () => {
         const trieBlob = createTrieBlobFromITrieNodeRoot(root);
         const iter = walkerWordsITrie(trieBlob.getRoot());
         expect([...iter]).toEqual(sampleWords);
-    });
-});
-
-describe('TrieBlob special character indexes', () => {
-    test.each`
-        index
-        ${0}
-        ${240}
-        ${TrieBlob.SpecialCharIndexMask}
-        ${TrieBlob.SpecialCharIndexMask + 1}
-        ${1024}
-    `('number to sequence $index', ({ index }) => {
-        const seq = TrieBlob.toCharIndexSequence(index);
-        const r = [...TrieBlob.fromCharIndexSequence(seq)];
-        expect(r).toEqual([index]);
-    });
-
-    test('mapping characters', () => {
-        const characters = 'this is a test of a few characters and accents: é ♘😀😎🥳';
-        const map = Object.fromEntries(
-            [...new Set([...characters]).values()].map((c) => [c, c.codePointAt(0)] as [string, number]),
-        );
-        const charIndex = Object.fromEntries(Object.entries(map).map(([c, i]) => [i, c])) as Record<number, string>;
-        const seq = TrieBlob.charactersToCharIndexSequence([...characters], map);
-        const r = TrieBlob.charIndexSequenceToCharacters(seq, charIndex);
-        expect(r.join('')).toBe(characters);
     });
 });
