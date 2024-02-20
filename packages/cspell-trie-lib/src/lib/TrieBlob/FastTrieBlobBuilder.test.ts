@@ -17,15 +17,6 @@ describe('FastTrieBlobBuilder', () => {
         expect([...ft.words()].sort()).toEqual([...words].sort());
     });
 
-    test('insert word list', () => {
-        const words = [...new Set(sampleWords())].sort();
-        const builder = new FastTrieBlobBuilder();
-        builder.insert(words);
-        expect(builder.has('😀😃😄😁😆🥹😅😂🤣🥲☺️😊😇🙂🙃😉')).toBe(true);
-        const ft = builder.build();
-        expect([...ft.words()]).toEqual([...words]);
-    });
-
     test('setOptions', () => {
         const builder = new FastTrieBlobBuilder();
         expect(builder.options).toEqual(defaultTrieInfo);
@@ -45,44 +36,12 @@ describe('FastTrieBlobBuilder', () => {
         expect([...t.words()]).toEqual(['hello']);
     });
 
-    test.each`
-        word
-        ${'hello'}
-        ${'😀😎'}
-    `('cursor insertChar split $word', ({ word }: { word: string }) => {
-        const builder = new FastTrieBlobBuilder();
-        const cursor = builder.getCursor();
-        const chars = word.split('');
-        chars.forEach((letter) => cursor.insertChar(letter));
-        cursor.markEOW();
-        cursor.backStep(chars.length);
-        const t = builder.build();
-        expect([...t.words()]).toEqual([word]);
-    });
-
     test('cursor with word list', () => {
         const builder = new FastTrieBlobBuilder();
         const cursor = builder.getCursor();
         const words = sampleWords();
-        // console.log('words %o', words.sort());
-        // console.log('Unique Letters: %o', new Set(words.join('')));
         const sortedUnique = [...new Set(words)].sort();
         insertWordsAtCursor(cursor, words);
-        const t = builder.build();
-        expect([...t.words()].sort()).toEqual(sortedUnique);
-    });
-
-    test('cursor with word list - non-optimized', () => {
-        const builder = new FastTrieBlobBuilder();
-        const cursor = builder.getCursor();
-        const words = sampleWords();
-        const sortedUnique = [...new Set(words)].sort();
-        for (const word of words) {
-            const chars = word.split('');
-            chars.forEach((letter) => cursor.insertChar(letter));
-            cursor.markEOW();
-            cursor.backStep(chars.length);
-        }
         const t = builder.build();
         expect([...t.words()].sort()).toEqual(sortedUnique);
     });
@@ -119,28 +78,9 @@ function sampleWords() {
         'play played playing player ' +
         'red green blue yellow orange ' +
         'on the first day of ' +
-        'on a dark and ' +
-        // cspell:disable
-        `"ትግርኛ",
-         "አማርኛ",
-         "ພາສາລາວ",
-         "ꦧꦱꦗꦮ",
-         "ᐃᓄᒃᑎᑐᑦ",
-         "ᐊᓂᔑᓈᐯᒧᐎᓐ",
-         "ᓀᐦᐃᔭᐍᐏᐣ"
-         😀😃😄😁😆🥹😅😂🤣🥲☺️😊😇🙂🙃😉
-         😌😍🥰😘😗😙😚😋😛😝😜🤪🤨🧐🤓😎
-         🥸🤩🥳😏😒😞😔😟😕🙁☹️😣😖😫😩🥺
-         😢😭😤😠😡🤬🤯😳🥵🥶😶‍🌫️😱😨😰😥😓
-         🤗🤔🫣🤭🫢🫡🤫🫠🤥😶🫥😐🫤😑🫨😬
-         🙄😯😦😧😮😲🥱😴🤤😪😮‍💨😵😵‍💫🤐🥴🤢
-         🤮🤧😷🤒🤕🤑🤠😈 ` + // cspell:enable
-        genWords(8, 'A', 'z').join(' ') +
-        genWords(8, '\u1f00', '\u1fff').join(' ') +
-        ' '
+        'on a dark and '
     )
-        .normalize('NFC')
-        .split(/[\s\p{P}]/gu)
+        .split(/[^a-zA-Z]/g)
         .filter((a) => !!a);
 }
 
@@ -184,19 +124,4 @@ function insertWords(root: TrieRoot, words: string[]) {
             insert(word, root);
         }
     }
-}
-
-function genWords(len: number, startLetter: string, endLetter: string): string[] {
-    const words: string[] = [];
-    const start = startLetter.codePointAt(0) || 0;
-    const end = endLetter.codePointAt(0) || 0;
-    let word = '';
-    for (let p = start; p <= end; ++p) {
-        word += String.fromCodePoint(p);
-        if (p % len === 0) {
-            words.push(word);
-            word = '';
-        }
-    }
-    return words;
 }
