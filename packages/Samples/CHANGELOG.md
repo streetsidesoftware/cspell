@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 8.4.1 (2024-02-20)
+
+**Note:** Version bump only for package cspell-tools-samples
+
 ## 8.4.0 (2024-02-19)
 
 **Note:** Version bump only for package cspell-tools-samples
