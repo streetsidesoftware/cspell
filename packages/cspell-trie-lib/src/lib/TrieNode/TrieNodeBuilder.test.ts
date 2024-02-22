@@ -18,6 +18,20 @@ describe('TrieNodeBuilder', () => {
         expect([...t.words()]).toEqual(['hello']);
     });
 
+    test('cursor wordToCharacters', () => {
+        const builder = new TrieNodeBuilder();
+        const cursor = builder.getCursor();
+        const words = ['hello', '😀😎'];
+        for (const word of words) {
+            const chars = builder.wordToCharacters(word);
+            chars.forEach((char) => cursor.insertChar(char));
+            cursor.markEOW();
+            cursor.backStep(chars.length);
+        }
+        const t = builder.build();
+        expect([...t.words()]).toEqual(words);
+    });
+
     test('cursor with word list', () => {
         const builder = new TrieNodeBuilder();
         const cursor = builder.getCursor();
