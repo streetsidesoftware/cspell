@@ -21,6 +21,8 @@ export class TrieNodeBuilder implements TrieBuilder<TrieNodeTrie> {
     private _cursor: BuilderCursor | undefined;
     root: TrieRoot = { ...defaultTrieInfo, c: Object.create(null) };
 
+    wordToCharacters = (word: string) => word.split('');
+
     setOptions(options: Readonly<PartialTrieOptions>): Readonly<TrieOptions> {
         const opts = mergeOptionalWithDefaults(options, this.root);
         Object.assign(this.root, opts);

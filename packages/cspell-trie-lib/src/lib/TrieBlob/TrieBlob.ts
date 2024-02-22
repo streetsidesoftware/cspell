@@ -4,6 +4,10 @@ import { findNode } from '../ITrieNode/trie-util.js';
 import type { PartialTrieInfo, TrieInfo } from '../ITrieNode/TrieInfo.js';
 import type { TrieData } from '../TrieData.js';
 import { mergeOptionalWithDefaults } from '../utils/mergeOptionalWithDefaults.js';
+import {
+    NumberSequenceByteDecoderAccumulator,
+    NumberSequenceByteEncoderDecoder,
+} from './NumberSequenceByteDecoderAccumulator.js';
 import { TrieBlobInternals, TrieBlobIRoot } from './TrieBlobIRoot.js';
 
 const NodeHeaderNumChildrenBits = 8;
@@ -42,20 +46,35 @@ export class TrieBlob implements TrieData {
     private _forbidIdx: number | undefined;
     private _size: number | undefined;
     private _iTrieRoot: ITrieNodeRoot | undefined;
+    wordToCharacters: (word: string) => string[];
 
     constructor(
         protected nodes: Uint32Array,
-        protected charIndex: string[],
+        readonly charIndex: readonly string[],
         info: PartialTrieInfo,
     ) {
         this.info = mergeOptionalWithDefaults(info);
+        this.wordToCharacters = (word: string) => [...word];
         this.charToIndexMap = Object.create(null);
+        Object.freeze(this.charIndex);
         for (let i = 0; i < charIndex.length; ++i) {
             const char = charIndex[i];
             this.charToIndexMap[char.normalize('NFC')] = i;
             this.charToIndexMap[char.normalize('NFD')] = i;
         }
         this._forbidIdx = this._lookupNode(0, this.info.forbiddenWordPrefix);
+    }
+
+    private _lookUpCharIndex = (char: string): number => {
+        return this.charToIndexMap[char] || 0;
+    };
+
+    private wordToNodeCharIndexSequence(word: string): number[] {
+        return TrieBlob.charactersToCharIndexSequence(this.wordToCharacters(word), this._lookUpCharIndex);
+    }
+
+    private letterToNodeCharIndexSequence(letter: string): number[] {
+        return TrieBlob.toCharIndexSequence(this._lookUpCharIndex(letter));
     }
 
     has(word: string): boolean {
@@ -93,11 +112,11 @@ export class TrieBlob implements TrieData {
         const NodeMaskChildCharIndex = TrieBlob.NodeMaskChildCharIndex;
         const NodeChildRefShift = TrieBlob.NodeChildRefShift;
         const nodes = this.nodes;
-        const len = word.length;
-        const charToIndexMap = this.charToIndexMap;
+        const wordIndexes = this.wordToNodeCharIndexSequence(word);
+        const len = wordIndexes.length;
         let node = nodes[nodeIdx];
         for (let p = 0; p < len; ++p, node = nodes[nodeIdx]) {
-            const letterIdx = charToIndexMap[word[p]];
+            const letterIdx = wordIndexes[p];
             const count = node & NodeMaskNumChildren;
             let i = count;
             for (; i > 0; --i) {
@@ -112,14 +131,39 @@ export class TrieBlob implements TrieData {
         return (node & TrieBlob.NodeMaskEOW) === TrieBlob.NodeMaskEOW;
     }
 
+    /**
+     * Find the node index for the given character.
+     * @param nodeIdx - node index to start the search
+     * @param char - character to look for
+     * @returns
+     */
     private _lookupNode(nodeIdx: number, char: string): number | undefined {
+        const indexSeq = this.letterToNodeCharIndexSequence(char);
+        const len = indexSeq.length;
+        if (!len) return undefined;
+        let currNodeIdx: number | undefined = nodeIdx;
+        for (let i = 0; i < len; ++i) {
+            currNodeIdx = this._lookupNodeByCharIndexSeq(currNodeIdx, indexSeq[i]);
+            if (currNodeIdx === undefined) {
+                return undefined;
+            }
+        }
+        return currNodeIdx;
+    }
+
+    /**
+     * Find the node index for the given character.
+     * @param nodeIdx - node index to start the search
+     * @param char - character to look for
+     * @returns
+     */
+    private _lookupNodeByCharIndexSeq(nodeIdx: number, index: number): number | undefined {
         const NodeMaskNumChildren = TrieBlob.NodeMaskNumChildren;
         const NodeMaskChildCharIndex = TrieBlob.NodeMaskChildCharIndex;
         const NodeChildRefShift = TrieBlob.NodeChildRefShift;
         const nodes = this.nodes;
-        const charToIndexMap = this.charToIndexMap;
         const node = nodes[nodeIdx];
-        const letterIdx = charToIndexMap[char];
+        const letterIdx = index;
         const count = node & NodeMaskNumChildren;
         let i = count;
         for (; i > 0; --i) {
@@ -129,23 +173,25 @@ export class TrieBlob implements TrieData {
         }
         return undefined;
     }
-
     *words(): Iterable<string> {
         interface StackItem {
             nodeIdx: number;
             pos: number;
             word: string;
+            acc: NumberSequenceByteDecoderAccumulator;
         }
         const NodeMaskNumChildren = TrieBlob.NodeMaskNumChildren;
         const NodeMaskEOW = TrieBlob.NodeMaskEOW;
         const NodeMaskChildCharIndex = TrieBlob.NodeMaskChildCharIndex;
         const NodeChildRefShift = TrieBlob.NodeChildRefShift;
         const nodes = this.nodes;
-        const stack: StackItem[] = [{ nodeIdx: 0, pos: 0, word: '' }];
+        const stack: StackItem[] = [
+            { nodeIdx: 0, pos: 0, word: '', acc: NumberSequenceByteDecoderAccumulator.create() },
+        ];
         let depth = 0;
 
         while (depth >= 0) {
-            const { nodeIdx, pos, word } = stack[depth];
+            const { nodeIdx, pos, word, acc } = stack[depth];
             const node = nodes[nodeIdx];
             // pos is 0 when first entering a node
             if (!pos && node & NodeMaskEOW) {
@@ -158,13 +204,15 @@ export class TrieBlob implements TrieData {
             }
             const nextPos = ++stack[depth].pos;
             const entry = nodes[nodeIdx + nextPos];
-            const charIdx = entry & NodeMaskChildCharIndex;
-            const letter = this.charIndex[charIdx];
+            const nAcc = acc.clone();
+            const charIdx = nAcc.decode(entry & NodeMaskChildCharIndex);
+            const letter = (charIdx && this.charIndex[charIdx]) || '';
             ++depth;
             stack[depth] = {
                 nodeIdx: entry >>> NodeChildRefShift,
                 pos: 0,
                 word: word + letter,
+                acc: nAcc,
             };
         }
     }
@@ -185,15 +233,15 @@ export class TrieBlob implements TrieData {
 
     toJSON() {
         return {
-            charIndex: this.charIndex,
             options: this.info,
-            nodes: splitString(Buffer.from(this.nodes.buffer, 128).toString('base64')),
+            nodes: nodesToJson(this.nodes),
+            charIndex: this.charIndex,
         };
     }
 
     encodeBin(): Uint8Array {
         const charIndex = Buffer.from(this.charIndex.join('\n'));
-        const charIndexLen = (charIndex.byteLength + 3) & ~3;
+        const charIndexLen = (charIndex.byteLength + 3) & ~3; // round up to the nearest 4 byte boundary.
         const nodeOffset = HEADER_SIZE + charIndexLen;
         const size = nodeOffset + this.nodes.length * 4;
         const useLittle = isLittleEndian();
@@ -209,7 +257,8 @@ export class TrieBlob implements TrieData {
         header.setUint32(HEADER.charIndexLen, charIndex.length, useLittle);
         buffer.set(charIndex, HEADER_SIZE);
         buffer.set(nodeData, nodeOffset);
-        // dumpBin(nodeData);
+        // console.log('encodeBin: %o', this.toJSON());
+        // console.log('encodeBin: buf %o nodes %o', buffer, this.nodes);
         return buffer;
     }
 
@@ -233,15 +282,66 @@ export class TrieBlob implements TrieData {
         const charIndex = Buffer.from(blob.subarray(offsetCharIndex, offsetCharIndex + lenCharIndex))
             .toString('utf8')
             .split('\n');
-        const nodes = new Uint32Array(blob.buffer).subarray(offsetNodes / 4, offsetNodes / 4 + lenNodes);
-        return new TrieBlob(nodes, charIndex, defaultTrieInfo);
+        const nodes = new Uint32Array(blob.buffer, offsetNodes, lenNodes);
+        const trieBlob = new TrieBlob(nodes, charIndex, defaultTrieInfo);
+        // console.log('decodeBin: %o', trieBlob.toJSON());
+        return trieBlob;
     }
 
     static NodeMaskEOW = 0x00000100;
     static NodeMaskNumChildren = (1 << NodeHeaderNumChildrenBits) - 1;
     static NodeMaskNumChildrenShift = NodeHeaderNumChildrenShift;
     static NodeChildRefShift = 8;
+    /**
+     * Only 8 bits are reserved for the character index.
+     * The max index is {@link TrieBlob.SpecialCharIndexMask} - 1.
+     * Node chaining is used to reference higher character indexes.
+     * - @see {@link TrieBlob.SpecialCharIndexMask}
+     * - @see {@link TrieBlob.MaxCharIndex}
+     */
     static NodeMaskChildCharIndex = 0x000000ff;
+    /** SpecialCharIndexMask is used to indicate a node chain */
+    static SpecialCharIndexMask = 0xf8;
+    static MaxCharIndex = this.SpecialCharIndexMask - 1;
+    /**
+     * SpecialCharIndex8bit is used to indicate a node chain. Where the final character index is 248 + the index found in the next node.
+     */
+    static SpecialCharIndex8bit = this.SpecialCharIndexMask | 0x01;
+    static SpecialCharIndex16bit = this.SpecialCharIndexMask | 0x02;
+    static SpecialCharIndex24bit = this.SpecialCharIndexMask | 0x03;
+
+    /**
+     * Since it is only possible to store single byte indexes, a multi-byte index is stored as a sequence of indexes chained between nodes.
+     * @param charIndex - character index to convert to a sequence of indexes
+     * @returns encoded index values.
+     */
+    static toCharIndexSequence(charIndex: number): number[] {
+        return NumberSequenceByteEncoderDecoder.encode(charIndex);
+    }
+
+    static fromCharIndexSequence(charIndexes: Iterable<number>): Iterable<number> {
+        return NumberSequenceByteEncoderDecoder.decodeSequence(charIndexes);
+    }
+
+    static charactersToCharIndexSequence(
+        chars: readonly string[],
+        charToIndexMap: Readonly<Record<string, number>> | ((char: string) => number),
+    ): number[] {
+        const fn = typeof charToIndexMap === 'function' ? charToIndexMap : (c: string) => charToIndexMap[c];
+        return chars.map(fn).flatMap((c) => this.toCharIndexSequence(c));
+    }
+
+    static charIndexSequenceToCharacters(
+        charIndexSequence: number[],
+        charIndex: readonly string[] | Readonly<Record<number, string>>,
+    ): readonly string[] {
+        const chars: readonly string[] = [...this.fromCharIndexSequence(charIndexSequence)].map((c) => charIndex[c]);
+        return chars;
+    }
+
+    static nodesView(trie: TrieBlob): Readonly<Uint32Array> {
+        return new Uint32Array(trie.nodes);
+    }
 }
 
 function isLittleEndian(): boolean {
@@ -267,10 +367,34 @@ class ErrorDecodeTrieBlob extends Error {
     }
 }
 
-function splitString(s: string, len = 64): string[] {
-    const splits: string[] = [];
-    for (let i = 0; i < s.length; i += len) {
-        splits.push(s.slice(i, i + len));
+interface NodeElement {
+    id: number;
+    eow: boolean;
+    c: { c: number | string; o: number }[];
+    n: number;
+}
+
+function nodesToJson(nodes: Uint32Array) {
+    function nodeElement(offset: number): NodeElement {
+        const node = nodes[offset];
+        const numChildren = node & TrieBlob.NodeMaskNumChildren;
+        const eow = !!(node & TrieBlob.NodeMaskEOW);
+        const children: { c: number | string; o: number }[] = [];
+        for (let i = 1; i <= numChildren; ++i) {
+            children.push({
+                c: ('00' + (nodes[offset + i] & TrieBlob.NodeMaskChildCharIndex).toString(16)).slice(-2),
+                o: nodes[offset + i] >>> TrieBlob.NodeChildRefShift,
+            });
+        }
+        return { id: offset, eow, n: offset + numChildren + 1, c: children };
     }
-    return splits;
+
+    const elements: NodeElement[] = [];
+    let offset = 0;
+    while (offset < nodes.length) {
+        const e = nodeElement(offset);
+        elements.push(e);
+        offset = e.n;
+    }
+    return elements;
 }

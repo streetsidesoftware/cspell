@@ -1,8 +1,17 @@
+import { promises as fs } from 'node:fs';
+
 import type { DictionaryInformation } from '@cspell/cspell-types';
+import { buildITrieFromWords, type ITrie, parseDictionaryLines } from 'cspell-trie-lib';
 import { describe, expect, test } from 'vitest';
 
 import { createFailedToLoadDictionary, createSpellingDictionary } from './createSpellingDictionary.js';
 import type { SpellingDictionaryOptions } from './SpellingDictionary.js';
+import type { SpellingDictionaryFromTrie } from './SpellingDictionaryFromTrie.js';
+
+const urlPackageRoot = new URL('../../', import.meta.url);
+const urlRepoRoot = new URL('../../', urlPackageRoot);
+const urlTestFixtures = new URL('test-fixtures/', urlRepoRoot);
+const urlTestFixturesIssues = new URL('issues/', urlTestFixtures);
 
 describe('Validate createSpellingDictionary', () => {
     test('createFailedToLoadDictionary', () => {
@@ -77,6 +86,54 @@ describe('Validate createSpellingDictionary', () => {
         const d = createSpellingDictionary(words, 'test create', __filename, options);
         expect(d.suggest(word, { ignoreCase, numSuggestions: 4 })).toEqual(expected);
     });
+});
+
+describe('test-fixtures', () => {
+    function readFixtureFile(name: string | URL): Promise<string> {
+        return fs.readFile(new URL(name, urlTestFixtures), 'utf8');
+    }
+
+    test('issue-5222', async () => {
+        const url = new URL('issue-5222/words.txt', urlTestFixturesIssues);
+        const words = (await readFixtureFile(url))
+            .normalize('NFC')
+            .split('\n')
+            .map((a) => a.trim())
+            .filter((a) => !!a);
+        const dict = createSpellingDictionary(words, 'issue-5222', url.toString(), {});
+        const lines = [...parseDictionaryLines(words)];
+        const bt = buildITrieFromWords(lines);
+        const trie = (dict as SpellingDictionaryFromTrie).trie;
+        for (const line of lines) {
+            expect(line.normalize('NFC')).toBe(line);
+            expect(bt.has(line), `bt to have "${line}"`).toBe(true);
+            expect(trie.has(line), `trie to have "${line}"`).toBe(true);
+        }
+        const setOfWords = new Set(words);
+        for (const word of setOfWords) {
+            expect(trie.has(word), `trie to have "${word}"`).toBe(true);
+        }
+        for (const word of trie.words()) {
+            expect(word.startsWith('~') || setOfWords.has(word), `to have "${word}"`).toBe(true);
+        }
+        expect(trie.size).toBeGreaterThan(0);
+        expect(size(trie)).toBeGreaterThan(0);
+        expect(dict.size).toBeGreaterThan(20);
+    });
+
+    function size(trie: ITrie): number {
+        // walk the trie and get the approximate size.
+        const i = trie.iterate();
+        let deeper = true;
+        let size = 0;
+        for (let r = i.next(); !r.done; r = i.next(deeper)) {
+            // count all nodes even though they are not words.
+            // because we are not going to all the leaves, this should give a good enough approximation.
+            size += 1;
+            deeper = r.value.text.length < 5;
+        }
+        return size;
+    }
 });
 
 function opts(opts: Partial<SpellingDictionaryOptions> = {}): SpellingDictionaryOptions {
