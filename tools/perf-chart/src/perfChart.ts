@@ -1,7 +1,7 @@
 import { promises as fs } from 'node:fs';
 
 import { parse as parseCsv } from 'csv-parse/sync';
-import { histogram } from 'thistogram';
+import { calcStandardDeviation, plotPointRelativeToStandardDeviation, simpleHistogram } from 'thistogram';
 
 interface CsvRecord {
     timestamp: number;
@@ -16,13 +16,6 @@ interface CsvRecord {
     usageSystem: number;
 }
 
-export async function perfChart(csvFile: string | URL): Promise<string> {
-    const limit = changeDate(new Date(), -30).getTime();
-    const records = (await readCsvData(csvFile)).filter((r) => r.platform === 'linux' && r.timestamp >= limit);
-    const data = [...groupBy(records, 'repo')].sort((a, b) => a[0].localeCompare(b[0]));
-    return createGraph(data);
-}
-
 export async function perfReport(csvFile: string | URL): Promise<string> {
     const limit = changeDate(new Date(), -30).getTime();
     const records = (await readCsvData(csvFile)).filter((r) => r.platform === 'linux' && r.timestamp >= limit);
@@ -31,11 +24,6 @@ export async function perfReport(csvFile: string | URL): Promise<string> {
 # Performance Report
 
 ${createPerfTable(data)}
-
-\`\`\`
-${createGraph(data)}
-\`\`\`
-
 
 `;
     return markdown;
@@ -47,51 +35,17 @@ async function readCsvData(csvFile: string | URL): Promise<CsvRecord[]> {
     return records;
 }
 
-function createGraph(data: [string, CsvRecord[]][]): string {
-    const chartData = data.map(
-        ([repo, records]) => [repo, ...extractPointMinMax(records)] as [string, number, number, number],
-    );
-    const allValues = chartData.flatMap(([_, value, min, max]) => [value, min, max]);
-    const minOverallValue = Math.min(...allValues);
-    const maxOverallValue = Math.max(...allValues);
-    const maxDeviation = Math.max(maxOverallValue - 1, 1 - minOverallValue);
-    const chart = histogram(chartData, {
-        width: 100,
-        maxLabelWidth: 30,
-        title: 'Latest Performance by Repo',
-        type: 'point-min-max',
-        headers: ['Repo', 'Rel Val', 'Min', 'Max'],
-        min: 1 - maxDeviation * 1.1,
-        max: 1 + maxDeviation * 1.1,
-        significantDigits: 3,
-    });
-    return chart;
-}
-
-/**
- * Extract data normalized to the median
- * @param data - the perf data.
- * @returns [point, min, max]
- */
-function extractPointMinMax(data: CsvRecord[]): [point: number, min: number, max: number] {
-    const { point, min, max, median } = calcStats(data);
-    return [point / median, min / median, max / median].map((v) => Math.round(v * 1000) / 1000) as [
-        number,
-        number,
-        number,
-    ];
-}
-
 interface CalcStats {
     point: number;
     min: number;
     max: number;
-    median: number;
     sum: number;
     count: number;
+    sd: number;
+    trend: number[];
 }
 
-const emptyStats: CalcStats = { point: 0, min: 0, max: 0, median: 1, sum: 0, count: 0 };
+const emptyStats: CalcStats = { point: 0, min: 0, max: 0, sum: 0, count: 0, sd: 0, trend: [0] };
 
 /**
  * Extract data and calculate min, max, and median
@@ -101,15 +55,14 @@ const emptyStats: CalcStats = { point: 0, min: 0, max: 0, median: 1, sum: 0, cou
  */
 function calcStats(data: CsvRecord[]): CalcStats {
     const values = data.map((d) => d.elapsedMs).map((v) => v || 1);
+    const trend = values.slice(-10);
     const point = values.pop();
     if (point === undefined) return emptyStats;
-    if (values.length === 0) return { point, min: point, max: point, median: point, sum: point, count: 1 };
-    values.sort((a, b) => a - b);
+    if (values.length === 0) return { point, min: point, max: point, sum: point, count: 1, sd: 0, trend };
     const min = Math.min(...values);
     const max = Math.max(...values);
-    const p = (values.length - 1) / 2;
-    const median = (values[Math.floor(p)] + values[Math.ceil(p)]) / 2;
-    return { point, min, max, median, sum: values.reduce((a, b) => a + b, 0), count: values.length };
+    const sd = calcStandardDeviation(values);
+    return { point, min, max, sum: values.reduce((a, b) => a + b, 0), count: values.length, sd, trend };
 }
 
 function groupBy<T, K extends keyof T>(data: T[], key: K): Map<T[K], T[]> {
@@ -129,19 +82,52 @@ function changeDate(date: Date, deltaDays: number): Date {
     return d;
 }
 
+function calcAllStats(data: [string, CsvRecord[]][]): CalcStats[] {
+    return data.map(([_, records]) => calcStats(records));
+}
+
+function p(s: string, n: number): string {
+    return n < 0 ? s.padEnd(-n, ' ') : s.padStart(n, ' ');
+}
+
+// function toFixed(v: number, digits = 4): string {
+//     const n = Math.max(1, Math.ceil(Math.log10(v || 1)));
+//     return v.toFixed(digits - n + 1);
+// }
+// const sf = (v: number, fixed = 3) => toFixed(v / 1000, fixed);
+
 function createPerfTable(data: [string, CsvRecord[]][]): string {
     const s = (v: number, fixed = 3) => (v / 1000).toFixed(fixed);
+    const sp = (v: number, pad = 6, fixed = 2) => p(s(v, fixed), pad);
 
-    const rows = data.map(([repo, records]) => {
-        const { point, min, max, median, sum, count } = calcStats(records);
+    const stats = calcAllStats(data);
+    const maxRelSd = Math.max(...stats.map((s) => (s.sd * s.sum) / s.count));
+
+    const rows = data.map(([repo], i) => {
+        const { point, min, max, sum, count, sd, trend } = stats[i];
         const avg = sum / (count || 1);
-        return `| ${repo} | ${s(point)} | ${((-100 * (point - median)) / (median || 1)).toFixed(2)}% | ${s(min)} | ${s(max)} | ${s(median)} | ${s(avg)} | ${count} |`;
+        const relSd = (sd * sum) / count;
+        const sdGraph = sd
+            ? plotPointRelativeToStandardDeviation(
+                  point,
+                  sd,
+                  avg,
+                  21,
+                  Math.max(2.5 + Math.log(maxRelSd / relSd) / 6, Math.abs(point - avg) / sd),
+              )
+            : '';
+        const trendGraph = simpleHistogram(trend, min * 0.9);
+        const relChange = ((100 * (point - avg)) / (avg || 1)).toFixed(2) + '%';
+        return `| ${repo.padEnd(36)} | ${p(s(point), 7)} | ${p(relChange, 6)} | \`${sp(min)}/${sp(avg)}/${sp(max)}\` | ${sp(sd, 5)} | \`${trendGraph}\` | \`${sdGraph}\` | ${count} |`;
     });
     return `
-| Rep | Elapsed | Delta | Min | Max | Median | Avg | Count |
-| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| Repository | Elapsed | Rel   | Min/Avg/Max | SD  | Trend | SD Graph | Count |
+| ---------- | ------: | ----: | ----------- | --: | ----- | -------- | ----: |
 ${rows.join('\n')}
 
-Note: the stats do not include the last value.
+Note:
+- Elapsed time is in seconds. The trend graph shows the last 10 runs.
+  The SD graph shows the current run relative to the average and standard deviation.
+- Rel is the relative change from the average.
 `;
 }

@@ -4214,7 +4214,7 @@ var parse = function(data, opts = {}) {
   return records;
 };
 
-// ../../node_modules/.pnpm/thistogram@1.0.1/node_modules/thistogram/dist/index.js
+// ../../node_modules/.pnpm/thistogram@1.1.1/node_modules/thistogram/dist/drawingCharacters.js
 var BoxSymbol;
 (function(BoxSymbol2) {
   BoxSymbol2[BoxSymbol2["topLeft"] = 0] = "topLeft";
@@ -4229,119 +4229,73 @@ var BoxSymbol;
   BoxSymbol2[BoxSymbol2["topT"] = 9] = "topT";
   BoxSymbol2[BoxSymbol2["cross"] = 10] = "cross";
 })(BoxSymbol || (BoxSymbol = {}));
-var histoChars = ["\u258F", "\u258E", "\u258D", "\u258C", "\u258B", "\u258A", "\u2589", "\u2588"];
 var boxSymbols = ["\u250F", "\u2513", "\u251B", "\u2517", "\u2503", "\u2501", "\u2523", "\u252B", "\u253B", "\u2533", "\u254B"];
-var defaultDrawOptions = {
-  boxSymbols,
-  histoChars
+var histoCharsBottomToTop = ["\u2581", "\u2582", "\u2583", "\u2584", "\u2585", "\u2586", "\u2587", "\u2588"];
+
+// ../../node_modules/.pnpm/thistogram@1.1.1/node_modules/thistogram/dist/bars.js
+function simpleHistogram(data, min, max, barChars = histoCharsBottomToTop) {
+  const [minVal, maxVal] = minMaxRange(data, min, max);
+  const range = maxVal - minVal || 1;
+  const lenBarChars = barChars.length;
+  const scale = lenBarChars / range;
+  const scaled = data.map((v) => Math.ceil((Math.min(v, maxVal) - minVal) * scale));
+  return scaled.map((v) => v > 0 ? barChars[v - 1] : " ").join("");
+}
+var stPlotChars = {
+  left2: boxSymbols[BoxSymbol.leftT],
+  left1: boxSymbols[BoxSymbol.bottomT],
+  middle: boxSymbols[BoxSymbol.horizontal],
+  center: boxSymbols[BoxSymbol.cross],
+  right1: boxSymbols[BoxSymbol.bottomT],
+  right2: boxSymbols[BoxSymbol.rightT],
+  point: "\u25CF"
 };
-function histogram(data, options) {
-  const { width = 80, maxLabelWidth: maxColumnWidth = Math.floor(width * 0.1), drawOptions: drawOptionsParam = defaultDrawOptions, title = "", min, max, showValues = true, significantDigits, type: chartType = "bar", headers } = { ...options };
-  const { boxSymbols: boxSymbols2 = defaultDrawOptions.boxSymbols, histoChars: histoChars2 = defaultDrawOptions.histoChars } = {
-    ...drawOptionsParam
-  };
-  const showMinMax = chartType === "point-min-max" && showValues;
-  const [headerLabel = "", headerValue = "Val", headerMin = showMinMax && "Min" || "", headerMax = showMinMax && "Max" || ""] = headers ?? ["", "", "", ""];
-  const verticalBar = boxSymbols2[BoxSymbol.vertical];
-  const horizontalBar = boxSymbols2[BoxSymbol.horizontal];
-  const crossBar = boxSymbols2[BoxSymbol.cross];
-  const values = data.map(([, value]) => value);
-  const labels = data.map(([label]) => String(label));
-  const needMinMaxValues = chartType === "point-min-max";
-  const minValues = needMinMaxValues ? data.map(([, , min2]) => min2).filter((v) => v !== void 0) : [];
-  const maxValues = needMinMaxValues ? data.map(([, , , max2]) => max2).filter((v) => v !== void 0) : [];
-  const allValues = [...values, ...minValues, ...maxValues];
-  const maxGraphValue = max ?? Math.max(...allValues);
-  const minGraphValue = min ?? Math.min(0, ...allValues);
-  const range = maxGraphValue - minGraphValue || 1;
-  const valueToString = (value) => value === void 0 ? "" : significantDigits !== void 0 ? value.toFixed(significantDigits) : value.toString();
-  const valuesToString = (values2) => values2.map(valueToString);
-  const calcColLabelLength = (label, values2) => Math.min(Math.max(sLen(label), ...values2.map(sLen)), maxColumnWidth);
-  const colWidthLabel = calcColLabelLength(headerLabel, labels);
-  const colWidthMin = calcColLabelLength(headerMin, valuesToString(minValues));
-  const colWidthMax = calcColLabelLength(headerMax, valuesToString(maxValues));
-  const colWidthValue = calcColLabelLength(headerValue, valuesToString(values));
-  const colWidths = [colWidthLabel, colWidthValue, colWidthMin, colWidthMax].filter((v) => v > 0);
-  const maxBarWidth = width - colWidths.reduce((a, b) => a + b, 0) - colWidths.length * 3 + 2;
-  const barValue = (value) => (Math.max(Math.min(value, maxGraphValue), minGraphValue) - minGraphValue) / range;
-  const colSep = ` ${verticalBar} `;
-  const headerSep = `${horizontalBar}${crossBar}${horizontalBar}`;
-  const lines = data.map(([label, value, minVal, maxVal]) => {
-    const labelValue = formatColValue(String(label), colWidthLabel, false);
-    const graphLine = chartType === "bar" ? bar(barValue(value), maxBarWidth, " ", histoChars2) : chartType === "point" ? point(barValue(value), maxBarWidth, " ") : chartType === "point-min-max" ? pointMinMax(barValue(value), minVal !== void 0 ? barValue(minVal) : void 0, maxVal !== void 0 ? barValue(maxVal) : void 0, maxBarWidth, " ") : "";
-    const cols = [
-      formatColValue(valueToString(value), colWidthValue, true),
-      formatColValue(valueToString(minVal), colWidthMin, true),
-      formatColValue(valueToString(maxVal), colWidthMax, true)
-    ].filter((v) => !!v);
-    return `${labelValue} ${verticalBar}${graphLine}${verticalBar} ${cols.join(colSep)}`;
-  });
-  function formatHeader() {
-    if (!headers)
-      return "";
-    const label = formatColValue(headerLabel, colWidthLabel, false);
-    const cols = [
-      formatColValue(headerValue, colWidthValue, true),
-      formatColValue(headerMin, colWidthMin, true),
-      formatColValue(headerMax, colWidthMax, true)
-    ].filter((v) => !!v);
-    return `${label} ${verticalBar}${" ".repeat(maxBarWidth)}${verticalBar} ${cols.join(colSep)}
-${horizontalBar.repeat(colWidthLabel + 1)}${crossBar}${horizontalBar.repeat(maxBarWidth)}${crossBar}${horizontalBar}${cols.map((s) => horizontalBar.repeat(sLen(s))).join(headerSep)}
-`;
+function plotPointRelativeToStandardDeviation(point, sd, mean, width, range = 2.5) {
+  const plot = " ".repeat(width).split("");
+  const scale = width / (2 * range * sd);
+  const diff = point - mean;
+  const mid = width >> 1;
+  const f = (v) => Math.min(Math.max(0, Math.floor(v * scale + mid + 0.5)), width - 1);
+  const leftMost = f(-2 * sd);
+  const rightMost = f(2 * sd);
+  for (let i = leftMost; i <= rightMost; i++) {
+    plot[i] = stPlotChars.middle;
   }
-  const titleLine = title ? `${title}
-` : "";
-  const headerLines = formatHeader();
-  const table = `${titleLine}${headerLines}${lines.join("\n")}`;
-  return table;
+  plot[mid] = stPlotChars.center;
+  plot[f(-sd)] = stPlotChars.left1;
+  plot[f(sd)] = stPlotChars.right1;
+  plot[leftMost] = stPlotChars.left2;
+  plot[rightMost] = stPlotChars.right2;
+  plot[f(diff)] = stPlotChars.point;
+  return plot.join("");
 }
-function bar(value, width, padding = " ", histo = histoChars) {
-  value = Math.max(Math.min(value, 1), 0);
-  const histoFractions = histo.length;
-  const barWidth = Math.floor(value * histoFractions * width);
-  const fullChar = histo[histoFractions - 1];
-  if (barWidth === 0)
-    return histo[0].padEnd(width, padding);
-  const rep = barWidth / histoFractions;
-  const fraction = barWidth % histoFractions;
-  return (fullChar.repeat(rep) + (fraction ? histo[fraction - 1] : "")).padEnd(width, padding);
+function minMaxRange(values, min, max) {
+  const minVal = min ?? Math.min(...values);
+  const maxVal = max ?? Math.max(...values);
+  const adj = (maxVal - minVal) * 0.05;
+  const r = [min ?? minVal - adj, max ?? maxVal + adj];
+  return r;
 }
-function point(value, width, padding = " ", pointChar = "\u25CF") {
-  const n = calc(value, width);
-  return pointChar.padStart(n, padding).padEnd(width, padding);
+
+// ../../node_modules/.pnpm/thistogram@1.1.1/node_modules/thistogram/dist/histogram.js
+var valueMinMaxSymbols = [
+  "\u25CF",
+  boxSymbols[BoxSymbol.leftT],
+  boxSymbols[BoxSymbol.horizontal],
+  boxSymbols[BoxSymbol.rightT]
+];
+
+// ../../node_modules/.pnpm/thistogram@1.1.1/node_modules/thistogram/dist/stats.js
+function calcStandardDeviation(values) {
+  const variance = calcVariance(values);
+  return Math.sqrt(variance);
 }
-function minMaxCap(value, min = 0, max = 1) {
-  return Math.max(Math.min(value, max), min);
+function calcMean(values) {
+  return values.reduce((a, b) => a + b, 0) / values.length;
 }
-function calc(value, width) {
-  const v = minMaxCap(value);
-  return Math.floor(v * (width - 1) + 0.5);
-}
-var valueMinMaxSymbols = ["\u25CF", "\u2523", "\u2501", "\u252B"];
-function pointMinMax(value, minVal, maxVal, width, padding = " ", symbols = valueMinMaxSymbols) {
-  const line = [...padding.repeat(width)];
-  const val = calc(value, width);
-  const min = calc(minVal ?? value, width);
-  const max = calc(maxVal ?? value, width);
-  line[min] = symbols[1];
-  line[max] = symbols[3];
-  for (let i = min + 1; i < max; i++) {
-    line[i] = symbols[2];
-  }
-  line[val] = symbols[0];
-  return line.join("");
-}
-function sLen(s) {
-  if (s === void 0)
-    return 0;
-  return [...s].length;
-}
-function sliceStr(s, start, end) {
-  return [...s].slice(start, end).join("");
-}
-function formatColValue(s, width, padStart, padding = " ") {
-  const ss = sliceStr(s, 0, width);
-  return padStart ? ss.padStart(width, padding) : ss.padEnd(width, padding);
+function calcVariance(values, mean) {
+  const avg = mean ?? calcMean(values);
+  return values.reduce((a, b) => a + Math.pow(b - avg, 2), 0) / values.length;
 }
 
 // src/perfChart.ts
@@ -4353,11 +4307,6 @@ async function perfReport(csvFile) {
 
 ${createPerfTable(data)}
 
-\`\`\`
-${createGraph(data)}
-\`\`\`
-
-
 `;
   return markdown;
 }
@@ -4366,44 +4315,19 @@ async function readCsvData(csvFile) {
   const records = parse(csv, { columns: true, cast: true });
   return records;
 }
-function createGraph(data) {
-  const chartData = data.map(
-    ([repo, records]) => [repo, ...extractPointMinMax(records)]
-  );
-  const allValues = chartData.flatMap(([_, value, min, max]) => [value, min, max]);
-  const minOverallValue = Math.min(...allValues);
-  const maxOverallValue = Math.max(...allValues);
-  const maxDeviation = Math.max(maxOverallValue - 1, 1 - minOverallValue);
-  const chart = histogram(chartData, {
-    width: 100,
-    maxLabelWidth: 30,
-    title: "Latest Performance by Repo",
-    type: "point-min-max",
-    headers: ["Repo", "Rel Val", "Min", "Max"],
-    min: 1 - maxDeviation * 1.1,
-    max: 1 + maxDeviation * 1.1,
-    significantDigits: 3
-  });
-  return chart;
-}
-function extractPointMinMax(data) {
-  const { point: point2, min, max, median } = calcStats(data);
-  return [point2 / median, min / median, max / median].map((v) => Math.round(v * 1e3) / 1e3);
-}
-var emptyStats = { point: 0, min: 0, max: 0, median: 1, sum: 0, count: 0 };
+var emptyStats = { point: 0, min: 0, max: 0, sum: 0, count: 0, sd: 0, trend: [0] };
 function calcStats(data) {
   const values = data.map((d) => d.elapsedMs).map((v) => v || 1);
-  const point2 = values.pop();
-  if (point2 === void 0)
+  const trend = values.slice(-10);
+  const point = values.pop();
+  if (point === void 0)
     return emptyStats;
   if (values.length === 0)
-    return { point: point2, min: point2, max: point2, median: point2, sum: point2, count: 1 };
-  values.sort((a, b) => a - b);
+    return { point, min: point, max: point, sum: point, count: 1, sd: 0, trend };
   const min = Math.min(...values);
   const max = Math.max(...values);
-  const p = (values.length - 1) / 2;
-  const median = (values[Math.floor(p)] + values[Math.ceil(p)]) / 2;
-  return { point: point2, min, max, median, sum: values.reduce((a, b) => a + b, 0), count: values.length };
+  const sd = calcStandardDeviation(values);
+  return { point, min, max, sum: values.reduce((a, b) => a + b, 0), count: values.length, sd, trend };
 }
 function groupBy(data, key) {
   const map = /* @__PURE__ */ new Map();
@@ -4420,19 +4344,41 @@ function changeDate(date, deltaDays) {
   d.setUTCDate(d.getUTCDate() + deltaDays);
   return d;
 }
+function calcAllStats(data) {
+  return data.map(([_, records]) => calcStats(records));
+}
+function p(s, n) {
+  return n < 0 ? s.padEnd(-n, " ") : s.padStart(n, " ");
+}
 function createPerfTable(data) {
   const s = (v, fixed = 3) => (v / 1e3).toFixed(fixed);
-  const rows = data.map(([repo, records]) => {
-    const { point: point2, min, max, median, sum, count } = calcStats(records);
+  const sp = (v, pad = 6, fixed = 2) => p(s(v, fixed), pad);
+  const stats = calcAllStats(data);
+  const maxRelSd = Math.max(...stats.map((s2) => s2.sd * s2.sum / s2.count));
+  const rows = data.map(([repo], i) => {
+    const { point, min, max, sum, count, sd, trend } = stats[i];
     const avg = sum / (count || 1);
-    return `| ${repo} | ${s(point2)} | ${(-100 * (point2 - median) / (median || 1)).toFixed(2)}% | ${s(min)} | ${s(max)} | ${s(median)} | ${s(avg)} | ${count} |`;
+    const relSd = sd * sum / count;
+    const sdGraph = sd ? plotPointRelativeToStandardDeviation(
+      point,
+      sd,
+      avg,
+      21,
+      Math.max(2.5 + Math.log(maxRelSd / relSd) / 6, Math.abs(point - avg) / sd)
+    ) : "";
+    const trendGraph = simpleHistogram(trend, min * 0.9);
+    const relChange = (100 * (point - avg) / (avg || 1)).toFixed(2) + "%";
+    return `| ${repo.padEnd(36)} | ${p(s(point), 7)} | ${p(relChange, 6)} | \`${sp(min)}/${sp(avg)}/${sp(max)}\` | ${sp(sd, 5)} | \`${trendGraph}\` | \`${sdGraph}\` | ${count} |`;
   });
   return `
-| Rep | Elapsed | Delta | Min | Max | Median | Avg | Count |
-| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| Repository | Elapsed | Rel   | Min/Avg/Max | SD  | Trend | SD Graph | Count |
+| ---------- | ------: | ----: | ----------- | --: | ----- | -------- | ----: |
 ${rows.join("\n")}
 
-Note: the stats do not include the last value.
+Note:
+- Elapsed time is in seconds. The trend graph shows the last 10 runs.
+  The SD graph shows the current run relative to the average and standard deviation.
+- Rel is the relative change from the average.
 `;
 }
 
