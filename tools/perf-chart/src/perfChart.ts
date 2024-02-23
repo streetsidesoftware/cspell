@@ -23,7 +23,9 @@ export async function perfReport(csvFile: string | URL): Promise<string> {
     const markdown = `\
 # Performance Report
 
-${createPerfTable(data)}
+${createPerfTable1(data)}
+
+${createPerfTable2(data)}
 
 `;
     return markdown;
@@ -55,7 +57,7 @@ const emptyStats: CalcStats = { point: 0, min: 0, max: 0, sum: 0, count: 0, sd: 
  */
 function calcStats(data: CsvRecord[]): CalcStats {
     const values = data.map((d) => d.elapsedMs).map((v) => v || 1);
-    const trend = values.slice(-10);
+    const trend = values.slice(-40);
     const point = values.pop();
     if (point === undefined) return emptyStats;
     if (values.length === 0) return { point, min: point, max: point, sum: point, count: 1, sd: 0, trend };
@@ -90,21 +92,22 @@ function p(s: string, n: number): string {
     return n < 0 ? s.padEnd(-n, ' ') : s.padStart(n, ' ');
 }
 
+const s = (v: number, fixed = 3) => (v / 1000).toFixed(fixed);
+
 // function toFixed(v: number, digits = 4): string {
 //     const n = Math.max(1, Math.ceil(Math.log10(v || 1)));
 //     return v.toFixed(digits - n + 1);
 // }
 // const sf = (v: number, fixed = 3) => toFixed(v / 1000, fixed);
 
-function createPerfTable(data: [string, CsvRecord[]][]): string {
-    const s = (v: number, fixed = 3) => (v / 1000).toFixed(fixed);
+function createPerfTable1(data: [string, CsvRecord[]][]): string {
     const sp = (v: number, pad = 6, fixed = 2) => p(s(v, fixed), pad);
 
     const stats = calcAllStats(data);
     const maxRelSd = Math.max(...stats.map((s) => (s.sd * s.sum) / s.count));
 
     const rows = data.map(([repo], i) => {
-        const { point, min, max, sum, count, sd, trend } = stats[i];
+        const { point, min, max, sum, count, sd } = stats[i];
         const avg = sum / (count || 1);
         const relSd = (sd * sum) / count;
         const sdGraph = sd
@@ -116,13 +119,29 @@ function createPerfTable(data: [string, CsvRecord[]][]): string {
                   Math.max(2.5 + Math.log(maxRelSd / relSd) / 6, Math.abs(point - avg) / sd),
               )
             : '';
-        const trendGraph = simpleHistogram(trend, min * 0.9);
         const relChange = ((100 * (point - avg)) / (avg || 1)).toFixed(2) + '%';
-        return `| ${repo.padEnd(36)} | ${p(s(point), 7)} | ${p(relChange, 6)} | ${sp(min)} / ${sp(avg)} / ${sp(max)} | ${sp(sd, 5)} | \`${trendGraph}\` | \`${sdGraph}\` | ${count} |`;
+        return `| ${repo.padEnd(36)} | ${p(s(point), 7)} | ${p(relChange, 6)} | ${sp(min)} / ${sp(avg)} / ${sp(max)} | ${sp(sd, 5)} | \`${sdGraph}\` |`;
     });
+
     return `
-| Repository | Elapsed | Rel   | Min/Avg/Max | SD  | Trend | SD Graph | Count |
-| ---------- | ------: | ----: | ----------- | --: | ----- | -------- | ----: |
+| Repository | Elapsed | Rel   | Min/Avg/Max | SD  | SD Graph  |
+| ---------- | ------: | ----: | ----------- | --: | --------  |
+${rows.join('\n')}
+`;
+}
+
+function createPerfTable2(data: [string, CsvRecord[]][]): string {
+    const stats = calcAllStats(data);
+
+    const rows = data.map(([repo], i) => {
+        const { count, trend, point } = stats[i];
+        const trendGraph = simpleHistogram(trend);
+        return `| ${repo.padEnd(36)} | ${p(s(point), 7)} | \`${trendGraph}\` | ${count} |`;
+    });
+
+    return `
+| Repository | Elapsed | Trend | Count |
+| ---------- | ------: | ----- | ----: |
 ${rows.join('\n')}
 
 Note:

@@ -2493,9 +2493,9 @@ Expecting one of '${allowedValues.join("', '")}'`);
         if (this._allowExcessArguments)
           return;
         const expected = this.registeredArguments.length;
-        const s = expected === 1 ? "" : "s";
+        const s2 = expected === 1 ? "" : "s";
         const forSubcommand = this.parent ? ` for '${this.name()}'` : "";
-        const message = `error: too many arguments${forSubcommand}. Expected ${expected} argument${s} but got ${receivedArgs.length}.`;
+        const message = `error: too many arguments${forSubcommand}. Expected ${expected} argument${s2} but got ${receivedArgs.length}.`;
         this.error(message, { code: "commander.excessArguments" });
       }
       /**
@@ -4305,7 +4305,9 @@ async function perfReport(csvFile) {
   const data = [...groupBy(records, "repo")].sort((a, b) => a[0].localeCompare(b[0]));
   const markdown = `# Performance Report
 
-${createPerfTable(data)}
+${createPerfTable1(data)}
+
+${createPerfTable2(data)}
 
 `;
   return markdown;
@@ -4318,7 +4320,7 @@ async function readCsvData(csvFile) {
 var emptyStats = { point: 0, min: 0, max: 0, sum: 0, count: 0, sd: 0, trend: [0] };
 function calcStats(data) {
   const values = data.map((d) => d.elapsedMs).map((v) => v || 1);
-  const trend = values.slice(-10);
+  const trend = values.slice(-40);
   const point = values.pop();
   if (point === void 0)
     return emptyStats;
@@ -4347,16 +4349,16 @@ function changeDate(date, deltaDays) {
 function calcAllStats(data) {
   return data.map(([_, records]) => calcStats(records));
 }
-function p(s, n) {
-  return n < 0 ? s.padEnd(-n, " ") : s.padStart(n, " ");
+function p(s2, n) {
+  return n < 0 ? s2.padEnd(-n, " ") : s2.padStart(n, " ");
 }
-function createPerfTable(data) {
-  const s = (v, fixed = 3) => (v / 1e3).toFixed(fixed);
+var s = (v, fixed = 3) => (v / 1e3).toFixed(fixed);
+function createPerfTable1(data) {
   const sp = (v, pad = 6, fixed = 2) => p(s(v, fixed), pad);
   const stats = calcAllStats(data);
   const maxRelSd = Math.max(...stats.map((s2) => s2.sd * s2.sum / s2.count));
   const rows = data.map(([repo], i) => {
-    const { point, min, max, sum, count, sd, trend } = stats[i];
+    const { point, min, max, sum, count, sd } = stats[i];
     const avg = sum / (count || 1);
     const relSd = sd * sum / count;
     const sdGraph = sd ? plotPointRelativeToStandardDeviation(
@@ -4366,13 +4368,25 @@ function createPerfTable(data) {
       21,
       Math.max(2.5 + Math.log(maxRelSd / relSd) / 6, Math.abs(point - avg) / sd)
     ) : "";
-    const trendGraph = simpleHistogram(trend, min * 0.9);
     const relChange = (100 * (point - avg) / (avg || 1)).toFixed(2) + "%";
-    return `| ${repo.padEnd(36)} | ${p(s(point), 7)} | ${p(relChange, 6)} | ${sp(min)} / ${sp(avg)} / ${sp(max)} | ${sp(sd, 5)} | \`${trendGraph}\` | \`${sdGraph}\` | ${count} |`;
+    return `| ${repo.padEnd(36)} | ${p(s(point), 7)} | ${p(relChange, 6)} | ${sp(min)} / ${sp(avg)} / ${sp(max)} | ${sp(sd, 5)} | \`${sdGraph}\` |`;
   });
   return `
-| Repository | Elapsed | Rel   | Min/Avg/Max | SD  | Trend | SD Graph | Count |
-| ---------- | ------: | ----: | ----------- | --: | ----- | -------- | ----: |
+| Repository | Elapsed | Rel   | Min/Avg/Max | SD  | SD Graph  |
+| ---------- | ------: | ----: | ----------- | --: | --------  |
+${rows.join("\n")}
+`;
+}
+function createPerfTable2(data) {
+  const stats = calcAllStats(data);
+  const rows = data.map(([repo], i) => {
+    const { count, trend, point } = stats[i];
+    const trendGraph = simpleHistogram(trend);
+    return `| ${repo.padEnd(36)} | ${p(s(point), 7)} | \`${trendGraph}\` | ${count} |`;
+  });
+  return `
+| Repository | Elapsed | Trend | Count |
+| ---------- | ------: | ----- | ----: |
 ${rows.join("\n")}
 
 Note:
