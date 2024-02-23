@@ -118,7 +118,7 @@ function createPerfTable(data: [string, CsvRecord[]][]): string {
             : '';
         const trendGraph = simpleHistogram(trend, min * 0.9);
         const relChange = ((100 * (point - avg)) / (avg || 1)).toFixed(2) + '%';
-        return `| ${repo.padEnd(36)} | ${p(s(point), 7)} | ${p(relChange, 6)} | \`${sp(min)}/${sp(avg)}/${sp(max)}\` | ${sp(sd, 5)} | \`${trendGraph}\` | \`${sdGraph}\` | ${count} |`;
+        return `| ${repo.padEnd(36)} | ${p(s(point), 7)} | ${p(relChange, 6)} | ${sp(min)} / ${sp(avg)} / ${sp(max)} | ${sp(sd, 5)} | \`${trendGraph}\` | \`${sdGraph}\` | ${count} |`;
     });
     return `
 | Repository | Elapsed | Rel   | Min/Avg/Max | SD  | Trend | SD Graph | Count |
