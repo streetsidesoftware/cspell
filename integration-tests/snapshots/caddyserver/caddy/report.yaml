@@ -3,9 +3,9 @@ Repository: caddyserver/caddy
 Url: https://github.com/caddyserver/caddy.git
 Args: '["**/*.go"]'
 Summary:
-  files: 253
-  filesWithIssues: 234
-  issues: 3820
+  files: 256
+  filesWithIssues: 237
+  issues: 3860
   errors: 0
 Errors: []
 
@@ -44,7 +44,7 @@ issues:
   - "caddyconfig/caddyfile/formatter_test.go:315:18      redir           U       input: `redir / /some/#/path`,"
   - "caddyconfig/caddyfile/formatter_test.go:330:18      matthewpi       U       description: \"matthewpi/vscode-caddyfile-support"
   - "caddyconfig/caddyfile/formatter_test.go:332:10      ACMEEMAIL       U       email {$ACMEEMAIL}"
-  - "caddyconfig/caddyfile/formatter.go:292:8        Caddyfiles      U       // ...Caddyfiles should, however, end"
+  - "caddyconfig/caddyfile/formatter.go:296:8        Caddyfiles      U       // ...Caddyfiles should, however, end"
   - "caddyconfig/caddyfile/lexer_test.go:404:24      Aheredoc    U       input: []byte(\"\\u000Aheredoc \\u003C\\u003C\\u0073\\u"
   - "caddyconfig/caddyfile/lexer.go:351:6        heredocs        U       // heredocs have an extra linebreak"
   - "caddyconfig/caddyfile/lexer.go:351:29       linebreak       U       heredocs have an extra linebreak because the opening"
@@ -103,10 +103,10 @@ issues:
   - "caddytest/caddytest.go:292:36       certificatename     U       convention to replace /[certificatename].[crt|key] with the"
   - "caddytest/caddytest.go:324:67       nolint              U       InsecureSkipVerify: true}, //nolint:gosec"
   - "caddytest/caddytest.go:324:74       gosec               U       reSkipVerify: true}, //nolint:gosec"
-  - "caddytest/integration/acme_test.go:22:2         smallstepacme       U       smallstepacme \"github.com/smallstep"
-  - "caddytest/integration/acme_test.go:22:28        smallstep           U       smallstepacme \"github.com/smallstep/certificates/acme\""
-  - "caddytest/integration/acme_test.go:51:2         datadir             U       datadir := caddy.AppDataDir"
+  - "caddytest/integration/acme_test.go:18:2         smallstepacme       U       smallstepacme \"github.com/smallstep"
+  - "caddytest/integration/acme_test.go:18:28        smallstep           U       smallstepacme \"github.com/smallstep/certificates/acme\""
   - "caddytest/integration/autohttps_test.go:20:11       Yahaha      U       respond \"Yahaha! You found me!\""
+  - "caddytest/integration/caddyfile_adapt_test.go:14:46         testmocks       U       caddyserver/caddy/v2/internal/testmocks\""
   - "caddytest/integration/caddyfile_test.go:78:11       clientname              U       Name: \"clientname\","
   - "caddytest/integration/caddyfile_test.go:150:43      someinvalidprefix       U       unsupported URL scheme someinvalidprefix://\","
   - "caddytest/integration/caddyfile_test.go:550:10      internalerr             U       error /internalerr* \"Internal Server Error"
@@ -292,7 +292,7 @@ issues:
   - "modules/caddyhttp/reverseproxy/reverseproxy.go:762:31       backported      U       Forward 1xx status codes, backported from https://github"
   - "modules/caddyhttp/reverseproxy/reverseproxy.go:1341:56      libcurl         U       standard but still sent by libcurl and rejected by e.g"
   - "modules/caddyhttp/reverseproxy/selectionpolicies_test.go:123:45         availablity (availability)      U       select first host on availablity.\")"
-  - "modules/caddyhttp/reverseproxy/selectionpolicies.go:793:65      hashable    U       from pool based on a hashable string s."
+  - "modules/caddyhttp/reverseproxy/selectionpolicies.go:803:65      hashable    U       from pool based on a hashable string s."
   - "modules/caddyhttp/reverseproxy/streaming.go:83:22       cancelation     U       // Ensure that the cancelation of a request closes"
   - "modules/caddyhttp/reverseproxy/streaming.go:127:6       timeoutc        U       var timeoutc <-chan time.Time"
   - "modules/caddyhttp/reverseproxy/streaming.go:134:2       errc            U       errc := make(chan error,"
@@ -347,8 +347,8 @@ issues:
   - "modules/caddyhttp/tracing/tracer.go:14:2        semconv             U       semconv \"go.opentelemetry.io"
   - "modules/caddypki/acmeserver/acmeserver.go:15:9          acmeserver      U       package acmeserver"
   - "modules/caddypki/acmeserver/acmeserver.go:32:55         nosql           U       certificates/acme/db/nosql\""
-  - "modules/caddypki/acmeserver/acmeserver.go:167:35        Smallstep       U       Challenges: ash.Challenges.toSmallstepType(),"
-  - "modules/caddypki/acmeserver/acmeserver.go:260:17        bbolt           U       Type: \"bbolt\","
+  - "modules/caddypki/acmeserver/acmeserver.go:170:35        Smallstep       U       Challenges: ash.Challenges.toSmallstepType(),"
+  - "modules/caddypki/acmeserver/acmeserver.go:266:17        bbolt           U       Type: \"bbolt\","
   - "modules/caddypki/acmeserver/challenges.go:31:51         normaliztion    U       and lowercase it for normaliztion. The"
   - "modules/caddypki/ca.go:31:24        truststore      U       github.com/smallstep/truststore\""
   - "modules/caddypki/certificates.go:22:21          keyutil     U       \"go.step.sm/crypto/keyutil\""
@@ -430,9 +430,10 @@ issues:
   - "modules/caddytls/connpolicy.go:285:17       ACMETLS             U       if a == acmez.ACMETLS1Protocol {"
   - "modules/caddytls/connpolicy.go:326:11       destructable        U       return destructableWriter{w}, err"
   - "modules/caddytls/connpolicy.go:465:4        ders                U       ders, err := convertPEMFilesToDER"
-  - "modules/caddytls/connpolicy.go:535:7        clientauth          U       func (clientauth *ClientAuthentication"
-  - "modules/caddytls/connpolicy.go:586:46       clientauth's        U       sets up cfg to enforce clientauth's configuration."
-  - "modules/caddytls/connpolicy.go:731:33       unmarshalable       U       PublicKeyAlgorithm is a JSON-unmarshalable wrapper type."
+  - "modules/caddytls/connpolicy.go:511:56       Certificat          U       not a caddytls.ClientCertificatVerifier\", modID)"
+  - "modules/caddytls/connpolicy.go:552:7        clientauth          U       func (clientauth *ClientAuthentication"
+  - "modules/caddytls/connpolicy.go:603:46       clientauth's        U       sets up cfg to enforce clientauth's configuration."
+  - "modules/caddytls/connpolicy.go:748:33       unmarshalable       U       PublicKeyAlgorithm is a JSON-unmarshalable wrapper type."
   - "modules/caddytls/distributedstek/distributedstek.go:15:12       distributedstek     U       // Package distributedstek provides TLS session"
   - "modules/caddytls/distributedstek/distributedstek.go:46:38       STEK                U       implements a distributed STEK provider. This"
   - "modules/caddytls/distributedstek/distributedstek.go:57:2        stek                U       stekConfig *caddytls.SessionTicket"
