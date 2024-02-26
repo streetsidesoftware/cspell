@@ -3,7 +3,7 @@ Repository: django/django
 Url: "https://github.com/django/django.git"
 Args: ["**/*.{md,py}"]
 Lines:
- CSpell: Files checked: 2776, Issues found: 8147 in 924 files
+ CSpell: Files checked: 2778, Issues found: 8170 in 926 files
  exit code: 1
 ./django/__init__.py:12:26     - Unknown word (urlresolvers) -- Set the thread-local urlresolvers script prefix if `set
 ./django/apps/registry.py:134:40    - Unknown word (unconfigured) -- not ready" is due to unconfigured settings, accessing
@@ -125,7 +125,7 @@ Lines:
 ./django/contrib/admin/apps.py:21:51     - Unknown word (autodiscovery) -- for admin which does autodiscovery."""
 ./django/contrib/admin/checks.py:19:22     - Unknown word (classinfo)  -- def _issubclass(cls, classinfo):
 ./django/contrib/admin/helpers.py:18:32     - Unknown word (flatatt)    -- django.forms.utils import flatatt
-./django/contrib/admin/options.py:1440:15   - Unknown word (saveasnew)   -- "_saveasnew" in request.POST
+./django/contrib/admin/options.py:1443:15   - Unknown word (saveasnew)   -- "_saveasnew" in request.POST
 ./django/contrib/admin/options.py:224:13    - Unknown word (klass)      -- for klass in db_field.__class
 ./django/contrib/admin/options.py:768:14    - Unknown word (urlify)     -- "urlify.js",
 ./django/contrib/admin/options.py:769:14    - Unknown word (prepopulate) -- "prepopulate.js",
@@ -151,6 +151,7 @@ Lines:
 ./django/contrib/auth/base_user.py:11:5      - Unknown word (acheck)     -- acheck_password,
 ./django/contrib/auth/context_processors.py:16:33     - Unknown word (someapp)    -- To fix 'item in perms.someapp' and __getitem__ interaction
 ./django/contrib/auth/context_processors.py:40:41     - Unknown word (someperm)   -- someapp" or "someapp.someperm" in perms.
+./django/contrib/auth/forms.py:530:46    - Unknown word (messagelist) -- unusable_warning" class="messagelist"><li class="warning
 ./django/contrib/auth/hashers.py:364:20    - Unknown word (PKCS)       -- recommended by PKCS #5. This is compatible
 ./django/contrib/auth/hashers.py:378:60    - Unknown word (cffi)       -- requires the argon2-cffi library which
 ./django/contrib/auth/hashers.py:492:23    - Unknown word (gensalt)    -- return bcrypt.gensalt(self.rounds)
@@ -475,7 +476,7 @@ Lines:
 ./django/db/backends/base/base.py:108:62    - Unknown word (executemany) -- invoked around execute()/executemany()
 ./django/db/backends/base/creation.py:101:36    - Unknown word (DJANGOS)    -- environ.get("RUNNING_DJANGOS_TEST_SUITE") == "true
 ./django/db/backends/base/creation.py:33:63     - Unknown word (keepdb)     -- False, serialize=True, keepdb=False
-./django/db/backends/base/creation.py:364:28    - Unknown word (RDBMS)      -- accordingly to the RDBMS particularities.
+./django/db/backends/base/creation.py:367:28    - Unknown word (RDBMS)      -- accordingly to the RDBMS particularities.
 ./django/db/backends/base/features.py:175:24    - Unknown word (clientside) -- schema_editor_uses_clientside_param_binding = False
 ./django/db/backends/base/features.py:83:36     - Unknown word (timedeltas) -- a true datatype for timedeltas?
 ./django/db/backends/base/operations.py:310:23    - Unknown word (lastrowid)  -- return cursor.lastrowid
@@ -535,9 +536,9 @@ Lines:
 ./django/db/backends/oracle/operations.py:98:30     - Unknown word (IYYY)       -- extract_param = "IYYY"
 ./django/db/backends/oracle/schema.py:187:40    - Unknown word (uppercased) -- properly shortened and uppercased identifier as returned
 ./django/db/backends/oracle/utils.py:98:25     - Unknown word (makedsn)    -- return Database.makedsn(host, int(settings_dict
-./django/db/backends/postgresql/base.py:247:73    - Unknown word (poolers)     -- default to keep connection poolers
-./django/db/backends/postgresql/base.py:471:13    - Unknown word (qparts)      -- qparts = [sql.SQL("SELECT
-./django/db/backends/postgresql/base.py:495:9     - Unknown word (prepareable) -- prepareable SQL (#20516).
+./django/db/backends/postgresql/base.py:245:73    - Unknown word (poolers)     -- default to keep connection poolers
+./django/db/backends/postgresql/base.py:468:13    - Unknown word (qparts)      -- qparts = [sql.SQL("SELECT
+./django/db/backends/postgresql/base.py:492:9     - Unknown word (prepareable) -- prepareable SQL (#20516).
 ./django/db/backends/postgresql/base.py:53:62     - Unknown word (tzloader)   -- adapters_template, register_tzloader
 ./django/db/backends/postgresql/base.py:55:39     - Unknown word (timestamptz) -- OID = adapters.types["timestamptz"].oid
 ./django/db/backends/postgresql/base.py:55:5      - Unknown word (TIMESTAMPTZ) -- TIMESTAMPTZ_OID = adapters.types
@@ -641,8 +642,8 @@ Lines:
 ./django/db/models/fields/__init__.py:2862:11   - Unknown word (subclasscheck) -- def __subclasscheck__(self, subclass):
 ./django/db/models/fields/__init__.py:520:76    - Unknown word (EXXX)       -- details.get("id", "fields.EXXX"),
 ./django/db/models/fields/__init__.py:531:79    - Unknown word (WXXX)       -- details.get("id", "fields.WXXX"),
-./django/db/models/fields/json.py:319:7     - Unknown word (JSONI)      -- class JSONIContains(CaseInsensitiveMixin
-./django/db/models/fields/json.py:398:65    - Unknown word (MDEV)       -- and ->> operators (see MDEV-13594).
+./django/db/models/fields/json.py:322:7     - Unknown word (JSONI)      -- class JSONIContains(CaseInsensitiveMixin
+./django/db/models/fields/json.py:401:65    - Unknown word (MDEV)       -- and ->> operators (see MDEV-13594).
 ./django/db/models/fields/related.py:823:63    - Unknown word (pushdown)   -- joining and subquery pushdown. The
 ./django/db/models/fields/related.py:888:20    - Unknown word (FK's)       -- # Internal FK's - i.e., those with a
 ./django/db/models/fields/related_descriptors.py:1172:23   - Unknown word (autocreated) -- # For non-autocreated 'through' models, can
@@ -773,6 +774,8 @@ Lines:
 ./django/test/runner.py:487:15    - Unknown word (subsuites)  -- self, subsuites, processes, failfast
 ./django/test/runner.py:519:13    - Unknown word (initargs)   -- initargs=[
 ./django/test/signals.py:243:54    - Unknown word (modwsgi)    -- auth.handlers import modwsgi
+./django/test/testcases.py:324:53    - Unknown word (picklability) -- cannot be tested on picklability, since they
+./django/test/testcases.py:96:8      - Unknown word (pickable)   -- def is_pickable(obj):
 ./django/test/utils.py:103:27    - Unknown word (subcontexts) -- Flattened keys of subcontexts.
 ./django/test/utils.py:993:22    - Unknown word (weakreferences) -- # Collecting weakreferences can take two collections
 ./django/urls/conf.py:1:27      - Unknown word (Lsconfs)    -- Functions for use in URLsconfs."""
@@ -1148,18 +1151,18 @@ Lines:
 ./tests/admin_ordering/tests.py:48:28     - Unknown word (Radiohead)  -- Band(name="Radiohead", bio="", rank=1),
 ./tests/admin_ordering/tests.py:49:32     - Unknown word (Halen)      -- Band(name="Van Halen", bio="", rank=2),
 ./tests/admin_scripts/broken_app/models.py:1:23      - Unknown word (modelz)     -- from django.db import modelz # NOQA
-./tests/admin_scripts/tests.py:1422:26   - Unknown word (scriptz)    -- apps=["admin_scriptz.broken_app"],
-./tests/admin_scripts/tests.py:1748:56   - Unknown word (trackback)  -- support --verbosity and --trackback options."""
-./tests/admin_scripts/tests.py:1863:25   - Unknown word (altert)     -- def test_help_short_altert(self):
-./tests/admin_scripts/tests.py:2111:33   - Unknown word (Erreur)     -- raise CommandError("Erreur personnalisée")
-./tests/admin_scripts/tests.py:2111:40   - Unknown word (personnalisée) -- CommandError("Erreur personnalisée")
-./tests/admin_scripts/tests.py:2480:49   - Unknown word (othertestproject) -- tartproject", "testproject", "othertestproject"]
-./tests/admin_scripts/tests.py:2545:63   - Unknown word (tarballtestproject) -- template", template_path, "tarballtestproject"]
-./tests/admin_scripts/tests.py:2564:14   - Unknown word (altlocation)        -- "altlocation",
-./tests/admin_scripts/tests.py:2646:14   - Unknown word (Procfile)           -- "Procfile",
-./tests/admin_scripts/tests.py:2838:42   - Unknown word (umasks)             -- only partially supports umasks and chmod.",
-./tests/admin_scripts/tests.py:3081:18   - Unknown word (rnserver)           -- args = ["rnserver", "--settings=test_project
-./tests/admin_scripts/tests.py:56:65     - Unknown word (sdict)      -- None, is_dir=False, sdict=None, extra=None):
+./tests/admin_scripts/tests.py:1423:26   - Unknown word (scriptz)    -- apps=["admin_scriptz.broken_app"],
+./tests/admin_scripts/tests.py:1749:56   - Unknown word (trackback)  -- support --verbosity and --trackback options."""
+./tests/admin_scripts/tests.py:1864:25   - Unknown word (altert)     -- def test_help_short_altert(self):
+./tests/admin_scripts/tests.py:2118:33   - Unknown word (Erreur)     -- raise CommandError("Erreur personnalisée")
+./tests/admin_scripts/tests.py:2118:40   - Unknown word (personnalisée) -- CommandError("Erreur personnalisée")
+./tests/admin_scripts/tests.py:2487:49   - Unknown word (othertestproject) -- tartproject", "testproject", "othertestproject"]
+./tests/admin_scripts/tests.py:2552:63   - Unknown word (tarballtestproject) -- template", template_path, "tarballtestproject"]
+./tests/admin_scripts/tests.py:2571:14   - Unknown word (altlocation)        -- "altlocation",
+./tests/admin_scripts/tests.py:2653:14   - Unknown word (Procfile)           -- "Procfile",
+./tests/admin_scripts/tests.py:2845:42   - Unknown word (umasks)             -- only partially supports umasks and chmod.",
+./tests/admin_scripts/tests.py:3088:18   - Unknown word (rnserver)           -- args = ["rnserver", "--settings=test_project
+./tests/admin_scripts/tests.py:57:65     - Unknown word (sdict)      -- None, is_dir=False, sdict=None, extra=None):
 ./tests/admin_utils/test_logentry.py:328:14    - Unknown word (recentactions) -- def test_recentactions_without_content_type
 ./tests/admin_utils/test_logentry.py:84:74     - Unknown word (Historique) -- Modification de Title et Historique."
 ./tests/admin_utils/test_logentry.py:96:62     - Unknown word (Ajout)      -- get_change_message(), "Ajout.")
@@ -1389,21 +1392,23 @@ Lines:
 ./tests/auth_tests/test_context_processors.py:56:14     - Unknown word (permlookupdict) -- def test_permlookupdict_in(self):
 ./tests/auth_tests/test_context_processors.py:60:9      - Unknown word (pldict)         -- pldict = PermLookupDict(MockUser
 ./tests/auth_tests/test_decorators.py:113:14    - Unknown word (permissioned) -- def test_permissioned_denied_redirect(self
-./tests/auth_tests/test_forms.py:1068:51   - Unknown word (ıxample)      -- user("mike456", "mike@ıxample.org", "test123")
-./tests/auth_tests/test_forms.py:1279:37   - Unknown word (Pucb)         -- pbkdf2_sha256$100000$a6Pucb1qSFcD$WmCkn9Hqidj48NVe
-./tests/auth_tests/test_forms.py:1301:45   - Unknown word (labelable)    -- it doesn't have any labelable elements.
-./tests/auth_tests/test_forms.py:555:44    - Unknown word (Σαρα)       -- create_user(username="Σαρα", password="pwd")
-./tests/auth_tests/test_forms.py:627:56    - Unknown word (credentails) -- necessary to have valid credentails for the test.
-./tests/auth_tests/test_forms.py:75:26     - Unknown word (jsmith)     -- "username": "jsmith!",
-./tests/auth_tests/test_forms.py:791:14    - Unknown word (Votre)       -- "Votre mot de passe ne peut
-./tests/auth_tests/test_forms.py:791:36    - Unknown word (peut)        -- Votre mot de passe ne peut pas trop ressembler
-./tests/auth_tests/test_forms.py:791:50    - Unknown word (ressembler)  -- passe ne peut pas trop ressembler à vos autres informations
-./tests/auth_tests/test_forms.py:791:67    - Unknown word (autres)      -- trop ressembler à vos autres informations "
-./tests/auth_tests/test_forms.py:791:74    - Unknown word (informations) -- ressembler à vos autres informations "
-./tests/auth_tests/test_forms.py:792:14    - Unknown word (personnelles) -- "personnelles.",
-./tests/auth_tests/test_forms.py:793:38    - Unknown word (contenir)     -- Votre mot de passe doit contenir au minimum 12 caract
-./tests/auth_tests/test_forms.py:793:61    - Unknown word (caractères)   -- contenir au minimum 12 caractères.",
-./tests/auth_tests/test_forms.py:870:31    - Unknown word (oldpassword)  -- user.set_password(" oldpassword ")
+./tests/auth_tests/test_forms.py:1131:51   - Unknown word (ıxample)         -- user("mike456", "mike@ıxample.org", "test123")
+./tests/auth_tests/test_forms.py:1342:37   - Unknown word (Pucb)            -- pbkdf2_sha256$100000$a6Pucb1qSFcD$WmCkn9Hqidj48NVe
+./tests/auth_tests/test_forms.py:1364:45   - Unknown word (labelable)       -- it doesn't have any labelable elements.
+./tests/auth_tests/test_forms.py:1495:28   - Unknown word (complexpassword) -- {"password1": "complexpassword", "password2": "complexpasswo
+./tests/auth_tests/test_forms.py:226:26    - Unknown word (othertestclient) -- "username": "othertestclient",
+./tests/auth_tests/test_forms.py:593:44    - Unknown word (Σαρα)            -- create_user(username="Σαρα", password="pwd")
+./tests/auth_tests/test_forms.py:665:56    - Unknown word (credentails)     -- necessary to have valid credentails for the test.
+./tests/auth_tests/test_forms.py:79:26     - Unknown word (jsmith)     -- "username": "jsmith!",
+./tests/auth_tests/test_forms.py:846:14    - Unknown word (Votre)           -- "Votre mot de passe ne peut
+./tests/auth_tests/test_forms.py:846:36    - Unknown word (peut)            -- Votre mot de passe ne peut pas trop ressembler
+./tests/auth_tests/test_forms.py:846:50    - Unknown word (ressembler)      -- passe ne peut pas trop ressembler à vos autres informations
+./tests/auth_tests/test_forms.py:846:67    - Unknown word (autres)          -- trop ressembler à vos autres informations "
+./tests/auth_tests/test_forms.py:846:74    - Unknown word (informations)    -- ressembler à vos autres informations "
+./tests/auth_tests/test_forms.py:847:14    - Unknown word (personnelles)    -- "personnelles.",
+./tests/auth_tests/test_forms.py:848:38    - Unknown word (contenir)        -- Votre mot de passe doit contenir au minimum 12 caract
+./tests/auth_tests/test_forms.py:848:61    - Unknown word (caractères)      -- contenir au minimum 12 caractères.",
+./tests/auth_tests/test_forms.py:925:31    - Unknown word (oldpassword)     -- user.set_password(" oldpassword ")
 ./tests/auth_tests/test_hashers.py:183:38    - Unknown word (letmein)    -- encoded = make_password("letmein", hasher="bcrypt")
 ./tests/auth_tests/test_hashers.py:269:31    - Unknown word (badencoded) -- passwords = ("lètmein_badencoded", "", None)
 ./tests/auth_tests/test_hashers.py:288:54    - Unknown word (Knrk)       -- $870000$seasalt2$iFPKnrkYfxxyxaeIqxq+c3nJ/j4
@@ -1444,13 +1449,16 @@ Lines:
 ./tests/auth_tests/test_validators.py:265:14    - Unknown word (zerowidth)  -- "zerowidth\u200Bspace",
 ./tests/auth_tests/test_validators.py:266:14    - Unknown word (nonbreaking) -- "nonbreaking\u00A0space",
 ./tests/auth_tests/test_validators.py:268:14    - Unknown word (trailingnewline) -- "trailingnewline\u000A",
-./tests/auth_tests/test_views.py:1521:29   - Unknown word (shouldnotchange) -- data["password"] = "shouldnotchange"
-./tests/auth_tests/test_views.py:1541:43   - Unknown word (uuiduser)        -- user_admin:auth_tests_uuiduser_change", args=(u.pk
-./tests/auth_tests/test_views.py:278:35    - Unknown word (anewpassword) -- "new_password1": "anewpassword",
-./tests/auth_tests/test_views.py:381:44    - Unknown word (passwordcustom) -- reset_url_token = "set-passwordcustom"
-./tests/backends/base/test_creation.py:185:36    - Unknown word (objectreference) -- "model": "backends.objectreference",
-./tests/backends/base/test_creation.py:250:43    - Unknown word (schoolclass)     -- '"model": "backends.schoolclass"', data)
-./tests/backends/base/test_creation.py:34:22     - Unknown word (hodor)      -- prod_name = "hodor"
+./tests/auth_tests/test_views.py:1631:29   - Unknown word (shouldnotchange) -- data["password"] = "shouldnotchange"
+./tests/auth_tests/test_views.py:1651:43   - Unknown word (uuiduser)        -- user_admin:auth_tests_uuiduser_change", args=(u.pk
+./tests/auth_tests/test_views.py:280:35    - Unknown word (anewpassword) -- "new_password1": "anewpassword",
+./tests/auth_tests/test_views.py:383:44    - Unknown word (passwordcustom) -- reset_url_token = "set-passwordcustom"
+./tests/backends/base/test_creation.py:186:36    - Unknown word (objectreference) -- "model": "backends.objectreference",
+./tests/backends/base/test_creation.py:251:43    - Unknown word (schoolclass)     -- '"model": "backends.schoolclass"', data)
+./tests/backends/base/test_creation.py:255:9     - Unknown word (sclass)          -- sclass = SchoolClass.objects
+./tests/backends/base/test_creation.py:259:13    - Unknown word (schoolclasses)   -- bus.schoolclasses.add(sclass)
+./tests/backends/base/test_creation.py:266:43    - Unknown word (schoolbus)       -- '"model": "backends.schoolbus"', data)
+./tests/backends/base/test_creation.py:35:22     - Unknown word (hodor)      -- prod_name = "hodor"
 ./tests/backends/mysql/test_schema.py:15:19     - Unknown word (hablas)     -- ("¿Tú hablas inglés?", "'¿Tú hablas
 ./tests/backends/oracle/test_introspection.py:69:26     - Unknown word (MVIEW)      -- "TEST_PERSON_MVIEW"
 ./tests/backends/oracle/test_operations.py:142:33    - Unknown word (VERYLONGMODELN)       -- self.assertIn("BACKENDS_VERYLONGMODELN7BE2_SQ", statements
@@ -1569,10 +1577,10 @@ Lines:
 ./tests/dbshell/test_mysql.py:65:38     - Unknown word (settinguser)   -- "USER": "settinguser",
 ./tests/dbshell/test_mysql.py:66:42     - Unknown word (settingpassword) -- "PASSWORD": "settingpassword",
 ./tests/dbshell/test_mysql.py:67:38     - Unknown word (settinghost)     -- "HOST": "settinghost",
-./tests/dbshell/test_postgresql.py:136:21    - Unknown word (rôle)         -- username = "rôle"
-./tests/dbshell/test_postgresql.py:137:21    - Unknown word (sésame)       -- password = "sésame"
-./tests/dbshell/test_postgresql.py:36:14     - Unknown word (nopass)     -- def test_nopass(self):
-./tests/dbshell/test_postgresql.py:94:41     - Unknown word (custompgpass) -- "passfile": "~/.custompgpass",
+./tests/dbshell/test_postgresql.py:137:21    - Unknown word (rôle)         -- username = "rôle"
+./tests/dbshell/test_postgresql.py:138:21    - Unknown word (sésame)       -- password = "sésame"
+./tests/dbshell/test_postgresql.py:37:14     - Unknown word (nopass)     -- def test_nopass(self):
+./tests/dbshell/test_postgresql.py:95:41     - Unknown word (custompgpass) -- "passfile": "~/.custompgpass",
 ./tests/decorators/tests.py:279:16    - Unknown word (argumented) -- # Test for argumented decorator
 ./tests/defer_regress/tests.py:148:22    - Unknown word (ofield)     -- # side has o2ofield or unique FK) - the
 ./tests/defer_regress/tests.py:339:21    - Unknown word (defered)    -- def test_delete_defered_model(self):
@@ -1608,7 +1616,7 @@ Lines:
 ./tests/file_storage/tests.py:668:34    - Unknown word (stringio)   -- storage.save("tests/stringio", output)
 ./tests/file_storage/tests.py:681:60    - Unknown word (AUFS)       -- filename length (e.g. AUFS has 242).
 ./tests/file_storage/tests.py:687:23    - Unknown word (pathconf)   -- return os.pathconf(dir_to_test, "PC_NAME
-./tests/file_storage/tests.py:803:31    - Unknown word (longext)    -- filename = "short.longext"
+./tests/file_storage/tests.py:809:31    - Unknown word (longext)    -- filename = "short.longext"
 ./tests/file_uploads/tests.py:377:49    - Unknown word (monkeybusiness) -- uploader We have to do some monkeybusiness here to construct
 ./tests/file_uploads/tests.py:660:14    - Unknown word (fileupload)     -- def test_fileupload_getlist(self):
 ./tests/file_uploads/tests.py:688:14    - Unknown word (fileuploads)    -- def test_fileuploads_closed_at_request_end
@@ -2576,7 +2584,7 @@ Lines:
 ./tests/sessions_tests/tests.py:359:33    - Unknown word (someunknownkey) -- session = self.backend("someunknownkey")
 ./tests/sessions_tests/tests.py:420:14    - Unknown word (sessionmanager) -- def test_sessionmanager_save(self):
 ./tests/sessions_tests/tests.py:54:26     - Unknown word (buildbots)  -- # of runs (think buildbots)
-./tests/sessions_tests/tests.py:563:26    - Unknown word (forwardslash)   -- def test_invalid_key_forwardslash(self):
+./tests/sessions_tests/tests.py:579:26    - Unknown word (forwardslash)   -- def test_invalid_key_forwardslash(self):
 ./tests/settings_tests/tests.py:324:14    - Unknown word (nonupper)   -- def test_nonupper_settings_prohibited
 ./tests/settings_tests/tests.py:374:47    - Unknown word (wrongvalue) -- FORWARDED_PROTO"] = "wrongvalue"
 ./tests/settings_tests/tests.py:441:26    - Unknown word (lazysettings) -- def test_unevaluated_lazysettings_repr(self):
@@ -2759,23 +2767,23 @@ Lines:
 ./tests/test_runner_apps/sample/tests_sample.py:20:11     - Unknown word (Zimple)     -- class TestZimpleTestCase(SimpleTestCase
 ./tests/test_runner_apps/sample/tests_sample.py:7:15      - Unknown word (doctests)   -- from . import doctests
 ./tests/test_utils/test_simpletestcase.py:72:30     - Unknown word (teardwn)    -- pre-setup and post-teardwn are called.
-./tests/test_utils/test_testcase.py:142:24    - Unknown word (deutsh)     -- def test_book_name_deutsh(self):
-./tests/test_utils/test_testcase.py:144:30    - Unknown word (Käfer)      -- self.car.name = "VW sKäfer"
-./tests/test_utils/test_testcase.py:149:37    - Unknown word (Coccinelle) -- car.name = "Volkswagen Coccinelle"
-./tests/test_utils/test_testcase.py:77:13     - Unknown word (herbie)     -- cls.herbie = cls.jim_douglas.possessed
+./tests/test_utils/test_testcase.py:150:24    - Unknown word (deutsh)     -- def test_book_name_deutsh(self):
+./tests/test_utils/test_testcase.py:152:30    - Unknown word (Käfer)      -- self.car.name = "VW sKäfer"
+./tests/test_utils/test_testcase.py:157:37    - Unknown word (Coccinelle) -- car.name = "Volkswagen Coccinelle"
+./tests/test_utils/test_testcase.py:85:13     - Unknown word (herbie)     -- cls.herbie = cls.jim_douglas.possessed
 ./tests/test_utils/tests.py:1988:11   - Unknown word (visualisation) -- A visualisation of the callback tree
-./tests/test_utils/tests.py:2157:38   - Unknown word (defualt)       -- class__.databases = {"defualt"}
+./tests/test_utils/tests.py:2189:38   - Unknown word (defualt)       -- class__.databases = {"defualt"}
 ./tests/test_utils/tests.py:763:26    - Unknown word (attibutes)  -- def test_non_boolean_attibutes(self):
 ./tests/transactions/tests.py:42:56     - Unknown word (Tintin)     -- objects.create(first_name="Tintin")
 ./tests/update/tests.py:192:44    - Unknown word (datapoint)  -- value=Max(Col(update_datapoint, update.DataPoint.value
 ./tests/update/tests.py:202:62    - Unknown word (relatedpoint) -- related_count=Count("relatedpoint"))
 ./tests/urlpatterns/path_base64_urls.py:7:1       - Unknown word (subsubpatterns) -- subsubpatterns = [
 ./tests/urlpatterns/path_base64_urls.py:8:58      - Unknown word (subsubpattern)  -- views.empty_view, name="subsubpattern-base64"),
-./tests/urlpatterns/tests.py:211:53    - Unknown word (stest)      -- int:num>/extra/<str:%stest>' cannot contain "
-./tests/urlpatterns/tests.py:245:23    - Unknown word (abcxyz)     -- ("str", {"abcxyz"}, no_converter),
-./tests/urlpatterns/tests.py:247:31    - Unknown word (ABCXYZ)     -- ("slug", {"abcxyz-ABCXYZ_01234567890"}, no_converter
-./tests/urlpatterns/tests.py:271:14    - Unknown word (nonmatching) -- def test_nonmatching_urls(self):
-./tests/urlpatterns/tests.py:276:34    - Unknown word (notallowed)  -- "slug", {"", "stars*notallowed"}),
+./tests/urlpatterns/tests.py:243:53    - Unknown word (stest)      -- int:num>/extra/<str:%stest>' cannot contain "
+./tests/urlpatterns/tests.py:277:23    - Unknown word (abcxyz)     -- ("str", {"abcxyz"}, no_converter),
+./tests/urlpatterns/tests.py:279:31    - Unknown word (ABCXYZ)     -- ("slug", {"abcxyz-ABCXYZ_01234567890"}, no_converter
+./tests/urlpatterns/tests.py:303:14    - Unknown word (nonmatching) -- def test_nonmatching_urls(self):
+./tests/urlpatterns/tests.py:308:34    - Unknown word (notallowed)  -- "slug", {"", "stars*notallowed"}),
 ./tests/urlpatterns_reverse/included_namespace_urls.py:6:1       - Unknown word (testobj)    -- testobj3 = URLObject("testapp
 ./tests/urlpatterns_reverse/namespace_urls.py:13:1      - Unknown word (newappobj)  -- newappobj1 = URLObject("newapp
 ./tests/urlpatterns_reverse/test_localeregexdescriptor.py:37:14     - Unknown word (nontranslated) -- def test_nontranslated_regex_compiled_once
