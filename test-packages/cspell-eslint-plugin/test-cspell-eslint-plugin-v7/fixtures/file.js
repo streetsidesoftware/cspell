@@ -1,3 +1,5 @@
-const glob = require('path');
+import path from 'path';
 
-console.log(glob !== undefined ? 'glob' : 'no-glob');
+// Load some to test the path
+
+console.log(path !== undefined ? 'path' : 'no-path');

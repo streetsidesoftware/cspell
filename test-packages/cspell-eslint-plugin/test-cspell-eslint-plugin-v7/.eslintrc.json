@@ -3,69 +3,12 @@
         "es2020": true,
         "node": true
     },
-    "extends": [
-        "eslint:recommended",
-        "plugin:node/recommended",
-        "plugin:import/errors",
-        "plugin:import/warnings",
-        "plugin:promise/recommended",
-        "plugin:prettier/recommended",
-        "plugin:@cspell/recommended"
-    ],
-    "ignorePatterns": ["**/*.d.ts", "**/*.map", "**/coverage/**", "**/dist/**", "**/node_modules/**"],
+    "extends": ["eslint:recommended", "plugin:@cspell/recommended"],
+    "ignorePatterns": ["**/node_modules/**"],
     "parserOptions": {
         "ecmaVersion": 2020,
         "sourceType": "module"
     },
-    "overrides": [
-        {
-            "files": ["**/*.ts", "**/*.tsx"],
-            "extends": ["plugin:@typescript-eslint/recommended", "plugin:import/typescript"],
-            "parser": "@typescript-eslint/parser",
-            "plugins": ["@typescript-eslint"],
-            "parserOptions": {
-                "ecmaFeatures": {
-                    "jsx": true
-                },
-                "ecmaVersion": 2020,
-                "sourceType": "module"
-            },
-            "rules": {
-                "@typescript-eslint/no-unused-vars": [
-                    "error",
-                    {
-                        "argsIgnorePattern": "^_",
-                        "varsIgnorePattern": "^_"
-                    }
-                ],
-                "node/no-missing-import": [
-                    "error",
-                    {
-                        "tryExtensions": [".js", ".d.ts", ".ts"]
-                    }
-                ],
-                "node/no-unsupported-features/es-syntax": [
-                    "error",
-                    {
-                        "ignores": ["modules"]
-                    }
-                ],
-                "@cspell/spellchecker": [
-                    "warn",
-                    {
-                        "customWordListFile": "words.txt",
-                        "autoFix": true
-                    }
-                ]
-            }
-        },
-        {
-            "files": ["**/*.test.ts", "**/*.spec.ts"],
-            "extends": "plugin:jest/recommended",
-            "env": {
-                "jest": true
-            }
-        }
-    ],
+    "overrides": [],
     "root": true
 }
