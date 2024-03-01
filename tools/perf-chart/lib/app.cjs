@@ -4319,7 +4319,7 @@ async function readCsvData(csvFile) {
   const records = parse(csv, { columns: true, cast: true });
   return records;
 }
-var emptyStats = { point: 0, min: 0, max: 0, sum: 0, count: 0, sd: 0, trend: [0] };
+var emptyStats = { point: 0, avg: 0, min: 0, max: 0, sum: 0, count: 0, sd: 0, trend: [0] };
 function calcStats(data) {
   const values = data.map((d) => d.elapsedMs).map((v) => v || 1);
   const trend = values.slice(-20);
@@ -4327,11 +4327,13 @@ function calcStats(data) {
   if (point === void 0)
     return emptyStats;
   if (values.length === 0)
-    return { point, min: point, max: point, sum: point, count: 1, sd: 0, trend };
+    return { point, avg: point, min: point, max: point, sum: point, count: 1, sd: 0, trend };
+  const sum = values.reduce((a, b) => a + b, 0);
+  const avg = sum / (values.length || 1);
   const min = Math.min(...values);
   const max = Math.max(...values);
   const sd = calcStandardDeviation(values);
-  return { point, min, max, sum: values.reduce((a, b) => a + b, 0), count: values.length, sd, trend };
+  return { point, avg, min, max, sum, count: values.length, sd, trend };
 }
 function groupBy(data, key) {
   const map = /* @__PURE__ */ new Map();
@@ -4360,8 +4362,7 @@ function createPerfTable1(data) {
   const stats = calcAllStats(data);
   const maxRelSd = Math.max(...stats.map((s2) => s2.sd * s2.sum / s2.count));
   const rows = data.map(([repo], i) => {
-    const { point, min, max, sum, count, sd } = stats[i];
-    const avg = sum / (count || 1);
+    const { point, min, max, sum, count, sd, avg } = stats[i];
     const relSd = sd * sum / count;
     const sdGraph = sd ? plotPointRelativeToStandardDeviation(
       point,
@@ -4381,9 +4382,8 @@ ${rows.join("\n")}
 function createPerfTable2(data) {
   const stats = calcAllStats(data);
   const rows = data.map(([repo], i) => {
-    const { point, sum, count, trend } = stats[i];
-    const avg = sum / (count || 1);
-    const trendGraph = simpleHistogram(trend);
+    const { point, count, trend, sd, avg } = stats[i];
+    const trendGraph = simpleHistogram(trend, avg - 2 * sd, avg + 3 * sd);
     const relChange = (100 * (point - avg) / (avg || 1)).toFixed(2) + "%";
     return `| ${repo.padEnd(36)} | ${p(s(point, 2), 6)} | ${p(relChange, 6)} | \`${trendGraph}\` | ${count} |`;
   });
