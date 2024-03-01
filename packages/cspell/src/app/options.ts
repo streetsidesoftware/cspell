@@ -51,12 +51,32 @@ export interface LinterOptions extends BaseOptions, Omit<CacheOptions, 'version'
      * Stop searching for a `.gitignore`s when a root is reached.
      */
     gitignoreRoot?: string | string[];
+
     /**
      * List of files that contains the paths to files to be spell checked.
      * The files in the lists will be filtered against the glob patterns.
      * - an entry of `stdin` means to read the file list from **`stdin`**
+     * The resulting files are filtered against the `files` globs found in the configuration.
      */
     fileList?: string[] | undefined;
+
+    /**
+     * List of file paths to spell check. These can be relative or absolute
+     * paths, but not Globs. Relative paths are relative to {@link LinterOptions.root}.
+     * The files are combined with the file paths read from {@link LinterOptions.fileList}.
+     * These files are filtered against the `files` globs found in the configuration.
+     */
+    files?: string[] | undefined;
+
+    /**
+     * Alias of {@link LinterOptions.files}.
+     */
+    file?: string[] | undefined;
+
+    /**
+     * Use the `files` configuration to filter the files found.
+     */
+    filterFiles?: boolean | undefined;
 
     /**
      * Files must be found and processed otherwise it is considered an error.

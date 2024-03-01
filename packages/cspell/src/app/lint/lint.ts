@@ -1,4 +1,4 @@
-import { isAsyncIterable, operators, opFilter, pipeAsync, pipeSync } from '@cspell/cspell-pipe';
+import { isAsyncIterable, operators, opFilter, pipeAsync } from '@cspell/cspell-pipe';
 import { opMap, pipe } from '@cspell/cspell-pipe/sync';
 import type {
     CSpellSettings,
@@ -41,10 +41,12 @@ import {
     filenameToUri,
     findFiles,
     isBinaryFile,
+    isFile,
     isNotDir,
     readConfig,
     readFileInfo,
     readFileListFiles,
+    resolveFilename,
 } from '../util/fileHelper.js';
 import type { GlobOptions } from '../util/glob.js';
 import {
@@ -428,7 +430,7 @@ export async function runLint(cfg: LintRequest): Promise<RunResult> {
         const globInfo = await determineGlobs(configInfo, cfg);
         const { fileGlobs, excludeGlobs } = globInfo;
         const hasFileLists = !!cfg.fileLists.length;
-        if (!fileGlobs.length && !hasFileLists) {
+        if (!fileGlobs.length && !hasFileLists && !cfg.files?.length) {
             // Nothing to do.
             return runResult();
         }
@@ -511,7 +513,8 @@ async function determineGlobs(configInfo: ConfigInfo, cfg: LintRequest): Promise
     const gitIgnore = useGitignore ? await generateGitIgnore(gitignoreRoots) : undefined;
 
     const cliGlobs: string[] = cfg.fileGlobs;
-    const allGlobs: Glob[] = cliGlobs.length ? cliGlobs : configInfo.config.files || [];
+    const allGlobs: Glob[] =
+        (cliGlobs.length && cliGlobs) || (cfg.options.filterFiles !== false && configInfo.config.files) || [];
     const combinedGlobs = await normalizeFileOrGlobsToRoot(allGlobs, cfg.root);
     const cliExcludeGlobs = extractPatterns(cfg.excludes).map((p) => p.glob as Glob);
     const normalizedExcludes = normalizeGlobsToRoot(cliExcludeGlobs, cfg.root, true);
@@ -551,14 +554,19 @@ async function determineFilesToCheck(
             globOptions.dot = enableGlobDot;
         }
 
-        const filterFiles = opFilter(filterFilesFn(globMatcher));
-        const foundFiles = await (hasFileLists
-            ? useFileLists(fileLists, allGlobs, root, enableGlobDot)
-            : findFiles(fileGlobs, globOptions));
+        const opFilterExcludedFiles = opFilter(filterOutExcludedFilesFn(globMatcher));
+        const includeFilter = createIncludeFileFilterFn(allGlobs, root, enableGlobDot);
+        const rawCliFiles = cfg.files?.map((file) => resolveFilename(file, root)).filter(includeFilter);
+        const cliFiles = cfg.options.mustFindFiles
+            ? rawCliFiles
+            : rawCliFiles && pipeAsync(rawCliFiles, opFilterAsync(isFile));
+        const foundFiles = hasFileLists
+            ? concatAsyncIterables(cliFiles, await useFileLists(fileLists, includeFilter))
+            : cliFiles || (await findFiles(fileGlobs, globOptions));
         const filtered = gitIgnore ? await gitIgnore.filterOutIgnored(foundFiles) : foundFiles;
         const files = isAsyncIterable(filtered)
-            ? pipeAsync(filtered, filterFiles)
-            : [...pipeSync(filtered, filterFiles)];
+            ? pipeAsync(filtered, opFilterExcludedFiles)
+            : [...pipe(filtered, opFilterExcludedFiles)];
         return files;
     }
 
@@ -581,7 +589,7 @@ async function determineFilesToCheck(
         return r.matched;
     }
 
-    function filterFilesFn(globMatcherExclude: GlobMatcher): (file: string) => boolean {
+    function filterOutExcludedFilesFn(globMatcherExclude: GlobMatcher): (file: string) => boolean {
         const patterns = globMatcherExclude.patterns;
         const excludeInfo = patterns
             .map(extractGlobSource)
@@ -680,18 +688,31 @@ async function generateGitIgnore(roots: string | string[] | undefined) {
 
 async function useFileLists(
     fileListFiles: string[],
-    includeGlobPatterns: Glob[],
-    root: string,
-    dot: boolean | undefined,
+    filterFiles: (file: string) => boolean,
 ): Promise<string[] | AsyncIterable<string>> {
-    includeGlobPatterns = includeGlobPatterns.length ? includeGlobPatterns : ['**'];
+    const files = readFileListFiles(fileListFiles);
+    return pipeAsync(files, opFilter(filterFiles), opFilterAsync(isNotDir));
+}
+
+function createIncludeFileFilterFn(includeGlobPatterns: Glob[] | undefined, root: string, dot: boolean | undefined) {
+    if (!includeGlobPatterns?.length) {
+        return () => true;
+    }
+    const patterns = includeGlobPatterns.map((g) => (g === '.' ? '/**' : g));
     const options: GlobMatchOptions = { root, mode: 'include' };
     if (dot !== undefined) {
         options.dot = dot;
     }
-    const globMatcher = new GlobMatcher(includeGlobPatterns, options);
+    const globMatcher = new GlobMatcher(patterns, options);
 
-    const filterFiles = (file: string) => globMatcher.match(file);
-    const files = readFileListFiles(fileListFiles);
-    return pipeAsync(files, opFilter(filterFiles), opFilterAsync(isNotDir));
+    return (file: string) => globMatcher.match(file);
+}
+
+async function* concatAsyncIterables<T>(
+    ...iterables: (AsyncIterable<T> | Iterable<T> | undefined)[]
+): AsyncIterable<T> {
+    for (const iter of iterables) {
+        if (!iter) continue;
+        yield* iter;
+    }
 }
