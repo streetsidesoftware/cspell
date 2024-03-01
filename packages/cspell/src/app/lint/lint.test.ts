@@ -35,6 +35,8 @@ describe('Linter Validation Tests', () => {
         expect(rWithFiles.files).toBe(1);
     });
 
+    const optionsRootCSpellJson = { root, config: j(root, 'cspell.json') };
+
     // cspell:ignore Tufte checkedd
     test.each`
         files               | options                                                                                                | expectedRunResult              | expectedReport
@@ -62,6 +64,12 @@ describe('Linter Validation Tests', () => {
         ${[]}               | ${{ root, config: j(root, 'cspell.json'), fileLists: [filesToCheckWithMissing], mustFindFiles: true }} | ${oc({ errors: 1, files: 3 })} | ${oc({ errorCount: 1, errors: [expect.anything()], issues: [] })}
         ${["'**'"]}         | ${{ root, config: j(root, 'cspell.json'), mustFindFiles: true }}                                       | ${oc({ errors: 0, files: 0 })} | ${oc({ errorCount: 1, errors: [expect.any(CheckFailed)], issues: [] })}
         ${['**']}           | ${{ root: j(configSamples, 'yaml-regexp') }}                                                           | ${oc({ errors: 0, files: 2 })} | ${oc({ errorCount: 0, errors: [], issues: [oc({ text: 'checkedd' })] })}
+        ${[]}               | ${{ ...optionsRootCSpellJson, files: ['README.md', 'LICENSE'], dot: true }}                            | ${oc({ errors: 0, files: 2 })} | ${oc({ errorCount: 0, errors: [], issues: [] })}
+        ${['*.md']}         | ${{ ...optionsRootCSpellJson, files: ['README.md', 'LICENSE'], dot: true }}                            | ${oc({ errors: 0, files: 1 })} | ${oc({ errorCount: 0, errors: [], issues: [] })}
+        ${[]}               | ${{ ...optionsRootCSpellJson, files: ['README.md', 'missing.txt'], dot: true, mustFindFiles: false }}  | ${oc({ errors: 0, files: 1 })} | ${oc({ errorCount: 0, errors: [], issues: [] })}
+        ${[]}               | ${{ ...optionsRootCSpellJson, files: ['README.md', 'missing.txt'], dot: true, mustFindFiles: true }}   | ${oc({ errors: 1, files: 2 })} | ${oc({ errorCount: 1, errors: [expect.anything()], issues: [] })}
+        ${[]}               | ${{ ...optionsRootCSpellJson, files: ['../../README.md'], dot: true }}                                 | ${oc({ errors: 0, files: 1 })} | ${oc({ errorCount: 0, errors: [], issues: [] })}
+        ${[]}               | ${{ ...optionsRootCSpellJson, files: ['../../resources/patreon.png' /* skip binary */], dot: true }}   | ${oc({ errors: 0, files: 0 })} | ${oc({ errorCount: 0, errors: [], issues: [] })}
     `('runLint $files $options', async ({ files, options, expectedRunResult, expectedReport }) => {
         const reporter = new InMemoryReporter();
         const runResult = await runLint(new LintRequest(files, options, reporter));
