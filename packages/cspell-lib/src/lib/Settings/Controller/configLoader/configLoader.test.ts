@@ -16,12 +16,17 @@ import {
     pathRepoTestFixturesURL,
 } from '../../../../test-util/test.locations.cjs';
 import { logError, logWarning } from '../../../util/logger.js';
-import { resolveFileWithURL, toFilePathOrHref, toFileUrl } from '../../../util/url.js';
+import { cwdURL, resolveFileWithURL, toFilePathOrHref, toFileUrl } from '../../../util/url.js';
 import { currentSettingsFileVersion, defaultConfigFileModuleRef, ENV_CSPELL_GLOB_ROOT } from '../../constants.js';
 import type { ImportFileRefWithError } from '../../CSpellSettingsServer.js';
 import { extractDependencies, getSources, mergeSettings } from '../../CSpellSettingsServer.js';
 import { _defaultSettings, getDefaultBundledSettingsAsync } from '../../DefaultSettings.js';
-import { __testing__ as __configLoader_testing__, createConfigLoader, loadPnP } from './configLoader.js';
+import {
+    __testing__ as __configLoader_testing__,
+    ConfigurationLoaderFailedToResolveError,
+    createConfigLoader,
+    loadPnP,
+} from './configLoader.js';
 import { configToRawSettings } from './configToRawSettings.js';
 import {
     clearCachedSettingsFiles,
@@ -337,10 +342,10 @@ describe('Validate search/load config files', () => {
         clearCachedSettingsFiles();
     });
 
-    function resolveError(filename: string): ImportFileRefWithError {
+    function resolveError(filename: string, relativeTo = cwdURL()): ImportFileRefWithError {
         return {
             filename,
-            error: new Error(`Failed to resolve file: "${filename}"`),
+            error: new ConfigurationLoaderFailedToResolveError(filename, relativeTo),
         };
     }
 
