@@ -22,7 +22,6 @@ import {
     resolveFileWithURL,
     toFilePathOrHref,
     toFileUrl,
-    toURL,
     windowsDriveLetterToUpper,
 } from '../../../util/url.js';
 import {
