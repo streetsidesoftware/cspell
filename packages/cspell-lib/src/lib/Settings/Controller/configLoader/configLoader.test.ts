@@ -43,7 +43,7 @@ import { extractImportErrors, extractImports } from './extractImportErrors.js';
 import { readSettings } from './readSettings.js';
 import { readSettingsFiles } from './readSettingsFiles.js';
 
-const { validateRawConfigVersion, resolveGlobRoot } = __configLoader_testing__;
+const { validateRawConfigVersion, resolveGlobRoot, relativeToCwd } = __configLoader_testing__;
 
 const rootCspellLib = path.join(pathPackageRoot, '.');
 const root = pathRepoRoot;
@@ -805,6 +805,22 @@ describe('Validate Dependencies', () => {
         const settings = await readSettings(filename, relativeTo);
         const dependencies = extractDependencies(settings);
         expect(dependencies).toEqual(expected);
+    });
+});
+
+describe.only('relativeToCwd', () => {
+    test.each`
+        filename                                      | expected
+        ${cwdURL()}                                   | ${'./'}
+        ${'../../cspell.json'}                        | ${'../../cspell.json'}
+        ${'../../cspell.json'}                        | ${'../../cspell.json'}
+        ${'../../../cspell.json'}                     | ${'../../../cspell.json'}
+        ${pathToFileURL('../../../../cspell.json')}   | ${path.resolve('../../../../cspell.json')}
+        ${pathToFileURL('./samples/cspell.json')}     | ${'./samples/cspell.json'}
+        ${pathToFileURL('../samples/cspell.json')}    | ${'../samples/cspell.json'}
+        ${new URL('https://example.com/cspell.json')} | ${'https://example.com/cspell.json'}
+    `('relativeToCwd', ({ filename, expected }) => {
+        expect(relativeToCwd(filename)).toEqual(expected);
     });
 });
 

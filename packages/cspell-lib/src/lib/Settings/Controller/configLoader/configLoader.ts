@@ -713,13 +713,15 @@ function relativeToCwd(file: string | URL): string {
     const url = toFileUrl(file);
     const cwdPath = cwdURL().pathname.split('/').slice(0, -1);
     const urlPath = url.pathname.split('/');
-    if (urlPath[0] !== cwdPath[0]) return file.toString();
+    if (urlPath[0] !== cwdPath[0]) return toFilePathOrHref(file);
     let i = 0;
     for (; i < cwdPath.length; ++i) {
         if (cwdPath[i] !== urlPath[i]) break;
     }
+    const segments = cwdPath.length - i;
+    if (segments > 3) return toFilePathOrHref(file);
     const prefix = '.'
-        .repeat(cwdPath.length - i)
+        .repeat(segments)
         .split('')
         .map(() => '..')
         .join('/');
@@ -731,4 +733,5 @@ export const __testing__ = {
     normalizeCacheSettings,
     validateRawConfigVersion,
     resolveGlobRoot,
+    relativeToCwd,
 };
