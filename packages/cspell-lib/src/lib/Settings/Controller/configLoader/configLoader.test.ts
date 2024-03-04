@@ -808,7 +808,7 @@ describe('Validate Dependencies', () => {
     });
 });
 
-describe.only('relativeToCwd', () => {
+describe('relativeToCwd', () => {
     test.each`
         filename                                      | expected
         ${cwdURL()}                                   | ${'./'}
