@@ -1,3 +1,6 @@
+import * as path from 'node:path';
+import { format } from 'node:util';
+
 import type {
     Issue,
     MessageType,
@@ -11,7 +14,6 @@ import chalk from 'chalk';
 import chalkTemplate from 'chalk-template';
 import type { ImportError, SpellingDictionaryLoadError } from 'cspell-lib';
 import { isSpellingDictionaryLoadError } from 'cspell-lib';
-import * as path from 'path';
 import { URI } from 'vscode-uri';
 
 import type { LinterCliOptions } from './options.js';
@@ -31,7 +33,14 @@ interface ReporterIssue extends Issue {
     filename: string;
 }
 
-function genIssueEmitter(template: string, uniqueIssues: boolean) {
+/**
+ *
+ * @param template - The template to use for the issue.
+ * @param uniqueIssues - If true, only unique issues will be reported.
+ * @param reportedIssuesCollection - optional collection to store reported issues.
+ * @returns issueEmitter function
+ */
+function genIssueEmitter(template: string, uniqueIssues: boolean, reportedIssuesCollection: string[] | undefined) {
     const uniqueFilter = uniqueIssues ? uniqueFilterFnGenerator((issue: Issue) => issue.text) : () => true;
     const defaultWidth = 10;
     let maxWidth = defaultWidth;
@@ -44,15 +53,10 @@ function genIssueEmitter(template: string, uniqueIssues: boolean) {
             uri = issue.uri;
         }
         maxWidth = Math.max(maxWidth * 0.999, issue.text.length, 10);
-        console.log(formatIssue(template, issue, Math.ceil(maxWidth)));
+        const issueText = formatIssue(template, issue, Math.ceil(maxWidth));
+        reportedIssuesCollection?.push(issueText);
+        console.log(issueText);
     };
-}
-
-function errorEmitter(message: string, error: Error | SpellingDictionaryLoadError | ImportError) {
-    if (isSpellingDictionaryLoadError(error)) {
-        error = error.cause;
-    }
-    console.error(chalk.red(message), error.toString());
 }
 
 type InfoEmitter = Record<MessageType, (msg: string) => void>;
@@ -164,31 +168,53 @@ export function getReporter(options: ReporterOptions, config?: ReporterConfigura
         };
     }
 
+    const issuesCollection: string[] | undefined = progress ? [] : undefined;
+    const errorCollection: string[] | undefined = [];
+
+    function errorEmitter(message: string, error: Error | SpellingDictionaryLoadError | ImportError) {
+        if (isSpellingDictionaryLoadError(error)) {
+            error = error.cause;
+        }
+        const errorText = format(chalk.red(message), error.toString());
+        errorCollection?.push(errorText);
+        console.error(errorText);
+    }
+
     const resultEmitter = (result: RunResult) => {
         if (!fileGlobs.length && !result.files) {
             return;
         }
-        if (result.cachedFiles) {
-            console.error(
-                'CSpell\x3a Files checked: %d (%d from cache), Issues found: %d in %d files',
-                result.files,
-                result.cachedFiles,
-                result.issues,
-                result.filesWithIssues.size,
-            );
-            return;
+        const { files, issues, cachedFiles, filesWithIssues, errors } = result;
+        const numFilesWithIssues = filesWithIssues.size;
+
+        if (issuesCollection?.length || errorCollection?.length) {
+            console.error('-------------------------------------------');
         }
 
-        console.error(
-            'CSpell\x3a Files checked: %d, Issues found: %d in %d files',
-            result.files,
-            result.issues,
-            result.filesWithIssues.size,
-        );
+        if (issuesCollection?.length) {
+            console.error('Issues found:');
+            issuesCollection.forEach((issue) => console.error(issue));
+        }
+
+        const cachedFilesText = cachedFiles ? ` (${cachedFiles} from cache)` : '';
+        const withErrorsText = errors ? ` with ${errors} error${errors === 1 ? '' : 's'}` : '';
+        const numFilesWidthIssuesText = numFilesWithIssues === 1 ? '1 file' : `${numFilesWithIssues} files`;
+
+        const summaryMessage = `CSpell\x3a Files checked: ${files}${cachedFilesText}, Issues found: ${issues} in ${numFilesWidthIssuesText}${withErrorsText}.`;
+
+        console.error(summaryMessage);
+
+        if (errorCollection?.length && issues > 5) {
+            console.error('-------------------------------------------');
+            console.error('Errors:');
+            errorCollection.forEach((error) => console.error(error));
+        }
     };
 
     return {
-        issue: relativeIssue(silent || !issues ? nullEmitter : genIssueEmitter(issueTemplate, uniqueIssues)),
+        issue: relativeIssue(
+            silent || !issues ? nullEmitter : genIssueEmitter(issueTemplate, uniqueIssues, issuesCollection),
+        ),
         error: silent ? nullEmitter : errorEmitter,
         info: infoEmitter,
         debug: emitters.Debug,
