@@ -5,7 +5,8 @@
   "description": "Tools and Scripts",
   "bin": {
     "update-release-please": "./update-release-please.mjs",
-    "build-cspell-schema": "./build-cspell-schema.mjs"
+    "build-cspell-schema": "./build-cspell-schema.mjs",
+    "update-package-json": "./update-package-json.mjs"
   },
   "scripts": {
     "#build:ts-json-schema-generator": "pnpm esbuild ../../../code/clones/ts-json-schema-generator/dist/index.js --bundle --outfile=lib/ts-json-schema-generator.cjs --platform=node --external:typescript",
@@ -21,6 +22,7 @@
     "esbuild": "^0.20.1"
   },
   "dependencies": {
+    "globby": "^14.0.1",
     "safe-stable-stringify": "^2.4.3",
     "ts-json-schema-generator": "^1.5.0"
   }
