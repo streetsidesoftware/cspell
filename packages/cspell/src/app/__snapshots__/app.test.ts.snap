@@ -7,7 +7,11 @@ exports[`Validate cli > app '--fail-fast no option' Expect Error: [Function Chec
 log	./first-fail.txt:1:1 - Unknown word (iamtypo)
 error	 0.00ms X
 log	./second-fail.txt:1:1 - Unknown word (iamtypotoo)
-error	CSpell: Files checked: 2, Issues found: 2 in 2 files"
+error	-------------------------------------------
+error	Issues found:
+error	./first-fail.txt:1:1 - Unknown word (iamtypo)
+error	./second-fail.txt:1:1 - Unknown word (iamtypotoo)
+error	CSpell: Files checked: 2, Issues found: 2 in 2 files."
 `;
 
 exports[`Validate cli > app '--fail-fast no option' Expect Error: [Function CheckFailed] 3`] = `
@@ -21,7 +25,10 @@ exports[`Validate cli > app '--fail-fast with config' Expect Error: [Function Ch
 exports[`Validate cli > app '--fail-fast with config' Expect Error: [Function CheckFailed] 2`] = `
 "error	 0.00ms X
 log	./first-fail.txt:1:1 - Unknown word (iamtypo)
-error	CSpell: Files checked: 1, Issues found: 1 in 1 files"
+error	-------------------------------------------
+error	Issues found:
+error	./first-fail.txt:1:1 - Unknown word (iamtypo)
+error	CSpell: Files checked: 1, Issues found: 1 in 1 file."
 `;
 
 exports[`Validate cli > app '--fail-fast with config' Expect Error: [Function CheckFailed] 3`] = `
@@ -34,7 +41,10 @@ exports[`Validate cli > app '--fail-fast with option' Expect Error: [Function Ch
 exports[`Validate cli > app '--fail-fast with option' Expect Error: [Function CheckFailed] 2`] = `
 "error	 0.00ms X
 log	./first-fail.txt:1:1 - Unknown word (iamtypo)
-error	CSpell: Files checked: 1, Issues found: 1 in 1 files"
+error	-------------------------------------------
+error	Issues found:
+error	./first-fail.txt:1:1 - Unknown word (iamtypo)
+error	CSpell: Files checked: 1, Issues found: 1 in 1 file."
 `;
 
 exports[`Validate cli > app '--fail-fast with option' Expect Error: [Function CheckFailed] 3`] = `
@@ -78,7 +88,11 @@ exports[`Validate cli > app '--no-fail-fast with config' Expect Error: [Function
 log	./first-fail.txt:1:1 - Unknown word (iamtypo)
 error	 0.00ms X
 log	./second-fail.txt:1:1 - Unknown word (iamtypotoo)
-error	CSpell: Files checked: 2, Issues found: 2 in 2 files"
+error	-------------------------------------------
+error	Issues found:
+error	./first-fail.txt:1:1 - Unknown word (iamtypo)
+error	./second-fail.txt:1:1 - Unknown word (iamtypotoo)
+error	CSpell: Files checked: 2, Issues found: 2 in 2 files."
 `;
 
 exports[`Validate cli > app '--no-fail-fast with config' Expect Error: [Function CheckFailed] 3`] = `
@@ -91,7 +105,7 @@ exports[`Validate cli > app 'Explicit file://' Expect Error: undefined 1`] = `[]
 
 exports[`Validate cli > app 'Explicit file://' Expect Error: undefined 2`] = `
 "error	 0.00ms
-error	CSpell: Files checked: 1, Issues found: 0 in 0 files"
+error	CSpell: Files checked: 1, Issues found: 0 in 0 files."
 `;
 
 exports[`Validate cli > app 'Explicit file://' Expect Error: undefined 3`] = `
@@ -104,7 +118,8 @@ exports[`Validate cli > app 'Explicit not found file://' Expect Error: [Function
 exports[`Validate cli > app 'Explicit not found file://' Expect Error: [Function CheckFailed] 2`] = `
 "error	Linter: File not found: "./fixtures/misc/not-fond.md"
 error	 0.00ms skipped X
-error	CSpell: Files checked: 1, Issues found: 0 in 1 files"
+error	-------------------------------------------
+error	CSpell: Files checked: 1, Issues found: 0 in 1 file with 1 error."
 `;
 
 exports[`Validate cli > app 'Explicit not found file://' Expect Error: [Function CheckFailed] 3`] = `
@@ -116,7 +131,7 @@ exports[`Validate cli > app 'LICENSE' Expect Error: undefined 1`] = `[]`;
 
 exports[`Validate cli > app 'LICENSE' Expect Error: undefined 2`] = `
 "error	 0.00ms
-error	CSpell: Files checked: 1, Issues found: 0 in 0 files"
+error	CSpell: Files checked: 1, Issues found: 0 in 0 files."
 `;
 
 exports[`Validate cli > app 'LICENSE' Expect Error: undefined 3`] = `
@@ -128,7 +143,8 @@ exports[`Validate cli > app 'bad config' Expect Error: [Function CheckFailed] 1`
 
 exports[`Validate cli > app 'bad config' Expect Error: [Function CheckFailed] 2`] = `
 "error	Configuration Error: Failed to read config file: "./src/app/app.test.ts"
-error	CSpell: Files checked: 0, Issues found: 0 in 0 files"
+error	-------------------------------------------
+error	CSpell: Files checked: 0, Issues found: 0 in 0 files with 1 error."
 `;
 
 exports[`Validate cli > app 'bad config' Expect Error: [Function CheckFailed] 3`] = `""`;
@@ -317,7 +333,7 @@ exports[`Validate cli > app 'cspell-bad.json' Expect Error: undefined 1`] = `[]`
 
 exports[`Validate cli > app 'cspell-bad.json' Expect Error: undefined 2`] = `
 "error	 0.00ms
-error	CSpell: Files checked: 1, Issues found: 0 in 0 files"
+error	CSpell: Files checked: 1, Issues found: 0 in 0 files."
 `;
 
 exports[`Validate cli > app 'cspell-bad.json' Expect Error: undefined 3`] = `
@@ -329,7 +345,8 @@ exports[`Validate cli > app 'cspell-import-missing.json' Expect Error: [Function
 
 exports[`Validate cli > app 'cspell-import-missing.json' Expect Error: [Function CheckFailed] 2`] = `
 "error	Configuration Configuration Loader Error: Failed to resolve configuration file: "../intentionally-missing-file.json" referenced from "./samples/linked/cspell-import-missing.json"
-error	CSpell: Files checked: 0, Issues found: 0 in 0 files"
+error	-------------------------------------------
+error	CSpell: Files checked: 0, Issues found: 0 in 0 files with 1 error."
 `;
 
 exports[`Validate cli > app 'cspell-import-missing.json' Expect Error: [Function CheckFailed] 3`] = `""`;
@@ -371,7 +388,7 @@ info	Checked: ./src/app/app.test.ts, File type: typescript, Language: en ... Iss
 info	Config file Used: ./cspell.json
 info	Dictionaries Used: companies, cryptocurrencies, filetypes, public-licenses, softwareTerms, computing-acronyms, web-services, workspace, [in-document-dict], aws, en_us, en-common-misspellings, fullstack, node, npm, svelte, typescript
 error	 0.00ms
-error	CSpell: Files checked: 1, Issues found: 0 in 0 files"
+error	CSpell: Files checked: 1, Issues found: 0 in 0 files."
 `;
 
 exports[`Validate cli > app 'current_file --verbose' Expect Error: undefined 3`] = `
@@ -383,7 +400,7 @@ exports[`Validate cli > app 'current_file languageId' Expect Error: undefined 1`
 
 exports[`Validate cli > app 'current_file languageId' Expect Error: undefined 2`] = `
 "error	 0.00ms
-error	CSpell: Files checked: 1, Issues found: 0 in 0 files"
+error	CSpell: Files checked: 1, Issues found: 0 in 0 files."
 `;
 
 exports[`Validate cli > app 'current_file languageId' Expect Error: undefined 3`] = `
@@ -395,7 +412,7 @@ exports[`Validate cli > app 'current_file' Expect Error: undefined 1`] = `[]`;
 
 exports[`Validate cli > app 'current_file' Expect Error: undefined 2`] = `
 "error	 0.00ms
-error	CSpell: Files checked: 1, Issues found: 0 in 0 files"
+error	CSpell: Files checked: 1, Issues found: 0 in 0 files."
 `;
 
 exports[`Validate cli > app 'current_file' Expect Error: undefined 3`] = `
@@ -408,7 +425,7 @@ exports[`Validate cli > app 'inline suggest' Expect Error: [Function CheckFailed
 exports[`Validate cli > app 'inline suggest' Expect Error: [Function CheckFailed] 2`] = `
 "log	./README.md:7:3 - Unknown word (bluelist) Suggestions: [blueList*, bluest, blueish, bluefish, bluesiest]
 log	./README.md:8:3 - Unknown word (blulist) Suggestions: [blueList*, bullish, bluest, bluish, blueish]
-error	CSpell: Files checked: 1, Issues found: 2 in 1 files"
+error	CSpell: Files checked: 1, Issues found: 2 in 1 file."
 `;
 
 exports[`Validate cli > app 'inline suggest' Expect Error: [Function CheckFailed] 3`] = `""`;
@@ -438,7 +455,7 @@ info	Checked: ./fixtures/issue-2998/fix-words.txt, File type: fix, Language: en 
 info	Config file Used: ./fixtures/issue-2998/cspell.json
 info	Dictionaries Used: companies, cryptocurrencies, filetypes, public-licenses, softwareTerms, computing-acronyms, web-services, aws, en_us, en-common-misspellings, fixture
 error	 0.00ms
-error	CSpell: Files checked: 1, Issues found: 0 in 0 files"
+error	CSpell: Files checked: 1, Issues found: 0 in 0 files."
 `;
 
 exports[`Validate cli > app 'issue-2998 --language-id' Expect Error: undefined 3`] = `
@@ -448,7 +465,7 @@ exports[`Validate cli > app 'issue-2998 --language-id' Expect Error: undefined 3
 
 exports[`Validate cli > app 'issue-4811 **/README.md' Expect Error: undefined 1`] = `[]`;
 
-exports[`Validate cli > app 'issue-4811 **/README.md' Expect Error: undefined 2`] = `"error	CSpell: Files checked: 2, Issues found: 0 in 0 files"`;
+exports[`Validate cli > app 'issue-4811 **/README.md' Expect Error: undefined 2`] = `"error	CSpell: Files checked: 2, Issues found: 0 in 0 files."`;
 
 exports[`Validate cli > app 'issue-4811 **/README.md' Expect Error: undefined 3`] = `""`;
 
@@ -456,20 +473,20 @@ exports[`Validate cli > app 'issue-4811' Expect Error: [Function CheckFailed] 1`
 
 exports[`Validate cli > app 'issue-4811' Expect Error: [Function CheckFailed] 2`] = `
 "log	./#local/version@2.md:3:9 - Unknown word (marrkdown)
-error	CSpell: Files checked: 9, Issues found: 1 in 1 files"
+error	CSpell: Files checked: 9, Issues found: 1 in 1 file."
 `;
 
 exports[`Validate cli > app 'issue-4811' Expect Error: [Function CheckFailed] 3`] = `""`;
 
 exports[`Validate cli > app 'issue-4811/#local' Expect Error: undefined 1`] = `[]`;
 
-exports[`Validate cli > app 'issue-4811/#local' Expect Error: undefined 2`] = `"error	CSpell: Files checked: 1, Issues found: 0 in 0 files"`;
+exports[`Validate cli > app 'issue-4811/#local' Expect Error: undefined 2`] = `"error	CSpell: Files checked: 1, Issues found: 0 in 0 files."`;
 
 exports[`Validate cli > app 'issue-4811/#local' Expect Error: undefined 3`] = `""`;
 
 exports[`Validate cli > app 'issue-4811/*/README.md' Expect Error: undefined 1`] = `[]`;
 
-exports[`Validate cli > app 'issue-4811/*/README.md' Expect Error: undefined 2`] = `"error	CSpell: Files checked: 1, Issues found: 0 in 0 files"`;
+exports[`Validate cli > app 'issue-4811/*/README.md' Expect Error: undefined 2`] = `"error	CSpell: Files checked: 1, Issues found: 0 in 0 files."`;
 
 exports[`Validate cli > app 'issue-4811/*/README.md' Expect Error: undefined 3`] = `""`;
 
@@ -485,13 +502,13 @@ exports[`Validate cli > app 'link' 1`] = `""`;
 
 exports[`Validate cli > app 'must find force no error' Expect Error: undefined 1`] = `[]`;
 
-exports[`Validate cli > app 'must find force no error' Expect Error: undefined 2`] = `"error	CSpell: Files checked: 0, Issues found: 0 in 0 files"`;
+exports[`Validate cli > app 'must find force no error' Expect Error: undefined 2`] = `"error	CSpell: Files checked: 0, Issues found: 0 in 0 files."`;
 
 exports[`Validate cli > app 'must find force no error' Expect Error: undefined 3`] = `""`;
 
 exports[`Validate cli > app 'must find with error' Expect Error: [Function CheckFailed] 1`] = `[]`;
 
-exports[`Validate cli > app 'must find with error' Expect Error: [Function CheckFailed] 2`] = `"error	CSpell: Files checked: 0, Issues found: 0 in 0 files"`;
+exports[`Validate cli > app 'must find with error' Expect Error: [Function CheckFailed] 2`] = `"error	CSpell: Files checked: 0, Issues found: 0 in 0 files."`;
 
 exports[`Validate cli > app 'must find with error' Expect Error: [Function CheckFailed] 3`] = `""`;
 
@@ -612,7 +629,7 @@ exports[`Validate cli > app 'no-args' Expect Error: 'outputHelp' 3`] = `""`;
 
 exports[`Validate cli > app 'not found error by default' Expect Error: [Function CheckFailed] 1`] = `[]`;
 
-exports[`Validate cli > app 'not found error by default' Expect Error: [Function CheckFailed] 2`] = `"error	CSpell: Files checked: 0, Issues found: 0 in 0 files"`;
+exports[`Validate cli > app 'not found error by default' Expect Error: [Function CheckFailed] 2`] = `"error	CSpell: Files checked: 0, Issues found: 0 in 0 files."`;
 
 exports[`Validate cli > app 'not found error by default' Expect Error: [Function CheckFailed] 3`] = `""`;
 
@@ -830,7 +847,198 @@ log	./samples/Dutch.txt:77:58 - Unknown word (algemeen)
 log	./samples/Dutch.txt:77:71 - Unknown word (beogende)
 log	./samples/Dutch.txt:78:4 - Unknown word (instelling)
 log	./samples/Dutch.txt:78:18 - Unknown word (ANBI)
-error	CSpell: Files checked: 1, Issues found: 189 in 1 files"
+error	-------------------------------------------
+error	Issues found:
+error	./samples/Dutch.txt:1:32 - Unknown word (NEDERLANDS)
+error	./samples/Dutch.txt:2:11 - Unknown word (wordt)
+error	./samples/Dutch.txt:2:17 - Unknown word (vriendelijk)
+error	./samples/Dutch.txt:2:29 - Unknown word (verzocht)
+error	./samples/Dutch.txt:2:45 - Unknown word (bestand)
+error	./samples/Dutch.txt:3:10 - Unknown word (lezen)
+error	./samples/Dutch.txt:3:26 - Unknown word (leveren)
+error	./samples/Dutch.txt:3:38 - Unknown word (iedere)
+error	./samples/Dutch.txt:3:45 - Unknown word (kopie)
+error	./samples/Dutch.txt:3:59 - Unknown word (taalhulpbestand)
+error	./samples/Dutch.txt:5:4 - Unknown word (Naam)
+error	./samples/Dutch.txt:5:10 - Unknown word (Nederlandstalige)
+error	./samples/Dutch.txt:5:27 - Unknown word (woordenlijst)
+error	./samples/Dutch.txt:5:40 - Unknown word (voor)
+error	./samples/Dutch.txt:5:45 - Unknown word (spellingcontrole)
+error	./samples/Dutch.txt:6:4 - Unknown word (Versie)
+error	./samples/Dutch.txt:6:11 - Unknown word (woordenlijst)
+error	./samples/Dutch.txt:6:32 - Unknown word (versie)
+error	./samples/Dutch.txt:6:39 - Unknown word (spellingcontrole)
+error	./samples/Dutch.txt:7:4 - Unknown word (Vereisten)
+error	./samples/Dutch.txt:7:33 - Unknown word (hoger)
+error	./samples/Dutch.txt:8:4 - Unknown word (Keurmerk)
+error	./samples/Dutch.txt:8:22 - Unknown word (Nederlandse)
+error	./samples/Dutch.txt:8:34 - Unknown word (Taalunie)
+error	./samples/Dutch.txt:8:47 - Unknown word (lijst)
+error	./samples/Dutch.txt:8:57 - Unknown word (basiswoorden)
+error	./samples/Dutch.txt:9:13 - Unknown word (draagt)
+error	./samples/Dutch.txt:9:24 - Unknown word (keurmerk)
+error	./samples/Dutch.txt:9:40 - Unknown word (Nederlandse)
+error	./samples/Dutch.txt:9:52 - Unknown word (Taalunie)
+error	./samples/Dutch.txt:9:62 - Unknown word (Voor)
+error	./samples/Dutch.txt:9:67 - Unknown word (meer)
+error	./samples/Dutch.txt:10:4 - Unknown word (informatie)
+error	./samples/Dutch.txt:11:4 - Unknown word (Auteursrechten)
+error	./samples/Dutch.txt:11:60 - Unknown word (Brouwer)
+error	./samples/Dutch.txt:12:11 - Unknown word (Nederlandstalige)
+error	./samples/Dutch.txt:12:32 - Unknown word (Gebruikersgroep)
+error	./samples/Dutch.txt:13:4 - Unknown word (Licenties)
+error	./samples/Dutch.txt:13:24 - Unknown word (heeft)
+error	./samples/Dutch.txt:13:34 - Unknown word (doel)
+error	./samples/Dutch.txt:13:42 - Unknown word (vrij)
+error	./samples/Dutch.txt:13:47 - Unknown word (beschikbare)
+error	./samples/Dutch.txt:13:59 - Unknown word (Nederlandstalige)
+error	./samples/Dutch.txt:14:4 - Unknown word (taalhulpbestanden)
+error	./samples/Dutch.txt:14:25 - Unknown word (ontwikkelen)
+error	./samples/Dutch.txt:14:43 - Unknown word (verspreiden)
+error	./samples/Dutch.txt:14:70 - Unknown word (gebruik)
+error	./samples/Dutch.txt:15:4 - Unknown word (mogelijk)
+error	./samples/Dutch.txt:15:16 - Unknown word (maken)
+error	./samples/Dutch.txt:15:22 - Unknown word (zijn)
+error	./samples/Dutch.txt:15:30 - Unknown word (taalhulpbestanden)
+error	./samples/Dutch.txt:15:55 - Unknown word (beschikbaar)
+error	./samples/Dutch.txt:15:67 - Unknown word (onder)
+error	./samples/Dutch.txt:16:4 - Unknown word (onderstaande)
+error	./samples/Dutch.txt:16:18 - Unknown word (liberale)
+error	./samples/Dutch.txt:16:27 - Unknown word (licenties)
+error	./samples/Dutch.txt:16:37 - Unknown word (naar)
+error	./samples/Dutch.txt:16:42 - Unknown word (keuze)
+error	./samples/Dutch.txt:16:55 - Unknown word (gebruiker)
+error	./samples/Dutch.txt:16:68 - Unknown word (wordt)
+error	./samples/Dutch.txt:17:4 - Unknown word (zeerste)
+error	./samples/Dutch.txt:17:12 - Unknown word (aangeraden)
+error	./samples/Dutch.txt:17:26 - Unknown word (voorafgaand)
+error	./samples/Dutch.txt:17:46 - Unknown word (gebruik)
+error	./samples/Dutch.txt:17:54 - Unknown word (kennis)
+error	./samples/Dutch.txt:17:64 - Unknown word (nemen)
+error	./samples/Dutch.txt:18:4 - Unknown word (toepasselijke)
+error	./samples/Dutch.txt:18:18 - Unknown word (licentie)
+error	./samples/Dutch.txt:19:12 - Unknown word (herziene)
+error	./samples/Dutch.txt:19:21 - Unknown word (versie)
+error	./samples/Dutch.txt:20:6 - Unknown word (Volledige)
+error	./samples/Dutch.txt:20:16 - Unknown word (licentie)
+error	./samples/Dutch.txt:21:6 - Unknown word (Samenvatting)
+error	./samples/Dutch.txt:22:25 - Unknown word (Naamsvermelding)
+error	./samples/Dutch.txt:22:46 - Unknown word (unported)
+error	./samples/Dutch.txt:23:6 - Unknown word (Volledige)
+error	./samples/Dutch.txt:23:16 - Unknown word (licentie)
+error	./samples/Dutch.txt:24:6 - Unknown word (Samenvatting)
+error	./samples/Dutch.txt:25:4 - Unknown word (Steun)
+error	./samples/Dutch.txt:25:36 - Unknown word (vrijwilligersproject)
+error	./samples/Dutch.txt:25:57 - Unknown word (zonder)
+error	./samples/Dutch.txt:25:64 - Unknown word (winstoogmerk)
+error	./samples/Dutch.txt:26:13 - Unknown word (kleine)
+error	./samples/Dutch.txt:26:21 - Unknown word (financiële)
+error	./samples/Dutch.txt:26:32 - Unknown word (steun)
+error	./samples/Dutch.txt:26:51 - Unknown word (meer)
+error	./samples/Dutch.txt:26:56 - Unknown word (activiteiten)
+error	./samples/Dutch.txt:26:69 - Unknown word (ontplooien)
+error	./samples/Dutch.txt:27:19 - Unknown word (professionaliseren)
+error	./samples/Dutch.txt:27:42 - Unknown word (donatie)
+error	./samples/Dutch.txt:27:63 - Unknown word (welkom)
+error	./samples/Dutch.txt:28:4 - Unknown word (rekeningnummer)
+error	./samples/Dutch.txt:28:39 - Unknown word (Stichting)
+error	./samples/Dutch.txt:28:62 - Unknown word (giften)
+error	./samples/Dutch.txt:28:69 - Unknown word (zijn)
+error	./samples/Dutch.txt:29:4 - Unknown word (aftrekbaar)
+error	./samples/Dutch.txt:29:22 - Unknown word (belasting)
+error	./samples/Dutch.txt:29:33 - Unknown word (Stichting)
+error	./samples/Dutch.txt:29:55 - Unknown word (namelijk)
+error	./samples/Dutch.txt:30:4 - Unknown word (Belastingdienst)
+error	./samples/Dutch.txt:30:20 - Unknown word (erkend)
+error	./samples/Dutch.txt:30:31 - Unknown word (ANBI)
+error	./samples/Dutch.txt:30:37 - Unknown word (oftewel)
+error	./samples/Dutch.txt:30:46 - Unknown word (Algemeen)
+error	./samples/Dutch.txt:30:59 - Unknown word (Beogende)
+error	./samples/Dutch.txt:30:68 - Unknown word (Instelling)
+error	./samples/Dutch.txt:32:4 - Unknown word (Meedoen)
+error	./samples/Dutch.txt:32:13 - Unknown word (Iedereen)
+error	./samples/Dutch.txt:32:25 - Unknown word (welkom)
+error	./samples/Dutch.txt:32:42 - Unknown word (doen)
+error	./samples/Dutch.txt:32:53 - Unknown word (fouten)
+error	./samples/Dutch.txt:32:61 - Unknown word (discussieer)
+error	./samples/Dutch.txt:33:7 - Unknown word (mailinglijst)
+error	./samples/Dutch.txt:33:23 - Unknown word (draai)
+error	./samples/Dutch.txt:33:52 - Unknown word (dragen)
+error	./samples/Dutch.txt:33:75 - Unknown word (stemt)
+error	./samples/Dutch.txt:34:6 - Unknown word (ermee)
+error	./samples/Dutch.txt:34:22 - Unknown word (bijdrage)
+error	./samples/Dutch.txt:34:39 - Unknown word (desbetreffende)
+error	./samples/Dutch.txt:34:54 - Unknown word (taalhulpbestand)
+error	./samples/Dutch.txt:34:70 - Unknown word (beschikbaar)
+error	./samples/Dutch.txt:35:4 - Unknown word (komt)
+error	./samples/Dutch.txt:35:9 - Unknown word (onder)
+error	./samples/Dutch.txt:35:15 - Unknown word (vrije)
+error	./samples/Dutch.txt:35:27 - Unknown word (opensource)
+error	./samples/Dutch.txt:35:38 - Unknown word (licenties)
+error	./samples/Dutch.txt:35:49 - Unknown word (Indien)
+error	./samples/Dutch.txt:35:62 - Unknown word (wenst)
+error	./samples/Dutch.txt:36:4 - Unknown word (naam)
+error	./samples/Dutch.txt:36:23 - Unknown word (genoemd)
+error	./samples/Dutch.txt:36:31 - Unknown word (worden)
+error	./samples/Dutch.txt:36:42 - Unknown word (ontvangen)
+error	./samples/Dutch.txt:36:55 - Unknown word (schriftelijk)
+error	./samples/Dutch.txt:36:68 - Unknown word (verzoek)
+error	./samples/Dutch.txt:37:4 - Unknown word (daarvoor)
+error	./samples/Dutch.txt:37:13 - Unknown word (graag)
+error	./samples/Dutch.txt:38:4 - Unknown word (Rechten)
+error	./samples/Dutch.txt:38:16 - Unknown word (derden)
+error	./samples/Dutch.txt:38:33 - Unknown word (respecteert)
+error	./samples/Dutch.txt:38:48 - Unknown word (rechten)
+error	./samples/Dutch.txt:38:60 - Unknown word (derden)
+error	./samples/Dutch.txt:39:13 - Unknown word (gegevens)
+error	./samples/Dutch.txt:39:22 - Unknown word (vrij)
+error	./samples/Dutch.txt:39:27 - Unknown word (beschikbaar)
+error	./samples/Dutch.txt:39:39 - Unknown word (houden)
+error	./samples/Dutch.txt:39:47 - Unknown word (Voor)
+error	./samples/Dutch.txt:39:52 - Unknown word (bijdragen)
+error	./samples/Dutch.txt:40:6 - Unknown word (daarom)
+error	./samples/Dutch.txt:40:13 - Unknown word (niet)
+error	./samples/Dutch.txt:40:18 - Unknown word (zonder)
+error	./samples/Dutch.txt:40:25 - Unknown word (toestemming)
+error	./samples/Dutch.txt:40:37 - Unknown word (gebruikmaken)
+error	./samples/Dutch.txt:40:54 - Unknown word (beschermde)
+error	./samples/Dutch.txt:40:65 - Unknown word (naslagwerken)
+error	./samples/Dutch.txt:41:4 - Unknown word (zoals)
+error	./samples/Dutch.txt:41:10 - Unknown word (woordenboeken)
+error	./samples/Dutch.txt:41:36 - Unknown word (toegestaan)
+error	./samples/Dutch.txt:41:50 - Unknown word (gebruik)
+error	./samples/Dutch.txt:41:61 - Unknown word (maken)
+error	./samples/Dutch.txt:42:4 - Unknown word (materialen)
+error	./samples/Dutch.txt:42:22 - Unknown word (Nederlandse)
+error	./samples/Dutch.txt:42:34 - Unknown word (Taalunie)
+error	./samples/Dutch.txt:42:44 - Unknown word (zoals)
+error	./samples/Dutch.txt:42:53 - Unknown word (leidraad)
+error	./samples/Dutch.txt:42:68 - Unknown word (woordenlijst)
+error	./samples/Dutch.txt:43:4 - Unknown word (Indien)
+error	./samples/Dutch.txt:43:17 - Unknown word (mening)
+error	./samples/Dutch.txt:43:42 - Unknown word (inbreuk)
+error	./samples/Dutch.txt:43:50 - Unknown word (maakt)
+error	./samples/Dutch.txt:43:62 - Unknown word (rechten)
+error	./samples/Dutch.txt:44:4 - Unknown word (verzoeken)
+error	./samples/Dutch.txt:44:19 - Unknown word (hierover)
+error	./samples/Dutch.txt:44:31 - Unknown word (spoedig)
+error	./samples/Dutch.txt:44:39 - Unknown word (mogelijk)
+error	./samples/Dutch.txt:44:48 - Unknown word (schriftelijk)
+error	./samples/Dutch.txt:45:7 - Unknown word (nemen)
+error	./samples/Dutch.txt:46:13 - Unknown word (Stichting)
+error	./samples/Dutch.txt:59:56 - Unknown word (Brouwer)
+error	./samples/Dutch.txt:60:11 - Unknown word (Nederlandstalige)
+error	./samples/Dutch.txt:60:32 - Unknown word (Gebruikersgroep)
+error	./samples/Dutch.txt:68:42 - Unknown word (unported)
+error	./samples/Dutch.txt:74:39 - Unknown word (RABONL)
+error	./samples/Dutch.txt:74:49 - Unknown word (IBAN)
+error	./samples/Dutch.txt:74:59 - Unknown word (RABO)
+error	./samples/Dutch.txt:75:4 - Unknown word (Stichting)
+error	./samples/Dutch.txt:77:58 - Unknown word (algemeen)
+error	./samples/Dutch.txt:77:71 - Unknown word (beogende)
+error	./samples/Dutch.txt:78:4 - Unknown word (instelling)
+error	./samples/Dutch.txt:78:18 - Unknown word (ANBI)
+error	CSpell: Files checked: 1, Issues found: 189 in 1 file."
 `;
 
 exports[`Validate cli > app 'samples/Dutch.txt' Expect Error: [Function CheckFailed] 3`] = `
@@ -1023,7 +1231,7 @@ log	./test.md:6:3 - Forbidden word (whitelist)
 log	./test.md:7:3 - Forbidden word (rad)
 log	./test.md:9:13 - Forbidden word (english)
 log	./test.md:9:38 - Forbidden word (Blacklisted)
-error	CSpell: Files checked: 3, Issues found: 6 in 2 files"
+error	CSpell: Files checked: 3, Issues found: 6 in 2 files."
 `;
 
 exports[`Validate cli > app 'typos --no-show-suggestions' Expect Error: [Function CheckFailed] 3`] = `""`;
@@ -1037,7 +1245,7 @@ log	./test.md:6:3 - Forbidden word (whitelist) Suggestions: [allowlist*, whiteli
 log	./test.md:7:3 - Forbidden word (rad) Suggestions: [cool*, ard, rda, rads, raid]
 log	./test.md:9:13 - Forbidden word (english) Suggestions: [English*, enlist, english's, englished, englisher]
 log	./test.md:9:38 - Forbidden word (Blacklisted) Suggestions: [Denylisted*, Backlist, Backlists, Backlashed, Blacklegged]
-error	CSpell: Files checked: 3, Issues found: 6 in 2 files"
+error	CSpell: Files checked: 3, Issues found: 6 in 2 files."
 `;
 
 exports[`Validate cli > app 'typos --show-suggestions' Expect Error: [Function CheckFailed] 3`] = `""`;
@@ -1051,7 +1259,7 @@ log	./test.md:6:3 - Forbidden word (whitelist) fix: (allowlist)
 log	./test.md:7:3 - Forbidden word (rad) fix: (cool)
 log	./test.md:9:13 - Forbidden word (english) fix: (English)
 log	./test.md:9:38 - Forbidden word (Blacklisted) fix: (Denylisted)
-error	CSpell: Files checked: 3, Issues found: 6 in 2 files"
+error	CSpell: Files checked: 3, Issues found: 6 in 2 files."
 `;
 
 exports[`Validate cli > app 'typos' Expect Error: [Function CheckFailed] 3`] = `""`;
@@ -1072,7 +1280,16 @@ log	./text.txt:3:9 - Unknown word (someissues)
 log	./text.txt:3:23 - Unknown word (everyline)
 log	./text.txt:5:24 - Unknown word (okkk)
 log	./text.txt:5:32 - Unknown word (reead)
-error	CSpell: Files checked: 6, Issues found: 7 in 1 files"
+error	-------------------------------------------
+error	Issues found:
+error	./text.txt:1:14 - Unknown word (fulll)
+error	./text.txt:1:23 - Unknown word (errrorrrs)
+error	./text.txt:3:4 - Unknown word (hass)
+error	./text.txt:3:9 - Unknown word (someissues)
+error	./text.txt:3:23 - Unknown word (everyline)
+error	./text.txt:5:24 - Unknown word (okkk)
+error	./text.txt:5:32 - Unknown word (reead)
+error	CSpell: Files checked: 6, Issues found: 7 in 1 file."
 `;
 
 exports[`Validate cli > app 'with errors and excludes' Expect Error: [Function CheckFailed] 3`] = `
@@ -1091,7 +1308,11 @@ exports[`Validate cli > app 'with forbidden words' Expect Error: [Function Check
 "error	 0.00ms X
 log	./samples/src/sample-with-forbidden-words.md:3:3 - Unknown word (behaviour)
 log	./samples/src/sample-with-forbidden-words.md:5:3 - Unknown word (colour)
-error	CSpell: Files checked: 1, Issues found: 2 in 1 files"
+error	-------------------------------------------
+error	Issues found:
+error	./samples/src/sample-with-forbidden-words.md:3:3 - Unknown word (behaviour)
+error	./samples/src/sample-with-forbidden-words.md:5:3 - Unknown word (colour)
+error	CSpell: Files checked: 1, Issues found: 2 in 1 file."
 `;
 
 exports[`Validate cli > app 'with forbidden words' Expect Error: [Function CheckFailed] 3`] = `
@@ -1492,7 +1713,198 @@ log	./samples/Dutch.txt[77, 58]: Unknown word: algemeen
 log	./samples/Dutch.txt[77, 71]: Unknown word: beogende
 log	./samples/Dutch.txt[78, 4]: Unknown word: instelling
 log	./samples/Dutch.txt[78, 18]: Unknown word: ANBI
-error	CSpell: Files checked: 1, Issues found: 189 in 1 files"
+error	-------------------------------------------
+error	Issues found:
+error	./samples/Dutch.txt[1, 32]: Unknown word: NEDERLANDS
+error	./samples/Dutch.txt[2, 11]: Unknown word: wordt
+error	./samples/Dutch.txt[2, 17]: Unknown word: vriendelijk
+error	./samples/Dutch.txt[2, 29]: Unknown word: verzocht
+error	./samples/Dutch.txt[2, 45]: Unknown word: bestand
+error	./samples/Dutch.txt[3, 10]: Unknown word: lezen
+error	./samples/Dutch.txt[3, 26]: Unknown word: leveren
+error	./samples/Dutch.txt[3, 38]: Unknown word: iedere
+error	./samples/Dutch.txt[3, 45]: Unknown word: kopie
+error	./samples/Dutch.txt[3, 59]: Unknown word: taalhulpbestand
+error	./samples/Dutch.txt[5, 4]: Unknown word: Naam
+error	./samples/Dutch.txt[5, 10]: Unknown word: Nederlandstalige
+error	./samples/Dutch.txt[5, 27]: Unknown word: woordenlijst
+error	./samples/Dutch.txt[5, 40]: Unknown word: voor
+error	./samples/Dutch.txt[5, 45]: Unknown word: spellingcontrole
+error	./samples/Dutch.txt[6, 4]: Unknown word: Versie
+error	./samples/Dutch.txt[6, 11]: Unknown word: woordenlijst
+error	./samples/Dutch.txt[6, 32]: Unknown word: versie
+error	./samples/Dutch.txt[6, 39]: Unknown word: spellingcontrole
+error	./samples/Dutch.txt[7, 4]: Unknown word: Vereisten
+error	./samples/Dutch.txt[7, 33]: Unknown word: hoger
+error	./samples/Dutch.txt[8, 4]: Unknown word: Keurmerk
+error	./samples/Dutch.txt[8, 22]: Unknown word: Nederlandse
+error	./samples/Dutch.txt[8, 34]: Unknown word: Taalunie
+error	./samples/Dutch.txt[8, 47]: Unknown word: lijst
+error	./samples/Dutch.txt[8, 57]: Unknown word: basiswoorden
+error	./samples/Dutch.txt[9, 13]: Unknown word: draagt
+error	./samples/Dutch.txt[9, 24]: Unknown word: keurmerk
+error	./samples/Dutch.txt[9, 40]: Unknown word: Nederlandse
+error	./samples/Dutch.txt[9, 52]: Unknown word: Taalunie
+error	./samples/Dutch.txt[9, 62]: Unknown word: Voor
+error	./samples/Dutch.txt[9, 67]: Unknown word: meer
+error	./samples/Dutch.txt[10, 4]: Unknown word: informatie
+error	./samples/Dutch.txt[11, 4]: Unknown word: Auteursrechten
+error	./samples/Dutch.txt[11, 60]: Unknown word: Brouwer
+error	./samples/Dutch.txt[12, 11]: Unknown word: Nederlandstalige
+error	./samples/Dutch.txt[12, 32]: Unknown word: Gebruikersgroep
+error	./samples/Dutch.txt[13, 4]: Unknown word: Licenties
+error	./samples/Dutch.txt[13, 24]: Unknown word: heeft
+error	./samples/Dutch.txt[13, 34]: Unknown word: doel
+error	./samples/Dutch.txt[13, 42]: Unknown word: vrij
+error	./samples/Dutch.txt[13, 47]: Unknown word: beschikbare
+error	./samples/Dutch.txt[13, 59]: Unknown word: Nederlandstalige
+error	./samples/Dutch.txt[14, 4]: Unknown word: taalhulpbestanden
+error	./samples/Dutch.txt[14, 25]: Unknown word: ontwikkelen
+error	./samples/Dutch.txt[14, 43]: Unknown word: verspreiden
+error	./samples/Dutch.txt[14, 70]: Unknown word: gebruik
+error	./samples/Dutch.txt[15, 4]: Unknown word: mogelijk
+error	./samples/Dutch.txt[15, 16]: Unknown word: maken
+error	./samples/Dutch.txt[15, 22]: Unknown word: zijn
+error	./samples/Dutch.txt[15, 30]: Unknown word: taalhulpbestanden
+error	./samples/Dutch.txt[15, 55]: Unknown word: beschikbaar
+error	./samples/Dutch.txt[15, 67]: Unknown word: onder
+error	./samples/Dutch.txt[16, 4]: Unknown word: onderstaande
+error	./samples/Dutch.txt[16, 18]: Unknown word: liberale
+error	./samples/Dutch.txt[16, 27]: Unknown word: licenties
+error	./samples/Dutch.txt[16, 37]: Unknown word: naar
+error	./samples/Dutch.txt[16, 42]: Unknown word: keuze
+error	./samples/Dutch.txt[16, 55]: Unknown word: gebruiker
+error	./samples/Dutch.txt[16, 68]: Unknown word: wordt
+error	./samples/Dutch.txt[17, 4]: Unknown word: zeerste
+error	./samples/Dutch.txt[17, 12]: Unknown word: aangeraden
+error	./samples/Dutch.txt[17, 26]: Unknown word: voorafgaand
+error	./samples/Dutch.txt[17, 46]: Unknown word: gebruik
+error	./samples/Dutch.txt[17, 54]: Unknown word: kennis
+error	./samples/Dutch.txt[17, 64]: Unknown word: nemen
+error	./samples/Dutch.txt[18, 4]: Unknown word: toepasselijke
+error	./samples/Dutch.txt[18, 18]: Unknown word: licentie
+error	./samples/Dutch.txt[19, 12]: Unknown word: herziene
+error	./samples/Dutch.txt[19, 21]: Unknown word: versie
+error	./samples/Dutch.txt[20, 6]: Unknown word: Volledige
+error	./samples/Dutch.txt[20, 16]: Unknown word: licentie
+error	./samples/Dutch.txt[21, 6]: Unknown word: Samenvatting
+error	./samples/Dutch.txt[22, 25]: Unknown word: Naamsvermelding
+error	./samples/Dutch.txt[22, 46]: Unknown word: unported
+error	./samples/Dutch.txt[23, 6]: Unknown word: Volledige
+error	./samples/Dutch.txt[23, 16]: Unknown word: licentie
+error	./samples/Dutch.txt[24, 6]: Unknown word: Samenvatting
+error	./samples/Dutch.txt[25, 4]: Unknown word: Steun
+error	./samples/Dutch.txt[25, 36]: Unknown word: vrijwilligersproject
+error	./samples/Dutch.txt[25, 57]: Unknown word: zonder
+error	./samples/Dutch.txt[25, 64]: Unknown word: winstoogmerk
+error	./samples/Dutch.txt[26, 13]: Unknown word: kleine
+error	./samples/Dutch.txt[26, 21]: Unknown word: financiële
+error	./samples/Dutch.txt[26, 32]: Unknown word: steun
+error	./samples/Dutch.txt[26, 51]: Unknown word: meer
+error	./samples/Dutch.txt[26, 56]: Unknown word: activiteiten
+error	./samples/Dutch.txt[26, 69]: Unknown word: ontplooien
+error	./samples/Dutch.txt[27, 19]: Unknown word: professionaliseren
+error	./samples/Dutch.txt[27, 42]: Unknown word: donatie
+error	./samples/Dutch.txt[27, 63]: Unknown word: welkom
+error	./samples/Dutch.txt[28, 4]: Unknown word: rekeningnummer
+error	./samples/Dutch.txt[28, 39]: Unknown word: Stichting
+error	./samples/Dutch.txt[28, 62]: Unknown word: giften
+error	./samples/Dutch.txt[28, 69]: Unknown word: zijn
+error	./samples/Dutch.txt[29, 4]: Unknown word: aftrekbaar
+error	./samples/Dutch.txt[29, 22]: Unknown word: belasting
+error	./samples/Dutch.txt[29, 33]: Unknown word: Stichting
+error	./samples/Dutch.txt[29, 55]: Unknown word: namelijk
+error	./samples/Dutch.txt[30, 4]: Unknown word: Belastingdienst
+error	./samples/Dutch.txt[30, 20]: Unknown word: erkend
+error	./samples/Dutch.txt[30, 31]: Unknown word: ANBI
+error	./samples/Dutch.txt[30, 37]: Unknown word: oftewel
+error	./samples/Dutch.txt[30, 46]: Unknown word: Algemeen
+error	./samples/Dutch.txt[30, 59]: Unknown word: Beogende
+error	./samples/Dutch.txt[30, 68]: Unknown word: Instelling
+error	./samples/Dutch.txt[32, 4]: Unknown word: Meedoen
+error	./samples/Dutch.txt[32, 13]: Unknown word: Iedereen
+error	./samples/Dutch.txt[32, 25]: Unknown word: welkom
+error	./samples/Dutch.txt[32, 42]: Unknown word: doen
+error	./samples/Dutch.txt[32, 53]: Unknown word: fouten
+error	./samples/Dutch.txt[32, 61]: Unknown word: discussieer
+error	./samples/Dutch.txt[33, 7]: Unknown word: mailinglijst
+error	./samples/Dutch.txt[33, 23]: Unknown word: draai
+error	./samples/Dutch.txt[33, 52]: Unknown word: dragen
+error	./samples/Dutch.txt[33, 75]: Unknown word: stemt
+error	./samples/Dutch.txt[34, 6]: Unknown word: ermee
+error	./samples/Dutch.txt[34, 22]: Unknown word: bijdrage
+error	./samples/Dutch.txt[34, 39]: Unknown word: desbetreffende
+error	./samples/Dutch.txt[34, 54]: Unknown word: taalhulpbestand
+error	./samples/Dutch.txt[34, 70]: Unknown word: beschikbaar
+error	./samples/Dutch.txt[35, 4]: Unknown word: komt
+error	./samples/Dutch.txt[35, 9]: Unknown word: onder
+error	./samples/Dutch.txt[35, 15]: Unknown word: vrije
+error	./samples/Dutch.txt[35, 27]: Unknown word: opensource
+error	./samples/Dutch.txt[35, 38]: Unknown word: licenties
+error	./samples/Dutch.txt[35, 49]: Unknown word: Indien
+error	./samples/Dutch.txt[35, 62]: Unknown word: wenst
+error	./samples/Dutch.txt[36, 4]: Unknown word: naam
+error	./samples/Dutch.txt[36, 23]: Unknown word: genoemd
+error	./samples/Dutch.txt[36, 31]: Unknown word: worden
+error	./samples/Dutch.txt[36, 42]: Unknown word: ontvangen
+error	./samples/Dutch.txt[36, 55]: Unknown word: schriftelijk
+error	./samples/Dutch.txt[36, 68]: Unknown word: verzoek
+error	./samples/Dutch.txt[37, 4]: Unknown word: daarvoor
+error	./samples/Dutch.txt[37, 13]: Unknown word: graag
+error	./samples/Dutch.txt[38, 4]: Unknown word: Rechten
+error	./samples/Dutch.txt[38, 16]: Unknown word: derden
+error	./samples/Dutch.txt[38, 33]: Unknown word: respecteert
+error	./samples/Dutch.txt[38, 48]: Unknown word: rechten
+error	./samples/Dutch.txt[38, 60]: Unknown word: derden
+error	./samples/Dutch.txt[39, 13]: Unknown word: gegevens
+error	./samples/Dutch.txt[39, 22]: Unknown word: vrij
+error	./samples/Dutch.txt[39, 27]: Unknown word: beschikbaar
+error	./samples/Dutch.txt[39, 39]: Unknown word: houden
+error	./samples/Dutch.txt[39, 47]: Unknown word: Voor
+error	./samples/Dutch.txt[39, 52]: Unknown word: bijdragen
+error	./samples/Dutch.txt[40, 6]: Unknown word: daarom
+error	./samples/Dutch.txt[40, 13]: Unknown word: niet
+error	./samples/Dutch.txt[40, 18]: Unknown word: zonder
+error	./samples/Dutch.txt[40, 25]: Unknown word: toestemming
+error	./samples/Dutch.txt[40, 37]: Unknown word: gebruikmaken
+error	./samples/Dutch.txt[40, 54]: Unknown word: beschermde
+error	./samples/Dutch.txt[40, 65]: Unknown word: naslagwerken
+error	./samples/Dutch.txt[41, 4]: Unknown word: zoals
+error	./samples/Dutch.txt[41, 10]: Unknown word: woordenboeken
+error	./samples/Dutch.txt[41, 36]: Unknown word: toegestaan
+error	./samples/Dutch.txt[41, 50]: Unknown word: gebruik
+error	./samples/Dutch.txt[41, 61]: Unknown word: maken
+error	./samples/Dutch.txt[42, 4]: Unknown word: materialen
+error	./samples/Dutch.txt[42, 22]: Unknown word: Nederlandse
+error	./samples/Dutch.txt[42, 34]: Unknown word: Taalunie
+error	./samples/Dutch.txt[42, 44]: Unknown word: zoals
+error	./samples/Dutch.txt[42, 53]: Unknown word: leidraad
+error	./samples/Dutch.txt[42, 68]: Unknown word: woordenlijst
+error	./samples/Dutch.txt[43, 4]: Unknown word: Indien
+error	./samples/Dutch.txt[43, 17]: Unknown word: mening
+error	./samples/Dutch.txt[43, 42]: Unknown word: inbreuk
+error	./samples/Dutch.txt[43, 50]: Unknown word: maakt
+error	./samples/Dutch.txt[43, 62]: Unknown word: rechten
+error	./samples/Dutch.txt[44, 4]: Unknown word: verzoeken
+error	./samples/Dutch.txt[44, 19]: Unknown word: hierover
+error	./samples/Dutch.txt[44, 31]: Unknown word: spoedig
+error	./samples/Dutch.txt[44, 39]: Unknown word: mogelijk
+error	./samples/Dutch.txt[44, 48]: Unknown word: schriftelijk
+error	./samples/Dutch.txt[45, 7]: Unknown word: nemen
+error	./samples/Dutch.txt[46, 13]: Unknown word: Stichting
+error	./samples/Dutch.txt[59, 56]: Unknown word: Brouwer
+error	./samples/Dutch.txt[60, 11]: Unknown word: Nederlandstalige
+error	./samples/Dutch.txt[60, 32]: Unknown word: Gebruikersgroep
+error	./samples/Dutch.txt[68, 42]: Unknown word: unported
+error	./samples/Dutch.txt[74, 39]: Unknown word: RABONL
+error	./samples/Dutch.txt[74, 49]: Unknown word: IBAN
+error	./samples/Dutch.txt[74, 59]: Unknown word: RABO
+error	./samples/Dutch.txt[75, 4]: Unknown word: Stichting
+error	./samples/Dutch.txt[77, 58]: Unknown word: algemeen
+error	./samples/Dutch.txt[77, 71]: Unknown word: beogende
+error	./samples/Dutch.txt[78, 4]: Unknown word: instelling
+error	./samples/Dutch.txt[78, 18]: Unknown word: ANBI
+error	CSpell: Files checked: 1, Issues found: 189 in 1 file."
 `;
 
 exports[`Validate cli > app 'with spelling errors Dutch.txt --legacy' Expect Error: [Function CheckFailed] 3`] = `
@@ -1693,7 +2105,198 @@ log	algemeen
 log	beogende
 log	instelling
 log	ANBI
-error	CSpell: Files checked: 1, Issues found: 189 in 1 files"
+error	-------------------------------------------
+error	Issues found:
+error	NEDERLANDS
+error	wordt
+error	vriendelijk
+error	verzocht
+error	bestand
+error	lezen
+error	leveren
+error	iedere
+error	kopie
+error	taalhulpbestand
+error	Naam
+error	Nederlandstalige
+error	woordenlijst
+error	voor
+error	spellingcontrole
+error	Versie
+error	woordenlijst
+error	versie
+error	spellingcontrole
+error	Vereisten
+error	hoger
+error	Keurmerk
+error	Nederlandse
+error	Taalunie
+error	lijst
+error	basiswoorden
+error	draagt
+error	keurmerk
+error	Nederlandse
+error	Taalunie
+error	Voor
+error	meer
+error	informatie
+error	Auteursrechten
+error	Brouwer
+error	Nederlandstalige
+error	Gebruikersgroep
+error	Licenties
+error	heeft
+error	doel
+error	vrij
+error	beschikbare
+error	Nederlandstalige
+error	taalhulpbestanden
+error	ontwikkelen
+error	verspreiden
+error	gebruik
+error	mogelijk
+error	maken
+error	zijn
+error	taalhulpbestanden
+error	beschikbaar
+error	onder
+error	onderstaande
+error	liberale
+error	licenties
+error	naar
+error	keuze
+error	gebruiker
+error	wordt
+error	zeerste
+error	aangeraden
+error	voorafgaand
+error	gebruik
+error	kennis
+error	nemen
+error	toepasselijke
+error	licentie
+error	herziene
+error	versie
+error	Volledige
+error	licentie
+error	Samenvatting
+error	Naamsvermelding
+error	unported
+error	Volledige
+error	licentie
+error	Samenvatting
+error	Steun
+error	vrijwilligersproject
+error	zonder
+error	winstoogmerk
+error	kleine
+error	financiële
+error	steun
+error	meer
+error	activiteiten
+error	ontplooien
+error	professionaliseren
+error	donatie
+error	welkom
+error	rekeningnummer
+error	Stichting
+error	giften
+error	zijn
+error	aftrekbaar
+error	belasting
+error	Stichting
+error	namelijk
+error	Belastingdienst
+error	erkend
+error	ANBI
+error	oftewel
+error	Algemeen
+error	Beogende
+error	Instelling
+error	Meedoen
+error	Iedereen
+error	welkom
+error	doen
+error	fouten
+error	discussieer
+error	mailinglijst
+error	draai
+error	dragen
+error	stemt
+error	ermee
+error	bijdrage
+error	desbetreffende
+error	taalhulpbestand
+error	beschikbaar
+error	komt
+error	onder
+error	vrije
+error	opensource
+error	licenties
+error	Indien
+error	wenst
+error	naam
+error	genoemd
+error	worden
+error	ontvangen
+error	schriftelijk
+error	verzoek
+error	daarvoor
+error	graag
+error	Rechten
+error	derden
+error	respecteert
+error	rechten
+error	derden
+error	gegevens
+error	vrij
+error	beschikbaar
+error	houden
+error	Voor
+error	bijdragen
+error	daarom
+error	niet
+error	zonder
+error	toestemming
+error	gebruikmaken
+error	beschermde
+error	naslagwerken
+error	zoals
+error	woordenboeken
+error	toegestaan
+error	gebruik
+error	maken
+error	materialen
+error	Nederlandse
+error	Taalunie
+error	zoals
+error	leidraad
+error	woordenlijst
+error	Indien
+error	mening
+error	inbreuk
+error	maakt
+error	rechten
+error	verzoeken
+error	hierover
+error	spoedig
+error	mogelijk
+error	schriftelijk
+error	nemen
+error	Stichting
+error	Brouwer
+error	Nederlandstalige
+error	Gebruikersgroep
+error	unported
+error	RABONL
+error	IBAN
+error	RABO
+error	Stichting
+error	algemeen
+error	beogende
+error	instelling
+error	ANBI
+error	CSpell: Files checked: 1, Issues found: 189 in 1 file."
 `;
 
 exports[`Validate cli > app 'with spelling errors Dutch.txt words only' Expect Error: [Function CheckFailed] 3`] = `
@@ -1894,7 +2497,198 @@ log	./samples/Dutch.txt:77:58 - Unknown word (algemeen)
 log	./samples/Dutch.txt:77:71 - Unknown word (beogende)
 log	./samples/Dutch.txt:78:4 - Unknown word (instelling)
 log	./samples/Dutch.txt:78:18 - Unknown word (ANBI)
-error	CSpell: Files checked: 1, Issues found: 189 in 1 files"
+error	-------------------------------------------
+error	Issues found:
+error	./samples/Dutch.txt:1:32 - Unknown word (NEDERLANDS)
+error	./samples/Dutch.txt:2:11 - Unknown word (wordt)
+error	./samples/Dutch.txt:2:17 - Unknown word (vriendelijk)
+error	./samples/Dutch.txt:2:29 - Unknown word (verzocht)
+error	./samples/Dutch.txt:2:45 - Unknown word (bestand)
+error	./samples/Dutch.txt:3:10 - Unknown word (lezen)
+error	./samples/Dutch.txt:3:26 - Unknown word (leveren)
+error	./samples/Dutch.txt:3:38 - Unknown word (iedere)
+error	./samples/Dutch.txt:3:45 - Unknown word (kopie)
+error	./samples/Dutch.txt:3:59 - Unknown word (taalhulpbestand)
+error	./samples/Dutch.txt:5:4 - Unknown word (Naam)
+error	./samples/Dutch.txt:5:10 - Unknown word (Nederlandstalige)
+error	./samples/Dutch.txt:5:27 - Unknown word (woordenlijst)
+error	./samples/Dutch.txt:5:40 - Unknown word (voor)
+error	./samples/Dutch.txt:5:45 - Unknown word (spellingcontrole)
+error	./samples/Dutch.txt:6:4 - Unknown word (Versie)
+error	./samples/Dutch.txt:6:11 - Unknown word (woordenlijst)
+error	./samples/Dutch.txt:6:32 - Unknown word (versie)
+error	./samples/Dutch.txt:6:39 - Unknown word (spellingcontrole)
+error	./samples/Dutch.txt:7:4 - Unknown word (Vereisten)
+error	./samples/Dutch.txt:7:33 - Unknown word (hoger)
+error	./samples/Dutch.txt:8:4 - Unknown word (Keurmerk)
+error	./samples/Dutch.txt:8:22 - Unknown word (Nederlandse)
+error	./samples/Dutch.txt:8:34 - Unknown word (Taalunie)
+error	./samples/Dutch.txt:8:47 - Unknown word (lijst)
+error	./samples/Dutch.txt:8:57 - Unknown word (basiswoorden)
+error	./samples/Dutch.txt:9:13 - Unknown word (draagt)
+error	./samples/Dutch.txt:9:24 - Unknown word (keurmerk)
+error	./samples/Dutch.txt:9:40 - Unknown word (Nederlandse)
+error	./samples/Dutch.txt:9:52 - Unknown word (Taalunie)
+error	./samples/Dutch.txt:9:62 - Unknown word (Voor)
+error	./samples/Dutch.txt:9:67 - Unknown word (meer)
+error	./samples/Dutch.txt:10:4 - Unknown word (informatie)
+error	./samples/Dutch.txt:11:4 - Unknown word (Auteursrechten)
+error	./samples/Dutch.txt:11:60 - Unknown word (Brouwer)
+error	./samples/Dutch.txt:12:11 - Unknown word (Nederlandstalige)
+error	./samples/Dutch.txt:12:32 - Unknown word (Gebruikersgroep)
+error	./samples/Dutch.txt:13:4 - Unknown word (Licenties)
+error	./samples/Dutch.txt:13:24 - Unknown word (heeft)
+error	./samples/Dutch.txt:13:34 - Unknown word (doel)
+error	./samples/Dutch.txt:13:42 - Unknown word (vrij)
+error	./samples/Dutch.txt:13:47 - Unknown word (beschikbare)
+error	./samples/Dutch.txt:13:59 - Unknown word (Nederlandstalige)
+error	./samples/Dutch.txt:14:4 - Unknown word (taalhulpbestanden)
+error	./samples/Dutch.txt:14:25 - Unknown word (ontwikkelen)
+error	./samples/Dutch.txt:14:43 - Unknown word (verspreiden)
+error	./samples/Dutch.txt:14:70 - Unknown word (gebruik)
+error	./samples/Dutch.txt:15:4 - Unknown word (mogelijk)
+error	./samples/Dutch.txt:15:16 - Unknown word (maken)
+error	./samples/Dutch.txt:15:22 - Unknown word (zijn)
+error	./samples/Dutch.txt:15:30 - Unknown word (taalhulpbestanden)
+error	./samples/Dutch.txt:15:55 - Unknown word (beschikbaar)
+error	./samples/Dutch.txt:15:67 - Unknown word (onder)
+error	./samples/Dutch.txt:16:4 - Unknown word (onderstaande)
+error	./samples/Dutch.txt:16:18 - Unknown word (liberale)
+error	./samples/Dutch.txt:16:27 - Unknown word (licenties)
+error	./samples/Dutch.txt:16:37 - Unknown word (naar)
+error	./samples/Dutch.txt:16:42 - Unknown word (keuze)
+error	./samples/Dutch.txt:16:55 - Unknown word (gebruiker)
+error	./samples/Dutch.txt:16:68 - Unknown word (wordt)
+error	./samples/Dutch.txt:17:4 - Unknown word (zeerste)
+error	./samples/Dutch.txt:17:12 - Unknown word (aangeraden)
+error	./samples/Dutch.txt:17:26 - Unknown word (voorafgaand)
+error	./samples/Dutch.txt:17:46 - Unknown word (gebruik)
+error	./samples/Dutch.txt:17:54 - Unknown word (kennis)
+error	./samples/Dutch.txt:17:64 - Unknown word (nemen)
+error	./samples/Dutch.txt:18:4 - Unknown word (toepasselijke)
+error	./samples/Dutch.txt:18:18 - Unknown word (licentie)
+error	./samples/Dutch.txt:19:12 - Unknown word (herziene)
+error	./samples/Dutch.txt:19:21 - Unknown word (versie)
+error	./samples/Dutch.txt:20:6 - Unknown word (Volledige)
+error	./samples/Dutch.txt:20:16 - Unknown word (licentie)
+error	./samples/Dutch.txt:21:6 - Unknown word (Samenvatting)
+error	./samples/Dutch.txt:22:25 - Unknown word (Naamsvermelding)
+error	./samples/Dutch.txt:22:46 - Unknown word (unported)
+error	./samples/Dutch.txt:23:6 - Unknown word (Volledige)
+error	./samples/Dutch.txt:23:16 - Unknown word (licentie)
+error	./samples/Dutch.txt:24:6 - Unknown word (Samenvatting)
+error	./samples/Dutch.txt:25:4 - Unknown word (Steun)
+error	./samples/Dutch.txt:25:36 - Unknown word (vrijwilligersproject)
+error	./samples/Dutch.txt:25:57 - Unknown word (zonder)
+error	./samples/Dutch.txt:25:64 - Unknown word (winstoogmerk)
+error	./samples/Dutch.txt:26:13 - Unknown word (kleine)
+error	./samples/Dutch.txt:26:21 - Unknown word (financiële)
+error	./samples/Dutch.txt:26:32 - Unknown word (steun)
+error	./samples/Dutch.txt:26:51 - Unknown word (meer)
+error	./samples/Dutch.txt:26:56 - Unknown word (activiteiten)
+error	./samples/Dutch.txt:26:69 - Unknown word (ontplooien)
+error	./samples/Dutch.txt:27:19 - Unknown word (professionaliseren)
+error	./samples/Dutch.txt:27:42 - Unknown word (donatie)
+error	./samples/Dutch.txt:27:63 - Unknown word (welkom)
+error	./samples/Dutch.txt:28:4 - Unknown word (rekeningnummer)
+error	./samples/Dutch.txt:28:39 - Unknown word (Stichting)
+error	./samples/Dutch.txt:28:62 - Unknown word (giften)
+error	./samples/Dutch.txt:28:69 - Unknown word (zijn)
+error	./samples/Dutch.txt:29:4 - Unknown word (aftrekbaar)
+error	./samples/Dutch.txt:29:22 - Unknown word (belasting)
+error	./samples/Dutch.txt:29:33 - Unknown word (Stichting)
+error	./samples/Dutch.txt:29:55 - Unknown word (namelijk)
+error	./samples/Dutch.txt:30:4 - Unknown word (Belastingdienst)
+error	./samples/Dutch.txt:30:20 - Unknown word (erkend)
+error	./samples/Dutch.txt:30:31 - Unknown word (ANBI)
+error	./samples/Dutch.txt:30:37 - Unknown word (oftewel)
+error	./samples/Dutch.txt:30:46 - Unknown word (Algemeen)
+error	./samples/Dutch.txt:30:59 - Unknown word (Beogende)
+error	./samples/Dutch.txt:30:68 - Unknown word (Instelling)
+error	./samples/Dutch.txt:32:4 - Unknown word (Meedoen)
+error	./samples/Dutch.txt:32:13 - Unknown word (Iedereen)
+error	./samples/Dutch.txt:32:25 - Unknown word (welkom)
+error	./samples/Dutch.txt:32:42 - Unknown word (doen)
+error	./samples/Dutch.txt:32:53 - Unknown word (fouten)
+error	./samples/Dutch.txt:32:61 - Unknown word (discussieer)
+error	./samples/Dutch.txt:33:7 - Unknown word (mailinglijst)
+error	./samples/Dutch.txt:33:23 - Unknown word (draai)
+error	./samples/Dutch.txt:33:52 - Unknown word (dragen)
+error	./samples/Dutch.txt:33:75 - Unknown word (stemt)
+error	./samples/Dutch.txt:34:6 - Unknown word (ermee)
+error	./samples/Dutch.txt:34:22 - Unknown word (bijdrage)
+error	./samples/Dutch.txt:34:39 - Unknown word (desbetreffende)
+error	./samples/Dutch.txt:34:54 - Unknown word (taalhulpbestand)
+error	./samples/Dutch.txt:34:70 - Unknown word (beschikbaar)
+error	./samples/Dutch.txt:35:4 - Unknown word (komt)
+error	./samples/Dutch.txt:35:9 - Unknown word (onder)
+error	./samples/Dutch.txt:35:15 - Unknown word (vrije)
+error	./samples/Dutch.txt:35:27 - Unknown word (opensource)
+error	./samples/Dutch.txt:35:38 - Unknown word (licenties)
+error	./samples/Dutch.txt:35:49 - Unknown word (Indien)
+error	./samples/Dutch.txt:35:62 - Unknown word (wenst)
+error	./samples/Dutch.txt:36:4 - Unknown word (naam)
+error	./samples/Dutch.txt:36:23 - Unknown word (genoemd)
+error	./samples/Dutch.txt:36:31 - Unknown word (worden)
+error	./samples/Dutch.txt:36:42 - Unknown word (ontvangen)
+error	./samples/Dutch.txt:36:55 - Unknown word (schriftelijk)
+error	./samples/Dutch.txt:36:68 - Unknown word (verzoek)
+error	./samples/Dutch.txt:37:4 - Unknown word (daarvoor)
+error	./samples/Dutch.txt:37:13 - Unknown word (graag)
+error	./samples/Dutch.txt:38:4 - Unknown word (Rechten)
+error	./samples/Dutch.txt:38:16 - Unknown word (derden)
+error	./samples/Dutch.txt:38:33 - Unknown word (respecteert)
+error	./samples/Dutch.txt:38:48 - Unknown word (rechten)
+error	./samples/Dutch.txt:38:60 - Unknown word (derden)
+error	./samples/Dutch.txt:39:13 - Unknown word (gegevens)
+error	./samples/Dutch.txt:39:22 - Unknown word (vrij)
+error	./samples/Dutch.txt:39:27 - Unknown word (beschikbaar)
+error	./samples/Dutch.txt:39:39 - Unknown word (houden)
+error	./samples/Dutch.txt:39:47 - Unknown word (Voor)
+error	./samples/Dutch.txt:39:52 - Unknown word (bijdragen)
+error	./samples/Dutch.txt:40:6 - Unknown word (daarom)
+error	./samples/Dutch.txt:40:13 - Unknown word (niet)
+error	./samples/Dutch.txt:40:18 - Unknown word (zonder)
+error	./samples/Dutch.txt:40:25 - Unknown word (toestemming)
+error	./samples/Dutch.txt:40:37 - Unknown word (gebruikmaken)
+error	./samples/Dutch.txt:40:54 - Unknown word (beschermde)
+error	./samples/Dutch.txt:40:65 - Unknown word (naslagwerken)
+error	./samples/Dutch.txt:41:4 - Unknown word (zoals)
+error	./samples/Dutch.txt:41:10 - Unknown word (woordenboeken)
+error	./samples/Dutch.txt:41:36 - Unknown word (toegestaan)
+error	./samples/Dutch.txt:41:50 - Unknown word (gebruik)
+error	./samples/Dutch.txt:41:61 - Unknown word (maken)
+error	./samples/Dutch.txt:42:4 - Unknown word (materialen)
+error	./samples/Dutch.txt:42:22 - Unknown word (Nederlandse)
+error	./samples/Dutch.txt:42:34 - Unknown word (Taalunie)
+error	./samples/Dutch.txt:42:44 - Unknown word (zoals)
+error	./samples/Dutch.txt:42:53 - Unknown word (leidraad)
+error	./samples/Dutch.txt:42:68 - Unknown word (woordenlijst)
+error	./samples/Dutch.txt:43:4 - Unknown word (Indien)
+error	./samples/Dutch.txt:43:17 - Unknown word (mening)
+error	./samples/Dutch.txt:43:42 - Unknown word (inbreuk)
+error	./samples/Dutch.txt:43:50 - Unknown word (maakt)
+error	./samples/Dutch.txt:43:62 - Unknown word (rechten)
+error	./samples/Dutch.txt:44:4 - Unknown word (verzoeken)
+error	./samples/Dutch.txt:44:19 - Unknown word (hierover)
+error	./samples/Dutch.txt:44:31 - Unknown word (spoedig)
+error	./samples/Dutch.txt:44:39 - Unknown word (mogelijk)
+error	./samples/Dutch.txt:44:48 - Unknown word (schriftelijk)
+error	./samples/Dutch.txt:45:7 - Unknown word (nemen)
+error	./samples/Dutch.txt:46:13 - Unknown word (Stichting)
+error	./samples/Dutch.txt:59:56 - Unknown word (Brouwer)
+error	./samples/Dutch.txt:60:11 - Unknown word (Nederlandstalige)
+error	./samples/Dutch.txt:60:32 - Unknown word (Gebruikersgroep)
+error	./samples/Dutch.txt:68:42 - Unknown word (unported)
+error	./samples/Dutch.txt:74:39 - Unknown word (RABONL)
+error	./samples/Dutch.txt:74:49 - Unknown word (IBAN)
+error	./samples/Dutch.txt:74:59 - Unknown word (RABO)
+error	./samples/Dutch.txt:75:4 - Unknown word (Stichting)
+error	./samples/Dutch.txt:77:58 - Unknown word (algemeen)
+error	./samples/Dutch.txt:77:71 - Unknown word (beogende)
+error	./samples/Dutch.txt:78:4 - Unknown word (instelling)
+error	./samples/Dutch.txt:78:18 - Unknown word (ANBI)
+error	CSpell: Files checked: 1, Issues found: 189 in 1 file."
 `;
 
 exports[`Validate cli > app 'with spelling errors Dutch.txt' Expect Error: [Function CheckFailed] 3`] = `
