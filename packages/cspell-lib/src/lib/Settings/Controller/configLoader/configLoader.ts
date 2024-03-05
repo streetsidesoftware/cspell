@@ -21,6 +21,7 @@ import {
     cwdURL,
     resolveFileWithURL,
     toFilePathOrHref,
+    toFileUrl,
     windowsDriveLetterToUpper,
 } from '../../../util/url.js';
 import {
@@ -550,7 +551,7 @@ export class ConfigLoader implements IConfigLoader {
 
         return {
             filename: r.filename.startsWith('file:/') ? fileURLToPath(r.filename) : r.filename,
-            error: r.found ? undefined : new Error(`Failed to resolve file: "${filename}"`),
+            error: r.found ? undefined : new ConfigurationLoaderFailedToResolveError(filename, relativeTo),
         };
     }
 
@@ -677,9 +678,59 @@ async function isDirectory(fs: VFileSystem, path: URL): Promise<boolean> {
     }
 }
 
+export class ConfigurationLoaderError extends Error {
+    constructor(
+        message: string,
+        public readonly configurationFile?: string,
+        public readonly relativeTo?: string | URL,
+        cause?: unknown,
+    ) {
+        super(message);
+        this.name = 'Configuration Loader Error';
+        if (cause) {
+            this.cause = cause;
+        }
+    }
+}
+
+export class ConfigurationLoaderFailedToResolveError extends ConfigurationLoaderError {
+    constructor(
+        public readonly configurationFile: string,
+        public readonly relativeTo: string | URL,
+        cause?: unknown,
+    ) {
+        const filename = configurationFile.startsWith('file:/') ? fileURLToPath(configurationFile) : configurationFile;
+        const relSource = relativeToCwd(relativeTo);
+
+        const message = `Failed to resolve configuration file: "${filename}" referenced from "${relSource}"`;
+        super(message, configurationFile, relativeTo, cause);
+        // this.name = 'Configuration Loader Error';
+    }
+}
+
+function relativeToCwd(file: string | URL): string {
+    const url = toFileUrl(file);
+    const cwdPath = cwdURL().pathname.split('/').slice(0, -1);
+    const urlPath = url.pathname.split('/');
+    if (urlPath[0] !== cwdPath[0]) return toFilePathOrHref(file);
+    let i = 0;
+    for (; i < cwdPath.length; ++i) {
+        if (cwdPath[i] !== urlPath[i]) break;
+    }
+    const segments = cwdPath.length - i;
+    if (segments > 3) return toFilePathOrHref(file);
+    const prefix = '.'
+        .repeat(segments)
+        .split('')
+        .map(() => '..')
+        .join('/');
+    return [prefix || '.', ...urlPath.slice(i)].join('/');
+}
+
 export const __testing__ = {
     getDefaultConfigLoaderInternal,
     normalizeCacheSettings,
     validateRawConfigVersion,
     resolveGlobRoot,
+    relativeToCwd,
 };

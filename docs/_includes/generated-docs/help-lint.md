@@ -41,6 +41,8 @@ Options:
   --file-list <path or stdin>  Specify a list of files to be spell checked. The
                                list is filtered against the glob file patterns.
                                Note: the format is 1 file path per line.
+  --file [file...]             Specify files to spell check. They are filtered
+                               by the [globs...].
   --no-issues                  Do not show the spelling errors.
   --no-progress                Turn off progress messages
   --no-summary                 Turn off summary message in console.
@@ -92,6 +94,13 @@ More Examples:
 
     cspell . --reporter ./<path>/reporter.cjs
         Use a custom reporter. See API for details.
+
+    cspell "*.md" --exclude CHANGELOG.md --files README.md CHANGELOG.md
+        Spell check only check "README.md" but NOT "CHANGELOG.md".
+
+    cspell "/*.md" --no-must-find-files --files $FILES
+        Only spell check the "/*.md" files in $FILES,
+        where $FILES is a shell variable that contains the list of files.
 
 References:
     https://cspell.org

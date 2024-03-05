@@ -16,12 +16,17 @@ import {
     pathRepoTestFixturesURL,
 } from '../../../../test-util/test.locations.cjs';
 import { logError, logWarning } from '../../../util/logger.js';
-import { resolveFileWithURL, toFilePathOrHref, toFileUrl } from '../../../util/url.js';
+import { cwdURL, resolveFileWithURL, toFilePathOrHref, toFileUrl } from '../../../util/url.js';
 import { currentSettingsFileVersion, defaultConfigFileModuleRef, ENV_CSPELL_GLOB_ROOT } from '../../constants.js';
 import type { ImportFileRefWithError } from '../../CSpellSettingsServer.js';
 import { extractDependencies, getSources, mergeSettings } from '../../CSpellSettingsServer.js';
 import { _defaultSettings, getDefaultBundledSettingsAsync } from '../../DefaultSettings.js';
-import { __testing__ as __configLoader_testing__, createConfigLoader, loadPnP } from './configLoader.js';
+import {
+    __testing__ as __configLoader_testing__,
+    ConfigurationLoaderFailedToResolveError,
+    createConfigLoader,
+    loadPnP,
+} from './configLoader.js';
 import { configToRawSettings } from './configToRawSettings.js';
 import {
     clearCachedSettingsFiles,
@@ -38,7 +43,7 @@ import { extractImportErrors, extractImports } from './extractImportErrors.js';
 import { readSettings } from './readSettings.js';
 import { readSettingsFiles } from './readSettingsFiles.js';
 
-const { validateRawConfigVersion, resolveGlobRoot } = __configLoader_testing__;
+const { validateRawConfigVersion, resolveGlobRoot, relativeToCwd } = __configLoader_testing__;
 
 const rootCspellLib = path.join(pathPackageRoot, '.');
 const root = pathRepoRoot;
@@ -337,10 +342,10 @@ describe('Validate search/load config files', () => {
         clearCachedSettingsFiles();
     });
 
-    function resolveError(filename: string): ImportFileRefWithError {
+    function resolveError(filename: string, relativeTo = cwdURL()): ImportFileRefWithError {
         return {
             filename,
-            error: new Error(`Failed to resolve file: "${filename}"`),
+            error: new ConfigurationLoaderFailedToResolveError(filename, relativeTo),
         };
     }
 
@@ -800,6 +805,22 @@ describe('Validate Dependencies', () => {
         const settings = await readSettings(filename, relativeTo);
         const dependencies = extractDependencies(settings);
         expect(dependencies).toEqual(expected);
+    });
+});
+
+describe('relativeToCwd', () => {
+    test.each`
+        filename                                      | expected
+        ${cwdURL()}                                   | ${'./'}
+        ${'../../cspell.json'}                        | ${'../../cspell.json'}
+        ${'../../cspell.json'}                        | ${'../../cspell.json'}
+        ${'../../../cspell.json'}                     | ${'../../../cspell.json'}
+        ${pathToFileURL('../../../../cspell.json')}   | ${path.resolve('../../../../cspell.json')}
+        ${pathToFileURL('./samples/cspell.json')}     | ${'./samples/cspell.json'}
+        ${pathToFileURL('../samples/cspell.json')}    | ${'../samples/cspell.json'}
+        ${new URL('https://example.com/cspell.json')} | ${'https://example.com/cspell.json'}
+    `('relativeToCwd', ({ filename, expected }) => {
+        expect(relativeToCwd(filename)).toEqual(expected);
     });
 });
 

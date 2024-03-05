@@ -2925,7 +2925,7 @@ var {
 // src/perfChart.ts
 var import_node_fs = require("node:fs");
 
-// ../../node_modules/.pnpm/csv-parse@5.5.3/node_modules/csv-parse/lib/api/CsvError.js
+// ../../node_modules/.pnpm/csv-parse@5.5.5/node_modules/csv-parse/lib/api/CsvError.js
 var CsvError = class _CsvError extends Error {
   constructor(code, message, options, ...contexts) {
     if (Array.isArray(message))
@@ -2944,12 +2944,12 @@ var CsvError = class _CsvError extends Error {
   }
 };
 
-// ../../node_modules/.pnpm/csv-parse@5.5.3/node_modules/csv-parse/lib/utils/is_object.js
+// ../../node_modules/.pnpm/csv-parse@5.5.5/node_modules/csv-parse/lib/utils/is_object.js
 var is_object = function(obj) {
   return typeof obj === "object" && obj !== null && !Array.isArray(obj);
 };
 
-// ../../node_modules/.pnpm/csv-parse@5.5.3/node_modules/csv-parse/lib/api/normalize_columns_array.js
+// ../../node_modules/.pnpm/csv-parse@5.5.5/node_modules/csv-parse/lib/api/normalize_columns_array.js
 var normalize_columns_array = function(columns) {
   const normalizedColumns = [];
   for (let i = 0, l = columns.length; i < l; i++) {
@@ -2978,7 +2978,7 @@ var normalize_columns_array = function(columns) {
   return normalizedColumns;
 };
 
-// ../../node_modules/.pnpm/csv-parse@5.5.3/node_modules/csv-parse/lib/utils/ResizeableBuffer.js
+// ../../node_modules/.pnpm/csv-parse@5.5.5/node_modules/csv-parse/lib/utils/ResizeableBuffer.js
 var ResizeableBuffer = class {
   constructor(size = 100) {
     this.size = size;
@@ -3042,7 +3042,7 @@ var ResizeableBuffer = class {
 };
 var ResizeableBuffer_default = ResizeableBuffer;
 
-// ../../node_modules/.pnpm/csv-parse@5.5.3/node_modules/csv-parse/lib/api/init_state.js
+// ../../node_modules/.pnpm/csv-parse@5.5.5/node_modules/csv-parse/lib/api/init_state.js
 var np = 12;
 var cr = 13;
 var nl = 10;
@@ -3091,14 +3091,14 @@ var init_state = function(options) {
   };
 };
 
-// ../../node_modules/.pnpm/csv-parse@5.5.3/node_modules/csv-parse/lib/utils/underscore.js
+// ../../node_modules/.pnpm/csv-parse@5.5.5/node_modules/csv-parse/lib/utils/underscore.js
 var underscore = function(str) {
   return str.replace(/([A-Z])/g, function(_, match) {
     return "_" + match.toLowerCase();
   });
 };
 
-// ../../node_modules/.pnpm/csv-parse@5.5.3/node_modules/csv-parse/lib/api/normalize_options.js
+// ../../node_modules/.pnpm/csv-parse@5.5.5/node_modules/csv-parse/lib/api/normalize_options.js
 var normalize_options = function(opts) {
   const options = {};
   for (const opt in opts) {
@@ -3496,7 +3496,7 @@ var normalize_options = function(opts) {
   return options;
 };
 
-// ../../node_modules/.pnpm/csv-parse@5.5.3/node_modules/csv-parse/lib/api/index.js
+// ../../node_modules/.pnpm/csv-parse@5.5.5/node_modules/csv-parse/lib/api/index.js
 var isRecordEmpty = function(record) {
   return record.every((field) => field == null || field.toString && field.toString().trim() === "");
 };
@@ -3730,10 +3730,12 @@ var transform = function(original_options = {}) {
             if (this.state.commenting) {
               continue;
             }
-            const commentCount = comment === null ? 0 : this.__compareBytes(comment, buf, pos, chr);
-            if (commentCount !== 0 && (comment_no_infix === false || this.state.field.length === 0)) {
-              this.state.commenting = true;
-              continue;
+            if (comment !== null && (comment_no_infix === false || this.state.record.length === 0 && this.state.field.length === 0)) {
+              const commentCount = this.__compareBytes(comment, buf, pos, chr);
+              if (commentCount !== 0) {
+                this.state.commenting = true;
+                continue;
+              }
             }
             const delimiterLength = this.__isDelimiter(buf, pos, chr);
             if (delimiterLength !== 0) {
@@ -4189,7 +4191,7 @@ var transform = function(original_options = {}) {
   };
 };
 
-// ../../node_modules/.pnpm/csv-parse@5.5.3/node_modules/csv-parse/lib/sync.js
+// ../../node_modules/.pnpm/csv-parse@5.5.5/node_modules/csv-parse/lib/sync.js
 var parse = function(data, opts = {}) {
   if (typeof data === "string") {
     data = Buffer.from(data);
@@ -4317,7 +4319,7 @@ async function readCsvData(csvFile) {
   const records = parse(csv, { columns: true, cast: true });
   return records;
 }
-var emptyStats = { point: 0, min: 0, max: 0, sum: 0, count: 0, sd: 0, trend: [0] };
+var emptyStats = { point: 0, avg: 0, min: 0, max: 0, sum: 0, count: 0, sd: 0, trend: [0] };
 function calcStats(data) {
   const values = data.map((d) => d.elapsedMs).map((v) => v || 1);
   const trend = values.slice(-20);
@@ -4325,11 +4327,13 @@ function calcStats(data) {
   if (point === void 0)
     return emptyStats;
   if (values.length === 0)
-    return { point, min: point, max: point, sum: point, count: 1, sd: 0, trend };
+    return { point, avg: point, min: point, max: point, sum: point, count: 1, sd: 0, trend };
+  const sum = values.reduce((a, b) => a + b, 0);
+  const avg = sum / (values.length || 1);
   const min = Math.min(...values);
   const max = Math.max(...values);
   const sd = calcStandardDeviation(values);
-  return { point, min, max, sum: values.reduce((a, b) => a + b, 0), count: values.length, sd, trend };
+  return { point, avg, min, max, sum, count: values.length, sd, trend };
 }
 function groupBy(data, key) {
   const map = /* @__PURE__ */ new Map();
@@ -4358,8 +4362,7 @@ function createPerfTable1(data) {
   const stats = calcAllStats(data);
   const maxRelSd = Math.max(...stats.map((s2) => s2.sd * s2.sum / s2.count));
   const rows = data.map(([repo], i) => {
-    const { point, min, max, sum, count, sd } = stats[i];
-    const avg = sum / (count || 1);
+    const { point, min, max, sum, count, sd, avg } = stats[i];
     const relSd = sd * sum / count;
     const sdGraph = sd ? plotPointRelativeToStandardDeviation(
       point,
@@ -4379,9 +4382,8 @@ ${rows.join("\n")}
 function createPerfTable2(data) {
   const stats = calcAllStats(data);
   const rows = data.map(([repo], i) => {
-    const { point, sum, count, trend } = stats[i];
-    const avg = sum / (count || 1);
-    const trendGraph = simpleHistogram(trend);
+    const { point, count, trend, sd, avg } = stats[i];
+    const trendGraph = simpleHistogram(trend, avg - 2 * sd, avg + 3 * sd);
     const relChange = (100 * (point - avg) / (avg || 1)).toFixed(2) + "%";
     return `| ${repo.padEnd(36)} | ${p(s(point, 2), 6)} | ${p(relChange, 6)} | \`${trendGraph}\` | ${count} |`;
   });

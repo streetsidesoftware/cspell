@@ -43,16 +43,21 @@ More Examples:
     cspell . --reporter ./<path>/reporter.cjs
         Use a custom reporter. See API for details.
 
+    cspell "*.md" --exclude CHANGELOG.md --files README.md CHANGELOG.md
+        Spell check only check "README.md" but NOT "CHANGELOG.md".
+
+    cspell "/*.md" --no-must-find-files --files $FILES
+        Only spell check the "/*.md" files in $FILES,
+        where $FILES is a shell variable that contains the list of files.
+
 References:
     https://cspell.org
     https://github.com/streetsidesoftware/cspell
 `;
 
-function collect(value: string, previous: string[] | undefined): string[] {
-    if (!previous) {
-        return [value];
-    }
-    return previous.concat([value]);
+function collect(value: string | string[], previous: string[] | undefined): string[] {
+    const values = Array.isArray(value) ? value : [value];
+    return previous ? [...previous, ...values] : values;
 }
 
 export function commandLint(prog: Command): Command {
@@ -70,21 +75,20 @@ export function commandLint(prog: Command): Command {
         )
         .option('--language-id <language>', 'Force programming language for unknown extensions. i.e. "php" or "scala"')
         .addOption(
-            new CommanderOption(
+            crOpt(
                 '--languageId <language>',
                 'Force programming language for unknown extensions. i.e. "php" or "scala"',
             ).hideHelp(),
         )
         .option('--words-only', 'Only output the words not found in the dictionaries.')
-        .addOption(
-            new CommanderOption('--wordsOnly', 'Only output the words not found in the dictionaries.').hideHelp(),
-        )
+        .addOption(crOpt('--wordsOnly', 'Only output the words not found in the dictionaries.').hideHelp())
         .option('-u, --unique', 'Only output the first instance of a word not found in the dictionaries.')
         .option(
             '-e, --exclude <glob>',
             'Exclude files matching the glob pattern. This option can be used multiple times to add multiple globs. ',
             collect,
         )
+        // .option('--include <glob>', 'Include files matching the glob pattern. This option can be used multiple times.', collect)
         .option(
             '--file-list <path or stdin>',
             'Specify a list of files to be spell checked.' +
@@ -92,43 +96,45 @@ export function commandLint(prog: Command): Command {
                 ' Note: the format is 1 file path per line.',
             collect,
         )
+        .option('--file [file...]', 'Specify files to spell check. They are filtered by the [globs...].', collect)
+        .addOption(crOpt('--files [file...]', 'Files to spell check.', collect).hideHelp())
         .option('--no-issues', 'Do not show the spelling errors.')
         .option('--no-progress', 'Turn off progress messages')
         .option('--no-summary', 'Turn off summary message in console.')
         .option('-s, --silent', 'Silent mode, suppress error messages.')
         .option('--no-exit-code', 'Do not return an exit code if issues are found.')
         .addOption(
-            new CommanderOption('--quiet', 'Only show spelling issues or errors.').implies({
+            crOpt('--quiet', 'Only show spelling issues or errors.').implies({
                 summary: false,
                 progress: false,
             }),
         )
         .option('--fail-fast', 'Exit after first file with an issue or error.')
-        .addOption(new CommanderOption('--no-fail-fast', 'Process all files even if there is an error.').hideHelp())
+        .addOption(crOpt('--no-fail-fast', 'Process all files even if there is an error.').hideHelp())
         .option('-r, --root <root folder>', 'Root directory, defaults to current directory.')
-        .addOption(
-            new CommanderOption('--relative', 'Issues are displayed relative to the root.').default(true).hideHelp(),
-        )
+        .addOption(crOpt('--relative', 'Issues are displayed relative to the root.').default(true).hideHelp())
         .option('--no-relative', 'Issues are displayed with absolute path instead of relative to the root.')
         .option('--show-context', 'Show the surrounding text around an issue.')
         .option('--show-suggestions', 'Show spelling suggestions.')
-        .addOption(
-            new CommanderOption('--no-show-suggestions', 'Do not show spelling suggestions or fixes.').default(
-                undefined,
-            ),
-        )
-        .addOption(new CommanderOption('--must-find-files', 'Error if no files are found.').default(true).hideHelp())
+        .addOption(crOpt('--no-show-suggestions', 'Do not show spelling suggestions or fixes.').default(undefined))
+        .addOption(crOpt('--must-find-files', 'Error if no files are found.').default(true).hideHelp())
         .option('--no-must-find-files', 'Do not error if no files are found.')
+        // The --filter-files option is still under design review.
+        // .option('--filter-files', 'Use the `files` configuration to filter files found.')
+        // .option(
+        //     '--no-filter-files',
+        //     'Do NOT use the `files` configuration to filter files (Only applies to --files options).',
+        // )
         // The following options are planned features
         // .option('-w, --watch', 'Watch for any changes to the matching files and report any errors')
         // .option('--force', 'Force the exit value to always be 0')
-        .addOption(new CommanderOption('--legacy', 'Legacy output').hideHelp())
-        .addOption(new CommanderOption('--local <local>', 'Deprecated -- Use: --locale').hideHelp())
+        .addOption(crOpt('--legacy', 'Legacy output').hideHelp())
+        .addOption(crOpt('--local <local>', 'Deprecated -- Use: --locale').hideHelp())
         .option('--cache', 'Use cache to only check changed files.')
         .option('--no-cache', 'Do not use cache.')
         .option('--cache-reset', 'Reset the cache file.')
         .addOption(
-            new CommanderOption('--cache-strategy <strategy>', 'Strategy to use for detecting changed files.').choices([
+            crOpt('--cache-strategy <strategy>', 'Strategy to use for detecting changed files.').choices([
                 'metadata',
                 'content',
             ]),
@@ -145,38 +151,33 @@ export function commandLint(prog: Command): Command {
         .option('--no-validate-directives', 'Do not validate in-document CSpell directives.')
         .option('--no-color', 'Turn off color.')
         .option('--color', 'Force color.')
-        .addOption(
-            new CommanderOption(
-                '--default-configuration',
-                'Load the default configuration and dictionaries.',
-            ).hideHelp(),
-        )
-        .addOption(
-            new CommanderOption(
-                '--no-default-configuration',
-                'Do not load the default configuration and dictionaries.',
-            ),
-        )
+        .addOption(crOpt('--default-configuration', 'Load the default configuration and dictionaries.').hideHelp())
+        .addOption(crOpt('--no-default-configuration', 'Do not load the default configuration and dictionaries.'))
         .option('--debug', 'Output information useful for debugging cspell.json files.')
         .option('--reporter <module|path>', 'Specify one or more reporters to use.', collect)
         .addOption(
-            new CommanderOption('--skip-validation', 'Collect and process documents, but do not spell check.')
+            crOpt('--skip-validation', 'Collect and process documents, but do not spell check.')
                 .implies({ cache: false })
                 .hideHelp(),
         )
-        .addOption(new CommanderOption('--issues-summary-report', 'Output a summary of issues found.').hideHelp())
+        .addOption(crOpt('--issues-summary-report', 'Output a summary of issues found.').hideHelp())
+        // Planned options
+        // .option('--dictionary <dictionary name>', 'Enable a dictionary by name.', collect)
+        // .option('--no-dictionary <dictionary name>', 'Disable a dictionary by name.', collect)
+        // .option('--import', 'Import a configuration file.', collect)
         .usage(usage)
         .addHelpText('after', advanced)
         .arguments('[globs...]')
         .action(async (fileGlobs: string[], options: LinterCliOptions) => {
+            // console.error('lint: %o', { fileGlobs, options });
             const useExitCode = options.exitCode ?? true;
             if (options.skipValidation) {
                 options.cache = false;
             }
             App.parseApplicationFeatureFlags(options.flag);
-            const { mustFindFiles, fileList } = options;
+            const { mustFindFiles, fileList, files, file } = options;
             const result = await App.lint(fileGlobs, options);
-            if (!fileGlobs.length && !result.files && !result.errors && !fileList) {
+            if (!fileGlobs.length && !result.files && !result.errors && !fileList && !files?.length && !file?.length) {
                 spellCheckCommand.outputHelp();
                 throw new CheckFailed('outputHelp', 1);
             }
@@ -191,4 +192,28 @@ export function commandLint(prog: Command): Command {
         });
 
     return spellCheckCommand;
+}
+
+/**
+ * Create Option - a helper function to create a commander option.
+ * @param name - the name of the option
+ * @param description - the description of the option
+ * @param parseArg - optional function to parse the argument
+ * @param defaultValue - optional default value
+ * @returns CommanderOption
+ */
+function crOpt<T>(
+    name: string,
+    description: string,
+    parseArg?: (value: string, previous: T) => T,
+    defaultValue?: T,
+): CommanderOption {
+    const option = new CommanderOption(name, description);
+    if (parseArg) {
+        option.argParser(parseArg);
+    }
+    if (defaultValue !== undefined) {
+        option.default(defaultValue);
+    }
+    return option;
 }
