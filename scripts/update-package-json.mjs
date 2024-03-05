@@ -13,7 +13,7 @@ async function updatePackageJson(pkgFile) {
 
     const repository = {
         type: 'git',
-        url: 'git+https://github.com/streetsidesoftware/cspell.git',
+        url: 'https://github.com/streetsidesoftware/cspell.git',
         directory,
     };
 
