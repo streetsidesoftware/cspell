@@ -12,6 +12,14 @@ npm install -SD @cspell/cspell-json-reporter
 
 ## Usage
 
+### Using Command Line
+
+```sh
+cspell . --reporter @cspell/cspell-json-reporter
+```
+
+### Using CSpell Configuration
+
 Add this to `cspell.yaml`:
 
 ```yaml
@@ -88,7 +96,7 @@ export type CSpellJSONReporterOutput = {
 
 Possible settings:
 
-- `outFile` (required) - path for JSON file to emit
+- `outFile` (default: stdout) - path for JSON file to emit
 - `verbose` (default: false) - enable saving of execution logs
 - `debug` (default: false) - enable saving of debug logs
 - `progress` (default: false) - enable saving of file progress logs
