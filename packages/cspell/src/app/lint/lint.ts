@@ -441,7 +441,7 @@ export async function runLint(cfg: LintRequest): Promise<RunResult> {
         reporter.info(`Config Files Found:\n    ${configInfo.source}\n`, MessageTypes.Info);
 
         const configErrors = await countConfigErrors(configInfo);
-        if (configErrors) return runResult({ errors: configErrors });
+        if (configErrors && cfg.options.exitCode !== false) return runResult({ errors: configErrors });
 
         // Get Exclusions from the config files.
         const { root } = cfg;
