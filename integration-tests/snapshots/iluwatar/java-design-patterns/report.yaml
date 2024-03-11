@@ -3,9 +3,9 @@ Repository: iluwatar/java-design-patterns
 Url: https://github.com/iluwatar/java-design-patterns.git
 Args: '["**/*.md","**/*.java"]'
 Summary:
-  files: 1786
-  filesWithIssues: 1738
-  issues: 10260
+  files: 1808
+  filesWithIssues: 1762
+  issues: 10319
   errors: 0
 Errors: []
 
@@ -36,7 +36,11 @@ issues:
   - "adapter/README.md:124:93        adaptee         U       needed to get to the adaptee."
   - "adapter/README.md:128:40        Adaptees        U       Adapter work with many Adaptees, that is, the Adaptee"
   - "adapter/src/main/java/com/iluwatar/adapter/App.java:33:89       adaptee's       U       adapter implements the adaptee's"
+  - "ambassador/README.md:209:70         Istio       U       mesh architecture, like Istio or Linkerd, the Ambassador"
+  - "ambassador/README.md:209:79         Linkerd     U       architecture, like Istio or Linkerd, the Ambassador pattern"
+  - "ambassador/README.md:213:134        Hystrix     U       instance, Netflix's Hystrix library can be used"
   - "api-gateway/price-microservice/src/test/java/com/iluwatar/price/microservice/PriceControllerTest.java:37:8          testget     U       void testgetPrice() {"
+  - "api-gateway/README.md:18:15         Frontends       U       * Backend for Frontends (BFF)"
   - "arrange-act-assert/src/main/java/com/iluwatar/arrangeactassert/Cash.java:25:22          arrangeactassert    U       package com.iluwatar.arrangeactassert;"
   - "async-method-invocation/README.md:112:50        lazyval     U       executor.startProcess(lazyval(10, 500));"
   - "async-method-invocation/src/test/java/com/iluwatar/async/method/invocation/ThreadAsyncExecutorTest.java:56:12       Jeroen          U       * @author Jeroen Meulemeester"
@@ -64,7 +68,6 @@ issues:
   - "caching/src/main/java/com/iluwatar/caching/database/VirtualDb.java:81:13        reecord     U       * Update reecord in DB."
   - "chain-of-responsibility/README.md:168:10        servlet     U       * [javax.servlet.Filter#doFilter()](http"
   - "chain-of-responsibility/src/main/java/com/iluwatar/chain/Request.java:47:34         unhandle    U       there's no way to 'unhandle' a request."
-  - "circuit-breaker/README.md:319:12        Hystrix     U       * [Netflix Hystrix API](https://github"
   - "circuit-breaker/src/main/java/com/iluwatar/circuitbreaker/App.java:25:22        circuitbreaker      U       package com.iluwatar.circuitbreaker;"
   - "collecting-parameter/README.md:26:5         localised               U       are localised to the smaller functions"
   - "collecting-parameter/README.md:39:22        collectingparameter     U       package com.iluwatar.collectingparameter;"
@@ -181,8 +184,8 @@ issues:
   - "double-dispatch/src/main/java/com/iluwatar/doubledispatch/App.java:25:22        doubledispatch      U       package com.iluwatar.doubledispatch;"
   - "embedded-value/README.md:54:20          pincode     U       private String pincode;"
   - "embedded-value/README.md:82:44          Pincode     U       setString(5, address.getPincode());"
-  - "embedded-value/src/main/java/com/iluwatar/embedded/value/App.java:57:43         Karnataka       U       ShippingAddress(\"Bangalore\", \"Karnataka\", \"560040\"));"
-  - "embedded-value/src/main/java/com/iluwatar/embedded/value/App.java:58:50         Manjunath       U       Order(\"MacBook Pro\", \"Manjunath\","
+  - "embedded-value/src/main/java/com/iluwatar/embedded/value/App.java:56:43         Karnataka       U       ShippingAddress(\"Bangalore\", \"Karnataka\", \"560040\"));"
+  - "embedded-value/src/main/java/com/iluwatar/embedded/value/App.java:57:50         Manjunath       U       Order(\"MacBook Pro\", \"Manjunath\","
   - "embedded-value/src/main/java/com/iluwatar/embedded/value/DataSource.java:37:51          JDBC            U       database with the help of JDBC API."
   - "embedded-value/src/main/java/com/iluwatar/embedded/value/DataSource.java:45:21          getschema       U       private Statement getschema;"
   - "embedded-value/src/main/java/com/iluwatar/embedded/value/DataSource.java:46:21          deleteschema    U       private Statement deleteschema;"
@@ -355,6 +358,11 @@ issues:
   - "multiton/README.md:47:48        nazguls         U       NazgulName, Nazgul> nazguls;"
   - "multiton/src/test/java/com/iluwatar/multiton/NazgulEnumTest.java:44:64          nazgul      U       dWithMultipleCalls(NazgulEnum nazgulEnum) {"
   - "naked-objects/README.md:149:12      Pawson      U       * [Richard Pawson - Naked Objects](http"
+  - "notification/README.md:2:11         Behavioural                 U       category: Behavioural"
+  - "notification/README.md:28:3         Programatic                 U       **Programatic example**"
+  - "notification/README.md:223:30       iluwater                    U       075 [main] INFO com.iluwater.RegisterWorkerForm"
+  - "notification/README.md:237:136      seperated (separated)       U       most applicable when a seperated presentation pattern"
+  - "notification/src/main/java/com/iluwatar/NotificationError.java:8:53         serialisation       U       but may be useful for serialisation."
   - "null-object/src/main/java/com/iluwatar/nullobject/App.java:25:22        nullobject      U       package com.iluwatar.nullobject;"
   - "object-mother/README.md:87:101      stackoverflow       U       objectmother) to the stackoverflow question: [What is an"
   - "object-mother/README.md:89:8        Pryce               U       * [Nat Pryce - Test Data Builders"
@@ -789,6 +797,13 @@ issues:
   - "README.md:481:254       bachbil                 U       a href=\"#translation-bachbil\" title=\"Translation"
   - "README.md:485:180       Asole                   U       width=\"100px;\" alt=\"Ved Asole\"/><br /><sub><b>Ved"
   - "README.md:487:253       Kiro                    U       a href=\"#translation-Kiro-Young\" title=\"Translation"
+  - "README.md:488:185       Seunghwan               U       width=\"100px;\" alt=\"Seunghwan Jeon\"/><br /><sub><b"
+  - "README.md:488:195       Jeon                    U       px;\" alt=\"Seunghwan Jeon\"/><br /><sub><b>Seunghwan"
+  - "README.md:488:272       Nickolodeon             U       a href=\"#translation-Nickolodeon98\" title=\"Translation"
+  - "README.md:489:184       sugavanesh              U       width=\"100px;\" alt=\"sugavanesh\"/><br /><sub><b>sugavanesh"
+  - "README.md:493:184       jerryyummy              U       width=\"100px;\" alt=\"jerryyummy\"/><br /><sub><b>jerryyummy"
+  - "README.md:494:188       Manoj                   U       width=\"100px;\" alt=\"Manoj Chowdary\"/><br /><sub"
+  - "README.md:494:194       Chowdary                U       \"100px;\" alt=\"Manoj Chowdary\"/><br /><sub><b>Manoj"
   - "repository/README.md:121:9          nasta           U       var nasta = new Person(\"Nasta"
   - "repository/README.md:121:29         Nasta           U       nasta = new Person(\"Nasta\", \"Kuzminova\", 25);"
   - "repository/README.md:121:38         Kuzminova       U       new Person(\"Nasta\", \"Kuzminova\", 25);"

@@ -3,7 +3,7 @@ Repository: RustPython/RustPython
 Url: "https://github.com/RustPython/RustPython.git"
 Args: ["**"]
 Lines:
- CSpell: Files checked: 598, Issues found: 2718 in 308 files.
+ CSpell: Files checked: 598, Issues found: 2733 in 308 files.
  exit code: 1
 ./Cargo.toml:110:82    - Unknown word (termcolor)  -- features = ["atty", "termcolor"] }
 ./Cargo.toml:152:62    - Unknown word (redoxer)    -- to compile/check with redoxer
@@ -420,8 +420,13 @@ Lines:
 ./stdlib/src/binascii.rs:570:8     - Unknown word (rlecode)    -- fn rlecode_hqx(s: ArgAsciiBuffer
 ./stdlib/src/binascii.rs:571:15    - Unknown word (RUNCHAR)    -- const RUNCHAR: u8 = 0x90; // b'\x
 ./stdlib/src/binascii.rs:605:8     - Unknown word (rledecode)  -- fn rledecode_hqx(s: ArgAsciiBuffer
-./stdlib/src/csv.rs:198:34    - Unknown word (nwritten)   -- let (res, nread, nwritten, nends) = reader.read
-./stdlib/src/csv.rs:198:44    - Unknown word (nends)      -- res, nread, nwritten, nends) = reader.read_record
+./stdlib/src/csv.rs:280:21    - Unknown word (pydialect)  -- opts.update_pydialect(&mut dialect);
+./stdlib/src/csv.rs:31:17     - Unknown word (NOTNULL)    -- const QUOTE_NOTNULL: i32 = QuoteStyle::Notnull
+./stdlib/src/csv.rs:31:44     - Unknown word (Notnull)    -- NOTNULL: i32 = QuoteStyle::Notnull as i32;
+./stdlib/src/csv.rs:706:66    - Unknown word (registed)   -- format!("{} is not registed.", name)))
+./stdlib/src/csv.rs:974:22    - Unknown word (rposition)  -- .rposition(|&x| x != b' ')
+./stdlib/src/csv.rs:990:34    - Unknown word (nwritten)   -- let (res, nread, nwritten, nends) = reader.read
+./stdlib/src/csv.rs:990:44    - Unknown word (nends)      -- res, nread, nwritten, nends) = reader.read_record
 ./stdlib/src/fcntl.rs:12:45     - Unknown word (fnctl)      -- these from <asm-generic/fnctl.h> (please file an issue
 ./stdlib/src/fcntl.rs:13:19     - Unknown word (MAND)       -- // LOCK_MAND, LOCK_READ, LOCK_WRITE
 ./stdlib/src/fcntl.rs:14:36     - Unknown word (EXLCK)      -- SETLKW64, FASYNC, F_EXLCK, F_SHLCK, DN_ACCESS
@@ -478,7 +483,6 @@ Lines:
 ./stdlib/src/mmap.rs:57:24     - Unknown word (DONTDUMP)    -- libc::MADV_DONTDUMP => Advice::DontDump
 ./stdlib/src/mmap.rs:59:24     - Unknown word (DODUMP)      -- libc::MADV_DODUMP => Advice::DoDump,
 ./stdlib/src/mmap.rs:61:24     - Unknown word (HWPOISON)    -- libc::MADV_HWPOISON => Advice::HwPoison
-./stdlib/src/mmap.rs:646:46    - Unknown word (rposition)             -- buf.windows(sub.len()).rposition(|window| window == sub
 ./stdlib/src/posixsubprocess.rs:109:66    - Unknown word (noexec)     -- preexec, if not then have "noexec" after
 ./stdlib/src/posixsubprocess.rs:168:43    - Unknown word (SIGXFZ)     -- restore signals SIGPIPE, SIGXFZ, SIGXFSZ to SIG_DFL
 ./stdlib/src/posixsubprocess.rs:28:17     - Unknown word (preexec)    -- if args.preexec_fn.is_some() {

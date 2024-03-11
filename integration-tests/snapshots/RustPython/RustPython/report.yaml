@@ -5,7 +5,7 @@ Args: '["**"]'
 Summary:
   files: 598
   filesWithIssues: 308
-  issues: 2718
+  issues: 2733
   errors: 0
 Errors: []
 
@@ -425,8 +425,13 @@ issues:
   - "stdlib/src/binascii.rs:570:8        rlecode         U       fn rlecode_hqx(s: ArgAsciiBuffer"
   - "stdlib/src/binascii.rs:571:15       RUNCHAR         U       const RUNCHAR: u8 = 0x90; // b'\\x"
   - "stdlib/src/binascii.rs:605:8        rledecode       U       fn rledecode_hqx(s: ArgAsciiBuffer"
-  - "stdlib/src/csv.rs:198:34        nwritten    U       let (res, nread, nwritten, nends) = reader.read"
-  - "stdlib/src/csv.rs:198:44        nends       U       res, nread, nwritten, nends) = reader.read_record"
+  - "stdlib/src/csv.rs:31:17         NOTNULL         U       const QUOTE_NOTNULL: i32 = QuoteStyle::Notnull"
+  - "stdlib/src/csv.rs:31:44         Notnull         U       NOTNULL: i32 = QuoteStyle::Notnull as i32;"
+  - "stdlib/src/csv.rs:280:21        pydialect       U       opts.update_pydialect(&mut dialect);"
+  - "stdlib/src/csv.rs:706:66        registed        U       format!(\"{} is not registed.\", name)))"
+  - "stdlib/src/csv.rs:974:22        rposition       U       .rposition(|&x| x != b' ')"
+  - "stdlib/src/csv.rs:990:34        nwritten        U       let (res, nread, nwritten, nends) = reader.read"
+  - "stdlib/src/csv.rs:990:44        nends           U       res, nread, nwritten, nends) = reader.read_record"
   - "stdlib/src/fcntl.rs:12:45       fnctl           U       these from <asm-generic/fnctl.h> (please file an issue"
   - "stdlib/src/fcntl.rs:13:19       MAND            U       // LOCK_MAND, LOCK_READ, LOCK_WRITE"
   - "stdlib/src/fcntl.rs:14:36       EXLCK           U       SETLKW64, FASYNC, F_EXLCK, F_SHLCK, DN_ACCESS"
@@ -483,7 +488,6 @@ issues:
   - "stdlib/src/mmap.rs:139:20       DENYWRITE                   U       use libc::{MAP_DENYWRITE, MAP_EXECUTABLE, MAP"
   - "stdlib/src/mmap.rs:157:22       ALLOCATIONGRANULARITY       U       #[pyattr(name = \"ALLOCATIONGRANULARITY\", once)]"
   - "stdlib/src/mmap.rs:562:18       resizeable                  U       fn check_resizeable(&self, vm: &VirtualMachine"
-  - "stdlib/src/mmap.rs:646:46       rposition                   U       buf.windows(sub.len()).rposition(|window| window == sub"
   - "stdlib/src/posixsubprocess.rs:28:17         preexec     U       if args.preexec_fn.is_some() {"
   - "stdlib/src/posixsubprocess.rs:31:13         cstrs       U       let cstrs_to_ptrs = |cstrs: &"
   - "stdlib/src/posixsubprocess.rs:77:7          cwrite      U       p2cwrite: i32,"

@@ -3,7 +3,7 @@ Repository: django/django
 Url: "https://github.com/django/django.git"
 Args: ["**/*.{md,py}"]
 Lines:
- CSpell: Files checked: 2778, Issues found: 8175 in 926 files.
+ CSpell: Files checked: 2778, Issues found: 8188 in 927 files.
  exit code: 1
 ./django/__init__.py:12:26     - Unknown word (urlresolvers) -- Set the thread-local urlresolvers script prefix if `set
 ./django/apps/registry.py:134:40    - Unknown word (unconfigured) -- not ready" is due to unconfigured settings, accessing
@@ -151,6 +151,7 @@ Lines:
 ./django/contrib/auth/base_user.py:11:5      - Unknown word (acheck)     -- acheck_password,
 ./django/contrib/auth/context_processors.py:16:33     - Unknown word (someapp)    -- To fix 'item in perms.someapp' and __getitem__ interaction
 ./django/contrib/auth/context_processors.py:40:41     - Unknown word (someperm)   -- someapp" or "someapp.someperm" in perms.
+./django/contrib/auth/decorators.py:41:17     - Unknown word (auser)      -- auser = await request.auser
 ./django/contrib/auth/forms.py:530:46    - Unknown word (messagelist) -- unusable_warning" class="messagelist"><li class="warning
 ./django/contrib/auth/hashers.py:364:20    - Unknown word (PKCS)       -- recommended by PKCS #5. This is compatible
 ./django/contrib/auth/hashers.py:378:60    - Unknown word (cffi)       -- requires the argon2-cffi library which
@@ -160,7 +161,6 @@ Lines:
 ./django/contrib/auth/hashers.py:507:27    - Unknown word (algostr)    -- algorithm, empty, algostr, work_factor, data
 ./django/contrib/auth/hashers.py:572:5     - Unknown word (maxmem)     -- maxmem = 0
 ./django/contrib/auth/hashers.py:588:13    - Unknown word (dklen)      -- dklen=64,
-./django/contrib/auth/middleware.py:17:11     - Unknown word (auser)      -- async def auser(request):
 ./django/contrib/auth/middleware.py:18:31     - Unknown word (acached)    -- not hasattr(request, "_acached_user"):
 ./django/contrib/auth/urls.py:27:17     - Unknown word (uidb)       -- "reset/<uidb64>/<token>/",
 ./django/contrib/auth/views.py:286:28    - Unknown word (Referer)    -- # HTTP Referer header.
@@ -618,9 +618,9 @@ Lines:
 ./django/db/backends/sqlite3/base.py:359:9     - Unknown word (peekable)   -- peekable, param_list = tee(iter
 ./django/db/backends/sqlite3/creation.py:105:13    - Unknown word (ondisk)     -- ondisk_db = sqlite3.connect
 ./django/db/backends/sqlite3/creation.py:22:26     - Unknown word (memorydb)   -- return "file:memorydb_%s?mode=memory&cache
+./django/db/backends/sqlite3/features.py:101:39    - Unknown word (liveserverthread) -- "servers.test_liveserverthread.LiveServerThreadTest
 ./django/db/backends/sqlite3/features.py:47:16     - Unknown word (nocase)     -- "ci": "nocase",
 ./django/db/backends/sqlite3/features.py:78:43     - Unknown word (doesnt)     -- alter_field_default_doesnt_perform_queries",
-./django/db/backends/sqlite3/features.py:98:39     - Unknown word (liveserverthread) -- "servers.test_liveserverthread.LiveServerThreadTest
 ./django/db/backends/sqlite3/introspection.py:37:10     - Unknown word (smallinteger) -- "smallinteger": "SmallIntegerField
 ./django/db/backends/sqlite3/introspection.py:94:27     - Unknown word (xinfo)        -- "PRAGMA table_xinfo(%s)" % self.connection
 ./django/db/backends/sqlite3/operations.py:97:28     - Unknown word (tznames)    -- *self._convert_tznames_to_sql(tzname),
@@ -636,9 +636,9 @@ Lines:
 ./django/db/migrations/serializer.py:191:51    - Unknown word (Qualname)        -- value.__qualname__: # Qualname can include <locals
 ./django/db/migrations/serializer.py:264:24    - Unknown word (fspath)          -- return repr(os.fspath(self.value)), {}
 ./django/db/migrations/serializer.py:95:7      - Unknown word (Deconstructable) -- class DeconstructableSerializer(BaseSerializer
-./django/db/models/base.py:1111:19   - Unknown word (autopopulate)  -- # autopopulate the _order field
-./django/db/models/base.py:113:9     - Unknown word (contributable) -- contributable_attrs = {}
-./django/db/models/base.py:683:40    - Unknown word (attnames)      -- an iterable of field attnames. If fields is None,
+./django/db/models/base.py:1116:19   - Unknown word (autopopulate)  -- # autopopulate the _order field
+./django/db/models/base.py:114:9     - Unknown word (contributable) -- contributable_attrs = {}
+./django/db/models/base.py:684:40    - Unknown word (attnames)      -- an iterable of field attnames. If fields is None,
 ./django/db/models/enums.py:32:17     - Unknown word (metacls)    -- def __new__(metacls, classname, bases, classdict
 ./django/db/models/expressions.py:280:47    - Unknown word (multijoins) -- of reusable joins for multijoins
 ./django/db/models/fields/__init__.py:2862:11   - Unknown word (subclasscheck) -- def __subclasscheck__(self, subclass):
@@ -646,8 +646,8 @@ Lines:
 ./django/db/models/fields/__init__.py:531:79    - Unknown word (WXXX)       -- details.get("id", "fields.WXXX"),
 ./django/db/models/fields/json.py:322:7     - Unknown word (JSONI)      -- class JSONIContains(CaseInsensitiveMixin
 ./django/db/models/fields/json.py:401:65    - Unknown word (MDEV)       -- and ->> operators (see MDEV-13594).
-./django/db/models/fields/related.py:823:63    - Unknown word (pushdown)   -- joining and subquery pushdown. The
-./django/db/models/fields/related.py:888:20    - Unknown word (FK's)       -- # Internal FK's - i.e., those with a
+./django/db/models/fields/related.py:820:63    - Unknown word (pushdown)   -- joining and subquery pushdown. The
+./django/db/models/fields/related.py:885:20    - Unknown word (FK's)       -- # Internal FK's - i.e., those with a
 ./django/db/models/fields/related_descriptors.py:1172:23   - Unknown word (autocreated) -- # For non-autocreated 'through' models, can
 ./django/db/models/fields/related_descriptors.py:31:69     - Unknown word (unicity)    -- is checked upstream (unicity
 ./django/db/models/functions/datetime.py:156:35    - Unknown word (mydatetime) -- replicate this in Python: (mydatetime.isoweekday() % 7) +
@@ -660,8 +660,8 @@ Lines:
 ./django/db/models/lookups.py:567:30    - Unknown word (thevalue)   -- col LIKE %s, ['thevalue%']
 ./django/db/models/lookups.py:571:24    - Unknown word (othercol)   -- # col LIKE othercol || '%%'
 ./django/db/models/lookups.py:767:7     - Unknown word (UUIDI)      -- class UUIDIExact(UUIDTextMixin,
-./django/db/models/options.py:137:37    - Unknown word (proxying)   -- class this model is proxying. Note that proxy_for
-./django/db/models/options.py:526:33    - Unknown word (longwinded) -- The third lambda is a longwinded way of checking f.related
+./django/db/models/options.py:136:37    - Unknown word (proxying)   -- class this model is proxying. Note that proxy_for
+./django/db/models/options.py:522:33    - Unknown word (longwinded) -- The third lambda is a longwinded way of checking f.related
 ./django/db/models/query.py:241:17    - Unknown word (rowfactory) -- rowfactory = operator.itemgetter
 ./django/db/models/query.py:564:27    - Unknown word (aprefetch)  -- await aprefetch_related_objects(
 ./django/db/models/query.py:780:30    - Unknown word (childmost)  -- insert into the childmost table.
@@ -1393,7 +1393,7 @@ Lines:
 ./tests/auth_tests/test_context_processors.py:45:14     - Unknown word (permwrapper) -- def test_permwrapper_in(self):
 ./tests/auth_tests/test_context_processors.py:56:14     - Unknown word (permlookupdict) -- def test_permlookupdict_in(self):
 ./tests/auth_tests/test_context_processors.py:60:9      - Unknown word (pldict)         -- pldict = PermLookupDict(MockUser
-./tests/auth_tests/test_decorators.py:113:14    - Unknown word (permissioned) -- def test_permissioned_denied_redirect(self
+./tests/auth_tests/test_decorators.py:184:14    - Unknown word (permissioned) -- def test_permissioned_denied_redirect(self
 ./tests/auth_tests/test_forms.py:1131:51   - Unknown word (ıxample)         -- user("mike456", "mike@ıxample.org", "test123")
 ./tests/auth_tests/test_forms.py:1342:37   - Unknown word (Pucb)            -- pbkdf2_sha256$100000$a6Pucb1qSFcD$WmCkn9Hqidj48NVe
 ./tests/auth_tests/test_forms.py:1364:45   - Unknown word (labelable)       -- it doesn't have any labelable elements.
@@ -1828,13 +1828,13 @@ Lines:
 ./tests/gis_tests/geoapp/test_feeds.py:25:14     - Unknown word (geofeed)    -- def test_geofeed_rss(self):
 ./tests/gis_tests/geoapp/test_feeds.py:76:28     - Unknown word (georsss)    -- # Ensuring the georsss namespace was added
 ./tests/gis_tests/geoapp/test_functions.py:148:9     - Unknown word (ptown)      -- ptown = City.objects.annotate
-./tests/gis_tests/geoapp/test_functions.py:357:43    - Unknown word (tobytes)    -- FromWKB(Value(g.wkb.tobytes())),
-./tests/gis_tests/geoapp/test_functions.py:618:15    - Unknown word (yfac)       -- xfac, yfac = 2, 3
-./tests/gis_tests/geoapp/test_functions.py:618:9     - Unknown word (xfac)       -- xfac, yfac = 2, 3
-./tests/gis_tests/geoapp/test_functions.py:643:28    - Unknown word (Marino)     -- # Boundary for San Marino, courtesy of Bjorn Sandvik
-./tests/gis_tests/geoapp/test_functions.py:643:48    - Unknown word (Bjorn)      -- Marino, courtesy of Bjorn Sandvik of thematicmapping
-./tests/gis_tests/geoapp/test_functions.py:643:54    - Unknown word (Sandvik)    -- Marino, courtesy of Bjorn Sandvik of thematicmapping.org
-./tests/gis_tests/geoapp/test_functions.py:643:65    - Unknown word (thematicmapping) -- of Bjorn Sandvik of thematicmapping.org
+./tests/gis_tests/geoapp/test_functions.py:352:43    - Unknown word (tobytes)    -- FromWKB(Value(g.wkb.tobytes())),
+./tests/gis_tests/geoapp/test_functions.py:613:15    - Unknown word (yfac)       -- xfac, yfac = 2, 3
+./tests/gis_tests/geoapp/test_functions.py:613:9     - Unknown word (xfac)       -- xfac, yfac = 2, 3
+./tests/gis_tests/geoapp/test_functions.py:638:28    - Unknown word (Marino)     -- # Boundary for San Marino, courtesy of Bjorn Sandvik
+./tests/gis_tests/geoapp/test_functions.py:638:48    - Unknown word (Bjorn)      -- Marino, courtesy of Bjorn Sandvik of thematicmapping
+./tests/gis_tests/geoapp/test_functions.py:638:54    - Unknown word (Sandvik)    -- Marino, courtesy of Bjorn Sandvik of thematicmapping.org
+./tests/gis_tests/geoapp/test_functions.py:638:65    - Unknown word (thematicmapping) -- of Bjorn Sandvik of thematicmapping.org
 ./tests/gis_tests/geoapp/test_regress.py:32:17     - Unknown word (Åland)      -- name = "Åland Islands"
 ./tests/gis_tests/geoapp/test_regress.py:58:21     - Unknown word (Tioga)      -- county="Tioga",
 ./tests/gis_tests/geoapp/test_sitemaps.py:27:14     - Unknown word (geositemap) -- def test_geositemap_kml(self):
@@ -2483,8 +2483,8 @@ Lines:
 ./tests/queryset_pickle/tests.py:73:22     - Unknown word (relatedobjectdoesnotexist) -- def test_forward_relatedobjectdoesnotexist_class(self):
 ./tests/raw_query/tests.py:126:14    - Unknown word (rawqueryset) -- def test_rawqueryset_repr(self):
 ./tests/raw_query/tests.py:174:42    - Unknown word (mixedcaseidcolumn) -- SELECT * FROM raw_query_mixedcaseidcolumn"
-./tests/raw_query/tests.py:356:42    - Unknown word (friendlyauthor)    -- SELECT * FROM raw_query_friendlyauthor"
-./tests/raw_query/tests.py:384:60    - Unknown word (bookfkaspk)        -- default FROM raw_query_bookfkaspk"
+./tests/raw_query/tests.py:353:42    - Unknown word (friendlyauthor)    -- SELECT * FROM raw_query_friendlyauthor"
+./tests/raw_query/tests.py:381:60    - Unknown word (bookfkaspk)        -- default FROM raw_query_bookfkaspk"
 ./tests/raw_query/tests.py:49:44     - Unknown word (Shaston)    -- walking homeward from Shaston to the village of Marlott
 ./tests/raw_query/tests.py:49:70     - Unknown word (Marlott)    -- Shaston to the village of Marlott, "
 ./tests/raw_query/tests.py:50:43     - Unknown word (Blakemore)  -- the adjoining Vale of Blakemore, or Blackmoor."
@@ -2567,7 +2567,6 @@ Lines:
 ./tests/select_related_onetoone/tests.py:34:59     - Unknown word (moar)       -- objects.create(results="moar results")
 ./tests/select_related_onetoone/tests.py:35:9      - Unknown word (advstat)    -- advstat = AdvancedUserStat.objects
 ./tests/select_related_regress/tests.py:161:24    - Unknown word (Buswell)    -- name="Troy Buswell", state=wa, status=active
-./tests/serializers/test_data.py:396:21    - Unknown word (XMLPK)      -- # (pk_obj, 790, XMLPKData, "<foo></foo>")
 ./tests/serializers/test_deserializedobject.py:10:9      - Unknown word (deserial)   -- deserial_obj = DeserializedObject
 ./tests/serializers/test_json.py:106:20    - Unknown word (badpk)      -- "pk": "badpk",
 ./tests/serializers/test_json.py:129:26    - Unknown word (invalidint) -- "rank": "invalidint",
@@ -2781,11 +2780,11 @@ Lines:
 ./tests/update/tests.py:202:62    - Unknown word (relatedpoint) -- related_count=Count("relatedpoint"))
 ./tests/urlpatterns/path_base64_urls.py:7:1       - Unknown word (subsubpatterns) -- subsubpatterns = [
 ./tests/urlpatterns/path_base64_urls.py:8:58      - Unknown word (subsubpattern)  -- views.empty_view, name="subsubpattern-base64"),
-./tests/urlpatterns/tests.py:250:53    - Unknown word (stest)      -- int:num>/extra/<str:%stest>' cannot contain "
-./tests/urlpatterns/tests.py:284:23    - Unknown word (abcxyz)     -- ("str", {"abcxyz"}, no_converter),
-./tests/urlpatterns/tests.py:286:31    - Unknown word (ABCXYZ)     -- ("slug", {"abcxyz-ABCXYZ_01234567890"}, no_converter
-./tests/urlpatterns/tests.py:310:14    - Unknown word (nonmatching) -- def test_nonmatching_urls(self):
-./tests/urlpatterns/tests.py:315:34    - Unknown word (notallowed)  -- "slug", {"", "stars*notallowed"}),
+./tests/urlpatterns/tests.py:252:54    - Unknown word (stest)      -- int:num>/extra/<str:%stest>" % whitespace
+./tests/urlpatterns/tests.py:282:23    - Unknown word (abcxyz)     -- ("str", {"abcxyz"}, no_converter),
+./tests/urlpatterns/tests.py:284:31    - Unknown word (ABCXYZ)     -- ("slug", {"abcxyz-ABCXYZ_01234567890"}, no_converter
+./tests/urlpatterns/tests.py:308:14    - Unknown word (nonmatching) -- def test_nonmatching_urls(self):
+./tests/urlpatterns/tests.py:313:34    - Unknown word (notallowed)  -- "slug", {"", "stars*notallowed"}),
 ./tests/urlpatterns_reverse/included_namespace_urls.py:6:1       - Unknown word (testobj)    -- testobj3 = URLObject("testapp
 ./tests/urlpatterns_reverse/namespace_urls.py:13:1      - Unknown word (newappobj)  -- newappobj1 = URLObject("newapp
 ./tests/urlpatterns_reverse/test_localeregexdescriptor.py:37:14     - Unknown word (nontranslated) -- def test_nontranslated_regex_compiled_once
@@ -2846,10 +2845,10 @@ Lines:
 ./tests/utils_tests/test_simplelazyobject.py:10:42     - Unknown word (johndoe)    -- objects.create_user("johndoe", "john@example.com
 ./tests/utils_tests/test_text.py:158:52    - Unknown word (mylink)      -- href="xyz.html"\n id="mylink">brown fox</a> jumped
 ./tests/utils_tests/test_text.py:191:36    - Unknown word (está)        -- i>Buenos días! ¿Cómo está?</i>",
-./tests/utils_tests/test_text.py:334:47    - Unknown word (rghi)        -- normalize_newlines("abc\ndef\rghi\r\n"), "abc\ndef\nghi
-./tests/utils_tests/test_text.py:334:69    - Unknown word (nghi)        -- rghi\r\n"), "abc\ndef\nghi\n"
-./tests/utils_tests/test_text.py:361:22    - Unknown word (ıçüş)        -- ("spam & ıçüş", "spam-ıçüş", True
-./tests/utils_tests/test_text.py:365:15    - Unknown word (İstanbul)    -- ("İstanbul", "istanbul", True)
+./tests/utils_tests/test_text.py:361:47    - Unknown word (rghi)        -- normalize_newlines("abc\ndef\rghi\r\n"), "abc\ndef\nghi
+./tests/utils_tests/test_text.py:361:69    - Unknown word (nghi)        -- rghi\r\n"), "abc\ndef\nghi\n"
+./tests/utils_tests/test_text.py:388:22    - Unknown word (ıçüş)        -- ("spam & ıçüş", "spam-ıçüş", True
+./tests/utils_tests/test_text.py:392:15    - Unknown word (İstanbul)    -- ("İstanbul", "istanbul", True)
 ./tests/utils_tests/test_text.py:61:9      - Unknown word (truncator)  -- truncator = text.Truncator("The
 ./tests/utils_tests/test_text.py:69:33     - Unknown word (xfco)       -- = text.Truncator("o\xfco\xfco\xfco\xfc")
 ./tests/utils_tests/test_text.py:71:27     - Unknown word (oüoüoüoü)   -- self.assertEqual("oüoüoüoü", nfc.chars(8))

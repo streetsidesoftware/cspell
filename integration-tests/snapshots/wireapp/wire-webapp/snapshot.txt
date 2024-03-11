@@ -3,7 +3,7 @@ Repository: wireapp/wire-webapp
 Url: "https://github.com/wireapp/wire-webapp.git"
 Args: ["src/script/**/*.{js,ts,tsx,md}"]
 Lines:
- CSpell: Files checked: 1151, Issues found: 2714 in 624 files.
+ CSpell: Files checked: 1151, Issues found: 2723 in 624 files.
  exit code: 1
 ./src/script/Config.ts:81:31     - Unknown word (acces)      -- DataDog client api keys acces */
 ./src/script/E2EIdentity/E2EIdentityEnrollment.test.ts:100:73    - Unknown word (alreaady)    -- progress and device is alreaady enrolled', async ()
@@ -16,7 +16,7 @@ Lines:
 ./src/script/E2EIdentity/E2EIdentityEnrollment.ts:218:116   - Unknown word (userdata)   -- just need to get the userdata
 ./src/script/E2EIdentity/E2EIdentityEnrollment.ts:242:51    - Unknown word (keycloak)   -- cannot do silent login as keycloak refresh token extension
 ./src/script/E2EIdentity/E2EIdentityEnrollment.ts:62:11     - Unknown word (oidc)       -- private oidcService?: OIDCService
-./src/script/E2EIdentity/E2EIdentityVerification.ts:46:67     - Unknown word (eidentity)  -- EIdentity data in an non-e2eidentity environment');
+./src/script/E2EIdentity/E2EIdentityVerification.ts:47:67     - Unknown word (eidentity)  -- EIdentity data in an non-e2eidentity environment');
 ./src/script/E2EIdentity/OIDCService/OIDCService.ts:44:11     - Unknown word (dexio)      -- const dexioConfig: UserManagerSettings
 ./src/script/E2EIdentity/OIDCService/OIDCService.ts:68:9      - Unknown word (keyauth)    -- keyauth: {essential: true, value
 ./src/script/E2EIdentity/OIDCService/OauthEncryptedStore.ts:20:33     - Unknown word (bazinga)    -- Encoder, Decoder} from 'bazinga64';
@@ -131,17 +131,17 @@ Lines:
 ./src/script/calling/CallingRepository.test.ts:87:5      - Unknown word (screeninput) -- screeninput: ko.pureComputed(()
 ./src/script/calling/CallingRepository.ts:1032:18   - Unknown word (aestab)          -- if (member.aestab === AUDIO_STATE.ESTABLISHED
 ./src/script/calling/CallingRepository.ts:103:55    - Unknown word (userid)          -- Omit<WcallMember, 'userid'> & {userId: QualifiedId
-./src/script/calling/CallingRepository.ts:1057:7    - Unknown word (convid)          -- convid: serializedConversationId
-./src/script/calling/CallingRepository.ts:1179:70   - Unknown word (screensharing)   -- V preferences) when screensharing is activated
-./src/script/calling/CallingRepository.ts:1335:47   - Unknown word (Recepients)      -- rtParticipantsToCallingMessageRecepients = (participants: Participant
-./src/script/calling/CallingRepository.ts:1412:27   - Unknown word (NOONE)           -- if (reason === REASON.NOONE_JOINED || reason ==
-./src/script/calling/CallingRepository.ts:1496:27   - Unknown word (ECONN)           -- case REASON.TIMEOUT_ECONN:
-./src/script/calling/CallingRepository.ts:1602:102  - Unknown word (vrecv)           -- ?.videoState(member.vrecv));
-./src/script/calling/CallingRepository.ts:1766:44   - Unknown word (wuser)           -- updateActiveSpeakers = (wuser: number, convId: string
-./src/script/calling/CallingRepository.ts:1898:11   - Unknown word (Segmentations)   -- customSegmentations: Record<string, any
-./src/script/calling/CallingRepository.ts:1906:11   - Unknown word (segmentations)   -- const segmentations = {
-./src/script/calling/CallingRepository.ts:1968:68   - Unknown word (noopener)        -- target="_blank" rel="noopener noreferrer">`,
-./src/script/calling/CallingRepository.ts:1968:77   - Unknown word (noreferrer)      -- blank" rel="noopener noreferrer">`,
+./src/script/calling/CallingRepository.ts:1062:7    - Unknown word (convid)          -- convid: serializedConversationId
+./src/script/calling/CallingRepository.ts:1184:70   - Unknown word (screensharing)   -- V preferences) when screensharing is activated
+./src/script/calling/CallingRepository.ts:1340:47   - Unknown word (Recepients)      -- rtParticipantsToCallingMessageRecepients = (participants: Participant
+./src/script/calling/CallingRepository.ts:1417:27   - Unknown word (NOONE)           -- if (reason === REASON.NOONE_JOINED || reason ==
+./src/script/calling/CallingRepository.ts:1501:27   - Unknown word (ECONN)           -- case REASON.TIMEOUT_ECONN:
+./src/script/calling/CallingRepository.ts:1607:102  - Unknown word (vrecv)           -- ?.videoState(member.vrecv));
+./src/script/calling/CallingRepository.ts:1771:44   - Unknown word (wuser)           -- updateActiveSpeakers = (wuser: number, convId: string
+./src/script/calling/CallingRepository.ts:1903:11   - Unknown word (Segmentations)   -- customSegmentations: Record<string, any
+./src/script/calling/CallingRepository.ts:1911:11   - Unknown word (segmentations)   -- const segmentations = {
+./src/script/calling/CallingRepository.ts:1973:68   - Unknown word (noopener)        -- target="_blank" rel="noopener noreferrer">`,
+./src/script/calling/CallingRepository.ts:1973:77   - Unknown word (noreferrer)      -- blank" rel="noopener noreferrer">`,
 ./src/script/calling/CallingRepository.ts:259:55    - Unknown word (initialised)     -- ubconversationService was not initialised');
 ./src/script/calling/CallingRepository.ts:26:9      - Unknown word (Subconversation) -- import {SubconversationEpochInfoMember} from
 ./src/script/calling/CallingRepository.ts:394:32    - Unknown word (Conv)            -- wCall?.setClientsForConv(
@@ -353,11 +353,10 @@ Lines:
 ./src/script/notification/PreferenceNotificationRepository.ts:104:11    - Unknown word (prio)       -- const prio = (item: GroupedNotifications
 ./src/script/page/AppLock/AppLock.test.tsx:29:18     - Unknown word (APPLOCK)    -- import {AppLock, APPLOCK_STATE} from './AppLock
 ./src/script/page/AppLock/AppLock.test.tsx:58:5      - Unknown word (applock)    -- applock: {
-./src/script/page/AppLock/AppLock.tsx:142:51    - Unknown word (Applock)    -- featureConfigChangeModalApplock'),
-./src/script/page/AppLock/AppLock.tsx:309:31    - Unknown word (Passcode)   -- {t('modalAppLockPasscode')}
-./src/script/page/AppLock/AppLock.tsx:327:37    - Unknown word (passcode)   -- className={cx('modal__passcode__info', {'modal__passcode
-./src/script/page/AppLock/AppLock.tsx:329:50    - Unknown word (charnumber) -- passcode-validation-charnumber"
-./src/script/page/AppLock/AppLock.tsx:363:50    - Unknown word (specialchar) -- passcode-validation-specialchar"
+./src/script/page/AppLock/AppLock.tsx:301:31    - Unknown word (Passcode)   -- {t('modalAppLockPasscode')}
+./src/script/page/AppLock/AppLock.tsx:319:37    - Unknown word (passcode)   -- className={cx('modal__passcode__info', {'modal__passcode
+./src/script/page/AppLock/AppLock.tsx:321:50    - Unknown word (charnumber) -- passcode-validation-charnumber"
+./src/script/page/AppLock/AppLock.tsx:355:50    - Unknown word (specialchar) -- passcode-validation-specialchar"
 ./src/script/page/LeftSidebar/LeftSidebar.tsx:32:53     - Unknown word (Temporaty)  -- Conversations} from './panels/TemporatyGuestConversations';
 ./src/script/page/MainContent/panels/Collection/Collection.tsx:108:39    - Unknown word (converation) -- message from a different converation, nothing to do
 ./src/script/page/MainContent/panels/Collection/Collection.tsx:202:28    - Unknown word (fullsearch)  -- aria-label={t('fullsearchCancelLabel')}
@@ -410,6 +409,7 @@ Lines:
 ./src/script/ui/ContextMenu.tsx:97:54     - Unknown word (begings)    -- such as 10 seconds etc begings with digit which is
 ./src/script/ui/Shortcut.ts:139:33    - Unknown word (graveaccent) -- macos: 'command + alt + graveaccent', // KeyboardJS fires
 ./src/script/ui/Shortcut.ts:21:25     - Unknown word (keyboardjs) -- import keyboardJS from 'keyboardjs';
+./src/script/user/AppLockRepository.ts:95:45     - Unknown word (Applock)    -- featureConfigChangeModalApplockHeadline'),
 ./src/script/user/AvailabilityModal.ts:38:20     - Unknown word (dont)       -- action: (dontShowAgain?: boolean)
 ./src/script/util/ArrayUtil.ts:124:14    - Unknown word (uniquify)    -- export const uniquify = <T>(elements: T[]
 ./src/script/util/ArrayUtil.ts:37:54     - Unknown word (referencial) -- matching function in case referencial equality is not enough
