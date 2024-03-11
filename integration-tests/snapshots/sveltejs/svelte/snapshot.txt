@@ -3,7 +3,7 @@ Repository: sveltejs/svelte
 Url: "https://github.com/sveltejs/svelte.git"
 Args: ["**"]
 Lines:
- CSpell: Files checked: 6183, Issues found: 5836 in 607 files.
+ CSpell: Files checked: 6177, Issues found: 5853 in 611 files.
  exit code: 1
 ./CONTRIBUTING.md:125:4     - Unknown word (typecheck)  -- To typecheck the codebase, run `pnpm
 ./CONTRIBUTING.md:22:5      - Unknown word (Triaging)   -- ### Triaging issues and pull requests
@@ -762,6 +762,7 @@ Lines:
 ./documentation/blog/2023-11-01-whats-new-in-svelte-november-2023.md:82:4      - Unknown word (Purplix)    -- - [Purplix](https://github.com
 ./documentation/blog/2023-11-01-whats-new-in-svelte-november-2023.md:83:4      - Unknown word (Obra)       -- - [Obra Icons](https://github
 ./documentation/blog/2023-11-01-whats-new-in-svelte-november-2023.md:84:179    - Unknown word (Langchain)  -- AI SDK and of course Langchain
+./documentation/docs/02-template-syntax/01-svelte-components.md:215:216   - Unknown word (initialisation) -- the store at component initialisation and unsubscribe when
 ./documentation/docs/02-template-syntax/01-svelte-components.md:251:159   - Unknown word (unsubscription) -- rather than return the unsubscription function directly. Note
 ./documentation/docs/02-template-syntax/02-basic-markup.md:7:66      - Unknown word (capitalised) -- regular HTML element. A capitalised tag, such as `<Widget
 ./documentation/docs/02-template-syntax/03-logic-blocks.md:124:8     - Unknown word (todos)      -- {#each todos as todo}
@@ -782,7 +783,6 @@ Lines:
 ./documentation/docs/02-template-syntax/06-component-directives.md:44:16     - Unknown word (anycssvalue) -- --style-props="anycssvalue"
 ./documentation/docs/02-template-syntax/06-component-directives.md:55:1      - Unknown word (Desugars)    -- Desugars to this:
 ./documentation/docs/02-template-syntax/06-component-directives.md:65:38     - Unknown word (desugars)    -- namespace, the example above desugars into using `<g>` instead
-./documentation/docs/03-runtime/01-svelte.md:11:147    - Unknown word (initialisation) -- during the component's initialisation (but doesn't need to
 ./documentation/docs/03-runtime/02-svelte-store.md:79:42     - Unknown word (tock)       -- sound === 'tick' ? 'tock' : 'tick'));
 ./documentation/docs/03-runtime/03-svelte-motion.md:41:2      - Unknown word (embiggen)   -- embiggen
 ./documentation/docs/03-runtime/05-svelte-animate.md:27:226    - Unknown word (travelled)  -- relative to the distance travelled by each element.
@@ -1179,9 +1179,11 @@ Lines:
 ./packages/svelte/src/compiler/legacy.js:133:9     - Unknown word (catchblock)   -- let catchblock = {
 ./packages/svelte/src/compiler/legacy.js:265:9     - Unknown word (elseblock)    -- let elseblock = undefined;
 ./packages/svelte/src/compiler/phases/1-parse/index.js:1:48      - Unknown word (borked)     -- type definitions are borked in the release we use
-./packages/svelte/src/compiler/phases/1-parse/read/options.js:137:12    - Unknown word (shadowdom)  -- const shadowdom = shadow?.value;
+./packages/svelte/src/compiler/phases/1-parse/read/options.js:142:12    - Unknown word (shadowdom)  -- const shadowdom = shadow?.value;
 ./packages/svelte/src/compiler/phases/1-parse/read/style.js:50:74     - Unknown word (Atrule)     -- import('#compiler').Css.Atrule>} */
 ./packages/svelte/src/compiler/phases/1-parse/state/element.js:2:8       - Unknown word (fuzzymatch) -- import fuzzymatch from '../utils/fuzzymatch
+./packages/svelte/src/compiler/phases/1-parse/state/element.js:55:20     - Unknown word (shadowroot) -- function parent_is_shadowroot_template(stack) {
+./packages/svelte/src/compiler/phases/1-parse/state/element.js:62:50     - Unknown word (shadowrootmode) -- Attribute' && a.name === 'shadowrootmode'
 ./packages/svelte/src/compiler/phases/1-parse/utils/entities.js:1000:3    - Unknown word (subsub)     -- 'subsub;': 10965,
 ./packages/svelte/src/compiler/phases/1-parse/utils/entities.js:1001:3    - Unknown word (subsup)     -- 'subsup;': 10963,
 ./packages/svelte/src/compiler/phases/1-parse/utils/entities.js:1002:3    - Unknown word (succeq)     -- 'succeq;': 10928,
@@ -2455,21 +2457,23 @@ Lines:
 ./packages/svelte/src/compiler/phases/2-analyze/a11y.js:745:12    - Unknown word (proptypes)  -- // aria-proptypes
 ./packages/svelte/src/compiler/phases/2-analyze/css/css-analyze.js:40:22     - Unknown word (analyse)    -- context.next(); // analyse relevant selectors first
 ./packages/svelte/src/compiler/phases/2-analyze/css/css-prune.js:192:19    - Unknown word (combinators) -- // TODO other combinators
-./packages/svelte/src/compiler/phases/2-analyze/index.js:1030:38   - Unknown word (proxied)    -- have $state that can be proxied or frozen and isn't
-./packages/svelte/src/compiler/phases/2-analyze/index.js:1170:73   - Unknown word (qirk)       -- stripped because of a qirk:
+./packages/svelte/src/compiler/phases/2-analyze/index.js:1076:38   - Unknown word (proxied)    -- have $state that can be proxied or frozen and isn't
+./packages/svelte/src/compiler/phases/2-analyze/index.js:1216:73   - Unknown word (qirk)       -- stripped because of a qirk:
 ./packages/svelte/src/compiler/phases/2-analyze/index.js:246:64    - Unknown word (tweaker)    -- runes_js, runes_scope_js_tweaker)
-./packages/svelte/src/compiler/phases/2-analyze/index.js:448:17    - Unknown word (nonstate)   -- // warn on any nonstate declarations that are
+./packages/svelte/src/compiler/phases/2-analyze/index.js:482:17    - Unknown word (nonstate)   -- // warn on any nonstate declarations that are
 ./packages/svelte/src/compiler/phases/2-analyze/index.js:83:12     - Unknown word (hoistable)  -- const non_hoistable = { type: 'non-hoistable
-./packages/svelte/src/compiler/phases/2-analyze/validation.js:2:13      - Unknown word (parapgraph) -- disallowed_parapgraph_contents,
-./packages/svelte/src/compiler/phases/2-analyze/validation.js:955:56    - Unknown word (iife)       -- node, path, 'derived-iife');
+./packages/svelte/src/compiler/phases/2-analyze/validation.js:1098:56   - Unknown word (iife)       -- node, path, 'derived-iife');
+./packages/svelte/src/compiler/phases/2-analyze/validation.js:344:19    - Unknown word (eachblock)  -- 'invalid-rest-eachblock-binding',
 ./packages/svelte/src/compiler/phases/3-transform/client/utils.js:198:40    - Unknown word (subexpression) -- expression.expressions.some((subexpression) => is_expression_async
+./packages/svelte/src/compiler/phases/3-transform/client/utils.js:423:29    - Unknown word (unsub)         -- return b.call('$.store_unsub', call, b.literal(`
 ./packages/svelte/src/compiler/phases/3-transform/client/visitors/global.js:97:23     - Unknown word (IIFEE)      -- // turn it into an IIFEE assignment expression
 ./packages/svelte/src/compiler/phases/3-transform/client/visitors/javascript-legacy.js:12:23     - Unknown word (declarators) -- function create_state_declarators(declarator, scope, value
 ./packages/svelte/src/compiler/phases/3-transform/client/visitors/template.js:134:65    - Unknown word (toogle)     -- something like `$.class_toogle(element, class_name
 ./packages/svelte/src/compiler/phases/3-transform/client/visitors/template.js:1733:8    - Unknown word (quasis)     -- const quasis = [];
-./packages/svelte/src/compiler/phases/3-transform/client/visitors/template.js:2218:47   - Unknown word (computeds)  -- ...lets); // create computeds in the outer context
-./packages/svelte/src/compiler/phases/3-transform/client/visitors/template.js:2363:57   - Unknown word (IIFEs)      -- other patterns into IIFEs and separates the assignments
+./packages/svelte/src/compiler/phases/3-transform/client/visitors/template.js:2230:47   - Unknown word (computeds)  -- ...lets); // create computeds in the outer context
+./packages/svelte/src/compiler/phases/3-transform/client/visitors/template.js:2375:57   - Unknown word (IIFEs)      -- other patterns into IIFEs and separates the assignments
 ./packages/svelte/src/compiler/phases/3-transform/server/transform-server.js:554:9     - Unknown word (deriveds)   -- const deriveds = [];
+./packages/svelte/src/compiler/phases/3-transform/utils.js:165:75    - Unknown word (spaceand)   -- text node with a single spaceand keep whitespace
 ./packages/svelte/src/compiler/phases/3-transform/utils.js:76:44     - Unknown word (inbetween)  -- trailing whitespace of inbetween text nodes,
 ./packages/svelte/src/compiler/phases/constants.js:113:3     - Unknown word (hatchpath)  -- 'hatchpath',
 ./packages/svelte/src/compiler/phases/constants.js:114:3     - Unknown word (hkern)      -- 'hkern',
@@ -2479,33 +2483,32 @@ Lines:
 ./packages/svelte/src/compiler/phases/constants.js:134:3     - Unknown word (solidcolor)   -- 'solidcolor',
 ./packages/svelte/src/compiler/phases/constants.js:146:3     - Unknown word (vkern)        -- 'vkern'
 ./packages/svelte/src/compiler/phases/patterns.js:19:43     - Unknown word (aeiou)      -- starts_with_vowel = /^[aeiou]/;
-./packages/svelte/src/compiler/phases/scope.js:402:84    - Unknown word (hella)      -- component, because slots are hella weird
-./packages/svelte/src/compiler/types/index.d.ts:282:45    - Unknown word (klass)      -- class` in `{ export klass as class}` */
+./packages/svelte/src/compiler/phases/scope.js:403:84    - Unknown word (hella)      -- component, because slots are hella weird
+./packages/svelte/src/compiler/types/index.d.ts:283:45    - Unknown word (klass)      -- class` in `{ export klass as class}` */
 ./packages/svelte/src/compiler/utils/mapped_code.js:129:6     - Unknown word (unswitched) -- // unswitched loops are faster
-./packages/svelte/src/compiler/warnings.js:174:10    - Unknown word (Screenreaders) -- 'A11y: Screenreaders already announce <img
+./packages/svelte/src/compiler/warnings.js:182:10    - Unknown word (Screenreaders) -- 'A11y: Screenreaders already announce <img
 ./packages/svelte/src/constants.js:111:3     - Unknown word (figcapture) -- 'figcapture',
 ./packages/svelte/src/constants.js:187:14    - Unknown word (bgsound)    -- tag === 'bgsound' ||
-./packages/svelte/src/internal/client/custom-element.js:66:11     - Unknown word (unsub)      -- const unsub = this.$$c.$on(type
 ./packages/svelte/src/internal/client/dev/ownership.js:48:14     - Unknown word (bondaries)  -- // of the bondaries/component context heuristic
-./packages/svelte/src/internal/client/dom/blocks/each.js:124:42    - Unknown word (treeshaken) -- let` or else it isn't treeshaken out
-./packages/svelte/src/internal/client/dom/blocks/each.js:435:16    - Unknown word (Ivi's)      -- * is based on Ivi's reconcilation logic
-./packages/svelte/src/internal/client/dom/blocks/each.js:435:22    - Unknown word (reconcilation) -- * is based on Ivi's reconcilation logic:
-./packages/svelte/src/internal/client/proxy.js:146:17    - Unknown word (unstate)    -- export function unstate(value) {
+./packages/svelte/src/internal/client/dom/blocks/each.js:118:42    - Unknown word (treeshaken) -- let` or else it isn't treeshaken out
+./packages/svelte/src/internal/client/dom/blocks/each.js:434:16    - Unknown word (Ivi's)      -- * is based on Ivi's reconcilation logic
+./packages/svelte/src/internal/client/dom/blocks/each.js:434:22    - Unknown word (reconcilation) -- * is based on Ivi's reconcilation logic:
+./packages/svelte/src/internal/client/dom/blocks/each.js:461:74    - Unknown word (itens)         -- we'll need ensure the itens are all wrapped in signals
+./packages/svelte/src/internal/client/proxy.js:144:17    - Unknown word (unstate)    -- export function unstate(value) {
+./packages/svelte/src/internal/client/reactivity/sources.js:117:73    - Unknown word (dirtyness)  -- signals can properly track dirtyness
+./packages/svelte/src/internal/client/reactivity/sources.js:8:10      - Unknown word (untracking) -- current_untracking,
 ./packages/svelte/src/internal/client/reactivity/store.js:30:83     - Unknown word (comptued)   -- when we split up source/comptued signals
+./packages/svelte/src/internal/client/reactivity/types.d.ts:75:64     - Unknown word (depdendencies) -- signals to track if their depdendencies are dirty or not **
 ./packages/svelte/src/internal/client/render.js:1029:10   - Unknown word (numberlike) -- if (is_numberlike_input(dom)) {
-./packages/svelte/src/internal/client/render.js:1362:77   - Unknown word (nullfiy)    -- context changes), then nullfiy the binding at
-./packages/svelte/src/internal/client/render.js:1610:23   - Unknown word (infering)   -- // We try our best infering the namespace in case
-./packages/svelte/src/internal/client/render.js:2843:36   - Unknown word (synchronisation) -- current_value); // force a synchronisation immediately
+./packages/svelte/src/internal/client/render.js:1373:77   - Unknown word (nullfiy)    -- context changes), then nullfiy the binding at
+./packages/svelte/src/internal/client/render.js:1621:23   - Unknown word (infering)   -- // We try our best infering the namespace in case
+./packages/svelte/src/internal/client/render.js:2854:36   - Unknown word (synchronisation) -- current_value); // force a synchronisation immediately
 ./packages/svelte/src/internal/client/render.js:83:11     - Unknown word (registerd)  -- const all_registerd_events = new Set();
-./packages/svelte/src/internal/client/runtime.js:1519:31   - Unknown word (proxified)  -- the object is already proxified, then unstate the value
-./packages/svelte/src/internal/client/runtime.js:186:17    - Unknown word (workig)     -- // If we're workig with an unowned derived
-./packages/svelte/src/internal/client/runtime.js:428:79    - Unknown word (accomodate) -- effects more than once to accomodate for "$: only runs once
-./packages/svelte/src/internal/client/runtime.js:78:20     - Unknown word (untracking) -- export let current_untracking = false;
-./packages/svelte/src/internal/client/runtime.js:815:26    - Unknown word (doesnt)     -- mutate(signal, null /* doesnt matter */);
-./packages/svelte/src/internal/client/runtime.js:963:73    - Unknown word (dirtyness)  -- signals can properly track dirtyness
-./packages/svelte/src/internal/client/types.d.ts:120:64    - Unknown word (depdendencies) -- signals to track if their depdendencies are dirty or not **
-./packages/svelte/src/internal/client/types.d.ts:286:6     - Unknown word (effewct)       -- /** effewct */
-./packages/svelte/src/internal/client/types.d.ts:40:19     - Unknown word (JITs)       -- // when the JS VM JITs the code.
+./packages/svelte/src/internal/client/runtime.js:1392:31   - Unknown word (proxified)  -- the object is already proxified, then unstate the value
+./packages/svelte/src/internal/client/runtime.js:194:17    - Unknown word (workig)     -- // If we're workig with an unowned derived
+./packages/svelte/src/internal/client/runtime.js:795:26    - Unknown word (doesnt)     -- mutate(signal, null /* doesnt matter */);
+./packages/svelte/src/internal/client/types.d.ts:212:6     - Unknown word (effewct)    -- /** effewct */
+./packages/svelte/src/internal/client/types.d.ts:26:19     - Unknown word (JITs)       -- // when the JS VM JITs the code.
 ./packages/svelte/src/internal/server/index.js:45:209    - Unknown word (AFFFE)      -- u{9FFFE}\u{9FFFF}\u{AFFFE}\u{AFFFF}\u{BFFFE}\u
 ./packages/svelte/src/internal/server/index.js:45:218    - Unknown word (AFFFF)      -- u{9FFFF}\u{AFFFE}\u{AFFFF}\u{BFFFE}\u{BFFFF}\u
 ./packages/svelte/src/internal/server/index.js:45:227    - Unknown word (BFFFE)      -- u{AFFFE}\u{AFFFF}\u{BFFFE}\u{BFFFF}\u{CFFFE}\u
@@ -2647,8 +2650,8 @@ Lines:
 ./packages/svelte/tests/runtime-runes/samples/event-attribute-not-hoistable/main.svelte:31:73     - Unknown word (delegateable) -- when one of them is not delegateable -->
 ./packages/svelte/tests/runtime-runes/samples/not-actual-runes/_config.js:6:11      - Unknown word (Shouldnt)   -- <button>Shouldnt be reactive</button
 ./packages/svelte/tests/server-side-rendering/samples/attribute-escaped-quotes-spread/_expected.html:5:2       - Unknown word (quux)       -- quux="&quot;><script>alert
-./packages/svelte/tests/signals/test.ts:211:26    - Unknown word (onowned)    -- test('correctly cleanup onowned nested derived values
-./packages/svelte/tests/signals/test.ts:278:56    - Unknown word (depedencies) -- derived that has no depedencies', () => {
+./packages/svelte/tests/signals/test.ts:207:26    - Unknown word (onowned)    -- test('correctly cleanup onowned nested derived values
+./packages/svelte/tests/signals/test.ts:274:56    - Unknown word (depedencies) -- derived that has no depedencies', () => {
 ./packages/svelte/tests/sourcemaps/samples/external/_config.js:26:4      - Unknown word (Divs)       -- 'Divs ftw!',
 ./packages/svelte/tests/sourcemaps/samples/preprocessed-multiple/_config.js:10:37     - Unknown word (bazitone)   -- replace_all(src, '--bazitone', '--baz');
 ./packages/svelte/tests/sourcemaps/samples/sourcemap-basename-without-outputname/input.svelte:1:32      - Unknown word (outputname) -- sourcemap-basename-without-outputname</h1>
@@ -2688,7 +2691,6 @@ Lines:
 ./packages/svelte/tests/validator/samples/dollar-dollar-global-in-markup/errors.json:4:17      - Unknown word (billsyall)  -- "message": "$$billsyall is an illegal variable
 ./packages/svelte/tests/validator/samples/event-attribute/input.svelte:2:17      - Unknown word (onbar)      -- <Button onclick onbar="bar">ok</Button>
 ./packages/svelte/tests/validator/samples/global-event-reference/warnings.json:4:46      - Unknown word (onkeydown)  -- referencing globalThis.onkeydown. Did you forget to declare
-./packages/svelte/tests/validator/samples/rest-eachblock-binding-2/warnings.json:3:25      - Unknown word (eachblock)  -- code": "invalid-rest-eachblock-binding",
 ./packages/svelte/tests/validator/samples/rest-eachblock-binding-3/input.svelte:2:103     - Unknown word (Somethin)   -- id:1, innerValue: "Somethin"} }]
 ./packages/svelte/tests/validator/samples/window-binding-invalid-innerwidth/errors.json:4:16      - Unknown word (innerwidth) -- "message": "'innerwidth' is not a valid binding
 ./packages/svelte/tests/validator/test.ts:119:41    - Unknown word (unrecognised) -- namespace is provided but unrecognised', () => {
