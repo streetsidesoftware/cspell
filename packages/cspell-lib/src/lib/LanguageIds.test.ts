@@ -30,6 +30,8 @@ describe('Validate LanguageIds', () => {
         ${'my-cert.pem'}                     | ${['pem']}
         ${'my-private-cert.private-key.pem'} | ${['pem', 'pem-private-key']}
         ${'Dockerfile'}                      | ${['dockerfile']}
+        ${'Dockerfile.dev'}                  | ${['dockerfile']}
+        ${'code.jl'}                         | ${['julia']}
     `('getLanguagesForBasename $filename', ({ filename, expected }) => {
         expect(LangId.getLanguagesForBasename(filename)).toEqual(expected);
     });
