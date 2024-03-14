@@ -117,7 +117,7 @@ const settings: AdvancedCSpellSettings = {
             ignoreRegExpList: ['MARKDOWN-link-reference', 'MARKDOWN-link-footer', 'MARKDOWN-link', 'MARKDOWN-anchor'],
         },
     ],
-    enableFiletypes: ['svelte'],
+    enableFiletypes: ['svelte', 'julia'],
     import: [
         '@cspell/dict-ada/cspell-ext.json',
         '@cspell/dict-aws/cspell-ext.json',
@@ -146,6 +146,7 @@ const settings: AdvancedCSpellSettings = {
         '@cspell/dict-html-symbol-entities/cspell-ext.json',
         '@cspell/dict-html/cspell-ext.json',
         '@cspell/dict-java/cspell-ext.json',
+        '@cspell/dict-julia/cspell-ext.json',
         '@cspell/dict-k8s/cspell-ext.json',
         '@cspell/dict-latex/cspell-ext.json',
         '@cspell/dict-lorem-ipsum/cspell-ext.json',
