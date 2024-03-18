@@ -3,7 +3,7 @@ Repository: sveltejs/svelte
 Url: "https://github.com/sveltejs/svelte.git"
 Args: ["**"]
 Lines:
- CSpell: Files checked: 6177, Issues found: 5853 in 611 files.
+ CSpell: Files checked: 6226, Issues found: 5868 in 619 files.
  exit code: 1
 ./CONTRIBUTING.md:125:4     - Unknown word (typecheck)  -- To typecheck the codebase, run `pnpm
 ./CONTRIBUTING.md:22:5      - Unknown word (Triaging)   -- ### Triaging issues and pull requests
@@ -2466,13 +2466,12 @@ Lines:
 ./packages/svelte/src/compiler/phases/2-analyze/validation.js:344:19    - Unknown word (eachblock)  -- 'invalid-rest-eachblock-binding',
 ./packages/svelte/src/compiler/phases/3-transform/client/utils.js:198:40    - Unknown word (subexpression) -- expression.expressions.some((subexpression) => is_expression_async
 ./packages/svelte/src/compiler/phases/3-transform/client/utils.js:423:29    - Unknown word (unsub)         -- return b.call('$.store_unsub', call, b.literal(`
-./packages/svelte/src/compiler/phases/3-transform/client/visitors/global.js:97:23     - Unknown word (IIFEE)      -- // turn it into an IIFEE assignment expression
+./packages/svelte/src/compiler/phases/3-transform/client/visitors/global.js:96:23     - Unknown word (IIFEE)      -- // turn it into an IIFEE assignment expression
 ./packages/svelte/src/compiler/phases/3-transform/client/visitors/javascript-legacy.js:12:23     - Unknown word (declarators) -- function create_state_declarators(declarator, scope, value
 ./packages/svelte/src/compiler/phases/3-transform/client/visitors/template.js:134:65    - Unknown word (toogle)     -- something like `$.class_toogle(element, class_name
 ./packages/svelte/src/compiler/phases/3-transform/client/visitors/template.js:1733:8    - Unknown word (quasis)     -- const quasis = [];
 ./packages/svelte/src/compiler/phases/3-transform/client/visitors/template.js:2230:47   - Unknown word (computeds)  -- ...lets); // create computeds in the outer context
-./packages/svelte/src/compiler/phases/3-transform/client/visitors/template.js:2375:57   - Unknown word (IIFEs)      -- other patterns into IIFEs and separates the assignments
-./packages/svelte/src/compiler/phases/3-transform/server/transform-server.js:554:9     - Unknown word (deriveds)   -- const deriveds = [];
+./packages/svelte/src/compiler/phases/3-transform/client/visitors/template.js:2387:57   - Unknown word (IIFEs)      -- other patterns into IIFEs and separates the assignments
 ./packages/svelte/src/compiler/phases/3-transform/utils.js:165:75    - Unknown word (spaceand)   -- text node with a single spaceand keep whitespace
 ./packages/svelte/src/compiler/phases/3-transform/utils.js:76:44     - Unknown word (inbetween)  -- trailing whitespace of inbetween text nodes,
 ./packages/svelte/src/compiler/phases/constants.js:113:3     - Unknown word (hatchpath)  -- 'hatchpath',
@@ -2494,36 +2493,33 @@ Lines:
 ./packages/svelte/src/internal/client/dom/blocks/each.js:434:16    - Unknown word (Ivi's)      -- * is based on Ivi's reconcilation logic
 ./packages/svelte/src/internal/client/dom/blocks/each.js:434:22    - Unknown word (reconcilation) -- * is based on Ivi's reconcilation logic:
 ./packages/svelte/src/internal/client/dom/blocks/each.js:461:74    - Unknown word (itens)         -- we'll need ensure the itens are all wrapped in signals
-./packages/svelte/src/internal/client/proxy.js:144:17    - Unknown word (unstate)    -- export function unstate(value) {
-./packages/svelte/src/internal/client/reactivity/sources.js:117:73    - Unknown word (dirtyness)  -- signals can properly track dirtyness
+./packages/svelte/src/internal/client/dom/blocks/svelte-element.js:76:23     - Unknown word (infering)   -- // We try our best infering the namespace in case
+./packages/svelte/src/internal/client/dom/elements/bindings/input.js:19:13     - Unknown word (numberlike) -- update(is_numberlike_input(input) ? to_number
+./packages/svelte/src/internal/client/dom/elements/bindings/this.js:39:77     - Unknown word (nullfiy)    -- context changes), then nullfiy the binding at
+./packages/svelte/src/internal/client/proxy.js:138:17    - Unknown word (unstate)    -- export function unstate(value) {
+./packages/svelte/src/internal/client/proxy.js:17:48     - Unknown word (deriveds)   -- from './reactivity/deriveds.js';
+./packages/svelte/src/internal/client/reactivity/props.js:232:36    - Unknown word (synchronisation) -- current_value); // force a synchronisation immediately
 ./packages/svelte/src/internal/client/reactivity/sources.js:8:10      - Unknown word (untracking) -- current_untracking,
-./packages/svelte/src/internal/client/reactivity/store.js:30:83     - Unknown word (comptued)   -- when we split up source/comptued signals
-./packages/svelte/src/internal/client/reactivity/types.d.ts:75:64     - Unknown word (depdendencies) -- signals to track if their depdendencies are dirty or not **
-./packages/svelte/src/internal/client/render.js:1029:10   - Unknown word (numberlike) -- if (is_numberlike_input(dom)) {
-./packages/svelte/src/internal/client/render.js:1373:77   - Unknown word (nullfiy)    -- context changes), then nullfiy the binding at
-./packages/svelte/src/internal/client/render.js:1621:23   - Unknown word (infering)   -- // We try our best infering the namespace in case
-./packages/svelte/src/internal/client/render.js:2854:36   - Unknown word (synchronisation) -- current_value); // force a synchronisation immediately
-./packages/svelte/src/internal/client/render.js:83:11     - Unknown word (registerd)  -- const all_registerd_events = new Set();
-./packages/svelte/src/internal/client/runtime.js:1392:31   - Unknown word (proxified)  -- the object is already proxified, then unstate the value
-./packages/svelte/src/internal/client/runtime.js:194:17    - Unknown word (workig)     -- // If we're workig with an unowned derived
-./packages/svelte/src/internal/client/runtime.js:795:26    - Unknown word (doesnt)     -- mutate(signal, null /* doesnt matter */);
+./packages/svelte/src/internal/client/reactivity/types.d.ts:29:6      - Unknown word (Deriveds)   -- /** Deriveds created inside this
+./packages/svelte/src/internal/client/runtime.js:1282:31   - Unknown word (proxified)  -- the object is already proxified, then unstate the value
+./packages/svelte/src/internal/client/runtime.js:747:26    - Unknown word (doesnt)     -- mutate(signal, null /* doesnt matter */);
 ./packages/svelte/src/internal/client/types.d.ts:212:6     - Unknown word (effewct)    -- /** effewct */
 ./packages/svelte/src/internal/client/types.d.ts:26:19     - Unknown word (JITs)       -- // when the JS VM JITs the code.
-./packages/svelte/src/internal/server/index.js:45:209    - Unknown word (AFFFE)      -- u{9FFFE}\u{9FFFF}\u{AFFFE}\u{AFFFF}\u{BFFFE}\u
-./packages/svelte/src/internal/server/index.js:45:218    - Unknown word (AFFFF)      -- u{9FFFF}\u{AFFFE}\u{AFFFF}\u{BFFFE}\u{BFFFF}\u
-./packages/svelte/src/internal/server/index.js:45:227    - Unknown word (BFFFE)      -- u{AFFFE}\u{AFFFF}\u{BFFFE}\u{BFFFF}\u{CFFFE}\u
-./packages/svelte/src/internal/server/index.js:45:23     - Unknown word (FDEF)       -- [\s'">/=\u{FDD0}-\u{FDEF}\u{FFFE}\u{FFFF}\u{
-./packages/svelte/src/internal/server/index.js:45:236    - Unknown word (BFFFF)      -- u{AFFFF}\u{BFFFE}\u{BFFFF}\u{CFFFE}\u{CFFFF}\u
-./packages/svelte/src/internal/server/index.js:45:245    - Unknown word (CFFFE)      -- u{BFFFE}\u{BFFFF}\u{CFFFE}\u{CFFFF}\u{DFFFE}\u
-./packages/svelte/src/internal/server/index.js:45:254    - Unknown word (CFFFF)      -- u{BFFFF}\u{CFFFE}\u{CFFFF}\u{DFFFE}\u{DFFFF}\u
-./packages/svelte/src/internal/server/index.js:45:263    - Unknown word (DFFFE)      -- u{CFFFE}\u{CFFFF}\u{DFFFE}\u{DFFFF}\u{EFFFE}\u
-./packages/svelte/src/internal/server/index.js:45:272    - Unknown word (DFFFF)      -- u{CFFFF}\u{DFFFE}\u{DFFFF}\u{EFFFE}\u{EFFFF}\u
-./packages/svelte/src/internal/server/index.js:45:281    - Unknown word (EFFFE)      -- u{DFFFE}\u{DFFFF}\u{EFFFE}\u{EFFFF}\u{FFFFE}\u
-./packages/svelte/src/internal/server/index.js:45:290    - Unknown word (EFFFF)      -- u{DFFFF}\u{EFFFE}\u{EFFFF}\u{FFFFE}\u{FFFFF}\u
-./packages/svelte/src/internal/server/index.js:45:299    - Unknown word (FFFFE)      -- u{EFFFE}\u{EFFFF}\u{FFFFE}\u{FFFFF}\u{10FFFE}
-./packages/svelte/src/internal/server/index.js:45:31     - Unknown word (FFFE)       -- \u{FDD0}-\u{FDEF}\u{FFFE}\u{FFFF}\u{1FFFE}\u
+./packages/svelte/src/internal/server/index.js:46:209    - Unknown word (AFFFE)      -- u{9FFFE}\u{9FFFF}\u{AFFFE}\u{AFFFF}\u{BFFFE}\u
+./packages/svelte/src/internal/server/index.js:46:218    - Unknown word (AFFFF)      -- u{9FFFF}\u{AFFFE}\u{AFFFF}\u{BFFFE}\u{BFFFF}\u
+./packages/svelte/src/internal/server/index.js:46:227    - Unknown word (BFFFE)      -- u{AFFFE}\u{AFFFF}\u{BFFFE}\u{BFFFF}\u{CFFFE}\u
+./packages/svelte/src/internal/server/index.js:46:23     - Unknown word (FDEF)       -- [\s'">/=\u{FDD0}-\u{FDEF}\u{FFFE}\u{FFFF}\u{
+./packages/svelte/src/internal/server/index.js:46:236    - Unknown word (BFFFF)      -- u{AFFFF}\u{BFFFE}\u{BFFFF}\u{CFFFE}\u{CFFFF}\u
+./packages/svelte/src/internal/server/index.js:46:245    - Unknown word (CFFFE)      -- u{BFFFE}\u{BFFFF}\u{CFFFE}\u{CFFFF}\u{DFFFE}\u
+./packages/svelte/src/internal/server/index.js:46:254    - Unknown word (CFFFF)      -- u{BFFFF}\u{CFFFE}\u{CFFFF}\u{DFFFE}\u{DFFFF}\u
+./packages/svelte/src/internal/server/index.js:46:263    - Unknown word (DFFFE)      -- u{CFFFE}\u{CFFFF}\u{DFFFE}\u{DFFFF}\u{EFFFE}\u
+./packages/svelte/src/internal/server/index.js:46:272    - Unknown word (DFFFF)      -- u{CFFFF}\u{DFFFE}\u{DFFFF}\u{EFFFE}\u{EFFFF}\u
+./packages/svelte/src/internal/server/index.js:46:281    - Unknown word (EFFFE)      -- u{DFFFE}\u{DFFFF}\u{EFFFE}\u{EFFFF}\u{FFFFE}\u
+./packages/svelte/src/internal/server/index.js:46:290    - Unknown word (EFFFF)      -- u{DFFFF}\u{EFFFE}\u{EFFFF}\u{FFFFE}\u{FFFFF}\u
+./packages/svelte/src/internal/server/index.js:46:299    - Unknown word (FFFFE)      -- u{EFFFE}\u{EFFFF}\u{FFFFE}\u{FFFFF}\u{10FFFE}
+./packages/svelte/src/internal/server/index.js:46:31     - Unknown word (FFFE)       -- \u{FDD0}-\u{FDEF}\u{FFFE}\u{FFFF}\u{1FFFE}\u
 ./packages/svelte/src/legacy/legacy-client.js:71:133    - Unknown word (practise)   -- it should be fine in practise.
-./packages/svelte/src/reactivity/index.js:60:10     - Unknown word (inited)     -- static #inited = false;
+./packages/svelte/src/reactivity/date.js:58:5      - Unknown word (inited)     -- var inited = false;
 ./packages/svelte/src/store/index.js:177:9     - Unknown word (unsubscribers) -- const unsubscribers = stores_array.map(
 ./packages/svelte/src/store/index.js:47:32     - Unknown word (Unsubscriber) -- {import('./public').Unsubscriber | null} */
 ./packages/svelte/tests/README.md:16:151    - Unknown word (unkeyed)    -- binding-each-remount-unkeyed` for an example
@@ -2650,8 +2646,8 @@ Lines:
 ./packages/svelte/tests/runtime-runes/samples/event-attribute-not-hoistable/main.svelte:31:73     - Unknown word (delegateable) -- when one of them is not delegateable -->
 ./packages/svelte/tests/runtime-runes/samples/not-actual-runes/_config.js:6:11      - Unknown word (Shouldnt)   -- <button>Shouldnt be reactive</button
 ./packages/svelte/tests/server-side-rendering/samples/attribute-escaped-quotes-spread/_expected.html:5:2       - Unknown word (quux)       -- quux="&quot;><script>alert
-./packages/svelte/tests/signals/test.ts:207:26    - Unknown word (onowned)    -- test('correctly cleanup onowned nested derived values
-./packages/svelte/tests/signals/test.ts:274:56    - Unknown word (depedencies) -- derived that has no depedencies', () => {
+./packages/svelte/tests/signals/test.ts:212:26    - Unknown word (onowned)    -- test('correctly cleanup onowned nested derived values
+./packages/svelte/tests/signals/test.ts:279:56    - Unknown word (depedencies) -- derived that has no depedencies', () => {
 ./packages/svelte/tests/sourcemaps/samples/external/_config.js:26:4      - Unknown word (Divs)       -- 'Divs ftw!',
 ./packages/svelte/tests/sourcemaps/samples/preprocessed-multiple/_config.js:10:37     - Unknown word (bazitone)   -- replace_all(src, '--bazitone', '--baz');
 ./packages/svelte/tests/sourcemaps/samples/sourcemap-basename-without-outputname/input.svelte:1:32      - Unknown word (outputname) -- sourcemap-basename-without-outputname</h1>
@@ -2743,181 +2739,181 @@ Lines:
 ./pnpm-lock.yaml:2172:34   - Unknown word (gnueabihf)       -- resvg/resvg-js-linux-arm-gnueabihf': 2.6.0
 ./pnpm-lock.yaml:2177:36   - Unknown word (msvc)            -- resvg-js-win32-arm64-msvc': 2.6.0
 ./pnpm-lock.yaml:219:9     - Unknown word (replit)        -- '@replit/codemirror-lang-svelte
-./pnpm-lock.yaml:2203:16   - Unknown word (pluginutils)     -- '@rollup/pluginutils': 5.1.0(rollup@4.9.
-./pnpm-lock.yaml:2204:7    - Unknown word (commondir)       -- commondir: 1.0.1
-./pnpm-lock.yaml:2223:7    - Unknown word (deepmerge)       -- deepmerge: 4.3.1
-./pnpm-lock.yaml:2241:7    - Unknown word (smob)            -- smob: 1.4.1
-./pnpm-lock.yaml:2262:7    - Unknown word (picomatch)       -- picomatch: 2.3.1
-./pnpm-lock.yaml:2371:5    - Unknown word (shuding)         -- /@shuding/opentype.js@1.4.0-beta
-./pnpm-lock.yaml:2376:7    - Unknown word (fflate)          -- fflate: 0.7.4
-./pnpm-lock.yaml:2377:24   - Unknown word (codepointat)     -- string.prototype.codepointat: 0.2.1
-./pnpm-lock.yaml:2384:5    - Unknown word (snyk)            -- /@snyk/github-codeowners@1
-./pnpm-lock.yaml:2410:7    - Unknown word (whatwg)          -- whatwg-url: 5.0.0
-./pnpm-lock.yaml:2427:9    - Unknown word (bufferutil)      -- - bufferutil
-./pnpm-lock.yaml:2441:18   - Unknown word (gotrue)          -- '@supabase/gotrue-js': 2.62.2
-./pnpm-lock.yaml:2443:18   - Unknown word (postgrest)       -- '@supabase/postgrest-js': 1.9.2
-./pnpm-lock.yaml:2508:7    - Unknown word (kleur)           -- kleur: 4.1.5
+./pnpm-lock.yaml:2211:16   - Unknown word (pluginutils)     -- '@rollup/pluginutils': 5.1.0(rollup@4.9.
+./pnpm-lock.yaml:2212:7    - Unknown word (commondir)       -- commondir: 1.0.1
+./pnpm-lock.yaml:2231:7    - Unknown word (deepmerge)       -- deepmerge: 4.3.1
+./pnpm-lock.yaml:2249:7    - Unknown word (smob)            -- smob: 1.4.1
+./pnpm-lock.yaml:2270:7    - Unknown word (picomatch)       -- picomatch: 2.3.1
+./pnpm-lock.yaml:2379:5    - Unknown word (shuding)         -- /@shuding/opentype.js@1.4.0-beta
+./pnpm-lock.yaml:2384:7    - Unknown word (fflate)          -- fflate: 0.7.4
+./pnpm-lock.yaml:2385:24   - Unknown word (codepointat)     -- string.prototype.codepointat: 0.2.1
+./pnpm-lock.yaml:2392:5    - Unknown word (snyk)            -- /@snyk/github-codeowners@1
+./pnpm-lock.yaml:2418:7    - Unknown word (whatwg)          -- whatwg-url: 5.0.0
+./pnpm-lock.yaml:2435:9    - Unknown word (bufferutil)      -- - bufferutil
+./pnpm-lock.yaml:2449:18   - Unknown word (gotrue)          -- '@supabase/gotrue-js': 2.62.2
+./pnpm-lock.yaml:2451:18   - Unknown word (postgrest)       -- '@supabase/postgrest-js': 1.9.2
 ./pnpm-lock.yaml:250:20    - Unknown word (fira)          -- '@fontsource/fira-mono':
 ./pnpm-lock.yaml:250:9     - Unknown word (fontsource)    -- '@fontsource/fira-mono':
-./pnpm-lock.yaml:2510:7    - Unknown word (mrmime)          -- mrmime: 2.0.0
+./pnpm-lock.yaml:2529:7    - Unknown word (kleur)           -- kleur: 4.1.5
+./pnpm-lock.yaml:2531:7    - Unknown word (mrmime)          -- mrmime: 2.0.0
 ./pnpm-lock.yaml:256:26    - Unknown word (vercel)        -- '@sveltejs/adapter-vercel':
-./pnpm-lock.yaml:2628:7    - Unknown word (vitefu)          -- vitefu: 0.2.5(vite@5.0.12)
-./pnpm-lock.yaml:2666:5    - Unknown word (tootallnate)     -- /@tootallnate/once@2.0.0:
-./pnpm-lock.yaml:2710:7    - Unknown word (undici)          -- undici-types: 5.26.5
-./pnpm-lock.yaml:2763:26   - Unknown word (regexpp)         -- '@eslint-community/regexpp': 4.10.0
-./pnpm-lock.yaml:2771:7    - Unknown word (graphemer)       -- graphemer: 1.4.0
+./pnpm-lock.yaml:2688:7    - Unknown word (vitefu)          -- vitefu: 0.2.5(vite@5.0.12)
+./pnpm-lock.yaml:2726:5    - Unknown word (tootallnate)     -- /@tootallnate/once@2.0.0:
+./pnpm-lock.yaml:2770:7    - Unknown word (undici)          -- undici-types: 5.26.5
 ./pnpm-lock.yaml:277:7     - Unknown word (shiki)         -- shiki:
 ./pnpm-lock.yaml:280:13    - Unknown word (twoslash)      -- shiki-twoslash:
-./pnpm-lock.yaml:2910:5    - Unknown word (ungap)           -- /@ungap/structured-clone@1.
-./pnpm-lock.yaml:2923:13   - Unknown word (sema)            -- async-sema: 3.1.1
-./pnpm-lock.yaml:2949:7    - Unknown word (magicast)        -- magicast: 0.3.3
-./pnpm-lock.yaml:2950:7    - Unknown word (picocolors)      -- picocolors: 1.0.0
-./pnpm-lock.yaml:2972:7    - Unknown word (pathe)           -- pathe: 1.1.2
-./pnpm-lock.yaml:2986:7    - Unknown word (tinyspy)         -- tinyspy: 2.2.0
+./pnpm-lock.yaml:2823:26   - Unknown word (regexpp)         -- '@eslint-community/regexpp': 4.10.0
+./pnpm-lock.yaml:2831:7    - Unknown word (graphemer)       -- graphemer: 1.4.0
+./pnpm-lock.yaml:2970:5    - Unknown word (ungap)           -- /@ungap/structured-clone@1.
+./pnpm-lock.yaml:2983:13   - Unknown word (sema)            -- async-sema: 3.1.1
 ./pnpm-lock.yaml:29:9      - Unknown word (vitest)     -- '@vitest/coverage-v8':
-./pnpm-lock.yaml:3156:7    - Unknown word (sprintf)         -- sprintf-js: 1.0.3
-./pnpm-lock.yaml:3166:7    - Unknown word (dequal)         -- dequal: 2.0.3
+./pnpm-lock.yaml:3009:7    - Unknown word (magicast)        -- magicast: 0.3.3
+./pnpm-lock.yaml:3010:7    - Unknown word (picocolors)      -- picocolors: 1.0.0
+./pnpm-lock.yaml:3032:7    - Unknown word (pathe)           -- pathe: 1.1.2
+./pnpm-lock.yaml:3046:7    - Unknown word (tinyspy)         -- tinyspy: 2.2.0
 ./pnpm-lock.yaml:319:7     - Unknown word (flexsearch)    -- flexsearch:
-./pnpm-lock.yaml:3202:15   - Unknown word (unscopables)    -- es-shim-unscopables: 1.0.2
+./pnpm-lock.yaml:3216:7    - Unknown word (sprintf)         -- sprintf-js: 1.0.3
+./pnpm-lock.yaml:3226:7    - Unknown word (dequal)         -- dequal: 2.0.3
 ./pnpm-lock.yaml:322:7     - Unknown word (flru)          -- flru:
+./pnpm-lock.yaml:3262:15   - Unknown word (unscopables)    -- es-shim-unscopables: 1.0.2
 ./pnpm-lock.yaml:326:9     - Unknown word (resvg)         -- '@resvg/resvg-js':
-./pnpm-lock.yaml:3291:7    - Unknown word (depd)           -- depd: 2.0.0
-./pnpm-lock.yaml:3299:7    - Unknown word (unpipe)         -- unpipe: 1.0.0
-./pnpm-lock.yaml:3315:7    - Unknown word (concat)         -- concat-map: 0.0.1
-./pnpm-lock.yaml:3333:7    - Unknown word (wcwidth)        -- wcwidth: 1.0.1
-./pnpm-lock.yaml:3443:7    - Unknown word (pathval)        -- pathval: 1.1.1
-./pnpm-lock.yaml:3478:7    - Unknown word (anymatch)       -- anymatch: 3.1.3
+./pnpm-lock.yaml:3351:7    - Unknown word (depd)           -- depd: 2.0.0
+./pnpm-lock.yaml:3359:7    - Unknown word (unpipe)         -- unpipe: 1.0.0
+./pnpm-lock.yaml:3375:7    - Unknown word (concat)         -- concat-map: 0.0.1
+./pnpm-lock.yaml:3393:7    - Unknown word (wcwidth)        -- wcwidth: 1.0.1
 ./pnpm-lock.yaml:347:7     - Unknown word (browserslist)  -- browserslist:
-./pnpm-lock.yaml:3484:7    - Unknown word (readdirp)       -- readdirp: 3.6.0
-./pnpm-lock.yaml:3486:7    - Unknown word (fsevents)       -- fsevents: 2.3.3
+./pnpm-lock.yaml:3503:7    - Unknown word (pathval)        -- pathval: 1.1.1
+./pnpm-lock.yaml:3538:7    - Unknown word (anymatch)       -- anymatch: 3.1.3
 ./pnpm-lock.yaml:353:7     - Unknown word (dotenv)        -- dotenv:
+./pnpm-lock.yaml:3544:7    - Unknown word (readdirp)       -- readdirp: 3.6.0
+./pnpm-lock.yaml:3546:7    - Unknown word (fsevents)       -- fsevents: 2.3.3
 ./pnpm-lock.yaml:359:7     - Unknown word (lightningcss)  -- lightningcss:
-./pnpm-lock.yaml:3644:7    - Unknown word (yargs)          -- yargs: 17.7.2
-./pnpm-lock.yaml:3738:7    - Unknown word (postcss)        -- postcss-value-parser: 4.2.0
-./pnpm-lock.yaml:3758:13   - Unknown word (cssom)          -- rrweb-cssom: 0.6.0
-./pnpm-lock.yaml:3758:7    - Unknown word (rrweb)          -- rrweb-cssom: 0.6.0
-./pnpm-lock.yaml:3839:7    - Unknown word (decamelize)     -- decamelize: 1.2.0
+./pnpm-lock.yaml:3704:7    - Unknown word (yargs)          -- yargs: 17.7.2
+./pnpm-lock.yaml:3798:7    - Unknown word (postcss)        -- postcss-value-parser: 4.2.0
+./pnpm-lock.yaml:3818:13   - Unknown word (cssom)          -- rrweb-cssom: 0.6.0
+./pnpm-lock.yaml:3818:7    - Unknown word (rrweb)          -- rrweb-cssom: 0.6.0
 ./pnpm-lock.yaml:383:7     - Unknown word (shelljs)       -- shelljs:
-./pnpm-lock.yaml:3882:7    - Unknown word (gopd)           -- gopd: 1.0.1
-./pnpm-lock.yaml:3962:7    - Unknown word (esutils)        -- esutils: 2.0.3
-./pnpm-lock.yaml:3974:7    - Unknown word (webidl)         -- webidl-conversions: 7.0.0
+./pnpm-lock.yaml:3899:7    - Unknown word (decamelize)     -- decamelize: 1.2.0
+./pnpm-lock.yaml:3942:7    - Unknown word (gopd)           -- gopd: 1.0.1
 ./pnpm-lock.yaml:398:14    - Unknown word (preprocess)    -- svelte-preprocess:
-./pnpm-lock.yaml:3990:7    - Unknown word (globrex)        -- globrex: 0.1.2
-./pnpm-lock.yaml:4068:10   - Unknown word (arrayish)       -- is-arrayish: 0.2.1
-./pnpm-lock.yaml:4076:7    - Unknown word (arraybuffer)    -- arraybuffer.prototype.slice: 1.
-./pnpm-lock.yaml:4079:14   - Unknown word (tostringtag)    -- es-set-tostringtag: 2.0.2
-./pnpm-lock.yaml:4084:7    - Unknown word (globalthis)     -- globalthis: 1.0.3
-./pnpm-lock.yaml:4087:11   - Unknown word (proto)          -- has-proto: 1.0.1
-./pnpm-lock.yaml:4089:7    - Unknown word (hasown)         -- hasown: 2.0.0
-./pnpm-lock.yaml:4098:10   - Unknown word (weakref)        -- is-weakref: 1.0.2
-./pnpm-lock.yaml:4106:24   - Unknown word (trimend)        -- string.prototype.trimend: 1.0.7
-./pnpm-lock.yaml:4107:24   - Unknown word (trimstart)      -- string.prototype.trimstart: 1.0.7
+./pnpm-lock.yaml:4022:7    - Unknown word (esutils)        -- esutils: 2.0.3
+./pnpm-lock.yaml:4034:7    - Unknown word (webidl)         -- webidl-conversions: 7.0.0
+./pnpm-lock.yaml:4050:7    - Unknown word (globrex)        -- globrex: 0.1.2
+./pnpm-lock.yaml:4128:10   - Unknown word (arrayish)       -- is-arrayish: 0.2.1
+./pnpm-lock.yaml:4136:7    - Unknown word (arraybuffer)    -- arraybuffer.prototype.slice: 1.
+./pnpm-lock.yaml:4139:14   - Unknown word (tostringtag)    -- es-set-tostringtag: 2.0.2
+./pnpm-lock.yaml:4144:7    - Unknown word (globalthis)     -- globalthis: 1.0.3
+./pnpm-lock.yaml:4147:11   - Unknown word (proto)          -- has-proto: 1.0.1
+./pnpm-lock.yaml:4149:7    - Unknown word (hasown)         -- hasown: 2.0.0
+./pnpm-lock.yaml:4158:10   - Unknown word (weakref)        -- is-weakref: 1.0.2
+./pnpm-lock.yaml:4166:24   - Unknown word (trimend)        -- string.prototype.trimend: 1.0.7
+./pnpm-lock.yaml:4167:24   - Unknown word (trimstart)      -- string.prototype.trimstart: 1.0.7
 ./pnpm-lock.yaml:416:5     - Unknown word (aashutoshrathi) -- /@aashutoshrathi/word-wrap@1.2.6:
-./pnpm-lock.yaml:4229:14   - Unknown word (compat)         -- eslint-compat-utils: 0.1.2(eslint
-./pnpm-lock.yaml:4257:7    - Unknown word (esquery)        -- esquery: 1.5.0
-./pnpm-lock.yaml:4260:7    - Unknown word (jsesc)          -- jsesc: 3.0.2
-./pnpm-lock.yaml:4264:7    - Unknown word (regjsparser)    -- regjsparser: 0.10.0
-./pnpm-lock.yaml:4275:7    - Unknown word (esrecurse)      -- esrecurse: 4.3.0
-./pnpm-lock.yaml:4276:7    - Unknown word (estraverse)     -- estraverse: 5.3.0
-./pnpm-lock.yaml:4315:7    - Unknown word (imurmurhash)    -- imurmurhash: 0.1.4
-./pnpm-lock.yaml:4319:37   - Unknown word (jsonify)        -- stable-stringify-without-jsonify: 1.0.1
-./pnpm-lock.yaml:4320:7    - Unknown word (levn)           -- levn: 0.4.1
-./pnpm-lock.yaml:4324:7    - Unknown word (optionator)     -- optionator: 0.9.3
-./pnpm-lock.yaml:4425:7    - Unknown word (encodeurl)      -- encodeurl: 1.0.2
-./pnpm-lock.yaml:4427:7    - Unknown word (etag)           -- etag: 1.8.1
-./pnpm-lock.yaml:4428:7    - Unknown word (finalhandler)   -- finalhandler: 1.2.0
-./pnpm-lock.yaml:4434:7    - Unknown word (parseurl)       -- parseurl: 1.3.3
-./pnpm-lock.yaml:4442:7    - Unknown word (setprototypeof) -- setprototypeof: 1.2.0
-./pnpm-lock.yaml:4459:7    - Unknown word (chardet)        -- chardet: 0.7.0
-./pnpm-lock.yaml:4494:7    - Unknown word (reusify)        -- reusify: 1.0.4
+./pnpm-lock.yaml:4289:14   - Unknown word (compat)         -- eslint-compat-utils: 0.1.2(eslint
+./pnpm-lock.yaml:4317:7    - Unknown word (esquery)        -- esquery: 1.5.0
+./pnpm-lock.yaml:4320:7    - Unknown word (jsesc)          -- jsesc: 3.0.2
+./pnpm-lock.yaml:4324:7    - Unknown word (regjsparser)    -- regjsparser: 0.10.0
+./pnpm-lock.yaml:4335:7    - Unknown word (esrecurse)      -- esrecurse: 4.3.0
+./pnpm-lock.yaml:4336:7    - Unknown word (estraverse)     -- estraverse: 5.3.0
+./pnpm-lock.yaml:4375:7    - Unknown word (imurmurhash)    -- imurmurhash: 0.1.4
+./pnpm-lock.yaml:4379:37   - Unknown word (jsonify)        -- stable-stringify-without-jsonify: 1.0.1
+./pnpm-lock.yaml:4380:7    - Unknown word (levn)           -- levn: 0.4.1
+./pnpm-lock.yaml:4384:7    - Unknown word (optionator)     -- optionator: 0.9.3
+./pnpm-lock.yaml:4485:7    - Unknown word (encodeurl)      -- encodeurl: 1.0.2
+./pnpm-lock.yaml:4487:7    - Unknown word (etag)           -- etag: 1.8.1
+./pnpm-lock.yaml:4488:7    - Unknown word (finalhandler)   -- finalhandler: 1.2.0
+./pnpm-lock.yaml:4494:7    - Unknown word (parseurl)       -- parseurl: 1.3.3
 ./pnpm-lock.yaml:44:7      - Unknown word (jsdom)      -- jsdom:
-./pnpm-lock.yaml:4528:7    - Unknown word (strtok)         -- strtok3: 6.3.0
-./pnpm-lock.yaml:4594:7    - Unknown word (keyv)           -- keyv: 4.5.4
-./pnpm-lock.yaml:4629:7    - Unknown word (asynckit)       -- asynckit: 0.4.0
-./pnpm-lock.yaml:4649:7    - Unknown word (jsonfile)       -- jsonfile: 6.1.0
-./pnpm-lock.yaml:4650:7    - Unknown word (universalify)   -- universalify: 2.0.1
-./pnpm-lock.yaml:4675:7    - Unknown word (minipass)       -- minipass: 3.3.6
-./pnpm-lock.yaml:4719:7    - Unknown word (aproba)         -- aproba: 2.0.0
-./pnpm-lock.yaml:4787:7    - Unknown word (jackspeak)      -- jackspeak: 2.3.6
-./pnpm-lock.yaml:4796:10   - Unknown word (realpath)       -- fs.realpath: 1.0.0
+./pnpm-lock.yaml:4502:7    - Unknown word (setprototypeof) -- setprototypeof: 1.2.0
+./pnpm-lock.yaml:4519:7    - Unknown word (chardet)        -- chardet: 0.7.0
+./pnpm-lock.yaml:4554:7    - Unknown word (reusify)        -- reusify: 1.0.4
+./pnpm-lock.yaml:4588:7    - Unknown word (strtok)         -- strtok3: 6.3.0
+./pnpm-lock.yaml:4654:7    - Unknown word (keyv)           -- keyv: 4.5.4
+./pnpm-lock.yaml:4689:7    - Unknown word (asynckit)       -- asynckit: 0.4.0
+./pnpm-lock.yaml:4709:7    - Unknown word (jsonfile)       -- jsonfile: 6.1.0
+./pnpm-lock.yaml:4710:7    - Unknown word (universalify)   -- universalify: 2.0.1
+./pnpm-lock.yaml:4735:7    - Unknown word (minipass)       -- minipass: 3.3.6
+./pnpm-lock.yaml:4779:7    - Unknown word (aproba)         -- aproba: 2.0.0
 ./pnpm-lock.yaml:479:5     - Unknown word (bcoe)           -- /@bcoe/v8-coverage@0.2.3:
+./pnpm-lock.yaml:4847:7    - Unknown word (jackspeak)      -- jackspeak: 2.3.6
+./pnpm-lock.yaml:4856:10   - Unknown word (realpath)       -- fs.realpath: 1.0.0
 ./pnpm-lock.yaml:491:9     - Unknown word (manypkg)        -- '@manypkg/get-packages': 1.1.
 ./pnpm-lock.yaml:494:14    - Unknown word (startcase)      -- lodash.startcase: 4.4.0
 ./pnpm-lock.yaml:495:7     - Unknown word (outdent)        -- outdent: 0.5.0
-./pnpm-lock.yaml:4970:7    - Unknown word (toidentifier)   -- toidentifier: 1.0.1
-./pnpm-lock.yaml:5086:7    - Unknown word (wrappy)         -- wrappy: 1.0.2
-./pnpm-lock.yaml:5131:11   - Unknown word (bigints)        -- has-bigints: 1.0.2
-./pnpm-lock.yaml:5190:10   - Unknown word (extglob)        -- is-extglob: 2.1.1
-./pnpm-lock.yaml:5369:16   - Unknown word (cliui)          -- '@isaacs/cliui': 8.0.2
-./pnpm-lock.yaml:5371:15   - Unknown word (parseargs)      -- '@pkgjs/parseargs': 0.11.0
-./pnpm-lock.yaml:5402:7    - Unknown word (argparse)       -- argparse: 1.0.10
-./pnpm-lock.yaml:5403:7    - Unknown word (esprima)        -- esprima: 4.0.1
-./pnpm-lock.yaml:5423:7    - Unknown word (cssstyle)       -- cssstyle: 3.0.0
-./pnpm-lock.yaml:5432:7    - Unknown word (nwsapi)         -- nwsapi: 2.2.7
-./pnpm-lock.yaml:5438:11   - Unknown word (xmlserializer)  -- w3c-xmlserializer: 4.0.0
+./pnpm-lock.yaml:5030:7    - Unknown word (toidentifier)   -- toidentifier: 1.0.1
+./pnpm-lock.yaml:5146:7    - Unknown word (wrappy)         -- wrappy: 1.0.2
+./pnpm-lock.yaml:5191:11   - Unknown word (bigints)        -- has-bigints: 1.0.2
+./pnpm-lock.yaml:5250:10   - Unknown word (extglob)        -- is-extglob: 2.1.1
+./pnpm-lock.yaml:5429:16   - Unknown word (cliui)          -- '@isaacs/cliui': 8.0.2
+./pnpm-lock.yaml:5431:15   - Unknown word (parseargs)      -- '@pkgjs/parseargs': 0.11.0
+./pnpm-lock.yaml:5462:7    - Unknown word (argparse)       -- argparse: 1.0.10
+./pnpm-lock.yaml:5463:7    - Unknown word (esprima)        -- esprima: 4.0.1
+./pnpm-lock.yaml:5483:7    - Unknown word (cssstyle)       -- cssstyle: 3.0.0
+./pnpm-lock.yaml:5492:7    - Unknown word (nwsapi)         -- nwsapi: 2.2.7
+./pnpm-lock.yaml:5498:11   - Unknown word (xmlserializer)  -- w3c-xmlserializer: 4.0.0
 ./pnpm-lock.yaml:551:7     - Unknown word (spawndamnit)    -- spawndamnit: 2.0.0
-./pnpm-lock.yaml:5534:24   - Unknown word (pkgs)           -- '@pnpm/workspace.pkgs-graph': 2.0.13(@pnpm
-./pnpm-lock.yaml:5535:21   - Unknown word (codeowners)     -- '@snyk/github-codeowners': 1.1.0
-./pnpm-lock.yaml:5540:7    - Unknown word (jiti)           -- jiti: 1.21.0
-./pnpm-lock.yaml:5547:7    - Unknown word (smol)           -- smol-toml: 1.1.3
-./pnpm-lock.yaml:5682:7    - Unknown word (phin)           -- phin: 2.9.3
-./pnpm-lock.yaml:5684:7    - Unknown word (xtend)          -- xtend: 4.0.2
-./pnpm-lock.yaml:5703:7    - Unknown word (pify)           -- pify: 4.0.1
-./pnpm-lock.yaml:5711:7    - Unknown word (mlly)           -- mlly: 1.5.0
-./pnpm-lock.yaml:5762:7    - Unknown word (pseudomap)      -- pseudomap: 1.0.2
-./pnpm-lock.yaml:5763:7    - Unknown word (yallist)        -- yallist: 2.1.2
-./pnpm-lock.yaml:5886:7    - Unknown word (redent)         -- redent: 3.0.0
-./pnpm-lock.yaml:5981:7    - Unknown word (arrify)         -- arrify: 1.0.1
-./pnpm-lock.yaml:6127:7    - Unknown word (chokidar)       -- chokidar: 3.5.3
-./pnpm-lock.yaml:6131:14   - Unknown word (remy)           -- pstree.remy: 1.1.8
-./pnpm-lock.yaml:6131:7    - Unknown word (pstree)         -- pstree.remy: 1.1.8
-./pnpm-lock.yaml:6136:7    - Unknown word (undefsafe)      -- undefsafe: 2.0.5
+./pnpm-lock.yaml:5594:24   - Unknown word (pkgs)           -- '@pnpm/workspace.pkgs-graph': 2.0.13(@pnpm
+./pnpm-lock.yaml:5595:21   - Unknown word (codeowners)     -- '@snyk/github-codeowners': 1.1.0
+./pnpm-lock.yaml:5600:7    - Unknown word (jiti)           -- jiti: 1.21.0
+./pnpm-lock.yaml:5607:7    - Unknown word (smol)           -- smol-toml: 1.1.3
+./pnpm-lock.yaml:5742:7    - Unknown word (phin)           -- phin: 2.9.3
+./pnpm-lock.yaml:5744:7    - Unknown word (xtend)          -- xtend: 4.0.2
+./pnpm-lock.yaml:5763:7    - Unknown word (pify)           -- pify: 4.0.1
+./pnpm-lock.yaml:5771:7    - Unknown word (mlly)           -- mlly: 1.5.0
+./pnpm-lock.yaml:5822:7    - Unknown word (pseudomap)      -- pseudomap: 1.0.2
+./pnpm-lock.yaml:5823:7    - Unknown word (yallist)        -- yallist: 2.1.2
+./pnpm-lock.yaml:5946:7    - Unknown word (redent)         -- redent: 3.0.0
+./pnpm-lock.yaml:6041:7    - Unknown word (arrify)         -- arrify: 1.0.1
 ./pnpm-lock.yaml:616:10    - Unknown word (subdir)         -- is-subdir: 1.2.0
-./pnpm-lock.yaml:6353:7    - Unknown word (yocto)          -- yocto-queue: 0.1.0
-./pnpm-lock.yaml:6414:7    - Unknown word (callsites)      -- callsites: 3.1.0
-./pnpm-lock.yaml:6630:7    - Unknown word (lilconfig)      -- lilconfig: 2.1.0
-./pnpm-lock.yaml:6657:7    - Unknown word (cssesc)         -- cssesc: 3.0.0
-./pnpm-lock.yaml:6777:7    - Unknown word (ipaddr)         -- ipaddr.js: 1.9.1
-./pnpm-lock.yaml:6797:11   - Unknown word (packlist)       -- npm-packlist: 5.1.3
-./pnpm-lock.yaml:7007:15   - Unknown word (iojs)           -- engines: {iojs: '>=1.0.0', node: '
-./pnpm-lock.yaml:7057:13   - Unknown word (microtask)      -- queue-microtask: 1.2.3
-./pnpm-lock.yaml:7079:7    - Unknown word (isarray)        -- isarray: 2.0.5
-./pnpm-lock.yaml:7104:7    - Unknown word (mkdirp)         -- mkdirp: 0.5.6
-./pnpm-lock.yaml:7120:7    - Unknown word (ultrahtml)      -- ultrahtml: 1.5.2
-./pnpm-lock.yaml:7127:17   - Unknown word (opentype)       -- '@shuding/opentype.js': 1.4.0-beta.0
-./pnpm-lock.yaml:7133:7    - Unknown word (linebreak)      -- linebreak: 1.1.0
-./pnpm-lock.yaml:7147:7    - Unknown word (xmlchars)       -- xmlchars: 2.2.0
+./pnpm-lock.yaml:6187:7    - Unknown word (chokidar)       -- chokidar: 3.5.3
+./pnpm-lock.yaml:6191:14   - Unknown word (remy)           -- pstree.remy: 1.1.8
+./pnpm-lock.yaml:6191:7    - Unknown word (pstree)         -- pstree.remy: 1.1.8
+./pnpm-lock.yaml:6196:7    - Unknown word (undefsafe)      -- undefsafe: 2.0.5
+./pnpm-lock.yaml:6413:7    - Unknown word (yocto)          -- yocto-queue: 0.1.0
+./pnpm-lock.yaml:6474:7    - Unknown word (callsites)      -- callsites: 3.1.0
+./pnpm-lock.yaml:6690:7    - Unknown word (lilconfig)      -- lilconfig: 2.1.0
+./pnpm-lock.yaml:6717:7    - Unknown word (cssesc)         -- cssesc: 3.0.0
+./pnpm-lock.yaml:6837:7    - Unknown word (ipaddr)         -- ipaddr.js: 1.9.1
+./pnpm-lock.yaml:6857:11   - Unknown word (packlist)       -- npm-packlist: 5.1.3
+./pnpm-lock.yaml:7067:15   - Unknown word (iojs)           -- engines: {iojs: '>=1.0.0', node: '
+./pnpm-lock.yaml:7117:13   - Unknown word (microtask)      -- queue-microtask: 1.2.3
+./pnpm-lock.yaml:7139:7    - Unknown word (isarray)        -- isarray: 2.0.5
+./pnpm-lock.yaml:7164:7    - Unknown word (mkdirp)         -- mkdirp: 0.5.6
+./pnpm-lock.yaml:7180:7    - Unknown word (ultrahtml)      -- ultrahtml: 1.5.2
+./pnpm-lock.yaml:7187:17   - Unknown word (opentype)       -- '@shuding/opentype.js': 1.4.0-beta.0
+./pnpm-lock.yaml:7193:7    - Unknown word (linebreak)      -- linebreak: 1.1.0
 ./pnpm-lock.yaml:71:15     - Unknown word (estree)     -- '@types/estree':
-./pnpm-lock.yaml:7200:7    - Unknown word (randombytes)    -- randombytes: 2.1.0
-./pnpm-lock.yaml:7315:7    - Unknown word (rechoir)        -- rechoir: 0.6.2
-./pnpm-lock.yaml:7325:7    - Unknown word (fenceparser)    -- fenceparser: 1.1.1
-./pnpm-lock.yaml:7389:7    - Unknown word (totalist)       -- totalist: 3.0.1
-./pnpm-lock.yaml:7402:7    - Unknown word (breakword)      -- breakword: 1.0.6
-./pnpm-lock.yaml:7515:7    - Unknown word (mixme)          -- mixme: 0.5.10
-./pnpm-lock.yaml:7523:10   - Unknown word (fullwidth)      -- is-fullwidth-code-point: 3.0.0
-./pnpm-lock.yaml:7531:7    - Unknown word (eastasianwidth) -- eastasianwidth: 0.2.0
-./pnpm-lock.yaml:7692:9    - Unknown word (sugarss)        -- - sugarss
+./pnpm-lock.yaml:7207:7    - Unknown word (xmlchars)       -- xmlchars: 2.2.0
+./pnpm-lock.yaml:7260:7    - Unknown word (randombytes)    -- randombytes: 2.1.0
+./pnpm-lock.yaml:7375:7    - Unknown word (rechoir)        -- rechoir: 0.6.2
+./pnpm-lock.yaml:7385:7    - Unknown word (fenceparser)    -- fenceparser: 1.1.1
+./pnpm-lock.yaml:7449:7    - Unknown word (totalist)       -- totalist: 3.0.1
+./pnpm-lock.yaml:7462:7    - Unknown word (breakword)      -- breakword: 1.0.6
+./pnpm-lock.yaml:7575:7    - Unknown word (mixme)          -- mixme: 0.5.10
+./pnpm-lock.yaml:7583:10   - Unknown word (fullwidth)      -- is-fullwidth-code-point: 3.0.0
+./pnpm-lock.yaml:7591:7    - Unknown word (eastasianwidth) -- eastasianwidth: 0.2.0
 ./pnpm-lock.yaml:771:7     - Unknown word (crelt)          -- crelt: 1.0.6
-./pnpm-lock.yaml:7831:7    - Unknown word (chownr)         -- chownr: 2.0.0
-./pnpm-lock.yaml:7834:7    - Unknown word (minizlib)       -- minizlib: 2.1.2
-./pnpm-lock.yaml:7881:7    - Unknown word (globalyzer)     -- globalyzer: 0.1.0
-./pnpm-lock.yaml:7910:10   - Unknown word (tmpdir)         -- os-tmpdir: 1.0.2
+./pnpm-lock.yaml:7752:9    - Unknown word (sugarss)        -- - sugarss
 ./pnpm-lock.yaml:791:11    - Unknown word (keyname)        -- w3c-keyname: 2.2.8
 ./pnpm-lock.yaml:794:5     - Unknown word (emnapi)         -- /@emnapi/runtime@0.45.0:
-./pnpm-lock.yaml:7969:7    - Unknown word (punycode)       -- punycode: 2.3.1
-./pnpm-lock.yaml:8015:7    - Unknown word (smartwrap)      -- smartwrap: 2.0.2
+./pnpm-lock.yaml:7983:7    - Unknown word (chownr)         -- chownr: 2.0.0
+./pnpm-lock.yaml:7986:7    - Unknown word (minizlib)       -- minizlib: 2.1.2
 ./pnpm-lock.yaml:802:5     - Unknown word (ericcornelissen) -- /@ericcornelissen/bash-parser@0.5.2:
-./pnpm-lock.yaml:8057:13   - Unknown word (typer)          -- media-typer: 0.3.0
-./pnpm-lock.yaml:8132:14   - Unknown word (fromcodepoint)  -- string.fromcodepoint: 0.2.1
-./pnpm-lock.yaml:8138:7    - Unknown word (pako)           -- pako: 0.2.9
-./pnpm-lock.yaml:8200:7    - Unknown word (querystringify) -- querystringify: 2.2.0
-./pnpm-lock.yaml:8374:7    - Unknown word (execa)          -- execa: 8.0.1
-./pnpm-lock.yaml:8382:7    - Unknown word (tinybench)      -- tinybench: 2.6.0
-./pnpm-lock.yaml:8383:7    - Unknown word (tinypool)       -- tinypool: 0.8.2
-./pnpm-lock.yaml:8505:7    - Unknown word (isexe)          -- isexe: 2.0.0
-./pnpm-lock.yaml:8529:7    - Unknown word (siginfo)        -- siginfo: 2.0.0
-./pnpm-lock.yaml:8530:7    - Unknown word (stackback)      -- stackback: 0.0.2
-./pnpm-lock.yaml:8605:7    - Unknown word (xmlbuilder)     -- xmlbuilder: 11.0.1
+./pnpm-lock.yaml:8033:7    - Unknown word (globalyzer)     -- globalyzer: 0.1.0
+./pnpm-lock.yaml:8062:10   - Unknown word (tmpdir)         -- os-tmpdir: 1.0.2
+./pnpm-lock.yaml:8121:7    - Unknown word (punycode)       -- punycode: 2.3.1
+./pnpm-lock.yaml:8167:7    - Unknown word (smartwrap)      -- smartwrap: 2.0.2
+./pnpm-lock.yaml:8209:13   - Unknown word (typer)          -- media-typer: 0.3.0
+./pnpm-lock.yaml:8284:14   - Unknown word (fromcodepoint)  -- string.fromcodepoint: 0.2.1
+./pnpm-lock.yaml:8290:7    - Unknown word (pako)           -- pako: 0.2.9
+./pnpm-lock.yaml:8352:7    - Unknown word (querystringify) -- querystringify: 2.2.0
+./pnpm-lock.yaml:8526:7    - Unknown word (execa)          -- execa: 8.0.1
+./pnpm-lock.yaml:8534:7    - Unknown word (tinybench)      -- tinybench: 2.6.0
+./pnpm-lock.yaml:8535:7    - Unknown word (tinypool)       -- tinypool: 0.8.2
+./pnpm-lock.yaml:8657:7    - Unknown word (isexe)          -- isexe: 2.0.0
+./pnpm-lock.yaml:8681:7    - Unknown word (siginfo)        -- siginfo: 2.0.0
+./pnpm-lock.yaml:8682:7    - Unknown word (stackback)      -- stackback: 0.0.2
+./pnpm-lock.yaml:8757:7    - Unknown word (xmlbuilder)     -- xmlbuilder: 11.0.1
 ./pnpm-lock.yaml:8:3       - Unknown word (jimp)       -- jimp>xml2js: ^0.6.0
 ./pnpm-lock.yaml:918:11    - Unknown word (loong)           -- cpu: [loong64]
 ./pnpm-lock.yaml:942:11    - Unknown word (riscv)           -- cpu: [riscv64]
@@ -2935,6 +2931,7 @@ Lines:
 ./sites/svelte-5-preview/src/lib/workers/bundler/index.js:263:19    - Unknown word (importee)   -- async resolveId(importee, importer) {
 ./sites/svelte-5-preview/src/lib/workers/bundler/index.js:9:8       - Unknown word (glsl)       -- import glsl from './plugins/glsl
 ./sites/svelte-5-preview/src/lib/workers/patch_window.js:1:39      - Unknown word (sring)      -- self; // hack for magic-sring and rollup inline sourcemaps
+./sites/svelte-5-preview/src/routes/docs/content/01-api/02-runes.md:291:215   - Unknown word (synchronise) -- particular, avoid using it to synchronise state. Instead of this
 ./sites/svelte-5-preview/src/routes/docs/content/01-api/03-snippets.md:5:119     - Unknown word (duplicative) -- Instead of writing duplicative code like [this](/#H
 ./sites/svelte-5-preview/src/routes/docs/content/02-examples/04-old-vs-new.md:127:4     - Unknown word (Autoscroll)   -- ## Autoscroll
 ./sites/svelte-5-preview/src/routes/docs/content/02-examples/04-old-vs-new.md:129:33    - Unknown word (autoscrolls)  -- implement a chat window that autoscrolls to the bottom when new
