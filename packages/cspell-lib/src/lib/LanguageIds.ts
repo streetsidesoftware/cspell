@@ -12,7 +12,7 @@ import { autoResolve } from './util/AutoResolve.js';
 // cspell:ignore jshintrc jscsrc eslintrc babelrc webmanifest mdown markdn psgi phtml pssc psrc gypi rhistory
 // cspell:ignore rprofile cshtml gemspec cginc ebuild zshrc zprofile zlogin zlogout zshenv dsql ascx axml
 // cspell:ignore bpmn csproj dita ditamap dtml fsproj fxml isml mxml adoc
-// cspell:ignore purescript purs dhall SPSS
+// cspell:ignore purescript purs dhall SPSS tfvars
 
 export interface LanguageExtensionDefinition {
     id: string;
@@ -122,6 +122,8 @@ export const languageExtensionDefinitions: LanguageDefinitions = [
     { id: 'svelte', extensions: ['.svelte'] },
     { id: 'swift', extensions: ['.swift'] },
     { id: 'toml', extensions: ['.toml'] },
+    { id: 'terraform', extensions: ['.tf', '.tf.json'] },
+    { id: 'tfvars', extensions: ['.tfvars'], description: 'Terraform Variables' },
     { id: 'typescript', extensions: ['.ts', '.cts', '.mts'] },
     { id: 'typescriptreact', extensions: ['.tsx'] },
     { id: 'vb', extensions: ['.vb', '.brs', '.vbs', '.bas'] },
