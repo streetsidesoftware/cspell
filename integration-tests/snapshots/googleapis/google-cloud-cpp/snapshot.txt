@@ -3,13 +3,14 @@ Repository: googleapis/google-cloud-cpp
 Url: "https://github.com/googleapis/google-cloud-cpp.git"
 Args: ["--config=../../../../config/repositories/googleapis/google-cloud-cpp/cspell.json","**/*","-e","{*.BUILD,BUILD,CHANGELOG.md,*.sh,*.cfg,*.ps1,Dockerfile.*,*.Dockerfile,*.{yaml,xml,json,cmake}}"]
 Lines:
- CSpell: Files checked: 17554, Issues found: 100118 in 11742 files.
+ CSpell: Files checked: 17659, Issues found: 100278 in 11764 files.
  exit code: 1
-./ARCHITECTURE.md:100:20    - Unknown word (bigtable)   -- - Bigtable has a [`bigtable::Table`](/google/cloud
-./ARCHITECTURE.md:100:3     - Unknown word (Bigtable)   -- - Bigtable has a [`bigtable::Table
-./ARCHITECTURE.md:23:61     - Unknown word (retryable)  -- RPCs that fail with a retryable error,
-./ARCHITECTURE.md:60:4      - Unknown word (quickstart) -- - `quickstart/` contains a small program
-./ARCHITECTURE.md:91:60     - Unknown word (proto)      -- a `service` in the `.proto` definitions
+./ARCHITECTURE.md:101:60    - Unknown word (proto)      -- a `service` in the `.proto` definitions
+./ARCHITECTURE.md:110:20    - Unknown word (bigtable)   -- - Bigtable has a [`bigtable::Table`](/google/cloud
+./ARCHITECTURE.md:110:3     - Unknown word (Bigtable)   -- - Bigtable has a [`bigtable::Table
+./ARCHITECTURE.md:158:48    - Unknown word (googlemock) -- implementation using `googlemock`
+./ARCHITECTURE.md:29:61     - Unknown word (retryable)  -- RPCs that fail with a retryable error,
+./ARCHITECTURE.md:70:4      - Unknown word (quickstart) -- - `quickstart/` contains a small program
 ./BUILD.bazel:149:20    - Unknown word (ctype)      -- name = "enable-ctype-cord-workaround",
 ./BUILD.bazel:15:14     - Unknown word (skylib)     -- load("@bazel_skylib//rules:common_settings
 ./BUILD.bazel:51:5      - Unknown word (testonly)   -- testonly = True,
@@ -87,25 +88,26 @@ Lines:
 ./ci/etc/docuploader-requirements.in:2:1       - Unknown word (certifi)    -- certifi==2023.7.22
 ./ci/etc/docuploader-requirements.in:5:1       - Unknown word (colorlog)   -- colorlog==6.7.0
 ./ci/etc/docuploader-requirements.in:6:5       - Unknown word (docuploader) -- gcp-docuploader==0.6.5
+./ci/etc/expected_install_directories:1002:24   - Unknown word (servicehealth)            -- include/google/cloud/servicehealth
 ./ci/etc/expected_install_directories:100:35    - Unknown word (appconnections)        -- google/cloud/beyondcorp/appconnections
-./ci/etc/expected_install_directories:1028:24   - Unknown word (storagecontrol)           -- include/google/cloud/storagecontrol
-./ci/etc/expected_install_directories:1032:24   - Unknown word (storageinsights)          -- include/google/cloud/storageinsights
-./ci/etc/expected_install_directories:1036:24   - Unknown word (storagetransfer)          -- include/google/cloud/storagetransfer
+./ci/etc/expected_install_directories:1040:24   - Unknown word (storagecontrol)           -- include/google/cloud/storagecontrol
+./ci/etc/expected_install_directories:1044:24   - Unknown word (storageinsights)          -- include/google/cloud/storageinsights
+./ci/etc/expected_install_directories:1048:24   - Unknown word (storagetransfer)          -- include/google/cloud/storagetransfer
 ./ci/etc/expected_install_directories:104:35    - Unknown word (appconnectors)         -- google/cloud/beyondcorp/appconnectors
-./ci/etc/expected_install_directories:1055:24   - Unknown word (telcoautomation)          -- include/google/cloud/telcoautomation
-./ci/etc/expected_install_directories:1059:24   - Unknown word (texttospeech)             -- include/google/cloud/texttospeech
-./ci/etc/expected_install_directories:1064:24   - Unknown word (timeseriesinsights)       -- include/google/cloud/timeseriesinsights
+./ci/etc/expected_install_directories:1067:24   - Unknown word (telcoautomation)          -- include/google/cloud/telcoautomation
+./ci/etc/expected_install_directories:1071:24   - Unknown word (texttospeech)             -- include/google/cloud/texttospeech
+./ci/etc/expected_install_directories:1076:24   - Unknown word (timeseriesinsights)       -- include/google/cloud/timeseriesinsights
 ./ci/etc/expected_install_directories:108:35    - Unknown word (appgateways)           -- google/cloud/beyondcorp/appgateways
-./ci/etc/expected_install_directories:1090:30   - Unknown word (livestream)               -- include/google/cloud/video/livestream
-./ci/etc/expected_install_directories:1103:24   - Unknown word (videointelligence)        -- include/google/cloud/videointelligence
-./ci/etc/expected_install_directories:1113:24   - Unknown word (vmmigration)              -- include/google/cloud/vmmigration
-./ci/etc/expected_install_directories:1118:24   - Unknown word (vmwareengine)             -- include/google/cloud/vmwareengine
-./ci/etc/expected_install_directories:1122:24   - Unknown word (vpcaccess)                -- include/google/cloud/vpcaccess
-./ci/etc/expected_install_directories:1127:24   - Unknown word (webrisk)                  -- include/google/cloud/webrisk
-./ci/etc/expected_install_directories:1132:24   - Unknown word (websecurityscanner)       -- include/google/cloud/websecurityscanner
+./ci/etc/expected_install_directories:1102:30   - Unknown word (livestream)               -- include/google/cloud/video/livestream
+./ci/etc/expected_install_directories:1115:24   - Unknown word (videointelligence)        -- include/google/cloud/videointelligence
+./ci/etc/expected_install_directories:1125:24   - Unknown word (vmmigration)              -- include/google/cloud/vmmigration
+./ci/etc/expected_install_directories:1130:24   - Unknown word (vmwareengine)             -- include/google/cloud/vmwareengine
+./ci/etc/expected_install_directories:1134:24   - Unknown word (vpcaccess)                -- include/google/cloud/vpcaccess
+./ci/etc/expected_install_directories:1139:24   - Unknown word (webrisk)                  -- include/google/cloud/webrisk
+./ci/etc/expected_install_directories:1144:24   - Unknown word (websecurityscanner)       -- include/google/cloud/websecurityscanner
 ./ci/etc/expected_install_directories:114:33    - Unknown word (analyticshub)          -- google/cloud/bigquery/analyticshub
-./ci/etc/expected_install_directories:1162:27   - Unknown word (cloudprofiler)            -- include/google/devtools/cloudprofiler
-./ci/etc/expected_install_directories:1164:27   - Unknown word (cloudtrace)               -- include/google/devtools/cloudtrace
+./ci/etc/expected_install_directories:1174:27   - Unknown word (cloudprofiler)            -- include/google/devtools/cloudprofiler
+./ci/etc/expected_install_directories:1176:27   - Unknown word (cloudtrace)               -- include/google/devtools/cloudtrace
 ./ci/etc/expected_install_directories:118:33    - Unknown word (biglake)               -- google/cloud/bigquery/biglake
 ./ci/etc/expected_install_directories:126:33    - Unknown word (datapolicies)          -- google/cloud/bigquery/datapolicies
 ./ci/etc/expected_install_directories:12:22     - Unknown word (servicemanagement) -- /include/google/api/servicemanagement
@@ -120,63 +122,62 @@ Lines:
 ./ci/etc/expected_install_directories:23:24     - Unknown word (accessapproval)    -- include/google/cloud/accessapproval
 ./ci/etc/expected_install_directories:28:24     - Unknown word (accesscontextmanager) -- include/google/cloud/accesscontextmanager
 ./ci/etc/expected_install_directories:33:24     - Unknown word (advisorynotifications) -- include/google/cloud/advisorynotifications
-./ci/etc/expected_install_directories:374:39    - Unknown word (mirrorings)            -- cloud/compute/packet_mirrorings
+./ci/etc/expected_install_directories:378:39    - Unknown word (mirrorings)            -- cloud/compute/packet_mirrorings
 ./ci/etc/expected_install_directories:37:24     - Unknown word (aiplatform)            -- include/google/cloud/aiplatform
 ./ci/etc/expected_install_directories:41:24     - Unknown word (alloydb)               -- include/google/cloud/alloydb
 ./ci/etc/expected_install_directories:50:24     - Unknown word (apigeeconnect)         -- include/google/cloud/apigeeconnect
-./ci/etc/expected_install_directories:526:32    - Unknown word (subnetworks)           -- google/cloud/compute/subnetworks
-./ci/etc/expected_install_directories:582:24    - Unknown word (confidentialcomputing) -- include/google/cloud/confidentialcomputing
-./ci/etc/expected_install_directories:595:24    - Unknown word (contactcenterinsights) -- include/google/cloud/contactcenterinsights
+./ci/etc/expected_install_directories:538:32    - Unknown word (subnetworks)           -- google/cloud/compute/subnetworks
+./ci/etc/expected_install_directories:594:24    - Unknown word (confidentialcomputing) -- include/google/cloud/confidentialcomputing
 ./ci/etc/expected_install_directories:5:22      - Unknown word (apikeys)    -- /include/google/api/apikeys
-./ci/etc/expected_install_directories:605:24    - Unknown word (containeranalysis)     -- include/google/cloud/containeranalysis
-./ci/etc/expected_install_directories:610:24    - Unknown word (contentwarehouse)      -- include/google/cloud/contentwarehouse
-./ci/etc/expected_install_directories:614:24    - Unknown word (datacatalog)           -- include/google/cloud/datacatalog
-./ci/etc/expected_install_directories:623:24    - Unknown word (datafusion)            -- include/google/cloud/datafusion
-./ci/etc/expected_install_directories:627:24    - Unknown word (datamigration)         -- include/google/cloud/datamigration
-./ci/etc/expected_install_directories:632:24    - Unknown word (dataplex)              -- include/google/cloud/dataplex
-./ci/etc/expected_install_directories:637:24    - Unknown word (dataproc)              -- include/google/cloud/dataproc
-./ci/etc/expected_install_directories:650:24    - Unknown word (datastream)            -- include/google/cloud/datastream
+./ci/etc/expected_install_directories:607:24    - Unknown word (contactcenterinsights) -- include/google/cloud/contactcenterinsights
+./ci/etc/expected_install_directories:617:24    - Unknown word (containeranalysis)     -- include/google/cloud/containeranalysis
+./ci/etc/expected_install_directories:622:24    - Unknown word (contentwarehouse)      -- include/google/cloud/contentwarehouse
+./ci/etc/expected_install_directories:626:24    - Unknown word (datacatalog)           -- include/google/cloud/datacatalog
+./ci/etc/expected_install_directories:635:24    - Unknown word (datafusion)            -- include/google/cloud/datafusion
+./ci/etc/expected_install_directories:639:24    - Unknown word (datamigration)         -- include/google/cloud/datamigration
+./ci/etc/expected_install_directories:644:24    - Unknown word (dataplex)              -- include/google/cloud/dataplex
+./ci/etc/expected_install_directories:649:24    - Unknown word (dataproc)              -- include/google/cloud/dataproc
 ./ci/etc/expected_install_directories:65:24     - Unknown word (apphub)                -- include/google/cloud/apphub
-./ci/etc/expected_install_directories:660:24    - Unknown word (dialogflow)            -- include/google/cloud/dialogflow
-./ci/etc/expected_install_directories:670:24    - Unknown word (discoveryengine)       -- include/google/cloud/discoveryengine
-./ci/etc/expected_install_directories:679:24    - Unknown word (documentai)            -- include/google/cloud/documentai
-./ci/etc/expected_install_directories:688:24    - Unknown word (edgecontainer)         -- include/google/cloud/edgecontainer
-./ci/etc/expected_install_directories:693:24    - Unknown word (edgenetwork)           -- include/google/cloud/edgenetwork
-./ci/etc/expected_install_directories:697:24    - Unknown word (essentialcontacts)     -- include/google/cloud/essentialcontacts
+./ci/etc/expected_install_directories:662:24    - Unknown word (datastream)            -- include/google/cloud/datastream
+./ci/etc/expected_install_directories:672:24    - Unknown word (dialogflow)            -- include/google/cloud/dialogflow
+./ci/etc/expected_install_directories:682:24    - Unknown word (discoveryengine)       -- include/google/cloud/discoveryengine
+./ci/etc/expected_install_directories:691:24    - Unknown word (documentai)            -- include/google/cloud/documentai
 ./ci/etc/expected_install_directories:69:24     - Unknown word (artifactregistry)      -- include/google/cloud/artifactregistry
-./ci/etc/expected_install_directories:710:24    - Unknown word (filestore)             -- include/google/cloud/filestore
-./ci/etc/expected_install_directories:723:24    - Unknown word (gkebackup)             -- include/google/cloud/gkebackup
-./ci/etc/expected_install_directories:727:24    - Unknown word (gkehub)                -- include/google/cloud/gkehub
-./ci/etc/expected_install_directories:732:24    - Unknown word (gkemulticloud)         -- include/google/cloud/gkemulticloud
-./ci/etc/expected_install_directories:784:24    - Unknown word (managedidentities)     -- include/google/cloud/managedidentities
-./ci/etc/expected_install_directories:794:24    - Unknown word (metastore)             -- include/google/cloud/metastore
-./ci/etc/expected_install_directories:798:24    - Unknown word (migrationcenter)       -- include/google/cloud/migrationcenter
+./ci/etc/expected_install_directories:700:24    - Unknown word (edgecontainer)         -- include/google/cloud/edgecontainer
+./ci/etc/expected_install_directories:705:24    - Unknown word (edgenetwork)           -- include/google/cloud/edgenetwork
+./ci/etc/expected_install_directories:709:24    - Unknown word (essentialcontacts)     -- include/google/cloud/essentialcontacts
+./ci/etc/expected_install_directories:722:24    - Unknown word (filestore)             -- include/google/cloud/filestore
+./ci/etc/expected_install_directories:735:24    - Unknown word (gkebackup)             -- include/google/cloud/gkebackup
+./ci/etc/expected_install_directories:739:24    - Unknown word (gkehub)                -- include/google/cloud/gkehub
+./ci/etc/expected_install_directories:744:24    - Unknown word (gkemulticloud)         -- include/google/cloud/gkemulticloud
+./ci/etc/expected_install_directories:796:24    - Unknown word (managedidentities)     -- include/google/cloud/managedidentities
 ./ci/etc/expected_install_directories:79:24     - Unknown word (assuredworkloads)      -- include/google/cloud/assuredworkloads
 ./ci/etc/expected_install_directories:7:22      - Unknown word (cloudquotas) -- /include/google/api/cloudquotas
-./ci/etc/expected_install_directories:807:35    - Unknown word (metricsscope)          -- google/cloud/monitoring/metricsscope
-./ci/etc/expected_install_directories:824:24    - Unknown word (networkmanagement)     -- include/google/cloud/networkmanagement
-./ci/etc/expected_install_directories:829:24    - Unknown word (networksecurity)       -- include/google/cloud/networksecurity
-./ci/etc/expected_install_directories:833:24    - Unknown word (networkservices)       -- include/google/cloud/networkservices
+./ci/etc/expected_install_directories:806:24    - Unknown word (metastore)             -- include/google/cloud/metastore
+./ci/etc/expected_install_directories:810:24    - Unknown word (migrationcenter)       -- include/google/cloud/migrationcenter
+./ci/etc/expected_install_directories:819:35    - Unknown word (metricsscope)          -- google/cloud/monitoring/metricsscope
+./ci/etc/expected_install_directories:836:24    - Unknown word (networkmanagement)     -- include/google/cloud/networkmanagement
+./ci/etc/expected_install_directories:841:24    - Unknown word (networksecurity)       -- include/google/cloud/networksecurity
+./ci/etc/expected_install_directories:845:24    - Unknown word (networkservices)       -- include/google/cloud/networkservices
 ./ci/etc/expected_install_directories:84:24     - Unknown word (automl)                -- include/google/cloud/automl
-./ci/etc/expected_install_directories:854:24    - Unknown word (orgpolicy)             -- include/google/cloud/orgpolicy
-./ci/etc/expected_install_directories:859:24    - Unknown word (osconfig)              -- include/google/cloud/osconfig
-./ci/etc/expected_install_directories:860:33    - Unknown word (agentendpoint)         -- google/cloud/osconfig/agentendpoint
-./ci/etc/expected_install_directories:868:24    - Unknown word (oslogin)               -- include/google/cloud/oslogin
-./ci/etc/expected_install_directories:873:24    - Unknown word (policysimulator)       -- include/google/cloud/policysimulator
-./ci/etc/expected_install_directories:877:24    - Unknown word (policytroubleshooter)  -- include/google/cloud/policytroubleshooter
-./ci/etc/expected_install_directories:886:24    - Unknown word (privateca)             -- include/google/cloud/privateca
+./ci/etc/expected_install_directories:866:24    - Unknown word (orgpolicy)             -- include/google/cloud/orgpolicy
+./ci/etc/expected_install_directories:871:24    - Unknown word (osconfig)              -- include/google/cloud/osconfig
+./ci/etc/expected_install_directories:872:33    - Unknown word (agentendpoint)         -- google/cloud/osconfig/agentendpoint
+./ci/etc/expected_install_directories:880:24    - Unknown word (oslogin)               -- include/google/cloud/oslogin
+./ci/etc/expected_install_directories:885:24    - Unknown word (policysimulator)       -- include/google/cloud/policysimulator
+./ci/etc/expected_install_directories:889:24    - Unknown word (policytroubleshooter)  -- include/google/cloud/policytroubleshooter
+./ci/etc/expected_install_directories:898:24    - Unknown word (privateca)             -- include/google/cloud/privateca
 ./ci/etc/expected_install_directories:89:24     - Unknown word (baremetalsolution)     -- include/google/cloud/baremetalsolution
-./ci/etc/expected_install_directories:902:24    - Unknown word (pubsublite)            -- include/google/cloud/pubsublite
-./ci/etc/expected_install_directories:906:24    - Unknown word (rapidmigrationassessment) -- include/google/cloud/rapidmigrationassessment
-./ci/etc/expected_install_directories:910:24    - Unknown word (recaptchaenterprise)      -- include/google/cloud/recaptchaenterprise
-./ci/etc/expected_install_directories:928:24    - Unknown word (resourcemanager)          -- include/google/cloud/resourcemanager
-./ci/etc/expected_install_directories:933:24    - Unknown word (resourcesettings)         -- include/google/cloud/resourcesettings
-./ci/etc/expected_install_directories:953:24    - Unknown word (secretmanager)            -- include/google/cloud/secretmanager
-./ci/etc/expected_install_directories:958:24    - Unknown word (securesourcemanager)      -- include/google/cloud/securesourcemanager
-./ci/etc/expected_install_directories:965:24    - Unknown word (securitycenter)           -- include/google/cloud/securitycenter
-./ci/etc/expected_install_directories:973:24    - Unknown word (securitycentermanagement) -- include/google/cloud/securitycentermanagement
-./ci/etc/expected_install_directories:985:24    - Unknown word (servicedirectory)         -- include/google/cloud/servicedirectory
-./ci/etc/expected_install_directories:990:24    - Unknown word (servicehealth)            -- include/google/cloud/servicehealth
+./ci/etc/expected_install_directories:914:24    - Unknown word (pubsublite)            -- include/google/cloud/pubsublite
+./ci/etc/expected_install_directories:918:24    - Unknown word (rapidmigrationassessment) -- include/google/cloud/rapidmigrationassessment
+./ci/etc/expected_install_directories:922:24    - Unknown word (recaptchaenterprise)      -- include/google/cloud/recaptchaenterprise
+./ci/etc/expected_install_directories:940:24    - Unknown word (resourcemanager)          -- include/google/cloud/resourcemanager
+./ci/etc/expected_install_directories:945:24    - Unknown word (resourcesettings)         -- include/google/cloud/resourcesettings
+./ci/etc/expected_install_directories:965:24    - Unknown word (secretmanager)            -- include/google/cloud/secretmanager
+./ci/etc/expected_install_directories:970:24    - Unknown word (securesourcemanager)      -- include/google/cloud/securesourcemanager
+./ci/etc/expected_install_directories:977:24    - Unknown word (securitycenter)           -- include/google/cloud/securitycenter
+./ci/etc/expected_install_directories:985:24    - Unknown word (securitycentermanagement) -- include/google/cloud/securitycentermanagement
+./ci/etc/expected_install_directories:997:24    - Unknown word (servicedirectory)         -- include/google/cloud/servicedirectory
 ./ci/etc/expected_install_directories:99:24     - Unknown word (beyondcorp)            -- include/google/cloud/beyondcorp
 ./ci/etc/expected_install_directories:9:22      - Unknown word (servicecontrol) -- /include/google/api/servicecontrol
 ./ci/etc/pip-tooling-requirements.txt:10:1      - Unknown word (tomli)      -- tomli==2.0.1 \
@@ -475,20 +476,20 @@ Lines:
 ./generator/generator_config.proto:41:35     - Unknown word (gcpxx)      -- to true generate the `gcpxxV1` alias for our inline
 ./generator/generator_config.proto:48:42     - Unknown word (struct)     -- ServiceNameRetryTraits struct using the provided codes
 ./generator/generator_config.proto:96:24     - Unknown word (COMPAT)     -- LOCATION_DEPENDENT_COMPAT = 2;
-./generator/generator_config.textproto:1548:15   - Unknown word (Abac)       -- "SetLegacyAbac(std::string const&,
-./generator/generator_config.textproto:1650:3    - Unknown word (Dataplex)   -- # Dataplex
-./generator/generator_config.textproto:1675:3    - Unknown word (Dataproc)   -- # Dataproc
-./generator/generator_config.textproto:1755:3    - Unknown word (Datastream) -- # Datastream
-./generator/generator_config.textproto:1773:3    - Unknown word (Dialogflow) -- # Dialogflow CX
-./generator/generator_config.textproto:1779:47   - Unknown word (DIALOGFLOW) -- var: "GOOGLE_CLOUD_CPP_DIALOGFLOW_ENVIRONMENT_ENDPOINT
-./generator/generator_config.textproto:2136:3    - Unknown word (Eventarc)   -- # Eventarc
-./generator/generator_config.textproto:2153:3    - Unknown word (Filestore)  -- # Filestore
-./generator/generator_config.textproto:2196:7    - Unknown word (Multicloud) -- # GKE Multicloud
+./generator/generator_config.textproto:1575:15   - Unknown word (Abac)       -- "SetLegacyAbac(std::string const&,
+./generator/generator_config.textproto:1677:3    - Unknown word (Dataplex)   -- # Dataplex
+./generator/generator_config.textproto:1702:3    - Unknown word (Dataproc)   -- # Dataproc
+./generator/generator_config.textproto:1782:3    - Unknown word (Datastream) -- # Datastream
+./generator/generator_config.textproto:1800:3    - Unknown word (Dialogflow) -- # Dialogflow CX
+./generator/generator_config.textproto:1806:47   - Unknown word (DIALOGFLOW) -- var: "GOOGLE_CLOUD_CPP_DIALOGFLOW_ENVIRONMENT_ENDPOINT
+./generator/generator_config.textproto:2163:3    - Unknown word (Eventarc)   -- # Eventarc
+./generator/generator_config.textproto:2180:3    - Unknown word (Filestore)  -- # Filestore
+./generator/generator_config.textproto:2223:7    - Unknown word (Multicloud) -- # GKE Multicloud
 ./generator/generator_config.textproto:239:3     - Unknown word (Apigee)     -- # Apigee Connect
-./generator/generator_config.textproto:2404:12   - Unknown word (Metastore)  -- # Dataproc Metastore
+./generator/generator_config.textproto:2431:12   - Unknown word (Metastore)  -- # Dataproc Metastore
 ./generator/generator_config.textproto:245:47    - Unknown word (APIGEE)     -- var: "GOOGLE_CLOUD_CPP_APIGEE_CONNECTION_SERVICE_ENDPOINT
 ./generator/generator_config.textproto:318:47    - Unknown word (AUTOML)     -- var: "GOOGLE_CLOUD_CPP_AUTOML_PREDICTION_SERVICE_ENDPOINT
-./generator/generator_config.textproto:3393:3    - Unknown word (Timeseries) -- # Timeseries Insights
+./generator/generator_config.textproto:3420:3    - Unknown word (Timeseries) -- # Timeseries Insights
 ./generator/integration_tests/backup.proto:27:40     - Unknown word (genproto)   -- "google.golang.org/genproto/googleapis/test/admin
 ./generator/integration_tests/backup.proto:29:19     - Unknown word (classname)  -- option java_outer_classname = "BackupProto";
 ./generator/integration_tests/golden/v1/golden_kitchen_sink_client.h:286:43    - Unknown word (cloudresourcemanager) -- organizations/1234567890/logs/cloudresourcemanager.googleapis.com%2Factivity
@@ -504,8 +505,8 @@ Lines:
 ./generator/integration_tests/test.proto:357:3     - Unknown word (oneof)      -- oneof source_info {
 ./generator/integration_tests/test.proto:971:52    - Unknown word (UNIQUEID)   -- iceAccounts/{ACCOUNT_EMAIL_OR_UNIQUEID}`. The `-` wildcard
 ./generator/integration_tests/test_request_id.proto:17:21     - Unknown word (requestid)  -- package google.test.requestid.v1;
-./generator/integration_tests/tests/golden_kitchen_sink_metadata_decorator_test.cc:352:54    - Unknown word (Finstance)  -- location=instances%2Finstance_bar";
-./generator/integration_tests/tests/golden_kitchen_sink_metadata_decorator_test.cc:513:58    - Unknown word (Fvalue)     -- "routing_id=%2Fvalue")));
+./generator/integration_tests/tests/golden_kitchen_sink_metadata_decorator_test.cc:401:54    - Unknown word (Finstance)  -- location=instances%2Finstance_bar";
+./generator/integration_tests/tests/golden_kitchen_sink_metadata_decorator_test.cc:562:58    - Unknown word (Fvalue)     -- "routing_id=%2Fvalue")));
 ./generator/integration_tests/tests/golden_thing_admin_idempotency_policy_test.cc:26:11     - Unknown word (gtab)       -- namespace gtab = ::google::test::admin
 ./generator/integration_tests/tests/golden_thing_admin_rest_stub_test.cc:298:24    - Unknown word (expirable)  -- "title": "expirable access",
 ./generator/integration_tests/tests/request_id_connection_impl_test.cc:73:34     - Unknown word (UUIDV)      -- request has request_id in UUIDV4 format",
@@ -629,7 +630,6 @@ Lines:
 ./google/cloud/bigquery/datatransfer/v1/data_transfer_client.cc:296:35    - Unknown word (Unenroll)   -- DataTransferServiceClient::UnenrollDataSources(
 ./google/cloud/bigquery/datatransfer/v1/data_transfer_client.h:19:48     - Unknown word (DATATRANSFER) -- GOOGLE_CLOUD_BIGQUERY_DATATRANSFER_V1_DATA_TRANSFER_CLIENT
 ./google/cloud/bigquery/datatransfer/v1/internal/data_transfer_option_defaults.cc:40:8      - Unknown word (bigquerydatatransfer) -- "bigquerydatatransfer.googleapis.com");
-./google/cloud/bigquery/doc/bigquery-read-mock.dox:3:75      - Unknown word (googlemock) -- BigQueryRead application with googlemock
 ./google/cloud/bigquery/doc/environment-variables.dox:22:40     - Unknown word (bigquerystorage) -- (which defaults to "bigquerystorage.googleapis.com")
 ./google/cloud/bigquery/doc/environment-variables.dox:42:40     - Unknown word (bigquerymigration) -- (which defaults to "bigquerymigration.googleapis.com")
 ./google/cloud/bigquery/doc/environment-variables.dox:46:40     - Unknown word (bigqueryreservation) -- (which defaults to "bigqueryreservation.googleapis.com")
@@ -800,10 +800,10 @@ Lines:
 ./google/cloud/compute/autoscalers/v1/autoscalers_client.cc:57:26     - Unknown word (Autoscaler)  -- AutoscalersClient::DeleteAutoscaler(std::string const& project
 ./google/cloud/compute/autoscalers/v1/autoscalers_client.cc:59:56     - Unknown word (autoscaler)  -- std::string const& autoscaler,
 ./google/cloud/compute/autoscalers/v1/autoscalers_client.h:19:47     - Unknown word (AUTOSCALERS) -- GOOGLE_CLOUD_COMPUTE_AUTOSCALERS_V1_AUTOSCALERS_CLIENT
-./google/cloud/compute/doc/environment-variables.dox:181:28    - Unknown word (MIRRORINGS) -- GOOGLE_CLOUD_CPP_PACKET_MIRRORINGS_ENDPOINT=...` overrides
-./google/cloud/compute/doc/environment-variables.dox:183:22    - Unknown word (Mirrorings) -- used by `MakePacketMirroringsConnection()`.
-./google/cloud/compute/doc/environment-variables.dox:333:21    - Unknown word (SUBNETWORKS) -- - `GOOGLE_CLOUD_CPP_SUBNETWORKS_ENDPOINT=...` overrides
-./google/cloud/compute/doc/environment-variables.dox:335:16    - Unknown word (Subnetworks) -- used by `MakeSubnetworksConnection()`.
+./google/cloud/compute/doc/environment-variables.dox:185:28    - Unknown word (MIRRORINGS) -- GOOGLE_CLOUD_CPP_PACKET_MIRRORINGS_ENDPOINT=...` overrides
+./google/cloud/compute/doc/environment-variables.dox:187:22    - Unknown word (Mirrorings) -- used by `MakePacketMirroringsConnection()`.
+./google/cloud/compute/doc/environment-variables.dox:345:21    - Unknown word (SUBNETWORKS) -- - `GOOGLE_CLOUD_CPP_SUBNETWORKS_ENDPOINT=...` overrides
+./google/cloud/compute/doc/environment-variables.dox:347:16    - Unknown word (Subnetworks) -- used by `MakeSubnetworksConnection()`.
 ./google/cloud/compute/instance_group_managers/v1/instance_group_managers_client.h:103:34    - Unknown word (listmanagedinstances) -- abandoning action with the listmanagedinstances method. If the group
 ./google/cloud/compute/instance_groups/v1/instance_groups_client.h:93:67     - Unknown word (subnetwork) -- in the same network/subnetwork.
 ./google/cloud/compute/interconnects/v1/interconnects_client.cc:97:59     - Unknown word (Macsec)     -- v1::InterconnectsGetMacsecConfigResponse>
@@ -1047,11 +1047,11 @@ Lines:
 ./google/cloud/serviceusage/mocks/mock_service_usage_connection.h:19:39     - Unknown word (SERVICEUSAGE) -- CLOUD_CPP_GOOGLE_CLOUD_SERVICEUSAGE_MOCKS_MOCK_SERVICE_USAGE
 ./google/cloud/spanner/admin/integration_tests/backup_extra_integration_test.cc:119:63    - Unknown word (creq)       -- CreateDatabaseRequest creq;
 ./google/cloud/spanner/admin/integration_tests/backup_extra_integration_test.cc:170:63    - Unknown word (breq)       -- CreateBackupRequest breq;
-./google/cloud/spanner/admin/integration_tests/backup_extra_integration_test.cc:479:64    - Unknown word (rreq)       -- RestoreDatabaseRequest rreq;
-./google/cloud/spanner/admin/integration_tests/backup_integration_test.cc:143:69    - Unknown word (lreq)       -- ListBackupOperationsRequest lreq;
-./google/cloud/spanner/admin/integration_tests/backup_integration_test.cc:206:73    - Unknown word (dreq)       -- ListDatabaseOperationsRequest dreq;
-./google/cloud/spanner/admin/integration_tests/backup_integration_test.cc:240:61    - Unknown word (ureq)       -- UpdateBackupRequest ureq;
-./google/cloud/spanner/admin/integration_tests/database_admin_integration_test.cc:528:52    - Unknown word (ceci)       -- kKeyRing, "ceci-n-est-pas-une-cle")
+./google/cloud/spanner/admin/integration_tests/backup_extra_integration_test.cc:483:64    - Unknown word (rreq)       -- RestoreDatabaseRequest rreq;
+./google/cloud/spanner/admin/integration_tests/backup_integration_test.cc:153:69    - Unknown word (lreq)       -- ListBackupOperationsRequest lreq;
+./google/cloud/spanner/admin/integration_tests/backup_integration_test.cc:224:73    - Unknown word (dreq)       -- ListDatabaseOperationsRequest dreq;
+./google/cloud/spanner/admin/integration_tests/backup_integration_test.cc:258:61    - Unknown word (ureq)       -- UpdateBackupRequest ureq;
+./google/cloud/spanner/admin/integration_tests/database_admin_integration_test.cc:533:52    - Unknown word (ceci)       -- kKeyRing, "ceci-n-est-pas-une-cle")
 ./google/cloud/spanner/benchmarks/README.md:104:9     - Unknown word (ggplot)     -- require(ggplot2) # may require install
 ./google/cloud/spanner/benchmarks/README.md:110:11    - Unknown word (rbind)      -- df <- rbind(df, t);
 ./google/cloud/spanner/benchmarks/README.md:117:71    - Unknown word (boxplot)    -- y=CpuTime)) + geom_boxplot()
@@ -1064,20 +1064,19 @@ Lines:
 ./google/cloud/spanner/client_test.cc:575:12    - Unknown word (STREQ)      -- EXPECT_STREQ(e, "Read() error");
 ./google/cloud/spanner/database_admin_client_test.cc:32:11     - Unknown word (gsad)       -- namespace gsad = ::google::spanner
 ./google/cloud/spanner/instance_admin_client_test.cc:29:11     - Unknown word (gsai)       -- namespace gsai = ::google::spanner
-./google/cloud/spanner/integration_tests/client_integration_test.cc:1387:8    - Unknown word (reconflict) -- auto reconflict_commit = client_->Commit
-./google/cloud/spanner/integration_tests/client_integration_test.cc:1485:50   - Unknown word (fkshoppingcartscustomerid) -- HasSubstr("fkshoppingcartscustomerid"),
-./google/cloud/spanner/integration_tests/client_integration_test.cc:1486:50   - Unknown word (shoppingcarts)             -- HasSubstr("shoppingcarts"),
-./google/cloud/spanner/integration_tests/client_integration_test.cc:1487:60   - Unknown word (customerid)                -- HasSubstr("customers(customerid)"))));
-./google/cloud/spanner/integration_tests/client_integration_test.cc:399:23    - Unknown word (Mahalia)    -- {1911, "Mahalia", "Jackson"},
-./google/cloud/spanner/integration_tests/client_integration_test.cc:429:23    - Unknown word (Aretha)     -- {1942, "Aretha", "Franklin"},
-./google/cloud/spanner/integration_tests/client_integration_test.cc:447:33    - Unknown word (Vandross)   -- {1951, "Luther", "Vandross"},
-./google/cloud/spanner/integration_tests/client_integration_test.cc:450:23    - Unknown word (Chaka)      -- {1953, "Chaka", "Khan"},
-./google/cloud/spanner/integration_tests/client_integration_test.cc:459:23    - Unknown word (Thom)       -- {1968, "Thom", "Yorke"},
-./google/cloud/spanner/integration_tests/client_integration_test.cc:459:31    - Unknown word (Yorke)      -- {1968, "Thom", "Yorke"},
-./google/cloud/spanner/integration_tests/client_integration_test.cc:460:23    - Unknown word (Mariah)     -- {1969, "Mariah", "Carey"},
-./google/cloud/spanner/integration_tests/client_integration_test.cc:469:14    - Unknown word (upserts)    -- // Use upserts as mutation groups are
-./google/cloud/spanner/integration_tests/data_types_integration_test.cc:541:47    - Unknown word (datatypesbyjsonvalue) -- AllOf(HasSubstr("Index datatypesbyjsonvalue"),
-./google/cloud/spanner/integration_tests/data_types_integration_test.cc:85:30     - Unknown word (Tmpl)       -- DataTypeIntegrationTestTmpl : public T {
+./google/cloud/spanner/integration_tests/client_integration_test.cc:1382:8    - Unknown word (reconflict) -- auto reconflict_commit = client_->Commit
+./google/cloud/spanner/integration_tests/client_integration_test.cc:1482:50   - Unknown word (fkshoppingcartscustomerid) -- HasSubstr("fkshoppingcartscustomerid"),
+./google/cloud/spanner/integration_tests/client_integration_test.cc:1483:50   - Unknown word (shoppingcarts)             -- HasSubstr("shoppingcarts"),
+./google/cloud/spanner/integration_tests/client_integration_test.cc:1484:60   - Unknown word (customerid)                -- HasSubstr("customers(customerid)"))));
+./google/cloud/spanner/integration_tests/client_integration_test.cc:394:23    - Unknown word (Mahalia)    -- {1911, "Mahalia", "Jackson"},
+./google/cloud/spanner/integration_tests/client_integration_test.cc:424:23    - Unknown word (Aretha)     -- {1942, "Aretha", "Franklin"},
+./google/cloud/spanner/integration_tests/client_integration_test.cc:442:33    - Unknown word (Vandross)   -- {1951, "Luther", "Vandross"},
+./google/cloud/spanner/integration_tests/client_integration_test.cc:445:23    - Unknown word (Chaka)      -- {1953, "Chaka", "Khan"},
+./google/cloud/spanner/integration_tests/client_integration_test.cc:454:23    - Unknown word (Thom)       -- {1968, "Thom", "Yorke"},
+./google/cloud/spanner/integration_tests/client_integration_test.cc:454:31    - Unknown word (Yorke)      -- {1968, "Thom", "Yorke"},
+./google/cloud/spanner/integration_tests/client_integration_test.cc:455:23    - Unknown word (Mariah)     -- {1969, "Mariah", "Carey"},
+./google/cloud/spanner/integration_tests/client_integration_test.cc:464:14    - Unknown word (upserts)    -- // Use upserts as mutation groups are
+./google/cloud/spanner/integration_tests/data_types_integration_test.cc:84:30     - Unknown word (Tmpl)       -- DataTypeIntegrationTestTmpl : public T {
 ./google/cloud/spanner/internal/connection_impl_test.cc:2914:37   - Unknown word (BADDECAF)   -- { partition_token: "BADDECAF" }
 ./google/cloud/spanner/internal/connection_impl_test.cc:2916:25   - Unknown word (CAFEDEAD)   -- transaction: { id: "CAFEDEAD" }
 ./google/cloud/spanner/internal/connection_impl_test.cc:65:34     - Unknown word (Wmissing)   -- diagnostic ignored "-Wmissing-field-initializers"
@@ -1197,20 +1196,20 @@ Lines:
 ./google/cloud/storage/examples/storage_object_file_transfer_samples.cc:143:28    - Unknown word (mollit)        -- qui officia deserunt mollit anim id est laborum
 ./google/cloud/storage/examples/storage_object_file_transfer_samples.cc:143:47    - Unknown word (laborum)       -- deserunt mollit anim id est laborum.
 ./google/cloud/storage/examples/storage_object_samples.cc:546:56    - Unknown word (tmpfiles)   -- CreateRandomPrefixName(".tmpfiles");
-./google/cloud/storage/google_cloud_cpp_storage.bzl:93:27     - Unknown word (streambuf)  -- internal/object_read_streambuf.h",
+./google/cloud/storage/google_cloud_cpp_storage.bzl:95:27     - Unknown word (streambuf)  -- internal/object_read_streambuf.h",
 ./google/cloud/storage/hashing_options_test.cc:37:19     - Unknown word (Tcrto)      -- EXPECT_EQ("nhB9nTcrtoJr2B01QqQZ1g==", actual
 ./google/cloud/storage/hashing_options_test.cc:53:16     - Unknown word (IEBA)       -- EXPECT_EQ("ImIEBA==", actual);
-./google/cloud/storage/internal/async/connection_impl_test.cc:160:38    - Unknown word (fieldmask)  -- Pair("x-goog-fieldmask", "field1,field2"),
-./google/cloud/storage/internal/async/connection_impl_test.cc:162:52    - Unknown word (Fbuckets)   -- bucket=projects%2F_%2Fbuckets%2Ftest-bucket"),
-./google/cloud/storage/internal/async/connection_impl_test.cc:162:62    - Unknown word (Ftest)      -- projects%2F_%2Fbuckets%2Ftest-bucket"),
-./google/cloud/storage/internal/async/connection_impl_test.cc:510:40    - Unknown word (wopt)       -- grpc::WriteOptions wopt) {
+./google/cloud/storage/internal/async/connection_impl_test.cc:172:38    - Unknown word (fieldmask)  -- Pair("x-goog-fieldmask", "field1,field2"),
+./google/cloud/storage/internal/async/connection_impl_test.cc:174:52    - Unknown word (Fbuckets)   -- bucket=projects%2F_%2Fbuckets%2Ftest-bucket"),
+./google/cloud/storage/internal/async/connection_impl_test.cc:174:62    - Unknown word (Ftest)      -- projects%2F_%2Fbuckets%2Ftest-bucket"),
+./google/cloud/storage/internal/async/connection_impl_test.cc:960:40    - Unknown word (wopt)       -- grpc::WriteOptions wopt) {
 ./google/cloud/storage/internal/async/insert_object.cc:50:21     - Unknown word (Subcord)    -- auto next = data_.Subcord(0, n);
 ./google/cloud/storage/internal/async/writer_connection_buffered.cc:403:39    - Unknown word (unsatisified) -- call that returns an unsatisified future until the buffer
 ./google/cloud/storage/internal/bucket_acl_requests_test.cc:115:53    - Unknown word (testuser)   -- request("my-bucket", "user-testuser", "READER");
 ./google/cloud/storage/internal/connection_impl_test.cc:425:40    - Unknown word (Overcommit) -- yClientTest, UploadChunkHandleOvercommit) {
 ./google/cloud/storage/internal/grpc/bucket_request_parser.cc:89:6      - Unknown word (subobject)  -- // subobject.
 ./google/cloud/storage/internal/grpc/object_request_parser_test.cc:63:33     - Unknown word (Cuakt)      -- md5) : StEvo2V/qoDCuaktZSw3IQ==
-./google/cloud/storage/internal/grpc/stub.cc:427:10    - Unknown word (wopts)      -- auto wopts = grpc::WriteOptions
+./google/cloud/storage/internal/grpc/stub.cc:420:10    - Unknown word (wopts)      -- auto wopts = grpc::WriteOptions
 ./google/cloud/storage/internal/grpc/stub_test.cc:132:29    - Unknown word (testbench)  -- "from-testbench-env");
 ./google/cloud/storage/internal/object_requests_test.cc:257:61    - Unknown word (NEFCQ)      -- encryption-key: MTIzNEFCQ0Q="));
 ./google/cloud/storage/internal/object_requests_test.cc:277:61    - Unknown word (QUJDRD)     -- source-encryption-key: QUJDRDEyMzQ="));
@@ -1327,15 +1326,15 @@ Lines:
 ./protos/google/cloud/compute/v1/internal/common_003.proto:193:10    - Unknown word (bootable)   -- // for bootable images. Read Enabling
 ./protos/google/cloud/compute/v1/internal/common_003.proto:211:21    - Unknown word (NVME)       -- // either SCSI or NVME. For most machine types
 ./protos/google/cloud/compute/v1/internal/common_003.proto:319:68    - Unknown word (behaviour)  -- this is the default behaviour.
-./protos/google/cloud/compute/v1/internal/common_003.proto:451:61    - Unknown word (Haswell)    -- minCpuPlatform: "Intel Haswell" or
-./protos/google/cloud/compute/v1/internal/common_003.proto:465:19    - Unknown word (SUBNETWORK) -- // INHERIT_FROM_SUBNETWORK as default. Note that
-./protos/google/cloud/compute/v1/internal/common_003.proto:591:66    - Unknown word (VNIC)       -- interface. This may be gVNIC or
-./protos/google/cloud/compute/v1/internal/common_003.proto:592:6     - Unknown word (Virtio)     -- // VirtioNet.
-./protos/google/cloud/compute/v1/internal/common_003.proto:658:59    - Unknown word (Preemptible) -- standard instances. Preemptible instances
-./protos/google/cloud/compute/v1/internal/common_003.proto:684:27    - Unknown word (cpus)        -- optional int32 min_node_cpus = 4 [json_name = "minNodeCpus
-./protos/google/cloud/compute/v1/internal/common_003.proto:684:57    - Unknown word (Cpus)        -- json_name = "minNodeCpus"];
-./protos/google/cloud/compute/v1/internal/common_003.proto:693:43    - Unknown word (preemptible) -- behavior is MIGRATE. For preemptible instances, the default
-./protos/google/cloud/compute/v1/internal/common_003.proto:754:53    - Unknown word (Vtpm)        -- [json_name = "enableVtpm"];
+./protos/google/cloud/compute/v1/internal/common_003.proto:459:61    - Unknown word (Haswell)    -- minCpuPlatform: "Intel Haswell" or
+./protos/google/cloud/compute/v1/internal/common_003.proto:473:19    - Unknown word (SUBNETWORK) -- // INHERIT_FROM_SUBNETWORK as default. Note that
+./protos/google/cloud/compute/v1/internal/common_003.proto:599:66    - Unknown word (VNIC)       -- interface. This may be gVNIC or
+./protos/google/cloud/compute/v1/internal/common_003.proto:600:6     - Unknown word (Virtio)     -- // VirtioNet.
+./protos/google/cloud/compute/v1/internal/common_003.proto:666:59    - Unknown word (Preemptible) -- standard instances. Preemptible instances
+./protos/google/cloud/compute/v1/internal/common_003.proto:692:27    - Unknown word (cpus)        -- optional int32 min_node_cpus = 4 [json_name = "minNodeCpus
+./protos/google/cloud/compute/v1/internal/common_003.proto:692:57    - Unknown word (Cpus)        -- json_name = "minNodeCpus"];
+./protos/google/cloud/compute/v1/internal/common_003.proto:701:43    - Unknown word (preemptible) -- behavior is MIGRATE. For preemptible instances, the default
+./protos/google/cloud/compute/v1/internal/common_003.proto:762:53    - Unknown word (Vtpm)        -- [json_name = "enableVtpm"];
 ./protos/google/cloud/compute/v1/internal/common_003.proto:80:68     - Unknown word (createc)    -- default PTR record will be createc for
 ./protos/google/cloud/compute/v1/internal/common_004.proto:125:14    - Unknown word (LOADBALANCER) -- // `SHARED_LOADBALANCER_VIP` for an internal
 ./protos/google/cloud/compute/v1/internal/common_004.proto:167:42    - Unknown word (subnetwork's) -- it must be within the subnetwork's IP range. This field
@@ -1407,55 +1406,57 @@ Lines:
 ./protos/google/cloud/compute/v1/internal/common_056.proto:371:60    - Unknown word (GCE's)      -- maintenance operations. GCE's internal
 ./protos/google/cloud/compute/v1/internal/common_056.proto:393:10    - Unknown word (overcommit) -- // CPU overcommit.
 ./protos/google/cloud/compute/v1/internal/common_056.proto:394:10    - Unknown word (OVERCOMMIT) -- // CPU_OVERCOMMIT_TYPE_UNSPECIFIED:
-./protos/google/cloud/compute/v1/internal/common_060.proto:26:14     - Unknown word (instancegroups) -- // compute.instancegroups.addInstances/removeInstances
-./protos/google/cloud/compute/v1/internal/common_064.proto:124:31    - Unknown word (macsec)       -- optional InterconnectMacsec macsec = 28 [json_name = "macsec
-./protos/google/cloud/compute/v1/internal/common_064.proto:150:45    - Unknown word (UNPROVISIONED) -- this Interconnect. - OS_UNPROVISIONED: An Interconnect that
-./protos/google/cloud/compute/v1/internal/common_064.proto:209:20    - Unknown word (demarc)        -- // Customer-side demarc ID for this circuit
-./protos/google/cloud/compute/v1/internal/common_064.proto:210:64    - Unknown word (Demarc)        -- json_name = "customerDemarcId"];
-./protos/google/cloud/compute/v1/internal/common_064.proto:231:30    - Unknown word (LACP)          -- BUNDLE_AGGREGATION_TYPE_LACP: LACP is enabled.
-./protos/google/cloud/compute/v1/internal/common_064.proto:321:50    - Unknown word (lacp)          -- nectDiagnosticsLinkLACPStatus lacp_status = 4
-./protos/google/cloud/compute/v1/internal/common_064.proto:35:52     - Unknown word (MACSEC)     -- following values: - MACSEC If present then the
-./protos/google/cloud/compute/v1/internal/common_064.proto:469:18    - Unknown word (cleartext)     -- // fallback to cleartext traffic if the MKA session
-./protos/google/cloud/compute/v1/internal/common_064.proto:50:30     - Unknown word (crossconnect) -- authorized to request a crossconnect.
-./protos/google/cloud/compute/v1/internal/common_064.proto:565:15    - Unknown word (NSRC)          -- // value of NSRC_GOOGLE has been deprecated
-./protos/google/cloud/compute/v1/internal/common_065.proto:107:20    - Unknown word (Dataplane)    -- // [Output Only] Dataplane version for this Interconnect
-./protos/google/cloud/compute/v1/internal/common_065.proto:110:18    - Unknown word (dataplane)    -- optional int32 dataplane_version = 12 [json_name
-./protos/google/cloud/compute/v1/internal/common_065.proto:40:28     - Unknown word (Mbit)       -- values: - BPS_50M: 50 Mbit/s - BPS_100M: 100 Mbit
-./protos/google/cloud/compute/v1/internal/common_065.proto:568:68    - Unknown word (customise)    -- Attachment. Partners may customise
-./protos/google/cloud/compute/v1/internal/common_065.proto:94:13     - Unknown word (subinterface) -- // router subinterface for this interconnect
-./protos/google/cloud/compute/v1/internal/common_067.proto:77:6      - Unknown word (Ashburn)    -- // Ashburn-DC1).
-./protos/google/cloud/compute/v1/internal/common_067.proto:92:24     - Unknown word (peeringdb)  -- / [Output Only] The peeringdb identifier for this
-./protos/google/cloud/compute/v1/internal/common_067.proto:93:13     - Unknown word (netfac)     -- // with a netfac type in peeringdb).
-./protos/google/cloud/compute/v1/internal/common_075.proto:36:4      - Unknown word (loadbalancers) -- // loadbalancers.
-./protos/google/cloud/compute/v1/internal/common_082.proto:78:75     - Unknown word (RPCLB)      -- This must be a valid gRPCLB
-./protos/google/cloud/compute/v1/internal/common_086.proto:260:44    - Unknown word (Owasp)      -- id973337 identifies Owasp core rule set version
-./protos/google/cloud/compute/v1/internal/common_086.proto:260:6     - Unknown word (owasp)      -- // owasp-crs-v020901-id97333
-./protos/google/cloud/compute/v1/internal/common_087.proto:103:17    - Unknown word (RPKI)       -- // `INITIAL`: RPKI validation is complete
-./protos/google/cloud/compute/v1/internal/common_087.proto:24:69     - Unknown word (netblock)   -- aggregated IP prefix or netblock
-./protos/google/cloud/compute/v1/internal/common_087.proto:94:24     - Unknown word (prefixs)    -- public_delegated_prefixs = 9 [json_name = "publicDeleg
-./protos/google/cloud/compute/v1/internal/common_087.proto:94:65     - Unknown word (Prefixs)    -- name = "publicDelegatedPrefixs"];
-./protos/google/cloud/compute/v1/internal/common_088.proto:101:32    - Unknown word (deprovsioned) -- delegated prefix is being deprovsioned.
-./protos/google/cloud/compute/v1/internal/common_090.proto:127:6     - Unknown word (PREEMPTIBLE) -- // PREEMPTIBLE_CPUS:
-./protos/google/cloud/compute/v1/internal/common_090.proto:142:27    - Unknown word (PODSLICE)    -- PREEMPTIBLE_TPU_LITE_PODSLICE_V5:
-./protos/google/cloud/compute/v1/internal/common_090.proto:161:22    - Unknown word (CEVAL)       -- // SECURITY_POLICY_CEVAL_RULES:
-./protos/google/cloud/compute/v1/internal/common_090.proto:89:37     - Unknown word (MBPS)       -- NTERCONNECT_ATTACHMENTS_TOTAL_MBPS:
-./protos/google/cloud/compute/v1/internal/common_100.proto:27:33     - Unknown word (backwacd)   -- Flatten Policy to create a backwacd compatible wire-format
-./protos/google/cloud/compute/v1/internal/common_104.proto:483:53    - Unknown word (reffering)  -- set of output values reffering to the
-./protos/google/cloud/compute/v1/internal/common_104.proto:533:35    - Unknown word (schedueled) -- for disks where the schedueled operations are performed
-./protos/google/cloud/compute/v1/internal/common_105.proto:123:36    - Unknown word (readvertise) -- Cloud Router and will readvertise to one of its BGP peers
-./protos/google/cloud/compute/v1/internal/common_105.proto:231:32    - Unknown word (CONFED)      -- has traversed - 'AS_CONFED_SEQUENCE': ordered set
-./protos/google/cloud/compute/v1/internal/common_107.proto:134:63    - Unknown word (CAAP)       -- Adaptive Protection (CAAP).
-./protos/google/cloud/compute/v1/internal/common_107.proto:443:34    - Unknown word (sourceiplist) -- evaluatePreconfiguredExpr('sourceiplist-*')` require Cloud Armor
-./protos/google/cloud/compute/v1/internal/common_107.proto:504:23    - Unknown word (asns)         -- repeated uint32 src_asns = 4 [json_name = "srcAsns
-./protos/google/cloud/compute/v1/internal/common_107.proto:504:49    - Unknown word (Asns)         -- 4 [json_name = "srcAsns"];
-./protos/google/cloud/compute/v1/internal/common_107.proto:645:6     - Unknown word (ratelimit)    -- // ratelimit threshold/action is
-./protos/google/cloud/compute/v1/internal/common_107.proto:671:34    - Unknown word (ratelimiting) -- Threshold at which to begin ratelimiting.
-./protos/google/cloud/compute/v1/internal/common_109.proto:60:22     - Unknown word (mycompany)  -- // domain name: "p.mycompany.com.". Current max number
-./protos/google/cloud/compute/v1/internal/common_112.proto:44:56     - Unknown word (chargeback) -- chains, for example, for chargeback tracking. When
-./protos/google/cloud/compute/v1/internal/common_118.proto:190:49    - Unknown word (broadset)   -- profile. Allows the broadset set of clients, even
-./protos/google/cloud/compute/v1/internal/common_121.proto:82:30     - Unknown word (proxyless)  -- optional bool validate_for_proxyless = 10
-./protos/google/cloud/compute/v1/internal/common_132.proto:92:24     - Unknown word (vpntunnels) -- / using the compute.vpntunnels.insert method and associated
-./protos/google/cloud/compute/v1/internal/common_136.proto:133:42    - Unknown word (deallocated) -- Resources are being deallocated for the VPN tunnel.
+./protos/google/cloud/compute/v1/internal/common_060.proto:136:64    - Unknown word (storred)    -- describing it will be storred in the
+./protos/google/cloud/compute/v1/internal/common_061.proto:26:14     - Unknown word (instancegroups) -- // compute.instancegroups.addInstances/removeInstances
+./protos/google/cloud/compute/v1/internal/common_065.proto:124:31    - Unknown word (macsec)       -- optional InterconnectMacsec macsec = 28 [json_name = "macsec
+./protos/google/cloud/compute/v1/internal/common_065.proto:150:45    - Unknown word (UNPROVISIONED) -- this Interconnect. - OS_UNPROVISIONED: An Interconnect that
+./protos/google/cloud/compute/v1/internal/common_065.proto:209:20    - Unknown word (demarc)        -- // Customer-side demarc ID for this circuit
+./protos/google/cloud/compute/v1/internal/common_065.proto:210:64    - Unknown word (Demarc)        -- json_name = "customerDemarcId"];
+./protos/google/cloud/compute/v1/internal/common_065.proto:231:30    - Unknown word (LACP)          -- BUNDLE_AGGREGATION_TYPE_LACP: LACP is enabled.
+./protos/google/cloud/compute/v1/internal/common_065.proto:321:50    - Unknown word (lacp)          -- nectDiagnosticsLinkLACPStatus lacp_status = 4
+./protos/google/cloud/compute/v1/internal/common_065.proto:35:52     - Unknown word (MACSEC)     -- following values: - MACSEC If present then the
+./protos/google/cloud/compute/v1/internal/common_065.proto:469:18    - Unknown word (cleartext)     -- // fallback to cleartext traffic if the MKA session
+./protos/google/cloud/compute/v1/internal/common_065.proto:50:30     - Unknown word (crossconnect) -- authorized to request a crossconnect.
+./protos/google/cloud/compute/v1/internal/common_065.proto:565:15    - Unknown word (NSRC)          -- // value of NSRC_GOOGLE has been deprecated
+./protos/google/cloud/compute/v1/internal/common_066.proto:107:20    - Unknown word (Dataplane)    -- // [Output Only] Dataplane version for this Interconnect
+./protos/google/cloud/compute/v1/internal/common_066.proto:110:18    - Unknown word (dataplane)    -- optional int32 dataplane_version = 12 [json_name
+./protos/google/cloud/compute/v1/internal/common_066.proto:40:28     - Unknown word (Mbit)       -- values: - BPS_50M: 50 Mbit/s - BPS_100M: 100 Mbit
+./protos/google/cloud/compute/v1/internal/common_066.proto:568:68    - Unknown word (customise)    -- Attachment. Partners may customise
+./protos/google/cloud/compute/v1/internal/common_066.proto:94:13     - Unknown word (subinterface) -- // router subinterface for this interconnect
+./protos/google/cloud/compute/v1/internal/common_068.proto:77:6      - Unknown word (Ashburn)    -- // Ashburn-DC1).
+./protos/google/cloud/compute/v1/internal/common_068.proto:92:24     - Unknown word (peeringdb)  -- / [Output Only] The peeringdb identifier for this
+./protos/google/cloud/compute/v1/internal/common_068.proto:93:13     - Unknown word (netfac)     -- // with a netfac type in peeringdb).
+./protos/google/cloud/compute/v1/internal/common_076.proto:36:4      - Unknown word (loadbalancers) -- // loadbalancers.
+./protos/google/cloud/compute/v1/internal/common_083.proto:78:75     - Unknown word (RPCLB)      -- This must be a valid gRPCLB
+./protos/google/cloud/compute/v1/internal/common_087.proto:260:44    - Unknown word (Owasp)      -- id973337 identifies Owasp core rule set version
+./protos/google/cloud/compute/v1/internal/common_087.proto:260:6     - Unknown word (owasp)      -- // owasp-crs-v020901-id97333
+./protos/google/cloud/compute/v1/internal/common_088.proto:103:17    - Unknown word (RPKI)       -- // `INITIAL`: RPKI validation is complete
+./protos/google/cloud/compute/v1/internal/common_088.proto:24:69     - Unknown word (netblock)   -- aggregated IP prefix or netblock
+./protos/google/cloud/compute/v1/internal/common_088.proto:94:24     - Unknown word (prefixs)    -- public_delegated_prefixs = 9 [json_name = "publicDeleg
+./protos/google/cloud/compute/v1/internal/common_088.proto:94:65     - Unknown word (Prefixs)    -- name = "publicDelegatedPrefixs"];
+./protos/google/cloud/compute/v1/internal/common_089.proto:101:32    - Unknown word (deprovsioned) -- delegated prefix is being deprovsioned.
+./protos/google/cloud/compute/v1/internal/common_091.proto:130:6     - Unknown word (PREEMPTIBLE) -- // PREEMPTIBLE_CPUS:
+./protos/google/cloud/compute/v1/internal/common_091.proto:145:27    - Unknown word (PODSLICE)    -- PREEMPTIBLE_TPU_LITE_PODSLICE_V5:
+./protos/google/cloud/compute/v1/internal/common_091.proto:165:22    - Unknown word (CEVAL)       -- // SECURITY_POLICY_CEVAL_RULES:
+./protos/google/cloud/compute/v1/internal/common_091.proto:92:37     - Unknown word (MBPS)       -- NTERCONNECT_ATTACHMENTS_TOTAL_MBPS:
+./protos/google/cloud/compute/v1/internal/common_101.proto:27:33     - Unknown word (backwacd)   -- Flatten Policy to create a backwacd compatible wire-format
+./protos/google/cloud/compute/v1/internal/common_105.proto:483:53    - Unknown word (reffering)  -- set of output values reffering to the
+./protos/google/cloud/compute/v1/internal/common_105.proto:533:35    - Unknown word (schedueled) -- for disks where the schedueled operations are performed
+./protos/google/cloud/compute/v1/internal/common_106.proto:123:36    - Unknown word (readvertise) -- Cloud Router and will readvertise to one of its BGP peers
+./protos/google/cloud/compute/v1/internal/common_106.proto:231:32    - Unknown word (CONFED)      -- has traversed - 'AS_CONFED_SEQUENCE': ordered set
+./protos/google/cloud/compute/v1/internal/common_108.proto:134:63    - Unknown word (CAAP)       -- Adaptive Protection (CAAP).
+./protos/google/cloud/compute/v1/internal/common_108.proto:443:34    - Unknown word (sourceiplist) -- evaluatePreconfiguredExpr('sourceiplist-*')` require Cloud Armor
+./protos/google/cloud/compute/v1/internal/common_108.proto:504:23    - Unknown word (asns)         -- repeated uint32 src_asns = 4 [json_name = "srcAsns
+./protos/google/cloud/compute/v1/internal/common_108.proto:504:49    - Unknown word (Asns)         -- 4 [json_name = "srcAsns"];
+./protos/google/cloud/compute/v1/internal/common_108.proto:645:6     - Unknown word (ratelimit)    -- // ratelimit threshold/action is
+./protos/google/cloud/compute/v1/internal/common_108.proto:671:34    - Unknown word (ratelimiting) -- Threshold at which to begin ratelimiting.
+./protos/google/cloud/compute/v1/internal/common_110.proto:60:22     - Unknown word (mycompany)  -- // domain name: "p.mycompany.com.". Current max number
+./protos/google/cloud/compute/v1/internal/common_113.proto:44:56     - Unknown word (chargeback) -- chains, for example, for chargeback tracking. When
+./protos/google/cloud/compute/v1/internal/common_119.proto:190:49    - Unknown word (broadset)   -- profile. Allows the broadset set of clients, even
+./protos/google/cloud/compute/v1/internal/common_121.proto:85:14     - Unknown word (hyperdisk)  -- // type is hyperdisk-balanced.
+./protos/google/cloud/compute/v1/internal/common_124.proto:82:30     - Unknown word (proxyless)  -- optional bool validate_for_proxyless = 10
+./protos/google/cloud/compute/v1/internal/common_135.proto:92:24     - Unknown word (vpntunnels) -- / using the compute.vpntunnels.insert method and associated
+./protos/google/cloud/compute/v1/internal/common_139.proto:133:42    - Unknown word (deallocated) -- Resources are being deallocated for the VPN tunnel.
 ./release/README.md:210:29    - Unknown word (vckpkg)     -- Get to your clone of vckpkg
 ./release/README.md:261:28    - Unknown word (portfile)   -- ports/google-cloud-cpp/portfile.cmake`, use the generated
 ./release/howto-update-conan-package.md:119:30    - Unknown word (conandata)  -- google-cloud-cpp/2.x/conandata.yml

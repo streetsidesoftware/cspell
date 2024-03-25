@@ -3,17 +3,17 @@ Repository: RustPython/RustPython
 Url: "https://github.com/RustPython/RustPython.git"
 Args: ["**"]
 Lines:
- CSpell: Files checked: 598, Issues found: 2733 in 308 files.
+ CSpell: Files checked: 607, Issues found: 2821 in 315 files.
  exit code: 1
-./Cargo.toml:110:82    - Unknown word (termcolor)  -- features = ["atty", "termcolor"] }
-./Cargo.toml:152:62    - Unknown word (redoxer)    -- to compile/check with redoxer
-./Cargo.toml:155:37    - Unknown word (vcpkg)      -- Windows to build the vcpkg dependencies
-./Cargo.toml:16:44     - Unknown word (pylib)      -- derive", "jit", "vm", "pylib", "stdlib", "wasm/lib
-./Cargo.toml:60:119    - Unknown word (zerocopy)   -- "socket", "sched", "zerocopy", "dir", "hostname"
-./Cargo.toml:72:1      - Unknown word (rustyline)  -- rustyline = "13"
-./Cargo.toml:77:1      - Unknown word (thiserror)  -- thiserror = "1.0"
-./Cargo.toml:80:1      - Unknown word (widestring) -- widestring = "0.5.1"
-./Cargo.toml:87:49     - Unknown word (flamescope) -- flame-it", "flame", "flamescope"]
+./Cargo.toml:111:82    - Unknown word (termcolor)  -- features = ["atty", "termcolor"] }
+./Cargo.toml:153:62    - Unknown word (redoxer)    -- to compile/check with redoxer
+./Cargo.toml:156:37    - Unknown word (vcpkg)      -- Windows to build the vcpkg dependencies
+./Cargo.toml:16:61     - Unknown word (pylib)      -- , "vm/sre_engine", "pylib", "stdlib", "wasm/lib
+./Cargo.toml:61:119    - Unknown word (zerocopy)   -- "socket", "sched", "zerocopy", "dir", "hostname"
+./Cargo.toml:73:1      - Unknown word (rustyline)  -- rustyline = "13"
+./Cargo.toml:78:1      - Unknown word (thiserror)  -- thiserror = "1.0"
+./Cargo.toml:81:1      - Unknown word (widestring) -- widestring = "0.5.1"
+./Cargo.toml:88:49     - Unknown word (flamescope) -- flame-it", "flame", "flamescope"]
 ./DEVELOPMENT.md:113:5     - Unknown word (speedscope) -- The speedscope json format (default
 ./DEVELOPMENT.md:131:26    - Unknown word (subcrates)  -- src`: using the other subcrates to bring rustpython
 ./DEVELOPMENT.md:24:20     - Unknown word (rustup)     -- - If you have `rustup` on your system, enter
@@ -954,6 +954,27 @@ Lines:
 ./vm/src/vm/setting.rs:61:10     - Unknown word (Wfoo)       -- /// -Wfoo
 ./vm/src/vm/thread.rs:38:24     - Unknown word (intp)       -- let vm_owns_obj = |intp: NonNull<VirtualMachine
 ./vm/src/vm/vm_new.rs:173:28    - Unknown word (ternop)     -- pub fn new_unsupported_ternop_error(
+./vm/sre_engine/Cargo.toml:4:13      - Unknown word (Kangzhi)    -- authors = ["Kangzhi Shi <shikangzhi@gmail
+./vm/sre_engine/benches/benches.rs:51:86     - Unknown word (fastmap)    -- c9,'), # Disable the fastmap optimization
+./vm/sre_engine/src/constants.rs:31:5      - Unknown word (BIGCHARSET) -- BIGCHARSET = 10,
+./vm/sre_engine/src/constants.rs:32:5      - Unknown word (GROUPREF)   -- GROUPREF = 11,
+./vm/sre_engine/src/constants.rs:46:5      - Unknown word (SUBPATTERN) -- SUBPATTERN = 25,
+./vm/sre_engine/src/constants.rs:92:5      - Unknown word (LINEBREAK)  -- LINEBREAK = 6,
+./vm/sre_engine/src/engine.rs:1273:34   - Unknown word (blockcount) -- /* <BIGCHARSET> <blockcount> <256 blockindices>
+./vm/sre_engine/src/engine.rs:1273:51   - Unknown word (blockindices) -- BIGCHARSET> <blockcount> <256 blockindices> <blocks> */
+./vm/sre_engine/src/engine.rs:4:18      - Unknown word (linebreak)  -- is_digit, is_linebreak, is_loc_word, is_space
+./vm/sre_engine/src/engine.rs:539:45    - Unknown word (groupref)   -- macro_rules! general_op_groupref {
+./vm/sre_engine/src/engine.rs:552:37    - Unknown word (gctx)       -- let mut gctx = MatchContext {
+./vm/sre_engine/src/engine.rs:630:33    - Unknown word (atcode)     -- let atcode = SreAtCode::try_from
+./vm/sre_engine/src/engine.rs:645:33    - Unknown word (catcode)    -- let catcode = SreCatCode::try_from
+./vm/sre_engine/tests/tests.rs:107:31    - Unknown word (r'ababc)    -- pattern p = re.compile(r'ababc+')
+./vm/sre_engine/tests/tests.rs:111:38    - Unknown word (ababc)      -- mut state) = p.state("!ababc");
+./vm/sre_engine/tests/tests.rs:121:37    - Unknown word (pythonpython) -- mut state) = p.state("pythonpython");
+./vm/sre_engine/tests/tests.rs:141:37    - Unknown word (eeea)         -- mut state) = p.state("eeea");
+./vm/sre_engine/tests/tests.rs:179:16    - Unknown word (nonascii)     -- fn test_search_nonascii() {
+./vm/sre_engine/tests/tests.rs:46:9      - Unknown word (zerowidth)  -- fn test_zerowidth() {
+./vm/sre_engine/tests/tests.rs:64:37     - Unknown word (axxzaz)     -- mut state) = p.state("axxzaz");
+./vm/sre_engine/tests/tests.rs:89:37     - Unknown word (baaaa)      -- mut state) = p.state("baaaa");
 ./wasm/README.md:1:16      - Unknown word (webassembly) -- # Compiling to webassembly
 ./wasm/demo/package.json:33:21     - Unknown word (Liddle)     -- "author": "Ryan Liddle",
 ./wasm/demo/package.json:7:10      - Unknown word (codemirror) -- "codemirror": "^5.42.0",
