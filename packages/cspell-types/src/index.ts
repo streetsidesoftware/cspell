@@ -112,3 +112,4 @@ export type { ParsedText, Parser, ParseResult, ParserName, ParserOptions } from 
 export type { SuggestionCostMapDef, SuggestionCostsDefs } from './suggestionCostsDef.js';
 export type { MappedText } from './TextMap.js';
 export type { TextDocumentOffset, TextOffset } from './TextOffset.js';
+export { defineConfig } from "./defineConfig.js"
