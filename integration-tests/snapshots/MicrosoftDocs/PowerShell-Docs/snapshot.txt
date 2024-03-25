@@ -3,7 +3,7 @@ Repository: MicrosoftDocs/PowerShell-Docs
 Url: "https://github.com/MicrosoftDocs/PowerShell-Docs.git"
 Args: ["--config=../../../cspell-power-shell-docs.config.yaml","**"]
 Lines:
- CSpell: Files checked: 3133, Issues found: 6461 in 1474 files.
+ CSpell: Files checked: 3133, Issues found: 6467 in 1474 files.
  exit code: 1
 ./LICENSE:139:15    - Unknown word (sublicensable)   -- non-sublicensable, non-exclusive, irrevocable
 ./LICENSE:205:34    - Unknown word (waivable)        -- under any voluntary or waivable statutory or compulsory
@@ -104,7 +104,7 @@ Lines:
 ./reference/5.1/Microsoft.PowerShell.Core/About/about_Language_Modes.md:313:5     - Unknown word (wmiclass)              -- - `[wmiclass]`
 ./reference/5.1/Microsoft.PowerShell.Core/About/about_Language_Modes.md:314:5     - Unknown word (wmisearcher)           -- - `[wmisearcher]`
 ./reference/5.1/Microsoft.PowerShell.Core/About/about_Line_Editing.md:81:12     - Unknown word (Readline)   -- - [about_PSReadline](../../PSReadline/About
-./reference/5.1/Microsoft.PowerShell.Core/About/about_Modules.md:95:11     - Unknown word (autoloading) -- ## Module autoloading
+./reference/5.1/Microsoft.PowerShell.Core/About/about_Modules.md:107:11    - Unknown word (autoloading) -- ## Module autoloading
 ./reference/5.1/Microsoft.PowerShell.Core/About/about_Operator_Precedence.md:88:14     - Unknown word (coalese)    -- | `??` (null-coalese operator)
 ./reference/5.1/Microsoft.PowerShell.Core/About/about_Operators.md:130:28    - Unknown word (Nosuch)     -- example, `(Get-Item /Nosuch); $?` unexpectedly yields
 ./reference/5.1/Microsoft.PowerShell.Core/About/about_Operators.md:273:15    - Unknown word (executionpolicy) -- PS> $c = "get-executionpolicy"
@@ -327,7 +327,7 @@ Lines:
 ./reference/5.1/Microsoft.PowerShell.Utility/Export-PSSession.md:474:4     - Unknown word (epsn)       -- - `epsn`
 ./reference/5.1/Microsoft.PowerShell.Utility/Format-Wide.md:49:64     - Unknown word (pschildname) -- Format-Wide -Property pschildname -AutoSize
 ./reference/5.1/Microsoft.PowerShell.Utility/Get-Date.md:147:70    - Unknown word (Dayof)      -- is evaluated by the **DayofYear** property.
-./reference/5.1/Microsoft.PowerShell.Utility/Get-Date.md:307:53    - Unknown word (Hmmssffff)  -- format is `yyyyMMddTHHmmssffff` (case-sensitive, using
+./reference/5.1/Microsoft.PowerShell.Utility/Get-Date.md:333:53    - Unknown word (Hmmssffff)  -- format is `yyyyMMddTHHmmssffff` (case-sensitive, using
 ./reference/5.1/Microsoft.PowerShell.Utility/Get-FileHash.md:100:2     - Unknown word (pkgurl)     -- $pkgurl = 'https://github.com
 ./reference/5.1/Microsoft.PowerShell.Utility/Get-FormatData.md:107:15    - Unknown word (bitstransfer) -- Import-Module bitstransfer
 ./reference/5.1/Microsoft.PowerShell.Utility/Get-PSCallStack.md:56:26     - Unknown word (pscallstack) -- : PS C:\ps-test>get-pscallstack
@@ -481,7 +481,6 @@ Lines:
 ./reference/7.4/Microsoft.PowerShell.Core/About/about_Pipelines.md:432:24    - Unknown word (xzvf)       -- curl -s -L $uri | tar -xzvf - -C .
 ./reference/7.4/Microsoft.PowerShell.Core/Get-Command.md:463:22    - Unknown word (Damerau)    -- calculated using the Damerau Levenshtein Distance
 ./reference/7.4/Microsoft.PowerShell.Utility/Invoke-RestMethod.md:1527:38   - Unknown word (Brotli)     -- added support for the Brotli compression algorithm
-./reference/7.5/Microsoft.PowerShell.Core/About/about_Modules.md:37:57     - Unknown word (registerd)  -- is available from a registerd repository,
 ./reference/docs-conceptual/community/2020-updates.md:103:156   - Unknown word (fsackur)        -- compiled-cmdlets) (thanks @fsackur)
 ./reference/docs-conceptual/community/2020-updates.md:104:143   - Unknown word (joshduffney)    -- functions) (thanks @joshduffney)
 ./reference/docs-conceptual/community/2020-updates.md:124:3     - Unknown word (nickdevore)     -- | nickdevore |     1      |
@@ -768,13 +767,18 @@ Lines:
 ./reference/docs-conceptual/community/2023-updates.md:77:3      - Unknown word (darthwalsh)   -- | darthwalsh |     1      |
 ./reference/docs-conceptual/community/2023-updates.md:79:3      - Unknown word (tabad)        -- | tabad |
 ./reference/docs-conceptual/community/2023-updates.md:81:3      - Unknown word (radkedan)     -- | radkedan |            |
-./reference/docs-conceptual/community/2024-updates.md:35:3      - Unknown word (flcdrg)     -- | flcdrg |     1
-./reference/docs-conceptual/community/2024-updates.md:36:3      - Unknown word (holtkampjs) -- | holtkampjs |     1
-./reference/docs-conceptual/community/2024-updates.md:38:11     - Unknown word (Nurillaew)  -- | MuzaffarNurillaew |     1      |
-./reference/docs-conceptual/community/2024-updates.md:38:3      - Unknown word (Muzaffar)   -- | MuzaffarNurillaew |     1
-./reference/docs-conceptual/community/2024-updates.md:39:3      - Unknown word (ybeltrikov) -- | ybeltrikov |     1
-./reference/docs-conceptual/community/2024-updates.md:42:3      - Unknown word (deraeler)   -- | deraeler |
-./reference/docs-conceptual/community/2024-updates.md:45:3      - Unknown word (wwilliams)  -- | wwilliams69 |
+./reference/docs-conceptual/community/2024-updates.md:38:3      - Unknown word (Certezalito) -- | Certezalito |     1      |
+./reference/docs-conceptual/community/2024-updates.md:40:3      - Unknown word (chrisdent)   -- | chrisdent-de |     1      |
+./reference/docs-conceptual/community/2024-updates.md:41:3      - Unknown word (jborean)     -- | jborean93 |     1      |
+./reference/docs-conceptual/community/2024-updates.md:42:3      - Unknown word (brucificus)  -- | brucificus |     1      |
+./reference/docs-conceptual/community/2024-updates.md:43:4      - Unknown word (Plantefeve)  -- | XPlantefeve |     1      |
+./reference/docs-conceptual/community/2024-updates.md:67:3      - Unknown word (flcdrg)      -- | flcdrg |     1
+./reference/docs-conceptual/community/2024-updates.md:68:3      - Unknown word (holtkampjs)  -- | holtkampjs |     1
+./reference/docs-conceptual/community/2024-updates.md:70:11     - Unknown word (Nurillaew)   -- | MuzaffarNurillaew |     1      |
+./reference/docs-conceptual/community/2024-updates.md:70:3      - Unknown word (Muzaffar)    -- | MuzaffarNurillaew |     1
+./reference/docs-conceptual/community/2024-updates.md:71:3      - Unknown word (ybeltrikov)  -- | ybeltrikov |     1
+./reference/docs-conceptual/community/2024-updates.md:74:3      - Unknown word (deraeler)    -- | deraeler |
+./reference/docs-conceptual/community/2024-updates.md:77:3      - Unknown word (wwilliams)   -- | wwilliams69 |
 ./reference/docs-conceptual/community/community-update.yml:50:21     - Unknown word (Helmick's)  -- - text: Jason Helmick's - The Show
 ./reference/docs-conceptual/community/contributing/general-markdown.md:217:41    - Unknown word (friendlyname) -- use Markdown syntax `[friendlyname](url-or-path)`.
 ./reference/docs-conceptual/community/contributing/general-markdown.md:242:7     - Unknown word (redirectedfrom) -- - `?redirectedfrom=MSDN` - added to the
@@ -799,7 +803,7 @@ Lines:
 ./reference/docs-conceptual/community/hall-of-fame.md:35:3      - Unknown word (markekraus) -- | markekraus |      |
 ./reference/docs-conceptual/community/hall-of-fame.md:36:3      - Unknown word (purdo)      -- | purdo17 |      |
 ./reference/docs-conceptual/community/hall-of-fame.md:52:3      - Unknown word (jszabo)     -- | jszabo98 |      |
-./reference/docs-conceptual/community/hall-of-fame.md:55:3      - Unknown word (vexx)       -- | vexx32 |      |
+./reference/docs-conceptual/community/hall-of-fame.md:56:3      - Unknown word (vexx)       -- | vexx32 |      |
 ./reference/docs-conceptual/community/hall-of-fame.md:71:10     - Unknown word (Dardenne)   -- | LaurentDardenne |      |      |
 ./reference/docs-conceptual/dev-cross-plat/choosing-the-right-nuget-package.md:3:12      - Unknown word (rjmholt)    -- ms.custom: rjmholt
 ./reference/docs-conceptual/dev-cross-plat/create-cmdline-predictor.md:107:47    - Unknown word (cref)       -- name="context">The <see cref="PredictionContext"
@@ -1306,9 +1310,7 @@ Lines:
 ./reference/docs-conceptual/whats-new/What-s-New-in-PowerShell-74.md:91:3      - Unknown word (Webcmdlets)  -- - Webcmdlets add 308 to redirect
 ./reference/docs-conceptual/whats-new/What-s-New-in-PowerShell-74.md:99:26     - Unknown word (webcmdlets)  -- Fix using xml -Body in webcmdlets without an encoding
 ./reference/docs-conceptual/whats-new/What-s-New-in-PowerShell-75.md:41:12     - Unknown word (LNKLEO)     -- (Thanks @LNKLEO!)
-./reference/docs-conceptual/whats-new/What-s-New-in-PowerShell-75.md:53:4      - Unknown word (chrisdent)  -- @chrisdent-de!)
 ./reference/docs-conceptual/whats-new/What-s-New-in-PowerShell-75.md:63:83     - Unknown word (mawosoft)   -- 5][20745]) (Thanks @mawosoft!)
-./reference/docs-conceptual/whats-new/What-s-New-in-PowerShell-75.md:69:79     - Unknown word (jborean)    -- 5][20925]) (Thanks @jborean93!)
 ./reference/docs-conceptual/whats-new/What-s-New-in-PowerShell-75.md:85:29     - Unknown word (setuid)     -- unixmode` to handle `setuid` and `sticky` when file
 ./reference/docs-conceptual/whats-new/What-s-New-in-PowerShell-75.md:85:8      - Unknown word (unixmode)   -- - Fix `unixmode` to handle `setuid`
 ./reference/docs-conceptual/whats-new/What-s-New-in-PowerShell-75.md:92:81     - Unknown word (domsleee)   -- 2][20402]) (Thanks @domsleee!)

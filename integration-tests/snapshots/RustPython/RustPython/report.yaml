@@ -3,9 +3,9 @@ Repository: RustPython/RustPython
 Url: https://github.com/RustPython/RustPython.git
 Args: '["**"]'
 Summary:
-  files: 598
-  filesWithIssues: 308
-  issues: 2733
+  files: 607
+  filesWithIssues: 315
+  issues: 2821
   errors: 0
 Errors: []
 
@@ -35,15 +35,15 @@ issues:
   - "benches/microbenchmarks.rs:54:39        microbenchmark      U       panic!(\"Error running microbenchmark\")"
   - "benches/README.md:58:1          rustflags       U       rustflags = ["
   - "benches/test_benchmarks.py:19:18        nbody       U       ['benchmarks/nbody.py'],"
-  - "Cargo.toml:16:44        pylib           U       derive\", \"jit\", \"vm\", \"pylib\", \"stdlib\", \"wasm/lib"
-  - "Cargo.toml:60:119       zerocopy        U       \"socket\", \"sched\", \"zerocopy\", \"dir\", \"hostname\""
-  - "Cargo.toml:72:1         rustyline       U       rustyline = \"13\""
-  - "Cargo.toml:77:1         thiserror       U       thiserror = \"1.0\""
-  - "Cargo.toml:80:1         widestring      U       widestring = \"0.5.1\""
-  - "Cargo.toml:87:49        flamescope      U       flame-it\", \"flame\", \"flamescope\"]"
-  - "Cargo.toml:110:82       termcolor       U       features = [\"atty\", \"termcolor\"] }"
-  - "Cargo.toml:152:62       redoxer         U       to compile/check with redoxer"
-  - "Cargo.toml:155:37       vcpkg           U       Windows to build the vcpkg dependencies"
+  - "Cargo.toml:16:61        pylib           U       , \"vm/sre_engine\", \"pylib\", \"stdlib\", \"wasm/lib"
+  - "Cargo.toml:61:119       zerocopy        U       \"socket\", \"sched\", \"zerocopy\", \"dir\", \"hostname\""
+  - "Cargo.toml:73:1         rustyline       U       rustyline = \"13\""
+  - "Cargo.toml:78:1         thiserror       U       thiserror = \"1.0\""
+  - "Cargo.toml:81:1         widestring      U       widestring = \"0.5.1\""
+  - "Cargo.toml:88:49        flamescope      U       flame-it\", \"flame\", \"flamescope\"]"
+  - "Cargo.toml:111:82       termcolor       U       features = [\"atty\", \"termcolor\"] }"
+  - "Cargo.toml:153:62       redoxer         U       to compile/check with redoxer"
+  - "Cargo.toml:156:37       vcpkg           U       Windows to build the vcpkg dependencies"
   - "common/Cargo.toml:33:1          siphasher       U       siphasher = \"0.3\""
   - "common/src/boxvec.rs:1:8            unresizable         U       //! An unresizable vector backed by a"
   - "common/src/boxvec.rs:264:23         nonoverlapping      U       ptr::copy_nonoverlapping(other.as_ptr(), dst"
@@ -959,6 +959,27 @@ issues:
   - "vm/src/vm/setting.rs:61:10          Wfoo    U       /// -Wfoo"
   - "vm/src/vm/thread.rs:38:24       intp    U       let vm_owns_obj = |intp: NonNull<VirtualMachine"
   - "vm/src/vm/vm_new.rs:173:28      ternop      U       pub fn new_unsupported_ternop_error("
+  - "vm/sre_engine/benches/benches.rs:51:86          fastmap     U       c9,'), # Disable the fastmap optimization"
+  - "vm/sre_engine/Cargo.toml:4:13           Kangzhi     U       authors = [\"Kangzhi Shi <shikangzhi@gmail"
+  - "vm/sre_engine/src/constants.rs:31:5         BIGCHARSET      U       BIGCHARSET = 10,"
+  - "vm/sre_engine/src/constants.rs:32:5         GROUPREF        U       GROUPREF = 11,"
+  - "vm/sre_engine/src/constants.rs:46:5         SUBPATTERN      U       SUBPATTERN = 25,"
+  - "vm/sre_engine/src/constants.rs:92:5         LINEBREAK       U       LINEBREAK = 6,"
+  - "vm/sre_engine/src/engine.rs:4:18        linebreak       U       is_digit, is_linebreak, is_loc_word, is_space"
+  - "vm/sre_engine/src/engine.rs:539:45      groupref        U       macro_rules! general_op_groupref {"
+  - "vm/sre_engine/src/engine.rs:552:37      gctx            U       let mut gctx = MatchContext {"
+  - "vm/sre_engine/src/engine.rs:630:33      atcode          U       let atcode = SreAtCode::try_from"
+  - "vm/sre_engine/src/engine.rs:645:33      catcode         U       let catcode = SreCatCode::try_from"
+  - "vm/sre_engine/src/engine.rs:1273:34     blockcount      U       /* <BIGCHARSET> <blockcount> <256 blockindices>"
+  - "vm/sre_engine/src/engine.rs:1273:51     blockindices    U       BIGCHARSET> <blockcount> <256 blockindices> <blocks> */"
+  - "vm/sre_engine/tests/tests.rs:46:9           zerowidth       U       fn test_zerowidth() {"
+  - "vm/sre_engine/tests/tests.rs:64:37          axxzaz          U       mut state) = p.state(\"axxzaz\");"
+  - "vm/sre_engine/tests/tests.rs:89:37          baaaa           U       mut state) = p.state(\"baaaa\");"
+  - "vm/sre_engine/tests/tests.rs:107:31         r'ababc         U       pattern p = re.compile(r'ababc+')"
+  - "vm/sre_engine/tests/tests.rs:111:38         ababc           U       mut state) = p.state(\"!ababc\");"
+  - "vm/sre_engine/tests/tests.rs:121:37         pythonpython    U       mut state) = p.state(\"pythonpython\");"
+  - "vm/sre_engine/tests/tests.rs:141:37         eeea            U       mut state) = p.state(\"eeea\");"
+  - "vm/sre_engine/tests/tests.rs:179:16         nonascii        U       fn test_search_nonascii() {"
   - "wasm/demo/package.json:7:10         codemirror      U       \"codemirror\": \"^5.42.0\","
   - "wasm/demo/package.json:33:21        Liddle          U       \"author\": \"Ryan Liddle\","
   - "wasm/demo/snippets/asyncbrowser.py:2:8          asyncweb    U       import asyncweb"

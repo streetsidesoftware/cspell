@@ -3,9 +3,9 @@ Repository: wireapp/wire-webapp
 Url: https://github.com/wireapp/wire-webapp.git
 Args: '["src/script/**/*.{js,ts,tsx,md}"]'
 Summary:
-  files: 1151
-  filesWithIssues: 626
-  issues: 2733
+  files: 1154
+  filesWithIssues: 625
+  issues: 2736
   errors: 0
 Errors: []
 
@@ -184,6 +184,8 @@ issues:
   - "src/script/components/Giphy/Giphy.tsx:34:7          GIPHY       U       const GIPHY_CLOSE_TIMEOUT = 350"
   - "src/script/components/Giphy/Giphy.tsx:55:10         gifs        U       const [gifs, setGifs] = useState"
   - "src/script/components/Giphy/Giphy.tsx:190:40        giphs       U       data-uie-name=\"do-open-giphs\""
+  - "src/script/components/Image/Image.tsx:72:11         Unmouted    U       const isUnmouted = useRef(false);"
+  - "src/script/components/Image/Image.tsx:90:55         umounted    U       a component that is umounted"
   - "src/script/components/InputBar/components/InputBarControls/ControlButtons.test.tsx:48:14        Filesharing     U       [{disableFilesharing: true}, ['tooltipConversation"
   - "src/script/components/InputBar/components/PastedFileControls.tsx:62:50          noninteractive      U       next-line jsx-a11y/no-noninteractive-tabindex */}"
   - "src/script/components/InputBar/components/TypingIndicator/TypingIndicator.styles.ts:71:18       Frams       U       const editIconKeyFrams = keyframes({"
@@ -192,7 +194,6 @@ issues:
   - "src/script/components/MessagesList/Message/CallMessage.test.tsx:68:33       incompleted     U       red hangup icon for incompleted calls', async () =>"
   - "src/script/components/MessagesList/Message/ContentMessage/asset/AudioAsset.tsx:140:55       seekbar     U       uie-name=\"status-audio-seekbar\""
   - "src/script/components/MessagesList/Message/ContentMessage/asset/FileAssetComponent.tsx:132:40       nocase      U       li className=\"label-nocase-xs\" data-uie-name=\"file"
-  - "src/script/components/MessagesList/Message/ContentMessage/asset/ImageAsset/ImageAsset.tsx:79:55         umounted    U       a component that is umounted"
   - "src/script/components/MessagesList/Message/ContentMessage/asset/LinkPreviewAssetComponent.tsx:78:50         singleline      U       info-title-${header ? 'singleline' : 'multiline'}`,"
   - "src/script/components/MessagesList/Message/ContentMessage/asset/TextMessageRenderer/TextMessageRenderer.test.tsx:39:66          correcly    U       event of mention message correcly', () => {"
   - "src/script/components/MessagesList/Message/ContentMessage/asset/TextMessageRenderer/TextMessageRenderer.test.tsx:41:54          buttton     U       message-mention\" role=\"buttton\" data-uie-name=\"label"
@@ -269,7 +270,7 @@ issues:
   - "src/script/conversation/ConversationRepository.ts:2097:16       inccessible         U       for (const inccessibleConversation of not_found"
   - "src/script/conversation/ConversationRepository.ts:2498:32       corecrypto          U       MLS conversation in corecrypto and deletes the conversation"
   - "src/script/conversation/ConversationRepository.ts:2631:117      ciphersuite         U       new fields (groupId, ciphersuite, epoch and new protocol"
-  - "src/script/conversation/ConversationRepository.ts:3748:14       Unarchived          U       const wasUnarchived = previouslyArchived"
+  - "src/script/conversation/ConversationRepository.ts:3757:14       Unarchived          U       const wasUnarchived = previouslyArchived"
   - "src/script/conversation/ConversationState.test.ts:37:29         groupid     U       conversation.groupId = `groupid-${randomUUID()}`;"
   - "src/script/conversation/EventMapper.test.ts:115:27      ugpawm      U       token: 'aV0TGxF3ugpawm3wAYPmew==',"
   - "src/script/conversation/EventMapper.test.ts:115:37      Pmew        U       'aV0TGxF3ugpawm3wAYPmew==',"
