@@ -166,6 +166,7 @@ const settings: AdvancedCSpellSettings = {
         '@cspell/dict-software-terms/cspell-ext.json',
         '@cspell/dict-svelte/cspell-ext.json',
         '@cspell/dict-swift/cspell-ext.json',
+        '@cspell/dict-terraform/cspell-ext.json',
         '@cspell/dict-typescript/cspell-ext.json',
         '@cspell/dict-vue/cspell-ext.json',
     ],
