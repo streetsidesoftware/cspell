@@ -1,5 +1,6 @@
 import { writeFile } from 'node:fs/promises';
 
+import {} from 'glob';
 import { describe, expect, test, vi } from 'vitest';
 
 import { configFileHeader, processCompileAction } from './compile.js';
@@ -8,6 +9,8 @@ import { configFileSchemaURL } from './config/config.js';
 vi.mock('node:fs/promises', () => ({
     writeFile: vi.fn().mockImplementation(() => Promise.resolve(undefined)),
 }));
+
+vi.mock('glob', () => ({}));
 
 const mockWriteFile = vi.mocked(writeFile);
 
