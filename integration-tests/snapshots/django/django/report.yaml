@@ -5,7 +5,7 @@ Args: '["**/*.{md,py}"]'
 Summary:
   files: 2778
   filesWithIssues: 932
-  issues: 8249
+  issues: 8250
   errors: 0
 Errors: []
 
@@ -1421,10 +1421,10 @@ issues:
   - "tests/auth_tests/test_forms.py:848:38       contenir            U       Votre mot de passe doit contenir au minimum 12 caract"
   - "tests/auth_tests/test_forms.py:848:61       caractères          U       contenir au minimum 12 caractères.\","
   - "tests/auth_tests/test_forms.py:925:31       oldpassword         U       user.set_password(\" oldpassword \")"
-  - "tests/auth_tests/test_forms.py:1131:51      ıxample             U       user(\"mike456\", \"mike@ıxample.org\", \"test123\")"
-  - "tests/auth_tests/test_forms.py:1342:37      Pucb                U       pbkdf2_sha256$100000$a6Pucb1qSFcD$WmCkn9Hqidj48NVe"
-  - "tests/auth_tests/test_forms.py:1364:45      labelable           U       it doesn't have any labelable elements."
-  - "tests/auth_tests/test_forms.py:1495:28      complexpassword     U       {\"password1\": \"complexpassword\", \"password2\": \"complexpasswo"
+  - "tests/auth_tests/test_forms.py:1139:51      ıxample             U       user(\"mike456\", \"mike@ıxample.org\", \"test123\")"
+  - "tests/auth_tests/test_forms.py:1350:37      Pucb                U       pbkdf2_sha256$100000$a6Pucb1qSFcD$WmCkn9Hqidj48NVe"
+  - "tests/auth_tests/test_forms.py:1375:45      labelable           U       it doesn't have any labelable elements."
+  - "tests/auth_tests/test_forms.py:1506:28      complexpassword     U       {\"password1\": \"complexpassword\", \"password2\": \"complexpasswo"
   - "tests/auth_tests/test_hashers.py:50:34          lètmein         U       encoded = make_password(\"lètmein\")"
   - "tests/auth_tests/test_hashers.py:54:42          lètmeinz        U       assertFalse(check_password(\"lètmeinz\", encoded))"
   - "tests/auth_tests/test_hashers.py:183:38         letmein         U       encoded = make_password(\"letmein\", hasher=\"bcrypt\")"
@@ -2549,7 +2549,8 @@ issues:
   - "tests/schema/tests.py:2363:29       looooooong          U       field_with_very_looooooong_name = PositiveIntegerField"
   - "tests/schema/tests.py:2416:22       tagm                U       columns[\"tagm2mtest_id\"][0],"
   - "tests/schema/tests.py:2695:50       uniquetest          U       remote_field.through, \"uniquetest_id\", \"schema_uniquetest"
-  - "tests/schema/tests.py:5164:27       dtob                U       self.assertNotIn(\"dtob_auto_now\", columns)"
+  - "tests/schema/tests.py:3658:37       Celine              U       objects.create(name=\"Celine\", height=None, weight"
+  - "tests/schema/tests.py:5196:27       dtob                U       self.assertNotIn(\"dtob_auto_now\", columns)"
   - "tests/select_for_update/tests.py:43:48          Liberchies      U       objects.create(name=\"Liberchies\", country=self.country"
   - "tests/select_for_update/tests.py:44:48          Samois          U       objects.create(name=\"Samois-sur-Seine\", country"
   - "tests/select_for_update/tests.py:157:44         eucountry       U       ['select_for_update_eucountry\".\"country_ptr_id']"

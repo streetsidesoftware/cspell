@@ -5,7 +5,7 @@ Args: '["**"]'
 Summary:
   files: 607
   filesWithIssues: 315
-  issues: 2821
+  issues: 2820
   errors: 0
 Errors: []
 
@@ -611,10 +611,10 @@ issues:
   - "stdlib/src/termios.rs:150:47        VSWTCH              U       target::{VSWTC, VSWTC as VSWTCH};"
   - "stdlib/src/termios.rs:171:13        noncanon            U       let noncanon = (termios.c_lflag"
   - "vm/build.rs:38:10       sysvars     U       \"sysvars! {{ {} }}\","
-  - "vm/Cargo.toml:47:43         wasmbind        U       true, features = [\"wasmbind\"] }"
-  - "vm/Cargo.toml:70:1          caseless        U       caseless = \"0.2.1\""
-  - "vm/Cargo.toml:71:1          getrandom       U       getrandom = { version = \"0.2."
-  - "vm/Cargo.toml:75:1          memoffset       U       memoffset = \"0.6.5\""
+  - "vm/Cargo.toml:48:43         wasmbind        U       true, features = [\"wasmbind\"] }"
+  - "vm/Cargo.toml:71:1          caseless        U       caseless = \"0.2.1\""
+  - "vm/Cargo.toml:72:1          getrandom       U       getrandom = { version = \"0.2."
+  - "vm/Cargo.toml:76:1          memoffset       U       memoffset = \"0.6.5\""
   - "vm/Lib/python_builtins/__reducelib.py:50:17         slotnames       U       names = slotnames(cls) # not checking"
   - "vm/Lib/python_builtins/__reducelib.py:65:5          listitems       U       listitems = iter(obj) if isinstance"
   - "vm/src/anystr.rs:189:9          splitw              U       splitw: SW,"
@@ -880,21 +880,21 @@ issues:
   - "vm/src/stdlib/signal.rs:81:24       SIGSTKFLT       U       use libc::{SIGPWR, SIGSTKFLT};"
   - "vm/src/stdlib/signal.rs:112:9       signalnum       U       signalnum: i32,"
   - "vm/src/stdlib/signal.rs:264:17      sigbyte         U       let sigbyte = signum as u8;"
-  - "vm/src/stdlib/sre.rs:30:57          CODESIZE        U       SRE_MAGIC as MAGIC, CODESIZE, MAXGROUPS, MAXREPEAT"
-  - "vm/src/stdlib/sre.rs:30:67          MAXGROUPS       U       as MAGIC, CODESIZE, MAXGROUPS, MAXREPEAT};"
-  - "vm/src/stdlib/sre.rs:30:78          MAXREPEAT       U       CODESIZE, MAXGROUPS, MAXREPEAT};"
+  - "vm/src/stdlib/sre.rs:30:37          CODESIZE        U       rustpython_sre_engine::{CODESIZE, MAXGROUPS, MAXREPEAT"
+  - "vm/src/stdlib/sre.rs:30:47          MAXGROUPS       U       sre_engine::{CODESIZE, MAXGROUPS, MAXREPEAT, SRE_MAGIC"
+  - "vm/src/stdlib/sre.rs:30:58          MAXREPEAT       U       CODESIZE, MAXGROUPS, MAXREPEAT, SRE_MAGIC as MAGIC"
   - "vm/src/stdlib/sre.rs:33:8           getcodesize     U       fn getcodesize() -> usize {"
   - "vm/src/stdlib/sre.rs:37:14          iscased         U       fn ascii_iscased(ch: i32) -> bool {"
   - "vm/src/stdlib/sre.rs:84:9           groupindex      U       groupindex: PyDictRef,"
   - "vm/src/stdlib/sre.rs:85:9           indexgroup      U       indexgroup: PyObjectRef,"
   - "vm/src/stdlib/sre.rs:91:12          isbytes         U       // isbytes will be hanging (-1"
-  - "vm/src/stdlib/sre.rs:174:12         pymatch         U       fn pymatch("
-  - "vm/src/stdlib/sre.rs:236:25         matchlist       U       let mut matchlist: Vec<PyObjectRef> ="
-  - "vm/src/stdlib/sre.rs:295:19         subx            U       Self::subx(zelf, sub_args, false"
-  - "vm/src/stdlib/sre.rs:311:25         splitlist       U       let mut splitlist: Vec<PyObjectRef> ="
-  - "vm/src/stdlib/sre.rs:525:9          lastindex       U       lastindex: isize,"
-  - "vm/src/stdlib/sre.rs:576:12         lastgroup       U       fn lastgroup(&self) -> Option<PyStrRef"
-  - "vm/src/stdlib/sre.rs:686:12         groupdict       U       fn groupdict("
+  - "vm/src/stdlib/sre.rs:226:12         pymatch         U       fn pymatch("
+  - "vm/src/stdlib/sre.rs:285:25         matchlist       U       let mut matchlist: Vec<PyObjectRef> ="
+  - "vm/src/stdlib/sre.rs:344:19         subx            U       Self::subx(zelf, sub_args, false"
+  - "vm/src/stdlib/sre.rs:360:25         splitlist       U       let mut splitlist: Vec<PyObjectRef> ="
+  - "vm/src/stdlib/sre.rs:592:9          lastindex       U       lastindex: isize,"
+  - "vm/src/stdlib/sre.rs:641:12         lastgroup       U       fn lastgroup(&self) -> Option<PyStrRef"
+  - "vm/src/stdlib/sre.rs:751:12         groupdict       U       fn groupdict("
   - "vm/src/stdlib/sys.rs:3:70           MULTIARCH               U       module_def, DOC, MAXSIZE, MULTIARCH};"
   - "vm/src/stdlib/sys.rs:30:81          multiarch               U       TODO: copy CPython's multiarch exactly,"
   - "vm/src/stdlib/sys.rs:34:34          debugbuild              U       name = \"_rustpython_debugbuild\")]"
