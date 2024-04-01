@@ -3,7 +3,7 @@ Repository: Azure/azure-rest-api-specs
 Url: "https://github.com/Azure/azure-rest-api-specs.git"
 Args: ["--config=cSpell.json","**/*.{md,ts,js}"]
 Lines:
- CSpell: Files checked: 2314, Issues found: 2827 in 859 files.
+ CSpell: Files checked: 2320, Issues found: 2840 in 862 files.
  exit code: 1
 ./CONTRIBUTING.md:24:6      - Unknown word (tocstop)    -- <!-- tocstop -->
 ./CONTRIBUTING.md:79:3      - Unknown word (Poli)       -- - PoliCheck -
@@ -28,12 +28,12 @@ Lines:
 ./documentation/api-scenario/how-to/ResolveDependencies.md:246:22    - Unknown word (ipconfigmy) -- "name": "ipconfigmyVM",
 ./documentation/api-scenario/references/ApiScenarioDefinition.md:278:29    - Unknown word (somedomain) -- value: $(serviceName).somedomain.com
 ./documentation/api-scenario/references/ErrorCodeReference.md:32:31     - Unknown word (blobnfs)    -- "namespacePath":"/blobnfs"
-./documentation/ci-fix.md:138:215   - Unknown word (guldance)             -- github comment with guldance on how to fix.
+./documentation/ci-fix.md:129:22    - Unknown word (brch)                 -- See [aka.ms/azsdk/pr-brch-deep](https://aka.ms
 ./documentation/ci-fix.md:16:16     - Unknown word (unkown)     -- - [`Record<unkown>` causes `AvoidAdditionalProp
-./documentation/ci-fix.md:207:119   - Unknown word (tspconfig)            -- types: true` to your `tspconfig.yaml`.
-./documentation/ci-fix.md:275:241   - Unknown word (languges)             -- APIViews for other SDK languges are generated in their
-./documentation/ci-fix.md:275:34    - Unknown word (languge)              -- nvestigate the CI job for the languge with error. TypeSpec
-./documentation/ci-fix.md:293:62    - Unknown word (specreview)           -- aka.ms/azsdk/support/specreview-channel].
+./documentation/ci-fix.md:198:119   - Unknown word (tspconfig)            -- types: true` to your `tspconfig.yaml`.
+./documentation/ci-fix.md:266:241   - Unknown word (languges)             -- APIViews for other SDK languges are generated in their
+./documentation/ci-fix.md:266:34    - Unknown word (languge)              -- nvestigate the CI job for the languge with error. TypeSpec
+./documentation/ci-fix.md:284:62    - Unknown word (specreview)           -- aka.ms/azsdk/support/specreview-channel].
 ./documentation/ci-fix.md:41:28     - Unknown word (azsdk)      -- more help, see [aka.ms/azsdk/pr-getting-help] and
 ./documentation/ci-fix.md:64:14     - Unknown word (flac)       -- "flac",
 ./documentation/ci-fix.md:65:14     - Unknown word (mpga)       -- "mpga"
@@ -78,8 +78,8 @@ Lines:
 ./documentation/typespec-structure-guidelines.md:46:7      - Unknown word (confidentialledger) -- -> confidentialledger
 ./documentation/x-ms-examples.md:105:29    - Unknown word (testrg)     -- resourceGroupName": "testrg123",
 ./documentation/x-ms-examples.md:106:30    - Unknown word (testacc)    -- storageAccountName": "testacc6141",
-./eng/tools/typespec-validation/src/index.ts:21:54     - Unknown word (Positionals) -- args, options, allowPositionals: true } as ParseArgsConfig
-./eng/tools/typespec-validation/src/index.ts:22:29     - Unknown word (positionals) -- folder = parsedArgs.positionals[0];
+./eng/tools/typespec-validation/src/index.ts:20:54     - Unknown word (Positionals) -- args, options, allowPositionals: true } as ParseArgsConfig
+./eng/tools/typespec-validation/src/index.ts:21:29     - Unknown word (positionals) -- folder = parsedArgs.positionals[0];
 ./eng/tools/typespec-validation/src/rules/folder-structure.ts:13:70     - Unknown word (revparse)   -- gitOperation(folder).revparse("--show-toplevel"))
 ./eng/tools/typespec-validation/test/folder-structure.test.ts:23:16     - Unknown word (gitroot)    -- return "/gitroot";
 ./profiles/ResourceSchemas.md:11:5      - Unknown word (azureresourceschema) -- azureresourceschema:
@@ -144,8 +144,8 @@ Lines:
 ./specification/azurelargeinstance/resource-manager/readme.az.md:9:17      - Unknown word (azurelargeinstance) -- extensions: azurelargeinstance
 ./specification/azurelargeinstance/resource-manager/readme.typescript.md:10:29     - Unknown word (largeinstance) -- package-name: "@azure/arm-largeinstance"
 ./specification/azurestackhci/resource-manager/readme.az.md:8:27      - Unknown word (azurestackhci) -- namespace: azure.mgmt.azurestackhci
-./specification/azurestackhci/resource-manager/readme.md:458:14    - Unknown word (sdkauto)    -- - node sdkauto_afterscript.js azurestackhci
-./specification/azurestackhci/resource-manager/readme.md:458:22    - Unknown word (afterscript) -- - node sdkauto_afterscript.js azurestackhci/resource
+./specification/azurestackhci/resource-manager/readme.md:486:14    - Unknown word (sdkauto)    -- - node sdkauto_afterscript.js azurestackhci
+./specification/azurestackhci/resource-manager/readme.md:486:22    - Unknown word (afterscript) -- - node sdkauto_afterscript.js azurestackhci/resource
 ./specification/batch/resource-manager/readme.go.md:15:40     - Unknown word (armbatch)   -- resourcemanager/batch/armbatch
 ./specification/billing/resource-manager/readme.az.md:88:27     - Unknown word (connot)     -- # the three get API connot auto group for not
 ./specification/billing/resource-manager/readme.go.md:15:42     - Unknown word (armbilling) -- resourcemanager/billing/armbilling
@@ -431,6 +431,7 @@ Lines:
 ./specification/purview/data-plane/readme.md:56:64     - Unknown word (purviewcatalog) -- preview/2023-02-01-preview/purviewcatalog.json
 ./specification/purview/data-plane/readme.python.md:23:22     - Unknown word (truefr)     -- clear-output-folder: truefr
 ./specification/purview/resource-manager/readme.go.md:14:42     - Unknown word (armpurview) -- resourcemanager/purview/armpurview
+./specification/quantum/Quantum.Workspace/CONTRIBUTING.md:14:99     - Unknown word (reqs)       -- installation) and its pre-reqs.
 ./specification/quantum/resource-manager/readme.go.md:14:42     - Unknown word (armquantum) -- resourcemanager/quantum/armquantum
 ./specification/quota/resource-manager/readme.go.md:14:40     - Unknown word (armquota)   -- resourcemanager/quota/armquota
 ./specification/quota/resource-manager/readme.md:39:48     - Unknown word (groupquota) -- preview/2023-06-01-preview/groupquota.json

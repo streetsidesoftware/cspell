@@ -3,12 +3,14 @@ Repository: caddyserver/caddy
 Url: "https://github.com/caddyserver/caddy.git"
 Args: ["**/*.go"]
 Lines:
- CSpell: Files checked: 267, Issues found: 3930 in 248 files.
+ CSpell: Files checked: 267, Issues found: 3935 in 248 files.
  exit code: 1
 ./admin.go:1357:21   - Unknown word (pidfile)     -- // PIDFile writes a pidfile to the file at filename
 ./admin.go:331:29    - Unknown word (infosec)     -- security checks, the infosec community assures me
-./admin.go:43:14     - Unknown word (caddyserver) -- "github.com/caddyserver/certmagic"
-./admin.go:43:26     - Unknown word (certmagic)   -- github.com/caddyserver/certmagic"
+./admin.go:42:14     - Unknown word (caddyserver) -- "github.com/caddyserver/certmagic"
+./admin.go:42:26     - Unknown word (certmagic)   -- github.com/caddyserver/certmagic"
+./admin.go:43:14     - Unknown word (cespare)     -- "github.com/cespare/xxhash/v2"
+./admin.go:43:22     - Unknown word (xxhash)      -- "github.com/cespare/xxhash/v2"
 ./admin.go:457:24    - Unknown word (loggable)    -- zap.Array("origins", loggableURLArray(handler.allowedOrigin
 ./admin.go:474:16    - Unknown word (caddytls)    -- // import the caddytls package -- but it works
 ./admin.go:477:33    - Unknown word (zerossl)     -- RawMessage(`{"module": "zerossl"}`),
@@ -105,8 +107,8 @@ Lines:
 ./caddytest/integration/caddyfile_test.go:150:43    - Unknown word (someinvalidprefix) -- unsupported URL scheme someinvalidprefix://",
 ./caddytest/integration/caddyfile_test.go:513:12    - Unknown word (changethis)        -- uri query changethis>changed
 ./caddytest/integration/caddyfile_test.go:517:145   - Unknown word (Dvalue)            -- foo=bar0&foo=bar&key%3Dvalue=example&taz=test")
-./caddytest/integration/caddyfile_test.go:728:10    - Unknown word (internalerr)       -- error /internalerr* "Internal Server Error
-./caddytest/integration/caddyfile_test.go:751:10    - Unknown word (threehundred)      -- error /threehundred* "Moved Permanently
+./caddytest/integration/caddyfile_test.go:747:10    - Unknown word (internalerr)       -- error /internalerr* "Internal Server Error
+./caddytest/integration/caddyfile_test.go:770:10    - Unknown word (threehundred)      -- error /threehundred* "Moved Permanently
 ./caddytest/integration/caddyfile_test.go:78:11     - Unknown word (clientname) -- Name: "clientname",
 ./caddytest/integration/leafcertloaders_test.go:47:28     - Unknown word (leafcert)   -- "files": ["../leafcert.pem"]
 ./caddytest/integration/stream_test.go:155:3     - Unknown word (rstring)    -- rstring, err := httputil.DumpRequest
@@ -157,7 +159,7 @@ Lines:
 ./modules/caddyevents/eventsconfig/caddyfile.go:15:12     - Unknown word (eventsconfig) -- // Package eventsconfig is for configuring caddyevent
 ./modules/caddyfs/filesystem.go:105:3     - Unknown word (fsys)       -- fsys, ok := unm.(fs.FS)
 ./modules/caddyfs/filesystem.go:1:9       - Unknown word (caddyfs)    -- package caddyfs
-./modules/caddyhttp/app.go:526:5     - Unknown word (hrough)     -- // hrough a reload; because if
+./modules/caddyhttp/app.go:529:5     - Unknown word (hrough)     -- // hrough a reload; because if
 ./modules/caddyhttp/autohttps.go:272:16    - Unknown word (tailscale)  -- var internal, tailscale []string
 ./modules/caddyhttp/autohttps.go:498:12    - Unknown word (reprovision) -- // must reprovision the automation policy
 ./modules/caddyhttp/autohttps.go:683:4     - Unknown word (reprovisioned) -- // reprovisioned. acmeIssuer must not
@@ -285,8 +287,7 @@ Lines:
 ./modules/caddyhttp/reverseproxy/reverseproxy.go:587:47    - Unknown word (slowloris)  -- more susceptible to slowloris
 ./modules/caddyhttp/reverseproxy/reverseproxy.go:632:50    - Unknown word (websockets) -- upgrades, such as for websockets.
 ./modules/caddyhttp/reverseproxy/reverseproxy.go:762:31    - Unknown word (backported) -- Forward 1xx status codes, backported from https://github
-./modules/caddyhttp/reverseproxy/selectionpolicies.go:803:65    - Unknown word (hashable)   -- from pool based on a hashable string s.
-./modules/caddyhttp/reverseproxy/selectionpolicies_test.go:123:45    - Unknown word (availablity) -- select first host on availablity.")
+./modules/caddyhttp/reverseproxy/selectionpolicies.go:804:65    - Unknown word (hashable)   -- from pool based on a hashable string s.
 ./modules/caddyhttp/reverseproxy/streaming.go:127:6     - Unknown word (timeoutc)    -- var timeoutc <-chan time.Time
 ./modules/caddyhttp/reverseproxy/streaming.go:134:2     - Unknown word (errc)        -- errc := make(chan error,
 ./modules/caddyhttp/reverseproxy/streaming.go:236:7     - Unknown word (rerr)        -- nr, rerr := src.Read(buf)
@@ -427,7 +428,6 @@ Lines:
 ./modules/caddytls/connpolicy.go:603:46    - Unknown word (clientauth's)  -- sets up cfg to enforce clientauth's configuration.
 ./modules/caddytls/connpolicy.go:738:13    - Unknown word (Certloaders)   -- trustedLeafCertloaders := []LeafCertificateLoader
 ./modules/caddytls/connpolicy.go:773:33    - Unknown word (unmarshalable) -- PublicKeyAlgorithm is a JSON-unmarshalable wrapper type.
-./modules/caddytls/connpolicy_test.go:148:42    - Unknown word (sucessfully) -- trusted_ca_cert' adapts sucessfully",
 ./modules/caddytls/distributedstek/distributedstek.go:100:2     - Unknown word (dstek)           -- dstek, err := s.getSTEK()
 ./modules/caddytls/distributedstek/distributedstek.go:15:12     - Unknown word (distributedstek) -- // Package distributedstek provides TLS session
 ./modules/caddytls/distributedstek/distributedstek.go:230:18    - Unknown word (godocs)          -- // again, see godocs for why timer is stopped
