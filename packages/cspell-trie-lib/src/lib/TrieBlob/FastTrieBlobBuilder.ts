@@ -127,7 +127,7 @@ export class FastTrieBlobBuilder implements TrieBuilder<FastTrieBlob> {
         let depth = 0;
 
         const insertChar = (char: string) => {
-            const cc = char.charCodeAt(0) & 0xdc00;
+            const cc = char.charCodeAt(0) & 0xfc00;
             // Work with partial surrogate pairs.
             if (cc === 0xd800 && char.length == 1) {
                 // We have a high surrogate
