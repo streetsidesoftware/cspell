@@ -3,14 +3,10 @@ Repository: Azure/azure-rest-api-specs
 Url: "https://github.com/Azure/azure-rest-api-specs.git"
 Args: ["--config=cSpell.json","**/*.{md,ts,js}"]
 Lines:
- CSpell: Files checked: 2320, Issues found: 2840 in 862 files.
+ CSpell: Files checked: 2323, Issues found: 2852 in 865 files.
  exit code: 1
 ./CONTRIBUTING.md:24:6      - Unknown word (tocstop)    -- <!-- tocstop -->
 ./CONTRIBUTING.md:79:3      - Unknown word (Poli)       -- - PoliCheck -
-./README.md:149:23    - Unknown word (sharedgallery) -- | |     +---sharedgallery
-./README.md:48:108    - Unknown word (AFEC)       -- Public Preview (behind [AFEC](https://armwiki.azurewebsite
-./README.md:96:10     - Unknown word (playfab)    -- | \---playfab
-./README.md:97:14     - Unknown word (Playfab)    -- | +---Playfab
 ./SECURITY.md:13:72     - Unknown word (MSRC)       -- Security Response Center (MSRC) at [https://msrc.microsoft
 ./SECURITY.md:17:205    - Unknown word (msrc)       -- found at [microsoft.com/msrc](https://aka.ms/opensource
 ./arm-compute/quickstart-templates/README.md:3:107     - Unknown word (quickstart) -- specification/compute/quickstart-templates`. However
@@ -47,6 +43,8 @@ Lines:
 ./documentation/code-gen/configure-python-sdk.md:13:8      - Unknown word (Appconfiguration) -- title: AppconfigurationConfigurationClient
 ./documentation/code-gen/configure-python-sdk.md:147:5     - Unknown word (multiapiscript)   -- - multiapiscript: true
 ./documentation/creating-swagger.md:581:16    - Unknown word (flim)       -- "bar": "flim"
+./documentation/directory-structure.md:115:62    - Unknown word (confidentialledger) -- consider [`specification/confidentialledger`] `<azureTeam>` which
+./documentation/directory-structure.md:170:57    - Unknown word (keyvaults)          -- e.g. `keyvault` not `keyvaults` ) -- this removes ambiguity
 ./documentation/openapi-authoring-automated-guidelines.md:1442:153  - Unknown word (extendedlocation) -- identity, systemData, extendedlocation. Model definition '
 ./documentation/openapi-authoring-automated-guidelines.md:254:3     - Unknown word (alllowercase) -- * alllowercase - If there are multiple
 ./documentation/openapi-authoring-automated-guidelines.md:256:60    - Unknown word (Ikey)         -- incorrectly recognize "Ikey" as a word and not flag
@@ -75,7 +73,6 @@ Lines:
 ./documentation/typespec-rest-api-dev-process.md:50:37     - Unknown word (devcontainer) -- VSCode with local docker .devcontainer
 ./documentation/typespec-rest-api-dev-process.md:73:12     - Unknown word (reporoot)     -- 1. Under `[reporoot]\specifications`, create
 ./documentation/typespec-rest-api-dev-process.md:86:104    - Unknown word (follwoing)    -- resource-manager` folders follwoing the naming conventions
-./documentation/typespec-structure-guidelines.md:46:7      - Unknown word (confidentialledger) -- -> confidentialledger
 ./documentation/x-ms-examples.md:105:29    - Unknown word (testrg)     -- resourceGroupName": "testrg123",
 ./documentation/x-ms-examples.md:106:30    - Unknown word (testacc)    -- storageAccountName": "testacc6141",
 ./eng/tools/typespec-validation/src/index.ts:20:54     - Unknown word (Positionals) -- args, options, allowPositionals: true } as ParseArgsConfig
@@ -279,7 +276,7 @@ Lines:
 ./specification/iothub/resource-manager/readme.go.md:14:41     - Unknown word (armiothub)  -- resourcemanager/iothub/armiothub
 ./specification/iotoperationsmq/resource-manager/readme.md:39:58     - Unknown word (iotoperationsmq) -- preview/2023-10-04-preview/iotoperationsmq.json
 ./specification/keyvault/data-plane/Microsoft.KeyVault/preview/7.0/index.md:2:4       - Unknown word (assetid)    -- ms.assetid: 357c9947-1098-4a03
-./specification/keyvault/data-plane/readme.md:39:35     - Unknown word (backuprestore) -- KeyVault/stable/7.5/backuprestore.json
+./specification/keyvault/data-plane/readme.md:38:46     - Unknown word (backuprestore) -- preview/7.6-preview.1/backuprestore.json
 ./specification/keyvault/resource-manager/readme.md:270:91    - Unknown word (syncronous) -- return a mix of 202 and syncronous return types (200,
 ./specification/kubernetesconfiguration/resource-manager/readme.csharp.md:14:40     - Unknown word (kubernetesconfiguration) -- csharp-sdks-folder)/kubernetesconfiguration/Microsoft.Azure.Management
 ./specification/kubernetesconfiguration/resource-manager/readme.java.md:8:11      - Unknown word (fluxconfiguration) -- - from: fluxconfiguration.json
@@ -434,12 +431,12 @@ Lines:
 ./specification/quantum/Quantum.Workspace/CONTRIBUTING.md:14:99     - Unknown word (reqs)       -- installation) and its pre-reqs.
 ./specification/quantum/resource-manager/readme.go.md:14:42     - Unknown word (armquantum) -- resourcemanager/quantum/armquantum
 ./specification/quota/resource-manager/readme.go.md:14:40     - Unknown word (armquota)   -- resourcemanager/quota/armquota
-./specification/quota/resource-manager/readme.md:39:48     - Unknown word (groupquota) -- preview/2023-06-01-preview/groupquota.json
-./specification/quota/resource-manager/readme.md:61:5      - Unknown word (Supressions) -- ### Supressions
+./specification/quota/resource-manager/readme.md:43:48     - Unknown word (groupquota) -- preview/2023-06-01-preview/groupquota.json
+./specification/quota/resource-manager/readme.md:65:5      - Unknown word (Supressions) -- ### Supressions
 ./specification/recommendationsservice/resource-manager/readme.az.md:9:17      - Unknown word (recommendationsservice) -- extensions: recommendationsservice
 ./specification/recoveryservicesbackup/resource-manager/readme.md:39:20     - Unknown word (passivestamp) -- ``` yaml $(package-passivestamp)
 ./specification/recoveryservicesbackup/resource-manager/readme.md:43:20     - Unknown word (activestamp)  -- ``` yaml $(package-activestamp)
-./specification/recoveryservicesbackup/resource-manager/readme.md:477:80    - Unknown word (execptions)   -- the conversation from execptions to custom error CloudError
+./specification/recoveryservicesbackup/resource-manager/readme.md:486:80    - Unknown word (execptions)   -- the conversation from execptions to custom error CloudError
 ./specification/recoveryservicesdatareplication/resource-manager/readme.az.md:9:17      - Unknown word (recoveryservicesdatareplication) -- extensions: recoveryservicesdatareplication
 ./specification/recoveryservicesdatareplication/resource-manager/readme.java.md:11:270    - Unknown word (Extn)       -- HyperVToAzStackHciRepExtnCustomProps,VMwareToAzStackHci
 ./specification/redhatopenshift/resource-manager/readme.go.md:8:14      - Unknown word (redhatopenshift) -- namespace: redhatopenshift
@@ -465,7 +462,7 @@ Lines:
 ./specification/resources/resource-manager/readme.go.md:47:44     - Unknown word (armlinks)   -- resourcemanager/resources/armlinks
 ./specification/resources/resource-manager/readme.go.md:55:44     - Unknown word (armlocks)   -- resourcemanager/resources/armlocks
 ./specification/resources/resource-manager/readme.go.md:71:44     - Unknown word (armpolicy)  -- resourcemanager/resources/armpolicy
-./specification/resources/resource-manager/readme.md:1120:46   - Unknown word (explictly)  -- issue, default is int32, explictly mentioning the format
+./specification/resources/resource-manager/readme.md:1129:46   - Unknown word (explictly)  -- issue, default is int32, explictly mentioning the format
 ./specification/resources/resource-manager/readme.terraform.md:49:15     - Unknown word (newgen)     -- - Gen: "newgen"
 ./specification/resources/resource-manager/readme.typescript.md:32:29     - Unknown word (resourcesdeploymentstacks) -- package-name: "@azure/arm-resourcesdeploymentstacks"
 ./specification/riskiq/resource-manager/readme.python.md:10:26     - Unknown word (defendereasm) -- package-name: azure-mgmt-defendereasm
