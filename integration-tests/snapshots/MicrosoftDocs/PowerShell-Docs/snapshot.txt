@@ -3,7 +3,7 @@ Repository: MicrosoftDocs/PowerShell-Docs
 Url: "https://github.com/MicrosoftDocs/PowerShell-Docs.git"
 Args: ["--config=../../../cspell-power-shell-docs.config.yaml","**"]
 Lines:
- CSpell: Files checked: 3133, Issues found: 6469 in 1474 files.
+ CSpell: Files checked: 3134, Issues found: 6500 in 1475 files.
  exit code: 1
 ./LICENSE:139:15    - Unknown word (sublicensable)   -- non-sublicensable, non-exclusive, irrevocable
 ./LICENSE:205:34    - Unknown word (waivable)        -- under any voluntary or waivable statutory or compulsory
@@ -46,10 +46,11 @@ Lines:
 ./reference/5.1/Microsoft.PowerShell.Archive/Compress-Archive.md:208:20    - Unknown word (testlog)    -- that contains the `testlog.txt` file.
 ./reference/5.1/Microsoft.PowerShell.Archive/Compress-Archive.md:90:24     - Unknown word (Draftdoc)   -- Path = "C:\Reference\Draftdoc.docx", "C:\Reference
 ./reference/5.1/Microsoft.PowerShell.Archive/Expand-Archive.md:58:22     - Unknown word (Draftv)     -- Expand-Archive -Path Draftv2.zip -DestinationPath
-./reference/5.1/Microsoft.PowerShell.Core/About/about_Arithmetic_Operators.md:241:30    - Unknown word (filefilefile) -- 3 # result = "filefilefile"
-./reference/5.1/Microsoft.PowerShell.Core/About/about_Arithmetic_Operators.md:389:11    - Unknown word (minvalue)     -- ([int32]::minvalue + [uint32]::maxvalue
-./reference/5.1/Microsoft.PowerShell.Core/About/about_Arithmetic_Operators.md:389:32    - Unknown word (maxvalue)     -- minvalue + [uint32]::maxvalue).gettype().fullname
-./reference/5.1/Microsoft.PowerShell.Core/About/about_Arithmetic_Operators.md:389:42    - Unknown word (gettype)      -- [uint32]::maxvalue).gettype().fullname
+./reference/5.1/Microsoft.PowerShell.Core/About/about_Arithmetic_Operators.md:229:11    - Unknown word (minvalue)   -- ([int32]::minvalue + [uint32]::maxvalue
+./reference/5.1/Microsoft.PowerShell.Core/About/about_Arithmetic_Operators.md:229:32    - Unknown word (maxvalue)   -- minvalue + [uint32]::maxvalue).gettype().fullname
+./reference/5.1/Microsoft.PowerShell.Core/About/about_Arithmetic_Operators.md:229:42    - Unknown word (gettype)    -- [uint32]::maxvalue).gettype().fullname
+./reference/5.1/Microsoft.PowerShell.Core/About/about_Arithmetic_Operators.md:263:25    - Unknown word (ulong)      -- Casting the result to `[ulong]` yields an inaccurate
+./reference/5.1/Microsoft.PowerShell.Core/About/about_Arithmetic_Operators.md:358:30    - Unknown word (filefilefile) -- 3 # result = "filefilefile"
 ./reference/5.1/Microsoft.PowerShell.Core/About/about_Arrays.md:345:20    - Unknown word (Longlength) -- **Count** alias. **Longlength** is useful if the array
 ./reference/5.1/Microsoft.PowerShell.Core/About/about_Arrays.md:787:51    - Unknown word (Instrinsic) -- members, see [about_Instrinsic_Members][08].
 ./reference/5.1/Microsoft.PowerShell.Core/About/about_Arrays.md:982:59    - Unknown word (nosuchkey)  -- string, int]]::new()['nosuchkey']
@@ -99,7 +100,6 @@ Lines:
 ./reference/5.1/Microsoft.PowerShell.Core/About/about_Language_Modes.md:276:5     - Unknown word (pslistmodifier) -- - `[pslistmodifier]`
 ./reference/5.1/Microsoft.PowerShell.Core/About/about_Language_Modes.md:278:5     - Unknown word (psprimitivedictionary) -- - `[psprimitivedictionary]`
 ./reference/5.1/Microsoft.PowerShell.Core/About/about_Language_Modes.md:283:5     - Unknown word (securestring)          -- - `[securestring]`
-./reference/5.1/Microsoft.PowerShell.Core/About/about_Language_Modes.md:295:5     - Unknown word (ulong)                 -- - `[ulong]`
 ./reference/5.1/Microsoft.PowerShell.Core/About/about_Language_Modes.md:297:5     - Unknown word (ushort)                -- - `[ushort]`
 ./reference/5.1/Microsoft.PowerShell.Core/About/about_Language_Modes.md:313:5     - Unknown word (wmiclass)              -- - `[wmiclass]`
 ./reference/5.1/Microsoft.PowerShell.Core/About/about_Language_Modes.md:314:5     - Unknown word (wmisearcher)           -- - `[wmisearcher]`
@@ -119,8 +119,8 @@ Lines:
 ./reference/5.1/Microsoft.PowerShell.Core/About/about_Parsing.md:350:7     - Unknown word (echoargs)       -- The **echoargs** parameter of `TestExe
 ./reference/5.1/Microsoft.PowerShell.Core/About/about_Path_Syntax.md:21:16     - Unknown word (pathnames)  -- In PowerShell, pathnames can be one of two types
 ./reference/5.1/Microsoft.PowerShell.Core/About/about_PowerShell_exe.md:289:27    - Unknown word (sqlsnapin)  -- PowerShell -PSConsoleFile sqlsnapin.psc1
-./reference/5.1/Microsoft.PowerShell.Core/About/about_Preference_Variables.md:1007:2    - Unknown word (hexdump)    -- `hexdump.ps1` to illustrate the
-./reference/5.1/Microsoft.PowerShell.Core/About/about_Preference_Variables.md:524:24    - Unknown word (nofile)     -- Get-ChildItem -Path C:\nofile.txt
+./reference/5.1/Microsoft.PowerShell.Core/About/about_Preference_Variables.md:1009:2    - Unknown word (hexdump)    -- `hexdump.ps1` to illustrate the
+./reference/5.1/Microsoft.PowerShell.Core/About/about_Preference_Variables.md:526:24    - Unknown word (nofile)     -- Get-ChildItem -Path C:\nofile.txt
 ./reference/5.1/Microsoft.PowerShell.Core/About/about_Profiles.md:208:28    - Unknown word (cmdletname) -- function Get-CmdletAlias ($cmdletname) {
 ./reference/5.1/Microsoft.PowerShell.Core/About/about_Profiles.md:219:4     - Unknown word (hosttime)   -- $hosttime = (Get-ChildItem -Path
 ./reference/5.1/Microsoft.PowerShell.Core/About/about_Profiles.md:220:4     - Unknown word (hostversion) -- $hostversion="$($Host.Version.Major
@@ -474,7 +474,7 @@ Lines:
 ./reference/7.2/Microsoft.PowerShell.Utility/Invoke-WebRequest.md:165:44    - Unknown word (docspage)   -- StreamWriter]::new('.\docspage.html', $false, $Response
 ./reference/7.3/Microsoft.PowerShell.Core/About/about_Calling_Generic_Methods.md:61:9      - Unknown word (Linq)       -- `System.Linq.Enumerable` class to
 ./reference/7.3/Microsoft.PowerShell.Core/About/about_Hash_Tables.md:420:23    - Unknown word (Servi)      -- System.ServiceProcess.Servi... Running
-./reference/7.3/Microsoft.PowerShell.Core/About/about_Preference_Variables.md:1066:29   - Unknown word (robocopy)   -- native commands, like [robocopy][02] use non-zero exit
+./reference/7.3/Microsoft.PowerShell.Core/About/about_Preference_Variables.md:1070:29   - Unknown word (robocopy)   -- native commands, like [robocopy][02] use non-zero exit
 ./reference/7.3/Microsoft.PowerShell.Core/Switch-Process.md:12:43     - Unknown word (execv)      -- the cmdlet calls the `execv()` function to provide
 ./reference/7.4/Microsoft.PowerShell.Core/About/about_CommonParameters.md:46:23     - Unknown word (proga)      -- **ProgressAction** (proga)
 ./reference/7.4/Microsoft.PowerShell.Core/About/about_Functions_Advanced_Parameters.md:743:50    - Unknown word (dynamicparameters) -- tab completion. Like **dynamicparameters**, the
@@ -767,18 +767,19 @@ Lines:
 ./reference/docs-conceptual/community/2023-updates.md:77:3      - Unknown word (darthwalsh)   -- | darthwalsh |     1      |
 ./reference/docs-conceptual/community/2023-updates.md:79:3      - Unknown word (tabad)        -- | tabad |
 ./reference/docs-conceptual/community/2023-updates.md:81:3      - Unknown word (radkedan)     -- | radkedan |            |
-./reference/docs-conceptual/community/2024-updates.md:38:3      - Unknown word (Certezalito) -- | Certezalito |     1      |
-./reference/docs-conceptual/community/2024-updates.md:40:3      - Unknown word (chrisdent)   -- | chrisdent-de |     1      |
-./reference/docs-conceptual/community/2024-updates.md:41:3      - Unknown word (jborean)     -- | jborean93 |     1      |
-./reference/docs-conceptual/community/2024-updates.md:42:3      - Unknown word (brucificus)  -- | brucificus |     1      |
-./reference/docs-conceptual/community/2024-updates.md:43:4      - Unknown word (Plantefeve)  -- | XPlantefeve |     1      |
-./reference/docs-conceptual/community/2024-updates.md:67:3      - Unknown word (flcdrg)      -- | flcdrg |     1
-./reference/docs-conceptual/community/2024-updates.md:68:3      - Unknown word (holtkampjs)  -- | holtkampjs |     1
-./reference/docs-conceptual/community/2024-updates.md:70:11     - Unknown word (Nurillaew)   -- | MuzaffarNurillaew |     1      |
-./reference/docs-conceptual/community/2024-updates.md:70:3      - Unknown word (Muzaffar)    -- | MuzaffarNurillaew |     1
-./reference/docs-conceptual/community/2024-updates.md:71:3      - Unknown word (ybeltrikov)  -- | ybeltrikov |     1
-./reference/docs-conceptual/community/2024-updates.md:74:3      - Unknown word (deraeler)    -- | deraeler |
-./reference/docs-conceptual/community/2024-updates.md:77:3      - Unknown word (wwilliams)   -- | wwilliams69 |
+./reference/docs-conceptual/community/2024-updates.md:102:3     - Unknown word (deraeler)    -- | deraeler |
+./reference/docs-conceptual/community/2024-updates.md:105:3     - Unknown word (wwilliams)   -- | wwilliams69 |
+./reference/docs-conceptual/community/2024-updates.md:39:3      - Unknown word (muzimuzhi)  -- | muzimuzhi |     1      |
+./reference/docs-conceptual/community/2024-updates.md:66:3      - Unknown word (Certezalito) -- | Certezalito |     1      |
+./reference/docs-conceptual/community/2024-updates.md:68:3      - Unknown word (chrisdent)   -- | chrisdent-de |     1      |
+./reference/docs-conceptual/community/2024-updates.md:69:3      - Unknown word (jborean)     -- | jborean93 |     1      |
+./reference/docs-conceptual/community/2024-updates.md:70:3      - Unknown word (brucificus)  -- | brucificus |     1      |
+./reference/docs-conceptual/community/2024-updates.md:71:4      - Unknown word (Plantefeve)  -- | XPlantefeve |     1      |
+./reference/docs-conceptual/community/2024-updates.md:95:3      - Unknown word (flcdrg)      -- | flcdrg |     1
+./reference/docs-conceptual/community/2024-updates.md:96:3      - Unknown word (holtkampjs)  -- | holtkampjs |     1
+./reference/docs-conceptual/community/2024-updates.md:98:11     - Unknown word (Nurillaew)   -- | MuzaffarNurillaew |     1      |
+./reference/docs-conceptual/community/2024-updates.md:98:3      - Unknown word (Muzaffar)    -- | MuzaffarNurillaew |     1
+./reference/docs-conceptual/community/2024-updates.md:99:3      - Unknown word (ybeltrikov)  -- | ybeltrikov |     1
 ./reference/docs-conceptual/community/community-update.yml:50:21     - Unknown word (Helmick's)  -- - text: Jason Helmick's - The Show
 ./reference/docs-conceptual/community/contributing/general-markdown.md:217:41    - Unknown word (friendlyname) -- use Markdown syntax `[friendlyname](url-or-path)`.
 ./reference/docs-conceptual/community/contributing/general-markdown.md:242:7     - Unknown word (redirectedfrom) -- - `?redirectedfrom=MSDN` - added to the
@@ -804,7 +805,7 @@ Lines:
 ./reference/docs-conceptual/community/hall-of-fame.md:36:3      - Unknown word (purdo)      -- | purdo17 |      |
 ./reference/docs-conceptual/community/hall-of-fame.md:52:3      - Unknown word (jszabo)     -- | jszabo98 |      |
 ./reference/docs-conceptual/community/hall-of-fame.md:56:3      - Unknown word (vexx)       -- | vexx32 |      |
-./reference/docs-conceptual/community/hall-of-fame.md:71:10     - Unknown word (Dardenne)   -- | LaurentDardenne |      |      |
+./reference/docs-conceptual/community/hall-of-fame.md:72:10     - Unknown word (Dardenne)   -- | LaurentDardenne |      |      |
 ./reference/docs-conceptual/dev-cross-plat/choosing-the-right-nuget-package.md:3:12      - Unknown word (rjmholt)    -- ms.custom: rjmholt
 ./reference/docs-conceptual/dev-cross-plat/create-cmdline-predictor.md:107:47    - Unknown word (cref)       -- name="context">The <see cref="PredictionContext"
 ./reference/docs-conceptual/dev-cross-plat/create-cmdline-predictor.md:119:52    - Unknown word (Concat)     -- PredictiveSuggestion(string.Concat(input, " HELLO WORLD
@@ -818,7 +819,6 @@ Lines:
 ./reference/docs-conceptual/dev-cross-plat/resolving-dependency-conflicts.md:718:2     - Unknown word (netcore)    -- $netcore = "netcoreapp3.1"
 ./reference/docs-conceptual/dev-cross-plat/resolving-dependency-conflicts.md:791:93    - Unknown word (qualifed)   -- with the same fully qualifed
 ./reference/docs-conceptual/dev-cross-plat/resolving-dependency-conflicts.md:881:9     - Unknown word (Strahl)     -- - [Rick Strahl: When does a .NET assembly
-./reference/docs-conceptual/dev-cross-plat/security/preventing-script-injection.md:48:36     - Unknown word (pwnd)       -- rocessById "$pid; Write-Host 'pwnd!'"
 ./reference/docs-conceptual/dev-cross-plat/vscode/How-To-Replicate-the-ISE-Experience-In-VSCode.md:118:27    - Unknown word (corbob)     -- Thanks to the work of [@corbob][04], the PowerShell
 ./reference/docs-conceptual/dev-cross-plat/vscode/understanding-file-encoding.md:202:54    - Unknown word (encodingtest) -- Path]::GetTempPath()) 'encodingtest.ps1'
 ./reference/docs-conceptual/dev-cross-plat/vscode/understanding-file-encoding.md:233:4     - Unknown word (rkeithhill's) -- - @rkeithhill's [blog post about dealing
@@ -1167,7 +1167,6 @@ Lines:
 ./reference/docs-conceptual/lang-spec/chapter-11.md:78:9      - Unknown word (Modulepath) -- `$Env:PSModulepath = $Env:PSModulepath
 ./reference/docs-conceptual/lang-spec/chapter-12.md:794:32    - Unknown word (regularexpressionoption) -- chapter-04.md#4264-regularexpressionoption-type
 ./reference/docs-conceptual/learn/Glossary.md:175:26    - Unknown word (boolens)    -- primitive types, such as boolens and numbers, and other
-./reference/docs-conceptual/learn/application-control.md:55:1      - Unknown word (wevtutil)   -- wevtutil.exe sl PowerShellCore
 ./reference/docs-conceptual/learn/deep-dives/add-credentials-to-powershell-functions.md:12:55     - Unknown word (duffney)    -- check out his blog at [duffney.io][duffney.io].
 ./reference/docs-conceptual/learn/deep-dives/add-credentials-to-powershell-functions.md:176:31    - Unknown word (mgmt)       -- Install-WindowsFeature web-mgmt-tools` if required.
 ./reference/docs-conceptual/learn/deep-dives/everything-about-arrays.md:1072:7    - Unknown word (Kraus)      -- [Mark Kraus][07] put together.
@@ -1208,34 +1207,6 @@ Lines:
 ./reference/docs-conceptual/learn/ps101/07-working-with-wmi.md:69:32     - Unknown word (winmgmts)   -- objWMIService = GetObject("winmgmts:" _
 ./reference/docs-conceptual/learn/ps101/07-working-with-wmi.md:76:5      - Unknown word (Wscript)    -- Wscript.Echo "Manufacturer:
 ./reference/docs-conceptual/learn/ps101/07-working-with-wmi.md:79:47     - Unknown word (SMBIOSBIOS) -- Version: " & objBIOS.SMBIOSBIOSVersion
-./reference/docs-conceptual/learn/remoting/PS-remoting-second-hop.md:190:5     - Unknown word (klist)      -- klist purge -li 0x3e7
-./reference/docs-conceptual/learn/remoting/PS-remoting-second-hop.md:240:57    - Unknown word (alpineskihouse) -- ServerB -Server dc1.alpineskihouse.com
-./reference/docs-conceptual/learn/remoting/PS-remoting-second-hop.md:84:20     - Unknown word (Analysing)  -- > [Security Focus: Analysing 'Account is sensitive
-./reference/docs-conceptual/learn/remoting/SSH-Remoting-in-PowerShell.md:114:4     - Unknown word (Pubkey)        -- PubkeyAuthentication yes
-./reference/docs-conceptual/learn/remoting/SSH-Remoting-in-PowerShell.md:12:59     - Unknown word (multiplatform) -- platforms and allows true multiplatform PowerShell remoting
-./reference/docs-conceptual/learn/remoting/SSH-Remoting-in-PowerShell.md:82:28     - Unknown word (progra)        -- Subsystem powershell c:/progra~1/powershell/7/pwsh
-./reference/docs-conceptual/learn/remoting/SSH-Remoting-in-PowerShell.md:82:66     - Unknown word (nologo)        -- powershell/7/pwsh.exe -sshs -nologo
-./reference/docs-conceptual/learn/remoting/WinRMSecurity.md:115:60    - Unknown word (etype)      -- is determined by the `etype` in the TGS ticket.
-./reference/docs-conceptual/learn/remoting/jea/audit-and-report.md:62:10     - Unknown word (psrcpath)   -- $psrcpath = Join-Path -Path $
-./reference/docs-conceptual/learn/remoting/jea/prerequisites.md:103:42    - Unknown word (gpupdate)   -- machines only) Run `gpupdate` or wait for Group Policy
-./reference/docs-conceptual/learn/remoting/jea/register-jea.md:91:69     - Unknown word (myfileshare) -- is located on the `\\myfileshare\JEA` file share.
-./reference/docs-conceptual/learn/remoting/jea/role-capabilities.md:231:27    - Unknown word (unprivilegedjeauser) -- group Administrators unprivilegedjeauser /add`. A more secure
-./reference/docs-conceptual/learn/remoting/jea/role-capabilities.md:287:68    - Unknown word (FQMN)                -- qualified module name (FQMN)
-./reference/docs-conceptual/learn/remoting/jea/role-capabilities.md:303:2     - Unknown word (tabexpansion)        -- `tabexpansion2` in the **VisibleFunctions
-./reference/docs-conceptual/learn/remoting/jea/role-capabilities.md:416:8     - Unknown word (Aand)                -- $mergedAandB = @{
-./reference/docs-conceptual/learn/remoting/jea/role-capabilities.md:66:6      - Unknown word (dsadd)      -- - `dsadd.exe`
-./reference/docs-conceptual/learn/remoting/jea/security-considerations.md:216:53    - Unknown word (nonadministrators) -- JEA is that it allows nonadministrators to do some administrative
-./reference/docs-conceptual/learn/remoting/jea/security-considerations.md:62:32     - Unknown word (ACCOUNTNUMBER) -- Virtual Users\WinRM_VA_<ACCOUNTNUMBER>_<DOMAIN>_<sAMAccountName
-./reference/docs-conceptual/learn/remoting/jea/session-configurations.md:103:33    - Unknown word (JEAGMSA)    -- sAMAccountName of 'MyJEAGMSA'
-./reference/docs-conceptual/learn/remoting/jea/session-configurations.md:226:82    - Unknown word (smartcard)  -- management solution, smartcard
-./reference/docs-conceptual/learn/remoting/jea/session-configurations.md:227:26    - Unknown word (multifactor) -- authentication, or other multifactor authentication solution
-./reference/docs-conceptual/learn/remoting/jea/session-configurations.md:95:34     - Unknown word (GMSA)       -- managed service account (GMSA) is the appropriate
-./reference/docs-conceptual/learn/remoting/jea/session-configurations.md:96:64     - Unknown word (GMSAs)      -- shares and web services. GMSAs give you a domain identity
-./reference/docs-conceptual/learn/remoting/jea/using-jea.md:130:26    - Unknown word (proxied)    -- can also persist the proxied cmdlets from implicit
-./reference/docs-conceptual/learn/remoting/jea/using-jea.md:171:5     - Unknown word (creds)      -- var creds = // create a
-./reference/docs-conceptual/learn/remoting/jea/using-jea.md:229:63    - Unknown word (Aformy)     -- UserName 'localhost\JEAformyHoster'
-./reference/docs-conceptual/learn/remoting/jea/using-jea.md:229:69    - Unknown word (Hoster)     -- UserName 'localhost\JEAformyHoster'
-./reference/docs-conceptual/learn/remoting/powershell-remoting-faq.yml:415:20    - Unknown word (Wsmprovhost) -- process (Wsmprovhost.exe) on the remote computer
 ./reference/docs-conceptual/learn/shell/using-keyhandlers.md:185:49    - Unknown word (eastus)     -- eGroupName myRGName -Location eastus -Name myVM`
 ./reference/docs-conceptual/learn/shell/using-light-theme.md:148:43    - Unknown word (WCAG)       -- Accessibility Guidelines (WCAG) 2.1 recommends that
 ./reference/docs-conceptual/samples/Changing-Computer-State.md:21:1      - Unknown word (rundll)     -- rundll32.exe user32.dll,LockWorkStat
@@ -1273,21 +1244,53 @@ Lines:
 ./reference/docs-conceptual/samples/Working-with-Registry-Keys.md:104:37    - Unknown word (regini)     -- including `reg.exe`, `regini.exe`, `regedit.exe`
 ./reference/docs-conceptual/samples/Working-with-Registry-Keys.md:105:49    - Unknown word (WMI's)      -- WScript.Shell** and WMI's **StdRegProv** class
 ./reference/docs-conceptual/samples/Working-with-Registry-Keys.md:51:3      - Unknown word (regedit)    -- (`regedit.exe`).
+./reference/docs-conceptual/security/application-control.md:55:1      - Unknown word (wevtutil)   -- wevtutil.exe sl PowerShellCore
+./reference/docs-conceptual/security/overview.yml:82:46     - Unknown word (secretmanagement) -- powershell/utility-modules/secretmanagement/overview
+./reference/docs-conceptual/security/overview.yml:88:77     - Unknown word (secretstore)      -- ecretmanagement/how-to/manage-secretstore
+./reference/docs-conceptual/security/overview.yml:92:82     - Unknown word (keyvault)         -- management/how-to/using-azure-keyvault
+./reference/docs-conceptual/security/preventing-script-injection.md:48:36     - Unknown word (pwnd)       -- rocessById "$pid; Write-Host 'pwnd!'"
+./reference/docs-conceptual/security/remoting/PS-remoting-second-hop.md:190:5     - Unknown word (klist)      -- klist purge -li 0x3e7
+./reference/docs-conceptual/security/remoting/PS-remoting-second-hop.md:240:57    - Unknown word (alpineskihouse) -- ServerB -Server dc1.alpineskihouse.com
+./reference/docs-conceptual/security/remoting/PS-remoting-second-hop.md:84:20     - Unknown word (Analysing)  -- > [Security Focus: Analysing 'Account is sensitive
+./reference/docs-conceptual/security/remoting/SSH-Remoting-in-PowerShell.md:114:4     - Unknown word (Pubkey)        -- PubkeyAuthentication yes
+./reference/docs-conceptual/security/remoting/SSH-Remoting-in-PowerShell.md:12:59     - Unknown word (multiplatform) -- platforms and allows true multiplatform PowerShell remoting
+./reference/docs-conceptual/security/remoting/SSH-Remoting-in-PowerShell.md:82:28     - Unknown word (progra)        -- Subsystem powershell c:/progra~1/powershell/7/pwsh
+./reference/docs-conceptual/security/remoting/SSH-Remoting-in-PowerShell.md:82:66     - Unknown word (nologo)        -- powershell/7/pwsh.exe -sshs -nologo
+./reference/docs-conceptual/security/remoting/WinRM-Security.md:115:60    - Unknown word (etype)      -- is determined by the `etype` in the TGS ticket.
+./reference/docs-conceptual/security/remoting/jea/audit-and-report.md:62:10     - Unknown word (psrcpath)   -- $psrcpath = Join-Path -Path $
+./reference/docs-conceptual/security/remoting/jea/prerequisites.md:103:42    - Unknown word (gpupdate)   -- machines only) Run `gpupdate` or wait for Group Policy
+./reference/docs-conceptual/security/remoting/jea/register-jea.md:91:69     - Unknown word (myfileshare) -- is located on the `\\myfileshare\JEA` file share.
+./reference/docs-conceptual/security/remoting/jea/role-capabilities.md:231:27    - Unknown word (unprivilegedjeauser) -- group Administrators unprivilegedjeauser /add`. A more secure
+./reference/docs-conceptual/security/remoting/jea/role-capabilities.md:287:68    - Unknown word (FQMN)                -- qualified module name (FQMN)
+./reference/docs-conceptual/security/remoting/jea/role-capabilities.md:303:2     - Unknown word (tabexpansion)        -- `tabexpansion2` in the **VisibleFunctions
+./reference/docs-conceptual/security/remoting/jea/role-capabilities.md:416:8     - Unknown word (Aand)                -- $mergedAandB = @{
+./reference/docs-conceptual/security/remoting/jea/role-capabilities.md:66:6      - Unknown word (dsadd)      -- - `dsadd.exe`
+./reference/docs-conceptual/security/remoting/jea/security-considerations.md:216:53    - Unknown word (nonadministrators) -- JEA is that it allows nonadministrators to do some administrative
+./reference/docs-conceptual/security/remoting/jea/security-considerations.md:62:32     - Unknown word (ACCOUNTNUMBER) -- Virtual Users\WinRM_VA_<ACCOUNTNUMBER>_<DOMAIN>_<sAMAccountName
+./reference/docs-conceptual/security/remoting/jea/session-configurations.md:103:33    - Unknown word (JEAGMSA)    -- sAMAccountName of 'MyJEAGMSA'
+./reference/docs-conceptual/security/remoting/jea/session-configurations.md:226:82    - Unknown word (smartcard)  -- management solution, smartcard
+./reference/docs-conceptual/security/remoting/jea/session-configurations.md:227:26    - Unknown word (multifactor) -- authentication, or other multifactor authentication solution
+./reference/docs-conceptual/security/remoting/jea/session-configurations.md:95:34     - Unknown word (GMSA)       -- managed service account (GMSA) is the appropriate
+./reference/docs-conceptual/security/remoting/jea/session-configurations.md:96:64     - Unknown word (GMSAs)      -- shares and web services. GMSAs give you a domain identity
+./reference/docs-conceptual/security/remoting/jea/using-jea.md:130:26    - Unknown word (proxied)    -- can also persist the proxied cmdlets from implicit
+./reference/docs-conceptual/security/remoting/jea/using-jea.md:171:5     - Unknown word (creds)      -- var creds = // create a
+./reference/docs-conceptual/security/remoting/jea/using-jea.md:229:63    - Unknown word (Aformy)     -- UserName 'localhost\JEAformyHoster'
+./reference/docs-conceptual/security/remoting/jea/using-jea.md:229:69    - Unknown word (Hoster)     -- UserName 'localhost\JEAformyHoster'
+./reference/docs-conceptual/security/remoting/powershell-remoting-faq.yml:415:20    - Unknown word (Wsmprovhost) -- process (Wsmprovhost.exe) on the remote computer
 ./reference/docs-conceptual/toc.yml:116:57    - Unknown word (shouldprocess) -- dives/everything-about-shouldprocess.md
-./reference/docs-conceptual/toc.yml:228:34    - Unknown word (winrmsecurity) -- href: learn/remoting/winrmsecurity.md
-./reference/docs-conceptual/toc.yml:303:63    - Unknown word (objectmodelroot) -- ise/object-model/the-objectmodelroot-object.md
-./reference/docs-conceptual/toc.yml:305:63    - Unknown word (iseaddontoolcollection) -- ise/object-model/the-iseaddontoolcollection-object.md
-./reference/docs-conceptual/toc.yml:307:63    - Unknown word (iseaddontool)           -- ise/object-model/the-iseaddontool-object.md
-./reference/docs-conceptual/toc.yml:309:63    - Unknown word (iseeditor)              -- ise/object-model/the-iseeditor-object.md
-./reference/docs-conceptual/toc.yml:311:63    - Unknown word (isefilecollection)      -- ise/object-model/the-isefilecollection-object.md
-./reference/docs-conceptual/toc.yml:313:63    - Unknown word (isefile)                -- ise/object-model/the-isefile-object.md
-./reference/docs-conceptual/toc.yml:315:63    - Unknown word (isemenuitemcollection)  -- ise/object-model/the-isemenuitemcollection-object.md
-./reference/docs-conceptual/toc.yml:317:63    - Unknown word (isemenuitem)            -- ise/object-model/the-isemenuitem-object.md
-./reference/docs-conceptual/toc.yml:319:63    - Unknown word (iseoptions)             -- ise/object-model/the-iseoptions-object.md
-./reference/docs-conceptual/toc.yml:321:63    - Unknown word (isesnippetcollection)   -- ise/object-model/the-isesnippetcollection-object.md
-./reference/docs-conceptual/toc.yml:323:63    - Unknown word (isesnippetobject)       -- ise/object-model/the-isesnippetobject.md
-./reference/docs-conceptual/toc.yml:325:63    - Unknown word (powershelltabcollection) -- ise/object-model/the-powershelltabcollection-object.md
-./reference/docs-conceptual/toc.yml:327:63    - Unknown word (powershelltab)           -- ise/object-model/the-powershelltab-object.md
+./reference/docs-conceptual/toc.yml:265:63    - Unknown word (objectmodelroot) -- ise/object-model/the-objectmodelroot-object.md
+./reference/docs-conceptual/toc.yml:267:63    - Unknown word (iseaddontoolcollection) -- ise/object-model/the-iseaddontoolcollection-object.md
+./reference/docs-conceptual/toc.yml:269:63    - Unknown word (iseaddontool)           -- ise/object-model/the-iseaddontool-object.md
+./reference/docs-conceptual/toc.yml:271:63    - Unknown word (iseeditor)              -- ise/object-model/the-iseeditor-object.md
+./reference/docs-conceptual/toc.yml:273:63    - Unknown word (isefilecollection)      -- ise/object-model/the-isefilecollection-object.md
+./reference/docs-conceptual/toc.yml:275:63    - Unknown word (isefile)                -- ise/object-model/the-isefile-object.md
+./reference/docs-conceptual/toc.yml:277:63    - Unknown word (isemenuitemcollection)  -- ise/object-model/the-isemenuitemcollection-object.md
+./reference/docs-conceptual/toc.yml:279:63    - Unknown word (isemenuitem)            -- ise/object-model/the-isemenuitem-object.md
+./reference/docs-conceptual/toc.yml:281:63    - Unknown word (iseoptions)             -- ise/object-model/the-iseoptions-object.md
+./reference/docs-conceptual/toc.yml:283:63    - Unknown word (isesnippetcollection)   -- ise/object-model/the-isesnippetcollection-object.md
+./reference/docs-conceptual/toc.yml:285:63    - Unknown word (isesnippetobject)       -- ise/object-model/the-isesnippetobject.md
+./reference/docs-conceptual/toc.yml:287:63    - Unknown word (powershelltabcollection) -- ise/object-model/the-powershelltabcollection-object.md
+./reference/docs-conceptual/toc.yml:289:63    - Unknown word (powershelltab)           -- ise/object-model/the-powershelltab-object.md
 ./reference/docs-conceptual/toc.yml:395:41    - Unknown word (cmdline)                 -- dev-cross-plat/create-cmdline-predictor.md
 ./reference/docs-conceptual/toc.yml:459:38    - Unknown word (hackathons)              -- community/contributing/hackathons.md
 ./reference/docs-conceptual/toc.yml:90:37     - Unknown word (keyhandlers) -- href: learn/shell/using-keyhandlers.md
@@ -1315,9 +1318,9 @@ Lines:
 ./reference/docs-conceptual/whats-new/What-s-New-in-PowerShell-75.md:85:8      - Unknown word (unixmode)   -- - Fix `unixmode` to handle `setuid`
 ./reference/docs-conceptual/whats-new/What-s-New-in-PowerShell-75.md:92:81     - Unknown word (domsleee)   -- 2][20402]) (Thanks @domsleee!)
 ./reference/docs-conceptual/whats-new/cmdlet-versions.md:222:125   - Unknown word (Notsupportedonmac) -- | ![Included][01] | NotsupportedonmacOS |
-./reference/docs-conceptual/whats-new/differences-from-windows-powershell.md:1147:23   - Unknown word (CONSOLEHOST) -- DELETE_ME_TO_DISABLE_CONSOLEHOST_TELEMETRY` to disable
-./reference/docs-conceptual/whats-new/differences-from-windows-powershell.md:280:26    - Unknown word (inputformat) -- short hand to match `-inputformat`, which now needs to
-./reference/docs-conceptual/whats-new/differences-from-windows-powershell.md:309:25    - Unknown word (Paren)       -- Preserve `$?` for **ParenExpression**, **SubExpression
+./reference/docs-conceptual/whats-new/differences-from-windows-powershell.md:1216:23   - Unknown word (CONSOLEHOST) -- DELETE_ME_TO_DISABLE_CONSOLEHOST_TELEMETRY` to disable
+./reference/docs-conceptual/whats-new/differences-from-windows-powershell.md:349:26    - Unknown word (inputformat) -- short hand to match `-inputformat`, which now needs to
+./reference/docs-conceptual/whats-new/differences-from-windows-powershell.md:378:25    - Unknown word (Paren)       -- Preserve `$?` for **ParenExpression**, **SubExpression
 ./reference/docs-conceptual/windows-powershell/ise/object-model/Other-Useful-Scripting-Objects.md:27:40     - Unknown word (Mycommand)  -- ortedConsoleApplications.Add('Mycommand')
 ./reference/docs-conceptual/windows-powershell/ise/object-model/The-ISEFile-Object.md:62:2      - Unknown word (fullpath)   -- $fullpath = "c:\temp\newname.txt
 ./reference/docs-conceptual/windows-powershell/ise/object-model/The-ISEFile-Object.md:62:22     - Unknown word (newname)    -- fullpath = "c:\temp\newname.txt"
@@ -1328,13 +1331,12 @@ Lines:
 ./reference/index.yml:151:45    - Unknown word (stackoverflow)    -- hubs/powershell/logo_stackoverflow.svg
 ./reference/index.yml:166:14    - Unknown word (Spiceworks)       -- - title: Spiceworks
 ./reference/index.yml:72:44     - Unknown word (psscriptanalyzer) -- powershell/utility-modules/psscriptanalyzer/overview?view=ps-modules
-./reference/index.yml:74:44     - Unknown word (secretmanagement) -- powershell/utility-modules/secretmanagement/overview?view=ps-modules
 ./reference/media/index/av_colors_128.svg:3:74      - Unknown word (xlink)      -- org/2000/svg" xmlns:xlink="http://www.w3.org/
 ./reference/media/index/av_colors_128.svg:6:19      - Unknown word (evenodd)    -- <path fill-rule="evenodd" clip-rule="evenodd
 ./reference/media/index/powershell_128.svg:5:21      - Unknown word (SVGID)      -- <linearGradient id="SVGID_1_" gradientUnits="userSpaceO
 ./reference/media/shared/check-mark-button-2705.svg:3:12      - Unknown word (svgg)       -- <g id="svgg">
 ./reference/module/index.md:14:36     - Unknown word (windowsserver) -- FilterColumn1: powershell-7.4,windowsserver2022-ps
-./reference/module/index.md:15:21     - Unknown word (azps)          -- quickFilterColumn2: azps-11.4.0,sqlserver-ps
+./reference/module/index.md:15:21     - Unknown word (azps)          -- quickFilterColumn2: azps-11.5.0,sqlserver-ps
 ./reference/module/index.md:16:42     - Unknown word (systemcenter)  -- graph-powershell-1.0,systemcenter-ps-2022
 ./tests/Pester/Update-Help.Tests.ps1:24:34     - Unknown word (pshome)     -- HelpInstallationPath = "$pshome\en-US"
 ./tests/Pester/Update-Help.Tests.ps1:30:109    - Unknown word (helpcontent) -- -2565dba61a4f_en-US_helpcontent$extension"
