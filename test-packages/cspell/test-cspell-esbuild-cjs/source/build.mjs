@@ -1,5 +1,4 @@
 #!/usr/bin/env node
-/* eslint-disable n/no-unpublished-import */
 
 import * as esbuild from 'esbuild';
 import { fileURLToPath } from 'url';

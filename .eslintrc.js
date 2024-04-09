@@ -114,6 +114,12 @@ const config = {
                 'n/no-unpublished-import': 'off',
             },
         },
+        {
+            files: ['**/eslint.config.js'],
+            rules: {
+                'import/no-unresolved': 'off',
+            },
+        },
     ],
     settings: {
         'import/parsers': {
