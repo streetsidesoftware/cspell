@@ -9,6 +9,7 @@ import {
     getDictionary,
     refreshDictionaryCache,
 } from 'cspell-lib';
+// eslint-disable-next-line n/no-missing-import
 import type { Comment, Identifier, ImportSpecifier, Literal, Node, TemplateElement } from 'estree';
 import * as path from 'path';
 import { format } from 'util';

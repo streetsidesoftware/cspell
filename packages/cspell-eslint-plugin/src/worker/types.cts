@@ -1,3 +1,4 @@
+// eslint-disable-next-line n/no-missing-import
 import type { Node } from 'estree';
 
 import type { WorkerOptions } from '../common/options.cjs';

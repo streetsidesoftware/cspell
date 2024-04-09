@@ -1,7 +1,6 @@
-/* eslint-disable import/no-unresolved */
-/* eslint-disable node/no-missing-import */
-
 // @ts-check
+
+/* eslint-disable n/no-missing-import */
 
 /**
  * @typedef {import('estree').Node} Node

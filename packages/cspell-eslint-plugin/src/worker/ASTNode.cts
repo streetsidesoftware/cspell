@@ -1,3 +1,4 @@
+// eslint-disable-next-line n/no-missing-import
 import type { Comment, Literal, Node } from 'estree';
 
 export interface JSXText extends Omit<Literal, 'type'> {

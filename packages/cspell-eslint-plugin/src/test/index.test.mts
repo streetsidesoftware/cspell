@@ -1,41 +1,61 @@
+import * as fs from 'node:fs';
+import * as path from 'node:path';
+import { fileURLToPath } from 'node:url';
+
+import typeScriptParser from '@typescript-eslint/parser';
 import { RuleTester } from 'eslint';
-import * as fs from 'fs';
-import * as path from 'path';
+import react from 'eslint-plugin-react';
+import globals from 'globals';
 
-import type { Options as RuleOptions } from './index.cjs';
-import Rule from './index.cjs';
+import type { Options as RuleOptions } from '../plugin/index.cjs';
+import Rule from '../plugin/index.cjs';
 
+const __dirname = fileURLToPath(new URL('.', import.meta.url));
 const root = path.resolve(__dirname, '../..');
 const fixturesDir = path.join(root, 'fixtures');
 
-const parsers: Record<string, string | undefined> = {
+const parsers: Record<string, string | undefined | unknown> = {
     // Note: it is possible for @typescript-eslint/parser to break the path
-    '.ts': resolveFromMonoRepo('@typescript-eslint/parser'),
+    '.ts': typeScriptParser,
 };
 
 type ValidTestCase = RuleTester.ValidTestCase;
 type Options = Partial<RuleOptions>;
 
-const ruleTester = new RuleTester({
-    env: {
-        es6: true,
-    },
+const ruleTester = new RuleTester({});
 
-    parserOptions: {
-        ecmaVersion: 2022,
-        sourceType: 'module',
-        ecmaFeatures: {
-            modules: true,
-        },
-    },
-    overrides: [
-        {
-            files: '**/*.ts',
-            extends: ['plugin:@typescript-eslint/recommended', 'plugin:import/typescript'],
-            parser: '@typescript-eslint/parser',
-        },
-    ],
-});
+const KnownErrors: TestCaseError[] = [
+    ce('Unknown word: "Summmer"', 8),
+    ce('Unknown word: "friendz"', 8),
+    ce('Forbidden word: "Bluelist"', 8),
+    ce('Forbidden word: "bluelist"', 8),
+    ce('Forbidden word: "café"', 8),
+    ce('Unknown word: "uuug"', 8),
+    ce('Unknown word: "Welcomeeeee"', 0),
+    ce('Unknown word: "bestbusiness"', 0),
+    ce('Unknown word: "muawhahaha"', 0),
+    ce('Unknown word: "uuuug"', 0),
+    ce('Unknown word: "grrr"', 8),
+    ce('Unknown word: "GRRRRRR"', 1),
+    ce('Unknown word: "UUUUUG"', 3),
+    ce('Unknown word: "grrrrr"', 8),
+    ce('Unknown word: "naaame"', 8),
+    ce(`Unknown word: "doen't"`, 8),
+    ce('Unknown word: "isssues"', 8),
+    ce('Unknown word: "playy"', 8),
+    ce('Unknown word: "Guuide"', 8),
+    ce('Unknown word: "Gallaxy"', 8),
+    ce('Unknown word: "BADD"', 8),
+    ce('Unknown word: "coool"', 8),
+    ce('Unknown word: "functionn"', 8),
+    ce('Unknown word: "Todayy"', 8),
+    ce('Unknown word: "Montj"', 8),
+    ce('Unknown word: "Yaar"', 8),
+    ce('Unknown word: "Februarry"', 6),
+    ce('Unknown word: "Aprill"', 8),
+    ce('Unknown word: "gooo"', 8),
+    ce('Unknown word: "weeek"', 8),
+];
 
 ruleTester.run('cspell', Rule.rules.spellchecker, {
     valid: [
@@ -90,7 +110,7 @@ ruleTester.run('cspell', Rule.rules.spellchecker, {
         ),
         // cspell:ignore Montj Todayy Yaar Aprill Februarry gooo weeek
         readInvalid('with-errors/sampleTemplateString.mjs', [
-            { message: 'Unknown word: "Todayy"' },
+            'Unknown word: "Todayy"',
             'Unknown word: "Montj"',
             'Unknown word: "Yaar"',
             'Unknown word: "Februarry"',
@@ -170,28 +190,21 @@ ruleTester.run('cspell', Rule.rules.spellchecker, {
 });
 
 const ruleTesterReact = new RuleTester({
-    env: {
-        es6: true,
+    files: ['**/*.{js,jsx,mjs,cjs,ts,tsx}'],
+    plugins: {
+        react,
     },
-
-    parserOptions: {
-        ecmaVersion: 2020,
-        sourceType: 'module',
-        ecmaFeatures: {
-            jsx: true,
+    languageOptions: {
+        parserOptions: {
+            ecmaFeatures: {
+                jsx: true,
+            },
+        },
+        globals: {
+            ...globals.browser,
         },
     },
-    overrides: [
-        {
-            files: '**/*.tsx',
-            extends: ['plugin:@typescript-eslint/recommended', 'plugin:import/typescript', 'plugin:react/recommended'],
-            parser: '@typescript-eslint/parser',
-        },
-        {
-            files: '**/*.jsx',
-            extends: ['eslint:recommended', 'plugin:react/recommended'],
-        },
-    ],
+    // ... others are omitted for brevity
 });
 
 ruleTesterReact.run('cspell with React', Rule.rules.spellchecker, {
@@ -200,28 +213,30 @@ ruleTesterReact.run('cspell with React', Rule.rules.spellchecker, {
         // cspell:ignore Welcomeeeee Summmer
         readInvalid('with-errors/react/sample.jsx', ['Unknown word: "Welcomeeeee"', 'Unknown word: "Summmer"']),
         readInvalid('with-errors/react/sample.tsx', ['Unknown word: "Welcomeeeee"', 'Unknown word: "Summmer"']),
-        readInvalid('with-errors/react/sample.tsx', ['Unknown word: "Summmer"'], { checkJSXText: false }),
-        readInvalid('with-errors/react/sample.jsx', ['Unknown word: "Summmer"'], { checkJSXText: false }),
+        readInvalid('with-errors/react/sample.tsx', ['Unknown word: "Summmer"'], {
+            checkJSXText: false,
+        }),
+        readInvalid('with-errors/react/sample.jsx', ['Unknown word: "Summmer"'], {
+            checkJSXText: false,
+        }),
     ],
 });
 
-function resolveFromMonoRepo(file: string): string {
-    const packagePath = require.resolve(file, {
-        paths: [root],
-    });
-    // console.error('resolveFromMonoRepo %o', packagePath);
-    return packagePath;
-}
-
 function resolveFix(filename: string): string {
     return path.resolve(fixturesDir, filename);
+}
+
+interface ValidTestCaseEsLint9 extends ValidTestCase {
+    languageOptions?: {
+        parser?: unknown;
+    };
 }
 
 function readFix(filename: string, options?: Options): ValidTestCase {
     const __filename = resolveFix(filename);
     const code = fs.readFileSync(__filename, 'utf-8');
 
-    const sample: ValidTestCase = {
+    const sample: ValidTestCaseEsLint9 = {
         code,
         filename: __filename,
     };
@@ -231,7 +246,8 @@ function readFix(filename: string, options?: Options): ValidTestCase {
 
     const parser = parsers[path.extname(__filename)];
     if (parser) {
-        sample.parser = parser;
+        sample.languageOptions ??= {};
+        sample.languageOptions.parser = parser;
     }
 
     return sample;
@@ -241,15 +257,39 @@ function readSample(sampleFile: string, options?: Options) {
     return readFix(path.join('samples', sampleFile), options);
 }
 
-function readInvalid(filename: string, errors: RuleTester.InvalidTestCase['errors'], options?: Options) {
+interface TestCaseError {
+    message?: string | RegExp | undefined;
+    messageId?: string | undefined;
+    type?: string | undefined;
+    data?: unknown | undefined;
+    line?: number | undefined;
+    column?: number | undefined;
+    endLine?: number | undefined;
+    endColumn?: number | undefined;
+    suggestions?: RuleTester.SuggestionOutput[] | undefined | number;
+}
+
+type InvalidTestCaseError = RuleTester.TestCaseError | TestCaseError | string;
+
+function readInvalid(filename: string, errors: (TestCaseError | string)[], options?: Options) {
     const sample = readFix(filename, options);
     return {
         ...sample,
-        errors,
+        errors: errors.map((err) => csError(err)),
     };
 }
 
 function fixtureRelativeToCwd(filename: string) {
     const fixFile = resolveFix(filename);
     return path.relative(process.cwd(), fixFile);
+}
+
+function ce(message: string, suggestions?: number): RuleTester.TestCaseError {
+    return { message, suggestions } as RuleTester.TestCaseError;
+}
+
+function csError(error: InvalidTestCaseError, suggestions?: number): RuleTester.TestCaseError {
+    if (error && typeof error === 'object') return error as RuleTester.TestCaseError;
+    const found = KnownErrors.find((e) => e.message === error) as RuleTester.TestCaseError | undefined;
+    return found || ce(error, suggestions);
 }

@@ -51,6 +51,7 @@
     "!**/*.map"
   ],
   "scripts": {
+    "bt": "pnpm build && pnpm test",
     "build": "pnpm build:schema && pnpm build:src",
     "build:src": "tsc -b ./tsconfig.json",
     "build:schema": "ts-json-schema-generator --no-top-ref --expose none --path src/common/options.cts --type Options  -o  ./assets/options.schema.json",
@@ -59,7 +60,7 @@
     "clean-build": "pnpm run clean && pnpm run build",
     "coverage": "echo coverage",
     "test-watch": "pnpm run test -- --watch",
-    "test": "npx mocha --timeout 10000 \"dist/**/*.test.cjs\""
+    "test": "npx mocha --timeout 10000 \"dist/**/*.test.mjs\""
   },
   "repository": {
     "type": "git",
@@ -73,23 +74,29 @@
     "node": ">=18"
   },
   "devDependencies": {
-    "@types/eslint": "^8.56.7",
+    "@eslint/eslintrc": "^3.0.2",
+    "@eslint/js": "^9.0.0",
     "@types/estree": "^1.0.5",
     "@types/mocha": "^10.0.6",
-    "@typescript-eslint/eslint-plugin": "^7.5.0",
-    "@typescript-eslint/parser": "^7.5.0",
-    "@typescript-eslint/types": "^7.5.0",
-    "@typescript-eslint/typescript-estree": "^7.5.0",
-    "eslint": "^8.57.0",
+    "@typescript-eslint/parser": "^7.6.0",
+    "@typescript-eslint/types": "^7.6.0",
+    "eslint": "^9.0.0",
+    "eslint-plugin-n": "^17.1.0",
     "eslint-plugin-react": "^7.34.1",
+    "eslint-plugin-simple-import-sort": "^12.0.0",
+    "globals": "^15.0.0",
     "mocha": "^10.4.0",
     "ts-json-schema-generator": "^1.5.0",
-    "typescript": "^5.4.4"
+    "typescript": "^5.4.4",
+    "typescript-eslint": "^7.5.0"
   },
   "dependencies": {
     "@cspell/cspell-types": "workspace:*",
     "cspell-lib": "workspace:*",
     "estree-walker": "^3.0.3",
     "synckit": "^0.9.0"
+  },
+  "peerDependencies": {
+    "eslint": "^7 || ^8 || ^9"
   }
 }
