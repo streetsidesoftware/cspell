@@ -1,4 +1,5 @@
 import fs from 'node:fs';
+// eslint-disable-next-line n/no-unsupported-features/node-builtins
 import { getActiveResourcesInfo } from 'node:process';
 import util from 'node:util';
 
@@ -49,7 +50,7 @@ const sm = expect.stringMatching;
 setTimeout(
     () => {
         debugOut('Failed to quit in 1 minute: %o', getActiveResourcesInfo());
-        // eslint-disable-next-line no-process-exit
+        // eslint-disable-next-line n/no-process-exit
         process.exit(1);
     },
     1000 * 60 * 1,

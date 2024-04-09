@@ -1,4 +1,4 @@
-/* eslint-disable node/no-extraneous-import */
+/* eslint-disable n/no-extraneous-import */
 import type { Plugin } from 'rollup';
 
 import { injectSnippet } from '../inject.mjs';

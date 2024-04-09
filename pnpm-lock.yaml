@@ -80,6 +80,9 @@ importers:
       eslint-plugin-jest:
         specifier: ^27.9.0
         version: 27.9.0(@typescript-eslint/eslint-plugin@7.5.0)(eslint@8.57.0)(jest@29.7.0)(typescript@5.4.4)
+      eslint-plugin-n:
+        specifier: ^17.1.0
+        version: 17.1.0(eslint@8.57.0)
       eslint-plugin-node:
         specifier: ^11.1.0
         version: 11.1.0(eslint@8.57.0)
@@ -125,6 +128,9 @@ importers:
       typescript:
         specifier: ^5.4.4
         version: 5.4.4
+      typescript-eslint:
+        specifier: ^7.5.0
+        version: 7.5.0(eslint@8.57.0)(typescript@5.4.4)
       vite:
         specifier: ^5.2.8
         version: 5.2.8(@types/node@18.19.30)
@@ -8798,6 +8804,16 @@ packages:
     resolution: {integrity: sha512-/veY75JbMK4j1yjvuUxuVsiS/hr/4iHs9FTT6cgTexxdE0Ly/glccBAkloH/DofkjRbZU3bnoj38mOmhkZ0lHw==}
     engines: {node: '>=12'}
 
+  /eslint-compat-utils@0.5.0(eslint@8.57.0):
+    resolution: {integrity: sha512-dc6Y8tzEcSYZMHa+CMPLi/hyo1FzNeonbhJL7Ol0ccuKQkwopJcJBA9YL/xmMTLU1eKigXo9vj9nALElWYSowg==}
+    engines: {node: '>=12'}
+    peerDependencies:
+      eslint: '>=6.0.0'
+    dependencies:
+      eslint: 8.57.0
+      semver: 7.6.0
+    dev: true
+
   /eslint-compat-utils@0.5.0(eslint@9.0.0):
     resolution: {integrity: sha512-dc6Y8tzEcSYZMHa+CMPLi/hyo1FzNeonbhJL7Ol0ccuKQkwopJcJBA9YL/xmMTLU1eKigXo9vj9nALElWYSowg==}
     engines: {node: '>=12'}
@@ -8917,6 +8933,18 @@ packages:
       eslint-import-resolver-typescript: 3.6.1(@typescript-eslint/parser@7.5.0)(eslint-plugin-import@2.29.1)(eslint@8.57.0)
     transitivePeerDependencies:
       - supports-color
+    dev: true
+
+  /eslint-plugin-es-x@7.6.0(eslint@8.57.0):
+    resolution: {integrity: sha512-I0AmeNgevgaTR7y2lrVCJmGYF0rjoznpDvqV/kIkZSZbZ8Rw3eu4cGlvBBULScfkSOCzqKbff5LR4CNrV7mZHA==}
+    engines: {node: ^14.18.0 || >=16.0.0}
+    peerDependencies:
+      eslint: '>=8'
+    dependencies:
+      '@eslint-community/eslint-utils': 4.4.0(eslint@8.57.0)
+      '@eslint-community/regexpp': 4.10.0
+      eslint: 8.57.0
+      eslint-compat-utils: 0.5.0(eslint@8.57.0)
     dev: true
 
   /eslint-plugin-es-x@7.6.0(eslint@9.0.0):
@@ -9043,6 +9071,23 @@ packages:
     transitivePeerDependencies:
       - supports-color
       - typescript
+    dev: true
+
+  /eslint-plugin-n@17.1.0(eslint@8.57.0):
+    resolution: {integrity: sha512-+MTiTej3B07+8vS/RfSMD1w4O9VVR9BSJT9kSa9QUsBlXzKi5PZc+lB3w+iu/2eIS3drFU7zCikSrD8Yn8PEBQ==}
+    engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
+    peerDependencies:
+      eslint: '>=8.23.0'
+    dependencies:
+      '@eslint-community/eslint-utils': 4.4.0(eslint@8.57.0)
+      enhanced-resolve: 5.16.0
+      eslint: 8.57.0
+      eslint-plugin-es-x: 7.6.0(eslint@8.57.0)
+      get-tsconfig: 4.7.3
+      globals: 14.0.0
+      ignore: 5.3.1
+      minimatch: 9.0.4
+      semver: 7.6.0
     dev: true
 
   /eslint-plugin-n@17.1.0(eslint@9.0.0):

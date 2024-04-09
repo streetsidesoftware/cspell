@@ -26,6 +26,7 @@ runAsWorker(
      */
     async (filename, text, root, options) => {
         if (!spellChecker) {
+            // eslint-disable-next-line import/no-unresolved
             spellChecker = await import('./spellCheck.mjs');
         }
 
