@@ -8,7 +8,7 @@
 
 import { autoResolve } from './util/AutoResolve.js';
 
-// cspell:ignore cljs cljx cson iname pcregrep fsscript gradle shtml xhtml mdoc aspx jshtm gitconfig bowerrc
+// cspell:ignore cljs cljx cson iname pcregrep fsscript fasl gradle shtml xhtml mdoc aspx jshtm gitconfig bowerrc
 // cspell:ignore jshintrc jscsrc eslintrc babelrc webmanifest mdown markdn psgi phtml pssc psrc gypi rhistory
 // cspell:ignore rprofile cshtml gemspec cginc ebuild zshrc zprofile zlogin zlogout zshenv dsql ascx axml
 // cspell:ignore bpmn csproj dita ditamap dtml fsproj fxml isml mxml adoc
@@ -49,6 +49,7 @@ export const languageExtensionDefinitions: LanguageDefinitions = [
     { id: 'dhall', extensions: ['.dhall'] },
     { id: 'diff', extensions: ['.diff', '.patch', '.rej'] },
     { id: 'dockerfile', extensions: ['.dockerfile'], filenames: ['Dockerfile', 'dockerfile', 'Dockerfile.dev'] },
+    { id: 'elisp', extensions: ['.el'] },
     { id: 'elixir', extensions: ['.ex', '.exs'] },
     { id: 'fsharp', extensions: ['.fs', '.fsi', '.fsx', '.fsscript'] },
     { id: 'go', extensions: ['.go'] },
@@ -74,6 +75,7 @@ export const languageExtensionDefinitions: LanguageDefinitions = [
     { id: 'julia', extensions: ['.jl'] },
     { id: 'jungle', extensions: ['.jungle'] },
     { id: 'less', extensions: ['.less'] },
+    { id: 'lisp', extensions: ['.lisp', '.lsp', '.l', '.fasl'] },
     { id: 'literate haskell', extensions: ['.lhs'] },
     { id: 'lua', extensions: ['.lua'] },
     { id: 'makefile', extensions: ['.mk'], filenames: ['makefile'] },
