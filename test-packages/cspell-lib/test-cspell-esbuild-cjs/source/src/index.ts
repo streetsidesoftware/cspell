@@ -1,5 +1,4 @@
 import assert from 'assert';
-// eslint-disable-next-line node/no-unpublished-import
 import { spellCheckDocument } from 'cspell-lib';
 import { resolve } from 'path';
 import { pathToFileURL } from 'url';

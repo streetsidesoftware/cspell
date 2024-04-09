@@ -10,7 +10,7 @@ const config = {
     },
     extends: [
         'eslint:recommended',
-        'plugin:node/recommended',
+        'plugin:n/recommended',
         'plugin:import/errors',
         'plugin:import/warnings',
         'plugin:promise/recommended',
@@ -61,13 +61,13 @@ const config = {
                 'no-restricted-modules': 'error',
                 '@typescript-eslint/no-unused-vars': ['error', { argsIgnorePattern: '^_', varsIgnorePattern: '^_' }],
                 // This is caught by 'import/no-unresolved'
-                'node/no-missing-import': [
+                'n/no-missing-import': [
                     'off',
                     {
                         tryExtensions: ['.js', '.d.ts', '.ts'],
                     },
                 ],
-                'node/no-unsupported-features/es-syntax': 'off',
+                'n/no-unsupported-features/es-syntax': 'off',
                 'import/no-unresolved': 'off',
                 '@typescript-eslint/consistent-type-imports': 'error',
                 // 'import/order': 'error',
@@ -93,7 +93,7 @@ const config = {
                 sourceType: 'module',
             },
             rules: {
-                'node/no-unsupported-features/es-syntax': 'off',
+                'n/no-unsupported-features/es-syntax': 'off',
             },
         },
         {
@@ -109,9 +109,15 @@ const config = {
                 '**/src/perf/**',
             ],
             rules: {
-                'node/no-extraneous-import': 'off',
-                'node/no-extraneous-require': 'off',
-                'node/no-unpublished-import': 'off',
+                'n/no-extraneous-import': 'off',
+                'n/no-extraneous-require': 'off',
+                'n/no-unpublished-import': 'off',
+            },
+        },
+        {
+            files: ['**/eslint.config.js'],
+            rules: {
+                'import/no-unresolved': 'off',
             },
         },
     ],

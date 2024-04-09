@@ -73,7 +73,7 @@ function create(context: Rule.RuleContext): Rule.RuleListener {
         const data = {
             word,
         };
-        const code = context.sourceCode || context.getSourceCode();
+        const code = contextSourceCode(context);
         const startPos = code.getLocFromIndex(start);
         const endPos = code.getLocFromIndex(end);
         const loc = { start: startPos, end: endPos };
@@ -149,9 +149,13 @@ function logContext(log: typeof console.log, context: Rule.RuleContext) {
         cwd: context.cwd,
         filename: context.filename,
         physicalFilename: context.physicalFilename,
-        scope: context.getScope().type,
+        // scope: context.getScope().type,
         options: context.options.length === 1 ? context.options[0] : context.options,
     });
+}
+
+function contextSourceCode(context: Rule.RuleContext): Rule.RuleContext['sourceCode'] {
+    return context.sourceCode || context.getSourceCode();
 }
 
 export const meta = { name: '@cspell' } as const;

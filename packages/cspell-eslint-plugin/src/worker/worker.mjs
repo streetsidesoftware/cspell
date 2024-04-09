@@ -1,7 +1,6 @@
-/* eslint-disable import/no-unresolved */
-/* eslint-disable node/no-missing-import */
-
 // @ts-check
+
+/* eslint-disable n/no-missing-import */
 
 /**
  * @typedef {import('estree').Node} Node
@@ -27,6 +26,7 @@ runAsWorker(
      */
     async (filename, text, root, options) => {
         if (!spellChecker) {
+            // eslint-disable-next-line import/no-unresolved
             spellChecker = await import('./spellCheck.mjs');
         }
 

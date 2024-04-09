@@ -1,4 +1,5 @@
-/* eslint-disable node/shebang */
+#!/usr/bin/env node
+
 import assert from 'assert';
 import { getPipes } from './dist/index.js';
 

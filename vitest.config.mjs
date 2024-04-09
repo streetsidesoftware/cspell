@@ -1,4 +1,4 @@
-// eslint-disable-next-line import/no-unresolved, node/no-missing-import
+// eslint-disable-next-line import/no-unresolved
 import { defineConfig } from 'vitest/config';
 import { fileURLToPath } from 'url';
 
