@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 8.7.0 (2024-04-10)
+
+**Note:** Version bump only for package test-cspell-io
+
 ## 8.6.1 (2024-03-25)
 
 **Note:** Version bump only for package test-cspell-io
