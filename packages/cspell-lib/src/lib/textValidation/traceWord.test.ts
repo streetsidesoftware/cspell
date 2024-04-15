@@ -47,7 +47,7 @@ describe('traceWord', async () => {
         ${'word_word'}    | ${[wff('word_word'), wft('word'), wft('word')]}
         ${'word_nword'}   | ${[wff('word_nword'), wft('word'), wff('nword')] /* cspell:ignore nword */}
         ${'ISpellResult'} | ${[wff('ISpellResult'), wft('I'), wft('Spell'), wft('Result')]}
-        ${'ERRORcode'}    | ${[wft('ERRORcode'), wft('ERROR'), wft('code')]}
+        ${'ERRORcode'}    | ${[wff('ERRORcode'), wft('ERROR'), wft('code')]}
     `('traceWord splits $word', ({ word, expected }) => {
         const r = traceWord(word, dicts, baseSettings);
         expect(r.splits).toEqual(expected);
@@ -57,7 +57,8 @@ describe('traceWord', async () => {
         word              | expected
         ${'word_word'}    | ${{ ...wft('word'), dictName: 'en_us' }}
         ${'ISpellResult'} | ${{ ...wft('Result'), foundWord: 'result', dictName: 'en_us' }}
-        ${'ERRORcode'}    | ${{ ...wft('ERRORcode'), foundWord: 'errorcode', dictName: 'node' }}
+        ${'ERRORCode'}    | ${{ ...wft('ERROR'), foundWord: 'ERROR', dictName: 'node' }}
+        ${'ERRORCode'}    | ${{ ...wft('Code'), foundWord: 'code', dictName: 'node' }}
         ${'ERRORcode'}    | ${{ ...wft('ERROR'), foundWord: 'error', dictName: 'en_us' }}
         ${'apple-pie'}    | ${{ ...wft('pie'), dictName: 'en_us' }}
         ${"can't"}        | ${{ ...wft("can't"), dictName: 'en_us' }}
