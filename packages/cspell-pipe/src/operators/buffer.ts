@@ -17,7 +17,7 @@ export function opBufferAsync<T>(size: number): (iter: AsyncIterable<T>) => Asyn
             }
         }
 
-        if (buffer.length) {
+        if (buffer.length > 0) {
             yield buffer;
         }
     }
@@ -40,7 +40,7 @@ export function opBufferSync<T>(size: number): (iter: Iterable<T>) => Iterable<T
             }
         }
 
-        if (buffer.length) {
+        if (buffer.length > 0) {
             yield buffer;
         }
     }

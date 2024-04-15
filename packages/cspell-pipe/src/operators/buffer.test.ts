@@ -1,13 +1,9 @@
-/* eslint-disable unicorn/no-array-callback-reference */
 import { describe, expect, test } from 'vitest';
 
-import { toArray, toAsyncIterable } from '../helpers/index.js';
+import { toArray } from '../helpers/index.js';
 import { pipeAsync, pipeSync } from '../pipe.js';
 import { opBuffer } from './buffer.js';
-import { opMap } from './map.js';
-import { opTap } from './tap.js';
 import { opTake } from './take.js';
-import exp from 'constants';
 
 describe('Validate buffer', () => {
     const values = ['one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten', 'eleven'];
@@ -78,7 +74,7 @@ function mapP<T>(v: T[]): Promise<T>[] {
 
 async function* delay<T>(values: T[], ms: number): AsyncIterable<T> {
     for (const v of values) {
-        await new Promise((r) => setTimeout(r, ms));
-        yield Promise.resolve(v);
+        await new Promise((resolve) => setTimeout(resolve, ms));
+        yield v;
     }
 }

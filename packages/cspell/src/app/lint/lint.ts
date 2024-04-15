@@ -716,16 +716,3 @@ async function* concatAsyncIterables<T>(
         yield* iter;
     }
 }
-
-function* readAhead<T>(iter: Iterable<T>, size: number): Iterable<T> {
-    const buffer: T[] = [];
-    for (const v of iter) {
-        buffer.push(v);
-        if (buffer.length >= size) {
-            yield buffer.shift()!;
-        }
-    }
-    if (buffer.length) {
-        yield* buffer;
-    }
-}

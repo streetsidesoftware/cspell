@@ -53,11 +53,6 @@ const config = {
     plugins: ['import', 'unicorn', 'simple-import-sort'],
     overrides: [
         {
-            rules: {
-                'unicorn/explicit-length-check': 'off',
-            },
-        },
-        {
             files: ['**/*.ts', '**/*.mts', '**/*.cts'],
             extends: ['plugin:@typescript-eslint/recommended', 'plugin:import/typescript'],
             parser: '@typescript-eslint/parser',
@@ -78,6 +73,7 @@ const config = {
                 // 'import/order': 'error',
                 'simple-import-sort/imports': 'error',
                 'simple-import-sort/exports': 'error',
+                'unicorn/explicit-length-check': 'off',
             },
         },
         {
