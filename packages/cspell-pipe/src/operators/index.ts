@@ -14,3 +14,4 @@ export { opTake, opTakeAsync, opTakeSync } from './take.js';
 export { opTap, opTapAsync, opTapSync } from './tap.js';
 export type { OperatorAsync, OperatorSync, OperatorSyncToAsync } from './types.js';
 export { opUnique, opUniqueAsync, opUniqueSync } from './unique.js';
+export { opBuffer, opBufferAsync, opBufferSync } from './buffer.js';

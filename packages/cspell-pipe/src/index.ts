@@ -4,6 +4,7 @@ import * as _operators from './operators/index.js';
 export { interleave, isAsyncIterable, toArray, toAsyncIterable, toDistributableIterable } from './helpers/index.js';
 export {
     opAppend,
+    opBuffer,
     opAwaitAsync,
     opConcatMap,
     opFilter,

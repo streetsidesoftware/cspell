@@ -2,6 +2,7 @@ export { toArraySync as toArray } from '../helpers/toArray.js';
 export type { OperatorSync as Operator } from '../operators/index.js';
 export {
     opAppendSync as opAppend,
+    opBufferSync as opBuffer,
     opCombineSync as opCombine,
     opConcatMapSync as opConcatMap,
     opFilterSync as opFilter,
