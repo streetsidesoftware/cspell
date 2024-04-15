@@ -73,6 +73,7 @@ const config = {
                 // 'import/order': 'error',
                 'simple-import-sort/imports': 'error',
                 'simple-import-sort/exports': 'error',
+                'unicorn/explicit-length-check': 'off',
             },
         },
         {

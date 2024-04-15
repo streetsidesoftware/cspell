@@ -5,6 +5,7 @@ export { interleave, isAsyncIterable, toArray, toAsyncIterable, toDistributableI
 export {
     opAppend,
     opAwaitAsync,
+    opBuffer,
     opConcatMap,
     opFilter,
     opFirst,

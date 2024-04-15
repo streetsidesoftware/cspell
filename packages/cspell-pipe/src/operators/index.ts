@@ -1,5 +1,6 @@
 export { opAppend, opAppendAsync, opAppendSync } from './append.js';
 export { opAwaitAsync } from './await.js';
+export { opBuffer, opBufferAsync, opBufferSync } from './buffer.js';
 export { opCombineAsync, opCombineSync } from './combine.js';
 export { opConcatMap, opConcatMapAsync, opConcatMapSync } from './concatMap.js';
 export { opFilter, opFilterAsync, opFilterSync } from './filter.js';
