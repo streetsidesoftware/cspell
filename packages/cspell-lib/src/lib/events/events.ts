@@ -1,3 +1,5 @@
+import { toError } from '../util/errors.js';
+
 export interface Disposable {
     dispose(): void;
 }
@@ -20,7 +22,7 @@ export type DisposableListener = Disposable;
 export interface IEventEmitter<T> extends Disposable {
     readonly name: string;
     readonly on: EventFn<T>;
-    fire(event: T): void;
+    fire(event: T): Error[] | undefined | void;
 }
 
 export function createEmitter<T>(name: string): IEventEmitter<T> {
@@ -50,14 +52,17 @@ export class EventEmitter<T> implements IEventEmitter<T> {
      *
      * @param data The event object.
      */
-    fire(event: T): void {
+    fire(event: T): undefined | Error[] {
+        let errors: Error[] | undefined;
         for (const listener of this.#listeners) {
             try {
                 listener(event);
             } catch (e) {
-                console.error(`Error in event listener: ${this.name}`, e);
+                errors = errors ?? [];
+                errors.push(toError(e));
             }
         }
+        return errors;
     }
 
     /**
