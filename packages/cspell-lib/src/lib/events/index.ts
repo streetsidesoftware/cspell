@@ -1,2 +1,2 @@
-export type { DisposableListener, EventNames, EventTypes } from './events.js';
-export { addEventListener, ClearCacheEvent, dispatchClearCache, dispatchEvent, onClearCache } from './events.js';
+export type { DisposableListener } from './events.js';
+export { dispatchClearCache, onClearCache } from './events.js';

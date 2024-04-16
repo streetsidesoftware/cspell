@@ -1,41 +1,89 @@
+export interface Disposable {
+    dispose(): void;
+}
+
+type EventListener<T, U = unknown> = (e: T) => U;
+
+export interface EventFn<T, U = unknown> {
+    /**
+     * A function that represents an event to which you subscribe by calling it with
+     * a listener function as argument.
+     *
+     * @param listener The listener function will be called when the event happens.
+     * @returns A disposable which unsubscribes the event listener.
+     */
+    (listener: (e: T) => U): Disposable;
+}
+
+export type DisposableListener = Disposable;
+
+export interface IEventEmitter<T> extends Disposable {
+    readonly name: string;
+    readonly on: EventFn<T>;
+    fire(event: T): void;
+}
+
+export function createEmitter<T>(name: string): IEventEmitter<T> {
+    return new EventEmitter(name);
+}
+
+export class EventEmitter<T> implements IEventEmitter<T> {
+    #listeners = new Set<EventListener<T>>();
+
+    constructor(readonly name: string) {}
+
+    /**
+     * The event listeners can subscribe to.
+     */
+    readonly on = (listener: EventListener<T>): Disposable => {
+        this.#listeners.add(listener);
+        return {
+            dispose: () => {
+                this.#listeners.delete(listener);
+            },
+        };
+    };
+
+    /**
+     * Notify all subscribers of the {@link EventEmitter.on event}. Failure
+     * of one or more listener will not fail this function call.
+     *
+     * @param data The event object.
+     */
+    fire(event: T): void {
+        for (const listener of this.#listeners) {
+            try {
+                listener(event);
+            } catch (e) {
+                console.error(`Error in event listener: ${this.name}`, e);
+            }
+        }
+    }
+
+    /**
+     * Dispose this object and free resources.
+     */
+    readonly dispose = (): void => {
+        this.#listeners.clear();
+    };
+}
+
 /**
  * Event indicating that the cache should be cleared.
  */
-export class ClearCacheEvent extends Event {
+class ClearCacheEvent extends EventEmitter<unknown> {
     constructor() {
         super(ClearCacheEvent.eventName);
     }
     static eventName = 'clear-cache' as const;
 }
 
-export type EventNames = typeof ClearCacheEvent.eventName;
-
-export type EventTypes = ClearCacheEvent;
-
-const eventEmitter = new EventTarget();
-
-export interface DisposableListener {
-    dispose(): void;
-}
-
-export function addEventListener(event: EventNames, listener: (event: ClearCacheEvent) => void): DisposableListener;
-export function addEventListener(event: string, listener: (event: Event) => void): DisposableListener {
-    eventEmitter.addEventListener(event, listener);
-    return {
-        dispose() {
-            eventEmitter.removeEventListener(event, listener);
-        },
-    };
-}
-
-export function dispatchEvent(event: EventTypes): void {
-    eventEmitter.dispatchEvent(event);
-}
+const clearCacheEvent = new ClearCacheEvent();
 
 export function onClearCache(listener: () => void): DisposableListener {
-    return addEventListener(ClearCacheEvent.eventName, listener);
+    return clearCacheEvent.on(listener);
 }
 
 export function dispatchClearCache(): void {
-    dispatchEvent(new ClearCacheEvent());
+    clearCacheEvent.fire(undefined);
 }
