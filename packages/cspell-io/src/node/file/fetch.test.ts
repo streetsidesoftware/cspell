@@ -5,8 +5,6 @@ import { fetchHead, fetchURL } from './fetch.js';
 
 const timeout = 20000;
 
-const testOptions = { timeout };
-
 describe('fetch', () => {
     test(
         'fetch url',
@@ -16,7 +14,7 @@ describe('fetch', () => {
             expect(response.ok).toBe(true);
             expect(await response.text()).toMatch('Example Domain');
         },
-        testOptions,
+        timeout,
     );
 
     test(
@@ -26,7 +24,7 @@ describe('fetch', () => {
             const response = await fetchURL(url);
             expect(response).toBeInstanceOf(Buffer);
         },
-        testOptions,
+        timeout,
     );
 
     /*
@@ -55,7 +53,7 @@ describe('fetch', () => {
             expect(response.get('etag')).toEqual(expect.any(String));
             expect(Number.parseInt(response.get('content-length') || '', 10)).toBeGreaterThan(0);
         },
-        testOptions,
+        timeout,
     );
 
     test.each`
@@ -69,7 +67,7 @@ describe('fetch', () => {
             url = new URL(url);
             await expect(fetchURL(url)).rejects.toThrowError(expected);
         },
-        testOptions,
+        timeout,
     );
 });
 
