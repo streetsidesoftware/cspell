@@ -59,10 +59,10 @@ describe('fetch', () => {
     );
 
     test.each`
-        url                                | expected
-        ${'https://x.example.com/'}        | ${'getaddrinfo ENOTFOUND x.example.com'}
-        ${'https://www.google.com/404'}    | ${/URL not found|getaddrinfo EAI_AGAIN/}
-        ${'http://httpbin.org/status/503'} | ${'Fatal Error'}
+        url                                   | expected
+        ${'https://x.example.com/'}           | ${'getaddrinfo ENOTFOUND x.example.com'}
+        ${'https://www.google.com/404'}       | ${/URL not found|getaddrinfo EAI_AGAIN/}
+        ${'https://httpbingo.org/status/503'} | ${'Fatal Error'}
     `(
         'fetchURL with error',
         async ({ url, expected }) => {
