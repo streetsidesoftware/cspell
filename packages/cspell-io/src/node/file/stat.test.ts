@@ -6,6 +6,8 @@ import { getStat, getStatSync } from './stat.js';
 const oc = expect.objectContaining;
 const sc = expect.stringContaining;
 
+const timeout = 20000;
+
 describe('stat', () => {
     test.each`
         url                                                                                 | expected
@@ -17,14 +19,18 @@ describe('stat', () => {
     });
 
     test.each`
-        url                                | expected
-        ${'https://www.google.com/404'}    | ${oc({ message: 'URL not found.', code: 'ENOENT' })}
-        ${'http://httpbin.org/status/503'} | ${oc({ message: 'Fatal Error' })}
-        ${join(__dirname, 'not-found.nf')} | ${oc({ code: 'ENOENT' })}
-    `('getStat with error $url', async ({ url, expected }) => {
-        const r = await getStat(url);
-        expect(r).toEqual(expected);
-    });
+        url                                   | expected
+        ${'https://www.google.com/404'}       | ${oc({ message: 'URL not found.', code: 'ENOENT' })}
+        ${'https://httpbingo.org/status/503'} | ${oc({ message: 'Fatal Error' })}
+        ${join(__dirname, 'not-found.nf')}    | ${oc({ code: 'ENOENT' })}
+    `(
+        'getStat with error $url',
+        async ({ url, expected }) => {
+            const r = await getStat(url);
+            expect(r).toEqual(expected);
+        },
+        timeout,
+    );
 
     test.each`
         url           | expected
