@@ -234,7 +234,7 @@ function fixMatch(type: AffixRule['type'], match: string): RegExp {
 
 function affixMatchToRegExpString(match: string): string {
     if (match === '0') return '';
-    return match.replace(/([\\\-?*])/g, '\\$1');
+    return match.replaceAll(/([\\\-?*])/g, '\\$1');
 }
 
 function collectFx(): Collector<Afx> {

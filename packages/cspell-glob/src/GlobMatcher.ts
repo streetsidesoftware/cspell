@@ -226,7 +226,7 @@ function buildMatcherFn(patterns: GlobPatternWithRoot[], options: NormalizedGlob
 
     const fn: GlobMatchFn = (filename: string) => {
         filename = path.resolve(path.normalize(filename));
-        const fNameNormalize = path.sep === '\\' ? filename.replace(/\\/g, '/') : filename;
+        const fNameNormalize = path.sep === '\\' ? filename.replaceAll('\\', '/') : filename;
         let lastRoot = '!!!!!!';
         let lastRel = '';
 
@@ -234,7 +234,7 @@ function buildMatcherFn(patterns: GlobPatternWithRoot[], options: NormalizedGlob
             if (root !== lastRoot) {
                 lastRoot = root;
                 const relName = path.relative(root, filename);
-                lastRel = path.sep === '\\' ? relName.replace(/\\/g, '/') : relName;
+                lastRel = path.sep === '\\' ? relName.replaceAll('\\', '/') : relName;
             }
             return lastRel;
         }

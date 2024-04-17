@@ -34,7 +34,7 @@ export function stringify(report: Report): string {
         ? stringifyYaml(
               {
                   issuesSummary: report.issuesSummary.map((issue) =>
-                      stringifyYaml(issue).replace(/\n/g, ', ').replace(/\s+/g, ' ').trim(),
+                      stringifyYaml(issue).replaceAll('\n', ', ').replaceAll(/\s+/g, ' ').trim(),
                   ),
               },
               { lineWidth: 200 },

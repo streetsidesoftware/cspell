@@ -220,7 +220,7 @@ describe('Validate weightedMaps', () => {
 });
 
 function sep(s: string): string {
-    return s.replace(/[|+]/g, DEFAULT_COMPOUNDED_WORD_SEPARATOR);
+    return s.replaceAll(/[|+]/g, DEFAULT_COMPOUNDED_WORD_SEPARATOR);
 }
 
 // function mo(...opts: Partial<SuggestionCostMapDef>[]): Partial<SuggestionCostMapDef> {

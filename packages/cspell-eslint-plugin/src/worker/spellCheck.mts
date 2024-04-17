@@ -430,9 +430,9 @@ function normalizeSuggestions(suggestions: Suggestions, nodeType: NodeType): Sug
     return suggestions.map((sug) => {
         if (!isSpecial.test(sug.word)) return sug;
         const s = { ...sug };
-        s.word = s.word.replace(allSpecial, '_');
+        s.word = s.word.replaceAll(allSpecial, '_');
         if (s.wordAdjustedToMatchCase) {
-            s.wordAdjustedToMatchCase = s.wordAdjustedToMatchCase.replace(allSpecial, '_');
+            s.wordAdjustedToMatchCase = s.wordAdjustedToMatchCase.replaceAll(allSpecial, '_');
         }
         return s;
     });

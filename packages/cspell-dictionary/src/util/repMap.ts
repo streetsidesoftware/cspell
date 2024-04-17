@@ -37,7 +37,7 @@ function charsetToRepMapRegEx(charset: CharacterSet | undefined, replaceWith = '
 
     return charset
         .split('|')
-        .map((chars) => `[${chars.replace(/[\][\\]/g, '\\$&')}]`)
+        .map((chars) => `[${chars.replaceAll(/[\][\\]/g, '\\$&')}]`)
         .map((map) => [map, replaceWith]);
 }
 function charsetToRepMap(charset: undefined, replaceWith?: string): undefined;
@@ -67,7 +67,7 @@ function createMapperRegExp(repMap: ReplaceMap): RegExp {
         .map((s) => {
             try {
                 // fix up any nested ()
-                const r = s.match(/\(/) ? s.replace(/\((?=.*\))/g, '(?:').replace(/\(\?:\?/g, '(?') : s;
+                const r = s.match(/\(/) ? s.replaceAll(/\((?=.*\))/g, '(?:').replaceAll('(?:?', '(?') : s;
                 new RegExp(r);
                 s = r;
             } catch (_err) {

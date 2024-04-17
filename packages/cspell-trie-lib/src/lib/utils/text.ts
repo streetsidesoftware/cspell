@@ -101,7 +101,7 @@ export function accentForms(letter: string): Iterable<string> {
  * @returns characters with accents removed (if it was possible)
  */
 export function stripAccents(characters: string): string {
-    return characters.normalize('NFD').replace(/\p{M}/gu, '');
+    return characters.normalize('NFD').replaceAll(/\p{M}/gu, '');
 }
 
 /**
@@ -110,7 +110,7 @@ export function stripAccents(characters: string): string {
  * @returns - only the accents.
  */
 export function stripNonAccents(characters: string): string {
-    return characters.normalize('NFD').replace(/[^\p{M}]/gu, '');
+    return characters.normalize('NFD').replaceAll(/[^\p{M}]/gu, '');
 }
 
 export function isValidUtf16Character(char: string): boolean {

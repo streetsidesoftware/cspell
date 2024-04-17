@@ -63,7 +63,7 @@ words:
 
 function toYaml(obj: unknown, indent: string | number = 2): string {
     if (typeof indent === 'string') {
-        indent = indent.replace(/\t/g, '    ').replace(/[^ ]/g, '');
+        indent = indent.replaceAll('\t', '    ').replaceAll(/[^ ]/g, '');
         indent = indent.length;
     }
     return stringify(obj, { indent });

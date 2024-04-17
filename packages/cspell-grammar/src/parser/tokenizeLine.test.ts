@@ -142,7 +142,7 @@ function serializeTokenizedLine(
 ) {
     const { line, tokens: parsedText } = val;
     const textAndScope = parsedText.map((t) => [
-        `${t.range[0]}: ${JSON.stringify(t.text.replace(/\r/g, '↤').replace(/\n/g, '↩'))}`,
+        `${t.range[0]}: ${JSON.stringify(t.text.replaceAll('\r', '↤').replaceAll('\n', '↩'))}`,
         `${t.scope.toString()}`,
     ]);
 
@@ -151,7 +151,7 @@ function serializeTokenizedLine(
     const pt = textAndScope
         .map((ts) => `${indentation}  ${ts[0]}${' '.repeat(maxLen - ts[0].length)}     -- ${ts[1]}`)
         .join('\n');
-    return `${line.lineNumber}: ${JSON.stringify(line.text.replace(/\r/g, '↤').replace(/\n/g, '↩'))}:\n${pt}`;
+    return `${line.lineNumber}: ${JSON.stringify(line.text.replaceAll('\r', '↤').replaceAll('\n', '↩'))}:\n${pt}`;
 }
 
 function isTokenizedLine(v: unknown | TokenizedLine): v is TokenizedLine {

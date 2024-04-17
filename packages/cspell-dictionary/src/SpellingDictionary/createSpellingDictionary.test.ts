@@ -47,7 +47,7 @@ describe('Validate createSpellingDictionary', () => {
         const words = ['آئینهٔ', 'آبادهٔ', 'کلاه'];
         expect(words).toEqual(words.map((w) => w.normalize('NFC')));
         const d = createSpellingDictionary(
-            words.map((w) => w.replace(/\p{M}/gu, '')),
+            words.map((w) => w.replaceAll(/\p{M}/gu, '')),
             'test create',
             __filename,
             opts({ caseSensitive: false }),

@@ -24,7 +24,7 @@ describe('Import/Export', () => {
         const ft = importTrieV3WithBuilder(
             new Builder(),
             data
-                .replace(/\[\d+\]/g, '')
+                .replaceAll(/\[\d+\]/g, '')
                 .split('\n')
                 .map((a) => (a ? a + '\r\n' : a)),
         );
@@ -40,7 +40,7 @@ describe('Import/Export', () => {
         const data = [...serializeTrie(trie, { base: 10, comment: 'Sample Words' })].join('');
         const ft = importTrieV3AsTrieRoot(
             data
-                .replace(/\[\d+\]/g, '')
+                .replaceAll(/\[\d+\]/g, '')
                 .split('\n')
                 .map((a) => (a ? a + '\r\n' : a)),
         );

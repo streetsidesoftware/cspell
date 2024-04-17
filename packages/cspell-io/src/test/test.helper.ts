@@ -49,7 +49,7 @@ function resolve(...parts: string[]): string {
 }
 
 export function testNameToDir(testName: string): string {
-    return `test_${testName.replace(/\s/g, '-').replace(/[^\w.-]/gi, '_')}_test`;
+    return `test_${testName.replaceAll(/\s/g, '-').replaceAll(/[^\w.-]/gi, '_')}_test`;
 }
 
 /**

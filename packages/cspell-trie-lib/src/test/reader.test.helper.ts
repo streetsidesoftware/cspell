@@ -21,7 +21,7 @@ export interface Config {
 
 export async function readConfig(configLocation: string): Promise<Config> {
     const json = await readFile(configLocation, 'utf-8');
-    return JSON.parse(json.replace(/\/\/.*/g, ''));
+    return JSON.parse(json.replaceAll(/\/\/.*/g, ''));
 }
 
 export async function readRawDictionaryFileFromConfig(configLocation: string, name?: string): Promise<Buffer> {

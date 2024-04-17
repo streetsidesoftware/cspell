@@ -154,7 +154,7 @@ function createIssuesSummaryAccumulator(issuesSummary: Map<string, IssueSummary>
 }
 
 function getPerfCsvFileUrl(root: vscodeUri.URI): URL {
-    const repPath = extractRepositoryPath(root).replace(/\//g, '__');
+    const repPath = extractRepositoryPath(root).replaceAll('/', '__');
     return new URL(`../../perf/perf-run-${repPath}.csv`, import.meta.url);
 }
 

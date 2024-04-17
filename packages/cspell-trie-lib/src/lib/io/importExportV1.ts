@@ -18,7 +18,7 @@ const regExpEscapeChars = /([[\]\\,:{}*])/g;
 const regExTrailingComma = /,(\}|\n)/g;
 
 function escapeChar(char: string): string {
-    return char.replace(regExpEscapeChars, '\\$1'); // lgtm[js/incomplete-sanitization]
+    return char.replaceAll(regExpEscapeChars, '\\$1'); // lgtm[js/incomplete-sanitization]
 }
 
 function trieToExportString(node: TrieNode, base: number): Sequence<string> {
@@ -62,7 +62,7 @@ export function serializeTrie(root: TrieRoot, options: ExportOptions | number = 
     const { base = 16, comment = '' } = options;
     const radix = base > 36 ? 36 : base < 10 ? 10 : base;
     const rows = toReferences(root).map((node) => {
-        const row = [...trieToExportString(node, radix), '\n'].join('').replace(regExTrailingComma, '$1');
+        const row = [...trieToExportString(node, radix), '\n'].join('').replaceAll(regExTrailingComma, '$1');
         return row;
     });
 
@@ -120,9 +120,9 @@ export function importTrie(linesX: Iterable<string> | IterableIterator<string>):
     function splitLine(line: string) {
         const pattern = '$1__COMMA__';
         return line
-            .replace(regNotEscapedCommas, pattern)
+            .replaceAll(regNotEscapedCommas, pattern)
             .split(regUnescapeCommas)
-            .map((a) => a.replace(regUnescape, '$1'));
+            .map((a) => a.replaceAll(regUnescape, '$1'));
     }
 
     function decodeLine(line: string, nodes: TrieNode[]): TrieNode {

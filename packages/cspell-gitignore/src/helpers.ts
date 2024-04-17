@@ -112,7 +112,7 @@ export function factoryPathHelper(path: PathInterface): PathHelper {
     }
 
     function normalizePath(path: string): string {
-        return path.replace(/\\/g, '/');
+        return path.replaceAll('\\', '/');
     }
 
     return {

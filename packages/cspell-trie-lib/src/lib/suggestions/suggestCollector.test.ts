@@ -178,7 +178,7 @@ function sampleSuggestions(): string[] {
         .concat(['workable', 'worked', 'cafe', 'café', 'resume', 'résumé', 'cafés'])
         .concat(['run|time', 'coffee|shop', 'run', 'time', 'coffee', 'shop', 'street|wise'])
         .concat([])
-        .map((a) => a.replace(/[|]/g, DEFAULT_COMPOUNDED_WORD_SEPARATOR));
+        .map((a) => a.replaceAll(/[|]/g, DEFAULT_COMPOUNDED_WORD_SEPARATOR));
 }
 
 function dictInfo() {

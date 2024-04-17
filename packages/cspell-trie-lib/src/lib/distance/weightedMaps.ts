@@ -424,7 +424,7 @@ function normalizeDef(def: SuggestionCostMapDef): SuggestionCostMapDef {
 }
 
 function normalizeMap(map: string): string {
-    return map.replace(matchPossibleWordSeparators, DEFAULT_COMPOUNDED_WORD_SEPARATOR);
+    return map.replaceAll(matchPossibleWordSeparators, DEFAULT_COMPOUNDED_WORD_SEPARATOR);
 }
 
 export const __testing__ = {

@@ -122,7 +122,7 @@ class TestHelperImpl implements TestHelper {
      */
     resolveTemp(...parts: string[]): string {
         const currentTestName = this.getCurrentTestName();
-        const testName = currentTestName.replace(/[^\w_.-]/g, '_');
+        const testName = currentTestName.replaceAll(/[^\w_.-]/g, '_');
         return path.resolve(this.tempDir, testName, ...parts);
     }
 

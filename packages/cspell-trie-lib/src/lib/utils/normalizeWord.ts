@@ -13,7 +13,7 @@ export const normalizeWord = (text: string): string => text.normalize();
  */
 
 export const normalizeWordToLowercase = (text: string): string =>
-    text.toLowerCase().normalize('NFD').replace(/\p{M}/gu, '');
+    text.toLowerCase().normalize('NFD').replaceAll(/\p{M}/gu, '');
 /**
  * generate case insensitive forms of a word
  * @param text - text to convert
@@ -22,5 +22,5 @@ export const normalizeWordToLowercase = (text: string): string =>
 
 export const normalizeWordForCaseInsensitive = (text: string): string[] => {
     const t = text.toLowerCase();
-    return [t, t.normalize('NFD').replace(/\p{M}/gu, '')];
+    return [t, t.normalize('NFD').replaceAll(/\p{M}/gu, '')];
 };

@@ -279,7 +279,7 @@ async function readFileSource(fileSource: FileSource, sourceOptions: CompileSour
 }
 
 function normalizeTargetName(name: string) {
-    return name.replace(/((\.txt|\.dic|\.aff|\.trie)(\.gz)?)?$/, '').replace(/[^\p{L}\p{M}.\w\\/-]/gu, '_');
+    return name.replace(/((\.txt|\.dic|\.aff|\.trie)(\.gz)?)?$/, '').replaceAll(/[^\p{L}\p{M}.\w\\/-]/gu, '_');
 }
 
 function logProgress<T>(freq = 100_000): (iter: Iterable<T>) => Iterable<T> {

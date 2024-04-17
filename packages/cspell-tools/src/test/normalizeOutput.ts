@@ -22,9 +22,9 @@ export function normalizeOutput(output: string, cwd = process.cwd()): string {
         output.replace(rxCwd, '{cwd}').replace(rxRootRepo, '{repo-root}'),
     );
 
-    return normalizeDirs.replace(regexpDate, '2022-01-01T00:00:00.000Z');
+    return normalizeDirs.replaceAll(regexpDate, '2022-01-01T00:00:00.000Z');
 }
 
 export function normalizeDirectorySeparator(path: string): string {
-    return path.replace(/\\/g, '/');
+    return path.replaceAll('\\', '/');
 }

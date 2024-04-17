@@ -189,7 +189,7 @@ export class Aff {
     #separateRules(rules: string): string[] {
         switch (this.affInfo.FLAG) {
             case 'long':
-                return [...new Set(rules.replace(/(..)/g, '$1//').split('//').slice(0, -1))];
+                return [...new Set(rules.replaceAll(/(..)/g, '$1//').split('//').slice(0, -1))];
             case 'num':
                 return [...new Set(rules.split(','))];
         }
@@ -249,7 +249,7 @@ export function logAffWord(affWord: AffWord, message: string) {
 export function affWordToColoredString(affWord: AffWord) {
     return util
         .inspect({ ...affWord, flags: flagsToString(affWord.flags) }, { showHidden: false, depth: 5, colors: true })
-        .replace(/(\s|\n|\r)+/g, ' ');
+        .replaceAll(/(\s|\n|\r)+/g, ' ');
 }
 
 /* istanbul ignore next */

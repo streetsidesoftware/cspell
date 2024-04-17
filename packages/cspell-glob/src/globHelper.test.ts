@@ -239,7 +239,7 @@ describe('Validate Glob Normalization to root', () => {
             root = path.resolve(root);
             const shouldMatch = !file.startsWith('!');
             file = file.replace(/^!/, '');
-            file = path.relative(root, path.resolve(root, file)).replace(/\\/g, '/');
+            file = path.relative(root, path.resolve(root, file)).replaceAll('\\', '/');
 
             const result = normalizeGlobToRoot(glob, root, path);
             expect(result).toEqual(expected);
@@ -343,7 +343,7 @@ describe('Validate Glob Normalization to root', () => {
     }
 
     function gN(glob: string, root: string, rawGlob: string, rawRoot: string): GlobPatternNormalized {
-        return { glob, root, rawGlob, rawRoot, isGlobalPattern: glob.replace(/^!+/g, '').startsWith('**') };
+        return { glob, root, rawGlob, rawRoot, isGlobalPattern: glob.replaceAll(/^!+/g, '').startsWith('**') };
     }
 
     test.each`

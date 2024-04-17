@@ -195,7 +195,7 @@ export function serializeTrie(root: TrieRoot, options: ExportOptions | number = 
         resolvedReferences
             .map((n) => n.toString(radix))
             .join(',')
-            .replace(/.{110,130}[,]/g, '$&\n') +
+            .replaceAll(/.{110,130}[,]/g, '$&\n') +
         '\n]\n';
 
     return pipe([generateHeader(radix, comment), reference], opAppend(lines));
@@ -459,7 +459,7 @@ function parseStream(radix: number, iter: Iterable<string>): TrieRoot {
             json = json + s;
             if (s === REF_INDEX_END) {
                 refIndex = json
-                    .replace(/[\s[\]]/g, '')
+                    .replaceAll(/[\s[\]]/g, '')
                     .split(',')
                     .map((n) => parseInt(n, radix));
                 return { ...acc, parser: undefined };

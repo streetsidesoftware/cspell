@@ -9,10 +9,10 @@ import * as path from 'node:path';
  * @return {string}
  */
 function normalize(content) {
-    content = content.replace(/\r/g, '');
-    content = content.replace(/^\s*\d+\/\d+/gm, '');
-    content = content.replace(/\n\n/g, '\n');
-    content = content.replace(/[\d.]+ms/g, ' ms');
+    content = content.replaceAll('\r', '');
+    content = content.replaceAll(/^\s*\d+\/\d+/gm, '');
+    content = content.replaceAll('\n\n', '\n');
+    content = content.replaceAll(/[\d.]+ms/g, ' ms');
     return content;
 }
 

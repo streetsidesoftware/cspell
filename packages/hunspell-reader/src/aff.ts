@@ -420,7 +420,7 @@ class AffData {
     #splitRules(rules: string): string[] {
         switch (this.affFlagType) {
             case 'long':
-                return [...new Set(rules.replace(/(..)/g, '$1//').split('//').slice(0, -1))];
+                return [...new Set(rules.replaceAll(/(..)/g, '$1//').split('//').slice(0, -1))];
             case 'num':
                 return [...new Set(rules.split(','))];
         }

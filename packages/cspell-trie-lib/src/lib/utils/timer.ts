@@ -106,7 +106,7 @@ export function createPerfTimer(): PerfTimer {
                     stack.push(e.at + e.elapsed);
                 }
                 return {
-                    name: '| '.repeat(d) + (e.name || '').replace(/\t/g, '  '),
+                    name: '| '.repeat(d) + (e.name || '').replaceAll('\t', '  '),
                     at: `${t(e.at)}`,
                     elapsed: e.elapsed ? `${t(e.elapsed)}` : '--',
                 };

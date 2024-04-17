@@ -57,7 +57,7 @@ export default tsEslint.config(
             // 'unicorn/prefer-module': 'error',
             'unicorn/prefer-node-protocol': 'error',
             // 'unicorn/prefer-spread': 'error',
-            // 'unicorn/prefer-string-replace-all': 'error',
+            'unicorn/prefer-string-replace-all': 'error',
         },
     },
     {

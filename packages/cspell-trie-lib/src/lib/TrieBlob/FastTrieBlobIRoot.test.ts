@@ -64,12 +64,12 @@ function genLetters(count = 500): string {
     for (let i = 'A'.codePointAt(0) || 0; i < count; ++i) {
         chars.push(String.fromCodePoint(i));
     }
-    letters = chars.join('').replace(/\P{L}/gu, '');
+    letters = chars.join('').replaceAll(/\P{L}/gu, '');
     return letters;
 }
 
 function genWords() {
     const letters = genLetters();
-    const words = letters.replace(/(.{5})/g, '$1|').split('|');
+    const words = letters.replaceAll(/(.{5})/g, '$1|').split('|');
     return words.filter((a) => !!a);
 }

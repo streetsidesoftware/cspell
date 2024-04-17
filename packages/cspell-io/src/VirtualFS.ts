@@ -153,7 +153,7 @@ class CVirtualFS implements VirtualFS {
     log = console.log;
     logEvent = (event: LogEvent) => {
         if (this.loggingEnabled) {
-            const id = event.traceID.toFixed(13).replace(/\d{4}(?=\d)/g, '$&.');
+            const id = event.traceID.toFixed(13).replaceAll(/\d{4}(?=\d)/g, '$&.');
             const msg = event.message ? `\n\t\t${event.message}` : '';
             const method = rPad(`${event.method}-${event.event}`, 16);
             this.log(`${method} ID:${id} ts:${event.ts.toFixed(13)} ${chopUrl(event.url)}${msg}`);

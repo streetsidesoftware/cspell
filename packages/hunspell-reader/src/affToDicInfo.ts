@@ -44,8 +44,8 @@ function extractAlphabet(aff: AffInfo, locale: string): AlphabetInfo {
             .filter((a) => !!a),
     );
 
-    const alphabet = [...setOfLetters].sort().join('').replace(/\P{L}/gu, '');
-    const accents = new Set(alphabet.normalize('NFD').replace(/\P{M}/gu, ''));
+    const alphabet = [...setOfLetters].sort().join('').replaceAll(/\P{L}/gu, '');
+    const accents = new Set(alphabet.normalize('NFD').replaceAll(/\P{M}/gu, ''));
 
     return { locale, alphabet, accents };
 }

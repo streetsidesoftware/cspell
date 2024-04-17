@@ -50,9 +50,9 @@ export function matchCase(example: string, word: string): string {
 }
 
 export function removeAccents(text: string): string {
-    return text.normalize('NFD').replace(regExAccents, '');
+    return text.normalize('NFD').replaceAll(regExAccents, '');
 }
 
 export function removeUnboundAccents(text: string): string {
-    return text.replace(regExAccents, '');
+    return text.replaceAll(regExAccents, '');
 }

@@ -139,7 +139,7 @@ function splitEntry(line: string): readonly [string, string | undefined] {
 }
 
 export function parseTyposFile(content: string): TyposDef {
-    const lines = splitIntoLines(content.replace(inlineComment, ''));
+    const lines = splitIntoLines(content.replaceAll(inlineComment, ''));
     return reduceToTyposDef(lines);
 }
 

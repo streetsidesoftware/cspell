@@ -7,6 +7,6 @@ interface Options {
 
 export function globP(pattern: string | string[], options?: Options): Promise<string[]> {
     // Convert windows separators.
-    const globs = (Array.isArray(pattern) ? pattern : [pattern]).map((pattern) => pattern.replace(/\\/g, '/'));
+    const globs = (Array.isArray(pattern) ? pattern : [pattern]).map((pattern) => pattern.replaceAll('\\', '/'));
     return glob(globs, options);
 }

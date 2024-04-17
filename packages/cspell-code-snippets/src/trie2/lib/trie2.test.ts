@@ -30,7 +30,7 @@ describe('Validate Trie2Builder', () => {
             ......ly
             ...
             ..mp
-        `.replace(/^\s+/gm, ''),
+        `.replaceAll(/^\s+/gm, ''),
         );
         const r2 = displayTrie2(trie, true, '+');
         expect(r2).toBe(
@@ -44,7 +44,7 @@ describe('Validate Trie2Builder', () => {
             +++ner
             ++++ing
             +++s
-        `.replace(/^\s+/gm, ''),
+        `.replaceAll(/^\s+/gm, ''),
         );
     });
 });

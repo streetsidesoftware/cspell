@@ -173,8 +173,8 @@ function processText(text: string): string[] {
     return [
         ...new Set(
             text
-                .replace(/#.*/gm, '')
-                .replace(/[.0-9,"“():]/g, ' ')
+                .replaceAll(/#.*/gm, '')
+                .replaceAll(/[.0-9,"“():]/g, ' ')
                 .split(/\s+/)
                 .sort()
                 .filter((a) => !!a),

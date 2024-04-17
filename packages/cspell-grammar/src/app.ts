@@ -44,6 +44,6 @@ export async function run(args: string[]): Promise<void> {
 }
 
 function emit(pt: ParsedText) {
-    const t = pt.text.replace(/\t/g, '↦').replace(/\r?\n/g, '↩︎').replace(/\r/g, '⇠');
+    const t = pt.text.replaceAll('\t', '↦').replaceAll(/\r?\n/g, '↩︎').replaceAll('\r', '⇠');
     console.log(`${pt.range[0]}-${pt.range[1]}\t${t}\t${pt.scope?.toString() || ''}`);
 }
