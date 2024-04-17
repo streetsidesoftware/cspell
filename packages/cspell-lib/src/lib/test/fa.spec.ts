@@ -12,7 +12,7 @@ const text = fs.readFileSync(sampleFilename, 'utf8').toString();
 // eslint-disable-next-line unicorn/prefer-module
 const frenchConfig = require.resolve('@cspell/dict-fa-ir/cspell-ext.json');
 
-const timeout = 10000;
+const timeout = 10_000;
 
 describe('Validate that Persian text is correctly checked.', () => {
     test(

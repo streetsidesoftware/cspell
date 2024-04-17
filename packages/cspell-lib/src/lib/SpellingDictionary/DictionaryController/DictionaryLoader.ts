@@ -22,7 +22,7 @@ import { toError } from '../../util/errors.js';
 import { SimpleCache } from '../../util/simpleCache.js';
 import { SpellingDictionaryLoadError } from '../SpellingDictionaryError.js';
 
-const MAX_AGE = 10000;
+const MAX_AGE = 10_000;
 
 const loaders: Loaders = {
     S: loadSimpleWordList,
@@ -259,7 +259,7 @@ function _legacyWordListSync(lines: Iterable<string>, filename: URL, options: Lo
     const words = pipe(
         lines,
         // Remove comments
-        opMap((line) => line.replace(/#.*/g, '')),
+        opMap((line) => line.replaceAll(/#.*/g, '')),
         // Split on everything else
         opConcatMap((line) => line.split(/[^\w\p{L}\p{M}'’]+/gu)),
         opFilter((word) => !!word),
@@ -276,7 +276,7 @@ function _wordsPerLineWordList(lines: Iterable<string>, filename: string, option
     const words = pipe(
         lines,
         // Remove comments
-        opMap((line) => line.replace(/#.*/g, '')),
+        opMap((line) => line.replaceAll(/#.*/g, '')),
         // Split on everything else
         opConcatMap((line) => line.split(/\s+/gu)),
         opFilter((word) => !!word),

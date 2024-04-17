@@ -243,7 +243,7 @@ describe('Validate Refresh', () => {
 
 function tempPath(file: string) {
     const testState = expect.getState();
-    const testName = (testState.currentTestName || 'test').replace(/[^-a-z0-9]/gi, '_');
+    const testName = (testState.currentTestName || 'test').replaceAll(/[^-a-z0-9]/gi, '_');
     return path.join(pathPackageRoot, 'temp', testName, file);
 }
 

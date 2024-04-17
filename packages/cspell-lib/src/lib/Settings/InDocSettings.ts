@@ -162,7 +162,7 @@ const settingParsers: readonly (readonly [RegExp, (m: string) => CSpellUserSetti
     [/^locale?\b(?!-)/i, parseLocale],
     [/^language\s\b(?!-)/i, parseLocale],
     [/^dictionar(?:y|ies)\b(?!-)/i, parseDictionaries], // cspell:disable-line
-    [/^LocalWords:/, (w) => parseWords(w.replace(/^LocalWords:?/gi, ' '))],
+    [/^LocalWords:/, (w) => parseWords(w.replaceAll(/^LocalWords:?/gi, ' '))],
 ] as const;
 
 export const regExSpellingGuardBlock =

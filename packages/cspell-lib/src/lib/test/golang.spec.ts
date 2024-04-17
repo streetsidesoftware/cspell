@@ -9,7 +9,7 @@ import * as cspell from '../index.js';
 const sampleFilename = path.join(pathPackageSamples, 'src/sample.go');
 const sampleFile = fsp.readFile(sampleFilename, 'utf8').then((buffer) => buffer.toString());
 
-const timeout = 10000;
+const timeout = 10_000;
 
 describe('Validate that Go files are correctly checked.', () => {
     test(

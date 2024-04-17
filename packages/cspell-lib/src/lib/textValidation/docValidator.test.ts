@@ -27,7 +27,7 @@ const sc = expect.stringContaining;
 
 const { sanitizeSuggestion } = __testing__;
 
-const timeout = 10000;
+const timeout = 10_000;
 
 describe('docValidator', () => {
     test('DocumentValidator', () => {
@@ -108,7 +108,7 @@ describe('docValidator', () => {
         ${fix('sample-with-errors.ts')} | ${'Helllo'} | ${[oc({ text: 'Helllo', suggestions: ac(['hello']) })]}
     `('checkText suggestions $filename "$text"', async ({ filename, text, expected }) => {
         const doc = await loadDoc(filename);
-        const dVal = new DocumentValidator(doc, { generateSuggestions: true }, { suggestionsTimeout: 10000 });
+        const dVal = new DocumentValidator(doc, { generateSuggestions: true }, { suggestionsTimeout: 10_000 });
         await dVal.prepare();
         const offset = doc.text.indexOf(text);
         assert(offset >= 0);
@@ -123,7 +123,7 @@ describe('docValidator', () => {
         ${fix('sample-with-errors.ts')} | ${'Helllo'} | ${[oc({ text: 'Helllo', suggestions: ac(['hello']) })]}
     `('checkText Async suggestions $filename "$text"', async ({ filename, text, expected }) => {
         const doc = await loadDoc(filename);
-        const dVal = new DocumentValidator(doc, { generateSuggestions: true }, { suggestionsTimeout: 10000 });
+        const dVal = new DocumentValidator(doc, { generateSuggestions: true }, { suggestionsTimeout: 10_000 });
         await dVal.prepare();
         const offset = doc.text.indexOf(text);
         assert(offset >= 0);

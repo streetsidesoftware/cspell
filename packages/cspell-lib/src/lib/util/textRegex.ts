@@ -32,7 +32,7 @@ export function stringToRegExp(pattern: string | RegExp, defaultFlags = 'gimu', 
         if (pat) {
             const regPattern = flag.includes('x') ? removeVerboseFromRegExp(pat) : pat;
             // Make sure the flags are unique.
-            const flags = [...new Set(forceFlags + flag)].join('').replace(/[^gimuy]/g, '');
+            const flags = [...new Set(forceFlags + flag)].join('').replaceAll(/[^gimuy]/g, '');
             const regex = new RegExp(regPattern, flags);
             return regex;
         }

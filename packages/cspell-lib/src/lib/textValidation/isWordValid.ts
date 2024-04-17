@@ -3,7 +3,7 @@ import type { CachingDictionary } from 'cspell-dictionary';
 import type { TextOffsetRO } from './ValidationTypes.js';
 
 function hasWordCheck(dict: CachingDictionary, word: string): boolean {
-    word = word.includes('\\') ? word.replace(/\\/g, '') : word;
+    word = word.includes('\\') ? word.replaceAll('\\', '') : word;
     return dict.has(word);
 }
 

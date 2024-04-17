@@ -44,8 +44,8 @@ export default tsEslint.config(
             // Enable these rules to help with on boarding eslint.
             'unicorn/prefer-module': 'error',
             'unicorn/prefer-node-protocol': 'error',
-            // 'unicorn/numeric-separators-style': 'error',
-            // 'unicorn/prefer-string-replace-all': 'error',
+            'unicorn/numeric-separators-style': 'error',
+            'unicorn/prefer-string-replace-all': 'error',
             // 'unicorn/prefer-spread': 'error',
             // 'unicorn/prefer-array-flat': 'error',
             // 'unicorn/no-instanceof-array': 'error',

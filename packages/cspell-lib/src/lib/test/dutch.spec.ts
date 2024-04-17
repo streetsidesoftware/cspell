@@ -12,7 +12,7 @@ const text = fs.readFileSync(sampleFilename, 'utf8').toString();
 // eslint-disable-next-line unicorn/prefer-module
 const dutchConfig = require.resolve('@cspell/dict-nl-nl/cspell-ext.json');
 
-const timeout = 10000;
+const timeout = 10_000;
 
 describe('Validate that Dutch text is correctly checked.', () => {
     test(

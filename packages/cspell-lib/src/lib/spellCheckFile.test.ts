@@ -55,7 +55,7 @@ describe('Validate Spell Checking Files', () => {
             const r = sanitizeSpellCheckFileResult(await spellCheckFile(rpS(filename), options, settings));
             expect(r).toEqual(oc(expected));
         },
-        10000,
+        10_000,
     );
 });
 
@@ -210,7 +210,7 @@ describe('Validate Uri assumptions', () => {
     }
 
     function normalizePath(p: string): string {
-        return posix.normalize('/' + fixDriveLetter(p).replace(/\\/g, '/'));
+        return posix.normalize('/' + fixDriveLetter(p).replaceAll('\\', '/'));
     }
 
     interface UriTestCase {

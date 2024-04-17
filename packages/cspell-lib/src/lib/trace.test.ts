@@ -4,7 +4,7 @@ import { describe, expect, test } from 'vitest';
 import { getDefaultSettings, mergeSettings } from './Settings/index.js';
 import { traceWords } from './trace.js';
 
-const timeout = 20000;
+const timeout = 20_000;
 
 const ac = expect.arrayContaining;
 

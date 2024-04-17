@@ -11,7 +11,7 @@ const configFile = path.join(samples, 'cspell.json');
 
 const files = ['bug345.ts', '../src/sample.go'];
 
-const timeout = 10000;
+const timeout = 10_000;
 
 describe('Validate Against Bug Fixes', () => {
     function t(filename: string) {

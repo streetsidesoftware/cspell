@@ -145,7 +145,7 @@ function unTitleCase(s: string): string {
 }
 
 function normalizePath(path: string): string {
-    const p = normalizeDriveLetter(path.replace(/\\/g, '/'));
+    const p = normalizeDriveLetter(path.replaceAll('\\', '/'));
     return p.startsWith('/') ? p : '/' + p;
 }
 

@@ -11,7 +11,7 @@ const sampleFilename = path.join(samples, 'src', 'sample.py');
 const sampleConfig = path.join(samples, '.cspell.json');
 const text = fsp.readFileSync(sampleFilename, 'utf8').toString();
 
-const timeout = 10000;
+const timeout = 10_000;
 
 describe('Validate that Python files are correctly checked.', () => {
     test(

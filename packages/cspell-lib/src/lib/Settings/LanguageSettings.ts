@@ -24,12 +24,12 @@ export function getDefaultLanguageSettings(): LanguageSettings {
 }
 
 function localesToList(locales: string): string[] {
-    return stringToList(locales.replace(/\s+/g, ','));
+    return stringToList(locales.replaceAll(/\s+/g, ','));
 }
 
 function stringToList(sList: string): string[] {
     return sList
-        .replace(/[|;]/g, ',')
+        .replaceAll(/[|;]/g, ',')
         .split(',')
         .map((s) => s.trim())
         .filter((s) => !!s);
@@ -53,7 +53,7 @@ export function normalizeLanguageId(langId: LanguageId | LanguageId[]): Set<Lang
 const _normalizeLocale = memorizer(__normalizeLocale);
 function __normalizeLocale(locale: LocaleId): Set<LocaleId> {
     const locales = localesToList(locale);
-    return new Set<LocaleId>(locales.map((locale) => locale.toLowerCase().replace(/[^a-z]/g, '')));
+    return new Set<LocaleId>(locales.map((locale) => locale.toLowerCase().replaceAll(/[^a-z]/g, '')));
 }
 
 export function normalizeLocale(locale: LocaleId | LocaleId[]): Set<LocaleId> {

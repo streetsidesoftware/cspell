@@ -7,7 +7,7 @@ import { asyncIterableToArray } from './util/util.js';
 const oc = expect.objectContaining;
 const ac = expect.arrayContaining;
 
-const timeout = 20000;
+const timeout = 20_000;
 
 describe('suggestions', () => {
     test.each`
