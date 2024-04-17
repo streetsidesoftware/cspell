@@ -1,6 +1,7 @@
-import * as fs from 'fs/promises';
+import * as fs from 'node:fs/promises';
+import * as zlib from 'node:zlib';
+
 import { describe, expect, test } from 'vitest';
-import * as zlib from 'zlib';
 
 import { resolveGlobalDict } from '../../test/samples.js';
 import { importTrie } from '../io/importExport.js';

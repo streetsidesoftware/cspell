@@ -1,8 +1,8 @@
 #!/usr/bin/env node
 
-import assert from 'assert';
-import { basename } from 'path';
-import { fileURLToPath } from 'url';
+import assert from 'node:assert';
+import { basename } from 'node:path';
+import { fileURLToPath } from 'node:url';
 
 import { run } from './dist/esm/index.mjs';
 

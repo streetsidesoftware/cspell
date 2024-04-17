@@ -1,5 +1,6 @@
-import { promises as fs } from 'fs';
-import * as path from 'path';
+import { promises as fs } from 'node:fs';
+import * as path from 'node:path';
+
 import { expect } from 'vitest';
 
 export function json(obj: unknown, indent: string | number = 2): string {

@@ -1,7 +1,7 @@
+import assert from 'node:assert';
 import { promises as fs } from 'node:fs';
 
 import Ajv from 'ajv';
-import assert from 'assert';
 import { findUp } from 'find-up-simple';
 
 const fixturesUrl = new URL('fixtures/', import.meta.url);

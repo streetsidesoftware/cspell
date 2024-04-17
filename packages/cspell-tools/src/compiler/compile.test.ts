@@ -1,4 +1,5 @@
-import * as path from 'path';
+import * as path from 'node:path';
+
 import { beforeAll, beforeEach, describe, expect, test } from 'vitest';
 
 import type { CompileRequest, Target } from '../config/index.js';

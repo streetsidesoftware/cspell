@@ -1,4 +1,5 @@
-import { readFile } from 'fs/promises';
+import { readFile } from 'node:fs/promises';
+
 import { genSequence } from 'gensequence';
 import { describe, expect, test } from 'vitest';
 

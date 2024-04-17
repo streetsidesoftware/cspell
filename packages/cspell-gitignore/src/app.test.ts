@@ -1,4 +1,5 @@
-import * as path from 'path';
+import * as path from 'node:path';
+
 import type { SpyInstance } from 'vitest';
 import { afterEach, beforeEach, describe, expect, test, vi } from 'vitest';
 

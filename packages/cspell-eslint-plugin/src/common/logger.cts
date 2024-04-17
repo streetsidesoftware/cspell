@@ -1,6 +1,6 @@
-import fs from 'fs';
-import path from 'path';
-import { format } from 'util';
+import fs from 'node:fs';
+import path from 'node:path';
+import { format } from 'node:util';
 
 const debugMode = false;
 

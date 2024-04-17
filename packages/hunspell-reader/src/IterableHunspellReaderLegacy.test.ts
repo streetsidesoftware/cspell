@@ -1,6 +1,7 @@
-import { readdirSync } from 'fs';
+import { readdirSync } from 'node:fs';
+import * as path from 'node:path';
+
 import { genSequence } from 'gensequence';
-import * as path from 'path';
 import { describe, expect, it, test } from 'vitest';
 
 import * as Aff from './affLegacy.js';

@@ -1,6 +1,7 @@
+import * as fs from 'node:fs/promises';
+import * as path from 'node:path';
+
 import * as Commander from 'commander';
-import * as fs from 'fs/promises';
-import * as path from 'path';
 import { afterEach, beforeAll, beforeEach, describe, expect, test, vi } from 'vitest';
 
 import * as app from './app.js';

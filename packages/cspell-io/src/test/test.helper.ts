@@ -1,6 +1,7 @@
-import { mkdir } from 'fs/promises';
-import * as path from 'path';
-import { fileURLToPath, pathToFileURL } from 'url';
+import { mkdir } from 'node:fs/promises';
+import * as path from 'node:path';
+import { fileURLToPath, pathToFileURL } from 'node:url';
+
 import { expect } from 'vitest';
 
 const mkdirp = async (p: string) => {

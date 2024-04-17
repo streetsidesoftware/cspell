@@ -1,4 +1,5 @@
-import { pathToFileURL } from 'url';
+import { pathToFileURL } from 'node:url';
+
 import { afterEach, describe, expect, test, vi } from 'vitest';
 
 import { CSpellConfigFileJson } from '../CSpellConfigFile/CSpellConfigFileJson.js';

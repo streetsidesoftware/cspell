@@ -1,4 +1,6 @@
 // import type {} from '@cspell/cspell-service-bus';
+import { assert } from 'node:console';
+
 import type {
     Dispatcher,
     Handler,
@@ -14,7 +16,6 @@ import {
     requestFactory,
     ServiceRequestCls,
 } from '@cspell/cspell-service-bus';
-import { assert } from 'console';
 
 function calcFib(request: FibRequest): ServiceResponse<number> {
     let a = 0,

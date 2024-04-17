@@ -1,5 +1,5 @@
-import { promises as fs } from 'fs';
-import * as fsPath from 'path';
+import { promises as fs } from 'node:fs';
+import * as fsPath from 'node:path';
 
 import { arrayBufferViewToBuffer } from '../common/arrayBuffers.js';
 import { toFileURL } from './file/url.js';

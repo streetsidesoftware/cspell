@@ -1,10 +1,11 @@
+import type { Dirent, Stats as FsStats } from 'node:fs';
+import { promises as fs, readFileSync, statSync } from 'node:fs';
+import { fileURLToPath } from 'node:url';
+import { promisify } from 'node:util';
+import { gunzipSync, gzip } from 'node:zlib';
+
 import type { Dispatcher, ServiceBus } from '@cspell/cspell-service-bus';
 import { createResponse, createResponseFail, isServiceResponseSuccess } from '@cspell/cspell-service-bus';
-import type { Dirent, Stats as FsStats } from 'fs';
-import { promises as fs, readFileSync, statSync } from 'fs';
-import { fileURLToPath } from 'url';
-import { promisify } from 'util';
-import { gunzipSync, gzip } from 'zlib';
 
 import { arrayBufferViewToBuffer } from '../../common/arrayBuffers.js';
 import { encodeString, isGZipped } from '../../common/encode-decode.js';

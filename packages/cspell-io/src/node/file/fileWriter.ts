@@ -1,7 +1,7 @@
-import * as fs from 'fs';
-import * as Stream from 'stream';
-import { promisify } from 'util';
-import * as zlib from 'zlib';
+import * as fs from 'node:fs';
+import * as Stream from 'node:stream';
+import { promisify } from 'node:util';
+import * as zlib from 'node:zlib';
 
 import type { BufferEncoding, BufferEncodingExt } from '../../common/BufferEncoding.js';
 import { encoderTransformer } from '../../common/transformers.js';

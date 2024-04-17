@@ -1,4 +1,4 @@
-import * as path from 'path';
+import * as path from 'node:path';
 
 import type { CompileCommonAppOptions } from '../AppOptions.js';
 import type { CompileRequest, DictionaryFormats, DictionarySource, FileSource, Target } from '../config/index.js';

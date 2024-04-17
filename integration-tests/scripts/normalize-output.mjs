@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
-import { readFile, writeFile } from 'fs/promises';
-import * as path from 'path';
+import { readFile, writeFile } from 'node:fs/promises';
+import * as path from 'node:path';
 
 /**
  *

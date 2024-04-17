@@ -1,6 +1,7 @@
-import { mkdir, readFile } from 'fs/promises';
+import { mkdir, readFile } from 'node:fs/promises';
+import * as path from 'node:path';
+
 import { loremIpsum } from 'lorem-ipsum';
-import * as path from 'path';
 import { describe, expect, test } from 'vitest';
 
 import { test_dirname } from '../test/TestHelper.js';

@@ -1,6 +1,9 @@
 // cspell:ignore TSESTree
+import assert from 'node:assert';
+import * as path from 'node:path';
+import { format } from 'node:util';
+
 import type { TSESTree } from '@typescript-eslint/types';
-import assert from 'assert';
 import type { CSpellSettings, TextDocument, ValidationIssue } from 'cspell-lib';
 import {
     createTextDocument,
@@ -10,8 +13,6 @@ import {
     refreshDictionaryCache,
 } from 'cspell-lib';
 import type { Comment, Identifier, ImportSpecifier, Literal, Node, TemplateElement } from 'estree';
-import * as path from 'path';
-import { format } from 'util';
 
 import { getDefaultLogger } from '../common/logger.cjs';
 import type { CustomWordListFile, WorkerOptions } from '../common/options.cjs';

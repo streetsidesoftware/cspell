@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-import assert from 'assert';
+import assert from 'node:assert';
 
 import { getPipes } from './dist/index.mjs';
 

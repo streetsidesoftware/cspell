@@ -1,6 +1,7 @@
-import assert from 'assert';
-import { readdirSync } from 'fs';
-import * as path from 'path';
+import assert from 'node:assert';
+import { readdirSync } from 'node:fs';
+import * as path from 'node:path';
+
 import { describe, expect, it } from 'vitest';
 
 import type { AffWord } from './affDef.js';

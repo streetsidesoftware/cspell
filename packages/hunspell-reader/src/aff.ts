@@ -1,4 +1,4 @@
-import assert from 'assert';
+import assert from 'node:assert';
 
 import { affFlag } from './affConstants.js';
 import type { AffInfo, AffTransformFlags, AffWordFlags, Fx, Substitution, SubstitutionsForRegExp } from './affDef.js';

@@ -1,5 +1,6 @@
-import assert from 'assert';
-import { readFile } from 'fs/promises';
+import assert from 'node:assert';
+import { readFile } from 'node:fs/promises';
+
 import { decode as decodeHtmlEntities } from 'html-entities';
 import pkgIconvLite from 'iconv-lite';
 

@@ -1,5 +1,6 @@
+import * as path from 'node:path';
+
 import { opFilter, opTake, pipe } from '@cspell/cspell-pipe/sync';
-import * as path from 'path';
 import { describe, expect, test } from 'vitest';
 
 import { test_dirname } from '../test/TestHelper.js';

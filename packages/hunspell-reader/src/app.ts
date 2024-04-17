@@ -1,5 +1,6 @@
+import { readFileSync } from 'node:fs';
+
 import { program } from 'commander';
-import { readFileSync } from 'fs';
 
 import { getCommand as getDictInfoCommand } from './commandDictInfo.js';
 import { getCommand as commandWords } from './commandWords.js';

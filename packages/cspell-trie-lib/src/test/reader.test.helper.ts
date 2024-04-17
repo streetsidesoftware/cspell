@@ -1,6 +1,6 @@
-import * as fs from 'fs/promises';
-import * as path from 'path';
-import * as zlib from 'zlib';
+import * as fs from 'node:fs/promises';
+import * as path from 'node:path';
+import * as zlib from 'node:zlib';
 
 import { importTrie } from '../lib/io/importExport.js';
 import { Trie } from '../lib/trie.js';

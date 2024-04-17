@@ -1,7 +1,8 @@
-import assert from 'assert';
-import { mkdirSync, promises as fs, readFileSync, rmSync, statSync, writeFileSync } from 'fs';
-import * as path from 'path';
-import { fileURLToPath } from 'url';
+import assert from 'node:assert';
+import { mkdirSync, promises as fs, readFileSync, rmSync, statSync, writeFileSync } from 'node:fs';
+import * as path from 'node:path';
+import { fileURLToPath } from 'node:url';
+
 import { expect } from 'vitest';
 
 const _dirname = test_dirname(import.meta.url);

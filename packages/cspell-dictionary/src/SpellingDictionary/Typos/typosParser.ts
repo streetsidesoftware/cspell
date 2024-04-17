@@ -1,4 +1,4 @@
-import assert from 'assert';
+import assert from 'node:assert';
 
 import type { TypoEntry, TyposDef, TyposDefValue } from './typos.js';
 import { appendToDef, createTyposDef } from './util.js';

@@ -1,7 +1,8 @@
-import { promises as fs } from 'fs';
+import { promises as fs } from 'node:fs';
+import * as path from 'node:path';
+import { fileURLToPath } from 'node:url';
+
 import { resolve as importResolve } from 'import-meta-resolve';
-import * as path from 'path';
-import { fileURLToPath } from 'url';
 
 import { importTrieV3AsFastTrieBlob } from '../lib/io/importV3FastBlob.js';
 import type { Trie } from '../lib/trie.js';

@@ -1,4 +1,4 @@
-import * as path from 'path';
+import * as path from 'node:path';
 
 import type { IsIgnoredExResult } from './GitIgnoreFile.js';
 import { GitIgnoreHierarchy, loadGitIgnore } from './GitIgnoreFile.js';

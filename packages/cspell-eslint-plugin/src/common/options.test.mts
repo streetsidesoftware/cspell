@@ -1,5 +1,6 @@
+import assert from 'node:assert';
+
 import type { CSpellSettings } from '@cspell/cspell-types';
-import assert from 'assert';
 import { describe, test } from 'mocha';
 
 import { defaultOptions, type Options } from './options.cjs';

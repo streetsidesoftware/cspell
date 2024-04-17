@@ -1,4 +1,5 @@
-import * as path from 'path';
+import * as path from 'node:path';
+
 import { describe, expect, it } from 'vitest';
 
 import * as Aff from './affLegacy.js';

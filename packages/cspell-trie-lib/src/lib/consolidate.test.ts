@@ -1,6 +1,7 @@
-import { readFile } from 'fs/promises';
+import { readFile } from 'node:fs/promises';
+import * as path from 'node:path';
+
 import { genSequence } from 'gensequence';
-import * as path from 'path';
 import { describe, expect, test } from 'vitest';
 
 import { resolveGlobalSample } from '../test/samples.js';

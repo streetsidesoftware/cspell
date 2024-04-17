@@ -1,6 +1,7 @@
+import { promises as fs } from 'node:fs';
+import * as path from 'node:path';
+
 import type { ParsedText, Parser } from '@cspell/cspell-types/Parser';
-import { promises as fs } from 'fs';
-import * as path from 'path';
 
 import { parser as parserTypeScript } from './parsers/typescript/index.js';
 

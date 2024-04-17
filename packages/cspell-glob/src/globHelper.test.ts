@@ -1,6 +1,7 @@
+import * as path from 'node:path';
+import { posix, win32 } from 'node:path';
+
 import mm from 'micromatch';
-import * as path from 'path';
-import { posix, win32 } from 'path';
 import { describe, expect, test } from 'vitest';
 
 import type { NormalizeOptions } from './globHelper.js';

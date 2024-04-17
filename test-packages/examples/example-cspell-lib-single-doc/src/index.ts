@@ -1,5 +1,6 @@
+import * as path from 'node:path';
+
 import { spellCheckDocument } from 'cspell-lib';
-import * as path from 'path';
 
 export async function run() {
     const app = path.relative(process.cwd(), process.argv[1]);

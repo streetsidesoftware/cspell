@@ -1,5 +1,6 @@
+import * as path from 'node:path';
+
 import { GlobMatcher } from 'cspell-glob';
-import * as path from 'path';
 import { describe, expect, test } from 'vitest';
 
 import { __testing__, GitIgnoreFile, GitIgnoreHierarchy, loadGitIgnore } from './GitIgnoreFile.js';

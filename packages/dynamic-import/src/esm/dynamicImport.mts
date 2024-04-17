@@ -1,8 +1,8 @@
 import { statSync } from 'node:fs';
+import { sep as pathSep } from 'node:path';
+import { pathToFileURL } from 'node:url';
 
 import { resolve } from 'import-meta-resolve';
-import { sep as pathSep } from 'path';
-import { pathToFileURL } from 'url';
 
 const isWindowsPath = /^[a-z]:\\/i;
 

@@ -1,5 +1,6 @@
+import { format } from 'node:util';
+
 import chalk from 'chalk';
-import { format } from 'util';
 
 export interface ExecOutput {
     code: number;

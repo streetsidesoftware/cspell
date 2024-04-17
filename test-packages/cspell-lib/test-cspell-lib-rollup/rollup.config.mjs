@@ -1,9 +1,10 @@
+import { readFileSync } from 'node:fs';
+
 import alias from '@rollup/plugin-alias';
 import rollupPluginCommonjs from '@rollup/plugin-commonjs';
 import rollupPluginJson from '@rollup/plugin-json';
 import rollupPluginNodeResolve from '@rollup/plugin-node-resolve';
 import rollupPluginTypescript from '@rollup/plugin-typescript';
-import { readFileSync } from 'fs';
 
 import { injectDirname } from './plugin/index.mjs';
 

@@ -1,8 +1,9 @@
-import * as fs from 'fs';
+import * as fs from 'node:fs';
+import * as Path from 'node:path';
+import { fileURLToPath } from 'node:url';
+
 import * as Diff from 'jest-diff';
-import * as Path from 'path';
 import Shell from 'shelljs';
-import { fileURLToPath } from 'url';
 
 import type { Repository } from './configDef.js';
 

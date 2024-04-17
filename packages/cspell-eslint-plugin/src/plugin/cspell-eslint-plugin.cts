@@ -1,7 +1,8 @@
 // cspell:ignore TSESTree
+import { readFileSync } from 'node:fs';
+import { join as pathJoin } from 'node:path';
+
 import type { ESLint, Rule } from 'eslint';
-import { readFileSync } from 'fs';
-import { join as pathJoin } from 'path';
 import { createSyncFn } from 'synckit';
 
 import { getDefaultLogger } from '../common/logger.cjs';

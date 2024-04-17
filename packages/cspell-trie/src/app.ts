@@ -1,13 +1,14 @@
+import { createWriteStream as fsCreateWriteStream } from 'node:fs';
+import * as fsp from 'node:fs/promises';
+import * as path from 'node:path';
+import * as stream from 'node:stream';
+import { fileURLToPath } from 'node:url';
+import * as zlib from 'node:zlib';
+
 import type { Command } from 'commander';
 import * as Trie from 'cspell-trie-lib';
-import { createWriteStream as fsCreateWriteStream } from 'fs';
-import * as fsp from 'fs/promises';
 import type { Sequence } from 'gensequence';
 import { genSequence } from 'gensequence';
-import * as path from 'path';
-import * as stream from 'stream';
-import { fileURLToPath } from 'url';
-import * as zlib from 'zlib';
 
 const UTF8: BufferEncoding = 'utf8';
 

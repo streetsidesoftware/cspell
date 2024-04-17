@@ -1,5 +1,6 @@
+import * as path from 'node:path';
+
 import { cosmiconfig } from 'cosmiconfig';
-import * as path from 'path';
 
 import { compile } from './compiler/index.js';
 import type { CompileRequest, Target } from './config/index.js';

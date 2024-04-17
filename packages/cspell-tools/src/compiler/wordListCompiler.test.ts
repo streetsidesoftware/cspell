@@ -1,11 +1,12 @@
 // cSpell:ignore jpegs outing dirs lcode outring outrings
 
+import * as fsp from 'node:fs/promises';
+import * as path from 'node:path';
+
 import { opConcatMap, opTake, pipe, toArray } from '@cspell/cspell-pipe/sync';
 import * as Trie from 'cspell-trie-lib';
 import { importTrie, isCircular, iteratorTrieWords, serializeTrie } from 'cspell-trie-lib';
-import * as fsp from 'fs/promises';
 import { uniqueFilter } from 'hunspell-reader';
-import * as path from 'path';
 import { beforeEach, describe, expect, test, vi } from 'vitest';
 
 import { spyOnConsole } from '../test/console.js';

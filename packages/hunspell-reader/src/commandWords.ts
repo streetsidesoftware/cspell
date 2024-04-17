@@ -1,6 +1,7 @@
 // cSpell:ignore findup
+import { createWriteStream, openSync, writeSync } from 'node:fs';
+
 import { Command } from 'commander';
-import { createWriteStream, openSync, writeSync } from 'fs';
 import type { Sequence } from 'gensequence';
 import { genSequence } from 'gensequence';
 

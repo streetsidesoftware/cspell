@@ -1,5 +1,6 @@
+import * as Path from 'node:path';
+
 import mm from 'micromatch';
-import * as Path from 'path';
 
 import { doesRootContainPath, normalizeGlobPatterns, normalizeGlobToRoot } from './globHelper.js';
 import type {

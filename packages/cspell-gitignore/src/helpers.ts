@@ -1,5 +1,6 @@
+import * as path from 'node:path';
+
 import { findUp } from 'find-up-simple';
-import * as path from 'path';
 
 interface ParsedPath {
     /**

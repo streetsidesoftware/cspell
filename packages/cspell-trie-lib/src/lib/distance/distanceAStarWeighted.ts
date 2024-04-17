@@ -1,4 +1,4 @@
-import assert from 'assert';
+import assert from 'node:assert';
 
 import { PairingHeap } from '../utils/PairingHeap.js';
 import type { WeightCostCalculator, WeightMap } from './weightedMaps.js';

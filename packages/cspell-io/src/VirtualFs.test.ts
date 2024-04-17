@@ -1,5 +1,6 @@
-import assert from 'assert';
-import { basename } from 'path';
+import assert from 'node:assert';
+import { basename } from 'node:path';
+
 import { afterEach, beforeEach, describe, expect, test, vi } from 'vitest';
 
 import { CFileResource } from './common/index.js';

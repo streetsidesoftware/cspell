@@ -1,5 +1,5 @@
-import assert from 'assert';
-import { readFileSync, writeFileSync } from 'fs';
+import assert from 'node:assert';
+import { readFileSync, writeFileSync } from 'node:fs';
 
 import { selectNearestWords } from '../lib/distance/levenshtein.js';
 import type { TrieNode, WeightMap } from '../lib/index.js';

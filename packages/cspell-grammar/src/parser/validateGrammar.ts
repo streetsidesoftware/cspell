@@ -1,5 +1,5 @@
-import { strict as assert } from 'assert';
-import { format } from 'util';
+import { strict as assert } from 'node:assert';
+import { format } from 'node:util';
 
 import type { GrammarDef, Pattern, PatternList, PatternRef, Repository } from './grammarDefinition.js';
 import { isPatternBeginEnd, isPatternInclude, isPatternMatch, isPatternPatterns } from './grammarTypesHelpers.js';

@@ -1,4 +1,4 @@
-import { AssertionError } from 'assert';
+import { AssertionError } from 'node:assert';
 
 import type { CSpellJSONReporterSettings } from '../CSpellJSONReporterSettings.js';
 

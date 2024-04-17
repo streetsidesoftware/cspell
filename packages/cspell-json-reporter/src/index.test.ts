@@ -7,10 +7,11 @@ vi.mock('fs', () => ({
     },
 }));
 
+import { promises as fs } from 'node:fs';
+import * as path from 'node:path';
+
 import type { CSpellReporter } from '@cspell/cspell-types';
 import { MessageTypes } from '@cspell/cspell-types';
-import { promises as fs } from 'fs';
-import * as path from 'path';
 
 import { getReporter } from './index.js';
 

@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-import assert from 'assert';
+import assert from 'node:assert';
 
 import { sumValues, sumValuesAsync, sumValuesSync } from './dist/index.mjs';
 

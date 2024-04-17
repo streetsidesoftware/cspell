@@ -1,5 +1,5 @@
-import assert from 'assert';
-import { promises as fs } from 'fs';
+import assert from 'node:assert';
+import { promises as fs } from 'node:fs';
 
 import { decompress } from '../../gzip/index.js';
 

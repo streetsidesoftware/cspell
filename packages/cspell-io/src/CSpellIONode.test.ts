@@ -1,6 +1,7 @@
-import { promises as fs } from 'fs';
-import { basename } from 'path';
-import { pathToFileURL } from 'url';
+import { promises as fs } from 'node:fs';
+import { basename } from 'node:path';
+import { pathToFileURL } from 'node:url';
+
 import { describe, expect, test } from 'vitest';
 
 import { CSpellIONode } from './CSpellIONode.js';

@@ -1,5 +1,6 @@
+import * as util from 'node:util';
+
 import * as GS from 'gensequence';
-import * as util from 'util';
 
 import { affFlag, flagToLongStringMap, flagToStringMap } from './affConstants.js';
 import type {

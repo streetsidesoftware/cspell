@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
-import assert from 'assert';
-import { fileURLToPath } from 'url';
+import assert from 'node:assert';
+import { fileURLToPath } from 'node:url';
 
 import { run } from './dist/esm/index.mjs';
 

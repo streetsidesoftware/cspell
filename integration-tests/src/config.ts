@@ -1,7 +1,7 @@
-import assert from 'assert';
-import * as fs from 'fs';
-import * as Path from 'path';
-import { fileURLToPath } from 'url';
+import assert from 'node:assert';
+import * as fs from 'node:fs';
+import * as Path from 'node:path';
+import { fileURLToPath } from 'node:url';
 
 import type { Config, Repository } from './configDef.js';
 

@@ -1,8 +1,9 @@
 // For large dictionaries, it is necessary to increase the memory limit.
 
+import { readFileSync } from 'node:fs';
+
 import type { Command } from 'commander';
 import { CommanderError, Option } from 'commander';
-import { readFileSync } from 'fs';
 
 import type { CompileAppOptions, CompileTrieAppOptions } from './AppOptions.js';
 import { build } from './build.js';

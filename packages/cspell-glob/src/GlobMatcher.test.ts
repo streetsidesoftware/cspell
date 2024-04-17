@@ -1,5 +1,6 @@
+import * as path from 'node:path';
+
 import mm from 'micromatch';
-import * as path from 'path';
 import { describe, expect, test } from 'vitest';
 
 import type { GlobMatchOptions, MatcherMode } from './GlobMatcher.js';

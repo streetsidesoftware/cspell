@@ -1,9 +1,9 @@
 #!/usr/bin/env node
 
 import { writeFile } from 'node:fs/promises';
+import * as path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-import * as path from 'path';
 import safeStableStringify from 'safe-stable-stringify';
 import tsj from 'ts-json-schema-generator';
 
