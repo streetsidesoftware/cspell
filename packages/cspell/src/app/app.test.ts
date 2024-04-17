@@ -1,3 +1,5 @@
+import { fileURLToPath } from 'node:url';
+
 import chalk from 'chalk';
 import * as Commander from 'commander';
 import * as Path from 'path';
@@ -13,6 +15,9 @@ import { pathPackageRoot } from './test/test.helper.js';
 import { mergeAsyncIterables } from './util/async.js';
 
 vi.mock('readline');
+
+const __filename = fileURLToPath(import.meta.url);
+
 const mockCreateInterface = vi.mocked(readline.createInterface);
 
 const hideOutput = true;

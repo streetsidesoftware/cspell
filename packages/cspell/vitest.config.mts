@@ -1,7 +1,11 @@
+import { fileURLToPath } from 'node:url';
+
 import { mergeConfig } from 'vite';
 import { defineConfig } from 'vitest/config';
 
 import viteConfig from '../../vitest.config.mjs';
+
+const __dirname = fileURLToPath(new URL('.', import.meta.url));
 
 export default mergeConfig(
     viteConfig,

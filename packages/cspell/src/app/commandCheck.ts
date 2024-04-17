@@ -55,7 +55,7 @@ export function commandCheck(prog: Command): Command {
                         issueCount += item.isError ? 1 : 0;
                     }
                     console.log();
-                } catch (e) {
+                } catch {
                     console.error(`File not found "${filename}"`);
                     throw new CheckFailed('File not found', 1);
                 }

@@ -14,7 +14,7 @@ export function parseFeatureFlags(flags: string[] | undefined, featureFlags = ge
         const [name, value] = flag;
         try {
             featureFlags.setFlag(name, value);
-        } catch (e) {
+        } catch {
             console.warn(`Unknown flag: "${name}"`);
         }
     }

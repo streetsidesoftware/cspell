@@ -166,7 +166,7 @@ async function adjustPossibleDirectory(glob: Glob, root: string): Promise<Glob> 
             const useGlob = posix.join(posixPath(g.glob), '**');
             return typeof glob === 'string' ? useGlob : { ...glob, glob: useGlob };
         }
-    } catch (e) {
+    } catch {
         // it was not possible to access the dirPath, no problem, just let the file glob search look for it.
         return glob;
     }

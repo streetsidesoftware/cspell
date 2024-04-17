@@ -1,3 +1,5 @@
+import { fileURLToPath } from 'node:url';
+
 import getStdin from 'get-stdin';
 import * as path from 'path';
 import { afterEach, describe, expect, test, vi } from 'vitest';
@@ -14,6 +16,9 @@ import {
     readFileListFiles,
     resolveFilename,
 } from './fileHelper.js';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = fileURLToPath(new URL('.', import.meta.url));
 
 vi.mock('get-stdin', () => ({
     default: vi.fn(),

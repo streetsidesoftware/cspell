@@ -211,7 +211,7 @@ export async function isFile(filename: string): Promise<boolean> {
     try {
         const stat = await fsp.stat(filename);
         return stat.isFile();
-    } catch (e) {
+    } catch {
         return false;
     }
 }
@@ -220,7 +220,7 @@ export async function isDir(filename: string): Promise<boolean> {
     try {
         const stat = await fsp.stat(filename);
         return stat.isDirectory();
-    } catch (e) {
+    } catch {
         return false;
     }
 }

@@ -179,7 +179,7 @@ describe('Validate createInit', () => {
         async function worked() {
             try {
                 await App.createInit();
-            } catch (e) {
+            } catch {
                 return false;
             }
             return true;

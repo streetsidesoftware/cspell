@@ -215,7 +215,7 @@ export class DiskCache implements CSpellLintResultCache {
         try {
             const buffer = fs.readFileSync(file);
             h = this.getHash(buffer);
-        } catch (e) {
+        } catch {
             return { f };
         }
         return { f, h };
