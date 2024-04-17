@@ -18,7 +18,7 @@ export interface TimedSuggestionsForWordResult extends SuggestionsForWordResult 
 const regExpRTL = /([\u0591-\u07FF\uFB1D-\uFDFD\uFE70-\uFEFC י]+)/g;
 
 function reverseRtlText(s: string): string {
-    return s.replace(regExpRTL, (s) => s.split('').reverse().join(''));
+    return s.replaceAll(regExpRTL, (s) => [...s].reverse().join(''));
 }
 
 export function emitSuggestionResult(result: TimedSuggestionsForWordResult, options: EmitSuggestionOptions): void {

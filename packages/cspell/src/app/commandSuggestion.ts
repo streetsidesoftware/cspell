@@ -21,7 +21,7 @@ function collect(value: string, previous: string[] | undefined): string[] {
     if (!previous) {
         return [value];
     }
-    return previous.concat([value]);
+    return [...previous, value];
 }
 
 function count(_: string, previous: number | undefined): number {
@@ -95,5 +95,5 @@ export function commandSuggestion(prog: Command): Command {
 function mergeArrays(a: string[] | undefined, b: string[] | undefined) {
     if (a === undefined) return b;
     if (b === undefined) return a;
-    return a.concat(b);
+    return [...a, ...b];
 }

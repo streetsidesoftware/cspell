@@ -51,7 +51,7 @@ export async function globP(pattern: string | string[], options?: GlobOptions): 
 
 export function calcGlobs(commandLineExclude: string[] | undefined): { globs: string[]; source: string } {
     const globs = new Set(
-        (commandLineExclude || []).flatMap((glob) => glob.split(/(?<!\\)\s+/g)).map((g) => g.replace(/\\ /g, ' ')),
+        (commandLineExclude || []).flatMap((glob) => glob.split(/(?<!\\)\s+/g)).map((g) => g.replaceAll('\\ ', ' ')),
     );
     const commandLineExcludes = {
         globs: [...globs],
@@ -79,7 +79,7 @@ export function extractPatterns(globs: GlobSrcInfo[]): ExtractPatternResult[] {
     const r = globs.reduce((info: ExtractPatternResult[], g: GlobSrcInfo) => {
         const source = g.source;
         const patterns = g.matcher.patternsNormalizedToRoot;
-        return info.concat(patterns.map((glob) => ({ glob, source })));
+        return [...info, ...patterns.map((glob) => ({ glob, source }))];
     }, []);
 
     return r;
@@ -126,7 +126,7 @@ export function extractGlobsFromMatcher(globMatcher: GlobMatcher): string[] {
 export function normalizeGlobsToRoot(globs: Glob[], root: string, isExclude: boolean): string[] {
     const urls = globs.filter((g): g is string => typeof g === 'string' && isPossibleUrlRegExp.test(g));
     const onlyGlobs = globs.filter((g) => typeof g !== 'string' || !isPossibleUrlRegExp.test(g));
-    return [urls, extractGlobsFromMatcher(buildGlobMatcher(onlyGlobs, root, isExclude))].flatMap((a) => a);
+    return [urls, extractGlobsFromMatcher(buildGlobMatcher(onlyGlobs, root, isExclude))].flat();
 }
 
 const isPossibleGlobRegExp = /[*{}()?[]/;
@@ -175,7 +175,7 @@ async function adjustPossibleDirectory(glob: Glob, root: string): Promise<Glob> 
 }
 
 function posixPath(p: string): string {
-    return path.sep === '\\' ? p.replace(/\\/g, '/') : p;
+    return path.sep === '\\' ? p.replaceAll('\\', '/') : p;
 }
 
 export async function normalizeFileOrGlobsToRoot(globs: Glob[], root: string): Promise<string[]> {

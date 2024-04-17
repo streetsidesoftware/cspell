@@ -196,5 +196,5 @@ function sampleResultsWin32() {
 }
 
 function bs(s: string, sep = win32.sep) {
-    return s.replace(/\//g, sep);
+    return s.replaceAll('/', sep);
 }

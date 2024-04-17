@@ -388,7 +388,7 @@ function normalizeLogCalls(calls: string[][]): string {
 }
 
 function normalizeOutput(lines: string[]): string {
-    return lines.join('\n').replace(/\\/g, '/');
+    return lines.join('\n').replaceAll('\\', '/');
 }
 
 function makeLogger() {
@@ -402,13 +402,13 @@ function makeLogger() {
     function normalizedHistory() {
         let t = history.join('\n');
         t = stripAnsi(t);
-        t = t.replace(/\r/gm, '');
+        t = t.replaceAll(/\r/gm, '');
         t = t.replace(RegExp(escapeRegExp(projectRootUri.toString()), 'gi'), '.');
         t = t.replace(RegExp(escapeRegExp(projectRoot), 'gi'), '.');
-        t = t.replace(/\\/g, '/');
-        t = t.replace(/(?<=^info\s+Date:).*$/gm, ' Sat, 03 Apr 2021 11:25:33 GMT');
-        t = t.replace(/\b[\d.]+ms\b/g, '0.00ms');
-        t = t.replace(/\b[\d.]+S\b/g, '0.00S');
+        t = t.replaceAll('\\', '/');
+        t = t.replaceAll(/(?<=^info\s+Date:).*$/gm, ' Sat, 03 Apr 2021 11:25:33 GMT');
+        t = t.replaceAll(/\b[\d.]+ms\b/g, '0.00ms');
+        t = t.replaceAll(/\b[\d.]+S\b/g, '0.00S');
         return t;
     }
 
@@ -426,5 +426,5 @@ function makeLogger() {
 }
 
 function escapeRegExp(s: string): string {
-    return s.replace(/[|\\{}()[\]^$+*?.]/g, '\\$&').replace(/-/g, '\\x2d');
+    return s.replaceAll(/[|\\{}()[\]^$+*?.]/g, '\\$&').replaceAll('-', '\\x2d');
 }

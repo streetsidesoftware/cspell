@@ -32,12 +32,19 @@ export default tsEslint.config(
             'unicorn/prevent-abbreviations': 'off',
             'unicorn/no-array-reduce': 'off',
             'unicorn/explicit-length-check': 'off',
-            'unicorn/no-array-for-each': 'off', // maybe add this one in later
+            'unicorn/no-nested-ternary': 'off',
+
+            // Maybe later
+            'unicorn/no-array-for-each': 'off',
+            'unicorn/prefer-at': 'off',
 
             // Enable these rules to help with on boarding eslint.
             'unicorn/prefer-module': 'error',
             'unicorn/prefer-node-protocol': 'error',
             'unicorn/numeric-separators-style': 'error',
+            'unicorn/prefer-string-replace-all': 'error',
+            'unicorn/prefer-spread': 'error',
+            'unicorn/prefer-array-flat': 'error',
         },
     },
     {

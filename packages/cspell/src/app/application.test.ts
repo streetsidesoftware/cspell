@@ -172,7 +172,7 @@ describe('Validate the Application', () => {
 
 async function trace(words: string[], options: TraceOptions) {
     const results = await asyncIterableToArray(App.trace(words, options));
-    return results.flatMap((a) => a);
+    return results.flat();
 }
 
 describe('Validate createInit', () => {
@@ -280,7 +280,7 @@ describe('Linter File Caching', () => {
 
 function tempLocation(...parts: string[]): string {
     const currTestName = expect.getState().currentTestName || 'test';
-    const testName = currTestName.replace(/\W/g, '_');
+    const testName = currTestName.replaceAll(/\W/g, '_');
     return r(tempRoot, testName, ...parts);
 }
 
