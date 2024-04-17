@@ -27,7 +27,7 @@ export class PairingHeap<T> implements IterableIterator<T> {
         return n.value;
     }
 
-    concat(i: Iterable<T>): this {
+    append(i: Iterable<T>): this {
         for (const v of i) {
             this.add(v);
         }

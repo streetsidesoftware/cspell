@@ -29,7 +29,7 @@ describe('Validate Mere Sort methods', () => {
     `('Merge Queue $letters', ({ letters }: { letters: string }) => {
         const q = new MinHeapQueue<string>(compare);
         const values = letters.split('');
-        q.concat(values);
+        q.append(values);
         expect(q.length).toBe(values.length);
         const sorted = [...q];
         expect(sorted).toEqual(letters.split('').sort());
@@ -63,7 +63,7 @@ describe('Validate Mere Sort methods', () => {
 
         const sorted = values.concat().sort(compare);
         const q = new MinHeapQueue<number>(compare);
-        q.concat(values);
+        q.append(values);
         expect([...q]).toEqual(sorted);
     });
 

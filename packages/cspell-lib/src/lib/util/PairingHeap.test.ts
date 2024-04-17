@@ -33,10 +33,10 @@ describe('PairingHeap', () => {
         expect(heap.peek()).toBeUndefined();
         expect(heap.dequeue()).toBeUndefined();
 
-        heap.concat(people);
+        heap.append(people);
         expect(heap.dequeue()).toBe(sorted[0]);
         expect(heap.dequeue()).toBe(sorted[1]);
-        heap.concat(people);
+        heap.append(people);
         expect(heap.dequeue()).toBe(sorted[0]);
         expect(heap.dequeue()).toBe(sorted[1]);
         expect(heap.peek()).toBe(sorted[2]);
