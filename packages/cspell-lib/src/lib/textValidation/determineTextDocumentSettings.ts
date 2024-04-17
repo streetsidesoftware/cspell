@@ -1,5 +1,6 @@
+import * as path from 'node:path';
+
 import type { CSpellUserSettings } from '@cspell/cspell-types';
-import * as path from 'path';
 
 import { getLanguagesForBasename } from '../LanguageIds.js';
 import type { CSpellSettingsInternal } from '../Models/CSpellSettingsInternalDef.js';

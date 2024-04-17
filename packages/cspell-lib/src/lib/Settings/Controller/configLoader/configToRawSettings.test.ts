@@ -1,5 +1,6 @@
+import { fileURLToPath } from 'node:url';
+
 import { CSpellConfigFileJavaScript } from 'cspell-config-lib';
-import { fileURLToPath } from 'url';
 import { describe, expect, test } from 'vitest';
 
 import { configToRawSettings } from './configToRawSettings.js';

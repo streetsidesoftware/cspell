@@ -1,7 +1,11 @@
-import { promises as fs } from 'fs';
+import { promises as fs } from 'node:fs';
+import { fileURLToPath } from 'node:url';
+
 import { describe, expect, test } from 'vitest';
 
 import * as fileReader from './fileReader.js';
+
+const __filename = fileURLToPath(import.meta.url);
 
 describe('Validate file reader', () => {
     test('Catches errors for non-existent files', async () => {

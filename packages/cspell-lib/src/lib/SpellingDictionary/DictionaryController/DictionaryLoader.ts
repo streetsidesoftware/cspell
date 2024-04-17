@@ -174,7 +174,6 @@ export class DictionaryLoader {
             loadingState: LoadingState.Loading,
             sig,
         };
-        // eslint-disable-next-line promise/catch-or-return
         pending.then(([dictionary, stat]) => {
             entry.stat = stat;
             entry.dictionary = dictionary;

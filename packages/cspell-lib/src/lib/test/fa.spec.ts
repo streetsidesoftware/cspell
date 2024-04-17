@@ -1,5 +1,6 @@
-import * as fs from 'fs';
-import * as path from 'path';
+import * as fs from 'node:fs';
+import * as path from 'node:path';
+
 import { describe, expect, test } from 'vitest';
 
 import { pathPackageSamples } from '../../test-util/test.locations.cjs';
@@ -8,6 +9,7 @@ import * as util from '../util/util.js';
 
 const sampleFilename = path.join(pathPackageSamples, 'Seattle.fa.md');
 const text = fs.readFileSync(sampleFilename, 'utf8').toString();
+// eslint-disable-next-line unicorn/prefer-module
 const frenchConfig = require.resolve('@cspell/dict-fa-ir/cspell-ext.json');
 
 const timeout = 10000;

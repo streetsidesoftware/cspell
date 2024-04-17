@@ -1,5 +1,6 @@
-import * as fsp from 'fs';
-import * as path from 'path';
+import * as fsp from 'node:fs';
+import * as path from 'node:path';
+
 import { describe, expect, test } from 'vitest';
 
 import { pathPackageSamples } from '../../test-util/test.locations.cjs';

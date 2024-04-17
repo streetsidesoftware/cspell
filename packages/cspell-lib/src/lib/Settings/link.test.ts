@@ -1,6 +1,7 @@
+import * as Path from 'node:path';
+import { fileURLToPath, pathToFileURL } from 'node:url';
+
 import { CSpellConfigFileInMemory } from 'cspell-config-lib';
-import * as Path from 'path';
-import { pathToFileURL } from 'url';
 import { afterEach, describe, expect, test, vi } from 'vitest';
 
 import type { CSpellSettingsWST } from './Controller/configLoader/types.js';
@@ -8,6 +9,8 @@ import { getGlobalConfig, getRawGlobalSettings, writeRawGlobalSettings } from '.
 import { __testing__, addPathsToGlobalImports, listGlobalImports, removePathsFromGlobalImports } from './link.js';
 
 vi.mock('./GlobalSettings');
+
+const __dirname = Path.dirname(fileURLToPath(import.meta.url));
 
 const findPackageForCSpellConfig = __testing__.findPackageForCSpellConfig;
 

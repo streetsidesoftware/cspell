@@ -18,7 +18,7 @@ import {
 } from './fileHelper.js';
 
 const __filename = fileURLToPath(import.meta.url);
-const __dirname = fileURLToPath(new URL('.', import.meta.url));
+const __dirname = path.dirname(__filename);
 
 vi.mock('get-stdin', () => ({
     default: vi.fn(),

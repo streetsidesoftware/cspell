@@ -1,7 +1,7 @@
+import * as fs from 'node:fs/promises';
+import * as path from 'node:path';
+
 import type { CSpellUserSettings } from '@cspell/cspell-types';
-import * as fs from 'fs/promises';
-import * as path from 'path';
-import { pathToFileURL } from 'url';
 import { describe, expect, test } from 'vitest';
 
 import { pathPackageRoot } from '../../test-util/test.locations.cjs';
@@ -28,7 +28,7 @@ function log(msg: string): void {
     }
 }
 
-const __filenameURL = pathToFileURL(__filename);
+const __filenameURL = new URL(import.meta.url);
 
 const di = mapDictDefToInternal;
 

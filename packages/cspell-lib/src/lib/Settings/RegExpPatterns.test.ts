@@ -1,6 +1,7 @@
+import fs from 'node:fs';
+import Path from 'node:path';
+
 import type { TextOffset } from '@cspell/cspell-types';
-import fs from 'fs';
-import Path from 'path';
 import { describe, expect, test } from 'vitest';
 
 import { pathPackageSamples } from '../../test-util/test.locations.cjs';

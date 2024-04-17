@@ -1,7 +1,8 @@
+import { pathToFileURL } from 'node:url';
+
 import type { CSpellSettings, CSpellSettingsWithSourceTrace } from '@cspell/cspell-types';
 import type { CSpellConfigFile } from 'cspell-config-lib';
 import { CSpellConfigFileInMemory, CSpellConfigFileJson } from 'cspell-config-lib';
-import { pathToFileURL } from 'url';
 
 import { isErrnoException } from '../util/errors.js';
 import { logError } from '../util/logger.js';
@@ -80,7 +81,7 @@ export function getGlobalConfigPath(): string | undefined {
     try {
         const cfgStore = new ConfigStore(packageName);
         return cfgStore.path;
-    } catch (e) {
+    } catch {
         return undefined;
     }
 }

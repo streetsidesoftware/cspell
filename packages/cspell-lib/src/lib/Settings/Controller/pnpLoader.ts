@@ -1,9 +1,10 @@
 /**
  * Handles loading of `.pnp.js` and `.pnp.js` files.
  */
+import { fileURLToPath } from 'node:url';
+
 import clearModule from 'clear-module';
 import importFresh from 'import-fresh';
-import { fileURLToPath } from 'url';
 
 import { findUp } from '../../util/findUp.js';
 import { toFileUrl } from '../../util/url.js';

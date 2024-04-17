@@ -1,5 +1,6 @@
+import assert from 'node:assert';
+
 import type { CSpellUserSettings } from '@cspell/cspell-types';
-import assert from 'assert';
 
 import type { Document } from '../Document/index.js';
 import { resolveDocumentToTextDocument } from '../Document/resolveDocument.js';

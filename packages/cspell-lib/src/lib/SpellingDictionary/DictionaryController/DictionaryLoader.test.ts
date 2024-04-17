@@ -1,5 +1,6 @@
-import * as path from 'path';
-import { pathToFileURL } from 'url';
+import * as path from 'node:path';
+import { pathToFileURL } from 'node:url';
+
 import { describe, expect, test, vi } from 'vitest';
 
 import { pathPackageRoot } from '../../../test-util/test.locations.cjs';
@@ -14,6 +15,8 @@ import { clean } from '../../util/util.js';
 import type { LoadOptions } from './DictionaryLoader.js';
 import { DictionaryLoader } from './DictionaryLoader.js';
 vi.mock('../../util/logger');
+
+const __filename = pathToFileURL(import.meta.url);
 
 const root = pathPackageRoot;
 const samples = path.join(root, 'samples');
@@ -73,9 +76,13 @@ describe('Validate DictionaryLoader', () => {
     function nfc(s: string): string {
         return s.normalize('NFC');
     }
-    // cspell:ignore aujourd’hui
+
+    // eslint-disable-next-line unicorn/prefer-module
     const csharpDictExt = require.resolve('@cspell/dict-csharp/cspell-ext.json');
     const csharp = path.join(path.dirname(csharpDictExt), 'csharp.txt.gz');
+
+    // cspell:ignore aujourd’hui
+
     test.each`
         testCase            | file                          | options          | word               | maxAge       | hasWord  | hasErrors
         ${'sample words'}   | ${sample('words.txt')}        | ${{}}            | ${'apple'}         | ${1}         | ${true}  | ${false}

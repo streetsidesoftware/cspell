@@ -1,13 +1,13 @@
 import { createRequire } from 'node:module';
+import * as os from 'node:os';
+import * as path from 'node:path';
 import { pathToFileURL } from 'node:url';
+import { fileURLToPath } from 'node:url';
 
 import { resolveGlobal } from '@cspell/cspell-resolver';
 import { importResolveModuleName } from '@cspell/dynamic-import';
 import type { VFileSystem } from 'cspell-io';
-import * as os from 'os';
-import * as path from 'path';
 import resolveFrom from 'resolve-from';
-import { fileURLToPath } from 'url';
 
 import { srcDirectory } from '../../lib-cjs/pkg-info.cjs';
 import { getFileSystem } from '../fileSystem.js';
@@ -113,7 +113,7 @@ export class FileResolver {
         try {
             const s = await this.fs.stat(file);
             return s.isFile() || s.isUnknown();
-        } catch (error) {
+        } catch {
             return false;
         }
     }
@@ -186,6 +186,7 @@ export class FileResolver {
 
     tryNodeResolveDefaultPaths = (filename: string): ResolveFileResult | undefined => {
         try {
+            // eslint-disable-next-line unicorn/prefer-module
             const r = require.resolve(filename);
             return { filename: r, relativeTo: undefined, found: true, method: 'tryNodeResolveDefaultPaths' };
         } catch (_) {
@@ -212,6 +213,7 @@ export class FileResolver {
         }
         const paths = calcPaths(path.resolve(relativeToPath));
         try {
+            // eslint-disable-next-line unicorn/prefer-module
             const r = require.resolve(filename, { paths });
             return { filename: r, relativeTo: relativeToPath, found: true, method: 'tryNodeRequireResolve' };
         } catch (_) {
@@ -267,7 +269,7 @@ export class FileResolver {
                 found: true,
                 method: 'tryResolveFrom',
             };
-        } catch (error) {
+        } catch {
             // Failed to resolve a relative module request
             return undefined;
         }

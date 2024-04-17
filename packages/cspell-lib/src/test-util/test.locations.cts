@@ -1,5 +1,5 @@
-import * as path from 'path';
-import { pathToFileURL } from 'url';
+import * as path from 'node:path';
+import { pathToFileURL } from 'node:url';
 
 export const pathPackageRoot = path.join(__dirname, '../../');
 export const pathRepoRoot = path.join(pathPackageRoot, '../../');

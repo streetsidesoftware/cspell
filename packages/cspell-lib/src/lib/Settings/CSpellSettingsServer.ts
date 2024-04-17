@@ -1,3 +1,6 @@
+import assert from 'node:assert';
+import { pathToFileURL } from 'node:url';
+
 import type {
     AdvancedCSpellSettingsWithSourceTrace,
     CSpellSettingsWithSourceTrace,
@@ -7,8 +10,6 @@ import type {
     Plugin,
     Source,
 } from '@cspell/cspell-types';
-import assert from 'assert';
-import { pathToFileURL } from 'url';
 
 import { onClearCache } from '../events/index.js';
 import type { CSpellSettingsInternal, CSpellSettingsInternalFinalized } from '../Models/CSpellSettingsInternalDef.js';

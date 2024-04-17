@@ -1,6 +1,7 @@
-import path from 'path';
+import path from 'node:path';
+import { fileURLToPath, pathToFileURL } from 'node:url';
+
 import resolveFrom from 'resolve-from';
-import { fileURLToPath, pathToFileURL } from 'url';
 import { describe, expect, test } from 'vitest';
 
 import { pathPackageSamplesURL, pathRepoRoot } from '../../../test-util/test.locations.cjs';

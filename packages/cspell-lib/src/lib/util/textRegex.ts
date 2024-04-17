@@ -36,7 +36,7 @@ export function stringToRegExp(pattern: string | RegExp, defaultFlags = 'gimu', 
             const regex = new RegExp(regPattern, flags);
             return regex;
         }
-    } catch (e) {
+    } catch {
         /* empty */
     }
     return undefined;

@@ -18,7 +18,7 @@ export function createMapper(repMap: ReplaceMap): ReplaceMapper {
                 const r = s.match(/\(/) ? s.replace(/\((?=.*\))/g, '(?:').replace(/\(\?:\?/g, '(?') : s;
                 new RegExp(r);
                 s = r;
-            } catch (err) {
+            } catch {
                 return escapeRegEx(s);
             }
             return s;

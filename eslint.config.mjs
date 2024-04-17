@@ -44,12 +44,12 @@ export default tsEslint.config(
             // Enable these rules to help with on boarding eslint.
             'unicorn/prefer-module': 'error',
             'unicorn/prefer-node-protocol': 'error',
-            'unicorn/numeric-separators-style': 'error',
-            'unicorn/prefer-string-replace-all': 'error',
-            'unicorn/prefer-spread': 'error',
-            'unicorn/prefer-array-flat': 'error',
-            'unicorn/no-instanceof-array': 'error',
-            'unicorn/better-regex': 'error',
+            // 'unicorn/numeric-separators-style': 'error',
+            // 'unicorn/prefer-string-replace-all': 'error',
+            // 'unicorn/prefer-spread': 'error',
+            // 'unicorn/prefer-array-flat': 'error',
+            // 'unicorn/no-instanceof-array': 'error',
+            // 'unicorn/better-regex': 'error',
         },
     },
     {
@@ -143,6 +143,7 @@ export default tsEslint.config(
             'n/no-unpublished-import': 'off',
             '@typescript-eslint/no-explicit-any': 'off', // any is allowed in tests
             'unicorn/no-null': 'off', // null is allowed in tests
+            'unicorn/prefer-module': 'off', // require.resolve is allowed in tests
         },
     },
     {

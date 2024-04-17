@@ -1,4 +1,5 @@
-import { promisify } from 'util';
+import { promisify } from 'node:util';
+
 import { describe, expect, test, vi } from 'vitest';
 
 import { createPerfTimer } from './timer.js';

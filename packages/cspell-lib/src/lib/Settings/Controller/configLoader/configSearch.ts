@@ -51,7 +51,7 @@ export class ConfigSearch {
 
                 const result = searchCache.get(searchHref) || pFoundUrl;
                 searchCache.set(searchHref, result);
-            } catch (e) {
+            } catch {
                 // ignore
             }
         };
@@ -116,7 +116,7 @@ export class ConfigSearch {
         try {
             const dirInfo = await this.fs.readDirectory(dir);
             return new Map(dirInfo.map((ent) => [ent.name, ent]));
-        } catch (e) {
+        } catch {
             return new Map();
         }
     }
@@ -166,7 +166,7 @@ async function checkPackageJson(fs: VFileSystem, filename: URL): Promise<boolean
         const file = await fs.readFile(filename);
         const pkg = JSON.parse(file.getText());
         return typeof pkg.cspell === 'object';
-    } catch (e) {
+    } catch {
         return false;
     }
 }

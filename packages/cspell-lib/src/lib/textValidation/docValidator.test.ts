@@ -1,8 +1,9 @@
+import assert from 'node:assert';
+import { promises as fs } from 'node:fs';
+import * as path from 'node:path';
+import { fileURLToPath, pathToFileURL } from 'node:url';
+
 import type { CSpellUserSettings } from '@cspell/cspell-types';
-import assert from 'assert';
-import { promises as fs } from 'fs';
-import * as path from 'path';
-import { pathToFileURL } from 'url';
 import { describe, expect, test } from 'vitest';
 
 import { pathPackageFixtures, pathPackageRoot, pathRepoTestFixtures } from '../../test-util/test.locations.cjs';
@@ -14,6 +15,8 @@ import { AutoCache } from '../util/simpleCache.js';
 import { toUri } from '../util/Uri.js';
 import type { DocumentValidatorOptions } from './docValidator.js';
 import { __testing__, DocumentValidator, shouldCheckDocument } from './docValidator.js';
+
+const __filename = fileURLToPath(import.meta.url);
 
 const docCache = new AutoCache(_loadDoc, 100);
 const fixturesDir = pathPackageFixtures;

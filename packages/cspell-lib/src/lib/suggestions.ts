@@ -1,5 +1,6 @@
+import assert from 'node:assert';
+
 import type { CSpellSettings, LocaleId } from '@cspell/cspell-types';
-import assert from 'assert';
 
 import type { LanguageId } from './LanguageIds.js';
 import { finalizeSettings, getDefaultSettings, getGlobalSettingsAsync, mergeSettings } from './Settings/index.js';

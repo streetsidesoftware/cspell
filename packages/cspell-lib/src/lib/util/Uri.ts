@@ -1,4 +1,5 @@
-import assert from 'assert';
+import assert from 'node:assert';
+
 import { URI, Utils } from 'vscode-uri';
 
 export interface Uri {

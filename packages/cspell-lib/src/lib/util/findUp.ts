@@ -1,7 +1,6 @@
 import { stat } from 'node:fs/promises';
-
-import path from 'path';
-import { fileURLToPath } from 'url';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
 
 export interface FindUpOptions {
     cwd?: string;

@@ -1,6 +1,8 @@
+import * as Path from 'node:path';
+import { posix } from 'node:path';
+import { fileURLToPath } from 'node:url';
+
 import type { CSpellSettingsWithSourceTrace, CSpellUserSettings } from '@cspell/cspell-types';
-import * as Path from 'path';
-import { posix } from 'path';
 import { describe, expect, test } from 'vitest';
 
 import { pathPackageSamples, pathRepoTestFixtures } from '../test-util/index.mjs';
@@ -12,6 +14,8 @@ import { ImportError } from './Settings/Controller/ImportError.js';
 import type { SpellCheckFileOptions, SpellCheckFileResult } from './spellCheckFile.js';
 import { determineFinalDocumentSettings, spellCheckDocument, spellCheckFile } from './spellCheckFile.js';
 import * as Uri from './util/Uri.js';
+
+const __filename = fileURLToPath(import.meta.url);
 
 const samples = pathPackageSamples;
 const testFixtures = pathRepoTestFixtures;

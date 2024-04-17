@@ -1,7 +1,8 @@
+import * as path from 'node:path';
+
 import type { CSpellUserSettings } from '@cspell/cspell-types';
 import type { CSpellConfigFile } from 'cspell-config-lib';
 import { CSpellConfigFileInMemory } from 'cspell-config-lib';
-import * as path from 'path';
 import { describe, expect, test } from 'vitest';
 
 import { pathPackageRoot, pathPackageSamples } from '../../test-util/test.locations.cjs';
