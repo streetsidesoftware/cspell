@@ -1,7 +1,4 @@
-const initialRow = '.'
-    .repeat(50)
-    .split('')
-    .map((_, i) => i);
+const initialRow = [...'.'.repeat(50)].map((_, i) => i);
 
 Object.freeze(initialRow);
 
@@ -113,7 +110,7 @@ export function selectNearestWords(
     //     resultsByCost.map((r) => r.length)
     // );
 
-    const results = resultsByCost.reduce((acc, r) => (acc.length < count ? acc.concat(r) : acc), []);
+    const results = resultsByCost.reduce((acc, r) => (acc.length < count ? [...acc, ...r] : acc), []);
     return results.slice(0, count);
 
     function levenshteinDistance(b: string): number | undefined {

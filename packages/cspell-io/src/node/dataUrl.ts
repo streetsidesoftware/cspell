@@ -45,7 +45,7 @@ function encodeString(
     const useBase64 = asBase64.length < asUrlComp.length - 7;
     const encoded = useBase64 ? asBase64 : asUrlComp;
     // Ensure charset is first.
-    const attribMap = new Map([['charset', 'utf-8'] as readonly [string, string]].concat([...attributes]));
+    const attribMap = new Map([['charset', 'utf-8'] as readonly [string, string], ...attributes]);
     attribMap.set('charset', 'utf-8'); // Make sure it is always `utf-8`.
     const attribs = encodeAttributes(attribMap);
     return `data:${mediaType}${attribs}${useBase64 ? ';base64' : ''},${encoded}`;

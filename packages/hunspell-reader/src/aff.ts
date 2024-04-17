@@ -424,7 +424,7 @@ class AffData {
             case 'num':
                 return [...new Set(rules.split(','))];
         }
-        return [...new Set(rules.split(''))];
+        return [...new Set([...rules])];
     }
 
     #processAffInfo(affInfo: AffInfo) {

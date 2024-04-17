@@ -69,7 +69,7 @@ export function generateReport(data: ReportData): Report {
     });
 
     const base: SortedFileIssues = [];
-    const fileIssues: SortedFileIssues = base.concat(...issuesByFile);
+    const fileIssues: SortedFileIssues = [...base, ...issuesByFile.flat()];
     const issuesSummary = [...(data.issuesSummary || [])].sort((a, b) => compare(a.text, b.text));
 
     return {

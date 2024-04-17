@@ -21,7 +21,7 @@ function* compoundWalker(root: TrieNode, compoundingMethod: CompoundWordsMethod)
 
     function children(n: TrieNode): Children {
         if (n.c && n.f && rc) {
-            return Object.entries(n.c).concat(rc);
+            return [...Object.entries(n.c), ...rc];
         }
         if (n.c) {
             return Object.entries(n.c);

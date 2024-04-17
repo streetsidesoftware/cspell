@@ -40,9 +40,11 @@ function trieToExportString(node: TrieNode, base: number): Sequence<string> {
 }
 
 function generateHeader(base: number, comment: string): Sequence<string> {
-    const header = ['#!/usr/bin/env cspell-trie reader', 'TrieXv1', 'base=' + base]
-        .concat(comment ? comment.split('\n').map((a) => '# ' + a) : [])
-        .concat(['# Data:']);
+    const header = [
+        ...['#!/usr/bin/env cspell-trie reader', 'TrieXv1', 'base=' + base],
+        ...(comment ? comment.split('\n').map((a) => '# ' + a) : []),
+        ...['# Data:'],
+    ];
     return genSequence(header).map((a) => a + '\n');
 }
 
@@ -66,6 +68,7 @@ export function serializeTrie(root: TrieRoot, options: ExportOptions | number = 
         return row;
     });
 
+    // eslint-disable-next-line unicorn/prefer-spread
     return generateHeader(radix, comment).concat(rows);
 }
 
@@ -140,6 +143,7 @@ export function importTrie(linesX: Iterable<string> | IterableIterator<string>):
     readHeader(iter);
 
     const n = genSequence([DATA])
+        // eslint-disable-next-line unicorn/prefer-spread
         .concat(iter)
         .map((a) => a.replace(/\r?\n/, ''))
         .filter((a) => !!a)

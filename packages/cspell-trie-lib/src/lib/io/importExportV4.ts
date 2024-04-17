@@ -34,10 +34,23 @@ const REF_INDEX_END = ']';
 const INLINE_DATA_COMMENT_LINE = '/';
 
 const specialCharacters = stringToCharSet(
-    [EOW, BACK, EOL, REF, REF_REL, EOR, ESCAPE, LF, REF_INDEX_BEGIN, REF_INDEX_END, INLINE_DATA_COMMENT_LINE]
-        .concat('0123456789'.split(''))
-        .concat('`~!@#$%^&*()_-+=[]{};:\'"<>,./?\\|'.split(''))
-        .join(''),
+    [
+        ...[
+            EOW,
+            BACK,
+            EOL,
+            REF,
+            REF_REL,
+            EOR,
+            ESCAPE,
+            LF,
+            REF_INDEX_BEGIN,
+            REF_INDEX_END,
+            INLINE_DATA_COMMENT_LINE,
+            ...'0123456789',
+        ],
+        ...'`~!@#$%^&*()_-+=[]{};:\'"<>,./?\\|',
+    ].join(''),
 );
 
 const SPECIAL_CHARACTERS_MAP = [
@@ -472,7 +485,7 @@ function parseStream(radix: number, iter: Iterable<string>): TrieRoot {
     reduce(
         pipe(
             iter,
-            opConcatMap((a) => a.split('')),
+            opConcatMap((a) => [...a]),
         ),
         parserMain,
         {

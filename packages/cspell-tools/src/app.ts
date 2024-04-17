@@ -21,7 +21,7 @@ const npmPackage = JSON.parse(npmPackageRaw);
 compiler.setLogger(logWithTimestamp);
 
 function collect(value: string, previous: string[]) {
-    return previous.concat([value]);
+    return [...previous, value];
 }
 
 function addCompileOptions(compileCommand: Command): Command {

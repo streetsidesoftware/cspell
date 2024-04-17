@@ -22,9 +22,11 @@ const WORDS_PER_LINE = 20;
 export const DATA = '__DATA__';
 
 function generateHeader(base: number, comment: string): Iterable<string> {
-    const header = ['#!/usr/bin/env cspell-trie reader', 'TrieXv3', 'base=' + base]
-        .concat(comment ? comment.split('\n').map((a) => '# ' + a) : [])
-        .concat(['# Data:', DATA]);
+    const header = [
+        ...['#!/usr/bin/env cspell-trie reader', 'TrieXv3', 'base=' + base],
+        ...(comment ? comment.split('\n').map((a) => '# ' + a) : []),
+        ...['# Data:', DATA],
+    ];
     return header.map((a) => a + '\n');
 }
 

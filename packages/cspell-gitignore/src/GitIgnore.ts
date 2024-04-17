@@ -109,7 +109,7 @@ export class GitIgnore {
         if (!git) {
             return parentHierarchy || new GitIgnoreHierarchy([]);
         }
-        const chain = parentHierarchy?.gitIgnoreChain.concat([git]) ?? [git];
+        const chain = parentHierarchy ? [...parentHierarchy.gitIgnoreChain, git] : [git];
         return new GitIgnoreHierarchy(chain);
     }
 

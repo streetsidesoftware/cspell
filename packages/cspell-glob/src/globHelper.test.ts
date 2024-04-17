@@ -135,7 +135,7 @@ describe('Validate Glob Normalization to root', () => {
             }
         }
 
-        return patterns.concat([...flatten()]);
+        return [...patterns, ...flatten()];
     }
 
     function eg(e: Partial<GlobPatternNormalized>, path: PathInterface) {

@@ -52,7 +52,7 @@ describe('FastTrieBlobBuilder', () => {
     `('cursor insertChar split $word', ({ word }: { word: string }) => {
         const builder = new FastTrieBlobBuilder();
         const cursor = builder.getCursor();
-        const chars = word.split('');
+        const chars = [...word];
         chars.forEach((letter) => cursor.insertChar(letter));
         cursor.markEOW();
         cursor.backStep(chars.length);
@@ -78,7 +78,7 @@ describe('FastTrieBlobBuilder', () => {
         const words = sampleWords();
         const sortedUnique = [...new Set(words)].sort();
         for (const word of words) {
-            const chars = word.split('');
+            const chars = [...word];
             chars.forEach((letter) => cursor.insertChar(letter));
             cursor.markEOW();
             cursor.backStep(chars.length);

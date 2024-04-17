@@ -193,7 +193,7 @@ export class Aff {
             case 'num':
                 return [...new Set(rules.split(','))];
         }
-        return [...new Set(rules.split(''))];
+        return [...new Set([...rules])];
     }
 
     get iConv() {

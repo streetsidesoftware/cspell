@@ -8,8 +8,8 @@ export function appendMappedText(a: MappedText, b: MappedText): MappedText {
     }
     const aLen = a.text.length;
     const bLen = b.text.length;
-    const aMap = [0, 0].concat(a.map || [0, 0, aLen, aLen]);
-    const bMap = [0, 0].concat(b.map || [0, 0, bLen, bLen]);
+    const aMap = [0, 0, ...(a.map || [0, 0, aLen, aLen])];
+    const bMap = [0, 0, ...(b.map || [0, 0, bLen, bLen])];
 
     assert(aMap[aMap.length - 1] === aLen);
     assert(bMap[bMap.length - 1] === bLen);
@@ -24,7 +24,7 @@ export function appendMappedText(a: MappedText, b: MappedText): MappedText {
 function joinMaps(aMap: number[], bMap: number[]): number[] {
     const n = aMap.length - 1;
     const offsets = [aMap[n - 1], aMap[n]];
-    const ab = aMap.concat(bMap.map((v, i) => v + offsets[i & 1]));
+    const ab = [...aMap, ...bMap.map((v, i) => v + offsets[i & 1])];
     // Normalize the map by removing duplicate entries
     const r = [0, 0];
     let last0 = 0,

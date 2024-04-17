@@ -169,16 +169,18 @@ function sugOpts(opts: Partial<SuggestionCollectorOptions>): SuggestionCollector
 }
 
 function sampleSuggestions(): string[] {
-    return ['']
-        .concat(['joy', 'joyful', 'joyfully', 'joyous', 'enjoy', 'enjoyment', 'joyfulness', 'joyless', 'enjoys'])
-        .concat(['one', 'two', 'concat', 'string', 'function', 'return', 'partial', 'values', 'value', 'collector'])
-        .concat(['color', 'word', 'words', 'would', "wouldn't", "won't", 'water', 'walk', 'walking', 'cost'])
-        .concat(['calculate', 'suggest', 'suggestion', 'supplement', 'apple', 'apples', 'walked', 'walker'])
-        .concat(['yo-yo', 'the', 'saw', 'raw', 'paw', 'this', 'these', 'those', 'work', 'works', 'working'])
-        .concat(['workable', 'worked', 'cafe', 'café', 'resume', 'résumé', 'cafés'])
-        .concat(['run|time', 'coffee|shop', 'run', 'time', 'coffee', 'shop', 'street|wise'])
-        .concat([])
-        .map((a) => a.replaceAll(/[|]/g, DEFAULT_COMPOUNDED_WORD_SEPARATOR));
+    const words = [
+        [''],
+        ['joy', 'joyful', 'joyfully', 'joyous', 'enjoy', 'enjoyment', 'joyfulness', 'joyless', 'enjoys'],
+        ['one', 'two', 'concat', 'string', 'function', 'return', 'partial', 'values', 'value', 'collector'],
+        ['color', 'word', 'words', 'would', "wouldn't", "won't", 'water', 'walk', 'walking', 'cost'],
+        ['calculate', 'suggest', 'suggestion', 'supplement', 'apple', 'apples', 'walked', 'walker'],
+        ['yo-yo', 'the', 'saw', 'raw', 'paw', 'this', 'these', 'those', 'work', 'works', 'working'],
+        ['workable', 'worked', 'cafe', 'café', 'resume', 'résumé', 'cafés'],
+        ['run|time', 'coffee|shop', 'run', 'time', 'coffee', 'shop', 'street|wise'],
+        [],
+    ].flat(1);
+    return words.map((a) => a.replaceAll(/[|]/g, DEFAULT_COMPOUNDED_WORD_SEPARATOR));
 }
 
 function dictInfo() {

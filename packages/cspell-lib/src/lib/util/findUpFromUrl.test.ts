@@ -27,12 +27,12 @@ describe('findUpFromUrl', () => {
     });
 
     test('should stop searching at the specified directory', async () => {
-        const result = await findUpFromUrl('.eslintrc.js', __dirURL, { stopAt: reposRoot });
-        expect(result).toEqual(new URL('.eslintrc.js', reposRoot));
+        const result = await findUpFromUrl('eslint.config.mjs', __dirURL, { stopAt: reposRoot });
+        expect(result).toEqual(new URL('eslint.config.mjs', reposRoot));
     });
 
     test('should stop searching at the specified directory', async () => {
-        const result = await findUpFromUrl('.eslintrc.js', __dirURL, { stopAt: packageRoot });
+        const result = await findUpFromUrl('eslint.config.mjs', __dirURL, { stopAt: packageRoot });
         expect(result).toBeUndefined();
     });
 

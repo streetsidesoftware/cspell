@@ -160,24 +160,25 @@ export class TrieBuilder {
         return Object.isFrozen(child) ? this.tryToCache(node) : node;
     }
 
-    private buildTail(s: string): TrieNodeEx {
-        const v = this.tails.get(s);
+    private buildTail(s: string[]): TrieNodeEx {
+        const ss = s.join('');
+        const v = this.tails.get(ss);
         if (v) return v;
         const head = s[0];
         const tail = s.slice(1);
-        const t = this.tails.get(tail);
+        const t = this.tails.get(tail.join(''));
         const c = t || this.buildTail(tail);
         const n = this.addChild(this.createNode(), head, c);
         if (!t) {
             return n;
         }
         const cachedNode = this.tryCacheFrozen(this.freeze(n));
-        this.tails.set(s, cachedNode);
+        this.tails.set(ss, cachedNode);
         // console.warn('tail: %s', s);
         return cachedNode;
     }
 
-    private _insert(node: TrieNodeEx, s: string, d: number): TrieNodeEx {
+    private _insert(node: TrieNodeEx, s: string[], d: number): TrieNodeEx {
         this.logDebug('_insert', () => ({
             n: this.debNodeInfo(node),
             s,
@@ -186,12 +187,12 @@ export class TrieBuilder {
         }));
         const orig = node;
         if (Object.isFrozen(node)) {
-            const n = this.transforms.get(node)?.get(s);
+            const n = this.transforms.get(node)?.get(s.join(''));
             if (n) {
                 return this.tryCacheFrozen(n);
             }
         }
-        if (!s) {
+        if (!s.length) {
             if (!node.c) {
                 return this._eow;
             } else {
@@ -205,7 +206,7 @@ export class TrieBuilder {
         const cNode = node.c?.[head];
         const child = cNode ? this._insert(cNode, tail, d + 1) : this.buildTail(tail);
         node = this.addChild(node, head, child);
-        this.storeTransform(orig, s, node);
+        this.storeTransform(orig, s.join(''), node);
         this.lastPath[d] = { s: head, n: child };
         return node;
     }
@@ -230,21 +231,23 @@ export class TrieBuilder {
         //     }
         // }
 
+        const chars = [...word];
+
         let d = 1;
-        for (const s of word.split('')) {
+        for (const s of chars) {
             const p = this.lastPath[d];
             if (p?.s !== s) break;
             d++;
         }
 
         // remove the remaining part of the path because it doesn't match this word.
-        if (word.length < d) {
-            d = word.length;
+        if (chars.length < d) {
+            d = chars.length;
         }
         this.lastPath.length = d;
         d -= 1;
         const { n } = this.lastPath[d];
-        const tail = word.slice(d);
+        const tail = chars.slice(d);
         this.lastPath[d].n = this._insert(n, tail, d + 1);
         while (d > 0) {
             const { s, n } = this.lastPath[d];
@@ -253,8 +256,8 @@ export class TrieBuilder {
             const pn = parent.n;
             parent.n = this.addChild(pn, s, n);
             if (pn === parent.n) break;
-            const tail = word.slice(d);
-            this.storeTransform(pn, tail, parent.n);
+            const tail = chars.slice(d);
+            this.storeTransform(pn, tail.join(''), parent.n);
         }
     }
 

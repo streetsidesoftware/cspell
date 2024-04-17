@@ -103,7 +103,7 @@ describe('Test Aff', () => {
     it('test breaking up rules for en', async () => {
         const aff = await parseAffFileToAffLegacy(enAff);
         expect(aff.separateRules('ZbCcChC1')).not.toEqual(['Zb', 'Cc', 'Ch', 'C1']);
-        expect(aff.separateRules('ZbCcChC1')).toEqual('ZbCch1'.split(''));
+        expect(aff.separateRules('ZbCcChC1')).toEqual([...'ZbCch1']);
     });
 
     it('test getting rules for nl', async () => {

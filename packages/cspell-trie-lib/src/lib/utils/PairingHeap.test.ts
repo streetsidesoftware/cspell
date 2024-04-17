@@ -6,7 +6,7 @@ describe('PairingHeap', () => {
     test('Basic add and remove', () => {
         const compare = new Intl.Collator().compare;
         const values = ['one', 'two', 'three', 'four', 'five', 'six', 'seven'];
-        const sorted = values.concat().sort(compare);
+        const sorted = [...values].sort(compare);
         const heap = new PairingHeap(compare);
         values.forEach((v) => heap.add(v));
         expect(heap.length).toBe(values.length);
@@ -24,7 +24,7 @@ describe('PairingHeap', () => {
         const compare = (a: Person, b: Person) => compareStr(a.name, b.name);
         const names = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'June', 'July'];
         const people: Person[] = names.map((name) => ({ name }));
-        const sorted = people.concat().sort(compare);
+        const sorted = [...people].sort(compare);
         const heap = new PairingHeap(compare);
 
         heap.add(people[0]);
@@ -33,10 +33,10 @@ describe('PairingHeap', () => {
         expect(heap.peek()).toBeUndefined();
         expect(heap.dequeue()).toBeUndefined();
 
-        heap.concat(people);
+        heap.append(people);
         expect(heap.dequeue()).toBe(sorted[0]);
         expect(heap.dequeue()).toBe(sorted[1]);
-        heap.concat(people);
+        heap.append(people);
         expect(heap.dequeue()).toBe(sorted[0]);
         expect(heap.dequeue()).toBe(sorted[1]);
         expect(heap.peek()).toBe(sorted[2]);

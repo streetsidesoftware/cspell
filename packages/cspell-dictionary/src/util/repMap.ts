@@ -11,7 +11,7 @@ export function createMapper(repMap: ReplaceMap | undefined, ignoreCharset?: str
     repMap = repMap || [];
     const charsetMap = charsetToRepMapRegEx(ignoreCharset);
     if (charsetMap) {
-        repMap = repMap.concat(charsetMap);
+        repMap = [...repMap, ...charsetMap];
     }
 
     const filteredMap = repMap.filter(([match, _]) => !!match);

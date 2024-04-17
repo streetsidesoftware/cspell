@@ -103,7 +103,7 @@ describe('Validate the wordListCompiler', () => {
         const resultLines = resultFile.split('\n');
         const node = Trie.importTrie(resultLines);
         const words = [...Trie.iteratorTrieWords(node)].filter((a) => !a.startsWith('~')).sort();
-        expect(words).toEqual(source.concat().sort());
+        expect(words).toEqual([...source].sort());
         expect(consoleOutput()).toMatchSnapshot();
     });
 

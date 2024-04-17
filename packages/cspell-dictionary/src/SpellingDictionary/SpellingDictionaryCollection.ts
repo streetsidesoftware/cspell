@@ -112,7 +112,7 @@ class SpellingDictionaryCollectionImpl implements SpellingDictionaryCollection {
     }
 
     public getErrors(): Error[] {
-        return this.dictionaries.reduce((errors, dict) => errors.concat(dict.getErrors?.() || []), [] as Error[]);
+        return this.dictionaries.reduce((errors, dict) => [...errors, ...(dict.getErrors?.() || [])], [] as Error[]);
     }
 
     private _isForbiddenInDict(word: string, ignoreCase: boolean | undefined) {

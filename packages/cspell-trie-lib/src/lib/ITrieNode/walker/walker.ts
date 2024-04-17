@@ -20,7 +20,7 @@ function* compoundWalker(root: ITrieNode, compoundingMethod: CompoundWordsMethod
     function children(n: ITrieNode): Children {
         if (n.hasChildren()) {
             const c = n.keys().map((k, i) => [k, n.child(i)] as const);
-            return n.eow && rc ? c.concat(rc) : c;
+            return n.eow && rc ? [...c, ...rc] : c;
         }
         if (n.eow) {
             return roots[compoundingMethod];

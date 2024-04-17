@@ -104,9 +104,11 @@ function toLine(node: TrieRefNode, base: number): string {
 }
 
 function generateHeader(base: number, comment: string): Sequence<string> {
-    const header = ['#!/usr/bin/env cspell-trie reader', 'TrieXv2', 'base=' + base]
-        .concat(comment ? comment.split('\n').map((a) => '# ' + a) : [])
-        .concat(['# Data:', DATA]);
+    const header = [
+        ...['#!/usr/bin/env cspell-trie reader', 'TrieXv2', 'base=' + base],
+        ...(comment ? comment.split('\n').map((a) => '# ' + a) : []),
+        ...['# Data:', DATA],
+    ];
     return genSequence(header);
 }
 
@@ -128,9 +130,12 @@ export function serializeTrie(root: TrieRoot, options: ExportOptions | number = 
     const rootRef: TrieRefNode = { ...root, s: '^' };
     const rows = flattenToReferences(rootRef).map((n) => toLine(n, base));
 
-    return generateHeader(radix, comment)
-        .concat(rows)
-        .map((a) => a + '\n');
+    return (
+        generateHeader(radix, comment)
+            // eslint-disable-next-line unicorn/prefer-spread
+            .concat(rows)
+            .map((a) => a + '\n')
+    );
 }
 
 function* toIterableIterator<T>(iter: Iterable<T> | IterableIterator<T>): IterableIterator<T> {

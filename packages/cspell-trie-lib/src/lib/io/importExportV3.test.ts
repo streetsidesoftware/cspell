@@ -179,9 +179,9 @@ const sampleWords = [
     'fun journey',
     'long walk',
     'fun walk',
-]
-    .concat(specialCharacters)
-    .concat(smallSample);
+    ...specialCharacters,
+    ...smallSample,
+];
 
 function applyEndings(s: string): string[] {
     const endings = ['', 'ed', 'er', 'ing', 's'];

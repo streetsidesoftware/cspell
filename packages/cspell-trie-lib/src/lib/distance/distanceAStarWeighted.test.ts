@@ -180,11 +180,7 @@ describe('distanceAStar', () => {
 });
 
 function mapLetters(cost = 50): SuggestionCostMapDef {
-    const letters = 'a'
-        .repeat(27)
-        .split('')
-        .map((s, i) => String.fromCharCode(s.charCodeAt(0) + i))
-        .join('');
+    const letters = [...'a'.repeat(27)].map((s, i) => String.fromCharCode(s.charCodeAt(0) + i)).join('');
 
     return {
         map: letters + letters.toUpperCase(),

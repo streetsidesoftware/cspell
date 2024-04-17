@@ -125,10 +125,7 @@ export function isValidUtf16Character(char: string): boolean {
 export function assertValidUtf16Character(char: string): void {
     if (!isValidUtf16Character(char)) {
         const len = char.length;
-        const codes = char
-            .slice(0, 2)
-            .split('')
-            .map((c) => '0x' + ('0000' + c.charCodeAt(0).toString(16)).slice(-4));
+        const codes = toCharCodes(char.slice(0, 2)).map((c) => '0x' + ('0000' + c.toString(16)).slice(-4));
         let message: string;
         if (len == 1) {
             message = `Invalid utf16 character, lone surrogate: ${codes[0]}`;
@@ -139,4 +136,12 @@ export function assertValidUtf16Character(char: string): void {
         }
         throw new Error(message);
     }
+}
+
+function toCharCodes(s: string): number[] {
+    const values: number[] = [];
+    for (let i = 0; i < s.length; ++i) {
+        values.push(s.charCodeAt(i));
+    }
+    return values;
 }
