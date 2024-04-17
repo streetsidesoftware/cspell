@@ -23,7 +23,7 @@ describe('AutoCache', () => {
             expect(r).toBe(v);
             expect(cache.has(v)).toBe(true);
         }
-        expect(mock.mock.calls.reduce((a, v) => a.concat(v), <unknown[]>[])).toEqual(expected);
+        expect(mock.mock.calls.reduce((a, v) => [...a, ...v], [] as unknown[])).toEqual(expected);
     });
 });
 
@@ -157,6 +157,6 @@ describe('AutoWeakCache', () => {
             expect(r).toBe(v);
             expect(cache.has(v)).toBe(true);
         }
-        expect(mock.mock.calls.reduce((a, v) => a.concat(v), <unknown[]>[])).toEqual(expected);
+        expect(mock.mock.calls.reduce((a, v) => [...a, ...v], [] as unknown[])).toEqual(expected);
     });
 });

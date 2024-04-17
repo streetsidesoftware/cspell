@@ -21,7 +21,7 @@ export function mergeFeatures(map: FeatureMap, features: Feature[]): void {
 }
 
 export function wordToSingleLetterFeatures(word: string): Feature[] {
-    return word.split('').map((a) => [a, 1] as Feature);
+    return [...word].map((a) => [a, 1] as Feature);
 }
 
 export function wordToTwoLetterFeatures(word: string): Feature[] {

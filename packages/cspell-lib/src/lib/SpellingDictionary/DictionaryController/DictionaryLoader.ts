@@ -174,12 +174,14 @@ export class DictionaryLoader {
             loadingState: LoadingState.Loading,
             sig,
         };
-        pending.then(([dictionary, stat]) => {
-            entry.stat = stat;
-            entry.dictionary = dictionary;
-            entry.loadingState = LoadingState.Loaded;
-            return;
-        });
+        pending
+            .then(([dictionary, stat]) => {
+                entry.stat = stat;
+                entry.dictionary = dictionary;
+                entry.loadingState = LoadingState.Loaded;
+                return;
+            })
+            .catch(() => undefined);
         return entry;
     }
 
@@ -210,7 +212,7 @@ export class DictionaryLoader {
         const path = def.path;
         const loaderType = determineType(toFileURL(path), def);
         const optValues = importantOptionKeys.map((k) => def[k]?.toString() || '');
-        const parts = [path, loaderType].concat(optValues);
+        const parts = [path, loaderType, ...optValues];
 
         return parts.join('|');
     }

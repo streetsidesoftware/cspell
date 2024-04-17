@@ -1,5 +1,5 @@
 import * as path from 'node:path';
-import { pathToFileURL } from 'node:url';
+import { fileURLToPath, pathToFileURL } from 'node:url';
 
 import { describe, expect, test, vi } from 'vitest';
 
@@ -16,7 +16,7 @@ import type { LoadOptions } from './DictionaryLoader.js';
 import { DictionaryLoader } from './DictionaryLoader.js';
 vi.mock('../../util/logger');
 
-const __filename = pathToFileURL(import.meta.url);
+const __filename = fileURLToPath(import.meta.url);
 
 const root = pathPackageRoot;
 const samples = path.join(root, 'samples');

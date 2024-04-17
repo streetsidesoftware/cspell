@@ -81,12 +81,13 @@ describe('Verify trace', () => {
         async () => {
             const words = ['apple'];
             const defaultConfig = await getSettings();
-            const dictionaryDefinitions = (defaultConfig.dictionaryDefinitions || []).concat([
+            const dictionaryDefinitions = [
+                ...(defaultConfig.dictionaryDefinitions || []),
                 {
                     name: 'bad dict',
                     path: './missing.txt',
                 },
-            ]);
+            ];
             const config: CSpellSettings = {
                 ...defaultConfig,
                 dictionaryDefinitions,

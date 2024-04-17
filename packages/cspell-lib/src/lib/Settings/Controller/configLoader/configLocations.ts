@@ -53,7 +53,7 @@ const setOfLocations = new Set([
 
 export const searchPlaces = Object.freeze([...setOfLocations]);
 
-export const defaultConfigFilenames = Object.freeze(searchPlaces.concat());
+export const defaultConfigFilenames = Object.freeze([...searchPlaces]);
 
 function genCfgLoc(filename: string, extensions: string[]) {
     return extensions.map((ext) => filename + ext);

@@ -13,11 +13,11 @@ describe('Validate Mere Sort methods', () => {
         ${'aaaaaaaaaaaaaaaaaa'}
     `('Merge $letters', ({ letters }: { letters: string }) => {
         const s: string[] = [];
-        letters.split('').forEach((a) => {
+        [...letters].forEach((a) => {
             addToHeap(s, a, compare);
         });
         const sorted = takeAll(s);
-        expect(sorted).toEqual(letters.split('').sort());
+        expect(sorted).toEqual([...letters].sort());
     });
 
     test.each`
@@ -28,11 +28,11 @@ describe('Validate Mere Sort methods', () => {
         ${'aaaaaaaaaaaaaaaaaa'}
     `('Merge Queue $letters', ({ letters }: { letters: string }) => {
         const q = new MinHeapQueue<string>(compare);
-        const values = letters.split('');
+        const values = [...letters];
         q.append(values);
         expect(q.length).toBe(values.length);
         const sorted = [...q];
-        expect(sorted).toEqual(letters.split('').sort());
+        expect(sorted).toEqual([...letters].sort());
         expect(q.length).toBe(0);
     });
 
@@ -61,7 +61,7 @@ describe('Validate Mere Sort methods', () => {
            1350,  577,  295, 1293,  962,  703
          ];
 
-        const sorted = values.concat().sort(compare);
+        const sorted = [...values].sort(compare);
         const q = new MinHeapQueue<number>(compare);
         q.append(values);
         expect([...q]).toEqual(sorted);
@@ -105,7 +105,7 @@ describe('Validate Mere Sort methods', () => {
 });
 
 function takeAll<T extends string | number>(t: T[]): T[] {
-    const c = t.concat([]);
+    const c = [...t];
     const r: T[] = [];
     while (c.length) {
         const x = takeFromHeap(c, compare);

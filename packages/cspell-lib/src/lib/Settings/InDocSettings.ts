@@ -68,7 +68,7 @@ const preferredDirectives = [
     'disableCaseSensitive',
 ];
 
-const allDirectives = new Set(preferredDirectives.concat(officialDirectives));
+const allDirectives = new Set([...preferredDirectives, ...officialDirectives]);
 const allDirectiveSuggestions: ExtendedSuggestion[] = [
     ...pipeSync(
         allDirectives,
@@ -129,8 +129,8 @@ export function getInDocumentSettings(text: string): CSpellUserSettings {
 
     const dictSettings = dict
         ? {
-              dictionaries: dictionaries.concat(staticInDocumentDictionaryName),
-              dictionaryDefinitions: dictionaryDefinitions.concat(dict),
+              dictionaries: [...dictionaries, staticInDocumentDictionaryName],
+              dictionaryDefinitions: [...dictionaryDefinitions, dict],
           }
         : clean({
               dictionaries: dictionaries.length ? dictionaries : undefined,

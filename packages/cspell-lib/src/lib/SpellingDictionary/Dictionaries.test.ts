@@ -199,10 +199,11 @@ describe('Validate Refresh', () => {
         await mkdirp(path.dirname(tempDictPath));
         await fs.writeFile(tempDictPath, 'one\ntwo\nthree\n');
         const settings = await getDefaultBundledSettingsAsync();
-        const defs = (settings.dictionaryDefinitions || []).concat([
+        const defs = [
+            ...(settings.dictionaryDefinitions || []),
             di({ name: 'temp', path: tempDictPath }, __filenameURL),
             di({ name: 'not_found', path: tempDictPathNotFound }, __filenameURL),
-        ]);
+        ];
         const toLoad = ['node', 'html', 'css', 'not_found', 'temp'];
         const col = createDictionaryReferenceCollection(toLoad);
         const defsToLoad = filterDictDefsToLoad(col, defs);
@@ -254,5 +255,5 @@ function sample(file: string): string {
 function getAllDictionaryNames(settings: CSpellUserSettings): string[] {
     const { dictionaries = [], dictionaryDefinitions = [] } = settings;
 
-    return dictionaries.concat(dictionaryDefinitions.map((d) => d.name));
+    return [...dictionaries, ...dictionaryDefinitions.map((d) => d.name)];
 }

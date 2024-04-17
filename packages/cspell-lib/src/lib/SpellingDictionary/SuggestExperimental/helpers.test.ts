@@ -13,7 +13,7 @@ describe('Validate Suggest Helpers', () => {
             { word: 'banana', score: 0.6 },
         ];
 
-        const r = sr.concat([]).sort(helpers.compareResults);
+        const r = [...sr].sort(helpers.compareResults);
         expect(r).toEqual([sr[3], sr[0], sr[1], sr[2]]);
     });
 
@@ -92,8 +92,8 @@ describe('Validate Suggest Helpers', () => {
     // cspell:ignore ello
     test('segmentString', () => {
         const tests = [
-            { v: 'a', s: 1, e: 'a'.split('') },
-            { v: 'hello', s: 1, e: 'hello'.split('') },
+            { v: 'a', s: 1, e: [...'a'] },
+            { v: 'hello', s: 1, e: [...'hello'] },
             { v: 'hello', s: 2, e: ['he', 'el', 'll', 'lo'] },
             { v: 'hello', s: 3, e: ['hel', 'ell', 'llo'] },
             { v: 'hello', s: 4, e: ['hell', 'ello'] },

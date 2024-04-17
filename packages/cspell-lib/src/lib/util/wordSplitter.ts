@@ -457,7 +457,7 @@ function splitIntoWords(
 }
 
 function mergeSortedBreaks(...maps: SortedBreaks[]): SortedBreaks {
-    return ([] as SortedBreaks).concat(...maps).sort((a, b) => a.offset - b.offset);
+    return maps.flat().sort((a, b) => a.offset - b.offset);
 }
 
 export const __testing__ = {

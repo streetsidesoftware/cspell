@@ -34,7 +34,7 @@ describe('Validate textRegex', () => {
         ${nfd('CAFÉ’ed')} | ${[['’ed']]}
         ${nfd('CAFÉ’s')}  | ${[['’s']]}
     `('regExTrailingEndings on "$text"', ({ text, expected }: { text: string; expected: string[] }) => {
-        const m = [...text.matchAll(regExTrailingEndings)].map((m) => Array.from(m));
+        const m = [...text.matchAll(regExTrailingEndings)].map((m) => [...m]);
         expect(m).toEqual(expected);
     });
 
@@ -114,7 +114,7 @@ describe('Validate textRegex', () => {
         ${nfd('caféStyle')} | ${[[nfd('éS'), nfd('é'), 'S']]}
         ${'Errors'}         | ${[]}
     `('regExSplitWords on "$text"', ({ text, expected }: { text: string; expected: string[] }) => {
-        const m = [...text.matchAll(regExSplitWords)].map((m) => Array.from(m));
+        const m = [...text.matchAll(regExSplitWords)].map((m) => [...m]);
         expect(m).toEqual(expected);
     });
 
@@ -128,7 +128,7 @@ describe('Validate textRegex', () => {
         ${nfd('CODEÉrror')} | ${[[nfd('EÉr'), 'E', nfd('Ér')]]}
         ${'ERRORS'}         | ${[]}
     `('regExSplitWords2 on "$text"', ({ text, expected }: { text: string; expected: string[] }) => {
-        const m = [...text.matchAll(regExSplitWords2)].map((m) => Array.from(m));
+        const m = [...text.matchAll(regExSplitWords2)].map((m) => [...m]);
         expect(m).toEqual(expected);
     });
 

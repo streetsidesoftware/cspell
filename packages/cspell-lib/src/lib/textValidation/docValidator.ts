@@ -284,7 +284,7 @@ export class DocumentValidator {
                 forceCheck || this.shouldCheckDocument() ? [...this._checkParsedText(this._parse())] : [];
             const directiveIssues = this.checkDocumentDirectives();
             // console.log('Stats: %o', this._preparations.textValidator.lineValidator.dict.stats());
-            const allIssues = spellingIssues.concat(directiveIssues).sort((a, b) => a.offset - b.offset);
+            const allIssues = [...spellingIssues, ...directiveIssues].sort((a, b) => a.offset - b.offset);
             return allIssues;
         } finally {
             timerDone();

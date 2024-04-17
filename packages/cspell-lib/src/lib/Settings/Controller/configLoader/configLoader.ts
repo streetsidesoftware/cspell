@@ -720,11 +720,7 @@ function relativeToCwd(file: string | URL): string {
     }
     const segments = cwdPath.length - i;
     if (segments > 3) return toFilePathOrHref(file);
-    const prefix = '.'
-        .repeat(segments)
-        .split('')
-        .map(() => '..')
-        .join('/');
+    const prefix = [...'.'.repeat(segments)].map(() => '..').join('/');
     return [prefix || '.', ...urlPath.slice(i)].join('/');
 }
 

@@ -10,7 +10,7 @@ export class SuggestionCollector {
     ) {}
 
     get collection(): SuggestionResult[] {
-        return this.results.concat();
+        return [...this.results];
     }
 
     get sortedCollection(): SuggestionResult[] {

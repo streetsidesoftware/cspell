@@ -85,10 +85,18 @@ describe('Validate textValidator functions', () => {
     });
 
     test('tests case sensitive word list', async () => {
-        const wordList = ['PUBLISHed', 'FIXesToThePROBLEMs', 'multiple', 'VeryBadProblem', 'with'].concat(
-            ['define', '_ERROR_CODE_42', 'NETWORK', '_ERROR42'],
-            specialWords,
-        );
+        const wordList = [
+            'PUBLISHed',
+            'FIXesToThePROBLEMs',
+            'multiple',
+            'VeryBadProblem',
+            'with',
+            'define',
+            '_ERROR_CODE_42',
+            'NETWORK',
+            '_ERROR42',
+            ...specialWords,
+        ];
         const flagWords = ['VeryBadProblem'];
         const dict = createSpellingDictionary(
             wordList,

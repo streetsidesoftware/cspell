@@ -2,7 +2,7 @@ import assert from 'node:assert';
 import * as fsp from 'node:fs/promises';
 import * as os from 'node:os';
 import * as path from 'node:path';
-import { pathToFileURL } from 'node:url';
+import { fileURLToPath, pathToFileURL } from 'node:url';
 
 import type { DictionaryDefinition, DictionaryDefinitionLegacy } from '@cspell/cspell-types';
 import { describe, expect, test } from 'vitest';
@@ -13,7 +13,7 @@ import { getDefaultBundledSettingsAsync } from './DefaultSettings.js';
 import { createDictionaryReferenceCollection as createRefCol } from './DictionaryReferenceCollection.js';
 import * as DictSettings from './DictionarySettings.js';
 
-const __filename = pathToFileURL(import.meta.url);
+const __filename = fileURLToPath(import.meta.url);
 
 const defaultSettings = await getDefaultBundledSettingsAsync();
 const oc = expect.objectContaining;

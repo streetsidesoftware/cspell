@@ -54,7 +54,7 @@ onClearCache(() => {
 
 function _mergeWordsCached(left: string[], right: string[]): string[] {
     const map = autoResolveWeak(cachedMerges, left, () => new WeakMap<string[], string[]>());
-    return autoResolveWeak(map, right, () => left.concat(right));
+    return autoResolveWeak(map, right, () => [...left, ...right]);
 }
 
 /**

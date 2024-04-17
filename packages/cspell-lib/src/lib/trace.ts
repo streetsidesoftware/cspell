@@ -74,9 +74,10 @@ export async function* traceWordsAsync(
             languageId ?? withLocale.languageId ?? 'plaintext',
         );
         const settings = finalizeSettings(withLanguageId);
-        const dictionaries = (settings.dictionaries || [])
-            .concat((settings.dictionaryDefinitions || []).map((d) => d.name))
-            .filter(util.uniqueFn);
+        const dictionaries = [
+            ...(settings.dictionaries || []),
+            ...(settings.dictionaryDefinitions || []).map((d) => d.name),
+        ].filter(util.uniqueFn);
         const dictSettings = toInternalSettings({ ...settings, dictionaries });
         const dictBase = await getDictionaryInternal(settings);
         const dicts = await getDictionaryInternal(dictSettings);
