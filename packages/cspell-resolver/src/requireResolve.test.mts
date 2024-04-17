@@ -2,7 +2,8 @@ import * as path from 'node:path';
 
 import { describe, expect, test } from 'vitest';
 
-import { requireResolve, resolveGlobal } from './requireResolve.js';
+import { requireResolve } from './requireResolve.js';
+import { resolveGlobal } from './resolveGlobal.mjs';
 
 describe('requireResolve', () => {
     test('requireResolve', () => {
