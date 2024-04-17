@@ -3,6 +3,7 @@
 import assert from 'assert';
 import { basename } from 'path';
 import { fileURLToPath } from 'url';
+
 import { run } from './dist/esm/index.mjs';
 
 const __filename = fileURLToPath(import.meta.url);

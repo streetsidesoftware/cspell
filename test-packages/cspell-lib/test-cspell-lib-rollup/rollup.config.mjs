@@ -1,9 +1,10 @@
+import alias from '@rollup/plugin-alias';
+import rollupPluginCommonjs from '@rollup/plugin-commonjs';
+import rollupPluginJson from '@rollup/plugin-json';
 import rollupPluginNodeResolve from '@rollup/plugin-node-resolve';
 import rollupPluginTypescript from '@rollup/plugin-typescript';
-import alias from '@rollup/plugin-alias';
-import rollupPluginJson from '@rollup/plugin-json';
-import rollupPluginCommonjs from '@rollup/plugin-commonjs';
 import { readFileSync } from 'fs';
+
 import { injectDirname } from './plugin/index.mjs';
 
 const pkg = JSON.parse(readFileSync('./package.json', 'utf-8'));

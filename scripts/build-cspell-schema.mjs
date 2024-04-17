@@ -1,10 +1,11 @@
 #!/usr/bin/env node
 
-import tsj from 'ts-json-schema-generator';
 import { writeFile } from 'node:fs/promises';
-import safeStableStringify from 'safe-stable-stringify';
 import { fileURLToPath } from 'node:url';
+
 import * as path from 'path';
+import safeStableStringify from 'safe-stable-stringify';
+import tsj from 'ts-json-schema-generator';
 
 const importDir = new URL('.', import.meta.url);
 const rootUrl = new URL('..', importDir);

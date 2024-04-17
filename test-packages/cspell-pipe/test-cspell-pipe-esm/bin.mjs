@@ -1,7 +1,8 @@
 #!/usr/bin/env node
 
 import assert from 'assert';
-import { sumValues, sumValuesSync, sumValuesAsync } from './dist/index.mjs';
+
+import { sumValues, sumValuesAsync, sumValuesSync } from './dist/index.mjs';
 
 assert(sumValues([1, 2, 3]) === 6);
 assert(sumValuesSync([1, 2, 3]) === 6);

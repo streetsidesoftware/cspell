@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 
 import fs from 'node:fs/promises';
+
 import { globby } from 'globby';
 
 const rootUrl = new URL('../', import.meta.url);
