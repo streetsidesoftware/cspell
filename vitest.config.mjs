@@ -1,6 +1,6 @@
-// eslint-disable-next-line import/no-unresolved
+import { fileURLToPath } from 'node:url';
+
 import { defineConfig } from 'vitest/config';
-import { fileURLToPath } from 'url';
 
 const __dirname = fileURLToPath(new URL('.', import.meta.url));
 

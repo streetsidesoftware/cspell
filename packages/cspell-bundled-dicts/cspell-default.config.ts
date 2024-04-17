@@ -24,7 +24,7 @@ const settings: AdvancedCSpellSettings = {
         'Română',
     ],
     flagWords: [],
-    maxNumberOfProblems: 10000,
+    maxNumberOfProblems: 10_000,
     ignorePaths: [],
     allowCompoundWords: false,
     dictionaryDefinitions: [],

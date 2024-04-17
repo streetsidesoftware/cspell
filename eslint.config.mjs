@@ -4,8 +4,8 @@ import eslint from '@eslint/js';
 import nodePlugin from 'eslint-plugin-n';
 import eslintPluginPrettierRecommended from 'eslint-plugin-prettier/recommended';
 import simpleImportSort from 'eslint-plugin-simple-import-sort';
-import tsEslint from 'typescript-eslint';
 import unicorn from 'eslint-plugin-unicorn';
+import tsEslint from 'typescript-eslint';
 
 // mimic CommonJS variables -- not needed if using CommonJS
 // import { FlatCompat } from "@eslint/eslintrc";
@@ -152,6 +152,7 @@ export default tsEslint.config(
             'n/no-extraneous-require': 'off',
             'n/no-extraneous-import': 'off',
             'no-undef': 'off',
+            'unicorn/prefer-module': 'off',
         },
     },
 );
