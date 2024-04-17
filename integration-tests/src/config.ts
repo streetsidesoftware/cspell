@@ -26,7 +26,7 @@ export function readConfig(): Config {
         const file = fs.readFileSync(configFile, 'utf-8');
         const cfg = JSON.parse(file);
         return cfg;
-    } catch (e) {
+    } catch (_) {
         return JSON.parse(JSON.stringify(defaultConfig));
     }
 }

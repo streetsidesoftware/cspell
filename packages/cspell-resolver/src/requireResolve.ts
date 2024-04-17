@@ -8,7 +8,7 @@ export function resolveGlobal(modulesName: string): string | undefined {
 export function requireResolve(filename: string, paths?: string[]): string | undefined {
     try {
         return require.resolve(filename, paths ? { paths } : undefined);
-    } catch (e) {
+    } catch (_) {
         return undefined;
     }
 }

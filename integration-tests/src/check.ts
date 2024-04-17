@@ -72,7 +72,7 @@ async function execCheckAndUpdate(rep: Repository, options: CheckAndUpdateOption
         try {
             const updatedRep = mustBeDefined(await addRepository(logger, rep.url, rep.branch));
             rep = resolveRepArgs(updatedRep);
-        } catch (e) {
+        } catch (_) {
             log(color`******** fail ********`);
             return Promise.resolve({ success: false, rep, elapsedTime: 0 });
         }

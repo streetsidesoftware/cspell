@@ -70,7 +70,7 @@ function createMapperRegExp(repMap: ReplaceMap): RegExp {
                 const r = s.match(/\(/) ? s.replace(/\((?=.*\))/g, '(?:').replace(/\(\?:\?/g, '(?') : s;
                 new RegExp(r);
                 s = r;
-            } catch (err) {
+            } catch (_err) {
                 return escapeRegEx(s);
             }
             return s;

@@ -43,13 +43,13 @@ export default tsEslint.config(
             'unicorn/better-regex': 'off', // Not sure if it is an improvement.
 
             // Enable these rules to help with on boarding eslint.
-            'unicorn/no-instanceof-array': 'error',
-            'unicorn/numeric-separators-style': 'error',
-            'unicorn/prefer-array-flat': 'error',
-            'unicorn/prefer-module': 'error',
-            'unicorn/prefer-node-protocol': 'error',
-            'unicorn/prefer-spread': 'error',
-            'unicorn/prefer-string-replace-all': 'error',
+            // 'unicorn/no-instanceof-array': 'error',
+            // 'unicorn/numeric-separators-style': 'error',
+            // 'unicorn/prefer-array-flat': 'error',
+            // 'unicorn/prefer-module': 'error',
+            // 'unicorn/prefer-node-protocol': 'error',
+            // 'unicorn/prefer-spread': 'error',
+            // 'unicorn/prefer-string-replace-all': 'error',
         },
     },
     {
@@ -133,10 +133,20 @@ export default tsEslint.config(
         files: ['**/*.cts', '**/*.cjs'],
         rules: {
             'unicorn/prefer-module': 'off',
+            '@typescript-eslint/no-var-requires': 'off',
         },
     },
     {
-        files: ['**/*.test.*', '**/__mocks__/**', '**/test/**', '**/test.*', '**/rollup.config.mjs', '**/build.mjs'],
+        files: [
+            '**/__mocks__/**',
+            '**/*.spec.*',
+            '**/*.test.*',
+            '**/build.mjs',
+            '**/rollup.config.mjs',
+            '**/test.*',
+            '**/test-*',
+            '**/test*/**',
+        ],
         rules: {
             'n/no-extraneous-require': 'off', // Mostly for __mocks__ and test files
             'n/no-extraneous-import': 'off',

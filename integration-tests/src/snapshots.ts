@@ -66,7 +66,7 @@ export function readSnapshot(rep: Repository): string {
     const filename = Path.join(dir, snapshotFileName);
     try {
         return fs.readFileSync(filename, 'utf-8');
-    } catch (e) {
+    } catch (_) {
         return '';
     }
 }

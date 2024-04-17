@@ -21,7 +21,7 @@ export async function shasumFile(filename: string, root: string | undefined): Pr
         const file = resolve(root || '.', filename);
         const checksum = await calcFileChecksum(file);
         return `${checksum}  ${filename}`;
-    } catch (error) {
+    } catch (_) {
         // const err = toError(error);
         return Promise.reject(`shasum: ${filename}: Unable to read file.`);
     }
@@ -64,7 +64,7 @@ async function tryToCheckFile(filename: string, root: string, checksum: string |
     try {
         const passed = await checkFile(checksum, file);
         return { filename, passed };
-    } catch (error) {
+    } catch (_) {
         return { filename, passed: false, error: Error('Failed to read file.') };
     }
 }

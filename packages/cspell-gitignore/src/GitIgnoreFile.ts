@@ -115,7 +115,7 @@ export async function loadGitIgnore(dir: string): Promise<GitIgnoreFile | undefi
     const file = path.join(dir, '.gitignore');
     try {
         return await GitIgnoreFile.loadGitignore(file);
-    } catch (e) {
+    } catch (_) {
         return undefined;
     }
 }

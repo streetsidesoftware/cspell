@@ -229,7 +229,7 @@ class CVirtualFS implements VirtualFS {
         for (const [key, fs] of [...this.cachedFs].reverse()) {
             try {
                 WrappedProviderFs.disposeOf(fs);
-            } catch (e) {
+            } catch (_) {
                 // continue - we are cleaning up.
             }
             this.cachedFs.delete(key);
@@ -243,7 +243,7 @@ class CVirtualFS implements VirtualFS {
         for (const provider of providers) {
             try {
                 provider.dispose?.();
-            } catch (e) {
+            } catch (_) {
                 // continue - we are cleaning up.
             }
         }

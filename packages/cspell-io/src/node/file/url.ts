@@ -88,7 +88,7 @@ export function urlDirname(url: string | URL): URL {
 
     try {
         return new URL(url.pathname.endsWith('/') ? '..' : '.', url);
-    } catch (e) {
+    } catch (_) {
         return url;
     }
 }
