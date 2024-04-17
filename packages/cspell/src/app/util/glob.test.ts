@@ -1,9 +1,10 @@
+import * as path from 'node:path';
+
 import { GlobMatcher } from 'cspell-glob';
 import type { Glob } from 'cspell-lib';
 import type { Options as MicromatchOptions } from 'micromatch';
 import micromatch from 'micromatch';
 import { minimatch } from 'minimatch';
-import * as path from 'path';
 import { describe, expect, test, vi } from 'vitest';
 
 import { calcGlobs, normalizeGlobsToRoot } from './glob.js';

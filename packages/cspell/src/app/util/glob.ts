@@ -1,11 +1,12 @@
+import { promises as fs } from 'node:fs';
+import * as path from 'node:path';
+import { posix } from 'node:path';
+
 import type { CSpellUserSettings, Glob } from '@cspell/cspell-types';
 import type { GlobPatternWithRoot } from 'cspell-glob';
 import { fileOrGlobToGlob, GlobMatcher } from 'cspell-glob';
 import type { Options as FastGlobOptions } from 'fast-glob';
 import glob from 'fast-glob';
-import { promises as fs } from 'fs';
-import * as path from 'path';
-import { posix } from 'path';
 
 import { clean } from './util.js';
 

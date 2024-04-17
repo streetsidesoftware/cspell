@@ -1,8 +1,9 @@
+import * as fs from 'node:fs/promises';
+import * as path from 'node:path';
+import { resolve as r } from 'node:path';
+
 import type { Issue, RunResult } from '@cspell/cspell-types';
-import * as fs from 'fs/promises';
 import getStdin from 'get-stdin';
-import * as path from 'path';
-import { resolve as r } from 'path';
 import { afterEach, describe, expect, test, vi } from 'vitest';
 
 import * as App from './application.js';

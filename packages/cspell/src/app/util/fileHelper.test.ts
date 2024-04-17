@@ -1,7 +1,7 @@
+import * as path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 import getStdin from 'get-stdin';
-import * as path from 'path';
 import { afterEach, describe, expect, test, vi } from 'vitest';
 
 import { pathPackageRoot } from '../test/test.helper.js';

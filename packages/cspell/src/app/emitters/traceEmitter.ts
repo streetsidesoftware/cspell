@@ -1,5 +1,6 @@
+import * as iPath from 'node:path';
+
 import chalk from 'chalk';
-import * as iPath from 'path';
 import strip from 'strip-ansi';
 
 import type { TraceResult } from '../application.js';

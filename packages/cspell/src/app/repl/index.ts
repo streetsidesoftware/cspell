@@ -1,4 +1,4 @@
-import * as readline from 'readline';
+import * as readline from 'node:readline';
 
 export function simpleRepl(): AsyncIterable<string> {
     return new SimpleRepl();

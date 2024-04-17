@@ -1,7 +1,7 @@
+import * as path from 'node:path';
+import { resolve as r } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-import * as path from 'path';
-import { resolve as r } from 'path';
 import { beforeEach, describe, expect, test, vi } from 'vitest';
 
 import type { CacheOptions } from './CacheOptions.js';

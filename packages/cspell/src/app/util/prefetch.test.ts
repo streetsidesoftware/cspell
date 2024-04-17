@@ -1,6 +1,7 @@
+import { promisify } from 'node:util';
+
 import { toAsyncIterable } from '@cspell/cspell-pipe';
 import { opMap, opTake, pipe } from '@cspell/cspell-pipe/sync';
-import { promisify } from 'util';
 import { describe, expect, test } from 'vitest';
 
 import { prefetchIterable } from './prefetch.js';

@@ -1,7 +1,7 @@
-import assert from 'assert';
-import * as crypto from 'crypto';
-import * as fs from 'fs';
-import { dirname, isAbsolute as isAbsolutePath, relative as relativePath, resolve as resolvePath } from 'path';
+import assert from 'node:assert';
+import * as crypto from 'node:crypto';
+import * as fs from 'node:fs';
+import { dirname, isAbsolute as isAbsolutePath, relative as relativePath, resolve as resolvePath } from 'node:path';
 
 import type { FileResult } from '../../util/fileHelper.js';
 import { readFileInfo } from '../../util/fileHelper.js';

@@ -1,5 +1,5 @@
-import { join } from 'path';
-import { fileURLToPath, pathToFileURL } from 'url';
+import { join } from 'node:path';
+import { fileURLToPath, pathToFileURL } from 'node:url';
 
 const __dirname = fileURLToPath(new URL('.', import.meta.url));
 

@@ -3,9 +3,9 @@
  */
 
 export type { FileDescriptor } from '../../../lib/file-entry-cache.cjs';
-import { mkdirSync } from 'fs';
-import * as path from 'path';
-import { isMainThread } from 'worker_threads';
+import { mkdirSync } from 'node:fs';
+import * as path from 'node:path';
+import { isMainThread } from 'node:worker_threads';
 
 import type { FileEntryCache as FecFileEntryCache } from '../../../lib/file-entry-cache.cjs';
 import * as fec from '../../../lib/file-entry-cache.cjs';

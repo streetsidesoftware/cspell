@@ -1,4 +1,4 @@
-import { format } from 'util';
+import { format } from 'node:util';
 export class CheckFailed extends Error {
     constructor(
         message: string,

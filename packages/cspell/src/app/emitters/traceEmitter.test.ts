@@ -1,4 +1,5 @@
-import { posix, win32 } from 'path';
+import { posix, win32 } from 'node:path';
+
 import strip from 'strip-ansi';
 import { describe, expect, test, vi } from 'vitest';
 

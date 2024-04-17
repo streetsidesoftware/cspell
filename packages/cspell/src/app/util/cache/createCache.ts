@@ -1,7 +1,8 @@
+import assert from 'node:assert';
+import { stat } from 'node:fs/promises';
+import path from 'node:path';
+
 import type { CacheSettings, CSpellSettings } from '@cspell/cspell-types';
-import assert from 'assert';
-import { stat } from 'fs/promises';
-import path from 'path';
 
 import { isError } from '../errors.js';
 import type { CacheOptions } from './CacheOptions.js';

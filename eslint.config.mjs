@@ -17,7 +17,24 @@ export default tsEslint.config(
     nodePlugin.configs['flat/recommended'],
     eslintPluginPrettierRecommended,
     ...tsEslint.configs.recommended,
-    unicorn.configs['flat/recommended'],
+    // unicorn.configs['flat/recommended'],
+    {
+        plugins: {
+            unicorn,
+        },
+        rules: {
+            'unicorn/catch-error-name': 'off',
+            'unicorn/consistent-function-scoping': 'off',
+            'unicorn/filename-case': 'off',
+            'unicorn/import-style': 'off',
+            'unicorn/no-array-callback-reference': 'off',
+            'unicorn/prefer-module': 'error',
+            'unicorn/prevent-abbreviations': 'off',
+            'unicorn/no-array-reduce': 'off',
+            'unicorn/no-array-for-each': 'off', // maybe add this one in later
+            'unicorn/prefer-node-protocol': 'error',
+        },
+    },
     {
         ignores: [
             '.github/**/*.yaml',
@@ -64,7 +81,6 @@ export default tsEslint.config(
     {
         plugins: {
             'simple-import-sort': simpleImportSort,
-            // unicorn,
         },
         rules: {
             'simple-import-sort/imports': 'error',
@@ -94,11 +110,6 @@ export default tsEslint.config(
                     tryExtensions: ['.d.ts', '.d.mts', '.d.cts', '.ts', '.cts', '.mts', '.js', '.cjs', '.mjs'],
                 },
             ],
-            'unicorn/prefer-module': 'error',
-            'unicorn/prevent-abbreviations': 'off',
-            'unicorn/consistent-function-scoping': 'off',
-            'unicorn/filename-case': 'off',
-            'unicorn/catch-error-name': 'off',
         },
     },
     {

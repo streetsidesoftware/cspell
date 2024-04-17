@@ -1,3 +1,6 @@
+import * as path from 'node:path';
+import { format } from 'node:util';
+
 import { isAsyncIterable, operators, opFilter, pipeAsync } from '@cspell/cspell-pipe';
 import { opMap, pipe } from '@cspell/cspell-pipe/sync';
 import type {
@@ -26,8 +29,6 @@ import {
     spellCheckDocument,
     Text as cspellText,
 } from 'cspell-lib';
-import * as path from 'path';
-import { format } from 'util';
 import { URI } from 'vscode-uri';
 
 import { npmPackage } from '../../lib/pkgInfo.cjs';

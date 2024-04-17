@@ -1,11 +1,11 @@
+import * as Path from 'node:path';
+import * as readline from 'node:readline';
 import { fileURLToPath } from 'node:url';
+import * as Util from 'node:util';
 
 import chalk from 'chalk';
 import * as Commander from 'commander';
-import * as Path from 'path';
-import * as readline from 'readline';
 import stripAnsi from 'strip-ansi';
-import * as Util from 'util';
 import { afterEach, beforeEach, type Constructable, describe, expect, test, vi } from 'vitest';
 import { URI } from 'vscode-uri';
 

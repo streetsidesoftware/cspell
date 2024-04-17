@@ -1,4 +1,5 @@
-import * as path from 'path';
+import * as path from 'node:path';
+
 import { afterEach, beforeEach, describe, expect, type Mock, test, vi } from 'vitest';
 
 import { createFromFile } from '../../../lib/file-entry-cache.cjs';
