@@ -40,6 +40,7 @@ export default tsEslint.config(
             'unicorn/prefer-at': 'off',
             'unicorn/no-for-loop': 'off',
             'unicorn/new-for-builtins': 'off',
+            'unicorn/better-regex': 'off', // Not sure if it is an improvement.
 
             // Enable these rules to help with on boarding eslint.
             'unicorn/prefer-module': 'error',
@@ -47,9 +48,8 @@ export default tsEslint.config(
             'unicorn/numeric-separators-style': 'error',
             'unicorn/prefer-string-replace-all': 'error',
             // 'unicorn/prefer-spread': 'error',
-            // 'unicorn/prefer-array-flat': 'error',
-            // 'unicorn/no-instanceof-array': 'error',
-            // 'unicorn/better-regex': 'error',
+            'unicorn/prefer-array-flat': 'error',
+            'unicorn/no-instanceof-array': 'error',
         },
     },
     {
