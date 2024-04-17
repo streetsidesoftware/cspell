@@ -23,16 +23,21 @@ export default tsEslint.config(
             unicorn,
         },
         rules: {
+            // Disable these rules
             'unicorn/catch-error-name': 'off',
             'unicorn/consistent-function-scoping': 'off',
             'unicorn/filename-case': 'off',
             'unicorn/import-style': 'off',
             'unicorn/no-array-callback-reference': 'off',
-            'unicorn/prefer-module': 'error',
             'unicorn/prevent-abbreviations': 'off',
             'unicorn/no-array-reduce': 'off',
+            'unicorn/explicit-length-check': 'off',
             'unicorn/no-array-for-each': 'off', // maybe add this one in later
+
+            // Enable these rules to help with on boarding eslint.
+            'unicorn/prefer-module': 'error',
             'unicorn/prefer-node-protocol': 'error',
+            'unicorn/numeric-separators-style': 'error',
         },
     },
     {

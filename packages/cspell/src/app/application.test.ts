@@ -25,7 +25,7 @@ const ac = expect.arrayContaining;
 
 vi.mock('get-stdin', () => ({ default: vi.fn() }));
 
-const timeout = 10000;
+const timeout = 10_000;
 
 const testOptions = { timeout };
 
