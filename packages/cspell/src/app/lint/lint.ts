@@ -248,7 +248,7 @@ export async function runLint(cfg: LintRequest): Promise<RunResult> {
         configInfo: ConfigInfo,
         cacheSettings: CreateCacheSettings,
     ): Promise<RunResult> {
-        const fileCount = files instanceof Array ? files.length : undefined;
+        const fileCount = Array.isArray(files) ? files.length : undefined;
         const status: RunResult = runResult();
         const cache = createCache(cacheSettings);
         const failFast = cfg.options.failFast ?? configInfo.config.failFast ?? false;

@@ -129,8 +129,8 @@ export function normalizeGlobsToRoot(globs: Glob[], root: string, isExclude: boo
     return [urls, extractGlobsFromMatcher(buildGlobMatcher(onlyGlobs, root, isExclude))].flat();
 }
 
-const isPossibleGlobRegExp = /[*{}()?[]/;
-const isPossibleUrlRegExp = /^[-a-z_0-9]{3,}:\/\//;
+const isPossibleGlobRegExp = /[()*?[{}]/;
+const isPossibleUrlRegExp = /^[\d_a-z-]{3,}:\/\//;
 
 /**
  * If a 'glob' is a path to a directory, then append `**` so that

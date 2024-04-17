@@ -426,5 +426,5 @@ function makeLogger() {
 }
 
 function escapeRegExp(s: string): string {
-    return s.replaceAll(/[|\\{}()[\]^$+*?.]/g, '\\$&').replaceAll('-', '\\x2d');
+    return s.replaceAll(/[$()*+.?[\\\]^{|}]/g, '\\$&').replaceAll('-', '\\x2d');
 }

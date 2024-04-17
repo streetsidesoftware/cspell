@@ -33,10 +33,13 @@ export default tsEslint.config(
             'unicorn/no-array-reduce': 'off',
             'unicorn/explicit-length-check': 'off',
             'unicorn/no-nested-ternary': 'off',
+            'unicorn/no-await-expression-member': 'off',
 
             // Maybe later
             'unicorn/no-array-for-each': 'off',
             'unicorn/prefer-at': 'off',
+            'unicorn/no-for-loop': 'off',
+            'unicorn/new-for-builtins': 'off',
 
             // Enable these rules to help with on boarding eslint.
             'unicorn/prefer-module': 'error',
@@ -45,6 +48,8 @@ export default tsEslint.config(
             'unicorn/prefer-string-replace-all': 'error',
             'unicorn/prefer-spread': 'error',
             'unicorn/prefer-array-flat': 'error',
+            'unicorn/no-instanceof-array': 'error',
+            'unicorn/better-regex': 'error',
         },
     },
     {
@@ -137,6 +142,7 @@ export default tsEslint.config(
             'n/no-extraneous-import': 'off',
             'n/no-unpublished-import': 'off',
             '@typescript-eslint/no-explicit-any': 'off', // any is allowed in tests
+            'unicorn/no-null': 'off', // null is allowed in tests
         },
     },
     {
