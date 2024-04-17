@@ -53,7 +53,7 @@ export default tsEslint.config(
                     },
                 },
             ],
-            // 'unicorn/prefer-array-flat': 'error',
+            'unicorn/prefer-array-flat': 'error',
             // 'unicorn/prefer-module': 'error',
             'unicorn/prefer-node-protocol': 'error',
             // 'unicorn/prefer-spread': 'error',

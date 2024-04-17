@@ -161,7 +161,7 @@ function calcAllEdits(root: RepTrieNode, word: string): Edit[] {
 }
 
 function createTrie(repMap: ReplaceMap | undefined, ignoreCharset?: string): RepTrieNode {
-    const combined = [repMap, charsetToRepMap(ignoreCharset)].filter(isDefined).flatMap((a) => a);
+    const combined = [repMap, charsetToRepMap(ignoreCharset)].filter(isDefined).flat();
     const expanded = expandReplaceMap(combined);
 
     const trieRoot: RepTrieNode = Object.create(null);

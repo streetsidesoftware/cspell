@@ -47,7 +47,7 @@ export async function createWordsCollectionFromFiles(files: FilePath | FilePath[
 
     const sources = await Promise.all(files.map((file) => readFile(file)));
 
-    const collection = createWordsCollection(sources.flatMap((a) => a));
+    const collection = createWordsCollection(sources.flat());
 
     cache.set(files, collection);
     return collection;

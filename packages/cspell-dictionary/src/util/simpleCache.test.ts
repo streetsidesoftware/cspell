@@ -23,7 +23,7 @@ describe('AutoCache', () => {
             expect(r).toBe(v);
             expect(cache.has(v)).toBe(true);
         }
-        expect(mock.mock.calls.flatMap((a) => a)).toEqual(expected);
+        expect(mock.mock.calls.flat()).toEqual(expected);
     });
 });
 
@@ -150,6 +150,6 @@ describe('AutoWeakCache', () => {
             expect(r).toBe(v);
             expect(cache.has(v)).toBe(true);
         }
-        expect(mock.mock.calls.flatMap((a) => a)).toEqual(expected);
+        expect(mock.mock.calls.flat()).toEqual(expected);
     });
 });
