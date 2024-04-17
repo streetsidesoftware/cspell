@@ -18,7 +18,7 @@ function getTrie() {
     return readTrieFromConfig('@cspell/dict-en_us/cspell-ext.json');
 }
 
-const timeout = 10000;
+const timeout = 10_000;
 
 interface ExpectedSuggestion extends Partial<SuggestionResult> {
     word: string;

@@ -48,9 +48,9 @@ interface PathNode {
 }
 
 // cspell:words sigs
-const MAX_NUM_SIGS = 100000;
-const MAX_TRANSFORMS = 1000000;
-const MAX_CACHE_SIZE = 1000000;
+const MAX_NUM_SIGS = 100_000;
+const MAX_TRANSFORMS = 1_000_000;
+const MAX_CACHE_SIZE = 1_000_000;
 
 export class TrieBuilder {
     private count = 0;

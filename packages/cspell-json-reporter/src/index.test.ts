@@ -96,7 +96,7 @@ async function runReporter(reporter: Required<CSpellReporter>): Promise<void> {
         fileNum: 1,
         fileCount: 1,
         filename: 'text.txt',
-        elapsedTimeMs: 349.058747,
+        elapsedTimeMs: 349.058_747,
         processed: true,
         numErrors: 2,
     });

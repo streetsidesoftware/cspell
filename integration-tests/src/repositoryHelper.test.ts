@@ -7,7 +7,7 @@ import { CaptureLogger } from './CaptureLogger.js';
 import { addRepository as configAddRepository } from './config.js';
 import { addRepository, checkoutRepositoryAsync, repositoryDir } from './repositoryHelper.js';
 
-const defaultTimeout = 60000;
+const defaultTimeout = 60_000;
 
 vi.mock('./config.js');
 

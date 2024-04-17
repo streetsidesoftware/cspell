@@ -159,7 +159,7 @@ describe('Validate Larger Dictionary', () => {
         const nWords = toArray(legacyNormalizeWords(words)).sort().filter(uniqueFilter(1000));
         const results = [...iteratorTrieWords(trie)].sort().filter(uniqueFilter(1000));
         expect(results).toEqual(nWords);
-    }, 60000);
+    }, 60_000);
 
     test('en_US word list', async () => {
         const source = await streamSourceWordsFromFile(sampleDictEn, readOptions);
@@ -173,7 +173,7 @@ describe('Validate Larger Dictionary', () => {
         const trie2 = importTrie(data);
         const results2 = [...iteratorTrieWords(trie2)];
         expect(results2).toEqual(results);
-    }, 60000);
+    }, 60_000);
 });
 
 async function compileTrie(words: Iterable<string>, destFilename: string, options: CompileTrieOptions): Promise<void> {

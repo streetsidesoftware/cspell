@@ -10,7 +10,7 @@ import { IterableHunspellReaderLegacy } from './IterableHunspellReaderLegacy.js'
 import { iterableToStream } from './iterableToStream.js';
 import { batch, uniqueFilter } from './util.js';
 
-const uniqueHistorySize = 500000;
+const uniqueHistorySize = 500_000;
 
 let logStream: NodeJS.WritableStream = process.stderr;
 

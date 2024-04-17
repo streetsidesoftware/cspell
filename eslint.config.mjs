@@ -43,8 +43,16 @@ export default tsEslint.config(
             'unicorn/better-regex': 'off', // Not sure if it is an improvement.
 
             // Enable these rules to help with on boarding eslint.
-            // 'unicorn/no-instanceof-array': 'error',
-            // 'unicorn/numeric-separators-style': 'error',
+            'unicorn/no-instanceof-array': 'error',
+            'unicorn/numeric-separators-style': [
+                'error',
+                {
+                    hexadecimal: {
+                        minimumDigits: 5,
+                        groupLength: 4,
+                    },
+                },
+            ],
             // 'unicorn/prefer-array-flat': 'error',
             // 'unicorn/prefer-module': 'error',
             // 'unicorn/prefer-node-protocol': 'error',

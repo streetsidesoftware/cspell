@@ -11,7 +11,7 @@ import {
 
 describe('Test util functions', () => {
     it('Test hrTimeToSeconds', () => {
-        expect(hrTimeToSeconds([5, 6])).toBe(5.000000006);
+        expect(hrTimeToSeconds([5, 6])).toBe(5.000_000_006);
     });
 
     it('Tests uniqueFilter', () => {

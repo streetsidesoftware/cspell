@@ -15,8 +15,8 @@ export function normalizeTargetWords(options: CompileOptions): Operator<string> 
     const operations: Operator<string>[] = [
         opFilter<string>((a) => !!a),
         lineParser,
-        options.sort ? createInlineBufferedSort(10000) : undefined,
-        opFilter<string>(uniqueFilter(10000)),
+        options.sort ? createInlineBufferedSort(10_000) : undefined,
+        opFilter<string>(uniqueFilter(10_000)),
         options.filter ? opFilter<string>(options.filter) : undefined,
     ].filter(isDefined);
     return opCombine(...operations);

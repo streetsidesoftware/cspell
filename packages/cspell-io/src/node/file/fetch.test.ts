@@ -3,7 +3,7 @@ import { describe, expect, test } from 'vitest';
 import { fetchHead, fetchURL } from './fetch.js';
 // import {} from './_fetch.js';
 
-const timeout = 20000;
+const timeout = 20_000;
 
 describe('fetch', () => {
     test(

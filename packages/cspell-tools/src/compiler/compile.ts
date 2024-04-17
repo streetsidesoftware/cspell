@@ -281,7 +281,7 @@ function normalizeTargetName(name: string) {
     return name.replace(/((\.txt|\.dic|\.aff|\.trie)(\.gz)?)?$/, '').replace(/[^\p{L}\p{M}.\w\\/-]/gu, '_');
 }
 
-function logProgress<T>(freq = 100000): (iter: Iterable<T>) => Iterable<T> {
+function logProgress<T>(freq = 100_000): (iter: Iterable<T>) => Iterable<T> {
     function* logProgress<T>(iter: Iterable<T>): Iterable<T> {
         const _freq = freq;
         let count = 0;

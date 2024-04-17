@@ -1,5 +1,5 @@
 export function hrTimeToSeconds([seconds, nanoseconds]: number[]) {
-    return seconds + nanoseconds / 1000000000;
+    return seconds + nanoseconds / 1_000_000_000;
 }
 
 export function uniqueFilter<T>(historySize: number): (i: T) => boolean;
