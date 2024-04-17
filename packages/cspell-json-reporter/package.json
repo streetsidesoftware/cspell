@@ -42,7 +42,7 @@
     "coverage": "vitest run --coverage",
     "test:watch": "vitest",
     "test": "vitest run && pnpm test:run",
-    "test:run": "pnpm cspell . --config cSpell.example.mjs",
+    "test:run": "node ../../bin.mjs . --config cSpell.example.mjs",
     "watch": "tsc -b . -w"
   },
   "dependencies": {
