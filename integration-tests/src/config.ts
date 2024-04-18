@@ -23,7 +23,7 @@ const defaultConfig: Config = {
 
 export function readConfig(): Config {
     try {
-        const file = fs.readFileSync(configFile, 'utf-8');
+        const file = fs.readFileSync(configFile, 'utf8');
         const cfg = JSON.parse(file);
         return cfg;
     } catch {

@@ -411,7 +411,7 @@ function serializeCostTrie(p: PNode): string {
 
 function _serializeCostTrie(t: CostTrie): string {
     const lines: string[] = [];
-    lines.push(`:: [${t.c.join()}]`);
+    lines.push(`:: [${t.c.join(',')}]`);
     for (const [letter, child] of Object.entries(t.t)) {
         lines.push(letter + ':');
         if (!child) continue;

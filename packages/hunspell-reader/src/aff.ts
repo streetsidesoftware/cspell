@@ -414,10 +414,12 @@ class AffData {
 
     #splitRules(rules: string): string[] {
         switch (this.affFlagType) {
-            case 'long':
+            case 'long': {
                 return [...new Set(rules.replaceAll(/(..)/g, '$1//').split('//').slice(0, -1))];
-            case 'num':
+            }
+            case 'num': {
                 return [...new Set(rules.split(','))];
+            }
         }
         return [...new Set(rules)];
     }
@@ -579,9 +581,11 @@ export function toAffFlagType(FLAG: string | undefined): AffFlagType {
     if (!FLAG) return 'char';
     switch (FLAG) {
         case 'long':
-        case 'num':
+        case 'num': {
             return FLAG;
-        default:
+        }
+        default: {
             throw new Error(`Unexpected FLAG value: ${FLAG}`);
+        }
     }
 }

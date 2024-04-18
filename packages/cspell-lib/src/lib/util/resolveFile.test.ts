@@ -30,8 +30,8 @@ interface Config {
     import: string[];
 }
 
-const issuesFolderURL = new URL('./issues/', pathRepoTestFixturesURL);
-const notFoundURL = new URL('./not-found/', pathRepoTestFixturesURL);
+const issuesFolderURL = new URL('issues/', pathRepoTestFixturesURL);
+const notFoundURL = new URL('not-found/', pathRepoTestFixturesURL);
 
 const defaultConfigFile = require.resolve('@cspell/cspell-bundled-dicts/cspell-default.json');
 const defaultConfigLocation = path.dirname(defaultConfigFile);
@@ -135,9 +135,7 @@ describe('Validate resolveFile', () => {
     });
 
     // Due to a circular reference it is not possible to make a dependency upon the issue.
-    const frExtFound = fs.existsSync(
-        new URL('./frontend/node_modules/@cspell/dict-fr-fr/cspell-ext.json', urlIssue5034),
-    );
+    const frExtFound = fs.existsSync(new URL('frontend/node_modules/@cspell/dict-fr-fr/cspell-ext.json', urlIssue5034));
 
     test.each`
         filename                                                        | relativeTo           | expected                   | found
@@ -250,7 +248,7 @@ describe('resolveRelativeTo', () => {
 });
 
 function readConfig(filename: string): Config {
-    const parsed = parse(fs.readFileSync(filename, 'utf-8'));
+    const parsed = parse(fs.readFileSync(filename, 'utf8'));
     if (!parsed || typeof parsed !== 'object') throw new Error(`Unable to parse "${filename}"`);
     return parsed as unknown as Config;
 }

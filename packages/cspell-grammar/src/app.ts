@@ -35,7 +35,7 @@ export async function run(args: string[]): Promise<void> {
     }
 
     console.log(`File: ${path.basename(filename)} Parser: ${parser.name}`);
-    const content = await fs.readFile(filename, 'utf-8');
+    const content = await fs.readFile(filename, 'utf8');
 
     const result = parser.parse(content, filename);
     for (const pt of result.parsedTexts) {

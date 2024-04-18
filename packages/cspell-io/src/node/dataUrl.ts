@@ -67,9 +67,9 @@ const dataUrlRegExHead = /^data:(?<mediaType>[^;,]*)(?<attributes>(?:;[^=]+=[^;,
 export function decodeDataUrl(url: string | URL): DecodedDataUrl {
     url = url.toString();
     const [head, encodedData] = url.split(',', 2);
-    if (!head || encodedData === undefined) throw Error('Not a data url');
+    if (!head || encodedData === undefined) throw new Error('Not a data url');
     const match = head.match(dataUrlRegExHead);
-    if (!match || !match.groups) throw Error('Not a data url');
+    if (!match || !match.groups) throw new Error('Not a data url');
     const mediaType = match.groups['mediaType'] || '';
     const rawAttributes = (match.groups['attributes'] || '')
         .split(';')

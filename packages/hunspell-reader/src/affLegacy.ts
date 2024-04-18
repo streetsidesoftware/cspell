@@ -170,10 +170,12 @@ export class Aff {
 
     joinRules(rules: string[]): string {
         switch (this.affInfo.FLAG) {
-            case 'long':
+            case 'long': {
                 return rules.join('');
-            case 'num':
+            }
+            case 'num': {
                 return rules.join(',');
+            }
         }
         return rules.join('');
     }
@@ -188,10 +190,12 @@ export class Aff {
 
     #separateRules(rules: string): string[] {
         switch (this.affInfo.FLAG) {
-            case 'long':
+            case 'long': {
                 return [...new Set(rules.replaceAll(/(..)/g, '$1//').split('//').slice(0, -1))];
-            case 'num':
+            }
+            case 'num': {
                 return [...new Set(rules.split(','))];
+            }
         }
         return [...new Set(rules)];
     }

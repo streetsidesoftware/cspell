@@ -114,12 +114,15 @@ function _findWordNode(root: Root, word: string, options: FindOptions): FindFull
     }
 
     switch (compoundMode) {
-        case 'none':
+        case 'none': {
             return options.matchCase ? __findExact() : __findCompound();
-        case 'compound':
+        }
+        case 'compound': {
             return __findCompound();
-        case 'legacy':
+        }
+        case 'legacy': {
             return findLegacyCompound(root, word, options);
+        }
     }
 }
 

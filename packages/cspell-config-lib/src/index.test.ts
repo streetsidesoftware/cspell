@@ -39,6 +39,6 @@ describe('cspell-config', () => {
         assert(cfg instanceof CSpellConfigFile);
         cfg.addWords(addWords);
         await rw.writeConfig(cfg);
-        expect(await fs.readFile(tempFile, 'utf-8')).toMatchSnapshot();
+        expect(await fs.readFile(tempFile, 'utf8')).toMatchSnapshot();
     });
 });

@@ -234,7 +234,7 @@ interface ValidTestCaseEsLint9 extends ValidTestCase {
 
 function readFix(filename: string, options?: Options): ValidTestCase {
     const __filename = resolveFix(filename);
-    const code = fs.readFileSync(__filename, 'utf-8');
+    const code = fs.readFileSync(__filename, 'utf8');
 
     const sample: ValidTestCaseEsLint9 = {
         code,

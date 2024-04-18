@@ -134,23 +134,28 @@ export function createParseFileLineMapper(options?: Partial<ParseFileOptions>): 
                 .filter((a) => !!a);
             for (const flag of flags) {
                 switch (flag) {
-                    case 'split':
+                    case 'split': {
                         split = true;
                         break;
-                    case 'no-split':
+                    }
+                    case 'no-split': {
                         split = false;
                         break;
-                    case 'keep-case':
+                    }
+                    case 'keep-case': {
                         keepCase = true;
                         legacy = false;
                         break;
-                    case 'no-keep-case':
+                    }
+                    case 'no-keep-case': {
                         keepCase = false;
                         break;
-                    case 'legacy':
+                    }
+                    case 'legacy': {
                         keepCase = false;
                         legacy = true;
                         break;
+                    }
                 }
             }
         }

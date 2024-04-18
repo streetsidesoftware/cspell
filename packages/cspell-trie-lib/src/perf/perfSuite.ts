@@ -164,11 +164,12 @@ export async function measurePerf(which: string | undefined, method: string | un
         );
 
         switch (method) {
-            case 'has':
+            case 'has': {
                 timer.measureFn('blob.TrieBlob.has', () => trieHasWords(trieBlob, words));
                 timer.measureFn('blob.TrieBlob.has', () => trieHasWords(trieBlob, words));
                 break;
-            case 'words':
+            }
+            case 'words': {
                 timer.start('blob.words');
                 [...trieBlob.words()];
                 timer.stop('blob.words');
@@ -177,7 +178,8 @@ export async function measurePerf(which: string | undefined, method: string | un
                 [...walkerWordsITrie(trieBlob.getRoot())];
                 timer.stop('blob.walkerWordsITrie');
                 break;
-            case 'dump':
+            }
+            case 'dump': {
                 timer.start('blob.write.TrieBlob.en.json');
                 writeFileSync('./TrieBlob.en.json', JSON.stringify(trieBlob, undefined, 2), 'utf8');
                 timer.stop('blob.write.TrieBlob.en.json');
@@ -186,7 +188,8 @@ export async function measurePerf(which: string | undefined, method: string | un
                 writeFileSync('./TrieBlob.en.trieb', trieBlob.encodeBin());
                 timer.stop('blob.write.TrieBlob.en.trieb');
                 break;
-            case 'decode':
+            }
+            case 'decode': {
                 {
                     const tb = timer.measureFn('blob.TrieBlob.decodeBin \t', () => {
                         return TrieBlob.decodeBin(readFileSync('./TrieBlob.en.trieb'));
@@ -195,6 +198,7 @@ export async function measurePerf(which: string | undefined, method: string | un
                     timer.measureFn('blob.TrieBlob.has \t\t', () => hasWords(words, (word) => tb.has(word)));
                 }
                 break;
+            }
         }
     }
 
@@ -208,11 +212,12 @@ export async function measurePerf(which: string | undefined, method: string | un
         );
 
         switch (method) {
-            case 'has':
+            case 'has': {
                 timer.measureFn('fast.FastTrieBlob.has', () => hasWords(words, (word) => ft.has(word)));
                 timer.measureFn('fast.FastTrieBlob.has', () => hasWords(words, (word) => ft.has(word)));
                 break;
-            case 'words':
+            }
+            case 'words': {
                 timer.start('fast.words.fromWordList');
                 [...ftWordList.words()];
                 timer.stop('fast.words.fromWordList');
@@ -220,6 +225,7 @@ export async function measurePerf(which: string | undefined, method: string | un
                 [...ft.words()];
                 timer.stop('fast.words');
                 break;
+            }
         }
     }
 
@@ -233,15 +239,17 @@ export async function measurePerf(which: string | undefined, method: string | un
         timer.measureFn('trie.buildTrieNodeTrieFromWords', () => buildTrieNodeTrieFromWords(words));
 
         switch (method) {
-            case 'has':
+            case 'has': {
                 timer.measureFn('trie.Trie.has', () => hasWords(words, (word) => trie.hasWord(word, true)));
                 timer.measureFn('trie.Trie.has', () => hasWords(words, (word) => trie.hasWord(word, true)));
                 break;
-            case 'words':
+            }
+            case 'words': {
                 timer.start('trie.words');
                 [...trie.words()];
                 timer.stop('trie.words');
                 break;
+            }
         }
     }
 

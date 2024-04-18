@@ -20,7 +20,7 @@ describe('Validate Against Bug Fixes', () => {
             async () => {
                 const fullFilename = path.resolve(samples, filename);
                 const ext = path.extname(filename);
-                const text = await fsp.readFile(fullFilename, 'utf-8');
+                const text = await fsp.readFile(fullFilename, 'utf8');
                 const languageIds = cspell.getLanguagesForExt(ext);
                 const settings = cspell.mergeSettings(
                     await cspell.getDefaultBundledSettingsAsync(),

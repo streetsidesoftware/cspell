@@ -10,7 +10,7 @@ async function updatePackageJson(pkgFile) {
     const directory = pkgFile.split(/[/\\]/g).slice(-3, -1).join('/');
     console.log(directory);
 
-    const pkg = JSON.parse(await fs.readFile(pkgFile, 'utf-8'));
+    const pkg = JSON.parse(await fs.readFile(pkgFile, 'utf8'));
 
     const repository = {
         type: 'git',

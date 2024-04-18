@@ -32,7 +32,7 @@ ${createPerfTable2(data)}
 }
 
 async function readCsvData(csvFile: string | URL): Promise<CsvRecord[]> {
-    const csv = await fs.readFile(csvFile, 'utf-8');
+    const csv = await fs.readFile(csvFile, 'utf8');
     const records = parseCsv(csv, { columns: true, cast: true }) as CsvRecord[];
     return records;
 }

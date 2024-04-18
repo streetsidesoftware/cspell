@@ -14,7 +14,7 @@ const uriSamples = pathPackageSamplesURL;
 const uriDirectory = uriSamples;
 const uriYarn2TestMed = new URL('yarn2/test-yarn3-med/', uriTestPackages);
 const uriYarn2TestSci = new URL('yarn2/test-yarn3-sci/', uriTestPackages);
-const uriBadPnp = new URL('./bad-pnp/', uriSamples);
+const uriBadPnp = new URL('bad-pnp/', uriSamples);
 const uriYarn2TestMedPnp = new URL('.pnp.cjs', uriYarn2TestMed);
 const uriYarn2TestSciPnp = new URL('.pnp.cjs', uriYarn2TestSci);
 

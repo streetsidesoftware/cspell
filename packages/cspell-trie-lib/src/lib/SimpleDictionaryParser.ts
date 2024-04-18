@@ -137,18 +137,22 @@ export function createDictionaryLineParserMapper(options?: Partial<ParseDictiona
                 .filter((a) => !!a);
             for (const flag of flags) {
                 switch (flag) {
-                    case 'split':
+                    case 'split': {
                         split = true;
                         break;
-                    case 'no-split':
+                    }
+                    case 'no-split': {
                         split = false;
                         break;
-                    case 'no-generate-alternatives':
+                    }
+                    case 'no-generate-alternatives': {
                         stripCaseAndAccents = false;
                         break;
-                    case 'generate-alternatives':
+                    }
+                    case 'generate-alternatives': {
                         stripCaseAndAccents = true;
                         break;
+                    }
                 }
             }
         }

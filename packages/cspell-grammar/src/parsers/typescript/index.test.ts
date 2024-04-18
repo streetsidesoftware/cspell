@@ -25,7 +25,7 @@ describe('TypeScript Parser', () => {
 });
 
 function readSample(filename: string): Promise<string> {
-    return fs.readFile(path.resolve(fixtures, filename), 'utf-8');
+    return fs.readFile(path.resolve(fixtures, filename), 'utf8');
 }
 
 function stringifyResult(result: ParseResult): string {

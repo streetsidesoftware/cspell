@@ -36,8 +36,9 @@ export class LoaderJavaScript implements FileLoaderMiddleware {
         switch (ext) {
             case '.js':
             case '.cjs':
-            case '.mjs':
+            case '.mjs': {
                 return importJavaScript(url, this.hashSuffix);
+            }
         }
         return next(req);
     }
