@@ -30,7 +30,7 @@ describe('mappers typescript', () => {
         ${'hello'}              | ${'hello'}
         ${'caf\\xe9'}           | ${'café'}
         ${'caf\\u00e9'}         | ${'café'}
-        ${'hello\\x20there'}    | ${'hello\x20there'}
+        ${'hello\\x20there'}    | ${'hello\u0020there'}
         ${'hello\\u0020there'}  | ${'hello\u0020there'}
         ${'hello\\u{020}there'} | ${'hello\u{020}there'}
         ${'a\\tb'}              | ${'a\tb'}

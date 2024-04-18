@@ -269,11 +269,7 @@ export class TrieBlob implements TrieData {
         const header = new DataView(blob.buffer);
         const useLittle = isLittleEndian();
         if (header.getUint32(HEADER.endian, useLittle) !== endianSig) {
-            // swap the bytes
-            // blob.swap32();
-            if (header.getUint32(HEADER.endian, useLittle) !== endianSig) {
-                throw new ErrorDecodeTrieBlob('Invalid TrieBlob Header');
-            }
+            throw new ErrorDecodeTrieBlob('Invalid TrieBlob Header');
         }
         const offsetNodes = header.getUint32(HEADER.nodes, useLittle);
         const lenNodes = header.getUint32(HEADER.nodesLen, useLittle);

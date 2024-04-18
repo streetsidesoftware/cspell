@@ -29,7 +29,7 @@ export async function processCompileAction(
 
 async function useCompile(src: string[], options: CompileCommonAppOptions): Promise<void> {
     console.log(
-        'Compile:\n output: %s\n compress: %s\n files:\n  %s ',
+        'Compile:\n output: %s\n compress: %s\n files:\n  %s',
         options.output || 'default',
         options.compress ? 'true' : 'false',
         src.join('\n  '),

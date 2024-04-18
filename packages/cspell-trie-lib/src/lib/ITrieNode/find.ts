@@ -200,11 +200,9 @@ export function findCompoundNode(
                 if (!r.cr) {
                     break;
                 }
-                if (!i && !r.caseMatched) {
-                    if (w !== w.toLowerCase()) {
-                        // It is not going to be found.
-                        break;
-                    }
+                if (!i && !r.caseMatched && w !== w.toLowerCase()) {
+                    // It is not going to be found.
+                    break;
                 }
             } else {
                 break;

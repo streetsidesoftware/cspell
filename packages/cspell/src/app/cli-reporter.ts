@@ -200,7 +200,7 @@ export function getReporter(options: ReporterOptions, config?: ReporterConfigura
         const withErrorsText = errors ? ` with ${errors} error${errors === 1 ? '' : 's'}` : '';
         const numFilesWidthIssuesText = numFilesWithIssues === 1 ? '1 file' : `${numFilesWithIssues} files`;
 
-        const summaryMessage = `CSpell\x3A Files checked: ${files}${cachedFilesText}, Issues found: ${issues} in ${numFilesWidthIssuesText}${withErrorsText}.`;
+        const summaryMessage = `CSpell\u003A Files checked: ${files}${cachedFilesText}, Issues found: ${issues} in ${numFilesWidthIssuesText}${withErrorsText}.`;
 
         console.error(summaryMessage);
 

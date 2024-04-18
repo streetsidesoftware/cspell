@@ -194,11 +194,9 @@ export function* getSuggestionsAStar(
                 storePath(t, n.child(j), i + 1, c, ss, p, 'r', ss);
             }
 
-            if (n.eow && i) {
+            if (n.eow && i && compoundMethod) {
                 // legacy word compound
-                if (compoundMethod) {
-                    storePath(t, root, i, costLegacyCompound, wordSeparator, p, 'L', wordSeparator);
-                }
+                storePath(t, root, i, costLegacyCompound, wordSeparator, p, 'L', wordSeparator);
             }
 
             // swap

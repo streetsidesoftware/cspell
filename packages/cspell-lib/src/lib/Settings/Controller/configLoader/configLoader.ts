@@ -240,11 +240,13 @@ export class ConfigLoader implements IConfigLoader {
 
     async searchForConfigFileLocation(searchFrom: URL | string | undefined): Promise<URL | undefined> {
         const url = toFileURL(searchFrom || cwdURL(), cwdURL());
-        if (typeof searchFrom === 'string' && !isUrlLike(searchFrom) && url.protocol === 'file:') {
-            // check to see if it is a directory
-            if (await isDirectory(this.fs, url)) {
-                return this.configSearch.searchForConfig(addTrailingSlash(url));
-            }
+        if (
+            typeof searchFrom === 'string' &&
+            !isUrlLike(searchFrom) &&
+            url.protocol === 'file:' && // check to see if it is a directory
+            (await isDirectory(this.fs, url))
+        ) {
+            return this.configSearch.searchForConfig(addTrailingSlash(url));
         }
         return this.configSearch.searchForConfig(url);
     }

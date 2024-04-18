@@ -457,7 +457,7 @@ describe('Validate InDocSettings', () => {
 
     test('regExIgnoreSpellingDirectives', () => {
         const match = sampleBug345.match(RegPat.regExIgnoreSpellingDirectives);
-        expect(match?.[0]).toBe('cspell\x3AignoreRegExp "(foobar|foobaz)"');
+        expect(match?.[0]).toBe('cspell\u003AignoreRegExp "(foobar|foobaz)"');
     });
 });
 

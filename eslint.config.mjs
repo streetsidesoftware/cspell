@@ -70,16 +70,15 @@ export default tsEslint.config(
 
             // To be evaluated
 
-            // 'unicorn/no-console-spaces': 'error',
-            // 'unicorn/no-document-cookie': 'error',
-            // 'unicorn/no-empty-file': 'error',
-            // 'unicorn/no-hex-escape': 'error',
-            // 'unicorn/no-invalid-remove-event-listener': 'error',
-            // 'unicorn/no-keyword-prefix': 'off',
-            // 'unicorn/no-lonely-if': 'error',
-            // 'unicorn/no-negated-condition': 'error',
-            // 'unicorn/no-new-array': 'error',
-            // 'unicorn/no-new-buffer': 'error',
+            'unicorn/no-console-spaces': 'error',
+            'unicorn/no-document-cookie': 'error',
+            'unicorn/no-empty-file': 'error',
+            'unicorn/no-hex-escape': 'error',
+            'unicorn/no-invalid-remove-event-listener': 'error',
+            'unicorn/no-lonely-if': 'error',
+            'unicorn/no-negated-condition': 'off', // Too picky - works against implying the most common branch.
+            'unicorn/no-new-array': 'error',
+            'unicorn/no-new-buffer': 'error',
             // 'unicorn/no-null': 'error',
             // 'unicorn/no-object-as-default-parameter': 'error',
             // 'unicorn/no-process-exit': 'error',

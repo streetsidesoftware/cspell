@@ -38,10 +38,8 @@ function takeFromHeap<T>(t: T[], compare: (a: T, b: T) => number): T | undefined
         i = k;
         j = i * 2 + 1;
     }
-    if (j === m) {
-        if (compare(t[i], t[j]) > 0) {
-            swap(t, i, j);
-        }
+    if (j === m && compare(t[i], t[j]) > 0) {
+        swap(t, i, j);
     }
     return result;
 }

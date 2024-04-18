@@ -236,10 +236,8 @@ function findCache(fn: FindFunction, size = 2000): FindFunction {
         ignoreCase: boolean,
     ): FindAnyFormResult | undefined {
         const r = cache.get(word);
-        if (r !== undefined) {
-            if (r.useCompounds === useCompounds && r.ignoreCase === ignoreCase) {
-                return r.findResult;
-            }
+        if (r !== undefined && r.useCompounds === useCompounds && r.ignoreCase === ignoreCase) {
+            return r.findResult;
         }
         const findResult = fn(word, useCompounds, ignoreCase);
         cache.set(word, { useCompounds, ignoreCase, findResult });

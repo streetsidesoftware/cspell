@@ -21,12 +21,10 @@ export function expandCharacterSet(line: string, rangeChar = '-'): Set<string> {
             expandRange(prev, char).forEach((a) => charSet.add(a));
             mode = 0;
         }
-        if (char === rangeChar) {
+        if (char === rangeChar && prev) {
             // store the `-` if there isn't a previous value.
-            if (prev) {
-                mode = 1;
-                continue;
-            }
+            mode = 1;
+            continue;
         }
         charSet.add(char);
         prev = char;
