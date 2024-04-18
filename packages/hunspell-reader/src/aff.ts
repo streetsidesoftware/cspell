@@ -105,12 +105,7 @@ export class Aff {
         const { flags } = affWord;
         const subRules = this.affData.getRulesForAffSubstitution(sub);
         const rules = joinRules(affWord.rules, subRules);
-        let word: string;
-        if (sub.type === 'S') {
-            word = stripped + sub.attach;
-        } else {
-            word = sub.attach + stripped;
-        }
+        const word = sub.type === 'S' ? stripped + sub.attach : sub.attach + stripped;
         return this.affData.toAffixWord(affWord, word, flags, rules);
     }
 
@@ -467,11 +462,9 @@ class AffData {
         const fx = sfx || pfx;
         if (fx) {
             const affFx = this.#mapFx(fx);
-            if (affFx.type === 'P') {
-                return { id, idx: index, type: 'P', flags: 0, fx: affFx };
-            } else {
-                return { id, idx: index, type: 'S', flags: 0, fx: affFx };
-            }
+            return affFx.type === 'P'
+                ? { id, idx: index, type: 'P', flags: 0, fx: affFx }
+                : { id, idx: index, type: 'S', flags: 0, fx: affFx };
         }
         return { id, idx: index, type: 'F', flags: flags || 0 };
     }

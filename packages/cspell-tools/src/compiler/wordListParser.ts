@@ -196,11 +196,9 @@ export function createParseFileLineMapper(options?: Partial<ParseFileOptions>): 
             }
             if (split) {
                 const words = splitLine(line);
-                if (!allowedSplitWords.size) {
-                    yield* words;
-                } else {
-                    yield* words.flatMap((word) => splitCamelCaseIfAllowed(word, allowedSplitWords, keepCase));
-                }
+                yield* !allowedSplitWords.size
+                    ? words
+                    : words.flatMap((word) => splitCamelCaseIfAllowed(word, allowedSplitWords, keepCase));
                 if (!splitKeepBoth) continue;
             }
             yield line.replaceAll(/["]/g, '');

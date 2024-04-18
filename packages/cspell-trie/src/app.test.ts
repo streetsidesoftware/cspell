@@ -53,11 +53,7 @@ describe('Validate App', () => {
         vi.spyOn(console, 'warn').mockImplementation(out.warn);
 
         const result = app.run(commander, argv(...args));
-        if (errorResult) {
-            await expect(result).rejects.toThrow(errorResult);
-        } else {
-            await expect(result).resolves.not.toThrow();
-        }
+        await (errorResult ? expect(result).rejects.toThrow(errorResult) : expect(result).resolves.not.toThrow());
         expect(out.getText()).toMatchSnapshot();
     });
 });

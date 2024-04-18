@@ -28,7 +28,7 @@ export function parseCSpellConfigFilePackageJson(file: TextFile): CSpellConfigFi
     packageJson['cspell'] = packageJson['cspell'] || {};
     const cspell = packageJson['cspell'];
     if (typeof cspell !== 'object' || Array.isArray(cspell)) {
-        throw new Error(`Unable to parse ${url}`);
+        throw new TypeError(`Unable to parse ${url}`);
     }
 
     const indent = detectIndent(content);

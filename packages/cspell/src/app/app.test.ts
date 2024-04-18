@@ -198,11 +198,7 @@ describe('Validate cli', () => {
         const commander = getCommander();
         const args = argv(...testArgs);
         const result = app.run(commander, args);
-        if (!errorCheck) {
-            await expect(result).resolves.toBeUndefined();
-        } else {
-            await expect(result).rejects.toThrow(errorCheck);
-        }
+        await (!errorCheck ? expect(result).resolves.toBeUndefined() : expect(result).rejects.toThrow(errorCheck));
 
         eError ? expect(error).toHaveBeenCalled() : expect(error).not.toHaveBeenCalled();
 
@@ -223,11 +219,7 @@ describe('Validate cli', () => {
         const commander = getCommander();
         const args = argv(...testArgs);
         const result = app.run(commander, args);
-        if (!errorCheck) {
-            await expect(result).resolves.toBeUndefined();
-        } else {
-            await expect(result).rejects.toThrow(errorCheck);
-        }
+        await (!errorCheck ? expect(result).resolves.toBeUndefined() : expect(result).rejects.toThrow(errorCheck));
 
         eError ? expect(error).toHaveBeenCalled() : expect(error).not.toHaveBeenCalled();
 
@@ -255,11 +247,7 @@ describe('Validate cli', () => {
         const commander = getCommander();
         const args = argv(...testArgs);
         const result = app.run(commander, args);
-        if (!errorCheck) {
-            await expect(result).resolves.toBeUndefined();
-        } else {
-            await expect(result).rejects.toThrow(errorCheck);
-        }
+        await (!errorCheck ? expect(result).resolves.toBeUndefined() : expect(result).rejects.toThrow(errorCheck));
 
         eError ? expect(error).toHaveBeenCalled() : expect(error).not.toHaveBeenCalled();
 
@@ -300,11 +288,7 @@ describe('Validate cli', () => {
         const commander = getCommander();
         const args = argv(...testArgs);
         const result = app.run(commander, args);
-        if (!errorCheck) {
-            await expect(result).resolves.toBeUndefined();
-        } else {
-            await expect(result).rejects.toThrow(errorCheck);
-        }
+        await (!errorCheck ? expect(result).resolves.toBeUndefined() : expect(result).rejects.toThrow(errorCheck));
 
         eError ? expect(error).toHaveBeenCalled() : expect(error).not.toHaveBeenCalled();
 
@@ -339,11 +323,7 @@ describe('Validate cli', () => {
         const commander = getCommander();
         const args = argv(...testArgs);
         const result = app.run(commander, args);
-        if (!errorCheck) {
-            await expect(result).resolves.toBeUndefined();
-        } else {
-            await expect(result).rejects.toThrow(errorCheck);
-        }
+        await (!errorCheck ? expect(result).resolves.toBeUndefined() : expect(result).rejects.toThrow(errorCheck));
         expect(captureStdout.text).toMatchSnapshot();
         expect(log.mock.calls.join('\n')).toMatchSnapshot();
         expect(error.mock.calls.join('\n')).toMatchSnapshot();
