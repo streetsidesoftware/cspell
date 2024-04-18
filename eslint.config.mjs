@@ -34,6 +34,15 @@ export default tsEslint.config(
             'unicorn/explicit-length-check': 'off',
             'unicorn/no-nested-ternary': 'off',
             'unicorn/no-await-expression-member': 'off',
+            'unicorn/prefer-logical-operator-over-ternary': 'off', // single line ternary is fine
+            'unicorn/prefer-math-trunc': 'off', // incorrectly sets Enums.
+            'unicorn/prefer-native-coercion-functions': 'off', // Makes some strange choices
+            'unicorn/number-literal-case': 'off', // doesn't fix anything, might conflict with other rules.
+            'unicorn/no-useless-undefined': 'off', // Breaks return types and other things
+            'unicorn/prefer-event-target': 'off', // It is broken
+            'unicorn/no-useless-spread': 'off', // makes dangerous fixes
+            'unicorn/no-new-array': 'off', // new Array(size) is 10x faster than Array.from({length: size})
+            'unicorn/no-zero-fractions': 'off',
 
             // Maybe later
             'unicorn/no-array-for-each': 'off',
@@ -43,12 +52,6 @@ export default tsEslint.config(
             'unicorn/better-regex': 'off', // Not sure if it is an improvement.
             'unicorn/no-array-method-this-argument': 'off', // Too many false positives
             'unicorn/no-negated-condition': 'off', // Too picky - works against implying the most common branch.
-            'unicorn/no-useless-spread': 'off', // makes dangerous fixes
-            'unicorn/no-new-array': 'off', // new Array(size) is 100x faster than Array.from({length: size})
-            'unicorn/no-zero-fractions': 'off',
-            'unicorn/number-literal-case': 'off', // doesn't fix anything, might conflict with other rules.
-            'unicorn/no-useless-undefined': 'off', // Breaks return types and other things
-            'unicorn/prefer-event-target': 'off', // It is broken
 
             // Enable these rules to help with on boarding eslint.
             'unicorn/no-instanceof-array': 'error',
@@ -110,27 +113,24 @@ export default tsEslint.config(
             'unicorn/prefer-dom-node-remove': 'error',
             'unicorn/prefer-dom-node-text-content': 'error',
             'unicorn/prefer-export-from': 'error',
+            'unicorn/prefer-code-point': 'error',
+            'unicorn/prefer-includes': 'error',
+            'unicorn/prefer-keyboard-event-key': 'error',
+            'unicorn/prefer-modern-dom-apis': 'error',
+            'unicorn/prefer-modern-math-apis': 'error',
+            'unicorn/prefer-negative-index': 'error',
 
             // To be evaluated
 
-            'unicorn/prefer-code-point': 'error',
-            // 'unicorn/prefer-includes': 'error',
-            // 'unicorn/prefer-keyboard-event-key': 'error',
-            // 'unicorn/prefer-logical-operator-over-ternary': 'error',
-            // 'unicorn/prefer-math-trunc': 'error',
-            // 'unicorn/prefer-modern-dom-apis': 'error',
-            // 'unicorn/prefer-modern-math-apis': 'error',
-            // 'unicorn/prefer-native-coercion-functions': 'error',
-            // 'unicorn/prefer-negative-index': 'error',
-            // 'unicorn/prefer-number-properties': 'error',
-            // 'unicorn/prefer-object-from-entries': 'error',
-            // 'unicorn/prefer-optional-catch-binding': 'error',
-            // 'unicorn/prefer-prototype-methods': 'error',
-            // 'unicorn/prefer-query-selector': 'error',
-            // 'unicorn/prefer-reflect-apply': 'error',
-            // 'unicorn/prefer-regexp-test': 'error',
-            // 'unicorn/prefer-set-has': 'error',
-            // 'unicorn/prefer-set-size': 'error',
+            'unicorn/prefer-number-properties': 'error',
+            'unicorn/prefer-object-from-entries': 'error',
+            'unicorn/prefer-optional-catch-binding': 'error',
+            'unicorn/prefer-prototype-methods': 'error',
+            'unicorn/prefer-query-selector': 'error',
+            'unicorn/prefer-reflect-apply': 'error',
+            'unicorn/prefer-regexp-test': 'error',
+            'unicorn/prefer-set-has': 'error',
+            'unicorn/prefer-set-size': 'error',
             // 'unicorn/prefer-string-slice': 'error',
             // 'unicorn/prefer-string-starts-ends-with': 'error',
             // 'unicorn/prefer-string-trim-start-end': 'error',

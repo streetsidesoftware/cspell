@@ -201,7 +201,7 @@ describe('Test Aff', () => {
 describe('Validated loading all dictionaries in the `dictionaries` directory.', () => {
     function getDictionaries() {
         return readdirSync(DICTIONARY_LOCATIONS)
-            .filter((dic) => !!dic.match(/\.aff$/))
+            .filter((dic) => !!/\.aff$/.test(dic))
             .map((base) => path.join(DICTIONARY_LOCATIONS, base));
     }
     const dictionaries = getDictionaries();

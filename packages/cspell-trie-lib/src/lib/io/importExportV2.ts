@@ -190,7 +190,7 @@ export function importTrie(linesX: Iterable<string> | IterableIterator<string>):
             .slice(refOffset)
             .split(',')
             .filter((a) => !!a)
-            .map((r) => parseInt(r, base));
+            .map((r) => Number.parseInt(r, base));
         return {
             letter: line[0],
             isWord,

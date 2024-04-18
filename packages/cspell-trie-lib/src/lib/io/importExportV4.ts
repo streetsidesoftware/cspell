@@ -332,7 +332,7 @@ function parseStream(radix: number, iter: Iterable<string>): TrieRoot {
         function parser(acc: ReduceResults, s: string): ReduceResults {
             if (s === EOR || (radix === 10 && !(s in numbersSet))) {
                 const { root, nodes, stack } = acc;
-                const r = parseInt(ref, radix);
+                const r = Number.parseInt(ref, radix);
                 const top = stack[stack.length - 1];
                 const p = stack[stack.length - 2].node;
                 const n = isIndexRef ? refIndex[r] : r;
@@ -421,7 +421,7 @@ function parseStream(radix: number, iter: Iterable<string>): TrieRoot {
         if (!(s in charactersBack)) {
             return parserMain({ ...acc, parser: undefined }, s);
         }
-        let n = s === BACK ? 1 : parseInt(s, 10) - 1;
+        let n = s === BACK ? 1 : Number.parseInt(s, 10) - 1;
         const { stack } = acc;
         while (n-- > 0) {
             stack.pop();
@@ -472,7 +472,7 @@ function parseStream(radix: number, iter: Iterable<string>): TrieRoot {
                 refIndex = json
                     .replaceAll(/[\s[\]]/g, '')
                     .split(',')
-                    .map((n) => parseInt(n, radix));
+                    .map((n) => Number.parseInt(n, radix));
                 return { ...acc, parser: undefined };
             }
             return acc;

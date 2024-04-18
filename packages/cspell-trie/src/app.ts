@@ -89,7 +89,7 @@ export async function run(program: Command, argv: string[]): Promise<Command> {
 
 async function fileToLines(filename: string): Promise<Sequence<string>> {
     const buffer = await fsp.readFile(filename);
-    const file = (filename.match(/\.gz$/) ? zlib.gunzipSync(buffer) : buffer).toString(UTF8);
+    const file = (/\.gz$/.test(filename) ? zlib.gunzipSync(buffer) : buffer).toString(UTF8);
     return genSequence(file.split(/\r?\n/));
 }
 

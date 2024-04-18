@@ -108,7 +108,7 @@ function createTextDecoderUtf16BE() {
     try {
         const decoder = new TextDecoder('utf-16be');
         return decoder;
-    } catch (_) {
+    } catch {
         return {
             encoding: 'utf-16be',
             fatal: false,

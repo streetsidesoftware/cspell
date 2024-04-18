@@ -11,14 +11,14 @@ import { addRepository, listRepositories } from './repositoryHelper.js';
 const defaultParallel = Math.max(os.cpus().length / 2, 1);
 
 function processParallelArg(value: string): number {
-    const v = parseInt(value, 10);
+    const v = Number.parseInt(value, 10);
     return v < 1 ? defaultParallel : v;
 }
 
 function validateParallelArg(value: string) {
     // parseInt takes a string and a radix
-    const parsedValue = parseInt(value, 10);
-    if (isNaN(parsedValue) || parsedValue < 1) {
+    const parsedValue = Number.parseInt(value, 10);
+    if (Number.isNaN(parsedValue) || parsedValue < 1) {
         throw new InvalidArgumentError('Must be a number >= 1');
     }
     return value;

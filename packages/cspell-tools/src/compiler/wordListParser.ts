@@ -182,8 +182,8 @@ export function createParseFileLineMapper(options?: Partial<ParseFileOptions>): 
             .split('|')
             .map((a) => a.trim())
             .filter((a) => !!a)
-            .filter((a) => !a.match(/^[0-9_-]+$/)) // pure numbers and symbols
-            .filter((a) => !a.match(/^0[xo][0-9A-F]+$/i)); // c-style hex/octal digits
+            .filter((a) => !/^[0-9_-]+$/.test(a)) // pure numbers and symbols
+            .filter((a) => !/^0[xo][0-9A-F]+$/i.test(a)); // c-style hex/octal digits
 
         return lines;
     }

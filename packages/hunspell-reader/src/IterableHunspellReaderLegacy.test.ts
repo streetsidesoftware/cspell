@@ -154,7 +154,7 @@ describe('HunspellReader read dictionaries', function () {
 
 describe('Validated loading all dictionaries in the `dictionaries` directory.', () => {
     const dictionaries = readdirSync(DICTIONARY_LOCATIONS)
-        .filter((dic) => !!dic.match(/\.aff$/))
+        .filter((dic) => !!/\.aff$/.test(dic))
         .map((base) => path.join(DICTIONARY_LOCATIONS, base));
     it('Make sure we found some sample dictionaries', () => {
         expect(dictionaries.length).toBeGreaterThan(4);

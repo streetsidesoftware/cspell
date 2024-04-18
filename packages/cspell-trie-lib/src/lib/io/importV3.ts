@@ -108,7 +108,7 @@ function parseStream(radix: number): Reducer {
         function parser(acc: ReduceResults, s: string): ReduceResults {
             if (s === EOR) {
                 const { cursor } = acc;
-                const r = parseInt(ref, radix);
+                const r = Number.parseInt(ref, radix);
                 // +1 is used because EOW node was added but not counted.
                 cursor.reference(r + 1);
                 acc.parser = undefined;
@@ -161,7 +161,7 @@ function parseStream(radix: number): Reducer {
             acc.parser = undefined;
             return parserMain(acc, s);
         }
-        const n = s === BACK ? 1 : parseInt(s, 10) - 1;
+        const n = s === BACK ? 1 : Number.parseInt(s, 10) - 1;
         acc.cursor.backStep(n);
         acc.parser = parseBack;
         return acc;

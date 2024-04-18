@@ -140,6 +140,7 @@ export class DocumentValidator {
         recGlobMatcherTime();
         const recShouldCheckTime = recordPerfTime(this.perfTiming, '_shouldCheck');
 
+        // eslint-disable-next-line unicorn/prefer-regexp-test
         const shouldCheck = !matcher.match(uriToFilePath(uri)) && (docSettings.enabled ?? true);
 
         recShouldCheckTime();
@@ -519,6 +520,7 @@ export async function shouldCheckDocument(
         const matcher = getGlobMatcherForExcluding(localConfig?.ignorePaths);
         const docSettings = await determineTextDocumentSettings(doc, config);
         const uri = doc.uri;
+        // eslint-disable-next-line unicorn/prefer-regexp-test
         return !matcher.match(uriToFilePath(uri)) && (docSettings.enabled ?? true);
     }
 

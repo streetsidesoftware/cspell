@@ -161,7 +161,7 @@ export class Aff {
 
     getMatchingRules(rules: string): Rule[] {
         const { AF = [] } = this.affInfo;
-        const idx = regExpIsNumber.test(rules) ? parseInt(rules, 10) : -1;
+        const idx = regExpIsNumber.test(rules) ? Number.parseInt(rules, 10) : -1;
         const rulesToSplit = AF[idx] || rules;
         return this.separateRules(rulesToSplit)
             .map((key) => this.rules.get(key))

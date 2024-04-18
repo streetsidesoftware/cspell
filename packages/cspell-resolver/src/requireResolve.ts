@@ -2,7 +2,7 @@ export function requireResolve(filename: string, paths?: string[]): string | und
     try {
         // eslint-disable-next-line unicorn/prefer-module
         return require.resolve(filename, paths ? { paths } : undefined);
-    } catch (_) {
+    } catch {
         return undefined;
     }
 }
