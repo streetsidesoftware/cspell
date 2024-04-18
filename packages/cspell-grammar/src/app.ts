@@ -21,7 +21,7 @@ export async function run(args: string[]): Promise<void> {
         return;
     }
 
-    const filename = args.slice(2).filter((p) => !p.startsWith('-'))[0];
+    const filename = args.slice(2).find((p) => !p.startsWith('-'));
     if (!filename) {
         console.log('filename missing');
         return;

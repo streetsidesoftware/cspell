@@ -52,7 +52,7 @@ export async function checkShasumFile(
         }),
     );
 
-    const passed = !results.find((v) => !v.passed);
+    const passed = !results.some((v) => !v.passed);
 
     return { passed, results };
 }

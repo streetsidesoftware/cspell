@@ -47,6 +47,7 @@ export default tsEslint.config(
             'unicorn/no-new-array': 'off', // new Array(size) is 100x faster than Array.from({length: size})
             'unicorn/no-zero-fractions': 'off',
             'unicorn/number-literal-case': 'off', // doesn't fix anything, might conflict with other rules.
+            'unicorn/no-useless-undefined': 'off', // Breaks return types and other things
 
             // Enable these rules to help with on boarding eslint.
             'unicorn/no-instanceof-array': 'error',
@@ -98,18 +99,11 @@ export default tsEslint.config(
 
             // To be evaluated
 
-            // 'unicorn/no-useless-undefined': [
-            //     'error', // Breaks return types
-            //     {
-            //         checkArrowFunctionBody: false,
-            //     },
-            // ],
-
-            // 'unicorn/prefer-add-event-listener': 'error',
-            // 'unicorn/prefer-array-find': 'error',
-            // 'unicorn/prefer-array-flat-map': 'error',
-            // 'unicorn/prefer-array-index-of': 'error',
-            // 'unicorn/prefer-array-some': 'error',
+            'unicorn/prefer-add-event-listener': 'error',
+            'unicorn/prefer-array-find': 'error',
+            'unicorn/prefer-array-flat-map': 'error',
+            'unicorn/prefer-array-index-of': 'error',
+            'unicorn/prefer-array-some': 'error',
             // 'unicorn/prefer-blob-reading-methods': 'error',
             // 'unicorn/prefer-code-point': 'error',
             // 'unicorn/prefer-date-now': 'error',

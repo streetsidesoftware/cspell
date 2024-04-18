@@ -60,7 +60,7 @@ export function traceWord(
     const unique = uniqueFn((w: WordSplits) => w.word + '|' + w.found);
 
     const wsFound = { word, found: dictCollection.has(word, opts) };
-    const wordSplits = wfSplits.find((s) => s.word === word) ? wfSplits : [wsFound, ...wfSplits];
+    const wordSplits = wfSplits.some((s) => s.word === word) ? wfSplits : [wsFound, ...wfSplits];
 
     const traces = wordSplits
         .filter(unique)

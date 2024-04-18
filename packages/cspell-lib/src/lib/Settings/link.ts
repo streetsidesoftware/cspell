@@ -58,7 +58,7 @@ function isString(s: string | undefined): s is string {
 
 export async function addPathsToGlobalImports(paths: string[]): Promise<AddPathsToGlobalImportsResults> {
     const resolvedSettings = await Promise.all(paths.map(resolveSettings));
-    const hasError = resolvedSettings.filter((r) => !!r.error).length > 0;
+    const hasError = resolvedSettings.some((r) => !!r.error);
     if (hasError) {
         return {
             success: false,
