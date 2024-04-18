@@ -10,7 +10,8 @@
   "type": "module",
   "private": true,
   "scripts": {
-    "#build": "node build.mjs",
+    "build": "cd source && pnpm build",
+    "clean": "shx rm -rf bin/dist",
     "test": "pnpm test:esm && pnpm test:cjs",
     "test:esm": "node bin.mjs README.md",
     "test:cjs": "node bin.cjs"
