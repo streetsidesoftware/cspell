@@ -214,10 +214,9 @@ export function createDictionaryLineParserMapper(options?: Partial<ParseDictiona
     function* splitWords(lines: Iterable<string>): Iterable<string> {
         for (const line of lines) {
             if (split) {
-                const lineEscaped =
-                    line.indexOf('"') >= 0
-                        ? line.replaceAll(/".*?"/g, (quoted) => ' ' + quoted.replaceAll(/(\s)/g, '\\$1') + ' ')
-                        : line;
+                const lineEscaped = line.includes('"')
+                    ? line.replaceAll(/".*?"/g, (quoted) => ' ' + quoted.replaceAll(/(\s)/g, '\\$1') + ' ')
+                    : line;
 
                 const words = splitLine(lineEscaped, splitSeparator);
                 yield* words.map((escaped) => escaped.replaceAll('\\', ''));

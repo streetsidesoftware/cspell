@@ -405,7 +405,7 @@ export async function parseAffFile(filename: string, encoding: string = UTF8) {
 }
 
 function convertHtmlEntities(line: string, index: number): string {
-    if (line.indexOf('&') < 0) return line;
+    if (!line.includes('&')) return line;
     const fixed = decodeHtmlEntities(line);
     if (fixed !== line) {
         if (htmlEntitiesFound < 10) {

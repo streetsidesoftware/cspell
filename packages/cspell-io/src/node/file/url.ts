@@ -99,7 +99,7 @@ export function urlDirname(url: string | URL): URL {
  * @returns
  */
 export function basename(path: string): string {
-    path = path.endsWith('/') ? path.slice(0, path.length - 1) : path;
+    path = path.endsWith('/') ? path.slice(0, -1) : path;
     const idx = path.lastIndexOf('/');
     return idx >= 0 ? path.slice(idx + 1) : path;
 }
