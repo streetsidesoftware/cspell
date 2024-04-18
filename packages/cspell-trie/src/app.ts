@@ -84,11 +84,7 @@ export async function run(program: Command, argv: string[]): Promise<Command> {
             });
         });
 
-    try {
-        return program.parseAsync(argv);
-    } catch (e) {
-        return Promise.reject(e);
-    }
+    return program.parseAsync(argv);
 }
 
 async function fileToLines(filename: string): Promise<Sequence<string>> {

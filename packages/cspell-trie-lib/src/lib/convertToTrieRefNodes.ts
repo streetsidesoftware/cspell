@@ -49,8 +49,8 @@ export function convertToTrieRefNodes(root: TrieNode): IterableIterator<TrieRefN
     }
 
     function* walkByTallies(tallies: Map<TrieNode, number>): IterableIterator<TrieRefNode> {
-        const nodes = [...genSequence(tallies).filter((a) => a[1] >= MinReferenceCount)].sort((a, b) => b[1] - a[1]);
-        for (const [n] of nodes) {
+        const nodes = genSequence(tallies).filter((a) => a[1] >= MinReferenceCount);
+        for (const [n] of [...nodes].sort((a, b) => b[1] - a[1])) {
             yield* walkByRollup(n);
         }
     }

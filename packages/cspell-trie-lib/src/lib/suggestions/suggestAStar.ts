@@ -331,7 +331,7 @@ function getCostTrie(t: CostTrie, s: string) {
         return t;
     }
     let tt = t;
-    for (const c of [...s]) {
+    for (const c of s) {
         tt = tt.t[c] ??= createCostTrie();
     }
     return tt;

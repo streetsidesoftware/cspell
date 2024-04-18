@@ -105,9 +105,12 @@ function toLine(node: TrieRefNode, base: number): string {
 
 function generateHeader(base: number, comment: string): Sequence<string> {
     const header = [
-        ...['#!/usr/bin/env cspell-trie reader', 'TrieXv2', 'base=' + base],
+        '#!/usr/bin/env cspell-trie reader',
+        'TrieXv2',
+        'base=' + base,
         ...(comment ? comment.split('\n').map((a) => '# ' + a) : []),
-        ...['# Data:', DATA],
+        '# Data:',
+        DATA,
     ];
     return genSequence(header);
 }

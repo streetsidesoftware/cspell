@@ -43,6 +43,7 @@ export default tsEslint.config(
             'unicorn/better-regex': 'off', // Not sure if it is an improvement.
             'unicorn/no-array-method-this-argument': 'off', // Too many false positives
             'unicorn/no-negated-condition': 'off', // Too picky - works against implying the most common branch.
+            'unicorn/no-useless-spread': 'off', // makes dangerous fixes
 
             // Enable these rules to help with on boarding eslint.
             'unicorn/no-instanceof-array': 'error',
@@ -84,17 +85,16 @@ export default tsEslint.config(
             'unicorn/no-thenable': 'error',
             'unicorn/no-this-assignment': 'error',
             'unicorn/no-typeof-undefined': 'error',
+            'unicorn/no-unnecessary-await': 'error',
+            'unicorn/no-unnecessary-polyfills': 'error',
+            'unicorn/no-unreadable-array-destructuring': 'error',
+            'unicorn/no-unreadable-iife': 'error',
+            'unicorn/no-useless-fallback-in-spread': 'error',
+            'unicorn/no-useless-length-check': 'error',
+            'unicorn/no-useless-promise-resolve-reject': 'error',
 
             // To be evaluated
 
-            // 'unicorn/no-unnecessary-await': 'error',
-            // 'unicorn/no-unnecessary-polyfills': 'error',
-            // 'unicorn/no-unreadable-array-destructuring': 'error',
-            // 'unicorn/no-unreadable-iife': 'error',
-            // 'unicorn/no-useless-fallback-in-spread': 'error',
-            // 'unicorn/no-useless-length-check': 'error',
-            // 'unicorn/no-useless-promise-resolve-reject': 'error',
-            // 'unicorn/no-useless-spread': 'error',
             // 'unicorn/no-useless-switch-case': 'error',
             // 'unicorn/no-useless-undefined': 'error',
             // 'unicorn/no-zero-fractions': 'error',

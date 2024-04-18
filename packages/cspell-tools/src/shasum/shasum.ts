@@ -23,6 +23,8 @@ export async function shasumFile(filename: string, root: string | undefined): Pr
         return `${checksum}  ${filename}`;
     } catch (_) {
         // const err = toError(error);
+        // Reject with a string.
+        // eslint-disable-next-line unicorn/no-useless-promise-resolve-reject
         return Promise.reject(`shasum: ${filename}: Unable to read file.`);
     }
 }

@@ -476,7 +476,7 @@ async function searchForDocumentConfig(
     pnpSettings: PnPSettings,
 ): Promise<CSpellSettingsWithSourceTrace> {
     const { uri } = document;
-    if (uri.scheme !== 'file') return Promise.resolve(defaultConfig);
+    if (uri.scheme !== 'file') return defaultConfig;
     return searchForConfig(uri.toString(), pnpSettings).then((s) => s || defaultConfig);
 }
 
