@@ -80,6 +80,7 @@ function toCharCodes(s: string): string {
 function toCharCodesNumber(s: string): number[] {
     const codes: number[] = [];
     for (let i = 0; i < s.length; ++i) {
+        // eslint-disable-next-line unicorn/prefer-code-point
         codes.push(s.charCodeAt(i));
     }
     return codes;

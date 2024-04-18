@@ -113,9 +113,11 @@ export function stripNonAccents(characters: string): string {
 
 export function isValidUtf16Character(char: string): boolean {
     const len = char.length;
+    // eslint-disable-next-line unicorn/prefer-code-point
     const code = char.charCodeAt(0) & 0xfc00;
     const valid =
         (len === 1 && (code & 0xf800) !== 0xd800) ||
+        // eslint-disable-next-line unicorn/prefer-code-point
         (len === 2 && (code & 0xfc00) === 0xd800 && (char.charCodeAt(1) & 0xfc00) === 0xdc00);
     return valid;
 }
@@ -139,6 +141,7 @@ export function assertValidUtf16Character(char: string): void {
 function toCharCodes(s: string): number[] {
     const values: number[] = [];
     for (let i = 0; i < s.length; ++i) {
+        // eslint-disable-next-line unicorn/prefer-code-point
         values.push(s.charCodeAt(i));
     }
     return values;

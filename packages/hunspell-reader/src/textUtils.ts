@@ -12,15 +12,19 @@ function replaceWithUnicode(substring: string): string {
     const start = 0x20;
     const end = 0x7a;
     let val = '';
-    for (let i = 0; i < substring.length; ++i) {
-        const char = substring[i];
-        const code = char.charCodeAt(0);
+    for (const char of substring) {
+        const code = char.codePointAt(0) || 0;
         if (code >= start && code <= end) {
             val += char;
             continue;
         }
-        const hex = '0000' + code.toString(16);
-        val += code < 256 ? '\\x' + hex.slice(-2) : '\\u' + hex.slice(-4);
+        for (let i = 0; i < char.length; i += 1) {
+            // Use charCodeAt to get the value because JSON does not handle \u{10000} correctly.
+            // eslint-disable-next-line unicorn/prefer-code-point
+            const code = char.charCodeAt(i);
+            const hex = code.toString(16).toUpperCase().padStart(4, '0');
+            val += code < 256 ? '\\x' + hex.slice(-2) : hex.length === 4 ? '\\u' + hex : '\\u{' + hex + '}';
+        }
     }
     return val;
 }
@@ -47,7 +51,7 @@ export function toRange(letters: string, minLength = 4): string {
             return;
         }
         for (let code = begin + 1; code < end; code += 1) {
-            chars.push(String.fromCharCode(code));
+            chars.push(String.fromCodePoint(code));
         }
     }
 
@@ -57,9 +61,8 @@ export function toRange(letters: string, minLength = 4): string {
         endChar = '';
     }
 
-    for (let i = 0; i < letters.length; ++i) {
-        const letter = letters[i];
-        const code = letter.charCodeAt(0);
+    for (const letter of letters) {
+        const code = letter.codePointAt(0) || 0;
         if (code - end === 1) {
             end = code;
             endChar = letter;

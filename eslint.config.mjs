@@ -48,6 +48,7 @@ export default tsEslint.config(
             'unicorn/no-zero-fractions': 'off',
             'unicorn/number-literal-case': 'off', // doesn't fix anything, might conflict with other rules.
             'unicorn/no-useless-undefined': 'off', // Breaks return types and other things
+            'unicorn/prefer-event-target': 'off', // It is broken
 
             // Enable these rules to help with on boarding eslint.
             'unicorn/no-instanceof-array': 'error',
@@ -96,24 +97,23 @@ export default tsEslint.config(
             'unicorn/no-useless-length-check': 'error',
             'unicorn/no-useless-promise-resolve-reject': 'error',
             'unicorn/no-useless-switch-case': 'error',
-
-            // To be evaluated
-
             'unicorn/prefer-add-event-listener': 'error',
             'unicorn/prefer-array-find': 'error',
             'unicorn/prefer-array-flat-map': 'error',
             'unicorn/prefer-array-index-of': 'error',
             'unicorn/prefer-array-some': 'error',
-            // 'unicorn/prefer-blob-reading-methods': 'error',
-            // 'unicorn/prefer-code-point': 'error',
-            // 'unicorn/prefer-date-now': 'error',
-            // 'unicorn/prefer-default-parameters': 'error',
-            // 'unicorn/prefer-dom-node-append': 'error',
-            // 'unicorn/prefer-dom-node-dataset': 'error',
-            // 'unicorn/prefer-dom-node-remove': 'error',
-            // 'unicorn/prefer-dom-node-text-content': 'error',
-            // 'unicorn/prefer-event-target': 'error',
-            // 'unicorn/prefer-export-from': 'error',
+            'unicorn/prefer-blob-reading-methods': 'error',
+            'unicorn/prefer-date-now': 'error',
+            'unicorn/prefer-default-parameters': 'error',
+            'unicorn/prefer-dom-node-append': 'error',
+            'unicorn/prefer-dom-node-dataset': 'error',
+            'unicorn/prefer-dom-node-remove': 'error',
+            'unicorn/prefer-dom-node-text-content': 'error',
+            'unicorn/prefer-export-from': 'error',
+
+            // To be evaluated
+
+            'unicorn/prefer-code-point': 'error',
             // 'unicorn/prefer-includes': 'error',
             // 'unicorn/prefer-keyboard-event-key': 'error',
             // 'unicorn/prefer-logical-operator-over-ternary': 'error',

@@ -127,6 +127,7 @@ export class FastTrieBlobBuilder implements TrieBuilder<FastTrieBlob> {
         let depth = 0;
 
         const insertChar = (char: string) => {
+            // eslint-disable-next-line unicorn/prefer-code-point
             const cc = char.charCodeAt(0) & 0xfc00;
             // Work with partial surrogate pairs.
             if (cc === 0xd800 && char.length == 1) {

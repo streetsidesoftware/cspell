@@ -138,7 +138,9 @@ export function* getSuggestionsAStar(
         return (
             pb - pa ||
             a.cost - b.cost ||
+            // eslint-disable-next-line unicorn/prefer-code-point
             Math.abs(a.word.charCodeAt(0) - srcWord.charCodeAt(0)) -
+                // eslint-disable-next-line unicorn/prefer-code-point
                 Math.abs(b.word.charCodeAt(0) - srcWord.charCodeAt(0))
         );
     }

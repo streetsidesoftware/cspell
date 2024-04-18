@@ -15,8 +15,8 @@ describe('arrayBuffers', () => {
     test('asUint8Array', () => {
         const buf = Buffer.from(sampleText);
         const u8 = asUint8Array(buf);
-        expect(u8[0]).toBe(sampleText.charCodeAt(0));
-        expect(buf[0]).toBe(sampleText.charCodeAt(0));
+        expect(u8[0]).toBe(sampleText.codePointAt(0));
+        expect(buf[0]).toBe(sampleText.codePointAt(0));
         u8[0] = 32;
         expect(u8[0]).toBe(32);
         expect(u8[0]).toBe(buf[0]);

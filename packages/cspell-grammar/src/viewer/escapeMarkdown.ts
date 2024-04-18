@@ -29,7 +29,7 @@ function _escape(str: string, r: RegExp): string {
 
     while (r.test(str)) {
         const i = r.lastIndex - 1;
-        html += str.substring(lastIndex, i) + cvt[str.charCodeAt(i)];
+        html += str.substring(lastIndex, i) + (cvt[str.codePointAt(i) || 0] || '');
         lastIndex = r.lastIndex;
     }
     return html + str.substring(lastIndex);
@@ -44,7 +44,9 @@ function compileEntities(entityMap: Record<string, string>): string[] {
     }
 
     for (const [char, entity] of Object.entries(entityMap)) {
-        result[char.charCodeAt(0)] = entity;
+        const index = char.codePointAt(0);
+        if (!index) continue;
+        result[index] = entity;
     }
     return result;
 }

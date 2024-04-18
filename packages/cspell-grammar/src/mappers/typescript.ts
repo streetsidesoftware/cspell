@@ -67,7 +67,7 @@ export function mapRawString(text: string): MappedText {
                         if (text[i + 1] !== '{') {
                             const digits = text.slice(i + 1, i + 5);
                             parsed = isHex.test(digits) ? parseInt(digits, 16) : NaN;
-                            char = isNaN(parsed) ? '' : String.fromCharCode(parsed);
+                            char = isNaN(parsed) ? '' : String.fromCodePoint(parsed);
                             end = i + 4;
                         } else {
                             for (end = i + 2; text[end] in hexChars; ++end) {
@@ -100,7 +100,7 @@ export function mapRawString(text: string): MappedText {
                             t += tc;
                             j += 1;
                         } else {
-                            t += String.fromCharCode(parsed);
+                            t += String.fromCodePoint(parsed);
                             i += 2;
                             ++j;
                         }

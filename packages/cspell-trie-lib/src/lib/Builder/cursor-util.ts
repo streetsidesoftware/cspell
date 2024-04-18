@@ -23,6 +23,7 @@ export function commonStringPrefixLen(a: string, b: string): number {
     }
     if (i) {
         // detect second half of a surrogate pair and backup.
+        // eslint-disable-next-line unicorn/prefer-code-point
         const c = a.charCodeAt(i) & 0xffff;
         if (c >= 0xdc00 && c <= 0xdfff) {
             --i;

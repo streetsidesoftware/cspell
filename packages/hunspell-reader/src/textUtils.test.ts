@@ -11,6 +11,7 @@ describe('textUtils', () => {
         ${'café'.normalize('NFD')}                  | ${undefined} | ${'"cafe\\u0301"'}
         ${'à la mode café résumé'.normalize('NFD')} | ${undefined} | ${'"a\\u0300 la mode cafe\\u0301 re\\u0301sume\\u0301"'}
         ${'abc\nabc'}                               | ${undefined} | ${'"abc\\nabc"'}
+        ${'😀😃\n😎😬'}                             | ${/\P{L}/gu} | ${'"\\uD83D\\uDE00\\uD83D\\uDE03\\n\\uD83D\\uDE0E\\uD83D\\uDE2C"'}
     `('escapeUnicodeCode $text', ({ text, regexp, expected }) => {
         const result = escapeUnicodeCode(JSON.stringify(text), regexp);
         expect(result).toBe(expected);
