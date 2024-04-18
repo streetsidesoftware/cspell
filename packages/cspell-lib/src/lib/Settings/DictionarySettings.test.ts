@@ -1,9 +1,10 @@
+import assert from 'node:assert';
+import * as fsp from 'node:fs/promises';
+import * as os from 'node:os';
+import * as path from 'node:path';
+import { fileURLToPath, pathToFileURL } from 'node:url';
+
 import type { DictionaryDefinition, DictionaryDefinitionLegacy } from '@cspell/cspell-types';
-import assert from 'assert';
-import * as fsp from 'fs/promises';
-import * as os from 'os';
-import * as path from 'path';
-import { pathToFileURL } from 'url';
 import { describe, expect, test } from 'vitest';
 
 import { isDictionaryDefinitionInlineInternal } from '../Models/CSpellSettingsInternalDef.js';
@@ -11,6 +12,8 @@ import { isDefined } from '../util/util.js';
 import { getDefaultBundledSettingsAsync } from './DefaultSettings.js';
 import { createDictionaryReferenceCollection as createRefCol } from './DictionaryReferenceCollection.js';
 import * as DictSettings from './DictionarySettings.js';
+
+const __filename = fileURLToPath(import.meta.url);
 
 const defaultSettings = await getDefaultBundledSettingsAsync();
 const oc = expect.objectContaining;

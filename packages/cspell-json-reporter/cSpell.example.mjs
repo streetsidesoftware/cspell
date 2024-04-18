@@ -1,6 +1,11 @@
-const path = require('path');
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
 
-module.exports = {
+import { defineConfig } from '@cspell/cspell-types';
+
+const __dirname = fileURLToPath(new URL('.', import.meta.url));
+
+export default defineConfig({
     version: '0.2',
     id: 'cspell-project-config',
     name: 'cspell Project Config',
@@ -17,5 +22,5 @@ module.exports = {
         '.vscode/**',
     ],
     ignoreWords: [],
-    reporters: [[path.join(__dirname, './dist/index'), { outFile: './temp/out.json' }]],
-};
+    reporters: [[path.join(__dirname, './dist/esm/index.js'), { outFile: './temp/out.json' }]],
+});

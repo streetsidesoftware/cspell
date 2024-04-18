@@ -1,6 +1,7 @@
-import { mkdir } from 'fs/promises';
-import * as path from 'path';
-import { fileURLToPath, pathToFileURL } from 'url';
+import { mkdir } from 'node:fs/promises';
+import * as path from 'node:path';
+import { fileURLToPath, pathToFileURL } from 'node:url';
+
 import { expect } from 'vitest';
 
 const mkdirp = async (p: string) => {
@@ -48,7 +49,7 @@ function resolve(...parts: string[]): string {
 }
 
 export function testNameToDir(testName: string): string {
-    return `test_${testName.replace(/\s/g, '-').replace(/[^\w.-]/gi, '_')}_test`;
+    return `test_${testName.replaceAll(/\s/g, '-').replaceAll(/[^\w.-]/gi, '_')}_test`;
 }
 
 /**

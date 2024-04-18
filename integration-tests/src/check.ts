@@ -1,8 +1,9 @@
+import * as Path from 'node:path';
+import { fileURLToPath } from 'node:url';
+
 import type { ChalkInstance } from 'chalk';
 import chalk from 'chalk';
-import * as Path from 'path';
 import Shell from 'shelljs';
-import { fileURLToPath } from 'url';
 
 import { readConfig, resolveArgs, resolveRepArgs } from './config.js';
 import type { Repository } from './configDef.js';
@@ -72,7 +73,7 @@ async function execCheckAndUpdate(rep: Repository, options: CheckAndUpdateOption
         try {
             const updatedRep = mustBeDefined(await addRepository(logger, rep.url, rep.branch));
             rep = resolveRepArgs(updatedRep);
-        } catch (e) {
+        } catch (_) {
             log(color`******** fail ********`);
             return Promise.resolve({ success: false, rep, elapsedTime: 0 });
         }

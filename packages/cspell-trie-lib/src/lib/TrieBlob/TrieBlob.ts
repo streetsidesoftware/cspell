@@ -38,7 +38,7 @@ const HEADER = {
 
 const headerSig = 'TrieBlob';
 const version = '00.01.00';
-const endianSig = 0x04030201;
+const endianSig = 0x0403_0201;
 
 export class TrieBlob implements TrieData {
     protected charToIndexMap: Record<string, number>;
@@ -288,7 +288,7 @@ export class TrieBlob implements TrieData {
         return trieBlob;
     }
 
-    static NodeMaskEOW = 0x00000100;
+    static NodeMaskEOW = 0x0000_0100;
     static NodeMaskNumChildren = (1 << NodeHeaderNumChildrenBits) - 1;
     static NodeMaskNumChildrenShift = NodeHeaderNumChildrenShift;
     static NodeChildRefShift = 8;
@@ -299,7 +299,7 @@ export class TrieBlob implements TrieData {
      * - @see {@link TrieBlob.SpecialCharIndexMask}
      * - @see {@link TrieBlob.MaxCharIndex}
      */
-    static NodeMaskChildCharIndex = 0x000000ff;
+    static NodeMaskChildCharIndex = 0x0000_00ff;
     /** SpecialCharIndexMask is used to indicate a node chain */
     static SpecialCharIndexMask = 0xf8;
     static MaxCharIndex = this.SpecialCharIndexMask - 1;
@@ -347,7 +347,7 @@ export class TrieBlob implements TrieData {
 function isLittleEndian(): boolean {
     const buf = new Uint8Array([1, 2, 3, 4]);
     const view = new DataView(buf.buffer);
-    return view.getUint32(0, true) === 0x04030201;
+    return view.getUint32(0, true) === 0x0403_0201;
 }
 
 function checkSig(blob: Uint8Array): boolean {

@@ -1,5 +1,5 @@
-import path from 'path';
-import { pathToFileURL } from 'url';
+import path from 'node:path';
+import { pathToFileURL } from 'node:url';
 
 const isZippedRegExp = /\.gz($|[?#])/i;
 
@@ -62,7 +62,7 @@ export function urlBasename(url: string | URL): string {
         const filenameMatch = header.match(regMatchFilename);
         if (filenameMatch) return filenameMatch[1];
         const mime = header.split(';', 1)[0];
-        return mime.replace(/\W/g, '.');
+        return mime.replaceAll(/\W/g, '.');
     }
 
     url = toURL(url);
@@ -88,7 +88,7 @@ export function urlDirname(url: string | URL): URL {
 
     try {
         return new URL(url.pathname.endsWith('/') ? '..' : '.', url);
-    } catch (e) {
+    } catch (_) {
         return url;
     }
 }
@@ -105,7 +105,7 @@ export function basename(path: string): string {
 }
 
 export function normalizePathForUrl(filePath: string): string {
-    const pathname = filePath.replace(/\\/g, '/');
+    const pathname = filePath.replaceAll('\\', '/');
     const raw = pathname.replace(isWindowsPath, '/$&');
     return raw
         .split('/')

@@ -116,7 +116,7 @@ export function* genCompoundableSuggestions(
         if (setOfSeparators.has(w)) {
             const mxRange = matrix[depth].slice(a, b + 1);
             const mxMin = Math.min(...mxRange);
-            const tag = [a].concat(mxRange.map((c) => c - mxMin)).join();
+            const tag = [a, ...mxRange.map((c) => c - mxMin)].join();
             const ht = historyTags.get(tag);
             if (ht && ht.m <= mxMin) {
                 goDeeper = false;

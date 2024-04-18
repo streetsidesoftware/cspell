@@ -69,7 +69,7 @@ export function generateReport(data: ReportData): Report {
     });
 
     const base: SortedFileIssues = [];
-    const fileIssues: SortedFileIssues = base.concat(...issuesByFile);
+    const fileIssues: SortedFileIssues = [...base, ...issuesByFile.flat()];
     const issuesSummary = [...(data.issuesSummary || [])].sort((a, b) => compare(a.text, b.text));
 
     return {
@@ -98,9 +98,9 @@ function formatIssue(file: string, issue: Issue): string {
     const fix = suggestions ? ` (${suggestions})` : '';
     const issueType = isFlagged ? 'F' : 'U';
     const ctx = context.text
-        .replace(/\s+/g, ' ')
+        .replaceAll(/\s+/g, ' ')
         // eslint-disable-next-line no-control-regex
-        .replace(/[\u0000-\u001F]+/g, '') // remove control characters
+        .replaceAll(/[\u0000-\u001F]+/g, '') // remove control characters
         .trim();
     const line = `${file}:${row}:${col}\t${text}${fix}\t${issueType}\t${ctx}`;
     return line.trim();

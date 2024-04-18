@@ -402,7 +402,7 @@ function splitIntoWords(
     let maxCost = lineSeg.relEnd - lineSeg.relStart;
     const candidates = new PairingHeap<Candidate>(compare);
     const text = lineSeg.line.text;
-    candidates.concat(makeCandidates(undefined, lineSeg.relStart, 0, 0));
+    candidates.append(makeCandidates(undefined, lineSeg.relStart, 0, 0));
     let attempts = 0;
     let bestPath: PathNode | undefined;
 
@@ -430,12 +430,12 @@ function splitIntoWords(
                 bestPath = !bestPath || (f && f.c < bestPath.c) ? f : bestPath;
             } else if (best.c < maxCost) {
                 const c = makeCandidates(t ? best : best.p, j, best.bi + 1, best.c);
-                candidates.concat(c);
+                candidates.append(c);
             }
         } else {
             // It is a pass through
             const c = makeCandidates(best.p, best.i, best.bi + 1, best.c);
-            candidates.concat(c);
+            candidates.append(c);
             if (!c.length) {
                 const t = maxIndex > best.i ? toTextOffset(text.slice(best.i, maxIndex), best.i) : undefined;
                 const cost = !t || t.isFound ? 0 : t.text.length;
@@ -457,7 +457,7 @@ function splitIntoWords(
 }
 
 function mergeSortedBreaks(...maps: SortedBreaks[]): SortedBreaks {
-    return ([] as SortedBreaks).concat(...maps).sort((a, b) => a.offset - b.offset);
+    return maps.flat().sort((a, b) => a.offset - b.offset);
 }
 
 export const __testing__ = {

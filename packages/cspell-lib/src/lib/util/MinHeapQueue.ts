@@ -66,7 +66,7 @@ export class MinHeapQueue<T> implements IterableIterator<T> {
         return takeFromHeap(this.values, this.compare);
     }
 
-    concat(i: Iterable<T>): MinHeapQueue<T> {
+    append(i: Iterable<T>): MinHeapQueue<T> {
         for (const v of i) {
             this.add(v);
         }
@@ -91,7 +91,7 @@ export class MinHeapQueue<T> implements IterableIterator<T> {
 
     clone(): MinHeapQueue<T> {
         const clone = new MinHeapQueue(this.compare);
-        clone.values = this.values.concat();
+        clone.values = [...this.values];
         return clone;
     }
 }

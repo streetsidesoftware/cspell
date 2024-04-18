@@ -268,7 +268,7 @@ export const languageExtensionDefinitions: LanguageDefinitions = [
 export type LanguageId = string;
 
 const binaryFormatIds = languageExtensionDefinitions.filter((d) => d.format === 'Binary').map((d) => d.id);
-export const binaryLanguages = new Set(['binary', 'image', 'video', 'fonts'].concat(binaryFormatIds));
+export const binaryLanguages = new Set(['binary', 'image', 'video', 'fonts', ...binaryFormatIds]);
 
 export const generatedFiles = new Set([...binaryLanguages, 'map', 'lock', 'pdf', 'cache_files', 'rsa', 'pem', 'trie']);
 

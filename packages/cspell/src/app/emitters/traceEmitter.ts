@@ -1,5 +1,6 @@
+import * as iPath from 'node:path';
+
 import chalk from 'chalk';
-import * as iPath from 'path';
 import strip from 'strip-ansi';
 
 import type { TraceResult } from '../application.js';
@@ -74,7 +75,7 @@ function emitTraceResult(r: TraceResult, colWidths: ColWidths, options: EmitTrac
     const { word: wordColWidth, terminalWidth, dictName: widthName } = colWidths;
     const errors = r.errors?.map((e) => e.message)?.join('\n\t') || '';
     const word = pad(r.foundWord || r.word, wordColWidth);
-    const cWord = word.replace(/[+]/g, chalk.yellow('+'));
+    const cWord = word.replaceAll('+', chalk.yellow('+'));
     const w = r.forbidden ? chalk.red(cWord) : chalk.green(cWord);
     const f = calcFoundChar(r);
     const a = r.dictActive ? '*' : ' ';

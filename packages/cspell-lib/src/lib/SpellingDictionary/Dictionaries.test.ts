@@ -1,7 +1,7 @@
+import * as fs from 'node:fs/promises';
+import * as path from 'node:path';
+
 import type { CSpellUserSettings } from '@cspell/cspell-types';
-import * as fs from 'fs/promises';
-import * as path from 'path';
-import { pathToFileURL } from 'url';
 import { describe, expect, test } from 'vitest';
 
 import { pathPackageRoot } from '../../test-util/test.locations.cjs';
@@ -28,7 +28,7 @@ function log(msg: string): void {
     }
 }
 
-const __filenameURL = pathToFileURL(__filename);
+const __filenameURL = new URL(import.meta.url);
 
 const di = mapDictDefToInternal;
 
@@ -199,10 +199,11 @@ describe('Validate Refresh', () => {
         await mkdirp(path.dirname(tempDictPath));
         await fs.writeFile(tempDictPath, 'one\ntwo\nthree\n');
         const settings = await getDefaultBundledSettingsAsync();
-        const defs = (settings.dictionaryDefinitions || []).concat([
+        const defs = [
+            ...(settings.dictionaryDefinitions || []),
             di({ name: 'temp', path: tempDictPath }, __filenameURL),
             di({ name: 'not_found', path: tempDictPathNotFound }, __filenameURL),
-        ]);
+        ];
         const toLoad = ['node', 'html', 'css', 'not_found', 'temp'];
         const col = createDictionaryReferenceCollection(toLoad);
         const defsToLoad = filterDictDefsToLoad(col, defs);
@@ -243,7 +244,7 @@ describe('Validate Refresh', () => {
 
 function tempPath(file: string) {
     const testState = expect.getState();
-    const testName = (testState.currentTestName || 'test').replace(/[^-a-z0-9]/gi, '_');
+    const testName = (testState.currentTestName || 'test').replaceAll(/[^-a-z0-9]/gi, '_');
     return path.join(pathPackageRoot, 'temp', testName, file);
 }
 
@@ -254,5 +255,5 @@ function sample(file: string): string {
 function getAllDictionaryNames(settings: CSpellUserSettings): string[] {
     const { dictionaries = [], dictionaryDefinitions = [] } = settings;
 
-    return dictionaries.concat(dictionaryDefinitions.map((d) => d.name));
+    return [...dictionaries, ...dictionaryDefinitions.map((d) => d.name)];
 }

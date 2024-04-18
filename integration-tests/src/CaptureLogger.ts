@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-import { format } from 'util';
+import { format } from 'node:util';
 
 import type { Logger } from './types.js';
 

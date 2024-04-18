@@ -1,4 +1,4 @@
-import * as stream from 'stream';
+import * as stream from 'node:stream';
 
 // cspell:words streamable
 

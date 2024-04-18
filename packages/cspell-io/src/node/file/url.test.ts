@@ -1,4 +1,5 @@
-import * as path from 'path';
+import * as path from 'node:path';
+
 import { describe, expect, test } from 'vitest';
 
 import { basename, isUrlLike, normalizePathForUrl, toFileURL, toURL, urlBasename, urlDirname } from './url.js';

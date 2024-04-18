@@ -1,6 +1,9 @@
 // cspell:ignore TSESTree
+import assert from 'node:assert';
+import * as path from 'node:path';
+import { format } from 'node:util';
+
 import type { TSESTree } from '@typescript-eslint/types';
-import assert from 'assert';
 import type { CSpellSettings, TextDocument, ValidationIssue } from 'cspell-lib';
 import {
     createTextDocument,
@@ -10,8 +13,6 @@ import {
     refreshDictionaryCache,
 } from 'cspell-lib';
 import type { Comment, Identifier, ImportSpecifier, Literal, Node, TemplateElement } from 'estree';
-import * as path from 'path';
-import { format } from 'util';
 
 import { getDefaultLogger } from '../common/logger.cjs';
 import type { CustomWordListFile, WorkerOptions } from '../common/options.cjs';
@@ -429,9 +430,9 @@ function normalizeSuggestions(suggestions: Suggestions, nodeType: NodeType): Sug
     return suggestions.map((sug) => {
         if (!isSpecial.test(sug.word)) return sug;
         const s = { ...sug };
-        s.word = s.word.replace(allSpecial, '_');
+        s.word = s.word.replaceAll(allSpecial, '_');
         if (s.wordAdjustedToMatchCase) {
-            s.wordAdjustedToMatchCase = s.wordAdjustedToMatchCase.replace(allSpecial, '_');
+            s.wordAdjustedToMatchCase = s.wordAdjustedToMatchCase.replaceAll(allSpecial, '_');
         }
         return s;
     });
@@ -445,7 +446,7 @@ function deepEqual(a: unknown, b: unknown): boolean {
     try {
         assert.deepStrictEqual(a, b);
         return true;
-    } catch (e) {
+    } catch (_) {
         return false;
     }
 }

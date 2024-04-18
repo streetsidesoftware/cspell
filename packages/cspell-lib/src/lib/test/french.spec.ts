@@ -1,16 +1,21 @@
-import * as fs from 'fs';
-import * as path from 'path';
+import * as fs from 'node:fs';
+import { createRequire } from 'node:module';
+import * as path from 'node:path';
+
 import { describe, expect, test } from 'vitest';
 
 import { pathPackageSamples } from '../../test-util/index.mjs';
 import * as cspell from '../index.js';
 import * as util from '../util/util.js';
 
+const require = createRequire(import.meta.url);
+
 const sampleFilename = path.join(pathPackageSamples, 'French.md');
 const text = fs.readFileSync(sampleFilename, 'utf8').toString();
+// eslint-disable-next-line unicorn/prefer-module
 const frenchConfig = require.resolve('@cspell/dict-fr-fr/cspell-ext.json');
 
-const timeout = 10000;
+const timeout = 10_000;
 
 describe('Validate that French text is correctly checked.', () => {
     test(

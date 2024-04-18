@@ -285,7 +285,7 @@ describe('Validate Suggest', () => {
             ignoreCase,
             changeLimit,
             compoundSeparator: '•',
-            timeout: 1000000,
+            timeout: 1_000_000,
         });
         expect(r).toEqual(expected);
     });

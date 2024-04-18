@@ -29,7 +29,7 @@ export async function validateText(
         options.validateDirectives || finalSettings.validateDirectives
             ? validateInDocumentSettings(text, settings)
             : [];
-    const issues: ValidationIssue[] = spellingIssues.concat(mapValidationIssues(text, validationIssues));
+    const issues: ValidationIssue[] = [...spellingIssues, ...mapValidationIssues(text, validationIssues)];
     if (!options.generateSuggestions) {
         return issues;
     }

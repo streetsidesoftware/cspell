@@ -1,3 +1,5 @@
+import * as path from 'node:path';
+
 import type {
     CustomDictionaryScope,
     DictionaryDefinition,
@@ -9,7 +11,6 @@ import type {
 } from '@cspell/cspell-types';
 import type { WeightMap } from 'cspell-trie-lib';
 import { mapDictionaryInformationToWeightMap } from 'cspell-trie-lib';
-import * as path from 'path';
 
 import type {
     CSpellSettingsInternal,
@@ -112,7 +113,7 @@ function determineName(filename: string, options: DictionaryDefinition): string 
 export function calcDictionaryDefsToLoad(settings: CSpellSettingsInternal): DictionaryDefinitionInternal[] {
     const { dictionaries = [], dictionaryDefinitions = [], noSuggestDictionaries = [] } = settings;
     const colNoSug = createDictionaryReferenceCollection(noSuggestDictionaries);
-    const colDicts = createDictionaryReferenceCollection(dictionaries.concat(colNoSug.enabled()));
+    const colDicts = createDictionaryReferenceCollection([...dictionaries, ...colNoSug.enabled()]);
     const modDefs = dictionaryDefinitions.map((def) => {
         const enabled = colNoSug.isEnabled(def.name);
         if (enabled === undefined) return def;

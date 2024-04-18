@@ -1,4 +1,5 @@
-import assert from 'assert';
+import assert from 'node:assert';
+
 import { spellCheckDocument } from 'cspell-lib';
 
 // cspell:ignore wordz coztom clockz cuztom

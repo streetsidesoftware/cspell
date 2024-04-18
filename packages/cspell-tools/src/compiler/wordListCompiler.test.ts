@@ -1,11 +1,12 @@
 // cSpell:ignore jpegs outing dirs lcode outring outrings
 
+import * as fsp from 'node:fs/promises';
+import * as path from 'node:path';
+
 import { opConcatMap, opTake, pipe, toArray } from '@cspell/cspell-pipe/sync';
 import * as Trie from 'cspell-trie-lib';
 import { importTrie, isCircular, iteratorTrieWords, serializeTrie } from 'cspell-trie-lib';
-import * as fsp from 'fs/promises';
 import { uniqueFilter } from 'hunspell-reader';
-import * as path from 'path';
 import { beforeEach, describe, expect, test, vi } from 'vitest';
 
 import { spyOnConsole } from '../test/console.js';
@@ -102,7 +103,7 @@ describe('Validate the wordListCompiler', () => {
         const resultLines = resultFile.split('\n');
         const node = Trie.importTrie(resultLines);
         const words = [...Trie.iteratorTrieWords(node)].filter((a) => !a.startsWith('~')).sort();
-        expect(words).toEqual(source.concat().sort());
+        expect(words).toEqual([...source].sort());
         expect(consoleOutput()).toMatchSnapshot();
     });
 
@@ -159,7 +160,7 @@ describe('Validate Larger Dictionary', () => {
         const nWords = toArray(legacyNormalizeWords(words)).sort().filter(uniqueFilter(1000));
         const results = [...iteratorTrieWords(trie)].sort().filter(uniqueFilter(1000));
         expect(results).toEqual(nWords);
-    }, 60000);
+    }, 60_000);
 
     test('en_US word list', async () => {
         const source = await streamSourceWordsFromFile(sampleDictEn, readOptions);
@@ -173,7 +174,7 @@ describe('Validate Larger Dictionary', () => {
         const trie2 = importTrie(data);
         const results2 = [...iteratorTrieWords(trie2)];
         expect(results2).toEqual(results);
-    }, 60000);
+    }, 60_000);
 });
 
 async function compileTrie(words: Iterable<string>, destFilename: string, options: CompileTrieOptions): Promise<void> {

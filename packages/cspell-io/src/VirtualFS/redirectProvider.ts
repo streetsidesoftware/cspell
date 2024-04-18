@@ -1,4 +1,4 @@
-import assert from 'assert';
+import assert from 'node:assert';
 
 import { renameFileReference, renameFileResource, urlOrReferenceToUrl } from '../common/index.js';
 import type { DirEntry, FileReference, FileResource } from '../models/index.js';

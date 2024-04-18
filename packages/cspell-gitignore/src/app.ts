@@ -1,4 +1,4 @@
-import * as path from 'path';
+import * as path from 'node:path';
 
 import { GitIgnore } from './GitIgnore.js';
 import { findRepoRoot } from './helpers.js';

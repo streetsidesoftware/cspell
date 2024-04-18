@@ -1,5 +1,5 @@
 import Path from 'node:path';
-import { pathToFileURL } from 'node:url';
+import { fileURLToPath, pathToFileURL } from 'node:url';
 
 import { describe, expect, test } from 'vitest';
 import { URI } from 'vscode-uri';
@@ -17,6 +17,8 @@ import {
     toUri,
     uriToFilePath,
 } from './Uri.js';
+
+const __filename = fileURLToPath(import.meta.url);
 
 const { toEqualCaseInsensitive } = extendExpect(expect);
 
@@ -143,7 +145,7 @@ function unTitleCase(s: string): string {
 }
 
 function normalizePath(path: string): string {
-    const p = normalizeDriveLetter(path.replace(/\\/g, '/'));
+    const p = normalizeDriveLetter(path.replaceAll('\\', '/'));
     return p.startsWith('/') ? p : '/' + p;
 }
 

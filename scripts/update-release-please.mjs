@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-import { readFile, readdir, writeFile } from 'fs/promises';
+import { readdir, readFile, writeFile } from 'node:fs/promises';
 
 const packagesDir = 'packages/';
 

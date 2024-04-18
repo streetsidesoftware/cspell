@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
-import { readFile, writeFile } from 'fs/promises';
-import * as path from 'path';
+import { readFile, writeFile } from 'node:fs/promises';
+import * as path from 'node:path';
 
 /**
  *
@@ -9,10 +9,10 @@ import * as path from 'path';
  * @return {string}
  */
 function normalize(content) {
-    content = content.replace(/\r/g, '');
-    content = content.replace(/^\s*\d+\/\d+/gm, '');
-    content = content.replace(/\n\n/g, '\n');
-    content = content.replace(/[\d.]+ms/g, ' ms');
+    content = content.replaceAll('\r', '');
+    content = content.replaceAll(/^\s*\d+\/\d+/gm, '');
+    content = content.replaceAll('\n\n', '\n');
+    content = content.replaceAll(/[\d.]+ms/g, ' ms');
     return content;
 }
 

@@ -1,6 +1,6 @@
-import { readFile } from 'fs/promises';
-import { join, resolve } from 'path';
-import { fileURLToPath } from 'url';
+import { readFile } from 'node:fs/promises';
+import { join, resolve } from 'node:path';
+import { fileURLToPath } from 'node:url';
 
 const __dirname = fileURLToPath(new URL('.', import.meta.url));
 

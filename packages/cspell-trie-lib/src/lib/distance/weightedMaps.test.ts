@@ -23,7 +23,7 @@ describe('Validate weightedMaps', () => {
     test.each`
         map             | expected
         ${''}           | ${[]}
-        ${'abc'}        | ${'abc'.split('')}
+        ${'abc'}        | ${[...'abc']}
         ${'f(ph)(gh)v'} | ${['f', 'ph', 'gh', 'v']}
     `('splitMapSubstrings "$map"', ({ map, expected }) => {
         expect(splitMapSubstrings(map)).toEqual(expected);
@@ -33,8 +33,8 @@ describe('Validate weightedMaps', () => {
         map                 | expected
         ${''}               | ${[]}
         ${'||'}             | ${[]}
-        ${'abc'}            | ${['abc'.split('')]}
-        ${'abc|'}           | ${['abc'.split('')]}
+        ${'abc'}            | ${[[...'abc']]}
+        ${'abc|'}           | ${[[...'abc']]}
         ${'f(ph)(gh)v|eé'}  | ${[['f', 'ph', 'gh', 'v'], ['e', 'é', 'é'.normalize('NFD')]]}
         ${'f(ph)(😁)🤣|eé'} | ${[['f', 'ph', '😁', '🤣'], ['e', 'é', 'é'.normalize('NFD')]]}
     `('splitMap "$map"', ({ map, expected }) => {
@@ -220,7 +220,7 @@ describe('Validate weightedMaps', () => {
 });
 
 function sep(s: string): string {
-    return s.replace(/[|+]/g, DEFAULT_COMPOUNDED_WORD_SEPARATOR);
+    return s.replaceAll(/[|+]/g, DEFAULT_COMPOUNDED_WORD_SEPARATOR);
 }
 
 // function mo(...opts: Partial<SuggestionCostMapDef>[]): Partial<SuggestionCostMapDef> {

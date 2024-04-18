@@ -1,3 +1,6 @@
+import * as path from 'node:path';
+import { format } from 'node:util';
+
 import { isAsyncIterable, operators, opFilter, pipeAsync } from '@cspell/cspell-pipe';
 import { opMap, pipe } from '@cspell/cspell-pipe/sync';
 import type {
@@ -26,8 +29,6 @@ import {
     spellCheckDocument,
     Text as cspellText,
 } from 'cspell-lib';
-import * as path from 'path';
-import { format } from 'util';
 import { URI } from 'vscode-uri';
 
 import { npmPackage } from '../../lib/pkgInfo.cjs';
@@ -247,7 +248,7 @@ export async function runLint(cfg: LintRequest): Promise<RunResult> {
         configInfo: ConfigInfo,
         cacheSettings: CreateCacheSettings,
     ): Promise<RunResult> {
-        const fileCount = files instanceof Array ? files.length : undefined;
+        const fileCount = Array.isArray(files) ? files.length : undefined;
         const status: RunResult = runResult();
         const cache = createCache(cacheSettings);
         const failFast = cfg.options.failFast ?? configInfo.config.failFast ?? false;
@@ -372,7 +373,7 @@ export async function runLint(cfg: LintRequest): Promise<RunResult> {
     function calcDependencies(config: CSpellSettings): ConfigDependencies {
         const { configFiles, dictionaryFiles } = extractDependencies(config);
 
-        return { files: configFiles.concat(dictionaryFiles) };
+        return { files: [...configFiles, ...dictionaryFiles] };
     }
 
     async function reportConfigurationErrors(config: CSpellSettings): Promise<number> {
@@ -461,7 +462,7 @@ export async function runLint(cfg: LintRequest): Promise<RunResult> {
     }
 
     function header(files: string[], cliExcludes: string[]) {
-        const formattedFiles = files.length > 100 ? files.slice(0, 100).concat(['...']) : files;
+        const formattedFiles = files.length > 100 ? [...files.slice(0, 100), '...'] : files;
 
         reporter.info(
             `
@@ -519,7 +520,7 @@ async function determineGlobs(configInfo: ConfigInfo, cfg: LintRequest): Promise
     const cliExcludeGlobs = extractPatterns(cfg.excludes).map((p) => p.glob as Glob);
     const normalizedExcludes = normalizeGlobsToRoot(cliExcludeGlobs, cfg.root, true);
     const includeGlobs = combinedGlobs.filter((g) => !g.startsWith('!'));
-    const excludeGlobs = combinedGlobs.filter((g) => g.startsWith('!')).concat(normalizedExcludes);
+    const excludeGlobs = [...combinedGlobs.filter((g) => g.startsWith('!')), ...normalizedExcludes];
     const fileGlobs: string[] = includeGlobs;
 
     const appGlobs = { allGlobs, gitIgnore, fileGlobs, excludeGlobs, normalizedExcludes };
@@ -539,14 +540,14 @@ async function determineFilesToCheck(
 
         // Get Exclusions from the config files.
         const { root } = cfg;
-        const globsToExclude = (configInfo.config.ignorePaths || []).concat(excludeGlobs);
+        const globsToExclude = [...(configInfo.config.ignorePaths || []), ...excludeGlobs];
         const globMatcher = buildGlobMatcher(globsToExclude, root, true);
         const ignoreGlobs = extractGlobsFromMatcher(globMatcher);
         // cspell:word nodir
         const globOptions: GlobOptions = {
             root,
             cwd: root,
-            ignore: ignoreGlobs.concat(normalizedExcludes),
+            ignore: [...ignoreGlobs, ...normalizedExcludes],
             nodir: true,
         };
         const enableGlobDot = cfg.enableGlobDot ?? configInfo.config.enableGlobDot;

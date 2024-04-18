@@ -1,4 +1,5 @@
-import * as path from 'path';
+import * as path from 'node:path';
+
 import type { SpyInstance } from 'vitest';
 import { afterEach, beforeEach, describe, expect, test, vi } from 'vitest';
 
@@ -32,11 +33,11 @@ describe('app', () => {
         const stderr = error.mock.calls
             .map((c) => c.join(''))
             .join('\n')
-            .replace(/\\/g, '/');
+            .replaceAll('\\', '/');
         const stdout = log.mock.calls
             .map((c) => c.join(''))
             .join('\n')
-            .replace(/\\/g, '/');
+            .replaceAll('\\', '/');
         expect(stdout).toMatchSnapshot();
         expect(stderr).toMatchSnapshot();
     });

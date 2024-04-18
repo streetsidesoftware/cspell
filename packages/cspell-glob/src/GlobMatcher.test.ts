@@ -1,5 +1,6 @@
+import * as path from 'node:path';
+
 import mm from 'micromatch';
-import * as path from 'path';
 import { describe, expect, test } from 'vitest';
 
 import type { GlobMatchOptions, MatcherMode } from './GlobMatcher.js';
@@ -287,12 +288,12 @@ describe('Validate Options', () => {
         root = root || '/Users/code/project/cspell/';
         const filename = path.join(root, file);
         const patterns = pattern.split('|');
-        options == options ?? root;
-        if (typeof options !== 'string' && typeof options !== 'undefined') {
-            options.root = options.root ?? root;
+        const _options = options ?? root;
+        if (typeof _options !== 'string' && typeof _options !== 'undefined') {
+            _options.root = _options.root ?? root;
         }
         expected = typeof expected === 'boolean' ? { matched: expected } : expected;
-        const matcher = new GlobMatcher(patterns, options);
+        const matcher = new GlobMatcher(patterns, _options);
         const r = matcher.matchEx(filename);
         expect(r).toEqual(expect.objectContaining(expected));
     });

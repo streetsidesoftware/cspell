@@ -1,5 +1,6 @@
-import { promises as fs, readFileSync } from 'fs';
-import * as path from 'path';
+import { promises as fs, readFileSync } from 'node:fs';
+import * as path from 'node:path';
+
 import { describe, expect, test } from 'vitest';
 
 import { TypeScript } from '../grammars/index.js';

@@ -1,11 +1,12 @@
-import * as path from 'path';
+import * as path from 'node:path';
+
 import { describe, expect, it } from 'vitest';
 
 import * as Aff from './affLegacy.js';
 import * as AffReader from './affReader.js';
 import { IterableHunspellReaderLegacy } from './IterableHunspellReaderLegacy.js';
 
-const timeout = 10000;
+const timeout = 10_000;
 
 describe('HunspellReader NL', function () {
     // We are reading big files, so we need to give it some time.

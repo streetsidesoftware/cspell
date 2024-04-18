@@ -1,8 +1,8 @@
 import { statSync } from 'node:fs';
+import { sep as pathSep } from 'node:path';
+import { pathToFileURL } from 'node:url';
 
 import { resolve } from 'import-meta-resolve';
-import { sep as pathSep } from 'path';
-import { pathToFileURL } from 'url';
 
 const isWindowsPath = /^[a-z]:\\/i;
 
@@ -63,7 +63,7 @@ export function importResolveModuleName(moduleName: string | URL, paths: (string
                 if (s.isFile()) {
                     return resolvedURL;
                 }
-            } catch (err) {
+            } catch (_) {
                 const error: ErrorWithCode = new Error(`Cannot find module ${moduleName}`);
                 error.code = 'ERR_MODULE_NOT_FOUND';
                 lastError = error;

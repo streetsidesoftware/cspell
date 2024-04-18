@@ -81,5 +81,5 @@ export function removeAccents(text: string): string {
 }
 
 export function removeLooseAccents(text: string): string {
-    return text.replace(/\p{M}/gu, '');
+    return text.replaceAll(/\p{M}/gu, '');
 }

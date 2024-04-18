@@ -52,6 +52,6 @@ export function padLeft(s: string, w: number): string {
 }
 
 export function width(s: string): number {
-    // eslint-disable-next-line no-control-regex
-    return s.replace(/[\u0300-\u036f\x00-\x1f]/g, '').length;
+    // eslint-disable-next-line no-control-regex, no-misleading-character-class
+    return s.replaceAll(/[\u0000-\u001F\u0300-\u036F]/g, '').length;
 }

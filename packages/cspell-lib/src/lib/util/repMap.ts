@@ -15,10 +15,10 @@ export function createMapper(repMap: ReplaceMap): ReplaceMapper {
         .map((s) => {
             try {
                 // fix up any nested ()
-                const r = s.match(/\(/) ? s.replace(/\((?=.*\))/g, '(?:').replace(/\(\?:\?/g, '(?') : s;
+                const r = s.match(/\(/) ? s.replaceAll(/\((?=.*\))/g, '(?:').replaceAll('(?:?', '(?') : s;
                 new RegExp(r);
                 s = r;
-            } catch (err) {
+            } catch {
                 return escapeRegEx(s);
             }
             return s;

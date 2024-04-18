@@ -1,5 +1,6 @@
+import * as path from 'node:path';
+
 import { findUp } from 'find-up-simple';
-import * as path from 'path';
 
 interface ParsedPath {
     /**
@@ -111,7 +112,7 @@ export function factoryPathHelper(path: PathInterface): PathHelper {
     }
 
     function normalizePath(path: string): string {
-        return path.replace(/\\/g, '/');
+        return path.replaceAll('\\', '/');
     }
 
     return {

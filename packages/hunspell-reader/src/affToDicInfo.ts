@@ -37,15 +37,15 @@ function extractAlphabet(aff: AffInfo, locale: string): AlphabetInfo {
     const setOfLetters = new Set(
         sources
             .filter(isDefined)
-            .flatMap((a) => a)
+            .flat()
             .map((a) => a.normalize())
             .flatMap((a) => [...a, ...a.toLocaleLowerCase(locale), ...a.toLocaleUpperCase(locale)])
             .map((a) => a.trim())
             .filter((a) => !!a),
     );
 
-    const alphabet = [...setOfLetters].sort().join('').replace(/\P{L}/gu, '');
-    const accents = new Set(alphabet.normalize('NFD').replace(/\P{M}/gu, ''));
+    const alphabet = [...setOfLetters].sort().join('').replaceAll(/\P{L}/gu, '');
+    const accents = new Set(alphabet.normalize('NFD').replaceAll(/\P{M}/gu, ''));
 
     return { locale, alphabet, accents };
 }

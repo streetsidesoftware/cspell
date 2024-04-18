@@ -31,7 +31,7 @@ const defaultAdjustments: PenaltyAdjustment[] = [
 ];
 
 export function mapDictionaryInformationToWeightMap(dictInfo: DictionaryInformation): WeightMap {
-    const defs = mapDictionaryInformation(dictInfo).concat(defaultDefs);
+    const defs = [...mapDictionaryInformation(dictInfo), ...defaultDefs];
     const adjustments = mapDictionaryInformationToAdjustment(dictInfo);
     const map = createWeightMap(...defs);
     addAdjustment(map, ...defaultAdjustments, ...adjustments);

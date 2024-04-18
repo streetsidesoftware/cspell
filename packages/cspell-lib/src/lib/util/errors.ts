@@ -1,4 +1,4 @@
-import { format } from 'util';
+import { format } from 'node:util';
 
 function getTypeOf(t: unknown) {
     return typeof t;

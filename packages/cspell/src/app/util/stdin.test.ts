@@ -1,4 +1,5 @@
-import * as readline from 'readline';
+import * as readline from 'node:readline';
+
 import { describe, expect, test, vi } from 'vitest';
 
 import { asyncIterableToArray, mergeAsyncIterables } from './async.js';

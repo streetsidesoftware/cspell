@@ -1,4 +1,5 @@
-import { readFile } from 'fs/promises';
+import { readFile } from 'node:fs/promises';
+
 import { describe, expect, test } from 'vitest';
 
 import { resolveSample } from '../../test/samples.js';
@@ -9,7 +10,7 @@ describe('Import/Export', () => {
     test('tests serialize / deserialize from trie', async () => {
         const trie = Trie.createTrieRootFromList(sampleWords);
         const data = [...serializeTrie(trie, { base: 10, comment: 'Sample Words' })].join('');
-        const sample = (await readFile(resolveSample('sampleV2.trie'), 'utf8')).replace(/\r?\n/g, '\n');
+        const sample = (await readFile(resolveSample('sampleV2.trie'), 'utf8')).replaceAll(/\r?\n/g, '\n');
         expect(data).toBe(sample);
         const root = importTrie(data.split('\n'));
         const words = [...Trie.iteratorTrieWords(root)];

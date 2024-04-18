@@ -1,6 +1,7 @@
-import { readdirSync } from 'fs';
+import { readdirSync } from 'node:fs';
+import * as path from 'node:path';
+
 import { genSequence } from 'gensequence';
-import * as path from 'path';
 import { describe, expect, it, test } from 'vitest';
 
 import * as Aff from './affLegacy.js';
@@ -70,7 +71,7 @@ describe('Basic Validation of the Reader', () => {
     });
 });
 
-const timeout = 10000;
+const timeout = 10_000;
 
 describe('HunspellReader En', function () {
     // We are reading big files, so we need to give it some time.
@@ -82,7 +83,7 @@ describe('HunspellReader En', function () {
         'reads dict entries',
         async () => {
             const reader = await pReader;
-            const values = reader.dicWordsSeq().skip(10000).take(10).toArray();
+            const values = reader.dicWordsSeq().skip(10_000).take(10).toArray();
             expect(values.length).toBe(10);
         },
         timeout,
@@ -92,7 +93,7 @@ describe('HunspellReader En', function () {
         'reads words with info',
         async () => {
             const reader = await pReader;
-            const values = reader.seqWords().skip(10000).take(10).toArray();
+            const values = reader.seqWords().skip(10_000).take(10).toArray();
             expect(values.length).toBe(10);
         },
         timeout,
@@ -102,7 +103,7 @@ describe('HunspellReader En', function () {
         'reads words',
         async () => {
             const reader = await pReader;
-            const values = genSequence(reader).skip(10000).take(10).toArray();
+            const values = genSequence(reader).skip(10_000).take(10).toArray();
             expect(values.length).toBe(10);
         },
         timeout,

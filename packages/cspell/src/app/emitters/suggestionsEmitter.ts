@@ -15,10 +15,11 @@ export interface TimedSuggestionsForWordResult extends SuggestionsForWordResult 
     elapsedTimeMs?: number;
 }
 
-const regExpRTL = /([\u0591-\u07FF\uFB1D-\uFDFD\uFE70-\uFEFC י]+)/g;
+// eslint-disable-next-line no-misleading-character-class
+const regExpRTL = /([ \u0591-\u07FF\uFB1D-\uFDFD\uFE70-\uFEFC]+)/g;
 
 function reverseRtlText(s: string): string {
-    return s.replace(regExpRTL, (s) => s.split('').reverse().join(''));
+    return s.replaceAll(regExpRTL, (s) => [...s].reverse().join(''));
 }
 
 export function emitSuggestionResult(result: TimedSuggestionsForWordResult, options: EmitSuggestionOptions): void {

@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-import { program, CommanderError } from 'commander';
+import { CommanderError, program } from 'commander';
 
 import * as app from './dist/esm/app.mjs';
 

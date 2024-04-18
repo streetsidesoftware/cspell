@@ -1,8 +1,9 @@
+import assert from 'node:assert';
+import { promises as fs } from 'node:fs';
+import * as path from 'node:path';
+import { fileURLToPath, pathToFileURL } from 'node:url';
+
 import type { CSpellUserSettings } from '@cspell/cspell-types';
-import assert from 'assert';
-import { promises as fs } from 'fs';
-import * as path from 'path';
-import { pathToFileURL } from 'url';
 import { describe, expect, test } from 'vitest';
 
 import { pathPackageFixtures, pathPackageRoot, pathRepoTestFixtures } from '../../test-util/test.locations.cjs';
@@ -15,6 +16,8 @@ import { toUri } from '../util/Uri.js';
 import type { DocumentValidatorOptions } from './docValidator.js';
 import { __testing__, DocumentValidator, shouldCheckDocument } from './docValidator.js';
 
+const __filename = fileURLToPath(import.meta.url);
+
 const docCache = new AutoCache(_loadDoc, 100);
 const fixturesDir = pathPackageFixtures;
 
@@ -24,7 +27,7 @@ const sc = expect.stringContaining;
 
 const { sanitizeSuggestion } = __testing__;
 
-const timeout = 10000;
+const timeout = 10_000;
 
 describe('docValidator', () => {
     test('DocumentValidator', () => {
@@ -105,7 +108,7 @@ describe('docValidator', () => {
         ${fix('sample-with-errors.ts')} | ${'Helllo'} | ${[oc({ text: 'Helllo', suggestions: ac(['hello']) })]}
     `('checkText suggestions $filename "$text"', async ({ filename, text, expected }) => {
         const doc = await loadDoc(filename);
-        const dVal = new DocumentValidator(doc, { generateSuggestions: true }, { suggestionsTimeout: 10000 });
+        const dVal = new DocumentValidator(doc, { generateSuggestions: true }, { suggestionsTimeout: 10_000 });
         await dVal.prepare();
         const offset = doc.text.indexOf(text);
         assert(offset >= 0);
@@ -120,7 +123,7 @@ describe('docValidator', () => {
         ${fix('sample-with-errors.ts')} | ${'Helllo'} | ${[oc({ text: 'Helllo', suggestions: ac(['hello']) })]}
     `('checkText Async suggestions $filename "$text"', async ({ filename, text, expected }) => {
         const doc = await loadDoc(filename);
-        const dVal = new DocumentValidator(doc, { generateSuggestions: true }, { suggestionsTimeout: 10000 });
+        const dVal = new DocumentValidator(doc, { generateSuggestions: true }, { suggestionsTimeout: 10_000 });
         await dVal.prepare();
         const offset = doc.text.indexOf(text);
         assert(offset >= 0);

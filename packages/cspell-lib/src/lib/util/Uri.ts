@@ -1,4 +1,5 @@
-import assert from 'assert';
+import assert from 'node:assert';
+
 import { URI, Utils } from 'vscode-uri';
 
 export interface Uri {
@@ -107,7 +108,7 @@ class UriImpl extends URI implements UriInstance {
 
     toString(): string {
         // if (this.scheme !== 'stdin') return super.toString(true);
-        const path = encodeURI(this.path || '').replace(/[#?]/g, (c) => `%${c.charCodeAt(0).toString(16)}`);
+        const path = encodeURI(this.path || '').replaceAll(/[#?]/g, (c) => `%${c.charCodeAt(0).toString(16)}`);
         const base = `${this.scheme}://${this.authority || ''}${path}`;
         const query = (this.query && `?${this.query}`) || '';
         const fragment = (this.fragment && `#${this.fragment}`) || '';
@@ -162,7 +163,7 @@ class UriImpl extends URI implements UriInstance {
 }
 
 function normalizeFilePath(path: string): string {
-    return normalizeDriveLetter(path.replace(/\\/g, '/'));
+    return normalizeDriveLetter(path.replaceAll('\\', '/'));
 }
 
 function parseStdinUri(uri: string): Uri {

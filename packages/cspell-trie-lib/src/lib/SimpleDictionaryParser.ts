@@ -191,7 +191,7 @@ export function createDictionaryLineParserMapper(options?: Partial<ParseDictiona
     }
 
     function stripKeepCasePrefixAndQuotes(word: string): string {
-        word = word.replace(/"(.*?)"/g, '$1');
+        word = word.replaceAll(/"(.*?)"/g, '$1');
         return word[0] === keepCase ? word.slice(1) : word;
     }
 
@@ -216,11 +216,11 @@ export function createDictionaryLineParserMapper(options?: Partial<ParseDictiona
             if (split) {
                 const lineEscaped =
                     line.indexOf('"') >= 0
-                        ? line.replace(/".*?"/g, (quoted) => ' ' + quoted.replace(/(\s)/g, '\\$1') + ' ')
+                        ? line.replaceAll(/".*?"/g, (quoted) => ' ' + quoted.replaceAll(/(\s)/g, '\\$1') + ' ')
                         : line;
 
                 const words = splitLine(lineEscaped, splitSeparator);
-                yield* words.map((escaped) => escaped.replace(/\\/g, ''));
+                yield* words.map((escaped) => escaped.replaceAll('\\', ''));
                 if (!splitKeepBoth) continue;
             }
             yield line;
@@ -311,11 +311,11 @@ const RegExpToEncode = /\\([\s,;])/g;
 const RegExpDecode = /<<(%[\da-f]{2})>>/gi;
 
 function encodeLine(line: string): string {
-    return line.replace(RegExpToEncode, (_, v) => '<<' + encodeURIComponent(v) + '>>');
+    return line.replaceAll(RegExpToEncode, (_, v) => '<<' + encodeURIComponent(v) + '>>');
 }
 
 function decodeLine(line: string): string {
-    return line.replace(RegExpDecode, (_, v) => '\\' + decodeURIComponent(v));
+    return line.replaceAll(RegExpDecode, (_, v) => '\\' + decodeURIComponent(v));
 }
 
 function splitLine(line: string, regExp: RegExp | string): string[] {

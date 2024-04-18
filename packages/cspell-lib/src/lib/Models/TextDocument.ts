@@ -1,4 +1,5 @@
-import assert from 'assert';
+import assert from 'node:assert';
+
 import { TextDocument as VsTextDocument } from 'vscode-languageserver-textdocument';
 
 import { getFileSystem } from '../fileSystem.js';

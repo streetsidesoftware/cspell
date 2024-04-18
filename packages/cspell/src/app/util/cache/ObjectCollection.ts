@@ -166,7 +166,7 @@ function addToCollection<T>(root: CollectionRoot, v: T): T {
 function toValueType(v: any): Types {
     const t = typeof v;
     if (t !== 'object') return t;
-    if (v instanceof Array) return 'array';
+    if (Array.isArray(v)) return 'array';
     if (v === null) return 'null';
     return t;
 }

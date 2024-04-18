@@ -11,7 +11,7 @@ export function createMapper(repMap: ReplaceMap | undefined, ignoreCharset?: str
     repMap = repMap || [];
     const charsetMap = charsetToRepMapRegEx(ignoreCharset);
     if (charsetMap) {
-        repMap = repMap.concat(charsetMap);
+        repMap = [...repMap, ...charsetMap];
     }
 
     const filteredMap = repMap.filter(([match, _]) => !!match);
@@ -37,7 +37,7 @@ function charsetToRepMapRegEx(charset: CharacterSet | undefined, replaceWith = '
 
     return charset
         .split('|')
-        .map((chars) => `[${chars.replace(/[\][\\]/g, '\\$&')}]`)
+        .map((chars) => `[${chars.replaceAll(/[\][\\]/g, '\\$&')}]`)
         .map((map) => [map, replaceWith]);
 }
 function charsetToRepMap(charset: undefined, replaceWith?: string): undefined;
@@ -67,10 +67,10 @@ function createMapperRegExp(repMap: ReplaceMap): RegExp {
         .map((s) => {
             try {
                 // fix up any nested ()
-                const r = s.match(/\(/) ? s.replace(/\((?=.*\))/g, '(?:').replace(/\(\?:\?/g, '(?') : s;
+                const r = s.match(/\(/) ? s.replaceAll(/\((?=.*\))/g, '(?:').replaceAll('(?:?', '(?') : s;
                 new RegExp(r);
                 s = r;
-            } catch (err) {
+            } catch (_err) {
                 return escapeRegEx(s);
             }
             return s;
@@ -161,7 +161,7 @@ function calcAllEdits(root: RepTrieNode, word: string): Edit[] {
 }
 
 function createTrie(repMap: ReplaceMap | undefined, ignoreCharset?: string): RepTrieNode {
-    const combined = [repMap, charsetToRepMap(ignoreCharset)].filter(isDefined).flatMap((a) => a);
+    const combined = [repMap, charsetToRepMap(ignoreCharset)].filter(isDefined).flat();
     const expanded = expandReplaceMap(combined);
 
     const trieRoot: RepTrieNode = Object.create(null);

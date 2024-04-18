@@ -1,5 +1,6 @@
+import * as Path from 'node:path';
+
 import * as Commander from 'commander';
-import * as Path from 'path';
 import type { Constructable } from 'vitest';
 import { afterEach, describe, expect, test, vi } from 'vitest';
 

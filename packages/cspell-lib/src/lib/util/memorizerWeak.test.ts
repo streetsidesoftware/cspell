@@ -13,7 +13,7 @@ describe('memorizer Weak', () => {
         const a = ['a'] as const;
         const b = ['b'] as const;
         const c = ['c'] as const;
-        const aa = a.concat() as [string];
+        const aa = [...a] as [string];
 
         const requests: (readonly [string])[][] = [];
         requests.push([a], [a, b, c], [a], [a, b, c]);

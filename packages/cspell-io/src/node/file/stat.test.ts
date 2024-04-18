@@ -1,4 +1,5 @@
-import { join } from 'path';
+import { join } from 'node:path';
+
 import { describe, expect, test } from 'vitest';
 
 import { getStat, getStatSync } from './stat.js';
@@ -6,7 +7,7 @@ import { getStat, getStatSync } from './stat.js';
 const oc = expect.objectContaining;
 const sc = expect.stringContaining;
 
-const timeout = 20000;
+const timeout = 20_000;
 
 describe('stat', () => {
     test.each`

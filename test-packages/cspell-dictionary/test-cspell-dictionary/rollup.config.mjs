@@ -1,8 +1,8 @@
-import rollupPluginNodeResolve from '@rollup/plugin-node-resolve';
-import rollupPluginTypescript from '@rollup/plugin-typescript';
-import rollupPluginJson from '@rollup/plugin-json';
 import rollupPluginCommonjs from '@rollup/plugin-commonjs';
+import rollupPluginJson from '@rollup/plugin-json';
+import rollupPluginNodeResolve from '@rollup/plugin-node-resolve';
 import rollupPluginTerser from '@rollup/plugin-terser';
+import rollupPluginTypescript from '@rollup/plugin-typescript';
 // import { readFileSync } from 'fs';
 
 // const pkg = JSON.parse(readFileSync('./package.json', 'utf-8'));

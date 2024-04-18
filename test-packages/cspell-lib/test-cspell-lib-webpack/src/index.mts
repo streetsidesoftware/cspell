@@ -1,6 +1,7 @@
-import assert from 'assert';
+import assert from 'node:assert';
+import { format } from 'node:util';
+
 import * as lib from 'cspell-lib';
-import { format } from 'util';
 
 console.log('start');
 

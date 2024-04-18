@@ -227,7 +227,7 @@ function getSampleWords() {
     const rawWords = [...textWords, ...otherWords]
         .map((word) => word.normalize('NFC'))
         .flatMap((word) => [word, word.toLowerCase(), word.toUpperCase()])
-        .flatMap((word) => [word, word.normalize('NFD').replace(/\p{M}/gu, '')])
+        .flatMap((word) => [word, word.normalize('NFD').replaceAll(/\p{M}/gu, '')])
         .map((a) => a.trim())
         .filter((a) => !!a);
     const setOfWords = new Set(rawWords);

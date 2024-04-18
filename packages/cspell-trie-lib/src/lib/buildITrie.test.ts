@@ -1,4 +1,5 @@
-import { resolve } from 'path';
+import { resolve } from 'node:path';
+
 import { describe, expect, test } from 'vitest';
 
 import { readFile } from '../test/reader.test.helper.js';

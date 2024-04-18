@@ -1,6 +1,6 @@
-import * as fs from 'fs/promises';
-import * as path from 'path';
-import * as zlib from 'zlib';
+import * as fs from 'node:fs/promises';
+import * as path from 'node:path';
+import * as zlib from 'node:zlib';
 
 import { importTrie } from '../lib/io/importExport.js';
 import { Trie } from '../lib/trie.js';
@@ -21,7 +21,7 @@ export interface Config {
 
 export async function readConfig(configLocation: string): Promise<Config> {
     const json = await readFile(configLocation, 'utf-8');
-    return JSON.parse(json.replace(/\/\/.*/g, ''));
+    return JSON.parse(json.replaceAll(/\/\/.*/g, ''));
 }
 
 export async function readRawDictionaryFileFromConfig(configLocation: string, name?: string): Promise<Buffer> {

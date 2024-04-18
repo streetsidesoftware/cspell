@@ -34,10 +34,23 @@ const REF_INDEX_END = ']';
 const INLINE_DATA_COMMENT_LINE = '/';
 
 const specialCharacters = stringToCharSet(
-    [EOW, BACK, EOL, REF, REF_REL, EOR, ESCAPE, LF, REF_INDEX_BEGIN, REF_INDEX_END, INLINE_DATA_COMMENT_LINE]
-        .concat('0123456789'.split(''))
-        .concat('`~!@#$%^&*()_-+=[]{};:\'"<>,./?\\|'.split(''))
-        .join(''),
+    [
+        ...[
+            EOW,
+            BACK,
+            EOL,
+            REF,
+            REF_REL,
+            EOR,
+            ESCAPE,
+            LF,
+            REF_INDEX_BEGIN,
+            REF_INDEX_END,
+            INLINE_DATA_COMMENT_LINE,
+            ...'0123456789',
+        ],
+        ...'`~!@#$%^&*()_-+=[]{};:\'"<>,./?\\|',
+    ].join(''),
 );
 
 const SPECIAL_CHARACTERS_MAP = [
@@ -195,7 +208,7 @@ export function serializeTrie(root: TrieRoot, options: ExportOptions | number = 
         resolvedReferences
             .map((n) => n.toString(radix))
             .join(',')
-            .replace(/.{110,130}[,]/g, '$&\n') +
+            .replaceAll(/.{110,130}[,]/g, '$&\n') +
         '\n]\n';
 
     return pipe([generateHeader(radix, comment), reference], opAppend(lines));
@@ -459,7 +472,7 @@ function parseStream(radix: number, iter: Iterable<string>): TrieRoot {
             json = json + s;
             if (s === REF_INDEX_END) {
                 refIndex = json
-                    .replace(/[\s[\]]/g, '')
+                    .replaceAll(/[\s[\]]/g, '')
                     .split(',')
                     .map((n) => parseInt(n, radix));
                 return { ...acc, parser: undefined };
@@ -472,7 +485,7 @@ function parseStream(radix: number, iter: Iterable<string>): TrieRoot {
     reduce(
         pipe(
             iter,
-            opConcatMap((a) => a.split('')),
+            opConcatMap((a) => [...a]),
         ),
         parserMain,
         {

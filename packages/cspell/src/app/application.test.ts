@@ -1,8 +1,9 @@
+import * as fs from 'node:fs/promises';
+import * as path from 'node:path';
+import { resolve as r } from 'node:path';
+
 import type { Issue, RunResult } from '@cspell/cspell-types';
-import * as fs from 'fs/promises';
 import getStdin from 'get-stdin';
-import * as path from 'path';
-import { resolve as r } from 'path';
 import { afterEach, describe, expect, test, vi } from 'vitest';
 
 import * as App from './application.js';
@@ -24,7 +25,7 @@ const ac = expect.arrayContaining;
 
 vi.mock('get-stdin', () => ({ default: vi.fn() }));
 
-const timeout = 10000;
+const timeout = 10_000;
 
 const testOptions = { timeout };
 
@@ -171,7 +172,7 @@ describe('Validate the Application', () => {
 
 async function trace(words: string[], options: TraceOptions) {
     const results = await asyncIterableToArray(App.trace(words, options));
-    return results.flatMap((a) => a);
+    return results.flat();
 }
 
 describe('Validate createInit', () => {
@@ -179,7 +180,7 @@ describe('Validate createInit', () => {
         async function worked() {
             try {
                 await App.createInit();
-            } catch (e) {
+            } catch {
                 return false;
             }
             return true;
@@ -279,7 +280,7 @@ describe('Linter File Caching', () => {
 
 function tempLocation(...parts: string[]): string {
     const currTestName = expect.getState().currentTestName || 'test';
-    const testName = currTestName.replace(/\W/g, '_');
+    const testName = currTestName.replaceAll(/\W/g, '_');
     return r(tempRoot, testName, ...parts);
 }
 

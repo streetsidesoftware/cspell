@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-const assert = require('assert');
+const assert = require('node:assert');
 const { run } = require('./dist/rollup/cjs/index.cjs');
 
 async function main() {

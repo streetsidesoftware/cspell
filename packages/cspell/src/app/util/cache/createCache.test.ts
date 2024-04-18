@@ -1,5 +1,7 @@
-import * as path from 'path';
-import { resolve as r } from 'path';
+import * as path from 'node:path';
+import { resolve as r } from 'node:path';
+import { fileURLToPath } from 'node:url';
+
 import { beforeEach, describe, expect, test, vi } from 'vitest';
 
 import type { CacheOptions } from './CacheOptions.js';
@@ -9,6 +11,9 @@ import { DiskCache } from './DiskCache.js';
 import { DummyCache } from './DummyCache.js';
 
 vi.mock('./DiskCache');
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = fileURLToPath(new URL('.', import.meta.url));
 
 const mockedDiskCache = vi.mocked(DiskCache);
 

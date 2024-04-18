@@ -1,5 +1,6 @@
-import * as path from 'path';
-import { win32 } from 'path';
+import * as path from 'node:path';
+import { win32 } from 'node:path';
+
 import { describe, expect, test } from 'vitest';
 
 import { contains, directoryRoot, factoryPathHelper, findRepoRoot, isParentOf, makeRelativeTo } from './helpers.js';

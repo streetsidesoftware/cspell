@@ -72,8 +72,15 @@ describe('mappers typescript', () => {
 });
 
 function toCharCodes(s: string): string {
-    return s
-        .split('')
-        .map((a) => ('000' + a.charCodeAt(0).toString(16)).slice(-4))
+    return toCharCodesNumber(s)
+        .map((c) => ('000' + c.toString(16)).slice(-4))
         .join(', ');
+}
+
+function toCharCodesNumber(s: string): number[] {
+    const codes: number[] = [];
+    for (let i = 0; i < s.length; ++i) {
+        codes.push(s.charCodeAt(i));
+    }
+    return codes;
 }

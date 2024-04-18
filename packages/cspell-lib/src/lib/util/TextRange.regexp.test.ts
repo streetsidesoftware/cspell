@@ -313,5 +313,5 @@ Not checked.
 
 `;
 
-const sampleCode2LF = sampleCodeSrc.replace(/\r?\n/g, '\n');
-const sampleCode2CRLF = sampleCode2LF.replace(/\n/g, '\r\n');
+const sampleCode2LF = sampleCodeSrc.replaceAll(/\r?\n/g, '\n');
+const sampleCode2CRLF = sampleCode2LF.replaceAll('\n', '\r\n');

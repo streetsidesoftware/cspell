@@ -1,36 +1,33 @@
-import js from '@eslint/js';
-import { FlatCompat } from '@eslint/eslintrc';
-import { fileURLToPath } from 'url';
-import eslintConfigPrettier from 'eslint-config-prettier';
-import cspellRecommended from '@cspell/eslint-plugin/recommended';
 import cspellConfigs from '@cspell/eslint-plugin/configs';
-import tsESLint from 'typescript-eslint';
+import cspellRecommended from '@cspell/eslint-plugin/recommended';
+import eslint from '@eslint/js';
+import nodePlugin from 'eslint-plugin-n';
+import simpleImportSort from 'eslint-plugin-simple-import-sort';
+import tsEslint from 'typescript-eslint';
 
-const __dirname = fileURLToPath(new URL('.', import.meta.url));
+// @ts-check
 
-const compat = new FlatCompat({
-    baseDirectory: __dirname,
-});
-
-/**
- * @type { import("eslint").Linter.FlatConfig[] }
- */
-const config = [
-    js.configs.recommended,
-    ...tsESLint.configs.recommended,
+const config = tsEslint.config(
+    eslint.configs.recommended,
+    nodePlugin.configs['flat/recommended'],
+    ...tsEslint.configs.recommended,
     // cspellRecommended or cspellConfigs.recommended can be used interchangeably.
     cspellConfigs.recommended,
-
-    ...compat.extends('plugin:prettier/recommended'),
-    eslintConfigPrettier,
+    {
+        ignores: ['**/node_modules/**', '**/*.d.ts'],
+    },
+    {
+        plugins: {
+            'simple-import-sort': simpleImportSort,
+        },
+        rules: {
+            'simple-import-sort/imports': 'error',
+            'simple-import-sort/exports': 'error',
+        },
+    },
     {
         files: ['**/*.ts', '**/*.tsx'],
         ignores: ['**/*.d.ts', '**/*.map', '**/coverage/**', '**/dist/**', '**/node_modules/**'],
-        languageOptions: {
-            parser: tsESLint.parser,
-            ecmaVersion: 2022,
-            sourceType: 'module',
-        },
         rules: {
             '@typescript-eslint/no-unused-vars': ['warn', { argsIgnorePattern: '^_', varsIgnorePattern: '^_' }],
             '@cspell/spellchecker': ['warn', { customWordListFile: 'words.txt', autoFix: true }],
@@ -51,6 +48,14 @@ const config = [
             '@cspell/spellchecker': ['warn', { checkIdentifiers: true }],
         },
     },
-];
+    {
+        files: ['fixtures/**'],
+        rules: {
+            'n/no-missing-import': 'off',
+            '@typescript-eslint/no-var-requires': 'off',
+            'simple-import-sort/imports': 'warn',
+        },
+    },
+);
 
 export default config;

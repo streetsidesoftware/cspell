@@ -1,5 +1,5 @@
-import * as path from 'path';
-import { fileURLToPath, pathToFileURL } from 'url';
+import * as path from 'node:path';
+import { fileURLToPath, pathToFileURL } from 'node:url';
 
 import { dynamicImport } from '../cjs/index.js';
 

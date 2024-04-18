@@ -4,6 +4,6 @@ export function detectIndent(content: string): string {
 }
 
 export function detectIndentAsNum(content: string): number {
-    const indent = detectIndent(content).replace(/\t/g, '    ').replace(/[^ ]/g, '');
+    const indent = detectIndent(content).replaceAll('\t', '    ').replaceAll(/[^ ]/g, '');
     return indent.length;
 }

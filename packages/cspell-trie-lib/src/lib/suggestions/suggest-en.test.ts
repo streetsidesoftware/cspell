@@ -1,4 +1,5 @@
-import assert from 'assert';
+import assert from 'node:assert';
+
 import { describe, expect, test } from 'vitest';
 
 import { readRawDictionaryFile, readTrieFromConfig } from '../../test/dictionaries.test.helper.js';
@@ -18,7 +19,7 @@ function getTrie() {
     return readTrieFromConfig('@cspell/dict-en_us/cspell-ext.json');
 }
 
-const timeout = 10000;
+const timeout = 10_000;
 
 interface ExpectedSuggestion extends Partial<SuggestionResult> {
     word: string;

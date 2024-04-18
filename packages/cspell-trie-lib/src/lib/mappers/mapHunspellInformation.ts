@@ -190,7 +190,7 @@ function affKey(line: string, costs: Costs): SuggestionCostMapDef | undefined {
 
     const pairsUpper = pairs.map((p) => p.toLocaleUpperCase(costs.locale));
 
-    const map = uniqueU(pairs.concat(pairsUpper)).join('|');
+    const map = uniqueU([...pairs, ...pairsUpper]).join('|');
     const cost = costs.keyboardCost;
 
     return {

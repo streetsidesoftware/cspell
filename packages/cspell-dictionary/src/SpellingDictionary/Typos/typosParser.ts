@@ -1,4 +1,4 @@
-import assert from 'assert';
+import assert from 'node:assert';
 
 import type { TypoEntry, TyposDef, TyposDefValue } from './typos.js';
 import { appendToDef, createTyposDef } from './util.js';
@@ -139,7 +139,7 @@ function splitEntry(line: string): readonly [string, string | undefined] {
 }
 
 export function parseTyposFile(content: string): TyposDef {
-    const lines = splitIntoLines(content.replace(inlineComment, ''));
+    const lines = splitIntoLines(content.replaceAll(inlineComment, ''));
     return reduceToTyposDef(lines);
 }
 

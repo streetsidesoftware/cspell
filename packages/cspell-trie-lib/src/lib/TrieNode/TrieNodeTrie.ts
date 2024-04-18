@@ -17,7 +17,7 @@ export class TrieNodeTrie implements TrieData {
         this.info = mergeOptionalWithDefaults(root);
     }
 
-    wordToCharacters = (word: string): string[] => word.split('');
+    wordToCharacters = (word: string): string[] => [...word];
 
     get iTrieRoot() {
         return this._iTrieRoot || (this._iTrieRoot = trieRootToITrieRoot(this.root));

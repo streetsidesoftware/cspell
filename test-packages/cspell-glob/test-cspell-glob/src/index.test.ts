@@ -1,4 +1,5 @@
-import { basename } from 'path';
+import { basename } from 'node:path';
+
 import { describe, expect, test } from 'vitest';
 
 import { run } from './index.js';

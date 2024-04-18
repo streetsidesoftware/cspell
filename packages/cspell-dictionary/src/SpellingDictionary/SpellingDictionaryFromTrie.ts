@@ -28,7 +28,7 @@ const findWordOptionsCaseSensitive: FindWordOptions = Object.freeze({ caseSensit
 const findWordOptionsNotCaseSensitive: FindWordOptions = Object.freeze({ caseSensitive: false });
 
 export class SpellingDictionaryFromTrie implements SpellingDictionary {
-    static readonly cachedWordsLimit = 50000;
+    static readonly cachedWordsLimit = 50_000;
     private _size = 0;
     readonly knownWords = new Set<string>();
     readonly unknownWords = new Set<string>();

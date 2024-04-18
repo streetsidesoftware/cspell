@@ -1,4 +1,4 @@
-import * as path from 'path';
+import * as path from 'node:path';
 
 import type { IsIgnoredExResult } from './GitIgnoreFile.js';
 import { GitIgnoreHierarchy, loadGitIgnore } from './GitIgnoreFile.js';
@@ -109,7 +109,7 @@ export class GitIgnore {
         if (!git) {
             return parentHierarchy || new GitIgnoreHierarchy([]);
         }
-        const chain = parentHierarchy?.gitIgnoreChain.concat([git]) ?? [git];
+        const chain = parentHierarchy ? [...parentHierarchy.gitIgnoreChain, git] : [git];
         return new GitIgnoreHierarchy(chain);
     }
 

@@ -1,5 +1,6 @@
-import * as fsp from 'fs';
-import * as path from 'path';
+import * as fsp from 'node:fs';
+import * as path from 'node:path';
+
 import { describe, expect, test } from 'vitest';
 
 import { pathPackageSamples } from '../../test-util/test.locations.cjs';
@@ -10,7 +11,7 @@ const sampleFilename = path.join(samples, 'src', 'sample.py');
 const sampleConfig = path.join(samples, '.cspell.json');
 const text = fsp.readFileSync(sampleFilename, 'utf8').toString();
 
-const timeout = 10000;
+const timeout = 10_000;
 
 describe('Validate that Python files are correctly checked.', () => {
     test(

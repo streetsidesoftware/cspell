@@ -9,7 +9,7 @@ describe('NumberSequenceByteEncoderDecoder', () => {
         ${1}
         ${255}
         ${1024}
-        ${100000}
+        ${100_000}
     `('encode/decode $value', ({ value }) => {
         const encoded = NumberSequenceByteEncoderDecoder.encode(value);
         const decoded = NumberSequenceByteEncoderDecoder.decode(encoded);
@@ -17,7 +17,7 @@ describe('NumberSequenceByteEncoderDecoder', () => {
     });
 
     test('sequence', () => {
-        const values = [0, 1, 255, 1024, 100000, 0x22, 0xfe, 0x1ff, 0xfffff];
+        const values = [0, 1, 255, 1024, 100_000, 0x22, 0xfe, 0x1ff, 0xf_ffff];
         const seq = NumberSequenceByteEncoderDecoder.encodeSequence(values);
         const decoded = NumberSequenceByteEncoderDecoder.decodeSequence(seq);
         expect(decoded).toEqual(values);

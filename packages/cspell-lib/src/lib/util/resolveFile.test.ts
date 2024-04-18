@@ -1,20 +1,25 @@
 import fs from 'node:fs';
+import { createRequire } from 'node:module';
+import * as os from 'node:os';
+import * as path from 'node:path';
 // eslint-disable-next-line n/no-unsupported-features/node-builtins
 import { getActiveResourcesInfo } from 'node:process';
+import { fileURLToPath, pathToFileURL } from 'node:url';
 import util from 'node:util';
 
 import { parse } from 'comment-json';
 import type { VFileSystemProvider } from 'cspell-io';
 import { createRedirectProvider, createVirtualFS } from 'cspell-io';
-import * as os from 'os';
-import * as path from 'path';
-import { fileURLToPath, pathToFileURL } from 'url';
 import { afterEach, describe, expect, test } from 'vitest';
 
 import { pathRepoTestFixturesURL } from '../../test-util/index.mjs';
 import { FileResolver, resolveRelativeTo } from './resolveFile.js';
 import { envToTemplateVars } from './templates.js';
 import { isFileURL, toFilePathOrHref, toURL } from './url.js';
+
+const require = createRequire(import.meta.url);
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 function debugOut(...args: Parameters<typeof util.format>) {
     // Use a function like this one when debugging inside an AsyncHook callback

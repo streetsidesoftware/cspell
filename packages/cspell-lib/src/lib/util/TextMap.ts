@@ -1,6 +1,7 @@
+import assert from 'node:assert';
+
 import type { MappedText } from '@cspell/cspell-types';
 import type { Range } from '@cspell/cspell-types/Parser';
-import assert from 'assert';
 
 /**
  * Extract a substring from a TextMap.
@@ -29,7 +30,7 @@ export function extractTextMapRangeOrigin(textMap: MappedText, extractRange: Ran
     const endDiff = srcTxt.length - mapEndDst;
     const head = !srcMap[0] && !srcMap[1] ? [] : [0, 0];
     const tail = [mapEndSrc + endDiff, mapEndDst + endDiff];
-    const sMap = head.concat(srcMap).concat(tail);
+    const sMap = [...head, ...srcMap, ...tail];
 
     let idx = 0;
     for (; idx < sMap.length && a >= sMap[idx]; idx += 2) {

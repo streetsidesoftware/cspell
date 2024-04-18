@@ -12,7 +12,7 @@ export function legacyLineToWords(
     allowedSplitWords: AllowedSplitWordsCollection,
 ): Iterable<string> {
     // Remove punctuation and non-letters.
-    const filteredLine = line.replace(regNonWord, '|');
+    const filteredLine = line.replaceAll(regNonWord, '|');
     const wordGroups = filteredLine.split('|');
 
     const words = pipe(

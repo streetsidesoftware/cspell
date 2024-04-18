@@ -1,4 +1,4 @@
-import assert from 'assert';
+import assert from 'node:assert';
 
 export function* prefetchIterable<T>(iterable: Iterable<T>, size: number): Iterable<T> {
     assert(size >= 0);

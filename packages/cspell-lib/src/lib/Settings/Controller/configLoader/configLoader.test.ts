@@ -1,8 +1,9 @@
+import * as path from 'node:path';
+import { fileURLToPath, pathToFileURL } from 'node:url';
+
 import type { CSpellSettingsWithSourceTrace, CSpellUserSettings, ImportFileRef } from '@cspell/cspell-types';
 import { CSpellConfigFile, CSpellConfigFileInMemory } from 'cspell-config-lib';
 import { createRedirectProvider, createVirtualFS } from 'cspell-io';
-import * as path from 'path';
-import { fileURLToPath, pathToFileURL } from 'url';
 import { assert, beforeEach, describe, expect, test, vi } from 'vitest';
 import { URI } from 'vscode-uri';
 

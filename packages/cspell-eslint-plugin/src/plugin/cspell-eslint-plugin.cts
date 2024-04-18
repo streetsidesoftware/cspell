@@ -1,7 +1,8 @@
 // cspell:ignore TSESTree
+import { readFileSync } from 'node:fs';
+import { join as pathJoin } from 'node:path';
+
 import type { ESLint, Rule } from 'eslint';
-import { readFileSync } from 'fs';
-import { join as pathJoin } from 'path';
 import { createSyncFn } from 'synckit';
 
 import { getDefaultLogger } from '../common/logger.cjs';
@@ -14,7 +15,7 @@ const optionsSchema = JSON.parse(readFileSync(pathJoin(__dirname, '../../assets/
 
 const schema = optionsSchema as unknown as Rule.RuleMetaData['schema'];
 
-const spellCheck = createSyncFn<SpellCheckFn>(require.resolve('../worker/worker.mjs'), 30000);
+const spellCheck = createSyncFn<SpellCheckFn>(require.resolve('../worker/worker.mjs'), 30_000);
 
 interface ExtendedSuggestion {
     /**

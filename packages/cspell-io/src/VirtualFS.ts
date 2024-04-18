@@ -153,7 +153,7 @@ class CVirtualFS implements VirtualFS {
     log = console.log;
     logEvent = (event: LogEvent) => {
         if (this.loggingEnabled) {
-            const id = event.traceID.toFixed(13).replace(/\d{4}(?=\d)/g, '$&.');
+            const id = event.traceID.toFixed(13).replaceAll(/\d{4}(?=\d)/g, '$&.');
             const msg = event.message ? `\n\t\t${event.message}` : '';
             const method = rPad(`${event.method}-${event.event}`, 16);
             this.log(`${method} ID:${id} ts:${event.ts.toFixed(13)} ${chopUrl(event.url)}${msg}`);
@@ -229,7 +229,7 @@ class CVirtualFS implements VirtualFS {
         for (const [key, fs] of [...this.cachedFs].reverse()) {
             try {
                 WrappedProviderFs.disposeOf(fs);
-            } catch (e) {
+            } catch (_) {
                 // continue - we are cleaning up.
             }
             this.cachedFs.delete(key);
@@ -243,7 +243,7 @@ class CVirtualFS implements VirtualFS {
         for (const provider of providers) {
             try {
                 provider.dispose?.();
-            } catch (e) {
+            } catch (_) {
                 // continue - we are cleaning up.
             }
         }

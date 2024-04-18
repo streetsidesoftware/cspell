@@ -1,4 +1,5 @@
-import * as fs from 'fs/promises';
+import * as fs from 'node:fs/promises';
+
 import type { Sequence } from 'gensequence';
 import { genSequence } from 'gensequence';
 import pkgIconvLite from 'iconv-lite';

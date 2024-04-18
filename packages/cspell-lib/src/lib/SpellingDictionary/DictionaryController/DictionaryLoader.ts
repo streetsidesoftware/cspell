@@ -22,7 +22,7 @@ import { toError } from '../../util/errors.js';
 import { SimpleCache } from '../../util/simpleCache.js';
 import { SpellingDictionaryLoadError } from '../SpellingDictionaryError.js';
 
-const MAX_AGE = 10000;
+const MAX_AGE = 10_000;
 
 const loaders: Loaders = {
     S: loadSimpleWordList,
@@ -174,13 +174,14 @@ export class DictionaryLoader {
             loadingState: LoadingState.Loading,
             sig,
         };
-        // eslint-disable-next-line promise/catch-or-return
-        pending.then(([dictionary, stat]) => {
-            entry.stat = stat;
-            entry.dictionary = dictionary;
-            entry.loadingState = LoadingState.Loaded;
-            return;
-        });
+        pending
+            .then(([dictionary, stat]) => {
+                entry.stat = stat;
+                entry.dictionary = dictionary;
+                entry.loadingState = LoadingState.Loaded;
+                return;
+            })
+            .catch(() => undefined);
         return entry;
     }
 
@@ -211,7 +212,7 @@ export class DictionaryLoader {
         const path = def.path;
         const loaderType = determineType(toFileURL(path), def);
         const optValues = importantOptionKeys.map((k) => def[k]?.toString() || '');
-        const parts = [path, loaderType].concat(optValues);
+        const parts = [path, loaderType, ...optValues];
 
         return parts.join('|');
     }
@@ -260,7 +261,7 @@ function _legacyWordListSync(lines: Iterable<string>, filename: URL, options: Lo
     const words = pipe(
         lines,
         // Remove comments
-        opMap((line) => line.replace(/#.*/g, '')),
+        opMap((line) => line.replaceAll(/#.*/g, '')),
         // Split on everything else
         opConcatMap((line) => line.split(/[^\w\p{L}\p{M}'’]+/gu)),
         opFilter((word) => !!word),
@@ -277,7 +278,7 @@ function _wordsPerLineWordList(lines: Iterable<string>, filename: string, option
     const words = pipe(
         lines,
         // Remove comments
-        opMap((line) => line.replace(/#.*/g, '')),
+        opMap((line) => line.replaceAll(/#.*/g, '')),
         // Split on everything else
         opConcatMap((line) => line.split(/\s+/gu)),
         opFilter((word) => !!word),

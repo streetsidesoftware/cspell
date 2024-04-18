@@ -1,7 +1,8 @@
+import * as path from 'node:path';
+
 import { pipeAsync, toArray } from '@cspell/cspell-pipe';
 import { opAwaitAsync, opMapAsync } from '@cspell/cspell-pipe/operators';
 import { opConcatMap, opMap, pipe } from '@cspell/cspell-pipe/sync';
-import * as path from 'path';
 
 import type {
     CompileRequest,
@@ -278,10 +279,10 @@ async function readFileSource(fileSource: FileSource, sourceOptions: CompileSour
 }
 
 function normalizeTargetName(name: string) {
-    return name.replace(/((\.txt|\.dic|\.aff|\.trie)(\.gz)?)?$/, '').replace(/[^\p{L}\p{M}.\w\\/-]/gu, '_');
+    return name.replace(/((\.txt|\.dic|\.aff|\.trie)(\.gz)?)?$/, '').replaceAll(/[^\p{L}\p{M}.\w\\/-]/gu, '_');
 }
 
-function logProgress<T>(freq = 100000): (iter: Iterable<T>) => Iterable<T> {
+function logProgress<T>(freq = 100_000): (iter: Iterable<T>) => Iterable<T> {
     function* logProgress<T>(iter: Iterable<T>): Iterable<T> {
         const _freq = freq;
         let count = 0;

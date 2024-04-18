@@ -33,7 +33,7 @@ describe('Validate util', () => {
             e: 'str',
         };
         const cleanObj = util.clean(obj);
-        expect([...Object.keys(cleanObj)]).toEqual(['b', 'c', 'e']);
+        expect(Object.keys(cleanObj)).toEqual(['b', 'c', 'e']);
     });
 
     test.each`

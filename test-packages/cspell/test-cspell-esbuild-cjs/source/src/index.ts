@@ -1,4 +1,5 @@
-import assert from 'assert';
+import assert from 'node:assert';
+
 import { lint } from 'cspell';
 
 async function checkFile(fileGlob: string) {

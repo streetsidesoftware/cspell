@@ -1,7 +1,8 @@
 #!/usr/bin/env node
 
+import { fileURLToPath } from 'node:url';
+
 import * as esbuild from 'esbuild';
-import { fileURLToPath } from 'url';
 
 const __dirname = fileURLToPath(new URL('.', import.meta.url));
 

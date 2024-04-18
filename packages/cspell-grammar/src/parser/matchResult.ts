@@ -30,11 +30,7 @@ export function segmentMatch(mr: MatchResult): MatchSegment[] {
     for (const [name, value] of Object.entries(groups)) {
         const s = value && textToSeg.get(value);
         if (!s) continue;
-        s.groupName = s.groupName
-            ? Array.isArray(s.groupName)
-                ? s.groupName.concat([name])
-                : [s.groupName, name]
-            : name;
+        s.groupName = s.groupName ? (Array.isArray(s.groupName) ? [...s.groupName, name] : [s.groupName, name]) : name;
     }
 
     return segments;

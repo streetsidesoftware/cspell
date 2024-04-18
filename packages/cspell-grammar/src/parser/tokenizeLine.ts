@@ -1,4 +1,4 @@
-import assert from 'assert';
+import assert from 'node:assert';
 
 import type { NGrammar, Rule } from './grammarNormalized.js';
 import { extractScope } from './grammarNormalizer.js';

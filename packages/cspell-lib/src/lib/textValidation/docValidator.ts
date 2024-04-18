@@ -1,3 +1,5 @@
+import assert from 'node:assert';
+
 import { opConcatMap, opMap, pipeSync } from '@cspell/cspell-pipe/sync';
 import type {
     CSpellSettingsWithSourceTrace,
@@ -7,7 +9,6 @@ import type {
     PnPSettings,
 } from '@cspell/cspell-types';
 import { IssueType } from '@cspell/cspell-types';
-import assert from 'assert';
 
 import { getGlobMatcherForExcluding } from '../globs/getGlobMatcher.js';
 import type { CSpellSettingsInternal, CSpellSettingsInternalFinalized } from '../Models/CSpellSettingsInternalDef.js';
@@ -283,7 +284,7 @@ export class DocumentValidator {
                 forceCheck || this.shouldCheckDocument() ? [...this._checkParsedText(this._parse())] : [];
             const directiveIssues = this.checkDocumentDirectives();
             // console.log('Stats: %o', this._preparations.textValidator.lineValidator.dict.stats());
-            const allIssues = spellingIssues.concat(directiveIssues).sort((a, b) => a.offset - b.offset);
+            const allIssues = [...spellingIssues, ...directiveIssues].sort((a, b) => a.offset - b.offset);
             return allIssues;
         } finally {
             timerDone();

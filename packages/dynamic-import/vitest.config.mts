@@ -14,7 +14,7 @@ export default mergeConfig(
                 all: false,
                 exclude: ['fixtures', 'src/test/**'],
             },
-            testTimeout: 10000,
+            testTimeout: 10_000,
         },
     }),
 );

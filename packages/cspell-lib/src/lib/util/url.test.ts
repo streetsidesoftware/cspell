@@ -1,5 +1,6 @@
-import path from 'path';
-import { fileURLToPath, pathToFileURL } from 'url';
+import path from 'node:path';
+import { fileURLToPath, pathToFileURL } from 'node:url';
+
 import { describe, expect, test } from 'vitest';
 
 import { srcDirectory } from '../../lib-cjs/pkg-info.cjs';

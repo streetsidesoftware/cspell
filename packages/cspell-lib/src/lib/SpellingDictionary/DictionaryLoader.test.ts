@@ -1,5 +1,7 @@
-import * as path from 'path';
-import { pathToFileURL } from 'url';
+import { createRequire } from 'node:module';
+import * as path from 'node:path';
+import { fileURLToPath, pathToFileURL } from 'node:url';
+
 import { describe, expect, test, vi } from 'vitest';
 
 import { pathPackageRoot, pathPackageSamples } from '../../test-util/test.locations.cjs';
@@ -13,6 +15,9 @@ import type { LoadOptions } from './DictionaryLoader.js';
 import { loadDictionary, refreshCacheEntries } from './DictionaryLoader.js';
 
 vi.mock('../util/logger');
+
+const require = createRequire(import.meta.url);
+const __filename = fileURLToPath(import.meta.url);
 
 const root = pathPackageRoot;
 const samples = pathPackageSamples;

@@ -1,4 +1,5 @@
-import * as path from 'path';
+import * as path from 'node:path';
+
 import { describe, expect, test, vi } from 'vitest';
 
 import { run } from './app.js';

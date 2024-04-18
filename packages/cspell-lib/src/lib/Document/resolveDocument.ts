@@ -1,4 +1,4 @@
-import { readFile } from 'fs/promises';
+import { readFile } from 'node:fs/promises';
 
 import type { TextDocument } from '../Models/TextDocument.js';
 import { createTextDocument } from '../Models/TextDocument.js';

@@ -1,7 +1,8 @@
+import { promises as fs } from 'node:fs';
+import * as path from 'node:path';
+
 import type { GlobMatchRule, GlobPatternNormalized, GlobPatternWithRoot } from 'cspell-glob';
 import { GlobMatcher } from 'cspell-glob';
-import { promises as fs } from 'fs';
-import * as path from 'path';
 
 import { isDefined, isParentOf, makeRelativeTo } from './helpers.js';
 
@@ -115,7 +116,7 @@ export async function loadGitIgnore(dir: string): Promise<GitIgnoreFile | undefi
     const file = path.join(dir, '.gitignore');
     try {
         return await GitIgnoreFile.loadGitignore(file);
-    } catch (e) {
+    } catch (_) {
         return undefined;
     }
 }

@@ -1,5 +1,6 @@
+import * as path from 'node:path';
+
 import type { Issue } from '@cspell/cspell-types';
-import * as path from 'path';
 
 import type { LinterOptions } from '../options.js';
 import type { GlobSrcInfo } from '../util/glob.js';

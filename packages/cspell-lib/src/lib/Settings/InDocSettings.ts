@@ -68,7 +68,7 @@ const preferredDirectives = [
     'disableCaseSensitive',
 ];
 
-const allDirectives = new Set(preferredDirectives.concat(officialDirectives));
+const allDirectives = new Set([...preferredDirectives, ...officialDirectives]);
 const allDirectiveSuggestions: ExtendedSuggestion[] = [
     ...pipeSync(
         allDirectives,
@@ -129,8 +129,8 @@ export function getInDocumentSettings(text: string): CSpellUserSettings {
 
     const dictSettings = dict
         ? {
-              dictionaries: dictionaries.concat(staticInDocumentDictionaryName),
-              dictionaryDefinitions: dictionaryDefinitions.concat(dict),
+              dictionaries: [...dictionaries, staticInDocumentDictionaryName],
+              dictionaryDefinitions: [...dictionaryDefinitions, dict],
           }
         : clean({
               dictionaries: dictionaries.length ? dictionaries : undefined,
@@ -162,7 +162,7 @@ const settingParsers: readonly (readonly [RegExp, (m: string) => CSpellUserSetti
     [/^locale?\b(?!-)/i, parseLocale],
     [/^language\s\b(?!-)/i, parseLocale],
     [/^dictionar(?:y|ies)\b(?!-)/i, parseDictionaries], // cspell:disable-line
-    [/^LocalWords:/, (w) => parseWords(w.replace(/^LocalWords:?/gi, ' '))],
+    [/^LocalWords:/, (w) => parseWords(w.replaceAll(/^LocalWords:?/gi, ' '))],
 ] as const;
 
 export const regExSpellingGuardBlock =

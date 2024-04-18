@@ -218,7 +218,7 @@ const rejectWords = ['!colour', '!behaviour', '!favour'];
 // cspell:ignore crazzzy wordz
 const ignoreWords = ['ignored', 'crazzzy-code'];
 
-const words = sampleWords.concat(rejectWords).concat(['hyphen-wordz']);
+const words = [...sampleWords, ...rejectWords, 'hyphen-wordz'];
 
 const _defaultSettings = await getDefaultSettings(true);
 

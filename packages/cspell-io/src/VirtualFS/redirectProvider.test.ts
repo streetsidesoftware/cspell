@@ -1,4 +1,5 @@
-import assert from 'assert';
+import assert from 'node:assert';
+
 import { describe, expect, test, vi } from 'vitest';
 
 import { CFileResource, renameFileResource } from '../common/index.js';

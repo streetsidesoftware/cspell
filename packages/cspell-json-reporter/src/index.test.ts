@@ -7,10 +7,11 @@ vi.mock('fs', () => ({
     },
 }));
 
+import { promises as fs } from 'node:fs';
+import * as path from 'node:path';
+
 import type { CSpellReporter } from '@cspell/cspell-types';
 import { MessageTypes } from '@cspell/cspell-types';
-import { promises as fs } from 'fs';
-import * as path from 'path';
 
 import { getReporter } from './index.js';
 
@@ -96,7 +97,7 @@ async function runReporter(reporter: Required<CSpellReporter>): Promise<void> {
         fileNum: 1,
         fileCount: 1,
         filename: 'text.txt',
-        elapsedTimeMs: 349.058747,
+        elapsedTimeMs: 349.058_747,
         processed: true,
         numErrors: 2,
     });

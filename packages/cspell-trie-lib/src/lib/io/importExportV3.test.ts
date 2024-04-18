@@ -1,4 +1,5 @@
-import { readFile } from 'fs/promises';
+import { readFile } from 'node:fs/promises';
+
 import { genSequence } from 'gensequence';
 import { describe, expect, test } from 'vitest';
 
@@ -17,7 +18,7 @@ describe('Import/Export', () => {
         const data = [...serializeTrie(trie, { base: 10, comment: 'Sample Words' })].join('');
         const root = importTrie(
             data
-                .replace(/\[\d+\]/g, '')
+                .replaceAll(/\[\d+\]/g, '')
                 .split('\n')
                 .map((a) => (a ? a + '\r\n' : a)),
         );
@@ -178,9 +179,9 @@ const sampleWords = [
     'fun journey',
     'long walk',
     'fun walk',
-]
-    .concat(specialCharacters)
-    .concat(smallSample);
+    ...specialCharacters,
+    ...smallSample,
+];
 
 function applyEndings(s: string): string[] {
     const endings = ['', 'ed', 'er', 'ing', 's'];

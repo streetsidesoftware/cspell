@@ -1,5 +1,6 @@
+import path from 'node:path';
+
 import { CSpellConfigFileInMemory, CSpellConfigFileJson } from 'cspell-config-lib';
-import path from 'path';
 import type { Mock } from 'vitest';
 import { afterEach, describe, expect, test, vi } from 'vitest';
 

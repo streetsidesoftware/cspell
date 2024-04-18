@@ -1,7 +1,7 @@
 import { homedir } from 'node:os';
+import { fileURLToPath } from 'node:url';
 
 import type { CSpellUserSettings, GlobDef, LanguageSetting, ReporterSettings } from '@cspell/cspell-types';
-import { fileURLToPath } from 'url';
 
 import { resolveFile } from '../../../util/resolveFile.js';
 import type { OptionalOrUndefined } from '../../../util/types.js';

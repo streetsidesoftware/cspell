@@ -1,10 +1,14 @@
-import * as path from 'path';
+import * as path from 'node:path';
+import { fileURLToPath } from 'node:url';
+
 import { describe, expect, test } from 'vitest';
 
 import { pathPackageSamples } from '../../test-util/test.locations.cjs';
 import { loadTextDocument } from '../Models/TextDocument.js';
 import { loadConfig } from '../Settings/index.js';
 import { determineTextDocumentSettings } from './determineTextDocumentSettings.js';
+
+const __filename = fileURLToPath(import.meta.url);
 
 const samples = pathPackageSamples;
 const cfgPath = path.join(samples, '.cspell.json');

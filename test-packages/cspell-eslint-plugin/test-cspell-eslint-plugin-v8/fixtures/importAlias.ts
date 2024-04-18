@@ -1,4 +1,4 @@
-import { uuug as uuug, muawhahaha as evilLaugh, grrr, ExpressionCategory } from './creepyData';
+import { ExpressionCategory,grrr, muawhahaha as evilLaugh, uuug as uuug } from './creepyData';
 
 /**
  * This is a comment about the imports. Lets see if grrr is ignored.

@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-const assert = require('assert');
+const assert = require('node:assert');
 const { getPipes } = require('./dist/index.cjs');
 
 async function t() {

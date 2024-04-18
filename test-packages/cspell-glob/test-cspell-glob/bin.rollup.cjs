@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
-const assert = require('assert');
-const { basename } = require('path');
+const assert = require('node:assert');
+const { basename } = require('node:path');
 const { run } = require('./dist/rollup/cjs/index.cjs');
 
 const expected = basename(__filename);

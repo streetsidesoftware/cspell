@@ -21,7 +21,7 @@ export function createReaderWriter(
 ): CSpellConfigFileReaderWriter {
     return new CSpellConfigFileReaderWriterImpl(
         io,
-        defaultDeserializers.concat(deserializers),
-        defaultLoaders.concat(loaders),
+        [...defaultDeserializers, ...deserializers],
+        [...defaultLoaders, ...loaders],
     );
 }

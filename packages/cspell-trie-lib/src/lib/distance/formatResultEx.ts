@@ -15,7 +15,7 @@ function pR(s: string, w: number) {
 }
 
 function vizWidth(s: string) {
-    const r = s.replace(/[\u0300-\u036F\u007f-\u009f]/gu, '');
+    const r = s.replaceAll(/[\u0300-\u036F\u007f-\u009f]/gu, '');
     let i = 0;
     for (const c of r) {
         i += c.length;

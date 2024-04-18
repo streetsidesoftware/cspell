@@ -1,11 +1,12 @@
+import { promises as fs } from 'node:fs';
+import * as path from 'node:path';
+import { posix } from 'node:path';
+
 import type { CSpellUserSettings, Glob } from '@cspell/cspell-types';
 import type { GlobPatternWithRoot } from 'cspell-glob';
 import { fileOrGlobToGlob, GlobMatcher } from 'cspell-glob';
 import type { Options as FastGlobOptions } from 'fast-glob';
 import glob from 'fast-glob';
-import { promises as fs } from 'fs';
-import * as path from 'path';
-import { posix } from 'path';
 
 import { clean } from './util.js';
 
@@ -50,7 +51,7 @@ export async function globP(pattern: string | string[], options?: GlobOptions): 
 
 export function calcGlobs(commandLineExclude: string[] | undefined): { globs: string[]; source: string } {
     const globs = new Set(
-        (commandLineExclude || []).flatMap((glob) => glob.split(/(?<!\\)\s+/g)).map((g) => g.replace(/\\ /g, ' ')),
+        (commandLineExclude || []).flatMap((glob) => glob.split(/(?<!\\)\s+/g)).map((g) => g.replaceAll('\\ ', ' ')),
     );
     const commandLineExcludes = {
         globs: [...globs],
@@ -78,7 +79,7 @@ export function extractPatterns(globs: GlobSrcInfo[]): ExtractPatternResult[] {
     const r = globs.reduce((info: ExtractPatternResult[], g: GlobSrcInfo) => {
         const source = g.source;
         const patterns = g.matcher.patternsNormalizedToRoot;
-        return info.concat(patterns.map((glob) => ({ glob, source })));
+        return [...info, ...patterns.map((glob) => ({ glob, source }))];
     }, []);
 
     return r;
@@ -125,11 +126,11 @@ export function extractGlobsFromMatcher(globMatcher: GlobMatcher): string[] {
 export function normalizeGlobsToRoot(globs: Glob[], root: string, isExclude: boolean): string[] {
     const urls = globs.filter((g): g is string => typeof g === 'string' && isPossibleUrlRegExp.test(g));
     const onlyGlobs = globs.filter((g) => typeof g !== 'string' || !isPossibleUrlRegExp.test(g));
-    return [urls, extractGlobsFromMatcher(buildGlobMatcher(onlyGlobs, root, isExclude))].flatMap((a) => a);
+    return [urls, extractGlobsFromMatcher(buildGlobMatcher(onlyGlobs, root, isExclude))].flat();
 }
 
-const isPossibleGlobRegExp = /[*{}()?[]/;
-const isPossibleUrlRegExp = /^[-a-z_0-9]{3,}:\/\//;
+const isPossibleGlobRegExp = /[()*?[{}]/;
+const isPossibleUrlRegExp = /^[\d_a-z-]{3,}:\/\//;
 
 /**
  * If a 'glob' is a path to a directory, then append `**` so that
@@ -166,7 +167,7 @@ async function adjustPossibleDirectory(glob: Glob, root: string): Promise<Glob> 
             const useGlob = posix.join(posixPath(g.glob), '**');
             return typeof glob === 'string' ? useGlob : { ...glob, glob: useGlob };
         }
-    } catch (e) {
+    } catch {
         // it was not possible to access the dirPath, no problem, just let the file glob search look for it.
         return glob;
     }
@@ -174,7 +175,7 @@ async function adjustPossibleDirectory(glob: Glob, root: string): Promise<Glob> 
 }
 
 function posixPath(p: string): string {
-    return path.sep === '\\' ? p.replace(/\\/g, '/') : p;
+    return path.sep === '\\' ? p.replaceAll('\\', '/') : p;
 }
 
 export async function normalizeFileOrGlobsToRoot(globs: Glob[], root: string): Promise<string[]> {

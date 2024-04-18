@@ -1,6 +1,7 @@
+import * as fs from 'node:fs';
+import * as Path from 'node:path';
+
 import type { CSpellSettingsWithSourceTrace } from '@cspell/cspell-types';
-import * as fs from 'fs';
-import * as Path from 'path';
 
 import { toError } from '../util/errors.js';
 import { clean } from '../util/util.js';
@@ -197,7 +198,7 @@ function findPackageForCSpellConfig(pathToConfig: string): NodePackage | undefin
             filename,
             name: pkg['name'],
         };
-    } catch (e) {
+    } catch {
         return undefined;
     }
 }

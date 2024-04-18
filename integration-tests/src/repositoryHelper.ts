@@ -1,9 +1,10 @@
+import * as fs from 'node:fs';
+import * as Path from 'node:path';
+import { fileURLToPath } from 'node:url';
+
 import { Octokit } from '@octokit/rest';
 import chalk from 'chalk';
-import * as fs from 'fs';
-import * as Path from 'path';
 import { simpleGit } from 'simple-git';
-import { fileURLToPath } from 'url';
 
 import * as Config from './config.js';
 import type { Repository } from './configDef.js';

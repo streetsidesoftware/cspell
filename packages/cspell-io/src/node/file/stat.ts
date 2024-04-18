@@ -1,5 +1,5 @@
-import { promises as fs, statSync } from 'fs';
-import { format } from 'util';
+import { promises as fs, statSync } from 'node:fs';
+import { format } from 'node:util';
 
 import type { Stats } from '../../models/Stats.js';
 import { fetchHead } from './fetch.js';

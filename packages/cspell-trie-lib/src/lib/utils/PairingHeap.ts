@@ -40,7 +40,7 @@ export class PairingHeap<T> implements IterableIterator<T> {
     }
 
     /** Add items to the heap */
-    concat(i: Iterable<T>): this {
+    append(i: Iterable<T>): this {
         for (const v of i) {
             this.add(v);
         }

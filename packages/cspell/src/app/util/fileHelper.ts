@@ -1,12 +1,13 @@
+import { promises as fsp } from 'node:fs';
+import * as path from 'node:path';
+import { fileURLToPath, pathToFileURL } from 'node:url';
+
 import type { BufferEncoding } from 'cspell-io';
 import { readFileText as cioReadFile } from 'cspell-io';
 import type { CSpellUserSettings, Document, Issue } from 'cspell-lib';
 import * as cspell from 'cspell-lib';
 import { fileToDocument, isBinaryFile as isUriBinaryFile } from 'cspell-lib';
-import { promises as fsp } from 'fs';
 import getStdin from 'get-stdin';
-import * as path from 'path';
-import { fileURLToPath, pathToFileURL } from 'url';
 import { URI } from 'vscode-uri';
 
 import { asyncAwait, asyncFlatten, asyncMap, asyncPipe, mergeAsyncIterables } from './async.js';
@@ -211,7 +212,7 @@ export async function isFile(filename: string): Promise<boolean> {
     try {
         const stat = await fsp.stat(filename);
         return stat.isFile();
-    } catch (e) {
+    } catch {
         return false;
     }
 }
@@ -220,7 +221,7 @@ export async function isDir(filename: string): Promise<boolean> {
     try {
         const stat = await fsp.stat(filename);
         return stat.isDirectory();
-    } catch (e) {
+    } catch {
         return false;
     }
 }

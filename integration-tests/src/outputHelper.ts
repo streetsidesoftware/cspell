@@ -1,5 +1,6 @@
+import { format } from 'node:util';
+
 import chalk from 'chalk';
-import { format } from 'util';
 
 export interface ExecOutput {
     code: number;
@@ -22,7 +23,7 @@ export function formatExecOutput(output: ExecOutput): string {
     const pCode = split(color(`exit code: ${code}`));
     const pTime = elapsedTime ? [`time: ${(elapsedTime / 1000).toFixed(3)}s`] : [];
 
-    return pStdout.concat(pStderr).concat(pCode).concat(pTime).join('\n');
+    return [...pStdout, ...pStderr, ...pCode, ...pTime].join('\n');
 }
 
 function split(text: string | undefined): string[] {

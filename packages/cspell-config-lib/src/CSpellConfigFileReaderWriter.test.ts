@@ -1,5 +1,6 @@
+import { pathToFileURL } from 'node:url';
+
 import type { CSpellSettings } from '@cspell/cspell-types';
-import { pathToFileURL } from 'url';
 import { describe, expect, test, vi } from 'vitest';
 
 import { CSpellConfigFile } from './CSpellConfigFile.js';

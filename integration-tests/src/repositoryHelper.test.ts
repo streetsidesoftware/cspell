@@ -1,5 +1,6 @@
-import { promises as fs } from 'fs';
-import { join } from 'path';
+import { promises as fs } from 'node:fs';
+import { join } from 'node:path';
+
 import type { Mock } from 'vitest';
 import { beforeEach, describe, expect, test, vi } from 'vitest';
 
@@ -7,7 +8,7 @@ import { CaptureLogger } from './CaptureLogger.js';
 import { addRepository as configAddRepository } from './config.js';
 import { addRepository, checkoutRepositoryAsync, repositoryDir } from './repositoryHelper.js';
 
-const defaultTimeout = 60000;
+const defaultTimeout = 60_000;
 
 vi.mock('./config.js');
 

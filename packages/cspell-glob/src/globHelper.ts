@@ -1,5 +1,5 @@
 /* eslint-disable no-irregular-whitespace */
-import * as Path from 'path';
+import * as Path from 'node:path';
 
 import type {
     GlobPattern,
@@ -25,7 +25,7 @@ export function fileOrGlobToGlob(
     root: string,
     path: PathInterface = Path,
 ): GlobPatternWithRoot {
-    const pathToGlob = path.sep === '\\' ? (p: string) => p.replace(/\\/g, '/') : (p: string) => p;
+    const pathToGlob = path.sep === '\\' ? (p: string) => p.replaceAll('\\', '/') : (p: string) => p;
 
     const isGlobalPattern = false;
     if (isGlobPatternWithOptionalRoot(fileOrGlob)) {
@@ -192,7 +192,7 @@ export function normalizeGlobToRoot<Glob extends GlobPatternWithRoot>(
     path: PathInterface,
 ): Glob {
     function relToGlob(relativePath: string): string {
-        return path.sep === '\\' ? relativePath.replace(/\\/g, '/') : relativePath;
+        return path.sep === '\\' ? relativePath.replaceAll('\\', '/') : relativePath;
     }
 
     if (glob.root === root) {
@@ -279,7 +279,7 @@ function rebaseGlob(glob: string, rebaseTo: string): string | undefined {
  * @returns trimmed glob
  */
 function trimGlob(glob: string): string {
-    glob = glob.replace(/(?<!\\)#.*/g, '');
+    glob = glob.replaceAll(/(?<!\\)#.*/g, '');
     glob = trimGlobLeft(glob);
     glob = trimGlobRight(glob);
     return glob;

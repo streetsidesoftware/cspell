@@ -5,7 +5,7 @@ import * as getDictionary from '../getDictionary.js';
 import * as cspell from '../index.js';
 import { validateText } from '../validator.js';
 
-const timeout = 10000;
+const timeout = 10_000;
 
 describe('Validate English', () => {
     test(

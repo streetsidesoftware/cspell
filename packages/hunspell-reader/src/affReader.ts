@@ -1,5 +1,6 @@
-import assert from 'assert';
-import { readFile } from 'fs/promises';
+import assert from 'node:assert';
+import { readFile } from 'node:fs/promises';
+
 import { decode as decodeHtmlEntities } from 'html-entities';
 import pkgIconvLite from 'iconv-lite';
 
@@ -233,7 +234,7 @@ function fixMatch(type: AffixRule['type'], match: string): RegExp {
 
 function affixMatchToRegExpString(match: string): string {
     if (match === '0') return '';
-    return match.replace(/([\\\-?*])/g, '\\$1');
+    return match.replaceAll(/([\\\-?*])/g, '\\$1');
 }
 
 function collectFx(): Collector<Afx> {

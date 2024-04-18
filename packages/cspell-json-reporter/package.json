@@ -41,7 +41,8 @@
     "clean-build": "pnpm run clean && pnpm run build",
     "coverage": "vitest run --coverage",
     "test:watch": "vitest",
-    "test": "vitest run",
+    "test": "vitest run && pnpm test:run",
+    "test:run": "node ../../bin.mjs . --config cSpell.example.mjs",
     "watch": "tsc -b . -w"
   },
   "dependencies": {

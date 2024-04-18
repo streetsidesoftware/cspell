@@ -1,10 +1,11 @@
+import assert from 'node:assert';
+import path from 'node:path';
+import { fileURLToPath, pathToFileURL } from 'node:url';
+
 import type { CSpellUserSettings, ImportFileRef, Source } from '@cspell/cspell-types';
-import assert from 'assert';
 import type { CSpellConfigFile, CSpellConfigFileReaderWriter, IO, TextFile } from 'cspell-config-lib';
 import { createReaderWriter, CSpellConfigFileInMemory } from 'cspell-config-lib';
 import { isUrlLike, toFileURL } from 'cspell-io';
-import path from 'path';
-import { fileURLToPath, pathToFileURL } from 'url';
 import { URI, Utils as UriUtils } from 'vscode-uri';
 
 import { srcDirectory } from '../../../../lib-cjs/index.cjs';
@@ -673,7 +674,7 @@ function createIO(fs: VFileSystem): IO {
 async function isDirectory(fs: VFileSystem, path: URL): Promise<boolean> {
     try {
         return (await fs.stat(path)).isDirectory();
-    } catch (e) {
+    } catch {
         return false;
     }
 }
@@ -719,11 +720,7 @@ function relativeToCwd(file: string | URL): string {
     }
     const segments = cwdPath.length - i;
     if (segments > 3) return toFilePathOrHref(file);
-    const prefix = '.'
-        .repeat(segments)
-        .split('')
-        .map(() => '..')
-        .join('/');
+    const prefix = [...'.'.repeat(segments)].map(() => '..').join('/');
     return [prefix || '.', ...urlPath.slice(i)].join('/');
 }
 

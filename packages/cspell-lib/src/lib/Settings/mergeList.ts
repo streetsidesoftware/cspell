@@ -40,7 +40,7 @@ export function mergeList<T>(left: T[] | undefined, right: T[] | undefined): T[]
     if (!Array.isArray(right)) return left;
     if (!left.length) return right;
     if (!right.length) return left;
-    const result = cacheMergeLists.get(left, right, (left, right) => left.concat(right));
+    const result = cacheMergeLists.get(left, right, (left, right) => [...left, ...right]);
     Object.freeze(left);
     Object.freeze(right);
     Object.freeze(result);

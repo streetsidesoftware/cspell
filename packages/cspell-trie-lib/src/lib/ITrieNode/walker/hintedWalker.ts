@@ -49,7 +49,7 @@ function* hintedWalkerNext(
     const roots = rawRoots.map(filterRoot);
     const compoundRoots = rawRoots.map((r) => r.get(compoundCharacter)).filter(isDefined);
     const setOfCompoundRoots = new Set(compoundRoots);
-    const rootsForCompoundMethods = roots.concat(compoundRoots);
+    const rootsForCompoundMethods = [...roots, ...compoundRoots];
 
     const compoundMethodRoots: { [index: number]: readonly (readonly [string, ITrieNode])[] } = {
         [CompoundWordsMethod.NONE]: [],

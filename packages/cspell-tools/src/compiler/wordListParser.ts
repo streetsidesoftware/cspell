@@ -15,8 +15,8 @@ export function normalizeTargetWords(options: CompileOptions): Operator<string> 
     const operations: Operator<string>[] = [
         opFilter<string>((a) => !!a),
         lineParser,
-        options.sort ? createInlineBufferedSort(10000) : undefined,
-        opFilter<string>(uniqueFilter(10000)),
+        options.sort ? createInlineBufferedSort(10_000) : undefined,
+        opFilter<string>(uniqueFilter(10_000)),
         options.filter ? opFilter<string>(options.filter) : undefined,
     ].filter(isDefined);
     return opCombine(...operations);
@@ -167,15 +167,15 @@ export function createParseFileLineMapper(options?: Partial<ParseFileOptions>): 
     function splitLine(line: string): string[] {
         line = line.replace(/#.*/, ''); // remove comment
         line = line.trim();
-        line = line.replace(/\bU\+[0-9A-F]{4}\b/gi, '|'); // Remove Unicode Definitions
-        line = line.replace(/\\U[0-9A-F]{4}/gi, '|'); // Remove Unicode Definitions
-        line = line.replace(regNonWordOrDigit, '|');
-        line = line.replace(/'(?=\|)/g, ''); // remove trailing '
+        line = line.replaceAll(/\bU\+[0-9A-F]{4}\b/gi, '|'); // Remove Unicode Definitions
+        line = line.replaceAll(/\\U[0-9A-F]{4}/gi, '|'); // Remove Unicode Definitions
+        line = line.replaceAll(regNonWordOrDigit, '|');
+        line = line.replaceAll(/'(?=\|)/g, ''); // remove trailing '
         line = line.replace(/'$/, ''); // remove trailing '
-        line = line.replace(/(?<=\|)'/g, ''); // remove leading '
+        line = line.replaceAll(/(?<=\|)'/g, ''); // remove leading '
         line = line.replace(/^'/, ''); // remove leading '
-        line = line.replace(/\s*\|\s*/g, '|'); // remove spaces around |
-        line = line.replace(/[|]+/g, '|'); // reduce repeated |
+        line = line.replaceAll(/\s*\|\s*/g, '|'); // remove spaces around |
+        line = line.replaceAll(/[|]+/g, '|'); // reduce repeated |
         line = line.replace(/^\|/, ''); // remove leading |
         line = line.replace(/\|$/, ''); // remove trailing |
         const lines = line
@@ -203,7 +203,7 @@ export function createParseFileLineMapper(options?: Partial<ParseFileOptions>): 
                 }
                 if (!splitKeepBoth) continue;
             }
-            yield line.replace(/["]/g, '');
+            yield line.replaceAll(/["]/g, '');
         }
     }
 

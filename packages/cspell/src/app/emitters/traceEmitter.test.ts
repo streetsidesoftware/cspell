@@ -1,4 +1,5 @@
-import { posix, win32 } from 'path';
+import { posix, win32 } from 'node:path';
+
 import strip from 'strip-ansi';
 import { describe, expect, test, vi } from 'vitest';
 
@@ -195,5 +196,5 @@ function sampleResultsWin32() {
 }
 
 function bs(s: string, sep = win32.sep) {
-    return s.replace(/\//g, sep);
+    return s.replaceAll('/', sep);
 }

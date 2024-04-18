@@ -1,6 +1,6 @@
-import { reader as myreader, reeder } from './reader';
 import { expressions, muawhahaha } from './creepyData';
 import * as creepy from './creepyData';
+import { reader as myreader, reeder } from './reader';
 
 /**
  * This is some sample code to test cspell's eslint-plugin.

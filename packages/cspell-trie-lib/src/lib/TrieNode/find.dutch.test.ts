@@ -1,6 +1,7 @@
-import * as fs from 'fs/promises';
+import * as fs from 'node:fs/promises';
+import * as zlib from 'node:zlib';
+
 import { describe, expect, test } from 'vitest';
-import * as zlib from 'zlib';
 
 import { resolveGlobalDict } from '../../test/samples.js';
 import { importTrie } from '../io/importExport.js';
@@ -172,8 +173,8 @@ function processText(text: string): string[] {
     return [
         ...new Set(
             text
-                .replace(/#.*/gm, '')
-                .replace(/[.0-9,"“():]/g, ' ')
+                .replaceAll(/#.*/gm, '')
+                .replaceAll(/[.0-9,"“():]/g, ' ')
                 .split(/\s+/)
                 .sort()
                 .filter((a) => !!a),

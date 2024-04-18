@@ -1,4 +1,4 @@
-import { promises as fs } from 'fs';
+import { promises as fs } from 'node:fs';
 
 import type { IO } from './IO.js';
 import type { TextFile, TextFileRef } from './TextFile.js';

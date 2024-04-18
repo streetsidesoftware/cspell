@@ -254,7 +254,7 @@ function formatIssue(templateStr: string, issue: ReporterIssue, maxIssueTextWidt
         $quickFix: formatQuickFix(issue),
     };
 
-    const t = template(templateStr.replace(/\$message/g, message));
+    const t = template(templateStr.replaceAll('$message', message));
 
     return substitute(chalkTemplate(t), substitutions).trimEnd();
 }

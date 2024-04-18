@@ -1,4 +1,5 @@
-import { readFile } from 'fs/promises';
+import { readFile } from 'node:fs/promises';
+
 import { genSequence } from 'gensequence';
 import { describe, expect, test } from 'vitest';
 
@@ -209,9 +210,9 @@ const sampleWords = [
     'fun journey',
     'long walk',
     'fun walk',
-]
-    .concat(specialCharacters)
-    .concat(smallSample);
+    ...specialCharacters,
+    ...smallSample,
+];
 
 function applyEndings(s: string): string[] {
     const endings = ['', 'ed', 'er', 'ing', 's'];

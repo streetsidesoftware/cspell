@@ -1,6 +1,7 @@
 // cSpell:ignore findup
+import { createWriteStream, openSync, writeSync } from 'node:fs';
+
 import { Command } from 'commander';
-import { createWriteStream, openSync, writeSync } from 'fs';
 import type { Sequence } from 'gensequence';
 import { genSequence } from 'gensequence';
 
@@ -10,7 +11,7 @@ import { IterableHunspellReaderLegacy } from './IterableHunspellReaderLegacy.js'
 import { iterableToStream } from './iterableToStream.js';
 import { batch, uniqueFilter } from './util.js';
 
-const uniqueHistorySize = 500000;
+const uniqueHistorySize = 500_000;
 
 let logStream: NodeJS.WritableStream = process.stderr;
 

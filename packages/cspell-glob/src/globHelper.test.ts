@@ -1,6 +1,7 @@
+import * as path from 'node:path';
+import { posix, win32 } from 'node:path';
+
 import mm from 'micromatch';
-import * as path from 'path';
-import { posix, win32 } from 'path';
 import { describe, expect, test } from 'vitest';
 
 import type { NormalizeOptions } from './globHelper.js';
@@ -134,7 +135,7 @@ describe('Validate Glob Normalization to root', () => {
             }
         }
 
-        return patterns.concat([...flatten()]);
+        return [...patterns, ...flatten()];
     }
 
     function eg(e: Partial<GlobPatternNormalized>, path: PathInterface) {
@@ -238,7 +239,7 @@ describe('Validate Glob Normalization to root', () => {
             root = path.resolve(root);
             const shouldMatch = !file.startsWith('!');
             file = file.replace(/^!/, '');
-            file = path.relative(root, path.resolve(root, file)).replace(/\\/g, '/');
+            file = path.relative(root, path.resolve(root, file)).replaceAll('\\', '/');
 
             const result = normalizeGlobToRoot(glob, root, path);
             expect(result).toEqual(expected);
@@ -342,7 +343,7 @@ describe('Validate Glob Normalization to root', () => {
     }
 
     function gN(glob: string, root: string, rawGlob: string, rawRoot: string): GlobPatternNormalized {
-        return { glob, root, rawGlob, rawRoot, isGlobalPattern: glob.replace(/^!+/g, '').startsWith('**') };
+        return { glob, root, rawGlob, rawRoot, isGlobalPattern: glob.replaceAll(/^!+/g, '').startsWith('**') };
     }
 
     test.each`

@@ -1,3 +1,6 @@
+import assert from 'node:assert';
+import { pathToFileURL } from 'node:url';
+
 import type {
     AdvancedCSpellSettingsWithSourceTrace,
     CSpellSettingsWithSourceTrace,
@@ -7,8 +10,6 @@ import type {
     Plugin,
     Source,
 } from '@cspell/cspell-types';
-import assert from 'assert';
-import { pathToFileURL } from 'url';
 
 import { onClearCache } from '../events/index.js';
 import type { CSpellSettingsInternal, CSpellSettingsInternalFinalized } from '../Models/CSpellSettingsInternalDef.js';
@@ -53,7 +54,7 @@ onClearCache(() => {
 
 function _mergeWordsCached(left: string[], right: string[]): string[] {
     const map = autoResolveWeak(cachedMerges, left, () => new WeakMap<string[], string[]>());
-    return autoResolveWeak(map, right, () => left.concat(right));
+    return autoResolveWeak(map, right, () => [...left, ...right]);
 }
 
 /**

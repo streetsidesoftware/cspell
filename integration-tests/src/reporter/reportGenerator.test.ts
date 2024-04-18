@@ -13,7 +13,7 @@ describe('reportGenerator', () => {
         ${['file:200:30\twords\tcontext']} | ${['file:200:30.........words.......context']}
     `('padLines $lines', ({ lines, expected }) => {
         function t(s: string): string {
-            return s.replace(/\t/g, '|').replace(/\s/g, '.');
+            return s.replaceAll('\t', '|').replaceAll(/\s/g, '.');
         }
         expect(padLines(lines).map(t)).toEqual(expected.map(t));
     });

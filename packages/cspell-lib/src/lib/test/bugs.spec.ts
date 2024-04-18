@@ -1,5 +1,6 @@
-import * as fsp from 'fs/promises';
-import * as path from 'path';
+import * as fsp from 'node:fs/promises';
+import * as path from 'node:path';
+
 import { describe, expect, test } from 'vitest';
 
 import { pathPackageSamples } from '../../test-util/test.locations.cjs';
@@ -10,7 +11,7 @@ const configFile = path.join(samples, 'cspell.json');
 
 const files = ['bug345.ts', '../src/sample.go'];
 
-const timeout = 10000;
+const timeout = 10_000;
 
 describe('Validate Against Bug Fixes', () => {
     function t(filename: string) {

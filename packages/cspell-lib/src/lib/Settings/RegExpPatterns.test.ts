@@ -1,6 +1,7 @@
+import fs from 'node:fs';
+import Path from 'node:path';
+
 import type { TextOffset } from '@cspell/cspell-types';
-import fs from 'fs';
-import Path from 'path';
 import { describe, expect, test } from 'vitest';
 
 import { pathPackageSamples } from '../../test-util/test.locations.cjs';
@@ -34,7 +35,7 @@ describe('Validate InDocSettings', () => {
                 "spell-checker:disable\nconst unicodeHexValue = '\\uBABC';\nconst unicodeHexValue2 = '\\x{abcd}';\n\n// spell-checker:enable",
                 'spell-checker:disable */\n\n// nested disabled checker is not supported.\n\n// spell-checker:disable\n\n// nested spell-checker:enable',
                 'cSpell:disable\n\nNot checked.\n\n',
-            ].map((a) => a.replace(/\n/g, '\r\n')),
+            ].map((a) => a.replaceAll('\n', '\r\n')),
         );
         // cspell:enable
     });
@@ -53,7 +54,7 @@ describe('Validate InDocSettings', () => {
         // cspell:disable
         expect(m1).toEqual(
             ["const badspelling = 'disable'; // spell-checker:disable-line, yes all of it."].map((a) =>
-                a.replace(/\n/g, '\r\n'),
+                a.replaceAll('\n', '\r\n'),
             ),
         );
         // cspell:enable
@@ -72,7 +73,7 @@ describe('Validate InDocSettings', () => {
         expect(m1).not.toBeFalsy();
         // cspell:disable
         expect(m1).toEqual(
-            ["cspell:disable-next\nconst verybadspelling = 'disable';"].map((a) => a.replace(/\n/g, '\r\n')),
+            ["cspell:disable-next\nconst verybadspelling = 'disable';"].map((a) => a.replaceAll('\n', '\r\n')),
         );
         // cspell:enable
     });
@@ -587,7 +588,7 @@ pAqEAuV4DNoxQKKWmhVv+J0ptMWD25Pnpxeq5sXzghfJnslJlQND
 -----END CERTIFICATE-----
 `;
 
-const sampleCode2LF = sampleCodeSrc.replace(/\r?\n/g, '\n');
-const sampleCode2CRLF = sampleCode2LF.replace(/\n/g, '\r\n');
+const sampleCode2LF = sampleCodeSrc.replaceAll(/\r?\n/g, '\n');
+const sampleCode2CRLF = sampleCode2LF.replaceAll('\n', '\r\n');
 
 const sampleBug345 = fs.readFileSync(Path.join(pathPackageSamples, './bug-fixes/bug345.ts'), 'utf-8');

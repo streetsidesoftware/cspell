@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 
-import { program, CommanderError } from 'commander';
+import { CommanderError, program } from 'commander';
+
 import { run } from './dist/app.js';
 
 run(program, process.argv).catch((e) => {

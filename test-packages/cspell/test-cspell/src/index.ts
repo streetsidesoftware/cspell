@@ -1,5 +1,6 @@
+import { assert } from 'node:console';
+
 import type { CSpellReporter } from '@cspell/cspell-types';
-import { assert } from 'console';
 import type { CSpellApplicationOptions, Issue, ProgressItem, RunResult } from 'cspell';
 import { checkText, lint, trace } from 'cspell';
 

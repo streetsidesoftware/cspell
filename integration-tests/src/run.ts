@@ -1,7 +1,8 @@
+import os from 'node:os';
+import path from 'node:path';
+
 import type { Command } from 'commander';
 import { createCommand, InvalidArgumentError } from 'commander';
-import os from 'os';
-import path from 'path';
 
 import { check } from './check.js';
 import type { ListRepositoryOptions } from './repositoryHelper.js';

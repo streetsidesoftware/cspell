@@ -1,7 +1,8 @@
-import assert from 'assert';
+import assert from 'node:assert';
+import { resolve } from 'node:path';
+import { pathToFileURL } from 'node:url';
+
 import { spellCheckDocument } from 'cspell-lib';
-import { resolve } from 'path';
-import { pathToFileURL } from 'url';
 
 // cspell:ignore wordz coztom clockz cuztom
 const customWords = ['wordz', 'cuztom', 'clockz'];
