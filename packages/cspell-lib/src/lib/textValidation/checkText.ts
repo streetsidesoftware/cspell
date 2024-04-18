@@ -99,18 +99,20 @@ function genResult(text: string, issues: ValidationIssue[], includeRanges: Match
     const result: TextInfoItem[] = [];
     let lastPos = 0;
     for (const { startPos, endPos } of includeRanges) {
-        result.push({
-            text: text.slice(lastPos, startPos),
-            startPos: lastPos,
-            endPos: startPos,
-            flagIE: IncludeExcludeFlag.EXCLUDE,
-        });
-        result.push({
-            text: text.slice(startPos, endPos),
-            startPos,
-            endPos,
-            flagIE: IncludeExcludeFlag.INCLUDE,
-        });
+        result.push(
+            {
+                text: text.slice(lastPos, startPos),
+                startPos: lastPos,
+                endPos: startPos,
+                flagIE: IncludeExcludeFlag.EXCLUDE,
+            },
+            {
+                text: text.slice(startPos, endPos),
+                startPos,
+                endPos,
+                flagIE: IncludeExcludeFlag.INCLUDE,
+            },
+        );
         lastPos = endPos;
     }
     result.push({

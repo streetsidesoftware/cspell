@@ -9,8 +9,7 @@ export function _tokenizedLineToMarkdown(line: TokenizedLine, indentation = ''):
   | text      | scope                                                    |
   | --------- | -------------------------------------------------------- |`;
 
-    markdownLines.push(...header.split('\n'));
-    markdownLines.push(...line.tokens.map((t) => `  | ${toInlineCode(t.text)} | ${t.scope} |`));
+    markdownLines.push(...header.split('\n'), ...line.tokens.map((t) => `  | ${toInlineCode(t.text)} | ${t.scope} |`));
 
     return markdownLines.map((line) => indentation + line).join('\n') + '\n\n';
 }

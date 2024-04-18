@@ -136,7 +136,7 @@ function sampleWords() {
          🙄😯😦😧😮😲🥱😴🤤😪😮‍💨😵😵‍💫🤐🥴🤢
          🤮🤧😷🤒🤕🤑🤠😈 ` + // cspell:enable
         genWords(8, 'A', 'z').join(' ') +
-        genWords(8, '\u1f00', '\u1fff').join(' ') +
+        genWords(8, '\u1F00', '\u1FFF').join(' ') +
         ' '
     )
         .normalize('NFC')

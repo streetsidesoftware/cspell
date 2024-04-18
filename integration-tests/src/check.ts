@@ -363,8 +363,7 @@ function tfn(colorFn: ChalkInstance): (strings: string | TemplateStringsArray, .
         const parts: string[] = [];
         let i = 0;
         for (; i < strings.length - 1; ++i) {
-            parts.push(strings[i]);
-            parts.push(rest[i] as string);
+            parts.push(strings[i], rest[i] as string);
         }
         if (i < strings.length) {
             parts.push(strings[i]);
