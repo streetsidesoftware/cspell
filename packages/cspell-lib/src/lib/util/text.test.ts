@@ -1,3 +1,5 @@
+/* eslint-disable unicorn/text-encoding-identifier-case */
+
 import { opConcatMap, pipe, toArray } from '@cspell/cspell-pipe/sync';
 import type { TextOffset } from '@cspell/cspell-types';
 import { describe, expect, test } from 'vitest';

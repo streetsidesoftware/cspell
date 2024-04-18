@@ -1,3 +1,4 @@
+/* eslint-disable unicorn/text-encoding-identifier-case */
 import assert from 'node:assert';
 import { readFile } from 'node:fs/promises';
 

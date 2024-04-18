@@ -1,3 +1,4 @@
+/* eslint-disable unicorn/text-encoding-identifier-case */
 import { describe, expect, test } from 'vitest';
 
 import { pathToSample } from '../test/test.helper.js';

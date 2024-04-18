@@ -23,6 +23,7 @@ describe('Basic Aff Validation', () => {
     const pAff = parseAff(getSimpleAff());
     it('Reads Simple Aff', () => {
         const aff = pAff;
+        // eslint-disable-next-line unicorn/text-encoding-identifier-case
         expect(aff.SET).toBe('UTF-8');
         expect(aff.PFX).toBeInstanceOf(Map);
         expect(aff.SFX).toBeInstanceOf(Map);

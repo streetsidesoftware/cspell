@@ -135,16 +135,15 @@ export default tsEslint.config(
             'unicorn/prefer-switch': 'error',
             'unicorn/prefer-ternary': 'error',
             'unicorn/prefer-type-error': 'error',
+            'unicorn/relative-url-style': 'error',
+            'unicorn/require-array-join-separator': 'error',
+            'unicorn/require-number-to-fixed-digits-argument': 'error',
+            'unicorn/switch-case-braces': 'error',
+            'unicorn/template-indent': 'error',
+            'unicorn/text-encoding-identifier-case': 'error',
+            'unicorn/throw-new-error': 'error',
 
             // To be evaluated
-
-            // 'unicorn/relative-url-style': 'error',
-            // 'unicorn/require-array-join-separator': 'error',
-            // 'unicorn/require-number-to-fixed-digits-argument': 'error',
-            // 'unicorn/switch-case-braces': 'error',
-            // 'unicorn/template-indent': 'error',
-            // 'unicorn/text-encoding-identifier-case': 'error',
-            // 'unicorn/throw-new-error': 'error',
         },
     },
     {

@@ -4315,7 +4315,7 @@ ${createPerfTable2(data)}
   return markdown;
 }
 async function readCsvData(csvFile) {
-  const csv = await import_node_fs.promises.readFile(csvFile, "utf-8");
+  const csv = await import_node_fs.promises.readFile(csvFile, "utf8");
   const records = parse(csv, { columns: true, cast: true });
   return records;
 }

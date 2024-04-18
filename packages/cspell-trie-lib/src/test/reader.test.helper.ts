@@ -20,7 +20,7 @@ export interface Config {
 }
 
 export async function readConfig(configLocation: string): Promise<Config> {
-    const json = await readFile(configLocation, 'utf-8');
+    const json = await readFile(configLocation, 'utf8');
     return JSON.parse(json.replaceAll(/\/\/.*/g, ''));
 }
 
@@ -42,6 +42,7 @@ export async function readTrieFileFromConfig(configLocation: string, name?: stri
     return new Trie(trieNode);
 }
 
+// eslint-disable-next-line unicorn/text-encoding-identifier-case
 type BufferEncoding = 'utf8' | 'utf-8';
 
 /**

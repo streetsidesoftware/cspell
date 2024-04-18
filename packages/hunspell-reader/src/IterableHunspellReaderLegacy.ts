@@ -11,6 +11,8 @@ import type { WordInfo } from './types.js';
 import { filterOrderedList } from './util.js';
 
 const { decode } = pkgIconvLite;
+
+// eslint-disable-next-line unicorn/text-encoding-identifier-case
 const defaultEncoding = 'UTF-8';
 
 export { WordInfo } from './types.js';

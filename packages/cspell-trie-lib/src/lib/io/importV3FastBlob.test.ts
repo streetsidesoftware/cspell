@@ -76,7 +76,7 @@ describe('Import/Export', () => {
         ${'sample2.txt'} | ${{}}
     `('Read sample and ensure results match $sampleWordList $options', async ({ sampleWordList, options }) => {
         const path = resolveSamplePath(sampleWordList);
-        const content = await readFile(path, 'utf-8');
+        const content = await readFile(path, 'utf8');
         const wordList = content
             .split('\n')
             .map((a) => a.trim())

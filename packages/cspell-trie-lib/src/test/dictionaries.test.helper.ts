@@ -55,7 +55,7 @@ function memorize<V>(key: string, map: Map<string, V>, resolve: (key: string) =>
     return r;
 }
 
-export function readRawDictionaryFile(name: string, encoding: BufferEncoding = 'utf-8'): Promise<string> {
+export function readRawDictionaryFile(name: string, encoding: BufferEncoding = 'utf8'): Promise<string> {
     return fs.readFile(resolveGlobalDict(name), encoding);
 }
 

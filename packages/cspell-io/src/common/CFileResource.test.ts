@@ -9,7 +9,7 @@ describe('CFileResource', () => {
             const fileResource = {
                 url: new URL('https://example.com/file.txt'),
                 content: 'Hello, world!',
-                encoding: 'utf-8',
+                encoding: 'utf8',
             } as const;
 
             // Act
@@ -28,7 +28,7 @@ describe('CFileResource', () => {
             const fileResource = {
                 url: new URL('https://example.com/file.txt'),
                 content: 'Hello, world!',
-                encoding: 'utf-8',
+                encoding: 'utf8',
             } as const;
 
             const content = 'Welcome to a new day!';
@@ -70,7 +70,7 @@ describe('CFileResource', () => {
             // Arrange
             const url = new URL('https://example.com/file.txt');
             const content = 'Hello, world!';
-            const encoding = 'utf-8';
+            const encoding = 'utf8';
             const baseFilename = 'file.txt';
             const gz = true;
 
@@ -95,7 +95,7 @@ describe('CFileResource', () => {
             const fileResource = {
                 url: new URL('https://example.com/file.txt'),
                 content: Buffer.from(content),
-                encoding: 'utf-8',
+                encoding: 'utf8',
             } as const;
 
             // Act

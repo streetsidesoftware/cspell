@@ -1,3 +1,4 @@
+/* eslint-disable unicorn/text-encoding-identifier-case */
 import { gunzipSync } from 'node:zlib';
 
 import { arrayBufferViewToBuffer, asUint8Array, swap16, swapBytes } from './arrayBuffers.js';
@@ -6,7 +7,7 @@ import type { BufferEncodingExt, TextEncodingExt } from './BufferEncoding.js';
 const BOM_BE = 0xfeff;
 const BOM_LE = 0xfffe;
 
-const decoderUTF8 = new TextDecoder('utf-8');
+const decoderUTF8 = new TextDecoder('utf8');
 const decoderUTF16LE = new TextDecoder('utf-16le');
 const decoderUTF16BE = createTextDecoderUtf16BE();
 
