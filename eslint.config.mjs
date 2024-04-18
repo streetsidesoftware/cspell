@@ -44,6 +44,9 @@ export default tsEslint.config(
             'unicorn/no-array-method-this-argument': 'off', // Too many false positives
             'unicorn/no-negated-condition': 'off', // Too picky - works against implying the most common branch.
             'unicorn/no-useless-spread': 'off', // makes dangerous fixes
+            'unicorn/no-new-array': 'off', // new Array(size) is 100x faster than Array.from({length: size})
+            'unicorn/no-zero-fractions': 'off',
+            'unicorn/number-literal-case': 'off', // doesn't fix anything, might conflict with other rules.
 
             // Enable these rules to help with on boarding eslint.
             'unicorn/no-instanceof-array': 'error',
@@ -75,7 +78,6 @@ export default tsEslint.config(
             'unicorn/no-hex-escape': 'error',
             'unicorn/no-invalid-remove-event-listener': 'error',
             'unicorn/no-lonely-if': 'error',
-            'unicorn/no-new-array': 'error',
             'unicorn/no-new-buffer': 'error',
             'unicorn/no-null': 'error',
             'unicorn/no-object-as-default-parameter': 'error',
@@ -92,13 +94,17 @@ export default tsEslint.config(
             'unicorn/no-useless-fallback-in-spread': 'error',
             'unicorn/no-useless-length-check': 'error',
             'unicorn/no-useless-promise-resolve-reject': 'error',
+            'unicorn/no-useless-switch-case': 'error',
 
             // To be evaluated
 
-            // 'unicorn/no-useless-switch-case': 'error',
-            // 'unicorn/no-useless-undefined': 'error',
-            // 'unicorn/no-zero-fractions': 'error',
-            // 'unicorn/number-literal-case': 'error',
+            // 'unicorn/no-useless-undefined': [
+            //     'error', // Breaks return types
+            //     {
+            //         checkArrowFunctionBody: false,
+            //     },
+            // ],
+
             // 'unicorn/prefer-add-event-listener': 'error',
             // 'unicorn/prefer-array-find': 'error',
             // 'unicorn/prefer-array-flat-map': 'error',
@@ -250,6 +256,7 @@ export default tsEslint.config(
             'unicorn/no-null': 'off', // null is allowed in tests
             'unicorn/prefer-module': 'off', // require.resolve is allowed in tests
             'unicorn/error-message': 'off',
+            'unicorn/no-useless-undefined': 'off', // undefined is allowed in tests
         },
     },
     {
