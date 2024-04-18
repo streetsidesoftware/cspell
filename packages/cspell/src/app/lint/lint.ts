@@ -224,6 +224,7 @@ export async function runLint(cfg: LintRequest): Promise<RunResult> {
             const debugCfg = {
                 filename,
                 languageId: doc.languageId ?? cfg.languageId ?? 'default',
+                // eslint-disable-next-line unicorn/no-null
                 config: { ...cfg, source: null },
                 source: spellResult.localConfigFilepath,
             };

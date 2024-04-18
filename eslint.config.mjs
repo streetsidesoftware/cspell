@@ -42,6 +42,7 @@ export default tsEslint.config(
             'unicorn/new-for-builtins': 'off',
             'unicorn/better-regex': 'off', // Not sure if it is an improvement.
             'unicorn/no-array-method-this-argument': 'off', // Too many false positives
+            'unicorn/no-negated-condition': 'off', // Too picky - works against implying the most common branch.
 
             // Enable these rules to help with on boarding eslint.
             'unicorn/no-instanceof-array': 'error',
@@ -67,26 +68,25 @@ export default tsEslint.config(
             'unicorn/no-anonymous-default-export': 'error',
             'unicorn/no-array-push-push': 'error', // This isn't really a problem
             'unicorn/no-await-in-promise-methods': 'error',
-
-            // To be evaluated
-
             'unicorn/no-console-spaces': 'error',
             'unicorn/no-document-cookie': 'error',
             'unicorn/no-empty-file': 'error',
             'unicorn/no-hex-escape': 'error',
             'unicorn/no-invalid-remove-event-listener': 'error',
             'unicorn/no-lonely-if': 'error',
-            'unicorn/no-negated-condition': 'off', // Too picky - works against implying the most common branch.
             'unicorn/no-new-array': 'error',
             'unicorn/no-new-buffer': 'error',
-            // 'unicorn/no-null': 'error',
-            // 'unicorn/no-object-as-default-parameter': 'error',
-            // 'unicorn/no-process-exit': 'error',
-            // 'unicorn/no-single-promise-in-promise-methods': 'error',
-            // 'unicorn/no-static-only-class': 'error',
-            // 'unicorn/no-thenable': 'error',
-            // 'unicorn/no-this-assignment': 'error',
-            // 'unicorn/no-typeof-undefined': 'error',
+            'unicorn/no-null': 'error',
+            'unicorn/no-object-as-default-parameter': 'error',
+            'unicorn/no-process-exit': 'error',
+            'unicorn/no-single-promise-in-promise-methods': 'error',
+            'unicorn/no-static-only-class': 'error',
+            'unicorn/no-thenable': 'error',
+            'unicorn/no-this-assignment': 'error',
+            'unicorn/no-typeof-undefined': 'error',
+
+            // To be evaluated
+
             // 'unicorn/no-unnecessary-await': 'error',
             // 'unicorn/no-unnecessary-polyfills': 'error',
             // 'unicorn/no-unreadable-array-destructuring': 'error',

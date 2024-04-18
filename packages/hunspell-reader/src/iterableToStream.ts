@@ -11,9 +11,9 @@ export type IterableLike<T> = Iterable<T> | IterableIterator<T>;
  */
 export function iterableToStream<T extends Streamable>(
     src: IterableLike<T>,
-    options: stream.ReadableOptions = { encoding: 'utf8' },
+    options?: stream.ReadableOptions,
 ): stream.Readable {
-    return new ReadableObservableStream(src, options);
+    return new ReadableObservableStream(src, options ?? { encoding: 'utf8' });
 }
 
 class ReadableObservableStream<T> extends stream.Readable {
@@ -32,6 +32,9 @@ class ReadableObservableStream<T> extends stream.Readable {
             this.iter = this._source[Symbol.iterator]();
         }
         if (this.done) {
+            // See: https://nodejs.org/api/stream.html#readablepushchunk-encoding
+            // Pushing null means the stream is done.
+            // eslint-disable-next-line unicorn/no-null
             this.push(null);
             return;
         }
@@ -46,6 +49,9 @@ class ReadableObservableStream<T> extends stream.Readable {
             if (r.value !== null && r.value !== undefined) {
                 this.push(r.value);
             }
+            // See: https://nodejs.org/api/stream.html#readablepushchunk-encoding
+            // Pushing null means the stream is done.
+            // eslint-disable-next-line unicorn/no-null
             this.push(null);
         }
     }

@@ -14,6 +14,7 @@ export type EncodedSequence =
     | [SpecialCharIndex.Index14bit, number, number]
     | [SpecialCharIndex.Index21bit, number, number, number];
 
+// eslint-disable-next-line unicorn/no-static-only-class
 export class NumberSequenceByteEncoderDecoder {
     static encode(n: number): EncodedSequence {
         if (n < this.SpecialCharIndexMask) return [n];

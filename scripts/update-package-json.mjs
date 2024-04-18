@@ -20,7 +20,7 @@ async function updatePackageJson(pkgFile) {
 
     pkg.repository = repository;
 
-    await fs.writeFile(pkgFile, JSON.stringify(pkg, null, 2) + '\n');
+    await fs.writeFile(pkgFile, JSON.stringify(pkg, undefined, 2) + '\n');
 }
 
 async function run() {

@@ -35,7 +35,7 @@ export function parseCSpellConfigFilePackageJson(file: TextFile): CSpellConfigFi
 
     function serialize(settings: CSpellSettings) {
         packageJson['cspell'] = settings;
-        return JSON.stringify(packageJson, null, indent) + '\n';
+        return JSON.stringify(packageJson, undefined, indent) + '\n';
     }
 
     return new CSpellConfigFilePackageJson(url, cspell, serialize);

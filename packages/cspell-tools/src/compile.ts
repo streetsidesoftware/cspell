@@ -54,7 +54,7 @@ async function useCompile(src: string[], options: CompileCommonAppOptions): Prom
 async function initConfig(runConfig: RunConfig): Promise<void> {
     const { $schema = configFileSchemaURL, ...cfg } = runConfig;
     const config = { $schema, ...cfg };
-    const content = configFileHeader + YAML.stringify(config, null, 2);
+    const content = configFileHeader + YAML.stringify(config, undefined, 2);
     console.log('Writing config file: %s', defaultConfigFile);
     await writeFile(defaultConfigFile, content);
 

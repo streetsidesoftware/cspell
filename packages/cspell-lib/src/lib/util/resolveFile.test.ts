@@ -55,8 +55,8 @@ const sm = expect.stringMatching;
 setTimeout(
     () => {
         debugOut('Failed to quit in 1 minute: %o', getActiveResourcesInfo());
-        // eslint-disable-next-line n/no-process-exit
-        process.exit(1);
+        process.exitCode = 1;
+        throw new Error('Failed to quit in 1 minute');
     },
     1000 * 60 * 1,
 );

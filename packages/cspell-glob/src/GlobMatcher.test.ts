@@ -289,7 +289,7 @@ describe('Validate Options', () => {
         const filename = path.join(root, file);
         const patterns = pattern.split('|');
         const _options = options ?? root;
-        if (typeof _options !== 'string' && typeof _options !== 'undefined') {
+        if (typeof _options !== 'string' && _options !== undefined) {
             _options.root = _options.root ?? root;
         }
         expected = typeof expected === 'boolean' ? { matched: expected } : expected;

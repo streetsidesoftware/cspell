@@ -24,6 +24,6 @@ async function action(hunspellFile: string, locale: string): Promise<void> {
 
     const info = affToDicInfo(aff, locale);
 
-    const rawJson = JSON.stringify(info, null, 2);
+    const rawJson = JSON.stringify(info, undefined, 2);
     console.log(escapeUnicodeCode(rawJson));
 }

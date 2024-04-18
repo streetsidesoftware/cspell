@@ -56,6 +56,7 @@ const ruleMeta: Rule.RuleMetaData = {
 let isDebugMode = false;
 
 function nullFix(): null {
+    // eslint-disable-next-line unicorn/no-null
     return null;
 }
 

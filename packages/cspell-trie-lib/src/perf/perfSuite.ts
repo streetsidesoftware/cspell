@@ -179,7 +179,7 @@ export async function measurePerf(which: string | undefined, method: string | un
                 break;
             case 'dump':
                 timer.start('blob.write.TrieBlob.en.json');
-                writeFileSync('./TrieBlob.en.json', JSON.stringify(trieBlob, null, 2), 'utf8');
+                writeFileSync('./TrieBlob.en.json', JSON.stringify(trieBlob, undefined, 2), 'utf8');
                 timer.stop('blob.write.TrieBlob.en.json');
 
                 timer.start('blob.write.TrieBlob.en.trieb');

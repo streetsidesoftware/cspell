@@ -20,7 +20,7 @@ export function clearCachedFiles(): Promise<void> {
 function _clearCachedFiles(): Promise<void> {
     // We want to dispatch immediately.
     dispatchClearCache();
-    return Promise.all([refreshDictionaryCache(0)]).then(() => undefined);
+    return refreshDictionaryCache(0).then(() => undefined);
 }
 
 /**

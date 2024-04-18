@@ -125,7 +125,7 @@ describe('Verify using multiple dictionaries', () => {
     });
 
     test('checks mapWord is identity', async () => {
-        const dicts = await Promise.all([createSpellingDictionary(wordsA, 'wordsA', 'test', opts())]);
+        const dicts = [createSpellingDictionary(wordsA, 'wordsA', 'test', opts())];
 
         const dictCollection = createCollection(dicts, 'test');
         expect(dictCollection.mapWord('Hello')).toBe('Hello');

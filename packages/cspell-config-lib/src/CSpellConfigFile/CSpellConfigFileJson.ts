@@ -16,7 +16,7 @@ export class CSpellConfigFileJson extends ImplCSpellConfigFile {
     }
 
     serialize() {
-        return stringify(this.settings, null, this.indent) + '\n';
+        return stringify(this.settings, undefined, this.indent) + '\n';
     }
 
     public static parse(file: TextFile): CSpellConfigFileJson {
