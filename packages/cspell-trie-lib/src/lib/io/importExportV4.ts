@@ -35,20 +35,18 @@ const INLINE_DATA_COMMENT_LINE = '/';
 
 const specialCharacters = stringToCharSet(
     [
-        ...[
-            EOW,
-            BACK,
-            EOL,
-            REF,
-            REF_REL,
-            EOR,
-            ESCAPE,
-            LF,
-            REF_INDEX_BEGIN,
-            REF_INDEX_END,
-            INLINE_DATA_COMMENT_LINE,
-            ...'0123456789',
-        ],
+        EOW,
+        BACK,
+        EOL,
+        REF,
+        REF_REL,
+        EOR,
+        ESCAPE,
+        LF,
+        REF_INDEX_BEGIN,
+        REF_INDEX_END,
+        INLINE_DATA_COMMENT_LINE,
+        ...'0123456789',
         ...'`~!@#$%^&*()_-+=[]{};:\'"<>,./?\\|',
     ].join(''),
 );

@@ -75,7 +75,7 @@ async function execCheckAndUpdate(rep: Repository, options: CheckAndUpdateOption
             rep = resolveRepArgs(updatedRep);
         } catch (_) {
             log(color`******** fail ********`);
-            return Promise.resolve({ success: false, rep, elapsedTime: 0 });
+            return { success: false, rep, elapsedTime: 0 };
         }
         log(color`******** Updating Repo Complete ********`);
         if (rep.commit !== oldCommit) {
@@ -111,12 +111,12 @@ async function execCheck(context: CheckContext, update: boolean): Promise<CheckR
     log(time());
     if (!(await checkoutRepositoryAsync(logger, rep.url, rep.path, rep.commit, rep.branch))) {
         logger.log('******** fail ********');
-        return Promise.resolve({ success: false, rep, elapsedTime: 0 });
+        return { success: false, rep, elapsedTime: 0 };
     }
     log(time());
     if (!(await execPostCheckoutSteps(context))) {
         logger.log('******** fail ********');
-        return Promise.resolve({ success: false, rep, elapsedTime: 0 });
+        return { success: false, rep, elapsedTime: 0 };
     }
     log(time());
     const cspellResult = await execCommand(logger, path, cmdToExec, rep.args);

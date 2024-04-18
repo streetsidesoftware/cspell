@@ -193,7 +193,7 @@ export class Aff {
             case 'num':
                 return [...new Set(rules.split(','))];
         }
-        return [...new Set([...rules])];
+        return [...new Set(rules)];
     }
 
     get iConv() {
@@ -222,12 +222,10 @@ export function processRules(affInfo: AffInfo): Map<string, Rule> {
     const pfxRules: PfxRule[] = [...(affInfo.PFX || [])]
         .map(([, pfx]) => pfx)
         .map((pfx) => ({ id: pfx.id, type: 'pfx', pfx }));
-    const flagRules: FlagRule[] = [
-        ...GS.sequenceFromObject(affInfo as AffTransformFlags)
-            .filter(([key, value]) => !!affFlag[key] && !!value)
-            .map(([key, value]) => ({ id: value!, type: 'flag', flags: affFlag[key] })),
-    ];
-
+    const flagRules: FlagRule[] = GS.sequenceFromObject(affInfo as AffTransformFlags)
+        .filter(([key, value]) => !!affFlag[key] && !!value)
+        .map(([key, value]) => ({ id: value!, type: 'flag', flags: affFlag[key] }))
+        .toArray();
     const rules = [...sfxRules, ...pfxRules, ...flagRules].reduce((acc, rule) => {
         acc.set(rule.id, rule);
         return acc;

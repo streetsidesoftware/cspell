@@ -91,7 +91,7 @@ export class CSpellConfigFileReaderWriterImpl implements CSpellConfigFileReaderW
     }
 
     setTrustedUrls(urls: readonly (URL | string)[]): this {
-        this._trustedUrls = [...new Set([...urls.map((url) => new URL(url).href)])].sort();
+        this._trustedUrls = [...new Set(urls.map((url) => new URL(url).href))].sort();
         return this;
     }
 
