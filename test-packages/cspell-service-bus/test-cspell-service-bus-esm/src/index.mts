@@ -55,13 +55,13 @@ export class StringToUpperRequest extends ServiceRequestCls<'toUpper', { readonl
 
 export class DoNotHandleRequest extends ServiceRequestCls<'Do Not Handle', undefined, undefined> {
     constructor() {
-        super('Do Not Handle', undefined);
+        super('Do Not Handle');
     }
 }
 
 export class RetryAgainRequest extends ServiceRequestCls<'Retry Again Request', undefined, undefined> {
     constructor() {
-        super('Retry Again Request', undefined);
+        super('Retry Again Request');
     }
     static is(req: ServiceRequest): req is RetryAgainRequest {
         return req instanceof RetryAgainRequest;

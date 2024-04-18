@@ -217,7 +217,7 @@ function report(reposChecked: Repository[], results: CheckResult[]) {
     const resultsByRep = new Map(results.map((r) => [r.rep, r]));
     const w = Math.max(...reposChecked.map((r) => r.path.length));
     const r = sorted.map((r) => {
-        const { success = undefined, elapsedTime = 0 } = resultsByRep.get(r) || {};
+        const { success, elapsedTime = 0 } = resultsByRep.get(r) || {};
         const mark = success === undefined ? '🛑' : success === false ? '❌' : '✅';
         const time = chalk.gray(rightJustify(elapsedTime ? `${(elapsedTime / 1000).toFixed(3)}s` : '', 9));
         const padding = ' '.repeat(w - r.path.length);
