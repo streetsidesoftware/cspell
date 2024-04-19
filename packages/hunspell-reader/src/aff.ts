@@ -105,12 +105,7 @@ export class Aff {
         const { flags } = affWord;
         const subRules = this.affData.getRulesForAffSubstitution(sub);
         const rules = joinRules(affWord.rules, subRules);
-        let word: string;
-        if (sub.type === 'S') {
-            word = stripped + sub.attach;
-        } else {
-            word = sub.attach + stripped;
-        }
+        const word = sub.type === 'S' ? stripped + sub.attach : sub.attach + stripped;
         return this.affData.toAffixWord(affWord, word, flags, rules);
     }
 
@@ -419,12 +414,14 @@ class AffData {
 
     #splitRules(rules: string): string[] {
         switch (this.affFlagType) {
-            case 'long':
+            case 'long': {
                 return [...new Set(rules.replaceAll(/(..)/g, '$1//').split('//').slice(0, -1))];
-            case 'num':
+            }
+            case 'num': {
                 return [...new Set(rules.split(','))];
+            }
         }
-        return [...new Set([...rules])];
+        return [...new Set(rules)];
     }
 
     #processAffInfo(affInfo: AffInfo) {
@@ -467,11 +464,9 @@ class AffData {
         const fx = sfx || pfx;
         if (fx) {
             const affFx = this.#mapFx(fx);
-            if (affFx.type === 'P') {
-                return { id, idx: index, type: 'P', flags: 0, fx: affFx };
-            } else {
-                return { id, idx: index, type: 'S', flags: 0, fx: affFx };
-            }
+            return affFx.type === 'P'
+                ? { id, idx: index, type: 'P', flags: 0, fx: affFx }
+                : { id, idx: index, type: 'S', flags: 0, fx: affFx };
         }
         return { id, idx: index, type: 'F', flags: flags || 0 };
     }
@@ -586,9 +581,11 @@ export function toAffFlagType(FLAG: string | undefined): AffFlagType {
     if (!FLAG) return 'char';
     switch (FLAG) {
         case 'long':
-        case 'num':
+        case 'num': {
             return FLAG;
-        default:
+        }
+        default: {
             throw new Error(`Unexpected FLAG value: ${FLAG}`);
+        }
     }
 }

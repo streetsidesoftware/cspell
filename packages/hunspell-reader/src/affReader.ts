@@ -1,3 +1,4 @@
+/* eslint-disable unicorn/text-encoding-identifier-case */
 import assert from 'node:assert';
 import { readFile } from 'node:fs/promises';
 
@@ -165,7 +166,7 @@ function parseAffixCreation(line: AffLine): Fx {
     const fx: Fx = {
         id: flag,
         type: line.option === 'SFX' ? 'SFX' : 'PFX',
-        combinable: !!combinable.match(yesRegex),
+        combinable: !!yesRegex.test(combinable),
         count,
         extra,
         substitutionSets: new Map<string, SubstitutionsForRegExp>(),
@@ -252,8 +253,8 @@ const asPfx = collectFx;
 const asSfx = collectFx;
 
 const asString = () => collectPrimitive<string>((v) => v, '');
-const asBoolean = () => collectPrimitive<boolean>((v) => !!parseInt(v), '1');
-const asNumber = () => collectPrimitive<number>(parseInt, '0');
+const asBoolean = () => collectPrimitive<boolean>((v) => !!Number.parseInt(v), '1');
+const asNumber = () => collectPrimitive<number>(Number.parseInt, '0');
 
 function collectPrimitive<T>(map: (line: string) => T, defaultValue = ''): Collector<T> {
     let primitive: T | undefined;
@@ -405,7 +406,7 @@ export async function parseAffFile(filename: string, encoding: string = UTF8) {
 }
 
 function convertHtmlEntities(line: string, index: number): string {
-    if (line.indexOf('&') < 0) return line;
+    if (!line.includes('&')) return line;
     const fixed = decodeHtmlEntities(line);
     if (fixed !== line) {
         if (htmlEntitiesFound < 10) {

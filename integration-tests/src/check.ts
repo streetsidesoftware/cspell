@@ -73,9 +73,9 @@ async function execCheckAndUpdate(rep: Repository, options: CheckAndUpdateOption
         try {
             const updatedRep = mustBeDefined(await addRepository(logger, rep.url, rep.branch));
             rep = resolveRepArgs(updatedRep);
-        } catch (_) {
+        } catch {
             log(color`******** fail ********`);
-            return Promise.resolve({ success: false, rep, elapsedTime: 0 });
+            return { success: false, rep, elapsedTime: 0 };
         }
         log(color`******** Updating Repo Complete ********`);
         if (rep.commit !== oldCommit) {
@@ -111,12 +111,12 @@ async function execCheck(context: CheckContext, update: boolean): Promise<CheckR
     log(time());
     if (!(await checkoutRepositoryAsync(logger, rep.url, rep.path, rep.commit, rep.branch))) {
         logger.log('******** fail ********');
-        return Promise.resolve({ success: false, rep, elapsedTime: 0 });
+        return { success: false, rep, elapsedTime: 0 };
     }
     log(time());
     if (!(await execPostCheckoutSteps(context))) {
         logger.log('******** fail ********');
-        return Promise.resolve({ success: false, rep, elapsedTime: 0 });
+        return { success: false, rep, elapsedTime: 0 };
     }
     log(time());
     const cspellResult = await execCommand(logger, path, cmdToExec, rep.args);
@@ -217,7 +217,7 @@ function report(reposChecked: Repository[], results: CheckResult[]) {
     const resultsByRep = new Map(results.map((r) => [r.rep, r]));
     const w = Math.max(...reposChecked.map((r) => r.path.length));
     const r = sorted.map((r) => {
-        const { success = undefined, elapsedTime = 0 } = resultsByRep.get(r) || {};
+        const { success, elapsedTime = 0 } = resultsByRep.get(r) || {};
         const mark = success === undefined ? '🛑' : success === false ? '❌' : '✅';
         const time = chalk.gray(rightJustify(elapsedTime ? `${(elapsedTime / 1000).toFixed(3)}s` : '', 9));
         const padding = ' '.repeat(w - r.path.length);
@@ -363,8 +363,7 @@ function tfn(colorFn: ChalkInstance): (strings: string | TemplateStringsArray, .
         const parts: string[] = [];
         let i = 0;
         for (; i < strings.length - 1; ++i) {
-            parts.push(strings[i]);
-            parts.push(rest[i] as string);
+            parts.push(strings[i], rest[i] as string);
         }
         if (i < strings.length) {
             parts.push(strings[i]);

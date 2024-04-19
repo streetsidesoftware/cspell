@@ -138,7 +138,9 @@ export function* getSuggestionsAStar(
         return (
             pb - pa ||
             a.cost - b.cost ||
+            // eslint-disable-next-line unicorn/prefer-code-point
             Math.abs(a.word.charCodeAt(0) - srcWord.charCodeAt(0)) -
+                // eslint-disable-next-line unicorn/prefer-code-point
                 Math.abs(b.word.charCodeAt(0) - srcWord.charCodeAt(0))
         );
     }
@@ -194,11 +196,9 @@ export function* getSuggestionsAStar(
                 storePath(t, n.child(j), i + 1, c, ss, p, 'r', ss);
             }
 
-            if (n.eow && i) {
+            if (n.eow && i && compoundMethod) {
                 // legacy word compound
-                if (compoundMethod) {
-                    storePath(t, root, i, costLegacyCompound, wordSeparator, p, 'L', wordSeparator);
-                }
+                storePath(t, root, i, costLegacyCompound, wordSeparator, p, 'L', wordSeparator);
             }
 
             // swap
@@ -333,7 +333,7 @@ function getCostTrie(t: CostTrie, s: string) {
         return t;
     }
     let tt = t;
-    for (const c of [...s]) {
+    for (const c of s) {
         tt = tt.t[c] ??= createCostTrie();
     }
     return tt;
@@ -411,7 +411,7 @@ function serializeCostTrie(p: PNode): string {
 
 function _serializeCostTrie(t: CostTrie): string {
     const lines: string[] = [];
-    lines.push(`:: [${t.c.join()}]`);
+    lines.push(`:: [${t.c.join(',')}]`);
     for (const [letter, child] of Object.entries(t.t)) {
         lines.push(letter + ':');
         if (!child) continue;

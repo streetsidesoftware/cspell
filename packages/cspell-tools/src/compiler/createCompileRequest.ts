@@ -77,8 +77,8 @@ function toTargetName(sourceFile: string) {
 }
 
 function parseNumber(s: string | undefined): number | undefined {
-    const n = parseInt(s ?? '');
-    return isNaN(n) ? undefined : n;
+    const n = Number.parseInt(s ?? '');
+    return Number.isNaN(n) ? undefined : n;
 }
 
 function baseNameOfSource(source: DictionarySource): string {

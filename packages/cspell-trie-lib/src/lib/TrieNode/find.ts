@@ -139,12 +139,15 @@ function _findWordNode(root: Root, word: string, options: FindOptions): FindFull
     }
 
     switch (compoundMode) {
-        case 'none':
+        case 'none': {
             return options.matchCase ? __findExact() : __findCompound();
-        case 'compound':
+        }
+        case 'compound': {
             return __findCompound();
-        case 'legacy':
+        }
+        case 'legacy': {
             return findLegacyCompound(root, word, options);
+        }
     }
 }
 
@@ -225,11 +228,9 @@ export function findCompoundNode(
                 if (!r.cr) {
                     break;
                 }
-                if (!i && !r.caseMatched) {
-                    if (w !== w.toLowerCase()) {
-                        // It is not going to be found.
-                        break;
-                    }
+                if (!i && !r.caseMatched && w !== w.toLowerCase()) {
+                    // It is not going to be found.
+                    break;
                 }
             } else {
                 break;

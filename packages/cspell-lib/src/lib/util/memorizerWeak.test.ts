@@ -16,8 +16,7 @@ describe('memorizer Weak', () => {
         const aa = [...a] as [string];
 
         const requests: (readonly [string])[][] = [];
-        requests.push([a], [a, b, c], [a], [a, b, c]);
-        requests.push([aa, b, c], [a, b, c], [aa], [a], [a, b, c]);
+        requests.push([a], [a, b, c], [a], [a, b, c], [aa, b, c], [a, b, c], [aa], [a], [a, b, c]);
 
         const expected = [[a], [a, b, c], [aa, b, c], [aa]];
 

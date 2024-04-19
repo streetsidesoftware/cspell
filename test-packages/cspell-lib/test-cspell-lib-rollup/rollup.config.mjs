@@ -8,7 +8,7 @@ import rollupPluginTypescript from '@rollup/plugin-typescript';
 
 import { injectDirname } from './plugin/index.mjs';
 
-const pkg = JSON.parse(readFileSync('./package.json', 'utf-8'));
+const pkg = JSON.parse(readFileSync('./package.json', 'utf8'));
 
 /** @type {import('rollup').RollupOptions} */
 const common = {

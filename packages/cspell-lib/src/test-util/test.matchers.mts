@@ -8,7 +8,7 @@ export function extendExpect(e: typeof expect): AsymmetricMatchers {
     e.extend({
         toEqualCaseInsensitive(actual, expected) {
             if (typeof actual !== 'string' || typeof expected !== 'string') {
-                throw new Error('These must be of type number!');
+                throw new TypeError('These must be of type number!');
             }
 
             const pass = actual.toLowerCase() === expected.toLowerCase();

@@ -164,7 +164,7 @@ function getPerfCsvFileUrl(root: vscodeUri.URI): URL {
  */
 async function createCsvFile(csvUrl: URL): Promise<void> {
     if (!reformatCsv) return;
-    const csvFile = await fs.readFile(csvUrl, 'utf-8').catch(() => undefined);
+    const csvFile = await fs.readFile(csvUrl, 'utf8').catch(() => undefined);
     if (!csvFile) {
         return fs.writeFile(csvUrl, stringifyCsv([csvHeaders]));
     }

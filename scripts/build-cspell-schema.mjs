@@ -57,7 +57,7 @@ async function run() {
     const schema = tsj.createGenerator(config).createSchema(config.type);
     schema.allowTrailingCommas = true;
     const stringify = config.sortProps ? safeStableStringify : JSON.stringify;
-    const schemaString = stringify(schema, null, 2);
+    const schemaString = stringify(schema, undefined, 2);
 
     await writeFile(path.join(typesDir, outFile), schemaString);
     await writeFile(new URL(outFile, rootUrl), schemaString);

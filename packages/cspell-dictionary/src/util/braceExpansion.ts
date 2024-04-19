@@ -4,11 +4,8 @@ export interface Options {
     sep: string;
 }
 
-function expand(
-    pattern: string,
-    options: Options = { begin: '(', end: ')', sep: '|' },
-    start = 0,
-): { parts: string[]; idx: number } {
+function expand(pattern: string, options?: Options, start = 0): { parts: string[]; idx: number } {
+    const _options = options ?? { begin: '(', end: ')', sep: '|' };
     const len = pattern.length;
     const parts: string[] = [];
     function push(word: string | string[]) {
@@ -22,16 +19,16 @@ function expand(
     let curWord: string | string[] = '';
     while (i < len) {
         const ch = pattern[i++];
-        if (ch === options.end) {
+        if (ch === _options.end) {
             break;
         }
-        if (ch === options.begin) {
-            const nested = expand(pattern, options, i);
+        if (ch === _options.begin) {
+            const nested = expand(pattern, _options, i);
             i = nested.idx;
             curWord = nested.parts.flatMap((p) => (Array.isArray(curWord) ? curWord.map((w) => w + p) : [curWord + p]));
             continue;
         }
-        if (ch === options.sep) {
+        if (ch === _options.sep) {
             push(curWord);
             curWord = '';
             continue;
@@ -42,6 +39,6 @@ function expand(
     return { parts, idx: i };
 }
 
-export function expandBraces(pattern: string, options: Options = { begin: '(', end: ')', sep: '|' }): string[] {
-    return expand(pattern, options).parts;
+export function expandBraces(pattern: string, options?: Options): string[] {
+    return expand(pattern, options ?? { begin: '(', end: ')', sep: '|' }).parts;
 }

@@ -457,7 +457,7 @@ describe('Validate InDocSettings', () => {
 
     test('regExIgnoreSpellingDirectives', () => {
         const match = sampleBug345.match(RegPat.regExIgnoreSpellingDirectives);
-        expect(match?.[0]).toBe('cspell\x3AignoreRegExp "(foobar|foobaz)"');
+        expect(match?.[0]).toBe('cspell\u003AignoreRegExp "(foobar|foobaz)"');
     });
 });
 
@@ -591,4 +591,4 @@ pAqEAuV4DNoxQKKWmhVv+J0ptMWD25Pnpxeq5sXzghfJnslJlQND
 const sampleCode2LF = sampleCodeSrc.replaceAll(/\r?\n/g, '\n');
 const sampleCode2CRLF = sampleCode2LF.replaceAll('\n', '\r\n');
 
-const sampleBug345 = fs.readFileSync(Path.join(pathPackageSamples, './bug-fixes/bug345.ts'), 'utf-8');
+const sampleBug345 = fs.readFileSync(Path.join(pathPackageSamples, './bug-fixes/bug345.ts'), 'utf8');

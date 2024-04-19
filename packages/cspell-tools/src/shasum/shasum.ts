@@ -21,8 +21,10 @@ export async function shasumFile(filename: string, root: string | undefined): Pr
         const file = resolve(root || '.', filename);
         const checksum = await calcFileChecksum(file);
         return `${checksum}  ${filename}`;
-    } catch (_) {
+    } catch {
         // const err = toError(error);
+        // Reject with a string.
+        // eslint-disable-next-line unicorn/no-useless-promise-resolve-reject
         return Promise.reject(`shasum: ${filename}: Unable to read file.`);
     }
 }
@@ -50,7 +52,7 @@ export async function checkShasumFile(
         }),
     );
 
-    const passed = !results.find((v) => !v.passed);
+    const passed = !results.some((v) => !v.passed);
 
     return { passed, results };
 }
@@ -64,7 +66,7 @@ async function tryToCheckFile(filename: string, root: string, checksum: string |
     try {
         const passed = await checkFile(checksum, file);
         return { filename, passed };
-    } catch (_) {
+    } catch {
         return { filename, passed: false, error: Error('Failed to read file.') };
     }
 }

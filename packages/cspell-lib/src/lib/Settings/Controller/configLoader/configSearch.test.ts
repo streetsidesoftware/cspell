@@ -113,7 +113,7 @@ describe('ConfigSearch', () => {
 
             const result = await configSearch.searchForConfig(searchFrom);
             expect(result).toEqual(expectedConfigUrl);
-            const result2 = await configSearch.searchForConfig(new URL('./text.txt', searchFrom));
+            const result2 = await configSearch.searchForConfig(new URL('text.txt', searchFrom));
             expect(result2).toBe(result);
 
             configSearch.clearCache();

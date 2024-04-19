@@ -105,9 +105,12 @@ function toLine(node: TrieRefNode, base: number): string {
 
 function generateHeader(base: number, comment: string): Sequence<string> {
     const header = [
-        ...['#!/usr/bin/env cspell-trie reader', 'TrieXv2', 'base=' + base],
+        '#!/usr/bin/env cspell-trie reader',
+        'TrieXv2',
+        'base=' + base,
         ...(comment ? comment.split('\n').map((a) => '# ' + a) : []),
-        ...['# Data:', DATA],
+        '# Data:',
+        DATA,
     ];
     return genSequence(header);
 }
@@ -187,7 +190,7 @@ export function importTrie(linesX: Iterable<string> | IterableIterator<string>):
             .slice(refOffset)
             .split(',')
             .filter((a) => !!a)
-            .map((r) => parseInt(r, base));
+            .map((r) => Number.parseInt(r, base));
         return {
             letter: line[0],
             isWord,

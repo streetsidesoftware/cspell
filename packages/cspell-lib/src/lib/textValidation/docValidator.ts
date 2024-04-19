@@ -140,6 +140,7 @@ export class DocumentValidator {
         recGlobMatcherTime();
         const recShouldCheckTime = recordPerfTime(this.perfTiming, '_shouldCheck');
 
+        // eslint-disable-next-line unicorn/prefer-regexp-test
         const shouldCheck = !matcher.match(uriToFilePath(uri)) && (docSettings.enabled ?? true);
 
         recShouldCheckTime();
@@ -476,7 +477,7 @@ async function searchForDocumentConfig(
     pnpSettings: PnPSettings,
 ): Promise<CSpellSettingsWithSourceTrace> {
     const { uri } = document;
-    if (uri.scheme !== 'file') return Promise.resolve(defaultConfig);
+    if (uri.scheme !== 'file') return defaultConfig;
     return searchForConfig(uri.toString(), pnpSettings).then((s) => s || defaultConfig);
 }
 
@@ -519,6 +520,7 @@ export async function shouldCheckDocument(
         const matcher = getGlobMatcherForExcluding(localConfig?.ignorePaths);
         const docSettings = await determineTextDocumentSettings(doc, config);
         const uri = doc.uri;
+        // eslint-disable-next-line unicorn/prefer-regexp-test
         return !matcher.match(uriToFilePath(uri)) && (docSettings.enabled ?? true);
     }
 

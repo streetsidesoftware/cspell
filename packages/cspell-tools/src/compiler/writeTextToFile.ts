@@ -6,7 +6,7 @@ const isGzFile = /\.gz$/;
 
 export async function writeTextToFile(filename: string, data: string): Promise<void> {
     const useGz = isGzFile.test(filename);
-    const buf = Buffer.from(data, 'utf-8');
+    const buf = Buffer.from(data, 'utf8');
     const buffer = useGz ? await compress(buf) : buf;
     await fs.writeFile(filename, buffer);
 }

@@ -4,10 +4,10 @@ import { isError, toError } from './errors.js';
 
 describe('errors', () => {
     test.each`
-        err            | expected
-        ${1}           | ${false}
-        ${undefined}   | ${false}
-        ${new Error()} | ${true}
+        err                 | expected
+        ${1}                | ${false}
+        ${undefined}        | ${false}
+        ${new Error('msg')} | ${true}
     `('isError', ({ err, expected }) => {
         expect(isError(err)).toBe(expected);
     });

@@ -4,11 +4,11 @@ const regExAllLower = /^(?:\p{Ll}\p{M}?)+$/u;
 const regExAccents = /\p{M}/gu;
 
 export function isUpperCase(word: string): boolean {
-    return !!word.match(regExAllUpper);
+    return !!regExAllUpper.test(word);
 }
 
 export function isLowerCase(word: string): boolean {
-    return !!word.match(regExAllLower);
+    return !!regExAllLower.test(word);
 }
 
 export function isFirstCharacterUpper(word: string): boolean {
@@ -28,13 +28,13 @@ export function lcFirst(word: string): string {
 }
 
 export function matchCase(example: string, word: string): string {
-    if (example.match(regExFirstUpper)) {
+    if (regExFirstUpper.test(example)) {
         return word.slice(0, 1).toUpperCase() + word.slice(1).toLowerCase();
     }
-    if (example.match(regExAllLower)) {
+    if (regExAllLower.test(example)) {
         return word.toLowerCase();
     }
-    if (example.match(regExAllUpper)) {
+    if (regExAllUpper.test(example)) {
         return word.toUpperCase();
     }
 

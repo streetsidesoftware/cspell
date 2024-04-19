@@ -54,8 +54,16 @@ function calcPosition(code: string): number | undefined {
     if (!code.includes('__dirname')) return undefined;
 
     const beforePos = code.indexOf('commonjsGlobal');
+    const lastImportPos = code.lastIndexOf('import ', beforePos);
+
+    // const context = {
+    //     after: code.slice(0, lastImportPos).split('\n').slice(-3),
+    //     before: code.slice(lastImportPos, beforePos).split('\n').slice(0, 3),
+    // };
+
+    // console.error('calcPosition %o', { includes: true, beforePos, lastImportPos, ...context });
+
     if (beforePos < 0) return logError('`commonjsGlobal` Not found, cannot inject.');
-    const lastImportPos = code.lastIndexOf('import', beforePos);
     if (lastImportPos < 0) return logError('`import` not found, cannot inject.');
 
     const betweenCode = code.slice(lastImportPos, beforePos);

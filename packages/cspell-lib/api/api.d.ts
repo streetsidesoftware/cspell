@@ -1,104 +1,30 @@
 /// <reference types="node" />
-import { Glob, CSpellSettingsWithSourceTrace, TextOffset, TextDocumentOffset, AdvancedCSpellSettingsWithSourceTrace, Parser, DictionaryDefinitionInline, DictionaryDefinitionPreferred, DictionaryDefinitionAugmented, DictionaryDefinitionCustom, ImportFileRef, PnPSettings, CSpellUserSettings, Issue, LocaleId, CSpellSettings, MappedText, ParsedText } from '@cspell/cspell-types';
+import { Glob, AdvancedCSpellSettingsWithSourceTrace, Parser, DictionaryDefinitionInline, DictionaryDefinitionPreferred, DictionaryDefinitionAugmented, DictionaryDefinitionCustom, CSpellUserSettings, ImportFileRef, PnPSettings, CSpellSettingsWithSourceTrace, TextOffset, Issue, LocaleId, CSpellSettings, MappedText, ParsedText, TextDocumentOffset } from '@cspell/cspell-types';
 export * from '@cspell/cspell-types';
-import { WeightMap } from 'cspell-trie-lib';
-export { CompoundWordsMethod } from 'cspell-trie-lib';
-import { CSpellConfigFile } from 'cspell-config-lib';
 import * as cspell_io from 'cspell-io';
 import { VFileSystem } from 'cspell-io';
 export { FSCapabilityFlags, VFileSystemProvider, VirtualFS, asyncIterableToArray, readFileText as readFile, readFileTextSync as readFileSync, writeToFile, writeToFileIterable, writeToFileIterableP } from 'cspell-io';
-import { SuggestOptions, SuggestionResult, CachingDictionary, SpellingDictionaryCollection } from 'cspell-dictionary';
+import { SpellingDictionaryCollection, SuggestOptions, SuggestionResult, CachingDictionary } from 'cspell-dictionary';
 export { SpellingDictionary, SpellingDictionaryCollection, SuggestOptions, SuggestionCollector, SuggestionResult, createSpellingDictionary, createCollection as createSpellingDictionaryCollection } from 'cspell-dictionary';
+import { WeightMap } from 'cspell-trie-lib';
+export { CompoundWordsMethod } from 'cspell-trie-lib';
+import { CSpellConfigFile } from 'cspell-config-lib';
 
-type ExclusionFunction = (fileUri: string) => boolean;
-type FileExclusionFunction = (file: string) => boolean;
-/** The structure of the VS Code search.exclude settings */
-interface ExcludeFilesGlobMap {
-    [glob: string]: boolean;
-}
-declare function extractGlobsFromExcludeFilesGlobMap(globMap: ExcludeFilesGlobMap): string[];
 /**
- * @todo Support multi root globs.
- * @param globs - glob patterns
- * @param root - root directory
- * @param allowedSchemes - allowed schemas
+ * Clear the cached files and other cached data.
+ * Calling this function will cause the next spell check to take longer because it will need to reload configuration files and dictionaries.
+ * Call this function if configuration files have changed.
+ *
+ * It is safe to replace {@link clearCachedFiles} with {@link clearCaches}
  */
-declare function generateExclusionFunctionForUri(globs: Glob[], root: string, allowedSchemes?: Set<string>): ExclusionFunction;
+declare function clearCachedFiles(): Promise<void>;
 /**
- * @todo Support multi root globs.
- * @param globs - glob patterns
- * @param root - root directory
- * @param allowedSchemes - allowed schemas
+ * Sends and event to clear the caches.
+ * It resets the configuration files and dictionaries.
+ *
+ * It is safe to replace {@link clearCaches} with {@link clearCachedFiles}
  */
-declare function generateExclusionFunctionForFiles(globs: Glob[], root: string): FileExclusionFunction;
-
-type exclusionHelper_d_ExcludeFilesGlobMap = ExcludeFilesGlobMap;
-type exclusionHelper_d_ExclusionFunction = ExclusionFunction;
-type exclusionHelper_d_FileExclusionFunction = FileExclusionFunction;
-declare const exclusionHelper_d_extractGlobsFromExcludeFilesGlobMap: typeof extractGlobsFromExcludeFilesGlobMap;
-declare const exclusionHelper_d_generateExclusionFunctionForFiles: typeof generateExclusionFunctionForFiles;
-declare const exclusionHelper_d_generateExclusionFunctionForUri: typeof generateExclusionFunctionForUri;
-declare namespace exclusionHelper_d {
-  export { type exclusionHelper_d_ExcludeFilesGlobMap as ExcludeFilesGlobMap, type exclusionHelper_d_ExclusionFunction as ExclusionFunction, type exclusionHelper_d_FileExclusionFunction as FileExclusionFunction, exclusionHelper_d_extractGlobsFromExcludeFilesGlobMap as extractGlobsFromExcludeFilesGlobMap, exclusionHelper_d_generateExclusionFunctionForFiles as generateExclusionFunctionForFiles, exclusionHelper_d_generateExclusionFunctionForUri as generateExclusionFunctionForUri };
-}
-
-interface ListGlobalImportsResult {
-    filename: string;
-    name: string | undefined;
-    id: string | undefined;
-    error: string | undefined;
-    dictionaryDefinitions: CSpellSettingsWithSourceTrace['dictionaryDefinitions'];
-    languageSettings: CSpellSettingsWithSourceTrace['languageSettings'];
-    package: NodePackage | undefined;
-}
-interface ListGlobalImportsResults {
-    list: ListGlobalImportsResult[];
-    globalSettings: CSpellSettingsWithSourceTrace;
-}
-interface NodePackage {
-    name: string | undefined;
-    filename: string;
-}
-declare function listGlobalImports(): Promise<ListGlobalImportsResults>;
-interface AddPathsToGlobalImportsResults {
-    success: boolean;
-    resolvedSettings: ResolveSettingsResult[];
-    error: string | undefined;
-}
-declare function addPathsToGlobalImports(paths: string[]): Promise<AddPathsToGlobalImportsResults>;
-interface RemovePathsFromGlobalImportsResult {
-    success: boolean;
-    error: string | undefined;
-    removed: string[];
-}
-/**
- * Remove files from the global setting.
- * @param paths match against the partial file path, or package name, or id.
- *   To match against a partial file path, it must match against the subdirectory and filename.
- * Note: for Idempotent reasons, asking to remove a path that is not in the global settings is considered a success.
- *   It is possible to check for this by looking at the returned list of removed paths.
- */
-declare function removePathsFromGlobalImports(paths: string[]): Promise<RemovePathsFromGlobalImportsResult>;
-interface ResolveSettingsResult {
-    filename: string;
-    resolvedToFilename: string | undefined;
-    error?: string;
-    settings: CSpellSettingsWithSourceTrace;
-}
-
-//# sourceMappingURL=index.link.d.ts.map
-
-type index_link_d_AddPathsToGlobalImportsResults = AddPathsToGlobalImportsResults;
-type index_link_d_ListGlobalImportsResult = ListGlobalImportsResult;
-type index_link_d_ListGlobalImportsResults = ListGlobalImportsResults;
-type index_link_d_RemovePathsFromGlobalImportsResult = RemovePathsFromGlobalImportsResult;
-type index_link_d_ResolveSettingsResult = ResolveSettingsResult;
-declare const index_link_d_addPathsToGlobalImports: typeof addPathsToGlobalImports;
-declare const index_link_d_listGlobalImports: typeof listGlobalImports;
-declare const index_link_d_removePathsFromGlobalImports: typeof removePathsFromGlobalImports;
-declare namespace index_link_d {
-  export { type index_link_d_AddPathsToGlobalImportsResults as AddPathsToGlobalImportsResults, type index_link_d_ListGlobalImportsResult as ListGlobalImportsResult, type index_link_d_ListGlobalImportsResults as ListGlobalImportsResults, type index_link_d_RemovePathsFromGlobalImportsResult as RemovePathsFromGlobalImportsResult, type index_link_d_ResolveSettingsResult as ResolveSettingsResult, index_link_d_addPathsToGlobalImports as addPathsToGlobalImports, index_link_d_listGlobalImports as listGlobalImports, index_link_d_removePathsFromGlobalImports as removePathsFromGlobalImports };
-}
+declare function clearCaches(): void;
 
 interface Uri {
     readonly scheme: string;
@@ -106,86 +32,6 @@ interface Uri {
     readonly authority?: string;
     readonly fragment?: string;
     readonly query?: string;
-}
-
-declare function stringToRegExp(pattern: string | RegExp, defaultFlags?: string, forceFlags?: string): RegExp | undefined;
-
-declare function splitCamelCaseWordWithOffset(wo: TextOffset): Array<TextOffset>;
-/**
- * Split camelCase words into an array of strings.
- */
-declare function splitCamelCaseWord(word: string): string[];
-/**
- * This function lets you iterate over regular expression matches.
- */
-declare function match(reg: RegExp, text: string): Iterable<RegExpExecArray>;
-declare function matchStringToTextOffset(reg: RegExp, text: string): Iterable<TextOffset>;
-declare function matchToTextOffset(reg: RegExp, text: TextOffset): Iterable<TextOffset>;
-declare function extractLinesOfText(text: string): Iterable<TextOffset>;
-/**
- * Extract out whole words from a string of text.
- */
-declare function extractWordsFromText(text: string): Iterable<TextOffset>;
-/**
- * Extract out whole words from a string of text.
- */
-declare function extractWordsFromTextOffset(text: TextOffset): Iterable<TextOffset>;
-declare function cleanText(text: string): string;
-declare function cleanTextOffset(text: TextOffset): TextOffset;
-/**
- * Extract out whole words and words containing numbers from a string of text.
- */
-declare function extractPossibleWordsFromTextOffset(text: TextOffset): Iterable<TextOffset>;
-declare function extractWordsFromCode(text: string): Iterable<TextOffset>;
-declare function extractWordsFromCodeTextOffset(textOffset: TextOffset): Iterable<TextOffset>;
-declare function isUpperCase(word: string): boolean;
-declare function isLowerCase(word: string): boolean;
-declare function isFirstCharacterUpper(word: string): boolean;
-declare function isFirstCharacterLower(word: string): boolean;
-declare function ucFirst(word: string): string;
-declare function lcFirst(word: string): string;
-declare function snakeToCamel(word: string): string;
-declare function camelToSnake(word: string): string;
-declare function matchCase(example: string, word: string): string;
-declare function textOffset(text: string, offset?: number): TextOffset;
-declare function extractText(textOffset: TextOffset, startPos: number, endPos: number): string;
-declare function calculateTextDocumentOffsets<T extends TextOffset>(uri: string | Uri | URL, doc: string, wordOffsets: T[]): (TextDocumentOffset & T)[];
-declare function removeAccents(text: string): string;
-declare const __testing__: {
-    regExWords: RegExp;
-    regExWordsAndDigits: RegExp;
-};
-
-declare const text_d___testing__: typeof __testing__;
-declare const text_d_calculateTextDocumentOffsets: typeof calculateTextDocumentOffsets;
-declare const text_d_camelToSnake: typeof camelToSnake;
-declare const text_d_cleanText: typeof cleanText;
-declare const text_d_cleanTextOffset: typeof cleanTextOffset;
-declare const text_d_extractLinesOfText: typeof extractLinesOfText;
-declare const text_d_extractPossibleWordsFromTextOffset: typeof extractPossibleWordsFromTextOffset;
-declare const text_d_extractText: typeof extractText;
-declare const text_d_extractWordsFromCode: typeof extractWordsFromCode;
-declare const text_d_extractWordsFromCodeTextOffset: typeof extractWordsFromCodeTextOffset;
-declare const text_d_extractWordsFromText: typeof extractWordsFromText;
-declare const text_d_extractWordsFromTextOffset: typeof extractWordsFromTextOffset;
-declare const text_d_isFirstCharacterLower: typeof isFirstCharacterLower;
-declare const text_d_isFirstCharacterUpper: typeof isFirstCharacterUpper;
-declare const text_d_isLowerCase: typeof isLowerCase;
-declare const text_d_isUpperCase: typeof isUpperCase;
-declare const text_d_lcFirst: typeof lcFirst;
-declare const text_d_match: typeof match;
-declare const text_d_matchCase: typeof matchCase;
-declare const text_d_matchStringToTextOffset: typeof matchStringToTextOffset;
-declare const text_d_matchToTextOffset: typeof matchToTextOffset;
-declare const text_d_removeAccents: typeof removeAccents;
-declare const text_d_snakeToCamel: typeof snakeToCamel;
-declare const text_d_splitCamelCaseWord: typeof splitCamelCaseWord;
-declare const text_d_splitCamelCaseWordWithOffset: typeof splitCamelCaseWordWithOffset;
-declare const text_d_stringToRegExp: typeof stringToRegExp;
-declare const text_d_textOffset: typeof textOffset;
-declare const text_d_ucFirst: typeof ucFirst;
-declare namespace text_d {
-  export { text_d___testing__ as __testing__, text_d_calculateTextDocumentOffsets as calculateTextDocumentOffsets, text_d_camelToSnake as camelToSnake, text_d_cleanText as cleanText, text_d_cleanTextOffset as cleanTextOffset, text_d_extractLinesOfText as extractLinesOfText, text_d_extractPossibleWordsFromTextOffset as extractPossibleWordsFromTextOffset, text_d_extractText as extractText, text_d_extractWordsFromCode as extractWordsFromCode, text_d_extractWordsFromCodeTextOffset as extractWordsFromCodeTextOffset, text_d_extractWordsFromText as extractWordsFromText, text_d_extractWordsFromTextOffset as extractWordsFromTextOffset, text_d_isFirstCharacterLower as isFirstCharacterLower, text_d_isFirstCharacterUpper as isFirstCharacterUpper, text_d_isLowerCase as isLowerCase, text_d_isUpperCase as isUpperCase, text_d_lcFirst as lcFirst, text_d_match as match, text_d_matchCase as matchCase, text_d_matchStringToTextOffset as matchStringToTextOffset, text_d_matchToTextOffset as matchToTextOffset, text_d_removeAccents as removeAccents, text_d_snakeToCamel as snakeToCamel, text_d_splitCamelCaseWord as splitCamelCaseWord, text_d_splitCamelCaseWordWithOffset as splitCamelCaseWordWithOffset, text_d_stringToRegExp as stringToRegExp, text_d_textOffset as textOffset, text_d_ucFirst as ucFirst };
 }
 
 interface Document {
@@ -288,6 +134,38 @@ declare function fileToDocument(file: string, text: string, languageId?: string,
 declare function fileToDocument(file: string, text?: string, languageId?: string, locale?: string): Document | DocumentWithText;
 declare function fileToTextDocument(file: string): Promise<TextDocument>;
 
+type ExclusionFunction = (fileUri: string) => boolean;
+type FileExclusionFunction = (file: string) => boolean;
+/** The structure of the VS Code search.exclude settings */
+interface ExcludeFilesGlobMap {
+    [glob: string]: boolean;
+}
+declare function extractGlobsFromExcludeFilesGlobMap(globMap: ExcludeFilesGlobMap): string[];
+/**
+ * @todo Support multi root globs.
+ * @param globs - glob patterns
+ * @param root - root directory
+ * @param allowedSchemes - allowed schemas
+ */
+declare function generateExclusionFunctionForUri(globs: Glob[], root: string, allowedSchemes?: Set<string>): ExclusionFunction;
+/**
+ * @todo Support multi root globs.
+ * @param globs - glob patterns
+ * @param root - root directory
+ * @param allowedSchemes - allowed schemas
+ */
+declare function generateExclusionFunctionForFiles(globs: Glob[], root: string): FileExclusionFunction;
+
+type exclusionHelper_d_ExcludeFilesGlobMap = ExcludeFilesGlobMap;
+type exclusionHelper_d_ExclusionFunction = ExclusionFunction;
+type exclusionHelper_d_FileExclusionFunction = FileExclusionFunction;
+declare const exclusionHelper_d_extractGlobsFromExcludeFilesGlobMap: typeof extractGlobsFromExcludeFilesGlobMap;
+declare const exclusionHelper_d_generateExclusionFunctionForFiles: typeof generateExclusionFunctionForFiles;
+declare const exclusionHelper_d_generateExclusionFunctionForUri: typeof generateExclusionFunctionForUri;
+declare namespace exclusionHelper_d {
+  export { type exclusionHelper_d_ExcludeFilesGlobMap as ExcludeFilesGlobMap, type exclusionHelper_d_ExclusionFunction as ExclusionFunction, type exclusionHelper_d_FileExclusionFunction as FileExclusionFunction, exclusionHelper_d_extractGlobsFromExcludeFilesGlobMap as extractGlobsFromExcludeFilesGlobMap, exclusionHelper_d_generateExclusionFunctionForFiles as generateExclusionFunctionForFiles, exclusionHelper_d_generateExclusionFunctionForUri as generateExclusionFunctionForUri };
+}
+
 interface FeatureFlag {
     name: string;
     description: string;
@@ -317,9 +195,7 @@ declare class UnknownFeatureFlagError extends Error {
 }
 declare function getSystemFeatureFlags(): FeatureFlags;
 
-type LanguageId = string;
-declare function getLanguagesForExt(ext: string): string[];
-declare function getLanguagesForBasename(basename: string): string[];
+declare function getVirtualFS(): cspell_io.VirtualFS;
 
 /**
  * The keys of an object where the values cannot be undefined.
@@ -360,6 +236,40 @@ interface DictionaryFileDefinitionInternal extends Readonly<DictionaryDefinition
     readonly __source?: string | undefined;
 }
 
+declare function refreshDictionaryCache(maxAge?: number): Promise<void>;
+
+type LoadOptions = DictionaryDefinitionInternal;
+
+declare class SpellingDictionaryLoadError extends Error {
+    readonly uri: string;
+    readonly options: LoadOptions;
+    readonly cause: Error;
+    readonly name: string;
+    constructor(uri: string, options: LoadOptions, cause: Error, message: string);
+}
+declare function isSpellingDictionaryLoadError(e: Error): e is SpellingDictionaryLoadError;
+
+/**
+ * Load a dictionary collection defined by the settings.
+ * @param settings - that defines the dictionaries and the ones to load.
+ * @returns a dictionary collection that represents all the enabled dictionaries.
+ */
+declare function getDictionary(settings: CSpellUserSettings): Promise<SpellingDictionaryCollection>;
+
+type LanguageId = string;
+declare function getLanguagesForExt(ext: string): string[];
+declare function getLanguagesForBasename(basename: string): string[];
+
+interface PerfTimer {
+    readonly name: string;
+    readonly startTime: number;
+    readonly elapsed: number;
+    start(): void;
+    end(): void;
+}
+type TimeNowFn = () => number;
+declare function createPerfTimer(name: string, onEnd?: (elapsed: number, name: string) => void, timeNowFn?: TimeNowFn): PerfTimer;
+
 type CSpellSettingsWST$1 = AdvancedCSpellSettingsWithSourceTrace;
 type CSpellSettingsWSTO = OptionalOrUndefined<AdvancedCSpellSettingsWithSourceTrace>;
 type CSpellSettingsI$1 = CSpellSettingsInternal;
@@ -395,19 +305,8 @@ declare function calcOverrideSettings(settings: CSpellSettingsWSTO, filename: st
  */
 declare function checkFilenameMatchesExcludeGlob(filename: string, globs: Glob | Glob[]): boolean;
 
-/**
- * @param filename - filename
- * @param globs - globs
- * @returns true if it matches
- * @deprecated true
- * @deprecationMessage No longer actively supported. Use package: `cspell-glob`.
- */
-declare const checkFilenameMatchesGlob: typeof checkFilenameMatchesExcludeGlob;
-
 declare const currentSettingsFileVersion = "0.2";
 declare const ENV_CSPELL_GLOB_ROOT = "CSPELL_GLOB_ROOT";
-
-declare function getVirtualFS(): cspell_io.VirtualFS;
 
 interface ResolveFileResult {
     /**
@@ -555,6 +454,64 @@ declare class ImportError extends Error {
 declare function getDefaultSettings(useDefaultDictionaries?: boolean): Promise<CSpellSettingsInternal>;
 declare function getDefaultBundledSettingsAsync(): Promise<CSpellSettingsInternal>;
 
+interface ListGlobalImportsResult {
+    filename: string;
+    name: string | undefined;
+    id: string | undefined;
+    error: string | undefined;
+    dictionaryDefinitions: CSpellSettingsWithSourceTrace['dictionaryDefinitions'];
+    languageSettings: CSpellSettingsWithSourceTrace['languageSettings'];
+    package: NodePackage | undefined;
+}
+interface ListGlobalImportsResults {
+    list: ListGlobalImportsResult[];
+    globalSettings: CSpellSettingsWithSourceTrace;
+}
+interface NodePackage {
+    name: string | undefined;
+    filename: string;
+}
+declare function listGlobalImports(): Promise<ListGlobalImportsResults>;
+interface AddPathsToGlobalImportsResults {
+    success: boolean;
+    resolvedSettings: ResolveSettingsResult[];
+    error: string | undefined;
+}
+declare function addPathsToGlobalImports(paths: string[]): Promise<AddPathsToGlobalImportsResults>;
+interface RemovePathsFromGlobalImportsResult {
+    success: boolean;
+    error: string | undefined;
+    removed: string[];
+}
+/**
+ * Remove files from the global setting.
+ * @param paths match against the partial file path, or package name, or id.
+ *   To match against a partial file path, it must match against the subdirectory and filename.
+ * Note: for Idempotent reasons, asking to remove a path that is not in the global settings is considered a success.
+ *   It is possible to check for this by looking at the returned list of removed paths.
+ */
+declare function removePathsFromGlobalImports(paths: string[]): Promise<RemovePathsFromGlobalImportsResult>;
+interface ResolveSettingsResult {
+    filename: string;
+    resolvedToFilename: string | undefined;
+    error?: string;
+    settings: CSpellSettingsWithSourceTrace;
+}
+
+//# sourceMappingURL=index.link.d.ts.map
+
+type index_link_d_AddPathsToGlobalImportsResults = AddPathsToGlobalImportsResults;
+type index_link_d_ListGlobalImportsResult = ListGlobalImportsResult;
+type index_link_d_ListGlobalImportsResults = ListGlobalImportsResults;
+type index_link_d_RemovePathsFromGlobalImportsResult = RemovePathsFromGlobalImportsResult;
+type index_link_d_ResolveSettingsResult = ResolveSettingsResult;
+declare const index_link_d_addPathsToGlobalImports: typeof addPathsToGlobalImports;
+declare const index_link_d_listGlobalImports: typeof listGlobalImports;
+declare const index_link_d_removePathsFromGlobalImports: typeof removePathsFromGlobalImports;
+declare namespace index_link_d {
+  export { type index_link_d_AddPathsToGlobalImportsResults as AddPathsToGlobalImportsResults, type index_link_d_ListGlobalImportsResult as ListGlobalImportsResult, type index_link_d_ListGlobalImportsResults as ListGlobalImportsResults, type index_link_d_RemovePathsFromGlobalImportsResult as RemovePathsFromGlobalImportsResult, type index_link_d_ResolveSettingsResult as ResolveSettingsResult, index_link_d_addPathsToGlobalImports as addPathsToGlobalImports, index_link_d_listGlobalImports as listGlobalImports, index_link_d_removePathsFromGlobalImports as removePathsFromGlobalImports };
+}
+
 declare function combineTextAndLanguageSettings(settings: CSpellUserSettings, text: string | undefined, languageId: string | string[]): CSpellSettingsInternal;
 
 interface ExtendedSuggestion {
@@ -582,19 +539,6 @@ interface ValidationIssue extends ValidationResult {
     suggestions?: string[] | undefined;
     suggestionsEx?: ExtendedSuggestion[] | undefined;
 }
-
-declare function refreshDictionaryCache(maxAge?: number): Promise<void>;
-
-type LoadOptions = DictionaryDefinitionInternal;
-
-declare class SpellingDictionaryLoadError extends Error {
-    readonly uri: string;
-    readonly options: LoadOptions;
-    readonly cause: Error;
-    readonly name: string;
-    constructor(uri: string, options: LoadOptions, cause: Error, message: string);
-}
-declare function isSpellingDictionaryLoadError(e: Error): e is SpellingDictionaryLoadError;
 
 type Href = string;
 interface DictionaryTraceResult {
@@ -1013,37 +957,84 @@ declare function setLogger(logger: Logger): Logger;
  */
 declare function getLogger(): Logger;
 
-/**
- * Clear the cached files and other cached data.
- * Calling this function will cause the next spell check to take longer because it will need to reload configuration files and dictionaries.
- * Call this function if configuration files have changed.
- *
- * It is safe to replace {@link clearCachedFiles} with {@link clearCaches}
- */
-declare function clearCachedFiles(): Promise<void>;
-/**
- * Sends and event to clear the caches.
- * It resets the configuration files and dictionaries.
- *
- * It is safe to replace {@link clearCaches} with {@link clearCachedFiles}
- */
-declare function clearCaches(): void;
+declare function stringToRegExp(pattern: string | RegExp, defaultFlags?: string, forceFlags?: string): RegExp | undefined;
 
+declare function splitCamelCaseWordWithOffset(wo: TextOffset): Array<TextOffset>;
 /**
- * Load a dictionary collection defined by the settings.
- * @param settings - that defines the dictionaries and the ones to load.
- * @returns a dictionary collection that represents all the enabled dictionaries.
+ * Split camelCase words into an array of strings.
  */
-declare function getDictionary(settings: CSpellUserSettings): Promise<SpellingDictionaryCollection>;
+declare function splitCamelCaseWord(word: string): string[];
+/**
+ * This function lets you iterate over regular expression matches.
+ */
+declare function match(reg: RegExp, text: string): Iterable<RegExpExecArray>;
+declare function matchStringToTextOffset(reg: RegExp, text: string): Iterable<TextOffset>;
+declare function matchToTextOffset(reg: RegExp, text: TextOffset): Iterable<TextOffset>;
+declare function extractLinesOfText(text: string): Iterable<TextOffset>;
+/**
+ * Extract out whole words from a string of text.
+ */
+declare function extractWordsFromText(text: string): Iterable<TextOffset>;
+/**
+ * Extract out whole words from a string of text.
+ */
+declare function extractWordsFromTextOffset(text: TextOffset): Iterable<TextOffset>;
+declare function cleanText(text: string): string;
+declare function cleanTextOffset(text: TextOffset): TextOffset;
+/**
+ * Extract out whole words and words containing numbers from a string of text.
+ */
+declare function extractPossibleWordsFromTextOffset(text: TextOffset): Iterable<TextOffset>;
+declare function extractWordsFromCode(text: string): Iterable<TextOffset>;
+declare function extractWordsFromCodeTextOffset(textOffset: TextOffset): Iterable<TextOffset>;
+declare function isUpperCase(word: string): boolean;
+declare function isLowerCase(word: string): boolean;
+declare function isFirstCharacterUpper(word: string): boolean;
+declare function isFirstCharacterLower(word: string): boolean;
+declare function ucFirst(word: string): string;
+declare function lcFirst(word: string): string;
+declare function snakeToCamel(word: string): string;
+declare function camelToSnake(word: string): string;
+declare function matchCase(example: string, word: string): string;
+declare function textOffset(text: string, offset?: number): TextOffset;
+declare function extractText(textOffset: TextOffset, startPos: number, endPos: number): string;
+declare function calculateTextDocumentOffsets<T extends TextOffset>(uri: string | Uri | URL, doc: string, wordOffsets: T[]): (TextDocumentOffset & T)[];
+declare function removeAccents(text: string): string;
+declare const __testing__: {
+    regExWords: RegExp;
+    regExWordsAndDigits: RegExp;
+};
 
-interface PerfTimer {
-    readonly name: string;
-    readonly startTime: number;
-    readonly elapsed: number;
-    start(): void;
-    end(): void;
+declare const text_d___testing__: typeof __testing__;
+declare const text_d_calculateTextDocumentOffsets: typeof calculateTextDocumentOffsets;
+declare const text_d_camelToSnake: typeof camelToSnake;
+declare const text_d_cleanText: typeof cleanText;
+declare const text_d_cleanTextOffset: typeof cleanTextOffset;
+declare const text_d_extractLinesOfText: typeof extractLinesOfText;
+declare const text_d_extractPossibleWordsFromTextOffset: typeof extractPossibleWordsFromTextOffset;
+declare const text_d_extractText: typeof extractText;
+declare const text_d_extractWordsFromCode: typeof extractWordsFromCode;
+declare const text_d_extractWordsFromCodeTextOffset: typeof extractWordsFromCodeTextOffset;
+declare const text_d_extractWordsFromText: typeof extractWordsFromText;
+declare const text_d_extractWordsFromTextOffset: typeof extractWordsFromTextOffset;
+declare const text_d_isFirstCharacterLower: typeof isFirstCharacterLower;
+declare const text_d_isFirstCharacterUpper: typeof isFirstCharacterUpper;
+declare const text_d_isLowerCase: typeof isLowerCase;
+declare const text_d_isUpperCase: typeof isUpperCase;
+declare const text_d_lcFirst: typeof lcFirst;
+declare const text_d_match: typeof match;
+declare const text_d_matchCase: typeof matchCase;
+declare const text_d_matchStringToTextOffset: typeof matchStringToTextOffset;
+declare const text_d_matchToTextOffset: typeof matchToTextOffset;
+declare const text_d_removeAccents: typeof removeAccents;
+declare const text_d_snakeToCamel: typeof snakeToCamel;
+declare const text_d_splitCamelCaseWord: typeof splitCamelCaseWord;
+declare const text_d_splitCamelCaseWordWithOffset: typeof splitCamelCaseWordWithOffset;
+declare const text_d_stringToRegExp: typeof stringToRegExp;
+declare const text_d_textOffset: typeof textOffset;
+declare const text_d_ucFirst: typeof ucFirst;
+declare namespace text_d {
+  export { text_d___testing__ as __testing__, text_d_calculateTextDocumentOffsets as calculateTextDocumentOffsets, text_d_camelToSnake as camelToSnake, text_d_cleanText as cleanText, text_d_cleanTextOffset as cleanTextOffset, text_d_extractLinesOfText as extractLinesOfText, text_d_extractPossibleWordsFromTextOffset as extractPossibleWordsFromTextOffset, text_d_extractText as extractText, text_d_extractWordsFromCode as extractWordsFromCode, text_d_extractWordsFromCodeTextOffset as extractWordsFromCodeTextOffset, text_d_extractWordsFromText as extractWordsFromText, text_d_extractWordsFromTextOffset as extractWordsFromTextOffset, text_d_isFirstCharacterLower as isFirstCharacterLower, text_d_isFirstCharacterUpper as isFirstCharacterUpper, text_d_isLowerCase as isLowerCase, text_d_isUpperCase as isUpperCase, text_d_lcFirst as lcFirst, text_d_match as match, text_d_matchCase as matchCase, text_d_matchStringToTextOffset as matchStringToTextOffset, text_d_matchToTextOffset as matchToTextOffset, text_d_removeAccents as removeAccents, text_d_snakeToCamel as snakeToCamel, text_d_splitCamelCaseWord as splitCamelCaseWord, text_d_splitCamelCaseWordWithOffset as splitCamelCaseWordWithOffset, text_d_stringToRegExp as stringToRegExp, text_d_textOffset as textOffset, text_d_ucFirst as ucFirst };
 }
-type TimeNowFn = () => number;
-declare function createPerfTimer(name: string, onEnd?: (elapsed: number, name: string) => void, timeNowFn?: TimeNowFn): PerfTimer;
 
-export { type CheckTextInfo, type ConfigurationDependencies, type CreateTextDocumentParams, type DetermineFinalDocumentSettingsResult, type Document, DocumentValidator, type DocumentValidatorOptions, ENV_CSPELL_GLOB_ROOT, type ExcludeFilesGlobMap, type ExclusionFunction, exclusionHelper_d as ExclusionHelper, type FeatureFlag, FeatureFlags, ImportError, type ImportFileRefWithError$1 as ImportFileRefWithError, IncludeExcludeFlag, type IncludeExcludeOptions, index_link_d as Link, type Logger, type PerfTimer, type SpellCheckFileOptions, type SpellCheckFileResult, SpellingDictionaryLoadError, type SuggestedWord, SuggestionError, type SuggestionOptions, type SuggestionsForWordResult, text_d as Text, type TextDocument, type TextDocumentLine, type TextDocumentRef, type TextInfoItem, type TraceOptions, type TraceResult, type TraceWordResult, UnknownFeatureFlagError, type ValidationIssue, calcOverrideSettings, checkFilenameMatchesGlob, checkText, checkTextDocument, clearCachedFiles, clearCaches, combineTextAndLanguageSettings, combineTextAndLanguageSettings as constructSettingsForText, createConfigLoader, createPerfTimer, createTextDocument, currentSettingsFileVersion, defaultConfigFilenames, defaultFileName, defaultFileName as defaultSettingsFilename, determineFinalDocumentSettings, extractDependencies, extractImportErrors, fileToDocument, fileToTextDocument, finalizeSettings, getCachedFileSize, getDefaultBundledSettingsAsync, getDefaultConfigLoader, getDefaultSettings, getDictionary, getGlobalSettings, getGlobalSettingsAsync, getLanguagesForBasename as getLanguageIdsForBaseFilename, getLanguagesForExt, getLogger, getSources, getSystemFeatureFlags, getVirtualFS, isBinaryFile, isSpellingDictionaryLoadError, loadConfig, loadPnP, mergeInDocSettings, mergeSettings, readRawSettings, readSettings, readSettingsFiles, refreshDictionaryCache, resolveFile, searchForConfig, sectionCSpell, setLogger, shouldCheckDocument, spellCheckDocument, spellCheckFile, suggestionsForWord, suggestionsForWords, traceWords, traceWordsAsync, updateTextDocument, validateText };
+export { type CheckTextInfo, type ConfigurationDependencies, type CreateTextDocumentParams, type DetermineFinalDocumentSettingsResult, type Document, DocumentValidator, type DocumentValidatorOptions, ENV_CSPELL_GLOB_ROOT, type ExcludeFilesGlobMap, type ExclusionFunction, exclusionHelper_d as ExclusionHelper, type FeatureFlag, FeatureFlags, ImportError, type ImportFileRefWithError$1 as ImportFileRefWithError, IncludeExcludeFlag, type IncludeExcludeOptions, index_link_d as Link, type Logger, type PerfTimer, type SpellCheckFileOptions, type SpellCheckFileResult, SpellingDictionaryLoadError, type SuggestedWord, SuggestionError, type SuggestionOptions, type SuggestionsForWordResult, text_d as Text, type TextDocument, type TextDocumentLine, type TextDocumentRef, type TextInfoItem, type TraceOptions, type TraceResult, type TraceWordResult, UnknownFeatureFlagError, type ValidationIssue, calcOverrideSettings, checkFilenameMatchesExcludeGlob as checkFilenameMatchesGlob, checkText, checkTextDocument, clearCachedFiles, clearCaches, combineTextAndLanguageSettings, combineTextAndLanguageSettings as constructSettingsForText, createConfigLoader, createPerfTimer, createTextDocument, currentSettingsFileVersion, defaultConfigFilenames, defaultFileName, defaultFileName as defaultSettingsFilename, determineFinalDocumentSettings, extractDependencies, extractImportErrors, fileToDocument, fileToTextDocument, finalizeSettings, getCachedFileSize, getDefaultBundledSettingsAsync, getDefaultConfigLoader, getDefaultSettings, getDictionary, getGlobalSettings, getGlobalSettingsAsync, getLanguagesForBasename as getLanguageIdsForBaseFilename, getLanguagesForExt, getLogger, getSources, getSystemFeatureFlags, getVirtualFS, isBinaryFile, isSpellingDictionaryLoadError, loadConfig, loadPnP, mergeInDocSettings, mergeSettings, readRawSettings, readSettings, readSettingsFiles, refreshDictionaryCache, resolveFile, searchForConfig, sectionCSpell, setLogger, shouldCheckDocument, spellCheckDocument, spellCheckFile, suggestionsForWord, suggestionsForWords, traceWords, traceWordsAsync, updateTextDocument, validateText };

@@ -1,3 +1,4 @@
+/* eslint-disable unicorn/text-encoding-identifier-case */
 import { describe, expect, test } from 'vitest';
 
 import { arrayBufferViewToBuffer, swap16 as swapBytesInPlace, swapBytes } from './arrayBuffers.js';

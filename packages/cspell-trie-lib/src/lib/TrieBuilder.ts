@@ -343,5 +343,5 @@ function assertFrozen(n: TrieNodeEx): asserts n is TrieNodeExFrozen {
     if (!('id' in n)) {
         console.warn('%o', n);
     }
-    if (!Object.isFrozen(n) || !('id' in n)) throw Error('Must be TrieNodeExFrozen');
+    if (!Object.isFrozen(n) || !('id' in n)) throw new Error('Must be TrieNodeExFrozen');
 }

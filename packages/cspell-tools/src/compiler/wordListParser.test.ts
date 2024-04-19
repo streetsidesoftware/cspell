@@ -49,8 +49,8 @@ describe('Validate the wordListCompiler', () => {
         ${s('Apple|~apple|Apple')}                                                            | ${pf({ legacy: true })} | ${['apple']}
         ${'ArrayObject::getFlags\nArrayObject::getIterator\nArrayObject::getIteratorClass\n'} | ${pf({ legacy: true })} | ${s('array|object|get|flags|iterator|class')}
         ${sampleContent}                                                                      | ${pf()}                 | ${s('Tower of London|New|York')}
-        ${'apple\u200cbanana'}                                                                | ${pf({ split: true })}  | ${['apple', 'banana']}
-        ${'apple\u200cbanana'}                                                                | ${pf({})}               | ${['apple\u200cbanana']}
+        ${'apple\u200Cbanana'}                                                                | ${pf({ split: true })}  | ${['apple', 'banana']}
+        ${'apple\u200Cbanana'}                                                                | ${pf({})}               | ${['apple\u200Cbanana']}
         ${'apple\\u200cbanana'}                                                               | ${pf({ split: true })}  | ${s('apple|banana')}
         ${s('apple|xfc|banana|x|u|a')}                                                        | ${pf({ split: true })}  | ${s('apple|xfc|banana|x|u|a')}
     `('createSortAndFilterOperation $content $options', ({ content, options, expectedResult }) => {

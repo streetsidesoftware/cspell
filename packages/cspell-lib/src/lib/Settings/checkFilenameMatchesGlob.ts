@@ -1,5 +1,3 @@
-import { checkFilenameMatchesExcludeGlob } from '../globs/checkFilenameMatchesGlob.js';
-
 /**
  * @param filename - filename
  * @param globs - globs
@@ -7,4 +5,5 @@ import { checkFilenameMatchesExcludeGlob } from '../globs/checkFilenameMatchesGl
  * @deprecated true
  * @deprecationMessage No longer actively supported. Use package: `cspell-glob`.
  */
-export const checkFilenameMatchesGlob = checkFilenameMatchesExcludeGlob;
+
+export { checkFilenameMatchesExcludeGlob as checkFilenameMatchesGlob } from '../globs/checkFilenameMatchesGlob.js';

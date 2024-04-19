@@ -179,9 +179,9 @@ describe('distanceAStar', () => {
     );
 });
 
-function mapLetters(cost = 50): SuggestionCostMapDef {
-    const letters = [...'a'.repeat(27)].map((s, i) => String.fromCharCode(s.charCodeAt(0) + i)).join('');
+const letters = 'abcdefghijklmnopqrstuvwxyz';
 
+function mapLetters(cost = 50): SuggestionCostMapDef {
     return {
         map: letters + letters.toUpperCase(),
         insDel: cost,

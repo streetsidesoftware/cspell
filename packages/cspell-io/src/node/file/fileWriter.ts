@@ -22,6 +22,6 @@ export function writeToFileIterable(
     encoding?: BufferEncodingExt,
 ): Promise<void> {
     const stream = Stream.Readable.from(encoderTransformer(data, encoding));
-    const zip = filename.match(/\.gz$/) ? zlib.createGzip() : new Stream.PassThrough();
+    const zip = /\.gz$/.test(filename) ? zlib.createGzip() : new Stream.PassThrough();
     return pipeline(stream, zip, fs.createWriteStream(filename));
 }

@@ -60,14 +60,14 @@ export function mapRawString(text: string): MappedText {
                 continue;
             }
             switch (tc) {
-                case 'u':
+                case 'u': {
                     {
                         let char: string;
                         let end: number;
                         if (text[i + 1] !== '{') {
                             const digits = text.slice(i + 1, i + 5);
-                            parsed = isHex.test(digits) ? parseInt(digits, 16) : NaN;
-                            char = isNaN(parsed) ? '' : String.fromCharCode(parsed);
+                            parsed = isHex.test(digits) ? Number.parseInt(digits, 16) : Number.NaN;
+                            char = Number.isNaN(parsed) ? '' : String.fromCodePoint(parsed);
                             end = i + 4;
                         } else {
                             for (end = i + 2; text[end] in hexChars; ++end) {
@@ -77,8 +77,8 @@ export function mapRawString(text: string): MappedText {
                                 char = '';
                             } else {
                                 const digits = text.slice(i + 2, end);
-                                parsed = isHex.test(digits) ? parseInt(digits, 16) : NaN;
-                                char = isNaN(parsed) ? '' : String.fromCodePoint(parsed);
+                                parsed = isHex.test(digits) ? Number.parseInt(digits, 16) : Number.NaN;
+                                char = Number.isNaN(parsed) ? '' : String.fromCodePoint(parsed);
                             }
                         }
                         if (!char) {
@@ -91,37 +91,44 @@ export function mapRawString(text: string): MappedText {
                         }
                     }
                     break;
-                case 'x':
+                }
+                case 'x': {
                     {
                         const digits = text.slice(i + 1, i + 3);
-                        parsed = isHex.test(digits) ? parseInt(digits, 16) : NaN;
-                        if (isNaN(parsed)) {
+                        parsed = isHex.test(digits) ? Number.parseInt(digits, 16) : Number.NaN;
+                        if (Number.isNaN(parsed)) {
                             // give up, it is not valid
                             t += tc;
                             j += 1;
                         } else {
-                            t += String.fromCharCode(parsed);
+                            t += String.fromCodePoint(parsed);
                             i += 2;
                             ++j;
                         }
                     }
                     break;
-                case '0':
+                }
+                case '0': {
                     // Deprecated in ES5
                     t += '0';
                     j += 1;
                     break;
-                case '\r':
+                }
+                case '\r': {
                     i += text[i + 1] === '\n' ? 1 : 0;
                     break;
-                case '\n':
+                }
+                case '\n': {
                     break;
-                case undefined:
+                }
+                case undefined: {
                     break;
-                default:
+                }
+                default: {
                     t += tc;
                     ++j;
                     break;
+                }
             }
             map.push(i + 1, j);
             continue;

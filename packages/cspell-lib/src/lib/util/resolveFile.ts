@@ -179,7 +179,7 @@ export class FileResolver {
         try {
             const r = require.resolve(filename);
             return { filename: r, relativeTo: rel.toString(), found: true, method: 'tryCreateRequire' };
-        } catch (_) {
+        } catch {
             return undefined;
         }
     };
@@ -189,7 +189,7 @@ export class FileResolver {
             // eslint-disable-next-line unicorn/prefer-module
             const r = require.resolve(filename);
             return { filename: r, relativeTo: undefined, found: true, method: 'tryNodeResolveDefaultPaths' };
-        } catch (_) {
+        } catch {
             return undefined;
         }
     };
@@ -216,7 +216,7 @@ export class FileResolver {
             // eslint-disable-next-line unicorn/prefer-module
             const r = require.resolve(filename, { paths });
             return { filename: r, relativeTo: relativeToPath, found: true, method: 'tryNodeRequireResolve' };
-        } catch (_) {
+        } catch {
             return undefined;
         }
     };
@@ -226,7 +226,7 @@ export class FileResolver {
             const paths = isRelative(filename) ? [relativeTo] : [relativeTo, srcDirectory];
             const resolved = fileURLToPath(importResolveModuleName(filename, paths));
             return { filename: resolved, relativeTo: relativeTo.toString(), found: true, method: 'tryImportResolve' };
-        } catch (_) {
+        } catch {
             return undefined;
         }
     };

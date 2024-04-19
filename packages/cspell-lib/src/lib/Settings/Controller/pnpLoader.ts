@@ -24,7 +24,7 @@ const cachedRequestsSync = new Map<string, LoaderResult>();
 export class PnpLoader {
     private cacheKeySuffix: string;
     constructor(readonly pnpFiles: string[] = defaultPnpFiles) {
-        this.cacheKeySuffix = ':' + pnpFiles.join();
+        this.cacheKeySuffix = ':' + pnpFiles.join(',');
     }
 
     /**

@@ -446,7 +446,7 @@ function deepEqual(a: unknown, b: unknown): boolean {
     try {
         assert.deepStrictEqual(a, b);
         return true;
-    } catch (_) {
+    } catch {
         return false;
     }
 }

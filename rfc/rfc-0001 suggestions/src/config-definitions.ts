@@ -47,6 +47,7 @@ type TermTypo = string[] | string;
 
 const TermForbid: TermForbid = false;
 const TermWord: TermWord = true;
+// eslint-disable-next-line unicorn/no-null
 const TermIgnore: TermIgnore = null;
 
 type Term = TermWord | TermForbid | TermIgnore | TermTypo;

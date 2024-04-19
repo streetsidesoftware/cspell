@@ -56,8 +56,8 @@ function* hintedWalkerNext(
 
     const compoundMethodRoots: { [index: number]: readonly (readonly [string, TrieNode])[] } = {
         [CompoundWordsMethod.NONE]: [],
-        [CompoundWordsMethod.JOIN_WORDS]: [...rootsForCompoundMethods.map((r) => [JOIN_SEPARATOR, r] as const)],
-        [CompoundWordsMethod.SEPARATE_WORDS]: [...rootsForCompoundMethods.map((r) => [WORD_SEPARATOR, r] as const)],
+        [CompoundWordsMethod.JOIN_WORDS]: rootsForCompoundMethods.map((r) => [JOIN_SEPARATOR, r] as const),
+        [CompoundWordsMethod.SEPARATE_WORDS]: rootsForCompoundMethods.map((r) => [WORD_SEPARATOR, r] as const),
     };
 
     interface StackItemEntry {

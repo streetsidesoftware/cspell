@@ -1,3 +1,4 @@
+/* eslint-disable unicorn/text-encoding-identifier-case */
 import type { Dirent, Stats as FsStats } from 'node:fs';
 import { promises as fs, readFileSync, statSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
@@ -283,7 +284,7 @@ export function registerHandlers(serviceBus: ServiceBus) {
 
 function encodeContent(ref: FileReference, content: string | ArrayBufferView): string | Buffer {
     if (typeof content === 'string') {
-        if (!ref.encoding || ref.encoding === 'utf-8') return content;
+        if ([undefined, 'utf8', 'utf-8'].includes(ref.encoding)) return content;
         return arrayBufferViewToBuffer(encodeString(content, ref.encoding));
     }
     return arrayBufferViewToBuffer(content);

@@ -174,7 +174,7 @@ class TestHelperImpl implements TestHelper {
         try {
             await fs.stat(path);
             return true;
-        } catch (_) {
+        } catch {
             return false;
         }
     }

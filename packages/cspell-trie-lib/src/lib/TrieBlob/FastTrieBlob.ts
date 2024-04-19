@@ -265,13 +265,14 @@ export class FastTrieBlob implements TrieData {
             nodeOffsets.push(offset);
         }
         const offsetToNodeIndex = new Map<number, number>(nodeOffsets.map((offset, i) => [offset, i]));
-        const nodes: FastTrieBlobNode[] = new Array(nodeOffsets.length);
+        const nodes: FastTrieBlobNode[] = Array.from({ length: nodeOffsets.length });
         for (let i = 0; i < nodes.length; ++i) {
             const offset = nodeOffsets[i];
             const n = trieNodesBin[offset];
             const eow = n & TrieBlob.NodeMaskEOW;
             const count = n & TrieBlob.NodeMaskNumChildren;
-            const node = new Array(count + 1);
+            // Preallocate the array to the correct size.
+            const node = Array.from<number>({ length: count + 1 });
             node[0] = eow;
             nodes[i] = node;
             for (let j = 1; j <= count; ++j) {

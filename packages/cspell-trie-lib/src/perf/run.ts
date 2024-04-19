@@ -1,26 +1,30 @@
 import { measurePerf, PerfConfig } from './perfSuite.js';
 
-const args = process.argv.slice(2);
+function run() {
+    const args = process.argv.slice(2);
 
-if (args.includes('--help')) {
-    console.log(`\
-Measure trie perf tool used only for testing.
-Usage:
+    if (args.includes('--help')) {
+        console.log(`\
+    Measure trie perf tool used only for testing.
+    Usage:
 
-- node run.js [type]
-- node run.js <type> [method]
+    - node run.js [type]
+    - node run.js <type> [method]
 
-type:
-${Object.entries(PerfConfig)
-    .map(([name, opt]) => `- ${name} - ${opt.desc}`)
-    .join('\n')}
+    type:
+    ${Object.entries(PerfConfig)
+        .map(([name, opt]) => `- ${name} - ${opt.desc}`)
+        .join('\n')}
 
-method - words, has
+    method - words, has
 
-`);
+    `);
 
-    // eslint-disable-next-line n/no-process-exit
-    process.exit(1);
+        process.exitCode = 1;
+        return;
+    }
+
+    measurePerf(args[0], args[1]);
 }
 
-measurePerf(args[0], args[1]);
+run();

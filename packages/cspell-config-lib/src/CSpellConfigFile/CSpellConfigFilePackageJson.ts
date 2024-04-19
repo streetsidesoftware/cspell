@@ -28,14 +28,14 @@ export function parseCSpellConfigFilePackageJson(file: TextFile): CSpellConfigFi
     packageJson['cspell'] = packageJson['cspell'] || {};
     const cspell = packageJson['cspell'];
     if (typeof cspell !== 'object' || Array.isArray(cspell)) {
-        throw new Error(`Unable to parse ${url}`);
+        throw new TypeError(`Unable to parse ${url}`);
     }
 
     const indent = detectIndent(content);
 
     function serialize(settings: CSpellSettings) {
         packageJson['cspell'] = settings;
-        return JSON.stringify(packageJson, null, indent) + '\n';
+        return JSON.stringify(packageJson, undefined, indent) + '\n';
     }
 
     return new CSpellConfigFilePackageJson(url, cspell, serialize);

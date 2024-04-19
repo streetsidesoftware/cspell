@@ -29,7 +29,7 @@ function count(_: string, previous: number | undefined): number {
 }
 
 function asNumber(value: string, prev: number | undefined): number {
-    return parseInt(value, 10) ?? prev;
+    return Number.parseInt(value, 10) ?? prev;
 }
 
 export function commandSuggestion(prog: Command): Command {

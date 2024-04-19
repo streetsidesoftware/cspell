@@ -1,3 +1,4 @@
+/* eslint-disable unicorn/text-encoding-identifier-case */
 import { gunzipSync } from 'node:zlib';
 
 import { arrayBufferViewToBuffer, asUint8Array, swap16, swapBytes } from './arrayBuffers.js';
@@ -6,7 +7,7 @@ import type { BufferEncodingExt, TextEncodingExt } from './BufferEncoding.js';
 const BOM_BE = 0xfeff;
 const BOM_LE = 0xfffe;
 
-const decoderUTF8 = new TextDecoder('utf-8');
+const decoderUTF8 = new TextDecoder('utf8');
 const decoderUTF16LE = new TextDecoder('utf-16le');
 const decoderUTF16BE = createTextDecoderUtf16BE();
 
@@ -38,14 +39,17 @@ export function decodeToString(data: ArrayBufferView, encoding?: TextEncodingExt
 
     switch (encoding) {
         case 'utf-16be':
-        case 'utf16be':
+        case 'utf16be': {
             return decodeUtf16BE(buf);
+        }
         case 'utf-16le':
-        case 'utf16le':
+        case 'utf16le': {
             return decodeUtf16LE(buf);
+        }
         case 'utf-8':
-        case 'utf8':
+        case 'utf8': {
             return decoderUTF8.decode(buf);
+        }
     }
 
     throw new UnsupportedEncodingError(encoding);
@@ -55,8 +59,9 @@ export function decode(data: ArrayBufferView, encoding?: BufferEncodingExt): str
     switch (encoding) {
         case 'base64':
         case 'base64url':
-        case 'hex':
+        case 'hex': {
             return arrayBufferViewToBuffer(data).toString(encoding);
+        }
     }
 
     const result = decodeToString(data, encoding);
@@ -67,11 +72,13 @@ export function decode(data: ArrayBufferView, encoding?: BufferEncodingExt): str
 export function encodeString(str: string, encoding?: BufferEncodingExt, bom?: boolean): ArrayBufferView {
     switch (encoding) {
         case 'utf-16be':
-        case 'utf16be':
+        case 'utf16be': {
             return encodeUtf16BE(str, bom);
+        }
         case 'utf-16le':
-        case 'utf16le':
+        case 'utf16le': {
             return encodeUtf16LE(str, bom);
+        }
     }
     return Buffer.from(str, encoding);
 }
@@ -96,10 +103,12 @@ export function calcEncodingFromBom(data: ArrayBufferView): 'utf16be' | 'utf16le
     const buf = asUint8Array(data);
     if (buf.length < 2) return undefined;
     switch ((buf[0] << 8) | buf[1]) {
-        case BOM_BE:
+        case BOM_BE: {
             return 'utf16be';
-        case BOM_LE:
+        }
+        case BOM_LE: {
             return 'utf16le';
+        }
     }
     return undefined;
 }
@@ -108,7 +117,7 @@ function createTextDecoderUtf16BE() {
     try {
         const decoder = new TextDecoder('utf-16be');
         return decoder;
-    } catch (_) {
+    } catch {
         return {
             encoding: 'utf-16be',
             fatal: false,

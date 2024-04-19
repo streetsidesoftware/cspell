@@ -69,7 +69,7 @@ async function readJson(filename) {
 }
 
 async function writeJson(filename, data) {
-    const content = JSON.stringify(data, null, 4) + '\n';
+    const content = JSON.stringify(data, undefined, 4) + '\n';
     await writeFile(filename, content, { encoding: 'utf8' });
 }
 

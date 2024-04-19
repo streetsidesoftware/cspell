@@ -14,6 +14,7 @@ export type EncodedSequence =
     | [SpecialCharIndex.Index14bit, number, number]
     | [SpecialCharIndex.Index21bit, number, number, number];
 
+// eslint-disable-next-line unicorn/no-static-only-class
 export class NumberSequenceByteEncoderDecoder {
     static encode(n: number): EncodedSequence {
         if (n < this.SpecialCharIndexMask) return [n];
@@ -28,18 +29,22 @@ export class NumberSequenceByteEncoderDecoder {
     static decode(encodedSequence: EncodedSequence): number {
         const [a, b, c, d] = encodedSequence;
         switch (a) {
-            case SpecialCharIndex.Index8bit:
+            case SpecialCharIndex.Index8bit: {
                 // assert(encodedSequence.length === 2);
                 return (b || 0) + this.SpecialCharIndexMask;
-            case SpecialCharIndex.Index14bit:
+            }
+            case SpecialCharIndex.Index14bit: {
                 // assert(encodedSequence.length === 3);
                 return ((b || 0) << 7) + (c || 0);
-            case SpecialCharIndex.Index21bit:
+            }
+            case SpecialCharIndex.Index21bit: {
                 // assert(encodedSequence.length === 4);
                 return ((b || 0) << 14) + ((c || 0) << 7) + (d || 0);
-            default:
+            }
+            default: {
                 // assert(a <= SpecialCharIndex.MaxCharIndex);
                 return a;
+            }
         }
     }
 
@@ -89,17 +94,21 @@ export class NumberSequenceByteDecoderAccumulator {
                 return v;
             }
             switch (idx) {
-                case NumberSequenceByteEncoderDecoder.SpecialCharIndex8bit:
+                case NumberSequenceByteEncoderDecoder.SpecialCharIndex8bit: {
                     this.accumulation += NumberSequenceByteEncoderDecoder.SpecialCharIndexMask;
                     break;
-                case NumberSequenceByteEncoderDecoder.SpecialCharIndex16bit:
+                }
+                case NumberSequenceByteEncoderDecoder.SpecialCharIndex16bit: {
                     this.byteMode = 2;
                     break;
-                case NumberSequenceByteEncoderDecoder.SpecialCharIndex24bit:
+                }
+                case NumberSequenceByteEncoderDecoder.SpecialCharIndex24bit: {
                     this.byteMode = 3;
                     break;
-                default:
+                }
+                default: {
                     throw new Error('Invalid SpecialCharIndex');
+                }
             }
             return undefined;
         }

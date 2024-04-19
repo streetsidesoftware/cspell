@@ -52,7 +52,7 @@ const samplesDir = pathPackageSamples;
 const samplesSrc = path.join(samplesDir, 'src');
 const testFixtures = pathRepoTestFixtures;
 
-const urlIssues = new URL('./issues/', pathRepoTestFixturesURL);
+const urlIssues = new URL('issues/', pathRepoTestFixturesURL);
 
 const oc = expect.objectContaining;
 const sm = expect.stringMatching;

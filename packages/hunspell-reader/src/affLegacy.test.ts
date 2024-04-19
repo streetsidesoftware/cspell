@@ -24,6 +24,7 @@ describe('Basic Aff Validation', () => {
     const pAff = AffReader.parseAff(getSimpleAff());
     it('Reads Simple Aff', async () => {
         const aff = await pAff;
+        // eslint-disable-next-line unicorn/text-encoding-identifier-case
         expect(aff.SET).toBe('UTF-8');
         expect(aff.PFX).toBeInstanceOf(Map);
         expect(aff.SFX).toBeInstanceOf(Map);
@@ -201,7 +202,7 @@ describe('Test Aff', () => {
 describe('Validated loading all dictionaries in the `dictionaries` directory.', () => {
     function getDictionaries() {
         return readdirSync(DICTIONARY_LOCATIONS)
-            .filter((dic) => !!dic.match(/\.aff$/))
+            .filter((dic) => !!/\.aff$/.test(dic))
             .map((base) => path.join(DICTIONARY_LOCATIONS, base));
     }
     const dictionaries = getDictionaries();

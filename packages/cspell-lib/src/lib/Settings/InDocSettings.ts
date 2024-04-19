@@ -220,10 +220,8 @@ function* filterUniqueSuggestions(sugs: Iterable<ExtendedSuggestion>): Iterable<
 
     for (const sug of sugs) {
         const existing = map.get(sug.word);
-        if (existing) {
-            if (sug.isPreferred) {
-                existing.isPreferred = true;
-            }
+        if (existing && sug.isPreferred) {
+            existing.isPreferred = true;
         }
         yield sug;
     }

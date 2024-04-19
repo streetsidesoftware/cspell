@@ -67,10 +67,10 @@ function createMapperRegExp(repMap: ReplaceMap): RegExp {
         .map((s) => {
             try {
                 // fix up any nested ()
-                const r = s.match(/\(/) ? s.replaceAll(/\((?=.*\))/g, '(?:').replaceAll('(?:?', '(?') : s;
+                const r = /\(/.test(s) ? s.replaceAll(/\((?=.*\))/g, '(?:').replaceAll('(?:?', '(?') : s;
                 new RegExp(r);
                 s = r;
-            } catch (_err) {
+            } catch {
                 return escapeRegEx(s);
             }
             return s;

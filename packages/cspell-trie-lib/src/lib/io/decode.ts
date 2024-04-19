@@ -32,7 +32,7 @@ function importTrie(input: Iterable<string> | IterableIterator<string> | string[
         for (let i = 0; i < headerRows.length; ++i) {
             const match = headerRows[i].match(headerReg);
             if (match) {
-                return parseInt(match[1], 10);
+                return Number.parseInt(match[1], 10);
             }
         }
         throw new Error('Unknown file format');

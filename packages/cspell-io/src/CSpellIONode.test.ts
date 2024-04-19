@@ -173,7 +173,7 @@ describe('CSpellIONode', () => {
         ${pathToTemp('cities.txt')}
         ${pathToTemp('cities.txt.gz')}
     `('writeFile $filename', async ({ filename }) => {
-        const content = await fs.readFile(ps('cities.txt'), 'utf-8');
+        const content = await fs.readFile(ps('cities.txt'), 'utf8');
         const cspellIo = new CSpellIONode();
         await makePathToFile(filename);
         await cspellIo.writeFile(filename, content);

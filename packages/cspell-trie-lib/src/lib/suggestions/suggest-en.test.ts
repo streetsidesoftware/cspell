@@ -31,9 +31,12 @@ const pAffContent = readRawDictionaryFile('hunspell/en_US.aff');
 
 let affContent: string | undefined;
 
-const pReady = Promise.all([pAffContent.then((aff) => (affContent = aff))]).then(() => {
-    return undefined;
-});
+const pReady = pAffContent
+    .then((aff) => (affContent = aff))
+    .then(() => {
+        return undefined;
+    })
+    .catch(() => undefined);
 
 describe('Validate English Suggestions', () => {
     interface WordSuggestionsTest {

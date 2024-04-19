@@ -1,11 +1,12 @@
-import * as ExclusionHelper from './exclusionHelper.js';
-import * as Link from './Settings/index.link.js';
-import * as Text from './util/text.js';
-
+export { clearCachedFiles, clearCaches } from './clearCachedFiles.js';
 export type { Document } from './Document/index.js';
 export { fileToDocument, fileToTextDocument, isBinaryFile } from './Document/index.js';
 export { ExcludeFilesGlobMap, ExclusionFunction } from './exclusionHelper.js';
+export * as ExclusionHelper from './exclusionHelper.js';
 export { FeatureFlag, FeatureFlags, getSystemFeatureFlags, UnknownFeatureFlagError } from './FeatureFlags/index.js';
+export type { VFileSystemProvider, VirtualFS } from './fileSystem.js';
+export { FSCapabilityFlags, getVirtualFS } from './fileSystem.js';
+export { getDictionary } from './getDictionary.js';
 export { getLanguagesForBasename as getLanguageIdsForBaseFilename, getLanguagesForExt } from './LanguageIds.js';
 export type {
     CreateTextDocumentParams,
@@ -14,6 +15,8 @@ export type {
     TextDocumentRef,
 } from './Models/TextDocument.js';
 export { createTextDocument, updateTextDocument } from './Models/TextDocument.js';
+export type { PerfTimer } from './perf/index.js';
+export { createPerfTimer } from './perf/index.js';
 export {
     calcOverrideSettings,
     checkFilenameMatchesGlob,
@@ -46,6 +49,7 @@ export {
     sectionCSpell,
 } from './Settings/index.js';
 export { defaultFileName as defaultSettingsFilename } from './Settings/index.js';
+export * as Link from './Settings/index.link.js';
 export {
     combineTextAndLanguageSettings,
     combineTextAndLanguageSettings as constructSettingsForText,
@@ -78,6 +82,7 @@ export type { TraceOptions, TraceResult, TraceWordResult } from './trace.js';
 export { traceWords, traceWordsAsync } from './trace.js';
 export { getLogger, Logger, setLogger } from './util/logger.js';
 export { resolveFile } from './util/resolveFile.js';
+export * as Text from './util/text.js';
 export {
     checkText,
     checkTextDocument,
@@ -97,11 +102,3 @@ export {
     writeToFileIterable,
     writeToFileIterableP,
 } from 'cspell-io';
-export { Link, Text };
-export { ExclusionHelper };
-export { clearCachedFiles, clearCaches } from './clearCachedFiles.js';
-export type { VFileSystemProvider, VirtualFS } from './fileSystem.js';
-export { FSCapabilityFlags, getVirtualFS } from './fileSystem.js';
-export { getDictionary } from './getDictionary.js';
-export type { PerfTimer } from './perf/index.js';
-export { createPerfTimer } from './perf/index.js';

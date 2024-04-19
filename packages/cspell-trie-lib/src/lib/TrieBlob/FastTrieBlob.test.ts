@@ -26,13 +26,13 @@ describe('FastTrieBlob', () => {
     test('expected', () => {
         const ft = FastTrieBlobBuilder.fromWordList(words);
         expect(ft.has('walk')).toBe(true);
-        expect(ft.charIndex.length).toBe(new Set([...words.join('')]).size + 1);
+        expect(ft.charIndex.length).toBe(new Set(words.join('')).size + 1);
     });
 
     test('createTriFromList', () => {
         const root = createTrieRootFromList(words);
         const ft = FastTrieBlobBuilder.fromTrieRoot(root);
-        expect(ft.charIndex.length).toBe(new Set([...words.join('')]).size + 1);
+        expect(ft.charIndex.length).toBe(new Set(words.join('')).size + 1);
         expect(ft.has('walk')).toBe(true);
         expect(words.findIndex((word) => !ft.has(word))).toBe(-1);
         expect(ft.has('hello')).toBe(false);

@@ -63,7 +63,7 @@ export function importResolveModuleName(moduleName: string | URL, paths: (string
                 if (s.isFile()) {
                     return resolvedURL;
                 }
-            } catch (_) {
+            } catch {
                 const error: ErrorWithCode = new Error(`Cannot find module ${moduleName}`);
                 error.code = 'ERR_MODULE_NOT_FOUND';
                 lastError = error;

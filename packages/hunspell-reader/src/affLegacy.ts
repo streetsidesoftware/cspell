@@ -161,7 +161,7 @@ export class Aff {
 
     getMatchingRules(rules: string): Rule[] {
         const { AF = [] } = this.affInfo;
-        const idx = regExpIsNumber.test(rules) ? parseInt(rules, 10) : -1;
+        const idx = regExpIsNumber.test(rules) ? Number.parseInt(rules, 10) : -1;
         const rulesToSplit = AF[idx] || rules;
         return this.separateRules(rulesToSplit)
             .map((key) => this.rules.get(key))
@@ -170,10 +170,12 @@ export class Aff {
 
     joinRules(rules: string[]): string {
         switch (this.affInfo.FLAG) {
-            case 'long':
+            case 'long': {
                 return rules.join('');
-            case 'num':
+            }
+            case 'num': {
                 return rules.join(',');
+            }
         }
         return rules.join('');
     }
@@ -188,12 +190,14 @@ export class Aff {
 
     #separateRules(rules: string): string[] {
         switch (this.affInfo.FLAG) {
-            case 'long':
+            case 'long': {
                 return [...new Set(rules.replaceAll(/(..)/g, '$1//').split('//').slice(0, -1))];
-            case 'num':
+            }
+            case 'num': {
                 return [...new Set(rules.split(','))];
+            }
         }
-        return [...new Set([...rules])];
+        return [...new Set(rules)];
     }
 
     get iConv() {
@@ -222,12 +226,10 @@ export function processRules(affInfo: AffInfo): Map<string, Rule> {
     const pfxRules: PfxRule[] = [...(affInfo.PFX || [])]
         .map(([, pfx]) => pfx)
         .map((pfx) => ({ id: pfx.id, type: 'pfx', pfx }));
-    const flagRules: FlagRule[] = [
-        ...GS.sequenceFromObject(affInfo as AffTransformFlags)
-            .filter(([key, value]) => !!affFlag[key] && !!value)
-            .map(([key, value]) => ({ id: value!, type: 'flag', flags: affFlag[key] })),
-    ];
-
+    const flagRules: FlagRule[] = GS.sequenceFromObject(affInfo as AffTransformFlags)
+        .filter(([key, value]) => !!affFlag[key] && !!value)
+        .map(([key, value]) => ({ id: value!, type: 'flag', flags: affFlag[key] }))
+        .toArray();
     const rules = [...sfxRules, ...pfxRules, ...flagRules].reduce((acc, rule) => {
         acc.set(rule.id, rule);
         return acc;

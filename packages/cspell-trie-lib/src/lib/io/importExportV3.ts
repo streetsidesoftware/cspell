@@ -23,9 +23,12 @@ export const DATA = '__DATA__';
 
 function generateHeader(base: number, comment: string): Iterable<string> {
     const header = [
-        ...['#!/usr/bin/env cspell-trie reader', 'TrieXv3', 'base=' + base],
+        '#!/usr/bin/env cspell-trie reader',
+        'TrieXv3',
+        'base=' + base,
         ...(comment ? comment.split('\n').map((a) => '# ' + a) : []),
-        ...['# Data:', DATA],
+        '# Data:',
+        DATA,
     ];
     return header.map((a) => a + '\n');
 }
@@ -83,19 +86,22 @@ export function serializeTrie(root: TrieRoot, options: ExportOptions | number = 
 
     function* emit(s: string): Generator<string> {
         switch (s) {
-            case EOW:
+            case EOW: {
                 yield* flush();
                 backBuffer.last = EOW;
                 backBuffer.count = 0;
                 backBuffer.words++;
                 break;
-            case BACK:
+            }
+            case BACK: {
                 backBuffer.count++;
                 break;
-            case EOL:
+            }
+            case EOL: {
                 backBuffer.eol = true;
                 break;
-            default:
+            }
+            default: {
                 if (backBuffer.words >= WORDS_PER_LINE) {
                     backBuffer.eol = true;
                 }
@@ -104,6 +110,7 @@ export function serializeTrie(root: TrieRoot, options: ExportOptions | number = 
                     backBuffer.words++;
                 }
                 yield s;
+            }
         }
     }
 

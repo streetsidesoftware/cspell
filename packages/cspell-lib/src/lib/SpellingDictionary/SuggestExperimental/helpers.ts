@@ -30,9 +30,9 @@ export function wordToTwoLetterFeatures(word: string): Feature[] {
 
 export function segmentString(s: string, segLen: number): string[] {
     const count = Math.max(0, s.length - segLen + 1);
-    const result: string[] = new Array<string>(count);
+    const result: string[] = [];
     for (let i = 0; i < count; ++i) {
-        result[i] = s.substr(i, segLen);
+        result[i] = s.slice(i, i + segLen);
     }
     return result;
 }

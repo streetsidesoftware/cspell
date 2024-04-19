@@ -83,7 +83,7 @@ describe('TrieBlob special character indexes', () => {
     test('mapping characters', () => {
         const characters = 'this is a test of a few characters and accents: é ♘😀😎🥳';
         const map = Object.fromEntries(
-            [...new Set([...characters]).values()].map((c) => [c, c.codePointAt(0)] as [string, number]),
+            [...new Set(characters).values()].map((c) => [c, c.codePointAt(0)] as [string, number]),
         );
         const charIndex = Object.fromEntries(Object.entries(map).map(([c, i]) => [i, c])) as Record<number, string>;
         const seq = TrieBlob.charactersToCharIndexSequence([...characters], map);

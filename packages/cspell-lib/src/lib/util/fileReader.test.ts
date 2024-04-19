@@ -18,7 +18,7 @@ describe('Validate file reader', () => {
         file
         ${__filename}
     `('reading files "$file"', async ({ file: filename }) => {
-        const expected = (await fs.readFile(filename, 'utf-8')).split(/\r?\n/g);
+        const expected = (await fs.readFile(filename, 'utf8')).split(/\r?\n/g);
         const content = [...(await fileReader.readLines(filename))];
         expect(content).toEqual(expected);
     });

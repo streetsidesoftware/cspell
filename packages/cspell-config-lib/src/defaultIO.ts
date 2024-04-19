@@ -9,7 +9,7 @@ export const defaultIO: IO = {
 };
 
 async function readFile(url: URL): Promise<TextFile> {
-    const content = await fs.readFile(url, 'utf-8');
+    const content = await fs.readFile(url, 'utf8');
     return { url, content };
 }
 

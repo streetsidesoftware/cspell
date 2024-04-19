@@ -41,7 +41,7 @@ export function getCommand(): Command {
 
 function notify(message: string, newLine = true) {
     message = message + (newLine ? '\n' : '');
-    logStream.write(message, 'utf-8');
+    logStream.write(message, 'utf8');
 }
 
 function yesNo(value: boolean) {
@@ -189,7 +189,7 @@ async function actionPrime(hunspellDicFilename: string, options: Options) {
     const callback = showProgress
         ? () => {
               current++;
-              !(current % reportProgressRate) && process.stderr.write(calcProgress(), 'utf-8');
+              !(current % reportProgressRate) && process.stderr.write(calcProgress(), 'utf8');
           }
         : () => {
               /* void */
