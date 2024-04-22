@@ -3,7 +3,7 @@ Repository: wireapp/wire-webapp
 Url: "https://github.com/wireapp/wire-webapp.git"
 Args: ["src/script/**/*.{js,ts,tsx,md}"]
 Lines:
- CSpell: Files checked: 1152, Issues found: 2752 in 628 files.
+ CSpell: Files checked: 1159, Issues found: 2767 in 633 files.
  exit code: 1
 ./src/script/Config.ts:81:31     - Unknown word (acces)      -- DataDog client api keys acces */
 ./src/script/E2EIdentity/E2EIdentityEnrollment.test.ts:110:33    - Unknown word (enrollement) -- should trigger an initial enrollement when device is a fresh
@@ -26,7 +26,7 @@ Lines:
 ./src/script/assets/AssetRepository.test.ts:180:19    - Unknown word (Qytx)       -- token: 'hYQytxHS6hSP6DlemD13uQ==&size
 ./src/script/assets/AssetRepository.test.ts:180:30    - Unknown word (Dlem)       -- token: 'hYQytxHS6hSP6DlemD13uQ==&size=100&q=test
 ./src/script/assets/AssetRepository.test.ts:21:26     - Unknown word (tsyringe)   -- import {container} from 'tsyringe';
-./src/script/assets/AssetRepository.ts:180:59    - Unknown word (DECRPYT)    -- TransferState.DOWNLOAD_FAILED_DECRPYT);
+./src/script/assets/AssetRepository.ts:179:59    - Unknown word (DECRPYT)    -- TransferState.DOWNLOAD_FAILED_DECRPYT);
 ./src/script/assets/AssetService.ts:38:35     - Unknown word (conv)       -- conversationIdParam = `&conv_id=${encodeURIComponent
 ./src/script/auth/component/AccountForm.tsx:254:9     - Unknown word (aligncenter) -- aligncenter
 ./src/script/auth/component/AccountForm.tsx:267:17    - Unknown word (privacypolicy) -- privacypolicy: (...chunks: string
@@ -39,6 +39,7 @@ Lines:
 ./src/script/auth/configureStore.ts:28:12     - Unknown word (Logdown)    -- const reduxLogdown = require('redux-logdown
 ./src/script/auth/configureStore.ts:28:37     - Unknown word (logdown)    -- reduxLogdown = require('redux-logdown');
 ./src/script/auth/module/action/AuthAction.test.ts:39:22     - Unknown word (Cqhah)      -- 'Ntc8CsuNMeGFaRCqhah1dSyDFmNq6m8zL1R2h5TEtLQy
+./src/script/auth/module/action/AuthAction.ts:44:60     - Unknown word (cryption)   -- error.message.includes('cryption is not available');
 ./src/script/auth/module/action/ConversationAction.ts:59:21     - Unknown word (passsword)  -- expected: passsword-required.
 ./src/script/auth/module/action/creator/RuntimeActionCreator.ts:25:17     - Unknown word (INDEXEDDB)  -- RUNTIME_CHECK_INDEXEDDB_FINISH = 'RUNTIME_CHECK
 ./src/script/auth/page/ConversationJoin.tsx:91:12     - Unknown word (Submiting)  -- const [isSubmitingName, setIsSubmitingName
@@ -82,7 +83,7 @@ Lines:
 ./src/script/backup/zipWorker.ts:78:37     - Unknown word (secretstream) -- headerBytes = sodium.crypto_secretstream_xchacha20poly1305_HEADERBYTES
 ./src/script/backup/zipWorker.ts:78:50     - Unknown word (xchacha)      -- crypto_secretstream_xchacha20poly1305_HEADERBYTES
 ./src/script/backup/zipWorker.ts:78:68     - Unknown word (HEADERBYTES)  -- ecretstream_xchacha20poly1305_HEADERBYTES;
-./src/script/calling/Call.ts:102:67    - Unknown word (ESTAB)      -- ANSWERED, CALL_STATE.MEDIA_ESTAB].includes(this.state
+./src/script/calling/Call.ts:103:67    - Unknown word (ESTAB)      -- ANSWERED, CALL_STATE.MEDIA_ESTAB].includes(this.state
 ./src/script/calling/Call.ts:23:20     - Unknown word (CONV)       -- import {CALL_TYPE, CONV_TYPE, STATE as CALL
 ./src/script/calling/CallingRepository.test.ts:123:38    - Unknown word (senderdomain) -- senderUserId = {domain: 'senderdomain', id: 'senderid'};
 ./src/script/calling/CallingRepository.test.ts:123:58    - Unknown word (senderid)     -- senderdomain', id: 'senderid'};
@@ -130,30 +131,30 @@ Lines:
 ./src/script/calling/CallingRepository.test.ts:845:28    - Unknown word (acbrh)           -- => {}) as any, // `acbrh`,
 ./src/script/calling/CallingRepository.test.ts:846:19    - Unknown word (vstateh)         -- () => {}, // `vstateh`,
 ./src/script/calling/CallingRepository.ts:103:55    - Unknown word (userid)          -- Omit<WcallMember, 'userid'> & {userId: QualifiedId
-./src/script/calling/CallingRepository.ts:1052:18   - Unknown word (aestab)          -- if (member.aestab === AUDIO_STATE.ESTABLISHED
-./src/script/calling/CallingRepository.ts:1082:7    - Unknown word (convid)          -- convid: serializedConversationId
-./src/script/calling/CallingRepository.ts:1204:70   - Unknown word (screensharing)   -- V preferences) when screensharing is activated
-./src/script/calling/CallingRepository.ts:1360:47   - Unknown word (Recepients)      -- rtParticipantsToCallingMessageRecepients = (participants: Participant
-./src/script/calling/CallingRepository.ts:1440:27   - Unknown word (NOONE)           -- if (reason === REASON.NOONE_JOINED || reason ==
-./src/script/calling/CallingRepository.ts:1524:27   - Unknown word (ECONN)           -- case REASON.TIMEOUT_ECONN:
-./src/script/calling/CallingRepository.ts:1630:102  - Unknown word (vrecv)           -- ?.videoState(member.vrecv));
-./src/script/calling/CallingRepository.ts:1794:44   - Unknown word (wuser)           -- updateActiveSpeakers = (wuser: number, convId: string
-./src/script/calling/CallingRepository.ts:1926:11   - Unknown word (Segmentations)   -- customSegmentations: Record<string, any
-./src/script/calling/CallingRepository.ts:1934:11   - Unknown word (segmentations)   -- const segmentations = {
-./src/script/calling/CallingRepository.ts:1996:68   - Unknown word (noopener)        -- target="_blank" rel="noopener noreferrer">`,
-./src/script/calling/CallingRepository.ts:1996:77   - Unknown word (noreferrer)      -- blank" rel="noopener noreferrer">`,
-./src/script/calling/CallingRepository.ts:259:55    - Unknown word (initialised)     -- ubconversationService was not initialised');
+./src/script/calling/CallingRepository.ts:1042:18   - Unknown word (aestab)          -- if (member.aestab === AUDIO_STATE.ESTABLISHED
+./src/script/calling/CallingRepository.ts:1072:7    - Unknown word (convid)          -- convid: serializedConversationId
+./src/script/calling/CallingRepository.ts:1199:70   - Unknown word (screensharing)   -- V preferences) when screensharing is activated
+./src/script/calling/CallingRepository.ts:1356:47   - Unknown word (Recepients)      -- rtParticipantsToCallingMessageRecepients = (participants: Participant
+./src/script/calling/CallingRepository.ts:1436:27   - Unknown word (NOONE)           -- if (reason === REASON.NOONE_JOINED || reason ==
+./src/script/calling/CallingRepository.ts:1514:27   - Unknown word (ECONN)           -- case REASON.TIMEOUT_ECONN:
+./src/script/calling/CallingRepository.ts:1620:102  - Unknown word (vrecv)           -- ?.videoState(member.vrecv));
+./src/script/calling/CallingRepository.ts:1784:44   - Unknown word (wuser)           -- updateActiveSpeakers = (wuser: number, convId: string
+./src/script/calling/CallingRepository.ts:1916:11   - Unknown word (Segmentations)   -- customSegmentations: Record<string, any
+./src/script/calling/CallingRepository.ts:1924:11   - Unknown word (segmentations)   -- const segmentations = {
+./src/script/calling/CallingRepository.ts:1983:68   - Unknown word (noopener)        -- target="_blank" rel="noopener noreferrer">`,
+./src/script/calling/CallingRepository.ts:1983:77   - Unknown word (noreferrer)      -- blank" rel="noopener noreferrer">`,
+./src/script/calling/CallingRepository.ts:255:55    - Unknown word (initialised)     -- ubconversationService was not initialised');
 ./src/script/calling/CallingRepository.ts:26:9      - Unknown word (Subconversation) -- import {SubconversationEpochInfoMember} from
-./src/script/calling/CallingRepository.ts:415:32    - Unknown word (Conv)            -- wCall?.setClientsForConv(
+./src/script/calling/CallingRepository.ts:406:32    - Unknown word (Conv)            -- wCall?.setClientsForConv(
 ./src/script/calling/CallingRepository.ts:47:3      - Unknown word (VSTREAMS)        -- VSTREAMS,
-./src/script/calling/CallingRepository.ts:547:49    - Unknown word (Insertable)      -- browser supports WebRTC Insertable Streams
-./src/script/calling/CallingRepository.ts:567:32    - Unknown word (Screensharing)   -- Runtime.isSupportingScreensharing();
-./src/script/calling/CallingRepository.ts:675:30    - Unknown word (CONFKEY)         -- case CALL_MESSAGE_TYPE.CONFKEY: {
-./src/script/calling/CallingRepository.ts:711:27    - Unknown word (Targetted)       -- const isSelfClientTargetted =
-./src/script/calling/CallingRepository.ts:774:33    - Unknown word (CONFSTART)       -- event.content.type === 'CONFSTART'
-./src/script/calling/CallingRepository.ts:892:14    - Unknown word (screenshare)     -- * Toggles screenshare ON and OFF for the given
-./src/script/calling/CallingRepository.ts:894:9     - Unknown word (Screenshare)     -- toggleScreenshare = async (call: Call
-./src/script/calling/CallingRepository.ts:916:46    - Unknown word (SCREENSHARE)     -- videoState(VIDEO_STATE.SCREENSHARE);
+./src/script/calling/CallingRepository.ts:530:49    - Unknown word (Insertable)      -- browser supports WebRTC Insertable Streams
+./src/script/calling/CallingRepository.ts:550:32    - Unknown word (Screensharing)   -- Runtime.isSupportingScreensharing();
+./src/script/calling/CallingRepository.ts:660:30    - Unknown word (CONFKEY)         -- case CALL_MESSAGE_TYPE.CONFKEY: {
+./src/script/calling/CallingRepository.ts:696:27    - Unknown word (Targetted)       -- const isSelfClientTargetted =
+./src/script/calling/CallingRepository.ts:759:33    - Unknown word (CONFSTART)       -- event.content.type === 'CONFSTART'
+./src/script/calling/CallingRepository.ts:877:14    - Unknown word (screenshare)     -- * Toggles screenshare ON and OFF for the given
+./src/script/calling/CallingRepository.ts:879:9     - Unknown word (Screenshare)     -- toggleScreenshare = async (call: Call
+./src/script/calling/CallingRepository.ts:907:46    - Unknown word (SCREENSHARE)     -- videoState(VIDEO_STATE.SCREENSHARE);
 ./src/script/calling/enum/CallMessageType.ts:23:15     - Unknown word (CONFEND)    -- CONF_END = 'CONFEND',
 ./src/script/calling/enum/CallMessageType.ts:25:18     - Unknown word (GROUPCHECK) -- GROUP_CHECK = 'GROUPCHECK',
 ./src/script/calling/enum/CallMessageType.ts:26:18     - Unknown word (GROUPLEAVE) -- GROUP_LEAVE = 'GROUPLEAVE',
@@ -172,7 +173,7 @@ Lines:
 ./src/script/components/Avatar/GroupAvatar.test.tsx:33:25     - Unknown word (Senger)     -- user1.name('Spencer Senger');
 ./src/script/components/Avatar/GroupAvatar.test.tsx:34:17     - Unknown word (Tasia)      -- user2.name('Tasia Price');
 ./src/script/components/Conversation/Conversation.tsx:29:9      - Unknown word (Giphy)      -- import {Giphy} from 'Components/Giphy
-./src/script/components/Conversation/Conversation.tsx:577:16    - Unknown word (giphy)      -- <Giphy giphyRepository={repositories
+./src/script/components/Conversation/Conversation.tsx:564:16    - Unknown word (giphy)      -- <Giphy giphyRepository={repositories
 ./src/script/components/DragableClickWrapper.tsx:24:11     - Unknown word (Dragable)   -- interface DragableClickWrapperProps {
 ./src/script/components/DropFileArea/DropFileArea.test.tsx:28:22     - Unknown word (chucknorris) -- const pngFileName = 'chucknorris.png';
 ./src/script/components/FadingScrollbar/FadingScrollbar.tsx:30:3      - Unknown word (fadein)     -- fadein: {step: config.ANIMATION
@@ -225,11 +226,12 @@ Lines:
 ./src/script/components/MessagesList/MessageList.tsx:55:18     - Unknown word (convesation) -- invitePeople: (convesation: Conversation) => void
 ./src/script/components/MessagesList/utils/messagesFilter.ts:49:16     - Unknown word (Dont)       -- // Dont show duplicated group
 ./src/script/components/MessagesList/utils/messagesGroup.ts:79:29     - Unknown word (timeframe)  -- if it's sent within a timeframe (30 seconds) of the
+./src/script/components/Modals/DetailViewModal/index.tsx:27:9      - Unknown word (Zoomable)   -- import {ZoomableImage} from 'Components
 ./src/script/components/Modals/InviteModal/InviteModal.test.tsx:32:21     - Unknown word (janek)      -- const userName = 'janek';
 ./src/script/components/Modals/LegalHoldModal/LegalHoldModal.tsx:204:25    - Unknown word (prekey)     -- response.last_prekey,
 ./src/script/components/Modals/PrimaryModal/PrimaryModal.tsx:305:31    - Unknown word (pswd)       -- id="modal_pswd"
 ./src/script/components/Modals/PrimaryModal/PrimaryModalState.tsx:54:42     - Unknown word (Moda)       -- rentModalContent: (nextCurrentModaContent: ModalContent
-./src/script/components/ParticipantItemContent/ParticipantItemContent.tsx:100:26    - Unknown word (subline)    -- className="subline"
+./src/script/components/ParticipantItemContent/ParticipantItemContent.tsx:112:26    - Unknown word (subline)    -- className="subline"
 ./src/script/components/PasswordGeneratorButton.test.tsx:41:68     - Unknown word (charachters) -- random password with 15 charachters when clicked', () =
 ./src/script/components/RichTextEditor/plugins/AutoFocusPlugin.tsx:47:13     - Unknown word (Pageup)     -- const isPageupDownKeyPressed = isPageUpDownK
 ./src/script/components/RichTextEditor/plugins/EmojiPickerPlugin/EmojiPickerPlugin.tsx:24:145    - Unknown word (typechecked) -- import it but since it's typechecked, we will be warned if
@@ -241,8 +243,8 @@ Lines:
 ./src/script/components/calling/CallParticipantsListItem/CallParticipantItemContent/CallParticipantItemContent.tsx:77:30     - Unknown word (UNFOCUSABLE) -- tabIndex={TabIndex.UNFOCUSABLE}
 ./src/script/components/calling/CallParticipantsListItem/CallParticipantsListItem.test.tsx:152:54    - Unknown word (unestablishd) -- text if user is in unestablishd audio state', () =>
 ./src/script/components/calling/FullscreenVideoCall.styles.ts:37:52     - Unknown word (inversed)   -- accent-color-highlight-inversed);
-./src/script/components/calling/FullscreenVideoCall.tsx:157:22    - Unknown word (Callaudio)  -- label: t('videoCallaudioInputMicrophone'),
-./src/script/components/calling/FullscreenVideoCall.tsx:213:22    - Unknown word (Callvideo)  -- label: t('videoCallvideoInputCamera'),
+./src/script/components/calling/FullscreenVideoCall.tsx:156:22    - Unknown word (Callaudio)  -- label: t('videoCallaudioInputMicrophone'),
+./src/script/components/calling/FullscreenVideoCall.tsx:212:22    - Unknown word (Callvideo)  -- label: t('videoCallvideoInputCamera'),
 ./src/script/components/calling/GroupVideoGrid.test.tsx:49:28     - Unknown word (Anot)       -- participant.user.name('Anot Heruser');
 ./src/script/components/calling/GroupVideoGrid.test.tsx:49:33     - Unknown word (Heruser)    -- participant.user.name('Anot Heruser');
 ./src/script/components/calling/GroupVideoGrid.tsx:143:76    - Unknown word (xsmall)     -- fontSize: 'var(--font-size-xsmall)', fontWeight: 500}
@@ -255,42 +257,42 @@ Lines:
 ./src/script/conversation/ConversationLabelRepository.ts:117:12    - Unknown word (unmarshal)  -- readonly unmarshal = (labelJson: LabelProperty
 ./src/script/conversation/ConversationLabelRepository.ts:84:88     - Unknown word (favorited)  -- type: 'conversation-favorited'}> {
 ./src/script/conversation/ConversationMapper.test.ts:59:25     - Unknown word (Emtpy)      -- const functionCallEmtpyArray = () => ConversationMapp
-./src/script/conversation/ConversationRepository.test.ts:1127:34   - Unknown word (Gregor)      -- b.name('René, Benny, Gregor, Lipis');
-./src/script/conversation/ConversationRepository.test.ts:1127:42   - Unknown word (Lipis)       -- René, Benny, Gregor, Lipis');
-./src/script/conversation/ConversationRepository.test.ts:1400:18   - Unknown word (initialise)  -- it('should initialise mls 1:1 conversation
-./src/script/conversation/ConversationRepository.test.ts:1558:42   - Unknown word (msdownload)  -- type: 'application/x-msdownload',
-./src/script/conversation/ConversationRepository.test.ts:2759:97   - Unknown word (atively)     -- to mls if we're not atively participating in a call
-./src/script/conversation/ConversationRepository.test.ts:382:16    - Unknown word (Initialised) -- describe('getInitialised1To1Conversation', (
-./src/script/conversation/ConversationRepository.test.ts:756:80    - Unknown word (testt)       -- dk03f38414', domain: 'testt-domain'};
-./src/script/conversation/ConversationRepository.test.ts:762:59    - Unknown word (kfbe)        -- ca-a495asd47a8-ac70-9kfbe924b2d0', domain: 'testt
-./src/script/conversation/ConversationRepository.test.ts:866:102   - Unknown word (choosen)     -- even when proteus is choosen.', async () => {
-./src/script/conversation/ConversationRepository.test.ts:949:9     - Unknown word (deos)        -- it('deos not mark mls 1:1 conversation
-./src/script/conversation/ConversationRepository.ts:1264:19   - Unknown word (unarchived)   -- * Get the next unarchived conversation.
-./src/script/conversation/ConversationRepository.ts:1322:36   - Unknown word (initialisation) -- mls 1:1 conversation initialisation is triggered by some
-./src/script/conversation/ConversationRepository.ts:1781:23   - Unknown word (Initialising)   -- this.logger.info(`Initialising MLS 1:1 conversation
-./src/script/conversation/ConversationRepository.ts:1815:58   - Unknown word (conversaiton)   -- was previously active conversaiton, we want to make mls
-./src/script/conversation/ConversationRepository.ts:1918:85   - Unknown word (initialising)   -- from backend before initialising the conversation
-./src/script/conversation/ConversationRepository.ts:2072:16   - Unknown word (inccessible)    -- for (const inccessibleConversation of not_found
-./src/script/conversation/ConversationRepository.ts:219:46    - Unknown word (agains)     -- client mismatch handler agains the message repository
-./src/script/conversation/ConversationRepository.ts:2473:32   - Unknown word (corecrypto)     -- MLS conversation in corecrypto and deletes the conversation
-./src/script/conversation/ConversationRepository.ts:2606:117  - Unknown word (ciphersuite)    -- new fields (groupId, ciphersuite, epoch and new protocol
-./src/script/conversation/ConversationRepository.ts:3732:14   - Unknown word (Unarchived)     -- const wasUnarchived = previouslyArchived
-./src/script/conversation/ConversationRepository.ts:441:9     - Unknown word (teamid)     -- teamid: this.teamState.team
-./src/script/conversation/ConversationRepository.ts:53:18     - Unknown word (Protobuf)   -- import {Asset as ProtobufAsset, Confirmation,
-./src/script/conversation/ConversationRepository.ts:550:75    - Unknown word (metat)      -- users & conversations metat data`, error);
-./src/script/conversation/ConversationRepository.ts:641:10    - Unknown word (Converstions) -- localConverstions: ConversationDatabaseData
-./src/script/conversation/ConversationRepository.ts:649:53    - Unknown word (refetched)    -- proteus 1:1 (so it's never refetched) conversation and remove
+./src/script/conversation/ConversationRepository.test.ts:1158:34   - Unknown word (Gregor)      -- b.name('René, Benny, Gregor, Lipis');
+./src/script/conversation/ConversationRepository.test.ts:1158:42   - Unknown word (Lipis)       -- René, Benny, Gregor, Lipis');
+./src/script/conversation/ConversationRepository.test.ts:1431:18   - Unknown word (initialise)  -- it('should initialise mls 1:1 conversation
+./src/script/conversation/ConversationRepository.test.ts:1589:42   - Unknown word (msdownload)  -- type: 'application/x-msdownload',
+./src/script/conversation/ConversationRepository.test.ts:2790:97   - Unknown word (atively)     -- to mls if we're not atively participating in a call
+./src/script/conversation/ConversationRepository.test.ts:413:16    - Unknown word (Initialised) -- describe('getInitialised1To1Conversation', (
+./src/script/conversation/ConversationRepository.test.ts:787:80    - Unknown word (testt)       -- dk03f38414', domain: 'testt-domain'};
+./src/script/conversation/ConversationRepository.test.ts:793:59    - Unknown word (kfbe)        -- ca-a495asd47a8-ac70-9kfbe924b2d0', domain: 'testt
+./src/script/conversation/ConversationRepository.test.ts:897:102   - Unknown word (choosen)     -- even when proteus is choosen.', async () => {
+./src/script/conversation/ConversationRepository.test.ts:980:9     - Unknown word (deos)        -- it('deos not mark mls 1:1 conversation
+./src/script/conversation/ConversationRepository.ts:1268:19   - Unknown word (unarchived)   -- * Get the next unarchived conversation.
+./src/script/conversation/ConversationRepository.ts:1328:36   - Unknown word (initialisation) -- mls 1:1 conversation initialisation is triggered by some
+./src/script/conversation/ConversationRepository.ts:1787:23   - Unknown word (Initialising)   -- this.logger.info(`Initialising MLS 1:1 conversation
+./src/script/conversation/ConversationRepository.ts:1821:58   - Unknown word (conversaiton)   -- was previously active conversaiton, we want to make mls
+./src/script/conversation/ConversationRepository.ts:1924:85   - Unknown word (initialising)   -- from backend before initialising the conversation
+./src/script/conversation/ConversationRepository.ts:2084:16   - Unknown word (inccessible)    -- for (const inccessibleConversation of not_found
+./src/script/conversation/ConversationRepository.ts:223:46    - Unknown word (agains)     -- client mismatch handler agains the message repository
+./src/script/conversation/ConversationRepository.ts:2485:32   - Unknown word (corecrypto)     -- MLS conversation in corecrypto and deletes the conversation
+./src/script/conversation/ConversationRepository.ts:2618:117  - Unknown word (ciphersuite)    -- new fields (groupId, ciphersuite, epoch and new protocol
+./src/script/conversation/ConversationRepository.ts:3744:14   - Unknown word (Unarchived)     -- const wasUnarchived = previouslyArchived
+./src/script/conversation/ConversationRepository.ts:445:9     - Unknown word (teamid)     -- teamid: this.teamState.team
+./src/script/conversation/ConversationRepository.ts:554:75    - Unknown word (metat)      -- users & conversations metat data`, error);
+./src/script/conversation/ConversationRepository.ts:57:18     - Unknown word (Protobuf)   -- import {Asset as ProtobufAsset, Confirmation,
+./src/script/conversation/ConversationRepository.ts:645:10    - Unknown word (Converstions) -- localConverstions: ConversationDatabaseData
+./src/script/conversation/ConversationRepository.ts:653:53    - Unknown word (refetched)    -- proteus 1:1 (so it's never refetched) conversation and remove
 ./src/script/conversation/ConversationState.test.ts:37:29     - Unknown word (groupid)    -- conversation.groupId = `groupid-${randomUUID()}`;
 ./src/script/conversation/EventMapper.test.ts:115:27    - Unknown word (ugpawm)     -- token: 'aV0TGxF3ugpawm3wAYPmew==',
 ./src/script/conversation/EventMapper.test.ts:115:37    - Unknown word (Pmew)       -- 'aV0TGxF3ugpawm3wAYPmew==',
 ./src/script/conversation/MessageRepository.test.ts:283:9     - Unknown word (unverifies) -- it('unverifies device if fingerprint
 ./src/script/conversation/MessageRepository.test.ts:57:28     - Unknown word (selfid)     -- selfUser = new User('selfid', '');
-./src/script/conversation/MessageRepository.ts:1393:41   - Unknown word (countly)     -- message to backend to sync countly id across other clients
-./src/script/conversation/MessageRepository.ts:1395:23   - Unknown word (Countly)     -- * @param countlyId Countly new ID
+./src/script/conversation/MessageRepository.ts:1405:41   - Unknown word (countly)     -- message to backend to sync countly id across other clients
+./src/script/conversation/MessageRepository.ts:1407:23   - Unknown word (Countly)     -- * @param countlyId Countly new ID
 ./src/script/conversation/MessageRepository.ts:354:24    - Unknown word (explicitely) -- // We set the id explicitely in order to be able
 ./src/script/conversation/MessageRepository.ts:501:34    - Unknown word (messsage)    -- originalId Id of the messsage currently in db, necessary
 ./src/script/conversation/MessageRepository.ts:522:27    - Unknown word (Remotedata)  -- await this.sendAssetRemotedata(conversation, file,
-./src/script/conversation/MessageRepository.ts:883:12    - Unknown word (unverify)    -- // unverify the client entity in
+./src/script/conversation/MessageRepository.ts:895:12    - Unknown word (unverify)    -- // unverify the client entity in
 ./src/script/conversation/linkPreviews/blackList.test.ts:23:18     - Unknown word (youtu)      -- it('blacklists youtu.be links', () => {
 ./src/script/conversation/linkPreviews/blackList.ts:42:4      - Unknown word (soundcloud) -- `soundcloud.com/(?!${soundCloudStatic
 ./src/script/conversation/linkPreviews/helpers.test.ts:79:11     - Unknown word (ticksception) -- const ticksception = "cool code: ```\nwire
@@ -440,7 +442,7 @@ Lines:
 ./src/script/util/Entropy.test.ts:235:11    - Unknown word (randomdata)  -- const randomdata = new Uint8Array([.
 ./src/script/util/Entropy.test.ts:98:21     - Unknown word (dimensonial) -- 'Calculate %d-dimensonial entropy on: %s',
 ./src/script/util/Entropy.ts:44:83     - Unknown word (multipe)    -- differences on, containing a multipe of `n` elements
-./src/script/util/LocalizerUtil/ReactLocalizerUtil.ts:33:21     - Unknown word (occurences) -- * Will replace all occurences of `replacements` by
+./src/script/util/LocalizerUtil/ReactLocalizerUtil.tsx:40:21     - Unknown word (occurences) -- * Will replace all occurences of `replacements` by
 ./src/script/util/SanitizationUtil.test.ts:38:39     - Unknown word (Unsanitzed) -- name(`<script>alert('Unsanitzed');</script>`);
 ./src/script/util/TimeUtil.ts:96:26     - Unknown word (momentjs)   -- This is equivalent to momentjs' `LT` formatting
 ./src/script/util/localStorage.ts:21:41     - Unknown word (localstorage) -- browser's instance of localstorage if present.

@@ -3,9 +3,9 @@ Repository: Azure/azure-rest-api-specs
 Url: https://github.com/Azure/azure-rest-api-specs.git
 Args: '["--config=cSpell.json","**/*.{md,ts,js}"]'
 Summary:
-  files: 2327
-  filesWithIssues: 871
-  issues: 2875
+  files: 2323
+  filesWithIssues: 872
+  issues: 2883
   errors: 0
 Errors: []
 
@@ -21,10 +21,10 @@ issues:
   - "documentation/api-scenario/how-to/QuickStart.md:54:13       configstor      U       prefix: configstor"
   - "documentation/api-scenario/how-to/ResolveDependencies.md:141:32         azureuser       U       adminUsername: azureuser"
   - "documentation/api-scenario/how-to/ResolveDependencies.md:246:22         ipconfigmy      U       \"name\": \"ipconfigmyVM\","
+  - "documentation/api-scenario/README.md:38:9           azsdk       U       [aka.ms/azsdk/support](https://aka"
   - "documentation/api-scenario/references/ApiScenarioDefinition.md:278:29       somedomain      U       value: $(serviceName).somedomain.com"
   - "documentation/api-scenario/references/ErrorCodeReference.md:32:31       blobnfs     U       \"namespacePath\":\"/blobnfs\""
   - "documentation/ci-fix.md:16:16       unkown (unknown)        U       - [`Record<unkown>` causes `AvoidAdditionalProp"
-  - "documentation/ci-fix.md:41:28       azsdk                   U       more help, see [aka.ms/azsdk/pr-getting-help] and"
   - "documentation/ci-fix.md:64:14       flac                    U       \"flac\","
   - "documentation/ci-fix.md:65:14       mpga                    U       \"mpga\""
   - "documentation/ci-fix.md:86:18       contosowidgetmanager    U       cd specification/contosowidgetmanager"
@@ -53,6 +53,7 @@ issues:
   - "documentation/openapi-authoring-automated-guidelines.md:3178:32     subcription         U       // ref to the same subcriptionId"
   - "documentation/openapi-authoring-automated-guidelines.md:3594:16     Decenmber           U       **CreatedAt**: Decenmber 15, 2021"
   - "documentation/restler/QuickStart.md:30:21       mikekistler     U       specs=$(find /Users/mikekistler/Projects/Azure/azure"
+  - "documentation/samplefiles-dp/ABOUT.md:1:10          samplefiles     U       # About `samplefiles-dp`"
   - "documentation/sdkautomation/README.md:251:22        snuget      U       \"sdk/cdn/cdn.snuget\""
   - "documentation/sdkautomation/sdk-suppressions.md:39:93       lables      U       breaking change suppression lables. For example, for the"
   - "documentation/Semantic-and-Model-Violations-Reference.md:15:14          OPERATIONID     U       | [DUPLICATE_OPERATIONID](#DUPLICATE_OPERATIONID"
@@ -153,7 +154,6 @@ issues:
   - "specification/billing/resource-manager/readme.go.md:15:42       armbilling      U       resourcemanager/billing/armbilling"
   - "specification/billingbenefits/resource-manager/readme.az.md:9:17        billingbenefits     U       extensions: billingbenefits"
   - "specification/botservice/resource-manager/readme.md:43:36       systemdata      U       don not yet support systemdata"
-  - "specification/carbon/resource-manager/readme.csharp.md:12:40        carbonoptimization      U       csharp-sdks-folder)/carbonoptimization/Azure.ResourceManager"
   - "specification/cdn/resource-manager/readme.go.md:14:38       armcdn      U       resourcemanager/cdn/armcdn"
   - "specification/cdn/resource-manager/readme.md:44:37          cdnwebapplicationfirewall       U       Cdn/stable/2024-02-01/cdnwebapplicationfirewall.json"
   - "specification/changeanalysis/resource-manager/readme.csharp.md:14:40        changeanalysis      U       csharp-sdks-folder)/changeanalysis/management/Microsoft"
@@ -172,6 +172,7 @@ issues:
   - "specification/cognitiveservices/data-plane/QnAMaker/readme.go.md:37:12          qnamakerruntime     U       namespace: qnamakerruntime"
   - "specification/cognitiveservices/data-plane/SpeakerRecognition/Identification/readme.go.md:8:14          speakeridentification       U       namespace: speakeridentification"
   - "specification/cognitiveservices/data-plane/SpeakerRecognition/Verification/readme.go.md:8:14        speakerverification     U       namespace: speakerverification"
+  - "specification/cognitiveservices/data-plane/Speech/BatchAvatar/readme.md:23:32       batchavatar     U       preview/2024-04-15-preview/batchavatar.json"
   - "specification/cognitiveservices/data-plane/TextAnalytics/readme.md:21:21        Quickstart      U       See Text Analytics [Quickstart guide](https://docs"
   - "specification/communication/Communication.JobRouter/README.md:48:134        communicationservicejobrouter       U       status>\\<api-version>\\communicationservicejobrouter.json`:"
   - "specification/communication/Communication.Messages/README.md:48:133         communicationservicesmessages       U       status>\\<api-version>\\communicationservicesmessages.json`:"
@@ -297,7 +298,7 @@ issues:
   - "specification/logic/resource-manager/readme.go.md:14:40         armlogic    U       resourcemanager/logic/armlogic"
   - "specification/logz/resource-manager/readme.go.md:14:39          armlogz     U       resourcemanager/logz/armlogz"
   - "specification/m365securityandcompliance/resource-manager/readme.go.md:9:18          securityandcompliance       U       namespace: m365securityandcompliance"
-  - "specification/machinelearningservices/resource-manager/readme.md:48:155         datareferences      U       registries/{registryName}/datareferences/{name}/versions/{version"
+  - "specification/machinelearningservices/resource-manager/readme.md:69:155         datareferences      U       registries/{registryName}/datareferences/{name}/versions/{version"
   - "specification/maintenance/resource-manager/readme.az.md:17:26       applyupdate     U       group: maintenance applyupdate"
   - "specification/maintenance/resource-manager/readme.md:183:19         postive (positive)      U       reason: False postive. ConfigurationAssignments"
   - "specification/managednetwork/resource-manager/readme.cli.md:8:25        managednetwork                      U       namespace: azure.mgmt.managednetwork"
@@ -398,8 +399,8 @@ issues:
   - "specification/network/resource-manager/readme.cli.md:620:14         virtualnetworkpeerings                  U       - split: virtualnetworkpeerings"
   - "specification/network/resource-manager/readme.cli.md:625:14         expressroutecircuitconnections          U       - split: expressroutecircuitconnections"
   - "specification/network/resource-manager/readme.go.md:14:42       armnetwork      U       resourcemanager/network/armnetwork"
-  - "specification/network/resource-manager/readme.md:3328:44        groupmembership     U       no id is needed for groupmembership resources."
-  - "specification/network/resource-manager/readme.md:3385:11        bastionhost         U       from: bastionhost.json"
+  - "specification/network/resource-manager/readme.md:3397:44        groupmembership     U       no id is needed for groupmembership resources."
+  - "specification/network/resource-manager/readme.md:3454:11        bastionhost         U       from: bastionhost.json"
   - "specification/networkanalytics/resource-manager/readme.csharp.md:14:40          networkanalytics    U       csharp-sdks-folder)/networkanalytics/management/[[ResourceProvider"
   - "specification/networkcloud/resource-manager/readme.csharp.md:14:40          networkcloud    U       csharp-sdks-folder)/networkcloud/management/Microsoft"
   - "specification/newrelic/resource-manager/readme.python.md:10:23          newrelicobservability       U       namespace: azure.mgmt.newrelicobservability"
@@ -441,9 +442,9 @@ issues:
   - "specification/quota/resource-manager/readme.md:43:48        groupquota      U       preview/2023-06-01-preview/groupquota.json"
   - "specification/quota/resource-manager/readme.md:65:5         Supressions     U       ### Supressions"
   - "specification/recommendationsservice/resource-manager/readme.az.md:9:17         recommendationsservice      U       extensions: recommendationsservice"
-  - "specification/recoveryservicesbackup/resource-manager/readme.md:39:20       passivestamp    U       ``` yaml $(package-passivestamp)"
-  - "specification/recoveryservicesbackup/resource-manager/readme.md:43:20       activestamp     U       ``` yaml $(package-activestamp)"
-  - "specification/recoveryservicesbackup/resource-manager/readme.md:486:80      execptions      U       the conversation from execptions to custom error CloudError"
+  - "specification/recoveryservicesbackup/resource-manager/readme.md:39:19       passivestamp    U       ```yaml $(package-passivestamp)"
+  - "specification/recoveryservicesbackup/resource-manager/readme.md:43:19       activestamp     U       ```yaml $(package-activestamp)"
+  - "specification/recoveryservicesbackup/resource-manager/readme.md:495:80      execptions      U       the conversation from execptions to custom error CloudError"
   - "specification/recoveryservicesdatareplication/resource-manager/readme.az.md:9:17        recoveryservicesdatareplication     U       extensions: recoveryservicesdatareplication"
   - "specification/recoveryservicesdatareplication/resource-manager/readme.java.md:11:270        Extn    U       HyperVToAzStackHciRepExtnCustomProps,VMwareToAzStackHci"
   - "specification/redhatopenshift/resource-manager/readme.go.md:8:14        redhatopenshift     U       namespace: redhatopenshift"
@@ -478,8 +479,8 @@ issues:
   - "specification/saas/resource-manager/readme.md:65:47         exsisting       U       tenant level and its an exsisting API"
   - "specification/scom/resource-manager/readme.go.md:13:39          armscom     U       resourcemanager/scom/armscom"
   - "specification/scvmm/resource-manager/readme.go.md:8:40          armscvmm    U       resourcemanager/scvmm/armscvmm"
-  - "specification/search/data-plane/Azure.Search/readme.md:434:1        vararg          U       vararg-properties: >-"
-  - "specification/search/data-plane/Azure.Search/readme.md:498:33       fasterxml       U       replace(/(import com.fasterxml.jackson.annotation.JsonProper"
+  - "specification/search/data-plane/Azure.Search/readme.md:462:1        vararg          U       vararg-properties: >-"
+  - "specification/search/data-plane/Azure.Search/readme.md:526:33       fasterxml       U       replace(/(import com.fasterxml.jackson.annotation.JsonProper"
   - "specification/search/resource-manager/readme.go.md:14:41        armsearch       U       resourcemanager/search/armsearch"
   - "specification/security/resource-manager/readme.csharp.md:32:40          securitycenter      U       csharp-sdks-folder)/securitycenter/Microsoft.Azure.Management"
   - "specification/securityinsights/resource-manager/readme.md:963:152       reviewr     U       supress this by Swagger reviewr.'"
@@ -488,8 +489,8 @@ issues:
   - "specification/servicebus/resource-manager/readme.md:42:51       networksets         U       preview/2021-01-01-preview/networksets.json"
   - "specification/servicefabric/resource-manager/readme.md:108:54       managedcluster      U       preview/2020-01-01-preview/managedcluster.json"
   - "specification/servicefabric/resource-manager/readme.python.md:31:36         Managedcluster      U       $['operationId'] = 'Managedcluster_List'"
-  - "specification/servicefabricmanagedclusters/resource-manager/readme.md:78:54         managedapplication              U       preview/2024-02-01-preview/managedapplication.json"
-  - "specification/servicefabricmanagedclusters/resource-manager/readme.md:301:40        servicefabricmanagedclusters    U       csharp-sdks-folder)/servicefabricmanagedclusters/Microsoft.Azure.Management"
+  - "specification/servicefabricmanagedclusters/resource-manager/readme.md:78:45         managedapplication              U       rviceFabric/stable/2024-04-01/managedapplication.json"
+  - "specification/servicefabricmanagedclusters/resource-manager/readme.md:312:40        servicefabricmanagedclusters    U       csharp-sdks-folder)/servicefabricmanagedclusters/Microsoft.Azure.Management"
   - "specification/servicelinker/resource-manager/readme.csharp.md:14:40         servicelinker       U       csharp-sdks-folder)/servicelinker/management/Microsoft"
   - "specification/signalr/resource-manager/readme.go.md:14:42       armsignalr      U       resourcemanager/signalr/armsignalr"
   - "specification/sphere/resource-manager/readme.azureresourceschema.md:9:17        azuresphere     U       - tag: schema-azuresphere-2022-09-01-preview"
@@ -520,8 +521,8 @@ issues:
   - "specification/vmwarecloudsimple/resource-manager/readme.csharp.md:13:40         vmwarecloudsimple       U       csharp-sdks-folder)/vmwarecloudsimple/Microsoft.Azure.Management"
   - "specification/voiceservices/resource-manager/readme.az.md:9:17          voiceservices       U       extensions: voiceservices"
   - "specification/voiceservices/resource-manager/readme.csharp.md:14:40         voiceservice    U       csharp-sdks-folder)/voiceservice/management/Azure.ResourceMana"
-  - "specification/web/resource-manager/readme.md:1366:18        weidongxu       U       approved-by: \"@weidongxu-microsoft\""
-  - "specification/web/resource-manager/readme.md:1374:23        cowlishaw       U       approved-by: \"@mark.cowlishaw\""
+  - "specification/web/resource-manager/readme.md:1540:18        weidongxu       U       approved-by: \"@weidongxu-microsoft\""
+  - "specification/web/resource-manager/readme.md:1548:23        cowlishaw       U       approved-by: \"@mark.cowlishaw\""
   - "specification/webpubsub/data-plane/readme.md:129:31         webpubsubservice    U       name: azure-messaging-webpubsubservice"
   - "specification/windowsiot/resource-manager/readme.az.md:7:15         windowsiotservices      U       extensions: windowsiotservices"
   - "specification/workloads/resource-manager/Microsoft.Workloads/monitors/readme.az.md:9:17         sapmonitors     U       extensions: sapmonitors"
