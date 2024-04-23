@@ -237,6 +237,8 @@ export default tsEslint.config(
             '**/*.test.*',
             '**/build.mjs',
             '**/rollup.config.mjs',
+            '**/perf/**',
+            '**/*.perf.*',
             '**/test.*',
             '**/test-*',
             '**/test*/**',

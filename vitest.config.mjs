@@ -37,6 +37,7 @@ const defaultConfig = {
                 '**/*.d.ts',
                 '**/*.test.*',
                 '**/fixtures/**',
+                '**/perf/**',
                 '**/samples/**',
                 '**/test-*/**',
                 '**/test.*',
