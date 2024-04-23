@@ -24,13 +24,14 @@
   "scripts": {
     "clean": "shx rm -rf dist temp coverage \"*.tsbuildInfo\"",
     "build": "pnpm run build:lib && pnpm run build:api",
-    "build:lib": "tsc -b .",
+    "build:lib": "tsc -p .",
     "build:api": "rollup -c api/rollup.config.mjs",
     "clean-build": "pnpm run clean && pnpm run build",
     "coverage": "vitest run --coverage",
     "test:watch": "vitest",
+    "test:perf": "insight --register ts-node/esm --file \"**/*.perf.{mts,ts}\" -t 500",
     "test": "vitest run",
-    "watch": "tsc -b . -w"
+    "watch": "tsc -p . -w"
   },
   "repository": {
     "type": "git",
