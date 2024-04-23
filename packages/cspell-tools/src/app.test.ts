@@ -12,7 +12,6 @@ import { spyOnConsole } from './test/console.js';
 import { createTestHelper } from './test/TestHelper.js';
 
 vi.mock('./gzip/compressFiles.js', async () => {
-    // eslint-disable-next-line @typescript-eslint/consistent-type-imports
     const mod = await vi.importActual<typeof import('./gzip/compressFiles.js')>('./gzip/compressFiles.js');
     return {
         ...mod,

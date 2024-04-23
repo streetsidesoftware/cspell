@@ -160,7 +160,7 @@ export function importTrie(linesX: Iterable<string> | IterableIterator<string>):
 
     function readHeader(iter: Iterator<string>) {
         const headerRows: string[] = [];
-        // eslint-disable-next-line no-constant-condition
+
         while (true) {
             const next = iter.next();
             if (next.done) {
