@@ -176,7 +176,7 @@ export function findCompoundNode(
     let caseMatched = true;
     let i = 0;
     let node: ITrieNode | undefined;
-    // eslint-disable-next-line no-constant-condition
+
     while (true) {
         const s = stack[i];
         const h = w[i++];
@@ -290,7 +290,7 @@ function findLegacyCompoundNode(
     let caseMatched = true;
     let i = 0;
     let node: ITrieNode | undefined;
-    // eslint-disable-next-line no-constant-condition
+
     while (true) {
         const s = stack[i];
         const h = w[i++];
