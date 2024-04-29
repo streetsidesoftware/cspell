@@ -3,7 +3,7 @@ Repository: RustPython/RustPython
 Url: "https://github.com/RustPython/RustPython.git"
 Args: ["**"]
 Lines:
- CSpell: Files checked: 609, Issues found: 2901 in 317 files.
+ CSpell: Files checked: 609, Issues found: 2902 in 317 files.
  exit code: 1
 ./Cargo.toml:114:82    - Unknown word (termcolor)  -- features = ["atty", "termcolor"] }
 ./Cargo.toml:156:62    - Unknown word (redoxer)    -- to compile/check with redoxer
@@ -712,12 +712,12 @@ Lines:
 ./vm/src/dictdatatype.rs:22:62     - Unknown word (pyhash)     -- compatible with actual pyhash value
 ./vm/src/dictdatatype.rs:681:29    - Unknown word (usecases)   -- dictionary. Typical usecases are:
 ./vm/src/frame.rs:350:13    - Unknown word (instrs)     -- let instrs = &self.code.instructions
-./vm/src/frame.rs:786:75    - Unknown word (binop)      -- op } => self.execute_binop(vm, op.get(arg)),
-./vm/src/frame.rs:793:74    - Unknown word (unop)       -- op } => self.execute_unop(vm, op.get(arg)),
-./vm/src/frame.rs:888:21    - Unknown word (aenter)     -- let aenter_res = vm
-./vm/src/frame.rs:892:21    - Unknown word (aexit)      -- let aexit = mgr
+./vm/src/frame.rs:795:75    - Unknown word (binop)      -- op } => self.execute_binop(vm, op.get(arg)),
+./vm/src/frame.rs:802:74    - Unknown word (unop)       -- op } => self.execute_unop(vm, op.get(arg)),
+./vm/src/frame.rs:897:21    - Unknown word (aenter)     -- let aenter_res = vm
+./vm/src/frame.rs:901:21    - Unknown word (aexit)      -- let aexit = mgr
 ./vm/src/frame.rs:91:6      - Unknown word (Lasti)      -- type Lasti = atomic::AtomicU32
-./vm/src/frame.rs:985:21    - Unknown word (aiterable)  -- let aiterable = self.pop_value();
+./vm/src/frame.rs:994:21    - Unknown word (aiterable)  -- let aiterable = self.pop_value();
 ./vm/src/function/argument.rs:120:13    - Unknown word (kwargc)     -- let kwargc = kwarg_names.len()
 ./vm/src/function/argument.rs:121:13    - Unknown word (posargc)    -- let posargc = total_argc - kwargc
 ./vm/src/function/argument.rs:123:13    - Unknown word (posargs)    -- let posargs = args.by_ref().take
@@ -735,8 +735,6 @@ Lines:
 ./vm/src/object/core.rs:207:54    - Unknown word (Weaks)      -- actually own the PyObjectWeaks inside `list`, and every
 ./vm/src/object/core.rs:225:32    - Unknown word (arrayvec)   -- // TODO: can be an arrayvec
 ./vm/src/object/core.rs:368:17    - Unknown word (pyinner)    -- let pyinner = (self as *const Self
-./vm/src/object/traverse.rs:159:26    - Unknown word (extremly)   -- because long tuple is extremly rare in almost every
-./vm/src/object/traverse.rs:25:33     - Unknown word (repeatly)   -- some field is called repeatly, panic and deadlock
 ./vm/src/object/traverse.rs:27:46     - Unknown word (Pyef)       -- a `PyObjectRef` or `Pyef<T>` in `traverse()`
 ./vm/src/object/traverse_object.rs:54:56     - Unknown word (maintaince) -- pointer* to a struct for maintaince weak ref, so no ownership
 ./vm/src/ospath.rs:184:13    - Unknown word (excp)       -- let excp = self.error.to_pyexception
@@ -750,12 +748,13 @@ Lines:
 ./vm/src/protocol/sequence.rs:126:30    - Unknown word (apear)      -- / if both arguments apear to be sequences, try
 ./vm/src/protocol/sequence.rs:238:59    - Unknown word (unsliceable) -- format!("'{}' object is unsliceable", self.obj.class())
 ./vm/src/py_io.rs:73:17     - Unknown word (sval)       -- let sval = s.as_str();
+./vm/src/stdlib/ast.rs:380:26    - Unknown word (BDFL)       -- const CO_FUTURE_BARRY_AS_BDFL: i32 = 0x400000;
 ./vm/src/stdlib/ast.rs:45:17     - Unknown word (numargs)    -- let numargs = args.args.len();
 ./vm/src/stdlib/atexit.rs:1:22      - Unknown word (exitfuncs)  -- pub use atexit::_run_exitfuncs;
 ./vm/src/stdlib/atexit.rs:50:9      - Unknown word (ncallbacks) -- fn _ncallbacks(vm: &VirtualMachine
-./vm/src/stdlib/builtins.rs:374:42    - Unknown word (breakpointhook) -- attr(vm.ctx.intern_str("breakpointhook"), vm)
-./vm/src/stdlib/builtins.rs:407:26    - Unknown word (normalish)      -- // everything is normalish, we can just rely on
-./vm/src/stdlib/builtins.rs:557:45    - Unknown word (iret)           -- iterator).next(vm).map(|iret| match iret {
+./vm/src/stdlib/builtins.rs:401:42    - Unknown word (breakpointhook) -- attr(vm.ctx.intern_str("breakpointhook"), vm)
+./vm/src/stdlib/builtins.rs:434:26    - Unknown word (normalish)      -- // everything is normalish, we can just rely on
+./vm/src/stdlib/builtins.rs:584:45    - Unknown word (iret)           -- iterator).next(vm).map(|iret| match iret {
 ./vm/src/stdlib/codecs.rs:351:17    - Unknown word (pycodecs)   -- fn delegate_pycodecs(
 ./vm/src/stdlib/codecs.rs:381:8     - Unknown word (readbuffer) -- fn readbuffer_encode(args: FuncArgs
 ./vm/src/stdlib/collections.rs:142:12    - Unknown word (extendleft) -- fn extendleft(&self, iter: PyObjectRef
@@ -868,6 +867,7 @@ Lines:
 ./vm/src/stdlib/nt.rs:297:14    - Unknown word (splitroot)         -- fn _path_splitroot(path: OsPath, vm: &VirtualMac
 ./vm/src/stdlib/nt.rs:302:13    - Unknown word (backslashed)       -- let backslashed: Vec<_> = orig
 ./vm/src/stdlib/nt.rs:335:9     - Unknown word (getdiskusage)      -- fn _getdiskusage(path: OsPath, vm: &VirtualMac
+./vm/src/stdlib/nt.rs:393:8     - Unknown word (listdrives)        -- fn listdrives(vm: &VirtualMachine
 ./vm/src/stdlib/operator.rs:392:17    - Unknown word (nattr)      -- let nattr = args.args.len();
 ./vm/src/stdlib/operator.rs:535:25    - Unknown word (pargs)      -- let mut pargs = vec![zelf.name.as
 ./vm/src/stdlib/os.rs:1037:19   - Unknown word (modif)          -- let (acc, modif) = match (args.times
@@ -888,10 +888,10 @@ Lines:
 ./vm/src/stdlib/pwd.rs:37:17     - Unknown word (pathbuf)    -- let pathbuf_lossy = |p: std::path
 ./vm/src/stdlib/pwd.rs:94:67     - Unknown word (fgetpwent)  -- thread safe. Could use fgetpwent_r, but this is easier
 ./vm/src/stdlib/pwd.rs:95:16     - Unknown word (GETPWALL)   -- static GETPWALL: parking_lot::Mutex
-./vm/src/stdlib/signal.rs:112:9     - Unknown word (signalnum)  -- signalnum: i32,
-./vm/src/stdlib/signal.rs:264:17    - Unknown word (sigbyte)    -- let sigbyte = signum as u8;
-./vm/src/stdlib/signal.rs:81:16     - Unknown word (SIGPWR)     -- use libc::{SIGPWR, SIGSTKFLT};
-./vm/src/stdlib/signal.rs:81:24     - Unknown word (SIGSTKFLT)  -- use libc::{SIGPWR, SIGSTKFLT};
+./vm/src/stdlib/signal.rs:124:10    - Unknown word (signalnum)  -- _signalnum: i32,
+./vm/src/stdlib/signal.rs:287:17    - Unknown word (sigbyte)    -- let sigbyte = signum as u8;
+./vm/src/stdlib/signal.rs:88:16     - Unknown word (SIGPWR)     -- use libc::{SIGPWR, SIGSTKFLT};
+./vm/src/stdlib/signal.rs:88:24     - Unknown word (SIGSTKFLT)  -- use libc::{SIGPWR, SIGSTKFLT};
 ./vm/src/stdlib/sre.rs:226:12    - Unknown word (pymatch)     -- fn pymatch(
 ./vm/src/stdlib/sre.rs:285:25    - Unknown word (matchlist)   -- let mut matchlist: Vec<PyObjectRef> =
 ./vm/src/stdlib/sre.rs:30:37     - Unknown word (CODESIZE)   -- rustpython_sre_engine::{CODESIZE, MAXGROUPS, MAXREPEAT
