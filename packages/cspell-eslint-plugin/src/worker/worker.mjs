@@ -1,7 +1,5 @@
 // @ts-check
 
-/* eslint-disable n/no-missing-import */
-
 /**
  * @typedef {import('estree').Node} Node
  * @typedef {import('./types.cjs').Issue} Issue

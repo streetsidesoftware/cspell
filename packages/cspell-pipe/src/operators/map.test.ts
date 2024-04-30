@@ -1,4 +1,3 @@
-/* eslint-disable unicorn/no-array-callback-reference */
 import { describe, expect, test } from 'vitest';
 
 import { toArray } from '../helpers/index.js';
