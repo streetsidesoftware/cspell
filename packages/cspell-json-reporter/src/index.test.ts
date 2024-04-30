@@ -65,7 +65,6 @@ describe('getReporter', () => {
     });
 });
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 function joinCalls(calls: any[][]): string {
     return calls.map((call) => call.join('<>')).join('\n');
 }

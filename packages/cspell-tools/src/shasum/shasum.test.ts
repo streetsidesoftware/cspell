@@ -12,7 +12,6 @@ import {
 } from './shasum.js';
 
 vi.mock('node:fs/promises', async () => {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const fs: any = await vi.importActual('node:fs/promises');
     return {
         ...fs,

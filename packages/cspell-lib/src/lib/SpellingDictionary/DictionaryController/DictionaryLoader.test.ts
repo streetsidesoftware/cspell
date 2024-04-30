@@ -77,7 +77,6 @@ describe('Validate DictionaryLoader', () => {
         return s.normalize('NFC');
     }
 
-    // eslint-disable-next-line unicorn/prefer-module
     const csharpDictExt = require.resolve('@cspell/dict-csharp/cspell-ext.json');
     const csharp = path.join(path.dirname(csharpDictExt), 'csharp.txt.gz');
 

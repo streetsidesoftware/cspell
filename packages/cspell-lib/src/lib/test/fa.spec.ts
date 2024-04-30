@@ -9,7 +9,7 @@ import * as util from '../util/util.js';
 
 const sampleFilename = path.join(pathPackageSamples, 'Seattle.fa.md');
 const text = fs.readFileSync(sampleFilename, 'utf8').toString();
-// eslint-disable-next-line unicorn/prefer-module
+
 const frenchConfig = require.resolve('@cspell/dict-fa-ir/cspell-ext.json');
 
 const timeout = 10_000;
