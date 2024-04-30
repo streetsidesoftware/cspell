@@ -3,9 +3,9 @@ Repository: Azure/azure-rest-api-specs
 Url: https://github.com/Azure/azure-rest-api-specs.git
 Args: '["--config=cSpell.json","**/*.{md,ts,js}"]'
 Summary:
-  files: 2323
-  filesWithIssues: 872
-  issues: 2883
+  files: 2313
+  filesWithIssues: 876
+  issues: 2896
   errors: 0
 Errors: []
 
@@ -46,6 +46,7 @@ issues:
   - "documentation/directory-structure.md:170:57         keyvaults               U       e.g. `keyvault` not `keyvaults` ) -- this removes ambiguity"
   - "documentation/FAQ.md:36:51          examplegen      U       from Swagger?<a name=\"examplegen\"></a>"
   - "documentation/Getting-started-with-TypeSpec-specifications.md:9:5           TLDR    U       ### TLDR: Key checklist for TypeSpec"
+  - "documentation/onboard-dpg-in-sdkautomation/java/README.md:32:41         standbypool     U       azure-resourcemanager-standbypool\""
   - "documentation/openapi-authoring-automated-guidelines.md:254:3       alllowercase        U       * alllowercase - If there are multiple"
   - "documentation/openapi-authoring-automated-guidelines.md:256:60      Ikey                U       incorrectly recognize \"Ikey\" as a word and not flag"
   - "documentation/openapi-authoring-automated-guidelines.md:314:283     Listby              U       the naming convention \"ListbyResourceGroup\", consider"
@@ -55,7 +56,7 @@ issues:
   - "documentation/restler/QuickStart.md:30:21       mikekistler     U       specs=$(find /Users/mikekistler/Projects/Azure/azure"
   - "documentation/samplefiles-dp/ABOUT.md:1:10          samplefiles     U       # About `samplefiles-dp`"
   - "documentation/sdkautomation/README.md:251:22        snuget      U       \"sdk/cdn/cdn.snuget\""
-  - "documentation/sdkautomation/sdk-suppressions.md:39:93       lables      U       breaking change suppression lables. For example, for the"
+  - "documentation/sdkautomation/sdk-suppressions.md:42:93       lables      U       breaking change suppression lables. For example, for the"
   - "documentation/Semantic-and-Model-Violations-Reference.md:15:14          OPERATIONID     U       | [DUPLICATE_OPERATIONID](#DUPLICATE_OPERATIONID"
   - "documentation/Semantic-and-Model-Violations-Reference.md:647:39         dicriminator    U       : The value of x-ms-dicriminator-value is not in the"
   - "documentation/swagger-accuracy-report.md:3:99           accuractly      U       that service contracts accuractly reflect true service"
@@ -207,12 +208,12 @@ issues:
   - "specification/cosmos-db/resource-manager/readme.go.md:14:41         armcosmos       U       resourcemanager/cosmos/armcosmos"
   - "specification/cosmos-db/resource-manager/readme.md:44:53        mongorbac           U       preview/2024-02-15-preview/mongorbac.json"
   - "specification/cosmos-db/resource-manager/readme.md:51:53        throughputpool      U       preview/2024-02-15-preview/throughputpool.json"
-  - "specification/cost-management/resource-manager/readme.md:42:48          costallocation                  U       tManagement/stable/2023-11-01/costallocation.json"
-  - "specification/cost-management/resource-manager/readme.md:46:63          generatecostdetailsreport       U       1-01/costmanagement.generatecostdetailsreport.json"
-  - "specification/cost-management/resource-manager/readme.md:47:63          generatedetailedcostreport      U       1-01/costmanagement.generatedetailedcostreport.json"
-  - "specification/cost-management/resource-manager/readme.md:360:52         Operatio                        U       Response schema of OperatioAPI does not match Arm"
-  - "specification/cost-management/resource-manager/readme.md:451:74         desgin                          U       in cost allocation by desgin'"
-  - "specification/cost-management/resource-manager/readme.md:457:14         Subscripiton                    U       reason: 'Subscripiton and ResourceGroup scope"
+  - "specification/cost-management/resource-manager/readme.md:43:48          costallocation                  U       tManagement/stable/2023-11-01/costallocation.json"
+  - "specification/cost-management/resource-manager/readme.md:47:63          generatecostdetailsreport       U       1-01/costmanagement.generatecostdetailsreport.json"
+  - "specification/cost-management/resource-manager/readme.md:48:63          generatedetailedcostreport      U       1-01/costmanagement.generatedetailedcostreport.json"
+  - "specification/cost-management/resource-manager/readme.md:377:52         Operatio                        U       Response schema of OperatioAPI does not match Arm"
+  - "specification/cost-management/resource-manager/readme.md:468:74         desgin                          U       in cost allocation by desgin'"
+  - "specification/cost-management/resource-manager/readme.md:474:14         Subscripiton                    U       reason: 'Subscripiton and ResourceGroup scope"
   - "specification/cpim/resource-manager/readme.go.md:19:14          azureadexternalidentities       U       namespace: azureadexternalidentities"
   - "specification/customerlockbox/resource-manager/readme.csharp.md:14:40       customerlockbox     U       csharp-sdks-folder)/customerlockbox/management/Microsoft"
   - "specification/customproviders/resource-manager/readme.terraform.md:18:19        resourceproviders       U       - IdPortion: \"resourceproviders\""
@@ -252,7 +253,7 @@ issues:
   - "specification/elasticsan/resource-manager/readme.az.md:8:27         storagepool     U       namespace: azure.mgmt.storagepool"
   - "specification/EnterpriseKnowledgeGraph/resource-manager/readme.go.md:8:14           enterpriseknowledgegraphservice     U       namespace: enterpriseknowledgegraphservice"
   - "specification/eventgrid/data-plane/readme.md:68:29          Jhon    U       senderDisplayName\": \"Jhon\","
-  - "specification/eventgrid/resource-manager/readme.md:50:283       defintion (definition)      U       requirements in this route defintion."
+  - "specification/eventgrid/resource-manager/readme.md:66:283       defintion (definition)      U       requirements in this route defintion."
   - "specification/eventhub/resource-manager/readme.md:79:49         networkrulessets    U       preview/2021-01-01-preview/networkrulessets-preview.json"
   - "specification/extendedlocation/resource-manager/readme.md:38:59         customlocations     U       preview/2021-03-15-preview/customlocations.json"
   - "specification/fist/resource-manager/readme.python.md:10:26          iotfirmwaredefense      U       package-name: azure-mgmt-iotfirmwaredefense"
@@ -298,7 +299,9 @@ issues:
   - "specification/logic/resource-manager/readme.go.md:14:40         armlogic    U       resourcemanager/logic/armlogic"
   - "specification/logz/resource-manager/readme.go.md:14:39          armlogz     U       resourcemanager/logz/armlogz"
   - "specification/m365securityandcompliance/resource-manager/readme.go.md:9:18          securityandcompliance       U       namespace: m365securityandcompliance"
-  - "specification/machinelearningservices/resource-manager/readme.md:69:155         datareferences      U       registries/{registryName}/datareferences/{name}/versions/{version"
+  - "specification/machinelearningservices/resource-manager/readme.md:49:65          commandjob          U       other job type like commandjob, sweepjob etc. We have"
+  - "specification/machinelearningservices/resource-manager/readme.md:49:77          sweepjob            U       type like commandjob, sweepjob etc. We have one interface"
+  - "specification/machinelearningservices/resource-manager/readme.md:132:155        datareferences      U       registries/{registryName}/datareferences/{name}/versions/{version"
   - "specification/maintenance/resource-manager/readme.az.md:17:26       applyupdate     U       group: maintenance applyupdate"
   - "specification/maintenance/resource-manager/readme.md:183:19         postive (positive)      U       reason: False postive. ConfigurationAssignments"
   - "specification/managednetwork/resource-manager/readme.cli.md:8:25        managednetwork                      U       namespace: azure.mgmt.managednetwork"
@@ -409,6 +412,8 @@ issues:
   - "specification/oep/resource-manager/readme.go.md:8:38        armoep      U       resourcemanager/oep/armoep"
   - "specification/offazurespringboot/resource-manager/readme.csharp.md:14:40        springappdiscovery      U       csharp-sdks-folder)/springappdiscovery/management/Azure.ResourceMana"
   - "specification/offazurespringboot/resource-manager/readme.md:44:61       springbootdiscovery     U       preview/2024-04-01-preview/springbootdiscovery.json"
+  - "specification/oracle/resource-manager/readme.go.md:8:50         armoracledatabase       U       sourcemanager/Oracle.Database/armoracledatabase"
+  - "specification/oracle/resource-manager/readme.python.md:10:26        oracledatabase      U       package-name: azure-mgmt-oracledatabase"
   - "specification/orbital/resource-manager/Microsoft.Orbital/aodg/readme.md:38:23       aodg    U       - stable/2024-03-01/aodg.json"
   - "specification/orbital/resource-manager/readme.go.md:8:42        armorbital      U       resourcemanager/orbital/armorbital"
   - "specification/paloaltonetworks/resource-manager/readme.python.md:10:26          paloaltonetworksngfw    U       package-name: azure-mgmt-paloaltonetworksngfw"
@@ -497,7 +502,6 @@ issues:
   - "specification/sphere/resource-manager/readme.go.md:7:41         armsphere       U       resourcemanager/sphere/armsphere"
   - "specification/sql/resource-manager/readme.go.md:7:38        armsql      U       resourcemanager/sql/armsql"
   - "specification/sql/resource-manager/readme.md:2969:40        sqlmanagement       U       csharp-sdks-folder)/sqlmanagement/Microsoft.Azure.Management"
-  - "specification/standbypool/resource-manager/readme.csharp.md:14:40       standbypool     U       csharp-sdks-folder)/standbypool/management/Microsoft"
   - "specification/storage/data-plane/Azure.Storage.Files.DataLake/readme.md:100:34      predfined       U       These parameters are predfined by storage specifications"
   - "specification/storage/resource-manager/readme.go.md:14:42       armstorage      U       resourcemanager/storage/armstorage"
   - "specification/storageactions/resource-manager/readme.az.md:9:17         storageactions      U       extensions: storageactions"

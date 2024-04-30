@@ -3,7 +3,7 @@ Repository: wireapp/wire-webapp
 Url: "https://github.com/wireapp/wire-webapp.git"
 Args: ["src/script/**/*.{js,ts,tsx,md}"]
 Lines:
- CSpell: Files checked: 1159, Issues found: 2767 in 633 files.
+ CSpell: Files checked: 1161, Issues found: 2775 in 635 files.
  exit code: 1
 ./src/script/Config.ts:81:31     - Unknown word (acces)      -- DataDog client api keys acces */
 ./src/script/E2EIdentity/E2EIdentityEnrollment.test.ts:110:33    - Unknown word (enrollement) -- should trigger an initial enrollement when device is a fresh
@@ -167,6 +167,8 @@ Lines:
 ./src/script/calling/enum/LeaveCallReason.ts:27:8      - Unknown word (MANUALY)    -- USER_MANUALY_LEFT_CONVERSATION =
 ./src/script/client/ClientRepository.test.ts:169:38    - Unknown word (Respy)      -- as any).getEnv().allowRespy(true);
 ./src/script/client/ClientRepository.ts:26:8      - Unknown word (murmurhash) -- import murmurhash from 'murmurhash';
+./src/script/client/clientMLSConfig.ts:33:16     - Unknown word (Ciphersuite) -- defaultCiphersuite: mlsConfig.config.defaultCiph
+./src/script/client/clientMLSConfig.ts:34:9      - Unknown word (ciphersuites) -- ciphersuites: mlsConfig.config.allowedCiph
 ./src/script/components/AppContainer/hooks/useTheme.test.ts:31:75     - Unknown word (bodyclass)  -- body classes', (theme, bodyclass) => {
 ./src/script/components/Avatar/Avatar.test.tsx:63:11     - Unknown word (behaviour)  -- * This behaviour exists in the message
 ./src/script/components/Avatar/Avatar.tsx:41:23     - Unknown word (xxxs)       -- XXX_SMALL = 'avatar-xxxs',
@@ -249,39 +251,39 @@ Lines:
 ./src/script/components/calling/GroupVideoGrid.test.tsx:49:33     - Unknown word (Heruser)    -- participant.user.name('Anot Heruser');
 ./src/script/components/calling/GroupVideoGrid.tsx:143:76    - Unknown word (xsmall)     -- fontSize: 'var(--font-size-xsmall)', fontWeight: 500}
 ./src/script/components/calling/useCallAlertState.ts:20:23     - Unknown word (zustand)    -- import {create} from 'zustand';
-./src/script/components/panel/ConversationProtocolDetails/ConversationProtocolDetails.test.tsx:22:9      - Unknown word (Ciphersuite) -- import {Ciphersuite} from '@wireapp/core
-./src/script/components/panel/ConversationProtocolDetails/ConversationProtocolDetails.test.tsx:29:40     - Unknown word (DHKEMP)      -- Ciphersuite.MLS_128_DHKEMP256_AES128GCM_SHA256
+./src/script/components/panel/ConversationProtocolDetails/ConversationProtocolDetails.test.tsx:30:40     - Unknown word (DHKEMP)     -- Ciphersuite.MLS_128_DHKEMP256_AES128GCM_SHA256
 ./src/script/components/utils/InViewport.tsx:22:9      - Unknown word (overlayed)  -- import {overlayedObserver} from 'Util
 ./src/script/conversation/ConversationAccessPermission.ts:138:53    - Unknown word (sigfigs)    -- feature with the correct sigfigs
 ./src/script/conversation/ConversationFilter.test.ts:66:16     - Unknown word (Florian)    -- name: 'Florian@Staging11',
 ./src/script/conversation/ConversationLabelRepository.ts:117:12    - Unknown word (unmarshal)  -- readonly unmarshal = (labelJson: LabelProperty
 ./src/script/conversation/ConversationLabelRepository.ts:84:88     - Unknown word (favorited)  -- type: 'conversation-favorited'}> {
 ./src/script/conversation/ConversationMapper.test.ts:59:25     - Unknown word (Emtpy)      -- const functionCallEmtpyArray = () => ConversationMapp
-./src/script/conversation/ConversationRepository.test.ts:1158:34   - Unknown word (Gregor)      -- b.name('René, Benny, Gregor, Lipis');
-./src/script/conversation/ConversationRepository.test.ts:1158:42   - Unknown word (Lipis)       -- René, Benny, Gregor, Lipis');
-./src/script/conversation/ConversationRepository.test.ts:1431:18   - Unknown word (initialise)  -- it('should initialise mls 1:1 conversation
-./src/script/conversation/ConversationRepository.test.ts:1589:42   - Unknown word (msdownload)  -- type: 'application/x-msdownload',
-./src/script/conversation/ConversationRepository.test.ts:2790:97   - Unknown word (atively)     -- to mls if we're not atively participating in a call
-./src/script/conversation/ConversationRepository.test.ts:413:16    - Unknown word (Initialised) -- describe('getInitialised1To1Conversation', (
-./src/script/conversation/ConversationRepository.test.ts:787:80    - Unknown word (testt)       -- dk03f38414', domain: 'testt-domain'};
-./src/script/conversation/ConversationRepository.test.ts:793:59    - Unknown word (kfbe)        -- ca-a495asd47a8-ac70-9kfbe924b2d0', domain: 'testt
-./src/script/conversation/ConversationRepository.test.ts:897:102   - Unknown word (choosen)     -- even when proteus is choosen.', async () => {
-./src/script/conversation/ConversationRepository.test.ts:980:9     - Unknown word (deos)        -- it('deos not mark mls 1:1 conversation
-./src/script/conversation/ConversationRepository.ts:1268:19   - Unknown word (unarchived)   -- * Get the next unarchived conversation.
-./src/script/conversation/ConversationRepository.ts:1328:36   - Unknown word (initialisation) -- mls 1:1 conversation initialisation is triggered by some
-./src/script/conversation/ConversationRepository.ts:1787:23   - Unknown word (Initialising)   -- this.logger.info(`Initialising MLS 1:1 conversation
-./src/script/conversation/ConversationRepository.ts:1821:58   - Unknown word (conversaiton)   -- was previously active conversaiton, we want to make mls
-./src/script/conversation/ConversationRepository.ts:1924:85   - Unknown word (initialising)   -- from backend before initialising the conversation
-./src/script/conversation/ConversationRepository.ts:2084:16   - Unknown word (inccessible)    -- for (const inccessibleConversation of not_found
-./src/script/conversation/ConversationRepository.ts:223:46    - Unknown word (agains)     -- client mismatch handler agains the message repository
-./src/script/conversation/ConversationRepository.ts:2485:32   - Unknown word (corecrypto)     -- MLS conversation in corecrypto and deletes the conversation
-./src/script/conversation/ConversationRepository.ts:2618:117  - Unknown word (ciphersuite)    -- new fields (groupId, ciphersuite, epoch and new protocol
-./src/script/conversation/ConversationRepository.ts:3744:14   - Unknown word (Unarchived)     -- const wasUnarchived = previouslyArchived
-./src/script/conversation/ConversationRepository.ts:445:9     - Unknown word (teamid)     -- teamid: this.teamState.team
-./src/script/conversation/ConversationRepository.ts:554:75    - Unknown word (metat)      -- users & conversations metat data`, error);
+./src/script/conversation/ConversationRepository.test.ts:1210:34   - Unknown word (Gregor)      -- b.name('René, Benny, Gregor, Lipis');
+./src/script/conversation/ConversationRepository.test.ts:1210:42   - Unknown word (Lipis)       -- René, Benny, Gregor, Lipis');
+./src/script/conversation/ConversationRepository.test.ts:1483:18   - Unknown word (initialise)  -- it('should initialise mls 1:1 conversation
+./src/script/conversation/ConversationRepository.test.ts:1641:42   - Unknown word (msdownload)  -- type: 'application/x-msdownload',
+./src/script/conversation/ConversationRepository.test.ts:2842:97   - Unknown word (atively)     -- to mls if we're not atively participating in a call
+./src/script/conversation/ConversationRepository.test.ts:415:16    - Unknown word (Initialised) -- describe('getInitialised1To1Conversation', (
+./src/script/conversation/ConversationRepository.test.ts:789:80    - Unknown word (testt)       -- dk03f38414', domain: 'testt-domain'};
+./src/script/conversation/ConversationRepository.test.ts:795:59    - Unknown word (kfbe)        -- ca-a495asd47a8-ac70-9kfbe924b2d0', domain: 'testt
+./src/script/conversation/ConversationRepository.test.ts:899:102   - Unknown word (choosen)     -- even when proteus is choosen.', async () => {
+./src/script/conversation/ConversationRepository.test.ts:982:9     - Unknown word (deos)        -- it('deos not mark mls 1:1 conversation
+./src/script/conversation/ConversationRepository.ts:1273:19   - Unknown word (unarchived)   -- * Get the next unarchived conversation.
+./src/script/conversation/ConversationRepository.ts:1333:36   - Unknown word (initialisation) -- mls 1:1 conversation initialisation is triggered by some
+./src/script/conversation/ConversationRepository.ts:1792:23   - Unknown word (Initialising)   -- this.logger.info(`Initialising MLS 1:1 conversation
+./src/script/conversation/ConversationRepository.ts:181:6     - Unknown word (Conversaiton) -- type ConversaitonWithServiceParams =
+./src/script/conversation/ConversationRepository.ts:1826:58   - Unknown word (conversaiton)   -- was previously active conversaiton, we want to make mls
+./src/script/conversation/ConversationRepository.ts:1929:85   - Unknown word (initialising)   -- from backend before initialising the conversation
+./src/script/conversation/ConversationRepository.ts:2089:16   - Unknown word (inccessible)    -- for (const inccessibleConversation of not_found
+./src/script/conversation/ConversationRepository.ts:228:46    - Unknown word (agains)       -- client mismatch handler agains the message repository
+./src/script/conversation/ConversationRepository.ts:2549:32   - Unknown word (corecrypto)     -- MLS conversation in corecrypto and deletes the conversation
+./src/script/conversation/ConversationRepository.ts:2682:117  - Unknown word (ciphersuite)    -- new fields (groupId, ciphersuite, epoch and new protocol
+./src/script/conversation/ConversationRepository.ts:3808:14   - Unknown word (Unarchived)     -- const wasUnarchived = previouslyArchived
+./src/script/conversation/ConversationRepository.ts:450:9     - Unknown word (teamid)       -- teamid: this.teamState.team
+./src/script/conversation/ConversationRepository.ts:559:75    - Unknown word (metat)        -- users & conversations metat data`, error);
 ./src/script/conversation/ConversationRepository.ts:57:18     - Unknown word (Protobuf)   -- import {Asset as ProtobufAsset, Confirmation,
-./src/script/conversation/ConversationRepository.ts:645:10    - Unknown word (Converstions) -- localConverstions: ConversationDatabaseData
-./src/script/conversation/ConversationRepository.ts:653:53    - Unknown word (refetched)    -- proteus 1:1 (so it's never refetched) conversation and remove
+./src/script/conversation/ConversationRepository.ts:650:10    - Unknown word (Converstions) -- localConverstions: ConversationDatabaseData
+./src/script/conversation/ConversationRepository.ts:658:53    - Unknown word (refetched)    -- proteus 1:1 (so it's never refetched) conversation and remove
 ./src/script/conversation/ConversationState.test.ts:37:29     - Unknown word (groupid)    -- conversation.groupId = `groupid-${randomUUID()}`;
 ./src/script/conversation/EventMapper.test.ts:115:27    - Unknown word (ugpawm)     -- token: 'aV0TGxF3ugpawm3wAYPmew==',
 ./src/script/conversation/EventMapper.test.ts:115:37    - Unknown word (Pmew)       -- 'aV0TGxF3ugpawm3wAYPmew==',
@@ -325,7 +327,7 @@ Lines:
 ./src/script/hooks/useRelativeTimestamp.tsx:67:22     - Unknown word (Timeago)    -- const [timeago, setTimeago] = useState<string>
 ./src/script/hooks/useSingleInstance.test.ts:32:30     - Unknown word (Intance)    -- result: {current: firstIntance},
 ./src/script/integration/ServiceTag.ts:34:3      - Unknown word (LIFETSTYLE) -- LIFETSTYLE = 'lifestyle',
-./src/script/main/app.ts:90:89     - Unknown word (Finaliser)  -- MLSMigration/migrationFinaliser';
+./src/script/main/app.ts:91:89     - Unknown word (Finaliser)  -- MLSMigration/migrationFinaliser';
 ./src/script/media/MediaDevicesHandler.test.ts:219:41    - Unknown word (newcamera)       -- newCameras = [{deviceId: 'newcamera', kind: MediaDeviceType
 ./src/script/media/MediaDevicesHandler.test.ts:24:54     - Unknown word (nolegacy)   -- MediaDevicesHandler --nolegacy */
 ./src/script/media/MediaDevicesHandler.test.ts:267:53    - Unknown word (inexistant)      -- currentDeviceId.audiooutput('inexistant-id');
@@ -398,8 +400,7 @@ Lines:
 ./src/script/search/SearchRepository.test.ts:74:16     - Unknown word (felici)         -- term: 'felici',
 ./src/script/search/SearchRepository.ts:88:51     - Unknown word (bardia)     -- Bardia and username of bardia_wire this mapping
 ./src/script/service/APIClientSingleton.ts:22:31     - Unknown word (Unconfigured) -- APIClient as APIClientUnconfigured} from '@wireapp/api
-./src/script/service/CoreSingleton.ts:46:28     - Unknown word (CIPHERSUITE) -- MLS_CONFIG_DEFAULT_CIPHERSUITE,
-./src/script/service/CoreSingleton.ts:79:9      - Unknown word (Prekeys)     -- nbPrekeys: 100,
+./src/script/service/CoreSingleton.ts:64:9      - Unknown word (Prekeys)    -- nbPrekeys: 100,
 ./src/script/service/StoreEngineProvider.ts:33:9      - Unknown word (permament)  -- /** a permament storage that will still
 ./src/script/service/StoreEngineProvider.ts:36:3      - Unknown word (EFFEMERAL)  -- EFFEMERAL,
 ./src/script/service/StoreEngineProvider.ts:51:21     - Unknown word (encyption)  -- logger.info('DB encyption config has changed'
@@ -408,6 +409,7 @@ Lines:
 ./src/script/storage/StorageService.ts:37:9      - Unknown word (DEXIE)      -- type: DEXIE_CRUD_EVENT;
 ./src/script/storage/record/CryptoboxRecord.ts:23:3      - Unknown word (serialised) -- serialised: string;
 ./src/script/storage/record/EventRecord.ts:69:19     - Unknown word (datestring) -- * - string: a datestring
+./src/script/team/TeamRepository.ts:89:30     - Unknown word (Detete)     -- private readonly onMemberDetete: () => Promise<void
 ./src/script/team/TeamService.ts:73:80     - Unknown word (webapps)    -- to ensure that modern webapps work with legacy backends
 ./src/script/tracking/EventTrackingRepository.ts:111:11    - Unknown word (unsynced)   -- const unsyncedCountlyDeviceId = loadValue
 ./src/script/tracking/EventTrackingRepository.ts:62:17     - Unknown word (UNSYNCED)   -- COUNTLY_UNSYNCED_DEVICE_ID_LOCAL_STORAGE

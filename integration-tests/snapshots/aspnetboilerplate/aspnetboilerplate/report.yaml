@@ -3,9 +3,9 @@ Repository: aspnetboilerplate/aspnetboilerplate
 Url: https://github.com/aspnetboilerplate/aspnetboilerplate
 Args: '["**/*.{md,cs,cshtml}","--exclude=wwwroot","--exclude=**/*SampleApp.Tests/Web*"]'
 Summary:
-  files: 2683
-  filesWithIssues: 897
-  issues: 3204
+  files: 2684
+  filesWithIssues: 898
+  issues: 3205
   errors: 0
 Errors: []
 
@@ -236,8 +236,8 @@ issues:
   - "src/Abp.ZeroCore.EntityFrameworkCore/EntityHistory/EntityHistoryHelper.cs:135:47        Unproxied       U       typeOfEntity = ProxyHelper.GetUnproxiedType(entityEntry.Entity"
   - "src/Abp.ZeroCore.IdentityServer4.vNext.EntityFrameworkCore/IdentityServer4vNext/AbpZeroCoreIdentityServerEntityFrameworkCoreConfigurationExtensions.cs:31:60        nvarchar    U       over 4K converts to nvarchar(max) on SqlServer"
   - "src/Abp.ZeroCore.IdentityServer4.vNext/IdentityServer4vNext/AbpResourceOwnerPasswordValidator.cs:52:73          Oidc    U       GrantValidationResult(sub, OidcConstants.AuthenticationMethod"
-  - "src/Abp.ZeroCore/Authorization/Users/AbpUserStore.cs:2230:34        userclaims      U       var query = from userclaims in _userClaimRepository"
-  - "src/Abp.ZeroCore/Authorization/Users/AbpUserStore.cs:2296:34        userrole        U       var query = from userrole in _userRoleRepository"
+  - "src/Abp.ZeroCore/Authorization/Users/AbpUserStore.cs:2233:34        userclaims      U       var query = from userclaims in await _userClaimRepository"
+  - "src/Abp.ZeroCore/Authorization/Users/AbpUserStore.cs:2299:34        userrole        U       var query = from userrole in await _userRoleRepository"
   - "src/Abp/AbpKernelModule.cs:30:19        Remoting    U       using Abp.Runtime.Remoting;"
   - "src/Abp/Aspects/AbpCrossCuttingConcerns.cs:68:35        Applieds    U       public static string[] GetApplieds(object obj)"
   - "src/Abp/Authorization/Permission.cs:51:66       mykey       U       indexer like Permission[\"mykey\"]=data; </para>"
