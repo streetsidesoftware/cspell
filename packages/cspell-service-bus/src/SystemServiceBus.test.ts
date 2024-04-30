@@ -38,7 +38,6 @@ describe('SystemServiceBus', () => {
     });
 
     test('ServiceRequestFactory Compliance', () => {
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         const knownRequests: [string, ServiceRequestFactory<any>][] = Object.entries(knownRequestTypes);
         expect(knownRequests.map(([name, def]) => [name, def.type])).toMatchSnapshot();
     });

@@ -12,7 +12,7 @@ const require = createRequire(import.meta.url);
 
 const sampleFilename = path.join(pathPackageSamples, 'French.md');
 const text = fs.readFileSync(sampleFilename, 'utf8').toString();
-// eslint-disable-next-line unicorn/prefer-module
+
 const frenchConfig = require.resolve('@cspell/dict-fr-fr/cspell-ext.json');
 
 const timeout = 10_000;

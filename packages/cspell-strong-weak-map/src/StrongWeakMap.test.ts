@@ -168,7 +168,6 @@ function deleteAll<K, V>(map: Map<K, Boxed<V>>, keys: K[] | undefined) {
     keys?.forEach((k) => map.delete(k));
 }
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 function keys<T>(iterable: Iterable<[T, ...any[]]>): T[] {
     return [...iterable].map(([k]) => k);
 }
