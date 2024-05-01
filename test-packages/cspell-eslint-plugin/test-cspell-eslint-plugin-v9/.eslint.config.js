@@ -1,9 +1,6 @@
-import pluginTypescriptParser from '@typescript-eslint/parser';
+import tsEslint from 'typescript-eslint';
 import js from '@eslint/js';
-import { fileURLToPath } from 'url';
 import cspellPlugin from '@cspell/eslint-plugin';
-
-const __dirname = fileURLToPath(new URL('.', import.meta.url));
 
 /**
  * @type { import("eslint").Linter.FlatConfig[] }
@@ -11,7 +8,7 @@ const __dirname = fileURLToPath(new URL('.', import.meta.url));
 const config = [
     js.configs.recommended,
     {
-        plugins: { '@cspell': cspellPlugin },
+        plugins: { '@cspell': cspellPlugin, '@typescript-eslint': tsEslint.plugin },
         rules: {
             '@cspell/spellchecker': ['warn', { checkIdentifiers: true }],
         },
@@ -21,7 +18,7 @@ const config = [
         files: ['**/*.ts', '**/*.tsx'],
         ignores: ['**/*.d.ts', '**/*.map', '**/coverage/**', '**/dist/**', '**/node_modules/**'],
         languageOptions: {
-            parser: pluginTypescriptParser,
+            parser: tsEslint.parser,
             ecmaVersion: 2022,
             sourceType: 'module',
         },
