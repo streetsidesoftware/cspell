@@ -1,15 +1,9 @@
 import pluginTypescriptParser from '@typescript-eslint/parser';
 import js from '@eslint/js';
-import { FlatCompat } from '@eslint/eslintrc';
 import { fileURLToPath } from 'url';
-import eslintConfigPrettier from 'eslint-config-prettier';
 import cspellPlugin from '@cspell/eslint-plugin';
 
 const __dirname = fileURLToPath(new URL('.', import.meta.url));
-
-const compat = new FlatCompat({
-    baseDirectory: __dirname,
-});
 
 /**
  * @type { import("eslint").Linter.FlatConfig[] }
@@ -22,8 +16,7 @@ const config = [
             '@cspell/spellchecker': ['warn', { checkIdentifiers: true }],
         },
     },
-    ...compat.extends('plugin:prettier/recommended', 'plugin:@typescript-eslint/recommended'),
-    eslintConfigPrettier,
+    ...tsEslint.configs.recommended,
     {
         files: ['**/*.ts', '**/*.tsx'],
         ignores: ['**/*.d.ts', '**/*.map', '**/coverage/**', '**/dist/**', '**/node_modules/**'],

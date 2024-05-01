@@ -1,17 +1,7 @@
-// import { fileURLToPath } from 'node:url';
-
 import eslint from '@eslint/js';
 import nodePlugin from 'eslint-plugin-n';
 import simpleImportSort from 'eslint-plugin-simple-import-sort';
 import tsEslint from 'typescript-eslint';
-
-// import { FlatCompat } from '@eslint/eslintrc';
-
-// const __dirname = fileURLToPath(new URL('.', import.meta.url));
-
-// const compat = new FlatCompat({
-//     baseDirectory: __dirname,
-// });
 
 export default tsEslint.config(
     nodePlugin.configs['flat/recommended'],

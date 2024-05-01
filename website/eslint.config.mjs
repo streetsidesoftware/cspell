@@ -1,6 +1,5 @@
 import eslint from '@eslint/js';
 import nodePlugin from 'eslint-plugin-n';
-import eslintPluginPrettierRecommended from 'eslint-plugin-prettier/recommended';
 import tsEslint from 'typescript-eslint';
 
 // import simpleImportSort from 'eslint-plugin-simple-import-sort';
@@ -11,7 +10,6 @@ import tsEslint from 'typescript-eslint';
 export default tsEslint.config(
     eslint.configs.recommended,
     nodePlugin.configs['flat/recommended'],
-    eslintPluginPrettierRecommended,
     ...tsEslint.configs.recommended,
     {
         ignores: [
