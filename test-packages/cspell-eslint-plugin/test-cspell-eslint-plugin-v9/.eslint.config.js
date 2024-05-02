@@ -1,15 +1,6 @@
-import pluginTypescriptParser from '@typescript-eslint/parser';
+import tsEslint from 'typescript-eslint';
 import js from '@eslint/js';
-import { FlatCompat } from '@eslint/eslintrc';
-import { fileURLToPath } from 'url';
-import eslintConfigPrettier from 'eslint-config-prettier';
 import cspellPlugin from '@cspell/eslint-plugin';
-
-const __dirname = fileURLToPath(new URL('.', import.meta.url));
-
-const compat = new FlatCompat({
-    baseDirectory: __dirname,
-});
 
 /**
  * @type { import("eslint").Linter.FlatConfig[] }
@@ -17,18 +8,17 @@ const compat = new FlatCompat({
 const config = [
     js.configs.recommended,
     {
-        plugins: { '@cspell': cspellPlugin },
+        plugins: { '@cspell': cspellPlugin, '@typescript-eslint': tsEslint.plugin },
         rules: {
             '@cspell/spellchecker': ['warn', { checkIdentifiers: true }],
         },
     },
-    ...compat.extends('plugin:prettier/recommended', 'plugin:@typescript-eslint/recommended'),
-    eslintConfigPrettier,
+    ...tsEslint.configs.recommended,
     {
         files: ['**/*.ts', '**/*.tsx'],
         ignores: ['**/*.d.ts', '**/*.map', '**/coverage/**', '**/dist/**', '**/node_modules/**'],
         languageOptions: {
-            parser: pluginTypescriptParser,
+            parser: tsEslint.parser,
             ecmaVersion: 2022,
             sourceType: 'module',
         },
