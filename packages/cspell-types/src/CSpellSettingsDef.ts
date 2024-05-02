@@ -146,7 +146,7 @@ export interface FileSettings extends ExtendableSettings, CommandLineSettings {
     /**
      * Configure CSpell features.
      *
-     * @version 5.16.0
+     * @since 5.16.0
      */
     features?: Features;
 }
@@ -806,7 +806,7 @@ export interface ExperimentalFileSettings {
     /**
      * Future Plugin support
      * @experimental
-     * @version 6.2.0
+     * @since 6.2.0
      */
     plugins?: Plugin[];
 }
@@ -829,7 +829,7 @@ export interface ExperimentalBaseSettings {
     /**
      * Parser to use for the file content
      * @experimental
-     * @version 6.2.0
+     * @since 6.2.0
      */
     parser?: ParserName;
 }
@@ -837,7 +837,7 @@ export interface ExperimentalBaseSettings {
 /**
  * Plugin API
  * @experimental
- * @version 6.2.0
+ * @since 6.2.0
  */
 export interface Plugin {
     parsers?: Parser[];
