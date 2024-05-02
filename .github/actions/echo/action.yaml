@@ -7,14 +7,14 @@ inputs:
     required: true
   show:
     description: Show the value in the console.
-    default: "true"
+    default: 'true'
     required: false
 outputs:
   value:
     description: The value that was input.
     value: ${{ inputs.value }}
 runs:
-  using: "composite"
+  using: 'composite'
   steps:
     - name: Show
       if: inputs.show

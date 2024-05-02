@@ -9,7 +9,7 @@ outputs:
     value: ${{ steps.result.outputs.value }}
 
 runs:
-  using: "composite"
+  using: 'composite'
   steps:
     - name: Inputs
       uses: ./.github/actions/echo

@@ -1,28 +1,28 @@
-name: " 🔥 Smoke Test"
+name: ' 🔥 Smoke Test'
 
 on:
   workflow_dispatch:
   pull_request:
     paths:
-      - ".github/workflows/smoke-test.yml"
-      - "*-lock.yaml"
-      - "package.json"
-      - "packages/**/*.cjs"
-      - "packages/**/*.cts"
-      - "packages/**/*.js"
-      - "packages/**/*.mjs"
-      - "packages/**/*.mts"
-      - "packages/**/*.ts"
-      - "packages/**/package.json"
-      - "packages/**/tsconfig.json"
-      - "tsconfig*.json"
-      - "!docs/**"
-      - "!website/**"
+      - '.github/workflows/smoke-test.yml'
+      - '*-lock.yaml'
+      - 'package.json'
+      - 'packages/**/*.cjs'
+      - 'packages/**/*.cts'
+      - 'packages/**/*.js'
+      - 'packages/**/*.mjs'
+      - 'packages/**/*.mts'
+      - 'packages/**/*.ts'
+      - 'packages/**/package.json'
+      - 'packages/**/tsconfig.json'
+      - 'tsconfig*.json'
+      - '!docs/**'
+      - '!website/**'
   push:
     branches:
       - main
     paths-ignore:
-      - "docs/**"
+      - 'docs/**'
 
 permissions:
   contents: read
@@ -72,7 +72,7 @@ jobs:
 
         use_cspell_cache:
           - true
-          - ""
+          - ''
 
     steps:
       - name: Checkout
@@ -118,7 +118,7 @@ jobs:
 
         use_cspell_cache:
           - true
-          - ""
+          - ''
 
     steps:
       - name: Checkout

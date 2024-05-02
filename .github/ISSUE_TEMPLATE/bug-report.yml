@@ -1,7 +1,7 @@
 name: Bug Report
 description: Create a report to help us improve.
-title: "[Bug]: "
-labels: ["Needs Investigating", "bug", "new issue"]
+title: '[Bug]: '
+labels: ['Needs Investigating', 'bug', 'new issue']
 body:
   - type: markdown
     attributes:
@@ -55,12 +55,12 @@ body:
       description: Issue with supporting library?
       multiple: true
       options:
-        - "Not sure / None"
-        - "cspell-glob" # - library for matching glob patterns."
-        - "cspell-io" # - thin file i/o library."
-        - "cspell-trie-lib" # - trie lib."
-        - "cspell-trie2-lib" # - trie lib alternate format."
-        - "Other" # - one of the other libraries."
+        - 'Not sure / None'
+        - 'cspell-glob' # - library for matching glob patterns."
+        - 'cspell-io' # - thin file i/o library."
+        - 'cspell-trie-lib' # - trie lib."
+        - 'cspell-trie2-lib' # - trie lib alternate format."
+        - 'Other' # - one of the other libraries."
 
   - type: dropdown
     id: os-type
@@ -69,11 +69,11 @@ body:
       description: Which OS has the issue?
       multiple: true
       options:
-        - "All of them"
-        - "macOS"
-        - "Linux"
-        - "Windows"
-        - "Other"
+        - 'All of them'
+        - 'macOS'
+        - 'Linux'
+        - 'Windows'
+        - 'Other'
 
   - type: input
     id: on-version
@@ -130,14 +130,14 @@ body:
   - type: textarea
     id: cspell-json
     attributes:
-      label: "cspell.json"
+      label: 'cspell.json'
       description: Please provide a copy of your `cspell.json` file.
       render: jsonc
 
   - type: textarea
     id: cspell-yaml
     attributes:
-      label: "cspell.config.yaml"
+      label: 'cspell.config.yaml'
       description: Please provide a copy of your `cspell.config.yaml` file.
       render: yml
 

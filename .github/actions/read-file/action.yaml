@@ -10,7 +10,7 @@ outputs:
     description: The content of the file.
     value: ${{ steps.read-file.outputs.value }}
 runs:
-  using: "composite"
+  using: 'composite'
   steps:
     - name: Read File
       id: read-file

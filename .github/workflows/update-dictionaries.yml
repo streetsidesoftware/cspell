@@ -1,4 +1,4 @@
-name: " 📚 Update Dictionaries Main"
+name: ' 📚 Update Dictionaries Main'
 
 on:
   workflow_dispatch:
@@ -6,10 +6,10 @@ on:
       base:
         description: The Base Ref to apply the diff
         required: false
-        default: "main"
+        default: 'main'
 
   schedule:
-    - cron: "0 7 * * *"
+    - cron: '0 7 * * *'
 
 permissions:
   contents: read
@@ -113,7 +113,7 @@ jobs:
     needs:
       - calc-ref
       - check-dictionaries
-    uses: "./.github/workflows/reuseable-build-dist-cache.yml"
+    uses: './.github/workflows/reuseable-build-dist-cache.yml'
     with:
       ref: ${{ needs.calc-ref.outputs.ref }}
       patch: ${{ needs.check-dictionaries.outputs.patch }}
@@ -165,7 +165,7 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: ${{ env.NODE_VERSION }}
-          cache: "pnpm"
+          cache: 'pnpm'
 
       - run: pnpm -v
 
@@ -217,8 +217,8 @@ jobs:
         id: step-normalize-repo-name
         env:
           REPO: ${{ matrix.repo }}
-          REPLACE: "/"
-          REPLACE_WITH: "__"
+          REPLACE: '/'
+          REPLACE_WITH: '__'
         run: |
           echo "REPO_NAME=${REPO//${REPLACE}/${REPLACE_WITH}}" >> $GITHUB_OUTPUT
 
@@ -265,7 +265,7 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: ${{ env.NODE_VERSION }}
-          cache: "pnpm"
+          cache: 'pnpm'
 
       - run: pnpm -v
 
@@ -319,7 +319,7 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: ${{ env.NODE_VERSION }}
-          cache: "pnpm"
+          cache: 'pnpm'
 
       - name: restore repos
         uses: actions/download-artifact@v4
@@ -347,10 +347,10 @@ jobs:
       - name: PR
         uses: streetsidesoftware/actions/.github/actions/pr@v1
         with:
-          commit-message: "fix: Workflow Bot -- Update Dictionaries (${{ env.REF_BRANCH }})"
+          commit-message: 'fix: Workflow Bot -- Update Dictionaries (${{ env.REF_BRANCH }})'
           branch: ${{ env.NEW_BRANCH }}
           base: ${{ env.REF_BRANCH }}
-          title: "fix: Workflow Bot -- Update Dictionaries (${{ env.REF_BRANCH }})"
+          title: 'fix: Workflow Bot -- Update Dictionaries (${{ env.REF_BRANCH }})'
           body: ${{ steps.body.outputs.body }}
           app_id: ${{ secrets.AUTOMATION_APP_ID }}
           app_private_key: ${{ secrets.AUTOMATION_PRIVATE_KEY }}

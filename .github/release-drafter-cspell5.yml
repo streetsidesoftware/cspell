@@ -1,36 +1,36 @@
-name-template: "CSpell5 v$RESOLVED_VERSION"
-tag-template: "v$RESOLVED_VERSION"
+name-template: 'CSpell5 v$RESOLVED_VERSION'
+tag-template: 'v$RESOLVED_VERSION'
 filter-by-commitish: true
 commitish: cspell5
 
 categories:
-  - title: "Features"
+  - title: 'Features'
     labels:
-      - "feat"
-      - "feature"
-      - "enhancement"
-  - title: "**BREAKING**"
+      - 'feat'
+      - 'feature'
+      - 'enhancement'
+  - title: '**BREAKING**'
     labels:
-      - "breaking"
-  - title: "Fixes"
+      - 'breaking'
+  - title: 'Fixes'
     labels:
-      - "fix"
-      - "bugfix"
-      - "bug"
-  - title: "Dictionary Updates"
+      - 'fix'
+      - 'bugfix'
+      - 'bug'
+  - title: 'Dictionary Updates'
     labels:
-      - "Update Dictionaries"
-  - title: "Documentation"
+      - 'Update Dictionaries'
+  - title: 'Documentation'
     labels:
-      - "documentation"
-      - "Documentation"
-  - title: "Testing"
+      - 'documentation'
+      - 'Documentation'
+  - title: 'Testing'
     labels:
-      - "test"
-  - title: "Maintenance"
+      - 'test'
+  - title: 'Maintenance'
     labels:
-      - "chore"
-      - "dependencies"
+      - 'chore'
+      - 'dependencies'
 
 change-template: |
   <details>
@@ -57,43 +57,43 @@ version-resolver:
       - patch
   default: patch
 include-labels:
-  - "cspell5"
+  - 'cspell5'
 exclude-labels:
-  - "hide-from-release"
+  - 'hide-from-release'
 autolabeler:
-  - label: "Update Dictionaries"
+  - label: 'Update Dictionaries'
     title:
-      - "/Update Dictionaries/i"
-  - label: "dependencies"
+      - '/Update Dictionaries/i'
+  - label: 'dependencies'
     title:
-      - "/^ci: Workflow Bot.*Dependencies/i"
-  - label: "chore"
+      - '/^ci: Workflow Bot.*Dependencies/i'
+  - label: 'chore'
     title:
-      - "/chore/i"
-      - "/^ci[:](?! Workflow Bot)/i"
-  - label: "documentation"
+      - '/chore/i'
+      - '/^ci[:](?! Workflow Bot)/i'
+  - label: 'documentation'
     files:
-      - "/docs/**/*.md"
+      - '/docs/**/*.md'
     title:
-      - "/^docs?/i"
-  - label: "fix"
+      - '/^docs?/i'
+  - label: 'fix'
     title:
-      - "/^fix/i"
-      - "/^dev:/i"
-      - "/^refactor/i"
-  - label: "feature"
+      - '/^fix/i'
+      - '/^dev:/i'
+      - '/^refactor/i'
+  - label: 'feature'
     title:
-      - "/^feat/i"
-  - label: "test"
+      - '/^feat/i'
+  - label: 'test'
     title:
-      - "/^test/i"
-  - label: "breaking"
+      - '/^test/i'
+  - label: 'breaking'
     title:
-      - "/^fix[!]/i"
-      - "/^feat[!]/i"
+      - '/^fix[!]/i'
+      - '/^feat[!]/i'
   - label: cspell5
     branch:
-      - "/./i" # only cspell5 commits are in this branch
+      - '/./i' # only cspell5 commits are in this branch
 
 template: |
   ## Changes

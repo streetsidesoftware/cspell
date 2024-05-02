@@ -1,4 +1,4 @@
-name: "CodeQL"
+name: 'CodeQL'
 
 on:
   push:
@@ -9,7 +9,7 @@ on:
       - main
       - cspell6
   schedule:
-    - cron: "0 23 * * 0"
+    - cron: '0 23 * * 0'
 
 permissions:
   contents: read
@@ -33,7 +33,7 @@ jobs:
       - name: Initialize CodeQL
         uses: github/codeql-action/init@v3
         with:
-          languages: "javascript"
+          languages: 'javascript'
 
       - name: Perform CodeQL Analysis
         uses: github/codeql-action/analyze@v3

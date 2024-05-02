@@ -1,4 +1,4 @@
-name: " 🖇 Update Integration Test Repositories"
+name: ' 🖇 Update Integration Test Repositories'
 
 on:
   workflow_dispatch:
@@ -7,17 +7,17 @@ on:
         description: Branch or hash
         required: false
   schedule:
-    - cron: "0 8 * * 1" # Monday at 8 UTC
+    - cron: '0 8 * * 1' # Monday at 8 UTC
 
 permissions:
   contents: read
 
 env:
-  NEW_BRANCH: "update-integration-repositories"
+  NEW_BRANCH: 'update-integration-repositories'
   REF_BRANCH_G: main
   RUNS_ON: ubuntu-latest
-  NODE_VERSION: "18.x"
-  NPM_VERSION: "9"
+  NODE_VERSION: '18.x'
+  NPM_VERSION: '9'
 
 jobs:
   calc-ref:
@@ -41,7 +41,7 @@ jobs:
   build:
     needs:
       - calc-ref
-    uses: "./.github/workflows/reuseable-build-dist-cache.yml"
+    uses: './.github/workflows/reuseable-build-dist-cache.yml'
     with:
       ref: ${{ needs.calc-ref.outputs.ref }}
 
@@ -85,7 +85,7 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: ${{ env.NODE_VERSION }}
-          cache: "pnpm"
+          cache: 'pnpm'
 
       - run: pnpm -v
 
@@ -125,8 +125,8 @@ jobs:
         id: step-normalize-repo-name
         env:
           REPO: ${{ matrix.repo }}
-          REPLACE: "/"
-          REPLACE_WITH: "__"
+          REPLACE: '/'
+          REPLACE_WITH: '__'
         run: |
           echo "REPO_NAME=${REPO//${REPLACE}/${REPLACE_WITH}}" >> $GITHUB_OUTPUT
 
@@ -158,9 +158,9 @@ jobs:
       base: ${{ env.REF_BRANCH }}
       body: |
         ## Update Integration Repositories
-      commit-message: "ci: Workflow Bot -- Update Integration Snapshots"
+      commit-message: 'ci: Workflow Bot -- Update Integration Snapshots'
       branch: ${{ env.NEW_BRANCH }}-${{ env.REF_BRANCH }}
-      title: "ci: Workflow Bot -- Update Integration Snapshots (${{ env.REF_BRANCH }})"
+      title: 'ci: Workflow Bot -- Update Integration Snapshots (${{ env.REF_BRANCH }})'
 
     steps:
       - name: Checkout
@@ -175,7 +175,7 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: ${{ env.NODE_VERSION }}
-          cache: "pnpm"
+          cache: 'pnpm'
 
       - name: restore repos
         uses: actions/download-artifact@v4

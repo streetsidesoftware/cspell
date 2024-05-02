@@ -2,28 +2,28 @@ name: Integration Tests
 on:
   pull_request:
     paths:
-      - "packages/**/package.json"
-      - "packages/**/*-lock.yaml"
-      - "packages/**/*.ts"
-      - "integration-tests/**"
-      - "!integration-tests/perf/**"
-      - "package.json"
-      - "*-lock.yaml"
-      - ".github/workflows/integration-test.yml"
-      - "!docs/**"
+      - 'packages/**/package.json'
+      - 'packages/**/*-lock.yaml'
+      - 'packages/**/*.ts'
+      - 'integration-tests/**'
+      - '!integration-tests/perf/**'
+      - 'package.json'
+      - '*-lock.yaml'
+      - '.github/workflows/integration-test.yml'
+      - '!docs/**'
   push:
     branches:
       - main
     paths:
-      - "packages/**/package.json"
-      - "packages/**/*-lock.yaml"
-      - "packages/**/*.ts"
-      - "integration-tests/**"
-      - "!integration-tests/perf/**"
-      - "package.json"
-      - "*-lock.yaml"
-      - ".github/workflows/integration-test.yml"
-      - "!docs/**"
+      - 'packages/**/package.json'
+      - 'packages/**/*-lock.yaml'
+      - 'packages/**/*.ts'
+      - 'integration-tests/**'
+      - '!integration-tests/perf/**'
+      - 'package.json'
+      - '*-lock.yaml'
+      - '.github/workflows/integration-test.yml'
+      - '!docs/**'
   # Run on demand
   workflow_dispatch:
     inputs:
@@ -36,8 +36,8 @@ permissions:
 
 env:
   RUNS_ON: ubuntu-latest
-  NODE_VERSION: "18.x"
-  NPM_VERSION: "9"
+  NODE_VERSION: '18.x'
+  NPM_VERSION: '9'
 
 jobs:
   pre-build:
@@ -134,8 +134,8 @@ jobs:
         id: step-normalize-repo-name
         env:
           REPO: ${{ matrix.repo }}
-          REPLACE: "/"
-          REPLACE_WITH: "__"
+          REPLACE: '/'
+          REPLACE_WITH: '__'
         run: |
           echo "REPO_NAME=${REPO//${REPLACE}/${REPLACE_WITH}}" >> $GITHUB_OUTPUT
 
@@ -267,7 +267,7 @@ jobs:
         id: pr-body
         uses: streetsidesoftware/actions/public/pr-body@v1
         with:
-          title: "Update Integration Test Performance Data"
+          title: 'Update Integration Test Performance Data'
           message: |
             ## Integration Tests Summary
 
@@ -295,10 +295,10 @@ jobs:
         if: github.ref_name == 'main'
         uses: streetsidesoftware/actions/.github/actions/pr@v1
         with:
-          commit-message: "chore: ${{ steps.pr-body.outputs.title }}"
+          commit-message: 'chore: ${{ steps.pr-body.outputs.title }}'
           branch: update-perf-main
           base: main
-          title: "chore: ${{ steps.pr-body.outputs.title }}"
+          title: 'chore: ${{ steps.pr-body.outputs.title }}'
           body: ${{ steps.pr-body.outputs.body }}
           app_id: ${{ secrets.AUTOMATION_APP_ID }}
           app_private_key: ${{ secrets.AUTOMATION_PRIVATE_KEY }}

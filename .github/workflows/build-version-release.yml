@@ -1,23 +1,23 @@
-name: " 🚀 Publish: 1. Create Version Release"
+name: ' 🚀 Publish: 1. Create Version Release'
 
 on:
   workflow_dispatch:
     inputs:
       bump:
-        description: "Version Bump"
+        description: 'Version Bump'
         type: choice
         options:
-          - "patch"
-          - "minor"
-          - "major"
-          - "auto"
-        default: "auto"
+          - 'patch'
+          - 'minor'
+          - 'major'
+          - 'auto'
+        default: 'auto'
         required: true
       prerelease:
         type: boolean
         description: Prerelease
       dry_run:
-        description: "Dry Run"
+        description: 'Dry Run'
         type: boolean
         default: true
 
@@ -73,7 +73,7 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 18
-          registry-url: "https://registry.npmjs.org"
+          registry-url: 'https://registry.npmjs.org'
           cache: pnpm
 
       - name: Version

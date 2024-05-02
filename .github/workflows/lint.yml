@@ -3,14 +3,14 @@ on:
   workflow_dispatch:
   pull_request:
     paths-ignore:
-      - "docs/**"
-      - "website/**"
+      - 'docs/**'
+      - 'website/**'
   push:
     branches:
       - main
     paths-ignore:
-      - "docs/**"
-      - "website/**"
+      - 'docs/**'
+      - 'website/**'
 
 permissions:
   contents: read
@@ -35,7 +35,7 @@ jobs:
         with:
           body: |
             # Fix Lint Issues
-          commit-message: "ci: Fix Lint -- Workflow Bot"
+          commit-message: 'ci: Fix Lint -- Workflow Bot'
           branch: update-fix-lint
           title: >-
             ci: Fix Lint -- Workflow Bot

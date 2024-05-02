@@ -4,13 +4,13 @@ inputs:
   node-version:
     required: false
     description: The version of Node to use.
-    default: "18.x"
+    default: '18.x'
   shell:
     required: false
     description: Shell to use, defaults to (bash || powershell)
 
 runs:
-  using: "composite"
+  using: 'composite'
   steps:
     - name: Show inputs
       env:

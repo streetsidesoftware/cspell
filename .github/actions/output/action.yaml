@@ -13,7 +13,7 @@ outputs:
     description: The value that was input.
     value: ${{ inputs.value }}
 runs:
-  using: "composite"
+  using: 'composite'
   steps:
     - name: Show
       if: inputs.show

@@ -5,7 +5,7 @@ on:
     branches:
       - main
     paths:
-      - "packages/cspell-types/**/*.ts"
+      - 'packages/cspell-types/**/*.ts'
   workflow_dispatch:
 
 permissions:
@@ -16,7 +16,7 @@ jobs:
     if: github.repository_owner == 'streetsidesoftware'
     runs-on: ubuntu-latest
     env:
-      NEW_BRANCH: "update-docs"
+      NEW_BRANCH: 'update-docs'
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -31,7 +31,7 @@ jobs:
       - name: PR
         uses: ./.github/actions/pr
         with:
-          commit-message: "ci: Workflow Bot -- Build Docs"
+          commit-message: 'ci: Workflow Bot -- Build Docs'
           branch: ${{ env.NEW_BRANCH }}
           app_id: ${{ secrets.AUTOMATION_APP_ID }}
           app_private_key: ${{ secrets.AUTOMATION_PRIVATE_KEY }}

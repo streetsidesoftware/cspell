@@ -2,28 +2,28 @@ name: Coverage
 on:
   pull_request:
     paths:
-      - "/*.js"
-      - "*.ts"
-      - "*-lock.yaml"
-      - "package.json"
-      - "packages/**/*-lock.yaml"
-      - "packages/**/*.js"
-      - "packages/**/*.ts"
-      - "packages/**/package.json"
-      - ".github/workflows/coverage.yml"
-      - "!docs/**"
-      - "!website/**"
+      - '/*.js'
+      - '*.ts'
+      - '*-lock.yaml'
+      - 'package.json'
+      - 'packages/**/*-lock.yaml'
+      - 'packages/**/*.js'
+      - 'packages/**/*.ts'
+      - 'packages/**/package.json'
+      - '.github/workflows/coverage.yml'
+      - '!docs/**'
+      - '!website/**'
   push:
     branches:
       - main
     paths:
-      - "**/package.json"
-      - "**/*-lock.yaml"
-      - "**/*.ts"
-      - "**/*.js"
-      - ".github/workflows/coverage.yml"
-      - "!docs/**"
-      - "!website/**"
+      - '**/package.json'
+      - '**/*-lock.yaml'
+      - '**/*.ts'
+      - '**/*.js'
+      - '.github/workflows/coverage.yml'
+      - '!docs/**'
+      - '!website/**'
 
 permissions:
   contents: read
@@ -52,5 +52,5 @@ jobs:
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@5ecb98a3c6b747ed38dc09f787459979aebb39be # v4.3.1
         with:
-          directory: "."
+          directory: '.'
           files: ./lcov.info

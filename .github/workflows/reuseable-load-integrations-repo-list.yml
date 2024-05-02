@@ -28,8 +28,8 @@ permissions:
 
 env:
   RUNS_ON: ubuntu-latest
-  NODE_VERSION: "18.x"
-  NPM_VERSION: "9"
+  NODE_VERSION: '18.x'
+  NPM_VERSION: '9'
 
 jobs:
   load:
@@ -62,7 +62,7 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: ${{ env.NODE_VERSION }}
-          cache: "pnpm"
+          cache: 'pnpm'
 
       - run: pnpm -v
 

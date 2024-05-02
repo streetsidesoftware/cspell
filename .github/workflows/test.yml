@@ -1,36 +1,36 @@
-name: " 🧪 Test"
+name: ' 🧪 Test'
 on:
   workflow_dispatch:
   pull_request:
     paths:
-      - ".github/workflows/test.yml"
-      - "*-lock.yaml"
-      - "package.json"
-      - "packages/**/*.cjs"
-      - "packages/**/*.cts"
-      - "packages/**/*.js"
-      - "packages/**/*.mjs"
-      - "packages/**/*.mts"
-      - "packages/**/*.ts"
-      - "packages/**/package.json"
-      - "packages/**/tsconfig.json"
-      - "test-packages/**/*.cjs"
-      - "test-packages/**/*.cts"
-      - "test-packages/**/*.js"
-      - "test-packages/**/*.mjs"
-      - "test-packages/**/*.mts"
-      - "test-packages/**/*.ts"
-      - "test-packages/**/package.json"
-      - "test-packages/**/tsconfig.json"
-      - "test-fixtures/**"
-      - "tsconfig*.json"
-      - "!docs/**"
-      - "!website/**"
+      - '.github/workflows/test.yml'
+      - '*-lock.yaml'
+      - 'package.json'
+      - 'packages/**/*.cjs'
+      - 'packages/**/*.cts'
+      - 'packages/**/*.js'
+      - 'packages/**/*.mjs'
+      - 'packages/**/*.mts'
+      - 'packages/**/*.ts'
+      - 'packages/**/package.json'
+      - 'packages/**/tsconfig.json'
+      - 'test-packages/**/*.cjs'
+      - 'test-packages/**/*.cts'
+      - 'test-packages/**/*.js'
+      - 'test-packages/**/*.mjs'
+      - 'test-packages/**/*.mts'
+      - 'test-packages/**/*.ts'
+      - 'test-packages/**/package.json'
+      - 'test-packages/**/tsconfig.json'
+      - 'test-fixtures/**'
+      - 'tsconfig*.json'
+      - '!docs/**'
+      - '!website/**'
   push:
     branches:
       - main
     paths-ignore:
-      - "docs/**"
+      - 'docs/**'
 
 permissions:
   contents: read
@@ -131,11 +131,11 @@ jobs:
 
         use_cspell_cache:
           - true
-          - ""
+          - ''
 
         include:
           - os: windows-latest
-            use_cspell_cache: ""
+            use_cspell_cache: ''
             node-version: 18.x
           # - os: macos-latest
           #   use_cspell_cache: ""
