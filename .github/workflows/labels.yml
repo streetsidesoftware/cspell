@@ -2,6 +2,7 @@ name: Labels
 
 on:
   pull_request:
+    types: [opened, reopened, labeled, edited, synchronize]
     branches:
       - main
 
@@ -13,6 +14,6 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Remove label 'fix'
-      run: |
-        gh pr edit ${{ github.event.number }} --remove-label fix
+      - name: Remove label 'fix'
+        run: |
+          gh pr edit ${{ github.event.number }} --remove-label fix
