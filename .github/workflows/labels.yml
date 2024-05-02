@@ -3,8 +3,6 @@ name: Labels
 on:
   pull_request:
     types: [opened, reopened, labeled, edited, synchronize]
-    branches:
-      - main
 
 jobs:
   fix-labels-on-pr:
