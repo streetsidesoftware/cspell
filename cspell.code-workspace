@@ -2,7 +2,7 @@
     "folders": [
         {
             "name": "cspell-monorepo",
-            "path": ".",
+            "path": "."
         },
         { "path": "docs" },
         { "path": "packages/dynamic-import" },
@@ -29,7 +29,7 @@
         { "path": "packages/hunspell-reader" },
         { "path": "test-packages" },
         { "path": "rfc" },
-        { "path": "website" },
+        { "path": "website" }
     ],
     "launch": {
         "configurations": [
@@ -43,27 +43,23 @@
                 "args": ["run", "--test-timeout=600000", "${relativeFile}"],
                 "cwd": "${fileWorkspaceFolder}",
                 "smartStep": true,
-                "console": "integratedTerminal",
-            },
+                "console": "integratedTerminal"
+            }
         ],
-        "compounds": [],
+        "compounds": []
     },
     "settings": {
         "typescript.tsdk": "cspell-monorepo/node_modules/typescript/lib",
         "cSpell.customDictionaries": {
-            "workspace": true,
+            "workspace": true
         },
         "cSpell.enableFiletypes": ["shellscript"],
         "editor.defaultFormatter": "esbenp.prettier-vscode",
         "[javascript]": {
-            "editor.defaultFormatter": "esbenp.prettier-vscode",
-        },
+            "editor.defaultFormatter": "esbenp.prettier-vscode"
+        }
     },
     "extensions": {
-        "recommendations": [
-            "streetsidesoftware.code-spell-checker",
-            "dbaeumer.vscode-eslint",
-            "esbenp.prettier-vscode",
-        ],
-    },
+        "recommendations": ["streetsidesoftware.code-spell-checker", "dbaeumer.vscode-eslint", "esbenp.prettier-vscode"]
+    }
 }
