@@ -76,6 +76,12 @@ ruleTester.run('cspell', Rule.rules.spellchecker, {
                 ignoreWords: ['Guuide', 'Gallaxy', 'BADD', 'functionn', 'coool'],
             },
         }),
+        readFix('with-errors/auto-fix.ts', {
+            ignoreImports: false,
+            customWordListFile: resolveFix('with-errors/creepyData.dict.txt'),
+            // Load a configuration to ignore the forbidden words.
+            configFile: resolveFix('cspell.test.config.yaml'),
+        }),
         readFix('issue-4870/sample.js', {
             cspell: {
                 dictionaries: ['business-terms'],

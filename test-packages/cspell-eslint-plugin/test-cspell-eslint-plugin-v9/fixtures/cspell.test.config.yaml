@@ -1,0 +1,26 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/streetsidesoftware/cspell/main/cspell.schema.json
+$schema: https://raw.githubusercontent.com/streetsidesoftware/cspell/main/cspell.schema.json
+noConfigSearch: true
+ignorePaths:
+  - "*.{ts,js}"
+  - "cspell*.{json,yaml}"
+ignoreWords:
+  - quic
+  - tsbuildinfo
+  - uuug
+  - grrr
+  - Expresssions # Note this is a deliberate misspelling
+words:
+  - pnpm
+flagWords:
+  - blacklist->denylist
+  - whitelist->allowlist
+  - café->cafe
+  - bluelist->greenList
+  - Bluelist->GreenList
+dictionaryDefinitions:
+  - name: words
+    path: ../words.txt
+dictionaries:
+  - words

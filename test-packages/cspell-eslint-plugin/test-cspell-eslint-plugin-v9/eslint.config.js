@@ -11,7 +11,6 @@ const config = [
     ...tsESLint.configs.recommended,
     // cspellRecommended or cspellConfigs.recommended can be used interchangeably.
     cspellConfigs.recommended,
-
     {
         files: ['**/*.ts', '**/*.tsx'],
         ignores: ['**/*.d.ts', '**/*.map', '**/coverage/**', '**/dist/**', '**/node_modules/**'],
@@ -23,6 +22,17 @@ const config = [
         rules: {
             '@typescript-eslint/no-unused-vars': ['warn', { argsIgnorePattern: '^_', varsIgnorePattern: '^_' }],
             '@cspell/spellchecker': ['warn', { customWordListFile: 'words.txt', autoFix: true }],
+        },
+    },
+    {
+        files: ['**/importAlias.ts'],
+        rules: {
+            '@cspell/spellchecker': [
+                'error',
+                {
+                    configFile: `${new URL('fixtures/cspell.test.config.yaml', import.meta.url)}`,
+                },
+            ],
         },
     },
     {

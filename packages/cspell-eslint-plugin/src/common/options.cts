@@ -94,6 +94,12 @@ export interface Check {
      */
     checkComments?: boolean;
     /**
+     * Path to the cspell configuration file.
+     * Relative paths, will be relative to the current working directory.
+     * @since 8.8.0
+     */
+    configFile?: string;
+    /**
      * CSpell options to pass to the spell checker.
      */
     cspell?: CSpellOptions;

@@ -6,6 +6,7 @@ export const defaultCheckOptions: Required<Check> = {
     checkJSXText: true,
     checkStrings: true,
     checkStringTemplates: true,
+    configFile: '',
     cspell: {
         words: [],
         flagWords: [],

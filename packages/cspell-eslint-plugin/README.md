@@ -141,6 +141,12 @@ interface Options {
    */
   checkComments?: boolean;
   /**
+   * Path to the cspell configuration file.
+   * Relative paths, will be relative to the current working directory.
+   * @since 8.8.0
+   */
+  configFile?: string;
+  /**
    * Some CSpell Settings
    */
   cspell?: {
@@ -244,6 +250,22 @@ export default [
     "@cspell/spellchecker": ["warn", { "checkComments": false, "autoFix": true }]
   }
 }
+```
+
+## `configFile` - Using a CSpell Configuration File
+
+**`eslint.config.mjs`**
+
+```js
+  rules: {
+      '@cspell/spellchecker': [
+          'error',
+          {
+              //
+              configFile: new URL('./cspell.config.yaml', import.meta.url).toString(),
+          },
+      ],
+  },
 ```
 
 ## `autoFix`

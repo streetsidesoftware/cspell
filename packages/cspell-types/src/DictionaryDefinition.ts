@@ -113,7 +113,7 @@ export interface DictionaryDefinitionInlineIgnoreWords
 
 /**
  * Inline Dictionary Definitions
- * @version 6.23.0
+ * @since 6.23.0
  */
 export type DictionaryDefinitionInline =
     | DictionaryDefinitionInlineWords

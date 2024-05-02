@@ -372,6 +372,18 @@ function calcInitialSettings(options: WorkerOptions): CSpellSettings {
         flagWords: cspell?.flagWords || [],
     };
 
+    if (options.configFile) {
+        const optionCspellImport = options.cspell?.import;
+        const importConfig =
+            typeof optionCspellImport === 'string'
+                ? [optionCspellImport]
+                : Array.isArray(optionCspellImport)
+                  ? optionCspellImport
+                  : [];
+        importConfig.push(options.configFile);
+        settings.import = importConfig;
+    }
+
     if (customWordListFile) {
         const filePath = isCustomWordListFile(customWordListFile) ? customWordListFile.path : customWordListFile;
         const { dictionaries = [], dictionaryDefinitions = [] } = settings;
