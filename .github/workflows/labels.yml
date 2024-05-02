@@ -2,7 +2,7 @@ name: Labels
 
 on:
   pull_request:
-    types: [opened, reopened, labeled, edited, synchronize]
+    types: [opened, reopened, labeled, edited, synchronize, unlabeled, closed]
 
 jobs:
   fix-labels-on-pr:
@@ -13,5 +13,7 @@ jobs:
 
     steps:
       - name: Remove label 'fix'
+        env:
+          GH_TOKEN: ${{ github.token }}
         run: |
           gh pr edit ${{ github.event.number }} --remove-label fix
