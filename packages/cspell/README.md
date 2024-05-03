@@ -138,7 +138,7 @@ Options:
                                checked and the configuration.
   --locale <locale>            Set language locales. i.e. "en,fr" for English
                                and French, or "en-GB" for British English.
-  --language-id <language>     Force programming language for unknown
+  --language-id <file-type>    Force programming language for unknown
                                extensions. i.e. "php" or "scala"
   --words-only                 Only output the words not found in the
                                dictionaries.
@@ -181,7 +181,6 @@ Options:
   --gitignore-root <path>      Prevent searching for .gitignore files past
                                root.
   --validate-directives        Validate in-document CSpell directives.
-  --no-validate-directives     Do not validate in-document CSpell directives.
   --no-color                   Turn off color.
   --color                      Force color.
   --no-default-configuration   Do not load the default configuration and
