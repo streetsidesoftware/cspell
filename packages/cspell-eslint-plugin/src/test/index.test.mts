@@ -106,6 +106,17 @@ ruleTester.run('cspell', Rule.rules.spellchecker, {
         ]),
         readInvalid(
             'with-errors/sampleESM.mjs',
+            [
+                'Unknown word: "Gallaxy"',
+                'Unknown word: "BADD"',
+                'Unknown word: "functionn"',
+                'Unknown word: "coool"',
+                'Unknown word: "coool"',
+            ],
+            { cspell: { ignoreRegExpList: ['/\\bGuuide\\b/g'] } },
+        ),
+        readInvalid(
+            'with-errors/sampleESM.mjs',
             ['Unknown word: "Guuide"', 'Unknown word: "Gallaxy"', 'Unknown word: "functionn"', 'Unknown word: "coool"'],
             { checkIdentifiers: false },
         ),

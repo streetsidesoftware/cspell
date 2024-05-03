@@ -1,8 +1,11 @@
-ignorePaths:
+ignorePaths: # glob patterns to ignore
   - cspell*.{yaml,json}
-ignoreWords:
+  - node_modules
+words: # words to add to dictionary
+  - MyCompanyName
+ignoreWords: # words to ignore, but not suggest
   - todos
-flagWords:
+flagWords: # words to flag as forbidden with suggestions.
   - blacklist->denylist
   - whitelist->allowlist
   - café->cafe

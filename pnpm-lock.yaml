@@ -529,8 +529,8 @@ importers:
         specifier: ^10.4.0
         version: 10.4.0
       ts-json-schema-generator:
-        specifier: ^1.5.1
-        version: 1.5.1
+        specifier: ^2.1.1
+        version: 2.1.1
       typescript:
         specifier: ^5.4.5
         version: 5.4.5
@@ -742,8 +742,8 @@ importers:
         specifier: ^2.0.8
         version: 2.0.8
       ts-json-schema-generator:
-        specifier: ^1.5.1
-        version: 1.5.1
+        specifier: ^2.1.1
+        version: 2.1.1
 
   packages/cspell-trie:
     dependencies:
@@ -826,8 +826,8 @@ importers:
         specifier: ^2.4.3
         version: 2.4.3
       ts-json-schema-generator:
-        specifier: ^1.5.1
-        version: 1.5.1
+        specifier: ^2.1.1
+        version: 2.1.1
     devDependencies:
       esbuild:
         specifier: ^0.20.2
@@ -9704,6 +9704,7 @@ packages:
       inherits: 2.0.4
       minimatch: 5.0.1
       once: 1.4.0
+    dev: true
 
   /global-directory@4.0.1:
     resolution: {integrity: sha512-wHTUcDUoZ1H5/0iVqEudYW4/kAlN5cZ3j/bXn0Dpbizl9iaUVeWSHqiOjsgk6OW2bkLclbBjzewBz6weQ1zA2Q==}
@@ -12450,6 +12451,7 @@ packages:
     engines: {node: '>=10'}
     dependencies:
       brace-expansion: 2.0.1
+    dev: true
 
   /minimatch@5.1.6:
     resolution: {integrity: sha512-lKwV/1brpG6mBUFHtb7NUmtABCb2WZZmm2wNiOA5hAb8VdCS4B3dtMWyvcoViccwAW/COERjXLt0zP1zXUN26g==}
@@ -15636,14 +15638,14 @@ packages:
       yargs-parser: 21.1.1
     dev: true
 
-  /ts-json-schema-generator@1.5.1:
-    resolution: {integrity: sha512-apX5qG2+NA66j7b4AJm8q/DpdTeOsjfh7A3LpKsUiil0FepkNwtN28zYgjrsiiya2/OPhsr/PSjX5FUYg79rCg==}
-    engines: {node: '>=10.0.0'}
+  /ts-json-schema-generator@2.1.1:
+    resolution: {integrity: sha512-ha5/w3A2APOOn9ET2CfunEXdVOnKmjISTGcxhCkDszmrsRWFfG5F+re5U5onLXo665sZ4BuE2g5jZAjC+CUcgA==}
+    engines: {node: '>=18.0.0'}
     hasBin: true
     dependencies:
       '@types/json-schema': 7.0.15
       commander: 12.0.0
-      glob: 8.1.0
+      glob: 10.3.12
       json5: 2.2.3
       normalize-path: 3.0.0
       safe-stable-stringify: 2.4.3
