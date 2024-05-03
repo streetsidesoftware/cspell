@@ -14,10 +14,14 @@ describe('stat', () => {
         url                                                                                 | expected
         ${'https://raw.githubusercontent.com/streetsidesoftware/cspell/main/tsconfig.json'} | ${oc({ eTag: sc('W/') })}
         ${__filename}                                                                       | ${oc({ mtimeMs: expect.any(Number) })}
-    `('getStat $url', async ({ url, expected }) => {
-        const r = await getStat(url);
-        expect(r).toEqual(expected);
-    });
+    `(
+        'getStat $url',
+        async ({ url, expected }) => {
+            const r = await getStat(url);
+            expect(r).toEqual(expected);
+        },
+        timeout,
+    );
 
     test.each`
         url                                   | expected
@@ -45,8 +49,12 @@ describe('stat', () => {
         url                                | expected
         ${'https://www.google.com/404'}    | ${oc({ code: 'ENOENT' })}
         ${join(__dirname, 'not-found.nf')} | ${oc({ code: 'ENOENT' })}
-    `('getStatSync with error $url', async ({ url, expected }) => {
-        const r = await getStatSync(url);
-        expect(r).toEqual(expected);
-    });
+    `(
+        'getStatSync with error $url',
+        async ({ url, expected }) => {
+            const r = await getStatSync(url);
+            expect(r).toEqual(expected);
+        },
+        timeout,
+    );
 });

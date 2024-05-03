@@ -5,7 +5,7 @@ import * as path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 import safeStableStringify from 'safe-stable-stringify';
-import tsj from 'ts-json-schema-generator';
+import { createGenerator } from 'ts-json-schema-generator';
 
 const importDir = new URL('.', import.meta.url);
 const rootUrl = new URL('..', importDir);
@@ -54,7 +54,7 @@ async function run() {
         skipTypeCheck: true,
     };
 
-    const schema = tsj.createGenerator(config).createSchema(config.type);
+    const schema = createGenerator(config).createSchema(config.type);
     schema.allowTrailingCommas = true;
     const stringify = config.sortProps ? safeStableStringify : JSON.stringify;
     const schemaString = stringify(schema, undefined, 2);

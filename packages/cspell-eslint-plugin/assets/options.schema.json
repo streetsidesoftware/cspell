@@ -49,8 +49,19 @@
         "dictionaries": {
           "description": "Optional list of dictionaries to use. Each entry should match the name of the dictionary.\n\nTo remove a dictionary from the list, add `!` before the name.\n\nFor example, `!typescript` will turn off the dictionary with the name `typescript`.\n\nSee the [Dictionaries](https://cspell.org/docs/dictionaries/) and [Custom Dictionaries](https://cspell.org/docs/dictionaries-custom/) for more details.",
           "items": {
-            "description": "Reference to a dictionary by name. One of:\n-  {@link  DictionaryRef } \n-  {@link  DictionaryNegRef }",
-            "type": "string"
+            "anyOf": [
+              {
+                "description": "This a reference to a named dictionary. It is expected to match the name of a dictionary.",
+                "pattern": "^(?=[^!*,;{}[\\]~\\n]+$)(?=(.*\\w)).+$",
+                "type": "string"
+              },
+              {
+                "description": "This a negative reference to a named dictionary.\n\nIt is used to exclude or include a dictionary by name.\n\nThe reference starts with 1 or more `!`.\n- `!<dictionary_name>` - Used to exclude the dictionary matching `<dictionary_name>`.\n- `!!<dictionary_name>` - Used to re-include a dictionary matching `<dictionary_name>`.    Overrides `!<dictionary_name>`.\n- `!!!<dictionary_name>` - Used to exclude a dictionary matching `<dictionary_name>`.    Overrides `!!<dictionary_name>`.",
+                "pattern": "^(?=!+[^!*,;{}[\\]~\\n]+$)(?=(.*\\w)).+$",
+                "type": "string"
+              }
+            ],
+            "description": "Reference to a dictionary by name. One of:\n-  {@link  DictionaryRef } \n-  {@link  DictionaryNegRef }"
           },
           "type": "array"
         },
@@ -126,8 +137,49 @@
         "ignoreRegExpList": {
           "description": "List of regular expression patterns or pattern names to exclude from spell checking.\n\nExample: `[\"href\"]` - to exclude html href pattern.\n\nRegular expressions use JavaScript regular expression syntax.\n\nExample: to ignore ALL-CAPS words\n\nJSON ```json \"ignoreRegExpList\": [\"/\\\\b[A-Z]+\\\\b/g\"] ```\n\nYAML ```yaml ignoreRegExpList:   - >-    /\\b[A-Z]+\\b/g ```\n\nBy default, several patterns are excluded. See [Configuration](https://cspell.org/configuration/patterns) for more details.\n\nWhile you can create your own patterns, you can also leverage several patterns that are [built-in to CSpell](https://cspell.org/types/cspell-types/types/PredefinedPatterns.html).",
           "items": {
-            "description": "A PatternRef is a Pattern or PatternId.",
-            "type": "string"
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "description": "This matches the name in a pattern definition.",
+                "type": "string"
+              },
+              {
+                "enum": [
+                  "Base64",
+                  "Base64MultiLine",
+                  "Base64SingleLine",
+                  "CStyleComment",
+                  "CStyleHexValue",
+                  "CSSHexValue",
+                  "CommitHash",
+                  "CommitHashLink",
+                  "Email",
+                  "EscapeCharacters",
+                  "HexValues",
+                  "href",
+                  "PhpHereDoc",
+                  "PublicKey",
+                  "RsaCert",
+                  "SshRsa",
+                  "SHA",
+                  "HashStrings",
+                  "SpellCheckerDisable",
+                  "SpellCheckerDisableBlock",
+                  "SpellCheckerDisableLine",
+                  "SpellCheckerDisableNext",
+                  "SpellCheckerIgnoreInDocSetting",
+                  "string",
+                  "UnicodeRef",
+                  "Urls",
+                  "UUID",
+                  "Everything"
+                ],
+                "type": "string"
+              }
+            ],
+            "description": "A PatternRef is a Pattern or PatternId."
           },
           "type": "array"
         },
@@ -157,8 +209,49 @@
         "includeRegExpList": {
           "description": "List of regular expression patterns or defined pattern names to match for spell checking.\n\nIf this property is defined, only text matching the included patterns will be checked.\n\nWhile you can create your own patterns, you can also leverage several patterns that are [built-in to CSpell](https://cspell.org/types/cspell-types/types/PredefinedPatterns.html).",
           "items": {
-            "description": "A PatternRef is a Pattern or PatternId.",
-            "type": "string"
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "description": "This matches the name in a pattern definition.",
+                "type": "string"
+              },
+              {
+                "enum": [
+                  "Base64",
+                  "Base64MultiLine",
+                  "Base64SingleLine",
+                  "CStyleComment",
+                  "CStyleHexValue",
+                  "CSSHexValue",
+                  "CommitHash",
+                  "CommitHashLink",
+                  "Email",
+                  "EscapeCharacters",
+                  "HexValues",
+                  "href",
+                  "PhpHereDoc",
+                  "PublicKey",
+                  "RsaCert",
+                  "SshRsa",
+                  "SHA",
+                  "HashStrings",
+                  "SpellCheckerDisable",
+                  "SpellCheckerDisableBlock",
+                  "SpellCheckerDisableLine",
+                  "SpellCheckerDisableNext",
+                  "SpellCheckerIgnoreInDocSetting",
+                  "string",
+                  "UnicodeRef",
+                  "Urls",
+                  "UUID",
+                  "Everything"
+                ],
+                "type": "string"
+              }
+            ],
+            "description": "A PatternRef is a Pattern or PatternId."
           },
           "type": "array"
         },
