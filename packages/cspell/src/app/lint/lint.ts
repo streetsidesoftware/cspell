@@ -273,6 +273,7 @@ export async function runLint(cfg: LintRequest): Promise<RunResult> {
                     processed: result?.processed,
                     numErrors: result?.issues.length || result?.errors,
                     cached: result?.cached,
+                    perf: result?.perf,
                 }),
             );
 

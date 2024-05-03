@@ -12,7 +12,7 @@ import type {
 } from '@cspell/cspell-types';
 import chalk from 'chalk';
 import chalkTemplate from 'chalk-template';
-import type { ImportError, SpellingDictionaryLoadError } from 'cspell-lib';
+import type { ImportError, SpellCheckFilePerf, SpellingDictionaryLoadError } from 'cspell-lib';
 import { isSpellingDictionaryLoadError } from 'cspell-lib';
 import { URI } from 'vscode-uri';
 
@@ -119,6 +119,7 @@ export interface ReporterOptions
         | 'relative'
         | 'root'
         | 'showContext'
+        | 'showPerfSummary'
         | 'showSuggestions'
         | 'silent'
         | 'summary'
@@ -128,7 +129,18 @@ export interface ReporterOptions
     fileGlobs: string[];
 }
 
+interface ProgressFileCompleteWithPerf extends ProgressFileComplete {
+    perf?: SpellCheckFilePerf;
+}
+
 export function getReporter(options: ReporterOptions, config?: ReporterConfiguration): FinalizedReporter {
+    const perfStats = {
+        filesProcessed: 0,
+        filesSkipped: 0,
+        filesCached: 0,
+        elapsedTimeMs: 0,
+        perf: Object.create(null) as SpellCheckFilePerf,
+    };
     const uniqueIssues = config?.unique || false;
     const issueTemplate = options.wordsOnly
         ? templateIssueWordsOnly
@@ -143,7 +155,7 @@ export function getReporter(options: ReporterOptions, config?: ReporterConfigura
               : options.showSuggestions === false
                 ? templateIssueNoFix
                 : templateIssue;
-    const { fileGlobs, silent, summary, issues, progress, verbose, debug } = options;
+    const { fileGlobs, silent, summary, issues, progress: showProgress, verbose, debug } = options;
 
     const emitters: InfoEmitter = {
         Debug: !silent && debug ? (s) => console.info(chalk.cyan(s)) : nullEmitter,
@@ -168,7 +180,7 @@ export function getReporter(options: ReporterOptions, config?: ReporterConfigura
         };
     }
 
-    const issuesCollection: string[] | undefined = progress ? [] : undefined;
+    const issuesCollection: string[] | undefined = showProgress ? [] : undefined;
     const errorCollection: string[] | undefined = [];
 
     function errorEmitter(message: string, error: Error | SpellingDictionaryLoadError | ImportError) {
@@ -209,7 +221,52 @@ export function getReporter(options: ReporterOptions, config?: ReporterConfigura
             console.error('Errors:');
             errorCollection.forEach((error) => console.error(error));
         }
+
+        if (options.showPerfSummary) {
+            console.error('-------------------------------------------');
+            console.error('Performance Summary:');
+            console.error(`  Files Processed: ${perfStats.filesProcessed.toString().padStart(6)}`);
+            console.error(`  Files Skipped  : ${perfStats.filesSkipped.toString().padStart(6)}`);
+            console.error(`  Files Cached   : ${perfStats.filesCached.toString().padStart(6)}`);
+            console.error(`  Processing Time: ${perfStats.elapsedTimeMs.toFixed(2).padStart(9)}ms`);
+            console.error('Stats:');
+            const stats = Object.entries(perfStats.perf)
+                .filter((p): p is [string, number] => !!p[1])
+                .map(([key, value]) => [key, value.toFixed(2)] as const);
+            const padName = Math.max(...stats.map((s) => s[0].length));
+            const padValue = Math.max(...stats.map((s) => s[1].length));
+            stats.sort((a, b) => a[0].localeCompare(b[0]));
+            for (const [key, value] of stats) {
+                value && console.error(`  ${key.padEnd(padName)}: ${value.padStart(padValue)}ms`);
+            }
+        }
     };
+
+    function collectPerfStats(p: ProgressFileCompleteWithPerf) {
+        if (p.cached) {
+            perfStats.filesCached++;
+            return;
+        }
+        perfStats.filesProcessed += p.processed ? 1 : 0;
+        perfStats.filesSkipped += !p.processed ? 1 : 0;
+        perfStats.elapsedTimeMs += p.elapsedTimeMs || 0;
+
+        if (!p.perf) return;
+        for (const [key, value] of Object.entries(p.perf)) {
+            if (typeof value === 'number') {
+                perfStats.perf[key] = (perfStats.perf[key] || 0) + value;
+            }
+        }
+    }
+
+    function progress(p: ProgressItem) {
+        if (!silent && showProgress) {
+            reportProgress(p, fsPathRoot);
+        }
+        if (p.type === 'ProgressFileComplete') {
+            collectPerfStats(p);
+        }
+    }
 
     return {
         issue: relativeIssue(
@@ -218,7 +275,7 @@ export function getReporter(options: ReporterOptions, config?: ReporterConfigura
         error: silent ? nullEmitter : errorEmitter,
         info: infoEmitter,
         debug: emitters.Debug,
-        progress: !silent && progress ? (p) => reportProgress(p, fsPathRoot) : nullEmitter,
+        progress,
         result: !silent && summary ? resultEmitter : nullEmitter,
     };
 }

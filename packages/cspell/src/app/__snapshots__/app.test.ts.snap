@@ -351,6 +351,36 @@ error	CSpell: Files checked: 0, Issues found: 0 in 0 files with 1 error."
 
 exports[`Validate cli > app 'cspell-import-missing.json' Expect Error: [Function CheckFailed] 3`] = `""`;
 
+exports[`Validate cli > app 'current_file --show-perf-summary' Expect Error: undefined 1`] = `[]`;
+
+exports[`Validate cli > app 'current_file --show-perf-summary' Expect Error: undefined 2`] = `
+"error	 0.00ms
+error	CSpell: Files checked: 1, Issues found: 0 in 0 files.
+error	-------------------------------------------
+error	Performance Summary:
+error	  Files Processed:      1
+error	  Files Skipped  :      0
+error	  Files Cached   :      0
+error	  Processing Time: 0.00ms
+error	Stats:
+error	  __determineTextDocumentSettings: 0.00ms
+error	  __finalizeSettings             : 0.00ms
+error	  __getDictionaryInternal        : 0.00ms
+error	  __GlobMatcher                  : 0.00ms
+error	  __shouldCheck                  : 0.00ms
+error	  _checkDocument                 : 0.00ms
+error	  _prepTime                      : 0.00ms
+error	  checkTimeMs                    : 0.00ms
+error	  loadTimeMs                     : 0.00ms
+error	  prepareTimeMs                  : 0.00ms
+error	  totalTimeMs                    : 0.00ms"
+`;
+
+exports[`Validate cli > app 'current_file --show-perf-summary' Expect Error: undefined 3`] = `
+"
+1/1 [90m./src/app/app.test.ts[39m"
+`;
+
 exports[`Validate cli > app 'current_file --verbose' Expect Error: undefined 1`] = `[]`;
 
 exports[`Validate cli > app 'current_file --verbose' Expect Error: undefined 2`] = `
@@ -500,19 +530,7 @@ exports[`Validate cli > app 'link remove' 1`] = `""`;
 
 exports[`Validate cli > app 'link' 1`] = `""`;
 
-exports[`Validate cli > app 'must find force no error' Expect Error: undefined 1`] = `[]`;
-
-exports[`Validate cli > app 'must find force no error' Expect Error: undefined 2`] = `"error	CSpell: Files checked: 0, Issues found: 0 in 0 files."`;
-
-exports[`Validate cli > app 'must find force no error' Expect Error: undefined 3`] = `""`;
-
-exports[`Validate cli > app 'must find with error' Expect Error: [Function CheckFailed] 1`] = `[]`;
-
-exports[`Validate cli > app 'must find with error' Expect Error: [Function CheckFailed] 2`] = `"error	CSpell: Files checked: 0, Issues found: 0 in 0 files."`;
-
-exports[`Validate cli > app 'must find with error' Expect Error: [Function CheckFailed] 3`] = `""`;
-
-exports[`Validate cli > app 'no-args' Expect Error: 'outputHelp' 1`] = `
+exports[`Validate cli > app 'lint --help --verbose' Expect Error: 'outputHelp' 1`] = `
 [
   "Usage: cspell lint [options] [globs...] [file://<path> ...] [stdin[://<path>]]",
   "",
@@ -542,7 +560,7 @@ exports[`Validate cli > app 'no-args' Expect Error: 'outputHelp' 1`] = `
   "                               checked and the configuration.",
   "  --locale <locale>            Set language locales. i.e. "en,fr" for English",
   "                               and French, or "en-GB" for British English.",
-  "  --language-id <language>     Force programming language for unknown",
+  "  --language-id <file-type>    Force programming language for unknown",
   "                               extensions. i.e. "php" or "scala"",
   "  --words-only                 Only output the words not found in the",
   "                               dictionaries.",
@@ -585,7 +603,266 @@ exports[`Validate cli > app 'no-args' Expect Error: 'outputHelp' 1`] = `
   "  --gitignore-root <path>      Prevent searching for .gitignore files past",
   "                               root.",
   "  --validate-directives        Validate in-document CSpell directives.",
+  "  --no-color                   Turn off color.",
+  "  --color                      Force color.",
+  "  --no-default-configuration   Do not load the default configuration and",
+  "                               dictionaries.",
+  "  --debug                      Output information useful for debugging",
+  "                               cspell.json files.",
+  "  --reporter <module|path>     Specify one or more reporters to use.",
+  "  -h, --help                   display help for command",
+  "",
+  "Hidden Options:",
+  "  --languageId <file-type>     Alias of "--language-id". Force programming",
+  "                               language for unknown extensions. i.e. "php" or",
+  "                               "scala"",
+  "  --wordsOnly                  Only output the words not found in the",
+  "                               dictionaries.",
+  "  --files [file...]            Alias of "--file". Files to spell check.",
+  "  --no-fail-fast               Process all files even if there is an error.",
+  "  --relative                   Issues are displayed relative to the root.",
+  "  --must-find-files            Error if no files are found.",
+  "  --legacy                     Legacy output",
+  "  --local <local>              Deprecated -- Use: --locale",
   "  --no-validate-directives     Do not validate in-document CSpell directives.",
+  "  --default-configuration      Load the default configuration and dictionaries.",
+  "  --skip-validation            Collect and process documents, but do not spell",
+  "                               check.",
+  "  --issues-summary-report      Output a summary of issues found.",
+  "  --show-perf-summary          Output a performance summary report.",
+  "  -f,--flag <flag:value>       Declare an execution flag value",
+  "",
+  "More Examples:",
+  "",
+  "    cspell "**/*.js" --reporter @cspell/cspell-json-reporter",
+  "        This will spell check all ".js" files recursively and use",
+  "        "@cspell/cspell-json-reporter".",
+  "",
+  "    cspell . --reporter default",
+  "        This will force the default reporter to be used overriding",
+  "        any reporters defined in the configuration.",
+  "",
+  "    cspell . --reporter ./<path>/reporter.cjs",
+  "        Use a custom reporter. See API for details.",
+  "",
+  "    cspell "*.md" --exclude CHANGELOG.md --files README.md CHANGELOG.md",
+  "        Spell check only check "README.md" but NOT "CHANGELOG.md".",
+  "",
+  "    cspell "/*.md" --no-must-find-files --files $FILES",
+  "        Only spell check the "/*.md" files in $FILES,",
+  "        where $FILES is a shell variable that contains the list of files.",
+  "",
+  "References:",
+  "    https://cspell.org",
+  "    https://github.com/streetsidesoftware/cspell",
+  "",
+  "",
+]
+`;
+
+exports[`Validate cli > app 'lint --help --verbose' Expect Error: 'outputHelp' 2`] = `""`;
+
+exports[`Validate cli > app 'lint --help --verbose' Expect Error: 'outputHelp' 3`] = `""`;
+
+exports[`Validate cli > app 'lint --help' Expect Error: 'outputHelp' 1`] = `
+[
+  "Usage: cspell lint [options] [globs...] [file://<path> ...] [stdin[://<path>]]",
+  "",
+  "Patterns:",
+  " - [globs...]            Glob Patterns",
+  " - [stdin]               Read from "stdin" assume text file.",
+  " - [stdin://<path>]      Read from "stdin", use <path> for file type and config.",
+  " - [file://<path>]       Check the file at <path>",
+  "",
+  "Examples:",
+  "    cspell .                        Recursively check all files.",
+  "    cspell lint .                   The same as "cspell ."",
+  "    cspell "*.js"                   Check all .js files in the current directory",
+  "    cspell "**/*.js"                Check all .js files recursively",
+  "    cspell "src/**/*.js"            Only check .js under src",
+  "    cspell "**/*.txt" "**/*.js"     Check both .js and .txt files.",
+  "    cspell "**/*.{txt,js,md}"       Check .txt, .js, and .md files.",
+  "    cat LICENSE | cspell stdin      Check stdin",
+  "    cspell stdin://docs/doc.md      Check stdin as if it was "./docs/doc.md"",
+  "",
+  "Check spelling",
+  "",
+  "Options:",
+  "  -c, --config <cspell.json>   Configuration file to use.  By default cspell",
+  "                               looks for cspell.json in the current directory.",
+  "  -v, --verbose                Display more information about the files being",
+  "                               checked and the configuration.",
+  "  --locale <locale>            Set language locales. i.e. "en,fr" for English",
+  "                               and French, or "en-GB" for British English.",
+  "  --language-id <file-type>    Force programming language for unknown",
+  "                               extensions. i.e. "php" or "scala"",
+  "  --words-only                 Only output the words not found in the",
+  "                               dictionaries.",
+  "  -u, --unique                 Only output the first instance of a word not",
+  "                               found in the dictionaries.",
+  "  -e, --exclude <glob>         Exclude files matching the glob pattern. This",
+  "                               option can be used multiple times to add",
+  "                               multiple globs.",
+  "  --file-list <path or stdin>  Specify a list of files to be spell checked. The",
+  "                               list is filtered against the glob file patterns.",
+  "                               Note: the format is 1 file path per line.",
+  "  --file [file...]             Specify files to spell check. They are filtered",
+  "                               by the [globs...].",
+  "  --no-issues                  Do not show the spelling errors.",
+  "  --no-progress                Turn off progress messages",
+  "  --no-summary                 Turn off summary message in console.",
+  "  -s, --silent                 Silent mode, suppress error messages.",
+  "  --no-exit-code               Do not return an exit code if issues are found.",
+  "  --quiet                      Only show spelling issues or errors.",
+  "  --fail-fast                  Exit after first file with an issue or error.",
+  "  -r, --root <root folder>     Root directory, defaults to current directory.",
+  "  --no-relative                Issues are displayed with absolute path instead",
+  "                               of relative to the root.",
+  "  --show-context               Show the surrounding text around an issue.",
+  "  --show-suggestions           Show spelling suggestions.",
+  "  --no-show-suggestions        Do not show spelling suggestions or fixes.",
+  "  --no-must-find-files         Do not error if no files are found.",
+  "  --cache                      Use cache to only check changed files.",
+  "  --no-cache                   Do not use cache.",
+  "  --cache-reset                Reset the cache file.",
+  "  --cache-strategy <strategy>  Strategy to use for detecting changed files.",
+  "                               (choices: "metadata", "content")",
+  "  --cache-location <path>      Path to the cache file or directory. (default:",
+  "                               ".cspellcache")",
+  "  --dot                        Include files and directories starting with \`.\`",
+  "                               (period) when matching globs.",
+  "  --gitignore                  Ignore files matching glob patterns found in",
+  "                               .gitignore files.",
+  "  --no-gitignore               Do NOT use .gitignore files.",
+  "  --gitignore-root <path>      Prevent searching for .gitignore files past",
+  "                               root.",
+  "  --validate-directives        Validate in-document CSpell directives.",
+  "  --no-color                   Turn off color.",
+  "  --color                      Force color.",
+  "  --no-default-configuration   Do not load the default configuration and",
+  "                               dictionaries.",
+  "  --debug                      Output information useful for debugging",
+  "                               cspell.json files.",
+  "  --reporter <module|path>     Specify one or more reporters to use.",
+  "  -h, --help                   display help for command",
+  "",
+  "More Examples:",
+  "",
+  "    cspell "**/*.js" --reporter @cspell/cspell-json-reporter",
+  "        This will spell check all ".js" files recursively and use",
+  "        "@cspell/cspell-json-reporter".",
+  "",
+  "    cspell . --reporter default",
+  "        This will force the default reporter to be used overriding",
+  "        any reporters defined in the configuration.",
+  "",
+  "    cspell . --reporter ./<path>/reporter.cjs",
+  "        Use a custom reporter. See API for details.",
+  "",
+  "    cspell "*.md" --exclude CHANGELOG.md --files README.md CHANGELOG.md",
+  "        Spell check only check "README.md" but NOT "CHANGELOG.md".",
+  "",
+  "    cspell "/*.md" --no-must-find-files --files $FILES",
+  "        Only spell check the "/*.md" files in $FILES,",
+  "        where $FILES is a shell variable that contains the list of files.",
+  "",
+  "References:",
+  "    https://cspell.org",
+  "    https://github.com/streetsidesoftware/cspell",
+  "",
+  "",
+]
+`;
+
+exports[`Validate cli > app 'lint --help' Expect Error: 'outputHelp' 2`] = `""`;
+
+exports[`Validate cli > app 'lint --help' Expect Error: 'outputHelp' 3`] = `""`;
+
+exports[`Validate cli > app 'must find force no error' Expect Error: undefined 1`] = `[]`;
+
+exports[`Validate cli > app 'must find force no error' Expect Error: undefined 2`] = `"error	CSpell: Files checked: 0, Issues found: 0 in 0 files."`;
+
+exports[`Validate cli > app 'must find force no error' Expect Error: undefined 3`] = `""`;
+
+exports[`Validate cli > app 'must find with error' Expect Error: [Function CheckFailed] 1`] = `[]`;
+
+exports[`Validate cli > app 'must find with error' Expect Error: [Function CheckFailed] 2`] = `"error	CSpell: Files checked: 0, Issues found: 0 in 0 files."`;
+
+exports[`Validate cli > app 'must find with error' Expect Error: [Function CheckFailed] 3`] = `""`;
+
+exports[`Validate cli > app 'no-args' Expect Error: 'outputHelp' 1`] = `
+[
+  "Usage: cspell lint [options] [globs...] [file://<path> ...] [stdin[://<path>]]",
+  "",
+  "Patterns:",
+  " - [globs...]            Glob Patterns",
+  " - [stdin]               Read from "stdin" assume text file.",
+  " - [stdin://<path>]      Read from "stdin", use <path> for file type and config.",
+  " - [file://<path>]       Check the file at <path>",
+  "",
+  "Examples:",
+  "    cspell .                        Recursively check all files.",
+  "    cspell lint .                   The same as "cspell ."",
+  "    cspell "*.js"                   Check all .js files in the current directory",
+  "    cspell "**/*.js"                Check all .js files recursively",
+  "    cspell "src/**/*.js"            Only check .js under src",
+  "    cspell "**/*.txt" "**/*.js"     Check both .js and .txt files.",
+  "    cspell "**/*.{txt,js,md}"       Check .txt, .js, and .md files.",
+  "    cat LICENSE | cspell stdin      Check stdin",
+  "    cspell stdin://docs/doc.md      Check stdin as if it was "./docs/doc.md"",
+  "",
+  "Check spelling",
+  "",
+  "Options:",
+  "  -c, --config <cspell.json>   Configuration file to use.  By default cspell",
+  "                               looks for cspell.json in the current directory.",
+  "  -v, --verbose                Display more information about the files being",
+  "                               checked and the configuration.",
+  "  --locale <locale>            Set language locales. i.e. "en,fr" for English",
+  "                               and French, or "en-GB" for British English.",
+  "  --language-id <file-type>    Force programming language for unknown",
+  "                               extensions. i.e. "php" or "scala"",
+  "  --words-only                 Only output the words not found in the",
+  "                               dictionaries.",
+  "  -u, --unique                 Only output the first instance of a word not",
+  "                               found in the dictionaries.",
+  "  -e, --exclude <glob>         Exclude files matching the glob pattern. This",
+  "                               option can be used multiple times to add",
+  "                               multiple globs.",
+  "  --file-list <path or stdin>  Specify a list of files to be spell checked. The",
+  "                               list is filtered against the glob file patterns.",
+  "                               Note: the format is 1 file path per line.",
+  "  --file [file...]             Specify files to spell check. They are filtered",
+  "                               by the [globs...].",
+  "  --no-issues                  Do not show the spelling errors.",
+  "  --no-progress                Turn off progress messages",
+  "  --no-summary                 Turn off summary message in console.",
+  "  -s, --silent                 Silent mode, suppress error messages.",
+  "  --no-exit-code               Do not return an exit code if issues are found.",
+  "  --quiet                      Only show spelling issues or errors.",
+  "  --fail-fast                  Exit after first file with an issue or error.",
+  "  -r, --root <root folder>     Root directory, defaults to current directory.",
+  "  --no-relative                Issues are displayed with absolute path instead",
+  "                               of relative to the root.",
+  "  --show-context               Show the surrounding text around an issue.",
+  "  --show-suggestions           Show spelling suggestions.",
+  "  --no-show-suggestions        Do not show spelling suggestions or fixes.",
+  "  --no-must-find-files         Do not error if no files are found.",
+  "  --cache                      Use cache to only check changed files.",
+  "  --no-cache                   Do not use cache.",
+  "  --cache-reset                Reset the cache file.",
+  "  --cache-strategy <strategy>  Strategy to use for detecting changed files.",
+  "                               (choices: "metadata", "content")",
+  "  --cache-location <path>      Path to the cache file or directory. (default:",
+  "                               ".cspellcache")",
+  "  --dot                        Include files and directories starting with \`.\`",
+  "                               (period) when matching globs.",
+  "  --gitignore                  Ignore files matching glob patterns found in",
+  "                               .gitignore files.",
+  "  --no-gitignore               Do NOT use .gitignore files.",
+  "  --gitignore-root <path>      Prevent searching for .gitignore files past",
+  "                               root.",
+  "  --validate-directives        Validate in-document CSpell directives.",
   "  --no-color                   Turn off color.",
   "  --color                      Force color.",
   "  --no-default-configuration   Do not load the default configuration and",

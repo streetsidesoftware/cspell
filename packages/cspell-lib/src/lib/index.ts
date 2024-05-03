@@ -60,6 +60,7 @@ export {
     spellCheckDocument,
     spellCheckFile,
     SpellCheckFileOptions,
+    SpellCheckFilePerf,
     SpellCheckFileResult,
 } from './spellCheckFile.js';
 export {

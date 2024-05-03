@@ -159,7 +159,10 @@ describe('Validate cli', () => {
         ${'with errors and excludes'}                  | ${['-r', 'samples', '*', '-e', 'Dutch.txt', '-c', 'samples/.cspell.json']}                     | ${app.CheckFailed} | ${true}  | ${true}  | ${false}
         ${'no-args'}                                   | ${[]}                                                                                          | ${'outputHelp'}    | ${false} | ${false} | ${false}
         ${'--help'}                                    | ${['--help']}                                                                                  | ${'outputHelp'}    | ${false} | ${false} | ${false}
+        ${'lint --help'}                               | ${['lint', '--help']}                                                                          | ${'outputHelp'}    | ${false} | ${false} | ${false}
+        ${'lint --help --verbose'}                     | ${['lint', '--help', '--verbose']}                                                             | ${'outputHelp'}    | ${false} | ${false} | ${false}
         ${'current_file'}                              | ${[__filename]}                                                                                | ${undefined}       | ${true}  | ${false} | ${false}
+        ${'current_file --show-perf-summary'}          | ${[__filename, '--show-perf-summary']}                                                         | ${undefined}       | ${true}  | ${false} | ${false}
         ${'with spelling errors Dutch.txt'}            | ${[pathSamples('Dutch.txt')]}                                                                  | ${app.CheckFailed} | ${true}  | ${true}  | ${false}
         ${'with spelling errors Dutch.txt words only'} | ${[pathSamples('Dutch.txt'), '--wordsOnly']}                                                   | ${app.CheckFailed} | ${true}  | ${true}  | ${false}
         ${'with spelling errors Dutch.txt --legacy'}   | ${[pathSamples('Dutch.txt'), '--legacy']}                                                      | ${app.CheckFailed} | ${true}  | ${true}  | ${false}
@@ -387,6 +390,7 @@ function makeLogger() {
         t = t.replace(RegExp(escapeRegExp(projectRoot), 'gi'), '.');
         t = t.replaceAll('\\', '/');
         t = t.replaceAll(/(?<=^info\s+Date:).*$/gm, ' Sat, 03 Apr 2021 11:25:33 GMT');
+        t = t.replaceAll(/ +[\d.]+ms\b/g, ' 0.00ms');
         t = t.replaceAll(/\b[\d.]+ms\b/g, '0.00ms');
         t = t.replaceAll(/\b[\d.]+S\b/g, '0.00S');
         return t;

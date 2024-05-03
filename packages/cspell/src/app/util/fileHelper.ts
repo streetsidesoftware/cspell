@@ -47,7 +47,7 @@ export interface FileInfo {
     errorCode?: string;
 }
 
-type Perf = Record<string, number | undefined>;
+export type Perf = cspell.SpellCheckFilePerf;
 
 export interface FileResult {
     fileInfo: FileInfo;
