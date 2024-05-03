@@ -1,4 +1,4 @@
-import type { Command } from 'commander';
+import type { AddHelpTextContext, Command } from 'commander';
 import { Option as CommanderOption } from 'commander';
 
 import * as App from './application.js';
@@ -73,11 +73,11 @@ export function commandLint(prog: Command): Command {
             '--locale <locale>',
             'Set language locales. i.e. "en,fr" for English and French, or "en-GB" for British English.',
         )
-        .option('--language-id <language>', 'Force programming language for unknown extensions. i.e. "php" or "scala"')
+        .option('--language-id <file-type>', 'Force programming language for unknown extensions. i.e. "php" or "scala"')
         .addOption(
             crOpt(
-                '--languageId <language>',
-                'Force programming language for unknown extensions. i.e. "php" or "scala"',
+                '--languageId <file-type>',
+                'Alias of "--language-id". Force programming language for unknown extensions. i.e. "php" or "scala"',
             ).hideHelp(),
         )
         .option('--words-only', 'Only output the words not found in the dictionaries.')
@@ -97,7 +97,7 @@ export function commandLint(prog: Command): Command {
             collect,
         )
         .option('--file [file...]', 'Specify files to spell check. They are filtered by the [globs...].', collect)
-        .addOption(crOpt('--files [file...]', 'Files to spell check.', collect).hideHelp())
+        .addOption(crOpt('--files [file...]', 'Alias of "--file". Files to spell check.', collect).hideHelp())
         .option('--no-issues', 'Do not show the spelling errors.')
         .option('--no-progress', 'Turn off progress messages')
         .option('--no-summary', 'Turn off summary message in console.')
@@ -148,7 +148,7 @@ export function commandLint(prog: Command): Command {
         .option('--no-gitignore', 'Do NOT use .gitignore files.')
         .option('--gitignore-root <path>', 'Prevent searching for .gitignore files past root.', collect)
         .option('--validate-directives', 'Validate in-document CSpell directives.')
-        .option('--no-validate-directives', 'Do not validate in-document CSpell directives.')
+        .addOption(crOpt('--no-validate-directives', 'Do not validate in-document CSpell directives.').hideHelp())
         .option('--no-color', 'Turn off color.')
         .option('--color', 'Force color.')
         .addOption(crOpt('--default-configuration', 'Load the default configuration and dictionaries.').hideHelp())
@@ -161,12 +161,13 @@ export function commandLint(prog: Command): Command {
                 .hideHelp(),
         )
         .addOption(crOpt('--issues-summary-report', 'Output a summary of issues found.').hideHelp())
+        .addOption(crOpt('--show-perf-summary', 'Output a performance summary report.').hideHelp())
         // Planned options
         // .option('--dictionary <dictionary name>', 'Enable a dictionary by name.', collect)
         // .option('--no-dictionary <dictionary name>', 'Disable a dictionary by name.', collect)
         // .option('--import', 'Import a configuration file.', collect)
         .usage(usage)
-        .addHelpText('after', advanced)
+        .addHelpText('after', augmentCommandHelp)
         .arguments('[globs...]')
         .action(async (fileGlobs: string[], options: LinterCliOptions) => {
             // console.error('lint: %o', { fileGlobs, options });
@@ -192,6 +193,37 @@ export function commandLint(prog: Command): Command {
         });
 
     return spellCheckCommand;
+}
+
+/**
+ * Add additional help text to the command.
+ * When the verbose flag is set, show the hidden options.
+ * @param context
+ * @returns
+ */
+function augmentCommandHelp(context: AddHelpTextContext) {
+    const output: string[] = [];
+    const command = context.command;
+    const showHidden = !!command.opts().verbose;
+    const hiddenHelp: string[] = [];
+    const help = command.createHelp();
+    const hiddenOptions = command.options.filter((opt) => opt.hidden && showHidden);
+    const flagColWidth = Math.max(...command.options.map((opt) => opt.flags.length), 0);
+    const indent = flagColWidth + 4;
+    for (const options of hiddenOptions) {
+        if (!hiddenHelp.length) {
+            hiddenHelp.push('\nHidden Options:');
+        }
+        hiddenHelp.push(
+            help.wrap(
+                `  ${options.flags.padEnd(flagColWidth)}  ${options.description}`,
+                process.stdout.columns || 80,
+                indent,
+            ),
+        );
+    }
+    output.push(...hiddenHelp, advanced);
+    return output.join('\n');
 }
 
 /**

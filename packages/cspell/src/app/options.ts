@@ -228,6 +228,11 @@ export interface LinterCliOptions extends LinterOptions {
      * Generate a summary report of issues.
      */
     issuesSummaryReport?: boolean;
+
+    /**
+     * Generate a summary report of performance.
+     */
+    showPerfSummary?: boolean;
 }
 
 export function fixLegacy<T extends BaseOptions>(opts: T & LegacyOptions): Omit<T & LegacyOptions, 'local'> {
