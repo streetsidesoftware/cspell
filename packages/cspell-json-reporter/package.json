@@ -36,14 +36,14 @@
   },
   "scripts": {
     "clean": "shx rm -rf dist temp coverage \"*.tsbuildInfo\"",
-    "build": "tsc -b .",
+    "build": "tsc -b . -f",
     "build:esm": "tsc -p tsconfig.esm.json",
     "clean-build": "pnpm run clean && pnpm run build",
     "coverage": "vitest run --coverage",
     "test:watch": "vitest",
     "test": "vitest run && pnpm test:run",
     "test:run": "node ../../bin.mjs . --config cSpell.example.mjs",
-    "watch": "tsc -b . -w"
+    "watch": "tsc -b . -w -f"
   },
   "dependencies": {
     "@cspell/cspell-types": "workspace:*"

@@ -34,12 +34,12 @@
   ],
   "scripts": {
     "clean": "shx rm -rf dist temp coverage \"*.tsbuildInfo\"",
-    "build": "tsc -b .",
+    "build": "tsc -b . -f",
     "clean-build": "pnpm run clean && pnpm run build",
     "coverage": "vitest run --coverage",
     "test:watch": "vitest",
     "test": "vitest run",
-    "watch": "tsc -b . -w"
+    "watch": "tsc -b . -w -f"
   },
   "repository": {
     "type": "git",

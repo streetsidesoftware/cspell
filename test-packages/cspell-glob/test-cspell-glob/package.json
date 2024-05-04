@@ -15,7 +15,7 @@
     "build:rollup": "rollup -c rollup.config.mjs",
     "build:ts": "pnpm run compile && ts2mjs dist/esm",
     "clean-build": "pnpm run clean && pnpm run build",
-    "compile": "tsc -b .",
+    "compile": "tsc -b .  -f",
     "test": "pnpm test:unit && pnpm test:smoke",
     "test:smoke": "node ./bin.mjs && node ./bin.rollup.mjs && node ./bin.rollup.cjs",
     "test:unit": "vitest run"

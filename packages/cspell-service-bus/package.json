@@ -30,11 +30,11 @@
     "!**/*.map"
   ],
   "scripts": {
-    "build": "tsc -b .",
+    "build": "tsc -b . -f",
     "build:cjs": "tsc -p tsconfig.cjs.json",
     "build:esm": "tsc -p tsconfig.esm.json",
     "build:clean": "pnpm run clean && pnpm run build",
-    "watch": "tsc -b . -w",
+    "watch": "tsc -b . -w -f",
     "clean": "shx rm -rf dist temp coverage \"*.tsbuildInfo\"",
     "clean-build": "pnpm build:clean",
     "coverage": "vitest run --coverage",
