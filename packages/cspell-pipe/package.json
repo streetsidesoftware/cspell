@@ -104,8 +104,8 @@
     "!**/*.map"
   ],
   "scripts": {
-    "build": "tsc -b .",
-    "watch": "tsc -p . -w",
+    "build": "tsc -b . -f",
+    "watch": "tsc -b . -w -f",
     "clean": "shx rm -rf dist temp coverage \"*.tsbuildInfo\"",
     "clean-build": "pnpm run clean && pnpm run build",
     "coverage": "vitest run --coverage",

@@ -20,9 +20,9 @@
     "!**/*.map"
   ],
   "scripts": {
-    "build": "tsc -b .",
+    "build": "tsc -b . -f",
     "build:esm": "tsc -p tsconfig.esm.json",
-    "build:watch": "tsc -b . -w",
+    "build:watch": "tsc -b . -w -f",
     "watch": "pnpm build:watch",
     "clean": "shx rm -rf dist temp coverage \"*.tsbuildInfo\"",
     "clean-build": "pnpm run clean && pnpm run build",

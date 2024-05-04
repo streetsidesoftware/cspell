@@ -37,14 +37,14 @@
     "!**/*.map"
   ],
   "scripts": {
-    "build": "tsc -b .",
+    "build": "tsc -b . -f",
     "build:clean": "pnpm clean && pnpm build",
     "clean": "shx rm -rf dist coverage",
     "clean-build": "pnpm build:clean",
     "coverage": "vitest run --coverage",
     "test-watch": "vitest",
     "test": "vitest run",
-    "watch": "tsc -b . --watch"
+    "watch": "tsc -b . --watch -f"
   },
   "repository": {
     "type": "git",

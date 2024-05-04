@@ -34,9 +34,9 @@
     "!**/*.map"
   ],
   "scripts": {
-    "build": "tsc -b .",
+    "build": "tsc -b . -f",
     "build:esm": "tsc -p tsconfig.esm.json",
-    "watch": "tsc -b . -w",
+    "watch": "tsc -b . -w -f",
     "clean": "shx rm -rf dist temp coverage \"*.tsbuildInfo\"",
     "clean-build": "pnpm run clean && pnpm run build",
     "coverage": "pnpm run vitest run --coverage",
