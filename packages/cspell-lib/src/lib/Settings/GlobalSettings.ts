@@ -4,14 +4,12 @@ import type { CSpellSettings, CSpellSettingsWithSourceTrace } from '@cspell/cspe
 import type { CSpellConfigFile } from 'cspell-config-lib';
 import { CSpellConfigFileInMemory, CSpellConfigFileJson } from 'cspell-config-lib';
 
-import { isErrnoException } from '../util/errors.js';
-import { logError } from '../util/logger.js';
 import { getSourceDirectoryUrl, toFilePathOrHref } from '../util/url.js';
-import { ConfigStore } from './cfgStore.js';
+import { GlobalConfigStore } from './cfgStore.js';
 import { configToRawSettings } from './Controller/configLoader/configToRawSettings.js';
 import type { CSpellSettingsWST } from './Controller/configLoader/types.js';
 
-const packageName = 'cspell';
+const globalConfig = new GlobalConfigStore();
 
 export interface GlobalSettingsWithSource extends Partial<GlobalCSpellSettings> {
     source: CSpellSettingsWithSourceTrace['source'];
@@ -23,10 +21,10 @@ export async function getRawGlobalSettings(): Promise<CSpellSettingsWST> {
     return configToRawSettings(await getGlobalConfig());
 }
 
-export function getGlobalConfig(): Promise<CSpellConfigFile> {
+export async function getGlobalConfig(): Promise<CSpellConfigFile> {
     const name = 'CSpell Configstore';
     const configPath = getGlobalConfigPath();
-    const urlGlobal = configPath ? pathToFileURL(configPath) : new URL('global-config.json', getSourceDirectoryUrl());
+    let urlGlobal = configPath ? pathToFileURL(configPath) : new URL('global-config.json', getSourceDirectoryUrl());
 
     const source: CSpellSettingsWST['source'] = {
         name,
@@ -37,27 +35,20 @@ export function getGlobalConfig(): Promise<CSpellConfigFile> {
 
     let hasGlobalConfig = false;
 
-    try {
-        const cfgStore = new ConfigStore(packageName);
+    const found = await globalConfig.readConfigFile();
 
-        const cfg = cfgStore.all;
+    if (found && found.config && found.filename) {
+        const cfg = found.config;
+        urlGlobal = pathToFileURL(found.filename);
 
         // Only populate globalConf is there are values.
         if (cfg && Object.keys(cfg).length) {
             Object.assign(globalConf, cfg);
             globalConf.source = {
                 name,
-                filename: cfgStore.path,
+                filename: found.filename,
             };
             hasGlobalConfig = Object.keys(cfg).length > 0;
-        }
-    } catch (error) {
-        if (
-            !isErrnoException(error) ||
-            !error.code ||
-            !['ENOENT', 'EACCES', 'ENOTDIR', 'EISDIR'].includes(error.code)
-        ) {
-            logError(error);
         }
     }
 
@@ -65,7 +56,7 @@ export function getGlobalConfig(): Promise<CSpellConfigFile> {
 
     const ConfigFile = hasGlobalConfig ? CSpellConfigFileJson : CSpellConfigFileInMemory;
 
-    return Promise.resolve(new ConfigFile(urlGlobal, settings));
+    return new ConfigFile(urlGlobal, settings);
 }
 
 export async function writeRawGlobalSettings(settings: GlobalCSpellSettings): Promise<void> {
@@ -73,14 +64,12 @@ export async function writeRawGlobalSettings(settings: GlobalCSpellSettings): Pr
         import: settings.import,
     };
 
-    const cfgStore = new ConfigStore(packageName);
-    cfgStore.set(toWrite);
+    await globalConfig.writeConfigFile(toWrite);
 }
 
 export function getGlobalConfigPath(): string | undefined {
     try {
-        const cfgStore = new ConfigStore(packageName);
-        return cfgStore.path;
+        return globalConfig.location || GlobalConfigStore.defaultLocation;
     } catch {
         return undefined;
     }
