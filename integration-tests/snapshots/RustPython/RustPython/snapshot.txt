@@ -3,7 +3,7 @@ Repository: RustPython/RustPython
 Url: "https://github.com/RustPython/RustPython.git"
 Args: ["**"]
 Lines:
- CSpell: Files checked: 609, Issues found: 2902 in 317 files.
+ CSpell: Files checked: 609, Issues found: 2933 in 317 files.
  exit code: 1
 ./Cargo.toml:114:82    - Unknown word (termcolor)  -- features = ["atty", "termcolor"] }
 ./Cargo.toml:156:62    - Unknown word (redoxer)    -- to compile/check with redoxer
@@ -420,7 +420,9 @@ Lines:
 ./src/settings.rs:231:49    - Unknown word (PYTHONDONTWRITEBYTECODE) -- environment && env::var_os("PYTHONDONTWRITEBYTECODE").is_some())
 ./src/settings.rs:235:44    - Unknown word (PYTHONINTMAXSTRDIGITS)   -- environment && env::var_os("PYTHONINTMAXSTRDIGITS").is_some() {
 ./src/settings.rs:239:173   - Unknown word (preinitialized)          -- nPython runtime state: preinitialized");
+./src/settings.rs:259:18    - Unknown word (xoptions)                -- settings.xoptions.extend(xopts.map(|s
 ./src/settings.rs:287:49    - Unknown word (PYTHONWARNDEFAULTENCODING) -- environment && env::var_os("PYTHONWARNDEFAULTENCODING").is_some())
+./src/settings.rs:293:18    - Unknown word (warnoptions)               -- settings.warnoptions.push("default".to_owned
 ./src/settings.rs:344:37    - Unknown word (PYTHONHASHSEED)            -- seed = match env::var("PYTHONHASHSEED") {
 ./src/shell/helper.rs:20:13     - Unknown word (startpos)   -- let mut startpos = 0;
 ./stdlib/Cargo.toml:116:25    - Unknown word (netioapi)   -- winsock2", "ifdef", "netioapi", "ws2tcpip",
@@ -526,11 +528,11 @@ Lines:
 ./stdlib/src/resource.rs:46:22     - Unknown word (SBSIZE)     -- use libc::RLIMIT_SBSIZE;
 ./stdlib/src/resource.rs:50:23     - Unknown word (NPTS)       -- use libc::{RLIMIT_NPTS, RLIMIT_SWAP};
 ./stdlib/src/resource.rs:56:75     - Unknown word (freebds)    -- emscripten", target_os = "freebds"))]
-./stdlib/src/select.rs:128:5     - Unknown word (errfds)     -- errfds: &mut FdSet,
-./stdlib/src/select.rs:177:9     - Unknown word (wlist)      -- wlist: PyObjectRef,
-./stdlib/src/select.rs:178:9     - Unknown word (xlist)      -- xlist: PyObjectRef,
+./stdlib/src/select.rs:119:13    - Unknown word (errorfds)   -- errorfds: *mut fd_set,
+./stdlib/src/select.rs:185:5     - Unknown word (errfds)     -- errfds: &mut FdSet,
+./stdlib/src/select.rs:234:9     - Unknown word (wlist)      -- wlist: PyObjectRef,
+./stdlib/src/select.rs:235:9     - Unknown word (xlist)      -- xlist: PyObjectRef,
 ./stdlib/src/select.rs:59:24     - Unknown word (WSAFDIs)    -- use WinSock::__WSAFDIsSet;
-./stdlib/src/socket.rs:1018:67   - Unknown word (errorfds)         -- SelectKind::Connect fills the errorfds fd_set, so if we wake
 ./stdlib/src/socket.rs:114:17    - Unknown word (ATALK)            -- use c::{SOL_ATALK, SOL_AX25, SOL_IPX,
 ./stdlib/src/socket.rs:114:47    - Unknown word (NETROM)           -- SOL_AX25, SOL_IPX, SOL_NETROM, SOL_ROSE};
 ./stdlib/src/socket.rs:118:15    - Unknown word (SETFIB)           -- use c::SO_SETFIB;
@@ -648,10 +650,10 @@ Lines:
 ./vm/src/builtins/descriptor.rs:231:33    - Unknown word (objclass)       -- "<descriptor>.__objclass__.__qualname__ is not
 ./vm/src/builtins/descriptor.rs:29:20     - Unknown word (vectorcallfunc) -- // vectorcall: vectorcallfunc,
 ./vm/src/builtins/descriptor.rs:29:8      - Unknown word (vectorcall) -- // vectorcall: vectorcallfunc,
-./vm/src/builtins/dict.rs:1014:10   - Unknown word (reverseitemiterator) -- dict_reverseitemiterator_type,
+./vm/src/builtins/dict.rs:1004:10   - Unknown word (reverseitemiterator) -- dict_reverseitemiterator_type,
 ./vm/src/builtins/dict.rs:14:5      - Unknown word (dictdatatype) -- dictdatatype::{self, DictKey},
-./vm/src/builtins/dict.rs:330:13    - Unknown word (dicted)       -- let dicted: Result<PyDictRef,
-./vm/src/builtins/dict.rs:988:10    - Unknown word (reversekeyiterator) -- dict_reversekeyiterator_type,
+./vm/src/builtins/dict.rs:285:13    - Unknown word (dicted)       -- let dicted: Result<PyDictRef,
+./vm/src/builtins/dict.rs:978:10    - Unknown word (reversekeyiterator) -- dict_reversekeyiterator_type,
 ./vm/src/builtins/frame.rs:57:10     - Unknown word (lasti)      -- fn f_lasti(&self) -> u32 {
 ./vm/src/builtins/function.rs:134:13    - Unknown word (argpos)     -- let argpos = |range: std::ops:
 ./vm/src/builtins/function.rs:144:17    - Unknown word (posonly)    -- let mut posonly_passed_as_kwarg = Vec
@@ -870,8 +872,8 @@ Lines:
 ./vm/src/stdlib/nt.rs:393:8     - Unknown word (listdrives)        -- fn listdrives(vm: &VirtualMachine
 ./vm/src/stdlib/operator.rs:392:17    - Unknown word (nattr)      -- let nattr = args.args.len();
 ./vm/src/stdlib/operator.rs:535:25    - Unknown word (pargs)      -- let mut pargs = vec![zelf.name.as
-./vm/src/stdlib/os.rs:1037:19   - Unknown word (modif)          -- let (acc, modif) = match (args.times
-./vm/src/stdlib/os.rs:1106:27   - Unknown word (utimensat)      -- libc::utimensat(
+./vm/src/stdlib/os.rs:1044:19   - Unknown word (modif)          -- let (acc, modif) = match (args.times
+./vm/src/stdlib/os.rs:1113:27   - Unknown word (utimensat)      -- libc::utimensat(
 ./vm/src/stdlib/os.rs:178:8     - Unknown word (closerange) -- fn closerange(fd_low: i32, fd_high
 ./vm/src/stdlib/os.rs:306:8     - Unknown word (mkdirs)     -- fn mkdirs(path: PyStrRef, vm:
 ./vm/src/stdlib/os.rs:316:11    - Unknown word (LISTDIR)    -- const LISTDIR_FD: bool = cfg!(all
@@ -910,8 +912,6 @@ Lines:
 ./vm/src/stdlib/sys.rs:109:8     - Unknown word (platlibdir) -- fn platlibdir(_vm: &VirtualMachine
 ./vm/src/stdlib/sys.rs:110:33    - Unknown word (PLATLIBDIR) -- option_env!("RUSTPYTHON_PLATLIBDIR").unwrap_or("lib")
 ./vm/src/stdlib/sys.rs:156:38    - Unknown word (PYVENV)     -- Ok(var) = env::var("__PYVENV_LAUNCHER__") {
-./vm/src/stdlib/sys.rs:278:9     - Unknown word (xoptions)   -- fn _xoptions(vm: &VirtualMachine
-./vm/src/stdlib/sys.rs:292:8     - Unknown word (warnoptions) -- fn warnoptions(vm: &VirtualMachine
 ./vm/src/stdlib/sys.rs:30:81     - Unknown word (multiarch)  -- TODO: copy CPython's multiarch exactly,
 ./vm/src/stdlib/sys.rs:344:38    - Unknown word (PYTHONBREAKPOINT) -- var = std::env::var("PYTHONBREAKPOINT")
 ./vm/src/stdlib/sys.rs:34:34     - Unknown word (debugbuild) -- name = "_rustpython_debugbuild")]
@@ -933,11 +933,15 @@ Lines:
 ./vm/src/stdlib/sys.rs:627:31    - Unknown word (maxdigits)          -- set_int_max_str_digits(maxdigits: usize, vm: &VirtualMachine
 ./vm/src/stdlib/sys.rs:644:19    - Unknown word (profilefunc)        -- fn setprofile(profilefunc: PyObjectRef, vm: &VirtualMac
 ./vm/src/stdlib/sys.rs:672:17    - Unknown word (tracefunc)          -- fn settrace(tracefunc: PyObjectRef, vm: &VirtualMac
-./vm/src/stdlib/sys.rs:783:51    - Unknown word (PYTHREAD)           -- stdlib::thread::_thread::PYTHREAD_NAME,
+./vm/src/stdlib/sys.rs:710:15    - Unknown word (Asyncgen)           -- struct SetAsyncgenHooksArgs {
+./vm/src/stdlib/sys.rs:712:9     - Unknown word (firstiter)          -- firstiter: OptionalArg<Option
+./vm/src/stdlib/sys.rs:718:12    - Unknown word (asyncgen)           -- fn set_asyncgen_hooks(args: SetAsyncgenHooksA
+./vm/src/stdlib/sys.rs:743:42    - Unknown word (FIRSTITER)          -- vm::thread::ASYNC_GEN_FIRSTITER.with(|cell| {
 ./vm/src/stdlib/sys.rs:80:22     - Unknown word (dllhandle)  -- #[pyattr(name = "dllhandle")]
 ./vm/src/stdlib/sys.rs:81:11     - Unknown word (DLLHANDLE)  -- const DLLHANDLE: usize = 0;
-./vm/src/stdlib/sys.rs:881:9     - Unknown word (releaselevel)       -- releaselevel: &'static str,
-./vm/src/stdlib/sys.rs:891:36    - Unknown word (RELEASELEVEL)       -- releaselevel: version::RELEASELEVEL,
+./vm/src/stdlib/sys.rs:859:51    - Unknown word (PYTHREAD)           -- stdlib::thread::_thread::PYTHREAD_NAME,
+./vm/src/stdlib/sys.rs:957:9     - Unknown word (releaselevel)       -- releaselevel: &'static str,
+./vm/src/stdlib/sys.rs:967:36    - Unknown word (RELEASELEVEL)       -- releaselevel: version::RELEASELEVEL,
 ./vm/src/stdlib/sys.rs:98:33     - Unknown word (BASEPREFIX) -- option_env!("RUSTPYTHON_BASEPREFIX").unwrap_or_else(||
 ./vm/src/stdlib/sysconfigdata.rs:20:19     - Unknown word (GETRANDOM)  -- "HAVE_GETRANDOM" => 1,
 ./vm/src/stdlib/thread.rs:337:25    - Unknown word (sents)      -- SENTINELS.with(|sents| {
@@ -967,9 +971,10 @@ Lines:
 ./vm/src/types/slot.rs:384:29    - Unknown word (subslot)      -- macro_rules! toggle_subslot {
 ./vm/src/vm/mod.rs:226:17    - Unknown word (rustpythonpath) -- let rustpythonpath_env = std::env::var
 ./vm/src/vm/mod.rs:603:29    - Unknown word (pyiter)         -- return self.map_pyiter(value, func);
-./vm/src/vm/setting.rs:46:10     - Unknown word (Xfoo)       -- /// -Xfoo[=bar]
-./vm/src/vm/setting.rs:61:10     - Unknown word (Wfoo)       -- /// -Wfoo
-./vm/src/vm/thread.rs:38:24     - Unknown word (intp)       -- let vm_owns_obj = |intp: NonNull<VirtualMachine
+./vm/src/vm/setting.rs:39:10     - Unknown word (Xfoo)       -- /// -Xfoo[=bar]
+./vm/src/vm/setting.rs:42:10     - Unknown word (Wfoo)       -- /// -Wfoo
+./vm/src/vm/setting.rs:93:12     - Unknown word (pathconfig) -- // int pathconfig_warnings;
+./vm/src/vm/thread.rs:42:24     - Unknown word (intp)       -- let vm_owns_obj = |intp: NonNull<VirtualMachine
 ./vm/src/vm/vm_new.rs:171:28    - Unknown word (ternop)     -- pub fn new_unsupported_ternop_error(
 ./vm/src/windows.rs:86:55     - Unknown word (birthtime)  -- from 3.12, so we copy birthtime across
 ./vm/sre_engine/Cargo.toml:4:13      - Unknown word (Kangzhi)    -- authors = ["Kangzhi Shi <shikangzhi@gmail
@@ -1015,8 +1020,8 @@ Lines:
 ./wasm/lib/Lib/whlimport.py:65:37     - Unknown word (distlib)      -- VersionMatcher from distlib
 ./wasm/lib/Lib/whlimport.py:76:53     - Unknown word (packagetype)  -- ver_downloads if dl["packagetype"] == "bdist_wheel")
 ./wasm/lib/Lib/whlimport.py:9:9       - Unknown word (microdistlib) -- import _microdistlib
-./wasm/lib/src/convert.rs:117:33    - Unknown word (jsresult)   -- pyresult_to_jsresult(vm, result)
-./wasm/lib/src/convert.rs:34:9      - Unknown word (jserr)      -- let jserr = vm.try_class("_js
+./wasm/lib/src/convert.rs:119:33    - Unknown word (jsresult)   -- pyresult_to_jsresult(vm, result)
+./wasm/lib/src/convert.rs:36:9      - Unknown word (jserr)      -- let jserr = vm.try_class("_js
 ./wasm/lib/src/js_module.rs:578:62    - Unknown word (awaitpromise) -- non-None value to an awaitpromise".to_owned(),
 ./wasm/notebook/README.md:99:73     - Unknown word (Etherpad)   -- Think Google Doc or Etherpad editing but for code
 ./wasm/notebook/package.json:9:10      - Unknown word (katex)      -- "katex": "^0.12.0",

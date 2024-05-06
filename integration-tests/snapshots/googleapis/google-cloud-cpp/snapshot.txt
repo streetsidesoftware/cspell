@@ -3,7 +3,7 @@ Repository: googleapis/google-cloud-cpp
 Url: "https://github.com/googleapis/google-cloud-cpp.git"
 Args: ["--config=../../../../config/repositories/googleapis/google-cloud-cpp/cspell.json","**/*","-e","{*.BUILD,BUILD,CHANGELOG.md,*.sh,*.cfg,*.ps1,Dockerfile.*,*.Dockerfile,*.{yaml,xml,json,cmake}}"]
 Lines:
- CSpell: Files checked: 18406, Issues found: 105262 in 12355 files.
+ CSpell: Files checked: 18417, Issues found: 105374 in 12358 files.
  exit code: 1
 ./ARCHITECTURE.md:101:60    - Unknown word (proto)      -- a `service` in the `.proto` definitions
 ./ARCHITECTURE.md:110:20    - Unknown word (bigtable)   -- - Bigtable has a [`bigtable::Table`](/google/cloud
@@ -241,36 +241,36 @@ Lines:
 ./doc/cpp-style-guide.md:54:18     - Unknown word (blorg)      -- #include <grpcpp/blorg.h>
 ./doc/cpp-style-guide.md:58:11     - Unknown word (unistd)     -- #include <unistd.h>
 ./doc/ctype-cord-workarounds.md:32:26     - Unknown word (CTYPE)      -- GOOGLE_CLOUD_CPP_ENABLE_CTYPE_CORD_WORKAROUND` CMake
-./doc/packaging.md:1335:21   - Unknown word (epel)           -- sudo dnf install -y epel-release && \
-./doc/packaging.md:1587:1    - Unknown word (Abseiil)        -- Abseiil from source. Enabling
+./doc/packaging.md:1427:21   - Unknown word (epel)           -- sudo dnf install -y epel-release && \
 ./doc/packaging.md:166:26    - Unknown word (pkgconf)     -- mkdir -p $HOME/Downloads/pkgconf && cd $HOME/Downloads
-./doc/packaging.md:1771:46   - Unknown word (rhscl)          -- -enable rhel-server-rhscl-7-rpms
-./doc/packaging.md:1771:54   - Unknown word (rpms)           -- rhel-server-rhscl-7-rpms
-./doc/packaging.md:1773:48   - Unknown word (devtoolset)     -- automake cmake3 curl-devel devtoolset-7 gcc gcc-c++ \
-./doc/packaging.md:1865:7    - Unknown word (buildconf)      -- ./buildconf && ./configure && make
+./doc/packaging.md:1679:1    - Unknown word (Abseiil)        -- Abseiil from source. Enabling
+./doc/packaging.md:1863:46   - Unknown word (rhscl)          -- -enable rhel-server-rhscl-7-rpms
+./doc/packaging.md:1863:54   - Unknown word (rpms)           -- rhel-server-rhscl-7-rpms
+./doc/packaging.md:1865:48   - Unknown word (devtoolset)     -- automake cmake3 curl-devel devtoolset-7 gcc gcc-c++ \
+./doc/packaging.md:1957:7    - Unknown word (buildconf)      -- ./buildconf && ./configure && make
 ./doc/packaging.md:210:10    - Unknown word (DWITH)       -- -DWITH_EXAMPLES=OFF \
 ./doc/packaging.md:213:10    - Unknown word (DOPENTELEMETRY) -- -DOPENTELEMETRY_INSTALL=ON \
 ./doc/packaging.md:245:10    - Unknown word (makecache)      -- sudo dnf makecache && \
 ./doc/packaging.md:246:32    - Unknown word (findutils)      -- install -y cmake curl findutils gcc-c++ git make ninja
-./doc/packaging.md:247:17    - Unknown word (devel)          -- openssl-devel patch unzip tar wget
+./doc/packaging.md:255:48    - Unknown word (devel)          -- protobuf-compiler protobuf-devel grpc-cpp grpc-devel
 ./doc/packaging.md:276:6     - Unknown word (ldconfig)       -- sudo ldconfig && cd /var/tmp && rm
-./doc/packaging.md:311:8     - Unknown word (DJSON)          -- -DJSON_BuildTests=OFF \
-./doc/packaging.md:383:23    - Unknown word (libopenssl)     -- libcurl-devel libopenssl-devel libcrc32c-devel
-./doc/packaging.md:383:40    - Unknown word (libcrc)         -- devel libopenssl-devel libcrc32c-devel nlohmann_json
-./doc/packaging.md:392:28    - Unknown word (usrlocal)       -- tee /etc/ld.so.conf.d/usrlocal.conf
-./doc/packaging.md:425:10    - Unknown word (Dprotobuf)      -- -Dprotobuf_BUILD_TESTS=OFF \
-./doc/packaging.md:516:24    - Unknown word (noninteractive) -- export DEBIAN_FRONTEND=noninteractive
-./doc/packaging.md:535:8     - Unknown word (DABSL)          -- -DABSL_BUILD_TESTING=OFF \
-./doc/packaging.md:601:10    - Unknown word (DCRC)           -- -DCRC32C_BUILD_TESTS=OFF
-./doc/packaging.md:603:22    - Unknown word (GLOG)           -- -DCRC32C_USE_GLOG=OFF \
+./doc/packaging.md:362:23    - Unknown word (libopenssl)     -- libcurl-devel libopenssl-devel libcrc32c-devel
+./doc/packaging.md:362:40    - Unknown word (libcrc)         -- devel libopenssl-devel libcrc32c-devel nlohmann_json
+./doc/packaging.md:371:28    - Unknown word (usrlocal)       -- tee /etc/ld.so.conf.d/usrlocal.conf
+./doc/packaging.md:404:10    - Unknown word (Dprotobuf)      -- -Dprotobuf_BUILD_TESTS=OFF \
+./doc/packaging.md:495:24    - Unknown word (noninteractive) -- export DEBIAN_FRONTEND=noninteractive
+./doc/packaging.md:508:9     - Unknown word (libabsl)        -- libabsl-dev \
+./doc/packaging.md:510:9     - Unknown word (libgrpc)        -- libgrpc++-dev protobuf-compiler
+./doc/packaging.md:511:9     - Unknown word (libprotobuf)    -- libprotobuf-dev protobuf-compiler
+./doc/packaging.md:548:10    - Unknown word (DCRC)           -- -DCRC32C_BUILD_TESTS=OFF
+./doc/packaging.md:550:22    - Unknown word (GLOG)           -- -DCRC32C_USE_GLOG=OFF \
+./doc/packaging.md:627:8     - Unknown word (DABSL)          -- -DABSL_BUILD_TESTING=OFF \
 ./doc/packaging.md:67:68     - Unknown word (msbuild)    -- generator from `make` (or msbuild on
 ./doc/packaging.md:69:16     - Unknown word (multicore)  -- advantage of multicore machines. Be aware that
+./doc/packaging.md:717:8     - Unknown word (DJSON)          -- -DJSON_BuildTests=OFF \
 ./doc/packaging.md:72:65     - Unknown word (NCPU)       -- consider appending `-- -j ${NCPU}` to the
 ./doc/packaging.md:74:73     - Unknown word (nproc)      -- information using the `nproc`
 ./doc/packaging.md:75:38     - Unknown word (physicalcpu) -- Linux, or `sysctl -n hw.physicalcpu` on macOS.
-./doc/packaging.md:878:9     - Unknown word (libabsl)        -- libabsl-dev \
-./doc/packaging.md:879:9     - Unknown word (libprotobuf)    -- libprotobuf-dev protobuf-compiler
-./doc/packaging.md:880:9     - Unknown word (libgrpc)        -- libgrpc++-dev libgrpc-dev protobuf
 ./doc/public-api.md:163:20    - Unknown word (lgoogle)    -- e.g., by using `-lgoogle_cloud_cpp_bigtable`
 ./doc/public-api.md:33:45     - Unknown word (structs)    -- including macros, classes, structs, typedefs, functions
 ./doc/public-api.md:33:54     - Unknown word (typedefs)   -- macros, classes, structs, typedefs, functions, enums,
@@ -475,17 +475,17 @@ Lines:
 ./generator/generator_config.textproto:1624:15   - Unknown word (Abac)       -- "SetLegacyAbac(std::string const&,
 ./generator/generator_config.textproto:1733:3    - Unknown word (Dataplex)   -- # Dataplex
 ./generator/generator_config.textproto:1779:3    - Unknown word (Dataproc)   -- # Dataproc
-./generator/generator_config.textproto:1875:3    - Unknown word (Datastream) -- # Datastream
-./generator/generator_config.textproto:1893:3    - Unknown word (Dialogflow) -- # Dialogflow CX
-./generator/generator_config.textproto:1899:47   - Unknown word (DIALOGFLOW) -- var: "GOOGLE_CLOUD_CPP_DIALOGFLOW_ENVIRONMENT_ENDPOINT
-./generator/generator_config.textproto:2293:3    - Unknown word (Eventarc)   -- # Eventarc
-./generator/generator_config.textproto:2310:3    - Unknown word (Filestore)  -- # Filestore
-./generator/generator_config.textproto:2353:7    - Unknown word (Multicloud) -- # GKE Multicloud
-./generator/generator_config.textproto:2561:12   - Unknown word (Metastore)  -- # Dataproc Metastore
+./generator/generator_config.textproto:1877:3    - Unknown word (Datastream) -- # Datastream
+./generator/generator_config.textproto:1895:3    - Unknown word (Dialogflow) -- # Dialogflow CX
+./generator/generator_config.textproto:1901:47   - Unknown word (DIALOGFLOW) -- var: "GOOGLE_CLOUD_CPP_DIALOGFLOW_ENVIRONMENT_ENDPOINT
+./generator/generator_config.textproto:2295:3    - Unknown word (Eventarc)   -- # Eventarc
+./generator/generator_config.textproto:2312:3    - Unknown word (Filestore)  -- # Filestore
+./generator/generator_config.textproto:2355:7    - Unknown word (Multicloud) -- # GKE Multicloud
+./generator/generator_config.textproto:2563:12   - Unknown word (Metastore)  -- # Dataproc Metastore
 ./generator/generator_config.textproto:271:3     - Unknown word (Apigee)     -- # Apigee Connect
 ./generator/generator_config.textproto:277:47    - Unknown word (APIGEE)     -- var: "GOOGLE_CLOUD_CPP_APIGEE_CONNECTION_SERVICE_ENDPOINT
 ./generator/generator_config.textproto:350:47    - Unknown word (AUTOML)     -- var: "GOOGLE_CLOUD_CPP_AUTOML_PREDICTION_SERVICE_ENDPOINT
-./generator/generator_config.textproto:3620:3    - Unknown word (Timeseries) -- # Timeseries Insights
+./generator/generator_config.textproto:3622:3    - Unknown word (Timeseries) -- # Timeseries Insights
 ./generator/integration_tests/backup.proto:27:40     - Unknown word (genproto)   -- "google.golang.org/genproto/googleapis/test/admin
 ./generator/integration_tests/backup.proto:29:19     - Unknown word (classname)  -- option java_outer_classname = "BackupProto";
 ./generator/integration_tests/golden/v1/golden_kitchen_sink_client.h:286:43    - Unknown word (cloudresourcemanager) -- organizations/1234567890/logs/cloudresourcemanager.googleapis.com%2Factivity
@@ -515,7 +515,7 @@ Lines:
 ./generator/internal/codegen_utils_test.cc:61:59     - Unknown word (BAAAAA)     -- CamelCaseToSnakeCase("fooBarBAAAAA"));
 ./generator/internal/descriptor_utils.cc:101:33    - Unknown word (CPPTYPE)    -- case FieldDescriptor::CPPTYPE_STRING:
 ./generator/internal/descriptor_utils.cc:399:32    - Unknown word (scikit)     -- environment would specify the scikit-learn version as follows
-./generator/internal/descriptor_utils.cc:635:5     - Unknown word (NOTREACHED) -- /*NOTREACHED*/
+./generator/internal/descriptor_utils.cc:631:5     - Unknown word (NOTREACHED) -- /*NOTREACHED*/
 ./generator/internal/descriptor_utils_test.cc:1472:10   - Unknown word (endcond)    -- /// @endcond
 ./generator/internal/discovery_proto_export_file_test.cc:50:36     - Unknown word (IWYU)       -- However, it is not IWYU friendly. Including
 ./generator/internal/discovery_to_proto.cc:577:13    - Unknown word (sdhart)     -- // TODO(sdhart): figure out if we can
@@ -532,7 +532,7 @@ Lines:
 ./generator/internal/discovery_to_proto_test.cc:38:18     - Unknown word (Pointee)    -- using ::testing::Pointee;
 ./generator/internal/discovery_type_vertex.cc:80:28     - Unknown word (notarray)   -- field.value("type", "notarray") == "array") return
 ./generator/internal/discovery_type_vertex.cc:82:28     - Unknown word (notobject)  -- field.value("type", "notobject") == "object" &&
-./generator/internal/format_method_comments.cc:121:24    - Unknown word (GRPCLRO)    -- auto constexpr kTrailerGRPCLRO =
+./generator/internal/format_method_comments.cc:123:24    - Unknown word (GRPCLRO)    -- auto constexpr kTrailerGRPCLRO =
 ./generator/internal/http_annotation_parser.cc:102:8     - Unknown word (abcdefghiljkmnopqrstuvwxyz) -- "abcdefghiljkmnopqrstuvwxyz"
 ./generator/internal/http_annotation_parser.h:45:12     - Unknown word (Naur)       -- * [Backus-Naur Form].  In this notation
 ./generator/internal/http_annotation_parser.h:66:18     - Unknown word (pchar)      -- * LITERAL     = pchar { pchar }
@@ -879,7 +879,7 @@ Lines:
 ./google/cloud/google_cloud_cpp_common.bzl:59:15     - Unknown word (getenv)     -- "internal/getenv.h",
 ./google/cloud/google_cloud_cpp_common_unit_tests.bzl:49:15     - Unknown word (noexcept)   -- "internal/noexcept_action_test.cc",
 ./google/cloud/google_cloud_cpp_common_unit_tests.bzl:60:22     - Unknown word (hmac)       -- "internal/sha256_hmac_test.cc",
-./google/cloud/google_cloud_cpp_common_unit_tests.bzl:62:15     - Unknown word (strerror)   -- "internal/strerror_test.cc",
+./google/cloud/google_cloud_cpp_common_unit_tests.bzl:63:15     - Unknown word (strerror)   -- "internal/strerror_test.cc",
 ./google/cloud/google_cloud_cpp_rest_internal_unit_tests.bzl:26:37     - Unknown word (sigpipe)    -- curl_wrappers_disable_sigpipe_handler_test.cc",
 ./google/cloud/google_cloud_cpp_rest_internal_unit_tests.bzl:32:20     - Unknown word (writev)     -- "internal/curl_writev_test.cc",
 ./google/cloud/grpc_options_test.cc:406:42    - Unknown word (fieldmask)  -- Pair("x-goog-fieldmask", "items.name,token
@@ -982,7 +982,7 @@ Lines:
 ./google/cloud/opentelemetry/internal/monitored_resource_test.cc:278:26    - Unknown word (faas)       -- {sc::kFaasName, "faas-name"},
 ./google/cloud/opentelemetry/internal/recordable_test.cc:184:9     - Unknown word (Truncatable) -- TEST(SetTruncatableString, LessThanLimit
 ./google/cloud/opentelemetry/internal/recordable_test.cc:707:27    - Unknown word (instrumentationscope) -- opentelemetry::sdk::instrumentationscope::InstrumentationScope
-./google/cloud/opentelemetry/internal/time_series.h:49:59     - Unknown word (OTLP)       -- how to convert from [OTLP] -> protos.
+./google/cloud/opentelemetry/internal/time_series.h:52:59     - Unknown word (OTLP)       -- how to convert from [OTLP] -> protos.
 ./google/cloud/optimization/doc/environment-variables.dox:14:40     - Unknown word (cloudoptimization) -- (which defaults to "cloudoptimization.googleapis.com")
 ./google/cloud/orgpolicy/mocks/mock_org_policy_connection.h:19:39     - Unknown word (ORGPOLICY)  -- CLOUD_CPP_GOOGLE_CLOUD_ORGPOLICY_MOCKS_MOCK_ORG_POLICY
 ./google/cloud/osconfig/agent_endpoint_client.h:19:39     - Unknown word (OSCONFIG)   -- CLOUD_CPP_GOOGLE_CLOUD_OSCONFIG_AGENT_ENDPOINT_CLIENT
@@ -1107,11 +1107,14 @@ Lines:
 ./google/cloud/spanner/internal/partial_result_set_source_test.cc:527:43    - Unknown word (chunkthird)  -- "first_chunksecond_chunkthird_chunk",
 ./google/cloud/spanner/internal/session_pool.cc:362:60    - Unknown word (robining)   -- stub to use by round-robining between
 ./google/cloud/spanner/internal/session_pool_test.cc:566:35    - Unknown word (Stubless)   -- SessionPoolTest, GetStubForStublessSession) {
-./google/cloud/spanner/interval.cc:171:20    - Unknown word (Atod)       -- if (!absl::SimpleAtod(s.substr(0, len), &d
-./google/cloud/spanner/interval.cc:59:7      - Unknown word (centurie)   -- {"centurie", [](auto n) { return
-./google/cloud/spanner/interval.h:99:43     - Unknown word (intervalstyle) -- Conversion to a string using "intervalstyle == postgres".
-./google/cloud/spanner/interval_test.cc:231:31    - Unknown word (dayss)      -- THAT(MakeInterval("7 dayss"), StatusIs(StatusCode
-./google/cloud/spanner/interval_test.cc:33:18     - Unknown word (intvl)      -- Interval const intvl(0, 1, 2, absl::Hours
+./google/cloud/spanner/interval.cc:203:20    - Unknown word (Atod)       -- if (!absl::SimpleAtod(s.substr(0, len), &d
+./google/cloud/spanner/interval.cc:432:37    - Unknown word (subsecond)  -- FromCivil(cs, *tz) + ci.subsecond +
+./google/cloud/spanner/interval.cc:70:7      - Unknown word (centurie)   -- {"centurie", [](auto n) { return
+./google/cloud/spanner/interval.h:100:43    - Unknown word (intervalstyle) -- Conversion to a string using "intervalstyle == postgres".
+./google/cloud/spanner/interval_test.cc:244:31    - Unknown word (dayss)      -- THAT(MakeInterval("7 dayss"), StatusIs(StatusCode
+./google/cloud/spanner/interval_test.cc:276:22    - Unknown word (Hyperborea) -- char const* bad = "Hyperborea/Gorinium";
+./google/cloud/spanner/interval_test.cc:276:33    - Unknown word (Gorinium)   -- const* bad = "Hyperborea/Gorinium";
+./google/cloud/spanner/interval_test.cc:48:18     - Unknown word (intvl)      -- Interval const intvl(0, 1, 2, hours(3));
 ./google/cloud/spanner/json.h:90:11     - Unknown word (reparsing)  -- * avoids reparsing. Therefore, applications
 ./google/cloud/spanner/keys.cc:58:46     - Unknown word (differencer) -- :MessageDifferencer differencer;
 ./google/cloud/spanner/mutations_test.cc:377:37    - Unknown word (ZXMA)       -- string_value: "Ynl0ZXMA" }
@@ -1132,7 +1135,9 @@ Lines:
 ./google/cloud/spanner/value_test.cc:1388:14   - Unknown word (alphahex)   -- auto const alphahex = [](std::ostream& os
 ./google/cloud/spanner/value_test.cc:1400:49   - Unknown word (manip)      -- ostream&(std::ostream&)> manip;
 ./google/cloud/sql/v1/internal/sql_instances_rest_connection_impl.cc:145:40    - Unknown word (Reencrypt)  -- cesServiceRestConnectionImpl::Reencrypt(
+./google/cloud/sql/v1/internal/sql_instances_rest_connection_impl.cc:545:53    - Unknown word (Ssrs)       -- :SqlInstancesAcquireSsrsLeaseResponse>
 ./google/cloud/sql/v1/internal/sql_instances_rest_stub.cc:136:46    - Unknown word (reencrypt)  -- request.instance(), "/", "reencrypt"));
+./google/cloud/sql/v1/sql_instances_client.h:1136:71   - Unknown word (SSRS)       -- Reporting Services (SSRS).
 ./google/cloud/status.cc:205:50    - Unknown word (keyspaces)  -- separate from other keyspaces (e.g.,
 ./google/cloud/status.cc:205:8     - Unknown word (keyspace)   -- // The keyspace used here is separate
 ./google/cloud/storage/async/client_test.cc:402:59    - Unknown word (algorigthm) -- only-invalid-encryption-algorigthm"
@@ -1232,9 +1237,9 @@ Lines:
 ./google/cloud/storage/internal/bucket_acl_requests_test.cc:115:53    - Unknown word (testuser)   -- request("my-bucket", "user-testuser", "READER");
 ./google/cloud/storage/internal/connection_impl_test.cc:425:40    - Unknown word (Overcommit) -- yClientTest, UploadChunkHandleOvercommit) {
 ./google/cloud/storage/internal/grpc/bucket_request_parser.cc:88:6      - Unknown word (subobject)  -- // subobject.
+./google/cloud/storage/internal/grpc/default_options_test.cc:84:29     - Unknown word (testbench)  -- "from-testbench-env");
 ./google/cloud/storage/internal/grpc/object_request_parser_test.cc:63:33     - Unknown word (Cuakt)      -- md5) : StEvo2V/qoDCuaktZSw3IQ==
-./google/cloud/storage/internal/grpc/stub.cc:419:10    - Unknown word (wopts)      -- auto wopts = grpc::WriteOptions
-./google/cloud/storage/internal/grpc/stub_test.cc:132:29    - Unknown word (testbench)  -- "from-testbench-env");
+./google/cloud/storage/internal/grpc/stub.cc:359:10    - Unknown word (wopts)      -- auto wopts = grpc::WriteOptions
 ./google/cloud/storage/internal/object_requests_test.cc:257:61    - Unknown word (NEFCQ)      -- encryption-key: MTIzNEFCQ0Q="));
 ./google/cloud/storage/internal/object_requests_test.cc:277:61    - Unknown word (QUJDRD)     -- source-encryption-key: QUJDRDEyMzQ="));
 ./google/cloud/storage/internal/object_requests_test.cc:551:27    - Unknown word (sdlkj)      -- "&upload_id=xa298sd_sdlkj2";
