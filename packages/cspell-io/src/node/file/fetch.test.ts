@@ -10,6 +10,7 @@ describe('fetch', () => {
         'fetch url',
         async () => {
             const url = new URL('https://example.com/');
+            // eslint-disable-next-line n/no-unsupported-features/node-builtins
             const response = await fetch(url);
             expect(response.ok).toBe(true);
             expect(await response.text()).toMatch('Example Domain');

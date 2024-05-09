@@ -1,6 +1,7 @@
 import { _fetch as fetch } from './_fetch.js';
 import { FetchUrlError, toFetchUrlError } from './FetchError.js';
 
+// eslint-disable-next-line n/no-unsupported-features/node-builtins
 export async function fetchHead(request: string | URL): Promise<Headers> {
     const url = toURL(request);
     try {
