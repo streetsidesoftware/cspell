@@ -162,6 +162,7 @@ function _merge(
         suggestWords: mergeWordsCached(_left.suggestWords, _right.suggestWords),
         enabledLanguageIds: replaceIfNotEmpty(_left.enabledLanguageIds, _right.enabledLanguageIds),
         enableFiletypes: mergeList(_left.enableFiletypes, _right.enableFiletypes),
+        enabledFileTypes: mergeObjects(_left.enabledFileTypes, _right.enabledFileTypes),
         ignoreRegExpList: mergeListUnique(_left.ignoreRegExpList, _right.ignoreRegExpList),
         patterns: mergeListUnique(_left.patterns, _right.patterns),
         dictionaryDefinitions: mergeListUnique(_left.dictionaryDefinitions, _right.dictionaryDefinitions),

@@ -184,7 +184,70 @@ export interface ExtendableSettings extends Settings {
     overrides?: OverrideSettings[];
 }
 
-export interface Settings extends ReportingConfiguration, BaseSetting, PnPSettings {
+export interface SpellCheckerExtensionSettings {
+    /**
+     * Specify a list of file types to spell check. It is better to use {@link Settings.enabledFileTypes} to Enable / Disable checking files types.
+     * @title Enabled Language Ids
+     * @deprecated true
+     * @deprecationMessage - Use {@link Settings.enabledFileTypes} instead.
+     * @uniqueItems true
+     */
+    enabledLanguageIds?: LanguageIdSingle[];
+
+    /**
+     * Enable / Disable checking file types (languageIds).
+     *
+     * These are in additional to the file types specified by {@link Settings.enabledLanguageIds}.
+     * To disable a language, prefix with `!` as in `!json`,
+     *
+     *
+     * **Example: individual file types**
+     *
+     * ```
+     * jsonc       // enable checking for jsonc
+     * !json       // disable checking for json
+     * kotlin      // enable checking for kotlin
+     * ```
+     *
+     * **Example: enable all file types**
+     *
+     * ```
+     * *           // enable checking for all file types
+     * !json       // except for json
+     * ```
+     * @title Enable File Types
+     * @scope resource
+     * @deprecated true
+     * @deprecationMessage - Use {@link Settings.enabledFileTypes} instead.
+     * @uniqueItems true
+     */
+    enableFiletypes?: LanguageIdSingle[];
+
+    /**
+     * Enable / Disable checking file types (languageIds).
+     *
+     * This setting replaces: {@link Settings.enabledLanguageIds} and {@link Settings.enableFiletypes}.
+     *
+     * A Value of:
+     * - `true` - enable checking for the file type
+     * - `false` - disable checking for the file type
+     *
+     * A file type of `*` is a wildcard that enables all file types.
+     *
+     * **Example: enable all file types**
+     *
+     * | File Type | Enabled | Comment |
+     * | --------- | ------- | ------- |
+     * | `*`       | `true`  | Enable all file types. |
+     * | `json`    | `false` | Disable checking for json files. |
+     *
+     * @title Enabled File Types to Check
+     * @since 8.8.1
+     */
+    enabledFileTypes?: Record<string, boolean>;
+}
+
+export interface Settings extends ReportingConfiguration, BaseSetting, PnPSettings, SpellCheckerExtensionSettings {
     /**
      * Current active spelling language. This specifies the language locale to use in choosing the
      * general dictionary.
@@ -197,28 +260,6 @@ export interface Settings extends ReportingConfiguration, BaseSetting, PnPSettin
      * @default "en"
      */
     language?: LocaleId;
-
-    /** languageIds for the files to spell check. */
-    enabledLanguageIds?: LanguageIdSingle[];
-
-    /**
-     * Enable / Disable checking file types (languageIds).
-     *
-     * These are in additional to the file types specified by `cSpell.enabledLanguageIds`.
-     *
-     * To disable a language, prefix with `!` as in `!json`,
-     *
-     * Example:
-     * ```
-     * jsonc       // enable checking for jsonc
-     * !json       // disable checking for json
-     * kotlin      // enable checking for kotlin
-     * ```
-     * @title File Types to Check
-     * @scope resource
-     * @uniqueItems true
-     */
-    enableFiletypes?: LanguageIdSingle[];
 
     /**
      * Additional settings for individual languages.
