@@ -52,7 +52,7 @@ jobs:
           ref: ${{ env.REF_BRANCH }}
 
       - name: Setup pnpm
-        uses: pnpm/action-setup@v3.0.0
+        uses: pnpm/action-setup@v4.0.0
 
       - name: Use Node.js
         uses: actions/setup-node@v4
@@ -155,7 +155,7 @@ jobs:
           ref: ${{ env.REF_BRANCH }}
 
       - name: Setup pnpm
-        uses: pnpm/action-setup@v3.0.0
+        uses: pnpm/action-setup@v4.0.0
 
       - name: Patch
         run: |
@@ -255,7 +255,7 @@ jobs:
           ref: ${{ env.REF_BRANCH }}
 
       - name: Setup pnpm
-        uses: pnpm/action-setup@v3.0.0
+        uses: pnpm/action-setup@v4.0.0
 
       - name: Patch
         run: |
@@ -313,7 +313,7 @@ jobs:
           ref: ${{ env.REF_BRANCH }}
 
       - name: Setup pnpm
-        uses: pnpm/action-setup@v3.0.0
+        uses: pnpm/action-setup@v4.0.0
 
       - name: Use Node.js ${{ env.NODE_VERSION }}
         uses: actions/setup-node@v4
