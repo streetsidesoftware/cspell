@@ -258,8 +258,7 @@ var require_help = __commonJS({
        * @returns {Option[]}
        */
       visibleGlobalOptions(cmd) {
-        if (!this.showGlobalOptions)
-          return [];
+        if (!this.showGlobalOptions) return [];
         const globalOptions = [];
         for (let ancestorCmd = cmd.parent; ancestorCmd; ancestorCmd = ancestorCmd.parent) {
           const visibleOptions = ancestorCmd.options.filter((option) => !option.hidden);
@@ -541,11 +540,9 @@ var require_help = __commonJS({
       wrap(str, width, indent, minColumnWidth = 40) {
         const indents = " \\f\\t\\v\xA0\u1680\u2000-\u200A\u202F\u205F\u3000\uFEFF";
         const manualIndent = new RegExp(`[\\n][${indents}]+`);
-        if (str.match(manualIndent))
-          return str;
+        if (str.match(manualIndent)) return str;
         const columnWidth = width - indent;
-        if (columnWidth < minColumnWidth)
-          return str;
+        if (columnWidth < minColumnWidth) return str;
         const leadingStr = str.slice(0, indent);
         const columnText = str.slice(indent).replace("\r\n", "\n");
         const indentString = " ".repeat(indent);
@@ -555,8 +552,7 @@ var require_help = __commonJS({
 |.{1,${columnWidth - 1}}([${breaks}]|$)|[^${breaks}]+?([${breaks}]|$)`, "g");
         const lines = columnText.match(regex) || [];
         return leadingStr + lines.map((line, i) => {
-          if (line === "\n")
-            return "";
+          if (line === "\n") return "";
           return (i > 0 ? indentString : "") + line.trimEnd();
         }).join("\n");
       }
@@ -806,8 +802,7 @@ var require_option = __commonJS({
        */
       valueFromOption(value, option) {
         const optionKey = option.attributeName();
-        if (!this.dualOptions.has(optionKey))
-          return true;
+        if (!this.dualOptions.has(optionKey)) return true;
         const preset = this.negativeOptions.get(optionKey).presetArg;
         const negativeValue = preset !== void 0 ? preset : false;
         return option.negate === (negativeValue === value);
@@ -822,8 +817,7 @@ var require_option = __commonJS({
       let shortFlag;
       let longFlag;
       const flagParts = flags.split(/[ |,]+/);
-      if (flagParts.length > 1 && !/^[[<]/.test(flagParts[1]))
-        shortFlag = flagParts.shift();
+      if (flagParts.length > 1 && !/^[[<]/.test(flagParts[1])) shortFlag = flagParts.shift();
       longFlag = flagParts.shift();
       if (!shortFlag && /^-[^-]$/.test(longFlag)) {
         shortFlag = longFlag;
@@ -841,8 +835,7 @@ var require_suggestSimilar = __commonJS({
   "../../node_modules/.pnpm/commander@12.0.0/node_modules/commander/lib/suggestSimilar.js"(exports2) {
     var maxDistance = 3;
     function editDistance(a, b) {
-      if (Math.abs(a.length - b.length) > maxDistance)
-        return Math.max(a.length, b.length);
+      if (Math.abs(a.length - b.length) > maxDistance) return Math.max(a.length, b.length);
       const d = [];
       for (let i = 0; i <= a.length; i++) {
         d[i] = [i];
@@ -874,8 +867,7 @@ var require_suggestSimilar = __commonJS({
       return d[a.length][b.length];
     }
     function suggestSimilar(word, candidates) {
-      if (!candidates || candidates.length === 0)
-        return "";
+      if (!candidates || candidates.length === 0) return "";
       candidates = Array.from(new Set(candidates));
       const searchingOptions = word.startsWith("--");
       if (searchingOptions) {
@@ -886,8 +878,7 @@ var require_suggestSimilar = __commonJS({
       let bestDistance = maxDistance;
       const minSimilarity = 0.4;
       candidates.forEach((candidate) => {
-        if (candidate.length <= 1)
-          return;
+        if (candidate.length <= 1) return;
         const distance = editDistance(word, candidate);
         const length = Math.max(word.length, candidate.length);
         const similarity = (length - distance) / length;
@@ -1054,17 +1045,14 @@ var require_command = __commonJS({
           cmd.description(desc);
           cmd._executableHandler = true;
         }
-        if (opts.isDefault)
-          this._defaultCommandName = cmd._name;
+        if (opts.isDefault) this._defaultCommandName = cmd._name;
         cmd._hidden = !!(opts.noHelp || opts.hidden);
         cmd._executableFile = opts.executableFile || null;
-        if (args)
-          cmd.arguments(args);
+        if (args) cmd.arguments(args);
         this._registerCommand(cmd);
         cmd.parent = this;
         cmd.copyInheritedSettings(this);
-        if (desc)
-          return this;
+        if (desc) return this;
         return cmd;
       }
       /**
@@ -1096,8 +1084,7 @@ var require_command = __commonJS({
        * @return {(Command|Object)} `this` command for chaining, or stored configuration
        */
       configureHelp(configuration) {
-        if (configuration === void 0)
-          return this._helpConfiguration;
+        if (configuration === void 0) return this._helpConfiguration;
         this._helpConfiguration = configuration;
         return this;
       }
@@ -1120,8 +1107,7 @@ var require_command = __commonJS({
        * @return {(Command|Object)} `this` command for chaining, or stored configuration
        */
       configureOutput(configuration) {
-        if (configuration === void 0)
-          return this._outputConfiguration;
+        if (configuration === void 0) return this._outputConfiguration;
         Object.assign(this._outputConfiguration, configuration);
         return this;
       }
@@ -1132,8 +1118,7 @@ var require_command = __commonJS({
        * @return {Command} `this` command for chaining
        */
       showHelpAfterError(displayHelp = true) {
-        if (typeof displayHelp !== "string")
-          displayHelp = !!displayHelp;
+        if (typeof displayHelp !== "string") displayHelp = !!displayHelp;
         this._showHelpAfterError = displayHelp;
         return this;
       }
@@ -1162,10 +1147,8 @@ var require_command = __commonJS({
 - specify the name in Command constructor or using .name()`);
         }
         opts = opts || {};
-        if (opts.isDefault)
-          this._defaultCommandName = cmd._name;
-        if (opts.noHelp || opts.hidden)
-          cmd._hidden = true;
+        if (opts.isDefault) this._defaultCommandName = cmd._name;
+        if (opts.noHelp || opts.hidden) cmd._hidden = true;
         this._registerCommand(cmd);
         cmd.parent = this;
         cmd._checkForBrokenPassThrough();
@@ -1266,10 +1249,8 @@ var require_command = __commonJS({
         const helpDescription = description ?? "display help for command";
         const helpCommand = this.createCommand(helpName);
         helpCommand.helpOption(false);
-        if (helpArgs)
-          helpCommand.arguments(helpArgs);
-        if (helpDescription)
-          helpCommand.description(helpDescription);
+        if (helpArgs) helpCommand.arguments(helpArgs);
+        if (helpDescription) helpCommand.description(helpDescription);
         this._addImplicitHelpCommand = true;
         this._helpCommand = helpCommand;
         return this;
@@ -1760,8 +1741,7 @@ Expecting one of '${allowedValues.join("', '")}'`);
           default:
             throw new Error(`unexpected parse option { from: '${parseOptions.from}' }`);
         }
-        if (!this._name && this._scriptPath)
-          this.nameFromFilename(this._scriptPath);
+        if (!this._name && this._scriptPath) this.nameFromFilename(this._scriptPath);
         this._name = this._name || "program";
         return userArgs;
       }
@@ -1820,13 +1800,10 @@ Expecting one of '${allowedValues.join("', '")}'`);
         const sourceExt = [".js", ".ts", ".tsx", ".mjs", ".cjs"];
         function findFile(baseDir, baseName) {
           const localBin = path.resolve(baseDir, baseName);
-          if (fs2.existsSync(localBin))
-            return localBin;
-          if (sourceExt.includes(path.extname(baseName)))
-            return void 0;
+          if (fs2.existsSync(localBin)) return localBin;
+          if (sourceExt.includes(path.extname(baseName))) return void 0;
           const foundExt = sourceExt.find((ext) => fs2.existsSync(`${localBin}${ext}`));
-          if (foundExt)
-            return `${localBin}${foundExt}`;
+          if (foundExt) return `${localBin}${foundExt}`;
           return void 0;
         }
         this._checkForMissingMandatoryOptions();
@@ -1912,8 +1889,7 @@ Expecting one of '${allowedValues.join("', '")}'`);
        */
       _dispatchSubcommand(commandName, operands, unknown) {
         const subCommand = this._findCommand(commandName);
-        if (!subCommand)
-          this.help({ error: true });
+        if (!subCommand) this.help({ error: true });
         let promiseChain;
         promiseChain = this._chainOrCallSubCommandHook(promiseChain, subCommand, "preSubcommand");
         promiseChain = this._chainOrCall(promiseChain, () => {
@@ -2137,8 +2113,7 @@ Expecting one of '${allowedValues.join("', '")}'`);
        * @private
        */
       _findCommand(name) {
-        if (!name)
-          return void 0;
+        if (!name) return void 0;
         return this.commands.find((cmd) => cmd._name === name || cmd._aliases.includes(name));
       }
       /**
@@ -2231,8 +2206,7 @@ Expecting one of '${allowedValues.join("', '")}'`);
         while (args.length) {
           const arg = args.shift();
           if (arg === "--") {
-            if (dest === unknown)
-              dest.push(arg);
+            if (dest === unknown) dest.push(arg);
             dest.push(...args);
             break;
           }
@@ -2246,8 +2220,7 @@ Expecting one of '${allowedValues.join("', '")}'`);
             if (option) {
               if (option.required) {
                 const value = args.shift();
-                if (value === void 0)
-                  this.optionMissingArgument(option);
+                if (value === void 0) this.optionMissingArgument(option);
                 this.emit(`option:${option.name()}`, value);
               } else if (option.optional) {
                 let value = null;
@@ -2288,25 +2261,21 @@ Expecting one of '${allowedValues.join("', '")}'`);
           if ((this._enablePositionalOptions || this._passThroughOptions) && operands.length === 0 && unknown.length === 0) {
             if (this._findCommand(arg)) {
               operands.push(arg);
-              if (args.length > 0)
-                unknown.push(...args);
+              if (args.length > 0) unknown.push(...args);
               break;
             } else if (this._getHelpCommand() && arg === this._getHelpCommand().name()) {
               operands.push(arg);
-              if (args.length > 0)
-                operands.push(...args);
+              if (args.length > 0) operands.push(...args);
               break;
             } else if (this._defaultCommandName) {
               unknown.push(arg);
-              if (args.length > 0)
-                unknown.push(...args);
+              if (args.length > 0) unknown.push(...args);
               break;
             }
           }
           if (this._passThroughOptions) {
             dest.push(arg);
-            if (args.length > 0)
-              dest.push(...args);
+            if (args.length > 0) dest.push(...args);
             break;
           }
           dest.push(arg);
@@ -2467,8 +2436,7 @@ Expecting one of '${allowedValues.join("', '")}'`);
        * @private
        */
       unknownOption(flag) {
-        if (this._allowUnknownOption)
-          return;
+        if (this._allowUnknownOption) return;
         let suggestion = "";
         if (flag.startsWith("--") && this._showSuggestionAfterError) {
           let candidateFlags = [];
@@ -2490,8 +2458,7 @@ Expecting one of '${allowedValues.join("', '")}'`);
        * @private
        */
       _excessArguments(receivedArgs) {
-        if (this._allowExcessArguments)
-          return;
+        if (this._allowExcessArguments) return;
         const expected = this.registeredArguments.length;
         const s2 = expected === 1 ? "" : "s";
         const forSubcommand = this.parent ? ` for '${this.name()}'` : "";
@@ -2510,8 +2477,7 @@ Expecting one of '${allowedValues.join("', '")}'`);
           const candidateNames = [];
           this.createHelp().visibleCommands(this).forEach((command) => {
             candidateNames.push(command.name());
-            if (command.alias())
-              candidateNames.push(command.alias());
+            if (command.alias()) candidateNames.push(command.alias());
           });
           suggestion = suggestSimilar(unknownName, candidateNames);
         }
@@ -2531,8 +2497,7 @@ Expecting one of '${allowedValues.join("', '")}'`);
        * @return {(this | string | undefined)} `this` command for chaining, or version string if no arguments
        */
       version(str, flags, description) {
-        if (str === void 0)
-          return this._version;
+        if (str === void 0) return this._version;
         this._version = str;
         flags = flags || "-V, --version";
         description = description || "output the version number";
@@ -2554,8 +2519,7 @@ Expecting one of '${allowedValues.join("', '")}'`);
        * @return {(string|Command)}
        */
       description(str, argsDescription) {
-        if (str === void 0 && argsDescription === void 0)
-          return this._description;
+        if (str === void 0 && argsDescription === void 0) return this._description;
         this._description = str;
         if (argsDescription) {
           this._argsDescription = argsDescription;
@@ -2569,8 +2533,7 @@ Expecting one of '${allowedValues.join("', '")}'`);
        * @return {(string|Command)}
        */
       summary(str) {
-        if (str === void 0)
-          return this._summary;
+        if (str === void 0) return this._summary;
         this._summary = str;
         return this;
       }
@@ -2583,14 +2546,12 @@ Expecting one of '${allowedValues.join("', '")}'`);
        * @return {(string|Command)}
        */
       alias(alias) {
-        if (alias === void 0)
-          return this._aliases[0];
+        if (alias === void 0) return this._aliases[0];
         let command = this;
         if (this.commands.length !== 0 && this.commands[this.commands.length - 1]._executableHandler) {
           command = this.commands[this.commands.length - 1];
         }
-        if (alias === command._name)
-          throw new Error("Command alias can't be the same as its name");
+        if (alias === command._name) throw new Error("Command alias can't be the same as its name");
         const matchingCommand = this.parent?._findCommand(alias);
         if (matchingCommand) {
           const existingCmd = [matchingCommand.name()].concat(matchingCommand.aliases()).join("|");
@@ -2608,8 +2569,7 @@ Expecting one of '${allowedValues.join("', '")}'`);
        * @return {(string[]|Command)}
        */
       aliases(aliases) {
-        if (aliases === void 0)
-          return this._aliases;
+        if (aliases === void 0) return this._aliases;
         aliases.forEach((alias) => this.alias(alias));
         return this;
       }
@@ -2621,8 +2581,7 @@ Expecting one of '${allowedValues.join("', '")}'`);
        */
       usage(str) {
         if (str === void 0) {
-          if (this._usage)
-            return this._usage;
+          if (this._usage) return this._usage;
           const args = this.registeredArguments.map((arg) => {
             return humanReadableArgName(arg);
           });
@@ -2642,8 +2601,7 @@ Expecting one of '${allowedValues.join("', '")}'`);
        * @return {(string|Command)}
        */
       name(str) {
-        if (str === void 0)
-          return this._name;
+        if (str === void 0) return this._name;
         this._name = str;
         return this;
       }
@@ -2675,8 +2633,7 @@ Expecting one of '${allowedValues.join("', '")}'`);
        * @return {(string|null|Command)}
        */
       executableDir(path2) {
-        if (path2 === void 0)
-          return this._executableDir;
+        if (path2 === void 0) return this._executableDir;
         this._executableDir = path2;
         return this;
       }
@@ -2928,8 +2885,7 @@ var import_node_fs = require("node:fs");
 // ../../node_modules/.pnpm/csv-parse@5.5.5/node_modules/csv-parse/lib/api/CsvError.js
 var CsvError = class _CsvError extends Error {
   constructor(code, message, options, ...contexts) {
-    if (Array.isArray(message))
-      message = message.join(" ").trim();
+    if (Array.isArray(message)) message = message.join(" ").trim();
     super(message);
     if (Error.captureStackTrace !== void 0) {
       Error.captureStackTrace(this, _CsvError);
@@ -3206,8 +3162,7 @@ var normalize_options = function(opts) {
     ], options);
   }
   const delimiter_json = JSON.stringify(options.delimiter);
-  if (!Array.isArray(options.delimiter))
-    options.delimiter = [options.delimiter];
+  if (!Array.isArray(options.delimiter)) options.delimiter = [options.delimiter];
   if (options.delimiter.length === 0) {
     throw new CsvError("CSV_INVALID_OPTION_DELIMITER", [
       "Invalid option delimiter:",
@@ -3529,8 +3484,7 @@ var transform = function(original_options = {}) {
     options,
     state: init_state(options),
     __needMoreData: function(i, bufLen, end) {
-      if (end)
-        return false;
+      if (end) return false;
       const { encoding, escape, quote } = this.options;
       const { quoting, needMoreDataSize, recordDelimiterMaxLength } = this.state;
       const numOfCharLeft = bufLen - i - 1;
@@ -3658,8 +3612,7 @@ var transform = function(original_options = {}) {
                     "(if activated) or comment"
                   ], this.options, this.__infoField())
                 );
-                if (err !== void 0)
-                  return err;
+                if (err !== void 0) return err;
               } else {
                 this.state.quoting = false;
                 this.state.wasQuoting = true;
@@ -3680,8 +3633,7 @@ var transform = function(original_options = {}) {
                       field: this.state.field
                     })
                   );
-                  if (err !== void 0)
-                    return err;
+                  if (err !== void 0) return err;
                 }
               } else {
                 this.state.quoting = true;
@@ -3711,12 +3663,10 @@ var transform = function(original_options = {}) {
                 }
                 this.info.bytes = this.state.bufBytesStart + pos;
                 const errField = this.__onField();
-                if (errField !== void 0)
-                  return errField;
+                if (errField !== void 0) return errField;
                 this.info.bytes = this.state.bufBytesStart + pos + recordDelimiterLength;
                 const errRecord = this.__onRecord(push);
-                if (errRecord !== void 0)
-                  return errRecord;
+                if (errRecord !== void 0) return errRecord;
                 if (to !== -1 && this.info.records >= to) {
                   this.state.stop = true;
                   close();
@@ -3741,8 +3691,7 @@ var transform = function(original_options = {}) {
             if (delimiterLength !== 0) {
               this.info.bytes = this.state.bufBytesStart + pos;
               const errField = this.__onField();
-              if (errField !== void 0)
-                return errField;
+              if (errField !== void 0) return errField;
               pos += delimiterLength - 1;
               continue;
             }
@@ -3787,17 +3736,14 @@ var transform = function(original_options = {}) {
               `the parsing is finished with an opening quote at line ${this.info.lines}`
             ], this.options, this.__infoField())
           );
-          if (err !== void 0)
-            return err;
+          if (err !== void 0) return err;
         } else {
           if (this.state.wasQuoting === true || this.state.record.length !== 0 || this.state.field.length !== 0) {
             this.info.bytes = this.state.bufBytesStart + pos;
             const errField = this.__onField();
-            if (errField !== void 0)
-              return errField;
+            if (errField !== void 0) return errField;
             const errRecord = this.__onRecord(push);
-            if (errRecord !== void 0)
-              return errRecord;
+            if (errRecord !== void 0) return errRecord;
           } else if (this.state.wasRowDelimiter === true) {
             this.info.empty_lines++;
           } else if (this.state.commenting === true) {
@@ -3850,8 +3796,7 @@ var transform = function(original_options = {}) {
           this.state.error = err;
         } else {
           const finalErr = this.__error(err);
-          if (finalErr)
-            return finalErr;
+          if (finalErr) return finalErr;
         }
       }
       if (skip_records_with_empty_values === true && isRecordEmpty(record)) {
@@ -3869,8 +3814,7 @@ var transform = function(original_options = {}) {
         if (columns !== false) {
           const obj = {};
           for (let i = 0, l = record.length; i < l; i++) {
-            if (columns[i] === void 0 || columns[i].disabled)
-              continue;
+            if (columns[i] === void 0 || columns[i].disabled) continue;
             if (group_columns_by_name === true && obj[columns[i].name] !== void 0) {
               if (Array.isArray(obj[columns[i].name])) {
                 obj[columns[i].name] = obj[columns[i].name].concat(record[i]);
@@ -3974,8 +3918,7 @@ var transform = function(original_options = {}) {
       }
       if (cast === true) {
         const [err, f] = this.__cast(field);
-        if (err !== void 0)
-          return err;
+        if (err !== void 0) return err;
         field = f;
       }
       this.state.record.push(field);
@@ -4030,15 +3973,13 @@ var transform = function(original_options = {}) {
     __isCharTrimable: function(buf, pos) {
       const isTrim = (buf2, pos2) => {
         const { timchars } = this.state;
-        loop1:
-          for (let i = 0; i < timchars.length; i++) {
-            const timchar = timchars[i];
-            for (let j = 0; j < timchar.length; j++) {
-              if (timchar[j] !== buf2[pos2 + j])
-                continue loop1;
-            }
-            return timchar.length;
+        loop1: for (let i = 0; i < timchars.length; i++) {
+          const timchar = timchars[i];
+          for (let j = 0; j < timchar.length; j++) {
+            if (timchar[j] !== buf2[pos2 + j]) continue loop1;
           }
+          return timchar.length;
+        }
         return 0;
       };
       return isTrim(buf, pos);
@@ -4053,12 +3994,10 @@ var transform = function(original_options = {}) {
       return value - parseFloat(value) + 1 >= 0;
     },
     __compareBytes: function(sourceBuf, targetBuf, targetPos, firstByte) {
-      if (sourceBuf[0] !== firstByte)
-        return 0;
+      if (sourceBuf[0] !== firstByte) return 0;
       const sourceLength = sourceBuf.length;
       for (let i = 1; i < sourceLength; i++) {
-        if (sourceBuf[i] !== targetBuf[targetPos + i])
-          return 0;
+        if (sourceBuf[i] !== targetBuf[targetPos + i]) return 0;
       }
       return sourceLength;
     },
@@ -4069,42 +4008,38 @@ var transform = function(original_options = {}) {
       } else if (ignore_last_delimiters !== false && typeof ignore_last_delimiters === "number" && this.state.record.length === ignore_last_delimiters - 1) {
         return 0;
       }
-      loop1:
-        for (let i = 0; i < delimiter.length; i++) {
-          const del = delimiter[i];
-          if (del[0] === chr) {
-            for (let j = 1; j < del.length; j++) {
-              if (del[j] !== buf[pos + j])
-                continue loop1;
-            }
-            return del.length;
+      loop1: for (let i = 0; i < delimiter.length; i++) {
+        const del = delimiter[i];
+        if (del[0] === chr) {
+          for (let j = 1; j < del.length; j++) {
+            if (del[j] !== buf[pos + j]) continue loop1;
           }
+          return del.length;
         }
+      }
       return 0;
     },
     __isRecordDelimiter: function(chr, buf, pos) {
       const { record_delimiter } = this.options;
       const recordDelimiterLength = record_delimiter.length;
-      loop1:
-        for (let i = 0; i < recordDelimiterLength; i++) {
-          const rd = record_delimiter[i];
-          const rdLength = rd.length;
-          if (rd[0] !== chr) {
-            continue;
-          }
-          for (let j = 1; j < rdLength; j++) {
-            if (rd[j] !== buf[pos + j]) {
-              continue loop1;
-            }
-          }
-          return rd.length;
+      loop1: for (let i = 0; i < recordDelimiterLength; i++) {
+        const rd = record_delimiter[i];
+        const rdLength = rd.length;
+        if (rd[0] !== chr) {
+          continue;
         }
+        for (let j = 1; j < rdLength; j++) {
+          if (rd[j] !== buf[pos + j]) {
+            continue loop1;
+          }
+        }
+        return rd.length;
+      }
       return 0;
     },
     __isEscape: function(buf, pos, chr) {
       const { escape } = this.options;
-      if (escape === null)
-        return false;
+      if (escape === null) return false;
       const l = escape.length;
       if (escape[0] === chr) {
         for (let i = 0; i < l; i++) {
@@ -4118,8 +4053,7 @@ var transform = function(original_options = {}) {
     },
     __isQuote: function(buf, pos) {
       const { quote } = this.options;
-      if (quote === null)
-        return false;
+      if (quote === null) return false;
       const l = quote.length;
       for (let i = 0; i < l; i++) {
         if (quote[i] !== buf[pos + i]) {
@@ -4136,18 +4070,17 @@ var transform = function(original_options = {}) {
         Buffer.from("\n", encoding),
         Buffer.from("\r", encoding)
       ];
-      loop:
-        for (let i = 0; i < rds.length; i++) {
-          const l = rds[i].length;
-          for (let j = 0; j < l; j++) {
-            if (rds[i][j] !== buf[pos + j]) {
-              continue loop;
-            }
+      loop: for (let i = 0; i < rds.length; i++) {
+        const l = rds[i].length;
+        for (let j = 0; j < l; j++) {
+          if (rds[i][j] !== buf[pos + j]) {
+            continue loop;
           }
-          this.options.record_delimiter.push(rds[i]);
-          this.state.recordDelimiterMaxLength = rds[i].length;
-          return rds[i].length;
         }
+        this.options.record_delimiter.push(rds[i]);
+        this.state.recordDelimiterMaxLength = rds[i].length;
+        return rds[i].length;
+      }
       return 0;
     },
     __error: function(msg) {
@@ -4208,11 +4141,9 @@ var parse = function(data, opts = {}) {
   const close = () => {
   };
   const err1 = parser.parse(data, false, push, close);
-  if (err1 !== void 0)
-    throw err1;
+  if (err1 !== void 0) throw err1;
   const err2 = parser.parse(void 0, true, push, close);
-  if (err2 !== void 0)
-    throw err2;
+  if (err2 !== void 0) throw err2;
   return records;
 };
 
@@ -4324,10 +4255,8 @@ function calcStats(data) {
   const values = data.map((d) => d.elapsedMs).map((v) => v || 1);
   const trend = values.slice(-20);
   const point = values.pop();
-  if (point === void 0)
-    return emptyStats;
-  if (values.length === 0)
-    return { point, avg: point, min: point, max: point, sum: point, count: 1, sd: 0, trend };
+  if (point === void 0) return emptyStats;
+  if (values.length === 0) return { point, avg: point, min: point, max: point, sum: point, count: 1, sd: 0, trend };
   const sum = values.reduce((a, b) => a + b, 0);
   const avg = sum / (values.length || 1);
   const min = Math.min(...values);
