@@ -185,15 +185,17 @@ export interface ExtendableSettings extends Settings {
 }
 
 export interface SpellCheckerExtensionSettings {
+    // * @deprecated true
+    // * @deprecationMessage - Use {@link Settings.enabledFileTypes} instead.
     /**
      * Specify a list of file types to spell check. It is better to use {@link Settings.enabledFileTypes} to Enable / Disable checking files types.
      * @title Enabled Language Ids
-     * @deprecated true
-     * @deprecationMessage - Use {@link Settings.enabledFileTypes} instead.
      * @uniqueItems true
      */
     enabledLanguageIds?: LanguageIdSingle[];
 
+    // * @deprecated true
+    // * @deprecationMessage - Use {@link Settings.enabledFileTypes} instead.
     /**
      * Enable / Disable checking file types (languageIds).
      *
@@ -217,8 +219,6 @@ export interface SpellCheckerExtensionSettings {
      * ```
      * @title Enable File Types
      * @scope resource
-     * @deprecated true
-     * @deprecationMessage - Use {@link Settings.enabledFileTypes} instead.
      * @uniqueItems true
      */
     enableFiletypes?: LanguageIdSingle[];

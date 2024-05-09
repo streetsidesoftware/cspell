@@ -16,7 +16,7 @@
     "build-dev": "pnpm run --filter \\!website build-dev",
     "build-cspell-types-docs": "cd doc-generator && pnpm i && pnpm run build-cspell-types-docs",
     "build-integration-tests": "cd ./integration-tests && pnpm i",
-    "build-schema": "pnpm -r run build-schema",
+    "build-schema": "pnpm -r run build-schema && node ./scripts/remove-zero-width-space.mjs ./cspell.schema.json",
     "build": "pnpm -r --stream --workspace-concurrency=2 run build && pnpm -r run prepare-cspell-action",
     "build:readme": "pnpm build:readme:packages && pnpm build:readme:root && pnpm docs:inject",
     "build:readme:packages": "pnpm -r build:readme",
