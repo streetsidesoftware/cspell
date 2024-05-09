@@ -6,7 +6,8 @@
   "bin": {
     "update-release-please": "./update-release-please.mjs",
     "build-cspell-schema": "./build-cspell-schema.mjs",
-    "update-package-json": "./update-package-json.mjs"
+    "update-package-json": "./update-package-json.mjs",
+    "remove-zero-width-space": "./remove-zero-width-space.mjs"
   },
   "scripts": {
     "#build:ts-json-schema-generator": "pnpm esbuild ../../../code/clones/ts-json-schema-generator/dist/index.js --bundle --outfile=lib/ts-json-schema-generator.cjs --platform=node --external:typescript",
