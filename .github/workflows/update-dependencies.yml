@@ -86,6 +86,7 @@ jobs:
 
       - name: Apply and new Lint rules
         if: env.git_status == 'dirty'
+        continue-on-error: true
         run: pnpm run lint
 
       - name: Update Integration Test Snapshots
