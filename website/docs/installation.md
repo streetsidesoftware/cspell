@@ -59,4 +59,4 @@ yarn add --dev cspell@latest
 
 # See Also
 
-- [Getting Started](./getting-started.md)
+- [Getting Started](./getting-started)
