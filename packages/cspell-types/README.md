@@ -6,18 +6,19 @@ This package contains no dependencies to avoid any security issues.
 
 ## Support Future Development
 
-- Become a [<img src="https://github.githubassets.com/images/modules/site/icons/funding_platforms/patreon.svg" width="16" height="16" alt="Patreon">Patreon!](https://patreon.com/streetsidesoftware)
+<!--- @@inject: ../../static/sponsor.md --->
 
-## cspell for enterprise
+- [![GitHub Sponsors](https://img.shields.io/badge/-black?style=social&logo=githubsponsors&label=GitHub%20Sponsor%3A%20Street%20Side%20Software)](https://github.com/sponsors/streetsidesoftware)
+- [![Patreon](https://img.shields.io/badge/-black?style=social&logo=patreon&label=Patreon%3A%20Street%20Side%20Software)](https://patreon.com/streetsidesoftware)
+- [![PayPal](https://img.shields.io/badge/-black?style=social&logo=paypal&label=PayPal%20Donate%3A%20Street%20Side%20Software)](https://www.paypal.com/donate/?hosted_button_id=26LNBP2Q6MKCY)
+- [![Open Collective](https://img.shields.io/badge/-black?style=social&logo=opencollective&label=Open%20Collective%3A%20CSpell)](https://opencollective.com/cspell)
 
-Available as part of the Tidelift Subscription.
-
-The maintainers of cspell and thousands of other packages are working with Tidelift to deliver commercial support and maintenance for the open source packages you use to build your applications. Save time, reduce risk, and improve code health, while paying the maintainers of the exact packages you use. [Learn more.](https://tidelift.com/subscription/pkg/npm-cspell?utm_source=npm-cspell&utm_medium=referral&utm_campaign=enterprise&utm_term=repo)
+<!--- @@inject-end: ../../static/sponsor.md --->
 
 ## Installation
 
 ```
-npm i -SD @cspell/cspell-types
+npm i -S @cspell/cspell-types
 ```
 
 ## Usage
@@ -76,8 +77,9 @@ The maintainers of cspell and thousands of other packages are working with Tidel
 ---
 
 <p align="center">
-Brought to you by <a href="https://streetsidesoftware.com" title="Street Side Software">
-<img width="16" alt="Street Side Software Logo" src="https://i.imgur.com/CyduuVY.png" /> Street Side Software
+Brought to you by
+<a href="https://streetsidesoftware.com" title="Street Side Software">
+  <img width="16" alt="Street Side Software Logo" src="https://i.imgur.com/CyduuVY.png" /> Street Side Software
 </a>
 </p>
 
