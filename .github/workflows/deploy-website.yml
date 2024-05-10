@@ -7,6 +7,7 @@ on:
     paths:
       - 'docs/**'
       - 'website/**'
+      - 'packages/cspell-types/**/*.ts'
   # Run on demand
   workflow_dispatch:
 
@@ -32,12 +33,14 @@ jobs:
         run: |
           cd website
           pnpm i
+          pnpm run build
           pnpm run build:site
       - uses: actions/upload-artifact@v4
         with:
           name: website
           path: docs
           retention-days: 1
+
   deploy:
     name: Deploy to GitHub Pages
     permissions:

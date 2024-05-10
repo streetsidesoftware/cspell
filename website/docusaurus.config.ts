@@ -24,6 +24,31 @@ const config: Config = {
     onBrokenLinks: 'throw',
     onBrokenMarkdownLinks: 'warn',
 
+    plugins: [
+        [
+            'docusaurus-plugin-typedoc',
+            {
+                id: 'api-cspell-types',
+                out: './docs/api/cspell-types',
+                entryPoints: ['../packages/cspell-types/src/index.ts'],
+                tsconfig: '../packages/cspell-types/tsconfig.json',
+                // outputFileStrategy: 'modules',
+                fileExtension: '.md',
+            },
+        ],
+        [
+            'docusaurus-plugin-typedoc',
+            {
+                id: 'api-cspell-lib',
+                out: './docs/api/cspell-lib',
+                entryPoints: ['../packages/cspell-lib/src/lib/index.ts'],
+                tsconfig: '../packages/cspell-lib/tsconfig.esm.json',
+                // outputFileStrategy: 'modules',
+                fileExtension: '.md',
+            },
+        ],
+    ],
+
     // Even if you don't use internationalization, you can use this field to set
     // useful metadata like html lang. For example, if your site is Chinese, you
     // may want to replace "en" with "zh-Hans".
@@ -62,7 +87,7 @@ const config: Config = {
         navbar: {
             title: 'CSpell',
             logo: {
-                alt: 'My Site Logo',
+                alt: 'Street Side Software Logo',
                 src: 'img/logo.png',
             },
             items: [

@@ -31,6 +31,7 @@ jobs:
 
       - name: Build website
         run: |
+          pnpm build
           pnpm --filter website run build:site
 
       # Ensure the repository is clean after build & test
