@@ -78,7 +78,7 @@ Or you can specify a path to a config file with the `--config <path>` argument o
 - `maxNumberOfProblems` - defaults to **_100_** per file.
 - `minWordLength` - defaults to **_4_** - the minimum length of a word before it is checked.
 - `allowCompoundWords` - defaults to **_false_**; set to **true** to allow compound words by default.
-- `dictionaries` - list of the names of the dictionaries to use. See [Dictionaries](#Dictionaries) below.
+- `dictionaries` - list of the names of the dictionaries to use. See [Dictionaries](../dictionaries.mdx).
 - `dictionaryDefinitions` - this list defines any custom dictionaries to use. This is how you can include other languages like Spanish.
 
   **Example**
@@ -129,7 +129,7 @@ Or you can specify a path to a config file with the `--config <path>` argument o
   "ignoreRegExpList": ["comments"]
   ```
 
-- `languageSettings` - this allow for per programming language configuration settings. See [LanguageSettings](./language-settings.md#LanguageSettings)
+- `languageSettings` - this allow for per programming language configuration settings. See [LanguageSettings](./language-settings.mdx#languagesettings).
 
 ## `package.json`
 
