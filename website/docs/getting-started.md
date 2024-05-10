@@ -2,7 +2,8 @@
 title: 'Getting Started with CSpell'
 categories: docs
 # parent: Docs
-nav_order: 2
+sidebar_position: 1
+sidebar_label: Getting Started
 ---
 
 # Spell Checking
