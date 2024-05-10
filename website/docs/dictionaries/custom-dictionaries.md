@@ -3,7 +3,8 @@ layout: default
 title: Custom Dictionaries
 categories: docs
 # parent: Docs
-nav_order: 4
+sidebar_position: 2
+sidebar_label: Custom Dictionaries
 ---
 
 # Custom Dictionaries

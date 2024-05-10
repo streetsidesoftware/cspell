@@ -2,7 +2,8 @@
 title: 'Getting Started with CSpell'
 categories: docs
 # parent: Docs
-nav_order: 2
+sidebar_position: 1
+sidebar_label: Getting Started
 ---
 
 # Spell Checking
@@ -137,8 +138,8 @@ Steps:
 The following resources can help you with fine-tuning your configurations:
 
 - [Making words forbidden](./forbidden-words.md)
-- [Defining Custom Dictionaries](./dictionaries-custom.md)
-- [About Dictionaries](./dictionaries.md)
+- [Defining Custom Dictionaries](./dictionaries/custom-dictionaries)
+- [About Dictionaries](./dictionaries)
 - [Understanding CSpell Globs](./globs.md)
 
 # Help

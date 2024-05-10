@@ -2,7 +2,8 @@
 title: 'Searching Dictionaries'
 categories: docs
 # parent: Docs
-nav_order: 4
+sidebar_position: 3
+sidebar_label: Searching Dictionaries
 ---
 
 # Searching Dictionaries

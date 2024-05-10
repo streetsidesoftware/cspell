@@ -3,14 +3,15 @@ layout: default
 title: Dictionaries
 categories: docs
 # parent: Docs
-nav_order: 4
+sidebar_position: 1
+sidebar_label: Default Dictionaries
 ---
 
 # Dictionaries
 
 The spell checker includes a set of default dictionaries.
 
-Use the `trace` command to see a list of dictionaries: See [Searching Dictionaries](./command-trace.md)
+Use the `trace` command to see a list of dictionaries: See [Searching Dictionaries](./dictionaries/searching-dictionaries)
 
 ## General Dictionaries
 

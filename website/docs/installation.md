@@ -2,7 +2,8 @@
 title: 'Installing CSpell'
 categories: docs
 # parent: Docs
-nav_order: 2
+sidebar_position: 2
+sidebar_label: Installation
 ---
 
 # Installation

@@ -36,7 +36,7 @@ The concept is simple, split camelCase and snake_case words before checking them
 
 ## Dictionaries
 
-See also: [Dictionaries](./dictionaries.md) and [Custom Dictionaries](./dictionaries-custom.md)
+See also: [Dictionaries](./dictionaries) and [Custom Dictionaries](./dictionaries/custom-dictionaries)
 
 The _dictionaries_ list allows you to specify dictionaries to use for the file.
 
