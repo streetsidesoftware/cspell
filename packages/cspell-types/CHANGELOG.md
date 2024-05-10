@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## <small>8.8.1 (2024-05-10)</small>
+
+* chore: Do not stop update if it fails to lint. ([64ba085](https://github.com/streetsidesoftware/cspell/commit/64ba085))
+
 ## 8.8.0 (2024-05-03)
 
 **Note:** Version bump only for package @cspell/cspell-types
