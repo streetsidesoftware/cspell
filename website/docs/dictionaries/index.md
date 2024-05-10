@@ -11,7 +11,7 @@ sidebar_label: Default Dictionaries
 
 The spell checker includes a set of default dictionaries.
 
-Use the `trace` command to see a list of dictionaries: See [Searching Dictionaries](./command-trace.md)
+Use the `trace` command to see a list of dictionaries: See [Searching Dictionaries](./dictionaries/searching-dictionaries)
 
 ## General Dictionaries
 
