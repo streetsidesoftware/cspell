@@ -31,9 +31,9 @@ jobs:
 
       - name: Build website
         run: |
-          cd website
           pnpm i
           pnpm run build
+          cd website
           pnpm run build:site
       - uses: actions/upload-artifact@v4
         with:
