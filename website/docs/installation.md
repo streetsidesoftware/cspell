@@ -18,7 +18,7 @@ CSpell requires Node JS to run. Most likely it is already install.
 node -v
 ```
 
-It should be greater than `14.x`.
+It should be greater than `18.x`.
 
 ### Resources:
 
@@ -28,34 +28,20 @@ It should be greater than `14.x`.
 
 ## CSpell
 
-### **NPM Global**
-
-```sh
+```sh npm2yarn
 npm install -g cspell@latest
-```
-
-### **NPM Package**
-
-```sh
-npm install --save-dev cspell@latest
-```
-
-### **Yarn Package**
-
-```sh
-yarn add --dev cspell@latest
 ```
 
 ## Running CSpell
 
 - ```sh
-  cspell "**"
+  cspell .
   ```
 - ```sh
-  npx cspell "**"
+  npx cspell .
   ```
 - ```sh
-  yarn cspell "**"
+  yarn cspell .
   ```
 
 # See Also

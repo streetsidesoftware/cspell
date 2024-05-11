@@ -45,7 +45,7 @@ The maintainers of cspell and thousands of other packages are working with Tidel
 
 ## Installation
 
-```sh
+```sh npm2yarn
 npm install -g cspell
 ```
 

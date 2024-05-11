@@ -1,6 +1,7 @@
 import { themes as prismThemes } from 'prism-react-renderer';
 import type { Config } from '@docusaurus/types';
 import type * as Preset from '@docusaurus/preset-classic';
+import npm2yarn from '@docusaurus/remark-plugin-npm2yarn';
 
 const config: Config = {
     title: 'CSpell',
@@ -47,6 +48,28 @@ const config: Config = {
                 fileExtension: '.md',
             },
         ],
+        [
+            'docusaurus-plugin-typedoc',
+            {
+                id: 'api-cspell',
+                out: './docs/api/cspell',
+                entryPoints: ['../packages/cspell/src/app/index.ts'],
+                tsconfig: '../packages/cspell/tsconfig.esm.json',
+                // outputFileStrategy: 'modules',
+                fileExtension: '.md',
+            },
+        ],
+        // [
+        //     'docusaurus-plugin-typedoc',
+        //     {
+        //         id: 'api-cspell-trie-lib',
+        //         out: './docs/api/cspell-trie-lib',
+        //         entryPoints: ['../packages/cspell-trie-lib/src/lib/index.ts'],
+        //         tsconfig: '../packages/cspell-trie-lib/tsconfig.json',
+        //         // outputFileStrategy: 'modules',
+        //         fileExtension: '.md',
+        //     },
+        // ],
     ],
 
     // Even if you don't use internationalization, you can use this field to set
@@ -65,7 +88,8 @@ const config: Config = {
                     sidebarPath: './sidebars.ts',
                     // Please change this to your repo.
                     // Remove this to remove the "edit this page" links.
-                    editUrl: 'https://github.com/streetsidesoftware/cspell/blob/main/docs',
+                    editUrl: 'https://github.com/streetsidesoftware/cspell/tree/main/website/docs',
+                    remarkPlugins: [npm2yarn],
                 },
                 // blog: {
                 //   showReadingTime: true,
@@ -154,6 +178,7 @@ const config: Config = {
         prism: {
             theme: prismThemes.github,
             darkTheme: prismThemes.dracula,
+            additionalLanguages: ['json', 'json5', 'bash'],
         },
     } satisfies Preset.ThemeConfig,
 };
