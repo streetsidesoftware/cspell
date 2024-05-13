@@ -3,7 +3,7 @@ Repository: eslint/eslint
 Url: "https://github.com/eslint/eslint"
 Args: [".","--config=../../../config/eslint/cspell.config.yaml","--issues-summary-report","--exclude=bin/**","--exclude=CHANGELOG.md","--exclude=_data","--exclude=tests/bench/large.js","--exclude=docs/src/_includes","--exclude=docs/src/assets/{fonts,s?css,images}"]
 Lines:
- CSpell: Files checked: 1931, Issues found: 2184 in 389 files.
+ CSpell: Files checked: 1931, Issues found: 2185 in 389 files.
  exit code: 1
 ./Makefile.js:145:88    - Unknown word (ined)               -- followed by the string "ined".
 ./Makefile.js:151:48    - Unknown word (blogpost)           -- render(cat("./templates/blogpost.md.ejs"), renderContext
@@ -31,8 +31,7 @@ Lines:
 ./README.md:288:5     - Unknown word (teamend)       -- <!--teamend-->
 ./README.md:295:5     - Unknown word (sponsorsstart) -- <!--sponsorsstart-->
 ./README.md:299:564   - Unknown word (Workleap)      -- f99fe2465f&v=4" alt="Workleap" height="64"></a></p
-./README.md:300:1186  - Unknown word (Nextbase)      -- 145838380?v=4" alt="Nextbase Starter Kit" height
-./README.md:300:673   - Unknown word (Transloadit)   -- com/u/125754?v=4" alt="Transloadit" height="32"></a> <a
+./README.md:300:1054  - Unknown word (Nextbase)      -- 145838380?v=4" alt="Nextbase Starter Kit" height
 ./README.md:301:5     - Unknown word (sponsorsend)   -- <!--sponsorsend-->
 ./conf/replacements.json:12:36     - Unknown word (parens)     -- wrap-func": ["no-extra-parens"],
 ./conf/replacements.json:13:62     - Unknown word (paren)      -- space-before-function-paren"],
@@ -158,7 +157,7 @@ Lines:
 ./docs/src/rules/no-restricted-modules.md:69:63     - Unknown word (dgram)      -- "cluster","crypto","dgram","dns","domain","events
 ./docs/src/rules/no-restricted-modules.md:69:95     - Unknown word (freelist)   -- ,"domain","events","freelist","fs","http","https
 ./docs/src/rules/no-restricted-syntax.md:66:5      - Unknown word (dont)       -- dontMess();
-./docs/src/rules/no-return-await.md:12:172    - Unknown word (microtask)  -- the cost of an extra microtask before resolving the
+./docs/src/rules/no-return-await.md:10:165    - Unknown word (microtask)  -- , to avoid an extra microtask. However, due to the
 ./docs/src/rules/no-script-url.md:29:41     - Unknown word (scripturl)  -- rule corresponds to `scripturl` rule of JSHint.
 ./docs/src/rules/no-unexpected-multiline.md:14:78     - Unknown word (Schlueter)  -- once described by Isaac Schlueter, a newline character
 ./docs/src/rules/no-unsafe-finally.md:44:69     - Unknown word (rethrown)   -- block is caught and rethrown
@@ -363,16 +362,16 @@ Lines:
 ./tests/lib/config/flat-config-array.js:207:22    - Unknown word (noniterable) -- it("should allow noniterable baseConfig objects"
 ./tests/lib/config/flat-config-schema.js:19:50     - Unknown word (reults)     -- expectedResult] The expected reults of merging first and
 ./tests/lib/config/flat-config-schema.js:46:20     - Unknown word (emtpy)      -- it("returns an emtpy object if both values
-./tests/lib/eslint/eslint.js:1287:57   - Unknown word (doesnotexist) -- lintFiles(["subdir1", "doesnotexist/*.js"]);
-./tests/lib/eslint/eslint.js:1362:58   - Unknown word (doesexist)    -- await eslint.lintFiles(["doesexist/*.js"]);
-./tests/lib/eslint/eslint.js:1889:30   - Unknown word (reignoring)   -- it("should allow reignoring of previously ignored
-./tests/lib/eslint/eslint.js:1930:71   - Unknown word (unignoring)   -- unignored without also unignoring all files in them",
-./tests/lib/eslint/eslint.js:1944:47   - Unknown word (jsfmt)        -- "!tests/format/**/jsfmt.spec.js"
-./tests/lib/eslint/eslint.js:3019:39   - Unknown word (previos)      -- make sure that the previos assertion checks the
-./tests/lib/eslint/eslint.js:3072:59   - Unknown word (intenationally) -- cacheFilePath, "[]"); // intenationally invalid to additionally
-./tests/lib/eslint/eslint.js:3242:59   - Unknown word (occured)        -- the previous run that occured after the cache was
-./tests/lib/eslint/eslint.js:6039:31   - Unknown word (reignore)       -- cwd: `${root}-reignore`,
-./tests/lib/eslint/eslint.js:6079:31   - Unknown word (dignore)        -- cwd: `${root}-dignore`,
+./tests/lib/eslint/eslint.js:1342:57   - Unknown word (doesnotexist) -- lintFiles(["subdir1", "doesnotexist/*.js"]);
+./tests/lib/eslint/eslint.js:1417:58   - Unknown word (doesexist)    -- await eslint.lintFiles(["doesexist/*.js"]);
+./tests/lib/eslint/eslint.js:1944:30   - Unknown word (reignoring)   -- it("should allow reignoring of previously ignored
+./tests/lib/eslint/eslint.js:1985:71   - Unknown word (unignoring)   -- unignored without also unignoring all files in them",
+./tests/lib/eslint/eslint.js:1999:47   - Unknown word (jsfmt)        -- "!tests/format/**/jsfmt.spec.js"
+./tests/lib/eslint/eslint.js:3074:39   - Unknown word (previos)      -- make sure that the previos assertion checks the
+./tests/lib/eslint/eslint.js:3127:59   - Unknown word (intenationally) -- cacheFilePath, "[]"); // intenationally invalid to additionally
+./tests/lib/eslint/eslint.js:3297:59   - Unknown word (occured)        -- the previous run that occured after the cache was
+./tests/lib/eslint/eslint.js:6089:31   - Unknown word (reignore)       -- cwd: `${root}-reignore`,
+./tests/lib/eslint/eslint.js:6129:31   - Unknown word (dignore)        -- cwd: `${root}-dignore`,
 ./tests/lib/eslint/legacy-eslint.js:2512:24   - Unknown word (succesfully) -- it("should succesfully execute with a rule
 ./tests/lib/linter/config-comment-parser.js:165:41    - Unknown word (ELEVENTEEN) -- code = "a: seventy, b:ELEVENTEEN";
 ./tests/lib/linter/linter.js:16238:52  - Unknown word (intentionaly)   -- // intentionaly mutates objects and

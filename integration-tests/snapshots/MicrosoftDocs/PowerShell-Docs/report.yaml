@@ -3,9 +3,9 @@ Repository: MicrosoftDocs/PowerShell-Docs
 Url: https://github.com/MicrosoftDocs/PowerShell-Docs.git
 Args: '["--config=../../../cspell-power-shell-docs.config.yaml","**"]'
 Summary:
-  files: 3134
-  filesWithIssues: 1466
-  issues: 6448
+  files: 2673
+  filesWithIssues: 1256
+  issues: 5674
   errors: 0
 Errors: []
 
@@ -111,13 +111,14 @@ issues:
   - "reference/5.1/Microsoft.PowerShell.Core/About/about_Modules.md:107:11       autoloading     U       ## Module autoloading"
   - "reference/5.1/Microsoft.PowerShell.Core/About/about_Operator_Precedence.md:88:14        coalese     U       | `??` (null-coalese operator)"
   - "reference/5.1/Microsoft.PowerShell.Core/About/about_Operators.md:130:28         Nosuch              U       example, `(Get-Item /Nosuch); $?` unexpectedly yields"
-  - "reference/5.1/Microsoft.PowerShell.Core/About/about_Operators.md:273:15         executionpolicy     U       PS> $c = \"get-executionpolicy\""
+  - "reference/5.1/Microsoft.PowerShell.Core/About/about_Operators.md:277:15         executionpolicy     U       PS> $c = \"get-executionpolicy\""
   - "reference/5.1/Microsoft.PowerShell.Core/About/about_Parameters.md:133:24        techdocs    U       Get-ChildItem -Path c:\\techdocs -Exclude *.ppt"
   - "reference/5.1/Microsoft.PowerShell.Core/About/about_Parsing.md:130:62       metacharacters      U       expandable string, except metacharacters"
   - "reference/5.1/Microsoft.PowerShell.Core/About/about_Parsing.md:182:9        CECHO               U       | `CMD /CECHO A,B` | argument"
   - "reference/5.1/Microsoft.PowerShell.Core/About/about_Parsing.md:191:1        metacharacter       U       metacharacter. For example, to use"
   - "reference/5.1/Microsoft.PowerShell.Core/About/about_Parsing.md:214:28       Vnet                U       VirtualNetworkName \"myVnet\" `"
   - "reference/5.1/Microsoft.PowerShell.Core/About/about_Parsing.md:350:7        echoargs            U       The **echoargs** parameter of `TestExe"
+  - "reference/5.1/Microsoft.PowerShell.Core/About/about_Parsing.md:474:24       repocache           U       D:\\temp> Get-Item ~\\repocache.clixml"
   - "reference/5.1/Microsoft.PowerShell.Core/About/about_Path_Syntax.md:21:16        pathnames       U       In PowerShell, pathnames can be one of two types"
   - "reference/5.1/Microsoft.PowerShell.Core/About/about_PowerShell_exe.md:289:27        sqlsnapin       U       PowerShell -PSConsoleFile sqlsnapin.psc1"
   - "reference/5.1/Microsoft.PowerShell.Core/About/about_Preference_Variables.md:526:24      nofile      U       Get-ChildItem -Path C:\\nofile.txt"
@@ -168,8 +169,8 @@ issues:
   - "reference/5.1/Microsoft.PowerShell.Core/About/about_Signing.md:195:37       codesigning         U       cert:\\CurrentUser\\my -codesigning"
   - "reference/5.1/Microsoft.PowerShell.Core/About/about_Signing.md:233:2        cmdletbinding       U       [cmdletbinding()]"
   - "reference/5.1/Microsoft.PowerShell.Core/About/about_Signing.md:278:2        Certmgr             U       `Certmgr.exe` to export your"
-  - "reference/5.1/Microsoft.PowerShell.Core/About/about_Special_Characters.md:103:53        nbetween    U       create a blank line`n`nbetween the words.\""
-  - "reference/5.1/Microsoft.PowerShell.Core/About/about_Special_Characters.md:154:37        vbetween    U       There is a vertical tab`vbetween the words.\""
+  - "reference/5.1/Microsoft.PowerShell.Core/About/about_Special_Characters.md:104:53        nbetween    U       create a blank line`n`nbetween the words.\""
+  - "reference/5.1/Microsoft.PowerShell.Core/About/about_Special_Characters.md:155:37        vbetween    U       There is a vertical tab`vbetween the words.\""
   - "reference/5.1/Microsoft.PowerShell.Core/About/about_Split.md:75:2           Lastname        U       \"Lastname:FirstName:Address\""
   - "reference/5.1/Microsoft.PowerShell.Core/About/about_Split.md:462:34         simplematch     U       test\" -split \".\", 0, \"simplematch\""
   - "reference/5.1/Microsoft.PowerShell.Core/About/about_Tab_Expansion.md:81:28          actsetup    U       Get-Content C:\\windows\\actsetup.log"
@@ -429,7 +430,7 @@ issues:
   - "reference/7.2/Microsoft.PowerShell.Core/About/about_Numeric_Literals.md:197:9       FFFFs       U       | 0xFFFFs | Int16 |"
   - "reference/7.2/Microsoft.PowerShell.Core/About/about_Numeric_Literals.md:266:56      gbus        U       invalid syntax like `1gbus` will be"
   - "reference/7.2/Microsoft.PowerShell.Core/About/about_Numeric_Literals.md:327:71      casies      U       BigInteger]` using special casies to"
-  - "reference/7.2/Microsoft.PowerShell.Core/About/about_Operators.md:313:46         subshell    U       it asynchronously in subshell as a job."
+  - "reference/7.2/Microsoft.PowerShell.Core/About/about_Operators.md:317:46         subshell    U       it asynchronously in subshell as a job."
   - "reference/7.2/Microsoft.PowerShell.Core/About/about_Parsing.md:350:4        cscript     U       - `cscript.exe`"
   - "reference/7.2/Microsoft.PowerShell.Core/About/about_Parsing.md:351:4        wscript     U       - `wscript.exe`"
   - "reference/7.2/Microsoft.PowerShell.Core/About/about_Pipeline_Chain_Operators.md:172:25      behaviour       U       of PowerShell 7, the behaviour of these syntaxes has"
@@ -464,16 +465,16 @@ issues:
   - "reference/7.2/Microsoft.PowerShell.Utility/Invoke-RestMethod.md:1369:80     proxying        U       should be excluded from proxying."
   - "reference/7.2/Microsoft.PowerShell.Utility/Invoke-WebRequest.md:131:21      jdoe        U       User = 'jdoe'"
   - "reference/7.2/Microsoft.PowerShell.Utility/Invoke-WebRequest.md:165:44      docspage    U       StreamWriter]::new('.\\docspage.html', $false, $Response"
-  - "reference/7.3/Microsoft.PowerShell.Core/About/about_Calling_Generic_Methods.md:61:9         Linq    U       `System.Linq.Enumerable` class to"
-  - "reference/7.3/Microsoft.PowerShell.Core/About/about_Hash_Tables.md:420:23       Servi       U       System.ServiceProcess.Servi... Running"
-  - "reference/7.3/Microsoft.PowerShell.Core/About/about_Preference_Variables.md:1070:29     robocopy    U       native commands, like [robocopy][02] use non-zero exit"
-  - "reference/7.3/Microsoft.PowerShell.Core/Switch-Process.md:12:43         execv       U       the cmdlet calls the `execv()` function to provide"
-  - "reference/7.3/Microsoft.PowerShell.Utility/Register-ObjectEvent.md:131:62       createand       U       registration. First we createand and enable a timer object"
+  - "reference/7.4/Microsoft.PowerShell.Core/About/about_Calling_Generic_Methods.md:61:9         Linq    U       `System.Linq.Enumerable` class to"
   - "reference/7.4/Microsoft.PowerShell.Core/About/about_CommonParameters.md:46:23       proga       U       **ProgressAction** (proga)"
   - "reference/7.4/Microsoft.PowerShell.Core/About/about_Functions_Advanced_Parameters.md:743:50         dynamicparameters       U       tab completion. Like **dynamicparameters**, the"
+  - "reference/7.4/Microsoft.PowerShell.Core/About/about_Hash_Tables.md:420:23       Servi       U       System.ServiceProcess.Servi... Running"
   - "reference/7.4/Microsoft.PowerShell.Core/About/about_Pipelines.md:432:24         xzvf    U       curl -s -L $uri | tar -xzvf - -C ."
+  - "reference/7.4/Microsoft.PowerShell.Core/About/about_Preference_Variables.md:1062:29     robocopy    U       native commands, like [robocopy][01] use non-zero exit"
   - "reference/7.4/Microsoft.PowerShell.Core/Get-Command.md:463:22       Damerau     U       calculated using the Damerau Levenshtein Distance"
+  - "reference/7.4/Microsoft.PowerShell.Core/Switch-Process.md:12:43         execv       U       the cmdlet calls the `execv()` function to provide"
   - "reference/7.4/Microsoft.PowerShell.Utility/Invoke-RestMethod.md:1527:38     Brotli      U       added support for the Brotli compression algorithm"
+  - "reference/7.4/Microsoft.PowerShell.Utility/Register-ObjectEvent.md:131:62       createand       U       registration. First we createand and enable a timer object"
   - "reference/docs-conceptual/community/2020-updates.md:38:3        doctordns           U       | doctordns | 3"
   - "reference/docs-conceptual/community/2020-updates.md:39:3        chadbaldwin         U       | chadbaldwin | 1"
   - "reference/docs-conceptual/community/2020-updates.md:40:3        dawedawe            U       | dawedawe | 1"
@@ -794,7 +795,7 @@ issues:
   - "reference/docs-conceptual/community/contributing/labelling-in-github.md:160:11      shiproom                U       | `review-shiproom` | Shiproom discussion"
   - "reference/docs-conceptual/community/contributing/labelling-in-github.md:160:27      Shiproom                U       review-shiproom` | Shiproom discussion with the"
   - "reference/docs-conceptual/community/contributing/managing-pull-requests.md:93:41        modulepath      U       name for `<version>/<modulepath>/About/About.md`"
-  - "reference/docs-conceptual/community/contributing/powershell-style-guide.md:222:32       DXGI    U       GameDVR_DXGIHonorFSEWindowsCompatible"
+  - "reference/docs-conceptual/community/contributing/powershell-style-guide.md:239:32       DXGI    U       GameDVR_DXGIHonorFSEWindowsCompatible"
   - "reference/docs-conceptual/community/digital-art.md:15:15        Infographics    U       ## PowerShell Infographics"
   - "reference/docs-conceptual/community/hall-of-fame.md:23:3        kiazhi          U       | kiazhi | |"
   - "reference/docs-conceptual/community/hall-of-fame.md:31:4        Reilingh        U       | NReilingh | | 2"
@@ -813,8 +814,8 @@ issues:
   - "reference/docs-conceptual/dev-cross-plat/create-feedback-provider.md:243:12         Cmds    U       var astCmds = ast.FindAll((cAst"
   - "reference/docs-conceptual/dev-cross-plat/create-standard-library-binary-Module.md:131:12        globaljson      U       dotnet new globaljson --sdk-version 2.1.0"
   - "reference/docs-conceptual/dev-cross-plat/create-standard-library-binary-Module.md:300:12        psmodule        U       dotnet new psmodule"
-  - "reference/docs-conceptual/dev-cross-plat/performance/script-authoring-considerations.md:36:22       arraylist       U       $null = $arraylist.Add($i)"
-  - "reference/docs-conceptual/dev-cross-plat/performance/script-authoring-considerations.md:70:29       Finalizers      U       [GC]::WaitForPendingFinalizers()"
+  - "reference/docs-conceptual/dev-cross-plat/performance/script-authoring-considerations.md:35:22       arraylist       U       $null = $arraylist.Add($i)"
+  - "reference/docs-conceptual/dev-cross-plat/performance/script-authoring-considerations.md:69:29       Finalizers      U       [GC]::WaitForPendingFinalizers()"
   - "reference/docs-conceptual/dev-cross-plat/resolving-dependency-conflicts.md:718:2        netcore     U       $netcore = \"netcoreapp3.1\""
   - "reference/docs-conceptual/dev-cross-plat/resolving-dependency-conflicts.md:791:93       qualifed    U       with the same fully qualifed"
   - "reference/docs-conceptual/dev-cross-plat/resolving-dependency-conflicts.md:881:9        Strahl      U       - [Rick Strahl: When does a .NET assembly"
@@ -1096,8 +1097,8 @@ issues:
   - "reference/docs-conceptual/developer/windows-powershell-reference-whats-new.md:35:26         mshshort    U       commands provided by mshshort, and a configuration"
   - "reference/docs-conceptual/developer/windows-powershell-reference.md:72:40       Cmdletmetadataattribute     U       Automation.Internal.Cmdletmetadataattribute](/dotnet/api/System"
   - "reference/docs-conceptual/dsc/overview.md:26:3          Automanage      U       Automanage."
-  - "reference/docs-conceptual/install/community-support.md:99:35        libunwind       U       install jq libssl1.1 libunwind8 -y"
-  - "reference/docs-conceptual/install/community-support.md:105:8        getconf         U       bits=$(getconf LONG_BIT)"
+  - "reference/docs-conceptual/install/community-support.md:92:35        libunwind       U       install jq libssl1.1 libunwind8 -y"
+  - "reference/docs-conceptual/install/community-support.md:98:8         getconf         U       bits=$(getconf LONG_BIT)"
   - "reference/docs-conceptual/install/install-alpine.md:34:13       terminfo    U       ncurses-terminfo-base \\"
   - "reference/docs-conceptual/install/install-alpine.md:36:5        libgcc      U       libgcc \\"
   - "reference/docs-conceptual/install/install-alpine.md:37:5        libintl     U       libintl \\"

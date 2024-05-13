@@ -3,7 +3,7 @@ Repository: RustPython/RustPython
 Url: "https://github.com/RustPython/RustPython.git"
 Args: ["**"]
 Lines:
- CSpell: Files checked: 609, Issues found: 2933 in 317 files.
+ CSpell: Files checked: 610, Issues found: 2972 in 319 files.
  exit code: 1
 ./Cargo.toml:114:82    - Unknown word (termcolor)  -- features = ["atty", "termcolor"] }
 ./Cargo.toml:156:62    - Unknown word (redoxer)    -- to compile/check with redoxer
@@ -386,20 +386,20 @@ Lines:
 ./jit/src/instructions.rs:125:46    - Unknown word (fcmp)       -- self.builder.ins().fcmp(FloatCC::NotEqual, val
 ./jit/src/instructions.rs:126:39    - Unknown word (bint)       -- Ok(self.builder.ins().bint(types::I8, val))
 ./jit/src/instructions.rs:129:47    - Unknown word (iconst)     -- self.builder.ins().iconst(types::I64, 0);
-./jit/src/instructions.rs:243:36    - Unknown word (brnz)       -- self.builder.ins().brnz(val, then_block, &[
-./jit/src/instructions.rs:327:65    - Unknown word (uextend)    -- self.builder.ins().uextend(types::I64, a),
-./jit/src/instructions.rs:406:68    - Unknown word (ifcout)     -- self.builder.ins().iadd_ifcout(a, b);
-./jit/src/instructions.rs:407:44    - Unknown word (trapif)     -- self.builder.ins().trapif(
-./jit/src/instructions.rs:430:55    - Unknown word (ushr)       -- self.builder.ins().ushr_imm(b, 63);
-./jit/src/instructions.rs:431:44    - Unknown word (trapnz)     -- self.builder.ins().trapnz(
-./jit/src/instructions.rs:437:48    - Unknown word (ishl)       -- self.builder.ins().ishl(a, b)
-./jit/src/instructions.rs:439:48    - Unknown word (sshr)       -- self.builder.ins().sshr(a, b)
-./jit/src/instructions.rs:455:60    - Unknown word (fadd)       -- Float(self.builder.ins().fadd(a, b))
-./jit/src/instructions.rs:458:60    - Unknown word (fsub)       -- Float(self.builder.ins().fsub(a, b))
-./jit/src/instructions.rs:461:60    - Unknown word (fmul)       -- Float(self.builder.ins().fmul(a, b))
-./jit/src/instructions.rs:464:60    - Unknown word (fdiv)       -- Float(self.builder.ins().fdiv(a, b))
-./jit/src/instructions.rs:511:79    - Unknown word (ifbout)     -- t special-case isub_ifbout
-./jit/src/instructions.rs:517:40    - Unknown word (ineg)       -- self.builder.ins().ineg(b);
+./jit/src/instructions.rs:256:36    - Unknown word (brnz)       -- self.builder.ins().brnz(val, then_block, &[
+./jit/src/instructions.rs:332:65    - Unknown word (uextend)    -- self.builder.ins().uextend(types::I64, a),
+./jit/src/instructions.rs:411:68    - Unknown word (ifcout)     -- self.builder.ins().iadd_ifcout(a, b);
+./jit/src/instructions.rs:412:44    - Unknown word (trapif)     -- self.builder.ins().trapif(
+./jit/src/instructions.rs:435:55    - Unknown word (ushr)       -- self.builder.ins().ushr_imm(b, 63);
+./jit/src/instructions.rs:436:44    - Unknown word (trapnz)     -- self.builder.ins().trapnz(
+./jit/src/instructions.rs:442:48    - Unknown word (ishl)       -- self.builder.ins().ishl(a, b)
+./jit/src/instructions.rs:444:48    - Unknown word (sshr)       -- self.builder.ins().sshr(a, b)
+./jit/src/instructions.rs:460:60    - Unknown word (fadd)       -- Float(self.builder.ins().fadd(a, b))
+./jit/src/instructions.rs:463:60    - Unknown word (fsub)       -- Float(self.builder.ins().fsub(a, b))
+./jit/src/instructions.rs:466:60    - Unknown word (fmul)       -- Float(self.builder.ins().fmul(a, b))
+./jit/src/instructions.rs:469:60    - Unknown word (fdiv)       -- Float(self.builder.ins().fdiv(a, b))
+./jit/src/instructions.rs:516:79    - Unknown word (ifbout)     -- t special-case isub_ifbout
+./jit/src/instructions.rs:522:40    - Unknown word (ineg)       -- self.builder.ins().ineg(b);
 ./jit/src/lib.rs:13:32     - Unknown word (jitted)     -- error("function can't be jitted")]
 ./jit/src/lib.rs:18:5      - Unknown word (Cranelift)  -- CraneliftError(#[from] ModuleError
 ./jit/src/lib.rs:285:23    - Unknown word (wasmtime)   -- TODO: confirm with wasmtime ppl that it's not unsound
@@ -425,9 +425,9 @@ Lines:
 ./src/settings.rs:293:18    - Unknown word (warnoptions)               -- settings.warnoptions.push("default".to_owned
 ./src/settings.rs:344:37    - Unknown word (PYTHONHASHSEED)            -- seed = match env::var("PYTHONHASHSEED") {
 ./src/shell/helper.rs:20:13     - Unknown word (startpos)   -- let mut startpos = 0;
-./stdlib/Cargo.toml:116:25    - Unknown word (netioapi)   -- winsock2", "ifdef", "netioapi", "ws2tcpip",
-./stdlib/Cargo.toml:124:28    - Unknown word (Ndis)       -- 2_NetworkManagement_Ndis",
-./stdlib/Cargo.toml:46:1      - Unknown word (puruspe)    -- puruspe = "0.2.4"
+./stdlib/Cargo.toml:118:25    - Unknown word (netioapi)   -- winsock2", "ifdef", "netioapi", "ws2tcpip",
+./stdlib/Cargo.toml:126:28    - Unknown word (Ndis)       -- 2_NetworkManagement_Ndis",
+./stdlib/Cargo.toml:48:1      - Unknown word (puruspe)    -- puruspe = "0.2.4"
 ./stdlib/build.rs:25:39     - Unknown word (osslconf)   -- println!("cargo:rustc-cfg=osslconf=\"{conf}\"");
 ./stdlib/build.rs:8:39      - Unknown word (ossl)       -- println!("cargo:rustc-cfg=ossl101");
 ./stdlib/src/array.rs:1442:9    - Unknown word (mformat)    -- mformat_code: MachineFormatCode
@@ -444,6 +444,13 @@ Lines:
 ./stdlib/src/binascii.rs:570:8     - Unknown word (rlecode)    -- fn rlecode_hqx(s: ArgAsciiBuffer
 ./stdlib/src/binascii.rs:571:15    - Unknown word (RUNCHAR)    -- const RUNCHAR: u8 = 0x90; // b'\x
 ./stdlib/src/binascii.rs:605:8     - Unknown word (rledecode)  -- fn rledecode_hqx(s: ArgAsciiBuffer
+./stdlib/src/contextvars.rs:301:62    - Unknown word (tsid)        -- AtomicUsize, // cached_tsid in CPython
+./stdlib/src/contextvars.rs:324:55    - Unknown word (tsver)       -- Context index; cached_tsver in CPython
+./stdlib/src/contextvars.rs:344:12    - Unknown word (contextvar)  -- // contextvar_set in CPython
+./stdlib/src/contextvars.rs:43:19     - Unknown word (hamt)       -- // TODO: Real hamt implementation
+./stdlib/src/contextvars.rs:44:10     - Unknown word (Hamt)       -- type Hamt = IndexMap<PyRef<ContextVar
+./stdlib/src/contextvars.rs:547:48    - Unknown word (oldval)      -- PyObjectRef>, // tok_oldval in CPython
+./stdlib/src/contextvars.rs:69:26     - Unknown word (weakreflist) -- // PyObject *ctx_weakreflist;
 ./stdlib/src/csv.rs:280:21    - Unknown word (pydialect)  -- opts.update_pydialect(&mut dialect);
 ./stdlib/src/csv.rs:31:17     - Unknown word (NOTNULL)    -- const QUOTE_NOTNULL: i32 = QuoteStyle::Notnull
 ./stdlib/src/csv.rs:31:44     - Unknown word (Notnull)    -- NOTNULL: i32 = QuoteStyle::Notnull as i32;
@@ -483,8 +490,8 @@ Lines:
 ./stdlib/src/hashlib.rs:335:9     - Unknown word (digestmod)  -- digestmod: bool, // TODO: RUSTPYTHON
 ./stdlib/src/json/machinery.rs:44:7      - Unknown word (fedcba)     -- //fedcba9876543210_fedcba987
 ./stdlib/src/json/machinery.rs:5:30      - Unknown word (LOJKINE)    -- Copyright (c) 2018, Ophir LOJKINE
-./stdlib/src/lib.rs:127:27    - Unknown word (sysmodule)  -- // crate::vm::sysmodule::sysconfigdata_name
-./stdlib/src/lib.rs:127:38    - Unknown word (sysconfigdata) -- crate::vm::sysmodule::sysconfigdata_name() => sysconfigdata
+./stdlib/src/lib.rs:129:27    - Unknown word (sysmodule)  -- // crate::vm::sysmodule::sysconfigdata_name
+./stdlib/src/lib.rs:129:38    - Unknown word (sysconfigdata) -- crate::vm::sysmodule::sysconfigdata_name() => sysconfigdata
 ./stdlib/src/locale.rs:59:72     - Unknown word (ABMON)      -- , ABDAY_6, ABDAY_7, ABMON_1, ABMON_10, ABMON_
 ./stdlib/src/math.rs:139:26    - Unknown word (logx)       -- log2(x, vm).map(|logx| logx / base.log2()
 ./stdlib/src/math.rs:585:13    - Unknown word (argvec)     -- let argvec = args.into_vec();
@@ -680,7 +687,7 @@ Lines:
 ./vm/src/builtins/module.rs:20:18     - Unknown word (traverseproc) -- // traverse: traverseproc
 ./vm/src/builtins/module.rs:22:14     - Unknown word (freefunc)     -- // free: freefunc
 ./vm/src/builtins/module.rs:51:8      - Unknown word (weaklist)     -- // weaklist
-./vm/src/builtins/range.rs:525:35    - Unknown word (longrange)  -- module = false, name = "longrange_iterator")]
+./vm/src/builtins/range.rs:527:35    - Unknown word (longrange)  -- module = false, name = "longrange_iterator")]
 ./vm/src/builtins/set.rs:451:48    - Unknown word (frozensets) -- patterns arising in nested frozensets
 ./vm/src/builtins/slice.rs:204:15    - Unknown word (XXPRIME)    -- const XXPRIME_1: PyUHash = if cfg
 ./vm/src/builtins/str.rs:1611:21   - Unknown word (Ωppercases)   -- ("Greek Ωppercases ...", "greek ωppercases
@@ -698,7 +705,7 @@ Lines:
 ./vm/src/builtins/super.rs:32:28     - Unknown word (supercheck) -- let obj_type = supercheck(typ.clone(), obj.clone
 ./vm/src/builtins/tuple.rs:307:39    - Unknown word (tuplesubclass) -- just return tup, or tuplesubclass(tup), which'll copy
 ./vm/src/builtins/tuple.rs:308:12    - Unknown word (structseq)     -- // structseq)
-./vm/src/builtins/type.rs:311:51    - Unknown word (stablized)  -- intrinsics::likely once it is stablized
+./vm/src/builtins/type.rs:320:51    - Unknown word (stablized)  -- intrinsics::likely once it is stablized
 ./vm/src/bytesinner.rs:1077:48   - Unknown word (byteset)    -- offset) = haystack.find_byteset(ASCII_WHITESPACES)
 ./vm/src/bytesinner.rs:1152:13   - Unknown word (unchunked)  -- let unchunked = len - chunked;
 ./vm/src/bytesinner.rs:872:12    - Unknown word (stringlib)  -- // stringlib_replace in CPython
@@ -709,17 +716,19 @@ Lines:
 ./vm/src/codecs.rs:157:18    - Unknown word (namereplace)       -- "namereplace_errors" => namereplace
 ./vm/src/codecs.rs:158:18    - Unknown word (surrogatepass)     -- "surrogatepass_errors" => surrogatepass
 ./vm/src/codecs.rs:159:18    - Unknown word (surrogateescape)   -- "surrogateescape_errors" => surrogateescape
-./vm/src/coroutine.rs:33:9      - Unknown word (weakreflist) -- // _weakreflist
 ./vm/src/dictdatatype.rs:172:25    - Unknown word (idxs)       -- let mut idxs = GenIndexes::new(entry
 ./vm/src/dictdatatype.rs:22:62     - Unknown word (pyhash)     -- compatible with actual pyhash value
-./vm/src/dictdatatype.rs:681:29    - Unknown word (usecases)   -- dictionary. Typical usecases are:
+./vm/src/dictdatatype.rs:682:29    - Unknown word (usecases)   -- dictionary. Typical usecases are:
+./vm/src/exceptions.rs:214:17    - Unknown word (rtext)      -- let rtext = text.as_str().trim
+./vm/src/exceptions.rs:215:17    - Unknown word (ltext)      -- let ltext = rtext.trim_start_matches
+./vm/src/exceptions.rs:240:25    - Unknown word (caretspace) -- let caretspace = ltext.chars().collect
 ./vm/src/frame.rs:350:13    - Unknown word (instrs)     -- let instrs = &self.code.instructions
 ./vm/src/frame.rs:795:75    - Unknown word (binop)      -- op } => self.execute_binop(vm, op.get(arg)),
 ./vm/src/frame.rs:802:74    - Unknown word (unop)       -- op } => self.execute_unop(vm, op.get(arg)),
-./vm/src/frame.rs:897:21    - Unknown word (aenter)     -- let aenter_res = vm
-./vm/src/frame.rs:901:21    - Unknown word (aexit)      -- let aexit = mgr
+./vm/src/frame.rs:901:21    - Unknown word (aenter)     -- let aenter_res = vm
+./vm/src/frame.rs:905:21    - Unknown word (aexit)      -- let aexit = mgr
 ./vm/src/frame.rs:91:6      - Unknown word (Lasti)      -- type Lasti = atomic::AtomicU32
-./vm/src/frame.rs:994:21    - Unknown word (aiterable)  -- let aiterable = self.pop_value();
+./vm/src/frame.rs:998:21    - Unknown word (aiterable)  -- let aiterable = self.pop_value();
 ./vm/src/function/argument.rs:120:13    - Unknown word (kwargc)     -- let kwargc = kwarg_names.len()
 ./vm/src/function/argument.rs:121:13    - Unknown word (posargc)    -- let posargc = total_argc - kwargc
 ./vm/src/function/argument.rs:123:13    - Unknown word (posargs)    -- let posargs = args.by_ref().take
@@ -732,7 +741,7 @@ Lines:
 ./vm/src/function/method.rs:37:18     - Unknown word (STACKLESS)  -- // const STACKLESS = 0x0100;
 ./vm/src/function/protocol.rs:79:5      - Unknown word (iterfn)     -- iterfn: Option<crate::types
 ./vm/src/import.rs:84:25     - Unknown word (codeobj)    -- let module = import_codeobj(vm, module_name, frozen
-./vm/src/object/core.rs:1253:35   - Unknown word (dfghjkl)    -- obj = ctx.new_bytes(b"dfghjkl".to_vec());
+./vm/src/object/core.rs:1297:35   - Unknown word (dfghjkl)    -- obj = ctx.new_bytes(b"dfghjkl".to_vec());
 ./vm/src/object/core.rs:169:51    - Unknown word (weakrefs)   -- have never been any weakrefs in this list
 ./vm/src/object/core.rs:207:54    - Unknown word (Weaks)      -- actually own the PyObjectWeaks inside `list`, and every
 ./vm/src/object/core.rs:225:32    - Unknown word (arrayvec)   -- // TODO: can be an arrayvec
@@ -747,8 +756,8 @@ Lines:
 ./vm/src/protocol/object.rs:31:44     - Unknown word (opid)       -- compare(self, other: Self, opid: PyComparisonOp, vm
 ./vm/src/protocol/object.rs:483:30    - Unknown word (icls)         -- } else if let Ok(icls) =
 ./vm/src/protocol/object.rs:61:30     - Unknown word (defaultvalue) -- fn length_hint(self, defaultvalue: usize, vm: &VirtualMachine
-./vm/src/protocol/sequence.rs:126:30    - Unknown word (apear)      -- / if both arguments apear to be sequences, try
-./vm/src/protocol/sequence.rs:238:59    - Unknown word (unsliceable) -- format!("'{}' object is unsliceable", self.obj.class())
+./vm/src/protocol/sequence.rs:119:30    - Unknown word (apear)      -- / if both arguments apear to be sequences, try
+./vm/src/protocol/sequence.rs:231:59    - Unknown word (unsliceable) -- format!("'{}' object is unsliceable", self.obj.class())
 ./vm/src/py_io.rs:73:17     - Unknown word (sval)       -- let sval = s.as_str();
 ./vm/src/stdlib/ast.rs:380:26    - Unknown word (BDFL)       -- const CO_FUTURE_BARRY_AS_BDFL: i32 = 0x400000;
 ./vm/src/stdlib/ast.rs:45:17     - Unknown word (numargs)    -- let numargs = args.args.len();
@@ -856,20 +865,20 @@ Lines:
 ./vm/src/stdlib/msvcrt.rs:31:13     - Unknown word (getwche)                -- fn _getwche() -> u32;
 ./vm/src/stdlib/msvcrt.rs:32:13     - Unknown word (putch)                  -- fn _putch(c: u32) -> i32;
 ./vm/src/stdlib/msvcrt.rs:33:13     - Unknown word (putwch)                 -- fn _putwch(c: u16) -> u32;
-./vm/src/stdlib/nt.rs:113:8     - Unknown word (cwait)      -- // cwait is available on MSVC
-./vm/src/stdlib/nt.rs:116:19    - Unknown word (termstat)   -- fn _cwait(termstat: *mut i32, procHandle
-./vm/src/stdlib/nt.rs:164:17    - Unknown word (stdhandle)  -- let stdhandle = match fd {
-./vm/src/stdlib/nt.rs:177:21    - Unknown word (csbi)       -- let mut csbi = MaybeUninit::uninit
-./vm/src/stdlib/nt.rs:194:13    - Unknown word (wexecv)     -- fn _wexecv(cmdname: *const u16
-./vm/src/stdlib/nt.rs:194:20    - Unknown word (cmdname)    -- fn _wexecv(cmdname: *const u16, argv:
-./vm/src/stdlib/nt.rs:240:9     - Unknown word (getfinalpathname) -- fn _getfinalpathname(path: OsPath, vm: &VirtualMac
-./vm/src/stdlib/nt.rs:249:9     - Unknown word (getfullpathname)  -- fn _getfullpathname(path: OsPath, vm: &VirtualMac
-./vm/src/stdlib/nt.rs:250:13    - Unknown word (wpath)            -- let wpath = path.to_widecstring
-./vm/src/stdlib/nt.rs:282:9     - Unknown word (getvolumepathname) -- fn _getvolumepathname(path: OsPath, vm: &VirtualMac
-./vm/src/stdlib/nt.rs:297:14    - Unknown word (splitroot)         -- fn _path_splitroot(path: OsPath, vm: &VirtualMac
-./vm/src/stdlib/nt.rs:302:13    - Unknown word (backslashed)       -- let backslashed: Vec<_> = orig
-./vm/src/stdlib/nt.rs:335:9     - Unknown word (getdiskusage)      -- fn _getdiskusage(path: OsPath, vm: &VirtualMac
-./vm/src/stdlib/nt.rs:393:8     - Unknown word (listdrives)        -- fn listdrives(vm: &VirtualMachine
+./vm/src/stdlib/nt.rs:111:8     - Unknown word (cwait)      -- // cwait is available on MSVC
+./vm/src/stdlib/nt.rs:114:19    - Unknown word (termstat)   -- fn _cwait(termstat: *mut i32, procHandle
+./vm/src/stdlib/nt.rs:162:17    - Unknown word (stdhandle)  -- let stdhandle = match fd {
+./vm/src/stdlib/nt.rs:175:21    - Unknown word (csbi)       -- let mut csbi = MaybeUninit::uninit
+./vm/src/stdlib/nt.rs:192:13    - Unknown word (wexecv)     -- fn _wexecv(cmdname: *const u16
+./vm/src/stdlib/nt.rs:192:20    - Unknown word (cmdname)    -- fn _wexecv(cmdname: *const u16, argv:
+./vm/src/stdlib/nt.rs:238:9     - Unknown word (getfinalpathname) -- fn _getfinalpathname(path: OsPath, vm: &VirtualMac
+./vm/src/stdlib/nt.rs:247:9     - Unknown word (getfullpathname)  -- fn _getfullpathname(path: OsPath, vm: &VirtualMac
+./vm/src/stdlib/nt.rs:248:13    - Unknown word (wpath)            -- let wpath = path.to_widecstring
+./vm/src/stdlib/nt.rs:280:9     - Unknown word (getvolumepathname) -- fn _getvolumepathname(path: OsPath, vm: &VirtualMac
+./vm/src/stdlib/nt.rs:295:14    - Unknown word (splitroot)         -- fn _path_splitroot(path: OsPath, vm: &VirtualMac
+./vm/src/stdlib/nt.rs:300:13    - Unknown word (backslashed)       -- let backslashed: Vec<_> = orig
+./vm/src/stdlib/nt.rs:333:9     - Unknown word (getdiskusage)      -- fn _getdiskusage(path: OsPath, vm: &VirtualMac
+./vm/src/stdlib/nt.rs:391:8     - Unknown word (listdrives)        -- fn listdrives(vm: &VirtualMachine
 ./vm/src/stdlib/operator.rs:392:17    - Unknown word (nattr)      -- let nattr = args.args.len();
 ./vm/src/stdlib/operator.rs:535:25    - Unknown word (pargs)      -- let mut pargs = vec![zelf.name.as
 ./vm/src/stdlib/os.rs:1044:19   - Unknown word (modif)          -- let (acc, modif) = match (args.times
@@ -885,15 +894,22 @@ Lines:
 ./vm/src/stdlib/os.rs:754:34    - Unknown word (mtim)           -- mtime = (stat.st_mtim.tv_sec, stat.st_mtim
 ./vm/src/stdlib/os.rs:755:34    - Unknown word (ctim)           -- ctime = (stat.st_ctim.tv_sec, stat.st_ctim
 ./vm/src/stdlib/os.rs:907:8     - Unknown word (getcwdb)        -- fn getcwdb(vm: &VirtualMachine
+./vm/src/stdlib/posix.rs:2089:12   - Unknown word (DELAYTIMER) -- SC_DELAYTIMER_MAX = libc::_SC_DELAYTIMER
+./vm/src/stdlib/posix.rs:2092:12   - Unknown word (GETGR)      -- SC_GETGR_R_SIZE_MAX = libc::
+./vm/src/stdlib/posix.rs:2093:12   - Unknown word (GETPW)      -- SC_GETPW_R_SIZE_MAX = libc::
+./vm/src/stdlib/posix.rs:2106:12   - Unknown word (NPROCESSORS) -- SC_NPROCESSORS_CONF = libc::_SC_NPROCESSORS
+./vm/src/stdlib/posix.rs:2107:24   - Unknown word (ONLN)        -- SC_NPROCESSORS_ONLN = libc::_SC_NPROCESSORS
+./vm/src/stdlib/posix.rs:2122:12   - Unknown word (RTSIG)       -- SC_RTSIG_MAX = libc::_SC_RTSIG
+./vm/src/stdlib/posix.rs:2204:12   - Unknown word (SYMLOOP)     -- SC_SYMLOOP_MAX = libc::_SC_SYMLOOP
 ./vm/src/stdlib/posix.rs:77:16     - Unknown word (GRND)       -- use libc::{GRND_NONBLOCK, GRND_RANDOM
 ./vm/src/stdlib/posix_compat.rs:22:12     - Unknown word (unimpl)     -- os_unimpl("os.access", vm)
 ./vm/src/stdlib/pwd.rs:37:17     - Unknown word (pathbuf)    -- let pathbuf_lossy = |p: std::path
 ./vm/src/stdlib/pwd.rs:94:67     - Unknown word (fgetpwent)  -- thread safe. Could use fgetpwent_r, but this is easier
 ./vm/src/stdlib/pwd.rs:95:16     - Unknown word (GETPWALL)   -- static GETPWALL: parking_lot::Mutex
-./vm/src/stdlib/signal.rs:124:10    - Unknown word (signalnum)  -- _signalnum: i32,
-./vm/src/stdlib/signal.rs:287:17    - Unknown word (sigbyte)    -- let sigbyte = signum as u8;
-./vm/src/stdlib/signal.rs:88:16     - Unknown word (SIGPWR)     -- use libc::{SIGPWR, SIGSTKFLT};
-./vm/src/stdlib/signal.rs:88:24     - Unknown word (SIGSTKFLT)  -- use libc::{SIGPWR, SIGSTKFLT};
+./vm/src/stdlib/signal.rs:106:16    - Unknown word (SIGPWR)     -- use libc::{SIGPWR, SIGSTKFLT};
+./vm/src/stdlib/signal.rs:106:24    - Unknown word (SIGSTKFLT)  -- use libc::{SIGPWR, SIGSTKFLT};
+./vm/src/stdlib/signal.rs:142:10    - Unknown word (signalnum)  -- _signalnum: i32,
+./vm/src/stdlib/signal.rs:308:17    - Unknown word (sigbyte)    -- let sigbyte = signum as u8;
 ./vm/src/stdlib/sre.rs:226:12    - Unknown word (pymatch)     -- fn pymatch(
 ./vm/src/stdlib/sre.rs:285:25    - Unknown word (matchlist)   -- let mut matchlist: Vec<PyObjectRef> =
 ./vm/src/stdlib/sre.rs:30:37     - Unknown word (CODESIZE)   -- rustpython_sre_engine::{CODESIZE, MAXGROUPS, MAXREPEAT
@@ -952,11 +968,13 @@ Lines:
 ./vm/src/stdlib/time.rs:251:13    - Unknown word (intpart)    -- let intpart = ticks / div;
 ./vm/src/stdlib/time.rs:399:21    - Unknown word (HIGHRES)    -- use libc::CLOCK_HIGHRES;
 ./vm/src/stdlib/time.rs:582:48    - Unknown word (gethrvtime) -- nanos(unsafe { libc::gethrvtime() }))
-./vm/src/stdlib/winapi.rs:164:60    - Unknown word (STARTUPINFOEXW) -- :System::Threading::STARTUPINFOEXW =
-./vm/src/stdlib/winapi.rs:192:22    - Unknown word (getenvironment) -- .map(|m| getenvironment(m, vm))
-./vm/src/stdlib/winapi.rs:197:13    - Unknown word (getattributelist) -- getattributelist(args.startup_info.get
-./vm/src/stdlib/winapi.rs:230:71    - Unknown word (STARTUPINFO)      -- Threading::EXTENDED_STARTUPINFO_PRESENT
-./vm/src/stdlib/winapi.rs:307:9     - Unknown word (handlelist)       -- handlelist: Option<Vec<usize>>
+./vm/src/stdlib/typing.rs:151:34    - Unknown word (gigity)     -- println!("gigity");
+./vm/src/stdlib/typing.rs:24:20     - Unknown word (idfunc)     -- pub(crate) fn _idfunc(_vm: &VirtualMachine
+./vm/src/stdlib/winapi.rs:167:60    - Unknown word (STARTUPINFOEXW) -- :System::Threading::STARTUPINFOEXW =
+./vm/src/stdlib/winapi.rs:195:22    - Unknown word (getenvironment) -- .map(|m| getenvironment(m, vm))
+./vm/src/stdlib/winapi.rs:200:13    - Unknown word (getattributelist) -- getattributelist(args.startup_info.get
+./vm/src/stdlib/winapi.rs:233:71    - Unknown word (STARTUPINFO)      -- Threading::EXTENDED_STARTUPINFO_PRESENT
+./vm/src/stdlib/winapi.rs:310:9     - Unknown word (handlelist)       -- handlelist: Option<Vec<usize>>
 ./vm/src/stdlib/winapi.rs:41:30     - Unknown word (WRITECOPY)  -- PAGE_EXECUTE_WRITECOPY, PAGE_GUARD, PAGE_NOACCESS
 ./vm/src/stdlib/winapi.rs:42:38     - Unknown word (WRITECOMBINE) -- PAGE_READWRITE, PAGE_WRITECOMBINE, PAGE_WRITECOPY, SEC
 ./vm/src/stdlib/winapi.rs:46:22     - Unknown word (READMODE)     -- PIPE_READMODE_MESSAGE, PIPE_TYPE_MESSAGE
@@ -968,9 +986,9 @@ Lines:
 ./vm/src/stdlib/winreg.rs:85:36     - Unknown word (predef)     -- let null_key = RegKey::predef(0 as ::winreg::HKEY
 ./vm/src/types/slot.rs:138:28    - Unknown word (TPFLAGS)    -- CPython default: Py_TPFLAGS_HAVE_STACKLESS_EXTENSION
 ./vm/src/types/slot.rs:142:43    - Unknown word (Subclassable) -- types created in Python. Subclassable and are a
-./vm/src/types/slot.rs:384:29    - Unknown word (subslot)      -- macro_rules! toggle_subslot {
+./vm/src/types/slot.rs:393:29    - Unknown word (subslot)      -- macro_rules! toggle_subslot {
 ./vm/src/vm/mod.rs:226:17    - Unknown word (rustpythonpath) -- let rustpythonpath_env = std::env::var
-./vm/src/vm/mod.rs:603:29    - Unknown word (pyiter)         -- return self.map_pyiter(value, func);
+./vm/src/vm/mod.rs:604:29    - Unknown word (pyiter)         -- return self.map_pyiter(value, func);
 ./vm/src/vm/setting.rs:39:10     - Unknown word (Xfoo)       -- /// -Xfoo[=bar]
 ./vm/src/vm/setting.rs:42:10     - Unknown word (Wfoo)       -- /// -Wfoo
 ./vm/src/vm/setting.rs:93:12     - Unknown word (pathconfig) -- // int pathconfig_warnings;
