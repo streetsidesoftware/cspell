@@ -5,7 +5,7 @@ Args: '[".","--config=../../../config/eslint/cspell.config.yaml","--issues-summa
 Summary:
   files: 1931
   filesWithIssues: 389
-  issues: 2184
+  issues: 2185
   errors: 0
 Errors: []
 
@@ -134,7 +134,7 @@ issues:
   - "docs/src/rules/no-restricted-modules.md:69:178      readline        U       punycode\",\"querystring\",\"readline\",\"repl\",\"smalloc\",\"stream"
   - "docs/src/rules/no-restricted-modules.md:69:196      smalloc         U       ,\"readline\",\"repl\",\"smalloc\",\"stream\",\"string_decoder"
   - "docs/src/rules/no-restricted-syntax.md:66:5         dont    U       dontMess();"
-  - "docs/src/rules/no-return-await.md:12:172        microtask       U       the cost of an extra microtask before resolving the"
+  - "docs/src/rules/no-return-await.md:10:165        microtask       U       , to avoid an extra microtask. However, due to the"
   - "docs/src/rules/no-script-url.md:29:41       scripturl       U       rule corresponds to `scripturl` rule of JSHint."
   - "docs/src/rules/no-unexpected-multiline.md:14:78         Schlueter       U       once described by Isaac Schlueter, a newline character"
   - "docs/src/rules/no-unsafe-finally.md:44:69       rethrown    U       block is caught and rethrown"
@@ -336,8 +336,7 @@ issues:
   - "README.md:288:5         teamend             U       <!--teamend-->"
   - "README.md:295:5         sponsorsstart       U       <!--sponsorsstart-->"
   - "README.md:299:564       Workleap            U       f99fe2465f&v=4\" alt=\"Workleap\" height=\"64\"></a></p"
-  - "README.md:300:673       Transloadit         U       com/u/125754?v=4\" alt=\"Transloadit\" height=\"32\"></a> <a"
-  - "README.md:300:1186      Nextbase            U       145838380?v=4\" alt=\"Nextbase Starter Kit\" height"
+  - "README.md:300:1054      Nextbase            U       145838380?v=4\" alt=\"Nextbase Starter Kit\" height"
   - "README.md:301:5         sponsorsend         U       <!--sponsorsend-->"
   - "templates/blogpost.md.ejs:18:10         linkify     U       function linkify(line) {"
   - "templates/formatter-examples.md.ejs:89:2        iframe      U       <iframe src=\"html-formatter"
@@ -368,16 +367,16 @@ issues:
   - "tests/lib/config/flat-config-array.js:2005:30       doesnt (doesn't)    U       \"doesnt-exist/match\": \"error"
   - "tests/lib/config/flat-config-schema.js:19:50        reults      U       expectedResult] The expected reults of merging first and"
   - "tests/lib/config/flat-config-schema.js:46:20        emtpy       U       it(\"returns an emtpy object if both values"
-  - "tests/lib/eslint/eslint.js:1287:57      doesnotexist            U       lintFiles([\"subdir1\", \"doesnotexist/*.js\"]);"
-  - "tests/lib/eslint/eslint.js:1362:58      doesexist               U       await eslint.lintFiles([\"doesexist/*.js\"]);"
-  - "tests/lib/eslint/eslint.js:1889:30      reignoring              U       it(\"should allow reignoring of previously ignored"
-  - "tests/lib/eslint/eslint.js:1930:71      unignoring              U       unignored without also unignoring all files in them\","
-  - "tests/lib/eslint/eslint.js:1944:47      jsfmt                   U       \"!tests/format/**/jsfmt.spec.js\""
-  - "tests/lib/eslint/eslint.js:3019:39      previos                 U       make sure that the previos assertion checks the"
-  - "tests/lib/eslint/eslint.js:3072:59      intenationally          U       cacheFilePath, \"[]\"); // intenationally invalid to additionally"
-  - "tests/lib/eslint/eslint.js:3242:59      occured (occurred)      U       the previous run that occured after the cache was"
-  - "tests/lib/eslint/eslint.js:6039:31      reignore                U       cwd: `${root}-reignore`,"
-  - "tests/lib/eslint/eslint.js:6079:31      dignore                 U       cwd: `${root}-dignore`,"
+  - "tests/lib/eslint/eslint.js:1342:57      doesnotexist            U       lintFiles([\"subdir1\", \"doesnotexist/*.js\"]);"
+  - "tests/lib/eslint/eslint.js:1417:58      doesexist               U       await eslint.lintFiles([\"doesexist/*.js\"]);"
+  - "tests/lib/eslint/eslint.js:1944:30      reignoring              U       it(\"should allow reignoring of previously ignored"
+  - "tests/lib/eslint/eslint.js:1985:71      unignoring              U       unignored without also unignoring all files in them\","
+  - "tests/lib/eslint/eslint.js:1999:47      jsfmt                   U       \"!tests/format/**/jsfmt.spec.js\""
+  - "tests/lib/eslint/eslint.js:3074:39      previos                 U       make sure that the previos assertion checks the"
+  - "tests/lib/eslint/eslint.js:3127:59      intenationally          U       cacheFilePath, \"[]\"); // intenationally invalid to additionally"
+  - "tests/lib/eslint/eslint.js:3297:59      occured (occurred)      U       the previous run that occured after the cache was"
+  - "tests/lib/eslint/eslint.js:6089:31      reignore                U       cwd: `${root}-reignore`,"
+  - "tests/lib/eslint/eslint.js:6129:31      dignore                 U       cwd: `${root}-dignore`,"
   - "tests/lib/eslint/legacy-eslint.js:2512:24       succesfully (successfully)      U       it(\"should succesfully execute with a rule"
   - "tests/lib/linter/config-comment-parser.js:165:41        ELEVENTEEN      U       code = \"a: seventy, b:ELEVENTEEN\";"
   - "tests/lib/linter/linter.js:3267:1       consolexlog         U       consolexlog(\"test2\");"
@@ -985,7 +984,7 @@ issuesSummary:
   - "text: messageids, count: 2, files: 1,"
   - "text: metascraper, count: 10, files: 2,"
   - "text: michaelficarra, count: 1, files: 1,"
-  - "text: microtask, count: 2, files: 1,"
+  - "text: microtask, count: 4, files: 1,"
   - "text: modns, count: 3, files: 1,"
   - "text: mootools, count: 4, files: 1,"
   - "text: morerules, count: 2, files: 1,"
@@ -1239,7 +1238,6 @@ issuesSummary:
   - "text: togglenav, count: 2, files: 1,"
   - "text: toint, count: 1, files: 1,"
   - "text: Traceur, count: 1, files: 1,"
-  - "text: Transloadit, count: 1, files: 1,"
   - "text: triaging, count: 5, files: 2,"
   - "text: Triaging, count: 5, files: 1,"
   - "text: Trotta, count: 1, files: 1,"
