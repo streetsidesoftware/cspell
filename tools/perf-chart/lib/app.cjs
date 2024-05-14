@@ -2882,7 +2882,7 @@ var {
 // src/perfChart.ts
 var import_node_fs = require("node:fs");
 
-// ../../node_modules/.pnpm/csv-parse@5.5.5/node_modules/csv-parse/lib/api/CsvError.js
+// ../../node_modules/.pnpm/csv-parse@5.5.6/node_modules/csv-parse/lib/api/CsvError.js
 var CsvError = class _CsvError extends Error {
   constructor(code, message, options, ...contexts) {
     if (Array.isArray(message)) message = message.join(" ").trim();
@@ -2900,12 +2900,12 @@ var CsvError = class _CsvError extends Error {
   }
 };
 
-// ../../node_modules/.pnpm/csv-parse@5.5.5/node_modules/csv-parse/lib/utils/is_object.js
+// ../../node_modules/.pnpm/csv-parse@5.5.6/node_modules/csv-parse/lib/utils/is_object.js
 var is_object = function(obj) {
   return typeof obj === "object" && obj !== null && !Array.isArray(obj);
 };
 
-// ../../node_modules/.pnpm/csv-parse@5.5.5/node_modules/csv-parse/lib/api/normalize_columns_array.js
+// ../../node_modules/.pnpm/csv-parse@5.5.6/node_modules/csv-parse/lib/api/normalize_columns_array.js
 var normalize_columns_array = function(columns) {
   const normalizedColumns = [];
   for (let i = 0, l = columns.length; i < l; i++) {
@@ -2934,7 +2934,7 @@ var normalize_columns_array = function(columns) {
   return normalizedColumns;
 };
 
-// ../../node_modules/.pnpm/csv-parse@5.5.5/node_modules/csv-parse/lib/utils/ResizeableBuffer.js
+// ../../node_modules/.pnpm/csv-parse@5.5.6/node_modules/csv-parse/lib/utils/ResizeableBuffer.js
 var ResizeableBuffer = class {
   constructor(size = 100) {
     this.size = size;
@@ -2998,7 +2998,7 @@ var ResizeableBuffer = class {
 };
 var ResizeableBuffer_default = ResizeableBuffer;
 
-// ../../node_modules/.pnpm/csv-parse@5.5.5/node_modules/csv-parse/lib/api/init_state.js
+// ../../node_modules/.pnpm/csv-parse@5.5.6/node_modules/csv-parse/lib/api/init_state.js
 var np = 12;
 var cr = 13;
 var nl = 10;
@@ -3047,14 +3047,14 @@ var init_state = function(options) {
   };
 };
 
-// ../../node_modules/.pnpm/csv-parse@5.5.5/node_modules/csv-parse/lib/utils/underscore.js
+// ../../node_modules/.pnpm/csv-parse@5.5.6/node_modules/csv-parse/lib/utils/underscore.js
 var underscore = function(str) {
   return str.replace(/([A-Z])/g, function(_, match) {
     return "_" + match.toLowerCase();
   });
 };
 
-// ../../node_modules/.pnpm/csv-parse@5.5.5/node_modules/csv-parse/lib/api/normalize_options.js
+// ../../node_modules/.pnpm/csv-parse@5.5.6/node_modules/csv-parse/lib/api/normalize_options.js
 var normalize_options = function(opts) {
   const options = {};
   for (const opt in opts) {
@@ -3297,6 +3297,9 @@ var normalize_options = function(opts) {
       `got ${JSON.stringify(options.on_record)}`
     ], options);
   }
+  if (options.on_skip !== void 0 && options.on_skip !== null && typeof options.on_skip !== "function") {
+    throw new Error(`Invalid Option: on_skip must be a function, got ${JSON.stringify(options.on_skip)}`);
+  }
   if (options.quote === null || options.quote === false || options.quote === "") {
     options.quote = null;
   } else {
@@ -3451,7 +3454,7 @@ var normalize_options = function(opts) {
   return options;
 };
 
-// ../../node_modules/.pnpm/csv-parse@5.5.5/node_modules/csv-parse/lib/api/index.js
+// ../../node_modules/.pnpm/csv-parse@5.5.6/node_modules/csv-parse/lib/api/index.js
 var isRecordEmpty = function(record) {
   return record.every((field) => field == null || field.toString && field.toString().trim() === "");
 };
@@ -4124,7 +4127,7 @@ var transform = function(original_options = {}) {
   };
 };
 
-// ../../node_modules/.pnpm/csv-parse@5.5.5/node_modules/csv-parse/lib/sync.js
+// ../../node_modules/.pnpm/csv-parse@5.5.6/node_modules/csv-parse/lib/sync.js
 var parse = function(data, opts = {}) {
   if (typeof data === "string") {
     data = Buffer.from(data);
