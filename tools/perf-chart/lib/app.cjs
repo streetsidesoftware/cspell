@@ -25,16 +25,15 @@ var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__ge
   mod
 ));
 
-// ../../node_modules/.pnpm/commander@12.0.0/node_modules/commander/lib/error.js
+// ../../node_modules/.pnpm/commander@12.1.0/node_modules/commander/lib/error.js
 var require_error = __commonJS({
-  "../../node_modules/.pnpm/commander@12.0.0/node_modules/commander/lib/error.js"(exports2) {
+  "../../node_modules/.pnpm/commander@12.1.0/node_modules/commander/lib/error.js"(exports2) {
     var CommanderError2 = class extends Error {
       /**
        * Constructs the CommanderError class
        * @param {number} exitCode suggested exit code which could be used with process.exit
        * @param {string} code an id string representing the error
        * @param {string} message human-readable description of the error
-       * @constructor
        */
       constructor(exitCode, code, message) {
         super(message);
@@ -49,7 +48,6 @@ var require_error = __commonJS({
       /**
        * Constructs the InvalidArgumentError class
        * @param {string} [message] explanation of why argument is invalid
-       * @constructor
        */
       constructor(message) {
         super(1, "commander.invalidArgument", message);
@@ -62,9 +60,9 @@ var require_error = __commonJS({
   }
 });
 
-// ../../node_modules/.pnpm/commander@12.0.0/node_modules/commander/lib/argument.js
+// ../../node_modules/.pnpm/commander@12.1.0/node_modules/commander/lib/argument.js
 var require_argument = __commonJS({
-  "../../node_modules/.pnpm/commander@12.0.0/node_modules/commander/lib/argument.js"(exports2) {
+  "../../node_modules/.pnpm/commander@12.1.0/node_modules/commander/lib/argument.js"(exports2) {
     var { InvalidArgumentError: InvalidArgumentError2 } = require_error();
     var Argument2 = class {
       /**
@@ -110,7 +108,7 @@ var require_argument = __commonJS({
         return this._name;
       }
       /**
-       * @package internal use only
+       * @package
        */
       _concatValue(value, previous) {
         if (previous === this.defaultValue || !Array.isArray(previous)) {
@@ -150,7 +148,9 @@ var require_argument = __commonJS({
         this.argChoices = values.slice();
         this.parseArg = (arg, previous) => {
           if (!this.argChoices.includes(arg)) {
-            throw new InvalidArgumentError2(`Allowed choices are ${this.argChoices.join(", ")}.`);
+            throw new InvalidArgumentError2(
+              `Allowed choices are ${this.argChoices.join(", ")}.`
+            );
           }
           if (this.variadic) {
             return this._concatValue(arg, previous);
@@ -161,6 +161,8 @@ var require_argument = __commonJS({
       }
       /**
        * Make argument required.
+       *
+       * @returns {Argument}
        */
       argRequired() {
         this.required = true;
@@ -168,6 +170,8 @@ var require_argument = __commonJS({
       }
       /**
        * Make argument optional.
+       *
+       * @returns {Argument}
        */
       argOptional() {
         this.required = false;
@@ -183,9 +187,9 @@ var require_argument = __commonJS({
   }
 });
 
-// ../../node_modules/.pnpm/commander@12.0.0/node_modules/commander/lib/help.js
+// ../../node_modules/.pnpm/commander@12.1.0/node_modules/commander/lib/help.js
 var require_help = __commonJS({
-  "../../node_modules/.pnpm/commander@12.0.0/node_modules/commander/lib/help.js"(exports2) {
+  "../../node_modules/.pnpm/commander@12.1.0/node_modules/commander/lib/help.js"(exports2) {
     var { humanReadableArgName } = require_argument();
     var Help2 = class {
       constructor() {
@@ -218,7 +222,7 @@ var require_help = __commonJS({
        *
        * @param {Option} a
        * @param {Option} b
-       * @returns number
+       * @returns {number}
        */
       compareOptions(a, b) {
         const getSortKey = (option) => {
@@ -241,9 +245,13 @@ var require_help = __commonJS({
           if (!removeShort && !removeLong) {
             visibleOptions.push(helpOption);
           } else if (helpOption.long && !removeLong) {
-            visibleOptions.push(cmd.createOption(helpOption.long, helpOption.description));
+            visibleOptions.push(
+              cmd.createOption(helpOption.long, helpOption.description)
+            );
           } else if (helpOption.short && !removeShort) {
-            visibleOptions.push(cmd.createOption(helpOption.short, helpOption.description));
+            visibleOptions.push(
+              cmd.createOption(helpOption.short, helpOption.description)
+            );
           }
         }
         if (this.sortOptions) {
@@ -261,7 +269,9 @@ var require_help = __commonJS({
         if (!this.showGlobalOptions) return [];
         const globalOptions = [];
         for (let ancestorCmd = cmd.parent; ancestorCmd; ancestorCmd = ancestorCmd.parent) {
-          const visibleOptions = ancestorCmd.options.filter((option) => !option.hidden);
+          const visibleOptions = ancestorCmd.options.filter(
+            (option) => !option.hidden
+          );
           globalOptions.push(...visibleOptions);
         }
         if (this.sortOptions) {
@@ -416,7 +426,9 @@ var require_help = __commonJS({
         if (option.defaultValue !== void 0) {
           const showDefault = option.required || option.optional || option.isBoolean() && typeof option.defaultValue === "boolean";
           if (showDefault) {
-            extraInfo.push(`default: ${option.defaultValueDescription || JSON.stringify(option.defaultValue)}`);
+            extraInfo.push(
+              `default: ${option.defaultValueDescription || JSON.stringify(option.defaultValue)}`
+            );
           }
         }
         if (option.presetArg !== void 0 && option.optional) {
@@ -445,7 +457,9 @@ var require_help = __commonJS({
           );
         }
         if (argument.defaultValue !== void 0) {
-          extraInfo.push(`default: ${argument.defaultValueDescription || JSON.stringify(argument.defaultValue)}`);
+          extraInfo.push(
+            `default: ${argument.defaultValueDescription || JSON.stringify(argument.defaultValue)}`
+          );
         }
         if (extraInfo.length > 0) {
           const extraDescripton = `(${extraInfo.join(", ")})`;
@@ -471,7 +485,11 @@ var require_help = __commonJS({
         function formatItem(term, description) {
           if (description) {
             const fullText = `${term.padEnd(termWidth + itemSeparatorWidth)}${description}`;
-            return helper.wrap(fullText, helpWidth - itemIndentWidth, termWidth + itemSeparatorWidth);
+            return helper.wrap(
+              fullText,
+              helpWidth - itemIndentWidth,
+              termWidth + itemSeparatorWidth
+            );
           }
           return term;
         }
@@ -481,30 +499,49 @@ var require_help = __commonJS({
         let output = [`Usage: ${helper.commandUsage(cmd)}`, ""];
         const commandDescription = helper.commandDescription(cmd);
         if (commandDescription.length > 0) {
-          output = output.concat([helper.wrap(commandDescription, helpWidth, 0), ""]);
+          output = output.concat([
+            helper.wrap(commandDescription, helpWidth, 0),
+            ""
+          ]);
         }
         const argumentList = helper.visibleArguments(cmd).map((argument) => {
-          return formatItem(helper.argumentTerm(argument), helper.argumentDescription(argument));
+          return formatItem(
+            helper.argumentTerm(argument),
+            helper.argumentDescription(argument)
+          );
         });
         if (argumentList.length > 0) {
           output = output.concat(["Arguments:", formatList(argumentList), ""]);
         }
         const optionList = helper.visibleOptions(cmd).map((option) => {
-          return formatItem(helper.optionTerm(option), helper.optionDescription(option));
+          return formatItem(
+            helper.optionTerm(option),
+            helper.optionDescription(option)
+          );
         });
         if (optionList.length > 0) {
           output = output.concat(["Options:", formatList(optionList), ""]);
         }
         if (this.showGlobalOptions) {
           const globalOptionList = helper.visibleGlobalOptions(cmd).map((option) => {
-            return formatItem(helper.optionTerm(option), helper.optionDescription(option));
+            return formatItem(
+              helper.optionTerm(option),
+              helper.optionDescription(option)
+            );
           });
           if (globalOptionList.length > 0) {
-            output = output.concat(["Global Options:", formatList(globalOptionList), ""]);
+            output = output.concat([
+              "Global Options:",
+              formatList(globalOptionList),
+              ""
+            ]);
           }
         }
         const commandList = helper.visibleCommands(cmd).map((cmd2) => {
-          return formatItem(helper.subcommandTerm(cmd2), helper.subcommandDescription(cmd2));
+          return formatItem(
+            helper.subcommandTerm(cmd2),
+            helper.subcommandDescription(cmd2)
+          );
         });
         if (commandList.length > 0) {
           output = output.concat(["Commands:", formatList(commandList), ""]);
@@ -548,8 +585,11 @@ var require_help = __commonJS({
         const indentString = " ".repeat(indent);
         const zeroWidthSpace = "\u200B";
         const breaks = `\\s${zeroWidthSpace}`;
-        const regex = new RegExp(`
-|.{1,${columnWidth - 1}}([${breaks}]|$)|[^${breaks}]+?([${breaks}]|$)`, "g");
+        const regex = new RegExp(
+          `
+|.{1,${columnWidth - 1}}([${breaks}]|$)|[^${breaks}]+?([${breaks}]|$)`,
+          "g"
+        );
         const lines = columnText.match(regex) || [];
         return leadingStr + lines.map((line, i) => {
           if (line === "\n") return "";
@@ -561,9 +601,9 @@ var require_help = __commonJS({
   }
 });
 
-// ../../node_modules/.pnpm/commander@12.0.0/node_modules/commander/lib/option.js
+// ../../node_modules/.pnpm/commander@12.1.0/node_modules/commander/lib/option.js
 var require_option = __commonJS({
-  "../../node_modules/.pnpm/commander@12.0.0/node_modules/commander/lib/option.js"(exports2) {
+  "../../node_modules/.pnpm/commander@12.1.0/node_modules/commander/lib/option.js"(exports2) {
     var { InvalidArgumentError: InvalidArgumentError2 } = require_error();
     var Option2 = class {
       /**
@@ -648,7 +688,7 @@ var require_option = __commonJS({
        *   .addOption(new Option('--log', 'write logging information to file'))
        *   .addOption(new Option('--trace', 'log extra details').implies({ log: 'trace.txt' }));
        *
-       * @param {Object} impliedOptionValues
+       * @param {object} impliedOptionValues
        * @return {Option}
        */
       implies(impliedOptionValues) {
@@ -703,7 +743,7 @@ var require_option = __commonJS({
         return this;
       }
       /**
-       * @package internal use only
+       * @package
        */
       _concatValue(value, previous) {
         if (previous === this.defaultValue || !Array.isArray(previous)) {
@@ -721,7 +761,9 @@ var require_option = __commonJS({
         this.argChoices = values.slice();
         this.parseArg = (arg, previous) => {
           if (!this.argChoices.includes(arg)) {
-            throw new InvalidArgumentError2(`Allowed choices are ${this.argChoices.join(", ")}.`);
+            throw new InvalidArgumentError2(
+              `Allowed choices are ${this.argChoices.join(", ")}.`
+            );
           }
           if (this.variadic) {
             return this._concatValue(arg, previous);
@@ -755,7 +797,7 @@ var require_option = __commonJS({
        *
        * @param {string} arg
        * @return {boolean}
-       * @package internal use only
+       * @package
        */
       is(arg) {
         return this.short === arg || this.long === arg;
@@ -766,7 +808,7 @@ var require_option = __commonJS({
        * Options are one of boolean, negated, required argument, or optional argument.
        *
        * @return {boolean}
-       * @package internal use only
+       * @package
        */
       isBoolean() {
         return !this.required && !this.optional && !this.negate;
@@ -817,7 +859,8 @@ var require_option = __commonJS({
       let shortFlag;
       let longFlag;
       const flagParts = flags.split(/[ |,]+/);
-      if (flagParts.length > 1 && !/^[[<]/.test(flagParts[1])) shortFlag = flagParts.shift();
+      if (flagParts.length > 1 && !/^[[<]/.test(flagParts[1]))
+        shortFlag = flagParts.shift();
       longFlag = flagParts.shift();
       if (!shortFlag && /^-[^-]$/.test(longFlag)) {
         shortFlag = longFlag;
@@ -830,12 +873,13 @@ var require_option = __commonJS({
   }
 });
 
-// ../../node_modules/.pnpm/commander@12.0.0/node_modules/commander/lib/suggestSimilar.js
+// ../../node_modules/.pnpm/commander@12.1.0/node_modules/commander/lib/suggestSimilar.js
 var require_suggestSimilar = __commonJS({
-  "../../node_modules/.pnpm/commander@12.0.0/node_modules/commander/lib/suggestSimilar.js"(exports2) {
+  "../../node_modules/.pnpm/commander@12.1.0/node_modules/commander/lib/suggestSimilar.js"(exports2) {
     var maxDistance = 3;
     function editDistance(a, b) {
-      if (Math.abs(a.length - b.length) > maxDistance) return Math.max(a.length, b.length);
+      if (Math.abs(a.length - b.length) > maxDistance)
+        return Math.max(a.length, b.length);
       const d = [];
       for (let i = 0; i <= a.length; i++) {
         d[i] = [i];
@@ -909,14 +953,14 @@ var require_suggestSimilar = __commonJS({
   }
 });
 
-// ../../node_modules/.pnpm/commander@12.0.0/node_modules/commander/lib/command.js
+// ../../node_modules/.pnpm/commander@12.1.0/node_modules/commander/lib/command.js
 var require_command = __commonJS({
-  "../../node_modules/.pnpm/commander@12.0.0/node_modules/commander/lib/command.js"(exports2) {
-    var EventEmitter = require("events").EventEmitter;
-    var childProcess = require("child_process");
-    var path = require("path");
-    var fs2 = require("fs");
-    var process = require("process");
+  "../../node_modules/.pnpm/commander@12.1.0/node_modules/commander/lib/command.js"(exports2) {
+    var EventEmitter = require("node:events").EventEmitter;
+    var childProcess = require("node:child_process");
+    var path = require("node:path");
+    var fs2 = require("node:fs");
+    var process = require("node:process");
     var { Argument: Argument2, humanReadableArgName } = require_argument();
     var { CommanderError: CommanderError2 } = require_error();
     var { Help: Help2 } = require_help();
@@ -1027,8 +1071,8 @@ var require_command = __commonJS({
        *   .command('stop [service]', 'stop named service, or all if no name supplied');
        *
        * @param {string} nameAndArgs - command name and arguments, args are `<required>` or `[optional]` and last may also be `variadic...`
-       * @param {(Object|string)} [actionOptsOrExecDesc] - configuration options (for action), or description (for executable)
-       * @param {Object} [execOpts] - configuration options (for executable)
+       * @param {(object | string)} [actionOptsOrExecDesc] - configuration options (for action), or description (for executable)
+       * @param {object} [execOpts] - configuration options (for executable)
        * @return {Command} returns new command for action handler, or `this` for executable command
        */
       command(nameAndArgs, actionOptsOrExecDesc, execOpts) {
@@ -1080,8 +1124,8 @@ var require_command = __commonJS({
        * You can customise the help by overriding Help properties using configureHelp(),
        * or with a subclass of Help by overriding createHelp().
        *
-       * @param {Object} [configuration] - configuration options
-       * @return {(Command|Object)} `this` command for chaining, or stored configuration
+       * @param {object} [configuration] - configuration options
+       * @return {(Command | object)} `this` command for chaining, or stored configuration
        */
       configureHelp(configuration) {
         if (configuration === void 0) return this._helpConfiguration;
@@ -1103,8 +1147,8 @@ var require_command = __commonJS({
        *     // functions based on what is being written out
        *     outputError(str, write) // used for displaying errors, and not used for displaying help
        *
-       * @param {Object} [configuration] - configuration options
-       * @return {(Command|Object)} `this` command for chaining, or stored configuration
+       * @param {object} [configuration] - configuration options
+       * @return {(Command | object)} `this` command for chaining, or stored configuration
        */
       configureOutput(configuration) {
         if (configuration === void 0) return this._outputConfiguration;
@@ -1138,7 +1182,7 @@ var require_command = __commonJS({
        * See .command() for creating an attached subcommand which inherits settings from its parent.
        *
        * @param {Command} cmd - new subcommand
-       * @param {Object} [opts] - configuration options
+       * @param {object} [opts] - configuration options
        * @return {Command} `this` command for chaining
        */
       addCommand(cmd, opts) {
@@ -1219,10 +1263,14 @@ var require_command = __commonJS({
       addArgument(argument) {
         const previousArgument = this.registeredArguments.slice(-1)[0];
         if (previousArgument && previousArgument.variadic) {
-          throw new Error(`only the last argument can be variadic '${previousArgument.name()}'`);
+          throw new Error(
+            `only the last argument can be variadic '${previousArgument.name()}'`
+          );
         }
         if (argument.required && argument.defaultValue !== void 0 && argument.parseArg === void 0) {
-          throw new Error(`a default value for a required argument is never used: '${argument.name()}'`);
+          throw new Error(
+            `a default value for a required argument is never used: '${argument.name()}'`
+          );
         }
         this.registeredArguments.push(argument);
         return this;
@@ -1230,6 +1278,7 @@ var require_command = __commonJS({
       /**
        * Customise or override default help command. By default a help command is automatically added if your command has subcommands.
        *
+       * @example
        *    program.helpCommand('help [cmd]');
        *    program.helpCommand('help [cmd]', 'show help');
        *    program.helpCommand(false); // suppress default help command
@@ -1408,7 +1457,7 @@ Expecting one of '${allowedValues.join("', '")}'`);
        * Register option if no conflicts found, or throw on conflict.
        *
        * @param {Option} option
-       * @api private
+       * @private
        */
       _registerOption(option) {
         const matchingOption = option.short && this._findOption(option.short) || option.long && this._findOption(option.long);
@@ -1424,17 +1473,21 @@ Expecting one of '${allowedValues.join("', '")}'`);
        * Register command if no conflicts found, or throw on conflict.
        *
        * @param {Command} command
-       * @api private
+       * @private
        */
       _registerCommand(command) {
         const knownBy = (cmd) => {
           return [cmd.name()].concat(cmd.aliases());
         };
-        const alreadyUsed = knownBy(command).find((name) => this._findCommand(name));
+        const alreadyUsed = knownBy(command).find(
+          (name) => this._findCommand(name)
+        );
         if (alreadyUsed) {
           const existingCmd = knownBy(this._findCommand(alreadyUsed)).join("|");
           const newCmd = knownBy(command).join("|");
-          throw new Error(`cannot add command '${newCmd}' as already have command '${existingCmd}'`);
+          throw new Error(
+            `cannot add command '${newCmd}' as already have command '${existingCmd}'`
+          );
         }
         this.commands.push(command);
       }
@@ -1451,7 +1504,11 @@ Expecting one of '${allowedValues.join("', '")}'`);
         if (option.negate) {
           const positiveLongFlag = option.long.replace(/^--no-/, "--");
           if (!this._findOption(positiveLongFlag)) {
-            this.setOptionValueWithSource(name, option.defaultValue === void 0 ? true : option.defaultValue, "default");
+            this.setOptionValueWithSource(
+              name,
+              option.defaultValue === void 0 ? true : option.defaultValue,
+              "default"
+            );
           }
         } else if (option.defaultValue !== void 0) {
           this.setOptionValueWithSource(name, option.defaultValue, "default");
@@ -1492,11 +1549,14 @@ Expecting one of '${allowedValues.join("', '")}'`);
       /**
        * Internal implementation shared by .option() and .requiredOption()
        *
+       * @return {Command} `this` command for chaining
        * @private
        */
       _optionEx(config, flags, description, fn, defaultValue) {
         if (typeof flags === "object" && flags instanceof Option2) {
-          throw new Error("To add an Option object use addOption() instead of option() or requiredOption()");
+          throw new Error(
+            "To add an Option object use addOption() instead of option() or requiredOption()"
+          );
         }
         const option = this.createOption(flags, description);
         option.makeOptionMandatory(!!config.mandatory);
@@ -1539,19 +1599,25 @@ Expecting one of '${allowedValues.join("', '")}'`);
         return this._optionEx({}, flags, description, parseArg, defaultValue);
       }
       /**
-      * Add a required option which must have a value after parsing. This usually means
-      * the option must be specified on the command line. (Otherwise the same as .option().)
-      *
-      * The `flags` string contains the short and/or long flags, separated by comma, a pipe or space.
-      *
-      * @param {string} flags
-      * @param {string} [description]
-      * @param {(Function|*)} [parseArg] - custom option processing function or default value
-      * @param {*} [defaultValue]
-      * @return {Command} `this` command for chaining
-      */
+       * Add a required option which must have a value after parsing. This usually means
+       * the option must be specified on the command line. (Otherwise the same as .option().)
+       *
+       * The `flags` string contains the short and/or long flags, separated by comma, a pipe or space.
+       *
+       * @param {string} flags
+       * @param {string} [description]
+       * @param {(Function|*)} [parseArg] - custom option processing function or default value
+       * @param {*} [defaultValue]
+       * @return {Command} `this` command for chaining
+       */
       requiredOption(flags, description, parseArg, defaultValue) {
-        return this._optionEx({ mandatory: true }, flags, description, parseArg, defaultValue);
+        return this._optionEx(
+          { mandatory: true },
+          flags,
+          description,
+          parseArg,
+          defaultValue
+        );
       }
       /**
        * Alter parsing of short flags with optional values.
@@ -1561,7 +1627,8 @@ Expecting one of '${allowedValues.join("', '")}'`);
        * program.combineFlagAndOptionalValue(true);  // `-f80` is treated like `--flag=80`, this is the default behaviour
        * program.combineFlagAndOptionalValue(false) // `-fb` is treated like `-f -b`
        *
-       * @param {boolean} [combine=true] - if `true` or omitted, an optional value can be specified directly after the flag.
+       * @param {boolean} [combine] - if `true` or omitted, an optional value can be specified directly after the flag.
+       * @return {Command} `this` command for chaining
        */
       combineFlagAndOptionalValue(combine = true) {
         this._combineFlagAndOptionalValue = !!combine;
@@ -1570,8 +1637,8 @@ Expecting one of '${allowedValues.join("', '")}'`);
       /**
        * Allow unknown options on the command line.
        *
-       * @param {boolean} [allowUnknown=true] - if `true` or omitted, no error will be thrown
-       * for unknown options.
+       * @param {boolean} [allowUnknown] - if `true` or omitted, no error will be thrown for unknown options.
+       * @return {Command} `this` command for chaining
        */
       allowUnknownOption(allowUnknown = true) {
         this._allowUnknownOption = !!allowUnknown;
@@ -1580,8 +1647,8 @@ Expecting one of '${allowedValues.join("', '")}'`);
       /**
        * Allow excess command-arguments on the command line. Pass false to make excess arguments an error.
        *
-       * @param {boolean} [allowExcess=true] - if `true` or omitted, no error will be thrown
-       * for excess arguments.
+       * @param {boolean} [allowExcess] - if `true` or omitted, no error will be thrown for excess arguments.
+       * @return {Command} `this` command for chaining
        */
       allowExcessArguments(allowExcess = true) {
         this._allowExcessArguments = !!allowExcess;
@@ -1592,7 +1659,8 @@ Expecting one of '${allowedValues.join("', '")}'`);
        * subcommands reuse the same option names, and also enables subcommands to turn on passThroughOptions.
        * The default behaviour is non-positional and global options may appear anywhere on the command line.
        *
-       * @param {boolean} [positional=true]
+       * @param {boolean} [positional]
+       * @return {Command} `this` command for chaining
        */
       enablePositionalOptions(positional = true) {
         this._enablePositionalOptions = !!positional;
@@ -1604,8 +1672,8 @@ Expecting one of '${allowedValues.join("', '")}'`);
        * positional options to have been enabled on the program (parent commands).
        * The default behaviour is non-positional and options may appear before or after command-arguments.
        *
-       * @param {boolean} [passThrough=true]
-       * for unknown options.
+       * @param {boolean} [passThrough] for unknown options.
+       * @return {Command} `this` command for chaining
        */
       passThroughOptions(passThrough = true) {
         this._passThroughOptions = !!passThrough;
@@ -1617,22 +1685,26 @@ Expecting one of '${allowedValues.join("', '")}'`);
        */
       _checkForBrokenPassThrough() {
         if (this.parent && this._passThroughOptions && !this.parent._enablePositionalOptions) {
-          throw new Error(`passThroughOptions cannot be used for '${this._name}' without turning on enablePositionalOptions for parent command(s)`);
+          throw new Error(
+            `passThroughOptions cannot be used for '${this._name}' without turning on enablePositionalOptions for parent command(s)`
+          );
         }
       }
       /**
-        * Whether to store option values as properties on command object,
-        * or store separately (specify false). In both cases the option values can be accessed using .opts().
-        *
-        * @param {boolean} [storeAsProperties=true]
-        * @return {Command} `this` command for chaining
-        */
+       * Whether to store option values as properties on command object,
+       * or store separately (specify false). In both cases the option values can be accessed using .opts().
+       *
+       * @param {boolean} [storeAsProperties=true]
+       * @return {Command} `this` command for chaining
+       */
       storeOptionsAsProperties(storeAsProperties = true) {
         if (this.options.length) {
           throw new Error("call .storeOptionsAsProperties() before adding options");
         }
         if (Object.keys(this._optionValues).length) {
-          throw new Error("call .storeOptionsAsProperties() before setting option values");
+          throw new Error(
+            "call .storeOptionsAsProperties() before setting option values"
+          );
         }
         this._storeOptionsAsProperties = !!storeAsProperties;
         return this;
@@ -1641,7 +1713,7 @@ Expecting one of '${allowedValues.join("', '")}'`);
        * Retrieve option value.
        *
        * @param {string} key
-       * @return {Object} value
+       * @return {object} value
        */
       getOptionValue(key) {
         if (this._storeOptionsAsProperties) {
@@ -1653,20 +1725,20 @@ Expecting one of '${allowedValues.join("', '")}'`);
        * Store option value.
        *
        * @param {string} key
-       * @param {Object} value
+       * @param {object} value
        * @return {Command} `this` command for chaining
        */
       setOptionValue(key, value) {
         return this.setOptionValueWithSource(key, value, void 0);
       }
       /**
-        * Store option value and where the value came from.
-        *
-        * @param {string} key
-        * @param {Object} value
-        * @param {string} source - expected values are default/config/env/cli/implied
-        * @return {Command} `this` command for chaining
-        */
+       * Store option value and where the value came from.
+       *
+       * @param {string} key
+       * @param {object} value
+       * @param {string} source - expected values are default/config/env/cli/implied
+       * @return {Command} `this` command for chaining
+       */
       setOptionValueWithSource(key, value, source) {
         if (this._storeOptionsAsProperties) {
           this[key] = value;
@@ -1677,22 +1749,22 @@ Expecting one of '${allowedValues.join("', '")}'`);
         return this;
       }
       /**
-        * Get source of option value.
-        * Expected values are default | config | env | cli | implied
-        *
-        * @param {string} key
-        * @return {string}
-        */
+       * Get source of option value.
+       * Expected values are default | config | env | cli | implied
+       *
+       * @param {string} key
+       * @return {string}
+       */
       getOptionValueSource(key) {
         return this._optionValueSources[key];
       }
       /**
-        * Get source of option value. See also .optsWithGlobals().
-        * Expected values are default | config | env | cli | implied
-        *
-        * @param {string} key
-        * @return {string}
-        */
+       * Get source of option value. See also .optsWithGlobals().
+       * Expected values are default | config | env | cli | implied
+       *
+       * @param {string} key
+       * @return {string}
+       */
       getOptionValueSourceWithGlobals(key) {
         let source;
         this._getCommandAndAncestors().forEach((cmd) => {
@@ -1713,11 +1785,17 @@ Expecting one of '${allowedValues.join("', '")}'`);
           throw new Error("first parameter to parse must be array or undefined");
         }
         parseOptions = parseOptions || {};
-        if (argv === void 0) {
-          argv = process.argv;
-          if (process.versions && process.versions.electron) {
+        if (argv === void 0 && parseOptions.from === void 0) {
+          if (process.versions?.electron) {
             parseOptions.from = "electron";
           }
+          const execArgv = process.execArgv ?? [];
+          if (execArgv.includes("-e") || execArgv.includes("--eval") || execArgv.includes("-p") || execArgv.includes("--print")) {
+            parseOptions.from = "eval";
+          }
+        }
+        if (argv === void 0) {
+          argv = process.argv;
         }
         this.rawArgs = argv.slice();
         let userArgs;
@@ -1738,26 +1816,38 @@ Expecting one of '${allowedValues.join("', '")}'`);
           case "user":
             userArgs = argv.slice(0);
             break;
+          case "eval":
+            userArgs = argv.slice(1);
+            break;
           default:
-            throw new Error(`unexpected parse option { from: '${parseOptions.from}' }`);
+            throw new Error(
+              `unexpected parse option { from: '${parseOptions.from}' }`
+            );
         }
-        if (!this._name && this._scriptPath) this.nameFromFilename(this._scriptPath);
+        if (!this._name && this._scriptPath)
+          this.nameFromFilename(this._scriptPath);
         this._name = this._name || "program";
         return userArgs;
       }
       /**
        * Parse `argv`, setting options and invoking commands when defined.
        *
-       * The default expectation is that the arguments are from node and have the application as argv[0]
-       * and the script being run in argv[1], with user parameters after that.
+       * Use parseAsync instead of parse if any of your action handlers are async.
+       *
+       * Call with no parameters to parse `process.argv`. Detects Electron and special node options like `node --eval`. Easy mode!
+       *
+       * Or call with an array of strings to parse, and optionally where the user arguments start by specifying where the arguments are `from`:
+       * - `'node'`: default, `argv[0]` is the application and `argv[1]` is the script being run, with user arguments after that
+       * - `'electron'`: `argv[0]` is the application and `argv[1]` varies depending on whether the electron application is packaged
+       * - `'user'`: just user arguments
        *
        * @example
-       * program.parse(process.argv);
-       * program.parse(); // implicitly use process.argv and auto-detect node vs electron conventions
+       * program.parse(); // parse process.argv and auto-detect electron and special node flags
+       * program.parse(process.argv); // assume argv[0] is app and argv[1] is script
        * program.parse(my-args, { from: 'user' }); // just user supplied arguments, nothing special about argv[0]
        *
        * @param {string[]} [argv] - optional, defaults to process.argv
-       * @param {Object} [parseOptions] - optionally specify style of options with from: node/user/electron
+       * @param {object} [parseOptions] - optionally specify style of options with from: node/user/electron
        * @param {string} [parseOptions.from] - where the args are from: 'node', 'user', 'electron'
        * @return {Command} `this` command for chaining
        */
@@ -1769,18 +1859,20 @@ Expecting one of '${allowedValues.join("', '")}'`);
       /**
        * Parse `argv`, setting options and invoking commands when defined.
        *
-       * Use parseAsync instead of parse if any of your action handlers are async. Returns a Promise.
+       * Call with no parameters to parse `process.argv`. Detects Electron and special node options like `node --eval`. Easy mode!
        *
-       * The default expectation is that the arguments are from node and have the application as argv[0]
-       * and the script being run in argv[1], with user parameters after that.
+       * Or call with an array of strings to parse, and optionally where the user arguments start by specifying where the arguments are `from`:
+       * - `'node'`: default, `argv[0]` is the application and `argv[1]` is the script being run, with user arguments after that
+       * - `'electron'`: `argv[0]` is the application and `argv[1]` varies depending on whether the electron application is packaged
+       * - `'user'`: just user arguments
        *
        * @example
-       * await program.parseAsync(process.argv);
-       * await program.parseAsync(); // implicitly use process.argv and auto-detect node vs electron conventions
+       * await program.parseAsync(); // parse process.argv and auto-detect electron and special node flags
+       * await program.parseAsync(process.argv); // assume argv[0] is app and argv[1] is script
        * await program.parseAsync(my-args, { from: 'user' }); // just user supplied arguments, nothing special about argv[0]
        *
        * @param {string[]} [argv]
-       * @param {Object} [parseOptions]
+       * @param {object} [parseOptions]
        * @param {string} parseOptions.from - where the args are from: 'node', 'user', 'electron'
        * @return {Promise}
        */
@@ -1802,7 +1894,9 @@ Expecting one of '${allowedValues.join("', '")}'`);
           const localBin = path.resolve(baseDir, baseName);
           if (fs2.existsSync(localBin)) return localBin;
           if (sourceExt.includes(path.extname(baseName))) return void 0;
-          const foundExt = sourceExt.find((ext) => fs2.existsSync(`${localBin}${ext}`));
+          const foundExt = sourceExt.find(
+            (ext) => fs2.existsSync(`${localBin}${ext}`)
+          );
           if (foundExt) return `${localBin}${foundExt}`;
           return void 0;
         }
@@ -1817,14 +1911,23 @@ Expecting one of '${allowedValues.join("', '")}'`);
           } catch (err) {
             resolvedScriptPath = this._scriptPath;
           }
-          executableDir = path.resolve(path.dirname(resolvedScriptPath), executableDir);
+          executableDir = path.resolve(
+            path.dirname(resolvedScriptPath),
+            executableDir
+          );
         }
         if (executableDir) {
           let localFile = findFile(executableDir, executableFile);
           if (!localFile && !subcommand._executableFile && this._scriptPath) {
-            const legacyName = path.basename(this._scriptPath, path.extname(this._scriptPath));
+            const legacyName = path.basename(
+              this._scriptPath,
+              path.extname(this._scriptPath)
+            );
             if (legacyName !== this._name) {
-              localFile = findFile(executableDir, `${legacyName}-${subcommand._name}`);
+              localFile = findFile(
+                executableDir,
+                `${legacyName}-${subcommand._name}`
+              );
             }
           }
           executableFile = localFile || executableFile;
@@ -1855,12 +1958,18 @@ Expecting one of '${allowedValues.join("', '")}'`);
           });
         }
         const exitCallback = this._exitCallback;
-        proc.on("close", (code, _signal) => {
+        proc.on("close", (code) => {
           code = code ?? 1;
           if (!exitCallback) {
             process.exit(code);
           } else {
-            exitCallback(new CommanderError2(code, "commander.executeSubCommandAsync", "(close)"));
+            exitCallback(
+              new CommanderError2(
+                code,
+                "commander.executeSubCommandAsync",
+                "(close)"
+              )
+            );
           }
         });
         proc.on("error", (err) => {
@@ -1877,7 +1986,11 @@ Expecting one of '${allowedValues.join("', '")}'`);
           if (!exitCallback) {
             process.exit(1);
           } else {
-            const wrappedError = new CommanderError2(1, "commander.executeSubCommandAsync", "(error)");
+            const wrappedError = new CommanderError2(
+              1,
+              "commander.executeSubCommandAsync",
+              "(error)"
+            );
             wrappedError.nestedError = err;
             exitCallback(wrappedError);
           }
@@ -1891,7 +2004,11 @@ Expecting one of '${allowedValues.join("', '")}'`);
         const subCommand = this._findCommand(commandName);
         if (!subCommand) this.help({ error: true });
         let promiseChain;
-        promiseChain = this._chainOrCallSubCommandHook(promiseChain, subCommand, "preSubcommand");
+        promiseChain = this._chainOrCallSubCommandHook(
+          promiseChain,
+          subCommand,
+          "preSubcommand"
+        );
         promiseChain = this._chainOrCall(promiseChain, () => {
           if (subCommand._executableHandler) {
             this._executeSubCommand(subCommand, operands.concat(unknown));
@@ -1915,9 +2032,11 @@ Expecting one of '${allowedValues.join("', '")}'`);
         if (subCommand && !subCommand._executableHandler) {
           subCommand.help();
         }
-        return this._dispatchSubcommand(subcommandName, [], [
-          this._getHelpOption()?.long ?? this._getHelpOption()?.short ?? "--help"
-        ]);
+        return this._dispatchSubcommand(
+          subcommandName,
+          [],
+          [this._getHelpOption()?.long ?? this._getHelpOption()?.short ?? "--help"]
+        );
       }
       /**
        * Check this.args against expected this.registeredArguments.
@@ -1947,7 +2066,12 @@ Expecting one of '${allowedValues.join("', '")}'`);
           let parsedValue = value;
           if (value !== null && argument.parseArg) {
             const invalidValueMessage = `error: command-argument value '${value}' is invalid for argument '${argument.name()}'.`;
-            parsedValue = this._callParseArg(argument, value, previous, invalidValueMessage);
+            parsedValue = this._callParseArg(
+              argument,
+              value,
+              previous,
+              invalidValueMessage
+            );
           }
           return parsedValue;
         };
@@ -2055,7 +2179,11 @@ Expecting one of '${allowedValues.join("', '")}'`);
         }
         if (this._defaultCommandName) {
           this._outputHelpIfRequested(unknown);
-          return this._dispatchSubcommand(this._defaultCommandName, operands, unknown);
+          return this._dispatchSubcommand(
+            this._defaultCommandName,
+            operands,
+            unknown
+          );
         }
         if (this.commands.length && this.args.length === 0 && !this._actionHandler && !this._defaultCommandName) {
           this.help({ error: true });
@@ -2074,7 +2202,10 @@ Expecting one of '${allowedValues.join("', '")}'`);
           this._processArguments();
           let promiseChain;
           promiseChain = this._chainOrCallHooks(promiseChain, "preAction");
-          promiseChain = this._chainOrCall(promiseChain, () => this._actionHandler(this.processedArgs));
+          promiseChain = this._chainOrCall(
+            promiseChain,
+            () => this._actionHandler(this.processedArgs)
+          );
           if (this.parent) {
             promiseChain = this._chainOrCall(promiseChain, () => {
               this.parent.emit(commandEvent, operands, unknown);
@@ -2111,17 +2242,20 @@ Expecting one of '${allowedValues.join("', '")}'`);
        * Find matching command.
        *
        * @private
+       * @return {Command | undefined}
        */
       _findCommand(name) {
         if (!name) return void 0;
-        return this.commands.find((cmd) => cmd._name === name || cmd._aliases.includes(name));
+        return this.commands.find(
+          (cmd) => cmd._name === name || cmd._aliases.includes(name)
+        );
       }
       /**
        * Return an option matching `arg` if any.
        *
        * @param {string} arg
        * @return {Option}
-       * @package internal use only
+       * @package
        */
       _findOption(arg) {
         return this.options.find((option) => option.is(arg));
@@ -2147,15 +2281,13 @@ Expecting one of '${allowedValues.join("', '")}'`);
        * @private
        */
       _checkForConflictingLocalOptions() {
-        const definedNonDefaultOptions = this.options.filter(
-          (option) => {
-            const optionKey = option.attributeName();
-            if (this.getOptionValue(optionKey) === void 0) {
-              return false;
-            }
-            return this.getOptionValueSource(optionKey) !== "default";
+        const definedNonDefaultOptions = this.options.filter((option) => {
+          const optionKey = option.attributeName();
+          if (this.getOptionValue(optionKey) === void 0) {
+            return false;
           }
-        );
+          return this.getOptionValueSource(optionKey) !== "default";
+        });
         const optionsWithConflicting = definedNonDefaultOptions.filter(
           (option) => option.conflictsWith.length > 0
         );
@@ -2285,7 +2417,7 @@ Expecting one of '${allowedValues.join("', '")}'`);
       /**
        * Return an object containing local option values as key-value pairs.
        *
-       * @return {Object}
+       * @return {object}
        */
       opts() {
         if (this._storeOptionsAsProperties) {
@@ -2302,7 +2434,7 @@ Expecting one of '${allowedValues.join("', '")}'`);
       /**
        * Return an object containing merged local and global option values as key-value pairs.
        *
-       * @return {Object}
+       * @return {object}
        */
       optsWithGlobals() {
         return this._getCommandAndAncestors().reduce(
@@ -2314,13 +2446,16 @@ Expecting one of '${allowedValues.join("', '")}'`);
        * Display error message and exit (or call exitOverride).
        *
        * @param {string} message
-       * @param {Object} [errorOptions]
+       * @param {object} [errorOptions]
        * @param {string} [errorOptions.code] - an id string representing the error
        * @param {number} [errorOptions.exitCode] - used with process.exit
        */
       error(message, errorOptions) {
-        this._outputConfiguration.outputError(`${message}
-`, this._outputConfiguration.writeErr);
+        this._outputConfiguration.outputError(
+          `${message}
+`,
+          this._outputConfiguration.writeErr
+        );
         if (typeof this._showHelpAfterError === "string") {
           this._outputConfiguration.writeErr(`${this._showHelpAfterError}
 `);
@@ -2343,7 +2478,9 @@ Expecting one of '${allowedValues.join("', '")}'`);
         this.options.forEach((option) => {
           if (option.envVar && option.envVar in process.env) {
             const optionKey = option.attributeName();
-            if (this.getOptionValue(optionKey) === void 0 || ["default", "config", "env"].includes(this.getOptionValueSource(optionKey))) {
+            if (this.getOptionValue(optionKey) === void 0 || ["default", "config", "env"].includes(
+              this.getOptionValueSource(optionKey)
+            )) {
               if (option.required || option.optional) {
                 this.emit(`optionEnv:${option.name()}`, process.env[option.envVar]);
               } else {
@@ -2363,9 +2500,18 @@ Expecting one of '${allowedValues.join("', '")}'`);
         const hasCustomOptionValue = (optionKey) => {
           return this.getOptionValue(optionKey) !== void 0 && !["default", "implied"].includes(this.getOptionValueSource(optionKey));
         };
-        this.options.filter((option) => option.implied !== void 0 && hasCustomOptionValue(option.attributeName()) && dualHelper.valueFromOption(this.getOptionValue(option.attributeName()), option)).forEach((option) => {
+        this.options.filter(
+          (option) => option.implied !== void 0 && hasCustomOptionValue(option.attributeName()) && dualHelper.valueFromOption(
+            this.getOptionValue(option.attributeName()),
+            option
+          )
+        ).forEach((option) => {
           Object.keys(option.implied).filter((impliedKey) => !hasCustomOptionValue(impliedKey)).forEach((impliedKey) => {
-            this.setOptionValueWithSource(impliedKey, option.implied[impliedKey], "implied");
+            this.setOptionValueWithSource(
+              impliedKey,
+              option.implied[impliedKey],
+              "implied"
+            );
           });
         });
       }
@@ -2410,8 +2556,12 @@ Expecting one of '${allowedValues.join("', '")}'`);
         const findBestOptionFromValue = (option2) => {
           const optionKey = option2.attributeName();
           const optionValue = this.getOptionValue(optionKey);
-          const negativeOption = this.options.find((target) => target.negate && optionKey === target.attributeName());
-          const positiveOption = this.options.find((target) => !target.negate && optionKey === target.attributeName());
+          const negativeOption = this.options.find(
+            (target) => target.negate && optionKey === target.attributeName()
+          );
+          const positiveOption = this.options.find(
+            (target) => !target.negate && optionKey === target.attributeName()
+          );
           if (negativeOption && (negativeOption.presetArg === void 0 && optionValue === false || negativeOption.presetArg !== void 0 && optionValue === negativeOption.presetArg)) {
             return negativeOption;
           }
@@ -2515,11 +2665,12 @@ Expecting one of '${allowedValues.join("', '")}'`);
        * Set the description.
        *
        * @param {string} [str]
-       * @param {Object} [argsDescription]
+       * @param {object} [argsDescription]
        * @return {(string|Command)}
        */
       description(str, argsDescription) {
-        if (str === void 0 && argsDescription === void 0) return this._description;
+        if (str === void 0 && argsDescription === void 0)
+          return this._description;
         this._description = str;
         if (argsDescription) {
           this._argsDescription = argsDescription;
@@ -2551,11 +2702,14 @@ Expecting one of '${allowedValues.join("', '")}'`);
         if (this.commands.length !== 0 && this.commands[this.commands.length - 1]._executableHandler) {
           command = this.commands[this.commands.length - 1];
         }
-        if (alias === command._name) throw new Error("Command alias can't be the same as its name");
+        if (alias === command._name)
+          throw new Error("Command alias can't be the same as its name");
         const matchingCommand = this.parent?._findCommand(alias);
         if (matchingCommand) {
           const existingCmd = [matchingCommand.name()].concat(matchingCommand.aliases()).join("|");
-          throw new Error(`cannot add alias '${alias}' to command '${this.name()}' as already have command '${existingCmd}'`);
+          throw new Error(
+            `cannot add alias '${alias}' to command '${this.name()}' as already have command '${existingCmd}'`
+          );
         }
         command._aliases.push(alias);
         return this;
@@ -2694,7 +2848,9 @@ Expecting one of '${allowedValues.join("', '")}'`);
           this.emit(this._getHelpOption().long);
         }
         this.emit("afterHelp", context);
-        this._getCommandAndAncestors().forEach((command) => command.emit("afterAllHelp", context));
+        this._getCommandAndAncestors().forEach(
+          (command) => command.emit("afterAllHelp", context)
+        );
       }
       /**
        * You can pass in flags and a description to customise the built-in help option.
@@ -2727,7 +2883,7 @@ Expecting one of '${allowedValues.join("', '")}'`);
        * Returns null if has been disabled with .helpOption(false).
        *
        * @returns {(Option | null)} the help option
-       * @package internal use only
+       * @package
        */
       _getHelpOption() {
         if (this._helpOption === void 0) {
@@ -2840,9 +2996,9 @@ Expecting one of '${allowedValues.join("', '")}'`);
   }
 });
 
-// ../../node_modules/.pnpm/commander@12.0.0/node_modules/commander/index.js
+// ../../node_modules/.pnpm/commander@12.1.0/node_modules/commander/index.js
 var require_commander = __commonJS({
-  "../../node_modules/.pnpm/commander@12.0.0/node_modules/commander/index.js"(exports2) {
+  "../../node_modules/.pnpm/commander@12.1.0/node_modules/commander/index.js"(exports2) {
     var { Argument: Argument2 } = require_argument();
     var { Command: Command2 } = require_command();
     var { CommanderError: CommanderError2, InvalidArgumentError: InvalidArgumentError2 } = require_error();
@@ -2862,7 +3018,7 @@ var require_commander = __commonJS({
   }
 });
 
-// ../../node_modules/.pnpm/commander@12.0.0/node_modules/commander/esm.mjs
+// ../../node_modules/.pnpm/commander@12.1.0/node_modules/commander/esm.mjs
 var import_index = __toESM(require_commander(), 1);
 var {
   program,
