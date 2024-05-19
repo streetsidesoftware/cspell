@@ -4,8 +4,8 @@ Url: https://github.com/microsoft/TypeScript-Website.git
 Args: '["--config=${repoConfig}/cspell.json","**/*.*"]'
 Summary:
   files: 742
-  filesWithIssues: 175
-  issues: 742
+  filesWithIssues: 168
+  issues: 717
   errors: 0
 Errors: []
 
@@ -30,7 +30,6 @@ issues:
   - "packages/documentation/copy/en/handbook-v1/Interfaces.md:186:31         colour      U       mySquare = createSquare({ colour: \"red\", width: 100"
   - "packages/documentation/copy/en/handbook-v1/Unions and Intersections.md:379:39       Loggable    U       Person & Serializable & Loggable` is a type which is"
   - "packages/documentation/copy/en/handbook-v2/Basics.md:316:8          Maddison    U       greet(\"Maddison\", Date());"
-  - "packages/documentation/copy/en/handbook-v2/Basics.md:385:10         concat      U       \"Hello \".concat(person, \", today is"
   - "packages/documentation/copy/en/handbook-v2/Classes.md:1215:14       Gameboy (Game Boy)      U       box.value = \"Gameboy\";"
   - "packages/documentation/copy/en/handbook-v2/Everyday Types.md:208:36         Alisson     U       first: \"Alice\", last: \"Alisson\" });"
   - "packages/documentation/copy/en/handbook-v2/Narrowing.md:475:21      sharkey     U       if (pet.name === \"sharkey\") return false;"
@@ -73,13 +72,11 @@ issues:
   - "packages/documentation/copy/en/project-config/Compiler Options.md:702:119       jsxdev                          U       code>, or <code>react-jsxdev</code></p>"
   - "packages/documentation/copy/en/project-config/Compiler Options in MSBuild.md:199:31         sourcemaps      U       Include source code in the sourcemaps inside the emitted JavaScript"
   - "packages/documentation/copy/en/project-config/Integrating with Build Tools.md:131:16        jmreidy             U       More details: [jmreidy/grunt-browserify](https"
-  - "packages/documentation/copy/en/project-config/Integrating with Build Tools.md:245:31        preprocess          U       install --save-dev svelte-preprocess"
   - "packages/documentation/copy/en/project-config/Integrating with Build Tools.md:262:33        preprocessors       U       more information about preprocessors"
   - "packages/documentation/copy/en/reference/Advanced Types.md:869:102      otherwords      U       index to an object. In otherwords, `keyof any` is currently"
   - "packages/documentation/copy/en/reference/Enums.md:388:43        deconstifying       U       ambient const enums, by deconstifying them with the help of"
   - "packages/documentation/copy/en/reference/Mixins.md:127:6        Positionable    U       type Positionable = GConstructor<{ setPos"
   - "packages/documentation/copy/en/reference/Mixins.md:224:7        Pausable        U       const Pausable = (target: typeof Player"
-  - "packages/documentation/copy/en/reference/Symbols.md:102:15      Concat      U       ### `Symbol.isConcatSpreadable`"
   - "packages/documentation/copy/en/reference/Type Compatibility.md:48:42        Weatherwax      U       Lassie\", owner: \"Rudd Weatherwax\" };"
   - "packages/documentation/copy/en/reference/Utility Types.md:153:39        Shorthair       U       16, breed: \"British Shorthair\" },"
   - "packages/documentation/copy/en/release-notes/TypeScript 2.0.md:519:63       knops           U       additional module resolution knops to _inform_ the compiler"
@@ -107,7 +104,6 @@ issues:
   - "packages/documentation/copy/en/release-notes/TypeScript 4.3.md:424:209      Kubilay     U       dragomirtitian)and [Kubilay Kahveci](https://github"
   - "packages/documentation/copy/en/release-notes/TypeScript 4.3.md:424:217      Kahveci     U       dragomirtitian)and [Kubilay Kahveci](https://github.com"
   - "packages/documentation/copy/en/release-notes/TypeScript 4.3.md:672:39       Koppers     U       spear-headed by [Tobias Koppers](https://github.com"
-  - "packages/documentation/copy/en/release-notes/TypeScript 4.3.md:771:50       compat      U       leveraged [Mozilla's browser-compat-data](https://github"
   - "packages/documentation/copy/en/release-notes/TypeScript 4.4.md:514:42       Michon      U       our thanks to [David Michon](https://github.com"
   - "packages/documentation/copy/en/release-notes/TypeScript 4.5.md:38:35        saschanaz       U       give a shout-out to [saschanaz](https://github.com"
   - "packages/documentation/copy/en/release-notes/TypeScript 4.5.md:112:12       Kagami          U       Thanks to [Kagami S. Rosylight](https"
@@ -147,7 +143,6 @@ issues:
   - "packages/documentation/copy/en/release-notes/TypeScript 5.0.md:1339:51      indirected          U       of certain kinds of indirected mixed string/number"
   - "packages/documentation/copy/en/release-notes/TypeScript 5.1.md:232:46       Silbermann      U       thanks to [Sebastian Silbermann](https://github.com"
   - "packages/documentation/copy/en/release-notes/TypeScript 5.1.md:376:10       EBADENGINE      U       npm WARN EBADENGINE Unsupported engine"
-  - "packages/documentation/copy/en/release-notes/TypeScript 5.2.md:197:29       rethrown            U       error is thrown, it's rethrown after disposal."
   - "packages/documentation/copy/en/release-notes/TypeScript 5.2.md:213:10       throwy              U       function throwy(id: string) {"
   - "packages/documentation/copy/en/release-notes/TypeScript 5.2.md:382:109      polyfilling         U       to get away with only polyfilling the built-in `symbol"
   - "packages/documentation/copy/en/release-notes/TypeScript 5.2.md:449:21       jsonify             U       import { serialize, jsonify } from \"./serializer"
@@ -192,13 +187,11 @@ issues:
   - "packages/playground/src/sidebar/fixtures/npmPlugins.ts:141:147      Gantt           U       configuration with a React Gantt chart visualization"
   - "packages/playground/src/sidebar/fixtures/npmPlugins.ts:142:14       jsuder          U       author: \"jsuder\","
   - "packages/playground/src/sidebar/fixtures/npmPlugins.ts:149:14       antfu           U       author: \"antfu\","
-  - "packages/sandbox/script/downloadReleases.js:17:23       prereleases     U       // Look through the prereleases to see if the beta and"
   - "packages/sandbox/src/theme.ts:12:53         fffffe      U       0000\", background: \"fffffe\" },"
   - "packages/sandbox/src/vendor/lzstring.min.js:6:28        Hocevar     U       Copyright (C) 2004 Sam Hocevar <sam@hocevar.net>"
   - "packages/sandbox/test/defaultCompilerOptions.test.ts:31:42          asdasdasdasd    U       new URLSearchParams(\"?asdasdasdasd=false\")"
   - "packages/ts-twoslasher/scripts/makeGlobals.js:3:29          tstwoslash      U       Creates a web version of tstwoslash which sets a global"
   - "packages/ts-twoslasher/src/index.ts:525:11      lsped       U       const lspedQueries = updates.queries"
-  - "packages/tsconfig-reference/copy/en/options/inlineSourceMap.md:8:52         webserver       U       debug JS files on a webserver that doesn't allow"
   - "packages/tsconfig-reference/copy/en/options/sourceMap.md:37:28          UAAU    U       mappings\": \";;AAAa,QAAA,UAAU,GAAG,IAAI,CAAA\""
   - "packages/tsconfig-reference/copy/en/options/sourceMap.md:37:43          CAAA    U       QAAA,UAAU,GAAG,IAAI,CAAA\""
   - "packages/tsconfig-reference/scripts/msbuild/Microsoft.TypeScript.targets:84:22          Guids       U       <CfgPropertyPagesGuidsAddCSharp>{d4683cae-"

@@ -3,9 +3,8 @@ Repository: googleapis/google-cloud-cpp
 Url: "https://github.com/googleapis/google-cloud-cpp.git"
 Args: ["--config=../../../../config/repositories/googleapis/google-cloud-cpp/cspell.json","**/*","-e","{*.BUILD,BUILD,CHANGELOG.md,*.sh,*.cfg,*.ps1,Dockerfile.*,*.Dockerfile,*.{yaml,xml,json,cmake}}"]
 Lines:
- CSpell: Files checked: 18862, Issues found: 104480 in 12587 files.
+ CSpell: Files checked: 18862, Issues found: 97487 in 11946 files.
  exit code: 1
-./ARCHITECTURE.md:101:60    - Unknown word (proto)      -- a `service` in the `.proto` definitions
 ./ARCHITECTURE.md:110:20    - Unknown word (bigtable)   -- - Bigtable has a [`bigtable::Table`](/google/cloud
 ./ARCHITECTURE.md:110:3     - Unknown word (Bigtable)   -- - Bigtable has a [`bigtable::Table
 ./ARCHITECTURE.md:158:48    - Unknown word (googlemock) -- implementation using `googlemock`
@@ -16,7 +15,6 @@ Lines:
 ./BUILD.bazel:53:5      - Unknown word (testonly)   -- testonly = True,
 ./CMakeLists.txt:103:37    - Unknown word (REFDOC)     -- CLOUD_CPP_USE_LATEST_FOR_REFDOC_LINKS
 ./CMakeLists.txt:112:31    - Unknown word (DOCFX)      -- GOOGLE_CLOUD_CPP_INTERNAL_DOCFX
-./CMakeLists.txt:117:31    - Unknown word (GOOGLEAPIS) -- GOOGLE_CLOUD_CPP_OVERRIDE_GOOGLEAPIS_URL
 ./CMakeLists.txt:196:39    - Unknown word (protobufs)  -- target results in all protobufs being compiled.
 ./CMakeLists.txt:199:8     - Unknown word (subproject) -- # Each subproject adds dependencies to
 ./CMakeLists.txt:206:17    - Unknown word (PROTOC)     -- # `Protobuf_PROTOC_EXECUTABLE` is pretty
@@ -41,7 +39,6 @@ Lines:
 ./bazel/development0.bzl:72:33     - Unknown word (pugixml)         -- name = "com_github_zeux_pugixml",
 ./bazel/development0.bzl:86:28     - Unknown word (jbeder)          -- name = "com_github_jbeder_yaml_cpp",
 ./bazel/gapic.bzl:15:37     - Unknown word (GAPIC)      -- for the typical C++ GAPIC library."""
-./bazel/gapic.bzl:17:47     - Unknown word (googleapis) -- service_dirs = [], googleapis_deps = []):
 ./bazel/gapic.bzl:17:8      - Unknown word (gapic)      -- def cc_gapic_library(name, service
 ./bazel/gapic.bzl:21:46     - Unknown word (accessapproval) -- of the library, e.g. `accessapproval`
 ./bazel/gapic.bzl:25:9      - Unknown word (googlapis)      -- googlapis_deps: The googleapis
@@ -181,7 +178,6 @@ Lines:
 ./ci/verify_current_targets/CMakeLists.txt:54:47     - Unknown word (ARGN)       -- "${name}" PRIVATE ${ARGN})
 ./ci/verify_current_targets/CMakeLists.txt:56:1      - Unknown word (endfunction) -- endfunction ()
 ./ci/verify_current_targets/CMakeLists.txt:60:1      - Unknown word (endforeach)  -- endforeach ()
-./ci/verify_current_targets/CMakeLists.txt:85:15     - Unknown word (compat)      -- set(backwards_compat_proto_libraries
 ./ci/verify_current_targets/CMakeLists.txt:87:26     - Unknown word (protos)      -- cloud_dialogflow_v2_protos"
 ./ci/verify_quickstart/CMakeLists.txt:103:22    - Unknown word (STREQUAL)        -- if ("${feature}" STREQUAL "experimental-storage
 ./ci/verify_quickstart/CMakeLists.txt:108:10    - Unknown word (vcpkg)           -- # In vcpkg we cannot use `_` in
@@ -211,7 +207,6 @@ Lines:
 ./doc/contributor/README.md:64:2      - Unknown word (pkgs)       -- [pkgs.org](https://pkgs.org
 ./doc/contributor/README.md:64:32     - Unknown word (repology)   -- https://pkgs.org), [repology.org](https://repology
 ./doc/contributor/howto-guide-adding-generated-libraries.md:147:32    - Unknown word (codegen)    -- generator:google-cloud-cpp-codegen -- \
-./doc/contributor/howto-guide-adding-generated-libraries.md:30:1      - Unknown word (subdir)     -- subdir="google/cloud/${library
 ./doc/contributor/howto-guide-adding-generated-libraries.md:37:23     - Unknown word (noshow)     -- bazel --batch query --noshow_progress --noshow_loading
 ./doc/contributor/howto-guide-adding-generated-libraries.md:88:29     - Unknown word (textproto)  -- generator/generator_config.textproto](../../generator/generator
 ./doc/contributor/howto-guide-declare-a-library-ga.md:47:1      - Unknown word (mapfile)    -- mapfile -t ga < <(cmake -P cmake
@@ -278,7 +273,6 @@ Lines:
 ./doc/packaging.md:75:38     - Unknown word (physicalcpu) -- Linux, or `sysctl -n hw.physicalcpu` on macOS.
 ./doc/public-api.md:163:20    - Unknown word (lgoogle)    -- e.g., by using `-lgoogle_cloud_cpp_bigtable`
 ./doc/public-api.md:33:45     - Unknown word (structs)    -- including macros, classes, structs, typedefs, functions
-./doc/public-api.md:33:54     - Unknown word (typedefs)   -- macros, classes, structs, typedefs, functions, enums,
 ./docfx/CMakeLists.txt:122:10    - Unknown word (fname)      -- foreach (fname IN LISTS unit_tests
 ./docfx/README.md:55:35     - Unknown word (devrel)     -- TRAMPOLINE_IMAGE=gcr.io/cloud-devrel-kokoro-resources/docfx
 ./docfx/README.md:74:28     - Unknown word (xrefmap)    -- HOME/doc-pipeline/site/xrefmap.yml build-out
@@ -318,8 +312,6 @@ Lines:
 ./docfx/doxygen2markdown_test.cc:730:138   - Unknown word (btadmin)         -- highlight class="normal">btadmin<sp/>=<sp/>google::bigtable
 ./docfx/doxygen2markdown_test.cc:751:19    - Unknown word (mdctx)           -- MarkdownContext mdctx;
 ./docfx/doxygen2markdown_test.cc:787:12    - Unknown word (parblock)        -- <parblock>
-./docfx/doxygen2markdown_test.cc:877:33    - Unknown word (Linebreak)       -- Doxygen2Markdown, ParagraphLinebreak) {
-./docfx/doxygen2markdown_test.cc:881:61    - Unknown word (linebreak)       -- location specified:<linebreak/>
 ./docfx/doxygen2markdown_test.cc:943:49    - Unknown word (brrr)            -- Item 2: <computeroutput>brrr</computeroutput></para
 ./docfx/doxygen2syntax.cc:118:29    - Unknown word (parametertype) -- <xsd:element name="parametertype" type="docParamType
 ./docfx/doxygen2syntax.cc:164:61    - Unknown word (templateparam) -- parameterlist[@kind='templateparam']");
@@ -408,7 +400,6 @@ Lines:
 ./docfx/testing/inputs.cc:63:120    - Unknown word (adbc)       -- erviceConnection_1a2518e5014c3adbc16e83281bd2a596a8" kindref
 ./examples/BUILD.bazel:84:14     - Unknown word (GENDIR)     -- "-I$(GENDIR)/examples",
 ./examples/CMakeLists.txt:33:9      - Unknown word (Findg)      -- include(FindgRPC)
-./examples/CMakeLists.txt:39:9      - Unknown word (PROTO)      -- PROTO_PATH_DIRECTORIES ${CMAKE
 ./examples/README.md:36:52     - Unknown word (gserviceaccount) -- GOOGLE_CLOUD_PROJECT}.iam.gserviceaccount.com"
 ./examples/gcs2cbt.cc:253:13    - Unknown word (cbta)       -- namespace cbta = ::google::cloud::bigtable
 ./examples/gcs2cbt.cc:256:51    - Unknown word (BIGTABLE)   -- , "GOOGLE_CLOUD_CPP_BIGTABLE_TEST_INSTANCE_ID",
@@ -417,16 +408,13 @@ Lines:
 ./external/googleapis/CMakeLists.txt:123:16    - Unknown word (Protos)         -- include(CompileProtos)
 ./external/googleapis/CMakeLists.txt:133:27    - Unknown word (protolist)      -- google_cloud_cpp_load_protolist(protos "${file}")
 ./external/googleapis/CMakeLists.txt:210:20    - Unknown word (SOVERSION)      -- SOVERSION ${PROJECT_VERSION_MAJOR
-./external/googleapis/CMakeLists.txt:21:9      - Unknown word (Googleapis) -- include(GoogleapisConfig)
 ./external/googleapis/CMakeLists.txt:346:23    - Unknown word (protodeps)      -- google_cloud_cpp_load_protodeps(cloud_common_deps "protodeps
 ./external/googleapis/CMakeLists.txt:362:41    - Unknown word (BINDIR)         -- DESTINATION ${CMAKE_INSTALL_BINDIR}
 ./external/googleapis/CMakeLists.txt:366:13    - Unknown word (NAMELINK)       -- NAMELINK_COMPONENT google_cloud
-./external/googleapis/CMakeLists.txt:384:51    - Unknown word (Proto)          -- The Google APIS C++ Proto Library")
 ./external/googleapis/CMakeLists.txt:416:6     - Unknown word (libcares)       -- "libcares")
 ./external/googleapis/CMakeLists.txt:56:17     - Unknown word (httpbody)   -- "google/api/httpbody.proto"
 ./external/googleapis/CMakeLists.txt:81:32     - Unknown word (iamcredentials) -- google/iam/credentials/v1/iamcredentials.proto"
 ./external/googleapis/CMakeLists.txt:86:13     - Unknown word (longrunning)    -- "google/longrunning/operations.proto"
-./external/googleapis/CMakeLists.txt:94:18     - Unknown word (datetime)       -- "google/type/datetime.proto"
 ./external/googleapis/CMakeLists.txt:95:18     - Unknown word (dayofweek)      -- "google/type/dayofweek.proto"
 ./external/googleapis/protodeps/binaryauthorization.deps:8:25      - Unknown word (grafeas)    -- com_google_googleapis//grafeas/v1:grafeas_proto
 ./external/googleapis/protolists/aiplatform.list:130:52    - Unknown word (tensorboard)  -- cloud/aiplatform/v1:tensorboard.proto
@@ -474,7 +462,6 @@ Lines:
 ./generator/generator_config.proto:26:27     - Unknown word (rpcs)       -- repeated string omitted_rpcs = 4;
 ./generator/generator_config.proto:41:35     - Unknown word (gcpxx)      -- to true generate the `gcpxxV1` alias for our inline
 ./generator/generator_config.proto:48:42     - Unknown word (struct)     -- ServiceNameRetryTraits struct using the provided codes
-./generator/generator_config.proto:96:24     - Unknown word (COMPAT)     -- LOCATION_DEPENDENT_COMPAT = 2;
 ./generator/generator_config.textproto:1624:15   - Unknown word (Abac)       -- "SetLegacyAbac(std::string const&,
 ./generator/generator_config.textproto:1733:3    - Unknown word (Dataplex)   -- # Dataplex
 ./generator/generator_config.textproto:1779:3    - Unknown word (Dataproc)   -- # Dataproc
@@ -490,7 +477,6 @@ Lines:
 ./generator/generator_config.textproto:350:47    - Unknown word (AUTOML)     -- var: "GOOGLE_CLOUD_CPP_AUTOML_PREDICTION_SERVICE_ENDPOINT
 ./generator/generator_config.textproto:3622:3    - Unknown word (Timeseries) -- # Timeseries Insights
 ./generator/integration_tests/backup.proto:27:40     - Unknown word (genproto)   -- "google.golang.org/genproto/googleapis/test/admin
-./generator/integration_tests/backup.proto:29:19     - Unknown word (classname)  -- option java_outer_classname = "BackupProto";
 ./generator/integration_tests/golden/v1/golden_kitchen_sink_client.h:286:43    - Unknown word (cloudresourcemanager) -- organizations/1234567890/logs/cloudresourcemanager.googleapis.com%2Factivity
 ./generator/integration_tests/golden/v1/golden_kitchen_sink_client.h:645:62    - Unknown word (bidir)                -- read-write RPCs (aka bidir streaming)
 ./generator/integration_tests/golden/v1/internal/golden_kitchen_sink_option_defaults.cc:40:8      - Unknown word (goldenkitchensink) -- "goldenkitchensink.googleapis.com");
@@ -913,7 +899,6 @@ Lines:
 ./google/cloud/internal/external_account_token_source_aws_test.cc:937:77    - Unknown word (hexkey)     -- 6 -mac HMAC -macopt hexkey:${K1} | cut -f2 -d'
 ./google/cloud/internal/external_account_token_source_aws_test.cc:99:21     - Unknown word (Imdsv)      -- auto constexpr kTestImdsv2Url = "http://169.2
 ./google/cloud/internal/external_account_token_source_url_test.cc:63:26     - Unknown word (parseable)  -- full error payload, parseable as an error info.
-./google/cloud/internal/filesystem_test.cc:50:41     - Unknown word (Bitxor)     -- PermissionsOperatorBitxor) {
 ./google/cloud/internal/future_impl.cc:24:50     - Unknown word (stdlibc)    -- C++17. Fortunately, stdlibc++, MSVC are forgiving
 ./google/cloud/internal/future_impl.cc:26:49     - Unknown word (LIBCPP)     -- VERSION >= 201703L || _LIBCPP_VERSION < 180100
 ./google/cloud/internal/future_impl.h:182:34    - Unknown word (Wmaybe)     -- diagnostic ignored "-Wmaybe-uninitialized"
@@ -1432,7 +1417,6 @@ Lines:
 ./protos/google/cloud/compute/v1/internal/common_040.proto:191:17    - Unknown word (Loadbalancers) -- // applies to Loadbalancers that have their loadBalancing
 ./protos/google/cloud/compute/v1/internal/common_040.proto:259:33    - Unknown word (discontiguous) -- can be contiguous or discontiguous. For external forwarding
 ./protos/google/cloud/compute/v1/internal/common_042.proto:265:51    - Unknown word (Autohealing) -- Load balancer guide. **Autohealing in MIGs** The
-./protos/google/cloud/compute/v1/internal/common_045.proto:34:49     - Unknown word (webserver)  -- labels. For example, "webserver-frontend": "images"
 ./protos/google/cloud/compute/v1/internal/common_048.proto:75:68     - Unknown word (Servicefor) -- Always compute#healthCheckServicefor
 ./protos/google/cloud/compute/v1/internal/common_053.proto:126:26    - Unknown word (unpackaging) -- / disk image before unpackaging provided by the client
 ./protos/google/cloud/compute/v1/internal/common_056.proto:259:10    - Unknown word (Autocaling) -- // ON: Autocaling is fully enabled.

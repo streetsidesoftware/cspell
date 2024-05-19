@@ -4,8 +4,8 @@ Url: https://github.com/MicrosoftDocs/PowerShell-Docs.git
 Args: '["--config=../../../cspell-power-shell-docs.config.yaml","**"]'
 Summary:
   files: 2673
-  filesWithIssues: 1256
-  issues: 5674
+  filesWithIssues: 1244
+  issues: 5576
   errors: 0
 Errors: []
 
@@ -107,7 +107,6 @@ issues:
   - "reference/5.1/Microsoft.PowerShell.Core/About/about_Language_Modes.md:297:5         ushort                      U       - `[ushort]`"
   - "reference/5.1/Microsoft.PowerShell.Core/About/about_Language_Modes.md:313:5         wmiclass                    U       - `[wmiclass]`"
   - "reference/5.1/Microsoft.PowerShell.Core/About/about_Language_Modes.md:314:5         wmisearcher                 U       - `[wmisearcher]`"
-  - "reference/5.1/Microsoft.PowerShell.Core/About/about_Line_Editing.md:81:12       Readline    U       - [about_PSReadline](../../PSReadline/About"
   - "reference/5.1/Microsoft.PowerShell.Core/About/about_Modules.md:107:11       autoloading     U       ## Module autoloading"
   - "reference/5.1/Microsoft.PowerShell.Core/About/about_Operator_Precedence.md:88:14        coalese     U       | `??` (null-coalese operator)"
   - "reference/5.1/Microsoft.PowerShell.Core/About/about_Operators.md:130:28         Nosuch              U       example, `(Get-Item /Nosuch); $?` unexpectedly yields"
@@ -132,7 +131,6 @@ issues:
   - "reference/5.1/Microsoft.PowerShell.Core/About/about_Redirection.md:80:10        fakepath    U       dir C:\\, fakepath 2>&1 > .\\dir.log"
   - "reference/5.1/Microsoft.PowerShell.Core/About/about_Regular_Expressions.md:38:32        csplit              U       , `-creplace`, or `-csplit`"
   - "reference/5.1/Microsoft.PowerShell.Core/About/about_Regular_Expressions.md:39:41        casesensitive       U       statement, use the `-casesensitive` option"
-  - "reference/5.1/Microsoft.PowerShell.Core/About/about_Regular_Expressions.md:201:3        Singleline          U       **Singleline** and **Multiline**"
   - "reference/5.1/Microsoft.PowerShell.Core/About/about_Regular_Expressions.md:328:34       keyname             U       capturing group, use `?<keyname>` to store captured"
   - "reference/5.1/Microsoft.PowerShell.Core/About/about_Remote_Troubleshooting.md:393:33        trustedhosts    U       wsman:localhost\\client\\trustedhosts -Value *"
   - "reference/5.1/Microsoft.PowerShell.Core/About/about_Requires.md:55:20       Netcore     U       Get-Module AzureRM.Netcore | Remove-Module"
@@ -288,7 +286,6 @@ issues:
   - "reference/5.1/Microsoft.PowerShell.Management/Invoke-WmiMethod.md:105:3         Wmiclass    U       ([Wmiclass]'Win32_Process').Create"
   - "reference/5.1/Microsoft.PowerShell.Management/Invoke-WmiMethod.md:554:4         iwmi        U       - `iwmi`"
   - "reference/5.1/Microsoft.PowerShell.Management/Join-Path.md:32:44        childpath       U       Path \"path\" -ChildPath \"childpath\""
-  - "reference/5.1/Microsoft.PowerShell.Management/Join-Path.md:106:87       Subdir          U       Join-Path -ChildPath \"Subdir\""
   - "reference/5.1/Microsoft.PowerShell.Management/Move-Item.md:89:38        Textfiles       U       are to be moved to `C:\\Textfiles` have the same name"
   - "reference/5.1/Microsoft.PowerShell.Management/New-Item.md:79:49         testfile    U       file that is named \"testfile1.txt\" in the current"
   - "reference/5.1/Microsoft.PowerShell.Management/New-ItemProperty.md:100:11        multistring     U       $newValue.multistring"
@@ -387,7 +384,6 @@ issues:
   - "reference/5.1/PSReadLine/About/about_PSReadLine.md:192:24       gcloud          U       token using the `az`, `gcloud`, and `kubectl` command"
   - "reference/5.1/PSReadLine/About/about_PSReadLine.md:202:6        PGPASS          U       $env:PGPASS = gcloud auth print"
   - "reference/5.1/PSReadLine/About/about_PSReadLine.md:225:5        Autoadjusts     U       - Autoadjusts the size based on the"
-  - "reference/5.1/PSReadLine/About/about_PSReadLine.md:294:48       readline        U       influenced by the GNU [readline][05] library."
   - "reference/5.1/PSScheduledJob/Get-ScheduledJobOption.md:84:76        Waketo      U       RunElevated -and !$_.WaketoRun}"
   - "reference/5.1/PSScheduledJob/Register-ScheduledJob.md:62:74         untriggered     U       any time, or save the untriggered scheduled job"
   - "reference/5.1/PSScheduledJob/Register-ScheduledJob.md:214:85        Energydata      U       computer, even though the `Energydata.ps1`"
@@ -421,7 +417,6 @@ issues:
   - "reference/7.2/Microsoft.PowerShell.Core/About/about_Logging_Non-Windows.md:46:4         psrl            U       $psrl = Get-Module PSReadLine"
   - "reference/7.2/Microsoft.PowerShell.Core/About/about_Logging_Non-Windows.md:138:2        journalctl      U       `journalctl` utility to query the"
   - "reference/7.2/Microsoft.PowerShell.Core/About/about_Logging_Non-Windows.md:153:18       rsyslog         U       server such as **rsyslog** if you want to use"
-  - "reference/7.2/Microsoft.PowerShell.Core/About/about_Logging_Non-Windows.md:154:49       preinstall      U       distributions such as Ubuntu preinstall **rsyslog**."
   - "reference/7.2/Microsoft.PowerShell.Core/About/about_Logging_Non-Windows.md:181:5        MACHINENAME     U       - **MACHINENAME** - The name of the"
   - "reference/7.2/Microsoft.PowerShell.Core/About/about_Logging_Non-Windows.md:183:5        COMMITID        U       - **COMMITID** - The **git commit"
   - "reference/7.2/Microsoft.PowerShell.Core/About/about_Logging_Non-Windows.md:188:5        EVENTID         U       - **EVENTID** - The event identifier"
@@ -444,7 +439,6 @@ issues:
   - "reference/7.2/Microsoft.PowerShell.Core/About/about_Tab_Expansion.md:57:30          psdf    U       functions. For example, `i-psdf<tab>` returns `Import"
   - "reference/7.2/Microsoft.PowerShell.Core/About/about_Telemetry.md:40:4           Geolocation     U       > [Geolocation and IP address handling"
   - "reference/7.2/Microsoft.PowerShell.Core/About/about_Type_Accelerators.md:84:3           pspropertyexpression    U       | pspropertyexpression | [Microsoft"
-  - "reference/7.2/Microsoft.PowerShell.Core/About/about_Windows_PowerShell_Compatibility.md:25:58       Compat      U       session named `WinPSCompatSession` that is"
   - "reference/7.2/Microsoft.PowerShell.Core/Enter-PSSession.md:198:70       sshkeys     U       :22 -KeyFilePath c:\\sshkeys\\userAKey_rsa"
   - "reference/7.2/Microsoft.PowerShell.Core/Get-Command.md:303:74       commnd      U       liberately has a typo as 'get-commnd'."
   - "reference/7.2/Microsoft.PowerShell.Management/Clear-RecycleBin.md:31:17         readded     U       This cmdlet was readded in PowerShell 7."
@@ -809,7 +803,6 @@ issues:
   - "reference/docs-conceptual/dev-cross-plat/choosing-the-right-nuget-package.md:3:12           rjmholt     U       ms.custom: rjmholt"
   - "reference/docs-conceptual/dev-cross-plat/create-cmdline-predictor.md:44:59          classlib    U       to create a starter classlib project."
   - "reference/docs-conceptual/dev-cross-plat/create-cmdline-predictor.md:107:47         cref        U       name=\"context\">The <see cref=\"PredictionContext\""
-  - "reference/docs-conceptual/dev-cross-plat/create-cmdline-predictor.md:119:52         Concat      U       PredictiveSuggestion(string.Concat(input, \" HELLO WORLD"
   - "reference/docs-conceptual/dev-cross-plat/create-cmdline-predictor.md:140:29         paramref    U       /// returned in <paramref name=\"session\"/>, starting"
   - "reference/docs-conceptual/dev-cross-plat/create-feedback-provider.md:243:12         Cmds    U       var astCmds = ast.FindAll((cAst"
   - "reference/docs-conceptual/dev-cross-plat/create-standard-library-binary-Module.md:131:12        globaljson      U       dotnet new globaljson --sdk-version 2.1.0"
@@ -855,7 +848,6 @@ issues:
   - "reference/docs-conceptual/developer/cmdlet/creating-a-cmdlet-to-access-a-data-store.md:365:143      Sessionstate                        U       Management.Automation.Sessionstate](/dotnet/api/System"
   - "reference/docs-conceptual/developer/cmdlet/creating-a-cmdlet-to-access-a-data-store.md:365:537      Providerintrinsics                  U       Management.Automation.Providerintrinsics](/dotnet/api/System"
   - "reference/docs-conceptual/developer/cmdlet/creating-a-cmdlet-to-access-a-data-store.md:367:259      Contentcmdletproviderintrinsics     U       Management.Automation.Contentcmdletproviderintrinsics.Getreader*](/dotnet"
-  - "reference/docs-conceptual/developer/cmdlet/creating-a-cmdlet-to-access-a-data-store.md:769:53       typeof                              U       typeof(string)"
   - "reference/docs-conceptual/developer/cmdlet/creating-a-cmdlet-without-parameters.md:189:11       starttime       U       $p[6].starttime"
   - "reference/docs-conceptual/developer/cmdlet/credential-attribute-declaration.md:25:76        Credentialattribute     U       Management.Automation.Credentialattribute](/dotnet/api/System"
   - "reference/docs-conceptual/developer/cmdlet/events01-sample.md:18:64         sysmgmt     U       Windows\\v7.0\\Samples\\sysmgmt\\WindowsPowerShell\\csharp"
@@ -1126,7 +1118,6 @@ issues:
   - "reference/docs-conceptual/lang-spec/chapter-05.md:174:47        ints    U       constrains $i to designating ints only"
   - "reference/docs-conceptual/lang-spec/chapter-06.md:315:6         Convertable     U       - **IConvertable**: `System.Convert.ChangeType"
   - "reference/docs-conceptual/lang-spec/chapter-07.md:315:15        Zabc                U       $b = \"abc#$%XYZabc\""
-  - "reference/docs-conceptual/lang-spec/chapter-07.md:500:63        parens              U       Length 2, value 20,30, parens needed"
   - "reference/docs-conceptual/lang-spec/chapter-07.md:967:28        dashdash            U       patterns matching the _dashdash_ pattern in [§7.2]["
   - "reference/docs-conceptual/lang-spec/chapter-07.md:1061:14       tblue               U       -split \" red`tblue`ngreen \" # 3 strings"
   - "reference/docs-conceptual/lang-spec/chapter-07.md:1061:20       ngreen              U       -split \" red`tblue`ngreen \" # 3 strings: \"red"
@@ -1289,7 +1280,6 @@ issues:
   - "reference/docs-conceptual/toc.yml:459:38        hackathons                  U       community/contributing/hackathons.md"
   - "reference/docs-conceptual/whats-new/cmdlet-versions.md:222:125      Notsupportedonmac       U       | ![Included][01] | NotsupportedonmacOS |"
   - "reference/docs-conceptual/whats-new/differences-from-windows-powershell.md:349:26       inputformat     U       short hand to match `-inputformat`, which now needs to"
-  - "reference/docs-conceptual/whats-new/differences-from-windows-powershell.md:378:25       Paren           U       Preserve `$?` for **ParenExpression**, **SubExpression"
   - "reference/docs-conceptual/whats-new/differences-from-windows-powershell.md:1216:23      CONSOLEHOST     U       DELETE_ME_TO_DISABLE_CONSOLEHOST_TELEMETRY` to disable"
   - "reference/docs-conceptual/whats-new/What-s-New-in-PowerShell-72.md:129:11       awakecoding     U       host by awakecoding · Pull Request #146"
   - "reference/docs-conceptual/whats-new/What-s-New-in-PowerShell-73.md:78:30        Brannen                 U       2][12802]) (Thanks @BrannenGH!)"

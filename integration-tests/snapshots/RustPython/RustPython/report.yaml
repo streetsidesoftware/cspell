@@ -4,8 +4,8 @@ Url: https://github.com/RustPython/RustPython.git
 Args: '["**"]'
 Summary:
   files: 610
-  filesWithIssues: 319
-  issues: 2972
+  filesWithIssues: 317
+  issues: 2945
   errors: 0
 Errors: []
 
@@ -207,7 +207,6 @@ issues:
   - "extra_tests/snippets/builtin_type.py:269:9          clsmethod       U       def clsmethod(cls):"
   - "extra_tests/snippets/builtin_type.py:273:9          stmethod        U       def stmethod():"
   - "extra_tests/snippets/builtin_type.py:331:3          Regresesion     U       # Regresesion to"
-  - "extra_tests/snippets/example_fizzbuzz.py:1:5            fizzbuzz    U       def fizzbuzz(n):"
   - "extra_tests/snippets/example_interactive.py:15:14       argcount            U       assert c2.co_argcount == 2"
   - "extra_tests/snippets/example_interactive.py:22:14       firstlineno         U       assert c2.co_firstlineno == 5, str(c2.co_firstlineno"
   - "extra_tests/snippets/example_interactive.py:23:53       NEWLOCALS           U       int) # 'OPTIMIZED, NEWLOCALS, NOFREE'"
@@ -414,7 +413,6 @@ issues:
   - "README.md:245:2         shinglyu            U       [shinglyu/RustPython](https:/"
   - "scripts/install-openssl.ps1:1:12        Actix       U       # From the Actix Web windows workflow"
   - "scripts/redox/recipe.sh:3:1         CARGOFLAGS      U       CARGOFLAGS=--no-default-features"
-  - "scripts/redox/recipe.sh:4:8         BUILDTIME       U       export BUILDTIME_RUSTPYTHONPATH=/lib"
   - "src/lib.rs:12:35        mymod           U       vm.add_native_module(\"mymod\".to_owned(), Box::new"
   - "src/lib.rs:13:81        otherthing      U       pass\", module_name = \"otherthing\"));"
   - "src/lib.rs:122:13       getpip          U       let get_getpip = rustpython_vm::py"
@@ -987,7 +985,6 @@ issues:
   - "vm/src/stdlib/winapi.rs:233:71      STARTUPINFO         U       Threading::EXTENDED_STARTUPINFO_PRESENT"
   - "vm/src/stdlib/winapi.rs:310:9       handlelist          U       handlelist: Option<Vec<usize>>"
   - "vm/src/stdlib/winreg.rs:50:77       QWORD       U       MULTI_SZ, REG_NONE, REG_QWORD,"
-  - "vm/src/stdlib/winreg.rs:85:36       predef      U       let null_key = RegKey::predef(0 as ::winreg::HKEY"
   - "vm/src/stdlib/winreg.rs:191:13      regval      U       let regval = key"
   - "vm/src/types/slot.rs:138:28         TPFLAGS         U       CPython default: Py_TPFLAGS_HAVE_STACKLESS_EXTENSION"
   - "vm/src/types/slot.rs:142:43         Subclassable    U       types created in Python. Subclassable and are a"
@@ -1005,8 +1002,6 @@ issues:
   - "vm/sre_engine/src/constants.rs:31:5         BIGCHARSET      U       BIGCHARSET = 10,"
   - "vm/sre_engine/src/constants.rs:32:5         GROUPREF        U       GROUPREF = 11,"
   - "vm/sre_engine/src/constants.rs:46:5         SUBPATTERN      U       SUBPATTERN = 25,"
-  - "vm/sre_engine/src/constants.rs:92:5         LINEBREAK       U       LINEBREAK = 6,"
-  - "vm/sre_engine/src/engine.rs:4:18        linebreak       U       is_digit, is_linebreak, is_loc_word, is_space"
   - "vm/sre_engine/src/engine.rs:539:45      groupref        U       macro_rules! general_op_groupref {"
   - "vm/sre_engine/src/engine.rs:552:37      gctx            U       let mut gctx = MatchContext {"
   - "vm/sre_engine/src/engine.rs:630:33      atcode          U       let atcode = SreAtCode::try_from"
