@@ -3,7 +3,7 @@ Repository: php/php-src
 Url: "https://github.com/php/php-src.git"
 Args: ["--config=../../../../config/repositories/php/php-src/cspell.json","**/*.{md,c,h,php}"]
 Lines:
- CSpell: Files checked: 2172, Issues found: 43540 in 1644 files.
+ CSpell: Files checked: 2172, Issues found: 43483 in 1643 files.
  exit code: 1
 ./CODING_STANDARDS.md:105:23    - Unknown word (intvl)        -- // Could be 'date_intvl_create_from_date_str
 ./CODING_STANDARDS.md:114:8     - Unknown word (setclientencoding) -- pg_setclientencoding
@@ -170,7 +170,7 @@ Lines:
 ./Zend/zend_closures.c:130:20    - Unknown word (newclass)   -- zend_class_entry *newclass;
 ./Zend/zend_closures.c:221:55    - Unknown word (zclosure)   -- return_value, zval *zclosure, zval *newthis, zend
 ./Zend/zend_closures.c:73:32     - Unknown word (newthis)    -- closure *closure, zval *newthis, zend_class_entry *scope
-./Zend/zend_compile.c:10868:85  - Unknown word (comptime)        -- expressions evaluated at comptime. */
+./Zend/zend_compile.c:10868:85  - Unknown word (comptime)   -- expressions evaluated at comptime. */
 ./Zend/zend_compile.c:1525:9    - Unknown word (anonclass)  -- size_t anonclass_src_len;
 ./Zend/zend_compile.c:217:14    - Unknown word (uqname)     -- const char *uqname = ZSTR_VAL(name);
 ./Zend/zend_compile.c:2704:28   - Unknown word (unticked)   -- inline bool zend_is_unticked_stmt(zend_ast *ast)
@@ -179,12 +179,10 @@ Lines:
 ./Zend/zend_compile.c:405:39    - Unknown word (opnums)     -- CG(short_circuiting_opnums), sizeof(uint32_t))
 ./Zend/zend_compile.c:4204:4    - Unknown word (cufa)       -- /* cufa = call_user_func_array
 ./Zend/zend_compile.c:443:13    - Unknown word (autoloads)  -- CG(delayed_autoloads) = NULL;
-./Zend/zend_compile.c:4781:63   - Unknown word (redeclared) -- functions, it may be redeclared as a userland
 ./Zend/zend_compile.c:5282:25   - Unknown word (freeable)   -- * Loop doesn't have freeable variable */
 ./Zend/zend_compile.c:5889:45   - Unknown word (JUMPTABLES) -- options) & ZEND_COMPILE_NO_JUMPTABLES) {
 ./Zend/zend_compile.c:6328:17   - Unknown word (multicatch) -- uint32_t *jmp_multicatch = safe_emalloc(sizeof
 ./Zend/zend_compile.c:7464:7    - Unknown word (varvars)    -- bool varvars_used;
-./Zend/zend_compile.c:9509:7    - Unknown word (Unparenthesized) -- "Unparenthesized `a ? b : c ? d : e`
 ./Zend/zend_constants.c:187:16    - Unknown word (haltname)   -- zend_string *haltname;
 ./Zend/zend_cpuinfo.c:34:50     - Unknown word (subfunc)    -- uint32_t func, uint32_t subfunc, zend_cpu_info *cpuinfo
 ./Zend/zend_cpuinfo.c:58:103    - Unknown word (cpuidex)    -- IX86)) /* use MSVC __cpuidex intrin */
@@ -2065,7 +2063,6 @@ Lines:
 ./ext/exif/exif.c:266:17    - Unknown word (SRATIONAL)  -- #define TAG_FMT_SRATIONAL 10
 ./ext/exif/exif.c:2717:17   - Unknown word (markername)      -- /* {{{ exif_get_markername
 ./ext/exif/exif.c:272:23    - Unknown word (tagformat)  -- static char *exif_get_tagformat(int format)
-./ext/exif/exif.c:3053:43   - Unknown word (NOBREAK)         -- detect BOM: ZERO WIDTH NOBREAK SPACE (FEFF 16)
 ./ext/exif/exif.c:3053:58   - Unknown word (FEFF)            -- WIDTH NOBREAK SPACE (FEFF 16)
 ./ext/exif/exif.c:3268:32   - Unknown word (cbuf)            -- value_ptr, tagname[64], cbuf[32], *outside=NULL;
 ./ext/exif/exif.c:3269:39   - Unknown word (fgot)            -- count, offset_val, fpos, fgot;
@@ -2140,7 +2137,6 @@ Lines:
 ./ext/ffi/ffi_parser.c:133:12    - Unknown word (HEXNUMBER)  -- #define YY_HEXNUMBER 92
 ./ext/ffi/ffi_parser.c:134:12    - Unknown word (FLOATNUMBER) -- #define YY_FLOATNUMBER 93
 ./ext/ffi/ffi_parser.c:231:5     - Unknown word (restict)     -- "__restict",
-./ext/ffi/ffi_parser.c:274:36    - Unknown word (declarators) -- parse_array_or_function_declarators(int sym, zend_ffi_dcl
 ./ext/ffi/ffi_parser.c:305:12    - Unknown word (synpred)     -- static int synpred_1(int sym);
 ./ext/ffi/ffi_parser.c:38:15     - Unknown word (cpos)       -- #define YYPOS cpos
 ./ext/ffi/ffi_parser.c:38:9      - Unknown word (YYPOS)      -- #define YYPOS cpos
@@ -3256,9 +3252,8 @@ Lines:
 ./ext/hash/xxhash/xxhash.h:3577:29   - Unknown word (autovectorize)     -- GCC for x86 tends to autovectorize the 128-bit multiply
 ./ext/hash/xxhash/xxhash.h:3581:20   - Unknown word (scalarize)         -- * cause it to scalarize. See `XXH32_round()
 ./ext/hash/xxhash/xxhash.h:3583:66   - Unknown word (Ryzen)             -- faster -- On an AMD Ryzen 3600,
-./ext/hash/xxhash/xxhash.h:3588:44   - Unknown word (codepath)          -- finding a more optimal codepath is an interest.
 ./ext/hash/xxhash/xxhash.h:3640:26   - Unknown word (STARTOFFSET)       -- define XXH3_MIDSIZE_STARTOFFSET 3
-./ext/hash/xxhash/xxhash.h:3641:26   - Unknown word (LASTOFFSET)       -- define XXH3_MIDSIZE_LASTOFFSET 17
+./ext/hash/xxhash/xxhash.h:3641:26   - Unknown word (LASTOFFSET)        -- define XXH3_MIDSIZE_LASTOFFSET 17
 ./ext/hash/xxhash/xxhash.h:3663:46   - Unknown word (vmulq)            -- to the nonexistent "vmulq_u64" intrinsic, which
 ./ext/hash/xxhash/xxhash.h:3664:12   - Unknown word (scalarized)       -- * scalarized into an ugly mess of
 ./ext/hash/xxhash/xxhash.h:3664:44   - Unknown word (VMOV)             -- into an ugly mess of VMOV.32 instructions.
@@ -3477,7 +3472,6 @@ Lines:
 ./ext/intl/php_intl.stub.php:78:15     - Unknown word (nontransitional) -- * Option for nontransitional processing in ToASCII
 ./ext/intl/php_intl_arginfo.h:1204:37   - Unknown word (CONTEXTJ)       -- CONSTANT("IDNA_CHECK_CONTEXTJ", UIDNA_CHECK_CONTEXTJ
 ./ext/intl/php_intl_arginfo.h:1205:31   - Unknown word (NONTRANSITIONAL) -- LONG_CONSTANT("IDNA_NONTRANSITIONAL_TO_ASCII", UIDNA_NONTRANSITIO
-./ext/intl/php_intl_arginfo.h:1216:37   - Unknown word (PUNYCODE)        -- CONSTANT("IDNA_ERROR_PUNYCODE", UIDNA_ERROR_PUNYCODE
 ./ext/intl/php_intl_arginfo.h:632:48    - Unknown word (resourcebundle) -- OBJ_INFO_EX(arginfo_resourcebundle_create, 0, 2, ResourceBundle
 ./ext/intl/php_intl_arginfo.h:658:49    - Unknown word (intltz)         -- TYPE_MASK_EX(arginfo_intltz_count_equivalent_ids
 ./ext/intl/resourcebundle/resourcebundle.c:27:25     - Unknown word (restype)    -- UResType restype;
@@ -4752,7 +4746,6 @@ Lines:
 ./ext/opcache/jit/ir/ir_cfg.c:1091:45   - Unknown word (Tesone)      -- Ducasse Stephane, and Tesone Pablo (2021)
 ./ext/opcache/jit/ir/ir_cfg.c:1091:5    - Unknown word (Polito)      -- * Polito Guillermo, Ducasse Stephane
 ./ext/opcache/jit/ir/ir_cfg.c:1181:20   - Unknown word (trankdir)    -- fprintf(stderr, "\trankdir=TB;\n");
-./ext/opcache/jit/ir/ir_cfg.c:1188:85   - Unknown word (fillcolor)   -- ,colorscheme=set312,fillcolor=%d%s%s]\n", b, b,
 ./ext/opcache/jit/ir/ir_cfg.c:1192:17   - Unknown word (penwidth)    -- is_head ? ",penwidth=3" : "",
 ./ext/opcache/jit/ir/ir_cfg.c:1251:5    - Unknown word (bitqueue)    -- ir_bitqueue worklist;
 ./ext/opcache/jit/ir/ir_cfg.c:1792:24   - Unknown word (termintated) -- Mark "stop" blocks termintated with UNREACHABLE as
@@ -5777,7 +5770,6 @@ Lines:
 ./ext/pcre/pcre2lib/pcre2_dfa_match.c:3692:31   - Unknown word (MATCHEDBY)         -- data->matchedby = PCRE2_MATCHEDBY_DFA_INTERPRETER;
 ./ext/pcre/pcre2lib/pcre2_dfa_match.c:3768:40   - Unknown word (Caseless)          -- cu != first_cu2)  /* Caseless */
 ./ext/pcre/pcre2lib/pcre2_dfa_match.c:3789:22   - Unknown word (searchlength)      -- PCRE2_SIZE searchlength = end_subject - start
-./ext/pcre/pcre2lib/pcre2_dfa_match.c:3860:65   - Unknown word (linebreak)         -- advance to just after a linebreak for a
 ./ext/pcre/pcre2lib/pcre2_dfa_match.c:3970:36   - Unknown word (INCTEST)           -- uint32_t pp = UCHAR21INCTEST(p);
 ./ext/pcre/pcre2lib/pcre2_dfa_match.c:4033:27   - Unknown word (oveccount)         -- uint32_t)match_data->oveccount * 2,  /* actual size
 ./ext/pcre/pcre2lib/pcre2_dfa_match.c:4050:17   - Unknown word (leftchar)          -- match_data->leftchar = (PCRE2_SIZE)(mb->start
@@ -6816,7 +6808,6 @@ Lines:
 ./ext/phar/phar.c:728:23    - Unknown word (pharfile)     -- static int phar_parse_pharfile(php_stream *fp, char
 ./ext/phar/phar.c:812:72    - Unknown word (Phars)        -- have zero entries.  Phars must have at least
 ./ext/phar/phar.c:846:25    - Unknown word (GBMB)         -- memcmp(sig_buf+4, "GBMB", 4)) {
-./ext/phar/phar/phar.php:43:28     - Unknown word (classname)  -- function command_autoload($classname)
 ./ext/phar/phar_internal.h:310:26    - Unknown word (brandnew)   -- uint32_t is_brandnew:1;
 ./ext/phar/phar_internal.h:312:23    - Unknown word (donotflush) -- uint32_t donotflush:1;
 ./ext/phar/phar_internal.h:335:36    - Unknown word (entrypfp)   -- php_stream *phar_get_entrypfp(phar_entry_info *entry
@@ -6824,10 +6815,9 @@ Lines:
 ./ext/phar/phar_internal.h:371:36    - Unknown word (pharfp)     -- php_stream *phar_get_pharfp(phar_archive_data *phar
 ./ext/phar/phar_internal.h:379:36    - Unknown word (pharufp)    -- php_stream *phar_get_pharufp(phar_archive_data *phar
 ./ext/phar/phar_internal.h:443:19    - Unknown word (PHPS)       -- #define PHAR_MIME_PHPS '\1'
-./ext/phar/phar_internal.h:526:10    - Unknown word (postprocess) -- int phar_postprocess_file(phar_entry_data
-./ext/phar/phar_internal.h:526:44    - Unknown word (idata)       -- file(phar_entry_data *idata, uint32_t crc32, char
-./ext/phar/phar_internal.h:527:129   - Unknown word (pphar)       -- phar_archive_data** pphar, char **error);
-./ext/phar/phar_internal.h:569:16    - Unknown word (tarfile)     -- int phar_parse_tarfile(php_stream* fp, char
+./ext/phar/phar_internal.h:526:44    - Unknown word (idata)      -- file(phar_entry_data *idata, uint32_t crc32, char
+./ext/phar/phar_internal.h:527:129   - Unknown word (pphar)      -- phar_archive_data** pphar, char **error);
+./ext/phar/phar_internal.h:569:16    - Unknown word (tarfile)    -- int phar_parse_tarfile(php_stream* fp, char
 ./ext/phar/phar_internal.h:571:81    - Unknown word (defaultstub) -- zend_long len, int defaultstub, char **error);
 ./ext/phar/phar_internal.h:574:16    - Unknown word (zipfile)     -- int phar_parse_zipfile(php_stream *fp, char
 ./ext/phar/phar_internal.h:67:26     - Unknown word (NODIR)      -- define PHAR_API_VERSION_NODIR 0x1100
@@ -8166,7 +8156,6 @@ Lines:
 ./ext/standard/proc_open.c:721:7     - Unknown word (snwprintf)      -- if (_snwprintf(cmdw_shell, len, L"
 ./ext/standard/proc_open.c:768:11    - Unknown word (ndescriptors)   -- uint32_t ndescriptors = zend_hash_num_elements
 ./ext/standard/proc_open.c:79:12     - Unknown word (stropts)    -- # include <stropts.h>
-./ext/standard/proc_open.c:811:59    - Unknown word (pseudoterminal) -- Could not open PTY (pseudoterminal): %s", strerror(errno
 ./ext/standard/proc_open.c:83:36     - Unknown word (Illumos)    -- before version 11.4 and Illumos do not have any openpty
 ./ext/standard/proc_open.c:840:88    - Unknown word (zmode)          -- *desc, zend_string *zmode)
 ./ext/standard/proc_open.c:842:24    - Unknown word (newpipe)        -- php_file_descriptor_t newpipe[2];
@@ -8320,7 +8309,6 @@ Lines:
 ./ext/tokenizer/tokenizer_data_gen.php:32:44     - Unknown word (PAAMAYIM)   -- var int\n * @cvalue T_PAAMAYIM_NEKUDOTAYIM\n */\n"
 ./ext/tokenizer/tokenizer_data_gen.php:32:53     - Unknown word (NEKUDOTAYIM) -- @cvalue T_PAAMAYIM_NEKUDOTAYIM\n */\n";
 ./ext/tokenizer/tokenizer_data_gen.php:52:23     - Unknown word (Schlueter)   -- | Author: Johannes Schlueter <johannes@php.net>
-./ext/tokenizer/tokenizer_data_gen.php:5:2       - Unknown word (outfile)    -- $outfile_stub = __DIR__ . '/tokenizer
 ./ext/xml/compat.c:140:65    - Unknown word (valueend)   -- value, *att_prefix, *att_valueend;
 ./ext/xml/compat.c:56:8      - Unknown word (attno)      -- int attno = 0;
 ./ext/xml/xml.c:1133:15   - Unknown word (mythis)     -- zval *pind, *mythis;
@@ -8645,9 +8633,6 @@ Lines:
 ./run-tests.php:319:10    - Unknown word (BORKED)       -- 'BORKED' => [],
 ./run-tests.php:323:10    - Unknown word (XFAILED)      -- 'XFAILED' => [],
 ./run-tests.php:324:10    - Unknown word (XLEAKED)      -- 'XLEAKED' => [],
-./run-tests.php:3344:15   - Unknown word (testsuites)    -- '<testsuites name="%s" tests="%s
-./run-tests.php:3363:19   - Unknown word (testsuite)     -- '<testsuite name="%s" tests="%s
-./run-tests.php:3410:58   - Unknown word (testcase)      -- file_name]['xml'] = "<testcase name='$escaped_test
 ./run-tests.php:362:6     - Unknown word (cfgtypes)     -- $cfgtypes = ['show', 'keep'];
 ./run-tests.php:363:6     - Unknown word (cfgfiles)     -- $cfgfiles = ['skip', 'php', 'clean
 ./run-tests.php:3679:10   - Unknown word (vcmd)          -- $vcmd = "valgrind -q --tool
@@ -8904,7 +8889,6 @@ Lines:
 ./sapi/phpdbg/phpdbg_bp.c:70:9      - Unknown word (breakmethod) -- phpdbg_breakmethod_t *bp = (phpdbg_breakmethod
 ./sapi/phpdbg/phpdbg_bp.c:85:9      - Unknown word (breakopline) -- phpdbg_breakopline_t *bp = (phpdbg_breakopline
 ./sapi/phpdbg/phpdbg_bp.h:153:8     - Unknown word (Breakbase)  -- /* {{{ Breakbase API */
-./sapi/phpdbg/phpdbg_cmd.h:154:12    - Unknown word (Declarators) -- * Command Declarators
 ./sapi/phpdbg/phpdbg_frame.c:172:44    - Unknown word (argstmp)    -- class, class_zv, *args, *argstmp;
 ./sapi/phpdbg/phpdbg_frame.c:251:18    - Unknown word (startfile)  -- zval startline, startfile;
 ./sapi/phpdbg/phpdbg_frame.c:252:14    - Unknown word (startfilename) -- const char *startfilename;
@@ -9013,7 +8997,6 @@ Lines:
 ./win32/build/mkdist.php:47:26     - Unknown word (libapr)     -- 'libhttpd.dll', 'libapr.dll', 'libaprutil.dll
 ./win32/build/mkdist.php:47:40     - Unknown word (libaprutil) -- dll', 'libapr.dll', 'libaprutil.dll','libapr-1.dll'
 ./win32/build/mkdist.php:484:22    - Unknown word (pharcommand)  -- echo "Generating pharcommand.phar\n";
-./win32/build/mkdist.php:499:32    - Unknown word (hashbang)     -- stub[0]); // remove hashbang
 ./win32/build/mkdist.php:50:21     - Unknown word (ociw)       -- 'oci.dll', 'ociw32.dll',
 ./win32/build/mkdist.php:53:23     - Unknown word (libct)      -- 'libcs.dll', 'libct.dll',
 ./win32/build/mkdist.php:58:24     - Unknown word (mscvrt)     -- /* visual C++; mscvrt.dll is present on everyones

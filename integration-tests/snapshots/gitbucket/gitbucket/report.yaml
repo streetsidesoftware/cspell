@@ -5,7 +5,7 @@ Args: '["**"]'
 Summary:
   files: 411
   filesWithIssues: 396
-  issues: 2144
+  issues: 2123
   errors: 0
 Errors: []
 
@@ -112,7 +112,6 @@ issues:
   - "doc/licenses.md:67:107      bytebuddy               U       LICENSE-2.0.txt) | net.bytebuddy # byte-buddy # 1.9."
   - "doc/licenses.md:69:107      minidev                 U       LICENSE-2.0.txt) | net.minidev # accessors-smart #"
   - "doc/licenses.md:73:98       scalactic               U       licenses/LICENSE-2.0) | org.scalactic # scalactic_2.12 #"
-  - "doc/licenses.md:81:106      compat                  U       modules # scala-java8-compat_2.12 # 0.8.0 | <notextile"
   - "doc/licenses.md:82:107      combinators             U       modules # scala-parser-combinators_2.12 # 1.0.6 | <notextile"
   - "doc/licenses.md:85:76       jgit                    U       null) | org.eclipse.jgit # org.eclipse.jgit"
   - "doc/licenses.md:88:83       hamcrest                U       bsd-license.php) | org.hamcrest # hamcrest-core # 1"
@@ -195,7 +194,6 @@ issues:
   - "src/main/scala/gitbucket/core/service/RepositoryCreationService.scala:310:8         fccd        U       \"fccd29\""
   - "src/main/scala/gitbucket/core/service/RepositoryCreationService.scala:312:76        acacac      U       Some(\"Default.\"), \"acacac\")"
   - "src/main/scala/gitbucket/core/service/SystemSettingsService.scala:50:58         Starttls    U       props.setProperty(SmtpStarttls, x.toString))"
-  - "src/main/scala/gitbucket/core/service/SystemSettingsService.scala:253:41        Proto       U       getHeader(\"X-Forwarded-Proto\"))"
   - "src/main/scala/gitbucket/core/service/WebHookService.scala:47:23        informations    U       /** get All WebHook informations of repository */"
   - "src/main/scala/gitbucket/core/service/WebHookService.scala:289:15       itcp            U       val itcp = new org.apache.http"
   - "src/main/scala/gitbucket/core/servlet/InitializeListener.scala:175:14       datasource      U       // Close datasource"
@@ -213,7 +211,6 @@ issues:
   - "src/main/scala/gitbucket/core/util/LDAPUtil.scala:173:32        LDAPJSSE    U       new LDAPConnection(new LDAPJSSESecureSocketFactory("
   - "src/main/scala/gitbucket/core/util/StringUtil.scala:30:62       Hmac    U       getInstance(\"PBKDF2WithHmacSHA256\")"
   - "src/main/scala/gitbucket/core/util/TextAvatarUtil.scala:16:17       Blightness      U       private val bgBlightness = 0.73f"
-  - "src/main/scala/gitbucket/core/view/helpers.scala:25:7           datetime        U       def datetime(date: Date): String"
   - "src/main/scala/gitbucket/core/view/helpers.scala:490:36         inlinediff      U       <table class=\\\"diff inlinediff\\\">\")"
   - "src/main/scala/gitbucket/core/view/helpers.scala:493:41         oldline         U       <th class=\"line-num oldline ${line.`type`}\">\"\"\""
   - "src/main/scala/gitbucket/core/view/Markdown.scala:120:18        listitem    U       override def listitem(text: String): String"
@@ -293,7 +290,6 @@ issues:
   - "src/test/scala/gitbucket/core/service/MergeServiceSpec.scala:153:48         fullname    U       eateAccount(\"dummy2\", \"dummy2-fullname\", \"dummy2@example.com"
   - "src/test/scala/gitbucket/core/service/ProtectedBranchServiceSpec.scala:73:73        fuga    U       branch2\", false, Seq(\"fuga\"))"
   - "src/test/scala/gitbucket/core/service/ServiceSpecBase.scala:168:49      baes    U       baseRepositoryName, baesBranch) = base.split"
-  - "src/test/scala/gitbucket/core/util/EditorConfigUtilSpec.scala:20:11         subdir      U       val subdirInfo = EditorConfigUtil"
   - "src/test/scala/gitbucket/core/util/JGitUtilSpec.scala:289:53        finfo       U       git, branch, path).map(finfo => (finfo.name, finfo"
   - "src/test/scala/gitbucket/core/util/ValidationsSpec.scala:21:40          gghhii      U       validate(\"color\", \"#gghhii\", messages) == Some"
   - "src/test/scala/gitbucket/core/view/HelpersSpec.scala:45:37          metacharacters      U       properly escape html metacharacters\") {"

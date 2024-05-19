@@ -4,19 +4,17 @@ Url: https://github.com/ktaranov/sqlserver-kit.git
 Args: '["**","--exclude=**/Backup/**"]'
 Summary:
   files: 489
-  filesWithIssues: 458
-  issues: 14754
+  filesWithIssues: 457
+  issues: 14723
   errors: 0
 Errors: []
 
 issues:
-  - "ADS/README.md:25:88         vsix            U       Release Date | Version | .vsix download link"
   - "ADS/README.md:30:15         Dacpac          U       | [SQL Server Dacpac]"
   - "ADS/README.md:30:181        wizarding       U       Provides an easy-to-use wizarding experience to deploy"
   - "ADS/README.md:30:227        dacpac          U       deploy and extract [`.dacpac`] files and import and"
   - "ADS/README.md:30:266        bacpac          U       import and export `.bacpac` files"
   - "ADS/README.md:31:214        SSMS            U       solution similar to SSMS Profiler, allowing users"
-  - "ADS/README.md:36:88         Vsix            U       -24 | 3.0.0 | [Vsix](https://github.com"
   - "ADS/README.md:39:4          whoisactive     U       | [whoisactive][1]"
   - "ADS/README.md:47:64         Rajendra        U       and GitHub] | Rajendra Gupta"
   - "Articles/README.md:10:14        Checkpont               U       - **[CHP]** Checkpont Articles"
@@ -489,12 +487,10 @@ issues:
   - "CLR/Regex/Fill_Factor/installRegexAssembly.sql:134:6        Repacement      U       @Repacement NVARCHAR(MAX)"
   - "CLR/Regex/Fill_Factor/installRegexSample.sql:58:37          asms    U       FROM sys.assemblies asms"
   - "CLR/Regex/Fill_Factor/RegexSQLCLR.vb:16:33          creat               U       this is used simply to creat the bitmap that is passed"
-  - "CLR/Regex/Fill_Factor/RegexSQLCLR.vb:36:49          Singleline          U       Value, RegexOptions.Singleline, RegexOptions.None)"
   - "CLR/Regex/Fill_Factor/RegexSQLCLR.vb:97:35          metacharacters      U       literally rather than as metacharacters so you can pass any"
   - "CLR/Regex/Fill_Factor/RegexSQLCLR.vb:97:70          atring              U       so you can pass any atring into"
   - "CLR/SplitterB_CLR.sql:48:62         enumration      U       parameters and receives an enumration object"
   - "CLR/SplitterB_CLR.sql:61:5          struct          U       struct SplitEnumerator : IEnumerator"
-  - "CLR/SplitterB_CLR.sql:126:10        endregion       U       #endregion"
   - "CONTRIBUTING.md:10:55       necolas     U       guidelines are adapted from [@necolas](https://github.com"
   - "Extended_Events/APC_plans_that_are_not_corrected.sql:6:4            SERVERPROPERTY      U       IF SERVERPROPERTY('ProductMajorVersion"
   - "Extended_Events/AppExecutionTimeout.sql:3:18        Yamamoto    U       Author: Franklin Yamamoto"
@@ -507,7 +503,6 @@ issues:
   - "Extended_Events/ConvertingSQLTracetoExtendedEvents.sql:125:39       Xact            U       transaction_sequence — XactSequence from SQLTrace"
   - "Extended_Events/ConvertingSQLTracetoExtendedEvents.sql:322:64       MSSQLSERVER     U       Microsoft SQL Server\\MSSQL11.MSSQLSERVER\\MSSQL\\Log\\XE_Default"
   - "Extended_Events/DBRecoveryProgress.sql:104:46       XEDB    U       Windows\\Temp\\DatabaseXEDBRecoveryProgress.xel"
-  - "Extended_Events/Deadlocks.sql:9:19          subdir      U       EXECUTE xp_create_subdir 'C:\\SQL\\XE_Out';"
   - "Extended_Events/FileSizeChanges.sql:7:52        Sess        U       COALESCE(NULLIF(CHARINDEX(SessName,BasePath)-1,-1)"
   - "Extended_Events/FileSizeChanges.sql:10:14       xmlsrc      U       SELECT xmlsrc.data.value(N'(@name"
   - "Extended_Events/FileSizeChanges.sql:18:12       xefile      U       ) AS xefile (TargetData, SessName"
@@ -642,7 +637,6 @@ issues:
   - "PowerShell/Convert_trc_to_2008r2.ps1:8:13           Gianluca        U       Author: Gianluca Sartori - @spaghettidba"
   - "PowerShell/Convert_trc_to_2008r2.ps1:8:22           Sartori         U       Author: Gianluca Sartori - @spaghettidba"
   - "PowerShell/Convert_trc_to_2008r2.ps1:8:33           spaghettidba    U       Gianluca Sartori - @spaghettidba"
-  - "PowerShell/Convert_trc_to_2008r2.ps1:22:14          somefile        U       $fileName = \"somefile.trc\""
   - "PowerShell/Convert-LSN.ps1:4:18         Lsns    U       Converts Lsns between Hex and/or numeric"
   - "PowerShell/Create-Deploy-SQL-Script.ps1:6:14        NIIGAZ              U       $Database = 'NIIGAZ' #the database"
   - "PowerShell/Create-Deploy-SQL-Script.ps1:15:14       SQLPS               U       #read in the SQLPS module if it isn't in"
@@ -708,7 +702,6 @@ issues:
   - "PowerShell/CsvSqlimport.ps1:593:6       sqlcolumnname           U       $sqlcolumnname = $Columns[$index]"
   - "PowerShell/CsvSqlimport.ps1:598:57      sqldatatype             U       ref]0) -eq $true) { $sqldatatype = \"varchar(255)\" }"
   - "PowerShell/CsvSqlimport.ps1:609:5       errormessage            U       $errormessage = $_.Exception.Message"
-  - "PowerShell/CsvSqlimport.ps1:641:55      typeof                  U       _rowsCopiedField = typeof(SqlBulkCopy).GetField"
   - "PowerShell/CsvSqlimport.ps1:651:4       Supafast                U       # Supafast turbo mode requires"
   - "PowerShell/CsvSqlimport.ps1:652:27      tablelock               U       turbo -eq $true) { $tablelock = $true }"
   - "PowerShell/CsvSqlimport.ps1:663:39      Streamreader            U       support -First in both Streamreader, and OleDb imports,"
@@ -990,7 +983,6 @@ issues:
   - "PowerShell/Simulate_Databse_Load.ps1:30:2           Freecmd             U       $Freecmd = New-Object System"
   - "PowerShell/Simulate_Databse_Load.ps1:35:6           FREEPROCCACHE       U       DBCC FREEPROCCACHE(@plan_handle);\""
   - "PowerShell/Simulate_Databse_Load.ps1:52:10          waittime            U       $waittime = get-random -minimum"
-  - "PowerShell/SQL_Server_Discovery_Report.ps1:54:5         Compat      U       $lstCompatLevelDirs = New-Object"
   - "PowerShell/SQL_Server_linked_server_connection_check.ps1:43:52          currentoy           U       services to skip those not currentoy running. #>"
   - "PowerShell/SQL_Server_linked_server_connection_check.ps1:95:16          testconnection      U       $LSname.testconnection()"
   - "PowerShell/SQL_Server_table_to_csv.ps1:16:22        localhsot       U       ConnectionString = \"localhsot\""
@@ -1603,7 +1595,6 @@ issues:
   - "Scripts/GoogleJobTimeline.sql:2:14          Ekelmans            U       Author: Theo Ekelmans"
   - "Scripts/GoogleJobTimeline.sql:27:16         Recocordset         U       declare @ReturnRecocordset int"
   - "Scripts/GoogleJobTimeline.sql:28:10         Emailprofilename    U       declare @Emailprofilename varchar(50)"
-  - "Scripts/GoogleJobTimeline.sql:73:129        runtimes            U       ntimeInSec -- Ignore trivial runtimes"
   - "Scripts/How_much_will_it_cost_or_save_to_rebuild_that_index.sql:20:2        Progammers      U       Progammers Notes:"
   - "Scripts/How_much_will_it_cost_or_save_to_rebuild_that_index.sql:27:61       rowstore        U       for non-partitioned rowstore indexes."
   - "Scripts/How_to_Find_Queries_Using_an_Index.sql:10:5         querystats      U       querystats.plan_handle,"
@@ -1872,7 +1863,6 @@ issues:
   - "Scripts/SQL Server 2012 Diagnostic Information Queries.sql:467:16       hotfixes    U       -- Recommended hotfixes and updates for Windows"
   - "Scripts/SQL Server 2012 Diagnostic Information Queries.sql:838:10       Winther     U       -- H�kan Winther has given me some great"
   - "Scripts/SQL Server 2016 Diagnostic Information Queries.sql:200:10       polybase    U       -- allow polybase export (Allow INSERT"
-  - "Scripts/SQL Server 2016 Diagnostic Information Queries.sql:239:83       compat      U       Server 2016 and newer (in compat level 130 and higher"
   - "Scripts/SQL Server 2016 Diagnostic Information Queries.sql:524:8        pvscsi      U       -- Get pvscsi info from Windows Registry"
   - "Scripts/SQL Server 2016 Diagnostic Information Queries.sql:524:55       PVSCSI      U       Registry (Query 19) (PVSCSI Driver Parameters)"
   - "Scripts/SQLServer_Memory_Information.sql:4:28           countes     U       returns>3 row sets: 1 - countes info; 2 - min, max,"
@@ -1934,7 +1924,6 @@ issues:
   - "Scripts/Wait_Statistics.sql:70:25       FLUSHFILEBUFFERS    U       N'PREEMPTIVE_OS_FLUSHFILEBUFFERS', -- https://www.sqlskills"
   - "Scripts/When_SQL_Server_Was_Installed.sql:6:11          Rebecca     U       <author>Rebecca Lewis</author>"
   - "Scripts/WhiteListIPTable.sql:28:10          ECHOBASE                U       ('*','ECHOBASE1','*','Any user from"
-  - "Scripts/WhiteListIPTable.sql:29:21          webserver               U       ,('WebSiteLogin','webserver1','192.168.100.55',"
   - "Scripts/WhiteListIPTable.sql:39:55          CONNECTIONPROPERTY      U       CONVERT(VARCHAR(50),CONNECTIONPROPERTY('client_net_address"
   - "Scripts/Who_dropped_altered_database_object.sql:22:17       eventclasses    U       /* query on the eventclasses for delete and alter"
   - "Scripts/Windows logins not in AD.sql:6:25           invalidlogins       U       OBJECT_ID(‘tempdb..#invalidlogins’) IS NOT NULL)"
@@ -2092,7 +2081,6 @@ issues:
   - "Solution/dbWarden/dbWarden.sql:4749:3       Perfthheader                    U       .Perfthheader {color:#FFFFFF; font"
   - "Solution/dbWarden/dbWarden.sql:4751:3       Perftd                          U       .Perftd {text-align:center;"
   - "Solution/dbWarden/dbWarden.sql:4805:63      rowspan                         U       master\" width=\"850\" rowspan=\"3\">"
-  - "Solution/dbWarden/dbWarden.sql:4836:61      valign                          U       master\" width=\"250\" valign=\"top\">'"
   - "Solution/dbWarden/dbWarden.sql:5100:20      Replcation                      U       <th width=\"500\">Replcation Share</th>"
   - "Solution/dbWarden/dbWarden.sql:6174:69      perfstats                       U       job_id=@jobId, @name=N'perfstats schedule',"
   - "Solution/dbWarden/dbWarden.sql:6338:79      inforamtion                     U       Contains statistical inforamtion on SQL Jobs' WHERE TableName"
@@ -2564,7 +2552,6 @@ issues:
   - "SQL Server Version.md:2123:51       logininfo           U       838460 FIX: The xp_logininfo procedure may fail with"
   - "SQL Server Version.md:2126:44       Sqlakw              U       16.0 | 317989 FIX: Sqlakw32.dll May Corrupt SQL"
   - "SQL Server Version.md:2156:89       UPDATEUSAGE         U       Occurs When You Run DBCC UPDATEUSAGE on a Database That Has"
-  - "SQL Server Version.md:2173:121      Cond                U       Access Violation on CStmtCond::XretExecute"
   - "SQL Server Version.md:2173:127      Xret                U       Violation on CStmtCond::XretExecute"
   - "SQL Server Version.md:2185:83       spinloop            U       activity results in spinloop wait"
   - "SQL Server Version.md:2193:87       Userdump            U       Does Not Generate a Userdump File When It Runs Against"
@@ -2807,8 +2794,7 @@ issues:
   - "Stored_Procedure/dbo.sp_help_permissions.sql:608:66         stoplist        U       major_id, 23 AS class, stoplist_id AS major_id, principal"
   - "Stored_Procedure/dbo.sp_help_permissions.sql:609:23         stoplists       U       FROM sys.fulltext_stoplists"
   - "Stored_Procedure/dbo.sp_help_permissions.sql:890:40         resultset       U       0, return a tabular resultset with all inherited permutatio"
-  - "Stored_Procedure/dbo.sp_helpExpandView.sql:39:43        Stuewe          U       Thanks Mickey Stuewe!"
-  - "Stored_Procedure/dbo.sp_helpExpandView.sql:323:8        Unflattened     U       -- Unflattened Output"
+  - "Stored_Procedure/dbo.sp_helpExpandView.sql:39:43        Stuewe      U       Thanks Mickey Stuewe!"
   - "Stored_Procedure/dbo.sp_helpme.sql:7:108        helpme              U       , N'PROCEDURE',N'sp_helpme', NULL,NULL))"
   - "Stored_Procedure/dbo.sp_helpme.sql:98:8         Depen               U       ,@HasDepen BIT = 0"
   - "Stored_Procedure/dbo.sp_helpme.sql:139:55       ownerid             U       OBJECTPROPERTY([object_id], ''ownerid'')),"

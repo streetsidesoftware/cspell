@@ -5,7 +5,7 @@ Args: '["**/*.go"]'
 Summary:
   files: 269
   filesWithIssues: 250
-  issues: 4044
+  issues: 4028
   errors: 0
 Errors: []
 
@@ -47,8 +47,7 @@ issues:
   - "caddyconfig/caddyfile/formatter_test.go:332:10      ACMEEMAIL       U       email {$ACMEEMAIL}"
   - "caddyconfig/caddyfile/formatter.go:295:8        Caddyfiles      U       // ...Caddyfiles should, however, end"
   - "caddyconfig/caddyfile/lexer_test.go:404:24      Aheredoc    U       input: []byte(\"\\u000Aheredoc \\u003C\\u003C\\u0073\\u"
-  - "caddyconfig/caddyfile/lexer.go:353:6        heredocs        U       // heredocs have an extra linebreak"
-  - "caddyconfig/caddyfile/lexer.go:353:29       linebreak       U       heredocs have an extra linebreak because the opening"
+  - "caddyconfig/caddyfile/lexer.go:353:6        heredocs    U       // heredocs have an extra linebreak"
   - "caddyconfig/caddyfile/parse_test.go:665:13      foofoobarbar    U       expect: \"foofoobarbar\","
   - "caddyconfig/caddyfile/parse_test.go:677:13      foobarfoobar    U       expect: \"foobarfoobar\","
   - "caddyconfig/caddyfile/parse_test.go:689:13      foobarbaz       U       expect: \"foobarbaz\","
@@ -184,7 +183,6 @@ issues:
   - "modules/caddyhttp/encode/encode.go:19:65        Httpgzip        U       Copyright (c) 2015 The Httpgzip Authors."
   - "modules/caddyhttp/encode/encode.go:52:59        Mmatcher        U       against this ResponseMmatcher."
   - "modules/caddyhttp/encode/encode.go:98:19        opentype        U       \"application/opentype*\","
-  - "modules/caddyhttp/encode/encode.go:101:19       truetype        U       \"application/truetype*\","
   - "modules/caddyhttp/encode/encode.go:104:26       fontobject      U       \"application/vnd.ms-fontobject*\","
   - "modules/caddyhttp/encode/encode.go:111:21       protobuf        U       \"application/x-protobuf*\","
   - "modules/caddyhttp/encode/encode.go:268:11       bodyclose       U       //nolint:bodyclose"
@@ -204,7 +202,6 @@ issues:
   - "modules/caddyhttp/fileserver/browsetplcontext_test.go:78:6          مجلد        U       {\"/مجلد/\", []crumb{"
   - "modules/caddyhttp/fileserver/browsetplcontext.go:135:37         browsable       U       parent directory is browsable."
   - "modules/caddyhttp/fileserver/browsetplcontext.go:178:2          lpath           U       lpath := l.Path"
-  - "modules/caddyhttp/fileserver/browsetplcontext.go:189:67         unescaping      U       the loop rather than unescaping the"
   - "modules/caddyhttp/fileserver/browsetplcontext.go:353:24         namedirfirst    U       sortByNameDirFirst = \"namedirfirst\""
   - "modules/caddyhttp/fileserver/caddyfile.go:136:5         precompress         U       precompress, ok := inst.(encode"
   - "modules/caddyhttp/fileserver/caddyfile.go:138:40        precompressor       U       \"module %s is not a precompressor; is %T\", modID, inst"
@@ -260,7 +257,6 @@ issues:
   - "modules/caddyhttp/requestbody/caddyfile.go:15:9         requestbody     U       package requestbody"
   - "modules/caddyhttp/responsewriter_test.go:22:6           barebones       U       // a barebones http.ResponseWriter"
   - "modules/caddyhttp/reverseproxy/addresses.go:104:20      proxying    U       // a backend and proxying to it, so we cannot"
-  - "modules/caddyhttp/reverseproxy/caddyfile.go:599:4       subdir      U       subdir := d.Val()"
   - "modules/caddyhttp/reverseproxy/caddyfile.go:608:5       usize       U       usize, err := humanize.ParseBytes"
   - "modules/caddyhttp/reverseproxy/fastcgi/client_test.go:50:26         fcgic       U       scriptFile = \"/tank/www/fcgic_test.php\""
   - "modules/caddyhttp/reverseproxy/fastcgi/client_test.go:51:26         serv        U       ipPort = \"remote-php-serv:59000\""

@@ -5,7 +5,7 @@ Args: '["**/*.*"]'
 Summary:
   files: 103
   filesWithIssues: 98
-  issues: 3246
+  issues: 3240
   errors: 0
 Errors: []
 
@@ -259,7 +259,6 @@ issues:
   - "Engine/neo-api-physx.ads:964:60         verts                       U       CreateConvexMesh(const Point* verts, udword vertCount, PxConvexFl"
   - "Engine/neo-api-physx.ads:964:67         udword                      U       const Point* verts, udword vertCount, PxConvexFlags"
   - "Engine/neo-api-physx.ads:995:88         TWOPI                       U       jc.mMaxLimitAngle, TWOPI));"
-  - "Engine/neo-api-physx.ads:1035:20        Preprocess                  U       -- Params.meshPreprocessParams = mParams.mPrecomputeAc"
   - "Engine/neo-api-physx.ads:1035:48        Precompute                  U       shPreprocessParams = mParams.mPrecomputeActiveEdges ? PxMeshPreprocess"
   - "Engine/neo-api-physx.ads:1035:149       PRECOMPUTE                  U       eDISABLE_ACTIVE_EDGES_PRECOMPUTE;"
   - "Engine/neo-api-vulkan.adb:19:22         Vulkan          U       package body Neo.API.Vulkan is"
@@ -782,7 +781,6 @@ issues:
   - "Engine/neo-world-network.adb:698:29         gentity                 U       if ( client->gentity && client->gentity-"
   - "Engine/neo-world-network.adb:702:20         allowoverflow           U       -- msg.allowoverflow = qtrue;"
   - "Engine/neo-world-physics.adb:49:14          midphase            U       Params.midphaseDesc.setToDefault(mParams"
-  - "Engine/neo-world-physics.adb:54:45          preprocess          U       meshPreprocessParams |= mesh_preprocess_params;"
   - "Engine/neo-world-physics.adb:92:52          ACTIVETRANSFORMS    U       PxSceneFlag::eENABLE_ACTIVETRANSFORMS, mParams.mEnableActiveTransf"
   - "Engine/neo-world-physics.adb:120:11         Cuda                U       PxCudaContextManagerDesc cudaContext"
   - "Engine/neo-world-physics.adb:120:34         cuda                U       PxCudaContextManagerDesc cudaContextManagerDesc;"
