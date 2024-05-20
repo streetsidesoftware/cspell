@@ -44,13 +44,24 @@ jobs:
       - run: pnpm run coverage
 
       - name: Upload coverage Coveralls
+        id: coveralls
         uses: coverallsapp/github-action@643bc377ffa44ace6394b2b5d0d3950076de9f63 # 2.3.0
+        continue-on-error: true
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           path-to-lcov: ./lcov.info
 
       - name: Upload coverage to Codecov
+        id: codecov
         uses: codecov/codecov-action@6d798873df2b1b8e5846dba6fb86631229fbcb17 # v4.4.0
+        continue-on-error: true
         with:
           directory: '.'
           files: ./lcov.info
+
+      - name: Show Summary
+        uses: streetsidesoftware/actions/public/summary@v1
+        with:
+          text: |
+            Coveralls: ${{ steps.coveralls.outcome }}
+            Codecov: ${{ steps.codecov.outcome }}
