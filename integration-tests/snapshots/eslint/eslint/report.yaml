@@ -4,8 +4,8 @@ Url: https://github.com/eslint/eslint
 Args: '[".","--config=../../../config/eslint/cspell.config.yaml","--issues-summary-report","--exclude=bin/**","--exclude=CHANGELOG.md","--exclude=_data","--exclude=tests/bench/large.js","--exclude=docs/src/_includes","--exclude=docs/src/assets/{fonts,s?css,images}"]'
 Summary:
   files: 1931
-  filesWithIssues: 325
-  issues: 1712
+  filesWithIssues: 323
+  issues: 1705
   errors: 0
 Errors: []
 
@@ -87,7 +87,6 @@ issues:
   - "docs/src/rules/key-spacing.md:194:5         bcde    U       bcde: 42,"
   - "docs/src/rules/key-spacing.md:216:5         ijkl    U       ijkl: 'Non-consecutive lines"
   - "docs/src/rules/max-lines-per-function.md:31:45          dbname      U       return m(\"tr\", {key: db.dbname}, ["
-  - "docs/src/rules/no-buffer-constructor.md:13:407      alloc       U       Buffer.from`, `Buffer.alloc`, and `Buffer.allocUnsafe"
   - "docs/src/rules/no-dupe-else-if.md:63:5          quuux       U       quuux();"
   - "docs/src/rules/no-dupe-keys.md:56:5         quxx    U       quxx: \"qux\""
   - "docs/src/rules/no-duplicate-imports.md:55:8         mergeable       U       // not mergeable"
@@ -132,8 +131,6 @@ issues:
   - "docs/src/rules/one-var.md:424:17        foonorf     U       let fooqux, foonorf;"
   - "docs/src/rules/one-var.md:715:38        onevar      U       This rule maps to the `onevar` JSHint rule, but allows"
   - "docs/src/rules/prefer-named-capture-group.md:21:19          cauli       U       const regex = /(?:cauli|sun)flower/;"
-  - "docs/src/rules/radix.md:10:305      autodetected    U       , `parseInt()` also autodetected octal literals, which"
-  - "docs/src/rules/radix.md:24:72       autodetects     U       so that it no longer autodetects octal literals and instead"
   - "docs/src/rules/space-unary-ops.md:12:101        nonwords    U       operators and after/before `nonwords` unary operators."
   - "docs/src/rules/spaced-comment.md:39:78          vsdoc       U       ocumentation read by doxygen, vsdoc, etc. which must have"
   - "docs/src/rules/use-isnan.md:2:12        isnan       U       title: use-isnan"
@@ -565,7 +562,6 @@ issuesSummary:
   - "text: algoliasearch, count: 4, files: 2,"
   - "text: allman, count: 13, files: 3,"
   - "text: Allman, count: 2, files: 1,"
-  - "text: alloc, count: 5, files: 1,"
   - "text: Amaresh, count: 2, files: 1,"
   - "text: amet, count: 2, files: 1,"
   - "text: anchorjs, count: 1, files: 1,"
@@ -591,8 +587,6 @@ issuesSummary:
   - "text: atomtest, count: 1, files: 1,"
   - "text: atrule, count: 1, files: 1,"
   - "text: Autocompleter, count: 1, files: 1,"
-  - "text: autodetected, count: 1, files: 1,"
-  - "text: autodetects, count: 1, files: 1,"
   - "text: avalue, count: 1, files: 1,"
   - "text: barbaz, count: 7, files: 5,"
   - "text: barfoo, count: 5, files: 3,"

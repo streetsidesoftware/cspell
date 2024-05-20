@@ -3,7 +3,7 @@ Repository: ktaranov/sqlserver-kit
 Url: "https://github.com/ktaranov/sqlserver-kit.git"
 Args: ["**","--exclude=**/Backup/**"]
 Lines:
- CSpell: Files checked: 489, Issues found: 14723 in 457 files.
+ CSpell: Files checked: 489, Issues found: 14541 in 456 files.
  exit code: 1
 ./ADS/README.md:30:15     - Unknown word (Dacpac)     -- | [SQL Server Dacpac]
 ./ADS/README.md:30:181    - Unknown word (wizarding)  -- Provides an easy-to-use wizarding experience to deploy
@@ -380,7 +380,6 @@ Lines:
 ./Articles/README.md:781:129   - Unknown word (Gurgul)        -- | Jon Gurgul
 ./Articles/README.md:792:131   - Unknown word (Feasel)        -- | Kevin Feasel
 ./Articles/README.md:79:130    - Unknown word (Robidoux)    -- | Greg Robidoux
-./Articles/README.md:79:33     - Unknown word (NOLOCK)      -- Understanding the SQL Server NOLOCK hint]
 ./Articles/README.md:801:35    - Unknown word (WRITEPAGE)     -- recovery using DBCC WRITEPAGE]
 ./Articles/README.md:804:125   - Unknown word (Bailu)         -- | Bailu Ding, Sudipto Das Wentao
 ./Articles/README.md:804:137   - Unknown word (Sudipto)       -- | Bailu Ding, Sudipto Das Wentao …
@@ -518,7 +517,6 @@ Lines:
 ./Extended_Events/XE_Truncate.sql:3:4       - Unknown word (Evgeny)     -- by Evgeny Garaev 2018-06-28
 ./Extended_Events/system_health.sql:17:48     - Unknown word (iocp)       -- monitor_non_yielding_iocp_ring_buffer_recorded
 ./Extended_Events/system_health.sql:7:11      - Unknown word (sqlclr)     -- ADD EVENT sqlclr.clr_allocation_failure
-./Extended_Events/system_health.sql:9:30      - Unknown word (alloc)      -- EVENT sqlclr.clr_virtual_alloc_failure(
 ./Extended_Events/system_health_azure.sql:41:28     - Unknown word (PAGELATCH)  -- ( wait_type >= N'PAGELATCH_NL'
 ./Extended_Events/system_health_azure.sql:44:23     - Unknown word (PAGEIOLATCH) -- OR (   wait_type >= N'PAGEIOLATCH_NL'
 ./Extended_Events/system_health_azure.sql:51:20     - Unknown word (WRITELOG)    -- AND wait_type <= N'WRITELOG') --FCB_REPLICA_WRITE
@@ -919,7 +917,6 @@ Lines:
 ./PowerShell/ResetSqlSaPassword.psm1:233:5     - Unknown word (isclustered)      -- $isclustered = $true
 ./PowerShell/ResetSqlSaPassword.psm1:254:30    - Unknown word (displayname)      -- netstart = net start ""$displayname"" /mReset-SqlSaPassword
 ./PowerShell/ResetSqlSaPassword.psm1:254:6     - Unknown word (netstart)         -- $netstart = net start ""$displayname
-./PowerShell/ResetSqlSaPassword.psm1:308:126   - Unknown word (DWORD)            -- , N'LoginMode', REG_DWORD, 2"
 ./PowerShell/ResetSqlSaPassword.psm1:308:29    - Unknown word (regwrite)         -- = "EXEC xp_instance_regwrite N'HKEY_LOCAL_MACHINE
 ./PowerShell/ResetSqlSaPassword.psm1:323:107   - Unknown word (syadmin)          -- Warning "Couldn't add to syadmin role." }
 ./PowerShell/ResetSqlSaPassword.psm1:40:127    - Unknown word (remoteserver) -- WORKSTATION\Admin to remoteserver\instance. Domain users
@@ -2006,7 +2003,6 @@ Lines:
 ./Scripts/Find_Weak_Passwords.sql:65:3      - Unknown word (starwars)   -- ('starwars'),
 ./Scripts/Find_Weak_Passwords.sql:66:3      - Unknown word (qwertyuiop) -- ('qwertyuiop'),
 ./Scripts/Find_Weak_Passwords.sql:67:3      - Unknown word (qazwsx)     -- ('qazwsx'),
-./Scripts/Find_Weak_Passwords.sql:75:24     - Unknown word (nolock)     -- sys.sql_logins sl (nolock)
 ./Scripts/Find_Weak_Passwords.sql:78:5      - Unknown word (PWDCOMPARE) -- PWDCOMPARE(cp.Password, sl.password
 ./Scripts/Find_and_fix_that_troublesome_Windows_Power_setting.sql:23:6      - Unknown word (Gettin)     -- , @isGettinFixed bit;
 ./Scripts/Find_and_fix_that_troublesome_Windows_Power_setting.sql:73:33     - Unknown word (setactive)  -- cmdshell 'powercfg.exe /setactive 8c5e7fda-e8bf-4a96-
@@ -2088,7 +2084,6 @@ Lines:
 ./Scripts/IdentifyObjectNameForCreateAndAlterUsingFn_dblog.sql:2:9       - Unknown word (skreebydba) -- Author: skreebydba
 ./Scripts/IdentifyObjectNameForCreateAndAlterUsingFn_dblog.sql:30:10     - Unknown word (loopcount)  -- DECLARE @loopcount INT = 1;
 ./Scripts/IdentifyObjectNameForCreateAndAlterUsingFn_dblog.sql:31:10     - Unknown word (looplimit)  -- DECLARE @looplimit INT;
-./Scripts/IdentifyObjectNameForCreateAndAlterUsingFn_dblog.sql:42:78     - Unknown word (Alloc)      -- operation, Context, AllocUnitName, AllocUnitId
 ./Scripts/IdentifyObjectNameForCreateAndAlterUsingFn_dblog.sql:64:14     - Unknown word (lockinfo)   -- DECLARE @lockinfo NVARCHAR(300);
 ./Scripts/IdentifyObjectNameForCreateAndAlterUsingFn_dblog.sql:65:14     - Unknown word (startingposition) -- DECLARE @startingposition INT;
 ./Scripts/IdentifyObjectNameForCreateAndAlterUsingFn_dblog.sql:66:14     - Unknown word (endingposition)   -- DECLARE @endingposition INT;
@@ -2250,7 +2245,6 @@ Lines:
 ./Scripts/Security_Audit_Report.sql:45:35     - Unknown word (ulogin)     -- WHEN 'U' THEN ulogin.[name] COLLATE Latin
 ./Scripts/Server_Parameters.sql:18:10     - Unknown word (tracestatus) -- DECLARE @tracestatus table(
 ./Scripts/Server_Parameters.sql:56:59     - Unknown word (xact)        -- table VALUES('in-doubt xact resolution',0,0);
-./Scripts/Server_Parameters.sql:72:50     - Unknown word (precompute)  -- option_table VALUES('precompute rank',0,0);
 ./Scripts/Server_Parameters.sql:84:67     - Unknown word (procs)       -- VALUES('scan for startup procs',0,0);
 ./Scripts/Server_Parameters.sql:98:38     - Unknown word (Traceflag)   -- tracestatus set TraceFlag = 'Traceflag ('+TraceFlag+')';
 ./Scripts/Show all permissions in a database.sql:183:18    - Unknown word (bulkadmin)  -- sp.[name]='bulkadmin' AND
@@ -2752,7 +2746,6 @@ Lines:
 ./Stored_Procedure/dbo.sp_RestoreGene.sql:156:113   - Unknown word (Dannen)       -- supported to 20, Steven Dannen
 ./Stored_Procedure/dbo.sp_RestoreGene.sql:157:33    - Unknown word (Masood)       -- 023 - V8.2    - Masood : Bug fix restoring
 ./Stored_Procedure/dbo.sp_RestoreGene.sql:1686:248  - Unknown word (Withove)          -- nvarchar(max)'), 1,1,'') AS WithoveCmds
-./Stored_Procedure/dbo.sp_RestoreGene.sql:1686:255  - Unknown word (Cmds)             -- , 1,1,'') AS WithoveCmds
 ./Stored_Procedure/dbo.sp_RestoreGene.sql:20:92     - Unknown word (seperated)  -- database or a list of comma seperated database names, NULL
 ./Stored_Procedure/dbo.sp_RestoreGene.sql:491:10    - Unknown word (backupmediasetid) -- ,backupmediasetid
 ./Stored_Procedure/dbo.sp_RestoreGene.sql:493:10    - Unknown word (backupfinishdate) -- ,backupfinishdate

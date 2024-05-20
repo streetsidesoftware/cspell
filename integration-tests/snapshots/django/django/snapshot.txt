@@ -3,7 +3,7 @@ Repository: django/django
 Url: "https://github.com/django/django.git"
 Args: ["--issues-summary-report","**/*.{md,py}"]
 Lines:
- CSpell: Files checked: 2778, Issues found: 8253 in 932 files.
+ CSpell: Files checked: 2778, Issues found: 8221 in 927 files.
  exit code: 1
 ./django/__init__.py:12:26     - Unknown word (urlresolvers) -- Set the thread-local urlresolvers script prefix if `set
 ./django/apps/registry.py:134:40    - Unknown word (unconfigured) -- not ready" is due to unconfigured settings, accessing
@@ -122,7 +122,6 @@ Lines:
 ./django/conf/locale/tr/formats.py:20:26     - Unknown word (Ekim)       -- "%d %B %Y",  # '25 Ekim 2006'
 ./django/conf/locale/uz/formats.py:18:29     - Unknown word (Oktabr)     -- %B, %Y-yil",  # '25-Oktabr, 2006-yil'
 ./django/contrib/admin/actions.py:25:5      - Unknown word (childs)     -- childs (foreignkeys), a "permission
-./django/contrib/admin/apps.py:21:51     - Unknown word (autodiscovery) -- for admin which does autodiscovery."""
 ./django/contrib/admin/checks.py:19:22     - Unknown word (classinfo)  -- def _issubclass(cls, classinfo):
 ./django/contrib/admin/helpers.py:18:32     - Unknown word (flatatt)    -- django.forms.utils import flatatt
 ./django/contrib/admin/options.py:1443:15   - Unknown word (saveasnew)   -- "_saveasnew" in request.POST
@@ -221,7 +220,6 @@ Lines:
 ./django/contrib/gis/db/models/aggregates.py:37:65     - Unknown word (SDOAGGRTYPE) -- t wrap filters with SDOAGGRTYPE().
 ./django/contrib/gis/db/models/aggregates.py:56:22     - Unknown word (Geospatial)  -- "Geospatial aggregates only allowed
 ./django/contrib/gis/db/models/functions.py:228:31    - Unknown word (GMLGEOMETRY) -- else "SDO_UTIL.TO_GMLGEOMETRY"
-./django/contrib/gis/db/models/proxy.py:52:22     - Unknown word (proxied)    -- Retrieve the proxied geometry or raster with
 ./django/contrib/gis/db/models/sql/conversion.py:2:45      - Unknown word (geospatial) -- simple classes to convert geospatial values from the
 ./django/contrib/gis/feeds.py:11:9      - Unknown word (georss)     -- def georss_coords(self, coords
 ./django/contrib/gis/forms/widgets.py:71:32     - Unknown word (geodjango)  -- "module": "geodjango_%s" % name.replace(
@@ -655,7 +653,6 @@ Lines:
 ./django/db/models/fields/json.py:401:65    - Unknown word (MDEV)       -- and ->> operators (see MDEV-13594).
 ./django/db/models/fields/related.py:820:63    - Unknown word (pushdown)   -- joining and subquery pushdown. The
 ./django/db/models/fields/related.py:885:20    - Unknown word (FK's)       -- # Internal FK's - i.e., those with a
-./django/db/models/fields/related_descriptors.py:1178:23   - Unknown word (autocreated) -- # For non-autocreated 'through' models, can
 ./django/db/models/fields/related_descriptors.py:31:69     - Unknown word (unicity)    -- is checked upstream (unicity
 ./django/db/models/functions/datetime.py:156:35    - Unknown word (mydatetime) -- replicate this in Python: (mydatetime.isoweekday() % 7) +
 ./django/db/models/functions/datetime.py:241:45    - Unknown word (LOCALTIMESTAMP) -- connection, template="LOCALTIMESTAMP", **extra_context
@@ -667,7 +664,6 @@ Lines:
 ./django/db/models/lookups.py:567:30    - Unknown word (thevalue)   -- col LIKE %s, ['thevalue%']
 ./django/db/models/lookups.py:571:24    - Unknown word (othercol)   -- # col LIKE othercol || '%%'
 ./django/db/models/lookups.py:767:7     - Unknown word (UUIDI)      -- class UUIDIExact(UUIDTextMixin,
-./django/db/models/options.py:137:37    - Unknown word (proxying)   -- class this model is proxying. Note that proxy_for
 ./django/db/models/options.py:530:33    - Unknown word (longwinded) -- The third lambda is a longwinded way of checking f.related
 ./django/db/models/query.py:241:17    - Unknown word (rowfactory) -- rowfactory = operator.itemgetter
 ./django/db/models/query.py:780:30    - Unknown word (childmost)  -- insert into the childmost table.
@@ -747,14 +743,13 @@ Lines:
 ./django/template/defaultfilters.py:285:30    - Unknown word (titlecase)  -- Convert a string into titlecase."""
 ./django/template/defaultfilters.py:447:5     - Unknown word (escapeseq)  -- def escapeseq(value):
 ./django/template/defaultfilters.py:943:22    - Unknown word (cand)       -- * If value is 0, cand{{ value|pluralize:"y
-./django/template/defaulttags.py:1118:48   - Unknown word (amet)         -- Lorem ipsum dolor sit amet, consectetuer...").
+./django/template/defaulttags.py:1118:48   - Unknown word (amet)        -- Lorem ipsum dolor sit amet, consectetuer...").
 ./django/template/defaulttags.py:1118:54   - Unknown word (consectetuer) -- ipsum dolor sit amet, consectetuer...").
 ./django/template/defaulttags.py:1224:21   - Unknown word (Remler)       -- * Emily Remler
 ./django/template/defaulttags.py:1226:15   - Unknown word (Lovie)        -- * Lovie Austin
 ./django/template/defaulttags.py:1457:21   - Unknown word (myblock)      -- {% verbatim myblock %}
 ./django/template/defaulttags.py:146:35    - Unknown word (asvar)      -- init__(self, variables, asvar=None):
 ./django/template/defaulttags.py:610:53    - Unknown word (subtemplate) -- rowcolors }}">{% include "subtemplate.html " %}</tr>
-./django/template/defaulttags.py:708:51    - Unknown word (autoescaping) -- autoescape`` tag to manage autoescaping for blocks of
 ./django/template/library.py:254:36    - Unknown word (reparsing)  -- render_context to avoid reparsing and loading when used
 ./django/template/library.py:37:34     - Unknown word (somename)   -- # @register.tag('somename') or @register.tag(name
 ./django/template/library.py:43:40     - Unknown word (somefunc)   -- register.tag('somename', somefunc)
@@ -1275,12 +1270,10 @@ Lines:
 ./tests/admin_views/tests.py:6433:18   - Unknown word (Roboto)                                                                 -- "Roboto",
 ./tests/admin_views/tests.py:6434:28   - Unknown word (Neue)                                                                   -- "Helvetica Neue",
 ./tests/admin_views/tests.py:6440:18   - Unknown word (Noto)                                                                   -- "Noto Color Emoji",
-./tests/admin_views/tests.py:6569:65   - Unknown word (autocompletes)                                                          -- updates_fk_selects_except_autocompletes(self):
-./tests/admin_views/tests.py:6931:44   - Unknown word (readonlyrelatedfield)                                                  -- admin_site}:admin_views_readonlyrelatedfield_change", args=(obj.pk
+./tests/admin_views/tests.py:6931:44   - Unknown word (readonlyrelatedfield)                                                   -- admin_site}:admin_views_readonlyrelatedfield_change", args=(obj.pk
 ./tests/admin_views/tests.py:6983:23   - Unknown word (onetoone)                                                              -- def test_readonly_onetoone_backwards_ref(self)
 ./tests/admin_views/tests.py:6992:40   - Unknown word (plotproxy)                                                             -- reverse("admin:admin_views_plotproxy_change", args=(pl.pk
 ./tests/admin_views/tests.py:7021:40   - Unknown word (fieldoverridepost)                                                     -- reverse("admin:admin_views_fieldoverridepost_change", args=(p.pk
-./tests/admin_views/tests.py:7039:65   - Unknown word (autoescaped)                                                           -- elements are properly autoescaped (#24461)
 ./tests/admin_views/tests.py:7069:9    - Unknown word (threepwood)                                                            -- threepwood = Character.objects
 ./tests/admin_views/tests.py:7077:63   - Unknown word (stumpjoke)                                                             -- reverse("admin:admin_views_stumpjoke_add"))
 ./tests/admin_views/tests.py:7123:36   - Unknown word (Kilbraken)                                                             -- objects.create(name="Kilbraken", age=50, title="Judge
@@ -1295,8 +1288,8 @@ Lines:
 ./tests/admin_views/tests.py:8345:63   - Unknown word (emptymodelhidden)                                                      -- reverse("admin:admin_views_emptymodelhidden_add"))
 ./tests/admin_views/tests.py:8351:63   - Unknown word (emptymodelmixin)                                                       -- reverse("admin:admin_views_emptymodelmixin_add"))
 ./tests/admin_views/tests.py:8393:79   - Unknown word (Rossi)                                                                 -- name="Mario", surname="Rossi")
-./tests/admin_views/tests.py:8395:54   - Unknown word (Bianchi)                                                              -- "Antonio", surname="Bianchi"
-./tests/admin_views/tests.py:8423:40   - Unknown word (parentwithdependentchildren)                                          -- reverse("admin:admin_views_parentwithdependentchildren_add"), post_data
+./tests/admin_views/tests.py:8395:54   - Unknown word (Bianchi)                                                               -- "Antonio", surname="Bianchi"
+./tests/admin_views/tests.py:8423:40   - Unknown word (parentwithdependentchildren)                                           -- reverse("admin:admin_views_parentwithdependentchildren_add"), post_data
 ./tests/admin_views/tests.py:8450:9    - Unknown word (pwdc)                                                                 -- pwdc = ParentWithDependentChildren
 ./tests/admin_views/tests.py:846:44    - Unknown word (Karnataka)               -- objects.create(name="Karnataka")
 ./tests/admin_views/tests.py:860:63    - Unknown word (vodcast)                 -- reverse("admin:admin_views_vodcast_changelist"), {})
@@ -2052,8 +2045,7 @@ Lines:
 ./tests/invalid_models_tests/test_models.py:739:52    - Unknown word (vlmn)                                                                    -- length=11, db_column="vlmn").contribute_to_class
 ./tests/invalid_models_tests/test_models.py:863:14    - Unknown word (multiinheritance)                                                        -- def test_multiinheritance_clash(self):
 ./tests/invalid_models_tests/test_models.py:919:14    - Unknown word (multigeneration)                                                         -- def test_multigeneration_inheritance(self):
-./tests/invalid_models_tests/test_ordinary_fields.py:30:35     - Unknown word (autocreating) -- Prevent Django from autocreating `id` AutoField, which
-./tests/invalid_models_tests/test_ordinary_fields.py:830:13    - Unknown word (biginteger)   -- biginteger = models.BigIntegerField
+./tests/invalid_models_tests/test_ordinary_fields.py:830:13    - Unknown word (biginteger) -- biginteger = models.BigIntegerField
 ./tests/invalid_models_tests/test_ordinary_fields.py:832:13    - Unknown word (positiveinteger) -- positiveinteger = models.PositiveIntegerField
 ./tests/invalid_models_tests/test_ordinary_fields.py:833:13    - Unknown word (positivebiginteger) -- positivebiginteger = models.PositiveBigIntegerFi
 ./tests/invalid_models_tests/test_ordinary_fields.py:834:13    - Unknown word (positivesmallinteger) -- positivesmallinteger = models.PositiveSmallInteger
@@ -2090,7 +2082,6 @@ Lines:
 ./tests/m2m_through/tests.py:369:45    - Unknown word (Rockwhale)             -- objects.create(title="Rockwhale 2014")
 ./tests/m2m_through/tests.py:466:27    - Unknown word (symmetricalfriendship) -- friendship = tony.symmetricalfriendship_set.get()
 ./tests/m2m_through_regress/models.py:14:38     - Unknown word (usermembership) -- AutoField(db_column="usermembership_id", primary_key=True
-./tests/m2m_through_regress/models.py:70:18     - Unknown word (Proxied)        -- through="ProxiedIndividualCompetitor
 ./tests/m2m_through_regress/tests.py:125:55    - Unknown word (Briscoe)    -- objects.create(name="Ryan Briscoe")
 ./tests/m2m_through_regress/tests.py:130:64    - Unknown word (autonumbering) -- driver to mix up the autonumbering
 ./tests/m2m_through_regress/tests.py:131:64    - Unknown word (Gumble)        -- create(name="Barney Gumble")
@@ -2132,8 +2123,7 @@ Lines:
 ./tests/migrations/models.py:19:33     - Unknown word (µóðéø)      -- verbose_name = "úñí©óðé µóðéø"
 ./tests/migrations/models.py:20:40     - Unknown word (µóðéøß)     -- name_plural = "úñí©óðé µóðéøß"
 ./tests/migrations/test_autodetector.py:1622:38   - Unknown word (oneoff)     -- alter_field_to_not_null_oneoff_default(self, mocked
-./tests/migrations/test_autodetector.py:2107:9    - Unknown word (autodetected) -- autodetected operations.
-./tests/migrations/test_autodetector.py:2504:45   - Unknown word (newauthor)    -- testapp", 0, 1, name="newauthor", table="author_three
+./tests/migrations/test_autodetector.py:2504:45   - Unknown word (newauthor)  -- testapp", 0, 1, name="newauthor", table="author_three
 ./tests/migrations/test_autodetector.py:3552:45   - Unknown word (authorunmanaged) -- testapp", 0, 0, name="authorunmanaged", options={}
 ./tests/migrations/test_autodetector.py:3790:19   - Unknown word (Uninstantiated)  -- #22951 -- Uninstantiated classes with deconstruct
 ./tests/migrations/test_autodetector.py:3993:28   - Unknown word (multistep)       -- def test_m2m_w_through_multistep_remove(self):

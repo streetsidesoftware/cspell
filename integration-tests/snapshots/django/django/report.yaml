@@ -4,8 +4,8 @@ Url: https://github.com/django/django.git
 Args: '["--issues-summary-report","**/*.{md,py}"]'
 Summary:
   files: 2778
-  filesWithIssues: 932
-  issues: 8253
+  filesWithIssues: 927
+  issues: 8221
   errors: 0
 Errors: []
 
@@ -127,7 +127,6 @@ issues:
   - "django/conf/locale/tr/formats.py:20:26          Ekim            U       \"%d %B %Y\", # '25 Ekim 2006'"
   - "django/conf/locale/uz/formats.py:18:29          Oktabr      U       %B, %Y-yil\", # '25-Oktabr, 2006-yil'"
   - "django/contrib/admin/actions.py:25:5        childs      U       childs (foreignkeys), a \"permission"
-  - "django/contrib/admin/apps.py:21:51          autodiscovery       U       for admin which does autodiscovery.\"\"\""
   - "django/contrib/admin/checks.py:19:22        classinfo       U       def _issubclass(cls, classinfo):"
   - "django/contrib/admin/helpers.py:18:32       flatatt     U       django.forms.utils import flatatt"
   - "django/contrib/admin/options.py:8:35        urlquote        U       parse import quote as urlquote"
@@ -226,7 +225,6 @@ issues:
   - "django/contrib/gis/db/models/aggregates.py:37:65        SDOAGGRTYPE     U       t wrap filters with SDOAGGRTYPE()."
   - "django/contrib/gis/db/models/aggregates.py:56:22        Geospatial      U       \"Geospatial aggregates only allowed"
   - "django/contrib/gis/db/models/functions.py:228:31        GMLGEOMETRY     U       else \"SDO_UTIL.TO_GMLGEOMETRY\""
-  - "django/contrib/gis/db/models/proxy.py:52:22         proxied     U       Retrieve the proxied geometry or raster with"
   - "django/contrib/gis/db/models/sql/conversion.py:2:45         geospatial      U       simple classes to convert geospatial values from the"
   - "django/contrib/gis/feeds.py:11:9        georss      U       def georss_coords(self, coords"
   - "django/contrib/gis/forms/widgets.py:71:32       geodjango       U       \"module\": \"geodjango_%s\" % name.replace("
@@ -658,8 +656,7 @@ issues:
   - "django/db/models/fields/__init__.py:2862:11     subclasscheck       U       def __subclasscheck__(self, subclass):"
   - "django/db/models/fields/json.py:322:7       JSONI       U       class JSONIContains(CaseInsensitiveMixin"
   - "django/db/models/fields/json.py:401:65      MDEV        U       and ->> operators (see MDEV-13594)."
-  - "django/db/models/fields/related_descriptors.py:31:69        unicity         U       is checked upstream (unicity"
-  - "django/db/models/fields/related_descriptors.py:1178:23      autocreated     U       # For non-autocreated 'through' models, can"
+  - "django/db/models/fields/related_descriptors.py:31:69        unicity     U       is checked upstream (unicity"
   - "django/db/models/fields/related.py:820:63       pushdown    U       joining and subquery pushdown. The"
   - "django/db/models/fields/related.py:885:20       FK's        U       # Internal FK's - i.e., those with a"
   - "django/db/models/functions/datetime.py:156:35       mydatetime          U       replicate this in Python: (mydatetime.isoweekday() % 7) +"
@@ -672,7 +669,6 @@ issues:
   - "django/db/models/lookups.py:567:30      thevalue        U       col LIKE %s, ['thevalue%']"
   - "django/db/models/lookups.py:571:24      othercol        U       # col LIKE othercol || '%%'"
   - "django/db/models/lookups.py:767:7       UUIDI           U       class UUIDIExact(UUIDTextMixin,"
-  - "django/db/models/options.py:137:37      proxying        U       class this model is proxying. Note that proxy_for"
   - "django/db/models/options.py:530:33      longwinded      U       The third lambda is a longwinded way of checking f.related"
   - "django/db/models/query_utils.py:23:49       somecol     U       converting lookups (fk__somecol). The contents"
   - "django/db/models/query_utils.py:94:19       subq        U       split_subq=False,"
@@ -754,7 +750,6 @@ issues:
   - "django/template/defaultfilters.py:943:22        cand            U       * If value is 0, cand{{ value|pluralize:\"y"
   - "django/template/defaulttags.py:146:35       asvar           U       init__(self, variables, asvar=None):"
   - "django/template/defaulttags.py:610:53       subtemplate     U       rowcolors }}\">{% include \"subtemplate.html \" %}</tr>"
-  - "django/template/defaulttags.py:708:51       autoescaping    U       autoescape`` tag to manage autoescaping for blocks of"
   - "django/template/defaulttags.py:1118:48      amet            U       Lorem ipsum dolor sit amet, consectetuer...\")."
   - "django/template/defaulttags.py:1118:54      consectetuer    U       ipsum dolor sit amet, consectetuer...\")."
   - "django/template/defaulttags.py:1224:21      Remler          U       * Emily Remler"
@@ -1294,12 +1289,10 @@ issues:
   - "tests/admin_views/tests.py:6433:18      Roboto                                                                      U       \"Roboto\","
   - "tests/admin_views/tests.py:6434:28      Neue                                                                        U       \"Helvetica Neue\","
   - "tests/admin_views/tests.py:6440:18      Noto                                                                        U       \"Noto Color Emoji\","
-  - "tests/admin_views/tests.py:6569:65      autocompletes                                                               U       updates_fk_selects_except_autocompletes(self):"
   - "tests/admin_views/tests.py:6931:44      readonlyrelatedfield                                                        U       admin_site}:admin_views_readonlyrelatedfield_change\", args=(obj.pk"
   - "tests/admin_views/tests.py:6983:23      onetoone                                                                    U       def test_readonly_onetoone_backwards_ref(self)"
   - "tests/admin_views/tests.py:6992:40      plotproxy                                                                   U       reverse(\"admin:admin_views_plotproxy_change\", args=(pl.pk"
   - "tests/admin_views/tests.py:7021:40      fieldoverridepost                                                           U       reverse(\"admin:admin_views_fieldoverridepost_change\", args=(p.pk"
-  - "tests/admin_views/tests.py:7039:65      autoescaped                                                                 U       elements are properly autoescaped (#24461)"
   - "tests/admin_views/tests.py:7069:9       threepwood                                                                  U       threepwood = Character.objects"
   - "tests/admin_views/tests.py:7077:63      stumpjoke                                                                   U       reverse(\"admin:admin_views_stumpjoke_add\"))"
   - "tests/admin_views/tests.py:7123:36      Kilbraken                                                                   U       objects.create(name=\"Kilbraken\", age=50, title=\"Judge"
@@ -2057,7 +2050,6 @@ issues:
   - "tests/invalid_models_tests/test_models.py:1346:24       overriden                                                                   U       def test_inherited_overriden_property_no_clash(self"
   - "tests/invalid_models_tests/test_models.py:1544:13       foos                                                                        U       foos = models.ManyToManyField"
   - "tests/invalid_models_tests/test_models.py:1698:16       aproxy                                                                      U       mm_aproxy = models.ManyToManyField"
-  - "tests/invalid_models_tests/test_ordinary_fields.py:30:35        autocreating            U       Prevent Django from autocreating `id` AutoField, which"
   - "tests/invalid_models_tests/test_ordinary_fields.py:830:13       biginteger              U       biginteger = models.BigIntegerField"
   - "tests/invalid_models_tests/test_ordinary_fields.py:832:13       positiveinteger         U       positiveinteger = models.PositiveIntegerField"
   - "tests/invalid_models_tests/test_ordinary_fields.py:833:13       positivebiginteger      U       positivebiginteger = models.PositiveBigIntegerFi"
@@ -2091,7 +2083,6 @@ issues:
   - "tests/m2m_regress/tests.py:47:14        selfreferchildsibling       U       \"selfreferchildsibling\""
   - "tests/m2m_regress/tests.py:63:70        selfrefer                   U       related.all(), [sr_sibling.selfrefer_ptr])"
   - "tests/m2m_through_regress/models.py:14:38       usermembership      U       AutoField(db_column=\"usermembership_id\", primary_key=True"
-  - "tests/m2m_through_regress/models.py:70:18       Proxied             U       through=\"ProxiedIndividualCompetitor"
   - "tests/m2m_through_regress/tests.py:125:55       Briscoe             U       objects.create(name=\"Ryan Briscoe\")"
   - "tests/m2m_through_regress/tests.py:130:64       autonumbering       U       driver to mix up the autonumbering"
   - "tests/m2m_through_regress/tests.py:131:64       Gumble              U       create(name=\"Barney Gumble\")"
@@ -2140,7 +2131,6 @@ issues:
   - "tests/migrations/test_autodetector.py:684:41        thirdapp            U       models.ForeignKey(\"thirdapp.CustomUser\", models"
   - "tests/migrations/test_autodetector.py:782:30        Authi               U       \"verbose_name\": \"Authi\","
   - "tests/migrations/test_autodetector.py:1622:38       oneoff              U       alter_field_to_not_null_oneoff_default(self, mocked"
-  - "tests/migrations/test_autodetector.py:2107:9        autodetected        U       autodetected operations."
   - "tests/migrations/test_autodetector.py:2504:45       newauthor           U       testapp\", 0, 1, name=\"newauthor\", table=\"author_three"
   - "tests/migrations/test_autodetector.py:3552:45       authorunmanaged     U       testapp\", 0, 0, name=\"authorunmanaged\", options={}"
   - "tests/migrations/test_autodetector.py:3790:19       Uninstantiated      U       #22951 -- Uninstantiated classes with deconstruct"
@@ -3158,13 +3148,6 @@ issuesSummary:
   - "text: AUTHORWITHEVENLOB, count: 1, files: 1,"
   - "text: authorwithevenlongee, count: 1, files: 1,"
   - "text: AUTHUSER, count: 2, files: 1,"
-  - "text: autocompletes, count: 1, files: 1,"
-  - "text: autocreated, count: 2, files: 2,"
-  - "text: autocreating, count: 1, files: 1,"
-  - "text: autodetected, count: 1, files: 1,"
-  - "text: autodiscovery, count: 1, files: 1,"
-  - "text: autoescaped, count: 1, files: 1,"
-  - "text: autoescaping, count: 2, files: 2,"
   - "text: autofields, count: 2, files: 2,"
   - "text: autom, count: 3, files: 1,"
   - "text: autonumbering, count: 1, files: 1,"
@@ -4879,9 +4862,6 @@ issuesSummary:
   - "text: projcs, count: 2, files: 1,"
   - "text: PROJCS, count: 9, files: 3,"
   - "text: projectname, count: 1, files: 1,"
-  - "text: proxied, count: 19, files: 10,"
-  - "text: Proxied, count: 2, files: 1,"
-  - "text: proxying, count: 2, files: 2,"
   - "text: proxypony, count: 5, files: 1,"
   - "text: proxys, count: 6, files: 2,"
   - "text: proxytrackeruser, count: 2, files: 1,"

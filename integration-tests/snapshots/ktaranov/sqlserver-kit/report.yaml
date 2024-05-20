@@ -4,8 +4,8 @@ Url: https://github.com/ktaranov/sqlserver-kit.git
 Args: '["**","--exclude=**/Backup/**"]'
 Summary:
   files: 489
-  filesWithIssues: 457
-  issues: 14723
+  filesWithIssues: 456
+  issues: 14541
   errors: 0
 Errors: []
 
@@ -44,7 +44,6 @@ issues:
   - "Articles/README.md:71:4         TSQL                    U       | [TSQL JOIN Types Poster]"
   - "Articles/README.md:76:125       Derik                   U       | Derik Hammer"
   - "Articles/README.md:77:131       Rudduck                 U       | Angie Rudduck"
-  - "Articles/README.md:79:33        NOLOCK                  U       Understanding the SQL Server NOLOCK hint]"
   - "Articles/README.md:79:130       Robidoux                U       | Greg Robidoux"
   - "Articles/README.md:82:135       Norheim                 U       | Hans Olav Norheim"
   - "Articles/README.md:83:125       Sanjay                  U       | Sanjay Mishra"
@@ -603,7 +602,6 @@ issues:
   - "Extended_Events/system_health_azure.sql:93:32       NETVALIDATEPASSWORDPOLICY           U       type = N'PREEMPTIVE_OS_NETVALIDATEPASSWORDPOLICY'"
   - "Extended_Events/system_health_azure.sql:94:33       CREATESNAPSHOT                      U       type = N'PREEMPTIVE_VSS_CREATESNAPSHOT')))))"
   - "Extended_Events/system_health.sql:7:11          sqlclr      U       ADD EVENT sqlclr.clr_allocation_failure"
-  - "Extended_Events/system_health.sql:9:30          alloc       U       EVENT sqlclr.clr_virtual_alloc_failure("
   - "Extended_Events/system_health.sql:17:48         iocp        U       monitor_non_yielding_iocp_ring_buffer_recorded"
   - "Extended_Events/TrackApiCursor.sql:19:60        Missle (Missile)    U       name]=N'Steely-Eyed-Missle-Man'"
   - "Extended_Events/TrackApiCursor.sql:91:57        xfer                U       \"attach_activity_id_xfer\"]/value)[1]', 'varchar"
@@ -932,7 +930,6 @@ issues:
   - "PowerShell/ResetSqlSaPassword.psm1:254:6        netstart            U       $netstart = net start \"\"$displayname"
   - "PowerShell/ResetSqlSaPassword.psm1:254:30       displayname         U       netstart = net start \"\"$displayname\"\" /mReset-SqlSaPassword"
   - "PowerShell/ResetSqlSaPassword.psm1:308:29       regwrite            U       = \"EXEC xp_instance_regwrite N'HKEY_LOCAL_MACHINE"
-  - "PowerShell/ResetSqlSaPassword.psm1:308:126      DWORD               U       , N'LoginMode', REG_DWORD, 2\""
   - "PowerShell/ResetSqlSaPassword.psm1:323:107      syadmin             U       Warning \"Couldn't add to syadmin role.\" }"
   - "PowerShell/Scripting_Out_SQL_Server_Data_As_Insert_Statements.ps1:33:55         statments           U       and generate INSERT statments if false. Default false"
   - "PowerShell/Scripting_Out_SQL_Server_Data_As_Insert_Statements.ps1:46:17         maste               U       $Databases = @('maste*', 'model'); <# the"
@@ -1536,7 +1533,6 @@ issues:
   - "Scripts/Find_Weak_Passwords.sql:65:3        starwars        U       ('starwars'),"
   - "Scripts/Find_Weak_Passwords.sql:66:3        qwertyuiop      U       ('qwertyuiop'),"
   - "Scripts/Find_Weak_Passwords.sql:67:3        qazwsx          U       ('qazwsx'),"
-  - "Scripts/Find_Weak_Passwords.sql:75:24       nolock          U       sys.sql_logins sl (nolock)"
   - "Scripts/Find_Weak_Passwords.sql:78:5        PWDCOMPARE      U       PWDCOMPARE(cp.Password, sl.password"
   - "Scripts/FindDBConnectionLeaks.sql:24:34         SERV    U       host_name sysname = N'SERV4102';"
   - "Scripts/Finding_Host_Names_for_Failed_login_attempts.sql:3:122          nslookup            U       machine name by running nslookup against the IP address"
@@ -1613,7 +1609,6 @@ issues:
   - "Scripts/IdentifyObjectNameForCreateAndAlterUsingFn_dblog.sql:29:10          tranid              U       DECLARE @tranid NVARCHAR(28);"
   - "Scripts/IdentifyObjectNameForCreateAndAlterUsingFn_dblog.sql:30:10          loopcount           U       DECLARE @loopcount INT = 1;"
   - "Scripts/IdentifyObjectNameForCreateAndAlterUsingFn_dblog.sql:31:10          looplimit           U       DECLARE @looplimit INT;"
-  - "Scripts/IdentifyObjectNameForCreateAndAlterUsingFn_dblog.sql:42:78          Alloc               U       operation, Context, AllocUnitName, AllocUnitId"
   - "Scripts/IdentifyObjectNameForCreateAndAlterUsingFn_dblog.sql:64:14          lockinfo            U       DECLARE @lockinfo NVARCHAR(300);"
   - "Scripts/IdentifyObjectNameForCreateAndAlterUsingFn_dblog.sql:65:14          startingposition    U       DECLARE @startingposition INT;"
   - "Scripts/IdentifyObjectNameForCreateAndAlterUsingFn_dblog.sql:66:14          endingposition      U       DECLARE @endingposition INT;"
@@ -1758,7 +1753,6 @@ issues:
   - "Scripts/Security_Audit_Report.sql:155:14        roleprinc                   U       [Role] = roleprinc.[name],"
   - "Scripts/Server_Parameters.sql:18:10         tracestatus     U       DECLARE @tracestatus table("
   - "Scripts/Server_Parameters.sql:56:59         xact            U       table VALUES('in-doubt xact resolution',0,0);"
-  - "Scripts/Server_Parameters.sql:72:50         precompute      U       option_table VALUES('precompute rank',0,0);"
   - "Scripts/Server_Parameters.sql:84:67         procs           U       VALUES('scan for startup procs',0,0);"
   - "Scripts/Server_Parameters.sql:98:38         Traceflag       U       tracestatus set TraceFlag = 'Traceflag ('+TraceFlag+')';"
   - "Scripts/Show all permissions in a database.sql:183:18       bulkadmin           U       sp.[name]='bulkadmin' AND"
@@ -2860,7 +2854,6 @@ issues:
   - "Stored_Procedure/dbo.sp_RestoreGene.sql:1051:11     logfileid                   U       ) logfileid"
   - "Stored_Procedure/dbo.sp_RestoreGene.sql:1496:48     Multipe                     U       CommentOut = 1 THEN ' -- Multipe backup fork points detected"
   - "Stored_Procedure/dbo.sp_RestoreGene.sql:1686:248    Withove                     U       nvarchar(max)'), 1,1,'') AS WithoveCmds"
-  - "Stored_Procedure/dbo.sp_RestoreGene.sql:1686:255    Cmds                        U       , 1,1,'') AS WithoveCmds"
   - "Stored_Procedure/dbo.sp_RestoreScript.sql:18:42         useage (usage)      U       See @PointInTime for useage of @RestoreToDate."
   - "Stored_Procedure/dbo.sp_RestoreScript.sql:41:53         sqlundercover       U       can be found at www.sqlundercover.com"
   - "Stored_Procedure/dbo.sp_RestoreScript.sql:71:88         doens't             U       both hold a value (why doens't SQL Server give us an"

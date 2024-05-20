@@ -5,7 +5,7 @@ Args: '["--config=${repoConfig}/cspell.json","**/*.{md,c,h,php}"]'
 Summary:
   files: 2172
   filesWithIssues: 1643
-  issues: 43483
+  issues: 43462
   errors: 0
 Errors: []
 
@@ -3650,7 +3650,6 @@ issues:
   - "ext/odbc/php_odbc_includes.h:13:20          Sæther              U       | Authors: Stig Sæther Bakken <ssb@php.net"
   - "ext/odbc/php_odbc_includes.h:45:9           SQLSMALLINT         U       #define SQLSMALLINT SWORD"
   - "ext/odbc/php_odbc_includes.h:46:9           SQLUSMALLINT        U       #define SQLUSMALLINT UWORD"
-  - "ext/odbc/php_odbc_includes.h:46:22          UWORD               U       define SQLUSMALLINT UWORD"
   - "ext/odbc/php_odbc_includes.h:66:9           SQLINTEGER          U       #define SQLINTEGER ULONG"
   - "ext/odbc/php_odbc_includes.h:84:8           SQLCHAR             U       #ifdef SQLCHAR"
   - "ext/odbc/php_odbc_includes.h:110:30         Easysoft            U       defined(HAVE_ESOOB) /* Easysoft ODBC-ODBC Bridge library"
@@ -4400,7 +4399,6 @@ issues:
   - "ext/opcache/jit/ir/ir_disasm.c:280:28       STRH            U       insn->id == ARM64_INS_STRH) {"
   - "ext/opcache/jit/ir/ir_disasm.c:332:5        hashtab         U       ir_hashtab labels;"
   - "ext/opcache/jit/ir/ir_disasm.c:368:7        DISASM          U       # if DISASM_INTEL_SYNTAX"
-  - "ext/opcache/jit/ir/ir_disasm.c:704:23       qword           U       fprintf(f, \"\\t.qword .ENTRY_%d\\n\", entry"
   - "ext/opcache/jit/ir/ir_disasm.c:755:46       sectheader      U       sect(int fd, ir_elf_sectheader *sect)"
   - "ext/opcache/jit/ir/ir_disasm.c:806:11       emagic          U       && hdr.emagic[0] == '\\177'"
   - "ext/opcache/jit/ir/ir_disasm.c:810:21       shofs           U       && lseek(fd, hdr.shofs, SEEK_SET) >= 0) {"
@@ -4776,7 +4774,6 @@ issues:
   - "ext/openssl/xp_ssl.c:418:59         subjectname         U       wildcard_name(const char *subjectname, const char *certname"
   - "ext/openssl/xp_ssl.c:418:84         certname            U       subjectname, const char *certname) /* {{{ */"
   - "ext/openssl/xp_ssl.c:457:7          ipbuffer            U       char ipbuffer[64];"
-  - "ext/openssl/xp_ssl.c:632:47         autodetected        U       specified we use the autodetected url name in client environmen"
   - "ext/openssl/xp_ssl.c:677:2          PCCERT              U       PCCERT_CONTEXT cert_ctx = NULL"
   - "ext/openssl/xp_ssl.c:719:8          ENHKEY              U       CERT_ENHKEY_USAGE enhkey_usage"
   - "ext/openssl/xp_ssl.c:719:21         enhkey              U       CERT_ENHKEY_USAGE enhkey_usage = {0};"
@@ -8272,14 +8269,12 @@ issues:
   - "run-tests.php:21:33         Bakken              U       on version by: Stig Bakken <ssb@php.net>)"
   - "run-tests.php:22:44         Rasmus              U       3 test framework by Rasmus Lerdorf)"
   - "run-tests.php:22:51         Lerdorf             U       framework by Rasmus Lerdorf) |"
-  - "run-tests.php:43:26         testfiles           U       l <file> Read the testfiles to be executed from"
   - "run-tests.php:64:47         XFAIL               U       values: PASS, FAIL, XFAIL, XLEAK, SKIP, BORK,"
   - "run-tests.php:64:54         XLEAK               U       PASS, FAIL, XFAIL, XLEAK, SKIP, BORK, WARN, LEAK"
   - "run-tests.php:90:20         sdir                U       --temp-source <sdir> --temp-target <tdir"
   - "run-tests.php:90:42         tdir                U       sdir> --temp-target <tdir> [--temp-urlbase <url"
   - "run-tests.php:90:56         urlbase             U       target <tdir> [--temp-urlbase <url>]"
   - "run-tests.php:139:43        überfunction        U       point and exit point überfunction. It contains all the"
-  - "run-tests.php:156:52        testfile            U       idx, $test_results, $testfile,"
   - "run-tests.php:179:26        SRCDIR              U       if (getenv('TEST_PHP_SRCDIR')) {"
   - "run-tests.php:208:74        GPCS                U       set variables_order=\"GPCS\""
   - "run-tests.php:244:24        LEODS               U       $log_format = 'LEODS';"

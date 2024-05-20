@@ -3,7 +3,7 @@ Repository: php/php-src
 Url: "https://github.com/php/php-src.git"
 Args: ["--config=../../../../config/repositories/php/php-src/cspell.json","**/*.{md,c,h,php}"]
 Lines:
- CSpell: Files checked: 2172, Issues found: 43483 in 1643 files.
+ CSpell: Files checked: 2172, Issues found: 43462 in 1643 files.
  exit code: 1
 ./CODING_STANDARDS.md:105:23    - Unknown word (intvl)        -- // Could be 'date_intvl_create_from_date_str
 ./CODING_STANDARDS.md:114:8     - Unknown word (setclientencoding) -- pg_setclientencoding
@@ -4039,7 +4039,6 @@ Lines:
 ./ext/odbc/php_odbc_includes.h:276:37    - Unknown word (phstmt)          -- ODBC_SQLALLOCSTMT(hdbc, phstmt) SQLAllocHandle(SQL
 ./ext/odbc/php_odbc_includes.h:290:9     - Unknown word (ODBCG)           -- #define ODBCG(v) ZEND_MODULE_GLOBALS
 ./ext/odbc/php_odbc_includes.h:45:9      - Unknown word (SQLSMALLINT) -- #define SQLSMALLINT SWORD
-./ext/odbc/php_odbc_includes.h:46:22     - Unknown word (UWORD)        -- define SQLUSMALLINT UWORD
 ./ext/odbc/php_odbc_includes.h:46:9      - Unknown word (SQLUSMALLINT) -- #define SQLUSMALLINT UWORD
 ./ext/odbc/php_odbc_includes.h:66:9      - Unknown word (SQLINTEGER)   -- #define SQLINTEGER ULONG
 ./ext/odbc/php_odbc_includes.h:84:8      - Unknown word (SQLCHAR)      -- #ifdef SQLCHAR
@@ -4766,7 +4765,6 @@ Lines:
 ./ext/opcache/jit/ir/ir_disasm.c:368:7     - Unknown word (DISASM)      -- # if DISASM_INTEL_SYNTAX
 ./ext/opcache/jit/ir/ir_disasm.c:3:27      - Unknown word (libcapstone) -- Disassembler based on libcapstone)
 ./ext/opcache/jit/ir/ir_disasm.c:62:21     - Unknown word (rotateright) -- static void ir_syms_rotateright(ir_sym_node *p)
-./ext/opcache/jit/ir/ir_disasm.c:704:23    - Unknown word (qword)       -- fprintf(f, "\t.qword .ENTRY_%d\n", entry
 ./ext/opcache/jit/ir/ir_disasm.c:755:46    - Unknown word (sectheader)  -- sect(int fd, ir_elf_sectheader *sect)
 ./ext/opcache/jit/ir/ir_disasm.c:806:11    - Unknown word (emagic)      -- && hdr.emagic[0] == '\177'
 ./ext/opcache/jit/ir/ir_disasm.c:810:21    - Unknown word (shofs)       -- && lseek(fd, hdr.shofs, SEEK_SET) >= 0) {
@@ -5113,11 +5111,10 @@ Lines:
 ./ext/openssl/xp_ssl.c:418:84    - Unknown word (certname)    -- subjectname, const char *certname) /* {{{ */
 ./ext/openssl/xp_ssl.c:44:19     - Unknown word (Wincrypt)   -- /* These are from Wincrypt.h, they conflict with
 ./ext/openssl/xp_ssl.c:457:7     - Unknown word (ipbuffer)    -- char ipbuffer[64];
-./ext/openssl/xp_ssl.c:632:47    - Unknown word (autodetected) -- specified we use the autodetected url name in client environmen
-./ext/openssl/xp_ssl.c:677:2     - Unknown word (PCCERT)       -- PCCERT_CONTEXT cert_ctx = NULL
-./ext/openssl/xp_ssl.c:719:21    - Unknown word (enhkey)       -- CERT_ENHKEY_USAGE enhkey_usage = {0};
-./ext/openssl/xp_ssl.c:719:8     - Unknown word (ENHKEY)       -- CERT_ENHKEY_USAGE enhkey_usage
-./ext/openssl/xp_ssl.c:728:16    - Unknown word (rgpsz)        -- enhkey_usage.rgpszUsageIdentifier = usages
+./ext/openssl/xp_ssl.c:677:2     - Unknown word (PCCERT)      -- PCCERT_CONTEXT cert_ctx = NULL
+./ext/openssl/xp_ssl.c:719:21    - Unknown word (enhkey)      -- CERT_ENHKEY_USAGE enhkey_usage = {0};
+./ext/openssl/xp_ssl.c:719:8     - Unknown word (ENHKEY)      -- CERT_ENHKEY_USAGE enhkey_usage
+./ext/openssl/xp_ssl.c:728:16    - Unknown word (rgpsz)       -- enhkey_usage.rgpszUsageIdentifier = usages
 ./ext/openssl/xp_ssl.c:786:64    - Unknown word (UNTRUSTEDROOT) -- status.dwError == CERT_E_UNTRUSTEDROOT
 ./ext/pcntl/pcntl.c:1396:15   - Unknown word (RFMEM)       -- if ((flags & RFMEM) != 0) {
 ./ext/pcntl/pcntl.c:1401:15   - Unknown word (RFSIGSHARE)  -- if ((flags & RFSIGSHARE) != 0) {
@@ -8595,7 +8592,6 @@ Lines:
 ./run-tests.php:1341:12   - Unknown word (Procs)        -- $workerProcs = [];
 ./run-tests.php:139:43    - Unknown word (überfunction) -- point and exit point überfunction. It contains all the
 ./run-tests.php:1493:76   - Unknown word (stdouts)      -- stdout in array of worker stdouts, THIS SHOULD NOT HAPPEN
-./run-tests.php:156:52    - Unknown word (testfile)     -- idx, $test_results, $testfile,
 ./run-tests.php:15:20     - Unknown word (Alshanetsky) -- | Authors: Ilia Alshanetsky <iliaa@php.net>
 ./run-tests.php:1628:157  - Unknown word (errline)      -- errfile] on line $message[errline]");
 ./run-tests.php:1632:36   - Unknown word (Unrecognised) -- error("Unrecognised message type '$message
@@ -8643,7 +8639,6 @@ Lines:
 ./run-tests.php:3800:10   - Unknown word (secfile)       -- $secfile = false;
 ./run-tests.php:3801:10   - Unknown word (secdone)       -- $secdone = false;
 ./run-tests.php:3937:39   - Unknown word (Bergmann)      -- 002-2023, Sebastian Bergmann
-./run-tests.php:43:26     - Unknown word (testfiles)   -- l <file>   Read the testfiles to be executed from
 ./run-tests.php:469:37    - Unknown word (Runtests)     -- $valgrind = new RuntestsValgrind($environment
 ./run-tests.php:575:44    - Unknown word (MSAN)         -- $environment['SKIP_MSAN'] = 1;
 ./run-tests.php:579:22    - Unknown word (lsan)         -- $lsanSuppressions = __DIR
