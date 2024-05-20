@@ -5,7 +5,7 @@ Args: '["**/*.*"]'
 Summary:
   files: 103
   filesWithIssues: 98
-  issues: 3240
+  issues: 3226
   errors: 0
 Errors: []
 
@@ -259,8 +259,6 @@ issues:
   - "Engine/neo-api-physx.ads:964:60         verts                       U       CreateConvexMesh(const Point* verts, udword vertCount, PxConvexFl"
   - "Engine/neo-api-physx.ads:964:67         udword                      U       const Point* verts, udword vertCount, PxConvexFlags"
   - "Engine/neo-api-physx.ads:995:88         TWOPI                       U       jc.mMaxLimitAngle, TWOPI));"
-  - "Engine/neo-api-physx.ads:1035:48        Precompute                  U       shPreprocessParams = mParams.mPrecomputeActiveEdges ? PxMeshPreprocess"
-  - "Engine/neo-api-physx.ads:1035:149       PRECOMPUTE                  U       eDISABLE_ACTIVE_EDGES_PRECOMPUTE;"
   - "Engine/neo-api-vulkan.adb:19:22         Vulkan          U       package body Neo.API.Vulkan is"
   - "Engine/neo-api-vulkan.adb:107:17        Subresource     U       vkGetImageSubresourceLayout"
   - "Engine/neo-api-vulkan.adb:125:15        Swapchain       U       vkCreateSwapchainKHR"
@@ -448,7 +446,6 @@ issues:
   - "Engine/neo-api-windows.ads:651:67       PUINT                   U       Ptr) -- PUINT"
   - "Engine/neo-api-windows.ads:657:53       LPCSTR                  U       lpProcName : Str_8_C) -- LPCSTR"
   - "Engine/neo-api-windows.ads:658:53       FARPROC                 U       return Ptr -- FARPROC"
-  - "Engine/neo-api-windows.ads:705:18       Alloc                   U       function GlobalAlloc (uFlags : Int_Unsigned"
   - "Engine/neo-api-windows.ads:750:27       pfwi                    U       function FlashWindowEx (pfwi : access FLASHWINFO"
   - "Engine/neo-api-windows.ads:750:56       PFLASHWINFO             U       access FLASHWINFO) -- PFLASHWINFO"
   - "Engine/neo-api-windows.ads:763:82       LPSTARTUPINFO           U       STARTUPINFO; -- LPSTARTUPINFO"
@@ -488,7 +485,6 @@ issues:
   - "Engine/neo-api-zdelta.ads:32:26         voidpc          U       typedef void *const voidpc;"
   - "Engine/neo-api-zdelta.ads:72:6          ERRNO           U       ZD_ERRNO : constant Int"
   - "Engine/neo-api-zdelta.ads:80:3          ZDLIB           U       ZDLIB_VERSION : constant String"
-  - "Engine/neo-api-zdelta.ads:87:8          alloc           U       type alloc_func is access function"
   - "Engine/neo-api-zdelta.ads:104:29        Bytef           U       next_in : := ; -- Bytef*"
   - "Engine/neo-api-zdelta.ads:110:36        REFNUM          U       : := ; -- Bytef*[REFNUM]"
   - "Engine/neo-api-zdelta.ads:113:7         refnum          U       refnum : Int_C := ; --"
@@ -803,7 +799,6 @@ issues:
   - "Engine/neo-world-physics.ads:758:19         Raycasts        U       bool mSupportRaycasts;"
   - "Engine/neo-world-physics.ads:884:14         RAYTRACING      U       PINT_HAS_RAYTRACING_WINDOW = (1<<1),"
   - "Engine/neo-world-physics.ads:916:105        raycasts        U       const PintRaycastData* raycasts, void**)"
-  - "Engine/neo-world-physics.ads:1785:25        Allocs          U       udword mTotalNbAllocs;"
   - "Engine/neo-world-physics.ads:1839:25        BROADPHASE      U       ifdef PHYSX_SUPPORT_PX_BROADPHASE_TYPE"
   - "Engine/neo-world-physics.ads:1848:22        RAYCAST         U       ifdef PHYSX_SUPPORT_RAYCAST_CCD"
   - "Engine/neo-world-physics.ads:1873:22        SUBSTEPS        U       ifdef PHYSX_SUPPORT_SUBSTEPS"

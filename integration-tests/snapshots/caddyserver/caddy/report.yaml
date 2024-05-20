@@ -5,7 +5,7 @@ Args: '["**/*.go"]'
 Summary:
   files: 269
   filesWithIssues: 250
-  issues: 4028
+  issues: 4010
   errors: 0
 Errors: []
 
@@ -36,7 +36,6 @@ issues:
   - "caddyconfig/caddyfile/adapter.go:26:19          Caddyfile       U       // Adapter adapts Caddyfile to Caddy JSON."
   - "caddyconfig/caddyfile/adapter.go:98:41          unmarshaled     U       into JSON. Caddyfile-unmarshaled values will not"
   - "caddyconfig/caddyfile/adapter.go:130:17         Errf            U       return nil, d.Errf(\"getting module named"
-  - "caddyconfig/caddyfile/dispenser_test.go:300:37      Testfile    U       Contains(err.Error(), \"Testfile:3\") {"
   - "caddyconfig/caddyfile/dispenser.go:35:41        unmarshalers    U       some information to unmarshalers."
   - "caddyconfig/caddyfile/dispenser.go:111:2        curr            U       curr := d.tokens[d.cursor"
   - "caddyconfig/caddyfile/dispenser.go:211:40       unmarshaling    U       not relevant to any unmarshaling logic at this time."
@@ -256,7 +255,6 @@ issues:
   - "modules/caddyhttp/proxyprotocol/policy.go:64:38         unmarshaller    U       implements the text unmarshaller method."
   - "modules/caddyhttp/requestbody/caddyfile.go:15:9         requestbody     U       package requestbody"
   - "modules/caddyhttp/responsewriter_test.go:22:6           barebones       U       // a barebones http.ResponseWriter"
-  - "modules/caddyhttp/reverseproxy/addresses.go:104:20      proxying    U       // a backend and proxying to it, so we cannot"
   - "modules/caddyhttp/reverseproxy/caddyfile.go:608:5       usize       U       usize, err := humanize.ParseBytes"
   - "modules/caddyhttp/reverseproxy/fastcgi/client_test.go:50:26         fcgic       U       scriptFile = \"/tank/www/fcgic_test.php\""
   - "modules/caddyhttp/reverseproxy/fastcgi/client_test.go:51:26         serv        U       ipPort = \"remote-php-serv:59000\""
@@ -268,7 +266,6 @@ issues:
   - "modules/caddyhttp/reverseproxy/fastcgi/client.go:45:18          Fileno      U       // FCGIListenSockFileno describes listen socket"
   - "modules/caddyhttp/reverseproxy/fastcgi/client.go:113:27         MPXS        U       MultiplexConns string = \"MPXS_CONNS\""
   - "modules/caddyhttp/reverseproxy/forwardauth/caddyfile.go:15:9        forwardauth     U       package forwardauth"
-  - "modules/caddyhttp/reverseproxy/healthchecks.go:47:35        proxied         U       health checks monitor proxied requests for errors"
   - "modules/caddyhttp/reverseproxy/healthchecks.go:529:71       forgetter       U       health check failure forgetter panicked\","
   - "modules/caddyhttp/reverseproxy/httptransport_test.go:13:22          MIID                U       const test_der_1 = `MIIDSzCCAjOgAwIBAgIUfIRObjWNUA"
   - "modules/caddyhttp/reverseproxy/httptransport_test.go:13:48          WNUA                U       MIIDSzCCAjOgAwIBAgIUfIRObjWNUA4jxQ/0x8BOCvE2Vw4wDQYJKoZIhvcN"

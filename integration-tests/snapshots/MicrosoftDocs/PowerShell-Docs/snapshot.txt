@@ -3,7 +3,7 @@ Repository: MicrosoftDocs/PowerShell-Docs
 Url: "https://github.com/MicrosoftDocs/PowerShell-Docs.git"
 Args: ["--config=../../../cspell-power-shell-docs.config.yaml","**"]
 Lines:
- CSpell: Files checked: 2673, Issues found: 5576 in 1244 files.
+ CSpell: Files checked: 2673, Issues found: 5413 in 1233 files.
  exit code: 1
 ./LICENSE:139:15    - Unknown word (sublicensable)   -- non-sublicensable, non-exclusive, irrevocable
 ./LICENSE:205:34    - Unknown word (waivable)        -- under any voluntary or waivable statutory or compulsory
@@ -49,7 +49,6 @@ Lines:
 ./reference/5.1/Microsoft.PowerShell.Core/About/about_Arithmetic_Operators.md:229:11    - Unknown word (minvalue)   -- ([int32]::minvalue + [uint32]::maxvalue
 ./reference/5.1/Microsoft.PowerShell.Core/About/about_Arithmetic_Operators.md:229:32    - Unknown word (maxvalue)   -- minvalue + [uint32]::maxvalue).gettype().fullname
 ./reference/5.1/Microsoft.PowerShell.Core/About/about_Arithmetic_Operators.md:229:42    - Unknown word (gettype)    -- [uint32]::maxvalue).gettype().fullname
-./reference/5.1/Microsoft.PowerShell.Core/About/about_Arithmetic_Operators.md:263:25    - Unknown word (ulong)      -- Casting the result to `[ulong]` yields an inaccurate
 ./reference/5.1/Microsoft.PowerShell.Core/About/about_Arithmetic_Operators.md:358:30    - Unknown word (filefilefile) -- 3 # result = "filefilefile"
 ./reference/5.1/Microsoft.PowerShell.Core/About/about_Arrays.md:345:20    - Unknown word (Longlength) -- **Count** alias. **Longlength** is useful if the array
 ./reference/5.1/Microsoft.PowerShell.Core/About/about_Arrays.md:787:51    - Unknown word (Instrinsic) -- members, see [about_Instrinsic_Members][08].
@@ -99,7 +98,6 @@ Lines:
 ./reference/5.1/Microsoft.PowerShell.Core/About/about_Language_Modes.md:276:5     - Unknown word (pslistmodifier) -- - `[pslistmodifier]`
 ./reference/5.1/Microsoft.PowerShell.Core/About/about_Language_Modes.md:278:5     - Unknown word (psprimitivedictionary) -- - `[psprimitivedictionary]`
 ./reference/5.1/Microsoft.PowerShell.Core/About/about_Language_Modes.md:283:5     - Unknown word (securestring)          -- - `[securestring]`
-./reference/5.1/Microsoft.PowerShell.Core/About/about_Language_Modes.md:297:5     - Unknown word (ushort)                -- - `[ushort]`
 ./reference/5.1/Microsoft.PowerShell.Core/About/about_Language_Modes.md:313:5     - Unknown word (wmiclass)              -- - `[wmiclass]`
 ./reference/5.1/Microsoft.PowerShell.Core/About/about_Language_Modes.md:314:5     - Unknown word (wmisearcher)           -- - `[wmisearcher]`
 ./reference/5.1/Microsoft.PowerShell.Core/About/about_Modules.md:107:11    - Unknown word (autoloading) -- ## Module autoloading
@@ -124,7 +122,6 @@ Lines:
 ./reference/5.1/Microsoft.PowerShell.Core/About/about_Profiles.md:219:4     - Unknown word (hosttime)   -- $hosttime = (Get-ChildItem -Path
 ./reference/5.1/Microsoft.PowerShell.Core/About/about_Profiles.md:220:4     - Unknown word (hostversion) -- $hostversion="$($Host.Version.Major
 ./reference/5.1/Microsoft.PowerShell.Core/About/about_Redirection.md:80:10     - Unknown word (fakepath)   -- dir C:\, fakepath 2>&1 > .\dir.log
-./reference/5.1/Microsoft.PowerShell.Core/About/about_Regular_Expressions.md:328:34    - Unknown word (keyname)       -- capturing group, use `?<keyname>` to store captured
 ./reference/5.1/Microsoft.PowerShell.Core/About/about_Regular_Expressions.md:38:32     - Unknown word (csplit)     -- , `-creplace`, or `-csplit`
 ./reference/5.1/Microsoft.PowerShell.Core/About/about_Regular_Expressions.md:39:41     - Unknown word (casesensitive) -- statement, use the `-casesensitive` option
 ./reference/5.1/Microsoft.PowerShell.Core/About/about_Remote_Troubleshooting.md:393:33    - Unknown word (trustedhosts) -- wsman:localhost\client\trustedhosts -Value *
@@ -275,14 +272,10 @@ Lines:
 ./reference/5.1/Microsoft.PowerShell.Management/Get-Service.md:73:1      - Unknown word (xmlprov)    -- xmlprov, the Network Provisioning
 ./reference/5.1/Microsoft.PowerShell.Management/Get-Service.md:76:14     - Unknown word (Displayname) -- Get-Service -Displayname "*network*"
 ./reference/5.1/Microsoft.PowerShell.Management/Get-Transaction.md:80:14     - Unknown word (hklm)       -- Set-Location hklm:\software
-./reference/5.1/Microsoft.PowerShell.Management/Get-WmiObject.md:234:56    - Unknown word (localizable) -- amended information is localizable information, such as
-./reference/5.1/Microsoft.PowerShell.Management/Get-WmiObject.md:311:69    - Unknown word (ntlmdomain)  -- authority setting to `ntlmdomain:<DomainName>`, where
-./reference/5.1/Microsoft.PowerShell.Management/Get-WmiObject.md:624:4     - Unknown word (gwmi)        -- - `gwmi`
+./reference/5.1/Microsoft.PowerShell.Management/Get-WmiObject.md:311:69    - Unknown word (ntlmdomain) -- authority setting to `ntlmdomain:<DomainName>`, where
+./reference/5.1/Microsoft.PowerShell.Management/Get-WmiObject.md:624:4     - Unknown word (gwmi)       -- - `gwmi`
 ./reference/5.1/Microsoft.PowerShell.Management/Invoke-WmiMethod.md:105:3     - Unknown word (Wmiclass)   -- ([Wmiclass]'Win32_Process').Create
 ./reference/5.1/Microsoft.PowerShell.Management/Invoke-WmiMethod.md:554:4     - Unknown word (iwmi)       -- - `iwmi`
-./reference/5.1/Microsoft.PowerShell.Management/Join-Path.md:32:44     - Unknown word (childpath)  -- Path "path" -ChildPath "childpath"
-./reference/5.1/Microsoft.PowerShell.Management/Move-Item.md:89:38     - Unknown word (Textfiles)  -- are to be moved to `C:\Textfiles` have the same name
-./reference/5.1/Microsoft.PowerShell.Management/New-Item.md:79:49     - Unknown word (testfile)   -- file that is named "testfile1.txt" in the current
 ./reference/5.1/Microsoft.PowerShell.Management/New-ItemProperty.md:100:11    - Unknown word (multistring) -- $newValue.multistring
 ./reference/5.1/Microsoft.PowerShell.Management/New-Service.md:62:57     - Unknown word (testservice) -- Service -Filter "Name='testservice'"
 ./reference/5.1/Microsoft.PowerShell.Management/New-Service.md:96:64     - Unknown word (myservice)   -- example, `d:\my share\myservice.exe` should be specified
@@ -306,7 +299,6 @@ Lines:
 ./reference/5.1/Microsoft.PowerShell.Security/Set-AuthenticodeSignature.md:94:46     - Unknown word (Mysign)     -- Certificate -FilePath C:\Test\Mysign.pfx
 ./reference/5.1/Microsoft.PowerShell.Utility/Add-Type.md:315:40    - Unknown word (beginprint) -- n <= 0 then () else beginprint_endline (string_of_int
 ./reference/5.1/Microsoft.PowerShell.Utility/Add-Type.md:315:51    - Unknown word (endline)    -- then () else beginprint_endline (string_of_int n);loop
-./reference/5.1/Microsoft.PowerShell.Utility/Compare-Object.md:51:4      - Unknown word (Testfile)   -- - `Testfile1.txt` contains the values
 ./reference/5.1/Microsoft.PowerShell.Utility/Convert-String.md:31:42     - Unknown word (Akers)      -- , "David Ahs", "Kim Akers" | Convert-String -Example
 ./reference/5.1/Microsoft.PowerShell.Utility/ConvertFrom-StringData.md:176:1     - Unknown word (Vincentio)  -- Vincentio = Heaven doth with us
 ./reference/5.1/Microsoft.PowerShell.Utility/ConvertFrom-StringData.md:176:133   - Unknown word (twere)      -- not go forth of us, 'twere all alike\nAs if we
@@ -412,8 +404,6 @@ Lines:
 ./reference/7.2/Microsoft.PowerShell.Core/About/about_Logging_Non-Windows.md:138:2     - Unknown word (journalctl) -- `journalctl` utility to query the
 ./reference/7.2/Microsoft.PowerShell.Core/About/about_Logging_Non-Windows.md:153:18    - Unknown word (rsyslog)    -- server such as **rsyslog** if you want to use
 ./reference/7.2/Microsoft.PowerShell.Core/About/about_Logging_Non-Windows.md:181:5     - Unknown word (MACHINENAME) -- - **MACHINENAME** - The name of the
-./reference/7.2/Microsoft.PowerShell.Core/About/about_Logging_Non-Windows.md:183:5     - Unknown word (COMMITID)    -- - **COMMITID** - The **git commit
-./reference/7.2/Microsoft.PowerShell.Core/About/about_Logging_Non-Windows.md:188:5     - Unknown word (EVENTID)     -- - **EVENTID** - The event identifier
 ./reference/7.2/Microsoft.PowerShell.Core/About/about_Logging_Non-Windows.md:218:5     - Unknown word (syslogtag)   -- :syslogtag, contains, "powershell
 ./reference/7.2/Microsoft.PowerShell.Core/About/about_Logging_Non-Windows.md:46:4      - Unknown word (psrl)       -- $psrl = Get-Module PSReadLine
 ./reference/7.2/Microsoft.PowerShell.Core/About/about_Numeric_Literals.md:120:15    - Unknown word (usgb)       -- the literal `1usgb` is malformed, because
@@ -448,7 +438,6 @@ Lines:
 ./reference/7.2/Microsoft.PowerShell.Management/Test-Connection.md:44:43     - Unknown word (Traceroute) -- TargetName] <string[]> -Traceroute [-IPv4] [-IPv6] [-ResolveDest
 ./reference/7.2/Microsoft.PowerShell.Management/Test-Connection.md:499:27    - Unknown word (traceroute) -- Causes the cmdlet to do a traceroute test. When this parameter
 ./reference/7.2/Microsoft.PowerShell.Utility/Get-Error.md:178:6     - Unknown word (gerr)       -- - `gerr`
-./reference/7.2/Microsoft.PowerShell.Utility/Invoke-RestMethod.md:1369:80   - Unknown word (proxying)     -- should be excluded from proxying.
 ./reference/7.2/Microsoft.PowerShell.Utility/Invoke-RestMethod.md:247:1     - Unknown word (standardards) -- standardards-defined value format
 ./reference/7.2/Microsoft.PowerShell.Utility/Invoke-RestMethod.md:270:2     - Unknown word (httpbin)      -- [httpbin.org](https://httpbin
 ./reference/7.2/Microsoft.PowerShell.Utility/Invoke-RestMethod.md:804:87    - Unknown word (redirections) -- when present, across redirections.
@@ -777,7 +766,6 @@ Lines:
 ./reference/docs-conceptual/community/contributing/labelling-in-github.md:32:9      - Unknown word (editorsvcs) -- | `area-editorsvcs` | The PowerShell
 ./reference/docs-conceptual/community/contributing/labelling-in-github.md:37:9      - Unknown word (helpsystem) -- | `area-helpsystem` | The Help services
 ./reference/docs-conceptual/community/contributing/labelling-in-github.md:43:9      - Unknown word (localaccounts) -- | `area-localaccounts` | The [Microsoft
-./reference/docs-conceptual/community/contributing/labelling-in-github.md:46:16     - Unknown word (cmds)          -- | `area-native-cmds` | Using native
 ./reference/docs-conceptual/community/contributing/labelling-in-github.md:51:9      - Unknown word (packagemanagement) -- | `area-packagemanagement` | The [PackageManagement
 ./reference/docs-conceptual/community/contributing/labelling-in-github.md:53:9      - Unknown word (platyps)           -- | `area-platyps` | The [PlatyPS
 ./reference/docs-conceptual/community/contributing/labelling-in-github.md:55:9      - Unknown word (powershellget)     -- | `area-powershellget` | The [PowerShellGet
@@ -798,8 +786,6 @@ Lines:
 ./reference/docs-conceptual/dev-cross-plat/choosing-the-right-nuget-package.md:3:12      - Unknown word (rjmholt)    -- ms.custom: rjmholt
 ./reference/docs-conceptual/dev-cross-plat/create-cmdline-predictor.md:107:47    - Unknown word (cref)       -- name="context">The <see cref="PredictionContext"
 ./reference/docs-conceptual/dev-cross-plat/create-cmdline-predictor.md:140:29    - Unknown word (paramref)   -- /// returned in <paramref name="session"/>, starting
-./reference/docs-conceptual/dev-cross-plat/create-cmdline-predictor.md:44:59     - Unknown word (classlib)   -- to create a starter classlib project.
-./reference/docs-conceptual/dev-cross-plat/create-feedback-provider.md:243:12    - Unknown word (Cmds)       -- var astCmds = ast.FindAll((cAst
 ./reference/docs-conceptual/dev-cross-plat/create-standard-library-binary-Module.md:131:12    - Unknown word (globaljson) -- dotnet new globaljson --sdk-version 2.1.0
 ./reference/docs-conceptual/dev-cross-plat/create-standard-library-binary-Module.md:300:12    - Unknown word (psmodule)   -- dotnet new psmodule
 ./reference/docs-conceptual/dev-cross-plat/performance/script-authoring-considerations.md:35:22     - Unknown word (arraylist)  -- $null = $arraylist.Add($i)
@@ -843,7 +829,6 @@ Lines:
 ./reference/docs-conceptual/developer/cmdlet/creating-a-cmdlet-to-access-a-data-store.md:365:143   - Unknown word (Sessionstate)           -- Management.Automation.Sessionstate](/dotnet/api/System
 ./reference/docs-conceptual/developer/cmdlet/creating-a-cmdlet-to-access-a-data-store.md:365:537   - Unknown word (Providerintrinsics)     -- Management.Automation.Providerintrinsics](/dotnet/api/System
 ./reference/docs-conceptual/developer/cmdlet/creating-a-cmdlet-to-access-a-data-store.md:367:259   - Unknown word (Contentcmdletproviderintrinsics) -- Management.Automation.Contentcmdletproviderintrinsics.Getreader*](/dotnet
-./reference/docs-conceptual/developer/cmdlet/creating-a-cmdlet-without-parameters.md:189:11    - Unknown word (starttime)  -- $p[6].starttime
 ./reference/docs-conceptual/developer/cmdlet/credential-attribute-declaration.md:25:76     - Unknown word (Credentialattribute) -- Management.Automation.Credentialattribute](/dotnet/api/System
 ./reference/docs-conceptual/developer/cmdlet/events01-sample.md:18:64     - Unknown word (sysmgmt)    -- Windows\v7.0\Samples\sysmgmt\WindowsPowerShell\csharp
 ./reference/docs-conceptual/developer/cmdlet/extending-properties-for-objects.md:135:49    - Unknown word (Serviceprocess) -- member set of the [System.Serviceprocess.Servicecontroller](
@@ -1251,7 +1236,6 @@ Lines:
 ./reference/docs-conceptual/security/remoting/jea/session-configurations.md:227:26    - Unknown word (multifactor) -- authentication, or other multifactor authentication solution
 ./reference/docs-conceptual/security/remoting/jea/session-configurations.md:95:34     - Unknown word (GMSA)       -- managed service account (GMSA) is the appropriate
 ./reference/docs-conceptual/security/remoting/jea/session-configurations.md:96:64     - Unknown word (GMSAs)      -- shares and web services. GMSAs give you a domain identity
-./reference/docs-conceptual/security/remoting/jea/using-jea.md:130:26    - Unknown word (proxied)    -- can also persist the proxied cmdlets from implicit
 ./reference/docs-conceptual/security/remoting/jea/using-jea.md:171:5     - Unknown word (creds)      -- var creds = // create a
 ./reference/docs-conceptual/security/remoting/jea/using-jea.md:229:63    - Unknown word (Aformy)     -- UserName 'localhost\JEAformyHoster'
 ./reference/docs-conceptual/security/remoting/jea/using-jea.md:229:69    - Unknown word (Hoster)     -- UserName 'localhost\JEAformyHoster'

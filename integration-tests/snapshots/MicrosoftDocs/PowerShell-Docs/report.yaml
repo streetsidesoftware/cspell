@@ -4,8 +4,8 @@ Url: https://github.com/MicrosoftDocs/PowerShell-Docs.git
 Args: '["--config=../../../cspell-power-shell-docs.config.yaml","**"]'
 Summary:
   files: 2673
-  filesWithIssues: 1244
-  issues: 5576
+  filesWithIssues: 1233
+  issues: 5413
   errors: 0
 Errors: []
 
@@ -54,7 +54,6 @@ issues:
   - "reference/5.1/Microsoft.PowerShell.Core/About/about_Arithmetic_Operators.md:229:11      minvalue        U       ([int32]::minvalue + [uint32]::maxvalue"
   - "reference/5.1/Microsoft.PowerShell.Core/About/about_Arithmetic_Operators.md:229:32      maxvalue        U       minvalue + [uint32]::maxvalue).gettype().fullname"
   - "reference/5.1/Microsoft.PowerShell.Core/About/about_Arithmetic_Operators.md:229:42      gettype         U       [uint32]::maxvalue).gettype().fullname"
-  - "reference/5.1/Microsoft.PowerShell.Core/About/about_Arithmetic_Operators.md:263:25      ulong           U       Casting the result to `[ulong]` yields an inaccurate"
   - "reference/5.1/Microsoft.PowerShell.Core/About/about_Arithmetic_Operators.md:358:30      filefilefile    U       3 # result = \"filefilefile\""
   - "reference/5.1/Microsoft.PowerShell.Core/About/about_Arrays.md:345:20        Longlength      U       **Count** alias. **Longlength** is useful if the array"
   - "reference/5.1/Microsoft.PowerShell.Core/About/about_Arrays.md:787:51        Instrinsic      U       members, see [about_Instrinsic_Members][08]."
@@ -104,7 +103,6 @@ issues:
   - "reference/5.1/Microsoft.PowerShell.Core/About/about_Language_Modes.md:276:5         pslistmodifier              U       - `[pslistmodifier]`"
   - "reference/5.1/Microsoft.PowerShell.Core/About/about_Language_Modes.md:278:5         psprimitivedictionary       U       - `[psprimitivedictionary]`"
   - "reference/5.1/Microsoft.PowerShell.Core/About/about_Language_Modes.md:283:5         securestring                U       - `[securestring]`"
-  - "reference/5.1/Microsoft.PowerShell.Core/About/about_Language_Modes.md:297:5         ushort                      U       - `[ushort]`"
   - "reference/5.1/Microsoft.PowerShell.Core/About/about_Language_Modes.md:313:5         wmiclass                    U       - `[wmiclass]`"
   - "reference/5.1/Microsoft.PowerShell.Core/About/about_Language_Modes.md:314:5         wmisearcher                 U       - `[wmisearcher]`"
   - "reference/5.1/Microsoft.PowerShell.Core/About/about_Modules.md:107:11       autoloading     U       ## Module autoloading"
@@ -131,7 +129,6 @@ issues:
   - "reference/5.1/Microsoft.PowerShell.Core/About/about_Redirection.md:80:10        fakepath    U       dir C:\\, fakepath 2>&1 > .\\dir.log"
   - "reference/5.1/Microsoft.PowerShell.Core/About/about_Regular_Expressions.md:38:32        csplit              U       , `-creplace`, or `-csplit`"
   - "reference/5.1/Microsoft.PowerShell.Core/About/about_Regular_Expressions.md:39:41        casesensitive       U       statement, use the `-casesensitive` option"
-  - "reference/5.1/Microsoft.PowerShell.Core/About/about_Regular_Expressions.md:328:34       keyname             U       capturing group, use `?<keyname>` to store captured"
   - "reference/5.1/Microsoft.PowerShell.Core/About/about_Remote_Troubleshooting.md:393:33        trustedhosts    U       wsman:localhost\\client\\trustedhosts -Value *"
   - "reference/5.1/Microsoft.PowerShell.Core/About/about_Requires.md:55:20       Netcore     U       Get-Module AzureRM.Netcore | Remove-Module"
   - "reference/5.1/Microsoft.PowerShell.Core/About/about_Script_Internationalization.md:68:22        msgtable            U       stores them in the `$msgtable` variable."
@@ -280,14 +277,10 @@ issues:
   - "reference/5.1/Microsoft.PowerShell.Management/Get-Service.md:76:14          Displayname             U       Get-Service -Displayname \"*network*\""
   - "reference/5.1/Microsoft.PowerShell.Management/Get-Service.md:122:53         dependentservices       U       dentServices\"; Expression={$_.dependentservices.count}"
   - "reference/5.1/Microsoft.PowerShell.Management/Get-Transaction.md:80:14          hklm    U       Set-Location hklm:\\software"
-  - "reference/5.1/Microsoft.PowerShell.Management/Get-WmiObject.md:234:56       localizable     U       amended information is localizable information, such as"
   - "reference/5.1/Microsoft.PowerShell.Management/Get-WmiObject.md:311:69       ntlmdomain      U       authority setting to `ntlmdomain:<DomainName>`, where"
   - "reference/5.1/Microsoft.PowerShell.Management/Get-WmiObject.md:624:4        gwmi            U       - `gwmi`"
   - "reference/5.1/Microsoft.PowerShell.Management/Invoke-WmiMethod.md:105:3         Wmiclass    U       ([Wmiclass]'Win32_Process').Create"
   - "reference/5.1/Microsoft.PowerShell.Management/Invoke-WmiMethod.md:554:4         iwmi        U       - `iwmi`"
-  - "reference/5.1/Microsoft.PowerShell.Management/Join-Path.md:32:44        childpath       U       Path \"path\" -ChildPath \"childpath\""
-  - "reference/5.1/Microsoft.PowerShell.Management/Move-Item.md:89:38        Textfiles       U       are to be moved to `C:\\Textfiles` have the same name"
-  - "reference/5.1/Microsoft.PowerShell.Management/New-Item.md:79:49         testfile    U       file that is named \"testfile1.txt\" in the current"
   - "reference/5.1/Microsoft.PowerShell.Management/New-ItemProperty.md:100:11        multistring     U       $newValue.multistring"
   - "reference/5.1/Microsoft.PowerShell.Management/New-Service.md:62:57          testservice     U       Service -Filter \"Name='testservice'\""
   - "reference/5.1/Microsoft.PowerShell.Management/New-Service.md:96:64          myservice       U       example, `d:\\my share\\myservice.exe` should be specified"
@@ -311,7 +304,6 @@ issues:
   - "reference/5.1/Microsoft.PowerShell.Security/Set-AuthenticodeSignature.md:94:46          Mysign      U       Certificate -FilePath C:\\Test\\Mysign.pfx"
   - "reference/5.1/Microsoft.PowerShell.Utility/Add-Type.md:315:40       beginprint      U       n <= 0 then () else beginprint_endline (string_of_int"
   - "reference/5.1/Microsoft.PowerShell.Utility/Add-Type.md:315:51       endline         U       then () else beginprint_endline (string_of_int n);loop"
-  - "reference/5.1/Microsoft.PowerShell.Utility/Compare-Object.md:51:4           Testfile    U       - `Testfile1.txt` contains the values"
   - "reference/5.1/Microsoft.PowerShell.Utility/Convert-String.md:31:42          Akers       U       , \"David Ahs\", \"Kim Akers\" | Convert-String -Example"
   - "reference/5.1/Microsoft.PowerShell.Utility/ConvertFrom-StringData.md:176:1          Vincentio       U       Vincentio = Heaven doth with us"
   - "reference/5.1/Microsoft.PowerShell.Utility/ConvertFrom-StringData.md:176:133        twere           U       not go forth of us, 'twere all alike\\nAs if we"
@@ -418,8 +410,6 @@ issues:
   - "reference/7.2/Microsoft.PowerShell.Core/About/about_Logging_Non-Windows.md:138:2        journalctl      U       `journalctl` utility to query the"
   - "reference/7.2/Microsoft.PowerShell.Core/About/about_Logging_Non-Windows.md:153:18       rsyslog         U       server such as **rsyslog** if you want to use"
   - "reference/7.2/Microsoft.PowerShell.Core/About/about_Logging_Non-Windows.md:181:5        MACHINENAME     U       - **MACHINENAME** - The name of the"
-  - "reference/7.2/Microsoft.PowerShell.Core/About/about_Logging_Non-Windows.md:183:5        COMMITID        U       - **COMMITID** - The **git commit"
-  - "reference/7.2/Microsoft.PowerShell.Core/About/about_Logging_Non-Windows.md:188:5        EVENTID         U       - **EVENTID** - The event identifier"
   - "reference/7.2/Microsoft.PowerShell.Core/About/about_Logging_Non-Windows.md:218:5        syslogtag       U       :syslogtag, contains, \"powershell"
   - "reference/7.2/Microsoft.PowerShell.Core/About/about_Numeric_Literals.md:120:15      usgb        U       the literal `1usgb` is malformed, because"
   - "reference/7.2/Microsoft.PowerShell.Core/About/about_Numeric_Literals.md:197:9       FFFFs       U       | 0xFFFFs | Int16 |"
@@ -456,7 +446,6 @@ issues:
   - "reference/7.2/Microsoft.PowerShell.Utility/Invoke-RestMethod.md:247:1       standardards    U       standardards-defined value format"
   - "reference/7.2/Microsoft.PowerShell.Utility/Invoke-RestMethod.md:270:2       httpbin         U       [httpbin.org](https://httpbin"
   - "reference/7.2/Microsoft.PowerShell.Utility/Invoke-RestMethod.md:804:87      redirections    U       when present, across redirections."
-  - "reference/7.2/Microsoft.PowerShell.Utility/Invoke-RestMethod.md:1369:80     proxying        U       should be excluded from proxying."
   - "reference/7.2/Microsoft.PowerShell.Utility/Invoke-WebRequest.md:131:21      jdoe        U       User = 'jdoe'"
   - "reference/7.2/Microsoft.PowerShell.Utility/Invoke-WebRequest.md:165:44      docspage    U       StreamWriter]::new('.\\docspage.html', $false, $Response"
   - "reference/7.4/Microsoft.PowerShell.Core/About/about_Calling_Generic_Methods.md:61:9         Linq    U       `System.Linq.Enumerable` class to"
@@ -780,7 +769,6 @@ issues:
   - "reference/docs-conceptual/community/contributing/labelling-in-github.md:32:9        editorsvcs              U       | `area-editorsvcs` | The PowerShell"
   - "reference/docs-conceptual/community/contributing/labelling-in-github.md:37:9        helpsystem              U       | `area-helpsystem` | The Help services"
   - "reference/docs-conceptual/community/contributing/labelling-in-github.md:43:9        localaccounts           U       | `area-localaccounts` | The [Microsoft"
-  - "reference/docs-conceptual/community/contributing/labelling-in-github.md:46:16       cmds                    U       | `area-native-cmds` | Using native"
   - "reference/docs-conceptual/community/contributing/labelling-in-github.md:51:9        packagemanagement       U       | `area-packagemanagement` | The [PackageManagement"
   - "reference/docs-conceptual/community/contributing/labelling-in-github.md:53:9        platyps                 U       | `area-platyps` | The [PlatyPS"
   - "reference/docs-conceptual/community/contributing/labelling-in-github.md:55:9        powershellget           U       | `area-powershellget` | The [PowerShellGet"
@@ -801,10 +789,8 @@ issues:
   - "reference/docs-conceptual/community/hall-of-fame.md:55:3        vexx            U       | vexx32 | |"
   - "reference/docs-conceptual/community/hall-of-fame.md:70:10       Dardenne        U       | LaurentDardenne | | |"
   - "reference/docs-conceptual/dev-cross-plat/choosing-the-right-nuget-package.md:3:12           rjmholt     U       ms.custom: rjmholt"
-  - "reference/docs-conceptual/dev-cross-plat/create-cmdline-predictor.md:44:59          classlib    U       to create a starter classlib project."
   - "reference/docs-conceptual/dev-cross-plat/create-cmdline-predictor.md:107:47         cref        U       name=\"context\">The <see cref=\"PredictionContext\""
   - "reference/docs-conceptual/dev-cross-plat/create-cmdline-predictor.md:140:29         paramref    U       /// returned in <paramref name=\"session\"/>, starting"
-  - "reference/docs-conceptual/dev-cross-plat/create-feedback-provider.md:243:12         Cmds    U       var astCmds = ast.FindAll((cAst"
   - "reference/docs-conceptual/dev-cross-plat/create-standard-library-binary-Module.md:131:12        globaljson      U       dotnet new globaljson --sdk-version 2.1.0"
   - "reference/docs-conceptual/dev-cross-plat/create-standard-library-binary-Module.md:300:12        psmodule        U       dotnet new psmodule"
   - "reference/docs-conceptual/dev-cross-plat/performance/script-authoring-considerations.md:35:22       arraylist       U       $null = $arraylist.Add($i)"
@@ -848,7 +834,6 @@ issues:
   - "reference/docs-conceptual/developer/cmdlet/creating-a-cmdlet-to-access-a-data-store.md:365:143      Sessionstate                        U       Management.Automation.Sessionstate](/dotnet/api/System"
   - "reference/docs-conceptual/developer/cmdlet/creating-a-cmdlet-to-access-a-data-store.md:365:537      Providerintrinsics                  U       Management.Automation.Providerintrinsics](/dotnet/api/System"
   - "reference/docs-conceptual/developer/cmdlet/creating-a-cmdlet-to-access-a-data-store.md:367:259      Contentcmdletproviderintrinsics     U       Management.Automation.Contentcmdletproviderintrinsics.Getreader*](/dotnet"
-  - "reference/docs-conceptual/developer/cmdlet/creating-a-cmdlet-without-parameters.md:189:11       starttime       U       $p[6].starttime"
   - "reference/docs-conceptual/developer/cmdlet/credential-attribute-declaration.md:25:76        Credentialattribute     U       Management.Automation.Credentialattribute](/dotnet/api/System"
   - "reference/docs-conceptual/developer/cmdlet/events01-sample.md:18:64         sysmgmt     U       Windows\\v7.0\\Samples\\sysmgmt\\WindowsPowerShell\\csharp"
   - "reference/docs-conceptual/developer/cmdlet/extending-properties-for-objects.md:135:49       Serviceprocess          U       member set of the [System.Serviceprocess.Servicecontroller]("
@@ -1248,7 +1233,6 @@ issues:
   - "reference/docs-conceptual/security/remoting/jea/session-configurations.md:103:33        JEAGMSA         U       sAMAccountName of 'MyJEAGMSA'"
   - "reference/docs-conceptual/security/remoting/jea/session-configurations.md:226:82        smartcard       U       management solution, smartcard"
   - "reference/docs-conceptual/security/remoting/jea/session-configurations.md:227:26        multifactor     U       authentication, or other multifactor authentication solution"
-  - "reference/docs-conceptual/security/remoting/jea/using-jea.md:130:26         proxied     U       can also persist the proxied cmdlets from implicit"
   - "reference/docs-conceptual/security/remoting/jea/using-jea.md:171:5          creds       U       var creds = // create a"
   - "reference/docs-conceptual/security/remoting/jea/using-jea.md:229:63         Aformy      U       UserName 'localhost\\JEAformyHoster'"
   - "reference/docs-conceptual/security/remoting/jea/using-jea.md:229:69         Hoster      U       UserName 'localhost\\JEAformyHoster'"

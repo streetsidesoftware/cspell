@@ -4,8 +4,8 @@ Url: https://github.com/aspnetboilerplate/aspnetboilerplate
 Args: '["**/*.{md,cs,cshtml}","--exclude=wwwroot","--exclude=**/*SampleApp.Tests/Web*"]'
 Summary:
   files: 2684
-  filesWithIssues: 883
-  issues: 3073
+  filesWithIssues: 837
+  issues: 2823
   errors: 0
 Errors: []
 
@@ -14,12 +14,10 @@ issues:
   - "CONTRIBUTING.md:28:30       aspnetboilerplate       U       Documents are located in [/aspnetboilerplate/doc](https://github"
   - "doc/WebSite/About.md:43:5           MVVM            U       and MVVM, and it should follow"
   - "doc/WebSite/About.md:72:2           Durandal        U       [DurandalJs](http://durandaljs"
-  - "doc/WebSite/About.md:81:9           Boilerplates    U       ASP.NET Boilerplates composes and combines"
   - "doc/WebSite/About.md:82:61          favourite       U       from using your own favourite"
   - "doc/WebSite/About.md:132:51         Halil           U       designed and developed by [Halil İbrahim"
   - "doc/WebSite/About.md:132:57         İbrahim         U       developed by [Halil İbrahim"
   - "doc/WebSite/About.md:133:1          Kalkan          U       Kalkan](http://www.halilibrahimkalka"
-  - "doc/WebSite/Application-Services.md:105:33      Localizable     U       var text = L(\"SampleLocalizableTextKey\");"
   - "doc/WebSite/Application-Services.md:320:15      behaviour       U       customize the behaviour."
   - "doc/WebSite/Articles/Developing-MultiTenant-SaaS-ASP.NET-CORE-Angular/Developing-MultiTenant-SaaS-ASP.NET-CORE-Angular5.md:21:228       appsettings     U       connection string in **appsettings.json** file)."
   - "doc/WebSite/Articles/Developing-MultiTenant-SaaS-ASP.NET-CORE-Angular/Developing-MultiTenant-SaaS-ASP.NET-CORE-Angular5.md:92:82        cref            U       create events using <see cref=\"Create\"/> method."
@@ -31,9 +29,7 @@ issues:
   - "doc/WebSite/AspNet-Core.md:187:26       Dont            U       *WrapResult** and **DontWrapResult** attributes"
   - "doc/WebSite/AspNet-Core.md:246:79       nameof          U       IAccountAppService>(x => nameof(x.Register));"
   - "doc/WebSite/AspNet-Core.md:269:52       Newtonsoft      U       two JsonConverter for Newtonsoft."
-  - "doc/WebSite/Audit-Logging.md:81:13          LINQ        U       (Use simple LINQ to find the selector"
-  - "doc/WebSite/Audit-Logging.md:129:54         proxying    U       Boilerplate uses dynamic proxying and"
-  - "doc/WebSite/Authorization.md:48:25          localizable     U       **Display name**: A localizable string that can be used"
+  - "doc/WebSite/Audit-Logging.md:81:13          LINQ    U       (Use simple LINQ to find the selector"
   - "doc/WebSite/Cached-Unique-Key-Per-User.md:125:3         YOURAPPNAME     U       *[YOURAPPNAME]WebMvcModule.cs*"
   - "doc/WebSite/Cached-Unique-Key-Per-User.md:132:136       evenif          U       client will request again evenif uniquekey not expired"
   - "doc/WebSite/Cached-Unique-Key-Per-User.md:132:143       uniquekey       U       request again evenif uniquekey not expired"
@@ -169,8 +165,6 @@ issues:
   - "src/Abp.AspNetCore/AspNetCore/EntityHistory/HttpRequestEntityChangeSetReasonProvider.cs:17:42       Overrided       U       override string Reason => OverridedValue != null"
   - "src/Abp.AspNetCore/AspNetCore/ExceptionHandling/AbpAuthorizationExceptionHandlingMiddleware.cs:61:61        Localizaion     U       GetString(AbpWebConsts.LocalizaionSourceName, \"DefaultError"
   - "src/Abp.AspNetCore/AspNetCore/MultiTenancy/DomainTenantResolveContributor.cs:9:43           Extracter       U       FormattedStringValueExtracter;"
-  - "src/Abp.AspNetCore/AspNetCore/Mvc/Controllers/AbpScriptsController.cs:12:15         Minifier    U       using Abp.Web.Minifier;"
-  - "src/Abp.AspNetCore/AspNetCore/Mvc/Proxying/AbpServiceProxiesController.cs:8:30          Proxying    U       namespace Abp.AspNetCore.Mvc.Proxying"
   - "src/Abp.AspNetCore/AspNetCore/Security/AbpSecurityHeadersMiddleware.cs:18:74        nosniff         U       Content-Type-Options\", \"nosniff\");"
   - "src/Abp.AspNetCore/AspNetCore/Security/AbpSecurityHeadersMiddleware.cs:23:176       SAMEORIGIN      U       iframe> or <object>. SAMEORIGIN makes it being displayed"
   - "src/Abp.AspNetCore/Json/SystemTextJson/DateOnlyJsonConverter.cs:23:38       fffffffzzz      U       yyyy-MM-ddTHH:mm:ss.fffffffzzz\""
@@ -190,9 +184,6 @@ issues:
   - "src/Abp.EntityFramework.GraphDiff/GraphDiff/Mapping/EntityMappingManager.cs:33:24       Exptession      U       var mappingExptession = entityMapping?.MappingExpre"
   - "src/Abp.EntityFramework/EntityFramework/Extensions/QueryableExtensions.cs:61:13         Nolockings      U       /// Nolockings the specified queryable"
   - "src/Abp.EntityFramework/EntityFramework/Extensions/QueryableExtensions.cs:68:31         Nolocking       U       public static TResult Nolocking<TEntity, TResult>(this"
-  - "src/Abp.EntityFramework/EntityFramework/Extensions/QueryableExtensions.cs:74:24         nolock          U       using (var nolockInterceptor = repository"
-  - "src/Abp.EntityFramework/EntityFramework/Interceptors/WithNolockInterceptor.cs:12:93         Nolock      U       ityFramework.Interceptors.WithNolockInterceptor\";"
-  - "src/Abp.EntityFramework/EntityFramework/Interceptors/WithNolockInterceptor.cs:13:110        NOLOCK      U       Extent\\d+\\](?! WITH \\(NOLOCK\\)))\", RegexOptions.Multiline"
   - "src/Abp.EntityFrameworkCore/EntityFrameworkCore/Extensions/QueryableExtensions.cs:51:34         Includable      U       Func<IQueryable<T>, IIncludableQueryable<T, object>"
   - "src/Abp.HangFire/Hangfire/Configuration/IAbpHangfireConfiguration.cs:13:30          Hanfgire's      U       // Gets or sets the Hanfgire's <see cref=\"BackgroundJobServe"
   - "src/Abp.HtmlSanitizer/HtmlSanitizer/AbpHtmlSanitizerModule.cs:5:7           Ganss       U       using Ganss.Xss;"
@@ -201,7 +192,6 @@ issues:
   - "src/Abp.RedisCache.ProtoBuf/Runtime/Caching/Redis/ProtoBufRedisCacheSerializer.cs:11:34         Seperator       U       private const string TypeSeperator = \"|\";"
   - "src/Abp.RedisCache.ProtoBuf/Runtime/Caching/Redis/ProtoBufRedisCacheSerializer.cs:17:26         objbyte         U       /// <param name=\"objbyte\">String representation"
   - "src/Abp.RedisCache/Runtime/Caching/Redis/RedisDatabaseExtensions.cs:42:64       getn    U       ScriptEvaluate(\"return table.getn(redis.call('keys', ARGV"
-  - "src/Abp.Web.Api/WebApi/Controllers/Dynamic/Builders/ApiControllerActionBuilder.cs:17:41         proxied     U       name=\"T\">Type of the proxied object</typeparam>"
   - "src/Abp.Web.Api/WebApi/Controllers/Dynamic/Builders/ApiControllerBuilder.cs:71:150      myapplication       U       least! For example: 'myapplication/myservice'.\", \"serviceName"
   - "src/Abp.Web.Api/WebApi/Controllers/Dynamic/Builders/ApiControllerBuilder.cs:71:164      myservice           U       example: 'myapplication/myservice'.\", \"serviceName\");"
   - "src/Abp.Web.Api/WebApi/Controllers/Dynamic/DynamicApiControllerInfo.cs:77:68        initialzing     U       { }; //Assigning or initialzing the action filters."
