@@ -264,7 +264,7 @@ describe('Validate internal functions', () => {
             const relToRoot = path.relative(root, file);
 
             expect(globMatcher.match(file)).toBe(expectedToMatch);
-            expect(micromatch.isMatch(relToRoot, expectedGlobs)).toBe(expectedToMatch);
+            expect(micromatch.isMatch(relToRoot, expectedGlobs, { windows: path.sep === '\\' })).toBe(expectedToMatch);
         },
     );
 });
