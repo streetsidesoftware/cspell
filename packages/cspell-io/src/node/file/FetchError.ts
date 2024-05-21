@@ -55,5 +55,5 @@ export function toFetchUrlError(err: unknown, url: URL): FetchUrlError {
 }
 
 export function toError(err: unknown): Error {
-    return err instanceof Error ? err : Error('Unknown Error', { cause: err });
+    return err instanceof Error ? err : new Error('Unknown Error', { cause: err });
 }

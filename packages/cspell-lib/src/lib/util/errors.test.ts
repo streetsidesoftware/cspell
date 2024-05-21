@@ -58,10 +58,10 @@ describe('errors', () => {
     });
 
     test.each`
-        err               | expected
-        ${Error('hello')} | ${Error('hello')}
-        ${'hello'}        | ${Error('hello')}
-        ${'hello'}        | ${expect.any(UnknownError)}
+        err                   | expected
+        ${new Error('hello')} | ${new Error('hello')}
+        ${'hello'}            | ${new Error('hello')}
+        ${'hello'}            | ${expect.any(UnknownError)}
     `('toError', ({ err, expected }) => {
         expect(toError(err)).toEqual(expected);
     });

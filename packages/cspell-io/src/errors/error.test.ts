@@ -5,10 +5,10 @@ import { toError } from './error.js';
 describe('errors', () => {
     test.each`
         err                    | expected
-        ${Error('test')}       | ${Error('test')}
-        ${{ message: 'test' }} | ${Error('test')}
-        ${'test'}              | ${Error('test')}
-        ${undefined}           | ${Error()}
+        ${new Error('test')}   | ${new Error('test')}
+        ${{ message: 'test' }} | ${new Error('test')}
+        ${'test'}              | ${new Error('test')}
+        ${undefined}           | ${new Error()}
     `('toError $err', ({ err, expected }) => {
         expect(toError(err)).toEqual(expected);
     });

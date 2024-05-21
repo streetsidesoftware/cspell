@@ -33,8 +33,8 @@ describe('FetchError', () => {
 
     test.each`
         err                      | expected
-        ${new Error('Not good')} | ${Error('Not good')}
-        ${'hello'}               | ${Error('Unknown Error')}
+        ${new Error('Not good')} | ${new Error('Not good')}
+        ${'hello'}               | ${new Error('Unknown Error')}
     `('toError', ({ err, expected }) => {
         expect(toError(err)).toEqual(expected);
     });

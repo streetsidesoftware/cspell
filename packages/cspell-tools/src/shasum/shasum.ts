@@ -59,7 +59,7 @@ export async function checkShasumFile(
 
 async function tryToCheckFile(filename: string, root: string, checksum: string | undefined): Promise<CheckFileResult> {
     if (!checksum) {
-        return { filename, passed: false, error: Error('Missing Checksum.') };
+        return { filename, passed: false, error: new Error('Missing Checksum.') };
     }
 
     const file = resolve(root, filename);
@@ -67,7 +67,7 @@ async function tryToCheckFile(filename: string, root: string, checksum: string |
         const passed = await checkFile(checksum, file);
         return { filename, passed };
     } catch {
-        return { filename, passed: false, error: Error('Failed to read file.') };
+        return { filename, passed: false, error: new Error('Failed to read file.') };
     }
 }
 

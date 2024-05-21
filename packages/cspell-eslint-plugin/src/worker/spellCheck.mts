@@ -471,7 +471,7 @@ async function reportConfigurationErrors(config: CSpellSettings, knownConfigErro
         const key = ref.error.toString();
         if (knownConfigErrors.has(key)) return;
         knownConfigErrors.add(key);
-        errors.push(Error('Configuration Error: \n  ' + ref.error.message));
+        errors.push(new Error('Configuration Error: \n  ' + ref.error.message));
     });
 
     const dictCollection = await getDictionary(config);
@@ -483,7 +483,7 @@ async function reportConfigurationErrors(config: CSpellSettings, knownConfigErro
             if (knownConfigErrors.has(key)) return;
             knownConfigErrors.add(key);
             const errMsg = `${msg}: ${error.message}\n  Source: ${dict.source}`;
-            errors.push(Error(errMsg));
+            errors.push(new Error(errMsg));
         });
     });
 
