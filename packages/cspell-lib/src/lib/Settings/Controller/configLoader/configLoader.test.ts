@@ -768,7 +768,7 @@ describe('ConfigLoader with VirtualFS', () => {
 
         expect(configFile).toBeInstanceOf(Error);
         assert(configFile instanceof Error);
-        expect(configFile.cause).toEqual(Error(`Untrusted URL: "${location?.href}"`));
+        expect(configFile.cause).toEqual(new Error(`Untrusted URL: "${location?.href}"`));
     });
 });
 

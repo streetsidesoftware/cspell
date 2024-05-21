@@ -78,14 +78,14 @@ describe('shasum', () => {
         expect(result.passed).toBe(false);
         expect(result.results.filter((r) => !r.passed)).toHaveLength(1);
         const missingResult = result.results[0];
-        expect(missingResult.error).toEqual(Error('Failed to read file.'));
+        expect(missingResult.error).toEqual(new Error('Failed to read file.'));
     });
 
     test('checkShasumFile bad format', async () => {
         const root = resolvePathToFixture('dicts');
         const filename = resolvePathToFixture('dicts/_checksum-bad-format.txt');
         await expect(checkShasumFile(filename, [], root)).rejects.toEqual(
-            Error('Failed to parse line 3 of checksum file.'),
+            new Error('Failed to parse line 3 of checksum file.'),
         );
     });
 
