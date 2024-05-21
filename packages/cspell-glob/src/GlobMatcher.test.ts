@@ -1,4 +1,5 @@
 import * as path from 'node:path';
+import { fileURLToPath } from 'node:url';
 
 import mm from 'micromatch';
 import { describe, expect, test } from 'vitest';
@@ -12,7 +13,6 @@ import type {
     GlobPatternWithOptionalRoot,
     PathInterface,
 } from './GlobMatcherTypes.js';
-import { fileURLToPath } from 'node:url';
 
 const defaultCwdWin32 = 'C:\\user\\home\\project\\testing';
 const defaultCwdPosix = '/user/home/project/testing';
