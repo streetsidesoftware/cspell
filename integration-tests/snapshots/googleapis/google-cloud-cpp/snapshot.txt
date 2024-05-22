@@ -3,7 +3,7 @@ Repository: googleapis/google-cloud-cpp
 Url: "https://github.com/googleapis/google-cloud-cpp.git"
 Args: ["--config=../../../../config/repositories/googleapis/google-cloud-cpp/cspell.json","**/*","-e","{*.BUILD,BUILD,CHANGELOG.md,*.sh,*.cfg,*.ps1,Dockerfile.*,*.Dockerfile,*.{yaml,xml,json,cmake}}"]
 Lines:
- CSpell: Files checked: 18862, Issues found: 97478 in 11946 files.
+ CSpell: Files checked: 18862, Issues found: 88524 in 11353 files.
  exit code: 1
 ./ARCHITECTURE.md:110:20    - Unknown word (bigtable)   -- - Bigtable has a [`bigtable::Table`](/google/cloud
 ./ARCHITECTURE.md:110:3     - Unknown word (Bigtable)   -- - Bigtable has a [`bigtable::Table
@@ -51,7 +51,6 @@ Lines:
 ./bazel/workspace0.bzl:133:11    - Unknown word (protobuf)   -- # protobuf message. No changes
 ./bazel/workspace0.bzl:156:17    - Unknown word (boringssl)  -- name = "boringssl",
 ./bazel/workspace0.bzl:192:15    - Unknown word (libcurl)    -- # We need libcurl for the Google Cloud
-./bazel/workspace0.bzl:237:20    - Unknown word (opentelemetry) -- name = "io_opentelemetry_cpp",
 ./bazel/workspace3.bzl:34:7      - Unknown word (Protobuf)   -- # Protobuf dependencies must be
 ./ci/check-include-guards.gawk:26:1      - Unknown word (BEGINFILE)  -- BEGINFILE {
 ./ci/check-include-guards.gawk:32:16     - Unknown word (toupper)    -- guard_body=toupper(FILENAME)
@@ -451,7 +450,6 @@ Lines:
 ./external/googleapis/protolists/servicemanagement.list:2:57      - Unknown word (servicemanager) -- servicemanagement/v1:servicemanager.proto
 ./external/googleapis/protolists/shell.list:1:47      - Unknown word (cloudshell) -- google/cloud/shell/v1:cloudshell.proto
 ./external/googleapis/protolists/tasks.list:1:47      - Unknown word (cloudtasks) -- google/cloud/tasks/v2:cloudtasks.proto
-./external/googleapis/protolists/timeseriesinsights.list:1:60      - Unknown word (timeseries) -- timeseriesinsights/v1:timeseries_insights.proto
 ./generator/BUILD.bazel:118:39    - Unknown word (commandlineflag) -- google_absl//absl/flags:commandlineflag",
 ./generator/CMakeLists.txt:159:22    - Unknown word (libprotoc)  -- protobuf::libprotoc
 ./generator/CMakeLists.txt:184:23    - Unknown word (PROTOS)     -- PROTOS generator_config.proto
@@ -475,12 +473,10 @@ Lines:
 ./generator/generator_config.textproto:271:3     - Unknown word (Apigee)     -- # Apigee Connect
 ./generator/generator_config.textproto:277:47    - Unknown word (APIGEE)     -- var: "GOOGLE_CLOUD_CPP_APIGEE_CONNECTION_SERVICE_ENDPOINT
 ./generator/generator_config.textproto:350:47    - Unknown word (AUTOML)     -- var: "GOOGLE_CLOUD_CPP_AUTOML_PREDICTION_SERVICE_ENDPOINT
-./generator/generator_config.textproto:3622:3    - Unknown word (Timeseries) -- # Timeseries Insights
 ./generator/integration_tests/backup.proto:27:40     - Unknown word (genproto)   -- "google.golang.org/genproto/googleapis/test/admin
 ./generator/integration_tests/golden/v1/golden_kitchen_sink_client.h:286:43    - Unknown word (cloudresourcemanager) -- organizations/1234567890/logs/cloudresourcemanager.googleapis.com%2Factivity
 ./generator/integration_tests/golden/v1/golden_kitchen_sink_client.h:645:62    - Unknown word (bidir)                -- read-write RPCs (aka bidir streaming)
 ./generator/integration_tests/golden/v1/internal/golden_kitchen_sink_option_defaults.cc:40:8      - Unknown word (goldenkitchensink) -- "goldenkitchensink.googleapis.com");
-./generator/integration_tests/golden/v1/internal/golden_kitchen_sink_tracing_connection.cc:30:30     - Unknown word (OPENTELEMETRY) -- GOOGLE_CLOUD_CPP_HAVE_OPENTELEMETRY
 ./generator/integration_tests/golden/v1/internal/golden_rest_only_option_defaults.cc:40:8      - Unknown word (goldenrestonly) -- "goldenrestonly.googleapis.com");
 ./generator/integration_tests/golden/v1/internal/golden_thing_admin_rest_stub.cc:38:38     - Unknown word (Longrunning) -- options.get<rest_internal::LongrunningEndpointOption>(), options
 ./generator/integration_tests/golden/v1/internal/request_id_auth_decorator.cc:62:43     - Unknown word (Foos)       -- :requestid::v1::ListFoosResponse> RequestIdServiceAuth
@@ -796,7 +792,6 @@ Lines:
 ./google/cloud/compute/projects/v1/projects_client.h:741:87    - Unknown word (moveinstance) -- vms_or_disks_using_the_moveinstance_api_or_the_causes_unexpected
 ./google/cloud/compute/security_policies/v1/internal/security_policies_rest_connection_impl.cc:336:34    - Unknown word (Preconfigured) -- SecurityPoliciesListPreconfiguredExpressionSetsResponse
 ./google/cloud/compute/subnetworks/v1/internal/subnetworks_rest_connection_impl.cc:76:43     - Unknown word (Subnetwork) -- cloud::cpp::compute::v1::SubnetworkAggregatedList r) {
-./google/cloud/confidentialcomputing/v1/confidential_computing_client.h:155:66    - Unknown word (OIDC)                  -- returning a signed OIDC token.
 ./google/cloud/confidentialcomputing/v1/confidential_computing_client.h:19:39     - Unknown word (CONFIDENTIALCOMPUTING) -- CLOUD_CPP_GOOGLE_CLOUD_CONFIDENTIALCOMPUTING_V1_CONFIDENTIAL_COMPUTING
 ./google/cloud/config/v1/config_client.cc:179:37    - Unknown word (Statefile)  -- :cloud::config::v1::Statefile>
 ./google/cloud/contactcenterinsights/contact_center_insights_client.h:19:39     - Unknown word (CONTACTCENTERINSIGHTS) -- CLOUD_CPP_GOOGLE_CLOUD_CONTACTCENTERINSIGHTS_CONTACT_CENTER_INSIGHTS
@@ -880,7 +875,6 @@ Lines:
 ./google/cloud/internal/base64_transforms_test.cc:48:54     - Unknown word (Fycw)       -- YWJjZGVmZ2hpamtsbW5vcHFycw=="},
 ./google/cloud/internal/build_info.cc.in:18:11     - Unknown word (cctype)     -- #include <cctype>
 ./google/cloud/internal/build_info.cc.in:25:4      - Unknown word (NOLINTNEXTLINE) -- // NOLINTNEXTLINE(readability-identifier
-./google/cloud/internal/call_context_test.cc:55:29     - Unknown word (otel)       -- EXPECT_THAT(CallContext().otel_context, IsEmpty())
 ./google/cloud/internal/compute_engine_util.h:26:49     - Unknown word (sevrre)     -- query a GCE metadata sevrre.
 ./google/cloud/internal/curl_impl.cc:164:35    - Unknown word (defrag)     -- 0) start_ = 0;  // defrag optimization
 ./google/cloud/internal/curl_rest_client_integration_test.cc:113:21    - Unknown word (httbin)     -- // TODO(#8396): httbin.org doesn't send back
@@ -918,9 +912,8 @@ Lines:
 ./google/cloud/internal/populate_common_options_test.cc:98:11     - Unknown word (optionses)  -- Options optionses[] = {
 ./google/cloud/internal/port_platform.h:75:16     - Unknown word (CPPUNWIND)  -- # if defined(_CPPUNWIND)
 ./google/cloud/internal/random.cc:31:70     - Unknown word (RDSEED)     -- the RDRAND [1], or the RDSEED [1]
-./google/cloud/internal/rest_opentelemetry_test.cc:41:10     - Unknown word (Opentelemetry) -- TEST(RestOpentelemetry, MakeSpanHttp) {
-./google/cloud/internal/rest_opentelemetry_test.cc:54:8      - Unknown word (aaabbbbb)      -- "aaabbbbb";
-./google/cloud/internal/rest_opentelemetry_test.cc:96:36     - Unknown word (traceparent)   -- Contains(Pair("traceparent", _))));
+./google/cloud/internal/rest_opentelemetry_test.cc:54:8      - Unknown word (aaabbbbb)   -- "aaabbbbb";
+./google/cloud/internal/rest_opentelemetry_test.cc:96:36     - Unknown word (traceparent) -- Contains(Pair("traceparent", _))));
 ./google/cloud/internal/routing_matcher_test.cc:120:73    - Unknown word (Ffoo)       -- previous", "routing_id=foo%2Ffoo"));
 ./google/cloud/internal/sha256_hash.cc:34:26     - Unknown word (PUCHAR)     -- static_cast<PUCHAR>(const_cast<void*>(data
 ./google/cloud/internal/trace_propagator.h:34:55     - Unknown word (Traceparent) -- that includes the W3 Traceparent headers, as
@@ -962,14 +955,12 @@ Lines:
 ./google/cloud/networkconnectivity/v1/policy_based_routing_client.h:39:58     - Unknown word (flexibile)  -- customers to specify flexibile routing
 ./google/cloud/networkmanagement/mocks/mock_reachability_connection.h:19:39     - Unknown word (NETWORKMANAGEMENT) -- CLOUD_CPP_GOOGLE_CLOUD_NETWORKMANAGEMENT_MOCKS_MOCK_REACHABILITY
 ./google/cloud/networksecurity/v1/internal/network_security_auth_decorator.h:19:39     - Unknown word (NETWORKSECURITY) -- CLOUD_CPP_GOOGLE_CLOUD_NETWORKSECURITY_V1_INTERNAL_NETWORK
-./google/cloud/networksecurity/v1/network_security_client.h:605:70    - Unknown word (mtls)       -- number. E.g. "server_mtls_policy".
 ./google/cloud/networkservices/v1/dep_client.h:19:39     - Unknown word (NETWORKSERVICES) -- CLOUD_CPP_GOOGLE_CLOUD_NETWORKSERVICES_V1_DEP_CLIENT_H
 ./google/cloud/opentelemetry/configure_basic_tracing.h:55:20     - Unknown word (Gooogle)    -- * that works with Gooogle Cloud Trace.
 ./google/cloud/opentelemetry/internal/monitored_resource_test.cc:218:15    - Unknown word (Faas)       -- {sc::kFaasName, "test-module"}
 ./google/cloud/opentelemetry/internal/monitored_resource_test.cc:278:26    - Unknown word (faas)       -- {sc::kFaasName, "faas-name"},
 ./google/cloud/opentelemetry/internal/recordable_test.cc:184:9     - Unknown word (Truncatable) -- TEST(SetTruncatableString, LessThanLimit
 ./google/cloud/opentelemetry/internal/recordable_test.cc:707:27    - Unknown word (instrumentationscope) -- opentelemetry::sdk::instrumentationscope::InstrumentationScope
-./google/cloud/opentelemetry/internal/time_series.h:61:59     - Unknown word (OTLP)       -- how to convert from [OTLP] -> protos.
 ./google/cloud/optimization/doc/environment-variables.dox:14:40     - Unknown word (cloudoptimization) -- (which defaults to "cloudoptimization.googleapis.com")
 ./google/cloud/orgpolicy/mocks/mock_org_policy_connection.h:19:39     - Unknown word (ORGPOLICY)  -- CLOUD_CPP_GOOGLE_CLOUD_ORGPOLICY_MOCKS_MOCK_ORG_POLICY
 ./google/cloud/osconfig/agent_endpoint_client.h:19:39     - Unknown word (OSCONFIG)   -- CLOUD_CPP_GOOGLE_CLOUD_OSCONFIG_AGENT_ENDPOINT_CLIENT
@@ -986,8 +977,6 @@ Lines:
 ./google/cloud/pubsub/integration_tests/subscription_admin_integration_test.cc:112:47    - Unknown word (appspot)    -- /" + project_id + ".appspot.com/push";
 ./google/cloud/pubsub/internal/batch_callback_wrapper.h:74:13     - Unknown word (Modack)     -- Span StartModackSpan(
 ./google/cloud/pubsub/internal/default_pull_ack_handler_test.cc:49:63     - Unknown word (aseq)       -- AsyncSequencer<bool>& aseq) {
-./google/cloud/pubsub/internal/defaults_test.cc:124:22    - Unknown word (Otel)       -- TEST(OptionsTest, SetOtelLinkLimitEnvOverrides
-./google/cloud/pubsub/internal/defaults_test.cc:125:26    - Unknown word (OTEL)       -- ScopedEnvironment env("OTEL_SPAN_LINK_COUNT_LIMIT
 ./google/cloud/pubsub/internal/exactly_once_policies_test.cc:28:38     - Unknown word (ooops)      -- StatusCode::kInternal, "ooops"),
 ./google/cloud/pubsub/internal/extend_leases_with_retry.cc:120:5     - Unknown word (enccode)    -- * @enccode
 ./google/cloud/pubsub/internal/extend_leases_with_retry.cc:62:30     - Unknown word (modack)     -- interface for making a modack rpc.
@@ -999,8 +988,6 @@ Lines:
 ./google/cloud/pubsub/samples/CMakeLists.txt:94:37     - Unknown word (TESTDATA)   -- GOOGLE_CLOUD_CPP_PUBSUB_TESTDATA=${CMAKE_CURRENT_SOURCE
 ./google/cloud/pubsub/samples/samples.cc:1035:67   - Unknown word (avsc)       -- directory + "schema.avsc";
 ./google/cloud/pubsub/samples/schema_samples.cc:275:19    - Unknown word (Rolledback) -- std::cout << "Rolledback schema. Created a new
-./google/cloud/pubsub/subscription_builder_test.cc:162:9     - Unknown word (oidc)       -- oidc_token {
-./google/cloud/pubsub/subscription_builder_test.cc:31:31     - Unknown word (Oidc)       -- SubscriptionBuilder, MakeOidcToken) {
 ./google/cloud/pubsublite/CMakeLists.txt:94:14     - Unknown word (multipartition) -- internal/multipartition_publisher.cc
 ./google/cloud/pubsublite/admin_client.h:19:39     - Unknown word (PUBSUBLITE) -- CLOUD_CPP_GOOGLE_CLOUD_PUBSUBLITE_ADMIN_CLIENT_H
 ./google/cloud/pubsublite/integration_tests/publisher_integration_test.cc:132:36    - Unknown word (abcded)     -- MessageBuilder{}.SetData("abcded-" + std::to_string(i
@@ -1282,7 +1269,6 @@ Lines:
 ./google/cloud/testing_util/validate_metadata.cc:115:37    - Unknown word (dbolduc)    -- is recursive because dbolduc could not figure out
 ./google/cloud/texttospeech/mocks/mock_text_to_speech_connection.h:19:39     - Unknown word (TEXTTOSPEECH) -- CLOUD_CPP_GOOGLE_CLOUD_TEXTTOSPEECH_MOCKS_MOCK_TEXT_TO_SPEECH
 ./google/cloud/texttospeech/v1/text_to_speech_client.h:98:55     - Unknown word (Bokmal)     -- "nb-\*"` (Norwegian Bokmal) voices will be
-./google/cloud/timeseriesinsights/doc/environment-variables.dox:13:21     - Unknown word (TIMESERIES) -- - `GOOGLE_CLOUD_CPP_TIMESERIES_INSIGHTS_CONTROLLER
 ./google/cloud/timeseriesinsights/v1/internal/timeseries_insights_controller_auth_decorator.h:19:39     - Unknown word (TIMESERIESINSIGHTS) -- CLOUD_CPP_GOOGLE_CLOUD_TIMESERIESINSIGHTS_V1_INTERNAL_TIMESERIES
 ./google/cloud/tpu/v1/internal/tpu_auth_decorator.cc:88:64     - Unknown word (Reimage)    -- Operation>> TpuAuth::AsyncReimageNode(
 ./google/cloud/tpu/v1/tpu_client.h:363:7     - Unknown word (Reimages)   -- /// Reimages a node's OS.
@@ -1313,7 +1299,6 @@ Lines:
 ./protos/google/cloud/compute/accelerator_types/v1/accelerator_types.proto:92:6      - Unknown word (Skylake)    -- // Skylake") ``` By default, each
 ./protos/google/cloud/compute/accelerator_types/v1/accelerator_types.proto:94:63     - Unknown word (Broadwell)  -- cpuPlatform = "Intel Broadwell") AND
 ./protos/google/cloud/compute/accelerator_types/v1/accelerator_types.proto:98:53     - Unknown word (fieldname)  -- expressions. Examples: `fieldname eq unquoted
-./protos/google/cloud/compute/routers/v1/routers.proto:287:10    - Unknown word (nats)       -- // all nats for this router will
 ./protos/google/cloud/compute/v1/internal/common_000.proto:1036:6    - Unknown word (myorg)        -- // myorg.CustomLbPolicy). The
 ./protos/google/cloud/compute/v1/internal/common_000.proto:1274:35   - Unknown word (nanos)        -- outlierDetection.interval.nanos. Defaults to 1 second
 ./protos/google/cloud/compute/v1/internal/common_000.proto:1303:37   - Unknown word (stdev)        -- success rate: mean - (stdev * successRateStdevFactor
@@ -1407,8 +1392,6 @@ Lines:
 ./protos/google/cloud/compute/v1/internal/common_034.proto:32:8      - Unknown word (sctp)       -- // sctp) or the IP protocol
 ./protos/google/cloud/compute/v1/internal/common_037.proto:137:6     - Unknown word (listsof)    -- // listsof FirewallPolicies
 ./protos/google/cloud/compute/v1/internal/common_037.proto:64:65     - Unknown word (Policyfor)  -- Always compute#firewallPolicyfor
-./protos/google/cloud/compute/v1/internal/common_038.proto:116:24    - Unknown word (fqdns)      -- repeated string dest_fqdns = 6 [json_name = "destFqdns
-./protos/google/cloud/compute/v1/internal/common_038.proto:116:52    - Unknown word (Fqdns)      -- 6 [json_name = "destFqdns"];
 ./protos/google/cloud/compute/v1/internal/common_038.proto:61:20     - Unknown word (prority)    -- // is the lowest prority.
 ./protos/google/cloud/compute/v1/internal/common_040.proto:189:45    - Unknown word (applifed)   -- specified here will be applifed before those specified
 ./protos/google/cloud/compute/v1/internal/common_040.proto:191:17    - Unknown word (Loadbalancers) -- // applies to Loadbalancers that have their loadBalancing
@@ -1417,7 +1400,6 @@ Lines:
 ./protos/google/cloud/compute/v1/internal/common_048.proto:75:68     - Unknown word (Servicefor) -- Always compute#healthCheckServicefor
 ./protos/google/cloud/compute/v1/internal/common_053.proto:126:26    - Unknown word (unpackaging) -- / disk image before unpackaging provided by the client
 ./protos/google/cloud/compute/v1/internal/common_056.proto:259:10    - Unknown word (Autocaling) -- // ON: Autocaling is fully enabled.
-./protos/google/cloud/compute/v1/internal/common_056.proto:371:60    - Unknown word (GCE's)      -- maintenance operations. GCE's internal
 ./protos/google/cloud/compute/v1/internal/common_056.proto:393:10    - Unknown word (overcommit) -- // CPU overcommit.
 ./protos/google/cloud/compute/v1/internal/common_056.proto:394:10    - Unknown word (OVERCOMMIT) -- // CPU_OVERCOMMIT_TYPE_UNSPECIFIED:
 ./protos/google/cloud/compute/v1/internal/common_060.proto:136:64    - Unknown word (storred)    -- describing it will be storred in the

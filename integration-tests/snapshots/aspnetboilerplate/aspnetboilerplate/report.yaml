@@ -4,8 +4,8 @@ Url: https://github.com/aspnetboilerplate/aspnetboilerplate
 Args: '["**/*.{md,cs,cshtml}","--exclude=wwwroot","--exclude=**/*SampleApp.Tests/Web*"]'
 Summary:
   files: 2684
-  filesWithIssues: 837
-  issues: 2823
+  filesWithIssues: 836
+  issues: 2820
   errors: 0
 Errors: []
 
@@ -218,7 +218,6 @@ issues:
   - "src/Abp.Zero.NHibernate/Zero/NHibernate/EntityMappings/AuditLogMap.cs:36:36         Nvarchar    U       .Length(Extensions.NvarcharMax);"
   - "src/Abp.ZeroCore.EntityFrameworkCore/EntityHistory/EntityHistoryHelper.cs:135:47        Unproxied       U       typeOfEntity = ProxyHelper.GetUnproxiedType(entityEntry.Entity"
   - "src/Abp.ZeroCore.IdentityServer4.vNext.EntityFrameworkCore/IdentityServer4vNext/AbpZeroCoreIdentityServerEntityFrameworkCoreConfigurationExtensions.cs:31:60        nvarchar    U       over 4K converts to nvarchar(max) on SqlServer"
-  - "src/Abp.ZeroCore.IdentityServer4.vNext/IdentityServer4vNext/AbpResourceOwnerPasswordValidator.cs:52:73          Oidc    U       GrantValidationResult(sub, OidcConstants.AuthenticationMethod"
   - "src/Abp.ZeroCore/Authorization/Users/AbpUserStore.cs:2233:34        userclaims      U       var query = from userclaims in await _userClaimRepository"
   - "src/Abp.ZeroCore/Authorization/Users/AbpUserStore.cs:2299:34        userrole        U       var query = from userrole in await _userRoleRepository"
   - "src/Abp/AbpKernelModule.cs:30:19        Remoting    U       using Abp.Runtime.Remoting;"
@@ -536,7 +535,6 @@ issues:
   - "test/Abp.Tests/Timing/TimezoneHelper_Tests.cs:49:53         Convertable     U       Timezones_Should_Be_Convertable_To_Iana()"
   - "test/Abp.Tests/Timing/TimezoneHelper_Tests.cs:129:111       Offsests        U       Return_Correct_DateTimeOffsests_With_No_DaylightSavings"
   - "test/Abp.Tests/Timing/TimezoneHelper_Tests.cs:145:84        timespan        U       should be the same timespan as previous date"
-  - "test/Abp.Web.Api.Tests/AbpWebApiTestModule.cs:28:80         myapp       U       GetExecutingAssembly(), \"myapp\")"
   - "test/Abp.Web.Api.Tests/DynamicApiController/ServiceNameValidation_Tests.cs:11:73        taskever        U       IsValidServiceName(\"taskever/task\"));"
   - "test/Abp.Web.Api.Tests/DynamicApiController/ServiceNameValidation_Tests.cs:16:108       mynamespace     U       myNameSpace1/MyNameSpace2/mynamespace3/myserviceName\"));"
   - "test/Abp.Web.Common.Tests/Configuration/AbpUserConfigurationBuilder_Tests.cs:52:96          Authanticated       U       RequiresAuthentication_For_Authanticated_User()"
