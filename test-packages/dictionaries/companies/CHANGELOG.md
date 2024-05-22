@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## <small>8.8.2 (2024-05-22)</small>
+
+* ci: Workflow Bot -- Update ALL Dependencies (main) (#5659) ([5d93673](https://github.com/streetsidesoftware/cspell-dicts/commit/5d93673)), closes [#5659](https://github.com/streetsidesoftware/cspell-dicts/issues/5659)
+
 ## <small>8.8.1 (2024-05-10)</small>
 
 * chore: Do not stop update if it fails to lint. ([64ba085](https://github.com/streetsidesoftware/cspell-dicts/commit/64ba085))
