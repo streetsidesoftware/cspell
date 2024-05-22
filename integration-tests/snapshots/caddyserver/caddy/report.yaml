@@ -5,7 +5,7 @@ Args: '["**/*.go"]'
 Summary:
   files: 269
   filesWithIssues: 250
-  issues: 4010
+  issues: 3991
   errors: 0
 Errors: []
 
@@ -374,11 +374,8 @@ issues:
   - "modules/caddyhttp/templates/tplcontext.go:549:24        niladic         U       WrappedHeader wraps niladic functions so that they"
   - "modules/caddyhttp/tracing/module_test.go:105:3          traceparent     U       traceparent := request.Header.Get"
   - "modules/caddyhttp/tracing/module_test.go:105:38         Traceparent     U       request.Header.Get(\"Traceparent\")"
-  - "modules/caddyhttp/tracing/module.go:30:5        otel                U       // otel implements opentelemetry"
-  - "modules/caddyhttp/tracing/module.go:30:21       opentelemetry       U       // otel implements opentelemetry related logic."
   - "modules/caddyhttp/tracing/tracer.go:8:56        otelhttp            U       instrumentation/net/http/otelhttp\""
   - "modules/caddyhttp/tracing/tracer.go:9:43        autoprop            U       contrib/propagators/autoprop\""
-  - "modules/caddyhttp/tracing/tracer.go:10:38       otlp                U       entelemetry.io/otel/exporters/otlp/otlptrace/otlptracegrpc"
   - "modules/caddyhttp/tracing/tracer.go:10:43       otlptrace           U       otel/exporters/otlp/otlptrace/otlptracegrpc\""
   - "modules/caddyhttp/tracing/tracer.go:10:53       otlptracegrpc       U       exporters/otlp/otlptrace/otlptracegrpc\""
   - "modules/caddyhttp/tracing/tracer.go:13:2        sdktrace            U       sdktrace \"go.opentelemetry.io"

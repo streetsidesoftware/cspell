@@ -5,7 +5,7 @@ Args: '["--config=${repoConfig}/cspell.json","**/*.{md,c,h,php}"]'
 Summary:
   files: 2172
   filesWithIssues: 1643
-  issues: 43462
+  issues: 43454
   errors: 0
 Errors: []
 
@@ -863,7 +863,6 @@ issues:
   - "ext/date/lib/tm2unixtime.c:476:72       halfly      U       in that day that only halfly fits in the int64_t"
   - "ext/date/lib/unixtime2tm.c:216:32       gmttime     U       otherwise it converts it to gmttime. This is only done when"
   - "ext/date/php_date_arginfo.h:213:70      SUNFUNCS    U       returnFormat, IS_LONG, 0, \"SUNFUNCS_RET_STRING\")"
-  - "ext/date/php_date.c:100:31      hhmm                    U       EST, EDT) and the +/-hhmm offset specified in"
   - "ext/date/php_date.c:119:5       CFWS                    U       * CFWS ="
   - "ext/date/php_date.c:140:10      fullyear                U       * date-fullyear = 4DIGIT"
   - "ext/date/php_date.c:148:10      secfrac                 U       * time-secfrac = \".\" 1*DIGIT"
@@ -2158,7 +2157,6 @@ issues:
   - "ext/fileinfo/libmagic/is_csv.c:158:30       stext       U       file_printf(ms, \"CSV %s%stext\", code ? code : \"\","
   - "ext/fileinfo/libmagic/is_json.c:50:16       debugused       U       #define __file_debugused"
   - "ext/fileinfo/libmagic/is_json.c:61:14       ARRAYN          U       #define JSON_ARRAYN 5"
-  - "ext/fileinfo/libmagic/is_json.c:443:29      ndjson          U       jt == 1 ? \"json\" : \"x-ndjson\") == -1)"
   - "ext/fileinfo/libmagic/is_simh.c:59:12       TAPEMARKS       U       * if SIMH_TAPEMARKS == 0:"
   - "ext/fileinfo/libmagic/is_simh.c:60:30       tapemarks       U       all the records and tapemarks"
   - "ext/fileinfo/libmagic/is_simh.c:71:3        myword          U       } myword;"
@@ -8241,7 +8239,6 @@ issues:
   - "main/streams/streams.c:1175:11      justwrote       U       ssize_t justwrote = stream->ops->write"
   - "main/streams/streams.c:1559:61      upsize          U       In order to avoid an upsize followed"
   - "main/streams/streams.c:1607:9       haveread        U       size_t haveread = 0;"
-  - "main/streams/streams.c:1640:71      Ceph            U       systems like NFS and Ceph, it even"
   - "main/streams/streams.c:1761:10      readchunk       U       size_t readchunk = sizeof(buf);"
   - "main/streams/streams.c:1763:9       writeptr        U       char *writeptr;"
   - "main/streams/streams.c:2398:8       wrapperhash     U       zval *wrapperhash;"
@@ -8493,7 +8490,6 @@ issues:
   - "sapi/litespeed/lsapi_main.c:56:14       LSAPI       U       #define SAPI_LSAPI_MAX_HEADER_LENGTH LSAPI"
   - "sapi/litespeed/lsapi_main.c:71:13       lsapi       U       static int lsapi_mode = 0;"
   - "sapi/litespeed/lsapi_main.c:92:17       LSPHPRC     U       p = getenv(\"LSPHPRC\");"
-  - "sapi/litespeed/lsapi_main.c:677:18      onexit      U       static int clean_onexit = 1;"
   - "sapi/litespeed/lsapi_main.c:1164:53     climode     U       char * argv[], int *climode,"
   - "sapi/litespeed/lsapi_main.c:1168:13     argend      U       char ** argend= &argv[argc];"
   - "sapi/litespeed/lsapi_main.c:1544:12     criu        U       int is_criu = LSCRIU_Init(); //"
