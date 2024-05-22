@@ -1,4 +1,5 @@
 import * as path from 'node:path';
+import { fileURLToPath } from 'node:url';
 
 import mm from 'micromatch';
 import { describe, expect, test } from 'vitest';
@@ -25,6 +26,8 @@ const pathPosix: PathInterface = {
     ...path.posix,
     resolve: (...paths) => path.posix.resolve(defaultCwdPosix, ...paths),
 };
+
+const __filename = fileURLToPath(import.meta.url);
 
 const pathNames = new Map([
     [pathWin32, 'Win32'],
@@ -55,34 +58,37 @@ describe('Validate assumptions', () => {
 
 describe('Validate Micromatch assumptions', () => {
     test.each`
-        glob                       | filename                      | expectedToMatch
-        ${'*.json'}                | ${'settings.json'}            | ${true}
-        ${'*.json'}                | ${'/settings.json'}           | ${false}
-        ${'*.json'}                | ${'src/settings.json'}        | ${false}
-        ${'*.json'}                | ${'/src/settings.json'}       | ${false}
-        ${'**/*.json'}             | ${'settings.json'}            | ${true}
-        ${'**/*.json'}             | ${'/settings.json'}           | ${true}
-        ${'**/*.json'}             | ${'src/settings.json'}        | ${true}
-        ${'**/*.json'}             | ${'/src/settings.json'}       | ${true}
-        ${'**/temp'}               | ${'/src/temp/data.json'}      | ${false}
-        ${'**/temp/'}              | ${'/src/temp/data.json'}      | ${false}
-        ${'**/temp/**'}            | ${'/src/temp/data.json'}      | ${true}
-        ${'src/*.json'}            | ${'src/settings.json'}        | ${true}
-        ${'**/{*.json,*.json/**}'} | ${'settings.json'}            | ${true}
-        ${'**/{*.json,*.json/**}'} | ${'/settings.json'}           | ${true}
-        ${'**/{*.json,*.json/**}'} | ${'src/settings.json'}        | ${true}
-        ${'**/{*.json,*.json/**}'} | ${'src/settings.json/config'} | ${true}
-        ${'**/{*.json,*.json/**}'} | ${'settings.json/config'}     | ${true}
-        ${'src/*.{test,spec}.ts'}  | ${'src/code.test.ts'}         | ${true}
-        ${'src/*.(test|spec).ts'}  | ${'src/code.test.ts'}         | ${true}
-        ${'src/*.(test|spec).ts'}  | ${'src/code.spec.ts'}         | ${true}
-        ${'src/*.(test|spec).ts'}  | ${'src/deep.code.test.ts'}    | ${true}
-        ${'src/*.(test|spec).ts'}  | ${'src/test.ts'}              | ${false}
+        glob                             | filename                      | expectedToMatch
+        ${'*.json'}                      | ${'settings.json'}            | ${true}
+        ${'*.json'}                      | ${'/settings.json'}           | ${false}
+        ${'*.json'}                      | ${'src/settings.json'}        | ${false}
+        ${'*.json'}                      | ${'/src/settings.json'}       | ${false}
+        ${'**/*.json'}                   | ${'settings.json'}            | ${true}
+        ${'**/*.json'}                   | ${'/settings.json'}           | ${true}
+        ${'**/*.json'}                   | ${'src/settings.json'}        | ${true}
+        ${'**/*.json'}                   | ${'/src/settings.json'}       | ${true}
+        ${'**/temp'}                     | ${'/src/temp/data.json'}      | ${false}
+        ${'**/temp/'}                    | ${'/src/temp/data.json'}      | ${false}
+        ${'**/temp/**'}                  | ${'/src/temp/data.json'}      | ${true}
+        ${'src/*.json'}                  | ${'src/settings.json'}        | ${true}
+        ${'**/{*.json,*.json/**}'}       | ${'settings.json'}            | ${true}
+        ${'**/{*.json,*.json/**}'}       | ${'/settings.json'}           | ${true}
+        ${'**/{*.json,*.json/**}'}       | ${'src/settings.json'}        | ${true}
+        ${'**/{*.json,*.json/**}'}       | ${'src/settings.json/config'} | ${true}
+        ${'**/{*.json,*.json/**}'}       | ${'settings.json/config'}     | ${true}
+        ${'src/*.{test,spec}.ts'}        | ${'src/code.test.ts'}         | ${true}
+        ${'src/*.(test|spec).ts'}        | ${'src/code.test.ts'}         | ${true}
+        ${'src/*.(test|spec).ts'}        | ${'src/code.spec.ts'}         | ${true}
+        ${'src/*.(test|spec).ts'}        | ${'src/deep.code.test.ts'}    | ${true}
+        ${'src/*.(test|spec).ts'}        | ${'src/test.ts'}              | ${false}
+        ${filenameToGlob(__filename, 1)} | ${__filename}                 | ${true}
+        ${filenameToGlob(__filename, 2)} | ${__filename}                 | ${true}
     `(
         `Micromatch glob: '$glob', filename: '$filename' expected: $expectedToMatch`,
         ({ glob, filename, expectedToMatch }) => {
-            const reg1 = mm.makeRe(glob);
-            expect(reg1.test(filename)).toEqual(expectedToMatch);
+            const reg = mm.makeRe(glob);
+            expect(reg.test(filename)).toEqual(expectedToMatch);
+            expect(mm.isMatch(filename, glob, { windows: path.sep === '\\' })).toBe(expectedToMatch);
         },
     );
 });
@@ -120,6 +126,14 @@ function resolveFilename(pathInstance: PathInterface, filename: string | undefin
                 }
             });
         });
+    });
+});
+
+describe('Validate GlobMatcher on Windows', () => {
+    test('Make sure it works on Windows', () => {
+        const glob = filenameToGlob(__filename, 3);
+        const matcher = new GlobMatcher(glob);
+        expect(matcher.match(__filename)).toBe(true);
     });
 });
 
@@ -691,4 +705,9 @@ function resolvePattern(p: GlobPattern | GlobPattern[], path: PathInterface): Gl
         ...p,
         root: path.resolve(p.root),
     };
+}
+
+function filenameToGlob(filename: string, segments: number = 1) {
+    const parts = filename.split(path.sep).slice(-segments).join('/');
+    return '**/' + parts;
 }

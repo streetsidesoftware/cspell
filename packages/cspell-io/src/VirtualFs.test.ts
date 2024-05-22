@@ -147,21 +147,21 @@ describe('VirtualFs', () => {
     test('try unsupported readFile', async () => {
         const fs = virtualFs.fs;
         const result = fs.readFile(new URL('ftp://example.com/data.json'));
-        await expect(result).rejects.toEqual(Error('Unsupported request: readFile'));
+        await expect(result).rejects.toEqual(new Error('Unsupported request: readFile'));
         await expect(result).rejects.toBeInstanceOf(VFSErrorUnsupportedRequest);
     });
 
     test('try unsupported stat', async () => {
         const fs = virtualFs.fs;
         const result = fs.stat(new URL('ftp://example.com/data.json'));
-        await expect(result).rejects.toEqual(Error('Unsupported request: stat'));
+        await expect(result).rejects.toEqual(new Error('Unsupported request: stat'));
         await expect(result).rejects.toBeInstanceOf(VFSErrorUnsupportedRequest);
     });
 
     test('try unsupported readDirectory', async () => {
         const fs = virtualFs.fs;
         const result = fs.readDirectory(new URL('ftp://example.com/data.json'));
-        await expect(result).rejects.toEqual(Error('Unsupported request: readDirectory'));
+        await expect(result).rejects.toEqual(new Error('Unsupported request: readDirectory'));
         await expect(result).rejects.toBeInstanceOf(VFSErrorUnsupportedRequest);
     });
 
