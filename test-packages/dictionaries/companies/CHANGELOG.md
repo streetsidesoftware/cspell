@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## <small>8.8.3 (2024-05-23)</small>
+
+* chore: Update Integration Test Performance Data (#5663) ([b605dd3](https://github.com/streetsidesoftware/cspell-dicts/commit/b605dd3)), closes [#5663](https://github.com/streetsidesoftware/cspell-dicts/issues/5663)
+
 ## <small>8.8.2 (2024-05-22)</small>
 
 * ci: Workflow Bot -- Update ALL Dependencies (main) (#5659) ([5d93673](https://github.com/streetsidesoftware/cspell-dicts/commit/5d93673)), closes [#5659](https://github.com/streetsidesoftware/cspell-dicts/issues/5659)
