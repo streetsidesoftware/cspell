@@ -119,23 +119,31 @@ export function normalizeGitignoreRoot(
 }
 
 interface NormalizeSettingsGlobs {
+    files?: CSpellUserSettings['files'];
     globRoot?: CSpellUserSettings['globRoot'];
     ignorePaths?: CSpellUserSettings['ignorePaths'];
 }
 interface NormalizeSettingsGlobsResult {
     ignorePaths?: GlobDef[];
+    files?: GlobDef[];
 }
 export function normalizeSettingsGlobs(
     settings: NormalizeSettingsGlobs,
     pathToSettingsFile: URL,
 ): NormalizeSettingsGlobsResult {
     const { globRoot } = settings;
-    if (settings.ignorePaths === undefined) return {};
 
-    const ignorePaths = toGlobDef(settings.ignorePaths, globRoot, toFilePathOrHref(pathToSettingsFile));
-    return {
-        ignorePaths,
-    };
+    const normalized: NormalizeSettingsGlobsResult = {};
+
+    if (settings.ignorePaths) {
+        normalized.ignorePaths = toGlobDef(settings.ignorePaths, globRoot, toFilePathOrHref(pathToSettingsFile));
+    }
+
+    if (settings.files) {
+        normalized.files = toGlobDef(settings.files, globRoot, toFilePathOrHref(pathToSettingsFile));
+    }
+
+    return normalized;
 }
 export function normalizeCacheSettings(
     settings: Pick<CSpellUserSettings, 'cache'>,
