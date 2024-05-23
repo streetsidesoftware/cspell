@@ -94,7 +94,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          pnpm run update-snapshots
+          pnpm run update-integration-snapshots
 
       - name: Build Patch
         run: |

@@ -139,6 +139,7 @@ const settings = {
         '@cspell/dict-gaming-terms/cspell-ext.json',
         '@cspell/dict-git/cspell-ext.json',
         '@cspell/dict-golang/cspell-ext.json',
+        '@cspell/dict-google/cspell-ext.json',
         '@cspell/dict-haskell/cspell-ext.json',
         '@cspell/dict-html-symbol-entities/cspell-ext.json',
         '@cspell/dict-html/cspell-ext.json',
