@@ -1,10 +1,11 @@
+import path from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 
 import { describe, expect, test } from 'vitest';
 
 import { normalizeSettingsGlobs } from './normalizeRawSettings.js';
 
-const pathToSettings = '/path/to/settings.json';
+const pathToSettings = path.resolve('/path/to/settings.json');
 const defaultSettingsUrl = pathToFileURL(pathToSettings);
 const defaultSettingsPath = fileURLToPath(pathToSettings);
 
