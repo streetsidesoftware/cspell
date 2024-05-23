@@ -1,17 +1,23 @@
+import { fileURLToPath, pathToFileURL } from 'node:url';
+
 import { describe, expect, test } from 'vitest';
 
 import { normalizeSettingsGlobs } from './normalizeRawSettings.js';
 
+const pathToSettings = '/path/to/settings.json';
+const defaultSettingsUrl = pathToFileURL(pathToSettings);
+const defaultSettingsPath = fileURLToPath(pathToSettings);
+
 describe('normalize settings', () => {
     test.each`
         settings                                    | settingsUrl                              | expected
-        ${{}}                                       | ${'file:///path/to/settings.json'}       | ${{}}
-        ${{ files: [], ignorePaths: [], id: 'id' }} | ${'file:///path/to/settings.json'}       | ${{ files: [], ignorePaths: [] }}
-        ${{ files: [], ignorePaths: undefined }}    | ${'file:///path/to/settings.json'}       | ${{ files: [] }}
-        ${{ files: ['*.md'] }}                      | ${'file:///path/to/settings.json'}       | ${{ files: [{ glob: '*.md', source: '/path/to/settings.json' }] }}
+        ${{}}                                       | ${defaultSettingsUrl}                    | ${{}}
+        ${{ files: [], ignorePaths: [], id: 'id' }} | ${defaultSettingsUrl}                    | ${{ files: [], ignorePaths: [] }}
+        ${{ files: [], ignorePaths: undefined }}    | ${defaultSettingsUrl}                    | ${{ files: [] }}
+        ${{ files: ['*.md'] }}                      | ${defaultSettingsUrl}                    | ${{ files: [{ glob: '*.md', source: defaultSettingsPath }] }}
         ${{ files: ['*.md'] }}                      | ${'vscode-vfs:///path/to/settings.json'} | ${{ files: [{ glob: '*.md', source: 'vscode-vfs:///path/to/settings.json' }] }}
-        ${{ files: ['**/*.md'] }}                   | ${'file:///path/to/settings.json'}       | ${{ files: [{ glob: '**/*.md', source: '/path/to/settings.json' }] }}
-        ${{ ignorePaths: ['**/*.md'] }}             | ${'file:///path/to/settings.json'}       | ${{ ignorePaths: [{ glob: '**/*.md', source: '/path/to/settings.json' }] }}
+        ${{ files: ['**/*.md'] }}                   | ${defaultSettingsUrl}                    | ${{ files: [{ glob: '**/*.md', source: defaultSettingsPath }] }}
+        ${{ ignorePaths: ['**/*.md'] }}             | ${defaultSettingsUrl}                    | ${{ ignorePaths: [{ glob: '**/*.md', source: defaultSettingsPath }] }}
     `('normalizeSettingsGlobs $settings $settingsUrl', ({ settings, settingsUrl, expected }) => {
         expect(normalizeSettingsGlobs(settings, new URL(settingsUrl))).toEqual(expected);
     });
