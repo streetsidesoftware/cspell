@@ -4,8 +4,8 @@ Url: https://github.com/googleapis/google-cloud-cpp.git
 Args: '["--config=${repoConfig}/cspell.json","**/*","-e","{*.BUILD,BUILD,CHANGELOG.md,*.sh,*.cfg,*.ps1,Dockerfile.*,*.Dockerfile,*.{yaml,xml,json,cmake}}"]'
 Summary:
   files: 18862
-  filesWithIssues: 11353
-  issues: 88524
+  filesWithIssues: 11351
+  issues: 88477
   errors: 0
 Errors: []
 
@@ -249,7 +249,6 @@ issues:
   - "doc/packaging.md:72:65          NCPU                U       consider appending `-- -j ${NCPU}` to the"
   - "doc/packaging.md:74:73          nproc               U       information using the `nproc`"
   - "doc/packaging.md:75:38          physicalcpu         U       Linux, or `sysctl -n hw.physicalcpu` on macOS."
-  - "doc/packaging.md:166:26         pkgconf             U       mkdir -p $HOME/Downloads/pkgconf && cd $HOME/Downloads"
   - "doc/packaging.md:210:10         DWITH               U       -DWITH_EXAMPLES=OFF \\"
   - "doc/packaging.md:213:10         DOPENTELEMETRY      U       -DOPENTELEMETRY_INSTALL=ON \\"
   - "doc/packaging.md:245:10         makecache           U       sudo dnf makecache && \\"
@@ -405,7 +404,6 @@ issues:
   - "examples/CMakeLists.txt:33:9        Findg       U       include(FindgRPC)"
   - "examples/gcs2cbt.cc:253:13      cbta        U       namespace cbta = ::google::cloud::bigtable"
   - "examples/gcs2cbt.cc:256:51      BIGTABLE    U       , \"GOOGLE_CLOUD_CPP_BIGTABLE_TEST_INSTANCE_ID\","
-  - "examples/README.md:36:52        gserviceaccount     U       GOOGLE_CLOUD_PROJECT}.iam.gserviceaccount.com\""
   - "external/googleapis/CMakeLists.txt:56:17        httpbody            U       \"google/api/httpbody.proto\""
   - "external/googleapis/CMakeLists.txt:81:32        iamcredentials      U       google/iam/credentials/v1/iamcredentials.proto\""
   - "external/googleapis/CMakeLists.txt:86:13        longrunning         U       \"google/longrunning/operations.proto\""
@@ -828,7 +826,6 @@ issues:
   - "google/cloud/deploy/doc/environment-variables.dox:14:40         clouddeploy     U       (which defaults to \"clouddeploy.googleapis.com\")"
   - "google/cloud/deploy/v1/cloud_deploy_client.cc:433:72        Rollouts        U       CloudDeployClient::ListRollouts("
   - "google/cloud/deploy/v1/cloud_deploy_client.cc:651:24        Automations     U       CloudDeployClient::ListAutomations(std::string const& parent"
-  - "google/cloud/deploy/v1/cloud_deploy_client.h:40:34          Skaffold        U       Google Cloud Platform via Skaffold (https://skaffold.dev"
   - "google/cloud/deploy/v1/cloud_deploy_client.h:2521:8         automations     U       /// automations. Format must be"
   - "google/cloud/deploy/v1/internal/cloud_deploy_connection_impl.cc:756:15      rollouts    U       r.rollouts().size());"
   - "google/cloud/dialogflow_cx/doc/main.dox:6:50        chatbots    U       interfaces (for example, chatbots, and voice-powered apps"
