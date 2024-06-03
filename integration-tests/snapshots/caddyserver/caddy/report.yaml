@@ -5,7 +5,7 @@ Args: '["**/*.go"]'
 Summary:
   files: 271
   filesWithIssues: 252
-  issues: 4035
+  issues: 4044
   errors: 0
 Errors: []
 
@@ -169,7 +169,7 @@ issues:
   - "modules/caddyhttp/caddyauth/hashes.go:59:26         ulqf            U       return []byte(\"$2a$14$X3ulqf/iGxnf1k6oMZ.RZeJUoqI"
   - "modules/caddyhttp/caddyauth/hashes.go:59:32         Gxnf            U       byte(\"$2a$14$X3ulqf/iGxnf1k6oMZ.RZeJUoqI9PX2PM"
   - "modules/caddyhttp/caddyauth/hashes.go:59:69         LGXG            U       RZeJUoqI9PX2PM4rS5lkIKJXduLGXGPrt6\")"
-  - "modules/caddyhttp/caddyhttp_test.go:57:21       fbar    U       inputPath: \"/..%2fbar\","
+  - "modules/caddyhttp/caddyhttp_test.go:63:21       fbar    U       inputPath: \"/..%2fbar\","
   - "modules/caddyhttp/caddyhttp.go:137:30       unmarshals      U       WeakString is a type that unmarshals any JSON value"
   - "modules/caddyhttp/celmatcher_test.go:57:60          localdomain     U       subject} == 'CN=client.localdomain'\","
   - "modules/caddyhttp/celmatcher.go:428:62      setes       U       matcherLibrary from option setes."
@@ -392,10 +392,10 @@ issues:
   - "modules/caddytls/acmeissuer.go:30:26        zerossl         U       github.com/caddyserver/zerossl\""
   - "modules/caddytls/acmeissuer.go:58:27        mothership      U       not sent to any Caddy mothership or used for any purpose"
   - "modules/caddytls/acmeissuer.go:224:57       SSLEAB          U       err = iss.generateZeroSSLEABCredentials(ctx, acct"
-  - "modules/caddytls/acmeissuer.go:268:37       usedif          U       issuer. It should only be usedif the CA endpoint is ZeroSSL"
-  - "modules/caddytls/acmeissuer.go:302:3        EABKID          U       EABKID string `json:\"eab"
-  - "modules/caddytls/acmeissuer.go:303:3        EABHMAC         U       EABHMACKey string `json:\"eab"
-  - "modules/caddytls/acmeissuer.go:334:16       tlsalpn         U       // disable_tlsalpn_challenge"
+  - "modules/caddytls/acmeissuer.go:274:37       usedif          U       issuer. It should only be usedif the CA endpoint is ZeroSSL"
+  - "modules/caddytls/acmeissuer.go:308:3        EABKID          U       EABKID string `json:\"eab"
+  - "modules/caddytls/acmeissuer.go:309:3        EABHMAC         U       EABHMACKey string `json:\"eab"
+  - "modules/caddytls/acmeissuer.go:340:16       tlsalpn         U       // disable_tlsalpn_challenge"
   - "modules/caddytls/capools_test.go:12:45          filestorage         U       caddyserver/caddy/v2/modules/filestorage\""
   - "modules/caddytls/capools_test.go:31:26          certificatest       U       name: \"configuring no certificatest produces an error\","
   - "modules/caddytls/capools_test.go:195:4          fcap                U       fcap := &FileCAPool{}"
