@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## <small>8.8.4 (2024-06-03)</small>
+
+* ci: Fix Lint -- Workflow Bot (#5699) ([211113a](https://github.com/streetsidesoftware/cspell/commit/211113a)), closes [#5699](https://github.com/streetsidesoftware/cspell/issues/5699)
+
 ## <small>8.8.3 (2024-05-23)</small>
 
 * chore: Update Integration Test Performance Data (#5663) ([b605dd3](https://github.com/streetsidesoftware/cspell/commit/b605dd3)), closes [#5663](https://github.com/streetsidesoftware/cspell/issues/5663)
