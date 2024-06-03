@@ -3,9 +3,9 @@ Repository: wireapp/wire-webapp
 Url: https://github.com/wireapp/wire-webapp.git
 Args: '["src/script/**/*.{js,ts,tsx,md}"]'
 Summary:
-  files: 1166
-  filesWithIssues: 631
-  issues: 2730
+  files: 1167
+  filesWithIssues: 632
+  issues: 2739
   errors: 0
 Errors: []
 
@@ -298,10 +298,10 @@ issues:
   - "src/script/E2EIdentity/E2EIdentityEnrollment.test.ts:132:33         enrollement     U       should trigger an initial enrollement when device is a fresh"
   - "src/script/E2EIdentity/E2EIdentityEnrollment.test.ts:138:73         alreaady        U       progress and device is alreaady enrolled', async ()"
   - "src/script/E2EIdentity/E2EIdentityEnrollment.ts:151:46      enorollment     U       allow to snooze the enorollment if the client is still"
-  - "src/script/E2EIdentity/E2EIdentityEnrollment.ts:186:46      Snoozable       U       computedFiringDate, isSnoozable} = getEnrollmentTimer"
-  - "src/script/E2EIdentity/E2EIdentityEnrollment.ts:205:112     eidentity       U       that just activated e2eidentity"
-  - "src/script/E2EIdentity/E2EIdentityEnrollment.ts:219:45      snoozable       U       processEnrollmentUponExpiry(snoozable: boolean) {"
-  - "src/script/E2EIdentity/E2EIdentityEnrollment.ts:285:51      keycloak        U       cannot do silent login as keycloak refresh token extension"
+  - "src/script/E2EIdentity/E2EIdentityEnrollment.ts:152:28      snoozable       U       await this.enroll({snoozable: !isFreshClient});"
+  - "src/script/E2EIdentity/E2EIdentityEnrollment.ts:203:46      Snoozable       U       computedFiringDate, isSnoozable} = getEnrollmentTimer"
+  - "src/script/E2EIdentity/E2EIdentityEnrollment.ts:218:112     eidentity       U       that just activated e2eidentity"
+  - "src/script/E2EIdentity/E2EIdentityEnrollment.ts:305:51      keycloak        U       cannot do silent login as keycloak refresh token extension"
   - "src/script/E2EIdentity/OIDCService/OauthEncryptedStore.ts:20:33         bazinga     U       Encoder, Decoder} from 'bazinga64';"
   - "src/script/E2EIdentity/OIDCService/OIDCService.ts:44:11         dexio       U       const dexioConfig: UserManagerSettings"
   - "src/script/E2EIdentity/OIDCService/OIDCService.ts:68:9          keyauth     U       keyauth: {essential: true, value"
@@ -369,6 +369,7 @@ issues:
   - "src/script/page/MainContent/panels/Collection/Collection.tsx:108:39         converation     U       message from a different converation, nothing to do"
   - "src/script/page/MainContent/panels/Collection/Collection.tsx:202:28         fullsearch      U       aria-label={t('fullsearchCancelLabel')}"
   - "src/script/page/MainContent/panels/preferences/accountPreferences/DataUsageSection.tsx:59:49        COUNTLY     U       !Config.getConfig().COUNTLY_API_KEY;"
+  - "src/script/page/MainContent/panels/preferences/DevicesPreferences/components/E2EICertificateDetails/E2EICertificateDetails.test.tsx:74:13       idicates    U       describe('idicates the state of the e2ei"
   - "src/script/page/RightSidebar/MessageDetails/MessageDetails.test.tsx:72:27       Kowalski    U       const userName = 'Jan Kowalski';"
   - "src/script/page/RightSidebar/Notifications/Notifications.test.tsx:61:41         ative       U       correct new value on the ative conversation', () ="
   - "src/script/page/RightSidebar/PanelHeader/PanelHeader.tsx:72:77          libray      U       transition group animation libray"
