@@ -1,6 +1,7 @@
 import assert from 'node:assert';
 
 import { URI, Utils } from 'vscode-uri';
+import { isUrlLike } from 'cspell-io'
 
 export interface Uri {
     readonly scheme: string;
@@ -21,17 +22,15 @@ interface HRef {
 const isFile = /^(?:[a-zA-Z]:|[/\\])/;
 const isPossibleUri = /\w:\/\//;
 
-const isUrl = /^(file:|stdin:|https?:|s?ftp:)/;
-
 const STDIN_PROTOCOL = 'stdin:';
 
 export function toUri(uriOrFile: string | Uri | URL): UriInstance {
     if (UriImpl.isUri(uriOrFile)) return uriOrFile;
     if (URI.isUri(uriOrFile)) return UriImpl.from(uriOrFile);
     if (uriOrFile instanceof URL) return UriImpl.parse(uriOrFile.toString());
-    if (isUrlLike(uriOrFile)) return UriImpl.parse(uriOrFile.href);
+    if (isHRef(uriOrFile)) return UriImpl.parse(uriOrFile.href);
     if (isUri(uriOrFile)) return UriImpl.from(uriOrFile);
-    if (isUrl.test(uriOrFile)) return UriImpl.parse(uriOrFile);
+    if (isUrlLike(uriOrFile)) return UriImpl.parse(uriOrFile);
     return isFile.test(uriOrFile) && !isPossibleUri.test(uriOrFile)
         ? UriImpl.file(normalizeDriveLetter(uriOrFile))
         : UriImpl.parse(uriOrFile);
@@ -63,7 +62,7 @@ export function normalizeDriveLetter(path: string): string {
     return hasDriveLetter.test(path) ? path[0].toLowerCase() + path.slice(1) : path;
 }
 
-function isUrlLike(url: unknown): url is HRef {
+function isHRef(url: unknown): url is HRef {
     return (!!url && typeof url === 'object' && typeof (<HRef>url).href === 'string') || false;
 }
 
