@@ -21,11 +21,11 @@ importers:
         specifier: workspace:*
         version: link:scripts
       '@lerna-lite/cli':
-        specifier: ^3.4.0
-        version: 3.4.0(@lerna-lite/publish@3.4.0)(@lerna-lite/version@3.4.0)(typescript@5.4.5)
+        specifier: ^3.5.0
+        version: 3.5.0(@lerna-lite/publish@3.5.0)(@lerna-lite/version@3.5.0)(typescript@5.4.5)
       '@lerna-lite/publish':
-        specifier: ^3.4.0
-        version: 3.4.0(typescript@5.4.5)
+        specifier: ^3.5.0
+        version: 3.5.0(typescript@5.4.5)
       '@rollup/plugin-alias':
         specifier: ^5.1.0
         version: 5.1.0(rollup@4.18.0)
@@ -4214,8 +4214,8 @@ packages:
       eslint: 9.4.0
       eslint-visitor-keys: 3.4.3
 
-  /@eslint-community/regexpp@4.10.0:
-    resolution: {integrity: sha512-Cu96Sd2By9mCNTx2iyKOmq10v22jUVQv0lQnlGNy16oE9589yE+QADPbrMGCkA51cKZSg3Pu/aTJVTGfL/qjUA==}
+  /@eslint-community/regexpp@4.10.1:
+    resolution: {integrity: sha512-Zm2NGpWELsQAD1xsJzGQpYfvICSsFkEpU0jxBjfdC6uNEWXcHnfs9hScFWtXVDVl+rBQJGrl4g1vcKIejpH9dA==}
     engines: {node: ^12.0.0 || ^14.0.0 || >=16.0.0}
 
   /@eslint/config-array@0.15.1:
@@ -4640,8 +4640,8 @@ packages:
     resolution: {integrity: sha512-Vo+PSpZG2/fmgmiNzYK9qWRh8h/CHrwD0mo1h1DzL4yzHNSfWYujGTYsWGreD000gcgmZ7K4Ys6Tx9TxtsKdDw==}
     dev: false
 
-  /@lerna-lite/cli@3.4.0(@lerna-lite/publish@3.4.0)(@lerna-lite/version@3.4.0)(typescript@5.4.5):
-    resolution: {integrity: sha512-8T7WsUFhCIO9sm+cY7IfkngHZVEKi1Jcu1+vVExnInO9ONEaaX+XBclDwfQXR5U3wrJR43jSq45C9djYigJ/7w==}
+  /@lerna-lite/cli@3.5.0(@lerna-lite/publish@3.5.0)(@lerna-lite/version@3.5.0)(typescript@5.4.5):
+    resolution: {integrity: sha512-7+3A9znjBqpReSMB7jU15wS0cp6jLlHgOh2H6WXecpDUdyKJOj6ULv0UZlWX7gsPG3SYc1U9EKPWBV413sr72A==}
     engines: {node: ^18.0.0 || >=20.0.0}
     hasBin: true
     peerDependencies:
@@ -4665,10 +4665,10 @@ packages:
       '@lerna-lite/watch':
         optional: true
     dependencies:
-      '@lerna-lite/core': 3.4.0(typescript@5.4.5)
-      '@lerna-lite/init': 3.4.0(typescript@5.4.5)
-      '@lerna-lite/publish': 3.4.0(typescript@5.4.5)
-      '@lerna-lite/version': 3.4.0(@lerna-lite/publish@3.4.0)(typescript@5.4.5)
+      '@lerna-lite/core': 3.5.0(typescript@5.4.5)
+      '@lerna-lite/init': 3.5.0(typescript@5.4.5)
+      '@lerna-lite/publish': 3.5.0(typescript@5.4.5)
+      '@lerna-lite/version': 3.5.0(@lerna-lite/publish@3.5.0)(typescript@5.4.5)
       dedent: 1.5.3
       dotenv: 16.4.5
       import-local: 3.1.0
@@ -4682,8 +4682,8 @@ packages:
       - typescript
     dev: true
 
-  /@lerna-lite/core@3.4.0(typescript@5.4.5):
-    resolution: {integrity: sha512-IFN8wojsl77zKQ5pe0DEW8BYr4qdbyNJCZEa9E9mE3Gh+N7JeB7doGlTqg1pu5eigaSh/UP4SeHvV2jq3Cm4Tg==}
+  /@lerna-lite/core@3.5.0(typescript@5.4.5):
+    resolution: {integrity: sha512-TFBVpPN0OjY8RR1JyFzVsdh535ZXtCaSf10fieyv9YiWFHykullm+UM/atiEpIr4LShkYf05pHBECOJ2+f+JEA==}
     engines: {node: ^18.0.0 || >=20.0.0}
     dependencies:
       '@npmcli/run-script': 8.1.0
@@ -4719,11 +4719,11 @@ packages:
       - typescript
     dev: true
 
-  /@lerna-lite/init@3.4.0(typescript@5.4.5):
-    resolution: {integrity: sha512-5lKL0Ab5vsk8PVNEUby6IVlgA3OxC+9pRH/jWhDMdgDKci9apCuTGoKMhVY8ixsbKvg9+ObRs3eIuMlxs4mvWw==}
+  /@lerna-lite/init@3.5.0(typescript@5.4.5):
+    resolution: {integrity: sha512-kd51wBShaYRq8Y6uVWAeBF7AsTojUsusaQmfyE8af5AcujQYzHoF/JEoM9v8gBKagXlSU24XdHBKH+QxhxclcQ==}
     engines: {node: ^18.0.0 || >=20.0.0}
     dependencies:
-      '@lerna-lite/core': 3.4.0(typescript@5.4.5)
+      '@lerna-lite/core': 3.5.0(typescript@5.4.5)
       fs-extra: 11.2.0
       p-map: 7.0.2
       write-json-file: 5.0.0
@@ -4734,13 +4734,13 @@ packages:
       - typescript
     dev: true
 
-  /@lerna-lite/publish@3.4.0(typescript@5.4.5):
-    resolution: {integrity: sha512-BiWDdV1vKhdxumXX4uSrhauvD7qV8TpImAYFyR3XxKEOv8SQt4O5ZlAIKG8yH1i365zIsS6DOPfBdamMFKB9hw==}
+  /@lerna-lite/publish@3.5.0(typescript@5.4.5):
+    resolution: {integrity: sha512-c+BsBAkIVWhtqCD/SeL6ikXLEGMI1m3WsbRJlBDmbM0Z/jPhc8yIHgTcjkBRM3hvhMdDL14lNsuLyAl8x1zZ8w==}
     engines: {node: ^18.0.0 || >=20.0.0}
     dependencies:
-      '@lerna-lite/cli': 3.4.0(@lerna-lite/publish@3.4.0)(@lerna-lite/version@3.4.0)(typescript@5.4.5)
-      '@lerna-lite/core': 3.4.0(typescript@5.4.5)
-      '@lerna-lite/version': 3.4.0(@lerna-lite/publish@3.4.0)(typescript@5.4.5)
+      '@lerna-lite/cli': 3.5.0(@lerna-lite/publish@3.5.0)(@lerna-lite/version@3.5.0)(typescript@5.4.5)
+      '@lerna-lite/core': 3.5.0(typescript@5.4.5)
+      '@lerna-lite/version': 3.5.0(@lerna-lite/publish@3.5.0)(typescript@5.4.5)
       byte-size: 8.1.1
       chalk: 5.3.0
       columnify: 1.6.0
@@ -4774,12 +4774,12 @@ packages:
       - typescript
     dev: true
 
-  /@lerna-lite/version@3.4.0(@lerna-lite/publish@3.4.0)(typescript@5.4.5):
-    resolution: {integrity: sha512-LQ265fmNCkJ9s1ndM4idttMB7PhO2ndKdxUciXe6+0PJLIkEOmWJ5v3fVHyDiOMtzFGC4LgCw4HISGgEU5ELLA==}
+  /@lerna-lite/version@3.5.0(@lerna-lite/publish@3.5.0)(typescript@5.4.5):
+    resolution: {integrity: sha512-FO6RDsMc2u7y6MlxNj9ZQADTqIEk117apyl23kYlzBxRo98a95S1fr+0ewfiYTiEBLJSJKu/gj/bMgOP3KhNYw==}
     engines: {node: ^18.0.0 || >=20.0.0}
     dependencies:
-      '@lerna-lite/cli': 3.4.0(@lerna-lite/publish@3.4.0)(@lerna-lite/version@3.4.0)(typescript@5.4.5)
-      '@lerna-lite/core': 3.4.0(typescript@5.4.5)
+      '@lerna-lite/cli': 3.5.0(@lerna-lite/publish@3.5.0)(@lerna-lite/version@3.5.0)(typescript@5.4.5)
+      '@lerna-lite/core': 3.5.0(typescript@5.4.5)
       '@octokit/plugin-enterprise-rest': 6.0.1
       '@octokit/rest': 20.1.1
       chalk: 5.3.0
@@ -4801,6 +4801,7 @@ packages:
       node-fetch: 3.3.2
       npm-package-arg: 11.0.2
       npmlog: 7.0.1
+      p-limit: 5.0.0
       p-map: 7.0.2
       p-pipe: 4.0.0
       p-reduce: 3.0.0
@@ -4937,8 +4938,8 @@ packages:
     engines: {node: ^14.17.0 || ^16.13.0 || >=18.0.0}
     dev: true
 
-  /@npmcli/package-json@5.1.1:
-    resolution: {integrity: sha512-uTq5j/UqUzbOaOxVy+osfOhpqOiLfUZ0Ut33UbcyyAPJbZcJsf4Mrsyb8r58FoIFlofw0iOFsuCA/oDK14VDJQ==}
+  /@npmcli/package-json@5.2.0:
+    resolution: {integrity: sha512-qe/kiqqkW0AGtvBjL8TJKZk/eBBSpnJkUWvHdQ9jM2lKHXRYYJuyNpJPlJw3c8QjC2ow6NZYiLExhUaeJelbxQ==}
     engines: {node: ^16.14.0 || >=18.0.0}
     dependencies:
       '@npmcli/git': 5.0.7
@@ -4969,7 +4970,7 @@ packages:
     engines: {node: ^16.14.0 || >=18.0.0}
     dependencies:
       '@npmcli/node-gyp': 3.0.0
-      '@npmcli/package-json': 5.1.1
+      '@npmcli/package-json': 5.2.0
       '@npmcli/promise-spawn': 7.0.2
       node-gyp: 10.1.0
       proc-log: 4.2.0
@@ -6063,7 +6064,7 @@ packages:
       typescript:
         optional: true
     dependencies:
-      '@eslint-community/regexpp': 4.10.0
+      '@eslint-community/regexpp': 4.10.1
       '@typescript-eslint/parser': 7.11.0(eslint@8.57.0)(typescript@5.4.5)
       '@typescript-eslint/scope-manager': 7.11.0
       '@typescript-eslint/type-utils': 7.11.0(eslint@8.57.0)(typescript@5.4.5)
@@ -6090,7 +6091,7 @@ packages:
       typescript:
         optional: true
     dependencies:
-      '@eslint-community/regexpp': 4.10.0
+      '@eslint-community/regexpp': 4.10.1
       '@typescript-eslint/parser': 7.11.0(eslint@9.4.0)(typescript@5.4.5)
       '@typescript-eslint/scope-manager': 7.11.0
       '@typescript-eslint/type-utils': 7.11.0(eslint@9.4.0)(typescript@5.4.5)
@@ -8955,7 +8956,7 @@ packages:
       eslint: '>=8'
     dependencies:
       '@eslint-community/eslint-utils': 4.4.0(eslint@8.57.0)
-      '@eslint-community/regexpp': 4.10.0
+      '@eslint-community/regexpp': 4.10.1
       eslint: 8.57.0
       eslint-compat-utils: 0.5.1(eslint@8.57.0)
     dev: true
@@ -8967,7 +8968,7 @@ packages:
       eslint: '>=8'
     dependencies:
       '@eslint-community/eslint-utils': 4.4.0(eslint@9.4.0)
-      '@eslint-community/regexpp': 4.10.0
+      '@eslint-community/regexpp': 4.10.1
       eslint: 9.4.0
       eslint-compat-utils: 0.5.1(eslint@9.4.0)
     dev: true
@@ -9234,7 +9235,7 @@ packages:
     hasBin: true
     dependencies:
       '@eslint-community/eslint-utils': 4.4.0(eslint@8.57.0)
-      '@eslint-community/regexpp': 4.10.0
+      '@eslint-community/regexpp': 4.10.1
       '@eslint/eslintrc': 2.1.4
       '@eslint/js': 8.57.0
       '@humanwhocodes/config-array': 0.11.14
@@ -9281,7 +9282,7 @@ packages:
     hasBin: true
     dependencies:
       '@eslint-community/eslint-utils': 4.4.0(eslint@9.4.0)
-      '@eslint-community/regexpp': 4.10.0
+      '@eslint-community/regexpp': 4.10.1
       '@eslint/config-array': 0.15.1
       '@eslint/eslintrc': 3.1.0
       '@eslint/js': 9.4.0
@@ -13672,7 +13673,7 @@ packages:
     dependencies:
       '@npmcli/git': 5.0.7
       '@npmcli/installed-package-contents': 2.1.0
-      '@npmcli/package-json': 5.1.1
+      '@npmcli/package-json': 5.2.0
       '@npmcli/promise-spawn': 7.0.2
       '@npmcli/run-script': 8.1.0
       cacache: 18.0.3
