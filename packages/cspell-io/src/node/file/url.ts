@@ -3,7 +3,7 @@ import { pathToFileURL } from 'node:url';
 
 const isZippedRegExp = /\.gz($|[?#])/i;
 
-const isURLRegExp = /^([\w-]{2,64}:\/\/|data:)/i;
+const isURLRegExp = /^([\w-]{2,64}:\/|data:)/i;
 const isWindowsPath = /^[a-z]:[\\/]/i;
 const supportedProtocols: Record<string, true | undefined> = { 'file:': true, 'http:': true, 'https:': true };
 
