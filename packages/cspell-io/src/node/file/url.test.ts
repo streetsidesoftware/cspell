@@ -16,7 +16,7 @@ describe('util', () => {
         ${'samples/cities.txt.gz'}                                                                          | ${false}
         ${'https://github.com/streetsidesoftware/cspell/raw/main/packages/cspell-io/samples/cities.txt'}    | ${true}
         ${'https://github.com/streetsidesoftware/cspell/raw/main/packages/cspell-io/samples/cities.txt.gz'} | ${true}
-        ${"vsls:/cspell.config.yaml"} | ${true}
+        ${'vsls:/cspell.config.yaml'}                                                                       | ${true}
     `('isUrlLike $file', ({ file, expected }) => {
         expect(isUrlLike(file)).toBe(expected);
     });
