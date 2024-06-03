@@ -1,7 +1,7 @@
 import assert from 'node:assert';
 
+import { isUrlLike } from 'cspell-io';
 import { URI, Utils } from 'vscode-uri';
-import { isUrlLike } from 'cspell-io'
 
 export interface Uri {
     readonly scheme: string;
