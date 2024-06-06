@@ -5,7 +5,7 @@ Args: '["--config=${repoConfig}/cspell.json","**/*","-e","{*.BUILD,BUILD,CHANGEL
 Summary:
   files: 18909
   filesWithIssues: 11397
-  issues: 88757
+  issues: 88754
   errors: 0
 Errors: []
 
@@ -18,7 +18,6 @@ issues:
   - "bazel/BUILD.bazel:17:37         subpackages     U       visibility = [\"//:__subpackages__\"])"
   - "bazel/deps-cache.py:46:6        bzls        U       \"bzls\","
   - "bazel/deps-cache.py:112:13      chksum      U       chksum = hashlib.sha256(f.read"
-  - "bazel/deps-cache.py:136:26      gsutil      U       subprocess.run([\"gsutil\", \"-q\", \"cp\", source"
   - "bazel/development0.bzl:46:17        libpfm              U       name = \"libpfm\","
   - "bazel/development0.bzl:56:38        microbenchmarks     U       only needed to run the microbenchmarks."
   - "bazel/development0.bzl:68:59        docfx               U       this is only used in //docfx."
@@ -58,6 +57,7 @@ issues:
   - "ci/cloudbuild/notifiers/logs/function/generate_svg_badge.cc:87:8        textbox     U       auto textbox_width = [](std::string"
   - "ci/cloudbuild/notifiers/logs/function/generate_svg_badge.h:15:29        CLOUDBUILD      U       GOOGLE_CLOUD_CPP_CI_CLOUDBUILD_NOTIFIERS_LOGS_FUNCTION"
   - "ci/cloudbuild/notifiers/logs/README.md:42:34        publiclogs      U       cloud-cpp-community-publiclogs\""
+  - "ci/cloudbuild/notifiers/logs/README.md:48:1         gsutil          U       gsutil iam ch \\"
   - "ci/cloudbuild/notifiers/logs/README.md:55:8         buildpack       U       We use buildpack to compile the code"
   - "ci/cloudbuild/notifiers/logs/README.md:61:30        buildpacks      U       build --builder gcr.io/buildpacks/builder:latest \\"
   - "ci/cloudbuild/notifiers/logs/README.md:62:44        cloudevent      U       FUNCTION_SIGNATURE_TYPE=cloudevent\" \\"
@@ -1057,7 +1057,6 @@ issues:
   - "google/cloud/spanner/benchmarks/README.md:117:71        boxplot     U       y=CpuTime)) + geom_boxplot()"
   - "google/cloud/spanner/benchmarks/README.md:118:1         ggsave      U       ggsave('read-data-types.png"
   - "google/cloud/spanner/benchmarks/README.md:140:29        srtp        U       experiment=read | tee srtp-read.csv"
-  - "google/cloud/spanner/benchmarks/single_row_throughput_plots.py:23:8         plotnine    U       import plotnine as p9"
   - "google/cloud/spanner/client_test.cc:338:68      epdp        U       tePartitionedDmlParams const& epdp) {"
   - "google/cloud/spanner/client_test.cc:575:12      STREQ       U       EXPECT_STREQ(e, \"Read() error\");"
   - "google/cloud/spanner/client.h:732:7         copybrief       U       * @copybrief Read(std::string,KeySet"
@@ -1124,10 +1123,11 @@ issues:
   - "google/cloud/storage/benchmarks/async_throughput_benchmark.cc:82:11         saturage        U       1) Try to saturage the egress path on the"
   - "google/cloud/storage/benchmarks/async_throughput_benchmark.cc:376:28        guploader       U       l = headers.find(\"x-guploader-uploadid\");"
   - "google/cloud/storage/benchmarks/async_throughput_benchmark.cc:376:38        uploadid        U       headers.find(\"x-guploader-uploadid\");"
-  - "google/cloud/storage/benchmarks/README.md:10:60         TTFB    U       time to first byte (TTFB) is high, so"
-  - "google/cloud/storage/benchmarks/README.md:35:17         ttfb    U       tee tp-vs-cpu.ttfb.txt"
-  - "google/cloud/storage/benchmarks/README.md:108:53        venv    U       and assume that the `venv` module is installed"
-  - "google/cloud/storage/benchmarks/README.md:116:14        vebm    U       We will use `vebm` (for Virtual Environment"
+  - "google/cloud/storage/benchmarks/README.md:10:60         TTFB        U       time to first byte (TTFB) is high, so"
+  - "google/cloud/storage/benchmarks/README.md:35:17         ttfb        U       tee tp-vs-cpu.ttfb.txt"
+  - "google/cloud/storage/benchmarks/README.md:108:53        venv        U       and assume that the `venv` module is installed"
+  - "google/cloud/storage/benchmarks/README.md:116:14        vebm        U       We will use `vebm` (for Virtual Environment"
+  - "google/cloud/storage/benchmarks/README.md:132:13        plotnine    U       pip install plotnine pandas"
   - "google/cloud/storage/benchmarks/storage_throughput_vs_cpu_benchmark.cc:292:8        uploaders       U       auto uploaders = gcs_bm::CreateUploadExperim"
   - "google/cloud/storage/benchmarks/storage_throughput_vs_cpu_benchmark.cc:299:8        downloaders     U       auto downloaders ="
   - "google/cloud/storage/benchmarks/throughput_options_test.cc:209:25       Readoffset      U       TEST(ThroughputOptions, Readoffset) {"

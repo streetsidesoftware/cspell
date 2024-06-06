@@ -4,8 +4,8 @@ Url: https://github.com/TheAlgorithms/Python.git
 Args: '["**/*.{md,py}"]'
 Summary:
   files: 1333
-  filesWithIssues: 494
-  issues: 3436
+  filesWithIssues: 488
+  issues: 3320
   errors: 0
 Errors: []
 
@@ -195,7 +195,6 @@ issues:
   - "ciphers/enigma_machine2.py:67:11        RZWQHFMVDBKICJLNTUXAGYPSOE      U       rotor7 = \"RZWQHFMVDBKICJLNTUXAGYPSOE\""
   - "ciphers/enigma_machine2.py:68:11        LFKIJODBEGAMQPXVUHYSTCZRWN      U       rotor8 = \"LFKIJODBEGAMQPXVUHYSTCZRWN\""
   - "ciphers/enigma_machine2.py:69:11        KOAEGVDHXPQZMLFTYWJNBRCIUS      U       rotor9 = \"KOAEGVDHXPQZMLFTYWJNBRCIUS\""
-  - "ciphers/enigma_machine2.py:73:29        rotsel                          U       rotpos: RotorPositionT, rotsel: RotorSelectionT, pb"
   - "ciphers/enigma_machine2.py:83:26        positon (position, positron)    U       param rotpos: rotor_positon"
   - "ciphers/enigma_machine2.py:85:16        plugb                           U       :param pb: plugb -> validated and transformed"
   - "ciphers/enigma_machine2.py:107:5        pbdict                          U       pbdict = _plugboard(pb)"
@@ -321,13 +320,10 @@ issues:
   - "compression/run_length_encoding.py:7:28         AAAABBBCCDAA                U       run_length_encode(\"AAAABBBCCDAA\")"
   - "compression/run_length_encoding.py:13:28        AAADDDDDDFFFCCCAAVVVV       U       run_length_encode(\"AAADDDDDDFFFCCCAAVVVV\")"
   - "computer_vision/cnn_classification.py:31:7          Initialising    U       # Initialising the CNN"
-  - "computer_vision/cnn_classification.py:39:72         relu            U       64, 3), activation=\"relu\")"
   - "computer_vision/flip_augmentation.py:26:16          annos       U       img_paths, annos = get_dataset(LABEL"
   - "computer_vision/flip_augmentation.py:35:13          imwrite     U       cv2.imwrite(f\"{file_root}.jpg\","
   - "computer_vision/flip_augmentation.py:35:53          IMWRITE     U       root}.jpg\", image, [cv2.IMWRITE_JPEG_QUALITY, 85])"
   - "computer_vision/flip_augmentation.py:86:32          narray      U       new_imgs_list <type: narray>: image after resize"
-  - "computer_vision/haralick_descriptors.py:6:8         imageio         U       import imageio.v2 as imageio"
-  - "computer_vision/haralick_descriptors.py:26:58       dtype           U       55.0, data_type: np.dtype = np.uint8"
   - "computer_vision/haralick_descriptors.py:88:5        binarize        U       def binarize(image: np.ndarray, threshold"
   - "computer_vision/haralick_descriptors.py:90:5        Binarizes       U       Binarizes a grayscale image based"
   - "computer_vision/haralick_descriptors.py:144:38      convolotion     U       image when applying convolotion"
@@ -338,7 +334,6 @@ issues:
   - "computer_vision/harris_corner.py:14:23          neighbourhoods      U       window_size : neighbourhoods considered"
   - "computer_vision/horn_schunck.py:2:10        Schunck     U       The Horn-Schunck method estimates the"
   - "computer_vision/horn_schunck.py:15:12       ndimage     U       from scipy.ndimage import convolve"
-  - "computer_vision/horn_schunck.py:45:24       arange      U       np.meshgrid(np.arange(0, image.shape[1]),"
   - "computer_vision/horn_schunck.py:61:10       schunck     U       def horn_schunck("
   - "computer_vision/mosaic_augmentation.py:29:9         idxs        U       idxs = random.sample(range"
   - "computer_vision/mosaic_augmentation.py:110:5        divid       U       divid_point_x = int(scale"
@@ -803,7 +798,6 @@ issues:
   - "machine_learning/automatic_differentiation.py:272:17        dparam      U       dparam_doutput = self.derivative"
   - "machine_learning/automatic_differentiation.py:272:24        doutput     U       dparam_doutput = self.derivative(param"
   - "machine_learning/automatic_differentiation.py:273:24        dtarget     U       dparam_dtarget = dparam_doutput * partial"
-  - "machine_learning/decision_tree.py:40:19         ndim        U       if labels.ndim != 1:"
   - "machine_learning/decision_tree.py:204:32        squarred    U       doctest.testmod(name=\"mean_squarred_error\", verbose=True"
   - "machine_learning/dimensionality_reduction.py:1:29           Gasco               U       Copyright (c) 2023 Diego Gasco (diego.gasco99@gmail"
   - "machine_learning/dimensionality_reduction.py:1:62           Diegomangasco       U       gasco99@gmail.com), Diegomangasco on GitHub"
@@ -822,7 +816,6 @@ issues:
   - "machine_learning/local_weighted_learning/local_weighted_learning.py:7:6         XᵀWX        U       β = (XᵀWX)⁻¹(XᵀWy),"
   - "machine_learning/local_weighted_learning/local_weighted_learning.py:7:14        XᵀWy        U       β = (XᵀWX)⁻¹(XᵀWy),"
   - "machine_learning/local_weighted_learning/local_weighted_learning.py:151:10      preds       U       def plot_preds("
-  - "machine_learning/logistic_regression.py:155:5       probs       U       probs = predict_prob(grid"
   - "machine_learning/loss_functions.py:50:52        BFCE        U       focal cross-entropy (BFCE) loss between true labels"
   - "machine_learning/loss_functions.py:57:5         BCFE        U       BCFE = -Σ(alpha * (1 - y"
   - "machine_learning/loss_functions.py:85:5         bcfe        U       bcfe_loss = -("
@@ -874,7 +867,6 @@ issues:
   - "machine_learning/sequential_minimum_optimization.py:584:5       yrange          U       yrange = np.linspace(train"
   - "machine_learning/sequential_minimum_optimization.py:596:12      asmatrix        U       np.asmatrix(grid).T,"
   - "machine_learning/support_vector_machines.py:74:15       sklear      U       # sklear: def_gamma = 1/(n_features"
-  - "machine_learning/xgboost_classifier.py:7:6          xgboost     U       from xgboost import XGBClassifier"
   - "machine_learning/xgboost_classifier.py:27:44        gbtree      U       score=0.5, booster='gbtree', callbacks=None,"
   - "machine_learning/xgboost_classifier.py:28:29        bylevel     U       colsample_bylevel=1, colsample_bynode"
   - "machine_learning/xgboost_classifier.py:28:50        bynode      U       bylevel=1, colsample_bynode=1, colsample_bytree"
@@ -932,7 +924,6 @@ issues:
   - "maths/primelib.py:101:14        erathostenes    U       sieve of erathostenes."
   - "maths/primelib.py:680:74        Divisiors       U       Error in function getDivisiors(...)\""
   - "maths/qr_decomposition.py:21:18         BLAS    U       version from BLAS should be used."
-  - "maths/radix2_fft.py:5:8         mpmath      U       import mpmath # for roots of unity"
   - "maths/radix2_fft.py:88:14       ncol        U       next_ncol = self.c_max_length"
   - "maths/radix2_fft.py:114:9       inverce     U       inverce_c = [[dft_a[i] * dft"
   - "maths/sieve_of_eratosthenes.py:10:25        Simas       U       doctest provider: Bruno Simas Hadlich (https://github"
@@ -1023,7 +1014,6 @@ issues:
   - "physics/ideal_gas_law.py:5:45           Benoît      U       was first stated by Benoît Paul Émile Clapeyron"
   - "physics/ideal_gas_law.py:5:57           Émile       U       stated by Benoît Paul Émile Clapeyron"
   - "physics/ideal_gas_law.py:7:25           Lussac's    U       Avogadro's law, and Gay-Lussac's law.[1] The ideal gas"
-  - "physics/lorentz_transformation_four_vector.py:30:6          sympy       U       from sympy import symbols"
   - "physics/malus_law.py:7:49           Étienne     U       which is named after Étienne-Louis Malus,"
   - "physics/malus_law.py:34:39          Glan        U       Polaroid to about 1:106 for Glan-Taylor prism polarizers"
   - "physics/malus_law.py:40:5           malus       U       def malus_law(initial_intensity"
@@ -1259,7 +1249,6 @@ issues:
   - "strings/word_occurrence.py:10:9         occurence (occurrence)      U       >>> occurence_dict = word_occurrence"
   - "strings/z_function.py:27:21         zxxzxxz     U       >>> z_function(\"zxxzxxz\")"
   - "web_programming/covid_stats_via_xpath.py:2:51           worldometers    U       info fetching from worldometers site using lxml"
-  - "web_programming/covid_stats_via_xpath.py:2:75           lxml            U       worldometers site using lxml"
   - "web_programming/currency_converter.py:46:11         Rican               U       CRC Costa Rican Colon"
   - "web_programming/currency_converter.py:48:10         Verdean             U       CVE Cape Verdean Escudo"
   - "web_programming/currency_converter.py:50:5          Djiboutian          U       DJF Djiboutian Franc"
@@ -1284,7 +1273,6 @@ issues:
   - "web_programming/fetch_github_info.py:4:12           lawric      U       Updated by lawric1 on 24/11/20"
   - "web_programming/fetch_well_rx_price.py:35:40        eliquis     U       pharmacy_and_price_list(\"eliquis\", None)"
   - "web_programming/get_imdb_top_250_movies_csv.py:9:9          imdb    U       def get_imdb_top_250_movies(url:"
-  - "web_programming/get_user_tweets.py:3:8          tweepy      U       import tweepy"
   - "web_programming/giphy.py:4:1            giphy       U       giphy_api_key = \"YOUR API"
   - "web_programming/giphy.py:8:9            gifs        U       def get_gifs(query: str, api_key"
   - "web_programming/instagram_video.py:13:30        IGTV    U       input(\"Enter Video/IGTV url: \").strip()"

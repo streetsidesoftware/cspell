@@ -392,8 +392,8 @@ importers:
         specifier: ^2.0.7
         version: 2.0.7
       '@cspell/dict-python':
-        specifier: ^4.1.11
-        version: 4.1.11
+        specifier: ^4.2.1
+        version: 4.2.1
       '@cspell/dict-r':
         specifier: ^2.0.1
         version: 2.0.1
@@ -407,8 +407,8 @@ importers:
         specifier: ^5.0.2
         version: 5.0.2
       '@cspell/dict-software-terms':
-        specifier: ^3.4.1
-        version: 3.4.1
+        specifier: ^3.4.2
+        version: 3.4.2
       '@cspell/dict-sql':
         specifier: ^2.1.3
         version: 2.1.3
@@ -2741,6 +2741,11 @@ packages:
 
   /@cspell/dict-data-science@1.0.11:
     resolution: {integrity: sha512-TaHAZRVe0Zlcc3C23StZqqbzC0NrodRwoSAc8dis+5qLeLLnOCtagYQeROQvDlcDg3X/VVEO9Whh4W/z4PAmYQ==}
+    dev: true
+
+  /@cspell/dict-data-science@2.0.1:
+    resolution: {integrity: sha512-xeutkzK0eBe+LFXOFU2kJeAYO6IuFUc1g7iRLr7HeCmlC4rsdGclwGHh61KmttL3+YHQytYStxaRBdGAXWC8Lw==}
+    dev: false
 
   /@cspell/dict-de-de@4.0.0:
     resolution: {integrity: sha512-MLRMRy44xdjtBLW2jqO73RTbnNfSLztK/mG1/LSblY4hpWxc6iJBAVA7hQye8m06sde6FHgnP38x+jgql/6q6A==}
@@ -2900,6 +2905,13 @@ packages:
     resolution: {integrity: sha512-XG+v3PumfzUW38huSbfT15Vqt3ihNb462ulfXifpQllPok5OWynhszCLCRQjQReV+dgz784ST4ggRxW452/kVg==}
     dependencies:
       '@cspell/dict-data-science': 1.0.11
+    dev: true
+
+  /@cspell/dict-python@4.2.1:
+    resolution: {integrity: sha512-9X2jRgyM0cxBoFQRo4Zc8oacyWnXi+0/bMI5FGibZNZV4y/o9UoFEr6agjU260/cXHTjIdkX233nN7eb7dtyRg==}
+    dependencies:
+      '@cspell/dict-data-science': 2.0.1
+    dev: false
 
   /@cspell/dict-r@2.0.1:
     resolution: {integrity: sha512-KCmKaeYMLm2Ip79mlYPc8p+B2uzwBp4KMkzeLd5E6jUlCL93Y5Nvq68wV5fRLDRTf7N1LvofkVFWfDcednFOgA==}
@@ -2917,8 +2929,8 @@ packages:
     resolution: {integrity: sha512-v97ClgidZt99JUm7OjhQugDHmhx4U8fcgunHvD/BsXWjXNj4cTr0m0YjofyZoL44WpICsNuFV9F/sv9OM5HUEw==}
     dev: false
 
-  /@cspell/dict-software-terms@3.4.1:
-    resolution: {integrity: sha512-JgNHVdWEUhZKCYBiAjsLojkw8WhvsTXyk/IfFby0Lzbl+/AoJvL/XZqr0pvqfpBjbv7pwtnjahrbGxPRCOV+gA==}
+  /@cspell/dict-software-terms@3.4.2:
+    resolution: {integrity: sha512-mdnTfWSWQVGdth7OTlX4WsNsHGBiBEzIEs8/rmmq//IDbjBYpIdbA4d/pZRhfUF0CpXkQdytccyg0EHtmN4+7w==}
     dev: false
 
   /@cspell/dict-sql@2.1.3:
