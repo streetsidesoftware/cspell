@@ -4,8 +4,8 @@ Url: https://github.com/RustPython/RustPython.git
 Args: '["**"]'
 Summary:
   files: 611
-  filesWithIssues: 317
-  issues: 2939
+  filesWithIssues: 316
+  issues: 2918
   errors: 0
 Errors: []
 
@@ -41,7 +41,6 @@ issues:
   - "Cargo.toml:80:1         thiserror       U       thiserror = \"1.0\""
   - "Cargo.toml:83:1         widestring      U       widestring = \"1.1.0\""
   - "Cargo.toml:91:49        flamescope      U       flame-it\", \"flame\", \"flamescope\"]"
-  - "Cargo.toml:114:82       termcolor       U       features = [\"atty\", \"termcolor\"] }"
   - "Cargo.toml:156:62       redoxer         U       to compile/check with redoxer"
   - "Cargo.toml:159:37       vcpkg           U       Windows to build the vcpkg dependencies"
   - "common/Cargo.toml:33:1          siphasher       U       siphasher = \"0.3\""
@@ -348,8 +347,6 @@ issues:
   - "extra_tests/snippets/stdlib_xdrlib.py:1:51          unittests                   U       superceeded by the python unittests when that works."
   - "extra_tests/snippets/stdlib_zlib.py:36:38       amet    U       Lorem ipsum dolor sit amet\", \"utf-8\")"
   - "extra_tests/snippets/syntax_async.py:8:16           Entrada     U       print(\"Entrada\")"
-  - "extra_tests/snippets/syntax_async.py:95:17          Aenter      U       def testAenterAttributeError1(self"
-  - "extra_tests/snippets/syntax_async.py:108:33         Aexit       U       class LacksAenterAndAexit(object):"
   - "extra_tests/snippets/syntax_class.py:48:9           kungfu      U       def kungfu(x):"
   - "extra_tests/snippets/syntax_class.py:229:20         dbca        U       assert D().f() == 'dbca', \"Mro resolution using"
   - "extra_tests/snippets/syntax_class.py:269:17         mcls        U       def __new__(mcls):"
@@ -399,7 +396,6 @@ issues:
   - "LICENSE-logo:36:7           creativecommons     U       wiki.creativecommons.org/Considerations_for"
   - "LICENSE-logo:139:15         sublicensable       U       non-sublicensable, non-exclusive, irrevocable"
   - "LICENSE-logo:205:34         waivable            U       under any voluntary or waivable statutory or compulsory"
-  - "pdc.sh:15:20        pycache         U       PRE_GLOBAL=(\"clear_pycache\")"
   - "pdc.sh:26:90        Dwarnings       U       cargo clippy --all -- -Dwarnings\" \"cargo test --all\""
   - "README.md:16:4          WAPM                U       [![WAPM package](https://wapm"
   - "README.md:97:8          wasmer              U       Run by wasmer"
@@ -727,8 +723,6 @@ issues:
   - "vm/src/frame.rs:350:13      instrs          U       let instrs = &self.code.instructions"
   - "vm/src/frame.rs:795:75      binop           U       op } => self.execute_binop(vm, op.get(arg)),"
   - "vm/src/frame.rs:802:74      unop            U       op } => self.execute_unop(vm, op.get(arg)),"
-  - "vm/src/frame.rs:901:21      aenter          U       let aenter_res = vm"
-  - "vm/src/frame.rs:905:21      aexit           U       let aexit = mgr"
   - "vm/src/frame.rs:998:21      aiterable       U       let aiterable = self.pop_value();"
   - "vm/src/function/argument.rs:120:13      kwargc      U       let kwargc = kwarg_names.len()"
   - "vm/src/function/argument.rs:121:13      posargc     U       let posargc = total_argc - kwargc"
@@ -1028,7 +1022,6 @@ issues:
   - "wasm/lib/Lib/browser.py:14:6        jsstr       U       \"jsstr\","
   - "wasm/lib/Lib/whlimport.py:9:9           microdistlib    U       import _microdistlib"
   - "wasm/lib/Lib/whlimport.py:45:9          urlobj          U       urlobj = urlparse(pkg)"
-  - "wasm/lib/Lib/whlimport.py:65:37         distlib         U       VersionMatcher from distlib"
   - "wasm/lib/Lib/whlimport.py:76:53         packagetype     U       ver_downloads if dl[\"packagetype\"] == \"bdist_wheel\")"
   - "wasm/lib/Lib/whlimport.py:106:13        zname           U       for zname, z in cls._packages"
   - "wasm/lib/Lib/whlimport.py:132:9         zipname         U       zipname, slash, path = origin"
@@ -1051,7 +1044,6 @@ issues:
   - "wasm/tests/conftest.py:23:12        sessionstart        U       def pytest_sessionstart(session):"
   - "wasm/tests/conftest.py:34:12        sessionfinish       U       def pytest_sessionfinish(session):"
   - "wasm/tests/conftest.py:92:5         wdriver             U       def wdriver(request):"
-  - "wasm/tests/requirements.txt:3:1         certifi     U       certifi"
   - "whats_left.py:5:3           cpymods                 U       # cpymods - a dictionary mapping"
   - "whats_left.py:79:6          fpectl                  U       \"fpectl\","
   - "whats_left.py:82:6          macpath                 U       \"macpath\","

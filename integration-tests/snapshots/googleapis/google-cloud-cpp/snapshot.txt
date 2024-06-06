@@ -3,7 +3,7 @@ Repository: googleapis/google-cloud-cpp
 Url: "https://github.com/googleapis/google-cloud-cpp.git"
 Args: ["--config=../../../../config/repositories/googleapis/google-cloud-cpp/cspell.json","**/*","-e","{*.BUILD,BUILD,CHANGELOG.md,*.sh,*.cfg,*.ps1,Dockerfile.*,*.Dockerfile,*.{yaml,xml,json,cmake}}"]
 Lines:
- CSpell: Files checked: 18909, Issues found: 88757 in 11397 files.
+ CSpell: Files checked: 18909, Issues found: 88754 in 11397 files.
  exit code: 1
 ./ARCHITECTURE.md:110:20    - Unknown word (bigtable)   -- - Bigtable has a [`bigtable::Table`](/google/cloud
 ./ARCHITECTURE.md:110:3     - Unknown word (Bigtable)   -- - Bigtable has a [`bigtable::Table
@@ -30,7 +30,6 @@ Lines:
 ./SECURITY.md:3:46      - Unknown word (vulnz)      -- issue, please use [g.co/vulnz](https://g.co/vulnz
 ./bazel/BUILD.bazel:17:37     - Unknown word (subpackages) -- visibility = ["//:__subpackages__"])
 ./bazel/deps-cache.py:112:13    - Unknown word (chksum)     -- chksum = hashlib.sha256(f.read
-./bazel/deps-cache.py:136:26    - Unknown word (gsutil)     -- subprocess.run(["gsutil", "-q", "cp", source
 ./bazel/deps-cache.py:46:6      - Unknown word (bzls)       -- "bzls",
 ./bazel/development0.bzl:46:17     - Unknown word (libpfm)     -- name = "libpfm",
 ./bazel/development0.bzl:56:38     - Unknown word (microbenchmarks) -- only needed to run the microbenchmarks.
@@ -67,6 +66,7 @@ Lines:
 ./ci/cloudbuild/notifiers/alerts/README.md:53:13     - Unknown word (eventarc)   -- gcloud beta eventarc triggers create send
 ./ci/cloudbuild/notifiers/alerts/function/function.cc:49:21     - Unknown word (cppcodec)   -- auto const data = cppcodec::base64_rfc4648::decode
 ./ci/cloudbuild/notifiers/logs/README.md:42:34     - Unknown word (publiclogs) -- cloud-cpp-community-publiclogs"
+./ci/cloudbuild/notifiers/logs/README.md:48:1      - Unknown word (gsutil)     -- gsutil iam ch \
 ./ci/cloudbuild/notifiers/logs/README.md:55:8      - Unknown word (buildpack)  -- We use buildpack to compile the code
 ./ci/cloudbuild/notifiers/logs/README.md:61:30     - Unknown word (buildpacks) -- build --builder gcr.io/buildpacks/builder:latest \
 ./ci/cloudbuild/notifiers/logs/README.md:62:44     - Unknown word (cloudevent) -- FUNCTION_SIGNATURE_TYPE=cloudevent" \
@@ -1053,7 +1053,6 @@ Lines:
 ./google/cloud/spanner/benchmarks/README.md:118:1     - Unknown word (ggsave)     -- ggsave('read-data-types.png
 ./google/cloud/spanner/benchmarks/README.md:140:29    - Unknown word (srtp)       -- experiment=read | tee srtp-read.csv
 ./google/cloud/spanner/benchmarks/README.md:78:49     - Unknown word (mrcb)       -- experiment=read-string | tee mrcb-read-string.csv
-./google/cloud/spanner/benchmarks/single_row_throughput_plots.py:23:8      - Unknown word (plotnine)   -- import plotnine as p9
 ./google/cloud/spanner/client.h:732:7     - Unknown word (copybrief)  -- * @copybrief Read(std::string,KeySet
 ./google/cloud/spanner/client_test.cc:338:68    - Unknown word (epdp)       -- tePartitionedDmlParams const& epdp) {
 ./google/cloud/spanner/client_test.cc:575:12    - Unknown word (STREQ)      -- EXPECT_STREQ(e, "Read() error");
@@ -1119,6 +1118,7 @@ Lines:
 ./google/cloud/storage/benchmarks/README.md:108:53    - Unknown word (venv)       -- and assume that the `venv` module is installed
 ./google/cloud/storage/benchmarks/README.md:10:60     - Unknown word (TTFB)       -- time to first byte (TTFB) is high, so
 ./google/cloud/storage/benchmarks/README.md:116:14    - Unknown word (vebm)       -- We will use `vebm` (for Virtual Environment
+./google/cloud/storage/benchmarks/README.md:132:13    - Unknown word (plotnine)   -- pip install plotnine pandas
 ./google/cloud/storage/benchmarks/README.md:35:17     - Unknown word (ttfb)       -- tee tp-vs-cpu.ttfb.txt
 ./google/cloud/storage/benchmarks/aggregate_download_throughput_benchmark.cc:418:18    - Unknown word (Gbit)       -- << " Gbit/s=" << bandwidth <<
 ./google/cloud/storage/benchmarks/async_throughput_benchmark.cc:376:28    - Unknown word (guploader)  -- l = headers.find("x-guploader-uploadid");
