@@ -1,33 +1,27 @@
 {
-  "name": "@cspell/dynamic-import",
+  "name": "@cspell/url",
   "publishConfig": {
     "access": "public"
   },
   "version": "8.8.4",
-  "description": "Dynamic Module Loader",
+  "description": "URL parsing and manipulation utilities for cspell",
   "keywords": [
-    "module",
-    "esm",
-    "cjs",
-    "import",
-    "require"
+    "cspell",
+    "url"
   ],
   "author": "Jason Dent <jason@streetsidesoftware.nl>",
-  "homepage": "https://github.com/streetsidesoftware/cspell/tree/main/packages/dynamic-import#readme",
+  "homepage": "https://github.com/streetsidesoftware/cspell/tree/main/packages/cspell-url#readme",
   "license": "MIT",
-  "type": "commonjs",
+  "type": "module",
   "sideEffects": false,
-  "main": "./dist/cjs/index.js",
-  "module": "./dist/esm/index.mjs",
-  "types": "./dist/cjs/index.d.ts",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
   "exports": {
     ".": {
-      "require": "./dist/cjs/index.js",
-      "import": "./dist/esm/index.mjs"
+      "import": "./dist/index.mjs"
     }
   },
   "files": [
-    "lib",
     "dist",
     "!**/*.tsbuildInfo",
     "!**/__mocks__",
@@ -37,14 +31,14 @@
     "!**/*.map"
   ],
   "scripts": {
-    "build": "tsc -b . -f",
+    "build": "tsc -p .",
     "build:clean": "pnpm clean && pnpm build",
     "clean": "shx rm -rf dist coverage",
     "clean-build": "pnpm build:clean",
     "coverage": "vitest run --coverage",
     "test-watch": "vitest",
     "test": "vitest run",
-    "watch": "tsc -b . --watch -f"
+    "watch": "tsc -p . --watch"
   },
   "repository": {
     "type": "git",
@@ -57,7 +51,5 @@
   "engines": {
     "node": ">=18.0"
   },
-  "dependencies": {
-    "import-meta-resolve": "^4.1.0"
-  }
+  "dependencies": {}
 }
