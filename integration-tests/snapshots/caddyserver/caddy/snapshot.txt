@@ -3,7 +3,7 @@ Repository: caddyserver/caddy
 Url: "https://github.com/caddyserver/caddy.git"
 Args: ["**/*.go"]
 Lines:
- CSpell: Files checked: 271, Issues found: 4044 in 252 files.
+ CSpell: Files checked: 273, Issues found: 4061 in 254 files.
  exit code: 1
 ./admin.go:1371:21   - Unknown word (pidfile)     -- // PIDFile writes a pidfile to the file at filename
 ./admin.go:331:29    - Unknown word (infosec)     -- security checks, the infosec community assures me
@@ -23,9 +23,9 @@ Lines:
 ./admin_test.go:34:8      - Unknown word (yourserver) -- "yourserver": {
 ./admin_test.go:44:10     - Unknown word (Unsynced)   -- func TestUnsyncedConfigAccess(t *testing
 ./caddy.go:42:44     - Unknown word (filesystems) -- caddyserver/caddy/v2/internal/filesystems"
-./caddy.go:715:24    - Unknown word (byeee)       -- logger.Warn("exiting; byeee!! 👋")
-./caddy.go:891:47    - Unknown word (ldflags)     -- during `go build` with `-ldflags`:
-./caddy.go:907:28    - Unknown word (devel)       -- this function returns "(devel)" because Go uses that
+./caddy.go:734:24    - Unknown word (byeee)       -- logger.Warn("exiting; byeee!! 👋")
+./caddy.go:910:47    - Unknown word (ldflags)     -- during `go build` with `-ldflags`:
+./caddy.go:926:28    - Unknown word (devel)       -- this function returns "(devel)" because Go uses that
 ./caddyconfig/caddyfile/adapter.go:130:17    - Unknown word (Errf)        -- return nil, d.Errf("getting module named
 ./caddyconfig/caddyfile/adapter.go:15:9      - Unknown word (caddyfile)  -- package caddyfile
 ./caddyconfig/caddyfile/adapter.go:23:35     - Unknown word (caddyconfig) -- caddyserver/caddy/v2/caddyconfig"
@@ -150,8 +150,8 @@ Lines:
 ./metrics.go:8:50      - Unknown word (promauto)   -- client_golang/prometheus/promauto"
 ./modules/caddyevents/app.go:128:12    - Unknown word (Iface)       -- handlersIface, err := ctx.LoadModule
 ./modules/caddyevents/app.go:15:9      - Unknown word (caddyevents) -- package caddyevents
-./modules/caddyevents/app.go:380:41    - Unknown word (specversion) -- string `json:"specversion"`
-./modules/caddyevents/app.go:383:41    - Unknown word (datacontenttype) -- string `json:"datacontenttype,omitempty"`
+./modules/caddyevents/app.go:385:41    - Unknown word (specversion) -- string `json:"specversion"`
+./modules/caddyevents/app.go:388:41    - Unknown word (datacontenttype) -- string `json:"datacontenttype,omitempty"`
 ./modules/caddyevents/eventsconfig/caddyfile.go:15:12     - Unknown word (eventsconfig) -- // Package eventsconfig is for configuring caddyevent
 ./modules/caddyfs/filesystem.go:105:3     - Unknown word (fsys)       -- fsys, ok := unm.(fs.FS)
 ./modules/caddyfs/filesystem.go:1:9       - Unknown word (caddyfs)    -- package caddyfs
@@ -165,6 +165,8 @@ Lines:
 ./modules/caddyhttp/caddyauth/hashes.go:59:32     - Unknown word (Gxnf)       -- byte("$2a$14$X3ulqf/iGxnf1k6oMZ.RZeJUoqI9PX2PM
 ./modules/caddyhttp/caddyauth/hashes.go:59:69     - Unknown word (LGXG)       -- RZeJUoqI9PX2PM4rS5lkIKJXduLGXGPrt6")
 ./modules/caddyhttp/caddyhttp.go:137:30    - Unknown word (unmarshals) -- WeakString is a type that unmarshals any JSON value
+./modules/caddyhttp/caddyhttp_test.go:113:25    - Unknown word (cwindows)   -- inputPath: `/..%5cwindows%5cwin.ini`,
+./modules/caddyhttp/caddyhttp_test.go:113:35    - Unknown word (cwin)       -- `/..%5cwindows%5cwin.ini`,
 ./modules/caddyhttp/caddyhttp_test.go:63:21     - Unknown word (fbar)       -- inputPath: "/..%2fbar",
 ./modules/caddyhttp/celmatcher.go:428:62    - Unknown word (setes)      -- matcherLibrary from option setes.
 ./modules/caddyhttp/celmatcher_test.go:57:60     - Unknown word (localdomain) -- subject} == 'CN=client.localdomain'",
@@ -416,15 +418,15 @@ Lines:
 ./modules/caddytls/distributedstek/distributedstek.go:57:2      - Unknown word (stek)            -- stekConfig *caddytls.SessionTicket
 ./modules/caddytls/standardstek/stek.go:15:9      - Unknown word (standardstek) -- package standardstek
 ./modules/caddytls/standardstek/stek.go:49:2      - Unknown word (itvl)         -- itvl := time.Duration(s.stekConfig
-./modules/caddytls/tls.go:246:25    - Unknown word (unmanaged)  -- load manual/static (unmanaged) certificates - we do
-./modules/caddytls/tls.go:266:28    - Unknown word (Unmanaged)  -- hash, err := magic.CacheUnmanagedTLSCertificate(ctx, cert
-./modules/caddytls/tls.go:463:46    - Unknown word (SSLHTTP)    -- certmagic.LooksLikeZeroSSLHTTPValidation(r)
-./modules/caddytls/tls.go:494:7     - Unknown word (ziss)       -- if ziss, ok := iss.(*ZeroSSLIssuer
+./modules/caddytls/tls.go:256:25    - Unknown word (unmanaged)  -- load manual/static (unmanaged) certificates - we do
+./modules/caddytls/tls.go:277:28    - Unknown word (Unmanaged)  -- hash, err := magic.CacheUnmanagedTLSCertificate(ctx, cert
+./modules/caddytls/tls.go:474:46    - Unknown word (SSLHTTP)    -- certmagic.LooksLikeZeroSSLHTTPValidation(r)
+./modules/caddytls/tls.go:505:7     - Unknown word (ziss)       -- if ziss, ok := iss.(*ZeroSSLIssuer
 ./modules/caddytls/values.go:23:24     - Unknown word (cpuid)      -- github.com/klauspost/cpuid/v2"
 ./modules/caddytls/values.go:52:28     - Unknown word (AESNI)      -- defaultCipherSuitesWithAESNI = []uint16{
 ./modules/caddytls/values.go:88:3      - Unknown word (secp)       -- "secp256r1": tls.CurveP25
 ./modules/logging/encoders.go:53:25     - Unknown word (milli)      -- ce.TimeFormat = "wall_milli"
-./modules/logging/filewriter.go:26:12     - Unknown word (natefinch)  -- "gopkg.in/natefinch/lumberjack.v2"
+./modules/logging/filewriter.go:27:12     - Unknown word (natefinch)  -- "gopkg.in/natefinch/lumberjack.v2"
 ./modules/logging/filters_test.go:165:2     - Unknown word (outval)     -- outval := out.Interface.(caddyhttp
 ./modules/logging/filters_test.go:89:20     - Unknown word (notexist)   -- {replaceAction, "notexist", "REDACTED"},
 ./modules/logging/netwriter.go:94:13     - Unknown word (redialer)   -- reconn := &redialerConn{

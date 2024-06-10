@@ -200,6 +200,7 @@ function cleanResult(result: Result): Result {
 
 function cleanOutput(out: string): string {
     const parent = Path.resolve(Path.join(__dirname, '..', '..'));
+    out = out.replaceAll(/\(node:\d+\)/g, '(node:0000)');
     return out
         .split('\n')
         .map((line) => line.replace(repositoryDir, '.'))
