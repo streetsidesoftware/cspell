@@ -1,5 +1,3 @@
-import * as path from 'node:path';
-
 import { describe, expect, test } from 'vitest';
 
 import { basenameOfUrlPathname, isUrlLike, toURL, urlParent } from './url.mjs';
