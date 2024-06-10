@@ -3,7 +3,7 @@ Repository: eslint/eslint
 Url: "https://github.com/eslint/eslint"
 Args: [".","--config=../../../config/eslint/cspell.config.yaml","--issues-summary-report","--exclude=bin/**","--exclude=CHANGELOG.md","--exclude=_data","--exclude=tests/bench/large.js","--exclude=docs/src/_includes","--exclude=docs/src/assets/{fonts,s?css,images}"]
 Lines:
- CSpell: Files checked: 1934, Issues found: 1701 in 321 files.
+ CSpell: Files checked: 1936, Issues found: 1704 in 321 files.
  exit code: 1
 ./Makefile.js:145:88    - Unknown word (ined)               -- followed by the string "ined".
 ./Makefile.js:356:12    - Unknown word (gensite)            -- target.gensite();
@@ -29,6 +29,7 @@ Lines:
 ./README.md:279:1     - Unknown word (Strek)         -- Strek
 ./README.md:288:5     - Unknown word (teamend)       -- <!--teamend-->
 ./README.md:295:5     - Unknown word (sponsorsstart) -- <!--sponsorsstart-->
+./README.md:298:96    - Unknown word (Schleifer)     -- avatar.png" alt="Eli Schleifer" height="96"></a> <a
 ./README.md:299:564   - Unknown word (Workleap)      -- f99fe2465f&v=4" alt="Workleap" height="64"></a></p
 ./README.md:300:1054  - Unknown word (Nextbase)      -- 145838380?v=4" alt="Nextbase Starter Kit" height
 ./README.md:301:5     - Unknown word (sponsorsend)   -- <!--sponsorsend-->
@@ -165,9 +166,9 @@ Lines:
 ./docs/src/static/sitemap.njk:11:14     - Unknown word (lastmod)    -- <lastmod>{{ page.date.toISOString
 ./docs/src/static/sitemap.njk:12:14     - Unknown word (changefreq) -- <changefreq>{{ page.data.changeFreq
 ./docs/src/static/sitemap.njk:7:2       - Unknown word (urlset)     -- <urlset xmlns="http://www.sitemaps
-./docs/src/use/command-line-interface.md:300:68    - Unknown word (levn)       -- configuration specified with [levn](https://github.com
-./docs/src/use/command-line-interface.md:451:5     - Unknown word (myfile)     -- cat myfile.js | npx eslint --stdin
-./docs/src/use/command-line-interface.md:547:17    - Unknown word (customformat) -- npx eslint -f ./customformat.js file.js
+./docs/src/use/command-line-interface.md:302:68    - Unknown word (levn)       -- configuration specified with [levn](https://github.com
+./docs/src/use/command-line-interface.md:453:5     - Unknown word (myfile)     -- cat myfile.js | npx eslint --stdin
+./docs/src/use/command-line-interface.md:549:17    - Unknown word (customformat) -- npx eslint -f ./customformat.js file.js
 ./docs/src/use/configure/configuration-files-deprecated.md:39:25     - Unknown word (myfiletotest) -- eslint -c myconfig.json myfiletotest.js
 ./docs/src/use/configure/ignore-deprecated.md:100:200   - Unknown word (jshintignore) -- example, you can use `.jshintignore` file because it has
 ./docs/src/use/configure/ignore-deprecated.md:120:14    - Unknown word (mypackage)    -- "name": "mypackage",
@@ -180,7 +181,7 @@ Lines:
 ./docs/src/use/configure/language-options-deprecated.md:44:4      - Unknown word (serviceworker) -- * `serviceworker` - Service Worker global
 ./docs/src/use/configure/language-options-deprecated.md:45:4      - Unknown word (atomtest)      -- * `atomtest` - Atom test helper
 ./docs/src/use/configure/language-options-deprecated.md:46:4      - Unknown word (embertest)     -- * `embertest` - Ember test helper
-./docs/src/use/configure/migration-guide.md:130:31    - Unknown word (someplugin) -- modules/eslint-plugin-someplugin/index.js
+./docs/src/use/configure/migration-guide.md:144:31    - Unknown word (someplugin) -- modules/eslint-plugin-someplugin/index.js
 ./docs/src/use/configure/plugins-deprecated.md:41:152    - Unknown word (pluginname) -- require('eslint-plugin-pluginname')` in the config file
 ./docs/src/use/core-concepts/glossary.md:146:81    - Unknown word (dprint)     -- //prettier.io) and [dprint](https://dprint.dev
 ./docs/src/use/core-concepts/glossary.md:77:17     - Unknown word (estools)    -- See [github.com/estools/esquery](https://github
@@ -211,6 +212,7 @@ Lines:
 ./lib/config/flat-config-schema.js:244:42    - Unknown word (incompat)   -- messageTemplate = "eslintrc-incompat";
 ./lib/eslint/eslint-helpers.js:18:26     - Unknown word (nodelib)    -- const fswalk = require("@nodelib/fs.walk");
 ./lib/eslint/eslint-helpers.js:18:7      - Unknown word (fswalk)     -- const fswalk = require("@nodelib
+./lib/eslint/eslint-helpers.js:629:34    - Unknown word (unconfigured) -- ignored"|"external"|"unconfigured"} configStatus A status
 ./lib/linter/code-path-analysis/code-path-state.js:1256:46   - Unknown word (circuting)  -- path due to the short-circuting, so we are just seeding
 ./lib/linter/code-path-analysis/code-path-state.js:1730:23   - Unknown word (Segs)       -- const prevSegsOfLeavingSegment = [headOfLeav
 ./lib/linter/code-path-analysis/code-path-state.js:351:34    - Unknown word (expresion)  -- The end of the update expresion. This may change during
@@ -291,14 +293,14 @@ Lines:
 ./tests/lib/config/flat-config-array.js:207:22    - Unknown word (noniterable) -- it("should allow noniterable baseConfig objects"
 ./tests/lib/config/flat-config-schema.js:19:50     - Unknown word (reults)     -- expectedResult] The expected reults of merging first and
 ./tests/lib/config/flat-config-schema.js:46:20     - Unknown word (emtpy)      -- it("returns an emtpy object if both values
-./tests/lib/eslint/eslint.js:1348:57   - Unknown word (doesnotexist) -- lintFiles(["subdir1", "doesnotexist/*.js"]);
-./tests/lib/eslint/eslint.js:1423:58   - Unknown word (doesexist)    -- await eslint.lintFiles(["doesexist/*.js"]);
-./tests/lib/eslint/eslint.js:1991:71   - Unknown word (unignoring)   -- unignored without also unignoring all files in them",
-./tests/lib/eslint/eslint.js:2005:47   - Unknown word (jsfmt)        -- "!tests/format/**/jsfmt.spec.js"
-./tests/lib/eslint/eslint.js:3080:39   - Unknown word (previos)      -- make sure that the previos assertion checks the
-./tests/lib/eslint/eslint.js:3133:59   - Unknown word (intenationally) -- cacheFilePath, "[]"); // intenationally invalid to additionally
-./tests/lib/eslint/eslint.js:3303:59   - Unknown word (occured)        -- the previous run that occured after the cache was
-./tests/lib/eslint/eslint.js:6307:31   - Unknown word (dignore)        -- cwd: `${root}-dignore`,
+./tests/lib/eslint/eslint.js:1444:57   - Unknown word (doesnotexist) -- lintFiles(["subdir1", "doesnotexist/*.js"]);
+./tests/lib/eslint/eslint.js:1519:58   - Unknown word (doesexist)    -- await eslint.lintFiles(["doesexist/*.js"]);
+./tests/lib/eslint/eslint.js:2127:71   - Unknown word (unignoring)   -- unignored without also unignoring all files in them",
+./tests/lib/eslint/eslint.js:2141:47   - Unknown word (jsfmt)        -- "!tests/format/**/jsfmt.spec.js"
+./tests/lib/eslint/eslint.js:3216:39   - Unknown word (previos)      -- make sure that the previos assertion checks the
+./tests/lib/eslint/eslint.js:3269:59   - Unknown word (intenationally) -- cacheFilePath, "[]"); // intenationally invalid to additionally
+./tests/lib/eslint/eslint.js:3439:59   - Unknown word (occured)        -- the previous run that occured after the cache was
+./tests/lib/eslint/eslint.js:6443:31   - Unknown word (dignore)        -- cwd: `${root}-dignore`,
 ./tests/lib/eslint/legacy-eslint.js:2512:24   - Unknown word (succesfully) -- it("should succesfully execute with a rule
 ./tests/lib/linter/config-comment-parser.js:165:41    - Unknown word (ELEVENTEEN) -- code = "a: seventy, b:ELEVENTEEN";
 ./tests/lib/linter/linter.js:16238:52  - Unknown word (intentionaly)   -- // intentionaly mutates objects and
@@ -534,11 +536,11 @@ Lines:
 ./tests/tools/eslint-fuzzer.js:124:50    - Unknown word (foos)       -- message: "no foos allowed",
 ./tools/check-emfile-handling.js:30:10     - Unknown word (Sonoma)     -- * MacOS Sonoma v14.4 has a limit of
 ./tools/fuzzer-runner.js:50:42     - Unknown word (elapseds)   -- rules [:bar] :percent, :elapseds elapsed, eta :etas,
-./wdio.conf.js:120:21    - Unknown word (webdriverio) -- * - webdriver, webdriverio
-./wdio.conf.js:124:16    - Unknown word (sumologic)   -- * - @wdio/sumologic-reporter
-./wdio.conf.js:129:19    - Unknown word (appium)      -- * '@wdio/appium-service': 'info'
-./wdio.conf.js:177:48    - Unknown word (specfile)    -- to retry the entire specfile when it fails as a whole
-./wdio.conf.js:183:31    - Unknown word (specfiles)   -- Whether or not retried specfiles should be retried immediately
-./wdio.conf.js:224:76    - Unknown word (initialise)  -- spawned and can be used to initialise specific service
-./wdio.conf.js:248:34    - Unknown word (initialising) -- executed just before initialising the webdriver session
-./wdio.conf.js:318:39    - Unknown word (informations) -- Object} result.retries informations to spec related retries
+./wdio.conf.js:121:21    - Unknown word (webdriverio) -- * - webdriver, webdriverio
+./wdio.conf.js:125:16    - Unknown word (sumologic)   -- * - @wdio/sumologic-reporter
+./wdio.conf.js:130:19    - Unknown word (appium)      -- * '@wdio/appium-service': 'info'
+./wdio.conf.js:178:48    - Unknown word (specfile)    -- to retry the entire specfile when it fails as a whole
+./wdio.conf.js:184:31    - Unknown word (specfiles)   -- Whether or not retried specfiles should be retried immediately
+./wdio.conf.js:225:76    - Unknown word (initialise)  -- spawned and can be used to initialise specific service
+./wdio.conf.js:249:34    - Unknown word (initialising) -- executed just before initialising the webdriver session
+./wdio.conf.js:319:39    - Unknown word (informations) -- Object} result.retries informations to spec related retries

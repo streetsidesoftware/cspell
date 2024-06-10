@@ -3,9 +3,9 @@ Repository: caddyserver/caddy
 Url: https://github.com/caddyserver/caddy.git
 Args: '["**/*.go"]'
 Summary:
-  files: 271
-  filesWithIssues: 252
-  issues: 4044
+  files: 273
+  filesWithIssues: 254
+  issues: 4061
   errors: 0
 Errors: []
 
@@ -28,9 +28,9 @@ issues:
   - "admin.go:843:23         Redir           U       if err == errInternalRedir {"
   - "admin.go:1371:21        pidfile         U       // PIDFile writes a pidfile to the file at filename"
   - "caddy.go:42:44          filesystems     U       caddyserver/caddy/v2/internal/filesystems\""
-  - "caddy.go:715:24         byeee           U       logger.Warn(\"exiting; byeee!! 👋\")"
-  - "caddy.go:891:47         ldflags         U       during `go build` with `-ldflags`:"
-  - "caddy.go:907:28         devel           U       this function returns \"(devel)\" because Go uses that"
+  - "caddy.go:734:24         byeee           U       logger.Warn(\"exiting; byeee!! 👋\")"
+  - "caddy.go:910:47         ldflags         U       during `go build` with `-ldflags`:"
+  - "caddy.go:926:28         devel           U       this function returns \"(devel)\" because Go uses that"
   - "caddyconfig/caddyfile/adapter.go:15:9           caddyfile       U       package caddyfile"
   - "caddyconfig/caddyfile/adapter.go:23:35          caddyconfig     U       caddyserver/caddy/v2/caddyconfig\""
   - "caddyconfig/caddyfile/adapter.go:26:19          Caddyfile       U       // Adapter adapts Caddyfile to Caddy JSON."
@@ -155,8 +155,8 @@ issues:
   - "metrics.go:39:15        promhttp    U       // Similar to promhttp.InstrumentHandlerCounter"
   - "modules/caddyevents/app.go:15:9         caddyevents         U       package caddyevents"
   - "modules/caddyevents/app.go:128:12       Iface               U       handlersIface, err := ctx.LoadModule"
-  - "modules/caddyevents/app.go:380:41       specversion         U       string `json:\"specversion\"`"
-  - "modules/caddyevents/app.go:383:41       datacontenttype     U       string `json:\"datacontenttype,omitempty\"`"
+  - "modules/caddyevents/app.go:385:41       specversion         U       string `json:\"specversion\"`"
+  - "modules/caddyevents/app.go:388:41       datacontenttype     U       string `json:\"datacontenttype,omitempty\"`"
   - "modules/caddyevents/eventsconfig/caddyfile.go:15:12         eventsconfig    U       // Package eventsconfig is for configuring caddyevent"
   - "modules/caddyfs/filesystem.go:1:9           caddyfs     U       package caddyfs"
   - "modules/caddyfs/filesystem.go:105:3         fsys        U       fsys, ok := unm.(fs.FS)"
@@ -169,7 +169,9 @@ issues:
   - "modules/caddyhttp/caddyauth/hashes.go:59:26         ulqf            U       return []byte(\"$2a$14$X3ulqf/iGxnf1k6oMZ.RZeJUoqI"
   - "modules/caddyhttp/caddyauth/hashes.go:59:32         Gxnf            U       byte(\"$2a$14$X3ulqf/iGxnf1k6oMZ.RZeJUoqI9PX2PM"
   - "modules/caddyhttp/caddyauth/hashes.go:59:69         LGXG            U       RZeJUoqI9PX2PM4rS5lkIKJXduLGXGPrt6\")"
-  - "modules/caddyhttp/caddyhttp_test.go:63:21       fbar    U       inputPath: \"/..%2fbar\","
+  - "modules/caddyhttp/caddyhttp_test.go:63:21       fbar        U       inputPath: \"/..%2fbar\","
+  - "modules/caddyhttp/caddyhttp_test.go:113:25      cwindows    U       inputPath: `/..%5cwindows%5cwin.ini`,"
+  - "modules/caddyhttp/caddyhttp_test.go:113:35      cwin        U       `/..%5cwindows%5cwin.ini`,"
   - "modules/caddyhttp/caddyhttp.go:137:30       unmarshals      U       WeakString is a type that unmarshals any JSON value"
   - "modules/caddyhttp/celmatcher_test.go:57:60          localdomain     U       subject} == 'CN=client.localdomain'\","
   - "modules/caddyhttp/celmatcher.go:428:62      setes       U       matcherLibrary from option setes."
@@ -421,15 +423,15 @@ issues:
   - "modules/caddytls/distributedstek/distributedstek.go:230:18      godocs              U       // again, see godocs for why timer is stopped"
   - "modules/caddytls/standardstek/stek.go:15:9          standardstek    U       package standardstek"
   - "modules/caddytls/standardstek/stek.go:49:2          itvl            U       itvl := time.Duration(s.stekConfig"
-  - "modules/caddytls/tls.go:246:25      unmanaged       U       load manual/static (unmanaged) certificates - we do"
-  - "modules/caddytls/tls.go:266:28      Unmanaged       U       hash, err := magic.CacheUnmanagedTLSCertificate(ctx, cert"
-  - "modules/caddytls/tls.go:463:46      SSLHTTP         U       certmagic.LooksLikeZeroSSLHTTPValidation(r)"
-  - "modules/caddytls/tls.go:494:7       ziss            U       if ziss, ok := iss.(*ZeroSSLIssuer"
+  - "modules/caddytls/tls.go:256:25      unmanaged       U       load manual/static (unmanaged) certificates - we do"
+  - "modules/caddytls/tls.go:277:28      Unmanaged       U       hash, err := magic.CacheUnmanagedTLSCertificate(ctx, cert"
+  - "modules/caddytls/tls.go:474:46      SSLHTTP         U       certmagic.LooksLikeZeroSSLHTTPValidation(r)"
+  - "modules/caddytls/tls.go:505:7       ziss            U       if ziss, ok := iss.(*ZeroSSLIssuer"
   - "modules/caddytls/values.go:23:24        cpuid       U       github.com/klauspost/cpuid/v2\""
   - "modules/caddytls/values.go:52:28        AESNI       U       defaultCipherSuitesWithAESNI = []uint16{"
   - "modules/caddytls/values.go:88:3         secp        U       \"secp256r1\": tls.CurveP25"
   - "modules/logging/encoders.go:53:25       milli       U       ce.TimeFormat = \"wall_milli\""
-  - "modules/logging/filewriter.go:26:12         natefinch       U       \"gopkg.in/natefinch/lumberjack.v2\""
+  - "modules/logging/filewriter.go:27:12         natefinch       U       \"gopkg.in/natefinch/lumberjack.v2\""
   - "modules/logging/filters_test.go:89:20       notexist    U       {replaceAction, \"notexist\", \"REDACTED\"},"
   - "modules/logging/filters_test.go:165:2       outval      U       outval := out.Interface.(caddyhttp"
   - "modules/logging/netwriter.go:94:2           reconn      U       reconn := &redialerConn{"
