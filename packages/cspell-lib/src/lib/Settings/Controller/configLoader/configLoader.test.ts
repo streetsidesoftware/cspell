@@ -782,15 +782,15 @@ function uh(url: string | URL, ref?: string | URL): string {
 
 describe('Validate resolveGlobRoot', () => {
     test.each`
-        globRoot          | cfgUrl                                                                 | expected
-        ${undefined}      | ${import.meta.url}                                                     | ${rp(fileURLToPath(u('.', import.meta.url)))}
-        ${undefined}      | ${uh('../not/found/cfg.json', import.meta.url)}                        | ${fileURLToPath(u('../not/found', import.meta.url))}
-        ${undefined}      | ${uh('./.vscode/cspell.json', import.meta.url)}                        | ${'${cwd}'}
-        ${undefined}      | ${uh('./.config/.cspell.json', import.meta.url)}                       | ${rp(fileURLToPath(u('.', import.meta.url)))}
-        ${undefined}      | ${cUrl(import.meta.url, { scheme: 'vscode-vfs' }).href}                | ${uh('.', cUrl(import.meta.url, { scheme: 'vscode-vfs' }))}
-        ${undefined}      | ${uh('vscode-vfs://github/streetsidesoftware/cspell-dicts/README.md')} | ${'vscode-vfs://github/streetsidesoftware/cspell-dicts/'}
-        ${'..'}           | ${uh('vscode-vfs://github/streetsidesoftware/cspell-dicts/README.md')} | ${'vscode-vfs://github/streetsidesoftware/'}
-        ${'..\\frontend'} | ${uh('vscode-vfs://github/streetsidesoftware/cspell-dicts/README.md')} | ${'vscode-vfs://github/streetsidesoftware/frontend/'}
+        globRoot                        | cfgUrl                                                                 | expected
+        ${undefined}                    | ${import.meta.url}                                                     | ${rp(fileURLToPath(u('.', import.meta.url)))}
+        ${undefined}                    | ${uh('../not/found/cfg.json', import.meta.url)}                        | ${fileURLToPath(u('../not/found', import.meta.url))}
+        ${undefined}                    | ${uh('./.vscode/cspell.json', import.meta.url)}                        | ${'${cwd}'}
+        ${undefined}                    | ${uh('./.config/.cspell.json', import.meta.url)}                       | ${rp(fileURLToPath(u('.', import.meta.url)))}
+        ${undefined}                    | ${cUrl(import.meta.url, { scheme: 'vscode-vfs' }).href}                | ${uh('.', cUrl(import.meta.url, { scheme: 'vscode-vfs' }))}
+        ${undefined}                    | ${uh('vscode-vfs://github/streetsidesoftware/cspell-dicts/README.md')} | ${'vscode-vfs://github/streetsidesoftware/cspell-dicts/'}
+        ${'..'}                         | ${uh('vscode-vfs://github/streetsidesoftware/cspell-dicts/README.md')} | ${'vscode-vfs://github/streetsidesoftware/'}
+        ${'..' + path.sep + 'frontend'} | ${uh('vscode-vfs://github/streetsidesoftware/cspell-dicts/README.md')} | ${'vscode-vfs://github/streetsidesoftware/frontend/'}
     `('resolveGlobRoot $globRoot, $cfgUrl', ({ globRoot, cfgUrl, expected }) => {
         const url = toFileUrl(cfgUrl);
         const r = resolveGlobRoot({ globRoot }, url);
