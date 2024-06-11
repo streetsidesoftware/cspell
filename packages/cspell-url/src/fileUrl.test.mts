@@ -8,7 +8,7 @@ import { FileUrlBuilder, normalizeFilePathForUrl, toFileURL } from './fileUrl.mj
 import { isUrlLike, toURL, urlParent } from './url.mjs';
 
 const root = path.join(__dirname, '../..');
-const oc = expect.objectContaining;
+// const oc = expect.objectContaining;
 // const sc = expect.stringContaining;
 const sm = expect.stringMatching;
 
