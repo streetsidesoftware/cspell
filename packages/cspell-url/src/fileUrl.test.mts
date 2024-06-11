@@ -1,10 +1,10 @@
 import * as path from 'node:path';
-import { pathToFileURL } from 'node:url';
+import { fileURLToPath, pathToFileURL } from 'node:url';
 
 import { describe, expect, test } from 'vitest';
 
 import { urlBasename } from './dataUrl.mjs';
-import { FileUrlBuilder, normalizeFilePathForUrl, toFileURL } from './fileUrl.mjs';
+import { FileUrlBuilder, normalizeFilePathForUrl, toFileDirURL, toFilePathOrHref, toFileURL } from './fileUrl.mjs';
 import { isUrlLike, toURL, urlParent } from './url.mjs';
 
 const root = path.join(__dirname, '../..');
@@ -97,6 +97,27 @@ describe('util', () => {
     `('normalizePathForUrl $path, $windows', ({ path, windows, expected }) => {
         const fileUrlBuilder = new FileUrlBuilder({ windows });
         expect(fileUrlBuilder.normalizeFilePathForUrl(path)).toEqual(expected);
+    });
+
+    test.each`
+        url                           | expected
+        ${toFileURL('file.txt')}      | ${path.resolve('file.txt')}
+        ${toFileURL('file.txt').href} | ${path.resolve('file.txt')}
+        ${import.meta.url}            | ${fileURLToPath(import.meta.url)}
+        ${'stdin:sample.py'}          | ${'stdin:sample.py'}
+    `('toFilePathOrHref $url', ({ url, expected }) => {
+        expect(toFilePathOrHref(url)).toEqual(expected);
+    });
+
+    test.each`
+        url                        | expected
+        ${toFileURL('./').href}    | ${pathToFileURL('./').href}
+        ${'.'}                     | ${pathToFileURL('./').href}
+        ${'data:application/json'} | ${'data:application/json'}
+        ${'stdin:file.txt'}        | ${'stdin:file.txt'}
+        ${'stdin:/path/to/dir'}    | ${'stdin:/path/to/dir/'}
+    `('toFileDirURL $url', ({ url, expected }) => {
+        expect(toFileDirURL(url).href).toEqual(expected);
     });
 });
 

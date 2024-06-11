@@ -10,10 +10,9 @@ import {
     isDataURL,
     isFileURL,
     isURLLike,
-    normalizePathSlashesForUrl,
     relativeTo,
     resolveFileWithURL,
-    toFileDirUrl,
+    toFileDirURL,
     toFilePathOrHref,
     toFileUrl,
     windowsDriveLetterToUpper,
@@ -67,38 +66,6 @@ describe('url', () => {
         `('relativeTo $filename $relativeToUrl', ({ filename, relativeToUrl, expected }) => {
             const result = relativeTo(filename, relativeToUrl);
             expect(result.href).toBe(expected?.href);
-        });
-    });
-
-    describe('normalizePathSlashes', () => {
-        test('should normalize path slashes', () => {
-            const filePath = '\\path\\to\\file.txt';
-            const result = normalizePathSlashesForUrl(filePath, '\\');
-            expect(result).toBe('/path/to/file.txt');
-        });
-
-        test('should not modify path with already normalized slashes', () => {
-            const filePath = '/path/to/file.txt';
-            const result = normalizePathSlashesForUrl(filePath);
-            expect(result).toBe('/path/to/file.txt');
-        });
-
-        test('should handle Windows drive letters', () => {
-            const filePath = 'c:\\path\\to\\file.txt';
-            const result = normalizePathSlashesForUrl(filePath, '\\');
-            expect(result).toBe('/c:/path/to/file.txt');
-        });
-
-        test('should handle Windows drive letters', () => {
-            const filePath = 'c:/path/to/file.txt';
-            const result = normalizePathSlashesForUrl(filePath);
-            expect(result).toBe('/c:/path/to/file.txt');
-        });
-
-        test('should handle empty path', () => {
-            const filePath = '';
-            const result = normalizePathSlashesForUrl(filePath);
-            expect(result).toBe('');
         });
     });
 
@@ -186,13 +153,13 @@ describe('url', () => {
     describe('toFileDirUrl', () => {
         test('should convert a directory path to a file URL', () => {
             const dir = u('/path/to/directory');
-            const result = toFileDirUrl(dir);
+            const result = toFileDirURL(dir);
             expect(result.href).toBe(u('/path/to/directory/').href);
         });
 
         test('should return the input if it is already a file URL', () => {
             const dir = u('file:///path/to/directory/');
-            const result = toFileDirUrl(dir);
+            const result = toFileDirURL(dir);
             expect(result.href).toBe('file:///path/to/directory/');
         });
     });

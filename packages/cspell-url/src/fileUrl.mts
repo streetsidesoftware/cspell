@@ -1,8 +1,8 @@
 import assert from 'node:assert';
 import path from 'node:path';
-import { pathToFileURL } from 'node:url';
+import { fileURLToPath, pathToFileURL } from 'node:url';
 
-import { hasProtocol, isUrlLike } from './url.mjs';
+import { addTrailingSlash, hasProtocol, isUrlLike } from './url.mjs';
 
 const isWindows = process.platform === 'win32';
 
@@ -132,4 +132,31 @@ export function normalizeFilePathForUrl(filePath: string): string {
  */
 export function toFileURL(filenameOrUrl: string | URL, relativeTo?: string | URL): URL {
     return fileUrlBuilder.toFileURL(filenameOrUrl, relativeTo);
+}
+
+/**
+ * Convert a URL into a string. If it is a file URL, convert it to a path.
+ * @param url - URL
+ * @returns path or href
+ */
+export function toFilePathOrHref(url: URL | string): string {
+    return isFileURL(url) ? toFilePath(url) : url.toString();
+}
+
+function toFilePath(url: string | URL): string {
+    return windowsDriveLetterToUpper(fileURLToPath(url));
+}
+
+function windowsDriveLetterToUpper(absoluteFilePath: string): string {
+    return absoluteFilePath.replace(/^([a-z]):\\/, (s) => s.toUpperCase());
+}
+
+/**
+ * Converts a file path to a URL and adds a trailing slash.
+ * @param dir - url to a directory
+ * @returns a URL
+ */
+export function toFileDirURL(dir: string | URL): URL {
+    const url = toFileURL(dir);
+    return addTrailingSlash(url);
 }

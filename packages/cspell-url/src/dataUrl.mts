@@ -23,6 +23,6 @@ export function urlBasename(url: string | URL): string {
     return basenameOfUrlPathname(url.pathname);
 }
 
-export function isDataUrl(url: string | URL): boolean {
+export function isDataURL(url: string | URL): boolean {
     return hasProtocol(url, 'data:');
 }

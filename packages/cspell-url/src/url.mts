@@ -1,4 +1,4 @@
-const isURLRegEx = /^([\w-]{2,64}:\/|data:)/i;
+const isURLRegEx = /^(\w[\w-]{1,63}:\/|data:|stdin:)/i;
 
 /**
  * Try to make a URL.
@@ -69,5 +69,19 @@ export function isURL(url: unknown): url is URL {
  * @returns
  */
 export function hasProtocol(url: string | URL, protocol: string): boolean {
+    protocol = protocol.endsWith(':') ? protocol : protocol + ':';
     return typeof url === 'string' ? url.startsWith(protocol) : url.protocol === protocol;
+}
+
+/**
+ * Attempts to add a trailing slash to the URL pathname if it does not already have one.
+ * Some If the pathname doesn't start with a `/`, a trailing slash is not added.
+ * @param url - a URL
+ * @returns
+ */
+export function addTrailingSlash(url: URL): URL {
+    if (url.pathname.endsWith('/')) return url;
+    const urlWithSlash = new URL(url.href);
+    urlWithSlash.pathname += '/';
+    return urlWithSlash;
 }
