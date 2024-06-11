@@ -43,7 +43,7 @@ export class FileUrlBuilder {
         const sep = options.path?.sep;
         this.windows = options.windows ?? (sep ? sep === '\\' : undefined) ?? isWindows;
         this.path = options.path ?? this.windows ? path.win32 : path.posix;
-        this.cwd = options.cwd ?? pathToFileURL(this.path.resolve());
+        this.cwd = options.cwd ?? pathToFileURL(this.path.resolve() + '/');
         assert(this.path.sep === (this.windows ? '\\' : '/'));
     }
 

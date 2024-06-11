@@ -1,4 +1,5 @@
 import * as path from 'node:path';
+import { pathToFileURL } from 'node:url';
 
 import { describe, expect, test } from 'vitest';
 
@@ -10,6 +11,8 @@ const root = path.join(__dirname, '../..');
 const oc = expect.objectContaining;
 // const sc = expect.stringContaining;
 const sm = expect.stringMatching;
+
+const cwdURL = pathToFileURL('.');
 
 describe('util', () => {
     test.each`
@@ -24,14 +27,14 @@ describe('util', () => {
     });
 
     test.each`
-        file                                                                                                | expected
-        ${'samples/cities.txt'}                                                                             | ${oc({ protocol: 'file:' })}
-        ${'samples/cities.txt.gz'}                                                                          | ${oc({ protocol: 'file:' })}
-        ${'https://github.com/streetsidesoftware/cspell/raw/main/packages/cspell-io/samples/cities.txt'}    | ${oc({ protocol: 'https:' })}
-        ${'https://github.com/streetsidesoftware/cspell/raw/main/packages/cspell-io/samples/cities.txt.gz'} | ${oc({ protocol: 'https:' })}
+        file                                                                       | expected
+        ${'samples/cities.txt'}                                                    | ${uh('samples/cities.txt')}
+        ${'samples/cities.txt.gz'}                                                 | ${uh('samples/cities.txt.gz')}
+        ${'https://github.com/streetsidesoftware/cspell-io/samples/cities.txt.gz'} | ${'https://github.com/streetsidesoftware/cspell-io/samples/cities.txt.gz'}
+        ${'https://github.com/streetsidesoftware/cspell-io/samples/cities.txt'}    | ${'https://github.com/streetsidesoftware/cspell-io/samples/cities.txt'}
     `('toFileURL $file', async ({ file, expected }) => {
         const url = toFileURL(file, root);
-        expect(url).toEqual(expected);
+        expect(url.href).toEqual(expected);
     });
 
     test.each`
@@ -96,3 +99,11 @@ describe('util', () => {
         expect(fileUrlBuilder.normalizeFilePathForUrl(path)).toEqual(expected);
     });
 });
+
+function u(path: string, relativeURL?: string | URL) {
+    return new URL(path, relativeURL);
+}
+
+function uh(path: string, relativeURL = cwdURL) {
+    return u(path, relativeURL).href;
+}
