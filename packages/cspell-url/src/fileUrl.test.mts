@@ -80,7 +80,8 @@ describe('util', () => {
         path                     | windows | expected
         ${'path/to/file'}        | ${true} | ${'path/to/file'}
         ${'path\\to\\file.txt'}  | ${true} | ${'path/to/file.txt'}
-        ${'C:/path/to/file'}     | ${true} | ${'/c:/path/to/file'}
+        ${'C:/path/to/file'}     | ${true} | ${'/C:/path/to/file'}
+        ${'d:/path/to/file'}     | ${true} | ${'/D:/path/to/file'}
         ${'http://example.com/'} | ${true} | ${'http://example.com/'}
         ${'path/to/file/'}       | ${true} | ${'path/to/file/'}
         ${'path/to/file\\'}      | ${true} | ${'path/to/file/'}

@@ -76,7 +76,7 @@ export class FileUrlBuilder {
         filePath = filePath.replaceAll(questionRegex, '%3F');
         filePath = filePath.replaceAll(hashRegex, '%23');
         const pathname = filePath.replaceAll('\\', '/');
-        return pathname.replace(isWindowsPathRegEx, (drive) => `/${drive}`.toLowerCase());
+        return pathname.replace(isWindowsPathRegEx, (drive) => `/${drive}`.toUpperCase());
     }
 
     /**

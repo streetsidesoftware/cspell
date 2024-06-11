@@ -31,5 +31,5 @@ export function isSupportedURL(url: URL): boolean {
  */
 export function basename(path: string): string {
     const base = basenameOfUrlPathname(path);
-    return base.endsWith('/') ? base.slice(0, -1) : base;
+    return base.endsWith('/') && !base.endsWith(':/') ? base.slice(0, -1) : base;
 }
