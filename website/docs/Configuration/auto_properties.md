@@ -9,67 +9,63 @@ format: md
 
 # CSpell Configuration
 
-
-
 ## Settings
 
-| Field | Type | Description |
-| --- | --- | --- |
-| [$schema](#settings--schema) | `string` | Url to JSON Schema | 
-| [allowCompoundWords](#settings-allowcompoundwords) | `boolean` | True to enable compound word checking. See [Case Sensitivity](https://cspell.org/docs/case-sensitive/) for more details. | 
-| [cache](#settings-cache) | `CacheSettings` | Define cache settings. | 
-| [caseSensitive](#settings-casesensitive) | `boolean` | Determines if words must match case and accent rules. | 
-| [description](#settings-description) | `string` | Optional description of configuration. | 
-| [dictionaries](#settings-dictionaries) | `DictionaryReference[]` | Optional list of dictionaries to use. Each entry should match the name of the dictionary. | 
-| [dictionaryDefinitions](#settings-dictionarydefinitions) | `DictionaryDefinition[]` | Define additional available dictionaries. | 
-| [enableFiletypes](#settings-enablefiletypes) | `LanguageIdSingle[]` | Enable / Disable checking file types (languageIds). | 
-| [enableGlobDot](#settings-enableglobdot) | `boolean` | Enable scanning files and directories beginning with `.` (period). | 
-| [enabled](#settings-enabled) | `boolean` | Is the spell checker enabled. | 
-| [enabledFileTypes](#settings-enabledfiletypes) | `object` | Enable / Disable checking file types (languageIds). | 
-| [enabledLanguageIds](#settings-enabledlanguageids) | `LanguageIdSingle[]` | Specify a list of file types to spell check. It is better to use  [Settings.enabledFileTypes](#settings-enabledfiletypes)  to Enable / Disable checking files types. | 
-| [failFast](#settings-failfast) | `boolean` | Exit with non-zero code as soon as an issue/error is encountered (useful for CI or git hooks) | 
-| [features](#settings-features) | `Features` | Configure CSpell features. | 
-| [files](#settings-files) | `Glob[]` | Glob patterns of files to be checked. | 
-| [flagWords](#settings-flagwords) | `string[]` | List of words to always be considered incorrect. Words found in `flagWords` override `words`. | 
-| [gitignoreRoot](#settings-gitignoreroot) | `FsPath`<br />`FsPath[]` | Tells the spell checker to stop searching for `.gitignore` files when it reaches a matching root. | 
-| [globRoot](#settings-globroot) | `FSPathResolvable` | The root to use for glob patterns found in this configuration. | 
-| [id](#settings-id) | `string` | Optional identifier. | 
-| [ignorePaths](#settings-ignorepaths) | `Glob[]` | Glob patterns of files to be ignored. | 
-| [ignoreRegExpList](#settings-ignoreregexplist) | `RegExpPatternList` | List of regular expression patterns or pattern names to exclude from spell checking. | 
-| [ignoreWords](#settings-ignorewords) | `string[]` | List of words to be ignored. An ignored word will not show up as an error, even if it is | 
-| [import](#settings-import) | `FsPath`<br />`FsPath[]` | Allows this configuration to inherit configuration for one or more other files. | 
-| [includeRegExpList](#settings-includeregexplist) | `RegExpPatternList` | List of regular expression patterns or defined pattern names to match for spell checking. | 
-| [language](#settings-language) | `LocaleId` | Current active spelling language. This specifies the language locale to use in choosing the | 
-| [languageId](#settings-languageid) | `MatchingFileType` | Forces the spell checker to assume a give language id. Used mainly as an Override. | 
-| [languageSettings](#settings-languagesettings) | `LanguageSetting[]` | Additional settings for individual languages. | 
-| [loadDefaultConfiguration](#settings-loaddefaultconfiguration) | `boolean` | By default, the bundled dictionary configurations are loaded. Explicitly setting this to `false` | 
-| [maxDuplicateProblems](#settings-maxduplicateproblems) | `number` | The maximum number of times the same word can be flagged as an error in a file. | 
-| [maxNumberOfProblems](#settings-maxnumberofproblems) | `number` | The maximum number of problems to report in a file. | 
-| [minWordLength](#settings-minwordlength) | `number` | The minimum length of a word before checking it against a dictionary. | 
-| [name](#settings-name) | `string` | Optional name of configuration. | 
-| [noConfigSearch](#settings-noconfigsearch) | `boolean` | Prevents searching for local configuration when checking individual documents. | 
-| [noSuggestDictionaries](#settings-nosuggestdictionaries) | `DictionaryReference[]` | Optional list of dictionaries that will not be used for suggestions. | 
-| [numSuggestions](#settings-numsuggestions) | `number` | Number of suggestions to make. | 
-| [overrides](#settings-overrides) | `OverrideSettings[]` | Overrides are used to apply settings for specific files in your project. | 
-| [patterns](#settings-patterns) | `RegExpPatternDefinition[]` | Defines a list of patterns that can be used with the `ignoreRegExpList` and | 
-| [pnpFiles](#settings-pnpfiles) | `string[]` | The PnP files to search for. Note: `.mjs` files are not currently supported. | 
-| [readonly](#settings-readonly) | `boolean` | Indicate that the configuration file should not be modified. | 
-| [reporters](#settings-reporters) | `ReporterSettings[]` | Define which reports to use. | 
-| [showStatus](#settings-showstatus) | `boolean` | Show status. | 
-| [spellCheckDelayMs](#settings-spellcheckdelayms) | `number` | Delay in ms after a document has changed before checking it for spelling errors. | 
-| [suggestWords](#settings-suggestwords) | `string[]` | A list of suggested replacements for words. | 
-| [suggestionNumChanges](#settings-suggestionnumchanges) | `number` | The maximum number of changes allowed on a word to be considered a suggestions. | 
-| [suggestionsTimeout](#settings-suggestionstimeout) | `number` | The maximum amount of time in milliseconds to generate suggestions for a word. | 
-| [useGitignore](#settings-usegitignore) | `boolean` | Tells the spell checker to load `.gitignore` files and skip files that match the globs in the `.gitignore` files found. | 
-| [usePnP](#settings-usepnp) | `boolean` | Packages managers like Yarn 2 use a `.pnp.cjs` file to assist in loading | 
-| [userWords](#settings-userwords) | `string[]` | Words to add to global dictionary -- should only be in the user config file. | 
-| [validateDirectives](#settings-validatedirectives) | `boolean` | Verify that the in-document directives are correct. | 
-| [version](#settings-version) | `Version` | Configuration format version of the settings file. | 
-| [words](#settings-words) | `string[]` | List of words to be considered correct. | 
-
+| Field                                                          | Type                        | Description                                                                                                                                                        |
+| -------------------------------------------------------------- | --------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| [$schema](#settings--schema)                                   | `string`                    | Url to JSON Schema                                                                                                                                                 |
+| [allowCompoundWords](#settings-allowcompoundwords)             | `boolean`                   | True to enable compound word checking. See [Case Sensitivity](https://cspell.org/docs/case-sensitive/) for more details.                                           |
+| [cache](#settings-cache)                                       | `CacheSettings`             | Define cache settings.                                                                                                                                             |
+| [caseSensitive](#settings-casesensitive)                       | `boolean`                   | Determines if words must match case and accent rules.                                                                                                              |
+| [description](#settings-description)                           | `string`                    | Optional description of configuration.                                                                                                                             |
+| [dictionaries](#settings-dictionaries)                         | `DictionaryReference[]`     | Optional list of dictionaries to use. Each entry should match the name of the dictionary.                                                                          |
+| [dictionaryDefinitions](#settings-dictionarydefinitions)       | `DictionaryDefinition[]`    | Define additional available dictionaries.                                                                                                                          |
+| [enableFiletypes](#settings-enablefiletypes)                   | `LanguageIdSingle[]`        | Enable / Disable checking file types (languageIds).                                                                                                                |
+| [enableGlobDot](#settings-enableglobdot)                       | `boolean`                   | Enable scanning files and directories beginning with `.` (period).                                                                                                 |
+| [enabled](#settings-enabled)                                   | `boolean`                   | Is the spell checker enabled.                                                                                                                                      |
+| [enabledFileTypes](#settings-enabledfiletypes)                 | `object`                    | Enable / Disable checking file types (languageIds).                                                                                                                |
+| [enabledLanguageIds](#settings-enabledlanguageids)             | `LanguageIdSingle[]`        | Specify a list of file types to spell check. It is better to use [Settings.enabledFileTypes](#settings-enabledfiletypes) to Enable / Disable checking files types. |
+| [failFast](#settings-failfast)                                 | `boolean`                   | Exit with non-zero code as soon as an issue/error is encountered (useful for CI or git hooks)                                                                      |
+| [features](#settings-features)                                 | `Features`                  | Configure CSpell features.                                                                                                                                         |
+| [files](#settings-files)                                       | `Glob[]`                    | Glob patterns of files to be checked.                                                                                                                              |
+| [flagWords](#settings-flagwords)                               | `string[]`                  | List of words to always be considered incorrect. Words found in `flagWords` override `words`.                                                                      |
+| [gitignoreRoot](#settings-gitignoreroot)                       | `FsPath`<br />`FsPath[]`    | Tells the spell checker to stop searching for `.gitignore` files when it reaches a matching root.                                                                  |
+| [globRoot](#settings-globroot)                                 | `FSPathResolvable`          | The root to use for glob patterns found in this configuration.                                                                                                     |
+| [id](#settings-id)                                             | `string`                    | Optional identifier.                                                                                                                                               |
+| [ignorePaths](#settings-ignorepaths)                           | `Glob[]`                    | Glob patterns of files to be ignored.                                                                                                                              |
+| [ignoreRegExpList](#settings-ignoreregexplist)                 | `RegExpPatternList`         | List of regular expression patterns or pattern names to exclude from spell checking.                                                                               |
+| [ignoreWords](#settings-ignorewords)                           | `string[]`                  | List of words to be ignored. An ignored word will not show up as an error, even if it is                                                                           |
+| [import](#settings-import)                                     | `FsPath`<br />`FsPath[]`    | Allows this configuration to inherit configuration for one or more other files.                                                                                    |
+| [includeRegExpList](#settings-includeregexplist)               | `RegExpPatternList`         | List of regular expression patterns or defined pattern names to match for spell checking.                                                                          |
+| [language](#settings-language)                                 | `LocaleId`                  | Current active spelling language. This specifies the language locale to use in choosing the                                                                        |
+| [languageId](#settings-languageid)                             | `MatchingFileType`          | Forces the spell checker to assume a give language id. Used mainly as an Override.                                                                                 |
+| [languageSettings](#settings-languagesettings)                 | `LanguageSetting[]`         | Additional settings for individual languages.                                                                                                                      |
+| [loadDefaultConfiguration](#settings-loaddefaultconfiguration) | `boolean`                   | By default, the bundled dictionary configurations are loaded. Explicitly setting this to `false`                                                                   |
+| [maxDuplicateProblems](#settings-maxduplicateproblems)         | `number`                    | The maximum number of times the same word can be flagged as an error in a file.                                                                                    |
+| [maxNumberOfProblems](#settings-maxnumberofproblems)           | `number`                    | The maximum number of problems to report in a file.                                                                                                                |
+| [minWordLength](#settings-minwordlength)                       | `number`                    | The minimum length of a word before checking it against a dictionary.                                                                                              |
+| [name](#settings-name)                                         | `string`                    | Optional name of configuration.                                                                                                                                    |
+| [noConfigSearch](#settings-noconfigsearch)                     | `boolean`                   | Prevents searching for local configuration when checking individual documents.                                                                                     |
+| [noSuggestDictionaries](#settings-nosuggestdictionaries)       | `DictionaryReference[]`     | Optional list of dictionaries that will not be used for suggestions.                                                                                               |
+| [numSuggestions](#settings-numsuggestions)                     | `number`                    | Number of suggestions to make.                                                                                                                                     |
+| [overrides](#settings-overrides)                               | `OverrideSettings[]`        | Overrides are used to apply settings for specific files in your project.                                                                                           |
+| [patterns](#settings-patterns)                                 | `RegExpPatternDefinition[]` | Defines a list of patterns that can be used with the `ignoreRegExpList` and                                                                                        |
+| [pnpFiles](#settings-pnpfiles)                                 | `string[]`                  | The PnP files to search for. Note: `.mjs` files are not currently supported.                                                                                       |
+| [readonly](#settings-readonly)                                 | `boolean`                   | Indicate that the configuration file should not be modified.                                                                                                       |
+| [reporters](#settings-reporters)                               | `ReporterSettings[]`        | Define which reports to use.                                                                                                                                       |
+| [showStatus](#settings-showstatus)                             | `boolean`                   | Show status.                                                                                                                                                       |
+| [spellCheckDelayMs](#settings-spellcheckdelayms)               | `number`                    | Delay in ms after a document has changed before checking it for spelling errors.                                                                                   |
+| [suggestWords](#settings-suggestwords)                         | `string[]`                  | A list of suggested replacements for words.                                                                                                                        |
+| [suggestionNumChanges](#settings-suggestionnumchanges)         | `number`                    | The maximum number of changes allowed on a word to be considered a suggestions.                                                                                    |
+| [suggestionsTimeout](#settings-suggestionstimeout)             | `number`                    | The maximum amount of time in milliseconds to generate suggestions for a word.                                                                                     |
+| [useGitignore](#settings-usegitignore)                         | `boolean`                   | Tells the spell checker to load `.gitignore` files and skip files that match the globs in the `.gitignore` files found.                                            |
+| [usePnP](#settings-usepnp)                                     | `boolean`                   | Packages managers like Yarn 2 use a `.pnp.cjs` file to assist in loading                                                                                           |
+| [userWords](#settings-userwords)                               | `string[]`                  | Words to add to global dictionary -- should only be in the user config file.                                                                                       |
+| [validateDirectives](#settings-validatedirectives)             | `boolean`                   | Verify that the in-document directives are correct.                                                                                                                |
+| [version](#settings-version)                                   | `Version`                   | Configuration format version of the settings file.                                                                                                                 |
+| [words](#settings-words)                                       | `string[]`                  | List of words to be considered correct.                                                                                                                            |
 
 ### Settings Fields
-
 
 ---
 
@@ -96,8 +92,6 @@ format: md
     </dd>
 </dl>
 
-
-
 ---
 
 #### `allowCompoundWords` {#settings-allowcompoundwords}
@@ -123,8 +117,6 @@ format: md
     </dd>
 </dl>
 
-
-
 ---
 
 #### `cache` {#settings-cache}
@@ -149,8 +141,6 @@ format: md
         Define cache settings.
     </dd>
 </dl>
-
-
 
 ---
 
@@ -181,8 +171,6 @@ format: md
     </dd>
 </dl>
 
-
-
 ---
 
 #### `description` {#settings-description}
@@ -207,8 +195,6 @@ format: md
         Optional description of configuration.
     </dd>
 </dl>
-
-
 
 ---
 
@@ -241,8 +227,6 @@ format: md
        and [Custom Dictionaries](https://cspell.org/docs/dictionaries-custom/) for more details.
     </dd>
 </dl>
-
-
 
 ---
 
@@ -277,8 +261,6 @@ format: md
        ```
     </dd>
 </dl>
-
-
 
 ---
 
@@ -324,8 +306,6 @@ format: md
     </dd>
 </dl>
 
-
-
 ---
 
 #### `enableGlobDot` {#settings-enableglobdot}
@@ -353,8 +333,6 @@ format: md
     </dd>
 </dl>
 
-
-
 ---
 
 #### `enabled` {#settings-enabled}
@@ -379,8 +357,6 @@ format: md
         Is the spell checker enabled.
     </dd>
 </dl>
-
-
 
 ---
 
@@ -422,8 +398,6 @@ format: md
     </dd>
 </dl>
 
-
-
 ---
 
 #### `enabledLanguageIds` {#settings-enabledlanguageids}
@@ -448,8 +422,6 @@ format: md
         Specify a list of file types to spell check. It is better to use  [Settings.enabledFileTypes](#settings-enabledfiletypes)  to Enable / Disable checking files types.
     </dd>
 </dl>
-
-
 
 ---
 
@@ -476,8 +448,6 @@ format: md
     </dd>
 </dl>
 
-
-
 ---
 
 #### `features` {#settings-features}
@@ -502,8 +472,6 @@ format: md
         Configure CSpell features.
     </dd>
 </dl>
-
-
 
 ---
 
@@ -531,8 +499,6 @@ format: md
        Glob patterns are relative to the `globRoot` of the configuration file that defines them.
     </dd>
 </dl>
-
-
 
 ---
 
@@ -573,8 +539,6 @@ format: md
     </dd>
 </dl>
 
-
-
 ---
 
 #### `gitignoreRoot` {#settings-gitignoreroot}
@@ -599,8 +563,6 @@ format: md
         Tells the spell checker to stop searching for `.gitignore` files when it reaches a matching root.
     </dd>
 </dl>
-
-
 
 ---
 
@@ -638,8 +600,6 @@ format: md
     </dd>
 </dl>
 
-
-
 ---
 
 #### `id` {#settings-id}
@@ -664,8 +624,6 @@ format: md
         Optional identifier.
     </dd>
 </dl>
-
-
 
 ---
 
@@ -693,8 +651,6 @@ format: md
        Glob patterns are relative to the `globRoot` of the configuration file that defines them.
     </dd>
 </dl>
-
-
 
 ---
 
@@ -745,8 +701,6 @@ format: md
     </dd>
 </dl>
 
-
-
 ---
 
 #### `ignoreWords` {#settings-ignorewords}
@@ -772,8 +726,6 @@ format: md
        also in the `flagWords`.
     </dd>
 </dl>
-
-
 
 ---
 
@@ -801,8 +753,6 @@ format: md
        See [Importing / Extending Configuration](https://cspell.org/configuration/imports/) for more details.
     </dd>
 </dl>
-
-
 
 ---
 
@@ -833,8 +783,6 @@ format: md
        [built-in to CSpell](https://cspell.org/types/cspell-types/types/PredefinedPatterns.html).
     </dd>
 </dl>
-
-
 
 ---
 
@@ -867,8 +815,6 @@ format: md
     </dd>
 </dl>
 
-
-
 ---
 
 #### `languageId` {#settings-languageid}
@@ -893,8 +839,6 @@ format: md
         Forces the spell checker to assume a give language id. Used mainly as an Override.
     </dd>
 </dl>
-
-
 
 ---
 
@@ -923,8 +867,6 @@ format: md
     </dd>
 </dl>
 
-
-
 ---
 
 #### `loadDefaultConfiguration` {#settings-loaddefaultconfiguration}
@@ -951,8 +893,6 @@ format: md
     </dd>
 </dl>
 
-
-
 ---
 
 #### `maxDuplicateProblems` {#settings-maxduplicateproblems}
@@ -977,8 +917,6 @@ format: md
         The maximum number of times the same word can be flagged as an error in a file.
     </dd>
 </dl>
-
-
 
 ---
 
@@ -1005,8 +943,6 @@ format: md
     </dd>
 </dl>
 
-
-
 ---
 
 #### `minWordLength` {#settings-minwordlength}
@@ -1031,8 +967,6 @@ format: md
         The minimum length of a word before checking it against a dictionary.
     </dd>
 </dl>
-
-
 
 ---
 
@@ -1059,8 +993,6 @@ format: md
     </dd>
 </dl>
 
-
-
 ---
 
 #### `noConfigSearch` {#settings-noconfigsearch}
@@ -1085,8 +1017,6 @@ format: md
         Prevents searching for local configuration when checking individual documents.
     </dd>
 </dl>
-
-
 
 ---
 
@@ -1119,8 +1049,6 @@ format: md
     </dd>
 </dl>
 
-
-
 ---
 
 #### `numSuggestions` {#settings-numsuggestions}
@@ -1145,8 +1073,6 @@ format: md
         Number of suggestions to make.
     </dd>
 </dl>
-
-
 
 ---
 
@@ -1189,8 +1115,6 @@ format: md
        ```
     </dd>
 </dl>
-
-
 
 ---
 
@@ -1241,8 +1165,6 @@ format: md
     </dd>
 </dl>
 
-
-
 ---
 
 #### `pnpFiles` {#settings-pnpfiles}
@@ -1267,8 +1189,6 @@ format: md
         The PnP files to search for. Note: `.mjs` files are not currently supported.
     </dd>
 </dl>
-
-
 
 ---
 
@@ -1296,8 +1216,6 @@ format: md
        modifying the file to add words and other configuration.
     </dd>
 </dl>
-
-
 
 ---
 
@@ -1331,8 +1249,6 @@ format: md
     </dd>
 </dl>
 
-
-
 ---
 
 #### `showStatus` {#settings-showstatus}
@@ -1358,8 +1274,6 @@ format: md
     </dd>
 </dl>
 
-
-
 ---
 
 #### `spellCheckDelayMs` {#settings-spellcheckdelayms}
@@ -1384,8 +1298,6 @@ format: md
         Delay in ms after a document has changed before checking it for spelling errors.
     </dd>
 </dl>
-
-
 
 ---
 
@@ -1422,8 +1334,6 @@ format: md
     </dd>
 </dl>
 
-
-
 ---
 
 #### `suggestionNumChanges` {#settings-suggestionnumchanges}
@@ -1453,8 +1363,6 @@ format: md
     </dd>
 </dl>
 
-
-
 ---
 
 #### `suggestionsTimeout` {#settings-suggestionstimeout}
@@ -1480,8 +1388,6 @@ format: md
     </dd>
 </dl>
 
-
-
 ---
 
 #### `useGitignore` {#settings-usegitignore}
@@ -1506,8 +1412,6 @@ format: md
         Tells the spell checker to load `.gitignore` files and skip files that match the globs in the `.gitignore` files found.
     </dd>
 </dl>
-
-
 
 ---
 
@@ -1538,8 +1442,6 @@ format: md
     </dd>
 </dl>
 
-
-
 ---
 
 #### `userWords` {#settings-userwords}
@@ -1565,8 +1467,6 @@ format: md
     </dd>
 </dl>
 
-
-
 ---
 
 #### `validateDirectives` {#settings-validatedirectives}
@@ -1591,8 +1491,6 @@ format: md
         Verify that the in-document directives are correct.
     </dd>
 </dl>
-
-
 
 ---
 
@@ -1621,8 +1519,6 @@ format: md
     </dd>
 </dl>
 
-
-
 ---
 
 #### `words` {#settings-words}
@@ -1648,23 +1544,20 @@ format: md
     </dd>
 </dl>
 
-
 ## CacheFormat
-**Not Handled:** string
 
+**Not Handled:** string
 
 ## CacheSettings
 
-| Field | Type | Description |
-| --- | --- | --- |
-| [cacheFormat](#cachesettings-cacheformat) | `CacheFormat` | Format of the cache file. | 
-| [cacheLocation](#cachesettings-cachelocation) | `FSPathResolvable` | Path to the cache location. Can be a file or a directory. | 
-| [cacheStrategy](#cachesettings-cachestrategy) | `CacheStrategy` | Strategy to use for detecting changed files, default: metadata | 
-| [useCache](#cachesettings-usecache) | `boolean` | Store the results of processed files in order to only operate on the changed ones. | 
-
+| Field                                         | Type               | Description                                                                        |
+| --------------------------------------------- | ------------------ | ---------------------------------------------------------------------------------- |
+| [cacheFormat](#cachesettings-cacheformat)     | `CacheFormat`      | Format of the cache file.                                                          |
+| [cacheLocation](#cachesettings-cachelocation) | `FSPathResolvable` | Path to the cache location. Can be a file or a directory.                          |
+| [cacheStrategy](#cachesettings-cachestrategy) | `CacheStrategy`    | Strategy to use for detecting changed files, default: metadata                     |
+| [useCache](#cachesettings-usecache)           | `boolean`          | Store the results of processed files in order to only operate on the changed ones. |
 
 ### CacheSettings Fields
-
 
 ---
 
@@ -1692,8 +1585,6 @@ format: md
        - `universal` - use a sharable format.
     </dd>
 </dl>
-
-
 
 ---
 
@@ -1725,8 +1616,6 @@ format: md
     </dd>
 </dl>
 
-
-
 ---
 
 #### `cacheStrategy` {#cachesettings-cachestrategy}
@@ -1751,8 +1640,6 @@ format: md
         Strategy to use for detecting changed files, default: metadata
     </dd>
 </dl>
-
-
 
 ---
 
@@ -1779,26 +1666,23 @@ format: md
     </dd>
 </dl>
 
-
 ## CacheStrategy
-**Not Handled:** string
 
+**Not Handled:** string
 
 ## CharacterSet
-**Not Handled:** string
 
+**Not Handled:** string
 
 ## CharacterSetCosts
 
-| Field | Type | Description |
-| --- | --- | --- |
-| [characters](#charactersetcosts-characters) | `CharacterSet` | This is a set of characters that can include `-` or `|` | 
-| [cost](#charactersetcosts-cost) | `number` | the cost to insert / delete / replace / swap the characters in a group | 
-| [penalty](#charactersetcosts-penalty) | `number` | The penalty cost to apply if the accent is used. | 
-
+| Field                                       | Type           | Description                                                            |
+| ------------------------------------------- | -------------- | ---------------------------------------------------------------------- | --- |
+| [characters](#charactersetcosts-characters) | `CharacterSet` | This is a set of characters that can include `-` or `                  | `   |
+| [cost](#charactersetcosts-cost)             | `number`       | the cost to insert / delete / replace / swap the characters in a group |
+| [penalty](#charactersetcosts-penalty)       | `number`       | The penalty cost to apply if the accent is used.                       |
 
 ### CharacterSetCosts Fields
-
 
 ---
 
@@ -1828,8 +1712,6 @@ format: md
     </dd>
 </dl>
 
-
-
 ---
 
 #### `cost` {#charactersetcosts-cost}
@@ -1854,8 +1736,6 @@ format: md
         the cost to insert / delete / replace / swap the characters in a group
     </dd>
 </dl>
-
-
 
 ---
 
@@ -1883,21 +1763,18 @@ format: md
     </dd>
 </dl>
 
-
 ## CostMapDefInsDel
 
-| Field | Type | Description |
-| --- | --- | --- |
-| [description](#costmapdefinsdel-description) | `string` | A description to describe the purpose of the map. | 
-| [insDel](#costmapdefinsdel-insdel) | `number` | The cost to insert/delete one of the substrings in the map. Note: insert/delete costs are symmetrical. | 
-| [map](#costmapdefinsdel-map) | `string` | The set of substrings to map, these are generally single character strings. | 
-| [penalty](#costmapdefinsdel-penalty) | `number` | Add a penalty to the final cost. | 
-| [replace](#costmapdefinsdel-replace) | `number` | The cost to replace of of the substrings in the map with another substring in the map. | 
-| [swap](#costmapdefinsdel-swap) | `number` | The cost to swap two adjacent substrings found in the map. | 
-
+| Field                                        | Type     | Description                                                                                            |
+| -------------------------------------------- | -------- | ------------------------------------------------------------------------------------------------------ |
+| [description](#costmapdefinsdel-description) | `string` | A description to describe the purpose of the map.                                                      |
+| [insDel](#costmapdefinsdel-insdel)           | `number` | The cost to insert/delete one of the substrings in the map. Note: insert/delete costs are symmetrical. |
+| [map](#costmapdefinsdel-map)                 | `string` | The set of substrings to map, these are generally single character strings.                            |
+| [penalty](#costmapdefinsdel-penalty)         | `number` | Add a penalty to the final cost.                                                                       |
+| [replace](#costmapdefinsdel-replace)         | `number` | The cost to replace of of the substrings in the map with another substring in the map.                 |
+| [swap](#costmapdefinsdel-swap)               | `number` | The cost to swap two adjacent substrings found in the map.                                             |
 
 ### CostMapDefInsDel Fields
-
 
 ---
 
@@ -1924,8 +1801,6 @@ format: md
     </dd>
 </dl>
 
-
-
 ---
 
 #### `insDel` {#costmapdefinsdel-insdel}
@@ -1950,8 +1825,6 @@ format: md
         The cost to insert/delete one of the substrings in the map. Note: insert/delete costs are symmetrical.
     </dd>
 </dl>
-
-
 
 ---
 
@@ -1988,8 +1861,6 @@ format: md
        - To match the end of a word, use `$`: `"(e$)(ing$)"`.
     </dd>
 </dl>
-
-
 
 ---
 
@@ -2029,8 +1900,6 @@ format: md
     </dd>
 </dl>
 
-
-
 ---
 
 #### `replace` {#costmapdefinsdel-replace}
@@ -2057,8 +1926,6 @@ format: md
        This would be the cost to substitute `a` with `i`: Like `bat` to `bit` or the reverse.
     </dd>
 </dl>
-
-
 
 ---
 
@@ -2087,21 +1954,18 @@ format: md
     </dd>
 </dl>
 
-
 ## CostMapDefReplace
 
-| Field | Type | Description |
-| --- | --- | --- |
-| [description](#costmapdefreplace-description) | `string` | A description to describe the purpose of the map. | 
-| [insDel](#costmapdefreplace-insdel) | `number` | The cost to insert/delete one of the substrings in the map. Note: insert/delete costs are symmetrical. | 
-| [map](#costmapdefreplace-map) | `string` | The set of substrings to map, these are generally single character strings. | 
-| [penalty](#costmapdefreplace-penalty) | `number` | Add a penalty to the final cost. | 
-| [replace](#costmapdefreplace-replace) | `number` | The cost to replace of of the substrings in the map with another substring in the map. | 
-| [swap](#costmapdefreplace-swap) | `number` | The cost to swap two adjacent substrings found in the map. | 
-
+| Field                                         | Type     | Description                                                                                            |
+| --------------------------------------------- | -------- | ------------------------------------------------------------------------------------------------------ |
+| [description](#costmapdefreplace-description) | `string` | A description to describe the purpose of the map.                                                      |
+| [insDel](#costmapdefreplace-insdel)           | `number` | The cost to insert/delete one of the substrings in the map. Note: insert/delete costs are symmetrical. |
+| [map](#costmapdefreplace-map)                 | `string` | The set of substrings to map, these are generally single character strings.                            |
+| [penalty](#costmapdefreplace-penalty)         | `number` | Add a penalty to the final cost.                                                                       |
+| [replace](#costmapdefreplace-replace)         | `number` | The cost to replace of of the substrings in the map with another substring in the map.                 |
+| [swap](#costmapdefreplace-swap)               | `number` | The cost to swap two adjacent substrings found in the map.                                             |
 
 ### CostMapDefReplace Fields
-
 
 ---
 
@@ -2128,8 +1992,6 @@ format: md
     </dd>
 </dl>
 
-
-
 ---
 
 #### `insDel` {#costmapdefreplace-insdel}
@@ -2154,8 +2016,6 @@ format: md
         The cost to insert/delete one of the substrings in the map. Note: insert/delete costs are symmetrical.
     </dd>
 </dl>
-
-
 
 ---
 
@@ -2192,8 +2052,6 @@ format: md
        - To match the end of a word, use `$`: `"(e$)(ing$)"`.
     </dd>
 </dl>
-
-
 
 ---
 
@@ -2233,8 +2091,6 @@ format: md
     </dd>
 </dl>
 
-
-
 ---
 
 #### `replace` {#costmapdefreplace-replace}
@@ -2261,8 +2117,6 @@ format: md
        This would be the cost to substitute `a` with `i`: Like `bat` to `bit` or the reverse.
     </dd>
 </dl>
-
-
 
 ---
 
@@ -2291,21 +2145,18 @@ format: md
     </dd>
 </dl>
 
-
 ## CostMapDefSwap
 
-| Field | Type | Description |
-| --- | --- | --- |
-| [description](#costmapdefswap-description) | `string` | A description to describe the purpose of the map. | 
-| [insDel](#costmapdefswap-insdel) | `number` | The cost to insert/delete one of the substrings in the map. Note: insert/delete costs are symmetrical. | 
-| [map](#costmapdefswap-map) | `string` | The set of substrings to map, these are generally single character strings. | 
-| [penalty](#costmapdefswap-penalty) | `number` | Add a penalty to the final cost. | 
-| [replace](#costmapdefswap-replace) | `number` | The cost to replace of of the substrings in the map with another substring in the map. | 
-| [swap](#costmapdefswap-swap) | `number` | The cost to swap two adjacent substrings found in the map. | 
-
+| Field                                      | Type     | Description                                                                                            |
+| ------------------------------------------ | -------- | ------------------------------------------------------------------------------------------------------ |
+| [description](#costmapdefswap-description) | `string` | A description to describe the purpose of the map.                                                      |
+| [insDel](#costmapdefswap-insdel)           | `number` | The cost to insert/delete one of the substrings in the map. Note: insert/delete costs are symmetrical. |
+| [map](#costmapdefswap-map)                 | `string` | The set of substrings to map, these are generally single character strings.                            |
+| [penalty](#costmapdefswap-penalty)         | `number` | Add a penalty to the final cost.                                                                       |
+| [replace](#costmapdefswap-replace)         | `number` | The cost to replace of of the substrings in the map with another substring in the map.                 |
+| [swap](#costmapdefswap-swap)               | `number` | The cost to swap two adjacent substrings found in the map.                                             |
 
 ### CostMapDefSwap Fields
-
 
 ---
 
@@ -2332,8 +2183,6 @@ format: md
     </dd>
 </dl>
 
-
-
 ---
 
 #### `insDel` {#costmapdefswap-insdel}
@@ -2358,8 +2207,6 @@ format: md
         The cost to insert/delete one of the substrings in the map. Note: insert/delete costs are symmetrical.
     </dd>
 </dl>
-
-
 
 ---
 
@@ -2396,8 +2243,6 @@ format: md
        - To match the end of a word, use `$`: `"(e$)(ing$)"`.
     </dd>
 </dl>
-
-
 
 ---
 
@@ -2437,8 +2282,6 @@ format: md
     </dd>
 </dl>
 
-
-
 ---
 
 #### `replace` {#costmapdefswap-replace}
@@ -2465,8 +2308,6 @@ format: md
        This would be the cost to substitute `a` with `i`: Like `bat` to `bit` or the reverse.
     </dd>
 </dl>
-
-
 
 ---
 
@@ -2495,34 +2336,31 @@ format: md
     </dd>
 </dl>
 
-
 ## CustomDictionaryPath
-**Not Handled:** undefined
 
+**Not Handled:** undefined
 
 ## CustomDictionaryScope
+
 **Not Handled:** string
 
-
 ## DictionaryDefinition
-**Not Handled:** undefined
 
+**Not Handled:** undefined
 
 ## DictionaryDefinitionAlternate
 
-| Field | Type | Description |
-| --- | --- | --- |
-| [description](#dictionarydefinitionalternate-description) | `string` | Optional description. | 
-| [file](#dictionarydefinitionalternate-file) | `DictionaryPath` | Path to the file, only for legacy dictionary definitions. | 
-| [name](#dictionarydefinitionalternate-name) | `DictionaryId` | This is the name of a dictionary. | 
-| [noSuggest](#dictionarydefinitionalternate-nosuggest) | `boolean` | Indicate that suggestions should not come from this dictionary. | 
-| [repMap](#dictionarydefinitionalternate-repmap) | `ReplaceMap` | Replacement pairs. | 
-| [type](#dictionarydefinitionalternate-type) | `DictionaryFileTypes` | Type of file: | 
-| [useCompounds](#dictionarydefinitionalternate-usecompounds) | `boolean` | Use Compounds. | 
-
+| Field                                                       | Type                  | Description                                                     |
+| ----------------------------------------------------------- | --------------------- | --------------------------------------------------------------- |
+| [description](#dictionarydefinitionalternate-description)   | `string`              | Optional description.                                           |
+| [file](#dictionarydefinitionalternate-file)                 | `DictionaryPath`      | Path to the file, only for legacy dictionary definitions.       |
+| [name](#dictionarydefinitionalternate-name)                 | `DictionaryId`        | This is the name of a dictionary.                               |
+| [noSuggest](#dictionarydefinitionalternate-nosuggest)       | `boolean`             | Indicate that suggestions should not come from this dictionary. |
+| [repMap](#dictionarydefinitionalternate-repmap)             | `ReplaceMap`          | Replacement pairs.                                              |
+| [type](#dictionarydefinitionalternate-type)                 | `DictionaryFileTypes` | Type of file:                                                   |
+| [useCompounds](#dictionarydefinitionalternate-usecompounds) | `boolean`             | Use Compounds.                                                  |
 
 ### DictionaryDefinitionAlternate Fields
-
 
 ---
 
@@ -2549,8 +2387,6 @@ format: md
     </dd>
 </dl>
 
-
-
 ---
 
 #### `file` {#dictionarydefinitionalternate-file}
@@ -2575,8 +2411,6 @@ format: md
         Path to the file, only for legacy dictionary definitions.
     </dd>
 </dl>
-
-
 
 ---
 
@@ -2610,8 +2444,6 @@ format: md
     </dd>
 </dl>
 
-
-
 ---
 
 #### `noSuggest` {#dictionarydefinitionalternate-nosuggest}
@@ -2643,8 +2475,6 @@ format: md
     </dd>
 </dl>
 
-
-
 ---
 
 #### `repMap` {#dictionarydefinitionalternate-repmap}
@@ -2669,8 +2499,6 @@ format: md
         Replacement pairs.
     </dd>
 </dl>
-
-
 
 ---
 
@@ -2704,8 +2532,6 @@ format: md
     </dd>
 </dl>
 
-
-
 ---
 
 #### `useCompounds` {#dictionarydefinitionalternate-usecompounds}
@@ -2731,23 +2557,20 @@ format: md
     </dd>
 </dl>
 
-
 ## DictionaryDefinitionAugmented
 
-| Field | Type | Description |
-| --- | --- | --- |
-| [description](#dictionarydefinitionaugmented-description) | `string` | Optional description. | 
-| [dictionaryInformation](#dictionarydefinitionaugmented-dictionaryinformation) | `DictionaryInformation` |  | 
-| [name](#dictionarydefinitionaugmented-name) | `DictionaryId` | This is the name of a dictionary. | 
-| [noSuggest](#dictionarydefinitionaugmented-nosuggest) | `boolean` | Indicate that suggestions should not come from this dictionary. | 
-| [path](#dictionarydefinitionaugmented-path) | `DictionaryPath` | Path to the file. | 
-| [repMap](#dictionarydefinitionaugmented-repmap) | `ReplaceMap` | Replacement pairs. | 
-| [type](#dictionarydefinitionaugmented-type) | `DictionaryFileTypes` | Type of file: | 
-| [useCompounds](#dictionarydefinitionaugmented-usecompounds) | `boolean` | Use Compounds. | 
-
+| Field                                                                         | Type                    | Description                                                     |
+| ----------------------------------------------------------------------------- | ----------------------- | --------------------------------------------------------------- |
+| [description](#dictionarydefinitionaugmented-description)                     | `string`                | Optional description.                                           |
+| [dictionaryInformation](#dictionarydefinitionaugmented-dictionaryinformation) | `DictionaryInformation` |                                                                 |
+| [name](#dictionarydefinitionaugmented-name)                                   | `DictionaryId`          | This is the name of a dictionary.                               |
+| [noSuggest](#dictionarydefinitionaugmented-nosuggest)                         | `boolean`               | Indicate that suggestions should not come from this dictionary. |
+| [path](#dictionarydefinitionaugmented-path)                                   | `DictionaryPath`        | Path to the file.                                               |
+| [repMap](#dictionarydefinitionaugmented-repmap)                               | `ReplaceMap`            | Replacement pairs.                                              |
+| [type](#dictionarydefinitionaugmented-type)                                   | `DictionaryFileTypes`   | Type of file:                                                   |
+| [useCompounds](#dictionarydefinitionaugmented-usecompounds)                   | `boolean`               | Use Compounds.                                                  |
 
 ### DictionaryDefinitionAugmented Fields
-
 
 ---
 
@@ -2774,8 +2597,6 @@ format: md
     </dd>
 </dl>
 
-
-
 ---
 
 #### `dictionaryInformation` {#dictionarydefinitionaugmented-dictionaryinformation}
@@ -2800,8 +2621,6 @@ format: md
         
     </dd>
 </dl>
-
-
 
 ---
 
@@ -2835,8 +2654,6 @@ format: md
     </dd>
 </dl>
 
-
-
 ---
 
 #### `noSuggest` {#dictionarydefinitionaugmented-nosuggest}
@@ -2868,8 +2685,6 @@ format: md
     </dd>
 </dl>
 
-
-
 ---
 
 #### `path` {#dictionarydefinitionaugmented-path}
@@ -2895,8 +2710,6 @@ format: md
     </dd>
 </dl>
 
-
-
 ---
 
 #### `repMap` {#dictionarydefinitionaugmented-repmap}
@@ -2921,8 +2734,6 @@ format: md
         Replacement pairs.
     </dd>
 </dl>
-
-
 
 ---
 
@@ -2956,8 +2767,6 @@ format: md
     </dd>
 </dl>
 
-
-
 ---
 
 #### `useCompounds` {#dictionarydefinitionaugmented-usecompounds}
@@ -2983,24 +2792,21 @@ format: md
     </dd>
 </dl>
 
-
 ## DictionaryDefinitionCustom
 
-| Field | Type | Description |
-| --- | --- | --- |
-| [addWords](#dictionarydefinitioncustom-addwords) | `boolean` | When `true`, let's the spell checker know that words can be added to this dictionary. | 
-| [description](#dictionarydefinitioncustom-description) | `string` | Optional description. | 
-| [name](#dictionarydefinitioncustom-name) | `DictionaryId` | This is the name of a dictionary. | 
-| [noSuggest](#dictionarydefinitioncustom-nosuggest) | `boolean` | Indicate that suggestions should not come from this dictionary. | 
-| [path](#dictionarydefinitioncustom-path) | `CustomDictionaryPath` | Path to custom dictionary text file. | 
-| [repMap](#dictionarydefinitioncustom-repmap) | `ReplaceMap` | Replacement pairs. | 
-| [scope](#dictionarydefinitioncustom-scope) | `CustomDictionaryScope`<br />`CustomDictionaryScope[]` | Defines the scope for when words will be added to the dictionary. | 
-| [type](#dictionarydefinitioncustom-type) | `DictionaryFileTypes` | Type of file: | 
-| [useCompounds](#dictionarydefinitioncustom-usecompounds) | `boolean` | Use Compounds. | 
-
+| Field                                                    | Type                                                   | Description                                                                           |
+| -------------------------------------------------------- | ------------------------------------------------------ | ------------------------------------------------------------------------------------- |
+| [addWords](#dictionarydefinitioncustom-addwords)         | `boolean`                                              | When `true`, let's the spell checker know that words can be added to this dictionary. |
+| [description](#dictionarydefinitioncustom-description)   | `string`                                               | Optional description.                                                                 |
+| [name](#dictionarydefinitioncustom-name)                 | `DictionaryId`                                         | This is the name of a dictionary.                                                     |
+| [noSuggest](#dictionarydefinitioncustom-nosuggest)       | `boolean`                                              | Indicate that suggestions should not come from this dictionary.                       |
+| [path](#dictionarydefinitioncustom-path)                 | `CustomDictionaryPath`                                 | Path to custom dictionary text file.                                                  |
+| [repMap](#dictionarydefinitioncustom-repmap)             | `ReplaceMap`                                           | Replacement pairs.                                                                    |
+| [scope](#dictionarydefinitioncustom-scope)               | `CustomDictionaryScope`<br />`CustomDictionaryScope[]` | Defines the scope for when words will be added to the dictionary.                     |
+| [type](#dictionarydefinitioncustom-type)                 | `DictionaryFileTypes`                                  | Type of file:                                                                         |
+| [useCompounds](#dictionarydefinitioncustom-usecompounds) | `boolean`                                              | Use Compounds.                                                                        |
 
 ### DictionaryDefinitionCustom Fields
-
 
 ---
 
@@ -3027,8 +2833,6 @@ format: md
     </dd>
 </dl>
 
-
-
 ---
 
 #### `description` {#dictionarydefinitioncustom-description}
@@ -3053,8 +2857,6 @@ format: md
         Optional description.
     </dd>
 </dl>
-
-
 
 ---
 
@@ -3088,8 +2890,6 @@ format: md
     </dd>
 </dl>
 
-
-
 ---
 
 #### `noSuggest` {#dictionarydefinitioncustom-nosuggest}
@@ -3121,8 +2921,6 @@ format: md
     </dd>
 </dl>
 
-
-
 ---
 
 #### `path` {#dictionarydefinitioncustom-path}
@@ -3148,8 +2946,6 @@ format: md
     </dd>
 </dl>
 
-
-
 ---
 
 #### `repMap` {#dictionarydefinitioncustom-repmap}
@@ -3174,8 +2970,6 @@ format: md
         Replacement pairs.
     </dd>
 </dl>
-
-
 
 ---
 
@@ -3203,8 +2997,6 @@ format: md
        Scope values: `user`, `workspace`, `folder`.
     </dd>
 </dl>
-
-
 
 ---
 
@@ -3238,8 +3030,6 @@ format: md
     </dd>
 </dl>
 
-
-
 ---
 
 #### `useCompounds` {#dictionarydefinitioncustom-usecompounds}
@@ -3265,29 +3055,26 @@ format: md
     </dd>
 </dl>
 
-
 ## DictionaryDefinitionInline
-**Not Handled:** undefined
 
+**Not Handled:** undefined
 
 ## DictionaryDefinitionInlineFlagWords
 
-| Field | Type | Description |
-| --- | --- | --- |
-| [description](#dictionarydefinitioninlineflagwords-description) | `string` | Optional description. | 
-| [flagWords](#dictionarydefinitioninlineflagwords-flagwords) | `string[]` | List of words to always be considered incorrect. Words found in `flagWords` override `words`. | 
-| [ignoreWords](#dictionarydefinitioninlineflagwords-ignorewords) | `string[]` | List of words to be ignored. An ignored word will not show up as an error, even if it is | 
-| [name](#dictionarydefinitioninlineflagwords-name) | `DictionaryId` | This is the name of a dictionary. | 
-| [noSuggest](#dictionarydefinitioninlineflagwords-nosuggest) | `boolean` | Indicate that suggestions should not come from this dictionary. | 
-| [repMap](#dictionarydefinitioninlineflagwords-repmap) | `ReplaceMap` | Replacement pairs. | 
-| [suggestWords](#dictionarydefinitioninlineflagwords-suggestwords) | `string[]` | A list of suggested replacements for words. | 
-| [type](#dictionarydefinitioninlineflagwords-type) | `DictionaryFileTypes` | Type of file: | 
-| [useCompounds](#dictionarydefinitioninlineflagwords-usecompounds) | `boolean` | Use Compounds. | 
-| [words](#dictionarydefinitioninlineflagwords-words) | `string[]` | List of words to be considered correct. | 
-
+| Field                                                             | Type                  | Description                                                                                   |
+| ----------------------------------------------------------------- | --------------------- | --------------------------------------------------------------------------------------------- |
+| [description](#dictionarydefinitioninlineflagwords-description)   | `string`              | Optional description.                                                                         |
+| [flagWords](#dictionarydefinitioninlineflagwords-flagwords)       | `string[]`            | List of words to always be considered incorrect. Words found in `flagWords` override `words`. |
+| [ignoreWords](#dictionarydefinitioninlineflagwords-ignorewords)   | `string[]`            | List of words to be ignored. An ignored word will not show up as an error, even if it is      |
+| [name](#dictionarydefinitioninlineflagwords-name)                 | `DictionaryId`        | This is the name of a dictionary.                                                             |
+| [noSuggest](#dictionarydefinitioninlineflagwords-nosuggest)       | `boolean`             | Indicate that suggestions should not come from this dictionary.                               |
+| [repMap](#dictionarydefinitioninlineflagwords-repmap)             | `ReplaceMap`          | Replacement pairs.                                                                            |
+| [suggestWords](#dictionarydefinitioninlineflagwords-suggestwords) | `string[]`            | A list of suggested replacements for words.                                                   |
+| [type](#dictionarydefinitioninlineflagwords-type)                 | `DictionaryFileTypes` | Type of file:                                                                                 |
+| [useCompounds](#dictionarydefinitioninlineflagwords-usecompounds) | `boolean`             | Use Compounds.                                                                                |
+| [words](#dictionarydefinitioninlineflagwords-words)               | `string[]`            | List of words to be considered correct.                                                       |
 
 ### DictionaryDefinitionInlineFlagWords Fields
-
 
 ---
 
@@ -3313,8 +3100,6 @@ format: md
         Optional description.
     </dd>
 </dl>
-
-
 
 ---
 
@@ -3355,8 +3140,6 @@ format: md
     </dd>
 </dl>
 
-
-
 ---
 
 #### `ignoreWords` {#dictionarydefinitioninlineflagwords-ignorewords}
@@ -3382,8 +3165,6 @@ format: md
        also in the `flagWords`.
     </dd>
 </dl>
-
-
 
 ---
 
@@ -3417,8 +3198,6 @@ format: md
     </dd>
 </dl>
 
-
-
 ---
 
 #### `noSuggest` {#dictionarydefinitioninlineflagwords-nosuggest}
@@ -3450,8 +3229,6 @@ format: md
     </dd>
 </dl>
 
-
-
 ---
 
 #### `repMap` {#dictionarydefinitioninlineflagwords-repmap}
@@ -3476,8 +3253,6 @@ format: md
         Replacement pairs.
     </dd>
 </dl>
-
-
 
 ---
 
@@ -3514,8 +3289,6 @@ format: md
     </dd>
 </dl>
 
-
-
 ---
 
 #### `type` {#dictionarydefinitioninlineflagwords-type}
@@ -3548,8 +3321,6 @@ format: md
     </dd>
 </dl>
 
-
-
 ---
 
 #### `useCompounds` {#dictionarydefinitioninlineflagwords-usecompounds}
@@ -3574,8 +3345,6 @@ format: md
         Use Compounds.
     </dd>
 </dl>
-
-
 
 ---
 
@@ -3602,25 +3371,22 @@ format: md
     </dd>
 </dl>
 
-
 ## DictionaryDefinitionInlineIgnoreWords
 
-| Field | Type | Description |
-| --- | --- | --- |
-| [description](#dictionarydefinitioninlineignorewords-description) | `string` | Optional description. | 
-| [flagWords](#dictionarydefinitioninlineignorewords-flagwords) | `string[]` | List of words to always be considered incorrect. Words found in `flagWords` override `words`. | 
-| [ignoreWords](#dictionarydefinitioninlineignorewords-ignorewords) | `string[]` | List of words to be ignored. An ignored word will not show up as an error, even if it is | 
-| [name](#dictionarydefinitioninlineignorewords-name) | `DictionaryId` | This is the name of a dictionary. | 
-| [noSuggest](#dictionarydefinitioninlineignorewords-nosuggest) | `boolean` | Indicate that suggestions should not come from this dictionary. | 
-| [repMap](#dictionarydefinitioninlineignorewords-repmap) | `ReplaceMap` | Replacement pairs. | 
-| [suggestWords](#dictionarydefinitioninlineignorewords-suggestwords) | `string[]` | A list of suggested replacements for words. | 
-| [type](#dictionarydefinitioninlineignorewords-type) | `DictionaryFileTypes` | Type of file: | 
-| [useCompounds](#dictionarydefinitioninlineignorewords-usecompounds) | `boolean` | Use Compounds. | 
-| [words](#dictionarydefinitioninlineignorewords-words) | `string[]` | List of words to be considered correct. | 
-
+| Field                                                               | Type                  | Description                                                                                   |
+| ------------------------------------------------------------------- | --------------------- | --------------------------------------------------------------------------------------------- |
+| [description](#dictionarydefinitioninlineignorewords-description)   | `string`              | Optional description.                                                                         |
+| [flagWords](#dictionarydefinitioninlineignorewords-flagwords)       | `string[]`            | List of words to always be considered incorrect. Words found in `flagWords` override `words`. |
+| [ignoreWords](#dictionarydefinitioninlineignorewords-ignorewords)   | `string[]`            | List of words to be ignored. An ignored word will not show up as an error, even if it is      |
+| [name](#dictionarydefinitioninlineignorewords-name)                 | `DictionaryId`        | This is the name of a dictionary.                                                             |
+| [noSuggest](#dictionarydefinitioninlineignorewords-nosuggest)       | `boolean`             | Indicate that suggestions should not come from this dictionary.                               |
+| [repMap](#dictionarydefinitioninlineignorewords-repmap)             | `ReplaceMap`          | Replacement pairs.                                                                            |
+| [suggestWords](#dictionarydefinitioninlineignorewords-suggestwords) | `string[]`            | A list of suggested replacements for words.                                                   |
+| [type](#dictionarydefinitioninlineignorewords-type)                 | `DictionaryFileTypes` | Type of file:                                                                                 |
+| [useCompounds](#dictionarydefinitioninlineignorewords-usecompounds) | `boolean`             | Use Compounds.                                                                                |
+| [words](#dictionarydefinitioninlineignorewords-words)               | `string[]`            | List of words to be considered correct.                                                       |
 
 ### DictionaryDefinitionInlineIgnoreWords Fields
-
 
 ---
 
@@ -3646,8 +3412,6 @@ format: md
         Optional description.
     </dd>
 </dl>
-
-
 
 ---
 
@@ -3688,8 +3452,6 @@ format: md
     </dd>
 </dl>
 
-
-
 ---
 
 #### `ignoreWords` {#dictionarydefinitioninlineignorewords-ignorewords}
@@ -3715,8 +3477,6 @@ format: md
        also in the `flagWords`.
     </dd>
 </dl>
-
-
 
 ---
 
@@ -3750,8 +3510,6 @@ format: md
     </dd>
 </dl>
 
-
-
 ---
 
 #### `noSuggest` {#dictionarydefinitioninlineignorewords-nosuggest}
@@ -3783,8 +3541,6 @@ format: md
     </dd>
 </dl>
 
-
-
 ---
 
 #### `repMap` {#dictionarydefinitioninlineignorewords-repmap}
@@ -3809,8 +3565,6 @@ format: md
         Replacement pairs.
     </dd>
 </dl>
-
-
 
 ---
 
@@ -3847,8 +3601,6 @@ format: md
     </dd>
 </dl>
 
-
-
 ---
 
 #### `type` {#dictionarydefinitioninlineignorewords-type}
@@ -3881,8 +3633,6 @@ format: md
     </dd>
 </dl>
 
-
-
 ---
 
 #### `useCompounds` {#dictionarydefinitioninlineignorewords-usecompounds}
@@ -3907,8 +3657,6 @@ format: md
         Use Compounds.
     </dd>
 </dl>
-
-
 
 ---
 
@@ -3935,25 +3683,22 @@ format: md
     </dd>
 </dl>
 
-
 ## DictionaryDefinitionInlineWords
 
-| Field | Type | Description |
-| --- | --- | --- |
-| [description](#dictionarydefinitioninlinewords-description) | `string` | Optional description. | 
-| [flagWords](#dictionarydefinitioninlinewords-flagwords) | `string[]` | List of words to always be considered incorrect. Words found in `flagWords` override `words`. | 
-| [ignoreWords](#dictionarydefinitioninlinewords-ignorewords) | `string[]` | List of words to be ignored. An ignored word will not show up as an error, even if it is | 
-| [name](#dictionarydefinitioninlinewords-name) | `DictionaryId` | This is the name of a dictionary. | 
-| [noSuggest](#dictionarydefinitioninlinewords-nosuggest) | `boolean` | Indicate that suggestions should not come from this dictionary. | 
-| [repMap](#dictionarydefinitioninlinewords-repmap) | `ReplaceMap` | Replacement pairs. | 
-| [suggestWords](#dictionarydefinitioninlinewords-suggestwords) | `string[]` | A list of suggested replacements for words. | 
-| [type](#dictionarydefinitioninlinewords-type) | `DictionaryFileTypes` | Type of file: | 
-| [useCompounds](#dictionarydefinitioninlinewords-usecompounds) | `boolean` | Use Compounds. | 
-| [words](#dictionarydefinitioninlinewords-words) | `string[]` | List of words to be considered correct. | 
-
+| Field                                                         | Type                  | Description                                                                                   |
+| ------------------------------------------------------------- | --------------------- | --------------------------------------------------------------------------------------------- |
+| [description](#dictionarydefinitioninlinewords-description)   | `string`              | Optional description.                                                                         |
+| [flagWords](#dictionarydefinitioninlinewords-flagwords)       | `string[]`            | List of words to always be considered incorrect. Words found in `flagWords` override `words`. |
+| [ignoreWords](#dictionarydefinitioninlinewords-ignorewords)   | `string[]`            | List of words to be ignored. An ignored word will not show up as an error, even if it is      |
+| [name](#dictionarydefinitioninlinewords-name)                 | `DictionaryId`        | This is the name of a dictionary.                                                             |
+| [noSuggest](#dictionarydefinitioninlinewords-nosuggest)       | `boolean`             | Indicate that suggestions should not come from this dictionary.                               |
+| [repMap](#dictionarydefinitioninlinewords-repmap)             | `ReplaceMap`          | Replacement pairs.                                                                            |
+| [suggestWords](#dictionarydefinitioninlinewords-suggestwords) | `string[]`            | A list of suggested replacements for words.                                                   |
+| [type](#dictionarydefinitioninlinewords-type)                 | `DictionaryFileTypes` | Type of file:                                                                                 |
+| [useCompounds](#dictionarydefinitioninlinewords-usecompounds) | `boolean`             | Use Compounds.                                                                                |
+| [words](#dictionarydefinitioninlinewords-words)               | `string[]`            | List of words to be considered correct.                                                       |
 
 ### DictionaryDefinitionInlineWords Fields
-
 
 ---
 
@@ -3979,8 +3724,6 @@ format: md
         Optional description.
     </dd>
 </dl>
-
-
 
 ---
 
@@ -4021,8 +3764,6 @@ format: md
     </dd>
 </dl>
 
-
-
 ---
 
 #### `ignoreWords` {#dictionarydefinitioninlinewords-ignorewords}
@@ -4048,8 +3789,6 @@ format: md
        also in the `flagWords`.
     </dd>
 </dl>
-
-
 
 ---
 
@@ -4083,8 +3822,6 @@ format: md
     </dd>
 </dl>
 
-
-
 ---
 
 #### `noSuggest` {#dictionarydefinitioninlinewords-nosuggest}
@@ -4116,8 +3853,6 @@ format: md
     </dd>
 </dl>
 
-
-
 ---
 
 #### `repMap` {#dictionarydefinitioninlinewords-repmap}
@@ -4142,8 +3877,6 @@ format: md
         Replacement pairs.
     </dd>
 </dl>
-
-
 
 ---
 
@@ -4180,8 +3913,6 @@ format: md
     </dd>
 </dl>
 
-
-
 ---
 
 #### `type` {#dictionarydefinitioninlinewords-type}
@@ -4214,8 +3945,6 @@ format: md
     </dd>
 </dl>
 
-
-
 ---
 
 #### `useCompounds` {#dictionarydefinitioninlinewords-usecompounds}
@@ -4240,8 +3969,6 @@ format: md
         Use Compounds.
     </dd>
 </dl>
-
-
 
 ---
 
@@ -4268,22 +3995,19 @@ format: md
     </dd>
 </dl>
 
-
 ## DictionaryDefinitionPreferred
 
-| Field | Type | Description |
-| --- | --- | --- |
-| [description](#dictionarydefinitionpreferred-description) | `string` | Optional description. | 
-| [name](#dictionarydefinitionpreferred-name) | `DictionaryId` | This is the name of a dictionary. | 
-| [noSuggest](#dictionarydefinitionpreferred-nosuggest) | `boolean` | Indicate that suggestions should not come from this dictionary. | 
-| [path](#dictionarydefinitionpreferred-path) | `DictionaryPath` | Path to the file. | 
-| [repMap](#dictionarydefinitionpreferred-repmap) | `ReplaceMap` | Replacement pairs. | 
-| [type](#dictionarydefinitionpreferred-type) | `DictionaryFileTypes` | Type of file: | 
-| [useCompounds](#dictionarydefinitionpreferred-usecompounds) | `boolean` | Use Compounds. | 
-
+| Field                                                       | Type                  | Description                                                     |
+| ----------------------------------------------------------- | --------------------- | --------------------------------------------------------------- |
+| [description](#dictionarydefinitionpreferred-description)   | `string`              | Optional description.                                           |
+| [name](#dictionarydefinitionpreferred-name)                 | `DictionaryId`        | This is the name of a dictionary.                               |
+| [noSuggest](#dictionarydefinitionpreferred-nosuggest)       | `boolean`             | Indicate that suggestions should not come from this dictionary. |
+| [path](#dictionarydefinitionpreferred-path)                 | `DictionaryPath`      | Path to the file.                                               |
+| [repMap](#dictionarydefinitionpreferred-repmap)             | `ReplaceMap`          | Replacement pairs.                                              |
+| [type](#dictionarydefinitionpreferred-type)                 | `DictionaryFileTypes` | Type of file:                                                   |
+| [useCompounds](#dictionarydefinitionpreferred-usecompounds) | `boolean`             | Use Compounds.                                                  |
 
 ### DictionaryDefinitionPreferred Fields
-
 
 ---
 
@@ -4309,8 +4033,6 @@ format: md
         Optional description.
     </dd>
 </dl>
-
-
 
 ---
 
@@ -4344,8 +4066,6 @@ format: md
     </dd>
 </dl>
 
-
-
 ---
 
 #### `noSuggest` {#dictionarydefinitionpreferred-nosuggest}
@@ -4377,8 +4097,6 @@ format: md
     </dd>
 </dl>
 
-
-
 ---
 
 #### `path` {#dictionarydefinitionpreferred-path}
@@ -4404,8 +4122,6 @@ format: md
     </dd>
 </dl>
 
-
-
 ---
 
 #### `repMap` {#dictionarydefinitionpreferred-repmap}
@@ -4430,8 +4146,6 @@ format: md
         Replacement pairs.
     </dd>
 </dl>
-
-
 
 ---
 
@@ -4465,8 +4179,6 @@ format: md
     </dd>
 </dl>
 
-
-
 ---
 
 #### `useCompounds` {#dictionarydefinitionpreferred-usecompounds}
@@ -4492,31 +4204,28 @@ format: md
     </dd>
 </dl>
 
-
 ## DictionaryFileTypes
-**Not Handled:** string
 
+**Not Handled:** string
 
 ## DictionaryId
-**Not Handled:** string
 
+**Not Handled:** string
 
 ## DictionaryInformation
 
-| Field | Type | Description |
-| --- | --- | --- |
-| [accents](#dictionaryinformation-accents) | `CharacterSet`<br />`CharacterSetCosts[]` | The accent characters. | 
-| [adjustments](#dictionaryinformation-adjustments) | `PatternAdjustment[]` | A collection of patterns to test against the suggested words. | 
-| [alphabet](#dictionaryinformation-alphabet) | `CharacterSet`<br />`CharacterSetCosts[]` | The alphabet to use. | 
-| [costs](#dictionaryinformation-costs) | `EditCosts` | Define edit costs. | 
-| [hunspellInformation](#dictionaryinformation-hunspellinformation) | `HunspellInformation` | Used by dictionary authors | 
-| [ignore](#dictionaryinformation-ignore) | `CharacterSet` | An optional set of characters that can possibly be removed from a word before | 
-| [locale](#dictionaryinformation-locale) | `string` | The locale of the dictionary. | 
-| [suggestionEditCosts](#dictionaryinformation-suggestioneditcosts) | `SuggestionCostsDefs` | Used in making suggestions. The lower the value, the more likely the suggestion | 
-
+| Field                                                             | Type                                      | Description                                                                     |
+| ----------------------------------------------------------------- | ----------------------------------------- | ------------------------------------------------------------------------------- |
+| [accents](#dictionaryinformation-accents)                         | `CharacterSet`<br />`CharacterSetCosts[]` | The accent characters.                                                          |
+| [adjustments](#dictionaryinformation-adjustments)                 | `PatternAdjustment[]`                     | A collection of patterns to test against the suggested words.                   |
+| [alphabet](#dictionaryinformation-alphabet)                       | `CharacterSet`<br />`CharacterSetCosts[]` | The alphabet to use.                                                            |
+| [costs](#dictionaryinformation-costs)                             | `EditCosts`                               | Define edit costs.                                                              |
+| [hunspellInformation](#dictionaryinformation-hunspellinformation) | `HunspellInformation`                     | Used by dictionary authors                                                      |
+| [ignore](#dictionaryinformation-ignore)                           | `CharacterSet`                            | An optional set of characters that can possibly be removed from a word before   |
+| [locale](#dictionaryinformation-locale)                           | `string`                                  | The locale of the dictionary.                                                   |
+| [suggestionEditCosts](#dictionaryinformation-suggestioneditcosts) | `SuggestionCostsDefs`                     | Used in making suggestions. The lower the value, the more likely the suggestion |
 
 ### DictionaryInformation Fields
-
 
 ---
 
@@ -4545,8 +4254,6 @@ format: md
     </dd>
 </dl>
 
-
-
 ---
 
 #### `adjustments` {#dictionaryinformation-adjustments}
@@ -4573,8 +4280,6 @@ format: md
     </dd>
 </dl>
 
-
-
 ---
 
 #### `alphabet` {#dictionaryinformation-alphabet}
@@ -4599,8 +4304,6 @@ format: md
         The alphabet to use.
     </dd>
 </dl>
-
-
 
 ---
 
@@ -4627,8 +4330,6 @@ format: md
     </dd>
 </dl>
 
-
-
 ---
 
 #### `hunspellInformation` {#dictionaryinformation-hunspellinformation}
@@ -4653,8 +4354,6 @@ format: md
         Used by dictionary authors
     </dd>
 </dl>
-
-
 
 ---
 
@@ -4686,8 +4385,6 @@ format: md
     </dd>
 </dl>
 
-
-
 ---
 
 #### `locale` {#dictionaryinformation-locale}
@@ -4713,8 +4410,6 @@ format: md
        Example: `nl,nl-be`
     </dd>
 </dl>
-
-
 
 ---
 
@@ -4742,36 +4437,33 @@ format: md
     </dd>
 </dl>
 
-
 ## DictionaryNegRef
-**Not Handled:** string
 
+**Not Handled:** string
 
 ## DictionaryPath
+
 **Not Handled:** string
 
-
 ## DictionaryRef
-**Not Handled:** undefined
 
+**Not Handled:** undefined
 
 ## DictionaryReference
-**Not Handled:** undefined
 
+**Not Handled:** undefined
 
 ## EditCosts
 
-| Field | Type | Description |
-| --- | --- | --- |
-| [accentCosts](#editcosts-accentcosts) | `number` | The cost to add / remove an accent | 
-| [baseCost](#editcosts-basecost) | `number` | This is the base cost for making an edit. | 
-| [capsCosts](#editcosts-capscosts) | `number` | The cost to change capitalization. | 
-| [firstLetterPenalty](#editcosts-firstletterpenalty) | `number` | The extra cost incurred for changing the first letter of a word. | 
-| [nonAlphabetCosts](#editcosts-nonalphabetcosts) | `number` | This is the cost for characters not in the alphabet. | 
-
+| Field                                               | Type     | Description                                                      |
+| --------------------------------------------------- | -------- | ---------------------------------------------------------------- |
+| [accentCosts](#editcosts-accentcosts)               | `number` | The cost to add / remove an accent                               |
+| [baseCost](#editcosts-basecost)                     | `number` | This is the base cost for making an edit.                        |
+| [capsCosts](#editcosts-capscosts)                   | `number` | The cost to change capitalization.                               |
+| [firstLetterPenalty](#editcosts-firstletterpenalty) | `number` | The extra cost incurred for changing the first letter of a word. |
+| [nonAlphabetCosts](#editcosts-nonalphabetcosts)     | `number` | This is the cost for characters not in the alphabet.             |
 
 ### EditCosts Fields
-
 
 ---
 
@@ -4799,8 +4491,6 @@ format: md
     </dd>
 </dl>
 
-
-
 ---
 
 #### `baseCost` {#editcosts-basecost}
@@ -4825,8 +4515,6 @@ format: md
         This is the base cost for making an edit.
     </dd>
 </dl>
-
-
 
 ---
 
@@ -4854,8 +4542,6 @@ format: md
     </dd>
 </dl>
 
-
-
 ---
 
 #### `firstLetterPenalty` {#editcosts-firstletterpenalty}
@@ -4882,8 +4568,6 @@ format: md
     </dd>
 </dl>
 
-
-
 ---
 
 #### `nonAlphabetCosts` {#editcosts-nonalphabetcosts}
@@ -4909,24 +4593,21 @@ format: md
     </dd>
 </dl>
 
-
 ## FSPathResolvable
+
 **Not Handled:** undefined
 
-
 ## FeatureEnableOnly
-**Not Handled:** boolean
 
+**Not Handled:** boolean
 
 ## Features
 
-| Field | Type | Description |
-| --- | --- | --- |
-| [weighted-suggestions](#features-weighted-suggestions) | `FeatureEnableOnly` | Enable/disable using weighted suggestions. | 
-
+| Field                                                  | Type                | Description                                |
+| ------------------------------------------------------ | ------------------- | ------------------------------------------ |
+| [weighted-suggestions](#features-weighted-suggestions) | `FeatureEnableOnly` | Enable/disable using weighted suggestions. |
 
 ### Features Fields
-
 
 ---
 
@@ -4953,29 +4634,26 @@ format: md
     </dd>
 </dl>
 
-
 ## FsDictionaryPath
-**Not Handled:** string
 
+**Not Handled:** string
 
 ## FsPath
+
 **Not Handled:** string
 
-
 ## Glob
-**Not Handled:** undefined
 
+**Not Handled:** undefined
 
 ## HunspellInformation
 
-| Field | Type | Description |
-| --- | --- | --- |
-| [aff](#hunspellinformation-aff) | `string` | Selected Hunspell AFF content. | 
-| [costs](#hunspellinformation-costs) | `object` | The costs to apply when using the hunspell settings | 
-
+| Field                               | Type     | Description                                         |
+| ----------------------------------- | -------- | --------------------------------------------------- |
+| [aff](#hunspellinformation-aff)     | `string` | Selected Hunspell AFF content.                      |
+| [costs](#hunspellinformation-costs) | `object` | The costs to apply when using the hunspell settings |
 
 ### HunspellInformation Fields
-
 
 ---
 
@@ -5022,8 +4700,6 @@ format: md
     </dd>
 </dl>
 
-
-
 ---
 
 #### `costs` {#hunspellinformation-costs}
@@ -5049,50 +4725,47 @@ format: md
     </dd>
 </dl>
 
-
 ## LanguageId
+
 **Not Handled:** undefined
 
-
 ## LanguageIdMultiple
-**Not Handled:** string
 
+**Not Handled:** string
 
 ## LanguageIdMultipleNeg
-**Not Handled:** string
 
+**Not Handled:** string
 
 ## LanguageIdSingle
-**Not Handled:** string
 
+**Not Handled:** string
 
 ## LanguageSetting
 
-| Field | Type | Description |
-| --- | --- | --- |
-| [allowCompoundWords](#languagesetting-allowcompoundwords) | `boolean` | True to enable compound word checking. See [Case Sensitivity](https://cspell.org/docs/case-sensitive/) for more details. | 
-| [caseSensitive](#languagesetting-casesensitive) | `boolean` | Determines if words must match case and accent rules. | 
-| [description](#languagesetting-description) | `string` | Optional description of configuration. | 
-| [dictionaries](#languagesetting-dictionaries) | `DictionaryReference[]` | Optional list of dictionaries to use. Each entry should match the name of the dictionary. | 
-| [dictionaryDefinitions](#languagesetting-dictionarydefinitions) | `DictionaryDefinition[]` | Define additional available dictionaries. | 
-| [enabled](#languagesetting-enabled) | `boolean` | Is the spell checker enabled. | 
-| [flagWords](#languagesetting-flagwords) | `string[]` | List of words to always be considered incorrect. Words found in `flagWords` override `words`. | 
-| [id](#languagesetting-id) | `string` | Optional identifier. | 
-| [ignoreRegExpList](#languagesetting-ignoreregexplist) | `RegExpPatternList` | List of regular expression patterns or pattern names to exclude from spell checking. | 
-| [ignoreWords](#languagesetting-ignorewords) | `string[]` | List of words to be ignored. An ignored word will not show up as an error, even if it is | 
-| [includeRegExpList](#languagesetting-includeregexplist) | `RegExpPatternList` | List of regular expression patterns or defined pattern names to match for spell checking. | 
-| [languageId](#languagesetting-languageid) | `MatchingFileType` | The language id.  Ex: "typescript", "html", or "php".  "*" -- will match all languages. | 
-| [local](#languagesetting-local) | `LocaleId`<br />`LocaleId[]` | Deprecated - The locale filter, matches against the language. This can be a comma separated list. "*" will match all locales. | 
-| [locale](#languagesetting-locale) | `LocaleId`<br />`LocaleId[]` | The locale filter, matches against the language. This can be a comma separated list. "*" will match all locales. | 
-| [name](#languagesetting-name) | `string` | Optional name of configuration. | 
-| [noSuggestDictionaries](#languagesetting-nosuggestdictionaries) | `DictionaryReference[]` | Optional list of dictionaries that will not be used for suggestions. | 
-| [patterns](#languagesetting-patterns) | `RegExpPatternDefinition[]` | Defines a list of patterns that can be used with the `ignoreRegExpList` and | 
-| [suggestWords](#languagesetting-suggestwords) | `string[]` | A list of suggested replacements for words. | 
-| [words](#languagesetting-words) | `string[]` | List of words to be considered correct. | 
-
+| Field                                                           | Type                         | Description                                                                                                                    |
+| --------------------------------------------------------------- | ---------------------------- | ------------------------------------------------------------------------------------------------------------------------------ |
+| [allowCompoundWords](#languagesetting-allowcompoundwords)       | `boolean`                    | True to enable compound word checking. See [Case Sensitivity](https://cspell.org/docs/case-sensitive/) for more details.       |
+| [caseSensitive](#languagesetting-casesensitive)                 | `boolean`                    | Determines if words must match case and accent rules.                                                                          |
+| [description](#languagesetting-description)                     | `string`                     | Optional description of configuration.                                                                                         |
+| [dictionaries](#languagesetting-dictionaries)                   | `DictionaryReference[]`      | Optional list of dictionaries to use. Each entry should match the name of the dictionary.                                      |
+| [dictionaryDefinitions](#languagesetting-dictionarydefinitions) | `DictionaryDefinition[]`     | Define additional available dictionaries.                                                                                      |
+| [enabled](#languagesetting-enabled)                             | `boolean`                    | Is the spell checker enabled.                                                                                                  |
+| [flagWords](#languagesetting-flagwords)                         | `string[]`                   | List of words to always be considered incorrect. Words found in `flagWords` override `words`.                                  |
+| [id](#languagesetting-id)                                       | `string`                     | Optional identifier.                                                                                                           |
+| [ignoreRegExpList](#languagesetting-ignoreregexplist)           | `RegExpPatternList`          | List of regular expression patterns or pattern names to exclude from spell checking.                                           |
+| [ignoreWords](#languagesetting-ignorewords)                     | `string[]`                   | List of words to be ignored. An ignored word will not show up as an error, even if it is                                       |
+| [includeRegExpList](#languagesetting-includeregexplist)         | `RegExpPatternList`          | List of regular expression patterns or defined pattern names to match for spell checking.                                      |
+| [languageId](#languagesetting-languageid)                       | `MatchingFileType`           | The language id. Ex: "typescript", "html", or "php". "\*" -- will match all languages.                                         |
+| [local](#languagesetting-local)                                 | `LocaleId`<br />`LocaleId[]` | Deprecated - The locale filter, matches against the language. This can be a comma separated list. "\*" will match all locales. |
+| [locale](#languagesetting-locale)                               | `LocaleId`<br />`LocaleId[]` | The locale filter, matches against the language. This can be a comma separated list. "\*" will match all locales.              |
+| [name](#languagesetting-name)                                   | `string`                     | Optional name of configuration.                                                                                                |
+| [noSuggestDictionaries](#languagesetting-nosuggestdictionaries) | `DictionaryReference[]`      | Optional list of dictionaries that will not be used for suggestions.                                                           |
+| [patterns](#languagesetting-patterns)                           | `RegExpPatternDefinition[]`  | Defines a list of patterns that can be used with the `ignoreRegExpList` and                                                    |
+| [suggestWords](#languagesetting-suggestwords)                   | `string[]`                   | A list of suggested replacements for words.                                                                                    |
+| [words](#languagesetting-words)                                 | `string[]`                   | List of words to be considered correct.                                                                                        |
 
 ### LanguageSetting Fields
-
 
 ---
 
@@ -5118,8 +4791,6 @@ format: md
         True to enable compound word checking. See [Case Sensitivity](https://cspell.org/docs/case-sensitive/) for more details.
     </dd>
 </dl>
-
-
 
 ---
 
@@ -5150,8 +4821,6 @@ format: md
     </dd>
 </dl>
 
-
-
 ---
 
 #### `description` {#languagesetting-description}
@@ -5176,8 +4845,6 @@ format: md
         Optional description of configuration.
     </dd>
 </dl>
-
-
 
 ---
 
@@ -5210,8 +4877,6 @@ format: md
        and [Custom Dictionaries](https://cspell.org/docs/dictionaries-custom/) for more details.
     </dd>
 </dl>
-
-
 
 ---
 
@@ -5247,8 +4912,6 @@ format: md
     </dd>
 </dl>
 
-
-
 ---
 
 #### `enabled` {#languagesetting-enabled}
@@ -5273,8 +4936,6 @@ format: md
         Is the spell checker enabled.
     </dd>
 </dl>
-
-
 
 ---
 
@@ -5315,8 +4976,6 @@ format: md
     </dd>
 </dl>
 
-
-
 ---
 
 #### `id` {#languagesetting-id}
@@ -5341,8 +5000,6 @@ format: md
         Optional identifier.
     </dd>
 </dl>
-
-
 
 ---
 
@@ -5393,8 +5050,6 @@ format: md
     </dd>
 </dl>
 
-
-
 ---
 
 #### `ignoreWords` {#languagesetting-ignorewords}
@@ -5420,8 +5075,6 @@ format: md
        also in the `flagWords`.
     </dd>
 </dl>
-
-
 
 ---
 
@@ -5453,8 +5106,6 @@ format: md
     </dd>
 </dl>
 
-
-
 ---
 
 #### `languageId` {#languagesetting-languageid}
@@ -5479,8 +5130,6 @@ format: md
         The language id.  Ex: "typescript", "html", or "php".  "*" -- will match all languages.
     </dd>
 </dl>
-
-
 
 ---
 
@@ -5507,8 +5156,6 @@ format: md
     </dd>
 </dl>
 
-
-
 ---
 
 #### `locale` {#languagesetting-locale}
@@ -5534,8 +5181,6 @@ format: md
     </dd>
 </dl>
 
-
-
 ---
 
 #### `name` {#languagesetting-name}
@@ -5560,8 +5205,6 @@ format: md
         Optional name of configuration.
     </dd>
 </dl>
-
-
 
 ---
 
@@ -5593,8 +5236,6 @@ format: md
        possible suggestions.
     </dd>
 </dl>
-
-
 
 ---
 
@@ -5645,8 +5286,6 @@ format: md
     </dd>
 </dl>
 
-
-
 ---
 
 #### `suggestWords` {#languagesetting-suggestwords}
@@ -5682,8 +5321,6 @@ format: md
     </dd>
 </dl>
 
-
-
 ---
 
 #### `words` {#languagesetting-words}
@@ -5709,55 +5346,52 @@ format: md
     </dd>
 </dl>
 
-
 ## LocaleId
+
 **Not Handled:** string
 
-
 ## MatchingFileType
-**Not Handled:** undefined
 
+**Not Handled:** undefined
 
 ## OverrideSettings
 
-| Field | Type | Description |
-| --- | --- | --- |
-| [allowCompoundWords](#overridesettings-allowcompoundwords) | `boolean` | True to enable compound word checking. See [Case Sensitivity](https://cspell.org/docs/case-sensitive/) for more details. | 
-| [caseSensitive](#overridesettings-casesensitive) | `boolean` | Determines if words must match case and accent rules. | 
-| [description](#overridesettings-description) | `string` | Optional description of configuration. | 
-| [dictionaries](#overridesettings-dictionaries) | `DictionaryReference[]` | Optional list of dictionaries to use. Each entry should match the name of the dictionary. | 
-| [dictionaryDefinitions](#overridesettings-dictionarydefinitions) | `DictionaryDefinition[]` | Define additional available dictionaries. | 
-| [enableFiletypes](#overridesettings-enablefiletypes) | `LanguageIdSingle[]` | Enable / Disable checking file types (languageIds). | 
-| [enabled](#overridesettings-enabled) | `boolean` | Is the spell checker enabled. | 
-| [enabledFileTypes](#overridesettings-enabledfiletypes) | `object` | Enable / Disable checking file types (languageIds). | 
-| [enabledLanguageIds](#overridesettings-enabledlanguageids) | `LanguageIdSingle[]` | Specify a list of file types to spell check. It is better to use  [Settings.enabledFileTypes](#settings-enabledfiletypes)  to Enable / Disable checking files types. | 
-| [filename](#overridesettings-filename) | `Glob`<br />`Glob[]` | Glob pattern or patterns to match against. | 
-| [flagWords](#overridesettings-flagwords) | `string[]` | List of words to always be considered incorrect. Words found in `flagWords` override `words`. | 
-| [id](#overridesettings-id) | `string` | Optional identifier. | 
-| [ignoreRegExpList](#overridesettings-ignoreregexplist) | `RegExpPatternList` | List of regular expression patterns or pattern names to exclude from spell checking. | 
-| [ignoreWords](#overridesettings-ignorewords) | `string[]` | List of words to be ignored. An ignored word will not show up as an error, even if it is | 
-| [includeRegExpList](#overridesettings-includeregexplist) | `RegExpPatternList` | List of regular expression patterns or defined pattern names to match for spell checking. | 
-| [language](#overridesettings-language) | `LocaleId` | Sets the locale. | 
-| [languageId](#overridesettings-languageid) | `MatchingFileType` | Sets the programming language id to match file type. | 
-| [languageSettings](#overridesettings-languagesettings) | `LanguageSetting[]` | Additional settings for individual languages. | 
-| [loadDefaultConfiguration](#overridesettings-loaddefaultconfiguration) | `boolean` | By default, the bundled dictionary configurations are loaded. Explicitly setting this to `false` | 
-| [maxDuplicateProblems](#overridesettings-maxduplicateproblems) | `number` | The maximum number of times the same word can be flagged as an error in a file. | 
-| [maxNumberOfProblems](#overridesettings-maxnumberofproblems) | `number` | The maximum number of problems to report in a file. | 
-| [minWordLength](#overridesettings-minwordlength) | `number` | The minimum length of a word before checking it against a dictionary. | 
-| [name](#overridesettings-name) | `string` | Optional name of configuration. | 
-| [noSuggestDictionaries](#overridesettings-nosuggestdictionaries) | `DictionaryReference[]` | Optional list of dictionaries that will not be used for suggestions. | 
-| [numSuggestions](#overridesettings-numsuggestions) | `number` | Number of suggestions to make. | 
-| [patterns](#overridesettings-patterns) | `RegExpPatternDefinition[]` | Defines a list of patterns that can be used with the `ignoreRegExpList` and | 
-| [pnpFiles](#overridesettings-pnpfiles) | `string[]` | The PnP files to search for. Note: `.mjs` files are not currently supported. | 
-| [suggestWords](#overridesettings-suggestwords) | `string[]` | A list of suggested replacements for words. | 
-| [suggestionNumChanges](#overridesettings-suggestionnumchanges) | `number` | The maximum number of changes allowed on a word to be considered a suggestions. | 
-| [suggestionsTimeout](#overridesettings-suggestionstimeout) | `number` | The maximum amount of time in milliseconds to generate suggestions for a word. | 
-| [usePnP](#overridesettings-usepnp) | `boolean` | Packages managers like Yarn 2 use a `.pnp.cjs` file to assist in loading | 
-| [words](#overridesettings-words) | `string[]` | List of words to be considered correct. | 
-
+| Field                                                                  | Type                        | Description                                                                                                                                                        |
+| ---------------------------------------------------------------------- | --------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| [allowCompoundWords](#overridesettings-allowcompoundwords)             | `boolean`                   | True to enable compound word checking. See [Case Sensitivity](https://cspell.org/docs/case-sensitive/) for more details.                                           |
+| [caseSensitive](#overridesettings-casesensitive)                       | `boolean`                   | Determines if words must match case and accent rules.                                                                                                              |
+| [description](#overridesettings-description)                           | `string`                    | Optional description of configuration.                                                                                                                             |
+| [dictionaries](#overridesettings-dictionaries)                         | `DictionaryReference[]`     | Optional list of dictionaries to use. Each entry should match the name of the dictionary.                                                                          |
+| [dictionaryDefinitions](#overridesettings-dictionarydefinitions)       | `DictionaryDefinition[]`    | Define additional available dictionaries.                                                                                                                          |
+| [enableFiletypes](#overridesettings-enablefiletypes)                   | `LanguageIdSingle[]`        | Enable / Disable checking file types (languageIds).                                                                                                                |
+| [enabled](#overridesettings-enabled)                                   | `boolean`                   | Is the spell checker enabled.                                                                                                                                      |
+| [enabledFileTypes](#overridesettings-enabledfiletypes)                 | `object`                    | Enable / Disable checking file types (languageIds).                                                                                                                |
+| [enabledLanguageIds](#overridesettings-enabledlanguageids)             | `LanguageIdSingle[]`        | Specify a list of file types to spell check. It is better to use [Settings.enabledFileTypes](#settings-enabledfiletypes) to Enable / Disable checking files types. |
+| [filename](#overridesettings-filename)                                 | `Glob`<br />`Glob[]`        | Glob pattern or patterns to match against.                                                                                                                         |
+| [flagWords](#overridesettings-flagwords)                               | `string[]`                  | List of words to always be considered incorrect. Words found in `flagWords` override `words`.                                                                      |
+| [id](#overridesettings-id)                                             | `string`                    | Optional identifier.                                                                                                                                               |
+| [ignoreRegExpList](#overridesettings-ignoreregexplist)                 | `RegExpPatternList`         | List of regular expression patterns or pattern names to exclude from spell checking.                                                                               |
+| [ignoreWords](#overridesettings-ignorewords)                           | `string[]`                  | List of words to be ignored. An ignored word will not show up as an error, even if it is                                                                           |
+| [includeRegExpList](#overridesettings-includeregexplist)               | `RegExpPatternList`         | List of regular expression patterns or defined pattern names to match for spell checking.                                                                          |
+| [language](#overridesettings-language)                                 | `LocaleId`                  | Sets the locale.                                                                                                                                                   |
+| [languageId](#overridesettings-languageid)                             | `MatchingFileType`          | Sets the programming language id to match file type.                                                                                                               |
+| [languageSettings](#overridesettings-languagesettings)                 | `LanguageSetting[]`         | Additional settings for individual languages.                                                                                                                      |
+| [loadDefaultConfiguration](#overridesettings-loaddefaultconfiguration) | `boolean`                   | By default, the bundled dictionary configurations are loaded. Explicitly setting this to `false`                                                                   |
+| [maxDuplicateProblems](#overridesettings-maxduplicateproblems)         | `number`                    | The maximum number of times the same word can be flagged as an error in a file.                                                                                    |
+| [maxNumberOfProblems](#overridesettings-maxnumberofproblems)           | `number`                    | The maximum number of problems to report in a file.                                                                                                                |
+| [minWordLength](#overridesettings-minwordlength)                       | `number`                    | The minimum length of a word before checking it against a dictionary.                                                                                              |
+| [name](#overridesettings-name)                                         | `string`                    | Optional name of configuration.                                                                                                                                    |
+| [noSuggestDictionaries](#overridesettings-nosuggestdictionaries)       | `DictionaryReference[]`     | Optional list of dictionaries that will not be used for suggestions.                                                                                               |
+| [numSuggestions](#overridesettings-numsuggestions)                     | `number`                    | Number of suggestions to make.                                                                                                                                     |
+| [patterns](#overridesettings-patterns)                                 | `RegExpPatternDefinition[]` | Defines a list of patterns that can be used with the `ignoreRegExpList` and                                                                                        |
+| [pnpFiles](#overridesettings-pnpfiles)                                 | `string[]`                  | The PnP files to search for. Note: `.mjs` files are not currently supported.                                                                                       |
+| [suggestWords](#overridesettings-suggestwords)                         | `string[]`                  | A list of suggested replacements for words.                                                                                                                        |
+| [suggestionNumChanges](#overridesettings-suggestionnumchanges)         | `number`                    | The maximum number of changes allowed on a word to be considered a suggestions.                                                                                    |
+| [suggestionsTimeout](#overridesettings-suggestionstimeout)             | `number`                    | The maximum amount of time in milliseconds to generate suggestions for a word.                                                                                     |
+| [usePnP](#overridesettings-usepnp)                                     | `boolean`                   | Packages managers like Yarn 2 use a `.pnp.cjs` file to assist in loading                                                                                           |
+| [words](#overridesettings-words)                                       | `string[]`                  | List of words to be considered correct.                                                                                                                            |
 
 ### OverrideSettings Fields
-
 
 ---
 
@@ -5783,8 +5417,6 @@ format: md
         True to enable compound word checking. See [Case Sensitivity](https://cspell.org/docs/case-sensitive/) for more details.
     </dd>
 </dl>
-
-
 
 ---
 
@@ -5815,8 +5447,6 @@ format: md
     </dd>
 </dl>
 
-
-
 ---
 
 #### `description` {#overridesettings-description}
@@ -5841,8 +5471,6 @@ format: md
         Optional description of configuration.
     </dd>
 </dl>
-
-
 
 ---
 
@@ -5875,8 +5503,6 @@ format: md
        and [Custom Dictionaries](https://cspell.org/docs/dictionaries-custom/) for more details.
     </dd>
 </dl>
-
-
 
 ---
 
@@ -5911,8 +5537,6 @@ format: md
        ```
     </dd>
 </dl>
-
-
 
 ---
 
@@ -5958,8 +5582,6 @@ format: md
     </dd>
 </dl>
 
-
-
 ---
 
 #### `enabled` {#overridesettings-enabled}
@@ -5984,8 +5606,6 @@ format: md
         Is the spell checker enabled.
     </dd>
 </dl>
-
-
 
 ---
 
@@ -6027,8 +5647,6 @@ format: md
     </dd>
 </dl>
 
-
-
 ---
 
 #### `enabledLanguageIds` {#overridesettings-enabledlanguageids}
@@ -6054,8 +5672,6 @@ format: md
     </dd>
 </dl>
 
-
-
 ---
 
 #### `filename` {#overridesettings-filename}
@@ -6080,8 +5696,6 @@ format: md
         Glob pattern or patterns to match against.
     </dd>
 </dl>
-
-
 
 ---
 
@@ -6122,8 +5736,6 @@ format: md
     </dd>
 </dl>
 
-
-
 ---
 
 #### `id` {#overridesettings-id}
@@ -6148,8 +5760,6 @@ format: md
         Optional identifier.
     </dd>
 </dl>
-
-
 
 ---
 
@@ -6200,8 +5810,6 @@ format: md
     </dd>
 </dl>
 
-
-
 ---
 
 #### `ignoreWords` {#overridesettings-ignorewords}
@@ -6227,8 +5835,6 @@ format: md
        also in the `flagWords`.
     </dd>
 </dl>
-
-
 
 ---
 
@@ -6260,8 +5866,6 @@ format: md
     </dd>
 </dl>
 
-
-
 ---
 
 #### `language` {#overridesettings-language}
@@ -6287,8 +5891,6 @@ format: md
     </dd>
 </dl>
 
-
-
 ---
 
 #### `languageId` {#overridesettings-languageid}
@@ -6313,8 +5915,6 @@ format: md
         Sets the programming language id to match file type.
     </dd>
 </dl>
-
-
 
 ---
 
@@ -6343,8 +5943,6 @@ format: md
     </dd>
 </dl>
 
-
-
 ---
 
 #### `loadDefaultConfiguration` {#overridesettings-loaddefaultconfiguration}
@@ -6371,8 +5969,6 @@ format: md
     </dd>
 </dl>
 
-
-
 ---
 
 #### `maxDuplicateProblems` {#overridesettings-maxduplicateproblems}
@@ -6397,8 +5993,6 @@ format: md
         The maximum number of times the same word can be flagged as an error in a file.
     </dd>
 </dl>
-
-
 
 ---
 
@@ -6425,8 +6019,6 @@ format: md
     </dd>
 </dl>
 
-
-
 ---
 
 #### `minWordLength` {#overridesettings-minwordlength}
@@ -6452,8 +6044,6 @@ format: md
     </dd>
 </dl>
 
-
-
 ---
 
 #### `name` {#overridesettings-name}
@@ -6478,8 +6068,6 @@ format: md
         Optional name of configuration.
     </dd>
 </dl>
-
-
 
 ---
 
@@ -6512,8 +6100,6 @@ format: md
     </dd>
 </dl>
 
-
-
 ---
 
 #### `numSuggestions` {#overridesettings-numsuggestions}
@@ -6538,8 +6124,6 @@ format: md
         Number of suggestions to make.
     </dd>
 </dl>
-
-
 
 ---
 
@@ -6590,8 +6174,6 @@ format: md
     </dd>
 </dl>
 
-
-
 ---
 
 #### `pnpFiles` {#overridesettings-pnpfiles}
@@ -6616,8 +6198,6 @@ format: md
         The PnP files to search for. Note: `.mjs` files are not currently supported.
     </dd>
 </dl>
-
-
 
 ---
 
@@ -6654,8 +6234,6 @@ format: md
     </dd>
 </dl>
 
-
-
 ---
 
 #### `suggestionNumChanges` {#overridesettings-suggestionnumchanges}
@@ -6685,8 +6263,6 @@ format: md
     </dd>
 </dl>
 
-
-
 ---
 
 #### `suggestionsTimeout` {#overridesettings-suggestionstimeout}
@@ -6711,8 +6287,6 @@ format: md
         The maximum amount of time in milliseconds to generate suggestions for a word.
     </dd>
 </dl>
-
-
 
 ---
 
@@ -6743,8 +6317,6 @@ format: md
     </dd>
 </dl>
 
-
-
 ---
 
 #### `words` {#overridesettings-words}
@@ -6770,22 +6342,19 @@ format: md
     </dd>
 </dl>
 
-
 ## Pattern
-**Not Handled:** string
 
+**Not Handled:** string
 
 ## PatternAdjustment
 
-| Field | Type | Description |
-| --- | --- | --- |
-| [id](#patternadjustment-id) | `string` | Id of the Adjustment, i.e. `short-compound` | 
-| [penalty](#patternadjustment-penalty) | `number` | The amount of penalty to apply. | 
-| [regexp](#patternadjustment-regexp) | `string` | RegExp pattern to match | 
-
+| Field                                 | Type     | Description                                 |
+| ------------------------------------- | -------- | ------------------------------------------- |
+| [id](#patternadjustment-id)           | `string` | Id of the Adjustment, i.e. `short-compound` |
+| [penalty](#patternadjustment-penalty) | `number` | The amount of penalty to apply.             |
+| [regexp](#patternadjustment-regexp)   | `string` | RegExp pattern to match                     |
 
 ### PatternAdjustment Fields
-
 
 ---
 
@@ -6812,8 +6381,6 @@ format: md
     </dd>
 </dl>
 
-
-
 ---
 
 #### `penalty` {#patternadjustment-penalty}
@@ -6838,8 +6405,6 @@ format: md
         The amount of penalty to apply.
     </dd>
 </dl>
-
-
 
 ---
 
@@ -6866,30 +6431,27 @@ format: md
     </dd>
 </dl>
 
-
 ## PatternId
-**Not Handled:** string
 
+**Not Handled:** string
 
 ## PatternRef
+
 **Not Handled:** undefined
 
-
 ## PredefinedPatterns
-**Not Handled:** string
 
+**Not Handled:** string
 
 ## RegExpPatternDefinition
 
-| Field | Type | Description |
-| --- | --- | --- |
-| [description](#regexppatterndefinition-description) | `string` | Description of the pattern. | 
-| [name](#regexppatterndefinition-name) | `PatternId` | Pattern name, used as an identifier in ignoreRegExpList and includeRegExpList. | 
-| [pattern](#regexppatterndefinition-pattern) | `Pattern`<br />`Pattern[]` | RegExp pattern or array of RegExp patterns. | 
-
+| Field                                               | Type                       | Description                                                                    |
+| --------------------------------------------------- | -------------------------- | ------------------------------------------------------------------------------ |
+| [description](#regexppatterndefinition-description) | `string`                   | Description of the pattern.                                                    |
+| [name](#regexppatterndefinition-name)               | `PatternId`                | Pattern name, used as an identifier in ignoreRegExpList and includeRegExpList. |
+| [pattern](#regexppatterndefinition-pattern)         | `Pattern`<br />`Pattern[]` | RegExp pattern or array of RegExp patterns.                                    |
 
 ### RegExpPatternDefinition Fields
-
 
 ---
 
@@ -6915,8 +6477,6 @@ format: md
         Description of the pattern.
     </dd>
 </dl>
-
-
 
 ---
 
@@ -6944,8 +6504,6 @@ format: md
     </dd>
 </dl>
 
-
-
 ---
 
 #### `pattern` {#regexppatterndefinition-pattern}
@@ -6971,54 +6529,54 @@ format: md
     </dd>
 </dl>
 
-
 ## RegExpPatternList
-**Not Handled:** array
 
+**Not Handled:** array
 
 ## ReplaceEntry
-**Not Handled:** array
 
+**Not Handled:** array
 
 ## ReplaceMap
-**Not Handled:** array
 
+**Not Handled:** array
 
 ## ReporterModuleName
-**Not Handled:** string
 
+**Not Handled:** string
 
 ## ReporterOptions
-**Not Handled:** undefined
 
+**Not Handled:** undefined
 
 ## ReporterSettings
-**Not Handled:** undefined
 
+**Not Handled:** undefined
 
 ## Serializable
-**Not Handled:** undefined
 
+**Not Handled:** undefined
 
 ## SimpleGlob
-**Not Handled:** string
 
+**Not Handled:** string
 
 ## SuggestionCostMapDef
-**Not Handled:** undefined
 
+**Not Handled:** undefined
 
 ## SuggestionCostsDefs
+
 **Not Handled:** array
 
-
 ## Version
+
 **Not Handled:** undefined
 
-
 ## VersionLatest
+
 **Not Handled:** string
 
-
 ## VersionLegacy
+
 **Not Handled:** string
