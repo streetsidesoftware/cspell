@@ -1,11 +1,20 @@
 import path from 'node:path';
 import { pathToFileURL } from 'node:url';
 
-import * as urlLib from '@cspell/url';
+import { toFilePathOrHref, toFileURL } from '@cspell/url';
 
 import { srcDirectory } from '../../lib-cjs/pkg-info.cjs';
 
-export { addTrailingSlash, isDataURL, isFileURL, toFileDirURL, toFilePathOrHref, toURL } from '@cspell/url';
+export {
+    addTrailingSlash,
+    isDataURL,
+    isFileURL,
+    isUrlLike as isURLLike,
+    toFileURL as resolveFileWithURL,
+    toFileDirURL,
+    toFilePathOrHref,
+    toURL,
+} from '@cspell/url';
 
 /**
  * This is a URL that can be used for searching for modules.
@@ -22,27 +31,19 @@ export function getSourceDirectoryUrl(): URL {
  * @returns a URL
  */
 export function relativeTo(path: string, relativeTo?: URL | string): URL {
-    return urlLib.toFileURL(path, relativeTo ?? cwdURL());
+    return toFileURL(path, relativeTo ?? cwdURL());
 }
 
 export function cwdURL(): URL {
     return pathToFileURL('./');
 }
 
-export function resolveFileWithURL(file: string | URL, relativeToURL: URL): URL {
-    return urlLib.toFileURL(file, relativeToURL);
-}
-
 export function toFileUrl(file: string | URL): URL {
-    return resolveFileWithURL(file, cwdURL());
+    return toFileURL(file, cwdURL());
 }
 
 export function fileURLOrPathToPath(filenameOrURL: string | URL): string {
-    return urlLib.toFilePathOrHref(filenameOrURL);
-}
-
-export function isURLLike(url: string | URL): boolean {
-    return urlLib.isUrlLike(url);
+    return toFilePathOrHref(filenameOrURL);
 }
 
 export function windowsDriveLetterToUpper(absoluteFilePath: string): string {
