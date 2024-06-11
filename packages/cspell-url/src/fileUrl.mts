@@ -2,7 +2,7 @@ import assert from 'node:assert';
 import path from 'node:path';
 import { pathToFileURL } from 'node:url';
 
-import { isUrlLike } from './url.mjs';
+import { hasProtocol, isUrlLike } from './url.mjs';
 
 const isWindows = process.platform === 'win32';
 
@@ -21,7 +21,7 @@ const hashRegex = /#/g;
  * @returns true if the URL is a file URL.
  */
 export function isFileURL(url: URL | string): boolean {
-    return typeof url === 'string' ? url.startsWith('file:') : url.protocol === 'file:';
+    return hasProtocol(url, 'file:');
 }
 
 export interface PathInterface {

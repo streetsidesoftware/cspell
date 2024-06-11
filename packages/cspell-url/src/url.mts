@@ -18,6 +18,9 @@ export function toURL(url: string | URL, relativeTo?: string | URL): URL {
  */
 export function urlParent(url: string | URL): URL {
     url = toURL(url);
+    if (url.protocol === 'data:') {
+        return url;
+    }
     const hasTrailingSlash = url.pathname.endsWith('/');
     if (!url.pathname.startsWith('/')) {
         const parts = url.pathname.split('/').slice(0, hasTrailingSlash ? -2 : -1);
@@ -57,4 +60,14 @@ export function isUrlLike(filename: string | URL): boolean {
  */
 export function isURL(url: unknown): url is URL {
     return url instanceof URL;
+}
+
+/**
+ *
+ * @param url - url to check
+ * @param protocol - protocol to check against - e.g. 'file:', 'http:', 'https:'
+ * @returns
+ */
+export function hasProtocol(url: string | URL, protocol: string): boolean {
+    return typeof url === 'string' ? url.startsWith(protocol) : url.protocol === protocol;
 }

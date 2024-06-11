@@ -1,4 +1,4 @@
-import { basenameOfUrlPathname, toURL } from './url.mjs';
+import { basenameOfUrlPathname, hasProtocol, toURL } from './url.mjs';
 
 const regMatchFilename = /filename=([^;,]*)/;
 /**
@@ -21,4 +21,8 @@ export function urlBasename(url: string | URL): string {
         return guessDataUrlName(url.pathname.split(',', 1)[0]);
     }
     return basenameOfUrlPathname(url.pathname);
+}
+
+export function isDataUrl(url: string | URL): boolean {
+    return hasProtocol(url, 'data:');
 }
