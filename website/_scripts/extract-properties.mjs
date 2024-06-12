@@ -32,7 +32,7 @@ function schemaEntry(entry, name) {
     if (entry.type === 'object') {
         return schemaObjectEntry(entry, name);
     }
-    return `## ${name}\n**Not Handled:** ${entry.type}\n`;
+    return formatTopLevelType(name, entry);
 }
 
 function schemaObjectEntry(schemaTypeObject, nameOfType) {
@@ -72,7 +72,7 @@ function linkToHeader(name, section) {
 }
 
 function toId(nameOfParentType, header) {
-    return `${nameOfParentType}-${header}`.toLowerCase().replaceAll(/\W/g, '-');
+    return (nameOfParentType ? `${nameOfParentType}-${header}` : header).toLowerCase().replaceAll(/\W/g, '-');
 }
 
 function formatPropertyForOverview(key, entry, section) {
@@ -86,24 +86,38 @@ function formatPropertyToDisplay(key, entry, nameOfParentType) {
 
         #### \`${key}\` {#${toId(nameOfParentType, key)}}
 
-        <dl>
-            <dt>Name</dt>
-            <dd>
-                \`${key}\`
-            </dd>
-        </dl>
+        ${padLines(formatTypeEntryBody(entry), '        ')}
+    `);
+}
 
+function formatTopLevelType(key, entry) {
+    return removeLeftPad(`
+
+        ---
+
+        ## ${key} {#${toId('', key)}}
+
+        ${padLines(formatTypeEntryBody(entry), '        ')}
+    `);
+}
+
+function formatTypeEntryBody(entry) {
+    let dlDescription = formatEntryDescription(entry, '');
+    if (dlDescription) {
+        dlDescription = removeLeftPad(`
+            <dt>Description</dt>
+            <dd>
+                ${padLines(dlDescription, '                ')}
+            </dd>
+        `);
+    }
+
+    return removeLeftPad(`
         <dl>
+            ${padLines(dlDescription, '            ')}
             <dt>Type</dt>
             <dd>
                 ${formatEntryType(entry)}
-            </dd>
-        </dl>
-
-        <dl>
-            <dt>Description</dt>
-            <dd>
-                ${formatEntryDescription(entry, '               ')}
             </dd>
         </dl>
     `);
@@ -185,10 +199,10 @@ function replaceLinks(markdown) {
 
 /**
  * @param {string} str - multi-line string to left pad
- * @param {string} padding - the padding to use
+ * @param {string} [padding] - the padding to use
  * @param {string} [firstLinePadding] - optional padding of first line.
  */
-function padLines(str, padding, firstLinePadding = '') {
+function padLines(str, padding = '', firstLinePadding = '') {
     let pad = firstLinePadding;
     const lines = [];
     for (const line of str.split('\n')) {
