@@ -1,3 +1,4 @@
+/// <reference types="node" />
 import { SuggestionCostMapDef, DictionaryDefinitionAugmented } from '@cspell/cspell-types';
 export { SuggestionCostMapDef } from '@cspell/cspell-types';
 import { Operator } from '@cspell/cspell-pipe/sync';

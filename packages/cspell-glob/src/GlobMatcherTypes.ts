@@ -6,6 +6,7 @@ export interface PathInterface {
     resolve(...paths: string[]): string;
     relative(from: string, to: string): string;
     isAbsolute(p: string): boolean;
+    parse(p: string): { root: string; dir: string; base: string; ext: string; name: string };
     sep: string;
 }
 

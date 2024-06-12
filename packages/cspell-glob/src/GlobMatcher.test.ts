@@ -1,6 +1,7 @@
 import * as path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
+import { FileUrlBuilder } from '@cspell/url';
 import mm from 'micromatch';
 import { describe, expect, test } from 'vitest';
 
@@ -28,31 +29,56 @@ const pathPosix: PathInterface = {
 };
 
 const __filename = fileURLToPath(import.meta.url);
+const __dirname = fileURLToPath(new URL('.', import.meta.url));
+
+const gitRoot = path.join(__dirname, '../../../');
 
 const pathNames = new Map([
     [pathWin32, 'Win32'],
     [pathPosix, 'Posix'],
 ]);
 
+function r(...parts: string[]) {
+    return path.resolve(...parts);
+}
+
 describe('Validate assumptions', () => {
-    test('path relative', () => {
-        const relCrossDevice = path.win32.relative('C:\\user\\home\\project', 'D:\\projects');
-        expect(relCrossDevice).toEqual('D:\\projects');
-        const relSubDir = path.win32.relative('/User/home/project', '/User/home/project/fun/with/coding');
-        expect(relSubDir).toBe(path.win32.normalize('fun/with/coding'));
-        const relSubDirPosix = path.posix.relative('/User/home/project', '/User/home/project/fun/with/coding');
-        expect(relSubDirPosix).toBe(path.posix.normalize('fun/with/coding'));
+    test.each`
+        a                            | b                                       | path          | expected
+        ${'C:\\user\\home\\project'} | ${'D:\\projects'}                       | ${path.win32} | ${'D:\\projects'}
+        ${'/User/home/project'}      | ${'/User/home/project/fun/with/coding'} | ${path.win32} | ${'fun\\with\\coding'}
+        ${'/User/home/project'}      | ${'/User/home/project/fun/with/coding'} | ${path.posix} | ${'fun/with/coding'}
+    `('path relative $a $b', ({ a, b, path, expected }) => {
+        expect(path.relative(a, b)).toBe(expected);
     });
 
-    test('path parse', () => {
-        const res1 = path.win32.parse('/user/home/project');
-        expect(res1.root).toBe('/');
-        const res2 = path.win32.parse('user/home/project');
-        expect(res2.root).toBe('');
-        const res3 = path.win32.parse('C:\\user\\home\\project');
-        expect(res3.root).toBe('C:\\');
-        const res4 = path.win32.parse('C:user\\home\\project');
-        expect(res4.root).toBe('C:');
+    test.each`
+        a                            | b                                           | path          | expected
+        ${'C:\\user\\home\\project'} | ${'D:\\projects'}                           | ${path.win32} | ${'/D:/projects'}
+        ${'/User/home/project'}      | ${'/User/home/project/fun/with/coding'}     | ${path.win32} | ${'fun/with/coding'}
+        ${'/User/home/project'}      | ${'/User/home/project/fun/with/coding'}     | ${path.posix} | ${'fun/with/coding'}
+        ${'/User/home/project/'}     | ${'/User/home/project/fun/with/coding'}     | ${path.win32} | ${'fun/with/coding'}
+        ${'/User/home/project/'}     | ${'/User/home/project/fun/with/coding'}     | ${path.posix} | ${'fun/with/coding'}
+        ${'/User/home/project'}      | ${'/User/home/assignments/fun/with/coding'} | ${path.win32} | ${'../assignments/fun/with/coding'}
+        ${'/User/home/project'}      | ${'/User/home/assignments/fun/with/coding'} | ${path.posix} | ${'../assignments/fun/with/coding'}
+        ${'/User/home/project'}      | ${'/User/home/d#/fun/with/coding'}          | ${path.posix} | ${'../d#/fun/with/coding'}
+        ${'/User/home/project'}      | ${'/User/home/d#/fun with/coding'}          | ${path.win32} | ${'../d#/fun with/coding'}
+    `('path relative $a $b', ({ a, b, path, expected }) => {
+        const builder = new FileUrlBuilder({ path });
+        expect(builder.relative(builder.toFileDirURL(a), builder.toFileURL(b))).toBe(expected);
+    });
+
+    test.each`
+        filepath                     | expected
+        ${'/user/home/project'}      | ${'/'}
+        ${'user/home/project'}       | ${''}
+        ${'C:\\user\\home\\project'} | ${'C:\\'}
+        ${'C:/user/home/project'}    | ${'C:/'}
+        ${'c:/user/home/project'}    | ${'c:/'}
+        ${'C:user\\home\\project'}   | ${'C:'}
+    `('path parse $filepath', ({ filepath, expected }) => {
+        const res = path.win32.parse(filepath);
+        expect(res.root).toBe(expected);
     });
 });
 
@@ -70,6 +96,10 @@ describe('Validate Micromatch assumptions', () => {
         ${'**/temp'}                     | ${'/src/temp/data.json'}      | ${false}
         ${'**/temp/'}                    | ${'/src/temp/data.json'}      | ${false}
         ${'**/temp/**'}                  | ${'/src/temp/data.json'}      | ${true}
+        ${'**/temp/**'}                  | ${'temp'}                     | ${true}
+        ${'**/temp/**'}                  | ${'temp/'}                    | ${true}
+        ${'**/temp/*'}                   | ${'temp/ '}                   | ${true}
+        ${'**/temp/*'}                   | ${'temp/'}                    | ${false}
         ${'src/*.json'}                  | ${'src/settings.json'}        | ${true}
         ${'**/{*.json,*.json/**}'}       | ${'settings.json'}            | ${true}
         ${'**/{*.json,*.json/**}'}       | ${'/settings.json'}           | ${true}
@@ -121,7 +151,7 @@ function resolveFilename(pathInstance: PathInterface, filename: string | undefin
                 try {
                     expect(matcher.match(filename)).toEqual(expected);
                 } catch (e) {
-                    console.error('Failed on %i %o', index, curTest);
+                    console.error('Failed on %i %o', index, { curTest, m_patterns: matcher.patterns, filename });
                     throw e;
                 }
             });
@@ -426,7 +456,7 @@ describe('Validate GlobMatcher excludeMode patternsNormalizedToRoot', () => {
         const { root, rawRoot, ...rest } = g;
         const gg: Partial<GlobPatternNormalized> = {};
         if (root !== undefined) {
-            gg.root = path.resolve(root);
+            gg.root = path.normalize(path.resolve(root) + '/');
         }
         if (rawRoot !== undefined) {
             gg.rawRoot = path.resolve(rawRoot);
@@ -459,8 +489,8 @@ describe('Validate GlobMatcher excludeMode patternsNormalizedToRoot', () => {
         ${'*.json'}         | ${''}    | ${'exclude'} | ${pathWin32} | ${expectedGlobs['*.json']}
         ${'*.json\n *.js'}  | ${''}    | ${'exclude'} | ${pathWin32} | ${[...expectedGlobs['*.json'], ...expectedGlobs['*.js']]}
         ${g('*.js', 'a')}   | ${''}    | ${'exclude'} | ${pathWin32} | ${gc(expectedGlobs['a/**/*.js'], { root: '' })}
-        ${g('*.js', 'a')}   | ${'a'}   | ${'exclude'} | ${pathWin32} | ${gc(expectedGlobs['*.js'], { root: 'a' })}
-        ${g('*.js', 'a')}   | ${'a/b'} | ${'exclude'} | ${pathWin32} | ${gc(expectedGlobs['*.js'], { root: 'a/b' })}
+        ${g('*.js', 'a')}   | ${'a'}   | ${'exclude'} | ${pathWin32} | ${gc(expectedGlobs['*.js'], { root: 'a/' })}
+        ${g('*.js', 'a')}   | ${'a/b'} | ${'exclude'} | ${pathWin32} | ${gc(expectedGlobs['*.js'], { root: 'a/b/' })}
         ${g('*.js', 'a/c')} | ${'a/b'} | ${'exclude'} | ${pathWin32} | ${[]}
         ${g('*.js', 'a/c')} | ${'a/b'} | ${'include'} | ${pathWin32} | ${[]}
     `(
@@ -476,7 +506,7 @@ describe('Validate GlobMatcher excludeMode patternsNormalizedToRoot', () => {
 });
 
 type TestCase = [
-    patterns: string[] | string,
+    patterns: GlobPattern[] | GlobPattern,
     root: string | undefined,
     filename: string,
     expected: boolean,
@@ -488,6 +518,8 @@ function tests(): TestCase[] {
     const limit = 0;
 
     const testCases: TestCase[] = [
+        [['node_modules/'], gitRoot, r(__dirname, 'node_modules/p/index.js'), true, 'node_modules/'],
+        [['node_modules/'], gitRoot, r(__dirname, 'node_modules/'), false, 'node_modules/'],
         [['*.json'], undefined, './settings.json', true, '*.json'],
         [['*.json'], undefined, 'settings.json', true, '*.json'],
         [['*.json'], undefined, '${cwd}/settings.json', true, '*.json'],

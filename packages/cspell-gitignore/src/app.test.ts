@@ -22,6 +22,7 @@ describe('app', () => {
         params
         ${[path.basename(__dirname) + '/code.ts']}
         ${['../node_modules']}
+        ${['../node_modules/.bin/run.mjs']}
         ${['-r', '.', 'dist']}
         ${['temp']}
         ${['-r', '.', 'temp']}

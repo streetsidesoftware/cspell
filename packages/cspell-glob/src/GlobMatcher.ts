@@ -1,8 +1,9 @@
 import * as Path from 'node:path';
 
+import { FileUrlBuilder } from '@cspell/url';
 import mm from 'micromatch';
 
-import { doesRootContainPath, normalizeGlobPatterns, normalizeGlobToRoot } from './globHelper.js';
+import { GlobPatterns, isRelativeValueNested, normalizeGlobPatterns, normalizeGlobToRoot } from './globHelper.js';
 import type {
     GlobMatch,
     GlobPattern,
@@ -113,23 +114,21 @@ export class GlobMatcher {
         rootOrOptions?: string | GlobMatchOptions,
         _nodePath?: PathInterface,
     ) {
-        _nodePath = _nodePath ?? Path;
-
         const options = typeof rootOrOptions === 'string' ? { root: rootOrOptions } : rootOrOptions ?? {};
-        const { mode = 'exclude' } = options;
+        const mode = options.mode ?? 'exclude';
         const isExcludeMode = mode !== 'include';
-        _nodePath = options.nodePath ?? _nodePath;
+        const nodePath = options.nodePath ?? _nodePath ?? Path;
+        this.path = nodePath;
+        const cwd = options.cwd ?? nodePath.resolve();
+        const dot = options.dot ?? isExcludeMode;
+        const nested = options.nested ?? isExcludeMode;
+        const nobrace = options.nobrace;
+        const root = options.root ?? nodePath.resolve();
+        const builder = new FileUrlBuilder({ path: nodePath });
 
-        const {
-            root = _nodePath.resolve(),
-            dot = isExcludeMode,
-            nodePath = _nodePath,
-            nested = isExcludeMode,
-            cwd = process.cwd(),
-            nobrace,
-        } = options;
+        const rootURL = builder.toFileDirURL(root);
+        const normalizedRoot = builder.urlToFilePathOrHref(rootURL);
 
-        const normalizedRoot = nodePath.resolve(nodePath.normalize(root));
         this.options = { root: normalizedRoot, dot, nodePath, nested, mode, nobrace, cwd };
 
         patterns = Array.isArray(patterns)
@@ -141,11 +140,10 @@ export class GlobMatcher {
         this.patternsNormalizedToRoot = globPatterns
             .map((g) => normalizeGlobToRoot(g, normalizedRoot, nodePath))
             // Only keep globs that do not match the root when using exclude mode.
-            .filter((g) => nodePath.relative(g.root, normalizedRoot) === '');
+            .filter((g) => builder.relative(builder.toFileDirURL(g.root), rootURL) === '');
 
         this.patterns = globPatterns;
         this.root = normalizedRoot;
-        this.path = nodePath;
         this.dot = dot;
         this.matchEx = buildMatcherFn(this.patterns, this.options);
     }
@@ -196,8 +194,10 @@ interface GlobRule {
  * @returns a function given a filename returns true if it matches.
  */
 function buildMatcherFn(patterns: GlobPatternWithRoot[], options: NormalizedGlobMatchOptions): GlobMatchFn {
-    const { nodePath: path, dot, nobrace } = options;
+    const { nodePath, dot, nobrace } = options;
+    const builder = new FileUrlBuilder({ path: nodePath });
     const makeReOptions = { dot, nobrace };
+    const suffixDir = GlobPatterns.suffixDir;
     const rules: GlobRule[] = patterns
         .map((pattern, index) => ({ pattern, index }))
         .filter((r) => !!r.pattern.glob)
@@ -207,10 +207,16 @@ function buildMatcherFn(patterns: GlobPatternWithRoot[], options: NormalizedGlob
             const glob = pattern.glob.replace(/^!/, '');
             const isNeg = (matchNeg && matchNeg[0].length & 1 && true) || false;
             const reg = mm.makeRe(glob, makeReOptions);
-            const fn = (filename: string) => {
-                reg.lastIndex = 0;
-                return reg.test(filename);
-            };
+            const fn = pattern.glob.endsWith(suffixDir)
+                ? (filename: string) => {
+                      // Note: this is a hack to get around the limitations of globs.
+                      // We want to match a filename with a trailing slash, but micromatch does not support it.
+                      // So it is necessary to pretend that the filename has a space at the end.
+                      return reg.test(filename) || (filename.endsWith('/') && reg.test(filename + ' '));
+                  }
+                : (filename: string) => {
+                      return reg.test(filename);
+                  };
             return { pattern, index, isNeg, fn, reg };
         });
     const negRules = rules.filter((r) => r.isNeg);
@@ -225,16 +231,25 @@ function buildMatcherFn(patterns: GlobPatternWithRoot[], options: NormalizedGlob
     // const posReg = joinRegExp(posRegEx);
 
     const fn: GlobMatchFn = (filename: string) => {
-        filename = path.resolve(path.normalize(filename));
-        const fNameNormalize = path.sep === '\\' ? filename.replaceAll('\\', '/') : filename;
-        let lastRoot = '!!!!!!';
+        const fileUrl = builder.toFileURL(filename);
+        const relFilePathname = builder.relative(new URL('file:///'), fileUrl);
+        let lastRoot = new URL('placeHolder://');
         let lastRel = '';
 
-        function relativeToRoot(root: string) {
-            if (root !== lastRoot) {
+        const mapRoots = new Map<string, URL>();
+
+        function rootToUrl(root: string): URL {
+            const found = mapRoots.get(root);
+            if (found) return found;
+            const url = builder.toFileDirURL(root);
+            mapRoots.set(root, url);
+            return url;
+        }
+
+        function relativeToRoot(root: URL) {
+            if (root.href !== lastRoot.href) {
                 lastRoot = root;
-                const relName = path.relative(root, filename);
-                lastRel = path.sep === '\\' ? relName.replaceAll('\\', '/') : relName;
+                lastRel = builder.relative(root, fileUrl);
             }
             return lastRel;
         }
@@ -243,11 +258,13 @@ function buildMatcherFn(patterns: GlobPatternWithRoot[], options: NormalizedGlob
             for (const rule of rules) {
                 const pattern = rule.pattern;
                 const root = pattern.root;
+                const rootURL = rootToUrl(root);
                 const isRelPat = !pattern.isGlobalPattern;
-                if (isRelPat && !doesRootContainPath(root, filename, path)) {
+                const relPathToFile = relativeToRoot(rootURL);
+                if (isRelPat && !isRelativeValueNested(relPathToFile)) {
                     continue;
                 }
-                const fname = isRelPat ? relativeToRoot(root) : fNameNormalize;
+                const fname = isRelPat ? relPathToFile : relFilePathname;
                 if (rule.fn(fname)) {
                     return {
                         matched,

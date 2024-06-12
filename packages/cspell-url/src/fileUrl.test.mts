@@ -1,13 +1,15 @@
-import * as path from 'node:path';
+import * as Path from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 
 import { describe, expect, test } from 'vitest';
 
 import { urlBasename } from './dataUrl.mjs';
-import { FileUrlBuilder, normalizeFilePathForUrl, toFileDirURL, toFilePathOrHref, toFileURL } from './fileUrl.mjs';
+import { normalizeFilePathForUrl, toFileDirURL, toFileURL } from './defaultFileUrlBuilder.mjs';
+import { toFilePathOrHref } from './fileUrl.mjs';
+import { FileUrlBuilder } from './FileUrlBuilder.mjs';
 import { isUrlLike, toURL, urlParent } from './url.mjs';
 
-const root = path.join(__dirname, '../..');
+const root = Path.join(__dirname, '../..');
 // const oc = expect.objectContaining;
 // const sc = expect.stringContaining;
 const sm = expect.stringMatching;
@@ -53,7 +55,7 @@ describe('util', () => {
         ${toURL('data:application/gzip;base64,H')}                                                          | ${'application.gzip'}
         ${'data:application/vnd.cspell.dictionary+trie,H'}                                                  | ${'application.vnd.cspell.dictionary.trie'}
     `('urlBasename $file', async ({ file, expected }) => {
-        const filename = isUrlLike(file) ? file : toFileURL(path.resolve(root, file));
+        const filename = isUrlLike(file) ? file : toFileURL(Path.resolve(root, file));
         expect(urlBasename(filename)).toEqual(expected);
     });
 
@@ -67,7 +69,7 @@ describe('util', () => {
         ${'https://github.com/streetsidesoftware/cspell/raw/main/packages/cspell-io/samples/cities.txt.gz'} | ${sm(/https:.*\/samples\/$/)}
         ${'https://github.com/streetsidesoftware/cspell/raw/main/packages/cspell-io/samples/code/'}         | ${sm(/https:.*\/samples\/$/)}
     `('urlDirname $file', async ({ file, expected }) => {
-        const filename = isUrlLike(file) ? file : toFileURL(path.resolve(root, file));
+        const filename = isUrlLike(file) ? file : toFileURL(Path.resolve(root, file));
         expect(urlParent(filename).toString()).toEqual(expected);
     });
 
@@ -101,8 +103,8 @@ describe('util', () => {
 
     test.each`
         url                           | expected
-        ${toFileURL('file.txt')}      | ${path.resolve('file.txt')}
-        ${toFileURL('file.txt').href} | ${path.resolve('file.txt')}
+        ${toFileURL('file.txt')}      | ${Path.resolve('file.txt')}
+        ${toFileURL('file.txt').href} | ${Path.resolve('file.txt')}
         ${import.meta.url}            | ${fileURLToPath(import.meta.url)}
         ${'stdin:sample.py'}          | ${'stdin:sample.py'}
     `('toFilePathOrHref $url', ({ url, expected }) => {
