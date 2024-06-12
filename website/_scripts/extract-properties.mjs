@@ -64,13 +64,19 @@ function schemaObjectEntry(schemaTypeObject, nameOfType) {
 
 /**
  * @param {string} name - name of heading
- * @param {string} section - the containing entry name
+ * @param {string} [section] - the containing entry name
+ * @param {string} [text] - optional text to show in the link
  */
-function linkToHeader(name, section) {
+function linkToHeader(name, section, text) {
+    text = text || name;
     const id = toId(section, name);
-    return `[${name}](#${id})`;
+    return `[${text}](#${id})`;
 }
 
+/**
+ * @param {string | undefined} nameOfParentType
+ * @param {string} header
+ */
 function toId(nameOfParentType, header) {
     return (nameOfParentType ? `${nameOfParentType}-${header}` : header).toLowerCase().replaceAll(/\W/g, '-');
 }
@@ -132,18 +138,23 @@ function formatEntryType(entry, addFix = '`') {
     }
 
     if (entry.type === 'array' && entry.items) {
-        return fix(`${formatEntryType(entry.items, '')}[]`);
+        return formatEntryType(entry.items, '`') + fix(`[]`);
     }
     if (entry.type) {
         return fix(entry.type);
     }
     if (entry.$ref) {
-        return fix(entry.$ref.split('/').slice(-1).join(''));
+        return formatReferenceType(entry.$ref, fix);
     }
     if (entry.anyOf) {
         return entry.anyOf.map((entry) => formatEntryType(entry)).join('<br />');
     }
     return fix('Unknown');
+}
+
+function formatReferenceType(ref, fnFix) {
+    const refType = ref.split('/').slice(-1).join('');
+    return linkToHeader(refType, '', fnFix(refType));
 }
 
 function formatDefinitions(schema) {
@@ -191,7 +202,7 @@ const regExpMatchLink = /\{@link (.*?)\}/g;
 function replaceLinks(markdown) {
     markdown = markdown.replaceAll(regExpMatchLink, (_match, p1) => {
         p1 = p1.trim();
-        const link = (p1 && `[${p1}](#${p1.toLowerCase().replaceAll(/\W/g, '-')})`) || '';
+        const link = (p1 && linkToHeader(p1, '')) || '';
         return link;
     });
     return markdown;
