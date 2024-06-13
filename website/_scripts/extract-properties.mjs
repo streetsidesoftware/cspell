@@ -142,7 +142,7 @@ function formatEntryType(entry, addFix = '`') {
     }
 
     if (entry.type === 'array' && entry.items) {
-        return formatEntryType(entry.items, '`') + fix(`[]`);
+        return formatEntryType(entry.items, '`') + '&ZeroWidthSpace;' + fix(`[]`);
     }
     if (entry.type) {
         return fix(entry.type);
