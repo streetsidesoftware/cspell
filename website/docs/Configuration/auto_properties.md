@@ -72,16 +72,20 @@ format: md
 #### `$schema` {#settings--schema}
 
 <dl>
-    
-    <dt>Description</dt>
-    <dd>
-        Url to JSON Schema
-    </dd>
-    
-    <dt>Type</dt>
-    <dd>
-        `string`
-    </dd>
+
+<dt>Description</dt>
+<dd>
+
+Url to JSON Schema
+
+</dd>
+
+<dt>Type</dt>
+<dd>
+
+`string`
+
+</dd>
 </dl>
 
 ---
@@ -89,16 +93,20 @@ format: md
 #### `allowCompoundWords` {#settings-allowcompoundwords}
 
 <dl>
-    
-    <dt>Description</dt>
-    <dd>
-        True to enable compound word checking. See [Case Sensitivity](https://cspell.org/docs/case-sensitive/) for more details.
-    </dd>
-    
-    <dt>Type</dt>
-    <dd>
-        `boolean`
-    </dd>
+
+<dt>Description</dt>
+<dd>
+
+True to enable compound word checking. See [Case Sensitivity](https://cspell.org/docs/case-sensitive/) for more details.
+
+</dd>
+
+<dt>Type</dt>
+<dd>
+
+`boolean`
+
+</dd>
 </dl>
 
 ---
@@ -106,16 +114,20 @@ format: md
 #### `cache` {#settings-cache}
 
 <dl>
-    
-    <dt>Description</dt>
-    <dd>
-        Define cache settings.
-    </dd>
-    
-    <dt>Type</dt>
-    <dd>
-        [`CacheSettings`](#cachesettings)
-    </dd>
+
+<dt>Description</dt>
+<dd>
+
+Define cache settings.
+
+</dd>
+
+<dt>Type</dt>
+<dd>
+
+[`CacheSettings`](#cachesettings)
+
+</dd>
 </dl>
 
 ---
@@ -123,20 +135,24 @@ format: md
 #### `caseSensitive` {#settings-casesensitive}
 
 <dl>
-    
-    <dt>Description</dt>
-    <dd>
-        Determines if words must match case and accent rules.
-        
-        - `false` - Case is ignored and accents can be missing on the entire word.
-          Incorrect accents or partially missing accents will be marked as incorrect.
-        - `true` - Case and accents are enforced.
-    </dd>
-    
-    <dt>Type</dt>
-    <dd>
-        `boolean`
-    </dd>
+
+<dt>Description</dt>
+<dd>
+
+Determines if words must match case and accent rules.
+
+- `false` - Case is ignored and accents can be missing on the entire word.
+  Incorrect accents or partially missing accents will be marked as incorrect.
+- `true` - Case and accents are enforced.
+
+</dd>
+
+<dt>Type</dt>
+<dd>
+
+`boolean`
+
+</dd>
 </dl>
 
 ---
@@ -144,16 +160,20 @@ format: md
 #### `description` {#settings-description}
 
 <dl>
-    
-    <dt>Description</dt>
-    <dd>
-        Optional description of configuration.
-    </dd>
-    
-    <dt>Type</dt>
-    <dd>
-        `string`
-    </dd>
+
+<dt>Description</dt>
+<dd>
+
+Optional description of configuration.
+
+</dd>
+
+<dt>Type</dt>
+<dd>
+
+`string`
+
+</dd>
 </dl>
 
 ---
@@ -161,23 +181,27 @@ format: md
 #### `dictionaries` {#settings-dictionaries}
 
 <dl>
-    
-    <dt>Description</dt>
-    <dd>
-        Optional list of dictionaries to use. Each entry should match the name of the dictionary.
-        
-        To remove a dictionary from the list, add `!` before the name.
-        
-        For example, `!typescript` will turn off the dictionary with the name `typescript`.
-        
-        See the [Dictionaries](https://cspell.org/docs/dictionaries/)
-        and [Custom Dictionaries](https://cspell.org/docs/dictionaries-custom/) for more details.
-    </dd>
-    
-    <dt>Type</dt>
-    <dd>
-        [`DictionaryReference`](#dictionaryreference)`[]`
-    </dd>
+
+<dt>Description</dt>
+<dd>
+
+Optional list of dictionaries to use. Each entry should match the name of the dictionary.
+
+To remove a dictionary from the list, add `!` before the name.
+
+For example, `!typescript` will turn off the dictionary with the name `typescript`.
+
+See the [Dictionaries](https://cspell.org/docs/dictionaries/)
+and [Custom Dictionaries](https://cspell.org/docs/dictionaries-custom/) for more details.
+
+</dd>
+
+<dt>Type</dt>
+<dd>
+
+[`DictionaryReference`](#dictionaryreference)`[]`
+
+</dd>
 </dl>
 
 ---
@@ -185,25 +209,29 @@ format: md
 #### `dictionaryDefinitions` {#settings-dictionarydefinitions}
 
 <dl>
-    
-    <dt>Description</dt>
-    <dd>
-        Define additional available dictionaries.
-        
-        For example, you can use the following to add a custom dictionary:
-        
-        ```json
-        "dictionaryDefinitions": [
-          { "name": "custom-words", "path": "./custom-words.txt"}
-        ],
-        "dictionaries": ["custom-words"]
-        ```
-    </dd>
-    
-    <dt>Type</dt>
-    <dd>
-        [`DictionaryDefinition`](#dictionarydefinition)`[]`
-    </dd>
+
+<dt>Description</dt>
+<dd>
+
+Define additional available dictionaries.
+
+For example, you can use the following to add a custom dictionary:
+
+```json
+"dictionaryDefinitions": [
+  { "name": "custom-words", "path": "./custom-words.txt"}
+],
+"dictionaries": ["custom-words"]
+```
+
+</dd>
+
+<dt>Type</dt>
+<dd>
+
+[`DictionaryDefinition`](#dictionarydefinition)`[]`
+
+</dd>
 </dl>
 
 ---
@@ -211,35 +239,39 @@ format: md
 #### `enableFiletypes` {#settings-enablefiletypes}
 
 <dl>
-    
-    <dt>Description</dt>
-    <dd>
-        Enable / Disable checking file types (languageIds).
-        
-        These are in additional to the file types specified by  [Settings.enabledLanguageIds](#settings-enabledlanguageids) .
-        To disable a language, prefix with `!` as in `!json`,
-        
-        
-        **Example: individual file types**
-        
-        ```
-        jsonc       // enable checking for jsonc
-        !json       // disable checking for json
-        kotlin      // enable checking for kotlin
-        ```
-        
-        **Example: enable all file types**
-        
-        ```
-        *           // enable checking for all file types
-        !json       // except for json
-        ```
-    </dd>
-    
-    <dt>Type</dt>
-    <dd>
-        [`LanguageIdSingle`](#languageidsingle)`[]`
-    </dd>
+
+<dt>Description</dt>
+<dd>
+
+Enable / Disable checking file types (languageIds).
+
+These are in additional to the file types specified by  [Settings.enabledLanguageIds](#settings-enabledlanguageids) .
+To disable a language, prefix with `!` as in `!json`,
+
+
+**Example: individual file types**
+
+```
+jsonc       // enable checking for jsonc
+!json       // disable checking for json
+kotlin      // enable checking for kotlin
+```
+
+**Example: enable all file types**
+
+```
+*           // enable checking for all file types
+!json       // except for json
+```
+
+</dd>
+
+<dt>Type</dt>
+<dd>
+
+[`LanguageIdSingle`](#languageidsingle)`[]`
+
+</dd>
 </dl>
 
 ---
@@ -247,18 +279,22 @@ format: md
 #### `enableGlobDot` {#settings-enableglobdot}
 
 <dl>
-    
-    <dt>Description</dt>
-    <dd>
-        Enable scanning files and directories beginning with `.` (period).
-        
-        By default, CSpell does not scan `hidden` files.
-    </dd>
-    
-    <dt>Type</dt>
-    <dd>
-        `boolean`
-    </dd>
+
+<dt>Description</dt>
+<dd>
+
+Enable scanning files and directories beginning with `.` (period).
+
+By default, CSpell does not scan `hidden` files.
+
+</dd>
+
+<dt>Type</dt>
+<dd>
+
+`boolean`
+
+</dd>
 </dl>
 
 ---
@@ -266,16 +302,20 @@ format: md
 #### `enabled` {#settings-enabled}
 
 <dl>
-    
-    <dt>Description</dt>
-    <dd>
-        Is the spell checker enabled.
-    </dd>
-    
-    <dt>Type</dt>
-    <dd>
-        `boolean`
-    </dd>
+
+<dt>Description</dt>
+<dd>
+
+Is the spell checker enabled.
+
+</dd>
+
+<dt>Type</dt>
+<dd>
+
+`boolean`
+
+</dd>
 </dl>
 
 ---
@@ -283,31 +323,35 @@ format: md
 #### `enabledFileTypes` {#settings-enabledfiletypes}
 
 <dl>
-    
-    <dt>Description</dt>
-    <dd>
-        Enable / Disable checking file types (languageIds).
-        
-        This setting replaces:  [Settings.enabledLanguageIds](#settings-enabledlanguageids)  and  [Settings.enableFiletypes](#settings-enablefiletypes) .
-        
-        A Value of:
-        - `true` - enable checking for the file type
-        - `false` - disable checking for the file type
-        
-        A file type of `*` is a wildcard that enables all file types.
-        
-        **Example: enable all file types**
-        
-        | File Type | Enabled | Comment |
-        | --------- | ------- | ------- |
-        | `*`       | `true`  | Enable all file types. |
-        | `json`    | `false` | Disable checking for json files. |
-    </dd>
-    
-    <dt>Type</dt>
-    <dd>
-        `object`
-    </dd>
+
+<dt>Description</dt>
+<dd>
+
+Enable / Disable checking file types (languageIds).
+
+This setting replaces:  [Settings.enabledLanguageIds](#settings-enabledlanguageids)  and  [Settings.enableFiletypes](#settings-enablefiletypes) .
+
+A Value of:
+- `true` - enable checking for the file type
+- `false` - disable checking for the file type
+
+A file type of `*` is a wildcard that enables all file types.
+
+**Example: enable all file types**
+
+| File Type | Enabled | Comment |
+| --------- | ------- | ------- |
+| `*`       | `true`  | Enable all file types. |
+| `json`    | `false` | Disable checking for json files. |
+
+</dd>
+
+<dt>Type</dt>
+<dd>
+
+`object`
+
+</dd>
 </dl>
 
 ---
@@ -315,16 +359,20 @@ format: md
 #### `enabledLanguageIds` {#settings-enabledlanguageids}
 
 <dl>
-    
-    <dt>Description</dt>
-    <dd>
-        Specify a list of file types to spell check. It is better to use  [Settings.enabledFileTypes](#settings-enabledfiletypes)  to Enable / Disable checking files types.
-    </dd>
-    
-    <dt>Type</dt>
-    <dd>
-        [`LanguageIdSingle`](#languageidsingle)`[]`
-    </dd>
+
+<dt>Description</dt>
+<dd>
+
+Specify a list of file types to spell check. It is better to use  [Settings.enabledFileTypes](#settings-enabledfiletypes)  to Enable / Disable checking files types.
+
+</dd>
+
+<dt>Type</dt>
+<dd>
+
+[`LanguageIdSingle`](#languageidsingle)`[]`
+
+</dd>
 </dl>
 
 ---
@@ -332,16 +380,20 @@ format: md
 #### `failFast` {#settings-failfast}
 
 <dl>
-    
-    <dt>Description</dt>
-    <dd>
-        Exit with non-zero code as soon as an issue/error is encountered (useful for CI or git hooks)
-    </dd>
-    
-    <dt>Type</dt>
-    <dd>
-        `boolean`
-    </dd>
+
+<dt>Description</dt>
+<dd>
+
+Exit with non-zero code as soon as an issue/error is encountered (useful for CI or git hooks)
+
+</dd>
+
+<dt>Type</dt>
+<dd>
+
+`boolean`
+
+</dd>
 </dl>
 
 ---
@@ -349,16 +401,20 @@ format: md
 #### `features` {#settings-features}
 
 <dl>
-    
-    <dt>Description</dt>
-    <dd>
-        Configure CSpell features.
-    </dd>
-    
-    <dt>Type</dt>
-    <dd>
-        [`Features`](#features)
-    </dd>
+
+<dt>Description</dt>
+<dd>
+
+Configure CSpell features.
+
+</dd>
+
+<dt>Type</dt>
+<dd>
+
+[`Features`](#features)
+
+</dd>
 </dl>
 
 ---
@@ -366,18 +422,22 @@ format: md
 #### `files` {#settings-files}
 
 <dl>
-    
-    <dt>Description</dt>
-    <dd>
-        Glob patterns of files to be checked.
-        
-        Glob patterns are relative to the `globRoot` of the configuration file that defines them.
-    </dd>
-    
-    <dt>Type</dt>
-    <dd>
-        [`Glob`](#glob)`[]`
-    </dd>
+
+<dt>Description</dt>
+<dd>
+
+Glob patterns of files to be checked.
+
+Glob patterns are relative to the `globRoot` of the configuration file that defines them.
+
+</dd>
+
+<dt>Type</dt>
+<dd>
+
+[`Glob`](#glob)`[]`
+
+</dd>
 </dl>
 
 ---
@@ -385,30 +445,34 @@ format: md
 #### `flagWords` {#settings-flagwords}
 
 <dl>
-    
-    <dt>Description</dt>
-    <dd>
-        List of words to always be considered incorrect. Words found in `flagWords` override `words`.
-        
-        Format of `flagWords`
-        - single word entry - `word`
-        - with suggestions - `word:suggestion` or `word->suggestion, suggestions`
-        
-        Example:
-        ```ts
-        "flagWords": [
-          "color: colour",
-          "incase: in case, encase",
-          "canot->cannot",
-          "cancelled->canceled"
-        ]
-        ```
-    </dd>
-    
-    <dt>Type</dt>
-    <dd>
-        `string``[]`
-    </dd>
+
+<dt>Description</dt>
+<dd>
+
+List of words to always be considered incorrect. Words found in `flagWords` override `words`.
+
+Format of `flagWords`
+- single word entry - `word`
+- with suggestions - `word:suggestion` or `word->suggestion, suggestions`
+
+Example:
+```ts
+"flagWords": [
+  "color: colour",
+  "incase: in case, encase",
+  "canot->cannot",
+  "cancelled->canceled"
+]
+```
+
+</dd>
+
+<dt>Type</dt>
+<dd>
+
+`string``[]`
+
+</dd>
 </dl>
 
 ---
@@ -416,16 +480,20 @@ format: md
 #### `gitignoreRoot` {#settings-gitignoreroot}
 
 <dl>
-    
-    <dt>Description</dt>
-    <dd>
-        Tells the spell checker to stop searching for `.gitignore` files when it reaches a matching root.
-    </dd>
-    
-    <dt>Type</dt>
-    <dd>
-        [`FsPath`](#fspath)<br />[`FsPath`](#fspath)`[]`
-    </dd>
+
+<dt>Description</dt>
+<dd>
+
+Tells the spell checker to stop searching for `.gitignore` files when it reaches a matching root.
+
+</dd>
+
+<dt>Type</dt>
+<dd>
+
+[`FsPath`](#fspath)<br />[`FsPath`](#fspath)`[]`
+
+</dd>
 </dl>
 
 ---
@@ -433,27 +501,31 @@ format: md
 #### `globRoot` {#settings-globroot}
 
 <dl>
-    
-    <dt>Description</dt>
-    <dd>
-        The root to use for glob patterns found in this configuration.
-        Default: location of the configuration file.
-          For compatibility reasons, config files with version 0.1, the glob root will
-          default to be `${cwd}`.
-        
-        Use `globRoot` to define a different location.
-        `globRoot` can be relative to the location of this configuration file.
-        Defining globRoot, does not impact imported configurations.
-        
-        Special Values:
-        - `${cwd}` - will be replaced with the current working directory.
-        - `.` - will be the location of the containing configuration file.
-    </dd>
-    
-    <dt>Type</dt>
-    <dd>
-        [`FSPathResolvable`](#fspathresolvable)
-    </dd>
+
+<dt>Description</dt>
+<dd>
+
+The root to use for glob patterns found in this configuration.
+Default: location of the configuration file.
+  For compatibility reasons, config files with version 0.1, the glob root will
+  default to be `${cwd}`.
+
+Use `globRoot` to define a different location.
+`globRoot` can be relative to the location of this configuration file.
+Defining globRoot, does not impact imported configurations.
+
+Special Values:
+- `${cwd}` - will be replaced with the current working directory.
+- `.` - will be the location of the containing configuration file.
+
+</dd>
+
+<dt>Type</dt>
+<dd>
+
+[`FSPathResolvable`](#fspathresolvable)
+
+</dd>
 </dl>
 
 ---
@@ -461,16 +533,20 @@ format: md
 #### `id` {#settings-id}
 
 <dl>
-    
-    <dt>Description</dt>
-    <dd>
-        Optional identifier.
-    </dd>
-    
-    <dt>Type</dt>
-    <dd>
-        `string`
-    </dd>
+
+<dt>Description</dt>
+<dd>
+
+Optional identifier.
+
+</dd>
+
+<dt>Type</dt>
+<dd>
+
+`string`
+
+</dd>
 </dl>
 
 ---
@@ -478,18 +554,22 @@ format: md
 #### `ignorePaths` {#settings-ignorepaths}
 
 <dl>
-    
-    <dt>Description</dt>
-    <dd>
-        Glob patterns of files to be ignored.
-        
-        Glob patterns are relative to the `globRoot` of the configuration file that defines them.
-    </dd>
-    
-    <dt>Type</dt>
-    <dd>
-        [`Glob`](#glob)`[]`
-    </dd>
+
+<dt>Description</dt>
+<dd>
+
+Glob patterns of files to be ignored.
+
+Glob patterns are relative to the `globRoot` of the configuration file that defines them.
+
+</dd>
+
+<dt>Type</dt>
+<dd>
+
+[`Glob`](#glob)`[]`
+
+</dd>
 </dl>
 
 ---
@@ -497,40 +577,44 @@ format: md
 #### `ignoreRegExpList` {#settings-ignoreregexplist}
 
 <dl>
-    
-    <dt>Description</dt>
-    <dd>
-        List of regular expression patterns or pattern names to exclude from spell checking.
-        
-        Example: `["href"]` - to exclude html href pattern.
-        
-        Regular expressions use JavaScript regular expression syntax.
-        
-        Example: to ignore ALL-CAPS words
-        
-        JSON
-        ```json
-        "ignoreRegExpList": ["/\\b[A-Z]+\\b/g"]
-        ```
-        
-        YAML
-        ```yaml
-        ignoreRegExpList:
-          - >-
-           /\b[A-Z]+\b/g
-        ```
-        
-        By default, several patterns are excluded. See
-        [Configuration](https://cspell.org/configuration/patterns) for more details.
-        
-        While you can create your own patterns, you can also leverage several patterns that are
-        [built-in to CSpell](https://cspell.org/types/cspell-types/types/PredefinedPatterns.html).
-    </dd>
-    
-    <dt>Type</dt>
-    <dd>
-        [`RegExpPatternList`](#regexppatternlist)
-    </dd>
+
+<dt>Description</dt>
+<dd>
+
+List of regular expression patterns or pattern names to exclude from spell checking.
+
+Example: `["href"]` - to exclude html href pattern.
+
+Regular expressions use JavaScript regular expression syntax.
+
+Example: to ignore ALL-CAPS words
+
+JSON
+```json
+"ignoreRegExpList": ["/\\b[A-Z]+\\b/g"]
+```
+
+YAML
+```yaml
+ignoreRegExpList:
+  - >-
+   /\b[A-Z]+\b/g
+```
+
+By default, several patterns are excluded. See
+[Configuration](https://cspell.org/configuration/patterns) for more details.
+
+While you can create your own patterns, you can also leverage several patterns that are
+[built-in to CSpell](https://cspell.org/types/cspell-types/types/PredefinedPatterns.html).
+
+</dd>
+
+<dt>Type</dt>
+<dd>
+
+[`RegExpPatternList`](#regexppatternlist)
+
+</dd>
 </dl>
 
 ---
@@ -538,17 +622,21 @@ format: md
 #### `ignoreWords` {#settings-ignorewords}
 
 <dl>
-    
-    <dt>Description</dt>
-    <dd>
-        List of words to be ignored. An ignored word will not show up as an error, even if it is
-        also in the `flagWords`.
-    </dd>
-    
-    <dt>Type</dt>
-    <dd>
-        `string``[]`
-    </dd>
+
+<dt>Description</dt>
+<dd>
+
+List of words to be ignored. An ignored word will not show up as an error, even if it is
+also in the `flagWords`.
+
+</dd>
+
+<dt>Type</dt>
+<dd>
+
+`string``[]`
+
+</dd>
 </dl>
 
 ---
@@ -556,18 +644,22 @@ format: md
 #### `import` {#settings-import}
 
 <dl>
-    
-    <dt>Description</dt>
-    <dd>
-        Allows this configuration to inherit configuration for one or more other files.
-        
-        See [Importing / Extending Configuration](https://cspell.org/configuration/imports/) for more details.
-    </dd>
-    
-    <dt>Type</dt>
-    <dd>
-        [`FsPath`](#fspath)<br />[`FsPath`](#fspath)`[]`
-    </dd>
+
+<dt>Description</dt>
+<dd>
+
+Allows this configuration to inherit configuration for one or more other files.
+
+See [Importing / Extending Configuration](https://cspell.org/configuration/imports/) for more details.
+
+</dd>
+
+<dt>Type</dt>
+<dd>
+
+[`FsPath`](#fspath)<br />[`FsPath`](#fspath)`[]`
+
+</dd>
 </dl>
 
 ---
@@ -575,21 +667,25 @@ format: md
 #### `includeRegExpList` {#settings-includeregexplist}
 
 <dl>
-    
-    <dt>Description</dt>
-    <dd>
-        List of regular expression patterns or defined pattern names to match for spell checking.
-        
-        If this property is defined, only text matching the included patterns will be checked.
-        
-        While you can create your own patterns, you can also leverage several patterns that are
-        [built-in to CSpell](https://cspell.org/types/cspell-types/types/PredefinedPatterns.html).
-    </dd>
-    
-    <dt>Type</dt>
-    <dd>
-        [`RegExpPatternList`](#regexppatternlist)
-    </dd>
+
+<dt>Description</dt>
+<dd>
+
+List of regular expression patterns or defined pattern names to match for spell checking.
+
+If this property is defined, only text matching the included patterns will be checked.
+
+While you can create your own patterns, you can also leverage several patterns that are
+[built-in to CSpell](https://cspell.org/types/cspell-types/types/PredefinedPatterns.html).
+
+</dd>
+
+<dt>Type</dt>
+<dd>
+
+[`RegExpPatternList`](#regexppatternlist)
+
+</dd>
 </dl>
 
 ---
@@ -597,22 +693,26 @@ format: md
 #### `language` {#settings-language}
 
 <dl>
-    
-    <dt>Description</dt>
-    <dd>
-        Current active spelling language. This specifies the language locale to use in choosing the
-        general dictionary.
-        
-        For example:
-        
-        - "en-GB" for British English.
-        - "en,nl" to enable both English and Dutch.
-    </dd>
-    
-    <dt>Type</dt>
-    <dd>
-        [`LocaleId`](#localeid)
-    </dd>
+
+<dt>Description</dt>
+<dd>
+
+Current active spelling language. This specifies the language locale to use in choosing the
+general dictionary.
+
+For example:
+
+- "en-GB" for British English.
+- "en,nl" to enable both English and Dutch.
+
+</dd>
+
+<dt>Type</dt>
+<dd>
+
+[`LocaleId`](#localeid)
+
+</dd>
 </dl>
 
 ---
@@ -620,16 +720,20 @@ format: md
 #### `languageId` {#settings-languageid}
 
 <dl>
-    
-    <dt>Description</dt>
-    <dd>
-        Forces the spell checker to assume a give language id. Used mainly as an Override.
-    </dd>
-    
-    <dt>Type</dt>
-    <dd>
-        [`MatchingFileType`](#matchingfiletype)
-    </dd>
+
+<dt>Description</dt>
+<dd>
+
+Forces the spell checker to assume a give language id. Used mainly as an Override.
+
+</dd>
+
+<dt>Type</dt>
+<dd>
+
+[`MatchingFileType`](#matchingfiletype)
+
+</dd>
 </dl>
 
 ---
@@ -637,18 +741,22 @@ format: md
 #### `languageSettings` {#settings-languagesettings}
 
 <dl>
-    
-    <dt>Description</dt>
-    <dd>
-        Additional settings for individual languages.
-        
-        See [Language Settings](https://cspell.org/configuration/language-settings/) for more details.
-    </dd>
-    
-    <dt>Type</dt>
-    <dd>
-        [`LanguageSetting`](#languagesetting)`[]`
-    </dd>
+
+<dt>Description</dt>
+<dd>
+
+Additional settings for individual languages.
+
+See [Language Settings](https://cspell.org/configuration/language-settings/) for more details.
+
+</dd>
+
+<dt>Type</dt>
+<dd>
+
+[`LanguageSetting`](#languagesetting)`[]`
+
+</dd>
 </dl>
 
 ---
@@ -656,17 +764,21 @@ format: md
 #### `loadDefaultConfiguration` {#settings-loaddefaultconfiguration}
 
 <dl>
-    
-    <dt>Description</dt>
-    <dd>
-        By default, the bundled dictionary configurations are loaded. Explicitly setting this to `false`
-        will prevent ALL default configuration from being loaded.
-    </dd>
-    
-    <dt>Type</dt>
-    <dd>
-        `boolean`
-    </dd>
+
+<dt>Description</dt>
+<dd>
+
+By default, the bundled dictionary configurations are loaded. Explicitly setting this to `false`
+will prevent ALL default configuration from being loaded.
+
+</dd>
+
+<dt>Type</dt>
+<dd>
+
+`boolean`
+
+</dd>
 </dl>
 
 ---
@@ -674,16 +786,20 @@ format: md
 #### `maxDuplicateProblems` {#settings-maxduplicateproblems}
 
 <dl>
-    
-    <dt>Description</dt>
-    <dd>
-        The maximum number of times the same word can be flagged as an error in a file.
-    </dd>
-    
-    <dt>Type</dt>
-    <dd>
-        `number`
-    </dd>
+
+<dt>Description</dt>
+<dd>
+
+The maximum number of times the same word can be flagged as an error in a file.
+
+</dd>
+
+<dt>Type</dt>
+<dd>
+
+`number`
+
+</dd>
 </dl>
 
 ---
@@ -691,16 +807,20 @@ format: md
 #### `maxNumberOfProblems` {#settings-maxnumberofproblems}
 
 <dl>
-    
-    <dt>Description</dt>
-    <dd>
-        The maximum number of problems to report in a file.
-    </dd>
-    
-    <dt>Type</dt>
-    <dd>
-        `number`
-    </dd>
+
+<dt>Description</dt>
+<dd>
+
+The maximum number of problems to report in a file.
+
+</dd>
+
+<dt>Type</dt>
+<dd>
+
+`number`
+
+</dd>
 </dl>
 
 ---
@@ -708,16 +828,20 @@ format: md
 #### `minWordLength` {#settings-minwordlength}
 
 <dl>
-    
-    <dt>Description</dt>
-    <dd>
-        The minimum length of a word before checking it against a dictionary.
-    </dd>
-    
-    <dt>Type</dt>
-    <dd>
-        `number`
-    </dd>
+
+<dt>Description</dt>
+<dd>
+
+The minimum length of a word before checking it against a dictionary.
+
+</dd>
+
+<dt>Type</dt>
+<dd>
+
+`number`
+
+</dd>
 </dl>
 
 ---
@@ -725,16 +849,20 @@ format: md
 #### `name` {#settings-name}
 
 <dl>
-    
-    <dt>Description</dt>
-    <dd>
-        Optional name of configuration.
-    </dd>
-    
-    <dt>Type</dt>
-    <dd>
-        `string`
-    </dd>
+
+<dt>Description</dt>
+<dd>
+
+Optional name of configuration.
+
+</dd>
+
+<dt>Type</dt>
+<dd>
+
+`string`
+
+</dd>
 </dl>
 
 ---
@@ -742,16 +870,20 @@ format: md
 #### `noConfigSearch` {#settings-noconfigsearch}
 
 <dl>
-    
-    <dt>Description</dt>
-    <dd>
-        Prevents searching for local configuration when checking individual documents.
-    </dd>
-    
-    <dt>Type</dt>
-    <dd>
-        `boolean`
-    </dd>
+
+<dt>Description</dt>
+<dd>
+
+Prevents searching for local configuration when checking individual documents.
+
+</dd>
+
+<dt>Type</dt>
+<dd>
+
+`boolean`
+
+</dd>
 </dl>
 
 ---
@@ -759,22 +891,26 @@ format: md
 #### `noSuggestDictionaries` {#settings-nosuggestdictionaries}
 
 <dl>
-    
-    <dt>Description</dt>
-    <dd>
-        Optional list of dictionaries that will not be used for suggestions.
-        Words in these dictionaries are considered correct, but will not be
-        used when making spell correction suggestions.
-        
-        Note: if a word is suggested by another dictionary, but found in
-        one of these dictionaries, it will be removed from the set of
-        possible suggestions.
-    </dd>
-    
-    <dt>Type</dt>
-    <dd>
-        [`DictionaryReference`](#dictionaryreference)`[]`
-    </dd>
+
+<dt>Description</dt>
+<dd>
+
+Optional list of dictionaries that will not be used for suggestions.
+Words in these dictionaries are considered correct, but will not be
+used when making spell correction suggestions.
+
+Note: if a word is suggested by another dictionary, but found in
+one of these dictionaries, it will be removed from the set of
+possible suggestions.
+
+</dd>
+
+<dt>Type</dt>
+<dd>
+
+[`DictionaryReference`](#dictionaryreference)`[]`
+
+</dd>
 </dl>
 
 ---
@@ -782,16 +918,20 @@ format: md
 #### `numSuggestions` {#settings-numsuggestions}
 
 <dl>
-    
-    <dt>Description</dt>
-    <dd>
-        Number of suggestions to make.
-    </dd>
-    
-    <dt>Type</dt>
-    <dd>
-        `number`
-    </dd>
+
+<dt>Description</dt>
+<dd>
+
+Number of suggestions to make.
+
+</dd>
+
+<dt>Type</dt>
+<dd>
+
+`number`
+
+</dd>
 </dl>
 
 ---
@@ -799,33 +939,37 @@ format: md
 #### `overrides` {#settings-overrides}
 
 <dl>
-    
-    <dt>Description</dt>
-    <dd>
-        Overrides are used to apply settings for specific files in your project.
-        
-        For example:
-        
-        ```javascript
-        "overrides": [
-          // Force `*.hrr` and `*.crr` files to be treated as `cpp` files:
-          {
-            "filename": "**/{*.hrr,*.crr}",
-            "languageId": "cpp"
-          },
-          // Force `*.txt` to use the Dutch dictionary (Dutch dictionary needs to be installed separately):
-          {
-            "language": "nl",
-            "filename": "**/dutch/**/*.txt"
-          }
-        ]
-        ```
-    </dd>
-    
-    <dt>Type</dt>
-    <dd>
-        [`OverrideSettings`](#overridesettings)`[]`
-    </dd>
+
+<dt>Description</dt>
+<dd>
+
+Overrides are used to apply settings for specific files in your project.
+
+For example:
+
+```javascript
+"overrides": [
+  // Force `*.hrr` and `*.crr` files to be treated as `cpp` files:
+  {
+    "filename": "**/{*.hrr,*.crr}",
+    "languageId": "cpp"
+  },
+  // Force `*.txt` to use the Dutch dictionary (Dutch dictionary needs to be installed separately):
+  {
+    "language": "nl",
+    "filename": "**/dutch/**/*.txt"
+  }
+]
+```
+
+</dd>
+
+<dt>Type</dt>
+<dd>
+
+[`OverrideSettings`](#overridesettings)`[]`
+
+</dd>
 </dl>
 
 ---
@@ -833,40 +977,44 @@ format: md
 #### `patterns` {#settings-patterns}
 
 <dl>
-    
-    <dt>Description</dt>
-    <dd>
-        Defines a list of patterns that can be used with the `ignoreRegExpList` and
-        `includeRegExpList` options.
-        
-        For example:
-        
-        ```javascript
-        "ignoreRegExpList": ["comments"],
-        "patterns": [
-          {
-            "name": "comment-single-line",
-            "pattern": "/#.*/g"
-          },
-          {
-            "name": "comment-multi-line",
-            "pattern": "/(?:\\/\\*[\\s\\S]*?\\*\\/)/g"
-          },
-          // You can also combine multiple named patterns into one single named pattern
-          {
-            "name": "comments",
-            "pattern": ["comment-single-line", "comment-multi-line"]
-          }
-        ]
-        ```
-        Defines a list of patterns that can be used with the `ignoreRegExpList` and
-        `includeRegExpList` options.
-    </dd>
-    
-    <dt>Type</dt>
-    <dd>
-        [`RegExpPatternDefinition`](#regexppatterndefinition)`[]`
-    </dd>
+
+<dt>Description</dt>
+<dd>
+
+Defines a list of patterns that can be used with the `ignoreRegExpList` and
+`includeRegExpList` options.
+
+For example:
+
+```javascript
+"ignoreRegExpList": ["comments"],
+"patterns": [
+  {
+    "name": "comment-single-line",
+    "pattern": "/#.*/g"
+  },
+  {
+    "name": "comment-multi-line",
+    "pattern": "/(?:\\/\\*[\\s\\S]*?\\*\\/)/g"
+  },
+  // You can also combine multiple named patterns into one single named pattern
+  {
+    "name": "comments",
+    "pattern": ["comment-single-line", "comment-multi-line"]
+  }
+]
+```
+Defines a list of patterns that can be used with the `ignoreRegExpList` and
+`includeRegExpList` options.
+
+</dd>
+
+<dt>Type</dt>
+<dd>
+
+[`RegExpPatternDefinition`](#regexppatterndefinition)`[]`
+
+</dd>
 </dl>
 
 ---
@@ -874,16 +1022,20 @@ format: md
 #### `pnpFiles` {#settings-pnpfiles}
 
 <dl>
-    
-    <dt>Description</dt>
-    <dd>
-        The PnP files to search for. Note: `.mjs` files are not currently supported.
-    </dd>
-    
-    <dt>Type</dt>
-    <dd>
-        `string``[]`
-    </dd>
+
+<dt>Description</dt>
+<dd>
+
+The PnP files to search for. Note: `.mjs` files are not currently supported.
+
+</dd>
+
+<dt>Type</dt>
+<dd>
+
+`string``[]`
+
+</dd>
 </dl>
 
 ---
@@ -891,18 +1043,22 @@ format: md
 #### `readonly` {#settings-readonly}
 
 <dl>
-    
-    <dt>Description</dt>
-    <dd>
-        Indicate that the configuration file should not be modified.
-        This is used to prevent tools like the VS Code Spell Checker from
-        modifying the file to add words and other configuration.
-    </dd>
-    
-    <dt>Type</dt>
-    <dd>
-        `boolean`
-    </dd>
+
+<dt>Description</dt>
+<dd>
+
+Indicate that the configuration file should not be modified.
+This is used to prevent tools like the VS Code Spell Checker from
+modifying the file to add words and other configuration.
+
+</dd>
+
+<dt>Type</dt>
+<dd>
+
+`boolean`
+
+</dd>
 </dl>
 
 ---
@@ -910,23 +1066,27 @@ format: md
 #### `reporters` {#settings-reporters}
 
 <dl>
-    
-    <dt>Description</dt>
-    <dd>
-        Define which reports to use.
-        `default` - is a special name for the default cli reporter.
-        
-        Examples:
-        - `["default"]` - to use the default reporter
-        - `["@cspell/cspell-json-reporter"]` - use the cspell JSON reporter.
-        - `[["@cspell/cspell-json-reporter", { "outFile": "out.json" }]]`
-        - `[ "default", ["@cspell/cspell-json-reporter", { "outFile": "out.json" }]]` - Use both the default reporter and the cspell-json-reporter.
-    </dd>
-    
-    <dt>Type</dt>
-    <dd>
-        [`ReporterSettings`](#reportersettings)`[]`
-    </dd>
+
+<dt>Description</dt>
+<dd>
+
+Define which reports to use.
+`default` - is a special name for the default cli reporter.
+
+Examples:
+- `["default"]` - to use the default reporter
+- `["@cspell/cspell-json-reporter"]` - use the cspell JSON reporter.
+- `[["@cspell/cspell-json-reporter", { "outFile": "out.json" }]]`
+- `[ "default", ["@cspell/cspell-json-reporter", { "outFile": "out.json" }]]` - Use both the default reporter and the cspell-json-reporter.
+
+</dd>
+
+<dt>Type</dt>
+<dd>
+
+[`ReporterSettings`](#reportersettings)`[]`
+
+</dd>
 </dl>
 
 ---
@@ -934,16 +1094,20 @@ format: md
 #### `showStatus` {#settings-showstatus}
 
 <dl>
-    
-    <dt>Description</dt>
-    <dd>
-        Show status.
-    </dd>
-    
-    <dt>Type</dt>
-    <dd>
-        `boolean`
-    </dd>
+
+<dt>Description</dt>
+<dd>
+
+Show status.
+
+</dd>
+
+<dt>Type</dt>
+<dd>
+
+`boolean`
+
+</dd>
 </dl>
 
 ---
@@ -951,16 +1115,20 @@ format: md
 #### `spellCheckDelayMs` {#settings-spellcheckdelayms}
 
 <dl>
-    
-    <dt>Description</dt>
-    <dd>
-        Delay in ms after a document has changed before checking it for spelling errors.
-    </dd>
-    
-    <dt>Type</dt>
-    <dd>
-        `number`
-    </dd>
+
+<dt>Description</dt>
+<dd>
+
+Delay in ms after a document has changed before checking it for spelling errors.
+
+</dd>
+
+<dt>Type</dt>
+<dd>
+
+`number`
+
+</dd>
 </dl>
 
 ---
@@ -968,26 +1136,30 @@ format: md
 #### `suggestWords` {#settings-suggestwords}
 
 <dl>
-    
-    <dt>Description</dt>
-    <dd>
-        A list of suggested replacements for words.
-        Suggested words provide a way to make preferred suggestions on word replacements.
-        To hint at a preferred change, but not to require it.
-        
-        Format of `suggestWords`
-        - Single suggestion (possible auto fix)
-            - `word: suggestion`
-            - `word->suggestion`
-        - Multiple suggestions (not auto fixable)
-           - `word: first, second, third`
-           - `word->first, second, third`
-    </dd>
-    
-    <dt>Type</dt>
-    <dd>
-        `string``[]`
-    </dd>
+
+<dt>Description</dt>
+<dd>
+
+A list of suggested replacements for words.
+Suggested words provide a way to make preferred suggestions on word replacements.
+To hint at a preferred change, but not to require it.
+
+Format of `suggestWords`
+- Single suggestion (possible auto fix)
+    - `word: suggestion`
+    - `word->suggestion`
+- Multiple suggestions (not auto fixable)
+   - `word: first, second, third`
+   - `word->first, second, third`
+
+</dd>
+
+<dt>Type</dt>
+<dd>
+
+`string``[]`
+
+</dd>
 </dl>
 
 ---
@@ -995,20 +1167,24 @@ format: md
 #### `suggestionNumChanges` {#settings-suggestionnumchanges}
 
 <dl>
-    
-    <dt>Description</dt>
-    <dd>
-        The maximum number of changes allowed on a word to be considered a suggestions.
-        
-        For example, appending an `s` onto `example` -> `examples` is considered 1 change.
-        
-        Range: between 1 and 5.
-    </dd>
-    
-    <dt>Type</dt>
-    <dd>
-        `number`
-    </dd>
+
+<dt>Description</dt>
+<dd>
+
+The maximum number of changes allowed on a word to be considered a suggestions.
+
+For example, appending an `s` onto `example` -> `examples` is considered 1 change.
+
+Range: between 1 and 5.
+
+</dd>
+
+<dt>Type</dt>
+<dd>
+
+`number`
+
+</dd>
 </dl>
 
 ---
@@ -1016,16 +1192,20 @@ format: md
 #### `suggestionsTimeout` {#settings-suggestionstimeout}
 
 <dl>
-    
-    <dt>Description</dt>
-    <dd>
-        The maximum amount of time in milliseconds to generate suggestions for a word.
-    </dd>
-    
-    <dt>Type</dt>
-    <dd>
-        `number`
-    </dd>
+
+<dt>Description</dt>
+<dd>
+
+The maximum amount of time in milliseconds to generate suggestions for a word.
+
+</dd>
+
+<dt>Type</dt>
+<dd>
+
+`number`
+
+</dd>
 </dl>
 
 ---
@@ -1033,16 +1213,20 @@ format: md
 #### `useGitignore` {#settings-usegitignore}
 
 <dl>
-    
-    <dt>Description</dt>
-    <dd>
-        Tells the spell checker to load `.gitignore` files and skip files that match the globs in the `.gitignore` files found.
-    </dd>
-    
-    <dt>Type</dt>
-    <dd>
-        `boolean`
-    </dd>
+
+<dt>Description</dt>
+<dd>
+
+Tells the spell checker to load `.gitignore` files and skip files that match the globs in the `.gitignore` files found.
+
+</dd>
+
+<dt>Type</dt>
+<dd>
+
+`boolean`
+
+</dd>
 </dl>
 
 ---
@@ -1050,20 +1234,24 @@ format: md
 #### `usePnP` {#settings-usepnp}
 
 <dl>
-    
-    <dt>Description</dt>
-    <dd>
-        Packages managers like Yarn 2 use a `.pnp.cjs` file to assist in loading
-        packages stored in the repository.
-        
-        When true, the spell checker will search up the directory structure for the existence
-        of a PnP file and load it.
-    </dd>
-    
-    <dt>Type</dt>
-    <dd>
-        `boolean`
-    </dd>
+
+<dt>Description</dt>
+<dd>
+
+Packages managers like Yarn 2 use a `.pnp.cjs` file to assist in loading
+packages stored in the repository.
+
+When true, the spell checker will search up the directory structure for the existence
+of a PnP file and load it.
+
+</dd>
+
+<dt>Type</dt>
+<dd>
+
+`boolean`
+
+</dd>
 </dl>
 
 ---
@@ -1071,16 +1259,20 @@ format: md
 #### `userWords` {#settings-userwords}
 
 <dl>
-    
-    <dt>Description</dt>
-    <dd>
-        Words to add to global dictionary -- should only be in the user config file.
-    </dd>
-    
-    <dt>Type</dt>
-    <dd>
-        `string``[]`
-    </dd>
+
+<dt>Description</dt>
+<dd>
+
+Words to add to global dictionary -- should only be in the user config file.
+
+</dd>
+
+<dt>Type</dt>
+<dd>
+
+`string``[]`
+
+</dd>
 </dl>
 
 ---
@@ -1088,16 +1280,20 @@ format: md
 #### `validateDirectives` {#settings-validatedirectives}
 
 <dl>
-    
-    <dt>Description</dt>
-    <dd>
-        Verify that the in-document directives are correct.
-    </dd>
-    
-    <dt>Type</dt>
-    <dd>
-        `boolean`
-    </dd>
+
+<dt>Description</dt>
+<dd>
+
+Verify that the in-document directives are correct.
+
+</dd>
+
+<dt>Type</dt>
+<dd>
+
+`boolean`
+
+</dd>
 </dl>
 
 ---
@@ -1105,18 +1301,22 @@ format: md
 #### `version` {#settings-version}
 
 <dl>
-    
-    <dt>Description</dt>
-    <dd>
-        Configuration format version of the settings file.
-        
-        This controls how the settings in the configuration file behave.
-    </dd>
-    
-    <dt>Type</dt>
-    <dd>
-        [`Version`](#version)
-    </dd>
+
+<dt>Description</dt>
+<dd>
+
+Configuration format version of the settings file.
+
+This controls how the settings in the configuration file behave.
+
+</dd>
+
+<dt>Type</dt>
+<dd>
+
+[`Version`](#version)
+
+</dd>
 </dl>
 
 ---
@@ -1124,16 +1324,20 @@ format: md
 #### `words` {#settings-words}
 
 <dl>
-    
-    <dt>Description</dt>
-    <dd>
-        List of words to be considered correct.
-    </dd>
-    
-    <dt>Type</dt>
-    <dd>
-        `string``[]`
-    </dd>
+
+<dt>Description</dt>
+<dd>
+
+List of words to be considered correct.
+
+</dd>
+
+<dt>Type</dt>
+<dd>
+
+`string``[]`
+
+</dd>
 </dl>
 
 ---
@@ -1141,11 +1345,13 @@ format: md
 ## CacheFormat {#cacheformat}
 
 <dl>
-    
-    <dt>Type</dt>
-    <dd>
-        `string`
-    </dd>
+
+<dt>Type</dt>
+<dd>
+
+`string`
+
+</dd>
 </dl>
 
 ## CacheSettings
@@ -1164,18 +1370,22 @@ format: md
 #### `cacheFormat` {#cachesettings-cacheformat}
 
 <dl>
-    
-    <dt>Description</dt>
-    <dd>
-        Format of the cache file.
-        - `legacy` - use absolute paths in the cache file
-        - `universal` - use a sharable format.
-    </dd>
-    
-    <dt>Type</dt>
-    <dd>
-        [`CacheFormat`](#cacheformat)
-    </dd>
+
+<dt>Description</dt>
+<dd>
+
+Format of the cache file.
+- `legacy` - use absolute paths in the cache file
+- `universal` - use a sharable format.
+
+</dd>
+
+<dt>Type</dt>
+<dd>
+
+[`CacheFormat`](#cacheformat)
+
+</dd>
 </dl>
 
 ---
@@ -1183,21 +1393,25 @@ format: md
 #### `cacheLocation` {#cachesettings-cachelocation}
 
 <dl>
-    
-    <dt>Description</dt>
-    <dd>
-        Path to the cache location. Can be a file or a directory.
-        If none specified `.cspellcache` will be used.
-        Relative paths are relative to the config file in which it
-        is defined.
-        
-        A prefix of `${cwd}` is replaced with the current working directory.
-    </dd>
-    
-    <dt>Type</dt>
-    <dd>
-        [`FSPathResolvable`](#fspathresolvable)
-    </dd>
+
+<dt>Description</dt>
+<dd>
+
+Path to the cache location. Can be a file or a directory.
+If none specified `.cspellcache` will be used.
+Relative paths are relative to the config file in which it
+is defined.
+
+A prefix of `${cwd}` is replaced with the current working directory.
+
+</dd>
+
+<dt>Type</dt>
+<dd>
+
+[`FSPathResolvable`](#fspathresolvable)
+
+</dd>
 </dl>
 
 ---
@@ -1205,16 +1419,20 @@ format: md
 #### `cacheStrategy` {#cachesettings-cachestrategy}
 
 <dl>
-    
-    <dt>Description</dt>
-    <dd>
-        Strategy to use for detecting changed files, default: metadata
-    </dd>
-    
-    <dt>Type</dt>
-    <dd>
-        [`CacheStrategy`](#cachestrategy)
-    </dd>
+
+<dt>Description</dt>
+<dd>
+
+Strategy to use for detecting changed files, default: metadata
+
+</dd>
+
+<dt>Type</dt>
+<dd>
+
+[`CacheStrategy`](#cachestrategy)
+
+</dd>
 </dl>
 
 ---
@@ -1222,16 +1440,20 @@ format: md
 #### `useCache` {#cachesettings-usecache}
 
 <dl>
-    
-    <dt>Description</dt>
-    <dd>
-        Store the results of processed files in order to only operate on the changed ones.
-    </dd>
-    
-    <dt>Type</dt>
-    <dd>
-        `boolean`
-    </dd>
+
+<dt>Description</dt>
+<dd>
+
+Store the results of processed files in order to only operate on the changed ones.
+
+</dd>
+
+<dt>Type</dt>
+<dd>
+
+`boolean`
+
+</dd>
 </dl>
 
 ---
@@ -1239,18 +1461,22 @@ format: md
 ## CacheStrategy {#cachestrategy}
 
 <dl>
-    
-    <dt>Description</dt>
-    <dd>
-        The Strategy to use to detect if a file has changed.
-        - `metadata` - uses the file system timestamp and size to detect changes (fastest).
-        - `content` - uses a hash of the file content to check file changes (slower - more accurate).
-    </dd>
-    
-    <dt>Type</dt>
-    <dd>
-        `string`
-    </dd>
+
+<dt>Description</dt>
+<dd>
+
+The Strategy to use to detect if a file has changed.
+- `metadata` - uses the file system timestamp and size to detect changes (fastest).
+- `content` - uses a hash of the file content to check file changes (slower - more accurate).
+
+</dd>
+
+<dt>Type</dt>
+<dd>
+
+`string`
+
+</dd>
 </dl>
 
 ---
@@ -1258,19 +1484,23 @@ format: md
 ## CharacterSet {#characterset}
 
 <dl>
-    
-    <dt>Description</dt>
-    <dd>
-        This is a set of characters that can include `-` or `|`
-        - `-` - indicates a range of characters: `a-c` => `abc`
-        - `|` - is a group separator, indicating that the characters on either side
-           are not related.
-    </dd>
-    
-    <dt>Type</dt>
-    <dd>
-        `string`
-    </dd>
+
+<dt>Description</dt>
+<dd>
+
+This is a set of characters that can include `-` or `|`
+- `-` - indicates a range of characters: `a-c` => `abc`
+- `|` - is a group separator, indicating that the characters on either side
+   are not related.
+
+</dd>
+
+<dt>Type</dt>
+<dd>
+
+`string`
+
+</dd>
 </dl>
 
 ## CharacterSetCosts
@@ -1288,19 +1518,23 @@ format: md
 #### `characters` {#charactersetcosts-characters}
 
 <dl>
-    
-    <dt>Description</dt>
-    <dd>
-        This is a set of characters that can include `-` or `|`
-        - `-` - indicates a range of characters: `a-c` => `abc`
-        - `|` - is a group separator, indicating that the characters on either side
-           are not related.
-    </dd>
-    
-    <dt>Type</dt>
-    <dd>
-        [`CharacterSet`](#characterset)
-    </dd>
+
+<dt>Description</dt>
+<dd>
+
+This is a set of characters that can include `-` or `|`
+- `-` - indicates a range of characters: `a-c` => `abc`
+- `|` - is a group separator, indicating that the characters on either side
+   are not related.
+
+</dd>
+
+<dt>Type</dt>
+<dd>
+
+[`CharacterSet`](#characterset)
+
+</dd>
 </dl>
 
 ---
@@ -1308,16 +1542,20 @@ format: md
 #### `cost` {#charactersetcosts-cost}
 
 <dl>
-    
-    <dt>Description</dt>
-    <dd>
-        the cost to insert / delete / replace / swap the characters in a group
-    </dd>
-    
-    <dt>Type</dt>
-    <dd>
-        `number`
-    </dd>
+
+<dt>Description</dt>
+<dd>
+
+the cost to insert / delete / replace / swap the characters in a group
+
+</dd>
+
+<dt>Type</dt>
+<dd>
+
+`number`
+
+</dd>
 </dl>
 
 ---
@@ -1325,17 +1563,21 @@ format: md
 #### `penalty` {#charactersetcosts-penalty}
 
 <dl>
-    
-    <dt>Description</dt>
-    <dd>
-        The penalty cost to apply if the accent is used.
-        This is used to discourage
-    </dd>
-    
-    <dt>Type</dt>
-    <dd>
-        `number`
-    </dd>
+
+<dt>Description</dt>
+<dd>
+
+The penalty cost to apply if the accent is used.
+This is used to discourage
+
+</dd>
+
+<dt>Type</dt>
+<dd>
+
+`number`
+
+</dd>
 </dl>
 
 ## CostMapDefInsDel
@@ -1356,16 +1598,20 @@ format: md
 #### `description` {#costmapdefinsdel-description}
 
 <dl>
-    
-    <dt>Description</dt>
-    <dd>
-        A description to describe the purpose of the map.
-    </dd>
-    
-    <dt>Type</dt>
-    <dd>
-        `string`
-    </dd>
+
+<dt>Description</dt>
+<dd>
+
+A description to describe the purpose of the map.
+
+</dd>
+
+<dt>Type</dt>
+<dd>
+
+`string`
+
+</dd>
 </dl>
 
 ---
@@ -1373,16 +1619,20 @@ format: md
 #### `insDel` {#costmapdefinsdel-insdel}
 
 <dl>
-    
-    <dt>Description</dt>
-    <dd>
-        The cost to insert/delete one of the substrings in the map. Note: insert/delete costs are symmetrical.
-    </dd>
-    
-    <dt>Type</dt>
-    <dd>
-        `number`
-    </dd>
+
+<dt>Description</dt>
+<dd>
+
+The cost to insert/delete one of the substrings in the map. Note: insert/delete costs are symmetrical.
+
+</dd>
+
+<dt>Type</dt>
+<dd>
+
+`number`
+
+</dd>
 </dl>
 
 ---
@@ -1390,27 +1640,31 @@ format: md
 #### `map` {#costmapdefinsdel-map}
 
 <dl>
-    
-    <dt>Description</dt>
-    <dd>
-        The set of substrings to map, these are generally single character strings.
-        
-        Multiple sets can be defined by using a `|` to separate them.
-        
-        Example: `"eéê|aåá"` contains two different sets.
-        
-        To add a multi-character substring use `()`.
-        
-        Example: `"f(ph)(gh)"` results in the following set: `f`, `ph`, `gh`.
-        
-        - To match the beginning of a word, use `^`: `"(^I)""`.
-        - To match the end of a word, use `$`: `"(e$)(ing$)"`.
-    </dd>
-    
-    <dt>Type</dt>
-    <dd>
-        `string`
-    </dd>
+
+<dt>Description</dt>
+<dd>
+
+The set of substrings to map, these are generally single character strings.
+
+Multiple sets can be defined by using a `|` to separate them.
+
+Example: `"eéê|aåá"` contains two different sets.
+
+To add a multi-character substring use `()`.
+
+Example: `"f(ph)(gh)"` results in the following set: `f`, `ph`, `gh`.
+
+- To match the beginning of a word, use `^`: `"(^I)""`.
+- To match the end of a word, use `$`: `"(e$)(ing$)"`.
+
+</dd>
+
+<dt>Type</dt>
+<dd>
+
+`string`
+
+</dd>
 </dl>
 
 ---
@@ -1418,29 +1672,33 @@ format: md
 #### `penalty` {#costmapdefinsdel-penalty}
 
 <dl>
-    
-    <dt>Description</dt>
-    <dd>
-        Add a penalty to the final cost.
-        This is used to discourage certain suggestions.
-        
-        Example:
-        ```yaml
-        # Match adding/removing `-` to the end of a word.
-        map: "$(-$)"
-        replace: 50
-        penalty: 100
-        ```
-        
-        This makes adding a `-` to the end of a word more expensive.
-        
-        Think of it as taking the toll way for speed but getting the bill later.
-    </dd>
-    
-    <dt>Type</dt>
-    <dd>
-        `number`
-    </dd>
+
+<dt>Description</dt>
+<dd>
+
+Add a penalty to the final cost.
+This is used to discourage certain suggestions.
+
+Example:
+```yaml
+# Match adding/removing `-` to the end of a word.
+map: "$(-$)"
+replace: 50
+penalty: 100
+```
+
+This makes adding a `-` to the end of a word more expensive.
+
+Think of it as taking the toll way for speed but getting the bill later.
+
+</dd>
+
+<dt>Type</dt>
+<dd>
+
+`number`
+
+</dd>
 </dl>
 
 ---
@@ -1448,18 +1706,22 @@ format: md
 #### `replace` {#costmapdefinsdel-replace}
 
 <dl>
-    
-    <dt>Description</dt>
-    <dd>
-        The cost to replace of of the substrings in the map with another substring in the map.
-        Example: Map['a', 'i']
-        This would be the cost to substitute `a` with `i`: Like `bat` to `bit` or the reverse.
-    </dd>
-    
-    <dt>Type</dt>
-    <dd>
-        `number`
-    </dd>
+
+<dt>Description</dt>
+<dd>
+
+The cost to replace of of the substrings in the map with another substring in the map.
+Example: Map['a', 'i']
+This would be the cost to substitute `a` with `i`: Like `bat` to `bit` or the reverse.
+
+</dd>
+
+<dt>Type</dt>
+<dd>
+
+`number`
+
+</dd>
 </dl>
 
 ---
@@ -1467,18 +1729,22 @@ format: md
 #### `swap` {#costmapdefinsdel-swap}
 
 <dl>
-    
-    <dt>Description</dt>
-    <dd>
-        The cost to swap two adjacent substrings found in the map.
-        Example: Map['e', 'i']
-        This represents the cost to change `ei` to `ie` or the reverse.
-    </dd>
-    
-    <dt>Type</dt>
-    <dd>
-        `number`
-    </dd>
+
+<dt>Description</dt>
+<dd>
+
+The cost to swap two adjacent substrings found in the map.
+Example: Map['e', 'i']
+This represents the cost to change `ei` to `ie` or the reverse.
+
+</dd>
+
+<dt>Type</dt>
+<dd>
+
+`number`
+
+</dd>
 </dl>
 
 ## CostMapDefReplace
@@ -1499,16 +1765,20 @@ format: md
 #### `description` {#costmapdefreplace-description}
 
 <dl>
-    
-    <dt>Description</dt>
-    <dd>
-        A description to describe the purpose of the map.
-    </dd>
-    
-    <dt>Type</dt>
-    <dd>
-        `string`
-    </dd>
+
+<dt>Description</dt>
+<dd>
+
+A description to describe the purpose of the map.
+
+</dd>
+
+<dt>Type</dt>
+<dd>
+
+`string`
+
+</dd>
 </dl>
 
 ---
@@ -1516,16 +1786,20 @@ format: md
 #### `insDel` {#costmapdefreplace-insdel}
 
 <dl>
-    
-    <dt>Description</dt>
-    <dd>
-        The cost to insert/delete one of the substrings in the map. Note: insert/delete costs are symmetrical.
-    </dd>
-    
-    <dt>Type</dt>
-    <dd>
-        `number`
-    </dd>
+
+<dt>Description</dt>
+<dd>
+
+The cost to insert/delete one of the substrings in the map. Note: insert/delete costs are symmetrical.
+
+</dd>
+
+<dt>Type</dt>
+<dd>
+
+`number`
+
+</dd>
 </dl>
 
 ---
@@ -1533,27 +1807,31 @@ format: md
 #### `map` {#costmapdefreplace-map}
 
 <dl>
-    
-    <dt>Description</dt>
-    <dd>
-        The set of substrings to map, these are generally single character strings.
-        
-        Multiple sets can be defined by using a `|` to separate them.
-        
-        Example: `"eéê|aåá"` contains two different sets.
-        
-        To add a multi-character substring use `()`.
-        
-        Example: `"f(ph)(gh)"` results in the following set: `f`, `ph`, `gh`.
-        
-        - To match the beginning of a word, use `^`: `"(^I)""`.
-        - To match the end of a word, use `$`: `"(e$)(ing$)"`.
-    </dd>
-    
-    <dt>Type</dt>
-    <dd>
-        `string`
-    </dd>
+
+<dt>Description</dt>
+<dd>
+
+The set of substrings to map, these are generally single character strings.
+
+Multiple sets can be defined by using a `|` to separate them.
+
+Example: `"eéê|aåá"` contains two different sets.
+
+To add a multi-character substring use `()`.
+
+Example: `"f(ph)(gh)"` results in the following set: `f`, `ph`, `gh`.
+
+- To match the beginning of a word, use `^`: `"(^I)""`.
+- To match the end of a word, use `$`: `"(e$)(ing$)"`.
+
+</dd>
+
+<dt>Type</dt>
+<dd>
+
+`string`
+
+</dd>
 </dl>
 
 ---
@@ -1561,29 +1839,33 @@ format: md
 #### `penalty` {#costmapdefreplace-penalty}
 
 <dl>
-    
-    <dt>Description</dt>
-    <dd>
-        Add a penalty to the final cost.
-        This is used to discourage certain suggestions.
-        
-        Example:
-        ```yaml
-        # Match adding/removing `-` to the end of a word.
-        map: "$(-$)"
-        replace: 50
-        penalty: 100
-        ```
-        
-        This makes adding a `-` to the end of a word more expensive.
-        
-        Think of it as taking the toll way for speed but getting the bill later.
-    </dd>
-    
-    <dt>Type</dt>
-    <dd>
-        `number`
-    </dd>
+
+<dt>Description</dt>
+<dd>
+
+Add a penalty to the final cost.
+This is used to discourage certain suggestions.
+
+Example:
+```yaml
+# Match adding/removing `-` to the end of a word.
+map: "$(-$)"
+replace: 50
+penalty: 100
+```
+
+This makes adding a `-` to the end of a word more expensive.
+
+Think of it as taking the toll way for speed but getting the bill later.
+
+</dd>
+
+<dt>Type</dt>
+<dd>
+
+`number`
+
+</dd>
 </dl>
 
 ---
@@ -1591,18 +1873,22 @@ format: md
 #### `replace` {#costmapdefreplace-replace}
 
 <dl>
-    
-    <dt>Description</dt>
-    <dd>
-        The cost to replace of of the substrings in the map with another substring in the map.
-        Example: Map['a', 'i']
-        This would be the cost to substitute `a` with `i`: Like `bat` to `bit` or the reverse.
-    </dd>
-    
-    <dt>Type</dt>
-    <dd>
-        `number`
-    </dd>
+
+<dt>Description</dt>
+<dd>
+
+The cost to replace of of the substrings in the map with another substring in the map.
+Example: Map['a', 'i']
+This would be the cost to substitute `a` with `i`: Like `bat` to `bit` or the reverse.
+
+</dd>
+
+<dt>Type</dt>
+<dd>
+
+`number`
+
+</dd>
 </dl>
 
 ---
@@ -1610,18 +1896,22 @@ format: md
 #### `swap` {#costmapdefreplace-swap}
 
 <dl>
-    
-    <dt>Description</dt>
-    <dd>
-        The cost to swap two adjacent substrings found in the map.
-        Example: Map['e', 'i']
-        This represents the cost to change `ei` to `ie` or the reverse.
-    </dd>
-    
-    <dt>Type</dt>
-    <dd>
-        `number`
-    </dd>
+
+<dt>Description</dt>
+<dd>
+
+The cost to swap two adjacent substrings found in the map.
+Example: Map['e', 'i']
+This represents the cost to change `ei` to `ie` or the reverse.
+
+</dd>
+
+<dt>Type</dt>
+<dd>
+
+`number`
+
+</dd>
 </dl>
 
 ## CostMapDefSwap
@@ -1642,16 +1932,20 @@ format: md
 #### `description` {#costmapdefswap-description}
 
 <dl>
-    
-    <dt>Description</dt>
-    <dd>
-        A description to describe the purpose of the map.
-    </dd>
-    
-    <dt>Type</dt>
-    <dd>
-        `string`
-    </dd>
+
+<dt>Description</dt>
+<dd>
+
+A description to describe the purpose of the map.
+
+</dd>
+
+<dt>Type</dt>
+<dd>
+
+`string`
+
+</dd>
 </dl>
 
 ---
@@ -1659,16 +1953,20 @@ format: md
 #### `insDel` {#costmapdefswap-insdel}
 
 <dl>
-    
-    <dt>Description</dt>
-    <dd>
-        The cost to insert/delete one of the substrings in the map. Note: insert/delete costs are symmetrical.
-    </dd>
-    
-    <dt>Type</dt>
-    <dd>
-        `number`
-    </dd>
+
+<dt>Description</dt>
+<dd>
+
+The cost to insert/delete one of the substrings in the map. Note: insert/delete costs are symmetrical.
+
+</dd>
+
+<dt>Type</dt>
+<dd>
+
+`number`
+
+</dd>
 </dl>
 
 ---
@@ -1676,27 +1974,31 @@ format: md
 #### `map` {#costmapdefswap-map}
 
 <dl>
-    
-    <dt>Description</dt>
-    <dd>
-        The set of substrings to map, these are generally single character strings.
-        
-        Multiple sets can be defined by using a `|` to separate them.
-        
-        Example: `"eéê|aåá"` contains two different sets.
-        
-        To add a multi-character substring use `()`.
-        
-        Example: `"f(ph)(gh)"` results in the following set: `f`, `ph`, `gh`.
-        
-        - To match the beginning of a word, use `^`: `"(^I)""`.
-        - To match the end of a word, use `$`: `"(e$)(ing$)"`.
-    </dd>
-    
-    <dt>Type</dt>
-    <dd>
-        `string`
-    </dd>
+
+<dt>Description</dt>
+<dd>
+
+The set of substrings to map, these are generally single character strings.
+
+Multiple sets can be defined by using a `|` to separate them.
+
+Example: `"eéê|aåá"` contains two different sets.
+
+To add a multi-character substring use `()`.
+
+Example: `"f(ph)(gh)"` results in the following set: `f`, `ph`, `gh`.
+
+- To match the beginning of a word, use `^`: `"(^I)""`.
+- To match the end of a word, use `$`: `"(e$)(ing$)"`.
+
+</dd>
+
+<dt>Type</dt>
+<dd>
+
+`string`
+
+</dd>
 </dl>
 
 ---
@@ -1704,29 +2006,33 @@ format: md
 #### `penalty` {#costmapdefswap-penalty}
 
 <dl>
-    
-    <dt>Description</dt>
-    <dd>
-        Add a penalty to the final cost.
-        This is used to discourage certain suggestions.
-        
-        Example:
-        ```yaml
-        # Match adding/removing `-` to the end of a word.
-        map: "$(-$)"
-        replace: 50
-        penalty: 100
-        ```
-        
-        This makes adding a `-` to the end of a word more expensive.
-        
-        Think of it as taking the toll way for speed but getting the bill later.
-    </dd>
-    
-    <dt>Type</dt>
-    <dd>
-        `number`
-    </dd>
+
+<dt>Description</dt>
+<dd>
+
+Add a penalty to the final cost.
+This is used to discourage certain suggestions.
+
+Example:
+```yaml
+# Match adding/removing `-` to the end of a word.
+map: "$(-$)"
+replace: 50
+penalty: 100
+```
+
+This makes adding a `-` to the end of a word more expensive.
+
+Think of it as taking the toll way for speed but getting the bill later.
+
+</dd>
+
+<dt>Type</dt>
+<dd>
+
+`number`
+
+</dd>
 </dl>
 
 ---
@@ -1734,18 +2040,22 @@ format: md
 #### `replace` {#costmapdefswap-replace}
 
 <dl>
-    
-    <dt>Description</dt>
-    <dd>
-        The cost to replace of of the substrings in the map with another substring in the map.
-        Example: Map['a', 'i']
-        This would be the cost to substitute `a` with `i`: Like `bat` to `bit` or the reverse.
-    </dd>
-    
-    <dt>Type</dt>
-    <dd>
-        `number`
-    </dd>
+
+<dt>Description</dt>
+<dd>
+
+The cost to replace of of the substrings in the map with another substring in the map.
+Example: Map['a', 'i']
+This would be the cost to substitute `a` with `i`: Like `bat` to `bit` or the reverse.
+
+</dd>
+
+<dt>Type</dt>
+<dd>
+
+`number`
+
+</dd>
 </dl>
 
 ---
@@ -1753,18 +2063,22 @@ format: md
 #### `swap` {#costmapdefswap-swap}
 
 <dl>
-    
-    <dt>Description</dt>
-    <dd>
-        The cost to swap two adjacent substrings found in the map.
-        Example: Map['e', 'i']
-        This represents the cost to change `ei` to `ie` or the reverse.
-    </dd>
-    
-    <dt>Type</dt>
-    <dd>
-        `number`
-    </dd>
+
+<dt>Description</dt>
+<dd>
+
+The cost to swap two adjacent substrings found in the map.
+Example: Map['e', 'i']
+This represents the cost to change `ei` to `ie` or the reverse.
+
+</dd>
+
+<dt>Type</dt>
+<dd>
+
+`number`
+
+</dd>
 </dl>
 
 ---
@@ -1772,16 +2086,20 @@ format: md
 ## CustomDictionaryPath {#customdictionarypath}
 
 <dl>
-    
-    <dt>Description</dt>
-    <dd>
-        A File System Path to a dictionary file.
-    </dd>
-    
-    <dt>Type</dt>
-    <dd>
-        [`FsDictionaryPath`](#fsdictionarypath)
-    </dd>
+
+<dt>Description</dt>
+<dd>
+
+A File System Path to a dictionary file.
+
+</dd>
+
+<dt>Type</dt>
+<dd>
+
+[`FsDictionaryPath`](#fsdictionarypath)
+
+</dd>
 </dl>
 
 ---
@@ -1789,16 +2107,20 @@ format: md
 ## CustomDictionaryScope {#customdictionaryscope}
 
 <dl>
-    
-    <dt>Description</dt>
-    <dd>
-        Specifies the scope of a dictionary.
-    </dd>
-    
-    <dt>Type</dt>
-    <dd>
-        `string`
-    </dd>
+
+<dt>Description</dt>
+<dd>
+
+Specifies the scope of a dictionary.
+
+</dd>
+
+<dt>Type</dt>
+<dd>
+
+`string`
+
+</dd>
 </dl>
 
 ---
@@ -1806,11 +2128,13 @@ format: md
 ## DictionaryDefinition {#dictionarydefinition}
 
 <dl>
-    
-    <dt>Type</dt>
-    <dd>
-        [`DictionaryDefinitionPreferred`](#dictionarydefinitionpreferred)<br />[`DictionaryDefinitionCustom`](#dictionarydefinitioncustom)<br />[`DictionaryDefinitionAugmented`](#dictionarydefinitionaugmented)<br />[`DictionaryDefinitionInline`](#dictionarydefinitioninline)<br />[`DictionaryDefinitionAlternate`](#dictionarydefinitionalternate)
-    </dd>
+
+<dt>Type</dt>
+<dd>
+
+[`DictionaryDefinitionPreferred`](#dictionarydefinitionpreferred)<br />[`DictionaryDefinitionCustom`](#dictionarydefinitioncustom)<br />[`DictionaryDefinitionAugmented`](#dictionarydefinitionaugmented)<br />[`DictionaryDefinitionInline`](#dictionarydefinitioninline)<br />[`DictionaryDefinitionAlternate`](#dictionarydefinitionalternate)
+
+</dd>
 </dl>
 
 ## DictionaryDefinitionAlternate
@@ -1832,16 +2156,20 @@ format: md
 #### `description` {#dictionarydefinitionalternate-description}
 
 <dl>
-    
-    <dt>Description</dt>
-    <dd>
-        Optional description.
-    </dd>
-    
-    <dt>Type</dt>
-    <dd>
-        `string`
-    </dd>
+
+<dt>Description</dt>
+<dd>
+
+Optional description.
+
+</dd>
+
+<dt>Type</dt>
+<dd>
+
+`string`
+
+</dd>
 </dl>
 
 ---
@@ -1849,16 +2177,20 @@ format: md
 #### `file` {#dictionarydefinitionalternate-file}
 
 <dl>
-    
-    <dt>Description</dt>
-    <dd>
-        Path to the file, only for legacy dictionary definitions.
-    </dd>
-    
-    <dt>Type</dt>
-    <dd>
-        [`DictionaryPath`](#dictionarypath)
-    </dd>
+
+<dt>Description</dt>
+<dd>
+
+Path to the file, only for legacy dictionary definitions.
+
+</dd>
+
+<dt>Type</dt>
+<dd>
+
+[`DictionaryPath`](#dictionarypath)
+
+</dd>
 </dl>
 
 ---
@@ -1866,23 +2198,27 @@ format: md
 #### `name` {#dictionarydefinitionalternate-name}
 
 <dl>
-    
-    <dt>Description</dt>
-    <dd>
-        This is the name of a dictionary.
-        
-        Name Format:
-        - Must contain at least 1 number or letter.
-        - Spaces are allowed.
-        - Leading and trailing space will be removed.
-        - Names ARE case-sensitive.
-        - Must not contain `*`, `!`, `;`, `,`, `{`, `}`, `[`, `]`, `~`.
-    </dd>
-    
-    <dt>Type</dt>
-    <dd>
-        [`DictionaryId`](#dictionaryid)
-    </dd>
+
+<dt>Description</dt>
+<dd>
+
+This is the name of a dictionary.
+
+Name Format:
+- Must contain at least 1 number or letter.
+- Spaces are allowed.
+- Leading and trailing space will be removed.
+- Names ARE case-sensitive.
+- Must not contain `*`, `!`, `;`, `,`, `{`, `}`, `[`, `]`, `~`.
+
+</dd>
+
+<dt>Type</dt>
+<dd>
+
+[`DictionaryId`](#dictionaryid)
+
+</dd>
 </dl>
 
 ---
@@ -1890,22 +2226,26 @@ format: md
 #### `noSuggest` {#dictionarydefinitionalternate-nosuggest}
 
 <dl>
-    
-    <dt>Description</dt>
-    <dd>
-        Indicate that suggestions should not come from this dictionary.
-        Words in this dictionary are considered correct, but will not be
-        used when making spell correction suggestions.
-        
-        Note: if a word is suggested by another dictionary, but found in
-        this dictionary, it will be removed from the set of
-        possible suggestions.
-    </dd>
-    
-    <dt>Type</dt>
-    <dd>
-        `boolean`
-    </dd>
+
+<dt>Description</dt>
+<dd>
+
+Indicate that suggestions should not come from this dictionary.
+Words in this dictionary are considered correct, but will not be
+used when making spell correction suggestions.
+
+Note: if a word is suggested by another dictionary, but found in
+this dictionary, it will be removed from the set of
+possible suggestions.
+
+</dd>
+
+<dt>Type</dt>
+<dd>
+
+`boolean`
+
+</dd>
 </dl>
 
 ---
@@ -1913,16 +2253,20 @@ format: md
 #### `repMap` {#dictionarydefinitionalternate-repmap}
 
 <dl>
-    
-    <dt>Description</dt>
-    <dd>
-        Replacement pairs.
-    </dd>
-    
-    <dt>Type</dt>
-    <dd>
-        [`ReplaceMap`](#replacemap)
-    </dd>
+
+<dt>Description</dt>
+<dd>
+
+Replacement pairs.
+
+</dd>
+
+<dt>Type</dt>
+<dd>
+
+[`ReplaceMap`](#replacemap)
+
+</dd>
 </dl>
 
 ---
@@ -1930,23 +2274,27 @@ format: md
 #### `type` {#dictionarydefinitionalternate-type}
 
 <dl>
-    
-    <dt>Description</dt>
-    <dd>
-        Type of file:
-        - S - single word per line,
-        - W - each line can contain one or more words separated by space,
-        - C - each line is treated like code (Camel Case is allowed).
-        
-        Default is S.
-        
-        C is the slowest to load due to the need to split each line based upon code splitting rules.
-    </dd>
-    
-    <dt>Type</dt>
-    <dd>
-        [`DictionaryFileTypes`](#dictionaryfiletypes)
-    </dd>
+
+<dt>Description</dt>
+<dd>
+
+Type of file:
+- S - single word per line,
+- W - each line can contain one or more words separated by space,
+- C - each line is treated like code (Camel Case is allowed).
+
+Default is S.
+
+C is the slowest to load due to the need to split each line based upon code splitting rules.
+
+</dd>
+
+<dt>Type</dt>
+<dd>
+
+[`DictionaryFileTypes`](#dictionaryfiletypes)
+
+</dd>
 </dl>
 
 ---
@@ -1954,16 +2302,20 @@ format: md
 #### `useCompounds` {#dictionarydefinitionalternate-usecompounds}
 
 <dl>
-    
-    <dt>Description</dt>
-    <dd>
-        Use Compounds.
-    </dd>
-    
-    <dt>Type</dt>
-    <dd>
-        `boolean`
-    </dd>
+
+<dt>Description</dt>
+<dd>
+
+Use Compounds.
+
+</dd>
+
+<dt>Type</dt>
+<dd>
+
+`boolean`
+
+</dd>
 </dl>
 
 ## DictionaryDefinitionAugmented
@@ -1986,16 +2338,20 @@ format: md
 #### `description` {#dictionarydefinitionaugmented-description}
 
 <dl>
-    
-    <dt>Description</dt>
-    <dd>
-        Optional description.
-    </dd>
-    
-    <dt>Type</dt>
-    <dd>
-        `string`
-    </dd>
+
+<dt>Description</dt>
+<dd>
+
+Optional description.
+
+</dd>
+
+<dt>Type</dt>
+<dd>
+
+`string`
+
+</dd>
 </dl>
 
 ---
@@ -2003,11 +2359,13 @@ format: md
 #### `dictionaryInformation` {#dictionarydefinitionaugmented-dictionaryinformation}
 
 <dl>
-    
-    <dt>Type</dt>
-    <dd>
-        [`DictionaryInformation`](#dictionaryinformation)
-    </dd>
+
+<dt>Type</dt>
+<dd>
+
+[`DictionaryInformation`](#dictionaryinformation)
+
+</dd>
 </dl>
 
 ---
@@ -2015,23 +2373,27 @@ format: md
 #### `name` {#dictionarydefinitionaugmented-name}
 
 <dl>
-    
-    <dt>Description</dt>
-    <dd>
-        This is the name of a dictionary.
-        
-        Name Format:
-        - Must contain at least 1 number or letter.
-        - Spaces are allowed.
-        - Leading and trailing space will be removed.
-        - Names ARE case-sensitive.
-        - Must not contain `*`, `!`, `;`, `,`, `{`, `}`, `[`, `]`, `~`.
-    </dd>
-    
-    <dt>Type</dt>
-    <dd>
-        [`DictionaryId`](#dictionaryid)
-    </dd>
+
+<dt>Description</dt>
+<dd>
+
+This is the name of a dictionary.
+
+Name Format:
+- Must contain at least 1 number or letter.
+- Spaces are allowed.
+- Leading and trailing space will be removed.
+- Names ARE case-sensitive.
+- Must not contain `*`, `!`, `;`, `,`, `{`, `}`, `[`, `]`, `~`.
+
+</dd>
+
+<dt>Type</dt>
+<dd>
+
+[`DictionaryId`](#dictionaryid)
+
+</dd>
 </dl>
 
 ---
@@ -2039,22 +2401,26 @@ format: md
 #### `noSuggest` {#dictionarydefinitionaugmented-nosuggest}
 
 <dl>
-    
-    <dt>Description</dt>
-    <dd>
-        Indicate that suggestions should not come from this dictionary.
-        Words in this dictionary are considered correct, but will not be
-        used when making spell correction suggestions.
-        
-        Note: if a word is suggested by another dictionary, but found in
-        this dictionary, it will be removed from the set of
-        possible suggestions.
-    </dd>
-    
-    <dt>Type</dt>
-    <dd>
-        `boolean`
-    </dd>
+
+<dt>Description</dt>
+<dd>
+
+Indicate that suggestions should not come from this dictionary.
+Words in this dictionary are considered correct, but will not be
+used when making spell correction suggestions.
+
+Note: if a word is suggested by another dictionary, but found in
+this dictionary, it will be removed from the set of
+possible suggestions.
+
+</dd>
+
+<dt>Type</dt>
+<dd>
+
+`boolean`
+
+</dd>
 </dl>
 
 ---
@@ -2062,16 +2428,20 @@ format: md
 #### `path` {#dictionarydefinitionaugmented-path}
 
 <dl>
-    
-    <dt>Description</dt>
-    <dd>
-        Path to the file.
-    </dd>
-    
-    <dt>Type</dt>
-    <dd>
-        [`DictionaryPath`](#dictionarypath)
-    </dd>
+
+<dt>Description</dt>
+<dd>
+
+Path to the file.
+
+</dd>
+
+<dt>Type</dt>
+<dd>
+
+[`DictionaryPath`](#dictionarypath)
+
+</dd>
 </dl>
 
 ---
@@ -2079,16 +2449,20 @@ format: md
 #### `repMap` {#dictionarydefinitionaugmented-repmap}
 
 <dl>
-    
-    <dt>Description</dt>
-    <dd>
-        Replacement pairs.
-    </dd>
-    
-    <dt>Type</dt>
-    <dd>
-        [`ReplaceMap`](#replacemap)
-    </dd>
+
+<dt>Description</dt>
+<dd>
+
+Replacement pairs.
+
+</dd>
+
+<dt>Type</dt>
+<dd>
+
+[`ReplaceMap`](#replacemap)
+
+</dd>
 </dl>
 
 ---
@@ -2096,23 +2470,27 @@ format: md
 #### `type` {#dictionarydefinitionaugmented-type}
 
 <dl>
-    
-    <dt>Description</dt>
-    <dd>
-        Type of file:
-        - S - single word per line,
-        - W - each line can contain one or more words separated by space,
-        - C - each line is treated like code (Camel Case is allowed).
-        
-        Default is S.
-        
-        C is the slowest to load due to the need to split each line based upon code splitting rules.
-    </dd>
-    
-    <dt>Type</dt>
-    <dd>
-        [`DictionaryFileTypes`](#dictionaryfiletypes)
-    </dd>
+
+<dt>Description</dt>
+<dd>
+
+Type of file:
+- S - single word per line,
+- W - each line can contain one or more words separated by space,
+- C - each line is treated like code (Camel Case is allowed).
+
+Default is S.
+
+C is the slowest to load due to the need to split each line based upon code splitting rules.
+
+</dd>
+
+<dt>Type</dt>
+<dd>
+
+[`DictionaryFileTypes`](#dictionaryfiletypes)
+
+</dd>
 </dl>
 
 ---
@@ -2120,16 +2498,20 @@ format: md
 #### `useCompounds` {#dictionarydefinitionaugmented-usecompounds}
 
 <dl>
-    
-    <dt>Description</dt>
-    <dd>
-        Use Compounds.
-    </dd>
-    
-    <dt>Type</dt>
-    <dd>
-        `boolean`
-    </dd>
+
+<dt>Description</dt>
+<dd>
+
+Use Compounds.
+
+</dd>
+
+<dt>Type</dt>
+<dd>
+
+`boolean`
+
+</dd>
 </dl>
 
 ## DictionaryDefinitionCustom
@@ -2153,16 +2535,20 @@ format: md
 #### `addWords` {#dictionarydefinitioncustom-addwords}
 
 <dl>
-    
-    <dt>Description</dt>
-    <dd>
-        When `true`, let's the spell checker know that words can be added to this dictionary.
-    </dd>
-    
-    <dt>Type</dt>
-    <dd>
-        `boolean`
-    </dd>
+
+<dt>Description</dt>
+<dd>
+
+When `true`, let's the spell checker know that words can be added to this dictionary.
+
+</dd>
+
+<dt>Type</dt>
+<dd>
+
+`boolean`
+
+</dd>
 </dl>
 
 ---
@@ -2170,16 +2556,20 @@ format: md
 #### `description` {#dictionarydefinitioncustom-description}
 
 <dl>
-    
-    <dt>Description</dt>
-    <dd>
-        Optional description.
-    </dd>
-    
-    <dt>Type</dt>
-    <dd>
-        `string`
-    </dd>
+
+<dt>Description</dt>
+<dd>
+
+Optional description.
+
+</dd>
+
+<dt>Type</dt>
+<dd>
+
+`string`
+
+</dd>
 </dl>
 
 ---
@@ -2187,23 +2577,27 @@ format: md
 #### `name` {#dictionarydefinitioncustom-name}
 
 <dl>
-    
-    <dt>Description</dt>
-    <dd>
-        This is the name of a dictionary.
-        
-        Name Format:
-        - Must contain at least 1 number or letter.
-        - Spaces are allowed.
-        - Leading and trailing space will be removed.
-        - Names ARE case-sensitive.
-        - Must not contain `*`, `!`, `;`, `,`, `{`, `}`, `[`, `]`, `~`.
-    </dd>
-    
-    <dt>Type</dt>
-    <dd>
-        [`DictionaryId`](#dictionaryid)
-    </dd>
+
+<dt>Description</dt>
+<dd>
+
+This is the name of a dictionary.
+
+Name Format:
+- Must contain at least 1 number or letter.
+- Spaces are allowed.
+- Leading and trailing space will be removed.
+- Names ARE case-sensitive.
+- Must not contain `*`, `!`, `;`, `,`, `{`, `}`, `[`, `]`, `~`.
+
+</dd>
+
+<dt>Type</dt>
+<dd>
+
+[`DictionaryId`](#dictionaryid)
+
+</dd>
 </dl>
 
 ---
@@ -2211,22 +2605,26 @@ format: md
 #### `noSuggest` {#dictionarydefinitioncustom-nosuggest}
 
 <dl>
-    
-    <dt>Description</dt>
-    <dd>
-        Indicate that suggestions should not come from this dictionary.
-        Words in this dictionary are considered correct, but will not be
-        used when making spell correction suggestions.
-        
-        Note: if a word is suggested by another dictionary, but found in
-        this dictionary, it will be removed from the set of
-        possible suggestions.
-    </dd>
-    
-    <dt>Type</dt>
-    <dd>
-        `boolean`
-    </dd>
+
+<dt>Description</dt>
+<dd>
+
+Indicate that suggestions should not come from this dictionary.
+Words in this dictionary are considered correct, but will not be
+used when making spell correction suggestions.
+
+Note: if a word is suggested by another dictionary, but found in
+this dictionary, it will be removed from the set of
+possible suggestions.
+
+</dd>
+
+<dt>Type</dt>
+<dd>
+
+`boolean`
+
+</dd>
 </dl>
 
 ---
@@ -2234,16 +2632,20 @@ format: md
 #### `path` {#dictionarydefinitioncustom-path}
 
 <dl>
-    
-    <dt>Description</dt>
-    <dd>
-        Path to custom dictionary text file.
-    </dd>
-    
-    <dt>Type</dt>
-    <dd>
-        [`CustomDictionaryPath`](#customdictionarypath)
-    </dd>
+
+<dt>Description</dt>
+<dd>
+
+Path to custom dictionary text file.
+
+</dd>
+
+<dt>Type</dt>
+<dd>
+
+[`CustomDictionaryPath`](#customdictionarypath)
+
+</dd>
 </dl>
 
 ---
@@ -2251,16 +2653,20 @@ format: md
 #### `repMap` {#dictionarydefinitioncustom-repmap}
 
 <dl>
-    
-    <dt>Description</dt>
-    <dd>
-        Replacement pairs.
-    </dd>
-    
-    <dt>Type</dt>
-    <dd>
-        [`ReplaceMap`](#replacemap)
-    </dd>
+
+<dt>Description</dt>
+<dd>
+
+Replacement pairs.
+
+</dd>
+
+<dt>Type</dt>
+<dd>
+
+[`ReplaceMap`](#replacemap)
+
+</dd>
 </dl>
 
 ---
@@ -2268,18 +2674,22 @@ format: md
 #### `scope` {#dictionarydefinitioncustom-scope}
 
 <dl>
-    
-    <dt>Description</dt>
-    <dd>
-        Defines the scope for when words will be added to the dictionary.
-        
-        Scope values: `user`, `workspace`, `folder`.
-    </dd>
-    
-    <dt>Type</dt>
-    <dd>
-        [`CustomDictionaryScope`](#customdictionaryscope)<br />[`CustomDictionaryScope`](#customdictionaryscope)`[]`
-    </dd>
+
+<dt>Description</dt>
+<dd>
+
+Defines the scope for when words will be added to the dictionary.
+
+Scope values: `user`, `workspace`, `folder`.
+
+</dd>
+
+<dt>Type</dt>
+<dd>
+
+[`CustomDictionaryScope`](#customdictionaryscope)<br />[`CustomDictionaryScope`](#customdictionaryscope)`[]`
+
+</dd>
 </dl>
 
 ---
@@ -2287,23 +2697,27 @@ format: md
 #### `type` {#dictionarydefinitioncustom-type}
 
 <dl>
-    
-    <dt>Description</dt>
-    <dd>
-        Type of file:
-        - S - single word per line,
-        - W - each line can contain one or more words separated by space,
-        - C - each line is treated like code (Camel Case is allowed).
-        
-        Default is S.
-        
-        C is the slowest to load due to the need to split each line based upon code splitting rules.
-    </dd>
-    
-    <dt>Type</dt>
-    <dd>
-        [`DictionaryFileTypes`](#dictionaryfiletypes)
-    </dd>
+
+<dt>Description</dt>
+<dd>
+
+Type of file:
+- S - single word per line,
+- W - each line can contain one or more words separated by space,
+- C - each line is treated like code (Camel Case is allowed).
+
+Default is S.
+
+C is the slowest to load due to the need to split each line based upon code splitting rules.
+
+</dd>
+
+<dt>Type</dt>
+<dd>
+
+[`DictionaryFileTypes`](#dictionaryfiletypes)
+
+</dd>
 </dl>
 
 ---
@@ -2311,16 +2725,20 @@ format: md
 #### `useCompounds` {#dictionarydefinitioncustom-usecompounds}
 
 <dl>
-    
-    <dt>Description</dt>
-    <dd>
-        Use Compounds.
-    </dd>
-    
-    <dt>Type</dt>
-    <dd>
-        `boolean`
-    </dd>
+
+<dt>Description</dt>
+<dd>
+
+Use Compounds.
+
+</dd>
+
+<dt>Type</dt>
+<dd>
+
+`boolean`
+
+</dd>
 </dl>
 
 ---
@@ -2328,16 +2746,20 @@ format: md
 ## DictionaryDefinitionInline {#dictionarydefinitioninline}
 
 <dl>
-    
-    <dt>Description</dt>
-    <dd>
-        Inline Dictionary Definitions
-    </dd>
-    
-    <dt>Type</dt>
-    <dd>
-        [`DictionaryDefinitionInlineWords`](#dictionarydefinitioninlinewords)<br />[`DictionaryDefinitionInlineIgnoreWords`](#dictionarydefinitioninlineignorewords)<br />[`DictionaryDefinitionInlineFlagWords`](#dictionarydefinitioninlineflagwords)
-    </dd>
+
+<dt>Description</dt>
+<dd>
+
+Inline Dictionary Definitions
+
+</dd>
+
+<dt>Type</dt>
+<dd>
+
+[`DictionaryDefinitionInlineWords`](#dictionarydefinitioninlinewords)<br />[`DictionaryDefinitionInlineIgnoreWords`](#dictionarydefinitioninlineignorewords)<br />[`DictionaryDefinitionInlineFlagWords`](#dictionarydefinitioninlineflagwords)
+
+</dd>
 </dl>
 
 ## DictionaryDefinitionInlineFlagWords
@@ -2362,16 +2784,20 @@ format: md
 #### `description` {#dictionarydefinitioninlineflagwords-description}
 
 <dl>
-    
-    <dt>Description</dt>
-    <dd>
-        Optional description.
-    </dd>
-    
-    <dt>Type</dt>
-    <dd>
-        `string`
-    </dd>
+
+<dt>Description</dt>
+<dd>
+
+Optional description.
+
+</dd>
+
+<dt>Type</dt>
+<dd>
+
+`string`
+
+</dd>
 </dl>
 
 ---
@@ -2379,30 +2805,34 @@ format: md
 #### `flagWords` {#dictionarydefinitioninlineflagwords-flagwords}
 
 <dl>
-    
-    <dt>Description</dt>
-    <dd>
-        List of words to always be considered incorrect. Words found in `flagWords` override `words`.
-        
-        Format of `flagWords`
-        - single word entry - `word`
-        - with suggestions - `word:suggestion` or `word->suggestion, suggestions`
-        
-        Example:
-        ```ts
-        "flagWords": [
-          "color: colour",
-          "incase: in case, encase",
-          "canot->cannot",
-          "cancelled->canceled"
-        ]
-        ```
-    </dd>
-    
-    <dt>Type</dt>
-    <dd>
-        `string``[]`
-    </dd>
+
+<dt>Description</dt>
+<dd>
+
+List of words to always be considered incorrect. Words found in `flagWords` override `words`.
+
+Format of `flagWords`
+- single word entry - `word`
+- with suggestions - `word:suggestion` or `word->suggestion, suggestions`
+
+Example:
+```ts
+"flagWords": [
+  "color: colour",
+  "incase: in case, encase",
+  "canot->cannot",
+  "cancelled->canceled"
+]
+```
+
+</dd>
+
+<dt>Type</dt>
+<dd>
+
+`string``[]`
+
+</dd>
 </dl>
 
 ---
@@ -2410,17 +2840,21 @@ format: md
 #### `ignoreWords` {#dictionarydefinitioninlineflagwords-ignorewords}
 
 <dl>
-    
-    <dt>Description</dt>
-    <dd>
-        List of words to be ignored. An ignored word will not show up as an error, even if it is
-        also in the `flagWords`.
-    </dd>
-    
-    <dt>Type</dt>
-    <dd>
-        `string``[]`
-    </dd>
+
+<dt>Description</dt>
+<dd>
+
+List of words to be ignored. An ignored word will not show up as an error, even if it is
+also in the `flagWords`.
+
+</dd>
+
+<dt>Type</dt>
+<dd>
+
+`string``[]`
+
+</dd>
 </dl>
 
 ---
@@ -2428,23 +2862,27 @@ format: md
 #### `name` {#dictionarydefinitioninlineflagwords-name}
 
 <dl>
-    
-    <dt>Description</dt>
-    <dd>
-        This is the name of a dictionary.
-        
-        Name Format:
-        - Must contain at least 1 number or letter.
-        - Spaces are allowed.
-        - Leading and trailing space will be removed.
-        - Names ARE case-sensitive.
-        - Must not contain `*`, `!`, `;`, `,`, `{`, `}`, `[`, `]`, `~`.
-    </dd>
-    
-    <dt>Type</dt>
-    <dd>
-        [`DictionaryId`](#dictionaryid)
-    </dd>
+
+<dt>Description</dt>
+<dd>
+
+This is the name of a dictionary.
+
+Name Format:
+- Must contain at least 1 number or letter.
+- Spaces are allowed.
+- Leading and trailing space will be removed.
+- Names ARE case-sensitive.
+- Must not contain `*`, `!`, `;`, `,`, `{`, `}`, `[`, `]`, `~`.
+
+</dd>
+
+<dt>Type</dt>
+<dd>
+
+[`DictionaryId`](#dictionaryid)
+
+</dd>
 </dl>
 
 ---
@@ -2452,22 +2890,26 @@ format: md
 #### `noSuggest` {#dictionarydefinitioninlineflagwords-nosuggest}
 
 <dl>
-    
-    <dt>Description</dt>
-    <dd>
-        Indicate that suggestions should not come from this dictionary.
-        Words in this dictionary are considered correct, but will not be
-        used when making spell correction suggestions.
-        
-        Note: if a word is suggested by another dictionary, but found in
-        this dictionary, it will be removed from the set of
-        possible suggestions.
-    </dd>
-    
-    <dt>Type</dt>
-    <dd>
-        `boolean`
-    </dd>
+
+<dt>Description</dt>
+<dd>
+
+Indicate that suggestions should not come from this dictionary.
+Words in this dictionary are considered correct, but will not be
+used when making spell correction suggestions.
+
+Note: if a word is suggested by another dictionary, but found in
+this dictionary, it will be removed from the set of
+possible suggestions.
+
+</dd>
+
+<dt>Type</dt>
+<dd>
+
+`boolean`
+
+</dd>
 </dl>
 
 ---
@@ -2475,16 +2917,20 @@ format: md
 #### `repMap` {#dictionarydefinitioninlineflagwords-repmap}
 
 <dl>
-    
-    <dt>Description</dt>
-    <dd>
-        Replacement pairs.
-    </dd>
-    
-    <dt>Type</dt>
-    <dd>
-        [`ReplaceMap`](#replacemap)
-    </dd>
+
+<dt>Description</dt>
+<dd>
+
+Replacement pairs.
+
+</dd>
+
+<dt>Type</dt>
+<dd>
+
+[`ReplaceMap`](#replacemap)
+
+</dd>
 </dl>
 
 ---
@@ -2492,26 +2938,30 @@ format: md
 #### `suggestWords` {#dictionarydefinitioninlineflagwords-suggestwords}
 
 <dl>
-    
-    <dt>Description</dt>
-    <dd>
-        A list of suggested replacements for words.
-        Suggested words provide a way to make preferred suggestions on word replacements.
-        To hint at a preferred change, but not to require it.
-        
-        Format of `suggestWords`
-        - Single suggestion (possible auto fix)
-            - `word: suggestion`
-            - `word->suggestion`
-        - Multiple suggestions (not auto fixable)
-           - `word: first, second, third`
-           - `word->first, second, third`
-    </dd>
-    
-    <dt>Type</dt>
-    <dd>
-        `string``[]`
-    </dd>
+
+<dt>Description</dt>
+<dd>
+
+A list of suggested replacements for words.
+Suggested words provide a way to make preferred suggestions on word replacements.
+To hint at a preferred change, but not to require it.
+
+Format of `suggestWords`
+- Single suggestion (possible auto fix)
+    - `word: suggestion`
+    - `word->suggestion`
+- Multiple suggestions (not auto fixable)
+   - `word: first, second, third`
+   - `word->first, second, third`
+
+</dd>
+
+<dt>Type</dt>
+<dd>
+
+`string``[]`
+
+</dd>
 </dl>
 
 ---
@@ -2519,23 +2969,27 @@ format: md
 #### `type` {#dictionarydefinitioninlineflagwords-type}
 
 <dl>
-    
-    <dt>Description</dt>
-    <dd>
-        Type of file:
-        - S - single word per line,
-        - W - each line can contain one or more words separated by space,
-        - C - each line is treated like code (Camel Case is allowed).
-        
-        Default is S.
-        
-        C is the slowest to load due to the need to split each line based upon code splitting rules.
-    </dd>
-    
-    <dt>Type</dt>
-    <dd>
-        [`DictionaryFileTypes`](#dictionaryfiletypes)
-    </dd>
+
+<dt>Description</dt>
+<dd>
+
+Type of file:
+- S - single word per line,
+- W - each line can contain one or more words separated by space,
+- C - each line is treated like code (Camel Case is allowed).
+
+Default is S.
+
+C is the slowest to load due to the need to split each line based upon code splitting rules.
+
+</dd>
+
+<dt>Type</dt>
+<dd>
+
+[`DictionaryFileTypes`](#dictionaryfiletypes)
+
+</dd>
 </dl>
 
 ---
@@ -2543,16 +2997,20 @@ format: md
 #### `useCompounds` {#dictionarydefinitioninlineflagwords-usecompounds}
 
 <dl>
-    
-    <dt>Description</dt>
-    <dd>
-        Use Compounds.
-    </dd>
-    
-    <dt>Type</dt>
-    <dd>
-        `boolean`
-    </dd>
+
+<dt>Description</dt>
+<dd>
+
+Use Compounds.
+
+</dd>
+
+<dt>Type</dt>
+<dd>
+
+`boolean`
+
+</dd>
 </dl>
 
 ---
@@ -2560,16 +3018,20 @@ format: md
 #### `words` {#dictionarydefinitioninlineflagwords-words}
 
 <dl>
-    
-    <dt>Description</dt>
-    <dd>
-        List of words to be considered correct.
-    </dd>
-    
-    <dt>Type</dt>
-    <dd>
-        `string``[]`
-    </dd>
+
+<dt>Description</dt>
+<dd>
+
+List of words to be considered correct.
+
+</dd>
+
+<dt>Type</dt>
+<dd>
+
+`string``[]`
+
+</dd>
 </dl>
 
 ## DictionaryDefinitionInlineIgnoreWords
@@ -2594,16 +3056,20 @@ format: md
 #### `description` {#dictionarydefinitioninlineignorewords-description}
 
 <dl>
-    
-    <dt>Description</dt>
-    <dd>
-        Optional description.
-    </dd>
-    
-    <dt>Type</dt>
-    <dd>
-        `string`
-    </dd>
+
+<dt>Description</dt>
+<dd>
+
+Optional description.
+
+</dd>
+
+<dt>Type</dt>
+<dd>
+
+`string`
+
+</dd>
 </dl>
 
 ---
@@ -2611,30 +3077,34 @@ format: md
 #### `flagWords` {#dictionarydefinitioninlineignorewords-flagwords}
 
 <dl>
-    
-    <dt>Description</dt>
-    <dd>
-        List of words to always be considered incorrect. Words found in `flagWords` override `words`.
-        
-        Format of `flagWords`
-        - single word entry - `word`
-        - with suggestions - `word:suggestion` or `word->suggestion, suggestions`
-        
-        Example:
-        ```ts
-        "flagWords": [
-          "color: colour",
-          "incase: in case, encase",
-          "canot->cannot",
-          "cancelled->canceled"
-        ]
-        ```
-    </dd>
-    
-    <dt>Type</dt>
-    <dd>
-        `string``[]`
-    </dd>
+
+<dt>Description</dt>
+<dd>
+
+List of words to always be considered incorrect. Words found in `flagWords` override `words`.
+
+Format of `flagWords`
+- single word entry - `word`
+- with suggestions - `word:suggestion` or `word->suggestion, suggestions`
+
+Example:
+```ts
+"flagWords": [
+  "color: colour",
+  "incase: in case, encase",
+  "canot->cannot",
+  "cancelled->canceled"
+]
+```
+
+</dd>
+
+<dt>Type</dt>
+<dd>
+
+`string``[]`
+
+</dd>
 </dl>
 
 ---
@@ -2642,17 +3112,21 @@ format: md
 #### `ignoreWords` {#dictionarydefinitioninlineignorewords-ignorewords}
 
 <dl>
-    
-    <dt>Description</dt>
-    <dd>
-        List of words to be ignored. An ignored word will not show up as an error, even if it is
-        also in the `flagWords`.
-    </dd>
-    
-    <dt>Type</dt>
-    <dd>
-        `string``[]`
-    </dd>
+
+<dt>Description</dt>
+<dd>
+
+List of words to be ignored. An ignored word will not show up as an error, even if it is
+also in the `flagWords`.
+
+</dd>
+
+<dt>Type</dt>
+<dd>
+
+`string``[]`
+
+</dd>
 </dl>
 
 ---
@@ -2660,23 +3134,27 @@ format: md
 #### `name` {#dictionarydefinitioninlineignorewords-name}
 
 <dl>
-    
-    <dt>Description</dt>
-    <dd>
-        This is the name of a dictionary.
-        
-        Name Format:
-        - Must contain at least 1 number or letter.
-        - Spaces are allowed.
-        - Leading and trailing space will be removed.
-        - Names ARE case-sensitive.
-        - Must not contain `*`, `!`, `;`, `,`, `{`, `}`, `[`, `]`, `~`.
-    </dd>
-    
-    <dt>Type</dt>
-    <dd>
-        [`DictionaryId`](#dictionaryid)
-    </dd>
+
+<dt>Description</dt>
+<dd>
+
+This is the name of a dictionary.
+
+Name Format:
+- Must contain at least 1 number or letter.
+- Spaces are allowed.
+- Leading and trailing space will be removed.
+- Names ARE case-sensitive.
+- Must not contain `*`, `!`, `;`, `,`, `{`, `}`, `[`, `]`, `~`.
+
+</dd>
+
+<dt>Type</dt>
+<dd>
+
+[`DictionaryId`](#dictionaryid)
+
+</dd>
 </dl>
 
 ---
@@ -2684,22 +3162,26 @@ format: md
 #### `noSuggest` {#dictionarydefinitioninlineignorewords-nosuggest}
 
 <dl>
-    
-    <dt>Description</dt>
-    <dd>
-        Indicate that suggestions should not come from this dictionary.
-        Words in this dictionary are considered correct, but will not be
-        used when making spell correction suggestions.
-        
-        Note: if a word is suggested by another dictionary, but found in
-        this dictionary, it will be removed from the set of
-        possible suggestions.
-    </dd>
-    
-    <dt>Type</dt>
-    <dd>
-        `boolean`
-    </dd>
+
+<dt>Description</dt>
+<dd>
+
+Indicate that suggestions should not come from this dictionary.
+Words in this dictionary are considered correct, but will not be
+used when making spell correction suggestions.
+
+Note: if a word is suggested by another dictionary, but found in
+this dictionary, it will be removed from the set of
+possible suggestions.
+
+</dd>
+
+<dt>Type</dt>
+<dd>
+
+`boolean`
+
+</dd>
 </dl>
 
 ---
@@ -2707,16 +3189,20 @@ format: md
 #### `repMap` {#dictionarydefinitioninlineignorewords-repmap}
 
 <dl>
-    
-    <dt>Description</dt>
-    <dd>
-        Replacement pairs.
-    </dd>
-    
-    <dt>Type</dt>
-    <dd>
-        [`ReplaceMap`](#replacemap)
-    </dd>
+
+<dt>Description</dt>
+<dd>
+
+Replacement pairs.
+
+</dd>
+
+<dt>Type</dt>
+<dd>
+
+[`ReplaceMap`](#replacemap)
+
+</dd>
 </dl>
 
 ---
@@ -2724,26 +3210,30 @@ format: md
 #### `suggestWords` {#dictionarydefinitioninlineignorewords-suggestwords}
 
 <dl>
-    
-    <dt>Description</dt>
-    <dd>
-        A list of suggested replacements for words.
-        Suggested words provide a way to make preferred suggestions on word replacements.
-        To hint at a preferred change, but not to require it.
-        
-        Format of `suggestWords`
-        - Single suggestion (possible auto fix)
-            - `word: suggestion`
-            - `word->suggestion`
-        - Multiple suggestions (not auto fixable)
-           - `word: first, second, third`
-           - `word->first, second, third`
-    </dd>
-    
-    <dt>Type</dt>
-    <dd>
-        `string``[]`
-    </dd>
+
+<dt>Description</dt>
+<dd>
+
+A list of suggested replacements for words.
+Suggested words provide a way to make preferred suggestions on word replacements.
+To hint at a preferred change, but not to require it.
+
+Format of `suggestWords`
+- Single suggestion (possible auto fix)
+    - `word: suggestion`
+    - `word->suggestion`
+- Multiple suggestions (not auto fixable)
+   - `word: first, second, third`
+   - `word->first, second, third`
+
+</dd>
+
+<dt>Type</dt>
+<dd>
+
+`string``[]`
+
+</dd>
 </dl>
 
 ---
@@ -2751,23 +3241,27 @@ format: md
 #### `type` {#dictionarydefinitioninlineignorewords-type}
 
 <dl>
-    
-    <dt>Description</dt>
-    <dd>
-        Type of file:
-        - S - single word per line,
-        - W - each line can contain one or more words separated by space,
-        - C - each line is treated like code (Camel Case is allowed).
-        
-        Default is S.
-        
-        C is the slowest to load due to the need to split each line based upon code splitting rules.
-    </dd>
-    
-    <dt>Type</dt>
-    <dd>
-        [`DictionaryFileTypes`](#dictionaryfiletypes)
-    </dd>
+
+<dt>Description</dt>
+<dd>
+
+Type of file:
+- S - single word per line,
+- W - each line can contain one or more words separated by space,
+- C - each line is treated like code (Camel Case is allowed).
+
+Default is S.
+
+C is the slowest to load due to the need to split each line based upon code splitting rules.
+
+</dd>
+
+<dt>Type</dt>
+<dd>
+
+[`DictionaryFileTypes`](#dictionaryfiletypes)
+
+</dd>
 </dl>
 
 ---
@@ -2775,16 +3269,20 @@ format: md
 #### `useCompounds` {#dictionarydefinitioninlineignorewords-usecompounds}
 
 <dl>
-    
-    <dt>Description</dt>
-    <dd>
-        Use Compounds.
-    </dd>
-    
-    <dt>Type</dt>
-    <dd>
-        `boolean`
-    </dd>
+
+<dt>Description</dt>
+<dd>
+
+Use Compounds.
+
+</dd>
+
+<dt>Type</dt>
+<dd>
+
+`boolean`
+
+</dd>
 </dl>
 
 ---
@@ -2792,16 +3290,20 @@ format: md
 #### `words` {#dictionarydefinitioninlineignorewords-words}
 
 <dl>
-    
-    <dt>Description</dt>
-    <dd>
-        List of words to be considered correct.
-    </dd>
-    
-    <dt>Type</dt>
-    <dd>
-        `string``[]`
-    </dd>
+
+<dt>Description</dt>
+<dd>
+
+List of words to be considered correct.
+
+</dd>
+
+<dt>Type</dt>
+<dd>
+
+`string``[]`
+
+</dd>
 </dl>
 
 ## DictionaryDefinitionInlineWords
@@ -2826,16 +3328,20 @@ format: md
 #### `description` {#dictionarydefinitioninlinewords-description}
 
 <dl>
-    
-    <dt>Description</dt>
-    <dd>
-        Optional description.
-    </dd>
-    
-    <dt>Type</dt>
-    <dd>
-        `string`
-    </dd>
+
+<dt>Description</dt>
+<dd>
+
+Optional description.
+
+</dd>
+
+<dt>Type</dt>
+<dd>
+
+`string`
+
+</dd>
 </dl>
 
 ---
@@ -2843,30 +3349,34 @@ format: md
 #### `flagWords` {#dictionarydefinitioninlinewords-flagwords}
 
 <dl>
-    
-    <dt>Description</dt>
-    <dd>
-        List of words to always be considered incorrect. Words found in `flagWords` override `words`.
-        
-        Format of `flagWords`
-        - single word entry - `word`
-        - with suggestions - `word:suggestion` or `word->suggestion, suggestions`
-        
-        Example:
-        ```ts
-        "flagWords": [
-          "color: colour",
-          "incase: in case, encase",
-          "canot->cannot",
-          "cancelled->canceled"
-        ]
-        ```
-    </dd>
-    
-    <dt>Type</dt>
-    <dd>
-        `string``[]`
-    </dd>
+
+<dt>Description</dt>
+<dd>
+
+List of words to always be considered incorrect. Words found in `flagWords` override `words`.
+
+Format of `flagWords`
+- single word entry - `word`
+- with suggestions - `word:suggestion` or `word->suggestion, suggestions`
+
+Example:
+```ts
+"flagWords": [
+  "color: colour",
+  "incase: in case, encase",
+  "canot->cannot",
+  "cancelled->canceled"
+]
+```
+
+</dd>
+
+<dt>Type</dt>
+<dd>
+
+`string``[]`
+
+</dd>
 </dl>
 
 ---
@@ -2874,17 +3384,21 @@ format: md
 #### `ignoreWords` {#dictionarydefinitioninlinewords-ignorewords}
 
 <dl>
-    
-    <dt>Description</dt>
-    <dd>
-        List of words to be ignored. An ignored word will not show up as an error, even if it is
-        also in the `flagWords`.
-    </dd>
-    
-    <dt>Type</dt>
-    <dd>
-        `string``[]`
-    </dd>
+
+<dt>Description</dt>
+<dd>
+
+List of words to be ignored. An ignored word will not show up as an error, even if it is
+also in the `flagWords`.
+
+</dd>
+
+<dt>Type</dt>
+<dd>
+
+`string``[]`
+
+</dd>
 </dl>
 
 ---
@@ -2892,23 +3406,27 @@ format: md
 #### `name` {#dictionarydefinitioninlinewords-name}
 
 <dl>
-    
-    <dt>Description</dt>
-    <dd>
-        This is the name of a dictionary.
-        
-        Name Format:
-        - Must contain at least 1 number or letter.
-        - Spaces are allowed.
-        - Leading and trailing space will be removed.
-        - Names ARE case-sensitive.
-        - Must not contain `*`, `!`, `;`, `,`, `{`, `}`, `[`, `]`, `~`.
-    </dd>
-    
-    <dt>Type</dt>
-    <dd>
-        [`DictionaryId`](#dictionaryid)
-    </dd>
+
+<dt>Description</dt>
+<dd>
+
+This is the name of a dictionary.
+
+Name Format:
+- Must contain at least 1 number or letter.
+- Spaces are allowed.
+- Leading and trailing space will be removed.
+- Names ARE case-sensitive.
+- Must not contain `*`, `!`, `;`, `,`, `{`, `}`, `[`, `]`, `~`.
+
+</dd>
+
+<dt>Type</dt>
+<dd>
+
+[`DictionaryId`](#dictionaryid)
+
+</dd>
 </dl>
 
 ---
@@ -2916,22 +3434,26 @@ format: md
 #### `noSuggest` {#dictionarydefinitioninlinewords-nosuggest}
 
 <dl>
-    
-    <dt>Description</dt>
-    <dd>
-        Indicate that suggestions should not come from this dictionary.
-        Words in this dictionary are considered correct, but will not be
-        used when making spell correction suggestions.
-        
-        Note: if a word is suggested by another dictionary, but found in
-        this dictionary, it will be removed from the set of
-        possible suggestions.
-    </dd>
-    
-    <dt>Type</dt>
-    <dd>
-        `boolean`
-    </dd>
+
+<dt>Description</dt>
+<dd>
+
+Indicate that suggestions should not come from this dictionary.
+Words in this dictionary are considered correct, but will not be
+used when making spell correction suggestions.
+
+Note: if a word is suggested by another dictionary, but found in
+this dictionary, it will be removed from the set of
+possible suggestions.
+
+</dd>
+
+<dt>Type</dt>
+<dd>
+
+`boolean`
+
+</dd>
 </dl>
 
 ---
@@ -2939,16 +3461,20 @@ format: md
 #### `repMap` {#dictionarydefinitioninlinewords-repmap}
 
 <dl>
-    
-    <dt>Description</dt>
-    <dd>
-        Replacement pairs.
-    </dd>
-    
-    <dt>Type</dt>
-    <dd>
-        [`ReplaceMap`](#replacemap)
-    </dd>
+
+<dt>Description</dt>
+<dd>
+
+Replacement pairs.
+
+</dd>
+
+<dt>Type</dt>
+<dd>
+
+[`ReplaceMap`](#replacemap)
+
+</dd>
 </dl>
 
 ---
@@ -2956,26 +3482,30 @@ format: md
 #### `suggestWords` {#dictionarydefinitioninlinewords-suggestwords}
 
 <dl>
-    
-    <dt>Description</dt>
-    <dd>
-        A list of suggested replacements for words.
-        Suggested words provide a way to make preferred suggestions on word replacements.
-        To hint at a preferred change, but not to require it.
-        
-        Format of `suggestWords`
-        - Single suggestion (possible auto fix)
-            - `word: suggestion`
-            - `word->suggestion`
-        - Multiple suggestions (not auto fixable)
-           - `word: first, second, third`
-           - `word->first, second, third`
-    </dd>
-    
-    <dt>Type</dt>
-    <dd>
-        `string``[]`
-    </dd>
+
+<dt>Description</dt>
+<dd>
+
+A list of suggested replacements for words.
+Suggested words provide a way to make preferred suggestions on word replacements.
+To hint at a preferred change, but not to require it.
+
+Format of `suggestWords`
+- Single suggestion (possible auto fix)
+    - `word: suggestion`
+    - `word->suggestion`
+- Multiple suggestions (not auto fixable)
+   - `word: first, second, third`
+   - `word->first, second, third`
+
+</dd>
+
+<dt>Type</dt>
+<dd>
+
+`string``[]`
+
+</dd>
 </dl>
 
 ---
@@ -2983,23 +3513,27 @@ format: md
 #### `type` {#dictionarydefinitioninlinewords-type}
 
 <dl>
-    
-    <dt>Description</dt>
-    <dd>
-        Type of file:
-        - S - single word per line,
-        - W - each line can contain one or more words separated by space,
-        - C - each line is treated like code (Camel Case is allowed).
-        
-        Default is S.
-        
-        C is the slowest to load due to the need to split each line based upon code splitting rules.
-    </dd>
-    
-    <dt>Type</dt>
-    <dd>
-        [`DictionaryFileTypes`](#dictionaryfiletypes)
-    </dd>
+
+<dt>Description</dt>
+<dd>
+
+Type of file:
+- S - single word per line,
+- W - each line can contain one or more words separated by space,
+- C - each line is treated like code (Camel Case is allowed).
+
+Default is S.
+
+C is the slowest to load due to the need to split each line based upon code splitting rules.
+
+</dd>
+
+<dt>Type</dt>
+<dd>
+
+[`DictionaryFileTypes`](#dictionaryfiletypes)
+
+</dd>
 </dl>
 
 ---
@@ -3007,16 +3541,20 @@ format: md
 #### `useCompounds` {#dictionarydefinitioninlinewords-usecompounds}
 
 <dl>
-    
-    <dt>Description</dt>
-    <dd>
-        Use Compounds.
-    </dd>
-    
-    <dt>Type</dt>
-    <dd>
-        `boolean`
-    </dd>
+
+<dt>Description</dt>
+<dd>
+
+Use Compounds.
+
+</dd>
+
+<dt>Type</dt>
+<dd>
+
+`boolean`
+
+</dd>
 </dl>
 
 ---
@@ -3024,16 +3562,20 @@ format: md
 #### `words` {#dictionarydefinitioninlinewords-words}
 
 <dl>
-    
-    <dt>Description</dt>
-    <dd>
-        List of words to be considered correct.
-    </dd>
-    
-    <dt>Type</dt>
-    <dd>
-        `string``[]`
-    </dd>
+
+<dt>Description</dt>
+<dd>
+
+List of words to be considered correct.
+
+</dd>
+
+<dt>Type</dt>
+<dd>
+
+`string``[]`
+
+</dd>
 </dl>
 
 ## DictionaryDefinitionPreferred
@@ -3055,16 +3597,20 @@ format: md
 #### `description` {#dictionarydefinitionpreferred-description}
 
 <dl>
-    
-    <dt>Description</dt>
-    <dd>
-        Optional description.
-    </dd>
-    
-    <dt>Type</dt>
-    <dd>
-        `string`
-    </dd>
+
+<dt>Description</dt>
+<dd>
+
+Optional description.
+
+</dd>
+
+<dt>Type</dt>
+<dd>
+
+`string`
+
+</dd>
 </dl>
 
 ---
@@ -3072,23 +3618,27 @@ format: md
 #### `name` {#dictionarydefinitionpreferred-name}
 
 <dl>
-    
-    <dt>Description</dt>
-    <dd>
-        This is the name of a dictionary.
-        
-        Name Format:
-        - Must contain at least 1 number or letter.
-        - Spaces are allowed.
-        - Leading and trailing space will be removed.
-        - Names ARE case-sensitive.
-        - Must not contain `*`, `!`, `;`, `,`, `{`, `}`, `[`, `]`, `~`.
-    </dd>
-    
-    <dt>Type</dt>
-    <dd>
-        [`DictionaryId`](#dictionaryid)
-    </dd>
+
+<dt>Description</dt>
+<dd>
+
+This is the name of a dictionary.
+
+Name Format:
+- Must contain at least 1 number or letter.
+- Spaces are allowed.
+- Leading and trailing space will be removed.
+- Names ARE case-sensitive.
+- Must not contain `*`, `!`, `;`, `,`, `{`, `}`, `[`, `]`, `~`.
+
+</dd>
+
+<dt>Type</dt>
+<dd>
+
+[`DictionaryId`](#dictionaryid)
+
+</dd>
 </dl>
 
 ---
@@ -3096,22 +3646,26 @@ format: md
 #### `noSuggest` {#dictionarydefinitionpreferred-nosuggest}
 
 <dl>
-    
-    <dt>Description</dt>
-    <dd>
-        Indicate that suggestions should not come from this dictionary.
-        Words in this dictionary are considered correct, but will not be
-        used when making spell correction suggestions.
-        
-        Note: if a word is suggested by another dictionary, but found in
-        this dictionary, it will be removed from the set of
-        possible suggestions.
-    </dd>
-    
-    <dt>Type</dt>
-    <dd>
-        `boolean`
-    </dd>
+
+<dt>Description</dt>
+<dd>
+
+Indicate that suggestions should not come from this dictionary.
+Words in this dictionary are considered correct, but will not be
+used when making spell correction suggestions.
+
+Note: if a word is suggested by another dictionary, but found in
+this dictionary, it will be removed from the set of
+possible suggestions.
+
+</dd>
+
+<dt>Type</dt>
+<dd>
+
+`boolean`
+
+</dd>
 </dl>
 
 ---
@@ -3119,16 +3673,20 @@ format: md
 #### `path` {#dictionarydefinitionpreferred-path}
 
 <dl>
-    
-    <dt>Description</dt>
-    <dd>
-        Path to the file.
-    </dd>
-    
-    <dt>Type</dt>
-    <dd>
-        [`DictionaryPath`](#dictionarypath)
-    </dd>
+
+<dt>Description</dt>
+<dd>
+
+Path to the file.
+
+</dd>
+
+<dt>Type</dt>
+<dd>
+
+[`DictionaryPath`](#dictionarypath)
+
+</dd>
 </dl>
 
 ---
@@ -3136,16 +3694,20 @@ format: md
 #### `repMap` {#dictionarydefinitionpreferred-repmap}
 
 <dl>
-    
-    <dt>Description</dt>
-    <dd>
-        Replacement pairs.
-    </dd>
-    
-    <dt>Type</dt>
-    <dd>
-        [`ReplaceMap`](#replacemap)
-    </dd>
+
+<dt>Description</dt>
+<dd>
+
+Replacement pairs.
+
+</dd>
+
+<dt>Type</dt>
+<dd>
+
+[`ReplaceMap`](#replacemap)
+
+</dd>
 </dl>
 
 ---
@@ -3153,23 +3715,27 @@ format: md
 #### `type` {#dictionarydefinitionpreferred-type}
 
 <dl>
-    
-    <dt>Description</dt>
-    <dd>
-        Type of file:
-        - S - single word per line,
-        - W - each line can contain one or more words separated by space,
-        - C - each line is treated like code (Camel Case is allowed).
-        
-        Default is S.
-        
-        C is the slowest to load due to the need to split each line based upon code splitting rules.
-    </dd>
-    
-    <dt>Type</dt>
-    <dd>
-        [`DictionaryFileTypes`](#dictionaryfiletypes)
-    </dd>
+
+<dt>Description</dt>
+<dd>
+
+Type of file:
+- S - single word per line,
+- W - each line can contain one or more words separated by space,
+- C - each line is treated like code (Camel Case is allowed).
+
+Default is S.
+
+C is the slowest to load due to the need to split each line based upon code splitting rules.
+
+</dd>
+
+<dt>Type</dt>
+<dd>
+
+[`DictionaryFileTypes`](#dictionaryfiletypes)
+
+</dd>
 </dl>
 
 ---
@@ -3177,16 +3743,20 @@ format: md
 #### `useCompounds` {#dictionarydefinitionpreferred-usecompounds}
 
 <dl>
-    
-    <dt>Description</dt>
-    <dd>
-        Use Compounds.
-    </dd>
-    
-    <dt>Type</dt>
-    <dd>
-        `boolean`
-    </dd>
+
+<dt>Description</dt>
+<dd>
+
+Use Compounds.
+
+</dd>
+
+<dt>Type</dt>
+<dd>
+
+`boolean`
+
+</dd>
 </dl>
 
 ---
@@ -3194,11 +3764,13 @@ format: md
 ## DictionaryFileTypes {#dictionaryfiletypes}
 
 <dl>
-    
-    <dt>Type</dt>
-    <dd>
-        `string`
-    </dd>
+
+<dt>Type</dt>
+<dd>
+
+`string`
+
+</dd>
 </dl>
 
 ---
@@ -3206,23 +3778,27 @@ format: md
 ## DictionaryId {#dictionaryid}
 
 <dl>
-    
-    <dt>Description</dt>
-    <dd>
-        This is the name of a dictionary.
-        
-        Name Format:
-        - Must contain at least 1 number or letter.
-        - Spaces are allowed.
-        - Leading and trailing space will be removed.
-        - Names ARE case-sensitive.
-        - Must not contain `*`, `!`, `;`, `,`, `{`, `}`, `[`, `]`, `~`.
-    </dd>
-    
-    <dt>Type</dt>
-    <dd>
-        `string`
-    </dd>
+
+<dt>Description</dt>
+<dd>
+
+This is the name of a dictionary.
+
+Name Format:
+- Must contain at least 1 number or letter.
+- Spaces are allowed.
+- Leading and trailing space will be removed.
+- Names ARE case-sensitive.
+- Must not contain `*`, `!`, `;`, `,`, `{`, `}`, `[`, `]`, `~`.
+
+</dd>
+
+<dt>Type</dt>
+<dd>
+
+`string`
+
+</dd>
 </dl>
 
 ## DictionaryInformation
@@ -3245,18 +3821,22 @@ format: md
 #### `accents` {#dictionaryinformation-accents}
 
 <dl>
-    
-    <dt>Description</dt>
-    <dd>
-        The accent characters.
-        
-        Default: `"\u0300-\u0341"`
-    </dd>
-    
-    <dt>Type</dt>
-    <dd>
-        [`CharacterSet`](#characterset)<br />[`CharacterSetCosts`](#charactersetcosts)`[]`
-    </dd>
+
+<dt>Description</dt>
+<dd>
+
+The accent characters.
+
+Default: `"\u0300-\u0341"`
+
+</dd>
+
+<dt>Type</dt>
+<dd>
+
+[`CharacterSet`](#characterset)<br />[`CharacterSetCosts`](#charactersetcosts)`[]`
+
+</dd>
 </dl>
 
 ---
@@ -3264,17 +3844,21 @@ format: md
 #### `adjustments` {#dictionaryinformation-adjustments}
 
 <dl>
-    
-    <dt>Description</dt>
-    <dd>
-        A collection of patterns to test against the suggested words.
-        If the word matches the pattern, then the penalty is applied.
-    </dd>
-    
-    <dt>Type</dt>
-    <dd>
-        [`PatternAdjustment`](#patternadjustment)`[]`
-    </dd>
+
+<dt>Description</dt>
+<dd>
+
+A collection of patterns to test against the suggested words.
+If the word matches the pattern, then the penalty is applied.
+
+</dd>
+
+<dt>Type</dt>
+<dd>
+
+[`PatternAdjustment`](#patternadjustment)`[]`
+
+</dd>
 </dl>
 
 ---
@@ -3282,16 +3866,20 @@ format: md
 #### `alphabet` {#dictionaryinformation-alphabet}
 
 <dl>
-    
-    <dt>Description</dt>
-    <dd>
-        The alphabet to use.
-    </dd>
-    
-    <dt>Type</dt>
-    <dd>
-        [`CharacterSet`](#characterset)<br />[`CharacterSetCosts`](#charactersetcosts)`[]`
-    </dd>
+
+<dt>Description</dt>
+<dd>
+
+The alphabet to use.
+
+</dd>
+
+<dt>Type</dt>
+<dd>
+
+[`CharacterSet`](#characterset)<br />[`CharacterSetCosts`](#charactersetcosts)`[]`
+
+</dd>
 </dl>
 
 ---
@@ -3299,16 +3887,20 @@ format: md
 #### `costs` {#dictionaryinformation-costs}
 
 <dl>
-    
-    <dt>Description</dt>
-    <dd>
-        Define edit costs.
-    </dd>
-    
-    <dt>Type</dt>
-    <dd>
-        [`EditCosts`](#editcosts)
-    </dd>
+
+<dt>Description</dt>
+<dd>
+
+Define edit costs.
+
+</dd>
+
+<dt>Type</dt>
+<dd>
+
+[`EditCosts`](#editcosts)
+
+</dd>
 </dl>
 
 ---
@@ -3316,16 +3908,20 @@ format: md
 #### `hunspellInformation` {#dictionaryinformation-hunspellinformation}
 
 <dl>
-    
-    <dt>Description</dt>
-    <dd>
-        Used by dictionary authors
-    </dd>
-    
-    <dt>Type</dt>
-    <dd>
-        [`HunspellInformation`](#hunspellinformation)
-    </dd>
+
+<dt>Description</dt>
+<dd>
+
+Used by dictionary authors
+
+</dd>
+
+<dt>Type</dt>
+<dd>
+
+[`HunspellInformation`](#hunspellinformation)
+
+</dd>
 </dl>
 
 ---
@@ -3333,21 +3929,25 @@ format: md
 #### `ignore` {#dictionaryinformation-ignore}
 
 <dl>
-    
-    <dt>Description</dt>
-    <dd>
-        An optional set of characters that can possibly be removed from a word before
-        checking it.
-        
-        This is useful in languages like Arabic where Harakat accents are optional.
-        
-        Note: All matching characters are removed or none. Partial removal is not supported.
-    </dd>
-    
-    <dt>Type</dt>
-    <dd>
-        [`CharacterSet`](#characterset)
-    </dd>
+
+<dt>Description</dt>
+<dd>
+
+An optional set of characters that can possibly be removed from a word before
+checking it.
+
+This is useful in languages like Arabic where Harakat accents are optional.
+
+Note: All matching characters are removed or none. Partial removal is not supported.
+
+</dd>
+
+<dt>Type</dt>
+<dd>
+
+[`CharacterSet`](#characterset)
+
+</dd>
 </dl>
 
 ---
@@ -3355,17 +3955,21 @@ format: md
 #### `locale` {#dictionaryinformation-locale}
 
 <dl>
-    
-    <dt>Description</dt>
-    <dd>
-        The locale of the dictionary.
-        Example: `nl,nl-be`
-    </dd>
-    
-    <dt>Type</dt>
-    <dd>
-        `string`
-    </dd>
+
+<dt>Description</dt>
+<dd>
+
+The locale of the dictionary.
+Example: `nl,nl-be`
+
+</dd>
+
+<dt>Type</dt>
+<dd>
+
+`string`
+
+</dd>
 </dl>
 
 ---
@@ -3373,17 +3977,21 @@ format: md
 #### `suggestionEditCosts` {#dictionaryinformation-suggestioneditcosts}
 
 <dl>
-    
-    <dt>Description</dt>
-    <dd>
-        Used in making suggestions. The lower the value, the more likely the suggestion
-        will be near the top of the suggestion list.
-    </dd>
-    
-    <dt>Type</dt>
-    <dd>
-        [`SuggestionCostsDefs`](#suggestioncostsdefs)
-    </dd>
+
+<dt>Description</dt>
+<dd>
+
+Used in making suggestions. The lower the value, the more likely the suggestion
+will be near the top of the suggestion list.
+
+</dd>
+
+<dt>Type</dt>
+<dd>
+
+[`SuggestionCostsDefs`](#suggestioncostsdefs)
+
+</dd>
 </dl>
 
 ---
@@ -3391,25 +3999,29 @@ format: md
 ## DictionaryNegRef {#dictionarynegref}
 
 <dl>
-    
-    <dt>Description</dt>
-    <dd>
-        This a negative reference to a named dictionary.
-        
-        It is used to exclude or include a dictionary by name.
-        
-        The reference starts with 1 or more `!`.
-        - `!<dictionary_name>` - Used to exclude the dictionary matching `<dictionary_name>`.
-        - `!!<dictionary_name>` - Used to re-include a dictionary matching `<dictionary_name>`.
-           Overrides `!<dictionary_name>`.
-        - `!!!<dictionary_name>` - Used to exclude a dictionary matching `<dictionary_name>`.
-           Overrides `!!<dictionary_name>`.
-    </dd>
-    
-    <dt>Type</dt>
-    <dd>
-        `string`
-    </dd>
+
+<dt>Description</dt>
+<dd>
+
+This a negative reference to a named dictionary.
+
+It is used to exclude or include a dictionary by name.
+
+The reference starts with 1 or more `!`.
+- `!<dictionary_name>` - Used to exclude the dictionary matching `<dictionary_name>`.
+- `!!<dictionary_name>` - Used to re-include a dictionary matching `<dictionary_name>`.
+   Overrides `!<dictionary_name>`.
+- `!!!<dictionary_name>` - Used to exclude a dictionary matching `<dictionary_name>`.
+   Overrides `!!<dictionary_name>`.
+
+</dd>
+
+<dt>Type</dt>
+<dd>
+
+`string`
+
+</dd>
 </dl>
 
 ---
@@ -3417,17 +4029,21 @@ format: md
 ## DictionaryPath {#dictionarypath}
 
 <dl>
-    
-    <dt>Description</dt>
-    <dd>
-        A File System Path to a dictionary file.
-        Pattern: `^.*\.(?:txt|trie|dic)(?:\.gz)?$`
-    </dd>
-    
-    <dt>Type</dt>
-    <dd>
-        `string`
-    </dd>
+
+<dt>Description</dt>
+<dd>
+
+A File System Path to a dictionary file.
+Pattern: `^.*\.(?:txt|trie|dic)(?:\.gz)?$`
+
+</dd>
+
+<dt>Type</dt>
+<dd>
+
+`string`
+
+</dd>
 </dl>
 
 ---
@@ -3435,17 +4051,21 @@ format: md
 ## DictionaryRef {#dictionaryref}
 
 <dl>
-    
-    <dt>Description</dt>
-    <dd>
-        This a reference to a named dictionary.
-        It is expected to match the name of a dictionary.
-    </dd>
-    
-    <dt>Type</dt>
-    <dd>
-        [`DictionaryId`](#dictionaryid)
-    </dd>
+
+<dt>Description</dt>
+<dd>
+
+This a reference to a named dictionary.
+It is expected to match the name of a dictionary.
+
+</dd>
+
+<dt>Type</dt>
+<dd>
+
+[`DictionaryId`](#dictionaryid)
+
+</dd>
 </dl>
 
 ---
@@ -3453,19 +4073,23 @@ format: md
 ## DictionaryReference {#dictionaryreference}
 
 <dl>
-    
-    <dt>Description</dt>
-    <dd>
-        Reference to a dictionary by name.
-        One of:
-        -  [DictionaryRef](#dictionaryref) 
-        -  [DictionaryNegRef](#dictionarynegref)
-    </dd>
-    
-    <dt>Type</dt>
-    <dd>
-        [`DictionaryRef`](#dictionaryref)<br />[`DictionaryNegRef`](#dictionarynegref)
-    </dd>
+
+<dt>Description</dt>
+<dd>
+
+Reference to a dictionary by name.
+One of:
+-  [DictionaryRef](#dictionaryref) 
+-  [DictionaryNegRef](#dictionarynegref)
+
+</dd>
+
+<dt>Type</dt>
+<dd>
+
+[`DictionaryRef`](#dictionaryref)<br />[`DictionaryNegRef`](#dictionarynegref)
+
+</dd>
 </dl>
 
 ## EditCosts
@@ -3485,17 +4109,21 @@ format: md
 #### `accentCosts` {#editcosts-accentcosts}
 
 <dl>
-    
-    <dt>Description</dt>
-    <dd>
-        The cost to add / remove an accent
-        This should be very cheap, it helps with fixing accent issues.
-    </dd>
-    
-    <dt>Type</dt>
-    <dd>
-        `number`
-    </dd>
+
+<dt>Description</dt>
+<dd>
+
+The cost to add / remove an accent
+This should be very cheap, it helps with fixing accent issues.
+
+</dd>
+
+<dt>Type</dt>
+<dd>
+
+`number`
+
+</dd>
 </dl>
 
 ---
@@ -3503,16 +4131,20 @@ format: md
 #### `baseCost` {#editcosts-basecost}
 
 <dl>
-    
-    <dt>Description</dt>
-    <dd>
-        This is the base cost for making an edit.
-    </dd>
-    
-    <dt>Type</dt>
-    <dd>
-        `number`
-    </dd>
+
+<dt>Description</dt>
+<dd>
+
+This is the base cost for making an edit.
+
+</dd>
+
+<dt>Type</dt>
+<dd>
+
+`number`
+
+</dd>
 </dl>
 
 ---
@@ -3520,17 +4152,21 @@ format: md
 #### `capsCosts` {#editcosts-capscosts}
 
 <dl>
-    
-    <dt>Description</dt>
-    <dd>
-        The cost to change capitalization.
-        This should be very cheap, it helps with fixing capitalization issues.
-    </dd>
-    
-    <dt>Type</dt>
-    <dd>
-        `number`
-    </dd>
+
+<dt>Description</dt>
+<dd>
+
+The cost to change capitalization.
+This should be very cheap, it helps with fixing capitalization issues.
+
+</dd>
+
+<dt>Type</dt>
+<dd>
+
+`number`
+
+</dd>
 </dl>
 
 ---
@@ -3538,17 +4174,21 @@ format: md
 #### `firstLetterPenalty` {#editcosts-firstletterpenalty}
 
 <dl>
-    
-    <dt>Description</dt>
-    <dd>
-        The extra cost incurred for changing the first letter of a word.
-        This value should be less than `100 - baseCost`.
-    </dd>
-    
-    <dt>Type</dt>
-    <dd>
-        `number`
-    </dd>
+
+<dt>Description</dt>
+<dd>
+
+The extra cost incurred for changing the first letter of a word.
+This value should be less than `100 - baseCost`.
+
+</dd>
+
+<dt>Type</dt>
+<dd>
+
+`number`
+
+</dd>
 </dl>
 
 ---
@@ -3556,16 +4196,20 @@ format: md
 #### `nonAlphabetCosts` {#editcosts-nonalphabetcosts}
 
 <dl>
-    
-    <dt>Description</dt>
-    <dd>
-        This is the cost for characters not in the alphabet.
-    </dd>
-    
-    <dt>Type</dt>
-    <dd>
-        `number`
-    </dd>
+
+<dt>Description</dt>
+<dd>
+
+This is the cost for characters not in the alphabet.
+
+</dd>
+
+<dt>Type</dt>
+<dd>
+
+`number`
+
+</dd>
 </dl>
 
 ---
@@ -3573,20 +4217,24 @@ format: md
 ## FSPathResolvable {#fspathresolvable}
 
 <dl>
-    
-    <dt>Description</dt>
-    <dd>
-        A File System Path.
-        
-        Special Properties:
-        - `${cwd}` prefix - will be replaced with the current working directory.
-        - Relative paths are relative to the configuration file.
-    </dd>
-    
-    <dt>Type</dt>
-    <dd>
-        [`FsPath`](#fspath)
-    </dd>
+
+<dt>Description</dt>
+<dd>
+
+A File System Path.
+
+Special Properties:
+- `${cwd}` prefix - will be replaced with the current working directory.
+- Relative paths are relative to the configuration file.
+
+</dd>
+
+<dt>Type</dt>
+<dd>
+
+[`FsPath`](#fspath)
+
+</dd>
 </dl>
 
 ---
@@ -3594,11 +4242,13 @@ format: md
 ## FeatureEnableOnly {#featureenableonly}
 
 <dl>
-    
-    <dt>Type</dt>
-    <dd>
-        `boolean`
-    </dd>
+
+<dt>Type</dt>
+<dd>
+
+`boolean`
+
+</dd>
 </dl>
 
 ## Features
@@ -3614,16 +4264,20 @@ format: md
 #### `weighted-suggestions` {#features-weighted-suggestions}
 
 <dl>
-    
-    <dt>Description</dt>
-    <dd>
-        Enable/disable using weighted suggestions.
-    </dd>
-    
-    <dt>Type</dt>
-    <dd>
-        [`FeatureEnableOnly`](#featureenableonly)
-    </dd>
+
+<dt>Description</dt>
+<dd>
+
+Enable/disable using weighted suggestions.
+
+</dd>
+
+<dt>Type</dt>
+<dd>
+
+[`FeatureEnableOnly`](#featureenableonly)
+
+</dd>
 </dl>
 
 ---
@@ -3631,16 +4285,20 @@ format: md
 ## FsDictionaryPath {#fsdictionarypath}
 
 <dl>
-    
-    <dt>Description</dt>
-    <dd>
-        A File System Path. Relative paths are relative to the configuration file.
-    </dd>
-    
-    <dt>Type</dt>
-    <dd>
-        `string`
-    </dd>
+
+<dt>Description</dt>
+<dd>
+
+A File System Path. Relative paths are relative to the configuration file.
+
+</dd>
+
+<dt>Type</dt>
+<dd>
+
+`string`
+
+</dd>
 </dl>
 
 ---
@@ -3648,16 +4306,20 @@ format: md
 ## FsPath {#fspath}
 
 <dl>
-    
-    <dt>Description</dt>
-    <dd>
-        A File System Path. Relative paths are relative to the configuration file.
-    </dd>
-    
-    <dt>Type</dt>
-    <dd>
-        `string`
-    </dd>
+
+<dt>Description</dt>
+<dd>
+
+A File System Path. Relative paths are relative to the configuration file.
+
+</dd>
+
+<dt>Type</dt>
+<dd>
+
+`string`
+
+</dd>
 </dl>
 
 ---
@@ -3665,16 +4327,20 @@ format: md
 ## Glob {#glob}
 
 <dl>
-    
-    <dt>Description</dt>
-    <dd>
-        These are glob expressions.
-    </dd>
-    
-    <dt>Type</dt>
-    <dd>
-        [`SimpleGlob`](#simpleglob)
-    </dd>
+
+<dt>Description</dt>
+<dd>
+
+These are glob expressions.
+
+</dd>
+
+<dt>Type</dt>
+<dd>
+
+[`SimpleGlob`](#simpleglob)
+
+</dd>
 </dl>
 
 ## HunspellInformation
@@ -3691,36 +4357,40 @@ format: md
 #### `aff` {#hunspellinformation-aff}
 
 <dl>
-    
-    <dt>Description</dt>
-    <dd>
-        Selected Hunspell AFF content.
-        The content must be UTF-8
-        
-        Sections:
-        - TRY
-        - MAP
-        - REP
-        - KEY
-        - ICONV
-        - OCONV
-        
-        Example:
-        ```hunspell
-        # Comment
-        TRY aeistlunkodmrvpgjhäõbüoöfcwzxðqþ`
-        MAP aàâäAÀÂÄ
-        MAP eéèêëEÉÈÊË
-        MAP iîïyIÎÏY
-        MAP oôöOÔÖ
-        MAP (IJ)(Ĳ)
-        ```
-    </dd>
-    
-    <dt>Type</dt>
-    <dd>
-        `string`
-    </dd>
+
+<dt>Description</dt>
+<dd>
+
+Selected Hunspell AFF content.
+The content must be UTF-8
+
+Sections:
+- TRY
+- MAP
+- REP
+- KEY
+- ICONV
+- OCONV
+
+Example:
+```hunspell
+# Comment
+TRY aeistlunkodmrvpgjhäõbüoöfcwzxðqþ`
+MAP aàâäAÀÂÄ
+MAP eéèêëEÉÈÊË
+MAP iîïyIÎÏY
+MAP oôöOÔÖ
+MAP (IJ)(Ĳ)
+```
+
+</dd>
+
+<dt>Type</dt>
+<dd>
+
+`string`
+
+</dd>
 </dl>
 
 ---
@@ -3728,16 +4398,20 @@ format: md
 #### `costs` {#hunspellinformation-costs}
 
 <dl>
-    
-    <dt>Description</dt>
-    <dd>
-        The costs to apply when using the hunspell settings
-    </dd>
-    
-    <dt>Type</dt>
-    <dd>
-        `object`
-    </dd>
+
+<dt>Description</dt>
+<dd>
+
+The costs to apply when using the hunspell settings
+
+</dd>
+
+<dt>Type</dt>
+<dd>
+
+`object`
+
+</dd>
 </dl>
 
 ---
@@ -3745,11 +4419,13 @@ format: md
 ## LanguageId {#languageid}
 
 <dl>
-    
-    <dt>Type</dt>
-    <dd>
-        [`LanguageIdSingle`](#languageidsingle)<br />[`LanguageIdMultiple`](#languageidmultiple)<br />[`LanguageIdMultipleNeg`](#languageidmultipleneg)
-    </dd>
+
+<dt>Type</dt>
+<dd>
+
+[`LanguageIdSingle`](#languageidsingle)<br />[`LanguageIdMultiple`](#languageidmultiple)<br />[`LanguageIdMultipleNeg`](#languageidmultipleneg)
+
+</dd>
 </dl>
 
 ---
@@ -3757,16 +4433,20 @@ format: md
 ## LanguageIdMultiple {#languageidmultiple}
 
 <dl>
-    
-    <dt>Description</dt>
-    <dd>
-        This can be 'typescript,cpp,json,literal haskell', etc.
-    </dd>
-    
-    <dt>Type</dt>
-    <dd>
-        `string`
-    </dd>
+
+<dt>Description</dt>
+<dd>
+
+This can be 'typescript,cpp,json,literal haskell', etc.
+
+</dd>
+
+<dt>Type</dt>
+<dd>
+
+`string`
+
+</dd>
 </dl>
 
 ---
@@ -3774,16 +4454,20 @@ format: md
 ## LanguageIdMultipleNeg {#languageidmultipleneg}
 
 <dl>
-    
-    <dt>Description</dt>
-    <dd>
-        This can be 'typescript,cpp,json,literal haskell', etc.
-    </dd>
-    
-    <dt>Type</dt>
-    <dd>
-        `string`
-    </dd>
+
+<dt>Description</dt>
+<dd>
+
+This can be 'typescript,cpp,json,literal haskell', etc.
+
+</dd>
+
+<dt>Type</dt>
+<dd>
+
+`string`
+
+</dd>
 </dl>
 
 ---
@@ -3791,16 +4475,20 @@ format: md
 ## LanguageIdSingle {#languageidsingle}
 
 <dl>
-    
-    <dt>Description</dt>
-    <dd>
-        This can be '*', 'typescript', 'cpp', 'json', etc.
-    </dd>
-    
-    <dt>Type</dt>
-    <dd>
-        `string`
-    </dd>
+
+<dt>Description</dt>
+<dd>
+
+This can be '*', 'typescript', 'cpp', 'json', etc.
+
+</dd>
+
+<dt>Type</dt>
+<dd>
+
+`string`
+
+</dd>
 </dl>
 
 ## LanguageSetting
@@ -3834,16 +4522,20 @@ format: md
 #### `allowCompoundWords` {#languagesetting-allowcompoundwords}
 
 <dl>
-    
-    <dt>Description</dt>
-    <dd>
-        True to enable compound word checking. See [Case Sensitivity](https://cspell.org/docs/case-sensitive/) for more details.
-    </dd>
-    
-    <dt>Type</dt>
-    <dd>
-        `boolean`
-    </dd>
+
+<dt>Description</dt>
+<dd>
+
+True to enable compound word checking. See [Case Sensitivity](https://cspell.org/docs/case-sensitive/) for more details.
+
+</dd>
+
+<dt>Type</dt>
+<dd>
+
+`boolean`
+
+</dd>
 </dl>
 
 ---
@@ -3851,20 +4543,24 @@ format: md
 #### `caseSensitive` {#languagesetting-casesensitive}
 
 <dl>
-    
-    <dt>Description</dt>
-    <dd>
-        Determines if words must match case and accent rules.
-        
-        - `false` - Case is ignored and accents can be missing on the entire word.
-          Incorrect accents or partially missing accents will be marked as incorrect.
-        - `true` - Case and accents are enforced.
-    </dd>
-    
-    <dt>Type</dt>
-    <dd>
-        `boolean`
-    </dd>
+
+<dt>Description</dt>
+<dd>
+
+Determines if words must match case and accent rules.
+
+- `false` - Case is ignored and accents can be missing on the entire word.
+  Incorrect accents or partially missing accents will be marked as incorrect.
+- `true` - Case and accents are enforced.
+
+</dd>
+
+<dt>Type</dt>
+<dd>
+
+`boolean`
+
+</dd>
 </dl>
 
 ---
@@ -3872,16 +4568,20 @@ format: md
 #### `description` {#languagesetting-description}
 
 <dl>
-    
-    <dt>Description</dt>
-    <dd>
-        Optional description of configuration.
-    </dd>
-    
-    <dt>Type</dt>
-    <dd>
-        `string`
-    </dd>
+
+<dt>Description</dt>
+<dd>
+
+Optional description of configuration.
+
+</dd>
+
+<dt>Type</dt>
+<dd>
+
+`string`
+
+</dd>
 </dl>
 
 ---
@@ -3889,23 +4589,27 @@ format: md
 #### `dictionaries` {#languagesetting-dictionaries}
 
 <dl>
-    
-    <dt>Description</dt>
-    <dd>
-        Optional list of dictionaries to use. Each entry should match the name of the dictionary.
-        
-        To remove a dictionary from the list, add `!` before the name.
-        
-        For example, `!typescript` will turn off the dictionary with the name `typescript`.
-        
-        See the [Dictionaries](https://cspell.org/docs/dictionaries/)
-        and [Custom Dictionaries](https://cspell.org/docs/dictionaries-custom/) for more details.
-    </dd>
-    
-    <dt>Type</dt>
-    <dd>
-        [`DictionaryReference`](#dictionaryreference)`[]`
-    </dd>
+
+<dt>Description</dt>
+<dd>
+
+Optional list of dictionaries to use. Each entry should match the name of the dictionary.
+
+To remove a dictionary from the list, add `!` before the name.
+
+For example, `!typescript` will turn off the dictionary with the name `typescript`.
+
+See the [Dictionaries](https://cspell.org/docs/dictionaries/)
+and [Custom Dictionaries](https://cspell.org/docs/dictionaries-custom/) for more details.
+
+</dd>
+
+<dt>Type</dt>
+<dd>
+
+[`DictionaryReference`](#dictionaryreference)`[]`
+
+</dd>
 </dl>
 
 ---
@@ -3913,25 +4617,29 @@ format: md
 #### `dictionaryDefinitions` {#languagesetting-dictionarydefinitions}
 
 <dl>
-    
-    <dt>Description</dt>
-    <dd>
-        Define additional available dictionaries.
-        
-        For example, you can use the following to add a custom dictionary:
-        
-        ```json
-        "dictionaryDefinitions": [
-          { "name": "custom-words", "path": "./custom-words.txt"}
-        ],
-        "dictionaries": ["custom-words"]
-        ```
-    </dd>
-    
-    <dt>Type</dt>
-    <dd>
-        [`DictionaryDefinition`](#dictionarydefinition)`[]`
-    </dd>
+
+<dt>Description</dt>
+<dd>
+
+Define additional available dictionaries.
+
+For example, you can use the following to add a custom dictionary:
+
+```json
+"dictionaryDefinitions": [
+  { "name": "custom-words", "path": "./custom-words.txt"}
+],
+"dictionaries": ["custom-words"]
+```
+
+</dd>
+
+<dt>Type</dt>
+<dd>
+
+[`DictionaryDefinition`](#dictionarydefinition)`[]`
+
+</dd>
 </dl>
 
 ---
@@ -3939,16 +4647,20 @@ format: md
 #### `enabled` {#languagesetting-enabled}
 
 <dl>
-    
-    <dt>Description</dt>
-    <dd>
-        Is the spell checker enabled.
-    </dd>
-    
-    <dt>Type</dt>
-    <dd>
-        `boolean`
-    </dd>
+
+<dt>Description</dt>
+<dd>
+
+Is the spell checker enabled.
+
+</dd>
+
+<dt>Type</dt>
+<dd>
+
+`boolean`
+
+</dd>
 </dl>
 
 ---
@@ -3956,30 +4668,34 @@ format: md
 #### `flagWords` {#languagesetting-flagwords}
 
 <dl>
-    
-    <dt>Description</dt>
-    <dd>
-        List of words to always be considered incorrect. Words found in `flagWords` override `words`.
-        
-        Format of `flagWords`
-        - single word entry - `word`
-        - with suggestions - `word:suggestion` or `word->suggestion, suggestions`
-        
-        Example:
-        ```ts
-        "flagWords": [
-          "color: colour",
-          "incase: in case, encase",
-          "canot->cannot",
-          "cancelled->canceled"
-        ]
-        ```
-    </dd>
-    
-    <dt>Type</dt>
-    <dd>
-        `string``[]`
-    </dd>
+
+<dt>Description</dt>
+<dd>
+
+List of words to always be considered incorrect. Words found in `flagWords` override `words`.
+
+Format of `flagWords`
+- single word entry - `word`
+- with suggestions - `word:suggestion` or `word->suggestion, suggestions`
+
+Example:
+```ts
+"flagWords": [
+  "color: colour",
+  "incase: in case, encase",
+  "canot->cannot",
+  "cancelled->canceled"
+]
+```
+
+</dd>
+
+<dt>Type</dt>
+<dd>
+
+`string``[]`
+
+</dd>
 </dl>
 
 ---
@@ -3987,16 +4703,20 @@ format: md
 #### `id` {#languagesetting-id}
 
 <dl>
-    
-    <dt>Description</dt>
-    <dd>
-        Optional identifier.
-    </dd>
-    
-    <dt>Type</dt>
-    <dd>
-        `string`
-    </dd>
+
+<dt>Description</dt>
+<dd>
+
+Optional identifier.
+
+</dd>
+
+<dt>Type</dt>
+<dd>
+
+`string`
+
+</dd>
 </dl>
 
 ---
@@ -4004,40 +4724,44 @@ format: md
 #### `ignoreRegExpList` {#languagesetting-ignoreregexplist}
 
 <dl>
-    
-    <dt>Description</dt>
-    <dd>
-        List of regular expression patterns or pattern names to exclude from spell checking.
-        
-        Example: `["href"]` - to exclude html href pattern.
-        
-        Regular expressions use JavaScript regular expression syntax.
-        
-        Example: to ignore ALL-CAPS words
-        
-        JSON
-        ```json
-        "ignoreRegExpList": ["/\\b[A-Z]+\\b/g"]
-        ```
-        
-        YAML
-        ```yaml
-        ignoreRegExpList:
-          - >-
-           /\b[A-Z]+\b/g
-        ```
-        
-        By default, several patterns are excluded. See
-        [Configuration](https://cspell.org/configuration/patterns) for more details.
-        
-        While you can create your own patterns, you can also leverage several patterns that are
-        [built-in to CSpell](https://cspell.org/types/cspell-types/types/PredefinedPatterns.html).
-    </dd>
-    
-    <dt>Type</dt>
-    <dd>
-        [`RegExpPatternList`](#regexppatternlist)
-    </dd>
+
+<dt>Description</dt>
+<dd>
+
+List of regular expression patterns or pattern names to exclude from spell checking.
+
+Example: `["href"]` - to exclude html href pattern.
+
+Regular expressions use JavaScript regular expression syntax.
+
+Example: to ignore ALL-CAPS words
+
+JSON
+```json
+"ignoreRegExpList": ["/\\b[A-Z]+\\b/g"]
+```
+
+YAML
+```yaml
+ignoreRegExpList:
+  - >-
+   /\b[A-Z]+\b/g
+```
+
+By default, several patterns are excluded. See
+[Configuration](https://cspell.org/configuration/patterns) for more details.
+
+While you can create your own patterns, you can also leverage several patterns that are
+[built-in to CSpell](https://cspell.org/types/cspell-types/types/PredefinedPatterns.html).
+
+</dd>
+
+<dt>Type</dt>
+<dd>
+
+[`RegExpPatternList`](#regexppatternlist)
+
+</dd>
 </dl>
 
 ---
@@ -4045,17 +4769,21 @@ format: md
 #### `ignoreWords` {#languagesetting-ignorewords}
 
 <dl>
-    
-    <dt>Description</dt>
-    <dd>
-        List of words to be ignored. An ignored word will not show up as an error, even if it is
-        also in the `flagWords`.
-    </dd>
-    
-    <dt>Type</dt>
-    <dd>
-        `string``[]`
-    </dd>
+
+<dt>Description</dt>
+<dd>
+
+List of words to be ignored. An ignored word will not show up as an error, even if it is
+also in the `flagWords`.
+
+</dd>
+
+<dt>Type</dt>
+<dd>
+
+`string``[]`
+
+</dd>
 </dl>
 
 ---
@@ -4063,21 +4791,25 @@ format: md
 #### `includeRegExpList` {#languagesetting-includeregexplist}
 
 <dl>
-    
-    <dt>Description</dt>
-    <dd>
-        List of regular expression patterns or defined pattern names to match for spell checking.
-        
-        If this property is defined, only text matching the included patterns will be checked.
-        
-        While you can create your own patterns, you can also leverage several patterns that are
-        [built-in to CSpell](https://cspell.org/types/cspell-types/types/PredefinedPatterns.html).
-    </dd>
-    
-    <dt>Type</dt>
-    <dd>
-        [`RegExpPatternList`](#regexppatternlist)
-    </dd>
+
+<dt>Description</dt>
+<dd>
+
+List of regular expression patterns or defined pattern names to match for spell checking.
+
+If this property is defined, only text matching the included patterns will be checked.
+
+While you can create your own patterns, you can also leverage several patterns that are
+[built-in to CSpell](https://cspell.org/types/cspell-types/types/PredefinedPatterns.html).
+
+</dd>
+
+<dt>Type</dt>
+<dd>
+
+[`RegExpPatternList`](#regexppatternlist)
+
+</dd>
 </dl>
 
 ---
@@ -4085,16 +4817,20 @@ format: md
 #### `languageId` {#languagesetting-languageid}
 
 <dl>
-    
-    <dt>Description</dt>
-    <dd>
-        The language id.  Ex: "typescript", "html", or "php".  "*" -- will match all languages.
-    </dd>
-    
-    <dt>Type</dt>
-    <dd>
-        [`MatchingFileType`](#matchingfiletype)
-    </dd>
+
+<dt>Description</dt>
+<dd>
+
+The language id.  Ex: "typescript", "html", or "php".  "*" -- will match all languages.
+
+</dd>
+
+<dt>Type</dt>
+<dd>
+
+[`MatchingFileType`](#matchingfiletype)
+
+</dd>
 </dl>
 
 ---
@@ -4102,16 +4838,20 @@ format: md
 #### `local` {#languagesetting-local}
 
 <dl>
-    
-    <dt>Description</dt>
-    <dd>
-        Deprecated - The locale filter, matches against the language. This can be a comma separated list. "*" will match all locales.
-    </dd>
-    
-    <dt>Type</dt>
-    <dd>
-        [`LocaleId`](#localeid)<br />[`LocaleId`](#localeid)`[]`
-    </dd>
+
+<dt>Description</dt>
+<dd>
+
+Deprecated - The locale filter, matches against the language. This can be a comma separated list. "*" will match all locales.
+
+</dd>
+
+<dt>Type</dt>
+<dd>
+
+[`LocaleId`](#localeid)<br />[`LocaleId`](#localeid)`[]`
+
+</dd>
 </dl>
 
 ---
@@ -4119,16 +4859,20 @@ format: md
 #### `locale` {#languagesetting-locale}
 
 <dl>
-    
-    <dt>Description</dt>
-    <dd>
-        The locale filter, matches against the language. This can be a comma separated list. "*" will match all locales.
-    </dd>
-    
-    <dt>Type</dt>
-    <dd>
-        [`LocaleId`](#localeid)<br />[`LocaleId`](#localeid)`[]`
-    </dd>
+
+<dt>Description</dt>
+<dd>
+
+The locale filter, matches against the language. This can be a comma separated list. "*" will match all locales.
+
+</dd>
+
+<dt>Type</dt>
+<dd>
+
+[`LocaleId`](#localeid)<br />[`LocaleId`](#localeid)`[]`
+
+</dd>
 </dl>
 
 ---
@@ -4136,16 +4880,20 @@ format: md
 #### `name` {#languagesetting-name}
 
 <dl>
-    
-    <dt>Description</dt>
-    <dd>
-        Optional name of configuration.
-    </dd>
-    
-    <dt>Type</dt>
-    <dd>
-        `string`
-    </dd>
+
+<dt>Description</dt>
+<dd>
+
+Optional name of configuration.
+
+</dd>
+
+<dt>Type</dt>
+<dd>
+
+`string`
+
+</dd>
 </dl>
 
 ---
@@ -4153,22 +4901,26 @@ format: md
 #### `noSuggestDictionaries` {#languagesetting-nosuggestdictionaries}
 
 <dl>
-    
-    <dt>Description</dt>
-    <dd>
-        Optional list of dictionaries that will not be used for suggestions.
-        Words in these dictionaries are considered correct, but will not be
-        used when making spell correction suggestions.
-        
-        Note: if a word is suggested by another dictionary, but found in
-        one of these dictionaries, it will be removed from the set of
-        possible suggestions.
-    </dd>
-    
-    <dt>Type</dt>
-    <dd>
-        [`DictionaryReference`](#dictionaryreference)`[]`
-    </dd>
+
+<dt>Description</dt>
+<dd>
+
+Optional list of dictionaries that will not be used for suggestions.
+Words in these dictionaries are considered correct, but will not be
+used when making spell correction suggestions.
+
+Note: if a word is suggested by another dictionary, but found in
+one of these dictionaries, it will be removed from the set of
+possible suggestions.
+
+</dd>
+
+<dt>Type</dt>
+<dd>
+
+[`DictionaryReference`](#dictionaryreference)`[]`
+
+</dd>
 </dl>
 
 ---
@@ -4176,40 +4928,44 @@ format: md
 #### `patterns` {#languagesetting-patterns}
 
 <dl>
-    
-    <dt>Description</dt>
-    <dd>
-        Defines a list of patterns that can be used with the `ignoreRegExpList` and
-        `includeRegExpList` options.
-        
-        For example:
-        
-        ```javascript
-        "ignoreRegExpList": ["comments"],
-        "patterns": [
-          {
-            "name": "comment-single-line",
-            "pattern": "/#.*/g"
-          },
-          {
-            "name": "comment-multi-line",
-            "pattern": "/(?:\\/\\*[\\s\\S]*?\\*\\/)/g"
-          },
-          // You can also combine multiple named patterns into one single named pattern
-          {
-            "name": "comments",
-            "pattern": ["comment-single-line", "comment-multi-line"]
-          }
-        ]
-        ```
-        Defines a list of patterns that can be used with the `ignoreRegExpList` and
-        `includeRegExpList` options.
-    </dd>
-    
-    <dt>Type</dt>
-    <dd>
-        [`RegExpPatternDefinition`](#regexppatterndefinition)`[]`
-    </dd>
+
+<dt>Description</dt>
+<dd>
+
+Defines a list of patterns that can be used with the `ignoreRegExpList` and
+`includeRegExpList` options.
+
+For example:
+
+```javascript
+"ignoreRegExpList": ["comments"],
+"patterns": [
+  {
+    "name": "comment-single-line",
+    "pattern": "/#.*/g"
+  },
+  {
+    "name": "comment-multi-line",
+    "pattern": "/(?:\\/\\*[\\s\\S]*?\\*\\/)/g"
+  },
+  // You can also combine multiple named patterns into one single named pattern
+  {
+    "name": "comments",
+    "pattern": ["comment-single-line", "comment-multi-line"]
+  }
+]
+```
+Defines a list of patterns that can be used with the `ignoreRegExpList` and
+`includeRegExpList` options.
+
+</dd>
+
+<dt>Type</dt>
+<dd>
+
+[`RegExpPatternDefinition`](#regexppatterndefinition)`[]`
+
+</dd>
 </dl>
 
 ---
@@ -4217,26 +4973,30 @@ format: md
 #### `suggestWords` {#languagesetting-suggestwords}
 
 <dl>
-    
-    <dt>Description</dt>
-    <dd>
-        A list of suggested replacements for words.
-        Suggested words provide a way to make preferred suggestions on word replacements.
-        To hint at a preferred change, but not to require it.
-        
-        Format of `suggestWords`
-        - Single suggestion (possible auto fix)
-            - `word: suggestion`
-            - `word->suggestion`
-        - Multiple suggestions (not auto fixable)
-           - `word: first, second, third`
-           - `word->first, second, third`
-    </dd>
-    
-    <dt>Type</dt>
-    <dd>
-        `string``[]`
-    </dd>
+
+<dt>Description</dt>
+<dd>
+
+A list of suggested replacements for words.
+Suggested words provide a way to make preferred suggestions on word replacements.
+To hint at a preferred change, but not to require it.
+
+Format of `suggestWords`
+- Single suggestion (possible auto fix)
+    - `word: suggestion`
+    - `word->suggestion`
+- Multiple suggestions (not auto fixable)
+   - `word: first, second, third`
+   - `word->first, second, third`
+
+</dd>
+
+<dt>Type</dt>
+<dd>
+
+`string``[]`
+
+</dd>
 </dl>
 
 ---
@@ -4244,16 +5004,20 @@ format: md
 #### `words` {#languagesetting-words}
 
 <dl>
-    
-    <dt>Description</dt>
-    <dd>
-        List of words to be considered correct.
-    </dd>
-    
-    <dt>Type</dt>
-    <dd>
-        `string``[]`
-    </dd>
+
+<dt>Description</dt>
+<dd>
+
+List of words to be considered correct.
+
+</dd>
+
+<dt>Type</dt>
+<dd>
+
+`string``[]`
+
+</dd>
 </dl>
 
 ---
@@ -4261,16 +5025,20 @@ format: md
 ## LocaleId {#localeid}
 
 <dl>
-    
-    <dt>Description</dt>
-    <dd>
-        This is a written language locale like: 'en', 'en-GB', 'fr', 'es', 'de', etc.
-    </dd>
-    
-    <dt>Type</dt>
-    <dd>
-        `string`
-    </dd>
+
+<dt>Description</dt>
+<dd>
+
+This is a written language locale like: 'en', 'en-GB', 'fr', 'es', 'de', etc.
+
+</dd>
+
+<dt>Type</dt>
+<dd>
+
+`string`
+
+</dd>
 </dl>
 
 ---
@@ -4278,11 +5046,13 @@ format: md
 ## MatchingFileType {#matchingfiletype}
 
 <dl>
-    
-    <dt>Type</dt>
-    <dd>
-        [`LanguageId`](#languageid)<br />[`LanguageId`](#languageid)`[]`
-    </dd>
+
+<dt>Type</dt>
+<dd>
+
+[`LanguageId`](#languageid)<br />[`LanguageId`](#languageid)`[]`
+
+</dd>
 </dl>
 
 ## OverrideSettings
@@ -4329,16 +5099,20 @@ format: md
 #### `allowCompoundWords` {#overridesettings-allowcompoundwords}
 
 <dl>
-    
-    <dt>Description</dt>
-    <dd>
-        True to enable compound word checking. See [Case Sensitivity](https://cspell.org/docs/case-sensitive/) for more details.
-    </dd>
-    
-    <dt>Type</dt>
-    <dd>
-        `boolean`
-    </dd>
+
+<dt>Description</dt>
+<dd>
+
+True to enable compound word checking. See [Case Sensitivity](https://cspell.org/docs/case-sensitive/) for more details.
+
+</dd>
+
+<dt>Type</dt>
+<dd>
+
+`boolean`
+
+</dd>
 </dl>
 
 ---
@@ -4346,20 +5120,24 @@ format: md
 #### `caseSensitive` {#overridesettings-casesensitive}
 
 <dl>
-    
-    <dt>Description</dt>
-    <dd>
-        Determines if words must match case and accent rules.
-        
-        - `false` - Case is ignored and accents can be missing on the entire word.
-          Incorrect accents or partially missing accents will be marked as incorrect.
-        - `true` - Case and accents are enforced.
-    </dd>
-    
-    <dt>Type</dt>
-    <dd>
-        `boolean`
-    </dd>
+
+<dt>Description</dt>
+<dd>
+
+Determines if words must match case and accent rules.
+
+- `false` - Case is ignored and accents can be missing on the entire word.
+  Incorrect accents or partially missing accents will be marked as incorrect.
+- `true` - Case and accents are enforced.
+
+</dd>
+
+<dt>Type</dt>
+<dd>
+
+`boolean`
+
+</dd>
 </dl>
 
 ---
@@ -4367,16 +5145,20 @@ format: md
 #### `description` {#overridesettings-description}
 
 <dl>
-    
-    <dt>Description</dt>
-    <dd>
-        Optional description of configuration.
-    </dd>
-    
-    <dt>Type</dt>
-    <dd>
-        `string`
-    </dd>
+
+<dt>Description</dt>
+<dd>
+
+Optional description of configuration.
+
+</dd>
+
+<dt>Type</dt>
+<dd>
+
+`string`
+
+</dd>
 </dl>
 
 ---
@@ -4384,23 +5166,27 @@ format: md
 #### `dictionaries` {#overridesettings-dictionaries}
 
 <dl>
-    
-    <dt>Description</dt>
-    <dd>
-        Optional list of dictionaries to use. Each entry should match the name of the dictionary.
-        
-        To remove a dictionary from the list, add `!` before the name.
-        
-        For example, `!typescript` will turn off the dictionary with the name `typescript`.
-        
-        See the [Dictionaries](https://cspell.org/docs/dictionaries/)
-        and [Custom Dictionaries](https://cspell.org/docs/dictionaries-custom/) for more details.
-    </dd>
-    
-    <dt>Type</dt>
-    <dd>
-        [`DictionaryReference`](#dictionaryreference)`[]`
-    </dd>
+
+<dt>Description</dt>
+<dd>
+
+Optional list of dictionaries to use. Each entry should match the name of the dictionary.
+
+To remove a dictionary from the list, add `!` before the name.
+
+For example, `!typescript` will turn off the dictionary with the name `typescript`.
+
+See the [Dictionaries](https://cspell.org/docs/dictionaries/)
+and [Custom Dictionaries](https://cspell.org/docs/dictionaries-custom/) for more details.
+
+</dd>
+
+<dt>Type</dt>
+<dd>
+
+[`DictionaryReference`](#dictionaryreference)`[]`
+
+</dd>
 </dl>
 
 ---
@@ -4408,25 +5194,29 @@ format: md
 #### `dictionaryDefinitions` {#overridesettings-dictionarydefinitions}
 
 <dl>
-    
-    <dt>Description</dt>
-    <dd>
-        Define additional available dictionaries.
-        
-        For example, you can use the following to add a custom dictionary:
-        
-        ```json
-        "dictionaryDefinitions": [
-          { "name": "custom-words", "path": "./custom-words.txt"}
-        ],
-        "dictionaries": ["custom-words"]
-        ```
-    </dd>
-    
-    <dt>Type</dt>
-    <dd>
-        [`DictionaryDefinition`](#dictionarydefinition)`[]`
-    </dd>
+
+<dt>Description</dt>
+<dd>
+
+Define additional available dictionaries.
+
+For example, you can use the following to add a custom dictionary:
+
+```json
+"dictionaryDefinitions": [
+  { "name": "custom-words", "path": "./custom-words.txt"}
+],
+"dictionaries": ["custom-words"]
+```
+
+</dd>
+
+<dt>Type</dt>
+<dd>
+
+[`DictionaryDefinition`](#dictionarydefinition)`[]`
+
+</dd>
 </dl>
 
 ---
@@ -4434,35 +5224,39 @@ format: md
 #### `enableFiletypes` {#overridesettings-enablefiletypes}
 
 <dl>
-    
-    <dt>Description</dt>
-    <dd>
-        Enable / Disable checking file types (languageIds).
-        
-        These are in additional to the file types specified by  [Settings.enabledLanguageIds](#settings-enabledlanguageids) .
-        To disable a language, prefix with `!` as in `!json`,
-        
-        
-        **Example: individual file types**
-        
-        ```
-        jsonc       // enable checking for jsonc
-        !json       // disable checking for json
-        kotlin      // enable checking for kotlin
-        ```
-        
-        **Example: enable all file types**
-        
-        ```
-        *           // enable checking for all file types
-        !json       // except for json
-        ```
-    </dd>
-    
-    <dt>Type</dt>
-    <dd>
-        [`LanguageIdSingle`](#languageidsingle)`[]`
-    </dd>
+
+<dt>Description</dt>
+<dd>
+
+Enable / Disable checking file types (languageIds).
+
+These are in additional to the file types specified by  [Settings.enabledLanguageIds](#settings-enabledlanguageids) .
+To disable a language, prefix with `!` as in `!json`,
+
+
+**Example: individual file types**
+
+```
+jsonc       // enable checking for jsonc
+!json       // disable checking for json
+kotlin      // enable checking for kotlin
+```
+
+**Example: enable all file types**
+
+```
+*           // enable checking for all file types
+!json       // except for json
+```
+
+</dd>
+
+<dt>Type</dt>
+<dd>
+
+[`LanguageIdSingle`](#languageidsingle)`[]`
+
+</dd>
 </dl>
 
 ---
@@ -4470,16 +5264,20 @@ format: md
 #### `enabled` {#overridesettings-enabled}
 
 <dl>
-    
-    <dt>Description</dt>
-    <dd>
-        Is the spell checker enabled.
-    </dd>
-    
-    <dt>Type</dt>
-    <dd>
-        `boolean`
-    </dd>
+
+<dt>Description</dt>
+<dd>
+
+Is the spell checker enabled.
+
+</dd>
+
+<dt>Type</dt>
+<dd>
+
+`boolean`
+
+</dd>
 </dl>
 
 ---
@@ -4487,31 +5285,35 @@ format: md
 #### `enabledFileTypes` {#overridesettings-enabledfiletypes}
 
 <dl>
-    
-    <dt>Description</dt>
-    <dd>
-        Enable / Disable checking file types (languageIds).
-        
-        This setting replaces:  [Settings.enabledLanguageIds](#settings-enabledlanguageids)  and  [Settings.enableFiletypes](#settings-enablefiletypes) .
-        
-        A Value of:
-        - `true` - enable checking for the file type
-        - `false` - disable checking for the file type
-        
-        A file type of `*` is a wildcard that enables all file types.
-        
-        **Example: enable all file types**
-        
-        | File Type | Enabled | Comment |
-        | --------- | ------- | ------- |
-        | `*`       | `true`  | Enable all file types. |
-        | `json`    | `false` | Disable checking for json files. |
-    </dd>
-    
-    <dt>Type</dt>
-    <dd>
-        `object`
-    </dd>
+
+<dt>Description</dt>
+<dd>
+
+Enable / Disable checking file types (languageIds).
+
+This setting replaces:  [Settings.enabledLanguageIds](#settings-enabledlanguageids)  and  [Settings.enableFiletypes](#settings-enablefiletypes) .
+
+A Value of:
+- `true` - enable checking for the file type
+- `false` - disable checking for the file type
+
+A file type of `*` is a wildcard that enables all file types.
+
+**Example: enable all file types**
+
+| File Type | Enabled | Comment |
+| --------- | ------- | ------- |
+| `*`       | `true`  | Enable all file types. |
+| `json`    | `false` | Disable checking for json files. |
+
+</dd>
+
+<dt>Type</dt>
+<dd>
+
+`object`
+
+</dd>
 </dl>
 
 ---
@@ -4519,16 +5321,20 @@ format: md
 #### `enabledLanguageIds` {#overridesettings-enabledlanguageids}
 
 <dl>
-    
-    <dt>Description</dt>
-    <dd>
-        Specify a list of file types to spell check. It is better to use  [Settings.enabledFileTypes](#settings-enabledfiletypes)  to Enable / Disable checking files types.
-    </dd>
-    
-    <dt>Type</dt>
-    <dd>
-        [`LanguageIdSingle`](#languageidsingle)`[]`
-    </dd>
+
+<dt>Description</dt>
+<dd>
+
+Specify a list of file types to spell check. It is better to use  [Settings.enabledFileTypes](#settings-enabledfiletypes)  to Enable / Disable checking files types.
+
+</dd>
+
+<dt>Type</dt>
+<dd>
+
+[`LanguageIdSingle`](#languageidsingle)`[]`
+
+</dd>
 </dl>
 
 ---
@@ -4536,16 +5342,20 @@ format: md
 #### `filename` {#overridesettings-filename}
 
 <dl>
-    
-    <dt>Description</dt>
-    <dd>
-        Glob pattern or patterns to match against.
-    </dd>
-    
-    <dt>Type</dt>
-    <dd>
-        [`Glob`](#glob)<br />[`Glob`](#glob)`[]`
-    </dd>
+
+<dt>Description</dt>
+<dd>
+
+Glob pattern or patterns to match against.
+
+</dd>
+
+<dt>Type</dt>
+<dd>
+
+[`Glob`](#glob)<br />[`Glob`](#glob)`[]`
+
+</dd>
 </dl>
 
 ---
@@ -4553,30 +5363,34 @@ format: md
 #### `flagWords` {#overridesettings-flagwords}
 
 <dl>
-    
-    <dt>Description</dt>
-    <dd>
-        List of words to always be considered incorrect. Words found in `flagWords` override `words`.
-        
-        Format of `flagWords`
-        - single word entry - `word`
-        - with suggestions - `word:suggestion` or `word->suggestion, suggestions`
-        
-        Example:
-        ```ts
-        "flagWords": [
-          "color: colour",
-          "incase: in case, encase",
-          "canot->cannot",
-          "cancelled->canceled"
-        ]
-        ```
-    </dd>
-    
-    <dt>Type</dt>
-    <dd>
-        `string``[]`
-    </dd>
+
+<dt>Description</dt>
+<dd>
+
+List of words to always be considered incorrect. Words found in `flagWords` override `words`.
+
+Format of `flagWords`
+- single word entry - `word`
+- with suggestions - `word:suggestion` or `word->suggestion, suggestions`
+
+Example:
+```ts
+"flagWords": [
+  "color: colour",
+  "incase: in case, encase",
+  "canot->cannot",
+  "cancelled->canceled"
+]
+```
+
+</dd>
+
+<dt>Type</dt>
+<dd>
+
+`string``[]`
+
+</dd>
 </dl>
 
 ---
@@ -4584,16 +5398,20 @@ format: md
 #### `id` {#overridesettings-id}
 
 <dl>
-    
-    <dt>Description</dt>
-    <dd>
-        Optional identifier.
-    </dd>
-    
-    <dt>Type</dt>
-    <dd>
-        `string`
-    </dd>
+
+<dt>Description</dt>
+<dd>
+
+Optional identifier.
+
+</dd>
+
+<dt>Type</dt>
+<dd>
+
+`string`
+
+</dd>
 </dl>
 
 ---
@@ -4601,40 +5419,44 @@ format: md
 #### `ignoreRegExpList` {#overridesettings-ignoreregexplist}
 
 <dl>
-    
-    <dt>Description</dt>
-    <dd>
-        List of regular expression patterns or pattern names to exclude from spell checking.
-        
-        Example: `["href"]` - to exclude html href pattern.
-        
-        Regular expressions use JavaScript regular expression syntax.
-        
-        Example: to ignore ALL-CAPS words
-        
-        JSON
-        ```json
-        "ignoreRegExpList": ["/\\b[A-Z]+\\b/g"]
-        ```
-        
-        YAML
-        ```yaml
-        ignoreRegExpList:
-          - >-
-           /\b[A-Z]+\b/g
-        ```
-        
-        By default, several patterns are excluded. See
-        [Configuration](https://cspell.org/configuration/patterns) for more details.
-        
-        While you can create your own patterns, you can also leverage several patterns that are
-        [built-in to CSpell](https://cspell.org/types/cspell-types/types/PredefinedPatterns.html).
-    </dd>
-    
-    <dt>Type</dt>
-    <dd>
-        [`RegExpPatternList`](#regexppatternlist)
-    </dd>
+
+<dt>Description</dt>
+<dd>
+
+List of regular expression patterns or pattern names to exclude from spell checking.
+
+Example: `["href"]` - to exclude html href pattern.
+
+Regular expressions use JavaScript regular expression syntax.
+
+Example: to ignore ALL-CAPS words
+
+JSON
+```json
+"ignoreRegExpList": ["/\\b[A-Z]+\\b/g"]
+```
+
+YAML
+```yaml
+ignoreRegExpList:
+  - >-
+   /\b[A-Z]+\b/g
+```
+
+By default, several patterns are excluded. See
+[Configuration](https://cspell.org/configuration/patterns) for more details.
+
+While you can create your own patterns, you can also leverage several patterns that are
+[built-in to CSpell](https://cspell.org/types/cspell-types/types/PredefinedPatterns.html).
+
+</dd>
+
+<dt>Type</dt>
+<dd>
+
+[`RegExpPatternList`](#regexppatternlist)
+
+</dd>
 </dl>
 
 ---
@@ -4642,17 +5464,21 @@ format: md
 #### `ignoreWords` {#overridesettings-ignorewords}
 
 <dl>
-    
-    <dt>Description</dt>
-    <dd>
-        List of words to be ignored. An ignored word will not show up as an error, even if it is
-        also in the `flagWords`.
-    </dd>
-    
-    <dt>Type</dt>
-    <dd>
-        `string``[]`
-    </dd>
+
+<dt>Description</dt>
+<dd>
+
+List of words to be ignored. An ignored word will not show up as an error, even if it is
+also in the `flagWords`.
+
+</dd>
+
+<dt>Type</dt>
+<dd>
+
+`string``[]`
+
+</dd>
 </dl>
 
 ---
@@ -4660,21 +5486,25 @@ format: md
 #### `includeRegExpList` {#overridesettings-includeregexplist}
 
 <dl>
-    
-    <dt>Description</dt>
-    <dd>
-        List of regular expression patterns or defined pattern names to match for spell checking.
-        
-        If this property is defined, only text matching the included patterns will be checked.
-        
-        While you can create your own patterns, you can also leverage several patterns that are
-        [built-in to CSpell](https://cspell.org/types/cspell-types/types/PredefinedPatterns.html).
-    </dd>
-    
-    <dt>Type</dt>
-    <dd>
-        [`RegExpPatternList`](#regexppatternlist)
-    </dd>
+
+<dt>Description</dt>
+<dd>
+
+List of regular expression patterns or defined pattern names to match for spell checking.
+
+If this property is defined, only text matching the included patterns will be checked.
+
+While you can create your own patterns, you can also leverage several patterns that are
+[built-in to CSpell](https://cspell.org/types/cspell-types/types/PredefinedPatterns.html).
+
+</dd>
+
+<dt>Type</dt>
+<dd>
+
+[`RegExpPatternList`](#regexppatternlist)
+
+</dd>
 </dl>
 
 ---
@@ -4682,16 +5512,20 @@ format: md
 #### `language` {#overridesettings-language}
 
 <dl>
-    
-    <dt>Description</dt>
-    <dd>
-        Sets the locale.
-    </dd>
-    
-    <dt>Type</dt>
-    <dd>
-        [`LocaleId`](#localeid)
-    </dd>
+
+<dt>Description</dt>
+<dd>
+
+Sets the locale.
+
+</dd>
+
+<dt>Type</dt>
+<dd>
+
+[`LocaleId`](#localeid)
+
+</dd>
 </dl>
 
 ---
@@ -4699,16 +5533,20 @@ format: md
 #### `languageId` {#overridesettings-languageid}
 
 <dl>
-    
-    <dt>Description</dt>
-    <dd>
-        Sets the programming language id to match file type.
-    </dd>
-    
-    <dt>Type</dt>
-    <dd>
-        [`MatchingFileType`](#matchingfiletype)
-    </dd>
+
+<dt>Description</dt>
+<dd>
+
+Sets the programming language id to match file type.
+
+</dd>
+
+<dt>Type</dt>
+<dd>
+
+[`MatchingFileType`](#matchingfiletype)
+
+</dd>
 </dl>
 
 ---
@@ -4716,18 +5554,22 @@ format: md
 #### `languageSettings` {#overridesettings-languagesettings}
 
 <dl>
-    
-    <dt>Description</dt>
-    <dd>
-        Additional settings for individual languages.
-        
-        See [Language Settings](https://cspell.org/configuration/language-settings/) for more details.
-    </dd>
-    
-    <dt>Type</dt>
-    <dd>
-        [`LanguageSetting`](#languagesetting)`[]`
-    </dd>
+
+<dt>Description</dt>
+<dd>
+
+Additional settings for individual languages.
+
+See [Language Settings](https://cspell.org/configuration/language-settings/) for more details.
+
+</dd>
+
+<dt>Type</dt>
+<dd>
+
+[`LanguageSetting`](#languagesetting)`[]`
+
+</dd>
 </dl>
 
 ---
@@ -4735,17 +5577,21 @@ format: md
 #### `loadDefaultConfiguration` {#overridesettings-loaddefaultconfiguration}
 
 <dl>
-    
-    <dt>Description</dt>
-    <dd>
-        By default, the bundled dictionary configurations are loaded. Explicitly setting this to `false`
-        will prevent ALL default configuration from being loaded.
-    </dd>
-    
-    <dt>Type</dt>
-    <dd>
-        `boolean`
-    </dd>
+
+<dt>Description</dt>
+<dd>
+
+By default, the bundled dictionary configurations are loaded. Explicitly setting this to `false`
+will prevent ALL default configuration from being loaded.
+
+</dd>
+
+<dt>Type</dt>
+<dd>
+
+`boolean`
+
+</dd>
 </dl>
 
 ---
@@ -4753,16 +5599,20 @@ format: md
 #### `maxDuplicateProblems` {#overridesettings-maxduplicateproblems}
 
 <dl>
-    
-    <dt>Description</dt>
-    <dd>
-        The maximum number of times the same word can be flagged as an error in a file.
-    </dd>
-    
-    <dt>Type</dt>
-    <dd>
-        `number`
-    </dd>
+
+<dt>Description</dt>
+<dd>
+
+The maximum number of times the same word can be flagged as an error in a file.
+
+</dd>
+
+<dt>Type</dt>
+<dd>
+
+`number`
+
+</dd>
 </dl>
 
 ---
@@ -4770,16 +5620,20 @@ format: md
 #### `maxNumberOfProblems` {#overridesettings-maxnumberofproblems}
 
 <dl>
-    
-    <dt>Description</dt>
-    <dd>
-        The maximum number of problems to report in a file.
-    </dd>
-    
-    <dt>Type</dt>
-    <dd>
-        `number`
-    </dd>
+
+<dt>Description</dt>
+<dd>
+
+The maximum number of problems to report in a file.
+
+</dd>
+
+<dt>Type</dt>
+<dd>
+
+`number`
+
+</dd>
 </dl>
 
 ---
@@ -4787,16 +5641,20 @@ format: md
 #### `minWordLength` {#overridesettings-minwordlength}
 
 <dl>
-    
-    <dt>Description</dt>
-    <dd>
-        The minimum length of a word before checking it against a dictionary.
-    </dd>
-    
-    <dt>Type</dt>
-    <dd>
-        `number`
-    </dd>
+
+<dt>Description</dt>
+<dd>
+
+The minimum length of a word before checking it against a dictionary.
+
+</dd>
+
+<dt>Type</dt>
+<dd>
+
+`number`
+
+</dd>
 </dl>
 
 ---
@@ -4804,16 +5662,20 @@ format: md
 #### `name` {#overridesettings-name}
 
 <dl>
-    
-    <dt>Description</dt>
-    <dd>
-        Optional name of configuration.
-    </dd>
-    
-    <dt>Type</dt>
-    <dd>
-        `string`
-    </dd>
+
+<dt>Description</dt>
+<dd>
+
+Optional name of configuration.
+
+</dd>
+
+<dt>Type</dt>
+<dd>
+
+`string`
+
+</dd>
 </dl>
 
 ---
@@ -4821,22 +5683,26 @@ format: md
 #### `noSuggestDictionaries` {#overridesettings-nosuggestdictionaries}
 
 <dl>
-    
-    <dt>Description</dt>
-    <dd>
-        Optional list of dictionaries that will not be used for suggestions.
-        Words in these dictionaries are considered correct, but will not be
-        used when making spell correction suggestions.
-        
-        Note: if a word is suggested by another dictionary, but found in
-        one of these dictionaries, it will be removed from the set of
-        possible suggestions.
-    </dd>
-    
-    <dt>Type</dt>
-    <dd>
-        [`DictionaryReference`](#dictionaryreference)`[]`
-    </dd>
+
+<dt>Description</dt>
+<dd>
+
+Optional list of dictionaries that will not be used for suggestions.
+Words in these dictionaries are considered correct, but will not be
+used when making spell correction suggestions.
+
+Note: if a word is suggested by another dictionary, but found in
+one of these dictionaries, it will be removed from the set of
+possible suggestions.
+
+</dd>
+
+<dt>Type</dt>
+<dd>
+
+[`DictionaryReference`](#dictionaryreference)`[]`
+
+</dd>
 </dl>
 
 ---
@@ -4844,16 +5710,20 @@ format: md
 #### `numSuggestions` {#overridesettings-numsuggestions}
 
 <dl>
-    
-    <dt>Description</dt>
-    <dd>
-        Number of suggestions to make.
-    </dd>
-    
-    <dt>Type</dt>
-    <dd>
-        `number`
-    </dd>
+
+<dt>Description</dt>
+<dd>
+
+Number of suggestions to make.
+
+</dd>
+
+<dt>Type</dt>
+<dd>
+
+`number`
+
+</dd>
 </dl>
 
 ---
@@ -4861,40 +5731,44 @@ format: md
 #### `patterns` {#overridesettings-patterns}
 
 <dl>
-    
-    <dt>Description</dt>
-    <dd>
-        Defines a list of patterns that can be used with the `ignoreRegExpList` and
-        `includeRegExpList` options.
-        
-        For example:
-        
-        ```javascript
-        "ignoreRegExpList": ["comments"],
-        "patterns": [
-          {
-            "name": "comment-single-line",
-            "pattern": "/#.*/g"
-          },
-          {
-            "name": "comment-multi-line",
-            "pattern": "/(?:\\/\\*[\\s\\S]*?\\*\\/)/g"
-          },
-          // You can also combine multiple named patterns into one single named pattern
-          {
-            "name": "comments",
-            "pattern": ["comment-single-line", "comment-multi-line"]
-          }
-        ]
-        ```
-        Defines a list of patterns that can be used with the `ignoreRegExpList` and
-        `includeRegExpList` options.
-    </dd>
-    
-    <dt>Type</dt>
-    <dd>
-        [`RegExpPatternDefinition`](#regexppatterndefinition)`[]`
-    </dd>
+
+<dt>Description</dt>
+<dd>
+
+Defines a list of patterns that can be used with the `ignoreRegExpList` and
+`includeRegExpList` options.
+
+For example:
+
+```javascript
+"ignoreRegExpList": ["comments"],
+"patterns": [
+  {
+    "name": "comment-single-line",
+    "pattern": "/#.*/g"
+  },
+  {
+    "name": "comment-multi-line",
+    "pattern": "/(?:\\/\\*[\\s\\S]*?\\*\\/)/g"
+  },
+  // You can also combine multiple named patterns into one single named pattern
+  {
+    "name": "comments",
+    "pattern": ["comment-single-line", "comment-multi-line"]
+  }
+]
+```
+Defines a list of patterns that can be used with the `ignoreRegExpList` and
+`includeRegExpList` options.
+
+</dd>
+
+<dt>Type</dt>
+<dd>
+
+[`RegExpPatternDefinition`](#regexppatterndefinition)`[]`
+
+</dd>
 </dl>
 
 ---
@@ -4902,16 +5776,20 @@ format: md
 #### `pnpFiles` {#overridesettings-pnpfiles}
 
 <dl>
-    
-    <dt>Description</dt>
-    <dd>
-        The PnP files to search for. Note: `.mjs` files are not currently supported.
-    </dd>
-    
-    <dt>Type</dt>
-    <dd>
-        `string``[]`
-    </dd>
+
+<dt>Description</dt>
+<dd>
+
+The PnP files to search for. Note: `.mjs` files are not currently supported.
+
+</dd>
+
+<dt>Type</dt>
+<dd>
+
+`string``[]`
+
+</dd>
 </dl>
 
 ---
@@ -4919,26 +5797,30 @@ format: md
 #### `suggestWords` {#overridesettings-suggestwords}
 
 <dl>
-    
-    <dt>Description</dt>
-    <dd>
-        A list of suggested replacements for words.
-        Suggested words provide a way to make preferred suggestions on word replacements.
-        To hint at a preferred change, but not to require it.
-        
-        Format of `suggestWords`
-        - Single suggestion (possible auto fix)
-            - `word: suggestion`
-            - `word->suggestion`
-        - Multiple suggestions (not auto fixable)
-           - `word: first, second, third`
-           - `word->first, second, third`
-    </dd>
-    
-    <dt>Type</dt>
-    <dd>
-        `string``[]`
-    </dd>
+
+<dt>Description</dt>
+<dd>
+
+A list of suggested replacements for words.
+Suggested words provide a way to make preferred suggestions on word replacements.
+To hint at a preferred change, but not to require it.
+
+Format of `suggestWords`
+- Single suggestion (possible auto fix)
+    - `word: suggestion`
+    - `word->suggestion`
+- Multiple suggestions (not auto fixable)
+   - `word: first, second, third`
+   - `word->first, second, third`
+
+</dd>
+
+<dt>Type</dt>
+<dd>
+
+`string``[]`
+
+</dd>
 </dl>
 
 ---
@@ -4946,20 +5828,24 @@ format: md
 #### `suggestionNumChanges` {#overridesettings-suggestionnumchanges}
 
 <dl>
-    
-    <dt>Description</dt>
-    <dd>
-        The maximum number of changes allowed on a word to be considered a suggestions.
-        
-        For example, appending an `s` onto `example` -> `examples` is considered 1 change.
-        
-        Range: between 1 and 5.
-    </dd>
-    
-    <dt>Type</dt>
-    <dd>
-        `number`
-    </dd>
+
+<dt>Description</dt>
+<dd>
+
+The maximum number of changes allowed on a word to be considered a suggestions.
+
+For example, appending an `s` onto `example` -> `examples` is considered 1 change.
+
+Range: between 1 and 5.
+
+</dd>
+
+<dt>Type</dt>
+<dd>
+
+`number`
+
+</dd>
 </dl>
 
 ---
@@ -4967,16 +5853,20 @@ format: md
 #### `suggestionsTimeout` {#overridesettings-suggestionstimeout}
 
 <dl>
-    
-    <dt>Description</dt>
-    <dd>
-        The maximum amount of time in milliseconds to generate suggestions for a word.
-    </dd>
-    
-    <dt>Type</dt>
-    <dd>
-        `number`
-    </dd>
+
+<dt>Description</dt>
+<dd>
+
+The maximum amount of time in milliseconds to generate suggestions for a word.
+
+</dd>
+
+<dt>Type</dt>
+<dd>
+
+`number`
+
+</dd>
 </dl>
 
 ---
@@ -4984,20 +5874,24 @@ format: md
 #### `usePnP` {#overridesettings-usepnp}
 
 <dl>
-    
-    <dt>Description</dt>
-    <dd>
-        Packages managers like Yarn 2 use a `.pnp.cjs` file to assist in loading
-        packages stored in the repository.
-        
-        When true, the spell checker will search up the directory structure for the existence
-        of a PnP file and load it.
-    </dd>
-    
-    <dt>Type</dt>
-    <dd>
-        `boolean`
-    </dd>
+
+<dt>Description</dt>
+<dd>
+
+Packages managers like Yarn 2 use a `.pnp.cjs` file to assist in loading
+packages stored in the repository.
+
+When true, the spell checker will search up the directory structure for the existence
+of a PnP file and load it.
+
+</dd>
+
+<dt>Type</dt>
+<dd>
+
+`boolean`
+
+</dd>
 </dl>
 
 ---
@@ -5005,16 +5899,20 @@ format: md
 #### `words` {#overridesettings-words}
 
 <dl>
-    
-    <dt>Description</dt>
-    <dd>
-        List of words to be considered correct.
-    </dd>
-    
-    <dt>Type</dt>
-    <dd>
-        `string``[]`
-    </dd>
+
+<dt>Description</dt>
+<dd>
+
+List of words to be considered correct.
+
+</dd>
+
+<dt>Type</dt>
+<dd>
+
+`string``[]`
+
+</dd>
 </dl>
 
 ---
@@ -5022,11 +5920,13 @@ format: md
 ## Pattern {#pattern}
 
 <dl>
-    
-    <dt>Type</dt>
-    <dd>
-        `string`
-    </dd>
+
+<dt>Type</dt>
+<dd>
+
+`string`
+
+</dd>
 </dl>
 
 ## PatternAdjustment
@@ -5044,16 +5944,20 @@ format: md
 #### `id` {#patternadjustment-id}
 
 <dl>
-    
-    <dt>Description</dt>
-    <dd>
-        Id of the Adjustment, i.e. `short-compound`
-    </dd>
-    
-    <dt>Type</dt>
-    <dd>
-        `string`
-    </dd>
+
+<dt>Description</dt>
+<dd>
+
+Id of the Adjustment, i.e. `short-compound`
+
+</dd>
+
+<dt>Type</dt>
+<dd>
+
+`string`
+
+</dd>
 </dl>
 
 ---
@@ -5061,16 +5965,20 @@ format: md
 #### `penalty` {#patternadjustment-penalty}
 
 <dl>
-    
-    <dt>Description</dt>
-    <dd>
-        The amount of penalty to apply.
-    </dd>
-    
-    <dt>Type</dt>
-    <dd>
-        `number`
-    </dd>
+
+<dt>Description</dt>
+<dd>
+
+The amount of penalty to apply.
+
+</dd>
+
+<dt>Type</dt>
+<dd>
+
+`number`
+
+</dd>
 </dl>
 
 ---
@@ -5078,16 +5986,20 @@ format: md
 #### `regexp` {#patternadjustment-regexp}
 
 <dl>
-    
-    <dt>Description</dt>
-    <dd>
-        RegExp pattern to match
-    </dd>
-    
-    <dt>Type</dt>
-    <dd>
-        `string`
-    </dd>
+
+<dt>Description</dt>
+<dd>
+
+RegExp pattern to match
+
+</dd>
+
+<dt>Type</dt>
+<dd>
+
+`string`
+
+</dd>
 </dl>
 
 ---
@@ -5095,16 +6007,20 @@ format: md
 ## PatternId {#patternid}
 
 <dl>
-    
-    <dt>Description</dt>
-    <dd>
-        This matches the name in a pattern definition.
-    </dd>
-    
-    <dt>Type</dt>
-    <dd>
-        `string`
-    </dd>
+
+<dt>Description</dt>
+<dd>
+
+This matches the name in a pattern definition.
+
+</dd>
+
+<dt>Type</dt>
+<dd>
+
+`string`
+
+</dd>
 </dl>
 
 ---
@@ -5112,16 +6028,20 @@ format: md
 ## PatternRef {#patternref}
 
 <dl>
-    
-    <dt>Description</dt>
-    <dd>
-        A PatternRef is a Pattern or PatternId.
-    </dd>
-    
-    <dt>Type</dt>
-    <dd>
-        [`Pattern`](#pattern)<br />[`PatternId`](#patternid)<br />[`PredefinedPatterns`](#predefinedpatterns)
-    </dd>
+
+<dt>Description</dt>
+<dd>
+
+A PatternRef is a Pattern or PatternId.
+
+</dd>
+
+<dt>Type</dt>
+<dd>
+
+[`Pattern`](#pattern)<br />[`PatternId`](#patternid)<br />[`PredefinedPatterns`](#predefinedpatterns)
+
+</dd>
 </dl>
 
 ---
@@ -5129,11 +6049,13 @@ format: md
 ## PredefinedPatterns {#predefinedpatterns}
 
 <dl>
-    
-    <dt>Type</dt>
-    <dd>
-        `string`
-    </dd>
+
+<dt>Type</dt>
+<dd>
+
+`string`
+
+</dd>
 </dl>
 
 ## RegExpPatternDefinition
@@ -5151,16 +6073,20 @@ format: md
 #### `description` {#regexppatterndefinition-description}
 
 <dl>
-    
-    <dt>Description</dt>
-    <dd>
-        Description of the pattern.
-    </dd>
-    
-    <dt>Type</dt>
-    <dd>
-        `string`
-    </dd>
+
+<dt>Description</dt>
+<dd>
+
+Description of the pattern.
+
+</dd>
+
+<dt>Type</dt>
+<dd>
+
+`string`
+
+</dd>
 </dl>
 
 ---
@@ -5168,17 +6094,21 @@ format: md
 #### `name` {#regexppatterndefinition-name}
 
 <dl>
-    
-    <dt>Description</dt>
-    <dd>
-        Pattern name, used as an identifier in ignoreRegExpList and includeRegExpList.
-        It is possible to redefine one of the predefined patterns to override its value.
-    </dd>
-    
-    <dt>Type</dt>
-    <dd>
-        [`PatternId`](#patternid)
-    </dd>
+
+<dt>Description</dt>
+<dd>
+
+Pattern name, used as an identifier in ignoreRegExpList and includeRegExpList.
+It is possible to redefine one of the predefined patterns to override its value.
+
+</dd>
+
+<dt>Type</dt>
+<dd>
+
+[`PatternId`](#patternid)
+
+</dd>
 </dl>
 
 ---
@@ -5186,16 +6116,20 @@ format: md
 #### `pattern` {#regexppatterndefinition-pattern}
 
 <dl>
-    
-    <dt>Description</dt>
-    <dd>
-        RegExp pattern or array of RegExp patterns.
-    </dd>
-    
-    <dt>Type</dt>
-    <dd>
-        [`Pattern`](#pattern)<br />[`Pattern`](#pattern)`[]`
-    </dd>
+
+<dt>Description</dt>
+<dd>
+
+RegExp pattern or array of RegExp patterns.
+
+</dd>
+
+<dt>Type</dt>
+<dd>
+
+[`Pattern`](#pattern)<br />[`Pattern`](#pattern)`[]`
+
+</dd>
 </dl>
 
 ---
@@ -5203,16 +6137,20 @@ format: md
 ## RegExpPatternList {#regexppatternlist}
 
 <dl>
-    
-    <dt>Description</dt>
-    <dd>
-        A list of pattern names or regular expressions.
-    </dd>
-    
-    <dt>Type</dt>
-    <dd>
-        [`PatternRef`](#patternref)`[]`
-    </dd>
+
+<dt>Description</dt>
+<dd>
+
+A list of pattern names or regular expressions.
+
+</dd>
+
+<dt>Type</dt>
+<dd>
+
+[`PatternRef`](#patternref)`[]`
+
+</dd>
 </dl>
 
 ---
@@ -5220,11 +6158,13 @@ format: md
 ## ReplaceEntry {#replaceentry}
 
 <dl>
-    
-    <dt>Type</dt>
-    <dd>
-        `string``[]`
-    </dd>
+
+<dt>Type</dt>
+<dd>
+
+`string``[]`
+
+</dd>
 </dl>
 
 ---
@@ -5232,11 +6172,13 @@ format: md
 ## ReplaceMap {#replacemap}
 
 <dl>
-    
-    <dt>Type</dt>
-    <dd>
-        [`ReplaceEntry`](#replaceentry)`[]`
-    </dd>
+
+<dt>Type</dt>
+<dd>
+
+[`ReplaceEntry`](#replaceentry)`[]`
+
+</dd>
 </dl>
 
 ---
@@ -5244,16 +6186,20 @@ format: md
 ## ReporterModuleName {#reportermodulename}
 
 <dl>
-    
-    <dt>Description</dt>
-    <dd>
-        The module or path to the the reporter to load.
-    </dd>
-    
-    <dt>Type</dt>
-    <dd>
-        `string`
-    </dd>
+
+<dt>Description</dt>
+<dd>
+
+The module or path to the the reporter to load.
+
+</dd>
+
+<dt>Type</dt>
+<dd>
+
+`string`
+
+</dd>
 </dl>
 
 ---
@@ -5261,16 +6207,20 @@ format: md
 ## ReporterOptions {#reporteroptions}
 
 <dl>
-    
-    <dt>Description</dt>
-    <dd>
-        Options to send to the reporter. These are defined by the reporter.
-    </dd>
-    
-    <dt>Type</dt>
-    <dd>
-        [`Serializable`](#serializable)
-    </dd>
+
+<dt>Description</dt>
+<dd>
+
+Options to send to the reporter. These are defined by the reporter.
+
+</dd>
+
+<dt>Type</dt>
+<dd>
+
+[`Serializable`](#serializable)
+
+</dd>
 </dl>
 
 ---
@@ -5278,23 +6228,27 @@ format: md
 ## ReporterSettings {#reportersettings}
 
 <dl>
-    
-    <dt>Description</dt>
-    <dd>
-        Declare a reporter to use.
-        
-        `default` - is a special name for the default cli reporter.
-        
-        Examples:
-        - `"default"` - to use the default reporter
-        - `"@cspell/cspell-json-reporter"` - use the cspell JSON reporter.
-        - `["@cspell/cspell-json-reporter", { "outFile": "out.json" }]`
-    </dd>
-    
-    <dt>Type</dt>
-    <dd>
-        [`ReporterModuleName`](#reportermodulename)<br />[`ReporterModuleName`](#reportermodulename)`[]`<br />`Unknown``[]`
-    </dd>
+
+<dt>Description</dt>
+<dd>
+
+Declare a reporter to use.
+
+`default` - is a special name for the default cli reporter.
+
+Examples:
+- `"default"` - to use the default reporter
+- `"@cspell/cspell-json-reporter"` - use the cspell JSON reporter.
+- `["@cspell/cspell-json-reporter", { "outFile": "out.json" }]`
+
+</dd>
+
+<dt>Type</dt>
+<dd>
+
+[`ReporterModuleName`](#reportermodulename)<br />[`ReporterModuleName`](#reportermodulename)`[]`<br />`Unknown``[]`
+
+</dd>
 </dl>
 
 ---
@@ -5302,11 +6256,13 @@ format: md
 ## Serializable {#serializable}
 
 <dl>
-    
-    <dt>Type</dt>
-    <dd>
-        `number`<br />`string`<br />`boolean`<br />`null`<br />`object`
-    </dd>
+
+<dt>Type</dt>
+<dd>
+
+`number`<br />`string`<br />`boolean`<br />`null`<br />`object`
+
+</dd>
 </dl>
 
 ---
@@ -5314,16 +6270,20 @@ format: md
 ## SimpleGlob {#simpleglob}
 
 <dl>
-    
-    <dt>Description</dt>
-    <dd>
-        Simple Glob string, the root will be globRoot.
-    </dd>
-    
-    <dt>Type</dt>
-    <dd>
-        `string`
-    </dd>
+
+<dt>Description</dt>
+<dd>
+
+Simple Glob string, the root will be globRoot.
+
+</dd>
+
+<dt>Type</dt>
+<dd>
+
+`string`
+
+</dd>
 </dl>
 
 ---
@@ -5331,35 +6291,39 @@ format: md
 ## SuggestionCostMapDef {#suggestioncostmapdef}
 
 <dl>
-    
-    <dt>Description</dt>
-    <dd>
-        A WeightedMapDef enables setting weights for edits between related characters and substrings.
-        
-        Multiple groups can be defined using a `|`.
-        A multi-character substring is defined using `()`.
-        
-        For example, in some languages, some letters sound alike.
-        
-        ```yaml
-          map: 'sc(sh)(sch)(ss)|t(tt)' # two groups.
-          replace: 50    # Make it 1/2 the cost of a normal edit to replace a `t` with `tt`.
-        ```
-        
-        The following could be used to make inserting, removing, or replacing vowels cheaper.
-        ```yaml
-          map: 'aeiouy'
-          insDel: 50     # Make it is cheaper to insert or delete a vowel.
-          replace: 45    # It is even cheaper to replace one with another.
-        ```
-        
-        Note: the default edit distance is 100.
-    </dd>
-    
-    <dt>Type</dt>
-    <dd>
-        [`CostMapDefReplace`](#costmapdefreplace)<br />[`CostMapDefInsDel`](#costmapdefinsdel)<br />[`CostMapDefSwap`](#costmapdefswap)
-    </dd>
+
+<dt>Description</dt>
+<dd>
+
+A WeightedMapDef enables setting weights for edits between related characters and substrings.
+
+Multiple groups can be defined using a `|`.
+A multi-character substring is defined using `()`.
+
+For example, in some languages, some letters sound alike.
+
+```yaml
+  map: 'sc(sh)(sch)(ss)|t(tt)' # two groups.
+  replace: 50    # Make it 1/2 the cost of a normal edit to replace a `t` with `tt`.
+```
+
+The following could be used to make inserting, removing, or replacing vowels cheaper.
+```yaml
+  map: 'aeiouy'
+  insDel: 50     # Make it is cheaper to insert or delete a vowel.
+  replace: 45    # It is even cheaper to replace one with another.
+```
+
+Note: the default edit distance is 100.
+
+</dd>
+
+<dt>Type</dt>
+<dd>
+
+[`CostMapDefReplace`](#costmapdefreplace)<br />[`CostMapDefInsDel`](#costmapdefinsdel)<br />[`CostMapDefSwap`](#costmapdefswap)
+
+</dd>
 </dl>
 
 ---
@@ -5367,11 +6331,13 @@ format: md
 ## SuggestionCostsDefs {#suggestioncostsdefs}
 
 <dl>
-    
-    <dt>Type</dt>
-    <dd>
-        [`SuggestionCostMapDef`](#suggestioncostmapdef)`[]`
-    </dd>
+
+<dt>Type</dt>
+<dd>
+
+[`SuggestionCostMapDef`](#suggestioncostmapdef)`[]`
+
+</dd>
 </dl>
 
 ---
@@ -5379,11 +6345,13 @@ format: md
 ## Version {#version}
 
 <dl>
-    
-    <dt>Type</dt>
-    <dd>
-        [`VersionLatest`](#versionlatest)<br />[`VersionLegacy`](#versionlegacy)
-    </dd>
+
+<dt>Type</dt>
+<dd>
+
+[`VersionLatest`](#versionlatest)<br />[`VersionLegacy`](#versionlegacy)
+
+</dd>
 </dl>
 
 ---
@@ -5391,16 +6359,20 @@ format: md
 ## VersionLatest {#versionlatest}
 
 <dl>
-    
-    <dt>Description</dt>
-    <dd>
-        Configuration File Version.
-    </dd>
-    
-    <dt>Type</dt>
-    <dd>
-        `string`
-    </dd>
+
+<dt>Description</dt>
+<dd>
+
+Configuration File Version.
+
+</dd>
+
+<dt>Type</dt>
+<dd>
+
+`string`
+
+</dd>
 </dl>
 
 ---
@@ -5408,14 +6380,18 @@ format: md
 ## VersionLegacy {#versionlegacy}
 
 <dl>
-    
-    <dt>Description</dt>
-    <dd>
-        Legacy Configuration File Versions.
-    </dd>
-    
-    <dt>Type</dt>
-    <dd>
-        `string`
-    </dd>
+
+<dt>Description</dt>
+<dd>
+
+Legacy Configuration File Versions.
+
+</dd>
+
+<dt>Type</dt>
+<dd>
+
+`string`
+
+</dd>
 </dl>

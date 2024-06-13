@@ -113,18 +113,22 @@ function formatTypeEntryBody(entry) {
         dlDescription = removeLeftPad(`
             <dt>Description</dt>
             <dd>
-                ${padLines(dlDescription, '                ')}
+
+            ${padLines(dlDescription, '            ')}
+
             </dd>
         `);
     }
 
     return removeLeftPad(`
         <dl>
-            ${padLines(dlDescription, '            ')}
-            <dt>Type</dt>
-            <dd>
-                ${formatEntryType(entry)}
-            </dd>
+        ${padLines(dlDescription, '        ')}
+        <dt>Type</dt>
+        <dd>
+
+        ${formatEntryType(entry)}
+
+        </dd>
         </dl>
     `);
 }
