@@ -38,6 +38,10 @@ ruleTester.run('cspell', Rule.rules.spellchecker, {
             checkComments: false,
             checkScope: [['JSONArrayExpression JSONLiteral', false]],
         }),
+        readFix('json-support/sample.jsonc', {
+            checkComments: false,
+            checkScope: [['JSONArrayExpression[elements] JSONLiteral', false]],
+        }),
     ],
     invalid: [
         // cspell:ignore commment Schooll

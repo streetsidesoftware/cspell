@@ -115,6 +115,20 @@ export interface Check {
 
     /**
      * Scope selectors to spell check.
+     * This is a list of scope selectors to spell check.
+     *
+     * Example:
+     * ```js
+     * checkScope: [
+     *     ['YAMLPair[key] YAMLScalar', true],
+     *     ['YAMLPair[value] YAMLScalar', true],
+     *     ['YAMLSequence[entries] YAMLScalar', true],
+     *     ['JSONProperty[key] JSONLiteral', true],
+     *     ['JSONProperty[value] JSONLiteral', true],
+     *     ['JSONArrayExpression JSONLiteral', true],
+     * ],
+     * ```
+     *
      * @since 8.9.0
      */
     checkScope?: ScopeSelectorList;
