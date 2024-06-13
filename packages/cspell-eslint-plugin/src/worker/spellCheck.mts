@@ -35,6 +35,7 @@ const defaultSettings: CSpellSettings = {
 };
 
 const isDebugModeExtended = false;
+const forceLogging = false;
 
 const knownConfigErrors = new Set<string>();
 
@@ -45,8 +46,8 @@ export async function spellCheck(
     options: WorkerOptions,
 ): Promise<SpellCheckResults> {
     const logger = getDefaultLogger();
-    const debugMode = options.debugMode || false;
-    logger.enabled = options.debugMode ?? (logger.enabled || isDebugModeExtended);
+    const debugMode = forceLogging || options.debugMode || false;
+    logger.enabled = forceLogging || (options.debugMode ?? (logger.enabled || isDebugModeExtended));
     const log = logger.log;
 
     const mapScopes = groupScopes([...defaultCheckedScopes, ...(options.checkScope || [])]);
@@ -227,7 +228,7 @@ export async function spellCheck(
     function needToCheckFields(path: ASTPath): Record<string, boolean> | undefined {
         const possibleScopes = mapScopes.get(path.node.type);
         if (!possibleScopes) {
-            // _dumpNode(path);
+            _dumpNode(path);
             return undefined;
         }
 
@@ -250,13 +251,13 @@ export async function spellCheck(
             const node = path.node as object as Record<string, unknown>;
             const value = node[field];
             if (typeof value !== 'string') continue;
-            // console.warn('Check Field: %o', { field, value, type: node.type });
             debugNode(path, value);
             checkNodeText(path, value);
         }
     }
 
     function checkNode(path: ASTPath) {
+        // _dumpNode(path);
         const handler = processors[path.node.type] ?? defaultHandler;
         handler(path);
     }
@@ -276,7 +277,8 @@ export async function spellCheck(
         }
 
         const { parent: _, ...n } = path.node;
-        log('Node: %o', {
+        const warn = log;
+        warn('Node: %o', {
             key: path.key,
             type: n.type,
             path: inheritanceSummary(path),
@@ -298,7 +300,8 @@ export async function spellCheck(
     }
 
     function isFunctionCall(node: ASTNode | undefined, name: string): boolean {
-        return node?.type === 'CallExpression' && node.callee.type === 'Identifier' && node.callee.name === name;
+        if (!node) return false;
+        return node.type === 'CallExpression' && node.callee.type === 'Identifier' && node.callee.name === name;
     }
 
     function isRequireCall(node: ASTNode | undefined) {
@@ -311,7 +314,7 @@ export async function spellCheck(
 
     function debugNode(path: ASTPath, value: unknown) {
         log(`${inheritanceSummary(path)}: %o`, value);
-        isDebugModeExtended && _dumpNode(path);
+        debugMode && _dumpNode(path);
     }
 
     // console.warn('root: %o', root);
@@ -327,7 +330,8 @@ function mapNode(path: ASTPath, key: Key | undefined): ScopeItem {
         return scopeItem(tagLiteral(node));
     }
     if (node.type === 'Block') {
-        return scopeItem(node.value[0] === '*' ? 'Comment.docBlock' : 'Comment.block');
+        const value = typeof node.value === 'string' ? node.value : '';
+        return scopeItem(value[0] === '*' ? 'Comment.docBlock' : 'Comment.block');
     }
     if (node.type === 'Line') {
         return scopeItem('Comment.line');
@@ -344,7 +348,7 @@ function tagLiteral(node: ASTNode | TSESTree.Node): string {
     const kind = typeof node.value;
     const extra =
         kind === 'string'
-            ? node.raw?.[0] === '"'
+            ? asStr(node.raw)?.[0] === '"'
                 ? 'string.double'
                 : 'string.single'
             : node.value === null
@@ -522,4 +526,8 @@ function groupScopes(scopes: ScopeSelectorList): Map<string, ScopeCheck[]> {
         map.set(key, list);
     }
     return map;
+}
+
+function asStr(v: string | unknown): string | undefined {
+    return typeof v === 'string' ? v : undefined;
 }
