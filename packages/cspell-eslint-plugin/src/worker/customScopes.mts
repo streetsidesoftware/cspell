@@ -6,5 +6,5 @@ export const defaultCheckedScopes: RequiredOptions['checkScope'] = [
     ['YAMLSequence[entries] YAMLScalar', true],
     ['JSONProperty[key] JSONLiteral', true],
     ['JSONProperty[value] JSONLiteral', true],
-    ['JSONArrayExpression[elements] JSONLiteral', true],
+    ['JSONArrayExpression JSONLiteral', true],
 ];
