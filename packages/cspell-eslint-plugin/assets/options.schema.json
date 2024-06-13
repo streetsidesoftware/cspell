@@ -24,7 +24,7 @@
       "type": "boolean"
     },
     "checkScope": {
-      "description": "Scope selectors to spell check.",
+      "description": "Scope selectors to spell check. This is a list of scope selectors to spell check.\n\nExample: ```js checkScope: [     ['YAMLPair[key] YAMLScalar', true],     ['YAMLPair[value] YAMLScalar', true],     ['YAMLSequence[entries] YAMLScalar', true],     ['JSONProperty[key] JSONLiteral', true],     ['JSONProperty[value] JSONLiteral', true],     ['JSONArrayExpression JSONLiteral', true], ], ```",
       "items": {
         "description": "A scope selector entry is a tuple that defines a scope selector and whether to spell check it.",
         "items": [
