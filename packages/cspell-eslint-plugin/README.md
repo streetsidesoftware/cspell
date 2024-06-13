@@ -326,7 +326,7 @@ CSpell will match case, but not word stems. `blacklist` and `Blacklist` will get
 
 ## Checking Custom AST Nodes
 
-The `checkScope` setting is used to enable / disable checking AST Nodes. Parsers are used to generate the AST (Abstract Syntax Tree) used by ESLint to evaluate a document. Each PlugIn gets access to the AST. `checkScope` can be used to handle new AST node when a custom parser is added.
+The `checkScope` setting is used to enable / disable checking AST Nodes. ESLint uses parsers to generate the AST (Abstract Syntax Tree) to evaluate a document. Each PlugIn gets access to the AST. `checkScope` can be used to handle new AST nodes when a custom parser is added. Some knowledge of the AST output by the parser is necessary.
 
 ```js
 rules: {
