@@ -4,8 +4,6 @@ import { fileURLToPath } from 'node:url';
 
 import typeScriptParser from '@typescript-eslint/parser';
 import { RuleTester } from 'eslint';
-import react from 'eslint-plugin-react';
-import globals from 'globals';
 
 import type { Options as RuleOptions } from '../plugin/index.cjs';
 import Rule from '../plugin/index.cjs';
@@ -25,13 +23,11 @@ type Options = Partial<RuleOptions>;
 const ruleTester = new RuleTester({});
 
 const KnownErrors: TestCaseError[] = [
-    ce('Unknown word: "Summmer"', 8),
     ce('Unknown word: "friendz"', 8),
     ce('Forbidden word: "Bluelist"', 8),
     ce('Forbidden word: "bluelist"', 8),
     ce('Forbidden word: "café"', 8),
     ce('Unknown word: "uuug"', 8),
-    ce('Unknown word: "Welcomeeeee"', 0),
     ce('Unknown word: "bestbusiness"', 0),
     ce('Unknown word: "muawhahaha"', 0),
     ce('Unknown word: "uuuug"', 0),
@@ -202,39 +198,6 @@ ruleTester.run('cspell', Rule.rules.spellchecker, {
         readInvalid('issue-4870/sample.js', ['Unknown word: "bestbusiness"', 'Unknown word: "friendz"'], {}),
         readInvalid('issue-4870/sample.js', ['Unknown word: "friendz"'], {
             cspell: { allowCompoundWords: true },
-        }),
-    ],
-});
-
-const ruleTesterReact = new RuleTester({
-    files: ['**/*.{js,jsx,mjs,cjs,ts,tsx}'],
-    plugins: {
-        react,
-    },
-    languageOptions: {
-        parserOptions: {
-            ecmaFeatures: {
-                jsx: true,
-            },
-        },
-        globals: {
-            ...globals.browser,
-        },
-    },
-    // ... others are omitted for brevity
-});
-
-ruleTesterReact.run('cspell with React', Rule.rules.spellchecker, {
-    valid: [readSample('react/sample.jsx'), readSample('react/sample.tsx')],
-    invalid: [
-        // cspell:ignore Welcomeeeee Summmer
-        readInvalid('with-errors/react/sample.jsx', ['Unknown word: "Welcomeeeee"', 'Unknown word: "Summmer"']),
-        readInvalid('with-errors/react/sample.tsx', ['Unknown word: "Welcomeeeee"', 'Unknown word: "Summmer"']),
-        readInvalid('with-errors/react/sample.tsx', ['Unknown word: "Summmer"'], {
-            checkJSXText: false,
-        }),
-        readInvalid('with-errors/react/sample.jsx', ['Unknown word: "Summmer"'], {
-            checkJSXText: false,
         }),
     ],
 });

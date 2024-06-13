@@ -3,6 +3,7 @@ import { readFileSync } from 'node:fs';
 import { join as pathJoin } from 'node:path';
 
 import type { ESLint, Rule } from 'eslint';
+import type { Program } from 'estree';
 import { createSyncFn } from 'synckit';
 
 import { getDefaultLogger } from '../common/logger.cjs';
@@ -120,10 +121,11 @@ function create(context: Rule.RuleContext): Rule.RuleListener {
         context.report(des);
     }
 
-    function checkProgram() {
+    function checkProgram(_node: Program) {
+        const filename = context.filename || context.getFilename();
         const sc = context.sourceCode || context.getSourceCode();
         if (!sc) return;
-        const { issues, errors } = spellCheck(context.filename || context.getFilename(), sc.text, sc.ast, options);
+        const { issues, errors } = spellCheck(filename, sc.text, sc.ast, options);
         if (errors && errors.length) {
             log(
                 'errors: %o',

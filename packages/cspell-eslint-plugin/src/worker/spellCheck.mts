@@ -1,7 +1,6 @@
 // cspell:ignore TSESTree
 import assert from 'node:assert';
 import * as path from 'node:path';
-import { format } from 'node:util';
 
 import type { TSESTree } from '@typescript-eslint/types';
 import type { CSpellSettings, TextDocument, ValidationIssue } from 'cspell-lib';
@@ -15,8 +14,12 @@ import {
 import type { Comment, Identifier, ImportSpecifier, Literal, Node, TemplateElement } from 'estree';
 
 import { getDefaultLogger } from '../common/logger.cjs';
-import type { CustomWordListFile, WorkerOptions } from '../common/options.cjs';
+import type { CustomWordListFile, ScopeSelectorList, WorkerOptions } from '../common/options.cjs';
 import type { ASTNode, JSXText, NodeType } from './ASTNode.cjs';
+import type { ASTPath, Key } from './ASTPath.mjs';
+import { defaultCheckedScopes } from './customScopes.mjs';
+import type { ScopeItem } from './scope.mjs';
+import { AstPathScope, AstScopeMatcher, astScopeToString, mapNodeToScope, scopeItem } from './scope.mjs';
 import type { Issue, SpellCheckResults, Suggestions } from './types.cjs';
 import { walkTree } from './walkTree.mjs';
 
@@ -32,6 +35,7 @@ const defaultSettings: CSpellSettings = {
 };
 
 const isDebugModeExtended = false;
+const forceLogging = false;
 
 const knownConfigErrors = new Set<string>();
 
@@ -42,9 +46,11 @@ export async function spellCheck(
     options: WorkerOptions,
 ): Promise<SpellCheckResults> {
     const logger = getDefaultLogger();
-    const debugMode = options.debugMode || false;
-    logger.enabled = options.debugMode ?? (logger.enabled || isDebugModeExtended);
+    const debugMode = forceLogging || options.debugMode || false;
+    logger.enabled = forceLogging || (options.debugMode ?? (logger.enabled || isDebugModeExtended));
     const log = logger.log;
+
+    const mapScopes = groupScopes([...defaultCheckedScopes, ...(options.checkScope || [])]);
 
     log('options: %o', options);
 
@@ -67,36 +73,40 @@ export async function spellCheck(
         return found;
     }
 
-    function checkLiteral(node: Literal | ASTNode) {
+    function checkLiteral(path: ASTPath) {
+        const node: Literal | ASTNode = path.node;
         if (node.type !== 'Literal') return;
         if (!options.checkStrings) return;
         if (typeof node.value === 'string') {
-            debugNode(node, node.value);
+            debugNode(path, node.value);
             if (options.ignoreImports && isImportOrRequired(node)) return;
             if (options.ignoreImportProperties && isImportedProperty(node)) return;
-            checkNodeText(node, node.value);
+            checkNodeText(path, node.value);
         }
     }
 
-    function checkJSXText(node: JSXText | ASTNode) {
+    function checkJSXText(path: ASTPath) {
+        const node: JSXText | ASTNode = path.node;
         if (node.type !== 'JSXText') return;
         if (!options.checkJSXText) return;
         if (typeof node.value === 'string') {
-            debugNode(node, node.value);
-            checkNodeText(node, node.value);
+            debugNode(path, node.value);
+            checkNodeText(path, node.value);
         }
     }
 
-    function checkTemplateElement(node: TemplateElement | ASTNode) {
+    function checkTemplateElement(path: ASTPath) {
+        const node: TemplateElement | ASTNode = path.node;
         if (node.type !== 'TemplateElement') return;
         if (!options.checkStringTemplates) return;
-        debugNode(node, node.value);
-        checkNodeText(node, node.value.cooked || node.value.raw);
+        debugNode(path, node.value);
+        checkNodeText(path, node.value.cooked || node.value.raw);
     }
 
-    function checkIdentifier(node: Identifier | ASTNode) {
+    function checkIdentifier(path: ASTPath) {
+        const node: Identifier | ASTNode = path.node;
         if (node.type !== 'Identifier') return;
-        debugNode(node, node.name);
+        debugNode(path, node.name);
         if (options.ignoreImports) {
             if (isRawImportIdentifier(node)) {
                 toIgnore.add(node.name);
@@ -105,7 +115,7 @@ export async function spellCheck(
             if (isImportIdentifier(node)) {
                 importedIdentifiers.add(node.name);
                 if (isLocalImportIdentifierUnique(node)) {
-                    checkNodeText(node, node.name);
+                    checkNodeText(path, node.name);
                 }
                 return;
             } else if (options.ignoreImportProperties && isImportedProperty(node)) {
@@ -115,28 +125,30 @@ export async function spellCheck(
         if (!options.checkIdentifiers) return;
         if (toIgnore.has(node.name) && !isObjectProperty(node)) return;
         if (skipCheckForRawImportIdentifiers(node)) return;
-        checkNodeText(node, node.name);
+        checkNodeText(path, node.name);
     }
 
-    function checkComment(node: Comment | ASTNode) {
+    function checkComment(path: ASTPath) {
+        const node: Comment | ASTNode = path.node;
         if (node.type !== 'Line' && node.type !== 'Block') return;
         if (!options.checkComments) return;
-        debugNode(node, node.value);
-        checkNodeText(node, node.value);
+        debugNode(path, node.value);
+        checkNodeText(path, node.value);
     }
 
-    function checkNodeText(node: ASTNode, text: string) {
+    function checkNodeText(path: ASTPath, text: string) {
+        const node: ASTNode = path.node;
         if (!node.range) return;
 
         const adj = node.type === 'Literal' ? 1 : 0;
         const range = [node.range[0] + adj, node.range[1] - adj] as const;
 
-        const scope: string[] = calcScope(node);
+        const scope: string[] = calcScope(path);
         const result = validator.checkText(range, text, scope);
         result.forEach((issue) => reportIssue(issue, node.type));
     }
 
-    function calcScope(_node: ASTNode): string[] {
+    function calcScope(_path: ASTPath): string[] {
         // inheritance(node);
         return [];
     }
@@ -201,7 +213,7 @@ export async function spellCheck(
     type NodeTypes = Node['type'] | Comment['type'] | 'JSXText';
 
     type Handlers = {
-        [K in NodeTypes]?: (n: ASTNode) => void;
+        [K in NodeTypes]?: (p: ASTPath) => void;
     };
 
     const processors: Handlers = {
@@ -213,78 +225,65 @@ export async function spellCheck(
         JSXText: checkJSXText,
     };
 
-    function checkNode(node: ASTNode) {
-        processors[node.type]?.(node);
+    function needToCheckFields(path: ASTPath): Record<string, boolean> | undefined {
+        const possibleScopes = mapScopes.get(path.node.type);
+        if (!possibleScopes) {
+            _dumpNode(path);
+            return undefined;
+        }
+
+        const scopePath = new AstPathScope(path);
+
+        const scores = possibleScopes
+            .map(({ scope, check }) => ({ score: scopePath.score(scope), check, scope }))
+            .filter((s) => s.score > 0);
+        const maxScore = Math.max(0, ...scores.map((s) => s.score));
+        const topScopes = scores.filter((s) => s.score === maxScore);
+        if (!topScopes.length) return undefined;
+        return Object.fromEntries(topScopes.map((s) => [s.scope.scopeField(), s.check]));
     }
 
-    function mapNode(node: ASTNode | TSESTree.Node, index: number, nodes: ASTNode[]): string {
-        const child = nodes[index + 1];
-        if (node.type === 'ImportSpecifier') {
-            const extra = node.imported === child ? '.imported' : node.local === child ? '.local' : '';
-            return node.type + extra;
-        }
-        if (node.type === 'ImportDeclaration') {
-            const extra = node.source === child ? '.source' : '';
-            return node.type + extra;
-        }
-        if (node.type === 'ExportSpecifier') {
-            const extra = node.exported === child ? '.exported' : node.local === child ? '.local' : '';
-            return node.type + extra;
-        }
-        if (node.type === 'ExportNamedDeclaration') {
-            const extra = node.source === child ? '.source' : '';
-            return node.type + extra;
-        }
-        if (node.type === 'Property') {
-            const extra = node.key === child ? 'key' : node.value === child ? 'value' : '';
-            return [node.type, node.kind, extra].join('.');
-        }
-        if (node.type === 'MemberExpression') {
-            const extra = node.property === child ? 'property' : node.object === child ? 'object' : '';
-            return node.type + '.' + extra;
-        }
-        if (node.type === 'ArrowFunctionExpression') {
-            const extra = node.body === child ? 'body' : 'param';
-            return node.type + '.' + extra;
-        }
-        if (node.type === 'FunctionDeclaration') {
-            const extra = node.id === child ? 'id' : node.body === child ? 'body' : 'params';
-            return node.type + '.' + extra;
-        }
-        if (node.type === 'ClassDeclaration' || node.type === 'ClassExpression') {
-            const extra = node.id === child ? 'id' : node.body === child ? 'body' : 'superClass';
-            return node.type + '.' + extra;
-        }
-        if (node.type === 'CallExpression') {
-            const extra = node.callee === child ? 'callee' : 'arguments';
-            return node.type + '.' + extra;
-        }
-        if (node.type === 'Literal') {
-            return tagLiteral(node);
-        }
-        if (node.type === 'Block') {
-            return node.value[0] === '*' ? 'Comment.docBlock' : 'Comment.block';
-        }
-        if (node.type === 'Line') {
-            return 'Comment.line';
-        }
-        return node.type;
-    }
-
-    function inheritance(node: ASTNode) {
-        const a = [...parents(node), node];
-        return a.map(mapNode);
-    }
-
-    function* parents(node: ASTNode | undefined): Iterable<ASTNode> {
-        while (node && node.parent) {
-            yield node.parent;
-            node = node.parent;
+    function defaultHandler(path: ASTPath) {
+        const fields = needToCheckFields(path);
+        if (!fields) return;
+        for (const [field, check] of Object.entries(fields)) {
+            if (!check) continue;
+            const node = path.node as object as Record<string, unknown>;
+            const value = node[field];
+            if (typeof value !== 'string') continue;
+            debugNode(path, value);
+            checkNodeText(path, value);
         }
     }
 
-    function inheritanceSummary(node: ASTNode) {
-        return inheritance(node).join(' ');
+    function checkNode(path: ASTPath) {
+        // _dumpNode(path);
+        const handler = processors[path.node.type] ?? defaultHandler;
+        handler(path);
+    }
+
+    function _dumpNode(path: ASTPath) {
+        function value(v: unknown) {
+            if (['string', 'number', 'boolean'].includes(typeof v)) return v;
+            if (v && typeof v === 'object' && 'type' in v) return `{ type: ${v.type} }`;
+            return `<${v}>`;
+        }
+
+        function dotValue(v: { [key: string]: unknown } | unknown) {
+            if (typeof v === 'object' && v) {
+                return Object.fromEntries(Object.entries(v).map(([k, v]) => [k, value(v)]));
+            }
+            return `<${typeof v}>`;
+        }
+
+        const { parent: _, ...n } = path.node;
+        const warn = log;
+        warn('Node: %o', {
+            key: path.key,
+            type: n.type,
+            path: inheritanceSummary(path),
+            node: dotValue(n),
+        });
     }
 
     /**
@@ -301,7 +300,8 @@ export async function spellCheck(
     }
 
     function isFunctionCall(node: ASTNode | undefined, name: string): boolean {
-        return node?.type === 'CallExpression' && node.callee.type === 'Identifier' && node.callee.name === name;
+        if (!node) return false;
+        return node.type === 'CallExpression' && node.callee.type === 'Identifier' && node.callee.name === name;
     }
 
     function isRequireCall(node: ASTNode | undefined) {
@@ -312,15 +312,35 @@ export async function spellCheck(
         return isRequireCall(node.parent) || (node.parent?.type === 'ImportDeclaration' && node.parent.source === node);
     }
 
-    function debugNode(node: ASTNode, value: unknown) {
-        if (!isDebugModeExtended) return;
-        const val = format('%o', value);
-        log(`${inheritanceSummary(node)}: ${val}`);
+    function debugNode(path: ASTPath, value: unknown) {
+        log(`${inheritanceSummary(path)}: %o`, value);
+        debugMode && _dumpNode(path);
     }
+
+    // console.warn('root: %o', root);
 
     walkTree(root, checkNode);
 
     return { issues, errors };
+}
+
+function mapNode(path: ASTPath, key: Key | undefined): ScopeItem {
+    const node = path.node;
+    if (node.type === 'Literal') {
+        return scopeItem(tagLiteral(node));
+    }
+    if (node.type === 'Block') {
+        const value = typeof node.value === 'string' ? node.value : '';
+        return scopeItem(value[0] === '*' ? 'Comment.docBlock' : 'Comment.block');
+    }
+    if (node.type === 'Line') {
+        return scopeItem('Comment.line');
+    }
+    return mapNodeToScope(path, key);
+}
+
+function inheritanceSummary(path: ASTPath) {
+    return astScopeToString(path, ' ', mapNode);
 }
 
 function tagLiteral(node: ASTNode | TSESTree.Node): string {
@@ -328,7 +348,7 @@ function tagLiteral(node: ASTNode | TSESTree.Node): string {
     const kind = typeof node.value;
     const extra =
         kind === 'string'
-            ? node.raw?.[0] === '"'
+            ? asStr(node.raw)?.[0] === '"'
                 ? 'string.double'
                 : 'string.single'
             : node.value === null
@@ -488,4 +508,26 @@ async function reportConfigurationErrors(config: CSpellSettings, knownConfigErro
     });
 
     return errors;
+}
+
+interface ScopeCheck {
+    scope: AstScopeMatcher;
+    check: boolean;
+}
+
+function groupScopes(scopes: ScopeSelectorList): Map<string, ScopeCheck[]> {
+    const objScopes = Object.fromEntries(scopes);
+    const map = new Map<string, ScopeCheck[]>();
+    for (const [selector, check] of Object.entries(objScopes)) {
+        const scope = AstScopeMatcher.fromScopeSelector(selector);
+        const key = scope.scopeType();
+        const list = map.get(key) || [];
+        list.push({ scope, check });
+        map.set(key, list);
+    }
+    return map;
+}
+
+function asStr(v: string | unknown): string | undefined {
+    return typeof v === 'string' ? v : undefined;
 }

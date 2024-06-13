@@ -192,6 +192,7 @@ interface Options {
     /** Define dictionaries. */
     dictionaryDefinitions?: DictionaryDefinition[];
   };
+
   /**
    * Specify a path to a custom word list file.
    *
@@ -201,6 +202,35 @@ interface Options {
    * ```
    */
   customWordListFile?: string | { path: string };
+
+  /**
+   * Scope selectors to spell check.
+   * This is a list of scope selectors to spell check.
+   *
+   * Example:
+   * ```js
+   * checkScope: [
+   *     ['YAMLPair[key] YAMLScalar', true],
+   *     ['YAMLPair[value] YAMLScalar', true],
+   *     ['YAMLSequence[entries] YAMLScalar', true],
+   *     ['JSONProperty[key] JSONLiteral', true],
+   *     ['JSONProperty[value] JSONLiteral', true],
+   *     ['JSONArrayExpression JSONLiteral', true],
+   * ],
+   * ```
+   *
+   * To turn off checking JSON keys, use the following:
+   *
+   * ```js
+   * checkScope: [
+   *     ['JSONProperty[key] JSONLiteral', false],
+   * ],
+   * ```
+   *
+   * @since 8.9.0
+   */
+  checkScope?: ScopeSelectorList;
+
   /**
    * Output debug logs
    * @default false
@@ -293,6 +323,24 @@ With this configuration, `blacklist` is flagged as forbidden and `allowlist` is 
 When spell checking, if `colour` is not in one of the dictionaries, then `color` will be offered as the preferred suggestion. `suggestWords` are used to provide preferred suggestions, but will not flag any words as incorrect.
 
 CSpell will match case, but not word stems. `blacklist` and `Blacklist` will get replaced, but not `blacklists`.
+
+## Checking Custom AST Nodes
+
+The `checkScope` setting is used to enable / disable checking AST Nodes. ESLint uses parsers to generate the AST (Abstract Syntax Tree) to evaluate a document. Each PlugIn gets access to the AST. `checkScope` can be used to handle new AST nodes when a custom parser is added. Some knowledge of the AST output by the parser is necessary.
+
+```js
+rules: {
+  '@cspell/spellchecker': ['warn', { checkScope: [
+    ['JSONLiteral': true],  // will match AST Nodes of type `JSONLiteral` and spell check the value.
+    ['JSONProperty[key] JSONLiteral', false]  // will turn off checking the JSON Property keys.
+    ['JSONProperty JSONLiteral', false]  // will turn off checking the JSON Property keys and values.
+    ['JSONProperty[value] JSONLiteral', true]  // will turn on checking the JSON Property values.
+    ['YAMLPair[key] YAMLScalar', true],
+    ['YAMLPair[value] YAMLScalar', true],
+    ['YAMLSequence YAMLScalar', true],
+  ] }],
+},
+```
 
 ## In Combination with CSpell
 

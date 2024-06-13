@@ -112,6 +112,26 @@ export interface Check {
      * ```
      */
     customWordListFile?: CustomWordListFilePath | CustomWordListFile | undefined;
+
+    /**
+     * Scope selectors to spell check.
+     * This is a list of scope selectors to spell check.
+     *
+     * Example:
+     * ```js
+     * checkScope: [
+     *     ['YAMLPair[key] YAMLScalar', true],
+     *     ['YAMLPair[value] YAMLScalar', true],
+     *     ['YAMLSequence[entries] YAMLScalar', true],
+     *     ['JSONProperty[key] JSONLiteral', true],
+     *     ['JSONProperty[value] JSONLiteral', true],
+     *     ['JSONArrayExpression JSONLiteral', true],
+     * ],
+     * ```
+     *
+     * @since 8.9.0
+     */
+    checkScope?: ScopeSelectorList;
 }
 
 /**
@@ -134,3 +154,21 @@ export const defaultOptions: Options = {
     generateSuggestions: true,
     autoFix: false,
 };
+
+/**
+ * The scope selector is a string that defines the context in which a rule applies.
+ * Examples:
+ * - `YAMLPair[value] YAMLScalar` - check the value of a YAML pair.
+ * - `YAMLPair[key] YAMLScalar` - check the key of a YAML pair.
+ */
+export type ScopeSelector = string;
+
+/**
+ * A scope selector entry is a tuple that defines a scope selector and whether to spell check it.
+ */
+export type ScopeSelectorEntry = [ScopeSelector, boolean];
+
+/**
+ * A list of scope selectors.
+ */
+export type ScopeSelectorList = ScopeSelectorEntry[];

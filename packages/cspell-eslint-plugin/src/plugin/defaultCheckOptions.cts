@@ -15,6 +15,7 @@ export const defaultCheckOptions: Required<Check> = {
     customWordListFile: undefined,
     ignoreImportProperties: true,
     ignoreImports: true,
+    checkScope: [],
 };
 
 export const defaultOptions: RequiredOptions = {
