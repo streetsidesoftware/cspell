@@ -45,9 +45,10 @@
     "assets",
     "dist",
     "!**/__mocks__",
-    "!**/*.tsbuildInfo",
-    "!**/*.test.*",
     "!**/*.spec.*",
+    "!**/*.test.*",
+    "!**/test*/**",
+    "!**/*.tsbuildInfo",
     "!**/*.map"
   ],
   "scripts": {
@@ -60,6 +61,7 @@
     "clean-build": "pnpm run clean && pnpm run build",
     "coverage": "echo coverage",
     "test-watch": "pnpm run test -- --watch",
+    "test-yaml": "npx mocha --timeout 10000 \"dist/**/yaml.test.mjs\"",
     "test": "npx mocha --timeout 10000 \"dist/**/*.test.mjs\""
   },
   "repository": {
@@ -81,14 +83,17 @@
     "@typescript-eslint/parser": "^7.13.0",
     "@typescript-eslint/types": "^7.13.0",
     "eslint": "^9.4.0",
+    "eslint-plugin-markdown": "^5.0.0",
     "eslint-plugin-n": "^17.8.1",
     "eslint-plugin-react": "^7.34.2",
     "eslint-plugin-simple-import-sort": "^12.1.0",
+    "eslint-plugin-yml": "^1.14.0",
     "globals": "^15.4.0",
     "mocha": "^10.4.0",
     "ts-json-schema-generator": "^2.3.0",
     "typescript": "^5.4.5",
-    "typescript-eslint": "^7.13.0"
+    "typescript-eslint": "^7.13.0",
+    "yaml-eslint-parser": "^1.2.3"
   },
   "dependencies": {
     "@cspell/cspell-types": "workspace:*",
