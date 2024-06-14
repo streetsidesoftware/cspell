@@ -7,7 +7,7 @@ const schemaFileOut = new URL('../docs/Configuration/auto_properties.md', import
 async function run() {
     const schema = await loadSchema();
 
-    const header = `\
+    const header = inject`\
     ---
     # AUTO-GENERATED ALL CHANGES WILL BE LOST
     # See \`_scripts/extract-properties.js\`
@@ -21,7 +21,7 @@ async function run() {
 
   `;
 
-    const sections = [removeLeftPad(header), '', schemaEntry(schema, 'Settings'), '', formatDefinitions(schema)];
+    const sections = [header, '', schemaEntry(schema, 'Settings'), '', formatDefinitions(schema)];
 
     const doc = sections.join('\n').replace(/\u200B/g, ''); // remove zero width spaces
 
@@ -86,43 +86,43 @@ function formatPropertyForOverview(key, entry, section) {
 }
 
 function formatPropertyToDisplay(key, entry, nameOfParentType) {
-    return removeLeftPad(`
+    return inject`
 
         ---
 
         #### \`${key}\` {#${toId(nameOfParentType, key)}}
 
-        ${padLines(formatTypeEntryBody(entry), '        ')}
-    `);
+        ${formatTypeEntryBody(entry)}
+    `;
 }
 
 function formatTopLevelType(key, entry) {
-    return removeLeftPad(`
+    return inject`
 
         ---
 
         ## ${key} {#${toId('', key)}}
 
-        ${padLines(formatTypeEntryBody(entry), '        ')}
-    `);
+        ${formatTypeEntryBody(entry)}
+    `;
 }
 
 function formatTypeEntryBody(entry) {
     let dlDescription = formatEntryDescription(entry, '');
     if (dlDescription) {
-        dlDescription = removeLeftPad(`
+        dlDescription = inject`
             <dt>Description</dt>
             <dd>
 
-            ${padLines(dlDescription, '            ')}
+            ${dlDescription}
 
             </dd>
-        `);
+        `;
     }
 
-    return removeLeftPad(`
+    return inject`
         <dl>
-        ${padLines(dlDescription, '        ')}
+        ${dlDescription}
         <dt>Type</dt>
         <dd>
 
@@ -130,7 +130,7 @@ function formatTypeEntryBody(entry) {
 
         </dd>
         </dl>
-    `);
+    `;
 }
 
 /**
@@ -228,13 +228,53 @@ function padLines(str, padding = '', firstLinePadding = '') {
     return lines.join('\n');
 }
 
-function removeLeftPad(str) {
+/**
+ * Inject values into a template string.
+ * @param {TemplateStringsArray} template
+ * @param  {...any} values
+ * @returns
+ */
+function inject(template, ...values) {
+    const strings = template;
+    const adjValues = [];
+    for (let i = 0; i < values.length; ++i) {
+        const prevLines = strings[i].split('\n');
+        const currLine = prevLines[prevLines.length - 1];
+        const padLen = padLength(currLine);
+        const padding = ' '.repeat(padLen);
+        const value = `${values[i]}`;
+        let pad = '';
+        const valueLines = [];
+        for (const line of value.split('\n')) {
+            valueLines.push(pad + line);
+            pad = padding;
+        }
+        adjValues.push(valueLines.join('\n'));
+    }
+
+    return unindent(String.raw({ raw: strings }, ...adjValues));
+}
+
+/**
+ * Calculate the padding at the start of the string.
+ * @param {string} s
+ * @returns {number}
+ */
+function padLength(s) {
+    return s.length - s.trimStart().length;
+}
+
+/**
+ * Remove the left padding from a multi-line string.
+ * @param {string} str
+ * @returns {string}
+ */
+function unindent(str) {
     const lines = str.split('\n');
     let curPad = str.length;
     for (const line of lines) {
         if (!line.trim()) continue;
-        const pad = line.length - line.trimStart().length;
-        curPad = Math.min(curPad, pad);
+        curPad = Math.min(curPad, padLength(line));
     }
 
     return lines.map((line) => line.slice(curPad)).join('\n');
