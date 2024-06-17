@@ -3,7 +3,7 @@ Repository: aspnetboilerplate/aspnetboilerplate
 Url: "https://github.com/aspnetboilerplate/aspnetboilerplate"
 Args: ["**/*.{md,cs,cshtml}","--exclude=wwwroot","--exclude=**/*SampleApp.Tests/Web*"]
 Lines:
- CSpell: Files checked: 2688, Issues found: 2808 in 832 files.
+ CSpell: Files checked: 2733, Issues found: 2853 in 856 files.
  exit code: 1
 ./CONTRIBUTING.md:28:30     - Unknown word (aspnetboilerplate) -- Documents are located in [/aspnetboilerplate/doc](https://github
 ./LICENSE.md:3:25      - Unknown word (Volosoft)   -- Copyright (c) 2013-2021 Volosoft (https://volosoft.com
@@ -208,9 +208,10 @@ Lines:
 ./src/Abp.Zero.Common/Auditing/AuditingStore.cs:8:66      - Unknown word (informations) -- /> to save auditing informations to database.
 ./src/Abp.Zero.Common/MultiTenancy/AbpTenant.cs:32:30     - Unknown word (deleter)    -- // Reference to the deleter user of this entity
 ./src/Abp.Zero.Common/Zero/Configuration/AbpZeroSettingProvider.cs:72:56     - Unknown word (Maxumum)    -- FixedLocalizableString("Maxumum Failed access attempt
+./src/Abp.Zero.NHibernate/EntityHistory/EventExtensions.cs:15:65     - Unknown word (Metamodel)  -- event.Persister.EntityMetamodel.Type.GetProperties(
+./src/Abp.Zero.NHibernate/EntityHistory/NhEntityHistoryHelper.cs:173:47    - Unknown word (Unproxied)  -- typeOfEntity = ProxyHelper.GetUnproxiedType(entityEntry);
 ./src/Abp.Zero.NHibernate/Zero/FluentMigrator/Migrations/_20150312_01_Add_DeleteAuidit_To_AbpTenants_Tables.cs:7:41      - Unknown word (Auidit)     -- 150312_01_Add_DeleteAuidit_To_AbpTenants_Tables
 ./src/Abp.Zero.NHibernate/Zero/NHibernate/EntityMappings/AuditLogMap.cs:36:36     - Unknown word (Nvarchar)   -- .Length(Extensions.NvarcharMax);
-./src/Abp.ZeroCore.EntityFrameworkCore/EntityHistory/EntityHistoryHelper.cs:135:47    - Unknown word (Unproxied)  -- typeOfEntity = ProxyHelper.GetUnproxiedType(entityEntry.Entity
 ./src/Abp.ZeroCore.IdentityServer4.vNext.EntityFrameworkCore/IdentityServer4vNext/AbpZeroCoreIdentityServerEntityFrameworkCoreConfigurationExtensions.cs:31:60     - Unknown word (nvarchar)   -- over 4K converts to nvarchar(max) on SqlServer
 ./src/Abp.ZeroCore/Authorization/Users/AbpUserStore.cs:2233:34   - Unknown word (userclaims) -- var query = from userclaims in await _userClaimRepository
 ./src/Abp.ZeroCore/Authorization/Users/AbpUserStore.cs:2299:34   - Unknown word (userrole)   -- var query = from userrole in await _userRoleRepository
@@ -506,7 +507,7 @@ Lines:
 ./test/Abp.Tests/Localization/Json/JsonAndXmlSourceMixing_Tests.cs:33:17     - Unknown word (mananger)   -- var mananger = LocalIocManager.Resolve
 ./test/Abp.Tests/Localization/ResourceFileLocalizationSource_Tests.cs:39:108    - Unknown word (Merhaba)    -- tCultureInfo("tr")).ShouldBe("Merhaba!");
 ./test/Abp.Tests/Localization/TestResourceFiles/MyTestResource.Designer.cs:37:46     - Unknown word (Browsable)  -- ComponentModel.EditorBrowsableAttribute(global::System
-./test/Abp.Tests/Localization/Test_DictionaryBasedLocalizationSource.cs:100:28    - Unknown word (Dünya)      -- {"world", "Dünya"}
+./test/Abp.Tests/Localization/Test_DictionaryBasedLocalizationSource.cs:107:28    - Unknown word (Dünya)      -- {"world", "Dünya"}
 ./test/Abp.Tests/Localization/Test_DictionaryBasedLocalizationSource.cs:29:27     - Unknown word (Yeryüzü)    -- Assert.Equal("Yeryüzü", _localizationSource
 ./test/Abp.Tests/Localization/Test_DictionaryBasedLocalizationSource.cs:41:27     - Unknown word (Fourty)     -- Assert.Equal("Fourty Two (42)", _localizationSourc
 ./test/Abp.Tests/Localization/Test_DictionaryBasedLocalizationSource.cs:41:76     - Unknown word (fourty)     -- localizationSource.GetString("fourtyTwo", new CultureInfo
@@ -533,7 +534,9 @@ Lines:
 ./test/Abp.Web.Api.Tests/DynamicApiController/ServiceNameValidation_Tests.cs:16:108    - Unknown word (mynamespace) -- myNameSpace1/MyNameSpace2/mynamespace3/myserviceName"));
 ./test/Abp.Web.Common.Tests/Configuration/AbpUserConfigurationBuilder_Tests.cs:52:96     - Unknown word (Authanticated) -- RequiresAuthentication_For_Authanticated_User()
 ./test/Abp.Web.Tests/Localization/AbpWebLocalizationTests.cs:27:73     - Unknown word (Evet)       -- "tr-TR")).ShouldBe("Evet");
-./test/Abp.Zero.SampleApp.NHibernateTests/NHibernate/NHibernateTestBase.cs:9:41      - Unknown word (Datas)      -- SampleApp.NHibernate.TestDatas;
+./test/Abp.Zero.SampleApp.NHibernateTests/NHibernate/EntityHistory/SimpleEntityHistory_Test.cs:12:40     - Unknown word (Nhibernate) -- SampleApp.EntityHistory.Nhibernate;
+./test/Abp.Zero.SampleApp.NHibernateTests/NHibernate/Mappings/FooMap.cs:8:33      - Unknown word (Foos)       -- public FooMap() : base("Foos")
+./test/Abp.Zero.SampleApp.NHibernateTests/NHibernate/NHibernateTestBase.cs:8:41      - Unknown word (Datas)      -- SampleApp.NHibernate.TestDatas;
 ./test/Abp.Zero.SampleApp.NHibernateTests/Organizations/OrganizationUnitManager_NHibernate_Tests.cs:137:49    - Unknown word (diplay)     -- OrganizationUnit GetOU(string diplayName)
 ./test/Abp.Zero.SampleApp.Tests/Ldap/LdapAuthenticationSource_Tests.cs:71:84     - Unknown word (testuser)   -- logInManager.LoginAsync("testuser", "testpass", Tenant
 ./test/Abp.Zero.SampleApp.Tests/Ldap/LdapAuthenticationSource_Tests.cs:71:96     - Unknown word (testpass)   -- LoginAsync("testuser", "testpass", Tenant.DefaultTenantName

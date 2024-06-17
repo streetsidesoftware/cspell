@@ -3,7 +3,7 @@ Repository: caddyserver/caddy
 Url: "https://github.com/caddyserver/caddy.git"
 Args: ["**/*.go"]
 Lines:
- CSpell: Files checked: 273, Issues found: 4061 in 254 files.
+ CSpell: Files checked: 274, Issues found: 4070 in 255 files.
  exit code: 1
 ./admin.go:1371:21   - Unknown word (pidfile)     -- // PIDFile writes a pidfile to the file at filename
 ./admin.go:331:29    - Unknown word (infosec)     -- security checks, the infosec community assures me
@@ -42,8 +42,9 @@ Lines:
 ./caddyconfig/caddyfile/formatter_test.go:332:10    - Unknown word (ACMEEMAIL)  -- email {$ACMEEMAIL}
 ./caddyconfig/caddyfile/lexer.go:353:6     - Unknown word (heredocs)   -- // heredocs have an extra linebreak
 ./caddyconfig/caddyfile/lexer_test.go:404:24    - Unknown word (Aheredoc)   -- input: []byte("\u000Aheredoc \u003C\u003C\u0073\u
-./caddyconfig/caddyfile/parse.go:662:36    - Unknown word (Curlies)    -- parser) blockTokens(retainCurlies bool) ([]Token, error
-./caddyconfig/caddyfile/parse.go:663:21    - Unknown word (curlies)    -- // block must have curlies.
+./caddyconfig/caddyfile/parse.go:391:13    - Unknown word (elee)       -- // TODO(elee1766): we don't enter
+./caddyconfig/caddyfile/parse.go:725:36    - Unknown word (Curlies)    -- parser) blockTokens(retainCurlies bool) ([]Token, error
+./caddyconfig/caddyfile/parse.go:726:21    - Unknown word (curlies)    -- // block must have curlies.
 ./caddyconfig/caddyfile/parse_test.go:665:13    - Unknown word (foofoobarbar) -- expect: "foofoobarbar",
 ./caddyconfig/caddyfile/parse_test.go:677:13    - Unknown word (foobarfoobar) -- expect: "foobarfoobar",
 ./caddyconfig/caddyfile/parse_test.go:689:13    - Unknown word (foobarbaz)    -- expect: "foobarbaz",
@@ -66,8 +67,8 @@ Lines:
 ./caddyconfig/httpcaddyfile/builtins.go:745:84    - Unknown word (subroute)      -- than an HTTP route or subroute: %#v (only handler directives
 ./caddyconfig/httpcaddyfile/builtins.go:77:8      - Unknown word (alpn)       -- // alpn
 ./caddyconfig/httpcaddyfile/builtins.go:850:8     - Unknown word (hostnames)     -- // hostnames <hostnames...>
-./caddyconfig/httpcaddyfile/builtins.go:917:8     - Unknown word (Hostnames)     -- customHostnames := []string{}
-./caddyconfig/httpcaddyfile/builtins_test.go:176:31    - Unknown word (htlm)       -- /old.html /new.html htlm
+./caddyconfig/httpcaddyfile/builtins.go:918:8     - Unknown word (Hostnames)     -- customHostnames := []string{}
+./caddyconfig/httpcaddyfile/builtins_test.go:178:31    - Unknown word (htlm)       -- /old.html /new.html htlm
 ./caddyconfig/httpcaddyfile/directives.go:316:58    - Unknown word (vals)       -- caddyhttp.Route type) in vals to the
 ./caddyconfig/httpcaddyfile/directives.go:93:7      - Unknown word (fastcgi)    -- "php_fastcgi",
 ./caddyconfig/httpcaddyfile/httptype.go:1317:3    - Unknown word (hostm)      -- hostm caddyhttp.MatchHost
@@ -145,7 +146,7 @@ Lines:
 ./listeners.go:584:25    - Unknown word (hotswappable) -- someone would need a hotswappable QUIC-only (not http
 ./listeners.go:588:7     - Unknown word (fcql)         -- func (fcql *fakeCloseQuicListener
 ./logging.go:283:7     - Unknown word (wdest)      -- func (wdest writerDestructor) Destruct
-./logging.go:472:10    - Unknown word (superspace) -- // be a superspace or subspace of an item
+./logging.go:484:10    - Unknown word (superspace) -- // be a superspace or subspace of an item
 ./metrics.go:39:15     - Unknown word (promhttp)   -- // Similar to promhttp.InstrumentHandlerCounter
 ./metrics.go:8:50      - Unknown word (promauto)   -- client_golang/prometheus/promauto"
 ./modules/caddyevents/app.go:128:12    - Unknown word (Iface)       -- handlersIface, err := ctx.LoadModule
@@ -329,7 +330,7 @@ Lines:
 ./modules/caddyhttp/reverseproxy/reverseproxy.go:583:47    - Unknown word (slowloris)  -- more susceptible to slowloris
 ./modules/caddyhttp/reverseproxy/reverseproxy.go:628:50    - Unknown word (websockets) -- upgrades, such as for websockets.
 ./modules/caddyhttp/reverseproxy/reverseproxy.go:758:31    - Unknown word (backported) -- Forward 1xx status codes, backported from https://github
-./modules/caddyhttp/reverseproxy/selectionpolicies.go:804:65    - Unknown word (hashable)   -- from pool based on a hashable string s.
+./modules/caddyhttp/reverseproxy/selectionpolicies.go:829:65    - Unknown word (hashable)   -- from pool based on a hashable string s.
 ./modules/caddyhttp/reverseproxy/streaming.go:138:6     - Unknown word (timeoutc)    -- var timeoutc <-chan time.Time
 ./modules/caddyhttp/reverseproxy/streaming.go:145:2     - Unknown word (errc)        -- errc := make(chan error,
 ./modules/caddyhttp/reverseproxy/streaming.go:248:7     - Unknown word (rerr)        -- nr, rerr := src.Read(buf)
