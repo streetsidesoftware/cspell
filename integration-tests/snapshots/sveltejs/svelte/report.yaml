@@ -3,9 +3,9 @@ Repository: sveltejs/svelte
 Url: https://github.com/sveltejs/svelte.git
 Args: '["**"]'
 Summary:
-  files: 6697
+  files: 6713
   filesWithIssues: 637
-  issues: 5315
+  issues: 5316
   errors: 0
 Errors: []
 
@@ -1167,7 +1167,7 @@ issues:
   - "packages/svelte/src/compiler/legacy.js:128:9        thenblock       U       let thenblock = {"
   - "packages/svelte/src/compiler/legacy.js:138:9        catchblock      U       let catchblock = {"
   - "packages/svelte/src/compiler/legacy.js:284:9        elseblock       U       let elseblock = undefined;"
-  - "packages/svelte/src/compiler/migrate/index.js:253:76        automigration       U       is not supported for automigration.'"
+  - "packages/svelte/src/compiler/migrate/index.js:258:76        automigration       U       is not supported for automigration.'"
   - "packages/svelte/src/compiler/phases/1-parse/index.js:1:48           borked      U       type definitions are borked in the release we use"
   - "packages/svelte/src/compiler/phases/1-parse/read/options.js:1:20        mathml          U       import { namespace_mathml, namespace_svg } from"
   - "packages/svelte/src/compiler/phases/1-parse/read/options.js:138:12      shadowdom       U       const shadowdom = shadow?.value;"
@@ -2450,12 +2450,12 @@ issues:
   - "packages/svelte/src/compiler/phases/2-analyze/index.js:91:12        hoistable       U       const non_hoistable = { type: 'non-hoistable"
   - "packages/svelte/src/compiler/phases/2-analyze/index.js:247:64       tweaker         U       runes_js, runes_scope_js_tweaker)"
   - "packages/svelte/src/compiler/phases/2-analyze/index.js:460:18       nonstate        U       // warn on any nonstate declarations that are"
-  - "packages/svelte/src/compiler/phases/2-analyze/index.js:1425:73      qirk            U       stripped because of a qirk:"
+  - "packages/svelte/src/compiler/phases/2-analyze/index.js:1426:73      qirk            U       stripped because of a qirk:"
   - "packages/svelte/src/compiler/phases/3-transform/client/utils.js:344:29      unsub       U       return b.call('$.store_unsub', call, b.literal(`"
   - "packages/svelte/src/compiler/phases/3-transform/client/visitors/global.js:95:23         IIFEE       U       // turn it into an IIFEE assignment expression"
   - "packages/svelte/src/compiler/phases/3-transform/client/visitors/template.js:136:65      toogle          U       something like `$.class_toogle(element, class_name"
   - "packages/svelte/src/compiler/phases/3-transform/client/visitors/template.js:286:67      readded         U       it isn't removed and readded on every update"
-  - "packages/svelte/src/compiler/phases/3-transform/client/visitors/template.js:2228:47     computeds       U       ...lets); // create computeds in the outer context"
+  - "packages/svelte/src/compiler/phases/3-transform/client/visitors/template.js:2226:47     computeds       U       ...lets); // create computeds in the outer context"
   - "packages/svelte/src/compiler/phases/3-transform/utils.js:128:44         inbetween (between)     U       trailing whitespace of inbetween text nodes,"
   - "packages/svelte/src/compiler/phases/3-transform/utils.js:226:75         spaceand                U       text node with a single spaceand keep whitespace"
   - "packages/svelte/src/compiler/phases/constants.js:129:3          hatchpath           U       'hatchpath',"
@@ -2495,23 +2495,23 @@ issues:
   - "packages/svelte/src/constants.js:218:14         bgsound         U       tag === 'bgsound' ||"
   - "packages/svelte/src/internal/client/constants.js:17:56          deriveds    U       need to be handled with deriveds and be recognized elsewhere"
   - "packages/svelte/src/internal/client/dev/ownership.js:51:14          bondaries       U       // of the bondaries/component context heuristic"
-  - "packages/svelte/src/internal/client/dom/blocks/each.js:149:86       treeshaken      U       let` or else it isn't treeshaken out */"
-  - "packages/svelte/src/internal/client/dom/blocks/svelte-element.js:81:18          Noone (No one)      U       // Assumption: Noone changes the namespace"
+  - "packages/svelte/src/internal/client/dom/blocks/each.js:148:86       treeshaken      U       let` or else it isn't treeshaken out */"
+  - "packages/svelte/src/internal/client/dom/blocks/svelte-element.js:82:18          Noone (No one)      U       // Assumption: Noone changes the namespace"
   - "packages/svelte/src/internal/client/dom/elements/actions.js:16:8        inited      U       var inited = false;"
-  - "packages/svelte/src/internal/client/dom/elements/bindings/input.js:20:13        numberlike      U       update(is_numberlike_input(input) ? to_number"
+  - "packages/svelte/src/internal/client/dom/elements/bindings/input.js:22:13        numberlike      U       update(is_numberlike_input(input) ? to_number"
   - "packages/svelte/src/internal/client/dom/elements/bindings/this.js:41:78         nullfiy     U       context changes), then nullfiy the binding at"
   - "packages/svelte/src/internal/client/dom/elements/class.js:80:6          peformance      U       // peformance issues vs simply making"
   - "packages/svelte/src/internal/client/dom/elements/misc.js:54:66          possiblity (possibility)    U       get noticed of it (no possiblity of stopPropagation)"
-  - "packages/svelte/src/internal/client/dom/elements/transitions.js:318:6       WAAPI       U       // WAAPI"
+  - "packages/svelte/src/internal/client/dom/elements/transitions.js:319:6       WAAPI       U       // WAAPI"
   - "packages/svelte/src/internal/client/reactivity/effects.js:6:10          untracking      U       current_untracking,"
   - "packages/svelte/src/internal/client/reactivity/props.js:325:36      synchronisation     U       current_value); // force a synchronisation immediately"
   - "packages/svelte/src/internal/client/reactivity/types.d.ts:33:6          Deriveds    U       /** Deriveds created inside this"
   - "packages/svelte/src/internal/client/render.js:151:19        occured (occurred)      U       // If an error occured above, the operations"
-  - "packages/svelte/src/internal/client/runtime.js:252:12       thise               U       // In thise case, we need to re"
-  - "packages/svelte/src/internal/client/runtime.js:320:36       callstack           U       internal files from callstack"
-  - "packages/svelte/src/internal/client/runtime.js:888:26       doesnt (doesn't)    U       mutate(dep, null /* doesnt matter */);"
-  - "packages/svelte/src/internal/client/runtime.js:1307:29      noone (no one)      U       value; // let's hope noone modifies this global"
-  - "packages/svelte/src/internal/client/runtime.js:1346:31      proxified           U       the object is already proxified, then snapshot the value"
+  - "packages/svelte/src/internal/client/runtime.js:257:12       thise               U       // In thise case, we need to re"
+  - "packages/svelte/src/internal/client/runtime.js:325:36       callstack           U       internal files from callstack"
+  - "packages/svelte/src/internal/client/runtime.js:908:26       doesnt (doesn't)    U       mutate(dep, null /* doesnt matter */);"
+  - "packages/svelte/src/internal/client/runtime.js:1327:29      noone (no one)      U       value; // let's hope noone modifies this global"
+  - "packages/svelte/src/internal/client/runtime.js:1366:31      proxified           U       the object is already proxified, then snapshot the value"
   - "packages/svelte/src/internal/client/types.d.ts:10:19        JITs    U       // when the JS VM JITs the code."
   - "packages/svelte/src/internal/server/index.js:19:23          FDEF        U       [\\s'\">/=\\u{FDD0}-\\u{FDEF}\\u{FFFE}\\u{FFFF}\\u{"
   - "packages/svelte/src/internal/server/index.js:19:31          FFFE        U       \\u{FDD0}-\\u{FDEF}\\u{FFFE}\\u{FFFF}\\u{1FFFE}\\u"
@@ -2668,8 +2668,8 @@ issues:
   - "packages/svelte/tests/runtime-runes/samples/reactive-to-string/main.svelte:6:6          rmap    U       let rmap = new ReactiveMap()"
   - "packages/svelte/tests/runtime-runes/samples/reactive-to-string/main.svelte:7:6          rset    U       let rset = new ReactiveSet()"
   - "packages/svelte/tests/server-side-rendering/samples/attribute-escaped-quotes-spread/_expected.html:5:2          quux    U       quux=\"&quot;><script>alert"
-  - "packages/svelte/tests/signals/test.ts:209:26        onowned         U       test('correctly cleanup onowned nested derived values"
-  - "packages/svelte/tests/signals/test.ts:278:56        depedencies     U       derived that has no depedencies', () => {"
+  - "packages/svelte/tests/signals/test.ts:208:26        onowned         U       test('correctly cleanup onowned nested derived values"
+  - "packages/svelte/tests/signals/test.ts:277:56        depedencies     U       derived that has no depedencies', () => {"
   - "packages/svelte/tests/sourcemaps/samples/external/_config.js:26:4           Divs    U       'Divs ftw!',"
   - "packages/svelte/tests/sourcemaps/samples/preprocessed-multiple/_config.js:10:37         bazitone    U       replace_all(src, '--bazitone', '--baz');"
   - "packages/svelte/tests/sourcemaps/samples/sourcemap-basename-without-outputname/input.svelte:1:32        outputname      U       sourcemap-basename-without-outputname</h1>"
@@ -2729,7 +2729,7 @@ issues:
   - "sites/svelte-5-preview/src/lib/Output/Viewer.svelte:78:7        ungroup     U       ungroup_logs();"
   - "sites/svelte-5-preview/src/lib/workers/bundler/index.js:9:8         glsl    U       import glsl from './plugins/glsl"
   - "sites/svelte-5-preview/src/lib/workers/patch_window.js:1:39         sring       U       self; // hack for magic-sring and rollup inline sourcemaps"
-  - "sites/svelte-5-preview/src/routes/docs/content/01-api/02-runes.md:319:215       synchronise     U       particular, avoid using it to synchronise state. Instead of this"
+  - "sites/svelte-5-preview/src/routes/docs/content/01-api/02-runes.md:313:215       synchronise     U       particular, avoid using it to synchronise state. Instead of this"
   - "sites/svelte-5-preview/src/routes/docs/content/01-api/03-snippets.md:5:119          duplicative     U       Instead of writing duplicative code like [this](/#H"
   - "sites/svelte-5-preview/src/routes/docs/content/02-examples/04-old-vs-new.md:40:220      refactorable    U       in more maintainable, refactorable code."
   - "sites/svelte-5-preview/src/routes/docs/content/02-examples/04-old-vs-new.md:67:4        Untracking      U       ## Untracking dependencies"

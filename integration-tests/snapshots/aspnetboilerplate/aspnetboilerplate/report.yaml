@@ -3,9 +3,9 @@ Repository: aspnetboilerplate/aspnetboilerplate
 Url: https://github.com/aspnetboilerplate/aspnetboilerplate
 Args: '["**/*.{md,cs,cshtml}","--exclude=wwwroot","--exclude=**/*SampleApp.Tests/Web*"]'
 Summary:
-  files: 2688
-  filesWithIssues: 832
-  issues: 2808
+  files: 2733
+  filesWithIssues: 856
+  issues: 2853
   errors: 0
 Errors: []
 
@@ -213,9 +213,10 @@ issues:
   - "src/Abp.Zero.Common/Auditing/AuditLog.cs:128:47         occured (occurred)      U       object, if an exception occured during execution of"
   - "src/Abp.Zero.Common/MultiTenancy/AbpTenant.cs:32:30         deleter     U       // Reference to the deleter user of this entity"
   - "src/Abp.Zero.Common/Zero/Configuration/AbpZeroSettingProvider.cs:72:56          Maxumum     U       FixedLocalizableString(\"Maxumum Failed access attempt"
+  - "src/Abp.Zero.NHibernate/EntityHistory/EventExtensions.cs:15:65          Metamodel       U       event.Persister.EntityMetamodel.Type.GetProperties("
+  - "src/Abp.Zero.NHibernate/EntityHistory/NhEntityHistoryHelper.cs:173:47       Unproxied       U       typeOfEntity = ProxyHelper.GetUnproxiedType(entityEntry);"
   - "src/Abp.Zero.NHibernate/Zero/FluentMigrator/Migrations/_20150312_01_Add_DeleteAuidit_To_AbpTenants_Tables.cs:7:41           Auidit      U       150312_01_Add_DeleteAuidit_To_AbpTenants_Tables"
   - "src/Abp.Zero.NHibernate/Zero/NHibernate/EntityMappings/AuditLogMap.cs:36:36         Nvarchar    U       .Length(Extensions.NvarcharMax);"
-  - "src/Abp.ZeroCore.EntityFrameworkCore/EntityHistory/EntityHistoryHelper.cs:135:47        Unproxied       U       typeOfEntity = ProxyHelper.GetUnproxiedType(entityEntry.Entity"
   - "src/Abp.ZeroCore.IdentityServer4.vNext.EntityFrameworkCore/IdentityServer4vNext/AbpZeroCoreIdentityServerEntityFrameworkCoreConfigurationExtensions.cs:31:60        nvarchar    U       over 4K converts to nvarchar(max) on SqlServer"
   - "src/Abp.ZeroCore/Authorization/Users/AbpUserStore.cs:2233:34        userclaims      U       var query = from userclaims in await _userClaimRepository"
   - "src/Abp.ZeroCore/Authorization/Users/AbpUserStore.cs:2299:34        userrole        U       var query = from userrole in await _userRoleRepository"
@@ -515,7 +516,7 @@ issues:
   - "test/Abp.Tests/Localization/Test_DictionaryBasedLocalizationSource.cs:41:76         fourty (forty)      U       localizationSource.GetString(\"fourtyTwo\", new CultureInfo"
   - "test/Abp.Tests/Localization/Test_DictionaryBasedLocalizationSource.cs:61:32         Selam               U       {\"hello\", \"Selam\"},"
   - "test/Abp.Tests/Localization/Test_DictionaryBasedLocalizationSource.cs:77:100        localed             U       ShouldBe(\"World\"); //not localed into french"
-  - "test/Abp.Tests/Localization/Test_DictionaryBasedLocalizationSource.cs:100:28        Dünya               U       {\"world\", \"Dünya\"}"
+  - "test/Abp.Tests/Localization/Test_DictionaryBasedLocalizationSource.cs:107:28        Dünya               U       {\"world\", \"Dünya\"}"
   - "test/Abp.Tests/Localization/Test_XmlLocalizationDictionaryBuilder.cs:34:34          Merhabalar      U       name=\"\"hello\"\" value=\"\"Merhabalar\"\"></text>"
   - "test/Abp.Tests/Localization/TestResourceFiles/MyTestResource.Designer.cs:37:46          Browsable       U       ComponentModel.EditorBrowsableAttribute(global::System"
   - "test/Abp.Tests/ObjectComparators/ObjectComparatorManager_Tests.cs:15:46         Equalto     U       string ReverseOfSecondIsEqualtoFirstCompareType = \"ReverseOfS"
@@ -538,7 +539,9 @@ issues:
   - "test/Abp.Web.Api.Tests/DynamicApiController/ServiceNameValidation_Tests.cs:16:108       mynamespace     U       myNameSpace1/MyNameSpace2/mynamespace3/myserviceName\"));"
   - "test/Abp.Web.Common.Tests/Configuration/AbpUserConfigurationBuilder_Tests.cs:52:96          Authanticated       U       RequiresAuthentication_For_Authanticated_User()"
   - "test/Abp.Web.Tests/Localization/AbpWebLocalizationTests.cs:27:73        Evet    U       \"tr-TR\")).ShouldBe(\"Evet\");"
-  - "test/Abp.Zero.SampleApp.NHibernateTests/NHibernate/NHibernateTestBase.cs:9:41           Datas       U       SampleApp.NHibernate.TestDatas;"
+  - "test/Abp.Zero.SampleApp.NHibernateTests/NHibernate/EntityHistory/SimpleEntityHistory_Test.cs:12:40          Nhibernate      U       SampleApp.EntityHistory.Nhibernate;"
+  - "test/Abp.Zero.SampleApp.NHibernateTests/NHibernate/Mappings/FooMap.cs:8:33          Foos    U       public FooMap() : base(\"Foos\")"
+  - "test/Abp.Zero.SampleApp.NHibernateTests/NHibernate/NHibernateTestBase.cs:8:41           Datas       U       SampleApp.NHibernate.TestDatas;"
   - "test/Abp.Zero.SampleApp.NHibernateTests/Organizations/OrganizationUnitManager_NHibernate_Tests.cs:137:49        diplay      U       OrganizationUnit GetOU(string diplayName)"
   - "test/Abp.Zero.SampleApp.Tests/Ldap/LdapAuthenticationSource_Tests.cs:71:84          testuser    U       logInManager.LoginAsync(\"testuser\", \"testpass\", Tenant"
   - "test/Abp.Zero.SampleApp.Tests/Ldap/LdapAuthenticationSource_Tests.cs:71:96          testpass    U       LoginAsync(\"testuser\", \"testpass\", Tenant.DefaultTenantName"

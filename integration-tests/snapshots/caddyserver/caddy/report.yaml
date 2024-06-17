@@ -3,9 +3,9 @@ Repository: caddyserver/caddy
 Url: https://github.com/caddyserver/caddy.git
 Args: '["**/*.go"]'
 Summary:
-  files: 273
-  filesWithIssues: 254
-  issues: 4061
+  files: 274
+  filesWithIssues: 255
+  issues: 4070
   errors: 0
 Errors: []
 
@@ -50,8 +50,9 @@ issues:
   - "caddyconfig/caddyfile/parse_test.go:665:13      foofoobarbar    U       expect: \"foofoobarbar\","
   - "caddyconfig/caddyfile/parse_test.go:677:13      foobarfoobar    U       expect: \"foobarfoobar\","
   - "caddyconfig/caddyfile/parse_test.go:689:13      foobarbaz       U       expect: \"foobarbaz\","
-  - "caddyconfig/caddyfile/parse.go:662:36       Curlies     U       parser) blockTokens(retainCurlies bool) ([]Token, error"
-  - "caddyconfig/caddyfile/parse.go:663:21       curlies     U       // block must have curlies."
+  - "caddyconfig/caddyfile/parse.go:391:13       elee        U       // TODO(elee1766): we don't enter"
+  - "caddyconfig/caddyfile/parse.go:725:36       Curlies     U       parser) blockTokens(retainCurlies bool) ([]Token, error"
+  - "caddyconfig/caddyfile/parse.go:726:21       curlies     U       // block must have curlies."
   - "caddyconfig/httpcaddyfile/addresses_fuzz.go:17:9        httpcaddyfile       U       package httpcaddyfile"
   - "caddyconfig/httpcaddyfile/addresses.go:31:43        caddyhttp       U       caddyserver/caddy/v2/modules/caddyhttp\""
   - "caddyconfig/httpcaddyfile/addresses.go:83:2         sbmap           U       sbmap := make(map[string]"
@@ -61,7 +62,7 @@ issues:
   - "caddyconfig/httpcaddyfile/addresses.go:166:23       Sblocks         U       for otherAddr, otherSblocks := range addrToServerBlocks"
   - "caddyconfig/httpcaddyfile/addresses.go:214:5        hport           U       if hport, ok := options[\"http"
   - "caddyconfig/httpcaddyfile/addresses.go:217:5        hsport          U       if hsport, ok := options[\"https"
-  - "caddyconfig/httpcaddyfile/builtins_test.go:176:31       htlm    U       /old.html /new.html htlm"
+  - "caddyconfig/httpcaddyfile/builtins_test.go:178:31       htlm    U       /old.html /new.html htlm"
   - "caddyconfig/httpcaddyfile/builtins.go:27:14         mholt               U       \"github.com/mholt/acmez/v2/acme\""
   - "caddyconfig/httpcaddyfile/builtins.go:27:20         acmez               U       \"github.com/mholt/acmez/v2/acme\""
   - "caddyconfig/httpcaddyfile/builtins.go:77:8          alpn                U       // alpn"
@@ -72,7 +73,7 @@ issues:
   - "caddyconfig/httpcaddyfile/builtins.go:743:35        Subroute            U       caddyhttp.Route, caddyhttp.Subroute:"
   - "caddyconfig/httpcaddyfile/builtins.go:745:84        subroute            U       than an HTTP route or subroute: %#v (only handler directives"
   - "caddyconfig/httpcaddyfile/builtins.go:850:8         hostnames           U       // hostnames <hostnames...>"
-  - "caddyconfig/httpcaddyfile/builtins.go:917:8         Hostnames           U       customHostnames := []string{}"
+  - "caddyconfig/httpcaddyfile/builtins.go:918:8         Hostnames           U       customHostnames := []string{}"
   - "caddyconfig/httpcaddyfile/directives.go:93:7        fastcgi     U       \"php_fastcgi\","
   - "caddyconfig/httpcaddyfile/directives.go:316:58      vals        U       caddyhttp.Route type) in vals to the"
   - "caddyconfig/httpcaddyfile/httptype_test.go:17:11        showdebug       U       query showdebug=1"
@@ -150,7 +151,7 @@ issues:
   - "listeners.go:584:25         hotswappable    U       someone would need a hotswappable QUIC-only (not http"
   - "listeners.go:588:7          fcql            U       func (fcql *fakeCloseQuicListener"
   - "logging.go:283:7        wdest           U       func (wdest writerDestructor) Destruct"
-  - "logging.go:472:10       superspace      U       // be a superspace or subspace of an item"
+  - "logging.go:484:10       superspace      U       // be a superspace or subspace of an item"
   - "metrics.go:8:50         promauto    U       client_golang/prometheus/promauto\""
   - "metrics.go:39:15        promhttp    U       // Similar to promhttp.InstrumentHandlerCounter"
   - "modules/caddyevents/app.go:15:9         caddyevents         U       package caddyevents"
@@ -334,7 +335,7 @@ issues:
   - "modules/caddyhttp/reverseproxy/reverseproxy.go:628:50       websockets      U       upgrades, such as for websockets."
   - "modules/caddyhttp/reverseproxy/reverseproxy.go:758:31       backported      U       Forward 1xx status codes, backported from https://github"
   - "modules/caddyhttp/reverseproxy/reverseproxy.go:1339:56      libcurl         U       standard but still sent by libcurl and rejected by e.g"
-  - "modules/caddyhttp/reverseproxy/selectionpolicies.go:804:65      hashable    U       from pool based on a hashable string s."
+  - "modules/caddyhttp/reverseproxy/selectionpolicies.go:829:65      hashable    U       from pool based on a hashable string s."
   - "modules/caddyhttp/reverseproxy/streaming.go:83:22       cancelation     U       // Ensure that the cancelation of a request closes"
   - "modules/caddyhttp/reverseproxy/streaming.go:138:6       timeoutc        U       var timeoutc <-chan time.Time"
   - "modules/caddyhttp/reverseproxy/streaming.go:145:2       errc            U       errc := make(chan error,"
