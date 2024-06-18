@@ -46,10 +46,12 @@ function schemaObjectEntry(schemaTypeObject, nameOfType) {
     }
 
     // Object Fields as a table
-    lines.push('| Field | Type | Description |', '| --- | --- | --- |');
-    for (const [key, entry] of Object.entries(properties)) {
-        lines.push(formatPropertyForOverview(key, entry, nameOfType));
-    }
+    lines.push(
+        createTable(
+            ['Field', 'Type', 'Description'],
+            Object.entries(properties).map(([key, entry]) => formatPropertyForOverview(key, entry, nameOfType)),
+        ),
+    );
 
     // Add Object Fields Expanded.
 
@@ -82,7 +84,7 @@ function toId(nameOfParentType, header) {
 }
 
 function formatPropertyForOverview(key, entry, section) {
-    return `| ${linkToHeader(key, section)} | ${formatEntryType(entry)} | ${formatEntryDescriptionShort(entry)} | `;
+    return [linkToHeader(key, section), formatEntryType(entry), formatEntryDescriptionShort(entry)];
 }
 
 function formatPropertyToDisplay(key, entry, nameOfParentType) {
@@ -253,6 +255,32 @@ function inject(template, ...values) {
     }
 
     return unindent(String.raw({ raw: strings }, ...adjValues));
+}
+
+/**
+ *
+ * @param {string[]} headers
+ * @param {string[][]} rows
+ * @returns
+ */
+function createTable(headers, rows) {
+    const colWidths = [];
+
+    for (const row of [headers, ...rows]) {
+        row.forEach((col, i) => {
+            colWidths[i] = Math.max(colWidths[i] || 0, [...col].length);
+        });
+    }
+
+    const rowPlaceholders = colWidths.map(() => '');
+    const sep = headers.map((_, i) => '---'.padEnd(colWidths[i], '-'));
+    const table = [headers, sep, ...rows];
+
+    return table
+        .map((row) => [...row, ...rowPlaceholders.slice(row.length)])
+        .map((row) => row.map((col, i) => col.padEnd(colWidths[i])))
+        .map((row) => `| ${row.join(' | ')} |`)
+        .join('\n');
 }
 
 /**
