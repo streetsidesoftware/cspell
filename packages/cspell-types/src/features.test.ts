@@ -10,7 +10,7 @@ describe('features', () => {
 
     /**
      * This test is to ensure type, it is not really a unit test
-     * It uses the complier to verify the definitions.
+     * It uses the compiler to verify the definitions.
      */
     test('assignment', () => {
         const f: Features = {};

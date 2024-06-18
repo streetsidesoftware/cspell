@@ -83,7 +83,7 @@ const definedDefaultRegExpExcludeList: PredefinedPatterns[] = [
     'UUID',
 ];
 
-// This bit of copying is done to have the complier ensure that the defaults exist.
+// This bit of copying is done to have the compiler ensure that the defaults exist.
 const defaultRegExpExcludeList: PredefinedPatternNames[] = definedDefaultRegExpExcludeList;
 
 export const _defaultSettingsBasis: Readonly<CSpellSettingsInternal> = Object.freeze(
