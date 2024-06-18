@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 8.9.0 (2024-06-18)
+
+**Note:** Version bump only for package test-cspell-pipe-esm
+
 ## 8.9.0-alpha.0 (2024-06-18)
 
 * ci: Fix Lint -- Workflow Bot (#5770) ([b21032f](https://github.com/streetsidesoftware/cspell/commit/b21032f)), closes [#5770](https://github.com/streetsidesoftware/cspell/issues/5770)
