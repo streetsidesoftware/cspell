@@ -109,7 +109,7 @@ describe('Validate SimpleDictionaryParser', () => {
         'BeginEnd',
     ];
 
-    // cspell:ignore Midle beginmidleend gescháft cafë resumé
+    // cspell:ignore Midle beginmidleend gescháft cafë resumé agin
     test.each`
         word               | ignoreCase | has      | expected
         ${'end'}           | ${false}   | ${false} | ${['End']}

@@ -10,7 +10,7 @@ Using this technique, nearly every default configuration setting can be overridd
 
 Order of imports does make a difference. `overrides` are applied in order, followed by `languageSettings`. This means that multiple `overrides` can change the same configuration setting with the last one winning.
 
-Even though it is possible to apply settings based upon conditions in `overrides` and `languageSettings`, it is not possible to conditionally _import_ configuration. An automatic workaround is enabled by dynamically searching for the nearest configuration when checking a file. It is possible to disable dynamically loading the nearest configuration by setting `noConfigSearch` to `true`. Despite this limitation, it is not desireable to allow for _conditional imports_. _Conditional imports_ would introduce a destabilizing effect on configuration calculation and optimization.
+Even though it is possible to apply settings based upon conditions in `overrides` and `languageSettings`, it is not possible to conditionally _import_ configuration. An automatic workaround is enabled by dynamically searching for the nearest configuration when checking a file. It is possible to disable dynamically loading the nearest configuration by setting `noConfigSearch` to `true`. Despite this limitation, it is not desirable to allow for _conditional imports_. _Conditional imports_ would introduce a destabilizing effect on configuration calculation and optimization.
 
 ## Problem
 
