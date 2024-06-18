@@ -123,7 +123,7 @@ export function createIgnoreWordsDictionary(
             w.normalize(NormalizeForm),
         );
 
-        const hasSpecial = words.findIndex((word) => testSpecialCharacters.test(word)) >= 0;
+        const hasSpecial = words.some((word) => testSpecialCharacters.test(word));
 
         if (hasSpecial) {
             return createSpellingDictionary(words, name, source, {
