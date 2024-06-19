@@ -149,6 +149,7 @@ describe('Validate Spell Checking Documents', () => {
         ${f('.cspellcache')}                              | ${''}           | ${{}}                          | ${{}}                                           | ${{ checked: false, errors: undefined }}
         ${f('.eslintcache')}                              | ${''}           | ${{}}                          | ${{}}                                           | ${{ checked: false, errors: undefined }}
         ${d(f('src/big_image.txt'), undefined, 'binary')} | ${''}           | ${{}}                          | ${{}}                                           | ${{ checked: false, errors: undefined }}
+        ${d(f('src/data.dat'), '\u0000\u0000\u0000')}     | ${''}           | ${{}}                          | ${{}}                                           | ${{ checked: false, errors: undefined }}
         ${f('./ruby/Gemfile')}                            | ${''}           | ${{}}                          | ${{}}                                           | ${{ checked: true, errors: undefined, settingsUsed: oc({ languageId: 'ruby' }) }}
     `(
         'spellCheckFile $uri $settings $options',

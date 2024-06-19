@@ -95,6 +95,17 @@ export async function spellCheckDocument(
     try {
         const timer = createPerfTimer('loadFile');
         const doc = await resolveDocument(document).finally(() => timer.end());
+        if (isBinaryDoc(doc)) {
+            return {
+                document,
+                options,
+                settingsUsed: settings,
+                localConfigFilepath: undefined,
+                issues: [],
+                checked: false,
+                errors: undefined,
+            };
+        }
         const result = await spellCheckFullDocument(doc, options, settings);
         const perf = result.perf || {};
         perf.loadTimeMs = timer.elapsed;

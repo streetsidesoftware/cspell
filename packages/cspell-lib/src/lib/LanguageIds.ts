@@ -241,7 +241,7 @@ export const languageExtensionDefinitions: LanguageDefinitions = [
     },
     {
         id: 'video',
-        extensions: ['.mov', '.mpg'],
+        extensions: ['.mov', '.mpg', '.mpeg', '.mp4', '.avi', '.wmv', '.mkv', '.flv'],
         format: 'Binary',
     },
     {

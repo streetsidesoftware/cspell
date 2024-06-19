@@ -45,7 +45,7 @@ interface DocumentWithText extends Document {
     text: string;
 }
 
-declare function isBinaryFile(filename: Uri | URL | string, languageId?: string | string[]): boolean;
+declare function isBinaryFile(filename: Uri | URL | string, languageId?: string | string[], text?: string): boolean;
 
 type DocumentUri = Uri;
 interface Position {
