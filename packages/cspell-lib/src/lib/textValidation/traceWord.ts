@@ -50,7 +50,7 @@ export function traceWord(
     config: TraceOptions,
 ): TraceResult {
     const opts: HasOptions = {
-        ignoreCase: true,
+        ignoreCase: config.ignoreCase ?? true,
         useCompounds: config.allowCompoundWords || false,
     };
 
@@ -59,7 +59,9 @@ export function traceWord(
 
     const unique = uniqueFn((w: WordSplits) => w.word + '|' + w.found);
 
-    const wsFound = { word, found: dictCollection.has(word, opts) };
+    const dFound = dictCollection.find(word, { ...opts, ignoreCase: true });
+
+    const wsFound = { word: dFound?.found || word, found: dictCollection.has(word, opts) };
     const wordSplits = wfSplits.some((s) => s.word === word) ? wfSplits : [wsFound, ...wfSplits];
 
     const traces = wordSplits
