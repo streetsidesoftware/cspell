@@ -117,10 +117,12 @@ export class DocumentValidator {
 
         const { options, settings: rawSettings } = this;
 
-        const settings = await resolveSettingsImports(
-            rawSettings,
-            new URL(rawSettings.name || 'virtual.settings.json', pathToFileURL('./')),
-        );
+        const settings = rawSettings.import?.length
+            ? await resolveSettingsImports(
+                  rawSettings,
+                  new URL(rawSettings.name || 'virtual.settings.json', pathToFileURL('./')),
+              )
+            : rawSettings;
 
         const useSearchForConfig =
             (!options.noConfigSearch && !settings.noConfigSearch) || options.noConfigSearch === false;
