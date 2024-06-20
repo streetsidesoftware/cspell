@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## <small>8.9.1 (2024-06-20)</small>
+
+* docs: format tables in generated docs (#5776) ([02e0359](https://github.com/streetsidesoftware/cspell/commit/02e0359)), closes [#5776](https://github.com/streetsidesoftware/cspell/issues/5776)
+
 ## 8.9.0 (2024-06-18)
 
 **Note:** Version bump only for package @cspell/cspell-pipe
