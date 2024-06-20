@@ -5,7 +5,7 @@ Args: '["**","--exclude=**/Backup/**"]'
 Summary:
   files: 489
   filesWithIssues: 452
-  issues: 14341
+  issues: 14344
   errors: 0
 Errors: []
 
@@ -1548,7 +1548,8 @@ issues:
   - "Scripts/Generate_BIML_Script.sql:78:8           Delmited    U       , 'Delmited' \"@FlatFileType\""
   - "Scripts/GenerateTSQLTimeSlices.sql:15:9         TIMEFROMPARTS       U       , TIMEFROMPARTS(0,0,0,0,0)"
   - "Scripts/Get_Amazon_RDS_Instance_Size.sql:28:6           rdsadmin    U       EXEC rdsadmin.dbo.rds_read_error_log"
-  - "Scripts/Get_Coulmn_Statistics_By_Name.sql:33:28         allc    U       OBJECT_NAME(allc.object_id) + ''' AS"
+  - "Scripts/Get_Coulmn_Statistics_By_Name.sql:20:55         colum (column)      U       '\" no tables with colum name equal \"' + @columnName"
+  - "Scripts/Get_Coulmn_Statistics_By_Name.sql:33:28         allc                U       OBJECT_NAME(allc.object_id) + ''' AS"
   - "Scripts/Get_CPU_Usage_Per_Database.sql:6:15         Leiba               U       <author>Eli Leiba</author>"
   - "Scripts/Get_CPU_Usage_Per_Database.sql:21:44        Mili                U       DECIMAL (6, 3), [CPUTimeInMiliSeconds] * 1.0 /"
   - "Scripts/Get_CPU_Usage_Per_Database.sql:25:14        execplanattr        U       dm_execplanattr.DatabaseID,"
