@@ -47,7 +47,7 @@ export const regExString = /(?:(['"]).*?(?<![^\\]\\(\\\\)*)\1)|(?:`[\s\S]*?(?<![
 
 // Note: the C Style Comments incorrectly considers '/*' and '//' inside of strings as comments.
 export const regExCStyleComments = /(?<!\w:)(?:\/\/.*)|(?:\/\*[\s\S]*?\*\/)/g;
-export const rexExPythonStyleComments = /#.*|(?:('''|""")[^\1]+?\1)/gm;
+export const rexExPythonStyleComments = /#.*|(?:('''|""")[\s\S]+?\1)/gm;
 
 export const regExEmail = /<?\b[\w.\-+]{1,128}@\w{1,63}(\.\w{1,63}){1,4}\b>?/gi;
 
