@@ -16,6 +16,7 @@ export {
     readRawSettings,
     readSettings,
     readSettingsFiles,
+    resolveSettingsImports,
     searchForConfig,
     sectionCSpell,
 } from './Controller/configLoader/index.js';

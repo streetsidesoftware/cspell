@@ -131,7 +131,8 @@ function create(context: Rule.RuleContext): Rule.RuleListener {
                 'errors: %o',
                 errors.map((e) => e.message),
             );
-            errors.forEach((error) => console.error('%s', error.message));
+            // errors.forEach((error) => console.error('%s', error.message));
+            errors.forEach((error) => context.report({ message: error.message, loc: { line: 1, column: 1 } }));
         }
         issues.forEach((issue) => reportIssue(issue));
     }

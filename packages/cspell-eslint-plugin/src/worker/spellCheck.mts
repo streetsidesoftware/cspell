@@ -24,6 +24,7 @@ import type { Issue, SpellCheckResults, Suggestions } from './types.cjs';
 import { walkTree } from './walkTree.mjs';
 
 const defaultSettings: CSpellSettings = {
+    name: 'eslint-configuration-file',
     patterns: [
         // @todo: be able to use cooked / transformed strings.
         // {

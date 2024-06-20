@@ -1,4 +1,5 @@
 import assert from 'node:assert';
+import { pathToFileURL } from 'node:url';
 
 import { opConcatMap, opMap, pipeSync } from '@cspell/cspell-pipe/sync';
 import type {
@@ -17,7 +18,13 @@ import type { TextDocument, TextDocumentLine, TextDocumentRef } from '../Models/
 import { updateTextDocument } from '../Models/TextDocument.js';
 import type { ValidationIssue } from '../Models/ValidationIssue.js';
 import { createPerfTimer } from '../perf/index.js';
-import { finalizeSettings, loadConfig, mergeSettings, searchForConfig } from '../Settings/index.js';
+import {
+    finalizeSettings,
+    loadConfig,
+    mergeSettings,
+    resolveSettingsImports,
+    searchForConfig,
+} from '../Settings/index.js';
 import type { DirectiveIssue } from '../Settings/InDocSettings.js';
 import { validateInDocumentSettings } from '../Settings/InDocSettings.js';
 import type { SpellingDictionaryCollection, SuggestionResult } from '../SpellingDictionary/index.js';
@@ -108,7 +115,12 @@ export class DocumentValidator {
 
         const timer = createPerfTimer('_prepareAsync');
 
-        const { options, settings } = this;
+        const { options, settings: rawSettings } = this;
+
+        const settings = await resolveSettingsImports(
+            rawSettings,
+            new URL(rawSettings.name || 'virtual.settings.json', pathToFileURL('./')),
+        );
 
         const useSearchForConfig =
             (!options.noConfigSearch && !settings.noConfigSearch) || options.noConfigSearch === false;
