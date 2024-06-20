@@ -492,6 +492,9 @@ importers:
       '@eslint/js':
         specifier: ^9.5.0
         version: 9.5.0
+      '@internal/cspell-eslint-plugin-scripts':
+        specifier: workspace:*
+        version: link:scripts
       '@types/estree':
         specifier: ^1.0.5
         version: 1.0.5
@@ -546,6 +549,15 @@ importers:
       yaml-eslint-parser:
         specifier: ^1.2.3
         version: 1.2.3
+
+  packages/cspell-eslint-plugin/scripts:
+    dependencies:
+      safe-stable-stringify:
+        specifier: ^2.4.3
+        version: 2.4.3
+      ts-json-schema-generator:
+        specifier: ^2.3.0
+        version: 2.3.0
 
   packages/cspell-gitignore:
     dependencies:

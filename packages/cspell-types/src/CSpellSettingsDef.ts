@@ -93,7 +93,7 @@ export interface FileSettings extends ExtendableSettings, CommandLineSettings {
     /**
      * Glob patterns of files to be ignored.
      *
-     * Glob patterns are relative to the `globRoot` of the configuration file that defines them.
+     * Glob patterns are relative to the {@link globRoot} of the configuration file that defines them.
      */
     ignorePaths?: Glob[];
 
@@ -467,7 +467,7 @@ export interface BaseSetting extends InlineDictionary, ExperimentalBaseSettings 
     enabled?: boolean;
 
     /**
-     * True to enable compound word checking. See [Case Sensitivity](https://cspell.org/docs/case-sensitive/) for more details.
+     * True to enable compound word checking.
      *
      * @default false
      */
@@ -475,6 +475,8 @@ export interface BaseSetting extends InlineDictionary, ExperimentalBaseSettings 
 
     /**
      * Determines if words must match case and accent rules.
+     *
+     * See [Case Sensitivity](https://cspell.org/docs/case-sensitive/) for more details.
      *
      * - `false` - Case is ignored and accents can be missing on the entire word.
      *   Incorrect accents or partially missing accents will be marked as incorrect.
@@ -561,8 +563,8 @@ export interface BaseSetting extends InlineDictionary, ExperimentalBaseSettings 
     includeRegExpList?: RegExpPatternList;
 
     /**
-     * Defines a list of patterns that can be used with the `ignoreRegExpList` and
-     * `includeRegExpList` options.
+     * Defines a list of patterns that can be used with the {@link ignoreRegExpList} and
+     * {@link includeRegExpList} options.
      *
      * For example:
      *
@@ -584,8 +586,6 @@ export interface BaseSetting extends InlineDictionary, ExperimentalBaseSettings 
      *   }
      * ]
      * ```
-     * Defines a list of patterns that can be used with the `ignoreRegExpList` and
-     * `includeRegExpList` options.
      */
     patterns?: RegExpPatternDefinition[];
 }
@@ -597,17 +597,17 @@ export interface LanguageSettingFilterFields
         LanguageSettingFilterFieldsDeprecated {}
 
 export interface LanguageSettingFilterFieldsPreferred {
-    /** The language id.  Ex: "typescript", "html", or "php".  "*" -- will match all languages. */
+    /** The language id.  Ex: `typescript`, `html`, or `php`.  `*` -- will match all languages. */
     languageId: MatchingFileType;
-    /** The locale filter, matches against the language. This can be a comma separated list. "*" will match all locales. */
+    /** The locale filter, matches against the language. This can be a comma separated list. `*` will match all locales. */
     locale?: LocaleId | LocaleId[];
 }
 
 export interface LanguageSettingFilterFieldsDeprecated {
-    /** The language id.  Ex: "typescript", "html", or "php".  "*" -- will match all languages. */
+    /** The language id.  Ex: `typescript`, `html`, or `php`.  `*` -- will match all languages. */
     languageId: MatchingFileType;
     /**
-     * Deprecated - The locale filter, matches against the language. This can be a comma separated list. "*" will match all locales.
+     * Deprecated - The locale filter, matches against the language. This can be a comma separated list. `*` will match all locales.
      * @deprecated true
      * @deprecationMessage Use `locale` instead.
      */
@@ -658,7 +658,7 @@ export type PatternRef = Pattern | PatternId | PredefinedPatterns;
 /** A list of pattern names or regular expressions. */
 export type RegExpPatternList = PatternRef[];
 
-/** This is a written language locale like: 'en', 'en-GB', 'fr', 'es', 'de', etc. */
+/** This is a written language locale like: `en`, `en-GB`, `fr`, `es`, `de` or `en,fr` for both English and French */
 export type LocaleId = string;
 
 /**
@@ -708,20 +708,28 @@ export interface GlobDef {
 }
 
 /**
- * This can be '*', 'typescript', 'cpp', 'json', etc.
+ * A file type:
+ * - `*` - will match ALL file types.
+ * - `typescript`, `cpp`, `json`, etc.
  * @pattern ^(!?[-\w_\s]+)|(\*)$
  */
 export type LanguageIdSingle = string;
 
 /**
- * This can be 'typescript,cpp,json,literal haskell', etc.
+ * A single string with a comma separated list of file types:
+ * - `typescript,cpp`
+ * - `json,jsonc,yaml`
+ * - etc.
  * @pattern ^([-\w_\s]+)(,[-\w_\s]+)*$
  */
 export type LanguageIdMultiple = string;
 
 /**
- * This can be 'typescript,cpp,json,literal haskell', etc.
- * @pattern ^(![-\w_\s]+)(,![-\w_\s]+)*$
+ * A Negative File Type used to exclude files of that type.
+ * - `!typescript` - will exclude typescript files.
+ * - `!cpp,!json` - will exclude cpp and json files.
+ * - `!typescript,javascript` - will exclude typescript files and include javascript files.
+ * @pattern ^(![-\w_\s]+)(,!?[-\w_\s]+)*$
  */
 export type LanguageIdMultipleNeg = string;
 
@@ -853,7 +861,7 @@ export interface ExperimentalFileSettings {
 }
 
 /**
- * Extends CSpellSettings with ExperimentalFileSettings
+ * Extends CSpellSettings with {@link ExperimentalFileSettings}
  * @experimental
  * @hidden
  */

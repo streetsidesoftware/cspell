@@ -55,7 +55,8 @@
     "bt": "pnpm build && pnpm test",
     "build": "pnpm build:schema && pnpm build:src",
     "build:src": "tsc -b ./tsconfig.json -f",
-    "build:schema": "ts-json-schema-generator --no-top-ref --expose none --path src/common/options.cts --type Options  -o  ./assets/options.schema.json",
+    "build:schema": "pnpm build-options-schema",
+    "build:schema:old": "ts-json-schema-generator --no-top-ref --expose none --path src/common/options.cts --type Options  -o  ./assets/options.schema.json",
     "watch": "tsc -b ./tsconfig.json --watch -f",
     "clean": "shx rm -rf dist temp coverage \"*.tsbuildInfo\"",
     "clean-build": "pnpm run clean && pnpm run build",
@@ -78,6 +79,7 @@
   "devDependencies": {
     "@eslint/eslintrc": "^3.1.0",
     "@eslint/js": "^9.5.0",
+    "@internal/cspell-eslint-plugin-scripts": "workspace:*",
     "@types/estree": "^1.0.5",
     "@types/mocha": "^10.0.6",
     "@typescript-eslint/parser": "^7.13.1",

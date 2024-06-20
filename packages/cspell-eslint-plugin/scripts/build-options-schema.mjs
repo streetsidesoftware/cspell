@@ -10,13 +10,13 @@ import { createGenerator } from 'ts-json-schema-generator';
 
 const importDir = new URL('.', import.meta.url);
 const rootUrl = new URL('..', importDir);
-const typesDirUrl = new URL('packages/cspell-types', rootUrl);
-const outFile = 'cspell.schema.json';
+const typesDirUrl = new URL('src/common', rootUrl);
+const outFile = 'assets/options.schema.json';
 const typesDir = fileURLToPath(typesDirUrl);
 
 /** @type {import('ts-json-schema-generator').Config} */
 const defaultConfig = {
-    expose: 'export',
+    expose: 'none',
     topRef: true,
     jsDoc: 'extended',
     markdownDescription: true,
@@ -34,35 +34,32 @@ const defaultConfig = {
  * Build the schema. This method replaces the old command line that was run in `packages/cspell-types`
  * ```sh
  * ts-json-schema-generator \
- *   --no-top-ref \
- *   --path src/CSpellSettingsDef.ts \
- *   --type CSpellSettings \
- *   --validation-keywords markdownDescription  \
- *   --validation-keywords scope \
- *   --validation-keywords deprecated \
- *   --validation-keywords deprecationMessage \
- *   -o  ./cspell.schema.json
+ *  --no-top-ref \
+ *  --expose none \
+ *  --validation-keywords markdownDescription  \
+ *  --validation-keywords deprecated \
+ *  --validation-keywords deprecationMessage \
+ *  --path src/common/options.cts \
+ *  --type Options \
+ *  -o  ./assets/options.schema.json
  * ```
  */
 async function run() {
     /** @type {import('ts-json-schema-generator').Config} */
     const config = {
         ...defaultConfig,
-        path: path.join(typesDir, 'src/CSpellSettingsDef.ts'),
+        path: path.join(typesDir, 'src/options.cts'),
         tsconfig: path.join(typesDir, './tsconfig.json'),
-        type: 'CSpellSettings',
+        type: 'Options',
         topRef: false,
-        extraTags: ['scope', 'deprecated', 'deprecationMessage'],
+        extraTags: ['deprecated', 'deprecationMessage'],
         skipTypeCheck: true,
     };
 
     const schema = createGenerator(config).createSchema(config.type);
-    // @ts-expect-error allowTrailingCommas is a new feature
-    schema.allowTrailingCommas = true;
     const stringify = config.sortProps ? safeStableStringify : JSON.stringify;
-    const schemaString = stringify(schema, undefined, 2)?.replaceAll('\u200B', '') || '';
+    const schemaString = stringify(schema, undefined, 2)?.replaceAll('\u200B', '');
 
-    await writeFile(path.join(typesDir, outFile), schemaString);
     await writeFile(new URL(outFile, rootUrl), schemaString);
 }
 
