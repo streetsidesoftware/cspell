@@ -51,7 +51,7 @@ export interface SpellingDictionaryOptions {
     /**
      * This is a NO Suggest dictionary used for words to be ignored.
      */
-    noSuggest?: boolean;
+    noSuggest?: boolean | undefined;
     /**
      * Extra dictionary information used in improving suggestions
      * based upon locale.

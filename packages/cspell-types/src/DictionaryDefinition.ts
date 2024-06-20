@@ -23,7 +23,9 @@ export interface DictionaryDefinitionBase {
      * - Must not contain `*`, `!`, `;`, `,`, `{`, `}`, `[`, `]`, `~`.
      */
     name: DictionaryId;
-    /** Optional description. */
+    /**
+     * Optional description of the contents / purpose of the dictionary.
+     */
     description?: string;
     /** Replacement pairs. */
     repMap?: ReplaceMap;
@@ -38,7 +40,7 @@ export interface DictionaryDefinitionBase {
      * this dictionary, it will be removed from the set of
      * possible suggestions.
      */
-    noSuggest?: boolean;
+    noSuggest?: boolean | undefined;
     /**
      * Type of file:
      * - S - single word per line,
@@ -48,9 +50,12 @@ export interface DictionaryDefinitionBase {
      * Default is S.
      *
      * C is the slowest to load due to the need to split each line based upon code splitting rules.
+     *
+     * Note: this settings does not apply to inline dictionaries or `.trie` files.
+     *
      * @default "S"
      */
-    type?: DictionaryFileTypes;
+    type?: DictionaryFileTypes | undefined;
 }
 
 export interface DictionaryDefinitionPreferred extends DictionaryDefinitionBase {
@@ -60,7 +65,7 @@ export interface DictionaryDefinitionPreferred extends DictionaryDefinitionBase 
     /**
      * Only for legacy dictionary definitions.
      * @deprecated true
-     * @deprecationMessage Use `path` instead.
+     * @deprecationMessage Use {@link path} instead.
      * @hidden
      */
     file?: undefined;
@@ -85,12 +90,20 @@ interface DictionaryDefinitionInlineBase extends DictionaryDefinitionBase, Inlin
      */
     path?: undefined;
     /**
-     * Note used
-     * @deprecated true
-     * @deprecationMessage Use `path` instead.
+     * Not used
      * @hidden
      */
     file?: undefined;
+    /**
+     * Not used
+     * @hidden
+     */
+    type?: DictionaryDefinitionBase['type'];
+    /**
+     * Use `ignoreWords` instead.
+     * @hidden
+     */
+    noSuggest?: DictionaryDefinitionBase['noSuggest'];
 }
 
 export interface DictionaryDefinitionInlineWords
@@ -111,6 +124,12 @@ export interface DictionaryDefinitionInlineIgnoreWords
     ignoreWords: string[];
 }
 
+export interface DictionaryDefinitionInlineSuggestWords
+    extends DictionaryDefinitionInlineBase,
+        Required<Pick<InlineDictionary, 'suggestWords'>> {
+    suggestWords: string[];
+}
+
 /**
  * Inline Dictionary Definitions
  * @since 6.23.0
@@ -118,12 +137,13 @@ export interface DictionaryDefinitionInlineIgnoreWords
 export type DictionaryDefinitionInline =
     | DictionaryDefinitionInlineWords
     | DictionaryDefinitionInlineIgnoreWords
-    | DictionaryDefinitionInlineFlagWords;
+    | DictionaryDefinitionInlineFlagWords
+    | DictionaryDefinitionInlineSuggestWords;
 
 /**
  * Only for legacy dictionary definitions.
  * @deprecated true
- * @deprecationMessage Use `DictionaryDefinitionPreferred` instead.
+ * @deprecationMessage Use {@link DictionaryDefinitionPreferred} instead.
  */
 export interface DictionaryDefinitionAlternate extends DictionaryDefinitionBase {
     /** @hidden */
@@ -149,7 +169,7 @@ export interface DictionaryDefinitionLegacy extends DictionaryDefinitionBase {
     /**
      * File name.
      * @deprecated true
-     * @deprecationMessage Use `path` instead.
+     * @deprecationMessage Use {@link path} instead.
      */
     file: FsDictionaryPath;
     /**

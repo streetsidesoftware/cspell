@@ -235,13 +235,13 @@
     "DictionaryDefinitionAlternate": {
       "additionalProperties": false,
       "deprecated": true,
-      "deprecationMessage": "Use `DictionaryDefinitionPreferred` instead.",
+      "deprecationMessage": "Use {@link DictionaryDefinitionPreferred } instead.",
       "description": "Only for legacy dictionary definitions.",
       "markdownDescription": "Only for legacy dictionary definitions.",
       "properties": {
         "description": {
-          "description": "Optional description.",
-          "markdownDescription": "Optional description.",
+          "description": "Optional description of the contents / purpose of the dictionary.",
+          "markdownDescription": "Optional description of the contents / purpose of the dictionary.",
           "type": "string"
         },
         "file": {
@@ -269,8 +269,8 @@
         "type": {
           "$ref": "#/definitions/DictionaryFileTypes",
           "default": "S",
-          "description": "Type of file:\n- S - single word per line,\n- W - each line can contain one or more words separated by space,\n- C - each line is treated like code (Camel Case is allowed).\n\nDefault is S.\n\nC is the slowest to load due to the need to split each line based upon code splitting rules.",
-          "markdownDescription": "Type of file:\n- S - single word per line,\n- W - each line can contain one or more words separated by space,\n- C - each line is treated like code (Camel Case is allowed).\n\nDefault is S.\n\nC is the slowest to load due to the need to split each line based upon code splitting rules."
+          "description": "Type of file:\n- S - single word per line,\n- W - each line can contain one or more words separated by space,\n- C - each line is treated like code (Camel Case is allowed).\n\nDefault is S.\n\nC is the slowest to load due to the need to split each line based upon code splitting rules.\n\nNote: this settings does not apply to inline dictionaries or `.trie` files.",
+          "markdownDescription": "Type of file:\n- S - single word per line,\n- W - each line can contain one or more words separated by space,\n- C - each line is treated like code (Camel Case is allowed).\n\nDefault is S.\n\nC is the slowest to load due to the need to split each line based upon code splitting rules.\n\nNote: this settings does not apply to inline dictionaries or `.trie` files."
         },
         "useCompounds": {
           "description": "Use Compounds.",
@@ -290,8 +290,8 @@
       "markdownDescription": "Used to provide extra data related to the dictionary",
       "properties": {
         "description": {
-          "description": "Optional description.",
-          "markdownDescription": "Optional description.",
+          "description": "Optional description of the contents / purpose of the dictionary.",
+          "markdownDescription": "Optional description of the contents / purpose of the dictionary.",
           "type": "string"
         },
         "dictionaryInformation": {
@@ -320,8 +320,8 @@
         "type": {
           "$ref": "#/definitions/DictionaryFileTypes",
           "default": "S",
-          "description": "Type of file:\n- S - single word per line,\n- W - each line can contain one or more words separated by space,\n- C - each line is treated like code (Camel Case is allowed).\n\nDefault is S.\n\nC is the slowest to load due to the need to split each line based upon code splitting rules.",
-          "markdownDescription": "Type of file:\n- S - single word per line,\n- W - each line can contain one or more words separated by space,\n- C - each line is treated like code (Camel Case is allowed).\n\nDefault is S.\n\nC is the slowest to load due to the need to split each line based upon code splitting rules."
+          "description": "Type of file:\n- S - single word per line,\n- W - each line can contain one or more words separated by space,\n- C - each line is treated like code (Camel Case is allowed).\n\nDefault is S.\n\nC is the slowest to load due to the need to split each line based upon code splitting rules.\n\nNote: this settings does not apply to inline dictionaries or `.trie` files.",
+          "markdownDescription": "Type of file:\n- S - single word per line,\n- W - each line can contain one or more words separated by space,\n- C - each line is treated like code (Camel Case is allowed).\n\nDefault is S.\n\nC is the slowest to load due to the need to split each line based upon code splitting rules.\n\nNote: this settings does not apply to inline dictionaries or `.trie` files."
         },
         "useCompounds": {
           "description": "Use Compounds.",
@@ -346,8 +346,8 @@
           "type": "boolean"
         },
         "description": {
-          "description": "Optional description.",
-          "markdownDescription": "Optional description.",
+          "description": "Optional description of the contents / purpose of the dictionary.",
+          "markdownDescription": "Optional description of the contents / purpose of the dictionary.",
           "type": "string"
         },
         "name": {
@@ -388,8 +388,8 @@
         "type": {
           "$ref": "#/definitions/DictionaryFileTypes",
           "default": "S",
-          "description": "Type of file:\n- S - single word per line,\n- W - each line can contain one or more words separated by space,\n- C - each line is treated like code (Camel Case is allowed).\n\nDefault is S.\n\nC is the slowest to load due to the need to split each line based upon code splitting rules.",
-          "markdownDescription": "Type of file:\n- S - single word per line,\n- W - each line can contain one or more words separated by space,\n- C - each line is treated like code (Camel Case is allowed).\n\nDefault is S.\n\nC is the slowest to load due to the need to split each line based upon code splitting rules."
+          "description": "Type of file:\n- S - single word per line,\n- W - each line can contain one or more words separated by space,\n- C - each line is treated like code (Camel Case is allowed).\n\nDefault is S.\n\nC is the slowest to load due to the need to split each line based upon code splitting rules.\n\nNote: this settings does not apply to inline dictionaries or `.trie` files.",
+          "markdownDescription": "Type of file:\n- S - single word per line,\n- W - each line can contain one or more words separated by space,\n- C - each line is treated like code (Camel Case is allowed).\n\nDefault is S.\n\nC is the slowest to load due to the need to split each line based upon code splitting rules.\n\nNote: this settings does not apply to inline dictionaries or `.trie` files."
         },
         "useCompounds": {
           "description": "Use Compounds.",
@@ -414,6 +414,9 @@
         },
         {
           "$ref": "#/definitions/DictionaryDefinitionInlineFlagWords"
+        },
+        {
+          "$ref": "#/definitions/DictionaryDefinitionInlineSuggestWords"
         }
       ],
       "description": "Inline Dictionary Definitions",
@@ -423,8 +426,8 @@
       "additionalProperties": false,
       "properties": {
         "description": {
-          "description": "Optional description.",
-          "markdownDescription": "Optional description.",
+          "description": "Optional description of the contents / purpose of the dictionary.",
+          "markdownDescription": "Optional description of the contents / purpose of the dictionary.",
           "type": "string"
         },
         "flagWords": {
@@ -469,8 +472,8 @@
         "type": {
           "$ref": "#/definitions/DictionaryFileTypes",
           "default": "S",
-          "description": "Type of file:\n- S - single word per line,\n- W - each line can contain one or more words separated by space,\n- C - each line is treated like code (Camel Case is allowed).\n\nDefault is S.\n\nC is the slowest to load due to the need to split each line based upon code splitting rules.",
-          "markdownDescription": "Type of file:\n- S - single word per line,\n- W - each line can contain one or more words separated by space,\n- C - each line is treated like code (Camel Case is allowed).\n\nDefault is S.\n\nC is the slowest to load due to the need to split each line based upon code splitting rules."
+          "description": "Type of file:\n- S - single word per line,\n- W - each line can contain one or more words separated by space,\n- C - each line is treated like code (Camel Case is allowed).\n\nDefault is S.\n\nC is the slowest to load due to the need to split each line based upon code splitting rules.\n\nNote: this settings does not apply to inline dictionaries or `.trie` files.",
+          "markdownDescription": "Type of file:\n- S - single word per line,\n- W - each line can contain one or more words separated by space,\n- C - each line is treated like code (Camel Case is allowed).\n\nDefault is S.\n\nC is the slowest to load due to the need to split each line based upon code splitting rules.\n\nNote: this settings does not apply to inline dictionaries or `.trie` files."
         },
         "useCompounds": {
           "description": "Use Compounds.",
@@ -496,8 +499,8 @@
       "additionalProperties": false,
       "properties": {
         "description": {
-          "description": "Optional description.",
-          "markdownDescription": "Optional description.",
+          "description": "Optional description of the contents / purpose of the dictionary.",
+          "markdownDescription": "Optional description of the contents / purpose of the dictionary.",
           "type": "string"
         },
         "flagWords": {
@@ -542,8 +545,8 @@
         "type": {
           "$ref": "#/definitions/DictionaryFileTypes",
           "default": "S",
-          "description": "Type of file:\n- S - single word per line,\n- W - each line can contain one or more words separated by space,\n- C - each line is treated like code (Camel Case is allowed).\n\nDefault is S.\n\nC is the slowest to load due to the need to split each line based upon code splitting rules.",
-          "markdownDescription": "Type of file:\n- S - single word per line,\n- W - each line can contain one or more words separated by space,\n- C - each line is treated like code (Camel Case is allowed).\n\nDefault is S.\n\nC is the slowest to load due to the need to split each line based upon code splitting rules."
+          "description": "Type of file:\n- S - single word per line,\n- W - each line can contain one or more words separated by space,\n- C - each line is treated like code (Camel Case is allowed).\n\nDefault is S.\n\nC is the slowest to load due to the need to split each line based upon code splitting rules.\n\nNote: this settings does not apply to inline dictionaries or `.trie` files.",
+          "markdownDescription": "Type of file:\n- S - single word per line,\n- W - each line can contain one or more words separated by space,\n- C - each line is treated like code (Camel Case is allowed).\n\nDefault is S.\n\nC is the slowest to load due to the need to split each line based upon code splitting rules.\n\nNote: this settings does not apply to inline dictionaries or `.trie` files."
         },
         "useCompounds": {
           "description": "Use Compounds.",
@@ -565,12 +568,12 @@
       ],
       "type": "object"
     },
-    "DictionaryDefinitionInlineWords": {
+    "DictionaryDefinitionInlineSuggestWords": {
       "additionalProperties": false,
       "properties": {
         "description": {
-          "description": "Optional description.",
-          "markdownDescription": "Optional description.",
+          "description": "Optional description of the contents / purpose of the dictionary.",
+          "markdownDescription": "Optional description of the contents / purpose of the dictionary.",
           "type": "string"
         },
         "flagWords": {
@@ -615,8 +618,81 @@
         "type": {
           "$ref": "#/definitions/DictionaryFileTypes",
           "default": "S",
-          "description": "Type of file:\n- S - single word per line,\n- W - each line can contain one or more words separated by space,\n- C - each line is treated like code (Camel Case is allowed).\n\nDefault is S.\n\nC is the slowest to load due to the need to split each line based upon code splitting rules.",
-          "markdownDescription": "Type of file:\n- S - single word per line,\n- W - each line can contain one or more words separated by space,\n- C - each line is treated like code (Camel Case is allowed).\n\nDefault is S.\n\nC is the slowest to load due to the need to split each line based upon code splitting rules."
+          "description": "Type of file:\n- S - single word per line,\n- W - each line can contain one or more words separated by space,\n- C - each line is treated like code (Camel Case is allowed).\n\nDefault is S.\n\nC is the slowest to load due to the need to split each line based upon code splitting rules.\n\nNote: this settings does not apply to inline dictionaries or `.trie` files.",
+          "markdownDescription": "Type of file:\n- S - single word per line,\n- W - each line can contain one or more words separated by space,\n- C - each line is treated like code (Camel Case is allowed).\n\nDefault is S.\n\nC is the slowest to load due to the need to split each line based upon code splitting rules.\n\nNote: this settings does not apply to inline dictionaries or `.trie` files."
+        },
+        "useCompounds": {
+          "description": "Use Compounds.",
+          "markdownDescription": "Use Compounds.",
+          "type": "boolean"
+        },
+        "words": {
+          "description": "List of words to be considered correct.",
+          "items": {
+            "type": "string"
+          },
+          "markdownDescription": "List of words to be considered correct.",
+          "type": "array"
+        }
+      },
+      "required": [
+        "name",
+        "suggestWords"
+      ],
+      "type": "object"
+    },
+    "DictionaryDefinitionInlineWords": {
+      "additionalProperties": false,
+      "properties": {
+        "description": {
+          "description": "Optional description of the contents / purpose of the dictionary.",
+          "markdownDescription": "Optional description of the contents / purpose of the dictionary.",
+          "type": "string"
+        },
+        "flagWords": {
+          "description": "List of words to always be considered incorrect. Words found in `flagWords` override `words`.\n\nFormat of `flagWords`\n- single word entry - `word`\n- with suggestions - `word:suggestion` or `word->suggestion, suggestions`\n\nExample: ```ts \"flagWords\": [   \"color: colour\",   \"incase: in case, encase\",   \"canot->cannot\",   \"cancelled->canceled\" ] ```",
+          "items": {
+            "type": "string"
+          },
+          "markdownDescription": "List of words to always be considered incorrect. Words found in `flagWords` override `words`.\n\nFormat of `flagWords`\n- single word entry - `word`\n- with suggestions - `word:suggestion` or `word->suggestion, suggestions`\n\nExample:\n```ts\n\"flagWords\": [\n  \"color: colour\",\n  \"incase: in case, encase\",\n  \"canot->cannot\",\n  \"cancelled->canceled\"\n]\n```",
+          "type": "array"
+        },
+        "ignoreWords": {
+          "description": "List of words to be ignored. An ignored word will not show up as an error, even if it is also in the `flagWords`.",
+          "items": {
+            "type": "string"
+          },
+          "markdownDescription": "List of words to be ignored. An ignored word will not show up as an error, even if it is\nalso in the `flagWords`.",
+          "type": "array"
+        },
+        "name": {
+          "$ref": "#/definitions/DictionaryId",
+          "description": "This is the name of a dictionary.\n\nName Format:\n- Must contain at least 1 number or letter.\n- Spaces are allowed.\n- Leading and trailing space will be removed.\n- Names ARE case-sensitive.\n- Must not contain `*`, `!`, `;`, `,`, `{`, `}`, `[`, `]`, `~`.",
+          "markdownDescription": "This is the name of a dictionary.\n\nName Format:\n- Must contain at least 1 number or letter.\n- Spaces are allowed.\n- Leading and trailing space will be removed.\n- Names ARE case-sensitive.\n- Must not contain `*`, `!`, `;`, `,`, `{`, `}`, `[`, `]`, `~`."
+        },
+        "noSuggest": {
+          "description": "Indicate that suggestions should not come from this dictionary. Words in this dictionary are considered correct, but will not be used when making spell correction suggestions.\n\nNote: if a word is suggested by another dictionary, but found in this dictionary, it will be removed from the set of possible suggestions.",
+          "markdownDescription": "Indicate that suggestions should not come from this dictionary.\nWords in this dictionary are considered correct, but will not be\nused when making spell correction suggestions.\n\nNote: if a word is suggested by another dictionary, but found in\nthis dictionary, it will be removed from the set of\npossible suggestions.",
+          "type": "boolean"
+        },
+        "repMap": {
+          "$ref": "#/definitions/ReplaceMap",
+          "description": "Replacement pairs.",
+          "markdownDescription": "Replacement pairs."
+        },
+        "suggestWords": {
+          "description": "A list of suggested replacements for words. Suggested words provide a way to make preferred suggestions on word replacements. To hint at a preferred change, but not to require it.\n\nFormat of `suggestWords`\n- Single suggestion (possible auto fix)     - `word: suggestion`     - `word->suggestion`\n- Multiple suggestions (not auto fixable)    - `word: first, second, third`    - `word->first, second, third`",
+          "items": {
+            "type": "string"
+          },
+          "markdownDescription": "A list of suggested replacements for words.\nSuggested words provide a way to make preferred suggestions on word replacements.\nTo hint at a preferred change, but not to require it.\n\nFormat of `suggestWords`\n- Single suggestion (possible auto fix)\n    - `word: suggestion`\n    - `word->suggestion`\n- Multiple suggestions (not auto fixable)\n   - `word: first, second, third`\n   - `word->first, second, third`",
+          "type": "array"
+        },
+        "type": {
+          "$ref": "#/definitions/DictionaryFileTypes",
+          "default": "S",
+          "description": "Type of file:\n- S - single word per line,\n- W - each line can contain one or more words separated by space,\n- C - each line is treated like code (Camel Case is allowed).\n\nDefault is S.\n\nC is the slowest to load due to the need to split each line based upon code splitting rules.\n\nNote: this settings does not apply to inline dictionaries or `.trie` files.",
+          "markdownDescription": "Type of file:\n- S - single word per line,\n- W - each line can contain one or more words separated by space,\n- C - each line is treated like code (Camel Case is allowed).\n\nDefault is S.\n\nC is the slowest to load due to the need to split each line based upon code splitting rules.\n\nNote: this settings does not apply to inline dictionaries or `.trie` files."
         },
         "useCompounds": {
           "description": "Use Compounds.",
@@ -642,8 +718,8 @@
       "additionalProperties": false,
       "properties": {
         "description": {
-          "description": "Optional description.",
-          "markdownDescription": "Optional description.",
+          "description": "Optional description of the contents / purpose of the dictionary.",
+          "markdownDescription": "Optional description of the contents / purpose of the dictionary.",
           "type": "string"
         },
         "name": {
@@ -669,8 +745,8 @@
         "type": {
           "$ref": "#/definitions/DictionaryFileTypes",
           "default": "S",
-          "description": "Type of file:\n- S - single word per line,\n- W - each line can contain one or more words separated by space,\n- C - each line is treated like code (Camel Case is allowed).\n\nDefault is S.\n\nC is the slowest to load due to the need to split each line based upon code splitting rules.",
-          "markdownDescription": "Type of file:\n- S - single word per line,\n- W - each line can contain one or more words separated by space,\n- C - each line is treated like code (Camel Case is allowed).\n\nDefault is S.\n\nC is the slowest to load due to the need to split each line based upon code splitting rules."
+          "description": "Type of file:\n- S - single word per line,\n- W - each line can contain one or more words separated by space,\n- C - each line is treated like code (Camel Case is allowed).\n\nDefault is S.\n\nC is the slowest to load due to the need to split each line based upon code splitting rules.\n\nNote: this settings does not apply to inline dictionaries or `.trie` files.",
+          "markdownDescription": "Type of file:\n- S - single word per line,\n- W - each line can contain one or more words separated by space,\n- C - each line is treated like code (Camel Case is allowed).\n\nDefault is S.\n\nC is the slowest to load due to the need to split each line based upon code splitting rules.\n\nNote: this settings does not apply to inline dictionaries or `.trie` files."
         },
         "useCompounds": {
           "description": "Use Compounds.",
@@ -966,20 +1042,20 @@
       ]
     },
     "LanguageIdMultiple": {
-      "description": "This can be 'typescript,cpp,json,literal haskell', etc.",
-      "markdownDescription": "This can be 'typescript,cpp,json,literal haskell', etc.",
+      "description": "A single string with a comma separated list of file types:\n- `typescript,cpp`\n- `json,jsonc,yaml`\n- etc.",
+      "markdownDescription": "A single string with a comma separated list of file types:\n- `typescript,cpp`\n- `json,jsonc,yaml`\n- etc.",
       "pattern": "^([-\\w_\\s]+)(,[-\\w_\\s]+)*$",
       "type": "string"
     },
     "LanguageIdMultipleNeg": {
-      "description": "This can be 'typescript,cpp,json,literal haskell', etc.",
-      "markdownDescription": "This can be 'typescript,cpp,json,literal haskell', etc.",
-      "pattern": "^(![-\\w_\\s]+)(,![-\\w_\\s]+)*$",
+      "description": "A Negative File Type used to exclude files of that type.\n- `!typescript` - will exclude typescript files.\n- `!cpp,!json` - will exclude cpp and json files.\n- `!typescript,javascript` - will exclude typescript files and include javascript files.",
+      "markdownDescription": "A Negative File Type used to exclude files of that type.\n- `!typescript` - will exclude typescript files.\n- `!cpp,!json` - will exclude cpp and json files.\n- `!typescript,javascript` - will exclude typescript files and include javascript files.",
+      "pattern": "^(![-\\w_\\s]+)(,!?[-\\w_\\s]+)*$",
       "type": "string"
     },
     "LanguageIdSingle": {
-      "description": "This can be '*', 'typescript', 'cpp', 'json', etc.",
-      "markdownDescription": "This can be '*', 'typescript', 'cpp', 'json', etc.",
+      "description": "A file type:\n- `*` - will match ALL file types.\n- `typescript`, `cpp`, `json`, etc.",
+      "markdownDescription": "A file type:\n- `*` - will match ALL file types.\n- `typescript`, `cpp`, `json`, etc.",
       "pattern": "^(!?[-\\w_\\s]+)|(\\*)$",
       "type": "string"
     },
@@ -988,14 +1064,14 @@
       "properties": {
         "allowCompoundWords": {
           "default": false,
-          "description": "True to enable compound word checking. See [Case Sensitivity](https://cspell.org/docs/case-sensitive/) for more details.",
-          "markdownDescription": "True to enable compound word checking. See [Case Sensitivity](https://cspell.org/docs/case-sensitive/) for more details.",
+          "description": "True to enable compound word checking.",
+          "markdownDescription": "True to enable compound word checking.",
           "type": "boolean"
         },
         "caseSensitive": {
           "default": false,
-          "description": "Determines if words must match case and accent rules.\n\n- `false` - Case is ignored and accents can be missing on the entire word.   Incorrect accents or partially missing accents will be marked as incorrect.\n- `true` - Case and accents are enforced.",
-          "markdownDescription": "Determines if words must match case and accent rules.\n\n- `false` - Case is ignored and accents can be missing on the entire word.\n  Incorrect accents or partially missing accents will be marked as incorrect.\n- `true` - Case and accents are enforced.",
+          "description": "Determines if words must match case and accent rules.\n\nSee [Case Sensitivity](https://cspell.org/docs/case-sensitive/) for more details.\n\n- `false` - Case is ignored and accents can be missing on the entire word.   Incorrect accents or partially missing accents will be marked as incorrect.\n- `true` - Case and accents are enforced.",
+          "markdownDescription": "Determines if words must match case and accent rules.\n\nSee [Case Sensitivity](https://cspell.org/docs/case-sensitive/) for more details.\n\n- `false` - Case is ignored and accents can be missing on the entire word.\n  Incorrect accents or partially missing accents will be marked as incorrect.\n- `true` - Case and accents are enforced.",
           "type": "boolean"
         },
         "description": {
@@ -1058,8 +1134,8 @@
         },
         "languageId": {
           "$ref": "#/definitions/MatchingFileType",
-          "description": "The language id.  Ex: \"typescript\", \"html\", or \"php\".  \"*\" -- will match all languages.",
-          "markdownDescription": "The language id.  Ex: \"typescript\", \"html\", or \"php\".  \"*\" -- will match all languages."
+          "description": "The language id.  Ex: `typescript`, `html`, or `php`.  `*` -- will match all languages.",
+          "markdownDescription": "The language id.  Ex: `typescript`, `html`, or `php`.  `*` -- will match all languages."
         },
         "local": {
           "anyOf": [
@@ -1075,8 +1151,8 @@
           ],
           "deprecated": true,
           "deprecationMessage": "Use `locale` instead.",
-          "description": "Deprecated - The locale filter, matches against the language. This can be a comma separated list. \"*\" will match all locales.",
-          "markdownDescription": "Deprecated - The locale filter, matches against the language. This can be a comma separated list. \"*\" will match all locales."
+          "description": "Deprecated - The locale filter, matches against the language. This can be a comma separated list. `*` will match all locales.",
+          "markdownDescription": "Deprecated - The locale filter, matches against the language. This can be a comma separated list. `*` will match all locales."
         },
         "locale": {
           "anyOf": [
@@ -1090,8 +1166,8 @@
               "type": "array"
             }
           ],
-          "description": "The locale filter, matches against the language. This can be a comma separated list. \"*\" will match all locales.",
-          "markdownDescription": "The locale filter, matches against the language. This can be a comma separated list. \"*\" will match all locales."
+          "description": "The locale filter, matches against the language. This can be a comma separated list. `*` will match all locales.",
+          "markdownDescription": "The locale filter, matches against the language. This can be a comma separated list. `*` will match all locales."
         },
         "name": {
           "description": "Optional name of configuration.",
@@ -1107,11 +1183,11 @@
           "type": "array"
         },
         "patterns": {
-          "description": "Defines a list of patterns that can be used with the `ignoreRegExpList` and `includeRegExpList` options.\n\nFor example:\n\n```javascript \"ignoreRegExpList\": [\"comments\"], \"patterns\": [   {     \"name\": \"comment-single-line\",     \"pattern\": \"/#.*​/g\"   },   {     \"name\": \"comment-multi-line\",     \"pattern\": \"/(?:\\\\/\\\\*[\\\\s\\\\S]*?\\\\*\\\\/)/g\"   },   // You can also combine multiple named patterns into one single named pattern   {     \"name\": \"comments\",     \"pattern\": [\"comment-single-line\", \"comment-multi-line\"]   } ] ``` Defines a list of patterns that can be used with the `ignoreRegExpList` and `includeRegExpList` options.",
+          "description": "Defines a list of patterns that can be used with the  {@link  ignoreRegExpList }  and  {@link  includeRegExpList }  options.\n\nFor example:\n\n```javascript \"ignoreRegExpList\": [\"comments\"], \"patterns\": [   {     \"name\": \"comment-single-line\",     \"pattern\": \"/#.*​/g\"   },   {     \"name\": \"comment-multi-line\",     \"pattern\": \"/(?:\\\\/\\\\*[\\\\s\\\\S]*?\\\\*\\\\/)/g\"   },   // You can also combine multiple named patterns into one single named pattern   {     \"name\": \"comments\",     \"pattern\": [\"comment-single-line\", \"comment-multi-line\"]   } ] ```",
           "items": {
             "$ref": "#/definitions/RegExpPatternDefinition"
           },
-          "markdownDescription": "Defines a list of patterns that can be used with the `ignoreRegExpList` and\n`includeRegExpList` options.\n\nFor example:\n\n```javascript\n\"ignoreRegExpList\": [\"comments\"],\n\"patterns\": [\n  {\n    \"name\": \"comment-single-line\",\n    \"pattern\": \"/#.*​/g\"\n  },\n  {\n    \"name\": \"comment-multi-line\",\n    \"pattern\": \"/(?:\\\\/\\\\*[\\\\s\\\\S]*?\\\\*\\\\/)/g\"\n  },\n  // You can also combine multiple named patterns into one single named pattern\n  {\n    \"name\": \"comments\",\n    \"pattern\": [\"comment-single-line\", \"comment-multi-line\"]\n  }\n]\n```\nDefines a list of patterns that can be used with the `ignoreRegExpList` and\n`includeRegExpList` options.",
+          "markdownDescription": "Defines a list of patterns that can be used with the  {@link  ignoreRegExpList }  and\n {@link  includeRegExpList }  options.\n\nFor example:\n\n```javascript\n\"ignoreRegExpList\": [\"comments\"],\n\"patterns\": [\n  {\n    \"name\": \"comment-single-line\",\n    \"pattern\": \"/#.*​/g\"\n  },\n  {\n    \"name\": \"comment-multi-line\",\n    \"pattern\": \"/(?:\\\\/\\\\*[\\\\s\\\\S]*?\\\\*\\\\/)/g\"\n  },\n  // You can also combine multiple named patterns into one single named pattern\n  {\n    \"name\": \"comments\",\n    \"pattern\": [\"comment-single-line\", \"comment-multi-line\"]\n  }\n]\n```",
           "type": "array"
         },
         "suggestWords": {
@@ -1137,8 +1213,8 @@
       "type": "object"
     },
     "LocaleId": {
-      "description": "This is a written language locale like: 'en', 'en-GB', 'fr', 'es', 'de', etc.",
-      "markdownDescription": "This is a written language locale like: 'en', 'en-GB', 'fr', 'es', 'de', etc.",
+      "description": "This is a written language locale like: `en`, `en-GB`, `fr`, `es`, `de` or `en,fr` for both English and French",
+      "markdownDescription": "This is a written language locale like: `en`, `en-GB`, `fr`, `es`, `de` or `en,fr` for both English and French",
       "type": "string"
     },
     "MatchingFileType": {
@@ -1159,14 +1235,14 @@
       "properties": {
         "allowCompoundWords": {
           "default": false,
-          "description": "True to enable compound word checking. See [Case Sensitivity](https://cspell.org/docs/case-sensitive/) for more details.",
-          "markdownDescription": "True to enable compound word checking. See [Case Sensitivity](https://cspell.org/docs/case-sensitive/) for more details.",
+          "description": "True to enable compound word checking.",
+          "markdownDescription": "True to enable compound word checking.",
           "type": "boolean"
         },
         "caseSensitive": {
           "default": false,
-          "description": "Determines if words must match case and accent rules.\n\n- `false` - Case is ignored and accents can be missing on the entire word.   Incorrect accents or partially missing accents will be marked as incorrect.\n- `true` - Case and accents are enforced.",
-          "markdownDescription": "Determines if words must match case and accent rules.\n\n- `false` - Case is ignored and accents can be missing on the entire word.\n  Incorrect accents or partially missing accents will be marked as incorrect.\n- `true` - Case and accents are enforced.",
+          "description": "Determines if words must match case and accent rules.\n\nSee [Case Sensitivity](https://cspell.org/docs/case-sensitive/) for more details.\n\n- `false` - Case is ignored and accents can be missing on the entire word.   Incorrect accents or partially missing accents will be marked as incorrect.\n- `true` - Case and accents are enforced.",
+          "markdownDescription": "Determines if words must match case and accent rules.\n\nSee [Case Sensitivity](https://cspell.org/docs/case-sensitive/) for more details.\n\n- `false` - Case is ignored and accents can be missing on the entire word.\n  Incorrect accents or partially missing accents will be marked as incorrect.\n- `true` - Case and accents are enforced.",
           "type": "boolean"
         },
         "description": {
@@ -1334,11 +1410,11 @@
           "type": "number"
         },
         "patterns": {
-          "description": "Defines a list of patterns that can be used with the `ignoreRegExpList` and `includeRegExpList` options.\n\nFor example:\n\n```javascript \"ignoreRegExpList\": [\"comments\"], \"patterns\": [   {     \"name\": \"comment-single-line\",     \"pattern\": \"/#.*​/g\"   },   {     \"name\": \"comment-multi-line\",     \"pattern\": \"/(?:\\\\/\\\\*[\\\\s\\\\S]*?\\\\*\\\\/)/g\"   },   // You can also combine multiple named patterns into one single named pattern   {     \"name\": \"comments\",     \"pattern\": [\"comment-single-line\", \"comment-multi-line\"]   } ] ``` Defines a list of patterns that can be used with the `ignoreRegExpList` and `includeRegExpList` options.",
+          "description": "Defines a list of patterns that can be used with the  {@link  ignoreRegExpList }  and  {@link  includeRegExpList }  options.\n\nFor example:\n\n```javascript \"ignoreRegExpList\": [\"comments\"], \"patterns\": [   {     \"name\": \"comment-single-line\",     \"pattern\": \"/#.*​/g\"   },   {     \"name\": \"comment-multi-line\",     \"pattern\": \"/(?:\\\\/\\\\*[\\\\s\\\\S]*?\\\\*\\\\/)/g\"   },   // You can also combine multiple named patterns into one single named pattern   {     \"name\": \"comments\",     \"pattern\": [\"comment-single-line\", \"comment-multi-line\"]   } ] ```",
           "items": {
             "$ref": "#/definitions/RegExpPatternDefinition"
           },
-          "markdownDescription": "Defines a list of patterns that can be used with the `ignoreRegExpList` and\n`includeRegExpList` options.\n\nFor example:\n\n```javascript\n\"ignoreRegExpList\": [\"comments\"],\n\"patterns\": [\n  {\n    \"name\": \"comment-single-line\",\n    \"pattern\": \"/#.*​/g\"\n  },\n  {\n    \"name\": \"comment-multi-line\",\n    \"pattern\": \"/(?:\\\\/\\\\*[\\\\s\\\\S]*?\\\\*\\\\/)/g\"\n  },\n  // You can also combine multiple named patterns into one single named pattern\n  {\n    \"name\": \"comments\",\n    \"pattern\": [\"comment-single-line\", \"comment-multi-line\"]\n  }\n]\n```\nDefines a list of patterns that can be used with the `ignoreRegExpList` and\n`includeRegExpList` options.",
+          "markdownDescription": "Defines a list of patterns that can be used with the  {@link  ignoreRegExpList }  and\n {@link  includeRegExpList }  options.\n\nFor example:\n\n```javascript\n\"ignoreRegExpList\": [\"comments\"],\n\"patterns\": [\n  {\n    \"name\": \"comment-single-line\",\n    \"pattern\": \"/#.*​/g\"\n  },\n  {\n    \"name\": \"comment-multi-line\",\n    \"pattern\": \"/(?:\\\\/\\\\*[\\\\s\\\\S]*?\\\\*\\\\/)/g\"\n  },\n  // You can also combine multiple named patterns into one single named pattern\n  {\n    \"name\": \"comments\",\n    \"pattern\": [\"comment-single-line\", \"comment-multi-line\"]\n  }\n]\n```",
           "type": "array"
         },
         "pnpFiles": {
@@ -1654,8 +1730,8 @@
     },
     "allowCompoundWords": {
       "default": false,
-      "description": "True to enable compound word checking. See [Case Sensitivity](https://cspell.org/docs/case-sensitive/) for more details.",
-      "markdownDescription": "True to enable compound word checking. See [Case Sensitivity](https://cspell.org/docs/case-sensitive/) for more details.",
+      "description": "True to enable compound word checking.",
+      "markdownDescription": "True to enable compound word checking.",
       "type": "boolean"
     },
     "cache": {
@@ -1665,8 +1741,8 @@
     },
     "caseSensitive": {
       "default": false,
-      "description": "Determines if words must match case and accent rules.\n\n- `false` - Case is ignored and accents can be missing on the entire word.   Incorrect accents or partially missing accents will be marked as incorrect.\n- `true` - Case and accents are enforced.",
-      "markdownDescription": "Determines if words must match case and accent rules.\n\n- `false` - Case is ignored and accents can be missing on the entire word.\n  Incorrect accents or partially missing accents will be marked as incorrect.\n- `true` - Case and accents are enforced.",
+      "description": "Determines if words must match case and accent rules.\n\nSee [Case Sensitivity](https://cspell.org/docs/case-sensitive/) for more details.\n\n- `false` - Case is ignored and accents can be missing on the entire word.   Incorrect accents or partially missing accents will be marked as incorrect.\n- `true` - Case and accents are enforced.",
+      "markdownDescription": "Determines if words must match case and accent rules.\n\nSee [Case Sensitivity](https://cspell.org/docs/case-sensitive/) for more details.\n\n- `false` - Case is ignored and accents can be missing on the entire word.\n  Incorrect accents or partially missing accents will be marked as incorrect.\n- `true` - Case and accents are enforced.",
       "type": "boolean"
     },
     "description": {
@@ -1785,11 +1861,11 @@
       "type": "string"
     },
     "ignorePaths": {
-      "description": "Glob patterns of files to be ignored.\n\nGlob patterns are relative to the `globRoot` of the configuration file that defines them.",
+      "description": "Glob patterns of files to be ignored.\n\nGlob patterns are relative to the  {@link  globRoot }  of the configuration file that defines them.",
       "items": {
         "$ref": "#/definitions/Glob"
       },
-      "markdownDescription": "Glob patterns of files to be ignored.\n\nGlob patterns are relative to the `globRoot` of the configuration file that defines them.",
+      "markdownDescription": "Glob patterns of files to be ignored.\n\nGlob patterns are relative to the  {@link  globRoot }  of the configuration file that defines them.",
       "type": "array"
     },
     "ignoreRegExpList": {
@@ -1902,11 +1978,11 @@
       "type": "array"
     },
     "patterns": {
-      "description": "Defines a list of patterns that can be used with the `ignoreRegExpList` and `includeRegExpList` options.\n\nFor example:\n\n```javascript \"ignoreRegExpList\": [\"comments\"], \"patterns\": [   {     \"name\": \"comment-single-line\",     \"pattern\": \"/#.*​/g\"   },   {     \"name\": \"comment-multi-line\",     \"pattern\": \"/(?:\\\\/\\\\*[\\\\s\\\\S]*?\\\\*\\\\/)/g\"   },   // You can also combine multiple named patterns into one single named pattern   {     \"name\": \"comments\",     \"pattern\": [\"comment-single-line\", \"comment-multi-line\"]   } ] ``` Defines a list of patterns that can be used with the `ignoreRegExpList` and `includeRegExpList` options.",
+      "description": "Defines a list of patterns that can be used with the  {@link  ignoreRegExpList }  and  {@link  includeRegExpList }  options.\n\nFor example:\n\n```javascript \"ignoreRegExpList\": [\"comments\"], \"patterns\": [   {     \"name\": \"comment-single-line\",     \"pattern\": \"/#.*​/g\"   },   {     \"name\": \"comment-multi-line\",     \"pattern\": \"/(?:\\\\/\\\\*[\\\\s\\\\S]*?\\\\*\\\\/)/g\"   },   // You can also combine multiple named patterns into one single named pattern   {     \"name\": \"comments\",     \"pattern\": [\"comment-single-line\", \"comment-multi-line\"]   } ] ```",
       "items": {
         "$ref": "#/definitions/RegExpPatternDefinition"
       },
-      "markdownDescription": "Defines a list of patterns that can be used with the `ignoreRegExpList` and\n`includeRegExpList` options.\n\nFor example:\n\n```javascript\n\"ignoreRegExpList\": [\"comments\"],\n\"patterns\": [\n  {\n    \"name\": \"comment-single-line\",\n    \"pattern\": \"/#.*​/g\"\n  },\n  {\n    \"name\": \"comment-multi-line\",\n    \"pattern\": \"/(?:\\\\/\\\\*[\\\\s\\\\S]*?\\\\*\\\\/)/g\"\n  },\n  // You can also combine multiple named patterns into one single named pattern\n  {\n    \"name\": \"comments\",\n    \"pattern\": [\"comment-single-line\", \"comment-multi-line\"]\n  }\n]\n```\nDefines a list of patterns that can be used with the `ignoreRegExpList` and\n`includeRegExpList` options.",
+      "markdownDescription": "Defines a list of patterns that can be used with the  {@link  ignoreRegExpList }  and\n {@link  includeRegExpList }  options.\n\nFor example:\n\n```javascript\n\"ignoreRegExpList\": [\"comments\"],\n\"patterns\": [\n  {\n    \"name\": \"comment-single-line\",\n    \"pattern\": \"/#.*​/g\"\n  },\n  {\n    \"name\": \"comment-multi-line\",\n    \"pattern\": \"/(?:\\\\/\\\\*[\\\\s\\\\S]*?\\\\*\\\\/)/g\"\n  },\n  // You can also combine multiple named patterns into one single named pattern\n  {\n    \"name\": \"comments\",\n    \"pattern\": [\"comment-single-line\", \"comment-multi-line\"]\n  }\n]\n```",
       "type": "array"
     },
     "pnpFiles": {

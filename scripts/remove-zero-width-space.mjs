@@ -21,8 +21,7 @@ async function run() {
     }
 
     const content = await fs.readFile(path, 'utf8');
-    // eslint-disable-next-line unicorn/prefer-string-replace-all
-    await fs.writeFile(path, content.replaceAll(/\u200B/g, ''));
+    await fs.writeFile(path, content.replaceAll('\u200B', ''));
 }
 
 run();
