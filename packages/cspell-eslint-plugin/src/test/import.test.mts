@@ -30,10 +30,6 @@ ruleTester.run('cspell', Rule.rules.spellchecker, {
             },
         }),
         readFix('import-support/sample.ts', {
-            configFile: 'https://cdn.jsdelivr.net/npm/@isentinel/dict-roblox@1.0.0/cspell-ext.json',
-            cspell: {},
-        }),
-        readFix('import-support/sample.ts', {
             configFile: '@internal/fixture-test-dictionary',
             cspell: {
                 language: 'en-US',
