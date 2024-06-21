@@ -45,21 +45,21 @@ ruleTester.run('cspell', Rule.rules.spellchecker, {
             unknownWord('rrotate', 8),
             unknownWord('rshift', 8),
         ]),
-        // readInvalid(
-        //     'import-support/sample.ts',
-        //     [
-        //         ce(
-        //             'Configuration Error: \n' +
-        //                 '  Failed to resolve configuration file: "bad-import" referenced from ' +
-        //                 `"./eslint-configuration-file"`,
-        //         ),
-        //     ],
-        //     {
-        //         cspell: {
-        //             import: ['@isentinel/dict-roblox', 'bad-import'],
-        //         },
-        //     },
-        // ),
+        readInvalid(
+            'import-support/sample.ts',
+            [
+                ce(
+                    'Configuration Error: \n' +
+                        '  Failed to resolve configuration file: "bad-import" referenced from ' +
+                        `"./eslint-configuration-file"`,
+                ),
+            ],
+            {
+                cspell: {
+                    import: ['@internal/fixture-test-dictionary', 'bad-import'],
+                },
+            },
+        ),
     ],
 });
 

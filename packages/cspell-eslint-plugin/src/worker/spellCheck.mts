@@ -377,7 +377,8 @@ function getDocValidator(filename: string, text: string, options: WorkerOptions)
         return cachedValidator;
     }
 
-    const validator = new DocumentValidator(doc, { ...options, resolveImportsRelativeTo: import.meta.url }, settings);
+    const resolveImportsRelativeTo = new URL('../../eslint-configuration-file', import.meta.url);
+    const validator = new DocumentValidator(doc, { ...options, resolveImportsRelativeTo }, settings);
     docValCache.set(doc, validator);
     return validator;
 }
