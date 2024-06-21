@@ -45,8 +45,7 @@ export async function resolveSettingsImports(
     settings: CSpellSettings,
     filename: string | URL,
 ): Promise<CSpellSettingsI> {
-    const settingsFile = gcl().createCSpellConfigFile(filename, settings);
-    return gcl().mergeConfigFileWithImports(settingsFile, settings);
+    return gcl().resolveSettingsImports(settings, filename);
 }
 
 export async function readConfigFile(filename: string | URL, relativeTo?: string | URL): Promise<CSpellConfigFile> {

@@ -377,7 +377,7 @@ function getDocValidator(filename: string, text: string, options: WorkerOptions)
         return cachedValidator;
     }
 
-    const validator = new DocumentValidator(doc, options, settings);
+    const validator = new DocumentValidator(doc, { ...options, resolveImportsRelativeTo: import.meta.url }, settings);
     docValCache.set(doc, validator);
     return validator;
 }

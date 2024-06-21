@@ -358,6 +358,13 @@ interface IConfigLoader {
      */
     clearCachedSettingsFiles(): void;
     /**
+     * Resolve and merge the settings from the imports.
+     * This will create a virtual configuration file that is used to resolve the settings.
+     * @param settings - settings to resolve imports for
+     * @param filename - the path / URL to the settings file. Used to resolve imports.
+     */
+    resolveSettingsImports(settings: CSpellUserSettings, filename: string | URL): Promise<CSpellSettingsI>;
+    /**
      * Resolve imports and merge.
      * @param cfgFile - configuration file.
      * @param pnpSettings - optional settings related to Using Yarn PNP.
@@ -710,6 +717,11 @@ interface DocumentValidatorOptions extends ValidateTextOptions {
      * @defaultValue undefined
      */
     noConfigSearch?: boolean;
+    /**
+     * If `settings: CSpellUserSettings` contains imports, they will be resolved using this path.
+     * If not set, the current working directory will be used.
+     */
+    resolveImportsRelativeTo?: string | URL;
 }
 type PerfTimings = Record<string, number>;
 declare class DocumentValidator {

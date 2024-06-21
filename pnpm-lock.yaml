@@ -495,9 +495,9 @@ importers:
       '@internal/cspell-eslint-plugin-scripts':
         specifier: workspace:*
         version: link:scripts
-      '@isentinel/dict-roblox':
-        specifier: ^1.0.0
-        version: 1.0.3
+      '@internal/fixture-test-dictionary':
+        specifier: workspace:*
+        version: link:../../test-fixtures/dictionaries/test-dictionary
       '@types/estree':
         specifier: ^1.0.5
         version: 1.0.5
@@ -870,6 +870,12 @@ importers:
       esbuild:
         specifier: ^0.21.5
         version: 0.21.5
+
+  test-fixtures/dictionaries/test-dictionary:
+    devDependencies:
+      '@cspell/cspell-types':
+        specifier: workspace:*
+        version: link:../../../packages/cspell-types
 
   test-fixtures/issues/issue-5034:
     devDependencies:
@@ -2594,9 +2600,6 @@ packages:
   '@isaacs/cliui@8.0.2':
     resolution: {integrity: sha512-O8jcjabXaleOG9DQ0+ARXWZBTfnP4WNAqzuiJK7ll44AmxGKv/J2M4TPjxjY3znBCfvBXFzucm1twdyFybFqEA==}
     engines: {node: '>=12'}
-
-  '@isentinel/dict-roblox@1.0.3':
-    resolution: {integrity: sha512-XR1KVHZLyyamVobUICxTlDkB3gfLVuV34mdFQeIL7DfCtNI2uCeuZm6g6J63AQzUrqsCIUF166Ogf+TL0przdg==}
 
   '@istanbuljs/load-nyc-config@1.1.0':
     resolution: {integrity: sha512-VjeHSlIzpv/NyD3N0YuHfXOPDIixcA1q2ZV98wsMqcYlPmv2n3Yb2lYP9XMElnaFVXg5A7YLTeLu6V84uQDjmQ==}
@@ -11493,8 +11496,6 @@ snapshots:
       strip-ansi-cjs: strip-ansi@6.0.1
       wrap-ansi: 8.1.0
       wrap-ansi-cjs: wrap-ansi@7.0.0
-
-  '@isentinel/dict-roblox@1.0.3': {}
 
   '@istanbuljs/load-nyc-config@1.1.0':
     dependencies:

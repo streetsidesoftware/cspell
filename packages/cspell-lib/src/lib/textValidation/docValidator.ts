@@ -10,6 +10,7 @@ import type {
     PnPSettings,
 } from '@cspell/cspell-types';
 import { IssueType } from '@cspell/cspell-types';
+import { toFileURL } from '@cspell/url';
 
 import { getGlobMatcherForExcluding } from '../globs/getGlobMatcher.js';
 import type { CSpellSettingsInternal, CSpellSettingsInternalFinalized } from '../Models/CSpellSettingsInternalDef.js';
@@ -62,6 +63,12 @@ export interface DocumentValidatorOptions extends ValidateTextOptions {
      * @defaultValue undefined
      */
     noConfigSearch?: boolean;
+
+    /**
+     * If `settings: CSpellUserSettings` contains imports, they will be resolved using this path.
+     * If not set, the current working directory will be used.
+     */
+    resolveImportsRelativeTo?: string | URL;
 }
 
 const ERROR_NOT_PREPARED = 'Validator Must be prepared before calling this function.';
@@ -117,11 +124,12 @@ export class DocumentValidator {
 
         const { options, settings: rawSettings } = this;
 
+        const resolveImportsRelativeTo = toFileURL(
+            options.resolveImportsRelativeTo || pathToFileURL('./virtual.settings.json'),
+        );
+
         const settings = rawSettings.import?.length
-            ? await resolveSettingsImports(
-                  rawSettings,
-                  new URL(rawSettings.name || 'virtual.settings.json', pathToFileURL('./')),
-              )
+            ? await resolveSettingsImports(rawSettings, resolveImportsRelativeTo)
             : rawSettings;
 
         const useSearchForConfig =

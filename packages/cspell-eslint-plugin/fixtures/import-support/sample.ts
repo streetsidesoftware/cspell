@@ -1,6 +1,6 @@
 /**
  * This is a sample file to test the import support.
- * It uses words from  [@isentinel/dict-roblox](https://www.npmjs.com/package/@isentinel/dict-roblox)
+ * Related to issue: [#5789](https://github.com/streetsidesoftware/cspell/issues/5789)
  */
 
 export function sample() {

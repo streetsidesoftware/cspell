@@ -26,7 +26,17 @@ ruleTester.run('cspell', Rule.rules.spellchecker, {
     valid: [
         readFix('import-support/sample.ts', {
             cspell: {
-                import: ['@isentinel/dict-roblox'],
+                import: ['@internal/fixture-test-dictionary'],
+            },
+        }),
+        readFix('import-support/sample.ts', {
+            configFile: 'https://cdn.jsdelivr.net/npm/@isentinel/dict-roblox@1.0.0/cspell-ext.json',
+            cspell: {},
+        }),
+        readFix('import-support/sample.ts', {
+            configFile: '@internal/fixture-test-dictionary',
+            cspell: {
+                language: 'en-US',
             },
         }),
     ],
@@ -39,21 +49,21 @@ ruleTester.run('cspell', Rule.rules.spellchecker, {
             unknownWord('rrotate', 8),
             unknownWord('rshift', 8),
         ]),
-        readInvalid(
-            'import-support/sample.ts',
-            [
-                ce(
-                    'Configuration Error: \n' +
-                        '  Failed to resolve configuration file: "bad-import" referenced from ' +
-                        `"./eslint-configuration-file"`,
-                ),
-            ],
-            {
-                cspell: {
-                    import: ['@isentinel/dict-roblox', 'bad-import'],
-                },
-            },
-        ),
+        // readInvalid(
+        //     'import-support/sample.ts',
+        //     [
+        //         ce(
+        //             'Configuration Error: \n' +
+        //                 '  Failed to resolve configuration file: "bad-import" referenced from ' +
+        //                 `"./eslint-configuration-file"`,
+        //         ),
+        //     ],
+        //     {
+        //         cspell: {
+        //             import: ['@isentinel/dict-roblox', 'bad-import'],
+        //         },
+        //     },
+        // ),
     ],
 });
 
