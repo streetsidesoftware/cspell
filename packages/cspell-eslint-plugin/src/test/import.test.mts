@@ -38,13 +38,19 @@ ruleTester.run('cspell', Rule.rules.spellchecker, {
     ],
     invalid: [
         // cspell:ignore readstring resetmemorycategory retargeting rrotate rshift
-        readInvalid('import-support/sample.ts', [
-            unknownWord('readstring', 8),
-            unknownWord('resetmemorycategory'),
-            unknownWord('retargeting', 8),
-            unknownWord('rrotate', 8),
-            unknownWord('rshift', 8),
-        ]),
+        readInvalid(
+            'import-support/sample.ts',
+            [
+                unknownWord('readstring', 8),
+                unknownWord('resetmemorycategory'),
+                unknownWord('retargeting', 8),
+                unknownWord('rrotate', 8),
+                unknownWord('rshift', 8),
+            ],
+            {
+                configFile: resolveFix('import-support/cspell.test.json'),
+            },
+        ),
         readInvalid(
             'import-support/sample.ts',
             [
