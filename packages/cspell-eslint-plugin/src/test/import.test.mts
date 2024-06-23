@@ -55,8 +55,25 @@ ruleTester.run('cspell', Rule.rules.spellchecker, {
                 ),
             ],
             {
+                cspellOptionsRoot: '',
                 cspell: {
                     import: ['@internal/fixture-test-dictionary', 'bad-import'],
+                },
+            },
+        ),
+        readInvalid(
+            'import-support/sample.ts',
+            [
+                ce(
+                    'Configuration Error: \n' +
+                        '  Failed to resolve configuration file: "missing-import" referenced from ' +
+                        `"./eslint-test-configuration-file"`,
+                ),
+            ],
+            {
+                cspellOptionsRoot: 'eslint-test-configuration-file',
+                cspell: {
+                    import: ['@internal/fixture-test-dictionary', 'missing-import'],
                 },
             },
         ),

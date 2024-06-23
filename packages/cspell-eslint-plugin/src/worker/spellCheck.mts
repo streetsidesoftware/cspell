@@ -2,6 +2,7 @@
 import assert from 'node:assert';
 import * as path from 'node:path';
 
+import { toFileDirURL, toFileURL } from '@cspell/url';
 import type { TSESTree } from '@typescript-eslint/types';
 import type { CSpellSettings, TextDocument, ValidationIssue } from 'cspell-lib';
 import {
@@ -377,7 +378,7 @@ function getDocValidator(filename: string, text: string, options: WorkerOptions)
         return cachedValidator;
     }
 
-    const resolveImportsRelativeTo = new URL('../../eslint-configuration-file', import.meta.url);
+    const resolveImportsRelativeTo = toFileURL(options.cspellOptionsRoot || import.meta.url, toFileDirURL(options.cwd));
     const validator = new DocumentValidator(doc, { ...options, resolveImportsRelativeTo }, settings);
     docValCache.set(doc, validator);
     return validator;

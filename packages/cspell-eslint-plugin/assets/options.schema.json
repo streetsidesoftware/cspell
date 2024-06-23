@@ -326,6 +326,19 @@
       },
       "type": "object"
     },
+    "cspellOptionsRoot": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "format": "uri",
+          "type": "string"
+        }
+      ],
+      "description": "Specify the root path of the cspell configuration. It is used to resolve `imports` found in  {@link  cspell } .\n\nexample: ```js cspellOptionsRoot: import.meta.url // or cspellOptionsRoot: __filename ```",
+      "markdownDescription": "Specify the root path of the cspell configuration.\nIt is used to resolve `imports` found in  {@link  cspell } .\n\nexample:\n```js\ncspellOptionsRoot: import.meta.url\n// or\ncspellOptionsRoot: __filename\n```"
+    },
     "customWordListFile": {
       "anyOf": [
         {
