@@ -194,6 +194,22 @@ interface Options {
   };
 
   /**
+   * Specify the root path of the cspell configuration.
+   * It is used to resolve `imports` found in {@link cspell}.
+   *
+   * example:
+   * ```js
+   * cspellOptionsRoot: import.meta.url
+   * // or
+   * cspellOptionsRoot: __filename
+   * ```
+   *
+   * @default cwd
+   *
+   */
+  cspellOptionsRoot?: string | URL;
+
+  /**
    * Specify a path to a custom word list file.
    *
    * example:
@@ -282,22 +298,6 @@ export default [
 }
 ```
 
-## `configFile` - Using a CSpell Configuration File
-
-**`eslint.config.mjs`**
-
-```js
-  rules: {
-      '@cspell/spellchecker': [
-          'error',
-          {
-              //
-              configFile: new URL('./cspell.config.yaml', import.meta.url).toString(),
-          },
-      ],
-  },
-```
-
 ## `autoFix`
 
 When enabled, `autoFix` corrects any spelling issues that have a single "preferred" suggestion. It attempts to match
@@ -323,6 +323,48 @@ With this configuration, `blacklist` is flagged as forbidden and `allowlist` is 
 When spell checking, if `colour` is not in one of the dictionaries, then `color` will be offered as the preferred suggestion. `suggestWords` are used to provide preferred suggestions, but will not flag any words as incorrect.
 
 CSpell will match case, but not word stems. `blacklist` and `Blacklist` will get replaced, but not `blacklists`.
+
+## `configFile` - Using a CSpell Configuration File
+
+**`eslint.config.mjs`**
+
+```js
+rules: {
+    '@cspell/spellchecker': [
+        'error',
+        {
+            configFile: new URL('./cspell.config.yaml', import.meta.url).toString(),
+        },
+    ],
+},
+```
+
+## `cspell` and `cspellOptionsRoot` - CSpell Configuration
+
+It is possible to send `cspell` configuration to the spell checker. Where possible, use a cspell configuration file and set `configFile`. But there are cases where this is not possible or desired (like fewer configuration files).
+
+- Option `cspell` is used to pass along configuration to the spell checker.
+- Option `cspellOptionsRoot` is used to tell the spell checker how to find `cspell.import`s.
+
+Example: **`eslint.config.mjs`**
+
+```js
+rules: {
+    '@cspell/spellchecker': [
+        'warn',
+        {
+            cspell: {
+              import: ['./cspell.config.yaml', '@cspell/dict-de-de']
+            },
+            cspellOptionsRoot: import.meta.url,
+        },
+    ],
+},
+```
+
+Assuming `import.meta.url` is `file:///Users/ci/project/app/eslint.config.mjs`, this tells the spell checker to import `cspell.config.yaml` from `file:///Users/ci/project/app/cspell.config.yaml` and to search for package `@cspell/dict-de-de` starting at `file:///Users/ci/project/app/`.
+
+If `cspellOptionsRoot` is not specified, the current working directory is used.
 
 ## Checking Custom AST Nodes
 
