@@ -8,24 +8,13 @@ import { finalizeSettings, mergeSettings } from './Settings/index.js';
 import { calcSettingsForLanguageId } from './Settings/LanguageSettings.js';
 import type { SpellingDictionaryCollection } from './SpellingDictionary/index.js';
 import { getDictionaryInternal, refreshDictionaryCache } from './SpellingDictionary/index.js';
-import type { WordSplits } from './textValidation/traceWord.js';
+import type { DictionaryTraceResult, WordSplits } from './textValidation/traceWord.js';
 import { traceWord } from './textValidation/traceWord.js';
 import { toFilePathOrHref } from './util/url.js';
 import * as util from './util/util.js';
 
-export interface TraceResult {
-    word: string;
-    found: boolean;
-    foundWord: string | undefined;
-    forbidden: boolean;
-    noSuggest: boolean;
-    dictName: string;
-    dictSource: string;
-    dictActive: boolean;
-    configSource: string;
-    preferredSuggestions?: string[] | undefined;
-    errors: Error[] | undefined;
-}
+export type TraceResult = DictionaryTraceResult;
+
 export interface TraceOptions {
     languageId?: LanguageId | LanguageId[];
     locale?: LocaleId;
