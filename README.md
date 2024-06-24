@@ -39,8 +39,8 @@ Some videos related to CSpell and the [Code Spell Checker](https://marketplace.v
 
 ## Packages
 
-- [cspell](https://github.com/streetsidesoftware/cspell/tree/main/packages/cspell) [![Verified on Openbase](https://badges.openbase.com/js/verified/cspell.svg?token=N5IXZIAqMY+0I+KuQhPpfoZYw0QUz/LiSYlOerD8Pio=)](https://openbase.com/js/cspell?utm_source=embedded&utm_medium=badge&utm_campaign=verified-badge&utm_term=js/cspell) -- cspell command-line application
-- [@cspell/eslint-plugin](https://github.com/streetsidesoftware/cspell/tree/main/packages/cspell-eslint-plugin) [![Verified on Openbase](https://badges.openbase.com/js/verified/@cspell/eslint-plugin.svg?token=SVzjSaHtOWCFmjBOgw1W6CuYHDw29Vx77pNj7v5lPRE=)](https://openbase.com/js/@cspell/eslint-plugin?utm_source=embedded&utm_medium=badge&utm_campaign=rate-badge) -- CSpell ESLint Plugin
+- [cspell](https://github.com/streetsidesoftware/cspell/tree/main/packages/cspell) -- cspell command-line application
+- [@cspell/eslint-plugin](https://github.com/streetsidesoftware/cspell/tree/main/packages/cspell-eslint-plugin) -- CSpell ESLint Plugin
 - [cspell-bundled-dicts](https://github.com/streetsidesoftware/cspell/tree/main/packages/cspell-bundled-dicts) -- collection of dictionaries bundled with cspell.
 - [cspell-glob](https://github.com/streetsidesoftware/cspell/tree/main/packages/cspell-glob) -- glob library.
 - [cspell-io](https://github.com/streetsidesoftware/cspell/tree/main/packages/cspell-io) -- i/o library.
