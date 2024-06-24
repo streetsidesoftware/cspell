@@ -4,8 +4,8 @@ Url: https://github.com/RustPython/RustPython.git
 Args: '["**"]'
 Summary:
   files: 611
-  filesWithIssues: 316
-  issues: 2918
+  filesWithIssues: 318
+  issues: 2925
   errors: 0
 Errors: []
 
@@ -672,8 +672,8 @@ issues:
   - "vm/src/builtins/genericalias.rs:254:9       tvars       U       fn subs_tvars("
   - "vm/src/builtins/genericalias.rs:257:5       argitems    U       argitems: &[PyObjectRef],"
   - "vm/src/builtins/int.rs:535:25       halfpow     U       let halfpow10 = &pow10 / BigInt"
-  - "vm/src/builtins/list.rs:318:26      keyfunc             U       // this prevents keyfunc from messing with the"
-  - "vm/src/builtins/list.rs:574:40      reverseiterator     U       false, name = \"list_reverseiterator\", traverse)]"
+  - "vm/src/builtins/list.rs:319:26      keyfunc             U       // this prevents keyfunc from messing with the"
+  - "vm/src/builtins/list.rs:575:40      reverseiterator     U       false, name = \"list_reverseiterator\", traverse)]"
   - "vm/src/builtins/memory.rs:47:37         memeoryview     U       the possible another memeoryview is viewing from it"
   - "vm/src/builtins/memory.rs:150:29        suboffset       U       let (shape, stride, suboffset) = self.desc.dim_desc"
   - "vm/src/builtins/memory.rs:615:8         suboffsets      U       fn suboffsets(&self, vm: &VirtualMachine"
@@ -684,6 +684,7 @@ issues:
   - "vm/src/builtins/module.rs:22:14         freefunc        U       // free: freefunc"
   - "vm/src/builtins/module.rs:51:8          weaklist        U       // weaklist"
   - "vm/src/builtins/module.rs:125:73        dictoffsets     U       dict method above once dictoffsets land"
+  - "vm/src/builtins/object.rs:136:33        weaklistoffset      U       if obj.class().slots.weaklistoffset > 0 {"
   - "vm/src/builtins/range.rs:527:35         longrange       U       module = false, name = \"longrange_iterator\")]"
   - "vm/src/builtins/set.rs:451:48       frozensets      U       patterns arising in nested frozensets"
   - "vm/src/builtins/slice.rs:204:15         XXPRIME     U       const XXPRIME_1: PyUHash = if cfg"
