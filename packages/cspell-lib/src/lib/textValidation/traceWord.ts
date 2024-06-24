@@ -34,11 +34,11 @@ export interface DictionaryTraceResult {
     /** The path/href to dictionary file. */
     dictSource: string;
     /** Suggested changes to the word. */
-    preferredSuggestions: string[] | undefined;
+    preferredSuggestions?: string[] | undefined;
     /** href to the config file referencing the dictionary. */
     configSource: Href | undefined;
     /** Errors */
-    errors: Error[] | undefined;
+    errors?: Error[] | undefined;
 }
 
 export interface WordSplits {

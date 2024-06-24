@@ -139,6 +139,7 @@ const _sampleResults: TraceResult[] = [
         dictActive: true,
         dictSource: '/this_is_a_very/long/path/which/should/not/fit/fully/into/the/space/my-special-words.txt',
         configSource: 'the config source',
+        preferredSuggestions: undefined,
         errors: undefined,
     },
     {
@@ -151,6 +152,7 @@ const _sampleResults: TraceResult[] = [
         dictActive: false,
         dictSource: '/this_is_a_very/long/path/project-words.txt',
         configSource: 'the config source',
+        preferredSuggestions: undefined,
         errors: undefined,
     },
     {
@@ -163,6 +165,7 @@ const _sampleResults: TraceResult[] = [
         dictActive: true,
         dictSource: '/this_is_a_very/long/forbid-words.txt',
         configSource: 'the config source',
+        preferredSuggestions: undefined,
         errors: undefined,
     },
     {
@@ -175,6 +178,7 @@ const _sampleResults: TraceResult[] = [
         dictActive: true,
         dictSource: '/this_is_a_very/ignore-words.txt',
         configSource: 'the config source',
+        preferredSuggestions: undefined,
         errors: undefined,
     },
     {
@@ -187,6 +191,7 @@ const _sampleResults: TraceResult[] = [
         dictActive: true,
         dictSource: '/this_is_a_very/long/path/node_modules/@cspell/dict-software-terms/dict/softwareTerms.txt',
         configSource: 'the config source',
+        preferredSuggestions: undefined,
         errors: undefined,
     },
 ];

@@ -562,11 +562,11 @@ interface DictionaryTraceResult {
     /** The path/href to dictionary file. */
     dictSource: string;
     /** Suggested changes to the word. */
-    preferredSuggestions: string[] | undefined;
+    preferredSuggestions?: string[] | undefined;
     /** href to the config file referencing the dictionary. */
     configSource: Href | undefined;
     /** Errors */
-    errors: Error[] | undefined;
+    errors?: Error[] | undefined;
 }
 interface WordSplits {
     word: string;
@@ -936,7 +936,10 @@ interface DetermineFinalDocumentSettingsResult {
  */
 declare function determineFinalDocumentSettings(document: DocumentWithText, settings: CSpellUserSettings): Promise<DetermineFinalDocumentSettingsResult>;
 
-type TraceResult = DictionaryTraceResult;
+interface TraceResult extends DictionaryTraceResult {
+    /** True if the dictionary is currently active. */
+    dictActive: boolean;
+}
 interface TraceOptions {
     languageId?: LanguageId | LanguageId[];
     locale?: LocaleId;

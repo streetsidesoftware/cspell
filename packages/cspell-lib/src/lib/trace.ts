@@ -13,7 +13,10 @@ import { traceWord } from './textValidation/traceWord.js';
 import { toFilePathOrHref } from './util/url.js';
 import * as util from './util/util.js';
 
-export type TraceResult = DictionaryTraceResult;
+export interface TraceResult extends DictionaryTraceResult {
+    /** True if the dictionary is currently active. */
+    dictActive: boolean;
+}
 
 export interface TraceOptions {
     languageId?: LanguageId | LanguageId[];
