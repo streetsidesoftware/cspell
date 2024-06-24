@@ -548,15 +548,25 @@ interface ValidationIssue extends ValidationResult {
 
 type Href = string;
 interface DictionaryTraceResult {
+    /** The word being traced. */
     word: string;
     found: boolean;
+    /** The word found. */
     foundWord: string | undefined;
+    /** Indicates that the word is flagged. */
     forbidden: boolean;
+    /** The would should not show up in suggestions, but is considered correct. */
     noSuggest: boolean;
+    /** The name of the dictionary. */
     dictName: string;
+    /** The path/href to dictionary file. */
     dictSource: string;
+    /** Suggested changes to the word. */
+    preferredSuggestions?: string[] | undefined;
+    /** href to the config file referencing the dictionary. */
     configSource: Href | undefined;
-    errors: Error[] | undefined;
+    /** Errors */
+    errors?: Error[] | undefined;
 }
 interface WordSplits {
     word: string;
@@ -926,17 +936,9 @@ interface DetermineFinalDocumentSettingsResult {
  */
 declare function determineFinalDocumentSettings(document: DocumentWithText, settings: CSpellUserSettings): Promise<DetermineFinalDocumentSettingsResult>;
 
-interface TraceResult {
-    word: string;
-    found: boolean;
-    foundWord: string | undefined;
-    forbidden: boolean;
-    noSuggest: boolean;
-    dictName: string;
-    dictSource: string;
+interface TraceResult extends DictionaryTraceResult {
+    /** True if the dictionary is currently active. */
     dictActive: boolean;
-    configSource: string;
-    errors: Error[] | undefined;
 }
 interface TraceOptions {
     languageId?: LanguageId | LanguageId[];

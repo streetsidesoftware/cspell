@@ -1,10 +1,9 @@
 import * as iPath from 'node:path';
 
 import chalk from 'chalk';
-import strip from 'strip-ansi';
 
 import type { TraceResult } from '../application.js';
-import { pad, width } from '../util/util.js';
+import { TableRow, tableToLines } from '../util/table.js';
 import type { DictionaryPathFormat } from './DictionaryPathFormat.js';
 
 interface PathInterface {
@@ -23,6 +22,8 @@ export interface EmitTraceOptions {
     showWordFound?: boolean;
 }
 
+const maxWidth = 120;
+
 const colWidthDictionaryName = 20;
 
 export function emitTraceResults(
@@ -31,67 +32,75 @@ export function emitTraceResults(
     results: TraceResult[],
     options: EmitTraceOptions,
 ): void {
-    const maxWordLength = results
-        .map((r) => r.foundWord || r.word)
-        .reduce((a, b) => Math.max(a, width(b)), 'Word'.length);
+    const report = calcTraceResultsReport(word, found, results, options);
+    console.log(report.table);
+    if (report.errors) {
+        console.error('Errors:');
+        console.error(report.errors);
+    }
+}
 
-    const maxDictNameLength = results
-        .map((r) => r.dictName.length)
-        .reduce((a, b) => Math.max(a, b), colWidthDictionaryName);
-
-    const cols: ColWidths = {
-        word: maxWordLength,
-        dictName: maxDictNameLength,
-        terminalWidth: options.lineWidth ?? (process.stdout.columns || 120),
-        location: options.dictionaryPathFormat === 'hide' ? 0 : 30,
-    };
-
+export function calcTraceResultsReport(
+    word: string,
+    found: boolean,
+    results: TraceResult[],
+    options: EmitTraceOptions,
+): { table: string; errors: string } {
     const col = new Intl.Collator();
     results.sort((a, b) => col.compare(a.dictName, b.dictName));
 
     options.showWordFound && console.log(`${options.prefix || ''}${word}: ${found ? 'Found' : 'Not Found'}`);
-    emitHeader(cols);
-    results.forEach((r) => emitTraceResult(r, cols, options));
+    const header = emitHeader(options.dictionaryPathFormat !== 'hide');
+    const rows = results.map((r) => emitTraceResult(r, options));
+
+    const t = tableToLines({
+        header,
+        rows,
+        terminalWidth: options.lineWidth || process.stdout.columns || maxWidth,
+        deliminator: ' ',
+    });
+
+    return {
+        table: t.map((line) => line.trimEnd()).join('\n'),
+        errors: emitErrors(results).join('\n'),
+    };
 }
 
-interface ColWidths {
-    word: number;
-    dictName: number;
-    terminalWidth: number;
-    location: number;
+function emitHeader(location: boolean): string[] {
+    const headers = ['Word', 'F', 'Dictionary'];
+
+    location && headers.push('Dictionary Location');
+
+    return headers;
 }
 
-function emitHeader(colWidths: ColWidths): void {
-    const line = [
-        pad('Word', colWidths.word),
-        'F',
-        pad('Dictionary', colWidths.dictName),
-        colWidths.location ? pad('Dictionary Location', colWidths.location) : '',
-    ];
-    console.log(chalk.underline(line.join(' ').trim().slice(0, colWidths.terminalWidth)));
-}
-
-function emitTraceResult(r: TraceResult, colWidths: ColWidths, options: EmitTraceOptions): void {
-    const { word: wordColWidth, terminalWidth, dictName: widthName } = colWidths;
-    const errors = r.errors?.map((e) => e.message)?.join('\n\t') || '';
-    const word = pad(r.foundWord || r.word, wordColWidth);
+function emitTraceResult(r: TraceResult, options: EmitTraceOptions): TableRow {
+    const errors = !!r.errors?.length;
+    const word = r.foundWord || r.word;
     const cWord = word.replaceAll('+', chalk.yellow('+'));
-    const w = r.forbidden ? chalk.red(cWord) : chalk.green(cWord);
+    const sug = r.preferredSuggestions?.map((s) => chalk.yellowBright(s)).join(', ') || '';
+    const w = (r.forbidden ? chalk.red(cWord) : chalk.green(cWord)) + (sug ? `->(${sug})` : '');
     const f = calcFoundChar(r);
     const a = r.dictActive ? '*' : ' ';
-    const dictName = pad(r.dictName.slice(0, widthName - 1) + a, widthName);
+    const dictName = r.dictName.slice(0, colWidthDictionaryName - 1) + a;
     const dictColor = r.dictActive ? chalk.yellowBright : chalk.rgb(200, 128, 50);
     const n = dictColor(dictName);
-    const info = [w, f, n].join(' ') + ' ';
-    const used = width(strip(info));
-    const widthSrc = terminalWidth - used;
     const c = colorize(errors ? chalk.red : chalk.white);
-    const s = c(formatDictionaryLocation(r.dictSource, widthSrc, { iPath, ...options }));
-    const line = info + s;
-    console.log(line.trim());
-    if (errors) {
-        console.error('\t' + chalk.red(errors));
-    }
+    return [
+        w,
+        f,
+        n,
+        (widthSrc) => c(formatDictionaryLocation(r.dictSource, widthSrc ?? maxWidth, { iPath, ...options })),
+    ];
+}
+
+function emitErrors(results: TraceResult[]): string[] {
+    const errorResults = results.filter((r) => r.errors?.length);
+
+    return errorResults.map((r) => {
+        const errors = r.errors?.map((e) => e.message)?.join('\n\t') || '';
+        return chalk.bold(r.dictName) + '\n\t' + chalk.red(errors);
+    });
 }
 
 function trimMid(s: string, w: number): string {

@@ -35,24 +35,4 @@ describe('Validate util', () => {
         const cleanObj = util.clean(obj);
         expect(Object.keys(cleanObj)).toEqual(['b', 'c', 'e']);
     });
-
-    test.each`
-        text       | n     | expected
-        ${''}      | ${0}  | ${''}
-        ${'hello'} | ${0}  | ${'hello'}
-        ${'hello'} | ${-1} | ${'hello'}
-        ${'a'}     | ${3}  | ${'  a'}
-    `('padLeft', ({ text, n, expected }) => {
-        expect(util.padLeft(text, n)).toBe(expected);
-    });
-
-    test.each`
-        text       | n     | expected
-        ${''}      | ${0}  | ${''}
-        ${'hello'} | ${0}  | ${'hello'}
-        ${'hello'} | ${-1} | ${'hello'}
-        ${'a'}     | ${3}  | ${'a  '}
-    `('pad', ({ text, n, expected }) => {
-        expect(util.pad(text, n)).toBe(expected);
-    });
 });

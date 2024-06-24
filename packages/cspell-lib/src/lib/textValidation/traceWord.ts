@@ -20,15 +20,25 @@ import type { TextOffsetRO } from './ValidationTypes.js';
 type Href = string;
 
 export interface DictionaryTraceResult {
+    /** The word being traced. */
     word: string;
     found: boolean;
+    /** The word found. */
     foundWord: string | undefined;
+    /** Indicates that the word is flagged. */
     forbidden: boolean;
+    /** The would should not show up in suggestions, but is considered correct. */
     noSuggest: boolean;
+    /** The name of the dictionary. */
     dictName: string;
+    /** The path/href to dictionary file. */
     dictSource: string;
+    /** Suggested changes to the word. */
+    preferredSuggestions?: string[] | undefined;
+    /** href to the config file referencing the dictionary. */
     configSource: Href | undefined;
-    errors: Error[] | undefined;
+    /** Errors */
+    errors?: Error[] | undefined;
 }
 
 export interface WordSplits {
@@ -50,7 +60,7 @@ export function traceWord(
     config: TraceOptions,
 ): TraceResult {
     const opts: HasOptions = {
-        ignoreCase: true,
+        ignoreCase: config.ignoreCase ?? true,
         useCompounds: config.allowCompoundWords || false,
     };
 
@@ -94,6 +104,8 @@ interface FindInDictResult {
 function unpackDictionaryFindResult(found: FindInDictResult, config: TraceOptions): DictionaryTraceResult[] {
     const { word, dict, findResult } = found;
 
+    const dictPreferred = getPreferred(dict, word);
+
     const baseResult: DictionaryTraceResult = {
         word,
         found: !!findResult?.found,
@@ -103,6 +115,7 @@ function unpackDictionaryFindResult(found: FindInDictResult, config: TraceOption
         dictName: dict.name,
         dictSource: dict.source,
         configSource: undefined,
+        preferredSuggestions: dictPreferred,
         errors: normalizeErrors(dict.getErrors?.()),
     };
 
@@ -139,8 +152,9 @@ function unpackDictionaryFindResult(found: FindInDictResult, config: TraceOption
         const cfgDict = createCollection(getInlineConfigDictionaries(cfg), dict.name, configSource);
 
         const findResult = cfgDict.find(word, opts);
+        const preferredSuggestions = getPreferred(cfgDict, word);
 
-        if (!findResult?.found) continue;
+        if (!findResult?.found && !preferredSuggestions) continue;
 
         const result: DictionaryTraceResult = {
             word,
@@ -151,20 +165,11 @@ function unpackDictionaryFindResult(found: FindInDictResult, config: TraceOption
             dictName: dict.name,
             dictSource: configSource,
             configSource,
+            preferredSuggestions,
             errors: normalizeErrors(dict.getErrors?.()),
         };
 
         results.push(result);
-
-        // console.log('unpackDictFindResult %o', {
-        //     id: src.id,
-        //     name: src.name,
-        //     filename: src.source?.filename,
-        //     configFieldName,
-        //     findResult,
-        //     cfg,
-        //     result,
-        // });
     }
 
     return results.length ? results : [baseResult];
@@ -172,6 +177,12 @@ function unpackDictionaryFindResult(found: FindInDictResult, config: TraceOption
 
 function normalizeErrors(errors: Error[] | undefined): Error[] | undefined {
     return errors?.length ? errors : undefined;
+}
+
+function getPreferred(dict: SpellingDictionary, word: string): string[] | undefined {
+    const sugs = dict.getPreferredSuggestions?.(word);
+    const preferred = sugs?.length ? sugs.filter((s) => s.isPreferred).map((s) => s.word) : undefined;
+    return preferred;
 }
 
 class CTraceResult extends Array<DictionaryTraceResult> implements TraceResult {

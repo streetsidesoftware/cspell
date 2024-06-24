@@ -99,7 +99,13 @@ function filterTraceResults(results: App.TraceResult[], options: TraceCommandOpt
 }
 
 function filterTraceResult(result: App.TraceResult, onlyFound?: boolean): boolean {
-    return result.found || result.forbidden || result.noSuggest || (!onlyFound && result.dictActive);
+    return (
+        result.found ||
+        result.forbidden ||
+        result.noSuggest ||
+        !!result.preferredSuggestions ||
+        (!onlyFound && result.dictActive)
+    );
 }
 
 function groupBy<T>(items: Iterable<T>, key: (item: T) => string): Map<string, T[]> {
