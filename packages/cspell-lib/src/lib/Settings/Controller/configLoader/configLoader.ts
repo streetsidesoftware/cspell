@@ -13,7 +13,7 @@ import { onClearCache } from '../../../events/index.js';
 import type { VFileSystem } from '../../../fileSystem.js';
 import { getVirtualFS } from '../../../fileSystem.js';
 import { createCSpellSettingsInternal as csi } from '../../../Models/CSpellSettingsInternalDef.js';
-import { AutoResolveCache } from '../../../util/AutoResolve.js';
+import { autoResolve, AutoResolveCache, autoResolveWeak } from '../../../util/AutoResolve.js';
 import { logError, logWarning } from '../../../util/logger.js';
 import { FileResolver } from '../../../util/resolveFile.js';
 import { envToTemplateVars } from '../../../util/templates.js';
@@ -130,6 +130,14 @@ export interface IConfigLoader {
     clearCachedSettingsFiles(): void;
 
     /**
+     * Resolve and merge the settings from the imports.
+     * This will create a virtual configuration file that is used to resolve the settings.
+     * @param settings - settings to resolve imports for
+     * @param filename - the path / URL to the settings file. Used to resolve imports.
+     */
+    resolveSettingsImports(settings: CSpellUserSettings, filename: string | URL): Promise<CSpellSettingsI>;
+
+    /**
      * Resolve imports and merge.
      * @param cfgFile - configuration file.
      * @param pnpSettings - optional settings related to Using Yarn PNP.
@@ -196,6 +204,7 @@ export class ConfigLoader implements IConfigLoader {
     protected cachedConfigFiles = new Map<string, CSpellConfigFile>();
     protected cachedPendingConfigFile = new AutoResolveCache<string, Promise<CSpellConfigFile | Error>>();
     protected cachedMergedConfig = new WeakMap<CSpellConfigFile, CacheMergeConfigFileWithImports>();
+    protected cachedCSpellConfigFileInMemory = new WeakMap<CSpellUserSettings, Map<string, CSpellConfigFileInMemory>>();
     protected globalSettings: CSpellSettingsI | undefined;
     protected cspellConfigFileReaderWriter: CSpellConfigFileReaderWriter;
     protected configSearch: ConfigSearch;
@@ -296,8 +305,19 @@ export class ConfigLoader implements IConfigLoader {
         this.configSearch.clearCache();
         this.cachedPendingConfigFile.clear();
         this.cspellConfigFileReaderWriter.clearCachedFiles();
-        this.cachedMergedConfig = new WeakMap<CSpellConfigFile, CacheMergeConfigFileWithImports>();
+        this.cachedMergedConfig = new WeakMap();
+        this.cachedCSpellConfigFileInMemory = new WeakMap();
         this.prefetchGlobalSettingsAsync();
+    }
+
+    /**
+     * Resolve and merge the settings from the imports.
+     * @param settings - settings to resolve imports for
+     * @param filename - the path / URL to the settings file. Used to resolve imports.
+     */
+    resolveSettingsImports(settings: CSpellUserSettings, filename: string | URL): Promise<CSpellSettingsI> {
+        const settingsFile = this.createCSpellConfigFile(filename, settings);
+        return this.mergeConfigFileWithImports(settingsFile, settings);
     }
 
     protected init(): Promise<void> {
@@ -520,7 +540,8 @@ export class ConfigLoader implements IConfigLoader {
     }
 
     createCSpellConfigFile(filename: URL | string, settings: CSpellUserSettings): CSpellConfigFile {
-        return new CSpellConfigFileInMemory(toFileURL(filename), settings);
+        const map = autoResolveWeak(this.cachedCSpellConfigFileInMemory, settings, () => new Map());
+        return autoResolve(map, filename, () => new CSpellConfigFileInMemory(toFileURL(filename), settings));
     }
 
     dispose() {

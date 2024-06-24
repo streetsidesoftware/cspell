@@ -15,6 +15,7 @@ export {
     getGlobalSettingsAsync,
     loadConfig,
     readRawSettings,
+    resolveSettingsImports,
     searchForConfig,
 } from './defaultConfigLoader.js';
 export { extractImportErrors, ImportFileRefWithError } from './extractImportErrors.js';

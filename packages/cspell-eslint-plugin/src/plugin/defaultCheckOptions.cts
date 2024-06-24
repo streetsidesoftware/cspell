@@ -7,6 +7,7 @@ export const defaultCheckOptions: Required<Check> = {
     checkStrings: true,
     checkStringTemplates: true,
     configFile: '',
+    cspellOptionsRoot: '',
     cspell: {
         words: [],
         flagWords: [],
@@ -26,6 +27,7 @@ export const defaultOptions: RequiredOptions = {
 };
 
 export function normalizeOptions(opts: Options | undefined, cwd: string): WorkerOptions {
-    const options: WorkerOptions = Object.assign({}, defaultOptions, opts || {}, { cwd });
+    const cspellOptionsRoot = opts?.cspellOptionsRoot || 'eslint-configuration-file';
+    const options: WorkerOptions = Object.assign({}, defaultOptions, opts || {}, { cspellOptionsRoot, cwd });
     return options;
 }

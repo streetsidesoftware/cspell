@@ -479,6 +479,9 @@ importers:
       '@cspell/cspell-types':
         specifier: workspace:*
         version: link:../cspell-types
+      '@cspell/url':
+        specifier: workspace:*
+        version: link:../cspell-url
       cspell-lib:
         specifier: workspace:*
         version: link:../cspell-lib
@@ -495,6 +498,12 @@ importers:
       '@internal/cspell-eslint-plugin-scripts':
         specifier: workspace:*
         version: link:scripts
+      '@internal/fixture-test-dictionary':
+        specifier: workspace:*
+        version: link:../../test-fixtures/dictionaries/test-dictionary
+      '@types/eslint':
+        specifier: ^8.56.10
+        version: 8.56.10
       '@types/estree':
         specifier: ^1.0.5
         version: 1.0.5
@@ -867,6 +876,12 @@ importers:
       esbuild:
         specifier: ^0.21.5
         version: 0.21.5
+
+  test-fixtures/dictionaries/test-dictionary:
+    devDependencies:
+      '@cspell/cspell-types':
+        specifier: workspace:*
+        version: link:../../../packages/cspell-types
 
   test-fixtures/issues/issue-5034:
     devDependencies:
@@ -5984,9 +5999,8 @@ packages:
     resolution: {integrity: sha512-ZYvCgrefwqoQ6yTyYUbQu64HsITZ3NfKX1lzaEYdkTDcfKzzCI/wthRRYKkdjHKFVgNiXKAKm65Zo1pk2as/QQ==}
     hasBin: true
 
-  is-core-module@2.14.0:
-    resolution: {integrity: sha512-a5dFJih5ZLYlRtDc0dZWP7RiKr6xIKzmn/oAYCDvdLThadVgyJwlaoQPmRtMSpz+rk0OGAgIu+TcM9HUF0fk1A==}
-    engines: {node: '>= 0.4'}
+  is-core-module@2.13.1:
+    resolution: {integrity: sha512-hHrIjvZsftOsvKSn2TRYl63zvxsgE0K+0mYMoH6gD4omR5IWB2KynivBQczo3+wF1cCkjzvptnI9Q0sPU66ilw==}
 
   is-data-view@1.0.1:
     resolution: {integrity: sha512-AHkaJrsUVW6wq6JS8y3JnM/GJF/9cf+k20+iDzlSaJrinEo5+7vRiteOSwBhHRiAyQATN1AmY4hwzxJKPmYf+w==}
@@ -12615,7 +12629,7 @@ snapshots:
 
   '@types/sax@1.2.7':
     dependencies:
-      '@types/node': 17.0.45
+      '@types/node': 18.19.39
 
   '@types/semver@7.5.8': {}
 
@@ -14462,7 +14476,7 @@ snapshots:
   eslint-import-resolver-node@0.3.9:
     dependencies:
       debug: 3.2.7
-      is-core-module: 2.14.0
+      is-core-module: 2.13.1
       resolve: 1.22.8
     transitivePeerDependencies:
       - supports-color
@@ -14476,7 +14490,7 @@ snapshots:
       eslint-plugin-import: 2.29.1(eslint-import-resolver-typescript@3.6.1)(eslint@9.5.0)
       fast-glob: 3.3.2
       get-tsconfig: 4.7.5
-      is-core-module: 2.14.0
+      is-core-module: 2.13.1
       is-glob: 4.0.3
     transitivePeerDependencies:
       - '@typescript-eslint/parser'
@@ -14540,7 +14554,7 @@ snapshots:
       eslint-import-resolver-node: 0.3.9
       eslint-module-utils: 2.8.1(eslint-import-resolver-node@0.3.9)(eslint-import-resolver-typescript@3.6.1(eslint-plugin-import@2.29.1)(eslint@9.5.0))(eslint@9.5.0)
       hasown: 2.0.2
-      is-core-module: 2.14.0
+      is-core-module: 2.13.1
       is-glob: 4.0.3
       minimatch: 3.1.2
       object.fromentries: 2.0.8
@@ -15895,7 +15909,7 @@ snapshots:
     dependencies:
       ci-info: 3.9.0
 
-  is-core-module@2.14.0:
+  is-core-module@2.13.1:
     dependencies:
       hasown: 2.0.2
 
@@ -17565,7 +17579,7 @@ snapshots:
   normalize-package-data@6.0.1:
     dependencies:
       hosted-git-info: 7.0.2
-      is-core-module: 2.14.0
+      is-core-module: 2.13.1
       semver: 7.6.2
       validate-npm-package-license: 3.0.4
 
@@ -18756,13 +18770,13 @@ snapshots:
 
   resolve@1.22.8:
     dependencies:
-      is-core-module: 2.14.0
+      is-core-module: 2.13.1
       path-parse: 1.0.7
       supports-preserve-symlinks-flag: 1.0.0
 
   resolve@2.0.0-next.5:
     dependencies:
-      is-core-module: 2.14.0
+      is-core-module: 2.13.1
       path-parse: 1.0.7
       supports-preserve-symlinks-flag: 1.0.0
 

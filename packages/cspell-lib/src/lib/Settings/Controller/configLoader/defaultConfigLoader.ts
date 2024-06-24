@@ -1,3 +1,4 @@
+import type { CSpellSettings } from '@cspell/cspell-types';
 import type { CSpellConfigFile } from 'cspell-config-lib';
 
 import { toError } from '../../../util/errors.js';
@@ -32,6 +33,19 @@ export function searchForConfig(
 
 export async function loadConfig(file: string, pnpSettings?: PnPSettingsOptional): Promise<CSpellSettingsI> {
     return gcl().readSettingsAsync(file, undefined, pnpSettings);
+}
+
+/**
+ * Resolve the imports in the settings file.
+ * @param settings - settings to resolve imports for
+ * @param filename - the filename of the settings file, use cwd if not available.
+ * @returns
+ */
+export async function resolveSettingsImports(
+    settings: CSpellSettings,
+    filename: string | URL,
+): Promise<CSpellSettingsI> {
+    return gcl().resolveSettingsImports(settings, filename);
 }
 
 export async function readConfigFile(filename: string | URL, relativeTo?: string | URL): Promise<CSpellConfigFile> {

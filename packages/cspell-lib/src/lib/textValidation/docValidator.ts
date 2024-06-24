@@ -1,4 +1,5 @@
 import assert from 'node:assert';
+import { pathToFileURL } from 'node:url';
 
 import { opConcatMap, opMap, pipeSync } from '@cspell/cspell-pipe/sync';
 import type {
@@ -9,6 +10,7 @@ import type {
     PnPSettings,
 } from '@cspell/cspell-types';
 import { IssueType } from '@cspell/cspell-types';
+import { toFileURL } from '@cspell/url';
 
 import { getGlobMatcherForExcluding } from '../globs/getGlobMatcher.js';
 import type { CSpellSettingsInternal, CSpellSettingsInternalFinalized } from '../Models/CSpellSettingsInternalDef.js';
@@ -17,7 +19,13 @@ import type { TextDocument, TextDocumentLine, TextDocumentRef } from '../Models/
 import { updateTextDocument } from '../Models/TextDocument.js';
 import type { ValidationIssue } from '../Models/ValidationIssue.js';
 import { createPerfTimer } from '../perf/index.js';
-import { finalizeSettings, loadConfig, mergeSettings, searchForConfig } from '../Settings/index.js';
+import {
+    finalizeSettings,
+    loadConfig,
+    mergeSettings,
+    resolveSettingsImports,
+    searchForConfig,
+} from '../Settings/index.js';
 import type { DirectiveIssue } from '../Settings/InDocSettings.js';
 import { validateInDocumentSettings } from '../Settings/InDocSettings.js';
 import type { SpellingDictionaryCollection, SuggestionResult } from '../SpellingDictionary/index.js';
@@ -55,6 +63,12 @@ export interface DocumentValidatorOptions extends ValidateTextOptions {
      * @defaultValue undefined
      */
     noConfigSearch?: boolean;
+
+    /**
+     * If `settings: CSpellUserSettings` contains imports, they will be resolved using this path.
+     * If not set, the current working directory will be used.
+     */
+    resolveImportsRelativeTo?: string | URL;
 }
 
 const ERROR_NOT_PREPARED = 'Validator Must be prepared before calling this function.';
@@ -108,7 +122,15 @@ export class DocumentValidator {
 
         const timer = createPerfTimer('_prepareAsync');
 
-        const { options, settings } = this;
+        const { options, settings: rawSettings } = this;
+
+        const resolveImportsRelativeTo = toFileURL(
+            options.resolveImportsRelativeTo || pathToFileURL('./virtual.settings.json'),
+        );
+
+        const settings = rawSettings.import?.length
+            ? await resolveSettingsImports(rawSettings, resolveImportsRelativeTo)
+            : rawSettings;
 
         const useSearchForConfig =
             (!options.noConfigSearch && !settings.noConfigSearch) || options.noConfigSearch === false;

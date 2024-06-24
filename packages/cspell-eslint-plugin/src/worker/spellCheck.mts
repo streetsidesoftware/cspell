@@ -2,6 +2,7 @@
 import assert from 'node:assert';
 import * as path from 'node:path';
 
+import { toFileDirURL, toFileURL } from '@cspell/url';
 import type { TSESTree } from '@typescript-eslint/types';
 import type { CSpellSettings, TextDocument, ValidationIssue } from 'cspell-lib';
 import {
@@ -24,6 +25,7 @@ import type { Issue, SpellCheckResults, Suggestions } from './types.cjs';
 import { walkTree } from './walkTree.mjs';
 
 const defaultSettings: CSpellSettings = {
+    name: 'eslint-configuration-file',
     patterns: [
         // @todo: be able to use cooked / transformed strings.
         // {
@@ -376,7 +378,8 @@ function getDocValidator(filename: string, text: string, options: WorkerOptions)
         return cachedValidator;
     }
 
-    const validator = new DocumentValidator(doc, options, settings);
+    const resolveImportsRelativeTo = toFileURL(options.cspellOptionsRoot || import.meta.url, toFileDirURL(options.cwd));
+    const validator = new DocumentValidator(doc, { ...options, resolveImportsRelativeTo }, settings);
     docValCache.set(doc, validator);
     return validator;
 }

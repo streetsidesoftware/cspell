@@ -104,6 +104,18 @@ export interface Check {
      */
     cspell?: CSpellOptions;
     /**
+     * Specify the root path of the cspell configuration.
+     * It is used to resolve `imports` found in {@link cspell}.
+     *
+     * example:
+     * ```js
+     * cspellOptionsRoot: import.meta.url
+     * // or
+     * cspellOptionsRoot: __filename
+     * ```
+     */
+    cspellOptionsRoot?: string | URL;
+    /**
      * Specify a path to a custom word list file.
      *
      * example:
