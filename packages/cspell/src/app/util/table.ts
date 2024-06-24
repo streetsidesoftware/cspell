@@ -1,30 +1,54 @@
 import chalk from 'chalk';
-import strip from 'strip-ansi';
+
+import { ansiWidth, pad } from './pad.js';
+
+export type RowTextFn = (maxWidth: number | undefined) => string;
+
+export type TableCell = string | RowTextFn;
+export type TableRow = TableCell[];
 
 export interface Table {
     header: string[];
-    rows: string[][];
+    rows: TableRow[];
+    terminalWidth?: number;
     deliminator?: string;
 }
 
 export function tableToLines(table: Table, deliminator?: string): string[] {
-    deliminator = deliminator || table.deliminator || ' | ';
+    const del = deliminator || table.deliminator || ' | ';
     const columnWidths: number[] = [];
 
     const { header, rows } = table;
 
-    function recordWidths(row: string[]) {
-        row.forEach((col, idx) => {
-            columnWidths[idx] = Math.max(strip(col).length, columnWidths[idx] || 0);
+    function getText(col: string | RowTextFn, maxWidth?: number): string {
+        return typeof col === 'string' ? col : col(maxWidth);
+    }
+
+    function getRCText(row: number, col: number, maxWidth?: number): string {
+        return getText(rows[row][col], maxWidth);
+    }
+
+    function recordHeaderWidths(header: string[]) {
+        header.forEach((col, idx) => {
+            columnWidths[idx] = Math.max(ansiWidth(col), columnWidths[idx] || 0);
+        });
+    }
+
+    function recordColWidths(row: (string | RowTextFn)[], rowIndex: number) {
+        row.forEach((_col, idx) => {
+            columnWidths[idx] = Math.max(ansiWidth(getRCText(rowIndex, idx, undefined)), columnWidths[idx] || 0);
         });
     }
 
     function justifyRow(c: string, i: number) {
-        return c + ' '.repeat(columnWidths[i] - strip(c).length);
+        return pad(c, columnWidths[i]);
     }
 
-    function toLine(row: string[]) {
-        return decorateRowWith(row, justifyRow).join(deliminator);
+    function toLine(row: TableCell[]) {
+        return decorateRowWith(
+            row.map((c, i) => getText(c, columnWidths[i])),
+            justifyRow,
+        ).join(del);
     }
 
     function* process() {
@@ -32,8 +56,24 @@ export function tableToLines(table: Table, deliminator?: string): string[] {
         yield* rows.map(toLine);
     }
 
-    recordWidths(header);
-    rows.forEach(recordWidths);
+    function adjustColWidths() {
+        if (!table.terminalWidth) return;
+
+        const dWidth = (columnWidths.length - 1) * ansiWidth(del);
+
+        let remainder = table.terminalWidth - dWidth;
+
+        for (let i = 0; i < columnWidths.length; i++) {
+            const colWidth = Math.min(columnWidths[i], remainder);
+            columnWidths[i] = colWidth;
+            remainder -= colWidth;
+        }
+    }
+
+    recordHeaderWidths(header);
+    rows.forEach(recordColWidths);
+
+    adjustColWidths();
 
     return [...process()];
 }

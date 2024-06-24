@@ -23,6 +23,7 @@ export interface TraceResult {
     dictSource: string;
     dictActive: boolean;
     configSource: string;
+    preferredSuggestions?: string[] | undefined;
     errors: Error[] | undefined;
 }
 export interface TraceOptions {

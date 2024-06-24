@@ -4,42 +4,44 @@ import strip from 'strip-ansi';
 import { describe, expect, test, vi } from 'vitest';
 
 import type { TraceResult } from '../application.js';
-import { __testing__, emitTraceResults } from './traceEmitter.js';
+import { __testing__, calcTraceResultsReport, emitTraceResults } from './traceEmitter.js';
 
 const compareStr = Intl.Collator().compare;
 
 describe('traceEmitter', () => {
     test('empty', () => {
-        const lines: string[] = [];
-        vi.spyOn(console, 'log').mockImplementation((a) => lines.push(strip(a)));
-        emitTraceResults('empty', false, [], { cwd: '/', lineWidth: 80, dictionaryPathFormat: 'long', iPath: posix });
-        expect(lines).toEqual(['Word F Dictionary           Dictionary Location']);
+        const report = calcTraceResultsReport('empty', false, [], {
+            cwd: '/',
+            lineWidth: 80,
+            dictionaryPathFormat: 'long',
+            iPath: posix,
+        });
+        expect(strip(report.table)).toEqual('Word F Dictionary Dictionary Location');
     });
 
     test('posix format long', () => {
-        const lines: string[] = [];
-        vi.spyOn(console, 'log').mockImplementation((a) => lines.push(strip(a)));
         const lineWidth = 80;
-        emitTraceResults('errorcode', true, sampleResults(), {
+        const report = calcTraceResultsReport('errorcode', true, sampleResults(), {
             cwd: '/this_is_a_very/long/path',
             lineWidth,
             dictionaryPathFormat: 'long',
             iPath: posix,
         });
+        const lines = report.table.split('\n').map(strip);
         expect(lines.reduce((a, b) => Math.max(a, b.length), 0)).toBeLessThanOrEqual(lineWidth);
         const output = lines.join('\n');
         expect(output).toEqual(`\
-Word       F Dictionary           Dictionary Location
-errorcode  ! forbid-words*        ../forbid-words.txt
-errorcode  I ignore-words*        ../../ignore-words.txt
-error+code * my-special-words*    which/should/.../space/my-special-words.txt
-errorcode  * project-words        project-words.txt
-errorcode  - softwareTerms*       node_modules/.../dict/softwareTerms.txt`);
+Word       F Dictionary        Dictionary Location
+errorcode  ! forbid-words*     ../forbid-words.txt
+errorcode  I ignore-words*     ../../ignore-words.txt
+error+code * my-special-words* which/should/.../the/space/my-special-words.txt
+errorcode  * project-words     project-words.txt
+errorcode  - softwareTerms*    node_modules/@cspell/.../dict/softwareTerms.txt`);
     });
 
     test('posix format short', () => {
-        const lines: string[] = [];
-        vi.spyOn(console, 'log').mockImplementation((a) => lines.push(strip(a)));
+        const consoleLines: string[] = [];
+        vi.spyOn(console, 'log').mockImplementation((a) => consoleLines.push(strip(a)));
         const lineWidth = 80;
         emitTraceResults('errorcode', true, sampleResults(), {
             cwd: '/this_is_a_very/long/path',
@@ -47,20 +49,21 @@ errorcode  - softwareTerms*       node_modules/.../dict/softwareTerms.txt`);
             dictionaryPathFormat: 'short',
             iPath: posix,
         });
+        const lines = consoleLines.join('\n').split('\n');
         expect(lines.reduce((a, b) => Math.max(a, b.length), 0)).toBeLessThanOrEqual(lineWidth);
         expect(lines).toEqual([
-            'Word       F Dictionary           Dictionary Location',
-            'errorcode  ! forbid-words*        ../forbid-words.txt',
-            'errorcode  I ignore-words*        .../ignore-words.txt',
-            'error+code * my-special-words*    my-special-words.txt',
-            'errorcode  * project-words        project-words.txt',
-            'errorcode  - softwareTerms*       [node_modules]/softwareTerms.txt',
+            'Word       F Dictionary        Dictionary Location',
+            'errorcode  ! forbid-words*     ../forbid-words.txt',
+            'errorcode  I ignore-words*     .../ignore-words.txt',
+            'error+code * my-special-words* my-special-words.txt',
+            'errorcode  * project-words     project-words.txt',
+            'errorcode  - softwareTerms*    [node_modules]/softwareTerms.txt',
         ]);
     });
 
     test('win32 format long', () => {
-        const lines: string[] = [];
-        vi.spyOn(console, 'log').mockImplementation((a) => lines.push(strip(a)));
+        const consoleLines: string[] = [];
+        vi.spyOn(console, 'log').mockImplementation((a) => consoleLines.push(strip(a)));
         const lineWidth = 80;
         emitTraceResults('errorcode', true, sampleResultsWin32(), {
             cwd: 'D:/this_is_a_very/long/path',
@@ -68,16 +71,17 @@ errorcode  - softwareTerms*       node_modules/.../dict/softwareTerms.txt`);
             dictionaryPathFormat: 'long',
             iPath: win32,
         });
+        const lines = consoleLines.join('\n').split('\n');
         expect(lines.reduce((a, b) => Math.max(a, b.length), 0)).toBeLessThanOrEqual(lineWidth);
         const output = lines.join('\n');
         expect(output).toEqual(
             bs(`\
-Word       F Dictionary           Dictionary Location
-errorcode  ! forbid-words*        ../forbid-words.txt
-errorcode  I ignore-words*        ../../ignore-words.txt
-error+code * my-special-words*    which/should/.../space/my-special-words.txt
-errorcode  * project-words        project-words.txt
-errorcode  - softwareTerms*       node_modules/.../dict/softwareTerms.txt`),
+Word       F Dictionary        Dictionary Location
+errorcode  ! forbid-words*     ../forbid-words.txt
+errorcode  I ignore-words*     ../../ignore-words.txt
+error+code * my-special-words* which/should/.../the/space/my-special-words.txt
+errorcode  * project-words     project-words.txt
+errorcode  - softwareTerms*    node_modules/@cspell/.../dict/softwareTerms.txt`),
         );
     });
 
@@ -98,12 +102,12 @@ errorcode  - softwareTerms*       node_modules/.../dict/softwareTerms.txt`),
             bs(
                 `\
 errorcode: Found
-Word       F Dictionary           Dictionary Location
-errorcode  ! forbid-words*        D:/this_is_a_very/long/forbid-words.txt
-errorcode  I ignore-words*        D:/this_is_a_very/ignore-words.txt
-error+code * my-special-words*    D:/this_is_a_very/long/path/which/should/not/fit/fully/into/the/space/my-special-words.txt
-errorcode  * project-words        D:/this_is_a_very/long/path/project-words.txt
-errorcode  - softwareTerms*       D:/this_is_a_very/long/path/node_modules/@cspell/dict-software-terms/dict/softwareTerms.txt`,
+Word       F Dictionary        Dictionary Location
+errorcode  ! forbid-words*     D:/this_is_a_very/long/forbid-words.txt
+errorcode  I ignore-words*     D:/this_is_a_very/ignore-words.txt
+error+code * my-special-words* D:/this_is_a_very/long/path/which/should/not/fit/fully/into/the/space/my-special-words.txt
+errorcode  * project-words     D:/this_is_a_very/long/path/project-words.txt
+errorcode  - softwareTerms*    D:/this_is_a_very/long/path/node_modules/@cspell/dict-software-terms/dict/softwareTerms.txt`,
             ),
         );
     });

@@ -31,7 +31,7 @@ describe('Verify trace', () => {
         );
     });
 
-    // cspell:ignore *error* *code* hte colour
+    // cspell:ignore *error* *code* hte colour colum
     test.each`
         word           | languageId   | locale       | ignoreCase | allowCompoundWords | dictName           | dictActive | found    | forbidden | noSuggest | foundWord
         ${'apple'}     | ${undefined} | ${undefined} | ${true}    | ${undefined}       | ${'en_us'}         | ${true}    | ${true}  | ${false}  | ${false}  | ${'apple'}
@@ -47,8 +47,9 @@ describe('Verify trace', () => {
         ${'hte'}       | ${undefined} | ${undefined} | ${true}    | ${undefined}       | ${'en_us'}         | ${true}    | ${false} | ${false}  | ${false}  | ${undefined}
         ${'hte'}       | ${undefined} | ${undefined} | ${true}    | ${undefined}       | ${'[flagWords]'}   | ${true}    | ${true}  | ${true}   | ${false}  | ${'hte'}
         ${'Colour'}    | ${undefined} | ${undefined} | ${true}    | ${undefined}       | ${'[ignoreWords]'} | ${true}    | ${true}  | ${false}  | ${true}   | ${'colour'}
-        ${'colum'}     | ${undefined} | ${'en'}      | ${true}    | ${undefined}       | ${'en_us'}         | ${true}    | ${true}  | ${false}  | ${false}  | ${'Colum'}
-        ${'colum'}     | ${undefined} | ${'en'}      | ${false}   | ${undefined}       | ${'en_us'}         | ${true}    | ${true}  | ${false}  | ${false}  | ${'Colum'}
+        ${'colum'}     | ${undefined} | ${'en'}      | ${true}    | ${undefined}       | ${'en_us'}         | ${true}    | ${false} | ${false}  | ${false}  | ${undefined}
+        ${'Colum'}     | ${undefined} | ${'en'}      | ${true}    | ${undefined}       | ${'en_us'}         | ${true}    | ${true}  | ${false}  | ${false}  | ${'Colum'}
+        ${'Colum'}     | ${undefined} | ${'en'}      | ${false}   | ${undefined}       | ${'en_us'}         | ${true}    | ${true}  | ${false}  | ${false}  | ${'Colum'}
     `('trace word "$word" in $dictName', testOptions, async (params) => {
         const { word, languageId, ignoreCase, locale, allowCompoundWords } = params;
         const { dictName, dictActive, found, forbidden, noSuggest, foundWord } = params;
@@ -68,6 +69,33 @@ describe('Verify trace', () => {
                     foundWord,
                     noSuggest,
                     word,
+                }),
+            ]),
+        );
+    });
+
+    // cspell:ignore ammount
+    test.each`
+        word         | languageId   | locale  | ignoreCase | preferredSuggestions
+        ${'ammount'} | ${undefined} | ${'en'} | ${true}    | ${['amount']}
+        ${'colour'}  | ${undefined} | ${'en'} | ${true}    | ${['color']}
+        ${'colum'}   | ${undefined} | ${'en'} | ${true}    | ${['column']}
+        ${'Colum'}   | ${undefined} | ${'en'} | ${true}    | ${['column']}
+    `('trace preferredSuggestions word "$word" in $dictName', testOptions, async (params) => {
+        const { word, languageId, ignoreCase, locale, preferredSuggestions } = params;
+        const words = [word];
+        const config = await getSettings({ suggestWords: ['colour:color'] });
+        const results = await traceWords(words, config, { locale, languageId, ignoreCase });
+
+        // console.log(JSON.stringify(byName));
+
+        expect(results.filter((r) => !!r.preferredSuggestions)).toEqual(
+            ac([
+                oc({
+                    found: false,
+                    foundWord: undefined,
+                    word,
+                    preferredSuggestions,
                 }),
             ]),
         );

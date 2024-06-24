@@ -555,6 +555,7 @@ interface DictionaryTraceResult {
     noSuggest: boolean;
     dictName: string;
     dictSource: string;
+    preferredSuggestions: string[] | undefined;
     configSource: Href | undefined;
     errors: Error[] | undefined;
 }
@@ -936,6 +937,7 @@ interface TraceResult {
     dictSource: string;
     dictActive: boolean;
     configSource: string;
+    preferredSuggestions?: string[] | undefined;
     errors: Error[] | undefined;
 }
 interface TraceOptions {

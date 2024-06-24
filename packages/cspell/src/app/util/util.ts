@@ -33,25 +33,3 @@ export function clean<T extends object>(src: T): RemoveUndefined<T> {
     }
     return r as RemoveUndefined<T>;
 }
-
-export function padWidth(s: string, target: number): number {
-    const sWidth = width(s);
-    return Math.max(target - sWidth, 0);
-}
-
-export function pad(s: string, w: number): string {
-    const p = padWidth(s, w);
-    if (!p) return s;
-    return s + ' '.repeat(p);
-}
-
-export function padLeft(s: string, w: number): string {
-    const p = padWidth(s, w);
-    if (!p) return s;
-    return ' '.repeat(p) + s;
-}
-
-export function width(s: string): number {
-    // eslint-disable-next-line no-control-regex, no-misleading-character-class
-    return s.replaceAll(/[\u0000-\u001F\u0300-\u036F]/g, '').length;
-}
