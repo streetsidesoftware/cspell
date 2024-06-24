@@ -3,7 +3,7 @@ Repository: MicrosoftDocs/PowerShell-Docs
 Url: "https://github.com/MicrosoftDocs/PowerShell-Docs.git"
 Args: ["--config=../../../cspell-power-shell-docs.config.yaml","**"]
 Lines:
- CSpell: Files checked: 2683, Issues found: 5412 in 1238 files.
+ CSpell: Files checked: 2683, Issues found: 5423 in 1242 files.
  exit code: 1
 ./CODE_OF_CONDUCT.md:10:38     - Unknown word (opensource) -- reach out at [aka.ms/opensource/moderation-support]
 ./LICENSE:139:15    - Unknown word (sublicensable)   -- non-sublicensable, non-exclusive, irrevocable
@@ -338,6 +338,7 @@ Lines:
 ./reference/5.1/Microsoft.PowerShell.Utility/Read-Host.md:66:17     - Unknown word (Osan)       -- "'New York; Osan; Koforidua'"
 ./reference/5.1/Microsoft.PowerShell.Utility/Read-Host.md:66:23     - Unknown word (Koforidua)  -- "'New York; Osan; Koforidua'"
 ./reference/5.1/Microsoft.PowerShell.Utility/Register-EngineEvent.md:83:28     - Unknown word (messagedata) -- Event: {0}" -f $event.messagedata | Out-File c:\temp\MyEvents
+./reference/5.1/Microsoft.PowerShell.Utility/Select-Object.md:407:6     - Unknown word (newobject)  -- PS> $newobject = [PSCustomObject]@
 ./reference/5.1/Microsoft.PowerShell.Utility/Select-Xml.md:143:59    - Unknown word (innerxml)   -- Expression= {($_.node.innerxml).trim()}}, Path -AutoSize
 ./reference/5.1/Microsoft.PowerShell.Utility/Select-Xml.md:225:29    - Unknown word (Innerxml)   -- ForEach-Object {$_.Node.Innerxml}
 ./reference/5.1/Microsoft.PowerShell.Utility/Set-Alias.md:419:47    - Unknown word (aliasname)  -- Remove-Item -Path Alias:aliasname`.
@@ -1080,7 +1081,7 @@ Lines:
 ./reference/docs-conceptual/install/Installing-PowerShell-on-Windows.md:133:11    - Unknown word (PSREMOTING)     -- - `ENABLE_PSREMOTING` - This property controls
 ./reference/docs-conceptual/install/Installing-PowerShell-on-Windows.md:141:4     - Unknown word (INSTALLFOLDER)  -- - `INSTALLFOLDER` - This property controls
 ./reference/docs-conceptual/install/Installing-PowerShell-on-Windows.md:275:2     - Unknown word (deviceip)       -- $deviceip = '<device ip address
-./reference/docs-conceptual/install/Installing-PowerShell-on-Windows.md:276:2     - Unknown word (zipfile)        -- $zipfile = 'PowerShell-7.4.2
+./reference/docs-conceptual/install/Installing-PowerShell-on-Windows.md:276:2     - Unknown word (zipfile)        -- $zipfile = 'PowerShell-7.4.3
 ./reference/docs-conceptual/install/Installing-PowerShell-on-Windows.md:277:2     - Unknown word (downloadfolder) -- $downloadfolder = 'u:\users\administrator
 ./reference/docs-conceptual/install/Installing-PowerShell-on-Windows.md:314:28    - Unknown word (workarea)       -- include the package in the workarea and add _OPENSRC_POWERSHELL
 ./reference/docs-conceptual/install/Installing-PowerShell-on-Windows.md:314:46    - Unknown word (OPENSRC)        -- the workarea and add _OPENSRC_POWERSHELL_ feature
@@ -1145,6 +1146,7 @@ Lines:
 ./reference/docs-conceptual/learn/deep-dives/everything-about-arrays.md:990:2     - Unknown word (mylist)     -- $mylist = [System.Collections
 ./reference/docs-conceptual/learn/deep-dives/everything-about-exceptions.md:194:43    - Unknown word (filefound)  -- ReadAllText( '\\test\no\filefound.log')
 ./reference/docs-conceptual/learn/deep-dives/everything-about-exceptions.md:228:33    - Unknown word (throwerror) -- : C:\blog\throwerror.ps1
+./reference/docs-conceptual/learn/deep-dives/everything-about-exceptions.md:361:11    - Unknown word (Redditor)   -- Thank you Redditor `u/Sheppard_Ra` for
 ./reference/docs-conceptual/learn/deep-dives/everything-about-exceptions.md:518:8     - Unknown word (Dhami)      -- Dexter Dhami pointed out that I can
 ./reference/docs-conceptual/learn/deep-dives/everything-about-hashtable.md:145:6     - Unknown word (Multiselection) -- #### Multiselection
 ./reference/docs-conceptual/learn/deep-dives/everything-about-hashtable.md:469:143   - Unknown word (testlab)        -- Description 'Network for testlab A' -LeaseDuration (New
@@ -1166,7 +1168,7 @@ Lines:
 ./reference/docs-conceptual/learn/deep-dives/everything-about-null.md:466:24    - Unknown word (kevmar)         -- userList = Get-ADUser kevmar
 ./reference/docs-conceptual/learn/deep-dives/everything-about-pscustomobject.md:129:2     - Unknown word (myobject)   -- $myobject.psobject.properties
 ./reference/docs-conceptual/learn/deep-dives/everything-about-shouldprocess.md:38:51     - Unknown word (importantfile) -- 9 AM              0 importantfile.txt
-./reference/docs-conceptual/learn/deep-dives/everything-about-string-substitutions.md:237:20    - Unknown word (parbold)    -- Thank you [/u/real_parbold][18] for that one.
+./reference/docs-conceptual/learn/deep-dives/everything-about-string-substitutions.md:237:28    - Unknown word (parbold)    -- you Redditor `u/real_parbold` for that one.
 ./reference/docs-conceptual/learn/deep-dives/everything-about-switch.md:430:2     - Unknown word (filelist)   -- :filelist foreach($path in $logs
 ./reference/docs-conceptual/learn/ps101/00-introduction.md:19:66     - Unknown word (Leanpub)      -- the original book from Leanpub at
 ./reference/docs-conceptual/learn/ps101/00-introduction.md:3:24      - Unknown word (mikefrobbins) -- custom: Contributor-mikefrobbins
@@ -1273,15 +1275,15 @@ Lines:
 ./reference/docs-conceptual/whats-new/What-s-New-in-PowerShell-73.md:86:83     - Unknown word (farmerau)   -- 3][16193]) (Thanks @farmerau!)
 ./reference/docs-conceptual/whats-new/What-s-New-in-PowerShell-73.md:87:85     - Unknown word (Ritchie)    -- 16197]) (Thanks @KevRitchie!)
 ./reference/docs-conceptual/whats-new/What-s-New-in-PowerShell-73.md:90:30     - Unknown word (dwtaber)    -- 3][16113]) (Thanks @dwtaber!)
-./reference/docs-conceptual/whats-new/What-s-New-in-PowerShell-74.md:117:81    - Unknown word (stevenebutler) -- 9][19249]) (Thanks @stevenebutler!)
-./reference/docs-conceptual/whats-new/What-s-New-in-PowerShell-74.md:122:30    - Unknown word (mkht)          -- 2][19622]) (Thanks @mkht!)
-./reference/docs-conceptual/whats-new/What-s-New-in-PowerShell-74.md:146:30    - Unknown word (dkaszews)      -- 0][17780]) (Thanks @dkaszews!)
-./reference/docs-conceptual/whats-new/What-s-New-in-PowerShell-74.md:152:30    - Unknown word (josea)         -- 5][19765]) (Thanks @josea!)
-./reference/docs-conceptual/whats-new/What-s-New-in-PowerShell-74.md:178:78    - Unknown word (wmentha)       -- 1][17191]) (Thanks @wmentha!)
-./reference/docs-conceptual/whats-new/What-s-New-in-PowerShell-74.md:185:80    - Unknown word (nohwnd)        -- 3][14953]) (Thanks @nohwnd!)
+./reference/docs-conceptual/whats-new/What-s-New-in-PowerShell-74.md:101:26    - Unknown word (webcmdlets)  -- Fix using xml -Body in webcmdlets without an encoding
+./reference/docs-conceptual/whats-new/What-s-New-in-PowerShell-74.md:119:81    - Unknown word (stevenebutler) -- 9][19249]) (Thanks @stevenebutler!)
+./reference/docs-conceptual/whats-new/What-s-New-in-PowerShell-74.md:124:30    - Unknown word (mkht)          -- 2][19622]) (Thanks @mkht!)
+./reference/docs-conceptual/whats-new/What-s-New-in-PowerShell-74.md:148:30    - Unknown word (dkaszews)      -- 0][17780]) (Thanks @dkaszews!)
+./reference/docs-conceptual/whats-new/What-s-New-in-PowerShell-74.md:154:30    - Unknown word (josea)         -- 5][19765]) (Thanks @josea!)
+./reference/docs-conceptual/whats-new/What-s-New-in-PowerShell-74.md:180:78    - Unknown word (wmentha)       -- 1][17191]) (Thanks @wmentha!)
+./reference/docs-conceptual/whats-new/What-s-New-in-PowerShell-74.md:187:80    - Unknown word (nohwnd)        -- 3][14953]) (Thanks @nohwnd!)
 ./reference/docs-conceptual/whats-new/What-s-New-in-PowerShell-74.md:22:88     - Unknown word (gregsdennis) -- 1][18141]) (Thanks @gregsdennis!)
-./reference/docs-conceptual/whats-new/What-s-New-in-PowerShell-74.md:91:3      - Unknown word (Webcmdlets)  -- - Webcmdlets add 308 to redirect
-./reference/docs-conceptual/whats-new/What-s-New-in-PowerShell-74.md:99:26     - Unknown word (webcmdlets)  -- Fix using xml -Body in webcmdlets without an encoding
+./reference/docs-conceptual/whats-new/What-s-New-in-PowerShell-74.md:93:3      - Unknown word (Webcmdlets)  -- - Webcmdlets add 308 to redirect
 ./reference/docs-conceptual/whats-new/What-s-New-in-PowerShell-75.md:105:29    - Unknown word (setuid)     -- unixmode` to handle `setuid` and `sticky` when file
 ./reference/docs-conceptual/whats-new/What-s-New-in-PowerShell-75.md:105:8     - Unknown word (unixmode)   -- - Fix `unixmode` to handle `setuid`
 ./reference/docs-conceptual/whats-new/What-s-New-in-PowerShell-75.md:112:81    - Unknown word (domsleee)   -- 2][20402]) (Thanks @domsleee!)

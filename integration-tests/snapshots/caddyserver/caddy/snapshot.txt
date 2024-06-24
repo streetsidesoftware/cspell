@@ -3,7 +3,7 @@ Repository: caddyserver/caddy
 Url: "https://github.com/caddyserver/caddy.git"
 Args: ["**/*.go"]
 Lines:
- CSpell: Files checked: 274, Issues found: 4070 in 255 files.
+ CSpell: Files checked: 274, Issues found: 4073 in 255 files.
  exit code: 1
 ./admin.go:1371:21   - Unknown word (pidfile)     -- // PIDFile writes a pidfile to the file at filename
 ./admin.go:331:29    - Unknown word (infosec)     -- security checks, the infosec community assures me
@@ -210,11 +210,11 @@ Lines:
 ./modules/caddyhttp/fileserver/matcher_test.go:193:20    - Unknown word (notphp)      -- path: "/notphp.php.txt",
 ./modules/caddyhttp/fileserver/matcher_test.go:73:20     - Unknown word (foodir)     -- path: "/foodir",
 ./modules/caddyhttp/fileserver/matcher_test.go:91:15     - Unknown word (missingfile) -- path: "/missingfile.php",
-./modules/caddyhttp/fileserver/staticfiles.go:124:51    - Unknown word (explictness) -- maximum clarity and explictness, use complete,
-./modules/caddyhttp/fileserver/staticfiles.go:162:2     - Unknown word (precompressors) -- precompressors map[string]encode
-./modules/caddyhttp/fileserver/staticfiles.go:164:44    - Unknown word (Etags)          -- extensions to try to read Etags from.
-./modules/caddyhttp/fileserver/staticfiles.go:476:3     - Unknown word (mtyp)           -- mtyp := mime.TypeByExtension
-./modules/caddyhttp/fileserver/staticfiles.go:552:74    - Unknown word (Caza)           -- written by Nathaniel Caza.
+./modules/caddyhttp/fileserver/staticfiles.go:125:51    - Unknown word (explictness) -- maximum clarity and explictness, use complete,
+./modules/caddyhttp/fileserver/staticfiles.go:163:2     - Unknown word (precompressors) -- precompressors map[string]encode
+./modules/caddyhttp/fileserver/staticfiles.go:165:44    - Unknown word (Etags)          -- extensions to try to read Etags from.
+./modules/caddyhttp/fileserver/staticfiles.go:477:3     - Unknown word (mtyp)           -- mtyp := mime.TypeByExtension
+./modules/caddyhttp/fileserver/staticfiles.go:553:74    - Unknown word (Caza)           -- written by Nathaniel Caza.
 ./modules/caddyhttp/headers/headers_test.go:216:11    - Unknown word (hdrs)       -- for k, hdrs := range tc.respHeader
 ./modules/caddyhttp/headers/headers_test.go:93:32     - Unknown word (lalala)     -- Header-Suffix": []string{"lalala"},
 ./modules/caddyhttp/headers/headers_test.go:96:32     - Unknown word (foofoofoo)  -- Me": []string{"foofoofoo"},
@@ -225,21 +225,23 @@ Lines:
 ./modules/caddyhttp/map/map_test.go:93:24     - Unknown word (testvar)    -- Outputs: []any{"{testvar}"},
 ./modules/caddyhttp/marshalers.go:26:4      - Unknown word (Loggable)   -- // LoggableHTTPRequest makes an
 ./modules/caddyhttp/marshalers.go:86:49     - Unknown word (marshalable) -- makes a slice of strings marshalable for logging.
-./modules/caddyhttp/matchers.go:1292:22   - Unknown word (embedable)  -- / MatchRegexp is an embedable type for matching
-./modules/caddyhttp/matchers.go:138:53    - Unknown word (escapings)  -- including those with bad escapings or illegal characters
-./modules/caddyhttp/matchers.go:597:22    - Unknown word (rawpath)    -- // we can now treat rawpath globs (%*) as regular
-./modules/caddyhttp/matchers.go:821:22    - Unknown word (WHATWG)     -- // Despite the URL WHATWG spec mandating the use
-./modules/caddyhttp/matchers.go:822:56    - Unknown word (Filippo)    -- lementation is different, and Filippo Valsorda rightly wrote
-./modules/caddyhttp/matchers.go:822:64    - Unknown word (Valsorda)   -- different, and Filippo Valsorda rightly wrote:
-./modules/caddyhttp/matchers_test.go:254:14    - Unknown word (FOOOO)      -- input: "/FOOOO",
-./modules/caddyhttp/matchers_test.go:289:20    - Unknown word (Fbar)       -- input: "/foo/%2Fbar",
-./modules/caddyhttp/matchers_test.go:510:60    - Unknown word (myparam)    -- Pattern: "^/foo/(?P<myparam>.*)/baz$", Name: "name
-./modules/caddyhttp/matchers_test.go:590:25    - Unknown word (Alakazam)   -- input: http.Header{"Alakazam": []string{"kapow"}
-./modules/caddyhttp/matchers_test.go:590:46    - Unknown word (kapow)      -- Alakazam": []string{"kapow"}},
-./modules/caddyhttp/matchers_test.go:719:35    - Unknown word (wildcarded) -- non match against a wildcarded",
-./modules/caddyhttp/matchers_test.go:733:17    - Unknown word (someparam)  -- input: "/?someparam",
-./modules/caddyhttp/matchers_test.go:763:17    - Unknown word (somekey)    -- input: "/?somekey=1",
-./modules/caddyhttp/matchers_test.go:846:43    - Unknown word (barfoo)     -- Header{"Field": []string{"barfoo", "foobar"}},
+./modules/caddyhttp/matchers.go:1300:22   - Unknown word (embedable)  -- / MatchRegexp is an embedable type for matching
+./modules/caddyhttp/matchers.go:139:53    - Unknown word (escapings)  -- including those with bad escapings or illegal characters
+./modules/caddyhttp/matchers.go:605:22    - Unknown word (rawpath)    -- // we can now treat rawpath globs (%*) as regular
+./modules/caddyhttp/matchers.go:829:22    - Unknown word (WHATWG)     -- // Despite the URL WHATWG spec mandating the use
+./modules/caddyhttp/matchers.go:830:56    - Unknown word (Filippo)    -- lementation is different, and Filippo Valsorda rightly wrote
+./modules/caddyhttp/matchers.go:830:64    - Unknown word (Valsorda)   -- different, and Filippo Valsorda rightly wrote:
+./modules/caddyhttp/matchers_test.go:263:14    - Unknown word (FOOOO)      -- input: "/FOOOO",
+./modules/caddyhttp/matchers_test.go:298:20    - Unknown word (Fbar)       -- input: "/foo/%2Fbar",
+./modules/caddyhttp/matchers_test.go:519:60    - Unknown word (myparam)    -- Pattern: "^/foo/(?P<myparam>.*)/baz$", Name: "name
+./modules/caddyhttp/matchers_test.go:599:25    - Unknown word (Alakazam)   -- input: http.Header{"Alakazam": []string{"kapow"}
+./modules/caddyhttp/matchers_test.go:599:46    - Unknown word (kapow)      -- Alakazam": []string{"kapow"}},
+./modules/caddyhttp/matchers_test.go:728:35    - Unknown word (wildcarded) -- non match against a wildcarded",
+./modules/caddyhttp/matchers_test.go:742:17    - Unknown word (someparam)  -- input: "/?someparam",
+./modules/caddyhttp/matchers_test.go:772:17    - Unknown word (somekey)    -- input: "/?somekey=1",
+./modules/caddyhttp/matchers_test.go:82:23     - Unknown word (éxàmplê)    -- match: MatchHost{"éxàmplê.com"},
+./modules/caddyhttp/matchers_test.go:83:17     - Unknown word (xmpl)       -- input: "xn--xmpl-0na6cm.com",
+./modules/caddyhttp/matchers_test.go:855:43    - Unknown word (barfoo)     -- Header{"Field": []string{"barfoo", "foobar"}},
 ./modules/caddyhttp/metrics.go:130:26    - Unknown word (behaviour)  -- Effectively the same behaviour as promhttp.InstrumentHandler
 ./modules/caddyhttp/metrics.go:133:3     - Unknown word (ttfb)       -- ttfb := time.Since(start
 ./modules/caddyhttp/metrics.go:137:2     - Unknown word (wrec)       -- wrec := NewResponseRecorder

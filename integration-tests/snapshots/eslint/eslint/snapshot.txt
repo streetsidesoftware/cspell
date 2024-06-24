@@ -3,7 +3,7 @@ Repository: eslint/eslint
 Url: "https://github.com/eslint/eslint"
 Args: [".","--config=../../../config/eslint/cspell.config.yaml","--issues-summary-report","--exclude=bin/**","--exclude=CHANGELOG.md","--exclude=_data","--exclude=tests/bench/large.js","--exclude=docs/src/_includes","--exclude=docs/src/assets/{fonts,s?css,images}"]
 Lines:
- CSpell: Files checked: 1940, Issues found: 1730 in 324 files.
+ CSpell: Files checked: 1939, Issues found: 1729 in 324 files.
  exit code: 1
 ./Makefile.js:145:88    - Unknown word (ined)               -- followed by the string "ined".
 ./Makefile.js:356:12    - Unknown word (gensite)            -- target.gensite();
@@ -202,8 +202,8 @@ Lines:
 ./docs/src/use/migrating-to-2.0.0.md:347:45    - Unknown word (FEFF)       -- parse(text.replace(/^\uFEFF/, ""), options);
 ./docs/src/use/migrating-to-3.0.0.md:47:229    - Unknown word (lifed)      -- Explorer 8 was end-of-lifed](https://www.microsoft
 ./docs/src/use/migrating-to-5.0.0.md:114:68    - Unknown word (lintable)   -- line does not match any lintable files
-./knip.jsonc:9:32      - Unknown word (Knip)       -- // Remove when Knip has a wdio plugin
-./knip.jsonc:9:43      - Unknown word (wdio)       -- Remove when Knip has a wdio plugin
+./knip.jsonc:15:23     - Unknown word (Knip)       -- // If Knip would consider exports
+./knip.jsonc:27:19     - Unknown word (wdio)       -- "@wdio/cli",
 ./lib/cli-engine/formatters/html.js:247:66    - Unknown word (noopener)   -- target="_blank" rel="noopener noreferrer">${ruleId
 ./lib/cli-engine/formatters/html.js:247:75    - Unknown word (noreferrer) -- blank" rel="noopener noreferrer">${ruleId ? ruleId
 ./lib/cli-engine/formatters/html.js:46:48     - Unknown word (Neue)       -- family: Arial, "Helvetica Neue", Helvetica, sans-serif
@@ -220,9 +220,9 @@ Lines:
 ./lib/linter/code-path-analysis/code-path-state.js:1730:23   - Unknown word (Segs)       -- const prevSegsOfLeavingSegment = [headOfLeav
 ./lib/linter/code-path-analysis/code-path-state.js:351:34    - Unknown word (expresion)  -- The end of the update expresion. This may change during
 ./lib/linter/code-path-analysis/debug-helpers.js:95:44     - Unknown word (Graphvis)   -- can be visualized with Graphvis.
-./lib/linter/config-comment-parser.js:83:22     - Unknown word (commaless)  -- // Also, commaless notations have invalid
-./lib/linter/config-comment-parser.js:94:20     - Unknown word (Levn)       -- debug("Levn parsing failed; falling
-./lib/linter/linter.js:1081:43   - Unknown word (tdiff)         -- ruleListenersReturn.tdiff, { type: "rules", key
+./lib/linter/config-comment-parser.js:76:22     - Unknown word (commaless)  -- // Also, commaless notations have invalid
+./lib/linter/config-comment-parser.js:87:20     - Unknown word (Levn)       -- debug("Levn parsing failed; falling
+./lib/linter/linter.js:1101:43   - Unknown word (tdiff)         -- ruleListenersReturn.tdiff, { type: "rules", key
 ./lib/linter/linter.js:119:52    - Unknown word (postprocessor) -- postprocess} [postprocess] postprocessor for report
 ./lib/linter/linter.js:47:7      - Unknown word (jslang)     -- const jslang = require("../languages
 ./lib/rule-tester/rule-tester.js:249:42    - Unknown word (errorize)   -- ast The root node to errorize `start`/`end` properties
@@ -267,8 +267,8 @@ Lines:
 ./lib/rules/use-isnan.js:89:15     - Unknown word (castable)   -- const castableOperators = new Set(
 ./lib/rules/utils/ast-utils.js:1049:89   - Unknown word (braket)     -- opening parenthesis or braket.
 ./lib/rules/utils/ast-utils.js:404:40    - Unknown word (samely)     -- a.b` and `a?.b` are samely.
-./package.json:130:6     - Unknown word (eslump)     -- "eslump": "^3.0.0",
-./package.json:147:6     - Unknown word (metascraper) -- "metascraper": "^5.25.7",
+./package.json:125:6     - Unknown word (eslump)     -- "eslump": "^3.0.0",
+./package.json:142:6     - Unknown word (metascraper) -- "metascraper": "^5.25.7",
 ./package.json:26:21     - Unknown word (knip)       -- "lint:unused": "knip",
 ./templates/blogpost.md.ejs:18:10     - Unknown word (linkify)    -- function linkify(line) {
 ./tests/fixtures/code-path-analysis/try--try-finally-4.js:43:156    - Unknown word (Expressio)  -- Expression\nIdentifier (bar)\nExpressio
@@ -304,14 +304,14 @@ Lines:
 ./tests/lib/eslint/eslint.js:3233:39   - Unknown word (previos)      -- make sure that the previos assertion checks the
 ./tests/lib/eslint/eslint.js:3286:59   - Unknown word (intenationally) -- cacheFilePath, "[]"); // intenationally invalid to additionally
 ./tests/lib/eslint/eslint.js:3456:59   - Unknown word (occured)        -- the previous run that occured after the cache was
-./tests/lib/eslint/eslint.js:6460:31   - Unknown word (dignore)        -- cwd: `${root}-dignore`,
+./tests/lib/eslint/eslint.js:6470:31   - Unknown word (dignore)        -- cwd: `${root}-dignore`,
 ./tests/lib/eslint/legacy-eslint.js:2512:24   - Unknown word (succesfully) -- it("should succesfully execute with a rule
-./tests/lib/linter/config-comment-parser.js:165:41    - Unknown word (ELEVENTEEN) -- code = "a: seventy, b:ELEVENTEEN";
-./tests/lib/linter/linter.js:16303:52  - Unknown word (intentionaly)   -- // intentionaly mutates objects and
-./tests/lib/linter/linter.js:3267:1    - Unknown word (consolexlog) -- consolexlog("test2");
-./tests/lib/linter/linter.js:3411:84   - Unknown word (rulename)    -- this is 2, since the rulename is very likely to be
-./tests/lib/linter/linter.js:5407:31   - Unknown word (suppresed)   -- it("should report one suppresed problem when noInlineConfig
-./tests/lib/linter/linter.js:7103:19   - Unknown word (postprocessors) -- describe("postprocessors", () => {
+./tests/lib/linter/config-comment-parser.js:159:41    - Unknown word (ELEVENTEEN) -- code = "a: seventy, b:ELEVENTEEN";
+./tests/lib/linter/linter.js:16349:52  - Unknown word (intentionaly)   -- // intentionaly mutates objects and
+./tests/lib/linter/linter.js:3287:1    - Unknown word (consolexlog) -- consolexlog("test2");
+./tests/lib/linter/linter.js:3431:84   - Unknown word (rulename)    -- this is 2, since the rulename is very likely to be
+./tests/lib/linter/linter.js:5427:31   - Unknown word (suppresed)   -- it("should report one suppresed problem when noInlineConfig
+./tests/lib/linter/linter.js:7123:19   - Unknown word (postprocessors) -- describe("postprocessors", () => {
 ./tests/lib/linter/report-translator.js:339:32    - Unknown word (fooo)       -- text: "fooo\nbar"
 ./tests/lib/linter/report-translator.js:396:34    - Unknown word (ncdar)      -- text: "o\ncdar"
 ./tests/lib/linter/rules.js:29:29     - Unknown word (michaelficarra) -- const ruleId = "michaelficarra";
