@@ -13,13 +13,14 @@
   },
   "files": [
     "dist",
-    "!**/*.tsbuildInfo",
     "!**/__mocks__",
-    "!**/perf/**",
-    "!**/test/**",
-    "!**/*.test.*",
+    "!**/*.map",
+    "!**/*.perf.*",
     "!**/*.spec.*",
-    "!**/*.map"
+    "!**/*.test.*",
+    "!**/*.tsbuildInfo",
+    "!**/perf/**",
+    "!**/test/**"
   ],
   "scripts": {
     "clean": "shx rm -rf dist temp coverage \"*.tsbuildInfo\"",
