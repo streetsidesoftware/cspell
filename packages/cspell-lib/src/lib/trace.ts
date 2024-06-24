@@ -94,7 +94,6 @@ export async function* traceWordsAsync(
     const setOfActiveDicts = new Set(activeDictionaries);
 
     function processWord(word: string): TraceWordResult {
-        console.error('Processing word:', { word, ignoreCase });
         const results = traceWord(word, dicts, { ...config, ignoreCase });
 
         const r = results.map((r) => ({
