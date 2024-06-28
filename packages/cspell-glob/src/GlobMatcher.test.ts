@@ -5,6 +5,7 @@ import { FileUrlBuilder } from '@cspell/url';
 import mm from 'micromatch';
 import { describe, expect, test } from 'vitest';
 
+import { fileOrGlobToGlob } from './globHelper.js';
 import type { GlobMatchOptions, MatcherMode } from './GlobMatcher.js';
 import { GlobMatcher } from './GlobMatcher.js';
 import type {
@@ -505,6 +506,79 @@ describe('Validate GlobMatcher excludeMode patternsNormalizedToRoot', () => {
     );
 });
 
+describe('normalizing globs', () => {
+    interface TestMapGlobToRoot {
+        glob: string;
+        globRoot: string;
+        root: string;
+        expectedGlobs: string[];
+        file: string;
+        expectedToMatch: boolean;
+    }
+
+    test.each`
+        glob                | globRoot          | root              | expectedGlobs                                                  | file                                | expectedToMatch
+        ${'src/*.json'}     | ${'.'}            | ${'./project/p2'} | ${[]}                                                          | ${''}                               | ${false}
+        ${'**'}             | ${'.'}            | ${'.'}            | ${['**']}                                                      | ${'./package.json'}                 | ${true}
+        ${'*.json'}         | ${'.'}            | ${'.'}            | ${['**/*.json', '**/*.json/**']}                               | ${'./package.json'}                 | ${true}
+        ${'*.json'}         | ${'.'}            | ${'.'}            | ${['**/*.json', '**/*.json/**']}                               | ${'./.git/package.json'}            | ${true}
+        ${'*.json'}         | ${'./project/p1'} | ${'.'}            | ${['project/p1/**/*.json', 'project/p1/**/*.json/**']}         | ${'./project/p1/package.json'}      | ${true}
+        ${'*.json'}         | ${'./project/p1'} | ${'.'}            | ${['project/p1/**/*.json', 'project/p1/**/*.json/**']}         | ${'./project/p1/src/package.json'}  | ${true}
+        ${'*.json'}         | ${'.'}            | ${'./project/p2'} | ${['**/*.json', '**/*.json/**']}                               | ${'./project/p2/package.json'}      | ${true}
+        ${'src/*.json'}     | ${'.'}            | ${'./project/p2'} | ${[]}                                                          | ${''}                               | ${false}
+        ${'**/src/*.json'}  | ${'.'}            | ${'./project/p2'} | ${['**/src/*.json', '**/src/*.json/**']}                       | ${'./project/p2/x/src/config.json'} | ${true}
+        ${'**/src/*.json'}  | ${'./project/p1'} | ${'.'}            | ${['**/src/*.json', '**/src/*.json/**']}                       | ${'./project/p1/src/config.json'}   | ${true}
+        ${'/**/src/*.json'} | ${'./project/p1'} | ${'.'}            | ${['project/p1/**/src/*.json', 'project/p1/**/src/*.json/**']} | ${'./project/p1/src/config.json'}   | ${true}
+    `(
+        'mapGlobToRoot exclude "$glob"@"$globRoot" -> "$root" = "$expectedGlobs"',
+        ({ glob, globRoot, root, expectedGlobs, file, expectedToMatch }: TestMapGlobToRoot) => {
+            globRoot = path.resolve(globRoot);
+            root = path.resolve(root);
+            file = path.resolve(file);
+            const globMatcher = new GlobMatcher(glob, {
+                root: globRoot,
+                mode: 'exclude',
+            });
+            const patterns = globMatcher.patterns.map((g) => g);
+            const r = normalizeGlobsToRoot(patterns, root, true);
+            expect(r).toEqual(expectedGlobs);
+
+            expect(globMatcher.match(file)).toBe(expectedToMatch);
+        },
+    );
+
+    test.each`
+        glob                | globRoot          | root              | expectedGlobs                   | file                                | expectedToMatch
+        ${'*.json'}         | ${'.'}            | ${'.'}            | ${['*.json']}                   | ${'./package.json'}                 | ${true}
+        ${'*.json'}         | ${'.'}            | ${'.'}            | ${['*.json']}                   | ${'./.git/package.json'}            | ${false}
+        ${'*.json'}         | ${'./project/p1'} | ${'.'}            | ${['project/p1/*.json']}        | ${'./project/p1/package.json'}      | ${true}
+        ${'*.json'}         | ${'./project/p1'} | ${'.'}            | ${['project/p1/*.json']}        | ${'./project/p1/src/package.json'}  | ${false}
+        ${'*.json'}         | ${'.'}            | ${'./project/p2'} | ${[]}                           | ${'./project/p2/package.json'}      | ${false}
+        ${'/**/*.json'}     | ${'.'}            | ${'./project/p2'} | ${['**/*.json']}                | ${'./project/p2/package.json'}      | ${true}
+        ${'**/*.json'}      | ${'.'}            | ${'./project/p2'} | ${['**/*.json']}                | ${'./project/p2/package.json'}      | ${true}
+        ${'src/*.json'}     | ${'.'}            | ${'./project/p2'} | ${[]}                           | ${''}                               | ${false}
+        ${'**/src/*.json'}  | ${'.'}            | ${'./project/p2'} | ${['**/src/*.json']}            | ${'./project/p2/x/src/config.json'} | ${true}
+        ${'**/src/*.json'}  | ${'./project/p1'} | ${'.'}            | ${['**/src/*.json']}            | ${'./project/p1/src/config.json'}   | ${true}
+        ${'/**/src/*.json'} | ${'./project/p1'} | ${'.'}            | ${['project/p1/**/src/*.json']} | ${'./project/p1/src/config.json'}   | ${true}
+    `(
+        'mapGlobToRoot include "$glob"@"$globRoot" -> "$root" = "$expectedGlobs"',
+        ({ glob, globRoot, root, expectedGlobs, file, expectedToMatch }: TestMapGlobToRoot) => {
+            globRoot = path.resolve(globRoot);
+            root = path.resolve(root);
+            file = path.resolve(file);
+            const globMatcher = new GlobMatcher(glob, {
+                root: globRoot,
+                mode: 'include',
+            });
+            const patterns = globMatcher.patterns.map((g) => g);
+            const r = normalizeGlobsToRoot(patterns, root, false);
+            expect(r).toEqual(expectedGlobs);
+
+            expect(globMatcher.match(file)).toBe(expectedToMatch);
+        },
+    );
+});
+
 type TestCase = [
     patterns: GlobPattern[] | GlobPattern,
     root: string | undefined,
@@ -742,4 +816,21 @@ function resolvePattern(p: GlobPattern | GlobPattern[], path: PathInterface): Gl
 function filenameToGlob(filename: string, segments: number = 1) {
     const parts = filename.split(path.sep).slice(-segments).join('/');
     return '**/' + parts;
+}
+
+function buildGlobMatcherFromCommandLine(globs: GlobPattern[], root: string, isExclude: boolean): GlobMatcher {
+    const withRoots = globs.map((g) => {
+        const source = typeof g === 'string' ? 'command line' : undefined;
+        return { source, ...fileOrGlobToGlob(g, root) };
+    });
+
+    return new GlobMatcher(withRoots, { root, mode: isExclude ? 'exclude' : 'include' });
+}
+
+function extractGlobsFromMatcher(globMatcher: GlobMatcher): string[] {
+    return globMatcher.patternsNormalizedToRoot.map((g) => g.glob);
+}
+
+function normalizeGlobsToRoot(globs: GlobPattern[], root: string, isExclude: boolean): string[] {
+    return extractGlobsFromMatcher(buildGlobMatcherFromCommandLine(globs, root, isExclude));
 }

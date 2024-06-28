@@ -53,6 +53,7 @@ export interface GlobPatternWithRoot extends GlobPatternWithOptionalRoot {
     root: string;
     /**
      * Global patterns do not need to be relative to the root.
+     * Note: Some patterns start with `**` but they are tied to the root. In this case, `isGlobalPattern` is `false`.
      */
     isGlobalPattern: boolean;
 }

@@ -75,6 +75,14 @@ export function isGlobPatternNormalized(g: GlobPattern | GlobPatternNormalized):
     return 'rawGlob' in gr && 'rawRoot' in gr && typeof gr.rawGlob === 'string';
 }
 
+export function isGlobPatternNormalizedToRoot(
+    g: GlobPattern | GlobPatternNormalized,
+    options: NormalizeOptions,
+): g is GlobPatternNormalized {
+    if (!isGlobPatternNormalized(g)) return false;
+    return g.root === options.root;
+}
+
 function urlBuilder(path: PathInterface = Path): FileUrlBuilder {
     return path === Path ? fileUrlBuilder : new FileUrlBuilder({ path });
 }
@@ -153,7 +161,9 @@ export function normalizeGlobPatterns(patterns: GlobPattern[], options: Normaliz
     function* normalize() {
         for (const glob of patterns) {
             if (isGlobPatternNormalized(glob)) {
-                yield glob;
+                yield isGlobPatternNormalizedToRoot(glob, options)
+                    ? glob
+                    : normalizeGlobToRoot(glob, options.root, options.nodePath || Path);
                 continue;
             }
             yield* normalizeGlobPattern(glob, options);
@@ -170,6 +180,7 @@ export function normalizeGlobPattern(g: GlobPattern, options: NormalizeOptions):
     const cwdUrl = builder.toFileDirURL(cwd);
     const rootUrl = builder.toFileDirURL(root, cwdUrl);
 
+    const gIsGlobalPattern = isGlobPatternWithRoot(g) ? g.isGlobalPattern : undefined;
     g = !isGlobPatternWithOptionalRoot(g) ? { glob: g } : g;
 
     const gr = { ...g, root: g.root ?? root };
@@ -188,7 +199,7 @@ export function normalizeGlobPattern(g: GlobPattern, options: NormalizeOptions):
         r.pathname = posix.normalize(r.pathname);
         gr.root = builder.urlToFilePathOrHref(r);
     }
-    const isGlobalPattern = isGlobalGlob(gr.glob);
+    const isGlobalPattern = gIsGlobalPattern ?? isGlobalGlob(gr.glob);
     gr.root = builder.urlToFilePathOrHref(builder.toFileDirURL(gr.root, rootUrl));
 
     const globs = normalizePattern(gr.glob, nested);
@@ -414,6 +425,8 @@ function rootToUrl(root: string, builder: FileUrlBuilder): URL {
 }
 
 function toGlobPatternWithRoot(glob: GlobPattern, root: string): GlobPatternWithRoot {
+    // We need to preserve isGlobal pattern so it gets correctly set later.
+    const isGlobal = isGlobPatternWithRoot(glob) ? glob.isGlobalPattern : undefined;
     const pattern = isGlobPatternWithRoot(glob)
         ? { ...glob }
         : typeof glob === 'string'
@@ -425,7 +438,7 @@ function toGlobPatternWithRoot(glob: GlobPattern, root: string): GlobPatternWith
         pattern.glob = pattern.glob.replace(GlobPlaceHolders.cwd, '');
     }
 
-    pattern.isGlobalPattern = isGlobalGlob(pattern.glob);
+    pattern.isGlobalPattern = isGlobal ?? isGlobalGlob(pattern.glob);
 
     return pattern;
 }

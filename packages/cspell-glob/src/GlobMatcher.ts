@@ -90,7 +90,7 @@ export class GlobMatcher {
     readonly path: PathInterface;
     readonly patterns: GlobPatternWithRoot[];
     readonly patternsNormalizedToRoot: GlobPatternNormalized[];
-    readonly root: string;
+    readonly root: string | URL;
     readonly dot: boolean;
     readonly options: NormalizedGlobMatchOptions;
 
@@ -99,7 +99,7 @@ export class GlobMatcher {
      * @param patterns - the contents of a `.gitignore` style file or an array of individual glob rules.
      * @param root - the working directory
      */
-    constructor(patterns: GlobPattern | GlobPattern[], root?: string, nodePath?: PathInterface);
+    constructor(patterns: GlobPattern | GlobPattern[], root?: string | URL, nodePath?: PathInterface);
 
     /**
      * Construct a `.gitignore` emulator
@@ -107,14 +107,17 @@ export class GlobMatcher {
      * @param options - to set the root and other options
      */
     constructor(patterns: GlobPattern | GlobPattern[], options?: GlobMatchOptions);
-    constructor(patterns: GlobPattern | GlobPattern[], rootOrOptions?: string | GlobMatchOptions);
+    constructor(patterns: GlobPattern | GlobPattern[], rootOrOptions?: string | URL | GlobMatchOptions);
 
     constructor(
         patterns: GlobPattern | GlobPattern[],
-        rootOrOptions?: string | GlobMatchOptions,
+        rootOrOptions?: string | URL | GlobMatchOptions,
         _nodePath?: PathInterface,
     ) {
-        const options = typeof rootOrOptions === 'string' ? { root: rootOrOptions } : rootOrOptions ?? {};
+        const options =
+            typeof rootOrOptions === 'string' || rootOrOptions instanceof URL
+                ? { root: rootOrOptions.toString() }
+                : rootOrOptions ?? {};
         const mode = options.mode ?? 'exclude';
         const isExcludeMode = mode !== 'include';
         const nodePath = options.nodePath ?? _nodePath ?? Path;
