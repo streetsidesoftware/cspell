@@ -5,6 +5,7 @@ import type {
     FSCapabilityFlags,
     UrlOrReference,
     VFileSystem,
+    VFileSystemCore,
 } from './VFileSystem.js';
 
 export type NextProvider = (url: URL) => VProviderFileSystem | undefined;
@@ -22,6 +23,11 @@ export interface VirtualFS extends Disposable {
      * The file system. All requests will first use getFileSystem to get the file system before making the request.
      */
     readonly fs: Required<VFileSystem>;
+
+    /**
+     * The file system core. All requests will first use getFileSystem to get the file system before making the request.
+     */
+    readonly fsc: Required<VFileSystemCore>;
 
     /**
      * Clear the cache of file systems.

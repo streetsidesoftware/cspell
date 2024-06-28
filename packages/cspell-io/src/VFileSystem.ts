@@ -17,7 +17,7 @@ export interface FileSystemProviderInfo {
     name: string;
 }
 
-export interface VFileSystem {
+export interface VFileSystemCore {
     /**
      * Read a file.
      * @param url - URL to read
@@ -58,6 +58,14 @@ export interface VFileSystem {
     hasProvider: boolean;
 }
 
+export interface VFileSystem extends VFileSystemCore {
+    findUp(
+        name: string | string[] | VFindUpPredicate,
+        from: URL,
+        options?: VFindUpURLOptions,
+    ): Promise<URL | undefined>;
+}
+
 export interface FSCapabilities {
     readonly flags: FSCapabilityFlags;
     readonly readFile: boolean;
@@ -80,3 +88,12 @@ export interface VfsDirEntry extends DirEntry {
     isUnknown(): boolean;
     isSymbolicLink(): boolean;
 }
+
+export type VFindEntryType = 'file' | 'directory' | '!file' | '!directory';
+
+export interface VFindUpURLOptions {
+    type?: VFindEntryType;
+    stopAt?: URL;
+}
+
+export type VFindUpPredicate = (dir: URL) => URL | undefined | Promise<URL | undefined>;

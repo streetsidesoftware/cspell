@@ -4,13 +4,13 @@ import { basename } from 'node:path';
 import { afterEach, beforeEach, describe, expect, test, vi } from 'vitest';
 
 import { CFileResource } from './common/index.js';
+import { createVirtualFS, getDefaultVFileSystem } from './CVirtualFS.js';
 import { FileType } from './models/Stats.js';
 import { toFileURL, urlBasename } from './node/file/url.js';
 import { pathToSample as ps } from './test/test.helper.js';
 import { FSCapabilityFlags } from './VFileSystem.js';
 import type { VFileSystemProvider, VirtualFS, VProviderFileSystem } from './VirtualFS.js';
-import { createVirtualFS, getDefaultVirtualFs } from './CVirtualFS.js';
-import { VFSErrorUnsupportedRequest } from './WrappedProviderFs.js';
+import { VFSErrorUnsupportedRequest } from './VirtualFS/WrappedProviderFs.js';
 
 const sc = expect.stringContaining;
 const oc = expect.objectContaining;
@@ -175,7 +175,7 @@ describe('VirtualFs', () => {
         ${ps('cities.txt.gz')} | ${'cities.txt.gz'}      | ${sc('San Francisco\n')}
     `('readFile $filename', async ({ filename, content, baseFilename }) => {
         const url = toFileURL(filename);
-        const fs = getDefaultVirtualFs().fs;
+        const fs = getDefaultVFileSystem();
         const expected = { url, content, baseFilename };
         const result = await fs.readFile(url);
         const gz = filename.endsWith('.gz') || undefined;
@@ -192,7 +192,7 @@ describe('VirtualFs', () => {
         ${ps('cities.not_found.txt.gz')} | ${oc({ code: 'ENOENT' })}
     `('readFile not found $filename', async ({ filename, expected }) => {
         const url = toFileURL(filename);
-        const fs = getDefaultVirtualFs().fs;
+        const fs = getDefaultVFileSystem();
         await expect(fs.readFile(url)).rejects.toEqual(expected);
     });
 
@@ -202,7 +202,7 @@ describe('VirtualFs', () => {
         ${ps('link.txt')} | ${oc({ mtimeMs: expect.any(Number), size: expect.any(Number), fileType: 1 }) /* links are resolved */}
     `('getStat $url', async ({ url, expected }) => {
         url = toFileURL(url);
-        const fs = getDefaultVirtualFs().fs;
+        const fs = getDefaultVFileSystem();
         const s = await fs.stat(url);
         expect(mockConsoleLog).not.toHaveBeenCalled();
         expect(s).toEqual(expected);
@@ -236,7 +236,7 @@ describe('VirtualFs', () => {
         ${ps(__dirname, 'not-found.nf')}                                                 | ${oc({ code: 'ENOENT' })}
     `('getStat with error $url', async ({ url, expected }) => {
         url = toFileURL(url);
-        const fs = getDefaultVirtualFs().fs;
+        const fs = getDefaultVFileSystem();
         const r = fs.stat(url);
         await expect(r).rejects.toEqual(expected);
     });

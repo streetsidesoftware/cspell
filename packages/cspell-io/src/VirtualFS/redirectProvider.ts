@@ -4,7 +4,7 @@ import { renameFileReference, renameFileResource, urlOrReferenceToUrl } from '..
 import type { DirEntry, FileReference, FileResource } from '../models/index.js';
 import type { FSCapabilityFlags } from '../VFileSystem.js';
 import type { VFileSystemProvider, VProviderFileSystem } from '../VirtualFS.js';
-import { fsCapabilities, VFSErrorUnsupportedRequest } from '../WrappedProviderFs.js';
+import { fsCapabilities, VFSErrorUnsupportedRequest } from './WrappedProviderFs.js';
 
 type UrlOrReference = URL | FileReference;
 

@@ -3,8 +3,9 @@ import type { CSpellIO } from './CSpellIO.js';
 import { getDefaultCSpellIO } from './CSpellIONode.js';
 import type { Disposable } from './models/index.js';
 import { LogEvent } from './models/LogEvent.js';
-import { UrlOrReference, VFileSystem } from './VFileSystem.js';
+import { UrlOrReference, VFileSystem, VFileSystemCore } from './VFileSystem.js';
 import { debug, NextProvider, VFileSystemProvider, VirtualFS } from './VirtualFS.js';
+import { CVFileSystem } from './VirtualFS/CVFileSystem.js';
 import {
     chopUrl,
     cspellIOToFsProvider,
@@ -12,17 +13,19 @@ import {
     rPad,
     VFSErrorUnsupportedRequest,
     WrappedProviderFs,
-} from './WrappedProviderFs.js';
+} from './VirtualFS/WrappedProviderFs.js';
 
 class CVirtualFS implements VirtualFS {
     private readonly providers = new Set<VFileSystemProvider>();
     private cachedFs = new Map<string, WrappedProviderFs>();
     private revCacheFs = new Map<VFileSystemProvider, Set<string>>();
+    readonly fsc: Required<VFileSystemCore>;
     readonly fs: Required<VFileSystem>;
     loggingEnabled = debug;
 
     constructor() {
-        this.fs = fsPassThrough((url) => this._getFS(url));
+        this.fsc = fsPassThroughCore((url) => this._getFS(url));
+        this.fs = new CVFileSystem(this.fsc);
     }
 
     enableLogging(value?: boolean | undefined): void {
@@ -56,12 +59,11 @@ class CVirtualFS implements VirtualFS {
     }
 
     getFS(url: URL): VFileSystem {
-        return this._getFS(url);
+        return new CVFileSystem(this._getFS(url));
     }
 
     private _getFS(url: URL): WrappedProviderFs {
         const key = `${url.protocol}${url.hostname}`;
-
         const cached = this.cachedFs.get(key);
         if (cached) {
             return cached;
@@ -99,8 +101,6 @@ class CVirtualFS implements VirtualFS {
     }
 
     reset(): void {
-        this.cachedFs.clear();
-        this.revCacheFs.clear();
         this.disposeOfCachedFs();
     }
 
@@ -114,6 +114,7 @@ class CVirtualFS implements VirtualFS {
             this.cachedFs.delete(key);
         }
         this.cachedFs.clear();
+        this.revCacheFs.clear();
     }
 
     dispose(): void {
@@ -128,8 +129,9 @@ class CVirtualFS implements VirtualFS {
         }
     }
 }
-function fsPassThrough(fs: (url: URL) => WrappedProviderFs): Required<VFileSystem> {
-    function gfs(ur: UrlOrReference, name: string): VFileSystem {
+
+function fsPassThroughCore(fs: (url: URL) => WrappedProviderFs): Required<VFileSystemCore> {
+    function gfs(ur: UrlOrReference, name: string): VFileSystemCore {
         const url = urlOrReferenceToUrl(ur);
         const f = fs(url);
         if (!f.hasProvider)
@@ -167,4 +169,12 @@ export function getDefaultVirtualFs(): VirtualFS {
         defaultVirtualFs = createVirtualFS();
     }
     return defaultVirtualFs;
+}
+
+export function getDefaultVFileSystemCore(): VFileSystemCore {
+    return getDefaultVirtualFs().fsc;
+}
+
+export function getDefaultVFileSystem(): VFileSystem {
+    return getDefaultVirtualFs().fs;
 }

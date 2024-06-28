@@ -1,18 +1,25 @@
-import { createTextFileResource, urlOrReferenceToUrl } from './common/index.js';
-import type { CSpellIO } from './CSpellIO.js';
-import type { BufferEncoding, DirEntry, FileReference, FileResource, Stats, TextFileResource } from './models/index.js';
-import { FileType } from './models/index.js';
-import type { EventMethods, LogEvent, LogEvents } from './models/LogEvent.js';
+import { createTextFileResource, urlOrReferenceToUrl } from '../common/index.js';
+import type { CSpellIO } from '../CSpellIO.js';
+import type {
+    BufferEncoding,
+    DirEntry,
+    FileReference,
+    FileResource,
+    Stats,
+    TextFileResource,
+} from '../models/index.js';
+import { FileType } from '../models/index.js';
+import type { EventMethods, LogEvent, LogEvents } from '../models/LogEvent.js';
 import {
     FileSystemProviderInfo,
     FSCapabilities,
     FSCapabilityFlags,
     UrlOrReference,
-    VFileSystem,
+    VFileSystemCore,
     VfsDirEntry,
     VfsStat,
-} from './VFileSystem.js';
-import { VFileSystemProvider, VProviderFileSystem } from './VirtualFS.js';
+} from '../VFileSystem.js';
+import { VFileSystemProvider, VProviderFileSystem } from '../VirtualFS.js';
 
 export function cspellIOToFsProvider(cspellIO: CSpellIO): VFileSystemProvider {
     const capabilities = FSCapabilityFlags.Stat | FSCapabilityFlags.ReadWrite | FSCapabilityFlags.ReadDir;
@@ -44,6 +51,7 @@ export function cspellIOToFsProvider(cspellIO: CSpellIO): VFileSystemProvider {
         },
     };
 }
+
 function wrapError(e: unknown): unknown {
     if (e instanceof VFSError) return e;
     // return new VFSError(e instanceof Error ? e.message : String(e), { cause: e });
@@ -68,6 +76,7 @@ export class VFSErrorUnsupportedRequest extends VFSError {
         this.url = url?.toString();
     }
 }
+
 class CFsCapabilities {
     constructor(readonly flags: FSCapabilityFlags) {}
 
@@ -95,7 +104,8 @@ class CFsCapabilities {
 export function fsCapabilities(flags: FSCapabilityFlags): FSCapabilities {
     return new CFsCapabilities(flags);
 }
-export class WrappedProviderFs implements VFileSystem {
+
+export class WrappedProviderFs implements VFileSystemCore {
     readonly hasProvider: boolean;
     readonly capabilities: FSCapabilityFlags;
     readonly providerInfo: FileSystemProviderInfo;
@@ -179,7 +189,7 @@ export class WrappedProviderFs implements VFileSystem {
         }
     }
 
-    static disposeOf(fs: VFileSystem): void {
+    static disposeOf<V extends VFileSystemCore>(fs: V): void {
         fs instanceof WrappedProviderFs && fs.fs?.dispose();
     }
 }
