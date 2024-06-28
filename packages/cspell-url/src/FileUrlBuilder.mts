@@ -48,7 +48,20 @@ export class FileUrlBuilder {
             this.path.sep === (this.windows ? '\\' : '/'),
             `Path separator should match OS type Windows: ${this.windows === true ? 'true' : (this.windows ?? 'undefined') || 'false'}, ` +
                 `sep: ${this.path.sep}, ` +
-                `options: ${JSON.stringify({ windows: options.windows, pathSep: options.path?.sep, n: options.path?.normalize('path/file.txt'), cwd: options.cwd?.href })}`,
+                `options: ` +
+                JSON.stringify({
+                    isWindows,
+                    sep: `${sep}`,
+                    windows: options.windows,
+                    pathSep: options.path?.sep,
+                    n: options.path?.normalize('path/file.txt'),
+                    cwd: options.cwd?.href,
+                    win32: this.path === Path.win32,
+                    posix: this.path === Path.posix,
+                    'win32.normalize': this.path.normalize === Path.win32.normalize,
+                    'posix.normalize': this.path.normalize === Path.posix.normalize,
+                }) +
+                ``,
         );
     }
 
