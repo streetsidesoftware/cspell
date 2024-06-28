@@ -73,7 +73,9 @@ export class FileUrlBuilder {
     encodePathChars(filepath: string) {
         filepath = filepath.replaceAll(percentRegEx, '%25');
         // In posix, backslash is a valid character in paths:
-        if (!this.windows && filepath.includes('\\')) filepath = filepath.replaceAll(backslashRegEx, '%5C');
+        if (!this.windows && !isWindows && filepath.includes('\\')) {
+            filepath = filepath.replaceAll(backslashRegEx, '%5C');
+        }
         filepath = filepath.replaceAll(newlineRegEx, '%0A');
         filepath = filepath.replaceAll(carriageReturnRegEx, '%0D');
         filepath = filepath.replaceAll(tabRegEx, '%09');
@@ -108,16 +110,13 @@ export class FileUrlBuilder {
         if (typeof filenameOrUrl !== 'string') return filenameOrUrl;
         if (isUrlLike(filenameOrUrl)) return new URL(filenameOrUrl);
         relativeTo ??= this.cwd;
+        isWindows && (filenameOrUrl = filenameOrUrl.replaceAll('\\', '/'));
         if (isUrlLike(relativeTo)) {
             const pathname = this.normalizeFilePathForUrl(filenameOrUrl);
             return new URL(pathname, relativeTo);
         }
         // Resolve removes the trailing slash, so we need to add it back.
-        const appendSlash = filenameOrUrl.endsWith('/')
-            ? '/'
-            : this.windows && filenameOrUrl.endsWith('\\')
-              ? '\\'
-              : '';
+        const appendSlash = filenameOrUrl.endsWith('/') ? '/' : '';
         const pathname =
             this.normalizeFilePathForUrl(this.path.resolve(relativeTo.toString(), filenameOrUrl)) + appendSlash;
         return this.pathToFileURL(pathname, this.cwd);
