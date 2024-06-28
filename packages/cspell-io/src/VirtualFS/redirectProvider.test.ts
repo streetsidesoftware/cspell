@@ -7,7 +7,8 @@ import { toURL, urlBasename } from '../node/file/url.js';
 import { makePathToURL, pathToSampleURL, pathToTempURL } from '../test/test.helper.js';
 import { FSCapabilityFlags } from '../VFileSystem.js';
 import type { VProviderFileSystem } from '../VirtualFS.js';
-import { createVirtualFS, VFSErrorUnsupportedRequest } from '../VirtualFS.js';
+import { createVirtualFS } from '../CVirtualFS.js';
+import { VFSErrorUnsupportedRequest } from '../WrappedProviderFs.js';
 import { createRedirectProvider } from './redirectProvider.js';
 
 const samplesURL = pathToSampleURL();

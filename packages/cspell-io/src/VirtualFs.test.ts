@@ -9,7 +9,8 @@ import { toFileURL, urlBasename } from './node/file/url.js';
 import { pathToSample as ps } from './test/test.helper.js';
 import { FSCapabilityFlags } from './VFileSystem.js';
 import type { VFileSystemProvider, VirtualFS, VProviderFileSystem } from './VirtualFS.js';
-import { createVirtualFS, getDefaultVirtualFs, VFSErrorUnsupportedRequest } from './VirtualFS.js';
+import { createVirtualFS, getDefaultVirtualFs } from './CVirtualFS.js';
+import { VFSErrorUnsupportedRequest } from './WrappedProviderFs.js';
 
 const sc = expect.stringContaining;
 const oc = expect.objectContaining;
