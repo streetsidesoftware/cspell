@@ -46,7 +46,7 @@ export class FileUrlBuilder {
         this.cwd = options.cwd ?? this.pathToFileURL(this.path.resolve() + '/', this.rootFileURL());
         assert(
             this.path.sep === (this.windows ? '\\' : '/'),
-            `Path separator should match OS type Windows: ${this.windows === true ? 'true' : (this.windows ?? 'undefined') || 'false'}, sep: ${this.path.sep}`,
+            `Path separator should match OS type Windows: ${this.windows === true ? 'true' : (this.windows ?? 'undefined') || 'false'}, sep: ${this.path.sep}, options: ${JSON.stringify(options)}`,
         );
     }
 
