@@ -82,7 +82,7 @@ describe('GitIgnoreServer', () => {
         expect(r.isIgnoredEx(file)).toEqual(expected);
     });
 
-    test.only.each`
+    test.each`
         file                       | roots        | expected
         ${p(pkg, 'node_modules/')} | ${undefined} | ${oc({ glob: 'node_modules/', matched: true, root: pr(gitRoot), gitIgnoreFile: gitIgnoreFile })}
     `('isIgnoredEx $file $roots', async ({ file, roots, expected }) => {

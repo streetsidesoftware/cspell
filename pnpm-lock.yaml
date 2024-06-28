@@ -570,9 +570,15 @@ importers:
 
   packages/cspell-gitignore:
     dependencies:
+      '@cspell/url':
+        specifier: workspace:*
+        version: link:../cspell-url
       cspell-glob:
         specifier: workspace:*
         version: link:../cspell-glob
+      cspell-io:
+        specifier: workspace:*
+        version: link:../cspell-io
       find-up-simple:
         specifier: ^1.0.0
         version: 1.0.0
