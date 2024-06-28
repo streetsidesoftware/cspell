@@ -5,8 +5,9 @@ import { describe, expect, test, vi } from 'vitest';
 import { CFileResource, renameFileResource } from '../common/index.js';
 import { toURL, urlBasename } from '../node/file/url.js';
 import { makePathToURL, pathToSampleURL, pathToTempURL } from '../test/test.helper.js';
+import { FSCapabilityFlags } from '../VFileSystem.js';
 import type { VProviderFileSystem } from '../VirtualFS.js';
-import { createVirtualFS, FSCapabilityFlags, VFSErrorUnsupportedRequest } from '../VirtualFS.js';
+import { createVirtualFS, VFSErrorUnsupportedRequest } from '../VirtualFS.js';
 import { createRedirectProvider } from './redirectProvider.js';
 
 const samplesURL = pathToSampleURL();
