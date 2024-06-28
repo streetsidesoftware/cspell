@@ -134,7 +134,7 @@ describe('CSpellIONode', () => {
         url                                                                                 | expected
         ${'https://raw.githubusercontent.com/streetsidesoftware/cspell/main/tsconfig.json'} | ${oc({ eTag: sc('W/') })}
         ${__filename}                                                                       | ${oc({ mtimeMs: expect.any(Number) })}
-    `('getStat $url', async ({ url, expected }) => {
+    `('getStat $url', { timeout: 30_000 }, async ({ url, expected }) => {
         const cspellIo = new CSpellIONode();
         const r = await cspellIo.getStat(url);
         expect(r).toEqual(expected);
@@ -144,7 +144,7 @@ describe('CSpellIONode', () => {
         url                                                                              | expected
         ${'https://raw.gitubusrcotent.com/streetsidesoftware/cspell/main/tsconfig.json'} | ${oc({ code: 'ENOTFOUND' })}
         ${ps(__dirname, 'not-found.nf')}                                                 | ${oc({ code: 'ENOENT' })}
-    `('getStat with error $url', async ({ url, expected }) => {
+    `('getStat with error $url', { timeout: 30_000 }, async ({ url, expected }) => {
         const cspellIo = new CSpellIONode();
         const r = cspellIo.getStat(url);
         await expect(r).rejects.toEqual(expected);
