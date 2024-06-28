@@ -40,7 +40,7 @@ export class FileUrlBuilder {
     readonly cwd: URL;
     constructor(options: BuilderOptions = {}) {
         const sep = options.path?.sep;
-        this.windows = options.windows ?? (sep === '\\' || undefined) ?? isWindows;
+        this.windows = options.windows ?? (sep ? sep === '\\' : undefined) ?? isWindows;
         this.path = options.path ?? (this.windows ? Path.win32 : Path.posix);
         // note: `this.path.resolve() + '/'` is used on purpose instead of `'./'`
         this.cwd = options.cwd ?? this.pathToFileURL(this.path.resolve() + '/', this.rootFileURL());
