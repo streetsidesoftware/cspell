@@ -90,7 +90,10 @@ export class GlobMatcher {
     readonly path: PathInterface;
     readonly patterns: GlobPatternWithRoot[];
     readonly patternsNormalizedToRoot: GlobPatternNormalized[];
-    readonly root: string | URL;
+    /**
+     * path or href of the root directory.
+     */
+    readonly root: string;
     readonly dot: boolean;
     readonly options: NormalizedGlobMatchOptions;
 
