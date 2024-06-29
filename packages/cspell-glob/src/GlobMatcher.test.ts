@@ -8,13 +8,7 @@ import { describe, expect, test } from 'vitest';
 import { fileOrGlobToGlob } from './globHelper.js';
 import type { GlobMatchOptions, MatcherMode } from './GlobMatcher.js';
 import { GlobMatcher } from './GlobMatcher.js';
-import type {
-    GlobMatch,
-    GlobPattern,
-    GlobPatternNormalized,
-    GlobPatternWithOptionalRoot,
-    PathInterface,
-} from './GlobMatcherTypes.js';
+import type { GlobMatch, GlobPattern, GlobPatternNormalized, GlobPatternWithOptionalRoot, PathInterface } from './GlobMatcherTypes.js';
 
 const defaultCwdWin32 = 'C:\\user\\home\\project\\testing';
 const defaultCwdPosix = '/user/home/project/testing';
@@ -114,14 +108,11 @@ describe('Validate Micromatch assumptions', () => {
         ${'src/*.(test|spec).ts'}        | ${'src/test.ts'}              | ${false}
         ${filenameToGlob(__filename, 1)} | ${__filename}                 | ${true}
         ${filenameToGlob(__filename, 2)} | ${__filename}                 | ${true}
-    `(
-        `Micromatch glob: '$glob', filename: '$filename' expected: $expectedToMatch`,
-        ({ glob, filename, expectedToMatch }) => {
-            const reg = mm.makeRe(glob);
-            expect(reg.test(filename)).toEqual(expectedToMatch);
-            expect(mm.isMatch(filename, glob, { windows: path.sep === '\\' })).toBe(expectedToMatch);
-        },
-    );
+    `(`Micromatch glob: '$glob', filename: '$filename' expected: $expectedToMatch`, ({ glob, filename, expectedToMatch }) => {
+        const reg = mm.makeRe(glob);
+        expect(reg.test(filename)).toEqual(expectedToMatch);
+        expect(mm.isMatch(filename, glob, { windows: path.sep === '\\' })).toBe(expectedToMatch);
+    });
 });
 
 function resolveFilename(pathInstance: PathInterface, filename: string): string;
@@ -145,9 +136,7 @@ function resolveFilename(pathInstance: PathInterface, filename: string | undefin
             const [patterns, _root, _filename, expected, description] = curTest;
             const root = resolveFilename(pathInstance, _root);
             const filename = resolveFilename(pathInstance, _filename);
-            test(`test ${index} ${description}, pattern: [${patterns}] filename: "${filename}", root: "${root}", expected: ${
-                expected ? 'T' : 'F'
-            }`, () => {
+            test(`test ${index} ${description}, pattern: [${patterns}] filename: "${filename}", root: "${root}", expected: ${expected ? 'T' : 'F'}`, () => {
                 const matcher = new GlobMatcher(patterns, root, pathInstance);
                 try {
                     expect(matcher.match(filename)).toEqual(expected);
@@ -428,18 +417,15 @@ describe('Validate GlobMatcher', () => {
             ${g('*.js', 'a/b')}          | ${'a'}       | ${'a/b/settings.js'}                        | ${'include'} | ${true}  | ${'Matches files, *.js'}
             ${g('*.js', 'a/b')}          | ${'a'}       | ${'a/settings.js'}                          | ${'include'} | ${false} | ${'Does not match parent files, *.js'}
             ${g('*.js', 'a')}            | ${'a/b'}     | ${'a/b/src/settings.js'}                    | ${'include'} | ${false} | ${'Does not match nested files, *.js'}
-        `(
-            `${os} $mode: $description, patterns: $patterns, filename: $filename, root: $root, $expected`,
-            ({ filename, root, patterns, mode, expected }: TestCaseMatcher) => {
-                root = resolveFilename(pathInstance, root);
-                filename = resolveFilename(pathInstance, filename);
-                patterns = resolvePattern(patterns, pathInstance);
-                // console.log(`root: ${root}, filename: ${filename}, pattern: ${JSON.stringify(patterns)}`);
-                const matcher = new GlobMatcher(patterns, { mode, root, nodePath: pathInstance });
+        `(`${os} $mode: $description, patterns: $patterns, filename: $filename, root: $root, $expected`, ({ filename, root, patterns, mode, expected }: TestCaseMatcher) => {
+            root = resolveFilename(pathInstance, root);
+            filename = resolveFilename(pathInstance, filename);
+            patterns = resolvePattern(patterns, pathInstance);
+            // console.log(`root: ${root}, filename: ${filename}, pattern: ${JSON.stringify(patterns)}`);
+            const matcher = new GlobMatcher(patterns, { mode, root, nodePath: pathInstance });
 
-                expect(matcher.match(filename)).toEqual(expected);
-            },
-        );
+            expect(matcher.match(filename)).toEqual(expected);
+        });
     }
 
     [pathWin32, pathPosix].forEach(runTestOn);
@@ -494,16 +480,13 @@ describe('Validate GlobMatcher excludeMode patternsNormalizedToRoot', () => {
         ${g('*.js', 'a')}   | ${'a/b'} | ${'exclude'} | ${pathWin32} | ${gc(expectedGlobs['*.js'], { root: 'a/b/' })}
         ${g('*.js', 'a/c')} | ${'a/b'} | ${'exclude'} | ${pathWin32} | ${[]}
         ${g('*.js', 'a/c')} | ${'a/b'} | ${'include'} | ${pathWin32} | ${[]}
-    `(
-        'excludeMode patternsNormalizedToRoot $patterns $root',
-        ({ patterns, root, pathInstance, expected, mode }: TestCaseNormalizedToRoot) => {
-            root = resolveFilename(pathInstance, root);
-            patterns = resolvePattern(patterns, pathInstance);
-            const matcher = new GlobMatcher(patterns, { mode, root, nodePath: pathInstance });
-            expected = expected.map((e) => ocg(e, pathInstance));
-            expect(matcher.patternsNormalizedToRoot).toEqual(expected);
-        },
-    );
+    `('excludeMode patternsNormalizedToRoot $patterns $root', ({ patterns, root, pathInstance, expected, mode }: TestCaseNormalizedToRoot) => {
+        root = resolveFilename(pathInstance, root);
+        patterns = resolvePattern(patterns, pathInstance);
+        const matcher = new GlobMatcher(patterns, { mode, root, nodePath: pathInstance });
+        expected = expected.map((e) => ocg(e, pathInstance));
+        expect(matcher.patternsNormalizedToRoot).toEqual(expected);
+    });
 });
 
 describe('normalizing globs', () => {
@@ -530,23 +513,20 @@ describe('normalizing globs', () => {
         ${'**/src/*.json'}            | ${'./project/p1'} | ${'.'}            | ${['**/src/*.json', '**/src/*.json/**']}                       | ${'./project/p1/src/config.json'}                         | ${true}
         ${'/**/src/*.json'}           | ${'./project/p1'} | ${'.'}            | ${['project/p1/**/src/*.json', 'project/p1/**/src/*.json/**']} | ${'./project/p1/src/config.json'}                         | ${true}
         ${'/docs/types/cspell-types'} | ${gitRoot}        | ${gitRoot}        | ${['docs/types/cspell-types', 'docs/types/cspell-types/**']}   | ${r(gitRoot, './docs/types/cspell-types/assets/main.js')} | ${true}
-    `(
-        'mapGlobToRoot exclude "$glob"@"$globRoot" -> "$root" = "$expectedGlobs"',
-        ({ glob, globRoot, root, expectedGlobs, file, expectedToMatch }: TestMapGlobToRoot) => {
-            globRoot = path.resolve(globRoot);
-            root = path.resolve(root);
-            file = path.resolve(file);
-            const globMatcher = new GlobMatcher(glob, {
-                root: globRoot,
-                mode: 'exclude',
-            });
-            const patterns = globMatcher.patterns.map((g) => g);
-            const r = normalizeGlobsToRoot(patterns, root, true);
-            expect(r).toEqual(expectedGlobs);
+    `('mapGlobToRoot exclude "$glob"@"$globRoot" -> "$root" = "$expectedGlobs"', ({ glob, globRoot, root, expectedGlobs, file, expectedToMatch }: TestMapGlobToRoot) => {
+        globRoot = path.resolve(globRoot);
+        root = path.resolve(root);
+        file = path.resolve(file);
+        const globMatcher = new GlobMatcher(glob, {
+            root: globRoot,
+            mode: 'exclude',
+        });
+        const patterns = globMatcher.patterns.map((g) => g);
+        const r = normalizeGlobsToRoot(patterns, root, true);
+        expect(r).toEqual(expectedGlobs);
 
-            expect(globMatcher.match(file)).toBe(expectedToMatch);
-        },
-    );
+        expect(globMatcher.match(file)).toBe(expectedToMatch);
+    });
 
     test.each`
         glob                | globRoot          | root              | expectedGlobs                   | file                                | expectedToMatch
@@ -561,32 +541,23 @@ describe('normalizing globs', () => {
         ${'**/src/*.json'}  | ${'.'}            | ${'./project/p2'} | ${['**/src/*.json']}            | ${'./project/p2/x/src/config.json'} | ${true}
         ${'**/src/*.json'}  | ${'./project/p1'} | ${'.'}            | ${['**/src/*.json']}            | ${'./project/p1/src/config.json'}   | ${true}
         ${'/**/src/*.json'} | ${'./project/p1'} | ${'.'}            | ${['project/p1/**/src/*.json']} | ${'./project/p1/src/config.json'}   | ${true}
-    `(
-        'mapGlobToRoot include "$glob"@"$globRoot" -> "$root" = "$expectedGlobs"',
-        ({ glob, globRoot, root, expectedGlobs, file, expectedToMatch }: TestMapGlobToRoot) => {
-            globRoot = path.resolve(globRoot);
-            root = path.resolve(root);
-            file = path.resolve(file);
-            const globMatcher = new GlobMatcher(glob, {
-                root: globRoot,
-                mode: 'include',
-            });
-            const patterns = globMatcher.patterns.map((g) => g);
-            const r = normalizeGlobsToRoot(patterns, root, false);
-            expect(r).toEqual(expectedGlobs);
+    `('mapGlobToRoot include "$glob"@"$globRoot" -> "$root" = "$expectedGlobs"', ({ glob, globRoot, root, expectedGlobs, file, expectedToMatch }: TestMapGlobToRoot) => {
+        globRoot = path.resolve(globRoot);
+        root = path.resolve(root);
+        file = path.resolve(file);
+        const globMatcher = new GlobMatcher(glob, {
+            root: globRoot,
+            mode: 'include',
+        });
+        const patterns = globMatcher.patterns.map((g) => g);
+        const r = normalizeGlobsToRoot(patterns, root, false);
+        expect(r).toEqual(expectedGlobs);
 
-            expect(globMatcher.match(file)).toBe(expectedToMatch);
-        },
-    );
+        expect(globMatcher.match(file)).toBe(expectedToMatch);
+    });
 });
 
-type TestCase = [
-    patterns: GlobPattern[] | GlobPattern,
-    root: string | undefined,
-    filename: string,
-    expected: boolean,
-    description: string,
-];
+type TestCase = [patterns: GlobPattern[] | GlobPattern, root: string | undefined, filename: string, expected: boolean, description: string];
 
 function tests(): TestCase[] {
     const from = 0;
@@ -595,6 +566,16 @@ function tests(): TestCase[] {
     const testCases: TestCase[] = [
         [['node_modules/'], gitRoot, r(__dirname, 'node_modules/p/index.js'), true, 'node_modules/'],
         [['node_modules/'], gitRoot, r(__dirname, 'node_modules/'), false, 'node_modules/'],
+        [['node_modules/'], gitRoot, r(__dirname, 'project/node_modules/p/index.js'), true, 'node_modules/'],
+        [['package.json'], gitRoot, r(__dirname, 'project/package.json'), true, 'package.json'],
+        // [{ glob: 'node_modules/', root: '${cwd}' }, gitRoot, r(__dirname, 'node_modules/p/index.js'), true, 'node_modules/'],
+        // [{ glob: 'node_modules/', root: '${cwd}' }, gitRoot, r(__dirname, 'node_modules/'), false, 'node_modules/'],
+        // [{ glob: 'node_modules/', root: '${cwd}' }, gitRoot, r(__dirname, 'project/node_modules/p/index.js'), true, 'node_modules/'],
+        // [{ glob: 'package.json', root: '${cwd}' }, gitRoot, r(__dirname, 'project/package.json'), true, 'package.json'],
+        // [['${cwd}/node_modules/'], gitRoot, r(__dirname, 'node_modules/p/index.js'), true, 'node_modules/'],
+        // [['${cwd}/node_modules/'], gitRoot, r(__dirname, 'node_modules/'), false, 'node_modules/'],
+        // [['${cwd}/node_modules/'], gitRoot, r(__dirname, 'project/node_modules/p/index.js'), true, 'node_modules/'],
+        // [['${cwd}/package.json'], gitRoot, r(__dirname, 'project/package.json'), true, 'package.json'],
         [['*.json'], undefined, './settings.json', true, '*.json'],
         [['*.json'], undefined, 'settings.json', true, '*.json'],
         [['*.json'], undefined, '${cwd}/settings.json', true, '*.json'],
@@ -628,44 +609,14 @@ function tests(): TestCase[] {
         // With Root
         [['*.json'], '/User/code/src', '/User/code/src/settings.json', true, 'With Root *.json'],
         [['.vscode'], '/User/code/src', '/User/code/src/.vscode/settings.json', true, 'With Root .vscode'],
-        [
-            ['/*.json'],
-            '/User/code/src',
-            '/User/code/src/settings.json',
-            true,
-            'With Root Matches only root level files, /*.json',
-        ], // .
+        [['/*.json'], '/User/code/src', '/User/code/src/settings.json', true, 'With Root Matches only root level files, /*.json'], // .
         [['*.js'], '/User/code/src', '/User/code/src/src/settings.js', true, 'With Root Matches nested files, *.js'],
         [['.vscode/'], '/User/code/src', '/User/code/src/.vscode/settings.json', true, 'With Root .vscode/'],
         [['.vscode/'], '/User/code/src', '/User/code/src/.vscode', false, 'With Root .vscode/'], // This one shouldn't match, but micromatch says it should. :-(
-        [
-            ['.vscode/'],
-            '/User/code/src',
-            '/User/code/src/src/.vscode/settings.json',
-            true,
-            'With Root should match nested .vscode/',
-        ],
-        [
-            ['**/.vscode/'],
-            '/User/code/src',
-            '/User/code/src/src/.vscode/settings.json',
-            true,
-            'With Root should match nested .vscode/',
-        ],
-        [
-            ['/User/user/Library/**'],
-            '/User/code/src',
-            '/src/User/user/Library/settings.json',
-            false,
-            'With Root No match',
-        ],
-        [
-            ['/User/user/Library/**'],
-            '/User/code/src',
-            '/User/user/Library/settings.json',
-            false,
-            'File has but does not match root',
-        ],
+        [['.vscode/'], '/User/code/src', '/User/code/src/src/.vscode/settings.json', true, 'With Root should match nested .vscode/'],
+        [['**/.vscode/'], '/User/code/src', '/User/code/src/src/.vscode/settings.json', true, 'With Root should match nested .vscode/'],
+        [['/User/user/Library/**'], '/User/code/src', '/src/User/user/Library/settings.json', false, 'With Root No match'],
+        [['/User/user/Library/**'], '/User/code/src', '/User/user/Library/settings.json', false, 'File has but does not match root'],
         [['tests/*.test.ts'], '/User/code/src', 'tests/code.test.ts', false, 'Relative file with Root'],
         [['tests/**/*.test.ts'], '/User/code/src', 'tests/nested/code.test.ts', false, 'Relative file with Root'],
 
@@ -679,38 +630,14 @@ function tests(): TestCase[] {
         // Root with trailing /
         [['*.json'], '/User/code/src/', '/User/code/src/settings.json', true, '*.json'],
         [['.vscode'], '/User/code/src/', '/User/code/src/.vscode/settings.json', true, '.vscode'],
-        [
-            ['/*.json'],
-            '/User/code/src/',
-            '/User/code/src/settings.json',
-            true,
-            'Matches only root level files, /*.json',
-        ], // .
+        [['/*.json'], '/User/code/src/', '/User/code/src/settings.json', true, 'Matches only root level files, /*.json'], // .
         [['*.js'], '/User/code/src/', '/User/code/src/src/settings.js', true, '// Matches nested files, *.js'],
         [['.vscode/'], '/User/code/src/', '/User/code/src/.vscode/settings.json', true, '.vscode/'],
         [['.vscode/'], '/User/code/src/', '/User/code/src/.vscode', false, '.vscode/'], // This one shouldn't match, but micromatch says it should. :-(
-        [
-            ['/.vscode/'],
-            '/User/code/src/',
-            '/User/code/src/src/.vscode/settings.json',
-            false,
-            "shouldn't match nested .vscode/",
-        ],
-        [
-            ['.vscode/'],
-            '/User/code/src/',
-            '/User/code/src/src/.vscode/settings.json',
-            true,
-            'should match nested .vscode/',
-        ],
+        [['/.vscode/'], '/User/code/src/', '/User/code/src/src/.vscode/settings.json', false, "shouldn't match nested .vscode/"],
+        [['.vscode/'], '/User/code/src/', '/User/code/src/src/.vscode/settings.json', true, 'should match nested .vscode/'],
         [['.vscode/'], '/User/code/src/', '/User/code/src/src/.vscode', false, 'should match nested file .vscode'],
-        [
-            ['**/.vscode/'],
-            '/User/code/src/',
-            '/User/code/src/src/.vscode/settings.json',
-            true,
-            'should match nested .vscode/',
-        ],
+        [['**/.vscode/'], '/User/code/src/', '/User/code/src/src/.vscode/settings.json', true, 'should match nested .vscode/'],
         [['/User/user/Library/**'], '/User/code/src/', '/src/User/user/Library/settings.json', false, 'No match'],
         [['/User/user/Library/**'], '/User/code/src/', '/User/user/Library/settings.json', false, 'Match system root'],
 

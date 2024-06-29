@@ -98,6 +98,8 @@ describe('Validate fileOrGlobToGlob', () => {
         ${{ glob: '../**/*.json' }}                      | ${'./a/b'} | ${posix} | ${g('**/*.json', pp('./a/'))}          | ${'posix'}
         ${{ glob: '/**/*.json' }}                        | ${'.'}     | ${posix} | ${g('/**/*.json', pp('./'))}           | ${'posix'}
         ${{ glob: '/**/*.json', root: pp('./data') }}    | ${'.'}     | ${posix} | ${g('/**/*.json', pp('./data/'))}      | ${'posix'}
+        ${{ glob: '*.json', root: '${cwd}' }}            | ${'.'}     | ${posix} | ${g('*.json', '${cwd}')}               | ${'posix'}
+        ${{ glob: '${cwd}/*.json', root: pp('./data') }} | ${'.'}     | ${posix} | ${g('/*.json', '${cwd}')}              | ${'posix'}
     `('fileOrGlobToGlob glob: "$glob" root: "$root" $comment', ({ glob, root, path, expected }) => {
         root = p(root, path);
         const r = fileOrGlobToGlob(glob, root, path);

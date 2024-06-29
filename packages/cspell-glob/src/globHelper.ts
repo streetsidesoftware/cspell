@@ -54,6 +54,10 @@ export function fileOrGlobToGlob(
 
     const pattern = toGlobPatternWithRoot(fileOrGlob, root, builder);
 
+    // if (root.includes(GlobPlaceHolders.cwd) || pattern.root.includes(GlobPlaceHolders.cwd)) {
+    //     console.warn('fileOrGlobToGlob: root or pattern contains ${cwd}', { root, pattern, fileOrGlob });
+    // }
+
     return pattern;
 }
 
@@ -490,6 +494,8 @@ function fixPatternGlob(glob: GlobPatternWithRoot, builder: FileUrlBuilder): voi
 }
 
 function fixPatternRelativeToRoot(glob: GlobPatternWithRoot, root: URL, builder: FileUrlBuilder): void {
+    if (glob.root.startsWith(GlobPlaceHolders.cwd)) return;
+
     const rel = builder.relative(root, builder.toFileDirURL(glob.root));
     if (rel.startsWith('/') || rel.startsWith('../')) return;
     glob.root = builder.urlToFilePathOrHref(root);

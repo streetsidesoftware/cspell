@@ -196,6 +196,7 @@ describe('Validate cli', () => {
         ${'reporter'}                                  | ${['-r', pathFix('features/reporter'), '-c', pathFix('features/reporter/cspell.config.yaml')]} | ${undefined}       | ${false} | ${true}  | ${false}
         ${'issue-4811 **/README.md'}                   | ${['-r', pIssues('issue-4811'), '--no-progress', '**/README.md']}                              | ${undefined}       | ${true}  | ${false} | ${false}
         ${'issue-4811'}                                | ${['-r', pIssues('issue-4811'), '--no-progress', '.']}                                         | ${app.CheckFailed} | ${true}  | ${true}  | ${false}
+        ${'verify globRoot works'}                     | ${['-r', pathFix('globRoot'), '.']}                                                            | ${undefined}       | ${true}  | ${false} | ${false}
     `('app $msg Expect Error: $errorCheck', async ({ testArgs, errorCheck, eError, eLog, eInfo }: TestCase) => {
         chalk.level = 1;
         const commander = getCommander();
