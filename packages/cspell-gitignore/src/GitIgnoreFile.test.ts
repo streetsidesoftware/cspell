@@ -1,4 +1,5 @@
 import * as path from 'node:path';
+import { fileURLToPath } from 'node:url';
 
 import { GlobMatcher } from 'cspell-glob';
 import { describe, expect, test } from 'vitest';
@@ -7,8 +8,9 @@ import { __testing__, GitIgnoreFile, GitIgnoreHierarchy, loadGitIgnore } from '.
 
 const { mustBeHierarchical } = __testing__;
 
+const __dirname = fileURLToPath(new URL('./', import.meta.url));
 const pathPackage = path.resolve(__dirname, '..');
-const pathRepo = path.resolve(pathPackage, '../..');
+const pathRepo = path.join(path.resolve(pathPackage, '../..'), './');
 const gitIgnoreFile = path.resolve(pathRepo, '.gitignore');
 
 const oc = (obj: unknown) => expect.objectContaining(obj);

@@ -1,15 +1,25 @@
 import * as path from 'node:path';
+import { fileURLToPath } from 'node:url';
 
 import { describe, expect, test } from 'vitest';
 
 import { GitIgnore } from './GitIgnore.js';
 
-const pkg = path.resolve(__dirname, '..');
-const packages = path.resolve(pkg, '..');
-const gitRoot = path.resolve(packages, '..');
-const samples = path.resolve(pkg, 'samples');
-const pkgCSpellLib = path.join(packages, 'cspell-lib');
-const gitIgnoreFile = path.resolve(gitRoot, '.gitignore');
+const dirUrl = new URL('.', import.meta.url);
+
+const pkgUrl = new URL('../', dirUrl);
+const packagesUrl = new URL('../', pkgUrl);
+const gitRootUrl = new URL('../', packagesUrl);
+const samplesUrl = new URL('samples/', pkgUrl);
+const pkgCSpellLibUrl = new URL('cspell-lib/', packagesUrl);
+const gitIgnoreFileUrl = new URL('.gitignore', gitRootUrl);
+
+const pkg = fileURLToPath(pkgUrl);
+const packages = fileURLToPath(packagesUrl);
+const gitRoot = fileURLToPath(gitRootUrl);
+const samples = fileURLToPath(samplesUrl);
+const pkgCSpellLib = fileURLToPath(pkgCSpellLibUrl);
+const gitIgnoreFile = fileURLToPath(gitIgnoreFileUrl);
 // const pathSamples = path.resolve(pkg, 'samples');
 // const gitIgnoreSamples = path.resolve(pathSamples, '.gitignore');
 
@@ -58,12 +68,23 @@ describe('GitIgnoreServer', () => {
         file                               | roots                      | expected
         ${__filename}                      | ${undefined}               | ${undefined}
         ${p(samples, 'ignored/keepme.md')} | ${undefined}               | ${undefined}
-        ${p(samples, 'ignored/file.txt')}  | ${undefined}               | ${{ glob: 'ignored/**', matched: true, line: 3, root: samples, gitIgnoreFile: p(samples, '.gitignore') }}
-        ${p(pkg, 'node_modules/bin')}      | ${undefined}               | ${oc({ glob: 'node_modules/', matched: true, root: gitRoot, gitIgnoreFile: gitIgnoreFile })}
+        ${p(samples, 'ignored/file.txt')}  | ${undefined}               | ${{ glob: 'ignored/**', matched: true, line: 3, root: pr(samples), gitIgnoreFile: p(samples, '.gitignore') }}
+        ${p(pkg, 'node_modules/bin')}      | ${undefined}               | ${oc({ glob: 'node_modules/', matched: true, root: pr(gitRoot), gitIgnoreFile: gitIgnoreFile })}
+        ${p(pkg, 'node_modules/')}         | ${undefined}               | ${oc({ glob: 'node_modules/', matched: true, root: pr(gitRoot), gitIgnoreFile: gitIgnoreFile })}
         ${__filename}                      | ${[p(samples, 'ignored')]} | ${undefined}
         ${p(samples, 'ignored/keepme.md')} | ${[p(samples, 'ignored')]} | ${undefined}
         ${p(samples, 'ignored/file.txt')}  | ${[p(samples, 'ignored')]} | ${undefined}
-        ${p(pkg, 'node_modules/bin')}      | ${[p(samples, 'ignored')]} | ${oc({ glob: 'node_modules/', matched: true, root: gitRoot, gitIgnoreFile: gitIgnoreFile })}
+        ${p(pkg, 'node_modules/bin')}      | ${[p(samples, 'ignored')]} | ${oc({ glob: 'node_modules/', matched: true, root: pr(gitRoot), gitIgnoreFile: gitIgnoreFile })}
+    `('isIgnoredEx $file $roots', async ({ file, roots, expected }) => {
+        const dir = path.dirname(file);
+        const gs = new GitIgnore(roots);
+        const r = await gs.findGitIgnoreHierarchy(dir);
+        expect(r.isIgnoredEx(file)).toEqual(expected);
+    });
+
+    test.each`
+        file                       | roots        | expected
+        ${p(pkg, 'node_modules/')} | ${undefined} | ${oc({ glob: 'node_modules/', matched: true, root: pr(gitRoot), gitIgnoreFile: gitIgnoreFile })}
     `('isIgnoredEx $file $roots', async ({ file, roots, expected }) => {
         const dir = path.dirname(file);
         const gs = new GitIgnore(roots);
@@ -77,6 +98,7 @@ describe('GitIgnoreServer', () => {
             p(samples, 'ignored/keepme.md'),
             p(samples, 'ignored/file.txt'),
             p(pkg, 'node_modules/bin'),
+            p(pkg, 'node_modules/'),
         ];
         const gs = new GitIgnore();
         const r = await gs.filterOutIgnored(files);
@@ -117,5 +139,9 @@ describe('GitIgnoreServer', () => {
 
     function p(dir: string, ...dirs: string[]) {
         return path.join(dir, ...dirs);
+    }
+
+    function pr(...dirs: string[]) {
+        return path.join(path.resolve(...dirs), './');
     }
 });

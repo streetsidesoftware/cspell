@@ -8,11 +8,12 @@ import { run } from './dist/esm/index.mjs';
 
 const __filename = fileURLToPath(import.meta.url);
 
-const expected = basename(__filename);
+const expected = '/' + basename(__filename);
 
 async function main() {
     assert(typeof run === 'function');
-    assert(run(__filename) === expected);
+    const result = run(__filename);
+    assert(result === expected, `Expect "${result}" to equal "${expected}"`);
     console.log('done.');
 }
 

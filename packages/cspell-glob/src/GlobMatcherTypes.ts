@@ -6,6 +6,7 @@ export interface PathInterface {
     resolve(...paths: string[]): string;
     relative(from: string, to: string): string;
     isAbsolute(p: string): boolean;
+    parse(p: string): { root: string; dir: string; base: string; ext: string; name: string };
     sep: string;
 }
 
@@ -52,6 +53,7 @@ export interface GlobPatternWithRoot extends GlobPatternWithOptionalRoot {
     root: string;
     /**
      * Global patterns do not need to be relative to the root.
+     * Note: Some patterns start with `**` but they are tied to the root. In this case, `isGlobalPattern` is `false`.
      */
     isGlobalPattern: boolean;
 }

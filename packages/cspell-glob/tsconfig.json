@@ -1,4 +1,9 @@
 {
-    "files": [],
-    "references": [{ "path": "./tsconfig.esm.json" }]
+    "extends": "../../tsconfig.esm.json",
+    "compilerOptions": {
+        "rootDir": "src",
+        "outDir": "dist",
+        "types": ["node"]
+    },
+    "include": ["src"]
 }

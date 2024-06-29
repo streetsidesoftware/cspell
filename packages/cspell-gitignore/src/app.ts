@@ -40,8 +40,9 @@ export async function run(args: string[]): Promise<void> {
     for (const file of files) {
         const filename = path.relative(cwd, file);
         const pFile = gi.isIgnoredEx(file);
-        const pDir = gi.isIgnoredEx(file + '/ ');
+        const pDir = gi.isIgnoredEx(file + '/');
         const r = (await pFile) || (await pDir);
+        console.warn('%o', { pFile: await pFile, pDir: await pDir });
         const gitignore = r?.gitIgnoreFile ? path.relative(repo, r.gitIgnoreFile) : '';
         const line = r?.line || '';
         const glob = r?.glob || '';

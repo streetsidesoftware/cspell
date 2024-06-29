@@ -1,6 +1,15 @@
 import { describe, expect, test } from 'vitest';
 
-import { addTrailingSlash, basenameOfUrlPathname, isUrlLike, toURL, urlParent } from './url.mjs';
+import {
+    addTrailingSlash,
+    basenameOfUrlPathname,
+    isUrlLike,
+    toURL,
+    urlFilename,
+    urlParent,
+    urlRelative,
+    urlRemoveFilename,
+} from './url.mjs';
 
 describe('url', () => {
     test.each`
@@ -20,8 +29,10 @@ describe('url', () => {
         ${'README.md'}                                                       | ${'https://github.com/streetsidesoftware/cspell/'} | ${'https://github.com/streetsidesoftware/cspell/README.md'}
         ${new URL('https://github.com/streetsidesoftware/cspell/README.md')} | ${undefined}                                       | ${'https://github.com/streetsidesoftware/cspell/README.md'}
         ${'vsls:/cspell.config.yaml'}                                        | ${undefined}                                       | ${'vsls:/cspell.config.yaml'}
-        ${'stdin:sample.py'}                                                 | ${undefined}                                       | ${'stdin:sample.py'}
+        ${'stdin:sample.py'}                                                 | ${'file:///'}                                      | ${'stdin:sample.py'}
         ${'vsls:/cspell.config.yaml'}                                        | ${'file:///'}                                      | ${'vsls:/cspell.config.yaml'}
+        ${'**/*.json'}                                                       | ${'file:///User/test/project/'}                    | ${'file:///User/test/project/**/*.json'}
+        ${'**/*{.json,.jsonc,.yml}'}                                         | ${'file:///User/test/project/'}                    | ${'file:///User/test/project/**/*%7B.json,.jsonc,.yml%7D'}
     `('toUrl $url $rootUrl', ({ url, rootUrl, expected }) => {
         expect(toURL(url, rootUrl)).toEqual(new URL(expected));
     });
@@ -77,7 +88,48 @@ describe('url', () => {
         ${'data:application/text'}                         | ${'data:application/text'}
         ${'https://github.com/streetsidesoftware/samples'} | ${'https://github.com/streetsidesoftware/samples/'}
         ${'vs-code:///remote/file/sample.ts'}              | ${'vs-code:///remote/file/sample.ts/'}
-    `('isUrlLike $url', ({ url, expected }) => {
+    `('addTrailingSlash $url', ({ url, expected }) => {
         expect(addTrailingSlash(toURL(url))).toEqual(new URL(expected));
+    });
+
+    test.each`
+        urlFrom                                            | urlTo                                              | expected
+        ${'file:///'}                                      | ${'file:///'}                                      | ${''}
+        ${'file:///samples/code/'}                         | ${'file:///samples/code/src/file.cpp'}             | ${'src/file.cpp'}
+        ${'file:///samples/code/package.json'}             | ${'file:///samples/code/src/file.cpp'}             | ${'src/file.cpp'}
+        ${'file:///samples/code/'}                         | ${'file:///samples/code/'}                         | ${''}
+        ${'file:///samples/code/'}                         | ${'file:///samples/code'}                          | ${'../code'}
+        ${'file:///samples/code'}                          | ${'file:///samples/code/'}                         | ${'code/'}
+        ${'stdin:sample'}                                  | ${'stdin:sample'}                                  | ${''}
+        ${'stdin:/sample'}                                 | ${'stdin:/sample'}                                 | ${''}
+        ${'data:application/text'}                         | ${'data:application/text'}                         | ${''}
+        ${'https://github.com/streetsidesoftware/samples'} | ${'https://github.com/streetsidesoftware/samples'} | ${''}
+        ${'vs-code:///remote/file/sample.ts'}              | ${'vs-code:///remote/file/sample.ts'}              | ${''}
+    `('urlRelative $urlFrom $urlTo', ({ urlFrom, urlTo, expected }) => {
+        expect(urlRelative(urlFrom, urlTo)).toEqual(expected);
+        const rel = urlRelative(toURL(urlFrom), toURL(urlTo));
+        expect(rel).toEqual(expected);
+        if (toURL(urlFrom).pathname.startsWith('/')) {
+            // new URL('', 'stdin:sample') will throw, but new URL('', 'stdin:/sample') will work.
+            expect(new URL(rel, urlFrom)).toEqual(new URL(urlTo));
+        }
+    });
+
+    test.each`
+        url                              | expected
+        ${'file:///path/to/my/file.txt'} | ${'file.txt'}
+        ${'stdin:sample'}                | ${''}
+    `('urlFilename $url', ({ url, expected }) => {
+        url = new URL(url);
+        expect(urlFilename(url)).toBe(expected);
+    });
+
+    test.each`
+        url                              | expected
+        ${'file:///path/to/my/file.txt'} | ${'file.txt'}
+    `('urlFilename & urlRemoveFilename $url', ({ url, expected }) => {
+        url = new URL(url);
+        expect(urlFilename(url)).toBe(expected);
+        expect(new URL(urlFilename(url), urlRemoveFilename(url)).href).toBe(url.href);
     });
 });

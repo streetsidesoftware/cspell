@@ -2,8 +2,9 @@ import assert from 'node:assert';
 
 import { renameFileReference, renameFileResource, urlOrReferenceToUrl } from '../common/index.js';
 import type { DirEntry, FileReference, FileResource } from '../models/index.js';
-import type { FSCapabilityFlags, VFileSystemProvider, VProviderFileSystem } from '../VirtualFS.js';
-import { fsCapabilities, VFSErrorUnsupportedRequest } from '../VirtualFS.js';
+import type { FSCapabilityFlags } from '../VFileSystem.js';
+import type { VFileSystemProvider, VProviderFileSystem } from '../VirtualFS.js';
+import { fsCapabilities, VFSErrorUnsupportedRequest } from './WrappedProviderFs.js';
 
 type UrlOrReference = URL | FileReference;
 
