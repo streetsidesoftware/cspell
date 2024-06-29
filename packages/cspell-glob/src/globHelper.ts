@@ -33,6 +33,13 @@ export const GlobPatterns = {
     prefixAny: '**/',
 };
 
+let cacheCalls = 0;
+let cacheMisses = 0;
+let cachePath: PathInterface = Path;
+let cacheRoot: string = '<>';
+const cache = new Map<GlobPattern, GlobPatternWithRoot>();
+const debugCache = false;
+
 /**
  * This function tries its best to determine if `fileOrGlob` is a path to a file or a glob pattern.
  * @param fileOrGlob - file (with absolute path) or glob.
@@ -40,6 +47,36 @@ export const GlobPatterns = {
  * @param path - optional node path methods - used for testing
  */
 export function fileOrGlobToGlob(
+    fileOrGlob: string | GlobPattern,
+    root: string,
+    path: PathInterface = Path,
+): GlobPatternWithRoot {
+    if (cacheRoot !== root || cachePath !== path) {
+        cache.clear();
+        cacheCalls = 0;
+        cacheMisses = 0;
+        cacheRoot = root;
+        cachePath = path;
+    }
+    ++cacheCalls;
+    debugCache &&
+        !(cacheCalls & 0x7) &&
+        console.error('cache miss rate: %d%% cache size: %d', (cacheMisses / cacheCalls) * 100, cache.size);
+    const found = cache.get(fileOrGlob);
+    if (found) return found;
+    ++cacheMisses;
+    const pattern = _fileOrGlobToGlob(fileOrGlob, root, path);
+    cache.set(fileOrGlob, pattern);
+    return pattern;
+}
+
+/**
+ * This function tries its best to determine if `fileOrGlob` is a path to a file or a glob pattern.
+ * @param fileOrGlob - file (with absolute path) or glob.
+ * @param root - absolute path to the directory that will be considered the root when testing the glob pattern.
+ * @param path - optional node path methods - used for testing
+ */
+function _fileOrGlobToGlob(
     fileOrGlob: string | GlobPattern,
     root: string,
     path: PathInterface = Path,
