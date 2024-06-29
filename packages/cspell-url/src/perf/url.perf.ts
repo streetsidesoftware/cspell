@@ -14,7 +14,7 @@ const cwd = process.cwd();
 
 suite('cspell-url.FileUrlBuilder.relative', async (test) => {
     const fileList = await loadFileList();
-    const fileUrlList = fileList.map((file) => pathToFileURL(file));
+    const fileUrlList = fileList.map((file) => pathToFileURL(file.filename));
     const builder = new FileUrlBuilder({ path: Path });
 
     verifyRelative(fileUrlList);
@@ -58,12 +58,24 @@ function verifyRelative(urls: URL[]) {
     }
 }
 
-async function loadFileList() {
+interface FileEntry {
+    filename: string;
+    matcherId: number;
+    match: boolean;
+}
+
+async function loadFileList(): Promise<FileEntry[]> {
     const fileList = (await fs.readFile(new URL('file-list.txt', fixturesDataUrl), 'utf8'))
         .split('\n')
         .map((a) => a.trim())
         .filter((a) => a)
-        .map((file) => Path.relative(cwd, file));
+        .map((file) => Path.resolve(cwd, file))
+        .map((file) => file.split(';'))
+        .map(([filename, matcherId, match]) => ({
+            filename,
+            matcherId: Number.parseInt(matcherId, 10),
+            match: match === 'true',
+        }));
 
     return fileList;
 }

@@ -1,25 +1,22 @@
-import { suite } from 'perf-insight';
+import assert from 'node:assert';
+
+import { describe } from 'vitest';
 
 import { GlobMatcher } from '../GlobMatcher.js';
 import { loadFileList, loadPatterns } from './loadFileList.js';
 
-suite('cspell-glob GlobMatcher match', async (test) => {
+describe('cspell-glob GlobMatcher match', async (test) => {
     const fileList = await loadFileList();
     const patterns = await loadPatterns();
     const matchers: GlobMatcher[] = patterns.map(({ options, patterns }) => new GlobMatcher(patterns, options));
 
-    test('match', () => {
+    test('verify files match', () => {
         for (const fileEntry of fileList) {
             const matcher = matchers[fileEntry.matcherId];
-            matcher.match(fileEntry.filename);
+            assert(
+                matcher.match(fileEntry.filename) === fileEntry.match,
+                `Expected ${fileEntry.filename} to ${fileEntry.match ? 'match' : 'not match'}`,
+            );
         }
-    });
-});
-
-suite('cspell-glob GlobMatcher create', async (test) => {
-    const patterns = await loadPatterns();
-
-    test('create GlobMatcher', () => {
-        patterns.map(({ options, patterns }) => new GlobMatcher(patterns, options));
     });
 });
