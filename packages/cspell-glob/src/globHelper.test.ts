@@ -54,20 +54,20 @@ describe('Validate fileOrGlobToGlob', () => {
         file                                         | root   | path     | expected                                          | comment
         ${'*.json'}                                  | ${'.'} | ${posix} | ${g('*.json', pp('./'))}                          | ${'posix'}
         ${'*.json'}                                  | ${'.'} | ${win32} | ${g('*.json', pw('./'))}                          | ${'win32'}
-        ${{ glob: '*.json' }}                        | ${'.'} | ${posix} | ${g('*.json', pp('./'))}                          | ${'posix'}
-        ${{ glob: '*.json', root: pp('./data') }}    | ${'.'} | ${posix} | ${g('*.json', pp('./data/'))}                     | ${'posix'}
-        ${pp('./*.json')}                            | ${'.'} | ${posix} | ${g('*.json', pp('./'))}                          | ${''}
-        ${pw('./*.json')}                            | ${'.'} | ${win32} | ${g('*.json', pw('./'))}                          | ${''}
-        ${pp('./package.json')}                      | ${'.'} | ${posix} | ${g('package.json', pp('./'))}                    | ${''}
-        ${pw('.\\package.json')}                     | ${'.'} | ${win32} | ${g('package.json', pw('./'))}                    | ${''}
-        ${pp('./package.json')}                      | ${'.'} | ${posix} | ${g('package.json', pp('./'))}                    | ${''}
-        ${'.\\package.json'}                         | ${'.'} | ${win32} | ${g('package.json', pw('./'))}                    | ${''}
-        ${'./a/package.json'}                        | ${'.'} | ${posix} | ${g('a/package.json', pp('./'))}                  | ${''}
-        ${pw('.\\a\\package.json')}                  | ${'.'} | ${win32} | ${g('a/package.json', pw('./'))}                  | ${''}
-        ${'/user/tester/projects'}                   | ${'.'} | ${posix} | ${g('projects', pp('/user/tester/'))}             | ${'Directory not matching root.'}
-        ${'C:\\user\\tester\\projects'}              | ${'.'} | ${win32} | ${g('projects', pw('C:/user/tester/'))}           | ${'Directory not matching root.'}
-        ${'E:\\user\\projects\\spell\\package.json'} | ${'.'} | ${win32} | ${g('spell/package.json', pw('./'))}              | ${'Directory matching root.'}
-        ${'e:\\user\\projects\\spell\\package.json'} | ${'.'} | ${win32} | ${g('spell/package.json', pw('./'))}              | ${'Directory matching root.'}
+        ${'**/*.json'}                               | ${'.'} | ${posix} | ${g('**/*.json', pp('./'), true)}                 | ${'posix'}
+        ${'**/*.json'}                               | ${'.'} | ${win32} | ${g('**/*.json', pw('./'), true)}                 | ${'win32'}
+        ${pp('./*.json')}                            | ${'.'} | ${posix} | ${g('/*.json', pp('./'))}                         | ${''}
+        ${pw('./*.json')}                            | ${'.'} | ${win32} | ${g('/*.json', pw('./'))}                         | ${''}
+        ${pp('./package.json')}                      | ${'.'} | ${posix} | ${g('/package.json', pp('./'))}                   | ${''}
+        ${pw('.\\package.json')}                     | ${'.'} | ${win32} | ${g('/package.json', pw('./'))}                   | ${''}
+        ${pp('./package.json')}                      | ${'.'} | ${posix} | ${g('/package.json', pp('./'))}                   | ${''}
+        ${'.\\package.json'}                         | ${'.'} | ${win32} | ${g('/package.json', pw('./'))}                   | ${''}
+        ${'./a/package.json'}                        | ${'.'} | ${posix} | ${g('/package.json', pp('./a/'))}                 | ${''}
+        ${pw('.\\a\\package.json')}                  | ${'.'} | ${win32} | ${g('/package.json', pw('./a/'))}                 | ${''}
+        ${'/user/tester/projects'}                   | ${'.'} | ${posix} | ${g('/projects', pp('/user/tester/'))}            | ${'Directory not matching root.'}
+        ${'C:\\user\\tester\\projects'}              | ${'.'} | ${win32} | ${g('/projects', pw('C:/user/tester/'))}          | ${'Directory not matching root.'}
+        ${'E:\\user\\projects\\spell\\package.json'} | ${'.'} | ${win32} | ${g('/package.json', pw('./spell/'))}             | ${'Directory matching root.'}
+        ${'e:\\user\\projects\\spell\\package.json'} | ${'.'} | ${win32} | ${g('/package.json', pw('./spell/'))}             | ${'Directory matching root.'}
         ${'/user/tester/projects/**/*.json'}         | ${'.'} | ${posix} | ${g('**/*.json', pp('/user/tester/projects/'))}   | ${'A glob like path not matching the root.'}
         ${'C:\\user\\tester\\projects\\**\\*.json'}  | ${'.'} | ${win32} | ${g('**/*.json', pw('C:/user/tester/projects/'))} | ${'A glob like path not matching the root.'}
     `('fileOrGlobToGlob file: "$file" root: "$root" $comment', ({ file, root, path, expected }) => {
@@ -83,6 +83,20 @@ describe('Validate fileOrGlobToGlob', () => {
     `('fileOrGlobToGlob file: "$file" root: "$root" $comment', ({ file, root, path, expected }) => {
         root = p(root, path);
         const r = fileOrGlobToGlob(file, root, path || Path);
+        expect(r).toEqual(expected);
+    });
+
+    test.each`
+        glob                                          | root   | path     | expected                          | comment
+        ${{ glob: '*.json' }}                         | ${'.'} | ${posix} | ${g('*.json', pp('./'))}          | ${'posix'}
+        ${{ glob: '*.json', root: pp('./data') }}     | ${'.'} | ${posix} | ${g('*.json', pp('./data/'))}     | ${'posix'}
+        ${{ glob: '**/*.json' }}                      | ${'.'} | ${posix} | ${g('**/*.json', pp('./'), true)} | ${'posix'}
+        ${{ glob: '**/*.json', root: pp('./data') }}  | ${'.'} | ${posix} | ${g('**/*.json', pp('./data/'))}  | ${'posix'}
+        ${{ glob: '/**/*.json' }}                     | ${'.'} | ${posix} | ${g('**/*.json', pp('./'))}       | ${'posix'}
+        ${{ glob: '/**/*.json', root: pp('./data') }} | ${'.'} | ${posix} | ${g('**/*.json', pp('./data/'))}  | ${'posix'}
+    `('fileOrGlobToGlob glob: "$glob" root: "$root" $comment', ({ glob, root, path, expected }) => {
+        root = p(root, path);
+        const r = fileOrGlobToGlob(glob, root, path);
         expect(r).toEqual(expected);
     });
 });

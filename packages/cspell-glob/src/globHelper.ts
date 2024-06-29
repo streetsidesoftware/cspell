@@ -1,7 +1,7 @@
 /* eslint-disable no-irregular-whitespace */
 import * as Path from 'node:path';
 
-import { FileUrlBuilder, isUrlLike } from '@cspell/url';
+import { FileUrlBuilder } from '@cspell/url';
 
 import type {
     GlobPattern,
@@ -47,14 +47,33 @@ export function fileOrGlobToGlob(
     const toForwardSlash = path.sep === '\\' ? (p: string) => p.replaceAll('\\', '/') : (p: string) => p;
     const builder = urlBuilder(path);
     fileOrGlob = typeof fileOrGlob === 'string' ? toForwardSlash(fileOrGlob) : fileOrGlob;
+    const rootUrl = builder.toFileDirURL(root);
 
-    const pattern = toGlobPatternWithRoot(fileOrGlob, root);
+    // Normalize root
+    root = builder.urlToFilePathOrHref(rootUrl);
 
-    // pattern.root might still be relative.
-    fixPatternRoot(pattern, builder);
+    const pattern = toGlobPatternWithRoot(fileOrGlob, root, builder);
 
-    // pattern.glob might still be a file or a relative glob pattern.
-    fixPatternGlob(pattern, builder);
+    return pattern;
+}
+
+function toGlobPatternWithRoot(glob: GlobPattern, root: string, builder: FileUrlBuilder): GlobPatternWithRoot {
+    function toPattern() {
+        if (isGlobPatternWithRoot(glob)) return fixPatternRoot({ ...glob }, builder);
+        const rootUrl = builder.toFileDirURL(root);
+        if (typeof glob === 'string') return filePathOrGlobToGlob(glob, rootUrl, builder);
+        const pattern = { isGlobalPattern: !glob.root && isGlobalGlob(glob.glob), ...glob, root: glob.root ?? root };
+        fixPatternRoot(pattern, builder);
+        // pattern.glob might still be a file or a relative glob pattern.
+        fixPatternGlob(pattern, builder);
+        return pattern;
+    }
+    const pattern = toPattern();
+
+    if (pattern.glob.startsWith(GlobPlaceHolders.cwd)) {
+        pattern.root = GlobPlaceHolders.cwd;
+        pattern.glob = pattern.glob.replace(GlobPlaceHolders.cwd, '');
+    }
 
     return pattern;
 }
@@ -255,16 +274,6 @@ export function normalizeGlobToRoot<Glob extends GlobPatternWithRoot>(
 
     // prefix with root
     if (globIsUnderRoot) {
-        // if (relFromRootToGlob.startsWith('..')) {
-        //     console.warn('%o', {
-        //         globRootUrl: globRootUrl.href,
-        //         rootURL: rootURL.href,
-        //         relFromRootToGlob,
-        //         relFromGlobToRoot,
-        //         globIsUnderRoot,
-        //         rootIsUnderGlob,
-        //     });
-        // }
         const relGlob = relFromRootToGlob;
 
         return {
@@ -369,6 +378,11 @@ function trimGlobLeft(glob: string): string {
     return glob.trimStart();
 }
 
+/**
+ * Test if a glob pattern has a leading `**`.
+ * @param glob - the glob
+ * @returns true if the glob pattern starts with `**`
+ */
 function isGlobalGlob(glob: string): boolean {
     return isGlobalPatternRegExp.test(glob);
 }
@@ -409,10 +423,12 @@ function splitGlob(glob: string): SplitGlob {
 
     const p = parts.findIndex(isGlobPart);
     const s = p < 0 ? parts.length - 1 : p;
-    return createSplitGlob(s ? parts.slice(0, s).join('/') : undefined, parts.slice(s).join('/'));
+    return createSplitGlob(s ? parts.slice(0, s).join('/') + '/' : undefined, parts.slice(s).join('/'));
 }
 
 function createSplitGlob(path: string | undefined, glob: string): SplitGlob {
+    glob = path ? '/' + glob : glob;
+    glob = glob.startsWith('/**') ? glob.slice(1) : glob;
     return { path, glob };
 }
 
@@ -424,32 +440,14 @@ function rootToUrl(root: string, builder: FileUrlBuilder): URL {
     return builder.toFileDirURL(root);
 }
 
-function toGlobPatternWithRoot(glob: GlobPattern, root: string): GlobPatternWithRoot {
-    // We need to preserve isGlobal pattern so it gets correctly set later.
-    const isGlobal = isGlobPatternWithRoot(glob) ? glob.isGlobalPattern : undefined;
-    const pattern = isGlobPatternWithRoot(glob)
-        ? { ...glob }
-        : typeof glob === 'string'
-          ? { glob, root, isGlobalPattern: false }
-          : { isGlobalPattern: false, ...glob, root: glob.root ?? root };
-
-    if (pattern.glob.startsWith(GlobPlaceHolders.cwd)) {
-        pattern.root = GlobPlaceHolders.cwd;
-        pattern.glob = pattern.glob.replace(GlobPlaceHolders.cwd, '');
-    }
-
-    pattern.isGlobalPattern = isGlobal ?? isGlobalGlob(pattern.glob);
-
-    return pattern;
-}
-
-function fixPatternRoot(glob: GlobPatternWithRoot, builder: FileUrlBuilder): void {
-    // Gets resoled later.
+function fixPatternRoot(glob: GlobPatternWithRoot, builder: FileUrlBuilder): GlobPatternWithRoot {
+    // Gets resolved later.
     if (glob.root.startsWith(GlobPlaceHolders.cwd)) {
-        return;
+        return glob;
     }
 
     glob.root = builder.urlToFilePathOrHref(rootToUrl(glob.root, builder));
+    return glob;
 }
 
 /**
@@ -460,20 +458,12 @@ function fixPatternRoot(glob: GlobPatternWithRoot, builder: FileUrlBuilder): voi
  */
 function fixPatternGlob(glob: GlobPatternWithRoot, builder: FileUrlBuilder): void {
     const rootURL = builder.toFileURL(glob.root);
-    if (isUrlLike(glob.glob)) {
-        // The glob is a URL, we need to convert it to a glob.
-        const url = new URL(glob.glob);
-        const split = splitGlob(url.pathname);
-        glob.glob = split.glob;
-        glob.root = builder.urlToFilePathOrHref(new URL(split.path || '/', url));
-        fixPatternRelativeToRoot(glob, rootURL, builder);
-        return;
-    }
 
     const split = splitGlob(glob.glob);
     glob.glob = split.glob;
     if (split.path !== undefined) {
-        glob.root = builder.urlToFilePathOrHref(builder.toFileDirURL(split.path, glob.root));
+        const relRootPath = split.path.startsWith('/') ? '.' + split.path : split.path;
+        glob.root = builder.urlToFilePathOrHref(builder.toFileDirURL(relRootPath, glob.root));
     }
     fixPatternRelativeToRoot(glob, rootURL, builder);
 }
@@ -490,6 +480,13 @@ function fixPatternRelativeToRoot(glob: GlobPatternWithRoot, root: URL, builder:
     }
     glob.root = builder.urlToFilePathOrHref(root);
     glob.glob = rel + glob.glob;
+}
+
+function filePathOrGlobToGlob(filePathOrGlob: string, root: URL, builder: FileUrlBuilder): GlobPatternWithRoot {
+    const isGlobalPattern = isGlobalGlob(filePathOrGlob);
+    const { path, glob } = splitGlob(filePathOrGlob);
+    const url = builder.toFileDirURL(path || './', root);
+    return { root: builder.urlToFilePathOrHref(url), glob, isGlobalPattern };
 }
 
 export const __testing__ = {
