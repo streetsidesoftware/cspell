@@ -143,17 +143,6 @@ export class GlobMatcher {
               ? patterns.split(/\r?\n/g)
               : [patterns];
         const globPatterns = normalizeGlobPatterns(patterns, this.options);
-        // console.error('GlobMatcher: %o', {
-        //     root,
-        //     dot,
-        //     nested,
-        //     mode,
-        //     nobrace,
-        //     cwd,
-        //     p: patterns.filter(isGlobPatternWithOptionalRoot).filter((g) => g.root),
-        // });
-
-        // autoGroupSort(globPatterns);
 
         this.patternsNormalizedToRoot = globPatterns
             .map((g) => normalizeGlobToRoot(g, normalizedRoot, nodePath))
@@ -300,67 +289,3 @@ function buildMatcherFn(patterns: GlobPatternWithRoot[], options: NormalizedGlob
     };
     return fn;
 }
-
-// function _joinRegExp(patterns: RegExp[]): RegExp | undefined {
-//     if (!patterns.length) {
-//         return undefined;
-//     }
-//     const joined = patterns.map((p) => `(?:${p.source})`).join('|');
-//     return new RegExp(joined);
-// }
-
-// function autoGroupSort<T extends object>(values: T[]): T[] {
-//     const keyMap = new Map<string, Set<unknown>>();
-
-//     for (const entry of values) {
-//         for (const [key, value] of Object.entries(entry)) {
-//             const valueSet = keyMap.get(key) || new Set();
-//             keyMap.set(key, valueSet);
-//             valueSet.add(value);
-//         }
-//     }
-
-//     const countEntries = [...keyMap.entries()]
-//         .map(([key, valueSet]) => [key, valueSet.size] as const)
-//         .sort((a, b) => a[1] - b[1] || (a[0] < b[0] ? -1 : 1));
-//     const counts = new Map(countEntries);
-//     const sortedKeys = [...counts.keys()];
-
-//     function compare(aa: T, bb: T): number {
-//         const a = aa as Record<string, unknown>;
-//         const b = bb as Record<string, unknown>;
-//         for (const key of sortedKeys) {
-//             const aValue = `${a[key]}`;
-//             const bValue = `${b[key]}`;
-//             if (aValue !== bValue) {
-//                 return aValue < bValue ? -1 : 1;
-//             }
-//         }
-//         return 0;
-//     }
-
-//     function diff(curr: T, prev: T | undefined) {
-//         const a = curr as Record<string, unknown>;
-//         const b = (prev || {}) as Record<string, unknown>;
-//         let depth = 0;
-//         for (const key of sortedKeys) {
-//             const aValue = `${a[key]}`;
-//             const bValue = `${b[key]}`;
-//             if (aValue !== bValue) {
-//                 console.log(key.padStart(depth * 2) + ': ' + aValue);
-//             }
-//             depth++;
-//         }
-//     }
-
-//     const sorted = [...values].sort(compare);
-
-//     let prev: T | undefined;
-
-//     for (const v of sorted) {
-//         diff(v, prev);
-//         prev = v;
-//     }
-
-//     return sorted;
-// }
