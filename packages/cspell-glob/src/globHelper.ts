@@ -426,6 +426,27 @@ function splitGlob(glob: string): SplitGlob {
     return createSplitGlob(s ? parts.slice(0, s).join('/') + '/' : undefined, parts.slice(s).join('/'));
 }
 
+/**
+ * Split a glob into a path and a glob portion.
+ * The path portion does not contain any glob characters.
+ * Path might be empty. The glob portion should always be non-empty.
+ * @param glob - glob string pattern
+ * @param relOnly - Indicates that only `..` and `.` path segments are considered for the path.
+ * @returns
+ */
+function splitGlobRel(glob: string): SplitGlob {
+    const parts = glob.split('/');
+
+    if (!parts.includes('..') && !parts.includes('.')) return { path: undefined, glob };
+
+    const firstGlobPartIdx = parts.findIndex(isGlobPart);
+    const lastRelIdx = Math.max(parts.lastIndexOf('..'), parts.lastIndexOf('.'));
+
+    const p = firstGlobPartIdx >= 0 ? Math.min(firstGlobPartIdx, lastRelIdx + 1) : lastRelIdx + 1;
+    const s = p < 0 ? parts.length - 1 : p;
+    return createSplitGlob(s ? parts.slice(0, s).join('/') + '/' : undefined, parts.slice(s).join('/'));
+}
+
 function createSplitGlob(path: string | undefined, glob: string): SplitGlob {
     glob = path ? '/' + glob : glob;
     glob = glob.startsWith('/**') ? glob.slice(1) : glob;
@@ -459,7 +480,7 @@ function fixPatternRoot(glob: GlobPatternWithRoot, builder: FileUrlBuilder): Glo
 function fixPatternGlob(glob: GlobPatternWithRoot, builder: FileUrlBuilder): void {
     const rootURL = builder.toFileURL(glob.root);
 
-    const split = splitGlob(glob.glob);
+    const split = splitGlobRel(glob.glob);
     glob.glob = split.glob;
     if (split.path !== undefined) {
         const relRootPath = split.path.startsWith('/') ? '.' + split.path : split.path;
@@ -470,21 +491,16 @@ function fixPatternGlob(glob: GlobPatternWithRoot, builder: FileUrlBuilder): voi
 
 function fixPatternRelativeToRoot(glob: GlobPatternWithRoot, root: URL, builder: FileUrlBuilder): void {
     const rel = builder.relative(root, builder.toFileDirURL(glob.root));
-    if (rel.startsWith('/')) return;
-    if (rel.startsWith('../')) {
-        // const n = rel.split('../').length - 1;
-        // if (n <= 3) {
-        //     fixPatternRelativeToRoot(glob, new URL('../', root), builder);
-        // }
-        return;
-    }
+    if (rel.startsWith('/') || rel.startsWith('../')) return;
     glob.root = builder.urlToFilePathOrHref(root);
     glob.glob = rel + glob.glob;
 }
 
 function filePathOrGlobToGlob(filePathOrGlob: string, root: URL, builder: FileUrlBuilder): GlobPatternWithRoot {
     const isGlobalPattern = isGlobalGlob(filePathOrGlob);
-    const { path, glob } = splitGlob(filePathOrGlob);
+    const { path, glob } = builder.isAbsolute(filePathOrGlob)
+        ? splitGlob(filePathOrGlob)
+        : splitGlobRel(filePathOrGlob);
     const url = builder.toFileDirURL(path || './', root);
     return { root: builder.urlToFilePathOrHref(url), glob, isGlobalPattern };
 }

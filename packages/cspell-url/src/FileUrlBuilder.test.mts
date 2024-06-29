@@ -25,4 +25,34 @@ describe('FileUrlBuilder', () => {
         const result = builder.relative(fromUrl, toUrl);
         expect(result).toEqual(expected);
     });
+
+    test.each`
+        filePath                                  | path          | expected
+        ${'.'}                                    | ${undefined}  | ${false}
+        ${'./../hello'}                           | ${undefined}  | ${false}
+        ${'src/README.md'}                        | ${undefined}  | ${false}
+        ${'e:/path/to/file.txt'}                  | ${Path.win32} | ${true}
+        ${'e:/path/to/file.txt'}                  | ${Path.posix} | ${false}
+        ${'/path/to/file.txt'}                    | ${Path.win32} | ${true}
+        ${'\\path\\to\\file.txt'}                 | ${Path.win32} | ${true}
+        ${'\\path\\to\\file.txt'}                 | ${Path.posix} | ${false}
+        ${'file:///E:/user/test/project/deeper/'} | ${Path.win32} | ${true}
+        ${'vscode:///E:/user/test/project/'}      | ${Path.win32} | ${true}
+    `('isAbsolute $filePath', ({ filePath, path, expected }) => {
+        const builder = new FileUrlBuilder({ path });
+        expect(builder.isAbsolute(filePath)).toEqual(expected);
+    });
+
+    test.each`
+        filePath                                  | path          | expected
+        ${'.'}                                    | ${undefined}  | ${false}
+        ${'e:/path/to/file.txt'}                  | ${Path.win32} | ${false}
+        ${'e:/path/to/file.txt'}                  | ${Path.posix} | ${false}
+        ${'/path/to/file.txt'}                    | ${Path.win32} | ${false}
+        ${'file:///E:/user/test/project/deeper/'} | ${Path.win32} | ${true}
+        ${'vscode:///E:/user/test/project/'}      | ${Path.win32} | ${true}
+    `('isUrlLike $filePath', ({ filePath, path, expected }) => {
+        const builder = new FileUrlBuilder({ path });
+        expect(builder.isUrlLike(filePath)).toEqual(expected);
+    });
 });

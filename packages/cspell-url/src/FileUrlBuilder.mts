@@ -23,6 +23,7 @@ export interface PathInterface {
     parse(path: string): Path.ParsedPath;
     normalize(path: string): string;
     relative(from: string, to: string): string;
+    isAbsolute(path: string): boolean;
 }
 
 export interface BuilderOptions {
@@ -180,5 +181,19 @@ export class FileUrlBuilder {
         const path = this.path;
         const p = path.parse(path.normalize(path.resolve(filePath ?? '.')));
         return new URL(this.normalizeFilePathForUrl(p.root), RootFileURL);
+    }
+
+    /**
+     * Determine if a filePath is absolute.
+     *
+     * @param filePath
+     * @returns true if `URL` or `path.isAbsolute(filePath)`
+     */
+    isAbsolute(filePath: string): boolean {
+        return isUrlLike(filePath) || this.path.isAbsolute(filePath);
+    }
+
+    isUrlLike(url: string | URL): boolean {
+        return isUrlLike(url);
     }
 }

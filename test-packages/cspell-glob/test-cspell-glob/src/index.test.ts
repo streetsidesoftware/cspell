@@ -7,7 +7,7 @@ import { run } from './index.js';
 describe('run', () => {
     test.each`
         glob          | expected
-        ${__filename} | ${'src/' + basename(__filename)}
+        ${__filename} | ${'/' + basename(__filename)}
         ${'*.md'}     | ${'*.md'}
     `('run', ({ glob, expected }) => {
         expect(run(glob)).toBe(expected);

@@ -52,6 +52,7 @@ describe('Validate fileOrGlobToGlob', () => {
 
     test.each`
         file                                         | root   | path     | expected                                          | comment
+        ${'node_modules/**'}                         | ${'.'} | ${posix} | ${g('node_modules/**', pp('./'))}                 | ${'posix'}
         ${'*.json'}                                  | ${'.'} | ${posix} | ${g('*.json', pp('./'))}                          | ${'posix'}
         ${'*.json'}                                  | ${'.'} | ${win32} | ${g('*.json', pw('./'))}                          | ${'win32'}
         ${'**/*.json'}                               | ${'.'} | ${posix} | ${g('**/*.json', pp('./'), true)}                 | ${'posix'}
@@ -62,7 +63,7 @@ describe('Validate fileOrGlobToGlob', () => {
         ${pw('.\\package.json')}                     | ${'.'} | ${win32} | ${g('/package.json', pw('./'))}                   | ${''}
         ${pp('./package.json')}                      | ${'.'} | ${posix} | ${g('/package.json', pp('./'))}                   | ${''}
         ${'.\\package.json'}                         | ${'.'} | ${win32} | ${g('/package.json', pw('./'))}                   | ${''}
-        ${'./a/package.json'}                        | ${'.'} | ${posix} | ${g('/package.json', pp('./a/'))}                 | ${''}
+        ${'./a/package.json'}                        | ${'.'} | ${posix} | ${g('/a/package.json', pp('./'))}                 | ${''}
         ${pw('.\\a\\package.json')}                  | ${'.'} | ${win32} | ${g('/package.json', pw('./a/'))}                 | ${''}
         ${'/user/tester/projects'}                   | ${'.'} | ${posix} | ${g('/projects', pp('/user/tester/'))}            | ${'Directory not matching root.'}
         ${'C:\\user\\tester\\projects'}              | ${'.'} | ${win32} | ${g('/projects', pw('C:/user/tester/'))}          | ${'Directory not matching root.'}
@@ -87,13 +88,15 @@ describe('Validate fileOrGlobToGlob', () => {
     });
 
     test.each`
-        glob                                          | root   | path     | expected                          | comment
-        ${{ glob: '*.json' }}                         | ${'.'} | ${posix} | ${g('*.json', pp('./'))}          | ${'posix'}
-        ${{ glob: '*.json', root: pp('./data') }}     | ${'.'} | ${posix} | ${g('*.json', pp('./data/'))}     | ${'posix'}
-        ${{ glob: '**/*.json' }}                      | ${'.'} | ${posix} | ${g('**/*.json', pp('./'), true)} | ${'posix'}
-        ${{ glob: '**/*.json', root: pp('./data') }}  | ${'.'} | ${posix} | ${g('**/*.json', pp('./data/'))}  | ${'posix'}
-        ${{ glob: '/**/*.json' }}                     | ${'.'} | ${posix} | ${g('**/*.json', pp('./'))}       | ${'posix'}
-        ${{ glob: '/**/*.json', root: pp('./data') }} | ${'.'} | ${posix} | ${g('**/*.json', pp('./data/'))}  | ${'posix'}
+        glob                                          | root       | path     | expected                          | comment
+        ${{ glob: '*.json' }}                         | ${'.'}     | ${posix} | ${g('*.json', pp('./'))}          | ${'posix'}
+        ${{ glob: '../*.json' }}                      | ${'.'}     | ${posix} | ${g('/*.json', pp('../'))}        | ${'posix'}
+        ${{ glob: '*.json', root: pp('./data') }}     | ${'.'}     | ${posix} | ${g('*.json', pp('./data/'))}     | ${'posix'}
+        ${{ glob: '**/*.json' }}                      | ${'.'}     | ${posix} | ${g('**/*.json', pp('./'), true)} | ${'posix'}
+        ${{ glob: '**/*.json', root: pp('./data') }}  | ${'.'}     | ${posix} | ${g('**/*.json', pp('./data/'))}  | ${'posix'}
+        ${{ glob: '../**/*.json' }}                   | ${'./a/b'} | ${posix} | ${g('**/*.json', pp('./a/'))}     | ${'posix'}
+        ${{ glob: '/**/*.json' }}                     | ${'.'}     | ${posix} | ${g('/**/*.json', pp('./'))}      | ${'posix'}
+        ${{ glob: '/**/*.json', root: pp('./data') }} | ${'.'}     | ${posix} | ${g('/**/*.json', pp('./data/'))} | ${'posix'}
     `('fileOrGlobToGlob glob: "$glob" root: "$root" $comment', ({ glob, root, path, expected }) => {
         root = p(root, path);
         const r = fileOrGlobToGlob(glob, root, path);
@@ -394,7 +397,7 @@ describe('Validate Glob Normalization to root', () => {
     }
 
     function gN(glob: string, root: string, rawGlob: string, rawRoot: string): GlobPatternNormalized {
-        root = Path.normalize(root + '/');
+        root = nOpts().nodePath.normalize(root + '/');
         return { glob, root, rawGlob, rawRoot, isGlobalPattern: glob.replaceAll(/^!+/g, '').startsWith('**') };
     }
 
