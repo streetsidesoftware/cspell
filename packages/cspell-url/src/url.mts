@@ -144,14 +144,26 @@ export function urlFilename(url: URL): string {
  * @returns the relative path
  */
 export function urlRelative(urlFrom: string | URL, urlTo: string | URL): string {
-    urlFrom = toURL(urlFrom);
-    urlTo = toURL(urlTo);
-    if (urlFrom.pathname === urlTo.pathname) return '';
-    urlFrom = urlRemoveFilename(urlFrom);
-    const p0 = urlFrom.pathname;
-    const p1 = urlTo.pathname;
+    return urlToUrlRelative(toURL(urlFrom), toURL(urlTo));
+}
+
+/**
+ * Calculate the relative path to go from `urlFrom` to `urlTo`.
+ * The protocol is not evaluated. Only the `url.pathname` is used.
+ * @param urlFrom
+ * @param urlTo
+ * @returns the relative path
+ */
+export function urlToUrlRelative(urlFrom: URL, urlTo: URL): string {
+    let pFrom = urlFrom.pathname;
+    const pTo = urlTo.pathname;
+    if (pFrom === pTo) return '';
+    pFrom = pFrom.endsWith('/') ? pFrom : new URL('./', urlFrom).pathname;
+    if (pTo.startsWith(pFrom)) return decodeURIComponent(pTo.slice(pFrom.length));
+    const p0 = pFrom;
+    const p1 = pTo;
     if (p1.startsWith(p0)) {
-        return p0 === p1 ? '' : p1.slice(p0.lastIndexOf('/') + 1);
+        return decodeURIComponent(p0 === p1 ? '' : p1.slice(p0.lastIndexOf('/') + 1));
     }
     const p0Parts = p0.split('/').slice(0, -1); // drop the last segment.
     const p1Parts = p1.split('/');
@@ -160,5 +172,5 @@ export function urlRelative(urlFrom: string | URL, urlTo: string | URL): string 
         // empty
     }
     const rel = '../'.repeat(p0Parts.length - i) + p1Parts.slice(i).join('/');
-    return rel.length < p1.length ? rel : p1;
+    return decodeURIComponent(rel.length < p1.length ? rel : p1);
 }

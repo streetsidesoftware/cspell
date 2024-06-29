@@ -201,6 +201,7 @@ interface GlobRule {
  * @returns a function given a filename returns true if it matches.
  */
 function buildMatcherFn(patterns: GlobPatternWithRoot[], options: NormalizedGlobMatchOptions): GlobMatchFn {
+    // outputBuildMatcherFnPerfData(patterns, options);
     const { nodePath, dot, nobrace } = options;
     const builder = new FileUrlBuilder({ path: nodePath });
     const makeReOptions = { dot, nobrace };
@@ -229,6 +230,8 @@ function buildMatcherFn(patterns: GlobPatternWithRoot[], options: NormalizedGlob
     const negRules = rules.filter((r) => r.isNeg);
     const posRules = rules.filter((r) => !r.isNeg);
 
+    const mapRoots = new Map<string, URL>();
+
     // const negRegEx = negRules.map((r) => r.reg).map((r) => r.toString());
     // const posRegEx = posRules.map((r) => r.reg).map((r) => r.toString());
 
@@ -242,8 +245,6 @@ function buildMatcherFn(patterns: GlobPatternWithRoot[], options: NormalizedGlob
         const relFilePathname = builder.relative(new URL('file:///'), fileUrl);
         let lastRoot = new URL('placeHolder://');
         let lastRel = '';
-
-        const mapRoots = new Map<string, URL>();
 
         function rootToUrl(root: string): URL {
             const found = mapRoots.get(root);
@@ -267,11 +268,14 @@ function buildMatcherFn(patterns: GlobPatternWithRoot[], options: NormalizedGlob
                 const root = pattern.root;
                 const rootURL = rootToUrl(root);
                 const isRelPat = !pattern.isGlobalPattern;
-                const relPathToFile = relativeToRoot(rootURL);
-                if (isRelPat && !isRelativeValueNested(relPathToFile)) {
-                    continue;
+                let fname = relFilePathname;
+                if (isRelPat) {
+                    const relPathToFile = relativeToRoot(rootURL);
+                    if (!isRelativeValueNested(relPathToFile)) {
+                        continue;
+                    }
+                    fname = relPathToFile;
                 }
-                const fname = isRelPat ? relPathToFile : relFilePathname;
                 if (rule.fn(fname)) {
                     return {
                         matched,
@@ -289,3 +293,20 @@ function buildMatcherFn(patterns: GlobPatternWithRoot[], options: NormalizedGlob
     };
     return fn;
 }
+
+// function outputBuildMatcherFnPerfData(patterns: GlobPatternWithRoot[], options: NormalizedGlobMatchOptions) {
+//     console.warn(
+//         JSON.stringify({
+//             options: {
+//                 ...options,
+//                 nodePath: undefined,
+//                 root: Path.relative(process.cwd(), options.root),
+//                 cwd: Path.relative(process.cwd(), options.cwd),
+//             },
+//             patterns: patterns.map(({ glob, root, isGlobalPattern }) => ({
+//                 glob,
+//                 root: isGlobalPattern ? undefined : Path.relative(process.cwd(), root),
+//             })),
+//         }) + ',',
+//     );
+// }

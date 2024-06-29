@@ -2,7 +2,7 @@ import assert from 'node:assert';
 import Path from 'node:path';
 
 import { toFilePathOrHref } from './fileUrl.mjs';
-import { addTrailingSlash, isUrlLike, urlParent, urlRelative, urlRemoveFilename } from './url.mjs';
+import { addTrailingSlash, isUrlLike, urlParent, urlToUrlRelative } from './url.mjs';
 
 export const isWindows = process.platform === 'win32';
 
@@ -136,6 +136,10 @@ export class FileUrlBuilder {
 
     urlToFilePathOrHref(url: URL | string): string {
         url = this.toFileURL(url);
+        return this.#urlToFilePathOrHref(url);
+    }
+
+    #urlToFilePathOrHref(url: URL): string {
         if (url.protocol !== ProtocolFile) return url.href;
         const p =
             this.path === Path
@@ -155,14 +159,18 @@ export class FileUrlBuilder {
     relative(urlFrom: URL, urlTo: URL): string {
         if (urlFrom.protocol === urlTo.protocol && urlFrom.protocol === ProtocolFile) {
             if (urlFrom.href === urlTo.href) return '';
-            const pFrom = this.urlToFilePathOrHref(urlRemoveFilename(urlFrom));
-            const pTo = this.urlToFilePathOrHref(urlTo);
+            urlFrom = urlFrom.pathname.endsWith('/') ? urlFrom : new URL('./', urlFrom);
+            const fromPath = urlFrom.pathname;
+            const toPath = urlTo.pathname;
+            if (toPath.startsWith(fromPath)) return decodeURIComponent(toPath.slice(fromPath.length));
+            const pFrom = this.#urlToFilePathOrHref(urlFrom);
+            const pTo = this.#urlToFilePathOrHref(urlTo);
             const toIsDir = urlTo.pathname.endsWith('/');
             let pathname = this.normalizeFilePathForUrl(this.path.relative(pFrom, pTo));
             if (toIsDir && !pathname.endsWith('/')) pathname += '/';
             return decodeURIComponent(pathname);
         }
-        return decodeURIComponent(urlRelative(urlFrom, urlTo));
+        return decodeURIComponent(urlToUrlRelative(urlFrom, urlTo));
     }
 
     /**

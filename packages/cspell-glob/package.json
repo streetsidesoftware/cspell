@@ -25,6 +25,8 @@
     "!**/__mocks__",
     "!**/test/**",
     "!**/*.test.*",
+    "!**/perf/**",
+    "!**/*.perf.*",
     "!**/*.spec.*",
     "!**/*.map"
   ],
@@ -33,6 +35,9 @@
     "build": "tsc -p .",
     "clean-build": "pnpm run clean && pnpm run build",
     "coverage": "vitest run --coverage",
+    "test:perf": "insight --file \"dist/perf/**/*.perf.{mjs,js}\" -t 1000",
+    "test:perf:ts": "insight --register ts-node/esm --file \"src/perf/**/*.perf.{mts,ts}\" -t 1000",
+    "test:perf:prof": "NODE_ENV=production node --cpu-prof ../../node_modules/perf-insight/bin.mjs --file \"dist/perf/**/*.perf.{mjs,js}\" -t 1000",
     "test:watch": "vitest",
     "test": "vitest run",
     "watch": "tsc -p . -w"
