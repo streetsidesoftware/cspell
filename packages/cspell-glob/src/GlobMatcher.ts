@@ -22,6 +22,8 @@ export type GlobMatchOptions = Optional<NormalizedGlobMatchOptions>;
 
 export type MatcherMode = 'exclude' | 'include';
 
+const traceMode = false;
+
 interface NormalizedGlobMatchOptions {
     /**
      * The matcher has two modes (`include` or `exclude`) that impact how globs behave.
@@ -81,6 +83,8 @@ interface NormalizedGlobMatchOptions {
     nobrace?: boolean | undefined; // cspell:ignore nobrace
 }
 
+let idGlobMatcher = 0;
+
 export class GlobMatcher {
     /**
      * @param filename full path of file to match against.
@@ -96,6 +100,11 @@ export class GlobMatcher {
     readonly root: string;
     readonly dot: boolean;
     readonly options: NormalizedGlobMatchOptions;
+
+    /**
+     * Instance ID
+     */
+    readonly id: number;
 
     /**
      * Construct a `.gitignore` emulator
@@ -117,6 +126,10 @@ export class GlobMatcher {
         rootOrOptions?: string | URL | GlobMatchOptions,
         _nodePath?: PathInterface,
     ) {
+        this.id = idGlobMatcher++;
+
+        // traceMode && console.warn('GlobMatcher(%d)', this.id, new Error('trace'));
+
         const options =
             typeof rootOrOptions === 'string' || rootOrOptions instanceof URL
                 ? { root: rootOrOptions.toString() }
@@ -152,7 +165,7 @@ export class GlobMatcher {
         this.patterns = globPatterns;
         this.root = normalizedRoot;
         this.dot = dot;
-        this.matchEx = buildMatcherFn(this.patterns, this.options);
+        this.matchEx = buildMatcherFn(this.id, this.patterns, this.options);
     }
 
     /**
@@ -200,8 +213,12 @@ interface GlobRule {
  * @param options - defines root and other options
  * @returns a function given a filename returns true if it matches.
  */
-function buildMatcherFn(patterns: GlobPatternWithRoot[], options: NormalizedGlobMatchOptions): GlobMatchFn {
-    // outputBuildMatcherFnPerfData(patterns, options);
+function buildMatcherFn(
+    _id: number,
+    patterns: GlobPatternWithRoot[],
+    options: NormalizedGlobMatchOptions,
+): GlobMatchFn {
+    // outputBuildMatcherFnPerfData(_id, patterns, options);
     const { nodePath, dot, nobrace } = options;
     const builder = new FileUrlBuilder({ path: nodePath });
     const makeReOptions = { dot, nobrace };
@@ -289,9 +306,15 @@ function buildMatcherFn(patterns: GlobPatternWithRoot[], options: NormalizedGlob
             }
         }
 
-        return testRules(negRules, false) || testRules(posRules, true) || { matched: false };
+        const result = testRules(negRules, false) || testRules(posRules, true) || { matched: false };
+        traceMode && logMatchTest(_id, filename, result);
+        return result;
     };
     return fn;
+}
+
+function logMatchTest(id: number, filename: string, match: GlobMatch) {
+    console.warn('%s;%d;%s', filename, id, JSON.stringify(match.matched));
 }
 
 // function outputBuildMatcherFnPerfData(patterns: GlobPatternWithRoot[], options: NormalizedGlobMatchOptions) {
