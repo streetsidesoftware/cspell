@@ -33,6 +33,10 @@ interface ReporterIssue extends Issue {
     filename: string;
 }
 
+function consoleError(...params: Parameters<typeof console.error>) {
+    console.error(chalk.white('%s'), format(...params));
+}
+
 /**
  *
  * @param template - The template to use for the issue.
@@ -99,7 +103,7 @@ function reportProgressFileComplete(p: ProgressFileComplete) {
     const time = reportTime(p.elapsedTimeMs, !!p.cached);
     const skipped = p.processed === false ? ' skipped' : '';
     const hasErrors = p.numErrors ? chalk.red` X` : '';
-    console.error(` ${time}${skipped}${hasErrors}`);
+    consoleError(` ${time}${skipped}${hasErrors}`);
 }
 
 function reportTime(elapsedTimeMs: number | undefined, cached: boolean): string {
@@ -189,7 +193,7 @@ export function getReporter(options: ReporterOptions, config?: ReporterConfigura
         }
         const errorText = format(chalk.red(message), error.toString());
         errorCollection?.push(errorText);
-        console.error(errorText);
+        consoleError(errorText);
     }
 
     const resultEmitter = (result: RunResult) => {
@@ -200,12 +204,12 @@ export function getReporter(options: ReporterOptions, config?: ReporterConfigura
         const numFilesWithIssues = filesWithIssues.size;
 
         if (issuesCollection?.length || errorCollection?.length) {
-            console.error('-------------------------------------------');
+            consoleError('-------------------------------------------');
         }
 
         if (issuesCollection?.length) {
-            console.error('Issues found:');
-            issuesCollection.forEach((issue) => console.error(issue));
+            consoleError('Issues found:');
+            issuesCollection.forEach((issue) => consoleError(issue));
         }
 
         const cachedFilesText = cachedFiles ? ` (${cachedFiles} from cache)` : '';
@@ -214,22 +218,22 @@ export function getReporter(options: ReporterOptions, config?: ReporterConfigura
 
         const summaryMessage = `CSpell\u003A Files checked: ${files}${cachedFilesText}, Issues found: ${issues} in ${numFilesWidthIssuesText}${withErrorsText}.`;
 
-        console.error(summaryMessage);
+        consoleError(summaryMessage);
 
         if (errorCollection?.length && issues > 5) {
-            console.error('-------------------------------------------');
-            console.error('Errors:');
-            errorCollection.forEach((error) => console.error(error));
+            consoleError('-------------------------------------------');
+            consoleError('Errors:');
+            errorCollection.forEach((error) => consoleError(error));
         }
 
         if (options.showPerfSummary) {
-            console.error('-------------------------------------------');
-            console.error('Performance Summary:');
-            console.error(`  Files Processed: ${perfStats.filesProcessed.toString().padStart(6)}`);
-            console.error(`  Files Skipped  : ${perfStats.filesSkipped.toString().padStart(6)}`);
-            console.error(`  Files Cached   : ${perfStats.filesCached.toString().padStart(6)}`);
-            console.error(`  Processing Time: ${perfStats.elapsedTimeMs.toFixed(2).padStart(9)}ms`);
-            console.error('Stats:');
+            consoleError('-------------------------------------------');
+            consoleError('Performance Summary:');
+            consoleError(`  Files Processed: ${perfStats.filesProcessed.toString().padStart(6)}`);
+            consoleError(`  Files Skipped  : ${perfStats.filesSkipped.toString().padStart(6)}`);
+            consoleError(`  Files Cached   : ${perfStats.filesCached.toString().padStart(6)}`);
+            consoleError(`  Processing Time: ${perfStats.elapsedTimeMs.toFixed(2).padStart(9)}ms`);
+            consoleError('Stats:');
             const stats = Object.entries(perfStats.perf)
                 .filter((p): p is [string, number] => !!p[1])
                 .map(([key, value]) => [key, value.toFixed(2)] as const);
@@ -237,7 +241,7 @@ export function getReporter(options: ReporterOptions, config?: ReporterConfigura
             const padValue = Math.max(...stats.map((s) => s[1].length));
             stats.sort((a, b) => a[0].localeCompare(b[0]));
             for (const [key, value] of stats) {
-                value && console.error(`  ${key.padEnd(padName)}: ${value.padStart(padValue)}ms`);
+                value && consoleError(`  ${key.padEnd(padName)}: ${value.padStart(padValue)}ms`);
             }
         }
     };
