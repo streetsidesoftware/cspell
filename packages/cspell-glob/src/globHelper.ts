@@ -62,7 +62,7 @@ function toGlobPatternWithRoot(glob: GlobPattern, root: string, builder: FileUrl
         if (isGlobPatternWithRoot(glob)) return fixPatternRoot({ ...glob }, builder);
         const rootUrl = builder.toFileDirURL(root);
         if (typeof glob === 'string') return filePathOrGlobToGlob(glob, rootUrl, builder);
-        const pattern = { isGlobalPattern: !glob.root && isGlobalGlob(glob.glob), ...glob, root: glob.root ?? root };
+        const pattern = { isGlobalPattern: isGlobalGlob(glob.glob), ...glob, root: glob.root ?? root };
         fixPatternRoot(pattern, builder);
         // pattern.glob might still be a file or a relative glob pattern.
         fixPatternGlob(pattern, builder);

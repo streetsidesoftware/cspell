@@ -88,15 +88,15 @@ describe('Validate fileOrGlobToGlob', () => {
     });
 
     test.each`
-        glob                                          | root       | path     | expected                          | comment
-        ${{ glob: '*.json' }}                         | ${'.'}     | ${posix} | ${g('*.json', pp('./'))}          | ${'posix'}
-        ${{ glob: '../*.json' }}                      | ${'.'}     | ${posix} | ${g('/*.json', pp('../'))}        | ${'posix'}
-        ${{ glob: '*.json', root: pp('./data') }}     | ${'.'}     | ${posix} | ${g('*.json', pp('./data/'))}     | ${'posix'}
-        ${{ glob: '**/*.json' }}                      | ${'.'}     | ${posix} | ${g('**/*.json', pp('./'), true)} | ${'posix'}
-        ${{ glob: '**/*.json', root: pp('./data') }}  | ${'.'}     | ${posix} | ${g('**/*.json', pp('./data/'))}  | ${'posix'}
-        ${{ glob: '../**/*.json' }}                   | ${'./a/b'} | ${posix} | ${g('**/*.json', pp('./a/'))}     | ${'posix'}
-        ${{ glob: '/**/*.json' }}                     | ${'.'}     | ${posix} | ${g('/**/*.json', pp('./'))}      | ${'posix'}
-        ${{ glob: '/**/*.json', root: pp('./data') }} | ${'.'}     | ${posix} | ${g('/**/*.json', pp('./data/'))} | ${'posix'}
+        glob                                          | root       | path     | expected                               | comment
+        ${{ glob: '*.json' }}                         | ${'.'}     | ${posix} | ${g('*.json', pp('./'))}               | ${'posix'}
+        ${{ glob: '../*.json' }}                      | ${'.'}     | ${posix} | ${g('/*.json', pp('../'))}             | ${'posix'}
+        ${{ glob: '*.json', root: pp('./data') }}     | ${'.'}     | ${posix} | ${g('*.json', pp('./data/'))}          | ${'posix'}
+        ${{ glob: '**/*.json' }}                      | ${'.'}     | ${posix} | ${g('**/*.json', pp('./'), true)}      | ${'posix'}
+        ${{ glob: '**/*.json', root: pp('./data') }}  | ${'.'}     | ${posix} | ${g('**/*.json', pp('./data/'), true)} | ${'posix'}
+        ${{ glob: '../**/*.json' }}                   | ${'./a/b'} | ${posix} | ${g('**/*.json', pp('./a/'))}          | ${'posix'}
+        ${{ glob: '/**/*.json' }}                     | ${'.'}     | ${posix} | ${g('/**/*.json', pp('./'))}           | ${'posix'}
+        ${{ glob: '/**/*.json', root: pp('./data') }} | ${'.'}     | ${posix} | ${g('/**/*.json', pp('./data/'))}      | ${'posix'}
     `('fileOrGlobToGlob glob: "$glob" root: "$root" $comment', ({ glob, root, path, expected }) => {
         root = p(root, path);
         const r = fileOrGlobToGlob(glob, root, path);
