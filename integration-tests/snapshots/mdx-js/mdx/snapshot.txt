@@ -3,17 +3,17 @@ Repository: mdx-js/mdx
 Url: "https://github.com/mdx-js/mdx"
 Args: ["--config=../../../../config/repositories/mdx-js/mdx/cspell.json","**/*.*"]
 Lines:
- CSpell: Files checked: 144, Issues found: 988 in 89 files.
+ CSpell: Files checked: 144, Issues found: 980 in 89 files.
  exit code: 1
-./docs/_asset/editor.jsx:10:22     - Unknown word (mdast)      -- * @typedef {import('mdast').Nodes} MdastNodes
-./docs/_asset/editor.jsx:10:37     - Unknown word (Mdast)      -- import('mdast').Nodes} MdastNodes
 ./docs/_asset/editor.jsx:168:15    - Unknown word (recma)      -- const recmaPlugins = []
 ./docs/_asset/editor.jsx:185:23    - Unknown word (esast)      -- if (show === 'esast') recmaPlugins.push
 ./docs/_asset/editor.jsx:185:57    - Unknown word (Esast)      -- recmaPlugins.push([captureEsast])
 ./docs/_asset/editor.jsx:58:24     - Unknown word (jsxs)       -- import {Fragment, jsx, jsxs} from 'react/jsx-runtime
-./docs/_asset/editor.jsx:5:23      - Unknown word (wooorm)     -- @typedef {import('@wooorm/starry-night').Grammar
+./docs/_asset/editor.jsx:5:29      - Unknown word (wooorm)     -- import {Grammar} from '@wooorm/starry-night'
 ./docs/_asset/editor.jsx:61:8      - Unknown word (rehype)     -- import rehypeRaw from 'rehype-raw
 ./docs/_asset/editor.jsx:68:22     - Unknown word (vfile)      -- import {VFile} from 'vfile'
+./docs/_asset/editor.jsx:8:22      - Unknown word (Mdast)      -- * @import {Nodes as MdastNodes, Root as MdastRoot
+./docs/_asset/editor.jsx:8:59      - Unknown word (mdast)      -- as MdastRoot} from 'mdast'
 ./docs/_asset/index.css:288:21    - Unknown word (squircle)           -- mask-image: paint(squircle);
 ./docs/_asset/index.css:2:37      - Unknown word (blinkmacsystemfont) -- system-ui, -apple-system, blinkmacsystemfont, 'Segoe UI', helvetica
 ./docs/_asset/index.css:300:2     - Unknown word (hljs)               -- .hljs,
@@ -261,10 +261,10 @@ Lines:
 ./docs/migrating/v3.mdx:22:72     - Unknown word (jsregister)        -- loader`](#replace-mdx-jsregister-with-mdx-jsnode-loader
 ./docs/migrating/v3.mdx:22:92     - Unknown word (jsnode)            -- jsregister-with-mdx-jsnode-loader)
 ./packages/esbuild/lib/index.js:45:9      - Unknown word (extnames)   -- import {extnamesToRegex} from '@mdx-js
-./packages/loader/lib/index.js:108:13    - Unknown word (fpath)      -- const fpath = path.relative(context
+./packages/loader/lib/index.js:106:13    - Unknown word (fpath)      -- const fpath = path.relative(context
 ./packages/loader/readme.md:38:29     - Unknown word (Rspack)     -- such as Next.js or Rspack).
-./packages/mdx/lib/core.js:137:15    - Unknown word (Recma)      -- import {rehypeRecma} from './plugin/rehype
-./packages/mdx/lib/core.js:6:53      - Unknown word (Rehype)     -- rehype').Options} RemarkRehypeOptions
+./packages/mdx/lib/core.js:135:15    - Unknown word (Recma)      -- import {rehypeRecma} from './plugin/rehype
+./packages/mdx/lib/core.js:5:30      - Unknown word (Rehype)     -- import {Options as RemarkRehypeOptions} from 'remark
 ./packages/mdx/lib/evaluate.js:48:10     - Unknown word (compiletime) -- const {compiletime, runtime} = resolveEvaluateOp
 ./packages/mdx/readme.md:1129:3    - Unknown word (rehypejs)      -- [`rehypejs/rehype-highlight`][rehype
 ./packages/mdx/readme.md:1144:29   - Unknown word (astring)       -- final step is done by [astring][], a
@@ -281,10 +281,10 @@ Lines:
 ./packages/mdx/test/syntax.js:180:31    - Unknown word (setext)     -- should support headings (setext) (`=` -> `<h1>`)',
 ./packages/mdx/test/syntax.js:263:103   - Unknown word (describedby) -- footnote-ref="true" aria-describedby="footnote-label">1<
 ./packages/mdx/test/syntax.js:798:21    - Unknown word (rexporting)  -- 'should support rexporting something as a default
-./packages/remark-mdx/lib/index.js:3:59      - Unknown word (Micromark)  -- extension-mdxjs').Options} MicromarkOptions
-./packages/remark-mdx/test/index.js:466:15    - Unknown word (onvisit)    -- visit(tree, onvisit)
+./packages/remark-mdx/lib/index.js:3:24      - Unknown word (Micromark)  -- @import {Options as MicromarkOptions} from 'micromark
+./packages/remark-mdx/test/index.js:468:15    - Unknown word (onvisit)    -- visit(tree, onvisit)
 ./packages/rollup/lib/index.js:15:6      - Unknown word (Picomatch)   -- * Picomatch patterns to exclude
-./packages/rollup/lib/index.js:4:30      - Unknown word (pluginutils) -- typedef {import('@rollup/pluginutils').FilterPattern} FilterPatter
+./packages/rollup/lib/index.js:4:42      - Unknown word (pluginutils) -- FilterPattern} from '@rollup/pluginutils'
 ./packages/rollup/readme.md:110:6     - Unknown word (picomatch)  -- — [picomatch][] patterns to exclude
 ./packages/rollup/test/index.js:44:10     - Unknown word (AAAO)       -- ';;AAAO,SAAA,OAAA,GAAA;;AAA
 ./packages/rollup/test/index.js:44:15     - Unknown word (SAAA)       -- ';;AAAO,SAAA,OAAA,GAAA;;AAA8B,IAAA
@@ -295,8 +295,8 @@ Lines:
 ./packages/rollup/test/index.js:44:47     - Unknown word (EAAA)       -- GAAA;;AAA8B,IAAA,QAAA,EAAA,QAAA;;;;;;;;;AAEnC,IAAA
 ./packages/rollup/test/index.js:44:86     - Unknown word (CAAA)       -- AAEnC,IAAA,QAAA,EAAA,CAAA,SAAA,EAAAA,GAAA,CAAA
 ./packages/rollup/test/index.js:44:96     - Unknown word (EAAAA)      -- QAAA,EAAA,CAAA,SAAA,EAAAA,GAAA,CAAA,OAAA,EAAA
-./website/generate.js:40:31     - Unknown word (ungap)      -- structuredClone from '@ungap/structured-clone'
-./website/generate.js:56:24     - Unknown word (xast)       -- import {sitemap} from 'xast-util-sitemap'
-./website/mdx-config.js:39:14     - Unknown word (Gemoji)     -- import remarkGemoji from 'remark-gemoji
-./website/mdx-config.js:39:34     - Unknown word (gemoji)     -- remarkGemoji from 'remark-gemoji'
-./website/post.js:26:24     - Unknown word (sparticuz)  -- import chromium from '@sparticuz/chromium'
+./website/generate.js:37:31     - Unknown word (ungap)      -- structuredClone from '@ungap/structured-clone'
+./website/generate.js:53:24     - Unknown word (xast)       -- import {sitemap} from 'xast-util-sitemap'
+./website/mdx-config.js:38:14     - Unknown word (Gemoji)     -- import remarkGemoji from 'remark-gemoji
+./website/mdx-config.js:38:34     - Unknown word (gemoji)     -- remarkGemoji from 'remark-gemoji'
+./website/post.js:24:24     - Unknown word (sparticuz)  -- import chromium from '@sparticuz/chromium'

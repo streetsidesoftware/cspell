@@ -5,14 +5,14 @@ Args: '["--config=${repoConfig}/cspell.json","**/*.*"]'
 Summary:
   files: 144
   filesWithIssues: 89
-  issues: 988
+  issues: 980
   errors: 0
 Errors: []
 
 issues:
-  - "docs/_asset/editor.jsx:5:23         wooorm      U       @typedef {import('@wooorm/starry-night').Grammar"
-  - "docs/_asset/editor.jsx:10:22        mdast       U       * @typedef {import('mdast').Nodes} MdastNodes"
-  - "docs/_asset/editor.jsx:10:37        Mdast       U       import('mdast').Nodes} MdastNodes"
+  - "docs/_asset/editor.jsx:5:29         wooorm      U       import {Grammar} from '@wooorm/starry-night'"
+  - "docs/_asset/editor.jsx:8:22         Mdast       U       * @import {Nodes as MdastNodes, Root as MdastRoot"
+  - "docs/_asset/editor.jsx:8:59         mdast       U       as MdastRoot} from 'mdast'"
   - "docs/_asset/editor.jsx:58:24        jsxs        U       import {Fragment, jsx, jsxs} from 'react/jsx-runtime"
   - "docs/_asset/editor.jsx:61:8         rehype      U       import rehypeRaw from 'rehype-raw"
   - "docs/_asset/editor.jsx:68:22        vfile       U       import {VFile} from 'vfile'"
@@ -266,10 +266,10 @@ issues:
   - "docs/migrating/v3.mdx:22:72         jsregister              U       loader`](#replace-mdx-jsregister-with-mdx-jsnode-loader"
   - "docs/migrating/v3.mdx:22:92         jsnode                  U       jsregister-with-mdx-jsnode-loader)"
   - "packages/esbuild/lib/index.js:45:9          extnames    U       import {extnamesToRegex} from '@mdx-js"
-  - "packages/loader/lib/index.js:108:13         fpath       U       const fpath = path.relative(context"
+  - "packages/loader/lib/index.js:106:13         fpath       U       const fpath = path.relative(context"
   - "packages/loader/readme.md:38:29         Rspack      U       such as Next.js or Rspack)."
-  - "packages/mdx/lib/core.js:6:53           Rehype      U       rehype').Options} RemarkRehypeOptions"
-  - "packages/mdx/lib/core.js:137:15         Recma       U       import {rehypeRecma} from './plugin/rehype"
+  - "packages/mdx/lib/core.js:5:30           Rehype      U       import {Options as RemarkRehypeOptions} from 'remark"
+  - "packages/mdx/lib/core.js:135:15         Recma       U       import {rehypeRecma} from './plugin/rehype"
   - "packages/mdx/lib/evaluate.js:48:10          compiletime     U       const {compiletime, runtime} = resolveEvaluateOp"
   - "packages/mdx/readme.md:67:4         Deno                U       In Deno with [`esm.sh`][esmsh"
   - "packages/mdx/readme.md:508:24       QAAQ                U       mappings: ';;aAAaA,QAAQ;YAAQ;;;;;;;;iBAE3B'"
@@ -286,9 +286,9 @@ issues:
   - "packages/mdx/test/syntax.js:180:31      setext          U       should support headings (setext) (`=` -> `<h1>`)',"
   - "packages/mdx/test/syntax.js:263:103     describedby     U       footnote-ref=\"true\" aria-describedby=\"footnote-label\">1<"
   - "packages/mdx/test/syntax.js:798:21      rexporting      U       'should support rexporting something as a default"
-  - "packages/remark-mdx/lib/index.js:3:59           Micromark       U       extension-mdxjs').Options} MicromarkOptions"
-  - "packages/remark-mdx/test/index.js:466:15        onvisit     U       visit(tree, onvisit)"
-  - "packages/rollup/lib/index.js:4:30           pluginutils     U       typedef {import('@rollup/pluginutils').FilterPattern} FilterPatter"
+  - "packages/remark-mdx/lib/index.js:3:24           Micromark       U       @import {Options as MicromarkOptions} from 'micromark"
+  - "packages/remark-mdx/test/index.js:468:15        onvisit     U       visit(tree, onvisit)"
+  - "packages/rollup/lib/index.js:4:42           pluginutils     U       FilterPattern} from '@rollup/pluginutils'"
   - "packages/rollup/lib/index.js:15:6           Picomatch       U       * Picomatch patterns to exclude"
   - "packages/rollup/readme.md:110:6         picomatch       U       — [picomatch][] patterns to exclude"
   - "packages/rollup/test/index.js:44:10         AAAO        U       ';;AAAO,SAAA,OAAA,GAAA;;AAA"
@@ -300,8 +300,8 @@ issues:
   - "packages/rollup/test/index.js:44:47         EAAA        U       GAAA;;AAA8B,IAAA,QAAA,EAAA,QAAA;;;;;;;;;AAEnC,IAAA"
   - "packages/rollup/test/index.js:44:86         CAAA        U       AAEnC,IAAA,QAAA,EAAA,CAAA,SAAA,EAAAA,GAAA,CAAA"
   - "packages/rollup/test/index.js:44:96         EAAAA       U       QAAA,EAAA,CAAA,SAAA,EAAAA,GAAA,CAAA,OAAA,EAAA"
-  - "website/generate.js:40:31       ungap       U       structuredClone from '@ungap/structured-clone'"
-  - "website/generate.js:56:24       xast        U       import {sitemap} from 'xast-util-sitemap'"
-  - "website/mdx-config.js:39:14         Gemoji      U       import remarkGemoji from 'remark-gemoji"
-  - "website/mdx-config.js:39:34         gemoji      U       remarkGemoji from 'remark-gemoji'"
-  - "website/post.js:26:24       sparticuz       U       import chromium from '@sparticuz/chromium'"
+  - "website/generate.js:37:31       ungap       U       structuredClone from '@ungap/structured-clone'"
+  - "website/generate.js:53:24       xast        U       import {sitemap} from 'xast-util-sitemap'"
+  - "website/mdx-config.js:38:14         Gemoji      U       import remarkGemoji from 'remark-gemoji"
+  - "website/mdx-config.js:38:34         gemoji      U       remarkGemoji from 'remark-gemoji'"
+  - "website/post.js:24:24       sparticuz       U       import chromium from '@sparticuz/chromium'"

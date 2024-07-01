@@ -3,7 +3,7 @@ Repository: Azure/azure-rest-api-specs
 Url: "https://github.com/Azure/azure-rest-api-specs.git"
 Args: ["--config=cSpell.json","**/*.{md,ts,js}"]
 Lines:
- CSpell: Files checked: 2367, Issues found: 2943 in 844 files.
+ CSpell: Files checked: 2376, Issues found: 2943 in 846 files.
  exit code: 1
 ./CONTRIBUTING.md:24:6      - Unknown word (tocstop)    -- <!-- tocstop -->
 ./CONTRIBUTING.md:79:3      - Unknown word (Poli)       -- - PoliCheck -
@@ -12,6 +12,7 @@ Lines:
 ./arm-compute/quickstart-templates/README.md:3:107     - Unknown word (quickstart) -- specification/compute/quickstart-templates`. However
 ./dev/cognitiveservices/data-plane/Language/readme.md:35:1      - Unknown word (modelerfour) -- modelerfour:
 ./documentation/FAQ.md:36:51     - Unknown word (examplegen) -- from Swagger?<a name="examplegen"></a>
+./documentation/Getting-started-with-TypeSpec-specifications.md:12:34     - Unknown word (tspconfig)  -- check_mark: Do include `tspconfig.yaml`.
 ./documentation/Semantic-and-Model-Violations-Reference.md:15:14     - Unknown word (OPERATIONID) -- | [DUPLICATE_OPERATIONID](#DUPLICATE_OPERATIONID
 ./documentation/Semantic-and-Model-Violations-Reference.md:647:39    - Unknown word (dicriminator) -- : The value of x-ms-dicriminator-value is not in the
 ./documentation/api-scenario/how-to/GenerateABasicApiScenario.md:19:182    - Unknown word (appconfiguration) -- --api_spec /swagger/appconfiguration/resource-manager/Microsoft
@@ -26,10 +27,9 @@ Lines:
 ./documentation/ci-fix.md:117:241   - Unknown word (languges)   -- APIViews for other SDK languges are generated in their
 ./documentation/ci-fix.md:117:34    - Unknown word (languge)    -- nvestigate the CI job for the languge with error. TypeSpec
 ./documentation/ci-fix.md:167:22    - Unknown word (brch)       -- See [aka.ms/azsdk/pr-brch-deep](https://aka.ms
-./documentation/ci-fix.md:239:119   - Unknown word (tspconfig)  -- types: true` to your `tspconfig.yaml`.
-./documentation/ci-fix.md:282:18    - Unknown word (contosowidgetmanager) -- cd specification/contosowidgetmanager
-./documentation/ci-fix.md:332:14    - Unknown word (flac)                 -- "flac",
-./documentation/ci-fix.md:333:14    - Unknown word (mpga)                 -- "mpga"
+./documentation/ci-fix.md:219:18    - Unknown word (contosowidgetmanager) -- cd specification/contosowidgetmanager
+./documentation/ci-fix.md:269:14    - Unknown word (flac)                 -- "flac",
+./documentation/ci-fix.md:270:14    - Unknown word (mpga)                 -- "mpga"
 ./documentation/ci-fix.md:75:28     - Unknown word (Yeming)     -- owner of this check is Yeming Liu from the `Azure
 ./documentation/ci-fix.md:92:39     - Unknown word (Weidong)    -- for-java` | Weidong Xu     |
 ./documentation/ci-fix.md:93:39     - Unknown word (Qiaoqiao)   -- for-js` | Qiaoqiao Zhang |
@@ -55,7 +55,7 @@ Lines:
 ./documentation/release-request/rules-for-release-request.md:3:97      - Unknown word (partnerinfo) -- umentation in [azsdk/releases/partnerinfo](https://aka.ms/azsdk
 ./documentation/restler/QuickStart.md:30:21     - Unknown word (mikekistler) -- specs=$(find /Users/mikekistler/Projects/Azure/azure
 ./documentation/samplefiles-dp/ABOUT.md:1:10      - Unknown word (samplefiles) -- # About `samplefiles-dp`
-./documentation/sdkautomation/README.md:251:22    - Unknown word (snuget)     -- "sdk/cdn/cdn.snuget"
+./documentation/sdkautomation/README.md:234:22    - Unknown word (snuget)     -- "sdk/cdn/cdn.snuget"
 ./documentation/sdkautomation/sdk-suppressions.md:42:93     - Unknown word (lables)     -- breaking change suppression lables. For example, for the
 ./documentation/swagger-accuracy-report.md:3:99      - Unknown word (accuractly) -- that service contracts accuractly reflect true service
 ./documentation/typespec-end-to-end-scenarios.md:173:104   - Unknown word (sdkgeneration) -- folder}:/work-dir -v sdkgeneration.azurecr.io/sdk-generation
@@ -258,6 +258,7 @@ Lines:
 ./specification/eventgrid/resource-manager/readme.md:66:283    - Unknown word (defintion)  -- requirements in this route defintion.
 ./specification/eventhub/resource-manager/readme.md:79:49     - Unknown word (networkrulessets) -- preview/2021-01-01-preview/networkrulessets-preview.json
 ./specification/extendedlocation/resource-manager/readme.md:38:59     - Unknown word (customlocations) -- preview/2021-03-15-preview/customlocations.json
+./specification/fabric/resource-manager/readme.go.md:8:41      - Unknown word (armfabric)  -- resourcemanager/fabric/armfabric
 ./specification/fist/resource-manager/readme.python.md:10:26     - Unknown word (iotfirmwaredefense) -- package-name: azure-mgmt-iotfirmwaredefense
 ./specification/fluidrelay/resource-manager/readme.csharp.md:14:40     - Unknown word (fluidrelay) -- csharp-sdks-folder)/fluidrelay/management/Microsoft
 ./specification/frontdoor/resource-manager/readme.cli.md:13:12     - Unknown word (networkexperimentprofiles) -- "^.*[/]networkexperimentprofiles([/][^/]*)?$": "internet
@@ -298,7 +299,7 @@ Lines:
 ./specification/liftrastronomer/resource-manager/readme.go.md:8:40      - Unknown word (armastro)   -- resourcemanager/astro/armastro
 ./specification/liftrastronomer/resource-manager/readme.java.md:7:8       - Unknown word (Astro)      -- title: AstroMgmtClient
 ./specification/liftrqumulo/resource-manager/readme.typescript.md:10:49     - Unknown word (liftrqumulo) -- typescript-sdks-folder)/sdk/liftrqumulo/arm-qumulo"
-./specification/loadtestservice/resource-manager/readme.md:74:67     - Unknown word (loadtesting) -- profiles['azure_mgmt_loadtesting']
+./specification/loadtestservice/resource-manager/readme.md:83:67     - Unknown word (loadtesting) -- profiles['azure_mgmt_loadtesting']
 ./specification/logic/resource-manager/readme.go.md:14:40     - Unknown word (armlogic)   -- resourcemanager/logic/armlogic
 ./specification/logz/resource-manager/readme.go.md:14:39     - Unknown word (armlogz)    -- resourcemanager/logz/armlogz
 ./specification/m365securityandcompliance/resource-manager/readme.go.md:9:18      - Unknown word (securityandcompliance) -- namespace: m365securityandcompliance
@@ -350,7 +351,7 @@ Lines:
 ./specification/mysql/resource-manager/readme.go.md:47:1      - Unknown word (rpname)          -- rpname: mysql
 ./specification/mysql/resource-manager/readme.go.md:48:12     - Unknown word (mysqlflexibleservers) -- namespace: mysqlflexibleservers
 ./specification/mysql/resource-manager/readme.md:314:48    - Unknown word (detecion)   -- used to update thread detecion configuration, which
-./specification/mysql/resource-manager/readme.md:449:68    - Unknown word (reponse)    -- included in get operation reponse body
+./specification/mysql/resource-manager/readme.md:485:68    - Unknown word (reponse)    -- included in get operation reponse body
 ./specification/netapp/resource-manager/readme.go.md:14:41     - Unknown word (armnetapp)  -- resourcemanager/netapp/armnetapp
 ./specification/network/resource-manager/readme.cli.md:104:14    - Unknown word (routefilters)  -- - split: routefilters
 ./specification/network/resource-manager/readme.cli.md:111:14    - Unknown word (routefilterrules) -- - split: routefilterrules
@@ -539,7 +540,7 @@ Lines:
 ./specification/voiceservices/resource-manager/readme.csharp.md:14:40     - Unknown word (voiceservice) -- csharp-sdks-folder)/voiceservice/management/Azure.ResourceMana
 ./specification/web/resource-manager/readme.md:1540:18   - Unknown word (weidongxu)  -- approved-by: "@weidongxu-microsoft"
 ./specification/web/resource-manager/readme.md:1548:23   - Unknown word (cowlishaw)  -- approved-by: "@mark.cowlishaw"
-./specification/webpubsub/data-plane/readme.md:129:31    - Unknown word (webpubsubservice) -- name: azure-messaging-webpubsubservice
+./specification/webpubsub/data-plane/readme.md:138:31    - Unknown word (webpubsubservice) -- name: azure-messaging-webpubsubservice
 ./specification/windowsiot/resource-manager/readme.az.md:7:15      - Unknown word (windowsiotservices) -- extensions: windowsiotservices
 ./specification/workloads/resource-manager/Microsoft.Workloads/SAPDiscoverySites/readme.az.md:13:54     - Unknown word (migrationdiscovery)    -- output-folder)/azext_migrationdiscovery/vendored_sdks/migrationdiscov
 ./specification/workloads/resource-manager/Microsoft.Workloads/SAPDiscoverySites/readme.az.md:9:17      - Unknown word (migrationdiscoverysap) -- extensions: migrationdiscoverysap
