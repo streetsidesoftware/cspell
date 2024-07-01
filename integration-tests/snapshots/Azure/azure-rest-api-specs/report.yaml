@@ -3,8 +3,8 @@ Repository: Azure/azure-rest-api-specs
 Url: https://github.com/Azure/azure-rest-api-specs.git
 Args: '["--config=cSpell.json","**/*.{md,ts,js}"]'
 Summary:
-  files: 2367
-  filesWithIssues: 844
+  files: 2376
+  filesWithIssues: 846
   issues: 2943
   errors: 0
 Errors: []
@@ -31,10 +31,9 @@ issues:
   - "documentation/ci-fix.md:117:34      languge                 U       nvestigate the CI job for the languge with error. TypeSpec"
   - "documentation/ci-fix.md:117:241     languges                U       APIViews for other SDK languges are generated in their"
   - "documentation/ci-fix.md:167:22      brch                    U       See [aka.ms/azsdk/pr-brch-deep](https://aka.ms"
-  - "documentation/ci-fix.md:239:119     tspconfig               U       types: true` to your `tspconfig.yaml`."
-  - "documentation/ci-fix.md:282:18      contosowidgetmanager    U       cd specification/contosowidgetmanager"
-  - "documentation/ci-fix.md:332:14      flac                    U       \"flac\","
-  - "documentation/ci-fix.md:333:14      mpga                    U       \"mpga\""
+  - "documentation/ci-fix.md:219:18      contosowidgetmanager    U       cd specification/contosowidgetmanager"
+  - "documentation/ci-fix.md:269:14      flac                    U       \"flac\","
+  - "documentation/ci-fix.md:270:14      mpga                    U       \"mpga\""
   - "documentation/code-gen/configure-cli.md:103:91      commmand    U       passed by user in their commmand line which should points"
   - "documentation/code-gen/configure-cli.md:115:62      offazure    U       packages like migrate and offazure."
   - "documentation/code-gen/configure-cli.md:243:47      qiaozha     U       autorest/az@latest /home/qiaozha/code/azure-rest-api"
@@ -46,6 +45,7 @@ issues:
   - "documentation/creating-swagger.md:581:16        flim    U       \"bar\": \"flim\""
   - "documentation/directory-structure.md:149:57         keyvaults       U       e.g. `keyvault` not `keyvaults` ) -- this removes ambiguity"
   - "documentation/FAQ.md:36:51          examplegen      U       from Swagger?<a name=\"examplegen\"></a>"
+  - "documentation/Getting-started-with-TypeSpec-specifications.md:12:34         tspconfig       U       check_mark: Do include `tspconfig.yaml`."
   - "documentation/onboard-dpg-in-sdkautomation/java/README.md:32:41         standbypool     U       azure-resourcemanager-standbypool\""
   - "documentation/openapi-authoring-automated-guidelines.md:254:3       alllowercase        U       * alllowercase - If there are multiple"
   - "documentation/openapi-authoring-automated-guidelines.md:256:60      Ikey                U       incorrectly recognize \"Ikey\" as a word and not flag"
@@ -56,7 +56,7 @@ issues:
   - "documentation/release-request/rules-for-release-request.md:3:97         partnerinfo     U       umentation in [azsdk/releases/partnerinfo](https://aka.ms/azsdk"
   - "documentation/restler/QuickStart.md:30:21       mikekistler     U       specs=$(find /Users/mikekistler/Projects/Azure/azure"
   - "documentation/samplefiles-dp/ABOUT.md:1:10          samplefiles     U       # About `samplefiles-dp`"
-  - "documentation/sdkautomation/README.md:251:22        snuget      U       \"sdk/cdn/cdn.snuget\""
+  - "documentation/sdkautomation/README.md:234:22        snuget      U       \"sdk/cdn/cdn.snuget\""
   - "documentation/sdkautomation/sdk-suppressions.md:42:93       lables      U       breaking change suppression lables. For example, for the"
   - "documentation/Semantic-and-Model-Violations-Reference.md:15:14          OPERATIONID     U       | [DUPLICATE_OPERATIONID](#DUPLICATE_OPERATIONID"
   - "documentation/Semantic-and-Model-Violations-Reference.md:647:39         dicriminator    U       : The value of x-ms-dicriminator-value is not in the"
@@ -263,6 +263,7 @@ issues:
   - "specification/eventgrid/resource-manager/readme.md:66:283       defintion (definition)      U       requirements in this route defintion."
   - "specification/eventhub/resource-manager/readme.md:79:49         networkrulessets    U       preview/2021-01-01-preview/networkrulessets-preview.json"
   - "specification/extendedlocation/resource-manager/readme.md:38:59         customlocations     U       preview/2021-03-15-preview/customlocations.json"
+  - "specification/fabric/resource-manager/readme.go.md:8:41         armfabric       U       resourcemanager/fabric/armfabric"
   - "specification/fist/resource-manager/readme.python.md:10:26          iotfirmwaredefense      U       package-name: azure-mgmt-iotfirmwaredefense"
   - "specification/fluidrelay/resource-manager/readme.csharp.md:14:40        fluidrelay      U       csharp-sdks-folder)/fluidrelay/management/Microsoft"
   - "specification/frontdoor/resource-manager/readme.cli.md:13:12        networkexperimentprofiles       U       \"^.*[/]networkexperimentprofiles([/][^/]*)?$\": \"internet"
@@ -303,7 +304,7 @@ issues:
   - "specification/liftrastronomer/resource-manager/readme.go.md:8:40        armastro    U       resourcemanager/astro/armastro"
   - "specification/liftrastronomer/resource-manager/readme.java.md:7:8           Astro       U       title: AstroMgmtClient"
   - "specification/liftrqumulo/resource-manager/readme.typescript.md:10:49       liftrqumulo     U       typescript-sdks-folder)/sdk/liftrqumulo/arm-qumulo\""
-  - "specification/loadtestservice/resource-manager/readme.md:74:67          loadtesting     U       profiles['azure_mgmt_loadtesting']"
+  - "specification/loadtestservice/resource-manager/readme.md:83:67          loadtesting     U       profiles['azure_mgmt_loadtesting']"
   - "specification/logic/resource-manager/readme.go.md:14:40         armlogic    U       resourcemanager/logic/armlogic"
   - "specification/logz/resource-manager/readme.go.md:14:39          armlogz     U       resourcemanager/logz/armlogz"
   - "specification/m365securityandcompliance/resource-manager/readme.go.md:9:18          securityandcompliance       U       namespace: m365securityandcompliance"
@@ -355,7 +356,7 @@ issues:
   - "specification/mysql/resource-manager/readme.go.md:47:1          rpname                  U       rpname: mysql"
   - "specification/mysql/resource-manager/readme.go.md:48:12         mysqlflexibleservers    U       namespace: mysqlflexibleservers"
   - "specification/mysql/resource-manager/readme.md:314:48       detecion                U       used to update thread detecion configuration, which"
-  - "specification/mysql/resource-manager/readme.md:449:68       reponse (response)      U       included in get operation reponse body"
+  - "specification/mysql/resource-manager/readme.md:485:68       reponse (response)      U       included in get operation reponse body"
   - "specification/netapp/resource-manager/readme.go.md:14:41        armnetapp       U       resourcemanager/netapp/armnetapp"
   - "specification/network/resource-manager/readme.cli.md:55:14          loadbalancers                           U       - split: loadbalancers"
   - "specification/network/resource-manager/readme.cli.md:90:14          routetables                             U       - split: routetables"
@@ -544,7 +545,7 @@ issues:
   - "specification/voiceservices/resource-manager/readme.csharp.md:14:40         voiceservice    U       csharp-sdks-folder)/voiceservice/management/Azure.ResourceMana"
   - "specification/web/resource-manager/readme.md:1540:18        weidongxu       U       approved-by: \"@weidongxu-microsoft\""
   - "specification/web/resource-manager/readme.md:1548:23        cowlishaw       U       approved-by: \"@mark.cowlishaw\""
-  - "specification/webpubsub/data-plane/readme.md:129:31         webpubsubservice    U       name: azure-messaging-webpubsubservice"
+  - "specification/webpubsub/data-plane/readme.md:138:31         webpubsubservice    U       name: azure-messaging-webpubsubservice"
   - "specification/windowsiot/resource-manager/readme.az.md:7:15         windowsiotservices      U       extensions: windowsiotservices"
   - "specification/workloads/resource-manager/Microsoft.Workloads/monitors/readme.az.md:9:17         sapmonitors     U       extensions: sapmonitors"
   - "specification/workloads/resource-manager/Microsoft.Workloads/SAPDiscoverySites/readme.az.md:9:17        migrationdiscoverysap       U       extensions: migrationdiscoverysap"

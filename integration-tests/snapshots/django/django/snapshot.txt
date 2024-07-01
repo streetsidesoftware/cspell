@@ -3,7 +3,7 @@ Repository: django/django
 Url: "https://github.com/django/django.git"
 Args: ["--issues-summary-report","**/*.{md,py}"]
 Lines:
- CSpell: Files checked: 2789, Issues found: 7998 in 900 files.
+ CSpell: Files checked: 2788, Issues found: 7999 in 900 files.
  exit code: 1
 ./django/__init__.py:12:26     - Unknown word (urlresolvers) -- Set the thread-local urlresolvers script prefix if `set
 ./django/apps/registry.py:134:40    - Unknown word (unconfigured) -- not ready" is due to unconfigured settings, accessing
@@ -623,7 +623,7 @@ Lines:
 ./django/db/migrations/serializer.py:264:24    - Unknown word (fspath)          -- return repr(os.fspath(self.value)), {}
 ./django/db/migrations/serializer.py:95:7      - Unknown word (Deconstructable) -- class DeconstructableSerializer(BaseSerializer
 ./django/db/models/__init__.py:52:5      - Unknown word (aprefetch)  -- aprefetch_related_objects,
-./django/db/models/base.py:1121:19   - Unknown word (autopopulate)  -- # autopopulate the _order field
+./django/db/models/base.py:1139:19   - Unknown word (autopopulate)  -- # autopopulate the _order field
 ./django/db/models/base.py:114:9     - Unknown word (contributable) -- contributable_attrs = {}
 ./django/db/models/base.py:684:40    - Unknown word (attnames)      -- an iterable of field attnames. If fields is None,
 ./django/db/models/enums.py:32:17     - Unknown word (metacls)    -- def __new__(metacls, classname, bases, classdict
@@ -669,15 +669,15 @@ Lines:
 ./django/db/models/sql/datastructures.py:84:24     - Unknown word (nullabled)  -- # Is this join nullabled?
 ./django/db/models/sql/datastructures.py:99:46     - Unknown word (depraction) -- edInDjango60Warning: when the depraction ends, replace with:
 ./django/db/models/sql/query.py:112:19    - Unknown word (repointing) -- # without repointing to the filtered annotation
-./django/db/models/sql/query.py:1463:28   - Unknown word (unreffing)  -- is responsible for unreffing the joins used.
-./django/db/models/sql/query.py:1572:40   - Unknown word (someval)    -- is null, then col != someval will result in SQL
-./django/db/models/sql/query.py:2375:44   - Unknown word (datastructure) -- that we can use a set datastructure. We do the foo__bar
-./django/db/models/sql/query.py:2638:5    - Unknown word (dirn)          -- dirn = ORDER_DIR[default
+./django/db/models/sql/query.py:1462:28   - Unknown word (unreffing)  -- is responsible for unreffing the joins used.
+./django/db/models/sql/query.py:1571:40   - Unknown word (someval)    -- is null, then col != someval will result in SQL
+./django/db/models/sql/query.py:2374:44   - Unknown word (datastructure) -- that we can use a set datastructure. We do the foo__bar
+./django/db/models/sql/query.py:2637:5    - Unknown word (dirn)          -- dirn = ORDER_DIR[default
 ./django/db/models/sql/query.py:352:53    - Unknown word (deepcopied) -- work when a Query is deepcopied."""
 ./django/db/models/sql/query.py:540:62    - Unknown word (realiasing) -- would require complex realiasing logic.
 ./django/db/models/sql/query.py:558:50    - Unknown word (repointed)  -- sure the aggregates are repointed to them.
-./django/db/models/sql/query.py:710:15    - Unknown word (revrel)     -- # revrel__col=1 & revrel__col
-./django/db/models/sql/query.py:930:20    - Unknown word (louter)     -- parent_louter = (
+./django/db/models/sql/query.py:709:15    - Unknown word (revrel)     -- # revrel__col=1 & revrel__col
+./django/db/models/sql/query.py:929:20    - Unknown word (louter)     -- parent_louter = (
 ./django/db/transaction.py:162:17    - Unknown word (reentrancy) -- This allows reentrancy even if the same AtomicWrappe
 ./django/db/utils.py:121:26    - Unknown word (ispkg)      -- for _, name, ispkg in pkgutil.iter_modules
 ./django/db/utils.py:125:21    - Unknown word (reprs)      -- backend_reprs = map(repr, sorted(builtin
@@ -1114,7 +1114,7 @@ Lines:
 ./tests/admin_inlines/tests.py:1786:28   - Unknown word (labelledby)               -- f'aria-labelledby="{heading_id}">',
 ./tests/admin_inlines/tests.py:190:65    - Unknown word (titlecollection)  -- admin:admin_inlines_titlecollection_add"))
 ./tests/admin_inlines/tests.py:196:65    - Unknown word (outfititem)       -- admin:admin_inlines_outfititem_add"))
-./tests/admin_inlines/tests.py:2394:34   - Unknown word (courseproxy)              -- admin:admin_inlines_courseproxy_add",
+./tests/admin_inlines/tests.py:2396:34   - Unknown word (courseproxy)              -- admin:admin_inlines_courseproxy_add",
 ./tests/admin_inlines/tests.py:300:65    - Unknown word (capofamiglia)     -- admin:admin_inlines_capofamiglia_add"))
 ./tests/admin_inlines/tests.py:449:15    - Unknown word (thead)            -- '<thead><tr><th class="original
 ./tests/admin_inlines/tests.py:524:42    - Unknown word (parentmodelwithcustompk) -- admin:admin_inlines_parentmodelwithcustompk_change", args=("foo
@@ -1464,11 +1464,11 @@ Lines:
 ./tests/backends/tests.py:940:9     - Unknown word (SQLPK)      -- class MySQLPKZeroTests(TestCase):
 ./tests/backends/tests.py:948:22    - Unknown word (autoval)    -- def test_zero_as_autoval(self):
 ./tests/basic/tests.py:138:18    - Unknown word (datetimefields) -- def test_for_datetimefields_saves_as_much_precision
-./tests/basic/tests.py:409:43    - Unknown word (undashedvalue)  -- dashed-value": "1", "undashedvalue": "2"}
-./tests/basic/tests.py:437:14    - Unknown word (emptyqs)        -- def test_emptyqs(self):
-./tests/basic/tests.py:452:22    - Unknown word (customqs)       -- def test_emptyqs_customqs(self):
+./tests/basic/tests.py:501:43    - Unknown word (undashedvalue)  -- dashed-value": "1", "undashedvalue": "2"}
+./tests/basic/tests.py:529:14    - Unknown word (emptyqs)        -- def test_emptyqs(self):
+./tests/basic/tests.py:544:22    - Unknown word (customqs)       -- def test_emptyqs_customqs(self):
 ./tests/basic/tests.py:75:14     - Unknown word (autofields) -- def test_autofields_generate_different_values
-./tests/basic/tests.py:822:9     - Unknown word (asos)           -- asos = ArticleSelectOnSave
+./tests/basic/tests.py:914:9     - Unknown word (asos)           -- asos = ArticleSelectOnSave
 ./tests/bulk_create/tests.py:106:45    - Unknown word (Fillory)    -- ProxyMultiCountry(name="Fillory", iso_two_letter="FL
 ./tests/bulk_create/tests.py:119:36    - Unknown word (Qwghlm)     -- ProxyCountry(name="Qwghlm", iso_two_letter="QW
 ./tests/bulk_create/tests.py:120:31    - Unknown word (Tortall)    -- Country(name="Tortall", iso_two_letter="TA
@@ -1491,7 +1491,7 @@ Lines:
 ./tests/constraints/models.py:82:23     - Unknown word (sheld)      -- name="sheld_init_immediate_uniq
 ./tests/constraints/tests.py:258:36    - Unknown word (childmodel) -- assertIn("constraints_childmodel_adult", constraints
 ./tests/constraints/tests.py:924:23    - Unknown word (conditon)   -- def test_validate_conditon_custom_error(self):
-./tests/contenttypes_tests/test_models.py:128:37    - Unknown word (modelcreatedonthefly) -- assertEqual(ct.model, "modelcreatedonthefly")
+./tests/contenttypes_tests/test_models.py:147:37    - Unknown word (modelcreatedonthefly) -- assertEqual(ct.model, "modelcreatedonthefly")
 ./tests/contenttypes_tests/test_operations.py:67:56     - Unknown word (renamedfoo) -- contenttypes_tests", model="renamedfoo"
 ./tests/contenttypes_tests/test_views.py:125:14    - Unknown word (nonint)     -- def test_nonint_content_type(self):
 ./tests/csrf_tests/tests.py:1240:41   - Unknown word (badvalue)   -- get_request(cookie="badvalue")

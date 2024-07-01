@@ -3,9 +3,9 @@ Repository: django/django
 Url: https://github.com/django/django.git
 Args: '["--issues-summary-report","**/*.{md,py}"]'
 Summary:
-  files: 2789
+  files: 2788
   filesWithIssues: 900
-  issues: 7998
+  issues: 7999
   errors: 0
 Errors: []
 
@@ -630,7 +630,7 @@ issues:
   - "django/db/models/__init__.py:52:5           aprefetch       U       aprefetch_related_objects,"
   - "django/db/models/base.py:114:9          contributable       U       contributable_attrs = {}"
   - "django/db/models/base.py:684:40         attnames            U       an iterable of field attnames. If fields is None,"
-  - "django/db/models/base.py:1121:19        autopopulate        U       # autopopulate the _order field"
+  - "django/db/models/base.py:1139:19        autopopulate        U       # autopopulate the _order field"
   - "django/db/models/enums.py:32:17         metacls     U       def __new__(metacls, classname, bases, classdict"
   - "django/db/models/expressions.py:283:47      multijoins      U       of reusable joins for multijoins"
   - "django/db/models/fields/__init__.py:520:76      EXXX                U       details.get(\"id\", \"fields.EXXX\"),"
@@ -677,12 +677,12 @@ issues:
   - "django/db/models/sql/query.py:352:53        deepcopied          U       work when a Query is deepcopied.\"\"\""
   - "django/db/models/sql/query.py:540:62        realiasing          U       would require complex realiasing logic."
   - "django/db/models/sql/query.py:558:50        repointed           U       sure the aggregates are repointed to them."
-  - "django/db/models/sql/query.py:710:15        revrel              U       # revrel__col=1 & revrel__col"
-  - "django/db/models/sql/query.py:930:20        louter              U       parent_louter = ("
-  - "django/db/models/sql/query.py:1463:28       unreffing           U       is responsible for unreffing the joins used."
-  - "django/db/models/sql/query.py:1572:40       someval             U       is null, then col != someval will result in SQL"
-  - "django/db/models/sql/query.py:2375:44       datastructure       U       that we can use a set datastructure. We do the foo__bar"
-  - "django/db/models/sql/query.py:2638:5        dirn                U       dirn = ORDER_DIR[default"
+  - "django/db/models/sql/query.py:709:15        revrel              U       # revrel__col=1 & revrel__col"
+  - "django/db/models/sql/query.py:929:20        louter              U       parent_louter = ("
+  - "django/db/models/sql/query.py:1462:28       unreffing           U       is responsible for unreffing the joins used."
+  - "django/db/models/sql/query.py:1571:40       someval             U       is null, then col != someval will result in SQL"
+  - "django/db/models/sql/query.py:2374:44       datastructure       U       that we can use a set datastructure. We do the foo__bar"
+  - "django/db/models/sql/query.py:2637:5        dirn                U       dirn = ORDER_DIR[default"
   - "django/db/transaction.py:162:17         reentrancy      U       This allows reentrancy even if the same AtomicWrappe"
   - "django/db/utils.py:121:26       ispkg       U       for _, name, ispkg in pkgutil.iter_modules"
   - "django/db/utils.py:125:21       reprs       U       backend_reprs = map(repr, sorted(builtin"
@@ -1136,7 +1136,7 @@ issues:
   - "tests/admin_inlines/tests.py:1558:26        bothverbosenameprofile      U       '<h2 id=\"bothverbosenameprofile_set-heading\" class="
   - "tests/admin_inlines/tests.py:1559:43        namess                      U       Childs with both verbose namess</h2>\""
   - "tests/admin_inlines/tests.py:1786:28        labelledby                  U       f'aria-labelledby=\"{heading_id}\">',"
-  - "tests/admin_inlines/tests.py:2394:34        courseproxy                 U       admin:admin_inlines_courseproxy_add\","
+  - "tests/admin_inlines/tests.py:2396:34        courseproxy                 U       admin:admin_inlines_courseproxy_add\","
   - "tests/admin_ordering/tests.py:47:28         Aerosmith       U       Band(name=\"Aerosmith\", bio=\"\", rank=3),"
   - "tests/admin_ordering/tests.py:48:28         Radiohead       U       Band(name=\"Radiohead\", bio=\"\", rank=1),"
   - "tests/admin_ordering/tests.py:49:32         Halen           U       Band(name=\"Van Halen\", bio=\"\", rank=2),"
@@ -1470,10 +1470,10 @@ issues:
   - "tests/backends/tests.py:948:22      autoval         U       def test_zero_as_autoval(self):"
   - "tests/basic/tests.py:75:14          autofields          U       def test_autofields_generate_different_values"
   - "tests/basic/tests.py:138:18         datetimefields      U       def test_for_datetimefields_saves_as_much_precision"
-  - "tests/basic/tests.py:409:43         undashedvalue       U       dashed-value\": \"1\", \"undashedvalue\": \"2\"}"
-  - "tests/basic/tests.py:437:14         emptyqs             U       def test_emptyqs(self):"
-  - "tests/basic/tests.py:452:22         customqs            U       def test_emptyqs_customqs(self):"
-  - "tests/basic/tests.py:822:9          asos                U       asos = ArticleSelectOnSave"
+  - "tests/basic/tests.py:501:43         undashedvalue       U       dashed-value\": \"1\", \"undashedvalue\": \"2\"}"
+  - "tests/basic/tests.py:529:14         emptyqs             U       def test_emptyqs(self):"
+  - "tests/basic/tests.py:544:22         customqs            U       def test_emptyqs_customqs(self):"
+  - "tests/basic/tests.py:914:9          asos                U       asos = ArticleSelectOnSave"
   - "tests/bulk_create/tests.py:106:45       Fillory     U       ProxyMultiCountry(name=\"Fillory\", iso_two_letter=\"FL"
   - "tests/bulk_create/tests.py:119:36       Qwghlm      U       ProxyCountry(name=\"Qwghlm\", iso_two_letter=\"QW"
   - "tests/bulk_create/tests.py:120:31       Tortall     U       Country(name=\"Tortall\", iso_two_letter=\"TA"
@@ -1496,7 +1496,7 @@ issues:
   - "tests/constraints/models.py:82:23       sheld       U       name=\"sheld_init_immediate_uniq"
   - "tests/constraints/tests.py:258:36       childmodel      U       assertIn(\"constraints_childmodel_adult\", constraints"
   - "tests/constraints/tests.py:924:23       conditon        U       def test_validate_conditon_custom_error(self):"
-  - "tests/contenttypes_tests/test_models.py:128:37      modelcreatedonthefly    U       assertEqual(ct.model, \"modelcreatedonthefly\")"
+  - "tests/contenttypes_tests/test_models.py:147:37      modelcreatedonthefly    U       assertEqual(ct.model, \"modelcreatedonthefly\")"
   - "tests/contenttypes_tests/test_operations.py:67:56       renamedfoo      U       contenttypes_tests\", model=\"renamedfoo\""
   - "tests/contenttypes_tests/test_views.py:125:14       nonint      U       def test_nonint_content_type(self):"
   - "tests/csrf_tests/tests.py:39:16         lccccccc        U       TEST_SECRET = \"lcccccccX2kcccccccY2jcccccccssIC"
@@ -3241,7 +3241,7 @@ issuesSummary:
   - "text: bothverbosenameprofile, count: 5, files: 1,"
   - "text: boundarystream, count: 2, files: 1,"
   - "text: Boxford, count: 1, files: 1,"
-  - "text: bpython, count: 9, files: 2,"
+  - "text: bpython, count: 10, files: 2,"
   - "text: Brasileiro, count: 1, files: 1,"
   - "text: breakie, count: 3, files: 1,"
   - "text: brezhoneg, count: 1, files: 1,"
