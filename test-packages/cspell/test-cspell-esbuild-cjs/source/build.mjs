@@ -12,6 +12,7 @@ async function buildAll() {
         absWorkingDir: __dirname,
         entryPoints: ['src/index.ts'],
         bundle: true,
+        packages: 'bundle',
         platform: 'node',
         outfile: '../bin/dist/index.cjs',
     });
