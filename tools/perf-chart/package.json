@@ -12,7 +12,7 @@
   },
   "scripts": {
     "build": "pnpm run build:tsc && pnpm run build:esbuild",
-    "build:esbuild": "esbuild --bundle --platform=node --target=node18 --outfile=lib/app.cjs src/app.ts",
+    "build:esbuild": "esbuild --bundle --packages=bundle --platform=node --target=node18 --outfile=lib/app.cjs src/app.ts",
     "build:tsc": "tsc -p .",
     "clean": "shx rm -rf dist coverage \"*.tsbuildInfo\"",
     "clean-build": "pnpm run clean && pnpm run build",
@@ -31,6 +31,6 @@
     "bin.js"
   ],
   "devDependencies": {
-    "esbuild": "^0.21.5"
+    "esbuild": "^0.22.0"
   }
 }
