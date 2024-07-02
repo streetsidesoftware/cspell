@@ -61,7 +61,7 @@ Some videos related to CSpell and the [Code Spell Checker](https://marketplace.v
 
 Join us on:
 
-[<img src="./resources/zulip-icon-circle.svg" width="32">](https://cspell.zulipchat.com/)
+[<img src="./assets/images/zulip-icon-circle.svg" width="32">](https://cspell.zulipchat.com/)
 
 [cspell.zulipchat.com](https://cspell.zulipchat.com/)
 
