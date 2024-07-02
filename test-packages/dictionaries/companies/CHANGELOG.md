@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 8.10.0 (2024-07-02)
+
+* chore: Update Integration Test Performance Data (#5859) ([898e806](https://github.com/streetsidesoftware/cspell-dicts/commit/898e806)), closes [#5859](https://github.com/streetsidesoftware/cspell-dicts/issues/5859)
+
 ## <small>8.9.1 (2024-06-20)</small>
 
 * docs: format tables in generated docs (#5776) ([02e0359](https://github.com/streetsidesoftware/cspell-dicts/commit/02e0359)), closes [#5776](https://github.com/streetsidesoftware/cspell-dicts/issues/5776)
