@@ -16,4 +16,16 @@ export interface CompileOptions {
      * @returns `true` to keep the word, `false` to exclude it.
      */
     filter?: (word: string) => boolean;
+
+    /**
+     * Injects `cspell-dictionary` directives into the dictionary header.
+     *
+     * Example:
+     *
+     * ```ini
+     * # cspell-dictionary: no-generate-alternatives
+     * ```
+     *
+     */
+    dictionaryDirectives?: string[] | undefined;
 }

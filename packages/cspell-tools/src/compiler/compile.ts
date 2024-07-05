@@ -53,6 +53,7 @@ export async function compile(request: CompileRequest, options?: CompileOptions)
     };
     const conditional = options?.conditionalBuild || false;
     const checksumFile = resolveChecksumFile(request.checksumFile || conditional, rootDir);
+    const dictionaryDirectives = request.dictionaryDirectives;
 
     const dependencies = new Set<string>();
 
@@ -60,7 +61,13 @@ export async function compile(request: CompileRequest, options?: CompileOptions)
         const keep = options?.filter?.(target) ?? true;
         if (!keep) continue;
         const adjustedTarget: Target = { ...targetOptions, ...target };
-        const deps = await compileTarget(adjustedTarget, request, { rootDir, cwd, conditional, checksumFile });
+        const deps = await compileTarget(adjustedTarget, request, {
+            rootDir,
+            cwd,
+            conditional,
+            checksumFile,
+            dictionaryDirectives,
+        });
         deps.forEach((dep) => dependencies.add(dep));
     }
 
@@ -87,6 +94,7 @@ interface CompileTargetOptions {
     cwd: string | undefined;
     conditional: boolean;
     checksumFile: string | undefined;
+    dictionaryDirectives: string[] | undefined;
 }
 
 export async function compileTarget(
@@ -98,6 +106,7 @@ export async function compileTarget(
     const { rootDir, cwd, checksumFile, conditional } = compileOptions;
     const { format, sources, trieBase, sort = true, generateNonStrict = false, excludeWordsFrom } = target;
     const targetDirectory = path.resolve(rootDir, target.targetDirectory ?? cwd ?? process.cwd());
+    const dictionaryDirectives = compileOptions.dictionaryDirectives;
 
     const excludeFilter = await createExcludeFilter(excludeWordsFrom);
 
@@ -114,7 +123,12 @@ export async function compileTarget(
         opAwaitAsync(),
     );
     const filesToProcess: FileToProcess[] = await toArray(filesToProcessAsync);
-    const normalizer = normalizeTargetWords({ sort: useTrie || sort, generateNonStrict, filter: excludeFilter });
+    const normalizer = normalizeTargetWords({
+        sort: useTrie || sort,
+        generateNonStrict,
+        filter: excludeFilter,
+        dictionaryDirectives,
+    });
     const checksumRoot = (checksumFile && path.dirname(checksumFile)) || rootDir;
 
     const deps = [...calculateDependencies(filename, filesToProcess, excludeWordsFrom, checksumRoot)];
@@ -135,10 +149,11 @@ export async function compileTarget(
                   trie3: format === 'trie3',
                   trie4: format === 'trie4',
                   generateNonStrict: generateNonStrictTrie,
+                  dictionaryDirectives: undefined,
               });
           }
         : async (words: Iterable<string>, dst: string) => {
-              return compileWordList(pipe(words, normalizer), dst, { sort, generateNonStrict });
+              return compileWordList(pipe(words, normalizer), dst, { sort, generateNonStrict, dictionaryDirectives });
           };
 
     await processFiles(action, filesToProcess, filename);

@@ -15,8 +15,7 @@ const mkdirp = async (p: string) => {
 
 // Indicate that a word list has already been processed.
 const wordListHeader = `
-# cspell-tools: keep-case no-split
-`;
+# cspell-tools: keep-case no-split`;
 const wordListHeaderLines = wordListHeader.split('\n').map((a) => a.trim());
 
 export async function compileWordList(
@@ -26,7 +25,10 @@ export async function compileWordList(
 ): Promise<void> {
     const finalLines = normalize(lines, options);
 
-    const finalSeq = pipe(wordListHeaderLines, opAppend(finalLines));
+    const directives = options.dictionaryDirectives ?? [];
+    const directivesLines = directives.map((a) => `# cspell-dictionary: ${a}`);
+
+    const finalSeq = pipe([...wordListHeaderLines, ...directivesLines, ''], opAppend(finalLines));
 
     return createWordListTarget(destFilename)(finalSeq);
 }

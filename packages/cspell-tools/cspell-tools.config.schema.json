@@ -144,6 +144,13 @@
           "description": "gzip the file?",
           "type": "boolean"
         },
+        "dictionaryDirectives": {
+          "description": "Injects `cspell-dictionary` directives into the dictionary header.\n\nExample:\n\n```ini # cspell-dictionary: no-generate-alternatives ```\n\nKnown Directives: ```yaml\n- split # Tell the dictionary loader to split words\n- no-split # Tell the dictionary loader to not split words (default)\n- generate-alternatives # Tell the dictionary loader to generate alternate spellings (default)\n- no-generate-alternatives # Tell the dictionary loader to not generate alternate spellings ```",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
         "excludeWordsFrom": {
           "description": "Words from the sources that are found in `excludeWordsFrom` files will not be added to the dictionary.",
           "items": {
@@ -156,7 +163,7 @@
           "description": "Format of the dictionary."
         },
         "generateNonStrict": {
-          "default": true,
+          "default": false,
           "description": "Generate lower case / accent free versions of words.",
           "type": "boolean"
         },
@@ -165,7 +172,7 @@
           "type": "string"
         },
         "sort": {
-          "default": ": true",
+          "default": true,
           "description": "Sort the words in the resulting dictionary. Does not apply to `trie` based formats.",
           "type": "boolean"
         },
@@ -221,8 +228,15 @@
         "boolean"
       ]
     },
+    "dictionaryDirectives": {
+      "description": "Injects `cspell-dictionary` directives into the dictionary header.\n\nExample:\n\n```ini # cspell-dictionary: no-generate-alternatives ```\n\nKnown Directives: ```yaml\n- split # Tell the dictionary loader to split words\n- no-split # Tell the dictionary loader to not split words (default)\n- generate-alternatives # Tell the dictionary loader to generate alternate spellings (default)\n- no-generate-alternatives # Tell the dictionary loader to not generate alternate spellings ```",
+      "items": {
+        "type": "string"
+      },
+      "type": "array"
+    },
     "generateNonStrict": {
-      "default": true,
+      "default": false,
       "description": "Generate lower case / accent free versions of words.",
       "type": "boolean"
     },
@@ -240,7 +254,7 @@
       "type": "string"
     },
     "sort": {
-      "default": ": true",
+      "default": true,
       "description": "Sort the words in the resulting dictionary. Does not apply to `trie` based formats.",
       "type": "boolean"
     },

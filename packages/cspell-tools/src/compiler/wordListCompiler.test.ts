@@ -70,7 +70,7 @@ describe('Validate the wordListCompiler', () => {
         const output = await fsp.readFile(destName, 'utf8');
         expect(output).toBe(
             wordListHeader +
-                '\n' +
+                '\n\n' +
                 citiesSorted +
                 citiesSorted
                     .toLowerCase()
@@ -115,7 +115,7 @@ describe('Validate the wordListCompiler', () => {
         const destName = path.join(temp, 'example0.txt');
         await compileWordList(source, destName, compileOpt(false));
         const output = await fsp.readFile(destName, 'utf8');
-        expect(output).toBe(__testing__.wordListHeader + '\n' + 'hello\ntry\nwork\n');
+        expect(output).toBe(__testing__.wordListHeader + '\n\n' + 'hello\ntry\nwork\n');
         expect(consoleOutput()).toMatchSnapshot();
     });
 
@@ -131,6 +131,33 @@ describe('Validate the wordListCompiler', () => {
             `\
 
             # cspell-tools: keep-case no-split
+
+            hello
+            rework
+            tried
+            try
+            work
+            worked
+        `
+                .split('\n')
+                .map((line) => line.trim()),
+        );
+        expect(consoleOutput()).toMatchSnapshot();
+    });
+
+    test('Specify directives', async () => {
+        const source = await streamSourceWordsFromFile(path.join(samples, 'hunspell/example.dic'), {
+            ...readOptions,
+            maxDepth: 1,
+        });
+        const destName = path.join(temp, 'example2.txt');
+        await compileWordList(source, destName, compileOpt(false, false, ['no-generate-alternatives']));
+        const output = await fsp.readFile(destName, 'utf8');
+        expect(output.split('\n')).toEqual(
+            `\
+
+            # cspell-tools: keep-case no-split
+            # cspell-dictionary: no-generate-alternatives
 
             hello
             rework
@@ -202,8 +229,8 @@ function legacyNormalizeWords(lines: Iterable<string>): Iterable<string> {
     );
 }
 
-function compileOpt(sort: boolean, generateNonStrict = true): CompileOptions {
-    return { sort, generateNonStrict };
+function compileOpt(sort: boolean, generateNonStrict = true, dictionaryDirectives?: string[]): CompileOptions {
+    return { sort, generateNonStrict, dictionaryDirectives };
 }
 
 // const cities = `\
