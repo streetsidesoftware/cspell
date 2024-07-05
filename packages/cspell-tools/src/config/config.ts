@@ -45,14 +45,14 @@ export interface Experimental {
 export interface CompileTargetOptions {
     /**
      * Generate lower case / accent free versions of words.
-     * @default true
+     * @default false
      */
     generateNonStrict?: boolean | undefined;
 
     /**
      * Sort the words in the resulting dictionary.
      * Does not apply to `trie` based formats.
-     * @default: true
+     * @default true
      */
     sort?: boolean | undefined;
 
@@ -66,6 +66,25 @@ export interface CompileTargetOptions {
      * dictionary.
      */
     allowedSplitWords?: FilePath | FilePath[] | undefined;
+
+    /**
+     * Injects `cspell-dictionary` directives into the dictionary header.
+     *
+     * Example:
+     *
+     * ```ini
+     * # cspell-dictionary: no-generate-alternatives
+     * ```
+     *
+     * Known Directives:
+     * ```yaml
+     * - split # Tell the dictionary loader to split words
+     * - no-split # Tell the dictionary loader to not split words (default)
+     * - generate-alternatives # Tell the dictionary loader to generate alternate spellings (default)
+     * - no-generate-alternatives # Tell the dictionary loader to not generate alternate spellings
+     * ```
+     */
+    dictionaryDirectives?: string[] | undefined;
 }
 
 export interface Target extends CompileTargetOptions {
