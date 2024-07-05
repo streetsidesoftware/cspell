@@ -33,6 +33,8 @@ const pathNames = new Map([
     [pathPosix, 'Posix'],
 ]);
 
+const oc = expect.objectContaining;
+
 function r(...parts: string[]) {
     return path.resolve(...parts);
 }
@@ -211,7 +213,7 @@ describe('Tests .gitignore file contents', () => {
         ${root + 'dist/code.ts'}                       | ${{ matched: true, pattern: p('**/dist/**'), isNeg: false }}      | ${'Ensure that `dest` .ts files are not allowed'}
         ${root + 'src/code.js'}                        | ${{ matched: true, pattern: p('**/*.js'), isNeg: false }}         | ${'Ensure that no .js files are allowed'}
         ${root + 'dist/settings.js'}                   | ${{ matched: false, pattern: p('!**/settings.js'), isNeg: true }} | ${'Ensure that settings.js is kept'}
-    `('match && matchEx "$comment" File: "$filename" $expected', ({ filename, expected }: TestCase) => {
+    `('match && matchEx $comment File: $filename $expected', ({ filename, expected }: TestCase) => {
         expected = typeof expected === 'boolean' ? { matched: expected } : expected;
         expect(matcher.match(filename)).toBe(expected.matched);
         expect(matcher.matchEx(filename)).toEqual(expect.objectContaining(expected));
@@ -262,7 +264,7 @@ describe('Tests .gitignore like file contents', () => {
         ${root + 'dist/code.ts'}                                | ${{ matched: true, pattern: p('**/dist/**'), isNeg: false }}      | ${'Ensure that `dest` .ts files are not allowed'}
         ${root + 'src/code.js'}                                 | ${{ matched: true, pattern: p('**/*.js'), isNeg: false }}         | ${'Ensure that no .js files are allowed'}
         ${root + 'dist/settings.js'}                            | ${{ matched: false, pattern: p('!**/settings.js'), isNeg: true }} | ${'Ensure that settings.js is kept'}
-    `('match && matchEx "$comment" File: "$filename" $expected', ({ filename, expected }: TestCase) => {
+    `('match && matchEx $comment File: $filename $expected', ({ filename, expected }: TestCase) => {
         expected = typeof expected === 'boolean' ? { matched: expected } : expected;
         expect(matcher.match(filename)).toBe(expected.matched);
         expect(matcher.matchEx(filename)).toEqual(expect.objectContaining(expected));
@@ -501,19 +503,19 @@ describe('normalizing globs', () => {
 
     test.each`
         glob                          | globRoot          | root              | expectedGlobs                                                  | file                                                      | expectedToMatch
-        ${'src/*.json'}               | ${'.'}            | ${'./project/p2'} | ${[]}                                                          | ${''}                                                     | ${false}
+        ${'src/*.json'}               | ${'.'}            | ${'./p2'}         | ${['../src/*.json', '../src/*.json/**']}                       | ${''}                                                     | ${false}
         ${'**'}                       | ${'.'}            | ${'.'}            | ${['**']}                                                      | ${'./package.json'}                                       | ${true}
         ${'*.json'}                   | ${'.'}            | ${'.'}            | ${['**/*.json', '**/*.json/**']}                               | ${'./package.json'}                                       | ${true}
         ${'*.json'}                   | ${'.'}            | ${'.'}            | ${['**/*.json', '**/*.json/**']}                               | ${'./.git/package.json'}                                  | ${true}
         ${'*.json'}                   | ${'./project/p1'} | ${'.'}            | ${['project/p1/**/*.json', 'project/p1/**/*.json/**']}         | ${'./project/p1/package.json'}                            | ${true}
         ${'*.json'}                   | ${'./project/p1'} | ${'.'}            | ${['project/p1/**/*.json', 'project/p1/**/*.json/**']}         | ${'./project/p1/src/package.json'}                        | ${true}
         ${'*.json'}                   | ${'.'}            | ${'./project/p2'} | ${['**/*.json', '**/*.json/**']}                               | ${'./project/p2/package.json'}                            | ${true}
-        ${'src/*.json'}               | ${'.'}            | ${'./project/p2'} | ${[]}                                                          | ${''}                                                     | ${false}
+        ${'src/*.json'}               | ${'.'}            | ${'./project/p2'} | ${['../../src/*.json', '../../src/*.json/**']}                 | ${''}                                                     | ${false}
         ${'**/src/*.json'}            | ${'.'}            | ${'./project/p2'} | ${['**/src/*.json', '**/src/*.json/**']}                       | ${'./project/p2/x/src/config.json'}                       | ${true}
         ${'**/src/*.json'}            | ${'./project/p1'} | ${'.'}            | ${['**/src/*.json', '**/src/*.json/**']}                       | ${'./project/p1/src/config.json'}                         | ${true}
         ${'/**/src/*.json'}           | ${'./project/p1'} | ${'.'}            | ${['project/p1/**/src/*.json', 'project/p1/**/src/*.json/**']} | ${'./project/p1/src/config.json'}                         | ${true}
         ${'/docs/types/cspell-types'} | ${gitRoot}        | ${gitRoot}        | ${['docs/types/cspell-types', 'docs/types/cspell-types/**']}   | ${r(gitRoot, './docs/types/cspell-types/assets/main.js')} | ${true}
-    `('mapGlobToRoot exclude "$glob"@"$globRoot" -> "$root" = "$expectedGlobs"', ({ glob, globRoot, root, expectedGlobs, file, expectedToMatch }: TestMapGlobToRoot) => {
+    `('mapGlobToRoot exclude $glob@$globRoot -> $root = $expectedGlobs', ({ glob, globRoot, root, expectedGlobs, file, expectedToMatch }: TestMapGlobToRoot) => {
         globRoot = path.resolve(globRoot);
         root = path.resolve(root);
         file = path.resolve(file);
@@ -534,14 +536,14 @@ describe('normalizing globs', () => {
         ${'*.json'}         | ${'.'}            | ${'.'}            | ${['*.json']}                   | ${'./.git/package.json'}            | ${false}
         ${'*.json'}         | ${'./project/p1'} | ${'.'}            | ${['project/p1/*.json']}        | ${'./project/p1/package.json'}      | ${true}
         ${'*.json'}         | ${'./project/p1'} | ${'.'}            | ${['project/p1/*.json']}        | ${'./project/p1/src/package.json'}  | ${false}
-        ${'*.json'}         | ${'.'}            | ${'./project/p2'} | ${[]}                           | ${'./project/p2/package.json'}      | ${false}
+        ${'*.json'}         | ${'.'}            | ${'./project/p2'} | ${['../../*.json']}             | ${'./project/p2/package.json'}      | ${false}
         ${'/**/*.json'}     | ${'.'}            | ${'./project/p2'} | ${['**/*.json']}                | ${'./project/p2/package.json'}      | ${true}
         ${'**/*.json'}      | ${'.'}            | ${'./project/p2'} | ${['**/*.json']}                | ${'./project/p2/package.json'}      | ${true}
-        ${'src/*.json'}     | ${'.'}            | ${'./project/p2'} | ${[]}                           | ${''}                               | ${false}
+        ${'src/*.json'}     | ${'.'}            | ${'./project/p2'} | ${['../../src/*.json']}         | ${''}                               | ${false}
         ${'**/src/*.json'}  | ${'.'}            | ${'./project/p2'} | ${['**/src/*.json']}            | ${'./project/p2/x/src/config.json'} | ${true}
         ${'**/src/*.json'}  | ${'./project/p1'} | ${'.'}            | ${['**/src/*.json']}            | ${'./project/p1/src/config.json'}   | ${true}
         ${'/**/src/*.json'} | ${'./project/p1'} | ${'.'}            | ${['project/p1/**/src/*.json']} | ${'./project/p1/src/config.json'}   | ${true}
-    `('mapGlobToRoot include "$glob"@"$globRoot" -> "$root" = "$expectedGlobs"', ({ glob, globRoot, root, expectedGlobs, file, expectedToMatch }: TestMapGlobToRoot) => {
+    `('mapGlobToRoot include $glob@$globRoot -> $root = $expectedGlobs', ({ glob, globRoot, root, expectedGlobs, file, expectedToMatch }: TestMapGlobToRoot) => {
         globRoot = path.resolve(globRoot);
         root = path.resolve(root);
         file = path.resolve(file);
@@ -554,6 +556,36 @@ describe('normalizing globs', () => {
         expect(r).toEqual(expectedGlobs);
 
         expect(globMatcher.match(file)).toBe(expectedToMatch);
+    });
+});
+
+describe('Build GlobMatcher', () => {
+    test.each`
+        glob                       | root   | isExclude | expected
+        ${'*.json'}                | ${'.'} | ${false}  | ${['*.json']}
+        ${'src/**/*.ts'}           | ${'.'} | ${false}  | ${['src/**/*.ts']}
+        ${'../src/**/*.ts'}        | ${'.'} | ${false}  | ${['../src/**/*.ts']}
+        ${'./src/**/*.ts'}         | ${'.'} | ${false}  | ${['./src/**/*.ts']}
+        ${'./src/../test/**/*.ts'} | ${'.'} | ${false}  | ${['./src/../test/**/*.ts']}
+        ${'*.json'}                | ${'.'} | ${true}   | ${['**/*.json', '**/*.json/**']}
+    `('patternsNormalizedToRoot $glob, $root, $isExclude', ({ glob, root, isExclude, expected }) => {
+        root = path.normalize(path.resolve(root || '') + '/');
+        const gm = new GlobMatcher([glob], { root, mode: isExclude ? 'exclude' : 'include' });
+        expect(gm.patternsNormalizedToRoot).toEqual((expected as string[]).map((glob) => oc({ glob, root })));
+    });
+
+    test.each`
+        glob                       | root   | isExclude | expected
+        ${'*.json'}                | ${'.'} | ${false}  | ${['*.json']}
+        ${'src/**/*.ts'}           | ${'.'} | ${false}  | ${['src/**/*.ts']}
+        ${'../src/**/*.ts'}        | ${'.'} | ${false}  | ${['../src/**/*.ts']}
+        ${'./src/**/*.ts'}         | ${'.'} | ${false}  | ${['./src/**/*.ts']}
+        ${'./src/../test/**/*.ts'} | ${'.'} | ${false}  | ${['./src/../test/**/*.ts']}
+        ${'*.json'}                | ${'.'} | ${true}   | ${['**/*.json', '**/*.json/**']}
+    `('patterns $glob, $root, $isExclude', ({ glob, root, isExclude, expected }) => {
+        root = path.normalize(path.resolve(root || '') + '/');
+        const gm = new GlobMatcher([glob], { root, mode: isExclude ? 'exclude' : 'include' });
+        expect(gm.patterns).toEqual((expected as string[]).map((glob) => oc({ glob, root })));
     });
 });
 

@@ -191,6 +191,38 @@ describe('Validate internal functions', () => {
         expect(r).toEqual({ globs: ['*/test files/', 'node_modules', '**/*.dat'], source: 'arguments' });
     });
 
+    test.each`
+        glob                           | root              | exclude  | expectedGlobs
+        ${'src/*.json'}                | ${'./project/p2'} | ${true}  | ${['src/*.json', 'src/*.json/**']}
+        ${'**'}                        | ${'.'}            | ${true}  | ${['**']}
+        ${'*.json'}                    | ${'.'}            | ${true}  | ${['**/*.json', '**/*.json/**']}
+        ${'*.json'}                    | ${'./project/p2'} | ${true}  | ${['**/*.json', '**/*.json/**']}
+        ${'src/*.json'}                | ${'./project/p2'} | ${true}  | ${['src/*.json', 'src/*.json/**']}
+        ${'**/src/*.json'}             | ${'./project/p2'} | ${true}  | ${['**/src/*.json', '**/src/*.json/**']}
+        ${'**/src/*.json'}             | ${'.'}            | ${true}  | ${['**/src/*.json', '**/src/*.json/**']}
+        ${'/**/src/*.json'}            | ${'.'}            | ${true}  | ${['**/src/*.json', '**/src/*.json/**']}
+        ${'src/*.json'}                | ${'./project/p2'} | ${false} | ${['src/*.json']}
+        ${'**'}                        | ${'.'}            | ${false} | ${['**']}
+        ${'*.json'}                    | ${'.'}            | ${false} | ${['*.json']}
+        ${'*.json'}                    | ${'./project/p2'} | ${false} | ${['*.json']}
+        ${'src/*.json'}                | ${'./project/p2'} | ${false} | ${['src/*.json']}
+        ${'**/src/*.json'}             | ${'./project/p2'} | ${false} | ${['**/src/*.json']}
+        ${'**/src/*.json'}             | ${'.'}            | ${false} | ${['**/src/*.json']}
+        ${'/**/src/*.json'}            | ${'.'}            | ${false} | ${['**/src/*.json']}
+        ${'!../src/*.ts'}              | ${'.'}            | ${false} | ${['!../src/*.ts']}
+        ${'../src/*.ts'}               | ${'.'}            | ${false} | ${['../src/*.ts']}
+        ${'../src/../test/**/*.ts'}    | ${'.'}            | ${false} | ${['../test/**/*.ts']}
+        ${'../src/../../test/**/*.ts'} | ${'.'}            | ${false} | ${['../../test/**/*.ts']}
+        ${path.resolve('src/*.json')}  | ${'.'}            | ${false} | ${['src/*.json']}
+    `(
+        'normalizeGlobsToRoot exclude: $exclude; "$glob" -> "$root" = "$expectedGlobs"',
+        ({ glob, root, exclude, expectedGlobs }) => {
+            root = path.resolve(root);
+            const r = normalizeGlobsToRoot([glob], root, exclude);
+            expect(r).toEqual(expectedGlobs);
+        },
+    );
+
     interface TestMapGlobToRoot {
         glob: string;
         globRoot: string;
@@ -202,19 +234,17 @@ describe('Validate internal functions', () => {
 
     test.each`
         glob                | globRoot          | root              | expectedGlobs                                                  | file                                | expectedToMatch
-        ${'src/*.json'}     | ${'.'}            | ${'./project/p2'} | ${[]}                                                          | ${''}                               | ${false}
         ${'**'}             | ${'.'}            | ${'.'}            | ${['**']}                                                      | ${'./package.json'}                 | ${true}
         ${'*.json'}         | ${'.'}            | ${'.'}            | ${['**/*.json', '**/*.json/**']}                               | ${'./package.json'}                 | ${true}
         ${'*.json'}         | ${'.'}            | ${'.'}            | ${['**/*.json', '**/*.json/**']}                               | ${'./.git/package.json'}            | ${true}
         ${'*.json'}         | ${'./project/p1'} | ${'.'}            | ${['project/p1/**/*.json', 'project/p1/**/*.json/**']}         | ${'./project/p1/package.json'}      | ${true}
         ${'*.json'}         | ${'./project/p1'} | ${'.'}            | ${['project/p1/**/*.json', 'project/p1/**/*.json/**']}         | ${'./project/p1/src/package.json'}  | ${true}
         ${'*.json'}         | ${'.'}            | ${'./project/p2'} | ${['**/*.json', '**/*.json/**']}                               | ${'./project/p2/package.json'}      | ${true}
-        ${'src/*.json'}     | ${'.'}            | ${'./project/p2'} | ${[]}                                                          | ${''}                               | ${false}
         ${'**/src/*.json'}  | ${'.'}            | ${'./project/p2'} | ${['**/src/*.json', '**/src/*.json/**']}                       | ${'./project/p2/x/src/config.json'} | ${true}
         ${'**/src/*.json'}  | ${'./project/p1'} | ${'.'}            | ${['**/src/*.json', '**/src/*.json/**']}                       | ${'./project/p1/src/config.json'}   | ${true}
         ${'/**/src/*.json'} | ${'./project/p1'} | ${'.'}            | ${['project/p1/**/src/*.json', 'project/p1/**/src/*.json/**']} | ${'./project/p1/src/config.json'}   | ${true}
     `(
-        'mapGlobToRoot exclude "$glob"@"$globRoot" -> "$root" = "$expectedGlobs"',
+        'mapGlobToRoot exclude "$glob"@"$globRoot" -> "$root" = "$expectedGlobs" $file',
         ({ glob, globRoot, root, expectedGlobs, file, expectedToMatch }: TestMapGlobToRoot) => {
             globRoot = path.resolve(globRoot);
             root = path.resolve(root);
@@ -235,15 +265,39 @@ describe('Validate internal functions', () => {
     );
 
     test.each`
+        glob            | globRoot  | root              | expectedGlobs                                  | file                  | expectedToMatch
+        ${'src/*.js'}   | ${'./p2'} | ${'./src'}        | ${[]}                                          | ${''}                 | ${false}
+        ${'src/*.js'}   | ${'./p2'} | ${'./p2'}         | ${['src/*.js', 'src/*.js/**']}                 | ${'./p2/src/code.js'} | ${true}
+        ${'src/*.js'}   | ${'.'}    | ${'./src'}        | ${['*.js', '*.js/**']}                         | ${'./src/code.js'}    | ${true}
+        ${'src/*.json'} | ${'.'}    | ${'./project/p2'} | ${['../../src/*.json', '../../src/*.json/**']} | ${'./src/data.json'}  | ${true}
+    `(
+        'mapGlobToRoot exclude "$glob"@"$globRoot" -> "$root" = "$expectedGlobs" $file',
+        ({ glob, globRoot, root, expectedGlobs, file, expectedToMatch }: TestMapGlobToRoot) => {
+            globRoot = path.resolve(globRoot);
+            root = path.resolve(root);
+            file = path.resolve(file);
+            const globMatcher = new GlobMatcher(glob, {
+                root: globRoot,
+                mode: 'exclude',
+            });
+            const patterns = globMatcher.patterns.map((g) => g as Glob);
+            const r = normalizeGlobsToRoot(patterns, root, true);
+            expect(r).toEqual(expectedGlobs);
+
+            expect(globMatcher.match(file)).toBe(expectedToMatch);
+        },
+    );
+
+    test.each`
         glob                | globRoot          | root              | expectedGlobs                   | file                                | expectedToMatch
         ${'*.json'}         | ${'.'}            | ${'.'}            | ${['*.json']}                   | ${'./package.json'}                 | ${true}
         ${'*.json'}         | ${'.'}            | ${'.'}            | ${['*.json']}                   | ${'./.git/package.json'}            | ${false}
         ${'*.json'}         | ${'./project/p1'} | ${'.'}            | ${['project/p1/*.json']}        | ${'./project/p1/package.json'}      | ${true}
         ${'*.json'}         | ${'./project/p1'} | ${'.'}            | ${['project/p1/*.json']}        | ${'./project/p1/src/package.json'}  | ${false}
-        ${'*.json'}         | ${'.'}            | ${'./project/p2'} | ${[]}                           | ${'./project/p2/package.json'}      | ${false}
+        ${'*.json'}         | ${'.'}            | ${'./project/p2'} | ${['../../*.json']}             | ${'./package.json'}                 | ${true}
         ${'/**/*.json'}     | ${'.'}            | ${'./project/p2'} | ${['**/*.json']}                | ${'./project/p2/package.json'}      | ${true}
         ${'**/*.json'}      | ${'.'}            | ${'./project/p2'} | ${['**/*.json']}                | ${'./project/p2/package.json'}      | ${true}
-        ${'src/*.json'}     | ${'.'}            | ${'./project/p2'} | ${[]}                           | ${''}                               | ${false}
+        ${'src/*.json'}     | ${'.'}            | ${'./project/p2'} | ${['../../src/*.json']}         | ${'./src/data.json'}                | ${true}
         ${'**/src/*.json'}  | ${'.'}            | ${'./project/p2'} | ${['**/src/*.json']}            | ${'./project/p2/x/src/config.json'} | ${true}
         ${'**/src/*.json'}  | ${'./project/p1'} | ${'.'}            | ${['**/src/*.json']}            | ${'./project/p1/src/config.json'}   | ${true}
         ${'/**/src/*.json'} | ${'./project/p1'} | ${'.'}            | ${['project/p1/**/src/*.json']} | ${'./project/p1/src/config.json'}   | ${true}

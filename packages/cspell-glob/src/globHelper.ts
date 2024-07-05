@@ -327,10 +327,13 @@ export function normalizeGlobToRoot<Glob extends GlobPatternWithRoot>(
     // The root is under the glob root
     // The more difficult case, the glob is higher than the root
     // A best effort is made, but does not do advanced matching.
-    const relGlob = (relFromGlobToRoot + '/').replaceAll('//', '/');
-    const rebasedGlob = rebaseGlob(g, relGlob);
+    const rebasedGlob = rebaseGlob(g, nRel(relFromRootToGlob), nRel(relFromGlobToRoot));
 
     return rebasedGlob ? { ...glob, glob: prefix + rebasedGlob, root } : glob;
+}
+
+function nRel(rel: string): string {
+    return rel.endsWith('/') ? rel : rel + '/';
 }
 
 export function isRelativeValueNested(rel: string): boolean {
@@ -338,24 +341,41 @@ export function isRelativeValueNested(rel: string): boolean {
 }
 
 /**
- * Rebase a glob string to a new prefix
+ * Rebase a glob string to a new root.
  * @param glob - glob string
- * @param rebaseTo - glob prefix
+ * @param fromRootToGlob - relative path from root to globRoot
+ * @param fromGlobToRoot - relative path from globRoot to root
  */
-export function rebaseGlob(glob: string, rebaseTo: string): string | undefined {
-    if (!rebaseTo || rebaseTo === '/') return glob;
-    if (glob.startsWith('**')) return glob;
-    rebaseTo = rebaseTo.endsWith('/') ? rebaseTo : rebaseTo + '/';
+export function rebaseGlob(glob: string, fromRootToGlob: string, fromGlobToRoot: string): string {
+    if (!fromGlobToRoot || fromGlobToRoot === '/') return glob;
+    if (fromRootToGlob.startsWith('../') && !fromGlobToRoot.startsWith('../') && glob.startsWith('**')) return glob;
+    fromRootToGlob = nRel(fromRootToGlob);
+    fromGlobToRoot = nRel(fromGlobToRoot);
 
-    if (glob.startsWith(rebaseTo)) {
-        return glob.slice(rebaseTo.length);
+    const relToParts = fromRootToGlob.split('/');
+    const relFromParts = fromGlobToRoot.split('/');
+
+    // console.warn('rebaseGlob 1: %o', { glob, fromRootToGlob, fromGlobToRoot, relToParts, relFromParts });
+
+    if (glob.startsWith(fromGlobToRoot) && fromRootToGlob === '../'.repeat(relToParts.length - 1)) {
+        return glob.slice(fromGlobToRoot.length);
     }
 
-    const relParts = rebaseTo.split('/');
-    const globParts = glob.split('/');
+    const lastRelIdx = relToParts.findIndex((s) => s !== '..');
+    const lastRel = lastRelIdx < 0 ? relToParts.length : lastRelIdx;
+    const globParts = [...relToParts.slice(lastRel).filter((a) => a), ...glob.split('/')];
+    relToParts.length = lastRel;
 
-    for (let i = 0; i < relParts.length && i < globParts.length; ++i) {
-        const relSeg = relParts[i];
+    // console.warn('rebaseGlob 2: %o', { glob, fromRootToGlob, fromGlobToRoot, globParts, relToParts, relFromParts });
+
+    if (fromRootToGlob.startsWith('../') && relFromParts.length !== relToParts.length + 1) {
+        return fromRootToGlob + (glob.startsWith('/') ? glob.slice(1) : glob);
+    }
+
+    // console.warn('rebaseGlob 3: %o', { glob, fromRootToGlob, fromGlobToRoot, globParts, relToParts, relFromParts });
+
+    for (let i = 0; i < relFromParts.length && i < globParts.length; ++i) {
+        const relSeg = relFromParts[i];
         const globSeg = globParts[i];
         // the empty segment due to the end relGlob / allows for us to test against an empty segment.
         if (!relSeg || globSeg === '**') {
@@ -365,7 +385,7 @@ export function rebaseGlob(glob: string, rebaseTo: string): string | undefined {
             break;
         }
     }
-    return undefined;
+    return fromRootToGlob + (glob.startsWith('/') ? glob.slice(1) : glob);
 }
 
 /**
@@ -541,9 +561,8 @@ function fixPatternRelativeToRoot(glob: GlobPatternWithRoot, root: URL, builder:
 
 function filePathOrGlobToGlob(filePathOrGlob: string, root: URL, builder: FileUrlBuilder): GlobPatternWithRoot {
     const isGlobalPattern = isGlobalGlob(filePathOrGlob);
-    const { path, glob } = builder.isAbsolute(filePathOrGlob)
-        ? splitGlob(filePathOrGlob)
-        : splitGlobRel(filePathOrGlob);
+    const isAbsolute = builder.isAbsolute(filePathOrGlob);
+    const { path, glob } = isAbsolute ? splitGlob(filePathOrGlob) : splitGlobRel(filePathOrGlob);
     const url = builder.toFileDirURL(path || './', root);
     return { root: builder.urlToFilePathOrHref(url), glob, isGlobalPattern };
 }
