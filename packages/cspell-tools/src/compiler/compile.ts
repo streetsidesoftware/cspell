@@ -43,7 +43,7 @@ interface CompileOptions {
 export async function compile(request: CompileRequest, options?: CompileOptions): Promise<void> {
     const { targets } = request;
 
-    // console.log('Request: %o', request);
+    // console.warn('Request: %o', request);
 
     const rootDir = path.resolve(request.rootDir || '.');
     const cwd = options?.cwd;
@@ -61,6 +61,7 @@ export async function compile(request: CompileRequest, options?: CompileOptions)
         const keep = options?.filter?.(target) ?? true;
         if (!keep) continue;
         const adjustedTarget: Target = { ...targetOptions, ...target };
+        // console.warn('adjustedTarget: %o', adjustedTarget);
         const deps = await compileTarget(adjustedTarget, request, {
             rootDir,
             cwd,
@@ -106,7 +107,7 @@ export async function compileTarget(
     const { rootDir, cwd, checksumFile, conditional } = compileOptions;
     const { format, sources, trieBase, sort = true, generateNonStrict = false, excludeWordsFrom } = target;
     const targetDirectory = path.resolve(rootDir, target.targetDirectory ?? cwd ?? process.cwd());
-    const dictionaryDirectives = compileOptions.dictionaryDirectives;
+    const dictionaryDirectives = target.dictionaryDirectives ?? compileOptions.dictionaryDirectives;
 
     const excludeFilter = await createExcludeFilter(excludeWordsFrom);
 
