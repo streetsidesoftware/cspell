@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## <small>8.10.4 (2024-07-05)</small>
+
+* chore: force 8.10.3 ([f18b8c7](https://github.com/streetsidesoftware/cspell/commit/f18b8c7))
+
 ## <small>8.10.2 (2024-07-05)</small>
 
 * ci: Workflow Bot -- Update ALL Dependencies (main) (#5862) ([814e15c](https://github.com/streetsidesoftware/cspell/commit/814e15c)), closes [#5862](https://github.com/streetsidesoftware/cspell/issues/5862)
