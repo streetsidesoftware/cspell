@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## <small>8.10.2 (2024-07-05)</small>
+
+* ci: Workflow Bot -- Update ALL Dependencies (main) (#5862) ([814e15c](https://github.com/streetsidesoftware/cspell/commit/814e15c)), closes [#5862](https://github.com/streetsidesoftware/cspell/issues/5862)
+
 ## <small>8.10.1 (2024-07-05)</small>
 
 * fix(cspell-tools): support adding directives (#5860) ([b2e014f](https://github.com/streetsidesoftware/cspell/commit/b2e014f)), closes [#5860](https://github.com/streetsidesoftware/cspell/issues/5860)
