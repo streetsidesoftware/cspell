@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## <small>8.10.1 (2024-07-05)</small>
+
+* fix(cspell-tools): support adding directives (#5860) ([b2e014f](https://github.com/streetsidesoftware/cspell/commit/b2e014f)), closes [#5860](https://github.com/streetsidesoftware/cspell/issues/5860)
+
 ## 8.10.0 (2024-07-02)
 
 * chore: Update Integration Test Performance Data (#5859) ([898e806](https://github.com/streetsidesoftware/cspell/commit/898e806)), closes [#5859](https://github.com/streetsidesoftware/cspell/issues/5859)
