@@ -5,7 +5,7 @@ Args: '["**","--exclude=**/Backup/**"]'
 Summary:
   files: 489
   filesWithIssues: 452
-  issues: 14344
+  issues: 14340
   errors: 0
 Errors: []
 
@@ -649,7 +649,6 @@ issues:
   - "PowerShell/Create-Deploy-SQL-Script.ps1:141:69      dirctory            U       DatabaseScriptPath' dirctory\""
   - "PowerShell/Create-Deploy-SQL-Script.ps1:180:32      fullpath            U       ScrOptions.Filename = \"$($fullpath)\\$($filename)\"; #tell"
   - "PowerShell/Create-Deploy-SQL-Script.ps1:205:11      Pathswritten        U       where {$Pathswritten -notcontains $_.fullname"
-  - "PowerShell/Create-Deploy-SQL-Script.ps1:205:40      fullname            U       Pathswritten -notcontains $_.fullname} | Remove-Item |foreach"
   - "PowerShell/CsvSqlimport.ps1:39:91       autopopulated           U       into. This parameter is autopopulated using the"
   - "PowerShell/CsvSqlimport.ps1:74:111      specifeid               U       FirstRowColumns was specifeid."
   - "PowerShell/CsvSqlimport.ps1:111:12      shellswitch             U       .PARAMETER shellswitch"

@@ -4,8 +4,8 @@ Url: https://github.com/googleapis/google-cloud-cpp.git
 Args: '["--config=${repoConfig}/cspell.json","**/*","-e","{*.BUILD,BUILD,CHANGELOG.md,*.sh,*.cfg,*.ps1,Dockerfile.*,*.Dockerfile,*.{yaml,xml,json,cmake}}"]'
 Summary:
   files: 19141
-  filesWithIssues: 12018
-  issues: 98269
+  filesWithIssues: 11999
+  issues: 97981
   errors: 0
 Errors: []
 
@@ -68,7 +68,6 @@ issues:
   - "ci/cloudbuild/README.md:80:54       distros         U       Linux x `N` different distros"
   - "ci/cloudbuild/README.md:81:26       MSVC            U       Compilers: Clang, GCC, MSVC"
   - "ci/cloudbuild/README.md:88:74       ubsan           U       analyzer, asan, msan, tsan, ubsan,"
-  - "ci/etc/expected_install_directories:5:22        apikeys                     U       /include/google/api/apikeys"
   - "ci/etc/expected_install_directories:7:22        cloudquotas                 U       /include/google/api/cloudquotas"
   - "ci/etc/expected_install_directories:9:22        servicecontrol              U       /include/google/api/servicecontrol"
   - "ci/etc/expected_install_directories:12:22       servicemanagement           U       /include/google/api/servicemanagement"
@@ -487,7 +486,6 @@ issues:
   - "generator/integration_tests/golden/v1/internal/golden_thing_admin_rest_stub.cc:38:38        Longrunning     U       options.get<rest_internal::LongrunningEndpointOption>(), options"
   - "generator/integration_tests/golden/v1/internal/request_id_auth_decorator.cc:72:43       Foos    U       :requestid::v1::ListFoosResponse> RequestIdServiceAuth"
   - "generator/integration_tests/golden/v1/internal/request_id_connection_impl.cc:187:64         foos    U       requestid::v1::Foo> result(r.foos().size());"
-  - "generator/integration_tests/test_request_id.proto:17:21         requestid       U       package google.test.requestid.v1;"
   - "generator/integration_tests/test.proto:357:3        oneof           U       oneof source_info {"
   - "generator/integration_tests/test.proto:972:52       UNIQUEID        U       iceAccounts/{ACCOUNT_EMAIL_OR_UNIQUEID}`. The `-` wildcard"
   - "generator/integration_tests/test.proto:1205:21      Struct          U       google.protobuf.Struct json_payload = 6;"
@@ -584,7 +582,6 @@ issues:
   - "google/cloud/aiplatform/v1/vizier_client.h:44:37        hyperparameters     U       tuning machine learning hyperparameters and searching over deep"
   - "google/cloud/alloydb/v1/alloy_db_admin_client.h:19:39       ALLOYDB     U       CLOUD_CPP_GOOGLE_CLOUD_ALLOYDB_V1_ALLOY_DB_ADMIN_CLIENT"
   - "google/cloud/apigeeconnect/connection_client.h:19:39        APIGEECONNECT       U       CLOUD_CPP_GOOGLE_CLOUD_APIGEECONNECT_CONNECTION_CLIENT_H"
-  - "google/cloud/apikeys/api_keys_client.h:19:39        APIKEYS     U       CLOUD_CPP_GOOGLE_CLOUD_APIKEYS_API_KEYS_CLIENT_H"
   - "google/cloud/appengine/applications_client.h:19:39          APPENGINE       U       CLOUD_CPP_GOOGLE_CLOUD_APPENGINE_APPLICATIONS_CLIENT"
   - "google/cloud/appengine/v1/applications_client.h:301:159     Fservice    U       name\"%3A\"projects%2F-%2FserviceAccounts%2Funique_id"
   - "google/cloud/appengine/v1/applications_client.h:301:177     Funique     U       %2FserviceAccounts%2Funique_id\"%2C\"resource\"%3A"
