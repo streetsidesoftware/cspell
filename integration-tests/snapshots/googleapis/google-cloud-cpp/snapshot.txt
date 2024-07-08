@@ -3,7 +3,7 @@ Repository: googleapis/google-cloud-cpp
 Url: "https://github.com/googleapis/google-cloud-cpp.git"
 Args: ["--config=../../../../config/repositories/googleapis/google-cloud-cpp/cspell.json","**/*","-e","{*.BUILD,BUILD,CHANGELOG.md,*.sh,*.cfg,*.ps1,Dockerfile.*,*.Dockerfile,*.{yaml,xml,json,cmake}}"]
 Lines:
- CSpell: Files checked: 19141, Issues found: 97981 in 11999 files.
+ CSpell: Files checked: 19141, Issues found: 97962 in 11999 files.
  exit code: 1
 ./ARCHITECTURE.md:110:20    - Unknown word (bigtable)   -- - Bigtable has a [`bigtable::Table`](/google/cloud
 ./ARCHITECTURE.md:110:3     - Unknown word (Bigtable)   -- - Bigtable has a [`bigtable::Table
@@ -241,32 +241,28 @@ Lines:
 ./doc/cpp-style-guide.md:54:18     - Unknown word (blorg)      -- #include <grpcpp/blorg.h>
 ./doc/cpp-style-guide.md:58:11     - Unknown word (unistd)     -- #include <unistd.h>
 ./doc/ctype-cord-workarounds.md:32:26     - Unknown word (CTYPE)      -- GOOGLE_CLOUD_CPP_ENABLE_CTYPE_CORD_WORKAROUND` CMake
-./doc/packaging.md:1436:21   - Unknown word (epel)           -- sudo dnf install -y epel-release && \
-./doc/packaging.md:1689:1    - Unknown word (Abseiil)        -- Abseiil from source. Enabling
-./doc/packaging.md:1874:46   - Unknown word (rhscl)          -- -enable rhel-server-rhscl-7-rpms
-./doc/packaging.md:1874:54   - Unknown word (rpms)           -- rhel-server-rhscl-7-rpms
-./doc/packaging.md:1876:48   - Unknown word (devtoolset)     -- automake cmake3 curl-devel devtoolset-7 gcc gcc-c++ \
-./doc/packaging.md:1968:7    - Unknown word (buildconf)      -- ./buildconf && ./configure && make
+./doc/packaging.md:1260:21   - Unknown word (epel)           -- sudo dnf install -y epel-release && \
+./doc/packaging.md:1298:1    - Unknown word (Abseiil)        -- Abseiil from source. Enabling
 ./doc/packaging.md:210:10    - Unknown word (DWITH)       -- -DWITH_EXAMPLES=OFF \
 ./doc/packaging.md:213:10    - Unknown word (DOPENTELEMETRY) -- -DOPENTELEMETRY_INSTALL=ON \
-./doc/packaging.md:246:10    - Unknown word (makecache)      -- sudo dnf makecache && \
-./doc/packaging.md:247:32    - Unknown word (findutils)      -- install -y cmake curl findutils gcc-c++ git make ninja
-./doc/packaging.md:256:48    - Unknown word (devel)          -- protobuf-compiler protobuf-devel grpc-cpp grpc-devel
-./doc/packaging.md:277:6     - Unknown word (ldconfig)       -- sudo ldconfig && cd /var/tmp && rm
-./doc/packaging.md:364:23    - Unknown word (libopenssl)     -- libcurl-devel libopenssl-devel libcrc32c-devel
-./doc/packaging.md:364:40    - Unknown word (libcrc)         -- devel libopenssl-devel libcrc32c-devel nlohmann_json
-./doc/packaging.md:373:28    - Unknown word (usrlocal)       -- tee /etc/ld.so.conf.d/usrlocal.conf
-./doc/packaging.md:406:10    - Unknown word (Dprotobuf)      -- -Dprotobuf_BUILD_TESTS=OFF \
-./doc/packaging.md:498:24    - Unknown word (noninteractive) -- export DEBIAN_FRONTEND=noninteractive
-./doc/packaging.md:511:9     - Unknown word (libabsl)        -- libabsl-dev \
-./doc/packaging.md:513:9     - Unknown word (libgrpc)        -- libgrpc++-dev protobuf-compiler
-./doc/packaging.md:514:9     - Unknown word (libprotobuf)    -- libprotobuf-dev protobuf-compiler
-./doc/packaging.md:551:10    - Unknown word (DCRC)           -- -DCRC32C_BUILD_TESTS=OFF
-./doc/packaging.md:553:22    - Unknown word (GLOG)           -- -DCRC32C_USE_GLOG=OFF \
-./doc/packaging.md:631:8     - Unknown word (DABSL)          -- -DABSL_BUILD_TESTING=OFF \
+./doc/packaging.md:247:10    - Unknown word (makecache)      -- sudo dnf makecache && \
+./doc/packaging.md:248:32    - Unknown word (findutils)      -- install -y cmake curl findutils gcc-c++ git make ninja
+./doc/packaging.md:257:48    - Unknown word (devel)          -- protobuf-compiler protobuf-devel grpc-cpp grpc-devel
+./doc/packaging.md:278:6     - Unknown word (ldconfig)       -- sudo ldconfig && cd /var/tmp && rm
+./doc/packaging.md:366:23    - Unknown word (libopenssl)     -- libcurl-devel libopenssl-devel libcrc32c-devel
+./doc/packaging.md:366:40    - Unknown word (libcrc)         -- devel libopenssl-devel libcrc32c-devel nlohmann_json
+./doc/packaging.md:375:28    - Unknown word (usrlocal)       -- tee /etc/ld.so.conf.d/usrlocal.conf
+./doc/packaging.md:408:10    - Unknown word (Dprotobuf)      -- -Dprotobuf_BUILD_TESTS=OFF \
+./doc/packaging.md:501:24    - Unknown word (noninteractive) -- export DEBIAN_FRONTEND=noninteractive
+./doc/packaging.md:514:9     - Unknown word (libabsl)        -- libabsl-dev \
+./doc/packaging.md:516:9     - Unknown word (libgrpc)        -- libgrpc++-dev protobuf-compiler
+./doc/packaging.md:517:9     - Unknown word (libprotobuf)    -- libprotobuf-dev protobuf-compiler
+./doc/packaging.md:554:10    - Unknown word (DCRC)           -- -DCRC32C_BUILD_TESTS=OFF
+./doc/packaging.md:556:22    - Unknown word (GLOG)           -- -DCRC32C_USE_GLOG=OFF \
+./doc/packaging.md:635:8     - Unknown word (DABSL)          -- -DABSL_BUILD_TESTING=OFF \
 ./doc/packaging.md:67:68     - Unknown word (msbuild)    -- generator from `make` (or msbuild on
 ./doc/packaging.md:69:16     - Unknown word (multicore)  -- advantage of multicore machines. Be aware that
-./doc/packaging.md:721:8     - Unknown word (DJSON)          -- -DJSON_BuildTests=OFF \
+./doc/packaging.md:725:8     - Unknown word (DJSON)          -- -DJSON_BuildTests=OFF \
 ./doc/packaging.md:72:65     - Unknown word (NCPU)       -- consider appending `-- -j ${NCPU}` to the
 ./doc/packaging.md:74:73     - Unknown word (nproc)      -- information using the `nproc`
 ./doc/packaging.md:75:38     - Unknown word (physicalcpu) -- Linux, or `sysctl -n hw.physicalcpu` on macOS.
@@ -541,7 +537,7 @@ Lines:
 ./generator/internal/service_code_generator.h:188:46    - Unknown word (autopopulated) -- of the methods has an autopopulated `request_id`-like
 ./generator/templates/WORKSPACE.bazel:19:21     - Unknown word (Starlark)   -- # Add the necessary Starlark functions to fetch google
 ./generator/testing/descriptor_pool_fixture.cc:49:7      - Unknown word (multifile)  -- multifile_error_collector_(
-./google/cloud/BUILD.bazel:81:15     - Unknown word (DEFAULTLIB) -- "-DEFAULTLIB:bcrypt.lib",
+./google/cloud/BUILD.bazel:73:15     - Unknown word (DEFAULTLIB) -- "-DEFAULTLIB:bcrypt.lib",
 ./google/cloud/accessapproval/README.md:25:11     - Unknown word (iostream)   -- #include <iostream>
 ./google/cloud/accessapproval/README.md:29:10     - Unknown word (cerr)       -- std::cerr << "Usage: " << argv
 ./google/cloud/accessapproval/README.md:39:10     - Unknown word (cout)       -- std::cout << a->DebugString()
@@ -913,7 +909,7 @@ Lines:
 ./google/cloud/internal/rest_opentelemetry_test.cc:54:8      - Unknown word (aaabbbbb)   -- "aaabbbbb";
 ./google/cloud/internal/rest_opentelemetry_test.cc:96:36     - Unknown word (traceparent) -- Contains(Pair("traceparent", _))));
 ./google/cloud/internal/routing_matcher_test.cc:120:73    - Unknown word (Ffoo)       -- previous", "routing_id=foo%2Ffoo"));
-./google/cloud/internal/sha256_hash.cc:34:26     - Unknown word (PUCHAR)     -- static_cast<PUCHAR>(const_cast<void*>(data
+./google/cloud/internal/sha256_hash.cc:39:26     - Unknown word (PUCHAR)     -- static_cast<PUCHAR>(const_cast<void*>(data
 ./google/cloud/internal/trace_propagator.h:34:55     - Unknown word (Traceparent) -- that includes the W3 Traceparent headers, as
 ./google/cloud/internal/trace_propagator_test.cc:108:7     - Unknown word (tracestate) -- // "tracestate", even when it omits
 ./google/cloud/internal/url_encode_test.cc:29:47     - Unknown word (Fresource)  -- string = "projects%2F*%2Fresource%2F*";
@@ -960,8 +956,8 @@ Lines:
 ./google/cloud/opentelemetry/configure_basic_tracing.h:55:20     - Unknown word (Gooogle)    -- * that works with Gooogle Cloud Trace.
 ./google/cloud/opentelemetry/internal/monitored_resource_test.cc:218:15    - Unknown word (Faas)       -- {sc::kFaasName, "test-module"}
 ./google/cloud/opentelemetry/internal/monitored_resource_test.cc:278:26    - Unknown word (faas)       -- {sc::kFaasName, "faas-name"},
-./google/cloud/opentelemetry/internal/recordable_test.cc:184:9     - Unknown word (Truncatable) -- TEST(SetTruncatableString, LessThanLimit
-./google/cloud/opentelemetry/internal/recordable_test.cc:707:27    - Unknown word (instrumentationscope) -- opentelemetry::sdk::instrumentationscope::InstrumentationScope
+./google/cloud/opentelemetry/internal/recordable_test.cc:193:9     - Unknown word (Truncatable) -- TEST(SetTruncatableString, LessThanLimit
+./google/cloud/opentelemetry/internal/recordable_test.cc:721:27    - Unknown word (instrumentationscope) -- opentelemetry::sdk::instrumentationscope::InstrumentationScope
 ./google/cloud/optimization/doc/environment-variables.dox:14:40     - Unknown word (cloudoptimization) -- (which defaults to "cloudoptimization.googleapis.com")
 ./google/cloud/orgpolicy/mocks/mock_org_policy_connection.h:19:39     - Unknown word (ORGPOLICY)  -- CLOUD_CPP_GOOGLE_CLOUD_ORGPOLICY_MOCKS_MOCK_ORG_POLICY
 ./google/cloud/osconfig/agent_endpoint_client.h:19:39     - Unknown word (OSCONFIG)   -- CLOUD_CPP_GOOGLE_CLOUD_OSCONFIG_AGENT_ENDPOINT_CLIENT

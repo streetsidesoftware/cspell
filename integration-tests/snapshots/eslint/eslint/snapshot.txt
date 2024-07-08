@@ -3,7 +3,7 @@ Repository: eslint/eslint
 Url: "https://github.com/eslint/eslint"
 Args: [".","--config=../../../config/eslint/cspell.config.yaml","--issues-summary-report","--exclude=bin/**","--exclude=CHANGELOG.md","--exclude=_data","--exclude=tests/bench/large.js","--exclude=docs/src/_includes","--exclude=docs/src/assets/{fonts,s?css,images}"]
 Lines:
- CSpell: Files checked: 1943, Issues found: 1731 in 324 files.
+ CSpell: Files checked: 1943, Issues found: 1736 in 324 files.
  exit code: 1
 ./Makefile.js:145:88    - Unknown word (ined)               -- followed by the string "ined".
 ./Makefile.js:356:12    - Unknown word (gensite)            -- target.gensite();
@@ -33,6 +33,8 @@ Lines:
 ./README.md:299:564   - Unknown word (Workleap)      -- f99fe2465f&v=4" alt="Workleap" height="64"></a></p
 ./README.md:300:1054  - Unknown word (Nextbase)      -- 145838380?v=4" alt="Nextbase Starter Kit" height
 ./README.md:301:5     - Unknown word (sponsorsend)   -- <!--sponsorsend-->
+./README.md:303:5     - Unknown word (techsponsorsstart) -- <!--techsponsorsstart-->
+./README.md:306:5     - Unknown word (techsponsorsend)   -- <!--techsponsorsend-->
 ./docs/README.md:45:51     - Unknown word (openjsf)    -- ESLint contributors, [www.openjsf.org](https://www.openjsf
 ./docs/package.json:31:32     - Unknown word (syntaxhighlight) -- 1ty/eleventy-plugin-syntaxhighlight": "^5.0.0",
 ./docs/package.json:32:11     - Unknown word (munter)          -- "@munter/tap-render": "^0.2.
@@ -58,7 +60,7 @@ Lines:
 ./docs/src/assets/scss/ads.scss:141:32    - Unknown word (callout)    -- publisher].loaded .ea-callout a:link,
 ./docs/src/assets/scss/ads.scss:16:2      - Unknown word (carbonads)  -- #carbonads * {
 ./docs/src/assets/scss/components/docs-navigation.scss:27:6      - Unknown word (flexer)     -- .flexer {
-./docs/src/assets/scss/components/search.scss:152:10    - Unknown word (docsearch)  -- .algolia-docsearch-suggestion--highlight
+./docs/src/assets/scss/components/search.scss:176:10    - Unknown word (docsearch)  -- .algolia-docsearch-suggestion--highlight
 ./docs/src/assets/scss/docs.scss:124:216   - Unknown word (Cpath)      -- fill='%23ECFDF3'/%3E%3Cpath d='M30.5 16L19.5 27L
 ./docs/src/assets/scss/docs.scss:124:339   - Unknown word (Crect)      -- linejoin='round'/%3E%3Crect x='1.5' y='1' width
 ./docs/src/assets/scss/docs.scss:124:44    - Unknown word (Csvg)       -- data:image/svg+xml,%3Csvg width='45' height='
@@ -213,18 +215,18 @@ Lines:
 ./lib/eslint/eslint-helpers.js:18:26     - Unknown word (nodelib)    -- const fswalk = require("@nodelib/fs.walk");
 ./lib/eslint/eslint-helpers.js:18:7      - Unknown word (fswalk)     -- const fswalk = require("@nodelib
 ./lib/eslint/eslint-helpers.js:629:34    - Unknown word (unconfigured) -- ignored"|"external"|"unconfigured"} configStatus A status
-./lib/languages/js/index.js:23:36     - Unknown word (vfile)      -- import("../../linter/vfile").VFile} VFile */
-./lib/languages/js/index.js:80:37     - Unknown word (Feenstra)   -- Copyright (c) 2013, Joel Feenstra
-./lib/languages/js/index.js:97:47     - Unknown word (FEENSTRA)   -- NO EVENT SHALL JOEL FEENSTRA BE LIABLE FOR ANY
+./lib/languages/js/index.js:102:47    - Unknown word (FEENSTRA)   -- NO EVENT SHALL JOEL FEENSTRA BE LIABLE FOR ANY
+./lib/languages/js/index.js:85:37     - Unknown word (Feenstra)   -- Copyright (c) 2013, Joel Feenstra
 ./lib/linter/code-path-analysis/code-path-state.js:1256:46   - Unknown word (circuting)  -- path due to the short-circuting, so we are just seeding
 ./lib/linter/code-path-analysis/code-path-state.js:1730:23   - Unknown word (Segs)       -- const prevSegsOfLeavingSegment = [headOfLeav
 ./lib/linter/code-path-analysis/code-path-state.js:351:34    - Unknown word (expresion)  -- The end of the update expresion. This may change during
 ./lib/linter/code-path-analysis/debug-helpers.js:95:44     - Unknown word (Graphvis)   -- can be visualized with Graphvis.
 ./lib/linter/config-comment-parser.js:76:22     - Unknown word (commaless)  -- // Also, commaless notations have invalid
 ./lib/linter/config-comment-parser.js:87:20     - Unknown word (Levn)       -- debug("Levn parsing failed; falling
-./lib/linter/linter.js:1102:43   - Unknown word (tdiff)         -- ruleListenersReturn.tdiff, { type: "rules", key
-./lib/linter/linter.js:120:52    - Unknown word (postprocessor) -- postprocess} [postprocess] postprocessor for report
+./lib/linter/linter.js:1106:43   - Unknown word (tdiff)         -- ruleListenersReturn.tdiff, { type: "rules", key
+./lib/linter/linter.js:124:52    - Unknown word (postprocessor) -- postprocess} [postprocess] postprocessor for report
 ./lib/linter/linter.js:47:7      - Unknown word (jslang)     -- const jslang = require("../languages
+./lib/linter/linter.js:57:30     - Unknown word (vfile)      -- VFile } = require("./vfile");
 ./lib/rule-tester/rule-tester.js:249:42    - Unknown word (errorize)   -- ast The root node to errorize `start`/`end` properties
 ./lib/rule-tester/rule-tester.js:855:27    - Unknown word (Didnt)      -- function assertASTDidntChange(beforeAST, afterAST
 ./lib/rules/dot-notation.js:138:63    - Unknown word (quasis)     -- node, node.property.quasis[0].value.cooked);
@@ -251,7 +253,7 @@ Lines:
 ./lib/rules/no-mixed-requires.js:78:66     - Unknown word (iojs)       -- per nodejs v0.12.2 and iojs v0.7.1
 ./lib/rules/no-new-native-nonconstructor.js:32:18     - Unknown word (Nonconstructor) -- noNewNonconstructor: "`{{name}}` cannot
 ./lib/rules/no-trailing-spaces.js:60:13     - Unknown word (NONBLANK)   -- NONBLANK = `${BLANK_CLASS}+$
-./lib/rules/no-useless-backreference.js:114:37    - Unknown word (bref's)     -- // group is bref's ancestor => bref is
+./lib/rules/no-useless-backreference.js:115:41    - Unknown word (bref's)     -- // group is bref's ancestor => bref is
 ./lib/rules/no-useless-backreference.js:75:40     - Unknown word (bref)       -- "Backreference '{{ bref }}' will be ignored
 ./lib/rules/no-useless-escape.js:32:47     - Unknown word (nrvtbfux)   -- ESCAPES = union(new Set("\\nrvtbfux"), astUtils.LINEBREAKS
 ./lib/rules/no-useless-escape.js:33:45     - Unknown word (Dfnp)       -- ESCAPES = new Set("\\bcdDfnpPrsStvwWxu0123456789
@@ -267,8 +269,8 @@ Lines:
 ./lib/rules/use-isnan.js:89:15     - Unknown word (castable)   -- const castableOperators = new Set(
 ./lib/rules/utils/ast-utils.js:1049:89   - Unknown word (braket)     -- opening parenthesis or braket.
 ./lib/rules/utils/ast-utils.js:404:40    - Unknown word (samely)     -- a.b` and `a?.b` are samely.
-./package.json:125:6     - Unknown word (eslump)     -- "eslump": "^3.0.0",
-./package.json:142:6     - Unknown word (metascraper) -- "metascraper": "^5.25.7",
+./package.json:126:6     - Unknown word (eslump)     -- "eslump": "^3.0.0",
+./package.json:143:6     - Unknown word (metascraper) -- "metascraper": "^5.25.7",
 ./package.json:26:21     - Unknown word (knip)       -- "lint:unused": "knip",
 ./templates/blogpost.md.ejs:18:10     - Unknown word (linkify)    -- function linkify(line) {
 ./tests/fixtures/code-path-analysis/try--try-finally-4.js:43:156    - Unknown word (Expressio)  -- Expression\nIdentifier (bar)\nExpressio
@@ -381,7 +383,7 @@ Lines:
 ./tests/lib/rules/no-invalid-regexp.js:82:35     - Unknown word (Vithkuqi)    -- RegExp('\\\\p{Script=Vithkuqi}', 'u')",
 ./tests/lib/rules/no-prototype-builtins.js:235:52    - Unknown word (Expresion)  -- OwnProperty is part of a ChainExpresion
 ./tests/lib/rules/no-prototype-builtins.js:44:35     - Unknown word (Enumerabl)  -- code: "foo?.['propertyIsEnumerabl']('bar')", languageOptions
-./tests/lib/rules/no-restricted-imports.js:507:84    - Unknown word (subimports) -- message: "some foo subimports are restricted" }]
+./tests/lib/rules/no-restricted-imports.js:539:84    - Unknown word (subimports) -- message: "some foo subimports are restricted" }]
 ./tests/lib/rules/no-script-url.js:25:21     - Unknown word (xjavascript) -- "var url = 'xjavascript:'",
 ./tests/lib/rules/no-tabs.js:24:17     - Unknown word (sdfdsf)     -- " //   sdfdsf \n" +
 ./tests/lib/rules/no-tabs.js:60:19     - Unknown word (tsdfdsf)    -- " //\tsdfdsf \n" +

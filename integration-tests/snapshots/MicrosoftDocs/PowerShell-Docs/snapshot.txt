@@ -3,7 +3,7 @@ Repository: MicrosoftDocs/PowerShell-Docs
 Url: "https://github.com/MicrosoftDocs/PowerShell-Docs.git"
 Args: ["--config=../../../cspell-power-shell-docs.config.yaml","**"]
 Lines:
- CSpell: Files checked: 2683, Issues found: 5366 in 1237 files.
+ CSpell: Files checked: 2683, Issues found: 5378 in 1240 files.
  exit code: 1
 ./CODE_OF_CONDUCT.md:10:38     - Unknown word (opensource) -- reach out at [aka.ms/opensource/moderation-support]
 ./LICENSE:139:15    - Unknown word (sublicensable)   -- non-sublicensable, non-exclusive, irrevocable
@@ -70,7 +70,8 @@ Lines:
 ./reference/5.1/Microsoft.PowerShell.Core/About/about_Command_Syntax.md:171:27    - Unknown word (binkies)    -- []` - also known as binkies -->
 ./reference/5.1/Microsoft.PowerShell.Core/About/about_Command_Syntax.md:184:34    - Unknown word (mycommand)  -- Name MyAlias -Value mycommand.exe
 ./reference/5.1/Microsoft.PowerShell.Core/About/about_Comment_Based_Help.md:677:25    - Unknown word (inputpath)  -- .\Update-Month.ps1 -inputpath C:\Data\January.csv
-./reference/5.1/Microsoft.PowerShell.Core/About/about_CommonParameters.md:718:72    - Unknown word (defau)      -- Suspend [?] Help (defau
+./reference/5.1/Microsoft.PowerShell.Core/About/about_CommonParameters.md:48:23     - Unknown word (proga)      -- **ProgressAction** (proga)
+./reference/5.1/Microsoft.PowerShell.Core/About/about_CommonParameters.md:755:72    - Unknown word (defau)      -- Suspend [?] Help (defau
 ./reference/5.1/Microsoft.PowerShell.Core/About/about_Comparison_Operators.md:419:11    - Unknown word (Chell)      -- "Rhell", "Chell", "Mel", "Smell", "Shell
 ./reference/5.1/Microsoft.PowerShell.Core/About/about_Comparison_Operators.md:419:2     - Unknown word (Rhell)      -- "Rhell", "Chell", "Mel", "Smell
 ./reference/5.1/Microsoft.PowerShell.Core/About/about_Data_Sections.md:175:29    - Unknown word (stringdata) -- ConvertFrom-StringData -stringdata @'
@@ -85,6 +86,7 @@ Lines:
 ./reference/5.1/Microsoft.PowerShell.Core/About/about_Format.ps1xml.md:434:45    - Unknown word (mygciview)  -- custom view is named **mygciview** and adds the
 ./reference/5.1/Microsoft.PowerShell.Core/About/about_Function_Provider.md:129:39    - Unknown word (Autosize)   -- the next line. The `-Autosize` parameter resizes the
 ./reference/5.1/Microsoft.PowerShell.Core/About/about_Functions.md:194:4     - Unknown word (allpix)     -- $allpix = Get-ChildItem -Path
+./reference/5.1/Microsoft.PowerShell.Core/About/about_Functions_Advanced_Parameters.md:733:50    - Unknown word (dynamicparameters) -- tab completion. Like **dynamicparameters**, the
 ./reference/5.1/Microsoft.PowerShell.Core/About/about_Hash_Tables.md:429:59    - Unknown word (Manag)      -- Remote Management (WS-Manag...
 ./reference/5.1/Microsoft.PowerShell.Core/About/about_Join.md:85:22     - Unknown word (ERSHELL)    -- a = "WIND", "S P", "ERSHELL"
 ./reference/5.1/Microsoft.PowerShell.Core/About/about_Language_Modes.md:226:5     - Unknown word (adsisearcher) -- - `[adsisearcher]`
@@ -442,8 +444,6 @@ Lines:
 ./reference/7.2/Microsoft.PowerShell.Utility/Invoke-WebRequest.md:131:21    - Unknown word (jdoe)       -- User = 'jdoe'
 ./reference/7.2/Microsoft.PowerShell.Utility/Invoke-WebRequest.md:165:44    - Unknown word (docspage)   -- StreamWriter]::new('.\docspage.html', $false, $Response
 ./reference/7.4/Microsoft.PowerShell.Core/About/about_Calling_Generic_Methods.md:61:9      - Unknown word (Linq)       -- `System.Linq.Enumerable` class to
-./reference/7.4/Microsoft.PowerShell.Core/About/about_CommonParameters.md:46:23     - Unknown word (proga)      -- **ProgressAction** (proga)
-./reference/7.4/Microsoft.PowerShell.Core/About/about_Functions_Advanced_Parameters.md:743:50    - Unknown word (dynamicparameters) -- tab completion. Like **dynamicparameters**, the
 ./reference/7.4/Microsoft.PowerShell.Core/About/about_Hash_Tables.md:420:23    - Unknown word (Servi)      -- System.ServiceProcess.Servi... Running
 ./reference/7.4/Microsoft.PowerShell.Core/About/about_Pipelines.md:432:24    - Unknown word (xzvf)       -- curl -s -L $uri | tar -xzvf - -C .
 ./reference/7.4/Microsoft.PowerShell.Core/About/about_Preference_Variables.md:1062:29   - Unknown word (robocopy)   -- native commands, like [robocopy][01] use non-zero exit
@@ -737,31 +737,34 @@ Lines:
 ./reference/docs-conceptual/community/2023-updates.md:77:3      - Unknown word (darthwalsh)   -- | darthwalsh |     1      |
 ./reference/docs-conceptual/community/2023-updates.md:79:3      - Unknown word (tabad)        -- | tabad |
 ./reference/docs-conceptual/community/2023-updates.md:81:3      - Unknown word (radkedan)     -- | radkedan |            |
-./reference/docs-conceptual/community/2024-updates.md:117:3     - Unknown word (muzimuzhi)    -- | muzimuzhi |     1      |
-./reference/docs-conceptual/community/2024-updates.md:144:3     - Unknown word (Certezalito)  -- | Certezalito |     1      |
-./reference/docs-conceptual/community/2024-updates.md:146:3     - Unknown word (chrisdent)    -- | chrisdent-de |     1      |
-./reference/docs-conceptual/community/2024-updates.md:147:3     - Unknown word (jborean)      -- | jborean93 |     1      |
-./reference/docs-conceptual/community/2024-updates.md:148:3     - Unknown word (brucificus)   -- | brucificus |     1      |
-./reference/docs-conceptual/community/2024-updates.md:149:4     - Unknown word (Plantefeve)   -- | XPlantefeve |     1      |
-./reference/docs-conceptual/community/2024-updates.md:173:3     - Unknown word (flcdrg)       -- | flcdrg |     1
-./reference/docs-conceptual/community/2024-updates.md:174:3     - Unknown word (holtkampjs)   -- | holtkampjs |     1
-./reference/docs-conceptual/community/2024-updates.md:176:11    - Unknown word (Nurillaew)    -- | MuzaffarNurillaew |     1      |
-./reference/docs-conceptual/community/2024-updates.md:176:3     - Unknown word (Muzaffar)     -- | MuzaffarNurillaew |     1
-./reference/docs-conceptual/community/2024-updates.md:177:3     - Unknown word (ybeltrikov)   -- | ybeltrikov |     1
-./reference/docs-conceptual/community/2024-updates.md:180:3     - Unknown word (deraeler)     -- | deraeler |
-./reference/docs-conceptual/community/2024-updates.md:183:3     - Unknown word (wwilliams)    -- | wwilliams69 |
-./reference/docs-conceptual/community/2024-updates.md:42:3      - Unknown word (berlintay)  -- | berlintay |     1
-./reference/docs-conceptual/community/2024-updates.md:43:3      - Unknown word (dcarpenter) -- | dcarpenter31 |     1
-./reference/docs-conceptual/community/2024-updates.md:45:3      - Unknown word (Matej)      -- | MatejKafka |
-./reference/docs-conceptual/community/2024-updates.md:46:8      - Unknown word (guanyuming) -- | real-guanyuming-he |     1      |
-./reference/docs-conceptual/community/2024-updates.md:47:3      - Unknown word (santisq)    -- | santisq |     2
-./reference/docs-conceptual/community/2024-updates.md:48:3      - Unknown word (stephanadler) -- | stephanadler1 |     1
-./reference/docs-conceptual/community/2024-updates.md:82:3      - Unknown word (aberus)       -- | aberus |     1
-./reference/docs-conceptual/community/2024-updates.md:83:3      - Unknown word (nickcox)      -- | nickcox |     1
-./reference/docs-conceptual/community/2024-updates.md:85:9      - Unknown word (slayden)      -- | glenn-slayden |     1      |
-./reference/docs-conceptual/community/2024-updates.md:88:3      - Unknown word (joshooaj)     -- | joshooaj |     1
-./reference/docs-conceptual/community/2024-updates.md:90:13     - Unknown word (Lockhart)     -- | RokeJulianLockhart |            |
-./reference/docs-conceptual/community/2024-updates.md:90:3      - Unknown word (Roke)         -- | RokeJulianLockhart |
+./reference/docs-conceptual/community/2024-updates.md:109:3     - Unknown word (aberus)       -- | aberus |     1
+./reference/docs-conceptual/community/2024-updates.md:110:3     - Unknown word (nickcox)      -- | nickcox |     1
+./reference/docs-conceptual/community/2024-updates.md:112:9     - Unknown word (slayden)      -- | glenn-slayden |     1      |
+./reference/docs-conceptual/community/2024-updates.md:115:3     - Unknown word (joshooaj)     -- | joshooaj |     1
+./reference/docs-conceptual/community/2024-updates.md:117:13    - Unknown word (Lockhart)     -- | RokeJulianLockhart |            |
+./reference/docs-conceptual/community/2024-updates.md:117:3     - Unknown word (Roke)         -- | RokeJulianLockhart |
+./reference/docs-conceptual/community/2024-updates.md:144:3     - Unknown word (muzimuzhi)    -- | muzimuzhi |     1      |
+./reference/docs-conceptual/community/2024-updates.md:171:3     - Unknown word (Certezalito)  -- | Certezalito |     1      |
+./reference/docs-conceptual/community/2024-updates.md:173:3     - Unknown word (chrisdent)    -- | chrisdent-de |     1      |
+./reference/docs-conceptual/community/2024-updates.md:174:3     - Unknown word (jborean)      -- | jborean93 |     1      |
+./reference/docs-conceptual/community/2024-updates.md:175:3     - Unknown word (brucificus)   -- | brucificus |     1      |
+./reference/docs-conceptual/community/2024-updates.md:176:4     - Unknown word (Plantefeve)   -- | XPlantefeve |     1      |
+./reference/docs-conceptual/community/2024-updates.md:200:3     - Unknown word (flcdrg)       -- | flcdrg |     1
+./reference/docs-conceptual/community/2024-updates.md:201:3     - Unknown word (holtkampjs)   -- | holtkampjs |     1
+./reference/docs-conceptual/community/2024-updates.md:203:11    - Unknown word (Nurillaew)    -- | MuzaffarNurillaew |     1      |
+./reference/docs-conceptual/community/2024-updates.md:203:3     - Unknown word (Muzaffar)     -- | MuzaffarNurillaew |     1
+./reference/docs-conceptual/community/2024-updates.md:204:3     - Unknown word (ybeltrikov)   -- | ybeltrikov |     1
+./reference/docs-conceptual/community/2024-updates.md:207:3     - Unknown word (deraeler)     -- | deraeler |
+./reference/docs-conceptual/community/2024-updates.md:210:3     - Unknown word (wwilliams)    -- | wwilliams69 |
+./reference/docs-conceptual/community/2024-updates.md:37:3      - Unknown word (trackd)     -- | trackd
+./reference/docs-conceptual/community/2024-updates.md:38:10     - Unknown word (lengyel)    -- | landon-lengyel |     1
+./reference/docs-conceptual/community/2024-updates.md:39:3      - Unknown word (msklv)      -- | msklv
+./reference/docs-conceptual/community/2024-updates.md:69:3      - Unknown word (berlintay)  -- | berlintay |     1
+./reference/docs-conceptual/community/2024-updates.md:70:3      - Unknown word (dcarpenter) -- | dcarpenter31 |     1
+./reference/docs-conceptual/community/2024-updates.md:72:3      - Unknown word (Matej)      -- | MatejKafka |
+./reference/docs-conceptual/community/2024-updates.md:73:8      - Unknown word (guanyuming) -- | real-guanyuming-he |     1      |
+./reference/docs-conceptual/community/2024-updates.md:74:3      - Unknown word (santisq)    -- | santisq |     2
+./reference/docs-conceptual/community/2024-updates.md:75:3      - Unknown word (stephanadler) -- | stephanadler1 |     1
 ./reference/docs-conceptual/community/community-update.yml:50:21     - Unknown word (Helmick's)  -- - text: Jason Helmick's - The Show
 ./reference/docs-conceptual/community/contributing/general-markdown.md:248:41    - Unknown word (friendlyname) -- use Markdown syntax `[friendlyname](url-or-path)`.
 ./reference/docs-conceptual/community/contributing/general-markdown.md:280:7     - Unknown word (redirectedfrom) -- - `?redirectedfrom=MSDN` - added to the
@@ -782,7 +785,7 @@ Lines:
 ./reference/docs-conceptual/community/hall-of-fame.md:31:4      - Unknown word (Reilingh)   -- | NReilingh |      |    2
 ./reference/docs-conceptual/community/hall-of-fame.md:32:6      - Unknown word (praktyk)    -- | it-praktyk |      |
 ./reference/docs-conceptual/community/hall-of-fame.md:33:3      - Unknown word (vors)       -- | vors |      |
-./reference/docs-conceptual/community/hall-of-fame.md:35:3      - Unknown word (markekraus) -- | markekraus |      |
+./reference/docs-conceptual/community/hall-of-fame.md:34:3      - Unknown word (markekraus) -- | markekraus |      |
 ./reference/docs-conceptual/community/hall-of-fame.md:36:3      - Unknown word (purdo)      -- | purdo17 |      |
 ./reference/docs-conceptual/community/hall-of-fame.md:52:3      - Unknown word (jszabo)     -- | jszabo98 |      |
 ./reference/docs-conceptual/community/hall-of-fame.md:56:3      - Unknown word (vexx)       -- | vexx32 |      |
