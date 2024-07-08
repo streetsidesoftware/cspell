@@ -3,9 +3,9 @@ Repository: RustPython/RustPython
 Url: https://github.com/RustPython/RustPython.git
 Args: '["**"]'
 Summary:
-  files: 611
-  filesWithIssues: 318
-  issues: 2925
+  files: 612
+  filesWithIssues: 319
+  issues: 2939
   errors: 0
 Errors: []
 
@@ -88,6 +88,13 @@ issues:
   - "common/src/str.rs:46:43         uncomputed      U       MAX as a sentinel for \"uncomputed\""
   - "common/src/str.rs:202:52        unicodes        U       compatible, escaping unicodes into escape"
   - "compiler/codegen/src/snapshots/rustpython_compiler_core__compile__tests__nested_double_async_with.snap:3:184        woohoo      U       async with woohoo():\\n"
+  - "deny.toml:73:7          RUSTSEC         U       #\"RUSTSEC-0000-0000\","
+  - "deny.toml:156:45        dotgraphs       U       ghlighting used when creating dotgraphs for crates"
+  - "deny.toml:188:11        reqwest         U       #crate = \"reqwest\""
+  - "deny.toml:193:7         rustls          U       # \"rustls\","
+  - "deny.toml:198:14        pemfile         U       # \"rustls-pemfile\","
+  - "deny.toml:199:18        webpki          U       # \"rustls-tls-webpki-roots\","
+  - "deny.toml:210:21        gnullvm         U       \"windows_x86_64_gnullvm\","
   - "derive-impl/src/lib.rs:21:5         pytraverse      U       mod pytraverse;"
   - "DEVELOPMENT.md:24:20        rustup          U       - If you have `rustup` on your system, enter"
   - "DEVELOPMENT.md:113:5        speedscope      U       The speedscope json format (default"
