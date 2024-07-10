@@ -1,7 +1,14 @@
 import * as _helpers from './helpers/index.js';
 import * as _operators from './operators/index.js';
 
-export { interleave, isAsyncIterable, toArray, toAsyncIterable, toDistributableIterable } from './helpers/index.js';
+export {
+    fork,
+    interleave,
+    isAsyncIterable,
+    toArray,
+    toAsyncIterable,
+    toDistributableIterable,
+} from './helpers/index.js';
 export {
     opAppend,
     opAwaitAsync,

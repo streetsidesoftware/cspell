@@ -1,4 +1,5 @@
 export { toDistributableIterable } from './distribute.js';
+export { fork } from './fork.js';
 export { interleave } from './interleave.js';
 export { asyncIteratorToAsyncIterable, iteratorToIterable } from './iteratorToIterable.js';
 export { toArray } from './toArray.js';
