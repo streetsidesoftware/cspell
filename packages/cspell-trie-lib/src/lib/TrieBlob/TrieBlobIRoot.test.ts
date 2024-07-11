@@ -19,13 +19,13 @@ describe('FastTrieBlob', () => {
         const trie = createTrieBlob(words);
         const iTrieRoot = trie.getRoot();
         const iter = walkerWordsITrie(iTrieRoot);
-        expect([...iter]).toEqual(words);
+        expect([...iter]).toEqual(words.sort());
     });
 
     test('toITrieNodeRoot.keys', () => {
         const trie = createTrieBlob(words);
         const iTrieRoot = trie.getRoot();
-        expect(iTrieRoot.keys()).toEqual([...new Set(words.map((w) => w[0]))]);
+        expect(iTrieRoot.keys()).toEqual([...new Set(words.map((w) => w[0]))].sort());
     });
 
     test('toITrieNodeRoot.values', () => {

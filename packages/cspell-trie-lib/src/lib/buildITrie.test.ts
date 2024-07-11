@@ -13,7 +13,7 @@ describe('buildITrie', () => {
     test('buildITrieFromWords', () => {
         const words = 'one two three'.split(' ');
         const trie = buildITrieFromWords(words, {});
-        expect([...trie.words()]).toEqual(words);
+        expect([...trie.words()]).toEqual(words.sort());
     });
 
     test('issue-5222', async () => {

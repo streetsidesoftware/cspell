@@ -69,7 +69,7 @@ export class TrieBlob implements TrieData {
         return this.charToIndexMap[char] || 0;
     };
 
-    private wordToNodeCharIndexSequence(word: string): number[] {
+    public wordToNodeCharIndexSequence(word: string): number[] {
         return TrieBlob.charactersToCharIndexSequence(this.wordToCharacters(word), this._lookUpCharIndex);
     }
 

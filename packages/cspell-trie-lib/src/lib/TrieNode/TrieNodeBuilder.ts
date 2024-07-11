@@ -17,9 +17,12 @@ interface TrieNodeBranch extends LockableTrieNode {
     c: ChildMap;
 }
 
+const compare = new Intl.Collator().compare;
+
 export class TrieNodeBuilder implements TrieBuilder<TrieNodeTrie> {
     private _cursor: BuilderCursor | undefined;
     root: TrieRoot = { ...defaultTrieInfo, c: Object.create(null) };
+    shouldSort = false;
 
     wordToCharacters = (word: string) => [...word];
 
@@ -36,6 +39,14 @@ export class TrieNodeBuilder implements TrieBuilder<TrieNodeTrie> {
     getCursor(): BuilderCursor {
         this._cursor ??= this.createCursor();
         return this._cursor;
+    }
+
+    /**
+     * In this case, it isn't necessary. The TrieNodeBuilder doesn't need to know the characters
+     * @param _characters
+     */
+    setCharacterSet(_characters: string | string[]): void {
+        this.shouldSort = true;
     }
 
     private createCursor(): BuilderCursor {
@@ -121,10 +132,27 @@ export class TrieNodeBuilder implements TrieBuilder<TrieNodeTrie> {
 
         return c;
     }
+
+    sortChildren(node: TrieNodeBranch): void {
+        const entries = Object.entries(node.c).sort((a, b) => compare(a[0], b[0]));
+        node.c = Object.fromEntries(entries);
+        for (const c of Object.values(node.c)) {
+            if (c.c) {
+                this.sortChildren(c as TrieNodeBranch);
+            }
+        }
+    }
+
+    sortNodes() {
+        if (this.shouldSort) {
+            this.sortChildren(this.root);
+        }
+    }
 }
 
 export function buildTrieNodeTrieFromWords(words: Iterable<string>): TrieNodeTrie {
     const builder = new TrieNodeBuilder();
+    builder.setCharacterSet('');
     insertWordsAtCursor(builder.getCursor(), words);
     return builder.build();
 }

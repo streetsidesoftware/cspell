@@ -14,6 +14,7 @@ suite('trie has', async (test) => {
     const trie = await getTrie();
     const words = await getWords();
     const fastTrieBlob = await getFastTrieBlob();
+    const trieBlob = fastTrieBlob.toTrieBlob();
 
     test('trie has words', () => {
         trieHasWords(trie, words);
@@ -21,6 +22,28 @@ suite('trie has', async (test) => {
 
     test('fastTrieBlob has words', () => {
         trieHasWords(fastTrieBlob, words);
+    });
+
+    test('trieBlob has words', () => {
+        trieHasWords(trieBlob, words);
+    });
+});
+
+suite('encode to sequence', async (test) => {
+    const words = await getWords();
+    const fastTrieBlob = await getFastTrieBlob();
+    const trieBlob = fastTrieBlob.toTrieBlob();
+
+    test('fastTrieBlob.wordToNodeCharIndexSequence', () => {
+        for (const word of words) {
+            fastTrieBlob.wordToNodeCharIndexSequence(word);
+        }
+    });
+
+    test('trieBlob.wordToNodeCharIndexSequence', () => {
+        for (const word of words) {
+            trieBlob.wordToNodeCharIndexSequence(word);
+        }
     });
 });
 

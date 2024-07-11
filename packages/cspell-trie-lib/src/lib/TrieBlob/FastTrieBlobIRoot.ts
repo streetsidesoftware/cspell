@@ -131,7 +131,7 @@ class FastTrieBlobINode implements ITrieNode {
             for (let i = 0; i < this._count; ++i) {
                 const entry = nodes[i + 1];
                 const charIdx = entry & NodeMaskChildCharIndex;
-                entries[i] = [charIndex[charIdx], entry >>> RefShift];
+                entries[i] = [charIndex.indexToCharacter(charIdx), entry >>> RefShift];
             }
             this._nodesEntries = entries;
             return entries;
@@ -174,7 +174,7 @@ class FastTrieBlobINode implements ITrieNode {
             const acc = s.acc.clone();
             const letterIdx = acc.decode(charIdx);
             if (letterIdx !== undefined) {
-                const char = charIndex[letterIdx];
+                const char = charIndex.indexToCharacter(letterIdx);
                 const nodeIdx = entry >>> NodeChildRefShift;
                 entries[eIdx++] = [char, nodeIdx];
                 continue;

@@ -22,7 +22,7 @@ describe('Import/Export', () => {
         const data = Buffer.from([...serializeTrie(trie, { version, base })].join('\n'));
         const root = decodeTrieData(data);
         const words = [...root.words()];
-        expect(words).toEqual([...sampleWords].sort());
+        expect(words.sort()).toEqual([...sampleWords].sort());
     });
 
     test('tests serialize / deserialize V2', async () => {
