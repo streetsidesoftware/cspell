@@ -92,9 +92,10 @@ function groupBy<T, K>(data: T[], key: keyof T | ((d: T) => K)): Map<K, T[]> {
 
 function changeDate(date: Date, deltaDays: number): Date {
     const d = new Date(date);
-    d.setUTCDate(d.getUTCDate() + deltaDays);
-    d.setUTCHours(0, 0, 0, 0);
-    return d;
+    const n = d.setUTCHours(0);
+    const dd = new Date(n + deltaDays * 24 * 60 * 60 * 1000);
+    dd.setUTCHours(0, 0, 0, 0);
+    return dd;
 }
 
 function calcAllStats(data: [string, CsvRecord[]][]): CalcStats[] {
@@ -175,12 +176,13 @@ interface DailyStats {
 }
 
 // cspell:ignore xychart
+const monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 
 function createDailyPerfGraph(dailyStats: DailyStats[]): string {
     const bar = dailyStats.map((d) => d.fps.toFixed(2));
     const lineMax = dailyStats.map((d) => d.fpsMax.toFixed(2));
     const lineMin = dailyStats.map((d) => d.fpsMin.toFixed(2));
-    const xAxis = dailyStats.map((d) => `${d.date.getUTCDay()}-${d.date.getUTCDay()}`);
+    const xAxis = dailyStats.map((d) => `${monthNames[d.date.getUTCMonth()]}-${d.date.getUTCDate()}`);
     return inject`
         ## Daily Performance
 
@@ -201,7 +203,9 @@ function createDailyStats(data: CsvRecord[]): DailyStats[] {
 
     const recordsByDay = groupBy(data, (r) => new Date(r.timestamp).setUTCHours(0, 0, 0, 0));
 
-    for (const [dayTs, records] of recordsByDay) {
+    const entries = [...recordsByDay.entries()].sort((a, b) => a[0] - b[0]);
+
+    for (const [dayTs, records] of entries) {
         const date = new Date(dayTs);
         const files = records.reduce((sum, r) => sum + r.files, 0);
         const elapsedSeconds = records.reduce((sum, r) => sum + r.elapsedMs, 0) / 1000;
