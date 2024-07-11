@@ -17,6 +17,7 @@ import type { TrieData } from './TrieData.js';
 import { clean } from './utils/clean.js';
 import { mergeOptionalWithDefaults } from './utils/mergeOptionalWithDefaults.js';
 import { replaceAllFactory } from './utils/util.js';
+import assert from 'assert';
 
 const defaultLegacyMinCompoundLength = 3;
 
@@ -189,10 +190,15 @@ export class ITrieImpl implements ITrie {
 
     findWord(word: string, options?: FindWordOptions): FindFullResult {
         if (this.data.has(word)) {
-            if (this.hasForbidden && this.data.has(this._info.forbiddenWordPrefix + word)) {
-                return { found: word, forbidden: true, caseMatched: true, compoundUsed: false };
-            }
-            return { found: word, forbidden: undefined, caseMatched: true, compoundUsed: false };
+            const forbidden = (this.hasForbidden && this.data.has(this._info.forbiddenWordPrefix + word)) || undefined;
+            const r = { found: word, forbidden, caseMatched: true, compoundUsed: false };
+            // const old = findWord(this.root, word, this.createFindOptionsMatchCase(options?.caseSensitive));
+            // assert.deepStrictEqual(
+            //     r,
+            //     old,
+            //     'findWord does not match hasWord a: ' + JSON.stringify(r) + ' b: ' + JSON.stringify(old),
+            // );
+            return r;
         }
         if (options?.useLegacyWordCompounds) {
             const len =
@@ -313,7 +319,6 @@ export class ITrieImpl implements ITrie {
         return findOptions;
     }
 }
-
 export interface FindWordOptions {
     caseSensitive?: boolean;
     useLegacyWordCompounds?: boolean | number;

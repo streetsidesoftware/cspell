@@ -30,7 +30,7 @@ export class CharIndex {
     }
 
     wordToCharIndexSequence(word: string): number[] {
-        word = word.normalize('NFC');
+        // word = word.normalize('NFC');
 
         // Note: Array.flatMap is very slow
         const seq: number[] = new Array(word.length);
@@ -121,7 +121,7 @@ export class CharIndexBuilder {
     }
 
     wordToCharIndexSequence(word: string): number[] {
-        word = word.normalize('NFC');
+        // word = word.normalize('NFC');
         const seq: number[] = new Array(word.length);
         let i = 0;
         for (const c of word) {
