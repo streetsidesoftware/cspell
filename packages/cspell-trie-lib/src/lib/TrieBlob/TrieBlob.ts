@@ -40,7 +40,7 @@ const headerSig = 'TrieBlob';
 const version = '00.01.00';
 const endianSig = 0x0403_0201;
 
-const lookupCount = 20;
+const lookupCount = 50;
 
 export class TrieBlob implements TrieData {
     readonly info: Readonly<TrieInfo>;
@@ -82,16 +82,16 @@ export class TrieBlob implements TrieData {
         return this.charIndex.getCharIndexSeq(letter);
     }
 
-    has(word: string): boolean {
-        return this._has(0, word);
+    hasV1(word: string): boolean {
+        return this._hasV1(0, word);
     }
 
-    has8(word: string): boolean {
+    has(word: string): boolean {
         return this._has8(0, word);
     }
 
     isForbiddenWord(word: string): boolean {
-        return !!this._forbidIdx && this._has(this._forbidIdx, word);
+        return !!this._forbidIdx && this._hasV1(this._forbidIdx, word);
     }
 
     hasForbiddenWords(): boolean {
@@ -116,7 +116,7 @@ export class TrieBlob implements TrieData {
         return findNode(this.getRoot(), prefix);
     }
 
-    private _has(nodeIdx: number, word: string): boolean {
+    private _hasV1(nodeIdx: number, word: string): boolean {
         const NodeMaskNumChildren = TrieBlob.NodeMaskNumChildren;
         const NodeMaskChildCharIndex = TrieBlob.NodeMaskChildCharIndex;
         const NodeChildRefShift = TrieBlob.NodeChildRefShift;
@@ -150,26 +150,18 @@ export class TrieBlob implements TrieData {
 
     private _has8(nodeIdx: number, word: string): boolean {
         const NodeMaskNumChildren = TrieBlob.NodeMaskNumChildren;
-        // const NodeMaskChildCharIndex = TrieBlob.NodeMaskChildCharIndex;
         const NodeChildRefShift = TrieBlob.NodeChildRefShift;
         const nodes = this.nodes;
         const nodes8 = this.#nodes8;
         const wordIndexes = this.wordToNodeCharIndexSequence(word);
         const len = wordIndexes.length;
         let p = 0;
-        // const idxLookup = this.#nodeIdxLookup;
-        // for (let m = idxLookup.get(nodeIdx); m && p < len; ++p) {
-        //     const i = m.get(wordIndexes[p]);
-        //     if (!i) break;
-        //     nodeIdx = i;
-        //     m = idxLookup.get(nodeIdx);
-        // }
         let node = nodes[nodeIdx];
         for (; p < len; ++p, node = nodes[nodeIdx]) {
             const letterIdx = wordIndexes[p];
             const count = node & NodeMaskNumChildren;
             const idx4 = nodeIdx << 2;
-            if (count > 20) {
+            if (count > 15) {
                 const pEnd = idx4 + (count << 2);
                 let i = idx4 + 4;
                 let j = pEnd;

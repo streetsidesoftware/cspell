@@ -28,8 +28,8 @@ suite('trie has', async (test) => {
         trieHasWords(trieBlob, words);
     });
 
-    test('trieBlob.has8 has words', () => {
-        trieHasWords({ has: (word) => trieBlob.has8(word) }, words);
+    test('trieBlob.hasV1 has words', () => {
+        trieHasWords({ has: (word) => trieBlob.hasV1(word) }, words);
     });
 });
 
