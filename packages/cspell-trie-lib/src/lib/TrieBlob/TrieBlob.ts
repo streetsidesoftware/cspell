@@ -71,7 +71,7 @@ export class TrieBlob implements TrieData {
         this.wordToCharacters = (word: string) => [...word];
         this._forbidIdx = this._lookupNode(0, this.info.forbiddenWordPrefix);
         this.#prepLookup();
-        this.#nodes8 = new Uint8Array(nodes.buffer);
+        this.#nodes8 = new Uint8Array(nodes.buffer, nodes.byteOffset + this.#beAdj);
     }
 
     public wordToNodeCharIndexSequence(word: string): number[] {
@@ -149,7 +149,6 @@ export class TrieBlob implements TrieData {
     }
 
     private _has8(nodeIdx: number, word: string): boolean {
-        const beAdj = this.#beAdj;
         const NodeMaskNumChildren = TrieBlob.NodeMaskNumChildren;
         // const NodeMaskChildCharIndex = TrieBlob.NodeMaskChildCharIndex;
         const NodeChildRefShift = TrieBlob.NodeChildRefShift;
@@ -170,7 +169,23 @@ export class TrieBlob implements TrieData {
             const letterIdx = wordIndexes[p];
             const count = node & NodeMaskNumChildren;
             const idx4 = nodeIdx << 2;
-            let i = idx4 + count * 4 + beAdj;
+            if (count > 20) {
+                const pEnd = idx4 + (count << 2);
+                let i = idx4 + 4;
+                let j = pEnd;
+                while (j - i >= 4) {
+                    const m = ((i + j) >> 1) & ~3;
+                    if (nodes8[m] < letterIdx) {
+                        i = m + 4;
+                    } else {
+                        j = m;
+                    }
+                }
+                if (i > pEnd || nodes8[i] !== letterIdx) return false;
+                nodeIdx = nodes[i >> 2] >>> NodeChildRefShift;
+                continue;
+            }
+            let i = idx4 + count * 4;
             for (; i > idx4; i -= 4) {
                 if (nodes8[i] === letterIdx) {
                     break;
