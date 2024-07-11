@@ -30,9 +30,9 @@
     "clean-build": "pnpm run clean && pnpm run build",
     "coverage": "vitest run --coverage",
     "test:watch": "vitest",
-    "test:perf": "insight --register ts-node/esm --file \"**/*.perf.{mts,ts}\" -t 500",
-    "test:perf:js": "insight -t 500",
-    "test:perf:prof": "node --cpu-prof  ../../node_modules/perf-insight/bin.mjs -t 1000",
+    "test:perf": "NODE_ENV=production insight --register ts-node/esm --file \"**/*.perf.{mts,ts}\" -t 500",
+    "test:perf:js": "NODE_ENV=production insight -t 500",
+    "test:perf:prof": "NODE_ENV=production node --cpu-prof  ../../node_modules/perf-insight/bin.mjs -t 1000",
     "test": "vitest run",
     "watch": "tsc -p . -w"
   },

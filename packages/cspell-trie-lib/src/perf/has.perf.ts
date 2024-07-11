@@ -27,6 +27,10 @@ suite('trie has', async (test) => {
     test('trieBlob has words', () => {
         trieHasWords(trieBlob, words);
     });
+
+    test('trieBlob.has8 has words', () => {
+        trieHasWords({ has: (word) => trieBlob.has8(word) }, words);
+    });
 });
 
 suite('encode to sequence', async (test) => {

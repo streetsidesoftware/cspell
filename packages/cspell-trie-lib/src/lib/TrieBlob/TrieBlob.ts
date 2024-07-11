@@ -1,3 +1,5 @@
+import { endianness } from 'node:os';
+
 import { defaultTrieInfo } from '../constants.js';
 import type { ITrieNode, ITrieNodeRoot } from '../ITrieNode/ITrieNode.js';
 import { findNode } from '../ITrieNode/trie-util.js';
@@ -45,6 +47,9 @@ export class TrieBlob implements TrieData {
     private _forbidIdx: number | undefined;
     private _size: number | undefined;
     private _iTrieRoot: ITrieNodeRoot | undefined;
+    /** the nodes data in 8 bits */
+    #nodes8: Uint8Array;
+    #beAdj = endianness() === 'BE' ? 3 : 0;
 
     /**
      * Lookup table for node indexes.
@@ -66,6 +71,7 @@ export class TrieBlob implements TrieData {
         this.wordToCharacters = (word: string) => [...word];
         this._forbidIdx = this._lookupNode(0, this.info.forbiddenWordPrefix);
         this.#prepLookup();
+        this.#nodes8 = new Uint8Array(nodes.buffer);
     }
 
     public wordToNodeCharIndexSequence(word: string): number[] {
@@ -78,6 +84,10 @@ export class TrieBlob implements TrieData {
 
     has(word: string): boolean {
         return this._has(0, word);
+    }
+
+    has8(word: string): boolean {
+        return this._has8(0, word);
     }
 
     isForbiddenWord(word: string): boolean {
@@ -138,6 +148,41 @@ export class TrieBlob implements TrieData {
         return (node & TrieBlob.NodeMaskEOW) === TrieBlob.NodeMaskEOW;
     }
 
+    private _has8(nodeIdx: number, word: string): boolean {
+        const beAdj = this.#beAdj;
+        const NodeMaskNumChildren = TrieBlob.NodeMaskNumChildren;
+        // const NodeMaskChildCharIndex = TrieBlob.NodeMaskChildCharIndex;
+        const NodeChildRefShift = TrieBlob.NodeChildRefShift;
+        const nodes = this.nodes;
+        const nodes8 = this.#nodes8;
+        const wordIndexes = this.wordToNodeCharIndexSequence(word);
+        const len = wordIndexes.length;
+        let p = 0;
+        // const idxLookup = this.#nodeIdxLookup;
+        // for (let m = idxLookup.get(nodeIdx); m && p < len; ++p) {
+        //     const i = m.get(wordIndexes[p]);
+        //     if (!i) break;
+        //     nodeIdx = i;
+        //     m = idxLookup.get(nodeIdx);
+        // }
+        let node = nodes[nodeIdx];
+        for (; p < len; ++p, node = nodes[nodeIdx]) {
+            const letterIdx = wordIndexes[p];
+            const count = node & NodeMaskNumChildren;
+            const idx4 = nodeIdx << 2;
+            let i = idx4 + count * 4 + beAdj;
+            for (; i > idx4; i -= 4) {
+                if (nodes8[i] === letterIdx) {
+                    break;
+                }
+            }
+            if (i <= idx4) return false;
+            nodeIdx = nodes[i >> 2] >>> NodeChildRefShift;
+        }
+
+        return (node & TrieBlob.NodeMaskEOW) === TrieBlob.NodeMaskEOW;
+    }
+
     /**
      * Find the node index for the given character.
      * @param nodeIdx - node index to start the search
@@ -180,6 +225,7 @@ export class TrieBlob implements TrieData {
         }
         return undefined;
     }
+
     *words(): Iterable<string> {
         interface StackItem {
             nodeIdx: number;
