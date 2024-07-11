@@ -22,6 +22,7 @@ interface CsvRecord {
     timestamp: string;
     elapsedMs: number;
     repo: string;
+    /** number of files processed */
     files: number;
     filesWithIssues: number;
     issues: number;
@@ -29,6 +30,8 @@ interface CsvRecord {
     platform: string;
     usageUser: number;
     usageSystem: number;
+    /** number of kilobytes processed */
+    kilobytes: number;
 }
 const csvHeaders = [
     'timestamp',
@@ -41,6 +44,7 @@ const csvHeaders = [
     'platform',
     'usageUser',
     'usageSystem',
+    'kilobytes',
 ] as const;
 
 const reformatCsv = false;
@@ -87,6 +91,7 @@ export function getReporter(_settings: unknown, config?: Config): CSpellReporter
             platform: process.platform,
             usageUser: usage.user / 1000,
             usageSystem: usage.system / 1000,
+            kilobytes: await getFileSizes([...files]),
         };
         await writePerfCsvRecord(csvRecord, root);
     }
@@ -182,11 +187,36 @@ async function createCsvFile(csvUrl: URL): Promise<void> {
     return fs.writeFile(csvUrl, stringifyCsv(records, { header: true, columns: [...csvHeaders] }));
 }
 
+function extractFieldFromCsv(csvRecord: CsvRecord, field: keyof CsvRecord): number | string | undefined {
+    if (field === 'elapsedMs') return csvRecord[field].toFixed(2);
+    return csvRecord[field];
+}
+
 async function writePerfCsvRecord(csvRecord: CsvRecord, root: vscodeUri.URI): Promise<void> {
     const url = getPerfCsvFileUrl(root);
 
     await createCsvFile(url);
 
-    const record = csvHeaders.map((key) => csvRecord[key]);
+    const record = csvHeaders.map((key) => extractFieldFromCsv(csvRecord, key));
     await fs.appendFile(url, stringifyCsv([record]));
+}
+
+/**
+ *
+ * @param files - list of files to get the size of
+ * @returns total size of all files in kilobytes.
+ */
+async function getFileSizes(files: string[]): Promise<number> {
+    let total = 0;
+
+    for (const file of files) {
+        try {
+            const stat = await fs.stat(file);
+            total += stat.size;
+        } catch {
+            // ignore
+        }
+    }
+
+    return Math.ceil(total / 1024);
 }

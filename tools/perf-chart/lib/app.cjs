@@ -4390,18 +4390,55 @@ function calcVariance(values, mean) {
   return values.reduce((a, b) => a + Math.pow(b - avg, 2), 0) / values.length;
 }
 
+// src/text.ts
+function inject(template, ...values) {
+  const strings = template;
+  const adjValues = [];
+  for (let i = 0; i < values.length; ++i) {
+    const prevLines = strings[i].split("\n");
+    const currLine = prevLines[prevLines.length - 1];
+    const padLen = padLength(currLine);
+    const padding = " ".repeat(padLen);
+    const value = `${values[i]}`;
+    let pad = "";
+    const valueLines = [];
+    for (const line of value.split("\n")) {
+      valueLines.push(pad + line);
+      pad = padding;
+    }
+    adjValues.push(valueLines.join("\n"));
+  }
+  return unindent(String.raw({ raw: strings }, ...adjValues));
+}
+function padLength(s2) {
+  return s2.length - s2.trimStart().length;
+}
+function unindent(str) {
+  const lines = str.split("\n");
+  let curPad = str.length;
+  for (const line of lines) {
+    if (!line.trim()) continue;
+    curPad = Math.min(curPad, padLength(line));
+  }
+  return lines.map((line) => line.slice(curPad)).join("\n");
+}
+
 // src/perfChart.ts
 async function perfReport(csvFile) {
   const limit = changeDate(/* @__PURE__ */ new Date(), -30).getTime();
   const records = (await readCsvData(csvFile)).filter((r) => r.platform === "linux" && r.timestamp >= limit);
+  const dailyStats = createDailyStats(records);
   const data = [...groupBy(records, "repo")].sort((a, b) => a[0].localeCompare(b[0]));
-  const markdown = `# Performance Report
+  const markdown = inject`\
+        # Performance Report
 
-${createPerfTable1(data)}
+        ${createDailyPerfGraph(dailyStats)}
 
-${createPerfTable2(data)}
+        ${createPerfTable1(data)}
 
-`;
+        ${createPerfTable2(data)}
+
+    `;
   return markdown;
 }
 async function readCsvData(csvFile) {
@@ -4424,9 +4461,10 @@ function calcStats(data) {
   return { point, avg, min, max, sum, count: values.length, sd, trend };
 }
 function groupBy(data, key) {
+  const fn = typeof key === "function" ? key : (d) => d[key];
   const map = /* @__PURE__ */ new Map();
   for (const d of data) {
-    const k = d[key];
+    const k = fn(d);
     const group = map.get(k) || [];
     group.push(d);
     map.set(k, group);
@@ -4436,6 +4474,7 @@ function groupBy(data, key) {
 function changeDate(date, deltaDays) {
   const d = new Date(date);
   d.setUTCDate(d.getUTCDate() + deltaDays);
+  d.setUTCHours(0, 0, 0, 0);
   return d;
 }
 function calcAllStats(data) {
@@ -4461,30 +4500,65 @@ function createPerfTable1(data) {
     ) : "";
     return `| ${repo.padEnd(36)} | ${p(s(point, 2), 6)} | ${sp(min)} / ${sp(avg)} / ${sp(max)} | ${sp(sd, 5, 2)} | \`${sdGraph}\` |`;
   });
-  return `
-| Repository | Elapsed | Min/Avg/Max | SD  | SD Graph  |
-| ---------- | ------: | ----------- | --: | --------  |
-${rows.join("\n")}
-`;
+  return inject`
+        | Repository | Elapsed | Min/Avg/Max | SD  | SD Graph  |
+        | ---------- | ------: | ----------- | --: | --------  |
+        ${rows.join("\n")}
+    `;
 }
 function createPerfTable2(data) {
   const stats = calcAllStats(data);
-  const rows = data.map(([repo], i) => {
+  const rows = data.map(([repo, records], i) => {
     const { point, count, trend, sd, avg } = stats[i];
     const trendGraph = simpleHistogram(trend, avg - 2 * sd, avg + 3 * sd);
     const relChange = (100 * (point - avg) / (avg || 1)).toFixed(2) + "%";
-    return `| ${repo.padEnd(36)} | ${p(s(point, 2), 6)} | ${p(relChange, 6)} | \`${trendGraph}\` | ${count} |`;
+    const lastRecord = records[records.length - 1];
+    const fps = lastRecord?.files ? 1e3 * lastRecord.files / lastRecord.elapsedMs : 0;
+    return `| ${repo.padEnd(36)} | ${p(s(point, 2), 6)} | ${p(fps.toFixed(2), 6)} | ${p(relChange, 6)} | \`${trendGraph}\` | ${count} |`;
   });
-  return `
-| Repository | Elapsed | Rel   | Trend | Count |
-| ---------- | ------: | ----: | ----- | ----: |
-${rows.join("\n")}
+  return inject`
+        | Repository | Elapsed | Fps  | Rel   | Trend | Count |
+        | ---------- | ------: | ---: | ----: | ----- | ----: |
+        ${rows.join("\n")}
 
-Note:
-- Elapsed time is in seconds. The trend graph shows the last 10 runs.
-  The SD graph shows the current run relative to the average and standard deviation.
-- Rel is the relative change from the average.
-`;
+        Note:
+        - Elapsed time is in seconds. The trend graph shows the last 10 runs.
+        The SD graph shows the current run relative to the average and standard deviation.
+        - Rel is the relative change from the average.
+    `;
+}
+function createDailyPerfGraph(dailyStats) {
+  const bar = dailyStats.map((d) => d.fps.toFixed(2));
+  const lineMax = dailyStats.map((d) => d.fpsMax.toFixed(2));
+  const lineMin = dailyStats.map((d) => d.fpsMin.toFixed(2));
+  const xAxis = dailyStats.map((d) => `${d.date.getUTCDay()}-${d.date.getUTCDay()}`);
+  return inject`
+        ## Daily Performance
+
+        ${"```mermaid"}
+        xychart-beta
+            title Daily Performance
+            y-axis Files per Second
+            x-axis [${xAxis.join(", ")}]
+            bar [${bar.join(", ")}]
+            line [${lineMax.join(", ")}]
+            line [${lineMin.join(", ")}]
+        ${"```"}
+    `;
+}
+function createDailyStats(data) {
+  const dailyStats = [];
+  const recordsByDay = groupBy(data, (r) => new Date(r.timestamp).setUTCHours(0, 0, 0, 0));
+  for (const [dayTs, records] of recordsByDay) {
+    const date = new Date(dayTs);
+    const files = records.reduce((sum, r) => sum + r.files, 0);
+    const elapsedSeconds = records.reduce((sum, r) => sum + r.elapsedMs, 0) / 1e3;
+    const fps = files / elapsedSeconds;
+    const fpsMax = Math.max(...records.map((r) => 1e3 * r.files / r.elapsedMs));
+    const fpsMin = Math.min(...records.map((r) => 1e3 * r.files / r.elapsedMs));
+    dailyStats.push({ date, files, elapsedSeconds, fps, fpsMax, fpsMin });
+  }
+  return dailyStats;
 }
 
 // src/app.ts
