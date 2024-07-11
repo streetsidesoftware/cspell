@@ -17,7 +17,6 @@ import type { TrieData } from './TrieData.js';
 import { clean } from './utils/clean.js';
 import { mergeOptionalWithDefaults } from './utils/mergeOptionalWithDefaults.js';
 import { replaceAllFactory } from './utils/util.js';
-import assert from 'assert';
 
 const defaultLegacyMinCompoundLength = 3;
 
