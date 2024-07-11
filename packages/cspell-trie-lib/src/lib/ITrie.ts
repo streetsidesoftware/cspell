@@ -189,14 +189,8 @@ export class ITrieImpl implements ITrie {
 
     findWord(word: string, options?: FindWordOptions): FindFullResult {
         if (this.data.has(word)) {
-            const forbidden = (this.hasForbidden && this.data.has(this._info.forbiddenWordPrefix + word)) || undefined;
+            const forbidden = this.data.isForbiddenWord(word) || undefined;
             const r = { found: word, forbidden, caseMatched: true, compoundUsed: false };
-            // const old = findWord(this.root, word, this.createFindOptionsMatchCase(options?.caseSensitive));
-            // assert.deepStrictEqual(
-            //     r,
-            //     old,
-            //     'findWord does not match hasWord a: ' + JSON.stringify(r) + ' b: ' + JSON.stringify(old),
-            // );
             return r;
         }
         if (options?.useLegacyWordCompounds) {

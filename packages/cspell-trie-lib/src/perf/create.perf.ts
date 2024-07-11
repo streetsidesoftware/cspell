@@ -1,5 +1,6 @@
 import { suite } from 'perf-insight';
 
+import { buildITrieFromWords } from '../lib/index.js';
 import { createTrieBlobFromITrieNodeRoot } from '../lib/TrieBlob/createTrieBlob.js';
 import { FastTrieBlob } from '../lib/TrieBlob/FastTrieBlob.js';
 import { FastTrieBlobBuilder } from '../lib/TrieBlob/FastTrieBlobBuilder.js';
@@ -16,12 +17,21 @@ suite('trie create', async (test) => {
     const iTrie = createITrieFromList(words);
     const trie = createTrieRootFromList(words);
     const fastTrie = FastTrieBlobBuilder.fromWordList(words);
+    console.error('Info: %o', {
+        wordsSize: words.length,
+        fastTrieSize: fastTrie.size,
+        fastTrieSmallSize: FastTrieBlobBuilder.fromWordList(words.slice(-1000)).size,
+    });
     const trieBlob = fastTrie.toTrieBlob();
 
     test('FastTrieBlobBuilder.insert.build', () => {
         const builder = new FastTrieBlobBuilder();
         builder.insert(words);
         builder.build();
+    });
+
+    test('ITrie buildITrieFromWords', () => {
+        buildITrieFromWords(words);
     });
 
     test('FastTrieBlobBuilder.fromWordList', () => {
@@ -44,7 +54,7 @@ suite('trie create', async (test) => {
         createTrieBlobFromITrieNodeRoot(iTrie);
     });
 
-    test('TrieBlob', () => {
+    test('TrieBlob fastTrie.toTrieBlob', () => {
         fastTrie.toTrieBlob();
     });
 });
