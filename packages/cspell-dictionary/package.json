@@ -22,12 +22,15 @@
   ],
   "scripts": {
     "clean": "shx rm -rf dist temp coverage \"*.tsbuildInfo\"",
-    "build": "tsc -b . -f",
+    "build": "tsc -p .",
     "clean-build": "pnpm run clean && pnpm run build",
     "coverage": "vitest run --coverage",
     "test:watch": "vitest",
     "test": "vitest run",
-    "watch": "tsc -b . -w -f"
+    "test:perf": "NODE_ENV=production insight --register ts-node/esm --file \"**/*.perf.{mts,ts}\" -t 500",
+    "test:perf:js": "NODE_ENV=production insight -t 500",
+    "test:perf:prof": "NODE_ENV=production node --cpu-prof  ../../node_modules/perf-insight/bin.mjs -t 1000",
+    "watch": "tsc -p . -w "
   },
   "repository": {
     "type": "git",
@@ -52,5 +55,8 @@
     "cspell-trie-lib": "workspace:*",
     "fast-equals": "^5.0.1",
     "gensequence": "^7.0.0"
+  },
+  "devDependencies": {
+    "lorem-ipsum": "^2.0.8"
   }
 }

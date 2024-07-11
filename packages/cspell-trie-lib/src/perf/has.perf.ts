@@ -2,6 +2,7 @@ import assert from 'node:assert';
 
 import { suite } from 'perf-insight';
 
+import { ITrieImpl } from '../lib/ITrie.js';
 import { readFastTrieBlobFromConfig, readTrieFromConfig } from '../test/dictionaries.test.helper.js';
 
 // const measureTimeout = 100;
@@ -15,6 +16,8 @@ suite('trie has', async (test) => {
     const words = await getWords();
     const fastTrieBlob = await getFastTrieBlob();
     const trieBlob = fastTrieBlob.toTrieBlob();
+    const iTrieFast = new ITrieImpl(fastTrieBlob);
+    const iTrieBlob = new ITrieImpl(trieBlob);
 
     test('trie has words', () => {
         trieHasWords(trie, words);
@@ -30,6 +33,14 @@ suite('trie has', async (test) => {
 
     test('trieBlob.hasV1 has words', () => {
         trieHasWords({ has: (word) => trieBlob.hasV1(word) }, words);
+    });
+
+    test('iTrieFast has words', () => {
+        trieHasWords(iTrieFast, words);
+    });
+
+    test('iTrieBlob has words', () => {
+        trieHasWords(iTrieBlob, words);
     });
 });
 
