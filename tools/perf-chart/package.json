@@ -16,7 +16,8 @@
     "build:tsc": "tsc -p .",
     "clean": "shx rm -rf dist coverage \"*.tsbuildInfo\"",
     "clean-build": "pnpm run clean && pnpm run build",
-    "test-vitest": "vitest run"
+    "test-vitest": "vitest run",
+    "watch": "tsc -p . -w"
   },
   "author": "Jason Dent",
   "license": "MIT",
