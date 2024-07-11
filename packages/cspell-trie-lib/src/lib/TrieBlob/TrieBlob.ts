@@ -38,11 +38,23 @@ const headerSig = 'TrieBlob';
 const version = '00.01.00';
 const endianSig = 0x0403_0201;
 
+const lookupCount = 20;
+
 export class TrieBlob implements TrieData {
     readonly info: Readonly<TrieInfo>;
     private _forbidIdx: number | undefined;
     private _size: number | undefined;
     private _iTrieRoot: ITrieNodeRoot | undefined;
+
+    /**
+     * Lookup table for node indexes.
+     * The first level is the node index.
+     * The second level is the character index.
+     * The value is the node index of the child node.
+     * It speeds the lookup process up by about 20%.
+     */
+    #nodeIdxLookup: Map<number, Map<number, number>> = new Map();
+
     wordToCharacters: (word: string) => string[];
 
     constructor(
@@ -53,6 +65,7 @@ export class TrieBlob implements TrieData {
         this.info = mergeOptionalWithDefaults(info);
         this.wordToCharacters = (word: string) => [...word];
         this._forbidIdx = this._lookupNode(0, this.info.forbiddenWordPrefix);
+        this.#prepLookup();
     }
 
     public wordToNodeCharIndexSequence(word: string): number[] {
@@ -100,8 +113,16 @@ export class TrieBlob implements TrieData {
         const nodes = this.nodes;
         const wordIndexes = this.wordToNodeCharIndexSequence(word);
         const len = wordIndexes.length;
+        let p = 0;
+        const idxLookup = this.#nodeIdxLookup;
+        for (let m = idxLookup.get(nodeIdx); m && p < len; ++p) {
+            const i = m.get(wordIndexes[p]);
+            if (!i) break;
+            nodeIdx = i;
+            m = idxLookup.get(nodeIdx);
+        }
         let node = nodes[nodeIdx];
-        for (let p = 0; p < len; ++p, node = nodes[nodeIdx]) {
+        for (; p < len; ++p, node = nodes[nodeIdx]) {
             const letterIdx = wordIndexes[p];
             const count = node & NodeMaskNumChildren;
             let i = count;
@@ -270,6 +291,67 @@ export class TrieBlob implements TrieData {
         return trieBlob;
     }
 
+    #prepLookup() {
+        const NodeMaskNumChildren = TrieBlob.NodeMaskNumChildren;
+        const NodeMaskChildCharIndex = TrieBlob.NodeMaskChildCharIndex;
+        const NodeChildRefShift = TrieBlob.NodeChildRefShift;
+        const stack: WalkStackItem[] = [];
+        const iter = this.#walk(stack)[Symbol.iterator]();
+        const nodes = this.nodes;
+
+        let n: IteratorResult<number>;
+        let deeper = true;
+        while (!(n = iter.next(deeper)).done) {
+            const depth = n.value;
+            const nodeIdx = stack[depth].nodeIdx;
+            const node = nodes[nodeIdx];
+            const len = node & NodeMaskNumChildren;
+            deeper = len > lookupCount;
+            if (deeper) {
+                const map = new Map<number, number>();
+                this.#nodeIdxLookup.set(nodeIdx, map);
+                for (let i = len; i > 0; --i) {
+                    const n = nodes[i + nodeIdx];
+                    map.set(n & NodeMaskChildCharIndex, n >> NodeChildRefShift);
+                }
+                // const parent = depth > 0 ? stack[depth - 1].nodeIdx : -1;
+                // console.error('Node %d has %d children, parent %d', nodeIdx, len, parent);
+            }
+        }
+    }
+
+    *#walk(wStack: WalkStackItem[]): Generator<number, undefined, undefined | boolean> {
+        const NodeMaskNumChildren = TrieBlob.NodeMaskNumChildren;
+        const NodeChildRefShift = TrieBlob.NodeChildRefShift;
+        const nodes = this.nodes;
+        const stack = wStack;
+        stack[0] = { nodeIdx: 0, pos: 0 };
+        let depth = 0;
+
+        while (depth >= 0) {
+            const { nodeIdx, pos } = stack[depth];
+            const node = nodes[nodeIdx];
+            // pos is 0 when first entering a node
+            if (!pos) {
+                const deeper = yield depth;
+                if (deeper === false) {
+                    --depth;
+                    continue;
+                }
+            }
+            const len = node & NodeMaskNumChildren;
+            if (pos >= len) {
+                --depth;
+                continue;
+            }
+            const nextPos = ++stack[depth].pos;
+            const entry = nodes[nodeIdx + nextPos];
+            ++depth;
+            stack[depth] = stack[depth] || { nodeIdx: 0, pos: 0 };
+            (stack[depth].nodeIdx = entry >>> NodeChildRefShift), (stack[depth].pos = 0);
+        }
+    }
+
     static NodeMaskEOW = 0x0000_0100;
     static NodeMaskNumChildren = (1 << NodeHeaderNumChildrenBits) - 1;
     static NodeMaskNumChildrenShift = NodeHeaderNumChildrenShift;
@@ -289,6 +371,11 @@ export class TrieBlob implements TrieData {
     static nodesView(trie: TrieBlob): Readonly<Uint32Array> {
         return new Uint32Array(trie.nodes);
     }
+}
+
+interface WalkStackItem {
+    nodeIdx: number;
+    pos: number;
 }
 
 function isLittleEndian(): boolean {
