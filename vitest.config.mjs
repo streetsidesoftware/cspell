@@ -39,7 +39,7 @@ const defaultConfig = {
                 '**/fixtures/**',
                 '**/perf/**',
                 '**/samples/**',
-                '**/test-*/**',
+                '**/test*/**',
                 '**/test.*',
                 'ajv.config.*',
                 'bin.cjs',

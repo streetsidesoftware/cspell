@@ -23,7 +23,7 @@ describe('FastTrieBlobBuilder', () => {
         builder.insert(words);
         expect(builder.has('😀😃😄😁😆🥹😅😂🤣🥲☺️😊😇🙂🙃😉')).toBe(true);
         const ft = builder.build();
-        expect([...ft.words()]).toEqual([...words]);
+        expect([...ft.words()]).toEqual([...words].sort());
     });
 
     test('setOptions', () => {

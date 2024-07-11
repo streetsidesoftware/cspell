@@ -99,36 +99,6 @@ type AwaitedRecord<T> = { [K in keyof T]: AwaitedFnOrValue<T[K]> };
 
 type AwaitedFnOrValue<T> = T extends () => infer P ? Awaited<P> : Awaited<T>;
 
-function _makeLazy<T extends Record<string, () => unknown>>(deps: T): T {
-    const r = { ...deps } as T;
-    for (const key of Object.keys(deps) as (keyof T)[]) {
-        const fn = deps[key];
-        if (typeof fn === 'function') {
-            // force the assignment to `any`. It is not 100% safe, but it works for this use case.
-            r[key] = lazy(fn) as any;
-        }
-    }
-    return r;
-}
-
-function _createPrepareFn<T extends Record<string, unknown>>(
-    deps: T,
-): <K extends keyof T>(...keys: K[]) => () => Promise<AwaitedRecord<T>> {
-    const prepare = async <K extends keyof T>(...keys: K[]) => {
-        const prep = { ...deps } as AwaitedRecord<T>;
-        const src = deps as Pick<T, K>;
-
-        for (const key of keys) {
-            const v = src[key];
-            prep[key] = await (typeof v === 'function' ? v() : v);
-        }
-
-        return prep as AwaitedRecord<T>;
-    };
-
-    return () => prepare;
-}
-
 async function prepareDI<K extends DependenciesKeys>(keys: K[]): Promise<AwaitedRecord<Pick<TestDependencies, K>>> {
     const prep: Record<string, unknown> = {};
 

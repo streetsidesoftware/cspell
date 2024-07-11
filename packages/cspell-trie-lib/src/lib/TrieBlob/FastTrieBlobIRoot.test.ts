@@ -14,14 +14,14 @@ describe('FastTrieBlob', () => {
         const ft = FastTrieBlobBuilder.fromTrieRoot(root);
         const iTrieRoot = FastTrieBlob.toITrieNodeRoot(ft);
         const iter = walkerWordsITrie(iTrieRoot);
-        expect([...iter]).toEqual(words);
+        expect([...iter]).toEqual(words.sort());
     });
 
     test('toITrieNodeRoot.keys', () => {
         const root = createTrieRootFromList(words);
         const ft = FastTrieBlobBuilder.fromTrieRoot(root);
         const iTrieRoot = FastTrieBlob.toITrieNodeRoot(ft);
-        expect(iTrieRoot.keys()).toEqual([...new Set(words.map((w) => w[0]))]);
+        expect(iTrieRoot.keys()).toEqual([...new Set(words.map((w) => w[0]))].sort());
     });
 
     test('toITrieNodeRoot.keys large character set', () => {

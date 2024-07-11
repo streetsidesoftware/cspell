@@ -188,6 +188,11 @@ export class ITrieImpl implements ITrie {
     }
 
     findWord(word: string, options?: FindWordOptions): FindFullResult {
+        if (this.data.has(word)) {
+            const forbidden = this.data.isForbiddenWord(word) || undefined;
+            const r = { found: word, forbidden, caseMatched: true, compoundUsed: false };
+            return r;
+        }
         if (options?.useLegacyWordCompounds) {
             const len =
                 options.useLegacyWordCompounds !== true
@@ -307,7 +312,6 @@ export class ITrieImpl implements ITrie {
         return findOptions;
     }
 }
-
 export interface FindWordOptions {
     caseSensitive?: boolean;
     useLegacyWordCompounds?: boolean | number;

@@ -27,7 +27,6 @@ export class TrieBlobInternals implements BitMaskInfo {
     constructor(
         readonly nodes: Uint32Array,
         readonly charIndex: readonly string[],
-        readonly charToIndexMap: Readonly<Record<string, number>>,
         maskInfo: BitMaskInfo,
     ) {
         const { NodeMaskEOW, NodeMaskChildCharIndex, NodeMaskNumChildren, NodeChildRefShift } = maskInfo;

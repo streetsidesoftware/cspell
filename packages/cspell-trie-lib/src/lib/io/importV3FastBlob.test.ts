@@ -26,7 +26,7 @@ describe('Import/Export', () => {
                 .map((a) => (a ? a + '\r\n' : a)),
         );
         const words = [...ft.words()];
-        expect(words).toEqual([...smallSample].sort());
+        expect(words.sort()).toEqual([...smallSample].sort());
         const result = toTree(FastTrieBlob.toITrieNodeRoot(ft));
         expect(result).toBe(expected);
     });
@@ -36,7 +36,7 @@ describe('Import/Export', () => {
         const data = [...serializeTrie(consolidate(trie), 10)];
         const ft = importTrieV3AsFastTrieBlob(data);
         const words = [...ft.words()];
-        expect(words).toEqual([...specialCharacters].sort());
+        expect(words.sort()).toEqual([...specialCharacters].sort());
     });
 
     test('tests serialize / deserialize', async () => {
@@ -50,14 +50,14 @@ describe('Import/Export', () => {
         ].join('');
         const ft = importTrieV3AsFastTrieBlob(data.split('\n').map((a) => (a ? a + '\n' : a)));
         const words = [...ft.words()];
-        expect(words).toEqual([...sampleWords].sort());
+        expect(words.sort()).toEqual([...sampleWords].sort());
     });
 
     test('tests deserialize from file', async () => {
         const sample = await readFile(sampleFile, 'utf8');
         const root = importTrieV3AsFastTrieBlob(sample);
         const words = [...root.words()];
-        expect(words).toEqual([...sampleWords].sort());
+        expect(words.sort()).toEqual([...sampleWords].sort());
     });
 
     test('tests serialize / deserialize trie', () => {
@@ -65,7 +65,7 @@ describe('Import/Export', () => {
         const data = serializeTrie(trie, 10);
         const root = importTrieV3AsFastTrieBlob(data);
         const words = [...root.words()];
-        expect(words).toEqual([...sampleWords].sort());
+        expect(words.sort()).toEqual([...sampleWords].sort());
     });
 
     test.each`
@@ -87,7 +87,7 @@ describe('Import/Export', () => {
         const data = [...serializeTrie(trie.root, options)].join('');
         const ft = importTrieV3AsFastTrieBlob(data);
         const wordsTrie = [...ft.words()];
-        expect(wordsTrie).toEqual(wordList);
+        expect(wordsTrie.sort()).toEqual(wordList);
     });
 
     test.each`
@@ -104,7 +104,7 @@ describe('Import/Export', () => {
         const data = [...serializeTrie(trieDawg, options)];
         const root = importTrieV3AsFastTrieBlob(data);
         const words = [...root.words()];
-        expect(words).toEqual([...sampleWords].sort());
+        expect(words.sort()).toEqual([...sampleWords].sort());
     });
 });
 

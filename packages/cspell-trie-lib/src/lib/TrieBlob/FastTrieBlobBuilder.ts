@@ -1,9 +1,13 @@
+import { fork, reduceSync } from '@cspell/cspell-pipe';
+import { opMap, opTake, pipe, pipeSync } from '@cspell/cspell-pipe/sync';
+
 import type { BuilderCursor, TrieBuilder } from '../Builder/index.js';
 import type { PartialTrieInfo, TrieInfo } from '../ITrieNode/TrieInfo.js';
 import type { TrieNode, TrieRoot } from '../TrieNode/TrieNode.js';
 import { assert } from '../utils/assert.js';
 import { mergeOptionalWithDefaults } from '../utils/mergeOptionalWithDefaults.js';
 import { assertValidUtf16Character } from '../utils/text.js';
+import { CharIndexBuilder } from './CharIndex.js';
 import { FastTrieBlob } from './FastTrieBlob.js';
 import type { FastTrieBlobBitMaskInfo } from './FastTrieBlobBitMaskInfo.js';
 import { FastTrieBlobInternals } from './FastTrieBlobInternals.js';
@@ -13,8 +17,7 @@ import { TrieBlob } from './TrieBlob.js';
 type FastTrieBlobNode = number[];
 
 export class FastTrieBlobBuilder implements TrieBuilder<FastTrieBlob> {
-    private charToIndexMap: Record<string, number> = Object.create(null);
-    private charIndex: string[] = [''];
+    private charIndex = new CharIndexBuilder();
     private nodes: FastTrieBlobNode[];
     private _readonly = false;
     private IdxEOW: number;
@@ -41,42 +44,27 @@ export class FastTrieBlobBuilder implements TrieBuilder<FastTrieBlob> {
     }
 
     private getCharIndex(char: string): number {
-        let idx = this.charToIndexMap[char];
-        if (idx) return idx;
-
-        const charNFC = char.normalize('NFC');
-        const charNFD = char.normalize('NFD');
-
-        idx = this.charIndex.push(charNFC) - 1;
-
-        this.charToIndexMap[charNFC] = idx;
-        this.charToIndexMap[charNFD] = idx;
-
-        return idx;
+        return this.charIndex.getCharIndex(char);
     }
 
     private wordToNodeCharIndexSequence(word: string): number[] {
-        return TrieBlob.charactersToCharIndexSequence(this.wordToCharacters(word), (c) => this.getCharIndex(c));
+        return this.charIndex.wordToCharIndexSequence(word);
     }
 
     private letterToNodeCharIndexSequence(letter: string): number[] {
-        return TrieBlob.toCharIndexSequence(this.getCharIndex(letter));
+        return this.charIndex.charToSequence(letter);
     }
 
     insert(word: string | Iterable<string> | string[]): this {
-        if (this.isReadonly()) {
-            throw new Error('FastTrieBlob is readonly');
-        }
+        this.#assertNotReadonly();
         if (typeof word === 'string') {
             return this._insert(word);
         }
-        const words = word;
 
-        if (Array.isArray(words)) {
-            for (let i = 0; i < words.length; ++i) {
-                this._insert(words[i]);
-            }
-            return this;
+        const forked = fork(word);
+        const words = forked[1];
+        if (this.charIndex.size < 50) {
+            this.setCharacterSet(pipe(forked[0], opTake(5000)));
         }
 
         for (const w of words) {
@@ -86,6 +74,7 @@ export class FastTrieBlobBuilder implements TrieBuilder<FastTrieBlob> {
     }
 
     getCursor(): BuilderCursor {
+        this.#assertNotReadonly();
         this._cursor ??= this.createCursor();
         return this._cursor;
     }
@@ -317,13 +306,35 @@ export class FastTrieBlobBuilder implements TrieBuilder<FastTrieBlob> {
     }
 
     build(): FastTrieBlob {
+        this._cursor = undefined;
+        this._readonly = true;
         this.freeze();
-        Object.freeze(this.nodes);
 
         return FastTrieBlob.create(
-            new FastTrieBlobInternals(this.nodes, this.charIndex, this.charToIndexMap, this.bitMasksInfo),
+            new FastTrieBlobInternals(this.nodes, this.charIndex.build(), this.bitMasksInfo),
             this.options,
         );
+    }
+
+    #assertNotReadonly(): void {
+        assert(!this.isReadonly(), 'FastTrieBlobBuilder is readonly');
+    }
+
+    setCharacterSet(characters: string | Iterable<string>): void {
+        this.#assertNotReadonly();
+        const iChars = reduceSync(
+            pipeSync(
+                typeof characters === 'string' ? [characters.normalize('NFC')] : characters,
+                opMap((word) => new Set(word.normalize('NFC'))),
+            ),
+            collect,
+            new Set<string>(),
+        );
+        const letters = [...iChars].sort();
+        // console.error('setCharacterSet', letters);
+        for (const char of letters) {
+            this.getCharIndex(char);
+        }
     }
 
     static fromWordList(words: readonly string[] | Iterable<string>, options?: PartialTrieInfo): FastTrieBlob {
@@ -337,6 +348,7 @@ export class FastTrieBlobBuilder implements TrieBuilder<FastTrieBlob> {
         const NodeCharIndexMask = bitMasksInfo.NodeMaskChildCharIndex;
         const NodeMaskEOW = bitMasksInfo.NodeMaskEOW;
         const tf = new FastTrieBlobBuilder(undefined, bitMasksInfo);
+        tf.setCharacterSet(extractCharactersFromTrieRoot(root));
         const IdxEOW = tf.IdxEOW;
 
         const known = new Map<TrieNode, number>([[root, 0]]);
@@ -401,4 +413,37 @@ export class FastTrieBlobBuilder implements TrieBuilder<FastTrieBlob> {
         NodeMaskChildCharIndex: FastTrieBlobBuilder.NodeMaskChildCharIndex,
         NodeChildRefShift: FastTrieBlobBuilder.NodeChildRefShift,
     };
+}
+
+function collect(acc: Set<string>, s: Iterable<string>): Set<string> {
+    for (const w of s) {
+        acc.add(w);
+    }
+    return acc;
+}
+
+function extractCharactersFromTrieRoot(root: TrieRoot): Set<string> {
+    const collection = new Set<string>();
+
+    let i = 0;
+    let lastSize = 0;
+    let lastChange = 0;
+
+    function walk(n: TrieNode) {
+        if (!n.c) return;
+        ++i;
+        lastSize = collection.size;
+        collect(collection, Object.keys(n.c));
+        if (collection.size > lastSize) {
+            lastChange = i;
+        }
+        if (i - lastChange > 1000) {
+            return;
+        }
+        Object.values(n.c).map(walk);
+    }
+
+    walk(root);
+
+    return collection;
 }
