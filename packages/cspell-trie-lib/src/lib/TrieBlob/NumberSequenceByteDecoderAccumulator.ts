@@ -16,6 +16,10 @@ export type EncodedSequence =
 
 // eslint-disable-next-line unicorn/no-static-only-class
 export class NumberSequenceByteEncoderDecoder {
+    static encodeIfNeeded(n: number): number | EncodedSequence {
+        return n <= this.MaxCharIndex ? n : this.encode(n);
+    }
+
     static encode(n: number): EncodedSequence {
         if (n < this.SpecialCharIndexMask) return [n];
         if (n < this.SpecialCharIndexMask * 2) {

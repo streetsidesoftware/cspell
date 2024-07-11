@@ -30,7 +30,9 @@ export class CharIndex {
     }
 
     wordToCharIndexSequence(word: string): number[] {
-        // return [...word].flatMap((c) => this.getCharIndexSeq(c));
+        word = word.normalize('NFC');
+
+        // Note: Array.flatMap is very slow
         const seq: number[] = new Array(word.length);
         let i = 0;
         for (const c of word) {
@@ -46,6 +48,10 @@ export class CharIndex {
         }
         if (seq.length !== i) seq.length = i;
         return seq;
+    }
+
+    get size(): number {
+        return this.charIndex.length;
     }
 
     indexToCharacter(idx: number): string {
@@ -67,8 +73,7 @@ function buildCharIndexMap(charIndex: readonly string[]): CharIndexMap {
 function buildCharIndexSequenceMap(charIndexMap: RO_CharIndexMap): CharIndexSeqMap {
     const map: CharIndexSeqMap = Object.create(null);
     for (const [c, idx] of Object.entries(charIndexMap)) {
-        const n = NumberSequenceByteEncoderDecoder.encode(idx);
-        map[c] = n.length === 1 ? n[0] : n;
+        map[c] = NumberSequenceByteEncoderDecoder.encodeIfNeeded(idx);
     }
     return map;
 }
@@ -78,13 +83,13 @@ export class CharIndexBuilder {
     readonly charIndexMap: CharIndexMap = Object.create(null);
     readonly charIndexSeqMap: CharIndexSeqMap = Object.create(null);
 
-    readonly #mapIdxToSeq = new Map<number, number[]>();
+    readonly #mapIdxToSeq = new Map<number, number[] | number>();
 
     constructor() {
-        this.addChar('');
+        this.getCharIndex('');
     }
 
-    addChar(c: string): number {
+    getCharIndex(c: string): number {
         const found = this.charIndexMap[c];
         if (found !== undefined) {
             return found;
@@ -96,14 +101,43 @@ export class CharIndexBuilder {
         return idx;
     }
 
-    indexToSequence(idx: number): number[] {
+    indexToSequence(idx: number): number[] | number {
         const found = this.#mapIdxToSeq.get(idx);
-        if (found) {
+        if (found !== undefined) {
             return found;
         }
-        const seq = NumberSequenceByteEncoderDecoder.encode(idx);
+        const seq = NumberSequenceByteEncoderDecoder.encodeIfNeeded(idx);
         this.#mapIdxToSeq.set(idx, seq);
         return seq;
+    }
+
+    charToSequence(c: string): number[] {
+        const idx = this.getCharIndex(c);
+        const s = this.indexToSequence(idx);
+        return typeof s === 'number' ? [s] : s;
+    }
+
+    wordToCharIndexSequence(word: string): number[] {
+        word = word.normalize('NFC');
+        const seq: number[] = new Array(word.length);
+        let i = 0;
+        for (const c of word) {
+            const idx = this.getCharIndex(c);
+            const cSep = this.indexToSequence(idx);
+            if (typeof cSep === 'number') {
+                seq[i++] = cSep;
+                continue;
+            }
+            for (const cIdx of cSep) {
+                seq[i++] = cIdx;
+            }
+        }
+        if (seq.length !== i) seq.length = i;
+        return seq;
+    }
+
+    get size(): number {
+        return this.charIndex.length;
     }
 
     build(): CharIndex {

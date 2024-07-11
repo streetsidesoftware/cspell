@@ -65,29 +65,3 @@ describe('TrieBlob', () => {
         expect([...iter]).toEqual(sampleWords);
     });
 });
-
-describe('TrieBlob special character indexes', () => {
-    test.each`
-        index
-        ${0}
-        ${240}
-        ${TrieBlob.SpecialCharIndexMask}
-        ${TrieBlob.SpecialCharIndexMask + 1}
-        ${1024}
-    `('number to sequence $index', ({ index }) => {
-        const seq = TrieBlob.toCharIndexSequence(index);
-        const r = [...TrieBlob.fromCharIndexSequence(seq)];
-        expect(r).toEqual([index]);
-    });
-
-    test('mapping characters', () => {
-        const characters = 'this is a test of a few characters and accents: é ♘😀😎🥳';
-        const map = Object.fromEntries(
-            [...new Set(characters).values()].map((c) => [c, c.codePointAt(0)] as [string, number]),
-        );
-        const charIndex = Object.fromEntries(Object.entries(map).map(([c, i]) => [i, c])) as Record<number, string>;
-        const seq = TrieBlob.charactersToCharIndexSequence([...characters], map);
-        const r = TrieBlob.charIndexSequenceToCharacters(seq, charIndex);
-        expect(r.join('')).toBe(characters);
-    });
-});

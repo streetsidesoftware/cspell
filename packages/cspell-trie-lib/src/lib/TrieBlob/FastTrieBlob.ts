@@ -188,7 +188,7 @@ export class FastTrieBlob implements TrieData {
             }
         }
 
-        return new TrieBlob(binNodes, this._charIndex.charIndex, this.info);
+        return new TrieBlob(binNodes, this._charIndex, this.info);
     }
 
     isReadonly(): boolean {
@@ -340,7 +340,7 @@ export class FastTrieBlob implements TrieData {
         }
         return new FastTrieBlob(
             sortNodes(nodes, TrieBlob.NodeMaskChildCharIndex),
-            new CharIndex(trie.charIndex),
+            trie.charIndex,
             bitMasksInfo,
             true,
             trie.info,
