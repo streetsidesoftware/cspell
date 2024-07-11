@@ -360,6 +360,7 @@ interface TrieData {
     info: Readonly<TrieInfo>;
     /** Method used to split words into individual characters. */
     wordToCharacters(word: string): readonly string[];
+    /** get an iterable for all the words in the dictionary. */
     words(): Iterable<string>;
     getRoot(): ITrieNodeRoot;
     getNode(prefix: string): ITrieNode | undefined;
