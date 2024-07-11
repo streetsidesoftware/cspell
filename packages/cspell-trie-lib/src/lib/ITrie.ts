@@ -189,13 +189,10 @@ export class ITrieImpl implements ITrie {
 
     findWord(word: string, options?: FindWordOptions): FindFullResult {
         if (this.data.has(word)) {
-            if (!this.hasForbidden) {
-                return { found: word, forbidden: false, caseMatched: true, compoundUsed: false };
-            }
-            const fWord = this._info.forbiddenWordPrefix + word;
-            if (this.data.has(fWord)) {
+            if (this.hasForbidden && this.data.has(this._info.forbiddenWordPrefix + word)) {
                 return { found: word, forbidden: true, caseMatched: true, compoundUsed: false };
             }
+            return { found: word, forbidden: undefined, caseMatched: true, compoundUsed: false };
         }
         if (options?.useLegacyWordCompounds) {
             const len =

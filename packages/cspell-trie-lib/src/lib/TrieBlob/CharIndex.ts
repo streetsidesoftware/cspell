@@ -8,7 +8,7 @@ export type CharIndexSeqMap = Record<string, number[] | number>;
 
 export type RO_CharIndexSeqMap = Readonly<CharIndexSeqMap>;
 
-const emptySeq: number[] = [];
+const emptySeq: number[] = [0];
 
 Object.freeze(emptySeq);
 
@@ -41,7 +41,10 @@ export class CharIndex {
                 seq[i++] = cSep;
                 continue;
             }
-            if (!cSep) continue;
+            if (!cSep) {
+                seq[i++] = 0;
+                continue;
+            }
             for (const cIdx of cSep) {
                 seq[i++] = cIdx;
             }
