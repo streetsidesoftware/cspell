@@ -1,4 +1,3 @@
-import { opConcatMap, pipe } from '@cspell/cspell-pipe/sync';
 import type {
     FindFullResult,
     FindWordOptions,
@@ -105,7 +104,7 @@ export class SpellingDictionaryFromTrie implements SpellingDictionary {
         useCompounds: number | boolean | undefined,
         ignoreCase: boolean,
     ): FindAnyFormResult | undefined {
-        const outerForms = outerWordForms(word, this.remapWord ? this.remapWord : (word) => [this.mapWord(word)]);
+        const outerForms = outerWordForms(word, this.remapWord);
 
         for (const form of outerForms) {
             const r = this._findAnyForm(form, useCompounds, ignoreCase);
@@ -247,14 +246,23 @@ function findCache(fn: FindFunction, size = 2000): FindFunction {
     return find;
 }
 
-function outerWordForms(word: string, mapWord: (word: string) => string[]): Set<string> {
-    const forms = pipe(
-        [word],
-        opConcatMap((word) => [word, word.normalize('NFC'), word.normalize('NFD')]),
-        opConcatMap((word) => [word, ...mapWord(word)]),
-    );
-
-    return new Set(forms);
+function* outerWordForms(word: string, mapWord?: (word: string) => string[]): Iterable<string> {
+    // Only generate the needed forms.
+    const sent = new Set<string>();
+    let w = word;
+    yield w;
+    sent.add(w);
+    w = w.normalize('NFC');
+    if (!sent.has(w)) yield w;
+    sent.add(w);
+    w = w.normalize('NFD');
+    if (!sent.has(w)) yield w;
+    if (!mapWord) return;
+    for (w of mapWord(word)) {
+        if (!sent.has(w)) yield w;
+        sent.add(w);
+    }
+    return sent;
 }
 
 export const __testing__ = { outerWordForms };
