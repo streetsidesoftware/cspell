@@ -20,7 +20,7 @@ describe('SpellingDictionaryFromTrie', () => {
         const trie = buildITrieFromWords([]);
         const dict = new SpellingDictionaryFromTrie(trie, 'test', { repMap });
         const mapWord = dict.remapWord || ((a) => [dict.mapWord(a)]);
-        expect(outerWordForms(word, mapWord)).toEqual(new Set(expected));
+        expect([...outerWordForms(word, mapWord)]).toEqual([...new Set(expected)]);
     });
 });
 
