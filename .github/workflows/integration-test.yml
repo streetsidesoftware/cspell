@@ -255,6 +255,7 @@ jobs:
         run: |
           touch temp/perf/perf-run-empty.csv
           cat temp/perf/perf-run-*.csv | sort >> integration-tests/perf/perf.csv
+          ./tools/perf-chart/bin.js ./integration-tests/perf/perf.csv > perf-report.md
 
       - name: Gen Report
         id: report

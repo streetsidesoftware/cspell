@@ -3,7 +3,7 @@ import { promises as fs } from 'node:fs';
 import { parse as parseCsv } from 'csv-parse/sync';
 import { calcStandardDeviation, plotPointRelativeToStandardDeviation, simpleHistogram } from 'thistogram';
 
-import { inject } from './text.js';
+import { createMdTable, inject } from './text.js';
 
 interface CsvRecord {
     timestamp: number;
@@ -25,15 +25,19 @@ export async function perfReport(csvFile: string | URL): Promise<string> {
     const dailyStats = createDailyStats(records);
     const data = [...groupBy(records, 'repo')].sort((a, b) => a[0].localeCompare(b[0]));
     const markdown = inject`\
+        <!---
+        # This file is auto-generated. Do not edit.
+        # cspell:disable
+        --->
         # Performance Report
 
         ${createDailyPerfGraph(dailyStats)}
 
         ${createPerfTable1(data)}
 
-        ## Files per Second over Time
+        ${createFpsPerfTable(data)}
 
-        ${createPerfTable2(data)}
+        ${createThroughputPerfTable(data)}
 
     `;
     return markdown;
@@ -108,6 +112,11 @@ function p(s: string, n: number): string {
     return n < 0 ? s.padEnd(-n, ' ') : s.padStart(n, ' ');
 }
 
+/**
+ * Convert a value in milliseconds to seconds and format it.
+ * @param v
+ * @param fixed
+ */
 const s = (v: number, fixed = 3) => (v / 1000).toFixed(fixed);
 
 // function toFixed(v: number, digits = 4): string {
@@ -134,18 +143,30 @@ function createPerfTable1(data: [string, CsvRecord[]][]): string {
                   Math.max(2.5 + Math.log(maxRelSd / relSd) / 6, Math.abs(point - avg) / sd),
               )
             : '';
-        return `| ${repo.padEnd(36)} | ${p(s(point, 2), 6)} | ${sp(min)} / ${sp(avg)} / ${sp(max)} | ${sp(sd, 5, 2)} | \`${sdGraph}\` |`;
+        return [sub(repo), s(point, 2), `${sp(min)} / ${sp(avg)} / ${sp(max)}`, sp(sd, 5, 2), `\`${sdGraph}\``];
+    });
+
+    const table = createMdTable({
+        header: `
+        | Repository | Elapsed | Min/Avg/Max | SD  | SD Graph  |
+        | ---------- | ------: | ----------- | --: | --------  |
+        `,
+        rows,
     });
 
     return inject`
-        | Repository | Elapsed | Min/Avg/Max | SD  | SD Graph  |
-        | ---------- | ------: | ----------- | --: | --------  |
-        ${rows.join('\n')}
+        ## Time to Process Files
+
+        ${table}
+
+        Note:
+        - Elapsed time is in seconds.
     `;
 }
 
-function createPerfTable2(data: [string, CsvRecord[]][]): string {
-    const stats = calcAllStats(data, (d) => (1000 * d.files) / d.elapsedMs);
+function createFpsPerfTable(data: [string, CsvRecord[]][]): string {
+    const fn = (d: CsvRecord) => (1000 * d.files) / d.elapsedMs;
+    const stats = calcAllStats(data, fn);
 
     const rows = data.map(([repo, records], i) => {
         const { point, count, trend, min, avg } = stats[i];
@@ -153,19 +174,57 @@ function createPerfTable2(data: [string, CsvRecord[]][]): string {
         const trendGraph = simpleHistogram(trend, min * 0.9);
         const relChange = ((100 * (point - avg)) / (avg || 1)).toFixed(2) + '%';
         const lastRecord = records[records.length - 1];
-        const fps = lastRecord?.files ? (1000 * lastRecord.files) / lastRecord.elapsedMs : 0;
-        return `| ${repo.padEnd(36)} | ${p(s(point, 2), 6)} | ${p(fps.toFixed(2), 6)} | ${p(relChange, 6)} | \`${trendGraph}\` | ${count} |`;
+        const fps = fn(lastRecord);
+        const elapsed = lastRecord.elapsedMs;
+        const nFiles = lastRecord.files.toFixed(0);
+        return [sub(repo), nFiles, s(elapsed, 2), fps.toFixed(2), relChange, `\`${trendGraph}\``, count];
+    });
+
+    const table = createMdTable({
+        header: `
+        | Repository | Files | Sec  | Fps  | Rel   | Trend Fps | N     |
+        | ---------- | ----: | ---: | ---: | ----: | --------- | ----: |
+        `,
+        rows,
     });
 
     return inject`
-        | Repository | Elapsed | Fps  | Rel   | Trend Fps | N     |
-        | ---------- | ------: | ---: | ----: | --------- | ----: |
-        ${rows.join('\n')}
+        ## Files per Second over Time
 
-        Note:
-        - Elapsed time is in seconds. The trend graph shows the last 10 runs.
-        The SD graph shows the current run relative to the average and standard deviation.
-        - Rel is the relative change from the average.
+        ${table}
+    `;
+}
+
+function createThroughputPerfTable(data: [string, CsvRecord[]][]): string {
+    data = data.map(([repo, records]) => [repo, records.filter((r) => r.kilobytes)] as const);
+
+    const fn = (d: CsvRecord) => (1000 * (d.kilobytes || 0)) / d.elapsedMs;
+
+    const stats = calcAllStats(data, fn);
+
+    const rows = data.map(([repo, records], i) => {
+        const { point, count, trend, min, avg } = stats[i];
+        const trendGraph = simpleHistogram(trend, min * 0.9);
+        const relChange = ((100 * (point - avg)) / (avg || 1)).toFixed(2) + '%';
+        const lastRecord = records[records.length - 1];
+        const mps = fn(lastRecord);
+        const elapsed = lastRecord.elapsedMs;
+        const nFiles = lastRecord.files.toFixed(0);
+        return [sub(repo), nFiles, s(elapsed, 2), mps.toFixed(2), relChange, `\`${trendGraph}\``, count];
+    });
+
+    const table = createMdTable({
+        header: `
+        | Repository | Files | Sec  | Kps  | Rel   | Trend Kps | N     |
+        | ---------- | ----: | ---: | ---: | ----: | --------- | ----: |
+        `,
+        rows,
+    });
+
+    return inject`
+        ## Data Throughput
+
+        ${table}
     `;
 }
 
@@ -199,9 +258,9 @@ function createDailyPerfGraph(dailyStats: DailyStats[]): string {
 
         ${'```mermaid'}
         xychart-beta
-            title Daily Performance
+            title Files Per Second by Day
             y-axis Files per Second
-            x-axis [${xAxis.join(', ')}]
+            x-axis Date [${xAxis.join(', ')}]
             bar [${bar.join(', ')}]
             ${lines.join('\n')}
         ${'```'}
@@ -245,6 +304,10 @@ function createDailyStats(data: CsvRecord[]): DailyStats[] {
         dailyStats.push({ date, files, elapsedSeconds, fps, fpsMax, fpsMin, fpsP90, fpsP10, fpsByRepo });
     }
     return dailyStats;
+}
+
+function sub(text: string) {
+    return `<sub>${text}</sub>`;
 }
 
 function calcP(values: number[], p: number): number {

@@ -4392,6 +4392,9 @@ function calcVariance(values, mean) {
 
 // src/text.ts
 function inject(template, ...values) {
+  return unindent(template, ...values);
+}
+function _inject(template, ...values) {
   const strings = template;
   const adjValues = [];
   for (let i = 0; i < values.length; ++i) {
@@ -4408,12 +4411,57 @@ function inject(template, ...values) {
     }
     adjValues.push(valueLines.join("\n"));
   }
-  return unindent(String.raw({ raw: strings }, ...adjValues));
+  return _unindent(String.raw({ raw: strings }, ...adjValues));
+}
+function createMdTable(options) {
+  const rows = options.rows.map((row) => row.map((col) => `${col}`.trim()));
+  let header;
+  let headerSep;
+  if (typeof options.header === "string") {
+    const hLines = options.header.split("\n").map((line) => line.trim()).filter((line) => !!line).map(
+      (line) => line.replace(/^\s*\|/, "").replace(/\|\s*$/, "").split("|").map((col) => col.trim())
+    );
+    header = hLines[0];
+    headerSep = options.headerSep || hLines[1];
+  } else {
+    header = options.header.map((col) => `${col}`.trim());
+    headerSep = options.headerSep || [];
+  }
+  const justifyLeft = (s2, width) => padRight(s2.trim(), width);
+  const justifyRight = (s2, width) => padLeft(s2.trim(), width);
+  function calcColHeaderSep(sep, width) {
+    const pL = sep.startsWith(":") ? ":" : "";
+    const pR = sep.endsWith(":") ? ":" : "";
+    width -= pL.length + pR.length;
+    return `${pL}${"---".padEnd(width, "-")}${pR}`;
+  }
+  const justifyCols = [];
+  const hSep = [...headerSep];
+  hSep.length = header.length;
+  header.forEach((col, i) => {
+    const s2 = hSep[i] || "---";
+    const h = calcColHeaderSep(s2, strWidth(col));
+    const jL = h.startsWith(":");
+    const jR = h.endsWith(":");
+    justifyCols[i] = jL ? justifyLeft : jR ? justifyRight : justifyLeft;
+    hSep[i] = h;
+  });
+  const table = [[...header], hSep, ...rows.map((row) => [...row])];
+  const widths = [];
+  table.forEach((row) => row.forEach((col, i) => widths[i] = Math.max(widths[i] || 0, strWidth(col))));
+  table[1] = table[1].map((col, i) => calcColHeaderSep(col, widths[i]));
+  return table.map((row) => row.map((col, i) => justifyCols[i](col, widths[i])).join(" | ")).map((row) => `| ${row} |`).join("\n");
 }
 function padLength(s2) {
   return s2.length - s2.trimStart().length;
 }
-function unindent(str) {
+function unindent(template, ...values) {
+  if (typeof template === "string") {
+    return _unindent(template);
+  }
+  return _inject(template, ...values);
+}
+function _unindent(str) {
   const lines = str.split("\n");
   let curPad = str.length;
   for (const line of lines) {
@@ -4421,6 +4469,15 @@ function unindent(str) {
     curPad = Math.min(curPad, padLength(line));
   }
   return lines.map((line) => line.slice(curPad)).join("\n");
+}
+function padLeft(s2, width) {
+  return s2.padStart(width + (s2.length - strWidth(s2)));
+}
+function padRight(s2, width) {
+  return s2.padEnd(width + (s2.length - strWidth(s2)));
+}
+function strWidth(str) {
+  return [...str].length;
 }
 
 // src/perfChart.ts
@@ -4430,15 +4487,19 @@ async function perfReport(csvFile) {
   const dailyStats = createDailyStats(records);
   const data = [...groupBy(records, "repo")].sort((a, b) => a[0].localeCompare(b[0]));
   const markdown = inject`\
+        <!---
+        # This file is auto-generated. Do not edit.
+        # cspell:disable
+        --->
         # Performance Report
 
         ${createDailyPerfGraph(dailyStats)}
 
         ${createPerfTable1(data)}
 
-        ## Files per Second over Time
+        ${createFpsPerfTable(data)}
 
-        ${createPerfTable2(data)}
+        ${createThroughputPerfTable(data)}
 
     `;
   return markdown;
@@ -4501,33 +4562,75 @@ function createPerfTable1(data) {
       21,
       Math.max(2.5 + Math.log(maxRelSd / relSd) / 6, Math.abs(point - avg) / sd)
     ) : "";
-    return `| ${repo.padEnd(36)} | ${p(s(point, 2), 6)} | ${sp(min)} / ${sp(avg)} / ${sp(max)} | ${sp(sd, 5, 2)} | \`${sdGraph}\` |`;
+    return [sub(repo), s(point, 2), `${sp(min)} / ${sp(avg)} / ${sp(max)}`, sp(sd, 5, 2), `\`${sdGraph}\``];
   });
-  return inject`
+  const table = createMdTable({
+    header: `
         | Repository | Elapsed | Min/Avg/Max | SD  | SD Graph  |
         | ---------- | ------: | ----------- | --: | --------  |
-        ${rows.join("\n")}
+        `,
+    rows
+  });
+  return inject`
+        ## Time to Process Files
+
+        ${table}
+
+        Note:
+        - Elapsed time is in seconds.
     `;
 }
-function createPerfTable2(data) {
-  const stats = calcAllStats(data, (d) => 1e3 * d.files / d.elapsedMs);
+function createFpsPerfTable(data) {
+  const fn = (d) => 1e3 * d.files / d.elapsedMs;
+  const stats = calcAllStats(data, fn);
   const rows = data.map(([repo, records], i) => {
     const { point, count, trend, min, avg } = stats[i];
     const trendGraph = simpleHistogram(trend, min * 0.9);
     const relChange = (100 * (point - avg) / (avg || 1)).toFixed(2) + "%";
     const lastRecord = records[records.length - 1];
-    const fps = lastRecord?.files ? 1e3 * lastRecord.files / lastRecord.elapsedMs : 0;
-    return `| ${repo.padEnd(36)} | ${p(s(point, 2), 6)} | ${p(fps.toFixed(2), 6)} | ${p(relChange, 6)} | \`${trendGraph}\` | ${count} |`;
+    const fps = fn(lastRecord);
+    const elapsed = lastRecord.elapsedMs;
+    const nFiles = lastRecord.files.toFixed(0);
+    return [sub(repo), nFiles, s(elapsed, 2), fps.toFixed(2), relChange, `\`${trendGraph}\``, count];
+  });
+  const table = createMdTable({
+    header: `
+        | Repository | Files | Sec  | Fps  | Rel   | Trend Fps | N     |
+        | ---------- | ----: | ---: | ---: | ----: | --------- | ----: |
+        `,
+    rows
   });
   return inject`
-        | Repository | Elapsed | Fps  | Rel   | Trend Fps | N     |
-        | ---------- | ------: | ---: | ----: | --------- | ----: |
-        ${rows.join("\n")}
+        ## Files per Second over Time
 
-        Note:
-        - Elapsed time is in seconds. The trend graph shows the last 10 runs.
-        The SD graph shows the current run relative to the average and standard deviation.
-        - Rel is the relative change from the average.
+        ${table}
+    `;
+}
+function createThroughputPerfTable(data) {
+  data = data.map(([repo, records]) => [repo, records.filter((r) => r.kilobytes)]);
+  const fn = (d) => 1e3 * (d.kilobytes || 0) / d.elapsedMs;
+  const stats = calcAllStats(data, fn);
+  const rows = data.map(([repo, records], i) => {
+    const { point, count, trend, min, avg } = stats[i];
+    const trendGraph = simpleHistogram(trend, min * 0.9);
+    const relChange = (100 * (point - avg) / (avg || 1)).toFixed(2) + "%";
+    const lastRecord = records[records.length - 1];
+    const mps = fn(lastRecord);
+    const elapsed = lastRecord.elapsedMs;
+    const nFiles = lastRecord.files.toFixed(0);
+    return [sub(repo), nFiles, s(elapsed, 2), mps.toFixed(2), relChange, `\`${trendGraph}\``, count];
+  });
+  const table = createMdTable({
+    header: `
+        | Repository | Files | Sec  | Kps  | Rel   | Trend Kps | N     |
+        | ---------- | ----: | ---: | ---: | ----: | --------- | ----: |
+        `,
+    rows
+  });
+  return inject`
+        ## Data Throughput
+
+        ${table}
     `;
 }
 var monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
@@ -4546,9 +4649,9 @@ function createDailyPerfGraph(dailyStats) {
 
         ${"```mermaid"}
         xychart-beta
-            title Daily Performance
+            title Files Per Second by Day
             y-axis Files per Second
-            x-axis [${xAxis.join(", ")}]
+            x-axis Date [${xAxis.join(", ")}]
             bar [${bar.join(", ")}]
             ${lines.join("\n")}
         ${"```"}
@@ -4583,6 +4686,9 @@ function createDailyStats(data) {
     dailyStats.push({ date, files, elapsedSeconds, fps, fpsMax, fpsMin, fpsP90, fpsP10, fpsByRepo });
   }
   return dailyStats;
+}
+function sub(text) {
+  return `<sub>${text}</sub>`;
 }
 function calcP(values, p2) {
   const sorted = [...values].sort((a, b) => a - b);
