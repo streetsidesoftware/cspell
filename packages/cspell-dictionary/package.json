@@ -29,7 +29,7 @@
     "test": "vitest run",
     "test:perf": "NODE_ENV=production insight --register ts-node/esm --file \"**/*.perf.{mts,ts}\" -t 500",
     "test:perf:js": "NODE_ENV=production insight -t 500",
-    "test:perf:prof": "NODE_ENV=production node --cpu-prof  ../../node_modules/perf-insight/bin.mjs -t 1000",
+    "test:perf:prof": "NODE_ENV=production node --cpu-prof  ../../node_modules/perf-insight/bin.mjs",
     "watch": "tsc -p . -w "
   },
   "repository": {
