@@ -156,7 +156,7 @@ describe('Validate wordSplitter', () => {
         const r = split(line, offset, has);
         expect(r.offset).toBe(offset);
         expect(r.endOffset).toBe(r.text.offset + r.text.text.length);
-        expect(r.words).toEqual(expect.arrayContaining(expectedWords.map(expect.objectContaining)));
+        expect(r.words).toEqual(expect.arrayContaining(expectedWords.map((v) => expect.objectContaining(v))));
         expect(r.words).toHaveLength(expectedWords.length);
     });
 
@@ -195,7 +195,7 @@ describe('Validate wordSplitter', () => {
         // console.log(hasCalls);
         expect(r.offset).toBe(offset);
         expect(r.endOffset).toBe(r.text.offset + r.text.text.length);
-        expect(r.words).toEqual(expect.arrayContaining(expectedWords.map(expect.objectContaining)));
+        expect(r.words).toEqual(expect.arrayContaining(expectedWords.map((v) => expect.objectContaining(v))));
         expect(r.words).toHaveLength(expectedWords.length);
         expect(h).toHaveBeenCalledTimes(calls);
     });
@@ -245,7 +245,7 @@ describe('Validate wordSplitter', () => {
         const r = split(line, offset, h);
         // console.log('%o', r);
         expect(r.endOffset).toBe(r.text.offset + r.text.text.length);
-        expect(r.words).toEqual(expect.arrayContaining(expectedWordSegments.map(expect.objectContaining)));
+        expect(r.words).toEqual(expect.arrayContaining(expectedWordSegments.map((v) => expect.objectContaining(v))));
         expect(r.words).toHaveLength(expectedWordSegments.length);
         expect(h).toHaveBeenCalledTimes(calls);
         expect(hasCalls).toMatchSnapshot();

@@ -4,7 +4,7 @@ import { describe, expect, test } from 'vitest';
 import { pathToSample } from '../test/test.helper.js';
 import { decodeDataUrl, encodeDataUrl, encodeDataUrlFromFile, guessMimeType, toDataUrl } from './dataUrl.js';
 
-const sc = expect.stringContaining;
+const sc = (m: string) => expect.stringContaining(m);
 
 describe('dataUrl', () => {
     test.each`

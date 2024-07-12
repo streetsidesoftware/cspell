@@ -7,7 +7,7 @@ import { defaultNextDeserializer, defaultNextSerializer } from '../defaultNext.j
 import { json } from '../test-helpers/util.js';
 import { serializerCSpellJson } from './cspellJson.js';
 
-const oc = expect.objectContaining;
+const oc = <T>(obj: T) => expect.objectContaining(obj);
 
 const next = defaultNextDeserializer;
 

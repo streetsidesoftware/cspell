@@ -20,8 +20,8 @@ const tempRoot = r(packageRoot, 'temp');
 
 const sampleOptions = { root: samplesRoot };
 
-const oc = expect.objectContaining;
-const ac = expect.arrayContaining;
+const oc = <T>(obj: T) => expect.objectContaining(obj);
+const ac = <T>(a: Array<T>) => expect.arrayContaining(a);
 
 vi.mock('get-stdin', () => ({ default: vi.fn() }));
 

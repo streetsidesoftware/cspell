@@ -7,7 +7,7 @@ import { traceWords } from './trace.js';
 
 const timeout = 20_000;
 
-const ac = expect.arrayContaining;
+const ac = <T>(a: Array<T>) => expect.arrayContaining(a);
 
 const testOptions: TestOptions = { timeout };
 

@@ -8,8 +8,8 @@ import { CSpellIONode } from './CSpellIONode.js';
 import { toFileURL } from './node/file/url.js';
 import { makePathToFile, pathToSample as ps, pathToTemp } from './test/test.helper.js';
 
-const sc = expect.stringContaining;
-const oc = expect.objectContaining;
+const sc = (m: string) => expect.stringContaining(m);
+const oc = <T>(obj: T) => expect.objectContaining(obj);
 
 describe('CSpellIONode', () => {
     test('constructor', () => {

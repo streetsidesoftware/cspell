@@ -23,8 +23,8 @@ const hasDriveLetter = /^[A-Z]:\\/i;
 
 const { toEqualCaseInsensitive: expectToEqualCaseInsensitive } = extendExpect(expect);
 
-const oc = expect.objectContaining;
-const sc = expect.stringContaining;
+const oc = <T>(obj: T) => expect.objectContaining(obj);
+const sc = (m: string) => expect.stringContaining(m);
 
 describe('Validate Spell Checking Files', () => {
     interface TestSpellCheckFile {

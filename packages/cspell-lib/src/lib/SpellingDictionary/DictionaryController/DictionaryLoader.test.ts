@@ -25,7 +25,7 @@ type ErrorResults = Record<string, unknown> | Error;
 
 const di = mapDictDefToInternal;
 
-const oc = expect.objectContaining;
+const oc = <T>(obj: T) => expect.objectContaining(obj);
 
 describe('Validate DictionaryLoader', () => {
     const errorENOENT = { code: 'ENOENT' };

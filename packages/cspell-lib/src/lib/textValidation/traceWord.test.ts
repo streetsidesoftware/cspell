@@ -13,8 +13,8 @@ const fixturesURL = new URL('traceWords/', pathPackageFixturesURL);
 const urlReadme = new URL('README.md', fixturesURL);
 const expectedConfigURL = new URL('cspell.config.yaml', fixturesURL);
 
-const ac = expect.arrayContaining;
-const oc = expect.objectContaining;
+const ac = <T>(a: Array<T>) => expect.arrayContaining(a);
+const oc = <T>(obj: T) => expect.objectContaining(obj);
 
 describe('traceWord', async () => {
     const doc: TextDocumentRef = { uri: toUri(import.meta.url), languageId: 'typescript' };

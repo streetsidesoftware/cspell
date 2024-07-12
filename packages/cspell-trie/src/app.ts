@@ -30,7 +30,7 @@ async function getPackageVersion() {
 
 export async function run(program: Command, argv: string[]): Promise<Command> {
     const version = await getPackageVersion();
-    program.version(version);
+    program.version(version).name('cspell-trie');
 
     program
         .command('create <file.txt>')

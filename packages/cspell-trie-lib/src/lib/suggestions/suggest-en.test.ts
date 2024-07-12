@@ -25,7 +25,7 @@ interface ExpectedSuggestion extends Partial<SuggestionResult> {
     word: string;
 }
 
-const ac = expect.arrayContaining;
+const ac = <T>(a: Array<T>) => expect.arrayContaining(a);
 
 const pAffContent = readRawDictionaryFile('hunspell/en_US.aff');
 

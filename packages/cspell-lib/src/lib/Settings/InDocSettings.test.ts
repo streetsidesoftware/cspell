@@ -8,8 +8,8 @@ import * as InDoc from './InDocSettings.js';
 
 const dictName = InDoc.internal.staticInDocumentDictionaryName;
 
-const oc = expect.objectContaining;
-const ac = expect.arrayContaining;
+const oc = <T>(obj: T) => expect.objectContaining(obj);
+const ac = <T>(a: Array<T>) => expect.arrayContaining(a);
 const nac = expect.not.arrayContaining;
 
 // cSpell:ignore faullts straange tooo

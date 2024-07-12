@@ -4,8 +4,8 @@ import { describe, expect, test } from 'vitest';
 
 import { getStat, getStatSync } from './stat.js';
 
-const oc = expect.objectContaining;
-const sc = expect.stringContaining;
+const oc = <T>(obj: T) => expect.objectContaining(obj);
+const sc = (m: string) => expect.stringContaining(m);
 
 const timeout = 20_000;
 

@@ -12,7 +12,7 @@ const samples = path.join(_dirname, '../../../Samples/dicts');
 
 const readerOptions: ReaderOptions = {};
 
-const sc = expect.stringContaining;
+const sc = (m: string) => expect.stringContaining(m);
 
 describe('Validate the iterateWordsFromFile', () => {
     test('streamWordsFromFile: hunspell', async () => {

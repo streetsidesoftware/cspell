@@ -10,7 +10,7 @@ import { normalizeGrammar } from './grammarNormalizer.js';
 import { tokenizeText } from './tokenizeLine.js';
 import type { TokenizedLine } from './types.js';
 
-// const oc = expect.objectContaining;
+// const oc = <T>(obj: T) => expect.objectContaining(obj);
 
 const grammar = normalizeGrammar(Simple.grammar);
 const grammarTypeScript = normalizeGrammar(TypeScript.grammar);
