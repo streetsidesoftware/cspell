@@ -155,7 +155,7 @@ describe('Validate the Application', () => {
                 cspell:ignore badspellingintext
                 We can ignore values within the text: badspellingintext
             `;
-            vi.mocked(getStdin).mockImplementation(async () => text);
+            vi.mocked(getStdin).mockImplementation((async () => text) as typeof getStdin);
 
             const lint = App.lint(files, options, reporter);
             const result = await lint;

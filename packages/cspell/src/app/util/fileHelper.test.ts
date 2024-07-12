@@ -41,7 +41,7 @@ describe('fileHelper', () => {
         try {
             const files = ['a', 'b', 'c'];
             const mockGetStdin = vi.mocked(getStdin);
-            mockGetStdin.mockImplementation(async () => files.join('\n'));
+            mockGetStdin.mockImplementation((async () => files.join('\n')) as typeof getStdin);
             const pResult = readFileListFile('stdin');
             const r = await pResult;
             expect(r).toEqual(files.map((f) => path.resolve(f)));
