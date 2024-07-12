@@ -1,6 +1,6 @@
 import * as path from 'node:path';
 
-import type { MockInstance as MockInstance } from 'vitest';
+import type { MockInstance } from 'vitest';
 import { afterEach, beforeEach, describe, expect, test, vi } from 'vitest';
 
 import * as app from './app.js';
