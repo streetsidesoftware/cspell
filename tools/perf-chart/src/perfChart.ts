@@ -31,6 +31,8 @@ export async function perfReport(csvFile: string | URL): Promise<string> {
 
         ${createPerfTable1(data)}
 
+        ## Files per Second over Time
+
         ${createPerfTable2(data)}
 
     `;
@@ -62,8 +64,8 @@ const emptyStats: CalcStats = { point: 0, avg: 0, min: 0, max: 0, sum: 0, count:
  * @param data - the perf data.
  * @returns [point, min, max]
  */
-function calcStats(data: CsvRecord[]): CalcStats {
-    const values = data.map((d) => d.elapsedMs).map((v) => v || 1);
+function calcStats(data: CsvRecord[], fn: (d: CsvRecord) => number = (d) => d.elapsedMs): CalcStats {
+    const values = data.map((d) => fn(d)).map((v) => v || 1);
     const trend = values.slice(-20);
     const point = values.pop();
     if (point === undefined) return emptyStats;
@@ -98,8 +100,8 @@ function changeDate(date: Date, deltaDays: number): Date {
     return dd;
 }
 
-function calcAllStats(data: [string, CsvRecord[]][]): CalcStats[] {
-    return data.map(([_, records]) => calcStats(records));
+function calcAllStats(data: [string, CsvRecord[]][], fn?: (d: CsvRecord) => number): CalcStats[] {
+    return data.map(([_, records]) => calcStats(records, fn));
 }
 
 function p(s: string, n: number): string {
@@ -143,11 +145,12 @@ function createPerfTable1(data: [string, CsvRecord[]][]): string {
 }
 
 function createPerfTable2(data: [string, CsvRecord[]][]): string {
-    const stats = calcAllStats(data);
+    const stats = calcAllStats(data, (d) => (1000 * d.files) / d.elapsedMs);
 
     const rows = data.map(([repo, records], i) => {
-        const { point, count, trend, sd, avg } = stats[i];
-        const trendGraph = simpleHistogram(trend, avg - 2 * sd, avg + 3 * sd);
+        const { point, count, trend, min, avg } = stats[i];
+        // const trendGraph = simpleHistogram(trend, avg - 2 * sd, avg + 3 * sd);
+        const trendGraph = simpleHistogram(trend, min * 0.9);
         const relChange = ((100 * (point - avg)) / (avg || 1)).toFixed(2) + '%';
         const lastRecord = records[records.length - 1];
         const fps = lastRecord?.files ? (1000 * lastRecord.files) / lastRecord.elapsedMs : 0;
@@ -155,8 +158,8 @@ function createPerfTable2(data: [string, CsvRecord[]][]): string {
     });
 
     return inject`
-        | Repository | Elapsed | Fps  | Rel   | Trend | Count |
-        | ---------- | ------: | ---: | ----: | ----- | ----: |
+        | Repository | Elapsed | Fps  | Rel   | Trend Fps | N     |
+        | ---------- | ------: | ---: | ----: | --------- | ----: |
         ${rows.join('\n')}
 
         Note:
@@ -173,6 +176,9 @@ interface DailyStats {
     fps: number;
     fpsMax: number;
     fpsMin: number;
+    fpsP90: number;
+    fpsP10: number;
+    fpsByRepo: Map<string, number>;
 }
 
 // cspell:ignore xychart
@@ -180,8 +186,13 @@ const monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep
 
 function createDailyPerfGraph(dailyStats: DailyStats[]): string {
     const bar = dailyStats.map((d) => d.fps.toFixed(2));
-    const lineMax = dailyStats.map((d) => d.fpsMax.toFixed(2));
-    const lineMin = dailyStats.map((d) => d.fpsMin.toFixed(2));
+    const fpsByRepo = groupBy(
+        dailyStats.flatMap((d) => [...d.fpsByRepo].map(([repo, fps]) => ({ repo, fps }))),
+        'repo',
+    );
+    const lines = [...fpsByRepo].map(([_repo, records]) => {
+        return `line [${records.map((r) => r.fps.toFixed(2)).join(', ')}]`;
+    });
     const xAxis = dailyStats.map((d) => `${monthNames[d.date.getUTCMonth()]}-${d.date.getUTCDate()}`);
     return inject`
         ## Daily Performance
@@ -192,14 +203,15 @@ function createDailyPerfGraph(dailyStats: DailyStats[]): string {
             y-axis Files per Second
             x-axis [${xAxis.join(', ')}]
             bar [${bar.join(', ')}]
-            line [${lineMax.join(', ')}]
-            line [${lineMin.join(', ')}]
+            ${lines.join('\n')}
         ${'```'}
     `;
 }
 
 function createDailyStats(data: CsvRecord[]): DailyStats[] {
     const dailyStats: DailyStats[] = [];
+
+    const repoNames = [...new Set(data.map((r) => r.repo))];
 
     const recordsByDay = groupBy(data, (r) => new Date(r.timestamp).setUTCHours(0, 0, 0, 0));
 
@@ -210,9 +222,35 @@ function createDailyStats(data: CsvRecord[]): DailyStats[] {
         const files = records.reduce((sum, r) => sum + r.files, 0);
         const elapsedSeconds = records.reduce((sum, r) => sum + r.elapsedMs, 0) / 1000;
         const fps = files / elapsedSeconds;
-        const fpsMax = Math.max(...records.map((r) => (1000 * r.files) / r.elapsedMs));
-        const fpsMin = Math.min(...records.map((r) => (1000 * r.files) / r.elapsedMs));
-        dailyStats.push({ date, files, elapsedSeconds, fps, fpsMax, fpsMin });
+        const aFps = records.map((r) => (1000 * r.files) / r.elapsedMs).sort((a, b) => a - b);
+        const fpsMax = Math.max(...aFps);
+        const fpsMin = Math.min(...aFps);
+
+        const fpsP90 = calcP(aFps, 0.9);
+        const fpsP10 = calcP(aFps, 0.1);
+
+        const fpsByRepo = new Map(
+            [...groupBy(records, 'repo')].map(
+                ([repo, records]) =>
+                    [
+                        repo,
+                        records.reduce((sum, r) => sum + (1000 * r.files) / r.elapsedMs, 0) / records.length,
+                    ] as const,
+            ),
+        );
+        repoNames.forEach((repo) => {
+            fpsByRepo.set(repo, fpsByRepo.get(repo) || 0);
+        });
+
+        dailyStats.push({ date, files, elapsedSeconds, fps, fpsMax, fpsMin, fpsP90, fpsP10, fpsByRepo });
     }
     return dailyStats;
+}
+
+function calcP(values: number[], p: number): number {
+    const sorted = [...values].sort((a, b) => a - b);
+    const n = sorted.length * p;
+    const i = Math.floor(n);
+    const d = n - i;
+    return sorted[i] * (1 - d) + sorted[i + 1] * d;
 }
