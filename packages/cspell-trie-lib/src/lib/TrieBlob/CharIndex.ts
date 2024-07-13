@@ -1,20 +1,26 @@
 import { NumberSequenceByteEncoderDecoder } from './NumberSequenceByteDecoderAccumulator.js';
 
+export type CharIndexSeq = Readonly<number[]>;
+
 export type CharIndexMap = Record<string, number>;
 
 export type RO_CharIndexMap = Readonly<CharIndexMap>;
 
-export type CharIndexSeqMap = Record<string, number[] | number>;
+export type CharIndexSeqMap = Record<string, CharIndexSeq | number>;
 
 export type RO_CharIndexSeqMap = Readonly<CharIndexSeqMap>;
 
-const emptySeq: number[] = [0];
+const emptySeq: CharIndexSeq = [0];
 
 Object.freeze(emptySeq);
 
 export class CharIndex {
     readonly charIndexMap: RO_CharIndexMap;
     readonly charIndexSeqMap: RO_CharIndexSeqMap;
+
+    #lastWord = '';
+    #lastWordSeq: CharIndexSeq = [];
+
     constructor(readonly charIndex: readonly string[]) {
         this.charIndexMap = buildCharIndexMap(charIndex);
         this.charIndexSeqMap = buildCharIndexSequenceMap(this.charIndexMap);
@@ -24,14 +30,12 @@ export class CharIndex {
         return this.charIndexMap[c] || 0;
     }
 
-    getCharIndexSeq(c: string): number[] {
+    getCharIndexSeq(c: string): CharIndexSeq {
         const r = this.charIndexSeqMap[c] ?? emptySeq;
         return typeof r === 'number' ? [r] : r;
     }
 
-    wordToCharIndexSequence(word: string): number[] {
-        // word = word.normalize('NFC');
-
+    __wordToCharIndexSequence(word: string): CharIndexSeq {
         // Note: Array.flatMap is very slow
         const seq: number[] = new Array(word.length);
         let i = 0;
@@ -49,7 +53,17 @@ export class CharIndex {
                 seq[i++] = cIdx;
             }
         }
-        if (seq.length !== i) seq.length = i;
+        return seq;
+    }
+
+    wordToCharIndexSequence(word: string): CharIndexSeq {
+        if (this.#lastWord === word) return this.#lastWordSeq;
+
+        const seq = this.__wordToCharIndexSequence(word);
+
+        this.#lastWord = word;
+        this.#lastWordSeq = seq;
+
         return seq;
     }
 

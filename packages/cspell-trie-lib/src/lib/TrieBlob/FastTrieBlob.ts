@@ -3,7 +3,7 @@ import { findNode } from '../ITrieNode/trie-util.js';
 import type { PartialTrieInfo, TrieInfo } from '../ITrieNode/TrieInfo.js';
 import type { TrieData } from '../TrieData.js';
 import { mergeOptionalWithDefaults } from '../utils/mergeOptionalWithDefaults.js';
-import { CharIndex } from './CharIndex.js';
+import { CharIndex, CharIndexSeq } from './CharIndex.js';
 import { extractInfo, type FastTrieBlobBitMaskInfo } from './FastTrieBlobBitMaskInfo.js';
 import { assertSorted, FastTrieBlobInternals, sortNodes } from './FastTrieBlobInternals.js';
 import { FastTrieBlobIRoot } from './FastTrieBlobIRoot.js';
@@ -38,11 +38,11 @@ export class FastTrieBlob implements TrieData {
         }
     }
 
-    public wordToNodeCharIndexSequence(word: string): number[] {
+    public wordToNodeCharIndexSequence(word: string): CharIndexSeq {
         return this._charIndex.wordToCharIndexSequence(word);
     }
 
-    private letterToNodeCharIndexSequence(letter: string): number[] {
+    private letterToNodeCharIndexSequence(letter: string): CharIndexSeq {
         return this._charIndex.getCharIndexSeq(letter);
     }
 

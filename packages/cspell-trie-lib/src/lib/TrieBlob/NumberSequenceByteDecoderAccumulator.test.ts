@@ -12,6 +12,7 @@ describe('NumberSequenceByteEncoderDecoder', () => {
         ${100_000}
     `('encode/decode $value', ({ value }) => {
         const encoded = NumberSequenceByteEncoderDecoder.encode(value);
+        expect(NumberSequenceByteEncoderDecoder.bytesNeeded(value)).toBe(encoded.length);
         const decoded = NumberSequenceByteEncoderDecoder.decode(encoded);
         expect(decoded).toBe(value);
     });

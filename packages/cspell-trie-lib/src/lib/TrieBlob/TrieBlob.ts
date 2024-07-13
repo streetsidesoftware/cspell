@@ -6,7 +6,7 @@ import { findNode } from '../ITrieNode/trie-util.js';
 import type { PartialTrieInfo, TrieInfo } from '../ITrieNode/TrieInfo.js';
 import type { TrieData } from '../TrieData.js';
 import { mergeOptionalWithDefaults } from '../utils/mergeOptionalWithDefaults.js';
-import { CharIndex } from './CharIndex.js';
+import { CharIndex, CharIndexSeq } from './CharIndex.js';
 import { NumberSequenceByteDecoderAccumulator, SpecialCharIndex } from './NumberSequenceByteDecoderAccumulator.js';
 import { TrieBlobInternals, TrieBlobIRoot } from './TrieBlobIRoot.js';
 
@@ -74,11 +74,11 @@ export class TrieBlob implements TrieData {
         this.#nodes8 = new Uint8Array(nodes.buffer, nodes.byteOffset + this.#beAdj);
     }
 
-    public wordToNodeCharIndexSequence(word: string): number[] {
+    public wordToNodeCharIndexSequence(word: string): CharIndexSeq {
         return this.charIndex.wordToCharIndexSequence(word);
     }
 
-    private letterToNodeCharIndexSequence(letter: string): number[] {
+    private letterToNodeCharIndexSequence(letter: string): CharIndexSeq {
         return this.charIndex.getCharIndexSeq(letter);
     }
 
