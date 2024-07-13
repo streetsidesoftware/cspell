@@ -54,8 +54,8 @@ importers:
         specifier: ^18.19.39
         version: 18.19.39
       '@vitest/coverage-istanbul':
-        specifier: ^1.6.0
-        version: 1.6.0(vitest@2.0.2(@types/node@18.19.39)(terser@5.31.2))
+        specifier: ^2.0.2
+        version: 2.0.2(vitest@2.0.2(@types/node@18.19.39)(terser@5.31.2))
       conventional-changelog-conventionalcommits:
         specifier: ^8.0.0
         version: 8.0.0
@@ -3749,10 +3749,10 @@ packages:
   '@ungap/structured-clone@1.2.0':
     resolution: {integrity: sha512-zuVdFrMJiuCDQUMCzQaD6KL28MjnqqN8XnAqiEq9PNm/hCPTSGfrXCOfwj1ow4LFb/tNymJPwsNbVePc1xFqrQ==}
 
-  '@vitest/coverage-istanbul@1.6.0':
-    resolution: {integrity: sha512-h/BwpXehkkS0qsNCS00QxiupAqVkNi0WT19BR0dQvlge5oHghoSVLx63fABYFoKxVb7Ue7+k6V2KokmQ1zdMpg==}
+  '@vitest/coverage-istanbul@2.0.2':
+    resolution: {integrity: sha512-9TZC/4CT9j7GZYwh1fYtxNtRoSi7T4evF5M/rxOOAvgejJFxM/ysXSvdyV/HXWkEbH/Be8uKnd+v/TyYyrglGA==}
     peerDependencies:
-      vitest: 1.6.0
+      vitest: 2.0.2
 
   '@vitest/expect@2.0.2':
     resolution: {integrity: sha512-nKAvxBYqcDugYZ4nJvnm5OR8eDJdgWjk4XM9owQKUjzW70q0icGV2HVnQOyYsp906xJaBDUXw0+9EHw2T8e0mQ==}
@@ -8930,6 +8930,10 @@ packages:
     resolution: {integrity: sha512-cAGWPIyOHU6zlmg88jwm7VRyXnMN7iV68OGAbYDk/Mh/xC/pzVPlQtY6ngoIH/5/tciuhGfvESU8GrHrcxD56w==}
     engines: {node: '>=8'}
 
+  test-exclude@7.0.1:
+    resolution: {integrity: sha512-pFYqmTw68LXVjeWJMST4+borgQP2AyMNbg1BpZh9LbyhUeNkeaPF9gzfPGUAnSMV3qPYdWUwDIjjCLiSDOl7vg==}
+    engines: {node: '>=18'}
+
   text-extensions@2.4.0:
     resolution: {integrity: sha512-te/NtwBwfiNRLf9Ijqx3T0nlqZiQ2XrrtBvu+cLL8ZRrGkO0NHTug8MYFKyoSrv/sHTaSKfilUkizV6XhxMJ3g==}
     engines: {node: '>=8'}
@@ -13221,8 +13225,9 @@ snapshots:
 
   '@ungap/structured-clone@1.2.0': {}
 
-  '@vitest/coverage-istanbul@1.6.0(vitest@2.0.2(@types/node@18.19.39)(terser@5.31.2))':
+  '@vitest/coverage-istanbul@2.0.2(vitest@2.0.2(@types/node@18.19.39)(terser@5.31.2))':
     dependencies:
+      '@istanbuljs/schema': 0.1.3
       debug: 4.3.5(supports-color@8.1.1)
       istanbul-lib-coverage: 3.2.2
       istanbul-lib-instrument: 6.0.3
@@ -13230,8 +13235,8 @@ snapshots:
       istanbul-lib-source-maps: 5.0.6
       istanbul-reports: 3.1.7
       magicast: 0.3.4
-      picocolors: 1.0.1
-      test-exclude: 6.0.0
+      test-exclude: 7.0.1
+      tinyrainbow: 1.2.0
       vitest: 2.0.2(@types/node@18.19.39)(terser@5.31.2)
     transitivePeerDependencies:
       - supports-color
@@ -19837,6 +19842,12 @@ snapshots:
       '@istanbuljs/schema': 0.1.3
       glob: 7.2.3
       minimatch: 3.1.2
+
+  test-exclude@7.0.1:
+    dependencies:
+      '@istanbuljs/schema': 0.1.3
+      glob: 10.4.5
+      minimatch: 9.0.5
 
   text-extensions@2.4.0: {}
 
