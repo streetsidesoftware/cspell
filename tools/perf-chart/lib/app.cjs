@@ -4566,8 +4566,8 @@ function createPerfTable1(data) {
   });
   const table = createMdTable({
     header: `
-        | Repository | Elapsed | Min/Avg/Max | SD  | SD Graph  |
-        | ---------- | ------: | ----------- | --: | --------  |
+        | Repository | Elapsed | Min/Avg/Max   | SD  | SD Graph  |
+        | ---------- | ------: | :-----------: | --: | --------  |
         `,
     rows
   });
