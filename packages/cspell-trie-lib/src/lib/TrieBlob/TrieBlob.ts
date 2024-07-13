@@ -109,17 +109,24 @@ export class TrieBlob implements TrieData {
         return !!this.#nonStrictIdx;
     }
 
-    // /**
-    //  * Try to find the word in the trie. The word must be normalized.
-    //  * If `strict` is `true` the case and accents must match.
-    //  * Compound words are supported assuming that the compound character is in the trie.
-    //  *
-    //  * @param word - the word to find (normalized)
-    //  * @param strict - if `true` the case and accents must match.
-    //  */
-    // find(word: string, strict: boolean): FindResult {
-
-    // }
+    /**
+     * Try to find the word in the trie. The word must be normalized.
+     * If `strict` is `true` the case and accents must match.
+     * Compound words are supported assuming that the compound character is in the trie.
+     *
+     * @param word - the word to find (normalized)
+     * @param strict - if `true` the case and accents must match.
+     */
+    find(word: string, strict: boolean): FindResult {
+        if (!this.hasCompoundWords()) {
+            const found = this._has8(0, word);
+            if (found) return { found: word, compoundUsed: false, caseMatched: true };
+            if (strict || !this.#nonStrictIdx) return { found: false, compoundUsed: false, caseMatched: false };
+            return { found: this._has8(this.#nonStrictIdx, word) && word, compoundUsed: false, caseMatched: false };
+        }
+        // @todo: handle compound words.
+        return { found: this.has(word) && word, compoundUsed: false, caseMatched: true };
+    }
 
     getRoot(): ITrieNodeRoot {
         return (this.#iTrieRoot ??= this._getRoot());
