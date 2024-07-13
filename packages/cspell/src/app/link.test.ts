@@ -3,7 +3,7 @@ import { describe, expect, test } from 'vitest';
 import { addPathsToGlobalImportsResultToTable, listGlobalImportsResultToTable } from './link.js';
 import { clean } from './util/util.js';
 
-const esc = expect.stringContaining;
+const esc = (s: string) => expect.stringContaining(s);
 
 describe('Validate link.ts', () => {
     test('listGlobalImportsResultToTable', () => {

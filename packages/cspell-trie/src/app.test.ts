@@ -41,6 +41,8 @@ describe('Validate App', () => {
         vi.restoreAllMocks();
     });
     test.each(tests)('%s', async (_: string, args: string[], errorResult: ErrorResult) => {
+        process.stdout.columns = 80;
+        process.stderr.columns = 80;
         const out = createCollector();
 
         const commander = getCommander();

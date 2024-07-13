@@ -20,8 +20,8 @@ const tempRoot = r(packageRoot, 'temp');
 
 const sampleOptions = { root: samplesRoot };
 
-const oc = expect.objectContaining;
-const ac = expect.arrayContaining;
+const oc = <T>(obj: T) => expect.objectContaining(obj);
+const ac = <T>(a: Array<T>) => expect.arrayContaining(a);
 
 vi.mock('get-stdin', () => ({ default: vi.fn() }));
 
@@ -155,7 +155,7 @@ describe('Validate the Application', () => {
                 cspell:ignore badspellingintext
                 We can ignore values within the text: badspellingintext
             `;
-            vi.mocked(getStdin).mockImplementation(async () => text);
+            vi.mocked(getStdin).mockImplementation((async () => text) as typeof getStdin);
 
             const lint = App.lint(files, options, reporter);
             const result = await lint;

@@ -2,7 +2,7 @@ import { describe, expect, test } from 'vitest';
 
 import { createSuggestDictionary } from './SuggestDictionary.js';
 
-// const oc = expect.objectContaining;
+// const oc = <T>(obj: T) => expect.objectContaining(obj);
 const isPreferred = true;
 
 describe('SuggestDictionary 1', () => {

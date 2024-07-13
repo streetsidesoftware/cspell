@@ -12,7 +12,7 @@ import { defaultDeserializers } from './serializers/index.js';
 import { fixtures } from './test-helpers/fixtures.js';
 import { json } from './test-helpers/util.js';
 
-const oc = expect.objectContaining;
+const oc = <T>(obj: T) => expect.objectContaining(obj);
 
 describe('CSpellConfigFileReaderWriter', () => {
     test.each`

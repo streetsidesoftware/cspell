@@ -5,9 +5,9 @@ import { describe, expect, test } from 'vitest';
 import { basename, isUrlLike, toFileURL, toURL, urlBasename, urlDirname } from './url.js';
 
 const root = path.join(__dirname, '../..');
-const oc = expect.objectContaining;
-// const sc = expect.stringContaining;
-const sm = expect.stringMatching;
+const oc = <T>(obj: T) => expect.objectContaining(obj);
+// const sc = (m: string) => expect.stringContaining(m);
+const sm = (m: string | RegExp) => expect.stringMatching(m);
 
 describe('util', () => {
     test.each`

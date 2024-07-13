@@ -7,8 +7,8 @@ import { defaultIO } from '../defaultIO.js';
 import { fixtures } from '../test-helpers/fixtures.js';
 import { loaderJavaScript } from './loaderJavaScript.js';
 
-const oc = expect.objectContaining;
-const ac = expect.arrayContaining;
+const oc = <T>(obj: T) => expect.objectContaining(obj);
+const ac = <T>(a: Array<T>) => expect.arrayContaining(a);
 
 describe('loaderJavaScript', () => {
     afterEach(() => {});

@@ -25,7 +25,7 @@ const pReady = Promise.all([pTrieNL, pAffContent.then((aff) => (affContent = aff
     return undefined;
 });
 
-const ac = expect.arrayContaining;
+const ac = <T>(a: Array<T>) => expect.arrayContaining(a);
 
 describe('Validate Dutch Suggestions', () => {
     // cspell:ignore buurtbewoners

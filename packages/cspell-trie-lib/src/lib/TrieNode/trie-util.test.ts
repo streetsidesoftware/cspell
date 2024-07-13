@@ -12,7 +12,7 @@ import {
     iteratorTrieWords,
 } from './trie-util.js';
 
-const oc = expect.objectContaining;
+const oc = <T>(obj: T) => expect.objectContaining(obj);
 
 describe('Validate Util Functions', () => {
     test('createTriFromList', () => {

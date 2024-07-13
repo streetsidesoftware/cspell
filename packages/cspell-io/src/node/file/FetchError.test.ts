@@ -3,7 +3,7 @@ import { describe, expect, test } from 'vitest';
 import { FetchUrlError, toError, toFetchUrlError } from './FetchError.js';
 import { toURL } from './url.js';
 
-const oc = expect.objectContaining;
+const oc = <T>(obj: T) => expect.objectContaining(obj);
 
 describe('FetchError', () => {
     test.each`

@@ -4,7 +4,7 @@ import { describe, expect, test } from 'vitest';
 
 import { textValidatorFactory } from './lineValidatorFactory.js';
 
-const oc = expect.objectContaining;
+const oc = <T>(obj: T) => expect.objectContaining(obj);
 
 describe('lineValidatorFactory', () => {
     test.each`

@@ -21,7 +21,7 @@ vi.mock('node:fs/promises', async (_importOriginal) => ({
     },
 }));
 
-const oc = expect.objectContaining;
+const oc = <T>(obj: T) => expect.objectContaining(obj);
 
 describe('Validate GlobalSettings', () => {
     beforeEach(() => {});

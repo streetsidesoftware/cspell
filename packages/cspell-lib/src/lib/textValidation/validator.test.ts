@@ -10,10 +10,10 @@ import * as Validator from './validator.js';
 
 // cSpell:ignore brouwn jumpped lazzy wrongg mispelled ctrip nmove mischecked
 
-const ac = expect.arrayContaining;
+const ac = <T>(a: Array<T>) => expect.arrayContaining(a);
 const notAc = expect.not.arrayContaining;
 
-const oc = expect.objectContaining;
+const oc = <T>(obj: T) => expect.objectContaining(obj);
 
 describe('Validator', () => {
     test('validates the validator', async () => {

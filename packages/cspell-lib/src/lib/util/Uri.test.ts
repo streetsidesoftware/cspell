@@ -23,7 +23,7 @@ const __filename = fileURLToPath(import.meta.url);
 const { toEqualCaseInsensitive } = extendExpect(expect);
 
 const eqCI = toEqualCaseInsensitive;
-const sc = expect.stringContaining;
+const sc = (m: string) => expect.stringContaining(m);
 
 const u = { scheme: '', path: '', query: '', fragment: '', authority: '' };
 

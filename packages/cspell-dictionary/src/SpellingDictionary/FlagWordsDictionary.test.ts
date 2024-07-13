@@ -2,7 +2,7 @@ import { describe, expect, test } from 'vitest';
 
 import { createFlagWordsDictionary } from './FlagWordsDictionary.js';
 
-// const oc = expect.objectContaining;
+// const oc = <T>(obj: T) => expect.objectContaining(obj);
 
 describe('ForbiddenWordsDictionary', () => {
     const dictWords = ['  english', '!English', 'grumpy', 'Avocado', 'avocadoS', '!avocado'];

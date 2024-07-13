@@ -29,7 +29,7 @@ const fixtures = path.join(packageRoot, 'fixtures/fileHelper');
 const fileListFile = path.join(fixtures, 'file-list.txt');
 const fileListFile2 = path.join(fixtures, 'nested/file-list-2.txt');
 
-const oc = expect.objectContaining;
+const oc = <T>(obj: T) => expect.objectContaining(obj);
 const r = path.resolve;
 
 describe('fileHelper', () => {
@@ -41,7 +41,7 @@ describe('fileHelper', () => {
         try {
             const files = ['a', 'b', 'c'];
             const mockGetStdin = vi.mocked(getStdin);
-            mockGetStdin.mockImplementation(async () => files.join('\n'));
+            mockGetStdin.mockImplementation((async () => files.join('\n')) as typeof getStdin);
             const pResult = readFileListFile('stdin');
             const r = await pResult;
             expect(r).toEqual(files.map((f) => path.resolve(f)));

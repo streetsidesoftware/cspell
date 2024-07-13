@@ -12,10 +12,7 @@ const defaultTimeout = 60_000;
 
 vi.mock('./config.js');
 
-const mockAddRepository = configAddRepository as Mock<
-    Parameters<typeof configAddRepository>,
-    ReturnType<typeof configAddRepository>
->;
+const mockAddRepository = configAddRepository as Mock<typeof configAddRepository>;
 
 describe('Validate repository helper', () => {
     interface TestCase {

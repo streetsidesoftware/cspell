@@ -1,13 +1,13 @@
 import * as path from 'node:path';
 
-import type { SpyInstance } from 'vitest';
+import type { MockInstance } from 'vitest';
 import { afterEach, beforeEach, describe, expect, test, vi } from 'vitest';
 
 import * as app from './app.js';
 
 describe('app', () => {
-    let log: SpyInstance<Parameters<typeof console.log>>;
-    let error: SpyInstance<Parameters<typeof console.error>>;
+    let log: MockInstance<typeof console.log>;
+    let error: MockInstance<typeof console.error>;
 
     beforeEach(() => {
         log = vi.spyOn(console, 'log').mockImplementation(() => undefined);

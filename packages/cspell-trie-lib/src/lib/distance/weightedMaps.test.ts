@@ -15,7 +15,7 @@ import {
 
 const { splitMapSubstrings, splitMap, findTrieCostPrefixes, normalizeDef } = __testing__;
 
-const oc = expect.objectContaining;
+const oc = <T>(obj: T) => expect.objectContaining(obj);
 
 // const u = undefined;  cspell:
 

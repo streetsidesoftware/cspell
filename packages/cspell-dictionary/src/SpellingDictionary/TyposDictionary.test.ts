@@ -2,7 +2,7 @@ import { describe, expect, test } from 'vitest';
 
 import { createTyposDictionary } from './TyposDictionary.js';
 
-// const oc = expect.objectContaining;
+// const oc = <T>(obj: T) => expect.objectContaining(obj);
 const isPreferred = true;
 
 describe('TyposDictionary 1', () => {

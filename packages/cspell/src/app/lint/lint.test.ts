@@ -23,7 +23,7 @@ const configSamples = path.resolve(samples, 'config');
 //     filesToCheckWithMissing,
 // });
 
-const oc = expect.objectContaining;
+const oc = <T>(obj: T) => expect.objectContaining(obj);
 const j = path.join;
 
 describe('Linter Validation Tests', () => {

@@ -12,8 +12,8 @@ import { FSCapabilityFlags } from './VFileSystem.js';
 import type { VFileSystemProvider, VirtualFS, VProviderFileSystem } from './VirtualFS.js';
 import { VFSErrorUnsupportedRequest } from './VirtualFS/WrappedProviderFs.js';
 
-const sc = expect.stringContaining;
-const oc = expect.objectContaining;
+const sc = (m: string) => expect.stringContaining(m);
+const oc = <T>(obj: T) => expect.objectContaining(obj);
 
 let mockConsoleLog = vi.spyOn(console, 'log');
 

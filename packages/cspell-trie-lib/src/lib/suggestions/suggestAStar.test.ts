@@ -10,8 +10,8 @@ import type { SuggestionOptions } from './genSuggestionsOptions.js';
 import * as Sug from './suggestAStar.js';
 import type { SuggestionResult } from './SuggestionTypes.js';
 
-// const oc = expect.objectContaining;
-// const ac = expect.arrayContaining;
+// const oc = <T>(obj: T) => expect.objectContaining(obj);
+// const ac = <T>(a: Array<T>) => expect.arrayContaining(a);
 
 describe('Validate Suggest A Star', () => {
     const changeLimit = 3;

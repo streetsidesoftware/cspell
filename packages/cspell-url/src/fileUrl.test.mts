@@ -10,9 +10,9 @@ import { FileUrlBuilder } from './FileUrlBuilder.mjs';
 import { isUrlLike, toURL, urlParent } from './url.mjs';
 
 const root = Path.join(__dirname, '../..');
-// const oc = expect.objectContaining;
-// const sc = expect.stringContaining;
-const sm = expect.stringMatching;
+// const oc = <T>(obj: T) => expect.objectContaining(obj);
+// const sc = (m: string) => expect.stringContaining(m);
+const sm = (m: string | RegExp) => expect.stringMatching(m);
 
 const cwdURL = pathToFileURL('.');
 
