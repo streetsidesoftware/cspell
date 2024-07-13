@@ -232,13 +232,23 @@ class TrieBlobINode implements ITrieNode {
     }
 }
 
+export interface ITrieSupportMethods extends Readonly<Pick<ITrieNodeRoot, 'find' | 'findExact' | 'isForbidden'>> {}
+
 export class TrieBlobIRoot extends TrieBlobINode implements ITrieNodeRoot {
+    find: ITrieNodeRoot['find'];
+    findExact: ITrieNodeRoot['findExact'];
+    isForbidden: ITrieNodeRoot['isForbidden'];
+
     constructor(
         trie: TrieBlobInternals,
         nodeIdx: number,
         readonly info: Readonly<TrieInfo>,
+        methods: ITrieSupportMethods | undefined,
     ) {
         super(trie, nodeIdx);
+        this.find = methods?.find;
+        this.findExact = methods?.findExact;
+        this.isForbidden = methods?.isForbidden;
     }
     resolveId(id: ITrieNodeId): ITrieNode {
         return new TrieBlobINode(this.trie, id as number);

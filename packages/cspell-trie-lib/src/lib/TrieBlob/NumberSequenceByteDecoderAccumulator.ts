@@ -30,6 +30,10 @@ export class NumberSequenceByteEncoderDecoder {
         return [SpecialCharIndex.Index21bit, (n >>> 14) & 0x7f, (n >>> 7) & 0x7f, n & 0x7f];
     }
 
+    static bytesNeeded(n: number): number {
+        return n < this.SpecialCharIndexMask ? 1 : n < this.SpecialCharIndexMask * 2 ? 2 : n < 1 << 14 ? 3 : 4;
+    }
+
     static decode(encodedSequence: EncodedSequence): number {
         const [a, b, c, d] = encodedSequence;
         switch (a) {

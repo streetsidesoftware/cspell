@@ -222,6 +222,3 @@ Note:
 | <sub>webpack/webpack</sub>                      |  1085 |  12.95 | 357.09 |  -6.23% | `▇██▇▄`   |    4 |
 | <sub>wireapp/wire-desktop</sub>                 |    42 |   1.36 | 137.11 |   4.44% | `▄█▇██`   |    4 |
 | <sub>wireapp/wire-webapp</sub>                  |  1174 |  20.81 | 243.39 |   2.74% | `▅█▇▇█`   |    4 |
-
-
-

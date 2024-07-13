@@ -148,8 +148,8 @@ function createPerfTable1(data: [string, CsvRecord[]][]): string {
 
     const table = createMdTable({
         header: `
-        | Repository | Elapsed | Min/Avg/Max | SD  | SD Graph  |
-        | ---------- | ------: | ----------- | --: | --------  |
+        | Repository | Elapsed | Min/Avg/Max   | SD  | SD Graph  |
+        | ---------- | ------: | :-----------: | --: | --------  |
         `,
         rows,
     });

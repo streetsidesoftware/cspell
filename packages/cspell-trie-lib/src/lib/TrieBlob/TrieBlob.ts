@@ -1,12 +1,12 @@
 import { endianness } from 'node:os';
 
 import { defaultTrieInfo } from '../constants.js';
-import type { ITrieNode, ITrieNodeRoot } from '../ITrieNode/ITrieNode.js';
+import type { FindResult, ITrieNode, ITrieNodeRoot } from '../ITrieNode/ITrieNode.js';
 import { findNode } from '../ITrieNode/trie-util.js';
 import type { PartialTrieInfo, TrieInfo } from '../ITrieNode/TrieInfo.js';
 import type { TrieData } from '../TrieData.js';
 import { mergeOptionalWithDefaults } from '../utils/mergeOptionalWithDefaults.js';
-import { CharIndex } from './CharIndex.js';
+import { CharIndex, CharIndexSeq } from './CharIndex.js';
 import { NumberSequenceByteDecoderAccumulator, SpecialCharIndex } from './NumberSequenceByteDecoderAccumulator.js';
 import { TrieBlobInternals, TrieBlobIRoot } from './TrieBlobIRoot.js';
 
@@ -42,11 +42,17 @@ const endianSig = 0x0403_0201;
 
 const lookupCount = 50;
 
+type MapSeqToNodeIdx = Map<number, number>;
+type CacheNodeIdxLookup = Map<number, MapSeqToNodeIdx>;
+
 export class TrieBlob implements TrieData {
     readonly info: Readonly<TrieInfo>;
-    private _forbidIdx: number | undefined;
-    private _size: number | undefined;
-    private _iTrieRoot: ITrieNodeRoot | undefined;
+    #forbidIdx: number | undefined;
+    #compoundIdx: number | undefined;
+    #nonStrictIdx: number | undefined;
+
+    #size: number | undefined;
+    #iTrieRoot: ITrieNodeRoot | undefined;
     /** the nodes data in 8 bits */
     #nodes8: Uint8Array;
     #beAdj = endianness() === 'BE' ? 3 : 0;
@@ -58,9 +64,9 @@ export class TrieBlob implements TrieData {
      * The value is the node index of the child node.
      * It speeds the lookup process up by about 20%.
      */
-    #nodeIdxLookup: Map<number, Map<number, number>> = new Map();
+    #nodeIdxLookup: CacheNodeIdxLookup = new Map();
 
-    wordToCharacters: (word: string) => string[];
+    readonly wordToCharacters = (word: string) => [...word];
 
     constructor(
         protected nodes: Uint32Array,
@@ -68,22 +74,19 @@ export class TrieBlob implements TrieData {
         info: PartialTrieInfo,
     ) {
         this.info = mergeOptionalWithDefaults(info);
-        this.wordToCharacters = (word: string) => [...word];
-        this._forbidIdx = this._lookupNode(0, this.info.forbiddenWordPrefix);
         this.#prepLookup();
         this.#nodes8 = new Uint8Array(nodes.buffer, nodes.byteOffset + this.#beAdj);
+        this.#forbidIdx = this._lookupNode(0, this.info.forbiddenWordPrefix);
+        this.#compoundIdx = this._lookupNode(0, this.info.compoundCharacter);
+        this.#nonStrictIdx = this._lookupNode(0, this.info.stripCaseAndAccentsPrefix);
     }
 
-    public wordToNodeCharIndexSequence(word: string): number[] {
+    public wordToNodeCharIndexSequence(word: string): CharIndexSeq {
         return this.charIndex.wordToCharIndexSequence(word);
     }
 
-    private letterToNodeCharIndexSequence(letter: string): number[] {
+    private letterToNodeCharIndexSequence(letter: string): CharIndexSeq {
         return this.charIndex.getCharIndexSeq(letter);
-    }
-
-    hasV1(word: string): boolean {
-        return this._hasV1(0, word);
     }
 
     has(word: string): boolean {
@@ -91,15 +94,42 @@ export class TrieBlob implements TrieData {
     }
 
     isForbiddenWord(word: string): boolean {
-        return !!this._forbidIdx && this._hasV1(this._forbidIdx, word);
+        return !!this.#forbidIdx && this._has8(this.#forbidIdx, word);
     }
 
     hasForbiddenWords(): boolean {
-        return !!this._forbidIdx;
+        return !!this.#forbidIdx;
+    }
+
+    hasCompoundWords(): boolean {
+        return !!this.#compoundIdx;
+    }
+
+    hasNonStrictWords(): boolean {
+        return !!this.#nonStrictIdx;
+    }
+
+    /**
+     * Try to find the word in the trie. The word must be normalized.
+     * If `strict` is `true` the case and accents must match.
+     * Compound words are supported assuming that the compound character is in the trie.
+     *
+     * @param word - the word to find (normalized)
+     * @param strict - if `true` the case and accents must match.
+     */
+    find(word: string, strict: boolean): FindResult | undefined {
+        if (!this.hasCompoundWords()) {
+            const found = this._has8(0, word);
+            if (found) return { found: word, compoundUsed: false, caseMatched: true };
+            if (strict || !this.#nonStrictIdx) return { found: false, compoundUsed: false, caseMatched: false };
+            return { found: this._has8(this.#nonStrictIdx, word) && word, compoundUsed: false, caseMatched: false };
+        }
+        // @todo: handle compound words.
+        return undefined;
     }
 
     getRoot(): ITrieNodeRoot {
-        return (this._iTrieRoot ??= this._getRoot());
+        return (this.#iTrieRoot ??= this._getRoot());
     }
 
     private _getRoot(): ITrieNodeRoot {
@@ -109,53 +139,34 @@ export class TrieBlob implements TrieData {
             NodeMaskChildCharIndex: TrieBlob.NodeMaskChildCharIndex,
             NodeChildRefShift: TrieBlob.NodeChildRefShift,
         });
-        return new TrieBlobIRoot(trieData, 0, this.info);
+        return new TrieBlobIRoot(trieData, 0, this.info, {
+            findExact: (word) => this.has(word),
+            isForbidden: (word) => this.isForbiddenWord(word),
+            find: (word, strict) => this.find(word, strict),
+        });
     }
 
     getNode(prefix: string): ITrieNode | undefined {
         return findNode(this.getRoot(), prefix);
     }
 
-    private _hasV1(nodeIdx: number, word: string): boolean {
-        const NodeMaskNumChildren = TrieBlob.NodeMaskNumChildren;
-        const NodeMaskChildCharIndex = TrieBlob.NodeMaskChildCharIndex;
-        const NodeChildRefShift = TrieBlob.NodeChildRefShift;
-        const nodes = this.nodes;
-        const wordIndexes = this.wordToNodeCharIndexSequence(word);
-        const len = wordIndexes.length;
-        let p = 0;
-        const idxLookup = this.#nodeIdxLookup;
-        for (let m = idxLookup.get(nodeIdx); m && p < len; ++p) {
-            const i = m.get(wordIndexes[p]);
-            if (!i) break;
-            nodeIdx = i;
-            m = idxLookup.get(nodeIdx);
-        }
-        let node = nodes[nodeIdx];
-        for (; p < len; ++p, node = nodes[nodeIdx]) {
-            const letterIdx = wordIndexes[p];
-            const count = node & NodeMaskNumChildren;
-            let i = count;
-            for (; i > 0; --i) {
-                if ((nodes[i + nodeIdx] & NodeMaskChildCharIndex) === letterIdx) {
-                    break;
-                }
-            }
-            if (i < 1) return false;
-            nodeIdx = nodes[i + nodeIdx] >>> NodeChildRefShift;
-        }
-
-        return (node & TrieBlob.NodeMaskEOW) === TrieBlob.NodeMaskEOW;
-    }
-
+    /**
+     * Check if the word is in the trie starting at the given node index.
+     */
     private _has8(nodeIdx: number, word: string): boolean {
         const NodeMaskNumChildren = TrieBlob.NodeMaskNumChildren;
         const NodeChildRefShift = TrieBlob.NodeChildRefShift;
         const nodes = this.nodes;
         const nodes8 = this.#nodes8;
         const wordIndexes = this.wordToNodeCharIndexSequence(word);
+        const lookup = this.#nodeIdxLookup;
         const len = wordIndexes.length;
         let p = 0;
+        for (let m = lookup.get(nodeIdx); m && p < len; ++p, m = lookup.get(nodeIdx)) {
+            const i = m.get(wordIndexes[p]);
+            if (!i) break;
+            nodeIdx = i;
+        }
         let node = nodes[nodeIdx];
         for (; p < len; ++p, node = nodes[nodeIdx]) {
             const letterIdx = wordIndexes[p];
@@ -278,7 +289,7 @@ export class TrieBlob implements TrieData {
     }
 
     get size(): number {
-        if (this._size) return this._size;
+        if (this.#size) return this.#size;
         const NodeMaskNumChildren = TrieBlob.NodeMaskNumChildren;
         const nodes = this.nodes;
         let p = 0;
@@ -287,7 +298,7 @@ export class TrieBlob implements TrieData {
             ++count;
             p += (nodes[p] & NodeMaskNumChildren) + 1;
         }
-        this._size = count;
+        this.#size = count;
         return count;
     }
 

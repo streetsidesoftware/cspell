@@ -5,12 +5,19 @@ import { loremIpsum } from 'lorem-ipsum';
 import { suite } from 'perf-insight';
 
 import { createSpellingDictionary } from '../SpellingDictionary/createSpellingDictionary.js';
+import { createCollection } from '../SpellingDictionary/SpellingDictionaryCollection.js';
 
 suite('dictionary has', async (test) => {
     const words = genWords(10_000);
+    const words2 = genWords(1000);
+    const words3 = genWords(1000);
 
     const iTrie = buildITrieFromWords(words);
     const dict = createSpellingDictionary(words, 'test', import.meta.url);
+    const dict2 = createSpellingDictionary(words2, 'test2', import.meta.url);
+    const dict3 = createSpellingDictionary(words3, 'test3', import.meta.url);
+
+    const dictCol = createCollection([dict, dict2, dict3], 'test-collection');
 
     test('dictionary has 100k words', () => {
         checkWords(dict, words);
@@ -18,6 +25,10 @@ suite('dictionary has', async (test) => {
 
     test('dictionary has 100k words (2nd time)', () => {
         checkWords(dict, words);
+    });
+
+    test('collection has 100k words', () => {
+        checkWords(dictCol, words);
     });
 
     test('iTrie has 100k words', () => {
@@ -34,18 +45,66 @@ suite('dictionary has', async (test) => {
     });
 });
 
-function checkWords(dict: { has: (word: string) => boolean }, words: string[], totalChecks = 100_000) {
+suite('dictionary has Not', async (test) => {
+    const words = genWords(10_000);
+    const words2 = genWords(1000);
+    const words3 = genWords(1000);
+    const missingWords = words.map((w) => w + '-x-');
+
+    const iTrie = buildITrieFromWords(words);
+    const dict = createSpellingDictionary(words, 'test', import.meta.url);
+    const dict2 = createSpellingDictionary(words2, 'test2', import.meta.url);
+    const dict3 = createSpellingDictionary(words3, 'test3', import.meta.url);
+    const dictCol = createCollection([dict, dict2, dict3], 'test-collection');
+
+    test('dictionary has 100k words', () => {
+        checkWords(dict, missingWords, false);
+    });
+
+    test('dictionary has 100k words (2nd time)', () => {
+        checkWords(dict, missingWords, false);
+    });
+
+    test('collection has 100k words', () => {
+        checkWords(dictCol, missingWords, false);
+    });
+
+    test('iTrie has 100k words', () => {
+        checkWords(iTrie, missingWords, false);
+    });
+
+    test('iTrie.hasWord has 100k words', () => {
+        const dict = { has: (word: string) => iTrie.hasWord(word, true) };
+        checkWords(dict, missingWords, false);
+    });
+
+    test('iTrie.data has 100k words', () => {
+        checkWords(iTrie.data, missingWords, false);
+    });
+});
+
+function checkWords(dict: { has: (word: string) => boolean }, words: string[], expected = true, totalChecks = 100_000) {
     let has = true;
     const len = words.length;
     for (let i = 0; i < totalChecks; ++i) {
         const word = words[i % len];
-        has = dict.has(word) && has;
+        const r = expected === dict.has(word);
+        if (!r) {
+            console.log(`Word ${expected ? 'not found' : 'found'}: ${word}`);
+        }
+        has = r && has;
     }
     assert(has, 'All words should be found in the dictionary');
 }
 
-function genWords(count: number): string[] {
+function genWords(count: number, includeForbidden = true): string[] {
     const setOfWords = new Set(loremIpsum({ count }).split(' '));
+
+    if (includeForbidden) {
+        setOfWords.add('!forbidden');
+        setOfWords.add('!bad-word');
+        setOfWords.add('!rejection');
+    }
 
     while (setOfWords.size < count) {
         const words = [...setOfWords];

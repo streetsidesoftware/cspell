@@ -3,33 +3,12 @@ import { memorizeLastCall } from '../utils/memorizeLastCall.js';
 import { mergeDefaults } from '../utils/mergeDefaults.js';
 import type { CompoundModes } from './CompoundModes.js';
 import type { FindOptions, PartialFindOptions } from './FindOptions.js';
-import type { ITrieNode, ITrieNodeRoot } from './ITrieNode.js';
+import type { FindFullNodeResult } from './FindTypes.js';
+import type { FindFullResult, FindResult, ITrieNode, ITrieNodeRoot } from './ITrieNode.js';
 
 type Root = ITrieNodeRoot;
 
 const defaultLegacyMinCompoundLength = 3;
-
-export interface FindNodeResult {
-    node: ITrieNode | undefined;
-}
-
-export interface FindResult {
-    found: string | false;
-    compoundUsed: boolean;
-    caseMatched: boolean;
-}
-
-export interface FindFullResult extends FindResult {
-    /**
-     * Is the word explicitly forbidden.
-     * - `true` - word is in the forbidden list.
-     * - `false` - word is not in the forbidden list.
-     * - `undefined` - unknown - was not checked.
-     * */
-    forbidden: boolean | undefined;
-}
-
-export interface FindFullNodeResult extends FindNodeResult, FindFullResult {}
 
 const _defaultFindOptions: FindOptions = {
     matchCase: false,
@@ -70,6 +49,10 @@ export function findWordNode(root: Root, word: string, options?: PartialFindOpti
  * @param options
  */
 function _findWord(root: Root, word: string, options: FindOptions): FindFullResult {
+    if (root.find) {
+        const found = root.find(word, options.matchCase);
+        if (found) return found as FindFullResult;
+    }
     const { node: _, ...result } = _findWordNode(root, word, options);
     return result;
 }
@@ -243,6 +226,8 @@ function findCompoundWord(
 }
 
 export function findWordExact(root: Root | ITrieNode | undefined, word: string): boolean {
+    const r = root as Root;
+    if (r?.findExact) return r.findExact(word);
     return isEndOfWordNode(walk(root, word));
 }
 
@@ -364,6 +349,8 @@ function findLegacyCompoundWord(roots: (ITrieNode | undefined)[], word: string, 
 }
 
 export function isForbiddenWord(root: Root | ITrieNode | undefined, word: string, forbiddenPrefix: string): boolean {
+    const r = root as Root | undefined;
+    if (r?.isForbidden) return r.isForbidden(word);
     return findWordExact(root?.get(forbiddenPrefix), word);
 }
 

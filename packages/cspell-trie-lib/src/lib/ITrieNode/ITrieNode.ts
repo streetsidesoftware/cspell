@@ -1,5 +1,28 @@
 import type { TrieInfo } from './TrieInfo.js';
 
+export interface FindResult {
+    found: string | false;
+    compoundUsed: boolean;
+    caseMatched: boolean;
+    /**
+     * Is the word explicitly forbidden.
+     * - `true` - word is in the forbidden list.
+     * - `false` - word is not in the forbidden list.
+     * - `undefined` - unknown - was not checked.
+     */
+    forbidden?: boolean | undefined;
+}
+
+export interface FindFullResult extends FindResult {
+    /**
+     * Is the word explicitly forbidden.
+     * - `true` - word is in the forbidden list.
+     * - `false` - word is not in the forbidden list.
+     * - `undefined` - unknown - was not checked.
+     */
+    forbidden: boolean | undefined;
+}
+
 export type ITrieNodeId = object | number | string;
 
 type Entry = readonly [string, ITrieNode];
@@ -41,4 +64,15 @@ export interface ITrieNodeRoot extends ITrieNode {
      * @param id an of a ITrieNode in this Trie
      */
     resolveId(id: ITrieNodeId): ITrieNode;
+
+    findExact?: ((word: string) => boolean) | undefined;
+    /**
+     * Try to find a word.
+     * @param word - the normalized word to look up.
+     * @param strict - if `true` the case and accents must match.
+     * @returns undefined if it did not try to find the word, otherwise a FindResult.
+     */
+    find?: ((word: string, strict: boolean) => FindResult | undefined) | undefined;
+
+    isForbidden?: ((word: string) => boolean) | undefined;
 }
