@@ -66,10 +66,11 @@ function _findWord(root: Root, word: string, options: FindOptions): FindFullResu
 function _findWordNode(root: Root, word: string, options: FindOptions): FindFullNodeResult {
     const trieInfo = root.info;
     const compoundMode = knownCompoundModes.get(options.compoundMode) || _defaultFindOptions.compoundMode;
-    const compoundPrefix = options.compoundMode === 'compound' ? trieInfo.compoundCharacter ?? options.compoundFix : '';
+    const compoundPrefix =
+        options.compoundMode === 'compound' ? (trieInfo.compoundCharacter ?? options.compoundFix) : '';
     const ignoreCasePrefix = options.matchCase
         ? ''
-        : trieInfo.stripCaseAndAccentsPrefix ?? options.caseInsensitivePrefix;
+        : (trieInfo.stripCaseAndAccentsPrefix ?? options.caseInsensitivePrefix);
 
     function __findCompound(): FindFullNodeResult {
         const f = findCompoundWord(root, word, compoundPrefix, ignoreCasePrefix);

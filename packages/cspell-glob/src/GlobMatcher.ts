@@ -133,7 +133,7 @@ export class GlobMatcher {
         const options =
             typeof rootOrOptions === 'string' || rootOrOptions instanceof URL
                 ? { root: rootOrOptions.toString() }
-                : rootOrOptions ?? {};
+                : (rootOrOptions ?? {});
         const mode = options.mode ?? 'exclude';
         const isExcludeMode = mode !== 'include';
         const nodePath = options.nodePath ?? _nodePath ?? Path;
