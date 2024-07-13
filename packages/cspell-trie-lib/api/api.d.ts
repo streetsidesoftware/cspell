@@ -86,6 +86,22 @@ interface FindResult$1 {
     found: string | false;
     compoundUsed: boolean;
     caseMatched: boolean;
+    /**
+     * Is the word explicitly forbidden.
+     * - `true` - word is in the forbidden list.
+     * - `false` - word is not in the forbidden list.
+     * - `undefined` - unknown - was not checked.
+     */
+    forbidden?: boolean | undefined;
+}
+interface FindFullResult$1 extends FindResult$1 {
+    /**
+     * Is the word explicitly forbidden.
+     * - `true` - word is in the forbidden list.
+     * - `false` - word is not in the forbidden list.
+     * - `undefined` - unknown - was not checked.
+     */
+    forbidden: boolean | undefined;
 }
 type ITrieNodeId = object | number | string;
 type Entry = readonly [string, ITrieNode];
@@ -127,23 +143,13 @@ interface ITrieNodeRoot extends ITrieNode {
     resolveId(id: ITrieNodeId): ITrieNode;
     findExact?: ((word: string) => boolean) | undefined;
     /**
-     *
+     * Try to find a word.
      * @param word - the normalized word to look up.
      * @param strict - if `true` the case and accents must match.
-     * @returns
+     * @returns undefined if it did not try to find the word, otherwise a FindResult.
      */
-    find?: ((word: string, strict: boolean) => FindResult$1) | undefined;
+    find?: ((word: string, strict: boolean) => FindResult$1 | undefined) | undefined;
     isForbidden?: ((word: string) => boolean) | undefined;
-}
-
-interface FindFullResult$1 extends FindResult$1 {
-    /**
-     * Is the word explicitly forbidden.
-     * - `true` - word is in the forbidden list.
-     * - `false` - word is not in the forbidden list.
-     * - `undefined` - unknown - was not checked.
-     * */
-    forbidden: boolean | undefined;
 }
 
 declare const FLAG_WORD = 1;

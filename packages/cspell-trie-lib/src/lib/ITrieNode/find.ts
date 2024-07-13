@@ -3,8 +3,8 @@ import { memorizeLastCall } from '../utils/memorizeLastCall.js';
 import { mergeDefaults } from '../utils/mergeDefaults.js';
 import type { CompoundModes } from './CompoundModes.js';
 import type { FindOptions, PartialFindOptions } from './FindOptions.js';
-import type { FindFullNodeResult, FindFullResult } from './FindTypes.js';
-import type { FindResult, ITrieNode, ITrieNodeRoot } from './ITrieNode.js';
+import type { FindFullNodeResult } from './FindTypes.js';
+import type { FindFullResult, FindResult, ITrieNode, ITrieNodeRoot } from './ITrieNode.js';
 
 type Root = ITrieNodeRoot;
 
@@ -49,6 +49,10 @@ export function findWordNode(root: Root, word: string, options?: PartialFindOpti
  * @param options
  */
 function _findWord(root: Root, word: string, options: FindOptions): FindFullResult {
+    if (root.find) {
+        const found = root.find(word, options.matchCase);
+        if (found) return found as FindFullResult;
+    }
     const { node: _, ...result } = _findWordNode(root, word, options);
     return result;
 }

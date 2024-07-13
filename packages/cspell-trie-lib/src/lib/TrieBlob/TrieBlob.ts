@@ -117,7 +117,7 @@ export class TrieBlob implements TrieData {
      * @param word - the word to find (normalized)
      * @param strict - if `true` the case and accents must match.
      */
-    find(word: string, strict: boolean): FindResult {
+    find(word: string, strict: boolean): FindResult | undefined {
         if (!this.hasCompoundWords()) {
             const found = this._has8(0, word);
             if (found) return { found: word, compoundUsed: false, caseMatched: true };
@@ -125,7 +125,7 @@ export class TrieBlob implements TrieData {
             return { found: this._has8(this.#nonStrictIdx, word) && word, compoundUsed: false, caseMatched: false };
         }
         // @todo: handle compound words.
-        return { found: this.has(word) && word, compoundUsed: false, caseMatched: true };
+        return undefined;
     }
 
     getRoot(): ITrieNodeRoot {
@@ -142,6 +142,7 @@ export class TrieBlob implements TrieData {
         return new TrieBlobIRoot(trieData, 0, this.info, {
             findExact: (word) => this.has(word),
             isForbidden: (word) => this.isForbiddenWord(word),
+            find: (word, strict) => this.find(word, strict),
         });
     }
 

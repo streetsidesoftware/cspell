@@ -5,7 +5,7 @@ import type { TrieData } from '../TrieData.js';
 import { TrieNodeTrie } from '../TrieNode/TrieNodeTrie.js';
 import { __testing__, createFindOptions, findLegacyCompound, findWord } from './find.js';
 import type { PartialFindOptions } from './FindOptions.js';
-import type { FindFullResult } from './FindTypes.js';
+import { FindFullResult } from './ITrieNode.js';
 
 const findLegacyCompoundWord = __testing__.findLegacyCompoundWord;
 

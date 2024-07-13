@@ -3,8 +3,8 @@ import { opAppend, opFilter, opMap, pipe } from '@cspell/cspell-pipe/sync';
 import type { WeightMap } from './distance/index.js';
 import { createFindOptions, findLegacyCompound, findWord, findWordNode, isForbiddenWord } from './ITrieNode/find.js';
 import type { FindOptions, PartialFindOptions } from './ITrieNode/FindOptions.js';
-import type { FindFullResult } from './ITrieNode/FindTypes.js';
 import type { ITrieNode, ITrieNodeRoot } from './ITrieNode/index.js';
+import { FindFullResult } from './ITrieNode/ITrieNode.js';
 import { countWords, iteratorTrieWords } from './ITrieNode/trie-util.js';
 import type { PartialTrieInfo, TrieInfo } from './ITrieNode/TrieInfo.js';
 import { walker } from './ITrieNode/walker/walker.js';
@@ -188,11 +188,6 @@ export class ITrieImpl implements ITrie {
     }
 
     findWord(word: string, options?: FindWordOptions): FindFullResult {
-        if (this.data.has(word)) {
-            const forbidden = this.data.isForbiddenWord(word) || undefined;
-            const r = { found: word, forbidden, caseMatched: true, compoundUsed: false };
-            return r;
-        }
         if (options?.useLegacyWordCompounds) {
             const len =
                 options.useLegacyWordCompounds !== true
