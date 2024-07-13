@@ -223,7 +223,7 @@ function findCompoundWord(
 
 export function findWordExact(root: Root | ITrieNode | undefined, word: string): boolean {
     const r = root as Root;
-    if (r.findExact) return r.findExact(word);
+    if (r?.findExact) return r.findExact(word);
     return isEndOfWordNode(walk(root, word));
 }
 
