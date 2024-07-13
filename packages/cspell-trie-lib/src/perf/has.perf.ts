@@ -31,55 +31,12 @@ suite('trie has', async (test) => {
         trieHasWords(trieBlob, words);
     });
 
-    test('trieBlob.hasV1 has words', () => {
-        trieHasWords({ has: (word) => trieBlob.hasV1(word) }, words);
-    });
-
     test('iTrieFast has words', () => {
         trieHasWords(iTrieFast, words);
     });
 
     test('iTrieBlob has words', () => {
         trieHasWords(iTrieBlob, words);
-    });
-});
-
-suite('encode to sequence', async (test) => {
-    const words = await getWords();
-    const fastTrieBlob = await getFastTrieBlob();
-    const trieBlob = fastTrieBlob.toTrieBlob();
-    const charIndex = trieBlob.charIndex;
-
-    test('fastTrieBlob.wordToNodeCharIndexSequence', () => {
-        for (const word of words) {
-            fastTrieBlob.wordToNodeCharIndexSequence(word);
-        }
-    });
-
-    test('trieBlob.wordToNodeCharIndexSequence', () => {
-        for (const word of words) {
-            trieBlob.wordToNodeCharIndexSequence(word);
-        }
-    });
-
-    test('trieBlob.wordToNodeCharIndexSequence x4', () => {
-        for (const word of words) {
-            for (let i = 0; i < 4; ++i) {
-                trieBlob.wordToNodeCharIndexSequence(word);
-            }
-        }
-    });
-
-    test('charIndex.wordToCharIndexSequence', () => {
-        for (const word of words) {
-            charIndex.wordToCharIndexSequence(word);
-        }
-    });
-
-    test('charIndex.__wordToCharIndexSequence', () => {
-        for (const word of words) {
-            charIndex.__wordToCharIndexSequence(word);
-        }
     });
 });
 

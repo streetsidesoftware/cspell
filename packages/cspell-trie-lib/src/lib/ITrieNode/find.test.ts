@@ -3,9 +3,9 @@ import { describe, expect, test } from 'vitest';
 import { parseDictionaryLegacy } from '../SimpleDictionaryParser.js';
 import type { TrieData } from '../TrieData.js';
 import { TrieNodeTrie } from '../TrieNode/TrieNodeTrie.js';
-import type { FindFullResult } from './find.js';
 import { __testing__, createFindOptions, findLegacyCompound, findWord } from './find.js';
 import type { PartialFindOptions } from './FindOptions.js';
+import type { FindFullResult } from './FindTypes.js';
 
 const findLegacyCompoundWord = __testing__.findLegacyCompoundWord;
 

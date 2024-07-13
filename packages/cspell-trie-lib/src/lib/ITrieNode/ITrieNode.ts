@@ -1,5 +1,11 @@
 import type { TrieInfo } from './TrieInfo.js';
 
+export interface FindResult {
+    found: string | false;
+    compoundUsed: boolean;
+    caseMatched: boolean;
+}
+
 export type ITrieNodeId = object | number | string;
 
 type Entry = readonly [string, ITrieNode];
@@ -41,4 +47,15 @@ export interface ITrieNodeRoot extends ITrieNode {
      * @param id an of a ITrieNode in this Trie
      */
     resolveId(id: ITrieNodeId): ITrieNode;
+
+    findExact?: ((word: string) => boolean) | undefined;
+    /**
+     *
+     * @param word - the normalized word to look up.
+     * @param strict - if `true` the case and accents must match.
+     * @returns
+     */
+    find?: ((word: string, strict: boolean) => FindResult) | undefined;
+
+    isForbidden?: ((word: string) => boolean) | undefined;
 }

@@ -1,9 +1,9 @@
 import { opAppend, opFilter, opMap, pipe } from '@cspell/cspell-pipe/sync';
 
 import type { WeightMap } from './distance/index.js';
-import type { FindFullResult } from './ITrieNode/find.js';
 import { createFindOptions, findLegacyCompound, findWord, findWordNode, isForbiddenWord } from './ITrieNode/find.js';
 import type { FindOptions, PartialFindOptions } from './ITrieNode/FindOptions.js';
+import type { FindFullResult } from './ITrieNode/FindTypes.js';
 import type { ITrieNode, ITrieNodeRoot } from './ITrieNode/index.js';
 import { countWords, iteratorTrieWords } from './ITrieNode/trie-util.js';
 import type { PartialTrieInfo, TrieInfo } from './ITrieNode/TrieInfo.js';

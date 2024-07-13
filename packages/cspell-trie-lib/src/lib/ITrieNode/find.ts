@@ -3,33 +3,12 @@ import { memorizeLastCall } from '../utils/memorizeLastCall.js';
 import { mergeDefaults } from '../utils/mergeDefaults.js';
 import type { CompoundModes } from './CompoundModes.js';
 import type { FindOptions, PartialFindOptions } from './FindOptions.js';
-import type { ITrieNode, ITrieNodeRoot } from './ITrieNode.js';
+import type { FindFullNodeResult, FindFullResult } from './FindTypes.js';
+import type { FindResult, ITrieNode, ITrieNodeRoot } from './ITrieNode.js';
 
 type Root = ITrieNodeRoot;
 
 const defaultLegacyMinCompoundLength = 3;
-
-export interface FindNodeResult {
-    node: ITrieNode | undefined;
-}
-
-export interface FindResult {
-    found: string | false;
-    compoundUsed: boolean;
-    caseMatched: boolean;
-}
-
-export interface FindFullResult extends FindResult {
-    /**
-     * Is the word explicitly forbidden.
-     * - `true` - word is in the forbidden list.
-     * - `false` - word is not in the forbidden list.
-     * - `undefined` - unknown - was not checked.
-     * */
-    forbidden: boolean | undefined;
-}
-
-export interface FindFullNodeResult extends FindNodeResult, FindFullResult {}
 
 const _defaultFindOptions: FindOptions = {
     matchCase: false,
@@ -243,6 +222,8 @@ function findCompoundWord(
 }
 
 export function findWordExact(root: Root | ITrieNode | undefined, word: string): boolean {
+    const r = root as Root;
+    if (r.findExact) return r.findExact(word);
     return isEndOfWordNode(walk(root, word));
 }
 
@@ -364,6 +345,8 @@ function findLegacyCompoundWord(roots: (ITrieNode | undefined)[], word: string, 
 }
 
 export function isForbiddenWord(root: Root | ITrieNode | undefined, word: string, forbiddenPrefix: string): boolean {
+    const r = root as Root;
+    if (r.isForbidden) return r.isForbidden(word);
     return findWordExact(root?.get(forbiddenPrefix), word);
 }
 

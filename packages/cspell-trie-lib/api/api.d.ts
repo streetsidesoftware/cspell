@@ -82,6 +82,11 @@ interface TrieInfo {
 }
 type PartialTrieInfo = PartialWithUndefined<TrieInfo> | undefined;
 
+interface FindResult$1 {
+    found: string | false;
+    compoundUsed: boolean;
+    caseMatched: boolean;
+}
 type ITrieNodeId = object | number | string;
 type Entry = readonly [string, ITrieNode];
 interface ITrieNode {
@@ -120,13 +125,17 @@ interface ITrieNodeRoot extends ITrieNode {
      * @param id an of a ITrieNode in this Trie
      */
     resolveId(id: ITrieNodeId): ITrieNode;
+    findExact?: ((word: string) => boolean) | undefined;
+    /**
+     *
+     * @param word - the normalized word to look up.
+     * @param strict - if `true` the case and accents must match.
+     * @returns
+     */
+    find?: ((word: string, strict: boolean) => FindResult$1) | undefined;
+    isForbidden?: ((word: string) => boolean) | undefined;
 }
 
-interface FindResult$1 {
-    found: string | false;
-    compoundUsed: boolean;
-    caseMatched: boolean;
-}
 interface FindFullResult$1 extends FindResult$1 {
     /**
      * Is the word explicitly forbidden.
