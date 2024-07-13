@@ -62,7 +62,7 @@ export function commandCheck(prog: Command): Command {
                 console.log();
             }
             if (issueCount) {
-                const exitCode = useExitCode ?? true ? 1 : 0;
+                const exitCode = (useExitCode ?? true) ? 1 : 0;
                 throw new CheckFailed('Issues found', exitCode);
             }
         });
