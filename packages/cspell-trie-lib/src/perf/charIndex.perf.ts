@@ -75,6 +75,36 @@ suite('encode to sequence', async (test) => {
     });
 });
 
+suite('Buffers and Type Arrays', async (test) => {
+    const buffer = new ArrayBuffer(16 * 1024);
+    const uint8Array = new Uint8Array(buffer);
+    const iterations = 100_000;
+
+    test('Uint8Array from buffer' + ' - ' + buffer.byteLength + ' bytes', () => {
+        for (let i = iterations; i > 0; --i) {
+            new Uint8Array(buffer);
+        }
+    });
+
+    test('Uint8Array from buffer + offset' + ' - ' + buffer.byteLength + ' bytes', () => {
+        for (let i = iterations; i > 0; --i) {
+            new Uint8Array(buffer, 1024, 2048);
+        }
+    });
+
+    test('Uint8Array from uint8Array.buffer' + ' - ' + buffer.byteLength + ' bytes', () => {
+        for (let i = iterations; i > 0; --i) {
+            new Uint8Array(uint8Array.buffer);
+        }
+    });
+
+    test('Uint8Array from uint8Array' + ' - ' + buffer.byteLength + ' bytes', () => {
+        for (let i = iterations; i > 0; --i) {
+            new Uint8Array(uint8Array);
+        }
+    });
+});
+
 function _getTrie() {
     return readTrieFromConfig('@cspell/dict-en_us/cspell-ext.json');
 }
