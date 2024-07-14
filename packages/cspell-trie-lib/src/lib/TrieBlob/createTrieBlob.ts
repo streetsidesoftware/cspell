@@ -18,7 +18,6 @@ export function createTrieBlobFromITrieNodeRoot(root: ITrieNodeRoot): TrieBlob {
     const NodeMaskEOW = TrieBlob.NodeMaskEOW;
     const NodeChildRefShift = TrieBlob.NodeChildRefShift;
     const NodeMaskNumChildren = TrieBlob.NodeMaskNumChildren;
-    const NodeMaskChildCharIndex = TrieBlob.NodeMaskChildCharIndex;
     const nodes: number[] = [];
     const known = new Map<ITrieNodeId, number>();
 
@@ -47,18 +46,6 @@ export function createTrieBlobFromITrieNodeRoot(root: ITrieNodeRoot): TrieBlob {
         return appendNode(n);
     }
 
-    function sortChildren(idx: number) {
-        const n = nodes[idx];
-        if (!n) return;
-        const numChildren = n & NodeMaskNumChildren;
-        if (!numChildren) return;
-        const mask = NodeMaskChildCharIndex;
-        const start = idx + 1;
-        const end = start + numChildren;
-        const sorted = nodes.slice(start, end).sort((a, b) => (a & mask) - (b & mask));
-        sorted.forEach((v, i) => (nodes[start + i] = v));
-    }
-
     function walk(n: ITrieNode): number {
         const found = known.get(n.id);
         if (found) return found;
@@ -66,18 +53,12 @@ export function createTrieBlobFromITrieNodeRoot(root: ITrieNodeRoot): TrieBlob {
         if (!n.hasChildren()) return nodeIdx;
         const cnIdx = nodeIdx + 1;
         const children = n.values();
-        let needsSort = false;
-        let last = 0;
         for (let p = 0; p < children.length; ++p) {
             const childNode = children[p];
             const childIdx = walk(childNode);
             // Nodes already have the letters, just OR in the child index.
-            const n = nodes[cnIdx + p];
-            needsSort = needsSort || last >= n;
-            last = n;
             nodes[cnIdx + p] |= childIdx << NodeChildRefShift;
         }
-        needsSort && sortChildren(nodeIdx);
         return nodeIdx;
     }
 

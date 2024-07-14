@@ -73,6 +73,7 @@ export class TrieBlob implements TrieData {
         readonly charIndex: CharIndex,
         info: PartialTrieInfo,
     ) {
+        trieBlobSort(nodes);
         this.info = mergeOptionalWithDefaults(info);
         this.#prepLookup();
         this.#nodes8 = new Uint8Array(nodes.buffer, nodes.byteOffset + this.#beAdj);
@@ -495,4 +496,34 @@ function nodesToJson(nodes: Uint32Array) {
         offset = e.n;
     }
     return elements;
+}
+
+/**
+ * Sorts the child nodes in the trie to ensure binary lookup works.
+ * @param data
+ */
+function trieBlobSort(data: Uint32Array) {
+    const MaskNumChildren = TrieBlob.NodeMaskNumChildren;
+    const MaskChildCharIndex = TrieBlob.NodeMaskChildCharIndex;
+
+    const limit = data.length;
+    let idx = 0;
+    let node = data[0];
+    let nc = node & MaskNumChildren;
+    for (; idx < limit; idx += nc + 1, node = data[idx], nc = node & MaskNumChildren) {
+        if (!nc) continue;
+        const start = idx + 1;
+        const end = start + nc;
+        let last = 0;
+        let i = start;
+        for (; i < end; ++i) {
+            const cIdx = data[i] & MaskChildCharIndex;
+            if (last >= cIdx) break;
+            last = cIdx;
+        }
+        if (i === end) continue;
+
+        const sorted = data.slice(start, end).sort((a, b) => (a & MaskChildCharIndex) - (b & MaskChildCharIndex));
+        sorted.forEach((v, i) => (data[start + i] = v));
+    }
 }
